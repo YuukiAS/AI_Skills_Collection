@@ -1,0 +1,1708 @@
+{
+  "version": "1.0.0",
+  "description": "Generated skill registry for AI_Skills_Collection.",
+  "skill_count": 189,
+  "skills": [
+    {
+      "id": "domain.bayesian.bayesian-ppl-diagnostics",
+      "name": "bayesian-ppl-diagnostics",
+      "path": "skills/domain/bayesian/bayesian-ppl-diagnostics",
+      "scope": "domain",
+      "category": "bayesian",
+      "description": "Executable guidance for Bayesian workflows using Stan/CmdStanPy, brms, PyMC, and ArviZ, with legacy JAGS/OpenBUGS paths and Rcpp acceleration patterns. Covers MCMC diagnostics (divergences, treedepth, BFMI, R-hat, ESS), predictive checks, and reparameterization. Use when fitting hierarchical models, reviewing convergence, or integrating Bayesian analysis with CardiacNexus phenotypes.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bayesian.pymc",
+      "name": "pymc",
+      "path": "skills/domain/bayesian/pymc",
+      "scope": "domain",
+      "category": "bayesian",
+      "description": "Bayesian modeling with PyMC. Build hierarchical models, MCMC (NUTS), variational inference, LOO/WAIC comparison, posterior checks, for probabilistic programming and inference.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bayesian.simpy",
+      "name": "simpy",
+      "path": "skills/domain/bayesian/simpy",
+      "scope": "domain",
+      "category": "bayesian",
+      "description": "Process-based discrete-event simulation framework in Python. Use this skill when building simulations of systems with processes, queues, resources, and time-based events such as manufacturing systems, service operations, network traffic, logistics, or any system where entities interact with shared resources over time.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bayesian.statistical-analysis",
+      "name": "statistical-analysis",
+      "path": "skills/domain/bayesian/statistical-analysis",
+      "scope": "domain",
+      "category": "bayesian",
+      "description": "Guided statistical analysis with test selection and reporting. Use when you need help choosing appropriate tests for your data, assumption checking, power analysis, and APA-formatted results. Best for academic research reporting, test selection guidance. For implementing specific models programmatically use statsmodels.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bayesian.statsmodels",
+      "name": "statsmodels",
+      "path": "skills/domain/bayesian/statsmodels",
+      "scope": "domain",
+      "category": "bayesian",
+      "description": "Statistical models library for Python. Use when you need specific model classes (OLS, GLM, mixed models, ARIMA) with detailed diagnostics, residuals, and inference. Best for econometrics, time series, rigorous inference with coefficient tables. For guided statistical test selection with APA reporting use statistical-analysis.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.alphafold-database",
+      "name": "alphafold-database",
+      "path": "skills/domain/bioinformatics/alphafold-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Access AlphaFold 200M+ AI-predicted protein structures. Retrieve structures by UniProt ID, download PDB/mmCIF files, analyze confidence metrics (pLDDT, PAE), for drug discovery and structural biology.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.anndata",
+      "name": "anndata",
+      "path": "skills/domain/bioinformatics/anndata",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Data structure for annotated matrices in single-cell analysis. Use when working with .h5ad files or integrating with the scverse ecosystem. This is the data format skill—for analysis workflows use scanpy; for probabilistic models use scvi-tools; for population-scale queries use cellxgene-census.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.arboreto",
+      "name": "arboreto",
+      "path": "skills/domain/bioinformatics/arboreto",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Infer gene regulatory networks (GRNs) from gene expression data using scalable algorithms (GRNBoost2, GENIE3). Use when analyzing transcriptomics data (bulk RNA-seq, single-cell RNA-seq) to identify transcription factor-target gene relationships and regulatory interactions. Supports distributed computation for large-scale datasets.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.biopython",
+      "name": "biopython",
+      "path": "skills/domain/bioinformatics/biopython",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Comprehensive molecular biology toolkit. Use for sequence manipulation, file parsing (FASTA/GenBank/PDB), phylogenetics, and programmatic NCBI/PubMed access (Bio.Entrez). Best for batch processing, custom bioinformatics pipelines, BLAST automation. For quick lookups use gget; for multi-service integration use bioservices.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.bioservices",
+      "name": "bioservices",
+      "path": "skills/domain/bioinformatics/bioservices",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Unified Python interface to 40+ bioinformatics services. Use when querying multiple databases (UniProt, KEGG, ChEMBL, Reactome) in a single workflow with consistent API. Best for cross-database analysis, ID mapping across services. For quick single-database lookups use gget; for sequence/file manipulation use biopython.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.cellxgene-census",
+      "name": "cellxgene-census",
+      "path": "skills/domain/bioinformatics/cellxgene-census",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Query the CELLxGENE Census (61M+ cells) programmatically. Use when you need expression data across tissues, diseases, or cell types from the largest curated single-cell atlas. Best for population-scale queries, reference atlas comparisons. For analyzing your own data use scanpy or scvi-tools.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.deeptools",
+      "name": "deeptools",
+      "path": "skills/domain/bioinformatics/deeptools",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "NGS analysis toolkit. BAM to bigWig conversion, QC (correlation, PCA, fingerprints), heatmaps/profiles (TSS, peaks), for ChIP-seq, RNA-seq, ATAC-seq visualization.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.depmap",
+      "name": "depmap",
+      "path": "skills/domain/bioinformatics/depmap",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Query the Cancer Dependency Map (DepMap) for cancer cell line gene dependency scores (CRISPR Chronos), drug sensitivity data, and gene effect profiles. Use for identifying cancer-specific vulnerabilities, synthetic lethal interactions, and validating oncology drug targets.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.dhdna-profiler",
+      "name": "dhdna-profiler",
+      "path": "skills/domain/bioinformatics/dhdna-profiler",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Extract cognitive patterns and thinking fingerprints from any text. Use this skill when the user wants to analyze how someone thinks, understand cognitive style, profile writing or speech patterns, compare thinking styles between people, asks \"what's my thinking style\", \"analyze how this person reasons\", \"cognitive profile\", \"thinking pattern\", \"DHDNA\", \"digital DNA\", or wants to understand the mind behind any text. Also trigger when the user provides text and wants deeper insight into the author's reasoning patterns, decision-making style, or cognitive signature.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.dnanexus-integration",
+      "name": "dnanexus-integration",
+      "path": "skills/domain/bioinformatics/dnanexus-integration",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "DNAnexus cloud genomics platform. Build apps/applets, manage data (upload/download), dxpy Python SDK, run workflows, FASTQ/BAM/VCF, for genomics pipeline development and execution.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.ena-database",
+      "name": "ena-database",
+      "path": "skills/domain/bioinformatics/ena-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Access European Nucleotide Archive via API/FTP. Retrieve DNA/RNA sequences, raw reads (FASTQ), genome assemblies by accession, for genomics and bioinformatics pipelines. Supports multiple formats.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.ensembl-database",
+      "name": "ensembl-database",
+      "path": "skills/domain/bioinformatics/ensembl-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Query Ensembl genome database REST API for 250+ species. Gene lookups, sequence retrieval, variant analysis, comparative genomics, orthologs, VEP predictions, for genomic research.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.esm",
+      "name": "esm",
+      "path": "skills/domain/bioinformatics/esm",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Comprehensive toolkit for protein language models including ESM3 (generative multimodal protein design across sequence, structure, and function) and ESM C (efficient protein embeddings and representations). Use this skill when working with protein sequences, structures, or function prediction; designing novel proteins; generating protein embeddings; performing inverse folding; or conducting protein engineering tasks. Supports both local model usage and cloud-based Forge API for scalable inference.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.etetoolkit",
+      "name": "etetoolkit",
+      "path": "skills/domain/bioinformatics/etetoolkit",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Phylogenetic tree toolkit (ETE). Tree manipulation (Newick/NHX), evolutionary event detection, orthology/paralogy, NCBI taxonomy, visualization (PDF/SVG), for phylogenomics.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.flowio",
+      "name": "flowio",
+      "path": "skills/domain/bioinformatics/flowio",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Parse FCS (Flow Cytometry Standard) files v2.0-3.1. Extract events as NumPy arrays, read metadata/channels, convert to CSV/DataFrame, for flow cytometry data preprocessing.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.gene-database",
+      "name": "gene-database",
+      "path": "skills/domain/bioinformatics/gene-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Query NCBI Gene via E-utilities/Datasets API. Search by symbol/ID, retrieve gene info (RefSeqs, GO, locations, phenotypes), batch lookups, for gene annotation and functional analysis.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.geniml",
+      "name": "geniml",
+      "path": "skills/domain/bioinformatics/geniml",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "This skill should be used when working with genomic interval data (BED files) for machine learning tasks. Use for training region embeddings (Region2Vec, BEDspace), single-cell ATAC-seq analysis (scEmbed), building consensus peaks (universes), or any ML-based analysis of genomic regions. Applies to BED file collections, scATAC-seq data, chromatin accessibility datasets, and region-based genomic feature learning.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.geo-database",
+      "name": "geo-database",
+      "path": "skills/domain/bioinformatics/geo-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Access NCBI GEO for gene expression/genomics data. Search/download microarray and RNA-seq datasets (GSE, GSM, GPL), retrieve SOFT/Matrix files, for transcriptomics and expression analysis.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.gget",
+      "name": "gget",
+      "path": "skills/domain/bioinformatics/gget",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Fast CLI/Python queries to 20+ bioinformatics databases. Use for quick lookups: gene info, BLAST searches, AlphaFold structures, enrichment analysis. Best for interactive exploration, simple queries. For batch processing or advanced BLAST use biopython; for multi-database Python workflows use bioservices.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.gnomad-database",
+      "name": "gnomad-database",
+      "path": "skills/domain/bioinformatics/gnomad-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Query gnomAD (Genome Aggregation Database) for population allele frequencies, variant constraint scores (pLI, LOEUF), and loss-of-function intolerance. Essential for variant pathogenicity interpretation, rare disease genetics, and identifying loss-of-function intolerant genes.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.gtars",
+      "name": "gtars",
+      "path": "skills/domain/bioinformatics/gtars",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "High-performance toolkit for genomic interval analysis in Rust with Python bindings. Use when working with genomic regions, BED files, coverage tracks, overlap detection, tokenization for ML models, or fragment analysis in computational genomics and machine learning applications.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.gtex-database",
+      "name": "gtex-database",
+      "path": "skills/domain/bioinformatics/gtex-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Query GTEx (Genotype-Tissue Expression) portal for tissue-specific gene expression, eQTLs (expression quantitative trait loci), and sQTLs. Essential for linking GWAS variants to gene regulation, understanding tissue-specific expression, and interpreting non-coding variant effects.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.gwas-database",
+      "name": "gwas-database",
+      "path": "skills/domain/bioinformatics/gwas-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Query NHGRI-EBI GWAS Catalog for SNP-trait associations. Search variants by rs ID, disease/trait, gene, retrieve p-values and summary statistics, for genetic epidemiology and polygenic risk scores.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.interpro-database",
+      "name": "interpro-database",
+      "path": "skills/domain/bioinformatics/interpro-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Query InterPro for protein family, domain, and functional site annotations. Integrates Pfam, PANTHER, PRINTS, SMART, SUPERFAMILY, and 11 other member databases. Use for protein function prediction, domain architecture analysis, evolutionary classification, and GO term mapping.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.jaspar-database",
+      "name": "jaspar-database",
+      "path": "skills/domain/bioinformatics/jaspar-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Query JASPAR for transcription factor binding site (TFBS) profiles (PWMs/PFMs). Search by TF name, species, or class; scan DNA sequences for TF binding sites; compare matrices; essential for regulatory genomics, motif analysis, and GWAS regulatory variant interpretation.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.kegg-database",
+      "name": "kegg-database",
+      "path": "skills/domain/bioinformatics/kegg-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Direct REST API access to KEGG (academic use only). Pathway analysis, gene-pathway mapping, metabolic pathways, drug interactions, ID conversion. For Python workflows with multiple databases, prefer bioservices. Use this for direct HTTP/REST work or KEGG-specific control.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.lamindb",
+      "name": "lamindb",
+      "path": "skills/domain/bioinformatics/lamindb",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "This skill should be used when working with LaminDB, an open-source data framework for biology that makes data queryable, traceable, reproducible, and FAIR. Use when managing biological datasets (scRNA-seq, spatial, flow cytometry, etc.), tracking computational workflows, curating and validating data with biological ontologies, building data lakehouses, or ensuring data lineage and reproducibility in biological research. Covers data management, annotation, ontologies (genes, cell types, diseases, tissues), schema validation, integrations with workflow managers (Nextflow, Snakemake) and MLOps platforms (W&B, MLflow), and deployment strategies.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.latchbio-integration",
+      "name": "latchbio-integration",
+      "path": "skills/domain/bioinformatics/latchbio-integration",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Latch platform for bioinformatics workflows. Build pipelines with Latch SDK, @workflow/@task decorators, deploy serverless workflows, LatchFile/LatchDir, Nextflow/Snakemake integration.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.monarch-database",
+      "name": "monarch-database",
+      "path": "skills/domain/bioinformatics/monarch-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Query the Monarch Initiative knowledge graph for disease-gene-phenotype associations across species. Integrates OMIM, ORPHANET, HPO, ClinVar, and model organism databases. Use for rare disease gene discovery, phenotype-to-gene mapping, cross-species disease modeling, and HPO term lookup.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.neuropixels-analysis",
+      "name": "neuropixels-analysis",
+      "path": "skills/domain/bioinformatics/neuropixels-analysis",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Neuropixels neural recording analysis. Load SpikeGLX/OpenEphys data, preprocess, motion correction, Kilosort4 spike sorting, quality metrics, Allen/IBL curation, AI-assisted visual analysis, for Neuropixels 1.0/2.0 extracellular electrophysiology. Use when working with neural recordings, spike sorting, extracellular electrophysiology, or when the user mentions Neuropixels, SpikeGLX, Open Ephys, Kilosort, quality metrics, or unit curation.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.opentargets-database",
+      "name": "opentargets-database",
+      "path": "skills/domain/bioinformatics/opentargets-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Query Open Targets Platform for target-disease associations, drug target discovery, tractability/safety data, genetics/omics evidence, known drugs, for therapeutic target identification.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.phylogenetics",
+      "name": "phylogenetics",
+      "path": "skills/domain/bioinformatics/phylogenetics",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Build and analyze phylogenetic trees using MAFFT (multiple alignment), IQ-TREE 2 (maximum likelihood), and FastTree (fast NJ/ML). Visualize with ETE3 or FigTree. For evolutionary analysis, microbial genomics, viral phylodynamics, protein family analysis, and molecular clock studies.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.polars-bio",
+      "name": "polars-bio",
+      "path": "skills/domain/bioinformatics/polars-bio",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "High-performance genomic interval operations and bioinformatics file I/O on Polars DataFrames. Overlap, nearest, merge, coverage, complement, subtract for BED/VCF/BAM/GFF intervals. Streaming, cloud-native, faster bioframe alternative.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.pydeseq2",
+      "name": "pydeseq2",
+      "path": "skills/domain/bioinformatics/pydeseq2",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Differential gene expression analysis (Python DESeq2). Identify DE genes from bulk RNA-seq counts, Wald tests, FDR correction, volcano/MA plots, for RNA-seq analysis.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.pysam",
+      "name": "pysam",
+      "path": "skills/domain/bioinformatics/pysam",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Genomic file toolkit. Read/write SAM/BAM/CRAM alignments, VCF/BCF variants, FASTA/FASTQ sequences, extract regions, calculate coverage, for NGS data processing pipelines.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.reactome-database",
+      "name": "reactome-database",
+      "path": "skills/domain/bioinformatics/reactome-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Query Reactome REST API for pathway analysis, enrichment, gene-pathway mapping, disease pathways, molecular interactions, expression analysis, for systems biology studies.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.scanpy",
+      "name": "scanpy",
+      "path": "skills/domain/bioinformatics/scanpy",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Standard single-cell RNA-seq analysis pipeline. Use for QC, normalization, dimensionality reduction (PCA/UMAP/t-SNE), clustering, differential expression, and visualization. Best for exploratory scRNA-seq analysis with established workflows. For deep learning models use scvi-tools; for data format questions use anndata.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.scikit-bio",
+      "name": "scikit-bio",
+      "path": "skills/domain/bioinformatics/scikit-bio",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Biological data toolkit. Sequence analysis, alignments, phylogenetic trees, diversity metrics (alpha/beta, UniFrac), ordination (PCoA), PERMANOVA, FASTA/Newick I/O, for microbiome analysis.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.scvelo",
+      "name": "scvelo",
+      "path": "skills/domain/bioinformatics/scvelo",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "RNA velocity analysis with scVelo. Estimate cell state transitions from unspliced/spliced mRNA dynamics, infer trajectory directions, compute latent time, and identify driver genes in single-cell RNA-seq data. Complements Scanpy/scVI-tools for trajectory inference.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.scvi-tools",
+      "name": "scvi-tools",
+      "path": "skills/domain/bioinformatics/scvi-tools",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Deep generative models for single-cell omics. Use when you need probabilistic batch correction (scVI), transfer learning, differential expression with uncertainty, or multi-modal integration (TOTALVI, MultiVI). Best for advanced modeling, batch effects, multimodal data. For standard analysis pipelines use scanpy.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.string-database",
+      "name": "string-database",
+      "path": "skills/domain/bioinformatics/string-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Query STRING API for protein-protein interactions (59M proteins, 20B interactions). Network analysis, GO/KEGG enrichment, interaction discovery, 5000+ species, for systems biology.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.tiledbvcf",
+      "name": "tiledbvcf",
+      "path": "skills/domain/bioinformatics/tiledbvcf",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Efficient storage and retrieval of genomic variant data using TileDB. Scalable VCF/BCF ingestion, incremental sample addition, compressed storage, parallel queries, and export capabilities for population genomics.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.uniprot-database",
+      "name": "uniprot-database",
+      "path": "skills/domain/bioinformatics/uniprot-database",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Direct REST API access to UniProt. Protein searches, FASTA retrieval, ID mapping, Swiss-Prot/TrEMBL. For Python workflows with multiple databases, prefer bioservices (unified interface to 40+ services). Use this for direct HTTP/REST work or UniProt-specific control.",
+      "status": "active"
+    },
+    {
+      "id": "domain.bioinformatics.zarr-python",
+      "name": "zarr-python",
+      "path": "skills/domain/bioinformatics/zarr-python",
+      "scope": "domain",
+      "category": "bioinformatics",
+      "description": "Chunked N-D arrays for cloud storage. Compressed arrays, parallel I/O, S3/GCS integration, NumPy/Dask/Xarray compatible, for large-scale scientific computing pipelines.",
+      "status": "active"
+    },
+    {
+      "id": "domain.medical-imaging.medical-imaging-classical-features",
+      "name": "medical-imaging-classical-features",
+      "path": "skills/domain/medical-imaging/medical-imaging-classical-features",
+      "scope": "domain",
+      "category": "medical-imaging",
+      "description": "Executable guidance for geometry-aware classical medical imaging pipelines: SimpleITK spatial processing, PyRadiomics with IBSI/CLEAR discipline, pydicom/highdicom DICOM semantics, and selective ANTsPy registration/template workflows with elastix and N4ITK anchors. Use when enforcing reproducible preprocessing, registration baselines, radiomics protocols, or DICOM SEG/SR provenance in CardiacNexus.",
+      "status": "active"
+    },
+    {
+      "id": "domain.medical-imaging.medical-imaging-deep-learning",
+      "name": "medical-imaging-deep-learning",
+      "path": "skills/domain/medical-imaging/medical-imaging-deep-learning",
+      "scope": "domain",
+      "category": "medical-imaging",
+      "description": "Executable guidance for medical image deep learning using MONAI (custom pipelines), nnU-Net (default strong segmentation benchmark), MedSAM (foundation/promptable segmentation), and VoxelMorph (learning-based registration) with classical registration baselines, geometry-safe preprocessing, and evaluation discipline. Aligns with CardiacNexus MONAI-first refactor and high-risk registration/strain awareness.",
+      "status": "active"
+    },
+    {
+      "id": "domain.medical-imaging.pathml",
+      "name": "pathml",
+      "path": "skills/domain/medical-imaging/pathml",
+      "scope": "domain",
+      "category": "medical-imaging",
+      "description": "Full-featured computational pathology toolkit. Use for advanced WSI analysis including multiplexed immunofluorescence (CODEX, Vectra), nucleus segmentation, tissue graph construction, and ML model training on pathology data. Supports 160+ slide formats. For simple tile extraction from H&E slides, histolab may be simpler.",
+      "status": "active"
+    },
+    {
+      "id": "domain.medical-imaging.pydicom",
+      "name": "pydicom",
+      "path": "skills/domain/medical-imaging/pydicom",
+      "scope": "domain",
+      "category": "medical-imaging",
+      "description": "Python library for working with DICOM (Digital Imaging and Communications in Medicine) files. Use this skill when reading, writing, or modifying medical imaging data in DICOM format, extracting pixel data from medical images (CT, MRI, X-ray, ultrasound), anonymizing DICOM files, working with DICOM metadata and tags, converting DICOM images to other formats, handling compressed DICOM data, or processing medical imaging datasets. Applies to tasks involving medical image analysis, PACS systems, radiology workflows, and healthcare imaging applications.",
+      "status": "active"
+    },
+    {
+      "id": "domain.medicine-clinical.clinical-decision-support",
+      "name": "clinical-decision-support",
+      "path": "skills/domain/medicine-clinical/clinical-decision-support",
+      "scope": "domain",
+      "category": "medicine-clinical",
+      "description": "Generate professional clinical decision support (CDS) documents for pharmaceutical and clinical research settings, including patient cohort analyses (biomarker-stratified with outcomes) and treatment recommendation reports (evidence-based guidelines with decision algorithms). Supports GRADE evidence grading, statistical analysis (hazard ratios, survival curves, waterfall plots), biomarker integration, and regulatory compliance. Outputs publication-ready LaTeX/PDF format optimized for drug development, clinical research, and evidence synthesis.",
+      "status": "active"
+    },
+    {
+      "id": "domain.medicine-clinical.clinical-reports",
+      "name": "clinical-reports",
+      "path": "skills/domain/medicine-clinical/clinical-reports",
+      "scope": "domain",
+      "category": "medicine-clinical",
+      "description": "Write comprehensive clinical reports including case reports (CARE guidelines), diagnostic reports (radiology/pathology/lab), clinical trial reports (ICH-E3, SAE, CSR), and patient documentation (SOAP, H&P, discharge summaries). Full support with templates, regulatory compliance (HIPAA, FDA, ICH-GCP), and validation tools.",
+      "status": "active"
+    },
+    {
+      "id": "domain.medicine-clinical.clinicaltrials-database",
+      "name": "clinicaltrials-database",
+      "path": "skills/domain/medicine-clinical/clinicaltrials-database",
+      "scope": "domain",
+      "category": "medicine-clinical",
+      "description": "Query ClinicalTrials.gov via API v2. Search trials by condition, drug, location, status, or phase. Retrieve trial details by NCT ID, export data, for clinical research and patient matching.",
+      "status": "active"
+    },
+    {
+      "id": "domain.medicine-clinical.neurokit2",
+      "name": "neurokit2",
+      "path": "skills/domain/medicine-clinical/neurokit2",
+      "scope": "domain",
+      "category": "medicine-clinical",
+      "description": "Comprehensive biosignal processing toolkit for analyzing physiological data including ECG, EEG, EDA, RSP, PPG, EMG, and EOG signals. Use this skill when processing cardiovascular signals, brain activity, electrodermal responses, respiratory patterns, muscle activity, or eye movements. Applicable for heart rate variability analysis, event-related potentials, complexity measures, autonomic nervous system assessment, psychophysiology research, and multi-modal physiological signal integration.",
+      "status": "active"
+    },
+    {
+      "id": "domain.medicine-clinical.pyhealth",
+      "name": "pyhealth",
+      "path": "skills/domain/medicine-clinical/pyhealth",
+      "scope": "domain",
+      "category": "medicine-clinical",
+      "description": "Comprehensive healthcare AI toolkit for developing, testing, and deploying machine learning models with clinical data. This skill should be used when working with electronic health records (EHR), clinical prediction tasks (mortality, readmission, drug recommendation), medical coding systems (ICD, NDC, ATC), physiological signals (EEG, ECG), healthcare datasets (MIMIC-III/IV, eICU, OMOP), or implementing deep learning models for healthcare applications (RETAIN, SafeDrug, Transformer, GNN).",
+      "status": "active"
+    },
+    {
+      "id": "domain.medicine-clinical.scikit-survival",
+      "name": "scikit-survival",
+      "path": "skills/domain/medicine-clinical/scikit-survival",
+      "scope": "domain",
+      "category": "medicine-clinical",
+      "description": "Comprehensive toolkit for survival analysis and time-to-event modeling in Python using scikit-survival. Use this skill when working with censored survival data, performing time-to-event analysis, fitting Cox models, Random Survival Forests, Gradient Boosting models, or Survival SVMs, evaluating survival predictions with concordance index or Brier score, handling competing risks, or implementing any survival analysis workflow with the scikit-survival library.",
+      "status": "active"
+    },
+    {
+      "id": "domain.medicine-clinical.treatment-plans",
+      "name": "treatment-plans",
+      "path": "skills/domain/medicine-clinical/treatment-plans",
+      "scope": "domain",
+      "category": "medicine-clinical",
+      "description": "Generate concise (3-4 page), focused medical treatment plans in LaTeX/PDF format for all clinical specialties. Supports general medical treatment, rehabilitation therapy, mental health care, chronic disease management, perioperative care, and pain management. Includes SMART goal frameworks, evidence-based interventions with minimal text citations, regulatory compliance (HIPAA), and professional formatting. Prioritizes brevity and clinical actionability.",
+      "status": "active"
+    },
+    {
+      "id": "project.CMR.cardiacnexus-docs-markdoc",
+      "name": "cardiacnexus-docs-markdoc",
+      "path": "skills/project/CMR/cardiacnexus-docs-markdoc",
+      "scope": "project",
+      "category": "CMR",
+      "description": "Project-specific guidance for the CardiacNexus documentation site in docs/. Use when editing Markdoc pages, navigation, metadata, Next.js static export settings, phenotype documentation, or preparing the site for static publishing behind Cloudflared and cardiacnexus-ukb.org.",
+      "status": "active"
+    },
+    {
+      "id": "project.CMR.cardiacnexus-feature-contracts",
+      "name": "cardiacnexus-feature-contracts",
+      "path": "skills/project/CMR/cardiacnexus-feature-contracts",
+      "scope": "project",
+      "category": "CMR",
+      "description": "Project-specific guidance for CardiacNexus phenotype outputs. Use when adding, renaming, validating, aggregating, or documenting CSV/NPZ/QC outputs, units, column schemas, cross-modality features, or downstream-facing phenotype contracts.",
+      "status": "active"
+    },
+    {
+      "id": "project.CMR.cardiacnexus-pipeline-refactor",
+      "name": "cardiacnexus-pipeline-refactor",
+      "path": "skills/project/CMR/cardiacnexus-pipeline-refactor",
+      "scope": "project",
+      "category": "CMR",
+      "description": "Project-specific guidance for refactoring the CardiacNexus UKB CMR pipeline. Use when touching config.py, step1-4 orchestration, Slurm script generation, segmentation wrappers, feature extraction boundaries, packaging, or any MONAI-first migration of the core pipeline.",
+      "status": "active"
+    },
+    {
+      "id": "project.CMR.cardiacnexus-strain-registration",
+      "name": "cardiacnexus-strain-registration",
+      "path": "skills/project/CMR/cardiacnexus-strain-registration",
+      "scope": "project",
+      "category": "CMR",
+      "description": "Project-specific guidance for CardiacNexus strain and registration refactors. Use when editing eval_strain_lax.py, eval_strain_sax.py, cardiac_utils motion/contour code, MIRTK integrations, or when introducing ANTsPy or VoxelMorph backends for deformation-sensitive phenotype extraction.",
+      "status": "active"
+    },
+    {
+      "id": "research.communication.latex-posters",
+      "name": "latex-posters",
+      "path": "skills/research/communication/latex-posters",
+      "scope": "research",
+      "category": "communication",
+      "description": "Create professional research posters in LaTeX using beamerposter, tikzposter, or baposter. Support for conference presentations, academic posters, and scientific communication. Includes layout design, color schemes, multi-column formats, figure integration, and poster-specific best practices for visual communication.",
+      "status": "active"
+    },
+    {
+      "id": "research.communication.paper-2-web",
+      "name": "paper-2-web",
+      "path": "skills/research/communication/paper-2-web",
+      "scope": "research",
+      "category": "communication",
+      "description": "This skill should be used when converting academic papers into promotional and presentation formats including interactive websites (Paper2Web), presentation videos (Paper2Video), and conference posters (Paper2Poster). Use this skill for tasks involving paper dissemination, conference preparation, creating explorable academic homepages, generating video abstracts, or producing print-ready posters from LaTeX or PDF sources.",
+      "status": "active"
+    },
+    {
+      "id": "research.communication.pptx-posters",
+      "name": "pptx-posters",
+      "path": "skills/research/communication/pptx-posters",
+      "scope": "research",
+      "category": "communication",
+      "description": "Create research posters using HTML/CSS that can be exported to PDF or PPTX. Use this skill ONLY when the user explicitly requests PowerPoint/PPTX poster format. For standard research posters, use latex-posters instead. This skill provides modern web-based poster design with responsive layouts and easy visual integration.",
+      "status": "active"
+    },
+    {
+      "id": "research.communication.scientific-schematics",
+      "name": "scientific-schematics",
+      "path": "skills/research/communication/scientific-schematics",
+      "scope": "research",
+      "category": "communication",
+      "description": "Create publication-quality scientific diagrams using Nano Banana 2 AI with smart iterative refinement. Uses Gemini 3.1 Pro Preview for quality review. Only regenerates if quality is below threshold for your document type. Specialized in neural network architectures, system diagrams, flowcharts, biological pathways, and complex scientific visualizations.",
+      "status": "active"
+    },
+    {
+      "id": "research.communication.scientific-slides",
+      "name": "scientific-slides",
+      "path": "skills/research/communication/scientific-slides",
+      "scope": "research",
+      "category": "communication",
+      "description": "Build slide decks and presentations for research talks. Use this for making PowerPoint slides, conference presentations, seminar talks, research presentations, thesis defense slides, or any scientific talk. Provides slide structure, design templates, timing guidance, and visual validation. Works with PowerPoint and LaTeX Beamer.",
+      "status": "active"
+    },
+    {
+      "id": "research.communication.scientific-visualization",
+      "name": "scientific-visualization",
+      "path": "skills/research/communication/scientific-visualization",
+      "scope": "research",
+      "category": "communication",
+      "description": "Meta-skill for publication-ready figures. Use when creating journal submission figures requiring multi-panel layouts, significance annotations, error bars, colorblind-safe palettes, and specific journal formatting (Nature, Science, Cell). Orchestrates matplotlib/seaborn/plotly with publication styles. For quick exploration use seaborn or plotly directly.",
+      "status": "active"
+    },
+    {
+      "id": "research.discovery.arxiv-database",
+      "name": "arxiv-database",
+      "path": "skills/research/discovery/arxiv-database",
+      "scope": "research",
+      "category": "discovery",
+      "description": "Search and retrieve preprints from arXiv via the Atom API. Use this skill when searching for papers in physics, mathematics, computer science, quantitative biology, quantitative finance, statistics, electrical engineering, or economics by keywords, authors, arXiv IDs, date ranges, or categories.",
+      "status": "active"
+    },
+    {
+      "id": "research.discovery.bgpt-paper-search",
+      "name": "bgpt-paper-search",
+      "path": "skills/research/discovery/bgpt-paper-search",
+      "scope": "research",
+      "category": "discovery",
+      "description": "Search scientific papers and retrieve structured experimental data extracted from full-text studies via the BGPT MCP server. Returns 25+ fields per paper including methods, results, sample sizes, quality scores, and conclusions. Use for literature reviews, evidence synthesis, and finding experimental details not available in abstracts alone.",
+      "status": "active"
+    },
+    {
+      "id": "research.discovery.biorxiv-database",
+      "name": "biorxiv-database",
+      "path": "skills/research/discovery/biorxiv-database",
+      "scope": "research",
+      "category": "discovery",
+      "description": "Efficient database search tool for bioRxiv preprint server. Use this skill when searching for life sciences preprints by keywords, authors, date ranges, or categories, retrieving paper metadata, downloading PDFs, or conducting literature reviews.",
+      "status": "active"
+    },
+    {
+      "id": "research.discovery.citation-management",
+      "name": "citation-management",
+      "path": "skills/research/discovery/citation-management",
+      "scope": "research",
+      "category": "discovery",
+      "description": "Comprehensive citation management for academic research. Search Google Scholar and PubMed for papers, extract accurate metadata, validate citations, and generate properly formatted BibTeX entries. This skill should be used when you need to find papers, verify citation information, convert DOIs to BibTeX, or ensure reference accuracy in scientific writing.",
+      "status": "active"
+    },
+    {
+      "id": "research.discovery.openalex-database",
+      "name": "openalex-database",
+      "path": "skills/research/discovery/openalex-database",
+      "scope": "research",
+      "category": "discovery",
+      "description": "Query and analyze scholarly literature using the OpenAlex database. This skill should be used when searching for academic papers, analyzing research trends, finding works by authors or institutions, tracking citations, discovering open access publications, or conducting bibliometric analysis across 240M+ scholarly works. Use for literature searches, research output analysis, citation analysis, and academic database queries.",
+      "status": "active"
+    },
+    {
+      "id": "research.discovery.pubmed-database",
+      "name": "pubmed-database",
+      "path": "skills/research/discovery/pubmed-database",
+      "scope": "research",
+      "category": "discovery",
+      "description": "Direct REST API access to PubMed. Advanced Boolean/MeSH queries, E-utilities API, batch processing, citation management. For Python workflows, prefer biopython (Bio.Entrez). Use this for direct HTTP/REST work or custom API implementations.",
+      "status": "active"
+    },
+    {
+      "id": "research.discovery.pyzotero",
+      "name": "pyzotero",
+      "path": "skills/research/discovery/pyzotero",
+      "scope": "research",
+      "category": "discovery",
+      "description": "Interact with Zotero reference management libraries using the pyzotero Python client. Retrieve, create, update, and delete items, collections, tags, and attachments via the Zotero Web API v3. Use this skill when working with Zotero libraries programmatically, managing bibliographic references, exporting citations, searching library contents, uploading PDF attachments, or building research automation workflows that integrate with Zotero.",
+      "status": "active"
+    },
+    {
+      "id": "research.discovery.research-lookup",
+      "name": "research-lookup",
+      "path": "skills/research/discovery/research-lookup",
+      "scope": "research",
+      "category": "discovery",
+      "description": "Look up current research information using the Parallel Chat API (primary) or Perplexity sonar-pro-search (academic paper searches). Automatically routes queries to the best backend. Use for finding papers, gathering research data, and verifying scientific information.",
+      "status": "active"
+    },
+    {
+      "id": "research.ideation.consciousness-council",
+      "name": "consciousness-council",
+      "path": "skills/research/ideation/consciousness-council",
+      "scope": "research",
+      "category": "ideation",
+      "description": "Run a multi-perspective Mind Council deliberation on any question, decision, or creative challenge. Use this skill whenever the user wants diverse viewpoints, needs help making a tough decision, asks for a council/panel/board discussion, wants to explore a problem from multiple angles, requests devil's advocate analysis, or says things like \"what would different experts think about this\", \"help me think through this from all sides\", \"council mode\", \"mind council\", or \"deliberate on this\". Also trigger when the user faces a dilemma, trade-off, or complex choice with no obvious answer.",
+      "status": "active"
+    },
+    {
+      "id": "research.ideation.hypogenic",
+      "name": "hypogenic",
+      "path": "skills/research/ideation/hypogenic",
+      "scope": "research",
+      "category": "ideation",
+      "description": "Automated LLM-driven hypothesis generation and testing on tabular datasets. Use when you want to systematically explore hypotheses about patterns in empirical data (e.g., deception detection, content analysis). Combines literature insights with data-driven hypothesis testing. For manual hypothesis formulation use hypothesis-generation; for creative ideation use scientific-brainstorming.",
+      "status": "active"
+    },
+    {
+      "id": "research.ideation.hypothesis-generation",
+      "name": "hypothesis-generation",
+      "path": "skills/research/ideation/hypothesis-generation",
+      "scope": "research",
+      "category": "ideation",
+      "description": "Structured hypothesis formulation from observations. Use when you have experimental observations or data and need to formulate testable hypotheses with predictions, propose mechanisms, and design experiments to test them. Follows scientific method framework. For open-ended ideation use scientific-brainstorming; for automated LLM-driven hypothesis testing on datasets use hypogenic.",
+      "status": "active"
+    },
+    {
+      "id": "research.ideation.scientific-brainstorming",
+      "name": "scientific-brainstorming",
+      "path": "skills/research/ideation/scientific-brainstorming",
+      "scope": "research",
+      "category": "ideation",
+      "description": "Creative research ideation and exploration. Use for open-ended brainstorming sessions, exploring interdisciplinary connections, challenging assumptions, or identifying research gaps. Best for early-stage research planning when you do not have specific observations yet. For formulating testable hypotheses from data use hypothesis-generation.",
+      "status": "active"
+    },
+    {
+      "id": "research.ideation.scientific-critical-thinking",
+      "name": "scientific-critical-thinking",
+      "path": "skills/research/ideation/scientific-critical-thinking",
+      "scope": "research",
+      "category": "ideation",
+      "description": "Evaluate scientific claims and evidence quality. Use for assessing experimental design validity, identifying biases and confounders, applying evidence grading frameworks (GRADE, Cochrane Risk of Bias), or teaching critical analysis. Best for understanding evidence quality, identifying flaws. For formal peer review writing use peer-review.",
+      "status": "active"
+    },
+    {
+      "id": "research.ideation.what-if-oracle",
+      "name": "what-if-oracle",
+      "path": "skills/research/ideation/what-if-oracle",
+      "scope": "research",
+      "category": "ideation",
+      "description": "Run structured What-If scenario analysis with multi-branch possibility exploration. Use this skill when the user asks speculative questions like \"what if...\", \"what would happen if...\", \"what are the possibilities\", \"explore scenarios\", \"scenario analysis\", \"possibility space\", \"what could go wrong\", \"best case / worst case\", \"risk analysis\", \"contingency planning\", \"strategic options\", or any question about uncertain futures. Also trigger when the user faces a fork-in-the-road decision, wants to stress-test an idea, or needs to think through consequences before committing.",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.academic-paper-writer-pro",
+      "name": "academic-paper-writer-pro",
+      "path": "skills/research/writing/academic-paper-writer-pro",
+      "scope": "research",
+      "category": "writing",
+      "description": "基于规范目录结构的学术论文排版助手。支持 PDF / .doc / .docx / .md 多种输入格式，自动选择 OCR 管道、重排版管道或 MD 直转管道。包含环境清理确认、断点恢复、智能配图裁剪、逐单元增量生成 DOCX、双单元质量核查、中间状态保存和 BibTeX 参考文献管理。所有中间文件放 resources/，最终产物放 outputs/。",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.content_generation",
+      "name": "content_generation",
+      "path": "skills/research/writing/academic-paper-writer-pro/content_generation",
+      "scope": "research",
+      "category": "writing",
+      "description": "基于代码仓库、笔记、实验数据或论文要求，全自动智能撰写学术论文初稿的主线管线。强制分章逐批检索代码、分步输出，内置规避上下文超限机制和人工审核卡点，无缝衔接格式化引擎。内置严格的学术 Prompt 准则与多模态图表检索能力。",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.docx",
+      "name": "docx",
+      "path": "skills/research/writing/academic-paper-writer-pro/docx",
+      "scope": "research",
+      "category": "writing",
+      "description": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of \\\"Word doc\\\", \\\"word document\\\", \\\".docx\\\", or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a \\\"report\\\", \\\"memo\\\", \\\"letter\\\", \\\"template\\\", or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.ocr_kb",
+      "name": "ocr_kb",
+      "path": "skills/research/writing/academic-paper-writer-pro/ocr_kb",
+      "scope": "research",
+      "category": "writing",
+      "description": "使用多模态大模型逐页读取长文档图片，精确提取文本、LaTeX公式和独立科研配图。支持环境清理、断点恢复、全局编号管理、失败页标记与部分重跑。逐页生成DOCX并每两页核查质量。本 Skill 专用于 Pipeline A（OCR 管道），处理 PDF 输入。中间产物全部放在 resources/，最终交付物放在 outputs/。Pipeline B / C 定义在主 SKILL.md 中。",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.pdf",
+      "name": "pdf",
+      "path": "skills/research/writing/academic-paper-writer-pro/pdf",
+      "scope": "research",
+      "category": "writing",
+      "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.academic-paper-writer-pro-cursor-global",
+      "name": "academic-paper-writer-pro",
+      "path": "skills/research/writing/academic-paper-writer-pro-cursor-global",
+      "scope": "research",
+      "category": "writing",
+      "description": "基于规范目录结构的学术论文排版助手。支持 PDF / .doc / .docx / .md 多种输入格式，自动选择 OCR 管道、重排版管道或 MD 直转管道。包含环境清理确认、断点恢复、智能配图裁剪、逐单元增量生成 DOCX、双单元质量核查、中间状态保存和 BibTeX 参考文献管理。所有中间文件放 resources/，最终产物放 outputs/。",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.content_generation",
+      "name": "content_generation",
+      "path": "skills/research/writing/academic-paper-writer-pro-cursor-global/content_generation",
+      "scope": "research",
+      "category": "writing",
+      "description": "基于代码仓库、笔记、实验数据或论文要求，全自动智能撰写学术论文初稿的主线管线。强制分章逐批检索代码、分步输出，内置规避上下文超限机制和人工审核卡点，无缝衔接格式化引擎。内置严格的学术 Prompt 准则与多模态图表检索能力。",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.docx",
+      "name": "docx",
+      "path": "skills/research/writing/academic-paper-writer-pro-cursor-global/docx",
+      "scope": "research",
+      "category": "writing",
+      "description": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of \\\"Word doc\\\", \\\"word document\\\", \\\".docx\\\", or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a \\\"report\\\", \\\"memo\\\", \\\"letter\\\", \\\"template\\\", or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.ocr_kb",
+      "name": "ocr_kb",
+      "path": "skills/research/writing/academic-paper-writer-pro-cursor-global/ocr_kb",
+      "scope": "research",
+      "category": "writing",
+      "description": "使用多模态大模型逐页读取长文档图片，精确提取文本、LaTeX公式和独立科研配图。支持环境清理、断点恢复、全局编号管理、失败页标记与部分重跑。逐页生成DOCX并每两页核查质量。本 Skill 专用于 Pipeline A（OCR 管道），处理 PDF 输入。中间产物全部放在 resources/，最终交付物放在 outputs/。Pipeline B / C 定义在主 SKILL.md 中。",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.pdf",
+      "name": "pdf",
+      "path": "skills/research/writing/academic-paper-writer-pro-cursor-global/pdf",
+      "scope": "research",
+      "category": "writing",
+      "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.content_generation",
+      "name": "content_generation",
+      "path": "skills/research/writing/content_generation",
+      "scope": "research",
+      "category": "writing",
+      "description": "基于代码仓库、笔记、实验数据或论文要求，全自动智能撰写学术论文初稿的主线管线。强制分章逐批检索代码、分步输出，内置规避上下文超限机制和人工审核卡点，无缝衔接格式化引擎。内置严格的学术 Prompt 准则与多模态图表检索能力。",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.literature-review",
+      "name": "literature-review",
+      "path": "skills/research/writing/literature-review",
+      "scope": "research",
+      "category": "writing",
+      "description": "Conduct comprehensive, systematic literature reviews using multiple academic databases (PubMed, arXiv, bioRxiv, Semantic Scholar, etc.). This skill should be used when conducting systematic literature reviews, meta-analyses, research synthesis, or comprehensive literature searches across biomedical, scientific, and technical domains. Creates professionally formatted markdown documents and PDFs with verified citations in multiple citation styles (APA, Nature, Vancouver, etc.).",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.ocr_kb",
+      "name": "ocr_kb",
+      "path": "skills/research/writing/ocr_kb",
+      "scope": "research",
+      "category": "writing",
+      "description": "使用多模态大模型逐页读取长文档图片，精确提取文本、LaTeX公式和独立科研配图。支持环境清理、断点恢复、全局编号管理、失败页标记与部分重跑。逐页生成DOCX并每两页核查质量。本 Skill 专用于 Pipeline A（OCR 管道），处理 PDF 输入。中间产物全部放在 resources/，最终交付物放在 outputs/。Pipeline B / C 定义在主 SKILL.md 中。",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.peer-review",
+      "name": "peer-review",
+      "path": "skills/research/writing/peer-review",
+      "scope": "research",
+      "category": "writing",
+      "description": "Structured manuscript/grant review with checklist-based evaluation. Use when writing formal peer reviews with specific criteria methodology assessment, statistical validity, reporting standards compliance (CONSORT/STROBE), and constructive feedback. Best for actual review writing, manuscript revision. For evaluating claims/evidence quality use scientific-critical-thinking; for quantitative scoring frameworks use scholar-evaluation.",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.research-grants",
+      "name": "research-grants",
+      "path": "skills/research/writing/research-grants",
+      "scope": "research",
+      "category": "writing",
+      "description": "Write competitive research proposals for NSF, NIH, DOE, DARPA, and Taiwan NSTC. Agency-specific formatting, review criteria, budget preparation, broader impacts, significance statements, innovation narratives, and compliance with submission requirements.",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.scholar-evaluation",
+      "name": "scholar-evaluation",
+      "path": "skills/research/writing/scholar-evaluation",
+      "scope": "research",
+      "category": "writing",
+      "description": "Systematically evaluate scholarly work using the ScholarEval framework, providing structured assessment across research quality dimensions including problem formulation, methodology, analysis, and writing with quantitative scoring and actionable feedback.",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.scientific-writing",
+      "name": "scientific-writing",
+      "path": "skills/research/writing/scientific-writing",
+      "scope": "research",
+      "category": "writing",
+      "description": "Core skill for the deep research and writing tool. Write scientific manuscripts in full paragraphs (never bullet points). Use two-stage process with (1) section outlines with key points using research-lookup then (2) convert to flowing prose. IMRAD structure, citations (APA/AMA/Vancouver), figures/tables, reporting guidelines (CONSORT/STROBE/PRISMA), for research papers and journal submissions.",
+      "status": "active"
+    },
+    {
+      "id": "research.writing.venue-templates",
+      "name": "venue-templates",
+      "path": "skills/research/writing/venue-templates",
+      "scope": "research",
+      "category": "writing",
+      "description": "Access comprehensive LaTeX templates, formatting requirements, and submission guidelines for major scientific publication venues (Nature, Science, PLOS, IEEE, ACM), academic conferences (NeurIPS, ICML, CVPR, CHI), research posters, and grant proposals (NSF, NIH, DOE, DARPA). This skill should be used when preparing manuscripts for journal submission, conference papers, research posters, or grant proposals and need venue-specific formatting requirements and templates.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.ai-ml.modal",
+      "name": "modal",
+      "path": "skills/reusable/ai-ml/modal",
+      "scope": "reusable",
+      "category": "ai-ml",
+      "description": "Run Python code in the cloud with serverless containers, GPUs, and autoscaling. Use when deploying ML models, running batch processing jobs, scheduling compute-intensive tasks, or serving APIs that require GPU acceleration or dynamic scaling.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.ai-ml.pufferlib",
+      "name": "pufferlib",
+      "path": "skills/reusable/ai-ml/pufferlib",
+      "scope": "reusable",
+      "category": "ai-ml",
+      "description": "High-performance reinforcement learning framework optimized for speed and scale. Use when you need fast parallel training, vectorized environments, multi-agent systems, or integration with game environments (Atari, Procgen, NetHack). Achieves 2-10x speedups over standard implementations. For quick prototyping or standard algorithm implementations with extensive documentation, use stable-baselines3 instead.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.ai-ml.pytorch-lightning",
+      "name": "pytorch-lightning",
+      "path": "skills/reusable/ai-ml/pytorch-lightning",
+      "scope": "reusable",
+      "category": "ai-ml",
+      "description": "Deep learning framework (PyTorch Lightning). Organize PyTorch code into LightningModules, configure Trainers for multi-GPU/TPU, implement data pipelines, callbacks, logging (W&B, TensorBoard), distributed training (DDP, FSDP, DeepSpeed), for scalable neural network training.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.ai-ml.stable-baselines3",
+      "name": "stable-baselines3",
+      "path": "skills/reusable/ai-ml/stable-baselines3",
+      "scope": "reusable",
+      "category": "ai-ml",
+      "description": "Production-ready reinforcement learning algorithms (PPO, SAC, DQN, TD3, DDPG, A2C) with scikit-learn-like API. Use for standard RL experiments, quick prototyping, and well-documented algorithm implementations. Best for single-agent RL with Gymnasium environments. For high-performance parallel training, multi-agent systems, or custom vectorized environments, use pufferlib instead.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.ai-ml.timesfm-forecasting",
+      "name": "timesfm-forecasting",
+      "path": "skills/reusable/ai-ml/timesfm-forecasting",
+      "scope": "reusable",
+      "category": "ai-ml",
+      "description": "Zero-shot time series forecasting with Google's TimesFM foundation model. Use for any univariate time series (sales, sensors, energy, vitals, weather) without training a custom model. Supports CSV/DataFrame/array inputs with point forecasts and prediction intervals. Includes a preflight system checker script to verify RAM/GPU before first use.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.ai-ml.torch-geometric",
+      "name": "torch-geometric",
+      "path": "skills/reusable/ai-ml/torch-geometric",
+      "scope": "reusable",
+      "category": "ai-ml",
+      "description": "Graph Neural Networks (PyG). Node/graph classification, link prediction, GCN, GAT, GraphSAGE, heterogeneous graphs, molecular property prediction, for geometric deep learning.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.ai-ml.transformers",
+      "name": "transformers",
+      "path": "skills/reusable/ai-ml/transformers",
+      "scope": "reusable",
+      "category": "ai-ml",
+      "description": "This skill should be used when working with pre-trained transformer models for natural language processing, computer vision, audio, or multimodal tasks. Use for text generation, classification, question answering, translation, summarization, image classification, object detection, speech recognition, and fine-tuning models on custom datasets.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.cursor.create-rule",
+      "name": "create-rule",
+      "path": "skills/reusable/cursor/cursor-skills/create-rule",
+      "scope": "reusable",
+      "category": "cursor",
+      "description": "Create Cursor rules for persistent AI guidance. Use when you want to create a rule, add coding standards, set up project conventions, configure file-specific patterns, create RULE.md files, or asks about .cursor/rules/ or AGENTS.md.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.cursor.create-skill",
+      "name": "create-skill",
+      "path": "skills/reusable/cursor/cursor-skills/create-skill",
+      "scope": "reusable",
+      "category": "cursor",
+      "description": "Guides users through creating effective Agent Skills for Cursor. Use when you want to create, write, or author a new skill, or asks about skill structure, best practices, or SKILL.md format.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.cursor.create-subagent",
+      "name": "create-subagent",
+      "path": "skills/reusable/cursor/cursor-skills/create-subagent",
+      "scope": "reusable",
+      "category": "cursor",
+      "description": "Create custom subagents for specialized AI tasks. Use when you want to create a new type of subagent, set up task-specific agents, configure code reviewers, debuggers, or domain-specific assistants with custom prompts.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.cursor.migrate-to-skills",
+      "name": "migrate-to-skills",
+      "path": "skills/reusable/cursor/cursor-skills/migrate-to-skills",
+      "scope": "reusable",
+      "category": "cursor",
+      "description": "Convert 'Applied intelligently' Cursor rules (.cursor/rules/*.mdc) and slash commands (.cursor/commands/*.md) to Agent Skills format (.cursor/skills/). Use when you want to migrate rules or commands to skills, convert .mdc rules to SKILL.md format, or consolidate commands into the skills directory.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.cursor.update-cursor-settings",
+      "name": "update-cursor-settings",
+      "path": "skills/reusable/cursor/cursor-skills/update-cursor-settings",
+      "scope": "reusable",
+      "category": "cursor",
+      "description": "Modify Cursor/VSCode user settings in settings.json. Use when you want to change editor settings, preferences, configuration, themes, font size, tab size, format on save, auto save, keybindings, or any settings.json values.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.data-science.aeon",
+      "name": "aeon",
+      "path": "skills/reusable/data-science/aeon",
+      "scope": "reusable",
+      "category": "data-science",
+      "description": "This skill should be used for time series machine learning tasks including classification, regression, clustering, forecasting, anomaly detection, segmentation, and similarity search. Use when working with temporal data, sequential patterns, or time-indexed observations requiring specialized algorithms beyond standard ML approaches. Particularly suited for univariate and multivariate time series analysis with scikit-learn compatible APIs.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.data-science.dask",
+      "name": "dask",
+      "path": "skills/reusable/data-science/dask",
+      "scope": "reusable",
+      "category": "data-science",
+      "description": "Distributed computing for larger-than-RAM pandas/NumPy workflows. Use when you need to scale existing pandas/NumPy code beyond memory or across clusters. Best for parallel file processing, distributed ML, integration with existing pandas code. For out-of-core analytics on single machine use vaex; for in-memory speed use polars.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.data-science.exploratory-data-analysis",
+      "name": "exploratory-data-analysis",
+      "path": "skills/reusable/data-science/exploratory-data-analysis",
+      "scope": "reusable",
+      "category": "data-science",
+      "description": "Perform comprehensive exploratory data analysis on scientific data files across 200+ file formats. This skill should be used when analyzing any scientific data file to understand its structure, content, quality, and characteristics. Automatically detects file type and generates detailed markdown reports with format-specific analysis, quality metrics, and downstream analysis recommendations. Covers chemistry, bioinformatics, microscopy, spectroscopy, proteomics, metabolomics, and general scientific data formats.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.data-science.geopandas",
+      "name": "geopandas",
+      "path": "skills/reusable/data-science/geopandas",
+      "scope": "reusable",
+      "category": "data-science",
+      "description": "Python library for working with geospatial vector data including shapefiles, GeoJSON, and GeoPackage files. Use when working with geographic data for spatial analysis, geometric operations, coordinate transformations, spatial joins, overlay operations, choropleth mapping, or any task involving reading/writing/analyzing vector geographic data. Supports PostGIS databases, interactive maps, and integration with matplotlib/folium/cartopy. Use for tasks like buffer analysis, spatial joins between datasets, dissolving boundaries, clipping data, calculating areas/distances, reprojecting coordinate systems, creating maps, or converting between spatial file formats.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.data-science.matlab",
+      "name": "matlab",
+      "path": "skills/reusable/data-science/matlab",
+      "scope": "reusable",
+      "category": "data-science",
+      "description": "MATLAB and GNU Octave numerical computing for matrix operations, data analysis, visualization, and scientific computing. Use when writing MATLAB/Octave scripts for linear algebra, signal processing, image processing, differential equations, optimization, statistics, or creating scientific visualizations. Also use when the user needs help with MATLAB syntax, functions, or wants to convert between MATLAB and Python code. Scripts can be executed with MATLAB or the open-source GNU Octave interpreter.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.data-science.networkx",
+      "name": "networkx",
+      "path": "skills/reusable/data-science/networkx",
+      "scope": "reusable",
+      "category": "data-science",
+      "description": "Comprehensive toolkit for creating, analyzing, and visualizing complex networks and graphs in Python. Use when working with network/graph data structures, analyzing relationships between entities, computing graph algorithms (shortest paths, centrality, clustering), detecting communities, generating synthetic networks, or visualizing network topologies. Applicable to social networks, biological networks, transportation systems, citation networks, and any domain involving pairwise relationships.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.data-science.polars",
+      "name": "polars",
+      "path": "skills/reusable/data-science/polars",
+      "scope": "reusable",
+      "category": "data-science",
+      "description": "Fast in-memory DataFrame library for datasets that fit in RAM. Use when pandas is too slow but data still fits in memory. Lazy evaluation, parallel execution, Apache Arrow backend. Best for 1-100GB datasets, ETL pipelines, faster pandas replacement. For larger-than-RAM data use dask or vaex.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.data-science.pymoo",
+      "name": "pymoo",
+      "path": "skills/reusable/data-science/pymoo",
+      "scope": "reusable",
+      "category": "data-science",
+      "description": "Multi-objective optimization framework. NSGA-II, NSGA-III, MOEA/D, Pareto fronts, constraint handling, benchmarks (ZDT, DTLZ), for engineering design and optimization problems.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.data-science.scikit-learn",
+      "name": "scikit-learn",
+      "path": "skills/reusable/data-science/scikit-learn",
+      "scope": "reusable",
+      "category": "data-science",
+      "description": "Machine learning in Python with scikit-learn. Use when working with supervised learning (classification, regression), unsupervised learning (clustering, dimensionality reduction), model evaluation, hyperparameter tuning, preprocessing, or building ML pipelines. Provides comprehensive reference documentation for algorithms, preprocessing techniques, pipelines, and best practices.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.data-science.shap",
+      "name": "shap",
+      "path": "skills/reusable/data-science/shap",
+      "scope": "reusable",
+      "category": "data-science",
+      "description": "Model interpretability and explainability using SHAP (SHapley Additive exPlanations). Use this skill when explaining machine learning model predictions, computing feature importance, generating SHAP plots (waterfall, beeswarm, bar, scatter, force, heatmap), debugging models, analyzing model bias or fairness, comparing models, or implementing explainable AI. Works with tree-based models (XGBoost, LightGBM, Random Forest), deep learning (TensorFlow, PyTorch), linear models, and any black-box model.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.data-science.sympy",
+      "name": "sympy",
+      "path": "skills/reusable/data-science/sympy",
+      "scope": "reusable",
+      "category": "data-science",
+      "description": "Use this skill when working with symbolic mathematics in Python. This skill should be used for symbolic computation tasks including solving equations algebraically, performing calculus operations (derivatives, integrals, limits), manipulating algebraic expressions, working with matrices symbolically, physics calculations, number theory problems, geometry computations, and generating executable code from mathematical expressions. Apply this skill when the user needs exact symbolic results rather than numerical approximations, or when working with mathematical formulas that contain variables and parameters.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.data-science.umap-learn",
+      "name": "umap-learn",
+      "path": "skills/reusable/data-science/umap-learn",
+      "scope": "reusable",
+      "category": "data-science",
+      "description": "UMAP dimensionality reduction. Fast nonlinear manifold learning for 2D/3D visualization, clustering preprocessing (HDBSCAN), supervised/parametric UMAP, for high-dimensional data.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.data-science.vaex",
+      "name": "vaex",
+      "path": "skills/reusable/data-science/vaex",
+      "scope": "reusable",
+      "category": "data-science",
+      "description": "Use this skill for processing and analyzing large tabular datasets (billions of rows) that exceed available RAM. Vaex excels at out-of-core DataFrame operations, lazy evaluation, fast aggregations, efficient visualization of big data, and machine learning on large datasets. Apply when users need to work with large CSV/HDF5/Arrow/Parquet files, perform fast statistics on massive datasets, create visualizations of big data, or build ML pipelines that do not fit in memory.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.documents-media.docx",
+      "name": "docx",
+      "path": "skills/reusable/documents-media/docx",
+      "scope": "reusable",
+      "category": "documents-media",
+      "description": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.documents-media.get-available-resources",
+      "name": "get-available-resources",
+      "path": "skills/reusable/documents-media/get-available-resources",
+      "scope": "reusable",
+      "category": "documents-media",
+      "description": "This skill should be used at the start of any computationally intensive scientific task to detect and report available system resources (CPU cores, GPUs, memory, disk space). It creates a JSON file with resource information and strategic recommendations that inform computational approach decisions such as whether to use parallel processing (joblib, multiprocessing), out-of-core computing (Dask, Zarr), GPU acceleration (PyTorch, JAX), or memory-efficient strategies. Use this skill before running analyses, training models, processing large datasets, or any task where resource constraints matter.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.documents-media.markitdown",
+      "name": "markitdown",
+      "path": "skills/reusable/documents-media/markitdown",
+      "scope": "reusable",
+      "category": "documents-media",
+      "description": "Convert files and office documents to Markdown. Supports PDF, DOCX, PPTX, XLSX, images (with OCR), audio (with transcription), HTML, CSV, JSON, XML, ZIP, YouTube URLs, EPubs and more.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.documents-media.open-notebook",
+      "name": "open-notebook",
+      "path": "skills/reusable/documents-media/open-notebook",
+      "scope": "reusable",
+      "category": "documents-media",
+      "description": "Self-hosted, open-source alternative to Google NotebookLM for AI-powered research and document analysis. Use when organizing research materials into notebooks, ingesting diverse content sources (PDFs, videos, audio, web pages, Office documents), generating AI-powered notes and summaries, creating multi-speaker podcasts from research, chatting with documents using context-aware AI, searching across materials with full-text and vector search, or running custom content transformations. Supports 16+ AI providers including OpenAI, Anthropic, Google, Ollama, Groq, and Mistral with complete data privacy through self-hosting.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.documents-media.parallel-web",
+      "name": "parallel-web",
+      "path": "skills/reusable/documents-media/parallel-web",
+      "scope": "reusable",
+      "category": "documents-media",
+      "description": "Search the web, extract URL content, and run deep research using the Parallel Chat API and Extract API. Use for ALL web searches, research queries, and general information gathering. Provides synthesized summaries with citations.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.documents-media.pdf",
+      "name": "pdf",
+      "path": "skills/reusable/documents-media/pdf",
+      "scope": "reusable",
+      "category": "documents-media",
+      "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.documents-media.perplexity-search",
+      "name": "perplexity-search",
+      "path": "skills/reusable/documents-media/perplexity-search",
+      "scope": "reusable",
+      "category": "documents-media",
+      "description": "Perform AI-powered web searches with real-time information using Perplexity models via LiteLLM and OpenRouter. This skill should be used when conducting web searches for current information, finding recent scientific literature, getting grounded answers with source citations, or accessing information beyond the model knowledge cutoff. Provides access to multiple Perplexity models including Sonar Pro, Sonar Pro Search (advanced agentic search), and Sonar Reasoning Pro through a single OpenRouter API key.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.documents-media.pptx",
+      "name": "pptx",
+      "path": "skills/reusable/documents-media/pptx",
+      "scope": "reusable",
+      "category": "documents-media",
+      "description": "Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates, layouts, speaker notes, or comments. Trigger whenever the user mentions \\\"deck,\\\" \\\"slides,\\\" \\\"presentation,\\\" or references a .pptx filename, regardless of what they plan to do with the content afterward. If a .pptx file needs to be opened, created, or touched, use this skill.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.documents-media.xlsx",
+      "name": "xlsx",
+      "path": "skills/reusable/documents-media/xlsx",
+      "scope": "reusable",
+      "category": "documents-media",
+      "description": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \\\"the xlsx in my downloads\\\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.frontend.brand-creative-assets",
+      "name": "frontend-brand-creative-assets",
+      "path": "skills/reusable/frontend/brand-creative-assets",
+      "scope": "reusable",
+      "category": "frontend",
+      "description": "Create and review brand-related frontend assets: brand identity, visual guidelines, banners, hero visuals, slides, social images, icons, and marketing creative. Use for branded campaigns and visual asset systems.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.frontend.design-system-tokens",
+      "name": "frontend-design-system-tokens",
+      "path": "skills/reusable/frontend/design-system-tokens",
+      "scope": "reusable",
+      "category": "frontend",
+      "description": "Create or refine frontend design systems: primitive, semantic, and component tokens; CSS variables; Tailwind theme config; typography scales; spacing; component states; brand consistency. Use when making reusable UI systems or aligning multiple screens.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.frontend.figma-design-to-code",
+      "name": "frontend-figma-design-to-code",
+      "path": "skills/reusable/frontend/figma-design-to-code",
+      "scope": "reusable",
+      "category": "frontend",
+      "description": "Work with Figma design files and MCP workflows: inspect designs, extract tokens/assets, audit accessibility, sync styles, and generate frontend code from Figma context. Use when Figma, design handoff, or design-to-code is involved.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.frontend.implementation-react-tailwind",
+      "name": "frontend-implementation-react-tailwind",
+      "path": "skills/reusable/frontend/implementation-react-tailwind",
+      "scope": "reusable",
+      "category": "frontend",
+      "description": "Implement production-ready frontend code with React, TypeScript, Tailwind CSS, and shadcn/ui. Use for components, pages, dashboards, forms, tables, navigation, themes, and responsive UI implementation.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.frontend.motion-interaction",
+      "name": "frontend-motion-interaction",
+      "path": "skills/reusable/frontend/motion-interaction",
+      "scope": "reusable",
+      "category": "frontend",
+      "description": "Design and implement frontend motion: page-load choreography, transitions, hover states, scroll effects, feedback animation, and reduced-motion behavior. Use when adding or reviewing animation and interaction polish.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.frontend.product-ux-planning",
+      "name": "frontend-product-ux-planning",
+      "path": "skills/reusable/frontend/product-ux-planning",
+      "scope": "reusable",
+      "category": "frontend",
+      "description": "Plan frontend products before implementation: purpose, audience, information architecture, navigation, user flows, states, content discipline, and feature scope. Use when starting a new app/page, redesigning UX, or reviewing whether a frontend experience is coherent.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.frontend.responsive-accessibility-review",
+      "name": "frontend-responsive-accessibility-review",
+      "path": "skills/reusable/frontend/responsive-accessibility-review",
+      "scope": "reusable",
+      "category": "frontend",
+      "description": "Review and fix frontend responsiveness, accessibility, usability, keyboard behavior, text fitting, contrast, and visual regressions. Use before shipping UI or when asked to improve UX quality.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.frontend.visual-direction",
+      "name": "frontend-visual-direction",
+      "path": "skills/reusable/frontend/visual-direction",
+      "scope": "reusable",
+      "category": "frontend",
+      "description": "Choose and execute a deliberate frontend visual direction across typography, palette, structure, texture, imagery, and composition. Use when designing or restyling frontend UI and avoiding generic AI-looking output.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.frontend.webapp-testing",
+      "name": "webapp-testing",
+      "path": "skills/reusable/frontend/webapp-testing",
+      "scope": "reusable",
+      "category": "frontend",
+      "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.create-database-row",
+      "name": "create-database-row",
+      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/create-database-row",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Insert a new row into a specified Notion database using natural-language property values. Handles property name matching and validation.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.create-page",
+      "name": "create-page",
+      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/create-page",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Create a new Notion page, optionally under a specific parent. Automatically structures content based on page type (meeting notes, project pages, etc.).",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.create-task",
+      "name": "create-task",
+      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/create-task",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Create a new task in the user's Notion tasks database with sensible defaults for due date, status, owner, and project.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.database-query",
+      "name": "database-query",
+      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/database-query",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Query a Notion database by name or ID and return structured, readable results with optional filters and sorting.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.find",
+      "name": "find",
+      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/find",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Quickly find pages or databases in Notion by title keywords. Returns precise matches rather than comprehensive results.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.knowledge-capture",
+      "name": "knowledge-capture",
+      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/knowledge-capture",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Transform conversations and discussions into structured documentation pages in Notion. Captures insights, decisions, and knowledge from chat context with proper organization and linking.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.meeting-intelligence",
+      "name": "meeting-intelligence",
+      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/meeting-intelligence",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Prepare meeting materials by gathering context from Notion, enriching with research, and creating both an internal pre-read and external agenda saved to Notion.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.research-documentation",
+      "name": "research-documentation",
+      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/research-documentation",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Search across your Notion workspace, synthesize findings from multiple pages, and create comprehensive research documentation with proper citations and actionable insights.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.search",
+      "name": "search",
+      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/search",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Search the user's Notion workspace using the Notion MCP server. Use for finding pages, databases, and content by keywords or natural-language queries.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.spec-to-implementation",
+      "name": "spec-to-implementation",
+      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/spec-to-implementation",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Turn product or tech specs into concrete Notion tasks. Breaks down spec pages into detailed implementation plans with clear tasks, acceptance criteria, and progress tracking.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.tasks-build",
+      "name": "tasks-build",
+      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/tasks-build",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Build a task from a Notion page URL. Fetches task details, marks it in progress, implements the work, and updates status in Notion.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.tasks-explain-diff",
+      "name": "tasks-explain-diff",
+      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/tasks-explain-diff",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Generate a rich Notion document explaining code changes. Creates comprehensive documentation with background, intuition, code walkthrough, and verification steps.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.tasks-plan",
+      "name": "tasks-plan",
+      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/tasks-plan",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Create an implementation plan from a Notion task or specification. Breaks down requirements into actionable steps with estimates and dependencies.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.tasks-setup",
+      "name": "tasks-setup",
+      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/tasks-setup",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Set up a Notion task board for tracking tasks. Guides users through using a template or connecting an existing board.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.create-database-row",
+      "name": "create-database-row",
+      "path": "skills/reusable/notion/notion-workspace-skills-codex/create-database-row",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Insert a new row into a specified Notion database using natural-language property values. Handles property name matching and validation.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.create-page",
+      "name": "create-page",
+      "path": "skills/reusable/notion/notion-workspace-skills-codex/create-page",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Create a new Notion page, optionally under a specific parent. Automatically structures content based on page type (meeting notes, project pages, etc.).",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.create-task",
+      "name": "create-task",
+      "path": "skills/reusable/notion/notion-workspace-skills-codex/create-task",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Create a new task in the user's Notion tasks database with sensible defaults for due date, status, owner, and project.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.database-query",
+      "name": "database-query",
+      "path": "skills/reusable/notion/notion-workspace-skills-codex/database-query",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Query a Notion database by name or ID and return structured, readable results with optional filters and sorting.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.find",
+      "name": "find",
+      "path": "skills/reusable/notion/notion-workspace-skills-codex/find",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Quickly find pages or databases in Notion by title keywords. Returns precise matches rather than comprehensive results.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.knowledge-capture",
+      "name": "knowledge-capture",
+      "path": "skills/reusable/notion/notion-workspace-skills-codex/knowledge-capture",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Transform conversations and discussions into structured documentation pages in Notion. Captures insights, decisions, and knowledge from chat context with proper organization and linking.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.meeting-intelligence",
+      "name": "meeting-intelligence",
+      "path": "skills/reusable/notion/notion-workspace-skills-codex/meeting-intelligence",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Prepare meeting materials by gathering context from Notion, enriching with research, and creating both an internal pre-read and external agenda saved to Notion.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.research-documentation",
+      "name": "research-documentation",
+      "path": "skills/reusable/notion/notion-workspace-skills-codex/research-documentation",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Search across your Notion workspace, synthesize findings from multiple pages, and create comprehensive research documentation with proper citations and actionable insights.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.search",
+      "name": "search",
+      "path": "skills/reusable/notion/notion-workspace-skills-codex/search",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Search the user's Notion workspace using the Notion MCP server. Use for finding pages, databases, and content by keywords or natural-language queries.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.spec-to-implementation",
+      "name": "spec-to-implementation",
+      "path": "skills/reusable/notion/notion-workspace-skills-codex/spec-to-implementation",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Turn product or tech specs into concrete Notion tasks. Breaks down spec pages into detailed implementation plans with clear tasks, acceptance criteria, and progress tracking.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.tasks-build",
+      "name": "tasks-build",
+      "path": "skills/reusable/notion/notion-workspace-skills-codex/tasks-build",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Build a task from a Notion page URL. Fetches task details, marks it in progress, implements the work, and updates status in Notion.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.tasks-explain-diff",
+      "name": "tasks-explain-diff",
+      "path": "skills/reusable/notion/notion-workspace-skills-codex/tasks-explain-diff",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Generate a rich Notion document explaining code changes. Creates comprehensive documentation with background, intuition, code walkthrough, and verification steps.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.tasks-plan",
+      "name": "tasks-plan",
+      "path": "skills/reusable/notion/notion-workspace-skills-codex/tasks-plan",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Create an implementation plan from a Notion task or specification. Breaks down requirements into actionable steps with estimates and dependencies.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.notion.tasks-setup",
+      "name": "tasks-setup",
+      "path": "skills/reusable/notion/notion-workspace-skills-codex/tasks-setup",
+      "scope": "reusable",
+      "category": "notion",
+      "description": "Set up a Notion task board for tracking tasks. Guides users through using a template or connecting an existing board.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.visualization.canvas-design",
+      "name": "canvas-design",
+      "path": "skills/reusable/visualization/canvas-design",
+      "scope": "reusable",
+      "category": "visualization",
+      "description": "Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.visualization.generate-image",
+      "name": "generate-image",
+      "path": "skills/reusable/visualization/generate-image",
+      "scope": "reusable",
+      "category": "visualization",
+      "description": "Generate or edit images using AI models (FLUX, Nano Banana 2). Use for general-purpose image generation including photos, illustrations, artwork, visual assets, concept art, and any image that is not a technical diagram or schematic. For flowcharts, circuits, pathways, and technical diagrams, use the scientific-schematics skill instead.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.visualization.infographics",
+      "name": "infographics",
+      "path": "skills/reusable/visualization/infographics",
+      "scope": "reusable",
+      "category": "visualization",
+      "description": "Create professional infographics using Nano Banana Pro AI with smart iterative refinement. Uses Gemini 3 Pro for quality review. Integrates research-lookup and web search for accurate data. Supports 10 infographic types, 8 industry styles, and colorblind-safe palettes.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.visualization.markdown-mermaid-writing",
+      "name": "markdown-mermaid-writing",
+      "path": "skills/reusable/visualization/markdown-mermaid-writing",
+      "scope": "reusable",
+      "category": "visualization",
+      "description": "Comprehensive markdown and Mermaid diagram writing skill. Use when creating any scientific document, report, analysis, or visualization. Establishes text-based diagrams as the default documentation standard with full style guides (markdown + mermaid), 24 diagram type references, and 9 document templates.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.visualization.matplotlib",
+      "name": "matplotlib",
+      "path": "skills/reusable/visualization/matplotlib",
+      "scope": "reusable",
+      "category": "visualization",
+      "description": "Low-level plotting library for full customization. Use when you need fine-grained control over every plot element, creating novel plot types, or integrating with specific scientific workflows. Export to PNG/PDF/SVG for publication. For quick statistical plots use seaborn; for interactive plots use plotly; for publication-ready multi-panel figures with journal styling, use scientific-visualization.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.visualization.plotly",
+      "name": "plotly",
+      "path": "skills/reusable/visualization/plotly",
+      "scope": "reusable",
+      "category": "visualization",
+      "description": "Interactive visualization library. Use when you need hover info, zoom, pan, or web-embeddable charts. Best for dashboards, exploratory analysis, and presentations. For static publication figures use matplotlib or scientific-visualization.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.visualization.pptx",
+      "name": "pptx",
+      "path": "skills/reusable/visualization/pptx",
+      "scope": "reusable",
+      "category": "visualization",
+      "description": "Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates, layouts, speaker notes, or comments. Trigger whenever the user mentions \\\"deck,\\\" \\\"slides,\\\" \\\"presentation,\\\" or references a .pptx filename, regardless of what they plan to do with the content afterward. If a .pptx file needs to be opened, created, or touched, use this skill.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.visualization.seaborn",
+      "name": "seaborn",
+      "path": "skills/reusable/visualization/seaborn",
+      "scope": "reusable",
+      "category": "visualization",
+      "description": "Statistical visualization with pandas integration. Use for quick exploration of distributions, relationships, and categorical comparisons with attractive defaults. Best for box plots, violin plots, pair plots, heatmaps. Built on matplotlib. For interactive plots use plotly; for publication styling use scientific-visualization.",
+      "status": "active"
+    },
+    {
+      "id": "reusable.visualization.theme-factory",
+      "name": "theme-factory",
+      "path": "skills/reusable/visualization/theme-factory",
+      "scope": "reusable",
+      "category": "visualization",
+      "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.",
+      "status": "active"
+    },
+    {
+      "id": "system.codex-system.claude-skill-creator",
+      "name": "skill-creator",
+      "path": "skills/system/codex-system/claude-skill-creator",
+      "scope": "system",
+      "category": "codex-system",
+      "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+      "status": "active"
+    },
+    {
+      "id": "system.codex-system.mcp-builder",
+      "name": "mcp-builder",
+      "path": "skills/system/codex-system/mcp-builder",
+      "scope": "system",
+      "category": "codex-system",
+      "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
+      "status": "active"
+    },
+    {
+      "id": "system.codex-system.imagegen",
+      "name": "imagegen",
+      "path": "skills/system/codex-system/system-skills/imagegen",
+      "scope": "system",
+      "category": "codex-system",
+      "description": "Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas.",
+      "status": "active"
+    },
+    {
+      "id": "system.codex-system.openai-docs",
+      "name": "openai-docs",
+      "path": "skills/system/codex-system/system-skills/openai-docs",
+      "scope": "system",
+      "category": "codex-system",
+      "description": "Use when the user asks how to build with OpenAI products or APIs and needs up-to-date official documentation with citations, help choosing the latest model for a use case, or model upgrade and prompt-upgrade guidance; prioritize OpenAI docs MCP tools, use bundled references only as helper context, and restrict any fallback browsing to official OpenAI domains.",
+      "status": "active"
+    },
+    {
+      "id": "system.codex-system.plugin-creator",
+      "name": "plugin-creator",
+      "path": "skills/system/codex-system/system-skills/plugin-creator",
+      "scope": "system",
+      "category": "codex-system",
+      "description": "Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, and baseline placeholders you can edit before publishing or testing. Use when Codex needs to create a new local plugin, add optional plugin structure, or generate or update repo-root `.agents/plugins/marketplace.json` entries for plugin ordering and availability metadata.",
+      "status": "active"
+    },
+    {
+      "id": "system.codex-system.skill-creator",
+      "name": "skill-creator",
+      "path": "skills/system/codex-system/system-skills/skill-creator",
+      "scope": "system",
+      "category": "codex-system",
+      "description": "Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations.",
+      "status": "active"
+    },
+    {
+      "id": "system.codex-system.skill-installer",
+      "name": "skill-installer",
+      "path": "skills/system/codex-system/system-skills/skill-installer",
+      "scope": "system",
+      "category": "codex-system",
+      "description": "Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos).",
+      "status": "active"
+    }
+  ]
+}

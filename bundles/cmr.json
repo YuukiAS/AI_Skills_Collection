@@ -1,0 +1,16 @@
+{
+  "name": "cmr",
+  "description": "Cardiac MRI and CardiacNexus project skills with supporting analysis tools.",
+  "include": [
+    "palette",
+    "skills/project/CMR",
+    "skills/domain/bayesian",
+    "skills/domain/medical-imaging",
+    "skills/domain/medicine-clinical",
+    "skills/reusable/data-science",
+    "skills/reusable/ai-ml",
+    "skills/reusable/visualization",
+    "skills/reusable/documents-media",
+    "skills/system/codex-system"
+  ]
+}

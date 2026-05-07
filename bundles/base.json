@@ -1,0 +1,11 @@
+{
+  "name": "base",
+  "description": "General-purpose reusable skills and shared palettes.",
+  "include": [
+    "palette",
+    "skills/reusable/documents-media",
+    "skills/reusable/data-science",
+    "skills/reusable/visualization",
+    "skills/system/codex-system"
+  ]
+}

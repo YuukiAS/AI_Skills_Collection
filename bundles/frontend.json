@@ -1,0 +1,11 @@
+{
+  "name": "frontend",
+  "description": "Frontend design, implementation, visual QA, and palette resources.",
+  "include": [
+    "palette",
+    "skills/reusable/frontend",
+    "skills/reusable/visualization",
+    "skills/reusable/documents-media",
+    "skills/system/codex-system"
+  ]
+}

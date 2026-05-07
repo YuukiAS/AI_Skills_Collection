@@ -1,0 +1,13 @@
+{
+  "name": "bioinformatics",
+  "description": "Bioinformatics and analysis skills with common data-science support.",
+  "include": [
+    "palette",
+    "skills/domain/bioinformatics",
+    "skills/reusable/data-science",
+    "skills/reusable/ai-ml",
+    "skills/reusable/visualization",
+    "skills/reusable/documents-media",
+    "skills/system/codex-system"
+  ]
+}

@@ -1,0 +1,889 @@
+{
+  "version": "1.0.0",
+  "description": "Journal-inspired color palettes for scientific figures.",
+  "source_note": "Palettes are adapted from common ggsci-style journal palettes and are intended for figure styling, not official journal branding.",
+  "palettes": [
+    {
+      "id": "nature_npg",
+      "name": "Nature Publishing Group inspired",
+      "type": "categorical",
+      "recommended_for": [
+        "multi-group bar plots",
+        "scatter plots",
+        "line plots"
+      ],
+      "colors": [
+        "#E64B35",
+        "#4DBBD5",
+        "#00A087",
+        "#3C5488",
+        "#F39B7F",
+        "#8491B4",
+        "#91D1C2",
+        "#DC0000",
+        "#7E6148",
+        "#B09C85"
+      ]
+    },
+    {
+      "id": "science_aaas",
+      "name": "Science AAAS inspired",
+      "type": "categorical",
+      "recommended_for": [
+        "group comparison plots",
+        "line plots",
+        "point plots"
+      ],
+      "colors": [
+        "#3B4992",
+        "#EE0000",
+        "#008B45",
+        "#631879",
+        "#008280",
+        "#BB0021",
+        "#5F559B",
+        "#A20056",
+        "#808180",
+        "#1B1919"
+      ]
+    },
+    {
+      "id": "nejm",
+      "name": "New England Journal of Medicine inspired",
+      "type": "categorical",
+      "recommended_for": [
+        "clinical plots",
+        "cohort comparisons",
+        "survival curves"
+      ],
+      "colors": [
+        "#BC3C29",
+        "#0072B5",
+        "#E18727",
+        "#20854E",
+        "#7876B1",
+        "#6F99AD",
+        "#FFDC91",
+        "#EE4C97"
+      ]
+    },
+    {
+      "id": "lancet",
+      "name": "Lancet Oncology inspired",
+      "type": "categorical",
+      "recommended_for": [
+        "clinical oncology plots",
+        "multi-arm comparisons",
+        "survival curves"
+      ],
+      "colors": [
+        "#00468B",
+        "#ED0000",
+        "#42B540",
+        "#0099B4",
+        "#925E9F",
+        "#FDAF91",
+        "#AD002A",
+        "#ADB6B6",
+        "#1B1919"
+      ]
+    },
+    {
+      "id": "jama",
+      "name": "JAMA inspired",
+      "type": "categorical",
+      "recommended_for": [
+        "medical figures",
+        "compact categorical plots",
+        "clinical dashboards"
+      ],
+      "colors": [
+        "#374E55",
+        "#DF8F44",
+        "#00A1D5",
+        "#B24745",
+        "#79AF97",
+        "#6A6599",
+        "#80796B"
+      ]
+    },
+    {
+      "id": "bmj",
+      "name": "BMJ inspired",
+      "type": "categorical",
+      "recommended_for": [
+        "medical communication",
+        "categorical charts",
+        "annotation colors"
+      ],
+      "colors": [
+        "#2A6EBB",
+        "#F0AB00",
+        "#C50084",
+        "#7D5CC6",
+        "#E37222",
+        "#69BE28",
+        "#00B2A9",
+        "#CD202C",
+        "#747678"
+      ]
+    },
+    {
+      "id": "jco",
+      "name": "Journal of Clinical Oncology inspired",
+      "type": "categorical",
+      "recommended_for": [
+        "oncology figures",
+        "clinical group comparisons",
+        "publication plots"
+      ],
+      "colors": [
+        "#0073C2",
+        "#EFC000",
+        "#868686",
+        "#CD534C",
+        "#7AA6DC",
+        "#003C67",
+        "#8F7700",
+        "#3B3B3B",
+        "#A73030",
+        "#4A6990"
+      ]
+    },
+    {
+      "id": "top_journal_cool_1",
+      "name": "Top journal cool palette 1",
+      "type": "categorical",
+      "source_image": "顶刊配色🌟冷淡色系❗️_1_自由巯基-_来自小红书网页版.jpg",
+      "recommended_for": [
+        "scientific figures",
+        "group comparison plots",
+        "bar plots"
+      ],
+      "colors": [
+        "#898EB1",
+        "#4778C7",
+        "#9CC4E6",
+        "#7C7C7C",
+        "#FFE8C7",
+        "#F1A947"
+      ]
+    },
+    {
+      "id": "nature_us_transfer_1",
+      "name": "Nature US city technology transfer palette 1",
+      "type": "categorical",
+      "source_image": "跟着 Nature 学配色｜美国城市技术转移_1_读博成长记录📝_来自小红书网页版.jpg",
+      "recommended_for": [
+        "maps",
+        "network plots",
+        "categorical scientific figures"
+      ],
+      "colors": [
+        "#FEEBDC",
+        "#FCD7EC",
+        "#F57FB4",
+        "#C51B7D",
+        "#760073",
+        "#ABD2FF",
+        "#004DA0"
+      ]
+    },
+    {
+      "id": "nature_us_transfer_2a_warm",
+      "name": "Nature US city technology transfer palette 2a warm",
+      "type": "sequential",
+      "source_image": "跟着 Nature 学配色｜美国城市技术转移_2_读博成长记录📝_来自小红书网页版.jpg",
+      "recommended_for": [
+        "choropleth maps",
+        "sequential scales",
+        "heatmaps"
+      ],
+      "colors": [
+        "#E8EDAA",
+        "#F1CD77",
+        "#EDA751",
+        "#EA8746",
+        "#E83C2E",
+        "#B51C31"
+      ]
+    },
+    {
+      "id": "nature_us_transfer_2b_blue",
+      "name": "Nature US city technology transfer palette 2b blue",
+      "type": "sequential",
+      "source_image": "跟着 Nature 学配色｜美国城市技术转移_2_读博成长记录📝_来自小红书网页版.jpg",
+      "recommended_for": [
+        "choropleth maps",
+        "sequential scales",
+        "line intensity scales"
+      ],
+      "colors": [
+        "#01539C",
+        "#2178AE",
+        "#53A0CA",
+        "#86BCD4",
+        "#B5D0E5",
+        "#E6E9F2"
+      ]
+    },
+    {
+      "id": "nature_us_transfer_2c_green",
+      "name": "Nature US city technology transfer palette 2c green",
+      "type": "sequential",
+      "source_image": "跟着 Nature 学配色｜美国城市技术转移_2_读博成长记录📝_来自小红书网页版.jpg",
+      "recommended_for": [
+        "choropleth maps",
+        "sequential scales",
+        "network intensity scales"
+      ],
+      "colors": [
+        "#EDEFC7",
+        "#BCD59B",
+        "#92C38B",
+        "#64AF77",
+        "#1A9657",
+        "#006032"
+      ]
+    },
+    {
+      "id": "nature_us_transfer_3a_warm",
+      "name": "Nature US city technology transfer palette 3a warm",
+      "type": "sequential",
+      "source_image": "跟着 Nature 学配色｜美国城市技术转移_3_读博成长记录📝_来自小红书网页版.jpg",
+      "recommended_for": [
+        "node size categories",
+        "sequential scales",
+        "highlight colors"
+      ],
+      "colors": [
+        "#F7E4D5",
+        "#F8B195",
+        "#F67245",
+        "#E23328",
+        "#B11414"
+      ]
+    },
+    {
+      "id": "nature_us_transfer_3b_blue",
+      "name": "Nature US city technology transfer palette 3b blue",
+      "type": "sequential",
+      "source_image": "跟着 Nature 学配色｜美国城市技术转移_3_读博成长记录📝_来自小红书网页版.jpg",
+      "recommended_for": [
+        "edge weight categories",
+        "sequential scales",
+        "network plots"
+      ],
+      "colors": [
+        "#08519C",
+        "#5A94C1",
+        "#73ADD2",
+        "#C1D9E8",
+        "#E1E6F4"
+      ]
+    },
+    {
+      "id": "nature_us_transfer_4",
+      "name": "Nature US city technology transfer palette 4",
+      "type": "categorical",
+      "source_image": "跟着 Nature 学配色｜美国城市技术转移_4_读博成长记录📝_来自小红书网页版.jpg",
+      "recommended_for": [
+        "network communities",
+        "categorical maps",
+        "group comparison plots"
+      ],
+      "colors": [
+        "#D65A4D",
+        "#B9BC61",
+        "#5B9C61",
+        "#5086AB"
+      ]
+    },
+    {
+      "id": "cols4all_area7",
+      "name": "cols4all area7",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "maps",
+        "space-filling visualizations",
+        "categorical scientific figures"
+      ],
+      "colors": [
+        "#FF9D9A",
+        "#77AADD",
+        "#F1CE63",
+        "#2CA02C",
+        "#B07AA1",
+        "#9EDAE5",
+        "#CC6677"
+      ]
+    },
+    {
+      "id": "cols4all_area8",
+      "name": "cols4all area8",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "maps",
+        "space-filling visualizations",
+        "categorical scientific figures"
+      ],
+      "colors": [
+        "#CC6677",
+        "#AEC7E8",
+        "#44BB99",
+        "#B07AA1",
+        "#BBCC33",
+        "#FFAABB",
+        "#B6992D",
+        "#98DF8A"
+      ]
+    },
+    {
+      "id": "cols4all_area9",
+      "name": "cols4all area9",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "maps",
+        "space-filling visualizations",
+        "categorical scientific figures"
+      ],
+      "colors": [
+        "#EE8866",
+        "#88CCEE",
+        "#2CA02C",
+        "#B07AA1",
+        "#F1CE63",
+        "#FFAABB",
+        "#6699CC",
+        "#44BB99",
+        "#CC6677"
+      ]
+    },
+    {
+      "id": "cols4all_area7_dark",
+      "name": "cols4all area7 dark",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "dark-mode maps",
+        "space-filling visualizations",
+        "categorical scientific figures"
+      ],
+      "colors": [
+        "#72190E",
+        "#332288",
+        "#225555",
+        "#997700",
+        "#437DBF",
+        "#994F88",
+        "#666633"
+      ]
+    },
+    {
+      "id": "cols4all_area8_dark",
+      "name": "cols4all area8 dark",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "dark-mode maps",
+        "space-filling visualizations",
+        "categorical scientific figures"
+      ],
+      "colors": [
+        "#663333",
+        "#1F77B4",
+        "#225555",
+        "#994F88",
+        "#997700",
+        "#332288",
+        "#666633",
+        "#661100"
+      ]
+    },
+    {
+      "id": "cols4all_area9_dark",
+      "name": "cols4all area9 dark",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "dark-mode maps",
+        "space-filling visualizations",
+        "categorical scientific figures"
+      ],
+      "colors": [
+        "#72190E",
+        "#1965B0",
+        "#225555",
+        "#994F88",
+        "#997700",
+        "#332288",
+        "#666633",
+        "#663333",
+        "#437DBF"
+      ]
+    },
+    {
+      "id": "cols4all_line7",
+      "name": "cols4all line7",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "line plots",
+        "scatter plots",
+        "light and dark backgrounds"
+      ],
+      "colors": [
+        "#1F77B4",
+        "#2CA02C",
+        "#E73F74",
+        "#6699CC",
+        "#994F88",
+        "#117733",
+        "#D37295"
+      ]
+    },
+    {
+      "id": "cols4all_line8",
+      "name": "cols4all line8",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "line plots",
+        "scatter plots",
+        "light and dark backgrounds"
+      ],
+      "colors": [
+        "#DC050C",
+        "#1F77B4",
+        "#117733",
+        "#994F88",
+        "#999933",
+        "#D37295",
+        "#6699CC",
+        "#E73F74"
+      ]
+    },
+    {
+      "id": "cols4all_line9",
+      "name": "cols4all line9",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "line plots",
+        "scatter plots",
+        "light and dark backgrounds"
+      ],
+      "colors": [
+        "#EE3377",
+        "#1F77B4",
+        "#117733",
+        "#CF1C90",
+        "#999933",
+        "#994455",
+        "#6699CC",
+        "#D37295",
+        "#DC050C"
+      ]
+    },
+    {
+      "id": "cols4all_friendly5",
+      "name": "cols4all friendly5",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "colorblind-friendly categories",
+        "compact group comparison plots",
+        "scientific figures"
+      ],
+      "colors": [
+        "#CC6677",
+        "#F1CE63",
+        "#117733",
+        "#99DDFF",
+        "#9467BD"
+      ]
+    },
+    {
+      "id": "cols4all_friendly7",
+      "name": "cols4all friendly7",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "colorblind-friendly categories",
+        "group comparison plots",
+        "scientific figures"
+      ],
+      "colors": [
+        "#E65518",
+        "#F2B701",
+        "#009988",
+        "#88CCEE",
+        "#9467BD",
+        "#225522",
+        "#882255"
+      ]
+    },
+    {
+      "id": "cols4all_friendly9",
+      "name": "cols4all friendly9",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "colorblind-friendly categories",
+        "multi-group plots",
+        "scientific figures"
+      ],
+      "colors": [
+        "#E73F74",
+        "#F1CE63",
+        "#99DDFF",
+        "#9467BD",
+        "#009988",
+        "#882255",
+        "#225522",
+        "#4B4B8F",
+        "#999933"
+      ]
+    },
+    {
+      "id": "cols4all_friendly11",
+      "name": "cols4all friendly11",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "colorblind-friendly categories",
+        "multi-group plots",
+        "scientific figures"
+      ],
+      "colors": [
+        "#E73F74",
+        "#F1CE63",
+        "#77AADD",
+        "#9467BD",
+        "#AAAA00",
+        "#FF9D9A",
+        "#99DDFF",
+        "#B07AA1",
+        "#225522",
+        "#882255",
+        "#4B4B8F"
+      ]
+    },
+    {
+      "id": "cols4all_friendly13",
+      "name": "cols4all friendly13",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "colorblind-friendly categories",
+        "large categorical legends",
+        "scientific figures"
+      ],
+      "colors": [
+        "#E73F74",
+        "#F1CE63",
+        "#77AADD",
+        "#009988",
+        "#9467BD",
+        "#FF9D9A",
+        "#99DDFF",
+        "#AAAA00",
+        "#225522",
+        "#882255",
+        "#997700",
+        "#4B4B8F",
+        "#8C564B"
+      ]
+    },
+    {
+      "id": "tol_bright",
+      "name": "Paul Tol bright",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "colorblind-friendly lines",
+        "scatter plots",
+        "categorical scientific figures"
+      ],
+      "colors": [
+        "#4477AA",
+        "#EE6677",
+        "#228833",
+        "#CCBB44",
+        "#66CCEE",
+        "#AA3377",
+        "#BBBBBB",
+        "#000000"
+      ]
+    },
+    {
+      "id": "tol_high_contrast",
+      "name": "Paul Tol high contrast",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "high-contrast annotations",
+        "line plots",
+        "small categorical sets"
+      ],
+      "colors": [
+        "#004488",
+        "#DDAA33",
+        "#BB5566",
+        "#000000"
+      ]
+    },
+    {
+      "id": "tol_vibrant",
+      "name": "Paul Tol vibrant",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "colorblind-friendly lines",
+        "scatter plots",
+        "categorical scientific figures"
+      ],
+      "colors": [
+        "#EE7733",
+        "#0077BB",
+        "#33BBEE",
+        "#EE3377",
+        "#CC3311",
+        "#009988",
+        "#BBBBBB",
+        "#000000"
+      ]
+    },
+    {
+      "id": "tol_muted",
+      "name": "Paul Tol muted",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "colorblind-friendly categories",
+        "publication figures",
+        "multi-group plots"
+      ],
+      "colors": [
+        "#CC6677",
+        "#332288",
+        "#DDCC77",
+        "#117733",
+        "#88CCEE",
+        "#882255",
+        "#44AA99",
+        "#999933",
+        "#AA4499",
+        "#DDDDDD",
+        "#000000"
+      ]
+    },
+    {
+      "id": "tol_medium_contrast",
+      "name": "Paul Tol medium contrast",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "line plots",
+        "small categorical sets",
+        "balanced contrast figures"
+      ],
+      "colors": [
+        "#6699CC",
+        "#004488",
+        "#EECC66",
+        "#994455",
+        "#997700",
+        "#EE99AA",
+        "#000000"
+      ]
+    },
+    {
+      "id": "tol_light",
+      "name": "Paul Tol light",
+      "type": "categorical",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "area fills",
+        "pastel categorical plots",
+        "light-background figures"
+      ],
+      "colors": [
+        "#77AADD",
+        "#EE8866",
+        "#EEDD88",
+        "#FFAABB",
+        "#99DDFF",
+        "#44BB99",
+        "#BBCC33",
+        "#AAAA00",
+        "#DDDDDD",
+        "#000000"
+      ]
+    },
+    {
+      "id": "tol_sunset",
+      "name": "Paul Tol sunset",
+      "type": "diverging",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "diverging continuous scales",
+        "heatmaps",
+        "scientific maps"
+      ],
+      "colors": [
+        "#364B9A",
+        "#4A7BB7",
+        "#6EA6CD",
+        "#98CAE1",
+        "#C2E4EF",
+        "#EAECCC",
+        "#FEDA8B",
+        "#FDB366",
+        "#F67E4B",
+        "#DD3D2D",
+        "#A50026"
+      ]
+    },
+    {
+      "id": "tol_bu_rd",
+      "name": "Paul Tol blue-red",
+      "type": "diverging",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "diverging continuous scales",
+        "difference maps",
+        "heatmaps"
+      ],
+      "colors": [
+        "#2166AC",
+        "#4393C3",
+        "#92C5DE",
+        "#D1E5F0",
+        "#F7F7F7",
+        "#FDDBC7",
+        "#F4A582",
+        "#D6604D",
+        "#B2182B"
+      ]
+    },
+    {
+      "id": "tol_pu_gn",
+      "name": "Paul Tol purple-green",
+      "type": "diverging",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "diverging continuous scales",
+        "difference maps",
+        "heatmaps"
+      ],
+      "colors": [
+        "#762A83",
+        "#9970AB",
+        "#C2A5CF",
+        "#E7D4E8",
+        "#F7F7F7",
+        "#D9F0D3",
+        "#ACD39E",
+        "#5AAE61",
+        "#1B7837"
+      ]
+    },
+    {
+      "id": "tol_yl_or_br",
+      "name": "Paul Tol yellow-orange-brown",
+      "type": "sequential",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "sequential continuous scales",
+        "choropleth maps",
+        "heatmaps"
+      ],
+      "colors": [
+        "#FFFFE5",
+        "#FFF7BC",
+        "#FEE391",
+        "#FEC44F",
+        "#FB9A29",
+        "#EC7014",
+        "#CC4C02",
+        "#993404",
+        "#662506"
+      ]
+    },
+    {
+      "id": "tol_iridescent",
+      "name": "Paul Tol iridescent",
+      "type": "sequential",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "sequential continuous scales",
+        "light-background heatmaps",
+        "scientific maps"
+      ],
+      "colors": [
+        "#FEFBE9",
+        "#FCF7D5",
+        "#F5F3C1",
+        "#EAF0B5",
+        "#DDECBF",
+        "#D0E7CA",
+        "#C2E3D2",
+        "#B5DDD8",
+        "#A8D8DC",
+        "#9BD2E1",
+        "#8DCBE4",
+        "#81C4E7",
+        "#7BBCE7",
+        "#7EB2E4",
+        "#88A5DD",
+        "#9398D2",
+        "#9B8AC4",
+        "#9D7DB2",
+        "#9A709E",
+        "#906388",
+        "#805770",
+        "#684957",
+        "#46353A"
+      ]
+    },
+    {
+      "id": "tol_rainbow_pu_rd",
+      "name": "Paul Tol rainbow purple-red",
+      "type": "sequential",
+      "source": "cols4all-R",
+      "recommended_for": [
+        "ordered scientific maps",
+        "continuous scales",
+        "heatmaps"
+      ],
+      "colors": [
+        "#6F4C9B",
+        "#6059A9",
+        "#5568B8",
+        "#4E79C5",
+        "#4D8AC6",
+        "#4E96BC",
+        "#549EB3",
+        "#59A5A9",
+        "#60AB9E",
+        "#69B190",
+        "#77B77D",
+        "#8CBC68",
+        "#A6BE54",
+        "#BEBC48",
+        "#D1B541",
+        "#DDAA3C",
+        "#E49C39",
+        "#E78C35",
+        "#E67932",
+        "#E4632D",
+        "#DF4828",
+        "#DA2222"
+      ]
+    }
+  ]
+}
