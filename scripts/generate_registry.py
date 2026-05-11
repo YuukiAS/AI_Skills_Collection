@@ -4,8 +4,10 @@
 from __future__ import annotations
 
 import json
-import re
 from pathlib import Path
+from typing import Any
+
+import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,20 +15,18 @@ SKILLS_ROOT = ROOT / "skills"
 REGISTRY = ROOT / "registry.json"
 
 
-def read_frontmatter(path: Path) -> dict[str, str]:
+def read_frontmatter(path: Path) -> dict[str, Any]:
     text = path.read_text(encoding="utf-8", errors="replace")
-    match = re.match(r"^---\n(.*?)\n---", text, re.DOTALL)
-    if not match:
+    if not text.startswith("---\n"):
         return {}
 
-    data: dict[str, str] = {}
-    for line in match.group(1).splitlines():
-        if ":" not in line:
-            continue
-        key, value = line.split(":", 1)
-        value = value.strip().strip('"').strip("'")
-        data[key.strip()] = value
-    return data
+    try:
+        _, raw, _ = text.split("---", 2)
+    except ValueError:
+        return {}
+
+    parsed = yaml.safe_load(raw) or {}
+    return parsed if isinstance(parsed, dict) else {}
 
 
 def skill_record(skill_file: Path) -> dict[str, object]:
@@ -37,14 +37,15 @@ def skill_record(skill_file: Path) -> dict[str, object]:
     slug = parts[-1]
     meta = read_frontmatter(skill_file)
     name = meta.get("name") or slug
+    description = meta.get("description") or ""
 
     return {
         "id": ".".join(part for part in (scope, category, slug) if part),
-        "name": name,
+        "name": str(name),
         "path": rel_dir.as_posix(),
         "scope": scope,
         "category": category,
-        "description": meta.get("description", ""),
+        "description": str(description),
         "status": "active",
     }
 

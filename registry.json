@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "description": "Generated skill registry for AI_Skills_Collection.",
-  "skill_count": 189,
+  "skill_count": 159,
   "skills": [
     {
       "id": "domain.bayesian.bayesian-ppl-diagnostics",
@@ -771,87 +771,6 @@
     {
       "id": "research.writing.content_generation",
       "name": "content_generation",
-      "path": "skills/research/writing/academic-paper-writer-pro/content_generation",
-      "scope": "research",
-      "category": "writing",
-      "description": "基于代码仓库、笔记、实验数据或论文要求，全自动智能撰写学术论文初稿的主线管线。强制分章逐批检索代码、分步输出，内置规避上下文超限机制和人工审核卡点，无缝衔接格式化引擎。内置严格的学术 Prompt 准则与多模态图表检索能力。",
-      "status": "active"
-    },
-    {
-      "id": "research.writing.docx",
-      "name": "docx",
-      "path": "skills/research/writing/academic-paper-writer-pro/docx",
-      "scope": "research",
-      "category": "writing",
-      "description": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of \\\"Word doc\\\", \\\"word document\\\", \\\".docx\\\", or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a \\\"report\\\", \\\"memo\\\", \\\"letter\\\", \\\"template\\\", or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.",
-      "status": "active"
-    },
-    {
-      "id": "research.writing.ocr_kb",
-      "name": "ocr_kb",
-      "path": "skills/research/writing/academic-paper-writer-pro/ocr_kb",
-      "scope": "research",
-      "category": "writing",
-      "description": "使用多模态大模型逐页读取长文档图片，精确提取文本、LaTeX公式和独立科研配图。支持环境清理、断点恢复、全局编号管理、失败页标记与部分重跑。逐页生成DOCX并每两页核查质量。本 Skill 专用于 Pipeline A（OCR 管道），处理 PDF 输入。中间产物全部放在 resources/，最终交付物放在 outputs/。Pipeline B / C 定义在主 SKILL.md 中。",
-      "status": "active"
-    },
-    {
-      "id": "research.writing.pdf",
-      "name": "pdf",
-      "path": "skills/research/writing/academic-paper-writer-pro/pdf",
-      "scope": "research",
-      "category": "writing",
-      "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
-      "status": "active"
-    },
-    {
-      "id": "research.writing.academic-paper-writer-pro-cursor-global",
-      "name": "academic-paper-writer-pro",
-      "path": "skills/research/writing/academic-paper-writer-pro-cursor-global",
-      "scope": "research",
-      "category": "writing",
-      "description": "基于规范目录结构的学术论文排版助手。支持 PDF / .doc / .docx / .md 多种输入格式，自动选择 OCR 管道、重排版管道或 MD 直转管道。包含环境清理确认、断点恢复、智能配图裁剪、逐单元增量生成 DOCX、双单元质量核查、中间状态保存和 BibTeX 参考文献管理。所有中间文件放 resources/，最终产物放 outputs/。",
-      "status": "active"
-    },
-    {
-      "id": "research.writing.content_generation",
-      "name": "content_generation",
-      "path": "skills/research/writing/academic-paper-writer-pro-cursor-global/content_generation",
-      "scope": "research",
-      "category": "writing",
-      "description": "基于代码仓库、笔记、实验数据或论文要求，全自动智能撰写学术论文初稿的主线管线。强制分章逐批检索代码、分步输出，内置规避上下文超限机制和人工审核卡点，无缝衔接格式化引擎。内置严格的学术 Prompt 准则与多模态图表检索能力。",
-      "status": "active"
-    },
-    {
-      "id": "research.writing.docx",
-      "name": "docx",
-      "path": "skills/research/writing/academic-paper-writer-pro-cursor-global/docx",
-      "scope": "research",
-      "category": "writing",
-      "description": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of \\\"Word doc\\\", \\\"word document\\\", \\\".docx\\\", or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a \\\"report\\\", \\\"memo\\\", \\\"letter\\\", \\\"template\\\", or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.",
-      "status": "active"
-    },
-    {
-      "id": "research.writing.ocr_kb",
-      "name": "ocr_kb",
-      "path": "skills/research/writing/academic-paper-writer-pro-cursor-global/ocr_kb",
-      "scope": "research",
-      "category": "writing",
-      "description": "使用多模态大模型逐页读取长文档图片，精确提取文本、LaTeX公式和独立科研配图。支持环境清理、断点恢复、全局编号管理、失败页标记与部分重跑。逐页生成DOCX并每两页核查质量。本 Skill 专用于 Pipeline A（OCR 管道），处理 PDF 输入。中间产物全部放在 resources/，最终交付物放在 outputs/。Pipeline B / C 定义在主 SKILL.md 中。",
-      "status": "active"
-    },
-    {
-      "id": "research.writing.pdf",
-      "name": "pdf",
-      "path": "skills/research/writing/academic-paper-writer-pro-cursor-global/pdf",
-      "scope": "research",
-      "category": "writing",
-      "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
-      "status": "active"
-    },
-    {
-      "id": "research.writing.content_generation",
-      "name": "content_generation",
       "path": "skills/research/writing/content_generation",
       "scope": "research",
       "category": "writing",
@@ -982,51 +901,6 @@
       "scope": "reusable",
       "category": "ai-ml",
       "description": "This skill should be used when working with pre-trained transformer models for natural language processing, computer vision, audio, or multimodal tasks. Use for text generation, classification, question answering, translation, summarization, image classification, object detection, speech recognition, and fine-tuning models on custom datasets.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.cursor.create-rule",
-      "name": "create-rule",
-      "path": "skills/reusable/cursor/cursor-skills/create-rule",
-      "scope": "reusable",
-      "category": "cursor",
-      "description": "Create Cursor rules for persistent AI guidance. Use when you want to create a rule, add coding standards, set up project conventions, configure file-specific patterns, create RULE.md files, or asks about .cursor/rules/ or AGENTS.md.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.cursor.create-skill",
-      "name": "create-skill",
-      "path": "skills/reusable/cursor/cursor-skills/create-skill",
-      "scope": "reusable",
-      "category": "cursor",
-      "description": "Guides users through creating effective Agent Skills for Cursor. Use when you want to create, write, or author a new skill, or asks about skill structure, best practices, or SKILL.md format.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.cursor.create-subagent",
-      "name": "create-subagent",
-      "path": "skills/reusable/cursor/cursor-skills/create-subagent",
-      "scope": "reusable",
-      "category": "cursor",
-      "description": "Create custom subagents for specialized AI tasks. Use when you want to create a new type of subagent, set up task-specific agents, configure code reviewers, debuggers, or domain-specific assistants with custom prompts.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.cursor.migrate-to-skills",
-      "name": "migrate-to-skills",
-      "path": "skills/reusable/cursor/cursor-skills/migrate-to-skills",
-      "scope": "reusable",
-      "category": "cursor",
-      "description": "Convert 'Applied intelligently' Cursor rules (.cursor/rules/*.mdc) and slash commands (.cursor/commands/*.md) to Agent Skills format (.cursor/skills/). Use when you want to migrate rules or commands to skills, convert .mdc rules to SKILL.md format, or consolidate commands into the skills directory.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.cursor.update-cursor-settings",
-      "name": "update-cursor-settings",
-      "path": "skills/reusable/cursor/cursor-skills/update-cursor-settings",
-      "scope": "reusable",
-      "category": "cursor",
-      "description": "Modify Cursor/VSCode user settings in settings.json. Use when you want to change editor settings, preferences, configuration, themes, font size, tab size, format on save, auto save, keybindings, or any settings.json values.",
       "status": "active"
     },
     {
@@ -1215,7 +1089,7 @@
       "path": "skills/reusable/documents-media/pptx",
       "scope": "reusable",
       "category": "documents-media",
-      "description": "Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates, layouts, speaker notes, or comments. Trigger whenever the user mentions \\\"deck,\\\" \\\"slides,\\\" \\\"presentation,\\\" or references a .pptx filename, regardless of what they plan to do with the content afterward. If a .pptx file needs to be opened, created, or touched, use this skill.",
+      "description": "Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates, layouts, speaker notes, or comments. Trigger whenever the user mentions \"deck,\" \"slides,\" \"presentation,\" or references a .pptx filename, regardless of what they plan to do with the content afterward. If a .pptx file needs to be opened, created, or touched, use this skill.",
       "status": "active"
     },
     {
@@ -1224,7 +1098,7 @@
       "path": "skills/reusable/documents-media/xlsx",
       "scope": "reusable",
       "category": "documents-media",
-      "description": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \\\"the xlsx in my downloads\\\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.",
+      "description": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \"the xlsx in my downloads\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.",
       "status": "active"
     },
     {
@@ -1306,132 +1180,6 @@
       "scope": "reusable",
       "category": "frontend",
       "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.notion.create-database-row",
-      "name": "create-database-row",
-      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/create-database-row",
-      "scope": "reusable",
-      "category": "notion",
-      "description": "Insert a new row into a specified Notion database using natural-language property values. Handles property name matching and validation.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.notion.create-page",
-      "name": "create-page",
-      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/create-page",
-      "scope": "reusable",
-      "category": "notion",
-      "description": "Create a new Notion page, optionally under a specific parent. Automatically structures content based on page type (meeting notes, project pages, etc.).",
-      "status": "active"
-    },
-    {
-      "id": "reusable.notion.create-task",
-      "name": "create-task",
-      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/create-task",
-      "scope": "reusable",
-      "category": "notion",
-      "description": "Create a new task in the user's Notion tasks database with sensible defaults for due date, status, owner, and project.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.notion.database-query",
-      "name": "database-query",
-      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/database-query",
-      "scope": "reusable",
-      "category": "notion",
-      "description": "Query a Notion database by name or ID and return structured, readable results with optional filters and sorting.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.notion.find",
-      "name": "find",
-      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/find",
-      "scope": "reusable",
-      "category": "notion",
-      "description": "Quickly find pages or databases in Notion by title keywords. Returns precise matches rather than comprehensive results.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.notion.knowledge-capture",
-      "name": "knowledge-capture",
-      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/knowledge-capture",
-      "scope": "reusable",
-      "category": "notion",
-      "description": "Transform conversations and discussions into structured documentation pages in Notion. Captures insights, decisions, and knowledge from chat context with proper organization and linking.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.notion.meeting-intelligence",
-      "name": "meeting-intelligence",
-      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/meeting-intelligence",
-      "scope": "reusable",
-      "category": "notion",
-      "description": "Prepare meeting materials by gathering context from Notion, enriching with research, and creating both an internal pre-read and external agenda saved to Notion.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.notion.research-documentation",
-      "name": "research-documentation",
-      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/research-documentation",
-      "scope": "reusable",
-      "category": "notion",
-      "description": "Search across your Notion workspace, synthesize findings from multiple pages, and create comprehensive research documentation with proper citations and actionable insights.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.notion.search",
-      "name": "search",
-      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/search",
-      "scope": "reusable",
-      "category": "notion",
-      "description": "Search the user's Notion workspace using the Notion MCP server. Use for finding pages, databases, and content by keywords or natural-language queries.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.notion.spec-to-implementation",
-      "name": "spec-to-implementation",
-      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/spec-to-implementation",
-      "scope": "reusable",
-      "category": "notion",
-      "description": "Turn product or tech specs into concrete Notion tasks. Breaks down spec pages into detailed implementation plans with clear tasks, acceptance criteria, and progress tracking.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.notion.tasks-build",
-      "name": "tasks-build",
-      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/tasks-build",
-      "scope": "reusable",
-      "category": "notion",
-      "description": "Build a task from a Notion page URL. Fetches task details, marks it in progress, implements the work, and updates status in Notion.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.notion.tasks-explain-diff",
-      "name": "tasks-explain-diff",
-      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/tasks-explain-diff",
-      "scope": "reusable",
-      "category": "notion",
-      "description": "Generate a rich Notion document explaining code changes. Creates comprehensive documentation with background, intuition, code walkthrough, and verification steps.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.notion.tasks-plan",
-      "name": "tasks-plan",
-      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/tasks-plan",
-      "scope": "reusable",
-      "category": "notion",
-      "description": "Create an implementation plan from a Notion task or specification. Breaks down requirements into actionable steps with estimates and dependencies.",
-      "status": "active"
-    },
-    {
-      "id": "reusable.notion.tasks-setup",
-      "name": "tasks-setup",
-      "path": "skills/reusable/notion/notion-workspace-cursor-plugin/skills/tasks-setup",
-      "scope": "reusable",
-      "category": "notion",
-      "description": "Set up a Notion task board for tracking tasks. Guides users through using a template or connecting an existing board.",
       "status": "active"
     },
     {
@@ -1615,15 +1363,6 @@
       "status": "active"
     },
     {
-      "id": "reusable.visualization.pptx",
-      "name": "pptx",
-      "path": "skills/reusable/visualization/pptx",
-      "scope": "reusable",
-      "category": "visualization",
-      "description": "Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates, layouts, speaker notes, or comments. Trigger whenever the user mentions \\\"deck,\\\" \\\"slides,\\\" \\\"presentation,\\\" or references a .pptx filename, regardless of what they plan to do with the content afterward. If a .pptx file needs to be opened, created, or touched, use this skill.",
-      "status": "active"
-    },
-    {
       "id": "reusable.visualization.seaborn",
       "name": "seaborn",
       "path": "skills/reusable/visualization/seaborn",
@@ -1639,15 +1378,6 @@
       "scope": "reusable",
       "category": "visualization",
       "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.",
-      "status": "active"
-    },
-    {
-      "id": "system.codex-system.claude-skill-creator",
-      "name": "skill-creator",
-      "path": "skills/system/codex-system/claude-skill-creator",
-      "scope": "system",
-      "category": "codex-system",
-      "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
       "status": "active"
     },
     {
