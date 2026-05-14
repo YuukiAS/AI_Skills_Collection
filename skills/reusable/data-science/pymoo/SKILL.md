@@ -1,11 +1,20 @@
 ---
 name: pymoo
 description: Multi-objective optimization framework. NSGA-II, NSGA-III, MOEA/D, Pareto fronts, constraint handling, benchmarks (ZDT, DTLZ), for engineering design and optimization problems.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 license: Apache-2.0 license
 metadata:
-    skill-author: K-Dense Inc.
+  skill-author: K-Dense Inc.
 ---
-
 # Pymoo - Multi-Objective Optimization in Python
 
 ## Overview

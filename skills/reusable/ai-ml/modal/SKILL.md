@@ -1,11 +1,20 @@
 ---
 name: modal
 description: Run Python code in the cloud with serverless containers, GPUs, and autoscaling. Use when deploying ML models, running batch processing jobs, scheduling compute-intensive tasks, or serving APIs that require GPU acceleration or dynamic scaling.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 license: Apache-2.0 license
 metadata:
-    skill-author: K-Dense Inc.
+  skill-author: K-Dense Inc.
 ---
-
 # Modal
 
 ## Overview

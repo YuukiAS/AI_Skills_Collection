@@ -1,8 +1,17 @@
 ---
 name: spec-to-implementation
 description: Turn product or tech specs into concrete Notion tasks. Breaks down spec pages into detailed implementation plans with clear tasks, acceptance criteria, and progress tracking.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Spec to Implementation
 
 Transforms specifications into actionable implementation plans with progress tracking. Fetches spec documents, extracts requirements, breaks down into tasks, and manages implementation workflow.

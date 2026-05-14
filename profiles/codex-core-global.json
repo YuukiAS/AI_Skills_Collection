@@ -1,0 +1,10 @@
+{
+  "name": "codex-core-global",
+  "description": "Tiny global bootstrap profile for project-local skill installation only.",
+  "max_active_skills": 3,
+  "skills": [
+    "skills/system/codex-system/project-skill-installer",
+    "skills/system/codex-system/system-skills/skill-installer",
+    "skills/system/codex-system/system-skills/skill-creator"
+  ]
+}

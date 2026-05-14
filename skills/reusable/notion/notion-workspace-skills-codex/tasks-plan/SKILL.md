@@ -1,8 +1,17 @@
 ---
 name: tasks-plan
 description: Create an implementation plan from a Notion task or specification. Breaks down requirements into actionable steps with estimates and dependencies.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Plan Task Implementation
 
 Create a detailed implementation plan from a Notion task or specification page.

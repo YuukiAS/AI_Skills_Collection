@@ -1,8 +1,17 @@
 ---
 name: create-database-row
 description: Insert a new row into a specified Notion database using natural-language property values. Handles property name matching and validation.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Create Database Row
 
 Use the Notion MCP server to insert a new row into a Notion database.

@@ -1,8 +1,17 @@
 ---
 name: search
 description: Search the user's Notion workspace using the Notion MCP server. Use for finding pages, databases, and content by keywords or natural-language queries.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Notion Search
 
 Use the Notion MCP server to search the user's Notion workspace for content related to the query.

@@ -1,11 +1,21 @@
 ---
 name: monarch-database
-description: Query the Monarch Initiative knowledge graph for disease-gene-phenotype associations across species. Integrates OMIM, ORPHANET, HPO, ClinVar, and model organism databases. Use for rare disease gene discovery, phenotype-to-gene mapping, cross-species disease modeling, and HPO term lookup.
+description: Archived provider note for Monarch phenotype lookup. Use bioinformatics-database-retrieval for active project routing.
+status: archived
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+  - archived-provider
+recommended_scope: project
 license: CC0-1.0
 metadata:
-    skill-author: Kuan-lin Huang
+  skill-author: Kuan-lin Huang
 ---
-
 # Monarch Initiative Database
 
 ## Overview

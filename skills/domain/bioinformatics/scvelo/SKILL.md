@@ -1,11 +1,20 @@
 ---
 name: scvelo
 description: RNA velocity analysis with scVelo. Estimate cell state transitions from unspliced/spliced mRNA dynamics, infer trajectory directions, compute latent time, and identify driver genes in single-cell RNA-seq data. Complements Scanpy/scVI-tools for trajectory inference.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 license: BSD-3-Clause
 metadata:
-    skill-author: Kuan-lin Huang
+  skill-author: Kuan-lin Huang
 ---
-
 # scVelo — RNA Velocity Analysis
 
 ## Overview

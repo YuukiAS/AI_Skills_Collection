@@ -1,8 +1,17 @@
 ---
 name: frontend-figma-design-to-code
 description: "Work with Figma design files and MCP workflows: inspect designs, extract tokens/assets, audit accessibility, sync styles, and generate frontend code from Figma context. Use when Figma, design handoff, or design-to-code is involved."
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Frontend Figma Design To Code
 
 Use this skill when a frontend task depends on Figma files, frames, components,

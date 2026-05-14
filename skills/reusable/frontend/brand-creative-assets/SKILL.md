@@ -1,8 +1,17 @@
 ---
 name: frontend-brand-creative-assets
 description: "Create and review brand-related frontend assets: brand identity, visual guidelines, banners, hero visuals, slides, social images, icons, and marketing creative. Use for branded campaigns and visual asset systems."
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Frontend Brand and Creative Assets
 
 Use this skill for visual identity and marketing-facing creative, separate from

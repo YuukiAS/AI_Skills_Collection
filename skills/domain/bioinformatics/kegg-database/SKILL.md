@@ -1,11 +1,21 @@
 ---
 name: kegg-database
-description: Direct REST API access to KEGG (academic use only). Pathway analysis, gene-pathway mapping, metabolic pathways, drug interactions, ID conversion. For Python workflows with multiple databases, prefer bioservices. Use this for direct HTTP/REST work or KEGG-specific control.
+description: Archived provider note for KEGG pathway lookup. Use bioinformatics-database-retrieval for active project routing.
+status: archived
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+  - archived-provider
+recommended_scope: project
 license: Non-academic use of KEGG requires a commercial license
 metadata:
-    skill-author: K-Dense Inc.
+  skill-author: K-Dense Inc.
 ---
-
 # KEGG Database
 
 ## Overview

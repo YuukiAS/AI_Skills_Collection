@@ -1,0 +1,27 @@
+{
+  "name": "codex-cardiacnexus",
+  "description": "Project-local profile for CardiacNexus, CMR, DICOM/NIfTI, MONAI, nnU-Net, UKB, and imaging pipelines.",
+  "max_active_skills": 24,
+  "skills": [
+    "skills/project/CMR/cardiacnexus-feature-contracts",
+    "skills/project/CMR/cardiacnexus-pipeline-refactor",
+    "skills/project/CMR/cardiacnexus-strain-registration",
+    "skills/project/CMR/cardiacnexus-docs-markdoc",
+    "skills/domain/medical-imaging/pydicom",
+    "skills/domain/medical-imaging/medical-imaging-classical-features",
+    "skills/domain/medical-imaging/medical-imaging-deep-learning",
+    "skills/domain/medical-imaging/pathml",
+    "skills/reusable/data-science/exploratory-data-analysis",
+    "skills/reusable/data-science/polars",
+    "skills/reusable/data-science/scikit-learn",
+    "skills/reusable/ai-ml/pytorch-lightning",
+    "skills/reusable/ai-ml/transformers",
+    "skills/reusable/visualization/matplotlib",
+    "skills/reusable/visualization/plotly",
+    "skills/reusable/documents-media/pdf"
+  ],
+  "secondary_skills": [
+    "skills/domain/bayesian/bayesian-ppl-diagnostics",
+    "skills/research/writing/scientific-writing"
+  ]
+}

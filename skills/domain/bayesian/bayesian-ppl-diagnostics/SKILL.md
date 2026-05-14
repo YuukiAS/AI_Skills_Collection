@@ -1,17 +1,21 @@
 ---
 name: bayesian-ppl-diagnostics
-description: Executable guidance for Bayesian workflows using Stan/CmdStanPy, brms, PyMC, and ArviZ, with legacy JAGS/OpenBUGS paths and Rcpp acceleration patterns. Covers MCMC diagnostics (divergences, treedepth, BFMI, R-hat, ESS), predictive checks, and reparameterization. Use when fitting hierarchical models, reviewing convergence, or integrating Bayesian analysis with CardiacNexus phenotypes.
+description: Executable guidance for Bayesian workflows using Stan/CmdStanPy, brms, PyMC, and ArviZ, with legacy JAGS/OpenBUGS paths and Rcpp acceleration patterns.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 license: Apache-2.0
-allowed-tools:
-  - read_file
-  - grep
-  - codebase_search
-  - run_terminal_cmd
-  - web_fetch
 metadata:
   skill-author: CardiacNexus maintainers
+allowed-tools:
 ---
-
 # Bayesian PPL and diagnostics
 
 ## Overview

@@ -1,8 +1,17 @@
 ---
 name: research-documentation
 description: Search across your Notion workspace, synthesize findings from multiple pages, and create comprehensive research documentation with proper citations and actionable insights.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Research & Documentation
 
 Enables comprehensive research workflows: search for information across your Notion workspace, fetch and analyze relevant pages, synthesize findings, and create well-structured documentation.

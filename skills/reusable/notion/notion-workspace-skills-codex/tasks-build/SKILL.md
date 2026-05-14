@@ -1,8 +1,17 @@
 ---
 name: tasks-build
 description: Build a task from a Notion page URL. Fetches task details, marks it in progress, implements the work, and updates status in Notion.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Build Task from Notion
 
 Build a task that is tracked in Notion. The user may be watching the Notion board, so all feedback should be sent through Notion.

@@ -1,13 +1,22 @@
 ---
 name: timesfm-forecasting
-description: Zero-shot time series forecasting with Google's TimesFM foundation model. Use for any univariate time series (sales, sensors, energy, vitals, weather) without training a custom model. Supports CSV/DataFrame/array inputs with point forecasts and prediction intervals. Includes a preflight system checker script to verify RAM/GPU before first use.
-allowed-tools: Read Write Edit Bash
+description: Zero-shot time series forecasting with Google's TimesFM foundation model. Use for any univariate time series (sales, sensors, energy, vitals, weather) without training a custom model.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 license: Apache-2.0 license
 metadata:
   skill-author: Clayton Young / Superior Byte Works, LLC (@borealBytes)
-  skill-version: "1.0.0"
+  skill-version: 1.0.0
+allowed-tools: Read Write Edit Bash
 ---
-
 # TimesFM Forecasting
 
 ## Overview

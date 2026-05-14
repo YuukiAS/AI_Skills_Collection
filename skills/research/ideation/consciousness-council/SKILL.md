@@ -1,12 +1,21 @@
 ---
 name: consciousness-council
-description: Run a multi-perspective Mind Council deliberation on any question, decision, or creative challenge. Use this skill whenever the user wants diverse viewpoints, needs help making a tough decision, asks for a council/panel/board discussion, wants to explore a problem from multiple angles, requests devil's advocate analysis, or says things like "what would different experts think about this", "help me think through this from all sides", "council mode", "mind council", or "deliberate on this". Also trigger when the user faces a dilemma, trade-off, or complex choice with no obvious answer.
-allowed-tools: Read Write
+description: Run a multi-perspective Mind Council deliberation on any question, decision, or creative challenge. Also trigger when the user faces a dilemma, trade-off, or complex choice with no obvious answer.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 license: MIT license
 metadata:
   skill-author: AHK Strategies (ashrafkahoush-ux)
+allowed-tools: Read Write
 ---
-
 # Consciousness Council
 
 A structured multi-perspective deliberation system that generates genuine cognitive diversity on any question. Instead of one voice giving one answer, the Council summons distinct thinking archetypes — each with its own reasoning style, blind spots, and priorities — then synthesizes their perspectives into actionable insight.

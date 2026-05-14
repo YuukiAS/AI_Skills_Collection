@@ -1,12 +1,21 @@
 ---
 name: paper-2-web
-description: This skill should be used when converting academic papers into promotional and presentation formats including interactive websites (Paper2Web), presentation videos (Paper2Video), and conference posters (Paper2Poster). Use this skill for tasks involving paper dissemination, conference preparation, creating explorable academic homepages, generating video abstracts, or producing print-ready posters from LaTeX or PDF sources.
-allowed-tools: Read Write Edit Bash
+description: This skill should be used when converting academic papers into promotional and presentation formats including interactive websites (Paper2Web), presentation videos (Paper2Video), and conference posters (Paper2Poster).
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 license: Unknown
 metadata:
-    skill-author: K-Dense Inc.
+  skill-author: K-Dense Inc.
+allowed-tools: Read Write Edit Bash
 ---
-
 # Paper2All: Academic Paper Transformation Pipeline
 
 ## Overview

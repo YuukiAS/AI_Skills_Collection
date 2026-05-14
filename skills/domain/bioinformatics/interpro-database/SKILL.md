@@ -1,11 +1,21 @@
 ---
 name: interpro-database
-description: Query InterPro for protein family, domain, and functional site annotations. Integrates Pfam, PANTHER, PRINTS, SMART, SUPERFAMILY, and 11 other member databases. Use for protein function prediction, domain architecture analysis, evolutionary classification, and GO term mapping.
+description: Archived provider note for InterPro domain lookup. Use bioinformatics-database-retrieval for active project routing.
+status: archived
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+  - archived-provider
+recommended_scope: project
 license: CC0-1.0
 metadata:
-    skill-author: Kuan-lin Huang
+  skill-author: Kuan-lin Huang
 ---
-
 # InterPro Database
 
 ## Overview

@@ -1,11 +1,21 @@
 ---
 name: jaspar-database
-description: Query JASPAR for transcription factor binding site (TFBS) profiles (PWMs/PFMs). Search by TF name, species, or class; scan DNA sequences for TF binding sites; compare matrices; essential for regulatory genomics, motif analysis, and GWAS regulatory variant interpretation.
+description: Archived provider note for JASPAR motif lookup. Use bioinformatics-database-retrieval for active project routing.
+status: archived
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+  - archived-provider
+recommended_scope: project
 license: CC0-1.0
 metadata:
-    skill-author: Kuan-lin Huang
+  skill-author: Kuan-lin Huang
 ---
-
 # JASPAR Database
 
 ## Overview

@@ -1,11 +1,21 @@
 ---
 name: reactome-database
-description: Query Reactome REST API for pathway analysis, enrichment, gene-pathway mapping, disease pathways, molecular interactions, expression analysis, for systems biology studies.
+description: Archived provider note for Reactome pathway lookup. Use bioinformatics-database-retrieval for active project routing.
+status: archived
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+  - archived-provider
+recommended_scope: project
 license: Unknown
 metadata:
-    skill-author: K-Dense Inc.
+  skill-author: K-Dense Inc.
 ---
-
 # Reactome Database
 
 ## Overview

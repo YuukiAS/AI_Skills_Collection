@@ -1,8 +1,17 @@
 ---
 name: frontend-implementation-react-tailwind
 description: Implement production-ready frontend code with React, TypeScript, Tailwind CSS, and shadcn/ui. Use for components, pages, dashboards, forms, tables, navigation, themes, and responsive UI implementation.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Frontend Implementation: React and Tailwind
 
 Use existing project conventions first. Add dependencies only when the project

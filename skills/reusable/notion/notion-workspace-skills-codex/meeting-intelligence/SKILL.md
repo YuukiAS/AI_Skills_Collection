@@ -1,8 +1,17 @@
 ---
 name: meeting-intelligence
 description: Prepare meeting materials by gathering context from Notion, enriching with research, and creating both an internal pre-read and external agenda saved to Notion.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Meeting Intelligence
 
 Prepares you for meetings by gathering context from Notion, enriching it with research, and creating comprehensive meeting materials. Generates both an internal pre-read for attendees and an external-facing agenda for the meeting itself.

@@ -1,11 +1,21 @@
 ---
 name: cellxgene-census
-description: Query the CELLxGENE Census (61M+ cells) programmatically. Use when you need expression data across tissues, diseases, or cell types from the largest curated single-cell atlas. Best for population-scale queries, reference atlas comparisons. For analyzing your own data use scanpy or scvi-tools.
+description: Archived provider note for CELLxGENE Census lookup. Use bioinformatics-database-retrieval for active project routing unless doing single-cell analysis.
+status: archived
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+  - archived-provider
+recommended_scope: project
 license: Unknown
 metadata:
-    skill-author: K-Dense Inc.
+  skill-author: K-Dense Inc.
 ---
-
 # CZ CELLxGENE Census
 
 ## Overview

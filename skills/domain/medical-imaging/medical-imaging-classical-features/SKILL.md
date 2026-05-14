@@ -1,17 +1,21 @@
 ---
 name: medical-imaging-classical-features
-description: "Executable guidance for geometry-aware classical medical imaging pipelines: SimpleITK spatial processing, PyRadiomics with IBSI/CLEAR discipline, pydicom/highdicom DICOM semantics, and selective ANTsPy registration/template workflows with elastix and N4ITK anchors. Use when enforcing reproducible preprocessing, registration baselines, radiomics protocols, or DICOM SEG/SR provenance in CardiacNexus."
+description: Use when enforcing reproducible preprocessing, registration baselines, radiomics protocols, or DICOM SEG/SR provenance in CardiacNexus.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 license: Apache-2.0
-allowed-tools:
-  - read_file
-  - grep
-  - codebase_search
-  - run_terminal_cmd
-  - web_fetch
 metadata:
   skill-author: CardiacNexus maintainers
+allowed-tools:
 ---
-
 # Medical imaging classical features and engineered preprocessing
 
 ## Overview

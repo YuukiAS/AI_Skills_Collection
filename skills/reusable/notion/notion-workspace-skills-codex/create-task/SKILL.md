@@ -1,8 +1,17 @@
 ---
 name: create-task
 description: Create a new task in the user's Notion tasks database with sensible defaults for due date, status, owner, and project.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Create Notion Task
 
 Use the Notion MCP server to create a new task for the user.

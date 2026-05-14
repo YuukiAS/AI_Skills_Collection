@@ -1,70 +1,35 @@
 #!/usr/bin/env python3
-"""Generate registry.json from SKILL.md files."""
+"""Generate registry.json from SKILL.md files with governance metadata."""
 
 from __future__ import annotations
 
+import argparse
 import json
-from pathlib import Path
-from typing import Any
 
-import yaml
+from skill_utils import ROOT, iter_skill_files, skill_record, utc_now
 
 
-ROOT = Path(__file__).resolve().parents[1]
-SKILLS_ROOT = ROOT / "skills"
 REGISTRY = ROOT / "registry.json"
 
 
-def read_frontmatter(path: Path) -> dict[str, Any]:
-    text = path.read_text(encoding="utf-8", errors="replace")
-    if not text.startswith("---\n"):
-        return {}
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--include-archive", action="store_true", help="Include archived skills and skills under skills/archive")
+    args = parser.parse_args()
 
-    try:
-        _, raw, _ = text.split("---", 2)
-    except ValueError:
-        return {}
-
-    parsed = yaml.safe_load(raw) or {}
-    return parsed if isinstance(parsed, dict) else {}
-
-
-def skill_record(skill_file: Path) -> dict[str, object]:
-    rel_dir = skill_file.parent.relative_to(ROOT)
-    parts = rel_dir.parts
-    scope = parts[1] if len(parts) > 1 else ""
-    category = parts[2] if len(parts) > 2 else ""
-    slug = parts[-1]
-    meta = read_frontmatter(skill_file)
-    name = meta.get("name") or slug
-    description = meta.get("description") or ""
-
-    return {
-        "id": ".".join(part for part in (scope, category, slug) if part),
-        "name": str(name),
-        "path": rel_dir.as_posix(),
-        "scope": scope,
-        "category": category,
-        "description": str(description),
-        "status": "active",
-    }
-
-
-def main() -> None:
-    records = [
-        skill_record(path)
-        for path in sorted(SKILLS_ROOT.rglob("SKILL.md"))
-        if "archive" not in path.parts
-    ]
+    records = [skill_record(path) for path in iter_skill_files(include_archive=args.include_archive)]
     output = {
-        "version": "1.0.0",
-        "description": "Generated skill registry for AI_Skills_Collection.",
+        "version": "2.0.0",
+        "generated_at": utc_now(),
+        "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
+        "include_archive": bool(args.include_archive),
         "skill_count": len(records),
         "skills": records,
     }
     REGISTRY.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"wrote {REGISTRY.relative_to(ROOT)} with {len(records)} skills")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

@@ -1,12 +1,21 @@
 ---
 name: generate-image
 description: Generate or edit images using AI models (FLUX, Nano Banana 2). Use for general-purpose image generation including photos, illustrations, artwork, visual assets, concept art, and any image that is not a technical diagram or schematic. For flowcharts, circuits, pathways, and technical diagrams, use the scientific-schematics skill instead.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 license: MIT license
-compatibility: Requires an OpenRouter API key
 metadata:
-    skill-author: K-Dense Inc.
+  skill-author: K-Dense Inc.
+compatibility: Requires an OpenRouter API key
 ---
-
 # Generate Image
 
 Generate and edit high-quality images using OpenRouter's image generation models including FLUX.2 Pro and Gemini 3.1 Flash Image Preview.

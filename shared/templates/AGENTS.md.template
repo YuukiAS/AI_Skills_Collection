@@ -1,0 +1,24 @@
+<!-- AI_SKILLS_COLLECTION_START -->
+# AI Skills Collection
+
+Profile: `{profile}`
+Installed: `{installed_at}`
+Project skills: `.codex/skills/`
+
+When a task matches an installed skill, read that skill's `SKILL.md` before acting.
+Do not read archived skills.
+
+## Skill Routing
+
+{skill_index}
+
+## Project Commands
+
+{project_commands}
+
+## Skill Maintenance
+
+- To install or update this project's skills, run the central project installer.
+- The installer only manages paths recorded in `.codex/skills/.ai-skills-collection-manifest.json`.
+- Do not clean or rewrite global `~/.codex/skills` when switching projects.
+<!-- AI_SKILLS_COLLECTION_END -->

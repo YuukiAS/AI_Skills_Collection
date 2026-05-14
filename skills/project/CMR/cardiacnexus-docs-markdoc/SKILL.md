@@ -1,10 +1,19 @@
 ---
 name: cardiacnexus-docs-markdoc
 description: Project-specific guidance for the CardiacNexus documentation site in docs/. Use when editing Markdoc pages, navigation, metadata, Next.js static export settings, phenotype documentation, or preparing the site for static publishing behind Cloudflared and cardiacnexus-ukb.org.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 metadata:
   short-description: Maintain the CardiacNexus docs site
 ---
-
 # CardiacNexus docs Markdoc site
 
 This skill is for the repository's documentation website, not for generic markdown writing.

@@ -1,10 +1,19 @@
 ---
 name: cardiacnexus-strain-registration
 description: Project-specific guidance for CardiacNexus strain and registration refactors. Use when editing eval_strain_lax.py, eval_strain_sax.py, cardiac_utils motion/contour code, MIRTK integrations, or when introducing ANTsPy or VoxelMorph backends for deformation-sensitive phenotype extraction.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 metadata:
   short-description: Refactor strain and registration safely
 ---
-
 # CardiacNexus strain and registration
 
 This skill exists because strain and deformable registration are the highest-risk parts of the pipeline. A successful refactor here is not just a cleaner API; it must preserve phenotype validity.

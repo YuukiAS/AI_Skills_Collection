@@ -1,8 +1,17 @@
 ---
 name: frontend-design-system-tokens
 description: "Create or refine frontend design systems: primitive, semantic, and component tokens; CSS variables; Tailwind theme config; typography scales; spacing; component states; brand consistency. Use when making reusable UI systems or aligning multiple screens."
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Frontend Design System Tokens
 
 Use this skill when design choices need to scale across components, pages, or

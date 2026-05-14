@@ -1,11 +1,20 @@
 ---
 name: arxiv-database
 description: Search and retrieve preprints from arXiv via the Atom API. Use this skill when searching for papers in physics, mathematics, computer science, quantitative biology, quantitative finance, statistics, electrical engineering, or economics by keywords, authors, arXiv IDs, date ranges, or categories.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 license: MIT
 metadata:
-    skill-author: Orchestra Research
+  skill-author: Orchestra Research
 ---
-
 # arXiv Database
 
 ## Overview

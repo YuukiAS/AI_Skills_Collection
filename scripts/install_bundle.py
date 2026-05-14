@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Install a bundle by copying included paths to a target directory."""
+"""Legacy bundle installer.
+
+Prefer scripts/install_project_skills.py for project-local skill installs. This
+script is kept for compatibility with old bundle deployments.
+"""
 
 from __future__ import annotations
 
@@ -66,6 +70,13 @@ def main() -> int:
 
     bundle_path = (ROOT / args.bundle).resolve() if not Path(args.bundle).is_absolute() else Path(args.bundle)
     target = Path(args.target).expanduser().resolve()
+    global_skills = (Path.home() / ".codex" / "skills").resolve()
+    if target == global_skills:
+        print(
+            "WARNING: installing broad bundles into global ~/.codex/skills can "
+            "trigger skill budget warnings. Prefer codex-core-global plus "
+            "project-local installs via scripts/install_project_skills.py."
+        )
 
     bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
     for item in bundle["include"]:

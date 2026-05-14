@@ -1,12 +1,21 @@
 ---
 name: transformers
-description: This skill should be used when working with pre-trained transformer models for natural language processing, computer vision, audio, or multimodal tasks. Use for text generation, classification, question answering, translation, summarization, image classification, object detection, speech recognition, and fine-tuning models on custom datasets.
+description: This skill should be used when working with pre-trained transformer models for natural language processing, computer vision, audio, or multimodal tasks.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 license: Apache-2.0 license
-compatibility: Some features require an Huggingface token
 metadata:
-    skill-author: K-Dense Inc.
+  skill-author: K-Dense Inc.
+compatibility: Some features require an Huggingface token
 ---
-
 # Transformers
 
 ## Overview

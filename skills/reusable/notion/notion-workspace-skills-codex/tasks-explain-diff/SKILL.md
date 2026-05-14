@@ -1,8 +1,17 @@
 ---
 name: tasks-explain-diff
 description: Generate a rich Notion document explaining code changes. Creates comprehensive documentation with background, intuition, code walkthrough, and verification steps.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Explain Code Changes
 
 Create a rich explanation of code changes as a new Notion page.

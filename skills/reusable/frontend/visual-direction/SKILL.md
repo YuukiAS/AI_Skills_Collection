@@ -1,8 +1,17 @@
 ---
 name: frontend-visual-direction
 description: Choose and execute a deliberate frontend visual direction across typography, palette, structure, texture, imagery, and composition. Use when designing or restyling frontend UI and avoiding generic AI-looking output.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Frontend Visual Direction
 
 Commit to one coherent direction before coding. Do not blend incompatible styles
@@ -54,4 +63,5 @@ Load files from `references/` only when needed:
 - `frontend-design-anthropic-like.md`: broad anti-generic frontend guidance.
 - `distinctive-frontend-design.md`: typography, color, motion, and background patterns.
 - `frontend-design-ultimate.md`: React/Tailwind static-site workflow and mobile patterns.
-- `ui-ux-pro-max-data/`: upstream style, palette, product, and stack data.
+- `../../../../shared/reference-packs/frontend-ui-ux/ui-ux-pro-max-data/`:
+  shared style, palette, product, and stack data.

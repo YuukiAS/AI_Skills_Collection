@@ -1,17 +1,21 @@
 ---
 name: medical-imaging-deep-learning
-description: Executable guidance for medical image deep learning using MONAI (custom pipelines), nnU-Net (default strong segmentation benchmark), MedSAM (foundation/promptable segmentation), and VoxelMorph (learning-based registration) with classical registration baselines, geometry-safe preprocessing, and evaluation discipline. Aligns with CardiacNexus MONAI-first refactor and high-risk registration/strain awareness.
+description: Aligns with CardiacNexus MONAI-first refactor and high-risk registration/strain awareness.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 license: Apache-2.0
-allowed-tools:
-  - read_file
-  - grep
-  - codebase_search
-  - run_terminal_cmd
-  - web_fetch
 metadata:
   skill-author: CardiacNexus maintainers
+allowed-tools:
 ---
-
 # Medical imaging deep learning
 
 ## Overview

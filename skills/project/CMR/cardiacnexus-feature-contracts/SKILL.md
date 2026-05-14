@@ -1,10 +1,19 @@
 ---
 name: cardiacnexus-feature-contracts
 description: Project-specific guidance for CardiacNexus phenotype outputs. Use when adding, renaming, validating, aggregating, or documenting CSV/NPZ/QC outputs, units, column schemas, cross-modality features, or downstream-facing phenotype contracts.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 metadata:
   short-description: Maintain phenotype output contracts
 ---
-
 # CardiacNexus feature contracts
 
 Use this skill whenever a change can alter the shape, meaning, location, or naming of phenotype outputs.

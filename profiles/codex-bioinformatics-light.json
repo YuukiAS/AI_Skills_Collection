@@ -1,0 +1,25 @@
+{
+  "name": "codex-bioinformatics-light",
+  "description": "Project-local profile for common bioinformatics workflows without activating every database provider.",
+  "max_active_skills": 20,
+  "skills": [
+    "skills/domain/bioinformatics/bioinformatics-database-retrieval",
+    "skills/domain/bioinformatics/scanpy",
+    "skills/domain/bioinformatics/scvi-tools",
+    "skills/domain/bioinformatics/anndata",
+    "skills/domain/bioinformatics/pysam",
+    "skills/domain/bioinformatics/pydeseq2",
+    "skills/domain/bioinformatics/biopython",
+    "skills/domain/bioinformatics/scikit-bio",
+    "skills/domain/bioinformatics/polars-bio",
+    "skills/domain/bioinformatics/tiledbvcf",
+    "skills/reusable/data-science/polars",
+    "skills/reusable/data-science/exploratory-data-analysis",
+    "skills/reusable/visualization/plotly",
+    "skills/reusable/visualization/matplotlib"
+  ],
+  "secondary_skills": [
+    "skills/domain/bioinformatics/scvelo",
+    "skills/domain/bioinformatics/deeptools"
+  ]
+}

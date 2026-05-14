@@ -1,8 +1,17 @@
 ---
 name: tasks-setup
 description: Set up a Notion task board for tracking tasks. Guides users through using a template or connecting an existing board.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
 # Notion Task Board Setup
 
 Help the user set up their Notion workspace to work with the task skills in this plugin.

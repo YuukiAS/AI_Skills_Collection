@@ -1,9 +1,17 @@
 ---
-name: "openai-docs"
-description: "Use when the user asks how to build with OpenAI products or APIs and needs up-to-date official documentation with citations, help choosing the latest model for a use case, or model upgrade and prompt-upgrade guidance; prioritize OpenAI docs MCP tools, use bundled references only as helper context, and restrict any fallback browsing to official OpenAI domains."
+name: openai-docs
+description: Use for openai docs workflows when the task directly names this tool or domain. Prefer narrower project skills or umbrella retrieval skills when the task is only a lookup.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 ---
-
-
 # OpenAI Docs
 
 Provide authoritative, current guidance from OpenAI developer docs using the developers.openai.com MCP server. Always prioritize the developer docs MCP tools over web.run for OpenAI-related questions. This skill also owns model selection, API model migration, and prompt-upgrade guidance. Only if the MCP server is installed and returns no meaningful results should you fall back to web search.

@@ -1,0 +1,30 @@
+{
+  "name": "codex-research-writing",
+  "description": "Project-local profile for manuscripts, literature review, citations, PDFs, figures, slides, and peer review.",
+  "max_active_skills": 24,
+  "skills": [
+    "skills/research/writing/scientific-writing",
+    "skills/research/writing/literature-review",
+    "skills/research/discovery/citation-management",
+    "skills/research/writing/venue-templates",
+    "skills/research/writing/peer-review",
+    "skills/research/writing/academic-paper-writer-pro",
+    "skills/research/discovery/research-lookup",
+    "skills/research/discovery/pubmed-database",
+    "skills/research/discovery/arxiv-database",
+    "skills/research/discovery/openalex-database",
+    "skills/reusable/documents-media/pdf",
+    "skills/reusable/documents-media/docx",
+    "skills/reusable/documents-media/pptx",
+    "skills/reusable/documents-media/markitdown",
+    "skills/research/communication/scientific-visualization",
+    "skills/research/communication/scientific-slides",
+    "skills/research/communication/scientific-schematics",
+    "skills/reusable/visualization/matplotlib",
+    "skills/reusable/visualization/plotly"
+  ],
+  "secondary_skills": [
+    "skills/research/writing/research-grants",
+    "skills/research/communication/latex-posters"
+  ]
+}

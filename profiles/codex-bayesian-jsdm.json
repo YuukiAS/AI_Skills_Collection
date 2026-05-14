@@ -1,0 +1,25 @@
+{
+  "name": "codex-bayesian-jsdm",
+  "description": "Project-local profile for TRACE/JSDM/HMSC work, Bayesian modeling, simulation, diagnostics, and theorem-heavy manuscripts.",
+  "max_active_skills": 22,
+  "skills": [
+    "skills/domain/bayesian/bayesian-ppl-diagnostics",
+    "skills/domain/bayesian/pymc",
+    "skills/domain/bayesian/statsmodels",
+    "skills/domain/bayesian/statistical-analysis",
+    "skills/domain/bayesian/simpy",
+    "skills/reusable/data-science/exploratory-data-analysis",
+    "skills/reusable/data-science/polars",
+    "skills/reusable/data-science/scikit-learn",
+    "skills/reusable/data-science/sympy",
+    "skills/reusable/visualization/matplotlib",
+    "skills/reusable/visualization/plotly",
+    "skills/research/writing/scientific-writing",
+    "skills/research/writing/venue-templates",
+    "skills/research/discovery/research-lookup"
+  ],
+  "secondary_skills": [
+    "skills/reusable/data-science/dask",
+    "skills/research/writing/literature-review"
+  ]
+}

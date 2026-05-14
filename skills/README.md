@@ -1,53 +1,38 @@
 # Skills Directory
 
-This directory is organized by reuse scope and workflow importance. Keep
-callable skills under one of the top-level buckets below.
+`skills/` is the callable workflow library. A directory should contain a
+`SKILL.md` only when an agent can directly decide to use it for a concrete task.
+
+## What Should Be A Skill
+
+- A repeatable workflow with clear triggers and boundaries.
+- A tool or library workflow users directly name, such as `scanpy`, `pydicom`,
+  `PyMC`, `pptx`, or React/Tailwind implementation.
+- A project-specific workflow with local conventions, such as CardiacNexus
+  pipeline refactors.
+- A system workflow used by the installer or skill maintenance profiles.
+
+## What Should Not Be A Skill
+
+- Provider notes for one database endpoint when an umbrella retrieval workflow
+  can route to it.
+- Static templates, schemas, palettes, prompt fragments, or long reference
+  packs.
+- Low-frequency documentation that is only read from another skill.
+- Multiple copies of the same UI/UX, platform, or API reference content.
+
+Move non-callable material to `shared/`, `palette/`, or a skill-local
+`references/` directory. If a previous skill must be retained for migration,
+mark it with `status: archived`; normal profiles and the default registry must
+not include archived skills.
 
 ## Top-Level Buckets
 
-- `reusable/`: Cross-project skills that are useful on most servers and repos.
-- `research/`: High-value research workflow skills for writing, discovery, ideation, and communication.
-- `domain/`: Domain-specific skills that are reusable within a field but not universally needed.
-- `project/`: Repo-specific or project-specific skills that depend on local codebase conventions.
-- `system/`: Agent, Codex, plugin, MCP, and skill-management skills.
+- `reusable/`: cross-project workflows.
+- `research/`: writing, discovery, ideation, and communication workflows.
+- `domain/`: field-specific workflows.
+- `project/`: repo-specific workflows.
+- `system/`: installer, Codex, plugin, MCP, and skill authoring workflows.
 
-## Current Groups
-
-### Reusable
-
-- `reusable/frontend/`: Frontend design, implementation, accessibility, motion, Figma, and web app testing.
-- `reusable/documents-media/`: PDF, Word, PowerPoint, spreadsheet, conversion, notebook, and web utilities.
-- `reusable/visualization/`: Plotting, image generation, slides, infographics, canvas design, themes, and diagrams.
-- `reusable/data-science/`: General analysis, modeling, graph, tabular, geospatial, and optimization skills.
-- `reusable/ai-ml/`: Machine learning, deep learning, forecasting, reinforcement learning, and model tooling.
-- `reusable/notion/`: Notion workspace automation, task planning, search, database, and page skills.
-- `reusable/cursor/`: Cursor rule, skill, subagent, migration, and settings helpers.
-
-### Research
-
-- `research/writing/`: Manuscript drafting, literature review, peer review, grants, venue templates, and academic paper pipelines.
-- `research/discovery/`: Academic search, citation management, paper databases, Zotero, and research lookup skills.
-- `research/ideation/`: Hypothesis generation, scientific brainstorming, critical thinking, and structured scenario exploration.
-- `research/communication/`: Research posters, scientific slides, schematics, paper-to-web, and publication-ready communication assets.
-
-### Domain
-
-- `domain/bayesian/`: Bayesian diagnostics and probabilistic programming support.
-- `domain/bioinformatics/`: Genomics, transcriptomics, single-cell, protein, pathway, and biological database skills.
-- `domain/medical-imaging/`: General medical imaging, DICOM, radiomics, MONAI/deep learning, IDC, and pathology imaging skills.
-- `domain/medicine-clinical/`: Clinical reports, treatment planning, decision support, clinical trials, and medical ML skills.
-
-### Project
-
-- `project/CMR/`: CardiacNexus-specific docs, phenotype contracts, pipeline refactors, strain, and registration skills.
-
-### System
-
-- `system/codex-system/`: Codex/OpenAI system skills plus MCP and skill-authoring helpers.
-
-## Layout Convention
-
-Each skill lives in its own directory with a `SKILL.md`. Optional `assets/`,
-`references/`, `scripts/`, templates, and other bundles sit beside that file.
-
-Use `../bundles/` to define deployable subsets for each server or workflow.
+Descriptions are discovery triggers, not tutorials. Keep frontmatter
+`description` under 350 characters and put details in the body or references.

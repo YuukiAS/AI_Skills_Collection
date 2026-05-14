@@ -1,12 +1,21 @@
 ---
 name: perplexity-search
-description: Perform AI-powered web searches with real-time information using Perplexity models via LiteLLM and OpenRouter. This skill should be used when conducting web searches for current information, finding recent scientific literature, getting grounded answers with source citations, or accessing information beyond the model knowledge cutoff. Provides access to multiple Perplexity models including Sonar Pro, Sonar Pro Search (advanced agentic search), and Sonar Reasoning Pro through a single OpenRouter API key.
+description: Perform AI-powered web searches with real-time information using Perplexity models via LiteLLM and OpenRouter.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 license: MIT license
-compatibility: An OpenRouter API key is required to use Perplexity search
 metadata:
-    skill-author: K-Dense Inc.
+  skill-author: K-Dense Inc.
+compatibility: An OpenRouter API key is required to use Perplexity search
 ---
-
 # Perplexity Search
 
 ## Overview

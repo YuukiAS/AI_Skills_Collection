@@ -1,10 +1,19 @@
 ---
 name: cardiacnexus-pipeline-refactor
 description: Project-specific guidance for refactoring the CardiacNexus UKB CMR pipeline. Use when touching config.py, step1-4 orchestration, Slurm script generation, segmentation wrappers, feature extraction boundaries, packaging, or any MONAI-first migration of the core pipeline.
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
 metadata:
   short-description: Refactor the core CardiacNexus pipeline
 ---
-
 # CardiacNexus pipeline refactor
 
 Use this skill for repository-specific refactors. This skill is narrower and more actionable than the generic imaging skills: it assumes the current CardiacNexus layout, legacy constraints, and the roadmap in `TODO.md`.

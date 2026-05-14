@@ -1,11 +1,20 @@
 ---
 name: polars-bio
 description: High-performance genomic interval operations and bioinformatics file I/O on Polars DataFrames. Overlap, nearest, merge, coverage, complement, subtract for BED/VCF/BAM/GFF intervals. Streaming, cloud-native, faster bioframe alternative.
-license: https://github.com/biodatageeks/polars-bio/blob/main/LICENSE
+status: active
+provenance: unknown
+trusted: false
+requires_network: false
+writes_files: true
+executes_code: false
+secrets_needed:
+last_reviewed: 2026-05-14
+profile_tags:
+recommended_scope: project
+license: "https://github.com/biodatageeks/polars-bio/blob/main/LICENSE"
 metadata:
-    skill-author: K-Dense Inc.
+  skill-author: K-Dense Inc.
 ---
-
 # polars-bio
 
 ## Overview
