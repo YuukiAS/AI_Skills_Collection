@@ -8,7 +8,7 @@ Author skills in this central repository first. Install them later with `scripts
 python3 scripts/skills.py new --scope domain --domain bayesian --name mcmc-diagnostics --description "Diagnose MCMC sampling pathologies and report Bayesian fit quality."
 ```
 
-This creates `skills/domain/bayesian/mcmc-diagnostics/` with `SKILL.md`, optional `references/`, and trigger eval scaffold.
+This creates `skills/domains/bayesian/mcmc-diagnostics/` with `SKILL.md`, optional `references/`, and trigger eval scaffold.
 
 ## What Belongs Where
 
@@ -20,6 +20,17 @@ This creates `skills/domain/bayesian/mcmc-diagnostics/` with `SKILL.md`, optiona
 - `docs/`: user-facing repository documentation and generated catalogs.
 - `profiles/`: curated cross-domain install sets.
 - `skills/archive/` or `status: archived`: obsolete or provider-specific skills that should not be active by default.
+
+## Directory Scheme
+
+- `skills/domains/`: installable complete domains. Subdirectories are allowed for browsing, but `--domain <name>` must still install the whole domain.
+- `skills/tools/`: reusable tool families.
+- `skills/writing/core/`: globally useful writing guardrails and prose polishers.
+- `skills/writing/research/`: manuscript, citation, venue, OCR, and peer-review workflows.
+- `skills/science/`: research discovery, communication, and ideation workflows.
+- `skills/projects/`: project-specific skills.
+- `skills/core/`: repository maintenance and system skills.
+- `skills/archive/`: inactive external/plugin material.
 
 ## Description Guidance
 

@@ -1,5 +1,5 @@
 ---
-name: natural-chinese-final-pass
+name: chinese-prose
 description: 中文报告、README、技术文档和科研说明的最终审校。用于降低 AI 味、翻译腔、模板腔和宣传腔，同时保护事实、数字、术语、命令、引用、实验结果和中文读者的阅读习惯。
 status: active
 provenance: local
@@ -137,4 +137,4 @@ If facts were risky, add:
 
 ## References
 
-Read `references/chinese-final-pass-checklist.md` for a full audit checklist. Read `references/source-notes.md` when provenance matters.
+Read `references/chinese-prose-checklist.md` for a full audit checklist. Read `references/source-notes.md` when provenance matters.

@@ -3,11 +3,11 @@
   "description": "Bioinformatics and analysis skills with common data-science support.",
   "include": [
     "palette",
-    "skills/domain/bioinformatics",
-    "skills/reusable/data-science",
-    "skills/reusable/ai-ml",
-    "skills/reusable/visualization",
-    "skills/reusable/documents-media",
-    "skills/system/codex-system"
+    "skills/domains/bioinformatics",
+    "skills/tools/data-science",
+    "skills/tools/ai-ml",
+    "skills/tools/visualization",
+    "skills/tools/documents-media",
+    "skills/core/codex-system"
   ]
 }

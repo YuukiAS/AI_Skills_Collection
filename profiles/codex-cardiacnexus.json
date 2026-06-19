@@ -3,25 +3,25 @@
   "description": "Project-local profile for CardiacNexus, CMR, DICOM/NIfTI, MONAI, nnU-Net, UKB, and imaging pipelines.",
   "max_active_skills": 24,
   "skills": [
-    "skills/project/CMR/cardiacnexus-feature-contracts",
-    "skills/project/CMR/cardiacnexus-pipeline-refactor",
-    "skills/project/CMR/cardiacnexus-strain-registration",
-    "skills/project/CMR/cardiacnexus-docs-markdoc",
-    "skills/domain/medical-imaging/pydicom",
-    "skills/domain/medical-imaging/medical-imaging-classical-features",
-    "skills/domain/medical-imaging/medical-imaging-deep-learning",
-    "skills/domain/medical-imaging/pathml",
-    "skills/reusable/data-science/exploratory-data-analysis",
-    "skills/reusable/data-science/polars",
-    "skills/reusable/data-science/scikit-learn",
-    "skills/reusable/ai-ml/pytorch-lightning",
-    "skills/reusable/ai-ml/transformers",
-    "skills/reusable/visualization/matplotlib",
-    "skills/reusable/visualization/plotly",
-    "skills/reusable/documents-media/pdf"
+    "skills/projects/cmr/cardiacnexus-feature-contracts",
+    "skills/projects/cmr/cardiacnexus-pipeline-refactor",
+    "skills/projects/cmr/cardiacnexus-strain-registration",
+    "skills/projects/cmr/cardiacnexus-docs-markdoc",
+    "skills/domains/medical-imaging/pydicom",
+    "skills/domains/medical-imaging/medical-imaging-classical-features",
+    "skills/domains/medical-imaging/medical-imaging-deep-learning",
+    "skills/domains/medical-imaging/pathml",
+    "skills/tools/data-science/exploratory-data-analysis",
+    "skills/tools/data-science/polars",
+    "skills/tools/data-science/scikit-learn",
+    "skills/tools/ai-ml/pytorch-lightning",
+    "skills/tools/ai-ml/transformers",
+    "skills/tools/visualization/matplotlib",
+    "skills/tools/visualization/plotly",
+    "skills/tools/documents-media/pdf"
   ],
   "secondary_skills": [
-    "skills/domain/bayesian/bayesian-ppl-diagnostics",
-    "skills/research/writing/scientific-writing"
+    "skills/domains/bayesian/bayesian-ppl-diagnostics",
+    "skills/writing/research/scientific-writing"
   ]
 }

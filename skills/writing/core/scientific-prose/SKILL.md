@@ -1,5 +1,5 @@
 ---
-name: scientific-evidence-prose
+name: scientific-prose
 description: English scientific report writing and revision pass. Use for research reports, progress reports, figure-heavy PDFs, manuscripts, technical summaries, and slide text that must keep evidence, uncertainty, captions, and conclusions scientifically defensible without AI-sounding prose.
 status: active
 provenance: local

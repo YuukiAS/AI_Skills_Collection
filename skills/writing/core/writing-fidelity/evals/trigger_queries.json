@@ -12,5 +12,5 @@
     "Make this English scientific report less AI-sounding.",
     "Do a natural Chinese final pass on this README."
   ],
-  "notes": "Use as a fidelity and completion guardrail. Pair with scientific-evidence-prose or natural-chinese-final-pass when style is the main requested operation."
+  "notes": "Use as a fidelity and completion guardrail. Pair with scientific-prose or chinese-prose when style is the main requested operation."
 }

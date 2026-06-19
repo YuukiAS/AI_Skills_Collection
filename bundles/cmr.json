@@ -3,14 +3,14 @@
   "description": "Cardiac MRI and CardiacNexus project skills with supporting analysis tools.",
   "include": [
     "palette",
-    "skills/project/CMR",
-    "skills/domain/bayesian",
-    "skills/domain/medical-imaging",
-    "skills/domain/medicine-clinical",
-    "skills/reusable/data-science",
-    "skills/reusable/ai-ml",
-    "skills/reusable/visualization",
-    "skills/reusable/documents-media",
-    "skills/system/codex-system"
+    "skills/projects/cmr",
+    "skills/domains/bayesian",
+    "skills/domains/medical-imaging",
+    "skills/domains/medicine-clinical",
+    "skills/tools/data-science",
+    "skills/tools/ai-ml",
+    "skills/tools/visualization",
+    "skills/tools/documents-media",
+    "skills/core/codex-system"
   ]
 }

@@ -3,9 +3,9 @@
   "description": "Frontend design, implementation, visual QA, and palette resources.",
   "include": [
     "palette",
-    "skills/reusable/frontend",
-    "skills/reusable/visualization",
-    "skills/reusable/documents-media",
-    "skills/system/codex-system"
+    "skills/tools/frontend",
+    "skills/tools/visualization",
+    "skills/tools/documents-media",
+    "skills/core/codex-system"
   ]
 }

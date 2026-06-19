@@ -1,7 +1,7 @@
 # TODO: make Chinese progress reports actually usable for oral presentations
 
 Created: 2026-06-01  
-Skill: `reusable/writing/natural-chinese-final-pass`
+Skill: `writing/core/chinese-prose`
 
 ## Why this TODO exists
 

@@ -13,7 +13,7 @@ python3 scripts/skills.py install --target repo --domain medical-imaging --mode 
 Install a few skills precisely:
 
 ```bash
-python3 scripts/skills.py install --target repo --skill domain-medical-imaging-medical-imaging-classical-features --skill domain-medical-imaging-medical-imaging-deep-learning --skill domain-medical-imaging-medical-imaging-terminology-measurement --mode symlink --write-agents-md
+python3 scripts/skills.py install --target repo --skill domain/medical-imaging/medical-imaging-classical-features --skill domain/medical-imaging/medical-imaging-deep-learning --skill domain/medical-imaging/medical-imaging-terminology-measurement --mode symlink --write-agents-md
 ```
 
 Complete domain installs are supported. If an audit reports high description length or many active skills, treat it as a context-budget warning, not an installation error.
@@ -26,16 +26,16 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Skills
 
-- `medical-imaging-classical-features` (`skills/domain/medical-imaging/medical-imaging-classical-features`): Use when enforcing reproducible preprocessing, registration baselines, radiomics protocols, or DICOM SEG/SR provenance in CardiacNexus.
-- `medical-imaging-deep-learning` (`skills/domain/medical-imaging/medical-imaging-deep-learning`): Aligns with CardiacNexus MONAI-first refactor and high-risk registration/strain awareness.
-- `medical-imaging-terminology-measurement` (`skills/domain/medical-imaging/medical-imaging-terminology-measurement`): Use medical imaging terminology and measurement conventions with source checks, modality-specific caveats, structured reporting boundaries, and uncertainty language.
-- `pathml` (`skills/domain/medical-imaging/pathml`): Full-featured computational pathology toolkit. Use for advanced WSI analysis including multiplexed immunofluorescence (CODEX, Vectra), nucleus segmentation, tissue graph construction, and ML model training on pathology data. Supports 160+ slide formats. For simple tile extraction from H&E slides, histolab may be simpler.
-- `pydicom` (`skills/domain/medical-imaging/pydicom`): Python library for working with DICOM (Digital Imaging and Communications in Medicine) files. Applies to tasks involving medical image analysis, PACS systems, radiology workflows, and healthcare imaging applications.
+- `medical-imaging-classical-features` (`skills/domains/medical-imaging/medical-imaging-classical-features`): Use when enforcing reproducible preprocessing, registration baselines, radiomics protocols, or DICOM SEG/SR provenance in CardiacNexus.
+- `medical-imaging-deep-learning` (`skills/domains/medical-imaging/medical-imaging-deep-learning`): Aligns with CardiacNexus MONAI-first refactor and high-risk registration/strain awareness.
+- `medical-imaging-terminology-measurement` (`skills/domains/medical-imaging/medical-imaging-terminology-measurement`): Use medical imaging terminology and measurement conventions with source checks, modality-specific caveats, structured reporting boundaries, and uncertainty language.
+- `pathml` (`skills/domains/medical-imaging/pathml`): Full-featured computational pathology toolkit. Use for advanced WSI analysis including multiplexed immunofluorescence (CODEX, Vectra), nucleus segmentation, tissue graph construction, and ML model training on pathology data. Supports 160+ slide formats. For simple tile extraction from H&E slides, histolab may be simpler.
+- `pydicom` (`skills/domains/medical-imaging/pydicom`): Python library for working with DICOM (Digital Imaging and Communications in Medicine) files. Applies to tasks involving medical image analysis, PACS systems, radiology workflows, and healthcare imaging applications.
 
 ## Main References
 
-- `skills/domain/medical-imaging/medical-imaging-classical-features/references/reference.md`
-- `skills/domain/medical-imaging/medical-imaging-deep-learning/references/reference.md`
-- `skills/domain/medical-imaging/medical-imaging-terminology-measurement/references/measurement-checklist.md`
-- `skills/domain/medical-imaging/pathml/references/source-notes.md`
-- `skills/domain/medical-imaging/pydicom/references/source-notes.md`
+- `skills/domains/medical-imaging/medical-imaging-classical-features/references/reference.md`
+- `skills/domains/medical-imaging/medical-imaging-deep-learning/references/reference.md`
+- `skills/domains/medical-imaging/medical-imaging-terminology-measurement/references/measurement-checklist.md`
+- `skills/domains/medical-imaging/pathml/references/source-notes.md`
+- `skills/domains/medical-imaging/pydicom/references/source-notes.md`

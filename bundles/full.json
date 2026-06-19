@@ -3,10 +3,10 @@
   "description": "Everything callable plus shared palettes.",
   "include": [
     "palette",
-    "skills/research",
-    "skills/reusable",
-    "skills/domain",
-    "skills/project",
-    "skills/system"
+    "skills/science",
+    "skills/tools",
+    "skills/domains",
+    "skills/projects",
+    "skills/core"
   ]
 }

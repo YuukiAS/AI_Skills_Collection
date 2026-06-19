@@ -23,7 +23,20 @@ AGENTS_END = "<!-- AI_SKILLS_COLLECTION_END -->"
 REPO_SKILLS_DIR = Path(".agents") / "skills"
 USER_SKILLS_ROOT = Path.home() / ".agents" / "skills"
 LEGACY_PROJECT_SKILLS_DIR = Path(".codex") / "skills"
-SYSTEM_SCOPE_NAMES = {".system", "system"}
+SYSTEM_SCOPE_NAMES = {".system", "system", "core"}
+CANONICAL_SCOPES = {
+    "domains": "domain",
+    "domain": "domain",
+    "tools": "tool",
+    "reusable": "tool",
+    "writing": "writing",
+    "science": "science",
+    "research": "science",
+    "projects": "project",
+    "project": "project",
+    "core": "core",
+    "system": "core",
+}
 
 
 def parse_scalar(value: str) -> Any:
@@ -179,29 +192,42 @@ def infer_taxonomy(skill_file: Path) -> dict[str, str]:
     rel_dir = skill_rel_dir(skill_file)
     rel_parts = rel_dir.parts
     parts = rel_parts[1:] if rel_parts and rel_parts[0] == "skills" else rel_parts
-    scope = parts[0] if parts else ""
+    raw_scope = parts[0] if parts else ""
+    scope = CANONICAL_SCOPES.get(raw_scope, raw_scope)
     domain = ""
     category = ""
+    subcategory = ""
     slug = parts[-1] if parts else ""
 
-    if scope == "domain" and len(parts) >= 3:
+    if raw_scope in {"domains", "domain"} and len(parts) >= 3:
         domain = parts[1]
-        category = f"domain/{domain}"
-    elif scope == "research" and len(parts) >= 3:
+        if len(parts) >= 4:
+            subcategory = "/".join(parts[2:-1])
+        category = f"domain/{domain}" + (f"/{subcategory}" if subcategory else "")
+    elif raw_scope == "writing" and len(parts) >= 3:
         category = parts[1]
+        subcategory = category
+        domain = "writing" if category == "core" else f"{category}-writing"
+    elif raw_scope in {"science", "research"} and len(parts) >= 3:
+        category = parts[1]
+        subcategory = category
         domain = f"research-{category}"
-    elif scope == "reusable" and len(parts) >= 3:
+    elif raw_scope in {"tools", "reusable"} and len(parts) >= 3:
         category = parts[1]
+        subcategory = category
         domain = category
-    elif scope == "project" and len(parts) >= 3:
+    elif raw_scope in {"projects", "project"} and len(parts) >= 3:
         category = parts[1]
+        subcategory = category
         domain = parts[1].lower()
-    elif scope in SYSTEM_SCOPE_NAMES and len(parts) >= 2:
-        scope = "system"
+    elif raw_scope in SYSTEM_SCOPE_NAMES and len(parts) >= 2:
+        scope = "core"
         category = "codex-system" if parts[0] == ".system" else parts[1]
-        domain = "system"
+        subcategory = category
+        domain = "core"
     elif len(parts) >= 2:
         category = parts[1]
+        subcategory = category
         domain = category
 
     selector = "/".join(part for part in (scope, domain if scope == "domain" else category, slug) if part)
@@ -209,10 +235,71 @@ def infer_taxonomy(skill_file: Path) -> dict[str, str]:
         "scope": scope,
         "domain": domain,
         "category": category,
+        "subcategory": subcategory,
         "slug": slug,
         "selector": selector,
         "relative_selector": "/".join(parts),
     }
+
+
+def skill_selectors(rel_dir: Path, taxonomy: dict[str, str], flat_name: str, name: str) -> set[str]:
+    parts = rel_dir.parts[1:] if rel_dir.parts and rel_dir.parts[0] == "skills" else rel_dir.parts
+    scope = taxonomy["scope"]
+    domain = taxonomy["domain"]
+    category = taxonomy["category"]
+    subcategory = taxonomy["subcategory"]
+    slug = taxonomy["slug"]
+    selectors = {
+        "/".join(parts),
+        rel_dir.as_posix(),
+        flat_name,
+        name,
+        taxonomy["selector"],
+        taxonomy["relative_selector"],
+    }
+    if scope == "domain":
+        selectors.add(f"domain/{domain}/{slug}")
+        selectors.add(f"domains/{domain}/{slug}")
+        if subcategory:
+            selectors.add(f"domain/{domain}/{subcategory}/{slug}")
+            selectors.add(f"domains/{domain}/{subcategory}/{slug}")
+        selectors.add(f"skills/domain/{domain}/{slug}")
+    elif scope == "tool":
+        selectors.add(f"tool/{domain}/{slug}")
+        selectors.add(f"tools/{domain}/{slug}")
+        selectors.add(f"reusable/{domain}/{slug}")
+        selectors.add(f"skills/reusable/{domain}/{slug}")
+    elif scope == "writing":
+        selectors.add(f"writing/{subcategory}/{slug}")
+        selectors.add(f"writing/{slug}")
+        if subcategory == "core":
+            selectors.add(f"reusable/writing/{slug}")
+            selectors.add(f"skills/reusable/writing/{slug}")
+    elif scope == "science":
+        selectors.add(f"science/{subcategory}/{slug}")
+        selectors.add(f"research/{subcategory}/{slug}")
+        selectors.add(f"skills/research/{subcategory}/{slug}")
+    elif scope == "project":
+        selectors.add(f"project/{domain}/{slug}")
+        selectors.add(f"projects/{domain}/{slug}")
+        selectors.add(f"skills/project/{domain}/{slug}")
+    elif scope == "core":
+        selectors.add(f"core/{category}/{slug}")
+        selectors.add(f"system/{category}/{slug}")
+        selectors.add(f"skills/system/{category}/{slug}")
+    if name == "writing-fidelity":
+        selectors.update(
+            {
+                "source-faithful-writing-final-pass",
+                "reusable/writing/source-faithful-writing-final-pass",
+                "skills/reusable/writing/source-faithful-writing-final-pass",
+            }
+        )
+    elif name == "scientific-prose":
+        selectors.update({"scientific-evidence-prose", "reusable/writing/scientific-evidence-prose"})
+    elif name == "chinese-prose":
+        selectors.update({"natural-chinese-final-pass", "reusable/writing/natural-chinese-final-pass"})
+    return selectors
 
 
 def skill_record(skill_file: Path, include_body: bool = False) -> dict[str, Any]:
@@ -221,6 +308,7 @@ def skill_record(skill_file: Path, include_body: bool = False) -> dict[str, Any]
     scope = taxonomy["scope"]
     category = taxonomy["category"]
     domain = taxonomy["domain"]
+    subcategory = taxonomy["subcategory"]
     slug = taxonomy["slug"]
     meta, body = read_frontmatter(skill_file)
     status = str(meta.get("status") or ("archived" if "archive" in skill_file.parts else "active"))
@@ -234,7 +322,9 @@ def skill_record(skill_file: Path, include_body: bool = False) -> dict[str, Any]
         "scope": scope,
         "domain": domain,
         "category": category,
+        "subcategory": subcategory,
         "slug": slug,
+        "install_selector": taxonomy["selector"],
         "description": str(meta.get("description") or ""),
         "status": status,
         "provenance": meta.get("provenance", "unknown"),
@@ -246,17 +336,7 @@ def skill_record(skill_file: Path, include_body: bool = False) -> dict[str, Any]
         "last_reviewed": meta.get("last_reviewed", ""),
         "profile_tags": normalize_list(meta.get("profile_tags", [])),
         "recommended_scope": meta.get("recommended_scope", "project"),
-        "selectors": sorted(
-            {
-                source_selector,
-                taxonomy["selector"],
-                taxonomy["relative_selector"],
-                rel_dir.as_posix(),
-                flat_name,
-                str(meta.get("name") or slug),
-            }
-            - {""}
-        ),
+        "selectors": sorted(skill_selectors(rel_dir, taxonomy, flat_name, str(meta.get("name") or slug)) - {""}),
     }
     if include_body:
         record["body"] = body

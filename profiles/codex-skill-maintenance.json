@@ -3,19 +3,19 @@
   "description": "Project-local profile for maintaining AI_Skills_Collection, profiles, registry, installers, and skill metadata.",
   "max_active_skills": 24,
   "skills": [
-    "skills/system/codex-system/project-skill-installer",
-    "skills/system/codex-system/system-skills/skill-creator",
-    "skills/system/codex-system/system-skills/skill-installer",
-    "skills/system/codex-system/system-skills/plugin-creator",
-    "skills/system/codex-system/system-skills/openai-docs",
-    "skills/system/codex-system/mcp-builder",
-    "skills/reusable/documents-media/markitdown",
-    "skills/reusable/documents-media/pdf",
-    "skills/reusable/visualization/markdown-mermaid-writing",
-    "skills/reusable/data-science/polars"
+    "skills/core/codex-system/project-skill-installer",
+    "skills/core/codex-system/system-skills/skill-creator",
+    "skills/core/codex-system/system-skills/skill-installer",
+    "skills/core/codex-system/system-skills/plugin-creator",
+    "skills/core/codex-system/system-skills/openai-docs",
+    "skills/core/codex-system/mcp-builder",
+    "skills/tools/documents-media/markitdown",
+    "skills/tools/documents-media/pdf",
+    "skills/tools/visualization/markdown-mermaid-writing",
+    "skills/tools/data-science/polars"
   ],
   "secondary_skills": [
-    "skills/reusable/documents-media/docx",
-    "skills/reusable/documents-media/xlsx"
+    "skills/tools/documents-media/docx",
+    "skills/tools/documents-media/xlsx"
   ]
 }

@@ -3,20 +3,20 @@
   "description": "Project-local profile for React, Next.js, Tailwind, Figma handoff, browser testing, and visual QA.",
   "max_active_skills": 18,
   "skills": [
-    "skills/reusable/frontend/product-ux-planning",
-    "skills/reusable/frontend/visual-direction",
-    "skills/reusable/frontend/design-system-tokens",
-    "skills/reusable/frontend/figma-design-to-code",
-    "skills/reusable/frontend/implementation-react-tailwind",
-    "skills/reusable/frontend/responsive-accessibility-review",
-    "skills/reusable/frontend/motion-interaction",
-    "skills/reusable/frontend/webapp-testing",
-    "skills/reusable/visualization/generate-image",
-    "skills/reusable/visualization/theme-factory",
-    "skills/reusable/documents-media/markitdown"
+    "skills/tools/frontend/product-ux-planning",
+    "skills/tools/frontend/visual-direction",
+    "skills/tools/frontend/design-system-tokens",
+    "skills/tools/frontend/figma-design-to-code",
+    "skills/tools/frontend/implementation-react-tailwind",
+    "skills/tools/frontend/responsive-accessibility-review",
+    "skills/tools/frontend/motion-interaction",
+    "skills/tools/frontend/webapp-testing",
+    "skills/tools/visualization/generate-image",
+    "skills/tools/visualization/theme-factory",
+    "skills/tools/documents-media/markitdown"
   ],
   "secondary_skills": [
-    "skills/reusable/documents-media/pdf",
-    "skills/reusable/visualization/plotly"
+    "skills/tools/documents-media/pdf",
+    "skills/tools/visualization/plotly"
   ]
 }

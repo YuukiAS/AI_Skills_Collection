@@ -69,7 +69,7 @@ Examples:
 ```bash
 python3 scripts/skills.py install --target repo --profile codex-bayesian-jsdm --mode symlink --write-agents-md
 python3 scripts/skills.py install --target repo --domain bayesian --mode symlink --write-agents-md
-python3 scripts/skills.py install --target user --domain reusable --mode symlink --dry-run
+python3 scripts/skills.py install --target user --profile codex-writing-style --mode symlink --dry-run
 python3 scripts/skills.py install --target codex-home --profile codex-core-global --mode symlink --dry-run
 ```
 
@@ -77,7 +77,13 @@ python3 scripts/skills.py install --target codex-home --profile codex-core-globa
 
 ## Layout
 
-- `skills/`: central skill library. `SKILL.md` files should stay workflow-oriented.
+- `skills/domains/`: complete domain-installable areas such as `bayesian`, `bioinformatics`, and medical domains.
+- `skills/tools/`: cross-project tool capabilities such as data science, frontend, documents, and visualization.
+- `skills/writing/`: first-class writing skills, split into globally useful `core` guardrails and `research` writing workflows.
+- `skills/science/`: research discovery, communication, and ideation workflows.
+- `skills/projects/`: project-specific skills.
+- `skills/core/`: skill-library maintenance, installer, and system skills.
+- `skills/archive/`: inactive or external plugin skills kept for reference.
 - `skills/**/references/`: longer domain knowledge, dated source notes, checklists, formulas, and legacy long-form material.
 - `profiles/`: curated skill sets.
 - `scripts/skills.py`: unified CLI for list/catalog/install/select/new/validate/audit/registry/doctor/migrate-legacy.

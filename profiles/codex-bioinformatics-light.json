@@ -3,23 +3,23 @@
   "description": "Project-local profile for common bioinformatics workflows without activating every database provider.",
   "max_active_skills": 20,
   "skills": [
-    "skills/domain/bioinformatics/bioinformatics-database-retrieval",
-    "skills/domain/bioinformatics/scanpy",
-    "skills/domain/bioinformatics/scvi-tools",
-    "skills/domain/bioinformatics/anndata",
-    "skills/domain/bioinformatics/pysam",
-    "skills/domain/bioinformatics/pydeseq2",
-    "skills/domain/bioinformatics/biopython",
-    "skills/domain/bioinformatics/scikit-bio",
-    "skills/domain/bioinformatics/polars-bio",
-    "skills/domain/bioinformatics/tiledbvcf",
-    "skills/reusable/data-science/polars",
-    "skills/reusable/data-science/exploratory-data-analysis",
-    "skills/reusable/visualization/plotly",
-    "skills/reusable/visualization/matplotlib"
+    "skills/domains/bioinformatics/databases/bioinformatics-database-retrieval",
+    "skills/domains/bioinformatics/single-cell/scanpy",
+    "skills/domains/bioinformatics/single-cell/scvi-tools",
+    "skills/domains/bioinformatics/single-cell/anndata",
+    "skills/domains/bioinformatics/genomics-io/pysam",
+    "skills/domains/bioinformatics/omics-analysis/pydeseq2",
+    "skills/domains/bioinformatics/biology-toolkits/biopython",
+    "skills/domains/bioinformatics/biology-toolkits/scikit-bio",
+    "skills/domains/bioinformatics/omics-analysis/polars-bio",
+    "skills/domains/bioinformatics/genomics-io/tiledbvcf",
+    "skills/tools/data-science/polars",
+    "skills/tools/data-science/exploratory-data-analysis",
+    "skills/tools/visualization/plotly",
+    "skills/tools/visualization/matplotlib"
   ],
   "secondary_skills": [
-    "skills/domain/bioinformatics/scvelo",
-    "skills/domain/bioinformatics/deeptools"
+    "skills/domains/bioinformatics/single-cell/scvelo",
+    "skills/domains/bioinformatics/omics-analysis/deeptools"
   ]
 }

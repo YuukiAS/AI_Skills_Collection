@@ -3,9 +3,9 @@
   "description": "General-purpose reusable skills and shared palettes.",
   "include": [
     "palette",
-    "skills/reusable/documents-media",
-    "skills/reusable/data-science",
-    "skills/reusable/visualization",
-    "skills/system/codex-system"
+    "skills/tools/documents-media",
+    "skills/tools/data-science",
+    "skills/tools/visualization",
+    "skills/core/codex-system"
   ]
 }

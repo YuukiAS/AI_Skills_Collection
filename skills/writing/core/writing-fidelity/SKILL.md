@@ -1,5 +1,5 @@
 ---
-name: source-faithful-writing-final-pass
+name: writing-fidelity
 description: Prevent deletion, over-rewriting, mistranslation, formatting breakage, and false completion in user-facing writing. Use when editing, polishing, summarizing, translating, OCR-cleaning, rendering, compressing, or final-checking Markdown, LaTeX, PDF, reports, notes, exam review material, technical documents, or source-derived writing.
 status: active
 provenance: user-authored
@@ -14,7 +14,7 @@ profile_tags:
   - global
 recommended_scope: global
 ---
-# Source-Faithful Writing Final Pass
+# Writing Fidelity
 
 Use this skill as a guardrail before editing or finalizing user-facing writing.
 Its purpose is to stop Codex from creating a cleaner-looking substitute that

@@ -3,12 +3,12 @@
   "description": "Academic writing, literature review, citation, paper search, and document handling.",
   "include": [
     "palette",
-    "skills/research/writing",
-    "skills/research/discovery",
-    "skills/research/ideation",
-    "skills/research/communication",
-    "skills/reusable/documents-media",
-    "skills/reusable/visualization",
-    "skills/system/codex-system"
+    "skills/writing/research",
+    "skills/science/discovery",
+    "skills/science/ideation",
+    "skills/science/communication",
+    "skills/tools/documents-media",
+    "skills/tools/visualization",
+    "skills/core/codex-system"
   ]
 }

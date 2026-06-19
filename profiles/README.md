@@ -29,7 +29,7 @@ python3 scripts/skills.py install --target repo --skill domain/bayesian/pymc --m
 - `codex-core-global`: tiny user-level bootstrap profile.
 - `codex-webdev`: React, Next.js, Tailwind, Figma handoff, browser testing, and visual QA.
 - `codex-research-writing`: manuscripts, literature review, citations, PDFs, figures, slides, and peer review.
-- `codex-writing-style`: source-faithful writing guardrail, English scientific prose, and Chinese final-pass editing.
+- `codex-writing-style`: writing fidelity guardrail, English scientific prose, and Chinese prose polishing.
 - `codex-bayesian-jsdm`: Bayesian modeling, JSDM/HMSC, simulation, diagnostics, and manuscript support.
 - `codex-cardiacnexus`: CardiacNexus, CMR, DICOM/NIfTI, MONAI, nnU-Net, UKB, and imaging pipelines.
 - `codex-bioinformatics-light`: common bioinformatics workflows without every provider note.

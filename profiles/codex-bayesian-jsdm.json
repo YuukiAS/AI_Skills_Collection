@@ -3,23 +3,23 @@
   "description": "Project-local profile for TRACE/JSDM/HMSC work, Bayesian modeling, simulation, diagnostics, and theorem-heavy manuscripts.",
   "max_active_skills": 22,
   "skills": [
-    "skills/domain/bayesian/bayesian-ppl-diagnostics",
-    "skills/domain/bayesian/pymc",
-    "skills/domain/bayesian/statsmodels",
-    "skills/domain/bayesian/statistical-analysis",
-    "skills/domain/bayesian/simpy",
-    "skills/reusable/data-science/exploratory-data-analysis",
-    "skills/reusable/data-science/polars",
-    "skills/reusable/data-science/scikit-learn",
-    "skills/reusable/data-science/sympy",
-    "skills/reusable/visualization/matplotlib",
-    "skills/reusable/visualization/plotly",
-    "skills/research/writing/scientific-writing",
-    "skills/research/writing/venue-templates",
-    "skills/research/discovery/research-lookup"
+    "skills/domains/bayesian/bayesian-ppl-diagnostics",
+    "skills/domains/bayesian/pymc",
+    "skills/domains/bayesian/statsmodels",
+    "skills/domains/bayesian/statistical-analysis",
+    "skills/domains/bayesian/simpy",
+    "skills/tools/data-science/exploratory-data-analysis",
+    "skills/tools/data-science/polars",
+    "skills/tools/data-science/scikit-learn",
+    "skills/tools/data-science/sympy",
+    "skills/tools/visualization/matplotlib",
+    "skills/tools/visualization/plotly",
+    "skills/writing/research/scientific-writing",
+    "skills/writing/research/venue-templates",
+    "skills/science/discovery/research-lookup"
   ],
   "secondary_skills": [
-    "skills/reusable/data-science/dask",
-    "skills/research/writing/literature-review"
+    "skills/tools/data-science/dask",
+    "skills/writing/research/literature-review"
   ]
 }

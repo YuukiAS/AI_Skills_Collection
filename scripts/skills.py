@@ -88,7 +88,7 @@ def command_list(args: argparse.Namespace) -> int:
         return 0
     for record in records:
         print(
-            f"{record['selectors'][0]:36} "
+            f"{record.get('install_selector', record['selectors'][0]):36} "
             f"{record['scope']:9} {record.get('domain') or '-':18} "
             f"{record['name']}: {record.get('description', '')}"
         )
@@ -124,7 +124,7 @@ def command_registry(args: argparse.Namespace) -> int:
 
 
 def install_command_hint(record: dict[str, Any], target: str = "repo") -> str:
-    selector = f"{record['scope']}/{record['domain']}/{record['slug']}" if record["scope"] == "domain" else record["selectors"][0]
+    selector = str(record.get("install_selector") or record["selectors"][0])
     base = "python3 scripts/skills.py install"
     if target == "repo":
         return f"{base} --target repo --skill {selector} --mode symlink --write-agents-md"
@@ -161,7 +161,7 @@ def catalog_markdown(records: list[dict[str, Any]]) -> str:
 def domain_page(domain: str, records: list[dict[str, Any]]) -> str:
     active = [r for r in records if r.get("domain") == domain or r.get("scope") == domain]
     active.sort(key=lambda r: r["name"])
-    selectors = " ".join(f"--skill {r['selectors'][0]}" for r in active[:3])
+    selectors = " ".join(f"--skill {r.get('install_selector', r['selectors'][0])}" for r in active[:3])
     refs: list[str] = []
     for r in active:
         ref_dir = ROOT / r["path"] / "references"
@@ -215,6 +215,8 @@ def command_catalog(args: argparse.Namespace) -> int:
         DOCS.mkdir(exist_ok=True)
         CATALOG.write_text(text, encoding="utf-8")
         DOMAIN_DOCS.mkdir(parents=True, exist_ok=True)
+        for old_page in DOMAIN_DOCS.glob("*.md"):
+            old_page.unlink()
         domains = sorted({str(r.get("domain")) for r in records if r.get("domain")})
         for domain in domains:
             (DOMAIN_DOCS / f"{domain}.md").write_text(domain_page(domain, records), encoding="utf-8")
@@ -235,15 +237,29 @@ def infer_project(args: argparse.Namespace) -> tuple[Path, bool]:
 
 
 def codex_home_report(skills_root: Path) -> list[str]:
-    raw, home = codex_home()
+    info = codex_home_info(skills_root)
     return [
-        f"detected CODEX_HOME: {raw or '(unset)'}",
-        f"resolved codex home: {home}",
-        f"target skills root: {skills_root}",
-        f"config.toml exists: {(home / 'config.toml').exists()}",
-        f"skills root writable: {skills_root.exists() and os.access(skills_root, os.W_OK) or os.access(skills_root.parent, os.W_OK)}",
-        "target class: explicit legacy/advanced compatibility target",
+        f"detected CODEX_HOME: {info['detected_CODEX_HOME'] or '(unset)'}",
+        f"resolved codex home: {info['resolved_codex_home']}",
+        f"target skills root: {info['target_skills_root']}",
+        f"config.toml exists: {info['config_toml_exists']}",
+        f"skills root writable: {info['skills_root_writable']}",
+        f"target class: {info['target_class']}",
     ]
+
+
+def codex_home_info(skills_root: Path) -> dict[str, Any]:
+    raw, home = codex_home()
+    return {
+        "detected_CODEX_HOME": raw or "",
+        "resolved_codex_home": str(home),
+        "target_skills_root": str(skills_root),
+        "config_toml_exists": (home / "config.toml").exists(),
+        "skills_root_writable": bool(
+            (skills_root.exists() and os.access(skills_root, os.W_OK)) or os.access(skills_root.parent, os.W_OK)
+        ),
+        "target_class": "explicit legacy/advanced compatibility target",
+    }
 
 
 def agents_block(project: Path, target: str, install_kind: str, records: list[dict[str, Any]], mode: str, prune: bool) -> str:
@@ -281,7 +297,7 @@ def agents_block(project: Path, target: str, install_kind: str, records: list[di
         update_parts.extend(["--domain", install_kind.split(":", 1)[1]])
     else:
         for record in records:
-            update_parts.extend(["--skill", record["selectors"][0]])
+            update_parts.extend(["--skill", str(record.get("install_selector") or record["selectors"][0])])
     update_parts.append("--write-agents-md")
     if prune:
         update_parts.append("--prune-managed")
@@ -360,18 +376,22 @@ def command_install(args: argparse.Namespace) -> int:
         raise SystemExit("no active skills selected")
 
     project, project_was_explicit = infer_project(args)
+    target_info: dict[str, Any] = {}
+    output_warnings: list[str] = []
     if args.target == "repo":
         skills_root = target_skills_root("repo", project)
         if not project_was_explicit:
             _, is_git = detect_git_root(Path.cwd())
             if not is_git:
-                print(f"WARNING: current directory is not a git repo; using current directory as project: {project}")
+                output_warnings.append(f"current directory is not a git repo; using current directory as project: {project}")
     elif args.target == "user":
         skills_root = USER_SKILLS_ROOT
     else:
         skills_root = target_skills_root("codex-home")
-        for line in codex_home_report(skills_root):
-            print(line)
+        target_info = codex_home_info(skills_root)
+        if not args.json:
+            for line in codex_home_report(skills_root):
+                print(line)
 
     manifest_path = skills_root / MANIFEST_NAME
     old_manifest = load_manifest(manifest_path)
@@ -401,7 +421,7 @@ def command_install(args: argparse.Namespace) -> int:
     if args.write_agents_md and args.target == "repo":
         update_agents(project, block, args.dry_run)
     elif args.write_agents_md and args.target != "repo":
-        print("WARNING: --write-agents-md is only applied for --target repo")
+        output_warnings.append("--write-agents-md is only applied for --target repo")
 
     audit = audit_records(records, block if args.target == "repo" else "")
     manifest = {
@@ -417,6 +437,7 @@ def command_install(args: argparse.Namespace) -> int:
         "skills_root": str(skills_root),
         "agents_md_managed": bool(args.write_agents_md and args.target == "repo"),
         "prune_managed": bool(args.prune_managed),
+        "target_info": target_info,
         "audit": audit,
         "installed_skills": installed,
     }
@@ -436,6 +457,8 @@ def command_install(args: argparse.Namespace) -> int:
         print(f"AGENTS.md: {'would update' if args.dry_run else 'updated'}")
     if removed:
         print(f"pruned managed skills: {', '.join(removed)}")
+    for warning in output_warnings:
+        print(f"WARNING: {warning}")
     for warning in audit["warnings"]:
         print(f"WARNING: {warning}")
     return 0
@@ -623,11 +646,25 @@ def command_audit(args: argparse.Namespace) -> int:
 def command_new(args: argparse.Namespace) -> int:
     if not NAME_RE.match(args.name) or "--" in args.name:
         raise SystemExit("skill name must use lowercase letters, digits, and hyphen only")
-    parts = [SKILLS_ROOT, args.scope]
-    if args.scope == "domain":
+    scope_aliases = {"domain": "domains", "tool": "tools", "reusable": "tools", "research": "science", "system": "core"}
+    scope_dir = scope_aliases.get(args.scope, args.scope)
+    parts = [SKILLS_ROOT, scope_dir]
+    if scope_dir == "domains":
         if not args.domain:
             raise SystemExit("--domain is required with --scope domain")
         parts.append(args.domain)
+        if args.category:
+            parts.append(args.category)
+    elif scope_dir in {"tools", "science"}:
+        if not args.category:
+            raise SystemExit(f"--category is required with --scope {args.scope}")
+        parts.append(args.category)
+    elif scope_dir == "writing":
+        parts.append(args.category or "core")
+    elif scope_dir == "projects":
+        parts.append(args.domain or args.category or "general")
+    elif scope_dir == "core":
+        parts.append(args.category or "codex-system")
     elif args.category:
         parts.append(args.category)
     skill_dir = Path(*parts) / args.name
@@ -739,9 +776,10 @@ def command_select(args: argparse.Namespace) -> int:
         query = inquirer.text(message="Search skills (empty for all)", default="").execute().lower()
         choices = []
         for r in records:
-            text = f"{r['selectors'][0]} | {r['name']} | {r.get('description','')} | scope={r.get('recommended_scope')} network={r.get('requires_network')} exec={r.get('executes_code')} writes={r.get('writes_files')} reviewed={r.get('last_reviewed')}"
+            selector = str(r.get("install_selector") or r["selectors"][0])
+            text = f"{selector} | {r['name']} | {r.get('description','')} | scope={r.get('recommended_scope')} network={r.get('requires_network')} exec={r.get('executes_code')} writes={r.get('writes_files')} reviewed={r.get('last_reviewed')}"
             if not query or query in text.lower():
-                choices.append({"name": text[:180], "value": r["selectors"][0]})
+                choices.append({"name": text[:180], "value": selector})
         skills = inquirer.checkbox(message="Skills", choices=choices).execute()
     selected = select_records(profiles=profiles, domains=domains, skills=skills)
     if not selected:
@@ -877,7 +915,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.set_defaults(func=command_select)
 
     p = sub.add_parser("new", help="Create a new central-library skill")
-    p.add_argument("--scope", required=True, choices=["domain", "research", "reusable", "project", "system"])
+    p.add_argument("--scope", required=True, choices=["domain", "domains", "tool", "tools", "writing", "science", "research", "project", "projects", "core", "system", "reusable"])
     p.add_argument("--domain")
     p.add_argument("--category")
     p.add_argument("--name", required=True)
