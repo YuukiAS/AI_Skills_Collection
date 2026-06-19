@@ -28,11 +28,25 @@ not include archived skills.
 
 ## Top-Level Buckets
 
-- `reusable/`: cross-project workflows.
-- `research/`: writing, discovery, ideation, and communication workflows.
-- `domain/`: field-specific workflows.
-- `project/`: repo-specific workflows.
-- `system/`: installer, Codex, plugin, MCP, and skill authoring workflows.
+- `domains/`: complete field collections that can be installed whole, such as
+  `bayesian`, `bioinformatics`, `medical-imaging`, and `medicine-clinical`.
+- `tools/`: cross-project tool families such as data science, frontend,
+  document/media processing, visualization, and AI/ML libraries.
+- `writing/`: first-class writing workflows. `writing/core/` is suitable for
+  global guardrails; `writing/research/` is heavier and usually project-scoped.
+- `science/`: research discovery, ideation, communication, and presentation
+  workflows that are not themselves writing-style guardrails.
+- `projects/`: repo- or product-specific workflows, such as CardiacNexus/CMR.
+- `core/`: skill library maintenance, installer support, and Codex system
+  compatibility workflows.
+- `archive/`: retained material that should not appear in the default active
+  registry, including external integration snapshots and misfit experiments.
 
 Descriptions are discovery triggers, not tutorials. Keep frontmatter
 `description` under 350 characters and put details in the body or references.
+
+## Local-Only Folders
+
+Ignore dot-prefixed local folders such as `.system/` when browsing the library.
+They are not part of the installable taxonomy and should not be added to
+profiles, bundles, or the generated registry.
