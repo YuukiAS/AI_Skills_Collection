@@ -8,6 +8,10 @@ Default paths:
 - User-level global: `$HOME/.agents/skills/`
 - Explicit legacy compatibility: `${CODEX_HOME:-$HOME/.codex}/skills/`
 
+If `--target` is omitted, `ai-skills install` defaults to `--target repo` and
+installs into the detected current repo's `.agents/skills/`. New installs do
+not write `.codex/skills/` unless `--target codex-home` is explicitly selected.
+
 Use the generated catalog first, then install a profile, a complete domain, or precise single skills.
 
 ## One-Time CLI Setup

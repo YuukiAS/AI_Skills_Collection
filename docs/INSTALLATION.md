@@ -13,6 +13,14 @@ This repository is installed from a local checkout. Keep the checkout available:
 `--mode symlink` deployments point back to it, while `--mode copy` creates a
 self-contained copy in the target.
 
+Default target behavior:
+
+- Omitted `--target` means `--target repo`.
+- Repo installs write to `<project>/.agents/skills/`.
+- User/global installs write to `$HOME/.agents/skills/`.
+- `.codex/skills/` is not used by default. It is only used through explicit
+  `--target codex-home` legacy compatibility.
+
 If the short command is not installed yet, the exact fallback is:
 
 ```bash
