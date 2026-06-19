@@ -35,10 +35,22 @@ python3 /path/to/AI_Skills_Collection/scripts/skills.py --help
 
 ## Main Commands
 
+Use this as the command cheat sheet.
+
+Help and diagnostics:
+
+```bash
+ai-skills --help
+ai-skills install --help
+ai-skills doctor
+```
+
 Browse:
 
 ```bash
 ai-skills list --domain bayesian
+ai-skills list --domain bioinformatics
+ai-skills list --scope writing
 ai-skills catalog --write
 ```
 
@@ -52,6 +64,12 @@ Install into the current repo:
 
 ```bash
 ai-skills install --target repo --domain bayesian --mode symlink --write-agents-md
+```
+
+Install a complete domain:
+
+```bash
+ai-skills install --target repo --domain bioinformatics --mode symlink --write-agents-md
 ```
 
 Install one precise skill:
@@ -73,12 +91,22 @@ Bootstrap user-level core skills:
 
 ```bash
 ai-skills install --target user --profile codex-core-global --mode symlink
+ai-skills install --target user --profile codex-writing-style --mode symlink
 ```
 
-Doctor:
+Explicit legacy codex-home install:
 
 ```bash
-ai-skills doctor
+ai-skills install --target codex-home --profile codex-core-global --mode symlink --dry-run
+```
+
+Validate before committing:
+
+```bash
+ai-skills registry --write
+ai-skills validate
+ai-skills audit --all
+ai-skills catalog --write
 ```
 
 ## Installation Models
@@ -105,10 +133,10 @@ Root folders:
 - `skills/`: the central skill library. This is the main source of installable skills.
 - `profiles/`: curated skill sets for common global or project setups.
 - `bundles/`: legacy bundle definitions kept for compatibility with `scripts/install_bundle.py`; prefer profiles/domains for new installs.
-- `docs/`: user-facing and generated documentation. Keep it: it is the browseable catalog, domain pages, installation guide, migration guide, and authoring guide.
-- `scripts/`: CLI implementation and compatibility wrappers.
-- `shared/`: shared templates and reference packs used by skills.
-- `palette/`: shared visual palette data used by design/visualization skills.
+- `docs/`: necessary user-facing and generated documentation: installation, migration, authoring, generated skill catalog, and generated domain pages.
+- `scripts/`: necessary CLI implementation and compatibility wrappers. `scripts/skills.py` is the source CLI; `ai-skills` is the short installed entrypoint.
+- `shared/`: necessary shared material used in more than one place. It currently holds the AGENTS.md managed-block template validated by the CLI and a frontend UI/UX reference pack linked by multiple frontend skills.
+- `palette/`: shared visual palette data used by design/visualization skills. Keep separate from `shared/` because it is a concrete machine-readable palette asset.
 - `registry.json`: generated machine-readable registry.
 - `setup.py` and `ai_skills_cli/`: editable-install wrapper that provides the `ai-skills` command.
 
