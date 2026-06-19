@@ -4,7 +4,7 @@ description: Comprehensive biosignal processing toolkit for analyzing physiologi
 status: active
 provenance: unknown
 trusted: false
-requires_network: false
+requires_network: true
 writes_files: true
 executes_code: false
 secrets_needed:
@@ -16,6 +16,8 @@ metadata:
   skill-author: K-Dense Inc.
 ---
 # NeuroKit2
+
+If the task involves clinical thresholds, diagnosis, device conventions, or medical interpretation of signals, read `references/source-notes.md` first.
 
 ## Overview
 
@@ -360,4 +362,3 @@ Load specific reference files as needed using the Read tool to access detailed f
 - Official Documentation: https://neuropsychology.github.io/NeuroKit/
 - GitHub Repository: https://github.com/neuropsychology/NeuroKit
 - Publication: Makowski et al. (2021). NeuroKit2: A Python toolbox for neurophysiological signal processing. Behavior Research Methods. https://doi.org/10.3758/s13428-020-01516-y
-

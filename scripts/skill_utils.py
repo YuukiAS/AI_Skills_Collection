@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import shutil
 import subprocess
 from collections import Counter
 from datetime import datetime, timezone
@@ -19,6 +20,10 @@ PROFILES_ROOT = ROOT / "profiles"
 MANIFEST_NAME = ".ai-skills-collection-manifest.json"
 AGENTS_START = "<!-- AI_SKILLS_COLLECTION_START -->"
 AGENTS_END = "<!-- AI_SKILLS_COLLECTION_END -->"
+REPO_SKILLS_DIR = Path(".agents") / "skills"
+USER_SKILLS_ROOT = Path.home() / ".agents" / "skills"
+LEGACY_PROJECT_SKILLS_DIR = Path(".codex") / "skills"
+SYSTEM_SCOPE_NAMES = {".system", "system"}
 
 
 def parse_scalar(value: str) -> Any:
@@ -141,6 +146,9 @@ def write_frontmatter(skill_file: Path, meta: dict[str, Any], body: str) -> None
 def iter_skill_files(include_archive: bool = False) -> list[Path]:
     files = []
     for path in sorted(SKILLS_ROOT.rglob("SKILL.md")):
+        rel_parts = path.relative_to(SKILLS_ROOT).parts
+        if any(part.startswith(".") for part in rel_parts):
+            continue
         if not include_archive and "archive" in path.parts:
             continue
         meta, _ = read_frontmatter(path)
@@ -159,21 +167,74 @@ def skill_flat_name(skill_dir: Path) -> str:
     return "-".join(rel.parts)
 
 
+def normalize_list(value: Any) -> list[Any]:
+    if value in (None, "", {}):
+        return []
+    if isinstance(value, list):
+        return value
+    return [value]
+
+
+def infer_taxonomy(skill_file: Path) -> dict[str, str]:
+    rel_dir = skill_rel_dir(skill_file)
+    rel_parts = rel_dir.parts
+    parts = rel_parts[1:] if rel_parts and rel_parts[0] == "skills" else rel_parts
+    scope = parts[0] if parts else ""
+    domain = ""
+    category = ""
+    slug = parts[-1] if parts else ""
+
+    if scope == "domain" and len(parts) >= 3:
+        domain = parts[1]
+        category = f"domain/{domain}"
+    elif scope == "research" and len(parts) >= 3:
+        category = parts[1]
+        domain = f"research-{category}"
+    elif scope == "reusable" and len(parts) >= 3:
+        category = parts[1]
+        domain = category
+    elif scope == "project" and len(parts) >= 3:
+        category = parts[1]
+        domain = parts[1].lower()
+    elif scope in SYSTEM_SCOPE_NAMES and len(parts) >= 2:
+        scope = "system"
+        category = "codex-system" if parts[0] == ".system" else parts[1]
+        domain = "system"
+    elif len(parts) >= 2:
+        category = parts[1]
+        domain = category
+
+    selector = "/".join(part for part in (scope, domain if scope == "domain" else category, slug) if part)
+    return {
+        "scope": scope,
+        "domain": domain,
+        "category": category,
+        "slug": slug,
+        "selector": selector,
+        "relative_selector": "/".join(parts),
+    }
+
+
 def skill_record(skill_file: Path, include_body: bool = False) -> dict[str, Any]:
     rel_dir = skill_rel_dir(skill_file)
-    parts = rel_dir.parts
-    scope = parts[1] if len(parts) > 1 else ""
-    category = parts[2] if len(parts) > 2 else ""
-    slug = parts[-1]
+    taxonomy = infer_taxonomy(skill_file)
+    scope = taxonomy["scope"]
+    category = taxonomy["category"]
+    domain = taxonomy["domain"]
+    slug = taxonomy["slug"]
     meta, body = read_frontmatter(skill_file)
     status = str(meta.get("status") or ("archived" if "archive" in skill_file.parts else "active"))
+    flat_name = skill_flat_name(skill_file.parent)
+    source_selector = "/".join(rel_dir.parts[1:])
     record: dict[str, Any] = {
-        "id": ".".join(part for part in (scope, category, slug) if part),
+        "id": ".".join(part for part in (scope, domain or category, slug) if part),
         "name": str(meta.get("name") or slug),
         "path": rel_dir.as_posix(),
-        "flat_name": skill_flat_name(skill_file.parent),
+        "flat_name": flat_name,
         "scope": scope,
+        "domain": domain,
         "category": category,
+        "slug": slug,
         "description": str(meta.get("description") or ""),
         "status": status,
         "provenance": meta.get("provenance", "unknown"),
@@ -181,10 +242,21 @@ def skill_record(skill_file: Path, include_body: bool = False) -> dict[str, Any]
         "requires_network": bool(meta.get("requires_network", False)),
         "writes_files": bool(meta.get("writes_files", True)),
         "executes_code": bool(meta.get("executes_code", False)),
-        "secrets_needed": meta.get("secrets_needed", []),
+        "secrets_needed": normalize_list(meta.get("secrets_needed", [])),
         "last_reviewed": meta.get("last_reviewed", ""),
-        "profile_tags": meta.get("profile_tags", []),
+        "profile_tags": normalize_list(meta.get("profile_tags", [])),
         "recommended_scope": meta.get("recommended_scope", "project"),
+        "selectors": sorted(
+            {
+                source_selector,
+                taxonomy["selector"],
+                taxonomy["relative_selector"],
+                rel_dir.as_posix(),
+                flat_name,
+                str(meta.get("name") or slug),
+            }
+            - {""}
+        ),
     }
     if include_body:
         record["body"] = body
@@ -234,6 +306,141 @@ def normalize_project_path(raw: str) -> Path:
     return Path(expanded).resolve()
 
 
+def detect_git_root(start: Path | None = None) -> tuple[Path, bool]:
+    base = (start or Path.cwd()).resolve()
+    try:
+        out = subprocess.check_output(["git", "rev-parse", "--show-toplevel"], cwd=base, text=True, stderr=subprocess.DEVNULL)
+        return Path(out.strip()).resolve(), True
+    except Exception:
+        return base, False
+
+
+def codex_home() -> tuple[str | None, Path]:
+    raw = os.environ.get("CODEX_HOME")
+    if raw:
+        return raw, normalize_project_path(raw)
+    return None, Path.home() / ".codex"
+
+
+def target_skills_root(target: str, project: Path | None = None) -> Path:
+    if target == "repo":
+        if project is None:
+            project, _ = detect_git_root()
+        return project / REPO_SKILLS_DIR
+    if target == "user":
+        return USER_SKILLS_ROOT
+    if target == "codex-home":
+        _, home = codex_home()
+        return home / "skills"
+    raise ValueError(f"unknown target: {target}")
+
+
+def active_skill_records(include_archive: bool = False) -> list[dict[str, Any]]:
+    return [skill_record(path) for path in iter_skill_files(include_archive=include_archive)]
+
+
+def active_skill_files(include_archive: bool = False) -> list[Path]:
+    return iter_skill_files(include_archive=include_archive)
+
+
+def records_by_selector(include_archive: bool = False) -> dict[str, dict[str, Any]]:
+    mapping: dict[str, dict[str, Any]] = {}
+    for record in active_skill_records(include_archive=include_archive):
+        for selector in record.get("selectors", []):
+            mapping[str(selector)] = record
+        mapping[record["path"]] = record
+    return mapping
+
+
+def record_source_dir(record: dict[str, Any]) -> Path:
+    return ROOT / str(record["path"])
+
+
+def select_records(
+    profiles: list[str] | None = None,
+    domains: list[str] | None = None,
+    categories: list[str] | None = None,
+    skills: list[str] | None = None,
+    include_archive: bool = False,
+) -> list[dict[str, Any]]:
+    records = active_skill_records(include_archive=include_archive)
+    selected: list[dict[str, Any]] = []
+    seen: set[str] = set()
+
+    def add(record: dict[str, Any]) -> None:
+        key = str(record["path"])
+        if key not in seen and (include_archive or record.get("status") == "active"):
+            selected.append(record)
+            seen.add(key)
+
+    profile_data = load_profiles()
+    for profile_name in profiles or []:
+        if profile_name not in profile_data:
+            raise SystemExit(f"unknown profile: {profile_name}")
+        for path in profile_skill_files(profile_data[profile_name]):
+            add(skill_record(path))
+
+    for domain in domains or []:
+        domain_norm = domain.strip()
+        if domain_norm == "medical-knowledge":
+            domain_norm = "medicine-clinical"
+        matched = [
+            record
+            for record in records
+            if record.get("domain") == domain_norm
+            or record.get("scope") == domain_norm
+        ]
+        if not matched:
+            raise SystemExit(f"unknown domain selector: {domain}")
+        for record in matched:
+            add(record)
+
+    for category in categories or []:
+        category_norm = category.strip().strip("/")
+        matched = [
+            record
+            for record in records
+            if record.get("category") == category_norm
+            or "/".join(str(record.get("path", "")).split("/")[1:-1]) == category_norm
+            or category_norm in record.get("selectors", [])
+        ]
+        if not matched:
+            raise SystemExit(f"unknown category selector: {category}")
+        for record in matched:
+            add(record)
+
+    selector_map = records_by_selector(include_archive=include_archive)
+    for selector in skills or []:
+        key = selector.strip().strip("/")
+        record = selector_map.get(key) or selector_map.get(f"skills/{key}")
+        if not record:
+            raise SystemExit(f"unknown skill selector: {selector}")
+        add(record)
+
+    return selected
+
+
+def copy_or_link_skill(source_dir: Path, dest: Path, mode: str, dry_run: bool) -> str:
+    if dry_run:
+        return mode
+    if dest.exists() or dest.is_symlink():
+        if dest.is_symlink() or dest.is_file():
+            dest.unlink()
+        else:
+            shutil.rmtree(dest)
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    if mode == "copy":
+        shutil.copytree(source_dir, dest, ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"))
+        return "copy"
+    try:
+        dest.symlink_to(source_dir, target_is_directory=True)
+        return "symlink"
+    except OSError as exc:
+        shutil.copytree(source_dir, dest, ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"))
+        print(f"WARNING: symlink failed for {dest.name}; copied instead ({exc})")
+        return "copy"
+
+
 def git_commit() -> str:
     try:
         return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
@@ -249,7 +456,8 @@ def audit_records(records: list[dict[str, Any]], agents_text: str = "") -> dict[
     descs = [str(record.get("description") or "") for record in records]
     norm_counts = Counter(re.sub(r"\W+", " ", desc.lower()).strip() for desc in descs if desc)
     scopes = Counter(str(record.get("scope") or "unknown") for record in records)
-    categories = Counter(f"{record.get('scope')}/{record.get('category')}" for record in records)
+    categories = Counter(str(record.get("category") or "unknown") for record in records)
+    domains = Counter(str(record.get("domain") or "unknown") for record in records)
     longest = sorted(records, key=lambda r: len(str(r.get("description") or "")), reverse=True)[:5]
     warnings: list[str] = []
     if len(records) > 35:
@@ -274,6 +482,7 @@ def audit_records(records: list[dict[str, Any]], agents_text: str = "") -> dict[
         ],
         "duplicate_description_count": len(duplicates),
         "scope_distribution": dict(scopes),
+        "domain_distribution": dict(domains),
         "category_distribution": dict(categories),
         "agents_block_chars": len(agents_text),
         "warnings": warnings,

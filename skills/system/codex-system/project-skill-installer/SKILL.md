@@ -36,16 +36,17 @@ Use this skill when the user says anything like:
      and `/project/*/*/AI_Skills_Collection`.
    - If it cannot be found, ask the user for the path.
 
-3. Run the project-local installer from the central repository:
+3. Run the unified installer from the central repository:
 
 ```bash
-python3 scripts/install_project_skills.py --project /path/to/project --profile auto --mode symlink --write-agents-md
+python3 scripts/skills.py install --target repo --project /path/to/project --profile codex-skill-maintenance --mode symlink --write-agents-md
 ```
 
-If the user stated the project purpose in natural language, pass it through:
+If the user stated a domain or exact skill, install that selector directly:
 
 ```bash
-python3 scripts/install_project_skills.py --project /path/to/project --profile auto --intent "write a research paper" --mode symlink --write-agents-md
+python3 scripts/skills.py install --target repo --project /path/to/project --domain bayesian --mode symlink --write-agents-md
+python3 scripts/skills.py install --target repo --project /path/to/project --skill domain/bayesian/pymc --mode symlink --write-agents-md
 ```
 
 Examples:
@@ -63,13 +64,14 @@ Examples:
 
 4. Read or re-read the generated project `AGENTS.md`.
    - The routing block lists the installed skills and their paths under
-     `.codex/skills/`.
+     `.agents/skills/`.
    - When a future task matches a listed trigger, read that skill's `SKILL.md`
      before acting.
 
 ## Important Boundaries
 
-- Do not install the whole central library into global `~/.codex/skills`.
+- Complete domain installs are allowed when requested; treat budget output as warnings.
+- Do not install the whole central library into global `$HOME/.agents/skills` or explicit codex-home skills.
 - Do not clean or rewrite global skills when switching projects.
-- Project skills belong in `<project>/.codex/skills/`.
-- The global directory should contain only a tiny core loader such as this skill.
+- Project skills belong in `<project>/.agents/skills/`.
+- Explicit codex-home installs use `${CODEX_HOME:-$HOME/.codex}/skills` only when the user asks for that advanced compatibility target.

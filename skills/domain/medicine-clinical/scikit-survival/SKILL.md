@@ -4,7 +4,7 @@ description: Comprehensive toolkit for survival analysis and time-to-event model
 status: active
 provenance: unknown
 trusted: false
-requires_network: false
+requires_network: true
 writes_files: true
 executes_code: false
 secrets_needed:
@@ -16,6 +16,8 @@ metadata:
   skill-author: K-Dense Inc.
 ---
 # scikit-survival: Survival Analysis in Python
+
+If the task involves clinical endpoints, prognosis, treatment comparison, or medical interpretation, read `references/source-notes.md` first.
 
 ## Overview
 
@@ -403,4 +405,3 @@ from sksurv.datasets import load_gbsg2, load_breast_cancer, load_veterans_lung_c
 # Kernels
 from sksurv.kernels import ClinicalKernelTransform
 ```
-

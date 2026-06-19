@@ -1,0 +1,15 @@
+{
+  "positive": [
+    "Verify whether this clinical guideline recommendation is current and jurisdiction-appropriate.",
+    "Check the recommendation strength and evidence certainty for this treatment pathway."
+  ],
+  "negative": [
+    "Draft a generic project README.",
+    "Analyze a non-clinical queueing simulation."
+  ],
+  "near_miss": [
+    "Write a treatment plan from user-supplied facts.",
+    "Summarize clinical literature evidence without a specific guideline claim."
+  ],
+  "notes": "Trigger when current guideline verification is the main task."
+}

@@ -1,5 +1,5 @@
 ---
-name: frontend-motion-interaction
+name: motion-interaction
 description: "Design and implement frontend motion: page-load choreography, transitions, hover states, scroll effects, feedback animation, and reduced-motion behavior. Use when adding or reviewing animation and interaction polish."
 status: active
 provenance: unknown

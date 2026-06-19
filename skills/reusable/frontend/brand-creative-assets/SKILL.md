@@ -1,5 +1,5 @@
 ---
-name: frontend-brand-creative-assets
+name: brand-creative-assets
 description: "Create and review brand-related frontend assets: brand identity, visual guidelines, banners, hero visuals, slides, social images, icons, and marketing creative. Use for branded campaigns and visual asset systems."
 status: active
 provenance: unknown

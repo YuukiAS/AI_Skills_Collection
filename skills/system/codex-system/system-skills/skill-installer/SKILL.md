@@ -1,6 +1,6 @@
 ---
 name: skill-installer
-description: Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos).
+description: Install external Codex skills from curated lists or GitHub repo paths. Use for third-party skill downloads; for AI_Skills_Collection installs prefer scripts/skills.py repo/user targets and treat codex-home as explicit legacy compatibility.
 status: active
 provenance: unknown
 trusted: false
@@ -54,7 +54,7 @@ All of these scripts use network, so when running in the sandbox, request escala
 - Defaults to direct download for public GitHub repos.
 - If download fails with auth/permission errors, falls back to git sparse checkout.
 - Aborts if the destination skill directory already exists.
-- Installs into `$CODEX_HOME/skills/<skill-name>` (defaults to `~/.codex/skills`).
+- Installs external downloads into an explicit destination. Legacy codex-home installs use `${CODEX_HOME:-$HOME/.codex}/skills/<skill-name>`; do not confuse this with AI_Skills_Collection's recommended repo `.agents/skills` or user `$HOME/.agents/skills` targets.
 - Multiple `--path` values install multiple skills in one run, each named from the path basename unless `--name` is supplied.
 - Options: `--ref <ref>` (default `main`), `--dest <path>`, `--method auto|download|git`.
 
@@ -64,4 +64,4 @@ All of these scripts use network, so when running in the sandbox, request escala
 - Private GitHub repos can be accessed via existing git credentials or optional `GITHUB_TOKEN`/`GH_TOKEN` for download.
 - Git fallback tries HTTPS first, then SSH.
 - The skills at https://github.com/openai/skills/tree/main/skills/.system are preinstalled, so no need to help users install those. If they ask, just explain this. If they insist, you can download and overwrite.
-- Installed annotations come from `$CODEX_HOME/skills`.
+- Installed annotations for this external installer come from the explicit destination or legacy codex-home skills path.

@@ -4,7 +4,7 @@ description: Python library for working with DICOM (Digital Imaging and Communic
 status: active
 provenance: unknown
 trusted: false
-requires_network: false
+requires_network: true
 writes_files: true
 executes_code: false
 secrets_needed:
@@ -16,6 +16,8 @@ metadata:
   skill-author: K-Dense Inc.
 ---
 # Pydicom
+
+If the task involves clinical interpretation, DICOM de-identification, PACS policy, or standard-specific claims, read `references/source-notes.md` first.
 
 ## Overview
 
@@ -438,4 +440,3 @@ Official pydicom documentation: https://pydicom.github.io/pydicom/dev/
 - Tutorials: https://pydicom.github.io/pydicom/dev/tutorials/index.html
 - API Reference: https://pydicom.github.io/pydicom/dev/reference/index.html
 - Examples: https://pydicom.github.io/pydicom/dev/auto_examples/index.html
-

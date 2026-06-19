@@ -1,0 +1,14 @@
+{
+  "name": "codex-writing-style",
+  "description": "Lightweight global/local profile for source-faithful writing, English scientific prose, and Chinese report/README/document final-pass editing.",
+  "max_active_skills": 6,
+  "skills": [
+    "skills/reusable/writing/source-faithful-writing-final-pass",
+    "skills/reusable/writing/scientific-evidence-prose",
+    "skills/reusable/writing/natural-chinese-final-pass"
+  ],
+  "secondary_skills": [
+    "skills/research/writing/scientific-writing",
+    "skills/research/writing/peer-review"
+  ]
+}

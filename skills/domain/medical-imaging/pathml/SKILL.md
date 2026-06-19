@@ -4,7 +4,7 @@ description: Full-featured computational pathology toolkit. Use for advanced WSI
 status: active
 provenance: unknown
 trusted: false
-requires_network: false
+requires_network: true
 writes_files: true
 executes_code: false
 secrets_needed:
@@ -16,6 +16,8 @@ metadata:
   skill-author: K-Dense Inc.
 ---
 # PathML
+
+If the task involves clinical interpretation, pathology reporting, or medical measurement claims, read `references/source-notes.md` before relying on domain facts.
 
 ## Overview
 
@@ -170,4 +172,3 @@ Documentation files providing in-depth coverage of PathML capabilities:
 - `data_management.md` - HDF5 storage, tile management, batch processing, dataset organization
 
 Load these references as needed when working on specific computational pathology tasks.
-

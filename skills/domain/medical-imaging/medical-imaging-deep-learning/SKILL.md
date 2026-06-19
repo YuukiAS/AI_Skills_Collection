@@ -4,7 +4,7 @@ description: Aligns with CardiacNexus MONAI-first refactor and high-risk registr
 status: active
 provenance: unknown
 trusted: false
-requires_network: false
+requires_network: true
 writes_files: true
 executes_code: false
 secrets_needed:

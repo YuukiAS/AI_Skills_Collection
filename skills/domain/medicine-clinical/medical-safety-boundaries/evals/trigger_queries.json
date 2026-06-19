@@ -1,0 +1,15 @@
+{
+  "positive": [
+    "This medical answer may include treatment advice; apply safety boundaries and source checks.",
+    "Review this patient-specific draft for missing clinician-review caveats and privacy risks."
+  ],
+  "negative": [
+    "Summarize a non-medical engineering design doc.",
+    "Format a CSV file."
+  ],
+  "near_miss": [
+    "Write a de-identified case report from supplied facts.",
+    "Check whether this oncology guideline claim is current."
+  ],
+  "notes": "This skill is a guardrail; pair with guideline or report skills when producing medical documents."
+}

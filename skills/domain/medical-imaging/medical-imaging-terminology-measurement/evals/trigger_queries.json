@@ -1,0 +1,15 @@
+{
+  "positive": [
+    "Check whether this radiology measurement wording follows accepted imaging terminology.",
+    "Draft measurement caveats for cardiac MRI segmentation results."
+  ],
+  "negative": [
+    "Train a generic image classifier on natural photos.",
+    "Create a frontend design system."
+  ],
+  "near_miss": [
+    "Use pydicom to extract DICOM tags.",
+    "Build a MONAI segmentation model."
+  ],
+  "notes": "Use for terminology and measurement conventions, not general DICOM IO or deep learning implementation."
+}

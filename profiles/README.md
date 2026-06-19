@@ -1,43 +1,38 @@
 # Profiles
 
-Profiles define small project-local skill sets. They replace broad bundles for
-day-to-day work.
+Profiles are curated install sets. They are not domains.
 
-Install with:
+- Profile: a hand-picked combination for a workflow, such as `codex-bayesian-jsdm`.
+- Domain: a complete area, such as all active `bayesian` skills.
+- Single skill: an exact selector, such as `domain/bayesian/pymc`.
+
+Install a profile:
 
 ```bash
-python3 scripts/install_project_skills.py --project /path/to/project --profile auto --mode symlink --write-agents-md
+python3 scripts/skills.py install --target repo --profile codex-research-writing --mode symlink --write-agents-md
+```
+
+Install a complete domain:
+
+```bash
+python3 scripts/skills.py install --target repo --domain bayesian --mode symlink --write-agents-md
+```
+
+Install precise skills:
+
+```bash
+python3 scripts/skills.py install --target repo --skill domain/bayesian/pymc --mode symlink --write-agents-md
 ```
 
 ## Available Profiles
 
-- `codex-core-global`: tiny global bootstrap profile. Expected active skills:
-  1-3. Use only for `project-skill-installer` and closely related management.
-- `codex-webdev`: Next.js, React, Tailwind, Figma handoff, browser testing, and
-  visual QA. Expected active skills: about 10-15.
-- `codex-research-writing`: manuscripts, literature review, citations, PDFs,
-  figures, slides, and peer review. Expected active skills: about 15-25.
-- `codex-bayesian-jsdm`: TRACE/JSDM/HMSC, Bayesian modeling, Stan/PyMC, MCMC
-  diagnostics, simulations, and theorem-heavy writing. Expected active skills:
-  about 12-20.
-- `codex-cardiacnexus`: CardiacNexus, CMR, DICOM/NIfTI, MONAI, nnU-Net, UKB,
-  and medical imaging pipelines. Expected active skills: about 15-24.
-- `codex-bioinformatics-light`: common bioinformatics workflows with one
-  umbrella database retrieval skill instead of every provider. Expected active
-  skills: about 12-18.
-- `codex-skill-maintenance`: maintenance of this repository, skill metadata,
-  registry, installers, and system skills. Expected active skills: about 10-18.
+- `codex-core-global`: tiny user-level bootstrap profile.
+- `codex-webdev`: React, Next.js, Tailwind, Figma handoff, browser testing, and visual QA.
+- `codex-research-writing`: manuscripts, literature review, citations, PDFs, figures, slides, and peer review.
+- `codex-writing-style`: source-faithful writing guardrail, English scientific prose, and Chinese final-pass editing.
+- `codex-bayesian-jsdm`: Bayesian modeling, JSDM/HMSC, simulation, diagnostics, and manuscript support.
+- `codex-cardiacnexus`: CardiacNexus, CMR, DICOM/NIfTI, MONAI, nnU-Net, UKB, and imaging pipelines.
+- `codex-bioinformatics-light`: common bioinformatics workflows without every provider note.
+- `codex-skill-maintenance`: maintain this skill repository, registry, docs, and installers.
 
-## Auto Detection
-
-`--profile auto` scores both project files and optional natural-language intent.
-It looks for signals such as `package.json`, `next.config.*`,
-`tailwind.config.*`, CMR/DICOM terms, TRACE/JSDM/HMSC/Bayesian terms,
-manuscript/LaTeX/bibliography structures, single-cell/RNA-seq/VCF/BAM/GTF paths,
-or the `AI_Skills_Collection` repository itself. For new empty folders, use
-`--intent "build a website"` or `--intent "write a paper"` so the user's stated
-purpose participates directly in profile selection.
-
-If two profiles score close together, the installer chooses one primary profile
-and may add only a few secondary skills. It does not stack profiles without
-limit.
+Budget warnings from `audit` are guidance. They should prompt description compression or profile tuning, but they do not make domain installs invalid.

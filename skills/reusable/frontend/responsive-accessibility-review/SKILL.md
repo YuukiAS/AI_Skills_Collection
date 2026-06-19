@@ -1,5 +1,5 @@
 ---
-name: frontend-responsive-accessibility-review
+name: responsive-accessibility-review
 description: Review and fix frontend responsiveness, accessibility, usability, keyboard behavior, text fitting, contrast, and visual regressions. Use before shipping UI or when asked to improve UX quality.
 status: active
 provenance: unknown

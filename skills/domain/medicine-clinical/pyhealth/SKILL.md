@@ -4,7 +4,7 @@ description: Comprehensive healthcare AI toolkit for developing, testing, and de
 status: active
 provenance: unknown
 trusted: false
-requires_network: false
+requires_network: true
 writes_files: true
 executes_code: false
 secrets_needed:
@@ -16,6 +16,8 @@ metadata:
   skill-author: K-Dense Inc.
 ---
 # PyHealth: Healthcare AI Toolkit
+
+If the task involves clinical prediction, patient data, labels, or deployment claims, read `references/source-notes.md` first.
 
 ## Overview
 
@@ -495,4 +497,3 @@ For detailed information on each component, refer to the comprehensive reference
 - **training_evaluation.md**: Training, metrics, calibration, interpretability (5,900 words)
 
 **Total comprehensive documentation**: ~28,000 words across modular reference files.
-

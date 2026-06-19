@@ -3,7 +3,7 @@
 
 Profile: `{profile}`
 Installed: `{installed_at}`
-Project skills: `.codex/skills/`
+Project skills: `.agents/skills/`
 
 When a task matches an installed skill, read that skill's `SKILL.md` before acting.
 Do not read archived skills.
@@ -19,6 +19,6 @@ Do not read archived skills.
 ## Skill Maintenance
 
 - To install or update this project's skills, run the central project installer.
-- The installer only manages paths recorded in `.codex/skills/.ai-skills-collection-manifest.json`.
-- Do not clean or rewrite global `~/.codex/skills` when switching projects.
+- The installer only manages paths recorded in `.agents/skills/.ai-skills-collection-manifest.json`.
+- Do not clean or rewrite `$HOME/.agents/skills` or explicit codex-home skills when switching projects.
 <!-- AI_SKILLS_COLLECTION_END -->

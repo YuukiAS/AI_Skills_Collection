@@ -1,5 +1,5 @@
 ---
-name: frontend-visual-direction
+name: visual-direction
 description: Choose and execute a deliberate frontend visual direction across typography, palette, structure, texture, imagery, and composition. Use when designing or restyling frontend UI and avoiding generic AI-looking output.
 status: active
 provenance: unknown

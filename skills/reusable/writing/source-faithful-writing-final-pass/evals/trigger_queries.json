@@ -1,0 +1,16 @@
+{
+  "positive": [
+    "Polish this report but do not delete anything or change the Chinese/English mix.",
+    "Fix OCR and formula spacing in this LaTeX/PDF while preserving source wording.",
+    "The previous version changed my headings and removed content; do a source-faithful final pass."
+  ],
+  "negative": [
+    "Write a brand new blog post from scratch.",
+    "Summarize this article into five bullet points and cut details."
+  ],
+  "near_miss": [
+    "Make this English scientific report less AI-sounding.",
+    "Do a natural Chinese final pass on this README."
+  ],
+  "notes": "Use as a fidelity and completion guardrail. Pair with scientific-evidence-prose or natural-chinese-final-pass when style is the main requested operation."
+}

@@ -4,7 +4,7 @@ description: Use when enforcing reproducible preprocessing, registration baselin
 status: active
 provenance: unknown
 trusted: false
-requires_network: false
+requires_network: true
 writes_files: true
 executes_code: false
 secrets_needed:

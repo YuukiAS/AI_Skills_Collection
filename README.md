@@ -1,186 +1,105 @@
 # AI Skills Collection
 
-This repository is a central skill library plus project-local installer. It is
-not meant to install every skill into global `~/.codex/skills`.
+Central library for personal Codex/agent skills. The repository keeps the full skill collection; installation is explicit and can target a repo, the user-level skills directory, or an advanced legacy codex-home directory.
 
-The new operating model is:
+Default paths:
 
-1. Keep the complete library in this repository.
-2. Select a small profile for a specific project.
-3. Install or link those skills into `<project>/.codex/skills/`.
-4. Generate a short `<project>/AGENTS.md` routing block so Codex knows when to
-   read each project-local skill.
+- Repo-specific: `<project>/.agents/skills/`
+- User-level global: `$HOME/.agents/skills/`
+- Explicit legacy compatibility: `${CODEX_HOME:-$HOME/.codex}/skills/`
 
-This avoids warnings such as `Skill descriptions were shortened to fit the 2%
-skills context budget` and avoids deleting/reinstalling global skills when
-switching projects.
+Use the generated catalog first, then install a profile, a complete domain, or precise single skills.
+
+## Main Commands
+
+Browse:
+
+```bash
+python3 scripts/skills.py list --domain bayesian
+python3 scripts/skills.py catalog --write
+```
+
+Interactive install:
+
+```bash
+python3 /path/to/AI_Skills_Collection/scripts/skills.py select
+```
+
+Install into the current repo:
+
+```bash
+python3 /path/to/AI_Skills_Collection/scripts/skills.py install --target repo --domain bayesian --mode symlink --write-agents-md
+```
+
+Install one precise skill:
+
+```bash
+python3 /path/to/AI_Skills_Collection/scripts/skills.py install --target repo --skill domain/bayesian/pymc --mode symlink --write-agents-md
+```
+
+Install multiple precise skills:
+
+```bash
+python3 scripts/skills.py install --target repo \
+  --skill domain/bayesian/pymc \
+  --skill domain/bayesian/bayesian-ppl-diagnostics \
+  --mode symlink --write-agents-md
+```
+
+Bootstrap user-level core skills:
+
+```bash
+python3 scripts/skills.py install --target user --profile codex-core-global --mode symlink
+```
+
+Doctor:
+
+```bash
+python3 scripts/skills.py doctor
+```
+
+## Installation Models
+
+Profiles are curated combinations for a project or global bootstrap. Domains are complete field collections. Single-skill selectors are exact installs.
+
+Complete domain installs are supported. If `audit` warns about total description length or active skill count, treat that as a context-budget warning, not an installation error.
+
+Examples:
+
+```bash
+python3 scripts/skills.py install --target repo --profile codex-bayesian-jsdm --mode symlink --write-agents-md
+python3 scripts/skills.py install --target repo --domain bayesian --mode symlink --write-agents-md
+python3 scripts/skills.py install --target user --domain reusable --mode symlink --dry-run
+python3 scripts/skills.py install --target codex-home --profile codex-core-global --mode symlink --dry-run
+```
+
+`--target codex-home` is explicit, legacy, and advanced. The CLI prints detected `CODEX_HOME`, resolved codex home, target skills root, `config.toml` status, and writability before installing.
 
 ## Layout
 
-- `skills/`: callable workflows. Each `SKILL.md` should be a clear executable
-  workflow, not a general knowledge page.
-- `shared/`: non-callable resources such as templates, provider notes, reference
-  packs, schemas, prompt fragments, and AGENTS templates.
-- `palette/`: shared color palette resources.
-- `profiles/`: small project profiles that list which skills to install.
-- `scripts/install_project_skills.py`: project-local installer.
-- `scripts/audit_skill_budget.py`: budget and profile audit tool.
-- `registry.json`: generated active skill registry with governance fields.
-- `bundles/`: legacy deployment subsets kept for compatibility. Do not use them
-  for daily project switching.
+- `skills/`: central skill library. `SKILL.md` files should stay workflow-oriented.
+- `skills/**/references/`: longer domain knowledge, dated source notes, checklists, formulas, and legacy long-form material.
+- `profiles/`: curated skill sets.
+- `scripts/skills.py`: unified CLI for list/catalog/install/select/new/validate/audit/registry/doctor/migrate-legacy.
+- `registry.json`: generated machine-readable registry.
+- `docs/SKILL_CATALOG.md`: generated catalog.
+- `docs/domains/`: generated domain pages.
+- `shared/templates/AGENTS.md.template`: managed routing block template.
 
-## Project-Local Install
-
-```bash
-python3 scripts/install_project_skills.py \
-  --project /path/to/project \
-  --profile auto \
-  --mode symlink \
-  --write-agents-md
-```
-
-`--profile auto` scores the project and chooses a profile such as
-`codex-webdev`, `codex-research-writing`, `codex-bayesian-jsdm`,
-`codex-cardiacnexus`, `codex-bioinformatics-light`, or
-`codex-skill-maintenance`.
-
-For a new or empty directory, pass the user's natural-language purpose as
-`--intent` so auto detection can use semantic intent as well as files:
-
-```bash
-python3 scripts/install_project_skills.py \
-  --project /path/to/project \
-  --profile auto \
-  --intent "write a research paper with citations and slides" \
-  --mode symlink \
-  --write-agents-md
-```
-
-`--mode symlink` links project skills back to this central repository. If
-symlinks fail, the installer falls back to copy mode and reports that choice.
-Use `--mode copy` explicitly for Windows filesystem locations where symlink
-permissions are unreliable.
-
-The installer writes:
-
-- `<project>/.codex/skills/<skill-name>/`
-- `<project>/.codex/skills/.ai-skills-collection-manifest.json`
-- a managed block in `<project>/AGENTS.md` when `--write-agents-md` is set
-
-The manifest records profile name, install time, central repo path and commit,
-install mode, installed skills, AGENTS.md management status, and the last audit
-summary. Sync only updates paths recorded in that project manifest.
-
-## AGENTS.md Routing
-
-`AGENTS.md` is intentionally short. It does not copy skill bodies. It says where
-project skills live, lists the installed skill index, gives trigger summaries
-and relative paths, records common build/test commands, and tells Codex to read
-the relevant `SKILL.md` before acting.
-
-Existing `AGENTS.md` content is preserved. The installer only updates:
-
-```md
-<!-- AI_SKILLS_COLLECTION_START -->
-...
-<!-- AI_SKILLS_COLLECTION_END -->
-```
-
-## Tiny Global Bootstrap
-
-Global `~/.codex/skills` should contain only a tiny loader profile. Recommended
-bootstrap:
-
-```bash
-python3 scripts/install_project_skills.py --global --profile codex-core-global --mode symlink
-```
-
-After that, normal usage is to enter a project and tell Codex: "为这个项目安装
-skills" or "install project skills". The global `project-skill-installer` skill
-will find this repository, run the project installer, and then read the
-project's `AGENTS.md`.
-
-Do not install the whole repository into global `~/.codex/skills`.
-
-## Agent Operating Procedure
-
-When an agent is running on a new server after this repository has been pulled,
-bootstrap global skills once:
-
-```bash
-cd /path/to/AI_Skills_Collection
-python3 scripts/install_project_skills.py --global --profile codex-core-global --mode symlink --prune-global
-```
-
-Use this only for the tiny global loader. It moves older broad global installs
-to a timestamped backup instead of deleting them.
-
-When the user asks to set up skills for a project, do not install a broad bundle
-globally. Install project-local skills:
-
-```bash
-python3 /path/to/AI_Skills_Collection/scripts/install_project_skills.py \
-  --project /path/to/project \
-  --profile auto \
-  --intent "user's natural-language project purpose" \
-  --mode symlink \
-  --write-agents-md
-```
-
-Examples of intent routing:
-
-- "write a paper", "literature review", "citations", "slides" ->
-  `codex-research-writing`
-- "build a website", "React", "Next.js", "Tailwind", "dashboard" ->
-  `codex-webdev`
-- "Bayesian", "JSDM", "HMSC", "Stan", "PyMC", "MCMC" ->
-  `codex-bayesian-jsdm`
-- "CMR", "DICOM", "NIfTI", "MONAI", "nnU-Net", "CardiacNexus" ->
-  `codex-cardiacnexus`
-- "bioinformatics", "single-cell", "RNA-seq", "scanpy", "scvi", "VCF/BAM/GTF" ->
-  `codex-bioinformatics-light`
-
-If project installation fails because `<project>/.codex/skills` resolves to
-global `~/.codex/skills`, repair the project-local directory explicitly:
-
-```bash
-python3 /path/to/AI_Skills_Collection/scripts/install_project_skills.py \
-  --project /path/to/project \
-  --profile auto \
-  --intent "user's natural-language project purpose" \
-  --mode symlink \
-  --write-agents-md \
-  --repair-project-codex-symlink
-```
-
-The repair mode backs up the project `.codex` symlink and creates a real local
-`.codex/skills/`. It must not be used to clean or rewrite global skills.
-
-## Validation And Audits
+## Validation
 
 Run before committing:
 
 ```bash
-python3 scripts/generate_registry.py
-python3 scripts/validate_skills.py
-python3 scripts/audit_skill_budget.py --all
+python3 scripts/skills.py registry --write
+python3 scripts/skills.py validate
+python3 scripts/skills.py audit --all
+python3 scripts/skills.py catalog --write
 ```
 
-Audit one profile:
+## Documentation
 
-```bash
-python3 scripts/audit_skill_budget.py profiles/codex-webdev.json
-```
-
-Audit an installed project:
-
-```bash
-python3 scripts/audit_skill_budget.py --project /path/to/project
-```
-
-## Windows And WSL
-
-The installer uses Python `pathlib` and recognizes common Windows drive paths
-from WSL. Prefer keeping WSL projects on the Linux filesystem for reliable
-symlinks. For projects on Windows-mounted drives, use `--mode copy` or allow the
-installer to fall back to copy mode when symlink creation fails.
+- `docs/INSTALLATION.md`: CLI install patterns, SSH/HPC notes, symlink/copy, Windows/WSL, user vs codex-home.
+- `docs/MIGRATION.md`: migrate old `.codex/skills` manifests to `.agents/skills`.
+- `docs/SKILL_AUTHORING.md`: create skills, domains, references, descriptions, profiles, and trigger evals.
+- `profiles/README.md`: profile vs domain vs single-skill selection.
