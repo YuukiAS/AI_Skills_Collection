@@ -12,10 +12,12 @@ Use the generated catalog first, then install a profile, a complete domain, or p
 
 ## One-Time CLI Setup
 
-Install the short command from this checkout:
+On a new server, clone this repository once and install the short command from
+that checkout:
 
 ```bash
-python3 -m pip install --no-build-isolation -e /path/to/AI_Skills_Collection
+git clone <repo-url> AI_Skills_Collection
+python3 -m pip install --no-build-isolation -e AI_Skills_Collection
 ```
 
 Then use `ai-skills` from any repo:
@@ -32,6 +34,11 @@ The long-form fallback remains available when the editable command is not instal
 ```bash
 python3 /path/to/AI_Skills_Collection/scripts/skills.py --help
 ```
+
+This is intentionally an editable install from a local checkout, not a PyPI
+package. Keep the checkout available. `--mode symlink` installs point back to
+this central library; use `--mode copy` when the target repo must keep a
+self-contained snapshot.
 
 ## Main Commands
 

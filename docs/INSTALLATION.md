@@ -1,11 +1,17 @@
 # Installation
 
-Use `ai-skills` as the normal entry point after one editable install:
+Use `ai-skills` as the normal entry point after one editable install. On a new
+server:
 
 ```bash
-python3 -m pip install --no-build-isolation -e /path/to/AI_Skills_Collection
+git clone <repo-url> AI_Skills_Collection
+python3 -m pip install --no-build-isolation -e AI_Skills_Collection
 ai-skills --help
 ```
+
+This repository is installed from a local checkout. Keep the checkout available:
+`--mode symlink` deployments point back to it, while `--mode copy` creates a
+self-contained copy in the target.
 
 If the short command is not installed yet, the exact fallback is:
 
