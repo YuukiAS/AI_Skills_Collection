@@ -7,13 +7,13 @@ Active skills: 9
 Complete domain install:
 
 ```bash
-python3 scripts/skills.py install --target repo --domain frontend --mode symlink --write-agents-md
+ai-skills install --target repo --domain frontend --mode symlink --write-agents-md
 ```
 
 Install a few skills precisely:
 
 ```bash
-python3 scripts/skills.py install --target repo --skill tool/frontend/brand-creative-assets --skill tool/frontend/design-system-tokens --skill tool/frontend/figma-design-to-code --mode symlink --write-agents-md
+ai-skills install --target repo --skill tool/frontend/brand-creative-assets --skill tool/frontend/design-system-tokens --skill tool/frontend/figma-design-to-code --mode symlink --write-agents-md
 ```
 
 Complete domain installs are supported. If an audit reports high description length or many active skills, treat it as a context-budget warning, not an installation error.

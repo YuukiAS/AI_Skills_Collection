@@ -7,13 +7,13 @@ Active skills: 5
 Complete domain install:
 
 ```bash
-python3 scripts/skills.py install --target repo --domain bayesian --mode symlink --write-agents-md
+ai-skills install --target repo --domain bayesian --mode symlink --write-agents-md
 ```
 
 Install a few skills precisely:
 
 ```bash
-python3 scripts/skills.py install --target repo --skill domain/bayesian/bayesian-ppl-diagnostics --skill domain/bayesian/pymc --skill domain/bayesian/simpy --mode symlink --write-agents-md
+ai-skills install --target repo --skill domain/bayesian/bayesian-ppl-diagnostics --skill domain/bayesian/pymc --skill domain/bayesian/simpy --mode symlink --write-agents-md
 ```
 
 Complete domain installs are supported. If an audit reports high description length or many active skills, treat it as a context-budget warning, not an installation error.

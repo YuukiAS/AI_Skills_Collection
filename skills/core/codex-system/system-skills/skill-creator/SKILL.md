@@ -262,7 +262,7 @@ For example, when building an image-editor skill, relevant questions include:
 - "Can you give some examples of how this skill would be used?"
 - "I can imagine users asking for things like 'Remove the red-eye from this image' or 'Rotate this image'. Are there other ways you imagine this skill being used?"
 - "What would a user say that should trigger this skill?"
-- "Where should I create this skill in the central library? If you do not have a preference, I will create it under this repository's `skills/<scope>/<domain-or-category>/<skill-name>/` and then install it with `scripts/skills.py install`."
+- "Where should I create this skill in the central library? If you do not have a preference, I will create it under this repository's `skills/<scope>/<domain-or-category>/<skill-name>/` and then install it with `ai-skills install`."
 
 To avoid overwhelming users, avoid asking too many questions in a single message. Start with the most important questions and follow up as needed for better effectiveness.
 
@@ -298,7 +298,7 @@ At this point, it is time to actually create the skill.
 
 Skip this step only if the skill being developed already exists. In this case, continue to the next step.
 
-Before creating files, ask for the central-library scope/domain/category if it is not obvious. Default to authoring in `AI_Skills_Collection/skills/<scope>/<domain-or-category>/<skill-name>/`, not directly in `$HOME/.agents/skills` or `${CODEX_HOME:-$HOME/.codex}/skills`. Install after authoring with `scripts/skills.py install --target repo|user|codex-home`.
+Before creating files, ask for the central-library scope/domain/category if it is not obvious. Default to authoring in `AI_Skills_Collection/skills/<scope>/<domain-or-category>/<skill-name>/`, not directly in `$HOME/.agents/skills` or `${CODEX_HOME:-$HOME/.codex}/skills`. Install after authoring with `ai-skills install --target repo|user|codex-home`.
 
 When creating a new skill from scratch, always run the `init_skill.py` script. The script conveniently generates a new template skill directory that automatically includes everything a skill requires, making the skill creation process much more efficient and reliable.
 
@@ -311,8 +311,8 @@ scripts/init_skill.py <skill-name> --path <output-directory> [--resources script
 Examples:
 
 ```bash
-python3 scripts/skills.py new --scope domain --domain bayesian --name my-skill --description "..."
-python3 scripts/skills.py install --target repo --skill domain/bayesian/my-skill --mode symlink --write-agents-md
+ai-skills new --scope domain --domain bayesian --name my-skill --description "..."
+ai-skills install --target repo --skill domain/bayesian/my-skill --mode symlink --write-agents-md
 scripts/init_skill.py my-skill --path ~/work/skills --resources scripts --examples
 ```
 

@@ -1,6 +1,6 @@
 ---
 name: skill-installer
-description: Install external Codex skills from curated lists or GitHub repo paths. Use for third-party skill downloads; for AI_Skills_Collection installs prefer scripts/skills.py repo/user targets and treat codex-home as explicit legacy compatibility.
+description: Install external Codex skills from curated lists or GitHub repo paths. Use for third-party skill downloads; for AI_Skills_Collection installs prefer ai-skills repo/user targets and treat codex-home as explicit legacy compatibility.
 status: active
 provenance: unknown
 trusted: false

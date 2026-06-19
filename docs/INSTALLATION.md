@@ -1,13 +1,24 @@
 # Installation
 
-Use `scripts/skills.py` as the single entry point.
+Use `ai-skills` as the normal entry point after one editable install:
+
+```bash
+python3 -m pip install --no-build-isolation -e /path/to/AI_Skills_Collection
+ai-skills --help
+```
+
+If the short command is not installed yet, the exact fallback is:
+
+```bash
+python3 /path/to/AI_Skills_Collection/scripts/skills.py --help
+```
 
 ## Repo-Specific Install
 
 From inside any git repo:
 
 ```bash
-python3 /path/to/AI_Skills_Collection/scripts/skills.py install --target repo --domain bayesian --mode symlink --write-agents-md
+ai-skills install --target repo --domain bayesian --mode symlink --write-agents-md
 ```
 
 If `--project` is omitted, the CLI detects the current git root. If the current directory is not a git repo, it uses the current directory and prints a warning.
@@ -15,7 +26,7 @@ If `--project` is omitted, the CLI detects the current git root. If the current 
 Explicit project:
 
 ```bash
-python3 /path/to/AI_Skills_Collection/scripts/skills.py install --target repo --project /path/to/repo --profile codex-research-writing --mode symlink --write-agents-md
+ai-skills install --target repo --project /path/to/repo --profile codex-research-writing --mode symlink --write-agents-md
 ```
 
 Repo installs write:
@@ -29,8 +40,8 @@ Repo installs write:
 User-level global installs go to `$HOME/.agents/skills/`.
 
 ```bash
-python3 scripts/skills.py install --target user --profile codex-core-global --mode symlink
-python3 scripts/skills.py install --target user --domain reusable --mode symlink --dry-run
+ai-skills install --target user --profile codex-core-global --mode symlink
+ai-skills install --target user --profile codex-writing-style --mode symlink --dry-run
 ```
 
 Keep user-level installs small unless you intentionally want broad cross-project skills.
@@ -40,7 +51,7 @@ Keep user-level installs small unless you intentionally want broad cross-project
 Codex-home is explicit legacy/advanced compatibility:
 
 ```bash
-python3 scripts/skills.py install --target codex-home --profile codex-core-global --mode symlink --dry-run
+ai-skills install --target codex-home --profile codex-core-global --mode symlink --dry-run
 ```
 
 The path is `${CODEX_HOME:-$HOME/.codex}/skills`. The CLI prints detected `CODEX_HOME`, resolved codex home, target skills root, whether `config.toml` exists, writability, and a legacy target warning.
@@ -50,25 +61,25 @@ The path is `${CODEX_HOME:-$HOME/.codex}/skills`. The CLI prints detected `CODEX
 Complete domain:
 
 ```bash
-python3 scripts/skills.py install --target repo --domain bayesian --mode symlink --write-agents-md
+ai-skills install --target repo --domain bayesian --mode symlink --write-agents-md
 ```
 
 Precise skills:
 
 ```bash
-python3 scripts/skills.py install --target repo --skill domain/bayesian/pymc --skill domain/bayesian/bayesian-ppl-diagnostics --mode symlink --write-agents-md
+ai-skills install --target repo --skill domain/bayesian/pymc --skill domain/bayesian/bayesian-ppl-diagnostics --mode symlink --write-agents-md
 ```
 
 Profile:
 
 ```bash
-python3 scripts/skills.py install --target repo --profile codex-bayesian-jsdm --mode symlink --write-agents-md
+ai-skills install --target repo --profile codex-bayesian-jsdm --mode symlink --write-agents-md
 ```
 
 ## Interactive Selection
 
 ```bash
-python3 scripts/skills.py select
+ai-skills select
 ```
 
 The selector chooses target, project path, strategy, profile/domain/single skills, mode, AGENTS.md write, and prune policy. It uses InquirerPy when available:

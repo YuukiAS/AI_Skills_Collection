@@ -39,14 +39,14 @@ Use this skill when the user says anything like:
 3. Run the unified installer from the central repository:
 
 ```bash
-python3 scripts/skills.py install --target repo --project /path/to/project --profile codex-skill-maintenance --mode symlink --write-agents-md
+ai-skills install --target repo --project /path/to/project --profile codex-skill-maintenance --mode symlink --write-agents-md
 ```
 
 If the user stated a domain or exact skill, install that selector directly:
 
 ```bash
-python3 scripts/skills.py install --target repo --project /path/to/project --domain bayesian --mode symlink --write-agents-md
-python3 scripts/skills.py install --target repo --project /path/to/project --skill domain/bayesian/pymc --mode symlink --write-agents-md
+ai-skills install --target repo --project /path/to/project --domain bayesian --mode symlink --write-agents-md
+ai-skills install --target repo --project /path/to/project --skill domain/bayesian/pymc --mode symlink --write-agents-md
 ```
 
 Examples:

@@ -7,13 +7,13 @@ Active skills: 4
 Complete domain install:
 
 ```bash
-python3 scripts/skills.py install --target repo --domain cmr --mode symlink --write-agents-md
+ai-skills install --target repo --domain cmr --mode symlink --write-agents-md
 ```
 
 Install a few skills precisely:
 
 ```bash
-python3 scripts/skills.py install --target repo --skill project/cmr/cardiacnexus-docs-markdoc --skill project/cmr/cardiacnexus-feature-contracts --skill project/cmr/cardiacnexus-pipeline-refactor --mode symlink --write-agents-md
+ai-skills install --target repo --skill project/cmr/cardiacnexus-docs-markdoc --skill project/cmr/cardiacnexus-feature-contracts --skill project/cmr/cardiacnexus-pipeline-refactor --mode symlink --write-agents-md
 ```
 
 Complete domain installs are supported. If an audit reports high description length or many active skills, treat it as a context-budget warning, not an installation error.

@@ -1,11 +1,11 @@
 # Skill Authoring
 
-Author skills in this central repository first. Install them later with `scripts/skills.py install`.
+Author skills in this central repository first. Install them later with `ai-skills install`.
 
 ## Create A Skill
 
 ```bash
-python3 scripts/skills.py new --scope domain --domain bayesian --name mcmc-diagnostics --description "Diagnose MCMC sampling pathologies and report Bayesian fit quality."
+ai-skills new --scope domain --domain bayesian --name mcmc-diagnostics --description "Diagnose MCMC sampling pathologies and report Bayesian fit quality."
 ```
 
 This creates `skills/domains/bayesian/mcmc-diagnostics/` with `SKILL.md`, optional `references/`, and trigger eval scaffold.
@@ -49,8 +49,8 @@ Domains are complete collections. Profiles are curated selections. Single skills
 ## Validation
 
 ```bash
-python3 scripts/skills.py validate
-python3 scripts/skills.py audit --domain bayesian
-python3 scripts/skills.py registry --write
-python3 scripts/skills.py catalog --write
+ai-skills validate
+ai-skills audit --domain bayesian
+ai-skills registry --write
+ai-skills catalog --write
 ```

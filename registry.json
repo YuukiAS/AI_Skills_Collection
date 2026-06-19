@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "generated_at": "2026-06-19T14:40:35+00:00",
+  "generated_at": "2026-06-19T14:59:58+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
   "skill_count": 132,
@@ -258,7 +258,7 @@
       "subcategory": "codex-system",
       "slug": "skill-installer",
       "install_selector": "core/codex-system/skill-installer",
-      "description": "Install external Codex skills from curated lists or GitHub repo paths. Use for third-party skill downloads; for AI_Skills_Collection installs prefer scripts/skills.py repo/user targets and treat codex-home as explicit legacy compatibility.",
+      "description": "Install external Codex skills from curated lists or GitHub repo paths. Use for third-party skill downloads; for AI_Skills_Collection installs prefer ai-skills repo/user targets and treat codex-home as explicit legacy compatibility.",
       "status": "active",
       "provenance": "unknown",
       "trusted": false,

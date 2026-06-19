@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unified CLI for AI_Skills_Collection."""
+"""Install, browse, validate, and maintain AI_Skills_Collection skills."""
 
 from __future__ import annotations
 
@@ -44,6 +44,10 @@ CATALOG = DOCS / "SKILL_CATALOG.md"
 DOMAIN_DOCS = DOCS / "domains"
 NAME_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")
 HIGH_RISK_DOMAINS = ("medical", "medicine", "finance", "legal", "system-ops")
+
+
+class HelpFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescriptionHelpFormatter):
+    """Show defaults while preserving multi-line examples."""
 
 
 def print_json(data: Any) -> None:
@@ -125,7 +129,7 @@ def command_registry(args: argparse.Namespace) -> int:
 
 def install_command_hint(record: dict[str, Any], target: str = "repo") -> str:
     selector = str(record.get("install_selector") or record["selectors"][0])
-    base = "python3 scripts/skills.py install"
+    base = "ai-skills install"
     if target == "repo":
         return f"{base} --target repo --skill {selector} --mode symlink --write-agents-md"
     return f"{base} --target {target} --skill {selector} --mode symlink"
@@ -177,13 +181,13 @@ def domain_page(domain: str, records: list[dict[str, Any]]) -> str:
         "Complete domain install:",
         "",
         "```bash",
-        f"python3 scripts/skills.py install --target repo --domain {domain} --mode symlink --write-agents-md",
+        f"ai-skills install --target repo --domain {domain} --mode symlink --write-agents-md",
         "```",
         "",
         "Install a few skills precisely:",
         "",
         "```bash",
-        f"python3 scripts/skills.py install --target repo {selectors} --mode symlink --write-agents-md",
+        f"ai-skills install --target repo {selectors} --mode symlink --write-agents-md",
         "```",
         "",
         "Complete domain installs are supported. If an audit reports high description length or many active skills, treat it as a context-budget warning, not an installation error.",
@@ -872,82 +876,112 @@ def command_migrate_legacy(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        prog="ai-skills",
+        description=(
+            "Manage the central AI_Skills_Collection library.\n\n"
+            "Install target defaults:\n"
+            "  repo       -> <project>/.agents/skills/ (recommended)\n"
+            "  user       -> $HOME/.agents/skills/\n"
+            "  codex-home -> ${CODEX_HOME:-$HOME/.codex}/skills (explicit legacy target)"
+        ),
+        epilog=(
+            "Common examples:\n"
+            "  ai-skills list --domain bayesian\n"
+            "  ai-skills select\n"
+            "  ai-skills install --target repo --domain bayesian --mode symlink --write-agents-md\n"
+            "  ai-skills install --target repo --skill domain/bayesian/pymc --mode symlink --write-agents-md\n"
+            "  ai-skills install --target user --profile codex-writing-style --mode symlink\n"
+            "  ai-skills doctor\n\n"
+            "Fallback without editable install:\n"
+            "  python3 /path/to/AI_Skills_Collection/scripts/skills.py <command> [options]"
+        ),
+        formatter_class=HelpFormatter,
+    )
     sub = parser.add_subparsers(dest="command", required=True)
 
-    p = sub.add_parser("list", help="List skills")
-    p.add_argument("--domain")
-    p.add_argument("--scope")
-    p.add_argument("--category")
-    p.add_argument("--tag")
-    p.add_argument("--profile")
-    p.add_argument("--include-archive", action="store_true")
-    p.add_argument("--json", action="store_true")
+    p = sub.add_parser("list", help="List active skills; filter by domain, scope, category, tag, or profile")
+    p.add_argument("--domain", help="Filter by domain, such as bayesian, bioinformatics, writing, or data-science")
+    p.add_argument("--scope", help="Filter by scope: domain, tool, writing, science, project, or core")
+    p.add_argument("--category", help="Filter by derived category, such as domain/bayesian or core/codex-system")
+    p.add_argument("--tag", help="Filter by profile_tags metadata")
+    p.add_argument("--profile", help="Show skills selected by a profile JSON file")
+    p.add_argument("--include-archive", action="store_true", help="Also list archived skills; default active registry excludes archive")
+    p.add_argument("--json", action="store_true", help="Print machine-readable JSON")
     p.set_defaults(func=command_list)
 
-    p = sub.add_parser("catalog", help="Generate catalog docs")
-    p.add_argument("--write", action="store_true")
+    p = sub.add_parser("catalog", help="Generate docs/SKILL_CATALOG.md and docs/domains/*.md")
+    p.add_argument("--write", action="store_true", help="Write docs/SKILL_CATALOG.md and docs/domains/*.md instead of printing")
     p.set_defaults(func=command_catalog)
 
-    p = sub.add_parser("registry", help="Generate or print registry JSON")
-    p.add_argument("--write", action="store_true")
-    p.add_argument("--include-archive", action="store_true")
+    p = sub.add_parser("registry", help="Generate or print machine-readable registry.json")
+    p.add_argument("--write", action="store_true", help="Write registry.json instead of printing to stdout")
+    p.add_argument("--include-archive", action="store_true", help="Include skills/archive/ and status: archived records")
     p.set_defaults(func=command_registry)
 
-    p = sub.add_parser("install", help="Install selected skills")
-    p.add_argument("--target", choices=["repo", "user", "codex-home"], default="repo")
-    p.add_argument("--project")
-    p.add_argument("--profile", action="append", default=[])
-    p.add_argument("--domain", action="append", default=[])
-    p.add_argument("--category", action="append", default=[])
-    p.add_argument("--skill", action="append", default=[])
-    p.add_argument("--mode", choices=["symlink", "copy"], default="symlink")
-    p.add_argument("--dry-run", action="store_true")
-    p.add_argument("--yes", action="store_true")
-    p.add_argument("--prune-managed", action="store_true")
-    p.add_argument("--no-prune", dest="prune_managed", action="store_false")
-    p.add_argument("--write-agents-md", action="store_true")
-    p.add_argument("--no-agents-md", dest="write_agents_md", action="store_false")
-    p.add_argument("--json", action="store_true")
+    p = sub.add_parser(
+        "install",
+        help="Non-interactively install profiles, complete domains, categories, or precise skills",
+        description=(
+            "Install selected skills into a repo, user-level global directory, or explicit legacy codex-home.\n"
+            "Complete --domain installs are valid; audit budget warnings do not block installation.\n"
+            "Default pruning is off. Only --prune-managed removes manifest-managed skills absent from this run."
+        ),
+        formatter_class=HelpFormatter,
+    )
+    p.add_argument("--target", choices=["repo", "user", "codex-home"], default="repo", help="Install destination class")
+    p.add_argument("--project", help="Repo/project path for --target repo; defaults to detected git root or current directory")
+    p.add_argument("--profile", action="append", default=[], help="Install all skills from a curated profile; repeatable")
+    p.add_argument("--domain", action="append", default=[], help="Install a complete domain, such as bayesian or bioinformatics; repeatable")
+    p.add_argument("--category", action="append", default=[], help="Install a derived category selector; repeatable")
+    p.add_argument("--skill", action="append", default=[], help="Install one precise skill selector, such as domain/bayesian/pymc; repeatable")
+    p.add_argument("--mode", choices=["symlink", "copy"], default="symlink", help="Use symlinks to central library or copy skill directories")
+    p.add_argument("--dry-run", action="store_true", help="Show intended changes without writing target files")
+    p.add_argument("--yes", action="store_true", help="Reserved for non-interactive confirmations; install is already non-interactive")
+    p.add_argument("--prune-managed", action="store_true", help="Remove only previously manifest-managed skills absent from this selection")
+    p.add_argument("--no-prune", dest="prune_managed", action="store_false", help="Disable pruning; this is the default")
+    p.add_argument("--write-agents-md", action="store_true", help="For repo target, update the managed block in AGENTS.md")
+    p.add_argument("--no-agents-md", dest="write_agents_md", action="store_false", help="Do not update AGENTS.md")
+    p.add_argument("--json", action="store_true", help="Print a pure JSON result suitable for scripts")
     p.set_defaults(func=command_install, prune_managed=False, write_agents_md=False)
 
-    p = sub.add_parser("select", help="Interactive installer")
+    p = sub.add_parser("select", help="Interactive installer using InquirerPy when available")
     p.set_defaults(func=command_select)
 
-    p = sub.add_parser("new", help="Create a new central-library skill")
-    p.add_argument("--scope", required=True, choices=["domain", "domains", "tool", "tools", "writing", "science", "research", "project", "projects", "core", "system", "reusable"])
-    p.add_argument("--domain")
-    p.add_argument("--category")
-    p.add_argument("--name", required=True)
-    p.add_argument("--description", required=True)
-    p.add_argument("--with-dirs", nargs="*", default=["references", "evals"], choices=["references", "scripts", "assets", "evals"])
-    p.add_argument("--requires-network", action="store_true")
-    p.add_argument("--dry-run", action="store_true")
-    p.add_argument("--force", action="store_true")
+    p = sub.add_parser("new", help="Create a new skill in this central library, not in an install target")
+    p.add_argument("--scope", required=True, choices=["domain", "domains", "tool", "tools", "writing", "science", "research", "project", "projects", "core", "system", "reusable"], help="Top-level taxonomy bucket or legacy alias")
+    p.add_argument("--domain", help="Domain name for domain/project skills, such as bayesian or cmr")
+    p.add_argument("--category", help="Subcategory/family for tool, writing, science, or core skills")
+    p.add_argument("--name", required=True, help="Skill directory/name, lowercase hyphenated")
+    p.add_argument("--description", required=True, help="Trigger-oriented frontmatter description")
+    p.add_argument("--with-dirs", nargs="*", default=["references", "evals"], choices=["references", "scripts", "assets", "evals"], help="Optional directories to create")
+    p.add_argument("--requires-network", action="store_true", help="Set requires_network: true in frontmatter")
+    p.add_argument("--dry-run", action="store_true", help="Print target path without writing")
+    p.add_argument("--force", action="store_true", help="Allow creating into an existing skill directory")
     p.set_defaults(func=command_new)
 
-    p = sub.add_parser("validate", help="Validate skills and profiles")
+    p = sub.add_parser("validate", help="Validate skill frontmatter, profiles, templates, and trigger eval scaffolds")
     p.set_defaults(func=command_validate)
 
-    p = sub.add_parser("audit", help="Audit skill budgets and high-risk metadata")
-    p.add_argument("--all", action="store_true")
-    p.add_argument("--profile")
-    p.add_argument("--domain")
-    p.add_argument("--skill", action="append", default=[])
-    p.add_argument("--target", choices=["repo", "user", "codex-home"], default="repo")
+    p = sub.add_parser("audit", help="Audit context-budget warnings and high-risk metadata")
+    p.add_argument("--all", action="store_true", help="Audit every profile and every domain")
+    p.add_argument("--profile", help="Audit one profile")
+    p.add_argument("--domain", help="Audit one complete domain")
+    p.add_argument("--skill", action="append", default=[], help="Audit explicit skill selectors; repeatable")
+    p.add_argument("--target", choices=["repo", "user", "codex-home"], default="repo", help="Budget context for warnings")
     p.add_argument("--run-agent-evals", action="store_true", help="Reserved; never enabled by default")
     p.set_defaults(func=command_audit)
 
-    p = sub.add_parser("doctor", help="Inspect install paths and legacy state")
-    p.add_argument("--project")
-    p.add_argument("--json", action="store_true")
+    p = sub.add_parser("doctor", help="Inspect repo/user/codex-home paths, manifests, legacy state, and recommended commands")
+    p.add_argument("--project", help="Project path; defaults to detected git root or current directory")
+    p.add_argument("--json", action="store_true", help="Print machine-readable JSON")
     p.set_defaults(func=command_doctor)
 
-    p = sub.add_parser("migrate-legacy", help="Reinstall managed .codex/skills into .agents/skills")
-    p.add_argument("--project")
-    p.add_argument("--mode", choices=["symlink", "copy"], default="symlink")
-    p.add_argument("--dry-run", action="store_true")
-    p.add_argument("--yes", action="store_true")
+    p = sub.add_parser("migrate-legacy", help="Reinstall managed legacy .codex/skills into repo .agents/skills")
+    p.add_argument("--project", help="Project containing legacy .codex/skills")
+    p.add_argument("--mode", choices=["symlink", "copy"], default="symlink", help="Install mode for the new .agents/skills target")
+    p.add_argument("--dry-run", action="store_true", help="Plan migration without writing")
+    p.add_argument("--yes", action="store_true", help="Reserved for explicit non-interactive confirmation")
     p.set_defaults(func=command_migrate_legacy)
 
     return parser

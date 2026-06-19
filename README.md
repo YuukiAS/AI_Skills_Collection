@@ -10,37 +10,60 @@ Default paths:
 
 Use the generated catalog first, then install a profile, a complete domain, or precise single skills.
 
+## One-Time CLI Setup
+
+Install the short command from this checkout:
+
+```bash
+python3 -m pip install --no-build-isolation -e /path/to/AI_Skills_Collection
+```
+
+Then use `ai-skills` from any repo:
+
+```bash
+ai-skills --help
+ai-skills doctor
+ai-skills select
+ai-skills list --domain bayesian
+```
+
+The long-form fallback remains available when the editable command is not installed:
+
+```bash
+python3 /path/to/AI_Skills_Collection/scripts/skills.py --help
+```
+
 ## Main Commands
 
 Browse:
 
 ```bash
-python3 scripts/skills.py list --domain bayesian
-python3 scripts/skills.py catalog --write
+ai-skills list --domain bayesian
+ai-skills catalog --write
 ```
 
 Interactive install:
 
 ```bash
-python3 /path/to/AI_Skills_Collection/scripts/skills.py select
+ai-skills select
 ```
 
 Install into the current repo:
 
 ```bash
-python3 /path/to/AI_Skills_Collection/scripts/skills.py install --target repo --domain bayesian --mode symlink --write-agents-md
+ai-skills install --target repo --domain bayesian --mode symlink --write-agents-md
 ```
 
 Install one precise skill:
 
 ```bash
-python3 /path/to/AI_Skills_Collection/scripts/skills.py install --target repo --skill domain/bayesian/pymc --mode symlink --write-agents-md
+ai-skills install --target repo --skill domain/bayesian/pymc --mode symlink --write-agents-md
 ```
 
 Install multiple precise skills:
 
 ```bash
-python3 scripts/skills.py install --target repo \
+ai-skills install --target repo \
   --skill domain/bayesian/pymc \
   --skill domain/bayesian/bayesian-ppl-diagnostics \
   --mode symlink --write-agents-md
@@ -49,13 +72,13 @@ python3 scripts/skills.py install --target repo \
 Bootstrap user-level core skills:
 
 ```bash
-python3 scripts/skills.py install --target user --profile codex-core-global --mode symlink
+ai-skills install --target user --profile codex-core-global --mode symlink
 ```
 
 Doctor:
 
 ```bash
-python3 scripts/skills.py doctor
+ai-skills doctor
 ```
 
 ## Installation Models
@@ -67,15 +90,29 @@ Complete domain installs are supported. If `audit` warns about total description
 Examples:
 
 ```bash
-python3 scripts/skills.py install --target repo --profile codex-bayesian-jsdm --mode symlink --write-agents-md
-python3 scripts/skills.py install --target repo --domain bayesian --mode symlink --write-agents-md
-python3 scripts/skills.py install --target user --profile codex-writing-style --mode symlink --dry-run
-python3 scripts/skills.py install --target codex-home --profile codex-core-global --mode symlink --dry-run
+ai-skills install --target repo --profile codex-bayesian-jsdm --mode symlink --write-agents-md
+ai-skills install --target repo --domain bayesian --mode symlink --write-agents-md
+ai-skills install --target user --profile codex-writing-style --mode symlink --dry-run
+ai-skills install --target codex-home --profile codex-core-global --mode symlink --dry-run
 ```
 
 `--target codex-home` is explicit, legacy, and advanced. The CLI prints detected `CODEX_HOME`, resolved codex home, target skills root, `config.toml` status, and writability before installing.
 
 ## Layout
+
+Root folders:
+
+- `skills/`: the central skill library. This is the main source of installable skills.
+- `profiles/`: curated skill sets for common global or project setups.
+- `bundles/`: legacy bundle definitions kept for compatibility with `scripts/install_bundle.py`; prefer profiles/domains for new installs.
+- `docs/`: user-facing and generated documentation. Keep it: it is the browseable catalog, domain pages, installation guide, migration guide, and authoring guide.
+- `scripts/`: CLI implementation and compatibility wrappers.
+- `shared/`: shared templates and reference packs used by skills.
+- `palette/`: shared visual palette data used by design/visualization skills.
+- `registry.json`: generated machine-readable registry.
+- `setup.py` and `ai_skills_cli/`: editable-install wrapper that provides the `ai-skills` command.
+
+Skill folders:
 
 - `skills/domains/`: complete domain-installable areas such as `bayesian`, `bioinformatics`, and medical domains.
 - `skills/tools/`: cross-project tool capabilities such as data science, frontend, documents, and visualization.
@@ -83,24 +120,18 @@ python3 scripts/skills.py install --target codex-home --profile codex-core-globa
 - `skills/science/`: research discovery, communication, and ideation workflows.
 - `skills/projects/`: project-specific skills.
 - `skills/core/`: skill-library maintenance, installer, and system skills.
-- `skills/archive/`: inactive or external plugin skills kept for reference.
+- `skills/archive/`: inactive, external, or misfit skills kept under version control for reference/migration. It is not gitignored; instead the registry excludes it by default unless `--include-archive` is used.
 - `skills/**/references/`: longer domain knowledge, dated source notes, checklists, formulas, and legacy long-form material.
-- `profiles/`: curated skill sets.
-- `scripts/skills.py`: unified CLI for list/catalog/install/select/new/validate/audit/registry/doctor/migrate-legacy.
-- `registry.json`: generated machine-readable registry.
-- `docs/SKILL_CATALOG.md`: generated catalog.
-- `docs/domains/`: generated domain pages.
-- `shared/templates/AGENTS.md.template`: managed routing block template.
 
 ## Validation
 
 Run before committing:
 
 ```bash
-python3 scripts/skills.py registry --write
-python3 scripts/skills.py validate
-python3 scripts/skills.py audit --all
-python3 scripts/skills.py catalog --write
+ai-skills registry --write
+ai-skills validate
+ai-skills audit --all
+ai-skills catalog --write
 ```
 
 ## Documentation

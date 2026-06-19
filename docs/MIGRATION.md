@@ -5,7 +5,7 @@ Older versions installed project skills under `<project>/.codex/skills/`. The re
 ## Inspect State
 
 ```bash
-python3 scripts/skills.py doctor --project /path/to/repo
+ai-skills doctor --project /path/to/repo
 ```
 
 Doctor reports repo root, repo skills root, user skills root, detected codex home, codex-home skills root, legacy `.codex/skills` state, manifest state, and recommended commands.
@@ -13,7 +13,7 @@ Doctor reports repo root, repo skills root, user skills root, detected codex hom
 ## Dry Run Migration
 
 ```bash
-python3 scripts/skills.py migrate-legacy --project /path/to/repo --dry-run
+ai-skills migrate-legacy --project /path/to/repo --dry-run
 ```
 
 The migration reads `<project>/.codex/skills/.ai-skills-collection-manifest.json`, reinstalls managed skills into `<project>/.agents/skills/`, and updates the managed AGENTS.md block.
@@ -21,7 +21,7 @@ The migration reads `<project>/.codex/skills/.ai-skills-collection-manifest.json
 ## Real Migration
 
 ```bash
-python3 scripts/skills.py migrate-legacy --project /path/to/repo --mode symlink --yes
+ai-skills migrate-legacy --project /path/to/repo --mode symlink --yes
 ```
 
 The old `.codex/skills` directory is not deleted. Keep it until the project works with `.agents/skills`.

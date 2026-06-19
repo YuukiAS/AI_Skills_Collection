@@ -1,6 +1,6 @@
 # Source Notes
 
-This skill synthesizes writing guidance from the deep research PDF in `reference/面向科研组会 PDF 的写作 skill 与工作流深度研究.pdf` and from these external sources cited there:
+This skill synthesizes writing guidance from an earlier local research note that has now been folded into the active writing skills. The original exploratory PDF is no longer kept as a repository dependency. The stable source anchors are:
 
 - Gopen and Swan, "The Science of Scientific Writing": information flow, old-to-new structure, and sentence emphasis.
 - Caltech Scientific Storytelling handout: scientific communication as known/unknown and problem/solution movement.

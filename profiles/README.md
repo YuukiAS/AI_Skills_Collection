@@ -9,19 +9,19 @@ Profiles are curated install sets. They are not domains.
 Install a profile:
 
 ```bash
-python3 scripts/skills.py install --target repo --profile codex-research-writing --mode symlink --write-agents-md
+ai-skills install --target repo --profile codex-research-writing --mode symlink --write-agents-md
 ```
 
 Install a complete domain:
 
 ```bash
-python3 scripts/skills.py install --target repo --domain bayesian --mode symlink --write-agents-md
+ai-skills install --target repo --domain bayesian --mode symlink --write-agents-md
 ```
 
 Install precise skills:
 
 ```bash
-python3 scripts/skills.py install --target repo --skill domain/bayesian/pymc --mode symlink --write-agents-md
+ai-skills install --target repo --skill domain/bayesian/pymc --mode symlink --write-agents-md
 ```
 
 ## Available Profiles

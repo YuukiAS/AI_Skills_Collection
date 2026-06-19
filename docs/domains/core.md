@@ -7,13 +7,13 @@ Active skills: 7
 Complete domain install:
 
 ```bash
-python3 scripts/skills.py install --target repo --domain core --mode symlink --write-agents-md
+ai-skills install --target repo --domain core --mode symlink --write-agents-md
 ```
 
 Install a few skills precisely:
 
 ```bash
-python3 scripts/skills.py install --target repo --skill core/codex-system/imagegen --skill core/codex-system/mcp-builder --skill core/codex-system/openai-docs --mode symlink --write-agents-md
+ai-skills install --target repo --skill core/codex-system/imagegen --skill core/codex-system/mcp-builder --skill core/codex-system/openai-docs --mode symlink --write-agents-md
 ```
 
 Complete domain installs are supported. If an audit reports high description length or many active skills, treat it as a context-budget warning, not an installation error.
@@ -32,7 +32,7 @@ Complete domain installs are supported. If an audit reports high description len
 - `plugin-creator` (`skills/core/codex-system/system-skills/plugin-creator`): Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, and baseline placeholders you can edit before publishing or testing.
 - `project-skill-installer` (`skills/core/codex-system/project-skill-installer`): Use when the user asks to install, update, or set up skills for the current project. Finds AI_Skills_Collection, runs project-local installation, then reads AGENTS.md.
 - `skill-creator` (`skills/core/codex-system/system-skills/skill-creator`): Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations.
-- `skill-installer` (`skills/core/codex-system/system-skills/skill-installer`): Install external Codex skills from curated lists or GitHub repo paths. Use for third-party skill downloads; for AI_Skills_Collection installs prefer scripts/skills.py repo/user targets and treat codex-home as explicit legacy compatibility.
+- `skill-installer` (`skills/core/codex-system/system-skills/skill-installer`): Install external Codex skills from curated lists or GitHub repo paths. Use for third-party skill downloads; for AI_Skills_Collection installs prefer ai-skills repo/user targets and treat codex-home as explicit legacy compatibility.
 
 ## Main References
 
