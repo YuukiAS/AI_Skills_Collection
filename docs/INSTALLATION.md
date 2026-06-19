@@ -21,6 +21,16 @@ Default target behavior:
 - `.codex/skills/` is not used by default. It is only used through explicit
   `--target codex-home` legacy compatibility.
 
+Read/write boundary:
+
+- `ai-skills install ...` is a deployment command. It reads the collection and
+  writes only the chosen target, unless the chosen target is this collection
+  repo itself.
+- The installer checks the collection git status before and after external
+  installs and fails if the source checkout changes unexpectedly.
+- `ai-skills new`, `ai-skills registry --write`, and `ai-skills catalog --write`
+  are authoring/maintenance commands and intentionally modify the collection.
+
 If the short command is not installed yet, the exact fallback is:
 
 ```bash

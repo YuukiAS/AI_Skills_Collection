@@ -7,6 +7,7 @@ import argparse
 import json
 import os
 import re
+import subprocess
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -52,6 +53,42 @@ class HelpFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescript
 
 def print_json(data: Any) -> None:
     print(json.dumps(data, ensure_ascii=False, indent=2))
+
+
+def path_within(path: Path, base: Path) -> bool:
+    try:
+        path.resolve().relative_to(base.resolve())
+    except ValueError:
+        return False
+    return True
+
+
+def git_status_snapshot(path: Path) -> str | None:
+    git_dir = path / ".git"
+    if not git_dir.exists():
+        return None
+    try:
+        return subprocess.check_output(
+            ["git", "-C", str(path), "status", "--porcelain=v1", "--untracked-files=all"],
+            text=True,
+            stderr=subprocess.DEVNULL,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return None
+
+
+def assert_collection_unchanged(before: str | None) -> None:
+    if before is None:
+        return
+    after = git_status_snapshot(ROOT)
+    if after is None or after == before:
+        return
+    raise SystemExit(
+        "ERROR: install unexpectedly modified the AI_Skills_Collection source checkout. "
+        "Deployment installs must be source-read-only; only authoring commands such as "
+        "`ai-skills new`, `ai-skills registry --write`, and `ai-skills catalog --write` "
+        "should change this repository. Inspect `git status --short` in the collection."
+    )
 
 
 def active_records_sorted(include_archive: bool = False) -> list[dict[str, Any]]:
@@ -397,6 +434,10 @@ def command_install(args: argparse.Namespace) -> int:
             for line in codex_home_report(skills_root):
                 print(line)
 
+    collection_status_before = None
+    if not path_within(skills_root, ROOT):
+        collection_status_before = git_status_snapshot(ROOT)
+
     manifest_path = skills_root / MANIFEST_NAME
     old_manifest = load_manifest(manifest_path)
     desired_dests = {str(r["flat_name"]) for r in records}
@@ -448,6 +489,8 @@ def command_install(args: argparse.Namespace) -> int:
     if not args.dry_run:
         skills_root.mkdir(parents=True, exist_ok=True)
         manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    assert_collection_unchanged(collection_status_before)
 
     if args.json:
         print_json({"dry_run": args.dry_run, "manifest": manifest, "removed": removed})

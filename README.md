@@ -12,6 +12,13 @@ If `--target` is omitted, `ai-skills install` defaults to `--target repo` and
 installs into the detected current repo's `.agents/skills/`. New installs do
 not write `.codex/skills/` unless `--target codex-home` is explicitly selected.
 
+Deployment installs are source-read-only: `ai-skills install ...` reads this
+collection and writes only the selected target. It should not modify
+`AI_Skills_Collection` itself unless you deliberately target this repository.
+Commands that intentionally edit the collection are authoring/maintenance
+commands such as `ai-skills new`, `ai-skills registry --write`, and
+`ai-skills catalog --write`.
+
 Use the generated catalog first, then install a profile, a complete domain, or precise single skills.
 
 ## One-Time CLI Setup
