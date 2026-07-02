@@ -1,6 +1,6 @@
 # documents-media
 
-Active skills: 9
+Active skills: 10
 
 ## Install
 
@@ -34,8 +34,12 @@ Complete domain installs are supported. If an audit reports high description len
 - `pdf` (`skills/tools/documents-media/pdf`): Use this skill whenever the user wants to do anything with PDF files. If the user mentions a .pdf file or asks to produce one, use this skill.
 - `perplexity-search` (`skills/tools/documents-media/perplexity-search`): Perform AI-powered web searches with real-time information using Perplexity models via LiteLLM and OpenRouter.
 - `pptx` (`skills/tools/documents-media/pptx`): Use this skill any time a .pptx file is involved in any way — as input, output, or both. Trigger whenever the user mentions \"deck,\" \"slides,\" \"presentation,\" or references a .pptx filename, regardless of what they plan to do with the content afterward.
+- `render-chinese-math-pdf` (`skills/tools/documents-media/render-chinese-math-pdf`): Render and validate Chinese or mixed Chinese/English mathematical Markdown/LaTeX as PDF. Use for CJK text, Unicode math, equations, tables, Pandoc/XeLaTeX/LuaLaTeX, TeX font/cache failures, citation cleanup, or readable PDF QA.
 - `xlsx` (`skills/tools/documents-media/xlsx`): Use this skill any time a spreadsheet file is the primary input or output. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \"the xlsx in my downloads\") — and wants something done to it or produced from it.
 
 ## Main References
 
-- No domain references discovered yet. Add `references/source-notes.md`, checklists, or overview notes when the skill carries long-lived domain knowledge.
+- `skills/tools/documents-media/render-chinese-math-pdf/references/checklists.md`
+- `skills/tools/documents-media/render-chinese-math-pdf/references/citation-cleanup.md`
+- `skills/tools/documents-media/render-chinese-math-pdf/references/portable-rendering.md`
+- `skills/tools/documents-media/render-chinese-math-pdf/references/source-notes.md`

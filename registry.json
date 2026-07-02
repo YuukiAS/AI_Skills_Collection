@@ -1,9 +1,9 @@
 {
   "version": "3.0.0",
-  "generated_at": "2026-06-19T14:59:58+00:00",
+  "generated_at": "2026-07-02T15:15:28+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
-  "skill_count": 132,
+  "skill_count": 133,
   "selectors": {
     "domains": [
       "ai-ml",
@@ -3298,6 +3298,38 @@
         "tool/documents-media/pptx",
         "tools-documents-media-pptx",
         "tools/documents-media/pptx"
+      ]
+    },
+    {
+      "id": "tool.documents-media.render-chinese-math-pdf",
+      "name": "render-chinese-math-pdf",
+      "path": "skills/tools/documents-media/render-chinese-math-pdf",
+      "flat_name": "tools-documents-media-render-chinese-math-pdf",
+      "scope": "tool",
+      "domain": "documents-media",
+      "category": "documents-media",
+      "subcategory": "documents-media",
+      "slug": "render-chinese-math-pdf",
+      "install_selector": "tool/documents-media/render-chinese-math-pdf",
+      "description": "Render and validate Chinese or mixed Chinese/English mathematical Markdown/LaTeX as PDF. Use for CJK text, Unicode math, equations, tables, Pandoc/XeLaTeX/LuaLaTeX, TeX font/cache failures, citation cleanup, or readable PDF QA.",
+      "status": "active",
+      "provenance": "user-authored",
+      "trusted": false,
+      "requires_network": false,
+      "writes_files": true,
+      "executes_code": true,
+      "secrets_needed": [],
+      "last_reviewed": "2026-07-02",
+      "profile_tags": [],
+      "recommended_scope": "global",
+      "selectors": [
+        "render-chinese-math-pdf",
+        "reusable/documents-media/render-chinese-math-pdf",
+        "skills/reusable/documents-media/render-chinese-math-pdf",
+        "skills/tools/documents-media/render-chinese-math-pdf",
+        "tool/documents-media/render-chinese-math-pdf",
+        "tools-documents-media-render-chinese-math-pdf",
+        "tools/documents-media/render-chinese-math-pdf"
       ]
     },
     {
