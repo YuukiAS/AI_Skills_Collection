@@ -1,6 +1,6 @@
 ---
 name: medical-imaging-deep-learning
-description: Aligns with CardiacNexus MONAI-first refactor and high-risk registration/strain awareness.
+description: Use for medical-imaging deep learning tasks involving segmentation, MONAI/nnU-Net baselines, registration or warping, temporal/video imaging, missing-modality fusion, proposal/cascade/refinement models, external method adaptation, and validation evidence gates.
 status: active
 provenance: unknown
 trusted: false
@@ -8,24 +8,25 @@ requires_network: true
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-02
 profile_tags:
 recommended_scope: project
 license: Apache-2.0
 metadata:
-  skill-author: CardiacNexus maintainers
+  skill-author: AI Skills Collection maintainers
 allowed-tools:
 ---
 # Medical imaging deep learning
 
 ## Overview
 
-This skill encodes a **project-consistent stack** for CardiacNexus-style work:
+This skill encodes a general **medical-imaging deep learning evidence standard**:
 
 - **Custom research pipelines / transforms / deployment-oriented code paths → MONAI** (PyTorch-first infrastructure).
 - **New segmentation task → nnU-Net as the default strong benchmark** before claiming gains from custom architectures.
 - **Foundation / promptable segmentation → MedSAM** when the problem matches prompt-based or zero-shot adaptation—**not** as a substitute for validation.
 - **Learning-based deformable registration → VoxelMorph** as the primary **deep** anchor, **always** paired with **classical** registration (ANTs/SyN, **elastix**, etc.) for evidence—not optional.
+- **Mechanism claims → explicit completion gates** before reporting a model as done.
 
 **High-visibility** here means **widely adopted benchmarks and seminal baselines** (qualitative); do **not** invent citation counts.
 
@@ -44,12 +45,37 @@ Avoid using this skill as a generic “list of cool models” checklist—**bind
 
 ## Core Tooling / Preferred Stack
 
-| Tool | Role | CardiacNexus default stance |
+| Tool | Role | Default stance |
 |------|------|-----------------------------|
 | **MONAI** | Training/eval **infrastructure**: transforms, datasets, networks, bundles, deployment hooks | **First choice** for new code in a MONAI-first refactor |
 | **nnU-Net** | Self-configuring **strong segmentation baseline** | **Run first** on a new segmentation task; **benchmark** before custom nets |
 | **MedSAM** | **Foundation** / promptable segmentation | **After** positioning against classical CNN baselines + nnU-Net-class strong baselines; domain validation required |
 | **VoxelMorph** | **Learning-based** pairwise registration | **Never** the only registration; **pair** with classical ANTs/SyN or elastix-style baselines |
+
+## Mechanism completion gates
+
+Use these statuses in model reports:
+
+- `TRUE_DONE`: the requested mechanism is implemented, trained or inferred as authorized, evaluated on the target split, and supported by checkpoint, prediction, metric, command/log, and same-split baseline evidence.
+- `PARTIAL_MECHANISM_INCOMPLETE`: code or experiments exist, but a core mechanism is missing, proxy-only, or below the required gate.
+- `PREFLIGHT_SMOKE_ONLY`: only import, shape, one-case, metadata, dryrun, readiness, or resource checks were completed.
+- `NOT_DONE`: no implementation, no run, failed run, stale evidence, or missing evidence.
+
+Do not promote a task above the weakest required evidence stage. If training/evaluation was not run, the result is not `TRUE_DONE`.
+
+## Forbidden shallow substitutions
+
+Never report these as completed mechanisms:
+
+- Smoke, preflight, dryrun, import, shape, metadata, or one-case checks as model completion.
+- A one-layer stem, shallow head, or 1x1 output head as a U-Net-like encoder-decoder.
+- Translation, center crop, metadata copying, or resampling as completed registration or warping.
+- A frame0, single-frame, or reference-only anatomy proxy as a temporal/video method.
+- Logit mixing as a proposal, refinement, or cascade model.
+- Hard-negative mining preflight as hard-negative training.
+- Search, license notes, clone, import, or tensor-shape smoke as external-method integration.
+- Local proxy metrics as challenge-grade or deployment-grade evidence without the target evaluator contract.
+- Missing-modality samples as target hard negatives when the target label depends on that missing modality.
 
 ### Canonical architecture baselines (not “instead of nnU-Net”)
 
@@ -78,11 +104,70 @@ Use as **evaluation anchors** and **literature positioning**, not as “mandator
    - **MONAI** custom method **only with** documented incremental value.  
 4. If claiming **transformer / foundation** value: explicitly relate to **UNETR / Swin UNETR / MedSAM** lineages and justify **why** extra complexity is needed.
 
+### Segmentation architecture gate
+
+When a task asks for **U-Net-like**, **encoder-decoder**, **multiscale**, **cascade**, **proposal**, or **refinement** behavior, the result must list:
+
+- key classes/functions changed;
+- feature scales and decoder/skip/refinement paths;
+- input/output tensor shapes;
+- checkpoint, prediction, metric, and same-split baseline paths;
+- ablation or comparison showing the mechanism changed behavior.
+
+If these are absent, mark the work `PARTIAL_MECHANISM_INCOMPLETE` or `PREFLIGHT_SMOKE_ONLY`.
+
 ### Registration / template building
 
 - **VoxelMorph** (or similar) **must** be reported against **ANTs/SyN** and/or **elastix**-class classical baselines on the **same** preprocessed images.  
 - **Template building** is a **separate validated stage**: inverse consistency, Jacobian plausibility, and **downstream** checks (warped-mask overlap, strain biomarker bias if applicable).  
-- **Strain / deformation-dependent phenotypes** (CardiacNexus): treat **registration** as **high-risk**—do not optimize **Dice alone**.
+- Treat **deformation-dependent phenotypes** as **high-risk**—do not optimize **Dice alone**.
+
+### Registration / warping gate
+
+Every registration claim must state:
+
+- transform family: rigid, affine, deformable, SyN, B-spline, TPS, optical flow, feature-level warp, or translation baseline;
+- moving and fixed images/frames, image space, interpolation, and label interpolation;
+- plausibility checks such as inverse/roundtrip consistency, Jacobian/folding, landmark error, warped-mask consistency, or visual overlays;
+- downstream task metric on the same split.
+
+Translation-only work is a **translation baseline**, not registration completion.
+
+### Temporal / video imaging gate
+
+For cine, video, 4D, longitudinal, or time-series imaging, report:
+
+- reference frame or time point and why it was chosen;
+- how non-reference frames are used;
+- motion estimation, warping, temporal aggregation, or temporal consistency;
+- whether the model has a head for the target clinical/anatomical task, not just an anatomy proxy;
+- metrics against a single-frame/reference baseline.
+
+Single-frame or reference-only evidence is a baseline/proxy, not temporal-method completion.
+
+### Missing-modality gate
+
+For multimodal models, report:
+
+- modality availability per split/subgroup;
+- availability mask, routing, imputation, or dropout behavior;
+- loss masks for targets that depend on a modality;
+- target-available subgroup metrics and target-missing subgroup caveats.
+
+If a target label depends on a modality, samples missing that modality must not be treated as default hard negatives for that target.
+
+### External method adapter gate
+
+Separate stages clearly:
+
+1. resource search and paper/code triage;
+2. license/version/dependency check;
+3. clone/import/shape smoke;
+4. one-case adapter with input/output contract;
+5. fold0 or full validation metric on the same evaluator;
+6. rollback criteria and cleanup.
+
+Only stage 5+ can be called an integrated method.
 
 ### DL-side QC
 
@@ -107,6 +192,17 @@ Use as **evaluation anchors** and **literature positioning**, not as “mandator
 5. **Metrics:** **Dice alone is insufficient** for high-stakes segmentation; add **surface / Hausdorff-class** metrics where applicable, **calibration** if probabilistic, **OOD/generalization** and **failure analysis** for real deployment narratives.  
 6. **Registration:** **VoxelMorph** does **not** bypass **classical** registration; include **Jacobian / folding / topology** and **landmark or downstream** checks when available.
 
+## Evidence standard for model changes
+
+Every model-change result must include:
+
+- command/log, exit status, job ID if applicable, and elapsed time;
+- checkpoint path, prediction path, metric path, and config/cache isolation;
+- same-split baseline and target evaluator contract;
+- failure analysis with surface/HD, component, calibration, subgroup, or remote false-positive metrics when they matter.
+
+Dice alone is insufficient when boundary accuracy, topology, lesion/component burden, calibration, or false positives drive the task.
+
 ## Common Pitfalls / Validation Notes
 
 - **Leakage** via slice shuffling, repeated patients, or preprocessing computed on global stats.  
@@ -118,3 +214,5 @@ Use as **evaluation anchors** and **literature positioning**, not as “mandator
 ## References
 
 Canonical papers and benchmark anchors are maintained in [references/reference.md](references/reference.md).
+
+Read [references/reference.md](references/reference.md) for detailed completion checklists and generic examples of shallow substitutions.

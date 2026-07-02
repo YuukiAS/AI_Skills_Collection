@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "generated_at": "2026-07-02T15:15:28+00:00",
+  "generated_at": "2026-07-02T15:51:38+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
   "skill_count": 133,
@@ -1268,7 +1268,7 @@
       "subcategory": "",
       "slug": "medical-imaging-deep-learning",
       "install_selector": "domain/medical-imaging/medical-imaging-deep-learning",
-      "description": "Aligns with CardiacNexus MONAI-first refactor and high-risk registration/strain awareness.",
+      "description": "Use for medical-imaging deep learning tasks involving segmentation, MONAI/nnU-Net baselines, registration or warping, temporal/video imaging, missing-modality fusion, proposal/cascade/refinement models, external method adaptation, and validation evidence gates.",
       "status": "active",
       "provenance": "unknown",
       "trusted": false,
@@ -1276,7 +1276,7 @@
       "writes_files": true,
       "executes_code": false,
       "secrets_needed": [],
-      "last_reviewed": "2026-05-14",
+      "last_reviewed": "2026-07-02",
       "profile_tags": [],
       "recommended_scope": "project",
       "selectors": [
