@@ -113,6 +113,8 @@ ai-skills install --target user --profile codex-workflow-core --mode symlink
 ai-skills install --target user --profile codex-writing-style --mode symlink
 ```
 
+`codex-writing-style` also installs `render-chinese-math-pdf`, because Chinese/math PDF rendering is a global writing/document workflow rather than a project-local domain skill.
+
 Explicit legacy codex-home install:
 
 ```bash
