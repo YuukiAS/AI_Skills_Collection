@@ -31,3 +31,11 @@
 - Can old downstream notebooks still find the file?
 - Can aggregation detect incomplete shards?
 - Does documentation still match the code?
+
+## Final acceptance questions
+
+- Is there an explicit output contract diff?
+- Does a sample output contain all required columns, especially `eid` for tabular outputs?
+- Are units and missing-value behavior documented and validated?
+- Does aggregation handle duplicate `eid`, empty shards, dtype drift, and partial outputs predictably?
+- If only smoke/schema validation ran, is the status reported as `partial_complete` with residual risk?

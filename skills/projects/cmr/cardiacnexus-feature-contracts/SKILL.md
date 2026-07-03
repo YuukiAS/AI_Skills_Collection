@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-03
 profile_tags:
 recommended_scope: project
 metadata:
@@ -17,6 +17,10 @@ metadata:
 # CardiacNexus feature contracts
 
 Use this skill whenever a change can alter the shape, meaning, location, or naming of phenotype outputs.
+
+## Workflow inheritance
+
+For complex tasks, first apply the global `codex-workflow-protocol` skill. This skill only adds project-specific knowledge, gates, and validation requirements. It must not weaken the global completion, escalation, or verification rules.
 
 ## Use this skill when
 
@@ -49,7 +53,20 @@ Use this skill whenever a change can alter the shape, meaning, location, or nami
    - empty files
    - incompatible partial outputs
 5. If documentation exists for the phenotype, update it or at minimum note the doc debt explicitly.
-6. Add at least a smoke or schema test for the changed output.
+6. Treat smoke or schema tests as minimum intermediate checks only.
+
+## Final acceptance
+
+For output contract changes, final acceptance must include:
+
+- output contract diff;
+- sample output validation;
+- required columns, including `eid` for tabular outputs;
+- units or tightly coupled metadata;
+- missing-value behavior;
+- aggregation behavior, including duplicate `eid`, empty shard, dtype drift, and incompatible partial-output handling.
+
+If only a smoke or schema test was completed, report `partial_complete` and state the residual downstream risk.
 
 ## Hard constraints
 
@@ -61,6 +78,7 @@ Use this skill whenever a change can alter the shape, meaning, location, or nami
 
 ## Cross-links
 
+- For general cardiac MRI / CMR phenotype knowledge, also use `cardiac-mri`.
 - For core pipeline changes, also use `cardiacnexus-pipeline-refactor`.
 - For docs updates in `docs/`, also use `cardiacnexus-docs-markdoc`.
 

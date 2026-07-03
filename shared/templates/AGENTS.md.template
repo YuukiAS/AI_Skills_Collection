@@ -16,6 +16,10 @@ Do not read archived skills.
 
 {project_commands}
 
+## Workflow Protocol
+
+For complex tasks, use the installed global workflow skill when available. Complex tasks must start with source-of-truth discovery, proceed through exploration / implementation / verification / report phases, and end with concrete gate or verification evidence. Smoke tests, dryruns, preflights, successful compilation, file existence, job submission, or HTTP 200 responses are intermediate evidence only, not final completion. If a simple method fails, escalate to the next stronger valid method or report a precise blocked status.
+
 ## Skill Maintenance
 
 - To install or update this project's skills, run the central project installer.

@@ -1,9 +1,9 @@
 {
   "version": "3.0.0",
-  "generated_at": "2026-07-02T15:51:38+00:00",
+  "generated_at": "2026-07-03T02:54:22+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
-  "skill_count": 133,
+  "skill_count": 135,
   "selectors": {
     "domains": [
       "ai-ml",
@@ -57,6 +57,37 @@
     ]
   },
   "skills": [
+    {
+      "id": "core.core.codex-workflow-protocol",
+      "name": "codex-workflow-protocol",
+      "path": "skills/core/codex-system/codex-workflow-protocol",
+      "flat_name": "core-codex-system-codex-workflow-protocol",
+      "scope": "core",
+      "domain": "core",
+      "category": "codex-system",
+      "subcategory": "codex-system",
+      "slug": "codex-workflow-protocol",
+      "install_selector": "core/codex-system/codex-workflow-protocol",
+      "description": "Use for complex Codex tasks that require source-of-truth discovery, phased execution, gate-driven completion, verification, failure escalation, commit/release checks, live-state supervision, or honest final status reporting.",
+      "status": "active",
+      "provenance": "user-authored",
+      "trusted": false,
+      "requires_network": false,
+      "writes_files": true,
+      "executes_code": false,
+      "secrets_needed": [],
+      "last_reviewed": "2026-07-03",
+      "profile_tags": [],
+      "recommended_scope": "global",
+      "selectors": [
+        "codex-workflow-protocol",
+        "core-codex-system-codex-workflow-protocol",
+        "core/codex-system/codex-workflow-protocol",
+        "skills/core/codex-system/codex-workflow-protocol",
+        "skills/system/codex-system/codex-workflow-protocol",
+        "system/codex-system/codex-workflow-protocol"
+      ]
+    },
     {
       "id": "core.core.imagegen",
       "name": "imagegen",
@@ -391,7 +422,7 @@
       "writes_files": true,
       "executes_code": false,
       "secrets_needed": [],
-      "last_reviewed": "2026-06-19",
+      "last_reviewed": "2026-07-03",
       "profile_tags": [],
       "recommended_scope": "project",
       "selectors": [
@@ -1227,6 +1258,37 @@
       ]
     },
     {
+      "id": "domain.medical-imaging.cardiac-mri",
+      "name": "cardiac-mri",
+      "path": "skills/domains/medical-imaging/cardiac-mri",
+      "flat_name": "domains-medical-imaging-cardiac-mri",
+      "scope": "domain",
+      "domain": "medical-imaging",
+      "category": "domain/medical-imaging",
+      "subcategory": "",
+      "slug": "cardiac-mri",
+      "install_selector": "domain/medical-imaging/cardiac-mri",
+      "description": "Use for cardiac MRI / CMR domain knowledge, cine SAX/LAX, ED/ES timing, LV/RV function, myocardial strain, tagged MRI, feature tracking, and cardiac phenotype validation independent of any single project.",
+      "status": "active",
+      "provenance": "user-authored",
+      "trusted": false,
+      "requires_network": true,
+      "writes_files": true,
+      "executes_code": false,
+      "secrets_needed": [],
+      "last_reviewed": "2026-07-03",
+      "profile_tags": [],
+      "recommended_scope": "project",
+      "selectors": [
+        "cardiac-mri",
+        "domain/medical-imaging/cardiac-mri",
+        "domains-medical-imaging-cardiac-mri",
+        "domains/medical-imaging/cardiac-mri",
+        "skills/domain/medical-imaging/cardiac-mri",
+        "skills/domains/medical-imaging/cardiac-mri"
+      ]
+    },
+    {
       "id": "domain.medical-imaging.medical-imaging-classical-features",
       "name": "medical-imaging-classical-features",
       "path": "skills/domains/medical-imaging/medical-imaging-classical-features",
@@ -1237,7 +1299,7 @@
       "subcategory": "",
       "slug": "medical-imaging-classical-features",
       "install_selector": "domain/medical-imaging/medical-imaging-classical-features",
-      "description": "Use when enforcing reproducible preprocessing, registration baselines, radiomics protocols, or DICOM SEG/SR provenance in CardiacNexus.",
+      "description": "Use when enforcing reproducible medical-imaging preprocessing, physical-space geometry, classical registration baselines, radiomics protocols, or DICOM SEG/SR provenance.",
       "status": "active",
       "provenance": "unknown",
       "trusted": false,
@@ -1245,7 +1307,7 @@
       "writes_files": true,
       "executes_code": false,
       "secrets_needed": [],
-      "last_reviewed": "2026-05-14",
+      "last_reviewed": "2026-07-03",
       "profile_tags": [],
       "recommended_scope": "project",
       "selectors": [
@@ -1276,7 +1338,7 @@
       "writes_files": true,
       "executes_code": false,
       "secrets_needed": [],
-      "last_reviewed": "2026-07-02",
+      "last_reviewed": "2026-07-03",
       "profile_tags": [],
       "recommended_scope": "project",
       "selectors": [
@@ -1679,7 +1741,7 @@
       "writes_files": true,
       "executes_code": false,
       "secrets_needed": [],
-      "last_reviewed": "2026-05-14",
+      "last_reviewed": "2026-07-03",
       "profile_tags": [],
       "recommended_scope": "project",
       "selectors": [
@@ -1710,7 +1772,7 @@
       "writes_files": true,
       "executes_code": false,
       "secrets_needed": [],
-      "last_reviewed": "2026-05-14",
+      "last_reviewed": "2026-07-03",
       "profile_tags": [],
       "recommended_scope": "project",
       "selectors": [
@@ -1741,7 +1803,7 @@
       "writes_files": true,
       "executes_code": false,
       "secrets_needed": [],
-      "last_reviewed": "2026-05-14",
+      "last_reviewed": "2026-07-03",
       "profile_tags": [],
       "recommended_scope": "project",
       "selectors": [
@@ -1772,7 +1834,7 @@
       "writes_files": true,
       "executes_code": false,
       "secrets_needed": [],
-      "last_reviewed": "2026-05-14",
+      "last_reviewed": "2026-07-03",
       "profile_tags": [],
       "recommended_scope": "project",
       "selectors": [

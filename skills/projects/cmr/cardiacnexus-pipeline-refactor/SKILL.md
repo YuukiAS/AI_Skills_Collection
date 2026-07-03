@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-03
 profile_tags:
 recommended_scope: project
 metadata:
@@ -17,6 +17,10 @@ metadata:
 # CardiacNexus pipeline refactor
 
 Use this skill for repository-specific refactors. This skill is narrower and more actionable than the generic imaging skills: it assumes the current CardiacNexus layout, legacy constraints, and the roadmap in `TODO.md`.
+
+## Workflow inheritance
+
+For complex tasks, first apply the global `codex-workflow-protocol` skill. This skill only adds project-specific knowledge, gates, and validation requirements. It must not weaken the global completion, escalation, or verification rules.
 
 ## Use this skill when
 
@@ -49,6 +53,10 @@ Use this skill for repository-specific refactors. This skill is narrower and mor
    - reusable services in `src/`
 6. If the change touches phenotype outputs, also use the `cardiacnexus-feature-contracts` skill.
 7. If the change touches strain or deformable registration, also use the `cardiacnexus-strain-registration` skill.
+
+## Final acceptance
+
+Refactor completion cannot rest on import, compile, or smoke checks alone. If behavior changes, validate the entrypoint, expected output layout, backward compatibility, and every touched downstream contract. If medical imaging method choice is part of the change, use `medical-imaging-deep-learning` or `medical-imaging-classical-features` for the domain method evidence instead of restating it here.
 
 ## Hard constraints
 

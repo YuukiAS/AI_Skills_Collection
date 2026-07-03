@@ -27,6 +27,7 @@ ai-skills install --target repo --skill domain/bayesian/pymc --mode symlink --wr
 ## Available Profiles
 
 - `codex-core-global`: tiny user-level bootstrap profile.
+- `codex-workflow-core`: global workflow protocol, source-of-truth discovery, gate-driven completion, verification, escalation, live-state supervision, and writing fidelity.
 - `codex-webdev`: React, Next.js, Tailwind, Figma handoff, browser testing, and visual QA.
 - `codex-research-writing`: manuscripts, literature review, citations, PDFs, figures, slides, and peer review.
 - `codex-writing-style`: writing fidelity guardrail, English scientific prose, and Chinese prose polishing.

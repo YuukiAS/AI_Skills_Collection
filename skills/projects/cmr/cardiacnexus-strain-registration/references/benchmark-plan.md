@@ -34,4 +34,4 @@ Keep the old backend available until the new backend:
 1. matches or improves phenotype stability
 2. does not introduce obvious geometric artifacts
 3. preserves output contracts
-4. has at least smoke-level automated coverage
+4. has automated coverage plus phenotype, geometry, and temporal validation appropriate to the changed backend

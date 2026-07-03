@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-03
 profile_tags:
 recommended_scope: project
 metadata:
@@ -17,6 +17,10 @@ metadata:
 # CardiacNexus docs Markdoc site
 
 This skill is for the repository's documentation website, not for generic markdown writing.
+
+## Workflow inheritance
+
+For complex tasks, first apply the global `codex-workflow-protocol` skill. This skill only adds project-specific knowledge, gates, and validation requirements. It must not weaken the global completion, escalation, or verification rules.
 
 ## Use this skill when
 
@@ -45,6 +49,10 @@ This skill is for the repository's documentation website, not for generic markdo
 5. Keep the site compatible with static export.
 6. If changing deployment assumptions, reason through `basePath`, `assetPrefix`, internal links, and image paths together.
 
+## Final acceptance
+
+Build success, page existence, and HTTP 200 responses are intermediate checks. Final docs completion must validate the source page, navigation coherence, render/build output, figure provenance, math/citation rendering when relevant, and production/export route behavior.
+
 ## Hard constraints
 
 - Do not preserve unrelated template pages just because they render.
@@ -58,6 +66,11 @@ This skill is for the repository's documentation website, not for generic markdo
 - Keep units and phenotype definitions consistent with code.
 - Note validation caveats and known limitations where appropriate.
 - Use Markdoc callouts, figures, math, and future tag badges in a way that is reusable across pages.
+
+## Cross-links
+
+- For writing fidelity, protected spans, and source-faithful editing, use `writing-fidelity`.
+- For general cardiac MRI / CMR phenotype knowledge, also use `cardiac-mri`.
 
 ## References
 

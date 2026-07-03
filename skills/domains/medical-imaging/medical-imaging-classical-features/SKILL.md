@@ -1,6 +1,6 @@
 ---
 name: medical-imaging-classical-features
-description: Use when enforcing reproducible preprocessing, registration baselines, radiomics protocols, or DICOM SEG/SR provenance in CardiacNexus.
+description: Use when enforcing reproducible medical-imaging preprocessing, physical-space geometry, classical registration baselines, radiomics protocols, or DICOM SEG/SR provenance.
 status: active
 provenance: unknown
 trusted: false
@@ -8,7 +8,7 @@ requires_network: true
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-03
 profile_tags:
 recommended_scope: project
 license: Apache-2.0
@@ -30,6 +30,10 @@ This skill is **not** a “legacy methods collection.” It defines a **classica
 **ANTsPy** is **selective**: use for **demanding registration, template construction, or biologically constrained normalization**—not “default every task.”
 
 Canonical anchors: [references/reference.md](references/reference.md).
+
+## Workflow inheritance
+
+For complex tasks, first apply the global `codex-workflow-protocol` skill. This skill only adds domain-specific knowledge, gates, and validation requirements. It must not weaken the global completion, escalation, or verification rules.
 
 ## When to Use This Skill
 

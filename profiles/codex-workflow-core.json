@@ -1,0 +1,13 @@
+{
+  "name": "codex-workflow-core",
+  "description": "Global workflow protocol for complex Codex tasks: source-of-truth discovery, phased execution, gate-driven completion, verification, escalation, live-state supervision, and honest final status.",
+  "max_active_skills": 6,
+  "skills": [
+    "skills/core/codex-system/codex-workflow-protocol",
+    "skills/writing/core/writing-fidelity"
+  ],
+  "secondary_skills": [
+    "skills/writing/core/scientific-prose",
+    "skills/writing/core/chinese-prose"
+  ]
+}

@@ -1,6 +1,6 @@
 # core
 
-Active skills: 7
+Active skills: 8
 
 ## Install
 
@@ -13,7 +13,7 @@ ai-skills install --target repo --domain core --mode symlink --write-agents-md
 Install a few skills precisely:
 
 ```bash
-ai-skills install --target repo --skill core/codex-system/imagegen --skill core/codex-system/mcp-builder --skill core/codex-system/openai-docs --mode symlink --write-agents-md
+ai-skills install --target repo --skill core/codex-system/codex-workflow-protocol --skill core/codex-system/imagegen --skill core/codex-system/mcp-builder --mode symlink --write-agents-md
 ```
 
 Complete domain installs are supported. If an audit reports high description length or many active skills, treat it as a context-budget warning, not an installation error.
@@ -26,6 +26,7 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Skills
 
+- `codex-workflow-protocol` (`skills/core/codex-system/codex-workflow-protocol`): Use for complex Codex tasks that require source-of-truth discovery, phased execution, gate-driven completion, verification, failure escalation, commit/release checks, live-state supervision, or honest final status reporting.
 - `imagegen` (`skills/core/codex-system/system-skills/imagegen`): Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts.
 - `mcp-builder` (`skills/core/codex-system/mcp-builder`): Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).
 - `openai-docs` (`skills/core/codex-system/system-skills/openai-docs`): Use for openai docs workflows when the task directly names this tool or domain. Prefer narrower project skills or umbrella retrieval skills when the task is only a lookup.
@@ -36,6 +37,10 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Main References
 
+- `skills/core/codex-system/codex-workflow-protocol/references/escalation-rules.md`
+- `skills/core/codex-system/codex-workflow-protocol/references/live-state-delegation.md`
+- `skills/core/codex-system/codex-workflow-protocol/references/task-template.md`
+- `skills/core/codex-system/codex-workflow-protocol/references/verification-matrix.md`
 - `skills/core/codex-system/system-skills/imagegen/references/cli.md`
 - `skills/core/codex-system/system-skills/imagegen/references/codex-network.md`
 - `skills/core/codex-system/system-skills/imagegen/references/image-api.md`

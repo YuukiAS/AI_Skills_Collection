@@ -8,7 +8,7 @@ requires_network: true
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-07-02
+last_reviewed: 2026-07-03
 profile_tags:
 recommended_scope: project
 license: Apache-2.0
@@ -31,6 +31,10 @@ This skill encodes a general **medical-imaging deep learning evidence standard**
 **High-visibility** here means **widely adopted benchmarks and seminal baselines** (qualitative); do **not** invent citation counts.
 
 Full anchors: [references/reference.md](references/reference.md).
+
+## Workflow inheritance
+
+For complex tasks, first apply the global `codex-workflow-protocol` skill. This skill only adds domain-specific knowledge, gates, and validation requirements. It must not weaken the global completion, escalation, or verification rules.
 
 ## When to Use This Skill
 

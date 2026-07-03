@@ -109,6 +109,7 @@ Bootstrap user-level core skills:
 
 ```bash
 ai-skills install --target user --profile codex-core-global --mode symlink
+ai-skills install --target user --profile codex-workflow-core --mode symlink
 ai-skills install --target user --profile codex-writing-style --mode symlink
 ```
 
@@ -138,6 +139,7 @@ Examples:
 ```bash
 ai-skills install --target repo --profile codex-bayesian-jsdm --mode symlink --write-agents-md
 ai-skills install --target repo --domain bayesian --mode symlink --write-agents-md
+ai-skills install --target user --profile codex-workflow-core --mode symlink --dry-run
 ai-skills install --target user --profile codex-writing-style --mode symlink --dry-run
 ai-skills install --target codex-home --profile codex-core-global --mode symlink --dry-run
 ```

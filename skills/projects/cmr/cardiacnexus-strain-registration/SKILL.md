@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-03
 profile_tags:
 recommended_scope: project
 metadata:
@@ -17,6 +17,10 @@ metadata:
 # CardiacNexus strain and registration
 
 This skill exists because strain and deformable registration are the highest-risk parts of the pipeline. A successful refactor here is not just a cleaner API; it must preserve phenotype validity.
+
+## Workflow inheritance
+
+For complex tasks, first apply the global `codex-workflow-protocol` skill. This skill only adds project-specific knowledge, gates, and validation requirements. It must not weaken the global completion, escalation, or verification rules.
 
 ## Use this skill when
 
@@ -42,6 +46,12 @@ This skill exists because strain and deformable registration are the highest-ris
 4. Keep MIRTK as a fallback until benchmarks are stable.
 5. Compare old and new backends on the same cases before changing defaults.
 
+## Failure escalation
+
+If translation, rigid, simple registration, or a single visual overlay performs poorly, do not treat the poor result as completion. Escalate to the next stronger valid method, such as affine, multiresolution, mask-assisted registration, landmark-assisted registration, ANTs/SyN, elastix, or a VoxelMorph-style backend unless compute, dependency, or user-approval boundaries block it.
+
+If stronger validation is blocked, report `blocked` or `blocked_target_not_met` and name the next strongest method that would be required.
+
 ## Minimum benchmark set
 
 - global strain
@@ -50,7 +60,9 @@ This skill exists because strain and deformable registration are the highest-ris
 - contour or warped-segmentation consistency
 - deformation plausibility:
   - folding / Jacobian sanity for deformable methods
-  - temporal smoothness
+- temporal smoothness
+
+Final acceptance cannot rely on Dice or one visual success case for deformation-sensitive phenotypes. It must consider global/segmental strain, ED/ES timing, contour consistency, warped segmentation consistency, Jacobian/folding for deformable methods, temporal smoothness, and downstream phenotype bias.
 
 ## Hard constraints
 
@@ -61,6 +73,7 @@ This skill exists because strain and deformable registration are the highest-ris
 
 ## Cross-links
 
+- For general cardiac MRI / CMR phenotype knowledge, also use `cardiac-mri`.
 - Use `medical-imaging-deep-learning` for MONAI / VoxelMorph positioning.
 - Use `medical-imaging-classical-features` for ANTsPy / classical registration guidance.
 
