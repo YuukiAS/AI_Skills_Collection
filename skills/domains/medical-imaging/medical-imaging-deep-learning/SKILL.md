@@ -56,16 +56,25 @@ Avoid using this skill as a generic “list of cool models” checklist—**bind
 | **MedSAM** | **Foundation** / promptable segmentation | **After** positioning against classical CNN baselines + nnU-Net-class strong baselines; domain validation required |
 | **VoxelMorph** | **Learning-based** pairwise registration | **Never** the only registration; **pair** with classical ANTs/SyN or elastix-style baselines |
 
-## Mechanism completion gates
+## Domain evidence labels for model changes
 
-Use these statuses in model reports:
+Use these labels as medical-imaging domain evidence labels inside model-change reports. They do not replace the global final status vocabulary from `codex-workflow-protocol`.
+
+Every final report must still use one global final status: `complete`, `partial_complete`, `qa_failed`, `blocked`, or `blocked_target_not_met`. When useful, add one domain evidence label to explain the model mechanism evidence stage.
 
 - `TRUE_DONE`: the requested mechanism is implemented, trained or inferred as authorized, evaluated on the target split, and supported by checkpoint, prediction, metric, command/log, and same-split baseline evidence.
 - `PARTIAL_MECHANISM_INCOMPLETE`: code or experiments exist, but a core mechanism is missing, proxy-only, or below the required gate.
 - `PREFLIGHT_SMOKE_ONLY`: only import, shape, one-case, metadata, dryrun, readiness, or resource checks were completed.
 - `NOT_DONE`: no implementation, no run, failed run, stale evidence, or missing evidence.
 
-Do not promote a task above the weakest required evidence stage. If training/evaluation was not run, the result is not `TRUE_DONE`.
+Examples:
+
+- If only import, shape, one-case, metadata, dryrun, readiness, or resource checks were completed, the global final status should usually be `partial_complete` or `qa_failed`, with domain evidence label `PREFLIGHT_SMOKE_ONLY`.
+- If code or experiments exist but the requested mechanism is missing, proxy-only, or below the required gate, the global final status should usually be `partial_complete` or `qa_failed`, with domain evidence label `PARTIAL_MECHANISM_INCOMPLETE`.
+- If no implementation, no run, failed run, stale evidence, or missing evidence exists, the global final status should usually be `partial_complete`, `qa_failed`, or `blocked`, with domain evidence label `NOT_DONE`.
+- If the requested mechanism is implemented, trained or inferred as authorized, evaluated on the target split, and supported by checkpoint, prediction, metric, command/log, and same-split baseline evidence, the global final status may be `complete`, with domain evidence label `TRUE_DONE`.
+
+Do not promote a task above the weakest required evidence stage. If training/evaluation was not run, do not label the domain evidence stage as `TRUE_DONE`.
 
 ## Forbidden shallow substitutions
 
@@ -118,7 +127,7 @@ When a task asks for **U-Net-like**, **encoder-decoder**, **multiscale**, **casc
 - checkpoint, prediction, metric, and same-split baseline paths;
 - ablation or comparison showing the mechanism changed behavior.
 
-If these are absent, mark the work `PARTIAL_MECHANISM_INCOMPLETE` or `PREFLIGHT_SMOKE_ONLY`.
+If these are absent, label the domain evidence stage as `PARTIAL_MECHANISM_INCOMPLETE` or `PREFLIGHT_SMOKE_ONLY`.
 
 ### Registration / template building
 
