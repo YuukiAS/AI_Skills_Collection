@@ -1,0 +1,116 @@
+{
+  "name": "yuukias-ai-skills",
+  "interface": {
+    "displayName": "YuukiAS AI Skills"
+  },
+  "plugins": [
+    {
+      "name": "codex-bayesian-jsdm",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-bayesian-jsdm"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Research"
+    },
+    {
+      "name": "codex-bioinformatics-light",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-bioinformatics-light"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Research"
+    },
+    {
+      "name": "codex-cardiacnexus",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-cardiacnexus"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Research"
+    },
+    {
+      "name": "codex-core-global",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-core-global"
+      },
+      "policy": {
+        "installation": "INSTALLED_BY_DEFAULT",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "codex-research-writing",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-research-writing"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Research"
+    },
+    {
+      "name": "codex-skill-maintenance",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-skill-maintenance"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "codex-webdev",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-webdev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Web Development"
+    },
+    {
+      "name": "codex-workflow-core",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-workflow-core"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "codex-writing-style",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-writing-style"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Research"
+    }
+  ]
+}

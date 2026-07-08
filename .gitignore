@@ -1,20 +1,61 @@
+# -----------------------------------------------------------------------------
+# OS, editors, and local assistant state
+# -----------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+.cursor/
 .agents/
 .codex/
-skills/.system/
+!plugins/
+!plugins/codex/
+!plugins/codex/.agents/
+!plugins/codex/.agents/plugins/
+!plugins/codex/.agents/plugins/marketplace.json
+
+# -----------------------------------------------------------------------------
+# Environment and local secrets
+# -----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+env/
+
+# -----------------------------------------------------------------------------
+# Python caches, test artifacts, and packaging
+# -----------------------------------------------------------------------------
 __pycache__/
-*.pyc
-*.pyo
-*.egg-info/
+*.py[cod]
+*$py.class
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
-.cache/
-.DS_Store
-.env
-.env.*
-node_modules/
-.venv/
-venv/
+.pytype/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+*.egg-info/
+pip-wheel-metadata/
 dist/
 build/
-pip-wheel-metadata/
+
+# -----------------------------------------------------------------------------
+# Node and generated package artifacts
+# -----------------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# -----------------------------------------------------------------------------
+# Project-local generated state
+# -----------------------------------------------------------------------------
+.cache/
+skills/.system/

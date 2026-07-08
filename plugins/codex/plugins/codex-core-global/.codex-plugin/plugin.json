@@ -1,0 +1,36 @@
+{
+  "name": "codex-core-global",
+  "version": "1.0.0",
+  "description": "Project-local skill installation only.",
+  "author": {
+    "name": "YuukiAS",
+    "email": "humc2013@gmail.com",
+    "url": "https://github.com/YuukiAS"
+  },
+  "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "keywords": [
+    "codex",
+    "core",
+    "global",
+    "skills"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Core Skill Installer",
+    "shortDescription": "Project-local skill installation only.",
+    "longDescription": "Project-local skill installation only. This plugin is generated from the `codex-core-global` profile and contains copied skill snapshots for Codex App marketplace installation.",
+    "developerName": "YuukiAS",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Skills"
+    ],
+    "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
+    "defaultPrompt": [
+      "Install project-local skills safely.",
+      "Create or update a Codex skill.",
+      "Set up this repo's skill profile."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

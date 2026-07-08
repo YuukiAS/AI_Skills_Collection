@@ -27,7 +27,7 @@ Complete domain installs are supported. If an audit reports high description len
 ## Skills
 
 - `academic-paper-writer-pro` (`skills/writing/research/academic-paper-writer-pro`): 基于规范目录结构的学术论文排版助手。支持 PDF / .doc / .docx / .md 多种输入格式，自动选择 OCR 管道、重排版管道或 MD 直转管道。包含环境清理确认、断点恢复、智能配图裁剪、逐单元增量生成 DOCX、双单元质量核查、中间状态保存和 BibTeX 参考文献管理。所有中间文件放 resources/，最终产物放 outputs/。
-- `chinese-prose` (`skills/writing/core/chinese-prose`): 中文报告、README、技术文档和科研说明的最终审校。用于降低 AI 味、翻译腔、模板腔和宣传腔，同时保护事实、数字、术语、命令、引用、实验结果和中文读者的阅读习惯。
+- `chinese-prose` (`skills/writing/core/chinese-prose`): 中文报告、README、技术文档和科研说明的最终审校。用于降低 AI 味、翻译腔、模板腔、宣传腔和不必要英文，同时保护事实、数字、术语、命令、引用、实验结果、机器精确字段和中文读者的阅读习惯。
 - `content-generation` (`skills/writing/research/content-generation`): 基于代码仓库、笔记、实验数据或论文要求，全自动智能撰写学术论文初稿的主线管线。强制分章逐批检索代码、分步输出，内置规避上下文超限机制和人工审核卡点，无缝衔接格式化引擎。内置严格的学术 Prompt 准则与多模态图表检索能力。
 - `literature-review` (`skills/writing/research/literature-review`): Conduct comprehensive, systematic literature reviews using multiple academic databases (PubMed, arXiv, bioRxiv, Semantic Scholar, etc.).
 - `ocr-kb` (`skills/writing/research/ocr-kb`): 使用多模态大模型逐页读取长文档图片，精确提取文本、LaTeX公式和独立科研配图。支持环境清理、断点恢复、全局编号管理、失败页标记与部分重跑。逐页生成DOCX并每两页核查质量。本 Skill 专用于 Pipeline A（OCR 管道），处理 PDF 输入。中间产物全部放在 resources/，最终交付物放在 outputs/。Pipeline B / C 定义在主 SKILL.md 中。

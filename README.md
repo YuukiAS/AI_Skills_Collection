@@ -51,6 +51,23 @@ package. Keep the checkout available. `--mode symlink` installs point back to
 this central library; use `--mode copy` when the target repo must keep a
 self-contained snapshot.
 
+## Codex App Marketplace Install
+
+For ordinary Codex App use, add this repository as a Git plugin marketplace:
+
+- Source: `https://github.com/YuukiAS/AI_Skills_Collection.git`
+- Git reference: `main`
+- Sparse path: `plugins/codex`
+
+The sparse path is a generated, self-contained marketplace root. Codex App can
+install the profile-backed plugins from there without running `ai-skills` after
+installation.
+
+Developers can still use the `ai-skills` CLI for repo, user, and explicit
+codex-home local installs. The marketplace publication layer and the CLI install
+path coexist: `skills/` and `profiles/` remain the source layer, while
+`plugins/codex/` is the generated Codex App distribution layer.
+
 ## Main Commands
 
 Use this as the command cheat sheet.
@@ -187,6 +204,7 @@ ai-skills catalog --write
 ## Documentation
 
 - `docs/INSTALLATION.md`: CLI install patterns, SSH/HPC notes, symlink/copy, Windows/WSL, user vs codex-home.
+- `docs/CODEX_MARKETPLACE.md`: Codex App marketplace publication layer and release workflow.
 - `docs/MIGRATION.md`: migrate old `.codex/skills` manifests to `.agents/skills`.
 - `docs/SKILL_AUTHORING.md`: create skills, domains, references, descriptions, profiles, and trigger evals.
 - `profiles/README.md`: profile vs domain vs single-skill selection.

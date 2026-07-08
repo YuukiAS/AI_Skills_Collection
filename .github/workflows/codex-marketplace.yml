@@ -1,0 +1,67 @@
+name: Codex Marketplace
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  codex-marketplace:
+    runs-on: ubuntu-latest
+    env:
+      HEAD_COMMIT_MESSAGE: ${{ github.event.head_commit.message || '' }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate Codex marketplace
+        run: python3 scripts/build_codex_marketplace.py --write
+
+      - name: Validate Codex marketplace
+        run: python3 scripts/build_codex_marketplace.py --validate
+
+      - name: Check Codex marketplace freshness
+        run: python3 scripts/build_codex_marketplace.py --check
+
+      - name: Validate skills
+        run: python3 scripts/skills.py validate
+
+      - name: Audit skills
+        run: python3 scripts/skills.py audit --all
+
+      - name: Ensure generated files are committed
+        if: github.event_name == 'pull_request'
+        run: |
+          if ! git diff --exit-code; then
+            echo "::error::Generated files are out of date. Run python3 scripts/build_codex_marketplace.py --write and commit the result."
+            git diff --stat
+            exit 1
+          fi
+          if [ -n "$(git status --short)" ]; then
+            echo "::error::Generated files are untracked. Run python3 scripts/build_codex_marketplace.py --write and commit the result."
+            git status --short
+            exit 1
+          fi
+
+      - name: Publish generated marketplace
+        if: github.event_name != 'pull_request' && !contains(env.HEAD_COMMIT_MESSAGE, '[skip codex-marketplace]')
+        run: |
+          if [ -z "$(git status --short -- plugins/codex)" ]; then
+            echo "No Codex marketplace changes to publish."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add plugins/codex
+          git commit -m "chore: publish codex marketplace [skip codex-marketplace]"
+          git push
+
+      - name: Skip publish commit
+        if: github.event_name != 'pull_request' && contains(env.HEAD_COMMIT_MESSAGE, '[skip codex-marketplace]')
+        run: echo "Skipping publish commit because head commit requested [skip codex-marketplace]."

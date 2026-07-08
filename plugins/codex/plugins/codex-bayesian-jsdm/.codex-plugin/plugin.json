@@ -1,0 +1,36 @@
+{
+  "name": "codex-bayesian-jsdm",
+  "version": "1.0.0",
+  "description": "TRACE/JSDM/HMSC work, Bayesian modeling, simulation, diagnostics, and theorem-heavy manuscripts.",
+  "author": {
+    "name": "YuukiAS",
+    "email": "humc2013@gmail.com",
+    "url": "https://github.com/YuukiAS"
+  },
+  "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "keywords": [
+    "bayesian",
+    "codex",
+    "jsdm",
+    "skills"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Bayesian JSDM Toolkit",
+    "shortDescription": "TRACE/JSDM/HMSC work, Bayesian modeling, simulation, diagnostics, and theorem-heavy manuscripts.",
+    "longDescription": "TRACE/JSDM/HMSC work, Bayesian modeling, simulation, diagnostics, and theorem-heavy manuscripts. This plugin is generated from the `codex-bayesian-jsdm` profile and contains copied skill snapshots for Codex App marketplace installation.",
+    "developerName": "YuukiAS",
+    "category": "Research",
+    "capabilities": [
+      "Skills"
+    ],
+    "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
+    "defaultPrompt": [
+      "Help me build and diagnose a Bayesian model.",
+      "Review this JSDM or HMSC workflow.",
+      "Prepare theorem-heavy manuscript guidance."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

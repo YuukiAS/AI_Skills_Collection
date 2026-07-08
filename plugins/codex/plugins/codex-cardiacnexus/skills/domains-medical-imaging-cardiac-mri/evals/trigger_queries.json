@@ -1,0 +1,22 @@
+{
+  "positive": [
+    "Validate cine SAX ED/ES frame handling for LV and RV volume phenotypes",
+    "Review this CMR strain workflow for global and segmental strain acceptance criteria",
+    "Check whether tagged MRI feature tracking preserves cardiac phenotype validity",
+    "Design validation gates for LV/RV EF, stroke volume, and myocardial strain from CMR",
+    "For cardiac MRI registration, define QC beyond Dice and a single visual overlay"
+  ],
+  "negative": [
+    "Segment a liver CT volume with nnU-Net",
+    "Extract DICOM tags from a chest CT series",
+    "Update CardiacNexus docs/src navigation for a Markdoc page",
+    "Refactor eval_strain_sax.py in the CardiacNexus repository"
+  ],
+  "near_miss": [
+    "What does CMR stand for?",
+    "Explain what ED and ES mean in one sentence",
+    "List common medical imaging metrics",
+    "Give me a simple definition of Dice coefficient"
+  ],
+  "notes": "Use for general cardiac MRI phenotype knowledge; use project skills for CardiacNexus paths and local commands."
+}
