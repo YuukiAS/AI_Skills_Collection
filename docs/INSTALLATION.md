@@ -48,10 +48,11 @@ Git reference: main
 Sparse path: plugins/codex
 ```
 
-`plugins/codex` is a generated, self-contained marketplace root. Each active
-profile becomes one plugin, and each plugin carries copied skill snapshots under
-its own `skills/` directory. Codex App does not need to run `ai-skills` after
-the marketplace is added.
+`plugins/codex` is a generated, self-contained marketplace root. It publishes a
+small Codex App plugin set, and each plugin carries copied skill snapshots under
+its own `skills/` directory. Some app-facing skills are aggregate skills whose
+source workflows live under `references/source-skills/`. Codex App does not need
+to run `ai-skills` after the marketplace is added.
 
 The CLI remains the developer and local deployment path. Use `ai-skills` when
 you need repo-local, user-level, or explicit legacy codex-home installs, or when

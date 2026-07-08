@@ -1,0 +1,37 @@
+{
+  "name": "bio-medical-imaging",
+  "version": "1.0.0",
+  "description": "Bioinformatics, medical imaging, CardiacNexus, AI/ML imaging, data analysis, visualization, and PDFs.",
+  "author": {
+    "name": "YuukiAS",
+    "email": "humc2013@gmail.com",
+    "url": "https://github.com/YuukiAS"
+  },
+  "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "keywords": [
+    "bio",
+    "codex",
+    "imaging",
+    "medical",
+    "skills"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Bio and Medical Imaging",
+    "shortDescription": "Bioinformatics, medical imaging, CardiacNexus, AI/ML imaging, data analysis, visualization, and PDFs.",
+    "longDescription": "Bioinformatics, medical imaging, CardiacNexus, AI/ML imaging, data analysis, visualization, and PDFs. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "developerName": "YuukiAS",
+    "category": "Research",
+    "capabilities": [
+      "Skills"
+    ],
+    "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
+    "defaultPrompt": [
+      "Plan a bioinformatics analysis.",
+      "Help with CMR image processing.",
+      "Review this CardiacNexus pipeline change."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

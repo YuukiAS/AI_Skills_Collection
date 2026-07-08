@@ -1,0 +1,36 @@
+{
+  "name": "statistical-modeling",
+  "version": "1.0.0",
+  "description": "Bayesian modeling, data analysis, scientific visualization, and manuscript support.",
+  "author": {
+    "name": "YuukiAS",
+    "email": "humc2013@gmail.com",
+    "url": "https://github.com/YuukiAS"
+  },
+  "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "keywords": [
+    "codex",
+    "modeling",
+    "skills",
+    "statistical"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Statistical Modeling",
+    "shortDescription": "Bayesian modeling, data analysis, scientific visualization, and manuscript support.",
+    "longDescription": "Bayesian modeling, data analysis, scientific visualization, and manuscript support. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "developerName": "YuukiAS",
+    "category": "Research",
+    "capabilities": [
+      "Skills"
+    ],
+    "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
+    "defaultPrompt": [
+      "Help me build and diagnose a Bayesian model.",
+      "Plan a statistical analysis.",
+      "Visualize these scientific results."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

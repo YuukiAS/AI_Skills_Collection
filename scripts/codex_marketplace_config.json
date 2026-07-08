@@ -1,0 +1,311 @@
+{
+  "name": "yuukias-ai-skills",
+  "displayName": "YuukiAS AI Skills",
+  "plugins": [
+    {
+      "name": "ai-skills-core",
+      "displayName": "AI Skills Core",
+      "description": "Install, create, and maintain project-local Codex skills.",
+      "category": "Developer Tools",
+      "installation": "INSTALLED_BY_DEFAULT",
+      "defaultPrompt": [
+        "Install project-local skills safely.",
+        "Create or update a Codex skill.",
+        "Set up this repo's skill profile."
+      ],
+      "skills": [
+        {
+          "type": "copy",
+          "source": "skills/core/codex-system/project-skill-installer"
+        },
+        {
+          "type": "copy",
+          "source": "skills/core/codex-system/system-skills/skill-installer"
+        },
+        {
+          "type": "copy",
+          "source": "skills/core/codex-system/system-skills/skill-creator"
+        }
+      ]
+    },
+    {
+      "name": "workflow-writing",
+      "displayName": "Workflow and Writing",
+      "description": "Verified execution workflows and source-faithful prose revision.",
+      "category": "Productivity",
+      "defaultPrompt": [
+        "Run a verified implementation workflow.",
+        "Make this scientific prose clearer.",
+        "Polish this Chinese technical text."
+      ],
+      "skills": [
+        {
+          "type": "copy",
+          "source": "skills/core/codex-system/codex-workflow-protocol"
+        },
+        {
+          "type": "copy",
+          "source": "skills/writing/core/writing-fidelity"
+        },
+        {
+          "type": "copy",
+          "source": "skills/writing/core/scientific-prose"
+        },
+        {
+          "type": "aggregate",
+          "name": "chinese-prose",
+          "description": "Chinese technical and scientific prose polishing with CJK/math PDF rendering support.",
+          "source_skills": [
+            "skills/writing/core/chinese-prose",
+            "skills/tools/documents-media/render-chinese-math-pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "web-development",
+      "displayName": "Web Development",
+      "description": "Frontend planning, implementation, design handoff, visual assets, and browser QA.",
+      "category": "Web Development",
+      "defaultPrompt": [
+        "Build a responsive React interface.",
+        "Audit this frontend with browser tests.",
+        "Implement this Figma handoff."
+      ],
+      "skills": [
+        {
+          "type": "aggregate",
+          "name": "frontend-app-builder",
+          "description": "Plan and build polished frontend apps from UX intent through visual direction and implementation.",
+          "source_skills": [
+            "skills/tools/frontend/product-ux-planning",
+            "skills/tools/frontend/visual-direction"
+          ]
+        },
+        {
+          "type": "aggregate",
+          "name": "frontend-testing-debugging",
+          "description": "Test and debug rendered frontend apps with browser automation, responsive checks, and accessibility review.",
+          "source_skills": [
+            "skills/tools/frontend/webapp-testing",
+            "skills/tools/frontend/responsive-accessibility-review"
+          ]
+        },
+        {
+          "type": "aggregate",
+          "name": "react-tailwind-ui",
+          "description": "Implement React, TypeScript, Tailwind, shadcn/ui, design tokens, and motion polish.",
+          "source_skills": [
+            "skills/tools/frontend/design-system-tokens",
+            "skills/tools/frontend/implementation-react-tailwind",
+            "skills/tools/frontend/motion-interaction"
+          ]
+        },
+        {
+          "type": "copy",
+          "source": "skills/tools/frontend/figma-design-to-code"
+        },
+        {
+          "type": "aggregate",
+          "name": "frontend-visual-assets",
+          "description": "Generate images and apply coherent visual themes for frontend surfaces and artifacts.",
+          "source_skills": [
+            "skills/tools/visualization/generate-image",
+            "skills/tools/visualization/theme-factory"
+          ]
+        },
+        {
+          "type": "aggregate",
+          "name": "frontend-product-design",
+          "description": "Shape product UX, information architecture, and distinctive frontend visual direction before implementation.",
+          "source_skills": [
+            "skills/tools/frontend/product-ux-planning",
+            "skills/tools/frontend/visual-direction",
+            "skills/tools/frontend/design-system-tokens"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "research-writing",
+      "displayName": "Research Writing",
+      "description": "Scientific manuscripts, literature review, citation workflows, research lookup, and research documents.",
+      "category": "Research",
+      "defaultPrompt": [
+        "Revise this research manuscript.",
+        "Plan a literature review.",
+        "Check citations, figures, and PDFs."
+      ],
+      "skills": [
+        {
+          "type": "copy",
+          "source": "skills/writing/research/scientific-writing"
+        },
+        {
+          "type": "copy",
+          "source": "skills/writing/research/literature-review"
+        },
+        {
+          "type": "copy",
+          "source": "skills/science/discovery/citation-management"
+        },
+        {
+          "type": "copy",
+          "source": "skills/science/discovery/research-lookup"
+        },
+        {
+          "type": "aggregate",
+          "name": "research-documents",
+          "description": "Work with research PDFs, Word documents, slides, Markdown conversion, figures, and schematics.",
+          "source_skills": [
+            "skills/tools/documents-media/pdf",
+            "skills/tools/documents-media/docx",
+            "skills/tools/documents-media/pptx",
+            "skills/tools/documents-media/markitdown",
+            "skills/science/communication/scientific-visualization",
+            "skills/science/communication/scientific-slides",
+            "skills/science/communication/scientific-schematics"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "statistical-modeling",
+      "displayName": "Statistical Modeling",
+      "description": "Bayesian modeling, data analysis, scientific visualization, and manuscript support.",
+      "category": "Research",
+      "defaultPrompt": [
+        "Help me build and diagnose a Bayesian model.",
+        "Plan a statistical analysis.",
+        "Visualize these scientific results."
+      ],
+      "skills": [
+        {
+          "type": "aggregate",
+          "name": "bayesian-modeling",
+          "description": "Bayesian and statistical modeling workflows with PyMC, diagnostics, simulation, and model reporting.",
+          "source_skills": [
+            "skills/domains/bayesian/bayesian-ppl-diagnostics",
+            "skills/domains/bayesian/pymc",
+            "skills/domains/bayesian/statsmodels",
+            "skills/domains/bayesian/statistical-analysis",
+            "skills/domains/bayesian/simpy"
+          ]
+        },
+        {
+          "type": "aggregate",
+          "name": "data-analysis-python",
+          "description": "Python data analysis workflows with EDA, Polars, scikit-learn, and symbolic math.",
+          "source_skills": [
+            "skills/tools/data-science/exploratory-data-analysis",
+            "skills/tools/data-science/polars",
+            "skills/tools/data-science/scikit-learn",
+            "skills/tools/data-science/sympy"
+          ]
+        },
+        {
+          "type": "aggregate",
+          "name": "scientific-visualization",
+          "description": "Scientific plotting and visualization with Matplotlib and Plotly.",
+          "source_skills": [
+            "skills/tools/visualization/matplotlib",
+            "skills/tools/visualization/plotly"
+          ]
+        },
+        {
+          "type": "copy",
+          "source": "skills/writing/research/scientific-writing"
+        },
+        {
+          "type": "copy",
+          "source": "skills/science/discovery/research-lookup"
+        }
+      ]
+    },
+    {
+      "name": "bio-medical-imaging",
+      "displayName": "Bio and Medical Imaging",
+      "description": "Bioinformatics, medical imaging, CardiacNexus, AI/ML imaging, data analysis, visualization, and PDFs.",
+      "category": "Research",
+      "defaultPrompt": [
+        "Plan a bioinformatics analysis.",
+        "Help with CMR image processing.",
+        "Review this CardiacNexus pipeline change."
+      ],
+      "skills": [
+        {
+          "type": "aggregate",
+          "name": "bioinformatics-workflows",
+          "description": "Common bioinformatics workflows across databases, single-cell analysis, genomics I/O, and omics analysis.",
+          "source_skills": [
+            "skills/domains/bioinformatics/databases/bioinformatics-database-retrieval",
+            "skills/domains/bioinformatics/single-cell/scanpy",
+            "skills/domains/bioinformatics/single-cell/scvi-tools",
+            "skills/domains/bioinformatics/single-cell/anndata",
+            "skills/domains/bioinformatics/genomics-io/pysam",
+            "skills/domains/bioinformatics/omics-analysis/pydeseq2",
+            "skills/domains/bioinformatics/biology-toolkits/biopython",
+            "skills/domains/bioinformatics/biology-toolkits/scikit-bio",
+            "skills/domains/bioinformatics/omics-analysis/polars-bio",
+            "skills/domains/bioinformatics/genomics-io/tiledbvcf"
+          ]
+        },
+        {
+          "type": "aggregate",
+          "name": "medical-imaging-workflows",
+          "description": "Medical imaging workflows for CMR, DICOM/NIfTI, classical features, deep learning, and pathology imaging.",
+          "source_skills": [
+            "skills/domains/medical-imaging/cardiac-mri",
+            "skills/domains/medical-imaging/pydicom",
+            "skills/domains/medical-imaging/medical-imaging-classical-features",
+            "skills/domains/medical-imaging/medical-imaging-deep-learning",
+            "skills/domains/medical-imaging/pathml"
+          ]
+        },
+        {
+          "type": "aggregate",
+          "name": "cardiacnexus-workflows",
+          "description": "CardiacNexus feature contracts, pipeline refactors, strain registration, and documentation workflows.",
+          "source_skills": [
+            "skills/projects/cmr/cardiacnexus-feature-contracts",
+            "skills/projects/cmr/cardiacnexus-pipeline-refactor",
+            "skills/projects/cmr/cardiacnexus-strain-registration",
+            "skills/projects/cmr/cardiacnexus-docs-markdoc"
+          ]
+        },
+        {
+          "type": "aggregate",
+          "name": "ai-ml-imaging",
+          "description": "AI/ML support for imaging workflows with PyTorch Lightning and Transformers.",
+          "source_skills": [
+            "skills/tools/ai-ml/pytorch-lightning",
+            "skills/tools/ai-ml/transformers"
+          ]
+        },
+        {
+          "type": "aggregate",
+          "name": "data-analysis-python",
+          "description": "Python data analysis workflows with EDA, Polars, and scikit-learn.",
+          "source_skills": [
+            "skills/tools/data-science/exploratory-data-analysis",
+            "skills/tools/data-science/polars",
+            "skills/tools/data-science/scikit-learn"
+          ]
+        },
+        {
+          "type": "aggregate",
+          "name": "scientific-visualization",
+          "description": "Scientific plotting and visualization with Matplotlib and Plotly.",
+          "source_skills": [
+            "skills/tools/visualization/matplotlib",
+            "skills/tools/visualization/plotly"
+          ]
+        },
+        {
+          "type": "copy",
+          "source": "skills/tools/documents-media/pdf"
+        }
+      ]
+    }
+  ]
+}

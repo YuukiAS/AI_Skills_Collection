@@ -1,0 +1,36 @@
+{
+  "name": "research-writing",
+  "version": "1.0.0",
+  "description": "Scientific manuscripts, literature review, citation workflows, research lookup, and research documents.",
+  "author": {
+    "name": "YuukiAS",
+    "email": "humc2013@gmail.com",
+    "url": "https://github.com/YuukiAS"
+  },
+  "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "keywords": [
+    "codex",
+    "research",
+    "skills",
+    "writing"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Research Writing",
+    "shortDescription": "Scientific manuscripts, literature review, citation workflows, research lookup, and research documents.",
+    "longDescription": "Scientific manuscripts, literature review, citation workflows, research lookup, and research documents. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "developerName": "YuukiAS",
+    "category": "Research",
+    "capabilities": [
+      "Skills"
+    ],
+    "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
+    "defaultPrompt": [
+      "Revise this research manuscript.",
+      "Plan a literature review.",
+      "Check citations, figures, and PDFs."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

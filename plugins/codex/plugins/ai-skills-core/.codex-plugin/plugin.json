@@ -1,0 +1,36 @@
+{
+  "name": "ai-skills-core",
+  "version": "1.0.0",
+  "description": "Install, create, and maintain project-local Codex skills.",
+  "author": {
+    "name": "YuukiAS",
+    "email": "humc2013@gmail.com",
+    "url": "https://github.com/YuukiAS"
+  },
+  "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "keywords": [
+    "ai",
+    "codex",
+    "core",
+    "skills"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "AI Skills Core",
+    "shortDescription": "Install, create, and maintain project-local Codex skills.",
+    "longDescription": "Install, create, and maintain project-local Codex skills. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "developerName": "YuukiAS",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Skills"
+    ],
+    "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
+    "defaultPrompt": [
+      "Install project-local skills safely.",
+      "Create or update a Codex skill.",
+      "Set up this repo's skill profile."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

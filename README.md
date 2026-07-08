@@ -60,13 +60,15 @@ For ordinary Codex App use, add this repository as a Git plugin marketplace:
 - Sparse path: `plugins/codex`
 
 The sparse path is a generated, self-contained marketplace root. Codex App can
-install the profile-backed plugins from there without running `ai-skills` after
-installation.
+install the curated plugins from there without running `ai-skills` after
+installation. The app marketplace intentionally publishes a smaller set of
+plugin-sized capabilities than the local CLI profiles.
 
 Developers can still use the `ai-skills` CLI for repo, user, and explicit
 codex-home local installs. The marketplace publication layer and the CLI install
 path coexist: `skills/` and `profiles/` remain the source layer, while
-`plugins/codex/` is the generated Codex App distribution layer.
+`plugins/codex/` is the generated Codex App distribution layer. The Codex App
+plugin set is configured separately in `scripts/codex_marketplace_config.json`.
 
 ## Main Commands
 

@@ -1,0 +1,36 @@
+{
+  "name": "web-development",
+  "version": "1.0.0",
+  "description": "Frontend planning, implementation, design handoff, visual assets, and browser QA.",
+  "author": {
+    "name": "YuukiAS",
+    "email": "humc2013@gmail.com",
+    "url": "https://github.com/YuukiAS"
+  },
+  "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "keywords": [
+    "codex",
+    "development",
+    "skills",
+    "web"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Web Development",
+    "shortDescription": "Frontend planning, implementation, design handoff, visual assets, and browser QA.",
+    "longDescription": "Frontend planning, implementation, design handoff, visual assets, and browser QA. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "developerName": "YuukiAS",
+    "category": "Web Development",
+    "capabilities": [
+      "Skills"
+    ],
+    "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
+    "defaultPrompt": [
+      "Build a responsive React interface.",
+      "Audit this frontend with browser tests.",
+      "Implement this Figma handoff."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

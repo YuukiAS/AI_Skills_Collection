@@ -4,6 +4,7 @@ This repository has two layers:
 
 - `skills/` and `profiles/` are the source layer. Edit these when changing skill behavior or profile membership.
 - `plugins/codex/` is the generated Codex App publication layer. It is self-contained for sparse checkout installation and does not depend on files outside that directory.
+- `scripts/codex_marketplace_config.json` is the Codex App publication config. It deliberately publishes fewer app-facing plugins and skills than the local CLI profiles.
 
 ## Install In Codex App
 
@@ -15,13 +16,24 @@ Git reference: main
 Sparse path: plugins/codex
 ```
 
-Each active `profiles/*.json` file becomes one Codex plugin. The generated
-plugin copies the profile's primary `skills` list into its own `skills/`
-directory. The publication layer uses copied snapshots, not symlinks.
+The generated marketplace currently publishes six curated plugins:
+
+- `ai-skills-core`
+- `workflow-writing`
+- `web-development`
+- `research-writing`
+- `statistical-modeling`
+- `bio-medical-imaging`
+
+Each plugin carries active skills under its own `skills/` directory. Some active
+skills are aggregate skills: they expose one Codex trigger boundary while copying
+their detailed source workflows under `references/source-skills/`. The
+publication layer uses copied snapshots, not symlinks.
 
 ## Local Build
 
-After changing `skills/` or `profiles/`, regenerate and validate the marketplace:
+After changing `skills/`, `profiles/`, or `scripts/codex_marketplace_config.json`,
+regenerate and validate the marketplace:
 
 ```bash
 python3 scripts/build_codex_marketplace.py --write
