@@ -6,7 +6,9 @@ for server, HPC, repo-local, and advanced maintenance workflows.
 
 ## Codex App Marketplace Install
 
-Add this repository as a Git plugin marketplace in Codex App:
+After these changes are pushed to `main` and the `Codex Marketplace` GitHub
+Actions workflow has completed, add this repository as a Git plugin marketplace
+in Codex App:
 
 - Source: `https://github.com/YuukiAS/AI_Skills_Collection.git`
 - Git reference: `main`
@@ -17,17 +19,28 @@ install the curated plugins from there without running `ai-skills` after
 installation. The app marketplace intentionally publishes a smaller set of
 plugin-sized capabilities than the local CLI profiles.
 
+The workflow regenerates and validates `plugins/codex/` on pushes to `main`. If
+the generated marketplace changes, GitHub Actions commits the updated generated
+files back to `main` with the `[skip codex-marketplace]` marker to avoid a
+publish loop. Install from `main` after that workflow is green.
+
 ## Available Marketplace Plugins
 
-- `ai-skills-core`: install, create, and maintain project-local Codex skills.
-- `workflow-core`: general Codex execution, source-of-truth, and verification workflows.
-- `writing-style`: source-faithful writing, scientific prose, Chinese prose, and CJK/math PDF rendering.
-- `web-development`: product UX, React/Tailwind implementation, Figma handoff, visual assets, and browser QA.
-- `research-writing`: manuscripts, literature review, citation workflows, research lookup, and research documents.
-- `statistical-modeling`: Bayesian modeling, Python data analysis, and scientific visualization.
-- `bioinformatics`: general bioinformatics workflows.
-- `medical-imaging`: general medical imaging and AI/ML imaging workflows.
-- `cardiacnexus`: optional CardiacNexus project-specific workflows.
+| Plugin | Included active skills |
+|---|---|
+| `ai-skills-core` | `project-skill-installer`, `skill-creator`, `skill-installer` |
+| `workflow-core` | `codex-workflow-protocol` |
+| `writing-style` | `chinese-prose`, `scientific-prose`, `writing-fidelity` |
+| `web-development` | `frontend-product-design`, `frontend-testing-debugging`, `frontend-visual-assets`, `react-tailwind-ui`, `figma-design-to-code` |
+| `research-writing` | `research-documents`, `research-paper-workflow`, `citation-management`, `research-lookup`, `literature-review` |
+| `statistical-modeling` | `bayesian-modeling`, `data-analysis-python`, `scientific-visualization` |
+| `bioinformatics` | `bioinformatics-workflows` |
+| `medical-imaging` | `ai-ml-imaging`, `medical-imaging-workflows` |
+| `cardiacnexus` | `cardiacnexus-workflows` |
+
+Aggregate skills expose one Codex App trigger boundary while keeping their
+source workflows under `references/source-skills/` inside the plugin. Copied
+skills keep their original source metadata in frontmatter.
 
 ## Local CLI For Advanced Installs
 
@@ -88,6 +101,13 @@ self-contained snapshot.
 `plugins/codex/` is generated from `scripts/codex_marketplace_config.json` and
 is the Codex App distribution layer. Do not edit generated marketplace snapshots
 by hand; update source skills or config, then rebuild.
+
+Skill provenance is recorded in source skill frontmatter, preserved in
+`registry.json`, summarized in `docs/SKILL_PROVENANCE.md`, and backed by the
+cloned-source inventory under `TODO/`. Historical skills without reliable source
+records remain marked `provenance: unknown`; new external adaptations must use
+the formal `source_repo_url`, `source_path`, `source_ref`,
+`source_imported_at`, `source_license`, and `source_note` fields.
 
 ## Main Commands
 
