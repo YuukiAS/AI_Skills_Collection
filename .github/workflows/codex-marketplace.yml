@@ -29,6 +29,9 @@ jobs:
       - name: Validate Codex marketplace
         run: python3 scripts/build_codex_marketplace.py --validate
 
+      - name: Report Codex marketplace paths
+        run: python3 scripts/build_codex_marketplace.py --path-report
+
       - name: Check Codex marketplace freshness
         run: python3 scripts/build_codex_marketplace.py --check
 
@@ -68,3 +71,56 @@ jobs:
       - name: Skip publish commit
         if: github.event_name != 'pull_request' && contains(env.HEAD_COMMIT_MESSAGE, '[skip codex-marketplace]')
         run: echo "Skipping publish commit because head commit requested [skip codex-marketplace]."
+
+  windows-sparse-checkout:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate and validate Codex marketplace
+        shell: pwsh
+        run: |
+          git config --global core.longpaths false
+          python scripts/build_codex_marketplace.py --write
+          python scripts/build_codex_marketplace.py --validate
+          python scripts/build_codex_marketplace.py --check
+          python scripts/build_codex_marketplace.py --path-report
+
+      - name: Sparse checkout in a long Windows path
+        shell: pwsh
+        run: |
+          git config --global core.longpaths false
+
+          $source = Join-Path $env:RUNNER_TEMP "codex-marketplace-source"
+          New-Item -ItemType Directory -Force $source | Out-Null
+          robocopy $env:GITHUB_WORKSPACE $source /MIR /XD .git | Out-Null
+          if ($LASTEXITCODE -gt 7) { exit $LASTEXITCODE }
+
+          git -C $source init
+          git -C $source config user.name "codex-marketplace-test"
+          git -C $source config user.email "codex-marketplace-test@example.invalid"
+          git -C $source add .
+          git -C $source commit -m "test marketplace sparse checkout"
+
+          $longParent = Join-Path $env:RUNNER_TEMP "codex-app-marketplace-checkout-nested-nested-nested-nested"
+          New-Item -ItemType Directory -Force $longParent | Out-Null
+          $target = Join-Path $longParent "repo"
+
+          git clone --no-checkout $source $target
+          git -C $target sparse-checkout init --cone
+          git -C $target sparse-checkout set plugins/codex
+          git -C $target checkout HEAD
+
+          $marketplace = Join-Path $target "plugins/codex/.agents/plugins/marketplace.json"
+          if (!(Test-Path $marketplace)) {
+            Write-Error "marketplace.json missing after sparse checkout"
+            exit 1
+          }
+          $pluginCount = (Get-ChildItem (Join-Path $target "plugins/codex/plugins") -Directory | Measure-Object).Count
+          if ($pluginCount -ne 9) {
+            Write-Error "expected 9 plugins after sparse checkout, found $pluginCount"
+            exit 1
+          }

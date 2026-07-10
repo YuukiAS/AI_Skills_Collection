@@ -198,7 +198,7 @@ class CodexMarketplaceTests(unittest.TestCase):
             write_config(root, [plugin("p", [{"type": "copy", "source": "skills/a/place"}])])
             with patched_build_root(root):
                 build.generate_layer(root / "out")
-            copied = root / "out/plugins/p/skills/a-place/script.py"
+            copied = root / "out/plugins/p/skills/place/script.py"
             self.assertEqual(copied.read_text(encoding="utf-8"), "placeholder = 'keep placeholder text'\n")
 
     def test_nested_skill_md_is_renamed_in_aggregate_snapshot(self) -> None:
@@ -226,9 +226,9 @@ class CodexMarketplaceTests(unittest.TestCase):
             )
             with patched_build_root(root):
                 build.generate_layer(root / "out")
-            source_root = root / "out/plugins/p/skills/agg/references/source-skills/a-nested"
+            source_root = root / "out/plugins/p/skills/agg/_src/nested"
             self.assertFalse((source_root / "references/child/SKILL.md").exists())
-            self.assertTrue((source_root / "references/child/source-skill.md").exists())
+            self.assertTrue((source_root / "references/child/source.md").exists())
 
     def test_generation_has_no_symlink_and_is_deterministic(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -240,6 +240,122 @@ class CodexMarketplaceTests(unittest.TestCase):
                 build.generate_layer(root / "out2")
                 self.assertEqual(build.compare_layers(root / "out1", root / "out2"), [])
                 self.assertFalse(any(path.is_symlink() for path in (root / "out1").rglob("*")))
+
+    def test_long_bioinformatics_source_path_uses_short_artifacts(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            skill_dir = write_skill(
+                root,
+                "skills/domains/bioinformatics/databases/bioinformatics-database-retrieval",
+                "bioinformatics-database-retrieval",
+            )
+            providers = skill_dir / "references" / "providers"
+            providers.mkdir(parents=True)
+            (providers / "ncbi.md").write_text("provider notes\n", encoding="utf-8")
+            write_config(
+                root,
+                [
+                    plugin(
+                        "bioinformatics",
+                        [
+                            {
+                                "type": "aggregate",
+                                "name": "bioinformatics-workflows",
+                                "artifact_id": "bio",
+                                "description": "Bioinformatics workflows.",
+                                "source_skills": [
+                                    {
+                                        "source": "skills/domains/bioinformatics/databases/bioinformatics-database-retrieval",
+                                        "artifact_id": "db",
+                                    }
+                                ],
+                            }
+                        ],
+                    )
+                ],
+            )
+            with patched_build_root(root):
+                build.generate_layer(root / "out")
+                report = build.path_report(root / "out")
+            self.assertTrue((root / "out/plugins/bioinformatics/skills/bio/_src/db/references/providers/ncbi.md").exists())
+            generated_paths = [path.relative_to(root / "out").as_posix() for path in (root / "out").rglob("*")]
+            self.assertFalse(any("domains-bioinformatics-databases-bioinformatics-database-retrieval" in path for path in generated_paths))
+            self.assertEqual(report["over_budget_count"], 0)
+
+    def test_artifact_id_conflict_fails_with_sources(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_skill(root, "skills/a/one", "one")
+            write_skill(root, "skills/b/two", "two")
+            write_config(
+                root,
+                [
+                    plugin(
+                        "p",
+                        [
+                            {"type": "copy", "source": "skills/a/one", "artifact_id": "same"},
+                            {"type": "copy", "source": "skills/b/two", "artifact_id": "same"},
+                        ],
+                    )
+                ],
+            )
+            with patched_build_root(root), self.assertRaisesRegex(build.BuildError, "duplicate artifact_id same"):
+                build.generate_layer(root / "out")
+
+    def test_path_report_is_deterministic(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_skill(root, "skills/a/one", "one")
+            write_config(root, [plugin("p", [{"type": "copy", "source": "skills/a/one", "artifact_id": "o"}])])
+            with patched_build_root(root):
+                build.generate_layer(root / "out1")
+                build.generate_layer(root / "out2")
+                self.assertEqual(build.path_report(root / "out1"), build.path_report(root / "out2"))
+
+    def test_source_snapshot_content_is_preserved_without_active_nested_skill(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            skill_dir = write_skill(root, "skills/a/full", "full")
+            (skill_dir / "references").mkdir()
+            (skill_dir / "scripts").mkdir()
+            (skill_dir / "references" / "guide.md").write_text("guide\n", encoding="utf-8")
+            (skill_dir / "scripts" / "tool.py").write_text("print('ok')\n", encoding="utf-8")
+            nested = skill_dir / "references" / "nested"
+            nested.mkdir()
+            (nested / "SKILL.md").write_text("---\nname: nested\n---\nnested\n", encoding="utf-8")
+            write_config(
+                root,
+                [
+                    plugin(
+                        "p",
+                        [
+                            {
+                                "type": "aggregate",
+                                "name": "agg",
+                                "artifact_id": "a",
+                                "description": "Aggregate.",
+                                "source_skills": [{"source": "skills/a/full", "artifact_id": "f"}],
+                            }
+                        ],
+                    )
+                ],
+            )
+            with patched_build_root(root):
+                build.generate_layer(root / "out")
+            source_root = root / "out/plugins/p/skills/a/_src/f"
+            self.assertEqual((source_root / "references/guide.md").read_text(encoding="utf-8"), "guide\n")
+            self.assertEqual((source_root / "scripts/tool.py").read_text(encoding="utf-8"), "print('ok')\n")
+            self.assertFalse((source_root / "references/nested/SKILL.md").exists())
+            self.assertTrue((source_root / "references/nested/source.md").exists())
+
+    def test_current_repository_marketplace_paths_fit_windows_budget(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "codex"
+            build.generate_layer(out)
+            report = build.path_report(out)
+        self.assertEqual(report["over_budget_count"], 0)
+        self.assertLessEqual(report["max_file_length"], build.WINDOWS_PATH_BUDGET)
+        self.assertLessEqual(report["max_dir_length"], build.WINDOWS_PATH_BUDGET)
 
 
 if __name__ == "__main__":

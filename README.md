@@ -14,6 +14,8 @@
 
 `plugins/codex/` 是自包含的生成发布层。Codex App 只需要拉取这个 sparse path，就可以安装里面的插件；安装后不需要再运行 `ai-skills`。
 
+Windows 用户也使用同一组参数。发布层会在 CI 和本地构建中检查完整 Git 路径长度，确保普通 Windows checkout 不需要开启 `core.longpaths`。如果看到历史报错 `Filename too long`，根因应由 `plugins/codex/` 的生成布局修复，而不是要求普通用户修改全局 Git 或 Windows 设置。
+
 ## Codex App 可安装插件
 
 | 插件 | 包含的 active skills |
@@ -28,7 +30,7 @@
 | `medical-imaging` | `ai-ml-imaging`, `medical-imaging-workflows` |
 | `cardiacnexus` | `cardiacnexus-workflows` |
 
-其中一部分是聚合 skill：它们在 Codex App 里只暴露一个触发入口，但会把多个源工作流复制到插件内的 `references/source-skills/`。直接复制的 skill 会保留原始 frontmatter，包括来源字段。
+其中一部分是聚合 skill：它们在 Codex App 里只暴露一个触发入口，但会把多个源工作流复制到插件内的紧凑 `_src/<source-id>/` snapshot。直接复制的 skill 会保留原始 frontmatter，包括来源字段。
 
 ## 原始来源记录
 
@@ -100,6 +102,7 @@ python3 /path/to/AI_Skills_Collection/scripts/skills.py --help
 python3 scripts/build_codex_marketplace.py --write
 python3 scripts/build_codex_marketplace.py --validate
 python3 scripts/build_codex_marketplace.py --check
+python3 scripts/build_codex_marketplace.py --path-report
 ```
 
 ## 常用 CLI 命令
@@ -263,6 +266,7 @@ Codex App 发布层还需要运行：
 python3 scripts/build_codex_marketplace.py --write
 python3 scripts/build_codex_marketplace.py --validate
 python3 scripts/build_codex_marketplace.py --check
+python3 scripts/build_codex_marketplace.py --path-report
 python3 -m unittest discover -s tests
 ```
 

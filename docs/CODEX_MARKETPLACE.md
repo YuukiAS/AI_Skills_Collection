@@ -30,8 +30,34 @@ The generated marketplace currently publishes nine curated plugins:
 
 Each plugin carries active skills under its own `skills/` directory. Some active
 skills are aggregate skills: they expose one Codex trigger boundary while copying
-their detailed source workflows under `references/source-skills/`. The
-publication layer uses copied snapshots, not symlinks.
+their detailed source workflows under a compact `_src/<source-id>/` directory
+inside the active skill. The publication layer uses copied snapshots, not
+symlinks.
+
+The physical directory names in `plugins/codex/` are short artifact ids from
+`scripts/codex_marketplace_config.json`. They do not change plugin names,
+frontmatter `name`, or provenance. Source provenance continues to use canonical
+`skills/...` paths in `source_skills`.
+
+## Windows Path Budget
+
+The marketplace is designed to install through the same Codex App Git sparse
+checkout on Windows:
+
+```text
+Source: https://github.com/YuukiAS/AI_Skills_Collection.git
+Git reference: main
+Sparse path: plugins/codex
+```
+
+The builder enforces a repository-relative path budget of 140 characters for
+every generated file and directory under `plugins/codex/`. This includes the
+`plugins/codex/` sparse path itself and is checked on Linux as well as Windows.
+
+`Filename too long` was historically caused by aggregate source snapshots using
+full flattened source paths such as `references/source-skills/<full-source>/`.
+The fix is the compact generated layout, not asking ordinary users to enable
+`core.longpaths` or move Codex App to a shorter directory.
 
 ## Local Build
 
@@ -41,6 +67,7 @@ regenerate and validate the marketplace:
 ```bash
 python3 scripts/build_codex_marketplace.py --write
 python3 scripts/build_codex_marketplace.py --validate
+python3 scripts/build_codex_marketplace.py --path-report
 ```
 
 Before opening a pull request, also run:
@@ -48,6 +75,7 @@ Before opening a pull request, also run:
 ```bash
 python3 -m unittest discover -s tests
 python3 scripts/build_codex_marketplace.py --check
+python3 scripts/build_codex_marketplace.py --path-report
 python3 scripts/skills.py validate
 python3 scripts/skills.py audit --all
 ```
@@ -76,5 +104,6 @@ publish commit.
 Marketplace builds fail when active skill names collide across plugins, source
 skills contain `[TODO:` placeholders, source snapshots include symlinks, or a
 published source skill references secret environment variables not declared in
-frontmatter. Aggregate skills use `provenance: generated` and keep their source
-skill paths in `source_skills`.
+frontmatter. Builds also fail when generated paths exceed the Windows path
+budget. Aggregate skills use `provenance: generated` and keep their source skill
+paths in `source_skills`.

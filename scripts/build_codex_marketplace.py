@@ -15,7 +15,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-from skill_utils import ROOT, SKILLS_ROOT, read_frontmatter, skill_flat_name
+from skill_utils import ROOT, SKILLS_ROOT, read_frontmatter
 
 
 CODEX_ROOT = ROOT / "plugins" / "codex"
@@ -24,6 +24,7 @@ CONFIG_PATH = ROOT / "scripts" / "codex_marketplace_config.json"
 REPOSITORY_URL = "https://github.com/YuukiAS/AI_Skills_Collection"
 MAX_MARKETPLACE_PLUGINS = 9
 MAX_ACTIVE_SKILLS = 30
+WINDOWS_PATH_BUDGET = 140
 AUTHOR = {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -49,6 +50,7 @@ IGNORE_NAMES = {
 }
 IGNORE_SUFFIXES = (".pyc", ".pyo", ".swp", ".swo", "~")
 SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$")
+ARTIFACT_ID_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]{0,30}[a-z0-9])?$")
 SECRET_RE = re.compile(r"\b[A-Z][A-Z0-9_]*(?:API_KEY|TOKEN)\b")
 EXPLICIT_SECRET_NAMES = {
     "OPENROUTER_API_KEY",
@@ -202,6 +204,109 @@ def relative(path: Path) -> str:
         return path.as_posix()
 
 
+def generated_git_path(root: Path, path: Path) -> str:
+    try:
+        return "plugins/codex/" + path.relative_to(root).as_posix()
+    except ValueError:
+        return relative(path)
+
+
+def generated_path_context(root: Path, path: Path, config: dict[str, Any]) -> dict[str, str]:
+    context = {"plugin": "", "active_skill": "", "source_skill": ""}
+    try:
+        rel_parts = path.relative_to(root).parts
+    except ValueError:
+        return context
+    if len(rel_parts) < 4 or rel_parts[0] != "plugins" or rel_parts[2] != "skills":
+        return context
+    plugin_name = rel_parts[1]
+    active_artifact = rel_parts[3]
+    context["plugin"] = plugin_name
+    plugin = next((item for item in marketplace_plugins(config) if item.get("name") == plugin_name), None)
+    if not plugin:
+        return context
+    for entry in plugin_skill_entries(plugin):
+        entry_context = f"plugin {plugin_name}"
+        entry_type = entry.get("type")
+        if entry_type == "copy":
+            source = str(entry.get("source") or "")
+            source_dir = resolve_skill_dir(source, entry_context)
+            artifact_id = copy_entry_artifact_id(entry, source_dir, entry_context)
+            if artifact_id == active_artifact:
+                meta, _ = read_frontmatter(source_dir / "SKILL.md")
+                context["active_skill"] = str(meta.get("name") or source_dir.name)
+                context["source_skill"] = source
+                return context
+        elif entry_type == "aggregate":
+            artifact_id = aggregate_entry_artifact_id(entry, entry_context)
+            if artifact_id != active_artifact:
+                continue
+            active_name = str(entry.get("name") or "")
+            context["active_skill"] = active_name
+            if len(rel_parts) >= 6 and rel_parts[4] == "_src":
+                source_id = rel_parts[5]
+                sources = normalize_source_items(entry.get("source_skills") or [], f"{entry_context}:{active_name}")
+                for source in sources:
+                    if source["artifact_id"] == source_id:
+                        context["source_skill"] = str(source["source"])
+                        return context
+            return context
+    return context
+
+
+def path_report(root: Path = CODEX_ROOT, limit: int = 20) -> dict[str, Any]:
+    config = load_marketplace_config()
+    files: list[dict[str, Any]] = []
+    dirs: list[dict[str, Any]] = []
+    if root.exists():
+        for path in sorted(root.rglob("*")):
+            rel = generated_git_path(root, path)
+            row = {
+                "path": rel,
+                "length": len(rel),
+                "kind": "dir" if path.is_dir() else "file",
+                "over_budget": len(rel) > WINDOWS_PATH_BUDGET,
+                **generated_path_context(root, path, config),
+            }
+            if path.is_dir():
+                dirs.append(row)
+            elif path.is_file() or path.is_symlink():
+                files.append(row)
+    files_sorted = sorted(files, key=lambda row: (-int(row["length"]), str(row["path"])))
+    dirs_sorted = sorted(dirs, key=lambda row: (-int(row["length"]), str(row["path"])))
+    over_budget = [row for row in files_sorted + dirs_sorted if row["over_budget"]]
+    return {
+        "budget": WINDOWS_PATH_BUDGET,
+        "top_files": files_sorted[:limit],
+        "top_dirs": dirs_sorted[:limit],
+        "over_budget_count": len(over_budget),
+        "over_budget": over_budget[:limit],
+        "max_file_length": int(files_sorted[0]["length"]) if files_sorted else 0,
+        "max_dir_length": int(dirs_sorted[0]["length"]) if dirs_sorted else 0,
+    }
+
+
+def path_budget_errors(root: Path = CODEX_ROOT) -> list[str]:
+    report = path_report(root)
+    errors: list[str] = []
+    for row in report["over_budget"]:
+        errors.append(
+            f"{row['path']}: path length {row['length']} exceeds Windows budget {WINDOWS_PATH_BUDGET} "
+            f"(plugin={row['plugin'] or '-'}, active_skill={row['active_skill'] or '-'}, source_skill={row['source_skill'] or '-'})"
+        )
+    if report["over_budget_count"] > len(report["over_budget"]):
+        errors.append(
+            f"{report['over_budget_count'] - len(report['over_budget'])} additional generated paths exceed Windows budget {WINDOWS_PATH_BUDGET}"
+        )
+    return errors
+
+
+def assert_path_budget(root: Path = CODEX_ROOT) -> None:
+    errors = path_budget_errors(root)
+    if errors:
+        raise BuildError("generated Codex marketplace paths exceed Windows budget:\n  " + "\n  ".join(errors))
+
+
 def assert_no_symlink(path: Path, errors: list[str]) -> None:
     if path.is_symlink():
         errors.append(f"{relative(path)}: symlinks are not allowed in the Codex marketplace layer")
@@ -327,13 +432,97 @@ def plugin_skill_entries(plugin: dict[str, Any]) -> list[dict[str, Any]]:
     return entries
 
 
+def validate_artifact_id(value: str, context: str) -> str:
+    if not ARTIFACT_ID_RE.match(value):
+        raise BuildError(f"{context}: artifact_id must be lowercase kebab-case and <=32 characters")
+    return value
+
+
+def artifact_id_from_name(name: str, context: str) -> str:
+    candidate = re.sub(r"[^a-z0-9-]+", "-", name.lower()).strip("-")
+    candidate = re.sub(r"-+", "-", candidate)
+    if not candidate:
+        raise BuildError(f"{context}: cannot derive artifact_id from empty name")
+    if len(candidate) > 32:
+        candidate = candidate[:32].rstrip("-")
+    return validate_artifact_id(candidate, context)
+
+
+def copy_entry_artifact_id(entry: dict[str, Any], source_dir: Path, context: str) -> str:
+    explicit = entry.get("artifact_id")
+    if explicit:
+        return validate_artifact_id(str(explicit), context)
+    meta = read_required_skill_metadata(source_dir, context)
+    return artifact_id_from_name(str(meta.get("name") or source_dir.name), context)
+
+
+def aggregate_entry_artifact_id(entry: dict[str, Any], context: str) -> str:
+    explicit = entry.get("artifact_id")
+    if explicit:
+        return validate_artifact_id(str(explicit), context)
+    return artifact_id_from_name(str(entry.get("name") or ""), context)
+
+
+def source_item_source(item: Any, context: str) -> str:
+    if isinstance(item, str):
+        return item
+    if isinstance(item, dict) and isinstance(item.get("source"), str):
+        return str(item["source"])
+    raise BuildError(f"{context}: source_skills entries must be strings or objects with source")
+
+
+def source_item_artifact_id(item: Any, source_dir: Path, context: str) -> str:
+    if isinstance(item, dict) and item.get("artifact_id"):
+        return validate_artifact_id(str(item["artifact_id"]), context)
+    meta = read_required_skill_metadata(source_dir, context)
+    return artifact_id_from_name(str(meta.get("name") or source_dir.name), context)
+
+
+def normalize_source_items(source_items: list[Any], context: str) -> list[dict[str, Any]]:
+    normalized: list[dict[str, Any]] = []
+    seen: dict[str, str] = {}
+    for item in source_items:
+        source = source_item_source(item, context)
+        source_dir = resolve_skill_dir(source, context)
+        artifact_id = source_item_artifact_id(item, source_dir, context)
+        if artifact_id in seen:
+            raise BuildError(
+                f"{context}: duplicate source artifact_id {artifact_id}: {seen[artifact_id]} and {source}"
+            )
+        seen[artifact_id] = source
+        normalized.append({"source": source, "source_dir": source_dir, "artifact_id": artifact_id})
+    return normalized
+
+
+def artifact_dirs_for_plugin(plugin: dict[str, Any], context: str) -> dict[str, str]:
+    used: dict[str, str] = {}
+    result: dict[str, str] = {}
+    for entry in plugin_skill_entries(plugin):
+        entry_type = entry.get("type")
+        if entry_type == "copy":
+            source = str(entry.get("source") or "")
+            source_dir = resolve_skill_dir(source, context)
+            artifact_id = copy_entry_artifact_id(entry, source_dir, context)
+            label = source
+        elif entry_type == "aggregate":
+            artifact_id = aggregate_entry_artifact_id(entry, context)
+            label = str(entry.get("name") or "")
+        else:
+            raise BuildError(f"{context}: unknown skill entry type {entry_type}")
+        if artifact_id in used:
+            raise BuildError(f"{context}: duplicate artifact_id {artifact_id}: {used[artifact_id]} and {label}")
+        used[artifact_id] = label
+        result[label] = artifact_id
+    return result
+
+
 def yaml_list(name: str, items: list[str]) -> list[str]:
     if not items:
         return [f"{name}:"]
     return [f"{name}:"] + [f"  - {item}" for item in items]
 
 
-def aggregate_skill_markdown(entry: dict[str, Any], source_dirs: list[Path], metadata: dict[str, Any]) -> str:
+def aggregate_skill_markdown(entry: dict[str, Any], sources: list[dict[str, Any]], metadata: dict[str, Any]) -> str:
     name = str(entry["name"])
     description = str(entry["description"])
     lines = [
@@ -368,22 +557,23 @@ def aggregate_skill_markdown(entry: dict[str, Any], source_dirs: list[Path], met
             "",
         ]
     )
-    for source_dir in source_dirs:
+    for source in sources:
+        source_dir = source["source_dir"]
         meta, _ = read_frontmatter(source_dir / "SKILL.md")
         source_name = str(meta.get("name") or source_dir.name)
         source_desc = str(meta.get("description") or "").strip()
-        flat = skill_flat_name(source_dir)
+        ref = f"_src/{source['artifact_id']}/source.md"
         if source_desc:
-            lines.append(f"- `{source_name}`: {source_desc} Reference: `references/source-skills/{flat}/source-skill.md`")
+            lines.append(f"- `{source_name}`: {source_desc} Reference: `{ref}`")
         else:
-            lines.append(f"- `{source_name}`. Reference: `references/source-skills/{flat}/source-skill.md`")
+            lines.append(f"- `{source_name}`. Reference: `{ref}`")
     lines.extend(
         [
             "",
             "## Workflow",
             "",
             "1. Choose the source workflow whose trigger boundary best matches the user request.",
-            "2. Read that source workflow's `source-skill.md` before acting.",
+            "2. Read that source workflow's `source.md` before acting.",
             "3. Load only the needed files under that workflow's copied references, scripts, assets, or evals.",
             "4. Follow the source workflow unless the current project gives stricter instructions.",
         ]
@@ -393,7 +583,7 @@ def aggregate_skill_markdown(entry: dict[str, Any], source_dirs: list[Path], met
 
 def rename_nested_skill_files(reference_root: Path) -> None:
     for skill_file in sorted(reference_root.rglob("SKILL.md")):
-        target = skill_file.with_name("source-skill.md")
+        target = skill_file.with_name("source.md")
         if target.exists():
             raise BuildError(f"{relative(target)} already exists while renaming nested SKILL.md")
         skill_file.rename(target)
@@ -406,7 +596,7 @@ def copy_source_tree(source_dir: Path, dest: Path) -> None:
 def generate_copy_skill(entry: dict[str, Any], skills_dir: Path, context: str) -> int:
     source_dir = resolve_skill_dir(str(entry.get("source") or ""), context)
     read_required_skill_metadata(source_dir, context)
-    copy_source_tree(source_dir, skills_dir / skill_flat_name(source_dir))
+    copy_source_tree(source_dir, skills_dir / copy_entry_artifact_id(entry, source_dir, context))
     return 1
 
 
@@ -421,13 +611,16 @@ def generate_aggregate_skill(entry: dict[str, Any], skills_dir: Path, context: s
     if not isinstance(source_items, list) or not source_items:
         raise BuildError(f"{context}: aggregate skill {name} needs source_skills")
 
-    aggregate_dir = skills_dir / name
+    artifact_id = aggregate_entry_artifact_id(entry, context)
+    aggregate_dir = skills_dir / artifact_id
     aggregate_dir.mkdir(parents=True, exist_ok=True)
-    source_dirs = [resolve_skill_dir(str(item), f"{context}:{name}") for item in source_items]
+    sources = normalize_source_items(source_items, f"{context}:{name}")
+    source_dirs = [source["source_dir"] for source in sources]
     metadata = aggregate_metadata(source_dirs, f"{context}:{name}")
-    (aggregate_dir / "SKILL.md").write_text(aggregate_skill_markdown(entry, source_dirs, metadata), encoding="utf-8")
-    for source_dir in source_dirs:
-        dest = aggregate_dir / "references" / "source-skills" / skill_flat_name(source_dir)
+    (aggregate_dir / "SKILL.md").write_text(aggregate_skill_markdown(entry, sources, metadata), encoding="utf-8")
+    for source in sources:
+        source_dir = source["source_dir"]
+        dest = aggregate_dir / "_src" / source["artifact_id"]
         copy_source_tree(source_dir, dest)
         rename_nested_skill_files(dest)
     return 1, len(source_dirs)
@@ -436,9 +629,10 @@ def generate_aggregate_skill(entry: dict[str, Any], skills_dir: Path, context: s
 def skill_entry_generated_dir(entry: dict[str, Any], context: str) -> str:
     entry_type = entry.get("type")
     if entry_type == "copy":
-        return skill_flat_name(resolve_skill_dir(str(entry.get("source") or ""), context))
+        source_dir = resolve_skill_dir(str(entry.get("source") or ""), context)
+        return copy_entry_artifact_id(entry, source_dir, context)
     if entry_type == "aggregate":
-        return str(entry.get("name") or "")
+        return aggregate_entry_artifact_id(entry, context)
     raise BuildError(f"{context}: unknown skill entry type {entry_type}")
 
 
@@ -470,6 +664,7 @@ def validate_config(config: dict[str, Any]) -> None:
             raise BuildError(f"{relative(CONFIG_PATH)}: duplicate plugin name {plugin_name}")
         plugin_seen.add(plugin_name)
         plugin_version(plugin, f"plugin {plugin_name}")
+        artifact_dirs_for_plugin(plugin, f"plugin {plugin_name}")
         for entry in plugin_skill_entries(plugin):
             active_name = skill_entry_name(entry)
             if entry.get("type") == "copy":
@@ -524,6 +719,7 @@ def generate_layer(target_root: Path) -> dict[str, Any]:
 
     marketplace = build_marketplace(config)
     (target_root / ".agents" / "plugins" / "marketplace.json").write_text(json_dump(marketplace), encoding="utf-8")
+    assert_path_budget(target_root)
     return {
         "plugin_count": len(plugins),
         "active_skill_count": active_skill_count,
@@ -603,6 +799,25 @@ def validate_plugin_json(plugin_dir: Path, plugin: dict[str, Any], errors: list[
             rel_parts = nested.relative_to(skills_dir).parts
             if len(rel_parts) != 2:
                 errors.append(f"{relative(nested)}: nested SKILL.md files are not allowed in the Codex marketplace layer")
+    for entry in plugin_skill_entries(plugin):
+        if entry.get("type") != "aggregate":
+            continue
+        active_dir = skills_dir / aggregate_entry_artifact_id(entry, f"plugin {plugin_name}")
+        active_skill = active_dir / "SKILL.md"
+        text = active_skill.read_text(encoding="utf-8", errors="replace") if active_skill.exists() else ""
+        active_name = str(entry.get("name") or "")
+        sources = normalize_source_items(entry.get("source_skills") or [], f"plugin {plugin_name}:{active_name}")
+        seen_sources: set[str] = set()
+        for source in sources:
+            source_path = str(source["source"])
+            if source_path in seen_sources:
+                errors.append(f"{relative(active_skill)}: source snapshot copied more than once: {source_path}")
+            seen_sources.add(source_path)
+            ref = f"_src/{source['artifact_id']}/source.md"
+            if ref not in text:
+                errors.append(f"{relative(active_skill)}: missing source workflow reference {ref}")
+            if not (active_dir / ref).exists():
+                errors.append(f"{relative(active_dir / ref)}: aggregate source workflow file is missing")
     return len(found_skill_md)
 
 
@@ -701,6 +916,8 @@ def validate_layer(root: Path = CODEX_ROOT) -> dict[str, Any]:
     if todo_matches:
         errors.append("plugins/codex contains [TODO: placeholders: " + ", ".join(sorted(todo_matches)))
 
+    errors.extend(path_budget_errors(root))
+
     duplicate_generated_names = {name: rows for name, rows in generated_active_names.items() if len(rows) > 1}
     for name, rows in sorted(duplicate_generated_names.items()):
         details = "; ".join(f"{plugin}: {path}" for plugin, path in rows)
@@ -757,6 +974,9 @@ def check_layer() -> tuple[dict[str, Any], list[str]]:
         differences = compare_layers(expected_root, CODEX_ROOT)
     if differences:
         summary["errors"] = [f"publication layer is not current ({len(differences)} differences)"]
+    budget_errors = path_budget_errors(CODEX_ROOT)
+    if budget_errors:
+        summary.setdefault("errors", []).extend(budget_errors)
     return summary, differences
 
 
@@ -777,18 +997,41 @@ def print_summary(summary: dict[str, Any], json_output: bool) -> None:
         print(f"ERROR: {error}", file=sys.stderr)
 
 
+def print_path_report(report: dict[str, Any], json_output: bool) -> None:
+    if json_output:
+        print(json.dumps({"path_report": report}, ensure_ascii=False, indent=2) + "\n", end="")
+        return
+    print(f"Windows path budget: {report['budget']}")
+    print(f"max_file_length={report['max_file_length']} max_dir_length={report['max_dir_length']} over_budget={report['over_budget_count']}")
+    print("\nTop files:")
+    for row in report["top_files"]:
+        marker = " OVER" if row["over_budget"] else ""
+        print(
+            f"{row['length']:>3}{marker} {row['path']} "
+            f"(plugin={row['plugin'] or '-'} active={row['active_skill'] or '-'} source={row['source_skill'] or '-'})"
+        )
+    print("\nTop directories:")
+    for row in report["top_dirs"]:
+        marker = " OVER" if row["over_budget"] else ""
+        print(
+            f"{row['length']:>3}{marker} {row['path']} "
+            f"(plugin={row['plugin'] or '-'} active={row['active_skill'] or '-'} source={row['source_skill'] or '-'})"
+        )
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write", action="store_true", help="Regenerate plugins/codex")
     parser.add_argument("--validate", action="store_true", help="Validate the current plugins/codex layer")
     parser.add_argument("--check", action="store_true", help="Compare plugins/codex with a freshly generated layer")
+    parser.add_argument("--path-report", action="store_true", help="Report longest generated paths and Windows budget status")
     parser.add_argument("--json", action="store_true", help="Print a machine-readable summary")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
-    actions = [args.write, args.validate, args.check]
+    actions = [args.write, args.validate, args.check, args.path_report]
     if not any(actions):
         args.validate = True
 
@@ -813,9 +1056,16 @@ def main() -> int:
                     print(f"  {item}", file=sys.stderr)
             if not args.json:
                 print_summary(summary, False)
-            if differences:
+            if differences or summary.get("errors"):
+                exit_code = 1
+        if args.path_report:
+            report = path_report(CODEX_ROOT)
+            print_path_report(report, args.json)
+            if report["over_budget_count"]:
                 exit_code = 1
         if args.json:
+            if args.path_report:
+                return exit_code
             if summary is None:
                 summary = validate_layer(CODEX_ROOT)
             print_summary(summary, True)

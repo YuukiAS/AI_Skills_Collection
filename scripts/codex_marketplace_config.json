@@ -17,15 +17,18 @@
       "skills": [
         {
           "type": "copy",
-          "source": "skills/core/codex-system/project-skill-installer"
+          "source": "skills/core/codex-system/project-skill-installer",
+          "artifact_id": "proj"
         },
         {
           "type": "copy",
-          "source": "skills/core/codex-system/system-skills/skill-installer"
+          "source": "skills/core/codex-system/system-skills/skill-installer",
+          "artifact_id": "install"
         },
         {
           "type": "copy",
-          "source": "skills/core/codex-system/system-skills/skill-creator"
+          "source": "skills/core/codex-system/system-skills/skill-creator",
+          "artifact_id": "create"
         }
       ]
     },
@@ -43,7 +46,8 @@
       "skills": [
         {
           "type": "copy",
-          "source": "skills/core/codex-system/codex-workflow-protocol"
+          "source": "skills/core/codex-system/codex-workflow-protocol",
+          "artifact_id": "workflow"
         }
       ]
     },
@@ -61,19 +65,28 @@
       "skills": [
         {
           "type": "copy",
-          "source": "skills/writing/core/writing-fidelity"
+          "source": "skills/writing/core/writing-fidelity",
+          "artifact_id": "fidelity"
         },
         {
           "type": "copy",
-          "source": "skills/writing/core/scientific-prose"
+          "source": "skills/writing/core/scientific-prose",
+          "artifact_id": "sci"
         },
         {
           "type": "aggregate",
           "name": "chinese-prose",
+          "artifact_id": "zh",
           "description": "Chinese technical and scientific prose polishing with CJK/math PDF rendering support.",
           "source_skills": [
-            "skills/writing/core/chinese-prose",
-            "skills/tools/documents-media/render-chinese-math-pdf"
+            {
+              "source": "skills/writing/core/chinese-prose",
+              "artifact_id": "prose"
+            },
+            {
+              "source": "skills/tools/documents-media/render-chinese-math-pdf",
+              "artifact_id": "pdf"
+            }
           ]
         }
       ]
@@ -93,43 +106,78 @@
         {
           "type": "aggregate",
           "name": "frontend-product-design",
+          "artifact_id": "ux",
           "description": "Shape product UX, information architecture, and distinctive frontend visual direction before implementation.",
           "source_skills": [
-            "skills/tools/frontend/product-ux-planning",
-            "skills/tools/frontend/visual-direction"
+            {
+              "source": "skills/tools/frontend/product-ux-planning",
+              "artifact_id": "plan"
+            },
+            {
+              "source": "skills/tools/frontend/visual-direction",
+              "artifact_id": "visual"
+            }
           ]
         },
         {
           "type": "aggregate",
           "name": "react-tailwind-ui",
+          "artifact_id": "ui",
           "description": "Implement React, TypeScript, Tailwind, shadcn/ui, design tokens, and motion polish.",
           "source_skills": [
-            "skills/tools/frontend/design-system-tokens",
-            "skills/tools/frontend/implementation-react-tailwind",
-            "skills/tools/frontend/motion-interaction"
+            {
+              "source": "skills/tools/frontend/design-system-tokens",
+              "artifact_id": "tokens"
+            },
+            {
+              "source": "skills/tools/frontend/implementation-react-tailwind",
+              "artifact_id": "impl"
+            },
+            {
+              "source": "skills/tools/frontend/motion-interaction",
+              "artifact_id": "motion"
+            }
           ]
         },
         {
           "type": "aggregate",
           "name": "frontend-testing-debugging",
+          "artifact_id": "qa",
           "description": "Test and debug rendered frontend apps with browser automation, responsive checks, and accessibility review.",
           "source_skills": [
-            "skills/tools/frontend/webapp-testing",
-            "skills/tools/frontend/responsive-accessibility-review"
+            {
+              "source": "skills/tools/frontend/webapp-testing",
+              "artifact_id": "test"
+            },
+            {
+              "source": "skills/tools/frontend/responsive-accessibility-review",
+              "artifact_id": "a11y"
+            }
           ]
         },
         {
           "type": "copy",
-          "source": "skills/tools/frontend/figma-design-to-code"
+          "source": "skills/tools/frontend/figma-design-to-code",
+          "artifact_id": "figma"
         },
         {
           "type": "aggregate",
           "name": "frontend-visual-assets",
+          "artifact_id": "assets",
           "description": "Generate images and apply coherent visual themes for frontend surfaces and artifacts.",
           "source_skills": [
-            "skills/tools/visualization/generate-image",
-            "skills/tools/visualization/theme-factory",
-            "skills/tools/frontend/brand-creative-assets"
+            {
+              "source": "skills/tools/visualization/generate-image",
+              "artifact_id": "image"
+            },
+            {
+              "source": "skills/tools/visualization/theme-factory",
+              "artifact_id": "theme"
+            },
+            {
+              "source": "skills/tools/frontend/brand-creative-assets",
+              "artifact_id": "brand"
+            }
           ]
         }
       ]
@@ -149,39 +197,80 @@
         {
           "type": "aggregate",
           "name": "research-paper-workflow",
+          "artifact_id": "paper",
           "description": "Scientific writing, paper workflow orchestration, Nature-style manuscripts, citation verification, LaTeX authoring, and optional semantic literature search.",
           "source_skills": [
-            "skills/writing/research/scientific-writing",
-            "skills/writing/research/paper-workflow-orchestrator",
-            "skills/writing/research/nature-manuscript-workflow",
-            "skills/writing/research/citation-verification",
-            "skills/writing/research/latex-paper-authoring",
-            "skills/science/discovery/valyu-scientific-search"
+            {
+              "source": "skills/writing/research/scientific-writing",
+              "artifact_id": "write"
+            },
+            {
+              "source": "skills/writing/research/paper-workflow-orchestrator",
+              "artifact_id": "flow"
+            },
+            {
+              "source": "skills/writing/research/nature-manuscript-workflow",
+              "artifact_id": "nature"
+            },
+            {
+              "source": "skills/writing/research/citation-verification",
+              "artifact_id": "cite"
+            },
+            {
+              "source": "skills/writing/research/latex-paper-authoring",
+              "artifact_id": "latex"
+            },
+            {
+              "source": "skills/science/discovery/valyu-scientific-search",
+              "artifact_id": "valyu"
+            }
           ]
         },
         {
           "type": "copy",
-          "source": "skills/writing/research/literature-review"
+          "source": "skills/writing/research/literature-review",
+          "artifact_id": "lit"
         },
         {
           "type": "copy",
-          "source": "skills/science/discovery/citation-management"
+          "source": "skills/science/discovery/citation-management",
+          "artifact_id": "cite"
         },
         {
           "type": "copy",
-          "source": "skills/science/discovery/research-lookup"
+          "source": "skills/science/discovery/research-lookup",
+          "artifact_id": "lookup"
         },
         {
           "type": "aggregate",
           "name": "research-documents",
+          "artifact_id": "d",
           "description": "Work with research PDFs, Word documents, slides, Markdown conversion, figures, and schematics.",
           "source_skills": [
-            "skills/tools/documents-media/pdf",
-            "skills/tools/documents-media/docx",
-            "skills/tools/documents-media/pptx",
-            "skills/tools/documents-media/markitdown",
-            "skills/science/communication/scientific-slides",
-            "skills/science/communication/scientific-schematics"
+            {
+              "source": "skills/tools/documents-media/pdf",
+              "artifact_id": "pdf"
+            },
+            {
+              "source": "skills/tools/documents-media/docx",
+              "artifact_id": "x"
+            },
+            {
+              "source": "skills/tools/documents-media/pptx",
+              "artifact_id": "p"
+            },
+            {
+              "source": "skills/tools/documents-media/markitdown",
+              "artifact_id": "md"
+            },
+            {
+              "source": "skills/science/communication/scientific-slides",
+              "artifact_id": "slides"
+            },
+            {
+              "source": "skills/science/communication/scientific-schematics",
+              "artifact_id": "fig"
+            }
           ]
         }
       ]
@@ -201,33 +290,69 @@
         {
           "type": "aggregate",
           "name": "bayesian-modeling",
+          "artifact_id": "bayes",
           "description": "Bayesian and statistical modeling workflows with PyMC, diagnostics, simulation, and model reporting.",
           "source_skills": [
-            "skills/domains/bayesian/bayesian-ppl-diagnostics",
-            "skills/domains/bayesian/pymc",
-            "skills/domains/bayesian/statsmodels",
-            "skills/domains/bayesian/statistical-analysis",
-            "skills/domains/bayesian/simpy"
+            {
+              "source": "skills/domains/bayesian/bayesian-ppl-diagnostics",
+              "artifact_id": "diag"
+            },
+            {
+              "source": "skills/domains/bayesian/pymc",
+              "artifact_id": "pymc"
+            },
+            {
+              "source": "skills/domains/bayesian/statsmodels",
+              "artifact_id": "stats"
+            },
+            {
+              "source": "skills/domains/bayesian/statistical-analysis",
+              "artifact_id": "analysis"
+            },
+            {
+              "source": "skills/domains/bayesian/simpy",
+              "artifact_id": "sim"
+            }
           ]
         },
         {
           "type": "aggregate",
           "name": "data-analysis-python",
+          "artifact_id": "data",
           "description": "Python data analysis workflows with EDA, Polars, scikit-learn, and symbolic math.",
           "source_skills": [
-            "skills/tools/data-science/exploratory-data-analysis",
-            "skills/tools/data-science/polars",
-            "skills/tools/data-science/scikit-learn",
-            "skills/tools/data-science/sympy"
+            {
+              "source": "skills/tools/data-science/exploratory-data-analysis",
+              "artifact_id": "eda"
+            },
+            {
+              "source": "skills/tools/data-science/polars",
+              "artifact_id": "polars"
+            },
+            {
+              "source": "skills/tools/data-science/scikit-learn",
+              "artifact_id": "sklearn"
+            },
+            {
+              "source": "skills/tools/data-science/sympy",
+              "artifact_id": "sympy"
+            }
           ]
         },
         {
           "type": "aggregate",
           "name": "scientific-visualization",
+          "artifact_id": "viz",
           "description": "Scientific plotting and visualization with Matplotlib and Plotly.",
           "source_skills": [
-            "skills/tools/visualization/matplotlib",
-            "skills/tools/visualization/plotly"
+            {
+              "source": "skills/tools/visualization/matplotlib",
+              "artifact_id": "mpl"
+            },
+            {
+              "source": "skills/tools/visualization/plotly",
+              "artifact_id": "plotly"
+            }
           ]
         }
       ]
@@ -247,18 +372,49 @@
         {
           "type": "aggregate",
           "name": "bioinformatics-workflows",
+          "artifact_id": "bio",
           "description": "Common bioinformatics workflows across databases, single-cell analysis, genomics I/O, and omics analysis.",
           "source_skills": [
-            "skills/domains/bioinformatics/databases/bioinformatics-database-retrieval",
-            "skills/domains/bioinformatics/single-cell/scanpy",
-            "skills/domains/bioinformatics/single-cell/scvi-tools",
-            "skills/domains/bioinformatics/single-cell/anndata",
-            "skills/domains/bioinformatics/genomics-io/pysam",
-            "skills/domains/bioinformatics/omics-analysis/pydeseq2",
-            "skills/domains/bioinformatics/biology-toolkits/biopython",
-            "skills/domains/bioinformatics/biology-toolkits/scikit-bio",
-            "skills/domains/bioinformatics/omics-analysis/polars-bio",
-            "skills/domains/bioinformatics/genomics-io/tiledbvcf"
+            {
+              "source": "skills/domains/bioinformatics/databases/bioinformatics-database-retrieval",
+              "artifact_id": "db"
+            },
+            {
+              "source": "skills/domains/bioinformatics/single-cell/scanpy",
+              "artifact_id": "scanpy"
+            },
+            {
+              "source": "skills/domains/bioinformatics/single-cell/scvi-tools",
+              "artifact_id": "scvi"
+            },
+            {
+              "source": "skills/domains/bioinformatics/single-cell/anndata",
+              "artifact_id": "anndata"
+            },
+            {
+              "source": "skills/domains/bioinformatics/genomics-io/pysam",
+              "artifact_id": "pysam"
+            },
+            {
+              "source": "skills/domains/bioinformatics/omics-analysis/pydeseq2",
+              "artifact_id": "deseq"
+            },
+            {
+              "source": "skills/domains/bioinformatics/biology-toolkits/biopython",
+              "artifact_id": "biopy"
+            },
+            {
+              "source": "skills/domains/bioinformatics/biology-toolkits/scikit-bio",
+              "artifact_id": "skbio"
+            },
+            {
+              "source": "skills/domains/bioinformatics/omics-analysis/polars-bio",
+              "artifact_id": "polars"
+            },
+            {
+              "source": "skills/domains/bioinformatics/genomics-io/tiledbvcf",
+              "artifact_id": "vcf"
+            }
           ]
         }
       ]
@@ -278,22 +434,45 @@
         {
           "type": "aggregate",
           "name": "medical-imaging-workflows",
+          "artifact_id": "med",
           "description": "Medical imaging workflows for CMR, DICOM/NIfTI, classical features, deep learning, and pathology imaging.",
           "source_skills": [
-            "skills/domains/medical-imaging/cardiac-mri",
-            "skills/domains/medical-imaging/pydicom",
-            "skills/domains/medical-imaging/medical-imaging-classical-features",
-            "skills/domains/medical-imaging/medical-imaging-deep-learning",
-            "skills/domains/medical-imaging/pathml"
+            {
+              "source": "skills/domains/medical-imaging/cardiac-mri",
+              "artifact_id": "cmr"
+            },
+            {
+              "source": "skills/domains/medical-imaging/pydicom",
+              "artifact_id": "dicom"
+            },
+            {
+              "source": "skills/domains/medical-imaging/medical-imaging-classical-features",
+              "artifact_id": "classic"
+            },
+            {
+              "source": "skills/domains/medical-imaging/medical-imaging-deep-learning",
+              "artifact_id": "dl"
+            },
+            {
+              "source": "skills/domains/medical-imaging/pathml",
+              "artifact_id": "pathml"
+            }
           ]
         },
         {
           "type": "aggregate",
           "name": "ai-ml-imaging",
+          "artifact_id": "aiml",
           "description": "AI/ML support for imaging workflows with PyTorch Lightning and Transformers.",
           "source_skills": [
-            "skills/tools/ai-ml/pytorch-lightning",
-            "skills/tools/ai-ml/transformers"
+            {
+              "source": "skills/tools/ai-ml/pytorch-lightning",
+              "artifact_id": "lightning"
+            },
+            {
+              "source": "skills/tools/ai-ml/transformers",
+              "artifact_id": "hf"
+            }
           ]
         }
       ]
@@ -313,12 +492,25 @@
         {
           "type": "aggregate",
           "name": "cardiacnexus-workflows",
+          "artifact_id": "cnx",
           "description": "CardiacNexus feature contracts, pipeline refactors, strain registration, and documentation workflows.",
           "source_skills": [
-            "skills/projects/cmr/cardiacnexus-feature-contracts",
-            "skills/projects/cmr/cardiacnexus-pipeline-refactor",
-            "skills/projects/cmr/cardiacnexus-strain-registration",
-            "skills/projects/cmr/cardiacnexus-docs-markdoc"
+            {
+              "source": "skills/projects/cmr/cardiacnexus-feature-contracts",
+              "artifact_id": "contracts"
+            },
+            {
+              "source": "skills/projects/cmr/cardiacnexus-pipeline-refactor",
+              "artifact_id": "pipeline"
+            },
+            {
+              "source": "skills/projects/cmr/cardiacnexus-strain-registration",
+              "artifact_id": "strain"
+            },
+            {
+              "source": "skills/projects/cmr/cardiacnexus-docs-markdoc",
+              "artifact_id": "docs"
+            }
           ]
         }
       ]
