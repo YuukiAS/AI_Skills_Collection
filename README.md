@@ -37,7 +37,7 @@
 - 源 skill 的 `SKILL.md` frontmatter：`provenance`, `source_repo_url`, `source_path`, `source_ref`, `source_imported_at`, `source_license`, `source_note`。
 - `registry.json`：机器可读注册表，会保留每个 skill 的来源字段。
 - `docs/SKILL_PROVENANCE.md`：由脚本生成的来源汇总，按用户原创、外部适配、外部原样引入、生成内容和历史未知来源分类。
-- `TODO/CLONED_SKILL_SOURCES.md` 和 `TODO/cloned_skill_sources.json`：记录本轮 clone 过、审查过、适配过或排除过的外部仓库。
+- `docs/provenance/CLONED_SKILL_SOURCES.md` 和 `docs/provenance/cloned_skill_sources.json`：记录本轮 clone 过、审查过、适配过或排除过的外部仓库。
 
 历史上没有可靠来源记录的 skill 保持 `provenance: unknown`，不猜测 GitHub URL、commit 或 license。新导入或大幅适配的外部 skill 必须填写完整来源字段。
 

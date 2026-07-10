@@ -8,7 +8,7 @@ source_path: .
 source_ref: d4529208cda72aa075767611b0265b95b709b550
 source_imported_at: 2026-07-09
 source_license: MIT
-source_note: Distilled from PaperSpine, academic-research-skills, Nature-Paper-Skills, paper-writing-skill, and Research-Paper-Writing-Skills; see TODO/CLONED_SKILL_SOURCES.md.
+source_note: Distilled from PaperSpine, academic-research-skills, Nature-Paper-Skills, paper-writing-skill, and Research-Paper-Writing-Skills; see docs/provenance/CLONED_SKILL_SOURCES.md.
 trusted: false
 requires_network: false
 writes_files: true

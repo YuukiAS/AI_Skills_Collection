@@ -1,6 +1,6 @@
 # Cloned Skill Sources
 
-This file records the lowercase `todo/` scratch clones used for integration. Keep this tracked before deleting `todo/`.
+This file records the scratch clones used for integration. Keep this tracked before deleting any local scratch clone directory.
 
 ## Summary
 
@@ -55,4 +55,4 @@ This file records the lowercase `todo/` scratch clones used for integration. Kee
 
 ## Cleanup Rule
 
-Do not remove lowercase `todo/` until this file and `TODO/cloned_skill_sources.json` are committed and the user explicitly approves scratch cleanup.
+Do not remove local scratch clones until this file and `docs/provenance/cloned_skill_sources.json` are committed and the user explicitly approves scratch cleanup.
