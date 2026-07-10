@@ -17,10 +17,10 @@ Before adapting external skill-like content into this repository:
 - review quality, safety, dependencies, and trigger boundaries;
 - adapt only the specific skill needed, not the whole upstream repository.
 
-`plugins/codex/` is generated from `skills/` and
-`scripts/codex_marketplace_config.json`. Do not edit it as source and do not use
-symlinks there; it must remain a self-contained sparse-checkout marketplace
-root.
+`.agents/plugins/marketplace.json` and `plugins/codex/plugins/` are generated
+from `skills/` and `scripts/codex_marketplace_config.json`. Do not edit them as
+source and do not use symlinks there; together they form the sparse-checkout
+Codex App marketplace publication.
 
 `bundles/` and explicit codex-home installs remain compatibility paths. They
 are not the design target for new skill publication.

@@ -8,14 +8,27 @@ through the app's Git marketplace flow:
 ```text
 Source: https://github.com/YuukiAS/AI_Skills_Collection.git
 Git reference: main
-Sparse path: plugins/codex
+Sparse paths:
+.agents/plugins
+plugins/codex/plugins
 ```
 
-`plugins/codex` is a generated, self-contained marketplace root. It publishes a
-small Codex App plugin set, and each plugin carries copied skill snapshots under
-its own `skills/` directory. Some app-facing skills are aggregate skills whose
-source workflows live under `references/source-skills/`. Codex App does not need
-to run `ai-skills` after the marketplace is added.
+Enter the sparse paths as two separate lines. `.agents/plugins` contains the
+repo marketplace manifest, and `plugins/codex/plugins` contains the generated
+plugin payload. Sparse checkout does not change the repository root, so both
+paths are required. Some app-facing skills are aggregate skills whose source
+workflows live under compact `_src/<source-id>/` snapshots. Codex App does not
+need to run `ai-skills` after the marketplace is added.
+
+CLI equivalent:
+
+```bash
+codex plugin marketplace add \
+  https://github.com/YuukiAS/AI_Skills_Collection.git \
+  --ref main \
+  --sparse .agents/plugins \
+  --sparse plugins/codex/plugins
+```
 
 Use the CLI when you need server, HPC, repo-local, user-level, explicit legacy
 codex-home installs, or when you are authoring and validating skills in this

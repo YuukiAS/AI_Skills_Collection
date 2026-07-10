@@ -4,17 +4,32 @@
 
 ## Codex App 安装插件市场
 
-把最新改动推送到 `main` 后，先等待 GitHub Actions 里的 `Codex Marketplace` 工作流执行完成。工作流会重新生成并验证 `plugins/codex/`；如果生成层有变化，它会用带有 `[skip codex-marketplace]` 的提交自动写回 `main`，避免循环触发。
+把最新改动推送到 `main` 后，先等待 GitHub Actions 里的 `Codex Marketplace` 工作流执行完成。工作流会重新生成并验证根目录 marketplace manifest 和 `plugins/codex/plugins/` 插件 payload；如果生成层有变化，它会用带有 `[skip codex-marketplace]` 的提交自动写回 `main`，避免循环触发。
 
 工作流变绿后，在 Codex App 里添加 Git 插件市场：
 
 - 来源：`https://github.com/YuukiAS/AI_Skills_Collection.git`
 - Git 引用：`main`
-- 稀疏路径：`plugins/codex`
+- 稀疏路径：
 
-`plugins/codex/` 是自包含的生成发布层。Codex App 只需要拉取这个 sparse path，就可以安装里面的插件；安装后不需要再运行 `ai-skills`。
+```text
+.agents/plugins
+plugins/codex/plugins
+```
 
-Windows 用户也使用同一组参数。发布层会在 CI 和本地构建中检查完整 Git 路径长度，确保普通 Windows checkout 不需要开启 `core.longpaths`。如果看到历史报错 `Filename too long`，根因应由 `plugins/codex/` 的生成布局修复，而不是要求普通用户修改全局 Git 或 Windows 设置。
+稀疏路径需要填两行：`.agents/plugins` 检出 marketplace manifest，`plugins/codex/plugins` 检出插件 payload。Sparse checkout 只决定拉取哪些 Git 路径，不会把 `plugins/codex` 改成新的仓库根目录。安装后不需要再运行 `ai-skills`。
+
+CLI 等价命令：
+
+```bash
+codex plugin marketplace add \
+  https://github.com/YuukiAS/AI_Skills_Collection.git \
+  --ref main \
+  --sparse .agents/plugins \
+  --sparse plugins/codex/plugins
+```
+
+Windows 用户也使用同一组参数。发布层会在 CI 和本地构建中检查完整 Git 路径长度，确保普通 Windows checkout 不需要开启 `core.longpaths`。如果看到历史报错 `Filename too long`，根因应由 `plugins/codex/plugins/` 的生成布局修复，而不是要求普通用户修改全局 Git 或 Windows 设置。
 
 ## Codex App 可安装插件
 
@@ -94,7 +109,8 @@ python3 /path/to/AI_Skills_Collection/scripts/skills.py --help
 - `skills/`：正式 skill 源码。
 - `profiles/`：CLI 使用的组合安装方案。
 - `scripts/codex_marketplace_config.json`：Codex App 插件市场配置。
-- `plugins/codex/`：由脚本生成的 Codex App 发布层，不要手工编辑。
+- `.agents/plugins/marketplace.json`：由脚本生成的 Codex App repo marketplace manifest。
+- `plugins/codex/plugins/`：由脚本生成的 Codex App 插件 payload，不要手工编辑。
 
 修改 `skills/`、`profiles/` 或 marketplace 配置后，运行：
 

@@ -19,7 +19,9 @@ from skill_utils import ROOT, SKILLS_ROOT, read_frontmatter
 
 
 CODEX_ROOT = ROOT / "plugins" / "codex"
-MARKETPLACE_PATH = CODEX_ROOT / ".agents" / "plugins" / "marketplace.json"
+PLUGIN_PAYLOAD_ROOT = CODEX_ROOT / "plugins"
+MARKETPLACE_PATH = ROOT / ".agents" / "plugins" / "marketplace.json"
+OLD_NESTED_MARKETPLACE_PATH = CODEX_ROOT / ".agents" / "plugins" / "marketplace.json"
 CONFIG_PATH = ROOT / "scripts" / "codex_marketplace_config.json"
 REPOSITORY_URL = "https://github.com/YuukiAS/AI_Skills_Collection"
 MAX_MARKETPLACE_PLUGINS = 9
@@ -135,7 +137,7 @@ def build_marketplace_entry(plugin: dict[str, Any]) -> dict[str, Any]:
         "name": plugin_name,
         "source": {
             "source": "local",
-            "path": f"./plugins/{plugin_name}",
+            "path": f"./plugins/codex/plugins/{plugin_name}",
         },
         "policy": {
             "installation": str(plugin.get("installation") or "AVAILABLE"),
@@ -206,7 +208,7 @@ def relative(path: Path) -> str:
 
 def generated_git_path(root: Path, path: Path) -> str:
     try:
-        return "plugins/codex/" + path.relative_to(root).as_posix()
+        return path.relative_to(root).as_posix()
     except ValueError:
         return relative(path)
 
@@ -217,10 +219,16 @@ def generated_path_context(root: Path, path: Path, config: dict[str, Any]) -> di
         rel_parts = path.relative_to(root).parts
     except ValueError:
         return context
-    if len(rel_parts) < 4 or rel_parts[0] != "plugins" or rel_parts[2] != "skills":
+    if (
+        len(rel_parts) < 6
+        or rel_parts[0] != "plugins"
+        or rel_parts[1] != "codex"
+        or rel_parts[2] != "plugins"
+        or rel_parts[4] != "skills"
+    ):
         return context
-    plugin_name = rel_parts[1]
-    active_artifact = rel_parts[3]
+    plugin_name = rel_parts[3]
+    active_artifact = rel_parts[5]
     context["plugin"] = plugin_name
     plugin = next((item for item in marketplace_plugins(config) if item.get("name") == plugin_name), None)
     if not plugin:
@@ -243,8 +251,8 @@ def generated_path_context(root: Path, path: Path, config: dict[str, Any]) -> di
                 continue
             active_name = str(entry.get("name") or "")
             context["active_skill"] = active_name
-            if len(rel_parts) >= 6 and rel_parts[4] == "_src":
-                source_id = rel_parts[5]
+            if len(rel_parts) >= 8 and rel_parts[6] == "_src":
+                source_id = rel_parts[7]
                 sources = normalize_source_items(entry.get("source_skills") or [], f"{entry_context}:{active_name}")
                 for source in sources:
                     if source["artifact_id"] == source_id:
@@ -254,24 +262,45 @@ def generated_path_context(root: Path, path: Path, config: dict[str, Any]) -> di
     return context
 
 
-def path_report(root: Path = CODEX_ROOT, limit: int = 20) -> dict[str, Any]:
+def publication_paths(root: Path) -> list[Path]:
+    return [
+        root / ".agents" / "plugins" / "marketplace.json",
+        root / "plugins" / "codex" / "plugins",
+    ]
+
+
+def iter_publication_paths(root: Path) -> list[Path]:
+    paths: list[Path] = []
+    marketplace = root / ".agents" / "plugins" / "marketplace.json"
+    if marketplace.exists():
+        paths.append(marketplace)
+    payload_root = root / "plugins" / "codex" / "plugins"
+    if payload_root.exists():
+        paths.append(payload_root)
+        paths.extend(sorted(payload_root.rglob("*")))
+    old_marketplace = root / "plugins" / "codex" / ".agents" / "plugins" / "marketplace.json"
+    if old_marketplace.exists():
+        paths.append(old_marketplace)
+    return paths
+
+
+def path_report(root: Path = ROOT, limit: int = 20) -> dict[str, Any]:
     config = load_marketplace_config()
     files: list[dict[str, Any]] = []
     dirs: list[dict[str, Any]] = []
-    if root.exists():
-        for path in sorted(root.rglob("*")):
-            rel = generated_git_path(root, path)
-            row = {
-                "path": rel,
-                "length": len(rel),
-                "kind": "dir" if path.is_dir() else "file",
-                "over_budget": len(rel) > WINDOWS_PATH_BUDGET,
-                **generated_path_context(root, path, config),
-            }
-            if path.is_dir():
-                dirs.append(row)
-            elif path.is_file() or path.is_symlink():
-                files.append(row)
+    for path in iter_publication_paths(root):
+        rel = generated_git_path(root, path)
+        row = {
+            "path": rel,
+            "length": len(rel),
+            "kind": "dir" if path.is_dir() else "file",
+            "over_budget": len(rel) > WINDOWS_PATH_BUDGET,
+            **generated_path_context(root, path, config),
+        }
+        if path.is_dir():
+            dirs.append(row)
+        elif path.is_file() or path.is_symlink():
+            files.append(row)
     files_sorted = sorted(files, key=lambda row: (-int(row["length"]), str(row["path"])))
     dirs_sorted = sorted(dirs, key=lambda row: (-int(row["length"]), str(row["path"])))
     over_budget = [row for row in files_sorted + dirs_sorted if row["over_budget"]]
@@ -286,7 +315,7 @@ def path_report(root: Path = CODEX_ROOT, limit: int = 20) -> dict[str, Any]:
     }
 
 
-def path_budget_errors(root: Path = CODEX_ROOT) -> list[str]:
+def path_budget_errors(root: Path = ROOT) -> list[str]:
     report = path_report(root)
     errors: list[str] = []
     for row in report["over_budget"]:
@@ -301,7 +330,7 @@ def path_budget_errors(root: Path = CODEX_ROOT) -> list[str]:
     return errors
 
 
-def assert_path_budget(root: Path = CODEX_ROOT) -> None:
+def assert_path_budget(root: Path = ROOT) -> None:
     errors = path_budget_errors(root)
     if errors:
         raise BuildError("generated Codex marketplace paths exceed Windows budget:\n  " + "\n  ".join(errors))
@@ -687,16 +716,22 @@ def generate_layer(target_root: Path) -> dict[str, Any]:
     config = load_marketplace_config()
     plugins = marketplace_plugins(config)
     validate_config(config)
-    if target_root.exists():
-        shutil.rmtree(target_root)
-    (target_root / ".agents" / "plugins").mkdir(parents=True, exist_ok=True)
-    (target_root / "plugins").mkdir(parents=True, exist_ok=True)
+    marketplace_path = target_root / ".agents" / "plugins" / "marketplace.json"
+    plugin_payload_root = target_root / "plugins" / "codex" / "plugins"
+    old_nested_agents = target_root / "plugins" / "codex" / ".agents"
+
+    if plugin_payload_root.exists():
+        shutil.rmtree(plugin_payload_root)
+    if old_nested_agents.exists():
+        shutil.rmtree(old_nested_agents)
+    marketplace_path.parent.mkdir(parents=True, exist_ok=True)
+    plugin_payload_root.mkdir(parents=True, exist_ok=True)
 
     active_skill_count = 0
     source_skill_snapshot_count = 0
     for plugin in plugins:
         plugin_name = str(plugin["name"])
-        plugin_root = target_root / "plugins" / plugin_name
+        plugin_root = plugin_payload_root / plugin_name
         manifest_dir = plugin_root / ".codex-plugin"
         skills_dir = plugin_root / "skills"
         manifest_dir.mkdir(parents=True, exist_ok=True)
@@ -718,13 +753,14 @@ def generate_layer(target_root: Path) -> dict[str, Any]:
         raise BuildError(f"Codex marketplace has {active_skill_count} active skills; maximum is {MAX_ACTIVE_SKILLS}")
 
     marketplace = build_marketplace(config)
-    (target_root / ".agents" / "plugins" / "marketplace.json").write_text(json_dump(marketplace), encoding="utf-8")
+    marketplace_path.write_text(json_dump(marketplace), encoding="utf-8")
     assert_path_budget(target_root)
     return {
         "plugin_count": len(plugins),
         "active_skill_count": active_skill_count,
         "source_skill_snapshot_count": source_skill_snapshot_count,
-        "marketplace_path": relative(target_root / ".agents" / "plugins" / "marketplace.json"),
+        "marketplace_path": relative(marketplace_path),
+        "plugin_payload_path": relative(plugin_payload_root),
         "errors": [],
         "warnings": [],
     }
@@ -821,76 +857,111 @@ def validate_plugin_json(plugin_dir: Path, plugin: dict[str, Any], errors: list[
     return len(found_skill_md)
 
 
-def validate_layer(root: Path = CODEX_ROOT) -> dict[str, Any]:
+def resolve_marketplace_source_path(root: Path, source: Any, plugin_name: str, errors: list[str]) -> Path | None:
+    manifest_label = relative(root / ".agents" / "plugins" / "marketplace.json")
+    if not isinstance(source, dict):
+        errors.append(f"{manifest_label}: {plugin_name} source must be an object")
+        return None
+    if source.get("source") != "local":
+        errors.append(f"{manifest_label}: {plugin_name} source.source must be local")
+    source_path = source.get("path")
+    if not isinstance(source_path, str):
+        errors.append(f"{manifest_label}: {plugin_name} source.path must be a string")
+        return None
+    if not source_path.startswith("./"):
+        errors.append(f"{manifest_label}: {plugin_name} source.path must start with ./")
+        return None
+    try:
+        plugin_dir = (root / source_path[2:]).resolve()
+        plugin_dir.relative_to(root.resolve())
+    except ValueError:
+        errors.append(f"{manifest_label}: {plugin_name} source.path escapes marketplace root: {source_path}")
+        return None
+    return plugin_dir
+
+
+def validate_layer(root: Path = ROOT) -> dict[str, Any]:
     errors: list[str] = []
     warnings: list[str] = []
     config = load_marketplace_config()
     validate_config(config)
     configured_plugins = marketplace_plugins(config)
     plugin_by_name = {str(plugin["name"]): plugin for plugin in configured_plugins}
+    marketplace_path = root / ".agents" / "plugins" / "marketplace.json"
+    plugin_payload_root = root / "plugins" / "codex" / "plugins"
+    old_marketplace = root / "plugins" / "codex" / ".agents" / "plugins" / "marketplace.json"
 
-    assert_no_symlink(root, errors)
-    marketplace = load_json(root / ".agents" / "plugins" / "marketplace.json", errors)
+    assert_no_symlink(plugin_payload_root, errors)
+    if marketplace_path.is_symlink():
+        errors.append(f"{relative(marketplace_path)}: symlinks are not allowed in the Codex marketplace layer")
+    if old_marketplace.exists():
+        errors.append(f"{relative(old_marketplace)}: old nested marketplace manifest must not exist")
+    marketplace = load_json(marketplace_path, errors)
     active_skill_count = 0
     plugin_count = 0
     generated_active_names: dict[str, list[tuple[str, str]]] = defaultdict(list)
 
     if isinstance(marketplace, dict):
         if marketplace.get("name") != config.get("name"):
-            errors.append(f"plugins/codex/.agents/plugins/marketplace.json: name must be {config.get('name')}")
+            errors.append(f"{relative(marketplace_path)}: name must be {config.get('name')}")
         interface = marketplace.get("interface")
         if not isinstance(interface, dict) or interface.get("displayName") != config.get("displayName"):
             errors.append(
-                f"plugins/codex/.agents/plugins/marketplace.json: interface.displayName must be {config.get('displayName')}"
+                f"{relative(marketplace_path)}: interface.displayName must be {config.get('displayName')}"
             )
         plugins = marketplace.get("plugins")
         if not isinstance(plugins, list):
-            errors.append("plugins/codex/.agents/plugins/marketplace.json: plugins must be a list")
+            errors.append(f"{relative(marketplace_path)}: plugins must be a list")
             plugins = []
         plugin_count = len(plugins)
         if plugin_count != len(configured_plugins):
             errors.append(
-                f"plugins/codex/.agents/plugins/marketplace.json: expected {len(configured_plugins)} plugin entries, found {plugin_count}"
+                f"{relative(marketplace_path)}: expected {len(configured_plugins)} plugin entries, found {plugin_count}"
             )
         if plugin_count > MAX_MARKETPLACE_PLUGINS:
             errors.append(
-                f"plugins/codex/.agents/plugins/marketplace.json: expected at most {MAX_MARKETPLACE_PLUGINS} plugin entries, found {plugin_count}"
+                f"{relative(marketplace_path)}: expected at most {MAX_MARKETPLACE_PLUGINS} plugin entries, found {plugin_count}"
             )
         seen_names: set[str] = set()
         for entry in plugins:
             if not isinstance(entry, dict):
-                errors.append("plugins/codex/.agents/plugins/marketplace.json: every plugins[] entry must be an object")
+                errors.append(f"{relative(marketplace_path)}: every plugins[] entry must be an object")
                 continue
             name = entry.get("name")
             if not isinstance(name, str):
-                errors.append("plugins/codex/.agents/plugins/marketplace.json: every plugins[] entry needs a string name")
+                errors.append(f"{relative(marketplace_path)}: every plugins[] entry needs a string name")
                 continue
             seen_names.add(name)
             if name not in plugin_by_name:
-                errors.append(f"plugins/codex/.agents/plugins/marketplace.json: unknown configured plugin {name}")
+                errors.append(f"{relative(marketplace_path)}: unknown configured plugin {name}")
                 continue
             configured = plugin_by_name[name]
-            expected_source = {"source": "local", "path": f"./plugins/{name}"}
-            if entry.get("source") != expected_source:
-                errors.append(f"plugins/codex/.agents/plugins/marketplace.json: {name} source must be {expected_source}")
+            expected_source = {"source": "local", "path": f"./plugins/codex/plugins/{name}"}
+            source = entry.get("source")
+            if source != expected_source:
+                errors.append(f"{relative(marketplace_path)}: {name} source must be {expected_source}")
+            plugin_dir = resolve_marketplace_source_path(root, source, name, errors)
             policy = entry.get("policy")
             if not isinstance(policy, dict):
-                errors.append(f"plugins/codex/.agents/plugins/marketplace.json: {name} policy must be an object")
+                errors.append(f"{relative(marketplace_path)}: {name} policy must be an object")
             else:
                 expected_install = str(configured.get("installation") or "AVAILABLE")
                 if policy.get("installation") != expected_install:
-                    errors.append(f"plugins/codex/.agents/plugins/marketplace.json: {name} installation must be {expected_install}")
+                    errors.append(f"{relative(marketplace_path)}: {name} installation must be {expected_install}")
                 if policy.get("authentication") != "ON_INSTALL":
-                    errors.append(f"plugins/codex/.agents/plugins/marketplace.json: {name} authentication must be ON_INSTALL")
+                    errors.append(f"{relative(marketplace_path)}: {name} authentication must be ON_INSTALL")
                 if policy.get("installation") not in INSTALL_POLICIES:
-                    errors.append(f"plugins/codex/.agents/plugins/marketplace.json: {name} has invalid installation policy")
+                    errors.append(f"{relative(marketplace_path)}: {name} has invalid installation policy")
                 if policy.get("authentication") not in AUTH_POLICIES:
-                    errors.append(f"plugins/codex/.agents/plugins/marketplace.json: {name} has invalid authentication policy")
+                    errors.append(f"{relative(marketplace_path)}: {name} has invalid authentication policy")
             if entry.get("category") != str(configured.get("category") or "Productivity"):
-                errors.append(f"plugins/codex/.agents/plugins/marketplace.json: {name} category is incorrect")
-            plugin_dir = root / "plugins" / name
+                errors.append(f"{relative(marketplace_path)}: {name} category is incorrect")
+            if plugin_dir is None:
+                continue
             if not plugin_dir.is_dir():
                 errors.append(f"{relative(plugin_dir)}: marketplace source.path does not resolve to a real plugin directory")
+            elif plugin_dir.name != name:
+                errors.append(f"{relative(plugin_dir)}: marketplace source.path directory name must match plugin name {name}")
             else:
                 active_skill_count += validate_plugin_json(plugin_dir, plugin_by_name[name], errors, warnings)
                 for skill_file in sorted((plugin_dir / "skills").glob("*/SKILL.md")):
@@ -900,13 +971,13 @@ def validate_layer(root: Path = CODEX_ROOT) -> dict[str, Any]:
                         generated_active_names[active_name].append((name, relative(skill_file)))
         missing_names = sorted(set(plugin_by_name) - seen_names)
         for name in missing_names:
-            errors.append(f"plugins/codex/.agents/plugins/marketplace.json: missing configured plugin {name}")
+            errors.append(f"{relative(marketplace_path)}: missing configured plugin {name}")
     if active_skill_count > MAX_ACTIVE_SKILLS:
         errors.append(f"plugins/codex contains {active_skill_count} active skills; maximum is {MAX_ACTIVE_SKILLS}")
 
     todo_matches = []
-    if root.exists():
-        for path in root.rglob("*"):
+    if plugin_payload_root.exists():
+        for path in plugin_payload_root.rglob("*"):
             if path.is_file() and not path.is_symlink():
                 try:
                     if "[TODO:" in path.read_text(encoding="utf-8", errors="ignore"):
@@ -926,7 +997,8 @@ def validate_layer(root: Path = CODEX_ROOT) -> dict[str, Any]:
     return {
         "plugin_count": plugin_count,
         "active_skill_count": active_skill_count,
-        "marketplace_path": relative(root / ".agents" / "plugins" / "marketplace.json"),
+        "marketplace_path": relative(marketplace_path),
+        "plugin_payload_path": relative(plugin_payload_root),
         "errors": errors,
         "warnings": warnings,
     }
@@ -934,9 +1006,7 @@ def validate_layer(root: Path = CODEX_ROOT) -> dict[str, Any]:
 
 def collect_files(root: Path) -> dict[str, Path]:
     files: dict[str, Path] = {}
-    if not root.exists():
-        return files
-    for path in sorted(root.rglob("*")):
+    for path in iter_publication_paths(root):
         if path.is_file() or path.is_symlink():
             files[path.relative_to(root).as_posix()] = path
     return files
@@ -947,34 +1017,35 @@ def compare_layers(expected_root: Path, current_root: Path) -> list[str]:
     expected_files = collect_files(expected_root)
     current_files = collect_files(current_root)
     for rel_path in sorted(set(expected_files) - set(current_files)):
-        differences.append(f"missing: plugins/codex/{rel_path}")
+        differences.append(f"missing: {rel_path}")
     for rel_path in sorted(set(current_files) - set(expected_files)):
-        differences.append(f"extra: plugins/codex/{rel_path}")
+        differences.append(f"extra: {rel_path}")
     for rel_path in sorted(set(expected_files) & set(current_files)):
         expected = expected_files[rel_path]
         current = current_files[rel_path]
         if expected.is_symlink() or current.is_symlink():
-            differences.append(f"symlink differs: plugins/codex/{rel_path}")
+            differences.append(f"symlink differs: {rel_path}")
             continue
         if not filecmp.cmp(expected, current, shallow=False):
-            differences.append(f"content differs: plugins/codex/{rel_path}")
+            differences.append(f"content differs: {rel_path}")
             continue
         expected_mode = stat.S_IMODE(expected.stat().st_mode)
         current_mode = stat.S_IMODE(current.stat().st_mode)
         if expected_mode != current_mode:
-            differences.append(f"mode differs: plugins/codex/{rel_path}")
+            differences.append(f"mode differs: {rel_path}")
     return differences
 
 
 def check_layer() -> tuple[dict[str, Any], list[str]]:
     with tempfile.TemporaryDirectory(prefix="codex-marketplace-") as tmp:
-        expected_root = Path(tmp) / "codex"
+        expected_root = Path(tmp) / "repo"
         summary = generate_layer(expected_root)
         summary["marketplace_path"] = relative(MARKETPLACE_PATH)
-        differences = compare_layers(expected_root, CODEX_ROOT)
+        summary["plugin_payload_path"] = relative(PLUGIN_PAYLOAD_ROOT)
+        differences = compare_layers(expected_root, ROOT)
     if differences:
         summary["errors"] = [f"publication layer is not current ({len(differences)} differences)"]
-    budget_errors = path_budget_errors(CODEX_ROOT)
+    budget_errors = path_budget_errors(ROOT)
     if budget_errors:
         summary.setdefault("errors", []).extend(budget_errors)
     return summary, differences
@@ -989,7 +1060,7 @@ def print_summary(summary: dict[str, Any], json_output: bool) -> None:
     snapshot_text = f" source_snapshots={snapshots}" if snapshots is not None else ""
     print(
         f"plugins={summary['plugin_count']} active_skills={active}{snapshot_text} "
-        f"marketplace={summary['marketplace_path']}"
+        f"marketplace={summary['marketplace_path']} payload={summary.get('plugin_payload_path', relative(PLUGIN_PAYLOAD_ROOT))}"
     )
     for warning in summary.get("warnings", []):
         print(f"WARNING: {warning}", file=sys.stderr)
@@ -1021,9 +1092,9 @@ def print_path_report(report: dict[str, Any], json_output: bool) -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--write", action="store_true", help="Regenerate plugins/codex")
-    parser.add_argument("--validate", action="store_true", help="Validate the current plugins/codex layer")
-    parser.add_argument("--check", action="store_true", help="Compare plugins/codex with a freshly generated layer")
+    parser.add_argument("--write", action="store_true", help="Regenerate the Codex marketplace manifest and plugin payload")
+    parser.add_argument("--validate", action="store_true", help="Validate the current Codex marketplace publication")
+    parser.add_argument("--check", action="store_true", help="Compare current publication files with a freshly generated publication")
     parser.add_argument("--path-report", action="store_true", help="Report longest generated paths and Windows budget status")
     parser.add_argument("--json", action="store_true", help="Print a machine-readable summary")
     return parser.parse_args()
@@ -1039,11 +1110,11 @@ def main() -> int:
     summary: dict[str, Any] | None = None
     try:
         if args.write:
-            summary = generate_layer(CODEX_ROOT)
+            summary = generate_layer(ROOT)
             if not args.json:
                 print_summary(summary, False)
         if args.validate:
-            summary = validate_layer(CODEX_ROOT)
+            summary = validate_layer(ROOT)
             if not args.json:
                 print_summary(summary, False)
             if summary["errors"]:
@@ -1059,7 +1130,7 @@ def main() -> int:
             if differences or summary.get("errors"):
                 exit_code = 1
         if args.path_report:
-            report = path_report(CODEX_ROOT)
+            report = path_report(ROOT)
             print_path_report(report, args.json)
             if report["over_budget_count"]:
                 exit_code = 1
@@ -1067,7 +1138,7 @@ def main() -> int:
             if args.path_report:
                 return exit_code
             if summary is None:
-                summary = validate_layer(CODEX_ROOT)
+                summary = validate_layer(ROOT)
             print_summary(summary, True)
     except BuildError as exc:
         summary = {
@@ -1075,6 +1146,7 @@ def main() -> int:
             "active_skill_count": 0,
             "source_skill_snapshot_count": 0,
             "marketplace_path": relative(MARKETPLACE_PATH),
+            "plugin_payload_path": relative(PLUGIN_PAYLOAD_ROOT),
             "errors": [str(exc)],
             "warnings": [],
         }

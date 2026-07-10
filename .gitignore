@@ -8,13 +8,13 @@ Thumbs.db
 .idea/
 .vscode/
 .cursor/
-.agents/
+.agents/*
+!.agents/plugins/
+.agents/plugins/*
+!.agents/plugins/marketplace.json
 .codex/
 !plugins/
 !plugins/codex/
-!plugins/codex/.agents/
-!plugins/codex/.agents/plugins/
-!plugins/codex/.agents/plugins/marketplace.json
 
 # -----------------------------------------------------------------------------
 # Environment and local secrets

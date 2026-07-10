@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 import sys
 import tempfile
 import unittest
@@ -77,7 +78,9 @@ def patched_build_root(root: Path):
         "build_SKILLS_ROOT": build.SKILLS_ROOT,
         "build_CONFIG_PATH": build.CONFIG_PATH,
         "build_CODEX_ROOT": build.CODEX_ROOT,
+        "build_PLUGIN_PAYLOAD_ROOT": build.PLUGIN_PAYLOAD_ROOT,
         "build_MARKETPLACE_PATH": build.MARKETPLACE_PATH,
+        "build_OLD_NESTED_MARKETPLACE_PATH": build.OLD_NESTED_MARKETPLACE_PATH,
         "utils_ROOT": skill_utils.ROOT,
         "utils_SKILLS_ROOT": skill_utils.SKILLS_ROOT,
     }
@@ -85,7 +88,9 @@ def patched_build_root(root: Path):
     build.SKILLS_ROOT = root / "skills"
     build.CONFIG_PATH = root / "scripts" / "codex_marketplace_config.json"
     build.CODEX_ROOT = root / "plugins" / "codex"
-    build.MARKETPLACE_PATH = build.CODEX_ROOT / ".agents" / "plugins" / "marketplace.json"
+    build.PLUGIN_PAYLOAD_ROOT = build.CODEX_ROOT / "plugins"
+    build.MARKETPLACE_PATH = root / ".agents" / "plugins" / "marketplace.json"
+    build.OLD_NESTED_MARKETPLACE_PATH = build.CODEX_ROOT / ".agents" / "plugins" / "marketplace.json"
     skill_utils.ROOT = root
     skill_utils.SKILLS_ROOT = root / "skills"
     try:
@@ -95,9 +100,22 @@ def patched_build_root(root: Path):
         build.SKILLS_ROOT = old["build_SKILLS_ROOT"]
         build.CONFIG_PATH = old["build_CONFIG_PATH"]
         build.CODEX_ROOT = old["build_CODEX_ROOT"]
+        build.PLUGIN_PAYLOAD_ROOT = old["build_PLUGIN_PAYLOAD_ROOT"]
         build.MARKETPLACE_PATH = old["build_MARKETPLACE_PATH"]
+        build.OLD_NESTED_MARKETPLACE_PATH = old["build_OLD_NESTED_MARKETPLACE_PATH"]
         skill_utils.ROOT = old["utils_ROOT"]
         skill_utils.SKILLS_ROOT = old["utils_SKILLS_ROOT"]
+
+
+def copy_sparse_paths(source: Path, target: Path, *paths: str) -> None:
+    for rel in paths:
+        src = source / rel
+        dst = target / rel
+        if src.is_dir():
+            shutil.copytree(src, dst)
+        else:
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dst)
 
 
 class CodexMarketplaceTests(unittest.TestCase):
@@ -164,7 +182,7 @@ class CodexMarketplaceTests(unittest.TestCase):
             )
             with patched_build_root(root):
                 build.generate_layer(root / "out")
-                meta, _ = build.read_frontmatter(root / "out/plugins/agg/skills/combined/SKILL.md")
+                meta, _ = build.read_frontmatter(root / "out/plugins/codex/plugins/agg/skills/combined/SKILL.md")
             self.assertTrue(meta["requires_network"])
             self.assertTrue(meta["writes_files"])
             self.assertTrue(meta["executes_code"])
@@ -198,7 +216,7 @@ class CodexMarketplaceTests(unittest.TestCase):
             write_config(root, [plugin("p", [{"type": "copy", "source": "skills/a/place"}])])
             with patched_build_root(root):
                 build.generate_layer(root / "out")
-            copied = root / "out/plugins/p/skills/place/script.py"
+            copied = root / "out/plugins/codex/plugins/p/skills/place/script.py"
             self.assertEqual(copied.read_text(encoding="utf-8"), "placeholder = 'keep placeholder text'\n")
 
     def test_nested_skill_md_is_renamed_in_aggregate_snapshot(self) -> None:
@@ -226,7 +244,7 @@ class CodexMarketplaceTests(unittest.TestCase):
             )
             with patched_build_root(root):
                 build.generate_layer(root / "out")
-            source_root = root / "out/plugins/p/skills/agg/_src/nested"
+            source_root = root / "out/plugins/codex/plugins/p/skills/agg/_src/nested"
             self.assertFalse((source_root / "references/child/SKILL.md").exists())
             self.assertTrue((source_root / "references/child/source.md").exists())
 
@@ -277,7 +295,7 @@ class CodexMarketplaceTests(unittest.TestCase):
             with patched_build_root(root):
                 build.generate_layer(root / "out")
                 report = build.path_report(root / "out")
-            self.assertTrue((root / "out/plugins/bioinformatics/skills/bio/_src/db/references/providers/ncbi.md").exists())
+            self.assertTrue((root / "out/plugins/codex/plugins/bioinformatics/skills/bio/_src/db/references/providers/ncbi.md").exists())
             generated_paths = [path.relative_to(root / "out").as_posix() for path in (root / "out").rglob("*")]
             self.assertFalse(any("domains-bioinformatics-databases-bioinformatics-database-retrieval" in path for path in generated_paths))
             self.assertEqual(report["over_budget_count"], 0)
@@ -342,7 +360,7 @@ class CodexMarketplaceTests(unittest.TestCase):
             )
             with patched_build_root(root):
                 build.generate_layer(root / "out")
-            source_root = root / "out/plugins/p/skills/a/_src/f"
+            source_root = root / "out/plugins/codex/plugins/p/skills/a/_src/f"
             self.assertEqual((source_root / "references/guide.md").read_text(encoding="utf-8"), "guide\n")
             self.assertEqual((source_root / "scripts/tool.py").read_text(encoding="utf-8"), "print('ok')\n")
             self.assertFalse((source_root / "references/nested/SKILL.md").exists())
@@ -350,12 +368,78 @@ class CodexMarketplaceTests(unittest.TestCase):
 
     def test_current_repository_marketplace_paths_fit_windows_budget(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
-            out = Path(tmp) / "codex"
+            out = Path(tmp) / "repo"
             build.generate_layer(out)
             report = build.path_report(out)
         self.assertEqual(report["over_budget_count"], 0)
         self.assertLessEqual(report["max_file_length"], build.WINDOWS_PATH_BUDGET)
         self.assertLessEqual(report["max_dir_length"], build.WINDOWS_PATH_BUDGET)
+
+    def test_manifest_is_generated_at_repository_root(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_skill(root, "skills/a/one", "one")
+            write_config(root, [plugin("p", [{"type": "copy", "source": "skills/a/one"}])])
+            with patched_build_root(root):
+                build.generate_layer(root / "out")
+                manifest = json.loads((root / "out/.agents/plugins/marketplace.json").read_text(encoding="utf-8"))
+                summary = build.validate_layer(root / "out")
+            self.assertEqual(summary["errors"], [])
+            self.assertTrue((root / "out/plugins/codex/plugins/p/.codex-plugin/plugin.json").exists())
+            self.assertFalse((root / "out/plugins/codex/.agents/plugins/marketplace.json").exists())
+            self.assertEqual(manifest["plugins"][0]["source"]["path"], "./plugins/codex/plugins/p")
+
+    def test_validate_fails_when_only_old_nested_manifest_exists(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_skill(root, "skills/a/one", "one")
+            write_config(root, [plugin("p", [{"type": "copy", "source": "skills/a/one"}])])
+            with patched_build_root(root):
+                build.generate_layer(root / "generated")
+                broken = root / "broken"
+                copy_sparse_paths(root / "generated", broken, "plugins/codex/plugins")
+                nested = broken / "plugins/codex/.agents/plugins/marketplace.json"
+                nested.parent.mkdir(parents=True)
+                shutil.copy2(root / "generated/.agents/plugins/marketplace.json", nested)
+                summary = build.validate_layer(broken)
+            self.assertTrue(any(".agents/plugins/marketplace.json: file does not exist" in item for item in summary["errors"]))
+            self.assertTrue(any("old nested marketplace manifest must not exist" in item for item in summary["errors"]))
+
+    def test_sparse_paths_must_include_manifest_and_payload(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_skill(root, "skills/a/one", "one")
+            write_config(root, [plugin("p", [{"type": "copy", "source": "skills/a/one"}])])
+            with patched_build_root(root):
+                generated = root / "generated"
+                build.generate_layer(generated)
+                only_manifest = root / "only-manifest"
+                only_payload = root / "only-payload"
+                both = root / "both"
+                copy_sparse_paths(generated, only_manifest, ".agents/plugins")
+                copy_sparse_paths(generated, only_payload, "plugins/codex/plugins")
+                copy_sparse_paths(generated, both, ".agents/plugins", "plugins/codex/plugins")
+                manifest_summary = build.validate_layer(only_manifest)
+                payload_summary = build.validate_layer(only_payload)
+                both_summary = build.validate_layer(both)
+            self.assertTrue(any("marketplace source.path does not resolve" in item for item in manifest_summary["errors"]))
+            self.assertTrue(any(".agents/plugins/marketplace.json: file does not exist" in item for item in payload_summary["errors"]))
+            self.assertEqual(both_summary["errors"], [])
+
+    def test_check_layer_compares_manifest_and_payload(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_skill(root, "skills/a/one", "one")
+            write_config(root, [plugin("p", [{"type": "copy", "source": "skills/a/one"}])])
+            with patched_build_root(root):
+                build.generate_layer(root)
+                summary, differences = build.check_layer()
+                self.assertEqual(summary["errors"], [])
+                self.assertEqual(differences, [])
+                (root / ".agents/plugins/marketplace.json").write_text("{}\n", encoding="utf-8")
+                summary, differences = build.check_layer()
+            self.assertTrue(differences)
+            self.assertTrue(any(".agents/plugins/marketplace.json" in item for item in differences))
 
 
 if __name__ == "__main__":

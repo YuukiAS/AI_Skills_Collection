@@ -8,7 +8,7 @@
       "name": "ai-skills-core",
       "source": {
         "source": "local",
-        "path": "./plugins/ai-skills-core"
+        "path": "./plugins/codex/plugins/ai-skills-core"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
@@ -20,7 +20,7 @@
       "name": "workflow-core",
       "source": {
         "source": "local",
-        "path": "./plugins/workflow-core"
+        "path": "./plugins/codex/plugins/workflow-core"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -32,7 +32,7 @@
       "name": "writing-style",
       "source": {
         "source": "local",
-        "path": "./plugins/writing-style"
+        "path": "./plugins/codex/plugins/writing-style"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -44,7 +44,7 @@
       "name": "web-development",
       "source": {
         "source": "local",
-        "path": "./plugins/web-development"
+        "path": "./plugins/codex/plugins/web-development"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -56,7 +56,7 @@
       "name": "research-writing",
       "source": {
         "source": "local",
-        "path": "./plugins/research-writing"
+        "path": "./plugins/codex/plugins/research-writing"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -68,7 +68,7 @@
       "name": "statistical-modeling",
       "source": {
         "source": "local",
-        "path": "./plugins/statistical-modeling"
+        "path": "./plugins/codex/plugins/statistical-modeling"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -80,7 +80,7 @@
       "name": "bioinformatics",
       "source": {
         "source": "local",
-        "path": "./plugins/bioinformatics"
+        "path": "./plugins/codex/plugins/bioinformatics"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -92,7 +92,7 @@
       "name": "medical-imaging",
       "source": {
         "source": "local",
-        "path": "./plugins/medical-imaging"
+        "path": "./plugins/codex/plugins/medical-imaging"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -104,7 +104,7 @@
       "name": "cardiacnexus",
       "source": {
         "source": "local",
-        "path": "./plugins/cardiacnexus"
+        "path": "./plugins/codex/plugins/cardiacnexus"
       },
       "policy": {
         "installation": "AVAILABLE",

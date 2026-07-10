@@ -58,13 +58,13 @@ jobs:
       - name: Publish generated marketplace
         if: github.event_name != 'pull_request' && !contains(env.HEAD_COMMIT_MESSAGE, '[skip codex-marketplace]')
         run: |
-          if [ -z "$(git status --short -- plugins/codex)" ]; then
+          if [ -z "$(git status --short -- .agents/plugins/marketplace.json plugins/codex/plugins)" ]; then
             echo "No Codex marketplace changes to publish."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add plugins/codex
+          git add .agents/plugins/marketplace.json plugins/codex/plugins
           git commit -m "chore: publish codex marketplace [skip codex-marketplace]"
           git push
 
@@ -111,16 +111,45 @@ jobs:
 
           git clone --no-checkout $source $target
           git -C $target sparse-checkout init --cone
-          git -C $target sparse-checkout set plugins/codex
+          git -C $target sparse-checkout set .agents/plugins plugins/codex/plugins
           git -C $target checkout HEAD
 
-          $marketplace = Join-Path $target "plugins/codex/.agents/plugins/marketplace.json"
+          $marketplace = Join-Path $target ".agents/plugins/marketplace.json"
           if (!(Test-Path $marketplace)) {
-            Write-Error "marketplace.json missing after sparse checkout"
+            Write-Error "root marketplace.json missing after sparse checkout"
+            exit 1
+          }
+          $oldMarketplace = Join-Path $target "plugins/codex/.agents/plugins/marketplace.json"
+          if (Test-Path $oldMarketplace) {
+            Write-Error "old nested marketplace.json must not exist"
             exit 1
           }
           $pluginCount = (Get-ChildItem (Join-Path $target "plugins/codex/plugins") -Directory | Measure-Object).Count
           if ($pluginCount -ne 9) {
             Write-Error "expected 9 plugins after sparse checkout, found $pluginCount"
             exit 1
+          }
+          $manifest = Get-Content $marketplace -Raw | ConvertFrom-Json
+          foreach ($plugin in $manifest.plugins) {
+            $sourcePath = $plugin.source.path
+            if (!$sourcePath.StartsWith("./")) {
+              Write-Error "source.path must start with ./ for $($plugin.name): $sourcePath"
+              exit 1
+            }
+            $relativePath = $sourcePath.Substring(2).Replace("/", [System.IO.Path]::DirectorySeparatorChar)
+            $pluginRoot = Join-Path $target $relativePath
+            $pluginManifest = Join-Path $pluginRoot ".codex-plugin/plugin.json"
+            if (!(Test-Path $pluginRoot)) {
+              Write-Error "plugin root missing for $($plugin.name): $sourcePath"
+              exit 1
+            }
+            if (!(Test-Path $pluginManifest)) {
+              Write-Error "plugin manifest missing for $($plugin.name): $pluginManifest"
+              exit 1
+            }
+            $pluginJson = Get-Content $pluginManifest -Raw | ConvertFrom-Json
+            if ($pluginJson.name -ne $plugin.name) {
+              Write-Error "plugin name mismatch for $($plugin.name): $($pluginJson.name)"
+              exit 1
+            }
           }
