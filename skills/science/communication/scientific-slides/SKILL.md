@@ -4,10 +4,11 @@ description: Build slide decks and presentations for research talks. Use this fo
 status: active
 provenance: unknown
 trusted: false
-requires_network: false
+requires_network: true
 writes_files: true
-executes_code: false
+executes_code: true
 secrets_needed:
+  - OPENROUTER_API_KEY
 last_reviewed: 2026-05-14
 profile_tags:
 recommended_scope: project
@@ -1160,4 +1161,3 @@ See `document-skills/pptx/SKILL.md` for complete PowerPoint workflow.
 - **Boring = Forgotten**: Dry, text-heavy slides fail to communicate your science
 - **Visual + Research = Impact**: Combine compelling visuals with research-backed context
 - **You are the presentation, slides are visual support**: They should enhance, not replace your talk
-

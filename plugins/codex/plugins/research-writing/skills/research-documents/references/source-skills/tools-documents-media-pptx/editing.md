@@ -9,7 +9,7 @@ When using an existing presentation as a template:
    python scripts/thumbnail.py template.pptx
    python -m markitdown template.pptx
    ```
-   Review `thumbnails.jpg` to see layouts, and markitdown output to see example value text.
+   Review `thumbnails.jpg` to see layouts, and markitdown output to see placeholder text.
 
 2. **Plan slide mapping**: For each content section, choose a template slide.
 
@@ -119,8 +119,8 @@ Slide order is in `ppt/presentation.xml` → `<p:sldIdLst>`.
 
 For each slide:
 1. Read the slide's XML
-2. Identify ALL example value content—text, images, charts, icons, captions
-3. Replace each example value with final content
+2. Identify ALL placeholder content—text, images, charts, icons, captions
+3. Replace each placeholder with final content
 
 **Use the Edit tool, not sed or Python scripts.** The Edit tool forces specificity about what to replace and where, yielding better reliability.
 

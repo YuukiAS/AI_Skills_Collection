@@ -36,7 +36,7 @@ import { Label } from "@/components/ui/label"
 
 <div className="space-y-2">
   <Label htmlFor="email">Email</Label>
-  <Input id="email" type="email" example value="you@example.com" />
+  <Input id="email" type="email" placeholder="you@example.com" />
 </div>
 ```
 
@@ -67,7 +67,7 @@ function ProfileForm() {
           <FormItem>
             <FormLabel>Username</FormLabel>
             <FormControl>
-              <Input example value="shadcn" {...field} />
+              <Input placeholder="shadcn" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -85,7 +85,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 <Select>
   <SelectTrigger className="w-[180px]">
-    <SelectValue example value="Theme" />
+    <SelectValue placeholder="Theme" />
   </SelectTrigger>
   <SelectContent>
     <SelectItem value="light">Light</SelectItem>
@@ -127,7 +127,7 @@ import { Label } from "@/components/ui/label"
 ```tsx
 import { Textarea } from "@/components/ui/textarea"
 
-<Textarea example value="Type your message here." />
+<Textarea placeholder="Type your message here." />
 ```
 
 ### Switch
@@ -306,7 +306,7 @@ const { toast } = useToast()
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 
 <Command>
-  <CommandInput example value="Type a command or search..." />
+  <CommandInput placeholder="Type a command or search..." />
   <CommandList>
     <CommandEmpty>No results found.</CommandEmpty>
     <CommandGroup heading="Suggestions">

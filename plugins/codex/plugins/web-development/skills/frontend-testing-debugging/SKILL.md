@@ -2,14 +2,18 @@
 name: frontend-testing-debugging
 description: Test and debug rendered frontend apps with browser automation, responsive checks, and accessibility review.
 status: active
-provenance: generated-codex-marketplace
+provenance: generated
 trusted: false
 requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
+last_reviewed: 2026-07-10
 profile_tags:
 recommended_scope: project
+source_skills:
+  - skills/tools/frontend/webapp-testing
+  - skills/tools/frontend/responsive-accessibility-review
 ---
 
 # frontend-testing-debugging

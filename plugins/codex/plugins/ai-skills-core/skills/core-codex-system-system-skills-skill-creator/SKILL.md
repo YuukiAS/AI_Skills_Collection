@@ -319,12 +319,12 @@ scripts/init_skill.py my-skill --path ~/work/skills --resources scripts --exampl
 The script:
 
 - Creates the skill directory at the specified path
-- Generates a SKILL.md template with proper frontmatter and TODO example values
+- Generates a SKILL.md template with proper frontmatter and TODO placeholders
 - Creates `agents/openai.yaml` using agent-generated `display_name`, `short_description`, and `default_prompt` passed via `--interface key=value`
 - Optionally creates resource directories based on `--resources`
 - Optionally adds example files when `--examples` is set
 
-After initialization, customize the SKILL.md and add resources as needed. If you used `--examples`, replace or delete example value files.
+After initialization, customize the SKILL.md and add resources as needed. If you used `--examples`, replace or delete placeholder files.
 
 Generate `display_name`, `short_description`, and `default_prompt` by reading the skill, then pass them as `--interface key=value` to `init_skill.py` or regenerate with:
 
@@ -346,7 +346,7 @@ To begin implementation, start with the reusable resources identified above: `sc
 
 Added scripts must be tested by actually running them to ensure there are no bugs and that the output matches what is expected. If there are many similar scripts, only a representative sample needs to be tested to ensure confidence that they all work while balancing time to completion.
 
-If you used `--examples`, delete any example value files that are not needed for the skill. Only create resource directories that are actually required.
+If you used `--examples`, delete any placeholder files that are not needed for the skill. Only create resource directories that are actually required.
 
 #### Update SKILL.md
 

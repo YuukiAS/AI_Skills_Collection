@@ -2,14 +2,20 @@
 name: data-analysis-python
 description: Python data analysis workflows with EDA, Polars, scikit-learn, and symbolic math.
 status: active
-provenance: generated-codex-marketplace
+provenance: generated
 trusted: false
 requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
+last_reviewed: 2026-07-10
 profile_tags:
 recommended_scope: project
+source_skills:
+  - skills/tools/data-science/exploratory-data-analysis
+  - skills/tools/data-science/polars
+  - skills/tools/data-science/scikit-learn
+  - skills/tools/data-science/sympy
 ---
 
 # data-analysis-python

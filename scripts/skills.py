@@ -10,6 +10,7 @@ import re
 import subprocess
 import sys
 from collections import Counter, defaultdict
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -45,6 +46,9 @@ CATALOG = DOCS / "SKILL_CATALOG.md"
 DOMAIN_DOCS = DOCS / "domains"
 NAME_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")
 HIGH_RISK_DOMAINS = ("medical", "medicine", "finance", "legal", "system-ops")
+PROVENANCE_VALUES = {"user-authored", "external-adapted", "external-vendored", "generated", "unknown", "local"}
+SOURCE_PROVENANCE_VALUES = {"external-adapted", "external-vendored"}
+HTTP_URL_RE = re.compile(r"^https?://[^\s<>'\"]+$")
 
 
 class HelpFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescriptionHelpFormatter):
@@ -566,6 +570,53 @@ def validate_eval_file(path: Path) -> list[str]:
     return errors
 
 
+def validate_skill_provenance(rel: Path, meta: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    provenance = str(meta.get("provenance") or "unknown")
+    if provenance not in PROVENANCE_VALUES:
+        errors.append(f"{rel}: provenance must be one of {', '.join(sorted(PROVENANCE_VALUES))}")
+        return errors
+
+    def value(key: str) -> str:
+        raw = meta.get(key, "")
+        return "" if raw in (None, {}, []) else str(raw).strip()
+
+    forbidden_source_placeholders = {"todo", "unknown url", "unknown-url", "tbd", "n/a"}
+    source_url = value("source_repo_url")
+    source_ref = value("source_ref")
+    source_imported_at = value("source_imported_at")
+    source_license = value("source_license")
+    source_path = value("source_path")
+
+    for key in ("source_repo_url", "source_path", "source_ref", "source_imported_at", "source_license"):
+        raw = value(key)
+        if raw and (raw.lower() in forbidden_source_placeholders or "TODO" in raw):
+            errors.append(f"{rel}: {key} must not be a placeholder")
+
+    if provenance in SOURCE_PROVENANCE_VALUES:
+        if not source_url:
+            errors.append(f"{rel}: {provenance} requires source_repo_url")
+        elif not HTTP_URL_RE.match(source_url):
+            errors.append(f"{rel}: source_repo_url must be an HTTP/HTTPS URL")
+        if not source_path:
+            errors.append(f"{rel}: {provenance} requires source_path")
+        if not source_ref:
+            errors.append(f"{rel}: {provenance} requires source_ref")
+        if not source_imported_at:
+            errors.append(f"{rel}: {provenance} requires source_imported_at")
+        else:
+            try:
+                datetime.strptime(source_imported_at, "%Y-%m-%d")
+            except ValueError:
+                errors.append(f"{rel}: source_imported_at must use YYYY-MM-DD")
+        if not source_license:
+            errors.append(f"{rel}: {provenance} requires source_license")
+    elif provenance == "user-authored":
+        if source_url:
+            errors.append(f"{rel}: user-authored skills should not declare source_repo_url")
+    return errors
+
+
 def command_validate(args: argparse.Namespace) -> int:
     errors: list[str] = []
     warnings: list[str] = []
@@ -596,6 +647,7 @@ def command_validate(args: argparse.Namespace) -> int:
             errors.append(f"{rel}: description exceeds official 1024 character limit")
         elif len(desc) > 350:
             warnings.append(f"{rel}: description is {len(desc)} chars; consider <=350")
+        errors.extend(validate_skill_provenance(rel, meta))
         seen[name].append(str(rel))
         for field in ("secrets_needed", "profile_tags"):
             value = meta.get(field, [])

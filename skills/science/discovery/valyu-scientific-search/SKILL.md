@@ -2,7 +2,13 @@
 name: valyu-scientific-search
 description: Search scientific literature and biomedical databases through Valyu-backed semantic search when available, including PubMed, arXiv, bioRxiv, medRxiv, patents, ChEMBL, DrugBank, Open Targets, FDA labels, and clinical trials.
 status: active
-provenance: adapted
+provenance: external-adapted
+source_repo_url: https://github.com/yorkeccak/scientific-skills
+source_path: .
+source_ref: 20b3d503700656f847e6de873753335bf90e63e3
+source_imported_at: 2026-07-09
+source_license: MIT
+source_note: Distilled from scientific-skills search skills; kept optional because it depends on external semantic-search infrastructure.
 trusted: false
 requires_network: true
 writes_files: false
@@ -13,10 +19,6 @@ last_reviewed: 2026-07-09
 profile_tags:
   - research-discovery
 recommended_scope: project
-source_url: https://github.com/yorkeccak/scientific-skills
-source_commit: 20b3d503700656f847e6de873753335bf90e63e3
-source_license: MIT
-adaptation_notes: Distilled from scientific-skills search skills; kept optional because it depends on external semantic-search infrastructure.
 metadata:
   skill-author: AI Skills Collection maintainers with recorded upstream sources
 ---

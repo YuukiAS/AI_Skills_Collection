@@ -1,7 +1,29 @@
 # Installation
 
-Use `ai-skills` as the normal entry point after one editable install. On a new
-server:
+## Codex App Marketplace Install
+
+For most Codex App users, install the generated plugin marketplace directly
+through the app's Git marketplace flow:
+
+```text
+Source: https://github.com/YuukiAS/AI_Skills_Collection.git
+Git reference: main
+Sparse path: plugins/codex
+```
+
+`plugins/codex` is a generated, self-contained marketplace root. It publishes a
+small Codex App plugin set, and each plugin carries copied skill snapshots under
+its own `skills/` directory. Some app-facing skills are aggregate skills whose
+source workflows live under `references/source-skills/`. Codex App does not need
+to run `ai-skills` after the marketplace is added.
+
+Use the CLI when you need server, HPC, repo-local, user-level, explicit legacy
+codex-home installs, or when you are authoring and validating skills in this
+source checkout.
+
+## One-Time CLI Setup
+
+On a new server:
 
 ```bash
 git clone <repo-url> AI_Skills_Collection
@@ -36,27 +58,6 @@ If the short command is not installed yet, the exact fallback is:
 ```bash
 python3 /path/to/AI_Skills_Collection/scripts/skills.py --help
 ```
-
-## Codex App Marketplace Install
-
-For most Codex App users, install the generated plugin marketplace directly
-through the app's Git marketplace flow:
-
-```text
-Source: https://github.com/YuukiAS/AI_Skills_Collection.git
-Git reference: main
-Sparse path: plugins/codex
-```
-
-`plugins/codex` is a generated, self-contained marketplace root. It publishes a
-small Codex App plugin set, and each plugin carries copied skill snapshots under
-its own `skills/` directory. Some app-facing skills are aggregate skills whose
-source workflows live under `references/source-skills/`. Codex App does not need
-to run `ai-skills` after the marketplace is added.
-
-The CLI remains the developer and local deployment path. Use `ai-skills` when
-you need repo-local, user-level, or explicit legacy codex-home installs, or when
-you are authoring and validating skills in this source checkout.
 
 ## Repo-Specific Install
 

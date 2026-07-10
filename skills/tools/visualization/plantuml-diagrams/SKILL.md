@@ -2,7 +2,13 @@
 name: plantuml-diagrams
 description: Create PlantUML source and rendered diagrams for sequence, activity, class, component, deployment, state, and C4-style architecture diagrams. Use when UML semantics are more important than freeform drawing.
 status: active
-provenance: adapted
+provenance: external-adapted
+source_repo_url: https://github.com/Agents365-ai/plantuml-skill
+source_path: .
+source_ref: 07fe0ade1fc9a0a1e2ae8d64f95aa45cd8882284
+source_imported_at: 2026-07-09
+source_license: MIT
+source_note: Distilled from Agents365-ai/plantuml-skill, SpillwaveSolutions/plantuml, and Kroki multi-engine diagram guidance.
 trusted: false
 requires_network: false
 writes_files: true
@@ -13,10 +19,6 @@ profile_tags:
   - visualization
   - diagrams
 recommended_scope: project
-source_url: https://github.com/Agents365-ai/plantuml-skill
-source_commit: 07fe0ade1fc9a0a1e2ae8d64f95aa45cd8882284
-source_license: MIT
-adaptation_notes: Distilled from Agents365-ai/plantuml-skill, SpillwaveSolutions/plantuml, and Kroki multi-engine diagram guidance.
 metadata:
   skill-author: AI Skills Collection maintainers with recorded upstream sources
 ---

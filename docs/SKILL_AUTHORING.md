@@ -52,14 +52,20 @@ metadata:
 For a copied, cloned, or adapted external skill:
 
 ```yaml
-provenance: external
-source_url: https://github.com/<owner>/<repo>
-source_commit: <full commit sha or release tag>
+provenance: external-adapted
+source_repo_url: https://github.com/<owner>/<repo>
+source_path: path/to/original/skill
+source_ref: <full commit sha or release tag>
+source_imported_at: YYYY-MM-DD
 source_license: <license id or URL>
-adaptation_notes: <short note on local changes>
+source_note: <short note on local changes>
 metadata:
   skill-author: <upstream author or organization>
 ```
+
+Use `external-vendored` only when the upstream skill is intentionally preserved
+substantially as-is. External adapted or vendored skills must have an HTTP/HTTPS
+repository URL, source path, reproducible ref, import date, and known license.
 
 If the exact source is not known, keep `provenance: unknown` and add evidence later
 instead of guessing. Run `python3 scripts/audit_skill_provenance.py --write` to

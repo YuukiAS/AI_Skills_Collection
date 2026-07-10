@@ -1,7 +1,7 @@
 {
   "name": "statistical-modeling",
-  "version": "1.0.0",
-  "description": "Bayesian modeling, data analysis, scientific visualization, and manuscript support.",
+  "version": "1.1.0",
+  "description": "Bayesian modeling, Python data analysis, and scientific visualization.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Statistical Modeling",
-    "shortDescription": "Bayesian modeling, data analysis, scientific visualization, and manuscript support.",
-    "longDescription": "Bayesian modeling, data analysis, scientific visualization, and manuscript support. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Bayesian modeling, Python data analysis, and scientific visualization.",
+    "longDescription": "Bayesian modeling, Python data analysis, and scientific visualization. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [

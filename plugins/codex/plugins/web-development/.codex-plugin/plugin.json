@@ -1,7 +1,7 @@
 {
   "name": "web-development",
-  "version": "1.0.0",
-  "description": "Frontend planning, implementation, design handoff, visual assets, and browser QA.",
+  "version": "1.1.0",
+  "description": "Frontend product design, React/Tailwind implementation, Figma handoff, visual assets, and browser QA.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Web Development",
-    "shortDescription": "Frontend planning, implementation, design handoff, visual assets, and browser QA.",
-    "longDescription": "Frontend planning, implementation, design handoff, visual assets, and browser QA. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Frontend product design, React/Tailwind implementation, Figma handoff, visual assets, and browser QA.",
+    "longDescription": "Frontend product design, React/Tailwind implementation, Figma handoff, visual assets, and browser QA. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Web Development",
     "capabilities": [
@@ -27,7 +27,7 @@
     ],
     "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
     "defaultPrompt": [
-      "Build a responsive React interface.",
+      "Design and build a frontend product.",
       "Audit this frontend with browser tests.",
       "Implement this Figma handoff."
     ],

@@ -2,7 +2,13 @@
 name: excalidraw-diagrams
 description: Create or revise Excalidraw-style sketch diagrams for early architecture, workflow, method, and concept ideation. Use when the user wants informal hand-drawn exploration rather than publication-final figures.
 status: active
-provenance: adapted
+provenance: external-adapted
+source_repo_url: https://github.com/coleam00/excalidraw-diagram-skill
+source_path: .
+source_ref: 8646fcc9f74f38539c6cdb4c969723336a96ddcd
+source_imported_at: 2026-07-09
+source_license: MIT
+source_note: Distilled from excalidraw-diagram-skill and kept separate from publication-final diagram workflows.
 trusted: false
 requires_network: false
 writes_files: true
@@ -13,10 +19,6 @@ profile_tags:
   - visualization
   - diagrams
 recommended_scope: project
-source_url: https://github.com/coleam00/excalidraw-diagram-skill
-source_commit: 8646fcc9f74f38539c6cdb4c969723336a96ddcd
-source_license: MIT
-adaptation_notes: Distilled from excalidraw-diagram-skill and kept separate from publication-final diagram workflows.
 metadata:
   skill-author: AI Skills Collection maintainers with recorded upstream sources
 ---

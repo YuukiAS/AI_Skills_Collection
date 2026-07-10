@@ -28,7 +28,7 @@ Complete reference of the tools Claude can use to interact with Figma.
 |---------|---------|---------------|
 | `set_image_fill` | Apply image to node | Set product photos, avatars |
 | `get_image_from_node` | Extract image metadata | Audit images in design |
-| `replace_image_fill` | Swap images | Update assets, example values |
+| `replace_image_fill` | Swap images | Update assets, placeholders |
 | `apply_image_transform` | Adjust image position/scale/rotation | Pan, zoom, rotate image inside node |
 | `set_image_filters` | Apply color/light adjustments | Brightness, contrast, saturation, etc. |
 

@@ -1,0 +1,35 @@
+{
+  "name": "cardiacnexus",
+  "version": "1.1.0",
+  "description": "Project-specific CardiacNexus feature contracts, pipeline refactors, strain registration, and documentation workflows.",
+  "author": {
+    "name": "YuukiAS",
+    "email": "humc2013@gmail.com",
+    "url": "https://github.com/YuukiAS"
+  },
+  "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "keywords": [
+    "cardiacnexus",
+    "codex",
+    "skills"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "CardiacNexus",
+    "shortDescription": "Project-specific CardiacNexus feature contracts, pipeline refactors, strain registration, and documentation workflows.",
+    "longDescription": "Project-specific CardiacNexus feature contracts, pipeline refactors, strain registration, and documentation workflows. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "developerName": "YuukiAS",
+    "category": "Research",
+    "capabilities": [
+      "Skills"
+    ],
+    "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
+    "defaultPrompt": [
+      "Review this CardiacNexus pipeline change.",
+      "Check a CardiacNexus feature contract.",
+      "Update CardiacNexus documentation."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

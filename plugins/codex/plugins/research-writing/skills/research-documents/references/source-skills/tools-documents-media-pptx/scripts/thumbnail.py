@@ -2,7 +2,7 @@
 
 Creates a grid layout of slide thumbnails for quick visual analysis.
 Labels each thumbnail with its XML filename (e.g., slide1.xml).
-Hidden slides are shown with a example value pattern.
+Hidden slides are shown with a placeholder pattern.
 
 Usage:
     python thumbnail.py input.pptx [output_prefix] [--cols N]
@@ -125,19 +125,19 @@ def build_slide_list(
 ) -> list[tuple[Path, str]]:
     if visible_images:
         with Image.open(visible_images[0]) as img:
-            example value_size = img.size
+            placeholder_size = img.size
     else:
-        example value_size = (1920, 1080)
+        placeholder_size = (1920, 1080)
 
     slides = []
     visible_idx = 0
 
     for info in slide_info:
         if info["hidden"]:
-            example value_path = temp_dir / f"hidden-{info['name']}.jpg"
-            example value_img = create_hidden_example value(example value_size)
-            example value_img.save(example value_path, "JPEG")
-            slides.append((example value_path, f"{info['name']} (hidden)"))
+            placeholder_path = temp_dir / f"hidden-{info['name']}.jpg"
+            placeholder_img = create_hidden_placeholder(placeholder_size)
+            placeholder_img.save(placeholder_path, "JPEG")
+            slides.append((placeholder_path, f"{info['name']} (hidden)"))
         else:
             if visible_idx < len(visible_images):
                 slides.append((visible_images[visible_idx], info["name"]))
@@ -146,7 +146,7 @@ def build_slide_list(
     return slides
 
 
-def create_hidden_example value(size: tuple[int, int]) -> Image.Image:
+def create_hidden_placeholder(size: tuple[int, int]) -> Image.Image:
     img = Image.new("RGB", size, color="#F0F0F0")
     draw = ImageDraw.Draw(img)
     line_width = max(5, min(size) // 100)

@@ -2,7 +2,13 @@
 name: skill-library-analysis
 description: Analyze, deduplicate, cluster, and select skills from a large skill library or cloned upstream sources. Use when maintaining AI_Skills_Collection, comparing external skill repos, or deciding whether to merge, add, archive, or ignore skills.
 status: active
-provenance: adapted
+provenance: external-adapted
+source_repo_url: https://github.com/davidliuk/graph-of-skills
+source_path: .
+source_ref: 69f2ab2f5e18681cb809e8e123da6b83ec50f5fc
+source_imported_at: 2026-07-09
+source_license: MIT
+source_note: Distilled from graph-of-skills and local provenance audit work.
 trusted: false
 requires_network: false
 writes_files: true
@@ -13,10 +19,6 @@ profile_tags:
   - maintenance
   - skills
 recommended_scope: project
-source_url: https://github.com/davidliuk/graph-of-skills
-source_commit: 69f2ab2f5e18681cb809e8e123da6b83ec50f5fc
-source_license: MIT
-adaptation_notes: Distilled from graph-of-skills and local provenance audit work.
 metadata:
   skill-author: AI Skills Collection maintainers with recorded upstream sources
 ---

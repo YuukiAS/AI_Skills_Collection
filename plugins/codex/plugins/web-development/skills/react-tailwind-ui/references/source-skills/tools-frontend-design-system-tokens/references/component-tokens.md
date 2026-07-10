@@ -55,8 +55,8 @@ Component-specific tokens referencing semantic layer.
   --input-border: var(--color-input);
   --input-fg: var(--color-foreground);
 
-  /* Example value */
-  --input-example value: var(--color-muted-foreground);
+  /* Placeholder */
+  --input-placeholder: var(--color-muted-foreground);
 
   /* Focus */
   --input-focus-border: var(--color-ring);

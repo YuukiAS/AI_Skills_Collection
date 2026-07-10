@@ -27,7 +27,7 @@ already uses them or the task clearly needs them.
 
 ## Implementation Rules
 
-- Build the actual usable screen, not a landing page example value.
+- Build the actual usable screen, not a landing page placeholder.
 - Keep components scoped and composable.
 - Use semantic HTML and accessible labels.
 - Use stable layout dimensions for boards, grids, tiles, toolbars, and counters.

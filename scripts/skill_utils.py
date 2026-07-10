@@ -69,40 +69,57 @@ def read_frontmatter(skill_file: Path) -> tuple[dict[str, Any], str]:
         return {}, text
 
     meta: dict[str, Any] = {}
-    stack: list[tuple[int, Any]] = [(-1, meta)]
-    last_key_at_indent: dict[int, str] = {}
-
-    for line in raw.splitlines():
+    lines = raw.splitlines()
+    index = 0
+    while index < len(lines):
+        line = lines[index]
         if not line.strip() or line.lstrip().startswith("#"):
+            index += 1
             continue
         indent = len(line) - len(line.lstrip(" "))
         stripped = line.strip()
-
-        while stack and indent <= stack[-1][0]:
-            stack.pop()
-        parent = stack[-1][1]
-
-        if stripped.startswith("- "):
-            item = parse_scalar(stripped[2:])
-            if isinstance(parent, list):
-                parent.append(item)
+        if indent != 0:
+            index += 1
             continue
 
         match = re.match(r"^([A-Za-z_][\w-]*):\s*(.*)$", stripped)
         if not match:
+            index += 1
             continue
         key, value = match.groups()
-        if value == "":
-            container: dict[str, Any] = {}
-            if isinstance(parent, dict):
-                parent[key] = container
-            stack.append((indent, container))
-            last_key_at_indent[indent] = key
-        else:
-            parsed = parse_scalar(value)
-            if isinstance(parent, dict):
-                parent[key] = parsed
-            last_key_at_indent[indent] = key
+        if value != "":
+            meta[key] = parse_scalar(value)
+            index += 1
+            continue
+
+        nested: list[str] = []
+        index += 1
+        while index < len(lines):
+            nested_line = lines[index]
+            if not nested_line.strip() or nested_line.lstrip().startswith("#"):
+                index += 1
+                continue
+            nested_indent = len(nested_line) - len(nested_line.lstrip(" "))
+            if nested_indent <= indent:
+                break
+            nested.append(nested_line)
+            index += 1
+
+        if not nested:
+            meta[key] = None
+            continue
+        if all(item.strip().startswith("- ") for item in nested):
+            meta[key] = [parse_scalar(item.strip()[2:]) for item in nested]
+            continue
+
+        nested_dict: dict[str, Any] = {}
+        for item in nested:
+            item_stripped = item.strip()
+            nested_match = re.match(r"^([A-Za-z_][\w-]*):\s*(.*)$", item_stripped)
+            if nested_match:
+                nested_key, nested_value = nested_match.groups()
+                nested_dict[nested_key] = parse_scalar(nested_value)
+        meta[key] = nested_dict
 
     return meta, body.lstrip("\n")
 
@@ -126,6 +143,12 @@ def write_frontmatter(skill_file: Path, meta: dict[str, Any], body: str) -> None
         "description",
         "status",
         "provenance",
+        "source_repo_url",
+        "source_path",
+        "source_ref",
+        "source_imported_at",
+        "source_license",
+        "source_note",
         "trusted",
         "requires_network",
         "writes_files",
@@ -135,6 +158,7 @@ def write_frontmatter(skill_file: Path, meta: dict[str, Any], body: str) -> None
         "profile_tags",
         "recommended_scope",
         "license",
+        "source_skills",
         "metadata",
     ]
     keys = [key for key in preferred if key in meta] + sorted(key for key in meta if key not in preferred)
@@ -328,6 +352,13 @@ def skill_record(skill_file: Path, include_body: bool = False) -> dict[str, Any]
         "description": str(meta.get("description") or ""),
         "status": status,
         "provenance": meta.get("provenance", "unknown"),
+        "source_repo_url": meta.get("source_repo_url", ""),
+        "source_path": meta.get("source_path", ""),
+        "source_ref": meta.get("source_ref", ""),
+        "source_imported_at": meta.get("source_imported_at", ""),
+        "source_license": meta.get("source_license", ""),
+        "source_note": meta.get("source_note", ""),
+        "source_skills": normalize_list(meta.get("source_skills", [])),
         "trusted": bool(meta.get("trusted", False)),
         "requires_network": bool(meta.get("requires_network", False)),
         "writes_files": bool(meta.get("writes_files", True)),

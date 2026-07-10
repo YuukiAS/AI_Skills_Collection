@@ -4,10 +4,11 @@ description: Create publication-quality scientific diagrams using Nano Banana 2 
 status: active
 provenance: unknown
 trusted: false
-requires_network: false
+requires_network: true
 writes_files: true
-executes_code: false
+executes_code: true
 secrets_needed:
+  - OPENROUTER_API_KEY
 last_reviewed: 2026-05-14
 profile_tags:
 recommended_scope: project
@@ -624,5 +625,4 @@ python scripts/generate_schematic.py "your diagram description" -o output.png
 ---
 
 Use this skill to create clear, accessible, publication-quality diagrams that effectively communicate complex scientific concepts. The AI-powered workflow with iterative refinement ensures diagrams meet professional standards.
-
 

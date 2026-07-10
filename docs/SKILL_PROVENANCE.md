@@ -7,9 +7,12 @@ This report records what can be proven from files currently in this repository. 
 - Scope: `active_and_non_archived`
 - Skills audited: 146
 - Skills with explicit source fields: 11
-- Skills marked `user-authored` or `local`: 12
-- Skills with only `metadata.skill-author`: 93
-- Skills with unknown origin and no author field: 30
+- User-authored skills: 8
+- External adapted skills: 11
+- External vendored skills: 0
+- Generated skills: 0
+- Local legacy skills: 4
+- Unknown-origin historical skills: 123
 - Skills containing URLs in the body: 68
 - Skills containing local license files: 12
 
@@ -17,159 +20,184 @@ This report records what can be proven from files currently in this repository. 
 
 | Provenance | Count |
 | --- | --- |
-| adapted | 11 |
+| external-adapted | 11 |
 | local | 4 |
 | unknown | 123 |
 | user-authored | 8 |
 
-## Recorded Authors
+## User Authored
 
-| metadata.skill-author | Count |
-| --- | --- |
-| (missing) | 42 |
-| AHK Strategies (ashrafkahoush-ux) | 2 |
-| AI Skills Collection maintainers | 1 |
-| AI Skills Collection maintainers with recorded upstream sources | 11 |
-| BGPT | 1 |
-| CardiacNexus maintainers | 2 |
-| Clayton Young / Superior Byte Works, LLC (@borealBytes) | 2 |
-| Jeremy Leipzig | 1 |
-| K-Dense Inc. | 81 |
-| Kuan-lin Huang | 2 |
-| Orchestra Research | 1 |
-
-## Explicit Source Fields
-
-| Skill | Path | Source fields |
-| --- | --- | --- |
-| skill-library-analysis | skills/core/codex-system/skill-library-analysis | {"source_commit": "69f2ab2f5e18681cb809e8e123da6b83ec50f5fc", "source_url": "https://github.com/davidliuk/graph-of-skills"} |
-| valyu-scientific-search | skills/science/discovery/valyu-scientific-search | {"source_commit": "20b3d503700656f847e6de873753335bf90e63e3", "source_url": "https://github.com/yorkeccak/scientific-skills"} |
-| experiment-execution | skills/science/ideation/experiment-execution | {"source_commit": "e291e7dc7ca268b2de7e1a9cf23bc2eef5dc0651", "source_url": "https://github.com/Imbad0202/experiment-agent"} |
-| d2-diagrams | skills/tools/visualization/d2-diagrams | {"source_commit": "5b30a5597f93876295b1ae9567c0e97e87543aa4", "source_url": "https://github.com/RayanAhmed0/D2-Diagram-Skill"} |
-| drawio-diagrams | skills/tools/visualization/drawio-diagrams | {"source_commit": "883b34c8aea72ca7bc978a281061c411bc3e3745", "source_url": "https://github.com/jgraph/drawio-mcp"} |
-| excalidraw-diagrams | skills/tools/visualization/excalidraw-diagrams | {"source_commit": "8646fcc9f74f38539c6cdb4c969723336a96ddcd", "source_url": "https://github.com/coleam00/excalidraw-diagram-skill"} |
-| plantuml-diagrams | skills/tools/visualization/plantuml-diagrams | {"source_commit": "07fe0ade1fc9a0a1e2ae8d64f95aa45cd8882284", "source_url": "https://github.com/Agents365-ai/plantuml-skill"} |
-| citation-verification | skills/writing/research/citation-verification | {"source_commit": "b9deb7077099f56b05c9b6ecea744c2ca0a6d324", "source_url": "https://github.com/serenakeyitan/citation-check-skill"} |
-| latex-paper-authoring | skills/writing/research/latex-paper-authoring | {"source_commit": "d0f106108cb09e448604a56ce973d35b340cf497", "source_url": "https://github.com/yunshenwuchuxun/latex-paper-skills"} |
-| nature-manuscript-workflow | skills/writing/research/nature-manuscript-workflow | {"source_commit": "44cff42ac22a5ac4dcfb7ba01b2e81c21d689ea6", "source_url": "https://github.com/Boom5426/Nature-Paper-Skills"} |
-| paper-workflow-orchestrator | skills/writing/research/paper-workflow-orchestrator | {"source_commit": "d4529208cda72aa075767611b0265b95b709b550", "source_url": "https://github.com/WUBING2023/PaperSpine"} |
-
-## Local Or User-Authored Records
-
-| Skill | Path | Provenance | Author |
+| Skill | Path | Provenance | Source |
 | --- | --- | --- | --- |
 | codex-workflow-protocol | skills/core/codex-system/codex-workflow-protocol | user-authored |  |
-| project-skill-installer | skills/core/codex-system/project-skill-installer | local |  |
-| bioinformatics-database-retrieval | skills/domains/bioinformatics/databases/bioinformatics-database-retrieval | local |  |
 | cardiac-mri | skills/domains/medical-imaging/cardiac-mri | user-authored |  |
 | medical-imaging-terminology-measurement | skills/domains/medical-imaging/medical-imaging-terminology-measurement | user-authored |  |
 | clinical-guideline-checking | skills/domains/medicine-clinical/clinical-guideline-checking | user-authored |  |
 | medical-literature-evidence-review | skills/domains/medicine-clinical/medical-literature-evidence-review | user-authored |  |
 | medical-safety-boundaries | skills/domains/medicine-clinical/medical-safety-boundaries | user-authored |  |
 | render-chinese-math-pdf | skills/tools/documents-media/render-chinese-math-pdf | user-authored |  |
-| chinese-prose | skills/writing/core/chinese-prose | local |  |
-| scientific-prose | skills/writing/core/scientific-prose | local |  |
 | writing-fidelity | skills/writing/core/writing-fidelity | user-authored |  |
 
-## Author-Only External Evidence
+## External Adapted
 
-These rows identify an author or organization, but not the exact upstream repository or commit.
-
-| Skill | Path | Author | License |
+| Skill | Path | Provenance | Source |
 | --- | --- | --- | --- |
-| bayesian-ppl-diagnostics | skills/domains/bayesian/bayesian-ppl-diagnostics | CardiacNexus maintainers | Apache-2.0 |
-| pymc | skills/domains/bayesian/pymc | K-Dense Inc. | Apache License, Version 2.0 |
-| simpy | skills/domains/bayesian/simpy | K-Dense Inc. | MIT License |
-| statistical-analysis | skills/domains/bayesian/statistical-analysis | K-Dense Inc. | MIT License |
-| statsmodels | skills/domains/bayesian/statsmodels | K-Dense Inc. | BSD License |
-| biopython | skills/domains/bioinformatics/biology-toolkits/biopython | K-Dense Inc. | Unknown |
-| esm | skills/domains/bioinformatics/biology-toolkits/esm | K-Dense Inc. | MIT license |
-| etetoolkit | skills/domains/bioinformatics/biology-toolkits/etetoolkit | K-Dense Inc. | GPL-3.0 license |
-| phylogenetics | skills/domains/bioinformatics/biology-toolkits/phylogenetics | Kuan-lin Huang | Unknown |
-| scikit-bio | skills/domains/bioinformatics/biology-toolkits/scikit-bio | K-Dense Inc. | BSD-3-Clause license |
-| pysam | skills/domains/bioinformatics/genomics-io/pysam | K-Dense Inc. | MIT license |
-| tiledbvcf | skills/domains/bioinformatics/genomics-io/tiledbvcf | Jeremy Leipzig | MIT license |
-| zarr-python | skills/domains/bioinformatics/genomics-io/zarr-python | K-Dense Inc. | MIT license |
-| arboreto | skills/domains/bioinformatics/omics-analysis/arboreto | K-Dense Inc. | BSD-3-Clause license |
-| deeptools | skills/domains/bioinformatics/omics-analysis/deeptools | K-Dense Inc. | BSD license |
-| flowio | skills/domains/bioinformatics/omics-analysis/flowio | K-Dense Inc. | BSD-3-Clause license |
-| geniml | skills/domains/bioinformatics/omics-analysis/geniml | K-Dense Inc. | BSD-2-Clause license |
-| gtars | skills/domains/bioinformatics/omics-analysis/gtars | K-Dense Inc. | Unknown |
-| polars-bio | skills/domains/bioinformatics/omics-analysis/polars-bio | K-Dense Inc. | https://github.com/biodatageeks/polars-bio/blob/main/LICENSE |
-| pydeseq2 | skills/domains/bioinformatics/omics-analysis/pydeseq2 | K-Dense Inc. | MIT license |
-| dnanexus-integration | skills/domains/bioinformatics/platforms/dnanexus-integration | K-Dense Inc. | Unknown |
-| lamindb | skills/domains/bioinformatics/platforms/lamindb | K-Dense Inc. | Apache-2.0 license |
-| latchbio-integration | skills/domains/bioinformatics/platforms/latchbio-integration | K-Dense Inc. | Unknown |
-| anndata | skills/domains/bioinformatics/single-cell/anndata | K-Dense Inc. | BSD-3-Clause license |
-| scanpy | skills/domains/bioinformatics/single-cell/scanpy | K-Dense Inc. | SD-3-Clause license |
-| scvelo | skills/domains/bioinformatics/single-cell/scvelo | Kuan-lin Huang | BSD-3-Clause |
-| scvi-tools | skills/domains/bioinformatics/single-cell/scvi-tools | K-Dense Inc. | BSD-3-Clause license |
-| neuropixels-analysis | skills/domains/bioinformatics/specialized/neuropixels-analysis | K-Dense Inc. | MIT license |
-| medical-imaging-classical-features | skills/domains/medical-imaging/medical-imaging-classical-features | CardiacNexus maintainers | Apache-2.0 |
-| medical-imaging-deep-learning | skills/domains/medical-imaging/medical-imaging-deep-learning | AI Skills Collection maintainers | Apache-2.0 |
-| pathml | skills/domains/medical-imaging/pathml | K-Dense Inc. | GPL-2.0 license |
-| pydicom | skills/domains/medical-imaging/pydicom | K-Dense Inc. | https://github.com/pydicom/pydicom/blob/main/LICENSE |
-| clinical-decision-support | skills/domains/medicine-clinical/clinical-decision-support | K-Dense Inc. | MIT License |
-| clinical-reports | skills/domains/medicine-clinical/clinical-reports | K-Dense Inc. | MIT License |
-| neurokit2 | skills/domains/medicine-clinical/neurokit2 | K-Dense Inc. | MIT license |
-| pyhealth | skills/domains/medicine-clinical/pyhealth | K-Dense Inc. | MIT license |
-| scikit-survival | skills/domains/medicine-clinical/scikit-survival | K-Dense Inc. | GPL-3.0 license |
-| treatment-plans | skills/domains/medicine-clinical/treatment-plans | K-Dense Inc. | MIT license |
-| paper-2-web | skills/science/communication/paper-2-web | K-Dense Inc. | Unknown |
-| pptx-posters | skills/science/communication/pptx-posters | K-Dense Inc. | MIT license |
-| scientific-schematics | skills/science/communication/scientific-schematics | K-Dense Inc. | MIT license |
-| scientific-slides | skills/science/communication/scientific-slides | K-Dense Inc. | MIT license |
-| scientific-visualization | skills/science/communication/scientific-visualization | K-Dense Inc. | MIT license |
-| arxiv-database | skills/science/discovery/arxiv-database | Orchestra Research | MIT |
-| bgpt-paper-search | skills/science/discovery/bgpt-paper-search | BGPT | MIT |
-| biorxiv-database | skills/science/discovery/biorxiv-database | K-Dense Inc. | Unknown |
-| citation-management | skills/science/discovery/citation-management | K-Dense Inc. | MIT License |
-| openalex-database | skills/science/discovery/openalex-database | K-Dense Inc. | Unknown |
-| pubmed-database | skills/science/discovery/pubmed-database | K-Dense Inc. | Unknown |
-| pyzotero | skills/science/discovery/pyzotero | K-Dense Inc. | MIT License |
-| research-lookup | skills/science/discovery/research-lookup | K-Dense Inc. | MIT license |
-| consciousness-council | skills/science/ideation/consciousness-council | AHK Strategies (ashrafkahoush-ux) | MIT license |
-| hypogenic | skills/science/ideation/hypogenic | K-Dense Inc. | MIT license |
-| hypothesis-generation | skills/science/ideation/hypothesis-generation | K-Dense Inc. | MIT license |
-| scientific-brainstorming | skills/science/ideation/scientific-brainstorming | K-Dense Inc. | MIT license |
-| scientific-critical-thinking | skills/science/ideation/scientific-critical-thinking | K-Dense Inc. | MIT license |
-| what-if-oracle | skills/science/ideation/what-if-oracle | AHK Strategies (ashrafkahoush-ux) | MIT license |
-| modal | skills/tools/ai-ml/modal | K-Dense Inc. | Apache-2.0 license |
-| pufferlib | skills/tools/ai-ml/pufferlib | K-Dense Inc. | MIT license |
-| pytorch-lightning | skills/tools/ai-ml/pytorch-lightning | K-Dense Inc. | Apache-2.0 license |
-| stable-baselines3 | skills/tools/ai-ml/stable-baselines3 | K-Dense Inc. | MIT license |
-| timesfm-forecasting | skills/tools/ai-ml/timesfm-forecasting | Clayton Young / Superior Byte Works, LLC (@borealBytes) | Apache-2.0 license |
-| torch-geometric | skills/tools/ai-ml/torch-geometric | K-Dense Inc. | MIT license |
-| transformers | skills/tools/ai-ml/transformers | K-Dense Inc. | Apache-2.0 license |
-| aeon | skills/tools/data-science/aeon | K-Dense Inc. | BSD-3-Clause license |
-| dask | skills/tools/data-science/dask | K-Dense Inc. | BSD-3-Clause license |
-| exploratory-data-analysis | skills/tools/data-science/exploratory-data-analysis | K-Dense Inc. | MIT license |
-| geopandas | skills/tools/data-science/geopandas | K-Dense Inc. | BSD-3-Clause license |
-| matlab | skills/tools/data-science/matlab | K-Dense Inc. | For MATLAB (https://www.mathworks.com/pricing-licensing.html) and for Octave (GNU General Public License version 3) |
-| networkx | skills/tools/data-science/networkx | K-Dense Inc. | 3-clause BSD license |
-| polars | skills/tools/data-science/polars | K-Dense Inc. | https://github.com/pola-rs/polars/blob/main/LICENSE |
-| pymoo | skills/tools/data-science/pymoo | K-Dense Inc. | Apache-2.0 license |
-| scikit-learn | skills/tools/data-science/scikit-learn | K-Dense Inc. | BSD-3-Clause license |
-| shap | skills/tools/data-science/shap | K-Dense Inc. | MIT license |
-| sympy | skills/tools/data-science/sympy | K-Dense Inc. | https://github.com/sympy/sympy/blob/master/LICENSE |
-| umap-learn | skills/tools/data-science/umap-learn | K-Dense Inc. | BSD-3-Clause license |
-| vaex | skills/tools/data-science/vaex | K-Dense Inc. | MIT license |
-| get-available-resources | skills/tools/documents-media/get-available-resources | K-Dense Inc. | MIT license |
-| markitdown | skills/tools/documents-media/markitdown | K-Dense Inc. | MIT license |
-| open-notebook | skills/tools/documents-media/open-notebook | K-Dense Inc. | MIT |
-| parallel-web | skills/tools/documents-media/parallel-web | K-Dense Inc. | MIT license |
-| perplexity-search | skills/tools/documents-media/perplexity-search | K-Dense Inc. | MIT license |
-| generate-image | skills/tools/visualization/generate-image | K-Dense Inc. | MIT license |
-| markdown-mermaid-writing | skills/tools/visualization/markdown-mermaid-writing | Clayton Young / Superior Byte Works, LLC (@borealBytes) | Apache-2.0 |
-| matplotlib | skills/tools/visualization/matplotlib | K-Dense Inc. | https://github.com/matplotlib/matplotlib/tree/main/LICENSE |
-| plotly | skills/tools/visualization/plotly | K-Dense Inc. | MIT license |
-| seaborn | skills/tools/visualization/seaborn | K-Dense Inc. | BSD-3-Clause license |
-| literature-review | skills/writing/research/literature-review | K-Dense Inc. | MIT license |
-| peer-review | skills/writing/research/peer-review | K-Dense Inc. | MIT license |
-| research-grants | skills/writing/research/research-grants | K-Dense Inc. | MIT license |
-| scholar-evaluation | skills/writing/research/scholar-evaluation | K-Dense Inc. | MIT license |
-| scientific-writing | skills/writing/research/scientific-writing | K-Dense Inc. | MIT license |
-| venue-templates | skills/writing/research/venue-templates | K-Dense Inc. | MIT license |
+| skill-library-analysis | skills/core/codex-system/skill-library-analysis | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from graph-of-skills and local provenance audit work.", "source_path": ".", "source_ref": "69f2ab2f5e18681cb809e8e123da6b83ec50f5fc", "source_repo_url": "https://github.com/davidliuk/graph-of-skills"} |
+| valyu-scientific-search | skills/science/discovery/valyu-scientific-search | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from scientific-skills search skills; kept optional because it depends on external semantic-search infrastructure.", "source_path": ".", "source_ref": "20b3d503700656f847e6de873753335bf90e63e3", "source_repo_url": "https://github.com/yorkeccak/scientific-skills"} |
+| experiment-execution | skills/science/ideation/experiment-execution | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from experiment-agent and existing codex-workflow-protocol verification gates.", "source_path": ".", "source_ref": "e291e7dc7ca268b2de7e1a9cf23bc2eef5dc0651", "source_repo_url": "https://github.com/Imbad0202/experiment-agent"} |
+| d2-diagrams | skills/tools/visualization/d2-diagrams | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from D2-Diagram-Skill and heathdutton/claude-d2-diagrams plugin notes; plugin-only repo recorded but not imported.", "source_path": ".", "source_ref": "5b30a5597f93876295b1ae9567c0e97e87543aa4", "source_repo_url": "https://github.com/RayanAhmed0/D2-Diagram-Skill"} |
+| drawio-diagrams | skills/tools/visualization/drawio-diagrams | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "Apache-2.0", "source_note": "Distilled from drawio-mcp, Agents365-ai/drawio-skill, and little-hands/claude-drawio-skill.", "source_path": ".", "source_ref": "883b34c8aea72ca7bc978a281061c411bc3e3745", "source_repo_url": "https://github.com/jgraph/drawio-mcp"} |
+| excalidraw-diagrams | skills/tools/visualization/excalidraw-diagrams | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from excalidraw-diagram-skill and kept separate from publication-final diagram workflows.", "source_path": ".", "source_ref": "8646fcc9f74f38539c6cdb4c969723336a96ddcd", "source_repo_url": "https://github.com/coleam00/excalidraw-diagram-skill"} |
+| plantuml-diagrams | skills/tools/visualization/plantuml-diagrams | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from Agents365-ai/plantuml-skill, SpillwaveSolutions/plantuml, and Kroki multi-engine diagram guidance.", "source_path": ".", "source_ref": "07fe0ade1fc9a0a1e2ae8d64f95aa45cd8882284", "source_repo_url": "https://github.com/Agents365-ai/plantuml-skill"} |
+| citation-verification | skills/writing/research/citation-verification | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from citation-check-skill, Nature-Paper-Skills citation-verifier/reference-audit, claude-scholar citation-verification, and paperpipe verification workflows.", "source_path": ".", "source_ref": "b9deb7077099f56b05c9b6ecea744c2ca0a6d324", "source_repo_url": "https://github.com/serenakeyitan/citation-check-skill"} |
+| latex-paper-authoring | skills/writing/research/latex-paper-authoring | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from latex-paper-skills, latex-document-skill, claude-scholar LaTeX template organizer, and existing render-chinese-math-pdf practice.", "source_path": ".", "source_ref": "d0f106108cb09e448604a56ce973d35b340cf497", "source_repo_url": "https://github.com/yunshenwuchuxun/latex-paper-skills"} |
+| nature-manuscript-workflow | skills/writing/research/nature-manuscript-workflow | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from Nature-Paper-Skills, nature-skills, and claude-scholar Nature writing/response/data skills.", "source_path": ".", "source_ref": "44cff42ac22a5ac4dcfb7ba01b2e81c21d689ea6", "source_repo_url": "https://github.com/Boom5426/Nature-Paper-Skills"} |
+| paper-workflow-orchestrator | skills/writing/research/paper-workflow-orchestrator | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from PaperSpine, academic-research-skills, Nature-Paper-Skills, paper-writing-skill, and Research-Paper-Writing-Skills; see TODO/CLONED_SKILL_SOURCES.md.", "source_path": ".", "source_ref": "d4529208cda72aa075767611b0265b95b709b550", "source_repo_url": "https://github.com/WUBING2023/PaperSpine"} |
+
+## External Vendored
+
+None.
+
+## Generated
+
+None.
+
+## Local Legacy
+
+| Skill | Path | Provenance | Source |
+| --- | --- | --- | --- |
+| project-skill-installer | skills/core/codex-system/project-skill-installer | local |  |
+| bioinformatics-database-retrieval | skills/domains/bioinformatics/databases/bioinformatics-database-retrieval | local |  |
+| chinese-prose | skills/writing/core/chinese-prose | local |  |
+| scientific-prose | skills/writing/core/scientific-prose | local |  |
+
+## Unknown Historical
+
+| Skill | Path | Provenance | Source |
+| --- | --- | --- | --- |
+| mcp-builder | skills/core/codex-system/mcp-builder | unknown |  |
+| imagegen | skills/core/codex-system/system-skills/imagegen | unknown |  |
+| openai-docs | skills/core/codex-system/system-skills/openai-docs | unknown |  |
+| plugin-creator | skills/core/codex-system/system-skills/plugin-creator | unknown |  |
+| skill-creator | skills/core/codex-system/system-skills/skill-creator | unknown |  |
+| skill-installer | skills/core/codex-system/system-skills/skill-installer | unknown |  |
+| bayesian-ppl-diagnostics | skills/domains/bayesian/bayesian-ppl-diagnostics | unknown |  |
+| pymc | skills/domains/bayesian/pymc | unknown |  |
+| simpy | skills/domains/bayesian/simpy | unknown |  |
+| statistical-analysis | skills/domains/bayesian/statistical-analysis | unknown |  |
+| statsmodels | skills/domains/bayesian/statsmodels | unknown |  |
+| biopython | skills/domains/bioinformatics/biology-toolkits/biopython | unknown |  |
+| esm | skills/domains/bioinformatics/biology-toolkits/esm | unknown |  |
+| etetoolkit | skills/domains/bioinformatics/biology-toolkits/etetoolkit | unknown |  |
+| phylogenetics | skills/domains/bioinformatics/biology-toolkits/phylogenetics | unknown |  |
+| scikit-bio | skills/domains/bioinformatics/biology-toolkits/scikit-bio | unknown |  |
+| pysam | skills/domains/bioinformatics/genomics-io/pysam | unknown |  |
+| tiledbvcf | skills/domains/bioinformatics/genomics-io/tiledbvcf | unknown |  |
+| zarr-python | skills/domains/bioinformatics/genomics-io/zarr-python | unknown |  |
+| arboreto | skills/domains/bioinformatics/omics-analysis/arboreto | unknown |  |
+| deeptools | skills/domains/bioinformatics/omics-analysis/deeptools | unknown |  |
+| flowio | skills/domains/bioinformatics/omics-analysis/flowio | unknown |  |
+| geniml | skills/domains/bioinformatics/omics-analysis/geniml | unknown |  |
+| gtars | skills/domains/bioinformatics/omics-analysis/gtars | unknown |  |
+| polars-bio | skills/domains/bioinformatics/omics-analysis/polars-bio | unknown |  |
+| pydeseq2 | skills/domains/bioinformatics/omics-analysis/pydeseq2 | unknown |  |
+| dnanexus-integration | skills/domains/bioinformatics/platforms/dnanexus-integration | unknown |  |
+| lamindb | skills/domains/bioinformatics/platforms/lamindb | unknown |  |
+| latchbio-integration | skills/domains/bioinformatics/platforms/latchbio-integration | unknown |  |
+| anndata | skills/domains/bioinformatics/single-cell/anndata | unknown |  |
+| scanpy | skills/domains/bioinformatics/single-cell/scanpy | unknown |  |
+| scvelo | skills/domains/bioinformatics/single-cell/scvelo | unknown |  |
+| scvi-tools | skills/domains/bioinformatics/single-cell/scvi-tools | unknown |  |
+| neuropixels-analysis | skills/domains/bioinformatics/specialized/neuropixels-analysis | unknown |  |
+| medical-imaging-classical-features | skills/domains/medical-imaging/medical-imaging-classical-features | unknown |  |
+| medical-imaging-deep-learning | skills/domains/medical-imaging/medical-imaging-deep-learning | unknown |  |
+| pathml | skills/domains/medical-imaging/pathml | unknown |  |
+| pydicom | skills/domains/medical-imaging/pydicom | unknown |  |
+| clinical-decision-support | skills/domains/medicine-clinical/clinical-decision-support | unknown |  |
+| clinical-reports | skills/domains/medicine-clinical/clinical-reports | unknown |  |
+| neurokit2 | skills/domains/medicine-clinical/neurokit2 | unknown |  |
+| pyhealth | skills/domains/medicine-clinical/pyhealth | unknown |  |
+| scikit-survival | skills/domains/medicine-clinical/scikit-survival | unknown |  |
+| treatment-plans | skills/domains/medicine-clinical/treatment-plans | unknown |  |
+| cardiacnexus-docs-markdoc | skills/projects/cmr/cardiacnexus-docs-markdoc | unknown |  |
+| cardiacnexus-feature-contracts | skills/projects/cmr/cardiacnexus-feature-contracts | unknown |  |
+| cardiacnexus-pipeline-refactor | skills/projects/cmr/cardiacnexus-pipeline-refactor | unknown |  |
+| cardiacnexus-strain-registration | skills/projects/cmr/cardiacnexus-strain-registration | unknown |  |
+| latex-posters | skills/science/communication/latex-posters | unknown |  |
+| paper-2-web | skills/science/communication/paper-2-web | unknown |  |
+| pptx-posters | skills/science/communication/pptx-posters | unknown |  |
+| scientific-schematics | skills/science/communication/scientific-schematics | unknown |  |
+| scientific-slides | skills/science/communication/scientific-slides | unknown |  |
+| scientific-visualization | skills/science/communication/scientific-visualization | unknown |  |
+| arxiv-database | skills/science/discovery/arxiv-database | unknown |  |
+| bgpt-paper-search | skills/science/discovery/bgpt-paper-search | unknown |  |
+| biorxiv-database | skills/science/discovery/biorxiv-database | unknown |  |
+| citation-management | skills/science/discovery/citation-management | unknown |  |
+| openalex-database | skills/science/discovery/openalex-database | unknown |  |
+| pubmed-database | skills/science/discovery/pubmed-database | unknown |  |
+| pyzotero | skills/science/discovery/pyzotero | unknown |  |
+| research-lookup | skills/science/discovery/research-lookup | unknown |  |
+| consciousness-council | skills/science/ideation/consciousness-council | unknown |  |
+| hypogenic | skills/science/ideation/hypogenic | unknown |  |
+| hypothesis-generation | skills/science/ideation/hypothesis-generation | unknown |  |
+| scientific-brainstorming | skills/science/ideation/scientific-brainstorming | unknown |  |
+| scientific-critical-thinking | skills/science/ideation/scientific-critical-thinking | unknown |  |
+| what-if-oracle | skills/science/ideation/what-if-oracle | unknown |  |
+| modal | skills/tools/ai-ml/modal | unknown |  |
+| pufferlib | skills/tools/ai-ml/pufferlib | unknown |  |
+| pytorch-lightning | skills/tools/ai-ml/pytorch-lightning | unknown |  |
+| stable-baselines3 | skills/tools/ai-ml/stable-baselines3 | unknown |  |
+| timesfm-forecasting | skills/tools/ai-ml/timesfm-forecasting | unknown |  |
+| torch-geometric | skills/tools/ai-ml/torch-geometric | unknown |  |
+| transformers | skills/tools/ai-ml/transformers | unknown |  |
+| aeon | skills/tools/data-science/aeon | unknown |  |
+| dask | skills/tools/data-science/dask | unknown |  |
+| exploratory-data-analysis | skills/tools/data-science/exploratory-data-analysis | unknown |  |
+| geopandas | skills/tools/data-science/geopandas | unknown |  |
+| matlab | skills/tools/data-science/matlab | unknown |  |
+| networkx | skills/tools/data-science/networkx | unknown |  |
+| polars | skills/tools/data-science/polars | unknown |  |
+| pymoo | skills/tools/data-science/pymoo | unknown |  |
+| scikit-learn | skills/tools/data-science/scikit-learn | unknown |  |
+| shap | skills/tools/data-science/shap | unknown |  |
+| sympy | skills/tools/data-science/sympy | unknown |  |
+| umap-learn | skills/tools/data-science/umap-learn | unknown |  |
+| vaex | skills/tools/data-science/vaex | unknown |  |
+| docx | skills/tools/documents-media/docx | unknown |  |
+| get-available-resources | skills/tools/documents-media/get-available-resources | unknown |  |
+| markitdown | skills/tools/documents-media/markitdown | unknown |  |
+| open-notebook | skills/tools/documents-media/open-notebook | unknown |  |
+| parallel-web | skills/tools/documents-media/parallel-web | unknown |  |
+| pdf | skills/tools/documents-media/pdf | unknown |  |
+| perplexity-search | skills/tools/documents-media/perplexity-search | unknown |  |
+| pptx | skills/tools/documents-media/pptx | unknown |  |
+| xlsx | skills/tools/documents-media/xlsx | unknown |  |
+| brand-creative-assets | skills/tools/frontend/brand-creative-assets | unknown |  |
+| design-system-tokens | skills/tools/frontend/design-system-tokens | unknown |  |
+| figma-design-to-code | skills/tools/frontend/figma-design-to-code | unknown |  |
+| implementation-react-tailwind | skills/tools/frontend/implementation-react-tailwind | unknown |  |
+| motion-interaction | skills/tools/frontend/motion-interaction | unknown |  |
+| product-ux-planning | skills/tools/frontend/product-ux-planning | unknown |  |
+| responsive-accessibility-review | skills/tools/frontend/responsive-accessibility-review | unknown |  |
+| visual-direction | skills/tools/frontend/visual-direction | unknown |  |
+| webapp-testing | skills/tools/frontend/webapp-testing | unknown |  |
+| canvas-design | skills/tools/visualization/canvas-design | unknown |  |
+| generate-image | skills/tools/visualization/generate-image | unknown |  |
+| infographics | skills/tools/visualization/infographics | unknown |  |
+| markdown-mermaid-writing | skills/tools/visualization/markdown-mermaid-writing | unknown |  |
+| matplotlib | skills/tools/visualization/matplotlib | unknown |  |
+| plotly | skills/tools/visualization/plotly | unknown |  |
+| seaborn | skills/tools/visualization/seaborn | unknown |  |
+| theme-factory | skills/tools/visualization/theme-factory | unknown |  |
+| academic-paper-writer-pro | skills/writing/research/academic-paper-writer-pro | unknown |  |
+| content-generation | skills/writing/research/content-generation | unknown |  |
+| literature-review | skills/writing/research/literature-review | unknown |  |
+| ocr-kb | skills/writing/research/ocr-kb | unknown |  |
+| peer-review | skills/writing/research/peer-review | unknown |  |
+| research-grants | skills/writing/research/research-grants | unknown |  |
+| scholar-evaluation | skills/writing/research/scholar-evaluation | unknown |  |
+| scientific-writing | skills/writing/research/scientific-writing | unknown |  |
+| venue-templates | skills/writing/research/venue-templates | unknown |  |
 
 ## URL Evidence
 
@@ -256,13 +284,95 @@ URLs below are evidence of related projects or references found in skill bodies.
 | plugin-creator | skills/core/codex-system/system-skills/plugin-creator |  |  |
 | skill-creator | skills/core/codex-system/system-skills/skill-creator |  | license.txt |
 | skill-installer | skills/core/codex-system/system-skills/skill-installer |  | LICENSE.txt |
+| bayesian-ppl-diagnostics | skills/domains/bayesian/bayesian-ppl-diagnostics | Apache-2.0 |  |
+| pymc | skills/domains/bayesian/pymc | Apache License, Version 2.0 |  |
+| simpy | skills/domains/bayesian/simpy | MIT License |  |
+| statistical-analysis | skills/domains/bayesian/statistical-analysis | MIT License |  |
+| statsmodels | skills/domains/bayesian/statsmodels | BSD License |  |
+| biopython | skills/domains/bioinformatics/biology-toolkits/biopython | Unknown |  |
+| esm | skills/domains/bioinformatics/biology-toolkits/esm | MIT license |  |
+| etetoolkit | skills/domains/bioinformatics/biology-toolkits/etetoolkit | GPL-3.0 license |  |
+| phylogenetics | skills/domains/bioinformatics/biology-toolkits/phylogenetics | Unknown |  |
+| scikit-bio | skills/domains/bioinformatics/biology-toolkits/scikit-bio | BSD-3-Clause license |  |
+| pysam | skills/domains/bioinformatics/genomics-io/pysam | MIT license |  |
+| tiledbvcf | skills/domains/bioinformatics/genomics-io/tiledbvcf | MIT license |  |
+| zarr-python | skills/domains/bioinformatics/genomics-io/zarr-python | MIT license |  |
+| arboreto | skills/domains/bioinformatics/omics-analysis/arboreto | BSD-3-Clause license |  |
+| deeptools | skills/domains/bioinformatics/omics-analysis/deeptools | BSD license |  |
+| flowio | skills/domains/bioinformatics/omics-analysis/flowio | BSD-3-Clause license |  |
+| geniml | skills/domains/bioinformatics/omics-analysis/geniml | BSD-2-Clause license |  |
+| gtars | skills/domains/bioinformatics/omics-analysis/gtars | Unknown |  |
+| polars-bio | skills/domains/bioinformatics/omics-analysis/polars-bio | https://github.com/biodatageeks/polars-bio/blob/main/LICENSE |  |
+| pydeseq2 | skills/domains/bioinformatics/omics-analysis/pydeseq2 | MIT license |  |
+| dnanexus-integration | skills/domains/bioinformatics/platforms/dnanexus-integration | Unknown |  |
+| lamindb | skills/domains/bioinformatics/platforms/lamindb | Apache-2.0 license |  |
+| latchbio-integration | skills/domains/bioinformatics/platforms/latchbio-integration | Unknown |  |
+| anndata | skills/domains/bioinformatics/single-cell/anndata | BSD-3-Clause license |  |
+| scanpy | skills/domains/bioinformatics/single-cell/scanpy | SD-3-Clause license |  |
+| scvelo | skills/domains/bioinformatics/single-cell/scvelo | BSD-3-Clause |  |
+| scvi-tools | skills/domains/bioinformatics/single-cell/scvi-tools | BSD-3-Clause license |  |
+| neuropixels-analysis | skills/domains/bioinformatics/specialized/neuropixels-analysis | MIT license |  |
+| medical-imaging-classical-features | skills/domains/medical-imaging/medical-imaging-classical-features | Apache-2.0 |  |
+| medical-imaging-deep-learning | skills/domains/medical-imaging/medical-imaging-deep-learning | Apache-2.0 |  |
+| pathml | skills/domains/medical-imaging/pathml | GPL-2.0 license |  |
+| pydicom | skills/domains/medical-imaging/pydicom | https://github.com/pydicom/pydicom/blob/main/LICENSE |  |
+| clinical-decision-support | skills/domains/medicine-clinical/clinical-decision-support | MIT License |  |
+| clinical-reports | skills/domains/medicine-clinical/clinical-reports | MIT License |  |
+| neurokit2 | skills/domains/medicine-clinical/neurokit2 | MIT license |  |
+| pyhealth | skills/domains/medicine-clinical/pyhealth | MIT license |  |
+| scikit-survival | skills/domains/medicine-clinical/scikit-survival | GPL-3.0 license |  |
+| treatment-plans | skills/domains/medicine-clinical/treatment-plans | MIT license |  |
 | cardiacnexus-docs-markdoc | skills/projects/cmr/cardiacnexus-docs-markdoc |  |  |
 | cardiacnexus-feature-contracts | skills/projects/cmr/cardiacnexus-feature-contracts |  |  |
 | cardiacnexus-pipeline-refactor | skills/projects/cmr/cardiacnexus-pipeline-refactor |  |  |
 | cardiacnexus-strain-registration | skills/projects/cmr/cardiacnexus-strain-registration |  |  |
 | latex-posters | skills/science/communication/latex-posters |  |  |
+| paper-2-web | skills/science/communication/paper-2-web | Unknown |  |
+| pptx-posters | skills/science/communication/pptx-posters | MIT license |  |
+| scientific-schematics | skills/science/communication/scientific-schematics | MIT license |  |
+| scientific-slides | skills/science/communication/scientific-slides | MIT license |  |
+| scientific-visualization | skills/science/communication/scientific-visualization | MIT license |  |
+| arxiv-database | skills/science/discovery/arxiv-database | MIT |  |
+| bgpt-paper-search | skills/science/discovery/bgpt-paper-search | MIT |  |
+| biorxiv-database | skills/science/discovery/biorxiv-database | Unknown |  |
+| citation-management | skills/science/discovery/citation-management | MIT License |  |
+| openalex-database | skills/science/discovery/openalex-database | Unknown |  |
+| pubmed-database | skills/science/discovery/pubmed-database | Unknown |  |
+| pyzotero | skills/science/discovery/pyzotero | MIT License |  |
+| research-lookup | skills/science/discovery/research-lookup | MIT license |  |
+| consciousness-council | skills/science/ideation/consciousness-council | MIT license |  |
+| hypogenic | skills/science/ideation/hypogenic | MIT license |  |
+| hypothesis-generation | skills/science/ideation/hypothesis-generation | MIT license |  |
+| scientific-brainstorming | skills/science/ideation/scientific-brainstorming | MIT license |  |
+| scientific-critical-thinking | skills/science/ideation/scientific-critical-thinking | MIT license |  |
+| what-if-oracle | skills/science/ideation/what-if-oracle | MIT license |  |
+| modal | skills/tools/ai-ml/modal | Apache-2.0 license |  |
+| pufferlib | skills/tools/ai-ml/pufferlib | MIT license |  |
+| pytorch-lightning | skills/tools/ai-ml/pytorch-lightning | Apache-2.0 license |  |
+| stable-baselines3 | skills/tools/ai-ml/stable-baselines3 | MIT license |  |
+| timesfm-forecasting | skills/tools/ai-ml/timesfm-forecasting | Apache-2.0 license |  |
+| torch-geometric | skills/tools/ai-ml/torch-geometric | MIT license |  |
+| transformers | skills/tools/ai-ml/transformers | Apache-2.0 license |  |
+| aeon | skills/tools/data-science/aeon | BSD-3-Clause license |  |
+| dask | skills/tools/data-science/dask | BSD-3-Clause license |  |
+| exploratory-data-analysis | skills/tools/data-science/exploratory-data-analysis | MIT license |  |
+| geopandas | skills/tools/data-science/geopandas | BSD-3-Clause license |  |
+| matlab | skills/tools/data-science/matlab | For MATLAB (https://www.mathworks.com/pricing-licensing.html) and for Octave (GNU General Public License version 3) |  |
+| networkx | skills/tools/data-science/networkx | 3-clause BSD license |  |
+| polars | skills/tools/data-science/polars | https://github.com/pola-rs/polars/blob/main/LICENSE |  |
+| pymoo | skills/tools/data-science/pymoo | Apache-2.0 license |  |
+| scikit-learn | skills/tools/data-science/scikit-learn | BSD-3-Clause license |  |
+| shap | skills/tools/data-science/shap | MIT license |  |
+| sympy | skills/tools/data-science/sympy | https://github.com/sympy/sympy/blob/master/LICENSE |  |
+| umap-learn | skills/tools/data-science/umap-learn | BSD-3-Clause license |  |
+| vaex | skills/tools/data-science/vaex | MIT license |  |
 | docx | skills/tools/documents-media/docx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt |
+| get-available-resources | skills/tools/documents-media/get-available-resources | MIT license |  |
+| markitdown | skills/tools/documents-media/markitdown | MIT license |  |
+| open-notebook | skills/tools/documents-media/open-notebook | MIT |  |
+| parallel-web | skills/tools/documents-media/parallel-web | MIT license |  |
 | pdf | skills/tools/documents-media/pdf | Proprietary. LICENSE.txt has complete terms | LICENSE.txt |
+| perplexity-search | skills/tools/documents-media/perplexity-search | MIT license |  |
 | pptx | skills/tools/documents-media/pptx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt |
 | xlsx | skills/tools/documents-media/xlsx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt |
 | brand-creative-assets | skills/tools/frontend/brand-creative-assets |  |  |
@@ -275,26 +385,39 @@ URLs below are evidence of related projects or references found in skill bodies.
 | visual-direction | skills/tools/frontend/visual-direction |  |  |
 | webapp-testing | skills/tools/frontend/webapp-testing | Complete terms in LICENSE.txt | LICENSE.txt |
 | canvas-design | skills/tools/visualization/canvas-design | Complete terms in LICENSE.txt | LICENSE.txt |
+| generate-image | skills/tools/visualization/generate-image | MIT license |  |
 | infographics | skills/tools/visualization/infographics |  |  |
+| markdown-mermaid-writing | skills/tools/visualization/markdown-mermaid-writing | Apache-2.0 |  |
+| matplotlib | skills/tools/visualization/matplotlib | https://github.com/matplotlib/matplotlib/tree/main/LICENSE |  |
+| plotly | skills/tools/visualization/plotly | MIT license |  |
+| seaborn | skills/tools/visualization/seaborn | BSD-3-Clause license |  |
 | theme-factory | skills/tools/visualization/theme-factory | Complete terms in LICENSE.txt | LICENSE.txt |
 | academic-paper-writer-pro | skills/writing/research/academic-paper-writer-pro |  |  |
 | content-generation | skills/writing/research/content-generation |  |  |
+| literature-review | skills/writing/research/literature-review | MIT license |  |
 | ocr-kb | skills/writing/research/ocr-kb | Proprietary. LICENSE.txt has complete terms |  |
+| peer-review | skills/writing/research/peer-review | MIT license |  |
+| research-grants | skills/writing/research/research-grants | MIT license |  |
+| scholar-evaluation | skills/writing/research/scholar-evaluation | MIT license |  |
+| scientific-writing | skills/writing/research/scientific-writing | MIT license |  |
+| venue-templates | skills/writing/research/venue-templates | MIT license |  |
 
 ## Going Forward
 
 For every newly cloned or adapted skill, add provenance metadata before committing it:
 
 ```yaml
-provenance: external
-source_url: https://github.com/<owner>/<repo>
-source_commit: <full commit sha or tag>
+provenance: external-adapted
+source_repo_url: https://github.com/<owner>/<repo>
+source_path: path/to/original/skill
+source_ref: <full commit sha or tag>
+source_imported_at: YYYY-MM-DD
 source_license: <license id or URL>
-adaptation_notes: <short note on local changes>
+source_note: <short note on local changes>
 metadata:
   skill-author: <upstream author or organization>
 ```
 
-Use `provenance: user-authored` for original local work and `provenance: local` for local synthesis where no upstream skill was copied. If the source is not known, leave `provenance: unknown` and add the skill to the unknown-origin inventory instead of guessing.
+Use `provenance: user-authored` for original local work. Historical `unknown` is allowed only when the exact source was not recorded; do not guess URLs, refs, or licenses.
 
 Machine-readable audit: `docs/skill_provenance_audit.json`

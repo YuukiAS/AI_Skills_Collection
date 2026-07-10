@@ -1,0 +1,35 @@
+{
+  "name": "bioinformatics",
+  "version": "1.1.0",
+  "description": "General bioinformatics workflows across databases, single-cell analysis, genomics I/O, and omics analysis.",
+  "author": {
+    "name": "YuukiAS",
+    "email": "humc2013@gmail.com",
+    "url": "https://github.com/YuukiAS"
+  },
+  "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "keywords": [
+    "bioinformatics",
+    "codex",
+    "skills"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Bioinformatics",
+    "shortDescription": "General bioinformatics workflows across databases, single-cell analysis, genomics I/O, and omics analysis.",
+    "longDescription": "General bioinformatics workflows across databases, single-cell analysis, genomics I/O, and omics analysis. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "developerName": "YuukiAS",
+    "category": "Research",
+    "capabilities": [
+      "Skills"
+    ],
+    "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
+    "defaultPrompt": [
+      "Plan a bioinformatics analysis.",
+      "Review this single-cell workflow.",
+      "Help me choose the right omics tool."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

@@ -2,7 +2,13 @@
 name: experiment-execution
 description: Plan, run, monitor, interpret, and reproduce computational or scientific experiments, including run setup, metric tracking, statistical interpretation, failure triage, and reproducibility checks.
 status: active
-provenance: adapted
+provenance: external-adapted
+source_repo_url: https://github.com/Imbad0202/experiment-agent
+source_path: .
+source_ref: e291e7dc7ca268b2de7e1a9cf23bc2eef5dc0651
+source_imported_at: 2026-07-09
+source_license: MIT
+source_note: Distilled from experiment-agent and existing codex-workflow-protocol verification gates.
 trusted: false
 requires_network: false
 writes_files: true
@@ -13,10 +19,6 @@ profile_tags:
   - workflow
   - research
 recommended_scope: project
-source_url: https://github.com/Imbad0202/experiment-agent
-source_commit: e291e7dc7ca268b2de7e1a9cf23bc2eef5dc0651
-source_license: MIT
-adaptation_notes: Distilled from experiment-agent and existing codex-workflow-protocol verification gates.
 metadata:
   skill-author: AI Skills Collection maintainers with recorded upstream sources
 ---

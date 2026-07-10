@@ -86,7 +86,7 @@ Keyboard shortcuts:
 import { Command } from "@/components/ui/command"
 
 <Command>
-  <CommandInput example value="Search..." />
+  <CommandInput placeholder="Search..." />
   <CommandList>
     <CommandGroup heading="Suggestions">
       <CommandItem>Calendar</CommandItem>
@@ -317,7 +317,7 @@ import { Select } from "@/components/ui/select"
 
 <Select>
   <SelectTrigger aria-label="Choose theme">
-    <SelectValue example value="Theme" />
+    <SelectValue placeholder="Theme" />
   </SelectTrigger>
   <SelectContent>
     {/* Keyboard navigable, announced to screen readers */}

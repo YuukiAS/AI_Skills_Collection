@@ -25,18 +25,18 @@ ALLOWED_RESOURCES = {"scripts", "references", "assets"}
 
 SKILL_TEMPLATE = """---
 name: {skill_name}
-description: [TODO: Complete and informative explanation of what the skill does and when to use it. Include WHEN to use this skill - specific scenarios, file types, or tasks that trigger it.]
+description: Drafting note - replace with a complete explanation of what the skill does and when to use it. Include specific scenarios, file types, or tasks that trigger it.
 ---
 
 # {skill_title}
 
 ## Overview
 
-[TODO: 1-2 sentences explaining what this skill enables]
+Drafting note - replace with 1-2 sentences explaining what this skill enables.
 
 ## Structuring This Skill
 
-[TODO: Choose the structure that best fits this skill's purpose. Common patterns:
+Drafting note - choose the structure that best fits this skill's purpose. Common patterns:
 
 **1. Workflow-Based** (best for sequential processes)
 - Works well when there are clear step-by-step procedures
@@ -60,15 +60,15 @@ description: [TODO: Complete and informative explanation of what the skill does 
 
 Patterns can be mixed and matched as needed. Most skills combine patterns (e.g., start with task-based, add workflow for complex operations).
 
-Delete this entire "Structuring This Skill" section when done - it's just guidance.]
+Delete this entire "Structuring This Skill" section when done - it's just guidance.
 
-## [TODO: Replace with the first main section based on chosen structure]
+## Draft Main Section
 
-[TODO: Add content here. See examples in existing skills:
+Drafting note - add content here. See examples in existing skills:
 - Code samples for technical skills
 - Decision trees for complex workflows
 - Concrete examples with realistic user requests
-- References to scripts/templates/references as needed]
+- References to scripts/templates/references as needed
 
 ## Resources (optional)
 

@@ -2,14 +2,21 @@
 name: bayesian-modeling
 description: Bayesian and statistical modeling workflows with PyMC, diagnostics, simulation, and model reporting.
 status: active
-provenance: generated-codex-marketplace
+provenance: generated
 trusted: false
 requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
+last_reviewed: 2026-07-10
 profile_tags:
 recommended_scope: project
+source_skills:
+  - skills/domains/bayesian/bayesian-ppl-diagnostics
+  - skills/domains/bayesian/pymc
+  - skills/domains/bayesian/statsmodels
+  - skills/domains/bayesian/statistical-analysis
+  - skills/domains/bayesian/simpy
 ---
 
 # bayesian-modeling

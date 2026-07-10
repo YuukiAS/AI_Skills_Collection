@@ -83,7 +83,7 @@ Detailed specs for core components with states and variants.
 ```
 Label (optional)
 ┌─────────────────────────────────────┐
-│ [icon] Example value/Value   [action] │
+│ [icon] Placeholder/Value   [action] │
 └─────────────────────────────────────┘
 Helper text or error message
 ```

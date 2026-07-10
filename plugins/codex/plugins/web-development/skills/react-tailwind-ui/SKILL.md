@@ -2,14 +2,19 @@
 name: react-tailwind-ui
 description: Implement React, TypeScript, Tailwind, shadcn/ui, design tokens, and motion polish.
 status: active
-provenance: generated-codex-marketplace
+provenance: generated
 trusted: false
 requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
+last_reviewed: 2026-07-10
 profile_tags:
 recommended_scope: project
+source_skills:
+  - skills/tools/frontend/design-system-tokens
+  - skills/tools/frontend/implementation-react-tailwind
+  - skills/tools/frontend/motion-interaction
 ---
 
 # react-tailwind-ui

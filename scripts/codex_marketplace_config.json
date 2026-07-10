@@ -4,6 +4,7 @@
   "plugins": [
     {
       "name": "ai-skills-core",
+      "version": "1.1.0",
       "displayName": "AI Skills Core",
       "description": "Install, create, and maintain project-local Codex skills.",
       "category": "Developer Tools",
@@ -29,20 +30,35 @@
       ]
     },
     {
-      "name": "workflow-writing",
-      "displayName": "Workflow and Writing",
-      "description": "Verified execution workflows and source-faithful prose revision.",
-      "category": "Productivity",
+      "name": "workflow-core",
+      "version": "1.1.0",
+      "displayName": "Workflow Core",
+      "description": "General Codex execution, source-of-truth discovery, verification, and completion gates.",
+      "category": "Developer Tools",
       "defaultPrompt": [
         "Run a verified implementation workflow.",
-        "Make this scientific prose clearer.",
-        "Polish this Chinese technical text."
+        "Find the source of truth before editing.",
+        "Check completion gates for this task."
       ],
       "skills": [
         {
           "type": "copy",
           "source": "skills/core/codex-system/codex-workflow-protocol"
-        },
+        }
+      ]
+    },
+    {
+      "name": "writing-style",
+      "version": "1.1.0",
+      "displayName": "Writing Style",
+      "description": "Source-faithful writing, scientific prose, Chinese technical prose, and CJK/math PDF rendering.",
+      "category": "Research",
+      "defaultPrompt": [
+        "Make this scientific prose clearer.",
+        "Polish this Chinese technical text.",
+        "Render and check a CJK math PDF."
+      ],
+      "skills": [
         {
           "type": "copy",
           "source": "skills/writing/core/writing-fidelity"
@@ -64,31 +80,23 @@
     },
     {
       "name": "web-development",
+      "version": "1.1.0",
       "displayName": "Web Development",
-      "description": "Frontend planning, implementation, design handoff, visual assets, and browser QA.",
+      "description": "Frontend product design, React/Tailwind implementation, Figma handoff, visual assets, and browser QA.",
       "category": "Web Development",
       "defaultPrompt": [
-        "Build a responsive React interface.",
+        "Design and build a frontend product.",
         "Audit this frontend with browser tests.",
         "Implement this Figma handoff."
       ],
       "skills": [
         {
           "type": "aggregate",
-          "name": "frontend-app-builder",
-          "description": "Plan and build polished frontend apps from UX intent through visual direction and implementation.",
+          "name": "frontend-product-design",
+          "description": "Shape product UX, information architecture, and distinctive frontend visual direction before implementation.",
           "source_skills": [
             "skills/tools/frontend/product-ux-planning",
             "skills/tools/frontend/visual-direction"
-          ]
-        },
-        {
-          "type": "aggregate",
-          "name": "frontend-testing-debugging",
-          "description": "Test and debug rendered frontend apps with browser automation, responsive checks, and accessibility review.",
-          "source_skills": [
-            "skills/tools/frontend/webapp-testing",
-            "skills/tools/frontend/responsive-accessibility-review"
           ]
         },
         {
@@ -102,6 +110,15 @@
           ]
         },
         {
+          "type": "aggregate",
+          "name": "frontend-testing-debugging",
+          "description": "Test and debug rendered frontend apps with browser automation, responsive checks, and accessibility review.",
+          "source_skills": [
+            "skills/tools/frontend/webapp-testing",
+            "skills/tools/frontend/responsive-accessibility-review"
+          ]
+        },
+        {
           "type": "copy",
           "source": "skills/tools/frontend/figma-design-to-code"
         },
@@ -111,23 +128,15 @@
           "description": "Generate images and apply coherent visual themes for frontend surfaces and artifacts.",
           "source_skills": [
             "skills/tools/visualization/generate-image",
-            "skills/tools/visualization/theme-factory"
-          ]
-        },
-        {
-          "type": "aggregate",
-          "name": "frontend-product-design",
-          "description": "Shape product UX, information architecture, and distinctive frontend visual direction before implementation.",
-          "source_skills": [
-            "skills/tools/frontend/product-ux-planning",
-            "skills/tools/frontend/visual-direction",
-            "skills/tools/frontend/design-system-tokens"
+            "skills/tools/visualization/theme-factory",
+            "skills/tools/frontend/brand-creative-assets"
           ]
         }
       ]
     },
     {
       "name": "research-writing",
+      "version": "1.1.0",
       "displayName": "Research Writing",
       "description": "Scientific manuscripts, literature review, citation workflows, research lookup, and research documents.",
       "category": "Research",
@@ -171,7 +180,6 @@
             "skills/tools/documents-media/docx",
             "skills/tools/documents-media/pptx",
             "skills/tools/documents-media/markitdown",
-            "skills/science/communication/scientific-visualization",
             "skills/science/communication/scientific-slides",
             "skills/science/communication/scientific-schematics"
           ]
@@ -179,36 +187,10 @@
       ]
     },
     {
-      "name": "scientific-diagrams",
-      "displayName": "Scientific Diagrams",
-      "description": "Editable method figures, architecture diagrams, UML, D2, draw.io, Mermaid, Excalidraw, and publication figure planning.",
-      "category": "Research",
-      "defaultPrompt": [
-        "Create an editable method figure.",
-        "Draw this architecture as D2.",
-        "Convert this workflow into a diagram."
-      ],
-      "skills": [
-        {
-          "type": "aggregate",
-          "name": "scientific-diagramming",
-          "description": "Editable draw.io, D2, PlantUML, Excalidraw, Mermaid, scientific schematic, and publication figure workflows.",
-          "source_skills": [
-            "skills/tools/visualization/drawio-diagrams",
-            "skills/tools/visualization/d2-diagrams",
-            "skills/tools/visualization/plantuml-diagrams",
-            "skills/tools/visualization/excalidraw-diagrams",
-            "skills/tools/visualization/markdown-mermaid-writing",
-            "skills/science/communication/scientific-visualization",
-            "skills/science/communication/scientific-schematics"
-          ]
-        }
-      ]
-    },
-    {
       "name": "statistical-modeling",
+      "version": "1.1.0",
       "displayName": "Statistical Modeling",
-      "description": "Bayesian modeling, data analysis, scientific visualization, and manuscript support.",
+      "description": "Bayesian modeling, Python data analysis, and scientific visualization.",
       "category": "Research",
       "defaultPrompt": [
         "Help me build and diagnose a Bayesian model.",
@@ -251,14 +233,15 @@
       ]
     },
     {
-      "name": "bio-medical-imaging",
-      "displayName": "Bio and Medical Imaging",
-      "description": "Bioinformatics, medical imaging, CardiacNexus, AI/ML imaging, data analysis, visualization, and PDFs.",
+      "name": "bioinformatics",
+      "version": "1.1.0",
+      "displayName": "Bioinformatics",
+      "description": "General bioinformatics workflows across databases, single-cell analysis, genomics I/O, and omics analysis.",
       "category": "Research",
       "defaultPrompt": [
         "Plan a bioinformatics analysis.",
-        "Help with CMR image processing.",
-        "Review this CardiacNexus pipeline change."
+        "Review this single-cell workflow.",
+        "Help me choose the right omics tool."
       ],
       "skills": [
         {
@@ -277,7 +260,21 @@
             "skills/domains/bioinformatics/omics-analysis/polars-bio",
             "skills/domains/bioinformatics/genomics-io/tiledbvcf"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "name": "medical-imaging",
+      "version": "1.1.0",
+      "displayName": "Medical Imaging",
+      "description": "General medical imaging and AI/ML imaging workflows without project-specific CardiacNexus conventions.",
+      "category": "Research",
+      "defaultPrompt": [
+        "Help with CMR image processing.",
+        "Plan a medical imaging ML workflow.",
+        "Review this DICOM or NIfTI workflow."
+      ],
+      "skills": [
         {
           "type": "aggregate",
           "name": "medical-imaging-workflows",
@@ -292,6 +289,29 @@
         },
         {
           "type": "aggregate",
+          "name": "ai-ml-imaging",
+          "description": "AI/ML support for imaging workflows with PyTorch Lightning and Transformers.",
+          "source_skills": [
+            "skills/tools/ai-ml/pytorch-lightning",
+            "skills/tools/ai-ml/transformers"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cardiacnexus",
+      "version": "1.1.0",
+      "displayName": "CardiacNexus",
+      "description": "Project-specific CardiacNexus feature contracts, pipeline refactors, strain registration, and documentation workflows.",
+      "category": "Research",
+      "defaultPrompt": [
+        "Review this CardiacNexus pipeline change.",
+        "Check a CardiacNexus feature contract.",
+        "Update CardiacNexus documentation."
+      ],
+      "skills": [
+        {
+          "type": "aggregate",
           "name": "cardiacnexus-workflows",
           "description": "CardiacNexus feature contracts, pipeline refactors, strain registration, and documentation workflows.",
           "source_skills": [
@@ -300,38 +320,6 @@
             "skills/projects/cmr/cardiacnexus-strain-registration",
             "skills/projects/cmr/cardiacnexus-docs-markdoc"
           ]
-        },
-        {
-          "type": "aggregate",
-          "name": "ai-ml-imaging",
-          "description": "AI/ML support for imaging workflows with PyTorch Lightning and Transformers.",
-          "source_skills": [
-            "skills/tools/ai-ml/pytorch-lightning",
-            "skills/tools/ai-ml/transformers"
-          ]
-        },
-        {
-          "type": "aggregate",
-          "name": "data-analysis-python",
-          "description": "Python data analysis workflows with EDA, Polars, and scikit-learn.",
-          "source_skills": [
-            "skills/tools/data-science/exploratory-data-analysis",
-            "skills/tools/data-science/polars",
-            "skills/tools/data-science/scikit-learn"
-          ]
-        },
-        {
-          "type": "aggregate",
-          "name": "scientific-visualization",
-          "description": "Scientific plotting and visualization with Matplotlib and Plotly.",
-          "source_skills": [
-            "skills/tools/visualization/matplotlib",
-            "skills/tools/visualization/plotly"
-          ]
-        },
-        {
-          "type": "copy",
-          "source": "skills/tools/documents-media/pdf"
         }
       ]
     }

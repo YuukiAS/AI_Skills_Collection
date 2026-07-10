@@ -2,7 +2,13 @@
 name: drawio-diagrams
 description: Create, edit, validate, and export editable draw.io diagrams for architecture, methods, flowcharts, ER diagrams, and paper method figures. Use when the deliverable should remain editable as .drawio XML or embedded editable SVG/PDF.
 status: active
-provenance: adapted
+provenance: external-adapted
+source_repo_url: https://github.com/jgraph/drawio-mcp
+source_path: .
+source_ref: 883b34c8aea72ca7bc978a281061c411bc3e3745
+source_imported_at: 2026-07-09
+source_license: Apache-2.0
+source_note: Distilled from drawio-mcp, Agents365-ai/drawio-skill, and little-hands/claude-drawio-skill.
 trusted: false
 requires_network: false
 writes_files: true
@@ -13,10 +19,6 @@ profile_tags:
   - visualization
   - diagrams
 recommended_scope: project
-source_url: https://github.com/jgraph/drawio-mcp
-source_commit: 883b34c8aea72ca7bc978a281061c411bc3e3745
-source_license: Apache-2.0
-adaptation_notes: Distilled from drawio-mcp, Agents365-ai/drawio-skill, and little-hands/claude-drawio-skill.
 metadata:
   skill-author: AI Skills Collection maintainers with recorded upstream sources
 ---

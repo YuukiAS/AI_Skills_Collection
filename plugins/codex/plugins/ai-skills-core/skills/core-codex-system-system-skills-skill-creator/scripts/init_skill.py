@@ -25,18 +25,18 @@ ALLOWED_RESOURCES = {"scripts", "references", "assets"}
 
 SKILL_TEMPLATE = """---
 name: {skill_name}
-description: [example: Complete and informative explanation of what the skill does and when to use it. Include WHEN to use this skill - specific scenarios, file types, or tasks that trigger it.]
+description: Drafting note - replace with a complete explanation of what the skill does and when to use it. Include specific scenarios, file types, or tasks that trigger it.
 ---
 
 # {skill_title}
 
 ## Overview
 
-[example: 1-2 sentences explaining what this skill enables]
+Drafting note - replace with 1-2 sentences explaining what this skill enables.
 
 ## Structuring This Skill
 
-[example: Choose the structure that best fits this skill's purpose. Common patterns:
+Drafting note - choose the structure that best fits this skill's purpose. Common patterns:
 
 **1. Workflow-Based** (best for sequential processes)
 - Works well when there are clear step-by-step procedures
@@ -60,15 +60,15 @@ description: [example: Complete and informative explanation of what the skill do
 
 Patterns can be mixed and matched as needed. Most skills combine patterns (e.g., start with task-based, add workflow for complex operations).
 
-Delete this entire "Structuring This Skill" section when done - it's just guidance.]
+Delete this entire "Structuring This Skill" section when done - it's just guidance.
 
-## [example: Replace with the first main section based on chosen structure]
+## Draft Main Section
 
-[example: Add content here. See examples in existing skills:
+Drafting note - add content here. See examples in existing skills:
 - Code samples for technical skills
 - Decision trees for complex workflows
 - Concrete examples with realistic user requests
-- References to scripts/templates/references as needed]
+- References to scripts/templates/references as needed
 
 ## Resources (optional)
 
@@ -114,7 +114,7 @@ EXAMPLE_SCRIPT = '''#!/usr/bin/env python3
 """
 Example helper script for {skill_name}
 
-This is a example value script that can be executed directly.
+This is a placeholder script that can be executed directly.
 Replace with actual implementation or delete if not needed.
 
 Example real scripts from other skills:
@@ -133,7 +133,7 @@ if __name__ == "__main__":
 
 EXAMPLE_REFERENCE = """# Reference Documentation for {skill_title}
 
-This is a example value for detailed reference documentation.
+This is a placeholder for detailed reference documentation.
 Replace with actual reference content or delete if not needed.
 
 Example real reference docs from other skills:
@@ -169,7 +169,7 @@ Reference docs are ideal for:
 
 EXAMPLE_ASSET = """# Example Asset File
 
-This example value represents where asset files would be stored.
+This placeholder represents where asset files would be stored.
 Replace with actual asset files (templates, images, fonts, etc.) or delete if not needed.
 
 Asset files are NOT intended to be loaded into context, but rather used within
@@ -190,7 +190,7 @@ Example asset files from other skills:
 - Icons: .ico, .svg
 - Data files: .csv, .json, .xml, .yaml
 
-Note: This is a text example value. Actual assets can be any file type.
+Note: This is a text placeholder. Actual assets can be any file type.
 """
 
 

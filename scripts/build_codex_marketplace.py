@@ -11,10 +11,11 @@ import shutil
 import stat
 import sys
 import tempfile
+from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-from skill_utils import ROOT, SKILLS_ROOT, load_profiles, read_frontmatter, skill_flat_name
+from skill_utils import ROOT, SKILLS_ROOT, read_frontmatter, skill_flat_name
 
 
 CODEX_ROOT = ROOT / "plugins" / "codex"
@@ -47,93 +48,16 @@ IGNORE_NAMES = {
     ".nox",
 }
 IGNORE_SUFFIXES = (".pyc", ".pyo", ".swp", ".swo", "~")
-TEXT_SUFFIXES = {
-    "",
-    ".cfg",
-    ".css",
-    ".html",
-    ".js",
-    ".json",
-    ".md",
-    ".py",
-    ".toml",
-    ".ts",
-    ".txt",
-    ".yaml",
-    ".yml",
+SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$")
+SECRET_RE = re.compile(r"\b[A-Z][A-Z0-9_]*(?:API_KEY|TOKEN)\b")
+EXPLICIT_SECRET_NAMES = {
+    "OPENROUTER_API_KEY",
+    "OPENAI_API_KEY",
+    "ANTHROPIC_API_KEY",
+    "GEMINI_API_KEY",
 }
-
-CATEGORY_BY_PROFILE = {
-    "codex-core-global": "Developer Tools",
-    "codex-workflow-core": "Developer Tools",
-    "codex-skill-maintenance": "Developer Tools",
-    "codex-webdev": "Web Development",
-    "codex-research-writing": "Research",
-    "codex-writing-style": "Research",
-    "codex-bayesian-jsdm": "Research",
-    "codex-cardiacnexus": "Research",
-    "codex-bioinformatics-light": "Research",
-}
-
-DISPLAY_NAME_BY_PROFILE = {
-    "codex-bayesian-jsdm": "Bayesian JSDM Toolkit",
-    "codex-bioinformatics-light": "Bioinformatics Light Toolkit",
-    "codex-cardiacnexus": "CardiacNexus Imaging Toolkit",
-    "codex-core-global": "Core Skill Installer",
-    "codex-research-writing": "Research Writing Toolkit",
-    "codex-skill-maintenance": "Skill Maintenance Toolkit",
-    "codex-webdev": "Web Development Toolkit",
-    "codex-workflow-core": "Workflow Protocol Core",
-    "codex-writing-style": "Writing Style and Fidelity",
-}
-
-PROMPTS_BY_PROFILE = {
-    "codex-bayesian-jsdm": [
-        "Help me build and diagnose a Bayesian model.",
-        "Review this JSDM or HMSC workflow.",
-        "Prepare theorem-heavy manuscript guidance.",
-    ],
-    "codex-bioinformatics-light": [
-        "Plan a common bioinformatics analysis.",
-        "Review this single-cell workflow.",
-        "Help me choose the right omics tool.",
-    ],
-    "codex-cardiacnexus": [
-        "Review this CardiacNexus pipeline change.",
-        "Help with CMR image processing.",
-        "Check this DICOM or NIfTI workflow.",
-    ],
-    "codex-core-global": [
-        "Install project-local skills safely.",
-        "Create or update a Codex skill.",
-        "Set up this repo's skill profile.",
-    ],
-    "codex-research-writing": [
-        "Revise this research manuscript.",
-        "Plan a literature review.",
-        "Check citations, figures, and PDFs.",
-    ],
-    "codex-skill-maintenance": [
-        "Validate this skill repository change.",
-        "Update registry and profile metadata.",
-        "Review a new skill for packaging.",
-    ],
-    "codex-webdev": [
-        "Build a responsive React interface.",
-        "Audit this frontend with browser tests.",
-        "Implement this Figma handoff.",
-    ],
-    "codex-workflow-core": [
-        "Run a verified implementation workflow.",
-        "Find the source of truth before editing.",
-        "Check completion gates for this task.",
-    ],
-    "codex-writing-style": [
-        "Make this scientific prose clearer.",
-        "Polish this Chinese technical text.",
-        "Render and check a CJK math PDF.",
-    ],
-}
+BOOL_METADATA_FIELDS = ("trusted", "requires_network", "writes_files", "executes_code")
+SCOPE_ORDER = {"project": 0, "user": 1, "global": 2}
 
 
 class BuildError(RuntimeError):
@@ -170,11 +94,6 @@ def json_dump(data: dict[str, Any]) -> str:
     return json.dumps(data, ensure_ascii=False, indent=2) + "\n"
 
 
-def load_profiles_sorted() -> list[dict[str, Any]]:
-    profiles = load_profiles()
-    return [profiles[name] for name in sorted(profiles)]
-
-
 def compact_description(description: str) -> str:
     text = description.strip()
     prefixes = (
@@ -196,20 +115,16 @@ def truncate_prompt(prompt: str) -> str:
     return prompt if len(prompt) <= 128 else prompt[:125].rstrip() + "..."
 
 
-def default_prompts(profile_name: str, description: str) -> list[str]:
-    prompts = PROMPTS_BY_PROFILE.get(profile_name)
-    if prompts:
-        return [truncate_prompt(prompt) for prompt in prompts[:3]]
-    return [truncate_prompt(f"Use {DISPLAY_NAME_BY_PROFILE.get(profile_name, profile_name)} for {compact_description(description).lower()}")]
-
-
-def keywords_for_profile(profile_name: str) -> list[str]:
-    parts = [part for part in profile_name.split("-") if part != "codex"]
+def keywords_for_plugin(plugin_name: str) -> list[str]:
+    parts = [part for part in plugin_name.split("-") if part != "codex"]
     return sorted(set(["codex", "skills", *parts]))
 
 
-def category_for_profile(profile_name: str) -> str:
-    return CATEGORY_BY_PROFILE.get(profile_name, "Productivity")
+def plugin_version(plugin: dict[str, Any], context: str) -> str:
+    version = plugin.get("version")
+    if not isinstance(version, str) or not SEMVER_RE.match(version):
+        raise BuildError(f"{context}: version must be a valid semantic version")
+    return version
 
 
 def build_marketplace_entry(plugin: dict[str, Any]) -> dict[str, Any]:
@@ -241,6 +156,7 @@ def build_marketplace(config: dict[str, Any]) -> dict[str, Any]:
 
 def build_plugin_json(plugin: dict[str, Any]) -> dict[str, Any]:
     plugin_name = str(plugin["name"])
+    context = f"plugin {plugin_name}"
     category = str(plugin.get("category") or "Productivity")
     display_name = str(plugin.get("displayName") or plugin_name.replace("-", " ").title())
     short_description = compact_description(str(plugin.get("description") or "Curated Codex App skills."))
@@ -250,12 +166,12 @@ def build_plugin_json(plugin: dict[str, Any]) -> dict[str, Any]:
     )
     return {
         "name": plugin_name,
-        "version": "1.0.0",
+        "version": plugin_version(plugin, context),
         "description": short_description,
         "author": AUTHOR,
         "homepage": REPOSITORY_URL,
         "repository": REPOSITORY_URL,
-        "keywords": keywords_for_profile(plugin_name),
+        "keywords": keywords_for_plugin(plugin_name),
         "skills": "./skills/",
         "interface": {
             "displayName": display_name,
@@ -301,44 +217,83 @@ def source_contains_symlink(source_dir: Path) -> bool:
     return source_dir.is_symlink() or any(item.is_symlink() for item in source_dir.rglob("*"))
 
 
-def sanitize_generated_snapshot(path: Path) -> None:
-    for item in path.rglob("*"):
-        if not item.is_file() or item.is_symlink() or item.suffix not in TEXT_SUFFIXES:
+def read_required_skill_metadata(skill_dir: Path, context: str) -> dict[str, Any]:
+    skill_file = skill_dir / "SKILL.md"
+    meta, _ = read_frontmatter(skill_file)
+    if not meta:
+        raise BuildError(f"{context}: {relative(skill_file)} is missing YAML frontmatter")
+    name = meta.get("name")
+    if not isinstance(name, str) or not name:
+        raise BuildError(f"{context}: {relative(skill_file)} must declare a non-empty frontmatter name")
+    for field in BOOL_METADATA_FIELDS:
+        if field not in meta or not isinstance(meta.get(field), bool):
+            raise BuildError(f"{context}: {relative(skill_file)} {field} must be an explicit boolean")
+    secrets = meta.get("secrets_needed", [])
+    if secrets in (None, "", {}):
+        secrets = []
+    if not isinstance(secrets, list) or any(not isinstance(item, str) for item in secrets):
+        raise BuildError(f"{context}: {relative(skill_file)} secrets_needed must be a list of strings")
+    meta["secrets_needed"] = secrets
+    scope = meta.get("recommended_scope")
+    if scope not in SCOPE_ORDER:
+        raise BuildError(
+            f"{context}: {relative(skill_file)} recommended_scope must be one of {', '.join(SCOPE_ORDER)}"
+        )
+    audit_source_secret_declarations(skill_dir, meta, context)
+    assert_no_source_todo(skill_dir, context)
+    return meta
+
+
+def iter_source_text_files(skill_dir: Path) -> list[Path]:
+    paths: list[Path] = []
+    for path in sorted(skill_dir.rglob("*")):
+        if not path.is_file() or path.is_symlink():
+            continue
+        if any(part in IGNORE_NAMES for part in path.relative_to(skill_dir).parts):
             continue
         try:
-            text = item.read_text(encoding="utf-8")
+            path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
             continue
-        replacements = {
-            "[TODO:": "[example:",
-            "placeholders": "example values",
-            "placeholder": "example value",
-            "Placeholders": "Example values",
-            "Placeholder": "Example value",
-        }
-        if not any(old in text for old in replacements):
-            continue
-        for old, new in replacements.items():
-            text = text.replace(old, new)
-        item.write_text(text, encoding="utf-8")
+        paths.append(path)
+    return paths
 
 
-def resolve_profile_skill_dirs(profile: dict[str, Any]) -> list[Path]:
-    skill_dirs: list[Path] = []
-    for item in profile.get("skills", []):
-        skill_dir = (ROOT / str(item)).resolve()
-        if not skill_dir.is_dir() or not (skill_dir / "SKILL.md").exists():
-            raise BuildError(f"profile {profile.get('name')}: missing skill directory {item}")
-        try:
-            skill_dir.relative_to(SKILLS_ROOT.resolve())
-        except ValueError as exc:
-            raise BuildError(f"profile {profile.get('name')}: skill path is outside skills/: {item}") from exc
-        if source_contains_symlink(skill_dir):
-            raise BuildError(f"profile {profile.get('name')}: skill source contains a symlink: {item}")
-        skill_dirs.append(skill_dir)
-    if not skill_dirs:
-        raise BuildError(f"profile {profile.get('name')}: profile has no skills")
-    return skill_dirs
+def assert_no_source_todo(skill_dir: Path, context: str) -> None:
+    matches: list[str] = []
+    for path in iter_source_text_files(skill_dir):
+        if "[TODO:" in path.read_text(encoding="utf-8", errors="replace"):
+            matches.append(relative(path))
+    if matches:
+        raise BuildError(f"{context}: source contains [TODO: placeholders: {', '.join(matches)}")
+
+
+def audit_source_secret_declarations(skill_dir: Path, meta: dict[str, Any], context: str) -> None:
+    declared = set(meta.get("secrets_needed") or [])
+    found: set[str] = set()
+    for path in iter_source_text_files(skill_dir):
+        text = path.read_text(encoding="utf-8", errors="replace")
+        found.update(SECRET_RE.findall(text))
+    found.update(secret for secret in EXPLICIT_SECRET_NAMES if secret in found)
+    missing = sorted(found - declared)
+    if missing:
+        raise BuildError(
+            f"{context}: {relative(skill_dir / 'SKILL.md')} references secrets not declared in frontmatter: "
+            + ", ".join(missing)
+        )
+
+
+def aggregate_metadata(source_dirs: list[Path], context: str) -> dict[str, Any]:
+    metas = [read_required_skill_metadata(source_dir, context) for source_dir in source_dirs]
+    return {
+        "trusted": all(meta["trusted"] is True for meta in metas),
+        "requires_network": any(meta["requires_network"] is True for meta in metas),
+        "writes_files": any(meta["writes_files"] is True for meta in metas),
+        "executes_code": any(meta["executes_code"] is True for meta in metas),
+        "secrets_needed": sorted({secret for meta in metas for secret in meta.get("secrets_needed", [])}),
+        "recommended_scope": min((str(meta["recommended_scope"]) for meta in metas), key=lambda item: SCOPE_ORDER[item]),
+        "source_skills": [relative(source_dir) for source_dir in source_dirs],
+    }
 
 
 def resolve_skill_dir(item: str, context: str) -> Path:
@@ -357,7 +312,9 @@ def resolve_skill_dir(item: str, context: str) -> Path:
 def skill_entry_name(entry: dict[str, Any]) -> str:
     entry_type = entry.get("type")
     if entry_type == "copy":
-        return skill_flat_name(resolve_skill_dir(str(entry.get("source") or ""), "copy entry"))
+        source_dir = resolve_skill_dir(str(entry.get("source") or ""), "copy entry")
+        meta = read_required_skill_metadata(source_dir, "copy entry")
+        return str(meta["name"])
     if entry_type == "aggregate":
         return str(entry.get("name") or "")
     raise BuildError(f"unknown skill entry type: {entry_type}")
@@ -370,7 +327,13 @@ def plugin_skill_entries(plugin: dict[str, Any]) -> list[dict[str, Any]]:
     return entries
 
 
-def aggregate_skill_markdown(entry: dict[str, Any], source_dirs: list[Path]) -> str:
+def yaml_list(name: str, items: list[str]) -> list[str]:
+    if not items:
+        return [f"{name}:"]
+    return [f"{name}:"] + [f"  - {item}" for item in items]
+
+
+def aggregate_skill_markdown(entry: dict[str, Any], source_dirs: list[Path], metadata: dict[str, Any]) -> str:
     name = str(entry["name"])
     description = str(entry["description"])
     lines = [
@@ -378,27 +341,33 @@ def aggregate_skill_markdown(entry: dict[str, Any], source_dirs: list[Path]) -> 
         f"name: {name}",
         f"description: {description}",
         "status: active",
-        "provenance: generated-codex-marketplace",
-        "trusted: false",
-        "requires_network: false",
-        "writes_files: true",
-        "executes_code: false",
-        "secrets_needed:",
-        "profile_tags:",
-        "recommended_scope: project",
-        "---",
-        "",
-        f"# {name}",
-        "",
-        "## Trigger Boundary",
-        "",
-        description,
-        "",
-        "Use this aggregate Codex App skill when the task matches one of the source workflows below.",
-        "",
-        "## Source Workflows",
-        "",
+        "provenance: generated",
+        f"trusted: {str(metadata['trusted']).lower()}",
+        f"requires_network: {str(metadata['requires_network']).lower()}",
+        f"writes_files: {str(metadata['writes_files']).lower()}",
+        f"executes_code: {str(metadata['executes_code']).lower()}",
     ]
+    lines.extend(yaml_list("secrets_needed", metadata["secrets_needed"]))
+    lines.append("last_reviewed: 2026-07-10")
+    lines.append("profile_tags:")
+    lines.append(f"recommended_scope: {metadata['recommended_scope']}")
+    lines.extend(yaml_list("source_skills", metadata["source_skills"]))
+    lines.extend(
+        [
+            "---",
+            "",
+            f"# {name}",
+            "",
+            "## Trigger Boundary",
+            "",
+            description,
+            "",
+            "Use this aggregate Codex App skill when the task matches one of the source workflows below.",
+            "",
+            "## Source Workflows",
+            "",
+        ]
+    )
     for source_dir in source_dirs:
         meta, _ = read_frontmatter(source_dir / "SKILL.md")
         source_name = str(meta.get("name") or source_dir.name)
@@ -432,11 +401,11 @@ def rename_nested_skill_files(reference_root: Path) -> None:
 
 def copy_source_tree(source_dir: Path, dest: Path) -> None:
     shutil.copytree(source_dir, dest, ignore=ignore_copy_names, copy_function=shutil.copy2)
-    sanitize_generated_snapshot(dest)
 
 
 def generate_copy_skill(entry: dict[str, Any], skills_dir: Path, context: str) -> int:
     source_dir = resolve_skill_dir(str(entry.get("source") or ""), context)
+    read_required_skill_metadata(source_dir, context)
     copy_source_tree(source_dir, skills_dir / skill_flat_name(source_dir))
     return 1
 
@@ -455,32 +424,74 @@ def generate_aggregate_skill(entry: dict[str, Any], skills_dir: Path, context: s
     aggregate_dir = skills_dir / name
     aggregate_dir.mkdir(parents=True, exist_ok=True)
     source_dirs = [resolve_skill_dir(str(item), f"{context}:{name}") for item in source_items]
-    (aggregate_dir / "SKILL.md").write_text(aggregate_skill_markdown(entry, source_dirs), encoding="utf-8")
+    metadata = aggregate_metadata(source_dirs, f"{context}:{name}")
+    (aggregate_dir / "SKILL.md").write_text(aggregate_skill_markdown(entry, source_dirs, metadata), encoding="utf-8")
     for source_dir in source_dirs:
         dest = aggregate_dir / "references" / "source-skills" / skill_flat_name(source_dir)
         copy_source_tree(source_dir, dest)
         rename_nested_skill_files(dest)
-    sanitize_generated_snapshot(aggregate_dir)
     return 1, len(source_dirs)
 
 
-def active_skill_names(plugin: dict[str, Any]) -> set[str]:
-    names: set[str] = set()
+def skill_entry_generated_dir(entry: dict[str, Any], context: str) -> str:
+    entry_type = entry.get("type")
+    if entry_type == "copy":
+        return skill_flat_name(resolve_skill_dir(str(entry.get("source") or ""), context))
+    if entry_type == "aggregate":
+        return str(entry.get("name") or "")
+    raise BuildError(f"{context}: unknown skill entry type {entry_type}")
+
+
+def active_skill_names(plugin: dict[str, Any]) -> list[str]:
+    names: list[str] = []
+    seen: set[str] = set()
     for entry in plugin_skill_entries(plugin):
         name = skill_entry_name(entry)
         if not name:
             raise BuildError(f"plugin {plugin.get('name')}: active skill name cannot be empty")
-        if name in names:
+        if name in seen:
             raise BuildError(f"plugin {plugin.get('name')}: duplicate active skill {name}")
-        names.add(name)
+        seen.add(name)
+        names.append(name)
     return names
+
+
+def validate_config(config: dict[str, Any]) -> None:
+    plugins = marketplace_plugins(config)
+    plugin_seen: set[str] = set()
+    active_seen: dict[str, list[tuple[str, str]]] = defaultdict(list)
+    if len(plugins) > MAX_MARKETPLACE_PLUGINS:
+        raise BuildError(f"Codex marketplace has {len(plugins)} plugins; maximum is {MAX_MARKETPLACE_PLUGINS}")
+    for plugin in plugins:
+        plugin_name = plugin.get("name")
+        if not isinstance(plugin_name, str) or not plugin_name:
+            raise BuildError(f"{relative(CONFIG_PATH)}: every plugin needs a non-empty string name")
+        if plugin_name in plugin_seen:
+            raise BuildError(f"{relative(CONFIG_PATH)}: duplicate plugin name {plugin_name}")
+        plugin_seen.add(plugin_name)
+        plugin_version(plugin, f"plugin {plugin_name}")
+        for entry in plugin_skill_entries(plugin):
+            active_name = skill_entry_name(entry)
+            if entry.get("type") == "copy":
+                source_path = str(entry.get("source") or "")
+            else:
+                source_path = ", ".join(str(item) for item in entry.get("source_skills", []))
+            active_seen[active_name].append((plugin_name, source_path))
+    duplicates = {name: rows for name, rows in active_seen.items() if len(rows) > 1}
+    if duplicates:
+        parts: list[str] = []
+        for name, rows in sorted(duplicates.items()):
+            details = "; ".join(f"{plugin}: {source}" for plugin, source in rows)
+            parts.append(f"{name} -> {details}")
+        raise BuildError("duplicate marketplace active skill names: " + " | ".join(parts))
+    if len(active_seen) > MAX_ACTIVE_SKILLS:
+        raise BuildError(f"Codex marketplace has {len(active_seen)} active skills; maximum is {MAX_ACTIVE_SKILLS}")
 
 
 def generate_layer(target_root: Path) -> dict[str, Any]:
     config = load_marketplace_config()
     plugins = marketplace_plugins(config)
-    if len(plugins) > MAX_MARKETPLACE_PLUGINS:
-        raise BuildError(f"Codex marketplace has {len(plugins)} plugins; maximum is {MAX_MARKETPLACE_PLUGINS}")
+    validate_config(config)
     if target_root.exists():
         shutil.rmtree(target_root)
     (target_root / ".agents" / "plugins").mkdir(parents=True, exist_ok=True)
@@ -514,9 +525,7 @@ def generate_layer(target_root: Path) -> dict[str, Any]:
     marketplace = build_marketplace(config)
     (target_root / ".agents" / "plugins" / "marketplace.json").write_text(json_dump(marketplace), encoding="utf-8")
     return {
-        "profile_count": len(load_profiles_sorted()),
         "plugin_count": len(plugins),
-        "copied_skill_count": active_skill_count,
         "active_skill_count": active_skill_count,
         "source_skill_snapshot_count": source_skill_snapshot_count,
         "marketplace_path": relative(target_root / ".agents" / "plugins" / "marketplace.json"),
@@ -546,6 +555,11 @@ def validate_plugin_json(plugin_dir: Path, plugin: dict[str, Any], errors: list[
         errors.append(f"{relative(plugin_json_path)}: must not contain [TODO: placeholders")
     if payload.get("name") != plugin_name:
         errors.append(f"{relative(plugin_json_path)}: name must equal plugin directory name {plugin_name}")
+    expected_version = str(plugin.get("version") or "")
+    if payload.get("version") != expected_version:
+        errors.append(f"{relative(plugin_json_path)}: version must be {expected_version}")
+    elif not SEMVER_RE.match(expected_version):
+        errors.append(f"{relative(plugin_json_path)}: version must be a valid semantic version")
     if payload.get("skills") != "./skills/":
         errors.append(f"{relative(plugin_json_path)}: skills must be ./skills/")
     if payload.get("repository") != REPOSITORY_URL:
@@ -572,16 +586,16 @@ def validate_plugin_json(plugin_dir: Path, plugin: dict[str, Any], errors: list[
                     errors.append(f"{relative(plugin_json_path)}: defaultPrompt[{index}] exceeds 128 characters")
 
     skills_dir = plugin_dir / "skills"
-    expected_names = active_skill_names(plugin)
-    expected_skill_dirs = [skills_dir / name for name in expected_names]
+    expected_dirs = [skill_entry_generated_dir(entry, f"plugin {plugin_name}") for entry in plugin_skill_entries(plugin)]
+    expected_skill_dirs = [skills_dir / name for name in expected_dirs]
     found_skill_md = sorted(skills_dir.glob("*/SKILL.md")) if skills_dir.exists() else []
     if not found_skill_md:
         errors.append(f"{relative(skills_dir)}: each plugin must contain at least one copied SKILL.md")
     for expected_dir in expected_skill_dirs:
         if not (expected_dir / "SKILL.md").exists():
             errors.append(f"{relative(expected_dir)}: expected copied skill with SKILL.md")
-    actual_names = {path.parent.name for path in found_skill_md}
-    extras = sorted(actual_names - expected_names)
+    actual_dirs = {path.parent.name for path in found_skill_md}
+    extras = sorted(actual_dirs - set(expected_dirs))
     if extras:
         warnings.append(f"{relative(skills_dir)}: extra active skill directories not listed in marketplace config: {', '.join(extras)}")
     if skills_dir.exists():
@@ -596,6 +610,7 @@ def validate_layer(root: Path = CODEX_ROOT) -> dict[str, Any]:
     errors: list[str] = []
     warnings: list[str] = []
     config = load_marketplace_config()
+    validate_config(config)
     configured_plugins = marketplace_plugins(config)
     plugin_by_name = {str(plugin["name"]): plugin for plugin in configured_plugins}
 
@@ -603,6 +618,7 @@ def validate_layer(root: Path = CODEX_ROOT) -> dict[str, Any]:
     marketplace = load_json(root / ".agents" / "plugins" / "marketplace.json", errors)
     active_skill_count = 0
     plugin_count = 0
+    generated_active_names: dict[str, list[tuple[str, str]]] = defaultdict(list)
 
     if isinstance(marketplace, dict):
         if marketplace.get("name") != config.get("name"):
@@ -662,6 +678,11 @@ def validate_layer(root: Path = CODEX_ROOT) -> dict[str, Any]:
                 errors.append(f"{relative(plugin_dir)}: marketplace source.path does not resolve to a real plugin directory")
             else:
                 active_skill_count += validate_plugin_json(plugin_dir, plugin_by_name[name], errors, warnings)
+                for skill_file in sorted((plugin_dir / "skills").glob("*/SKILL.md")):
+                    meta, _ = read_frontmatter(skill_file)
+                    active_name = str(meta.get("name") or "")
+                    if active_name:
+                        generated_active_names[active_name].append((name, relative(skill_file)))
         missing_names = sorted(set(plugin_by_name) - seen_names)
         for name in missing_names:
             errors.append(f"plugins/codex/.agents/plugins/marketplace.json: missing configured plugin {name}")
@@ -680,10 +701,13 @@ def validate_layer(root: Path = CODEX_ROOT) -> dict[str, Any]:
     if todo_matches:
         errors.append("plugins/codex contains [TODO: placeholders: " + ", ".join(sorted(todo_matches)))
 
+    duplicate_generated_names = {name: rows for name, rows in generated_active_names.items() if len(rows) > 1}
+    for name, rows in sorted(duplicate_generated_names.items()):
+        details = "; ".join(f"{plugin}: {path}" for plugin, path in rows)
+        errors.append(f"duplicate generated active skill name {name}: {details}")
+
     return {
-        "profile_count": len(load_profiles_sorted()),
         "plugin_count": plugin_count,
-        "copied_skill_count": active_skill_count,
         "active_skill_count": active_skill_count,
         "marketplace_path": relative(root / ".agents" / "plugins" / "marketplace.json"),
         "errors": errors,
@@ -740,12 +764,12 @@ def print_summary(summary: dict[str, Any], json_output: bool) -> None:
     if json_output:
         print(json_dump(summary), end="")
         return
-    active = summary.get("active_skill_count", summary["copied_skill_count"])
+    active = summary.get("active_skill_count", 0)
     snapshots = summary.get("source_skill_snapshot_count")
     snapshot_text = f" source_snapshots={snapshots}" if snapshots is not None else ""
     print(
-        f"profiles={summary['profile_count']} plugins={summary['plugin_count']} "
-        f"active_skills={active}{snapshot_text} marketplace={summary['marketplace_path']}"
+        f"plugins={summary['plugin_count']} active_skills={active}{snapshot_text} "
+        f"marketplace={summary['marketplace_path']}"
     )
     for warning in summary.get("warnings", []):
         print(f"WARNING: {warning}", file=sys.stderr)
@@ -797,9 +821,9 @@ def main() -> int:
             print_summary(summary, True)
     except BuildError as exc:
         summary = {
-            "profile_count": 0,
             "plugin_count": 0,
-            "copied_skill_count": 0,
+            "active_skill_count": 0,
+            "source_skill_snapshot_count": 0,
             "marketplace_path": relative(MARKETPLACE_PATH),
             "errors": [str(exc)],
             "warnings": [],

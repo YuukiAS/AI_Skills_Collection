@@ -2,7 +2,13 @@
 name: latex-paper-authoring
 description: Author, organize, repair, and prepare LaTeX research papers for arXiv, Overleaf, conference templates, or journal submission. Use when manuscript structure, LaTeX source hygiene, compilation, figures, bibliography, or template cleanup is central.
 status: active
-provenance: adapted
+provenance: external-adapted
+source_repo_url: https://github.com/yunshenwuchuxun/latex-paper-skills
+source_path: .
+source_ref: d0f106108cb09e448604a56ce973d35b340cf497
+source_imported_at: 2026-07-09
+source_license: MIT
+source_note: Distilled from latex-paper-skills, latex-document-skill, claude-scholar LaTeX template organizer, and existing render-chinese-math-pdf practice.
 trusted: false
 requires_network: false
 writes_files: true
@@ -13,10 +19,6 @@ profile_tags:
   - research-writing
   - latex
 recommended_scope: project
-source_url: https://github.com/yunshenwuchuxun/latex-paper-skills
-source_commit: d0f106108cb09e448604a56ce973d35b340cf497
-source_license: MIT
-adaptation_notes: Distilled from latex-paper-skills, latex-document-skill, claude-scholar LaTeX template organizer, and existing render-chinese-math-pdf practice.
 metadata:
   skill-author: AI Skills Collection maintainers with recorded upstream sources
 ---

@@ -17,16 +17,28 @@
       "category": "Developer Tools"
     },
     {
-      "name": "workflow-writing",
+      "name": "workflow-core",
       "source": {
         "source": "local",
-        "path": "./plugins/workflow-writing"
+        "path": "./plugins/workflow-core"
       },
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
       },
-      "category": "Productivity"
+      "category": "Developer Tools"
+    },
+    {
+      "name": "writing-style",
+      "source": {
+        "source": "local",
+        "path": "./plugins/writing-style"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Research"
     },
     {
       "name": "web-development",
@@ -53,18 +65,6 @@
       "category": "Research"
     },
     {
-      "name": "scientific-diagrams",
-      "source": {
-        "source": "local",
-        "path": "./plugins/scientific-diagrams"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Research"
-    },
-    {
       "name": "statistical-modeling",
       "source": {
         "source": "local",
@@ -77,10 +77,34 @@
       "category": "Research"
     },
     {
-      "name": "bio-medical-imaging",
+      "name": "bioinformatics",
       "source": {
         "source": "local",
-        "path": "./plugins/bio-medical-imaging"
+        "path": "./plugins/bioinformatics"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Research"
+    },
+    {
+      "name": "medical-imaging",
+      "source": {
+        "source": "local",
+        "path": "./plugins/medical-imaging"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Research"
+    },
+    {
+      "name": "cardiacnexus",
+      "source": {
+        "source": "local",
+        "path": "./plugins/cardiacnexus"
       },
       "policy": {
         "installation": "AVAILABLE",

@@ -49,7 +49,7 @@
 | 5 | Layout & Responsive | HIGH | `ux` | Mobile-first breakpoints, Viewport meta, No horizontal scroll | Horizontal scroll, Fixed px container widths, Disable zoom |
 | 6 | Typography & Color | MEDIUM | `typography`, `color` | Base 16px, Line-height 1.5, Semantic color tokens | Text &lt; 12px body, Gray-on-gray, Raw hex in components |
 | 7 | Animation | MEDIUM | `ux` | Duration 150–300ms, Motion conveys meaning, Spatial continuity | Decorative-only animation, Animating width/height, No reduced-motion |
-| 8 | Forms & Feedback | MEDIUM | `ux` | Visible labels, Error near field, Helper text, Progressive disclosure | Example value-only label, Errors only at top, Overwhelm upfront |
+| 8 | Forms & Feedback | MEDIUM | `ux` | Visible labels, Error near field, Helper text, Progressive disclosure | Placeholder-only label, Errors only at top, Overwhelm upfront |
 | 9 | Navigation Patterns | HIGH | `ux` | Predictable back, Bottom nav ≤5, Deep linking | Overloaded nav, Broken back behavior, No deep links |
 | 10 | Charts & Data | LOW | `chart` | Legends, Tooltips, Accessible colors | Relying on color alone to convey meaning |
 
@@ -196,14 +196,14 @@
 
 ### 8. Forms & Feedback (MEDIUM)
 
-- `input-labels` - Visible label per input (not example value-only)
+- `input-labels` - Visible label per input (not placeholder-only)
 - `error-placement` - Show error below the related field
 - `submit-feedback` - Loading then success/error state on submit
 - `required-indicators` - Mark required fields (e.g. asterisk)
 - `empty-states` - Helpful message and action when no content
 - `toast-dismiss` - Auto-dismiss toasts in 3-5s
 - `confirmation-dialogs` - Confirm before destructive actions
-- `input-helper-text` - Provide persistent helper text below complex inputs, not just example value (Material Design)
+- `input-helper-text` - Provide persistent helper text below complex inputs, not just placeholder (Material Design)
 - `disabled-states` - Disabled elements use reduced opacity (0.38–0.5) + cursor change + semantic attribute (MD)
 - `progressive-disclosure` - Reveal complex options progressively; don't overwhelm users upfront (Apple HIG)
 - `inline-validation` - Validate on blur (not keystroke); show error only after user finishes input (MD)
@@ -268,7 +268,7 @@
 - `axis-labels` - Label axes with units and readable scale; avoid truncated or rotated labels on mobile
 - `responsive-chart` - Charts must reflow or simplify on small screens (e.g. horizontal bar instead of vertical, fewer ticks)
 - `empty-data-state` - Show meaningful empty state when no data exists ("No data yet" + guidance), not a blank chart (MD)
-- `loading-chart` - Use skeleton or shimmer example value while chart data loads; don't show an empty axis frame
+- `loading-chart` - Use skeleton or shimmer placeholder while chart data loads; don't show an empty axis frame
 - `animation-optional` - Chart entrance animations must respect prefers-reduced-motion; data should be readable immediately (HIG)
 - `large-dataset` - For 1000+ data points, aggregate or sample; provide drill-down for detail instead of rendering all (MD)
 - `number-formatting` - Use locale-aware formatting for numbers, dates, currencies on axes and labels (HIG, MD)

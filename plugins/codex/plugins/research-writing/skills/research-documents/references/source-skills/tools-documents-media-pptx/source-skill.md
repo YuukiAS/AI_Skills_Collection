@@ -161,7 +161,7 @@ python -m markitdown output.pptx
 
 Check for missing content, typos, wrong order.
 
-**When using templates, check for leftover example value text:**
+**When using templates, check for leftover placeholder text:**
 
 ```bash
 python -m markitdown output.pptx | grep -iE "xxxx|lorem|ipsum|this.*(page|slide).*layout"
@@ -190,7 +190,7 @@ Look for:
 - Low-contrast text (e.g., light gray text on cream-colored background)
 - Low-contrast icons (e.g., dark icons on dark backgrounds without a contrasting circle)
 - Text boxes too narrow causing excessive wrapping
-- Leftover example value content
+- Leftover placeholder content
 
 For each slide, list issues or areas of concern, even if minor.
 

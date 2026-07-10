@@ -20,6 +20,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Test Codex marketplace builder
+        run: python3 -m unittest discover -s tests
+
       - name: Generate Codex marketplace
         run: python3 scripts/build_codex_marketplace.py --write
 

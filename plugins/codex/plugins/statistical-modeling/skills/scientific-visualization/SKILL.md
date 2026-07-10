@@ -2,14 +2,18 @@
 name: scientific-visualization
 description: Scientific plotting and visualization with Matplotlib and Plotly.
 status: active
-provenance: generated-codex-marketplace
+provenance: generated
 trusted: false
 requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
+last_reviewed: 2026-07-10
 profile_tags:
 recommended_scope: project
+source_skills:
+  - skills/tools/visualization/matplotlib
+  - skills/tools/visualization/plotly
 ---
 
 # scientific-visualization

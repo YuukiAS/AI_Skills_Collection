@@ -16,15 +16,17 @@ Git reference: main
 Sparse path: plugins/codex
 ```
 
-The generated marketplace currently publishes seven curated plugins:
+The generated marketplace currently publishes nine curated plugins:
 
 - `ai-skills-core`
-- `workflow-writing`
+- `workflow-core`
+- `writing-style`
 - `web-development`
 - `research-writing`
-- `scientific-diagrams`
 - `statistical-modeling`
-- `bio-medical-imaging`
+- `bioinformatics`
+- `medical-imaging`
+- `cardiacnexus`
 
 Each plugin carries active skills under its own `skills/` directory. Some active
 skills are aggregate skills: they expose one Codex trigger boundary while copying
@@ -44,6 +46,7 @@ python3 scripts/build_codex_marketplace.py --validate
 Before opening a pull request, also run:
 
 ```bash
+python3 -m unittest discover -s tests
 python3 scripts/build_codex_marketplace.py --check
 python3 scripts/skills.py validate
 python3 scripts/skills.py audit --all
@@ -67,3 +70,11 @@ chore: publish codex marketplace [skip codex-marketplace]
 
 The skip marker prevents the follow-up workflow run from creating another
 publish commit.
+
+## Metadata Rules
+
+Marketplace builds fail when active skill names collide across plugins, source
+skills contain `[TODO:` placeholders, source snapshots include symlinks, or a
+published source skill references secret environment variables not declared in
+frontmatter. Aggregate skills use `provenance: generated` and keep their source
+skill paths in `source_skills`.

@@ -16,7 +16,7 @@ from skill_utils import ROOT, iter_skill_files, read_frontmatter
 DOC_PATH = ROOT / "docs" / "SKILL_PROVENANCE.md"
 JSON_PATH = ROOT / "docs" / "skill_provenance_audit.json"
 URL_RE = re.compile(r"https?://[^\s)>\]\"'`,]+")
-SOURCE_KEYS = ("source_url", "source_repo", "source_commit", "origin_url", "upstream_url", "upstream_repo")
+SOURCE_KEYS = ("source_repo_url", "source_path", "source_ref", "source_imported_at", "source_license", "source_note")
 LICENSE_FILES = ("LICENSE", "LICENSE.txt", "license.txt", "COPYING", "NOTICE")
 
 
@@ -31,7 +31,6 @@ def skill_rows(include_archive: bool = False) -> list[dict[str, Any]]:
         metadata = meta.get("metadata") if isinstance(meta.get("metadata"), dict) else {}
         urls = sorted({url.rstrip(".,;:") for url in URL_RE.findall(body)})
         source_fields = {key: meta[key] for key in SOURCE_KEYS if meta.get(key)}
-        source_fields.update({key: metadata[key] for key in SOURCE_KEYS if metadata.get(key)})
         license_files = [name for name in LICENSE_FILES if (skill_file.parent / name).exists()]
         provenance = str(meta.get("provenance") or "unknown")
         status = str(meta.get("status") or ("archived" if "archive" in skill_file.parts else "active"))
@@ -48,14 +47,18 @@ def skill_rows(include_archive: bool = False) -> list[dict[str, Any]]:
             "url_count": len(urls),
             "urls": urls,
         }
-        if source_fields:
-            row["provenance_confidence"] = "recorded_source_field"
-        elif provenance in {"user-authored", "local"}:
-            row["provenance_confidence"] = "recorded_local"
-        elif author:
-            row["provenance_confidence"] = "recorded_author_only"
+        if provenance == "user-authored":
+            row["provenance_category"] = "user-authored"
+        elif provenance == "external-adapted":
+            row["provenance_category"] = "external-adapted"
+        elif provenance == "external-vendored":
+            row["provenance_category"] = "external-vendored"
+        elif provenance == "generated":
+            row["provenance_category"] = "generated"
+        elif provenance == "local":
+            row["provenance_category"] = "local"
         else:
-            row["provenance_confidence"] = "unknown"
+            row["provenance_category"] = "unknown"
         rows.append(row)
     return sorted(rows, key=lambda item: item["path"])
 
@@ -63,7 +66,7 @@ def skill_rows(include_archive: bool = False) -> list[dict[str, Any]]:
 def audit(include_archive: bool = False) -> dict[str, Any]:
     rows = skill_rows(include_archive=include_archive)
     provenance_counts = Counter(row["provenance"] for row in rows)
-    confidence_counts = Counter(row["provenance_confidence"] for row in rows)
+    category_counts = Counter(row["provenance_category"] for row in rows)
     author_counts = Counter(row["metadata_skill_author"] or "(missing)" for row in rows)
     license_counts = Counter(row["license"] or "(missing)" for row in rows)
     rows_with_urls = [row for row in rows if row["url_count"]]
@@ -72,7 +75,7 @@ def audit(include_archive: bool = False) -> dict[str, Any]:
         "scope": "active_and_non_archived" if not include_archive else "all_non_hidden",
         "skill_count": len(rows),
         "provenance_counts": dict(sorted(provenance_counts.items())),
-        "provenance_confidence_counts": dict(sorted(confidence_counts.items())),
+        "provenance_category_counts": dict(sorted(category_counts.items())),
         "metadata_skill_author_counts": dict(sorted(author_counts.items())),
         "license_counts": dict(sorted(license_counts.items())),
         "rows_with_urls_count": len(rows_with_urls),
@@ -96,9 +99,12 @@ def markdown_table(rows: list[list[str]]) -> list[str]:
 def render_markdown(data: dict[str, Any]) -> str:
     skills = data["skills"]
     source_field_rows = [row for row in skills if row["source_fields"]]
-    local_rows = [row for row in skills if row["provenance_confidence"] == "recorded_local"]
-    author_rows = [row for row in skills if row["provenance_confidence"] == "recorded_author_only"]
-    unknown_rows = [row for row in skills if row["provenance_confidence"] == "unknown"]
+    user_rows = [row for row in skills if row["provenance_category"] == "user-authored"]
+    adapted_rows = [row for row in skills if row["provenance_category"] == "external-adapted"]
+    vendored_rows = [row for row in skills if row["provenance_category"] == "external-vendored"]
+    generated_rows = [row for row in skills if row["provenance_category"] == "generated"]
+    local_rows = [row for row in skills if row["provenance_category"] == "local"]
+    unknown_rows = [row for row in skills if row["provenance_category"] == "unknown"]
     url_rows = [row for row in skills if row["url_count"]]
 
     lines = [
@@ -111,9 +117,12 @@ def render_markdown(data: dict[str, Any]) -> str:
         f"- Scope: `{data['scope']}`",
         f"- Skills audited: {data['skill_count']}",
         f"- Skills with explicit source fields: {data['source_field_count']}",
-        f"- Skills marked `user-authored` or `local`: {len(local_rows)}",
-        f"- Skills with only `metadata.skill-author`: {len(author_rows)}",
-        f"- Skills with unknown origin and no author field: {len(unknown_rows)}",
+        f"- User-authored skills: {len(user_rows)}",
+        f"- External adapted skills: {len(adapted_rows)}",
+        f"- External vendored skills: {len(vendored_rows)}",
+        f"- Generated skills: {len(generated_rows)}",
+        f"- Local legacy skills: {len(local_rows)}",
+        f"- Unknown-origin historical skills: {len(unknown_rows)}",
         f"- Skills containing URLs in the body: {data['rows_with_urls_count']}",
         f"- Skills containing local license files: {data['rows_with_license_files_count']}",
         "",
@@ -121,50 +130,32 @@ def render_markdown(data: dict[str, Any]) -> str:
         "",
     ]
     lines.extend(markdown_table([["Provenance", "Count"]] + [[key, str(value)] for key, value in data["provenance_counts"].items()]))
-    lines.extend(["", "## Recorded Authors", ""])
-    lines.extend(
-        markdown_table(
-            [["metadata.skill-author", "Count"]]
-            + [[key, str(value)] for key, value in data["metadata_skill_author_counts"].items()]
-        )
-    )
-    lines.extend(["", "## Explicit Source Fields", ""])
-    if source_field_rows:
-        lines.extend(
-            markdown_table(
-                [["Skill", "Path", "Source fields"]]
-                + [
-                    [row["name"], row["path"], json.dumps(row["source_fields"], ensure_ascii=False, sort_keys=True)]
-                    for row in source_field_rows
-                ]
+    for title, rows in (
+        ("User Authored", user_rows),
+        ("External Adapted", adapted_rows),
+        ("External Vendored", vendored_rows),
+        ("Generated", generated_rows),
+        ("Local Legacy", local_rows),
+        ("Unknown Historical", unknown_rows),
+    ):
+        lines.extend(["", f"## {title}", ""])
+        if rows:
+            lines.extend(
+                markdown_table(
+                    [["Skill", "Path", "Provenance", "Source"]]
+                    + [
+                        [
+                            row["name"],
+                            row["path"],
+                            row["provenance"],
+                            json.dumps(row["source_fields"], ensure_ascii=False, sort_keys=True) if row["source_fields"] else "",
+                        ]
+                        for row in rows
+                    ]
+                )
             )
-        )
-    else:
-        lines.append("No active skill currently records `source_url`, `source_repo`, `source_commit`, `origin_url`, `upstream_url`, or `upstream_repo`.")
-
-    lines.extend(["", "## Local Or User-Authored Records", ""])
-    lines.extend(
-        markdown_table(
-            [["Skill", "Path", "Provenance", "Author"]]
-            + [[row["name"], row["path"], row["provenance"], row["metadata_skill_author"] or ""] for row in local_rows]
-        )
-    )
-
-    lines.extend(["", "## Author-Only External Evidence", ""])
-    if author_rows:
-        lines.append("These rows identify an author or organization, but not the exact upstream repository or commit.")
-        lines.append("")
-        lines.extend(
-            markdown_table(
-                [["Skill", "Path", "Author", "License"]]
-                + [
-                    [row["name"], row["path"], row["metadata_skill_author"], row["license"] or ""]
-                    for row in author_rows
-                ]
-            )
-        )
-    else:
-        lines.append("None.")
+        else:
+            lines.append("None.")
 
     lines.extend(["", "## URL Evidence", ""])
     if url_rows:
@@ -201,16 +192,18 @@ def render_markdown(data: dict[str, Any]) -> str:
             "For every newly cloned or adapted skill, add provenance metadata before committing it:",
             "",
             "```yaml",
-            "provenance: external",
-            "source_url: https://github.com/<owner>/<repo>",
-            "source_commit: <full commit sha or tag>",
+            "provenance: external-adapted",
+            "source_repo_url: https://github.com/<owner>/<repo>",
+            "source_path: path/to/original/skill",
+            "source_ref: <full commit sha or tag>",
+            "source_imported_at: YYYY-MM-DD",
             "source_license: <license id or URL>",
-            "adaptation_notes: <short note on local changes>",
+            "source_note: <short note on local changes>",
             "metadata:",
             "  skill-author: <upstream author or organization>",
             "```",
             "",
-            "Use `provenance: user-authored` for original local work and `provenance: local` for local synthesis where no upstream skill was copied. If the source is not known, leave `provenance: unknown` and add the skill to the unknown-origin inventory instead of guessing.",
+            "Use `provenance: user-authored` for original local work. Historical `unknown` is allowed only when the exact source was not recorded; do not guess URLs, refs, or licenses.",
             "",
             f"Machine-readable audit: `{JSON_PATH.relative_to(ROOT).as_posix()}`",
             "",

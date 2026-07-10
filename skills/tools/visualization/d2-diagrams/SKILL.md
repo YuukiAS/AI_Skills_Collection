@@ -2,7 +2,13 @@
 name: d2-diagrams
 description: Generate D2 source diagrams and rendered SVG/PNG outputs for architecture, infrastructure, method pipelines, system components, and codebase structure. Use when a text-based diagram DSL is preferable to manual drawing.
 status: active
-provenance: adapted
+provenance: external-adapted
+source_repo_url: https://github.com/RayanAhmed0/D2-Diagram-Skill
+source_path: .
+source_ref: 5b30a5597f93876295b1ae9567c0e97e87543aa4
+source_imported_at: 2026-07-09
+source_license: MIT
+source_note: Distilled from D2-Diagram-Skill and heathdutton/claude-d2-diagrams plugin notes; plugin-only repo recorded but not imported.
 trusted: false
 requires_network: false
 writes_files: true
@@ -13,10 +19,6 @@ profile_tags:
   - visualization
   - diagrams
 recommended_scope: project
-source_url: https://github.com/RayanAhmed0/D2-Diagram-Skill
-source_commit: 5b30a5597f93876295b1ae9567c0e97e87543aa4
-source_license: MIT
-adaptation_notes: Distilled from D2-Diagram-Skill and heathdutton/claude-d2-diagrams plugin notes; plugin-only repo recorded but not imported.
 metadata:
   skill-author: AI Skills Collection maintainers with recorded upstream sources
 ---

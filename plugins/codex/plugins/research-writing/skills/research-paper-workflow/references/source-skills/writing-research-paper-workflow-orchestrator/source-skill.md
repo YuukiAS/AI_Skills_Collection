@@ -2,7 +2,13 @@
 name: paper-workflow-orchestrator
 description: Orchestrate end-to-end research paper work: project bootstrap, claim/evidence spine, section sequencing, figure/text synchronization, submission checks, and rebuttal planning. Use when the user asks how to structure a manuscript workflow rather than only polish a paragraph.
 status: active
-provenance: adapted
+provenance: external-adapted
+source_repo_url: https://github.com/WUBING2023/PaperSpine
+source_path: .
+source_ref: d4529208cda72aa075767611b0265b95b709b550
+source_imported_at: 2026-07-09
+source_license: MIT
+source_note: Distilled from PaperSpine, academic-research-skills, Nature-Paper-Skills, paper-writing-skill, and Research-Paper-Writing-Skills; see TODO/CLONED_SKILL_SOURCES.md.
 trusted: false
 requires_network: false
 writes_files: true
@@ -12,10 +18,6 @@ last_reviewed: 2026-07-09
 profile_tags:
   - research-writing
 recommended_scope: project
-source_url: https://github.com/WUBING2023/PaperSpine
-source_commit: d4529208cda72aa075767611b0265b95b709b550
-source_license: MIT
-adaptation_notes: Distilled from PaperSpine, academic-research-skills, Nature-Paper-Skills, paper-writing-skill, and Research-Paper-Writing-Skills; see TODO/CLONED_SKILL_SOURCES.md.
 metadata:
   skill-author: AI Skills Collection maintainers with recorded upstream sources
 ---

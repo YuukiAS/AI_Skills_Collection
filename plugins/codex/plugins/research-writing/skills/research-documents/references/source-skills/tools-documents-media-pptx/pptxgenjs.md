@@ -353,12 +353,12 @@ slide.addChart(pres.charts.BAR, chartData, {
 pres.defineSlideMaster({
   title: 'TITLE_SLIDE', background: { color: '283A5E' },
   objects: [{
-    example value: { options: { name: 'title', type: 'title', x: 1, y: 2, w: 8, h: 2 } }
+    placeholder: { options: { name: 'title', type: 'title', x: 1, y: 2, w: 8, h: 2 } }
   }]
 });
 
 let titleSlide = pres.addSlide({ masterName: "TITLE_SLIDE" });
-titleSlide.addText("My Title", { example value: "title" });
+titleSlide.addText("My Title", { placeholder: "title" });
 ```
 
 ---

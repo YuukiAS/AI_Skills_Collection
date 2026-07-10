@@ -2,7 +2,13 @@
 name: citation-verification
 description: Verify academic citations, references, BibTeX entries, DOI/PMID metadata, citation claims, and figure/table evidence before manuscript submission, review response, or report delivery. Use when citation existence or claim support matters more than citation formatting alone.
 status: active
-provenance: adapted
+provenance: external-adapted
+source_repo_url: https://github.com/serenakeyitan/citation-check-skill
+source_path: .
+source_ref: b9deb7077099f56b05c9b6ecea744c2ca0a6d324
+source_imported_at: 2026-07-09
+source_license: MIT
+source_note: Distilled from citation-check-skill, Nature-Paper-Skills citation-verifier/reference-audit, claude-scholar citation-verification, and paperpipe verification workflows.
 trusted: false
 requires_network: true
 writes_files: true
@@ -13,10 +19,6 @@ profile_tags:
   - research-writing
   - citations
 recommended_scope: project
-source_url: https://github.com/serenakeyitan/citation-check-skill
-source_commit: b9deb7077099f56b05c9b6ecea744c2ca0a6d324
-source_license: MIT
-adaptation_notes: Distilled from citation-check-skill, Nature-Paper-Skills citation-verifier/reference-audit, claude-scholar citation-verification, and paperpipe verification workflows.
 metadata:
   skill-author: AI Skills Collection maintainers with recorded upstream sources
 ---
@@ -31,7 +33,7 @@ Use this as a verification gate. Formatting a bibliography is not enough; check 
    - existence: DOI, PMID, arXiv ID, URL, title, authors, year;
    - metadata consistency: BibTeX fields match authoritative metadata;
    - claim support: the cited source actually supports the sentence or panel;
-   - example value risk: missing references, `TODO`, fake-looking DOIs, malformed keys;
+   - placeholder risk: missing references, `TODO`, fake-looking DOIs, malformed keys;
    - citation drift: cited paper supports a narrower or different claim.
 3. Prefer authoritative sources when available: publisher page, Crossref, PubMed, OpenAlex, arXiv, official repository, or the source PDF.
 4. Record uncertainty. If online verification is unavailable, mark the citation `unverified`, not `valid`.

@@ -2,14 +2,23 @@
 name: research-paper-workflow
 description: Scientific writing, paper workflow orchestration, Nature-style manuscripts, citation verification, LaTeX authoring, and optional semantic literature search.
 status: active
-provenance: generated-codex-marketplace
+provenance: generated
 trusted: false
-requires_network: false
+requires_network: true
 writes_files: true
-executes_code: false
+executes_code: true
 secrets_needed:
+  - VALYU_API_KEY
+last_reviewed: 2026-07-10
 profile_tags:
 recommended_scope: project
+source_skills:
+  - skills/writing/research/scientific-writing
+  - skills/writing/research/paper-workflow-orchestrator
+  - skills/writing/research/nature-manuscript-workflow
+  - skills/writing/research/citation-verification
+  - skills/writing/research/latex-paper-authoring
+  - skills/science/discovery/valyu-scientific-search
 ---
 
 # research-paper-workflow

@@ -2,7 +2,13 @@
 name: nature-manuscript-workflow
 description: Plan, draft, revise, and audit Nature-style manuscripts, including claim framing, figure logic, data availability, submission readiness, and reviewer response. Use when the user targets Nature-family journals or asks for Nature-style scientific writing.
 status: active
-provenance: adapted
+provenance: external-adapted
+source_repo_url: https://github.com/Boom5426/Nature-Paper-Skills
+source_path: .
+source_ref: 44cff42ac22a5ac4dcfb7ba01b2e81c21d689ea6
+source_imported_at: 2026-07-09
+source_license: MIT
+source_note: Distilled from Nature-Paper-Skills, nature-skills, and claude-scholar Nature writing/response/data skills.
 trusted: false
 requires_network: true
 writes_files: true
@@ -13,10 +19,6 @@ profile_tags:
   - research-writing
   - nature
 recommended_scope: project
-source_url: https://github.com/Boom5426/Nature-Paper-Skills
-source_commit: 44cff42ac22a5ac4dcfb7ba01b2e81c21d689ea6
-source_license: MIT
-adaptation_notes: Distilled from Nature-Paper-Skills, nature-skills, and claude-scholar Nature writing/response/data skills.
 metadata:
   skill-author: AI Skills Collection maintainers with recorded upstream sources
 ---

@@ -1,6 +1,39 @@
 # AI Skills Collection
 
-Central library for personal Codex/agent skills. The repository keeps the full skill collection; installation is explicit and can target a repo, the user-level skills directory, or an advanced legacy codex-home directory.
+Central library for personal Codex/agent skills. For ordinary Codex App use,
+install the generated plugin marketplace first; use the local `ai-skills` CLI
+for server, HPC, repo-local, and advanced maintenance workflows.
+
+## Codex App Marketplace Install
+
+Add this repository as a Git plugin marketplace in Codex App:
+
+- Source: `https://github.com/YuukiAS/AI_Skills_Collection.git`
+- Git reference: `main`
+- Sparse path: `plugins/codex`
+
+The sparse path is a generated, self-contained marketplace root. Codex App can
+install the curated plugins from there without running `ai-skills` after
+installation. The app marketplace intentionally publishes a smaller set of
+plugin-sized capabilities than the local CLI profiles.
+
+## Available Marketplace Plugins
+
+- `ai-skills-core`: install, create, and maintain project-local Codex skills.
+- `workflow-core`: general Codex execution, source-of-truth, and verification workflows.
+- `writing-style`: source-faithful writing, scientific prose, Chinese prose, and CJK/math PDF rendering.
+- `web-development`: product UX, React/Tailwind implementation, Figma handoff, visual assets, and browser QA.
+- `research-writing`: manuscripts, literature review, citation workflows, research lookup, and research documents.
+- `statistical-modeling`: Bayesian modeling, Python data analysis, and scientific visualization.
+- `bioinformatics`: general bioinformatics workflows.
+- `medical-imaging`: general medical imaging and AI/ML imaging workflows.
+- `cardiacnexus`: optional CardiacNexus project-specific workflows.
+
+## Local CLI For Advanced Installs
+
+The CLI remains the developer and local deployment path. Use it when you need
+repo-local, user-level, explicit legacy codex-home installs, or when you are
+authoring and validating skills in this source checkout.
 
 Default paths:
 
@@ -18,8 +51,6 @@ collection and writes only the selected target. It should not modify
 Commands that intentionally edit the collection are authoring/maintenance
 commands such as `ai-skills new`, `ai-skills registry --write`, and
 `ai-skills catalog --write`.
-
-Use the generated catalog first, then install a profile, a complete domain, or precise single skills.
 
 ## One-Time CLI Setup
 
@@ -51,24 +82,12 @@ package. Keep the checkout available. `--mode symlink` installs point back to
 this central library; use `--mode copy` when the target repo must keep a
 self-contained snapshot.
 
-## Codex App Marketplace Install
+## Source And Generated Layers
 
-For ordinary Codex App use, add this repository as a Git plugin marketplace:
-
-- Source: `https://github.com/YuukiAS/AI_Skills_Collection.git`
-- Git reference: `main`
-- Sparse path: `plugins/codex`
-
-The sparse path is a generated, self-contained marketplace root. Codex App can
-install the curated plugins from there without running `ai-skills` after
-installation. The app marketplace intentionally publishes a smaller set of
-plugin-sized capabilities than the local CLI profiles.
-
-Developers can still use the `ai-skills` CLI for repo, user, and explicit
-codex-home local installs. The marketplace publication layer and the CLI install
-path coexist: `skills/` and `profiles/` remain the source layer, while
-`plugins/codex/` is the generated Codex App distribution layer. The Codex App
-plugin set is configured separately in `scripts/codex_marketplace_config.json`.
+`skills/` and `profiles/` are the source layer for local installs.
+`plugins/codex/` is generated from `scripts/codex_marketplace_config.json` and
+is the Codex App distribution layer. Do not edit generated marketplace snapshots
+by hand; update source skills or config, then rebuild.
 
 ## Main Commands
 
@@ -207,6 +226,7 @@ ai-skills catalog --write
 
 - `docs/INSTALLATION.md`: CLI install patterns, SSH/HPC notes, symlink/copy, Windows/WSL, user vs codex-home.
 - `docs/CODEX_MARKETPLACE.md`: Codex App marketplace publication layer and release workflow.
+- `docs/REPOSITORY_BOUNDARY.md`: boundary between active skills, generated marketplace output, and external source material.
 - `docs/MIGRATION.md`: migrate old `.codex/skills` manifests to `.agents/skills`.
 - `docs/SKILL_AUTHORING.md`: create skills, domains, references, descriptions, profiles, and trigger evals.
 - `profiles/README.md`: profile vs domain vs single-skill selection.
