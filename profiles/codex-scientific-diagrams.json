@@ -1,0 +1,19 @@
+{
+  "name": "codex-scientific-diagrams",
+  "description": "Project-local profile for editable scientific method figures, architecture diagrams, UML/PlantUML, D2, draw.io, Mermaid, Excalidraw, and publication figure planning.",
+  "max_active_skills": 16,
+  "skills": [
+    "skills/tools/visualization/drawio-diagrams",
+    "skills/tools/visualization/d2-diagrams",
+    "skills/tools/visualization/plantuml-diagrams",
+    "skills/tools/visualization/excalidraw-diagrams",
+    "skills/tools/visualization/markdown-mermaid-writing",
+    "skills/science/communication/scientific-visualization",
+    "skills/science/communication/scientific-schematics",
+    "skills/writing/research/paper-workflow-orchestrator"
+  ],
+  "secondary_skills": [
+    "skills/tools/visualization/matplotlib",
+    "skills/tools/visualization/plotly"
+  ]
+}

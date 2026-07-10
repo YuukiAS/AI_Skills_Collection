@@ -9,6 +9,7 @@
     "skills/core/codex-system/system-skills/plugin-creator",
     "skills/core/codex-system/system-skills/openai-docs",
     "skills/core/codex-system/mcp-builder",
+    "skills/core/codex-system/skill-library-analysis",
     "skills/tools/documents-media/markitdown",
     "skills/tools/documents-media/pdf",
     "skills/tools/visualization/markdown-mermaid-writing",

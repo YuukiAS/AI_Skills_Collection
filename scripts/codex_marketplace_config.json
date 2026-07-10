@@ -138,8 +138,17 @@
       ],
       "skills": [
         {
-          "type": "copy",
-          "source": "skills/writing/research/scientific-writing"
+          "type": "aggregate",
+          "name": "research-paper-workflow",
+          "description": "Scientific writing, paper workflow orchestration, Nature-style manuscripts, citation verification, LaTeX authoring, and optional semantic literature search.",
+          "source_skills": [
+            "skills/writing/research/scientific-writing",
+            "skills/writing/research/paper-workflow-orchestrator",
+            "skills/writing/research/nature-manuscript-workflow",
+            "skills/writing/research/citation-verification",
+            "skills/writing/research/latex-paper-authoring",
+            "skills/science/discovery/valyu-scientific-search"
+          ]
         },
         {
           "type": "copy",
@@ -164,6 +173,33 @@
             "skills/tools/documents-media/markitdown",
             "skills/science/communication/scientific-visualization",
             "skills/science/communication/scientific-slides",
+            "skills/science/communication/scientific-schematics"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scientific-diagrams",
+      "displayName": "Scientific Diagrams",
+      "description": "Editable method figures, architecture diagrams, UML, D2, draw.io, Mermaid, Excalidraw, and publication figure planning.",
+      "category": "Research",
+      "defaultPrompt": [
+        "Create an editable method figure.",
+        "Draw this architecture as D2.",
+        "Convert this workflow into a diagram."
+      ],
+      "skills": [
+        {
+          "type": "aggregate",
+          "name": "scientific-diagramming",
+          "description": "Editable draw.io, D2, PlantUML, Excalidraw, Mermaid, scientific schematic, and publication figure workflows.",
+          "source_skills": [
+            "skills/tools/visualization/drawio-diagrams",
+            "skills/tools/visualization/d2-diagrams",
+            "skills/tools/visualization/plantuml-diagrams",
+            "skills/tools/visualization/excalidraw-diagrams",
+            "skills/tools/visualization/markdown-mermaid-writing",
+            "skills/science/communication/scientific-visualization",
             "skills/science/communication/scientific-schematics"
           ]
         }
@@ -211,14 +247,6 @@
             "skills/tools/visualization/matplotlib",
             "skills/tools/visualization/plotly"
           ]
-        },
-        {
-          "type": "copy",
-          "source": "skills/writing/research/scientific-writing"
-        },
-        {
-          "type": "copy",
-          "source": "skills/science/discovery/research-lookup"
         }
       ]
     },

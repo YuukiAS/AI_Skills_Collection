@@ -30,6 +30,7 @@ ai-skills install --target repo --skill domain/bayesian/pymc --mode symlink --wr
 - `codex-workflow-core`: global workflow protocol, source-of-truth discovery, gate-driven completion, verification, escalation, live-state supervision, and writing fidelity.
 - `codex-webdev`: React, Next.js, Tailwind, Figma handoff, browser testing, and visual QA.
 - `codex-research-writing`: manuscripts, literature review, citations, PDFs, figures, slides, and peer review.
+- `codex-scientific-diagrams`: editable scientific method figures, D2, draw.io, PlantUML, Mermaid, Excalidraw, and publication figure planning.
 - `codex-writing-style`: writing fidelity guardrail, English scientific prose, Chinese prose polishing, and CJK/math PDF rendering.
 - `codex-bayesian-jsdm`: Bayesian modeling, JSDM/HMSC, simulation, diagnostics, and manuscript support.
 - `codex-cardiacnexus`: CardiacNexus, CMR, DICOM/NIfTI, MONAI, nnU-Net, UKB, and imaging pipelines.

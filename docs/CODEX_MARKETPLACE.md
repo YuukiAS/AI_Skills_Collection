@@ -16,12 +16,13 @@ Git reference: main
 Sparse path: plugins/codex
 ```
 
-The generated marketplace currently publishes six curated plugins:
+The generated marketplace currently publishes seven curated plugins:
 
 - `ai-skills-core`
 - `workflow-writing`
 - `web-development`
 - `research-writing`
+- `scientific-diagrams`
 - `statistical-modeling`
 - `bio-medical-imaging`
 

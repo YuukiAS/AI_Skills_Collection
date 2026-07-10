@@ -1,0 +1,2359 @@
+{
+  "license_counts": {
+    "(missing)": 42,
+    "3-clause BSD license": 1,
+    "Apache License, Version 2.0": 1,
+    "Apache-2.0": 4,
+    "Apache-2.0 license": 6,
+    "BSD License": 1,
+    "BSD license": 1,
+    "BSD-2-Clause license": 1,
+    "BSD-3-Clause": 1,
+    "BSD-3-Clause license": 11,
+    "Complete terms in LICENSE.txt": 4,
+    "For MATLAB (https://www.mathworks.com/pricing-licensing.html) and for Octave (GNU General Public License version 3)": 1,
+    "GPL-2.0 license": 1,
+    "GPL-3.0 license": 2,
+    "MIT": 3,
+    "MIT License": 6,
+    "MIT license": 38,
+    "MIT-compatible synthesis from cited public/academic writing guidance": 1,
+    "MIT-compatible synthesis plus public-domain style guidance": 1,
+    "Proprietary. LICENSE.txt has complete terms": 5,
+    "SD-3-Clause license": 1,
+    "Unknown": 9,
+    "https://github.com/biodatageeks/polars-bio/blob/main/LICENSE": 1,
+    "https://github.com/matplotlib/matplotlib/tree/main/LICENSE": 1,
+    "https://github.com/pola-rs/polars/blob/main/LICENSE": 1,
+    "https://github.com/pydicom/pydicom/blob/main/LICENSE": 1,
+    "https://github.com/sympy/sympy/blob/master/LICENSE": 1
+  },
+  "metadata_skill_author_counts": {
+    "(missing)": 42,
+    "AHK Strategies (ashrafkahoush-ux)": 2,
+    "AI Skills Collection maintainers": 1,
+    "AI Skills Collection maintainers with recorded upstream sources": 11,
+    "BGPT": 1,
+    "CardiacNexus maintainers": 2,
+    "Clayton Young / Superior Byte Works, LLC (@borealBytes)": 2,
+    "Jeremy Leipzig": 1,
+    "K-Dense Inc.": 81,
+    "Kuan-lin Huang": 2,
+    "Orchestra Research": 1
+  },
+  "provenance_confidence_counts": {
+    "recorded_author_only": 93,
+    "recorded_local": 12,
+    "recorded_source_field": 11,
+    "unknown": 30
+  },
+  "provenance_counts": {
+    "adapted": 11,
+    "local": 4,
+    "unknown": 123,
+    "user-authored": 8
+  },
+  "rows_with_license_files_count": 12,
+  "rows_with_urls_count": 68,
+  "scope": "active_and_non_archived",
+  "skill_count": 146,
+  "skills": [
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "codex-workflow-protocol",
+      "path": "skills/core/codex-system/codex-workflow-protocol",
+      "provenance": "user-authored",
+      "provenance_confidence": "recorded_local",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "Complete terms in LICENSE.txt",
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "metadata_skill_author": "",
+      "name": "mcp-builder",
+      "path": "skills/core/codex-system/mcp-builder",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 4,
+      "urls": [
+        "https://modelcontextprotocol.io/sitemap.xml",
+        "https://modelcontextprotocol.io/specification/draft.md",
+        "https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md",
+        "https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/README.md"
+      ]
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "project-skill-installer",
+      "path": "skills/core/codex-system/project-skill-installer",
+      "provenance": "local",
+      "provenance_confidence": "recorded_local",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "AI Skills Collection maintainers with recorded upstream sources",
+      "name": "skill-library-analysis",
+      "path": "skills/core/codex-system/skill-library-analysis",
+      "provenance": "adapted",
+      "provenance_confidence": "recorded_source_field",
+      "source_fields": {
+        "source_commit": "69f2ab2f5e18681cb809e8e123da6b83ec50f5fc",
+        "source_url": "https://github.com/davidliuk/graph-of-skills"
+      },
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "metadata_skill_author": "",
+      "name": "imagegen",
+      "path": "skills/core/codex-system/system-skills/imagegen",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 1,
+      "urls": [
+        "https://platform.openai.com/api-keys"
+      ]
+    },
+    {
+      "license": "",
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "metadata_skill_author": "",
+      "name": "openai-docs",
+      "path": "skills/core/codex-system/system-skills/openai-docs",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 2,
+      "urls": [
+        "https://developers.openai.com/api/docs/guides/latest-model.md",
+        "https://developers.openai.com/mcp"
+      ]
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "plugin-creator",
+      "path": "skills/core/codex-system/system-skills/plugin-creator",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [
+        "license.txt"
+      ],
+      "metadata_skill_author": "",
+      "name": "skill-creator",
+      "path": "skills/core/codex-system/system-skills/skill-creator",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "metadata_skill_author": "",
+      "name": "skill-installer",
+      "path": "skills/core/codex-system/system-skills/skill-installer",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 4,
+      "urls": [
+        "https://github.com/<owner",
+        "https://github.com/openai/skills/tree/main/skills/.curated",
+        "https://github.com/openai/skills/tree/main/skills/.experimental",
+        "https://github.com/openai/skills/tree/main/skills/.system"
+      ]
+    },
+    {
+      "license": "Apache-2.0",
+      "license_files": [],
+      "metadata_skill_author": "CardiacNexus maintainers",
+      "name": "bayesian-ppl-diagnostics",
+      "path": "skills/domains/bayesian/bayesian-ppl-diagnostics",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "Apache License, Version 2.0",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "pymc",
+      "path": "skills/domains/bayesian/pymc",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT License",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "simpy",
+      "path": "skills/domains/bayesian/simpy",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT License",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "statistical-analysis",
+      "path": "skills/domains/bayesian/statistical-analysis",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "BSD License",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "statsmodels",
+      "path": "skills/domains/bayesian/statsmodels",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "Unknown",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "biopython",
+      "path": "skills/domains/bioinformatics/biology-toolkits/biopython",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 3,
+      "urls": [
+        "https://biopython.org/docs/latest/",
+        "https://biopython.org/docs/latest/Tutorial/",
+        "https://github.com/biopython/biopython"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "esm",
+      "path": "skills/domains/bioinformatics/biology-toolkits/esm",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 7,
+      "urls": [
+        "https://bit.ly/3FKwcWd",
+        "https://forge.evolutionaryscale.ai",
+        "https://github.com/evolutionaryscale/esm",
+        "https://responsiblebiodesign.ai/",
+        "https://www.evolutionaryscale.ai/blog/esm-cambrian",
+        "https://www.evolutionaryscale.ai/blog/esm3-release",
+        "https://www.science.org/doi/10.1126/science.ads0018"
+      ]
+    },
+    {
+      "license": "GPL-3.0 license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "etetoolkit",
+      "path": "skills/domains/bioinformatics/biology-toolkits/etetoolkit",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "Unknown",
+      "license_files": [],
+      "metadata_skill_author": "Kuan-lin Huang",
+      "name": "phylogenetics",
+      "path": "skills/domains/bioinformatics/biology-toolkits/phylogenetics",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 9,
+      "urls": [
+        "http://etetoolkit.org/",
+        "http://www.iqtree.org/",
+        "http://www.microbesonline.org/fasttree/",
+        "https://itol.embl.de/",
+        "https://mafft.cbrc.jp/alignment/software/",
+        "https://tree.bio.ed.ac.uk/software/figtree/",
+        "https://vicfero.github.io/trimal/",
+        "https://www.drive5.com/muscle/",
+        "https://www.iqtree.org/workshop/molevol2022"
+      ]
+    },
+    {
+      "license": "BSD-3-Clause license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "scikit-bio",
+      "path": "skills/domains/bioinformatics/biology-toolkits/scikit-bio",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 3,
+      "urls": [
+        "https://forum.qiime2.org",
+        "https://github.com/scikit-bio/scikit-bio",
+        "https://scikit.bio/docs/latest/"
+      ]
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "bioinformatics-database-retrieval",
+      "path": "skills/domains/bioinformatics/databases/bioinformatics-database-retrieval",
+      "provenance": "local",
+      "provenance_confidence": "recorded_local",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "pysam",
+      "path": "skills/domains/bioinformatics/genomics-io/pysam",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 1,
+      "urls": [
+        "https://pysam.readthedocs.io/"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "Jeremy Leipzig",
+      "name": "tiledbvcf",
+      "path": "skills/domains/bioinformatics/genomics-io/tiledbvcf",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 4,
+      "urls": [
+        "https://cloud.tiledb.com",
+        "https://cloud.tiledb.com/academy/",
+        "https://cloud.tiledb.com/academy/structure/life-sciences/population-genomics/",
+        "https://github.com/TileDB-Inc/TileDB-VCF"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "zarr-python",
+      "path": "skills/domains/bioinformatics/genomics-io/zarr-python",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 7,
+      "urls": [
+        "https://docs.dask.org/",
+        "https://docs.xarray.dev/",
+        "https://github.com/zarr-developers/zarr-python",
+        "https://gitter.im/zarr-developers/community",
+        "https://numcodecs.readthedocs.io/",
+        "https://zarr-specs.readthedocs.io/",
+        "https://zarr.readthedocs.io/"
+      ]
+    },
+    {
+      "license": "BSD-3-Clause license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "arboreto",
+      "path": "skills/domains/bioinformatics/omics-analysis/arboreto",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "BSD license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "deeptools",
+      "path": "skills/domains/bioinformatics/omics-analysis/deeptools",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "BSD-3-Clause license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "flowio",
+      "path": "skills/domains/bioinformatics/omics-analysis/flowio",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "BSD-2-Clause license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "geniml",
+      "path": "skills/domains/bioinformatics/omics-analysis/geniml",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 4,
+      "urls": [
+        "https://docs.bedbase.org/geniml/",
+        "https://github.com/databio/geniml",
+        "https://github.com/databio/geniml.git",
+        "https://github.com/facebookresearch/StarSpace"
+      ]
+    },
+    {
+      "license": "Unknown",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "gtars",
+      "path": "skills/domains/bioinformatics/omics-analysis/gtars",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "https://github.com/biodatageeks/polars-bio/blob/main/LICENSE",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "polars-bio",
+      "path": "skills/domains/bioinformatics/omics-analysis/polars-bio",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "pydeseq2",
+      "path": "skills/domains/bioinformatics/omics-analysis/pydeseq2",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 2,
+      "urls": [
+        "https://github.com/owkin/PyDESeq2",
+        "https://pydeseq2.readthedocs.io"
+      ]
+    },
+    {
+      "license": "Unknown",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "dnanexus-integration",
+      "path": "skills/domains/bioinformatics/platforms/dnanexus-integration",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 3,
+      "urls": [
+        "http://autodoc.dnanexus.com/",
+        "https://documentation.dnanexus.com/",
+        "https://github.com/dnanexus/dx-toolkit"
+      ]
+    },
+    {
+      "license": "Apache-2.0 license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "lamindb",
+      "path": "skills/domains/bioinformatics/platforms/lamindb",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 5,
+      "urls": [
+        "https://docs.lamin.ai",
+        "https://docs.lamin.ai/api",
+        "https://docs.lamin.ai/faq",
+        "https://docs.lamin.ai/tutorial",
+        "https://github.com/laminlabs/lamindb"
+      ]
+    },
+    {
+      "license": "Unknown",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "latchbio-integration",
+      "path": "skills/domains/bioinformatics/platforms/latchbio-integration",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 4,
+      "urls": [
+        "https://blog.latch.bio",
+        "https://docs.latch.bio",
+        "https://docs.latch.bio/api/latch.html",
+        "https://github.com/latchbio/latch"
+      ]
+    },
+    {
+      "license": "BSD-3-Clause license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "anndata",
+      "path": "skills/domains/bioinformatics/single-cell/anndata",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 4,
+      "urls": [
+        "https://anndata.readthedocs.io/",
+        "https://github.com/scverse/anndata",
+        "https://scanpy.readthedocs.io/",
+        "https://scverse.org/"
+      ]
+    },
+    {
+      "license": "SD-3-Clause license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "scanpy",
+      "path": "skills/domains/bioinformatics/single-cell/scanpy",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 3,
+      "urls": [
+        "https://scanpy-tutorials.readthedocs.io/",
+        "https://scanpy.readthedocs.io/",
+        "https://scverse.org/"
+      ]
+    },
+    {
+      "license": "BSD-3-Clause",
+      "license_files": [],
+      "metadata_skill_author": "Kuan-lin Huang",
+      "name": "scvelo",
+      "path": "skills/domains/bioinformatics/single-cell/scvelo",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 6,
+      "urls": [
+        "http://velocyto.org/",
+        "https://cellrank.readthedocs.io/",
+        "https://dynamo-release.readthedocs.io/",
+        "https://github.com/theislab/scvelo",
+        "https://scvelo.readthedocs.io/",
+        "https://scvelo.readthedocs.io/tutorials/"
+      ]
+    },
+    {
+      "license": "BSD-3-Clause license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "scvi-tools",
+      "path": "skills/domains/bioinformatics/single-cell/scvi-tools",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 3,
+      "urls": [
+        "https://docs.scvi-tools.org/en/stable/",
+        "https://docs.scvi-tools.org/en/stable/api/index.html",
+        "https://docs.scvi-tools.org/en/stable/tutorials/index.html"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "neuropixels-analysis",
+      "path": "skills/domains/bioinformatics/specialized/neuropixels-analysis",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 7,
+      "urls": [
+        "https://github.com/AllenInstitute/ecephys_spike_sorting",
+        "https://github.com/Julie-Fabre/bombcell",
+        "https://github.com/MouseLand/Kilosort",
+        "https://github.com/SpikeAgent/SpikeAgent",
+        "https://github.com/int-brain-lab/ibl-neuropixel",
+        "https://spikeinterface.readthedocs.io/",
+        "https://spikeinterface.readthedocs.io/en/stable/how_to/analyze_neuropixels.html"
+      ]
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "cardiac-mri",
+      "path": "skills/domains/medical-imaging/cardiac-mri",
+      "provenance": "user-authored",
+      "provenance_confidence": "recorded_local",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "Apache-2.0",
+      "license_files": [],
+      "metadata_skill_author": "CardiacNexus maintainers",
+      "name": "medical-imaging-classical-features",
+      "path": "skills/domains/medical-imaging/medical-imaging-classical-features",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 1,
+      "urls": [
+        "https://theibsi.github.io/"
+      ]
+    },
+    {
+      "license": "Apache-2.0",
+      "license_files": [],
+      "metadata_skill_author": "AI Skills Collection maintainers",
+      "name": "medical-imaging-deep-learning",
+      "path": "skills/domains/medical-imaging/medical-imaging-deep-learning",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "medical-imaging-terminology-measurement",
+      "path": "skills/domains/medical-imaging/medical-imaging-terminology-measurement",
+      "provenance": "user-authored",
+      "provenance_confidence": "recorded_local",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "GPL-2.0 license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "pathml",
+      "path": "skills/domains/medical-imaging/pathml",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "https://github.com/pydicom/pydicom/blob/main/LICENSE",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "pydicom",
+      "path": "skills/domains/medical-imaging/pydicom",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 5,
+      "urls": [
+        "https://pydicom.github.io/pydicom/dev/",
+        "https://pydicom.github.io/pydicom/dev/auto_examples/index.html",
+        "https://pydicom.github.io/pydicom/dev/guides/user/index.html",
+        "https://pydicom.github.io/pydicom/dev/reference/index.html",
+        "https://pydicom.github.io/pydicom/dev/tutorials/index.html"
+      ]
+    },
+    {
+      "license": "MIT License",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "clinical-decision-support",
+      "path": "skills/domains/medicine-clinical/clinical-decision-support",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "clinical-guideline-checking",
+      "path": "skills/domains/medicine-clinical/clinical-guideline-checking",
+      "provenance": "user-authored",
+      "provenance_confidence": "recorded_local",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT License",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "clinical-reports",
+      "path": "skills/domains/medicine-clinical/clinical-reports",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "medical-literature-evidence-review",
+      "path": "skills/domains/medicine-clinical/medical-literature-evidence-review",
+      "provenance": "user-authored",
+      "provenance_confidence": "recorded_local",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "medical-safety-boundaries",
+      "path": "skills/domains/medicine-clinical/medical-safety-boundaries",
+      "provenance": "user-authored",
+      "provenance_confidence": "recorded_local",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "neurokit2",
+      "path": "skills/domains/medicine-clinical/neurokit2",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 4,
+      "urls": [
+        "https://doi.org/10.3758/s13428-020-01516-y",
+        "https://github.com/neuropsychology/NeuroKit",
+        "https://github.com/neuropsychology/NeuroKit/zipball/dev",
+        "https://neuropsychology.github.io/NeuroKit/"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "pyhealth",
+      "path": "skills/domains/medicine-clinical/pyhealth",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 2,
+      "urls": [
+        "https://github.com/sunlabuiuc/PyHealth/issues",
+        "https://pyhealth.readthedocs.io/"
+      ]
+    },
+    {
+      "license": "GPL-3.0 license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "scikit-survival",
+      "path": "skills/domains/medicine-clinical/scikit-survival",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 3,
+      "urls": [
+        "https://github.com/sebp/scikit-survival",
+        "https://scikit-survival.readthedocs.io/",
+        "https://scikit-survival.readthedocs.io/en/stable/api/index.html"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "treatment-plans",
+      "path": "skills/domains/medicine-clinical/treatment-plans",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "cardiacnexus-docs-markdoc",
+      "path": "skills/projects/cmr/cardiacnexus-docs-markdoc",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "cardiacnexus-feature-contracts",
+      "path": "skills/projects/cmr/cardiacnexus-feature-contracts",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "cardiacnexus-pipeline-refactor",
+      "path": "skills/projects/cmr/cardiacnexus-pipeline-refactor",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "cardiacnexus-strain-registration",
+      "path": "skills/projects/cmr/cardiacnexus-strain-registration",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "latex-posters",
+      "path": "skills/science/communication/latex-posters",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 3,
+      "urls": [
+        "https://doi.org/10.1234/paper}\\\\",
+        "https://github.com/username/project}",
+        "https://webaim.org/resources/contrastchecker/"
+      ]
+    },
+    {
+      "license": "Unknown",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "paper-2-web",
+      "path": "skills/science/communication/paper-2-web",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 2,
+      "urls": [
+        "https://github.com/YuhangChen1/Paper2All",
+        "https://github.com/YuhangChen1/Paper2All.git"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "pptx-posters",
+      "path": "skills/science/communication/pptx-posters",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "scientific-schematics",
+      "path": "skills/science/communication/scientific-schematics",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 7,
+      "urls": [
+        "http://www.consort-statement.org/consort-statement/flow-diagram",
+        "https://matplotlib.org/",
+        "https://networkx.org/documentation/",
+        "https://openrouter.ai/keys",
+        "https://schemdraw.readthedocs.io/",
+        "https://www.nature.com/nature/for-authors/final-submission",
+        "https://www.science.org/content/page/instructions-preparing-initial-manuscript"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "scientific-slides",
+      "path": "skills/science/communication/scientific-slides",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 1,
+      "urls": [
+        "https://openrouter.ai/keys"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "scientific-visualization",
+      "path": "skills/science/communication/scientific-visualization",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT",
+      "license_files": [],
+      "metadata_skill_author": "Orchestra Research",
+      "name": "arxiv-database",
+      "path": "skills/science/discovery/arxiv-database",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 3,
+      "urls": [
+        "http://arxiv.org/abs/2309.10668v1",
+        "http://arxiv.org/pdf/2309.10668v1",
+        "https://arxiv.org/abs/2309.10668"
+      ]
+    },
+    {
+      "license": "MIT",
+      "license_files": [],
+      "metadata_skill_author": "BGPT",
+      "name": "bgpt-paper-search",
+      "path": "skills/science/discovery/bgpt-paper-search",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 2,
+      "urls": [
+        "https://bgpt.pro/mcp",
+        "https://bgpt.pro/mcp/sse"
+      ]
+    },
+    {
+      "license": "Unknown",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "biorxiv-database",
+      "path": "skills/science/discovery/biorxiv-database",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 4,
+      "urls": [
+        "https://doi.org/10.1101/2024.01.15.123456",
+        "https://www.biorxiv.org/content/",
+        "https://www.biorxiv.org/content/10.1101/2024.01.15.123456v1",
+        "https://www.biorxiv.org/content/10.1101/2024.01.15.123456v1.full.pdf"
+      ]
+    },
+    {
+      "license": "MIT License",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "citation-management",
+      "path": "skills/science/discovery/citation-management",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 13,
+      "urls": [
+        "http://www.bibtex.org/",
+        "http://www.bibtex.org/Format/",
+        "https://api.crossref.org/",
+        "https://api.datacite.org/",
+        "https://arxiv.org/help/api/",
+        "https://doi.org/",
+        "https://meshb.nlm.nih.gov/search",
+        "https://pubmed.ncbi.nlm.nih.gov/",
+        "https://pubmed.ncbi.nlm.nih.gov/advanced/",
+        "https://scholar.google.com/",
+        "https://www.nature.com/articles/s41586-021-03819-2",
+        "https://www.ncbi.nlm.nih.gov/books/NBK25501/",
+        "https://www.overleaf.com/learn/latex/Bibliography_management"
+      ]
+    },
+    {
+      "license": "Unknown",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "openalex-database",
+      "path": "skills/science/discovery/openalex-database",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 5,
+      "urls": [
+        "https://doi.org/10.1038/s41586-021-03819-2",
+        "https://doi.org/10.1126/science.abc1234",
+        "https://doi.org/10.7717/peerj.4375",
+        "https://orcid.org/0000-0003-1613-5981",
+        "https://ror.org/02y3ad647"
+      ]
+    },
+    {
+      "license": "Unknown",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "pubmed-database",
+      "path": "skills/science/discovery/pubmed-database",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 3,
+      "urls": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/",
+        "https://pubmed.ncbi.nlm.nih.gov/help/",
+        "https://www.ncbi.nlm.nih.gov/books/NBK25501/"
+      ]
+    },
+    {
+      "license": "MIT License",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "pyzotero",
+      "path": "skills/science/discovery/pyzotero",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 3,
+      "urls": [
+        "https://www.zotero.org/settings/keys",
+        "https://www.zotero.org/settings/keys/new",
+        "https://www.zotero.org/support/dev/web_api/v3/start"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "research-lookup",
+      "path": "skills/science/discovery/research-lookup",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 1,
+      "urls": [
+        "https://api.parallel.ai"
+      ]
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "AI Skills Collection maintainers with recorded upstream sources",
+      "name": "valyu-scientific-search",
+      "path": "skills/science/discovery/valyu-scientific-search",
+      "provenance": "adapted",
+      "provenance_confidence": "recorded_source_field",
+      "source_fields": {
+        "source_commit": "20b3d503700656f847e6de873753335bf90e63e3",
+        "source_url": "https://github.com/yorkeccak/scientific-skills"
+      },
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "AHK Strategies (ashrafkahoush-ux)",
+      "name": "consciousness-council",
+      "path": "skills/science/ideation/consciousness-council",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 2,
+      "urls": [
+        "https://ahkstrategies.net",
+        "https://themindbook.app"
+      ]
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "AI Skills Collection maintainers with recorded upstream sources",
+      "name": "experiment-execution",
+      "path": "skills/science/ideation/experiment-execution",
+      "provenance": "adapted",
+      "provenance_confidence": "recorded_source_field",
+      "source_fields": {
+        "source_commit": "e291e7dc7ca268b2de7e1a9cf23bc2eef5dc0651",
+        "source_url": "https://github.com/Imbad0202/experiment-agent"
+      },
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "hypogenic",
+      "path": "skills/science/ideation/hypogenic",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 11,
+      "urls": [
+        "https://aclanthology.org/2024.nlp4science-1.10/",
+        "https://aclanthology.org/2024.nlp4science-1.10/}",
+        "https://arxiv.org/abs/2410.17309",
+        "https://arxiv.org/abs/2410.17309}",
+        "https://arxiv.org/abs/2504.11524",
+        "https://arxiv.org/abs/2504.11524}",
+        "https://github.com/ChicagoHAI/HypoGeniC-datasets.git",
+        "https://github.com/ChicagoHAI/Hypothesis-agent-datasets.git",
+        "https://github.com/ChicagoHAI/hypothesis-generation",
+        "https://github.com/ChicagoHAI/hypothesis-generation/issues",
+        "https://pypi.org/project/hypogenic/"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "hypothesis-generation",
+      "path": "skills/science/ideation/hypothesis-generation",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "scientific-brainstorming",
+      "path": "skills/science/ideation/scientific-brainstorming",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "scientific-critical-thinking",
+      "path": "skills/science/ideation/scientific-critical-thinking",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "AHK Strategies (ashrafkahoush-ux)",
+      "name": "what-if-oracle",
+      "path": "skills/science/ideation/what-if-oracle",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 4,
+      "urls": [
+        "https://ahkstrategies.net",
+        "https://doi.org/10.5281/zenodo.18736841",
+        "https://doi.org/10.5281/zenodo.18807387",
+        "https://themindbook.app"
+      ]
+    },
+    {
+      "license": "Apache-2.0 license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "modal",
+      "path": "skills/tools/ai-ml/modal",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 2,
+      "urls": [
+        "https://modal.com",
+        "https://modal.com/docs"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "pufferlib",
+      "path": "skills/tools/ai-ml/pufferlib",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 2,
+      "urls": [
+        "https://github.com/PufferAI/PufferLib",
+        "https://puffer.ai/docs.html"
+      ]
+    },
+    {
+      "license": "Apache-2.0 license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "pytorch-lightning",
+      "path": "skills/tools/ai-ml/pytorch-lightning",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "stable-baselines3",
+      "path": "skills/tools/ai-ml/stable-baselines3",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "Apache-2.0 license",
+      "license_files": [],
+      "metadata_skill_author": "Clayton Young / Superior Byte Works, LLC (@borealBytes)",
+      "name": "timesfm-forecasting",
+      "path": "skills/tools/ai-ml/timesfm-forecasting",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 7,
+      "urls": [
+        "https://arxiv.org/abs/2310.10688",
+        "https://cloud.google.com/bigquery/docs/timesfm-model",
+        "https://download.pytorch.org/whl/cpu",
+        "https://download.pytorch.org/whl/cu121",
+        "https://github.com/google-research/timesfm",
+        "https://huggingface.co/collections/google/timesfm-release-66e4be5fdb56e960c1e482a6",
+        "https://research.google/blog/a-decoder-only-foundation-model-for-time-series-forecasting/"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "torch-geometric",
+      "path": "skills/tools/ai-ml/torch-geometric",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 5,
+      "urls": [
+        "https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html",
+        "https://github.com/pyg-team/pytorch_geometric",
+        "https://github.com/pyg-team/pytorch_geometric/tree/master/examples",
+        "https://pytorch-geometric.readthedocs.io/",
+        "https://pytorch-geometric.readthedocs.io/en/latest/get_started/introduction.html"
+      ]
+    },
+    {
+      "license": "Apache-2.0 license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "transformers",
+      "path": "skills/tools/ai-ml/transformers",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 1,
+      "urls": [
+        "https://huggingface.co/settings/tokens"
+      ]
+    },
+    {
+      "license": "BSD-3-Clause license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "aeon",
+      "path": "skills/tools/data-science/aeon",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 4,
+      "urls": [
+        "https://github.com/aeon-toolkit/aeon",
+        "https://www.aeon-toolkit.org/",
+        "https://www.aeon-toolkit.org/en/stable/api_reference.html",
+        "https://www.aeon-toolkit.org/en/stable/examples.html"
+      ]
+    },
+    {
+      "license": "BSD-3-Clause license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "dask",
+      "path": "skills/tools/data-science/dask",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "exploratory-data-analysis",
+      "path": "skills/tools/data-science/exploratory-data-analysis",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "BSD-3-Clause license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "geopandas",
+      "path": "skills/tools/data-science/geopandas",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "For MATLAB (https://www.mathworks.com/pricing-licensing.html) and for Octave (GNU General Public License version 3)",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "matlab",
+      "path": "skills/tools/data-science/matlab",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 5,
+      "urls": [
+        "https://docs.octave.org/latest/",
+        "https://octave.org/download",
+        "https://www.mathworks.com/help/matlab/",
+        "https://www.mathworks.com/learn/tutorials/matlab-onramp.html",
+        "https://www.mathworks.com/matlabcentral/fileexchange/"
+      ]
+    },
+    {
+      "license": "3-clause BSD license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "networkx",
+      "path": "skills/tools/data-science/networkx",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 4,
+      "urls": [
+        "https://github.com/networkx/networkx",
+        "https://networkx.org/documentation/latest/",
+        "https://networkx.org/documentation/latest/auto_examples/index.html",
+        "https://networkx.org/documentation/latest/tutorial.html"
+      ]
+    },
+    {
+      "license": "https://github.com/pola-rs/polars/blob/main/LICENSE",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "polars",
+      "path": "skills/tools/data-science/polars",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "Apache-2.0 license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "pymoo",
+      "path": "skills/tools/data-science/pymoo",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 1,
+      "urls": [
+        "https://pymoo.org/"
+      ]
+    },
+    {
+      "license": "BSD-3-Clause license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "scikit-learn",
+      "path": "skills/tools/data-science/scikit-learn",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 4,
+      "urls": [
+        "https://scikit-learn.org/stable/",
+        "https://scikit-learn.org/stable/api/index.html",
+        "https://scikit-learn.org/stable/auto_examples/index.html",
+        "https://scikit-learn.org/stable/user_guide.html"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "shap",
+      "path": "skills/tools/data-science/shap",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 2,
+      "urls": [
+        "https://github.com/slundberg/shap",
+        "https://shap.readthedocs.io/"
+      ]
+    },
+    {
+      "license": "https://github.com/sympy/sympy/blob/master/LICENSE",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "sympy",
+      "path": "skills/tools/data-science/sympy",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 4,
+      "urls": [
+        "https://docs.sympy.org/",
+        "https://docs.sympy.org/latest/reference/index.html",
+        "https://docs.sympy.org/latest/tutorials/intro-tutorial/index.html",
+        "https://github.com/sympy/sympy/tree/master/examples"
+      ]
+    },
+    {
+      "license": "BSD-3-Clause license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "umap-learn",
+      "path": "skills/tools/data-science/umap-learn",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "vaex",
+      "path": "skills/tools/data-science/vaex",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "Proprietary. LICENSE.txt has complete terms",
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "metadata_skill_author": "",
+      "name": "docx",
+      "path": "skills/tools/documents-media/docx",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 1,
+      "urls": [
+        "https://example.com"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "get-available-resources",
+      "path": "skills/tools/documents-media/get-available-resources",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "markitdown",
+      "path": "skills/tools/documents-media/markitdown",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 8,
+      "urls": [
+        "https://github.com/microsoft/markitdown",
+        "https://github.com/microsoft/markitdown.git",
+        "https://openrouter.ai",
+        "https://openrouter.ai/api/v1",
+        "https://openrouter.ai/keys",
+        "https://openrouter.ai/models",
+        "https://pypi.org/project/markitdown/",
+        "https://www.youtube.com/watch?v=VIDEO_ID"
+      ]
+    },
+    {
+      "license": "MIT",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "open-notebook",
+      "path": "skills/tools/documents-media/open-notebook",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 7,
+      "urls": [
+        "http://localhost:5055",
+        "http://localhost:5055/api",
+        "http://localhost:5055/docs",
+        "http://localhost:8502",
+        "https://arxiv.org/abs/2301.00001",
+        "https://github.com/lfnovo/open-notebook",
+        "https://raw.githubusercontent.com/lfnovo/open-notebook/main/docker-compose.yml"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "parallel-web",
+      "path": "skills/tools/documents-media/parallel-web",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 6,
+      "urls": [
+        "https://docs.example.com/api",
+        "https://docs.example.com/api-reference",
+        "https://docs.parallel.ai",
+        "https://example.com/article",
+        "https://paper-url.com",
+        "https://platform.parallel.ai"
+      ]
+    },
+    {
+      "license": "Proprietary. LICENSE.txt has complete terms",
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "metadata_skill_author": "",
+      "name": "pdf",
+      "path": "skills/tools/documents-media/pdf",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "perplexity-search",
+      "path": "skills/tools/documents-media/perplexity-search",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 9,
+      "urls": [
+        "https://docs.litellm.ai/",
+        "https://docs.litellm.ai/docs/providers/openrouter",
+        "https://docs.perplexity.ai/",
+        "https://github.com/BerriAI/litellm",
+        "https://openrouter.ai/account",
+        "https://openrouter.ai/activity",
+        "https://openrouter.ai/docs",
+        "https://openrouter.ai/keys",
+        "https://openrouter.ai/perplexity"
+      ]
+    },
+    {
+      "license": "Proprietary. LICENSE.txt has complete terms",
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "metadata_skill_author": "",
+      "name": "pptx",
+      "path": "skills/tools/documents-media/pptx",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "render-chinese-math-pdf",
+      "path": "skills/tools/documents-media/render-chinese-math-pdf",
+      "provenance": "user-authored",
+      "provenance_confidence": "recorded_local",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "Proprietary. LICENSE.txt has complete terms",
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "metadata_skill_author": "",
+      "name": "xlsx",
+      "path": "skills/tools/documents-media/xlsx",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "brand-creative-assets",
+      "path": "skills/tools/frontend/brand-creative-assets",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "design-system-tokens",
+      "path": "skills/tools/frontend/design-system-tokens",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "figma-design-to-code",
+      "path": "skills/tools/frontend/figma-design-to-code",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "implementation-react-tailwind",
+      "path": "skills/tools/frontend/implementation-react-tailwind",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "motion-interaction",
+      "path": "skills/tools/frontend/motion-interaction",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "product-ux-planning",
+      "path": "skills/tools/frontend/product-ux-planning",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "responsive-accessibility-review",
+      "path": "skills/tools/frontend/responsive-accessibility-review",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "visual-direction",
+      "path": "skills/tools/frontend/visual-direction",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "Complete terms in LICENSE.txt",
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "metadata_skill_author": "",
+      "name": "webapp-testing",
+      "path": "skills/tools/frontend/webapp-testing",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 1,
+      "urls": [
+        "http://localhost:5173"
+      ]
+    },
+    {
+      "license": "Complete terms in LICENSE.txt",
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "metadata_skill_author": "",
+      "name": "canvas-design",
+      "path": "skills/tools/visualization/canvas-design",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "AI Skills Collection maintainers with recorded upstream sources",
+      "name": "d2-diagrams",
+      "path": "skills/tools/visualization/d2-diagrams",
+      "provenance": "adapted",
+      "provenance_confidence": "recorded_source_field",
+      "source_fields": {
+        "source_commit": "5b30a5597f93876295b1ae9567c0e97e87543aa4",
+        "source_url": "https://github.com/RayanAhmed0/D2-Diagram-Skill"
+      },
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "AI Skills Collection maintainers with recorded upstream sources",
+      "name": "drawio-diagrams",
+      "path": "skills/tools/visualization/drawio-diagrams",
+      "provenance": "adapted",
+      "provenance_confidence": "recorded_source_field",
+      "source_fields": {
+        "source_commit": "883b34c8aea72ca7bc978a281061c411bc3e3745",
+        "source_url": "https://github.com/jgraph/drawio-mcp"
+      },
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "AI Skills Collection maintainers with recorded upstream sources",
+      "name": "excalidraw-diagrams",
+      "path": "skills/tools/visualization/excalidraw-diagrams",
+      "provenance": "adapted",
+      "provenance_confidence": "recorded_source_field",
+      "source_fields": {
+        "source_commit": "8646fcc9f74f38539c6cdb4c969723336a96ddcd",
+        "source_url": "https://github.com/coleam00/excalidraw-diagram-skill"
+      },
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "generate-image",
+      "path": "skills/tools/visualization/generate-image",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 2,
+      "urls": [
+        "https://openrouter.ai/keys",
+        "https://openrouter.ai/models"
+      ]
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "infographics",
+      "path": "skills/tools/visualization/infographics",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 1,
+      "urls": [
+        "https://openrouter.ai/keys"
+      ]
+    },
+    {
+      "license": "Apache-2.0",
+      "license_files": [],
+      "metadata_skill_author": "Clayton Young / Superior Byte Works, LLC (@borealBytes)",
+      "name": "markdown-mermaid-writing",
+      "path": "skills/tools/visualization/markdown-mermaid-writing",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 3,
+      "urls": [
+        "https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/",
+        "https://github.com/SuperiorByteWorks-LLC/agent-project",
+        "https://mermaid.js.org/"
+      ]
+    },
+    {
+      "license": "https://github.com/matplotlib/matplotlib/tree/main/LICENSE",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "matplotlib",
+      "path": "skills/tools/visualization/matplotlib",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 4,
+      "urls": [
+        "https://matplotlib.org/",
+        "https://matplotlib.org/cheatsheets/",
+        "https://matplotlib.org/stable/gallery/index.html",
+        "https://matplotlib.org/stable/tutorials/index.html"
+      ]
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "AI Skills Collection maintainers with recorded upstream sources",
+      "name": "plantuml-diagrams",
+      "path": "skills/tools/visualization/plantuml-diagrams",
+      "provenance": "adapted",
+      "provenance_confidence": "recorded_source_field",
+      "source_fields": {
+        "source_commit": "07fe0ade1fc9a0a1e2ae8d64f95aa45cd8882284",
+        "source_url": "https://github.com/Agents365-ai/plantuml-skill"
+      },
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "plotly",
+      "path": "skills/tools/visualization/plotly",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 3,
+      "urls": [
+        "https://community.plotly.com/",
+        "https://plotly.com/python-api-reference/",
+        "https://plotly.com/python/"
+      ]
+    },
+    {
+      "license": "BSD-3-Clause license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "seaborn",
+      "path": "skills/tools/visualization/seaborn",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "Complete terms in LICENSE.txt",
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "metadata_skill_author": "",
+      "name": "theme-factory",
+      "path": "skills/tools/visualization/theme-factory",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT-compatible synthesis plus public-domain style guidance",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "chinese-prose",
+      "path": "skills/writing/core/chinese-prose",
+      "provenance": "local",
+      "provenance_confidence": "recorded_local",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT-compatible synthesis from cited public/academic writing guidance",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "scientific-prose",
+      "path": "skills/writing/core/scientific-prose",
+      "provenance": "local",
+      "provenance_confidence": "recorded_local",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "writing-fidelity",
+      "path": "skills/writing/core/writing-fidelity",
+      "provenance": "user-authored",
+      "provenance_confidence": "recorded_local",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "academic-paper-writer-pro",
+      "path": "skills/writing/research/academic-paper-writer-pro",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 1,
+      "urls": [
+        "https://github.com/tfboy1/academic-paper-writer"
+      ]
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "AI Skills Collection maintainers with recorded upstream sources",
+      "name": "citation-verification",
+      "path": "skills/writing/research/citation-verification",
+      "provenance": "adapted",
+      "provenance_confidence": "recorded_source_field",
+      "source_fields": {
+        "source_commit": "b9deb7077099f56b05c9b6ecea744c2ca0a6d324",
+        "source_url": "https://github.com/serenakeyitan/citation-check-skill"
+      },
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "content-generation",
+      "path": "skills/writing/research/content-generation",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "AI Skills Collection maintainers with recorded upstream sources",
+      "name": "latex-paper-authoring",
+      "path": "skills/writing/research/latex-paper-authoring",
+      "provenance": "adapted",
+      "provenance_confidence": "recorded_source_field",
+      "source_fields": {
+        "source_commit": "d0f106108cb09e448604a56ce973d35b340cf497",
+        "source_url": "https://github.com/yunshenwuchuxun/latex-paper-skills"
+      },
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "literature-review",
+      "path": "skills/writing/research/literature-review",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 10,
+      "urls": [
+        "http://www.prisma-statement.org/",
+        "https://amstar.ca/",
+        "https://apastyle.apa.org/",
+        "https://doi.org/10.xxx/yyy",
+        "https://meshb.nlm.nih.gov/search",
+        "https://pubmed.ncbi.nlm.nih.gov/advanced/",
+        "https://training.cochrane.org/handbook",
+        "https://www.nature.com/nature-portfolio/editorial-policies/reporting-standards",
+        "https://www.ncbi.nlm.nih.gov/books/NBK3827/",
+        "https://www.nlm.nih.gov/bsd/uniform_requirements.html"
+      ]
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "AI Skills Collection maintainers with recorded upstream sources",
+      "name": "nature-manuscript-workflow",
+      "path": "skills/writing/research/nature-manuscript-workflow",
+      "provenance": "adapted",
+      "provenance_confidence": "recorded_source_field",
+      "source_fields": {
+        "source_commit": "44cff42ac22a5ac4dcfb7ba01b2e81c21d689ea6",
+        "source_url": "https://github.com/Boom5426/Nature-Paper-Skills"
+      },
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "Proprietary. LICENSE.txt has complete terms",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "ocr-kb",
+      "path": "skills/writing/research/ocr-kb",
+      "provenance": "unknown",
+      "provenance_confidence": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "AI Skills Collection maintainers with recorded upstream sources",
+      "name": "paper-workflow-orchestrator",
+      "path": "skills/writing/research/paper-workflow-orchestrator",
+      "provenance": "adapted",
+      "provenance_confidence": "recorded_source_field",
+      "source_fields": {
+        "source_commit": "d4529208cda72aa075767611b0265b95b709b550",
+        "source_url": "https://github.com/WUBING2023/PaperSpine"
+      },
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "peer-review",
+      "path": "skills/writing/research/peer-review",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "research-grants",
+      "path": "skills/writing/research/research-grants",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "scholar-evaluation",
+      "path": "skills/writing/research/scholar-evaluation",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 1,
+      "urls": [
+        "https://arxiv.org/abs/2510.16234"
+      ]
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "scientific-writing",
+      "path": "skills/writing/research/scientific-writing",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "MIT license",
+      "license_files": [],
+      "metadata_skill_author": "K-Dense Inc.",
+      "name": "venue-templates",
+      "path": "skills/writing/research/venue-templates",
+      "provenance": "unknown",
+      "provenance_confidence": "recorded_author_only",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 10,
+      "urls": [
+        "https://cvpr.thecvf.com/Conferences/2024/AuthorGuidelines",
+        "https://grants.nih.gov/grants/how-to-apply-application-guide.html",
+        "https://icml.cc/Conferences/2024/StyleAuthorInstructions",
+        "https://neurips.cc/Conferences/2024/CallForPapers",
+        "https://plos.org/resources/for-authors/",
+        "https://science.osti.gov/grants",
+        "https://www.cell.com/author-guidelines",
+        "https://www.nature.com/nature/for-authors",
+        "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=pappg",
+        "https://www.science.org/content/page/instructions-authors"
+      ]
+    }
+  ],
+  "source_field_count": 11
+}

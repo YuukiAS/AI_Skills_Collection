@@ -1,0 +1,775 @@
+{
+  "excluded_sources": [
+    {
+      "decision": "removed",
+      "name": "paper-qa",
+      "reason": "Software/RAG library, not a skill source for this integration.",
+      "remote": "https://github.com/Future-House/paper-qa.git"
+    },
+    {
+      "decision": "skipped",
+      "name": "claude-skill-registry",
+      "reason": "Too large for scratch integration; user accepted skipping it.",
+      "remote": "https://github.com/majiayu000/claude-skill-registry.git"
+    }
+  ],
+  "generated_from": "todo/ scratch clones",
+  "record_count": 33,
+  "records": [
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [
+          ".claude-plugin/plugin.json"
+        ],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "academic-paper-reviewer/SKILL.md",
+          "deep-research/SKILL.md",
+          "academic-paper/SKILL.md",
+          "academic-pipeline/SKILL.md"
+        ],
+        "skill_md_count": 4
+      },
+      "head": "ad0a7759cee9e7d2db5ca7ea1666096dea8e5d3c",
+      "integration_decision": "merge",
+      "integration_target": "paper-workflow-orchestrator; literature-review; peer-review; citation-verification",
+      "license_files": [
+        "LICENSE",
+        "NOTICE.md",
+        "THIRD_PARTY.md"
+      ],
+      "name": "academic-research-skills",
+      "remote": "https://github.com/Imbad0202/academic-research-skills.git",
+      "scratch_path": "todo/academic-research-skills"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "b9deb7077099f56b05c9b6ecea744c2ca0a6d324",
+      "integration_decision": "merge",
+      "integration_target": "citation-verification",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "citation-check-skill",
+      "remote": "https://github.com/serenakeyitan/citation-check-skill.git",
+      "scratch_path": "todo/citation-check-skill"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [
+          ".claude-plugin/plugin.json"
+        ],
+        "readme_skill_or_plugin_wording": false,
+        "sample_skill_paths": [],
+        "skill_md_count": 0
+      },
+      "head": "2694f8d50e03308555089583a36da7d830274572",
+      "integration_decision": "record-only",
+      "integration_target": "plugin-only; future d2-diagrams reference",
+      "license_files": [],
+      "name": "claude-d2-diagrams",
+      "remote": "https://github.com/heathdutton/claude-d2-diagrams.git",
+      "scratch_path": "todo/claude-d2-diagrams"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "plugins/draw-io/skills/draw-io/SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "23b638710f92578deb49bca2a94940fe6492f328",
+      "integration_decision": "merge",
+      "integration_target": "drawio-diagrams",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "claude-drawio-skill",
+      "remote": "https://github.com/little-hands/claude-drawio-skill.git",
+      "scratch_path": "todo/claude-drawio-skill"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [
+          ".claude-plugin/plugin.json"
+        ],
+        "readme_skill_or_plugin_wording": false,
+        "sample_skill_paths": [
+          "skills/mermaid-diagrams/SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "9c7edc930337399359938990c15e23cba826fafb",
+      "integration_decision": "merge",
+      "integration_target": "markdown-mermaid-writing",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "claude-mermaid",
+      "remote": "https://github.com/veelenga/claude-mermaid.git",
+      "scratch_path": "todo/claude-mermaid"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [
+          ".claude-plugin/plugin.json"
+        ],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "skills/plugin-structure/SKILL.md",
+          "skills/obsidian-kb-artifacts/SKILL.md",
+          "skills/zotero-obsidian-bridge/SKILL.md",
+          "skills/nature-polishing/SKILL.md",
+          "skills/post-acceptance/SKILL.md",
+          "skills/publication-chart-skill/SKILL.md",
+          "skills/verification-loop/SKILL.md",
+          "skills/web-design-reviewer/SKILL.md",
+          "skills/obsidian-literature-workflow/SKILL.md",
+          "skills/skill-improver/SKILL.md",
+          "skills/defuddle/SKILL.md",
+          "skills/citation-verification/SKILL.md"
+        ],
+        "skill_md_count": 45
+      },
+      "head": "2f7766fd541a723d4ddc6230b3277f948d61b093",
+      "integration_decision": "merge-selected",
+      "integration_target": "nature-manuscript-workflow; citation-verification; latex-paper-authoring; skill-library-analysis",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "claude-scholar",
+      "remote": "https://github.com/Galaxy-Dawn/claude-scholar.git",
+      "scratch_path": "todo/claude-scholar"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 25,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          ".claude/skills/citation-management/SKILL.md",
+          ".claude/skills/venue-templates/SKILL.md",
+          ".claude/skills/peer-review/SKILL.md",
+          ".claude/skills/scientific-slides/SKILL.md",
+          ".claude/skills/generate-image/SKILL.md",
+          ".claude/skills/scientific-writing/SKILL.md",
+          ".claude/skills/literature-review/SKILL.md",
+          ".claude/skills/paper-2-web/SKILL.md",
+          ".claude/skills/clinical-reports/SKILL.md",
+          ".claude/skills/pptx-posters/SKILL.md",
+          ".claude/skills/research-lookup/SKILL.md",
+          ".claude/skills/latex-posters/SKILL.md"
+        ],
+        "skill_md_count": 84
+      },
+      "head": "44414bded0ea850658aac59c014f3d6bec6d1ca8",
+      "integration_decision": "merge-selected",
+      "integration_target": "existing scientific/writing/database skills; mostly duplicate provenance source",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "claude-scientific-writer",
+      "remote": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
+      "scratch_path": "todo/claude-scientific-writer"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "5b30a5597f93876295b1ae9567c0e97e87543aa4",
+      "integration_decision": "merge",
+      "integration_target": "d2-diagrams",
+      "license_files": [],
+      "name": "D2-Diagram-Skill",
+      "remote": "https://github.com/RayanAhmed0/D2-Diagram-Skill.git",
+      "scratch_path": "todo/D2-Diagram-Skill"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "e13f987306d5cd7a34f541927a3228343dd90e45",
+      "integration_decision": "merge",
+      "integration_target": "markdown-mermaid-writing; d2-diagrams",
+      "license_files": [],
+      "name": "design-doc-mermaid",
+      "remote": "https://github.com/SpillwaveSolutions/design-doc-mermaid.git",
+      "scratch_path": "todo/design-doc-mermaid"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "plugins/claude-code/skills/drawio/SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "883b34c8aea72ca7bc978a281061c411bc3e3745",
+      "integration_decision": "merge",
+      "integration_target": "drawio-diagrams",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "drawio-mcp",
+      "remote": "https://github.com/jgraph/drawio-mcp.git",
+      "scratch_path": "todo/drawio-mcp"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "skills/drawio-skill/SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "e740fb2898c08217952c4337b7f0c89864ce7a7e",
+      "integration_decision": "merge",
+      "integration_target": "drawio-diagrams",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "drawio-skill",
+      "remote": "https://github.com/Agents365-ai/drawio-skill.git",
+      "scratch_path": "todo/drawio-skill"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "8646fcc9f74f38539c6cdb4c969723336a96ddcd",
+      "integration_decision": "merge",
+      "integration_target": "excalidraw-diagrams",
+      "license_files": [],
+      "name": "excalidraw-diagram-skill",
+      "remote": "https://github.com/coleam00/excalidraw-diagram-skill.git",
+      "scratch_path": "todo/excalidraw-diagram-skill"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "e291e7dc7ca268b2de7e1a9cf23bc2eef5dc0651",
+      "integration_decision": "merge",
+      "integration_target": "experiment-execution",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "experiment-agent",
+      "remote": "https://github.com/Imbad0202/experiment-agent.git",
+      "scratch_path": "todo/experiment-agent"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "evaluation/skillsbench/graphskills_assets/bootstrap_skill/SKILL.md",
+          "skills/vector-skills-retriever/SKILL.md",
+          "skills/graph-skills-retriever/SKILL.md"
+        ],
+        "skill_md_count": 3
+      },
+      "head": "69f2ab2f5e18681cb809e8e123da6b83ec50f5fc",
+      "integration_decision": "merge",
+      "integration_target": "skill-library-analysis",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "graph-of-skills",
+      "remote": "https://github.com/davidliuk/graph-of-skills.git",
+      "scratch_path": "todo/graph-of-skills"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [],
+        "skill_md_count": 0
+      },
+      "head": "9c27a524482246aa425bfe8b32e4fba87e4a77ca",
+      "integration_decision": "record-only",
+      "integration_target": "no SKILL.md; possible future knowledge-graph tooling",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "graphify",
+      "remote": "https://github.com/safishamsi/graphify.git",
+      "scratch_path": "todo/graphify"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "skills/kroki-editorial-diagrams/SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "e92889d89e72a3dbb7f06b3a7611403451b0830e",
+      "integration_decision": "merge",
+      "integration_target": "plantuml-diagrams; markdown-mermaid-writing; d2-diagrams",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "kroki-editorial-diagrams",
+      "remote": "https://github.com/LabinatorSolutions/kroki-editorial-diagrams.git",
+      "scratch_path": "todo/kroki-editorial-diagrams"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": false,
+        "sample_skill_paths": [
+          "SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "75fd68be6588de1146e14a278ea2e7565783b410",
+      "integration_decision": "merge-selected",
+      "integration_target": "latex-paper-authoring; render-chinese-math-pdf",
+      "license_files": [],
+      "name": "latex-document-skill",
+      "remote": "https://github.com/ndpvt-web/latex-document-skill.git",
+      "scratch_path": "todo/latex-document-skill"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          ".codex/skills/latex-rhythm-refiner/SKILL.md",
+          ".codex/skills/check-collaborators/SKILL.md",
+          ".codex/skills/collaborating-with-claude/SKILL.md",
+          ".codex/skills/collaborating-with-gemini/SKILL.md",
+          ".codex/skills/arxiv-paper-writer/SKILL.md",
+          ".codex/skills/paper-from-zero/SKILL.md",
+          ".codex/skills/results-backfill/SKILL.md",
+          ".codex/skills/empirical-paper-writer/SKILL.md"
+        ],
+        "skill_md_count": 8
+      },
+      "head": "d0f106108cb09e448604a56ce973d35b340cf497",
+      "integration_decision": "merge",
+      "integration_target": "latex-paper-authoring",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "latex-paper-skills",
+      "remote": "https://github.com/yunshenwuchuxun/latex-paper-skills.git",
+      "scratch_path": "todo/latex-paper-skills"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "18475960526bc0f3a64bced026d11ccce97a521b",
+      "integration_decision": "merge",
+      "integration_target": "literature-review",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "literature-survey-skill",
+      "remote": "https://github.com/SNL-UCSB/literature-survey-skill.git",
+      "scratch_path": "todo/literature-survey-skill"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "bpmn/SKILL.md",
+          "network/SKILL.md",
+          "infographic/SKILL.md",
+          "archimate/SKILL.md",
+          "mindmap/SKILL.md",
+          "architecture/SKILL.md",
+          "infocard/SKILL.md",
+          "iot/SKILL.md",
+          "uml/SKILL.md",
+          "vega/SKILL.md",
+          "cloud/SKILL.md",
+          "graphviz/SKILL.md"
+        ],
+        "skill_md_count": 15
+      },
+      "head": "a3afd455b3ad37c0e71c05fa9407c4ec377226e3",
+      "integration_decision": "merge-selected",
+      "integration_target": "markdown-mermaid-writing; plantuml-diagrams; d2-diagrams",
+      "license_files": [],
+      "name": "markdown-viewer-skills",
+      "remote": "https://github.com/markdown-viewer/skills.git",
+      "scratch_path": "todo/markdown-viewer-skills"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "skills/mermaid-skill/SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "15d09cfff6cf940c2fc51324b57c482f36420f3b",
+      "integration_decision": "merge",
+      "integration_target": "markdown-mermaid-writing",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "mermaid-skill",
+      "remote": "https://github.com/Agents365-ai/mermaid-skill.git",
+      "scratch_path": "todo/mermaid-skill"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "skills/venue/nature-portfolio-playbook/SKILL.md",
+          "skills/research/paper-analyzer/SKILL.md",
+          "skills/research/academic-researcher/SKILL.md",
+          "skills/research/results-analysis/SKILL.md",
+          "skills/review/paper-reviewer/SKILL.md",
+          "skills/core/citation-verifier/SKILL.md",
+          "skills/core/manuscript-optimizer/SKILL.md",
+          "skills/core/scientific-writing/SKILL.md",
+          "skills/core/paper-bootstrap/SKILL.md",
+          "skills/core/results-section-revision/SKILL.md",
+          "skills/core/rebuttal-response/SKILL.md",
+          "skills/core/figure-planner/SKILL.md"
+        ],
+        "skill_md_count": 18
+      },
+      "head": "44cff42ac22a5ac4dcfb7ba01b2e81c21d689ea6",
+      "integration_decision": "merge",
+      "integration_target": "nature-manuscript-workflow; paper-workflow-orchestrator; citation-verification; peer-review",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "Nature-Paper-Skills",
+      "remote": "https://github.com/Boom5426/Nature-Paper-Skills.git",
+      "scratch_path": "todo/Nature-Paper-Skills"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "skills/nature-statistics/SKILL.md",
+          "skills/nature-proposal-writer/SKILL.md",
+          "skills/nature-polishing/SKILL.md",
+          "skills/nature-reviewer/SKILL.md",
+          "skills/nature-experiment-log/SKILL.md",
+          "skills/nature-paper-to-patent/SKILL.md",
+          "skills/nature-response/SKILL.md",
+          "skills/nature-data/SKILL.md",
+          "skills/nature-paper2ppt/SKILL.md",
+          "skills/nature-citation/SKILL.md",
+          "skills/nature-academic-search/SKILL.md",
+          "skills/nature-literature-pipeline/SKILL.md"
+        ],
+        "skill_md_count": 17
+      },
+      "head": "7fcb3f0d03bf6ebb5d443394e59552f176fde25e",
+      "integration_decision": "merge",
+      "integration_target": "nature-manuscript-workflow; scientific-visualization; citation-verification",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "nature-skills",
+      "remote": "https://github.com/Yuan1z0825/nature-skills.git",
+      "scratch_path": "todo/nature-skills"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "8c303a75f99afd95ffa67ad010fad141c24fbe2a",
+      "integration_decision": "merge",
+      "integration_target": "scientific-writing; paper-workflow-orchestrator",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "paper-writing-skill",
+      "remote": "https://github.com/SNL-UCSB/paper-writing-skill.git",
+      "scratch_path": "todo/paper-writing-skill"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": false,
+        "sample_skill_paths": [
+          "skills/papi-verify/SKILL.md",
+          "skills/papi-init/SKILL.md",
+          "skills/papi-ground/SKILL.md",
+          "skills/papi-curate/SKILL.md",
+          "skills/papi-ask/SKILL.md",
+          "skills/papi-compare/SKILL.md",
+          "skills/papi/SKILL.md"
+        ],
+        "skill_md_count": 7
+      },
+      "head": "7b9ab07c11f6ebde5614f023e1df460246f2f8c7",
+      "integration_decision": "merge-selected",
+      "integration_target": "literature-review; citation-verification",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "paperpipe",
+      "remote": "https://github.com/hummat/paperpipe.git",
+      "scratch_path": "todo/paperpipe"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [
+          ".claude-plugin/plugin.json"
+        ],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "src/skill/SKILL.md",
+          "dist/codex/skills/paper-spine/SKILL.md",
+          "dist/openclaw/skills/paper-spine/SKILL.md",
+          "dist/claude/skills/paper-spine/SKILL.md",
+          "dist/hermes/skills/academic-writing/paper-spine/SKILL.md"
+        ],
+        "skill_md_count": 5
+      },
+      "head": "d4529208cda72aa075767611b0265b95b709b550",
+      "integration_decision": "merge",
+      "integration_target": "paper-workflow-orchestrator",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "PaperSpine",
+      "remote": "https://github.com/WUBING2023/PaperSpine.git",
+      "scratch_path": "todo/PaperSpine"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "5580ff786015ee8e9a662dd2fead24e770a6bce4",
+      "integration_decision": "merge",
+      "integration_target": "plantuml-diagrams",
+      "license_files": [],
+      "name": "plantuml",
+      "remote": "https://github.com/SpillwaveSolutions/plantuml.git",
+      "scratch_path": "todo/plantuml"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "skills/plantuml-skill/SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "07fe0ade1fc9a0a1e2ae8d64f95aa45cd8882284",
+      "integration_decision": "merge",
+      "integration_target": "plantuml-diagrams",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "plantuml-skill",
+      "remote": "https://github.com/Agents365-ai/plantuml-skill.git",
+      "scratch_path": "todo/plantuml-skill"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "research-paper-writing/SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "77e7c2c1ba06f7d71844873147665437a03aac1b",
+      "integration_decision": "merge",
+      "integration_target": "scientific-writing; paper-workflow-orchestrator",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "Research-Paper-Writing-Skills",
+      "remote": "https://github.com/Master-cai/Research-Paper-Writing-Skills.git",
+      "scratch_path": "todo/Research-Paper-Writing-Skills"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "skills/citation-management/SKILL.md",
+          "skills/hugging-science/SKILL.md",
+          "skills/modal/SKILL.md",
+          "skills/dnanexus-integration/SKILL.md",
+          "skills/optimize-for-gpu/SKILL.md",
+          "skills/arboreto/SKILL.md",
+          "skills/arbor/SKILL.md",
+          "skills/deepchem/SKILL.md",
+          "skills/simpy/SKILL.md",
+          "skills/exploratory-data-analysis/SKILL.md",
+          "skills/cirq/SKILL.md",
+          "skills/pymatgen/SKILL.md"
+        ],
+        "skill_md_count": 149
+      },
+      "head": "4d97e293dc6f604fb6b63dcd49b9028df413d65b",
+      "integration_decision": "merge-selected",
+      "integration_target": "existing duplicated skills; provenance and selected deltas only",
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "name": "scientific-agent-skills",
+      "remote": "https://github.com/K-Dense-AI/scientific-agent-skills.git",
+      "scratch_path": "todo/scientific-agent-skills"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [
+          ".claude-plugin/plugin.json"
+        ],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "skills/open-targets-search/SKILL.md",
+          "skills/arxiv-search/SKILL.md",
+          "skills/patents-search/SKILL.md",
+          "skills/drug-discovery-search/SKILL.md",
+          "skills/chembl-search/SKILL.md",
+          "skills/biorxiv-search/SKILL.md",
+          "skills/literature-search/SKILL.md",
+          "skills/drug-labels-search/SKILL.md",
+          "skills/medrxiv-search/SKILL.md",
+          "skills/clinical-trials-search/SKILL.md",
+          "skills/biomedical-search/SKILL.md",
+          "skills/drugbank-search/SKILL.md"
+        ],
+        "skill_md_count": 13
+      },
+      "head": "20b3d503700656f847e6de873753335bf90e63e3",
+      "integration_decision": "merge",
+      "integration_target": "valyu-scientific-search",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "scientific-skills",
+      "remote": "https://github.com/yorkeccak/scientific-skills.git",
+      "scratch_path": "todo/scientific-skills"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "df89f35a16f87b1b9812d1aeee43cd8caa91ae13",
+      "integration_decision": "merge-selected",
+      "integration_target": "chinese-prose; scientific-writing",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "Scientific-Writing-zh",
+      "remote": "https://github.com/YuanZHAO321/Scientific-Writing-zh",
+      "scratch_path": "todo/Scientific-Writing-zh"
+    },
+    {
+      "evidence": {
+        "claude_skill_dirs_count": 0,
+        "plugin_manifests": [],
+        "readme_skill_or_plugin_wording": true,
+        "sample_skill_paths": [
+          "SKILL.md"
+        ],
+        "skill_md_count": 1
+      },
+      "head": "43098ddb9e6a6d142218540c114f9ed38922fc42",
+      "integration_decision": "merge",
+      "integration_target": "scientific-visualization; drawio-diagrams",
+      "license_files": [
+        "LICENSE"
+      ],
+      "name": "scipilot-figure-skill",
+      "remote": "https://github.com/Haojae/scipilot-figure-skill.git",
+      "scratch_path": "todo/scipilot-figure-skill"
+    }
+  ]
+}

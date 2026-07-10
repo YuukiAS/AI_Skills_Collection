@@ -36,6 +36,35 @@ This creates `skills/domains/bayesian/mcmc-diagnostics/` with `SKILL.md`, option
 
 Descriptions are the trigger surface. Keep them specific and under the official 1024 character limit; this repo warns above 350 characters. Include when to use the skill, not encyclopedia background. Avoid descriptions that overlap heavily with neighboring skills.
 
+## Provenance Metadata
+
+Every new or imported skill must record where it came from before it is committed.
+Do not infer provenance from package names, docs links, or licenses after the fact.
+
+For original local work:
+
+```yaml
+provenance: user-authored
+metadata:
+  skill-author: AI Skills Collection maintainers
+```
+
+For a copied, cloned, or adapted external skill:
+
+```yaml
+provenance: external
+source_url: https://github.com/<owner>/<repo>
+source_commit: <full commit sha or release tag>
+source_license: <license id or URL>
+adaptation_notes: <short note on local changes>
+metadata:
+  skill-author: <upstream author or organization>
+```
+
+If the exact source is not known, keep `provenance: unknown` and add evidence later
+instead of guessing. Run `python3 scripts/audit_skill_provenance.py --write` to
+refresh the local audit in `docs/SKILL_PROVENANCE.md`.
+
 ## Domain Knowledge
 
 Do not delete valuable long knowledge just to shrink a skill. Move it into `references/` and link to it from `SKILL.md` with clear conditions.
