@@ -136,6 +136,35 @@ python3 -m pip install InquirerPy
 
 Without InquirerPy it prints equivalent non-interactive commands.
 
+## Refresh Existing Installs
+
+Every managed install writes `.ai-skills-collection-manifest.json`. Use
+`ai-skills update` to replay that manifest after pulling a newer
+AI_Skills_Collection checkout:
+
+```bash
+git -C /path/to/AI_Skills_Collection pull --ff-only
+ai-skills update --manifest /path/to/project/.agents/skills/.ai-skills-collection-manifest.json --dry-run
+ai-skills update --manifest /path/to/project/.agents/skills/.ai-skills-collection-manifest.json
+```
+
+For several managed installs, prefer explicit Codex home or repo roots instead
+of a broad home directory:
+
+```bash
+ai-skills update --scan-root /path/to/codex-home --scan-root /path/to/repo --dry-run --json
+ai-skills update --scan-root /path/to/codex-home --scan-root /path/to/repo
+```
+
+The update command reuses the previous target, project path, selected
+profiles/domains/skills, install mode, AGENTS.md setting, and managed-prune
+policy. For `codex-home` manifests it derives the correct `CODEX_HOME` from the
+manifest's `skills_root`, so it can refresh multiple Codex homes without relying
+on the caller's current environment variable. `--scan-root` uses a default
+directory depth of 4 so broad roots do not traverse caches, sessions, or data
+trees; use `--scan-depth` only when manifests live deeper than the normal
+`<repo>/.agents/skills/` layout.
+
 ## Symlink Vs Copy
 
 Use `--mode symlink` for central-library development and easy updates. Use `--mode copy` when symlinks are unreliable, especially on Windows-mounted drives.

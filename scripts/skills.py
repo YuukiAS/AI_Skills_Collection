@@ -413,7 +413,16 @@ def install_kind(args: argparse.Namespace) -> str:
     return "mixed:" + "+".join(parts) if len(parts) > 1 else (parts[0] if parts else "explicit")
 
 
-def command_install(args: argparse.Namespace) -> int:
+def install_request(args: argparse.Namespace) -> dict[str, Any]:
+    return {
+        "profiles": list(args.profile or []),
+        "domains": list(args.domain or []),
+        "categories": list(args.category or []),
+        "skills": list(args.skill or []),
+    }
+
+
+def install_result(args: argparse.Namespace) -> dict[str, Any]:
     if not (args.profile or args.domain or args.category or args.skill):
         raise SystemExit("install requires --profile, --domain, --category, or --skill")
     records = select_records(args.profile, args.domain, args.category, args.skill)
@@ -486,6 +495,7 @@ def command_install(args: argparse.Namespace) -> int:
         "skills_root": str(skills_root),
         "agents_md_managed": bool(args.write_agents_md and args.target == "repo"),
         "prune_managed": bool(args.prune_managed),
+        "install_request": install_request(args),
         "target_info": target_info,
         "audit": audit,
         "installed_skills": installed,
@@ -496,12 +506,24 @@ def command_install(args: argparse.Namespace) -> int:
 
     assert_collection_unchanged(collection_status_before)
 
-    if args.json:
-        print_json({"dry_run": args.dry_run, "manifest": manifest, "removed": removed})
-        return 0
+    return {
+        "dry_run": args.dry_run,
+        "manifest": manifest,
+        "manifest_path": str(manifest_path),
+        "removed": removed,
+        "output_warnings": output_warnings,
+    }
+
+
+def print_install_result(result: dict[str, Any], args: argparse.Namespace) -> None:
+    manifest = result["manifest"]
+    manifest_path = result["manifest_path"]
+    removed = result["removed"]
+    output_warnings = result["output_warnings"]
     print(f"target: {args.target}")
-    print(f"skills root: {skills_root}")
-    print(f"selected skills: {len(records)}")
+    print(f"skills root: {manifest['skills_root']}")
+    print(f"selected skills: {len(manifest['installed_skills'])}")
+    modes = manifest.get("install_mode_counts", {})
     print(f"mode: {args.mode} ({'dry run' if args.dry_run else ', '.join(f'{k}={v}' for k, v in modes.items())})")
     print(f"manifest: {manifest_path} ({'would write' if args.dry_run else 'written'})")
     if args.write_agents_md and args.target == "repo":
@@ -510,8 +532,244 @@ def command_install(args: argparse.Namespace) -> int:
         print(f"pruned managed skills: {', '.join(removed)}")
     for warning in output_warnings:
         print(f"WARNING: {warning}")
-    for warning in audit["warnings"]:
+    for warning in manifest["audit"]["warnings"]:
         print(f"WARNING: {warning}")
+
+
+def command_install(args: argparse.Namespace) -> int:
+    result = install_result(args)
+    if args.json:
+        print_json({"dry_run": result["dry_run"], "manifest": result["manifest"], "removed": result["removed"]})
+        return 0
+    print_install_result(result, args)
+    return 0
+
+
+def request_from_manifest(manifest: dict[str, Any]) -> tuple[dict[str, list[str]], list[str]]:
+    warnings: list[str] = []
+    request = manifest.get("install_request")
+    if isinstance(request, dict):
+        return (
+            {
+                "profiles": [str(item) for item in request.get("profiles", [])],
+                "domains": [str(item) for item in request.get("domains", [])],
+                "categories": [str(item) for item in request.get("categories", [])],
+                "skills": [str(item) for item in request.get("skills", [])],
+            },
+            warnings,
+        )
+
+    parsed = {"profiles": [], "domains": [], "categories": [], "skills": []}
+    install_kind_text = str(manifest.get("install_kind") or "")
+    kind_parts = install_kind_text.removeprefix("mixed:").split("+") if install_kind_text else []
+    for part in kind_parts:
+        if part.startswith("profile:"):
+            parsed["profiles"].append(part.split(":", 1)[1])
+        elif part.startswith("domain:"):
+            parsed["domains"].append(part.split(":", 1)[1])
+        elif part.startswith("category:"):
+            parsed["categories"].extend(item for item in part.split(":", 1)[1].split(",") if item)
+        elif part == "skills":
+            parsed["skills"].extend(str(item.get("path") or item.get("name")) for item in manifest.get("installed_skills", []) if item.get("path") or item.get("name"))
+
+    if not any(parsed.values()):
+        parsed["skills"].extend(str(item.get("path") or item.get("name")) for item in manifest.get("installed_skills", []) if item.get("path") or item.get("name"))
+    if not any(parsed.values()):
+        raise SystemExit("manifest does not contain a reusable install request or installed skills")
+    warnings.append("manifest has no install_request; reconstructed update selection from legacy install_kind/installed_skills")
+    return parsed, warnings
+
+
+def manifest_to_install_args(manifest_path: Path, args: argparse.Namespace) -> tuple[argparse.Namespace, list[str], str | None]:
+    manifest = load_manifest(manifest_path)
+    if not manifest:
+        raise SystemExit(f"missing or empty manifest: {manifest_path}")
+    request, warnings = request_from_manifest(manifest)
+    target = str(manifest.get("target") or "")
+    if target not in {"repo", "user", "codex-home"}:
+        raise SystemExit(f"{manifest_path}: unsupported target in manifest: {target or '(missing)'}")
+
+    project = str(manifest.get("project_path") or "") if target == "repo" else ""
+    if target == "repo" and not project:
+        raise SystemExit(f"{manifest_path}: repo target manifest is missing project_path")
+
+    temporary_codex_home: str | None = None
+    if target == "codex-home":
+        skills_root = Path(str(manifest.get("skills_root") or ""))
+        if skills_root.name != "skills":
+            raise SystemExit(f"{manifest_path}: codex-home manifest has invalid skills_root: {skills_root}")
+        temporary_codex_home = str(skills_root.parent)
+
+    install_args = argparse.Namespace(
+        target=target,
+        project=project,
+        profile=request["profiles"],
+        domain=request["domains"],
+        category=request["categories"],
+        skill=request["skills"],
+        mode=str(manifest.get("install_mode_requested") or "symlink"),
+        dry_run=args.dry_run,
+        yes=True,
+        prune_managed=bool(manifest.get("prune_managed", False)),
+        write_agents_md=bool(manifest.get("agents_md_managed", False)),
+        json=True,
+    )
+    return install_args, warnings, temporary_codex_home
+
+
+def find_manifests(scan_roots: list[str], max_depth: int = 4) -> list[Path]:
+    manifests: list[Path] = []
+    seen: set[Path] = set()
+    skipped_dir_names = {
+        ".cache",
+        ".git",
+        ".codex-homes",
+        ".mypy_cache",
+        ".pytest_cache",
+        ".ruff_cache",
+        "__pycache__",
+        "build",
+        "cache",
+        "dist",
+        "node_modules",
+        "plugins",
+        "sessions",
+        "target",
+        "venv",
+        ".venv",
+    }
+    for raw in scan_roots:
+        root = normalize_project_path(raw)
+        if str(root).startswith("/nas/") or root == Path("/nas"):
+            raise SystemExit(f"refusing to scan /nas path: {root}")
+        if root.is_file() and root.name == MANIFEST_NAME:
+            candidates = [root]
+        elif root.exists():
+            candidates = []
+            root_parts = len(root.parts)
+            for current, dirnames, filenames in os.walk(root, followlinks=False):
+                current_path = Path(current)
+                depth = len(current_path.parts) - root_parts
+                dirnames[:] = [
+                    dirname
+                    for dirname in dirnames
+                    if dirname not in skipped_dir_names and not dirname.endswith(".egg-info")
+                ]
+                if depth >= max_depth:
+                    dirnames[:] = []
+                if MANIFEST_NAME in filenames:
+                    candidates.append(current_path / MANIFEST_NAME)
+            candidates.sort()
+        else:
+            raise SystemExit(f"scan root does not exist: {root}")
+        for candidate in candidates:
+            try:
+                data = json.loads(candidate.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                continue
+            if data.get("target") not in {"repo", "user", "codex-home"}:
+                continue
+            skills_root = str(data.get("skills_root") or "")
+            if skills_root.startswith("/nas/") or skills_root == "/nas":
+                continue
+            resolved = candidate.resolve()
+            if resolved not in seen:
+                manifests.append(resolved)
+                seen.add(resolved)
+    return manifests
+
+
+def run_manifest_update(manifest_path: Path, args: argparse.Namespace) -> dict[str, Any]:
+    install_args, warnings, temporary_codex_home = manifest_to_install_args(manifest_path, args)
+    old_codex_home = os.environ.get("CODEX_HOME")
+    if temporary_codex_home:
+        os.environ["CODEX_HOME"] = temporary_codex_home
+    try:
+        result = install_result(install_args)
+    finally:
+        if temporary_codex_home:
+            if old_codex_home is None:
+                os.environ.pop("CODEX_HOME", None)
+            else:
+                os.environ["CODEX_HOME"] = old_codex_home
+    result["source_manifest_path"] = str(manifest_path)
+    result["legacy_warnings"] = warnings
+    result["temporary_codex_home"] = temporary_codex_home or ""
+    result["install_args"] = {
+        "target": install_args.target,
+        "project": install_args.project,
+        "profiles": install_args.profile,
+        "domains": install_args.domain,
+        "categories": install_args.category,
+        "skills": install_args.skill,
+        "mode": install_args.mode,
+        "write_agents_md": install_args.write_agents_md,
+        "prune_managed": install_args.prune_managed,
+    }
+    return result
+
+
+def command_update(args: argparse.Namespace) -> int:
+    manifest_paths = [normalize_project_path(path) for path in args.manifest]
+    manifest_paths.extend(find_manifests(args.scan_root, max_depth=args.scan_depth))
+    seen: set[Path] = set()
+    manifests = []
+    for path in manifest_paths:
+        resolved = path.resolve()
+        if str(resolved).startswith("/nas/") or resolved == Path("/nas"):
+            raise SystemExit(f"refusing to update /nas manifest: {resolved}")
+        if resolved not in seen:
+            manifests.append(resolved)
+            seen.add(resolved)
+    if not manifests:
+        raise SystemExit("update requires --manifest or --scan-root")
+
+    unique_manifests: list[Path] = []
+    seen_targets: set[str] = set()
+    for path in manifests:
+        manifest = load_manifest(path)
+        target_key = str(manifest.get("skills_root") or path)
+        if target_key.startswith("/nas/") or target_key == "/nas":
+            raise SystemExit(f"refusing to update manifest with /nas skills_root: {path} -> {target_key}")
+        if target_key in seen_targets:
+            continue
+        unique_manifests.append(path)
+        seen_targets.add(target_key)
+    manifests = unique_manifests
+
+    results = [run_manifest_update(path, args) for path in manifests]
+    if args.json:
+        print_json(
+            {
+                "dry_run": args.dry_run,
+                "manifest_count": len(results),
+                "results": [
+                    {
+                        "source_manifest_path": result["source_manifest_path"],
+                        "manifest_path": result["manifest_path"],
+                        "skills_root": result["manifest"]["skills_root"],
+                        "target": result["manifest"]["target"],
+                        "install_kind": result["manifest"]["install_kind"],
+                        "selected_skill_count": len(result["manifest"]["installed_skills"]),
+                        "removed": result["removed"],
+                        "warnings": result["legacy_warnings"] + result["output_warnings"] + result["manifest"]["audit"]["warnings"],
+                        "temporary_codex_home": result["temporary_codex_home"],
+                        "install_args": result["install_args"],
+                    }
+                    for result in results
+                ],
+            }
+        )
+        return 0
+
+    for index, result in enumerate(results, start=1):
+        print(f"\n== update {index}/{len(results)}: {result['source_manifest_path']} ==")
+        for warning in result["legacy_warnings"]:
+            print(f"WARNING: {warning}")
+        if result["temporary_codex_home"]:
+            print(f"CODEX_HOME: {result['temporary_codex_home']}")
+        install_args = argparse.Namespace(**result["install_args"], dry_run=args.dry_run)
+        print_install_result(result, install_args)
     return 0
 
 
@@ -1039,6 +1297,22 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--no-agents-md", dest="write_agents_md", action="store_false", help="Do not update AGENTS.md")
     p.add_argument("--json", action="store_true", help="Print a pure JSON result suitable for scripts")
     p.set_defaults(func=command_install, prune_managed=False, write_agents_md=False)
+
+    p = sub.add_parser(
+        "update",
+        help="Refresh existing ai-skills installations from their managed manifest",
+        description=(
+            "Re-run the install recorded in one or more .ai-skills-collection-manifest.json files.\n"
+            "Use --dry-run first to inspect the exact targets and managed pruning."
+        ),
+        formatter_class=HelpFormatter,
+    )
+    p.add_argument("--manifest", action="append", default=[], help="Path to a managed manifest; repeatable")
+    p.add_argument("--scan-root", action="append", default=[], help="Recursively find managed manifests under this root; repeatable")
+    p.add_argument("--scan-depth", type=int, default=4, help="Maximum directory depth for --scan-root searches")
+    p.add_argument("--dry-run", action="store_true", help="Plan updates without writing target files")
+    p.add_argument("--json", action="store_true", help="Print machine-readable summary")
+    p.set_defaults(func=command_update)
 
     p = sub.add_parser("select", help="Interactive installer using InquirerPy when available")
     p.set_defaults(func=command_select)

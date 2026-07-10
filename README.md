@@ -162,6 +162,15 @@ ai-skills install --target user --profile codex-workflow-core --mode symlink
 ai-skills install --target user --profile codex-writing-style --mode symlink
 ```
 
+刷新已有安装：
+
+```bash
+ai-skills update --manifest /path/to/.ai-skills-collection-manifest.json --dry-run
+ai-skills update --scan-root /path/to/projects --dry-run --json
+```
+
+`update` 会读取已有 manifest，复用上次安装的 target、profile/domain/skill、copy/symlink、AGENTS.md 和 prune 设置。正式执行前先用 `--dry-run` 看清楚会写入哪些 root。
+
 显式使用旧的 `codex-home` 兼容目标：
 
 ```bash
@@ -194,6 +203,23 @@ ai-skills install --target codex-home --profile codex-core-global --mode symlink
 ```
 
 `--target codex-home` 是显式、旧兼容、高级入口。CLI 会在安装前打印检测到的 `CODEX_HOME`、解析后的 codex home、目标 skills root、`config.toml` 状态和可写性。
+
+后续更新推荐流程：
+
+```bash
+cd /overflow/htzhu/mingcheng_new/AI_Skills_Collection
+git pull --ff-only
+ai-skills update \
+  --scan-root /overflow/htzhu/mingcheng_new/.codex-global \
+  --scan-root /overflow/htzhu/mingcheng_new/.codex-home \
+  --scan-root /overflow/htzhu/mingcheng_new/CardiacNexus \
+  --scan-root /overflow/htzhu/mingcheng_new/Bioinformatics \
+  --scan-root /overflow/htzhu/mingcheng_new/MONAILabel \
+  --dry-run
+```
+
+跨用户或 CARE 路径需要显式指定对应 root；不要扫描或写入 `/nas`。
+`--scan-root` 默认只扫 4 层目录，避免进入缓存、session 或数据目录；如果 manifest 不在常规 `<repo>/.agents/skills/` 深度，再显式加 `--scan-depth`。
 
 ## 仓库结构
 
