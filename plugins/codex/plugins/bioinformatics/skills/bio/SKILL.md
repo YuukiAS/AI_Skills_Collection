@@ -23,6 +23,8 @@ source_skills:
   - skills/domains/bioinformatics/biology-toolkits/scikit-bio
   - skills/domains/bioinformatics/omics-analysis/polars-bio
   - skills/domains/bioinformatics/genomics-io/tiledbvcf
+icon_small: "assets/codex/app-skill-icons/aggregate.svg"
+icon_large: "assets/codex/app-skill-icons/aggregate.svg"
 default_prompt:
 ---
 

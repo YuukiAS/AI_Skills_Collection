@@ -1,27 +1,30 @@
 # Live-State and Delegation Supervision
 
-Use this reference for tmux, Slurm, watchdogs, tunnels, frontend previews, long-running jobs, daemon processes, child Codex sessions, and sub-agents.
+Use this reference when the task depends on current process state, current logs, current artifacts, delegated work, or long-running execution.
 
 ## Rule
 
-Starting a session, submitting a job, launching a child agent, or seeing an old status file is not completion. Verify current live state and the requested final output.
+Starting a process, launching a child agent, creating an output path, or finding an old status file is not completion. Verify the current live state and the requested final output.
 
-## Check by surface
+## Generic Checks
 
-- `tmux`: list sessions/windows, confirm active command, inspect recent pane output, and distinguish attached shell continuity from task progress.
-- `Slurm`: check job state, node, elapsed time, stdout/stderr paths, exit status, and final output files.
-- `watchdog`: compare process state, watchdog state file, timestamps, and latest logs.
-- `tunnels`: verify tunnel process and client-visible behavior; a healthy tunnel message is not enough if SSH/browser clients fail.
-- `frontend preview`: check dev server/build logs, browser console, rendered page, production/export output when relevant, and stale build artifacts.
-- `long-running jobs`: record owner, budget, stop condition, polling plan, logs, and final artifact path.
-- `child Codex/sub-agent`: define scope, forbidden actions, expected artifact, and verification owner before launch.
+- Identify the owner, run identifier, start time, stop condition, budget, and expected final artifact.
+- Compare timestamps of logs, state files, and artifacts against the current run.
+- Confirm the latest observable state, not just a cached or stale success marker.
+- Keep enough evidence for a later reviewer to distinguish in-progress, failed, stale, and complete states.
+- When delegating, define scope, forbidden actions, expected artifact, and final verification owner before launch.
 
-## Drift and stale-artifact checks
+## Specialist Boundary
 
-- Compare timestamps of logs, state files, and produced artifacts against the current run.
-- Confirm a child agent changed the intended files and did not overwrite unrelated user work.
-- Main agent must perform final integration and acceptance. Do not forward a child response as final without checking artifacts, diffs, and gates.
+Use the specialist skill for domain-specific live-state checks. Workflow Core only requires that current state is verified and integrated before completion.
 
-## Final report
+Examples:
 
-Report process/job IDs, node or host when relevant, log paths, status files, artifact paths, current state, and unverified boundaries.
+- scheduler/job systems: specialist owns queue commands, resource policy, log interpretation, and resubmission rules;
+- rendered or generated artifacts: specialist owns rendering commands, validators, and visual/semantic QA;
+- frontend or service previews: specialist owns browser, server, console, and client-visible verification;
+- sub-agents: the main agent owns integration, diff review, and final acceptance.
+
+## Final Report
+
+Report the current state, evidence paths or identifiers, final artifacts, verification command summaries, and any unverified boundaries.

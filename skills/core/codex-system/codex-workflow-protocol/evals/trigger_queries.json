@@ -1,24 +1,27 @@
 {
   "positive": [
-    "帮我修复这个训练 pipeline，不能只做 smoke test，要跑验证并报告指标",
-    "审查这个 repo 的 Codex task，找真相源、实现、验证、报告",
-    "修 GitHub issue，改完后不要 push，先给验证矩阵",
-    "Slurm job 跑了但结果不对，检查 live state、log、node 和最终产物",
-    "把这个 PDF/LaTeX 任务做到 final artifact，不要只说编译成功",
-    "Codex 子任务跑偏了，检查 sub-agent 输出并重新验收"
+    "帮我完成这个跨模块重构，先找真实入口，改完跑验证，并说明剩余风险",
+    "修复这个 GitHub issue，完成实现、测试、生成层更新和最终验收，但不要自动 push",
+    "这个训练 pipeline 结果不可信，需要从配置、运行日志、产物和指标一路查到可复现结论",
+    "另一个 Codex task 给了方案，请你审计它的假设，执行必要修改，然后用证据确认完成",
+    "我要一个端到端交付，不要只停在代码改动；请检查 live state、测试结果和用户可见产物"
   ],
   "negative": [
-    "hitherto 是什么意思",
     "把这句话翻译成英文",
-    "给我一个 git 命令只列出当前分支",
+    "润色这段中文，不改变意思",
+    "给我一个 git 命令列出当前分支",
     "解释一下 Dice coefficient",
-    "这段中文润色一下"
+    "编译这个 LaTeX 文件",
+    "查一下这个 Slurm job 的状态",
+    "tmux 里怎么开鼠标滚动",
+    "把这个 Markdown 渲染成 PDF"
   ],
   "near_miss": [
     "帮我写一个很短的回复",
     "告诉我怎么运行 pytest",
     "给我一个简单 bash 命令",
-    "解释一下什么是 smoke test"
+    "解释一下什么是 smoke test",
+    "这个单文件函数哪里报错"
   ],
-  "notes": "Use for complex workflow execution and verification boundaries, not simple facts or short text edits."
+  "notes": "Trigger on cross-cutting execution, routing, verification, and acceptance risk. Do not trigger only because a task mentions PDF, LaTeX, Slurm, tmux, or prose editing."
 }

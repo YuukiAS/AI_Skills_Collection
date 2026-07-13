@@ -1,6 +1,6 @@
 {
   "license_counts": {
-    "(missing)": 45,
+    "(missing)": 46,
     "3-clause BSD license": 1,
     "Apache License, Version 2.0": 1,
     "Apache-2.0": 4,
@@ -16,10 +16,10 @@
     "GPL-3.0 license": 2,
     "MIT": 3,
     "MIT License": 6,
-    "MIT license": 38,
+    "MIT license": 37,
     "MIT-compatible synthesis from cited public/academic writing guidance": 1,
     "MIT-compatible synthesis plus public-domain style guidance": 1,
-    "Proprietary. LICENSE.txt has complete terms": 5,
+    "Proprietary. LICENSE.txt has complete terms": 4,
     "SD-3-Clause license": 1,
     "Unknown": 9,
     "https://github.com/biodatageeks/polars-bio/blob/main/LICENSE": 1,
@@ -37,26 +37,26 @@
     "CardiacNexus maintainers": 2,
     "Clayton Young / Superior Byte Works, LLC (@borealBytes)": 2,
     "Jeremy Leipzig": 1,
-    "K-Dense Inc.": 81,
+    "K-Dense Inc.": 80,
     "Kuan-lin Huang": 2,
     "Orchestra Research": 1
   },
   "provenance_category_counts": {
     "external-adapted": 11,
     "local": 4,
-    "unknown": 119,
-    "user-authored": 15
+    "unknown": 117,
+    "user-authored": 16
   },
   "provenance_counts": {
     "external-adapted": 11,
     "local": 4,
-    "unknown": 119,
-    "user-authored": 15
+    "unknown": 117,
+    "user-authored": 16
   },
-  "rows_with_license_files_count": 12,
-  "rows_with_urls_count": 68,
+  "rows_with_license_files_count": 11,
+  "rows_with_urls_count": 67,
   "scope": "active_and_non_archived",
-  "skill_count": 149,
+  "skill_count": 148,
   "skills": [
     {
       "license": "",
@@ -980,21 +980,6 @@
       "license": "MIT license",
       "license_files": [],
       "metadata_skill_author": "K-Dense Inc.",
-      "name": "scientific-slides",
-      "path": "skills/science/communication/scientific-slides",
-      "provenance": "unknown",
-      "provenance_category": "unknown",
-      "source_fields": {},
-      "status": "active",
-      "url_count": 1,
-      "urls": [
-        "https://openrouter.ai/keys"
-      ]
-    },
-    {
-      "license": "MIT license",
-      "license_files": [],
-      "metadata_skill_author": "K-Dense Inc.",
       "name": "scientific-visualization",
       "path": "skills/science/communication/scientific-visualization",
       "provenance": "unknown",
@@ -1735,22 +1720,6 @@
       ]
     },
     {
-      "license": "Proprietary. LICENSE.txt has complete terms",
-      "license_files": [
-        "LICENSE.txt",
-        "license.txt"
-      ],
-      "metadata_skill_author": "",
-      "name": "pptx",
-      "path": "skills/tools/documents-media/pptx",
-      "provenance": "unknown",
-      "provenance_category": "unknown",
-      "source_fields": {},
-      "status": "active",
-      "url_count": 0,
-      "urls": []
-    },
-    {
       "license": "",
       "license_files": [],
       "metadata_skill_author": "",
@@ -1965,6 +1934,19 @@
       "urls": [
         "http://localhost:5173"
       ]
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "slurm-workflows",
+      "path": "skills/tools/hpc/slurm-workflows",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
     },
     {
       "license": "Complete terms in LICENSE.txt",

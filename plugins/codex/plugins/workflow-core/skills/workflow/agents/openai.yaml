@@ -1,0 +1,14 @@
+name: codex-workflow-protocol
+summary: Process layer for complex, risky, delegated, or gate-driven Codex work.
+allow_implicit_invocation: true
+trigger:
+  positive:
+    - multi-phase implementation with verification
+    - cross-file or generated-layer refactor
+    - task with explicit acceptance gates
+    - long-running execution or delegation requiring final integration
+  negative:
+    - simple one-command help
+    - short wording polish
+    - casual explanation of a tool or command
+    - single-format task better handled directly by a specialist

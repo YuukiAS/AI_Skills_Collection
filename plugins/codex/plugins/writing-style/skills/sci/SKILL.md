@@ -11,6 +11,8 @@ secrets_needed:
 last_reviewed: 2026-06-01
 profile_tags:
 recommended_scope: project
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 license: MIT-compatible synthesis from cited public/academic writing guidance
 ---
 # Scientific Evidence Prose

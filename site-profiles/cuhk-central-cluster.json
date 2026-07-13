@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "site_id": "cuhk-central-cluster",
+  "display_name": "CUHK Central Cluster",
+  "revision": "2026-07-13-v1",
+  "scheduler": "slurm",
+  "detect": {
+    "host_patterns": ["*cuhk*", "*central*"],
+    "path_markers": ["/project/"]
+  },
+  "capabilities": {
+    "slurm": true,
+    "tex_pdf": true,
+    "scratch": true
+  },
+  "constraints": {
+    "slurm_requires_site_account": true,
+    "do_not_submit_without_user_confirmation": true,
+    "private_paths_must_use_local_override": true
+  },
+  "policy": {
+    "race_execution": "disabled_by_default",
+    "submit_smoke_job": "explicit_flag_only"
+  },
+  "preferences": {
+    "skills": [
+      "skills/tools/documents-media/render-chinese-math-pdf",
+      "skills/tools/hpc/slurm-workflows"
+    ]
+  },
+  "public_notes": [
+    "Public-safe profile distilled from server migration zip and repository history.",
+    "Account, QOS, private module paths, and personal scratch directories must live in local overrides."
+  ]
+}

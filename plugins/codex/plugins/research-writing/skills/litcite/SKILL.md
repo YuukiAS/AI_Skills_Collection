@@ -20,6 +20,8 @@ source_skills:
   - skills/science/discovery/citation-management
   - skills/science/discovery/research-lookup
   - skills/science/discovery/pyzotero
+icon_small: "assets/codex/app-skill-icons/aggregate.svg"
+icon_large: "assets/codex/app-skill-icons/aggregate.svg"
 default_prompt:
 ---
 

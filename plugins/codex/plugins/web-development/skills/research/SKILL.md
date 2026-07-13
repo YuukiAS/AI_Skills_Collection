@@ -14,6 +14,8 @@ recommended_scope: project
 source_skills:
   - skills/tools/frontend/research-product-frontend
   - skills/tools/frontend/product-ux-planning
+icon_small: "assets/codex/app-skill-icons/aggregate.svg"
+icon_large: "assets/codex/app-skill-icons/aggregate.svg"
 default_prompt:
 ---
 

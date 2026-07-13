@@ -1,12 +1,11 @@
 {
   "name": "codex-writing-style",
-  "description": "Lightweight global/local profile for writing fidelity, English scientific prose, Chinese report/README/document polishing, and CJK/math PDF rendering.",
+  "description": "Lightweight global/local profile for writing fidelity, English scientific prose, and Chinese report/README/document polishing.",
   "max_active_skills": 8,
   "skills": [
     "skills/writing/core/writing-fidelity",
     "skills/writing/core/scientific-prose",
-    "skills/writing/core/chinese-prose",
-    "skills/tools/documents-media/render-chinese-math-pdf"
+    "skills/writing/core/chinese-prose"
   ],
   "secondary_skills": [
     "skills/writing/research/scientific-writing",

@@ -1,25 +1,25 @@
 # AI Skills Collection
 
-这是面向 Codex 的个人科研与工程技能库。它不是通用官方插件的替代品：官方插件负责文件、浏览器、GitHub、Notion、PDF、Slides、LaTeX、前端构建等执行后端；本仓库负责我的长期工作流、科研写作规则、领域判断、安装 profile、来源记录和验收标准。
+这是面向 Codex 的个人科研与工程技能库。它不替代官方插件：官方能力负责文件、浏览器、GitHub、Notion、PDF、Presentation/Slides、LaTeX、前端构建等执行层；本仓库负责长期工作流、科研写作规则、领域判断、安装 profile、来源记录和验收标准。
 
 ## 先决定装什么
 
-| 场景 | 安装本仓库插件 | 同时使用的官方能力 |
+| 场景 | 本仓库插件或 profile | 同时使用的官方能力 |
 |---|---|---|
-| 所有主力 Codex 环境 | `workflow-core`、`writing-style` | GitHub、文件工具 |
-| 主力科研机器 | `research-writing`、`statistical-modeling` | Zotero、PDF、LaTeX、GitHub |
-| 经常做 PPT 的桌面环境 | `presentations` | Presentation/Slides；需要 Beamer 时加 LaTeX |
-| 前端网站或科研产品 | `web-development` | `build-web-apps`、Figma、GitHub |
-| 医学影像项目 | `medical-imaging`，需要时加项目 repo-local skills | PDF、GitHub、前端构建 |
-| 生物信息项目 | `bioinformatics` | GitHub、数据库/文献工具 |
-| 维护本仓库 | `ai-skills-core` | GitHub、必要时 Notion |
-| 纯 Slurm compute node 或训练容器 | 通常不装全局插件 | 只保留项目必要脚本 |
+| 所有主力 Codex 环境 | `workflow-core`、`writing-style` 或 `global-baseline` | GitHub、文件工具 |
+| 科研主力机器 | `research-writing`、`statistical-modeling` 或 `research-main` | Zotero、PDF、LaTeX、GitHub |
+| 经常做 PPT 的桌面环境 | `presentations` 或 `presentation-desktop` | Presentation/Slides；Beamer 用 LaTeX |
+| 前端网站或科研产品 | `web-development` 或 `frontend-research-product` | `build-web-apps`、Figma、GitHub |
+| 医学影像项目 | `medical-imaging-project` | PDF、GitHub、前端构建 |
+| 生物信息项目 | `bioinformatics-project` | GitHub、文献/数据库工具 |
+| Slurm compute node | `server-research-baseline` 或 `ai-skills environment apply` | 站点已有 Slurm、TeX、Python |
+| 维护本仓库 | `ai-skills-core` 或 `ai-skills-maintainer` | GitHub，必要时 Notion |
 
-`ai-skills-core` 不是所有机器必装。只有在使用本仓库 CLI、安装 profile、更新 registry/catalog/marketplace、处理 provenance 或维护插件发布层时才需要。
+`v3.1` 是仓库重构任务标签，不是插件版本号。中央 Marketplace 的 9 个插件继续保持 `2.0.0`。
 
 ## Codex App 插件市场
 
-推送到 `main` 后，等待 GitHub Actions 的 `Codex Marketplace` 工作流完成。工作流会重新生成并验证：
+推送到 `main` 后，GitHub Actions 会重新生成并验证：
 
 - `.agents/plugins/marketplace.json`
 - `plugins/codex/plugins/`
@@ -44,7 +44,7 @@ codex plugin marketplace add \
   --sparse plugins/codex/plugins
 ```
 
-生成层不要手工编辑。改 `skills/`、`profiles/`、`scripts/codex_marketplace_config.json` 或 `assets/codex/plugin-icons/` 后，重新生成发布层。
+生成层不要手改。改 `skills/`、`profiles/`、`scripts/codex_marketplace_config.json` 或 `assets/codex/` 后，重新生成发布层。
 
 ## 中央九个插件
 
@@ -60,90 +60,44 @@ codex plugin marketplace add \
 | `bioinformatics` | `bioinformatics-workflows` |
 | `medical-imaging` | `medical-imaging-workflows`、`ai-ml-imaging` |
 
-`cardiacnexus` 不再是中央通用插件。CardiacNexus 的项目专用技能应合并进 CardiacNexus repo 的 `.agents/skills/`，当前短期导出包在 `exports/cardiacnexus-repo-local/`。
+`cardiacnexus` 不再是中央通用插件。CardiacNexus 项目专用技能保留在短期导出包 `exports/cardiacnexus-repo-local/`，后续合并进目标 repo 的 `.agents/skills/` 后删除该导出包。
 
-## 典型组合
-
-| 任务 | 本仓库负责 | 官方能力负责 |
-|---|---|---|
-| repo report、milestone、实验复盘 | `workflow-core` + `research-writing` + `writing-style` + 领域/项目 skill | GitHub；需要 PDF 时用 PDF/LaTeX |
-| Asteria/TRACE Markdown 到组会 PPT | repo-local skill + `research-presentations` + `statistical-modeling` | Presentation/Slides；Beamer 时用 LaTeX |
-| 正式论文 | repo-local skill + `research-paper-workflow` + `literature-and-citations` + `writing-style` | LaTeX、PDF、Zotero、GitHub |
-| 前端网站或科研产品 | repo-local skill + `web-development` | `build-web-apps`、Figma、GitHub |
-| 商业或公司 deck | `business-presentations` | Presentation/Slides |
-| CardiacNexus pipeline/docs | CardiacNexus repo-local skills + `medical-imaging` | GitHub、`build-web-apps` |
-| 外部 Skill/Notion 规范整合 | `ai-skills-core` + `workflow-core` | Notion、GitHub |
-
-## 本地 CLI
-
-`ai-skills` CLI 适合服务器、HPC、repo-local 安装、用户级安装和维护任务。
-
-默认安装位置：
-
-- repo-local：`<project>/.agents/skills/`
-- 用户级：`$HOME/.agents/skills/`
-- 旧兼容目标：`${CODEX_HOME:-$HOME/.codex}/skills/`
-
-新机器设置：
+## Profile 安装
 
 ```bash
-git clone <repo-url> AI_Skills_Collection
-python3 -m pip install --no-build-isolation -e AI_Skills_Collection
+ai-skills install --target user --profile global-baseline --mode symlink
+ai-skills install --target repo --profile research-main --mode copy --write-agents-md
+ai-skills install --target repo --profile presentation-desktop --mode copy --write-agents-md
+ai-skills install --target repo --profile frontend-research-product --mode copy --write-agents-md
+ai-skills install --target repo --profile server-research-baseline --mode copy --write-agents-md
 ```
 
-如果没有安装短命令：
+完整 domain 安装仍支持。`audit` 的 active skill 数量或描述长度提示是上下文预算提醒，不是安装失败。
+
+## Server Overlay
+
+服务器环境使用 public-safe site profile 加本地 override。Git 中只保存公共约束；账号、hostname、私有路径、partition、QOS、token、module 私有路径都放在：
+
+```text
+~/.config/ai-skills/local-overrides.toml
+```
+
+常用命令：
 
 ```bash
-python3 /path/to/AI_Skills_Collection/scripts/skills.py --help
+ai-skills environment init
+ai-skills environment list-sites
+ai-skills environment detect
+ai-skills environment plan --site cuhk-central-cluster --target user
+ai-skills environment apply --site cuhk-central-cluster --target user
+ai-skills environment doctor --site cuhk-central-cluster
 ```
 
-这台 Windows 机器上 `python` 可能不在 `PATH`，可使用 Codex runtime Python：
-
-```powershell
-& "$HOME\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\skills.py validate
-```
-
-## 推荐 profile
-
-| profile | 适用场景 | 目标 |
-|---|---|---|
-| `codex-workflow-core` | 所有主力 Codex 环境 | user |
-| `codex-writing-style` | 长期写作风格 | user |
-| `codex-research-writing` | 科研写作主力机 | user 或 repo |
-| `codex-webdev` | 前端或科研产品 repo | repo |
-| `codex-bioinformatics-light` | 生信项目 | repo |
-| `codex-bayesian-jsdm` | 贝叶斯/统计项目 | repo |
-| `codex-cardiacnexus` | CardiacNexus 支撑技能 | repo，项目技能另从导出包合并 |
-| `codex-skill-maintenance` | 维护本仓库 | repo |
-
-示例：
-
-```bash
-ai-skills install --target user --profile codex-workflow-core --mode symlink
-ai-skills install --target user --profile codex-writing-style --mode symlink
-ai-skills install --target repo --profile codex-webdev --mode copy --write-agents-md
-ai-skills install --target repo --profile codex-cardiacnexus --mode copy --write-agents-md
-```
-
-完整 domain 安装仍然支持。若 `audit` 报 active skill 数量或描述长度偏高，把它当作上下文预算提醒，不是安装失败。
-
-## 目录边界
-
-- `skills/`：源层，正式可维护 skill。
-- `profiles/`：CLI 安装组合。
-- `shared/`：跨 skill 共用材料。
-- `assets/codex/plugin-icons/`：中央插件图标和来源记录。
-- `scripts/codex_marketplace_config.json`：中央 marketplace 源配置。
-- `.agents/plugins/marketplace.json`：生成层，不手改。
-- `plugins/codex/plugins/`：生成层，不手改。
-- `exports/cardiacnexus-repo-local/`：短期 CardiacNexus 迁移包，合并进目标 repo 后删除。
-- `docs/provenance/INTEGRATION_HISTORY.md`：外部来源 canonical history。
-- `archive/`、`.tmp/skill-intake/`、`build/skill-intake/`：本地临时区，已加入 `.gitignore`。
-- `bundles/` 和 `scripts/install_bundle.py`：legacy compatibility，只为旧流程保留；新文档和新安装优先用 profiles、domains 或 precise skill selectors。
+`plan` 只读；`apply` 先 staging 再替换；`doctor` 默认不提交 Slurm 作业，只有显式 `--submit-smoke-job` 才允许进入提交路径。
 
 ## Presentation 与 CUHK 模板
 
-`presentations` 插件只负责 deck plan、叙事、模板路由、来源忠实度和 QA。底层 PPTX/Google Slides 对象操作交给官方 Presentation/Slides；明确要求 Beamer/Overleaf/LaTeX 时交给 LaTeX 能力。
+`presentations` 只负责 deck plan、叙事、模板路由、来源忠实度和 QA。PPTX/Google Slides 对象操作交给官方 Presentation/Slides；明确要求 Beamer/Overleaf/LaTeX 时交给 LaTeX 能力。
 
 CUHK 模板材料位于：
 
@@ -151,40 +105,40 @@ CUHK 模板材料位于：
 skills/tools/documents-media/presentations/shared/templates/cuhk/
 ```
 
-其中：
+其中保留 Beamer 源、样式、必要 PNG、`design-tokens.json`、PPTX reference deck、生成脚本和本地资源 importer；`.vscode`、XCF、样例 Fig/Table 等 zip 非必要资源不提交。
 
-- `beamer/source/` 是从本地 `CUHK Template.zip` 提交的完整模板源。
-- `design-tokens.json` 是统一视觉 token。
-- `beamer/main.tex` 是最小可编译派生模板。
-- `pptx/build_reference_deck.py` 可生成可编辑 16:9 reference deck。
-- `pptx/cuhk-reference-deck.pptx` 是已生成的可编辑参考 deck。
+## 目录边界
 
-## 外部来源
-
-外部 GitHub、Notion、网页、截图或文档先进入临时 intake，不直接长期提交原始目录：
-
-```bash
-python3 scripts/external_source_intake.py --source <url-or-id> --dry-run
-```
-
-每次整合只在 `docs/provenance/INTEGRATION_HISTORY.md` 追加一行，目标 skill 的 frontmatter 继续保留直接来源字段。旧 scratch inventory 已迁出 tracked docs；详细临时证据只放本地 `archive/` 或 `.tmp/skill-intake/`。
+- `skills/`：源层，正式可维护 skill。
+- `profiles/`：CLI 安装组合。
+- `site-profiles/`：public-safe 服务器 overlay。
+- `schemas/`：profile 和 overlay 的结构约束。
+- `assets/codex/`：插件图标、app-facing 图标和来源记录。
+- `scripts/codex_marketplace_config.json`：中央 Marketplace 源配置。
+- `.agents/plugins/marketplace.json`：生成层，不手改。
+- `plugins/codex/plugins/`：生成层，不手改。
+- `archive/legacy-bundles/`：tracked legacy bundle 归档。
+- `.tmp/skill-intake/`、`.tmp/archive/`、`.codex_tmp_notion_images/`：本地临时区，不提交。
+- `docs/provenance/INTEGRATION_HISTORY.md`：外部来源 canonical history。
 
 ## 验证
+
+Windows 上如果 `python` 不在 `PATH`，使用 Codex runtime Python：
+
+```powershell
+& "$HOME\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\skills.py validate
+```
 
 提交前运行：
 
 ```bash
-python3 scripts/skills.py registry --write
-python3 scripts/skills.py validate
-python3 scripts/skills.py audit --all
-python3 scripts/skills.py catalog --write
-python3 scripts/provenance_audit.py --check
-python3 scripts/icon_audit.py --scope marketplace --check
-python3 scripts/build_codex_marketplace.py --write
-python3 scripts/build_codex_marketplace.py --validate
-python3 scripts/build_codex_marketplace.py --check
-python3 scripts/build_codex_marketplace.py --path-report
-python3 -m unittest discover -s tests
+python scripts/skills.py registry --write
+python scripts/skills.py validate
+python scripts/skills.py audit --all
+python scripts/skills.py catalog --write
+python scripts/audit_skill_provenance.py --write
+python scripts/build_codex_marketplace.py --write --validate --check --path-report
+python scripts/provenance_audit.py --check
+python scripts/icon_audit.py --scope marketplace --check
+python -m unittest discover -s tests
 ```
-
-Windows 上用 Codex runtime Python 替换 `python3` 即可。

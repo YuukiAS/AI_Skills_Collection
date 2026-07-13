@@ -1,0 +1,18 @@
+{
+  "name": "server-research-baseline",
+  "description": "Compute-node research profile for source-faithful writing, CJK/math PDF rendering, and generic Slurm workflows.",
+  "max_active_skills": 12,
+  "skills": [
+    "skills/core/codex-system/codex-workflow-protocol",
+    "skills/writing/core/writing-fidelity",
+    "skills/writing/core/scientific-prose",
+    "skills/writing/core/chinese-prose",
+    "skills/writing/research/research-reporting",
+    "skills/tools/documents-media/render-chinese-math-pdf",
+    "skills/tools/hpc/slurm-workflows"
+  ],
+  "secondary_skills": [
+    "skills/tools/visualization/matplotlib",
+    "skills/tools/data-science/exploratory-data-analysis"
+  ]
+}

@@ -1,103 +1,45 @@
 #!/usr/bin/env python3
-"""Legacy bundle installer.
-
-Prefer scripts/skills.py for repo, user, domain, profile, and single-skill
-installs. This script is kept for compatibility with old bundle deployments.
-"""
+"""Deprecated compatibility shim for legacy bundle installs."""
 
 from __future__ import annotations
 
 import argparse
-import json
-import shutil
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 
-
-def copy_path(source: Path, target_root: Path) -> None:
-    rel = source.relative_to(ROOT)
-    dest = target_root / rel
-    if source.is_dir():
-        if dest.exists():
-            shutil.rmtree(dest)
-        dest.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copytree(source, dest, ignore=shutil.ignore_patterns(".git", "__pycache__"))
-    else:
-        dest.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, dest)
+COMMAND_HINTS = {
+    "base": "python scripts/skills.py install --target repo --profile global-baseline --mode symlink --write-agents-md",
+    "full": "python scripts/skills.py install --target repo --profile research-main --mode symlink --write-agents-md",
+    "research-writing": "python scripts/skills.py install --target repo --profile research-main --mode symlink --write-agents-md",
+    "frontend": "python scripts/skills.py install --target repo --profile frontend-research-product --mode symlink --write-agents-md",
+    "bioinformatics": "python scripts/skills.py install --target repo --profile bioinformatics-project --mode symlink --write-agents-md",
+    "cmr": "python scripts/skills.py install --target repo --profile medical-imaging-project --mode symlink --write-agents-md",
+}
 
 
-def skill_dest_name(skill_dir: Path) -> str:
-    rel = skill_dir.relative_to(ROOT)
-    parts = rel.parts
-    if len(parts) >= 4 and parts[0] == "skills":
-        return "-".join(parts[1:])
-    return skill_dir.name
-
-
-def iter_skill_dirs(source: Path) -> list[Path]:
-    if source.is_file():
-        return []
-    if (source / "SKILL.md").exists():
-        return [source]
-    return sorted(path.parent for path in source.rglob("SKILL.md"))
-
-
-def copy_skill_flat(skill_dir: Path, target_root: Path) -> None:
-    dest = target_root / skill_dest_name(skill_dir)
-    if dest.exists():
-        shutil.rmtree(dest)
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copytree(skill_dir, dest, ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"))
+def bundle_name(path_text: str) -> str:
+    path = Path(path_text)
+    return path.stem
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("bundle", help="Path to a bundle JSON file, such as bundles/base.json")
-    parser.add_argument("--target", required=True, help="Target directory to copy bundle contents into")
-    parser.add_argument(
-        "--mode",
-        choices=("tree", "flat"),
-        default="tree",
-        help=(
-            "tree preserves repository-relative paths; flat copies each skill "
-            "directory directly under target with scope/category prefixes"
-        ),
-    )
+    parser.add_argument("bundle", help="Legacy bundle path, now archived under archive/legacy-bundles/")
+    parser.add_argument("--target", help="Ignored legacy option")
+    parser.add_argument("--mode", help="Ignored legacy option")
     args = parser.parse_args()
 
-    bundle_path = (ROOT / args.bundle).resolve() if not Path(args.bundle).is_absolute() else Path(args.bundle)
-    target = Path(args.target).expanduser().resolve()
-    global_skills = (Path.home() / ".agents" / "skills").resolve()
-    if target == global_skills:
-        print(
-            "WARNING: installing broad bundles into global $HOME/.agents/skills can "
-            "trigger skill budget warnings. Prefer codex-core-global plus "
-            "repo installs via scripts/skills.py."
-        )
-
-    bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
-    for item in bundle["include"]:
-        source = ROOT / item
-        if not source.exists():
-            raise FileNotFoundError(item)
-        if args.mode == "flat" and source.parts[-1] != "palette":
-            skill_dirs = iter_skill_dirs(source)
-            if skill_dirs:
-                for skill_dir in skill_dirs:
-                    copy_skill_flat(skill_dir, target)
-                print(f"installed {len(skill_dirs)} skills from {item}")
-            else:
-                copy_path(source, target)
-                print(f"installed {item}")
-        else:
-            copy_path(source, target)
-            print(f"installed {item}")
-
-    print(f"bundle {bundle.get('name', bundle_path.stem)} installed to {target} ({args.mode} mode)")
-    return 0
+    name = bundle_name(args.bundle)
+    archived = ROOT / "archive" / "legacy-bundles" / f"{name}.json"
+    print("ERROR: scripts/install_bundle.py is deprecated and no longer installs files.")
+    print(f"Archived bundle definition: {archived.relative_to(ROOT).as_posix()}")
+    print("Use profile/domain/single-skill installs through scripts/skills.py instead.")
+    print("")
+    print("Recommended replacement:")
+    print(f"  {COMMAND_HINTS.get(name, 'python scripts/skills.py install --target repo --profile research-main --mode symlink --write-agents-md')}")
+    return 2
 
 
 if __name__ == "__main__":

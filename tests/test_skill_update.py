@@ -80,6 +80,50 @@ class SkillUpdateTests(unittest.TestCase):
         self.assertTrue(install_args.prune_managed)
         self.assertEqual(temporary_codex_home, str(root / "home"))
 
+    def test_environment_detects_public_site_profile(self) -> None:
+        args = argparse.Namespace(site=None, hostname="login01.cuhk.example", path="/project/demo")
+        profile, matches = skills.environment_detect_profile(args, skills.load_site_profiles())
+        self.assertIsNotNone(profile)
+        self.assertEqual(profile["id"], "cuhk-central-cluster")
+        self.assertEqual([item["id"] for item in matches], ["cuhk-central-cluster"])
+
+    def test_environment_plan_is_read_only(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp)
+            args = argparse.Namespace(
+                site="unc-longleaf",
+                target="repo",
+                project=str(project),
+                hostname=None,
+                path=None,
+                local_override=str(project / "local-overrides.toml"),
+            )
+            plan = skills.environment_plan_payload(args)
+            self.assertEqual(plan["site_id"], "unc-longleaf")
+            self.assertFalse((project / ".agents").exists())
+            self.assertEqual([action["action"] for action in plan["actions"]], ["materialize-skill", "materialize-skill"])
+
+    def test_environment_apply_is_idempotent_and_manifest_managed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp)
+            args = argparse.Namespace(
+                site="cuhk-central-cluster",
+                target="repo",
+                project=str(project),
+                hostname=None,
+                path=None,
+                local_override=str(project / "local-overrides.toml"),
+                dry_run=False,
+                json=True,
+            )
+            first = skills.environment_apply_plan(args, skills.environment_plan_payload(args))
+            second = skills.environment_apply_plan(args, skills.environment_plan_payload(args))
+            manifest_path = Path(first["target_root"]) / skills.ENV_MANIFEST_NAME
+            self.assertTrue(manifest_path.exists())
+            self.assertEqual(first["site_id"], "cuhk-central-cluster")
+            self.assertEqual(second["site_id"], "cuhk-central-cluster")
+            self.assertTrue((Path(first["target_root"]) / "slurm-workflows" / "references" / "_generated" / "site-profile.md").exists())
+
     def test_find_manifests_respects_scan_depth(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

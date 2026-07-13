@@ -24,7 +24,7 @@ EXPECTED_COLUMNS = [
     "note",
 ]
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-INTAKE_PREFIXES = (".tmp/skill-intake/", "build/skill-intake/", "archive/")
+INTAKE_PREFIXES = (".tmp/skill-intake/", ".tmp/archive/", "build/skill-intake/", ".codex_tmp_notion_images/")
 
 
 def parse_rows(path: Path) -> tuple[list[str], list[list[str]]]:

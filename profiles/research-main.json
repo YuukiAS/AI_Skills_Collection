@@ -1,0 +1,30 @@
+{
+  "name": "research-main",
+  "description": "Main research writing profile for manuscripts, literature review, citations, documents, and source-faithful reporting.",
+  "max_active_skills": 24,
+  "skills": [
+    "skills/core/codex-system/codex-workflow-protocol",
+    "skills/writing/research/research-reporting",
+    "skills/writing/research/scientific-writing",
+    "skills/writing/research/paper-workflow-orchestrator",
+    "skills/writing/research/nature-manuscript-workflow",
+    "skills/writing/research/citation-verification",
+    "skills/writing/research/latex-paper-authoring",
+    "skills/writing/research/literature-review",
+    "skills/science/discovery/citation-management",
+    "skills/science/discovery/research-lookup",
+    "skills/tools/documents-media/pdf",
+    "skills/tools/documents-media/docx",
+    "skills/tools/documents-media/markitdown",
+    "skills/writing/core/writing-fidelity",
+    "skills/writing/core/scientific-prose",
+    "skills/writing/core/chinese-prose",
+    "skills/tools/visualization/matplotlib",
+    "skills/tools/visualization/plotly"
+  ],
+  "secondary_skills": [
+    "skills/writing/research/research-grants",
+    "skills/writing/research/peer-review",
+    "skills/science/ideation/experiment-execution"
+  ]
+}

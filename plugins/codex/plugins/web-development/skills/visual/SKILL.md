@@ -15,6 +15,8 @@ source_skills:
   - skills/tools/frontend/frontend-visual-systems
   - skills/tools/frontend/visual-direction
   - skills/tools/frontend/design-system-tokens
+icon_small: "assets/codex/app-skill-icons/aggregate.svg"
+icon_large: "assets/codex/app-skill-icons/aggregate.svg"
 default_prompt:
 ---
 

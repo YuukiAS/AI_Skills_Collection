@@ -13,6 +13,8 @@ profile_tags:
   - writing
   - global
 recommended_scope: global
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 ---
 # Writing Fidelity
 

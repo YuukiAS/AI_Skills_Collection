@@ -15,6 +15,8 @@ recommended_scope: project
 source_skills:
   - skills/tools/ai-ml/pytorch-lightning
   - skills/tools/ai-ml/transformers
+icon_small: "assets/codex/app-skill-icons/aggregate.svg"
+icon_large: "assets/codex/app-skill-icons/aggregate.svg"
 default_prompt:
 ---
 

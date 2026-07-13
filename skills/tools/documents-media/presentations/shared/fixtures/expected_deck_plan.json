@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "metadata": {
+    "title": "Deidentified Research Update",
+    "audience": "mixed",
+    "mode": "research",
+    "purpose": "group-meeting",
+    "duration_minutes": 8,
+    "language": "mixed",
+    "template": "cuhk-default",
+    "output": "pptx",
+    "source_files": []
+  },
+  "slides": [
+    {
+      "id": "s01",
+      "title": "Study Motivation",
+      "key_message": "Study Motivation",
+      "source_anchors": ["markdown:L1"],
+      "content": [
+        "The project compares a baseline model with an updated feature set on a deidentified cohort."
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Method",
+      "key_message": "Method",
+      "source_anchors": ["markdown:L5"],
+      "content": [
+        "- Inputs were preprocessed with a fixed pipeline.",
+        "- Evaluation uses held-out folds and source-tracked metrics."
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "Results",
+      "key_message": "Results",
+      "source_anchors": ["markdown:L10"],
+      "content": [
+        "The updated feature set improves calibration while leaving discrimination similar."
+      ]
+    },
+    {
+      "id": "s04",
+      "title": "Discussion",
+      "key_message": "Discussion",
+      "source_anchors": ["markdown:L14"],
+      "content": [
+        "The next decision is whether the calibration gain is sufficient for deployment review."
+      ]
+    }
+  ]
+}

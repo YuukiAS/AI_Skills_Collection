@@ -1,0 +1,20 @@
+{
+  "name": "medical-imaging-project",
+  "description": "General medical imaging project profile without project-specific CardiacNexus skills.",
+  "max_active_skills": 14,
+  "skills": [
+    "skills/domains/medical-imaging/cardiac-mri",
+    "skills/domains/medical-imaging/pydicom",
+    "skills/domains/medical-imaging/medical-imaging-classical-features",
+    "skills/domains/medical-imaging/medical-imaging-deep-learning",
+    "skills/domains/medical-imaging/pathml",
+    "skills/tools/ai-ml/pytorch-lightning",
+    "skills/tools/ai-ml/transformers",
+    "skills/tools/data-science/exploratory-data-analysis",
+    "skills/tools/visualization/matplotlib"
+  ],
+  "secondary_skills": [
+    "skills/tools/documents-media/pdf",
+    "skills/writing/core/scientific-prose"
+  ]
+}

@@ -5,16 +5,16 @@ This report records what can be proven from files currently in this repository. 
 ## Summary
 
 - Scope: `active_and_non_archived`
-- Skills audited: 149
+- Skills audited: 148
 - Skills with explicit source fields: 11
-- User-authored skills: 15
+- User-authored skills: 16
 - External adapted skills: 11
 - External vendored skills: 0
 - Generated skills: 0
 - Local legacy skills: 4
-- Unknown-origin historical skills: 119
-- Skills containing URLs in the body: 68
-- Skills containing local license files: 12
+- Unknown-origin historical skills: 117
+- Skills containing URLs in the body: 67
+- Skills containing local license files: 11
 
 ## Provenance Counts
 
@@ -22,8 +22,8 @@ This report records what can be proven from files currently in this repository. 
 | --- | --- |
 | external-adapted | 11 |
 | local | 4 |
-| unknown | 119 |
-| user-authored | 15 |
+| unknown | 117 |
+| user-authored | 16 |
 
 ## User Authored
 
@@ -42,6 +42,7 @@ This report records what can be proven from files currently in this repository. 
 | frontend-reference-research | skills/tools/frontend/frontend-reference-research | user-authored |  |
 | frontend-visual-systems | skills/tools/frontend/frontend-visual-systems | user-authored |  |
 | research-product-frontend | skills/tools/frontend/research-product-frontend | user-authored |  |
+| slurm-workflows | skills/tools/hpc/slurm-workflows | user-authored |  |
 | writing-fidelity | skills/writing/core/writing-fidelity | user-authored |  |
 | research-reporting | skills/writing/research/research-reporting | user-authored |  |
 
@@ -130,7 +131,6 @@ None.
 | paper-2-web | skills/science/communication/paper-2-web | unknown |  |
 | pptx-posters | skills/science/communication/pptx-posters | unknown |  |
 | scientific-schematics | skills/science/communication/scientific-schematics | unknown |  |
-| scientific-slides | skills/science/communication/scientific-slides | unknown |  |
 | scientific-visualization | skills/science/communication/scientific-visualization | unknown |  |
 | arxiv-database | skills/science/discovery/arxiv-database | unknown |  |
 | bgpt-paper-search | skills/science/discovery/bgpt-paper-search | unknown |  |
@@ -173,7 +173,6 @@ None.
 | parallel-web | skills/tools/documents-media/parallel-web | unknown |  |
 | pdf | skills/tools/documents-media/pdf | unknown |  |
 | perplexity-search | skills/tools/documents-media/perplexity-search | unknown |  |
-| pptx | skills/tools/documents-media/pptx | unknown |  |
 | xlsx | skills/tools/documents-media/xlsx | unknown |  |
 | brand-creative-assets | skills/tools/frontend/brand-creative-assets | unknown |  |
 | design-system-tokens | skills/tools/frontend/design-system-tokens | unknown |  |
@@ -237,7 +236,6 @@ URLs below are evidence of related projects or references found in skill bodies.
 | latex-posters | skills/science/communication/latex-posters | 3 | https://doi.org/10.1234/paper}\\, https://github.com/username/project}, https://webaim.org/resources/contrastchecker/ |
 | paper-2-web | skills/science/communication/paper-2-web | 2 | https://github.com/YuhangChen1/Paper2All, https://github.com/YuhangChen1/Paper2All.git |
 | scientific-schematics | skills/science/communication/scientific-schematics | 7 | http://www.consort-statement.org/consort-statement/flow-diagram, https://matplotlib.org/, https://networkx.org/documentation/ |
-| scientific-slides | skills/science/communication/scientific-slides | 1 | https://openrouter.ai/keys |
 | arxiv-database | skills/science/discovery/arxiv-database | 3 | http://arxiv.org/abs/2309.10668v1, http://arxiv.org/pdf/2309.10668v1, https://arxiv.org/abs/2309.10668 |
 | bgpt-paper-search | skills/science/discovery/bgpt-paper-search | 2 | https://bgpt.pro/mcp, https://bgpt.pro/mcp/sse |
 | biorxiv-database | skills/science/discovery/biorxiv-database | 4 | https://doi.org/10.1101/2024.01.15.123456, https://www.biorxiv.org/content/, https://www.biorxiv.org/content/10.1101/2024.01.15.123456v1 |
@@ -329,7 +327,6 @@ URLs below are evidence of related projects or references found in skill bodies.
 | paper-2-web | skills/science/communication/paper-2-web | Unknown |  |
 | pptx-posters | skills/science/communication/pptx-posters | MIT license |  |
 | scientific-schematics | skills/science/communication/scientific-schematics | MIT license |  |
-| scientific-slides | skills/science/communication/scientific-slides | MIT license |  |
 | scientific-visualization | skills/science/communication/scientific-visualization | MIT license |  |
 | arxiv-database | skills/science/discovery/arxiv-database | MIT |  |
 | bgpt-paper-search | skills/science/discovery/bgpt-paper-search | MIT |  |
@@ -372,7 +369,6 @@ URLs below are evidence of related projects or references found in skill bodies.
 | parallel-web | skills/tools/documents-media/parallel-web | MIT license |  |
 | pdf | skills/tools/documents-media/pdf | Proprietary. LICENSE.txt has complete terms | LICENSE.txt, license.txt |
 | perplexity-search | skills/tools/documents-media/perplexity-search | MIT license |  |
-| pptx | skills/tools/documents-media/pptx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt, license.txt |
 | xlsx | skills/tools/documents-media/xlsx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt, license.txt |
 | brand-creative-assets | skills/tools/frontend/brand-creative-assets |  |  |
 | design-system-tokens | skills/tools/frontend/design-system-tokens |  |  |

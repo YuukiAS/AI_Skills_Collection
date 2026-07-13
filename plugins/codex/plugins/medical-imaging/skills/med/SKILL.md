@@ -17,6 +17,8 @@ source_skills:
   - skills/domains/medical-imaging/medical-imaging-classical-features
   - skills/domains/medical-imaging/medical-imaging-deep-learning
   - skills/domains/medical-imaging/pathml
+icon_small: "assets/codex/app-skill-icons/aggregate.svg"
+icon_large: "assets/codex/app-skill-icons/aggregate.svg"
 default_prompt:
 ---
 

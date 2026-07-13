@@ -1,6 +1,6 @@
 {
   "name": "codex-research-writing",
-  "description": "Project-local profile for manuscripts, literature review, citations, PDFs, figures, slides, and peer review.",
+  "description": "Project-local profile for manuscripts, literature review, citations, PDFs, figures, and peer review. Presentation work is installed with presentation-desktop.",
   "max_active_skills": 24,
   "skills": [
     "skills/writing/research/scientific-writing",
@@ -20,10 +20,8 @@
     "skills/science/discovery/openalex-database",
     "skills/tools/documents-media/pdf",
     "skills/tools/documents-media/docx",
-    "skills/tools/documents-media/pptx",
     "skills/tools/documents-media/markitdown",
     "skills/science/communication/scientific-visualization",
-    "skills/science/communication/scientific-slides",
     "skills/science/communication/scientific-schematics",
     "skills/writing/core/writing-fidelity",
     "skills/writing/core/scientific-prose",

@@ -162,6 +162,13 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertNotIn("skills/tools/documents-media/pptx", serialized)
         self.assertNotIn("scientific-slides", serialized)
 
+    def test_render_and_slurm_are_not_central_marketplace_skills(self) -> None:
+        data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        serialized = json.dumps(data)
+        self.assertNotIn("skills/tools/documents-media/render-chinese-math-pdf", serialized)
+        self.assertNotIn("skills/tools/hpc/slurm-workflows", serialized)
+        self.assertTrue((REPO_ROOT / "skills/tools/hpc/slurm-workflows/SKILL.md").exists())
+
     def test_web_development_is_reference_and_brief_layer(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         web = next(plugin for plugin in data["plugins"] if plugin["name"] == "web-development")
@@ -176,7 +183,45 @@ class CodexMarketplaceTests(unittest.TestCase):
         text = history.read_text(encoding="utf-8")
         self.assertIn("| date | source_type | source | revision | permission/license | decision | target | integration_commit | note |", text)
         self.assertIn("CardiacNexus repo-local skills", text)
+        self.assertIn("deferred-user-merge", text)
         self.assertFalse((REPO_ROOT / "docs/provenance/CLONED_SKILL_SOURCES.md").exists())
+
+    def test_v31_profiles_exist_and_server_profile_carries_overlay_skills(self) -> None:
+        for name in [
+            "global-baseline",
+            "research-main",
+            "presentation-desktop",
+            "frontend-research-product",
+            "medical-imaging-project",
+            "bioinformatics-project",
+            "server-research-baseline",
+            "ai-skills-maintainer",
+        ]:
+            self.assertTrue((REPO_ROOT / "profiles" / f"{name}.json").exists())
+        server = json.loads((REPO_ROOT / "profiles/server-research-baseline.json").read_text(encoding="utf-8"))
+        self.assertIn("skills/tools/hpc/slurm-workflows", server["skills"])
+        self.assertIn("skills/tools/documents-media/render-chinese-math-pdf", server["skills"])
+
+    def test_cuhk_payload_excludes_nonessential_zip_assets(self) -> None:
+        root = REPO_ROOT / "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source"
+        self.assertFalse((root / ".vscode/settings.json").exists())
+        self.assertFalse(any((root / "assets").glob("*.xcf")))
+        self.assertFalse(any((root / "images").glob("Fig*.png")))
+        self.assertFalse(any((root / "images").glob("Table*.png")))
+        self.assertTrue((root / "assets/logo_RGB.png").exists())
+
+    def test_marketplace_app_facing_skills_have_icon_metadata(self) -> None:
+        data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        for plugin_data in data["plugins"]:
+            for entry in plugin_data["skills"]:
+                if entry["type"] == "aggregate":
+                    self.assertTrue(entry.get("icon_small"), entry["name"])
+                    self.assertTrue((REPO_ROOT / entry["icon_small"]).exists())
+                elif entry["type"] == "copy":
+                    skill_dir = REPO_ROOT / entry["source"]
+                    text = (skill_dir / "SKILL.md").read_text(encoding="utf-8")
+                    self.assertIn("icon_small:", text, entry["source"])
+                    self.assertTrue((skill_dir / "assets/app-facing.svg").exists() or (skill_dir / "assets/workflow-core.svg").exists())
 
     def test_cross_plugin_frontmatter_name_duplicate_fails(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

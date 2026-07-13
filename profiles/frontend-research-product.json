@@ -1,0 +1,20 @@
+{
+  "name": "frontend-research-product",
+  "description": "Frontend profile for research products, visual systems, reference research, and implementation QA.",
+  "max_active_skills": 16,
+  "skills": [
+    "skills/tools/frontend/frontend-reference-research",
+    "skills/tools/frontend/frontend-visual-systems",
+    "skills/tools/frontend/research-product-frontend",
+    "skills/tools/frontend/product-ux-planning",
+    "skills/tools/frontend/visual-direction",
+    "skills/tools/frontend/design-system-tokens",
+    "skills/tools/frontend/implementation-react-tailwind",
+    "skills/tools/frontend/responsive-accessibility-review",
+    "skills/tools/frontend/webapp-testing"
+  ],
+  "secondary_skills": [
+    "skills/tools/frontend/figma-design-to-code",
+    "skills/tools/frontend/motion-interaction"
+  ]
+}

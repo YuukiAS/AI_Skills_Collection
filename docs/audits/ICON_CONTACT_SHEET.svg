@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="768" viewBox="0 0 640 768">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<image href="../../assets/codex/plugin-icons/workflow-core/composer.svg" x="16" y="12" width="56" height="56"/>
+<text x="16" y="90" font-size="10" font-family="Arial, sans-serif" fill="#111827">workflow-core</text>
+<image href="../../skills/core/codex-system/codex-workflow-protocol/assets/workflow-core.svg" x="144" y="12" width="56" height="56"/>
+<text x="144" y="90" font-size="10" font-family="Arial, sans-serif" fill="#111827">codex-workflow-protocol</text>
+<image href="../../assets/codex/plugin-icons/ai-skills-core/composer.svg" x="272" y="12" width="56" height="56"/>
+<text x="272" y="90" font-size="10" font-family="Arial, sans-serif" fill="#111827">ai-skills-core</text>
+<image href="../../skills/core/codex-system/project-skill-installer/assets/app-facing.svg" x="400" y="12" width="56" height="56"/>
+<text x="400" y="90" font-size="10" font-family="Arial, sans-serif" fill="#111827">project-skill-installer</text>
+<image href="../../skills/core/codex-system/ai-skills-repository-maintainer/assets/app-facing.svg" x="528" y="12" width="56" height="56"/>
+<text x="528" y="90" font-size="10" font-family="Arial, sans-serif" fill="#111827">ai-skills-repository-maintainer</text>
+<image href="../../assets/codex/plugin-icons/writing-style/composer.svg" x="16" y="140" width="56" height="56"/>
+<text x="16" y="218" font-size="10" font-family="Arial, sans-serif" fill="#111827">writing-style</text>
+<image href="../../skills/writing/core/writing-fidelity/assets/app-facing.svg" x="144" y="140" width="56" height="56"/>
+<text x="144" y="218" font-size="10" font-family="Arial, sans-serif" fill="#111827">writing-fidelity</text>
+<image href="../../skills/writing/core/scientific-prose/assets/app-facing.svg" x="272" y="140" width="56" height="56"/>
+<text x="272" y="218" font-size="10" font-family="Arial, sans-serif" fill="#111827">scientific-prose</text>
+<image href="../../skills/writing/core/chinese-prose/assets/app-facing.svg" x="400" y="140" width="56" height="56"/>
+<text x="400" y="218" font-size="10" font-family="Arial, sans-serif" fill="#111827">chinese-prose</text>
+<image href="../../assets/codex/plugin-icons/research-writing/composer.svg" x="528" y="140" width="56" height="56"/>
+<text x="528" y="218" font-size="10" font-family="Arial, sans-serif" fill="#111827">research-writing</text>
+<image href="../../skills/writing/research/research-reporting/assets/app-facing.svg" x="16" y="268" width="56" height="56"/>
+<text x="16" y="346" font-size="10" font-family="Arial, sans-serif" fill="#111827">research-reporting</text>
+<image href="../../assets/codex/app-skill-icons/aggregate.svg" x="144" y="268" width="56" height="56"/>
+<text x="144" y="346" font-size="10" font-family="Arial, sans-serif" fill="#111827">research-paper-workflow</text>
+<image href="../../assets/codex/app-skill-icons/aggregate.svg" x="272" y="268" width="56" height="56"/>
+<text x="272" y="346" font-size="10" font-family="Arial, sans-serif" fill="#111827">literature-and-citations</text>
+<image href="../../assets/codex/plugin-icons/presentations/composer.svg" x="400" y="268" width="56" height="56"/>
+<text x="400" y="346" font-size="10" font-family="Arial, sans-serif" fill="#111827">presentations</text>
+<image href="../../skills/tools/documents-media/presentations/research-presentations/assets/app-facing.svg" x="528" y="268" width="56" height="56"/>
+<text x="528" y="346" font-size="10" font-family="Arial, sans-serif" fill="#111827">research-presentations</text>
+<image href="../../skills/tools/documents-media/presentations/business-presentations/assets/app-facing.svg" x="16" y="396" width="56" height="56"/>
+<text x="16" y="474" font-size="10" font-family="Arial, sans-serif" fill="#111827">business-presentations</text>
+<image href="../../assets/codex/plugin-icons/web-development/composer.svg" x="144" y="396" width="56" height="56"/>
+<text x="144" y="474" font-size="10" font-family="Arial, sans-serif" fill="#111827">web-development</text>
+<image href="../../skills/tools/frontend/frontend-reference-research/assets/app-facing.svg" x="272" y="396" width="56" height="56"/>
+<text x="272" y="474" font-size="10" font-family="Arial, sans-serif" fill="#111827">frontend-reference-research</text>
+<image href="../../assets/codex/app-skill-icons/aggregate.svg" x="400" y="396" width="56" height="56"/>
+<text x="400" y="474" font-size="10" font-family="Arial, sans-serif" fill="#111827">frontend-visual-systems</text>
+<image href="../../assets/codex/app-skill-icons/aggregate.svg" x="528" y="396" width="56" height="56"/>
+<text x="528" y="474" font-size="10" font-family="Arial, sans-serif" fill="#111827">research-product-frontend</text>
+<image href="../../assets/codex/plugin-icons/statistical-modeling/composer.svg" x="16" y="524" width="56" height="56"/>
+<text x="16" y="602" font-size="10" font-family="Arial, sans-serif" fill="#111827">statistical-modeling</text>
+<image href="../../assets/codex/app-skill-icons/aggregate.svg" x="144" y="524" width="56" height="56"/>
+<text x="144" y="602" font-size="10" font-family="Arial, sans-serif" fill="#111827">bayesian-modeling</text>
+<image href="../../assets/codex/app-skill-icons/aggregate.svg" x="272" y="524" width="56" height="56"/>
+<text x="272" y="602" font-size="10" font-family="Arial, sans-serif" fill="#111827">data-analysis-python</text>
+<image href="../../assets/codex/app-skill-icons/aggregate.svg" x="400" y="524" width="56" height="56"/>
+<text x="400" y="602" font-size="10" font-family="Arial, sans-serif" fill="#111827">scientific-visualization</text>
+<image href="../../assets/codex/plugin-icons/bioinformatics/composer.svg" x="528" y="524" width="56" height="56"/>
+<text x="528" y="602" font-size="10" font-family="Arial, sans-serif" fill="#111827">bioinformatics</text>
+<image href="../../assets/codex/app-skill-icons/aggregate.svg" x="16" y="652" width="56" height="56"/>
+<text x="16" y="730" font-size="10" font-family="Arial, sans-serif" fill="#111827">bioinformatics-workflows</text>
+<image href="../../assets/codex/plugin-icons/medical-imaging/composer.svg" x="144" y="652" width="56" height="56"/>
+<text x="144" y="730" font-size="10" font-family="Arial, sans-serif" fill="#111827">medical-imaging</text>
+<image href="../../assets/codex/app-skill-icons/aggregate.svg" x="272" y="652" width="56" height="56"/>
+<text x="272" y="730" font-size="10" font-family="Arial, sans-serif" fill="#111827">medical-imaging-workflows</text>
+<image href="../../assets/codex/app-skill-icons/aggregate.svg" x="400" y="652" width="56" height="56"/>
+<text x="400" y="730" font-size="10" font-family="Arial, sans-serif" fill="#111827">ai-ml-imaging</text>
+</svg>

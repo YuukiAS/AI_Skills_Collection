@@ -14,6 +14,8 @@ recommended_scope: project
 source_skills:
   - skills/tools/visualization/matplotlib
   - skills/tools/visualization/plotly
+icon_small: "assets/codex/app-skill-icons/aggregate.svg"
+icon_large: "assets/codex/app-skill-icons/aggregate.svg"
 default_prompt:
 ---
 

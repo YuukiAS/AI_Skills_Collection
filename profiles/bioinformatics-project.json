@@ -1,0 +1,21 @@
+{
+  "name": "bioinformatics-project",
+  "description": "Common bioinformatics project profile across databases, single-cell analysis, genomics I/O, and omics analysis.",
+  "max_active_skills": 16,
+  "skills": [
+    "skills/domains/bioinformatics/databases/bioinformatics-database-retrieval",
+    "skills/domains/bioinformatics/single-cell/scanpy",
+    "skills/domains/bioinformatics/single-cell/scvi-tools",
+    "skills/domains/bioinformatics/single-cell/anndata",
+    "skills/domains/bioinformatics/genomics-io/pysam",
+    "skills/domains/bioinformatics/omics-analysis/pydeseq2",
+    "skills/domains/bioinformatics/biology-toolkits/biopython",
+    "skills/domains/bioinformatics/biology-toolkits/scikit-bio",
+    "skills/domains/bioinformatics/omics-analysis/polars-bio",
+    "skills/domains/bioinformatics/genomics-io/tiledbvcf"
+  ],
+  "secondary_skills": [
+    "skills/tools/data-science/exploratory-data-analysis",
+    "skills/tools/visualization/matplotlib"
+  ]
+}

@@ -1,0 +1,16 @@
+# Copy to ~/.config/ai-skills/local-overrides.toml and edit locally.
+# Do not commit real account names, private hostnames, tokens, or personal paths.
+
+[sites.cuhk-central-cluster]
+account = ""
+qos = ""
+scratch_root = ""
+texlive_path = ""
+module_init = ""
+
+[sites.unc-longleaf]
+account = ""
+qos = ""
+scratch_root = ""
+texlive_path = ""
+module_init = ""

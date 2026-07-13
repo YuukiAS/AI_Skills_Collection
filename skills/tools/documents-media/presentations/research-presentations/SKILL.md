@@ -13,6 +13,8 @@ profile_tags:
   - presentations
   - research-writing
 recommended_scope: project
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 ---
 # Research Presentations
 

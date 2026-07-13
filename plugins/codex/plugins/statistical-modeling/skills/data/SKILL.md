@@ -16,6 +16,8 @@ source_skills:
   - skills/tools/data-science/polars
   - skills/tools/data-science/scikit-learn
   - skills/tools/data-science/sympy
+icon_small: "assets/codex/app-skill-icons/aggregate.svg"
+icon_large: "assets/codex/app-skill-icons/aggregate.svg"
 default_prompt:
 ---
 

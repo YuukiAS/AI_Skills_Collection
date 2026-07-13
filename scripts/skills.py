@@ -4,9 +4,13 @@
 from __future__ import annotations
 
 import argparse
+import fnmatch
+import hashlib
 import json
 import os
+import platform
 import re
+import shutil
 import subprocess
 import sys
 from collections import Counter, defaultdict
@@ -44,6 +48,13 @@ REGISTRY = ROOT / "registry.json"
 DOCS = ROOT / "docs"
 CATALOG = DOCS / "SKILL_CATALOG.md"
 DOMAIN_DOCS = DOCS / "domains"
+SITE_PROFILES_ROOT = ROOT / "site-profiles"
+ENV_MANIFEST_NAME = ".ai-skills-environment-manifest.json"
+DEFAULT_LOCAL_OVERRIDE = Path.home() / ".config" / "ai-skills" / "local-overrides.toml"
+ENVIRONMENT_SKILLS = (
+    "skills/tools/documents-media/render-chinese-math-pdf",
+    "skills/tools/hpc/slurm-workflows",
+)
 NAME_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")
 HIGH_RISK_DOMAINS = ("medical", "medicine", "finance", "legal", "system-ops")
 PROVENANCE_VALUES = {"user-authored", "external-adapted", "external-vendored", "generated", "unknown", "local"}
@@ -814,6 +825,323 @@ def command_doctor(args: argparse.Namespace) -> int:
     return 0
 
 
+def environment_profile_files() -> list[Path]:
+    if not SITE_PROFILES_ROOT.exists():
+        return []
+    return sorted(SITE_PROFILES_ROOT.glob("*.json"))
+
+
+def load_site_profiles() -> dict[str, dict[str, Any]]:
+    profiles: dict[str, dict[str, Any]] = {}
+    for path in environment_profile_files():
+        try:
+            profile = json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            raise SystemExit(f"{path.relative_to(ROOT)}: invalid JSON: {exc}") from exc
+        site_id = str(profile.get("id") or path.stem)
+        profile["id"] = site_id
+        profile["_path"] = str(path.relative_to(ROOT).as_posix())
+        profiles[site_id] = profile
+    return profiles
+
+
+def environment_local_override_hash(path: Path) -> str | None:
+    if not path.exists():
+        return None
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def environment_target_root(args: argparse.Namespace) -> Path:
+    if args.target == "repo":
+        project = Path(args.project).expanduser().resolve() if args.project else detect_git_root(Path.cwd())[0]
+        return target_skills_root("repo", project)
+    return target_skills_root("user")
+
+
+def environment_detect_profile(args: argparse.Namespace, profiles: dict[str, dict[str, Any]]) -> tuple[dict[str, Any] | None, list[dict[str, Any]]]:
+    if args.site:
+        profile = profiles.get(args.site)
+        if not profile:
+            raise SystemExit(f"unknown site profile: {args.site}")
+        return profile, [profile]
+
+    hostname = (args.hostname or platform.node() or os.environ.get("COMPUTERNAME") or "").lower()
+    path_hint = str(args.path or Path.cwd()).replace("\\", "/").lower()
+    matches: list[dict[str, Any]] = []
+    for profile in profiles.values():
+        detect = profile.get("detect", {}) if isinstance(profile.get("detect"), dict) else {}
+        host_markers = [str(item).lower() for item in detect.get("hostname_contains", detect.get("host_patterns", []))]
+        path_markers = [str(item).lower() for item in detect.get("path_contains", detect.get("path_markers", []))]
+        host_hit = any(marker and (fnmatch.fnmatch(hostname, marker) or marker.strip("*") in hostname) for marker in host_markers)
+        path_hit = any(marker and marker.strip("*") in path_hint for marker in path_markers)
+        if host_hit or path_hit:
+            matches.append(profile)
+    return (matches[0] if len(matches) == 1 else None), matches
+
+
+def environment_plan_payload(args: argparse.Namespace) -> dict[str, Any]:
+    profiles = load_site_profiles()
+    profile, matches = environment_detect_profile(args, profiles)
+    local_override = Path(args.local_override).expanduser() if args.local_override else DEFAULT_LOCAL_OVERRIDE
+    target_root = environment_target_root(args)
+    actions: list[dict[str, Any]] = []
+    for rel in ENVIRONMENT_SKILLS:
+        source = ROOT / rel
+        if not source.exists():
+            actions.append({"action": "error", "source": rel, "reason": "missing-source"})
+            continue
+        actions.append(
+            {
+                "action": "materialize-skill",
+                "source": rel,
+                "target": str((target_root / source.name).resolve()),
+                "site_profile": profile["id"] if profile else None,
+            }
+        )
+    manifest_path = target_root / ENV_MANIFEST_NAME
+    return {
+        "schema_version": 1,
+        "kind": "ai-skills-environment-plan",
+        "site_id": profile["id"] if profile else None,
+        "site_profile_path": profile.get("_path") if profile else None,
+        "matched_site_ids": [item["id"] for item in matches],
+        "ambiguous": len(matches) > 1,
+        "target": args.target,
+        "target_root": str(target_root.resolve()),
+        "local_override_path": str(local_override),
+        "local_override_hash": environment_local_override_hash(local_override),
+        "manifest_path": str(manifest_path.resolve()),
+        "actions": actions,
+        "warnings": [] if profile else ["no unambiguous site profile detected; pass --site to apply a site overlay"],
+    }
+
+
+def environment_site_reference(profile: dict[str, Any] | None, local_override: Path) -> str:
+    lines = [
+        "# Generated site profile",
+        "",
+        "This file is generated by `ai-skills environment apply`; edit the public profile or local override instead.",
+        "",
+    ]
+    if not profile:
+        lines.append("site_id: none")
+        return "\n".join(lines) + "\n"
+    lines.extend(
+        [
+            f"site_id: {profile['id']}",
+            f"display_name: {profile.get('display_name', profile['id'])}",
+            f"profile_revision: {profile.get('revision', 'unknown')}",
+            f"scheduler: {profile.get('scheduler', 'unknown')}",
+            f"local_override_path: {local_override}",
+            "",
+            "public_constraints:",
+        ]
+    )
+    constraints = profile.get("constraints", {}) if isinstance(profile.get("constraints"), dict) else {}
+    for key in sorted(constraints):
+        lines.append(f"- {key}: {constraints[key]}")
+    modules = profile.get("modules", {}) if isinstance(profile.get("modules"), dict) else {}
+    if modules:
+        lines.append("")
+        lines.append("module_hints:")
+        for key in sorted(modules):
+            value = modules[key]
+            if isinstance(value, list):
+                value = ", ".join(str(item) for item in value)
+            lines.append(f"- {key}: {value}")
+    return "\n".join(lines) + "\n"
+
+
+def environment_apply_plan(args: argparse.Namespace, plan: dict[str, Any]) -> dict[str, Any]:
+    if plan["ambiguous"] and not args.site:
+        raise SystemExit("site detection is ambiguous; rerun with --site")
+    if plan["site_id"] is None and not args.site:
+        raise SystemExit("no site profile detected; rerun with --site")
+
+    target_root = Path(plan["target_root"])
+    local_override = Path(plan["local_override_path"]).expanduser()
+    profiles = load_site_profiles()
+    profile = profiles.get(str(plan["site_id"])) if plan["site_id"] else None
+    target_root.mkdir(parents=True, exist_ok=True)
+    staging_root = target_root.parent / f".ai-skills-environment-staging-{os.getpid()}"
+    if staging_root.exists():
+        shutil.rmtree(staging_root)
+    staging_root.mkdir(parents=True)
+    installed: list[dict[str, Any]] = []
+    try:
+        for rel in ENVIRONMENT_SKILLS:
+            source = ROOT / rel
+            staged = staging_root / source.name
+            shutil.copytree(source, staged, ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"))
+            generated = staged / "references" / "_generated"
+            generated.mkdir(parents=True, exist_ok=True)
+            (generated / "site-profile.md").write_text(environment_site_reference(profile, local_override), encoding="utf-8")
+            installed.append({"name": source.name, "source": rel, "target": str((target_root / source.name).resolve())})
+
+        for item in installed:
+            target = Path(item["target"])
+            backup = target.with_name(f"{target.name}.previous-{os.getpid()}")
+            if target.exists() or target.is_symlink():
+                if backup.exists():
+                    shutil.rmtree(backup)
+                target.replace(backup)
+            (staging_root / item["name"]).replace(target)
+            if backup.exists():
+                shutil.rmtree(backup)
+        manifest = {
+            "schema_version": 1,
+            "kind": "ai-skills-environment",
+            "site_id": plan["site_id"],
+            "site_profile_path": plan["site_profile_path"],
+            "site_revision": profile.get("revision") if profile else None,
+            "collection_commit": git_commit(),
+            "target_root": str(target_root.resolve()),
+            "local_override_path": str(local_override),
+            "local_override_hash": environment_local_override_hash(local_override),
+            "installed_at": utc_now(),
+            "installed_skills": installed,
+            "managed_paths": [item["target"] for item in installed],
+        }
+        (target_root / ENV_MANIFEST_NAME).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        return manifest
+    finally:
+        if staging_root.exists():
+            shutil.rmtree(staging_root)
+
+
+def command_environment_list_sites(args: argparse.Namespace) -> int:
+    profiles = load_site_profiles()
+    data = [
+        {
+            "id": profile["id"],
+            "display_name": profile.get("display_name", profile["id"]),
+            "scheduler": profile.get("scheduler", ""),
+            "revision": profile.get("revision", ""),
+            "path": profile.get("_path"),
+        }
+        for profile in profiles.values()
+    ]
+    if args.json:
+        print_json(data)
+    else:
+        for item in data:
+            print(f"{item['id']}\t{item['display_name']}\t{item['scheduler']}\t{item['revision']}")
+    return 0
+
+
+def command_environment_detect(args: argparse.Namespace) -> int:
+    profiles = load_site_profiles()
+    profile, matches = environment_detect_profile(args, profiles)
+    data = {
+        "site_id": profile["id"] if profile else None,
+        "matched_site_ids": [item["id"] for item in matches],
+        "ambiguous": len(matches) > 1,
+    }
+    print_json(data) if args.json else print(data["site_id"] or "unknown")
+    return 2 if data["ambiguous"] else 0
+
+
+def command_environment_plan(args: argparse.Namespace) -> int:
+    plan = environment_plan_payload(args)
+    if args.json:
+        print_json(plan)
+    else:
+        print(f"site: {plan['site_id'] or 'unknown'}")
+        print(f"target_root: {plan['target_root']}")
+        for action in plan["actions"]:
+            print(f"{action['action']}: {action.get('source')} -> {action.get('target', '')}")
+        for warning in plan["warnings"]:
+            print(f"WARNING: {warning}")
+    return 2 if plan["ambiguous"] else 0
+
+
+def command_environment_apply(args: argparse.Namespace) -> int:
+    plan = environment_plan_payload(args)
+    if args.dry_run:
+        print_json(plan) if args.json else print("dry-run: no files written")
+        return 0
+    manifest = environment_apply_plan(args, plan)
+    print_json(manifest) if args.json else print(f"environment overlay applied: {manifest['site_id']} -> {manifest['target_root']}")
+    return 0
+
+
+def command_environment_sync(args: argparse.Namespace) -> int:
+    args.dry_run = getattr(args, "dry_run", False)
+    return command_environment_apply(args)
+
+
+def command_environment_diff(args: argparse.Namespace) -> int:
+    target_root = environment_target_root(args)
+    manifest_path = target_root / ENV_MANIFEST_NAME
+    current = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+    plan = environment_plan_payload(args)
+    data = {
+        "manifest_exists": manifest_path.exists(),
+        "site_changed": current.get("site_id") != plan.get("site_id"),
+        "local_override_changed": current.get("local_override_hash") != plan.get("local_override_hash"),
+        "current_site_id": current.get("site_id"),
+        "planned_site_id": plan.get("site_id"),
+        "managed_paths": current.get("managed_paths", []),
+    }
+    print_json(data)
+    return 0
+
+
+def command_environment_doctor(args: argparse.Namespace) -> int:
+    plan = environment_plan_payload(args)
+    commands = ["sbatch", "squeue", "sinfo", "scontrol", "latexmk", "xelatex", "lualatex", "pandoc", "kpsewhich"]
+    data = {
+        "site_id": plan["site_id"],
+        "target_root": plan["target_root"],
+        "local_override_exists": Path(plan["local_override_path"]).expanduser().exists(),
+        "commands": {cmd: shutil.which(cmd) for cmd in commands},
+        "submit_smoke_job": "requested" if args.submit_smoke_job else "skipped",
+    }
+    if args.submit_smoke_job:
+        data["submit_smoke_job_warning"] = "submission is not implemented by default; run the site smoke script manually after review"
+    print_json(data) if args.json else [print(f"{key}: {value}") for key, value in data.items()]
+    return 0
+
+
+def command_environment_init(args: argparse.Namespace) -> int:
+    path = Path(args.local_override).expanduser() if args.local_override else DEFAULT_LOCAL_OVERRIDE
+    if args.dry_run:
+        print(f"would create {path}")
+        return 0
+    path.parent.mkdir(parents=True, exist_ok=True)
+    template = ROOT / "site-profiles" / "local-overrides.example.toml"
+    text = template.read_text(encoding="utf-8") if template.exists() else "# local ai-skills overrides\n"
+    if path.exists() and not args.force:
+        raise SystemExit(f"local override already exists: {path}")
+    path.write_text(text, encoding="utf-8")
+    print(f"created {path}")
+    return 0
+
+
+def command_environment_uninstall(args: argparse.Namespace) -> int:
+    target_root = environment_target_root(args)
+    manifest_path = target_root / ENV_MANIFEST_NAME
+    if not manifest_path.exists():
+        raise SystemExit(f"environment manifest not found: {manifest_path}")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    managed_paths = [Path(path) for path in manifest.get("managed_paths", [])]
+    if args.dry_run:
+        print_json({"would_remove": [str(path) for path in managed_paths], "manifest": str(manifest_path)})
+        return 0
+    for path in managed_paths:
+        resolved = path.resolve()
+        if not path_within(resolved, target_root):
+            raise SystemExit(f"refusing to remove unmanaged path outside target root: {path}")
+        if resolved.exists() or resolved.is_symlink():
+            if resolved.is_dir() and not resolved.is_symlink():
+                shutil.rmtree(resolved)
+            else:
+                resolved.unlink()
+    manifest_path.unlink()
+    print(f"environment overlay removed from {target_root}")
+    return 0
+
+
 def validate_eval_file(path: Path) -> list[str]:
     errors: list[str] = []
     try:
@@ -1340,6 +1668,64 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--target", choices=["repo", "user", "codex-home"], default="repo", help="Budget context for warnings")
     p.add_argument("--run-agent-evals", action="store_true", help="Reserved; never enabled by default")
     p.set_defaults(func=command_audit)
+
+    p = sub.add_parser("environment", help="Manage server/site overlays for compute-node research environments")
+    env_sub = p.add_subparsers(dest="environment_command", required=True)
+
+    ep = env_sub.add_parser("init", help="Create a local override template outside the repo")
+    ep.add_argument("--local-override", default=str(DEFAULT_LOCAL_OVERRIDE), help="Local override TOML path")
+    ep.add_argument("--dry-run", action="store_true", help="Show the path without writing")
+    ep.add_argument("--force", action="store_true", help="Overwrite an existing local override file")
+    ep.set_defaults(func=command_environment_init)
+
+    ep = env_sub.add_parser("list-sites", help="List public-safe site profiles")
+    ep.add_argument("--json", action="store_true", help="Print machine-readable JSON")
+    ep.set_defaults(func=command_environment_list_sites)
+
+    ep = env_sub.add_parser("detect", help="Detect a site profile from public host/path markers")
+    ep.add_argument("--site", help="Explicit site profile id")
+    ep.add_argument("--hostname", help="Override hostname detection for testing")
+    ep.add_argument("--path", help="Override path detection for testing")
+    ep.add_argument("--json", action="store_true", help="Print machine-readable JSON")
+    ep.set_defaults(func=command_environment_detect)
+
+    def add_environment_target_args(ep: argparse.ArgumentParser) -> None:
+        ep.add_argument("--site", help="Explicit site profile id")
+        ep.add_argument("--target", choices=["repo", "user"], default="user", help="Overlay destination")
+        ep.add_argument("--project", help="Repo/project path for --target repo")
+        ep.add_argument("--hostname", help="Override hostname detection for testing")
+        ep.add_argument("--path", help="Override path detection for testing")
+        ep.add_argument("--local-override", default=str(DEFAULT_LOCAL_OVERRIDE), help="Local override TOML path")
+        ep.add_argument("--json", action="store_true", help="Print machine-readable JSON")
+
+    ep = env_sub.add_parser("plan", help="Plan a site overlay without writing files")
+    add_environment_target_args(ep)
+    ep.set_defaults(func=command_environment_plan)
+
+    ep = env_sub.add_parser("apply", help="Materialize a site overlay using staging then swap")
+    add_environment_target_args(ep)
+    ep.add_argument("--dry-run", action="store_true", help="Print the plan without writing")
+    ep.set_defaults(func=command_environment_apply)
+
+    ep = env_sub.add_parser("sync", help="Reapply the selected site overlay while preserving local override separation")
+    add_environment_target_args(ep)
+    ep.add_argument("--dry-run", action="store_true", help="Print the plan without writing")
+    ep.set_defaults(func=command_environment_sync)
+
+    ep = env_sub.add_parser("diff", help="Compare current manifest with the planned overlay")
+    add_environment_target_args(ep)
+    ep.set_defaults(func=command_environment_diff)
+
+    ep = env_sub.add_parser("doctor", help="Check local tooling for a planned site overlay")
+    add_environment_target_args(ep)
+    ep.add_argument("--submit-smoke-job", action="store_true", help="Explicitly acknowledge that a site smoke job may be submitted")
+    ep.set_defaults(func=command_environment_doctor)
+
+    ep = env_sub.add_parser("uninstall", help="Remove manifest-managed environment overlay skills")
+    ep.add_argument("--target", choices=["repo", "user"], default="user", help="Overlay destination")
+    ep.add_argument("--project", help="Repo/project path for --target repo")
+    ep.add_argument("--dry-run", action="store_true", help="Show manifest-managed removals without deleting")
+    ep.set_defaults(func=command_environment_uninstall)
 
     p = sub.add_parser("doctor", help="Inspect repo/user/codex-home paths, manifests, legacy state, and recommended commands")
     p.add_argument("--project", help="Project path; defaults to detected git root or current directory")

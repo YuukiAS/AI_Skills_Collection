@@ -16,6 +16,8 @@ source_skills:
   - skills/writing/research/paper-workflow-orchestrator
   - skills/writing/research/nature-manuscript-workflow
   - skills/writing/research/latex-paper-authoring
+icon_small: "assets/codex/app-skill-icons/aggregate.svg"
+icon_large: "assets/codex/app-skill-icons/aggregate.svg"
 default_prompt:
 ---
 

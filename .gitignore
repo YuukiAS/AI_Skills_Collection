@@ -7,10 +7,6 @@ Thumbs.db
 *.swo
 .idea/
 .vscode/
-!skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/.vscode/
-!skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/.vscode/**
-!plugins/codex/plugins/presentations/shared/templates/cuhk/beamer/source/.vscode/
-!plugins/codex/plugins/presentations/shared/templates/cuhk/beamer/source/.vscode/**
 .cursor/
 .agents/*
 !.agents/plugins/
@@ -67,7 +63,9 @@ pnpm-debug.log*
 # -----------------------------------------------------------------------------
 .cache/
 todo/
-archive/
 .tmp/skill-intake/
+.tmp/archive/
+archive/provenance/
+.codex_tmp_notion_images/
 build/skill-intake/
 skills/.system/

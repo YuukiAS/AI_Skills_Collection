@@ -12,6 +12,8 @@ last_reviewed: 2026-07-13
 profile_tags:
   - web-development
 recommended_scope: project
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 ---
 # Frontend Reference Research
 

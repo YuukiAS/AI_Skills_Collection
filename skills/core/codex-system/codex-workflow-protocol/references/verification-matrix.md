@@ -1,25 +1,21 @@
 # Verification Matrix
 
-Use this checklist for code, release, commit, PR, issue-fix, framework, generated artifact, or docs work.
+Use this checklist for complex code, data, document, release, generated artifact, or repository maintenance work.
 
-## Required checks
+## Required Checks
 
-- Run `git status --short --branch` before and after the task when inside a git repo.
-- Identify dirty tree ownership: task-owned files, pre-existing user files, generated files, and unrelated files.
-- Inspect the staged diff before any commit. Stage only task-owned changes.
-- Run relevant tests. Prefer targeted tests first, then broader tests when risk warrants it.
-- Run compile/static/format checks available in the repo.
-- Run `git diff --check` before final report or commit.
-- When the repo is meant to be generic, scan for forbidden project-specific strings in touched or staged content.
-- Validate final artifacts directly: rendered PDF/HTML, schema output, metric file, production build, live status, or client-visible behavior.
-- Do not push unless the user explicitly requested push and authentication is available.
+- Inspect `git status --short --branch` before and after repository work.
+- Identify task-owned files, pre-existing user files, generated files, and unrelated changes.
+- Inspect staged diffs before any commit. Stage only task-owned changes.
+- Run relevant tests or validators. Prefer targeted checks first, then broader checks when blast radius warrants it.
+- Validate final artifacts directly through the specialist-defined gate: schema, render, metric, build, live state, or client-visible behavior.
+- Scan touched or staged content for forbidden project-specific strings when producing generic repository assets.
+- Do not push, publish, delete user work, or perform expensive/destructive actions unless the user allowed it.
 
-## Reporting requirements
+## Reporting Requirements
 
-Report exact commands, exit status, important output, and any skipped checks.
+Report exact commands, exit status, important output, skipped checks, and residual risk. If a check cannot run, state the missing dependency, unavailable service, permission boundary, or required user decision.
 
-If tests cannot run, state the exact reason, such as missing dependency, unavailable service, insufficient compute, network restriction, or user approval boundary. Include residual risk and the next strongest validation step.
+## Completion Boundary
 
-## Completion boundary
-
-Smoke, dryrun, preflight, compile success, file existence, job submission, and HTTP 200 responses are intermediate checks. They support progress but do not replace final acceptance unless the user explicitly asked only for that intermediate check.
+Intermediate checks support progress but do not replace acceptance criteria. Completion requires the final gate named by the user, repo, specialist skill, schema, or task plan.

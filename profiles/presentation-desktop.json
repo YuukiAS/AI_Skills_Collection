@@ -1,0 +1,16 @@
+{
+  "name": "presentation-desktop",
+  "description": "Desktop presentation profile for research and business deck planning with editable PPTX/Slides handoff.",
+  "max_active_skills": 10,
+  "skills": [
+    "skills/tools/documents-media/presentations/research-presentations",
+    "skills/tools/documents-media/presentations/business-presentations",
+    "skills/writing/core/writing-fidelity",
+    "skills/writing/core/scientific-prose",
+    "skills/writing/core/chinese-prose"
+  ],
+  "secondary_skills": [
+    "skills/tools/documents-media/render-chinese-math-pdf",
+    "skills/writing/research/citation-verification"
+  ]
+}

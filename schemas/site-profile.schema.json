@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yuukias.github.io/ai-skills/site-profile.schema.json",
+  "type": "object",
+  "required": ["schema_version", "site_id", "display_name", "revision", "scheduler", "capabilities", "constraints", "policy", "preferences"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "site_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "display_name": { "type": "string" },
+    "revision": { "type": "string" },
+    "scheduler": { "enum": ["slurm", "none", "unknown"] },
+    "detect": {
+      "type": "object",
+      "properties": {
+        "host_patterns": { "type": "array", "items": { "type": "string" } },
+        "path_markers": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "capabilities": { "type": "object" },
+    "constraints": { "type": "object" },
+    "policy": { "type": "object" },
+    "preferences": { "type": "object" },
+    "public_notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}

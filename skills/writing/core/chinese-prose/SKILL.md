@@ -11,6 +11,8 @@ secrets_needed:
 last_reviewed: 2026-07-08
 profile_tags:
 recommended_scope: project
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 license: MIT-compatible synthesis plus public-domain style guidance
 ---
 # 中文自然表达终审

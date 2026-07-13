@@ -26,15 +26,15 @@ remain at `.agents/plugins/marketplace.json` relative to the real checkout root.
 
 The generated marketplace currently publishes nine curated plugins:
 
-- `ai-skills-core`
 - `workflow-core`
+- `ai-skills-core`
 - `writing-style`
-- `web-development`
 - `research-writing`
+- `presentations`
+- `web-development`
 - `statistical-modeling`
 - `bioinformatics`
 - `medical-imaging`
-- `cardiacnexus`
 
 Each plugin carries active skills under its own `skills/` directory. Some active
 skills are aggregate skills: they expose one Codex trigger boundary while copying

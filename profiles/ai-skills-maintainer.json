@@ -1,0 +1,15 @@
+{
+  "name": "ai-skills-maintainer",
+  "description": "Maintainer profile for this repository's registry, catalog, provenance, marketplace, icon, and profile workflows.",
+  "max_active_skills": 10,
+  "skills": [
+    "skills/core/codex-system/project-skill-installer",
+    "skills/core/codex-system/ai-skills-repository-maintainer",
+    "skills/core/codex-system/skill-library-analysis",
+    "skills/core/codex-system/codex-workflow-protocol"
+  ],
+  "secondary_skills": [
+    "skills/writing/core/writing-fidelity",
+    "skills/writing/core/chinese-prose"
+  ]
+}

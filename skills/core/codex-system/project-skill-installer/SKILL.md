@@ -11,6 +11,8 @@ secrets_needed:
 last_reviewed: 2026-05-14
 profile_tags:
 recommended_scope: global
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 ---
 # Project Skill Installer
 

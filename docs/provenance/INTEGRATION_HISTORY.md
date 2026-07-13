@@ -4,7 +4,9 @@ Append-only history for external or project-specific sources that were reviewed,
 
 | date | source_type | source | revision | permission/license | decision | target | integration_commit | note |
 |---|---|---|---|---|---|---|---|---|
-| 2026-07-13 | project | CardiacNexus repo-local skills | local central copy | project-specific | project-local | exports/cardiacnexus-repo-local | pending | short-lived export package for target repo merge |
+| 2026-07-13 | project | CardiacNexus repo-local skills | local central copy | project-specific | deferred-user-merge | exports/cardiacnexus-repo-local | deferred-user-merge | short-lived export package kept until user merges into target repo |
+| 2026-07-13 | local-zip | skills-CUHK.zip | sha256:95AC905AC8DABA9FC0FF401777F1197612635764C020F33FC80E813EEE186B3D | local user-provided | merge-selected | site-profiles/cuhk-central-cluster.json skills/tools/hpc/slurm-workflows | pending-v3.1 | extracted generic Slurm overlay behavior without private host account or path details |
+| 2026-07-13 | local-zip | skills-UNC.zip | sha256:0DA4862079F2F494132669682CAEC9450904EC72817FF6C156424A5B4C035A8C | local user-provided | merge-selected | site-profiles/unc-longleaf.json skills/tools/hpc/slurm-workflows | pending-v3.1 | extracted generic Slurm overlay behavior without private host account or path details |
 | 2026-07-13 | github | Imbad0202/academic-research-skills | ad0a7759cee9 | LICENSE NOTICE THIRD_PARTY | merge | paper-workflow-orchestrator literature-review peer-review citation-verification | pre-v2 | migrated from scratch inventory |
 | 2026-07-13 | github | serenakeyitan/citation-check-skill | b9deb7077099 | LICENSE | merge | citation-verification | pre-v2 | migrated from scratch inventory |
 | 2026-07-13 | github | heathdutton/claude-d2-diagrams | 2694f8d50e03 | unknown | record-only | d2-diagrams reference | pre-v2 | plugin-only source |

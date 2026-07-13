@@ -17,6 +17,8 @@ source_skills:
   - skills/domains/bayesian/statsmodels
   - skills/domains/bayesian/statistical-analysis
   - skills/domains/bayesian/simpy
+icon_small: "assets/codex/app-skill-icons/aggregate.svg"
+icon_large: "assets/codex/app-skill-icons/aggregate.svg"
 default_prompt:
 ---
 

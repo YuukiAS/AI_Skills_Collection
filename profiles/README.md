@@ -1,40 +1,43 @@
 # Profiles
 
-Profiles are curated install sets. They are not domains.
+Profile 是手工挑选的安装组合，不是完整 domain。
 
-- Profile: a hand-picked combination for a workflow, such as `codex-bayesian-jsdm`.
-- Domain: a complete area, such as all active `bayesian` skills.
-- Single skill: an exact selector, such as `domain/bayesian/pymc`.
+- Profile：面向一个工作流的组合，例如 `research-main`。
+- Domain：某个领域的完整 active skills，例如完整 `bayesian`。
+- 精确 skill：单个 selector，例如 `domain/bayesian/pymc`。
 
-Install a profile:
-
-```bash
-ai-skills install --target repo --profile codex-research-writing --mode symlink --write-agents-md
-```
-
-Install a complete domain:
+安装示例：
 
 ```bash
+ai-skills install --target repo --profile research-main --mode copy --write-agents-md
 ai-skills install --target repo --domain bayesian --mode symlink --write-agents-md
-```
-
-Install precise skills:
-
-```bash
 ai-skills install --target repo --skill domain/bayesian/pymc --mode symlink --write-agents-md
 ```
 
-## Available Profiles
+## v3.1 推荐 Profile
 
-- `codex-core-global`: tiny user-level bootstrap profile.
-- `codex-workflow-core`: global workflow protocol, source-of-truth discovery, gate-driven completion, verification, escalation, live-state supervision, and writing fidelity.
-- `codex-webdev`: React, Next.js, Tailwind, Figma handoff, browser testing, and visual QA.
-- `codex-research-writing`: manuscripts, literature review, citations, PDFs, figures, slides, and peer review.
-- `codex-scientific-diagrams`: editable scientific method figures, D2, draw.io, PlantUML, Mermaid, Excalidraw, and publication figure planning.
-- `codex-writing-style`: writing fidelity guardrail, English scientific prose, Chinese prose polishing, and CJK/math PDF rendering.
-- `codex-bayesian-jsdm`: Bayesian modeling, JSDM/HMSC, simulation, diagnostics, and manuscript support.
-- `codex-cardiacnexus`: CardiacNexus, CMR, DICOM/NIfTI, MONAI, nnU-Net, UKB, and imaging pipelines.
-- `codex-bioinformatics-light`: common bioinformatics workflows without every provider note.
-- `codex-skill-maintenance`: maintain this skill repository, registry, docs, and installers.
+- `global-baseline`：最小全局基线，包含流程路由和写作保真。
+- `research-main`：科研写作主力，包含报告、论文、文献、引用、PDF/DOCX/可视化支持。
+- `presentation-desktop`：桌面演示工作，包含 research/business deck planning。
+- `frontend-research-product`：科研产品前端、视觉系统、参考研究和实现 QA。
+- `medical-imaging-project`：通用医学影像项目，不复制 CardiacNexus 专用 skill。
+- `bioinformatics-project`：常用生物信息项目组合。
+- `server-research-baseline`：compute node 基线，包含 CJK/math PDF render 和通用 Slurm workflow。
+- `ai-skills-maintainer`：维护本仓库 registry、catalog、provenance、marketplace、icon 和 profile。
 
-Budget warnings from `audit` are guidance. They should prompt description compression or profile tuning, but they do not make domain installs invalid.
+## 兼容 Profile
+
+旧 `codex-*` profile 仍保留，方便已有脚本继续使用。新文档优先推荐 v3.1 profile。
+
+- `codex-core-global`
+- `codex-workflow-core`
+- `codex-webdev`
+- `codex-research-writing`
+- `codex-scientific-diagrams`
+- `codex-writing-style`
+- `codex-bayesian-jsdm`
+- `codex-cardiacnexus`
+- `codex-bioinformatics-light`
+- `codex-skill-maintenance`
+
+`codex-cardiacnexus` 只保留通用支持组合；项目专用 CardiacNexus skills 在 `exports/cardiacnexus-repo-local/`，后续应合并进 CardiacNexus repo。
