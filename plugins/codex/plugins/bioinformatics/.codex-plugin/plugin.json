@@ -1,6 +1,6 @@
 {
   "name": "bioinformatics",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "General bioinformatics workflows across databases, single-cell analysis, genomics I/O, and omics analysis.",
   "author": {
     "name": "YuukiAS",

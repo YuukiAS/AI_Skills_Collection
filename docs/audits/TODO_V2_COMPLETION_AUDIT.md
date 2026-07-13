@@ -5,7 +5,7 @@ Status vocabulary is limited to `PASS | PARTIAL | FAIL | DEFERRED_USER_ACTION | 
 | Area | Status | Evidence |
 |---|---|---|
 | Central marketplace fixed to nine generic plugins | PASS | `scripts/codex_marketplace_config.json` contains the generic nine-plugin set and omits `cardiacnexus`. |
-| Plugin versions synchronized at `2.0.0` | PASS | All marketplace plugin entries keep `version: "2.0.0"`. |
+| Plugin versions synchronized | PASS | All marketplace plugin entries now use `version: "3.0.0"` after the v3 release bump. |
 | `presentations` split from `research-writing` | PASS | `presentations` owns research/business routes and shared CUHK payload; `research-writing` no longer publishes legacy `pptx` or `scientific-slides`. |
 | Chinese README direction | PARTIAL | Main README is Chinese-first; v3.1 continues tightening profile and environment sections. |
 | CUHK LaTeX/PPTX template payload | PARTIAL | Beamer source, design tokens, PPTX builder/reference deck, and importer are tracked; live LaTeX/PPTX render verification depends on local tool availability. |
