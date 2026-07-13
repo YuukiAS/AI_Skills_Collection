@@ -164,6 +164,9 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Bootstrap Python packaging tools
+        run: python -m pip install --upgrade pip setuptools wheel
+
       - name: Install editable CLI
         run: python -m pip install --no-build-isolation -e .
 
