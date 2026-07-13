@@ -1,6 +1,6 @@
 # visualization
 
-Active skills: 8
+Active skills: 12
 
 ## Install
 
@@ -13,7 +13,7 @@ ai-skills install --target repo --domain visualization --mode symlink --write-ag
 Install a few skills precisely:
 
 ```bash
-ai-skills install --target repo --skill tool/visualization/canvas-design --skill tool/visualization/generate-image --skill tool/visualization/infographics --mode symlink --write-agents-md
+ai-skills install --target repo --skill tool/visualization/canvas-design --skill tool/visualization/d2-diagrams --skill tool/visualization/drawio-diagrams --mode symlink --write-agents-md
 ```
 
 Complete domain installs are supported. If an audit reports high description length or many active skills, treat it as a context-budget warning, not an installation error.
@@ -27,10 +27,14 @@ Complete domain installs are supported. If an audit reports high description len
 ## Skills
 
 - `canvas-design` (`skills/tools/visualization/canvas-design`): Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.
+- `d2-diagrams` (`skills/tools/visualization/d2-diagrams`): Generate D2 source diagrams and rendered SVG/PNG outputs for architecture, infrastructure, method pipelines, system components, and codebase structure. Use when a text-based diagram DSL is preferable to manual drawing.
+- `drawio-diagrams` (`skills/tools/visualization/drawio-diagrams`): Create, edit, validate, and export editable draw.io diagrams for architecture, methods, flowcharts, ER diagrams, and paper method figures. Use when the deliverable should remain editable as .drawio XML or embedded editable SVG/PDF.
+- `excalidraw-diagrams` (`skills/tools/visualization/excalidraw-diagrams`): Create or revise Excalidraw-style sketch diagrams for early architecture, workflow, method, and concept ideation. Use when the user wants informal hand-drawn exploration rather than publication-final figures.
 - `generate-image` (`skills/tools/visualization/generate-image`): Generate or edit images using AI models (FLUX, Nano Banana 2). Use for general-purpose image generation including photos, illustrations, artwork, visual assets, concept art, and any image that is not a technical diagram or schematic. For flowcharts, circuits, pathways, and technical diagrams, use the scientific-schematics skill instead.
 - `infographics` (`skills/tools/visualization/infographics`): Create professional infographics using Nano Banana Pro AI with smart iterative refinement. Uses Gemini 3 Pro for quality review. Integrates research-lookup and web search for accurate data. Supports 10 infographic types, 8 industry styles, and colorblind-safe palettes.
 - `markdown-mermaid-writing` (`skills/tools/visualization/markdown-mermaid-writing`): Comprehensive markdown and Mermaid diagram writing skill. Use when creating any scientific document, report, analysis, or visualization. Establishes text-based diagrams as the default documentation standard with full style guides (markdown + mermaid), 24 diagram type references, and 9 document templates.
 - `matplotlib` (`skills/tools/visualization/matplotlib`): Low-level plotting library for full customization. Use when you need fine-grained control over every plot element, creating novel plot types, or integrating with specific scientific workflows.
+- `plantuml-diagrams` (`skills/tools/visualization/plantuml-diagrams`): Create PlantUML source and rendered diagrams for sequence, activity, class, component, deployment, state, and C4-style architecture diagrams. Use when UML semantics are more important than freeform drawing.
 - `plotly` (`skills/tools/visualization/plotly`): Interactive visualization library. Use when you need hover info, zoom, pan, or web-embeddable charts. Best for dashboards, exploratory analysis, and presentations. For static publication figures use matplotlib or scientific-visualization.
 - `seaborn` (`skills/tools/visualization/seaborn`): Statistical visualization with pandas integration. Use for quick exploration of distributions, relationships, and categorical comparisons with attractive defaults. Best for box plots, violin plots, pair plots, heatmaps. Built on matplotlib. For interactive plots use plotly; for publication styling use scientific-visualization.
 - `theme-factory` (`skills/tools/visualization/theme-factory`): Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.

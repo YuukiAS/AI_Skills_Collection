@@ -1,7 +1,7 @@
 {
   "name": "writing-style",
-  "version": "1.1.0",
-  "description": "Source-faithful writing, scientific prose, Chinese technical prose, and CJK/math PDF rendering.",
+  "version": "2.0.0",
+  "description": "Source-faithful rewriting, Chinese technical expression, and local scientific prose cleanup without deciding research structure.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Writing Style",
-    "shortDescription": "Source-faithful writing, scientific prose, Chinese technical prose, and CJK/math PDF rendering.",
-    "longDescription": "Source-faithful writing, scientific prose, Chinese technical prose, and CJK/math PDF rendering. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Source-faithful rewriting, Chinese technical expression, and local scientific prose cleanup without deciding research structure.",
+    "longDescription": "Source-faithful rewriting, Chinese technical expression, and local scientific prose cleanup without deciding research structure. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [
@@ -27,10 +27,12 @@
     ],
     "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
     "defaultPrompt": [
-      "Make this scientific prose clearer.",
+      "Make this text clearer without changing meaning.",
       "Polish this Chinese technical text.",
-      "Render and check a CJK math PDF."
+      "Improve this scientific prose locally."
     ],
-    "brandColor": "#2563EB"
+    "brandColor": "#7C3AED",
+    "composerIcon": "./.codex-plugin/assets/composer.svg",
+    "logo": "./.codex-plugin/assets/logo.svg"
   }
 }

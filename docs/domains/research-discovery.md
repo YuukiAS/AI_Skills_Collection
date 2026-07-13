@@ -1,6 +1,6 @@
 # research-discovery
 
-Active skills: 8
+Active skills: 9
 
 ## Install
 
@@ -34,6 +34,7 @@ Complete domain installs are supported. If an audit reports high description len
 - `pubmed-database` (`skills/science/discovery/pubmed-database`): Direct REST API access to PubMed. Advanced Boolean/MeSH queries, E-utilities API, batch processing, citation management. For Python workflows, prefer biopython (Bio.Entrez). Use this for direct HTTP/REST work or custom API implementations.
 - `pyzotero` (`skills/science/discovery/pyzotero`): Interact with Zotero reference management libraries using the pyzotero Python client. Retrieve, create, update, and delete items, collections, tags, and attachments via the Zotero Web API v3.
 - `research-lookup` (`skills/science/discovery/research-lookup`): Look up current research information using the Parallel Chat API (primary) or Perplexity sonar-pro-search (academic paper searches). Automatically routes queries to the best backend. Use for finding papers, gathering research data, and verifying scientific information.
+- `valyu-scientific-search` (`skills/science/discovery/valyu-scientific-search`): Search scientific literature and biomedical databases through Valyu-backed semantic search when available, including PubMed, arXiv, bioRxiv, medRxiv, patents, ChEMBL, DrugBank, Open Targets, FDA labels, and clinical trials.
 
 ## Main References
 

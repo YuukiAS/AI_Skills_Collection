@@ -1,7 +1,7 @@
 {
   "name": "workflow-core",
-  "version": "1.1.0",
-  "description": "General Codex execution, source-of-truth discovery, verification, and completion gates.",
+  "version": "2.0.0",
+  "description": "General Codex execution, source-of-truth discovery, planning, verification, and completion gates.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Workflow Core",
-    "shortDescription": "General Codex execution, source-of-truth discovery, verification, and completion gates.",
-    "longDescription": "General Codex execution, source-of-truth discovery, verification, and completion gates. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "General Codex execution, source-of-truth discovery, planning, verification, and completion gates.",
+    "longDescription": "General Codex execution, source-of-truth discovery, planning, verification, and completion gates. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Developer Tools",
     "capabilities": [
@@ -31,6 +31,8 @@
       "Find the source of truth before editing.",
       "Check completion gates for this task."
     ],
-    "brandColor": "#2563EB"
+    "brandColor": "#334155",
+    "composerIcon": "./.codex-plugin/assets/composer.svg",
+    "logo": "./.codex-plugin/assets/logo.svg"
   }
 }

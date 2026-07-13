@@ -1,7 +1,7 @@
 {
   "name": "ai-skills-core",
-  "version": "1.1.0",
-  "description": "Install, create, and maintain project-local Codex skills.",
+  "version": "2.0.0",
+  "description": "AI_Skills_Collection profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "AI Skills Core",
-    "shortDescription": "Install, create, and maintain project-local Codex skills.",
-    "longDescription": "Install, create, and maintain project-local Codex skills. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "AI_Skills_Collection profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing.",
+    "longDescription": "AI_Skills_Collection profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Developer Tools",
     "capabilities": [
@@ -27,10 +27,12 @@
     ],
     "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
     "defaultPrompt": [
-      "Install project-local skills safely.",
-      "Create or update a Codex skill.",
-      "Set up this repo's skill profile."
+      "Install this repository's project profiles.",
+      "Maintain the AI Skills registry and catalog.",
+      "Regenerate the Codex marketplace layer."
     ],
-    "brandColor": "#2563EB"
+    "brandColor": "#0F766E",
+    "composerIcon": "./.codex-plugin/assets/composer.svg",
+    "logo": "./.codex-plugin/assets/logo.svg"
   }
 }

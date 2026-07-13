@@ -34,12 +34,12 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Main References
 
-- `skills/domains/bayesian/bayesian-ppl-diagnostics/references/reference.md`
-- `skills/domains/bayesian/pymc/references/legacy-full-skill.md`
-- `skills/domains/bayesian/pymc/references/modeling-workflow.md`
-- `skills/domains/bayesian/simpy/references/legacy-full-skill.md`
-- `skills/domains/bayesian/simpy/references/simulation-workflow.md`
-- `skills/domains/bayesian/statistical-analysis/references/legacy-full-skill.md`
-- `skills/domains/bayesian/statistical-analysis/references/statistical-decision-notes.md`
-- `skills/domains/bayesian/statsmodels/references/legacy-full-skill.md`
-- `skills/domains/bayesian/statsmodels/references/statsmodels-workflow.md`
+- `skills\domains\bayesian\bayesian-ppl-diagnostics\references\reference.md`
+- `skills\domains\bayesian\pymc\references\legacy-full-skill.md`
+- `skills\domains\bayesian\pymc\references\modeling-workflow.md`
+- `skills\domains\bayesian\simpy\references\legacy-full-skill.md`
+- `skills\domains\bayesian\simpy\references\simulation-workflow.md`
+- `skills\domains\bayesian\statistical-analysis\references\legacy-full-skill.md`
+- `skills\domains\bayesian\statistical-analysis\references\statistical-decision-notes.md`
+- `skills\domains\bayesian\statsmodels\references\legacy-full-skill.md`
+- `skills\domains\bayesian\statsmodels\references\statsmodels-workflow.md`

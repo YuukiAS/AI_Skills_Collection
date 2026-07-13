@@ -38,21 +38,21 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Main References
 
-- `skills/domains/medicine-clinical/clinical-decision-support/references/evidence-checklist.md`
-- `skills/domains/medicine-clinical/clinical-decision-support/references/legacy-full-skill.md`
-- `skills/domains/medicine-clinical/clinical-decision-support/references/source-notes.md`
-- `skills/domains/medicine-clinical/clinical-guideline-checking/references/guideline-checklist.md`
-- `skills/domains/medicine-clinical/clinical-reports/references/clinical-report-checklist.md`
-- `skills/domains/medicine-clinical/clinical-reports/references/legacy-full-skill.md`
-- `skills/domains/medicine-clinical/clinical-reports/references/source-notes.md`
-- `skills/domains/medicine-clinical/medical-literature-evidence-review/references/evidence-table-template.md`
-- `skills/domains/medicine-clinical/medical-literature-evidence-review/references/source-notes.md`
-- `skills/domains/medicine-clinical/medical-safety-boundaries/references/safety-checklist.md`
-- `skills/domains/medicine-clinical/neurokit2/references/source-notes.md`
-- `skills/domains/medicine-clinical/pyhealth/references/source-notes.md`
-- `skills/domains/medicine-clinical/scikit-survival/references/source-notes.md`
-- `skills/domains/medicine-clinical/treatment-plans/references/legacy-full-skill.md`
-- `skills/domains/medicine-clinical/treatment-plans/references/source-notes.md`
-- `skills/domains/medicine-clinical/treatment-plans/references/treatment-plan-checklist.md`
+- `skills\domains\medicine-clinical\clinical-decision-support\references\evidence-checklist.md`
+- `skills\domains\medicine-clinical\clinical-decision-support\references\legacy-full-skill.md`
+- `skills\domains\medicine-clinical\clinical-decision-support\references\source-notes.md`
+- `skills\domains\medicine-clinical\clinical-guideline-checking\references\guideline-checklist.md`
+- `skills\domains\medicine-clinical\clinical-reports\references\clinical-report-checklist.md`
+- `skills\domains\medicine-clinical\clinical-reports\references\legacy-full-skill.md`
+- `skills\domains\medicine-clinical\clinical-reports\references\source-notes.md`
+- `skills\domains\medicine-clinical\medical-literature-evidence-review\references\evidence-table-template.md`
+- `skills\domains\medicine-clinical\medical-literature-evidence-review\references\source-notes.md`
+- `skills\domains\medicine-clinical\medical-safety-boundaries\references\safety-checklist.md`
+- `skills\domains\medicine-clinical\neurokit2\references\source-notes.md`
+- `skills\domains\medicine-clinical\pyhealth\references\source-notes.md`
+- `skills\domains\medicine-clinical\scikit-survival\references\source-notes.md`
+- `skills\domains\medicine-clinical\treatment-plans\references\legacy-full-skill.md`
+- `skills\domains\medicine-clinical\treatment-plans\references\source-notes.md`
+- `skills\domains\medicine-clinical\treatment-plans\references\treatment-plan-checklist.md`
 
 Alias for registry domain `medicine-clinical`.

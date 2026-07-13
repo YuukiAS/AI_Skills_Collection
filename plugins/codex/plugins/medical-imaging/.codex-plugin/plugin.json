@@ -1,7 +1,7 @@
 {
   "name": "medical-imaging",
-  "version": "1.1.0",
-  "description": "General medical imaging and AI/ML imaging workflows without project-specific CardiacNexus conventions.",
+  "version": "2.0.0",
+  "description": "Medical imaging, CMR, DICOM/NIfTI, segmentation, registration, imaging features, and imaging ML workflows.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Medical Imaging",
-    "shortDescription": "General medical imaging and AI/ML imaging workflows without project-specific CardiacNexus conventions.",
-    "longDescription": "General medical imaging and AI/ML imaging workflows without project-specific CardiacNexus conventions. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Medical imaging, CMR, DICOM/NIfTI, segmentation, registration, imaging features, and imaging ML workflows.",
+    "longDescription": "Medical imaging, CMR, DICOM/NIfTI, segmentation, registration, imaging features, and imaging ML workflows. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [
@@ -31,6 +31,8 @@
       "Plan a medical imaging ML workflow.",
       "Review this DICOM or NIfTI workflow."
     ],
-    "brandColor": "#2563EB"
+    "brandColor": "#DC2626",
+    "composerIcon": "./.codex-plugin/assets/composer.svg",
+    "logo": "./.codex-plugin/assets/logo.svg"
   }
 }

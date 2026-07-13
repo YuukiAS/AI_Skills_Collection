@@ -1,6 +1,6 @@
 ---
 name: chinese-prose
-description: Chinese technical and scientific prose polishing with CJK/math PDF rendering support.
+description: Chinese technical and scientific prose polishing with CJK/math rendering support.
 status: active
 provenance: generated
 trusted: false
@@ -14,13 +14,14 @@ recommended_scope: project
 source_skills:
   - skills/writing/core/chinese-prose
   - skills/tools/documents-media/render-chinese-math-pdf
+default_prompt:
 ---
 
 # chinese-prose
 
 ## Trigger Boundary
 
-Chinese technical and scientific prose polishing with CJK/math PDF rendering support.
+Chinese technical and scientific prose polishing with CJK/math rendering support.
 
 Use this aggregate Codex App skill when the task matches one of the source workflows below.
 

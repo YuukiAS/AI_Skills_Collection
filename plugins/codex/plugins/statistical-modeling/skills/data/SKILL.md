@@ -16,6 +16,7 @@ source_skills:
   - skills/tools/data-science/polars
   - skills/tools/data-science/scikit-learn
   - skills/tools/data-science/sympy
+default_prompt:
 ---
 
 # data-analysis-python

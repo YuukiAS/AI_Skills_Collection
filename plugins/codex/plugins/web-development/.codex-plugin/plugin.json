@@ -1,7 +1,7 @@
 {
   "name": "web-development",
-  "version": "1.1.0",
-  "description": "Frontend product design, React/Tailwind implementation, Figma handoff, visual assets, and browser QA.",
+  "version": "2.0.0",
+  "description": "Frontend reference research, visual systems, and research product frontend constraints that complement official build-web-apps.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Web Development",
-    "shortDescription": "Frontend product design, React/Tailwind implementation, Figma handoff, visual assets, and browser QA.",
-    "longDescription": "Frontend product design, React/Tailwind implementation, Figma handoff, visual assets, and browser QA. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Frontend reference research, visual systems, and research product frontend constraints that complement official build-web-apps.",
+    "longDescription": "Frontend reference research, visual systems, and research product frontend constraints that complement official build-web-apps. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Web Development",
     "capabilities": [
@@ -27,10 +27,12 @@
     ],
     "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
     "defaultPrompt": [
-      "Design and build a frontend product.",
-      "Audit this frontend with browser tests.",
-      "Implement this Figma handoff."
+      "Research frontend references.",
+      "Create a visual system brief.",
+      "Plan a research product UI."
     ],
-    "brandColor": "#2563EB"
+    "brandColor": "#EA580C",
+    "composerIcon": "./.codex-plugin/assets/composer.svg",
+    "logo": "./.codex-plugin/assets/logo.svg"
   }
 }

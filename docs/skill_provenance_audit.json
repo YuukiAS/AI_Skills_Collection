@@ -1,6 +1,6 @@
 {
   "license_counts": {
-    "(missing)": 42,
+    "(missing)": 45,
     "3-clause BSD license": 1,
     "Apache License, Version 2.0": 1,
     "Apache-2.0": 4,
@@ -29,7 +29,7 @@
     "https://github.com/sympy/sympy/blob/master/LICENSE": 1
   },
   "metadata_skill_author_counts": {
-    "(missing)": 42,
+    "(missing)": 45,
     "AHK Strategies (ashrafkahoush-ux)": 2,
     "AI Skills Collection maintainers": 1,
     "AI Skills Collection maintainers with recorded upstream sources": 11,
@@ -44,20 +44,33 @@
   "provenance_category_counts": {
     "external-adapted": 11,
     "local": 4,
-    "unknown": 123,
-    "user-authored": 8
+    "unknown": 119,
+    "user-authored": 15
   },
   "provenance_counts": {
     "external-adapted": 11,
     "local": 4,
-    "unknown": 123,
-    "user-authored": 8
+    "unknown": 119,
+    "user-authored": 15
   },
   "rows_with_license_files_count": 12,
   "rows_with_urls_count": 68,
   "scope": "active_and_non_archived",
-  "skill_count": 146,
+  "skill_count": 149,
   "skills": [
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "ai-skills-repository-maintainer",
+      "path": "skills/core/codex-system/ai-skills-repository-maintainer",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
     {
       "license": "",
       "license_files": [],
@@ -74,7 +87,8 @@
     {
       "license": "Complete terms in LICENSE.txt",
       "license_files": [
-        "LICENSE.txt"
+        "LICENSE.txt",
+        "license.txt"
       ],
       "metadata_skill_author": "",
       "name": "mcp-builder",
@@ -127,7 +141,8 @@
     {
       "license": "",
       "license_files": [
-        "LICENSE.txt"
+        "LICENSE.txt",
+        "license.txt"
       ],
       "metadata_skill_author": "",
       "name": "imagegen",
@@ -144,7 +159,8 @@
     {
       "license": "",
       "license_files": [
-        "LICENSE.txt"
+        "LICENSE.txt",
+        "license.txt"
       ],
       "metadata_skill_author": "",
       "name": "openai-docs",
@@ -175,6 +191,7 @@
     {
       "license": "",
       "license_files": [
+        "LICENSE.txt",
         "license.txt"
       ],
       "metadata_skill_author": "",
@@ -190,7 +207,8 @@
     {
       "license": "",
       "license_files": [
-        "LICENSE.txt"
+        "LICENSE.txt",
+        "license.txt"
       ],
       "metadata_skill_author": "",
       "name": "skill-installer",
@@ -895,58 +913,6 @@
       "license": "",
       "license_files": [],
       "metadata_skill_author": "",
-      "name": "cardiacnexus-docs-markdoc",
-      "path": "skills/projects/cmr/cardiacnexus-docs-markdoc",
-      "provenance": "unknown",
-      "provenance_category": "unknown",
-      "source_fields": {},
-      "status": "active",
-      "url_count": 0,
-      "urls": []
-    },
-    {
-      "license": "",
-      "license_files": [],
-      "metadata_skill_author": "",
-      "name": "cardiacnexus-feature-contracts",
-      "path": "skills/projects/cmr/cardiacnexus-feature-contracts",
-      "provenance": "unknown",
-      "provenance_category": "unknown",
-      "source_fields": {},
-      "status": "active",
-      "url_count": 0,
-      "urls": []
-    },
-    {
-      "license": "",
-      "license_files": [],
-      "metadata_skill_author": "",
-      "name": "cardiacnexus-pipeline-refactor",
-      "path": "skills/projects/cmr/cardiacnexus-pipeline-refactor",
-      "provenance": "unknown",
-      "provenance_category": "unknown",
-      "source_fields": {},
-      "status": "active",
-      "url_count": 0,
-      "urls": []
-    },
-    {
-      "license": "",
-      "license_files": [],
-      "metadata_skill_author": "",
-      "name": "cardiacnexus-strain-registration",
-      "path": "skills/projects/cmr/cardiacnexus-strain-registration",
-      "provenance": "unknown",
-      "provenance_category": "unknown",
-      "source_fields": {},
-      "status": "active",
-      "url_count": 0,
-      "urls": []
-    },
-    {
-      "license": "",
-      "license_files": [],
-      "metadata_skill_author": "",
       "name": "latex-posters",
       "path": "skills/science/communication/latex-posters",
       "provenance": "unknown",
@@ -1638,7 +1604,8 @@
     {
       "license": "Proprietary. LICENSE.txt has complete terms",
       "license_files": [
-        "LICENSE.txt"
+        "LICENSE.txt",
+        "license.txt"
       ],
       "metadata_skill_author": "",
       "name": "docx",
@@ -1731,7 +1698,8 @@
     {
       "license": "Proprietary. LICENSE.txt has complete terms",
       "license_files": [
-        "LICENSE.txt"
+        "LICENSE.txt",
+        "license.txt"
       ],
       "metadata_skill_author": "",
       "name": "pdf",
@@ -1769,13 +1737,40 @@
     {
       "license": "Proprietary. LICENSE.txt has complete terms",
       "license_files": [
-        "LICENSE.txt"
+        "LICENSE.txt",
+        "license.txt"
       ],
       "metadata_skill_author": "",
       "name": "pptx",
       "path": "skills/tools/documents-media/pptx",
       "provenance": "unknown",
       "provenance_category": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "business-presentations",
+      "path": "skills/tools/documents-media/presentations/business-presentations",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "research-presentations",
+      "path": "skills/tools/documents-media/presentations/research-presentations",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
       "source_fields": {},
       "status": "active",
       "url_count": 0,
@@ -1797,7 +1792,8 @@
     {
       "license": "Proprietary. LICENSE.txt has complete terms",
       "license_files": [
-        "LICENSE.txt"
+        "LICENSE.txt",
+        "license.txt"
       ],
       "metadata_skill_author": "",
       "name": "xlsx",
@@ -1852,6 +1848,32 @@
       "license": "",
       "license_files": [],
       "metadata_skill_author": "",
+      "name": "frontend-reference-research",
+      "path": "skills/tools/frontend/frontend-reference-research",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "frontend-visual-systems",
+      "path": "skills/tools/frontend/frontend-visual-systems",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
       "name": "implementation-react-tailwind",
       "path": "skills/tools/frontend/implementation-react-tailwind",
       "provenance": "unknown",
@@ -1891,6 +1913,19 @@
       "license": "",
       "license_files": [],
       "metadata_skill_author": "",
+      "name": "research-product-frontend",
+      "path": "skills/tools/frontend/research-product-frontend",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
       "name": "responsive-accessibility-review",
       "path": "skills/tools/frontend/responsive-accessibility-review",
       "provenance": "unknown",
@@ -1916,7 +1951,8 @@
     {
       "license": "Complete terms in LICENSE.txt",
       "license_files": [
-        "LICENSE.txt"
+        "LICENSE.txt",
+        "license.txt"
       ],
       "metadata_skill_author": "",
       "name": "webapp-testing",
@@ -1933,7 +1969,8 @@
     {
       "license": "Complete terms in LICENSE.txt",
       "license_files": [
-        "LICENSE.txt"
+        "LICENSE.txt",
+        "license.txt"
       ],
       "metadata_skill_author": "",
       "name": "canvas-design",
@@ -2124,7 +2161,8 @@
     {
       "license": "Complete terms in LICENSE.txt",
       "license_files": [
-        "LICENSE.txt"
+        "LICENSE.txt",
+        "license.txt"
       ],
       "metadata_skill_author": "",
       "name": "theme-factory",
@@ -2311,7 +2349,7 @@
       "source_fields": {
         "source_imported_at": "2026-07-09",
         "source_license": "MIT",
-        "source_note": "Distilled from PaperSpine, academic-research-skills, Nature-Paper-Skills, paper-writing-skill, and Research-Paper-Writing-Skills; see docs/provenance/CLONED_SKILL_SOURCES.md.",
+        "source_note": "Distilled from PaperSpine, academic-research-skills, Nature-Paper-Skills, paper-writing-skill, and Research-Paper-Writing-Skills; see docs/provenance/INTEGRATION_HISTORY.md.",
         "source_path": ".",
         "source_ref": "d4529208cda72aa075767611b0265b95b709b550",
         "source_repo_url": "https://github.com/WUBING2023/PaperSpine"
@@ -2341,6 +2379,19 @@
       "path": "skills/writing/research/research-grants",
       "provenance": "unknown",
       "provenance_category": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "research-reporting",
+      "path": "skills/writing/research/research-reporting",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
       "source_fields": {},
       "status": "active",
       "url_count": 0,

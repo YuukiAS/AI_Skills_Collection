@@ -24,7 +24,7 @@ MARKETPLACE_PATH = ROOT / ".agents" / "plugins" / "marketplace.json"
 OLD_NESTED_MARKETPLACE_PATH = CODEX_ROOT / ".agents" / "plugins" / "marketplace.json"
 CONFIG_PATH = ROOT / "scripts" / "codex_marketplace_config.json"
 REPOSITORY_URL = "https://github.com/YuukiAS/AI_Skills_Collection"
-MAX_MARKETPLACE_PLUGINS = 9
+DEFAULT_MARKETPLACE_PLUGIN_BUDGET = 9
 MAX_ACTIVE_SKILLS = 30
 WINDOWS_PATH_BUDGET = 140
 AUTHOR = {
@@ -88,6 +88,13 @@ def marketplace_plugins(config: dict[str, Any]) -> list[dict[str, Any]]:
     if not isinstance(plugins, list):
         raise BuildError(f"{relative(CONFIG_PATH)}: plugins must be a list")
     return plugins
+
+
+def marketplace_plugin_budget(config: dict[str, Any]) -> int:
+    value = config.get("marketplacePluginBudget", DEFAULT_MARKETPLACE_PLUGIN_BUDGET)
+    if not isinstance(value, int) or value < 1:
+        raise BuildError(f"{relative(CONFIG_PATH)}: marketplacePluginBudget must be a positive integer")
+    return value
 
 
 def plugin_names(config: dict[str, Any]) -> set[str]:
@@ -168,6 +175,23 @@ def build_plugin_json(plugin: dict[str, Any]) -> dict[str, Any]:
         f"{short_description} This plugin is generated from the Codex App marketplace "
         "configuration and contains a self-contained skill snapshot."
     )
+    interface = {
+        "displayName": display_name,
+        "shortDescription": short_description,
+        "longDescription": long_description,
+        "developerName": "YuukiAS",
+        "category": category,
+        "capabilities": ["Skills"],
+        "websiteURL": REPOSITORY_URL,
+        "defaultPrompt": [truncate_prompt(str(prompt)) for prompt in plugin.get("defaultPrompt", [])[:3]],
+        "brandColor": str(plugin.get("brandColor") or "#2563EB"),
+    }
+    for source_key, target_key, final_path in (
+        ("composerIcon", "composerIcon", "./.codex-plugin/assets/composer.svg"),
+        ("logo", "logo", "./.codex-plugin/assets/logo.svg"),
+    ):
+        if plugin.get(source_key):
+            interface[target_key] = final_path
     return {
         "name": plugin_name,
         "version": plugin_version(plugin, context),
@@ -177,17 +201,7 @@ def build_plugin_json(plugin: dict[str, Any]) -> dict[str, Any]:
         "repository": REPOSITORY_URL,
         "keywords": keywords_for_plugin(plugin_name),
         "skills": "./skills/",
-        "interface": {
-            "displayName": display_name,
-            "shortDescription": short_description,
-            "longDescription": long_description,
-            "developerName": "YuukiAS",
-            "category": category,
-            "capabilities": ["Skills"],
-            "websiteURL": REPOSITORY_URL,
-            "defaultPrompt": [truncate_prompt(str(prompt)) for prompt in plugin.get("defaultPrompt", [])[:3]],
-            "brandColor": "#2563EB",
-        },
+        "interface": interface,
     }
 
 
@@ -551,6 +565,61 @@ def yaml_list(name: str, items: list[str]) -> list[str]:
     return [f"{name}:"] + [f"  - {item}" for item in items]
 
 
+def yaml_string(name: str, value: Any) -> list[str]:
+    if value in (None, ""):
+        return []
+    return [f"{name}: {json.dumps(str(value), ensure_ascii=False)}"]
+
+
+def config_copy_items(items: Any, context: str) -> list[dict[str, str]]:
+    if items in (None, []):
+        return []
+    if not isinstance(items, list):
+        raise BuildError(f"{context}: shared must be a list")
+    result: list[dict[str, str]] = []
+    for index, item in enumerate(items):
+        if not isinstance(item, dict):
+            raise BuildError(f"{context}: shared[{index}] must be an object")
+        source = item.get("source")
+        target = item.get("target")
+        if not isinstance(source, str) or not source:
+            raise BuildError(f"{context}: shared[{index}].source must be a non-empty string")
+        if not isinstance(target, str) or not target:
+            raise BuildError(f"{context}: shared[{index}].target must be a non-empty string")
+        source_path = (ROOT / source).resolve()
+        try:
+            source_path.relative_to(ROOT.resolve())
+        except ValueError as exc:
+            raise BuildError(f"{context}: shared source escapes repository: {source}") from exc
+        if not source_path.exists():
+            raise BuildError(f"{context}: shared source does not exist: {source}")
+        has_symlink = source_contains_symlink(source_path) if source_path.is_dir() else source_path.is_symlink()
+        if has_symlink:
+            raise BuildError(f"{context}: shared source contains a symlink: {source}")
+        target_path = Path(target)
+        if target_path.is_absolute() or ".." in target_path.parts:
+            raise BuildError(f"{context}: shared target must stay inside plugin payload: {target}")
+        result.append({"source": source, "target": target})
+    return result
+
+
+def validate_repo_asset(path_text: Any, context: str, field: str) -> Path | None:
+    if not path_text:
+        return None
+    if not isinstance(path_text, str):
+        raise BuildError(f"{context}: {field} must be a string")
+    source_path = (ROOT / path_text.removeprefix("./")).resolve()
+    try:
+        source_path.relative_to(ROOT.resolve())
+    except ValueError as exc:
+        raise BuildError(f"{context}: {field} escapes repository: {path_text}") from exc
+    if not source_path.is_file():
+        raise BuildError(f"{context}: {field} does not exist: {path_text}")
+    if source_path.suffix.lower() != ".svg":
+        raise BuildError(f"{context}: {field} must point to an SVG file")
+    return source_path
+
+
 def aggregate_skill_markdown(entry: dict[str, Any], sources: list[dict[str, Any]], metadata: dict[str, Any]) -> str:
     name = str(entry["name"])
     description = str(entry["description"])
@@ -570,6 +639,13 @@ def aggregate_skill_markdown(entry: dict[str, Any], sources: list[dict[str, Any]
     lines.append("profile_tags:")
     lines.append(f"recommended_scope: {metadata['recommended_scope']}")
     lines.extend(yaml_list("source_skills", metadata["source_skills"]))
+    lines.extend(yaml_string("display_name", entry.get("display_name")))
+    lines.extend(yaml_string("short_description", entry.get("short_description")))
+    lines.extend(yaml_string("brand_color", entry.get("brand_color")))
+    lines.extend(yaml_string("icon_small", entry.get("icon_small")))
+    lines.extend(yaml_string("icon_large", entry.get("icon_large")))
+    prompts = [str(prompt) for prompt in entry.get("default_prompt", [])] if isinstance(entry.get("default_prompt"), list) else []
+    lines.extend(yaml_list("default_prompt", prompts[:3]))
     lines.extend(
         [
             "---",
@@ -620,6 +696,32 @@ def rename_nested_skill_files(reference_root: Path) -> None:
 
 def copy_source_tree(source_dir: Path, dest: Path) -> None:
     shutil.copytree(source_dir, dest, ignore=ignore_copy_names, copy_function=shutil.copy2)
+
+
+def copy_configured_shared(plugin: dict[str, Any], plugin_root: Path, context: str) -> int:
+    count = 0
+    for item in config_copy_items(plugin.get("shared"), context):
+        source = ROOT / item["source"]
+        dest = plugin_root / item["target"]
+        if dest.exists():
+            raise BuildError(f"{context}: shared target already exists: {item['target']}")
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        if source.is_dir():
+            shutil.copytree(source, dest, ignore=ignore_copy_names, copy_function=shutil.copy2)
+        else:
+            shutil.copy2(source, dest)
+        count += 1
+    return count
+
+
+def copy_configured_plugin_assets(plugin: dict[str, Any], plugin_root: Path, context: str) -> None:
+    assets_dir = plugin_root / ".codex-plugin" / "assets"
+    for field, filename in (("composerIcon", "composer.svg"), ("logo", "logo.svg")):
+        source = validate_repo_asset(plugin.get(field), context, field)
+        if source is None:
+            continue
+        assets_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, assets_dir / filename)
 
 
 def generate_copy_skill(entry: dict[str, Any], skills_dir: Path, context: str) -> int:
@@ -681,10 +783,11 @@ def active_skill_names(plugin: dict[str, Any]) -> list[str]:
 
 def validate_config(config: dict[str, Any]) -> None:
     plugins = marketplace_plugins(config)
+    plugin_budget = marketplace_plugin_budget(config)
     plugin_seen: set[str] = set()
     active_seen: dict[str, list[tuple[str, str]]] = defaultdict(list)
-    if len(plugins) > MAX_MARKETPLACE_PLUGINS:
-        raise BuildError(f"Codex marketplace has {len(plugins)} plugins; maximum is {MAX_MARKETPLACE_PLUGINS}")
+    if len(plugins) > plugin_budget:
+        raise BuildError(f"Codex marketplace has {len(plugins)} plugins; repository budget is {plugin_budget}")
     for plugin in plugins:
         plugin_name = plugin.get("name")
         if not isinstance(plugin_name, str) or not plugin_name:
@@ -693,6 +796,9 @@ def validate_config(config: dict[str, Any]) -> None:
             raise BuildError(f"{relative(CONFIG_PATH)}: duplicate plugin name {plugin_name}")
         plugin_seen.add(plugin_name)
         plugin_version(plugin, f"plugin {plugin_name}")
+        validate_repo_asset(plugin.get("composerIcon"), f"plugin {plugin_name}", "composerIcon")
+        validate_repo_asset(plugin.get("logo"), f"plugin {plugin_name}", "logo")
+        config_copy_items(plugin.get("shared"), f"plugin {plugin_name}")
         artifact_dirs_for_plugin(plugin, f"plugin {plugin_name}")
         for entry in plugin_skill_entries(plugin):
             active_name = skill_entry_name(entry)
@@ -738,6 +844,8 @@ def generate_layer(target_root: Path) -> dict[str, Any]:
         skills_dir.mkdir(parents=True, exist_ok=True)
 
         (manifest_dir / "plugin.json").write_text(json_dump(build_plugin_json(plugin)), encoding="utf-8")
+        copy_configured_plugin_assets(plugin, plugin_root, f"plugin {plugin_name}")
+        copy_configured_shared(plugin, plugin_root, f"plugin {plugin_name}")
         for entry in plugin_skill_entries(plugin):
             context = f"plugin {plugin_name}"
             if entry.get("type") == "copy":
@@ -918,9 +1026,10 @@ def validate_layer(root: Path = ROOT) -> dict[str, Any]:
             errors.append(
                 f"{relative(marketplace_path)}: expected {len(configured_plugins)} plugin entries, found {plugin_count}"
             )
-        if plugin_count > MAX_MARKETPLACE_PLUGINS:
+        plugin_budget = marketplace_plugin_budget(config)
+        if plugin_count > plugin_budget:
             errors.append(
-                f"{relative(marketplace_path)}: expected at most {MAX_MARKETPLACE_PLUGINS} plugin entries, found {plugin_count}"
+                f"{relative(marketplace_path)}: expected at most repository budget {plugin_budget} plugin entries, found {plugin_count}"
             )
         seen_names: set[str] = set()
         for entry in plugins:

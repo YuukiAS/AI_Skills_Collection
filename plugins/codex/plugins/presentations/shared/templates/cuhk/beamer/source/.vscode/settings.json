@@ -1,0 +1,17 @@
+{
+    "quickCommandButtons.buttons": [
+        {
+            "command": "overleaf-workshop.compileManager.compile",
+            "insertOnly": false,
+            "name": "$(file-pdf) Render PDF",
+            "useVsCodeApi": true
+        }
+    ],
+    "quickCommandButtons.buttonSets": [
+        {
+            "buttons": [],
+            "name": "Latex"
+        }
+    ],
+    "quickCommandButtons.activeSet": null
+}

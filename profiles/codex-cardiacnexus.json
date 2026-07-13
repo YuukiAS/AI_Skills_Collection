@@ -1,12 +1,8 @@
 {
   "name": "codex-cardiacnexus",
-  "description": "Project-local profile for CardiacNexus, CMR, DICOM/NIfTI, MONAI, nnU-Net, UKB, and imaging pipelines.",
+  "description": "Support profile for CardiacNexus environments. Project-specific CardiacNexus skills are exported under exports/cardiacnexus-repo-local/ and should be merged into the CardiacNexus repo as repo-local skills.",
   "max_active_skills": 24,
   "skills": [
-    "skills/projects/cmr/cardiacnexus-feature-contracts",
-    "skills/projects/cmr/cardiacnexus-pipeline-refactor",
-    "skills/projects/cmr/cardiacnexus-strain-registration",
-    "skills/projects/cmr/cardiacnexus-docs-markdoc",
     "skills/domains/medical-imaging/cardiac-mri",
     "skills/domains/medical-imaging/pydicom",
     "skills/domains/medical-imaging/medical-imaging-classical-features",
@@ -19,8 +15,10 @@
     "skills/tools/ai-ml/transformers",
     "skills/tools/visualization/matplotlib",
     "skills/tools/visualization/plotly",
-    "skills/tools/documents-media/pdf"
+    "skills/tools/documents-media/pdf",
+    "skills/writing/research/research-reporting"
   ],
+  "repo_local_skill_package": "exports/cardiacnexus-repo-local/.agents/skills",
   "secondary_skills": [
     "skills/domains/bayesian/bayesian-ppl-diagnostics",
     "skills/writing/research/scientific-writing"

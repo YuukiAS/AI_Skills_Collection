@@ -1,6 +1,6 @@
 {
   "name": "bioinformatics",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "General bioinformatics workflows across databases, single-cell analysis, genomics I/O, and omics analysis.",
   "author": {
     "name": "YuukiAS",
@@ -28,8 +28,10 @@
     "defaultPrompt": [
       "Plan a bioinformatics analysis.",
       "Review this single-cell workflow.",
-      "Help me choose the right omics tool."
+      "Choose the right omics tool."
     ],
-    "brandColor": "#2563EB"
+    "brandColor": "#16A34A",
+    "composerIcon": "./.codex-plugin/assets/composer.svg",
+    "logo": "./.codex-plugin/assets/logo.svg"
   }
 }

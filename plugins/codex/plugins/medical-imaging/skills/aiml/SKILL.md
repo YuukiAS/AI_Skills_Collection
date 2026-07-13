@@ -15,6 +15,7 @@ recommended_scope: project
 source_skills:
   - skills/tools/ai-ml/pytorch-lightning
   - skills/tools/ai-ml/transformers
+default_prompt:
 ---
 
 # ai-ml-imaging

@@ -1,6 +1,6 @@
 # research-ideation
 
-Active skills: 6
+Active skills: 7
 
 ## Install
 
@@ -13,7 +13,7 @@ ai-skills install --target repo --domain research-ideation --mode symlink --writ
 Install a few skills precisely:
 
 ```bash
-ai-skills install --target repo --skill science/ideation/consciousness-council --skill science/ideation/hypogenic --skill science/ideation/hypothesis-generation --mode symlink --write-agents-md
+ai-skills install --target repo --skill science/ideation/consciousness-council --skill science/ideation/experiment-execution --skill science/ideation/hypogenic --mode symlink --write-agents-md
 ```
 
 Complete domain installs are supported. If an audit reports high description length or many active skills, treat it as a context-budget warning, not an installation error.
@@ -27,6 +27,7 @@ Complete domain installs are supported. If an audit reports high description len
 ## Skills
 
 - `consciousness-council` (`skills/science/ideation/consciousness-council`): Run a multi-perspective Mind Council deliberation on any question, decision, or creative challenge. Also trigger when the user faces a dilemma, trade-off, or complex choice with no obvious answer.
+- `experiment-execution` (`skills/science/ideation/experiment-execution`): Plan, run, monitor, interpret, and reproduce computational or scientific experiments, including run setup, metric tracking, statistical interpretation, failure triage, and reproducibility checks.
 - `hypogenic` (`skills/science/ideation/hypogenic`): Automated LLM-driven hypothesis generation and testing on tabular datasets. Use when you want to systematically explore hypotheses about patterns in empirical data (e.g., deception detection, content analysis).
 - `hypothesis-generation` (`skills/science/ideation/hypothesis-generation`): Structured hypothesis formulation from observations. Use when you have experimental observations or data and need to formulate testable hypotheses with predictions, propose mechanisms, and design experiments to test them.
 - `scientific-brainstorming` (`skills/science/ideation/scientific-brainstorming`): Creative research ideation and exploration. Use for open-ended brainstorming sessions, exploring interdisciplinary connections, challenging assumptions, or identifying research gaps.

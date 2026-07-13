@@ -5,14 +5,14 @@ This report records what can be proven from files currently in this repository. 
 ## Summary
 
 - Scope: `active_and_non_archived`
-- Skills audited: 146
+- Skills audited: 149
 - Skills with explicit source fields: 11
-- User-authored skills: 8
+- User-authored skills: 15
 - External adapted skills: 11
 - External vendored skills: 0
 - Generated skills: 0
 - Local legacy skills: 4
-- Unknown-origin historical skills: 123
+- Unknown-origin historical skills: 119
 - Skills containing URLs in the body: 68
 - Skills containing local license files: 12
 
@@ -22,21 +22,28 @@ This report records what can be proven from files currently in this repository. 
 | --- | --- |
 | external-adapted | 11 |
 | local | 4 |
-| unknown | 123 |
-| user-authored | 8 |
+| unknown | 119 |
+| user-authored | 15 |
 
 ## User Authored
 
 | Skill | Path | Provenance | Source |
 | --- | --- | --- | --- |
+| ai-skills-repository-maintainer | skills/core/codex-system/ai-skills-repository-maintainer | user-authored |  |
 | codex-workflow-protocol | skills/core/codex-system/codex-workflow-protocol | user-authored |  |
 | cardiac-mri | skills/domains/medical-imaging/cardiac-mri | user-authored |  |
 | medical-imaging-terminology-measurement | skills/domains/medical-imaging/medical-imaging-terminology-measurement | user-authored |  |
 | clinical-guideline-checking | skills/domains/medicine-clinical/clinical-guideline-checking | user-authored |  |
 | medical-literature-evidence-review | skills/domains/medicine-clinical/medical-literature-evidence-review | user-authored |  |
 | medical-safety-boundaries | skills/domains/medicine-clinical/medical-safety-boundaries | user-authored |  |
+| business-presentations | skills/tools/documents-media/presentations/business-presentations | user-authored |  |
+| research-presentations | skills/tools/documents-media/presentations/research-presentations | user-authored |  |
 | render-chinese-math-pdf | skills/tools/documents-media/render-chinese-math-pdf | user-authored |  |
+| frontend-reference-research | skills/tools/frontend/frontend-reference-research | user-authored |  |
+| frontend-visual-systems | skills/tools/frontend/frontend-visual-systems | user-authored |  |
+| research-product-frontend | skills/tools/frontend/research-product-frontend | user-authored |  |
 | writing-fidelity | skills/writing/core/writing-fidelity | user-authored |  |
+| research-reporting | skills/writing/research/research-reporting | user-authored |  |
 
 ## External Adapted
 
@@ -52,7 +59,7 @@ This report records what can be proven from files currently in this repository. 
 | citation-verification | skills/writing/research/citation-verification | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from citation-check-skill, Nature-Paper-Skills citation-verifier/reference-audit, claude-scholar citation-verification, and paperpipe verification workflows.", "source_path": ".", "source_ref": "b9deb7077099f56b05c9b6ecea744c2ca0a6d324", "source_repo_url": "https://github.com/serenakeyitan/citation-check-skill"} |
 | latex-paper-authoring | skills/writing/research/latex-paper-authoring | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from latex-paper-skills, latex-document-skill, claude-scholar LaTeX template organizer, and existing render-chinese-math-pdf practice.", "source_path": ".", "source_ref": "d0f106108cb09e448604a56ce973d35b340cf497", "source_repo_url": "https://github.com/yunshenwuchuxun/latex-paper-skills"} |
 | nature-manuscript-workflow | skills/writing/research/nature-manuscript-workflow | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from Nature-Paper-Skills, nature-skills, and claude-scholar Nature writing/response/data skills.", "source_path": ".", "source_ref": "44cff42ac22a5ac4dcfb7ba01b2e81c21d689ea6", "source_repo_url": "https://github.com/Boom5426/Nature-Paper-Skills"} |
-| paper-workflow-orchestrator | skills/writing/research/paper-workflow-orchestrator | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from PaperSpine, academic-research-skills, Nature-Paper-Skills, paper-writing-skill, and Research-Paper-Writing-Skills; see docs/provenance/CLONED_SKILL_SOURCES.md.", "source_path": ".", "source_ref": "d4529208cda72aa075767611b0265b95b709b550", "source_repo_url": "https://github.com/WUBING2023/PaperSpine"} |
+| paper-workflow-orchestrator | skills/writing/research/paper-workflow-orchestrator | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from PaperSpine, academic-research-skills, Nature-Paper-Skills, paper-writing-skill, and Research-Paper-Writing-Skills; see docs/provenance/INTEGRATION_HISTORY.md.", "source_path": ".", "source_ref": "d4529208cda72aa075767611b0265b95b709b550", "source_repo_url": "https://github.com/WUBING2023/PaperSpine"} |
 
 ## External Vendored
 
@@ -119,10 +126,6 @@ None.
 | pyhealth | skills/domains/medicine-clinical/pyhealth | unknown |  |
 | scikit-survival | skills/domains/medicine-clinical/scikit-survival | unknown |  |
 | treatment-plans | skills/domains/medicine-clinical/treatment-plans | unknown |  |
-| cardiacnexus-docs-markdoc | skills/projects/cmr/cardiacnexus-docs-markdoc | unknown |  |
-| cardiacnexus-feature-contracts | skills/projects/cmr/cardiacnexus-feature-contracts | unknown |  |
-| cardiacnexus-pipeline-refactor | skills/projects/cmr/cardiacnexus-pipeline-refactor | unknown |  |
-| cardiacnexus-strain-registration | skills/projects/cmr/cardiacnexus-strain-registration | unknown |  |
 | latex-posters | skills/science/communication/latex-posters | unknown |  |
 | paper-2-web | skills/science/communication/paper-2-web | unknown |  |
 | pptx-posters | skills/science/communication/pptx-posters | unknown |  |
@@ -278,12 +281,12 @@ URLs below are evidence of related projects or references found in skill bodies.
 
 | Skill | Path | License | License files |
 | --- | --- | --- | --- |
-| mcp-builder | skills/core/codex-system/mcp-builder | Complete terms in LICENSE.txt | LICENSE.txt |
-| imagegen | skills/core/codex-system/system-skills/imagegen |  | LICENSE.txt |
-| openai-docs | skills/core/codex-system/system-skills/openai-docs |  | LICENSE.txt |
+| mcp-builder | skills/core/codex-system/mcp-builder | Complete terms in LICENSE.txt | LICENSE.txt, license.txt |
+| imagegen | skills/core/codex-system/system-skills/imagegen |  | LICENSE.txt, license.txt |
+| openai-docs | skills/core/codex-system/system-skills/openai-docs |  | LICENSE.txt, license.txt |
 | plugin-creator | skills/core/codex-system/system-skills/plugin-creator |  |  |
-| skill-creator | skills/core/codex-system/system-skills/skill-creator |  | license.txt |
-| skill-installer | skills/core/codex-system/system-skills/skill-installer |  | LICENSE.txt |
+| skill-creator | skills/core/codex-system/system-skills/skill-creator |  | LICENSE.txt, license.txt |
+| skill-installer | skills/core/codex-system/system-skills/skill-installer |  | LICENSE.txt, license.txt |
 | bayesian-ppl-diagnostics | skills/domains/bayesian/bayesian-ppl-diagnostics | Apache-2.0 |  |
 | pymc | skills/domains/bayesian/pymc | Apache License, Version 2.0 |  |
 | simpy | skills/domains/bayesian/simpy | MIT License |  |
@@ -322,10 +325,6 @@ URLs below are evidence of related projects or references found in skill bodies.
 | pyhealth | skills/domains/medicine-clinical/pyhealth | MIT license |  |
 | scikit-survival | skills/domains/medicine-clinical/scikit-survival | GPL-3.0 license |  |
 | treatment-plans | skills/domains/medicine-clinical/treatment-plans | MIT license |  |
-| cardiacnexus-docs-markdoc | skills/projects/cmr/cardiacnexus-docs-markdoc |  |  |
-| cardiacnexus-feature-contracts | skills/projects/cmr/cardiacnexus-feature-contracts |  |  |
-| cardiacnexus-pipeline-refactor | skills/projects/cmr/cardiacnexus-pipeline-refactor |  |  |
-| cardiacnexus-strain-registration | skills/projects/cmr/cardiacnexus-strain-registration |  |  |
 | latex-posters | skills/science/communication/latex-posters |  |  |
 | paper-2-web | skills/science/communication/paper-2-web | Unknown |  |
 | pptx-posters | skills/science/communication/pptx-posters | MIT license |  |
@@ -366,15 +365,15 @@ URLs below are evidence of related projects or references found in skill bodies.
 | sympy | skills/tools/data-science/sympy | https://github.com/sympy/sympy/blob/master/LICENSE |  |
 | umap-learn | skills/tools/data-science/umap-learn | BSD-3-Clause license |  |
 | vaex | skills/tools/data-science/vaex | MIT license |  |
-| docx | skills/tools/documents-media/docx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt |
+| docx | skills/tools/documents-media/docx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt, license.txt |
 | get-available-resources | skills/tools/documents-media/get-available-resources | MIT license |  |
 | markitdown | skills/tools/documents-media/markitdown | MIT license |  |
 | open-notebook | skills/tools/documents-media/open-notebook | MIT |  |
 | parallel-web | skills/tools/documents-media/parallel-web | MIT license |  |
-| pdf | skills/tools/documents-media/pdf | Proprietary. LICENSE.txt has complete terms | LICENSE.txt |
+| pdf | skills/tools/documents-media/pdf | Proprietary. LICENSE.txt has complete terms | LICENSE.txt, license.txt |
 | perplexity-search | skills/tools/documents-media/perplexity-search | MIT license |  |
-| pptx | skills/tools/documents-media/pptx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt |
-| xlsx | skills/tools/documents-media/xlsx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt |
+| pptx | skills/tools/documents-media/pptx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt, license.txt |
+| xlsx | skills/tools/documents-media/xlsx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt, license.txt |
 | brand-creative-assets | skills/tools/frontend/brand-creative-assets |  |  |
 | design-system-tokens | skills/tools/frontend/design-system-tokens |  |  |
 | figma-design-to-code | skills/tools/frontend/figma-design-to-code |  |  |
@@ -383,15 +382,15 @@ URLs below are evidence of related projects or references found in skill bodies.
 | product-ux-planning | skills/tools/frontend/product-ux-planning |  |  |
 | responsive-accessibility-review | skills/tools/frontend/responsive-accessibility-review |  |  |
 | visual-direction | skills/tools/frontend/visual-direction |  |  |
-| webapp-testing | skills/tools/frontend/webapp-testing | Complete terms in LICENSE.txt | LICENSE.txt |
-| canvas-design | skills/tools/visualization/canvas-design | Complete terms in LICENSE.txt | LICENSE.txt |
+| webapp-testing | skills/tools/frontend/webapp-testing | Complete terms in LICENSE.txt | LICENSE.txt, license.txt |
+| canvas-design | skills/tools/visualization/canvas-design | Complete terms in LICENSE.txt | LICENSE.txt, license.txt |
 | generate-image | skills/tools/visualization/generate-image | MIT license |  |
 | infographics | skills/tools/visualization/infographics |  |  |
 | markdown-mermaid-writing | skills/tools/visualization/markdown-mermaid-writing | Apache-2.0 |  |
 | matplotlib | skills/tools/visualization/matplotlib | https://github.com/matplotlib/matplotlib/tree/main/LICENSE |  |
 | plotly | skills/tools/visualization/plotly | MIT license |  |
 | seaborn | skills/tools/visualization/seaborn | BSD-3-Clause license |  |
-| theme-factory | skills/tools/visualization/theme-factory | Complete terms in LICENSE.txt | LICENSE.txt |
+| theme-factory | skills/tools/visualization/theme-factory | Complete terms in LICENSE.txt | LICENSE.txt, license.txt |
 | academic-paper-writer-pro | skills/writing/research/academic-paper-writer-pro |  |  |
 | content-generation | skills/writing/research/content-generation |  |  |
 | literature-review | skills/writing/research/literature-review | MIT license |  |

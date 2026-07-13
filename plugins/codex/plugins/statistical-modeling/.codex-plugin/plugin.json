@@ -1,7 +1,7 @@
 {
   "name": "statistical-modeling",
-  "version": "1.1.0",
-  "description": "Bayesian modeling, Python data analysis, and scientific visualization.",
+  "version": "2.0.0",
+  "description": "Statistical models, Bayesian workflows, Python data analysis, diagnostics, experiment design, and scientific visualization.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Statistical Modeling",
-    "shortDescription": "Bayesian modeling, Python data analysis, and scientific visualization.",
-    "longDescription": "Bayesian modeling, Python data analysis, and scientific visualization. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Statistical models, Bayesian workflows, Python data analysis, diagnostics, experiment design, and scientific visualization.",
+    "longDescription": "Statistical models, Bayesian workflows, Python data analysis, diagnostics, experiment design, and scientific visualization. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [
@@ -27,10 +27,12 @@
     ],
     "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
     "defaultPrompt": [
-      "Help me build and diagnose a Bayesian model.",
       "Plan a statistical analysis.",
-      "Visualize these scientific results."
+      "Diagnose a Bayesian model.",
+      "Visualize scientific results."
     ],
-    "brandColor": "#2563EB"
+    "brandColor": "#0891B2",
+    "composerIcon": "./.codex-plugin/assets/composer.svg",
+    "logo": "./.codex-plugin/assets/logo.svg"
   }
 }

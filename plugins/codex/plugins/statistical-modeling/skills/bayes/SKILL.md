@@ -17,6 +17,7 @@ source_skills:
   - skills/domains/bayesian/statsmodels
   - skills/domains/bayesian/statistical-analysis
   - skills/domains/bayesian/simpy
+default_prompt:
 ---
 
 # bayesian-modeling

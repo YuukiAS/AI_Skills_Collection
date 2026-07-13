@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/YuukiAS/AI_Skills_Collection/deck-plan.schema.json",
+  "title": "Deck Plan",
+  "type": "object",
+  "required": ["schema_version", "metadata", "slides"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "metadata": {
+      "type": "object",
+      "required": ["title", "audience", "mode", "purpose", "duration_minutes", "language", "template", "output"],
+      "properties": {
+        "title": { "type": "string" },
+        "author": { "type": "string" },
+        "affiliation": { "type": "string" },
+        "audience": { "enum": ["specialist", "mixed", "general", "executive"] },
+        "mode": { "enum": ["research", "business"] },
+        "purpose": { "enum": ["group-meeting", "conference", "defense", "journal-club", "company", "other"] },
+        "duration_minutes": { "type": "integer", "minimum": 1 },
+        "language": { "enum": ["en", "zh", "mixed"] },
+        "template": { "type": "string", "default": "cuhk-default" },
+        "output": { "enum": ["pptx", "tex", "pdf", "google-slides"] },
+        "source_files": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "slides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "key_message"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "key_message": { "type": "string" },
+          "source_anchors": { "type": "array", "items": { "type": "string" } },
+          "content": { "type": "array" },
+          "equations": { "type": "array", "items": { "type": "string" } },
+          "visuals": { "type": "array" },
+          "layout_hint": { "type": "string" },
+          "citations": { "type": "array", "items": { "type": "string" } },
+          "speaker_notes": { "type": "string" },
+          "backup": { "type": "boolean", "default": false }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

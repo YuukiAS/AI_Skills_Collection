@@ -1,0 +1,39 @@
+{
+  "name": "cuhk-default",
+  "source": {
+    "pdf": "C:\\Users\\humc2\\Downloads\\CUHK Template.pdf",
+    "zip": "C:\\Users\\humc2\\Downloads\\CUHK Template.zip",
+    "audited_at": "2026-07-13",
+    "note": "Derived from local CUHK Beamer template. Brand assets are not redistributed unless license is confirmed."
+  },
+  "slide": {
+    "aspect_ratio": "16:9",
+    "width_in": 13.333,
+    "height_in": 7.5
+  },
+  "colors": {
+    "main": "#72256D",
+    "ink": "#201A2A",
+    "muted": "#AA7CA7",
+    "light_bar": "#E8E0EC",
+    "warm_grey": "#EBEBE6",
+    "gold": "#D4AF37",
+    "green": "#14B978",
+    "red": "#BE3C37"
+  },
+  "typography": {
+    "preferred_sans": ["Aptos", "Calibri", "Carlito", "Arial"],
+    "preferred_serif": ["Cambria", "Caladea", "Times New Roman"],
+    "title_pt": 34,
+    "section_pt": 20,
+    "body_pt": 18,
+    "caption_pt": 10
+  },
+  "layout": {
+    "margin_in": 0.52,
+    "top_nav_height_in": 0.28,
+    "footer_height_in": 0.25,
+    "title_geometry": "purple angular field with light secondary facets",
+    "content_rule": "one main message per slide"
+  }
+}

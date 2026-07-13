@@ -14,6 +14,7 @@ recommended_scope: project
 source_skills:
   - skills/tools/visualization/matplotlib
   - skills/tools/visualization/plotly
+default_prompt:
 ---
 
 # scientific-visualization

@@ -7,11 +7,19 @@ Thumbs.db
 *.swo
 .idea/
 .vscode/
+!skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/.vscode/
+!skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/.vscode/**
+!plugins/codex/plugins/presentations/shared/templates/cuhk/beamer/source/.vscode/
+!plugins/codex/plugins/presentations/shared/templates/cuhk/beamer/source/.vscode/**
 .cursor/
 .agents/*
 !.agents/plugins/
 .agents/plugins/*
 !.agents/plugins/marketplace.json
+!exports/
+!exports/cardiacnexus-repo-local/
+!exports/cardiacnexus-repo-local/.agents/
+!exports/cardiacnexus-repo-local/.agents/**
 .codex/
 !plugins/
 !plugins/codex/
@@ -59,4 +67,7 @@ pnpm-debug.log*
 # -----------------------------------------------------------------------------
 .cache/
 todo/
+archive/
+.tmp/skill-intake/
+build/skill-intake/
 skills/.system/

@@ -23,6 +23,7 @@ source_skills:
   - skills/domains/bioinformatics/biology-toolkits/scikit-bio
   - skills/domains/bioinformatics/omics-analysis/polars-bio
   - skills/domains/bioinformatics/genomics-io/tiledbvcf
+default_prompt:
 ---
 
 # bioinformatics-workflows

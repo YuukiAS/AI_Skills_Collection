@@ -1,43 +1,17 @@
 {
   "name": "yuukias-ai-skills",
   "displayName": "YuukiAS AI Skills",
+  "marketplacePluginBudget": 9,
   "plugins": [
     {
-      "name": "ai-skills-core",
-      "version": "1.1.0",
-      "displayName": "AI Skills Core",
-      "description": "Install, create, and maintain project-local Codex skills.",
-      "category": "Developer Tools",
-      "installation": "INSTALLED_BY_DEFAULT",
-      "defaultPrompt": [
-        "Install project-local skills safely.",
-        "Create or update a Codex skill.",
-        "Set up this repo's skill profile."
-      ],
-      "skills": [
-        {
-          "type": "copy",
-          "source": "skills/core/codex-system/project-skill-installer",
-          "artifact_id": "proj"
-        },
-        {
-          "type": "copy",
-          "source": "skills/core/codex-system/system-skills/skill-installer",
-          "artifact_id": "install"
-        },
-        {
-          "type": "copy",
-          "source": "skills/core/codex-system/system-skills/skill-creator",
-          "artifact_id": "create"
-        }
-      ]
-    },
-    {
       "name": "workflow-core",
-      "version": "1.1.0",
+      "version": "2.0.0",
       "displayName": "Workflow Core",
-      "description": "General Codex execution, source-of-truth discovery, verification, and completion gates.",
+      "description": "General Codex execution, source-of-truth discovery, planning, verification, and completion gates.",
       "category": "Developer Tools",
+      "brandColor": "#334155",
+      "composerIcon": "./assets/codex/plugin-icons/workflow-core/composer.svg",
+      "logo": "./assets/codex/plugin-icons/workflow-core/composer.svg",
       "defaultPrompt": [
         "Run a verified implementation workflow.",
         "Find the source of truth before editing.",
@@ -52,15 +26,46 @@
       ]
     },
     {
-      "name": "writing-style",
-      "version": "1.1.0",
-      "displayName": "Writing Style",
-      "description": "Source-faithful writing, scientific prose, Chinese technical prose, and CJK/math PDF rendering.",
-      "category": "Research",
+      "name": "ai-skills-core",
+      "version": "2.0.0",
+      "displayName": "AI Skills Core",
+      "description": "AI_Skills_Collection profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing.",
+      "category": "Developer Tools",
+      "installation": "AVAILABLE",
+      "brandColor": "#0F766E",
+      "composerIcon": "./assets/codex/plugin-icons/ai-skills-core/composer.svg",
+      "logo": "./assets/codex/plugin-icons/ai-skills-core/composer.svg",
       "defaultPrompt": [
-        "Make this scientific prose clearer.",
+        "Install this repository's project profiles.",
+        "Maintain the AI Skills registry and catalog.",
+        "Regenerate the Codex marketplace layer."
+      ],
+      "skills": [
+        {
+          "type": "copy",
+          "source": "skills/core/codex-system/project-skill-installer",
+          "artifact_id": "proj"
+        },
+        {
+          "type": "copy",
+          "source": "skills/core/codex-system/ai-skills-repository-maintainer",
+          "artifact_id": "maint"
+        }
+      ]
+    },
+    {
+      "name": "writing-style",
+      "version": "2.0.0",
+      "displayName": "Writing Style",
+      "description": "Source-faithful rewriting, Chinese technical expression, and local scientific prose cleanup without deciding research structure.",
+      "category": "Research",
+      "brandColor": "#7C3AED",
+      "composerIcon": "./assets/codex/plugin-icons/writing-style/composer.svg",
+      "logo": "./assets/codex/plugin-icons/writing-style/composer.svg",
+      "defaultPrompt": [
+        "Make this text clearer without changing meaning.",
         "Polish this Chinese technical text.",
-        "Render and check a CJK math PDF."
+        "Improve this scientific prose locally."
       ],
       "skills": [
         {
@@ -77,7 +82,7 @@
           "type": "aggregate",
           "name": "chinese-prose",
           "artifact_id": "zh",
-          "description": "Chinese technical and scientific prose polishing with CJK/math PDF rendering support.",
+          "description": "Chinese technical and scientific prose polishing with CJK/math rendering support.",
           "source_skills": [
             {
               "source": "skills/writing/core/chinese-prose",
@@ -92,113 +97,30 @@
       ]
     },
     {
-      "name": "web-development",
-      "version": "1.1.0",
-      "displayName": "Web Development",
-      "description": "Frontend product design, React/Tailwind implementation, Figma handoff, visual assets, and browser QA.",
-      "category": "Web Development",
+      "name": "research-writing",
+      "version": "2.0.0",
+      "displayName": "Research Writing",
+      "description": "Repo reports, research documents, manuscripts, literature review, citations, and claim-evidence organization.",
+      "category": "Research",
+      "brandColor": "#1D4ED8",
+      "composerIcon": "./assets/codex/plugin-icons/research-writing/composer.svg",
+      "logo": "./assets/codex/plugin-icons/research-writing/composer.svg",
       "defaultPrompt": [
-        "Design and build a frontend product.",
-        "Audit this frontend with browser tests.",
-        "Implement this Figma handoff."
+        "Write a repo-grounded research report.",
+        "Plan this paper workflow.",
+        "Check literature and citations."
       ],
       "skills": [
-        {
-          "type": "aggregate",
-          "name": "frontend-product-design",
-          "artifact_id": "ux",
-          "description": "Shape product UX, information architecture, and distinctive frontend visual direction before implementation.",
-          "source_skills": [
-            {
-              "source": "skills/tools/frontend/product-ux-planning",
-              "artifact_id": "plan"
-            },
-            {
-              "source": "skills/tools/frontend/visual-direction",
-              "artifact_id": "visual"
-            }
-          ]
-        },
-        {
-          "type": "aggregate",
-          "name": "react-tailwind-ui",
-          "artifact_id": "ui",
-          "description": "Implement React, TypeScript, Tailwind, shadcn/ui, design tokens, and motion polish.",
-          "source_skills": [
-            {
-              "source": "skills/tools/frontend/design-system-tokens",
-              "artifact_id": "tokens"
-            },
-            {
-              "source": "skills/tools/frontend/implementation-react-tailwind",
-              "artifact_id": "impl"
-            },
-            {
-              "source": "skills/tools/frontend/motion-interaction",
-              "artifact_id": "motion"
-            }
-          ]
-        },
-        {
-          "type": "aggregate",
-          "name": "frontend-testing-debugging",
-          "artifact_id": "qa",
-          "description": "Test and debug rendered frontend apps with browser automation, responsive checks, and accessibility review.",
-          "source_skills": [
-            {
-              "source": "skills/tools/frontend/webapp-testing",
-              "artifact_id": "test"
-            },
-            {
-              "source": "skills/tools/frontend/responsive-accessibility-review",
-              "artifact_id": "a11y"
-            }
-          ]
-        },
         {
           "type": "copy",
-          "source": "skills/tools/frontend/figma-design-to-code",
-          "artifact_id": "figma"
+          "source": "skills/writing/research/research-reporting",
+          "artifact_id": "report"
         },
-        {
-          "type": "aggregate",
-          "name": "frontend-visual-assets",
-          "artifact_id": "assets",
-          "description": "Generate images and apply coherent visual themes for frontend surfaces and artifacts.",
-          "source_skills": [
-            {
-              "source": "skills/tools/visualization/generate-image",
-              "artifact_id": "image"
-            },
-            {
-              "source": "skills/tools/visualization/theme-factory",
-              "artifact_id": "theme"
-            },
-            {
-              "source": "skills/tools/frontend/brand-creative-assets",
-              "artifact_id": "brand"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "research-writing",
-      "version": "1.1.0",
-      "displayName": "Research Writing",
-      "description": "Scientific manuscripts, literature review, citation workflows, research lookup, and research documents.",
-      "category": "Research",
-      "defaultPrompt": [
-        "Revise this research manuscript.",
-        "Plan a literature review.",
-        "Check citations, figures, and PDFs."
-      ],
-      "skills": [
         {
           "type": "aggregate",
           "name": "research-paper-workflow",
           "artifact_id": "paper",
-          "description": "Scientific writing, paper workflow orchestration, Nature-style manuscripts, citation verification, LaTeX authoring, and optional semantic literature search.",
+          "description": "Formal manuscript, supplement, rebuttal, grant, claim-evidence, citation, and LaTeX authoring workflow coordination.",
           "source_skills": [
             {
               "source": "skills/writing/research/scientific-writing",
@@ -213,63 +135,127 @@
               "artifact_id": "nature"
             },
             {
-              "source": "skills/writing/research/citation-verification",
-              "artifact_id": "cite"
-            },
-            {
               "source": "skills/writing/research/latex-paper-authoring",
               "artifact_id": "latex"
-            },
-            {
-              "source": "skills/science/discovery/valyu-scientific-search",
-              "artifact_id": "valyu"
             }
           ]
         },
         {
+          "type": "aggregate",
+          "name": "literature-and-citations",
+          "artifact_id": "litcite",
+          "description": "Literature search, review synthesis, citation verification, BibTeX hygiene, and Zotero-oriented citation workflows.",
+          "source_skills": [
+            {
+              "source": "skills/writing/research/literature-review",
+              "artifact_id": "lit"
+            },
+            {
+              "source": "skills/writing/research/citation-verification",
+              "artifact_id": "verify"
+            },
+            {
+              "source": "skills/science/discovery/citation-management",
+              "artifact_id": "cite"
+            },
+            {
+              "source": "skills/science/discovery/research-lookup",
+              "artifact_id": "lookup"
+            },
+            {
+              "source": "skills/science/discovery/pyzotero",
+              "artifact_id": "zotero"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "presentations",
+      "version": "2.0.0",
+      "displayName": "Presentations",
+      "description": "Research and business presentation planning, deck-plan schema, CUHK templates, source fidelity, and visual QA.",
+      "category": "Research",
+      "brandColor": "#72256D",
+      "composerIcon": "./assets/codex/plugin-icons/presentations/composer.svg",
+      "logo": "./assets/codex/plugin-icons/presentations/composer.svg",
+      "shared": [
+        {
+          "source": "skills/tools/documents-media/presentations/shared",
+          "target": "shared"
+        }
+      ],
+      "defaultPrompt": [
+        "Plan a CUHK research presentation.",
+        "Turn this Markdown into a deck plan.",
+        "Plan a business decision deck."
+      ],
+      "skills": [
+        {
           "type": "copy",
-          "source": "skills/writing/research/literature-review",
-          "artifact_id": "lit"
+          "source": "skills/tools/documents-media/presentations/research-presentations",
+          "artifact_id": "research"
         },
         {
           "type": "copy",
-          "source": "skills/science/discovery/citation-management",
-          "artifact_id": "cite"
-        },
+          "source": "skills/tools/documents-media/presentations/business-presentations",
+          "artifact_id": "business"
+        }
+      ]
+    },
+    {
+      "name": "web-development",
+      "version": "2.0.0",
+      "displayName": "Web Development",
+      "description": "Frontend reference research, visual systems, and research product frontend constraints that complement official build-web-apps.",
+      "category": "Web Development",
+      "brandColor": "#EA580C",
+      "composerIcon": "./assets/codex/plugin-icons/web-development/composer.svg",
+      "logo": "./assets/codex/plugin-icons/web-development/composer.svg",
+      "defaultPrompt": [
+        "Research frontend references.",
+        "Create a visual system brief.",
+        "Plan a research product UI."
+      ],
+      "skills": [
         {
           "type": "copy",
-          "source": "skills/science/discovery/research-lookup",
-          "artifact_id": "lookup"
+          "source": "skills/tools/frontend/frontend-reference-research",
+          "artifact_id": "refs"
         },
         {
           "type": "aggregate",
-          "name": "research-documents",
-          "artifact_id": "d",
-          "description": "Work with research PDFs, Word documents, slides, Markdown conversion, figures, and schematics.",
+          "name": "frontend-visual-systems",
+          "artifact_id": "visual",
+          "description": "Frontend visual direction, design tokens, typography, palette, icon, layout, density, and motion brief.",
           "source_skills": [
             {
-              "source": "skills/tools/documents-media/pdf",
-              "artifact_id": "pdf"
+              "source": "skills/tools/frontend/frontend-visual-systems",
+              "artifact_id": "system"
             },
             {
-              "source": "skills/tools/documents-media/docx",
-              "artifact_id": "x"
+              "source": "skills/tools/frontend/visual-direction",
+              "artifact_id": "direction"
             },
             {
-              "source": "skills/tools/documents-media/pptx",
-              "artifact_id": "p"
+              "source": "skills/tools/frontend/design-system-tokens",
+              "artifact_id": "tokens"
+            }
+          ]
+        },
+        {
+          "type": "aggregate",
+          "name": "research-product-frontend",
+          "artifact_id": "research",
+          "description": "High-density research product frontend planning for imaging, phenotype, model comparison, provenance, and experiment interfaces.",
+          "source_skills": [
+            {
+              "source": "skills/tools/frontend/research-product-frontend",
+              "artifact_id": "product"
             },
             {
-              "source": "skills/tools/documents-media/markitdown",
-              "artifact_id": "md"
-            },
-            {
-              "source": "skills/science/communication/scientific-slides",
-              "artifact_id": "slides"
-            },
-            {
-              "source": "skills/science/communication/scientific-schematics",
-              "artifact_id": "fig"
+              "source": "skills/tools/frontend/product-ux-planning",
+              "artifact_id": "ux"
             }
           ]
         }
@@ -277,14 +263,17 @@
     },
     {
       "name": "statistical-modeling",
-      "version": "1.1.0",
+      "version": "2.0.0",
       "displayName": "Statistical Modeling",
-      "description": "Bayesian modeling, Python data analysis, and scientific visualization.",
+      "description": "Statistical models, Bayesian workflows, Python data analysis, diagnostics, experiment design, and scientific visualization.",
       "category": "Research",
+      "brandColor": "#0891B2",
+      "composerIcon": "./assets/codex/plugin-icons/statistical-modeling/composer.svg",
+      "logo": "./assets/codex/plugin-icons/statistical-modeling/composer.svg",
       "defaultPrompt": [
-        "Help me build and diagnose a Bayesian model.",
         "Plan a statistical analysis.",
-        "Visualize these scientific results."
+        "Diagnose a Bayesian model.",
+        "Visualize scientific results."
       ],
       "skills": [
         {
@@ -359,14 +348,17 @@
     },
     {
       "name": "bioinformatics",
-      "version": "1.1.0",
+      "version": "2.0.0",
       "displayName": "Bioinformatics",
       "description": "General bioinformatics workflows across databases, single-cell analysis, genomics I/O, and omics analysis.",
       "category": "Research",
+      "brandColor": "#16A34A",
+      "composerIcon": "./assets/codex/plugin-icons/bioinformatics/composer.svg",
+      "logo": "./assets/codex/plugin-icons/bioinformatics/composer.svg",
       "defaultPrompt": [
         "Plan a bioinformatics analysis.",
         "Review this single-cell workflow.",
-        "Help me choose the right omics tool."
+        "Choose the right omics tool."
       ],
       "skills": [
         {
@@ -421,10 +413,13 @@
     },
     {
       "name": "medical-imaging",
-      "version": "1.1.0",
+      "version": "2.0.0",
       "displayName": "Medical Imaging",
-      "description": "General medical imaging and AI/ML imaging workflows without project-specific CardiacNexus conventions.",
+      "description": "Medical imaging, CMR, DICOM/NIfTI, segmentation, registration, imaging features, and imaging ML workflows.",
       "category": "Research",
+      "brandColor": "#DC2626",
+      "composerIcon": "./assets/codex/plugin-icons/medical-imaging/composer.svg",
+      "logo": "./assets/codex/plugin-icons/medical-imaging/composer.svg",
       "defaultPrompt": [
         "Help with CMR image processing.",
         "Plan a medical imaging ML workflow.",
@@ -472,44 +467,6 @@
             {
               "source": "skills/tools/ai-ml/transformers",
               "artifact_id": "hf"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "cardiacnexus",
-      "version": "1.1.0",
-      "displayName": "CardiacNexus",
-      "description": "Project-specific CardiacNexus feature contracts, pipeline refactors, strain registration, and documentation workflows.",
-      "category": "Research",
-      "defaultPrompt": [
-        "Review this CardiacNexus pipeline change.",
-        "Check a CardiacNexus feature contract.",
-        "Update CardiacNexus documentation."
-      ],
-      "skills": [
-        {
-          "type": "aggregate",
-          "name": "cardiacnexus-workflows",
-          "artifact_id": "cnx",
-          "description": "CardiacNexus feature contracts, pipeline refactors, strain registration, and documentation workflows.",
-          "source_skills": [
-            {
-              "source": "skills/projects/cmr/cardiacnexus-feature-contracts",
-              "artifact_id": "contracts"
-            },
-            {
-              "source": "skills/projects/cmr/cardiacnexus-pipeline-refactor",
-              "artifact_id": "pipeline"
-            },
-            {
-              "source": "skills/projects/cmr/cardiacnexus-strain-registration",
-              "artifact_id": "strain"
-            },
-            {
-              "source": "skills/projects/cmr/cardiacnexus-docs-markdoc",
-              "artifact_id": "docs"
             }
           ]
         }

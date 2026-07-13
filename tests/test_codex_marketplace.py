@@ -124,17 +124,59 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertEqual(
             [plugin["name"] for plugin in data["plugins"]],
             [
-                "ai-skills-core",
                 "workflow-core",
+                "ai-skills-core",
                 "writing-style",
-                "web-development",
                 "research-writing",
+                "presentations",
+                "web-development",
                 "statistical-modeling",
                 "bioinformatics",
                 "medical-imaging",
-                "cardiacnexus",
             ],
         )
+        self.assertEqual(data["marketplacePluginBudget"], 9)
+
+    def test_repository_config_migrates_cardiacnexus_to_export_package(self) -> None:
+        data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        plugin_names = [plugin["name"] for plugin in data["plugins"]]
+        self.assertNotIn("cardiacnexus", plugin_names)
+        self.assertTrue((REPO_ROOT / "exports/cardiacnexus-repo-local/.agents/skills/cardiacnexus-feature-contracts/SKILL.md").exists())
+        self.assertFalse((REPO_ROOT / "skills/projects/cmr/cardiacnexus-feature-contracts/SKILL.md").exists())
+
+    def test_presentations_plugin_has_two_routes_and_shared_cuhk_template(self) -> None:
+        data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        presentations = next(plugin for plugin in data["plugins"] if plugin["name"] == "presentations")
+        self.assertEqual([entry["source"] for entry in presentations["skills"]], [
+            "skills/tools/documents-media/presentations/research-presentations",
+            "skills/tools/documents-media/presentations/business-presentations",
+        ])
+        self.assertEqual(presentations["shared"][0]["source"], "skills/tools/documents-media/presentations/shared")
+        self.assertTrue((REPO_ROOT / "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/main.tex").exists())
+        self.assertTrue((REPO_ROOT / "skills/tools/documents-media/presentations/shared/templates/cuhk/pptx/cuhk-reference-deck.pptx").exists())
+
+    def test_research_writing_no_longer_publishes_pptx_or_scientific_slides(self) -> None:
+        data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        research = next(plugin for plugin in data["plugins"] if plugin["name"] == "research-writing")
+        serialized = json.dumps(research)
+        self.assertNotIn("skills/tools/documents-media/pptx", serialized)
+        self.assertNotIn("scientific-slides", serialized)
+
+    def test_web_development_is_reference_and_brief_layer(self) -> None:
+        data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        web = next(plugin for plugin in data["plugins"] if plugin["name"] == "web-development")
+        self.assertEqual([entry["name"] if entry["type"] == "aggregate" else Path(entry["source"]).name for entry in web["skills"]], [
+            "frontend-reference-research",
+            "frontend-visual-systems",
+            "research-product-frontend",
+        ])
+
+    def test_canonical_integration_history_exists(self) -> None:
+        history = REPO_ROOT / "docs/provenance/INTEGRATION_HISTORY.md"
+        text = history.read_text(encoding="utf-8")
+        self.assertIn("| date | source_type | source | revision | permission/license | decision | target | integration_commit | note |", text)
+        self.assertIn("CardiacNexus repo-local skills", text)
+        self.assertFalse((REPO_ROOT / "docs/provenance/CLONED_SKILL_SOURCES.md").exists())
 
     def test_cross_plugin_frontmatter_name_duplicate_fails(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -388,6 +430,39 @@ class CodexMarketplaceTests(unittest.TestCase):
             self.assertTrue((root / "out/plugins/codex/plugins/p/.codex-plugin/plugin.json").exists())
             self.assertFalse((root / "out/plugins/codex/.agents/plugins/marketplace.json").exists())
             self.assertEqual(manifest["plugins"][0]["source"]["path"], "./plugins/codex/plugins/p")
+
+    def test_plugin_interface_metadata_and_shared_payload_are_generated(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_skill(root, "skills/a/one", "one")
+            assets = root / "assets"
+            assets.mkdir()
+            (assets / "icon.svg").write_text("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" />\n", encoding="utf-8")
+            (assets / "logo.svg").write_text("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1 1\" />\n", encoding="utf-8")
+            shared = root / "shared/payload"
+            shared.mkdir(parents=True)
+            (shared / "guide.md").write_text("shared guide\n", encoding="utf-8")
+            write_config(
+                root,
+                [
+                    {
+                        **plugin("p", [{"type": "copy", "source": "skills/a/one"}]),
+                        "brandColor": "#123456",
+                        "composerIcon": "./assets/icon.svg",
+                        "logo": "./assets/logo.svg",
+                        "shared": [{"source": "shared/payload", "target": "shared"}],
+                    }
+                ],
+            )
+            with patched_build_root(root):
+                build.generate_layer(root / "out")
+            payload = json.loads((root / "out/plugins/codex/plugins/p/.codex-plugin/plugin.json").read_text(encoding="utf-8"))
+            self.assertEqual(payload["interface"]["brandColor"], "#123456")
+            self.assertEqual(payload["interface"]["composerIcon"], "./.codex-plugin/assets/composer.svg")
+            self.assertEqual(payload["interface"]["logo"], "./.codex-plugin/assets/logo.svg")
+            self.assertTrue((root / "out/plugins/codex/plugins/p/.codex-plugin/assets/composer.svg").exists())
+            self.assertTrue((root / "out/plugins/codex/plugins/p/.codex-plugin/assets/logo.svg").exists())
+            self.assertTrue((root / "out/plugins/codex/plugins/p/shared/guide.md").exists())
 
     def test_validate_fails_when_only_old_nested_manifest_exists(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

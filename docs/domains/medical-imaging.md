@@ -35,9 +35,9 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Main References
 
-- `skills/domains/medical-imaging/cardiac-mri/references/source-notes.md`
-- `skills/domains/medical-imaging/medical-imaging-classical-features/references/reference.md`
-- `skills/domains/medical-imaging/medical-imaging-deep-learning/references/reference.md`
-- `skills/domains/medical-imaging/medical-imaging-terminology-measurement/references/measurement-checklist.md`
-- `skills/domains/medical-imaging/pathml/references/source-notes.md`
-- `skills/domains/medical-imaging/pydicom/references/source-notes.md`
+- `skills\domains\medical-imaging\cardiac-mri\references\source-notes.md`
+- `skills\domains\medical-imaging\medical-imaging-classical-features\references\reference.md`
+- `skills\domains\medical-imaging\medical-imaging-deep-learning\references\reference.md`
+- `skills\domains\medical-imaging\medical-imaging-terminology-measurement\references\measurement-checklist.md`
+- `skills\domains\medical-imaging\pathml\references\source-notes.md`
+- `skills\domains\medical-imaging\pydicom\references\source-notes.md`

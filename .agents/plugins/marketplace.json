@@ -5,22 +5,22 @@
   },
   "plugins": [
     {
-      "name": "ai-skills-core",
+      "name": "workflow-core",
       "source": {
         "source": "local",
-        "path": "./plugins/codex/plugins/ai-skills-core"
+        "path": "./plugins/codex/plugins/workflow-core"
       },
       "policy": {
-        "installation": "INSTALLED_BY_DEFAULT",
+        "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
       },
       "category": "Developer Tools"
     },
     {
-      "name": "workflow-core",
+      "name": "ai-skills-core",
       "source": {
         "source": "local",
-        "path": "./plugins/codex/plugins/workflow-core"
+        "path": "./plugins/codex/plugins/ai-skills-core"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -41,18 +41,6 @@
       "category": "Research"
     },
     {
-      "name": "web-development",
-      "source": {
-        "source": "local",
-        "path": "./plugins/codex/plugins/web-development"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Web Development"
-    },
-    {
       "name": "research-writing",
       "source": {
         "source": "local",
@@ -63,6 +51,30 @@
         "authentication": "ON_INSTALL"
       },
       "category": "Research"
+    },
+    {
+      "name": "presentations",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex/plugins/presentations"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Research"
+    },
+    {
+      "name": "web-development",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex/plugins/web-development"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Web Development"
     },
     {
       "name": "statistical-modeling",
@@ -93,18 +105,6 @@
       "source": {
         "source": "local",
         "path": "./plugins/codex/plugins/medical-imaging"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Research"
-    },
-    {
-      "name": "cardiacnexus",
-      "source": {
-        "source": "local",
-        "path": "./plugins/codex/plugins/cardiacnexus"
       },
       "policy": {
         "installation": "AVAILABLE",

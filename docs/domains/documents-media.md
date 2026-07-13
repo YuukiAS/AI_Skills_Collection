@@ -1,6 +1,6 @@
 # documents-media
 
-Active skills: 10
+Active skills: 12
 
 ## Install
 
@@ -13,7 +13,7 @@ ai-skills install --target repo --domain documents-media --mode symlink --write-
 Install a few skills precisely:
 
 ```bash
-ai-skills install --target repo --skill tool/documents-media/docx --skill tool/documents-media/get-available-resources --skill tool/documents-media/markitdown --mode symlink --write-agents-md
+ai-skills install --target repo --skill tool/documents-media/business-presentations --skill tool/documents-media/docx --skill tool/documents-media/get-available-resources --mode symlink --write-agents-md
 ```
 
 Complete domain installs are supported. If an audit reports high description length or many active skills, treat it as a context-budget warning, not an installation error.
@@ -26,6 +26,7 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Skills
 
+- `business-presentations` (`skills/tools/documents-media/presentations/business-presentations`): Plan business, executive, product, operations, market, client, strategy, pitch, and decision decks. Use when the audience is non-technical or the deck asks for a decision, resource, proposal, or business update.
 - `docx` (`skills/tools/documents-media/docx`): Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill.
 - `get-available-resources` (`skills/tools/documents-media/get-available-resources`): This skill should be used at the start of any computationally intensive scientific task to detect and report available system resources (CPU cores, GPUs, memory, disk space).
 - `markitdown` (`skills/tools/documents-media/markitdown`): Convert files and office documents to Markdown. Supports PDF, DOCX, PPTX, XLSX, images (with OCR), audio (with transcription), HTML, CSV, JSON, XML, ZIP, YouTube URLs, EPubs and more.
@@ -35,11 +36,12 @@ Complete domain installs are supported. If an audit reports high description len
 - `perplexity-search` (`skills/tools/documents-media/perplexity-search`): Perform AI-powered web searches with real-time information using Perplexity models via LiteLLM and OpenRouter.
 - `pptx` (`skills/tools/documents-media/pptx`): Use this skill any time a .pptx file is involved in any way — as input, output, or both. Trigger whenever the user mentions \"deck,\" \"slides,\" \"presentation,\" or references a .pptx filename, regardless of what they plan to do with the content afterward.
 - `render-chinese-math-pdf` (`skills/tools/documents-media/render-chinese-math-pdf`): Render and validate Chinese or mixed Chinese/English mathematical Markdown/LaTeX as PDF. Use for CJK text, Unicode math, equations, tables, Pandoc/XeLaTeX/LuaLaTeX, TeX font/cache failures, citation cleanup, or readable PDF QA.
+- `research-presentations` (`skills/tools/documents-media/presentations/research-presentations`): Plan research and technical presentations from papers, repo evidence, Markdown reports, Asteria or TRACE exports, code results, figures, and existing decks. Use for group meetings, seminars, conferences, journal clubs, defenses, and scientific project updates.
 - `xlsx` (`skills/tools/documents-media/xlsx`): Use this skill any time a spreadsheet file is the primary input or output. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \"the xlsx in my downloads\") — and wants something done to it or produced from it.
 
 ## Main References
 
-- `skills/tools/documents-media/render-chinese-math-pdf/references/checklists.md`
-- `skills/tools/documents-media/render-chinese-math-pdf/references/citation-cleanup.md`
-- `skills/tools/documents-media/render-chinese-math-pdf/references/portable-rendering.md`
-- `skills/tools/documents-media/render-chinese-math-pdf/references/source-notes.md`
+- `skills\tools\documents-media\render-chinese-math-pdf\references\checklists.md`
+- `skills\tools\documents-media\render-chinese-math-pdf\references\citation-cleanup.md`
+- `skills\tools\documents-media\render-chinese-math-pdf\references\portable-rendering.md`
+- `skills\tools\documents-media\render-chinese-math-pdf\references\source-notes.md`
