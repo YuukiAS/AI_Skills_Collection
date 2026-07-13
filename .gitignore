@@ -69,3 +69,4 @@ archive/provenance/
 .codex_tmp_notion_images/
 build/skill-intake/
 skills/.system/
+skills-*.zip
