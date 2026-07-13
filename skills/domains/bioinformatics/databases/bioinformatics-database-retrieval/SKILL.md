@@ -26,6 +26,7 @@ than a full analysis workflow.
 - Studies and cohorts: GEO, ENA, GWAS Catalog, OpenTargets, DepMap.
 - GWAS summary statistics: start with `references/providers/gwas-summary-statistics-databases.md`, then choose the smallest official source that fits the trait, population, access, and downstream analysis.
 - Phenotype and disease graphs: Monarch, OpenTargets.
+- Broad analysis taxonomy: use `references/bioinformatics-analysis-taxonomy.md` only as a high-level routing aid from reviewed screenshot evidence; it is not paid workflow content.
 
 Provider details live in `references/providers/`. Read only the relevant
 provider note before making network calls.

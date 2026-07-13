@@ -2,13 +2,13 @@
 name: figma-design-to-code
 description: "Plan Figma-to-code handoff: identify frames, tokens, assets, accessibility risks, and implementation notes that complement official Figma tooling."
 status: active
-provenance: unknown
+provenance: local
 trusted: false
 requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-13
 profile_tags:
 recommended_scope: project
 ---
@@ -18,6 +18,10 @@ Use this skill when a frontend task depends on Figma files, frames, components,
 tokens, or design handoff.
 
 Actual Figma file inspection, node edits, asset export, Code Connect, or design generation should use the official Figma capability and its required skill flow. This repository skill only defines the handoff checklist and implementation boundary.
+
+2026-07-13 review note: v3.6.0 confirmed this skill as a local handoff checklist
+around official Figma tooling, not a replacement for the Figma connector or a
+copy of private Notion examples.
 
 ## Workflow
 

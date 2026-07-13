@@ -55,6 +55,23 @@ ENVIRONMENT_SKILLS = (
     "skills/tools/documents-media/render-chinese-math-pdf",
     "skills/tools/hpc/slurm-workflows",
 )
+LOCAL_OVERRIDE_ALLOWED_FIELDS = {
+    "account",
+    "partition",
+    "qos",
+    "scratch_root",
+    "texlive_path",
+    "python_path",
+    "module_init",
+}
+LOCAL_OVERRIDE_REQUIRED_FIELDS = {
+    "account",
+    "partition",
+    "qos",
+    "scratch_root",
+    "module_init",
+}
+LOCAL_OVERRIDE_PATH_FIELDS = {"scratch_root", "texlive_path", "python_path"}
 NAME_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")
 HIGH_RISK_DOMAINS = ("medical", "medicine", "finance", "legal", "system-ops")
 PROVENANCE_VALUES = {"user-authored", "external-adapted", "external-vendored", "generated", "unknown", "local"}
@@ -807,7 +824,7 @@ def command_doctor(args: argparse.Namespace) -> int:
         "codex_home_manifest_exists": (codex_root / MANIFEST_NAME).exists(),
         "recommended_commands": [
             "python3 scripts/skills.py select",
-            "python3 scripts/skills.py install --target repo --profile codex-skill-maintenance --mode symlink --write-agents-md",
+            "python3 scripts/skills.py install --target repo --profile ai-skills-maintainer --mode symlink --write-agents-md",
             "python3 scripts/skills.py install --target repo --domain bayesian --mode symlink --write-agents-md",
             "python3 scripts/skills.py install --target user --profile codex-core-global --mode symlink",
         ],
@@ -849,6 +866,130 @@ def environment_local_override_hash(path: Path) -> str | None:
     if not path.exists():
         return None
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def environment_blank_site_override(site_id: str) -> str:
+    return "\n".join(
+        [
+            f"[sites.{site_id}]",
+            'account = ""',
+            'partition = ""',
+            'qos = ""',
+            'scratch_root = ""',
+            'texlive_path = ""',
+            'python_path = ""',
+            'module_init = ""',
+            "",
+        ]
+    )
+
+
+def environment_local_override_template(site_id: str | None = None) -> str:
+    intro = [
+        "# Copy to ~/.config/ai-skills/local-overrides.toml and edit locally.",
+        "# Do not commit real account names, private hostnames, tokens, or personal paths.",
+        "# Values here override public-safe site profiles. Leave unknown values blank and run `ai-skills environment doctor`.",
+        "",
+        "# Field guide:",
+        "# - account: required on Slurm sites when your scheduler account differs from username.",
+        "# - partition: required when a site does not provide a safe default partition.",
+        "# - qos: required when jobs need an explicit QoS or queue class.",
+        "# - scratch_root: required private writable scratch/work directory; never commit personal paths.",
+        "# - texlive_path: optional private TeX root or bin directory when site modules do not expose TeX.",
+        "# - python_path: optional preferred Python executable or environment path.",
+        "# - module_init: required when the shell must source a modules init script before `module load`.",
+        "",
+    ]
+    profiles = load_site_profiles()
+    site_ids = [site_id] if site_id else sorted(profiles)
+    sections: list[str] = []
+    for current_site_id in site_ids:
+        if current_site_id not in profiles:
+            raise SystemExit(f"unknown site profile: {current_site_id}")
+        sections.append(environment_blank_site_override(current_site_id).rstrip())
+    return "\n".join(intro + sections) + "\n"
+
+
+def parse_environment_local_override(path: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
+    data: dict[str, dict[str, str]] = {}
+    errors: list[str] = []
+    if not path.exists():
+        return data, errors
+    current_site: str | None = None
+    for line_no, raw_line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        section_match = re.fullmatch(r"\[sites\.([A-Za-z0-9_-]+)\]", line)
+        if section_match:
+            current_site = section_match.group(1)
+            data.setdefault(current_site, {})
+            continue
+        if line.startswith("["):
+            current_site = None
+            errors.append(f"line {line_no}: unsupported section {line}")
+            continue
+        if "=" not in line:
+            errors.append(f"line {line_no}: expected key = value")
+            continue
+        if not current_site:
+            errors.append(f"line {line_no}: field outside [sites.<site-id>] section")
+            continue
+        key, value = [part.strip() for part in line.split("=", 1)]
+        comment_index = value.find(" #")
+        if comment_index != -1:
+            value = value[:comment_index].strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {'"', "'"}:
+            value = value[1:-1]
+        data.setdefault(current_site, {})[key] = value
+    return data, errors
+
+
+def environment_doctor_payload(args: argparse.Namespace) -> dict[str, Any]:
+    plan = environment_plan_payload(args)
+    local_override_path = Path(plan["local_override_path"]).expanduser()
+    local_data, parse_errors = parse_environment_local_override(local_override_path)
+    profiles = load_site_profiles()
+    site_id = plan["site_id"]
+    site_fields = local_data.get(str(site_id), {}) if site_id else {}
+    unknown_sites = sorted(site for site in local_data if site not in profiles)
+    unknown_fields = sorted(field for field in site_fields if field not in LOCAL_OVERRIDE_ALLOWED_FIELDS)
+    empty_fields = sorted(field for field, value in site_fields.items() if field in LOCAL_OVERRIDE_ALLOWED_FIELDS and not str(value).strip())
+    missing_required = sorted(field for field in LOCAL_OVERRIDE_REQUIRED_FIELDS if not site_fields.get(field))
+    inaccessible_paths: dict[str, str] = {}
+    for field in sorted(LOCAL_OVERRIDE_PATH_FIELDS):
+        value = str(site_fields.get(field) or "").strip()
+        if value and not Path(value).expanduser().exists():
+            inaccessible_paths[field] = value
+    commands = ["sbatch", "squeue", "sinfo", "scontrol", "latexmk", "xelatex", "lualatex", "pandoc", "kpsewhich"]
+    possible_missing_scheduler_fields = [
+        field for field in ["account", "partition", "qos", "module_init"] if field in missing_required
+    ]
+    diagnostics = {
+        "parse_errors": parse_errors,
+        "unknown_sites": unknown_sites,
+        "unknown_fields": unknown_fields,
+        "empty_fields": empty_fields,
+        "missing_required_fields": missing_required,
+        "inaccessible_paths": inaccessible_paths,
+        "site_mismatch": bool(local_data and site_id and str(site_id) not in local_data),
+        "possible_missing_scheduler_fields": possible_missing_scheduler_fields,
+    }
+    return {
+        "site_id": site_id,
+        "target_root": plan["target_root"],
+        "local_override_path": str(local_override_path),
+        "local_override_exists": local_override_path.exists(),
+        "local_override_site_ids": sorted(local_data),
+        "commands": {cmd: shutil.which(cmd) for cmd in commands},
+        "diagnostics": diagnostics,
+        "submit_smoke_job": "requested" if args.submit_smoke_job else "skipped",
+        "next_steps": [
+            f"edit {local_override_path}",
+            f"ai-skills environment plan --site {site_id} --target {args.target}" if site_id else "ai-skills environment plan --site <site-id>",
+            f"ai-skills environment apply --site {site_id} --target {args.target} --dry-run" if site_id else "ai-skills environment apply --site <site-id> --dry-run",
+        ],
+    }
 
 
 def environment_target_root(args: argparse.Namespace) -> Path:
@@ -1088,33 +1229,50 @@ def command_environment_diff(args: argparse.Namespace) -> int:
 
 
 def command_environment_doctor(args: argparse.Namespace) -> int:
-    plan = environment_plan_payload(args)
-    commands = ["sbatch", "squeue", "sinfo", "scontrol", "latexmk", "xelatex", "lualatex", "pandoc", "kpsewhich"]
-    data = {
-        "site_id": plan["site_id"],
-        "target_root": plan["target_root"],
-        "local_override_exists": Path(plan["local_override_path"]).expanduser().exists(),
-        "commands": {cmd: shutil.which(cmd) for cmd in commands},
-        "submit_smoke_job": "requested" if args.submit_smoke_job else "skipped",
-    }
+    data = environment_doctor_payload(args)
     if args.submit_smoke_job:
         data["submit_smoke_job_warning"] = "submission is not implemented by default; run the site smoke script manually after review"
-    print_json(data) if args.json else [print(f"{key}: {value}") for key, value in data.items()]
+    if args.json:
+        print_json(data)
+    else:
+        print(f"site_id: {data['site_id'] or 'unknown'}")
+        print(f"target_root: {data['target_root']}")
+        print(f"local_override_path: {data['local_override_path']}")
+        print(f"local_override_exists: {data['local_override_exists']}")
+        diagnostics = data["diagnostics"]
+        for key in [
+            "parse_errors",
+            "unknown_sites",
+            "unknown_fields",
+            "empty_fields",
+            "missing_required_fields",
+            "inaccessible_paths",
+            "site_mismatch",
+            "possible_missing_scheduler_fields",
+        ]:
+            print(f"{key}: {diagnostics[key]}")
+        print(f"submit_smoke_job: {data['submit_smoke_job']}")
+        for step in data["next_steps"]:
+            print(f"next: {step}")
     return 0
 
 
 def command_environment_init(args: argparse.Namespace) -> int:
     path = Path(args.local_override).expanduser() if args.local_override else DEFAULT_LOCAL_OVERRIDE
     if args.dry_run:
-        print(f"would create {path}")
+        site_note = f" for site {args.site}" if args.site else ""
+        print(f"would create {path}{site_note}")
         return 0
     path.parent.mkdir(parents=True, exist_ok=True)
-    template = ROOT / "site-profiles" / "local-overrides.example.toml"
-    text = template.read_text(encoding="utf-8") if template.exists() else "# local ai-skills overrides\n"
+    text = environment_local_override_template(args.site)
     if path.exists() and not args.force:
         raise SystemExit(f"local override already exists: {path}")
     path.write_text(text, encoding="utf-8")
     print(f"created {path}")
+    if args.site:
+        print(f"site: {args.site}")
+    print(f"next: ai-skills environment doctor{' --site ' + args.site if args.site else ''} --local-override {path}")
+    print(f"next: ai-skills environment plan{' --site ' + args.site if args.site else ''} --local-override {path}")
     return 0
 
 
@@ -1673,6 +1831,7 @@ def build_parser() -> argparse.ArgumentParser:
     env_sub = p.add_subparsers(dest="environment_command", required=True)
 
     ep = env_sub.add_parser("init", help="Create a local override template outside the repo")
+    ep.add_argument("--site", help="Only write the [sites.<site-id>] section for one public site profile")
     ep.add_argument("--local-override", default=str(DEFAULT_LOCAL_OVERRIDE), help="Local override TOML path")
     ep.add_argument("--dry-run", action="store_true", help="Show the path without writing")
     ep.add_argument("--force", action="store_true", help="Overwrite an existing local override file")

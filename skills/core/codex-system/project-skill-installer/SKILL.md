@@ -43,7 +43,7 @@ This is an infrastructure skill. It installs profile selections and writes proje
 3. Run the unified installer from the central repository:
 
 ```bash
-ai-skills install --target repo --project /path/to/project --profile codex-skill-maintenance --mode symlink --write-agents-md
+ai-skills install --target repo --project /path/to/project --profile ai-skills-maintainer --mode symlink --write-agents-md
 ```
 
 If the user stated a domain or exact skill, install that selector directly:
@@ -56,15 +56,19 @@ ai-skills install --target repo --project /path/to/project --skill domain/bayesi
 Examples:
 
 - Writing a paper, literature review, submission, slides, or citations should
-  route to `codex-research-writing`.
+  route to `research-main`.
 - Building a website, frontend, dashboard, React/Next.js app, or Tailwind UI
-  should route to `codex-webdev`.
+  should route to `frontend-research-product`.
 - Bayesian, JSDM, HMSC, Stan, PyMC, MCMC, or simulation projects should route
   to `codex-bayesian-jsdm`.
 - CMR, CardiacNexus, DICOM, NIfTI, MONAI, nnU-Net, or medical imaging projects
-  should route to `codex-cardiacnexus`.
+  should route to `medical-imaging-project`.
 - Bioinformatics, single-cell, RNA-seq, VCF/BAM/GTF, scanpy, or scvi projects
-  should route to `codex-bioinformatics-light`.
+  should route to `bioinformatics-project`.
+- Maintaining AI_Skills_Collection itself should route to `ai-skills-maintainer`.
+
+Legacy `codex-*` profile names remain available for compatibility with older
+scripts. Prefer the v3 profile names above in new examples.
 
 4. Read or re-read the generated project `AGENTS.md`.
    - The routing block lists the installed skills and their paths under

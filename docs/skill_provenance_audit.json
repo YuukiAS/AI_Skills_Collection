@@ -43,14 +43,14 @@
   },
   "provenance_category_counts": {
     "external-adapted": 11,
-    "local": 5,
-    "unknown": 116,
+    "local": 6,
+    "unknown": 115,
     "user-authored": 16
   },
   "provenance_counts": {
     "external-adapted": 11,
-    "local": 5,
-    "unknown": 116,
+    "local": 6,
+    "unknown": 115,
     "user-authored": 16
   },
   "rows_with_license_files_count": 11,
@@ -1806,8 +1806,8 @@
       "metadata_skill_author": "",
       "name": "figma-design-to-code",
       "path": "skills/tools/frontend/figma-design-to-code",
-      "provenance": "unknown",
-      "provenance_category": "unknown",
+      "provenance": "local",
+      "provenance_category": "local",
       "source_fields": {},
       "status": "active",
       "url_count": 0,

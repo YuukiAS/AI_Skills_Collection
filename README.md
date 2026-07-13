@@ -2,6 +2,41 @@
 
 这是面向 Codex 的个人科研与工程技能库。它不替代官方插件：官方能力负责文件、浏览器、GitHub、Notion、PDF、Presentation/Slides、LaTeX、前端构建等执行层；本仓库负责长期工作流、科研写作规则、领域判断、安装 profile、来源记录和验收标准。
 
+## 二选一快速开始
+
+### Codex App / Codex CLI 插件市场
+
+适合普通 Codex App 或 CLI 用户。添加 Git marketplace，安装需要的插件；安装或升级后启动新会话，让 Codex 稳定加载新技能。
+
+```text
+Source: https://github.com/YuukiAS/AI_Skills_Collection.git
+Ref: main
+Sparse paths:
+.agents/plugins
+plugins/codex/plugins
+```
+
+CLI 等价命令：
+
+```bash
+codex plugin marketplace add https://github.com/YuukiAS/AI_Skills_Collection.git --ref main --sparse .agents/plugins --sparse plugins/codex/plugins
+codex plugin marketplace list
+codex plugin marketplace upgrade
+```
+
+### Source CLI / repo-local profile
+
+适合服务器、HPC、repo-local profile、可编辑开发或需要 symlink 的环境。
+
+```bash
+git clone https://github.com/YuukiAS/AI_Skills_Collection.git
+python3 -m pip install --no-build-isolation -e AI_Skills_Collection
+cd /path/to/project
+ai-skills install --target repo --profile research-main --mode symlink --write-agents-md
+```
+
+`v3.6.0` 起中央插件版本与 CLI package 版本同步；此前 `setup.py` 的 `0.1.0` 只表示早期本地命令包装器版本。
+
 ## 先决定装什么
 
 | 场景 | 本仓库插件或 profile | 同时使用的官方能力 |
@@ -15,7 +50,7 @@
 | Slurm compute node | `server-research-baseline` 或 `ai-skills environment apply` | 站点已有 Slurm、TeX、Python |
 | 维护本仓库 | `ai-skills-core` 或 `ai-skills-maintainer` | GitHub，必要时 Notion |
 
-`v3.5` 是当前仓库整合任务标签。中央 Marketplace 的 9 个插件当前发布版本为 `3.5.0`；九个插件是本仓库当前发布预算，不是 Codex 能力上限。
+`v3.6.0` 是当前仓库整合任务标签。中央 Marketplace 的 9 个插件当前发布版本为 `3.6.0`；九个插件是本仓库当前发布预算，不是 Codex 能力上限。
 
 ## Codex App 插件市场
 
@@ -89,11 +124,14 @@ ai-skills environment init
 ai-skills environment list-sites
 ai-skills environment detect
 ai-skills environment plan --site cuhk-central-cluster --target user
-ai-skills environment apply --site cuhk-central-cluster --target user
 ai-skills environment doctor --site cuhk-central-cluster
+ai-skills environment apply --site cuhk-central-cluster --target user
+ai-skills environment diff --site cuhk-central-cluster --target user
 ```
 
 `plan` 只读；`apply` 先 staging 再替换；`doctor` 默认不提交 Slurm 作业，只有显式 `--submit-smoke-job` 才允许进入提交路径。
+
+更多本地配置说明见 `docs/LOCAL_CONFIGURATION.md`。
 
 ## Presentation 与 CUHK 模板
 

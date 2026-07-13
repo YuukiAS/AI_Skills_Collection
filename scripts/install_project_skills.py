@@ -11,7 +11,7 @@ from skills import main as skills_main
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project")
-    parser.add_argument("--profile", default="auto", help="Profile name; 'auto' is kept for compatibility and maps to codex-skill-maintenance in this repo")
+    parser.add_argument("--profile", default="auto", help="Profile name; 'auto' is kept for compatibility and maps to ai-skills-maintainer in this repo")
     parser.add_argument("--intent", default="", help="Ignored compatibility option")
     parser.add_argument("--mode", choices=("symlink", "copy"), default="symlink")
     parser.add_argument("--write-agents-md", action="store_true")
@@ -23,7 +23,7 @@ def main() -> int:
 
     profile = args.profile
     if profile == "auto":
-        profile = "codex-skill-maintenance"
+        profile = "ai-skills-maintainer"
     argv = ["install", "--target", "user" if args.global_install else "repo", "--profile", profile, "--mode", args.mode]
     if args.project and not args.global_install:
         argv.extend(["--project", args.project])

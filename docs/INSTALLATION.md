@@ -28,7 +28,12 @@ codex plugin marketplace add \
   --ref main \
   --sparse .agents/plugins \
   --sparse plugins/codex/plugins
+codex plugin marketplace list
+codex plugin marketplace upgrade
 ```
+
+After installing or upgrading plugins, start a new Codex session so the updated
+skills are loaded consistently.
 
 Use the CLI when you need server, HPC, repo-local, user-level, explicit legacy
 codex-home installs, or when you are authoring and validating skills in this
@@ -36,11 +41,28 @@ source checkout.
 
 ## One-Time CLI Setup
 
-On a new server:
+Linux/macOS:
 
 ```bash
-git clone <repo-url> AI_Skills_Collection
+git clone https://github.com/YuukiAS/AI_Skills_Collection.git
 python3 -m pip install --no-build-isolation -e AI_Skills_Collection
+ai-skills --help
+```
+
+PowerShell:
+
+```powershell
+git clone https://github.com/YuukiAS/AI_Skills_Collection.git
+py -m pip install --no-build-isolation -e AI_Skills_Collection
+ai-skills --help
+```
+
+WSL:
+
+```bash
+cd ~
+git clone https://github.com/YuukiAS/AI_Skills_Collection.git
+python3 -m pip install --no-build-isolation -e ~/AI_Skills_Collection
 ai-skills --help
 ```
 
@@ -85,7 +107,7 @@ If `--project` is omitted, the CLI detects the current git root. If the current 
 Explicit project:
 
 ```bash
-ai-skills install --target repo --project /path/to/repo --profile codex-research-writing --mode symlink --write-agents-md
+ai-skills install --target repo --project /path/to/repo --profile research-main --mode symlink --write-agents-md
 ```
 
 Repo installs write:
@@ -99,8 +121,8 @@ Repo installs write:
 User-level global installs go to `$HOME/.agents/skills/`.
 
 ```bash
-ai-skills install --target user --profile codex-core-global --mode symlink
-ai-skills install --target user --profile codex-writing-style --mode symlink --dry-run
+ai-skills install --target user --profile global-baseline --mode symlink
+ai-skills install --target user --profile research-main --mode symlink --dry-run
 ```
 
 Keep user-level installs small unless you intentionally want broad cross-project skills.
@@ -110,7 +132,7 @@ Keep user-level installs small unless you intentionally want broad cross-project
 Codex-home is explicit legacy/advanced compatibility:
 
 ```bash
-ai-skills install --target codex-home --profile codex-core-global --mode symlink --dry-run
+ai-skills install --target codex-home --profile global-baseline --mode symlink --dry-run
 ```
 
 The path is `${CODEX_HOME:-$HOME/.codex}/skills`. The CLI prints detected `CODEX_HOME`, resolved codex home, target skills root, whether `config.toml` exists, writability, and a legacy target warning.
@@ -132,8 +154,13 @@ ai-skills install --target repo --skill domain/bayesian/pymc --skill domain/baye
 Profile:
 
 ```bash
-ai-skills install --target repo --profile codex-bayesian-jsdm --mode symlink --write-agents-md
+ai-skills install --target repo --profile bioinformatics-project --mode symlink --write-agents-md
 ```
+
+Legacy `codex-*` profile names remain available for old scripts, but new docs
+prefer v3 profile names such as `research-main`, `frontend-research-product`,
+`medical-imaging-project`, `bioinformatics-project`, and
+`ai-skills-maintainer`.
 
 ## Interactive Selection
 

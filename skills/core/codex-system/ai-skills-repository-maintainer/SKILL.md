@@ -30,10 +30,15 @@ Use this skill only for maintaining `AI_Skills_Collection`. Do not use it for or
 
 ## Workflow
 
-1. Read `README.md`, `scripts/codex_marketplace_config.json`, `profiles/`, `docs/provenance/INTEGRATION_HISTORY.md`, and relevant tests.
-2. Edit source files first, then regenerate derived registry/catalog/marketplace files.
-3. Run repository validation gates with the local runtime Python when `python` is not on `PATH`.
-4. Report generated-layer changes separately from source-layer changes.
+1. Read `README.md`, `scripts/codex_marketplace_config.json`, `profiles/`, `docs/provenance/INTEGRATION_HISTORY.md`, any v3 intake table under `docs/provenance/`, and relevant tests.
+2. For Notion or GitHub intake, record the evidence boundary first: source page or repo, readable text/images/attachments, public-source verification, processing decision, target skill/reference, integration commit, and whether the external tracker has already been reconciled.
+3. Decide whether each item is `merged`, `partially-merged`, `reference-only`, `reviewed-not-adopted`, `unresolved-asset`, or `rejected`. Do not collapse several weak-evidence items into a single `merge-selected` claim.
+4. Route domain judgment to the right domain plugin or official capability. This skill controls repository maintenance; it does not decide frontend taste, PPT content, bioinformatics workflows, statistics, or medical-imaging methods by itself.
+5. Edit source files first: `skills/`, `profiles/`, `docs/provenance/`, tests, and public docs.
+6. Regenerate derived registry/catalog/marketplace files only after source-layer changes are complete.
+7. Run repository validation gates with the local runtime Python when `python` is not on `PATH`.
+8. Commit after validation, then reconcile external trackers only if the user requested it. If the user has already updated Notion `Utilized`, do not call the Notion connector again.
+9. Report generated-layer changes separately from source-layer changes.
 
 ## Validation
 

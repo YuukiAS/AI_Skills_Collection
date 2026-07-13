@@ -153,3 +153,36 @@ jobs:
               exit 1
             }
           }
+
+  editable-install-smoke:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install editable CLI
+        run: python -m pip install --no-build-isolation -e .
+
+      - name: Smoke test CLI on Linux
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          set -euo pipefail
+          ai-skills --help
+          ai-skills list
+          project="$(mktemp -d)"
+          ai-skills install --target repo --project "$project" --profile research-main --mode copy --dry-run
+
+      - name: Smoke test CLI on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          ai-skills --help
+          ai-skills list
+          $project = Join-Path $env:RUNNER_TEMP "ai-skills-smoke-project"
+          New-Item -ItemType Directory -Force $project | Out-Null
+          ai-skills install --target repo --project $project --profile research-main --mode copy --dry-run

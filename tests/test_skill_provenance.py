@@ -9,6 +9,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 import skills  # noqa: E402
+import provenance_audit  # noqa: E402
 
 
 class SkillProvenanceTests(unittest.TestCase):
@@ -45,6 +46,14 @@ class SkillProvenanceTests(unittest.TestCase):
 
     def test_user_authored_does_not_require_external_url(self) -> None:
         errors = skills.validate_skill_provenance(Path("skills/local/SKILL.md"), {"provenance": "user-authored"})
+        self.assertEqual(errors, [])
+
+    def test_integration_history_pending_rows_have_closure(self) -> None:
+        errors = provenance_audit.audit_history(REPO_ROOT / "docs/provenance/INTEGRATION_HISTORY.md")
+        self.assertFalse([error for error in errors if "pending-" in error])
+
+    def test_v36_ai_resources_intake_is_consistent(self) -> None:
+        errors = provenance_audit.audit_intake_table(REPO_ROOT / "docs/provenance/AI_RESOURCES_INTAKE_V3_6.md")
         self.assertEqual(errors, [])
 
 

@@ -53,4 +53,4 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Main References
 
-- No domain references discovered yet. Add `references/source-notes.md`, checklists, or overview notes when the skill carries long-lived domain knowledge.
+- `skills\domains\bioinformatics\databases\bioinformatics-database-retrieval\references\bioinformatics-analysis-taxonomy.md`

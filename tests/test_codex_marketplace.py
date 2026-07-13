@@ -186,7 +186,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertIn("deferred-user-merge", text)
         self.assertFalse((REPO_ROOT / "docs/provenance/CLONED_SKILL_SOURCES.md").exists())
 
-    def test_v31_profiles_exist_and_server_profile_carries_overlay_skills(self) -> None:
+    def test_v36_profiles_exist_and_server_profile_carries_overlay_skills(self) -> None:
         for name in [
             "global-baseline",
             "research-main",

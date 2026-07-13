@@ -1,16 +1,37 @@
 # Copy to ~/.config/ai-skills/local-overrides.toml and edit locally.
 # Do not commit real account names, private hostnames, tokens, or personal paths.
+#
+# Public site profiles in this repository define safe shared constraints.
+# This private override supplies machine/user-specific values that cannot live
+# in git. Empty strings are intentional placeholders; run
+# `ai-skills environment doctor --site <site-id>` to see what is still missing.
+#
+# Field guide:
+# - account: Slurm account/allocation name. Usually required; never guess it.
+# - partition: Slurm partition/queue. Required when the site has no safe default.
+# - qos: Slurm QoS or queue class. Required when the scheduler expects one.
+# - scratch_root: private writable scratch/work directory for temporary outputs.
+# - texlive_path: optional private TeX Live root/bin path if modules are insufficient.
+# - python_path: optional preferred Python executable or environment path.
+# - module_init: shell snippet or file path needed before `module load`.
+#
+# Precedence: explicit CLI flags > this local override > public site profile.
+# Keep this file out of project repositories; use ~/.config/ai-skills/ by default.
 
 [sites.cuhk-central-cluster]
 account = ""
+partition = ""
 qos = ""
 scratch_root = ""
 texlive_path = ""
+python_path = ""
 module_init = ""
 
 [sites.unc-longleaf]
 account = ""
+partition = ""
 qos = ""
 scratch_root = ""
 texlive_path = ""
+python_path = ""
 module_init = ""

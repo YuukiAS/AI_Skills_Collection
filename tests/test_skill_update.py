@@ -124,6 +124,78 @@ class SkillUpdateTests(unittest.TestCase):
             self.assertEqual(second["site_id"], "cuhk-central-cluster")
             self.assertTrue((Path(first["target_root"]) / "slurm-workflows" / "references" / "_generated" / "site-profile.md").exists())
 
+    def test_environment_init_site_writes_only_selected_section_and_refuses_overwrite(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            override = Path(tmp) / "local-overrides.toml"
+            args = argparse.Namespace(site="cuhk-central-cluster", local_override=str(override), dry_run=False, force=False)
+            self.assertEqual(skills.command_environment_init(args), 0)
+            text = override.read_text(encoding="utf-8")
+            self.assertIn("[sites.cuhk-central-cluster]", text)
+            self.assertNotIn("[sites.unc-longleaf]", text)
+            with self.assertRaises(SystemExit):
+                skills.command_environment_init(args)
+
+    def test_environment_doctor_reports_override_diagnostics(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp) / "project"
+            override = Path(tmp) / "local-overrides.toml"
+            override.write_text(
+                "\n".join(
+                    [
+                        "[sites.cuhk-central-cluster]",
+                        'account = ""',
+                        'unknown_field = "x"',
+                        f'scratch_root = "{Path(tmp) / "missing-scratch"}"',
+                        "",
+                        "[sites.unknown-site]",
+                        'account = "x"',
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            args = argparse.Namespace(
+                site="cuhk-central-cluster",
+                target="repo",
+                project=str(project),
+                hostname=None,
+                path=None,
+                local_override=str(override),
+                submit_smoke_job=False,
+                json=True,
+            )
+            data = skills.environment_doctor_payload(args)
+            diagnostics = data["diagnostics"]
+            self.assertIn("unknown-site", diagnostics["unknown_sites"])
+            self.assertIn("unknown_field", diagnostics["unknown_fields"])
+            self.assertIn("account", diagnostics["empty_fields"])
+            self.assertIn("partition", diagnostics["missing_required_fields"])
+            self.assertIn("scratch_root", diagnostics["inaccessible_paths"])
+
+    def test_environment_doctor_reports_site_mismatch(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            override = Path(tmp) / "local-overrides.toml"
+            override.write_text("[sites.unc-longleaf]\naccount = \"abc\"\n", encoding="utf-8")
+            args = argparse.Namespace(
+                site="cuhk-central-cluster",
+                target="user",
+                project=None,
+                hostname=None,
+                path=None,
+                local_override=str(override),
+                submit_smoke_job=False,
+                json=True,
+            )
+            data = skills.environment_doctor_payload(args)
+            self.assertTrue(data["diagnostics"]["site_mismatch"])
+
+    def test_environment_local_override_parser_reports_invalid_lines(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            override = Path(tmp) / "local-overrides.toml"
+            override.write_text("account = \"outside\"\n[sites.cuhk-central-cluster]\nnot-a-field\n", encoding="utf-8")
+            _data, errors = skills.parse_environment_local_override(override)
+            self.assertTrue(any("outside" in error for error in errors))
+            self.assertTrue(any("expected key = value" in error for error in errors))
+
     def test_find_manifests_respects_scan_depth(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
