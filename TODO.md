@@ -1,189 +1,573 @@
-# TODO：为全部 Skill 补齐图标，并建立与 OpenAI Presentation 协作的独立演示文稿插件
+# TODO v2：插件架构、图标、演示文稿、外部来源整合与安装文档重构
 
 ## 0. 任务定位
 
-这是当前最高优先级的仓库工作。需要同时完成两个互相关联但应独立验收的工作流：
+本文件替代上一版根目录 `TODO.md`，作为下一轮 Codex 重构 `AI_Skills_Collection` 的主要执行说明。目标不是简单增加一个 Presentation 插件或批量补图标，而是把整个仓库整理成一套边界清楚、可按机器和项目安装、能与 OpenAI 官方插件协作、可以持续吸收外部 Skill/规范且保留来源历史的系统。
 
-1. 为 Codex Marketplace 中的插件、应用层 active skill，以及最终所有 `status: active` 的源 skill 建立可维护、可追踪、可验证的图标体系。
-2. 建立一个独立的 `presentations` 插件，使 Codex 能把 Markdown、论文、已有 PPTX 和项目材料转换为专业演示文稿，同时与 OpenAI 已安装的官方 Presentation/Slides 能力协作，而不是复制或争夺同一层职责。
+必须遵守以下总原则：
 
-本任务不是简单地批量放若干 PNG，也不是把现有 `pptx` 与 `scientific-slides` 原样重新打包。必须先理清发布层、触发边界、模板资产、来源许可、输入规范和 QA，再实施。
+1. `skills/`、`profiles/`、`shared/` 和发布配置是源层；`.agents/plugins/marketplace.json` 与 `plugins/codex/plugins/` 是生成层，不得手工维护。
+2. OpenAI 官方插件负责通用执行后端，例如 Presentation/Slides、LaTeX、PDF、GitHub、Notion、Zotero、BioRender 和 `build-web-apps`；本仓库负责用户特有的科研工作流、写作规则、设计知识、领域知识、项目约束和验收标准。
+3. 官方插件与本仓库插件可以同时使用，但必须按职责串联，不得用多个宽泛 trigger 竞争同一任务。
+4. 项目专用知识与项目代码同版本维护；通用插件不应长期携带 CardiacNexus、CARE、TRACE 或 Asteria 的易变项目事实。
+5. 外部 Skill、GitHub 仓库、Notion 页面或其他规范只能先审查、再提炼合并；不允许把外部目录永久 clone 到本仓库后长期保留。
+6. 所有长期保留的外部来源必须可追踪；临时 clone/export 删除后，统一历史中保留一条简洁记录，目标 Skill 的 provenance 继续记录直接来源。
+7. 修改后必须更新 README、生成 Marketplace、运行测试、路径预算、图标审计、provenance 审计和真实安装检查。
 
-## 1. 当前事实与约束
+---
 
-### 1.1 仓库层级
+## 1. 目标架构
 
-- `skills/` 是正式源层；行为、参考材料和模板应优先在这里修改。
-- `scripts/codex_marketplace_config.json` 是 Codex App 发布配置。
-- `.agents/plugins/marketplace.json` 与 `plugins/codex/plugins/` 是生成发布层，不得手工维护。
-- 任何源层或发布配置变更都必须重新运行 Marketplace builder，并提交生成结果。
-- 当前 builder 对插件数量设置了 `MAX_MARKETPLACE_PLUGINS = 9`，测试也固定断言当前九个插件；新增 `presentations` 前必须解决这个约束，而不是让测试失效后绕过。
-- 当前 builder 还执行 active skill 数量上限、跨插件名称冲突检查和 140 字符 Windows 路径预算；新增模板和图标不得破坏这些 gate。
+### 1.1 中央 Marketplace：九个通用插件
 
-### 1.2 当前演示文稿能力的问题
+中央 `AI_Skills_Collection` Marketplace 的目标用户可见插件为：
 
-- `skills/tools/documents-media/pptx/` 是一套较完整的底层 PPTX 读写、OOXML、PptxGenJS 与渲染 QA 说明。它与 OpenAI 官方 Presentation/Slides 能力在“文件实现层”明显重叠。
-- `skills/science/communication/scientific-slides/SKILL.md` 目前把 Nano Banana Pro/OpenRouter 生成整页图片作为默认路径，并引用了仓库中并不存在的 `scripts/generate_slide_image.py`、`references/beamer_guide.md`、若干模板和资源。它不能直接作为新插件的可靠基础。
-- 当前 `research-writing` 插件中的聚合 skill `research-documents` 同时发布 `pptx` 和 `scientific-slides`。如果再增加一个广义 presentation skill，会造成触发边界重复。
-- 新插件必须保留可编辑、可复现、可审计的演示文稿工作流，不能把整页 AI 图片冒充可编辑 PPTX，也不能依赖未声明的第三方 API key。
+| 插件 | 核心职责 | 典型安装范围 |
+|---|---|---|
+| `workflow-core` | 复杂任务的事实源发现、计划、执行、验证和完成门槛 | 所有实际运行 Codex 的主力环境 |
+| `ai-skills-core` | 本仓库的 profile 安装、更新、registry、catalog、Marketplace 和维护 | 需要使用或维护 AI_Skills_Collection 的机器 |
+| `writing-style` | 忠实改写、中文技术表达、科学表达和局部文本质量 | 用户级全局安装 |
+| `research-writing` | Repo 报告、研究文档、正式论文、文献与引用工作流 | 主力科研环境 |
+| `presentations` | 独立的科研/技术演示与商业演示工作流 | 主要制作 PPT/Slides 的桌面环境 |
+| `web-development` | 前端参考研究、视觉系统和科研产品前端约束，补充官方 `build-web-apps` | 有网站、Dashboard 或研究产品任务的环境 |
+| `statistical-modeling` | 统计模型、贝叶斯方法、数据分析和科学可视化 | 主力科研环境 |
+| `bioinformatics` | 通用生物信息学与组学工作流 | 按领域或项目安装 |
+| `medical-imaging` | 医学影像、CMR、DICOM/NIfTI 和影像机器学习 | 按领域或项目安装 |
 
-### 1.3 当前图标能力的问题
+`cardiacnexus` 不再作为中央通用 Marketplace 插件。中央插件数仍为九，但这是目标架构的结果，不是为了迎合当前 `MAX_MARKETPLACE_PLUGINS = 9`。必须确认该限制只是仓库内部预算，并把产品限制、仓库预算和测试断言分开表达。
 
-- Marketplace 生成的插件 manifest 目前只写固定 `brandColor`，没有生成 `composerIcon` 或 `logo`。
-- 大多数源 skill 没有 `agents/openai.yaml`，或者没有 `icon_small`、`icon_large`。
-- 现有 icon design reference 引用了缺失的 Gemini 图标生成脚本，不能作为唯一实现。
-- `pptxgenjs.md` 中已经使用 `react-icons` 作为图标来源示例。用户提到的“Reicon”可能是 React Icons，也可能是另一套图标库；实现前先确认名称，不要把猜测写进正式来源记录。
-- CardiacNexus 等项目可能已有 favicon、logo 或可复用视觉资产。必须先在对应项目仓库中查找和验证，不能仅凭文件名猜测路径。
+### 1.2 项目层
 
-## 2. 总体设计原则
-
-### 2.1 演示文稿职责分层
-
-新插件负责“演示文稿思考层”，包括：
-
-- 分析输入材料；
-- 判断商业模式或科学/工程模式；
-- 确定受众、时长、叙事与信息密度；
-- 从 Markdown、论文、图表和已有 deck 中提取可信内容；
-- 生成结构化 deck plan；
-- 选择模板、版式、视觉语言和引用策略；
-- 把 deck plan 交给官方 Presentation/Slides 能力完成 PPTX 的底层构造、编辑、导出和渲染；
-- 执行来源忠实度、内容和视觉 QA。
-
-OpenAI 官方 Presentation/Slides 能力负责“文件实现层”，包括：
-
-- 创建或编辑 `.pptx`；
-- PptxGenJS、OOXML、PowerPoint 对象、导出和渲染等底层机制；
-- 具体 slide 对象、文本框、图表、图片和布局写入。
-
-不得在新 skill 中复制一份完整官方 Presentation skill。可以保留少量兼容说明、模板接口和失败时的受控 fallback，但不能维护两套等价底层引擎。
-
-### 2.2 图标职责分层
-
-- 插件图标用于 Marketplace 卡片与 composer：每个用户可见插件至少有 `composerIcon`、`logo` 和 `brandColor`。
-- Skill 图标用于 skill 列表、chip 或入口：每个应用层 active skill 至少有 `icon_small`、`icon_large`、`brand_color` 和明确的 `display_name`。
-- 源 skill 图标属于源层；生成聚合 skill 的图标由 Marketplace builder 从发布配置生成。
-- 生成发布层只复制和生成，不作为手工修改来源。
-
-### 2.3 默认模板规则
-
-除非用户明确指定其他模板，所有演示文稿默认使用本任务引入的 CUHK 模板视觉体系。这里的“使用模板”包括：
-
-- 默认 PPTX：使用与上传 Beamer 模板视觉一致、但适配标准 16:9 和 PowerPoint 编辑能力的 CUHK PPTX 模板。
-- 明确要求 Overleaf、Beamer、LaTeX 或数学原生 PDF：使用 CUHK Beamer 模板生成 `.tex` 和 `.pdf`。
-- 明确提供公司、课程、会议或项目模板：用户模板优先。
-- 项目仓库已有专用模板时，项目模板优先于全局 CUHK 默认。
-
-商业演示与科学演示的叙事和内容规范不同，但在未指定其他品牌模板时，二者都可以使用 CUHK 默认视觉体系。
-
-## 3. 工作流 A：图标系统
-
-## 3.1 覆盖范围与优先级
-
-按两个阶段实施，但最终不能停在第一阶段。
-
-### P0：Codex App 用户可见层
-
-- [ ] 当前全部 Marketplace 插件。
-- [ ] 新增的 `presentations` 插件。
-- [ ] 每个插件发布的全部 active skill，包括 generated aggregate skill。
-- [ ] 生成后的 `plugin.json` 和 `agents/openai.yaml` 均能解析并引用存在的资产。
-
-### P1：完整源 skill 层
-
-- [ ] 以 `registry.json` 和 source frontmatter 为事实来源，覆盖全部 `status: active` 的源 skill。
-- [ ] archived、inactive 或仅作为 `_src` snapshot 的说明文件不计入强制覆盖。
-- [ ] 为 CLI 安装到 repo/user 的 skill 同样保留图标元数据和资产。
-- [ ] 最终把完整覆盖设为硬 gate，而不是永久停留在 report-only。
-
-## 3.2 图标来源优先级
-
-对每个插件或 skill 按以下顺序选择：
-
-1. **已有项目/产品资产**：例如项目 favicon、logo 或已发布视觉标识。CardiacNexus 作为首个审计对象，但必须记录真实仓库、路径、commit/ref、许可和哈希。
-2. **许可清晰的图标库**：优先从 React Icons 所汇集的具体图标集、Lucide、Heroicons、Material Symbols、Remix Icon、Bootstrap Icons 等中选择。必须记录“具体图标集”的许可证，不能只写 React Icons。
-3. **Codex 直接绘制的简单 SVG**：仅在没有合适现成图标、或项目需要独特符号时使用。SVG 应是可审查的文本资产，不依赖外部生成 API。
-4. **禁止默认使用**：来源不明的搜索结果图片、带水印资产、从网站截图裁出的品牌标识、无法确认许可的图标包、嵌入字体或脚本的 SVG。
-
-不要把整套第三方 icon library vendoring 到仓库，只复制实际使用的少量图标，并保留必要 attribution。
-
-## 3.3 统一风格规范
-
-- [ ] 优先使用单色或双色矢量图标；不同插件可有品牌色，但线条、留白和视觉重量应统一。
-- [ ] 小图标默认 `viewBox="0 0 24 24"`，无文本、无嵌入字体、无脚本、无外部 URL。
-- [ ] SVG 必须有可理解的 `<title>` 或由对应 YAML 提供可访问名称。
-- [ ] 同一插件内的 active skills 应形成视觉家族，但不能全部使用无法区分的同一图形。
-- [ ] 在 16、24、48、128 和 512 像素下检查清晰度。
-- [ ] 同时检查浅色和深色界面；不能依赖透明度过低的细线。
-- [ ] 可共享同一图标的 skill 必须在 provenance 中显式说明原因；禁止意外重复。
-
-## 3.4 建议目录与配置
-
-插件源资产建议放在：
+项目专用 Skill 以项目仓库为 canonical source：
 
 ```text
-assets/codex/plugin-icons/<plugin-name>/
+<Project Repo>/
+  AGENTS.md
+  .agents/
+    skills/
+      <project-skill>/
+        SKILL.md
+        agents/openai.yaml
+        references/
+        scripts/
+        assets/
+```
+
+项目层至少覆盖：
+
+- CardiacNexus：pipeline、feature contracts、strain/registration、docs/website。
+- CARE：当项目形成稳定专用协议后再在 CARE repo 中创建，不提前把易变规则放进中央插件。
+- TRACE/Asteria：模型版本、符号、数据流、论文状态和导出格式在相应 repo 中维护。
+
+中央仓库可以保留项目 profile、来源索引、安装/检查入口和迁移历史，但不能同时维护另一份独立可编辑的完整项目 Skill 副本。
+
+### 1.3 与 OpenAI 官方插件的关系
+
+实现前先读取当前 Codex App/CLI 环境中已安装的官方插件 manifest 和 Skill，记录实际名称、触发器、输入输出、文件格式和调用方式，不得凭记忆硬编码 `$presentation`、`$latex`、`$build-web-apps` 等调用名。
+
+职责边界：
+
+| 工作 | 本仓库负责 | 官方插件负责 |
+|---|---|---|
+| PPT/Slides | 受众、叙事、deck plan、模板、引用、内容与视觉 QA | `.pptx`/Google Slides 的创建、编辑、对象操作、导出和渲染 |
+| LaTeX/Beamer | 论文或演示内容、模板选择、中文/数学规则、完成标准 | `.tex`、宏包、编译、日志修复和 PDF 构建 |
+| 前端 | 外部参考、视觉方向、科研产品约束、设计 brief | 代码实现、框架最佳实践、浏览器测试和部署 |
+| GitHub | 本仓库或项目工作流规则 | 文件、提交、PR、Issue 和 Actions 操作 |
+| Notion | 如何审查、提炼、合并和记录来源 | 页面搜索、读取和元数据获取 |
+| Zotero/BioRender/PDF | 科研工作流、引用/图示使用规则 | 实际连接器或文件工具能力 |
+
+不得复制官方插件全文。兼容性文档只保存公开接口、已验证行为、协作顺序和已知缺口。
+
+---
+
+## 2. 插件边界与应用层 Active Skills
+
+### 2.1 `workflow-core` 与 `ai-skills-core`
+
+两者保持独立。
+
+`workflow-core` 是通用执行纪律，负责：
+
+- 先发现 source of truth；
+- 区分设计、实现、验证和交付；
+- 复杂任务建立阶段门槛；
+- 不把启动子 Agent、提交作业或生成第一版当作完成；
+- 读取 repo 的 `AGENTS.md`、TODO、handoff、测试和既有约束；
+- 诚实报告未完成项和证据不足。
+
+`ai-skills-core` 是 AI_Skills_Collection 管理入口，目标只暴露本仓库独有能力，例如：
+
+```text
+ai-skills-core
+├── project-skill-profile-installer
+└── ai-skills-repository-maintainer
+```
+
+要求：
+
+- [ ] 不再重复发布 OpenAI 官方 `skill-creator`、`skill-installer` 或 `plugin-creator` 的通用实现。
+- [ ] `project-skill-profile-installer` 负责选择 profile、安装 repo-local Skill、更新 manifest，并同步项目 `AGENTS.md`。
+- [ ] `ai-skills-repository-maintainer` 负责 registry、catalog、provenance、Marketplace、图标和发布层维护。
+- [ ] `ai-skills-repository-maintainer` 默认 `allow_implicit_invocation: false`，普通编码任务不得自动注入仓库维护流程。
+- [ ] README 明确：`ai-skills-core` 不是所有机器必装，只在使用中央 CLI/profile 或维护本仓库时安装。
+
+### 2.2 `writing-style` 与 `research-writing`
+
+必须在 Skill description、README 和测试中明确以下边界：
+
+`writing-style` 解决：
+
+```text
+已有语义内容 → 更清楚、更自然、更一致、符合目标风格的表达
+```
+
+它可以做忠实改写、中文技术表达、局部科学表达、术语统一、标点与中英文混排、数学排版和语言压缩；原则上不搜索文献、不决定论文结构、不新增研究结论、不判断证据是否足以支撑主张。
+
+`research-writing` 解决：
+
+```text
+项目证据、研究目标与文献 → 结构完整、可追踪的科研成果
+```
+
+它负责 repo 报告、milestone/实验复盘、研究设计文档、正式论文、supplement、rebuttal、grant、literature review、claim–evidence–citation 关系和章节组织，并在需要时调用 `writing-style` 做最终语言处理。
+
+目标应用层 Active Skills：
+
+```text
+writing-style
+├── writing-fidelity
+├── chinese-prose
+└── scientific-prose
+
+research-writing
+├── research-reporting
+├── research-paper-workflow
+└── literature-and-citations
+```
+
+要求：
+
+- [ ] 现有 source skills 可以继续作为内部工作流，但 App-facing trigger 必须收敛到以上边界。
+- [ ] `scientific-prose` 只负责表达，不得与 `research-paper-workflow` 竞争整篇论文任务。
+- [ ] `research-reporting` 覆盖 repo 内 Markdown 报告、里程碑总结、结果复盘和技术文档。
+- [ ] `research-paper-workflow` 覆盖正式论文、Methods/Results/Discussion、supplement、rebuttal 和 grant。
+- [ ] `literature-and-citations` 覆盖文献检索、综述、引用核验、BibTeX 和 Zotero 协作。
+- [ ] PDF/DOCX/LaTeX 的底层文件实现优先交给官方能力；本插件保留内容和科研流程控制。
+
+### 2.3 `presentations`：两个互不干扰的 Skill
+
+目标结构：
+
+```text
+presentations
+├── research-presentations
+└── business-presentations
+```
+
+`research-presentations` 触发范围：组会、学术报告、seminar、conference、journal club、答辩、方法/模型/实验汇报，以及从论文、科研 Markdown、Asteria 导出、代码结果或已有 deck 制作技术演示。
+
+其主线是：
+
+```text
+为什么做 → 做了什么 → 关键机制 → 证据说明什么 → 失败/局限 → 需要讨论什么 → 下一步
+```
+
+`business-presentations` 触发范围：公司汇报、executive summary、项目提案、产品/运营/市场/组织汇报、pitch、决策 deck，以及明确面向非技术业务受众的演示。
+
+其主线是：
+
+```text
+结论/请求 → 问题或机会 → 证据与影响 → 方案 → 资源与风险 → 决策和下一步
+```
+
+避免冲突：
+
+- [ ] 仅修改现有 PPTX/Google Slides 的文字、颜色、对齐或对象时，直接使用官方 Presentation/Slides，不触发本仓库两个 orchestration Skill。
+- [ ] 来自科研 repo、论文、模型、实验或 Asteria 的输入默认 `research-presentations`。
+- [ ] 明确 company/executive/market/product/client/strategy/pitch/operations 语境时使用 `business-presentations`。
+- [ ] 两者共用 deck-plan schema、输入适配器、模板路由、来源忠实度和 visual QA，但拥有独立 trigger、叙事、信息密度和验收规则。
+- [ ] 从 `research-writing` 的 App-facing `research-documents` 中移除 `pptx` 和旧 `scientific-slides`，避免三处争夺 presentation 任务。
+
+建议源层结构：
+
+```text
+skills/tools/documents-media/presentations/
+  shared/
+    deck-plan.schema.json
+    markdown-ingestion.md
+    template-routing.md
+    source-fidelity.md
+    visual-qa.md
+    compatibility/
+      openai-presentation.md
+      openai-latex.md
+    templates/
+      cuhk/
+        design-tokens.json
+        beamer/
+        pptx/
+  research-presentations/
+    SKILL.md
+    agents/openai.yaml
+    references/
+  business-presentations/
+    SKILL.md
+    agents/openai.yaml
+    references/
+```
+
+Marketplace builder 需要支持插件级共享 payload，或提供等价且不复制两套共享材料的生成方案。不得使用 symlink。
+
+### 2.4 官方 LaTeX 插件
+
+建议在需要论文/Beamer 的主力环境安装官方 LaTeX 插件，但本仓库不再创建另一套通用 LaTeX 插件。
+
+调用边界：
+
+- [ ] 正式论文的结构、论证、引用和内容由 `research-writing` 主导；`.tex`、宏包、编译和日志由官方 LaTeX 完成。
+- [ ] 研究演示的叙事和 deck plan 由 `research-presentations` 主导；明确要求 Beamer/Overleaf/LaTeX/PDF 时由官方 LaTeX 完成文件实现。
+- [ ] 普通 Markdown 报告或 PPTX 不因含有公式而自动触发 LaTeX。
+- [ ] 先审计实际官方插件名称和功能，再写 compatibility 文档和依赖声明。
+
+### 2.5 `web-development` 作为官方前端插件的补充
+
+不得删除 `web-development`。其目标不是复制官方 `build-web-apps` 的实现闭环，而是吸收更广、更快更新的设计参考和科研产品知识。
+
+目标 Active Skills：
+
+```text
+web-development
+├── frontend-reference-research
+├── frontend-visual-systems
+└── research-product-frontend
+```
+
+`frontend-reference-research` 负责：
+
+- 小红书帖子、用户截图、GitHub 新 UI 库、Figma Community、设计案例和其他新资料的审查；
+- 记录访问时间、来源、适用场景和可复用模式；
+- 将案例抽象成 pattern，而不是复制整页或永久保存来源不明图片。
+
+`frontend-visual-systems` 负责：
+
+- design tokens、品牌、配色、图标、排版、页面节奏、信息密度和可执行 design brief；
+- 把外部参考转化成当前项目可实现的视觉规则。
+
+`research-product-frontend` 负责：
+
+- 医学影像浏览器、phenotype explorer、模型比较、实验历史、provenance、统计图表、公式和科研证据界面的特殊约束；
+- Asteria、CARE、CardiacNexus 等高信息密度研究产品。
+
+标准协作顺序：
+
+```text
+外部参考/用户截图
+→ frontend-reference-research
+→ frontend-visual-systems 或 research-product-frontend
+→ 形成 design brief/视觉约束
+→ OpenAI build-web-apps 实现、浏览器测试和部署
+```
+
+要求：
+
+- [ ] 当前 `frontend-product-design`、`react-tailwind-ui`、`frontend-testing-debugging` 等与官方实现高度重叠的 App-facing trigger 重新收敛。
+- [ ] 原 source skills 可以保留供 CLI/内部参考，但用户可见入口必须体现“补充层”定位。
+- [ ] 不把小红书、Dribbble 等完整第三方图片或帖子内容直接提交到公开仓库；保留链接、模式摘要、访问日期和必要的许可/用途说明。
+- [ ] 对用户私有截图或 Notion 页面，默认只在本地 intake 区使用；未经确认不得进入公开仓库。
+
+### 2.6 领域插件
+
+`statistical-modeling`、`bioinformatics` 和 `medical-imaging` 继续提供领域判断，不承担通用写作、PPT 文件实现或前端工程。
+
+- `statistical-modeling` 检查模型、公式、估计、诊断、实验设计和科学图表。
+- `bioinformatics` 处理组学、数据库、单细胞和生物信息学工具链。
+- `medical-imaging` 处理 CMR、DICOM/NIfTI、分割、配准、影像特征和医学影像机器学习。
+
+它们可以与 `research-writing`、`research-presentations` 或官方前端插件组合，但不得替代项目 repo-local 事实。
+
+---
+
+## 3. README 与安装模型
+
+README 必须从“列出命令”升级为“先告诉用户该装什么、装在哪里、为什么”。至少加入以下内容。
+
+### 3.1 安装层级
+
+#### A. 所有主力 Codex 环境建议用户级全局安装
+
+```text
+workflow-core
+writing-style
+```
+
+说明：`workflow-core` 约束执行质量；`writing-style` 体现用户长期表达规则。纯 Slurm compute node、训练容器或不运行 Codex 的机器不需要安装。
+
+#### B. 主力科研环境建议安装
+
+```text
+research-writing
+statistical-modeling
+```
+
+桌面或经常制作演示的机器再安装：
+
+```text
+presentations
+OpenAI 官方 Presentation/Slides
+OpenAI 官方 LaTeX（需要论文或 Beamer 时）
+```
+
+有网站、Dashboard 或研究产品开发时安装：
+
+```text
+web-development
+OpenAI build-web-apps
+```
+
+#### C. 按领域/项目安装
+
+```text
+medical-imaging
+bioinformatics
+```
+
+这些插件可以用户级安装在长期从事对应领域的环境，也可以通过 project profile 仅安装到相关 repo。README 必须给出两种方式的区别。
+
+#### D. 仅在使用或维护本仓库时安装
+
+```text
+ai-skills-core
+```
+
+适用于：有 `AI_Skills_Collection` checkout、运行 `ai-skills` CLI、更新 profile、维护 registry/catalog/Marketplace 的机器。
+
+不适用于：只从 Codex App Marketplace 使用普通插件的机器、纯计算节点、无维护需求的临时容器。
+
+### 3.2 README 必须提供的场景矩阵
+
+至少写清楚：
+
+| 场景 | 本仓库插件 | 官方插件/后端 |
+|---|---|---|
+| Repo 内 report/milestone/实验复盘 | `workflow-core` + `research-writing` + `writing-style` + 领域/项目 Skill | GitHub；需要 PDF 时加 LaTeX/PDF |
+| Asteria/TRACE Markdown → 组会 PPT | repo-local TRACE/Asteria + `research-presentations` + `statistical-modeling` | Presentation；Beamer 时加 LaTeX |
+| 正式论文 | repo-local 项目 Skill + `research-paper-workflow` + `literature-and-citations` + `writing-style` + 领域插件 | LaTeX、PDF、Zotero、GitHub |
+| 前端网站/科研产品 | repo-local 项目 Skill + `web-development` | `build-web-apps`、Figma、GitHub |
+| 商业/公司 PPT | `business-presentations` | Presentation/Google Slides |
+| CardiacNexus pipeline/docs | CardiacNexus repo-local Skills + `medical-imaging`，需要时加 `research-writing`/`web-development` | GitHub、`build-web-apps` |
+| 外部 Skill/Notion 规范整合 | `ai-skills-core` + `workflow-core` | Notion/GitHub |
+
+### 3.3 README 命令和平台说明
+
+- [ ] Codex App Marketplace：继续写清 source、ref 和两条 sparse paths。
+- [ ] CLI：分别给出 user、repo 和显式兼容目标的命令。
+- [ ] 给出推荐 profile：`global-baseline`、`research-main`、`presentation-desktop`、`frontend-research-product`、`medical-imaging-project`、`bioinformatics-project`、`ai-skills-maintainer`。
+- [ ] 每个 profile 说明会安装哪些插件/Skill、目标目录、是否修改 `AGENTS.md`。
+- [ ] Windows、Linux/HPC 和纯 compute node 分开说明。
+- [ ] 不要求普通用户频繁删除重装全局 Skill；优先使用 manifest 驱动的 `ai-skills update`。
+- [ ] README 明确 generated layer 不手工编辑，push 到 `main` 后由现有 Marketplace workflow 生成/验证/写回。
+
+---
+
+## 4. CardiacNexus 的迁移和长期位置
+
+### 4.1 Canonical source
+
+CardiacNexus 项目专用 Skill 的长期位置：
+
+```text
+YuukiAS/CardiacNexus
+  AGENTS.md
+  .agents/skills/
+    cardiacnexus-pipeline-refactor/
+    cardiacnexus-feature-contracts/
+    cardiacnexus-strain-registration/
+    cardiacnexus-docs-markdoc/
+```
+
+CardiacNexus repo 是唯一可编辑 canonical source。Skill 与 pipeline、schema、website 和测试同 commit 演进。
+
+### 4.2 中央仓库保留什么
+
+`AI_Skills_Collection` 仅保留：
+
+- CardiacNexus 项目 profile 或安装检查描述；
+- 外部/项目来源索引与 integration history；
+- 指向 CardiacNexus repo、commit/ref 和 Skill 路径的记录；
+- 必要的迁移脚本或“确认 repo-local Skill 已存在”的检查器；
+- 不包含完整可编辑副本。
+
+### 4.3 迁移步骤
+
+- [ ] 审计当前中央 `skills/projects/cmr/cardiacnexus-*` 与 CardiacNexus repo 内实际规则。
+- [ ] 以内容更完整、与当前代码一致的一方为基础，在 CardiacNexus `.agents/skills/` 建立 canonical Skills。
+- [ ] 更新 CardiacNexus `AGENTS.md`，从旧 `.codex/skills` 和中央 canonical 路径迁移到 `.agents/skills`。
+- [ ] 在 CardiacNexus repo 运行项目测试和 Skill 路由检查。
+- [ ] 从中央 `scripts/codex_marketplace_config.json` 移除 `cardiacnexus` 插件。
+- [ ] 将中央完整副本删除或转换为轻量 external-project descriptor；不能保留两份可编辑来源。
+- [ ] 在 integration history 中记录迁移日期、CardiacNexus commit、源路径、目标路径和中央删除 commit。
+- [ ] README 写清楚：CardiacNexus 用户应在项目 repo 中使用 repo-local Skills，而不是全局安装中央 `cardiacnexus`。
+- [ ] 如确有 UI 需求，可由 CardiacNexus repo 自己发布 repo-scoped marketplace；不要重新放回中央通用 Marketplace。
+
+---
+
+## 5. 外部 GitHub/Notion Skill 与规范的整合
+
+### 5.1 适用来源
+
+后续 Codex 可能读取：
+
+- 用户在 Notion 中维护的页面；
+- 别人分享的 Skill、Prompt、规范或 checklist；
+- GitHub 仓库、插件或单个 `SKILL.md`；
+- 用户提供的网页、截图、文档和代码片段。
+
+所有来源进入同一 intake 流程，不因来源是 Notion 就绕过许可、隐私、重复和 provenance 检查。
+
+### 5.2 Notion 读取规则
+
+- [ ] 使用官方 Notion 连接器/插件读取页面和必要的子页面；不得要求用户先把整套 Notion 导出后永久提交。
+- [ ] 读取时记录 page title、稳定页面标识/URL、`last_edited_time`、读取日期、页面所有者或权限基础（能确认时）和目标用途。
+- [ ] Notion 页面可能包含私密、未公开或第三方内容；默认不得把原文、截图或完整导出提交到公开仓库。
+- [ ] 用户拥有或明确获准再利用的页面可以提炼合并；许可不清的第三方页面只能作为思路参考，必须独立改写，不能复制其完整 Skill 文本、代码或资产。
+- [ ] 同一页面后续更新并再次整合时，新增一条 integration event，记录新 revision/`last_edited_time`，不得篡改旧历史。
+
+### 5.3 临时 intake 区
+
+临时 clone/export 必须放到未跟踪目录，例如：
+
+```text
+.tmp/skill-intake/<source-id>/
+build/skill-intake/<source-id>/
+```
+
+要求：
+
+- [ ] 加入 `.gitignore`。
+- [ ] 禁止继续使用 tracked `todo/<cloned-repo>/` 作为长期源目录。
+- [ ] clone 时固定 commit/ref；Notion 读取时固定页面 revision/last edited time。
+- [ ] intake 区只服务于比较、审查和合并，不能被 Marketplace builder 引用。
+- [ ] 合并和验证完成后删除临时 clone/export。
+
+### 5.4 审查与合并流程
+
+每个来源按以下顺序处理：
+
+1. 记录来源身份、版本、许可/权限和拟整合目标。
+2. 列出可用内容：trigger、工作流、checklist、脚本、参考资料、测试、资产。
+3. 与现有目录做重复/冲突分析：相同能力不得再建一个宽泛 Skill。
+4. 分类决定：`merge`、`merge-selected`、`reference-only`、`project-local`、`rejected`。
+5. 将有价值内容提炼进现有或新目标 Skill，保持本仓库术语、frontmatter、目录和触发边界。
+6. 为直接采用或实质改写的内容更新目标 Skill provenance；保留必要的许可和 attribution。
+7. 运行 Skill validation、测试、catalog、Marketplace 和路径检查。
+8. 在统一 history 中追加一条记录。
+9. 删除临时 clone/export 和详细 intake 报告，只保留合并后的内容、必要法律文件、Skill provenance 和一行 history。
+
+不得先批量复制外部目录再“以后整理”。
+
+### 5.5 统一 Integration History
+
+建立一个 canonical history，例如：
+
+```text
+docs/provenance/INTEGRATION_HISTORY.md
+```
+
+每个来源或每次重新整合只保留一行 Markdown 表格记录：
+
+```text
+| date | source_type | source | revision | permission/license | decision | target | integration_commit | note |
+```
+
+示例仅说明格式：
+
+```text
+| 2026-07-13 | notion | <page title + stable id> | <last_edited_time> | user-owned | merge-selected | research-presentations | <commit> | deck planning rules |
+| 2026-07-13 | github | owner/repo | <commit sha> | MIT | merge | frontend-visual-systems | <commit> | temporary clone deleted |
+```
+
+要求：
+
+- [ ] 一条记录必须足以回答“用了谁的什么、哪个版本、合并到哪里、在哪个 commit 完成”。
+- [ ] history 是 append-only；发现错误时追加 correction 行，不静默改写已经发生的整合事实。
+- [ ] 目标 Skill 的 frontmatter 继续保留 `provenance`、`source_repo_url`/page id、`source_path`、`source_ref`、`source_imported_at`、`source_license` 和 `source_note` 等直接来源信息。
+- [ ] 历史只保留一行不等于可以删除法律要求的 LICENSE/NOTICE/attribution；必要法律文件继续保留。
+- [ ] 不在 history 中写私密 Notion 正文；私有来源使用稳定 ID、标题摘要和权限说明，不泄漏敏感内容。
+
+### 5.6 迁移现有 clone 记录
+
+当前 `docs/provenance/CLONED_SKILL_SOURCES.md` 和 `cloned_skill_sources.json` 含大量 scratch inventory。重构时：
+
+- [ ] 将每个已完成来源转换为 `INTEGRATION_HISTORY.md` 中一行。
+- [ ] 保留远端、commit、许可、decision、target 和最终 integration commit。
+- [ ] 删除长期无价值的 `scratch_path`、文件计数和临时证据清单。
+- [ ] 对仍未完成整合的来源先标记 pending，不得在未确认目标和 commit 前删除证据。
+- [ ] 完成迁移后，旧文件可以归档或删除；README/provenance 文档只指向新的 canonical history。
+
+### 5.7 自动化与验证
+
+新增或扩展工具，例如：
+
+```bash
+python3 scripts/provenance_audit.py --check
+python3 scripts/provenance_audit.py --history docs/provenance/INTEGRATION_HISTORY.md
+python3 scripts/external_source_intake.py --source <url-or-notion-id> --dry-run
+```
+
+至少检查：
+
+- history 列完整、日期/revision/commit 格式有效；
+- `integration_commit` 存在；
+- 目标 Skill 存在；
+- 直接外部来源的 frontmatter provenance 完整；
+- 临时 intake 路径未被 tracked；
+- generated Marketplace 未引用 `.tmp/`、`build/` 或外部 clone；
+- 未知许可、权限不明、私密页面或大段逐字复制时阻断合并。
+
+---
+
+## 6. 图标系统
+
+### 6.1 覆盖范围
+
+P0：中央九个插件和其全部 App-facing Active Skills。
+
+P1：`registry.json` 中全部 `status: active` 的源 Skill。
+
+项目层：CardiacNexus 等 repo-local Skills 在各自仓库中维护图标；中央 history/index 可以记录来源，但不复制项目图标形成第二套来源。
+
+### 6.2 来源优先级
+
+1. 已有项目/产品 favicon 或 logo，确认仓库路径、commit、许可和用途。
+2. 许可清晰的具体图标集，例如 React Icons 聚合下的 Font Awesome、Material、Heroicons、Bootstrap Icons，或 Lucide、Remix Icon 等；记录具体 icon set，不只写 React Icons。
+3. Codex 直接绘制的简单可审查 SVG。
+4. 禁止：来源不明搜索图片、带水印资产、无法确认许可的品牌图、嵌入脚本/字体/远程 URL 的 SVG。
+
+### 6.3 目录和配置
+
+插件图标建议：
+
+```text
+assets/codex/plugin-icons/<plugin>/
   composer.svg
   logo.png
   source.json
 ```
 
-源 skill 资产继续放在各自目录：
+源 Skill：
 
 ```text
-skills/.../<skill-name>/
-  agents/openai.yaml
-  assets/
-    icon-small.svg
-    icon-large.png
-```
-
-其中 `source.json` 或统一的 `scripts/icon_sources.json` 至少包含：
-
-```json
-{
-  "target_type": "plugin-or-skill",
-  "target_id": "cardiacnexus",
-  "source_type": "repo-asset | icon-library | generated-svg",
-  "source_repository": "owner/repo or null",
-  "source_path": "path or null",
-  "source_ref": "commit/tag or null",
-  "source_url": "canonical project page or null",
-  "icon_set": "specific icon set or null",
-  "icon_name": "icon identifier or null",
-  "license": "SPDX or reviewed text",
-  "attribution": "required attribution or null",
-  "sha256": "asset hash",
-  "notes": "why this icon represents the target"
-}
-```
-
-具体采用分散 `source.json` 还是统一 manifest，由实现者在不重复数据的前提下选择；但最终必须可机器审计和生成人类可读汇总。
-
-## 3.5 扩展 Marketplace 配置和 builder
-
-- [ ] 为 `scripts/codex_marketplace_config.json` 中的 plugin entry 增加可配置的 `brandColor`、`composerIcon`、`logo`。
-- [ ] `build_plugin_json()` 不再对所有插件硬编码 `#2563EB`，而是读取配置并输出相对路径。
-- [ ] builder 把插件图标复制到生成插件的 `assets/`，并在 `.codex-plugin/plugin.json` 中写入 `interface.composerIcon` 与 `interface.logo`。
-- [ ] copy skill 优先保留源目录中的 `agents/openai.yaml` 和 `assets/`。
-- [ ] aggregate skill entry 增加应用层 interface 元数据，builder 生成：
-
-```text
-plugins/codex/plugins/<plugin>/skills/<artifact-id>/
-  SKILL.md
+skills/.../<skill>/
   agents/openai.yaml
   assets/icon-small.svg
   assets/icon-large.png
-  _src/...
 ```
 
-- [ ] aggregate skill 的 `openai.yaml` 至少包含 `display_name`、`short_description`、`icon_small`、`icon_large`、`brand_color`、`default_prompt`。
-- [ ] 不得把短 artifact id 当作用户可见 display name 或 provenance。
-- [ ] 所有新增路径继续满足 140 字符预算。
+Marketplace config 增加 `brandColor`、`composerIcon`、`logo`；aggregate Skill config 增加 `display_name`、`short_description`、`brand_color`、`icon_small`、`icon_large`、`default_prompt`。
 
-## 3.6 图标审计工具
+### 6.4 审计
 
-新增一个机器可运行的审计入口，例如：
+新增：
 
 ```bash
 python3 scripts/icon_audit.py --scope marketplace
@@ -192,150 +576,35 @@ python3 scripts/icon_audit.py --contact-sheet build/icon-contact-sheet.png
 python3 scripts/icon_audit.py --check
 ```
 
-工具至少检查：
+检查覆盖率、路径、尺寸、SVG 安全、来源/许可、哈希、浅色/深色可读性和意外重复。
 
-- [ ] P0/P1 覆盖率及缺失清单。
-- [ ] 所有 YAML/JSON 引用路径存在且位于允许目录。
-- [ ] 扩展名、文件尺寸、PNG 像素尺寸和 SVG viewBox。
-- [ ] SVG 不含脚本、远程资源、嵌入字体、`foreignObject` 或明显不安全内容。
-- [ ] source/provenance 字段完整，哈希与文件一致。
-- [ ] 近重复或完全重复图标，并区分“有意共享”和“意外重复”。
-- [ ] 生成带名称标签的联系表供人工检查。
+---
 
-不要依赖 ImageMagick 或平台特有 GUI；优先使用仓库可声明的 Python/Node 依赖，并在 CI 中可重复运行。
+## 7. Presentation 插件与 CUHK 默认模板
 
-## 3.7 图标测试与验收
+### 7.1 共享中间表示
 
-- [ ] 为 plugin manifest 图标字段增加 builder 单元测试。
-- [ ] 为 aggregate skill `agents/openai.yaml` 生成增加测试。
-- [ ] 缺失图标、错误相对路径、非法 SVG、未知 license、哈希漂移时测试失败。
-- [ ] 当前真实 Marketplace 生成一次并通过 icon audit 与 path report。
-- [ ] Codex App 中人工安装 Marketplace，确认每个插件卡片显示正确 logo/composer icon。
-- [ ] 逐个检查应用层 active skill 的图标、名称与描述，没有空白图标或错误继承。
-- [ ] P1 完成后，`status: active` 源 skill 图标覆盖率为 100%。
-
-## 4. 工作流 B：独立 `presentations` 插件
-
-## 4.1 先检查官方 Presentation/Slides 能力
-
-开始编码前必须在当前 Codex App/CLI 环境中读取已安装的 OpenAI 官方 Presentation/Slides skill 或插件，记录：
-
-- [ ] 实际插件名和可调用 skill 名；不要凭记忆硬编码 `$slides`、`$presentation` 等名称。
-- [ ] 支持的输入、输出与模板方式。
-- [ ] 是否以 PptxGenJS、artifact tool、OOXML 或其他机制实现。
-- [ ] 是否支持编辑现有 PPTX、speaker notes、charts、images、PDF preview 与 visual QA。
-- [ ] 官方能力明确拥有的职责，以及本仓库需要补充的缺口。
-
-将兼容性结论写入：
-
-```text
-skills/tools/documents-media/presentation-workflows/references/openai-presentation-compatibility.md
-```
-
-该文件只记录公开接口和协作方式，不复制官方 skill 全文。
-
-## 4.2 新插件与 skill 结构
-
-建议建立一个用户可见插件和一个主要 active skill：
-
-```text
-presentations
-└── presentation-workflows
-```
-
-源层建议：
-
-```text
-skills/tools/documents-media/presentation-workflows/
-  SKILL.md
-  agents/openai.yaml
-  assets/
-    icon-small.svg
-    icon-large.png
-    templates/
-      cuhk/
-        README.md
-        design-tokens.json
-        beamer/
-        pptx/
-  references/
-    openai-presentation-compatibility.md
-    business-presentations.md
-    scientific-presentations.md
-    markdown-ingestion.md
-    deck-plan-schema.md
-    template-routing.md
-    source-fidelity-and-citations.md
-    visual-qa.md
-  scripts/
-    ingest_markdown.py
-    validate_deck_plan.py
-    validate_template_assets.py
-```
-
-实际脚本数量可以减少，但不得把核心输入解析、schema 验证和模板完整性完全留给自然语言临场发挥。
-
-只暴露一个广义 orchestration skill，商业和科学模式作为内部路由，不要再创建多个互相竞争的“business-ppt”“scientific-ppt”“pptx”触发器。
-
-## 4.3 解决第十个插件的位置
-
-当前 Marketplace 由仓库代码固定为九个插件。按以下顺序处理：
-
-1. [ ] 先验证 Codex App 当前是否真实限制最多九个插件。
-2. [ ] 如果九是本仓库人为预算而非产品限制，把上限提高到至少十，更新测试、文档与真实安装测试。
-3. [ ] 如果产品确实限制九个插件，优先把 `workflow-core` 作为 active skill 合并进 `ai-skills-core` 插件，保持原 skill 名称和功能，腾出一个用户可见插件位置。
-4. [ ] 不要为了省一个位置把 `presentations` 隐藏回 `research-writing`；用户需要一个可独立安装、可明确识别的演示文稿插件。
-5. [ ] 不得删除任何核心 workflow，只允许调整其插件归属。
-
-## 4.4 清理现有触发冲突
-
-- [ ] 从 Codex App 的 `research-writing` → `research-documents` aggregate 中移除 `pptx` 与 `scientific-slides` 的应用层发布。
-- [ ] 保留 PDF、DOCX、MarkItDown 和科学示意图等研究文档能力。
-- [ ] `skills/tools/documents-media/pptx/` 可以保留为 CLI/兼容 fallback 或归档参考，但其 broad trigger 不再与新插件同时发布。
-- [ ] `skills/science/communication/scientific-slides/` 进行迁移审计：
-  - 有价值的叙事、时长、科学引用和视觉 QA 内容迁入新 skill 的 references；
-  - 删除或改写对不存在脚本、模板和 OpenRouter/Nano Banana 默认路径的依赖；
-  - 标记 deprecated/archive，或把它缩减为指向新 workflow 的迁移说明；
-  - 不得继续作为 Codex App active skill 发布。
-- [ ] 更新 catalog、domain 文档和 provenance，避免同一能力在三个位置继续声称自己是默认入口。
-
-## 4.5 触发边界
-
-`presentation-workflows` 的触发描述应覆盖：
-
-- 从 Markdown、Asteria 导出、论文、报告、代码结果、现有 PPTX 或 PDF 创建或重构演示文稿；
-- 研究组会、学术报告、答辩、journal club、技术汇报、商业汇报和一般公司 presentation；
-- 用户需要决定 deck 结构、叙事、受众、模板、图表、引用、speaker notes 或信息密度；
-- 用户需要使用本仓库的默认 CUHK 模板。
-
-它不应声称自己直接实现所有 PowerPoint 文件操作。执行过程中在需要 `.pptx` 文件时，明确联合调用官方 Presentation/Slides 能力。
-
-## 4.6 中间表示：`deck-plan`
-
-所有非微小编辑任务先生成一个结构化中间表示，再构建 PPTX。建议采用 YAML，schema 至少包括：
+所有非微小任务先生成版本化 `deck-plan.yaml`，至少包含：
 
 ```yaml
+schema_version: 1
 metadata:
   title: ""
-  subtitle: ""
   author: ""
   affiliation: ""
-  date: ""
   audience: "specialist | mixed | general | executive"
-  mode: "scientific | business"
+  mode: "research | business"
   purpose: "group-meeting | conference | defense | journal-club | company | other"
   duration_minutes: 15
   language: "en | zh | mixed"
   template: "cuhk-default"
   output: "pptx"
   source_files: []
-
 slides:
   - id: "s01"
     title: ""
-    purpose: ""
-    source_anchors: []
     key_message: ""
+    source_anchors: []
     content: []
     equations: []
     visuals: []
@@ -347,256 +616,146 @@ slides:
 
 要求：
 
-- [ ] schema 有版本号和验证脚本。
-- [ ] 每页只有一个主要信息目标，但不能机械地把每个 Markdown heading 映射成一页。
-- [ ] `source_anchors` 能回溯到原 Markdown section、页码、图号、代码结果或现有 slide。
-- [ ] 数学公式保留 LaTeX 原文；不能在解析时丢失反斜杠、上下标或 equation numbering。
-- [ ] 图片、表格、引用、脚注和 speaker notes 有明确字段。
-- [ ] 任何新增事实、数字或结论都必须能追溯到输入或经允许的检索来源。
-- [ ] deck plan 作为最终交付物的一部分保留，便于后续迭代。
+- 每页一个主要信息目标；
+- 不把 Markdown heading 机械映射成 slide；
+- 公式保留 LaTeX；
+- `source_anchors` 可回溯到 Markdown section、PDF 页码、图号、代码结果或已有 slide；
+- 区分已完成结果、计划、假设和推测；
+- deck plan 与最终文件一起保留。
 
-## 4.7 输入适配器
+### 7.2 输入适配器
 
-至少支持：
+支持：
 
-### 通用 Markdown
+- 通用 Markdown；
+- Asteria/Marked TRACE v3 Markdown；
+- 论文/PDF；
+- 现有 PPTX/Google Slides；
+- repo 中 figures、tables、results、logs 和 notes。
 
-- [ ] 解析 frontmatter、标题层级、段落、列表、代码块、LaTeX、图片、表格、脚注和引用。
-- [ ] 根据时长、受众、内容复杂度和视觉素材分块，而不是一标题一页。
-- [ ] 过长段落先压缩为“主结论 + 支撑证据 + speaker notes”，不能直接把全文塞进 slide。
+Asteria/TRACE 高优先级验收：取得脱敏 fixture，识别模型定义、版本变化、符号、公式、设计动机、结果、未解决问题和导师/reviewer 标记；主线围绕“本周变化、为什么改变、证据、风险、需要导师决定什么”。
 
-### Asteria / Marked TRACE v3 Markdown
+### 7.3 CUHK 模板
 
-这是高优先级真实用例：从 Asteria 导入 Marked TRACE v3 的 Markdown，制作导师能快速理解的组会 PPT。
-
-- [ ] 先取得一份真实、可脱敏的 Marked TRACE v3 Markdown fixture；没有 fixture 时不得声称完整支持。
-- [ ] 识别模型定义、版本变化、符号表、公式、假设、设计动机、结果、未解决问题和 reviewer/导师标记。
-- [ ] 将长篇方法文档转换为适合口头汇报的结构，而不是复刻 Asteria 阅读界面。
-- [ ] 对公式密集部分保留关键公式，次要推导放 speaker notes 或 backup slides。
-- [ ] 生成“本周变化、为什么改变、证据、风险、需要导师决定什么”的组会主线。
-- [ ] 建立 golden fixture 和 end-to-end regression test。
-
-### 论文/PDF
-
-- [ ] 提取标题、研究问题、方法、主要图表、结果、局限和引用。
-- [ ] 使用图号、页码或 section 作为 source anchor。
-- [ ] 论文中的复杂多面板图应重新排版为可读 slide，不要缩成不可辨识的整页截图。
-
-### 现有 PPTX
-
-- [ ] 使用官方 Presentation/Slides 能力读取和编辑。
-- [ ] 保留用户明确要求保留的母版、图表和 speaker notes。
-- [ ] 先做 visual inventory，再决定复用、重排或重建。
-
-## 4.8 科学/工程模式
-
-默认适用于组会、seminar、答辩、方法报告和 TRACE/CardiacNexus/CARE 等研究项目。重点是让听众快速理解“为什么做、做了什么、结果说明什么、差距在哪里、下一步需要什么决定”。
-
-建议的组会默认叙事：
-
-1. 标题与一句话进展。
-2. 上次会议后的目标和上下文。
-3. 本次最重要的变化。
-4. 问题定义与当前模型/系统。
-5. 方法或架构的关键机制。
-6. 必要公式、符号与假设。
-7. 实验、验证或当前证据。
-8. 结果解释，而不只是图表陈列。
-9. 失败、局限、不可替代性尚未证明之处。
-10. 需要导师讨论或决定的问题。
-11. 下一步与预期验收。
-12. 推导、额外实验和完整表格放 backup。
-
-科学模式要求：
-
-- [ ] 公式、统计量、图表和单位准确。
-- [ ] 一页主结论明确，图题和坐标可在投影环境阅读。
-- [ ] 结果图优先使用真实输出；禁止生成看似真实的假数据图。
-- [ ] 引用用简短 author-year 或编号放页脚，完整参考文献保留在末页或附录。
-- [ ] 区分已完成结果、计划、假设和推测。
-- [ ] 为复杂方法提供概念图，但概念图不能替代正式模型说明。
-
-## 4.9 商业模式
-
-默认适用于一般公司、非理工专业、项目提案、执行汇报和决策 deck。它不是科学模式换一套颜色。
-
-建议主线：
-
-1. Executive summary。
-2. 问题或机会。
-3. 证据与规模。
-4. 用户/市场/组织影响。
-5. 方案与选择依据。
-6. 实施路径与资源。
-7. 风险、依赖和缓解措施。
-8. 决策请求与下一步。
-
-商业模式要求：
-
-- [ ] 先结论后证据，减少方法细节。
-- [ ] 不伪造市场规模、增长率、财务预测、用户反馈或 KPI。
-- [ ] 图表必须标明数据来源和假设。
-- [ ] 使用可编辑 diagram、chart 和简洁视觉，不把装饰性图片当作论证。
-- [ ] 当用户没有公司模板时仍使用 CUHK 默认视觉；有公司模板时品牌模板优先。
-
-## 5. CUHK 默认模板
-
-## 5.1 输入资产
-
-本任务对应的本地输入文件：
+本地输入：
 
 ```text
 /mnt/data/CUHK Template.zip
 /mnt/data/CUHK Template.pdf
 ```
 
-当前文件哈希：
+要求：
 
-```text
-CUHK Template.zip
-sha256: 5cbe4a545d8abbab007f5f0aceec405138f8035b9dcb09c617e1e7cf7b525ee9
+- [ ] 审计 ZIP 内容、引用、许可和运行时必需文件。
+- [ ] 从模板提取单一 `design-tokens.json`。
+- [ ] 建立最小可编译 CUHK Beamer 模板。
+- [ ] 建立真正可编辑、标准 16:9 的 CUHK PPTX/reference deck；不得把 PDF 页面作为不可编辑背景图。
+- [ ] 保留标题页紫色几何视觉、顶部 section navigation、页码和 closing 语言，但允许适配 PowerPoint 16:9。
+- [ ] 未明确指定其他模板时，科研和商业演示均使用 CUHK 默认视觉体系；公司/课程/会议/项目模板优先。
+- [ ] 明确要求 Overleaf/Beamer/LaTeX/PDF 时输出 `.tex` 和 `.pdf`；普通“做 PPT/组会汇报”默认 `.pptx`，并导出 PDF/images 做 QA。
+- [ ] 不提交字体文件；CUHK logo/校名等品牌资产再分发许可不清时，改用本地 import 脚本，不静默公开提交。
 
-CUHK Template.pdf
-sha256: a62a4bb5ec2296b875ffe9ff8c1d850b88797e27a74aac7d64f576abb91daa7e
-```
+### 7.4 清理旧能力
 
-实现时先重新计算哈希并确认输入未变化。
+- [ ] `skills/tools/documents-media/pptx/` 保留为兼容/内部参考或 archive，但不再作为中央 App-facing broad trigger。
+- [ ] 审计 `scientific-slides`：把有价值的叙事、时长、引用和 visual QA 迁入 `research-presentations`；删除不存在脚本和默认 OpenRouter/Nano Banana 整页图片路径；不再发布为 Active Skill。
+- [ ] 不把生成的整页 AI 图片冒充可编辑 PPTX。
+- [ ] 官方 Presentation/Slides 能力不可用时，只允许明确标记的 fallback，不维护第二套等价引擎。
 
-ZIP 中有运行时所需的 Beamer 源文件、theme、背景和 logo，也有示例图片、XCF 源文件、`.vscode` 和空 bibliography。不要无选择地把全部 1:1 复制进 Marketplace。
+---
 
-## 5.2 模板审计
+## 8. Marketplace、Builder 和测试
 
-- [ ] 列出 ZIP 内容和引用关系，区分 runtime-required、authoring-source、sample-only 和 editor-only。
-- [ ] 运行时至少审计 `main.tex`、`styles/beamerthemesintef.sty`、`styles/sintefcolor.sty`、背景与 logo。
-- [ ] 示例 `Fig*`、`Table*`、`.vscode` 和未被使用的 XCF 不进入默认发布 payload，除非有明确理由。
-- [ ] 保留原 theme 中对 SINTEF/Sapienza 派生来源和 GPL 条款的说明。
-- [ ] 单独检查 CUHK logo、校名和品牌资产是否允许在公开 GitHub 仓库与可安装插件中再分发。
-- [ ] 如果 logo/品牌再分发许可不清晰，不要静默提交：
-  - 提供本地 `import_cuhk_template.py` 或用户模板路径配置；
-  - 公共 repo 只保存可合法分发的 layout/token 和导入说明；
-  - 在用户本地导入后仍可成为默认模板。
-- [ ] 不提交任何字体文件。模板依赖系统字体时，记录 fallback，并在 CI 中验证。
+### 8.1 配置
 
-## 5.3 共享设计 token
+- [ ] 将中央插件列表更新为本文件定义的九个通用插件。
+- [ ] 移除中央 `cardiacnexus`，加入 `presentations`。
+- [ ] `web-development` 更新为补充层三个 Active Skills。
+- [ ] `research-writing` 和 `writing-style` 按边界收敛 Active Skills。
+- [ ] `ai-skills-core` 不再复制官方通用 creator/installer。
+- [ ] 对 plugin-level shared payload、图标和 interface metadata 增加 builder 支持。
+- [ ] `MAX_MARKETPLACE_PLUGINS` 改成有解释的仓库预算或配置项；测试不再把“九”写成假定的 Codex 产品限制。
 
-从 Beamer 模板抽取单一事实来源，例如：
+### 8.2 保持既有 gate
 
-```json
-{
-  "name": "cuhk-default",
-  "primary": "#72256D",
-  "accent": "#D4AF37",
-  "background": "#FFFFFF",
-  "text": "#222222",
-  "muted": "#6B6B6B",
-  "title_style": "split-purple",
-  "navigation_style": "top-section-progress"
-}
-```
+不得破坏：
 
-颜色值必须以实际源文件为准重新核对。Beamer 与 PPTX 共同读取或至少由同一 token 文件生成，避免两套视觉长期漂移。
+- active skill 名称唯一；
+- 140 字符 Windows 路径预算；
+- 无 symlink 的自包含发布层；
+- secret 声明；
+- `[TODO:` placeholder 检查；
+- deterministic build；
+- root `.agents/plugins/marketplace.json` 和 `plugins/codex/plugins/` 两条 sparse path；
+- GitHub Actions 自动生成、验证和 `[skip codex-marketplace]` 写回机制。
 
-## 5.4 双模板交付
+### 8.3 新增测试
 
-### CUHK Beamer
+至少覆盖：
 
-- [ ] 整理最小可编译模板目录。
-- [ ] 以 XeLaTeX/`latexmk` 为标准编译路径，并记录系统依赖。
-- [ ] 保留标题页右侧紫色几何背景、CUHK 标识、顶部 section navigation、页码和结束页视觉。
-- [ ] 补充研究常用 frame 示例：公式、双栏、全图、图加解释、方法流程、表格、references 和 backup。
-- [ ] 不把示例研究内容当成模板的一部分。
+- 中央九插件精确列表和安装分类；
+- `research-presentations` 与 `business-presentations` trigger eval，不互相误触发；
+- 小型 PPTX 编辑只路由官方能力，不触发 orchestration；
+- `writing-style` 与 `research-writing` 的正例、反例和组合例；
+- `web-development` 与官方 `build-web-apps` 的串联路由；
+- `ai-skills-repository-maintainer` 禁止 implicit invocation；
+- CardiacNexus 不出现在中央 Marketplace，项目 descriptor 指向 repo-local source；
+- Notion/GitHub source history 一行记录、append-only 和 provenance 完整性；
+- 临时 clone/export 不被追踪；
+- icon manifest、aggregate openai.yaml 和资产路径；
+- CUHK 模板完整性、Beamer 编译和 PPTX 渲染；
+- Asteria/TRACE Markdown → deck plan → PPTX 的端到端 fixture。
 
-### CUHK PPTX
+---
 
-- [ ] 新建真正可编辑的 16:9 `.pptx` 模板或 reference deck，而不是把 Beamer PDF 每页放成背景图。
-- [ ] 使用与 Beamer 相同的设计 token 和视觉语言，但允许为标准 16:9 做必要重排。
-- [ ] 原 Beamer 页面尺寸约为 20cm × 11cm，并非严格标准 16:9；PPTX 版本应明确使用标准 16:9，不要通过非等比拉伸复刻。
-- [ ] 至少提供以下 layout：
-  - title；
-  - section divider；
-  - standard content；
-  - equation/model；
-  - process/method；
-  - full figure；
-  - figure + interpretation；
-  - comparison；
-  - table；
-  - references；
-  - closing；
-  - backup。
-- [ ] 所有文本、图表、形状和占位区域可编辑。
-- [ ] 使用官方 Presentation/Slides 能力创建和维护该模板；仓库 skill 只记录模板接口和选择规则。
+## 9. 推荐执行顺序
 
-## 5.5 默认输出规则
+### Phase 0：现状和官方能力审计
 
-- 用户说“做 PPT”“做组会汇报”“从 Asteria Markdown 做 slides”：默认输出 `.pptx`，同时导出 `.pdf` 或 slide images 用于 QA。
-- 用户明确说 Overleaf/Beamer/LaTeX/PDF：输出 `.tex`、必要资产和 `.pdf`。
-- 用户需要两种格式：从同一 deck plan 生成 PPTX 与 Beamer，允许布局有差异，但内容、来源和 slide id 对齐。
-- 最终保留：输入清单、`deck-plan.yaml`、可编辑源、最终文件、渲染预览和 QA 报告。
+- 读取当前 main、registry、profiles、Marketplace config、builder、tests 和 README。
+- 读取已安装官方 Presentation/Slides、LaTeX、Notion 和 `build-web-apps` 的公开接口。
+- 生成当前中央/项目 Skill 冲突、重复、安装范围和 provenance 报告。
 
-## 6. QA 与验证闭环
+### Phase 1：架构与安装模型
 
-## 6.1 内容 QA
+- 更新中央九插件配置。
+- 重构 `workflow-core`、`ai-skills-core`、`writing-style`、`research-writing` 和 `web-development` 的 App-facing 边界。
+- 建立 profiles 和 README 安装矩阵。
 
-- [ ] 标题、作者、单位、日期、页序和 section 正确。
-- [ ] 输入中的主要结论没有丢失或被反转。
-- [ ] 公式、符号、数值、单位和引用可追溯。
-- [ ] 没有残留 placeholder、示例图、模板作者信息或虚构数据。
-- [ ] 每页 key message 与 speaker notes 一致。
-- [ ] 科学 deck 明确区分结果、假设、计划和未解决问题。
-- [ ] 商业 deck 明确区分数据、假设、预测和建议。
+### Phase 2：CardiacNexus 迁移
 
-## 6.2 视觉 QA
+- 在 CardiacNexus repo 建立 canonical `.agents/skills`。
+- 更新 `AGENTS.md` 和项目测试。
+- 从中央 Marketplace 和中央完整 source 副本中迁出。
 
-每次生成都必须：
+### Phase 3：Presentations
 
-1. 渲染 PPTX/Beamer 为 PDF。
-2. 把每页转为图片。
-3. 生成 contact sheet 和单页检查图。
-4. 列出问题，至少完成一次修复—重渲染—复查循环。
+- 建立两个独立 Skill、共享 foundation、deck-plan 和官方兼容文档。
+- 整理 CUHK Beamer/PPTX 双模板。
+- 完成 Asteria/TRACE fixture 和 QA 闭环。
 
-检查：
+### Phase 4：图标
 
-- [ ] 溢出、裁切、重叠和边距。
-- [ ] 投影环境下的字号、公式和坐标轴可读性。
-- [ ] 标题换行后装饰元素仍对齐。
-- [ ] 引用、页码、顶部导航和内容不冲突。
-- [ ] 图像没有不必要的拉伸、裁切或低分辨率。
-- [ ] 深浅背景对比满足可读性。
-- [ ] 不使用整页截图掩盖不可编辑内容。
+- 先完成中央插件与 App-facing Active Skills。
+- 再覆盖全部 active source Skills。
+- 运行 contact sheet 人工检查。
 
-## 6.3 自动测试
+### Phase 5：外部来源与 Notion intake
 
-至少增加：
+- 建立统一 `INTEGRATION_HISTORY.md` 和 provenance audit。
+- 迁移现有 cloned source 记录。
+- 支持 Notion 页面/GitHub Skill 的审查、提炼、合并、记录和临时内容清理。
 
-- [ ] CUHK Beamer 最小编译 smoke test。
-- [ ] CUHK PPTX 打开/渲染 smoke test。
-- [ ] 通用 Markdown → `deck-plan.yaml` snapshot test。
-- [ ] 公式、表格、图片、引用和 footnote 解析测试。
-- [ ] 真实脱敏 Asteria Marked TRACE v3 fixture → deck plan → PPTX end-to-end test。
-- [ ] business fixture 与 scientific fixture 各一套 golden deck。
-- [ ] template asset 引用完整性和哈希检查。
-- [ ] Marketplace plugin/skill icon 生成与路径测试。
-- [ ] 视觉回归使用容忍度或结构检查，不对 PDF 二进制做脆弱的逐字节相等。
+### Phase 6：生成、测试和真实安装
 
-## 7. 文档、发布与迁移
-
-- [ ] 更新 `README.md` 的插件列表和安装说明。
-- [ ] 更新 `docs/CODEX_MARKETPLACE.md`，说明 `presentations`、图标字段和官方 Presentation 协作边界。
-- [ ] 更新 `docs/domains/documents-media.md`。
-- [ ] 更新 `docs/domains/research-communication.md`。
-- [ ] 更新 `docs/SKILL_CATALOG.md`、`registry.json` 和 provenance 汇总。
-- [ ] 为旧 `pptx`/`scientific-slides` 的应用层入口写 migration note。
-- [ ] 说明默认 CUHK 模板、模板覆盖优先级、品牌/许可限制和本地导入方式。
-- [ ] 所有生成文档通过仓库现有生成命令更新，不手工修补生成结果。
-
-发布前运行：
+运行：
 
 ```bash
 python3 scripts/skills.py registry --write
 python3 scripts/skills.py validate
 python3 scripts/skills.py audit --all
 python3 scripts/skills.py catalog --write
+python3 scripts/provenance_audit.py --check
 python3 scripts/icon_audit.py --check
 python3 scripts/build_codex_marketplace.py --write
 python3 scripts/build_codex_marketplace.py --validate
@@ -605,82 +764,29 @@ python3 scripts/build_codex_marketplace.py --path-report
 python3 -m unittest discover -s tests
 ```
 
-如果实际 CLI 短命令已安装，可以使用等价 `ai-skills ...` 命令，但 CI 应采用仓库内稳定入口。
+随后在 Codex App 做真实 Marketplace 安装，并分别验证：
 
-## 8. 建议实施顺序
+- 全局 baseline；
+- research main；
+- presentation desktop；
+- frontend + official `build-web-apps`；
+- medical/bioinformatics project profile；
+- CardiacNexus repo-local Skills；
+- Notion/GitHub 外部来源整合 dry-run。
 
-### Phase 1：审计和契约
+---
 
-- [ ] 读取官方 Presentation/Slides skill，形成 compatibility matrix。
-- [ ] 审计 `pptx`、`scientific-slides`、research-writing aggregate 的重复与缺失。
-- [ ] 审计九插件限制是否为产品限制。
-- [ ] 审计 CUHK ZIP、PDF、theme 来源和品牌许可。
-- [ ] 审计全部 P0/P1 图标目标和已有资产。
-- [ ] 提交架构说明、deck-plan schema 和 icon provenance schema；暂不大规模生成资产。
+## 10. 最终验收标准
 
-### Phase 2：图标基础设施与 P0
+只有同时满足以下条件才可声明本 TODO 完成：
 
-- [ ] 扩展 Marketplace config 和 builder。
-- [ ] 实现 icon audit、SVG 安全检查和联系表。
-- [ ] 为现有九个插件、新 `presentations` 插件和所有应用层 active skills 补齐图标。
-- [ ] 先使 P0 成为 CI 硬 gate。
-
-### Phase 3：Presentation source skill 与模板
-
-- [ ] 建立 `presentation-workflows`。
-- [ ] 完成 business/scientific routing、deck-plan schema 和输入适配器。
-- [ ] 完成 CUHK Beamer 最小模板与可编辑 CUHK PPTX 模板。
-- [ ] 移除应用层旧触发冲突。
-
-### Phase 4：真实用例
-
-- [ ] 使用真实脱敏 Marked TRACE v3 Markdown 生成组会 deck。
-- [ ] 验证导师阅读场景：进展、方法、公式、证据、问题和下一步清晰。
-- [ ] 使用一份一般商业材料生成 business deck。
-- [ ] 两种 deck 均通过内容、视觉和 source-fidelity QA。
-
-### Phase 5：P1 完整图标覆盖
-
-- [ ] 批量映射所有 active source skills。
-- [ ] 对项目专用 skill 优先复用项目 favicon/logo。
-- [ ] 人工检查 contact sheet，修复含义不符和过度重复。
-- [ ] 将 active source skill 100% coverage 设为 CI gate。
-
-### Phase 6：发布验收
-
-- [ ] 全部单元测试、生成层 check、path budget 和 Windows sparse checkout 通过。
-- [ ] 在 Codex App 中安装 Marketplace。
-- [ ] 插件图标和 skill 图标显示正确。
-- [ ] `presentation-workflows` 与官方 Presentation/Slides 同时启用时没有互相覆盖、循环调用或重复生成。
-- [ ] 新建 TRACE 组会 PPT 和 business PPT 各一次。
-- [ ] README、Marketplace 文档、catalog 和 provenance 与实际生成层一致。
-
-## 9. 不允许的捷径
-
-- 不手工编辑 `plugins/codex/plugins/` 或 `.agents/plugins/marketplace.json`。
-- 不把同一个通用图标复制给全部 skill 后声称覆盖完成。
-- 不使用来源不明的网页图片或无法确认许可证的 logo。
-- 不把第三方完整 icon library 提交进仓库。
-- 不提交字体文件。
-- 不把 Beamer PDF 每页作为不可编辑背景来伪造 PPTX 模板。
-- 不让整页图片生成成为科学 PPT 的默认路径。
-- 不继续依赖仓库中不存在的脚本、reference 或 template。
-- 不要求用户提供 OpenRouter/Gemini key 才能完成基础演示文稿工作流。
-- 不机械地把 Markdown 标题逐个变成 slides。
-- 不为补充官方插件而复制一套完整底层 Presentation 实现。
-- 不在没有真实 Asteria fixture 的情况下宣布 Marked TRACE v3 已完整支持。
-- 不通过删除引用、模板资产或缩短内容来规避路径预算和 QA。
-
-## 10. 完成定义
-
-只有同时满足以下条件，任务才算完成：
-
-1. Codex App 中每个用户可见插件和 active skill 都有正确、可追踪的图标；所有 active 源 skill 最终达到 100% 图标覆盖。
-2. 图标来源、许可证、哈希和含义可以机器审计；builder 与 CI 能阻止缺失或非法资产。
-3. `presentations` 作为独立插件可安装，且不会与 OpenAI 官方 Presentation/Slides 或旧 repo skills 产生模糊的重复触发。
-4. 默认 CUHK 视觉体系同时有可编译 Beamer 与真正可编辑的标准 16:9 PPTX 实现。
-5. 未特别指定模板时，科学与商业 deck 都使用 CUHK 默认；用户或项目模板能可靠覆盖默认值。
-6. 通用 Markdown、真实脱敏 Marked TRACE v3 Markdown、论文/PDF 和现有 PPTX 有明确输入路径。
-7. TRACE 组会 deck 能把长 Markdown 转换为适合导师理解和讨论的汇报，而不是简单复制原文。
-8. 科学 deck 与商业 deck 都有真实 fixture、可重复生成、source anchors、渲染预览和至少一轮修复—复查记录。
-9. Marketplace builder、tests、icon audit、path report、文档和 Codex App 手工验收全部通过。
+1. 中央 Marketplace 只包含九个通用插件，CardiacNexus 已迁为 repo-local canonical Skills。
+2. README 清楚回答：所有机器装什么、主力科研机器装什么、桌面 PPT 环境装什么、前端场景装什么、领域插件何时装、`ai-skills-core` 何时不装、纯 compute node 为什么不装。
+3. `writing-style` 与 `research-writing` 有明确边界和 trigger eval。
+4. `presentations` 有两个独立 Active Skills，科研和商业场景互不干扰，并与官方 Presentation/LaTeX 协作。
+5. `web-development` 作为外部设计参考、视觉系统和科研产品补充，与官方 `build-web-apps` 串联，而不是重复实现。
+6. CUHK Beamer 和可编辑 PPTX 模板从同一设计 token 出发，默认路由正确。
+7. 中央插件和全部 App-facing Active Skills 均有合法、清晰、可验证的图标；P1 最终覆盖全部 active source Skills。
+8. 外部 GitHub/Notion 内容经过审查和提炼；临时 clone/export 删除；统一 history 每次整合只留一行；目标 Skill provenance 和必要 license/attribution 完整。
+9. generated layer、路径预算、无 symlink、secret、placeholder、determinism、CI 和 Windows sparse checkout 全部通过。
+10. 至少完成一次真实端到端用例：从 Asteria/Marked TRACE v3 Markdown 生成可编辑 CUHK 组会 PPTX、渲染预览、deck plan 和 QA 报告。
