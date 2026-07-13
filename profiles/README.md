@@ -14,7 +14,7 @@ ai-skills install --target repo --domain bayesian --mode symlink --write-agents-
 ai-skills install --target repo --skill domain/bayesian/pymc --mode symlink --write-agents-md
 ```
 
-## v3.1 推荐 Profile
+## v3.5 推荐 Profile
 
 - `global-baseline`：最小全局基线，包含流程路由和写作保真。
 - `research-main`：科研写作主力，包含报告、论文、文献、引用、PDF/DOCX/可视化支持。
@@ -27,7 +27,7 @@ ai-skills install --target repo --skill domain/bayesian/pymc --mode symlink --wr
 
 ## 兼容 Profile
 
-旧 `codex-*` profile 仍保留，方便已有脚本继续使用。新文档优先推荐 v3.1 profile。
+旧 `codex-*` profile 仍保留，方便已有脚本继续使用。新文档优先推荐 v3.5 profile。
 
 - `codex-core-global`
 - `codex-workflow-core`

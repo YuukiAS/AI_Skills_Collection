@@ -48,6 +48,7 @@ why this was done -> what changed -> mechanism/method -> evidence -> limits -> d
 
 - `../../shared/deck-plan.schema.json`
 - `../../shared/template-routing.md`
+- `../../shared/ppt-skill-routing.md`
 - `../../shared/source-fidelity.md`
 - `../../shared/visual-qa.md`
 - `../../shared/templates/cuhk/`

@@ -24,6 +24,7 @@ than a full analysis workflow.
 - Proteins and domains: UniProt, AlphaFold DB, InterPro, STRING.
 - Pathways and regulatory data: KEGG, Reactome, JASPAR.
 - Studies and cohorts: GEO, ENA, GWAS Catalog, OpenTargets, DepMap.
+- GWAS summary statistics: start with `references/providers/gwas-summary-statistics-databases.md`, then choose the smallest official source that fits the trait, population, access, and downstream analysis.
 - Phenotype and disease graphs: Monarch, OpenTargets.
 
 Provider details live in `references/providers/`. Read only the relevant
@@ -34,8 +35,9 @@ provider note before making network calls.
 1. Clarify entity type, organism, genome build, ID namespace, and desired output.
 2. Pick the smallest provider set that can answer the question.
 3. Prefer official REST APIs or stable package clients.
-4. Record query URLs, access dates, and version/build metadata in the response.
-5. For batch retrieval, write reproducible scripts rather than manual browser steps.
+4. For GWAS summary statistics, record genome build, ancestry/population, sample size, endpoint/trait definition, file version or release, harmonization status, and access conditions.
+5. Record query URLs, access dates, and version/build metadata in the response.
+6. For batch retrieval, write reproducible scripts rather than manual browser steps.
 
 ## Boundaries
 

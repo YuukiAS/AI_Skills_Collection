@@ -5,7 +5,7 @@
   "plugins": [
     {
       "name": "workflow-core",
-      "version": "3.0.0",
+      "version": "3.5.0",
       "displayName": "Workflow Core",
       "description": "General Codex execution, source-of-truth discovery, planning, verification, and completion gates.",
       "category": "Developer Tools",
@@ -27,9 +27,9 @@
     },
     {
       "name": "ai-skills-core",
-      "version": "3.0.0",
+      "version": "3.5.0",
       "displayName": "AI Skills Core",
-      "description": "AI_Skills_Collection profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing.",
+      "description": "AI_Skills_Collection infrastructure only: profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing.",
       "category": "Developer Tools",
       "installation": "AVAILABLE",
       "brandColor": "#0F766E",
@@ -55,7 +55,7 @@
     },
     {
       "name": "writing-style",
-      "version": "3.0.0",
+      "version": "3.5.0",
       "displayName": "Writing Style",
       "description": "Source-faithful rewriting, Chinese technical expression, and local scientific prose cleanup without deciding research structure.",
       "category": "Research",
@@ -88,7 +88,7 @@
     },
     {
       "name": "research-writing",
-      "version": "3.0.0",
+      "version": "3.5.0",
       "displayName": "Research Writing",
       "description": "Repo reports, research documents, manuscripts, literature review, citations, and claim-evidence organization.",
       "category": "Research",
@@ -166,9 +166,9 @@
     },
     {
       "name": "presentations",
-      "version": "3.0.0",
+      "version": "3.5.0",
       "displayName": "Presentations",
-      "description": "Research and business presentation planning, deck-plan schema, CUHK templates, source fidelity, and visual QA.",
+      "description": "Research and business presentation planning, PPT style routing, deck-plan schema, CUHK templates, source fidelity, and visual QA.",
       "category": "Research",
       "brandColor": "#72256D",
       "composerIcon": "./assets/codex/plugin-icons/presentations/composer.svg",
@@ -182,6 +182,7 @@
       "defaultPrompt": [
         "Plan a CUHK research presentation.",
         "Turn this Markdown into a deck plan.",
+        "Choose the right PPT workflow and editability route.",
         "Plan a business decision deck."
       ],
       "skills": [
@@ -199,15 +200,16 @@
     },
     {
       "name": "web-development",
-      "version": "3.0.0",
+      "version": "3.5.0",
       "displayName": "Web Development",
-      "description": "Frontend reference research, visual systems, and research product frontend constraints that complement official build-web-apps.",
+      "description": "Frontend reference research, visual taste systems, motion/icon resource routing, and research product frontend constraints that complement official build-web-apps and Figma.",
       "category": "Web Development",
       "brandColor": "#EA580C",
       "composerIcon": "./assets/codex/plugin-icons/web-development/composer.svg",
       "logo": "./assets/codex/plugin-icons/web-development/composer.svg",
       "defaultPrompt": [
         "Research frontend references.",
+        "Distill AI frontend taste and motion resources.",
         "Create a visual system brief.",
         "Plan a research product UI."
       ],
@@ -261,7 +263,7 @@
     },
     {
       "name": "statistical-modeling",
-      "version": "3.0.0",
+      "version": "3.5.0",
       "displayName": "Statistical Modeling",
       "description": "Statistical models, Bayesian workflows, Python data analysis, diagnostics, experiment design, and scientific visualization.",
       "category": "Research",
@@ -352,9 +354,9 @@
     },
     {
       "name": "bioinformatics",
-      "version": "3.0.0",
+      "version": "3.5.0",
       "displayName": "Bioinformatics",
-      "description": "General bioinformatics workflows across databases, single-cell analysis, genomics I/O, and omics analysis.",
+      "description": "General bioinformatics workflows across databases, GWAS summary-statistics routing, single-cell analysis, genomics I/O, and omics analysis.",
       "category": "Research",
       "brandColor": "#16A34A",
       "composerIcon": "./assets/codex/plugin-icons/bioinformatics/composer.svg",
@@ -362,7 +364,8 @@
       "defaultPrompt": [
         "Plan a bioinformatics analysis.",
         "Review this single-cell workflow.",
-        "Choose the right omics tool."
+        "Choose the right omics tool.",
+        "Choose a GWAS summary statistics source."
       ],
       "skills": [
         {
@@ -419,7 +422,7 @@
     },
     {
       "name": "medical-imaging",
-      "version": "3.0.0",
+      "version": "3.5.0",
       "displayName": "Medical Imaging",
       "description": "Medical imaging, CMR, DICOM/NIfTI, segmentation, registration, imaging features, and imaging ML workflows.",
       "category": "Research",

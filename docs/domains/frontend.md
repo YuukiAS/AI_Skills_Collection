@@ -28,7 +28,7 @@ Complete domain installs are supported. If an audit reports high description len
 
 - `brand-creative-assets` (`skills/tools/frontend/brand-creative-assets`): Create and review brand-related frontend assets: brand identity, visual guidelines, banners, hero visuals, slides, social images, icons, and marketing creative. Use for branded campaigns and visual asset systems.
 - `design-system-tokens` (`skills/tools/frontend/design-system-tokens`): Create or refine frontend design systems: primitive, semantic, and component tokens; CSS variables; Tailwind theme config; typography scales; spacing; component states; brand consistency. Use when making reusable UI systems or aligning multiple screens.
-- `figma-design-to-code` (`skills/tools/frontend/figma-design-to-code`): Work with Figma design files and MCP workflows: inspect designs, extract tokens/assets, audit accessibility, sync styles, and generate frontend code from Figma context. Use when Figma, design handoff, or design-to-code is involved.
+- `figma-design-to-code` (`skills/tools/frontend/figma-design-to-code`): Plan Figma-to-code handoff: identify frames, tokens, assets, accessibility risks, and implementation notes that complement official Figma tooling.
 - `frontend-reference-research` (`skills/tools/frontend/frontend-reference-research`): Review external frontend references, screenshots, UI libraries, Figma Community examples, and design cases, then distill reusable patterns without copying third-party pages or unclear assets.
 - `frontend-visual-systems` (`skills/tools/frontend/frontend-visual-systems`): Convert frontend references and product intent into design tokens, visual direction, palette, typography, icon, layout, density, and motion rules for implementation by a frontend builder.
 - `implementation-react-tailwind` (`skills/tools/frontend/implementation-react-tailwind`): Implement production-ready frontend code with React, TypeScript, Tailwind CSS, and shadcn/ui. Use for components, pages, dashboards, forms, tables, navigation, themes, and responsive UI implementation.
@@ -56,6 +56,7 @@ Complete domain installs are supported. If an audit reports high description len
 - `skills\tools\frontend\figma-design-to-code\references\figma-mcp-readme.md`
 - `skills\tools\frontend\figma-design-to-code\references\figma-mcp-testing.md`
 - `skills\tools\frontend\figma-design-to-code\references\figma-mcp-troubleshooting.md`
+- `skills\tools\frontend\frontend-reference-research\references\2026-ai-frontend-resources.md`
 - `skills\tools\frontend\implementation-react-tailwind\references\canvas-design-system.md`
 - `skills\tools\frontend\implementation-react-tailwind\references\shadcn-accessibility.md`
 - `skills\tools\frontend\implementation-react-tailwind\references\shadcn-components.md`

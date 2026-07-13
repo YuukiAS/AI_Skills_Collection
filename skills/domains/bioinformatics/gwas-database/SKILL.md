@@ -1,6 +1,6 @@
 ---
 name: gwas-database
-description: Archived provider note for GWAS Catalog lookup. Use bioinformatics-database-retrieval for active project routing.
+description: Archived provider note for GWAS Catalog lookup. Use bioinformatics-database-retrieval for active project routing and GWAS summary-stat database selection.
 status: archived
 provenance: unknown
 trusted: false
@@ -17,6 +17,8 @@ metadata:
   skill-author: K-Dense Inc.
 ---
 # GWAS Catalog Database
+
+Active routing lives in `skills/domains/bioinformatics/databases/bioinformatics-database-retrieval`. For 2026 GWAS summary-statistics database selection, read `../databases/bioinformatics-database-retrieval/references/providers/gwas-summary-statistics-databases.md` first.
 
 ## Overview
 

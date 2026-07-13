@@ -41,3 +41,11 @@ answer/request -> problem or opportunity -> evidence and impact -> plan -> resou
 3. Keep each slide tied to one decision-relevant message.
 4. Use the CUHK default visual system only when no company, client, course, or event template is specified.
 5. Route editable deck creation to official Presentation/Slides and keep visual QA evidence.
+
+## References
+
+- `../../shared/deck-plan.schema.json`
+- `../../shared/template-routing.md`
+- `../../shared/ppt-skill-routing.md`
+- `../../shared/source-fidelity.md`
+- `../../shared/visual-qa.md`

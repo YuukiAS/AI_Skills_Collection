@@ -24,12 +24,13 @@ Use this skill only for maintaining `AI_Skills_Collection`. Do not use it for or
 
 - Maintain source skills, profiles, README, registry, catalog, provenance, icon metadata, and Codex App marketplace publication.
 - Do not duplicate OpenAI system skills such as `skill-creator`, `skill-installer`, or `plugin-creator`.
+- Do not use this as a domain skill. Frontend taste, PPT planning, bioinformatics retrieval, writing, and statistics live in their own plugins or official capabilities.
 - Treat `.agents/plugins/marketplace.json` and `plugins/codex/plugins/` as generated output.
 - Keep external source intake temporary, reviewed, and provenance-recorded.
 
 ## Workflow
 
-1. Read `TODO.md`, `README.md`, `scripts/codex_marketplace_config.json`, `profiles/`, and relevant tests.
+1. Read `README.md`, `scripts/codex_marketplace_config.json`, `profiles/`, `docs/provenance/INTEGRATION_HISTORY.md`, and relevant tests.
 2. Edit source files first, then regenerate derived registry/catalog/marketplace files.
 3. Run repository validation gates with the local runtime Python when `python` is not on `PATH`.
 4. Report generated-layer changes separately from source-layer changes.

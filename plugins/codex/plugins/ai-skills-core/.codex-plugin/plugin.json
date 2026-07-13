@@ -1,7 +1,7 @@
 {
   "name": "ai-skills-core",
-  "version": "3.0.0",
-  "description": "AI_Skills_Collection profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing.",
+  "version": "3.5.0",
+  "description": "AI_Skills_Collection infrastructure only: profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "AI Skills Core",
-    "shortDescription": "AI_Skills_Collection profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing.",
-    "longDescription": "AI_Skills_Collection profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "AI_Skills_Collection infrastructure only: profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing.",
+    "longDescription": "AI_Skills_Collection infrastructure only: profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Developer Tools",
     "capabilities": [

@@ -2,13 +2,13 @@
 name: motion-interaction
 description: "Design and implement frontend motion: page-load choreography, transitions, hover states, scroll effects, feedback animation, and reduced-motion behavior. Use when adding or reviewing animation and interaction polish."
 status: active
-provenance: unknown
+provenance: local
 trusted: false
 requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-13
 profile_tags:
 recommended_scope: project
 ---
@@ -44,6 +44,7 @@ Avoid scattered animation that competes with the interface.
 
 - Prefer CSS transitions for simple effects.
 - Use Framer Motion when coordinating React state, route transitions, or complex sequencing.
+- For React projects, public libraries such as React Bits can be useful references for text effects, animated backgrounds, and interactive components. Treat them as optional dependencies: verify license, bundle impact, accessibility, reduced-motion behavior, and project fit before adding.
 - Avoid animation that changes layout unexpectedly.
 - Provide `prefers-reduced-motion` fallbacks.
 

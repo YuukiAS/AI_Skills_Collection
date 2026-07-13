@@ -27,6 +27,13 @@ Use this skill to turn research and product intent into an executable visual sys
 
 1. Summarize the product job, audience, and information density.
 2. Choose a coherent visual direction and one differentiating move.
-3. Define tokens for color, type, spacing, radius, borders, charts, and motion.
-4. State responsive and accessibility constraints.
-5. Produce a handoff brief that a frontend implementation tool can execute.
+3. Translate taste references into concrete constraints: image/reference first, clear hierarchy, disciplined typography, spacing rhythm, contextual brand cues, and purposeful motion.
+4. Define tokens for color, type, spacing, radius, borders, charts, and motion.
+5. State responsive and accessibility constraints.
+6. Produce a handoff brief that a frontend implementation tool can execute.
+
+## Quality Bar
+
+- Avoid generic "AI page" tells: undifferentiated purple gradients, oversized cards, weak contrast, random icon mixes, decorative motion, and unsupported hero copy.
+- Prefer one strong visual idea over a pile of effects.
+- Use screenshot comparison and browser QA to verify hierarchy, density, text fit, responsive behavior, and motion restraint.

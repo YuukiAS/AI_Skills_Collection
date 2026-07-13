@@ -1,7 +1,7 @@
 {
   "name": "presentations",
-  "version": "3.0.0",
-  "description": "Research and business presentation planning, deck-plan schema, CUHK templates, source fidelity, and visual QA.",
+  "version": "3.5.0",
+  "description": "Research and business presentation planning, PPT style routing, deck-plan schema, CUHK templates, source fidelity, and visual QA.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -17,8 +17,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Presentations",
-    "shortDescription": "Research and business presentation planning, deck-plan schema, CUHK templates, source fidelity, and visual QA.",
-    "longDescription": "Research and business presentation planning, deck-plan schema, CUHK templates, source fidelity, and visual QA. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Research and business presentation planning, PPT style routing, deck-plan schema, CUHK templates, source fidelity, and visual QA.",
+    "longDescription": "Research and business presentation planning, PPT style routing, deck-plan schema, CUHK templates, source fidelity, and visual QA. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [
@@ -28,7 +28,7 @@
     "defaultPrompt": [
       "Plan a CUHK research presentation.",
       "Turn this Markdown into a deck plan.",
-      "Plan a business decision deck."
+      "Choose the right PPT workflow and editability route."
     ],
     "brandColor": "#72256D",
     "composerIcon": "./.codex-plugin/assets/composer.svg",

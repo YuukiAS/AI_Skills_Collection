@@ -1,6 +1,6 @@
 ---
 name: figma-design-to-code
-description: "Work with Figma design files and MCP workflows: inspect designs, extract tokens/assets, audit accessibility, sync styles, and generate frontend code from Figma context. Use when Figma, design handoff, or design-to-code is involved."
+description: "Plan Figma-to-code handoff: identify frames, tokens, assets, accessibility risks, and implementation notes that complement official Figma tooling."
 status: active
 provenance: unknown
 trusted: false
@@ -12,36 +12,37 @@ last_reviewed: 2026-05-14
 profile_tags:
 recommended_scope: project
 ---
-# Frontend Figma Design To Code
+# Frontend Figma Handoff
 
 Use this skill when a frontend task depends on Figma files, frames, components,
 tokens, or design handoff.
 
+Actual Figma file inspection, node edits, asset export, Code Connect, or design generation should use the official Figma capability and its required skill flow. This repository skill only defines the handoff checklist and implementation boundary.
+
 ## Workflow
 
-1. Connect to the Figma MCP/tooling specified by the environment.
-2. Inspect the relevant frame, selection, components, styles, and variables.
-3. Extract design tokens before writing code.
-4. Identify reusable components and variants.
+1. Confirm the exact Figma file, page, frame, node IDs, and target implementation stack.
+2. Use the official Figma capability to inspect frames, components, styles, variables, and assets.
+3. Extract or request design tokens before writing code.
+4. Identify reusable project components and variants.
 5. Check accessibility concerns such as contrast, text size, hit targets, and hierarchy.
-6. Generate code that matches the design while using the project stack and components.
+6. Produce implementation notes that preserve design intent while using the project stack and components.
 7. Verify the rendered app against the Figma frame.
 
 ## Rules
 
 - Do not rely on implicit page context when multiple agents or sessions may be active.
-- Use explicit frame/node identifiers when modifying Figma.
+- Use explicit frame/node identifiers when asking the official Figma tooling to inspect or modify Figma.
 - Keep Figma tooling separate from general visual-design skills.
 - Prefer existing project components over pixel-copying everything.
 - Preserve meaningful design intent, not accidental spacing noise.
 
 ## Useful Tasks
 
-- Generate React/Vue components from selected frames.
+- Create implementation notes for React/Vue components from selected frames.
 - Extract color and typography tokens.
 - Audit contrast and hierarchy.
-- Bulk update styles or colors.
-- Export assets.
+- Prepare safe requests for bulk style updates or asset export through official Figma tooling.
 - Create implementation notes for developers.
 
 ## References And Utilities

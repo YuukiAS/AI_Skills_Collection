@@ -1,6 +1,6 @@
 ---
 name: project-skill-installer
-description: Use when the user asks to install, update, or set up skills for the current project. Finds AI_Skills_Collection, runs project-local installation, then reads AGENTS.md.
+description: Use when the user asks to install, update, or set up AI_Skills_Collection profiles for the current project. Handles project-local installation only; it does not provide domain knowledge.
 status: active
 provenance: local
 trusted: true
@@ -23,6 +23,8 @@ Use this skill when the user says anything like:
 - "setup skills for this project"
 - "install project skills"
 - "update this project's skills"
+
+This is an infrastructure skill. It installs profile selections and writes project routing docs; it does not replace frontend, presentation, bioinformatics, writing, or OpenAI system skills.
 
 ## Workflow
 

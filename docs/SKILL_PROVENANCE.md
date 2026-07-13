@@ -11,8 +11,8 @@ This report records what can be proven from files currently in this repository. 
 - External adapted skills: 11
 - External vendored skills: 0
 - Generated skills: 0
-- Local legacy skills: 4
-- Unknown-origin historical skills: 117
+- Local legacy skills: 5
+- Unknown-origin historical skills: 116
 - Skills containing URLs in the body: 67
 - Skills containing local license files: 11
 
@@ -21,8 +21,8 @@ This report records what can be proven from files currently in this repository. 
 | Provenance | Count |
 | --- | --- |
 | external-adapted | 11 |
-| local | 4 |
-| unknown | 117 |
+| local | 5 |
+| unknown | 116 |
 | user-authored | 16 |
 
 ## User Authored
@@ -76,6 +76,7 @@ None.
 | --- | --- | --- | --- |
 | project-skill-installer | skills/core/codex-system/project-skill-installer | local |  |
 | bioinformatics-database-retrieval | skills/domains/bioinformatics/databases/bioinformatics-database-retrieval | local |  |
+| motion-interaction | skills/tools/frontend/motion-interaction | local |  |
 | chinese-prose | skills/writing/core/chinese-prose | local |  |
 | scientific-prose | skills/writing/core/scientific-prose | local |  |
 
@@ -178,7 +179,6 @@ None.
 | design-system-tokens | skills/tools/frontend/design-system-tokens | unknown |  |
 | figma-design-to-code | skills/tools/frontend/figma-design-to-code | unknown |  |
 | implementation-react-tailwind | skills/tools/frontend/implementation-react-tailwind | unknown |  |
-| motion-interaction | skills/tools/frontend/motion-interaction | unknown |  |
 | product-ux-planning | skills/tools/frontend/product-ux-planning | unknown |  |
 | responsive-accessibility-review | skills/tools/frontend/responsive-accessibility-review | unknown |  |
 | visual-direction | skills/tools/frontend/visual-direction | unknown |  |
@@ -374,7 +374,6 @@ URLs below are evidence of related projects or references found in skill bodies.
 | design-system-tokens | skills/tools/frontend/design-system-tokens |  |  |
 | figma-design-to-code | skills/tools/frontend/figma-design-to-code |  |  |
 | implementation-react-tailwind | skills/tools/frontend/implementation-react-tailwind |  |  |
-| motion-interaction | skills/tools/frontend/motion-interaction |  |  |
 | product-ux-planning | skills/tools/frontend/product-ux-planning |  |  |
 | responsive-accessibility-review | skills/tools/frontend/responsive-accessibility-review |  |  |
 | visual-direction | skills/tools/frontend/visual-direction |  |  |

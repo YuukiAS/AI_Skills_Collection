@@ -1,6 +1,6 @@
 {
   "name": "medical-imaging",
-  "version": "3.0.0",
+  "version": "3.5.0",
   "description": "Medical imaging, CMR, DICOM/NIfTI, segmentation, registration, imaging features, and imaging ML workflows.",
   "author": {
     "name": "YuukiAS",

@@ -15,7 +15,7 @@
 | Slurm compute node | `server-research-baseline` 或 `ai-skills environment apply` | 站点已有 Slurm、TeX、Python |
 | 维护本仓库 | `ai-skills-core` 或 `ai-skills-maintainer` | GitHub，必要时 Notion |
 
-`v3.1` 是仓库重构任务标签。中央 Marketplace 的 9 个插件当前发布版本为 `3.0.0`。
+`v3.5` 是当前仓库整合任务标签。中央 Marketplace 的 9 个插件当前发布版本为 `3.5.0`；九个插件是本仓库当前发布预算，不是 Codex 能力上限。
 
 ## Codex App 插件市场
 

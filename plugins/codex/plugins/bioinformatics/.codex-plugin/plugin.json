@@ -1,7 +1,7 @@
 {
   "name": "bioinformatics",
-  "version": "3.0.0",
-  "description": "General bioinformatics workflows across databases, single-cell analysis, genomics I/O, and omics analysis.",
+  "version": "3.5.0",
+  "description": "General bioinformatics workflows across databases, GWAS summary-statistics routing, single-cell analysis, genomics I/O, and omics analysis.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -17,8 +17,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Bioinformatics",
-    "shortDescription": "General bioinformatics workflows across databases, single-cell analysis, genomics I/O, and omics analysis.",
-    "longDescription": "General bioinformatics workflows across databases, single-cell analysis, genomics I/O, and omics analysis. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "General bioinformatics workflows across databases, GWAS summary-statistics routing, single-cell analysis, genomics I/O, and omics analysis.",
+    "longDescription": "General bioinformatics workflows across databases, GWAS summary-statistics routing, single-cell analysis, genomics I/O, and omics analysis. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [

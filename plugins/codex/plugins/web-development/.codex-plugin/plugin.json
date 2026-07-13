@@ -1,7 +1,7 @@
 {
   "name": "web-development",
-  "version": "3.0.0",
-  "description": "Frontend reference research, visual systems, and research product frontend constraints that complement official build-web-apps.",
+  "version": "3.5.0",
+  "description": "Frontend reference research, visual taste systems, motion/icon resource routing, and research product frontend constraints that complement official build-web-apps and Figma.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Web Development",
-    "shortDescription": "Frontend reference research, visual systems, and research product frontend constraints that complement official build-web-apps.",
-    "longDescription": "Frontend reference research, visual systems, and research product frontend constraints that complement official build-web-apps. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Frontend reference research, visual taste systems, motion/icon resource routing, and research product frontend constraints that complement official build-web-apps and Figma.",
+    "longDescription": "Frontend reference research, visual taste systems, motion/icon resource routing, and research product frontend constraints that complement official build-web-apps and Figma. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Web Development",
     "capabilities": [
@@ -28,8 +28,8 @@
     "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
     "defaultPrompt": [
       "Research frontend references.",
-      "Create a visual system brief.",
-      "Plan a research product UI."
+      "Distill AI frontend taste and motion resources.",
+      "Create a visual system brief."
     ],
     "brandColor": "#EA580C",
     "composerIcon": "./.codex-plugin/assets/composer.svg",
