@@ -40,9 +40,10 @@ why this was done -> what changed -> mechanism/method -> evidence -> limits -> d
 1. Read source material and identify source anchors: Markdown sections, PDF pages, figures, tables, code outputs, prior slides, or review comments.
 2. Produce `deck-plan.yaml` before creating non-trivial slides.
 3. Keep one main message per slide and preserve equations in LaTeX.
-4. Route ordinary PPT requests to editable PPTX output; route explicit Beamer/Overleaf/LaTeX requests to `.tex` plus PDF.
-5. Use the CUHK default visual system when no stronger project, course, company, or conference template is specified.
-6. Export PDF/images for visual QA and keep the deck plan with the final deck.
+4. Route academic, research, technical, group-meeting, seminar, conference, journal-club, and defense decks to LaTeX plus Beamer by default. Do not use `python-pptx`, python-ppt, or editable PPTX generation for academic decks unless the user explicitly asks for editable `.pptx`.
+5. Before compiling `.tex` or producing PDF, invoke the locally installed `render-chinese-math-pdf` skill. Use that skill to probe for the LaTeX compiler, TeX packages, font availability, writable TeX caches, and PDF QA tools instead of assuming `xelatex`/`lualatex` paths. If the local skill is not installed in the active environment, block and report that missing dependency.
+6. Use the CUHK default template when no stronger project, course, company, or conference template is specified. For exact CUHK reproduction, use `../../shared/templates/cuhk/beamer/source/` as the canonical source; the title slide layout is locked and only content fields such as title, subtitle, author, institute, and date may change.
+7. Export PDF/images for visual QA and keep the deck plan with the final deck.
 
 ## References
 

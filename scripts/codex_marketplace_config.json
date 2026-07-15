@@ -166,7 +166,7 @@
     },
     {
       "name": "presentations",
-      "version": "3.6.0",
+      "version": "3.6.1",
       "displayName": "Presentations",
       "description": "Research and business presentation planning, PPT style routing, deck-plan schema, CUHK templates, source fidelity, and visual QA.",
       "category": "Research",

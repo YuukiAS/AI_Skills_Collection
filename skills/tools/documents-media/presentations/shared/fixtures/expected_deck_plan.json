@@ -8,7 +8,7 @@
     "duration_minutes": 8,
     "language": "mixed",
     "template": "cuhk-default",
-    "output": "pptx",
+    "output": "tex",
     "source_files": []
   },
   "slides": [

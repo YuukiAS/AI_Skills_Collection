@@ -13,6 +13,7 @@ Use whole-slide images only when the user explicitly asks for image/PDF/social-c
 | User intent | Route |
 |---|---|
 | Professional editable PowerPoint with conventional layouts | Editable PPTX through official Presentation/Slides or ChatGPT for PowerPoint, with this repo providing deck plan and QA |
+| Academic, research, technical, group-meeting, seminar, conference, journal-club, or defense slides | LaTeX plus Beamer by default; create `.tex` and PDF, and use PPTX only when the user explicitly requests editable PowerPoint |
 | High visual ceiling, multi-format visual outputs, or poster-like pages | Visual direction first, then confirm whether the user accepts image-heavy slides |
 | Narrative, storyline, decision logic, or quality control | `research-presentations` or `business-presentations` deck plan before file creation |
 | HTML-style expressive slides | Frontend visual system plus explicit HTML/PDF routing; do not pretend it is an editable PPTX |
@@ -30,6 +31,8 @@ Known limitations to account for in prompts and QA:
 - advanced PowerPoint features, fonts, templates, and complex formatting may not be fully supported;
 - vague instructions can change or remove content unexpectedly;
 - users should give concrete edit instructions, review output, and keep a backup of important decks.
+
+Python PowerPoint libraries are not the default implementation path for academic decks. `python-pptx` or python-ppt may be used only for non-academic editable PPTX work, reference-deck scaffolds, or explicitly requested PowerPoint deliverables.
 
 ## Prompt Intake Pattern
 

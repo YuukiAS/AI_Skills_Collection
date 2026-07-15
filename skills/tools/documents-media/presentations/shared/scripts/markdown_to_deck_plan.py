@@ -12,7 +12,7 @@ from pathlib import Path
 HEADING_RE = re.compile(r"^(#{1,3})\s+(.+?)\s*$")
 
 
-def markdown_to_deck_plan(markdown: str, title: str, output: str = "pptx") -> dict:
+def markdown_to_deck_plan(markdown: str, title: str, output: str = "tex") -> dict:
     slides = []
     current: dict | None = None
     for line_no, line in enumerate(markdown.splitlines(), start=1):
@@ -57,7 +57,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("markdown", type=Path)
     parser.add_argument("--title", default=None)
-    parser.add_argument("--output", choices=["pptx", "tex", "pdf", "google-slides"], default="pptx")
+    parser.add_argument("--output", choices=["pptx", "tex", "pdf", "google-slides"], default="tex")
     parser.add_argument("--write", type=Path, help="Write JSON deck plan to this path")
     args = parser.parse_args()
     title = args.title or args.markdown.stem.replace("-", " ").title()
