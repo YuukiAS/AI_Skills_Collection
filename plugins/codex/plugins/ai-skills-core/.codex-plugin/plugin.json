@@ -1,6 +1,6 @@
 {
   "name": "ai-skills-core",
-  "version": "3.6.0",
+  "version": "4.0.0",
   "description": "AI_Skills_Collection infrastructure only: profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing.",
   "author": {
     "name": "YuukiAS",

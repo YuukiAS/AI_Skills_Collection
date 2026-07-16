@@ -1,6 +1,6 @@
 {
   "name": "workflow-core",
-  "version": "3.6.0",
+  "version": "4.0.0",
   "description": "General Codex execution, source-of-truth discovery, planning, verification, and completion gates.",
   "author": {
     "name": "YuukiAS",

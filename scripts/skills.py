@@ -172,7 +172,7 @@ def command_list(args: argparse.Namespace) -> int:
 def registry_data(include_archive: bool = False) -> dict[str, Any]:
     records = active_records_sorted(include_archive=include_archive)
     return {
-        "version": "3.0.0",
+        "version": "4.0.0",
         "generated_at": utc_now(),
         "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
         "include_archive": bool(include_archive),

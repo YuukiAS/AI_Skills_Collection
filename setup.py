@@ -5,7 +5,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="ai-skills-collection-cli",
-    version="3.6.0",
+    version="4.0.0",
     description="Local command wrapper for AI_Skills_Collection.",
     packages=find_packages(include=["ai_skills_cli", "ai_skills_cli.*"]),
     python_requires=">=3.10",

@@ -35,7 +35,7 @@ cd /path/to/project
 ai-skills install --target repo --profile research-main --mode symlink --write-agents-md
 ```
 
-`v3.6.0` 起中央插件版本与 CLI package 版本同步；此前 `setup.py` 的 `0.1.0` 只表示早期本地命令包装器版本。
+`v4.0.0` 起中央插件版本与 CLI package 版本同步；此前 `setup.py` 的 `0.1.0` 只表示早期本地命令包装器版本。
 
 ## 先决定装什么
 
@@ -50,7 +50,7 @@ ai-skills install --target repo --profile research-main --mode symlink --write-a
 | Slurm compute node | `server-research-baseline` 或 `ai-skills environment apply` | 站点已有 Slurm、TeX、Python |
 | 维护本仓库 | `ai-skills-core` 或 `ai-skills-maintainer` | GitHub，必要时 Notion |
 
-`v3.6.0` 是当前仓库整合任务标签。中央 Marketplace 的 9 个插件当前发布版本为 `3.6.0`；九个插件是本仓库当前发布预算，不是 Codex 能力上限。
+`v4.0.0` 是当前仓库整合任务标签。中央 Marketplace 的 10 个插件当前发布版本为 `4.0.0`；十个插件是本仓库当前发布预算，不是 Codex 能力上限。
 
 ## Codex App 插件市场
 
@@ -81,7 +81,7 @@ codex plugin marketplace add \
 
 生成层不要手改。改 `skills/`、`profiles/`、`scripts/codex_marketplace_config.json` 或 `assets/codex/` 后，重新生成发布层。
 
-## 中央九个插件
+## 中央十个插件
 
 | 插件 | 用户可见入口 |
 |---|---|

@@ -5,7 +5,7 @@
   "plugins": [
     {
       "name": "workflow-core",
-      "version": "3.6.0",
+      "version": "4.0.0",
       "displayName": "Workflow Core",
       "description": "General Codex execution, source-of-truth discovery, planning, verification, and completion gates.",
       "category": "Developer Tools",
@@ -27,7 +27,7 @@
     },
     {
       "name": "ai-skills-core",
-      "version": "3.6.0",
+      "version": "4.0.0",
       "displayName": "AI Skills Core",
       "description": "AI_Skills_Collection infrastructure only: profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing.",
       "category": "Developer Tools",
@@ -55,7 +55,7 @@
     },
     {
       "name": "writing-style",
-      "version": "3.6.0",
+      "version": "4.0.0",
       "displayName": "Writing Style",
       "description": "Source-faithful rewriting, Chinese technical expression, and local scientific prose cleanup without deciding research structure.",
       "category": "Research",
@@ -88,7 +88,7 @@
     },
     {
       "name": "research-writing",
-      "version": "3.6.0",
+      "version": "4.0.0",
       "displayName": "Research Writing",
       "description": "Repo reports, research documents, manuscripts, literature review, citations, and claim-evidence organization.",
       "category": "Research",
@@ -166,7 +166,7 @@
     },
     {
       "name": "presentations",
-      "version": "3.6.1",
+      "version": "4.0.0",
       "displayName": "Presentations",
       "description": "Research and business presentation planning, PPT style routing, deck-plan schema, CUHK templates, source fidelity, and visual QA.",
       "category": "Research",
@@ -200,7 +200,7 @@
     },
     {
       "name": "scientific-visualization",
-      "version": "3.6.0",
+      "version": "4.0.0",
       "displayName": "Scientific Visualization",
       "description": "Publication-ready scientific figures, canonical research palettes, plotting snippets, schematics, posters, and venue figure QA.",
       "category": "Research",
@@ -276,7 +276,7 @@
     },
     {
       "name": "web-development",
-      "version": "3.6.0",
+      "version": "4.0.0",
       "displayName": "Web Development",
       "description": "Frontend reference research, visual taste systems, motion/icon resource routing, and research product frontend constraints that complement official build-web-apps and Figma.",
       "category": "Web Development",
@@ -339,7 +339,7 @@
     },
     {
       "name": "statistical-modeling",
-      "version": "3.6.0",
+      "version": "4.0.0",
       "displayName": "Statistical Modeling",
       "description": "Statistical models, Bayesian workflows, Python data analysis, diagnostics, experiment design, and scientific visualization.",
       "category": "Research",
@@ -430,7 +430,7 @@
     },
     {
       "name": "bioinformatics",
-      "version": "3.6.0",
+      "version": "4.0.0",
       "displayName": "Bioinformatics",
       "description": "General bioinformatics workflows across databases, GWAS summary-statistics routing, single-cell analysis, genomics I/O, and omics analysis.",
       "category": "Research",
@@ -498,7 +498,7 @@
     },
     {
       "name": "medical-imaging",
-      "version": "3.6.0",
+      "version": "4.0.0",
       "displayName": "Medical Imaging",
       "description": "Medical imaging, CMR, DICOM/NIfTI, segmentation, registration, imaging features, and imaging ML workflows.",
       "category": "Research",
