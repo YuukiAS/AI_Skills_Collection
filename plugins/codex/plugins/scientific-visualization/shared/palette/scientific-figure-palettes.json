@@ -1,0 +1,1268 @@
+{
+  "library_id": "ai_skills_scientific_figure_palettes",
+  "version": "1.0.0",
+  "scope": "scientific-figures-publication-ready",
+  "generated_on": "2026-07-16",
+  "canonical_file": "palette/scientific-figure-palettes.json",
+  "compatibility_file": "palette/palettes.json",
+  "default_policy": {
+    "categorical_first_choice": "okabe_ito",
+    "continuous_first_choices": [
+      "viridis",
+      "cividis"
+    ],
+    "diverging_first_choices": [
+      "RdBu",
+      "BrBG",
+      "PuOr",
+      "coolwarm"
+    ],
+    "journal_style_rule": "Use journal-inspired palettes only as non-official style inspiration and always run accessibility review.",
+    "routing": "Scientific figures use palette/; presentations use themes; product UI uses semantic design tokens."
+  },
+  "external_sources": [
+    {
+      "name": "ColorBrewer",
+      "url": "https://github.com/axismaps/colorbrewer",
+      "repo_commit": "7d135fc4e19eda73f2eb1bf55fcdf4a04fe4881f",
+      "local_path": "C:\\Users\\yuukias\\AppData\\Local\\Temp\\ai-skills-palette-sources\\colorbrewer",
+      "usage": "copied ColorBrewer target palettes"
+    },
+    {
+      "name": "Matplotlib",
+      "url": "https://github.com/matplotlib/matplotlib",
+      "repo_commit": "63bd095608a65ff6f33112009797b66cadab7f06",
+      "local_path": "C:\\Users\\yuukias\\AppData\\Local\\Temp\\ai-skills-palette-sources\\matplotlib",
+      "usage": "sampled target colormaps from cloned source"
+    },
+    {
+      "name": "Material Color Utilities",
+      "url": "https://github.com/material-foundation/material-color-utilities",
+      "repo_commit": "6fd88eb3e95ba1d457842e2a2bf847d06b3a018a",
+      "local_path": "C:\\Users\\yuukias\\AppData\\Local\\Temp\\ai-skills-palette-sources\\material-color-utilities",
+      "usage": "referenced for product/UI dynamic color boundary; no scientific palette copied"
+    },
+    {
+      "name": "ggsci",
+      "url": "https://github.com/nanxstats/ggsci",
+      "repo_commit": "16660ea17f8d9b306828b8411580ea1ac1fa9109",
+      "local_path": "C:\\Users\\yuukias\\AppData\\Local\\Temp\\ai-skills-palette-sources\\ggsci",
+      "usage": "copied journal-inspired palettes"
+    },
+    {
+      "name": "Color Universal Design (CUD)",
+      "url": "https://jfly.uni-koeln.de/color/",
+      "access_date": "2026-07-16",
+      "local_path": "C:\\Users\\yuukias\\AppData\\Local\\Temp\\ai-skills-palette-sources\\okabe-ito-cud.html",
+      "usage": "referenced Okabe-Ito/CUD guidance"
+    }
+  ],
+  "palettes": [
+    {
+      "id": "okabe_ito",
+      "legacy_ids": [
+        "okabe-ito",
+        "cud_okabe_ito"
+      ],
+      "name": "Okabe-Ito / Color Universal Design",
+      "family": "colorblind-safe categorical",
+      "type": "categorical",
+      "colors": [
+        "#E69F00",
+        "#56B4E9",
+        "#009E73",
+        "#F0E442",
+        "#0072B2",
+        "#D55E00",
+        "#CC79A7",
+        "#000000"
+      ],
+      "recommended_for": [
+        "category series in scientific figures",
+        "line plots with redundant encodings",
+        "publication figures that must survive color vision differences"
+      ],
+      "avoid_for": [
+        "ordered magnitudes",
+        "heatmaps",
+        "more than eight categories without grouping"
+      ],
+      "colorblind_safe": {
+        "status": "designed_for_colorblind_accessibility",
+        "notes": "Use redundant encodings for high-stakes figures."
+      },
+      "provenance_status": "referenced_verified",
+      "origins": [
+        {
+          "name": "Color Universal Design (CUD)",
+          "url": "https://jfly.uni-koeln.de/color/",
+          "access_date": "2026-07-16",
+          "usage": "referenced",
+          "license_note": "CUD page by Masataka Okabe and Kei Ito; use with attribution to Color Universal Design principles.",
+          "source_path": "okabe-ito-cud.html"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "notes": "Values are the standard Okabe-Ito palette used with CUD guidance; the downloaded CUD page is recorded as the verified upstream guidance source."
+    },
+    {
+      "id": "nature_npg",
+      "legacy_ids": [
+        "ggsci_npg_nrc",
+        "pal_npg_nrc"
+      ],
+      "name": "Nature Publishing Group inspired",
+      "family": "journal-inspired categorical",
+      "type": "categorical",
+      "colors": [
+        "#E64B35",
+        "#4DBBD5",
+        "#00A087",
+        "#3C5488",
+        "#F39B7F",
+        "#8491B4",
+        "#91D1C2",
+        "#DC0000",
+        "#7E6148",
+        "#B09C85"
+      ],
+      "recommended_for": [
+        "journal-style categorical figures",
+        "manuscript plots needing restrained categorical contrast"
+      ],
+      "avoid_for": [
+        "claiming official journal branding",
+        "product UI brand systems",
+        "accessibility-critical category encoding without grayscale and CVD checks"
+      ],
+      "colorblind_safe": {
+        "status": "not_guaranteed",
+        "notes": "Journal-inspired palettes require colorblind and grayscale review before submission."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ggsci",
+          "url": "https://github.com/nanxstats/ggsci",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "ggsci license applies; journal-inspired palettes are not official brand specifications.",
+          "repo_commit": "16660ea17f8d9b306828b8411580ea1ac1fa9109",
+          "source_path": "R/palettes.R"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "is_official_branding": false,
+      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci."
+    },
+    {
+      "id": "science_aaas",
+      "legacy_ids": [
+        "ggsci_aaas_default",
+        "pal_aaas_default"
+      ],
+      "name": "Science AAAS inspired",
+      "family": "journal-inspired categorical",
+      "type": "categorical",
+      "colors": [
+        "#3B4992",
+        "#EE0000",
+        "#008B45",
+        "#631879",
+        "#008280",
+        "#BB0021",
+        "#5F559B",
+        "#A20056",
+        "#808180",
+        "#1B1919"
+      ],
+      "recommended_for": [
+        "journal-style categorical figures",
+        "manuscript plots needing restrained categorical contrast"
+      ],
+      "avoid_for": [
+        "claiming official journal branding",
+        "product UI brand systems",
+        "accessibility-critical category encoding without grayscale and CVD checks"
+      ],
+      "colorblind_safe": {
+        "status": "not_guaranteed",
+        "notes": "Journal-inspired palettes require colorblind and grayscale review before submission."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ggsci",
+          "url": "https://github.com/nanxstats/ggsci",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "ggsci license applies; journal-inspired palettes are not official brand specifications.",
+          "repo_commit": "16660ea17f8d9b306828b8411580ea1ac1fa9109",
+          "source_path": "R/palettes.R"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "is_official_branding": false,
+      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci."
+    },
+    {
+      "id": "nejm",
+      "legacy_ids": [
+        "ggsci_nejm_default",
+        "pal_nejm_default"
+      ],
+      "name": "New England Journal of Medicine inspired",
+      "family": "journal-inspired categorical",
+      "type": "categorical",
+      "colors": [
+        "#BC3C29",
+        "#0072B5",
+        "#E18727",
+        "#20854E",
+        "#7876B1",
+        "#6F99AD",
+        "#FFDC91",
+        "#EE4C97"
+      ],
+      "recommended_for": [
+        "journal-style categorical figures",
+        "manuscript plots needing restrained categorical contrast"
+      ],
+      "avoid_for": [
+        "claiming official journal branding",
+        "product UI brand systems",
+        "accessibility-critical category encoding without grayscale and CVD checks"
+      ],
+      "colorblind_safe": {
+        "status": "not_guaranteed",
+        "notes": "Journal-inspired palettes require colorblind and grayscale review before submission."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ggsci",
+          "url": "https://github.com/nanxstats/ggsci",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "ggsci license applies; journal-inspired palettes are not official brand specifications.",
+          "repo_commit": "16660ea17f8d9b306828b8411580ea1ac1fa9109",
+          "source_path": "R/palettes.R"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "is_official_branding": false,
+      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci."
+    },
+    {
+      "id": "lancet",
+      "legacy_ids": [
+        "ggsci_lancet_lanonc",
+        "pal_lancet_lanonc"
+      ],
+      "name": "Lancet Oncology inspired",
+      "family": "journal-inspired categorical",
+      "type": "categorical",
+      "colors": [
+        "#00468B",
+        "#ED0000",
+        "#42B540",
+        "#0099B4",
+        "#925E9F",
+        "#FDAF91",
+        "#AD002A",
+        "#ADB6B6",
+        "#1B1919"
+      ],
+      "recommended_for": [
+        "journal-style categorical figures",
+        "manuscript plots needing restrained categorical contrast"
+      ],
+      "avoid_for": [
+        "claiming official journal branding",
+        "product UI brand systems",
+        "accessibility-critical category encoding without grayscale and CVD checks"
+      ],
+      "colorblind_safe": {
+        "status": "not_guaranteed",
+        "notes": "Journal-inspired palettes require colorblind and grayscale review before submission."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ggsci",
+          "url": "https://github.com/nanxstats/ggsci",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "ggsci license applies; journal-inspired palettes are not official brand specifications.",
+          "repo_commit": "16660ea17f8d9b306828b8411580ea1ac1fa9109",
+          "source_path": "R/palettes.R"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "is_official_branding": false,
+      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci."
+    },
+    {
+      "id": "jama",
+      "legacy_ids": [
+        "ggsci_jama_default",
+        "pal_jama_default"
+      ],
+      "name": "JAMA inspired",
+      "family": "journal-inspired categorical",
+      "type": "categorical",
+      "colors": [
+        "#374E55",
+        "#DF8F44",
+        "#00A1D5",
+        "#B24745",
+        "#79AF97",
+        "#6A6599",
+        "#80796B"
+      ],
+      "recommended_for": [
+        "journal-style categorical figures",
+        "manuscript plots needing restrained categorical contrast"
+      ],
+      "avoid_for": [
+        "claiming official journal branding",
+        "product UI brand systems",
+        "accessibility-critical category encoding without grayscale and CVD checks"
+      ],
+      "colorblind_safe": {
+        "status": "not_guaranteed",
+        "notes": "Journal-inspired palettes require colorblind and grayscale review before submission."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ggsci",
+          "url": "https://github.com/nanxstats/ggsci",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "ggsci license applies; journal-inspired palettes are not official brand specifications.",
+          "repo_commit": "16660ea17f8d9b306828b8411580ea1ac1fa9109",
+          "source_path": "R/palettes.R"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "is_official_branding": false,
+      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci."
+    },
+    {
+      "id": "bmj",
+      "legacy_ids": [
+        "ggsci_bmj_default",
+        "pal_bmj_default"
+      ],
+      "name": "BMJ living style guide inspired",
+      "family": "journal-inspired categorical",
+      "type": "categorical",
+      "colors": [
+        "#2A6EBB",
+        "#F0AB00",
+        "#C50084",
+        "#7D5CC6",
+        "#E37222",
+        "#69BE28",
+        "#00B2A9",
+        "#CD202C",
+        "#747678"
+      ],
+      "recommended_for": [
+        "journal-style categorical figures",
+        "manuscript plots needing restrained categorical contrast"
+      ],
+      "avoid_for": [
+        "claiming official journal branding",
+        "product UI brand systems",
+        "accessibility-critical category encoding without grayscale and CVD checks"
+      ],
+      "colorblind_safe": {
+        "status": "not_guaranteed",
+        "notes": "Journal-inspired palettes require colorblind and grayscale review before submission."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ggsci",
+          "url": "https://github.com/nanxstats/ggsci",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "ggsci license applies; journal-inspired palettes are not official brand specifications.",
+          "repo_commit": "16660ea17f8d9b306828b8411580ea1ac1fa9109",
+          "source_path": "R/palettes.R"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "is_official_branding": false,
+      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci."
+    },
+    {
+      "id": "jco",
+      "legacy_ids": [
+        "ggsci_jco_default",
+        "pal_jco_default"
+      ],
+      "name": "Journal of Clinical Oncology inspired",
+      "family": "journal-inspired categorical",
+      "type": "categorical",
+      "colors": [
+        "#0073C2",
+        "#EFC000",
+        "#868686",
+        "#CD534C",
+        "#7AA6DC",
+        "#003C67",
+        "#8F7700",
+        "#3B3B3B",
+        "#A73030",
+        "#4A6990"
+      ],
+      "recommended_for": [
+        "journal-style categorical figures",
+        "manuscript plots needing restrained categorical contrast"
+      ],
+      "avoid_for": [
+        "claiming official journal branding",
+        "product UI brand systems",
+        "accessibility-critical category encoding without grayscale and CVD checks"
+      ],
+      "colorblind_safe": {
+        "status": "not_guaranteed",
+        "notes": "Journal-inspired palettes require colorblind and grayscale review before submission."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ggsci",
+          "url": "https://github.com/nanxstats/ggsci",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "ggsci license applies; journal-inspired palettes are not official brand specifications.",
+          "repo_commit": "16660ea17f8d9b306828b8411580ea1ac1fa9109",
+          "source_path": "R/palettes.R"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "is_official_branding": false,
+      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci."
+    },
+    {
+      "id": "Dark2",
+      "legacy_ids": [
+        "colorbrewer_dark2",
+        "cb_Dark2_8"
+      ],
+      "name": "ColorBrewer qualitative Dark2",
+      "family": "ColorBrewer qualitative",
+      "type": "categorical",
+      "colors": [
+        "#1B9E77",
+        "#D95F02",
+        "#7570B3",
+        "#E7298A",
+        "#66A61E",
+        "#E6AB02",
+        "#A6761D",
+        "#666666"
+      ],
+      "recommended_for": [
+        "categorical scientific charts",
+        "moderate-count qualitative groups"
+      ],
+      "avoid_for": [
+        "journal brand matching",
+        "product UI semantic tokens",
+        "more bins than available colors without interpolation"
+      ],
+      "colorblind_safe": {
+        "status": "varies_by_palette",
+        "notes": "Use ColorBrewer suitability guidance and test grayscale/CVD for final figures."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ColorBrewer",
+          "url": "https://github.com/axismaps/colorbrewer",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "Apache-Style Software License for ColorBrewer; see upstream LICENCE.txt.",
+          "repo_commit": "7d135fc4e19eda73f2eb1bf55fcdf4a04fe4881f",
+          "source_path": "export/gpl/Dark2_8.gpl"
+        }
+      ],
+      "stability": "stable",
+      "core": true
+    },
+    {
+      "id": "Set2",
+      "legacy_ids": [
+        "colorbrewer_set2",
+        "cb_Set2_8"
+      ],
+      "name": "ColorBrewer qualitative Set2",
+      "family": "ColorBrewer qualitative",
+      "type": "categorical",
+      "colors": [
+        "#66C2A5",
+        "#FC8D62",
+        "#8DA0CB",
+        "#E78AC3",
+        "#A6D854",
+        "#FFD92F",
+        "#E5C494",
+        "#B3B3B3"
+      ],
+      "recommended_for": [
+        "soft categorical scientific charts",
+        "filled regions and boxplots"
+      ],
+      "avoid_for": [
+        "journal brand matching",
+        "product UI semantic tokens",
+        "more bins than available colors without interpolation"
+      ],
+      "colorblind_safe": {
+        "status": "varies_by_palette",
+        "notes": "Use ColorBrewer suitability guidance and test grayscale/CVD for final figures."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ColorBrewer",
+          "url": "https://github.com/axismaps/colorbrewer",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "Apache-Style Software License for ColorBrewer; see upstream LICENCE.txt.",
+          "repo_commit": "7d135fc4e19eda73f2eb1bf55fcdf4a04fe4881f",
+          "source_path": "export/gpl/Set2_8.gpl"
+        }
+      ],
+      "stability": "stable",
+      "core": true
+    },
+    {
+      "id": "Paired",
+      "legacy_ids": [
+        "colorbrewer_paired",
+        "cb_Paired_12"
+      ],
+      "name": "ColorBrewer qualitative Paired",
+      "family": "ColorBrewer qualitative",
+      "type": "categorical",
+      "colors": [
+        "#A6CEE3",
+        "#1F78B4",
+        "#B2DF8A",
+        "#33A02C",
+        "#FB9A99",
+        "#E31A1C",
+        "#FDBF6F",
+        "#FF7F00",
+        "#CAB2D6",
+        "#6A3D9A",
+        "#FFFF99",
+        "#B15928"
+      ],
+      "recommended_for": [
+        "paired categories",
+        "case/control or before/after grouped series"
+      ],
+      "avoid_for": [
+        "journal brand matching",
+        "product UI semantic tokens",
+        "more bins than available colors without interpolation"
+      ],
+      "colorblind_safe": {
+        "status": "varies_by_palette",
+        "notes": "Use ColorBrewer suitability guidance and test grayscale/CVD for final figures."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ColorBrewer",
+          "url": "https://github.com/axismaps/colorbrewer",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "Apache-Style Software License for ColorBrewer; see upstream LICENCE.txt.",
+          "repo_commit": "7d135fc4e19eda73f2eb1bf55fcdf4a04fe4881f",
+          "source_path": "export/gpl/Paired_12.gpl"
+        }
+      ],
+      "stability": "stable",
+      "core": true
+    },
+    {
+      "id": "Blues",
+      "legacy_ids": [
+        "colorbrewer_blues",
+        "cb_Blues_9"
+      ],
+      "name": "ColorBrewer sequential Blues",
+      "family": "ColorBrewer sequential",
+      "type": "sequential",
+      "colors": [
+        "#F7FBFF",
+        "#DEEBF7",
+        "#C6DBEF",
+        "#9ECAE1",
+        "#6BAED6",
+        "#4292C6",
+        "#2171B5",
+        "#08519C",
+        "#08306B"
+      ],
+      "recommended_for": [
+        "single-direction magnitudes",
+        "density or rate maps"
+      ],
+      "avoid_for": [
+        "journal brand matching",
+        "product UI semantic tokens",
+        "more bins than available colors without interpolation"
+      ],
+      "colorblind_safe": {
+        "status": "varies_by_palette",
+        "notes": "Use ColorBrewer suitability guidance and test grayscale/CVD for final figures."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ColorBrewer",
+          "url": "https://github.com/axismaps/colorbrewer",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "Apache-Style Software License for ColorBrewer; see upstream LICENCE.txt.",
+          "repo_commit": "7d135fc4e19eda73f2eb1bf55fcdf4a04fe4881f",
+          "source_path": "export/gpl/Blues_9.gpl"
+        }
+      ],
+      "stability": "stable",
+      "core": true
+    },
+    {
+      "id": "YlGnBu",
+      "legacy_ids": [
+        "colorbrewer_ylgnbu",
+        "cb_YlGnBu_9"
+      ],
+      "name": "ColorBrewer sequential YlGnBu",
+      "family": "ColorBrewer sequential",
+      "type": "sequential",
+      "colors": [
+        "#FFFFD9",
+        "#EDF8B1",
+        "#C7E9B4",
+        "#7FCDBB",
+        "#41B6C4",
+        "#1D91C0",
+        "#225EA8",
+        "#253494",
+        "#081D58"
+      ],
+      "recommended_for": [
+        "single-direction magnitudes",
+        "maps and heatmaps where yellow low values are acceptable"
+      ],
+      "avoid_for": [
+        "journal brand matching",
+        "product UI semantic tokens",
+        "more bins than available colors without interpolation"
+      ],
+      "colorblind_safe": {
+        "status": "varies_by_palette",
+        "notes": "Use ColorBrewer suitability guidance and test grayscale/CVD for final figures."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ColorBrewer",
+          "url": "https://github.com/axismaps/colorbrewer",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "Apache-Style Software License for ColorBrewer; see upstream LICENCE.txt.",
+          "repo_commit": "7d135fc4e19eda73f2eb1bf55fcdf4a04fe4881f",
+          "source_path": "export/gpl/YlGnBu_9.gpl"
+        }
+      ],
+      "stability": "stable",
+      "core": true
+    },
+    {
+      "id": "OrRd",
+      "legacy_ids": [
+        "colorbrewer_orrd",
+        "cb_OrRd_9"
+      ],
+      "name": "ColorBrewer sequential OrRd",
+      "family": "ColorBrewer sequential",
+      "type": "sequential",
+      "colors": [
+        "#FFF7EC",
+        "#FEE8C8",
+        "#FDD49E",
+        "#FDBB84",
+        "#FC8D59",
+        "#EF6548",
+        "#D7301F",
+        "#B30000",
+        "#7F0000"
+      ],
+      "recommended_for": [
+        "single-direction magnitudes",
+        "risk or intensity maps"
+      ],
+      "avoid_for": [
+        "journal brand matching",
+        "product UI semantic tokens",
+        "more bins than available colors without interpolation"
+      ],
+      "colorblind_safe": {
+        "status": "varies_by_palette",
+        "notes": "Use ColorBrewer suitability guidance and test grayscale/CVD for final figures."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ColorBrewer",
+          "url": "https://github.com/axismaps/colorbrewer",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "Apache-Style Software License for ColorBrewer; see upstream LICENCE.txt.",
+          "repo_commit": "7d135fc4e19eda73f2eb1bf55fcdf4a04fe4881f",
+          "source_path": "export/gpl/OrRd_9.gpl"
+        }
+      ],
+      "stability": "stable",
+      "core": true
+    },
+    {
+      "id": "RdBu",
+      "legacy_ids": [
+        "colorbrewer_rdbu",
+        "cb_RdBu_11"
+      ],
+      "name": "ColorBrewer diverging RdBu",
+      "family": "ColorBrewer diverging",
+      "type": "diverging",
+      "colors": [
+        "#67001F",
+        "#B2182B",
+        "#D6604D",
+        "#F4A582",
+        "#FDDBC7",
+        "#F7F7F7",
+        "#D1E5F0",
+        "#92C5DE",
+        "#4393C3",
+        "#2166AC",
+        "#053061"
+      ],
+      "recommended_for": [
+        "signed deviations around a midpoint",
+        "correlation heatmaps with center zero"
+      ],
+      "avoid_for": [
+        "journal brand matching",
+        "product UI semantic tokens",
+        "more bins than available colors without interpolation"
+      ],
+      "colorblind_safe": {
+        "status": "varies_by_palette",
+        "notes": "Use ColorBrewer suitability guidance and test grayscale/CVD for final figures."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ColorBrewer",
+          "url": "https://github.com/axismaps/colorbrewer",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "Apache-Style Software License for ColorBrewer; see upstream LICENCE.txt.",
+          "repo_commit": "7d135fc4e19eda73f2eb1bf55fcdf4a04fe4881f",
+          "source_path": "export/gpl/RdBu_11.gpl"
+        }
+      ],
+      "stability": "stable",
+      "core": true
+    },
+    {
+      "id": "BrBG",
+      "legacy_ids": [
+        "colorbrewer_brbg",
+        "cb_BrBG_11"
+      ],
+      "name": "ColorBrewer diverging BrBG",
+      "family": "ColorBrewer diverging",
+      "type": "diverging",
+      "colors": [
+        "#543005",
+        "#8C510A",
+        "#BF812D",
+        "#DFC27D",
+        "#F6E8C3",
+        "#F5F5F5",
+        "#C7EAE5",
+        "#80CDC1",
+        "#35978F",
+        "#01665E",
+        "#003C30"
+      ],
+      "recommended_for": [
+        "signed deviations around a midpoint",
+        "environmental or terrain-like contrasts"
+      ],
+      "avoid_for": [
+        "journal brand matching",
+        "product UI semantic tokens",
+        "more bins than available colors without interpolation"
+      ],
+      "colorblind_safe": {
+        "status": "varies_by_palette",
+        "notes": "Use ColorBrewer suitability guidance and test grayscale/CVD for final figures."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ColorBrewer",
+          "url": "https://github.com/axismaps/colorbrewer",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "Apache-Style Software License for ColorBrewer; see upstream LICENCE.txt.",
+          "repo_commit": "7d135fc4e19eda73f2eb1bf55fcdf4a04fe4881f",
+          "source_path": "export/gpl/BrBG_11.gpl"
+        }
+      ],
+      "stability": "stable",
+      "core": true
+    },
+    {
+      "id": "PuOr",
+      "legacy_ids": [
+        "colorbrewer_puor",
+        "cb_PuOr_11"
+      ],
+      "name": "ColorBrewer diverging PuOr",
+      "family": "ColorBrewer diverging",
+      "type": "diverging",
+      "colors": [
+        "#7F3B08",
+        "#B35806",
+        "#E08214",
+        "#FDB863",
+        "#FEE0B6",
+        "#F7F7F7",
+        "#D8DAEB",
+        "#B2ABD2",
+        "#8073AC",
+        "#542788",
+        "#2D004B"
+      ],
+      "recommended_for": [
+        "signed deviations around a midpoint",
+        "red-green-safe diverging alternatives"
+      ],
+      "avoid_for": [
+        "journal brand matching",
+        "product UI semantic tokens",
+        "more bins than available colors without interpolation"
+      ],
+      "colorblind_safe": {
+        "status": "varies_by_palette",
+        "notes": "Use ColorBrewer suitability guidance and test grayscale/CVD for final figures."
+      },
+      "provenance_status": "copied_verified",
+      "origins": [
+        {
+          "name": "ColorBrewer",
+          "url": "https://github.com/axismaps/colorbrewer",
+          "access_date": "2026-07-16",
+          "usage": "copied",
+          "license_note": "Apache-Style Software License for ColorBrewer; see upstream LICENCE.txt.",
+          "repo_commit": "7d135fc4e19eda73f2eb1bf55fcdf4a04fe4881f",
+          "source_path": "export/gpl/PuOr_11.gpl"
+        }
+      ],
+      "stability": "stable",
+      "core": true
+    },
+    {
+      "id": "viridis",
+      "legacy_ids": [
+        "matplotlib_viridis",
+        "mpl_viridis"
+      ],
+      "name": "Matplotlib viridis",
+      "family": "Matplotlib perceptually uniform",
+      "type": "sequential",
+      "colors": [
+        "#440154",
+        "#472D7B",
+        "#3B528B",
+        "#2C728E",
+        "#21918C",
+        "#27AD81",
+        "#5CC863",
+        "#AADC32",
+        "#FDE725"
+      ],
+      "recommended_for": [
+        "continuous scalar data",
+        "heatmaps",
+        "colorbars that must print well"
+      ],
+      "avoid_for": [
+        "unordered categories",
+        "official brand colors",
+        "small discrete legends unless sampled deliberately"
+      ],
+      "colorblind_safe": {
+        "status": "generally_accessible",
+        "notes": "Use as colormaps; sampled values are provided for prompt/tool portability."
+      },
+      "provenance_status": "sampled_verified",
+      "origins": [
+        {
+          "name": "Matplotlib",
+          "url": "https://github.com/matplotlib/matplotlib",
+          "access_date": "2026-07-16",
+          "usage": "sampled",
+          "license_note": "Matplotlib license; individual colormap provenance notes are preserved upstream where applicable.",
+          "repo_commit": "63bd095608a65ff6f33112009797b66cadab7f06",
+          "source_path": "lib/matplotlib/_cm_listed.py"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "sampling": {
+        "method": "evenly sampled inclusive endpoints",
+        "sample_count": 9
+      }
+    },
+    {
+      "id": "plasma",
+      "legacy_ids": [
+        "matplotlib_plasma",
+        "mpl_plasma"
+      ],
+      "name": "Matplotlib plasma",
+      "family": "Matplotlib perceptually uniform",
+      "type": "sequential",
+      "colors": [
+        "#0D0887",
+        "#4C02A1",
+        "#7E03A8",
+        "#AA2395",
+        "#CC4778",
+        "#E56B5D",
+        "#F89441",
+        "#FDC328",
+        "#F0F921"
+      ],
+      "recommended_for": [
+        "continuous scalar data",
+        "high-contrast heatmaps"
+      ],
+      "avoid_for": [
+        "unordered categories",
+        "official brand colors",
+        "small discrete legends unless sampled deliberately"
+      ],
+      "colorblind_safe": {
+        "status": "not_guaranteed",
+        "notes": "Use as colormaps; sampled values are provided for prompt/tool portability."
+      },
+      "provenance_status": "sampled_verified",
+      "origins": [
+        {
+          "name": "Matplotlib",
+          "url": "https://github.com/matplotlib/matplotlib",
+          "access_date": "2026-07-16",
+          "usage": "sampled",
+          "license_note": "Matplotlib license; individual colormap provenance notes are preserved upstream where applicable.",
+          "repo_commit": "63bd095608a65ff6f33112009797b66cadab7f06",
+          "source_path": "lib/matplotlib/_cm_listed.py"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "sampling": {
+        "method": "evenly sampled inclusive endpoints",
+        "sample_count": 9
+      }
+    },
+    {
+      "id": "inferno",
+      "legacy_ids": [
+        "matplotlib_inferno",
+        "mpl_inferno"
+      ],
+      "name": "Matplotlib inferno",
+      "family": "Matplotlib perceptually uniform",
+      "type": "sequential",
+      "colors": [
+        "#000004",
+        "#210C4A",
+        "#57106E",
+        "#8A226A",
+        "#BC3754",
+        "#E35933",
+        "#F98C0A",
+        "#F9C932",
+        "#FCFFA4"
+      ],
+      "recommended_for": [
+        "continuous scalar data",
+        "dark-to-light intensity maps"
+      ],
+      "avoid_for": [
+        "unordered categories",
+        "official brand colors",
+        "small discrete legends unless sampled deliberately"
+      ],
+      "colorblind_safe": {
+        "status": "not_guaranteed",
+        "notes": "Use as colormaps; sampled values are provided for prompt/tool portability."
+      },
+      "provenance_status": "sampled_verified",
+      "origins": [
+        {
+          "name": "Matplotlib",
+          "url": "https://github.com/matplotlib/matplotlib",
+          "access_date": "2026-07-16",
+          "usage": "sampled",
+          "license_note": "Matplotlib license; individual colormap provenance notes are preserved upstream where applicable.",
+          "repo_commit": "63bd095608a65ff6f33112009797b66cadab7f06",
+          "source_path": "lib/matplotlib/_cm_listed.py"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "sampling": {
+        "method": "evenly sampled inclusive endpoints",
+        "sample_count": 9
+      }
+    },
+    {
+      "id": "magma",
+      "legacy_ids": [
+        "matplotlib_magma",
+        "mpl_magma"
+      ],
+      "name": "Matplotlib magma",
+      "family": "Matplotlib perceptually uniform",
+      "type": "sequential",
+      "colors": [
+        "#000004",
+        "#1D1147",
+        "#51127C",
+        "#832681",
+        "#B73779",
+        "#E55064",
+        "#FB8761",
+        "#FEC287",
+        "#FCFDBF"
+      ],
+      "recommended_for": [
+        "continuous scalar data",
+        "dark-to-light intensity maps"
+      ],
+      "avoid_for": [
+        "unordered categories",
+        "official brand colors",
+        "small discrete legends unless sampled deliberately"
+      ],
+      "colorblind_safe": {
+        "status": "not_guaranteed",
+        "notes": "Use as colormaps; sampled values are provided for prompt/tool portability."
+      },
+      "provenance_status": "sampled_verified",
+      "origins": [
+        {
+          "name": "Matplotlib",
+          "url": "https://github.com/matplotlib/matplotlib",
+          "access_date": "2026-07-16",
+          "usage": "sampled",
+          "license_note": "Matplotlib license; individual colormap provenance notes are preserved upstream where applicable.",
+          "repo_commit": "63bd095608a65ff6f33112009797b66cadab7f06",
+          "source_path": "lib/matplotlib/_cm_listed.py"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "sampling": {
+        "method": "evenly sampled inclusive endpoints",
+        "sample_count": 9
+      }
+    },
+    {
+      "id": "cividis",
+      "legacy_ids": [
+        "matplotlib_cividis",
+        "mpl_cividis"
+      ],
+      "name": "Matplotlib cividis",
+      "family": "Matplotlib perceptually uniform",
+      "type": "sequential",
+      "colors": [
+        "#00224E",
+        "#1A386F",
+        "#434E6C",
+        "#61656F",
+        "#7D7C78",
+        "#9A9376",
+        "#BBAD6D",
+        "#DDC858",
+        "#FEE838"
+      ],
+      "recommended_for": [
+        "continuous scalar data",
+        "color vision accessibility focused heatmaps"
+      ],
+      "avoid_for": [
+        "unordered categories",
+        "official brand colors",
+        "small discrete legends unless sampled deliberately"
+      ],
+      "colorblind_safe": {
+        "status": "generally_accessible",
+        "notes": "Use as colormaps; sampled values are provided for prompt/tool portability."
+      },
+      "provenance_status": "sampled_verified",
+      "origins": [
+        {
+          "name": "Matplotlib",
+          "url": "https://github.com/matplotlib/matplotlib",
+          "access_date": "2026-07-16",
+          "usage": "sampled",
+          "license_note": "Matplotlib license; individual colormap provenance notes are preserved upstream where applicable.",
+          "repo_commit": "63bd095608a65ff6f33112009797b66cadab7f06",
+          "source_path": "lib/matplotlib/_cm_listed.py"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "sampling": {
+        "method": "evenly sampled inclusive endpoints",
+        "sample_count": 9
+      }
+    },
+    {
+      "id": "twilight",
+      "legacy_ids": [
+        "matplotlib_twilight",
+        "mpl_twilight"
+      ],
+      "name": "Matplotlib twilight",
+      "family": "Matplotlib cyclic",
+      "type": "cyclic",
+      "colors": [
+        "#E2D9E2",
+        "#ADC3CD",
+        "#7499C1",
+        "#6068B6",
+        "#5B3196",
+        "#3E1150",
+        "#41123D",
+        "#7B2150",
+        "#A94950",
+        "#C37F64",
+        "#D2B7A5",
+        "#E2D9E2"
+      ],
+      "recommended_for": [
+        "cyclic phase data",
+        "wrapped angular variables"
+      ],
+      "avoid_for": [
+        "unordered categories",
+        "official brand colors",
+        "small discrete legends unless sampled deliberately"
+      ],
+      "colorblind_safe": {
+        "status": "not_guaranteed",
+        "notes": "Use as colormaps; sampled values are provided for prompt/tool portability."
+      },
+      "provenance_status": "sampled_verified",
+      "origins": [
+        {
+          "name": "Matplotlib",
+          "url": "https://github.com/matplotlib/matplotlib",
+          "access_date": "2026-07-16",
+          "usage": "sampled",
+          "license_note": "Matplotlib license; individual colormap provenance notes are preserved upstream where applicable.",
+          "repo_commit": "63bd095608a65ff6f33112009797b66cadab7f06",
+          "source_path": "lib/matplotlib/_cm_listed.py"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "sampling": {
+        "method": "evenly sampled inclusive endpoints",
+        "sample_count": 12
+      }
+    },
+    {
+      "id": "coolwarm",
+      "legacy_ids": [
+        "matplotlib_coolwarm",
+        "mpl_coolwarm"
+      ],
+      "name": "Matplotlib coolwarm",
+      "family": "Matplotlib diverging",
+      "type": "diverging",
+      "colors": [
+        "#3B4CC0",
+        "#5978E3",
+        "#7B9FF9",
+        "#9FBEFF",
+        "#C0D4F5",
+        "#DDDDDD",
+        "#F2CBB7",
+        "#F7AD8F",
+        "#EE8468",
+        "#D75344",
+        "#B40426"
+      ],
+      "recommended_for": [
+        "signed deviations around a midpoint",
+        "scientific diverging scalar fields"
+      ],
+      "avoid_for": [
+        "unordered categories",
+        "red-green replacement where stronger CVD guarantees are required"
+      ],
+      "colorblind_safe": {
+        "status": "not_guaranteed",
+        "notes": "Use only with a clear centered midpoint and grayscale/CVD review."
+      },
+      "provenance_status": "sampled_verified",
+      "origins": [
+        {
+          "name": "Matplotlib",
+          "url": "https://github.com/matplotlib/matplotlib",
+          "access_date": "2026-07-16",
+          "usage": "sampled",
+          "license_note": "Matplotlib license; individual colormap provenance notes are preserved upstream where applicable.",
+          "repo_commit": "63bd095608a65ff6f33112009797b66cadab7f06",
+          "source_path": "lib/matplotlib/_cm.py"
+        }
+      ],
+      "stability": "stable",
+      "core": true,
+      "sampling": {
+        "method": "linear interpolation from cloned segmented colormap data",
+        "sample_count": 11
+      }
+    }
+  ]
+}

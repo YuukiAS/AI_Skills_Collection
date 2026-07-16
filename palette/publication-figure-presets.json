@@ -1,0 +1,104 @@
+{
+  "version": "1.0.0",
+  "source": "palette/scientific-figure-palettes.json",
+  "scope": "publication-ready scientific figures",
+  "presets": [
+    {
+      "id": "top_conference_default",
+      "name": "Top conference default",
+      "palette_ids": {
+        "categorical": "okabe_ito",
+        "sequential": "viridis",
+        "diverging": "RdBu",
+        "cyclic": "twilight"
+      },
+      "recommended_for": [
+        "ML/AI conference papers",
+        "general scientific manuscripts",
+        "camera-ready figures"
+      ],
+      "checks": [
+        "Verify colorblind accessibility and grayscale readability.",
+        "Use redundant marker or line encodings for categorical series.",
+        "Export line art as PDF/SVG and raster images at 300+ dpi."
+      ]
+    },
+    {
+      "id": "journal_inspired_nonofficial",
+      "name": "Journal-inspired non-official",
+      "palette_ids": {
+        "categorical": "nature_npg",
+        "sequential": "cividis",
+        "diverging": "BrBG"
+      },
+      "recommended_for": [
+        "journal-style manuscript figures",
+        "visual style exploration before final submission"
+      ],
+      "checks": [
+        "Do not describe these palettes as official publisher branding.",
+        "Confirm the journal does not require stricter color conventions.",
+        "Run accessibility checks before submission."
+      ]
+    },
+    {
+      "id": "clinical_journal_inspired",
+      "name": "Clinical journal-inspired",
+      "palette_ids": {
+        "categorical": "jama",
+        "backup_categorical": "nejm",
+        "sequential": "Blues",
+        "diverging": "RdBu"
+      },
+      "recommended_for": [
+        "clinical figures",
+        "survival curves",
+        "cohort comparison plots"
+      ],
+      "checks": [
+        "Use direct labeling where possible.",
+        "Avoid relying on color alone for treatment arms.",
+        "Keep non-official journal-inspired disclaimer in documentation."
+      ]
+    },
+    {
+      "id": "heatmap_continuous",
+      "name": "Continuous heatmap",
+      "palette_ids": {
+        "sequential_primary": "viridis",
+        "sequential_accessible": "cividis",
+        "sequential_alternative": "magma"
+      },
+      "recommended_for": [
+        "expression heatmaps",
+        "density matrices",
+        "single-direction scalar fields"
+      ],
+      "checks": [
+        "Use a labeled colorbar with units.",
+        "Do not use diverging palettes unless the data has a real midpoint.",
+        "Avoid rainbow and jet colormaps."
+      ]
+    },
+    {
+      "id": "diverging_centered",
+      "name": "Centered diverging",
+      "palette_ids": {
+        "diverging_primary": "RdBu",
+        "diverging_alternative": "BrBG",
+        "diverging_orange_purple": "PuOr",
+        "matplotlib_reference": "coolwarm"
+      },
+      "recommended_for": [
+        "signed model residuals",
+        "correlation heatmaps",
+        "difference maps centered at zero"
+      ],
+      "checks": [
+        "Set the visual center to the scientifically meaningful midpoint.",
+        "Label the midpoint and colorbar range.",
+        "Do not use for unordered categories."
+      ]
+    }
+  ]
+}

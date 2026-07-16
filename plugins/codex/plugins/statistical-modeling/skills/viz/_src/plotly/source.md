@@ -89,6 +89,15 @@ Plotly supports 40+ chart types organized into categories:
 
 For detailed examples and usage of all chart types, see [reference/chart-types.md](reference/chart-types.md).
 
+### Canonical Scientific Palettes
+
+For interactive paper supplements, exploratory dashboards tied to manuscript
+figures, or static Plotly export, use the canonical scientific palette library
+instead of ad hoc Plotly defaults. In this repo, generate snippets with `python
+scripts/palette.py snippet <palette-id> --target plotly`; inside the
+`scientific-visualization` plugin, read
+`../../shared/palette/scientific-figure-palettes.json`.
+
 ### 2. Layouts and Styling
 
 **Subplots:** Create multi-plot figures with shared axes:

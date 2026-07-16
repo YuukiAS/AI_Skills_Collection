@@ -672,6 +672,10 @@ def aggregate_skill_markdown(entry: dict[str, Any], sources: list[dict[str, Any]
             lines.append(f"- `{source_name}`: {source_desc} Reference: `{ref}`")
         else:
             lines.append(f"- `{source_name}`. Reference: `{ref}`")
+    workflow_notes = [str(note) for note in entry.get("workflow_notes", [])] if isinstance(entry.get("workflow_notes"), list) else []
+    if workflow_notes:
+        lines.extend(["", "## Plugin Workflow Notes", ""])
+        lines.extend(f"- {note}" for note in workflow_notes)
     lines.extend(
         [
             "",

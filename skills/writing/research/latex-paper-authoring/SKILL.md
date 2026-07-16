@@ -40,6 +40,9 @@ Use this when the source format and compilation path matter. Prefer `scientific-
 4. Preserve template-required commands and class files.
 5. After edits, compile or provide an explicit reason compilation was not run.
 6. Report warnings that affect submission: missing figures, unresolved refs, undefined citations, overfull boxes in visible areas, non-portable paths, and shell-escape dependencies.
+7. Route figure palette choice, plot snippets, color accessibility, and publication
+   figure export QA to `scientific-visualization`; keep this skill focused on
+   LaTeX source structure and compilation.
 
 ## arXiv And Submission Checks
 
@@ -47,6 +50,8 @@ Use this when the source format and compilation path matter. Prefer `scientific-
 - Keep source package small and reproducible.
 - Include `.bbl` when the target requires it.
 - Ensure figure formats are accepted by the venue.
+- Ensure any journal-inspired figure palette is documented as non-official and
+  sourced from the canonical scientific palette library.
 - Check that generated files are not treated as authoritative manuscript source.
 
 ## Boundaries

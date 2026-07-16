@@ -25,6 +25,10 @@ Use three layers:
 2. Semantic tokens: purpose aliases such as background, foreground, primary, muted.
 3. Component tokens: button, card, input, table, nav, chart, and dialog values.
 
+For product or UI color, use semantic tokens rather than direct academic
+palette ids. Scientific palettes from `palette/` may be referenced only after
+mapping them into chart/data-visualization tokens with clear roles.
+
 ## Required Token Groups
 
 - Color: background, foreground, muted, border, primary, secondary, accent, danger, success, warning.

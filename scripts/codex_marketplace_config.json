@@ -1,7 +1,7 @@
 {
   "name": "yuukias-ai-skills",
   "displayName": "YuukiAS AI Skills",
-  "marketplacePluginBudget": 9,
+  "marketplacePluginBudget": 10,
   "plugins": [
     {
       "name": "workflow-core",
@@ -199,6 +199,82 @@
       ]
     },
     {
+      "name": "scientific-visualization",
+      "version": "3.6.0",
+      "displayName": "Scientific Visualization",
+      "description": "Publication-ready scientific figures, canonical research palettes, plotting snippets, schematics, posters, and venue figure QA.",
+      "category": "Research",
+      "brandColor": "#0E7490",
+      "composerIcon": "./assets/codex/plugin-icons/scientific-visualization/composer.svg",
+      "logo": "./assets/codex/plugin-icons/scientific-visualization/composer.svg",
+      "shared": [
+        {
+          "source": "palette",
+          "target": "shared/palette"
+        },
+        {
+          "source": "scripts/palette_library.py",
+          "target": "shared/scripts/palette_library.py"
+        },
+        {
+          "source": "scripts/palette.py",
+          "target": "shared/scripts/palette.py"
+        }
+      ],
+      "defaultPrompt": [
+        "Choose a publication-ready palette for this figure.",
+        "Generate matplotlib or seaborn code for a paper figure.",
+        "Audit this figure for color, export, and venue readiness.",
+        "Prepare a top-conference figure style plan."
+      ],
+      "skills": [
+        {
+          "type": "aggregate",
+          "name": "scientific-visualization",
+          "artifact_id": "figures",
+          "description": "Publication-ready figures, canonical scientific palettes, Matplotlib/Seaborn/Plotly snippets, schematics, posters, and venue figure QA for papers and top conferences.",
+          "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
+          "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
+          "workflow_notes": [
+            "For palette selection, first read `../../shared/palette/scientific-figure-palettes.json` and `../../shared/palette/ROUTING.md` when running inside this plugin.",
+            "In the source repository, use `palette/scientific-figure-palettes.json` and the read-only CLI `python scripts/palette.py`.",
+            "Use journal-inspired palettes only as non-official visual inspiration and preserve the disclaimer in figure guidance.",
+            "Route manuscript-level figure policy to research-writing, but route figure color, plot code, and visual QA here."
+          ],
+          "source_skills": [
+            {
+              "source": "skills/science/communication/scientific-visualization",
+              "artifact_id": "publication"
+            },
+            {
+              "source": "skills/tools/visualization/matplotlib",
+              "artifact_id": "mpl"
+            },
+            {
+              "source": "skills/tools/visualization/seaborn",
+              "artifact_id": "seaborn"
+            },
+            {
+              "source": "skills/tools/visualization/plotly",
+              "artifact_id": "plotly"
+            },
+            {
+              "source": "skills/science/communication/scientific-schematics",
+              "artifact_id": "schematics"
+            },
+            {
+              "source": "skills/science/communication/latex-posters",
+              "artifact_id": "posters"
+            },
+            {
+              "source": "skills/writing/research/venue-templates",
+              "artifact_id": "venue"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "web-development",
       "version": "3.6.0",
       "displayName": "Web Development",
@@ -334,9 +410,9 @@
         },
         {
           "type": "aggregate",
-          "name": "scientific-visualization",
+          "name": "statistical-visualization",
           "artifact_id": "viz",
-          "description": "Scientific plotting and visualization with Matplotlib and Plotly.",
+          "description": "Statistical result visualization with Matplotlib and Plotly. For publication-ready figure palettes, venue figure QA, and manuscript figure styling, use the scientific-visualization plugin.",
           "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
           "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
           "source_skills": [

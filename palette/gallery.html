@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scientific Figure Palettes</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f8fafc;
+      --fg: #0f172a;
+      --muted: #475569;
+      --card: #ffffff;
+      --border: #cbd5e1;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    h1 {
+      font-size: 28px;
+      margin: 0 0 8px;
+    }
+    .lead {
+      margin: 0 0 24px;
+      color: var(--muted);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .meta h2 {
+      font-size: 16px;
+      margin: 0;
+      margin-right: auto;
+    }
+    .meta span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .swatches {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+      height: 32px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .swatch {
+      display: block;
+      min-width: 10px;
+    }
+    p {
+      margin: 10px 0 0;
+      font-size: 13px;
+    }
+    .disclaimer {
+      color: #9a3412;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Scientific Figure Palettes</h1>
+  <p class="lead">Canonical palette preview generated from palette/scientific-figure-palettes.json.</p>
+  <div class="grid">
+    
+<section class="card">
+  <div class="meta">
+    <h2>okabe_ito</h2>
+    <span>categorical</span>
+    <span>8 colors</span>
+    <span>referenced_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#E69F00" style="background:#E69F00"></span><span class="swatch" title="#56B4E9" style="background:#56B4E9"></span><span class="swatch" title="#009E73" style="background:#009E73"></span><span class="swatch" title="#F0E442" style="background:#F0E442"></span><span class="swatch" title="#0072B2" style="background:#0072B2"></span><span class="swatch" title="#D55E00" style="background:#D55E00"></span><span class="swatch" title="#CC79A7" style="background:#CC79A7"></span><span class="swatch" title="#000000" style="background:#000000"></span></div>
+  <p><strong>Okabe-Ito / Color Universal Design</strong> · colorblind-safe categorical</p>
+  <p>category series in scientific figures; line plots with redundant encodings; publication figures that must survive color vision differences</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>nature_npg</h2>
+    <span>categorical</span>
+    <span>10 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#E64B35" style="background:#E64B35"></span><span class="swatch" title="#4DBBD5" style="background:#4DBBD5"></span><span class="swatch" title="#00A087" style="background:#00A087"></span><span class="swatch" title="#3C5488" style="background:#3C5488"></span><span class="swatch" title="#F39B7F" style="background:#F39B7F"></span><span class="swatch" title="#8491B4" style="background:#8491B4"></span><span class="swatch" title="#91D1C2" style="background:#91D1C2"></span><span class="swatch" title="#DC0000" style="background:#DC0000"></span><span class="swatch" title="#7E6148" style="background:#7E6148"></span><span class="swatch" title="#B09C85" style="background:#B09C85"></span></div>
+  <p><strong>Nature Publishing Group inspired</strong> · journal-inspired categorical</p>
+  <p>journal-style categorical figures; manuscript plots needing restrained categorical contrast</p>
+  <p class="disclaimer">Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci.</p>
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>science_aaas</h2>
+    <span>categorical</span>
+    <span>10 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#3B4992" style="background:#3B4992"></span><span class="swatch" title="#EE0000" style="background:#EE0000"></span><span class="swatch" title="#008B45" style="background:#008B45"></span><span class="swatch" title="#631879" style="background:#631879"></span><span class="swatch" title="#008280" style="background:#008280"></span><span class="swatch" title="#BB0021" style="background:#BB0021"></span><span class="swatch" title="#5F559B" style="background:#5F559B"></span><span class="swatch" title="#A20056" style="background:#A20056"></span><span class="swatch" title="#808180" style="background:#808180"></span><span class="swatch" title="#1B1919" style="background:#1B1919"></span></div>
+  <p><strong>Science AAAS inspired</strong> · journal-inspired categorical</p>
+  <p>journal-style categorical figures; manuscript plots needing restrained categorical contrast</p>
+  <p class="disclaimer">Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci.</p>
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>nejm</h2>
+    <span>categorical</span>
+    <span>8 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#BC3C29" style="background:#BC3C29"></span><span class="swatch" title="#0072B5" style="background:#0072B5"></span><span class="swatch" title="#E18727" style="background:#E18727"></span><span class="swatch" title="#20854E" style="background:#20854E"></span><span class="swatch" title="#7876B1" style="background:#7876B1"></span><span class="swatch" title="#6F99AD" style="background:#6F99AD"></span><span class="swatch" title="#FFDC91" style="background:#FFDC91"></span><span class="swatch" title="#EE4C97" style="background:#EE4C97"></span></div>
+  <p><strong>New England Journal of Medicine inspired</strong> · journal-inspired categorical</p>
+  <p>journal-style categorical figures; manuscript plots needing restrained categorical contrast</p>
+  <p class="disclaimer">Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci.</p>
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>lancet</h2>
+    <span>categorical</span>
+    <span>9 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#00468B" style="background:#00468B"></span><span class="swatch" title="#ED0000" style="background:#ED0000"></span><span class="swatch" title="#42B540" style="background:#42B540"></span><span class="swatch" title="#0099B4" style="background:#0099B4"></span><span class="swatch" title="#925E9F" style="background:#925E9F"></span><span class="swatch" title="#FDAF91" style="background:#FDAF91"></span><span class="swatch" title="#AD002A" style="background:#AD002A"></span><span class="swatch" title="#ADB6B6" style="background:#ADB6B6"></span><span class="swatch" title="#1B1919" style="background:#1B1919"></span></div>
+  <p><strong>Lancet Oncology inspired</strong> · journal-inspired categorical</p>
+  <p>journal-style categorical figures; manuscript plots needing restrained categorical contrast</p>
+  <p class="disclaimer">Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci.</p>
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>jama</h2>
+    <span>categorical</span>
+    <span>7 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#374E55" style="background:#374E55"></span><span class="swatch" title="#DF8F44" style="background:#DF8F44"></span><span class="swatch" title="#00A1D5" style="background:#00A1D5"></span><span class="swatch" title="#B24745" style="background:#B24745"></span><span class="swatch" title="#79AF97" style="background:#79AF97"></span><span class="swatch" title="#6A6599" style="background:#6A6599"></span><span class="swatch" title="#80796B" style="background:#80796B"></span></div>
+  <p><strong>JAMA inspired</strong> · journal-inspired categorical</p>
+  <p>journal-style categorical figures; manuscript plots needing restrained categorical contrast</p>
+  <p class="disclaimer">Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci.</p>
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>bmj</h2>
+    <span>categorical</span>
+    <span>9 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#2A6EBB" style="background:#2A6EBB"></span><span class="swatch" title="#F0AB00" style="background:#F0AB00"></span><span class="swatch" title="#C50084" style="background:#C50084"></span><span class="swatch" title="#7D5CC6" style="background:#7D5CC6"></span><span class="swatch" title="#E37222" style="background:#E37222"></span><span class="swatch" title="#69BE28" style="background:#69BE28"></span><span class="swatch" title="#00B2A9" style="background:#00B2A9"></span><span class="swatch" title="#CD202C" style="background:#CD202C"></span><span class="swatch" title="#747678" style="background:#747678"></span></div>
+  <p><strong>BMJ living style guide inspired</strong> · journal-inspired categorical</p>
+  <p>journal-style categorical figures; manuscript plots needing restrained categorical contrast</p>
+  <p class="disclaimer">Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci.</p>
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>jco</h2>
+    <span>categorical</span>
+    <span>10 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#0073C2" style="background:#0073C2"></span><span class="swatch" title="#EFC000" style="background:#EFC000"></span><span class="swatch" title="#868686" style="background:#868686"></span><span class="swatch" title="#CD534C" style="background:#CD534C"></span><span class="swatch" title="#7AA6DC" style="background:#7AA6DC"></span><span class="swatch" title="#003C67" style="background:#003C67"></span><span class="swatch" title="#8F7700" style="background:#8F7700"></span><span class="swatch" title="#3B3B3B" style="background:#3B3B3B"></span><span class="swatch" title="#A73030" style="background:#A73030"></span><span class="swatch" title="#4A6990" style="background:#4A6990"></span></div>
+  <p><strong>Journal of Clinical Oncology inspired</strong> · journal-inspired categorical</p>
+  <p>journal-style categorical figures; manuscript plots needing restrained categorical contrast</p>
+  <p class="disclaimer">Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci.</p>
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>Dark2</h2>
+    <span>categorical</span>
+    <span>8 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#1B9E77" style="background:#1B9E77"></span><span class="swatch" title="#D95F02" style="background:#D95F02"></span><span class="swatch" title="#7570B3" style="background:#7570B3"></span><span class="swatch" title="#E7298A" style="background:#E7298A"></span><span class="swatch" title="#66A61E" style="background:#66A61E"></span><span class="swatch" title="#E6AB02" style="background:#E6AB02"></span><span class="swatch" title="#A6761D" style="background:#A6761D"></span><span class="swatch" title="#666666" style="background:#666666"></span></div>
+  <p><strong>ColorBrewer qualitative Dark2</strong> · ColorBrewer qualitative</p>
+  <p>categorical scientific charts; moderate-count qualitative groups</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>Set2</h2>
+    <span>categorical</span>
+    <span>8 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#66C2A5" style="background:#66C2A5"></span><span class="swatch" title="#FC8D62" style="background:#FC8D62"></span><span class="swatch" title="#8DA0CB" style="background:#8DA0CB"></span><span class="swatch" title="#E78AC3" style="background:#E78AC3"></span><span class="swatch" title="#A6D854" style="background:#A6D854"></span><span class="swatch" title="#FFD92F" style="background:#FFD92F"></span><span class="swatch" title="#E5C494" style="background:#E5C494"></span><span class="swatch" title="#B3B3B3" style="background:#B3B3B3"></span></div>
+  <p><strong>ColorBrewer qualitative Set2</strong> · ColorBrewer qualitative</p>
+  <p>soft categorical scientific charts; filled regions and boxplots</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>Paired</h2>
+    <span>categorical</span>
+    <span>12 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#A6CEE3" style="background:#A6CEE3"></span><span class="swatch" title="#1F78B4" style="background:#1F78B4"></span><span class="swatch" title="#B2DF8A" style="background:#B2DF8A"></span><span class="swatch" title="#33A02C" style="background:#33A02C"></span><span class="swatch" title="#FB9A99" style="background:#FB9A99"></span><span class="swatch" title="#E31A1C" style="background:#E31A1C"></span><span class="swatch" title="#FDBF6F" style="background:#FDBF6F"></span><span class="swatch" title="#FF7F00" style="background:#FF7F00"></span><span class="swatch" title="#CAB2D6" style="background:#CAB2D6"></span><span class="swatch" title="#6A3D9A" style="background:#6A3D9A"></span><span class="swatch" title="#FFFF99" style="background:#FFFF99"></span><span class="swatch" title="#B15928" style="background:#B15928"></span></div>
+  <p><strong>ColorBrewer qualitative Paired</strong> · ColorBrewer qualitative</p>
+  <p>paired categories; case/control or before/after grouped series</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>Blues</h2>
+    <span>sequential</span>
+    <span>9 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#F7FBFF" style="background:#F7FBFF"></span><span class="swatch" title="#DEEBF7" style="background:#DEEBF7"></span><span class="swatch" title="#C6DBEF" style="background:#C6DBEF"></span><span class="swatch" title="#9ECAE1" style="background:#9ECAE1"></span><span class="swatch" title="#6BAED6" style="background:#6BAED6"></span><span class="swatch" title="#4292C6" style="background:#4292C6"></span><span class="swatch" title="#2171B5" style="background:#2171B5"></span><span class="swatch" title="#08519C" style="background:#08519C"></span><span class="swatch" title="#08306B" style="background:#08306B"></span></div>
+  <p><strong>ColorBrewer sequential Blues</strong> · ColorBrewer sequential</p>
+  <p>single-direction magnitudes; density or rate maps</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>YlGnBu</h2>
+    <span>sequential</span>
+    <span>9 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#FFFFD9" style="background:#FFFFD9"></span><span class="swatch" title="#EDF8B1" style="background:#EDF8B1"></span><span class="swatch" title="#C7E9B4" style="background:#C7E9B4"></span><span class="swatch" title="#7FCDBB" style="background:#7FCDBB"></span><span class="swatch" title="#41B6C4" style="background:#41B6C4"></span><span class="swatch" title="#1D91C0" style="background:#1D91C0"></span><span class="swatch" title="#225EA8" style="background:#225EA8"></span><span class="swatch" title="#253494" style="background:#253494"></span><span class="swatch" title="#081D58" style="background:#081D58"></span></div>
+  <p><strong>ColorBrewer sequential YlGnBu</strong> · ColorBrewer sequential</p>
+  <p>single-direction magnitudes; maps and heatmaps where yellow low values are acceptable</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>OrRd</h2>
+    <span>sequential</span>
+    <span>9 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#FFF7EC" style="background:#FFF7EC"></span><span class="swatch" title="#FEE8C8" style="background:#FEE8C8"></span><span class="swatch" title="#FDD49E" style="background:#FDD49E"></span><span class="swatch" title="#FDBB84" style="background:#FDBB84"></span><span class="swatch" title="#FC8D59" style="background:#FC8D59"></span><span class="swatch" title="#EF6548" style="background:#EF6548"></span><span class="swatch" title="#D7301F" style="background:#D7301F"></span><span class="swatch" title="#B30000" style="background:#B30000"></span><span class="swatch" title="#7F0000" style="background:#7F0000"></span></div>
+  <p><strong>ColorBrewer sequential OrRd</strong> · ColorBrewer sequential</p>
+  <p>single-direction magnitudes; risk or intensity maps</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>RdBu</h2>
+    <span>diverging</span>
+    <span>11 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#67001F" style="background:#67001F"></span><span class="swatch" title="#B2182B" style="background:#B2182B"></span><span class="swatch" title="#D6604D" style="background:#D6604D"></span><span class="swatch" title="#F4A582" style="background:#F4A582"></span><span class="swatch" title="#FDDBC7" style="background:#FDDBC7"></span><span class="swatch" title="#F7F7F7" style="background:#F7F7F7"></span><span class="swatch" title="#D1E5F0" style="background:#D1E5F0"></span><span class="swatch" title="#92C5DE" style="background:#92C5DE"></span><span class="swatch" title="#4393C3" style="background:#4393C3"></span><span class="swatch" title="#2166AC" style="background:#2166AC"></span><span class="swatch" title="#053061" style="background:#053061"></span></div>
+  <p><strong>ColorBrewer diverging RdBu</strong> · ColorBrewer diverging</p>
+  <p>signed deviations around a midpoint; correlation heatmaps with center zero</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>BrBG</h2>
+    <span>diverging</span>
+    <span>11 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#543005" style="background:#543005"></span><span class="swatch" title="#8C510A" style="background:#8C510A"></span><span class="swatch" title="#BF812D" style="background:#BF812D"></span><span class="swatch" title="#DFC27D" style="background:#DFC27D"></span><span class="swatch" title="#F6E8C3" style="background:#F6E8C3"></span><span class="swatch" title="#F5F5F5" style="background:#F5F5F5"></span><span class="swatch" title="#C7EAE5" style="background:#C7EAE5"></span><span class="swatch" title="#80CDC1" style="background:#80CDC1"></span><span class="swatch" title="#35978F" style="background:#35978F"></span><span class="swatch" title="#01665E" style="background:#01665E"></span><span class="swatch" title="#003C30" style="background:#003C30"></span></div>
+  <p><strong>ColorBrewer diverging BrBG</strong> · ColorBrewer diverging</p>
+  <p>signed deviations around a midpoint; environmental or terrain-like contrasts</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>PuOr</h2>
+    <span>diverging</span>
+    <span>11 colors</span>
+    <span>copied_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#7F3B08" style="background:#7F3B08"></span><span class="swatch" title="#B35806" style="background:#B35806"></span><span class="swatch" title="#E08214" style="background:#E08214"></span><span class="swatch" title="#FDB863" style="background:#FDB863"></span><span class="swatch" title="#FEE0B6" style="background:#FEE0B6"></span><span class="swatch" title="#F7F7F7" style="background:#F7F7F7"></span><span class="swatch" title="#D8DAEB" style="background:#D8DAEB"></span><span class="swatch" title="#B2ABD2" style="background:#B2ABD2"></span><span class="swatch" title="#8073AC" style="background:#8073AC"></span><span class="swatch" title="#542788" style="background:#542788"></span><span class="swatch" title="#2D004B" style="background:#2D004B"></span></div>
+  <p><strong>ColorBrewer diverging PuOr</strong> · ColorBrewer diverging</p>
+  <p>signed deviations around a midpoint; red-green-safe diverging alternatives</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>viridis</h2>
+    <span>sequential</span>
+    <span>9 colors</span>
+    <span>sampled_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#440154" style="background:#440154"></span><span class="swatch" title="#472D7B" style="background:#472D7B"></span><span class="swatch" title="#3B528B" style="background:#3B528B"></span><span class="swatch" title="#2C728E" style="background:#2C728E"></span><span class="swatch" title="#21918C" style="background:#21918C"></span><span class="swatch" title="#27AD81" style="background:#27AD81"></span><span class="swatch" title="#5CC863" style="background:#5CC863"></span><span class="swatch" title="#AADC32" style="background:#AADC32"></span><span class="swatch" title="#FDE725" style="background:#FDE725"></span></div>
+  <p><strong>Matplotlib viridis</strong> · Matplotlib perceptually uniform</p>
+  <p>continuous scalar data; heatmaps; colorbars that must print well</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>plasma</h2>
+    <span>sequential</span>
+    <span>9 colors</span>
+    <span>sampled_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#0D0887" style="background:#0D0887"></span><span class="swatch" title="#4C02A1" style="background:#4C02A1"></span><span class="swatch" title="#7E03A8" style="background:#7E03A8"></span><span class="swatch" title="#AA2395" style="background:#AA2395"></span><span class="swatch" title="#CC4778" style="background:#CC4778"></span><span class="swatch" title="#E56B5D" style="background:#E56B5D"></span><span class="swatch" title="#F89441" style="background:#F89441"></span><span class="swatch" title="#FDC328" style="background:#FDC328"></span><span class="swatch" title="#F0F921" style="background:#F0F921"></span></div>
+  <p><strong>Matplotlib plasma</strong> · Matplotlib perceptually uniform</p>
+  <p>continuous scalar data; high-contrast heatmaps</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>inferno</h2>
+    <span>sequential</span>
+    <span>9 colors</span>
+    <span>sampled_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#000004" style="background:#000004"></span><span class="swatch" title="#210C4A" style="background:#210C4A"></span><span class="swatch" title="#57106E" style="background:#57106E"></span><span class="swatch" title="#8A226A" style="background:#8A226A"></span><span class="swatch" title="#BC3754" style="background:#BC3754"></span><span class="swatch" title="#E35933" style="background:#E35933"></span><span class="swatch" title="#F98C0A" style="background:#F98C0A"></span><span class="swatch" title="#F9C932" style="background:#F9C932"></span><span class="swatch" title="#FCFFA4" style="background:#FCFFA4"></span></div>
+  <p><strong>Matplotlib inferno</strong> · Matplotlib perceptually uniform</p>
+  <p>continuous scalar data; dark-to-light intensity maps</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>magma</h2>
+    <span>sequential</span>
+    <span>9 colors</span>
+    <span>sampled_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#000004" style="background:#000004"></span><span class="swatch" title="#1D1147" style="background:#1D1147"></span><span class="swatch" title="#51127C" style="background:#51127C"></span><span class="swatch" title="#832681" style="background:#832681"></span><span class="swatch" title="#B73779" style="background:#B73779"></span><span class="swatch" title="#E55064" style="background:#E55064"></span><span class="swatch" title="#FB8761" style="background:#FB8761"></span><span class="swatch" title="#FEC287" style="background:#FEC287"></span><span class="swatch" title="#FCFDBF" style="background:#FCFDBF"></span></div>
+  <p><strong>Matplotlib magma</strong> · Matplotlib perceptually uniform</p>
+  <p>continuous scalar data; dark-to-light intensity maps</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>cividis</h2>
+    <span>sequential</span>
+    <span>9 colors</span>
+    <span>sampled_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#00224E" style="background:#00224E"></span><span class="swatch" title="#1A386F" style="background:#1A386F"></span><span class="swatch" title="#434E6C" style="background:#434E6C"></span><span class="swatch" title="#61656F" style="background:#61656F"></span><span class="swatch" title="#7D7C78" style="background:#7D7C78"></span><span class="swatch" title="#9A9376" style="background:#9A9376"></span><span class="swatch" title="#BBAD6D" style="background:#BBAD6D"></span><span class="swatch" title="#DDC858" style="background:#DDC858"></span><span class="swatch" title="#FEE838" style="background:#FEE838"></span></div>
+  <p><strong>Matplotlib cividis</strong> · Matplotlib perceptually uniform</p>
+  <p>continuous scalar data; color vision accessibility focused heatmaps</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>twilight</h2>
+    <span>cyclic</span>
+    <span>12 colors</span>
+    <span>sampled_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#E2D9E2" style="background:#E2D9E2"></span><span class="swatch" title="#ADC3CD" style="background:#ADC3CD"></span><span class="swatch" title="#7499C1" style="background:#7499C1"></span><span class="swatch" title="#6068B6" style="background:#6068B6"></span><span class="swatch" title="#5B3196" style="background:#5B3196"></span><span class="swatch" title="#3E1150" style="background:#3E1150"></span><span class="swatch" title="#41123D" style="background:#41123D"></span><span class="swatch" title="#7B2150" style="background:#7B2150"></span><span class="swatch" title="#A94950" style="background:#A94950"></span><span class="swatch" title="#C37F64" style="background:#C37F64"></span><span class="swatch" title="#D2B7A5" style="background:#D2B7A5"></span><span class="swatch" title="#E2D9E2" style="background:#E2D9E2"></span></div>
+  <p><strong>Matplotlib twilight</strong> · Matplotlib cyclic</p>
+  <p>cyclic phase data; wrapped angular variables</p>
+  
+</section>
+<section class="card">
+  <div class="meta">
+    <h2>coolwarm</h2>
+    <span>diverging</span>
+    <span>11 colors</span>
+    <span>sampled_verified</span>
+  </div>
+  <div class="swatches"><span class="swatch" title="#3B4CC0" style="background:#3B4CC0"></span><span class="swatch" title="#5978E3" style="background:#5978E3"></span><span class="swatch" title="#7B9FF9" style="background:#7B9FF9"></span><span class="swatch" title="#9FBEFF" style="background:#9FBEFF"></span><span class="swatch" title="#C0D4F5" style="background:#C0D4F5"></span><span class="swatch" title="#DDDDDD" style="background:#DDDDDD"></span><span class="swatch" title="#F2CBB7" style="background:#F2CBB7"></span><span class="swatch" title="#F7AD8F" style="background:#F7AD8F"></span><span class="swatch" title="#EE8468" style="background:#EE8468"></span><span class="swatch" title="#D75344" style="background:#D75344"></span><span class="swatch" title="#B40426" style="background:#B40426"></span></div>
+  <p><strong>Matplotlib coolwarm</strong> · Matplotlib diverging</p>
+  <p>signed deviations around a midpoint; scientific diverging scalar fields</p>
+  
+</section>
+  </div>
+</main>
+</body>
+</html>

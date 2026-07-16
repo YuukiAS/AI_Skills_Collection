@@ -40,8 +40,11 @@ Use this for Nature-family manuscript strategy. It complements general `scientif
    - missing source data or code availability;
    - vague data availability statements;
    - terminology drift between title, abstract, results, figures, and discussion.
-4. Draft or revise in this order: title/abstract framing, figure logic, results narrative, discussion boundaries, methods/data availability, cover or rebuttal text.
-5. Before delivery, list unresolved policy or evidence checks that require the journal's current instructions.
+4. Route palette choice, figure color accessibility, and publication-ready plot
+   snippets to `scientific-visualization`; journal-inspired palettes must remain
+   non-official visual inspiration rather than Nature branding.
+5. Draft or revise in this order: title/abstract framing, figure logic, results narrative, discussion boundaries, methods/data availability, cover or rebuttal text.
+6. Before delivery, list unresolved policy or evidence checks that require the journal's current instructions.
 
 ## Data Availability
 

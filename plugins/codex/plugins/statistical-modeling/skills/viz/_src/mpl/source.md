@@ -185,6 +185,12 @@ For comprehensive plot type examples and variations, refer to `references/plot_t
 - RGB tuples: `(0.1, 0.2, 0.3)`
 - Colormaps: `cmap='viridis'`, `cmap='plasma'`, `cmap='coolwarm'`
 
+For publication figures, prefer the canonical scientific palette library over
+ad hoc colors. In this repo, inspect palettes with `python scripts/palette.py
+list` and generate code with `python scripts/palette.py snippet <palette-id>
+--target matplotlib`. Inside the `scientific-visualization` plugin, use the
+shared payload at `../../shared/palette/scientific-figure-palettes.json`.
+
 **Using style sheets:**
 ```python
 plt.style.use('seaborn-v0_8-darkgrid')  # Apply predefined style

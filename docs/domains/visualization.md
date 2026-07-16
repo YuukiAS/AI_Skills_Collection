@@ -41,4 +41,6 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Main References
 
-- No domain references discovered yet. Add `references/source-notes.md`, checklists, or overview notes when the skill carries long-lived domain knowledge.
+- `palette/README.md`: canonical scientific figure palette entry point.
+- `palette/ROUTING.md`: boundary between scientific palettes, presentation themes, and frontend semantic tokens.
+- `palette/PROVENANCE.md`: upstream source commits, access dates, license notes, and copied palette ids.

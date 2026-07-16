@@ -1,6 +1,6 @@
 ---
-name: scientific-visualization
-description: Scientific plotting and visualization with Matplotlib and Plotly.
+name: statistical-visualization
+description: Statistical result visualization with Matplotlib and Plotly. For publication-ready figure palettes, venue figure QA, and manuscript figure styling, use the scientific-visualization plugin.
 status: active
 provenance: generated
 trusted: false
@@ -19,11 +19,11 @@ icon_large: "assets/codex/app-skill-icons/aggregate.svg"
 default_prompt:
 ---
 
-# scientific-visualization
+# statistical-visualization
 
 ## Trigger Boundary
 
-Scientific plotting and visualization with Matplotlib and Plotly.
+Statistical result visualization with Matplotlib and Plotly. For publication-ready figure palettes, venue figure QA, and manuscript figure styling, use the scientific-visualization plugin.
 
 Use this aggregate Codex App skill when the task matches one of the source workflows below.
 

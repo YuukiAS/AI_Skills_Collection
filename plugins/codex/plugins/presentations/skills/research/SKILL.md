@@ -25,6 +25,7 @@ Use this skill for research presentation planning and quality control. File crea
 - Use for group meeting, academic talk, seminar, conference, journal club, defense, methods/model/result update, or Asteria/TRACE-to-deck work.
 - Do not use for minor text, color, alignment, or object edits to an existing PPTX/Google Slides deck.
 - Do not use generated whole-slide images as a substitute for editable PPTX unless the user explicitly asks for image/PDF slides.
+- Use presentation themes/templates for deck-wide color. Scientific palettes in `palette/` may inform embedded figures, but raw palette ids should not become the slide theme.
 - Use `../../shared/deck-plan.schema.json` as the default intermediate representation.
 
 ## Narrative

@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AI Skills Scientific Figure Palette Library",
+  "type": "object",
+  "required": [
+    "library_id",
+    "version",
+    "scope",
+    "generated_on",
+    "default_policy",
+    "external_sources",
+    "palettes"
+  ],
+  "properties": {
+    "library_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "generated_on": {
+      "type": "string"
+    },
+    "canonical_file": {
+      "type": "string"
+    },
+    "compatibility_file": {
+      "type": "string"
+    },
+    "default_policy": {
+      "type": "object"
+    },
+    "external_sources": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "palettes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "legacy_ids",
+          "name",
+          "family",
+          "type",
+          "colors",
+          "recommended_for",
+          "avoid_for",
+          "colorblind_safe",
+          "provenance_status",
+          "origins",
+          "stability"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "legacy_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "family": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "categorical",
+              "sequential",
+              "diverging",
+              "cyclic"
+            ]
+          },
+          "colors": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^#[0-9A-Fa-f]{6}$"
+            }
+          },
+          "recommended_for": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "avoid_for": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "colorblind_safe": {
+            "type": "object"
+          },
+          "provenance_status": {
+            "type": "string"
+          },
+          "origins": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object"
+            }
+          },
+          "stability": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

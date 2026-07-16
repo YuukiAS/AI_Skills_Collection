@@ -52,7 +52,10 @@ Use this skill to plan and coordinate manuscript work. Do not use it as a prose-
 - Use `citation-verification` before submission or when claims rely on citations.
 - Use `nature-manuscript-workflow` for Nature-family venue fit, data availability, and submission-specific checks.
 - Use `latex-paper-authoring` when LaTeX structure, Overleaf readiness, or compilation is the main issue.
-- Use `scientific-visualization`, `drawio-diagrams`, or `d2-diagrams` when figures are the main deliverable.
+- Use `scientific-visualization` for manuscript figure palettes, plotting snippets,
+  figure export QA, top-conference figure presets, and publication-ready visual
+  checks. Use `drawio-diagrams` or `d2-diagrams` when editable diagrams are the
+  main deliverable.
 
 ## Quality Gates
 

@@ -22,6 +22,7 @@ Use this skill to turn research and product intent into an executable visual sys
 - Define tokens, density, typography, color, icon strategy, layout rhythm, and interaction tone.
 - Do not implement the app; route implementation to the official `build-web-apps` capability or project code workflow.
 - Do not rely on decorative blobs, generic purple gradients, or unexplained hero copy.
+- Do not use academic or journal-inspired palettes from `palette/` as direct UI colors. Product surfaces need semantic tokens; scientific palettes may map only to chart roles.
 
 ## Workflow
 

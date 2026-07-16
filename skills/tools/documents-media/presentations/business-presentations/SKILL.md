@@ -24,6 +24,7 @@ Use this skill for decision-oriented decks. File creation, object editing, expor
 - Use for executive summaries, company updates, product proposals, strategy, operations, market, client, and pitch decks.
 - Do not use for technical research talks unless the user explicitly frames the audience as business or executive.
 - Do not trigger for small edits to an existing PPTX/Google Slides file.
+- Use business presentation themes/templates for deck-wide color. Do not use journal-inspired scientific palettes from `palette/` as business deck themes.
 - Use `../../shared/deck-plan.schema.json` as the default intermediate representation.
 
 ## Narrative
