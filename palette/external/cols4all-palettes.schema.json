@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AI Skills cols4all External Palette Library",
+  "type": "object",
+  "required": [
+    "library_id",
+    "generated_on",
+    "package",
+    "package_version",
+    "source_repo",
+    "source_commit",
+    "access_date",
+    "license",
+    "series",
+    "types",
+    "palettes"
+  ],
+  "properties": {
+    "library_id": {
+      "const": "cols4all-palettes"
+    },
+    "license": {
+      "const": "GPL-3"
+    },
+    "palettes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "source_id",
+          "series",
+          "type",
+          "n",
+          "colors",
+          "license",
+          "provenance_status",
+          "scores"
+        ],
+        "properties": {
+          "colors": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^#[0-9A-Fa-f]{6}$"
+            }
+          },
+          "license": {
+            "const": "GPL-3"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

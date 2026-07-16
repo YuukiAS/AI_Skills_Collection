@@ -14,6 +14,10 @@ PALETTE_DIR = ROOT / "palette"
 CANONICAL = PALETTE_DIR / "scientific-figure-palettes.json"
 SCHEMA = PALETTE_DIR / "scientific-figure-palettes.schema.json"
 LEGACY = PALETTE_DIR / "palettes.json"
+COLS4ALL = PALETTE_DIR / "external" / "cols4all-palettes.json"
+COLS4ALL_SCHEMA = PALETTE_DIR / "external" / "cols4all-palettes.schema.json"
+COLS4ALL_EVALUATION = PALETTE_DIR / "cols4all-evaluation.json"
+NOTION_IMAGES = PALETTE_DIR / "notion-image-palettes.json"
 
 REQUIRED_IDS = {
     "okabe_ito",
@@ -80,6 +84,10 @@ def main() -> int:
 
     canonical = load_json(CANONICAL)
     legacy = load_json(LEGACY)
+    cols4all = load_json(COLS4ALL) if COLS4ALL.exists() else None
+    cols4all_schema = load_json(COLS4ALL_SCHEMA) if COLS4ALL_SCHEMA.exists() else None
+    cols4all_evaluation = load_json(COLS4ALL_EVALUATION) if COLS4ALL_EVALUATION.exists() else None
+    notion_images = load_json(NOTION_IMAGES) if NOTION_IMAGES.exists() else None
 
     if not isinstance(canonical, dict):
         errors.append("canonical file must be a JSON object")
@@ -187,13 +195,91 @@ def main() -> int:
 
     external_sources = canonical.get("external_sources", [])
     source_names = {str(source.get("name", "")).lower() for source in external_sources if isinstance(source, dict)}
-    for expected in {"colorbrewer", "matplotlib", "material color utilities", "ggsci", "color universal design (cud)"}:
+    for expected in {"colorbrewer", "matplotlib", "material color utilities", "ggsci", "color universal design (cud)", "cols4all"}:
         if expected not in source_names:
             errors.append(f"external_sources missing {expected}")
+
+    curated_cols4all_ids = {
+        "cols4all_area7",
+        "cols4all_area8",
+        "cols4all_area9",
+        "cols4all_line7",
+        "cols4all_line8",
+        "cols4all_line9",
+        "cols4all_friendly5",
+        "cols4all_friendly7",
+        "cols4all_friendly9",
+        "cols4all_friendly11",
+        "cols4all_friendly13",
+        "tol_bright",
+        "carto_safe",
+        "scico_batlow",
+        "hcl_purple_green",
+    }
+    for pid in sorted(curated_cols4all_ids):
+        palette = by_id.get(pid)
+        if not palette:
+            errors.append(f"missing curated cols4all palette: {pid}")
+            continue
+        if palette.get("core") is not False:
+            errors.append(f"{pid} must remain non-core")
+        if palette.get("license") != "GPL-3":
+            errors.append(f"{pid} must keep GPL-3 license metadata")
+        if "cols4all" not in origin_names(palette):
+            errors.append(f"{pid} must reference cols4all in origins")
 
     legacy_palettes = legacy.get("palettes", [])
     if not isinstance(legacy_palettes, list) or not legacy_palettes:
         errors.append("palette/palettes.json must preserve a non-empty palettes list")
+
+    if not isinstance(cols4all_schema, dict) or cols4all_schema.get("title") != "AI Skills cols4all External Palette Library":
+        errors.append("cols4all external schema missing or invalid")
+
+    if not isinstance(cols4all, dict):
+        errors.append("cols4all external palette file missing or invalid")
+    else:
+        if cols4all.get("license") != "GPL-3":
+            errors.append("cols4all external library must be marked GPL-3")
+        if not cols4all.get("source_commit"):
+            errors.append("cols4all external library must record source_commit")
+        external_palettes = cols4all.get("palettes", [])
+        if not isinstance(external_palettes, list) or len(external_palettes) < 600:
+            errors.append("cols4all external library must contain the bulk runtime export")
+        for idx, palette in enumerate(external_palettes[:20]):
+            if palette.get("license") != "GPL-3":
+                errors.append(f"cols4all palette #{idx} missing GPL-3 license")
+            if not palette.get("colors"):
+                errors.append(f"cols4all palette #{idx} missing colors")
+
+    if not isinstance(cols4all_evaluation, dict):
+        errors.append("cols4all evaluation file missing or invalid")
+    else:
+        evaluated = cols4all_evaluation.get("palettes", [])
+        if not isinstance(evaluated, list) or len(evaluated) < len(palettes):
+            errors.append("cols4all evaluation must cover canonical palettes")
+        evaluation_errors = [item for item in evaluated if isinstance(item, dict) and item.get("error")]
+        if evaluation_errors:
+            errors.append(f"cols4all evaluation contains errors: {evaluation_errors[:3]}")
+
+    if not isinstance(notion_images, dict):
+        errors.append("notion image palette file missing or invalid")
+    else:
+        pages = notion_images.get("pages", [])
+        if not isinstance(pages, list) or len(pages) != 8:
+            errors.append("notion image palette file must record all 8 palette pages")
+        slugs = {str(page.get("slug")) for page in pages if isinstance(page, dict)}
+        for expected in {
+            "cvpr25",
+            "aaai",
+            "journal_reviewer_9",
+            "icml_clean",
+            "nature_inspiration",
+            "nature_same_palette",
+            "python_bar_distribution",
+            "old_palettes_typical_figures",
+        }:
+            if expected not in slugs:
+                errors.append(f"notion image palette file missing page {expected}")
 
     if errors:
         for error in errors:

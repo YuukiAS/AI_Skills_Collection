@@ -55,6 +55,16 @@
       "access_date": "2026-07-16",
       "local_path": "C:\\Users\\yuukias\\AppData\\Local\\Temp\\ai-skills-palette-sources\\okabe-ito-cud.html",
       "usage": "referenced Okabe-Ito/CUD guidance"
+    },
+    {
+      "name": "cols4all",
+      "url": "https://github.com/cols4all/cols4all-R",
+      "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+      "local_path": "C:\\Users\\yuukias\\AppData\\Local\\Temp\\ai-skills-palette-sources\\cols4all-R",
+      "access_date": "2026-07-17",
+      "usage": "copied GPL-3 palette colors to palette/external and curated non-core scientific figure candidates; computed c4a_scores for canonical palettes",
+      "license": "GPL-3",
+      "package_version": "0.10"
     }
   ],
   "palettes": [
@@ -1263,6 +1273,973 @@
         "method": "linear interpolation from cloned segmented colormap data",
         "sample_count": 11
       }
+    },
+    {
+      "id": "cols4all_area7",
+      "legacy_ids": [
+        "cols4all.area7",
+        "cols4all.cols4all.area7"
+      ],
+      "name": "cols4all Area7",
+      "family": "cols4all/cols4all",
+      "type": "categorical",
+      "colors": [
+        "#FF9D9A",
+        "#77AADD",
+        "#F1CE63",
+        "#2CA02C",
+        "#B07AA1",
+        "#9EDAE5",
+        "#CC6677"
+      ],
+      "recommended_for": [
+        "UMAP/cell-type area fills",
+        "maps and space-filling scientific figures",
+        "accessible categorical fills for publication drafts"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 1.0111,
+        "fairness": 83
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "cols4all.area7",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "cols4all.area7",
+      "scores": {
+        "cbfriendly": 1.0111,
+        "fairness": 83,
+        "min_dist": 11.15,
+        "CRmin": 1,
+        "CRwt": 1.53,
+        "CRbk": 5.73,
+        "Blues": 1.3,
+        "Hspread": 91,
+        "fair": "H",
+        "contrastWT": true,
+        "contrastBK": false,
+        "equiluminance": true
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+    },
+    {
+      "id": "cols4all_area8",
+      "legacy_ids": [
+        "cols4all.area8",
+        "cols4all.cols4all.area8"
+      ],
+      "name": "cols4all Area8",
+      "family": "cols4all/cols4all",
+      "type": "categorical",
+      "colors": [
+        "#CC6677",
+        "#AEC7E8",
+        "#44BB99",
+        "#B07AA1",
+        "#BBCC33",
+        "#FFAABB",
+        "#B6992D",
+        "#98DF8A"
+      ],
+      "recommended_for": [
+        "maps and area charts",
+        "categorical segmentation overlays",
+        "space-filling plots with up to eight classes"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 0.0094,
+        "fairness": 83
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "cols4all.area8",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "cols4all.area8",
+      "scores": {
+        "cbfriendly": 0.0094,
+        "fairness": 83,
+        "min_dist": 9.38,
+        "CRmin": 1.01,
+        "CRwt": 1.58,
+        "CRbk": 5.73,
+        "Blues": 1.17,
+        "Hspread": 88,
+        "fair": "H",
+        "contrastWT": true,
+        "contrastBK": false,
+        "equiluminance": true
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+    },
+    {
+      "id": "cols4all_area9",
+      "legacy_ids": [
+        "cols4all.area9",
+        "cols4all.cols4all.area9"
+      ],
+      "name": "cols4all Area9",
+      "family": "cols4all/cols4all",
+      "type": "categorical",
+      "colors": [
+        "#EE8866",
+        "#88CCEE",
+        "#2CA02C",
+        "#B07AA1",
+        "#F1CE63",
+        "#FFAABB",
+        "#6699CC",
+        "#44BB99",
+        "#CC6677"
+      ],
+      "recommended_for": [
+        "maps and area charts",
+        "categorical segmentation overlays",
+        "space-filling plots with up to nine classes"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 0.009,
+        "fairness": 82
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "cols4all.area9",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "cols4all.area9",
+      "scores": {
+        "cbfriendly": 0.009,
+        "fairness": 82,
+        "min_dist": 8.96,
+        "CRmin": 1,
+        "CRwt": 1.53,
+        "CRbk": 5.73,
+        "Blues": 1.33,
+        "Hspread": 88,
+        "fair": "H",
+        "contrastWT": true,
+        "contrastBK": false,
+        "equiluminance": true
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+    },
+    {
+      "id": "cols4all_line7",
+      "legacy_ids": [
+        "cols4all.line7",
+        "cols4all.cols4all.line7"
+      ],
+      "name": "cols4all Line7",
+      "family": "cols4all/cols4all",
+      "type": "categorical",
+      "colors": [
+        "#1F77B4",
+        "#2CA02C",
+        "#E73F74",
+        "#6699CC",
+        "#994F88",
+        "#117733",
+        "#D37295"
+      ],
+      "recommended_for": [
+        "line charts",
+        "scatter plots",
+        "multi-series conference figures"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 1.01,
+        "fairness": 74
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "cols4all.line7",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "cols4all.line7",
+      "scores": {
+        "cbfriendly": 1.01,
+        "fairness": 74,
+        "min_dist": 10.05,
+        "CRmin": 1.03,
+        "CRwt": 3,
+        "CRbk": 3.71,
+        "Blues": 1.51,
+        "Hspread": 75,
+        "fair": "M",
+        "contrastWT": false,
+        "contrastBK": false,
+        "equiluminance": true
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+    },
+    {
+      "id": "cols4all_line8",
+      "legacy_ids": [
+        "cols4all.line8",
+        "cols4all.cols4all.line8"
+      ],
+      "name": "cols4all Line8",
+      "family": "cols4all/cols4all",
+      "type": "categorical",
+      "colors": [
+        "#DC050C",
+        "#1F77B4",
+        "#117733",
+        "#994F88",
+        "#999933",
+        "#D37295",
+        "#6699CC",
+        "#E73F74"
+      ],
+      "recommended_for": [
+        "line charts",
+        "scatter plots",
+        "multi-series conference figures up to eight groups"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 0.0095,
+        "fairness": 16
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "cols4all.line8",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "cols4all.line8",
+      "scores": {
+        "cbfriendly": 0.0095,
+        "fairness": 16,
+        "min_dist": 9.54,
+        "CRmin": 1,
+        "CRwt": 3,
+        "CRbk": 3.71,
+        "Blues": 1.51,
+        "Hspread": 80,
+        "fair": "L",
+        "contrastWT": false,
+        "contrastBK": false,
+        "equiluminance": true
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+    },
+    {
+      "id": "cols4all_line9",
+      "legacy_ids": [
+        "cols4all.line9",
+        "cols4all.cols4all.line9"
+      ],
+      "name": "cols4all Line9",
+      "family": "cols4all/cols4all",
+      "type": "categorical",
+      "colors": [
+        "#EE3377",
+        "#1F77B4",
+        "#117733",
+        "#CF1C90",
+        "#999933",
+        "#994455",
+        "#6699CC",
+        "#D37295",
+        "#DC050C"
+      ],
+      "recommended_for": [
+        "line charts",
+        "scatter plots",
+        "multi-series conference figures up to nine groups"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 0.008,
+        "fairness": 21
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "cols4all.line9",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "cols4all.line9",
+      "scores": {
+        "cbfriendly": 0.008,
+        "fairness": 21,
+        "min_dist": 8.03,
+        "CRmin": 1,
+        "CRwt": 3,
+        "CRbk": 3.31,
+        "Blues": 1.51,
+        "Hspread": 78,
+        "fair": "L",
+        "contrastWT": false,
+        "contrastBK": false,
+        "equiluminance": true
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+    },
+    {
+      "id": "cols4all_friendly5",
+      "legacy_ids": [
+        "cols4all.friendly5",
+        "cols4all.cols4all.friendly5"
+      ],
+      "name": "cols4all Friendly5",
+      "family": "cols4all/cols4all",
+      "type": "categorical",
+      "colors": [
+        "#CC6677",
+        "#F1CE63",
+        "#117733",
+        "#99DDFF",
+        "#9467BD"
+      ],
+      "recommended_for": [
+        "colorblind-friendly categorical figures",
+        "bar charts",
+        "small multiples"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 2.0177,
+        "fairness": 70
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "cols4all.friendly5",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "cols4all.friendly5",
+      "scores": {
+        "cbfriendly": 2.0177,
+        "fairness": 70,
+        "min_dist": 17.66,
+        "CRmin": 1.03,
+        "CRwt": 1.49,
+        "CRbk": 3.71,
+        "Blues": 1.28,
+        "Hspread": 93,
+        "fair": "M",
+        "contrastWT": true,
+        "contrastBK": false,
+        "equiluminance": true
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+    },
+    {
+      "id": "cols4all_friendly7",
+      "legacy_ids": [
+        "cols4all.friendly7",
+        "cols4all.cols4all.friendly7"
+      ],
+      "name": "cols4all Friendly7",
+      "family": "cols4all/cols4all",
+      "type": "categorical",
+      "colors": [
+        "#E65518",
+        "#F2B701",
+        "#009988",
+        "#88CCEE",
+        "#9467BD",
+        "#225522",
+        "#882255"
+      ],
+      "recommended_for": [
+        "colorblind-friendly categorical figures",
+        "bar charts",
+        "small multiples"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 2.015,
+        "fairness": 18
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "cols4all.friendly7",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "cols4all.friendly7",
+      "scores": {
+        "cbfriendly": 2.015,
+        "fairness": 18,
+        "min_dist": 15.02,
+        "CRmin": 1.01,
+        "CRwt": 1.76,
+        "CRbk": 2.39,
+        "Blues": 1.28,
+        "Hspread": 94,
+        "fair": "L",
+        "contrastWT": true,
+        "contrastBK": true,
+        "equiluminance": true
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+    },
+    {
+      "id": "cols4all_friendly9",
+      "legacy_ids": [
+        "cols4all.friendly9",
+        "cols4all.cols4all.friendly9"
+      ],
+      "name": "cols4all Friendly9",
+      "family": "cols4all/cols4all",
+      "type": "categorical",
+      "colors": [
+        "#E73F74",
+        "#F1CE63",
+        "#99DDFF",
+        "#9467BD",
+        "#009988",
+        "#882255",
+        "#225522",
+        "#4B4B8F",
+        "#999933"
+      ],
+      "recommended_for": [
+        "many-class categorical labels",
+        "large legends",
+        "single-cell cluster figures"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 1.0125,
+        "fairness": 24
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "cols4all.friendly9",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "cols4all.friendly9",
+      "scores": {
+        "cbfriendly": 1.0125,
+        "fairness": 24,
+        "min_dist": 12.52,
+        "CRmin": 1.01,
+        "CRwt": 1.49,
+        "CRbk": 2.39,
+        "Blues": 1.91,
+        "Hspread": 92,
+        "fair": "L",
+        "contrastWT": true,
+        "contrastBK": true,
+        "equiluminance": true
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+    },
+    {
+      "id": "cols4all_friendly11",
+      "legacy_ids": [
+        "cols4all.friendly11",
+        "cols4all.cols4all.friendly11"
+      ],
+      "name": "cols4all Friendly11",
+      "family": "cols4all/cols4all",
+      "type": "categorical",
+      "colors": [
+        "#E73F74",
+        "#F1CE63",
+        "#77AADD",
+        "#9467BD",
+        "#AAAA00",
+        "#FF9D9A",
+        "#99DDFF",
+        "#B07AA1",
+        "#225522",
+        "#882255",
+        "#4B4B8F"
+      ],
+      "recommended_for": [
+        "many-class categorical labels",
+        "large legends",
+        "exploratory scientific plots"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 1.0111,
+        "fairness": 24
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "cols4all.friendly11",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "cols4all.friendly11",
+      "scores": {
+        "cbfriendly": 1.0111,
+        "fairness": 24,
+        "min_dist": 11.12,
+        "CRmin": 1.01,
+        "CRwt": 1.49,
+        "CRbk": 2.39,
+        "Blues": 1.91,
+        "Hspread": 80,
+        "fair": "L",
+        "contrastWT": true,
+        "contrastBK": true,
+        "equiluminance": true
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+    },
+    {
+      "id": "cols4all_friendly13",
+      "legacy_ids": [
+        "cols4all.friendly13",
+        "cols4all.cols4all.friendly13"
+      ],
+      "name": "cols4all Friendly13",
+      "family": "cols4all/cols4all",
+      "type": "categorical",
+      "colors": [
+        "#E73F74",
+        "#F1CE63",
+        "#77AADD",
+        "#009988",
+        "#9467BD",
+        "#FF9D9A",
+        "#99DDFF",
+        "#AAAA00",
+        "#225522",
+        "#882255",
+        "#997700",
+        "#4B4B8F",
+        "#8C564B"
+      ],
+      "recommended_for": [
+        "many-class categorical labels",
+        "large legends",
+        "exploratory scientific plots"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 1.0101,
+        "fairness": 24
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "cols4all.friendly13",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "cols4all.friendly13",
+      "scores": {
+        "cbfriendly": 1.0101,
+        "fairness": 24,
+        "min_dist": 10.06,
+        "CRmin": 1.01,
+        "CRwt": 1.49,
+        "CRbk": 2.39,
+        "Blues": 1.91,
+        "Hspread": 90,
+        "fair": "L",
+        "contrastWT": true,
+        "contrastBK": true,
+        "equiluminance": true
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+    },
+    {
+      "id": "tol_bright",
+      "legacy_ids": [
+        "tol.bright",
+        "cols4all.tol.bright"
+      ],
+      "name": "Paul Tol Bright via cols4all",
+      "family": "cols4all/tol",
+      "type": "categorical",
+      "colors": [
+        "#4477AA",
+        "#EE6677",
+        "#228833",
+        "#CCBB44",
+        "#66CCEE",
+        "#AA3377",
+        "#BBBBBB"
+      ],
+      "recommended_for": [
+        "line charts",
+        "scatter plots",
+        "publication categorical palette candidate"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 0.0087,
+        "fairness": 18
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "tol.bright",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "tol.bright",
+      "scores": {
+        "cbfriendly": 0.0087,
+        "fairness": 18,
+        "min_dist": 8.66,
+        "CRmin": 1.02,
+        "CRwt": 1.84,
+        "CRbk": 3.45,
+        "Blues": 1.43,
+        "Hspread": 87,
+        "fair": "L",
+        "contrastWT": true,
+        "contrastBK": false,
+        "equiluminance": true
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+    },
+    {
+      "id": "carto_safe",
+      "legacy_ids": [
+        "carto.safe",
+        "cols4all.carto.safe"
+      ],
+      "name": "CARTO Safe via cols4all",
+      "family": "cols4all/carto",
+      "type": "categorical",
+      "colors": [
+        "#88CCEE",
+        "#CC6677",
+        "#DDCC77",
+        "#117733",
+        "#332288",
+        "#AA4499",
+        "#44AA99",
+        "#999933",
+        "#882255",
+        "#661100",
+        "#6699CC"
+      ],
+      "recommended_for": [
+        "scatter plots",
+        "maps",
+        "colorblind-aware categorical figures"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 0.006,
+        "fairness": 25
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "carto.safe",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "carto.safe",
+      "scores": {
+        "cbfriendly": 0.006,
+        "fairness": 25,
+        "min_dist": 5.96,
+        "CRmin": 1,
+        "CRwt": 1.62,
+        "CRbk": 1.65,
+        "Blues": 2.67,
+        "Hspread": 92,
+        "fair": "M",
+        "contrastWT": true,
+        "contrastBK": true,
+        "equiluminance": true
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+    },
+    {
+      "id": "scico_batlow",
+      "legacy_ids": [
+        "scico.batlow",
+        "cols4all.scico.batlow"
+      ],
+      "name": "scico Batlow via cols4all",
+      "family": "cols4all/scico",
+      "type": "sequential",
+      "colors": [
+        "#0C325D",
+        "#195661",
+        "#46704F",
+        "#818231",
+        "#C59039",
+        "#F9A382",
+        "#FBBDD0"
+      ],
+      "recommended_for": [
+        "heatmaps",
+        "continuous scientific fields",
+        "publication-ready sequential maps"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 1.0078,
+        "fairness": 92
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "scico.batlow",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "scico.batlow",
+      "scores": {
+        "cbfriendly": 1.0078,
+        "fairness": 92,
+        "min_dist": 7.83,
+        "CRmin": 1.26,
+        "CRwt": 1.58,
+        "CRbk": 1.63,
+        "Blues": 1.86,
+        "Hspread": 85,
+        "fair": "H",
+        "contrastWT": true,
+        "contrastBK": true,
+        "equiluminance": false
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+    },
+    {
+      "id": "hcl_purple_green",
+      "legacy_ids": [
+        "hcl.purple_green",
+        "cols4all.hcl.purple_green"
+      ],
+      "name": "HCL Purple-Green via cols4all",
+      "family": "cols4all/hcl",
+      "type": "diverging",
+      "colors": [
+        "#64336D",
+        "#A062AC",
+        "#C999D3",
+        "#E5CFEB",
+        "#F1F1F1",
+        "#C2DEC3",
+        "#7DB77D",
+        "#3D893E",
+        "#125114"
+      ],
+      "recommended_for": [
+        "centered heatmaps",
+        "signed residual maps",
+        "diverging quantitative fields"
+      ],
+      "avoid_for": [
+        "official journal branding",
+        "default core palette without source/provenance review"
+      ],
+      "colorblind_safe": {
+        "source": "cols4all c4a_scores",
+        "cbfriendly": 1.0128,
+        "fairness": 84
+      },
+      "provenance_status": "external_curated_from_cols4all_gpl3",
+      "origins": [
+        {
+          "name": "cols4all",
+          "url": "https://github.com/cols4all/cols4all-R",
+          "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
+          "usage": "copied GPL-3 palette colors from cols4all runtime export",
+          "source_id": "hcl.purple_green",
+          "license": "GPL-3"
+        }
+      ],
+      "stability": "external_curated",
+      "core": false,
+      "license": "GPL-3",
+      "source_id": "hcl.purple_green",
+      "scores": {
+        "cbfriendly": 1.0128,
+        "fairness": 84,
+        "min_dist": null,
+        "CRmin": 1,
+        "CRwt": 1.13,
+        "CRbk": 2.21,
+        "Blues": 1.09,
+        "Hspread": 54,
+        "fair": "H",
+        "contrastWT": true,
+        "contrastBK": true,
+        "equiluminance": true
+      },
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
     }
   ]
 }

@@ -46,6 +46,9 @@ Use this aggregate Codex App skill when the task matches one of the source workf
 ## Plugin Workflow Notes
 
 - For palette selection, first read `../../shared/palette/scientific-figure-palettes.json` and `../../shared/palette/ROUTING.md` when running inside this plugin.
+- For broad external palette search, read `../../shared/palette/external/cols4all-palettes.json`; those entries are GPL-3 and must keep license/provenance visible.
+- For Notion image-derived inspiration, read `../../shared/palette/notion-image-palettes.json` and treat picker colors as experimental review candidates.
+- Use `../../shared/scripts/palette.py list --source cols4all` and `../../shared/scripts/palette.py recommend --figure-type heatmap --source all` when a task needs more than the canonical core.
 - In the source repository, use `palette/scientific-figure-palettes.json` and the read-only CLI `python scripts/palette.py`.
 - Use journal-inspired palettes only as non-official visual inspiration and preserve the disclaimer in figure guidance.
 - Route manuscript-level figure policy to research-writing, but route figure color, plot code, and visual QA here.

@@ -19,6 +19,22 @@ Use the palette from palette/scientific-figure-palettes.json: RdBu
 `palette/palettes.json` is preserved as a compatibility layer for old prompts
 and old ids. Do not add new canonical scientific palettes there first.
 
+## External And Image-Derived Sources
+
+- `palette/external/cols4all-palettes.json` contains a full runtime export of
+  689 palettes from the GPL-3 R `cols4all` package. Use it as an external
+  exploration library and keep GPL-3 provenance visible.
+- Curated `cols4all` candidates such as `cols4all_line7`,
+  `cols4all_area7`, `cols4all_friendly9`, `tol_bright`, `carto_safe`,
+  `scico_batlow`, and `hcl_purple_green` are included in the canonical file as
+  non-core `external_curated` palettes.
+- `palette/cols4all-evaluation.json` records `cols4all` scoring for canonical
+  palettes.
+- `palette/notion-image-palettes.json` records the latest local Notion
+  `Type=Palette` image pages, picker-derived colors, visible HEX/RGB status,
+  and figure-example routing. These are experimental review candidates, not
+  core palettes.
+
 ## Scope
 
 - Use scientific palettes for plots, panels, heatmaps, line charts, maps, and
@@ -45,6 +61,9 @@ Run:
 
 ```bash
 python -m json.tool palette/scientific-figure-palettes.json
+python -m json.tool palette/external/cols4all-palettes.json
+python -m json.tool palette/cols4all-evaluation.json
+python -m json.tool palette/notion-image-palettes.json
 python -m json.tool palette/publication-figure-presets.json
 python -m json.tool palette/palettes.json
 python scripts/validate_palette_library.py
@@ -59,8 +78,12 @@ Use the read-only CLI for palette lookup and code snippets:
 
 ```bash
 python scripts/palette.py list
+python scripts/palette.py list --source cols4all
+python scripts/palette.py list --source notion
 python scripts/palette.py recommend --purpose heatmap
+python scripts/palette.py recommend --figure-type heatmap --source all
 python scripts/palette.py snippet okabe_ito --target matplotlib
+python scripts/palette.py snippet cols4all_line7 --source all --target matplotlib
 python scripts/palette.py snippet RdBu --target latex
 ```
 

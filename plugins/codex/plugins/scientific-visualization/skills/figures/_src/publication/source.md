@@ -153,6 +153,16 @@ recommend --purpose heatmap`, and `python scripts/palette.py snippet okabe_ito
 `palette/publication-figure-presets.json` for top-conference, heatmap, centered
 diverging, and journal-inspired non-official figure defaults.
 
+For expanded publication palette search, use the GPL-3 `cols4all` export at
+`palette/external/cols4all-palettes.json` through `python scripts/palette.py
+list --source cols4all` or figure-specific recommendations such as `python
+scripts/palette.py recommend --figure-type heatmap --source all`. Keep
+`cols4all` license/provenance visible. For Notion image-derived palette
+inspiration, read `palette/notion-image-palettes.json`: it records each
+`Type=Palette` page, whether the page has visible HEX/RGB values, picker-derived
+colors, and suitable figure types. Treat those entries as experimental examples
+until manually reviewed.
+
 **Always use colorblind-friendly palettes** (detailed in `references/color_palettes.md`):
 
 **Recommended: Okabe-Ito palette** (distinguishable by all types of color blindness):

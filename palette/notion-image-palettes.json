@@ -1,0 +1,946 @@
+{
+  "library_id": "notion-image-palettes",
+  "generated_on": "2026-07-16T17:08:51.925281+00:00",
+  "scope": "latest local Downloads images corresponding to Notion Skills Collection Type=Palette pages",
+  "default_policy": {
+    "core": false,
+    "stability": "experimental",
+    "promotion_rule": "manual review plus cols4all/accessibility scoring required before moving into curated publication palettes"
+  },
+  "pages": [
+    {
+      "page_title": "CVPR25优质绘图学配色",
+      "slug": "cvpr25",
+      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "has_visible_hex_or_rgb": "no",
+      "action": "derive_palette_and_example",
+      "figure_uses": [
+        "3D point cloud",
+        "Gaussian splatting",
+        "multi-panel computer vision figure"
+      ],
+      "notes": "One latest image; bottom swatches require picker extraction.",
+      "image_count": 1,
+      "images": [
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\CVPR25优质绘图学配色 _ 3D高斯溅射‼️_1_莱昂的科研日记_来自小红书网页版.jpg",
+          "mtime": 1784213014.0322802,
+          "picker_colors": [
+            "#F8E8D8",
+            "#D8E8F8",
+            "#F8E8E8",
+            "#F8D8B8",
+            "#B8D8E8",
+            "#C8C8D8",
+            "#D8E8C8",
+            "#D8F8F8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        }
+      ]
+    },
+    {
+      "page_title": "AAAI跟着顶会学配色",
+      "slug": "aaai",
+      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "has_visible_hex_or_rgb": "yes",
+      "action": "parse_visible_hex_then_picker_check",
+      "figure_uses": [
+        "AI schematic",
+        "codec pipeline",
+        "benchmark panel",
+        "histogram",
+        "boxplot",
+        "scatter density"
+      ],
+      "notes": "Three images with visible RGB/HEX labels; picker output is kept for verification.",
+      "image_count": 3,
+      "images": [
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\AAAI跟着顶会学配色_3_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
+          "mtime": 1784213010.1586602,
+          "picker_colors": [
+            "#4878C8",
+            "#4888C8",
+            "#78A848",
+            "#3878C8",
+            "#E87828",
+            "#D8E8F8",
+            "#F8F8D8",
+            "#E88828"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\AAAI跟着顶会学配色_2_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
+          "mtime": 1784213008.3564832,
+          "picker_colors": [
+            "#D8E8C8",
+            "#F8F8D8",
+            "#F8F8E8",
+            "#4878B8",
+            "#B8D8C8",
+            "#E8F8D8",
+            "#A8C8E8",
+            "#B8C8E8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\AAAI跟着顶会学配色_1_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
+          "mtime": 1784213006.3642495,
+          "picker_colors": [
+            "#F8D8D8",
+            "#D8E8F8",
+            "#F8E8D8",
+            "#88B8B8",
+            "#D8E8D8",
+            "#88A8E8",
+            "#F87808",
+            "#B8C8D8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        }
+      ]
+    },
+    {
+      "page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "slug": "journal_reviewer_9",
+      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "has_visible_hex_or_rgb": "yes",
+      "action": "parse_visible_hex_then_picker_check",
+      "figure_uses": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
+      "image_count": 9,
+      "images": [
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_10_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "mtime": 1784213000.4255419,
+          "picker_colors": [
+            "#88A898",
+            "#98B8A8",
+            "#B8C8C8",
+            "#B8D8C8",
+            "#88A8A8",
+            "#88B8A8",
+            "#789888",
+            "#889898"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_9_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "mtime": 1784212997.3991265,
+          "picker_colors": [
+            "#A8A8B8",
+            "#A8B8C8",
+            "#98A8B8",
+            "#A8A8C8",
+            "#B8B8C8",
+            "#081828",
+            "#9898C8",
+            "#9898B8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_8_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "mtime": 1784212995.635727,
+          "picker_colors": [
+            "#F8E8D8",
+            "#E8D8D8",
+            "#E8E8D8",
+            "#C8A8A8",
+            "#B89898",
+            "#B898A8",
+            "#C8A8B8",
+            "#B8A8A8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_7_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "mtime": 1784212993.8432777,
+          "picker_colors": [
+            "#B8C8C8",
+            "#B8C8D8",
+            "#8898A8",
+            "#A8B8C8",
+            "#98A8B8",
+            "#98A8A8",
+            "#C8C8D8",
+            "#88A8B8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_6_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "mtime": 1784212992.197862,
+          "picker_colors": [
+            "#88A8C8",
+            "#8898B8",
+            "#B8B8C8",
+            "#788898",
+            "#8898A8",
+            "#888898",
+            "#8898C8",
+            "#787898"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_5_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "mtime": 1784212990.3819168,
+          "picker_colors": [
+            "#989888",
+            "#A8A898",
+            "#984838",
+            "#384828",
+            "#C8C8B8",
+            "#B8B8A8",
+            "#A8A888",
+            "#98A888"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_4_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "mtime": 1784212988.6891048,
+          "picker_colors": [
+            "#B8A8C8",
+            "#B8B8C8",
+            "#C8B8C8",
+            "#D898C8",
+            "#A8A8B8",
+            "#C898D8",
+            "#E898C8",
+            "#A8A8C8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_3_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "mtime": 1784212987.115832,
+          "picker_colors": [
+            "#989888",
+            "#889878",
+            "#889888",
+            "#98A888",
+            "#383808",
+            "#98A898",
+            "#989878",
+            "#88A898"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_2_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "mtime": 1784212985.588732,
+          "picker_colors": [
+            "#F8E8E8",
+            "#F8F8E8",
+            "#F8E8D8",
+            "#F8C8C8",
+            "#E8D8C8",
+            "#F8D8C8",
+            "#D8C8C8",
+            "#E8C8C8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        }
+      ]
+    },
+    {
+      "page_title": "ICML的清爽绘图风格！学了就能Accept‼️",
+      "slug": "icml_clean",
+      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "has_visible_hex_or_rgb": "no",
+      "action": "derive_examples_first_palette_second",
+      "figure_uses": [
+        "ICML-style schematic",
+        "line chart",
+        "attention heatmap",
+        "model comparison figure"
+      ],
+      "notes": "Three figures; mostly examples. Extracted colors need manual review before promotion.",
+      "image_count": 3,
+      "images": [
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\ICML的清爽绘图风格！学了就能Accept‼️_3_莱昂的科研日记_来自小红书网页版.jpg",
+          "mtime": 1784212979.230957,
+          "picker_colors": [
+            "#F8D8D8",
+            "#F8E8E8",
+            "#F8C8C8",
+            "#F8B8B8",
+            "#F8A8A8",
+            "#F89898",
+            "#F8E8D8",
+            "#E8D8D8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\ICML的清爽绘图风格！学了就能Accept‼️_2_莱昂的科研日记_来自小红书网页版.jpg",
+          "mtime": 1784212977.1661108,
+          "picker_colors": [
+            "#4878C8",
+            "#F8F8E8",
+            "#78A848",
+            "#68A848",
+            "#687858",
+            "#485878",
+            "#A86838",
+            "#A86848"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\ICML的清爽绘图风格！学了就能Accept‼️_1_莱昂的科研日记_来自小红书网页版.jpg",
+          "mtime": 1784212975.5510037,
+          "picker_colors": [
+            "#F8D8B8",
+            "#C8E8B8",
+            "#F8F8E8",
+            "#F8E8D8",
+            "#C8E8F8",
+            "#C8E8C8",
+            "#C8E8E8",
+            "#F8D8C8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        }
+      ]
+    },
+    {
+      "page_title": "Nature顶刊配色灵感🌷",
+      "slug": "nature_inspiration",
+      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "has_visible_hex_or_rgb": "mixed",
+      "action": "parse_visible_hex_and_picker",
+      "figure_uses": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
+      "image_count": 8,
+      "images": [
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_8_花本兰_来自小红书网页版.jpg",
+          "mtime": 1784212967.692594,
+          "picker_colors": [
+            "#B8E8F8",
+            "#A8E8B8",
+            "#6888E8",
+            "#181898",
+            "#086808",
+            "#58B878",
+            "#78C8F8",
+            "#28A858"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_7_花本兰_来自小红书网页版.jpg",
+          "mtime": 1784212965.5104885,
+          "picker_colors": [
+            "#C8E898",
+            "#98C878",
+            "#98B8A8",
+            "#98B878",
+            "#98B868",
+            "#78A868",
+            "#C8E8A8",
+            "#C8D8A8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_6_花本兰_来自小红书网页版.jpg",
+          "mtime": 1784212963.4767249,
+          "picker_colors": [
+            "#B8E8B8",
+            "#A8D8E8",
+            "#58A878",
+            "#D8E8D8",
+            "#98D888",
+            "#5888C8",
+            "#D8F8F8",
+            "#E8F8F8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_5_花本兰_来自小红书网页版.jpg",
+          "mtime": 1784212961.2580779,
+          "picker_colors": [
+            "#D8E8F8",
+            "#78B8E8",
+            "#C8D8E8",
+            "#98C8D8",
+            "#A8C8E8",
+            "#D8F8F8",
+            "#B8D8E8",
+            "#78B8D8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_4_花本兰_来自小红书网页版.jpg",
+          "mtime": 1784212959.3885417,
+          "picker_colors": [
+            "#D8F8F8",
+            "#D8F8D8",
+            "#78C8D8",
+            "#98D8D8",
+            "#F8F8D8",
+            "#B8E8F8",
+            "#58C8E8",
+            "#0858A8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_3_花本兰_来自小红书网页版.jpg",
+          "mtime": 1784212956.456182,
+          "picker_colors": [
+            "#98C878",
+            "#A8C8E8",
+            "#3878B8",
+            "#489838",
+            "#389838",
+            "#489848",
+            "#58A848",
+            "#2878B8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_2_花本兰_来自小红书网页版.jpg",
+          "mtime": 1784212954.4116678,
+          "picker_colors": [
+            "#389838",
+            "#E8F8F8",
+            "#3888B8",
+            "#C8D8E8",
+            "#A8C8E8",
+            "#98C878",
+            "#A8D888",
+            "#D8E8F8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_1_花本兰_来自小红书网页版.jpg",
+          "mtime": 1784212952.8281584,
+          "picker_colors": [
+            "#98C8E8",
+            "#3888B8",
+            "#98C878",
+            "#489838",
+            "#C8E8F8",
+            "#D8E8F8",
+            "#B8D8F8",
+            "#A8D8F8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        }
+      ]
+    },
+    {
+      "page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "slug": "nature_same_palette",
+      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "has_visible_hex_or_rgb": "yes",
+      "action": "parse_visible_hex_then_picker_check",
+      "figure_uses": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
+      "image_count": 8,
+      "images": [
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_8_Her.o_来自小红书网页版.jpg",
+          "mtime": 1784212939.1324189,
+          "picker_colors": [
+            "#786898",
+            "#D8C8E8",
+            "#485888",
+            "#C8D8E8",
+            "#C888C8",
+            "#C898C8",
+            "#B8D8E8",
+            "#C888B8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_7_Her.o_来自小红书网页版.jpg",
+          "mtime": 1784212937.4949527,
+          "picker_colors": [
+            "#F8B8C8",
+            "#F8E8F8",
+            "#F8C8F8",
+            "#98C8F8",
+            "#A8C8F8",
+            "#F8C8E8",
+            "#F8D8F8",
+            "#A8C8E8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_6_Her.o_来自小红书网页版.jpg",
+          "mtime": 1784212934.9376016,
+          "picker_colors": [
+            "#F8E8E8",
+            "#D8E8F8",
+            "#D888A8",
+            "#E878B8",
+            "#F8D8E8",
+            "#A8D8E8",
+            "#A8C8E8",
+            "#78A8D8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_5_Her.o_来自小红书网页版.jpg",
+          "mtime": 1784212933.210127,
+          "picker_colors": [
+            "#D8E8F8",
+            "#98C8E8",
+            "#58A8D8",
+            "#C8E8F8",
+            "#E8E8F8",
+            "#C8D8F8",
+            "#E8F8F8",
+            "#B8D8F8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_4_Her.o_来自小红书网页版.jpg",
+          "mtime": 1784212931.4674072,
+          "picker_colors": [
+            "#F8D8E8",
+            "#F8B8D8",
+            "#E888A8",
+            "#E898B8",
+            "#E8E8F8",
+            "#88A8F8",
+            "#88B8F8",
+            "#D8E8F8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_3_Her.o_来自小红书网页版.jpg",
+          "mtime": 1784212929.7875073,
+          "picker_colors": [
+            "#78B8E8",
+            "#D84848",
+            "#F8C878",
+            "#F89858",
+            "#4878B8",
+            "#F8F8D8",
+            "#4868B8",
+            "#F8F8C8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_2_Her.o_来自小红书网页版.jpg",
+          "mtime": 1784212927.8420918,
+          "picker_colors": [
+            "#F8C8D8",
+            "#C8E8F8",
+            "#E888A8",
+            "#A8C8F8",
+            "#A8D8F8",
+            "#D8E8F8",
+            "#F8D8E8",
+            "#F898B8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_1_Her.o_来自小红书网页版.jpg",
+          "mtime": 1784212925.9674144,
+          "picker_colors": [
+            "#F8D8E8",
+            "#D8E8F8",
+            "#B8E8F8",
+            "#C8D8E8",
+            "#98B8E8",
+            "#98A8B8",
+            "#F8B8D8",
+            "#F8B8C8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        }
+      ]
+    },
+    {
+      "page_title": "Python绘制高颜值柱状图展示数据分布",
+      "slug": "python_bar_distribution",
+      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "has_visible_hex_or_rgb": "no",
+      "action": "derive_bar_palette_and_example",
+      "figure_uses": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "image_count": 18,
+      "images": [
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_18_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212921.1218042,
+          "picker_colors": [
+            "#A8D8C8",
+            "#48A878",
+            "#E8F8F8",
+            "#187848",
+            "#48A868",
+            "#187838",
+            "#38A868",
+            "#98D8C8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_17_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212919.252183,
+          "picker_colors": [
+            "#F8C868",
+            "#D86828",
+            "#F8F8C8",
+            "#A84818",
+            "#F8C858",
+            "#D87828",
+            "#F8F8B8",
+            "#983808"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_16_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212917.6143646,
+          "picker_colors": [
+            "#F8A8B8",
+            "#E83898",
+            "#C83888",
+            "#F8E8D8",
+            "#F8E8E8",
+            "#E8A8B8",
+            "#C81878",
+            "#F8A8C8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_15_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212912.5095682,
+          "picker_colors": [
+            "#88D8C8",
+            "#58B8C8",
+            "#E8F8B8",
+            "#3868B8",
+            "#3868A8",
+            "#88D8B8",
+            "#F8F8B8",
+            "#58B8B8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_14_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212910.8099494,
+          "picker_colors": [
+            "#F8D898",
+            "#F89868",
+            "#F8F8D8",
+            "#E85848",
+            "#F8C898",
+            "#F8E8D8",
+            "#F8C888",
+            "#F8F8E8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_13_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212908.9891703,
+          "picker_colors": [
+            "#A8C8D8",
+            "#C8D8E8",
+            "#98A8C8",
+            "#9868A8",
+            "#9898C8",
+            "#A8B8D8",
+            "#9868B8",
+            "#A8C8E8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_12_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212907.197132,
+          "picker_colors": [
+            "#48A868",
+            "#B8E898",
+            "#187848",
+            "#F8F8B8",
+            "#B8D898",
+            "#F8F8C8",
+            "#086838",
+            "#084828"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_11_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212905.4210916,
+          "picker_colors": [
+            "#D8B8D8",
+            "#E878B8",
+            "#D82868",
+            "#E8B8D8",
+            "#C82868",
+            "#D878B8",
+            "#C81858",
+            "#C878A8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_10_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212903.6696014,
+          "picker_colors": [
+            "#B8D8E8",
+            "#88B8D8",
+            "#E8F8F8",
+            "#5888B8",
+            "#A8D8E8",
+            "#D8F8F8",
+            "#78A8C8",
+            "#78A8D8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_9_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212900.9451828,
+          "picker_colors": [
+            "#E8C888",
+            "#C88848",
+            "#F8E8C8",
+            "#986828",
+            "#D8C888",
+            "#C88838",
+            "#B88848",
+            "#B88838"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_8_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212898.2280004,
+          "picker_colors": [
+            "#F8C8C8",
+            "#F8A8B8",
+            "#F878A8",
+            "#F8E8D8",
+            "#F8E8E8",
+            "#F8A8C8",
+            "#F8D8D8",
+            "#E8A8B8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_7_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212896.1729827,
+          "picker_colors": [
+            "#D8E8C8",
+            "#E8F8D8",
+            "#88D8C8",
+            "#B8E8B8",
+            "#A8E8B8",
+            "#C8E8C8",
+            "#88C8C8",
+            "#B8D8B8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_6_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212894.2015371,
+          "picker_colors": [
+            "#F8F8F8",
+            "#D8D8D8",
+            "#C8C8C8",
+            "#989898",
+            "#080808",
+            "#B8B8B8",
+            "#A8A8A8",
+            "#787878"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_5_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212892.1295536,
+          "picker_colors": [
+            "#F8D8A8",
+            "#F8B878",
+            "#F8E8E8",
+            "#F89858",
+            "#F89848",
+            "#F8E8D8",
+            "#F8D8B8",
+            "#F8F8E8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_4_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212888.5545955,
+          "picker_colors": [
+            "#C8C8D8",
+            "#A8A8C8",
+            "#C8C8E8",
+            "#D8D8F8",
+            "#8888B8",
+            "#B8B8D8",
+            "#A898C8",
+            "#A8A8D8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_3_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212886.0814505,
+          "picker_colors": [
+            "#F8C8A8",
+            "#F89878",
+            "#F8E8D8",
+            "#F87858",
+            "#F89888",
+            "#F8B8A8",
+            "#F87868",
+            "#E87858"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_2_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212884.5843973,
+          "picker_colors": [
+            "#C8E8C8",
+            "#A8D8A8",
+            "#88C888",
+            "#E8F8E8",
+            "#78C888",
+            "#58A868",
+            "#E8F8D8",
+            "#A8E8A8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        },
+        {
+          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_1_pytho遥感学习日志_来自小红书网页版.jpg",
+          "mtime": 1784212882.453493,
+          "picker_colors": [
+            "#C8D8F8",
+            "#A8B8D8",
+            "#C8D8E8",
+            "#E8F8F8",
+            "#D8E8F8",
+            "#98B8E8",
+            "#C8E8F8",
+            "#6888C8"
+          ],
+          "review_status": "needs_manual_review",
+          "extraction_method": "opencv_kmeans_bottom_crop"
+        }
+      ]
+    },
+    {
+      "page_title": "Palettes and Typical Figures (Old)",
+      "slug": "old_palettes_typical_figures",
+      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "has_visible_hex_or_rgb": "unknown",
+      "action": "cols4all_only_plus_typical_examples",
+      "figure_uses": [
+        "legacy typical figure examples"
+      ],
+      "notes": "Old page is not imported as image palette; only cols4all is fused from this page direction.",
+      "image_count": 0,
+      "images": []
+    }
+  ]
+}

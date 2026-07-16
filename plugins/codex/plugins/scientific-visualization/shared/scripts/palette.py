@@ -11,12 +11,13 @@ from palette_library import (
     get_palette,
     list_palettes,
     palette_to_snippet,
+    recommend_for_figure,
     recommend_palette,
 )
 
 
 def command_list(args: argparse.Namespace) -> int:
-    palettes = list_palettes(type=args.type, core_only=not args.all)
+    palettes = list_palettes(type=args.type, core_only=not args.all, source=args.source)
     for palette in palettes:
         print(
             f"{palette['id']}\t{palette['type']}\t{len(palette['colors'])}\t"
@@ -26,19 +27,23 @@ def command_list(args: argparse.Namespace) -> int:
 
 
 def command_get(args: argparse.Namespace) -> int:
-    palette = get_palette(args.id_or_alias)
+    palette = get_palette(args.id_or_alias, source=args.source)
     print(format_palette(palette, args.format))
     return 0
 
 
 def command_snippet(args: argparse.Namespace) -> int:
-    palette = get_palette(args.id_or_alias)
+    palette = get_palette(args.id_or_alias, source=args.source)
     print(palette_to_snippet(palette, args.target), end="")
     return 0
 
 
 def command_recommend(args: argparse.Namespace) -> int:
-    palettes = recommend_palette(args.purpose)
+    if args.figure_type:
+        source = "all" if args.source == "canonical" else args.source
+        palettes = recommend_for_figure(args.figure_type, source=source)
+    else:
+        palettes = recommend_palette(args.purpose, source=args.source)
     for palette in palettes:
         print(
             f"{palette['id']}\t{palette['type']}\t{len(palette['colors'])}\t"
@@ -54,24 +59,32 @@ def build_parser() -> argparse.ArgumentParser:
     p_list = sub.add_parser("list", help="List canonical palettes")
     p_list.add_argument("--type", choices=["categorical", "sequential", "diverging", "cyclic"])
     p_list.add_argument("--all", action="store_true", help="Include non-core palettes if present")
+    p_list.add_argument("--source", choices=["canonical", "cols4all", "notion", "all"], default="canonical")
     p_list.set_defaults(func=command_list)
 
     p_get = sub.add_parser("get", help="Get one palette")
     p_get.add_argument("id_or_alias")
     p_get.add_argument("--format", choices=["json", "hex", "python", "css"], default="json")
+    p_get.add_argument("--source", choices=["canonical", "cols4all", "notion", "all"], default="canonical")
     p_get.set_defaults(func=command_get)
 
     p_snippet = sub.add_parser("snippet", help="Generate plotting code for one palette")
     p_snippet.add_argument("id_or_alias")
     p_snippet.add_argument("--target", choices=["matplotlib", "seaborn", "plotly", "latex"], required=True)
+    p_snippet.add_argument("--source", choices=["canonical", "cols4all", "notion", "all"], default="canonical")
     p_snippet.set_defaults(func=command_snippet)
 
     p_recommend = sub.add_parser("recommend", help="Recommend palettes for a figure purpose")
     p_recommend.add_argument(
         "--purpose",
         choices=["categorical", "sequential", "diverging", "cyclic", "journal", "clinical", "heatmap"],
-        required=True,
     )
+    p_recommend.add_argument(
+        "--figure-type",
+        choices=["line", "scatter", "umap", "map", "heatmap", "bar", "schematic", "clinical"],
+        help="Recommend palettes for a concrete figure type; uses cols4all candidates when source=all",
+    )
+    p_recommend.add_argument("--source", choices=["canonical", "cols4all", "notion", "all"], default="canonical")
     p_recommend.set_defaults(func=command_recommend)
     return parser
 
@@ -80,6 +93,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     try:
+        if args.command == "recommend" and not args.purpose and not args.figure_type:
+            parser.error("recommend requires --purpose or --figure-type")
         return args.func(args)
     except (KeyError, FileNotFoundError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
