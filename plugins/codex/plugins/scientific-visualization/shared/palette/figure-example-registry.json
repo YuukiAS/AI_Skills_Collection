@@ -1,0 +1,1381 @@
+{
+  "library_id": "ai_skills_figure_example_registry",
+  "version": "1.0.0",
+  "source": "palette/notion-image-palettes.json",
+  "example_count": 51,
+  "examples": [
+    {
+      "example_id": "example_cvpr25_1",
+      "source_page_slug": "cvpr25",
+      "source_page_title": "CVPR25优质绘图学配色",
+      "source_image_basename": "CVPR25优质绘图学配色 _ 3D高斯溅射‼️_1_莱昂的科研日记_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "3D point cloud",
+        "Gaussian splatting",
+        "multi-panel computer vision figure"
+      ],
+      "venue_tags": [
+        "CVPR",
+        "computer-vision"
+      ],
+      "linked_candidate_ids": [
+        "notion_cvpr25_1"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "viridis",
+        "RdBu"
+      ],
+      "style_notes": "One latest image with visible bottom HEX labels; use as a computer-vision figure example and experimental palette.",
+      "usage": "parse_visible_hex_then_example"
+    },
+    {
+      "example_id": "example_aaai_3",
+      "source_page_slug": "aaai",
+      "source_page_title": "AAAI跟着顶会学配色",
+      "source_image_basename": "AAAI跟着顶会学配色_3_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "AI schematic",
+        "codec pipeline",
+        "benchmark panel",
+        "histogram",
+        "boxplot",
+        "scatter density"
+      ],
+      "venue_tags": [
+        "AAAI",
+        "ai-schematic"
+      ],
+      "linked_candidate_ids": [
+        "notion_aaai_3"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "cividis"
+      ],
+      "style_notes": "Three images with visible RGB/HEX labels; picker output is kept for verification.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_aaai_2",
+      "source_page_slug": "aaai",
+      "source_page_title": "AAAI跟着顶会学配色",
+      "source_image_basename": "AAAI跟着顶会学配色_2_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "AI schematic",
+        "codec pipeline",
+        "benchmark panel",
+        "histogram",
+        "boxplot",
+        "scatter density"
+      ],
+      "venue_tags": [
+        "AAAI",
+        "ai-schematic"
+      ],
+      "linked_candidate_ids": [
+        "notion_aaai_2"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "cividis"
+      ],
+      "style_notes": "Three images with visible RGB/HEX labels; picker output is kept for verification.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_aaai_1",
+      "source_page_slug": "aaai",
+      "source_page_title": "AAAI跟着顶会学配色",
+      "source_image_basename": "AAAI跟着顶会学配色_1_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "AI schematic",
+        "codec pipeline",
+        "benchmark panel",
+        "histogram",
+        "boxplot",
+        "scatter density"
+      ],
+      "venue_tags": [
+        "AAAI",
+        "ai-schematic"
+      ],
+      "linked_candidate_ids": [
+        "notion_aaai_1"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "cividis"
+      ],
+      "style_notes": "Three images with visible RGB/HEX labels; picker output is kept for verification.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_journal_reviewer_9_10",
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_10_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "linked_candidate_ids": [
+        "notion_journal_reviewer_9_10"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_journal_reviewer_9_9",
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_9_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "linked_candidate_ids": [
+        "notion_journal_reviewer_9_9"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_journal_reviewer_9_8",
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_8_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "linked_candidate_ids": [
+        "notion_journal_reviewer_9_8"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_journal_reviewer_9_7",
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_7_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "linked_candidate_ids": [
+        "notion_journal_reviewer_9_7"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_journal_reviewer_9_6",
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_6_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "linked_candidate_ids": [
+        "notion_journal_reviewer_9_6"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_journal_reviewer_9_5",
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_5_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "linked_candidate_ids": [
+        "notion_journal_reviewer_9_5"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_journal_reviewer_9_4",
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_4_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "linked_candidate_ids": [
+        "notion_journal_reviewer_9_4"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_journal_reviewer_9_3",
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_3_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "linked_candidate_ids": [
+        "notion_journal_reviewer_9_3"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_journal_reviewer_9_2",
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_2_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "linked_candidate_ids": [
+        "notion_journal_reviewer_9_2"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_icml_clean_3",
+      "source_page_slug": "icml_clean",
+      "source_page_title": "ICML的清爽绘图风格！学了就能Accept‼️",
+      "source_image_basename": "ICML的清爽绘图风格！学了就能Accept‼️_3_莱昂的科研日记_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "ICML-style schematic",
+        "line chart",
+        "attention heatmap",
+        "model comparison figure"
+      ],
+      "venue_tags": [
+        "ICML",
+        "machine-learning"
+      ],
+      "linked_candidate_ids": [
+        "notion_icml_clean_3"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "viridis",
+        "coolwarm"
+      ],
+      "style_notes": "Three figures; mostly examples. Extracted colors need manual review before promotion.",
+      "usage": "derive_examples_first_palette_second"
+    },
+    {
+      "example_id": "example_icml_clean_2",
+      "source_page_slug": "icml_clean",
+      "source_page_title": "ICML的清爽绘图风格！学了就能Accept‼️",
+      "source_image_basename": "ICML的清爽绘图风格！学了就能Accept‼️_2_莱昂的科研日记_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "ICML-style schematic",
+        "line chart",
+        "attention heatmap",
+        "model comparison figure"
+      ],
+      "venue_tags": [
+        "ICML",
+        "machine-learning"
+      ],
+      "linked_candidate_ids": [
+        "notion_icml_clean_2"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "viridis",
+        "coolwarm"
+      ],
+      "style_notes": "Three figures; mostly examples. Extracted colors need manual review before promotion.",
+      "usage": "derive_examples_first_palette_second"
+    },
+    {
+      "example_id": "example_icml_clean_1",
+      "source_page_slug": "icml_clean",
+      "source_page_title": "ICML的清爽绘图风格！学了就能Accept‼️",
+      "source_image_basename": "ICML的清爽绘图风格！学了就能Accept‼️_1_莱昂的科研日记_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "ICML-style schematic",
+        "line chart",
+        "attention heatmap",
+        "model comparison figure"
+      ],
+      "venue_tags": [
+        "ICML",
+        "machine-learning"
+      ],
+      "linked_candidate_ids": [
+        "notion_icml_clean_1"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "viridis",
+        "coolwarm"
+      ],
+      "style_notes": "Three figures; mostly examples. Extracted colors need manual review before promotion.",
+      "usage": "derive_examples_first_palette_second"
+    },
+    {
+      "example_id": "example_nature_inspiration_8",
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_8_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_inspiration_8"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
+      "usage": "parse_visible_hex_and_picker"
+    },
+    {
+      "example_id": "example_nature_inspiration_7",
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_7_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_inspiration_7"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
+      "usage": "parse_visible_hex_and_picker"
+    },
+    {
+      "example_id": "example_nature_inspiration_6",
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_6_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_inspiration_6"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
+      "usage": "parse_visible_hex_and_picker"
+    },
+    {
+      "example_id": "example_nature_inspiration_5",
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_5_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_inspiration_5"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
+      "usage": "parse_visible_hex_and_picker"
+    },
+    {
+      "example_id": "example_nature_inspiration_4",
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_4_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_inspiration_4"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
+      "usage": "parse_visible_hex_and_picker"
+    },
+    {
+      "example_id": "example_nature_inspiration_3",
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_3_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_inspiration_3"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
+      "usage": "parse_visible_hex_and_picker"
+    },
+    {
+      "example_id": "example_nature_inspiration_2",
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_2_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_inspiration_2"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
+      "usage": "parse_visible_hex_and_picker"
+    },
+    {
+      "example_id": "example_nature_inspiration_1",
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_1_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_inspiration_1"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
+      "usage": "parse_visible_hex_and_picker"
+    },
+    {
+      "example_id": "example_nature_same_palette_8",
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_8_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_same_palette_8"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_nature_same_palette_7",
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_7_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_same_palette_7"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_nature_same_palette_6",
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_6_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_same_palette_6"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_nature_same_palette_5",
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_5_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_same_palette_5"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_nature_same_palette_4",
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_4_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_same_palette_4"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_nature_same_palette_3",
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_3_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_same_palette_3"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_nature_same_palette_2",
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_2_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_same_palette_2"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_nature_same_palette_1",
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_1_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "linked_candidate_ids": [
+        "notion_nature_same_palette_1"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
+      "usage": "parse_visible_hex_then_picker_check"
+    },
+    {
+      "example_id": "example_python_bar_distribution_18",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_18_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_18"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_17",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_17_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_17"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_16",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_16_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_16"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_15",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_15_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_15"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_14",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_14_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_14"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_13",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_13_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_13"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_12",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_12_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_12"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_11",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_11_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_11"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_10",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_10_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_10"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_9",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_9_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_9"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_8",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_8_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_8"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_7",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_7_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_7"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_6",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_6_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_6"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_5",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_5_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_5"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_4",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_4_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_4"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_3",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_3_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_3"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_2",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_2_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_2"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_python_bar_distribution_1",
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_1_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "linked_candidate_ids": [
+        "notion_python_bar_distribution_1"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
+      "usage": "derive_bar_palette_and_example"
+    },
+    {
+      "example_id": "example_old_palettes_typical_figures",
+      "source_page_slug": "old_palettes_typical_figures",
+      "source_page_title": "Palettes and Typical Figures (Old)",
+      "source_asset_committed": false,
+      "figure_type_tags": [
+        "legacy typical figure examples"
+      ],
+      "venue_tags": [
+        "legacy-examples"
+      ],
+      "linked_candidate_ids": [],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "viridis"
+      ],
+      "style_notes": "Old page is not imported as image palette; only cols4all is fused from this page direction.",
+      "usage": "cols4all_only_plus_typical_examples"
+    }
+  ]
+}

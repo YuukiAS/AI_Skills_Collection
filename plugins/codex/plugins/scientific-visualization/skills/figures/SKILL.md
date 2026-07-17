@@ -1,14 +1,13 @@
 ---
-name: scientific-visualization
-description: Publication-ready figures, canonical scientific palettes, Matplotlib/Seaborn/Plotly snippets, schematics, posters, and venue figure QA for papers and top conferences.
+name: publication-figures
+description: Publication figure orchestration with Matplotlib, Seaborn, Plotly, canonical palettes, and export-ready figure layout.
 status: active
 provenance: generated
 trusted: false
-requires_network: true
+requires_network: false
 writes_files: true
-executes_code: true
+executes_code: false
 secrets_needed:
-  - OPENROUTER_API_KEY
 last_reviewed: 2026-07-10
 profile_tags:
 recommended_scope: project
@@ -17,19 +16,16 @@ source_skills:
   - skills/tools/visualization/matplotlib
   - skills/tools/visualization/seaborn
   - skills/tools/visualization/plotly
-  - skills/science/communication/scientific-schematics
-  - skills/science/communication/latex-posters
-  - skills/writing/research/venue-templates
 icon_small: "assets/codex/app-skill-icons/aggregate.svg"
 icon_large: "assets/codex/app-skill-icons/aggregate.svg"
 default_prompt:
 ---
 
-# scientific-visualization
+# publication-figures
 
 ## Trigger Boundary
 
-Publication-ready figures, canonical scientific palettes, Matplotlib/Seaborn/Plotly snippets, schematics, posters, and venue figure QA for papers and top conferences.
+Publication figure orchestration with Matplotlib, Seaborn, Plotly, canonical palettes, and export-ready figure layout.
 
 Use this aggregate Codex App skill when the task matches one of the source workflows below.
 
@@ -39,19 +35,12 @@ Use this aggregate Codex App skill when the task matches one of the source workf
 - `matplotlib`: Low-level plotting library for full customization. Use when you need fine-grained control over every plot element, creating novel plot types, or integrating with specific scientific workflows. Reference: `_src/mpl/source.md`
 - `seaborn`: Statistical visualization with pandas integration. Use for quick exploration of distributions, relationships, and categorical comparisons with attractive defaults. Best for box plots, violin plots, pair plots, heatmaps. Built on matplotlib. For interactive plots use plotly; for publication styling use scientific-visualization. Reference: `_src/seaborn/source.md`
 - `plotly`: Interactive visualization library. Use when you need hover info, zoom, pan, or web-embeddable charts. Best for dashboards, exploratory analysis, and presentations. For static publication figures use matplotlib or scientific-visualization. Reference: `_src/plotly/source.md`
-- `scientific-schematics`: Create publication-quality scientific diagrams using Nano Banana 2 AI with smart iterative refinement. Uses Gemini 3.1 Pro Preview for quality review. Reference: `_src/schematics/source.md`
-- `latex-posters`: Create professional research posters in LaTeX using beamerposter, tikzposter, or baposter. Support for conference presentations, academic posters, and scientific communication. Includes layout design, color schemes, multi-column formats, figure integration, and poster-specific best practices for visual communication. Reference: `_src/posters/source.md`
-- `venue-templates`: This skill should be used when preparing manuscripts for journal submission, conference papers, research posters, or grant proposals and need venue-specific formatting requirements and templates. Reference: `_src/venue/source.md`
 
 ## Plugin Workflow Notes
 
-- For palette selection, first read `../../shared/palette/scientific-figure-palettes.json` and `../../shared/palette/ROUTING.md` when running inside this plugin.
-- For broad external palette search, read `../../shared/palette/external/cols4all-palettes.json`; those entries are GPL-3 and must keep license/provenance visible.
-- For Notion image-derived inspiration, read `../../shared/palette/notion-image-palettes.json` and treat picker colors as experimental review candidates.
-- Use `../../shared/scripts/palette.py list --source cols4all` and `../../shared/scripts/palette.py recommend --figure-type heatmap --source all` when a task needs more than the canonical core.
-- In the source repository, use `palette/scientific-figure-palettes.json` and the read-only CLI `python scripts/palette.py`.
-- Use journal-inspired palettes only as non-official visual inspiration and preserve the disclaimer in figure guidance.
-- Route manuscript-level figure policy to research-writing, but route figure color, plot code, and visual QA here.
+- For palette selection, use `publication-figure-palettes` or `../../shared/scripts/palette.py` before choosing raw colors.
+- For figure readiness checks, use `scientific-figure-qa` after plotting or layout decisions.
+- Venue templates belong to research-writing; this plugin owns figure color, plotting code, visual examples, schematics, and posters.
 
 ## Workflow
 

@@ -11,6 +11,8 @@ secrets_needed:
 last_reviewed: 2026-05-14
 profile_tags:
 recommended_scope: project
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 allowed-tools: Read Write Edit Bash
 ---
 # LaTeX Research Posters
@@ -18,6 +20,11 @@ allowed-tools: Read Write Edit Bash
 ## Overview
 
 Research posters are a critical medium for scientific communication at conferences, symposia, and academic events. This skill provides comprehensive guidance for creating professional, visually appealing research posters using LaTeX packages. Generate publication-quality posters with proper layout, typography, color schemes, and visual hierarchy.
+
+For poster figure palettes, use the shared scientific palette API and presets
+rather than raw colors embedded only in poster guidance. Route palette selection
+to `publication-figure-palettes`; route accessibility/export checks to
+`scientific-figure-qa`.
 
 ## When to Use This Skill
 

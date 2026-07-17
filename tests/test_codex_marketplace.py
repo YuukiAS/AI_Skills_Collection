@@ -163,6 +163,23 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertNotIn("skills/tools/documents-media/pptx", serialized)
         self.assertNotIn("scientific-slides", serialized)
 
+    def test_scientific_visualization_exposes_split_figure_workflows(self) -> None:
+        data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        plugin_data = next(plugin for plugin in data["plugins"] if plugin["name"] == "scientific-visualization")
+        self.assertEqual(plugin_data["version"], "4.1.0")
+        self.assertEqual(
+            [entry["name"] if entry["type"] == "aggregate" else Path(entry["source"]).name for entry in plugin_data["skills"]],
+            [
+                "publication-figures",
+                "publication-figure-palettes",
+                "scientific-figure-qa",
+                "scientific-schematics",
+                "latex-posters",
+            ],
+        )
+        serialized = json.dumps(plugin_data)
+        self.assertNotIn("skills/writing/research/venue-templates", serialized)
+
     def test_render_and_slurm_are_not_central_marketplace_skills(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         serialized = json.dumps(data)

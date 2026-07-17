@@ -1,7 +1,7 @@
 {
   "name": "scientific-visualization",
-  "version": "4.0.0",
-  "description": "Publication-ready scientific figures, canonical research palettes, plotting snippets, schematics, posters, and venue figure QA.",
+  "version": "4.1.0",
+  "description": "Publication-ready scientific figures, palette recommendation, example-derived conference styles, figure QA, schematics, and posters.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Scientific Visualization",
-    "shortDescription": "Publication-ready scientific figures, canonical research palettes, plotting snippets, schematics, posters, and venue figure QA.",
-    "longDescription": "Publication-ready scientific figures, canonical research palettes, plotting snippets, schematics, posters, and venue figure QA. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Publication-ready scientific figures, palette recommendation, example-derived conference styles, figure QA, schematics, and posters.",
+    "longDescription": "Publication-ready scientific figures, palette recommendation, example-derived conference styles, figure QA, schematics, and posters. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [
@@ -27,9 +27,9 @@
     ],
     "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
     "defaultPrompt": [
-      "Choose a publication-ready palette for this figure.",
-      "Generate matplotlib or seaborn code for a paper figure.",
-      "Audit this figure for color, export, and venue readiness."
+      "Create or refine a publication-ready scientific figure.",
+      "Choose a contextual palette or Notion-derived style candidate with provenance.",
+      "Audit this figure for accessibility, export, and venue readiness."
     ],
     "brandColor": "#0E7490",
     "composerIcon": "./.codex-plugin/assets/composer.svg",

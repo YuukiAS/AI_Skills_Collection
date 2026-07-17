@@ -21,6 +21,13 @@ metadata:
 
 Seaborn is a Python visualization library for creating publication-quality statistical graphics. Use this skill for dataset-oriented plotting, multivariate analysis, automatic statistical estimation, and complex multi-panel figures with minimal code.
 
+For publication palettes, do not maintain a separate Seaborn-only palette
+policy. Use the shared palette API:
+`python scripts/palette.py recommend ...` and
+`python scripts/palette.py snippet <palette-id> --target seaborn`. Treat
+Notion-derived candidates as experimental unless the palette metadata says
+otherwise.
+
 ## Design Philosophy
 
 Seaborn follows these core principles:

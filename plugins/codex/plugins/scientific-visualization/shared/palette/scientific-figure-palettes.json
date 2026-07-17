@@ -18,49 +18,48 @@
       "coolwarm"
     ],
     "journal_style_rule": "Use journal-inspired palettes only as non-official style inspiration and always run accessibility review.",
-    "routing": "Scientific figures use palette/; presentations use themes; product UI uses semantic design tokens."
+    "routing": "Scientific figures use palette/; presentations use themes; product UI uses semantic design tokens.",
+    "tier_routing": {
+      "core_publication": "Default publication-ready palettes for general scientific figures.",
+      "journal_inspired_nonofficial": "Contextual journal-style inspiration only; not official branding.",
+      "curated_external_gpl": "Explicit external candidates with GPL-3 provenance."
+    }
   },
   "external_sources": [
     {
       "name": "ColorBrewer",
       "url": "https://github.com/axismaps/colorbrewer",
       "repo_commit": "7d135fc4e19eda73f2eb1bf55fcdf4a04fe4881f",
-      "local_path": "C:\\Users\\yuukias\\AppData\\Local\\Temp\\ai-skills-palette-sources\\colorbrewer",
       "usage": "copied ColorBrewer target palettes"
     },
     {
       "name": "Matplotlib",
       "url": "https://github.com/matplotlib/matplotlib",
       "repo_commit": "63bd095608a65ff6f33112009797b66cadab7f06",
-      "local_path": "C:\\Users\\yuukias\\AppData\\Local\\Temp\\ai-skills-palette-sources\\matplotlib",
       "usage": "sampled target colormaps from cloned source"
     },
     {
       "name": "Material Color Utilities",
       "url": "https://github.com/material-foundation/material-color-utilities",
       "repo_commit": "6fd88eb3e95ba1d457842e2a2bf847d06b3a018a",
-      "local_path": "C:\\Users\\yuukias\\AppData\\Local\\Temp\\ai-skills-palette-sources\\material-color-utilities",
       "usage": "referenced for product/UI dynamic color boundary; no scientific palette copied"
     },
     {
       "name": "ggsci",
       "url": "https://github.com/nanxstats/ggsci",
       "repo_commit": "16660ea17f8d9b306828b8411580ea1ac1fa9109",
-      "local_path": "C:\\Users\\yuukias\\AppData\\Local\\Temp\\ai-skills-palette-sources\\ggsci",
       "usage": "copied journal-inspired palettes"
     },
     {
       "name": "Color Universal Design (CUD)",
       "url": "https://jfly.uni-koeln.de/color/",
       "access_date": "2026-07-16",
-      "local_path": "C:\\Users\\yuukias\\AppData\\Local\\Temp\\ai-skills-palette-sources\\okabe-ito-cud.html",
       "usage": "referenced Okabe-Ito/CUD guidance"
     },
     {
       "name": "cols4all",
       "url": "https://github.com/cols4all/cols4all-R",
       "repo_commit": "6c0ca5a6026109d2fb476d2011538c65aa5f0794",
-      "local_path": "C:\\Users\\yuukias\\AppData\\Local\\Temp\\ai-skills-palette-sources\\cols4all-R",
       "access_date": "2026-07-17",
       "usage": "copied GPL-3 palette colors to palette/external and curated non-core scientific figure candidates; computed c4a_scores for canonical palettes",
       "license": "GPL-3",
@@ -114,7 +113,9 @@
       ],
       "stability": "stable",
       "core": true,
-      "notes": "Values are the standard Okabe-Ito palette used with CUD guidance; the downloaded CUD page is recorded as the verified upstream guidance source."
+      "notes": "Values are the standard Okabe-Ito palette used with CUD guidance; the downloaded CUD page is recorded as the verified upstream guidance source.",
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "nature_npg",
@@ -163,9 +164,11 @@
         }
       ],
       "stability": "stable",
-      "core": true,
+      "core": false,
       "is_official_branding": false,
-      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci."
+      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci.",
+      "tier": "journal_inspired_nonofficial",
+      "recommendation_status": "contextual_nonofficial"
     },
     {
       "id": "science_aaas",
@@ -214,9 +217,11 @@
         }
       ],
       "stability": "stable",
-      "core": true,
+      "core": false,
       "is_official_branding": false,
-      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci."
+      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci.",
+      "tier": "journal_inspired_nonofficial",
+      "recommendation_status": "contextual_nonofficial"
     },
     {
       "id": "nejm",
@@ -263,9 +268,11 @@
         }
       ],
       "stability": "stable",
-      "core": true,
+      "core": false,
       "is_official_branding": false,
-      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci."
+      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci.",
+      "tier": "journal_inspired_nonofficial",
+      "recommendation_status": "contextual_nonofficial"
     },
     {
       "id": "lancet",
@@ -313,9 +320,11 @@
         }
       ],
       "stability": "stable",
-      "core": true,
+      "core": false,
       "is_official_branding": false,
-      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci."
+      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci.",
+      "tier": "journal_inspired_nonofficial",
+      "recommendation_status": "contextual_nonofficial"
     },
     {
       "id": "jama",
@@ -361,9 +370,11 @@
         }
       ],
       "stability": "stable",
-      "core": true,
+      "core": false,
       "is_official_branding": false,
-      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci."
+      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci.",
+      "tier": "journal_inspired_nonofficial",
+      "recommendation_status": "contextual_nonofficial"
     },
     {
       "id": "bmj",
@@ -411,9 +422,11 @@
         }
       ],
       "stability": "stable",
-      "core": true,
+      "core": false,
       "is_official_branding": false,
-      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci."
+      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci.",
+      "tier": "journal_inspired_nonofficial",
+      "recommendation_status": "contextual_nonofficial"
     },
     {
       "id": "jco",
@@ -462,9 +475,11 @@
         }
       ],
       "stability": "stable",
-      "core": true,
+      "core": false,
       "is_official_branding": false,
-      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci."
+      "disclaimer": "Not official journal branding or publisher style guidance; this is a journal-inspired palette sourced from ggsci.",
+      "tier": "journal_inspired_nonofficial",
+      "recommendation_status": "contextual_nonofficial"
     },
     {
       "id": "Dark2",
@@ -511,7 +526,9 @@
         }
       ],
       "stability": "stable",
-      "core": true
+      "core": true,
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "Set2",
@@ -558,7 +575,9 @@
         }
       ],
       "stability": "stable",
-      "core": true
+      "core": true,
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "Paired",
@@ -609,7 +628,9 @@
         }
       ],
       "stability": "stable",
-      "core": true
+      "core": true,
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "Blues",
@@ -657,7 +678,9 @@
         }
       ],
       "stability": "stable",
-      "core": true
+      "core": true,
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "YlGnBu",
@@ -705,7 +728,9 @@
         }
       ],
       "stability": "stable",
-      "core": true
+      "core": true,
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "OrRd",
@@ -753,7 +778,9 @@
         }
       ],
       "stability": "stable",
-      "core": true
+      "core": true,
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "RdBu",
@@ -803,7 +830,9 @@
         }
       ],
       "stability": "stable",
-      "core": true
+      "core": true,
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "BrBG",
@@ -853,7 +882,9 @@
         }
       ],
       "stability": "stable",
-      "core": true
+      "core": true,
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "PuOr",
@@ -903,7 +934,9 @@
         }
       ],
       "stability": "stable",
-      "core": true
+      "core": true,
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "viridis",
@@ -956,7 +989,9 @@
       "sampling": {
         "method": "evenly sampled inclusive endpoints",
         "sample_count": 9
-      }
+      },
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "plasma",
@@ -1008,7 +1043,9 @@
       "sampling": {
         "method": "evenly sampled inclusive endpoints",
         "sample_count": 9
-      }
+      },
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "inferno",
@@ -1060,7 +1097,9 @@
       "sampling": {
         "method": "evenly sampled inclusive endpoints",
         "sample_count": 9
-      }
+      },
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "magma",
@@ -1112,7 +1151,9 @@
       "sampling": {
         "method": "evenly sampled inclusive endpoints",
         "sample_count": 9
-      }
+      },
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "cividis",
@@ -1164,7 +1205,9 @@
       "sampling": {
         "method": "evenly sampled inclusive endpoints",
         "sample_count": 9
-      }
+      },
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "twilight",
@@ -1219,7 +1262,9 @@
       "sampling": {
         "method": "evenly sampled inclusive endpoints",
         "sample_count": 12
-      }
+      },
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "coolwarm",
@@ -1272,7 +1317,9 @@
       "sampling": {
         "method": "linear interpolation from cloned segmented colormap data",
         "sample_count": 11
-      }
+      },
+      "tier": "core_publication",
+      "recommendation_status": "default"
     },
     {
       "id": "cols4all_area7",
@@ -1335,7 +1382,9 @@
         "contrastBK": false,
         "equiluminance": true
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     },
     {
       "id": "cols4all_area8",
@@ -1399,7 +1448,9 @@
         "contrastBK": false,
         "equiluminance": true
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     },
     {
       "id": "cols4all_area9",
@@ -1464,7 +1515,9 @@
         "contrastBK": false,
         "equiluminance": true
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     },
     {
       "id": "cols4all_line7",
@@ -1527,7 +1580,9 @@
         "contrastBK": false,
         "equiluminance": true
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     },
     {
       "id": "cols4all_line8",
@@ -1591,7 +1646,9 @@
         "contrastBK": false,
         "equiluminance": true
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     },
     {
       "id": "cols4all_line9",
@@ -1656,7 +1713,9 @@
         "contrastBK": false,
         "equiluminance": true
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     },
     {
       "id": "cols4all_friendly5",
@@ -1717,7 +1776,9 @@
         "contrastBK": false,
         "equiluminance": true
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     },
     {
       "id": "cols4all_friendly7",
@@ -1780,7 +1841,9 @@
         "contrastBK": true,
         "equiluminance": true
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     },
     {
       "id": "cols4all_friendly9",
@@ -1845,7 +1908,9 @@
         "contrastBK": true,
         "equiluminance": true
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     },
     {
       "id": "cols4all_friendly11",
@@ -1912,7 +1977,9 @@
         "contrastBK": true,
         "equiluminance": true
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     },
     {
       "id": "cols4all_friendly13",
@@ -1981,7 +2048,9 @@
         "contrastBK": true,
         "equiluminance": true
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     },
     {
       "id": "tol_bright",
@@ -2044,7 +2113,9 @@
         "contrastBK": false,
         "equiluminance": true
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     },
     {
       "id": "carto_safe",
@@ -2111,7 +2182,9 @@
         "contrastBK": true,
         "equiluminance": true
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     },
     {
       "id": "scico_batlow",
@@ -2174,7 +2247,9 @@
         "contrastBK": true,
         "equiluminance": false
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     },
     {
       "id": "hcl_purple_green",
@@ -2239,7 +2314,9 @@
         "contrastBK": true,
         "equiluminance": true
       },
-      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads."
+      "disclaimer": "External GPL-3 palette exported from cols4all; keep provenance and license visible in redistributed plugin payloads.",
+      "tier": "curated_external_gpl",
+      "recommendation_status": "explicit_external"
     }
   ]
 }

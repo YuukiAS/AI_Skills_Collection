@@ -5,9 +5,9 @@ This report records what can be proven from files currently in this repository. 
 ## Summary
 
 - Scope: `active_and_non_archived`
-- Skills audited: 148
+- Skills audited: 150
 - Skills with explicit source fields: 11
-- User-authored skills: 16
+- User-authored skills: 18
 - External adapted skills: 11
 - External vendored skills: 0
 - Generated skills: 0
@@ -23,7 +23,7 @@ This report records what can be proven from files currently in this repository. 
 | external-adapted | 11 |
 | local | 6 |
 | unknown | 115 |
-| user-authored | 16 |
+| user-authored | 18 |
 
 ## User Authored
 
@@ -36,6 +36,8 @@ This report records what can be proven from files currently in this repository. 
 | clinical-guideline-checking | skills/domains/medicine-clinical/clinical-guideline-checking | user-authored |  |
 | medical-literature-evidence-review | skills/domains/medicine-clinical/medical-literature-evidence-review | user-authored |  |
 | medical-safety-boundaries | skills/domains/medicine-clinical/medical-safety-boundaries | user-authored |  |
+| publication-figure-palettes | skills/science/communication/publication-figure-palettes | user-authored |  |
+| scientific-figure-qa | skills/science/communication/scientific-figure-qa | user-authored |  |
 | business-presentations | skills/tools/documents-media/presentations/business-presentations | user-authored |  |
 | research-presentations | skills/tools/documents-media/presentations/research-presentations | user-authored |  |
 | render-chinese-math-pdf | skills/tools/documents-media/render-chinese-math-pdf | user-authored |  |

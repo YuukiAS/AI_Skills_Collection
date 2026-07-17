@@ -18,6 +18,11 @@ COLS4ALL = PALETTE_DIR / "external" / "cols4all-palettes.json"
 COLS4ALL_SCHEMA = PALETTE_DIR / "external" / "cols4all-palettes.schema.json"
 COLS4ALL_EVALUATION = PALETTE_DIR / "cols4all-evaluation.json"
 NOTION_IMAGES = PALETTE_DIR / "notion-image-palettes.json"
+NOTION_CANDIDATES = PALETTE_DIR / "notion-palette-candidates.json"
+FIGURE_EXAMPLES = PALETTE_DIR / "figure-example-registry.json"
+NOTION_REVIEW_QUEUE = PALETTE_DIR / "notion-review-queue.json"
+PUBLICATION_PRESETS = PALETTE_DIR / "publication-figure-presets.json"
+THIRD_PARTY_NOTICES = PALETTE_DIR / "THIRD_PARTY_NOTICES.md"
 
 REQUIRED_IDS = {
     "okabe_ito",
@@ -62,6 +67,7 @@ REQUIRED_FIELDS = {
 }
 
 HEX = re.compile(r"^#[0-9A-Fa-f]{6}$")
+LOCAL_PATH_PATTERNS = ("C:\\Users\\", "/Users/", "/home/")
 
 
 def load_json(path: Path) -> object:
@@ -88,6 +94,10 @@ def main() -> int:
     cols4all_schema = load_json(COLS4ALL_SCHEMA) if COLS4ALL_SCHEMA.exists() else None
     cols4all_evaluation = load_json(COLS4ALL_EVALUATION) if COLS4ALL_EVALUATION.exists() else None
     notion_images = load_json(NOTION_IMAGES) if NOTION_IMAGES.exists() else None
+    notion_candidates = load_json(NOTION_CANDIDATES) if NOTION_CANDIDATES.exists() else None
+    figure_examples = load_json(FIGURE_EXAMPLES) if FIGURE_EXAMPLES.exists() else None
+    notion_review_queue = load_json(NOTION_REVIEW_QUEUE) if NOTION_REVIEW_QUEUE.exists() else None
+    publication_presets = load_json(PUBLICATION_PRESETS) if PUBLICATION_PRESETS.exists() else None
 
     if not isinstance(canonical, dict):
         errors.append("canonical file must be a JSON object")
@@ -198,6 +208,9 @@ def main() -> int:
     for expected in {"colorbrewer", "matplotlib", "material color utilities", "ggsci", "color universal design (cud)", "cols4all"}:
         if expected not in source_names:
             errors.append(f"external_sources missing {expected}")
+    for source in external_sources:
+        if isinstance(source, dict) and "local_path" in source:
+            errors.append("external_sources must not store local_path")
 
     curated_cols4all_ids = {
         "cols4all_area7",
@@ -227,6 +240,23 @@ def main() -> int:
             errors.append(f"{pid} must keep GPL-3 license metadata")
         if "cols4all" not in origin_names(palette):
             errors.append(f"{pid} must reference cols4all in origins")
+
+    core_publication = [palette for palette in palettes if palette.get("tier") == "core_publication"]
+    journal_nonofficial = [palette for palette in palettes if palette.get("tier") == "journal_inspired_nonofficial"]
+    curated_gpl = [palette for palette in palettes if palette.get("tier") == "curated_external_gpl"]
+    if len(palettes) != 39:
+        errors.append(f"canonical palette count must remain 39, found {len(palettes)}")
+    if len(core_publication) != 17:
+        errors.append(f"core_publication palette count must be 17, found {len(core_publication)}")
+    if len(journal_nonofficial) != 7:
+        errors.append(f"journal_inspired_nonofficial palette count must be 7, found {len(journal_nonofficial)}")
+    if len(curated_gpl) != 15:
+        errors.append(f"curated_external_gpl palette count must be 15, found {len(curated_gpl)}")
+    for palette in journal_nonofficial:
+        if palette.get("core") is not False:
+            errors.append(f"{palette.get('id')} journal-inspired palette must be non-core")
+        if palette.get("is_official_branding") is not False:
+            errors.append(f"{palette.get('id')} must be marked non-official branding")
 
     legacy_palettes = legacy.get("palettes", [])
     if not isinstance(legacy_palettes, list) or not legacy_palettes:
@@ -264,6 +294,12 @@ def main() -> int:
     if not isinstance(notion_images, dict):
         errors.append("notion image palette file missing or invalid")
     else:
+        notion_text = NOTION_IMAGES.read_text(encoding="utf-8")
+        for pattern in LOCAL_PATH_PATTERNS:
+            if pattern in notion_text:
+                errors.append(f"notion image palette file must not contain local path pattern {pattern}")
+        if '"mtime"' in notion_text:
+            errors.append("notion image palette file must not contain mtime fields")
         pages = notion_images.get("pages", [])
         if not isinstance(pages, list) or len(pages) != 8:
             errors.append("notion image palette file must record all 8 palette pages")
@@ -303,11 +339,107 @@ def main() -> int:
                     continue
                 primary = image.get("primary_colors", [])
                 if image.get("color_source") == "visible_hex_manual_transcription" and primary != image.get("visible_hex_colors"):
-                    errors.append(f"notion image {image.get('file')} primary_colors must use visible_hex_colors")
+                    errors.append(f"notion image {image.get('candidate_id')} primary_colors must use visible_hex_colors")
                 if primary:
                     bad_primary = [c for c in primary if not isinstance(c, str) or not HEX.match(c)]
                     if bad_primary:
-                        errors.append(f"notion image {image.get('file')} has invalid primary colors: {bad_primary[:3]}")
+                        errors.append(f"notion image {image.get('candidate_id')} has invalid primary colors: {bad_primary[:3]}")
+                if "file" in image or "mtime" in image:
+                    errors.append(f"notion image {image.get('candidate_id')} must not keep file or mtime")
+
+    candidate_ids: set[str] = set()
+    if not isinstance(notion_candidates, dict):
+        errors.append("notion candidate file missing or invalid")
+    else:
+        candidates = notion_candidates.get("candidates", [])
+        if not isinstance(candidates, list) or len(candidates) != 50:
+            errors.append("notion candidate file must contain 50 image-level candidates")
+            candidates = []
+        for candidate in candidates:
+            if not isinstance(candidate, dict):
+                errors.append("notion candidate entry must be an object")
+                continue
+            cid = candidate.get("candidate_id")
+            if not isinstance(cid, str) or not cid:
+                errors.append("notion candidate missing candidate_id")
+                continue
+            if cid in candidate_ids:
+                errors.append(f"duplicate notion candidate id: {cid}")
+            candidate_ids.add(cid)
+            if candidate.get("review_status") != "unreviewed":
+                errors.append(f"{cid} must remain unreviewed")
+            colors = candidate.get("colors", [])
+            if not isinstance(colors, list) or not colors:
+                errors.append(f"{cid} must contain colors")
+            else:
+                bad_colors = [c for c in colors if not isinstance(c, str) or not HEX.match(c)]
+                if bad_colors:
+                    errors.append(f"{cid} has invalid colors: {bad_colors[:3]}")
+            if candidate.get("color_source") == "visible_hex_manual_transcription":
+                if candidate.get("colors") != candidate.get("source_evidence", {}).get("visible_hex_colors"):
+                    errors.append(f"{cid} colors must match visible_hex_colors evidence")
+                if len(candidate.get("colors", [])) > 12:
+                    if candidate.get("palette_role") != "composite" or candidate.get("snippet_eligibility") != "blocked":
+                        errors.append(f"{cid} large transcribed color card must be composite and snippet-blocked")
+                elif candidate.get("snippet_eligibility") != "requires_allow_experimental":
+                    errors.append(f"{cid} transcribed candidate must require experimental snippet gate")
+            elif candidate.get("snippet_eligibility") != "blocked":
+                errors.append(f"{cid} non-transcribed candidate must be snippet-blocked")
+            if not candidate.get("canonical_fallback_ids"):
+                errors.append(f"{cid} missing canonical_fallback_ids")
+
+    example_ids: set[str] = set()
+    if not isinstance(figure_examples, dict):
+        errors.append("figure example registry missing or invalid")
+    else:
+        examples = figure_examples.get("examples", [])
+        if not isinstance(examples, list) or len(examples) < 51:
+            errors.append("figure example registry must contain image examples and old-page example")
+            examples = []
+        for example in examples:
+            if not isinstance(example, dict):
+                continue
+            example_id = example.get("example_id")
+            if not isinstance(example_id, str) or not example_id:
+                errors.append("figure example missing example_id")
+                continue
+            if example_id in example_ids:
+                errors.append(f"duplicate example id: {example_id}")
+            example_ids.add(example_id)
+            for cid in example.get("linked_candidate_ids", []):
+                if cid not in candidate_ids:
+                    errors.append(f"example {example_id} references unknown candidate {cid}")
+
+    if not isinstance(notion_review_queue, dict):
+        errors.append("notion review queue missing or invalid")
+    else:
+        queue_ids = {entry.get("candidate_id") for entry in notion_review_queue.get("entries", []) if isinstance(entry, dict)}
+        if candidate_ids and queue_ids != candidate_ids:
+            errors.append("notion review queue must cover every candidate exactly")
+
+    if not isinstance(publication_presets, dict):
+        errors.append("publication presets missing or invalid")
+    else:
+        if publication_presets.get("version") != "2.0.0":
+            errors.append("publication presets must be version 2.0.0")
+        for preset in publication_presets.get("presets", []):
+            if not isinstance(preset, dict):
+                continue
+            preset_id = preset.get("id", "<unknown>")
+            for palette_id in preset.get("canonical_palette_ids", {}).values():
+                if palette_id not in ids:
+                    errors.append(f"preset {preset_id} references unknown canonical palette {palette_id}")
+            for candidate_id in preset.get("style_candidate_ids", []):
+                if candidate_id not in candidate_ids:
+                    errors.append(f"preset {preset_id} references unknown candidate {candidate_id}")
+            for example_id in preset.get("example_refs", []):
+                if example_id not in example_ids:
+                    errors.append(f"preset {preset_id} references unknown example {example_id}")
+            if not preset.get("disclaimer"):
+                errors.append(f"preset {preset_id} missing disclaimer")
+
+    if not THIRD_PARTY_NOTICES.exists():
+        errors.append("palette/THIRD_PARTY_NOTICES.md must exist")
 
     if errors:
         for error in errors:

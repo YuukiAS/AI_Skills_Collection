@@ -1,17 +1,19 @@
 {
   "library_id": "notion-image-palettes",
   "generated_on": "2026-07-17T03:15:17.191261+00:00",
-  "scope": "latest local Downloads images corresponding to Notion Skills Collection Type=Palette pages",
+  "scope": "Notion Skills Collection Type=Palette metadata from the latest reviewed local image batch; source images are not redistributed.",
   "default_policy": {
     "core": false,
     "stability": "experimental",
-    "promotion_rule": "manual review plus cols4all/accessibility scoring required before moving into curated publication palettes"
+    "promotion_rule": "manual review plus cols4all/accessibility scoring required before moving into curated publication palettes",
+    "source_asset_policy": "Remote repository stores derived metadata only; source images are not committed.",
+    "path_policy": "Do not store user-local absolute paths or file mtimes in committed metadata."
   },
   "pages": [
     {
       "page_title": "CVPR25优质绘图学配色",
       "slug": "cvpr25",
-      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "source": "Notion Skills Collection Type=Palette metadata; source images are not redistributed",
       "has_visible_hex_or_rgb": "yes",
       "action": "parse_visible_hex_then_example",
       "figure_uses": [
@@ -23,9 +25,7 @@
       "image_count": 1,
       "images": [
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\CVPR25优质绘图学配色 _ 3D高斯溅射‼️_1_莱昂的科研日记_来自小红书网页版.jpg",
           "image_index": 1,
-          "mtime": 1784213014.0322802,
           "visible_hex_colors": [
             "#BFDCE7",
             "#DFEDF2",
@@ -70,15 +70,24 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "CVPR25优质绘图学配色 _ 3D高斯溅射‼️_1_莱昂的科研日记_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_cvpr25_1",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         }
-      ]
+      ],
+      "source_asset_committed": false,
+      "source_locator_status": "source_images_unavailable_in_remote_repo"
     },
     {
       "page_title": "AAAI跟着顶会学配色",
       "slug": "aaai",
-      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "source": "Notion Skills Collection Type=Palette metadata; source images are not redistributed",
       "has_visible_hex_or_rgb": "yes",
       "action": "parse_visible_hex_then_picker_check",
       "figure_uses": [
@@ -93,9 +102,7 @@
       "image_count": 3,
       "images": [
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\AAAI跟着顶会学配色_3_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
           "image_index": 3,
-          "mtime": 1784213010.1586602,
           "visible_hex_colors": [
             "#FFF5D5",
             "#CEE1F3",
@@ -150,13 +157,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "AAAI跟着顶会学配色_3_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_aaai_3",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\AAAI跟着顶会学配色_2_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
           "image_index": 2,
-          "mtime": 1784213008.3564832,
           "visible_hex_colors": [
             "#F4F0DE",
             "#DAEEC3",
@@ -211,13 +223,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "AAAI跟着顶会学配色_2_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_aaai_2",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\AAAI跟着顶会学配色_1_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
           "image_index": 1,
-          "mtime": 1784213006.3642495,
           "visible_hex_colors": [
             "#D9E7FA",
             "#ECECEC",
@@ -272,15 +289,24 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "AAAI跟着顶会学配色_1_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_aaai_1",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         }
-      ]
+      ],
+      "source_asset_committed": false,
+      "source_locator_status": "source_images_unavailable_in_remote_repo"
     },
     {
       "page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
       "slug": "journal_reviewer_9",
-      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "source": "Notion Skills Collection Type=Palette metadata; source images are not redistributed",
       "has_visible_hex_or_rgb": "yes",
       "action": "parse_visible_hex_then_picker_check",
       "figure_uses": [
@@ -293,9 +319,7 @@
       "image_count": 9,
       "images": [
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_10_Echo饭饭小博儿土_来自小红书网页版.jpg",
           "image_index": 10,
-          "mtime": 1784213000.4255419,
           "visible_hex_colors": [
             "#B3C3B5",
             "#81B2AA",
@@ -325,13 +349,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_10_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_journal_reviewer_9_10",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_9_Echo饭饭小博儿土_来自小红书网页版.jpg",
           "image_index": 9,
-          "mtime": 1784212997.3991265,
           "visible_hex_colors": [
             "#DFC7BA",
             "#9298C6",
@@ -361,13 +390,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_9_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_journal_reviewer_9_9",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_8_Echo饭饭小博儿土_来自小红书网页版.jpg",
           "image_index": 8,
-          "mtime": 1784212995.635727,
           "visible_hex_colors": [
             "#DEC19C",
             "#8D8089",
@@ -395,13 +429,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_8_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_journal_reviewer_9_8",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_7_Echo饭饭小博儿土_来自小红书网页版.jpg",
           "image_index": 7,
-          "mtime": 1784212993.8432777,
           "visible_hex_colors": [
             "#D5DBDC",
             "#86A1B1",
@@ -431,13 +470,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_7_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_journal_reviewer_9_7",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_6_Echo饭饭小博儿土_来自小红书网页版.jpg",
           "image_index": 6,
-          "mtime": 1784212992.197862,
           "visible_hex_colors": [
             "#D2AD98",
             "#4B7FCC",
@@ -470,13 +514,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_6_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_journal_reviewer_9_6",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_5_Echo饭饭小博儿土_来自小红书网页版.jpg",
           "image_index": 5,
-          "mtime": 1784212990.3819168,
           "visible_hex_colors": [
             "#E5EDE3",
             "#909C87",
@@ -507,13 +556,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_5_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_journal_reviewer_9_5",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_4_Echo饭饭小博儿土_来自小红书网页版.jpg",
           "image_index": 4,
-          "mtime": 1784212988.6891048,
           "visible_hex_colors": [
             "#C7ACB0",
             "#8188AD",
@@ -544,13 +598,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_4_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_journal_reviewer_9_4",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_3_Echo饭饭小博儿土_来自小红书网页版.jpg",
           "image_index": 3,
-          "mtime": 1784212987.115832,
           "visible_hex_colors": [
             "#C6D0D4",
             "#737B7B",
@@ -581,13 +640,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_3_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_journal_reviewer_9_3",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\攒了九组顶刊审稿人都挑不出毛病的配色_2_Echo饭饭小博儿土_来自小红书网页版.jpg",
           "image_index": 2,
-          "mtime": 1784212985.588732,
           "visible_hex_colors": [
             "#FBF6E3",
             "#FAE9C8",
@@ -617,15 +681,24 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_2_Echo饭饭小博儿土_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_journal_reviewer_9_2",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         }
-      ]
+      ],
+      "source_asset_committed": false,
+      "source_locator_status": "source_images_unavailable_in_remote_repo"
     },
     {
       "page_title": "ICML的清爽绘图风格！学了就能Accept‼️",
       "slug": "icml_clean",
-      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "source": "Notion Skills Collection Type=Palette metadata; source images are not redistributed",
       "has_visible_hex_or_rgb": "no",
       "action": "derive_examples_first_palette_second",
       "figure_uses": [
@@ -638,9 +711,7 @@
       "image_count": 3,
       "images": [
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\ICML的清爽绘图风格！学了就能Accept‼️_3_莱昂的科研日记_来自小红书网页版.jpg",
           "image_index": 3,
-          "mtime": 1784212979.230957,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#F5C2C3",
@@ -680,13 +751,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "ICML的清爽绘图风格！学了就能Accept‼️_3_莱昂的科研日记_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_icml_clean_3",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\ICML的清爽绘图风格！学了就能Accept‼️_2_莱昂的科研日记_来自小红书网页版.jpg",
           "image_index": 2,
-          "mtime": 1784212977.1661108,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#70AB49",
@@ -714,13 +790,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "ICML的清爽绘图风格！学了就能Accept‼️_2_莱昂的科研日记_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_icml_clean_2",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\ICML的清爽绘图风格！学了就能Accept‼️_1_莱昂的科研日记_来自小红书网页版.jpg",
           "image_index": 1,
-          "mtime": 1784212975.5510037,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#DEE7F6",
@@ -762,15 +843,24 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "ICML的清爽绘图风格！学了就能Accept‼️_1_莱昂的科研日记_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_icml_clean_1",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         }
-      ]
+      ],
+      "source_asset_committed": false,
+      "source_locator_status": "source_images_unavailable_in_remote_repo"
     },
     {
       "page_title": "Nature顶刊配色灵感🌷",
       "slug": "nature_inspiration",
-      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "source": "Notion Skills Collection Type=Palette metadata; source images are not redistributed",
       "has_visible_hex_or_rgb": "mixed",
       "action": "parse_visible_hex_and_picker",
       "figure_uses": [
@@ -783,9 +873,7 @@
       "image_count": 8,
       "images": [
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_8_花本兰_来自小红书网页版.jpg",
           "image_index": 8,
-          "mtime": 1784212967.692594,
           "visible_hex_colors": [
             "#0E600F",
             "#21AD5D",
@@ -832,13 +920,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Nature顶刊配色灵感🌷_8_花本兰_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_inspiration_8",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_7_花本兰_来自小红书网页版.jpg",
           "image_index": 7,
-          "mtime": 1784212965.5104885,
           "visible_hex_colors": [
             "#99BCAC",
             "#90B56D",
@@ -871,13 +964,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Nature顶刊配色灵感🌷_7_花本兰_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_inspiration_7",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_6_花本兰_来自小红书网页版.jpg",
           "image_index": 6,
-          "mtime": 1784212963.4767249,
           "visible_hex_colors": [
             "#519D78",
             "#8BCF8B",
@@ -922,13 +1020,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Nature顶刊配色灵感🌷_6_花本兰_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_inspiration_6",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_5_花本兰_来自小红书网页版.jpg",
           "image_index": 5,
-          "mtime": 1784212961.2580779,
           "visible_hex_colors": [
             "#6CBAD8",
             "#96C2D4",
@@ -961,13 +1064,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Nature顶刊配色灵感🌷_5_花本兰_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_inspiration_5",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_4_花本兰_来自小红书网页版.jpg",
           "image_index": 4,
-          "mtime": 1784212959.3885417,
           "visible_hex_colors": [
             "#BCF4C5",
             "#92C2A6",
@@ -1013,13 +1121,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Nature顶刊配色灵感🌷_4_花本兰_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_inspiration_4",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_3_花本兰_来自小红书网页版.jpg",
           "image_index": 3,
-          "mtime": 1784212956.456182,
           "visible_hex_colors": [
             "#3D9F3C",
             "#9ED17B",
@@ -1054,13 +1167,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Nature顶刊配色灵感🌷_3_花本兰_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_inspiration_3",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_2_花本兰_来自小红书网页版.jpg",
           "image_index": 2,
-          "mtime": 1784212954.4116678,
           "visible_hex_colors": [
             "#3D9F3C",
             "#9ED17B",
@@ -1127,13 +1245,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Nature顶刊配色灵感🌷_2_花本兰_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_inspiration_2",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "blocked",
+          "palette_role": "composite"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Nature顶刊配色灵感🌷_1_花本兰_来自小红书网页版.jpg",
           "image_index": 1,
-          "mtime": 1784212952.8281584,
           "visible_hex_colors": [
             "#3D9F3C",
             "#9ED17B",
@@ -1172,15 +1295,24 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Nature顶刊配色灵感🌷_1_花本兰_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_inspiration_1",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         }
-      ]
+      ],
+      "source_asset_committed": false,
+      "source_locator_status": "source_images_unavailable_in_remote_repo"
     },
     {
       "page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
       "slug": "nature_same_palette",
-      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "source": "Notion Skills Collection Type=Palette metadata; source images are not redistributed",
       "has_visible_hex_or_rgb": "yes",
       "action": "parse_visible_hex_then_picker_check",
       "figure_uses": [
@@ -1194,9 +1326,7 @@
       "image_count": 8,
       "images": [
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_8_Her.o_来自小红书网页版.jpg",
           "image_index": 8,
-          "mtime": 1784212939.1324189,
           "visible_hex_colors": [
             "#4F587D",
             "#C68DC0",
@@ -1227,13 +1357,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_8_Her.o_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_same_palette_8",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_7_Her.o_来自小红书网页版.jpg",
           "image_index": 7,
-          "mtime": 1784212937.4949527,
           "visible_hex_colors": [
             "#93C2E9",
             "#F5CDEF",
@@ -1265,13 +1400,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_7_Her.o_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_same_palette_7",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_6_Her.o_来自小红书网页版.jpg",
           "image_index": 6,
-          "mtime": 1784212934.9376016,
           "visible_hex_colors": [
             "#DAE6F4",
             "#9EC5E4",
@@ -1312,13 +1452,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_6_Her.o_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_same_palette_6",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_5_Her.o_来自小红书网页版.jpg",
           "image_index": 5,
-          "mtime": 1784212933.210127,
           "visible_hex_colors": [
             "#EDF2F6",
             "#DCE9F2",
@@ -1357,13 +1502,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_5_Her.o_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_same_palette_5",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_4_Her.o_来自小红书网页版.jpg",
           "image_index": 4,
-          "mtime": 1784212931.4674072,
           "visible_hex_colors": [
             "#FEEFF4",
             "#FBE0E9",
@@ -1402,13 +1552,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_4_Her.o_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_same_palette_4",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_3_Her.o_来自小红书网页版.jpg",
           "image_index": 3,
-          "mtime": 1784212929.7875073,
           "visible_hex_colors": [
             "#5271AE",
             "#70ACDE",
@@ -1449,13 +1604,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_3_Her.o_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_same_palette_3",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_2_Her.o_来自小红书网页版.jpg",
           "image_index": 2,
-          "mtime": 1784212927.8420918,
           "visible_hex_colors": [
             "#CAE5F8",
             "#9DCBED",
@@ -1494,13 +1654,18 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_2_Her.o_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_same_palette_2",
+          "snippet_eligibility": "requires_allow_experimental",
+          "recommendation_status": "explicit_only",
+          "palette_role": "style_candidate"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\顶刊配色直接抄！Nature同款色板也太绝了_1_Her.o_来自小红书网页版.jpg",
           "image_index": 1,
-          "mtime": 1784212925.9674144,
           "visible_hex_colors": [
             "#FFD6E7",
             "#FFB6D5",
@@ -1583,15 +1748,24 @@
           ],
           "color_source": "visible_hex_manual_transcription",
           "palette_confidence": "high_visible_hex_transcribed",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_1_Her.o_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_nature_same_palette_1",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "blocked",
+          "palette_role": "composite"
         }
-      ]
+      ],
+      "source_asset_committed": false,
+      "source_locator_status": "source_images_unavailable_in_remote_repo"
     },
     {
       "page_title": "Python绘制高颜值柱状图展示数据分布",
       "slug": "python_bar_distribution",
-      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "source": "Notion Skills Collection Type=Palette metadata; source images are not redistributed",
       "has_visible_hex_or_rgb": "no",
       "action": "derive_bar_palette_and_example",
       "figure_uses": [
@@ -1604,9 +1778,7 @@
       "image_count": 18,
       "images": [
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_18_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 18,
-          "mtime": 1784212921.1218042,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#8CD2B2",
@@ -1642,13 +1814,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_18_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_18",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_17_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 17,
-          "mtime": 1784212919.252183,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#F2B550",
@@ -1682,13 +1859,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_17_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_17",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_16_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 16,
-          "mtime": 1784212917.6143646,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#F28BB4",
@@ -1722,13 +1904,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_16_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_16",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_15_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 15,
-          "mtime": 1784212912.5095682,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#79CAC0",
@@ -1764,13 +1951,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_15_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_15",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_14_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 14,
-          "mtime": 1784212910.8099494,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#F8C586",
@@ -1804,13 +1996,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_14_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_14",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_13_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 13,
-          "mtime": 1784212908.9891703,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#9FB6D6",
@@ -1842,13 +2039,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_13_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_13",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_12_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 12,
-          "mtime": 1784212907.197132,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#99D88B",
@@ -1882,13 +2084,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_12_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_12",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_11_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 11,
-          "mtime": 1784212905.4210916,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#DBAAD4",
@@ -1918,13 +2125,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_11_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_11",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_10_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 10,
-          "mtime": 1784212903.6696014,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#A5D2E6",
@@ -1956,13 +2168,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_10_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_10",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_9_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 9,
-          "mtime": 1784212900.9451828,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#DBBC77",
@@ -1996,13 +2213,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_9_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_9",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_8_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 8,
-          "mtime": 1784212898.2280004,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#F6B2BE",
@@ -2032,13 +2254,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_8_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_8",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_7_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 7,
-          "mtime": 1784212896.1729827,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#B9E6CA",
@@ -2066,13 +2293,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_7_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_7",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_6_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 6,
-          "mtime": 1784212894.2015371,
           "visible_hex_colors": [],
           "visible_palette_colors": [],
           "picker_colors": [
@@ -2097,13 +2329,18 @@
           ],
           "color_source": "dominant_picker_fallback",
           "palette_confidence": "low_picker_only",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_6_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_6",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_5_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 5,
-          "mtime": 1784212892.1295536,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#F8C695",
@@ -2137,13 +2374,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_5_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_5",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_4_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 4,
-          "mtime": 1784212888.5545955,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#C8C3DC",
@@ -2169,13 +2411,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_4_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_4",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_3_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 3,
-          "mtime": 1784212886.0814505,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#F6AF97",
@@ -2207,13 +2454,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_3_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_3",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_2_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 2,
-          "mtime": 1784212884.5843973,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#BBE4B3",
@@ -2245,13 +2497,18 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_2_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_2",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         },
         {
-          "file": "C:\\Users\\yuukias\\Downloads\\Python绘制高颜值柱状图展示数据分布_1_pytho遥感学习日志_来自小红书网页版.jpg",
           "image_index": 1,
-          "mtime": 1784212882.453493,
           "visible_hex_colors": [],
           "visible_palette_colors": [
             "#C8E0EE",
@@ -2279,15 +2536,24 @@
           ],
           "color_source": "figure_swatch_or_bar_sample",
           "palette_confidence": "medium_figure_derived",
-          "review_status": "needs_manual_review",
-          "extraction_method": "connected_swatch_detection_plus_dominant_fallback"
+          "review_status": "unreviewed",
+          "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+          "source_image_basename": "Python绘制高颜值柱状图展示数据分布_1_pytho遥感学习日志_来自小红书网页版.jpg",
+          "source_asset_committed": false,
+          "source_locator_status": "source_image_unavailable_in_remote_repo",
+          "candidate_id": "notion_python_bar_distribution_1",
+          "snippet_eligibility": "blocked",
+          "recommendation_status": "inspiration_only",
+          "palette_role": "figure_example_palette"
         }
-      ]
+      ],
+      "source_asset_committed": false,
+      "source_locator_status": "source_images_unavailable_in_remote_repo"
     },
     {
       "page_title": "Palettes and Typical Figures (Old)",
       "slug": "old_palettes_typical_figures",
-      "source": "Notion Skills Collection Type=Palette latest local Downloads batch",
+      "source": "Notion Skills Collection Type=Palette metadata; source images are not redistributed",
       "has_visible_hex_or_rgb": "unknown",
       "action": "cols4all_only_plus_typical_examples",
       "figure_uses": [
@@ -2295,7 +2561,9 @@
       ],
       "notes": "Old page is not imported as image palette; only cols4all is fused from this page direction.",
       "image_count": 0,
-      "images": []
+      "images": [],
+      "source_asset_committed": false,
+      "source_locator_status": "source_images_unavailable_in_remote_repo"
     }
   ]
 }

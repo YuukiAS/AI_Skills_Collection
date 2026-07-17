@@ -16,7 +16,7 @@ repositories are not vendored into this repo.
 | ggsci | https://github.com/nanxstats/ggsci | cloned | `16660ea17f8d9b306828b8411580ea1ac1fa9109` | Copied journal-inspired palette constants |
 | Color Universal Design (CUD) | https://jfly.uni-koeln.de/color/ | downloaded page | 2026-07-16 | Referenced Okabe-Ito/CUD guidance |
 | cols4all | https://github.com/cols4all/cols4all-R | cloned + CRAN package installed into temp R library | `6c0ca5a6026109d2fb476d2011538c65aa5f0794` / 2026-07-17 | Exported 689 GPL-3 palettes, curated non-core scientific candidates, and computed `c4a_scores` for canonical palettes |
-| Notion Skills Collection palette pages | Notion `Skills Collection` database, `Type=Palette` rows | local latest images in `C:\Users\yuukias\Downloads` | 2026-07-17 | Extracted reviewable image-derived palette candidates and figure-example routing; not promoted to core |
+| Notion Skills Collection palette pages | Notion `Skills Collection` database, `Type=Palette` rows | derived metadata only; source images not redistributed | 2026-07-17 | Extracted reviewable image-derived palette candidates and figure-example routing; not promoted to core |
 
 ## Copied Or Sampled Palette Ids
 

@@ -19,6 +19,13 @@ metadata:
 
 Python graphing library for creating interactive, publication-quality visualizations with 40+ chart types.
 
+For paper-facing palette choices, do not maintain a separate Plotly-only
+palette policy. Use the shared palette API:
+`python scripts/palette.py recommend ...` and
+`python scripts/palette.py snippet <palette-id> --target plotly`. Keep
+journal-inspired, cols4all, and Notion-derived disclaimers visible when
+turning palette metadata into Plotly code.
+
 ## Quick Start
 
 Install Plotly:

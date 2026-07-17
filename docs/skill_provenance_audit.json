@@ -1,6 +1,6 @@
 {
   "license_counts": {
-    "(missing)": 46,
+    "(missing)": 48,
     "3-clause BSD license": 1,
     "Apache License, Version 2.0": 1,
     "Apache-2.0": 4,
@@ -29,7 +29,7 @@
     "https://github.com/sympy/sympy/blob/master/LICENSE": 1
   },
   "metadata_skill_author_counts": {
-    "(missing)": 45,
+    "(missing)": 47,
     "AHK Strategies (ashrafkahoush-ux)": 2,
     "AI Skills Collection maintainers": 1,
     "AI Skills Collection maintainers with recorded upstream sources": 11,
@@ -45,18 +45,18 @@
     "external-adapted": 11,
     "local": 6,
     "unknown": 115,
-    "user-authored": 16
+    "user-authored": 18
   },
   "provenance_counts": {
     "external-adapted": 11,
     "local": 6,
     "unknown": 115,
-    "user-authored": 16
+    "user-authored": 18
   },
   "rows_with_license_files_count": 11,
   "rows_with_urls_count": 67,
   "scope": "active_and_non_archived",
-  "skill_count": 148,
+  "skill_count": 150,
   "skills": [
     {
       "license": "",
@@ -950,6 +950,32 @@
       "path": "skills/science/communication/pptx-posters",
       "provenance": "unknown",
       "provenance_category": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "publication-figure-palettes",
+      "path": "skills/science/communication/publication-figure-palettes",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "scientific-figure-qa",
+      "path": "skills/science/communication/scientific-figure-qa",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
       "source_fields": {},
       "status": "active",
       "url_count": 0,

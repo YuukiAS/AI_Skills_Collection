@@ -23,9 +23,6 @@ Complete domain installs are supported. If an audit reports high description len
 - Install the whole domain for a project where most tasks are in this area.
 - Use precise skill selectors when only one tool or workflow is needed.
 - Combine with profiles when a project needs a curated cross-domain set.
-- Use semantic design tokens for product/frontend UI color. Do not apply
-  academic or journal-inspired scientific palettes directly to UI surfaces;
-  map them through chart or data-visualization tokens when needed.
 
 ## Skills
 

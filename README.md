@@ -50,7 +50,7 @@ ai-skills install --target repo --profile research-main --mode symlink --write-a
 | Slurm compute node | `server-research-baseline` 或 `ai-skills environment apply` | 站点已有 Slurm、TeX、Python |
 | 维护本仓库 | `ai-skills-core` 或 `ai-skills-maintainer` | GitHub，必要时 Notion |
 
-`v4.0.0` 是当前仓库整合任务标签。中央 Marketplace 的 10 个插件当前发布版本为 `4.0.0`；十个插件是本仓库当前发布预算，不是 Codex 能力上限。
+`v4.0.0` 是当前仓库整合任务标签。中央 Marketplace 的 10 个插件当前发布预算不是 Codex 能力上限；其中 `scientific-visualization` 已进入 `4.1.0` 小版本，负责 Notion-derived palette workflow 和 publication figure skill 拆分。
 
 ## Codex App 插件市场
 
@@ -90,6 +90,7 @@ codex plugin marketplace add \
 | `writing-style` | `writing-fidelity`、`scientific-prose`、`chinese-prose` |
 | `research-writing` | `research-reporting`、`research-paper-workflow`、`literature-and-citations` |
 | `presentations` | `research-presentations`、`business-presentations` |
+| `scientific-visualization` | `publication-figures`、`publication-figure-palettes`、`scientific-figure-qa`、`scientific-schematics`、`latex-posters` |
 | `web-development` | `frontend-reference-research`、`frontend-visual-systems`、`research-product-frontend` |
 | `statistical-modeling` | `bayesian-modeling`、`data-analysis-python`、`scientific-visualization` |
 | `bioinformatics` | `bioinformatics-workflows` |

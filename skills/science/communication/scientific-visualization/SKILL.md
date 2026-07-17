@@ -21,6 +21,12 @@ metadata:
 
 Scientific visualization transforms data into clear, accurate figures for publication. Create journal-ready plots with multi-panel layouts, error bars, significance markers, and colorblind-safe palettes. Export as PDF/EPS/TIFF using matplotlib, seaborn, and plotly for manuscripts.
 
+For palette selection, contextual conference/journal style candidates, and
+snippet gates, route to `publication-figure-palettes`. For final accessibility,
+grayscale, contrast, export, and venue-readiness checks, route to
+`scientific-figure-qa`. This skill remains the publication figure orchestrator:
+it coordinates plot intent, data encodings, layout, and export decisions.
+
 ## When to Use This Skill
 
 This skill should be used when:
@@ -152,6 +158,13 @@ recommend --purpose heatmap`, and `python scripts/palette.py snippet okabe_ito
 --target matplotlib` for read-only palette lookup and plotting snippets. Use
 `palette/publication-figure-presets.json` for top-conference, heatmap, centered
 diverging, and journal-inspired non-official figure defaults.
+
+For contextual conference or journal visual references, use
+`palette/notion-palette-candidates.json` and `palette/figure-example-registry.json`
+through `python scripts/palette.py recommend --style-source notion|all` or
+`python scripts/palette.py example`. Do not treat those candidates as official
+venue palettes, and do not generate snippets from unreviewed candidates without
+the explicit CLI gate.
 
 For expanded publication palette search, use the GPL-3 `cols4all` export at
 `palette/external/cols4all-palettes.json` through `python scripts/palette.py

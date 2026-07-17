@@ -16,6 +16,7 @@ source_skills:
   - skills/writing/research/paper-workflow-orchestrator
   - skills/writing/research/nature-manuscript-workflow
   - skills/writing/research/latex-paper-authoring
+  - skills/writing/research/venue-templates
 icon_small: "assets/codex/app-skill-icons/aggregate.svg"
 icon_large: "assets/codex/app-skill-icons/aggregate.svg"
 default_prompt:
@@ -35,6 +36,7 @@ Use this aggregate Codex App skill when the task matches one of the source workf
 - `paper-workflow-orchestrator`: Orchestrate end-to-end research paper work: project bootstrap, claim/evidence spine, section sequencing, figure/text synchronization, submission checks, and rebuttal planning. Use when the user asks how to structure a manuscript workflow rather than only polish a paragraph. Reference: `_src/flow/source.md`
 - `nature-manuscript-workflow`: Plan, draft, revise, and audit Nature-style manuscripts, including claim framing, figure logic, data availability, submission readiness, and reviewer response. Use when the user targets Nature-family journals or asks for Nature-style scientific writing. Reference: `_src/nature/source.md`
 - `latex-paper-authoring`: Author, organize, repair, and prepare LaTeX research papers for arXiv, Overleaf, conference templates, or journal submission. Use when manuscript structure, LaTeX source hygiene, compilation, figures, bibliography, or template cleanup is central. Reference: `_src/latex/source.md`
+- `venue-templates`: This skill should be used when preparing manuscripts for journal submission, conference papers, research posters, or grant proposals and need venue-specific formatting requirements and templates. Reference: `_src/venue/source.md`
 
 ## Workflow
 

@@ -1,104 +1,386 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0",
   "source": "palette/scientific-figure-palettes.json",
-  "scope": "publication-ready scientific figures",
+  "candidate_source": "palette/notion-palette-candidates.json",
+  "example_source": "palette/figure-example-registry.json",
+  "scope": "publication-ready scientific figures with contextual style candidates",
   "presets": [
     {
       "id": "top_conference_default",
       "name": "Top conference default",
-      "palette_ids": {
+      "canonical_palette_ids": {
         "categorical": "okabe_ito",
         "sequential": "viridis",
         "diverging": "RdBu",
         "cyclic": "twilight"
       },
-      "recommended_for": [
-        "ML/AI conference papers",
-        "general scientific manuscripts",
-        "camera-ready figures"
+      "style_candidate_ids": [],
+      "example_refs": [],
+      "venue_tags": [
+        "general-conference"
+      ],
+      "figure_type_tags": [
+        "line",
+        "scatter",
+        "bar",
+        "heatmap"
       ],
       "checks": [
         "Verify colorblind accessibility and grayscale readability.",
-        "Use redundant marker or line encodings for categorical series.",
-        "Export line art as PDF/SVG and raster images at 300+ dpi."
-      ]
+        "Use redundant marker or line encodings.",
+        "Export vector line art and 300+ dpi rasters."
+      ],
+      "disclaimer": "General scientific defaults, not a venue official palette."
     },
     {
       "id": "journal_inspired_nonofficial",
       "name": "Journal-inspired non-official",
-      "palette_ids": {
-        "categorical": "nature_npg",
+      "canonical_palette_ids": {
+        "categorical": "okabe_ito",
+        "journal_style": "nature_npg",
         "sequential": "cividis",
         "diverging": "BrBG"
       },
-      "recommended_for": [
-        "journal-style manuscript figures",
-        "visual style exploration before final submission"
+      "style_candidate_ids": [],
+      "example_refs": [],
+      "venue_tags": [
+        "general-journal"
+      ],
+      "figure_type_tags": [
+        "line",
+        "bar",
+        "small-multiple"
       ],
       "checks": [
         "Do not describe these palettes as official publisher branding.",
-        "Confirm the journal does not require stricter color conventions.",
+        "Confirm journal requirements.",
         "Run accessibility checks before submission."
-      ]
+      ],
+      "disclaimer": "Journal-inspired palettes are non-official style references."
     },
     {
       "id": "clinical_journal_inspired",
       "name": "Clinical journal-inspired",
-      "palette_ids": {
-        "categorical": "jama",
+      "canonical_palette_ids": {
+        "categorical": "okabe_ito",
+        "clinical_style": "jama",
         "backup_categorical": "nejm",
         "sequential": "Blues",
         "diverging": "RdBu"
       },
-      "recommended_for": [
-        "clinical figures",
-        "survival curves",
-        "cohort comparison plots"
+      "style_candidate_ids": [],
+      "example_refs": [],
+      "venue_tags": [
+        "clinical"
+      ],
+      "figure_type_tags": [
+        "survival",
+        "cohort",
+        "bar"
       ],
       "checks": [
         "Use direct labeling where possible.",
-        "Avoid relying on color alone for treatment arms.",
-        "Keep non-official journal-inspired disclaimer in documentation."
-      ]
+        "Avoid relying on color alone.",
+        "Keep non-official journal-inspired disclaimer."
+      ],
+      "disclaimer": "Clinical journal-inspired palettes are non-official references."
     },
     {
       "id": "heatmap_continuous",
       "name": "Continuous heatmap",
-      "palette_ids": {
+      "canonical_palette_ids": {
         "sequential_primary": "viridis",
         "sequential_accessible": "cividis",
         "sequential_alternative": "magma"
       },
-      "recommended_for": [
-        "expression heatmaps",
-        "density matrices",
-        "single-direction scalar fields"
+      "style_candidate_ids": [],
+      "example_refs": [],
+      "venue_tags": [
+        "general"
+      ],
+      "figure_type_tags": [
+        "heatmap",
+        "density",
+        "matrix"
       ],
       "checks": [
         "Use a labeled colorbar with units.",
-        "Do not use diverging palettes unless the data has a real midpoint.",
+        "Use diverging palettes only with a real midpoint.",
         "Avoid rainbow and jet colormaps."
-      ]
+      ],
+      "disclaimer": "Use data semantics, not visual taste, to select continuous palettes."
     },
     {
       "id": "diverging_centered",
       "name": "Centered diverging",
-      "palette_ids": {
+      "canonical_palette_ids": {
         "diverging_primary": "RdBu",
         "diverging_alternative": "BrBG",
         "diverging_orange_purple": "PuOr",
         "matplotlib_reference": "coolwarm"
       },
-      "recommended_for": [
-        "signed model residuals",
-        "correlation heatmaps",
-        "difference maps centered at zero"
+      "style_candidate_ids": [],
+      "example_refs": [],
+      "venue_tags": [
+        "general"
+      ],
+      "figure_type_tags": [
+        "correlation",
+        "residual",
+        "difference-map"
       ],
       "checks": [
-        "Set the visual center to the scientifically meaningful midpoint.",
-        "Label the midpoint and colorbar range.",
+        "Set the visual center to a scientifically meaningful midpoint.",
+        "Label midpoint and colorbar range.",
         "Do not use for unordered categories."
-      ]
+      ],
+      "disclaimer": "Diverging palettes require signed or centered data semantics."
+    },
+    {
+      "id": "cvpr_computer_vision_soft",
+      "name": "CVPR computer vision soft style reference",
+      "canonical_palette_ids": {
+        "categorical": "okabe_ito",
+        "sequential": "viridis",
+        "diverging": "RdBu"
+      },
+      "style_candidate_ids": [
+        "notion_cvpr25_1"
+      ],
+      "example_refs": [
+        "example_cvpr25_1"
+      ],
+      "venue_tags": [
+        "CVPR",
+        "computer-vision"
+      ],
+      "figure_type_tags": [
+        "3D point cloud",
+        "Gaussian splatting",
+        "multi-panel computer vision figure"
+      ],
+      "checks": [
+        "Use Notion candidate only with explicit style-source notion.",
+        "Verify contrast on white background.",
+        "Do not claim official CVPR palette."
+      ],
+      "disclaimer": "Contextual CVPR-style reference only; not official CVPR guidance."
+    },
+    {
+      "id": "aaai_schematic_clean",
+      "name": "AAAI schematic clean style reference",
+      "canonical_palette_ids": {
+        "categorical": "okabe_ito",
+        "sequential": "cividis",
+        "diverging": "RdBu"
+      },
+      "style_candidate_ids": [
+        "notion_aaai_3",
+        "notion_aaai_2",
+        "notion_aaai_1"
+      ],
+      "example_refs": [
+        "example_aaai_3",
+        "example_aaai_2",
+        "example_aaai_1"
+      ],
+      "venue_tags": [
+        "AAAI",
+        "ai-schematic"
+      ],
+      "figure_type_tags": [
+        "AI schematic",
+        "codec pipeline",
+        "benchmark panel"
+      ],
+      "checks": [
+        "Use explicit experimental gate for snippets.",
+        "Preserve semantic role labels.",
+        "Do not claim official AAAI palette."
+      ],
+      "disclaimer": "Contextual AAAI-style reference only; not official AAAI guidance."
+    },
+    {
+      "id": "icml_clean_layout",
+      "name": "ICML clean layout examples",
+      "canonical_palette_ids": {
+        "categorical": "okabe_ito",
+        "sequential": "viridis",
+        "diverging": "coolwarm"
+      },
+      "style_candidate_ids": [],
+      "example_refs": [
+        "example_icml_clean_3",
+        "example_icml_clean_2",
+        "example_icml_clean_1"
+      ],
+      "venue_tags": [
+        "ICML",
+        "machine-learning"
+      ],
+      "figure_type_tags": [
+        "ICML-style schematic",
+        "line chart",
+        "attention heatmap"
+      ],
+      "checks": [
+        "Use examples for layout/style only.",
+        "Do not generate snippets from figure-derived colors.",
+        "Do not claim official ICML palette."
+      ],
+      "disclaimer": "ICML examples are layout/style references; figure-derived colors remain snippet-blocked."
+    },
+    {
+      "id": "nature_biomedical_multi_panel_nonofficial",
+      "name": "Nature biomedical multi-panel non-official style reference",
+      "canonical_palette_ids": {
+        "categorical": "okabe_ito",
+        "journal_style": "nature_npg",
+        "sequential": "cividis",
+        "diverging": "BrBG"
+      },
+      "style_candidate_ids": [
+        "notion_nature_inspiration_8",
+        "notion_nature_inspiration_7",
+        "notion_nature_inspiration_6",
+        "notion_nature_inspiration_5",
+        "notion_nature_inspiration_4",
+        "notion_nature_inspiration_3",
+        "notion_nature_inspiration_2",
+        "notion_nature_inspiration_1",
+        "notion_nature_same_palette_8",
+        "notion_nature_same_palette_7",
+        "notion_nature_same_palette_6",
+        "notion_nature_same_palette_5",
+        "notion_nature_same_palette_4",
+        "notion_nature_same_palette_3",
+        "notion_nature_same_palette_2",
+        "notion_nature_same_palette_1"
+      ],
+      "example_refs": [
+        "example_nature_inspiration_8",
+        "example_nature_inspiration_7",
+        "example_nature_inspiration_6",
+        "example_nature_inspiration_5",
+        "example_nature_inspiration_4",
+        "example_nature_inspiration_3",
+        "example_nature_inspiration_2",
+        "example_nature_inspiration_1",
+        "example_nature_same_palette_8",
+        "example_nature_same_palette_7",
+        "example_nature_same_palette_6",
+        "example_nature_same_palette_5",
+        "example_nature_same_palette_4",
+        "example_nature_same_palette_3",
+        "example_nature_same_palette_2",
+        "example_nature_same_palette_1"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "figure_type_tags": [
+        "UMAP",
+        "single-cell plot",
+        "biomedical multi-panel"
+      ],
+      "checks": [
+        "Keep non-official Nature disclaimer.",
+        "Verify accessibility and grayscale.",
+        "Use canonical fallback for submission-safe defaults."
+      ],
+      "disclaimer": "Nature-inspired only; not official Nature Portfolio branding or style guidance."
+    },
+    {
+      "id": "general_journal_restrained",
+      "name": "General restrained journal figure style",
+      "canonical_palette_ids": {
+        "categorical": "okabe_ito",
+        "journal_style": "nature_npg",
+        "sequential": "Blues"
+      },
+      "style_candidate_ids": [
+        "notion_journal_reviewer_9_10",
+        "notion_journal_reviewer_9_9",
+        "notion_journal_reviewer_9_8",
+        "notion_journal_reviewer_9_7",
+        "notion_journal_reviewer_9_6",
+        "notion_journal_reviewer_9_5",
+        "notion_journal_reviewer_9_4",
+        "notion_journal_reviewer_9_3",
+        "notion_journal_reviewer_9_2"
+      ],
+      "example_refs": [
+        "example_journal_reviewer_9_10",
+        "example_journal_reviewer_9_9",
+        "example_journal_reviewer_9_8",
+        "example_journal_reviewer_9_7",
+        "example_journal_reviewer_9_6",
+        "example_journal_reviewer_9_5",
+        "example_journal_reviewer_9_4",
+        "example_journal_reviewer_9_3",
+        "example_journal_reviewer_9_2"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "figure_type_tags": [
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "checks": [
+        "Review each 4-color candidate before submission.",
+        "Use redundant encodings for categories.",
+        "Do not claim journal official branding."
+      ],
+      "disclaimer": "User-curated journal-style reference; not official publisher guidance."
+    },
+    {
+      "id": "distribution_bar_examples",
+      "name": "Distribution and bar chart examples",
+      "canonical_palette_ids": {
+        "categorical": "okabe_ito",
+        "bar": "Set2",
+        "sequential": "Blues"
+      },
+      "style_candidate_ids": [],
+      "example_refs": [
+        "example_python_bar_distribution_18",
+        "example_python_bar_distribution_17",
+        "example_python_bar_distribution_16",
+        "example_python_bar_distribution_15",
+        "example_python_bar_distribution_14",
+        "example_python_bar_distribution_13",
+        "example_python_bar_distribution_12",
+        "example_python_bar_distribution_11",
+        "example_python_bar_distribution_10",
+        "example_python_bar_distribution_9",
+        "example_python_bar_distribution_8",
+        "example_python_bar_distribution_7",
+        "example_python_bar_distribution_6",
+        "example_python_bar_distribution_5",
+        "example_python_bar_distribution_4",
+        "example_python_bar_distribution_3",
+        "example_python_bar_distribution_2",
+        "example_python_bar_distribution_1"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "figure_type_tags": [
+        "histogram",
+        "bar chart",
+        "distribution comparison"
+      ],
+      "checks": [
+        "Use examples for chart composition only.",
+        "Do not generate snippets from bar-sampled colors.",
+        "Confirm category order and labels."
+      ],
+      "disclaimer": "Distribution examples are figure-style references; sampled colors remain snippet-blocked."
     }
   ]
 }

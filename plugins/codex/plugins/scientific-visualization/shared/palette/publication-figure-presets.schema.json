@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Skills Publication Figure Presets",
+  "type": "object",
+  "required": [
+    "version",
+    "presets"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "presets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "canonical_palette_ids",
+          "style_candidate_ids",
+          "example_refs",
+          "checks",
+          "disclaimer"
+        ]
+      }
+    }
+  },
+  "additionalProperties": true
+}

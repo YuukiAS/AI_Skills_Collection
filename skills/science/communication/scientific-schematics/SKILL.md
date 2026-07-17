@@ -13,6 +13,8 @@ last_reviewed: 2026-05-14
 profile_tags:
 recommended_scope: project
 license: MIT license
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 metadata:
   skill-author: K-Dense Inc.
 allowed-tools: Read Write Edit Bash
@@ -22,6 +24,12 @@ allowed-tools: Read Write Edit Bash
 ## Overview
 
 Scientific schematics and diagrams transform complex concepts into clear visual representations for publication. **This skill uses Nano Banana 2 AI for diagram generation with Gemini 3.1 Pro Preview quality review.**
+
+For schematic color choices, call the shared palette workflow rather than
+inventing a diagram-specific palette. Use `publication-figure-palettes` or
+`python scripts/palette.py recommend --figure-type schematic --paper-venue <venue>
+--style-source core|notion --explain`. Keep Notion-derived candidates
+experimental and non-official.
 
 **How it works:**
 - Describe your diagram in natural language

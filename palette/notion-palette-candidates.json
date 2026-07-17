@@ -1,0 +1,3772 @@
+{
+  "library_id": "ai_skills_notion_palette_candidates",
+  "version": "1.0.0",
+  "source": "palette/notion-image-palettes.json",
+  "candidate_count": 50,
+  "default_policy": {
+    "core_promotion": "Never promote image-derived candidates to canonical core without manual review.",
+    "default_recommendation": "Do not include unreviewed candidates in default recommendations.",
+    "snippet_gate": "Only transcribed unreviewed candidates may generate snippets with --allow-experimental; figure-derived candidates remain blocked."
+  },
+  "candidates": [
+    {
+      "candidate_id": "notion_cvpr25_1",
+      "legacy_ids": [
+        "notion_cvpr25",
+        "cvpr25_1"
+      ],
+      "source_page_slug": "cvpr25",
+      "source_page_title": "CVPR25优质绘图学配色",
+      "source_image_basename": "CVPR25优质绘图学配色 _ 3D高斯溅射‼️_1_莱昂的科研日记_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 1,
+      "colors": [
+        "#BFDCE7",
+        "#DFEDF2",
+        "#CAC2D7",
+        "#DDD6E5",
+        "#D9E4C2",
+        "#F5D8BF",
+        "#F9EDE0"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "3D point cloud",
+        "Gaussian splatting",
+        "multi-panel computer vision figure"
+      ],
+      "venue_tags": [
+        "CVPR",
+        "computer-vision"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "viridis",
+        "RdBu"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#BFDCE7",
+          "#DFEDF2",
+          "#CAC2D7",
+          "#DDD6E5",
+          "#D9E4C2",
+          "#F5D8BF",
+          "#F9EDE0"
+        ],
+        "visible_palette_colors": [
+          "#BB9F88",
+          "#DED6E5",
+          "#EAF0DF",
+          "#FDF2CB",
+          "#E6AEAC",
+          "#E2918F",
+          "#50A8BF",
+          "#DAEBEF",
+          "#ECC2BE",
+          "#B7DDE8",
+          "#CCC2DA",
+          "#D8E4C0"
+        ],
+        "picker_colors": [
+          "#F8E8D8",
+          "#D8E8F8",
+          "#F8E8E8",
+          "#F8D8B8",
+          "#B8D8E8",
+          "#C8C8D8",
+          "#D8E8C8",
+          "#D8F8F8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_aaai_3",
+      "legacy_ids": [
+        "notion_aaai",
+        "aaai_3"
+      ],
+      "source_page_slug": "aaai",
+      "source_page_title": "AAAI跟着顶会学配色",
+      "source_image_basename": "AAAI跟着顶会学配色_3_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 3,
+      "colors": [
+        "#FFF5D5",
+        "#CEE1F3",
+        "#DEEBF7",
+        "#B4C6E7",
+        "#FAE4D5",
+        "#C6E0B4",
+        "#5D9FCC",
+        "#9A4653",
+        "#E2DC2F",
+        "#6FA4A6",
+        "#4470C3",
+        "#6EAB46"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "AI schematic",
+        "codec pipeline",
+        "benchmark panel",
+        "histogram",
+        "boxplot",
+        "scatter density"
+      ],
+      "venue_tags": [
+        "AAAI",
+        "ai-schematic"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "cividis"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#FFF5D5",
+          "#CEE1F3",
+          "#DEEBF7",
+          "#B4C6E7",
+          "#FAE4D5",
+          "#C6E0B4",
+          "#5D9FCC",
+          "#9A4653",
+          "#E2DC2F",
+          "#6FA4A6",
+          "#4470C3",
+          "#6EAB46"
+        ],
+        "visible_palette_colors": [
+          "#FDF9E4",
+          "#BCCCDA",
+          "#DEE7F0",
+          "#F9E6D9",
+          "#224E9C",
+          "#899BBB",
+          "#838FAF",
+          "#CE8F97",
+          "#A0B7DE",
+          "#E2A5A1",
+          "#9AB5F5",
+          "#84C1B1"
+        ],
+        "picker_colors": [
+          "#4878C8",
+          "#4888C8",
+          "#78A848",
+          "#3878C8",
+          "#E87828",
+          "#D8E8F8",
+          "#F8F8D8",
+          "#E88828"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_aaai_2",
+      "legacy_ids": [
+        "notion_aaai",
+        "aaai_2"
+      ],
+      "source_page_slug": "aaai",
+      "source_page_title": "AAAI跟着顶会学配色",
+      "source_image_basename": "AAAI跟着顶会学配色_2_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 2,
+      "colors": [
+        "#F4F0DE",
+        "#DAEEC3",
+        "#D6E9E0",
+        "#ACD0C0",
+        "#86BAA3",
+        "#E1E1E1",
+        "#CCCCCC",
+        "#B7B7B7",
+        "#D2DEEC",
+        "#97AFD3",
+        "#6689BD",
+        "#4A74B1"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "AI schematic",
+        "codec pipeline",
+        "benchmark panel",
+        "histogram",
+        "boxplot",
+        "scatter density"
+      ],
+      "venue_tags": [
+        "AAAI",
+        "ai-schematic"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "cividis"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#F4F0DE",
+          "#DAEEC3",
+          "#D6E9E0",
+          "#ACD0C0",
+          "#86BAA3",
+          "#E1E1E1",
+          "#CCCCCC",
+          "#B7B7B7",
+          "#D2DEEC",
+          "#97AFD3",
+          "#6689BD",
+          "#4A74B1"
+        ],
+        "visible_palette_colors": [
+          "#C7DDB3",
+          "#FBF8E5",
+          "#E9F1D9",
+          "#D58C92",
+          "#FBF0C4",
+          "#77A09A",
+          "#90A8A9",
+          "#608D84",
+          "#D8E7C2",
+          "#B3C8E4",
+          "#DEF0E8",
+          "#B6D9CB"
+        ],
+        "picker_colors": [
+          "#D8E8C8",
+          "#F8F8D8",
+          "#F8F8E8",
+          "#4878B8",
+          "#B8D8C8",
+          "#E8F8D8",
+          "#A8C8E8",
+          "#B8C8E8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_aaai_1",
+      "legacy_ids": [
+        "notion_aaai",
+        "aaai_1"
+      ],
+      "source_page_slug": "aaai",
+      "source_page_title": "AAAI跟着顶会学配色",
+      "source_image_basename": "AAAI跟着顶会学配色_1_胖子爱吃冰激凌🍦_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 1,
+      "colors": [
+        "#D9E7FA",
+        "#ECECEC",
+        "#D3E7D2",
+        "#B8C6D1",
+        "#F8F6E8",
+        "#66AA9E",
+        "#FFFED3",
+        "#F8D8D3",
+        "#FF8400",
+        "#7DA5DE",
+        "#FDD2CF",
+        "#DFD3E6"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "AI schematic",
+        "codec pipeline",
+        "benchmark panel",
+        "histogram",
+        "boxplot",
+        "scatter density"
+      ],
+      "venue_tags": [
+        "AAAI",
+        "ai-schematic"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "cividis"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#D9E7FA",
+          "#ECECEC",
+          "#D3E7D2",
+          "#B8C6D1",
+          "#F8F6E8",
+          "#66AA9E",
+          "#FFFED3",
+          "#F8D8D3",
+          "#FF8400",
+          "#7DA5DE",
+          "#FDD2CF",
+          "#DFD3E6"
+        ],
+        "visible_palette_colors": [
+          "#F7E0DD",
+          "#F0D99F",
+          "#F5E4AE",
+          "#8CA0CA",
+          "#BDD7C1",
+          "#AFC295",
+          "#B7C8E0",
+          "#DEE9D4",
+          "#98B0C8",
+          "#A9C1D7",
+          "#F2D58A",
+          "#CFE0ED"
+        ],
+        "picker_colors": [
+          "#F8D8D8",
+          "#D8E8F8",
+          "#F8E8D8",
+          "#88B8B8",
+          "#D8E8D8",
+          "#88A8E8",
+          "#F87808",
+          "#B8C8D8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_10",
+      "legacy_ids": [
+        "notion_journal_reviewer_9",
+        "journal_reviewer_9_10"
+      ],
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_10_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 10,
+      "colors": [
+        "#B3C3B5",
+        "#81B2AA",
+        "#579186",
+        "#174E42"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#B3C3B5",
+          "#81B2AA",
+          "#579186",
+          "#174E42"
+        ],
+        "visible_palette_colors": [
+          "#A4BDB4",
+          "#94B2A4",
+          "#85A699"
+        ],
+        "picker_colors": [
+          "#88A898",
+          "#98B8A8",
+          "#B8C8C8",
+          "#B8D8C8",
+          "#88A8A8",
+          "#88B8A8",
+          "#789888",
+          "#889898"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_9",
+      "legacy_ids": [
+        "notion_journal_reviewer_9",
+        "journal_reviewer_9_9"
+      ],
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_9_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 9,
+      "colors": [
+        "#DFC7BA",
+        "#9298C6",
+        "#37507E",
+        "#161C2E"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#DFC7BA",
+          "#9298C6",
+          "#37507E",
+          "#161C2E"
+        ],
+        "visible_palette_colors": [
+          "#B2BBCC",
+          "#ACACBC",
+          "#919CB4"
+        ],
+        "picker_colors": [
+          "#A8A8B8",
+          "#A8B8C8",
+          "#98A8B8",
+          "#A8A8C8",
+          "#B8B8C8",
+          "#081828",
+          "#9898C8",
+          "#9898B8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_8",
+      "legacy_ids": [
+        "notion_journal_reviewer_9",
+        "journal_reviewer_9_8"
+      ],
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_8_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 8,
+      "colors": [
+        "#DEC19C",
+        "#8D8089",
+        "#59434E",
+        "#3E495B"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#DEC19C",
+          "#8D8089",
+          "#59434E",
+          "#3E495B"
+        ],
+        "visible_palette_colors": [
+          "#C1AEC0"
+        ],
+        "picker_colors": [
+          "#F8E8D8",
+          "#E8D8D8",
+          "#E8E8D8",
+          "#C8A8A8",
+          "#B89898",
+          "#B898A8",
+          "#C8A8B8",
+          "#B8A8A8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_7",
+      "legacy_ids": [
+        "notion_journal_reviewer_9",
+        "journal_reviewer_9_7"
+      ],
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_7_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 7,
+      "colors": [
+        "#D5DBDC",
+        "#86A1B1",
+        "#295C6C",
+        "#0D334A"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#D5DBDC",
+          "#86A1B1",
+          "#295C6C",
+          "#0D334A"
+        ],
+        "visible_palette_colors": [
+          "#A3B2BB",
+          "#93A5AD",
+          "#8598A3"
+        ],
+        "picker_colors": [
+          "#B8C8C8",
+          "#B8C8D8",
+          "#8898A8",
+          "#A8B8C8",
+          "#98A8B8",
+          "#98A8A8",
+          "#C8C8D8",
+          "#88A8B8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_6",
+      "legacy_ids": [
+        "notion_journal_reviewer_9",
+        "journal_reviewer_9_6"
+      ],
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_6_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 6,
+      "colors": [
+        "#D2AD98",
+        "#4B7FCC",
+        "#225295",
+        "#041E4F"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#D2AD98",
+          "#4B7FCC",
+          "#225295",
+          "#041E4F"
+        ],
+        "visible_palette_colors": [
+          "#A2ACBA",
+          "#021950",
+          "#90A3CA",
+          "#888EA1",
+          "#959AAA",
+          "#F5EAE4"
+        ],
+        "picker_colors": [
+          "#88A8C8",
+          "#8898B8",
+          "#B8B8C8",
+          "#788898",
+          "#8898A8",
+          "#888898",
+          "#8898C8",
+          "#787898"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_5",
+      "legacy_ids": [
+        "notion_journal_reviewer_9",
+        "journal_reviewer_9_5"
+      ],
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_5_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 5,
+      "colors": [
+        "#E5EDE3",
+        "#909C87",
+        "#954738",
+        "#39422F"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#E5EDE3",
+          "#909C87",
+          "#954738",
+          "#39422F"
+        ],
+        "visible_palette_colors": [
+          "#BDC1A8",
+          "#D9DDCE",
+          "#A89686",
+          "#AAAC9A"
+        ],
+        "picker_colors": [
+          "#989888",
+          "#A8A898",
+          "#984838",
+          "#384828",
+          "#C8C8B8",
+          "#B8B8A8",
+          "#A8A888",
+          "#98A888"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_4",
+      "legacy_ids": [
+        "notion_journal_reviewer_9",
+        "journal_reviewer_9_4"
+      ],
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_4_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 4,
+      "colors": [
+        "#C7ACB0",
+        "#8188AD",
+        "#594958",
+        "#272B56"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#C7ACB0",
+          "#8188AD",
+          "#594958",
+          "#272B56"
+        ],
+        "visible_palette_colors": [
+          "#EADAE5",
+          "#B590E2",
+          "#C792D9",
+          "#E293C7"
+        ],
+        "picker_colors": [
+          "#B8A8C8",
+          "#B8B8C8",
+          "#C8B8C8",
+          "#D898C8",
+          "#A8A8B8",
+          "#C898D8",
+          "#E898C8",
+          "#A8A8C8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_3",
+      "legacy_ids": [
+        "notion_journal_reviewer_9",
+        "journal_reviewer_9_3"
+      ],
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_3_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 3,
+      "colors": [
+        "#C6D0D4",
+        "#737B7B",
+        "#383F0F",
+        "#21220A"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#C6D0D4",
+          "#737B7B",
+          "#383F0F",
+          "#21220A"
+        ],
+        "visible_palette_colors": [
+          "#9CA898",
+          "#C4D2D4",
+          "#BBC6B5",
+          "#8C9D8D"
+        ],
+        "picker_colors": [
+          "#989888",
+          "#889878",
+          "#889888",
+          "#98A888",
+          "#383808",
+          "#98A898",
+          "#989878",
+          "#88A898"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_2",
+      "legacy_ids": [
+        "notion_journal_reviewer_9",
+        "journal_reviewer_9_2"
+      ],
+      "source_page_slug": "journal_reviewer_9",
+      "source_page_title": "攒了九组顶刊审稿人都挑不出毛病的配色",
+      "source_image_basename": "攒了九组顶刊审稿人都挑不出毛病的配色_2_Echo饭饭小博儿土_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 2,
+      "colors": [
+        "#FBF6E3",
+        "#FAE9C8",
+        "#E3BDAA",
+        "#7B9097"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "journal-style categorical palette",
+        "small multiples",
+        "line chart",
+        "bar chart"
+      ],
+      "venue_tags": [
+        "general-journal",
+        "journal-style"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#FBF6E3",
+          "#FAE9C8",
+          "#E3BDAA",
+          "#7B9097"
+        ],
+        "visible_palette_colors": [
+          "#F2DCD6",
+          "#E3CDC9",
+          "#F5C6CC"
+        ],
+        "picker_colors": [
+          "#F8E8E8",
+          "#F8F8E8",
+          "#F8E8D8",
+          "#F8C8C8",
+          "#E8D8C8",
+          "#F8D8C8",
+          "#D8C8C8",
+          "#E8C8C8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_icml_clean_3",
+      "legacy_ids": [
+        "notion_icml_clean",
+        "icml_clean_3"
+      ],
+      "source_page_slug": "icml_clean",
+      "source_page_title": "ICML的清爽绘图风格！学了就能Accept‼️",
+      "source_image_basename": "ICML的清爽绘图风格！学了就能Accept‼️_3_莱昂的科研日记_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 3,
+      "colors": [
+        "#F5C2C3",
+        "#F5D0D1",
+        "#F6A4A5",
+        "#F5B6B5",
+        "#F34240",
+        "#F6E5E6",
+        "#F49295",
+        "#F18386",
+        "#F47373",
+        "#F0554E",
+        "#F16462"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "ICML-style schematic",
+        "line chart",
+        "attention heatmap",
+        "model comparison figure"
+      ],
+      "venue_tags": [
+        "ICML",
+        "machine-learning"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "viridis",
+        "coolwarm"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#F5C2C3",
+          "#F5D0D1",
+          "#F6A4A5",
+          "#F5B6B5",
+          "#F34240",
+          "#F6E5E6",
+          "#F49295",
+          "#F18386",
+          "#F47373",
+          "#F0554E",
+          "#F16462"
+        ],
+        "picker_colors": [
+          "#F8D8D8",
+          "#F8E8E8",
+          "#F8C8C8",
+          "#F8B8B8",
+          "#F8A8A8",
+          "#F89898",
+          "#F8E8D8",
+          "#E8D8D8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_icml_clean_2",
+      "legacy_ids": [
+        "notion_icml_clean",
+        "icml_clean_2"
+      ],
+      "source_page_slug": "icml_clean",
+      "source_page_title": "ICML的清爽绘图风格！学了就能Accept‼️",
+      "source_image_basename": "ICML的清爽绘图风格！学了就能Accept‼️_2_莱昂的科研日记_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 2,
+      "colors": [
+        "#70AB49",
+        "#9EB08C",
+        "#4571C0",
+        "#7884A7",
+        "#8E9CC0"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "ICML-style schematic",
+        "line chart",
+        "attention heatmap",
+        "model comparison figure"
+      ],
+      "venue_tags": [
+        "ICML",
+        "machine-learning"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "viridis",
+        "coolwarm"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#70AB49",
+          "#9EB08C",
+          "#4571C0",
+          "#7884A7",
+          "#8E9CC0"
+        ],
+        "picker_colors": [
+          "#4878C8",
+          "#F8F8E8",
+          "#78A848",
+          "#68A848",
+          "#687858",
+          "#485878",
+          "#A86838",
+          "#A86848"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_icml_clean_1",
+      "legacy_ids": [
+        "notion_icml_clean",
+        "icml_clean_1"
+      ],
+      "source_page_slug": "icml_clean",
+      "source_page_title": "ICML的清爽绘图风格！学了就能Accept‼️",
+      "source_image_basename": "ICML的清爽绘图风格！学了就能Accept‼️_1_莱昂的科研日记_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 1,
+      "colors": [
+        "#DEE7F6",
+        "#BCF8F8",
+        "#F8B8FA",
+        "#D0F3E0",
+        "#BDBDF7",
+        "#F5BCC1",
+        "#D4B2D1",
+        "#D5D5EF",
+        "#C7EFC9",
+        "#DC9A9B",
+        "#F5F4E2",
+        "#F2EAFA"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "ICML-style schematic",
+        "line chart",
+        "attention heatmap",
+        "model comparison figure"
+      ],
+      "venue_tags": [
+        "ICML",
+        "machine-learning"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "viridis",
+        "coolwarm"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#DEE7F6",
+          "#BCF8F8",
+          "#F8B8FA",
+          "#D0F3E0",
+          "#BDBDF7",
+          "#F5BCC1",
+          "#D4B2D1",
+          "#D5D5EF",
+          "#C7EFC9",
+          "#DC9A9B",
+          "#F5F4E2",
+          "#F2EAFA"
+        ],
+        "picker_colors": [
+          "#F8D8B8",
+          "#C8E8B8",
+          "#F8F8E8",
+          "#F8E8D8",
+          "#C8E8F8",
+          "#C8E8C8",
+          "#C8E8E8",
+          "#F8D8C8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_8",
+      "legacy_ids": [
+        "notion_nature_inspiration",
+        "nature_inspiration_8"
+      ],
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_8_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 8,
+      "colors": [
+        "#0E600F",
+        "#21AD5D",
+        "#53BD7D",
+        "#A1E7B8",
+        "#191A94",
+        "#7087E4",
+        "#72C2FF",
+        "#BFE9FE"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#0E600F",
+          "#21AD5D",
+          "#53BD7D",
+          "#A1E7B8",
+          "#191A94",
+          "#7087E4",
+          "#72C2FF",
+          "#BFE9FE"
+        ],
+        "visible_palette_colors": [
+          "#CDE2D2",
+          "#B6E7F8",
+          "#12B6F7",
+          "#1617A3",
+          "#A1E2F8",
+          "#B0B3E7",
+          "#01610A",
+          "#20AD55",
+          "#52BF7C",
+          "#A3E6BB",
+          "#6885EB",
+          "#71C1FC"
+        ],
+        "picker_colors": [
+          "#B8E8F8",
+          "#A8E8B8",
+          "#6888E8",
+          "#181898",
+          "#086808",
+          "#58B878",
+          "#78C8F8",
+          "#28A858"
+        ],
+        "has_visible_hex_or_rgb": "mixed"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_7",
+      "legacy_ids": [
+        "notion_nature_inspiration",
+        "nature_inspiration_7"
+      ],
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_7_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 7,
+      "colors": [
+        "#99BCAC",
+        "#90B56D",
+        "#97C87D",
+        "#B9DF99"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#99BCAC",
+          "#90B56D",
+          "#97C87D",
+          "#B9DF99"
+        ],
+        "visible_palette_colors": [
+          "#BFDCA3",
+          "#6B9E63",
+          "#77AA6B",
+          "#9FBEAE",
+          "#97BB70",
+          "#9FCE7C"
+        ],
+        "picker_colors": [
+          "#C8E898",
+          "#98C878",
+          "#98B8A8",
+          "#98B878",
+          "#98B868",
+          "#78A868",
+          "#C8E8A8",
+          "#C8D8A8"
+        ],
+        "has_visible_hex_or_rgb": "mixed"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_6",
+      "legacy_ids": [
+        "notion_nature_inspiration",
+        "nature_inspiration_6"
+      ],
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_6_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 6,
+      "colors": [
+        "#519D78",
+        "#8BCF8B",
+        "#AADCA9",
+        "#C4E9CA",
+        "#DDF3DE",
+        "#F3FBF2",
+        "#5385BD",
+        "#9BC7DF",
+        "#DFF3F8"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#519D78",
+          "#8BCF8B",
+          "#AADCA9",
+          "#C4E9CA",
+          "#DDF3DE",
+          "#F3FBF2",
+          "#5385BD",
+          "#9BC7DF",
+          "#DFF3F8"
+        ],
+        "visible_palette_colors": [
+          "#5A90C7",
+          "#B1D8ED",
+          "#DFF1F7",
+          "#59A37E",
+          "#95D28F",
+          "#BCE2BB",
+          "#D1EFD5",
+          "#E4F5E5"
+        ],
+        "picker_colors": [
+          "#B8E8B8",
+          "#A8D8E8",
+          "#58A878",
+          "#D8E8D8",
+          "#98D888",
+          "#5888C8",
+          "#D8F8F8",
+          "#E8F8F8"
+        ],
+        "has_visible_hex_or_rgb": "mixed"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_5",
+      "legacy_ids": [
+        "notion_nature_inspiration",
+        "nature_inspiration_5"
+      ],
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_5_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 5,
+      "colors": [
+        "#6CBAD8",
+        "#96C2D4",
+        "#BAD2E1",
+        "#D8E5F7",
+        "#DBF1FA"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#6CBAD8",
+          "#96C2D4",
+          "#BAD2E1",
+          "#D8E5F7",
+          "#DBF1FA"
+        ],
+        "visible_palette_colors": [
+          "#79BEDF",
+          "#9EC8DF",
+          "#C1D8E9",
+          "#DBE7FD"
+        ],
+        "picker_colors": [
+          "#D8E8F8",
+          "#78B8E8",
+          "#C8D8E8",
+          "#98C8D8",
+          "#A8C8E8",
+          "#D8F8F8",
+          "#B8D8E8",
+          "#78B8D8"
+        ],
+        "has_visible_hex_or_rgb": "mixed"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_4",
+      "legacy_ids": [
+        "notion_nature_inspiration",
+        "nature_inspiration_4"
+      ],
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_4_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 4,
+      "colors": [
+        "#BCF4C5",
+        "#92C2A6",
+        "#D6F6FF",
+        "#ACEEFE",
+        "#6FC8CA",
+        "#58B8D1",
+        "#3492B2",
+        "#04579B"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#BCF4C5",
+          "#92C2A6",
+          "#D6F6FF",
+          "#ACEEFE",
+          "#6FC8CA",
+          "#58B8D1",
+          "#3492B2",
+          "#04579B"
+        ],
+        "visible_palette_colors": [
+          "#D1F2D2",
+          "#C3EACA",
+          "#96C6AE",
+          "#D8F7FC",
+          "#B5EFFD",
+          "#76CCD9",
+          "#5FC2E0",
+          "#6EC09F",
+          "#63B391",
+          "#329BBE",
+          "#0553A0"
+        ],
+        "picker_colors": [
+          "#D8F8F8",
+          "#D8F8D8",
+          "#78C8D8",
+          "#98D8D8",
+          "#F8F8D8",
+          "#B8E8F8",
+          "#58C8E8",
+          "#0858A8"
+        ],
+        "has_visible_hex_or_rgb": "mixed"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_3",
+      "legacy_ids": [
+        "notion_nature_inspiration",
+        "nature_inspiration_3"
+      ],
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_3_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 3,
+      "colors": [
+        "#3D9F3C",
+        "#9ED17B",
+        "#367DB0",
+        "#9DC7DD"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#3D9F3C",
+          "#9ED17B",
+          "#367DB0",
+          "#9DC7DD"
+        ],
+        "visible_palette_colors": [
+          "#A6D1A4",
+          "#ADCFE8",
+          "#3480B9",
+          "#CEE3E0",
+          "#A8D488",
+          "#47A243",
+          "#5E97C3",
+          "#81ACD2"
+        ],
+        "picker_colors": [
+          "#98C878",
+          "#A8C8E8",
+          "#3878B8",
+          "#489838",
+          "#389838",
+          "#489848",
+          "#58A848",
+          "#2878B8"
+        ],
+        "has_visible_hex_or_rgb": "mixed"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_2",
+      "legacy_ids": [
+        "notion_nature_inspiration",
+        "nature_inspiration_2"
+      ],
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_2_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 2,
+      "colors": [
+        "#3D9F3C",
+        "#9ED17B",
+        "#367DB0",
+        "#9DC7DD",
+        "#519D78",
+        "#8BCF8B",
+        "#AADCA9",
+        "#C4E9CA",
+        "#DDF3DE",
+        "#F3FBF2",
+        "#5385BD",
+        "#9BC7DF",
+        "#DFF3F8",
+        "#6CBAD8",
+        "#96C2D4",
+        "#BAD2E1",
+        "#D8E5F7",
+        "#DBF1FA"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "composite",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "blocked",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "disclaimer": "Composite Notion-derived color card; not eligible for plotting snippets until manually reviewed and split into semantic roles.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#3D9F3C",
+          "#9ED17B",
+          "#367DB0",
+          "#9DC7DD",
+          "#519D78",
+          "#8BCF8B",
+          "#AADCA9",
+          "#C4E9CA",
+          "#DDF3DE",
+          "#F3FBF2",
+          "#5385BD",
+          "#9BC7DF",
+          "#DFF3F8",
+          "#6CBAD8",
+          "#96C2D4",
+          "#BAD2E1",
+          "#D8E5F7",
+          "#DBF1FA"
+        ],
+        "visible_palette_colors": [
+          "#79B676",
+          "#95D2DA",
+          "#78C7DF",
+          "#4A9EC4",
+          "#196CAD",
+          "#99C181",
+          "#D0E8F5",
+          "#53A553",
+          "#3A963C",
+          "#E1F4FC",
+          "#B1CF9F",
+          "#CEDAC0"
+        ],
+        "picker_colors": [
+          "#389838",
+          "#E8F8F8",
+          "#3888B8",
+          "#C8D8E8",
+          "#A8C8E8",
+          "#98C878",
+          "#A8D888",
+          "#D8E8F8"
+        ],
+        "has_visible_hex_or_rgb": "mixed"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_1",
+      "legacy_ids": [
+        "notion_nature_inspiration",
+        "nature_inspiration_1"
+      ],
+      "source_page_slug": "nature_inspiration",
+      "source_page_title": "Nature顶刊配色灵感🌷",
+      "source_image_basename": "Nature顶刊配色灵感🌷_1_花本兰_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 1,
+      "colors": [
+        "#3D9F3C",
+        "#9ED17B",
+        "#367DB0",
+        "#9DC7DD"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "UMAP",
+        "single-cell plot",
+        "line/scatter series",
+        "biomedical multi-panel"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "cividis",
+        "YlGnBu"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#3D9F3C",
+          "#9ED17B",
+          "#367DB0",
+          "#9DC7DD"
+        ],
+        "visible_palette_colors": [
+          "#D5E4F4",
+          "#226EDE",
+          "#86BDE7",
+          "#ADDCC8",
+          "#778CB5",
+          "#54B04A",
+          "#B6D9F4",
+          "#D5EADF",
+          "#B6DAB2",
+          "#C8E2C4",
+          "#479F3D",
+          "#9CCE79"
+        ],
+        "picker_colors": [
+          "#98C8E8",
+          "#3888B8",
+          "#98C878",
+          "#489838",
+          "#C8E8F8",
+          "#D8E8F8",
+          "#B8D8F8",
+          "#A8D8F8"
+        ],
+        "has_visible_hex_or_rgb": "mixed"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_8",
+      "legacy_ids": [
+        "notion_nature_same_palette",
+        "nature_same_palette_8"
+      ],
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_8_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 8,
+      "colors": [
+        "#4F587D",
+        "#C68DC0",
+        "#C2E0EE",
+        "#776B97",
+        "#DBC8ED"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#4F587D",
+          "#C68DC0",
+          "#C2E0EE",
+          "#776B97",
+          "#DBC8ED"
+        ],
+        "visible_palette_colors": [
+          "#C591C3",
+          "#C3DEEF"
+        ],
+        "picker_colors": [
+          "#786898",
+          "#D8C8E8",
+          "#485888",
+          "#C8D8E8",
+          "#C888C8",
+          "#C898C8",
+          "#B8D8E8",
+          "#C888B8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_7",
+      "legacy_ids": [
+        "notion_nature_same_palette",
+        "nature_same_palette_7"
+      ],
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_7_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 7,
+      "colors": [
+        "#93C2E9",
+        "#F5CDEF",
+        "#F1BDC1",
+        "#888888",
+        "#D0D0CE"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#93C2E9",
+          "#F5CDEF",
+          "#F1BDC1",
+          "#888888",
+          "#D0D0CE"
+        ],
+        "visible_palette_colors": [
+          "#9EC9F4",
+          "#F4CCF1",
+          "#F2BEC2"
+        ],
+        "picker_colors": [
+          "#F8B8C8",
+          "#F8E8F8",
+          "#F8C8F8",
+          "#98C8F8",
+          "#A8C8F8",
+          "#F8C8E8",
+          "#F8D8F8",
+          "#A8C8E8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_6",
+      "legacy_ids": [
+        "notion_nature_same_palette",
+        "nature_same_palette_6"
+      ],
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_6_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 6,
+      "colors": [
+        "#DAE6F4",
+        "#9EC5E4",
+        "#67A5CC",
+        "#FAE1E5",
+        "#D780AA"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#DAE6F4",
+          "#9EC5E4",
+          "#67A5CC",
+          "#FAE1E5",
+          "#D780AA"
+        ],
+        "visible_palette_colors": [
+          "#EAF3FC",
+          "#FDEEF3",
+          "#FCDEE6",
+          "#EC96BD",
+          "#F9BAD1",
+          "#CAE2EA",
+          "#EFCADB",
+          "#AFBEF7",
+          "#DAE8F5",
+          "#AECFEB",
+          "#70A5D1",
+          "#DD82AD"
+        ],
+        "picker_colors": [
+          "#F8E8E8",
+          "#D8E8F8",
+          "#D888A8",
+          "#E878B8",
+          "#F8D8E8",
+          "#A8D8E8",
+          "#A8C8E8",
+          "#78A8D8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_5",
+      "legacy_ids": [
+        "notion_nature_same_palette",
+        "nature_same_palette_5"
+      ],
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_5_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 5,
+      "colors": [
+        "#EDF2F6",
+        "#DCE9F2",
+        "#C2DBEF",
+        "#97C2E4",
+        "#4FA1D1"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#EDF2F6",
+          "#DCE9F2",
+          "#C2DBEF",
+          "#97C2E4",
+          "#4FA1D1"
+        ],
+        "visible_palette_colors": [
+          "#FADDEB",
+          "#EBEFFC",
+          "#A9CBF7",
+          "#D8E7F9",
+          "#F6CAE5",
+          "#F4B9D9",
+          "#FCEDF4",
+          "#C6DEF8",
+          "#9AC7EB",
+          "#55A5DB"
+        ],
+        "picker_colors": [
+          "#D8E8F8",
+          "#98C8E8",
+          "#58A8D8",
+          "#C8E8F8",
+          "#E8E8F8",
+          "#C8D8F8",
+          "#E8F8F8",
+          "#B8D8F8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_4",
+      "legacy_ids": [
+        "notion_nature_same_palette",
+        "nature_same_palette_4"
+      ],
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_4_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 4,
+      "colors": [
+        "#FEEFF4",
+        "#FBE0E9",
+        "#F3C2D5",
+        "#E69EB6",
+        "#E282A7"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#FEEFF4",
+          "#FBE0E9",
+          "#F3C2D5",
+          "#E69EB6",
+          "#E282A7"
+        ],
+        "visible_palette_colors": [
+          "#DDE5FC",
+          "#EFF1FE",
+          "#FDECF2",
+          "#FDD4E4",
+          "#B4CBFC",
+          "#CDDCFD",
+          "#84ADFD",
+          "#F3BCD3",
+          "#EE9EBB",
+          "#E680A5"
+        ],
+        "picker_colors": [
+          "#F8D8E8",
+          "#F8B8D8",
+          "#E888A8",
+          "#E898B8",
+          "#E8E8F8",
+          "#88A8F8",
+          "#88B8F8",
+          "#D8E8F8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_3",
+      "legacy_ids": [
+        "notion_nature_same_palette",
+        "nature_same_palette_3"
+      ],
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_3_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 3,
+      "colors": [
+        "#5271AE",
+        "#70ACDE",
+        "#F5CC7D",
+        "#FFA660",
+        "#D85B59"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#5271AE",
+          "#70ACDE",
+          "#F5CC7D",
+          "#FFA660",
+          "#D85B59"
+        ],
+        "visible_palette_colors": [
+          "#E26557",
+          "#3E76CD",
+          "#ABCEE7",
+          "#C1E1F0",
+          "#F0A17A",
+          "#DAEBEC",
+          "#F3F0CF",
+          "#EEF4E3",
+          "#4970B5",
+          "#72B5E6",
+          "#F5CC70",
+          "#FD9651"
+        ],
+        "picker_colors": [
+          "#78B8E8",
+          "#D84848",
+          "#F8C878",
+          "#F89858",
+          "#4878B8",
+          "#F8F8D8",
+          "#4868B8",
+          "#F8F8C8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_2",
+      "legacy_ids": [
+        "notion_nature_same_palette",
+        "nature_same_palette_2"
+      ],
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_2_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 2,
+      "colors": [
+        "#CAE5F8",
+        "#9DCBED",
+        "#FAEFF5",
+        "#F2C5DA",
+        "#E286AF"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_transcribed",
+      "palette_role": "style_candidate",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "explicit_only",
+      "snippet_eligibility": "requires_allow_experimental",
+      "figure_types": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#CAE5F8",
+          "#9DCBED",
+          "#FAEFF5",
+          "#F2C5DA",
+          "#E286AF"
+        ],
+        "visible_palette_colors": [
+          "#93C1F3",
+          "#BBD8F4",
+          "#FADBE6",
+          "#A7CCF4",
+          "#E3E6F6",
+          "#CFE0F6",
+          "#FEEBF1",
+          "#FBC0D5",
+          "#F6AFCA",
+          "#E686AC"
+        ],
+        "picker_colors": [
+          "#F8C8D8",
+          "#C8E8F8",
+          "#E888A8",
+          "#A8C8F8",
+          "#A8D8F8",
+          "#D8E8F8",
+          "#F8D8E8",
+          "#F898B8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_1",
+      "legacy_ids": [
+        "notion_nature_same_palette",
+        "nature_same_palette_1"
+      ],
+      "source_page_slug": "nature_same_palette",
+      "source_page_title": "顶刊配色直接抄！Nature同款色板也太绝了",
+      "source_image_basename": "顶刊配色直接抄！Nature同款色板也太绝了_1_Her.o_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 1,
+      "colors": [
+        "#FFD6E7",
+        "#FFB6D5",
+        "#F7A1C4",
+        "#E6F3FF",
+        "#CDEBFA",
+        "#B3E5FC",
+        "#9ED8F5",
+        "#81D4FA",
+        "#90CAF9",
+        "#B0BEC5",
+        "#A7C7E7",
+        "#7FB3F0",
+        "#4D90FE",
+        "#E8F0F8",
+        "#FCE4EC",
+        "#D9F0FA",
+        "#EDE7F6",
+        "#C7D6E6",
+        "#8FB7E3",
+        "#FFD1E1",
+        "#BDBDBD",
+        "#D0D0D0",
+        "#E5E5E5",
+        "#F8BBD0",
+        "#90A4AE",
+        "#B3E5FC"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "composite",
+      "color_source": "visible_hex_manual_transcription",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "high_visible_hex_transcribed",
+      "review_status": "unreviewed",
+      "recommendation_status": "blocked",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "UMAP",
+        "activation heatmap",
+        "ridge plot",
+        "histogram",
+        "Nature-inspired figure"
+      ],
+      "venue_tags": [
+        "Nature",
+        "biomedical"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "nature_npg",
+        "cividis"
+      ],
+      "disclaimer": "Composite Notion-derived color card; not eligible for plotting snippets until manually reviewed and split into semantic roles.",
+      "source_evidence": {
+        "visible_hex_colors": [
+          "#FFD6E7",
+          "#FFB6D5",
+          "#F7A1C4",
+          "#E6F3FF",
+          "#CDEBFA",
+          "#B3E5FC",
+          "#9ED8F5",
+          "#81D4FA",
+          "#90CAF9",
+          "#B0BEC5",
+          "#A7C7E7",
+          "#7FB3F0",
+          "#4D90FE",
+          "#E8F0F8",
+          "#FCE4EC",
+          "#D9F0FA",
+          "#EDE7F6",
+          "#C7D6E6",
+          "#8FB7E3",
+          "#FFD1E1",
+          "#BDBDBD",
+          "#D0D0D0",
+          "#E5E5E5",
+          "#F8BBD0",
+          "#90A4AE",
+          "#B3E5FC"
+        ],
+        "visible_palette_colors": [
+          "#525F89",
+          "#C591C3",
+          "#C4E4F5",
+          "#AAA4D0",
+          "#DACCED",
+          "#4475D4",
+          "#74B0EE",
+          "#FEE2A3",
+          "#FBAC6F",
+          "#FD7E77",
+          "#B2E4FB",
+          "#FBE5E8"
+        ],
+        "picker_colors": [
+          "#F8D8E8",
+          "#D8E8F8",
+          "#B8E8F8",
+          "#C8D8E8",
+          "#98B8E8",
+          "#98A8B8",
+          "#F8B8D8",
+          "#F8B8C8"
+        ],
+        "has_visible_hex_or_rgb": "yes"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_18",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_18"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_18_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 18,
+      "colors": [
+        "#8CD2B2",
+        "#2E9E60",
+        "#C0E6DC",
+        "#086A30",
+        "#CFEEE7",
+        "#42AB70",
+        "#A3DCCD",
+        "#E6F6FB",
+        "#197B42"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#8CD2B2",
+          "#2E9E60",
+          "#C0E6DC",
+          "#086A30",
+          "#CFEEE7",
+          "#42AB70",
+          "#A3DCCD",
+          "#E6F6FB",
+          "#197B42"
+        ],
+        "picker_colors": [
+          "#A8D8C8",
+          "#48A878",
+          "#E8F8F8",
+          "#187848",
+          "#48A868",
+          "#187838",
+          "#38A868",
+          "#98D8C8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_17",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_17"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_17_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 17,
+      "colors": [
+        "#F2B550",
+        "#CB5F15",
+        "#FAE196",
+        "#93360C",
+        "#DB6F26",
+        "#A3481C",
+        "#FDC961",
+        "#FEF7C3"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#F2B550",
+          "#CB5F15",
+          "#FAE196",
+          "#93360C",
+          "#DB6F26",
+          "#A3481C",
+          "#FDC961",
+          "#FEF7C3"
+        ],
+        "picker_colors": [
+          "#F8C868",
+          "#D86828",
+          "#F8F8C8",
+          "#A84818",
+          "#F8C858",
+          "#D87828",
+          "#F8F8B8",
+          "#983808"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_16",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_16"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_16_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 16,
+      "colors": [
+        "#F28BB4",
+        "#DE2B8B",
+        "#F6C5D0",
+        "#BA1D79",
+        "#EA3D96",
+        "#CB338A",
+        "#FAA8BA",
+        "#FEE2DF"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#F28BB4",
+          "#DE2B8B",
+          "#F6C5D0",
+          "#BA1D79",
+          "#EA3D96",
+          "#CB338A",
+          "#FAA8BA",
+          "#FEE2DF"
+        ],
+        "picker_colors": [
+          "#F8A8B8",
+          "#E83898",
+          "#C83888",
+          "#F8E8D8",
+          "#F8E8E8",
+          "#E8A8B8",
+          "#C81878",
+          "#F8A8C8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_15",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_15"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_15_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 15,
+      "colors": [
+        "#79CAC0",
+        "#43A6C0",
+        "#B7E4BA",
+        "#265D9F",
+        "#CCEEBA",
+        "#53BDCA",
+        "#396EB0",
+        "#8BD3C1",
+        "#EEF9B7"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#79CAC0",
+          "#43A6C0",
+          "#B7E4BA",
+          "#265D9F",
+          "#CCEEBA",
+          "#53BDCA",
+          "#396EB0",
+          "#8BD3C1",
+          "#EEF9B7"
+        ],
+        "picker_colors": [
+          "#88D8C8",
+          "#58B8C8",
+          "#E8F8B8",
+          "#3868B8",
+          "#3868A8",
+          "#88D8B8",
+          "#F8F8B8",
+          "#58B8B8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_14",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_14"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_14_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 14,
+      "colors": [
+        "#F8C586",
+        "#F0885A",
+        "#F9E2B9",
+        "#DB4632",
+        "#FB9968",
+        "#E45C46",
+        "#FED195",
+        "#FDF1DB"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#F8C586",
+          "#F0885A",
+          "#F9E2B9",
+          "#DB4632",
+          "#FB9968",
+          "#E45C46",
+          "#FED195",
+          "#FDF1DB"
+        ],
+        "picker_colors": [
+          "#F8D898",
+          "#F89868",
+          "#F8F8D8",
+          "#E85848",
+          "#F8C898",
+          "#F8E8D8",
+          "#F8C888",
+          "#F8F8E8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_13",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_13"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_13_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 13,
+      "colors": [
+        "#9FB6D6",
+        "#8E8DBF",
+        "#B6CEE1",
+        "#8C4FA3",
+        "#97A0CB",
+        "#9567AF",
+        "#C6D7E7"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#9FB6D6",
+          "#8E8DBF",
+          "#B6CEE1",
+          "#8C4FA3",
+          "#97A0CB",
+          "#9567AF",
+          "#C6D7E7"
+        ],
+        "picker_colors": [
+          "#A8C8D8",
+          "#C8D8E8",
+          "#98A8C8",
+          "#9868A8",
+          "#9898C8",
+          "#A8B8D8",
+          "#9868B8",
+          "#A8C8E8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_12",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_12"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_12_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 12,
+      "colors": [
+        "#99D88B",
+        "#31A054",
+        "#D4EEB2",
+        "#08673A",
+        "#45AC63",
+        "#B4E098",
+        "#F6FDBF",
+        "#18774B"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#99D88B",
+          "#31A054",
+          "#D4EEB2",
+          "#08673A",
+          "#45AC63",
+          "#B4E098",
+          "#F6FDBF",
+          "#18774B"
+        ],
+        "picker_colors": [
+          "#48A868",
+          "#B8E898",
+          "#187848",
+          "#F8F8B8",
+          "#B8D898",
+          "#F8F8C8",
+          "#086838",
+          "#084828"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_11",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_11"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_11_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 11,
+      "colors": [
+        "#DBAAD4",
+        "#DB5EA3",
+        "#D8C4DA",
+        "#C01457",
+        "#E374B7",
+        "#D32967"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#DBAAD4",
+          "#DB5EA3",
+          "#D8C4DA",
+          "#C01457",
+          "#E374B7",
+          "#D32967"
+        ],
+        "picker_colors": [
+          "#D8B8D8",
+          "#E878B8",
+          "#D82868",
+          "#E8B8D8",
+          "#C82868",
+          "#D878B8",
+          "#C81858",
+          "#C878A8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_10",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_10"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_10_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 10,
+      "colors": [
+        "#A5D2E6",
+        "#71A6CC",
+        "#CCE8F0",
+        "#486FB0",
+        "#81B6D6",
+        "#5883BA",
+        "#E3F5F9"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#A5D2E6",
+          "#71A6CC",
+          "#CCE8F0",
+          "#486FB0",
+          "#81B6D6",
+          "#5883BA",
+          "#E3F5F9"
+        ],
+        "picker_colors": [
+          "#B8D8E8",
+          "#88B8D8",
+          "#E8F8F8",
+          "#5888B8",
+          "#A8D8E8",
+          "#D8F8F8",
+          "#78A8C8",
+          "#78A8D8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_9",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_9"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_9_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 9,
+      "colors": [
+        "#DBBC77",
+        "#BB7F2E",
+        "#EED8AA",
+        "#865011",
+        "#C58D42",
+        "#986222",
+        "#E1C789",
+        "#F7EAC9"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#DBBC77",
+          "#BB7F2E",
+          "#EED8AA",
+          "#865011",
+          "#C58D42",
+          "#986222",
+          "#E1C789",
+          "#F7EAC9"
+        ],
+        "picker_colors": [
+          "#E8C888",
+          "#C88848",
+          "#F8E8C8",
+          "#986828",
+          "#D8C888",
+          "#C88838",
+          "#B88848",
+          "#B88838"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_8",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_8"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_8_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 8,
+      "colors": [
+        "#F6B2BE",
+        "#EC8BB8",
+        "#F5C6D0",
+        "#E360A4",
+        "#F678A8",
+        "#FEE2DF"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#F6B2BE",
+          "#EC8BB8",
+          "#F5C6D0",
+          "#E360A4",
+          "#F678A8",
+          "#FEE2DF"
+        ],
+        "picker_colors": [
+          "#F8C8C8",
+          "#F8A8B8",
+          "#F878A8",
+          "#F8E8D8",
+          "#F8E8E8",
+          "#F8A8C8",
+          "#F8D8D8",
+          "#E8A8B8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_7",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_7"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_7_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 7,
+      "colors": [
+        "#B9E6CA",
+        "#98D5C4",
+        "#CAEAD0",
+        "#72C2C8",
+        "#E2F4DE"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#B9E6CA",
+          "#98D5C4",
+          "#CAEAD0",
+          "#72C2C8",
+          "#E2F4DE"
+        ],
+        "picker_colors": [
+          "#D8E8C8",
+          "#E8F8D8",
+          "#88D8C8",
+          "#B8E8B8",
+          "#A8E8B8",
+          "#C8E8C8",
+          "#88C8C8",
+          "#B8D8B8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_6",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_6"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_6_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 6,
+      "colors": [
+        "#F8F8F8",
+        "#D8D8D8",
+        "#C8C8C8",
+        "#989898",
+        "#080808",
+        "#B8B8B8",
+        "#A8A8A8",
+        "#787878"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "dominant_picker_fallback",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "low_picker_only",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [],
+        "picker_colors": [
+          "#F8F8F8",
+          "#D8D8D8",
+          "#C8C8C8",
+          "#989898",
+          "#080808",
+          "#B8B8B8",
+          "#A8A8A8",
+          "#787878"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_5",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_5"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_5_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 5,
+      "colors": [
+        "#F8C695",
+        "#F4AA64",
+        "#F8D4AD",
+        "#F2883B",
+        "#FAE1BE",
+        "#FD984F",
+        "#FEEEE1",
+        "#FDB67B"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#F8C695",
+          "#F4AA64",
+          "#F8D4AD",
+          "#F2883B",
+          "#FAE1BE",
+          "#FD984F",
+          "#FEEEE1",
+          "#FDB67B"
+        ],
+        "picker_colors": [
+          "#F8D8A8",
+          "#F8B878",
+          "#F8E8E8",
+          "#F89858",
+          "#F89848",
+          "#F8E8D8",
+          "#F8D8B8",
+          "#F8F8E8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_4",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_4"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_4_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 4,
+      "colors": [
+        "#C8C3DC",
+        "#B0ACD0",
+        "#9A92C3",
+        "#DDDCEC"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#C8C3DC",
+          "#B0ACD0",
+          "#9A92C3",
+          "#DDDCEC"
+        ],
+        "picker_colors": [
+          "#C8C8D8",
+          "#A8A8C8",
+          "#C8C8E8",
+          "#D8D8F8",
+          "#8888B8",
+          "#B8B8D8",
+          "#A898C8",
+          "#A8A8D8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_3",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_3"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_3_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 3,
+      "colors": [
+        "#F6AF97",
+        "#F18A6C",
+        "#F7C4AF",
+        "#EC6549",
+        "#FB9C7E",
+        "#FB7A5D",
+        "#FFE3D6"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#F6AF97",
+          "#F18A6C",
+          "#F7C4AF",
+          "#EC6549",
+          "#FB9C7E",
+          "#FB7A5D",
+          "#FFE3D6"
+        ],
+        "picker_colors": [
+          "#F8C8A8",
+          "#F89878",
+          "#F8E8D8",
+          "#F87858",
+          "#F89888",
+          "#F8B8A8",
+          "#F87868",
+          "#E87858"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_2",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_2"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_2_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 2,
+      "colors": [
+        "#BBE4B3",
+        "#93D297",
+        "#C9EBC6",
+        "#6DBD74",
+        "#AADDA5",
+        "#83C983",
+        "#E8F7E4"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#BBE4B3",
+          "#93D297",
+          "#C9EBC6",
+          "#6DBD74",
+          "#AADDA5",
+          "#83C983",
+          "#E8F7E4"
+        ],
+        "picker_colors": [
+          "#C8E8C8",
+          "#A8D8A8",
+          "#88C888",
+          "#E8F8E8",
+          "#78C888",
+          "#58A868",
+          "#E8F8D8",
+          "#A8E8A8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_1",
+      "legacy_ids": [
+        "notion_python_bar_distribution",
+        "python_bar_distribution_1"
+      ],
+      "source_page_slug": "python_bar_distribution",
+      "source_page_title": "Python绘制高颜值柱状图展示数据分布",
+      "source_image_basename": "Python绘制高颜值柱状图展示数据分布_1_pytho遥感学习日志_来自小红书网页版.jpg",
+      "source_asset_committed": false,
+      "source_locator_status": "source_image_unavailable_in_remote_repo",
+      "image_index": 1,
+      "colors": [
+        "#C8E0EE",
+        "#ABC4E4",
+        "#909AC6",
+        "#A7B4D4",
+        "#E2F0F1"
+      ],
+      "type": "categorical",
+      "tier": "image_derived_unreviewed",
+      "palette_role": "figure_example_palette",
+      "color_source": "figure_swatch_or_bar_sample",
+      "extraction_method": "connected_swatch_detection_plus_dominant_fallback",
+      "extraction_confidence": "medium_figure_derived",
+      "review_status": "unreviewed",
+      "recommendation_status": "inspiration_only",
+      "snippet_eligibility": "blocked",
+      "figure_types": [
+        "histogram",
+        "bar chart",
+        "distribution comparison",
+        "four-level categorical bars"
+      ],
+      "venue_tags": [
+        "distribution",
+        "python-plotting"
+      ],
+      "canonical_fallback_ids": [
+        "okabe_ito",
+        "Set2",
+        "Blues"
+      ],
+      "disclaimer": "User-curated Notion image-derived candidate; not an official venue, conference, journal, or publisher palette.",
+      "source_evidence": {
+        "visible_hex_colors": [],
+        "visible_palette_colors": [
+          "#C8E0EE",
+          "#ABC4E4",
+          "#909AC6",
+          "#A7B4D4",
+          "#E2F0F1"
+        ],
+        "picker_colors": [
+          "#C8D8F8",
+          "#A8B8D8",
+          "#C8D8E8",
+          "#E8F8F8",
+          "#D8E8F8",
+          "#98B8E8",
+          "#C8E8F8",
+          "#6888C8"
+        ],
+        "has_visible_hex_or_rgb": "no"
+      }
+    }
+  ]
+}

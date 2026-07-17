@@ -21,6 +21,13 @@ metadata:
 
 Matplotlib is Python's foundational visualization library for creating static, animated, and interactive plots. This skill provides guidance on using matplotlib effectively, covering both the pyplot interface (MATLAB-style) and the object-oriented API (Figure/Axes), along with best practices for creating publication-quality visualizations.
 
+For publication palette decisions, do not maintain a separate Matplotlib-only
+palette policy. Use the repository palette API instead:
+`python scripts/palette.py recommend ...` and
+`python scripts/palette.py snippet <palette-id> --target matplotlib`. Notion
+image-derived candidates require the explicit experimental gate described by
+the `publication-figure-palettes` skill.
+
 ## When to Use This Skill
 
 This skill should be used when:
