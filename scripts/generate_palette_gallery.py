@@ -76,7 +76,7 @@ def main() -> int:
         for page in notion.get("pages", []):
             first_colors = []
             if page.get("images"):
-                first_colors = page["images"][0].get("picker_colors", [])
+                first_colors = page["images"][0].get("primary_colors") or page["images"][0].get("visible_hex_colors") or page["images"][0].get("picker_colors", [])
             notion_cards.append(
                 f"""
 <section class="card image-derived">

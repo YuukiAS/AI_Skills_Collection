@@ -280,6 +280,34 @@ def main() -> int:
         }:
             if expected not in slugs:
                 errors.append(f"notion image palette file missing page {expected}")
+        for page in pages:
+            if not isinstance(page, dict):
+                continue
+            slug = str(page.get("slug"))
+            images = page.get("images", [])
+            if not isinstance(images, list):
+                errors.append(f"notion page {slug} images must be a list")
+                continue
+            if page.get("has_visible_hex_or_rgb") in {"yes", "mixed"} and images:
+                manual = [
+                    image
+                    for image in images
+                    if isinstance(image, dict)
+                    and image.get("color_source") == "visible_hex_manual_transcription"
+                    and image.get("visible_hex_colors")
+                ]
+                if not manual:
+                    errors.append(f"notion page {slug} has visible HEX/RGB but no transcribed visible_hex_colors")
+            for image in images:
+                if not isinstance(image, dict):
+                    continue
+                primary = image.get("primary_colors", [])
+                if image.get("color_source") == "visible_hex_manual_transcription" and primary != image.get("visible_hex_colors"):
+                    errors.append(f"notion image {image.get('file')} primary_colors must use visible_hex_colors")
+                if primary:
+                    bad_primary = [c for c in primary if not isinstance(c, str) or not HEX.match(c)]
+                    if bad_primary:
+                        errors.append(f"notion image {image.get('file')} has invalid primary colors: {bad_primary[:3]}")
 
     if errors:
         for error in errors:

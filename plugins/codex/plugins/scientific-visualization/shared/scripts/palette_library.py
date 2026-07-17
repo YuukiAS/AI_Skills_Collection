@@ -148,7 +148,7 @@ def _normalise_notion_page(page: Palette) -> Palette:
     images = page.get("images", [])
     colors = []
     if images:
-        colors = images[0].get("picker_colors", [])
+        colors = images[0].get("primary_colors") or images[0].get("visible_palette_colors") or images[0].get("picker_colors", [])
     return {
         "id": f"notion_{page.get('slug', '')}",
         "legacy_ids": [str(page.get("slug", "")), str(page.get("page_title", ""))],

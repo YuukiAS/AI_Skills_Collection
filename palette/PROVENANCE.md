@@ -72,7 +72,7 @@ license and provenance metadata visible in redistributed plugin payloads.
 
 ### Notion Image-Derived Palettes And Figure Examples
 
-- `CVPR25优质绘图学配色`: 1 latest image, no visible HEX; picker-derived palette plus 3D point cloud / Gaussian splatting example.
+- `CVPR25优质绘图学配色`: 1 latest image, visible bottom HEX labels; experimental palette plus 3D point cloud / Gaussian splatting example.
 - `AAAI跟着顶会学配色`: 3 latest images, visible RGB/HEX labels; parse labels where possible and keep picker output for verification; use for AI schematics, codec pipelines, benchmark panels, histogram/box/scatter examples.
 - `攒了九组顶刊审稿人都挑不出毛病的配色`: 9 latest images, visible HEX cards; experimental journal-aesthetic palettes for small multiples, line and bar examples.
 - `ICML的清爽绘图风格！学了就能Accept‼️`: 3 latest images, no reliable visible HEX; treat primarily as figure examples for clean schematic, line chart, attention heatmap, and model comparison.
