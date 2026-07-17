@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-17
 profile_tags:
 recommended_scope: project
 license: MIT license
@@ -22,10 +22,11 @@ metadata:
 Scientific visualization transforms data into clear, accurate figures for publication. Create journal-ready plots with multi-panel layouts, error bars, significance markers, and colorblind-safe palettes. Export as PDF/EPS/TIFF using matplotlib, seaborn, and plotly for manuscripts.
 
 For palette selection, contextual conference/journal style candidates, and
-snippet gates, route to `publication-figure-palettes`. For final accessibility,
-grayscale, contrast, export, and venue-readiness checks, route to
+snippet gates, route to `publication-figure-palettes` before plotting. For final
+accessibility, grayscale, contrast, export, and venue-readiness checks, route to
 `scientific-figure-qa`. This skill remains the publication figure orchestrator:
-it coordinates plot intent, data encodings, layout, and export decisions.
+it coordinates figure intent, palette discovery, data encodings, layout, plot
+implementation, and export decisions.
 
 ## When to Use This Skill
 
@@ -80,14 +81,14 @@ Apply journal-specific styles using the matplotlib style files in `assets/`:
 ```python
 import matplotlib.pyplot as plt
 
-# Option 1: Use style file directly
+# Option 1: Use style file directly after checking current venue requirements
 plt.style.use('assets/nature.mplstyle')
 
 # Option 2: Use style_presets.py helper
 from style_presets import configure_for_journal
 configure_for_journal('nature', figure_width='single')
 
-# Now create figures - they'll automatically match Nature specifications
+# Now create figures, then run figure QA against current Nature requirements
 fig, ax = plt.subplots()
 # ... your plotting code ...
 ```
@@ -159,12 +160,22 @@ recommend --purpose heatmap`, and `python scripts/palette.py snippet okabe_ito
 `palette/publication-figure-presets.json` for top-conference, heatmap, centered
 diverging, and journal-inspired non-official figure defaults.
 
+For any request with venue, figure type, or domain context, run contextual
+discovery before choosing colors:
+
+```bash
+python scripts/palette.py discover --figure-type schematic --paper-venue AAAI --explain
+python scripts/palette.py discover --figure-type umap --paper-venue Nature --format json
+```
+
 For contextual conference or journal visual references, use
 `palette/notion-palette-candidates.json` and `palette/figure-example-registry.json`
-through `python scripts/palette.py recommend --style-source notion|all` or
-`python scripts/palette.py example`. Do not treat those candidates as official
-venue palettes, and do not generate snippets from unreviewed candidates without
-the explicit CLI gate.
+through `python scripts/palette.py discover`, `python scripts/palette.py notion
+search`, or `python scripts/palette.py guidance`. Do not treat those candidates
+as official venue palettes, and do not generate snippets from unreviewed
+candidates without the explicit CLI gate. Contextual discovery is a reference
+step; actual plotting should still default to safe canonical palettes unless the
+user explicitly accepts an experimental candidate.
 
 For expanded publication palette search, use the GPL-3 `cols4all` export at
 `palette/external/cols4all-palettes.json` through `python scripts/palette.py

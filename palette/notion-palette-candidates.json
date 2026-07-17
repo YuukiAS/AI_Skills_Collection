@@ -1,12 +1,14 @@
 {
   "library_id": "ai_skills_notion_palette_candidates",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "source": "palette/notion-image-palettes.json",
   "candidate_count": 50,
   "default_policy": {
     "core_promotion": "Never promote image-derived candidates to canonical core without manual review.",
     "default_recommendation": "Do not include unreviewed candidates in default recommendations.",
-    "snippet_gate": "Only transcribed unreviewed candidates may generate snippets with --allow-experimental; figure-derived candidates remain blocked."
+    "snippet_gate": "Only transcribed unreviewed candidates may generate snippets with --allow-experimental; figure-derived candidates remain blocked.",
+    "contextual_discovery": "Show Notion-derived pages, examples, and experimental candidates when venue or figure context matches; do not treat them as publication-safe defaults or default snippets.",
+    "application_gate": "Contextual discovery is not application. Raw snippets remain limited to visible HEX transcriptions behind --allow-experimental."
   },
   "candidates": [
     {
@@ -89,7 +91,17 @@
           "#D8F8F8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:cvpr25",
+      "variant_rank": 1,
+      "representative": true
     },
     {
       "candidate_id": "notion_aaai_3",
@@ -184,7 +196,17 @@
           "#E88828"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:aaai",
+      "variant_rank": 3,
+      "representative": false
     },
     {
       "candidate_id": "notion_aaai_2",
@@ -279,7 +301,17 @@
           "#B8C8E8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:aaai",
+      "variant_rank": 2,
+      "representative": false
     },
     {
       "candidate_id": "notion_aaai_1",
@@ -374,7 +406,17 @@
           "#B8C8D8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:aaai",
+      "variant_rank": 1,
+      "representative": true
     },
     {
       "candidate_id": "notion_journal_reviewer_9_10",
@@ -441,7 +483,17 @@
           "#889898"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 10,
+      "representative": false
     },
     {
       "candidate_id": "notion_journal_reviewer_9_9",
@@ -508,7 +560,17 @@
           "#9898B8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 9,
+      "representative": false
     },
     {
       "candidate_id": "notion_journal_reviewer_9_8",
@@ -573,7 +635,17 @@
           "#B8A8A8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 8,
+      "representative": false
     },
     {
       "candidate_id": "notion_journal_reviewer_9_7",
@@ -640,7 +712,17 @@
           "#88A8B8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 7,
+      "representative": false
     },
     {
       "candidate_id": "notion_journal_reviewer_9_6",
@@ -710,7 +792,17 @@
           "#787898"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 6,
+      "representative": false
     },
     {
       "candidate_id": "notion_journal_reviewer_9_5",
@@ -778,7 +870,17 @@
           "#98A888"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 5,
+      "representative": false
     },
     {
       "candidate_id": "notion_journal_reviewer_9_4",
@@ -846,7 +948,17 @@
           "#A8A8C8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 4,
+      "representative": false
     },
     {
       "candidate_id": "notion_journal_reviewer_9_3",
@@ -914,7 +1026,17 @@
           "#88A898"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 3,
+      "representative": false
     },
     {
       "candidate_id": "notion_journal_reviewer_9_2",
@@ -981,7 +1103,17 @@
           "#E8C8C8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 2,
+      "representative": true
     },
     {
       "candidate_id": "notion_icml_clean_3",
@@ -1059,7 +1191,17 @@
           "#E8D8D8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:icml_clean",
+      "variant_rank": 3,
+      "representative": false
     },
     {
       "candidate_id": "notion_icml_clean_2",
@@ -1125,7 +1267,17 @@
           "#A86848"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:icml_clean",
+      "variant_rank": 2,
+      "representative": false
     },
     {
       "candidate_id": "notion_icml_clean_1",
@@ -1205,7 +1357,17 @@
           "#F8D8C8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:icml_clean",
+      "variant_rank": 1,
+      "representative": true
     },
     {
       "candidate_id": "notion_nature_inspiration_8",
@@ -1290,7 +1452,17 @@
           "#28A858"
         ],
         "has_visible_hex_or_rgb": "mixed"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 8,
+      "representative": false
     },
     {
       "candidate_id": "notion_nature_inspiration_7",
@@ -1361,7 +1533,17 @@
           "#C8D8A8"
         ],
         "has_visible_hex_or_rgb": "mixed"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 7,
+      "representative": false
     },
     {
       "candidate_id": "notion_nature_inspiration_6",
@@ -1444,7 +1626,17 @@
           "#E8F8F8"
         ],
         "has_visible_hex_or_rgb": "mixed"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 6,
+      "representative": false
     },
     {
       "candidate_id": "notion_nature_inspiration_5",
@@ -1515,7 +1707,17 @@
           "#78B8D8"
         ],
         "has_visible_hex_or_rgb": "mixed"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 5,
+      "representative": false
     },
     {
       "candidate_id": "notion_nature_inspiration_4",
@@ -1599,7 +1801,17 @@
           "#0858A8"
         ],
         "has_visible_hex_or_rgb": "mixed"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 4,
+      "representative": false
     },
     {
       "candidate_id": "notion_nature_inspiration_3",
@@ -1672,7 +1884,17 @@
           "#2878B8"
         ],
         "has_visible_hex_or_rgb": "mixed"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 3,
+      "representative": false
     },
     {
       "candidate_id": "notion_nature_inspiration_2",
@@ -1777,7 +1999,17 @@
           "#D8E8F8"
         ],
         "has_visible_hex_or_rgb": "mixed"
-      }
+      },
+      "asset_kind": "composite_reference",
+      "derivation_method": "visible_hex_composite",
+      "source_fidelity": "composite",
+      "discovery_eligibility": "guidance_only",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 2,
+      "representative": false
     },
     {
       "candidate_id": "notion_nature_inspiration_1",
@@ -1854,7 +2086,17 @@
           "#A8D8F8"
         ],
         "has_visible_hex_or_rgb": "mixed"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 1,
+      "representative": true
     },
     {
       "candidate_id": "notion_nature_same_palette_8",
@@ -1924,7 +2166,17 @@
           "#C888B8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 8,
+      "representative": false
     },
     {
       "candidate_id": "notion_nature_same_palette_7",
@@ -1995,7 +2247,17 @@
           "#A8C8E8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 7,
+      "representative": false
     },
     {
       "candidate_id": "notion_nature_same_palette_6",
@@ -2075,7 +2337,17 @@
           "#78A8D8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 6,
+      "representative": false
     },
     {
       "candidate_id": "notion_nature_same_palette_5",
@@ -2153,7 +2425,17 @@
           "#B8D8F8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 5,
+      "representative": false
     },
     {
       "candidate_id": "notion_nature_same_palette_4",
@@ -2231,7 +2513,17 @@
           "#D8E8F8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 4,
+      "representative": false
     },
     {
       "candidate_id": "notion_nature_same_palette_3",
@@ -2311,7 +2603,17 @@
           "#F8F8C8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 3,
+      "representative": false
     },
     {
       "candidate_id": "notion_nature_same_palette_2",
@@ -2389,7 +2691,17 @@
           "#F898B8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "palette_candidate",
+      "derivation_method": "visible_hex_transcription",
+      "source_fidelity": "exact_transcription",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "experimental_gate",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 2,
+      "representative": true
     },
     {
       "candidate_id": "notion_nature_same_palette_1",
@@ -2511,7 +2823,17 @@
           "#F8B8C8"
         ],
         "has_visible_hex_or_rgb": "yes"
-      }
+      },
+      "asset_kind": "composite_reference",
+      "derivation_method": "visible_hex_composite",
+      "source_fidelity": "composite",
+      "discovery_eligibility": "guidance_only",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 1,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_18",
@@ -2585,7 +2907,17 @@
           "#98D8C8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 18,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_17",
@@ -2657,7 +2989,17 @@
           "#983808"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 17,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_16",
@@ -2729,7 +3071,17 @@
           "#F8A8C8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 16,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_15",
@@ -2803,7 +3155,17 @@
           "#58B8B8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 15,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_14",
@@ -2875,7 +3237,17 @@
           "#F8F8E8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 14,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_13",
@@ -2945,7 +3317,17 @@
           "#A8C8E8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 13,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_12",
@@ -3017,7 +3399,17 @@
           "#084828"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 12,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_11",
@@ -3085,7 +3477,17 @@
           "#C878A8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 11,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_10",
@@ -3155,7 +3557,17 @@
           "#78A8D8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 10,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_9",
@@ -3227,7 +3639,17 @@
           "#B88838"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 9,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_8",
@@ -3295,7 +3717,17 @@
           "#E8A8B8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 8,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_7",
@@ -3361,7 +3793,17 @@
           "#B8D8B8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 7,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_6",
@@ -3424,7 +3866,17 @@
           "#787878"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 6,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_5",
@@ -3496,7 +3948,17 @@
           "#F8F8E8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 5,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_4",
@@ -3560,7 +4022,17 @@
           "#A8A8D8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 4,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_3",
@@ -3630,7 +4102,17 @@
           "#E87858"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 3,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_2",
@@ -3700,7 +4182,17 @@
           "#A8E8A8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 2,
+      "representative": false
     },
     {
       "candidate_id": "notion_python_bar_distribution_1",
@@ -3766,7 +4258,17 @@
           "#6888C8"
         ],
         "has_visible_hex_or_rgb": "no"
-      }
+      },
+      "asset_kind": "figure_example",
+      "derivation_method": "figure_sampling",
+      "source_fidelity": "sampled_from_figure",
+      "discovery_eligibility": "contextual_default",
+      "raw_snippet_eligibility": "blocked",
+      "style_guidance_eligibility": "allowed",
+      "publication_status": "not_reviewed",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 1,
+      "representative": true
     }
   ]
 }

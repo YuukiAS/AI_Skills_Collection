@@ -166,7 +166,7 @@ class CodexMarketplaceTests(unittest.TestCase):
     def test_scientific_visualization_exposes_split_figure_workflows(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         plugin_data = next(plugin for plugin in data["plugins"] if plugin["name"] == "scientific-visualization")
-        self.assertEqual(plugin_data["version"], "4.1.0")
+        self.assertEqual(plugin_data["version"], "4.2.0")
         self.assertEqual(
             [entry["name"] if entry["type"] == "aggregate" else Path(entry["source"]).name for entry in plugin_data["skills"]],
             [

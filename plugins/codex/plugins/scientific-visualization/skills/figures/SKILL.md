@@ -1,6 +1,6 @@
 ---
 name: publication-figures
-description: Publication figure orchestration with Matplotlib, Seaborn, Plotly, canonical palettes, and export-ready figure layout.
+description: Publication figure orchestration with contextual palette discovery, Matplotlib, Seaborn, Plotly, and export-ready layout.
 status: active
 provenance: generated
 trusted: false
@@ -25,7 +25,7 @@ default_prompt:
 
 ## Trigger Boundary
 
-Publication figure orchestration with Matplotlib, Seaborn, Plotly, canonical palettes, and export-ready figure layout.
+Publication figure orchestration with contextual palette discovery, Matplotlib, Seaborn, Plotly, and export-ready layout.
 
 Use this aggregate Codex App skill when the task matches one of the source workflows below.
 
@@ -38,7 +38,8 @@ Use this aggregate Codex App skill when the task matches one of the source workf
 
 ## Plugin Workflow Notes
 
-- For palette selection, use `publication-figure-palettes` or `../../shared/scripts/palette.py` before choosing raw colors.
+- When no palette is specified, or when a venue/figure type/domain context is provided, first run contextual discovery with `publication-figure-palettes` or `../../shared/scripts/palette.py discover`.
+- Keep discovery and application separate: safe canonical palettes are plotting defaults; Notion candidates are contextual, non-official, and gated for snippets.
 - For figure readiness checks, use `scientific-figure-qa` after plotting or layout decisions.
 - Venue templates belong to research-writing; this plugin owns figure color, plotting code, visual examples, schematics, and posters.
 

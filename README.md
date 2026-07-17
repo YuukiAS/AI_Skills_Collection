@@ -50,7 +50,7 @@ ai-skills install --target repo --profile research-main --mode symlink --write-a
 | Slurm compute node | `server-research-baseline` 或 `ai-skills environment apply` | 站点已有 Slurm、TeX、Python |
 | 维护本仓库 | `ai-skills-core` 或 `ai-skills-maintainer` | GitHub，必要时 Notion |
 
-`v4.0.0` 是当前仓库整合任务标签。中央 Marketplace 的 10 个插件当前发布预算不是 Codex 能力上限；其中 `scientific-visualization` 已进入 `4.1.0` 小版本，负责 Notion-derived palette workflow 和 publication figure skill 拆分。
+`v4.0.0` 是当前仓库整合任务标签。中央 Marketplace 的 10 个插件当前发布预算不是 Codex 能力上限；其中 `scientific-visualization` 已进入 `4.2.0` 小版本，负责 Notion-derived palette contextual discovery、publication figure workflow 和 figure QA。
 
 ## Codex App 插件市场
 

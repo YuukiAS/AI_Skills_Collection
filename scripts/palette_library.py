@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import os
+from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
@@ -34,13 +35,17 @@ PURPOSE_TYPES = {
 
 FIGURE_PURPOSE_HINTS = {
     "line": ["line"],
+    "line plot": ["line"],
     "scatter": ["scatter"],
     "umap": ["umap", "single-cell", "biomedical"],
     "map": ["map", "spatial"],
     "heatmap": ["heatmap", "matrix", "density", "activation"],
     "bar": ["bar", "histogram", "distribution"],
+    "bar chart": ["bar", "histogram", "distribution"],
     "histogram": ["histogram", "bar", "distribution"],
     "schematic": ["schematic", "pipeline", "codec"],
+    "benchmark": ["benchmark", "multi-panel"],
+    "gaussian splatting": ["gaussian splatting", "3d point cloud", "computer vision"],
     "clinical": ["clinical", "cohort", "survival"],
 }
 
@@ -51,7 +56,11 @@ VENUE_ALIASES = {
     "nature": "Nature",
     "general-journal": "general-journal",
     "journal": "general-journal",
+    "general journal": "general-journal",
     "clinical": "clinical",
+    "computer vision": "computer-vision",
+    "computer-vision": "computer-vision",
+    "biomedical": "biomedical",
 }
 
 
@@ -187,6 +196,16 @@ def _normalise_notion_candidate(candidate: Palette) -> Palette:
         "disclaimer": candidate.get("disclaimer", ""),
         "extraction_method": candidate.get("extraction_method", ""),
         "color_source": candidate.get("color_source", ""),
+        "asset_kind": candidate.get("asset_kind", ""),
+        "derivation_method": candidate.get("derivation_method", ""),
+        "source_fidelity": candidate.get("source_fidelity", ""),
+        "discovery_eligibility": candidate.get("discovery_eligibility", ""),
+        "raw_snippet_eligibility": candidate.get("raw_snippet_eligibility", ""),
+        "style_guidance_eligibility": candidate.get("style_guidance_eligibility", ""),
+        "publication_status": candidate.get("publication_status", ""),
+        "page_group_id": candidate.get("page_group_id", ""),
+        "variant_rank": candidate.get("variant_rank"),
+        "representative": candidate.get("representative", False),
     }
 
 
@@ -291,6 +310,48 @@ def _venue_match(palette: Palette, paper_venue: str | None) -> bool:
     return target.lower() in {str(tag).lower() for tag in palette.get("venue_tags", [])}
 
 
+def _context_hints(figure_type: str | None = None, purpose: str | None = None, domain: str | None = None) -> list[str]:
+    hints: list[str] = []
+    if figure_type:
+        hints.extend(FIGURE_PURPOSE_HINTS.get(figure_type.lower(), [figure_type]))
+    if purpose:
+        hints.extend(FIGURE_PURPOSE_HINTS.get(purpose.lower(), [purpose]))
+    if domain:
+        hints.extend(FIGURE_PURPOSE_HINTS.get(domain.lower(), [domain]))
+    return [str(hint).lower() for hint in hints if hint]
+
+
+def _limit_by_page(items: list[dict[str, Any]], limit_per_page: int = 3) -> list[dict[str, Any]]:
+    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for item in items:
+        grouped[str(item.get("page_group_id") or item.get("source_page_slug") or "ungrouped")].append(item)
+    limited: list[dict[str, Any]] = []
+    for group_items in grouped.values():
+        ordered = sorted(
+            group_items,
+            key=lambda item: (
+                not bool(item.get("representative")),
+                int(item.get("variant_rank") or item.get("image_index") or 999),
+                str(item.get("candidate_id") or item.get("example_id") or item.get("id")),
+            ),
+        )
+        limited.extend(ordered[:limit_per_page])
+    return limited
+
+
+def _page_summary(page: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "slug": page.get("slug"),
+        "page_title": page.get("page_title"),
+        "image_count": page.get("image_count"),
+        "has_visible_hex_or_rgb": page.get("has_visible_hex_or_rgb"),
+        "figure_uses": page.get("figure_uses", []),
+        "notes": page.get("notes", ""),
+        "source_asset_committed": page.get("source_asset_committed"),
+        "source_locator_status": page.get("source_locator_status"),
+    }
+
+
 def recommend_palettes(
     purpose: str | None = None,
     figure_type: str | None = None,
@@ -344,6 +405,8 @@ def recommend_palettes(
             score += 20
         result.append((score, palette))
     result.sort(key=lambda item: (-item[0], str(item[1].get("id", ""))))
+    if not result and style_source == "core":
+        return _safe_fallback_palettes(purpose=purpose, figure_type=figure_type)
     return [palette for _, palette in result[:12]]
 
 
@@ -369,12 +432,14 @@ def get_preset(preset_id: str) -> dict[str, Any]:
 
 def recommend_presets(paper_venue: str | None = None, figure_type: str | None = None) -> list[dict[str, Any]]:
     result = []
-    hints = FIGURE_PURPOSE_HINTS.get((figure_type or "").lower(), [figure_type] if figure_type else [])
+    hints = _context_hints(figure_type=figure_type)
     venue = VENUE_ALIASES.get((paper_venue or "").lower(), paper_venue or "")
     for preset in list_presets():
-        if venue and venue.lower() not in {str(tag).lower() for tag in preset.get("venue_tags", [])}:
+        venue_values = preset.get("venue_tags", []) + preset.get("venue_aliases", [])
+        figure_values = preset.get("figure_type_tags", []) + preset.get("figure_type_aliases", [])
+        if venue and venue.lower() not in {str(tag).lower() for tag in venue_values}:
             continue
-        if hints and not _text_match(preset.get("figure_type_tags", []), hints):
+        if hints and not _text_match(figure_values, hints):
             continue
         result.append(preset)
     return result
@@ -385,9 +450,11 @@ def find_examples(
     style_source: str | None = None,
     page: str | None = None,
     paper_venue: str | None = None,
+    limit_per_page: int | None = None,
+    representative_first: bool = True,
 ) -> list[dict[str, Any]]:
     examples = list(load_example_registry().get("examples", []))
-    hints = FIGURE_PURPOSE_HINTS.get((figure_type or "").lower(), [figure_type] if figure_type else [])
+    hints = _context_hints(figure_type=figure_type)
     venue = VENUE_ALIASES.get((paper_venue or "").lower(), paper_venue or "")
     result = []
     for example in examples:
@@ -400,7 +467,237 @@ def find_examples(
         if venue and venue.lower() not in {str(tag).lower() for tag in example.get("venue_tags", [])}:
             continue
         result.append(example)
+    if representative_first:
+        result.sort(
+            key=lambda item: (
+                not bool(item.get("representative")),
+                int(item.get("discovery_rank") or item.get("variant_rank") or 999),
+                str(item.get("example_id")),
+            )
+        )
+    if limit_per_page:
+        result = _limit_by_page(result, limit_per_page=limit_per_page)
     return result
+
+
+def search_notion_pages(
+    paper_venue: str | None = None,
+    figure_type: str | None = None,
+    query: str | None = None,
+) -> list[dict[str, Any]]:
+    hints = _context_hints(figure_type=figure_type, domain=query)
+    venue = VENUE_ALIASES.get((paper_venue or "").lower(), paper_venue or "")
+    result = []
+    for page in load_notion_evidence().get("pages", []):
+        values = [
+            page.get("slug", ""),
+            page.get("page_title", ""),
+            page.get("notes", ""),
+            *page.get("figure_uses", []),
+        ]
+        if venue and venue.lower() not in " ".join(str(value).lower() for value in values):
+            continue
+        if hints and not _text_match([str(value) for value in values], hints):
+            continue
+        result.append(_page_summary(page))
+    return result
+
+
+def search_notion_candidates(
+    paper_venue: str | None = None,
+    figure_type: str | None = None,
+    role: str | None = None,
+    query: str | None = None,
+    limit_per_page: int | None = 3,
+    include_guidance_only: bool = True,
+) -> list[Palette]:
+    hints = _context_hints(figure_type=figure_type, domain=query)
+    venue = VENUE_ALIASES.get((paper_venue or "").lower(), paper_venue or "")
+    result: list[Palette] = []
+    for palette in notion_palettes():
+        if role and palette.get("palette_role") != role and palette.get("asset_kind") != role:
+            continue
+        if palette.get("discovery_eligibility") == "blocked":
+            continue
+        if palette.get("discovery_eligibility") == "guidance_only" and not include_guidance_only:
+            continue
+        values = [
+            palette.get("id", ""),
+            palette.get("source_page_slug", ""),
+            palette.get("source_page_title", ""),
+            palette.get("palette_role", ""),
+            palette.get("asset_kind", ""),
+            *palette.get("recommended_for", []),
+            *palette.get("venue_tags", []),
+        ]
+        if venue and venue.lower() not in {str(tag).lower() for tag in palette.get("venue_tags", [])}:
+            continue
+        if hints and not _text_match([str(value) for value in values], hints):
+            continue
+        result.append(palette)
+    result.sort(
+        key=lambda item: (
+            item.get("discovery_eligibility") != "contextual_default",
+            not bool(item.get("representative")),
+            int(item.get("variant_rank") or 999),
+            str(item.get("id")),
+        )
+    )
+    if limit_per_page:
+        result = _limit_by_page(result, limit_per_page=limit_per_page)
+    return result
+
+
+def _safe_fallback_palettes(purpose: str | None = None, figure_type: str | None = None) -> list[Palette]:
+    preferred: list[str]
+    context = " ".join(str(item or "").lower() for item in [purpose, figure_type])
+    if any(term in context for term in ("heatmap", "density", "matrix", "umap")):
+        preferred = ["viridis", "cividis", "Blues"]
+    elif any(term in context for term in ("diverging", "correlation", "residual", "difference")):
+        preferred = ["RdBu", "BrBG", "PuOr"]
+    else:
+        preferred = ["okabe_ito", "Dark2", "Set2"]
+    by_id = {palette["id"]: palette for palette in canonical_palettes(core_only=True)}
+    return [by_id[pid] for pid in preferred if pid in by_id]
+
+
+def discover_context(
+    purpose: str | None = None,
+    figure_type: str | None = None,
+    paper_venue: str | None = None,
+    domain: str | None = None,
+    limit_per_page: int = 3,
+) -> dict[str, Any]:
+    safe_palettes = recommend_palettes(
+        purpose=purpose,
+        figure_type=figure_type,
+        paper_venue=paper_venue,
+        style_source="core",
+        source="canonical",
+        include_experimental=False,
+    )
+    if not safe_palettes:
+        safe_palettes = _safe_fallback_palettes(purpose=purpose, figure_type=figure_type)
+    contextual_presets = recommend_presets(paper_venue=paper_venue or domain, figure_type=figure_type or purpose)
+    notion_pages = search_notion_pages(paper_venue=paper_venue or domain, figure_type=figure_type or purpose)
+    candidates = search_notion_candidates(
+        paper_venue=paper_venue or domain,
+        figure_type=figure_type or purpose,
+        query=domain,
+        limit_per_page=limit_per_page,
+        include_guidance_only=True,
+    )
+    experimental_candidates = [
+        candidate for candidate in candidates if candidate.get("discovery_eligibility") == "contextual_default"
+    ]
+    guidance_only = [
+        candidate for candidate in candidates if candidate.get("discovery_eligibility") == "guidance_only"
+    ]
+    figure_examples = find_examples(
+        figure_type=figure_type or purpose,
+        style_source="notion",
+        paper_venue=paper_venue or domain,
+        limit_per_page=limit_per_page,
+    )
+    warnings = [
+        "Notion-derived candidates are unreviewed, non-official, and not publication-safe defaults.",
+        "Use canonical safe palettes for default plotting snippets.",
+    ]
+    if experimental_candidates:
+        warnings.append("Raw color snippets for transcribed Notion candidates still require --allow-experimental.")
+    if guidance_only:
+        warnings.append("Guidance-only candidates are not eligible for raw color snippets.")
+    return {
+        "safe_palettes": safe_palettes,
+        "contextual_presets": contextual_presets,
+        "notion_pages": notion_pages,
+        "experimental_candidates": experimental_candidates,
+        "figure_examples": figure_examples,
+        "guidance_only": guidance_only,
+        "warnings": warnings,
+    }
+
+
+def explain_item(item_id: str) -> dict[str, Any]:
+    try:
+        palette = get_palette(item_id, source="all")
+        return {"kind": "palette", "item": palette}
+    except KeyError:
+        pass
+    for preset in list_presets():
+        if preset.get("id") == item_id:
+            return {"kind": "preset", "item": preset}
+    for example in load_example_registry().get("examples", []):
+        if example.get("example_id") == item_id:
+            return {"kind": "example", "item": example}
+    for page in load_notion_evidence().get("pages", []):
+        if page.get("slug") == item_id:
+            return {"kind": "notion_page", "item": _page_summary(page)}
+    raise KeyError(f"Unknown palette discovery item: {item_id}")
+
+
+def compare_items(item_ids: list[str], paper_venue: str | None = None, figure_type: str | None = None) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for item_id in item_ids:
+        explained = explain_item(item_id)
+        item = explained["item"]
+        rows.append(
+            {
+                "id": item.get("id") or item.get("candidate_id") or item.get("example_id") or item.get("slug"),
+                "kind": explained["kind"],
+                "type": item.get("type", ""),
+                "colors": len(item.get("colors", [])) if isinstance(item.get("colors"), list) else "",
+                "tier": item.get("tier", ""),
+                "review_status": item.get("review_status", ""),
+                "discovery_eligibility": item.get("discovery_eligibility", ""),
+                "raw_snippet_eligibility": item.get("raw_snippet_eligibility", item.get("snippet_eligibility", "")),
+                "venue_match": _venue_match(item, paper_venue) if explained["kind"] == "palette" else "",
+                "figure_match": _text_match(item.get("recommended_for", item.get("figure_type_tags", [])), _context_hints(figure_type=figure_type))
+                if figure_type
+                else "",
+                "fallback": item.get("canonical_fallback_ids", []),
+                "disclaimer": item.get("disclaimer", ""),
+            }
+        )
+    return rows
+
+
+def style_guidance(item_id: str, target: str = "json") -> dict[str, Any] | str:
+    palette = get_palette(item_id, source="all")
+    if palette.get("source") != "notion":
+        guidance = {
+            "id": palette["id"],
+            "status": "canonical_or_external_palette",
+            "message": "Use normal snippets for reviewed canonical palettes; keep license and disclaimer visible for non-core palettes.",
+        }
+    else:
+        guidance = {
+            "id": palette["id"],
+            "source_page_slug": palette.get("source_page_slug"),
+            "review_status": palette.get("review_status"),
+            "source_fidelity": palette.get("source_fidelity"),
+            "discovery_eligibility": palette.get("discovery_eligibility"),
+            "raw_snippet_eligibility": palette.get("raw_snippet_eligibility"),
+            "canonical_fallback_ids": palette.get("canonical_fallback_ids", []),
+            "style_rules": [
+                "Treat this as non-official visual inspiration, not as a publication-safe palette.",
+                "Use canonical fallback palettes for final plots unless the user explicitly accepts experimental colors.",
+                "Preserve redundant encodings such as markers, line styles, labels, or hatching.",
+            ],
+            "disclaimer": palette.get("disclaimer", ""),
+        }
+    if target == "json":
+        return guidance
+    lines = [
+        f"# Style guidance for {guidance['id']}",
+        f"# Review status: {guidance.get('review_status', '-')}",
+        f"# Raw snippet eligibility: {guidance.get('raw_snippet_eligibility', '-')}",
+    ]
+    for fallback in guidance.get("canonical_fallback_ids", []):
+        lines.append(f"# Canonical fallback: {fallback}")
+    for rule in guidance.get("style_rules", []):
+        lines.append(f"# {rule}")
+    return "\n".join(lines) + "\n"
 
 
 def _snippet_header(palette: Palette) -> str:
@@ -417,7 +714,9 @@ def _snippet_header(palette: Palette) -> str:
     )
 
 
-def palette_to_snippet(palette: Palette, target: str, allow_experimental: bool = False) -> str:
+def palette_to_snippet(palette: Palette, target: str, allow_experimental: bool = False, kind: str = "raw-colors") -> str:
+    if kind == "style-tokens":
+        return style_guidance(str(palette["id"]), target=target)  # type: ignore[return-value]
     eligibility = palette.get("snippet_eligibility")
     if eligibility == "blocked":
         raise ValueError(f"{palette['id']} is not eligible for snippets: {palette.get('palette_role')} / {palette.get('color_source')}")

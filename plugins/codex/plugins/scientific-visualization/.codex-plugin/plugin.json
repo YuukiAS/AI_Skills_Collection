@@ -1,7 +1,7 @@
 {
   "name": "scientific-visualization",
-  "version": "4.1.0",
-  "description": "Publication-ready scientific figures, palette recommendation, example-derived conference styles, figure QA, schematics, and posters.",
+  "version": "4.2.0",
+  "description": "Publication-ready scientific figures with contextual palette discovery, Notion-derived references, figure QA, schematics, and posters.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Scientific Visualization",
-    "shortDescription": "Publication-ready scientific figures, palette recommendation, example-derived conference styles, figure QA, schematics, and posters.",
-    "longDescription": "Publication-ready scientific figures, palette recommendation, example-derived conference styles, figure QA, schematics, and posters. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Publication-ready scientific figures with contextual palette discovery, Notion-derived references, figure QA, schematics, and posters.",
+    "longDescription": "Publication-ready scientific figures with contextual palette discovery, Notion-derived references, figure QA, schematics, and posters. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [
@@ -27,8 +27,8 @@
     ],
     "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
     "defaultPrompt": [
-      "Create or refine a publication-ready scientific figure.",
-      "Choose a contextual palette or Notion-derived style candidate with provenance.",
+      "Create or refine a publication-ready scientific figure with contextual palette discovery.",
+      "Discover safe palettes, Notion-derived references, and figure examples for a venue or figure type.",
       "Audit this figure for accessibility, export, and venue readiness."
     ],
     "brandColor": "#0E7490",

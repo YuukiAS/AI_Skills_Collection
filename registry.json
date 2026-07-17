@@ -1,6 +1,6 @@
 {
   "version": "4.0.0",
-  "generated_at": "2026-07-17T04:31:54+00:00",
+  "generated_at": "2026-07-17T06:34:09+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
   "skill_count": 150,
@@ -2434,7 +2434,7 @@
       "writes_files": true,
       "executes_code": false,
       "secrets_needed": [],
-      "last_reviewed": "2026-05-14",
+      "last_reviewed": "2026-07-17",
       "profile_tags": [],
       "recommended_scope": "project",
       "selectors": [

@@ -1,6 +1,6 @@
 {
   "library_id": "ai_skills_figure_example_registry",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "source": "palette/notion-image-palettes.json",
   "example_count": 51,
   "examples": [
@@ -28,7 +28,19 @@
         "RdBu"
       ],
       "style_notes": "One latest image with visible bottom HEX labels; use as a computer-vision figure example and experimental palette.",
-      "usage": "parse_visible_hex_then_example"
+      "usage": "parse_visible_hex_then_example",
+      "page_group_id": "notion_page:cvpr25",
+      "variant_rank": 1,
+      "representative": true,
+      "layout_traits": [
+        "multi_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 0
     },
     {
       "example_id": "example_aaai_3",
@@ -57,7 +69,21 @@
         "cividis"
       ],
       "style_notes": "Three images with visible RGB/HEX labels; picker output is kept for verification.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:aaai",
+      "variant_rank": 3,
+      "representative": false,
+      "layout_traits": [
+        "multi_panel",
+        "schematic_flow",
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 3
     },
     {
       "example_id": "example_aaai_2",
@@ -86,7 +112,21 @@
         "cividis"
       ],
       "style_notes": "Three images with visible RGB/HEX labels; picker output is kept for verification.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:aaai",
+      "variant_rank": 2,
+      "representative": false,
+      "layout_traits": [
+        "multi_panel",
+        "schematic_flow",
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 2
     },
     {
       "example_id": "example_aaai_1",
@@ -115,7 +155,21 @@
         "cividis"
       ],
       "style_notes": "Three images with visible RGB/HEX labels; picker output is kept for verification.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:aaai",
+      "variant_rank": 1,
+      "representative": true,
+      "layout_traits": [
+        "multi_panel",
+        "schematic_flow",
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 0
     },
     {
       "example_id": "example_journal_reviewer_9_10",
@@ -141,7 +195,19 @@
         "nature_npg"
       ],
       "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 10,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 10
     },
     {
       "example_id": "example_journal_reviewer_9_9",
@@ -167,7 +233,19 @@
         "nature_npg"
       ],
       "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 9,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 9
     },
     {
       "example_id": "example_journal_reviewer_9_8",
@@ -193,7 +271,19 @@
         "nature_npg"
       ],
       "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 8,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 8
     },
     {
       "example_id": "example_journal_reviewer_9_7",
@@ -219,7 +309,19 @@
         "nature_npg"
       ],
       "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 7,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 7
     },
     {
       "example_id": "example_journal_reviewer_9_6",
@@ -245,7 +347,19 @@
         "nature_npg"
       ],
       "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 6,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 6
     },
     {
       "example_id": "example_journal_reviewer_9_5",
@@ -271,7 +385,19 @@
         "nature_npg"
       ],
       "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 5,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 5
     },
     {
       "example_id": "example_journal_reviewer_9_4",
@@ -297,7 +423,19 @@
         "nature_npg"
       ],
       "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 4,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 4
     },
     {
       "example_id": "example_journal_reviewer_9_3",
@@ -323,7 +461,19 @@
         "nature_npg"
       ],
       "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 3,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 3
     },
     {
       "example_id": "example_journal_reviewer_9_2",
@@ -349,7 +499,19 @@
         "nature_npg"
       ],
       "style_notes": "Nine card images in the latest batch; treat as aesthetic experimental palettes.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:journal_reviewer_9",
+      "variant_rank": 2,
+      "representative": true,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 0
     },
     {
       "example_id": "example_icml_clean_3",
@@ -376,7 +538,19 @@
         "coolwarm"
       ],
       "style_notes": "Three figures; mostly examples. Extracted colors need manual review before promotion.",
-      "usage": "derive_examples_first_palette_second"
+      "usage": "derive_examples_first_palette_second",
+      "page_group_id": "notion_page:icml_clean",
+      "variant_rank": 3,
+      "representative": false,
+      "layout_traits": [
+        "schematic_flow"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 3
     },
     {
       "example_id": "example_icml_clean_2",
@@ -403,7 +577,19 @@
         "coolwarm"
       ],
       "style_notes": "Three figures; mostly examples. Extracted colors need manual review before promotion.",
-      "usage": "derive_examples_first_palette_second"
+      "usage": "derive_examples_first_palette_second",
+      "page_group_id": "notion_page:icml_clean",
+      "variant_rank": 2,
+      "representative": false,
+      "layout_traits": [
+        "schematic_flow"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 2
     },
     {
       "example_id": "example_icml_clean_1",
@@ -430,7 +616,19 @@
         "coolwarm"
       ],
       "style_notes": "Three figures; mostly examples. Extracted colors need manual review before promotion.",
-      "usage": "derive_examples_first_palette_second"
+      "usage": "derive_examples_first_palette_second",
+      "page_group_id": "notion_page:icml_clean",
+      "variant_rank": 1,
+      "representative": true,
+      "layout_traits": [
+        "schematic_flow"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 0
     },
     {
       "example_id": "example_nature_inspiration_8",
@@ -457,7 +655,20 @@
         "YlGnBu"
       ],
       "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
-      "usage": "parse_visible_hex_and_picker"
+      "usage": "parse_visible_hex_and_picker",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 8,
+      "representative": false,
+      "layout_traits": [
+        "multi_panel",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 8
     },
     {
       "example_id": "example_nature_inspiration_7",
@@ -484,7 +695,20 @@
         "YlGnBu"
       ],
       "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
-      "usage": "parse_visible_hex_and_picker"
+      "usage": "parse_visible_hex_and_picker",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 7,
+      "representative": false,
+      "layout_traits": [
+        "multi_panel",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 7
     },
     {
       "example_id": "example_nature_inspiration_6",
@@ -511,7 +735,20 @@
         "YlGnBu"
       ],
       "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
-      "usage": "parse_visible_hex_and_picker"
+      "usage": "parse_visible_hex_and_picker",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 6,
+      "representative": false,
+      "layout_traits": [
+        "multi_panel",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 6
     },
     {
       "example_id": "example_nature_inspiration_5",
@@ -538,7 +775,20 @@
         "YlGnBu"
       ],
       "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
-      "usage": "parse_visible_hex_and_picker"
+      "usage": "parse_visible_hex_and_picker",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 5,
+      "representative": false,
+      "layout_traits": [
+        "multi_panel",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 5
     },
     {
       "example_id": "example_nature_inspiration_4",
@@ -565,7 +815,20 @@
         "YlGnBu"
       ],
       "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
-      "usage": "parse_visible_hex_and_picker"
+      "usage": "parse_visible_hex_and_picker",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 4,
+      "representative": false,
+      "layout_traits": [
+        "multi_panel",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 4
     },
     {
       "example_id": "example_nature_inspiration_3",
@@ -592,7 +855,20 @@
         "YlGnBu"
       ],
       "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
-      "usage": "parse_visible_hex_and_picker"
+      "usage": "parse_visible_hex_and_picker",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 3,
+      "representative": false,
+      "layout_traits": [
+        "multi_panel",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 3
     },
     {
       "example_id": "example_nature_inspiration_2",
@@ -619,7 +895,20 @@
         "YlGnBu"
       ],
       "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
-      "usage": "parse_visible_hex_and_picker"
+      "usage": "parse_visible_hex_and_picker",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 2,
+      "representative": false,
+      "layout_traits": [
+        "multi_panel",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 2
     },
     {
       "example_id": "example_nature_inspiration_1",
@@ -646,7 +935,20 @@
         "YlGnBu"
       ],
       "style_notes": "Eight images; several include visible HEX labels while dense figures need picker confirmation.",
-      "usage": "parse_visible_hex_and_picker"
+      "usage": "parse_visible_hex_and_picker",
+      "page_group_id": "notion_page:nature_inspiration",
+      "variant_rank": 1,
+      "representative": true,
+      "layout_traits": [
+        "multi_panel",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 0
     },
     {
       "example_id": "example_nature_same_palette_8",
@@ -674,7 +976,20 @@
         "cividis"
       ],
       "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 8,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 8
     },
     {
       "example_id": "example_nature_same_palette_7",
@@ -702,7 +1017,20 @@
         "cividis"
       ],
       "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 7,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 7
     },
     {
       "example_id": "example_nature_same_palette_6",
@@ -730,7 +1058,20 @@
         "cividis"
       ],
       "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 6,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 6
     },
     {
       "example_id": "example_nature_same_palette_5",
@@ -758,7 +1099,20 @@
         "cividis"
       ],
       "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 5,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 5
     },
     {
       "example_id": "example_nature_same_palette_4",
@@ -786,7 +1140,20 @@
         "cividis"
       ],
       "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 4,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 4
     },
     {
       "example_id": "example_nature_same_palette_3",
@@ -814,7 +1181,20 @@
         "cividis"
       ],
       "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 3,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 3
     },
     {
       "example_id": "example_nature_same_palette_2",
@@ -842,7 +1222,20 @@
         "cividis"
       ],
       "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 2,
+      "representative": true,
+      "layout_traits": [
+        "distribution_comparison",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 0
     },
     {
       "example_id": "example_nature_same_palette_1",
@@ -870,7 +1263,20 @@
         "cividis"
       ],
       "style_notes": "Eight images with visible palette cards; non-official Nature-inspired experimental source.",
-      "usage": "parse_visible_hex_then_picker_check"
+      "usage": "parse_visible_hex_then_picker_check",
+      "page_group_id": "notion_page:nature_same_palette",
+      "variant_rank": 1,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison",
+        "embedding_panel"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 1
     },
     {
       "example_id": "example_python_bar_distribution_18",
@@ -897,7 +1303,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 18,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 18
     },
     {
       "example_id": "example_python_bar_distribution_17",
@@ -924,7 +1342,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 17,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 17
     },
     {
       "example_id": "example_python_bar_distribution_16",
@@ -951,7 +1381,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 16,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 16
     },
     {
       "example_id": "example_python_bar_distribution_15",
@@ -978,7 +1420,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 15,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 15
     },
     {
       "example_id": "example_python_bar_distribution_14",
@@ -1005,7 +1459,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 14,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 14
     },
     {
       "example_id": "example_python_bar_distribution_13",
@@ -1032,7 +1498,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 13,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 13
     },
     {
       "example_id": "example_python_bar_distribution_12",
@@ -1059,7 +1537,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 12,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 12
     },
     {
       "example_id": "example_python_bar_distribution_11",
@@ -1086,7 +1576,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 11,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 11
     },
     {
       "example_id": "example_python_bar_distribution_10",
@@ -1113,7 +1615,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 10,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 10
     },
     {
       "example_id": "example_python_bar_distribution_9",
@@ -1140,7 +1654,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 9,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 9
     },
     {
       "example_id": "example_python_bar_distribution_8",
@@ -1167,7 +1693,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 8,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 8
     },
     {
       "example_id": "example_python_bar_distribution_7",
@@ -1194,7 +1732,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 7,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 7
     },
     {
       "example_id": "example_python_bar_distribution_6",
@@ -1221,7 +1771,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 6,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 6
     },
     {
       "example_id": "example_python_bar_distribution_5",
@@ -1248,7 +1810,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 5,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 5
     },
     {
       "example_id": "example_python_bar_distribution_4",
@@ -1275,7 +1849,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 4,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 4
     },
     {
       "example_id": "example_python_bar_distribution_3",
@@ -1302,7 +1888,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 3,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 3
     },
     {
       "example_id": "example_python_bar_distribution_2",
@@ -1329,7 +1927,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 2,
+      "representative": false,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 2
     },
     {
       "example_id": "example_python_bar_distribution_1",
@@ -1356,7 +1966,19 @@
         "Blues"
       ],
       "style_notes": "Eighteen variants of the same bar/distribution example; use primarily as figure examples.",
-      "usage": "derive_bar_palette_and_example"
+      "usage": "derive_bar_palette_and_example",
+      "page_group_id": "notion_page:python_bar_distribution",
+      "variant_rank": 1,
+      "representative": true,
+      "layout_traits": [
+        "distribution_comparison"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 0
     },
     {
       "example_id": "example_old_palettes_typical_figures",
@@ -1375,7 +1997,22 @@
         "viridis"
       ],
       "style_notes": "Old page is not imported as image palette; only cols4all is fused from this page direction.",
-      "usage": "cols4all_only_plus_typical_examples"
+      "usage": "cols4all_only_plus_typical_examples",
+      "page_group_id": "notion_page:old_palettes_typical_figures",
+      "variant_rank": 999,
+      "representative": false,
+      "layout_traits": [
+        "style_reference"
+      ],
+      "style_traits": [
+        "notion_image_reference",
+        "non_official",
+        "unreviewed"
+      ],
+      "discovery_rank": 999
     }
-  ]
+  ],
+  "default_policy": {
+    "contextual_discovery": "Use representative examples first and limit same-page variants unless explicitly requested."
+  }
 }

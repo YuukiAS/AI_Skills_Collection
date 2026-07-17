@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Generated at `2026-07-17T04:31:57+00:00` from `registry.json` metadata. Do not edit by hand.
+Generated at `2026-07-17T06:34:09+00:00` from `registry.json` metadata. Do not edit by hand.
 
 Budget warnings in this catalog are guidance for context hygiene; they do not make complete domain installation invalid.
 
@@ -123,7 +123,7 @@ Budget warnings in this catalog are guidance for context hygiene; they do not ma
 | `publication-figure-palettes` | `skills/science/communication/publication-figure-palettes` | Choose publication figure palettes, contextual Notion-derived style candidates, presets, and snippets with provenance and experimental gates. | `project` | False | True | False | `2026-07-17` | `ai-skills install --target repo --skill science/communication/publication-figure-palettes --mode symlink --write-agents-md` |
 | `scientific-figure-qa` | `skills/science/communication/scientific-figure-qa` | Audit scientific figures for publication readiness, accessibility, grayscale readability, export quality, and venue visual constraints. | `project` | False | True | False | `2026-07-17` | `ai-skills install --target repo --skill science/communication/scientific-figure-qa --mode symlink --write-agents-md` |
 | `scientific-schematics` | `skills/science/communication/scientific-schematics` | Create publication-quality scientific diagrams using Nano Banana 2 AI with smart iterative refinement. Uses Gemini 3.1 Pro Preview for quality review. | `project` | True | True | True | `2026-05-14` | `ai-skills install --target repo --skill science/communication/scientific-schematics --mode symlink --write-agents-md` |
-| `scientific-visualization` | `skills/science/communication/scientific-visualization` | Meta-skill for publication-ready figures. Use when creating journal submission figures requiring multi-panel layouts, significance annotations, error bars, colorblind-safe palettes, and specific journal formatting (Nature, Science, Cell). | `project` | False | False | True | `2026-05-14` | `ai-skills install --target repo --skill science/communication/scientific-visualization --mode symlink --write-agents-md` |
+| `scientific-visualization` | `skills/science/communication/scientific-visualization` | Meta-skill for publication-ready figures. Use when creating journal submission figures requiring multi-panel layouts, significance annotations, error bars, colorblind-safe palettes, and specific journal formatting (Nature, Science, Cell). | `project` | False | False | True | `2026-07-17` | `ai-skills install --target repo --skill science/communication/scientific-visualization --mode symlink --write-agents-md` |
 
 ## science / research-discovery / discovery
 

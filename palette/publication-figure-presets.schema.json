@@ -19,9 +19,58 @@
           "canonical_palette_ids",
           "style_candidate_ids",
           "example_refs",
+          "safe_lane",
+          "experimental_lane",
+          "reference_lane",
+          "venue_aliases",
+          "figure_type_aliases",
+          "per_page_limit",
+          "discovery_mode",
           "checks",
           "disclaimer"
-        ]
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "canonical_palette_ids": {
+            "type": "object"
+          },
+          "style_candidate_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "example_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "venue_aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "figure_type_aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "per_page_limit": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "discovery_mode": {
+            "enum": [
+              "safe_default",
+              "contextual_default"
+            ]
+          }
+        }
       }
     }
   },

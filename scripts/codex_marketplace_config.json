@@ -204,9 +204,9 @@
     },
     {
       "name": "scientific-visualization",
-      "version": "4.1.0",
+      "version": "4.2.0",
       "displayName": "Scientific Visualization",
-      "description": "Publication-ready scientific figures, palette recommendation, example-derived conference styles, figure QA, schematics, and posters.",
+      "description": "Publication-ready scientific figures with contextual palette discovery, Notion-derived references, figure QA, schematics, and posters.",
       "category": "Research",
       "brandColor": "#0E7490",
       "composerIcon": "./assets/codex/plugin-icons/scientific-visualization/composer.svg",
@@ -226,8 +226,8 @@
         }
       ],
       "defaultPrompt": [
-        "Create or refine a publication-ready scientific figure.",
-        "Choose a contextual palette or Notion-derived style candidate with provenance.",
+        "Create or refine a publication-ready scientific figure with contextual palette discovery.",
+        "Discover safe palettes, Notion-derived references, and figure examples for a venue or figure type.",
         "Audit this figure for accessibility, export, and venue readiness."
       ],
       "skills": [
@@ -235,11 +235,12 @@
           "type": "aggregate",
           "name": "publication-figures",
           "artifact_id": "figures",
-          "description": "Publication figure orchestration with Matplotlib, Seaborn, Plotly, canonical palettes, and export-ready figure layout.",
+          "description": "Publication figure orchestration with contextual palette discovery, Matplotlib, Seaborn, Plotly, and export-ready layout.",
           "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
           "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
           "workflow_notes": [
-            "For palette selection, use `publication-figure-palettes` or `../../shared/scripts/palette.py` before choosing raw colors.",
+            "When no palette is specified, or when a venue/figure type/domain context is provided, first run contextual discovery with `publication-figure-palettes` or `../../shared/scripts/palette.py discover`.",
+            "Keep discovery and application separate: safe canonical palettes are plotting defaults; Notion candidates are contextual, non-official, and gated for snippets.",
             "For figure readiness checks, use `scientific-figure-qa` after plotting or layout decisions.",
             "Venue templates belong to research-writing; this plugin owns figure color, plotting code, visual examples, schematics, and posters."
           ],

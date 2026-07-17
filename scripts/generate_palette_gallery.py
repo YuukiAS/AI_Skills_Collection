@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate a static HTML gallery for scientific figure palettes and examples."""
+"""Generate static discovery files for scientific figure palettes."""
 
 from __future__ import annotations
 
@@ -17,6 +17,7 @@ from palette_library import (
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "palette" / "gallery.html"
+INDEX_OUTPUT = ROOT / "palette" / "gallery-index.json"
 
 
 def swatches(colors: list[str]) -> str:
@@ -26,97 +27,131 @@ def swatches(colors: list[str]) -> str:
     )
 
 
-def palette_card(palette: dict, section_class: str = "") -> str:
-    disclaimer = palette.get("disclaimer", "")
+def index_record(item: dict, kind: str, source: str, colors: list[str] | None = None) -> dict:
+    item_id = str(item.get("id") or item.get("candidate_id") or item.get("example_id") or item.get("source_id"))
+    figure_types = item.get("figure_types", item.get("figure_type_tags", item.get("recommended_for", [])))
+    venue_tags = item.get("venue_tags", [])
+    title = str(item.get("name") or item.get("source_page_title") or item.get("source_id") or item_id)
+    return {
+        "id": item_id,
+        "kind": kind,
+        "source": source,
+        "title": title,
+        "colors": colors if colors is not None else item.get("colors", []),
+        "type": item.get("type", ""),
+        "tier": item.get("tier", ""),
+        "palette_role": item.get("palette_role", ""),
+        "review_status": item.get("review_status", ""),
+        "snippet_eligibility": item.get("snippet_eligibility", ""),
+        "raw_snippet_eligibility": item.get("raw_snippet_eligibility", item.get("snippet_eligibility", "")),
+        "discovery_eligibility": item.get("discovery_eligibility", ""),
+        "representative": bool(item.get("representative", False)),
+        "page_group_id": item.get("page_group_id", item.get("source_page_slug", "")),
+        "source_page_slug": item.get("source_page_slug", ""),
+        "venue_tags": venue_tags,
+        "figure_types": figure_types,
+        "canonical_fallback_ids": item.get("canonical_fallback_ids", []),
+        "disclaimer": item.get("disclaimer", ""),
+        "search_text": " ".join(
+            str(value)
+            for value in [
+                item_id,
+                title,
+                source,
+                kind,
+                item.get("tier", ""),
+                item.get("palette_role", ""),
+                item.get("source_page_slug", ""),
+                *venue_tags,
+                *figure_types,
+            ]
+        ).lower(),
+    }
+
+
+def card(record: dict) -> str:
+    colors = record.get("colors", [])
+    tags = " ".join(str(tag) for tag in [*record.get("venue_tags", []), *record.get("figure_types", [])])
     return f"""
-<section class="card {escape(section_class)}" data-tier="{escape(str(palette.get('tier', '')))}" data-review="{escape(str(palette.get('review_status', '')))}" data-snippet="{escape(str(palette.get('snippet_eligibility', '')))}" data-venue="{escape(' '.join(str(tag) for tag in palette.get('venue_tags', [])))}">
+<section class="card {escape(record['kind'])}" data-id="{escape(record['id'])}" data-kind="{escape(record['kind'])}" data-source="{escape(record['source'])}" data-tier="{escape(str(record.get('tier', '')))}" data-role="{escape(str(record.get('palette_role', '')))}" data-review="{escape(str(record.get('review_status', '')))}" data-snippet="{escape(str(record.get('raw_snippet_eligibility') or record.get('snippet_eligibility') or ''))}" data-venue="{escape(' '.join(str(tag) for tag in record.get('venue_tags', [])))}" data-figure="{escape(' '.join(str(tag) for tag in record.get('figure_types', [])))}" data-text="{escape(record.get('search_text', ''))}">
   <div class="meta">
-    <h3>{escape(str(palette.get('id') or palette.get('candidate_id') or palette.get('source_id')))}</h3>
-    <span>{escape(str(palette.get('type', '')))}</span>
-    <span>{len(palette.get('colors', []))} colors</span>
-    <span>{escape(str(palette.get('tier', palette.get('series', ''))))}</span>
+    <h3>{escape(record['id'])}</h3>
+    <span>{escape(record['source'])}</span>
+    <span>{escape(record['kind'])}</span>
+    {('<span>representative</span>' if record.get('representative') else '')}
   </div>
-  <div class="swatches">{swatches(palette.get('colors', []))}</div>
-  <p><strong>{escape(str(palette.get('name') or palette.get('source_page_title') or palette.get('source_id')))}</strong></p>
-  <p>{escape('; '.join(str(item) for item in palette.get('recommended_for', palette.get('figure_types', []))[:3]))}</p>
-  <p class="small">review={escape(str(palette.get('review_status', '-')))} | recommendation={escape(str(palette.get('recommendation_status', '-')))} | snippet={escape(str(palette.get('snippet_eligibility', '-')))}</p>
-  <p class="small">fallback={escape(', '.join(str(item) for item in palette.get('canonical_fallback_ids', [])))}</p>
-  <p class="small">source asset committed={escape(str(palette.get('source_asset_committed', '-')))}</p>
-  {f'<p class="disclaimer">{escape(disclaimer)}</p>' if disclaimer else ''}
+  <p><strong>{escape(record.get('title', ''))}</strong></p>
+  {f'<div class="swatches">{swatches(colors)}</div>' if colors else ''}
+  <p>{escape('; '.join(str(item) for item in record.get('figure_types', [])[:4]))}</p>
+  <p class="small">venue={escape(', '.join(str(item) for item in record.get('venue_tags', [])) or '-')} | role={escape(str(record.get('palette_role') or '-'))}</p>
+  <p class="small">review={escape(str(record.get('review_status') or '-'))} | raw={escape(str(record.get('raw_snippet_eligibility') or record.get('snippet_eligibility') or '-'))}</p>
+  <p class="small">fallback={escape(', '.join(str(item) for item in record.get('canonical_fallback_ids', [])) or '-')}</p>
+  {f'<p class="disclaimer">{escape(record["disclaimer"])}</p>' if record.get('disclaimer') else ''}
 </section>"""
 
 
-def example_card(example: dict) -> str:
-    return f"""
-<section class="card example" data-venue="{escape(' '.join(str(tag) for tag in example.get('venue_tags', [])))}">
-  <div class="meta">
-    <h3>{escape(example['example_id'])}</h3>
-    <span>{escape(example.get('source_page_slug', ''))}</span>
-  </div>
-  <p><strong>{escape(example.get('source_page_title', ''))}</strong></p>
-  <p>{escape('; '.join(str(item) for item in example.get('figure_type_tags', [])[:4]))}</p>
-  <p class="small">candidate={escape(', '.join(example.get('linked_candidate_ids', [])) or '-')}</p>
-  <p class="small">fallback={escape(', '.join(example.get('canonical_fallback_ids', [])))}</p>
-  <p class="small">source asset committed={escape(str(example.get('source_asset_committed')))}</p>
-</section>"""
-
-
-def section(title: str, note: str, cards: list[str]) -> str:
-    return f"""
-  <h2 class="section">{escape(title)}</h2>
-  <p class="note">{escape(note)}</p>
-  <div class="grid">
-    {''.join(cards)}
-  </div>"""
-
-
-def main() -> int:
-    library = load_library()
-    canonical = library.get("palettes", [])
-    core_cards = [palette_card(palette, "core") for palette in canonical if palette.get("tier") == "core_publication"]
-    journal_cards = [palette_card(palette, "journal") for palette in canonical if palette.get("tier") == "journal_inspired_nonofficial"]
-    curated_cards = [palette_card(palette, "external") for palette in canonical if palette.get("tier") == "curated_external_gpl"]
-
-    notion_candidates = load_notion_candidates().get("candidates", [])
-    notion_transcribed = [palette_card(candidate, "notion") for candidate in notion_candidates if candidate.get("tier") == "image_derived_transcribed"]
-    notion_unreviewed = [palette_card(candidate, "notion") for candidate in notion_candidates if candidate.get("tier") != "image_derived_transcribed"]
-
-    examples = [example_card(example) for example in load_example_registry().get("examples", [])]
-
-    cols4all_cards = []
+def build_index() -> list[dict]:
+    records: list[dict] = []
+    for palette in load_library().get("palettes", []):
+        source = "canonical"
+        if palette.get("tier") == "curated_external_gpl":
+            source = "curated_external"
+        records.append(index_record(palette, "palette", source))
+    for candidate in load_notion_candidates().get("candidates", []):
+        records.append(index_record(candidate, "candidate", "notion"))
+    for example in load_example_registry().get("examples", []):
+        records.append(index_record(example, "example", "notion", colors=[]))
     for palette in load_cols4all_library().get("palettes", [])[:120]:
-        item = {
+        preview = {
             "id": palette.get("source_id"),
+            "source_id": palette.get("source_id"),
             "name": palette.get("name", palette.get("source_id")),
             "type": palette.get("type"),
             "colors": palette.get("colors", []),
             "tier": "external_gpl_library",
-            "review_status": "-",
-            "recommendation_status": "explicit_external",
-            "snippet_eligibility": "-",
+            "recommended_for": ["external cols4all exploration"],
             "disclaimer": f"GPL-3 external palette; source id {palette.get('source_id', '')}",
         }
-        cols4all_cards.append(palette_card(item, "cols4all"))
+        records.append(index_record(preview, "palette", "cols4all"))
+    return records
 
+
+def options(records: list[dict], field: str) -> str:
+    values: set[str] = set()
+    for record in records:
+        value = record.get(field)
+        if isinstance(value, list):
+            values.update(str(item) for item in value if item)
+        elif value:
+            values.add(str(value))
+    return "\n".join(f'<option value="{escape(value)}">{escape(value)}</option>' for value in sorted(values))
+
+
+def main() -> int:
+    records = build_index()
+    INDEX_OUTPUT.write_text(json.dumps({"version": "1.0.0", "items": records}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    cards = "\n".join(card(record) for record in records)
     html = f"""<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Scientific Figure Palettes</title>
+  <title>Scientific Figure Palette Discovery</title>
   <style>
-    :root {{ color-scheme: light; --bg: #f8fafc; --fg: #0f172a; --muted: #475569; --card: #fff; --border: #cbd5e1; }}
+    :root {{ color-scheme: light; --bg: #f8fafc; --fg: #0f172a; --muted: #475569; --card: #fff; --border: #cbd5e1; --accent: #0e7490; }}
     body {{ margin: 0; background: var(--bg); color: var(--fg); font-family: Arial, Helvetica, sans-serif; line-height: 1.45; }}
-    main {{ max-width: 1180px; margin: 0 auto; padding: 32px 20px 48px; }}
+    main {{ max-width: 1240px; margin: 0 auto; padding: 28px 20px 48px; }}
     h1 {{ font-size: 28px; margin: 0 0 8px; }}
-    .lead, .note {{ color: var(--muted); }}
-    .grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 28px; }}
-    h2.section {{ font-size: 20px; margin: 30px 0 8px; }}
+    .lead, .small {{ color: var(--muted); }}
+    .controls {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin: 18px 0 22px; }}
+    input, select {{ width: 100%; box-sizing: border-box; border: 1px solid var(--border); border-radius: 6px; padding: 8px; background: #fff; color: var(--fg); }}
+    .grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }}
     .card {{ background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }}
-    .meta {{ display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }}
+    .card[hidden] {{ display: none; }}
+    .meta {{ display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }}
     .meta h3 {{ font-size: 15px; margin: 0; margin-right: auto; }}
-    .meta span, .small {{ color: var(--muted); font-size: 12px; }}
-    .swatches {{ display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; height: 32px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); }}
+    .meta span {{ color: var(--accent); font-size: 12px; font-weight: 700; }}
+    .swatches {{ display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; height: 32px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); margin-top: 10px; }}
     .swatch {{ display: block; min-width: 10px; }}
     p {{ margin: 10px 0 0; font-size: 13px; }}
     .disclaimer {{ color: #9a3412; }}
@@ -124,22 +159,67 @@ def main() -> int:
 </head>
 <body>
 <main>
-  <h1>Scientific Figure Palettes</h1>
-  <p class="lead">Canonical palettes, Notion image-level candidates, figure examples, and external GPL library preview.</p>
-  {section('Core Publication', 'Default publication-ready canonical palettes.', core_cards)}
-  {section('Journal-Inspired Non-Official', 'Contextual style references, not official publisher branding.', journal_cards)}
-  {section('Curated External GPL', 'Non-core curated cols4all candidates with GPL-3 provenance.', curated_cards)}
-  {section('Notion Transcribed Candidates', 'Image-level candidates with visible HEX transcription; still unreviewed and gated for snippets.', notion_transcribed)}
-  {section('Notion Unreviewed / Inspiration', 'Picker-derived or figure-sampled candidates remain inspiration-only and snippet-blocked.', notion_unreviewed)}
-  {section('Figure Examples', 'Example routing records for layouts and figure styles. Source images are not redistributed.', examples)}
-  {section('cols4all Large Library', 'First 120 exported GPL-3 cols4all palettes. Use the CLI for the full library.', cols4all_cards)}
+  <h1>Scientific Figure Palette Discovery</h1>
+  <p class="lead">Search canonical palettes, contextual Notion candidates, figure examples, and external GPL palette previews. Notion entries are non-official and unreviewed unless explicitly marked otherwise.</p>
+  <div class="controls">
+    <input id="q" type="search" placeholder="Search id, venue, figure type, page">
+    <select id="source"><option value="">All sources</option>{options(records, 'source')}</select>
+    <select id="kind"><option value="">All kinds</option>{options(records, 'kind')}</select>
+    <select id="venue"><option value="">All venues</option>{options(records, 'venue_tags')}</select>
+    <select id="figure"><option value="">All figure types</option>{options(records, 'figure_types')}</select>
+    <select id="role"><option value="">All roles</option>{options(records, 'palette_role')}</select>
+    <select id="review"><option value="">All review states</option>{options(records, 'review_status')}</select>
+    <select id="snippet"><option value="">All snippet states</option>{options(records, 'raw_snippet_eligibility')}</select>
+  </div>
+  <p class="small" id="count"></p>
+  <div class="grid" id="cards">
+    {cards}
+  </div>
 </main>
+<script>
+const fields = ["q", "source", "kind", "venue", "figure", "role", "review", "snippet"];
+const cards = [...document.querySelectorAll(".card")];
+function paramsToControls() {{
+  const params = new URLSearchParams(location.search);
+  for (const id of fields) {{
+    if (params.has(id)) document.getElementById(id).value = params.get(id);
+  }}
+}}
+function matches(card, id, value) {{
+  if (!value) return true;
+  const lower = value.toLowerCase();
+  if (id === "q") return card.dataset.text.includes(lower);
+  if (id === "venue") return card.dataset.venue.toLowerCase().includes(lower);
+  if (id === "figure") return card.dataset.figure.toLowerCase().includes(lower);
+  if (id === "snippet") return card.dataset.snippet === value;
+  return (card.dataset[id] || "") === value;
+}}
+function applyFilters() {{
+  let shown = 0;
+  const params = new URLSearchParams();
+  for (const card of cards) {{
+    const visible = fields.every(id => {{
+      const value = document.getElementById(id).value;
+      if (value) params.set(id, value);
+      return matches(card, id, value);
+    }});
+    card.hidden = !visible;
+    if (visible) shown += 1;
+  }}
+  history.replaceState(null, "", `${{location.pathname}}${{params.toString() ? "?" + params : ""}}`);
+  document.getElementById("count").textContent = `${{shown}} of ${{cards.length}} records shown`;
+}}
+paramsToControls();
+for (const id of fields) document.getElementById(id).addEventListener("input", applyFilters);
+applyFilters();
+</script>
 </body>
 </html>
 """
     html = "\n".join(line.rstrip() for line in html.splitlines()) + "\n"
     OUTPUT.write_text(html, encoding="utf-8")
     print(f"wrote {OUTPUT}")
+    print(f"wrote {INDEX_OUTPUT}")
     return 0
 
 

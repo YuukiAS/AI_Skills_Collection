@@ -23,6 +23,7 @@ FIGURE_EXAMPLES = PALETTE_DIR / "figure-example-registry.json"
 NOTION_REVIEW_QUEUE = PALETTE_DIR / "notion-review-queue.json"
 PUBLICATION_PRESETS = PALETTE_DIR / "publication-figure-presets.json"
 THIRD_PARTY_NOTICES = PALETTE_DIR / "THIRD_PARTY_NOTICES.md"
+GALLERY_INDEX = PALETTE_DIR / "gallery-index.json"
 
 REQUIRED_IDS = {
     "okabe_ito",
@@ -98,6 +99,7 @@ def main() -> int:
     figure_examples = load_json(FIGURE_EXAMPLES) if FIGURE_EXAMPLES.exists() else None
     notion_review_queue = load_json(NOTION_REVIEW_QUEUE) if NOTION_REVIEW_QUEUE.exists() else None
     publication_presets = load_json(PUBLICATION_PRESETS) if PUBLICATION_PRESETS.exists() else None
+    gallery_index = load_json(GALLERY_INDEX) if GALLERY_INDEX.exists() else None
 
     if not isinstance(canonical, dict):
         errors.append("canonical file must be a JSON object")
@@ -303,6 +305,7 @@ def main() -> int:
         pages = notion_images.get("pages", [])
         if not isinstance(pages, list) or len(pages) != 8:
             errors.append("notion image palette file must record all 8 palette pages")
+        image_total = 0
         slugs = {str(page.get("slug")) for page in pages if isinstance(page, dict)}
         for expected in {
             "cvpr25",
@@ -324,6 +327,9 @@ def main() -> int:
             if not isinstance(images, list):
                 errors.append(f"notion page {slug} images must be a list")
                 continue
+            image_total += len(images)
+            if page.get("image_count") != len(images):
+                errors.append(f"notion page {slug} image_count must match actual images")
             if page.get("has_visible_hex_or_rgb") in {"yes", "mixed"} and images:
                 manual = [
                     image
@@ -346,11 +352,16 @@ def main() -> int:
                         errors.append(f"notion image {image.get('candidate_id')} has invalid primary colors: {bad_primary[:3]}")
                 if "file" in image or "mtime" in image:
                     errors.append(f"notion image {image.get('candidate_id')} must not keep file or mtime")
+        if image_total != 50:
+            errors.append(f"notion image evidence must contain 50 images, found {image_total}")
 
     candidate_ids: set[str] = set()
+    candidate_page_groups: dict[str, int] = {}
     if not isinstance(notion_candidates, dict):
         errors.append("notion candidate file missing or invalid")
     else:
+        if notion_candidates.get("version") != "1.1.0":
+            errors.append("notion candidate file must be version 1.1.0")
         candidates = notion_candidates.get("candidates", [])
         if not isinstance(candidates, list) or len(candidates) != 50:
             errors.append("notion candidate file must contain 50 image-level candidates")
@@ -368,6 +379,31 @@ def main() -> int:
             candidate_ids.add(cid)
             if candidate.get("review_status") != "unreviewed":
                 errors.append(f"{cid} must remain unreviewed")
+            for field in {
+                "asset_kind",
+                "derivation_method",
+                "source_fidelity",
+                "discovery_eligibility",
+                "raw_snippet_eligibility",
+                "style_guidance_eligibility",
+                "publication_status",
+                "page_group_id",
+                "variant_rank",
+                "representative",
+            }:
+                if field not in candidate:
+                    errors.append(f"{cid} missing discovery field {field}")
+            if candidate.get("publication_status") != "not_reviewed":
+                errors.append(f"{cid} publication_status must remain not_reviewed")
+            if candidate.get("discovery_eligibility") not in {"contextual_default", "explicit_only", "guidance_only", "blocked"}:
+                errors.append(f"{cid} has invalid discovery_eligibility")
+            if candidate.get("raw_snippet_eligibility") not in {"experimental_gate", "blocked"}:
+                errors.append(f"{cid} has invalid raw_snippet_eligibility")
+            if candidate.get("style_guidance_eligibility") not in {"allowed", "blocked"}:
+                errors.append(f"{cid} has invalid style_guidance_eligibility")
+            if candidate.get("representative") is True:
+                group = str(candidate.get("page_group_id"))
+                candidate_page_groups[group] = candidate_page_groups.get(group, 0) + 1
             colors = candidate.get("colors", [])
             if not isinstance(colors, list) or not colors:
                 errors.append(f"{cid} must contain colors")
@@ -381,17 +417,31 @@ def main() -> int:
                 if len(candidate.get("colors", [])) > 12:
                     if candidate.get("palette_role") != "composite" or candidate.get("snippet_eligibility") != "blocked":
                         errors.append(f"{cid} large transcribed color card must be composite and snippet-blocked")
+                    if candidate.get("raw_snippet_eligibility") != "blocked" or candidate.get("discovery_eligibility") != "guidance_only":
+                        errors.append(f"{cid} composite visible HEX card must be guidance-only and raw-snippet-blocked")
                 elif candidate.get("snippet_eligibility") != "requires_allow_experimental":
                     errors.append(f"{cid} transcribed candidate must require experimental snippet gate")
+                elif candidate.get("raw_snippet_eligibility") != "experimental_gate":
+                    errors.append(f"{cid} transcribed candidate must keep experimental raw snippet gate")
             elif candidate.get("snippet_eligibility") != "blocked":
                 errors.append(f"{cid} non-transcribed candidate must be snippet-blocked")
+            if candidate.get("palette_role") in {"figure_example_palette", "composite"} and candidate.get("raw_snippet_eligibility") != "blocked":
+                errors.append(f"{cid} figure-derived/composite candidate must block raw snippets")
+            if candidate.get("review_status") == "unreviewed" and candidate.get("publication_status") == "publication_ready":
+                errors.append(f"{cid} unreviewed candidate must not be publication_ready")
             if not candidate.get("canonical_fallback_ids"):
                 errors.append(f"{cid} missing canonical_fallback_ids")
+        bad_representatives = {group: count for group, count in candidate_page_groups.items() if count != 1}
+        if bad_representatives:
+            errors.append(f"each Notion page group must have exactly one representative candidate: {bad_representatives}")
 
     example_ids: set[str] = set()
+    example_page_reps: dict[str, int] = {}
     if not isinstance(figure_examples, dict):
         errors.append("figure example registry missing or invalid")
     else:
+        if figure_examples.get("version") != "1.1.0":
+            errors.append("figure example registry must be version 1.1.0")
         examples = figure_examples.get("examples", [])
         if not isinstance(examples, list) or len(examples) < 51:
             errors.append("figure example registry must contain image examples and old-page example")
@@ -406,9 +456,17 @@ def main() -> int:
             if example_id in example_ids:
                 errors.append(f"duplicate example id: {example_id}")
             example_ids.add(example_id)
+            for field in {"page_group_id", "variant_rank", "representative", "layout_traits", "style_traits", "discovery_rank"}:
+                if field not in example:
+                    errors.append(f"example {example_id} missing discovery field {field}")
+            if example.get("representative") is True:
+                group = str(example.get("page_group_id"))
+                example_page_reps[group] = example_page_reps.get(group, 0) + 1
             for cid in example.get("linked_candidate_ids", []):
                 if cid not in candidate_ids:
                     errors.append(f"example {example_id} references unknown candidate {cid}")
+        if example_page_reps and any(count != 1 for count in example_page_reps.values()):
+            errors.append(f"each Notion page group must have one representative example where examples exist: {example_page_reps}")
 
     if not isinstance(notion_review_queue, dict):
         errors.append("notion review queue missing or invalid")
@@ -420,8 +478,8 @@ def main() -> int:
     if not isinstance(publication_presets, dict):
         errors.append("publication presets missing or invalid")
     else:
-        if publication_presets.get("version") != "2.0.0":
-            errors.append("publication presets must be version 2.0.0")
+        if publication_presets.get("version") != "2.1.0":
+            errors.append("publication presets must be version 2.1.0")
         for preset in publication_presets.get("presets", []):
             if not isinstance(preset, dict):
                 continue
@@ -437,6 +495,32 @@ def main() -> int:
                     errors.append(f"preset {preset_id} references unknown example {example_id}")
             if not preset.get("disclaimer"):
                 errors.append(f"preset {preset_id} missing disclaimer")
+            for field in {
+                "safe_lane",
+                "experimental_lane",
+                "reference_lane",
+                "venue_aliases",
+                "figure_type_aliases",
+                "representative_candidate_ids",
+                "representative_example_refs",
+                "per_page_limit",
+                "discovery_mode",
+            }:
+                if field not in preset:
+                    errors.append(f"preset {preset_id} missing discovery field {field}")
+
+    if isinstance(gallery_index, dict):
+        items = gallery_index.get("items", [])
+        if not isinstance(items, list) or not items:
+            errors.append("gallery-index must contain items")
+        else:
+            index_ids = {item.get("id") for item in items if isinstance(item, dict)}
+            for cid in candidate_ids:
+                if cid not in index_ids:
+                    errors.append(f"gallery-index missing candidate {cid}")
+            for example_id in example_ids:
+                if example_id not in index_ids:
+                    errors.append(f"gallery-index missing example {example_id}")
 
     if not THIRD_PARTY_NOTICES.exists():
         errors.append("palette/THIRD_PARTY_NOTICES.md must exist")
