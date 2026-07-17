@@ -24,7 +24,7 @@ repo marketplace manifest. `plugins/codex/plugins` provides the plugin payloads.
 Sparse checkout does not redefine the repository root, so the manifest must
 remain at `.agents/plugins/marketplace.json` relative to the real checkout root.
 
-The generated marketplace currently publishes nine curated plugins. This is the repository's current app-facing publication budget, not a general Codex plugin limit:
+The generated marketplace currently publishes six curated server plugins. This is the repository's current app-facing publication budget, not a general Codex plugin limit:
 
 - `workflow-core`
 - `ai-skills-core`

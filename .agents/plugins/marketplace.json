@@ -53,54 +53,6 @@
       "category": "Research"
     },
     {
-      "name": "presentations",
-      "source": {
-        "source": "local",
-        "path": "./plugins/codex/plugins/presentations"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Research"
-    },
-    {
-      "name": "scientific-visualization",
-      "source": {
-        "source": "local",
-        "path": "./plugins/codex/plugins/scientific-visualization"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Research"
-    },
-    {
-      "name": "web-development",
-      "source": {
-        "source": "local",
-        "path": "./plugins/codex/plugins/web-development"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Web Development"
-    },
-    {
-      "name": "statistical-modeling",
-      "source": {
-        "source": "local",
-        "path": "./plugins/codex/plugins/statistical-modeling"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Research"
-    },
-    {
       "name": "bioinformatics",
       "source": {
         "source": "local",

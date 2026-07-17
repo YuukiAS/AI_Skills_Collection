@@ -6,8 +6,9 @@
 - Check whether the repo already has a render script, Makefile, template,
   Pandoc defaults file, TeX header, font directory, or
   `render_resources/chinese_math_pdf`.
-- Run `scripts/probe_pdf_render_env.py --root <project-root>` or equivalent
-  local checks for `pandoc`, `xelatex`/`lualatex`, `kpsewhich`, and PDF QA tools.
+- Run `scripts/probe_pdf_render_env.py --root <project-root> --pretty` or
+  equivalent local checks for `pandoc`, `xelatex`/`lualatex`, `kpsewhich`, PDF QA
+  tools, and usable `render_resources/chinese_math_pdf` bundles.
 - Confirm the output/cache directory is writable.
 
 ## Source Integrity
@@ -22,8 +23,12 @@
 - Command exits successfully.
 - PDF exists and is non-empty.
 - `pdfinfo` or an equivalent tool reports a plausible page count.
-- `pdftotext` output contains representative Chinese text and surrounding math
-  prose when the PDF is not image-only by design.
+- `pdftotext -layout` output contains representative Chinese text and
+  surrounding math prose when the PDF is not image-only by design.
+- Extracted layout text does not show abnormal CJK one-character/short-line
+  fragmentation.
+- Source Markdown tables survive as recognizable rows/columns in extracted
+  layout text when the source contains tables.
 - `pdffonts` shows embedded/subset fonts when available.
 - First page and any equation/table-heavy pages are visually checked if layout
   risk exists.

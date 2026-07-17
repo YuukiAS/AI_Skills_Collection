@@ -58,11 +58,16 @@ ENVIRONMENT_SKILLS = (
 LOCAL_OVERRIDE_ALLOWED_FIELDS = {
     "account",
     "partition",
+    "partition_priority",
     "qos",
+    "qos_priority",
     "scratch_root",
     "texlive_path",
     "python_path",
     "module_init",
+    "race_after_minutes",
+    "race_partitions",
+    "race_cancel_policy",
 }
 LOCAL_OVERRIDE_REQUIRED_FIELDS = {
     "account",
@@ -874,11 +879,16 @@ def environment_blank_site_override(site_id: str) -> str:
             f"[sites.{site_id}]",
             'account = ""',
             'partition = ""',
+            'partition_priority = "htzhulab,a100,volta-gpu"',
             'qos = ""',
+            'qos_priority = ""',
             'scratch_root = ""',
             'texlive_path = ""',
             'python_path = ""',
             'module_init = ""',
+            'race_after_minutes = "60"',
+            'race_partitions = "htzhulab,a100,volta-gpu"',
+            'race_cancel_policy = "cancel_after_first_validated_output"',
             "",
         ]
     )
@@ -893,11 +903,16 @@ def environment_local_override_template(site_id: str | None = None) -> str:
         "# Field guide:",
         "# - account: required on Slurm sites when your scheduler account differs from username.",
         "# - partition: required when a site does not provide a safe default partition.",
+        "# - partition_priority: optional comma-separated fallback order for prompt-guided Slurm routing.",
         "# - qos: required when jobs need an explicit QoS or queue class.",
+        "# - qos_priority: optional comma-separated fallback order for prompt-guided QoS routing.",
         "# - scratch_root: required private writable scratch/work directory; never commit personal paths.",
         "# - texlive_path: optional private TeX root or bin directory when site modules do not expose TeX.",
         "# - python_path: optional preferred Python executable or environment path.",
         "# - module_init: required when the shell must source a modules init script before `module load`.",
+        "# - race_after_minutes: optional wait threshold before suggesting partition race execution.",
+        "# - race_partitions: optional comma-separated race partition set.",
+        "# - race_cancel_policy: optional cancellation rule after one candidate validates.",
         "",
     ]
     profiles = load_site_profiles()
@@ -908,6 +923,34 @@ def environment_local_override_template(site_id: str | None = None) -> str:
             raise SystemExit(f"unknown site profile: {current_site_id}")
         sections.append(environment_blank_site_override(current_site_id).rstrip())
     return "\n".join(intro + sections) + "\n"
+
+
+
+def environment_override_list(value: str | None) -> list[str]:
+    if not value:
+        return []
+    raw = str(value).strip()
+    if raw.startswith("[") and raw.endswith("]"):
+        raw = raw[1:-1]
+    return [item.strip().strip('"\'') for item in raw.split(",") if item.strip().strip('"\'')]
+
+
+def environment_public_override_policy(site_fields: dict[str, str]) -> dict[str, Any]:
+    policy: dict[str, Any] = {}
+    for key in ("partition_priority", "qos_priority", "race_partitions"):
+        values = environment_override_list(site_fields.get(key))
+        if values:
+            policy[key] = values
+    race_after = str(site_fields.get("race_after_minutes") or "").strip()
+    if race_after:
+        try:
+            policy["race_after_minutes"] = int(race_after)
+        except ValueError:
+            policy["race_after_minutes"] = race_after
+    cancel_policy = str(site_fields.get("race_cancel_policy") or "").strip()
+    if cancel_policy:
+        policy["race_cancel_policy"] = cancel_policy
+    return policy
 
 
 def parse_environment_local_override(path: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
@@ -955,6 +998,7 @@ def environment_doctor_payload(args: argparse.Namespace) -> dict[str, Any]:
     unknown_sites = sorted(site for site in local_data if site not in profiles)
     unknown_fields = sorted(field for field in site_fields if field not in LOCAL_OVERRIDE_ALLOWED_FIELDS)
     empty_fields = sorted(field for field, value in site_fields.items() if field in LOCAL_OVERRIDE_ALLOWED_FIELDS and not str(value).strip())
+    public_override_policy = environment_public_override_policy(site_fields)
     missing_required = sorted(field for field in LOCAL_OVERRIDE_REQUIRED_FIELDS if not site_fields.get(field))
     inaccessible_paths: dict[str, str] = {}
     for field in sorted(LOCAL_OVERRIDE_PATH_FIELDS):
@@ -983,11 +1027,12 @@ def environment_doctor_payload(args: argparse.Namespace) -> dict[str, Any]:
         "local_override_site_ids": sorted(local_data),
         "commands": {cmd: shutil.which(cmd) for cmd in commands},
         "diagnostics": diagnostics,
+        "public_override_policy": public_override_policy,
         "submit_smoke_job": "requested" if args.submit_smoke_job else "skipped",
         "next_steps": [
             f"edit {local_override_path}",
-            f"ai-skills environment plan --site {site_id} --target {args.target}" if site_id else "ai-skills environment plan --site <site-id>",
-            f"ai-skills environment apply --site {site_id} --target {args.target} --dry-run" if site_id else "ai-skills environment apply --site <site-id> --dry-run",
+            f"ai-skills environment plan --site {site_id} --target {args.target} --local-override {local_override_path}" if site_id else "ai-skills environment plan --site <site-id>",
+            f"ai-skills environment apply --site {site_id} --target {args.target} --local-override {local_override_path} --dry-run" if site_id else "ai-skills environment apply --site <site-id> --dry-run",
         ],
     }
 
@@ -1081,6 +1126,16 @@ def environment_site_reference(profile: dict[str, Any] | None, local_override: P
     constraints = profile.get("constraints", {}) if isinstance(profile.get("constraints"), dict) else {}
     for key in sorted(constraints):
         lines.append(f"- {key}: {constraints[key]}")
+    local_data, _errors = parse_environment_local_override(local_override)
+    local_policy = environment_public_override_policy(local_data.get(profile["id"], {}))
+    if local_policy:
+        lines.append("")
+        lines.append("local_prompt_policy:")
+        for key in sorted(local_policy):
+            value = local_policy[key]
+            if isinstance(value, list):
+                value = ", ".join(str(item) for item in value)
+            lines.append(f"- {key}: {value}")
     modules = profile.get("modules", {}) if isinstance(profile.get("modules"), dict) else {}
     if modules:
         lines.append("")

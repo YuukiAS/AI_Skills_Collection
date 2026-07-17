@@ -134,6 +134,8 @@ class PaletteWorkflowTests(unittest.TestCase):
 
     def test_plugin_shared_payload_matches_source_files(self) -> None:
         shared_root = REPO_ROOT / "plugins/codex/plugins/scientific-visualization/shared"
+        if not shared_root.exists():
+            self.skipTest("scientific-visualization plugin is excluded from the server marketplace set")
         for relative in [
             "palette/notion-palette-candidates.json",
             "palette/figure-example-registry.json",

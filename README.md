@@ -42,15 +42,11 @@ ai-skills install --target repo --profile research-main --mode symlink --write-a
 | 场景 | 本仓库插件或 profile | 同时使用的官方能力 |
 |---|---|---|
 | 所有主力 Codex 环境 | `workflow-core`、`writing-style` 或 `global-baseline` | GitHub、文件工具 |
-| 科研主力机器 | `research-writing`、`statistical-modeling` 或 `research-main` | Zotero、PDF、LaTeX、GitHub |
-| 经常做 PPT 的桌面环境 | `presentations` 或 `presentation-desktop` | Presentation/Slides；Beamer 用 LaTeX |
-| 前端网站或科研产品 | `web-development` 或 `frontend-research-product` | `build-web-apps`、Figma、GitHub |
 | 医学影像项目 | `medical-imaging-project` | PDF、GitHub、前端构建 |
 | 生物信息项目 | `bioinformatics-project` | GitHub、文献/数据库工具 |
 | Slurm compute node | `server-research-baseline` 或 `ai-skills environment apply` | 站点已有 Slurm、TeX、Python |
 | 维护本仓库 | `ai-skills-core` 或 `ai-skills-maintainer` | GitHub，必要时 Notion |
 
-`v4.0.0` 是当前仓库整合任务标签。中央 Marketplace 的 10 个插件当前发布预算不是 Codex 能力上限；其中 `scientific-visualization` 已进入 `4.2.0` 小版本，负责 Notion-derived palette contextual discovery、publication figure workflow 和 figure QA。
 
 ## Codex App 插件市场
 
@@ -81,7 +77,7 @@ codex plugin marketplace add \
 
 生成层不要手改。改 `skills/`、`profiles/`、`scripts/codex_marketplace_config.json` 或 `assets/codex/` 后，重新生成发布层。
 
-## 中央十个插件
+## 中央服务器插件集
 
 | 插件 | 用户可见入口 |
 |---|---|
@@ -89,14 +85,10 @@ codex plugin marketplace add \
 | `ai-skills-core` | `project-skill-installer`、`ai-skills-repository-maintainer` |
 | `writing-style` | `writing-fidelity`、`scientific-prose`、`chinese-prose` |
 | `research-writing` | `research-reporting`、`research-paper-workflow`、`literature-and-citations` |
-| `presentations` | `research-presentations`、`business-presentations` |
-| `scientific-visualization` | `publication-figures`、`publication-figure-palettes`、`scientific-figure-qa`、`scientific-schematics`、`latex-posters` |
-| `web-development` | `frontend-reference-research`、`frontend-visual-systems`、`research-product-frontend` |
-| `statistical-modeling` | `bayesian-modeling`、`data-analysis-python`、`scientific-visualization` |
 | `bioinformatics` | `bioinformatics-workflows` |
 | `medical-imaging` | `medical-imaging-workflows`、`ai-ml-imaging` |
 
-`cardiacnexus` 不再是中央通用插件。CardiacNexus 项目专用技能保留在短期导出包 `exports/cardiacnexus-repo-local/`，后续合并进目标 repo 的 `.agents/skills/` 后删除该导出包。
+`cardiacnexus` 不再是中央通用插件。CardiacNexus 项目专用技能已经迁移到 CardiacNexus 仓库的 `.agents/skills/`，中央仓库不再保留导出包。
 
 ## Profile 安装
 
@@ -136,7 +128,6 @@ ai-skills environment diff --site cuhk-central-cluster --target user
 
 ## Presentation 与 CUHK 模板
 
-`presentations` 只负责 deck plan、叙事、模板路由、来源忠实度和 QA。PPTX/Google Slides 对象操作交给官方 Presentation/Slides；明确要求 Beamer/Overleaf/LaTeX 时交给 LaTeX 能力。
 
 CUHK 模板材料位于：
 

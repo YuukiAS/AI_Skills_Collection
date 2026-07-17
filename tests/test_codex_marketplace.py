@@ -119,7 +119,7 @@ def copy_sparse_paths(source: Path, target: Path, *paths: str) -> None:
 
 
 class CodexMarketplaceTests(unittest.TestCase):
-    def test_repository_config_has_ten_plugins(self) -> None:
+    def test_repository_config_has_server_plugin_set(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         self.assertEqual(
             [plugin["name"] for plugin in data["plugins"]],
@@ -128,57 +128,23 @@ class CodexMarketplaceTests(unittest.TestCase):
                 "ai-skills-core",
                 "writing-style",
                 "research-writing",
-                "presentations",
-                "scientific-visualization",
-                "web-development",
-                "statistical-modeling",
                 "bioinformatics",
                 "medical-imaging",
             ],
         )
-        self.assertEqual(data["marketplacePluginBudget"], 10)
+        self.assertEqual(data["marketplacePluginBudget"], 6)
 
-    def test_repository_config_migrates_cardiacnexus_to_export_package(self) -> None:
+    def test_repository_config_keeps_cardiacnexus_out_of_marketplace(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         plugin_names = [plugin["name"] for plugin in data["plugins"]]
         self.assertNotIn("cardiacnexus", plugin_names)
-        self.assertTrue((REPO_ROOT / "exports/cardiacnexus-repo-local/.agents/skills/cardiacnexus-feature-contracts/SKILL.md").exists())
+        self.assertFalse((REPO_ROOT / "exports/cardiacnexus-repo-local").exists())
         self.assertFalse((REPO_ROOT / "skills/projects/cmr/cardiacnexus-feature-contracts/SKILL.md").exists())
 
-    def test_presentations_plugin_has_two_routes_and_shared_cuhk_template(self) -> None:
+    def test_excluded_plugins_are_not_published_for_server_set(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
-        presentations = next(plugin for plugin in data["plugins"] if plugin["name"] == "presentations")
-        self.assertEqual([entry["source"] for entry in presentations["skills"]], [
-            "skills/tools/documents-media/presentations/research-presentations",
-            "skills/tools/documents-media/presentations/business-presentations",
-        ])
-        self.assertEqual(presentations["shared"][0]["source"], "skills/tools/documents-media/presentations/shared")
-        self.assertTrue((REPO_ROOT / "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/main.tex").exists())
-        self.assertTrue((REPO_ROOT / "skills/tools/documents-media/presentations/shared/templates/cuhk/pptx/cuhk-reference-deck.pptx").exists())
-
-    def test_research_writing_no_longer_publishes_pptx_or_scientific_slides(self) -> None:
-        data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
-        research = next(plugin for plugin in data["plugins"] if plugin["name"] == "research-writing")
-        serialized = json.dumps(research)
-        self.assertNotIn("skills/tools/documents-media/pptx", serialized)
-        self.assertNotIn("scientific-slides", serialized)
-
-    def test_scientific_visualization_exposes_split_figure_workflows(self) -> None:
-        data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
-        plugin_data = next(plugin for plugin in data["plugins"] if plugin["name"] == "scientific-visualization")
-        self.assertEqual(plugin_data["version"], "4.2.0")
-        self.assertEqual(
-            [entry["name"] if entry["type"] == "aggregate" else Path(entry["source"]).name for entry in plugin_data["skills"]],
-            [
-                "publication-figures",
-                "publication-figure-palettes",
-                "scientific-figure-qa",
-                "scientific-schematics",
-                "latex-posters",
-            ],
-        )
-        serialized = json.dumps(plugin_data)
-        self.assertNotIn("skills/writing/research/venue-templates", serialized)
+        plugin_names = {plugin["name"] for plugin in data["plugins"]}
+        self.assertFalse({"presentations", "scientific-visualization", "web-development", "statistical-modeling"} & plugin_names)
 
     def test_render_and_slurm_are_not_central_marketplace_skills(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
@@ -187,21 +153,17 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertNotIn("skills/tools/hpc/slurm-workflows", serialized)
         self.assertTrue((REPO_ROOT / "skills/tools/hpc/slurm-workflows/SKILL.md").exists())
 
-    def test_web_development_is_reference_and_brief_layer(self) -> None:
-        data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
-        web = next(plugin for plugin in data["plugins"] if plugin["name"] == "web-development")
-        self.assertEqual([entry["name"] if entry["type"] == "aggregate" else Path(entry["source"]).name for entry in web["skills"]], [
-            "frontend-reference-research",
-            "frontend-visual-systems",
-            "research-product-frontend",
-        ])
+    def test_excluded_plugin_payload_directories_are_removed(self) -> None:
+        for name in ["presentations", "scientific-visualization", "web-development", "statistical-modeling"]:
+            self.assertFalse((REPO_ROOT / "plugins/codex/plugins" / name).exists())
 
     def test_canonical_integration_history_exists(self) -> None:
         history = REPO_ROOT / "docs/provenance/INTEGRATION_HISTORY.md"
         text = history.read_text(encoding="utf-8")
         self.assertIn("| date | source_type | source | revision | permission/license | decision | target | integration_commit | note |", text)
         self.assertIn("CardiacNexus repo-local skills", text)
-        self.assertIn("deferred-user-merge", text)
+        self.assertIn("migrated-repo-local", text)
+        self.assertIn("repo-local-canonical", text)
         self.assertFalse((REPO_ROOT / "docs/provenance/CLONED_SKILL_SOURCES.md").exists())
 
     def test_v36_profiles_exist_and_server_profile_carries_overlay_skills(self) -> None:

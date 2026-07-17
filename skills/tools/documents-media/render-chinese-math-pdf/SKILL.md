@@ -31,7 +31,9 @@ workflow.
    compiling. Prefer repo-provided scripts, templates, Makefiles, fonts, or
    `render_resources/chinese_math_pdf` directories when they exist.
 2. Probe the environment instead of assuming a host-specific TeX path:
-   `python scripts/probe_pdf_render_env.py --root <project-root>`.
+   `python scripts/probe_pdf_render_env.py --root <project-root> --pretty`.
+   Treat a usable `render_resources/chinese_math_pdf` bundle as a valid CJK
+   render route even when system `kpsewhich` cannot find `xeCJK` or `ctex`.
 3. Choose the narrowest viable route:
    - Existing project render command when documented and current.
    - Project-local render resources for fonts, TeX headers, or `texmf`.
@@ -51,10 +53,13 @@ workflow.
    reference rather than inventing bibliography entries.
 7. Validate the produced PDF, not only the command exit code:
    - `pdfinfo` for page count and metadata when available.
-   - `pdftotext` for extractable Chinese, English, and formula context.
+   - `pdftotext -layout` for extractable Chinese, English, formula context,
+     abnormal CJK line fragmentation, and table row survival.
    - `pdffonts` for embedded/subset fonts when available.
-   - `pdftoppm` or another raster preview for first/critical pages when layout
-     or glyph rendering is uncertain.
+   - `python scripts/validate_pdf_layout.py <pdf> --source <source.md>` when the
+     source is Markdown or table-heavy.
+   - `pdftoppm` or another raster preview for first/critical pages when layout,
+     table, equation, or glyph rendering is uncertain.
 8. Report the exact source, output PDF path, command(s), page count, font/text
    checks, and any unresolved warnings. A smoke test or dry run is not a final
    result unless the user explicitly asked only for environment probing.
@@ -70,14 +75,15 @@ workflow.
 - If direct compilation fails after a Markdown conversion, inspect the generated
   `.tex` around the first real error and fix source/header issues rather than
   repeatedly rerunning the same command.
-- If PDF exists but text extraction or font checks fail, treat the task as
-  incomplete or partially complete and state what stronger validation or render
-  route is required.
+- If PDF exists but text extraction, table survival, line-fragmentation, or
+  font checks fail, treat the task as incomplete or partially complete and state
+  what stronger validation or render route is required.
 
 ## Completion States
 
-- `complete`: PDF rendered and passed command, page-count, text-extraction, and
-  visual/font sanity checks appropriate to the document.
+- `complete`: PDF rendered and passed command, page-count, text-extraction,
+  table/line-layout checks, and visual/font sanity checks appropriate to the
+  document.
 - `partial_complete`: PDF rendered, but non-critical warnings or limited QA
   remain and are reported with next steps.
 - `blocked_missing_dependency`: no safe render route exists in the current

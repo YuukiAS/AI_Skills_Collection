@@ -1,6 +1,6 @@
 {
   "name": "codex-cardiacnexus",
-  "description": "Support profile for CardiacNexus environments. Project-specific CardiacNexus skills are exported under exports/cardiacnexus-repo-local/ and should be merged into the CardiacNexus repo as repo-local skills.",
+  "description": "Support profile for CardiacNexus environments. Project-specific CardiacNexus skills now live as canonical repo-local directories in the CardiacNexus repository.",
   "max_active_skills": 24,
   "skills": [
     "skills/domains/medical-imaging/cardiac-mri",
@@ -18,7 +18,6 @@
     "skills/tools/documents-media/pdf",
     "skills/writing/research/research-reporting"
   ],
-  "repo_local_skill_package": "exports/cardiacnexus-repo-local/.agents/skills",
   "secondary_skills": [
     "skills/domains/bayesian/bayesian-ppl-diagnostics",
     "skills/writing/research/scientific-writing"

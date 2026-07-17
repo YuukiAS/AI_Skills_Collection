@@ -90,6 +90,42 @@ def ancestor_dirs(root: Path) -> list[Path]:
 
 
 def find_project_resources(root: Path) -> list[str]:
+    return [item["path"] for item in find_project_resource_bundles(root)]
+
+
+def find_file(root: Path, filename: str) -> str | None:
+    matches = sorted(root.rglob(filename)) if root.exists() else []
+    return str(matches[0]) if matches else None
+
+
+def resource_bundle_info(path: Path) -> dict[str, Any]:
+    texmf = path / "texmf" if (path / "texmf").exists() else path
+    scripts = path / "scripts"
+    templates = path / "templates"
+    tex_files = {filename: find_file(texmf, filename) for filename in TEX_FILES}
+    font_files = {
+        "FandolSong-Regular.otf": find_file(texmf, "FandolSong-Regular.otf"),
+        "FandolHei-Regular.otf": find_file(texmf, "FandolHei-Regular.otf"),
+        "FandolKai-Regular.otf": find_file(texmf, "FandolKai-Regular.otf"),
+    }
+    wrappers = {
+        "render_markdown_pdf.sh": str(scripts / "render_markdown_pdf.sh") if (scripts / "render_markdown_pdf.sh").exists() else None,
+        "validate_pdf.sh": str(scripts / "validate_pdf.sh") if (scripts / "validate_pdf.sh").exists() else None,
+    }
+    template = templates / "chinese_math_pandoc_header.tex.in"
+    usable = bool(tex_files.get("xeCJK.sty") and tex_files.get("ctexart.cls") and font_files.get("FandolSong-Regular.otf"))
+    return {
+        "path": str(path),
+        "texmf": str(texmf),
+        "usable_chinese_math_bundle": usable,
+        "tex_files": tex_files,
+        "font_files": font_files,
+        "header_template": str(template) if template.exists() else None,
+        "wrappers": wrappers,
+    }
+
+
+def find_project_resource_bundles(root: Path) -> list[dict[str, Any]]:
     candidates: list[Path] = []
     for base in ancestor_dirs(root):
         candidates.extend(
@@ -99,14 +135,20 @@ def find_project_resources(root: Path) -> list[str]:
                 base / ".texlive" / "texmf",
             ]
         )
-    found: list[str] = []
+    found: list[dict[str, Any]] = []
     seen: set[Path] = set()
     for candidate in candidates:
-        if candidate in seen:
+        if candidate.name == "texmf" and candidate.parent.name == "chinese_math_pdf":
+            bundle_path = candidate.parent
+        else:
+            bundle_path = candidate
+        if not bundle_path.exists():
             continue
-        seen.add(candidate)
-        if candidate.exists():
-            found.append(str(candidate))
+        key = bundle_path.resolve()
+        if key in seen:
+            continue
+        seen.add(key)
+        found.append(resource_bundle_info(bundle_path))
     return found
 
 
@@ -123,18 +165,23 @@ def main() -> int:
 
     commands = {command: command_info(command) for command in COMMANDS}
     tex_files = {filename: kpsewhich_lookup(filename) for filename in TEX_FILES}
+    resource_bundles = find_project_resource_bundles(args.root)
+    usable_bundles = [item for item in resource_bundles if item["usable_chinese_math_bundle"]]
 
     result = {
         "root": str(args.root.resolve()),
         "commands": commands,
         "tex_files": tex_files,
-        "project_resources": find_project_resources(args.root),
+        "project_resources": [item["path"] for item in resource_bundles],
+        "project_resource_bundles": resource_bundles,
         "summary": {
             "markdown_to_pdf_candidate": commands["pandoc"]["available"]
             and (commands["xelatex"]["available"] or commands["lualatex"]["available"]),
             "cjk_xelatex_candidate": commands["xelatex"]["available"]
-            and tex_files["xeCJK.sty"]["available"]
-            and tex_files["fontspec.sty"]["available"],
+            and tex_files["fontspec.sty"]["available"]
+            and (tex_files["xeCJK.sty"]["available"] or bool(usable_bundles)),
+            "usable_resource_bundle_count": len(usable_bundles),
+            "recommended_resource_dir": usable_bundles[0]["path"] if usable_bundles else None,
             "pdf_qa_tools": [
                 name
                 for name in ("pdfinfo", "pdftotext", "pdffonts", "pdftoppm")
