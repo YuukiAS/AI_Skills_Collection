@@ -119,7 +119,7 @@ def copy_sparse_paths(source: Path, target: Path, *paths: str) -> None:
 
 
 class CodexMarketplaceTests(unittest.TestCase):
-    def test_repository_config_has_nine_plugins(self) -> None:
+    def test_repository_config_has_ten_plugins(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         self.assertEqual(
             [plugin["name"] for plugin in data["plugins"]],
@@ -129,13 +129,14 @@ class CodexMarketplaceTests(unittest.TestCase):
                 "writing-style",
                 "research-writing",
                 "presentations",
+                "scientific-visualization",
                 "web-development",
                 "statistical-modeling",
                 "bioinformatics",
                 "medical-imaging",
             ],
         )
-        self.assertEqual(data["marketplacePluginBudget"], 9)
+        self.assertEqual(data["marketplacePluginBudget"], 10)
 
     def test_repository_config_migrates_cardiacnexus_to_export_package(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))

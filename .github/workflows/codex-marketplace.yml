@@ -124,12 +124,13 @@ jobs:
             Write-Error "old nested marketplace.json must not exist"
             exit 1
           }
+          $manifest = Get-Content $marketplace -Raw | ConvertFrom-Json
           $pluginCount = (Get-ChildItem (Join-Path $target "plugins/codex/plugins") -Directory | Measure-Object).Count
-          if ($pluginCount -ne 9) {
-            Write-Error "expected 9 plugins after sparse checkout, found $pluginCount"
+          $expectedPluginCount = ($manifest.plugins | Measure-Object).Count
+          if ($pluginCount -ne $expectedPluginCount) {
+            Write-Error "expected $expectedPluginCount plugins after sparse checkout, found $pluginCount"
             exit 1
           }
-          $manifest = Get-Content $marketplace -Raw | ConvertFrom-Json
           foreach ($plugin in $manifest.plugins) {
             $sourcePath = $plugin.source.path
             if (!$sourcePath.StartsWith("./")) {
