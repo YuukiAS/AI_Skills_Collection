@@ -8,7 +8,8 @@
   `render_resources/chinese_math_pdf`.
 - Run `scripts/probe_pdf_render_env.py --root <project-root> --pretty` or
   equivalent local checks for `pandoc`, `xelatex`/`lualatex`, `kpsewhich`, PDF QA
-  tools, and usable `render_resources/chinese_math_pdf` bundles.
+  tools, Chromium browser commands, fontconfig CJK matches, and usable
+  `render_resources/chinese_math_pdf` bundles.
 - Confirm the output/cache directory is writable.
 
 ## Source Integrity
@@ -30,13 +31,27 @@
 - Source Markdown tables survive as recognizable rows/columns in extracted
   layout text when the source contains tables.
 - `pdffonts` shows embedded/subset fonts when available.
-- First page and any equation/table-heavy pages are visually checked if layout
-  risk exists.
+- A first-page PNG preview is generated and inspected for visible Chinese,
+  normal layout, no truncation, and no mojibake; this is required even when
+  `pdftotext` extracts Chinese.
+- Any equation/table-heavy pages are visually checked when layout risk exists.
+- If LaTeX produces invisible Chinese, missing glyphs, unstable wrapping, or
+  repeated header/cache failures, switch to the Chromium HTML route promptly.
+
+## Reader-Facing Chinese QA
+
+- The PDF can be sent directly to the intended Chinese reader without raw TeX
+  blocks, build logs, duplicated titles, browser headers/footers, or needless
+  English process labels.
+- Questions for an author/collaborator include only points that require their
+  judgment; evidence-backed facts stay out of the recipient-facing question list.
+- Long paths, metric names, and method names are retained only where useful and
+  do not overflow the page.
 
 ## Final Report
 
 - Source path and output PDF path.
 - Exact render command and any environment variables used.
-- Page count and QA evidence.
+- Page count, text/font QA evidence, and first-page preview PNG path.
 - Missing dependencies, warnings, or partial-completion caveats.
 - Next stronger route if the current route failed.

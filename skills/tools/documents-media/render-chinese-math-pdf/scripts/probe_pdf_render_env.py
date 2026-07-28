@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -13,6 +14,10 @@ from typing import Any
 
 COMMANDS = [
     "pandoc",
+    "chromium-browser",
+    "chromium",
+    "google-chrome",
+    "google-chrome-stable",
     "xelatex",
     "lualatex",
     "kpsewhich",
@@ -20,6 +25,7 @@ COMMANDS = [
     "pdftotext",
     "pdffonts",
     "pdftoppm",
+    "fc-match",
 ]
 
 TEX_FILES = [
@@ -31,6 +37,23 @@ TEX_FILES = [
     "longtable.sty",
     "hyperref.sty",
 ]
+
+CJK_FONT_CANDIDATES = [
+    "Noto Serif CJK SC",
+    "Noto Sans CJK SC",
+    "Source Han Serif SC",
+    "Source Han Sans SC",
+    "FandolSong",
+    "AR PL UMing CN",
+    "WenQuanYi Micro Hei",
+]
+
+SHARED_RESOURCE_ROOTS = [
+    Path("/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf"),
+    Path("/overflow/htzhu/render_resources/chinese_math_pdf"),
+    Path("/users/a/e/aereinh/render_resources/chinese_math_pdf"),
+]
+DEFAULT_LOCAL_OVERRIDE = Path.home() / ".config" / "ai-skills" / "local-overrides.toml"
 
 
 def run_version(command: str) -> str | None:
@@ -61,6 +84,13 @@ def command_info(command: str) -> dict[str, Any]:
     }
 
 
+def first_available_command(commands: list[str]) -> str | None:
+    for command in commands:
+        if shutil.which(command):
+            return command
+    return None
+
+
 def kpsewhich_lookup(filename: str) -> dict[str, Any]:
     kpsewhich = shutil.which("kpsewhich")
     if not kpsewhich:
@@ -84,9 +114,75 @@ def kpsewhich_lookup(filename: str) -> dict[str, Any]:
     }
 
 
+def fontconfig_match(font_name: str) -> dict[str, Any]:
+    fc_match = shutil.which("fc-match")
+    if not fc_match:
+        return {"available": False, "matched": None, "path": None, "reason": "fc-match not found"}
+    try:
+        proc = subprocess.run(
+            [fc_match, "-f", "%{file}\t%{family}\n", font_name],
+            check=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=5,
+        )
+    except subprocess.TimeoutExpired:
+        return {"available": False, "matched": None, "path": None, "reason": "fc-match timed out"}
+    output = proc.stdout.strip()
+    if proc.returncode != 0 or not output:
+        return {"available": False, "matched": None, "path": None, "reason": proc.stderr.strip() or None}
+    path, _, family = output.partition("\t")
+    families = [item.strip() for item in family.split(",") if item.strip()]
+    requested = font_name.lower()
+    matched = any(requested == item.lower() for item in families)
+    return {
+        "available": matched,
+        "matched": families[0] if families else None,
+        "path": path or None,
+        "reason": None if matched else f"fontconfig matched fallback family: {family}",
+    }
+
+
 def ancestor_dirs(root: Path) -> list[Path]:
     root = root.resolve()
     return [root, *root.parents]
+
+
+def split_resource_list(raw: str | None) -> list[Path]:
+    if not raw:
+        return []
+    text = str(raw).strip()
+    if text.startswith("[") and text.endswith("]"):
+        text = text[1:-1]
+    items: list[Path] = []
+    for chunk in text.replace(",", os.pathsep).split(os.pathsep):
+        value = chunk.strip().strip("\"'")
+        if value:
+            items.append(Path(value).expanduser())
+    return items
+
+
+def env_resource_roots() -> list[Path]:
+    return split_resource_list(os.environ.get("CHINESE_MATH_PDF_RESOURCE_DIRS", ""))
+
+
+def local_override_resource_roots(path: Path) -> list[Path]:
+    if not path.exists():
+        return []
+    roots: list[Path] = []
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = [part.strip() for part in line.split("=", 1)]
+        if key != "render_resource_dirs":
+            continue
+        comment_index = value.find(" #")
+        if comment_index != -1:
+            value = value[:comment_index].strip()
+        roots.extend(split_resource_list(value))
+    return roots
 
 
 def find_project_resources(root: Path) -> list[str]:
@@ -125,7 +221,7 @@ def resource_bundle_info(path: Path) -> dict[str, Any]:
     }
 
 
-def find_project_resource_bundles(root: Path) -> list[dict[str, Any]]:
+def find_project_resource_bundles(root: Path, local_override: Path | None = None) -> list[dict[str, Any]]:
     candidates: list[Path] = []
     for base in ancestor_dirs(root):
         candidates.extend(
@@ -135,6 +231,9 @@ def find_project_resource_bundles(root: Path) -> list[dict[str, Any]]:
                 base / ".texlive" / "texmf",
             ]
         )
+    candidates.extend(env_resource_roots())
+    candidates.extend(local_override_resource_roots(local_override or DEFAULT_LOCAL_OVERRIDE))
+    candidates.extend(SHARED_RESOURCE_ROOTS)
     found: list[dict[str, Any]] = []
     seen: set[Path] = set()
     for candidate in candidates:
@@ -161,17 +260,34 @@ def main() -> int:
         help="Project root or source directory to inspect for local render resources.",
     )
     parser.add_argument("--pretty", action="store_true", help="Pretty-print JSON output.")
+    parser.add_argument(
+        "--local-override",
+        type=Path,
+        default=DEFAULT_LOCAL_OVERRIDE,
+        help="Local ai-skills override file containing render_resource_dirs.",
+    )
     args = parser.parse_args()
 
+    local_override = args.local_override.expanduser()
     commands = {command: command_info(command) for command in COMMANDS}
     tex_files = {filename: kpsewhich_lookup(filename) for filename in TEX_FILES}
-    resource_bundles = find_project_resource_bundles(args.root)
+    fontconfig_fonts = {font: fontconfig_match(font) for font in CJK_FONT_CANDIDATES}
+    local_override_roots = local_override_resource_roots(local_override)
+    resource_bundles = find_project_resource_bundles(args.root, local_override=local_override)
     usable_bundles = [item for item in resource_bundles if item["usable_chinese_math_bundle"]]
+    chromium_command = first_available_command(["chromium-browser", "chromium", "google-chrome", "google-chrome-stable"])
+    usable_system_cjk_fonts = [font for font, info in fontconfig_fonts.items() if info["available"]]
 
     result = {
         "root": str(args.root.resolve()),
         "commands": commands,
         "tex_files": tex_files,
+        "fontconfig_fonts": fontconfig_fonts,
+        "local_override": {
+            "path": str(local_override),
+            "exists": local_override.exists(),
+            "render_resource_dirs": [str(path) for path in local_override_roots],
+        },
         "project_resources": [item["path"] for item in resource_bundles],
         "project_resource_bundles": resource_bundles,
         "summary": {
@@ -180,6 +296,11 @@ def main() -> int:
             "cjk_xelatex_candidate": commands["xelatex"]["available"]
             and tex_files["fontspec.sty"]["available"]
             and (tex_files["xeCJK.sty"]["available"] or bool(usable_bundles)),
+            "html_chromium_candidate": bool(chromium_command)
+            and commands["pandoc"]["available"]
+            and (bool(usable_bundles) or bool(usable_system_cjk_fonts)),
+            "chromium_command": chromium_command,
+            "usable_system_cjk_fonts": usable_system_cjk_fonts,
             "usable_resource_bundle_count": len(usable_bundles),
             "recommended_resource_dir": usable_bundles[0]["path"] if usable_bundles else None,
             "pdf_qa_tools": [

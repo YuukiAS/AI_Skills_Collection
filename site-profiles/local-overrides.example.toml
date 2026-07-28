@@ -11,6 +11,7 @@
 # - partition: Slurm partition/queue. Required when the site has no safe default.
 # - qos: Slurm QoS or queue class. Required when the scheduler expects one.
 # - scratch_root: private writable scratch/work directory for temporary outputs.
+# - render_resource_dirs: optional comma-separated local CJK render resource directories.
 # - texlive_path: optional private TeX Live root/bin path if modules are insufficient.
 # - python_path: optional preferred Python executable or environment path.
 # - module_init: shell snippet or file path needed before `module load`.
@@ -23,6 +24,7 @@ account = ""
 partition = ""
 qos = ""
 scratch_root = ""
+render_resource_dirs = ""
 texlive_path = ""
 python_path = ""
 module_init = ""
@@ -32,6 +34,7 @@ account = ""
 partition = ""
 qos = ""
 scratch_root = ""
+render_resource_dirs = ""
 texlive_path = ""
 python_path = ""
 module_init = ""

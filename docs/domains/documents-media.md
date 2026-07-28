@@ -40,7 +40,7 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Main References
 
-- `skills\tools\documents-media\render-chinese-math-pdf\references\checklists.md`
-- `skills\tools\documents-media\render-chinese-math-pdf\references\citation-cleanup.md`
-- `skills\tools\documents-media\render-chinese-math-pdf\references\portable-rendering.md`
-- `skills\tools\documents-media\render-chinese-math-pdf\references\source-notes.md`
+- `skills/tools/documents-media/render-chinese-math-pdf/references/checklists.md`
+- `skills/tools/documents-media/render-chinese-math-pdf/references/citation-cleanup.md`
+- `skills/tools/documents-media/render-chinese-math-pdf/references/portable-rendering.md`
+- `skills/tools/documents-media/render-chinese-math-pdf/references/source-notes.md`

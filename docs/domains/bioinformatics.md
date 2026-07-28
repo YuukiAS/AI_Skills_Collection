@@ -53,4 +53,4 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Main References
 
-- `skills\domains\bioinformatics\databases\bioinformatics-database-retrieval\references\bioinformatics-analysis-taxonomy.md`
+- `skills/domains/bioinformatics/databases/bioinformatics-database-retrieval/references/bioinformatics-analysis-taxonomy.md`

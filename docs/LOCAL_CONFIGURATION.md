@@ -61,6 +61,7 @@ ai-skills environment uninstall --target user
 | `partition` | Usually | Slurm partition/queue. Required when no safe site default exists. |
 | `qos` | Usually | Slurm QoS or queue class. Leave blank until confirmed. |
 | `scratch_root` | Usually | Private writable scratch/work directory for temporary outputs. |
+| `render_resource_dirs` | Optional | Comma-separated local CJK render resource directories, for example `$HOME/render_resources/chinese_math_pdf`. |
 | `texlive_path` | Optional | Private TeX Live root/bin path when modules do not expose TeX. |
 | `python_path` | Optional | Preferred Python executable or environment path. |
 | `module_init` | Usually | Shell snippet or script path needed before `module load`. |

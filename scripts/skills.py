@@ -62,6 +62,7 @@ LOCAL_OVERRIDE_ALLOWED_FIELDS = {
     "qos",
     "qos_priority",
     "scratch_root",
+    "render_resource_dirs",
     "texlive_path",
     "python_path",
     "module_init",
@@ -77,6 +78,7 @@ LOCAL_OVERRIDE_REQUIRED_FIELDS = {
     "module_init",
 }
 LOCAL_OVERRIDE_PATH_FIELDS = {"scratch_root", "texlive_path", "python_path"}
+LOCAL_OVERRIDE_LIST_PATH_FIELDS = {"render_resource_dirs"}
 NAME_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")
 HIGH_RISK_DOMAINS = ("medical", "medicine", "finance", "legal", "system-ops")
 PROVENANCE_VALUES = {"user-authored", "external-adapted", "external-vendored", "generated", "unknown", "local"}
@@ -883,6 +885,7 @@ def environment_blank_site_override(site_id: str) -> str:
             'qos = ""',
             'qos_priority = ""',
             'scratch_root = ""',
+            'render_resource_dirs = ""',
             'texlive_path = ""',
             'python_path = ""',
             'module_init = ""',
@@ -907,6 +910,7 @@ def environment_local_override_template(site_id: str | None = None) -> str:
         "# - qos: required when jobs need an explicit QoS or queue class.",
         "# - qos_priority: optional comma-separated fallback order for prompt-guided QoS routing.",
         "# - scratch_root: required private writable scratch/work directory; never commit personal paths.",
+        "# - render_resource_dirs: optional comma-separated local CJK render resource directories.",
         "# - texlive_path: optional private TeX root or bin directory when site modules do not expose TeX.",
         "# - python_path: optional preferred Python executable or environment path.",
         "# - module_init: required when the shell must source a modules init script before `module load`.",
@@ -1005,6 +1009,11 @@ def environment_doctor_payload(args: argparse.Namespace) -> dict[str, Any]:
         value = str(site_fields.get(field) or "").strip()
         if value and not Path(value).expanduser().exists():
             inaccessible_paths[field] = value
+    for field in sorted(LOCAL_OVERRIDE_LIST_PATH_FIELDS):
+        values = environment_override_list(site_fields.get(field))
+        missing = [value for value in values if not Path(value).expanduser().exists()]
+        if missing:
+            inaccessible_paths[field] = ",".join(missing)
     commands = ["sbatch", "squeue", "sinfo", "scontrol", "latexmk", "xelatex", "lualatex", "pandoc", "kpsewhich"]
     possible_missing_scheduler_fields = [
         field for field in ["account", "partition", "qos", "module_init"] if field in missing_required

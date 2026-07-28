@@ -39,17 +39,17 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Main References
 
-- `skills\core\codex-system\codex-workflow-protocol\references\escalation-rules.md`
-- `skills\core\codex-system\codex-workflow-protocol\references\live-state-delegation.md`
-- `skills\core\codex-system\codex-workflow-protocol\references\task-template.md`
-- `skills\core\codex-system\codex-workflow-protocol\references\verification-matrix.md`
-- `skills\core\codex-system\system-skills\imagegen\references\cli.md`
-- `skills\core\codex-system\system-skills\imagegen\references\codex-network.md`
-- `skills\core\codex-system\system-skills\imagegen\references\image-api.md`
-- `skills\core\codex-system\system-skills\imagegen\references\prompting.md`
-- `skills\core\codex-system\system-skills\imagegen\references\sample-prompts.md`
-- `skills\core\codex-system\system-skills\openai-docs\references\latest-model.md`
-- `skills\core\codex-system\system-skills\openai-docs\references\prompting-guide.md`
-- `skills\core\codex-system\system-skills\openai-docs\references\upgrade-guide.md`
-- `skills\core\codex-system\system-skills\plugin-creator\references\plugin-json-spec.md`
-- `skills\core\codex-system\system-skills\skill-creator\references\openai_yaml.md`
+- `skills/core/codex-system/codex-workflow-protocol/references/escalation-rules.md`
+- `skills/core/codex-system/codex-workflow-protocol/references/live-state-delegation.md`
+- `skills/core/codex-system/codex-workflow-protocol/references/task-template.md`
+- `skills/core/codex-system/codex-workflow-protocol/references/verification-matrix.md`
+- `skills/core/codex-system/system-skills/imagegen/references/cli.md`
+- `skills/core/codex-system/system-skills/imagegen/references/codex-network.md`
+- `skills/core/codex-system/system-skills/imagegen/references/image-api.md`
+- `skills/core/codex-system/system-skills/imagegen/references/prompting.md`
+- `skills/core/codex-system/system-skills/imagegen/references/sample-prompts.md`
+- `skills/core/codex-system/system-skills/openai-docs/references/latest-model.md`
+- `skills/core/codex-system/system-skills/openai-docs/references/prompting-guide.md`
+- `skills/core/codex-system/system-skills/openai-docs/references/upgrade-guide.md`
+- `skills/core/codex-system/system-skills/plugin-creator/references/plugin-json-spec.md`
+- `skills/core/codex-system/system-skills/skill-creator/references/openai_yaml.md`

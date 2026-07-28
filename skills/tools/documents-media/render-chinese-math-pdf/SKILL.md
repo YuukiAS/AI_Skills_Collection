@@ -37,7 +37,11 @@ workflow.
 3. Choose the narrowest viable route:
    - Existing project render command when documented and current.
    - Project-local render resources for fonts, TeX headers, or `texmf`.
-   - Pandoc plus XeLaTeX for Markdown with CJK and conventional math.
+   - Pandoc plus XeLaTeX for Markdown with CJK and conventional math when the
+     CJK font chain is known to render visibly.
+   - Pandoc HTML plus headless Chromium for Chinese Markdown when TeX CJK fonts
+     are missing, invisible, unstable, or taking repeated header tweaks. Use
+     `python scripts/render_markdown_pdf_chromium.py input.md output.pdf --root <project-root>`.
    - Direct XeLaTeX/LuaLaTeX for already-authored `.tex`.
    - Block with exact missing dependencies if no available route can render CJK
      safely.
@@ -57,17 +61,26 @@ workflow.
      abnormal CJK line fragmentation, and table row survival.
    - `pdffonts` for embedded/subset fonts when available.
    - `python scripts/validate_pdf_layout.py <pdf> --source <source.md>` when the
-     source is Markdown or table-heavy.
-   - `pdftoppm` or another raster preview for first/critical pages when layout,
-     table, equation, or glyph rendering is uncertain.
-8. Report the exact source, output PDF path, command(s), page count, font/text
-   checks, and any unresolved warnings. A smoke test or dry run is not a final
-   result unless the user explicitly asked only for environment probing.
+     source is Markdown or table-heavy; by default this emits a first-page PNG
+     preview beside the PDF.
+   - Always inspect at least the first-page PNG, and inspect any equation/table
+     heavy pages when risk exists. Text extraction is not proof that Chinese
+     glyphs are visible in a PDF viewer.
+8. For Chinese documents meant for an author, collaborator, or non-technical
+   reader, do a reader-facing pass before delivery: remove raw TeX/log blocks
+   unless they are the subject, avoid unnecessary English process words, keep
+   only questions that the recipient actually needs to answer, and check that
+   long paths or duplicated titles do not dominate the page.
+9. Report the exact source, output PDF path, command(s), page count, font/text
+   checks, preview PNG path, and any unresolved warnings. A smoke test or dry
+   run is not a final result unless the user explicitly asked only for
+   environment probing.
 
 ## Escalation Rules
 
-- If Pandoc fails on CJK/font setup, try a generated header and writable TeX
-  caches before stopping.
+- If Pandoc/XeLaTeX fails on CJK/font setup, try a generated header and writable
+  TeX caches once, then switch to the Chromium HTML route when it is available
+  instead of repeatedly tweaking TeX headers.
 - If generated header compilation fails because a package or font is missing,
   inspect project-local resources and TeX package availability with
   `kpsewhich`; then either switch to available fonts/packages or report the
@@ -75,15 +88,16 @@ workflow.
 - If direct compilation fails after a Markdown conversion, inspect the generated
   `.tex` around the first real error and fix source/header issues rather than
   repeatedly rerunning the same command.
-- If PDF exists but text extraction, table survival, line-fragmentation, or
-  font checks fail, treat the task as incomplete or partially complete and state
-  what stronger validation or render route is required.
+- If PDF exists but text extraction, table survival, line-fragmentation, font
+  checks, or PNG visual inspection fail, treat the task as incomplete or
+  partially complete and state what stronger validation or render route is
+  required.
 
 ## Completion States
 
 - `complete`: PDF rendered and passed command, page-count, text-extraction,
-  table/line-layout checks, and visual/font sanity checks appropriate to the
-  document.
+  table/line-layout checks, first-page PNG visual inspection, and visual/font
+  sanity checks appropriate to the document.
 - `partial_complete`: PDF rendered, but non-critical warnings or limited QA
   remain and are reported with next steps.
 - `blocked_missing_dependency`: no safe render route exists in the current

@@ -146,6 +146,7 @@ class SkillUpdateTests(unittest.TestCase):
                         'account = ""',
                         'unknown_field = "x"',
                         f'scratch_root = "{Path(tmp) / "missing-scratch"}"',
+                        f'render_resource_dirs = "{Path(tmp) / "missing-render"}"',
                         "",
                         "[sites.unknown-site]",
                         'account = "x"',
@@ -170,6 +171,7 @@ class SkillUpdateTests(unittest.TestCase):
             self.assertIn("account", diagnostics["empty_fields"])
             self.assertIn("partition", diagnostics["missing_required_fields"])
             self.assertIn("scratch_root", diagnostics["inaccessible_paths"])
+            self.assertIn("render_resource_dirs", diagnostics["inaccessible_paths"])
 
     def test_environment_doctor_reports_site_mismatch(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -46,9 +46,9 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Main References
 
-- `skills\writing\core\chinese-prose\references\chinese-prose-checklist.md`
-- `skills\writing\core\chinese-prose\references\group-meeting-chinese-report-prompt.md`
-- `skills\writing\core\chinese-prose\references\source-notes.md`
-- `skills\writing\core\scientific-prose\references\scientific-report-checklist.md`
-- `skills\writing\core\scientific-prose\references\source-notes.md`
-- `skills\writing\core\writing-fidelity\references\failure-summary.md`
+- `skills/writing/core/chinese-prose/references/chinese-prose-checklist.md`
+- `skills/writing/core/chinese-prose/references/group-meeting-chinese-report-prompt.md`
+- `skills/writing/core/chinese-prose/references/source-notes.md`
+- `skills/writing/core/scientific-prose/references/scientific-report-checklist.md`
+- `skills/writing/core/scientific-prose/references/source-notes.md`
+- `skills/writing/core/writing-fidelity/references/failure-summary.md`

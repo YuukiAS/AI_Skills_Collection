@@ -30,4 +30,4 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Main References
 
-- `skills\tools\hpc\slurm-workflows\references\site-profile-contract.md`
+- `skills/tools/hpc/slurm-workflows/references/site-profile-contract.md`

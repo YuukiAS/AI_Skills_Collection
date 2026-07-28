@@ -107,7 +107,12 @@ def validate_text(extracted_text: str, source_text: str | None = None) -> dict[s
     return {"errors": errors, "warnings": warnings, "fragmentation": fragmentation, "table_survival": table}
 
 
-def validate_pdf(pdf: Path, source: Path | None = None, preview_dir: Path | None = None) -> dict[str, Any]:
+def validate_pdf(
+    pdf: Path,
+    source: Path | None = None,
+    preview_dir: Path | None = None,
+    require_preview: bool = True,
+) -> dict[str, Any]:
     result: dict[str, Any] = {"pdf": str(pdf), "errors": [], "warnings": []}
     if not pdf.exists() or pdf.stat().st_size == 0:
         result["errors"].append("PDF missing or empty")
@@ -142,13 +147,19 @@ def validate_pdf(pdf: Path, source: Path | None = None, preview_dir: Path | None
     result["text_checks"] = text_result
     result["errors"].extend(text_result["errors"])
     result["warnings"].extend(text_result["warnings"])
+    if preview_dir is None and require_preview:
+        preview_dir = pdf.parent / f"{pdf.stem}_preview"
     if preview_dir:
         preview_dir.mkdir(parents=True, exist_ok=True)
         prefix = preview_dir / pdf.stem
         code, preview_output = run_command(["pdftoppm", "-f", "1", "-l", "1", "-r", "120", "-png", str(pdf), str(prefix)])
         result["preview_prefix"] = str(prefix)
+        preview_paths = sorted(str(path) for path in preview_dir.glob(f"{pdf.stem}-*.png"))
+        result["preview_paths"] = preview_paths
         if code != 0:
             result["warnings"].append(f"pdftoppm preview failed: {preview_output.strip()}")
+        elif not preview_paths:
+            result["warnings"].append("pdftoppm reported success but no preview PNG was found")
     return result
 
 
@@ -157,9 +168,10 @@ def main() -> int:
     parser.add_argument("pdf", type=Path)
     parser.add_argument("--source", type=Path)
     parser.add_argument("--preview-dir", type=Path)
+    parser.add_argument("--no-preview", action="store_true", help="Skip first-page PNG generation.")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
-    result = validate_pdf(args.pdf, source=args.source, preview_dir=args.preview_dir)
+    result = validate_pdf(args.pdf, source=args.source, preview_dir=args.preview_dir, require_preview=not args.no_preview)
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
     else:
@@ -169,6 +181,8 @@ def main() -> int:
             print(f"WARNING: {warning}")
         print(f"pages: {result.get('pages')}")
         print(f"fonts_embedded: {result.get('fonts_embedded')}")
+        if result.get("preview_paths"):
+            print("preview_png: " + ", ".join(result["preview_paths"]))
     return 1 if result["errors"] else 0
 
 
