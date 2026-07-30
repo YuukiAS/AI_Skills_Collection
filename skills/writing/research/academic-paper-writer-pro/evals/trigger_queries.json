@@ -1,0 +1,17 @@
+{
+  "positive": [
+    "把这个扫描 PDF 恢复成可编辑 DOCX，并保留公式、表格和图注。",
+    "Convert this manuscript markdown into a Word document using the journal template.",
+    "整理这份论文的中间文件和最终 DOCX 输出，检查排版是否能交付。",
+    "从断点继续 OCR 这篇长 PDF，最后生成 Word 和参考文献文件。"
+  ],
+  "negative": [
+    "帮我从实验结果写论文初稿。",
+    "像审稿人一样验收这篇论文的 claims。"
+  ],
+  "near_miss": [
+    "润色这段英文摘要。",
+    "把论文做成组会 PPT。"
+  ],
+  "notes": "Trigger on document recovery, formatting, OCR, DOCX/Markdown conversion, and final file delivery; route writing and review to research-writing skills."
+}

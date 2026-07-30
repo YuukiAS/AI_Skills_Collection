@@ -2,7 +2,10 @@
   "positive": [
     "Polish this report but do not delete anything or change the Chinese/English mix.",
     "Fix OCR and formula spacing in this LaTeX/PDF while preserving source wording.",
-    "The previous version changed my headings and removed content; do a source-faithful final pass."
+    "The previous version changed my headings and removed content; do a source-faithful final pass.",
+    "Before rendering this PDF, make sure the title uses the actual selected best result, not month shorthand.",
+    "Fix this Markdown final report so it does not call the method final unless the evidence supports that status.",
+    "The last draft used old date labels and invented lifecycle names; preserve the facts and correct the version naming."
   ],
   "negative": [
     "Write a brand new blog post from scratch.",

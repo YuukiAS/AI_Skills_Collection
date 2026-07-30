@@ -1,0 +1,16 @@
+{
+  "positive": [
+    "Stress-test this scientific claim for weak assumptions and alternative explanations.",
+    "帮我批判性审视这个实验结论，看看证据够不够。",
+    "Find confounders, missing controls, and causal gaps in this result interpretation."
+  ],
+  "negative": [
+    "Convert a DOCX to Markdown.",
+    "Generate a decorative poster image."
+  ],
+  "near_miss": [
+    "Write the introduction section from scratch.",
+    "Make a journal club slide deck."
+  ],
+  "notes": "Trigger on scientific reasoning audits; do not force generated schematics."
+}

@@ -1,0 +1,16 @@
+{
+  "positive": [
+    "Generate testable hypotheses from these preliminary results.",
+    "帮我把这些观察整理成可验证的科研假设和实验计划。",
+    "Propose mechanistic hypotheses and validation experiments for this dataset."
+  ],
+  "negative": [
+    "Convert this PDF to Markdown.",
+    "Make slides from this manuscript."
+  ],
+  "near_miss": [
+    "Critique this hypothesis for weak assumptions.",
+    "Search the literature for prior work only."
+  ],
+  "notes": "Hypothesis generation may route to visuals for complex mechanisms, but figures are conditional."
+}

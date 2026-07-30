@@ -1,0 +1,17 @@
+{
+  "positive": [
+    "把这些实验结果整理成论文主线，判断哪些结果能写成 claim。",
+    "Plan the manuscript workflow from evidence ledger to submission package.",
+    "Before writing, build a claim-evidence matrix and section contracts for this paper.",
+    "验收这篇 Markdown/PDF 成稿：是不是最终版本、best row 和 audit result 有没有混。"
+  ],
+  "negative": [
+    "Polish this single paragraph for grammar only.",
+    "Search for papers about transformers in medical imaging."
+  ],
+  "near_miss": [
+    "Act as a reviewer and score this submitted manuscript.",
+    "Translate this Chinese report into English."
+  ],
+  "notes": "Use for paper process, result-to-claim gates, final artifact QA, and routing to downstream writing/review/fidelity skills."
+}

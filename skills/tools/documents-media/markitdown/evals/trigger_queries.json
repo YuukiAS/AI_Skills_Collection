@@ -1,0 +1,17 @@
+{
+  "positive": [
+    "Convert this PDF to clean Markdown.",
+    "把这个 DOCX 转成 Markdown，尽量保留标题、表格和图片说明。",
+    "Extract the text and tables from this PPTX into markdown notes.",
+    "Convert these scanned images into Markdown with OCR."
+  ],
+  "negative": [
+    "Write a new manuscript from these results.",
+    "Design a new infographic for this report."
+  ],
+  "near_miss": [
+    "Render this Markdown as PDF.",
+    "Fix the Chinese prose in this Markdown report."
+  ],
+  "notes": "Conversion does not imply generated diagrams; visuals are routed only when requested or needed for reconstructed source figures."
+}

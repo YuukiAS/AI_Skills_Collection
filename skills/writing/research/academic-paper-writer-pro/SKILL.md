@@ -1,6 +1,6 @@
 ---
 name: academic-paper-writer-pro
-description: 基于规范目录结构的学术论文排版助手。支持 PDF / .doc / .docx / .md 多种输入格式，自动选择 OCR 管道、重排版管道或 MD 直转管道。包含环境清理确认、断点恢复、智能配图裁剪、逐单元增量生成 DOCX、双单元质量核查、中间状态保存和 BibTeX 参考文献管理。所有中间文件放 resources/，最终产物放 outputs/。
+description: 学术论文排版、OCR恢复、DOCX/Markdown整理和模板化交付工作流。用于扫描 PDF、DOC/DOCX、Markdown 到 Word/PDF 的结构修复、断点恢复、参考文献整理和最终文件验收；内容写作、审稿和事实保真应路由到 research-writing 与 writing-fidelity。
 status: active
 provenance: unknown
 trusted: false
@@ -8,15 +8,16 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-28
 profile_tags:
 recommended_scope: project
 ---
-# 学术论文专家（主路由）
+# 学术论文排版与交付工作流
 
 > [!IMPORTANT]
-> 本文件是**主路由入口 + Pipeline B/C 定义 + 排版格式规范库**。Pipeline A（OCR 管道）的详细规范请参见 `ocr_kb/SKILL.md`。
-> 所有管道的 DOCX 生成均使用 `docx/SKILL.md` 中定义的方法（docx-js 创建新文档 / unpack-edit-pack 编辑现有文档）。
+> 本文件负责学术文档的 OCR、重排版、DOCX/Markdown 整理、参考文献整理和最终文件交付。它不是论文内容生成入口。
+> 需要写作、改写、审稿、结果到主张判断或中文终审时，转交 `paper-workflow-orchestrator`、`scientific-writing`、`peer-review`、`writing-fidelity` 或 `chinese-prose`。
+> 旧的 A/B/C 管道名称仅作为内部处理模式，不要求用户用这些词触发。
 
 ## 0. 目录规范 (Directory Convention)
 
@@ -42,9 +43,7 @@ recommended_scope: project
 │   └── SKILL.md
 ├── pdf/                # PDF 操作 Skill
 │   └── SKILL.md
-├── content_generation/ # Pipeline D: 论文内容智能生成 Skill
-│   └── SKILL.md
-├── SKILL.md            # 本文件（主入口路由 + Pipeline B/C + 排版规范库）
+├── SKILL.md            # 本文件（排版、OCR、DOCX/Markdown 整理与交付工作流）
 └── <source>.*          # 用户提供的原始文件 (.pdf / .doc / .docx / .md / 项目代码目录)
 ```
 
@@ -55,13 +54,11 @@ recommended_scope: project
 > [!CAUTION]
 > 以下四项检查必须在执行**任何**写作或排版动作之前**全部完成**，不可跳过。
 
-### 1.0 技能版本检查与自动更新 (Version Check & Auto Update)
+### 1.0 版本与来源边界
 
-在每次启动处理时，必须首先对比用户本地的 skill 版本和现在的最新版本：
-- 运行相应的命令（如 `git fetch origin && git status -uno`）检测本地仓库状态。
-- **如果本地版本与最新版本不一致**：应当主动提示并帮助用户自动更新：
-  > "检测到 `academic-paper-writer-pro` 技能存在最新版本，是否需要帮您自动更新？回复 **更新** 进行升级，或 **跳过** 继续当前任务。"
-- 若用户选择更新，自动执行更新命令（如 `git pull` 或 `npx skills add https://github.com/tfboy1/academic-paper-writer --skill academic-paper-writer-pro`），待更新完成后再进入下一步。
+不要在运行时自动执行仓库更新、第三方 skill 安装命令或自我更新流程。若怀疑本地 skill 过旧，只报告当前文件路径、可见版本/日期和建议用户在单独维护任务中更新。
+
+本 skill 只处理文档恢复、排版、转换和交付文件；不要把正文写作、审稿或事实判断塞回旧内容生成管线。
 
 ### 1.1 环境清理确认
 
@@ -70,7 +67,7 @@ recommended_scope: project
 - **若存在旧文件**：列出文件清单，明确询问用户：
   > "检测到上次任务的中间文件（N 个页面/章节、M 个 Markdown、K 张配图）。是否删除以避免干扰？回复 **删除** 清空，或 **保留** 继续上次任务。"
 - **若不存在旧文件**：跳过此步。
-- **用户选择"删除"时**：删除 `resources/pages/*`、`resources/md/*`、`resources/figures/*`、`resources/checkpoint.json`、`resources/config.json`。`resources/scripts/` **不删除**（脚本可复用）。
+- **用户明确选择"删除"时**：只删除本任务管理的 `resources/pages/*`、`resources/md/*`、`resources/figures/*`、`resources/checkpoint.json`、`resources/config.json`。先列出目标，避免删除用户原始文件；`resources/scripts/` **不删除**（脚本可复用）。
 - **用户选择"保留"时**：读取 `resources/checkpoint.json`，进入断点恢复流程（见 §1.3）。
 
 ### 1.2 源文件确认与管道选择
@@ -242,18 +239,16 @@ python docx/scripts/office/pack.py resources/unpacked/ outputs/<name>_final_<dat
 
 ---
 
-### 3.4 Pipeline D — 内容生成管道（项目记录/代码输入）
+### 3.4 内容写作转交流程
 
-适用场景：用户没有完整的论文草稿，只有代码、实验数据或笔记，希望基于现有项目素材智能生成符合学术格式的论文初稿。
+当任务从排版/转换转向“写论文、改论文、验收主张、回应审稿意见、中文终稿”时，不调用旧内容生成入口。按任务转交：
 
-详情操作规范见 `content_generation/SKILL.md`，主要流程概览：
-1. 分析用户提供的各种技术素材，提取并与用户确认论文整体大纲结构。
-2. 以逐节自回归生成的方式构建高质量学术文本，保存至 `resources/md/section_N.md`。
-3. 系统在生成完毕后，自动将其流转到 Pipeline C（MD 直转管道），复用其排版能力输出最终样式。
+- `paper-workflow-orchestrator`：论文主线、claim-evidence、结果到主张、投稿前验收。
+- `scientific-writing` / `scientific-prose`：英文科研段落、摘要、方法、结果和讨论改写。
+- `peer-review`：审稿口径、风险评估、rebuttal 和 re-review。
+- `writing-fidelity` / `chinese-prose`：终稿保真、版本标签、中文为主和说人话验收。
 
----
-
-### 3.5 所有管道的通用规则
+### 3.5 所有处理模式的通用规则
 
 以下规则不分管道，**强制执行**：
 

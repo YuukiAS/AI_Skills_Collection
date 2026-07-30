@@ -48,7 +48,7 @@ description: 基于代码仓库、笔记、实验数据或论文要求，全自�
 - **图表插入占位 (Proposed Media)**：标明每节应补充哪类架构图或哪几类对比表格。
 
 ### 2.3 用户审查卡点 (Mandatory User Review)
-生成大纲后，**必须**调用 `notify_user` 强阻断大模型执行流等待人工确认或修改。
+生成大纲后，**必须**保存 checkpoint，并向用户说明需要确认的大纲或修改点。
 
 ## 3. 超大项目上下文控制机制 (Handling Extremely Large Repositories)
 

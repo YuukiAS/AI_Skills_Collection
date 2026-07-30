@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-28
 profile_tags:
 recommended_scope: project
 license: MIT license
@@ -46,25 +46,25 @@ This skill creates research posters using HTML/CSS, which can then be exported t
 
 ## AI-Powered Visual Element Generation
 
-**STANDARD WORKFLOW: Generate ALL major visual elements using AI before creating the HTML poster.**
+**STANDARD WORKFLOW: Plan poster visuals before creating the PPTX/HTML poster; use existing evidence figures first and generate new visuals only when needed.**
 
 This is the recommended approach for creating visually compelling posters:
 1. Plan all visual elements needed (hero image, intro, methods, results, conclusions)
-2. Generate each element using scientific-schematics or Nano Banana Pro
+2. Generate new elements with a visualization skill only when existing evidence figures are insufficient
 3. Assemble generated images in the HTML template
 4. Add text content around the visuals
 
-**Target: 60-70% of poster area should be AI-generated visuals, 30-40% text.**
+**Target: A poster should be visually led, but generated visuals are optional and must serve the evidence and venue, 30-40% text.**
 
 ---
 
 ### CRITICAL: Poster-Size Font Requirements
 
-**⚠️ ALL text within AI-generated visualizations MUST be poster-readable.**
+**⚠️ ALL text within Visualizations should be poster-readable.**
 
 When generating graphics for posters, you MUST include font size specifications in EVERY prompt. Poster graphics are viewed from 4-6 feet away, so text must be LARGE.
 
-**MANDATORY prompt requirements for EVERY poster graphic:**
+**Prompt requirements when generating new visuals for EVERY poster graphic:**
 
 ```
 POSTER FORMAT REQUIREMENTS (STRICTLY ENFORCE):
@@ -401,7 +401,7 @@ body {
 
 This skill works with:
 - **Scientific Schematics**: Generate all poster diagrams and flowcharts
-- **Generate Image / Nano Banana Pro**: Create stylized graphics and hero images
+- **Generate Image**: Create stylized graphics and hero images when a generated visual is needed
 - **LaTeX Posters**: DEFAULT skill for poster creation (use this instead unless PPTX explicitly requested)
 
 ---

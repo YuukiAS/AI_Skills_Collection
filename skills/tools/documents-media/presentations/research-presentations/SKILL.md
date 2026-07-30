@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-28
 profile_tags:
   - presentations
   - research-writing
@@ -26,6 +26,7 @@ Use this skill for research presentation planning and quality control. File crea
 - Do not use for minor text, color, alignment, or object edits to an existing PPTX/Google Slides deck.
 - Do not use generated whole-slide images as a substitute for editable PPTX unless the user explicitly asks for image/PDF slides.
 - Use presentation themes/templates for deck-wide color. Scientific palettes in `palette/` may inform embedded figures, but raw palette ids should not become the slide theme.
+- Choose the presentation format from the user's deliverable: Beamer/PDF for archival academic slides, PPTX or Slides when the user needs an editable/collaborative deck, and Markdown outlines when they only need structure. Do not default every academic deck to Beamer.
 - Use `../../shared/deck-plan.schema.json` as the default intermediate representation.
 
 ## Narrative

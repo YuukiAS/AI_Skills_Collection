@@ -2,6 +2,7 @@
 
 Created: 2026-06-01  
 Skill: `writing/core/chinese-prose`
+Status: merged into `SKILL.md` on 2026-07-28; keep this file as background evidence for future refinements.
 
 ## Why this TODO exists
 

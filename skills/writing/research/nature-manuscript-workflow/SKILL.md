@@ -1,6 +1,6 @@
 ---
 name: nature-manuscript-workflow
-description: Plan, draft, revise, and audit Nature-style manuscripts, including claim framing, figure logic, data availability, submission readiness, and reviewer response. Use when the user targets Nature-family journals or asks for Nature-style scientific writing.
+description: Plan, draft, revise, and audit broad-journal or high-impact manuscripts, including claim framing, figure logic, data availability, submission readiness, and reviewer response. Use for story-driven journal strategy, broad-audience manuscript framing, figure-to-claim alignment, and Nature-family targets when explicit.
 status: active
 provenance: external-adapted
 source_repo_url: https://github.com/Boom5426/Nature-Paper-Skills
@@ -22,19 +22,19 @@ recommended_scope: project
 metadata:
   skill-author: AI Skills Collection maintainers with recorded upstream sources
 ---
-# Nature Manuscript Workflow
+# Broad-Journal Manuscript Workflow
 
-Use this for Nature-family manuscript strategy. It complements general `scientific-writing`; it does not replace venue-specific author instructions.
+Use this for broad-audience or high-impact manuscript strategy, including Nature-family targets when explicit. It complements general `scientific-writing`; it does not replace current venue-specific author instructions.
 
 ## Workflow
 
-1. Identify the Nature-family target, article type, field, current manuscript state, and submission deadline.
+1. Identify the target venue family if known, article type, field, current manuscript state, audience breadth, and submission deadline.
 2. Build the claim map:
    - headline claim;
    - significance beyond technical performance;
    - main figures and their panel-level claims;
    - methods/results needed to support the scope of the claim.
-3. Audit Nature-specific risks:
+3. Audit broad-journal and submission risks:
    - overclaiming relative to evidence;
    - figure panels that are descriptive but not argumentative;
    - missing source data or code availability;
@@ -56,6 +56,6 @@ For reviewer comments, classify each point as evidence request, clarity request,
 
 ## Boundaries
 
-- Do not promise Nature compliance without checking current journal instructions.
+- Do not promise journal compliance without checking current author instructions.
 - Do not imitate a journal voice by adding hype.
 - Preserve scientific uncertainty and limitations.

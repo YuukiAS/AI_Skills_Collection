@@ -1,6 +1,6 @@
 ---
 name: markdown-mermaid-writing
-description: Comprehensive markdown and Mermaid diagram writing skill. Use when creating any scientific document, report, analysis, or visualization. Establishes text-based diagrams as the default documentation standard with full style guides (markdown + mermaid), 24 diagram type references, and 9 document templates.
+description: Markdown and Mermaid diagram writing for reports, architecture notes, methods, workflows, and scientific documentation when structure or relationships need a diagram. Use for flowcharts, pipelines, dependency maps, timelines, and evidence maps; ordinary prose reports do not require diagrams.
 status: active
 provenance: unknown
 trusted: false
@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-28
 profile_tags:
 recommended_scope: project
 license: Apache-2.0
@@ -24,10 +24,9 @@ allowed-tools: Read Write Edit Bash
 ## Overview
 
 This skill teaches you — and enforces a standard for — creating scientific documentation
-using **markdown with embedded Mermaid diagrams as the default and canonical format**.
+using **Markdown with embedded Mermaid diagrams when a diagram is the clearest way to show structure**.
 
-The core bet: a relationship expressed as a Mermaid diagram inside a `.md` file is more
-valuable than any image. It is text, so it diffs cleanly in git. It requires no build step.
+The core bet: when a relationship, workflow, timeline, dependency map, or evidence chain needs a diagram, a Mermaid diagram inside a `.md` file is often more maintainable than an image. It is text, so it diffs cleanly in git. It requires no build step.
 It renders natively on GitHub, GitLab, Notion, VS Code, and any markdown viewer. It uses
 fewer tokens than a prose description of the same relationship. And it can always be
 converted to a polished image later — but the text version remains the source of truth.
@@ -49,7 +48,7 @@ Use this skill when:
 - Producing **any diagram** — workflows, data pipelines, architectures, timelines, relationships
 - Generating **any output that will be version-controlled** — if it's going into git, it should be markdown
 - Working with **any other skill** — this skill defines the documentation layer that wraps every other output
-- Someone asks you to "add a diagram" or "visualize the relationship" — Mermaid first, always
+- Someone asks you to "add a diagram" or "visualize the relationship" where a text-based diagram is appropriate
 
 Do NOT start with Python matplotlib, seaborn, or AI image generation for structural or relational diagrams.
 Those are Phase 2 and Phase 3 — only used when Mermaid cannot express what's needed (e.g., scatter plots with real data, photorealistic images).

@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-28
 profile_tags:
 recommended_scope: project
 license: Complete terms in LICENSE.txt
@@ -31,7 +31,7 @@ To begin, create a VISUAL PHILOSOPHY (not layouts or templates) that will be int
 ### THE CRITICAL UNDERSTANDING
 - What is received: Some subtle input or instructions by the user that should be taken into account, but used as a foundation; it should not constrain creative freedom.
 - What is created: A design philosophy/aesthetic movement.
-- What happens next: Then, the same version receives the philosophy and EXPRESSES IT VISUALLY - creating artifacts that are 90% visual design, 10% essential text.
+- What happens next: Then, the implementation pass receives the philosophy and expresses it visually - creating artifacts that are 90% visual design, 10% essential text.
 
 Consider this approach:
 - Write a manifesto for an art movement
@@ -54,8 +54,8 @@ To capture the VISUAL essence, express how the philosophy manifests through:
 
 **CRITICAL GUIDELINES:**
 - **Avoid redundancy**: Each design aspect should be mentioned once. Avoid repeating points about color theory, spatial relationships, or typographic principles unless adding new depth.
-- **Emphasize craftsmanship REPEATEDLY**: The philosophy MUST stress multiple times that the final work should appear as though it took countless hours to create, was labored over with care, and comes from someone at the absolute top of their field. This framing is essential - repeat phrases like "meticulously crafted," "the product of deep expertise," "painstaking attention," "master-level execution."
-- **Leave creative space**: Remain specific about the aesthetic direction, but concise enough that the next Claude has room to make interpretive choices also at a extremely high level of craftmanship.
+- **Emphasize craftsmanship REPEATEDLY**: The philosophy should set a clear quality bar for careful composition, deliberate detail, and professional execution without repeating the same craft adjectives.
+- **Leave creative space**: Remain specific about the aesthetic direction, but concise enough that the implementation pass has room to make interpretive choices also at a extremely high level of craftmanship.
 
 The philosophy must guide the next version to express ideas VISUALLY, not through text. Information lives in design, not paragraphs.
 
@@ -87,7 +87,7 @@ Visual expression: Grid-based precision, bold photography or stark graphics, dra
 - **VISUAL PHILOSOPHY**: Create an aesthetic worldview to be expressed through design
 - **MINIMAL TEXT**: Always emphasize that text is sparse, essential-only, integrated as visual element - never lengthy
 - **SPATIAL EXPRESSION**: Ideas communicate through space, form, color, composition - not paragraphs
-- **ARTISTIC FREEDOM**: The next Claude interprets the philosophy visually - provide creative room
+- **ARTISTIC FREEDOM**: The next the agent interprets the philosophy visually - provide creative room
 - **PURE DESIGN**: This is about making ART OBJECTS, not documents with decoration
 - **EXPERT CRAFTSMANSHIP**: Repeatedly emphasize the final work must look meticulously crafted, labored over with care, the product of countless hours by someone at the top of their field
 
@@ -128,7 +128,7 @@ Output the final result as a single, downloadable .pdf or .png file, alongside t
 
 ## FINAL STEP
 
-**IMPORTANT**: The user ALREADY said "It isn't perfect enough. It must be pristine, a masterpiece if craftsmanship, as if it were about to be displayed in a museum."
+**IMPORTANT**: When the user asks for refinement, treat it as a request for more coherent craft, sharper composition, and cleaner execution rather than extra decoration.
 
 **CRITICAL**: To refine the work, avoid adding more graphics; instead refine what has been created and make it extremely crisp, respecting the design philosophy and the principles of minimalism entirely. Rather than adding a fun filter or refactoring a font, consider how to make the existing composition more cohesive with the art. If the instinct is to call a new function or draw a new shape, STOP and instead ask: "How can I make what's already here more of a piece of art?"
 

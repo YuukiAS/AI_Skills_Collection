@@ -1,7 +1,7 @@
 {
   "name": "research-writing",
   "version": "4.0.0",
-  "description": "Repo reports, research documents, manuscripts, literature review, citations, and claim-evidence organization.",
+  "description": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Research Writing",
-    "shortDescription": "Repo reports, research documents, manuscripts, literature review, citations, and claim-evidence organization.",
-    "longDescription": "Repo reports, research documents, manuscripts, literature review, citations, and claim-evidence organization. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization.",
+    "longDescription": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [

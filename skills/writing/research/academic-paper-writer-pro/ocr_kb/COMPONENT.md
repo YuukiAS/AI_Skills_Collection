@@ -241,7 +241,7 @@ stderr: 转换失败时输出错误信息（不支持的 LaTeX 命令等）
 - 连续处理 **4 页**后，必须主动悬挂（suspend）：
   1. 将 `checkpoint.json` 的 `status` 设为 `"suspended"`。
   2. 保存当前 DOCX 中间版本到 `outputs/`（命名规则见 §2.4）。
-  3. 使用 `notify_user` 通知用户发送"继续"以刷新上下文窗口。
+  3. 保存 checkpoint，并说明发送“继续”后的恢复位置。
 - 恢复后读取 `checkpoint.json`，从 `current_unit` 继续。
 
 ### 2.4 中间版本命名规则

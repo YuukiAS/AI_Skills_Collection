@@ -1,6 +1,6 @@
 ---
 name: infographics
-description: Create professional infographics using Nano Banana Pro AI with smart iterative refinement. Uses Gemini 3 Pro for quality review. Integrates research-lookup and web search for accurate data. Supports 10 infographic types, 8 industry styles, and colorblind-safe palettes.
+description: Create professional infographics from text, data, or research using configured research, image-generation, and quality-review providers. Produces polished, source-faithful visual explanations for reports, presentations, education, and public communication.
 status: active
 provenance: unknown
 trusted: false
@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-28
 profile_tags:
 recommended_scope: project
 allowed-tools: Read Write Edit Bash
@@ -17,13 +17,13 @@ allowed-tools: Read Write Edit Bash
 
 ## Overview
 
-Infographics are visual representations of information, data, or knowledge designed to present complex content quickly and clearly. **This skill uses Nano Banana Pro AI for infographic generation with Gemini 3 Pro quality review and Perplexity Sonar for research.**
+Infographics are visual representations of information, data, or knowledge designed to present complex content quickly and clearly. **This skill uses configured research, image-generation, and quality-review providers for infographic generation and review.**
 
 **How it works:**
-- (Optional) **Research phase**: Gather accurate facts and statistics using Perplexity Sonar
+- (Optional) **Research phase**: Gather accurate facts and statistics using the configured research provider
 - Describe your infographic in natural language
-- Nano Banana Pro generates publication-quality infographics automatically
-- **Gemini 3 Pro reviews quality** against document-type thresholds
+- the configured image-generation provider generates publication-quality infographics automatically
+- **the configured review provider reviews quality** against document-type thresholds
 - **Smart iteration**: Only regenerates if quality is below threshold
 - Professional-ready output in minutes
 - No design skills required
@@ -39,7 +39,7 @@ Infographics are visual representations of information, data, or knowledge desig
 | draft | 6.5/10 | Working drafts |
 | default | 7.5/10 | General purpose |
 
-**Simply describe what you want, and Nano Banana Pro creates it.**
+**Simply describe what you want, and the configured image-generation provider creates it.**
 
 ## Quick Start
 
@@ -73,9 +73,9 @@ python skills/infographics/scripts/generate_infographic.py \
 ```
 
 **What happens behind the scenes:**
-1. **(Optional) Research**: Perplexity Sonar gathers accurate facts, statistics, and data
-2. **Generation 1**: Nano Banana Pro creates initial infographic following design best practices
-3. **Review 1**: **Gemini 3 Pro** evaluates quality against document-type threshold
+1. **(Optional) Research**: the configured research provider gathers accurate facts, statistics, and data
+2. **Generation 1**: the configured image-generation provider creates initial infographic following design best practices
+3. **Review 1**: **the configured review provider** evaluates quality against document-type threshold
 4. **Decision**: If quality >= threshold → **DONE** (no more iterations needed!)
 5. **If below threshold**: Improved prompt based on critique, regenerate
 6. **Repeat**: Until quality meets threshold OR max iterations reached
@@ -112,7 +112,7 @@ Use the **infographics** skill when:
 
 ### Automatic Data Gathering (`--research`)
 
-When creating infographics that require accurate, up-to-date data, use the `--research` flag to automatically gather facts and statistics using **Perplexity Sonar Pro**.
+When creating infographics that require accurate, up-to-date data, use the `--research` flag to automatically gather facts and statistics using **the configured research provider Pro**.
 
 ```bash
 # Research and generate statistical infographic
@@ -368,9 +368,9 @@ python skills/infographics/scripts/generate_infographic.py \
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  1. Generate infographic with Nano Banana Pro       │
+│  1. Generate infographic with the configured image-generation provider       │
 │                    ↓                                │
-│  2. Review quality with Gemini 3 Pro                │
+│  2. Review quality with the configured review provider                │
 │                    ↓                                │
 │  3. Score >= threshold?                             │
 │       YES → DONE! (early stop)                      │
@@ -382,7 +382,7 @@ python skills/infographics/scripts/generate_infographic.py \
 
 ### Quality Review Criteria
 
-Gemini 3 Pro evaluates each infographic on:
+the configured review provider evaluates each infographic on:
 
 1. **Visual Hierarchy & Layout** (0-2 points)
    - Clear visual hierarchy
@@ -569,4 +569,4 @@ After generating:
 
 ---
 
-Use this skill to create professional, accessible, and visually compelling infographics using the power of Nano Banana Pro AI with intelligent quality review.
+Use this skill to create professional, accessible, and visually compelling infographics using the power of the configured image-generation provider with intelligent quality review.

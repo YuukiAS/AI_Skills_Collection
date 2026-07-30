@@ -1,0 +1,17 @@
+{
+  "positive": [
+    "Make this scientific result paragraph confident without defensive wording or overclaiming.",
+    "Rewrite this limitation so it is precise but not self-undermining.",
+    "Turn these ablation notes into evidence-bounded manuscript prose.",
+    "Fix this rebuttal paragraph so it admits the issue and returns to evidence."
+  ],
+  "negative": [
+    "Find citations for this related work section.",
+    "Convert this PDF into Markdown."
+  ],
+  "near_miss": [
+    "Plan the whole paper workflow from results to submission.",
+    "Make this Chinese report sound natural."
+  ],
+  "notes": "Use as the English scientific prose pass after evidence and paper structure are known."
+}

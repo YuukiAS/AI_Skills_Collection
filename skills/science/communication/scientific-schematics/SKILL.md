@@ -1,6 +1,6 @@
 ---
 name: scientific-schematics
-description: Create publication-quality scientific diagrams using Nano Banana 2 AI with smart iterative refinement. Uses Gemini 3.1 Pro Preview for quality review.
+description: Create publication-quality scientific diagrams and schematics using configured image-generation and review providers. Use when papers, grants, presentations, posters, or educational materials need source-faithful visual illustrations, prompt planning, quality review, and iterative refinement.
 status: active
 provenance: unknown
 trusted: false
@@ -9,7 +9,7 @@ writes_files: true
 executes_code: true
 secrets_needed:
   - OPENROUTER_API_KEY
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-28
 profile_tags:
 recommended_scope: project
 license: MIT license
@@ -23,7 +23,7 @@ allowed-tools: Read Write Edit Bash
 
 ## Overview
 
-Scientific schematics and diagrams transform complex concepts into clear visual representations for publication. **This skill uses Nano Banana 2 AI for diagram generation with Gemini 3.1 Pro Preview quality review.**
+Scientific schematics and diagrams transform complex concepts into clear visual representations for publication. **This skill uses the configured image-generation and review providers for diagram generation and quality review.**
 
 For schematic color choices, call the shared palette workflow rather than
 inventing a diagram-specific palette. Use `publication-figure-palettes` or
@@ -33,8 +33,8 @@ experimental and non-official.
 
 **How it works:**
 - Describe your diagram in natural language
-- Nano Banana 2 generates publication-quality images automatically
-- **Gemini 3.1 Pro Preview reviews quality** against document-type thresholds
+- the configured image-generation provider generates publication-quality images automatically
+- **the configured review provider reviews quality** against document-type thresholds
 - **Smart iteration**: Only regenerates if quality is below threshold
 - Publication-ready output in minutes
 - No coding, templates, or manual drawing required
@@ -52,11 +52,11 @@ experimental and non-official.
 | presentation | 6.5/10 | Slides, talks |
 | default | 7.5/10 | General purpose |
 
-**Simply describe what you want, and Nano Banana 2 creates it.** All diagrams are stored in the figures/ subfolder and referenced in papers/posters.
+**Simply describe what you want, and the configured image-generation provider creates it.** All diagrams are stored in the figures/ subfolder and referenced in papers/posters.
 
 ## Quick Start: Generate Any Diagram
 
-Create any scientific diagram by simply describing it. Nano Banana 2 handles everything automatically with **smart iteration**:
+Create any scientific diagram by simply describing it. the configured image-generation provider handles everything automatically with **smart iteration**:
 
 ```bash
 # Generate for journal paper (highest quality threshold: 8.5/10)
@@ -73,8 +73,8 @@ python scripts/generate_schematic.py "Complex circuit diagram with op-amp, resis
 ```
 
 **What happens behind the scenes:**
-1. **Generation 1**: Nano Banana 2 creates initial image following scientific diagram best practices
-2. **Review 1**: **Gemini 3.1 Pro Preview** evaluates quality against document-type threshold
+1. **Generation 1**: the configured image-generation provider creates initial image following scientific diagram best practices
+2. **Review 1**: **the configured review provider** evaluates quality against document-type threshold
 3. **Decision**: If quality >= threshold → **DONE** (no more iterations needed!)
 4. **If below threshold**: Improved prompt based on critique, regenerate
 5. **Repeat**: Until quality meets threshold OR max iterations reached
@@ -143,7 +143,7 @@ This skill should be used when:
 
 ## How to Use This Skill
 
-**Simply describe your diagram in natural language.** Nano Banana 2 generates it automatically:
+**Simply describe your diagram in natural language.** the configured image-generation provider generates it automatically:
 
 ```bash
 python scripts/generate_schematic.py "your diagram description" -o output.png
@@ -169,7 +169,7 @@ python scripts/generate_schematic.py "your diagram description" -o output.png
 
 ---
 
-# AI Generation Mode (Nano Banana 2 + Gemini 3.1 Pro Preview Review)
+# AI Generation Mode (the configured image-generation provider + the configured review provider Review)
 
 ## Smart Iterative Refinement Workflow
 
@@ -179,9 +179,9 @@ The AI generation system uses **smart iteration** - it only regenerates if quali
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  1. Generate image with Nano Banana 2             │
+│  1. Generate image with the configured image-generation provider             │
 │                    ↓                                │
-│  2. Review quality with Gemini 3.1 Pro Preview                │
+│  2. Review quality with the configured review provider                │
 │                    ↓                                │
 │  3. Score >= threshold?                             │
 │       YES → DONE! (early stop)                      │
@@ -199,9 +199,9 @@ Scientific diagram guidelines + User request
 
 **Output:** `diagram_v1.png`
 
-### Quality Review by Gemini 3.1 Pro Preview
+### Quality Review by the configured review provider
 
-Gemini 3.1 Pro Preview evaluates the diagram on:
+the configured review provider evaluates the diagram on:
 1. **Scientific Accuracy** (0-2 points) - Correct concepts, notation, relationships
 2. **Clarity and Readability** (0-2 points) - Easy to understand, clear hierarchy
 3. **Label Quality** (0-2 points) - Complete, readable, consistent labels
@@ -238,10 +238,10 @@ VERDICT: ACCEPTABLE (for poster, threshold 7.0)
 ### Subsequent Iterations (Only If Needed)
 
 If quality is below threshold, the system:
-1. Extracts specific issues from Gemini 3.1 Pro Preview's review
+1. Extracts specific issues from the configured review provider's review
 2. Enhances the prompt with improvement instructions
-3. Regenerates with Nano Banana 2
-4. Reviews again with Gemini 3.1 Pro Preview
+3. Regenerates with the configured image-generation provider
+4. Reviews again with the configured review provider
 5. Repeats until threshold met or max iterations reached
 
 ### Review Log
@@ -437,7 +437,7 @@ python scripts/generate_schematic.py "complex diagram" -o diagram.png --iteratio
 python scripts/generate_schematic.py "diagram" -o out.png -v
 ```
 
-**Note:** The Nano Banana 2 AI generation system includes automatic quality review in its iterative refinement process. Each iteration is evaluated for scientific accuracy, clarity, and accessibility.
+**Note:** The the configured image-generation provider generation system includes automatic quality review in its iterative refinement process. Each iteration is evaluated for scientific accuracy, clarity, and accessibility.
 
 ## Best Practices Summary
 

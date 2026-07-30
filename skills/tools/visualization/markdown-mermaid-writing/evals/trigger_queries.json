@@ -1,0 +1,17 @@
+{
+  "positive": [
+    "Add a Mermaid flowchart for this method pipeline in the Markdown report.",
+    "画一个文本版架构图，说明这些模块怎么调用。",
+    "Create a Mermaid timeline for this experiment workflow.",
+    "Turn this claim-evidence relationship into a Markdown diagram."
+  ],
+  "negative": [
+    "Polish this plain Chinese report without diagrams.",
+    "Convert this PDF into Markdown text."
+  ],
+  "near_miss": [
+    "Make a bitmap schematic for a paper figure.",
+    "Create a PowerPoint deck."
+  ],
+  "notes": "Use diagrams when structure matters; ordinary prose does not require Mermaid."
+}

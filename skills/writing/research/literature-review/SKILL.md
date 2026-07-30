@@ -1,6 +1,6 @@
 ---
 name: literature-review
-description: Conduct comprehensive, systematic literature reviews using multiple academic databases (PubMed, arXiv, bioRxiv, Semantic Scholar, etc.).
+description: Conduct literature reviews and single-paper evidence cards. Use for systematic reviews, related work, paper精读, paper cards, claim-evidence extraction from one paper/PDF/arXiv/DOI, method-map reconstruction, research-gap synthesis, and citation-backed writing.
 status: active
 provenance: unknown
 trusted: false
@@ -34,41 +34,30 @@ Use this skill when:
 - Investigating the state of the art in a research domain
 - Identifying research gaps and future directions
 - Requiring verified citations and professional formatting
+- Creating a single-paper deep reading card, evidence card, method map, or paper card
+- Extracting a claim-evidence chain, method map, limitations, and research ideas from one supplied paper/PDF/arXiv/DOI
 
-## Visual Enhancement with Scientific Schematics
 
-**⚠️ MANDATORY: Every literature review MUST include at least 1-2 AI-generated figures using the scientific-schematics skill.**
+## Single-Paper Deep Reading Card
 
-This is not optional. Literature reviews without visual elements are incomplete. Before finalizing any document:
-1. Generate at minimum ONE schematic or diagram (e.g., PRISMA flow diagram for systematic reviews)
-2. Prefer 2-3 figures for comprehensive reviews (search strategy flowchart, thematic synthesis diagram, conceptual framework)
+Use this sub-workflow when the user asks to deeply read one difficult paper, build a paper card, reconstruct a method map, analyze one PDF/arXiv/DOI, map an experiment-to-claim chain, or extract research ideas from a single source. Do not use it for full bilingual translation, formal peer review, or batch literature monitoring.
 
-**How to generate figures:**
-- Use the **scientific-schematics** skill to generate AI-powered publication-quality diagrams
-- Simply describe your desired diagram in natural language
-- Nano Banana Pro will automatically generate, review, and refine the schematic
+1. Establish the source boundary first: full paper with figures/tables, text without layout, abstract-only metadata, or user-provided excerpt. If the source is partial, label unsupported sections as `Not assessable from supplied material`.
+2. Build an evidence inventory before analysis: bibliographic metadata, research question, claimed contribution, method components, assumptions, main figures/tables/equations, experiments, baselines, metrics, reported results, and author-stated limitations.
+3. Build a claim-evidence matrix linking each central claim to a stable pointer such as page, section, figure, table, equation, paragraph/block id, DOI/arXiv metadata, or user excerpt. Do not invent page numbers when extraction is unreliable.
+4. Reconstruct the paper's argument as: problem -> prior limitation -> core insight -> design choice -> required evidence -> supplied experiment or analysis -> bounded conclusion.
+5. Keep author-acknowledged limitations separate from agent analysis. Author limitations contain only what the source states; agent analysis contains alternative explanations, missing controls, failure cases, and validation ideas.
+6. Produce a concise paper card with these sections when useful: basic information, one-sentence summary, research question, background path, pain points, core idea, method overview, module breakdown, essential formulas, experiment evidence chain, bounded conclusions, author limitations, critical analysis, knowledge learned, connections to existing work, and candidate research ideas.
+7. Label external context explicitly as `paper-only`, `targeted external check`, or `externally verified`. Do not present the paper's own related-work framing as independently verified field history.
+8. Treat generated research ideas as hypotheses. For each idea, include originating limitation or observation, core hypothesis, delta from the paper, initial method, validation plan, failure modes, and novelty status (`unverified`, `partially checked`, or `prior-art checked`).
 
-**How to generate schematics:**
-```bash
-python scripts/generate_schematic.py "your diagram description" -o figures/output.png
-```
+Source distilled from `Yuan1z0825/nature-skills` `nature-paper-card` at `1562ab71e5ae`; see `docs/provenance/RESEARCH_SKILL_REPOS_2026_07_28.md`.
 
-The AI will automatically:
-- Create publication-quality images with proper formatting
-- Review and refine through multiple iterations
-- Ensure accessibility (colorblind-friendly, high contrast)
-- Save outputs in the figures/ directory
+## Visual and Diagram Routing
 
-**When to add schematics:**
-- PRISMA flow diagrams for systematic reviews
-- Literature search strategy flowcharts
-- Thematic synthesis diagrams
-- Research gap visualization maps
-- Citation network diagrams
-- Conceptual framework illustrations
-- Any complex concept that benefits from visualization
+Do not add diagrams unconditionally. Use a visual only when it helps the requested literature deliverable: PRISMA/search-flow diagrams for systematic reviews, method maps for single-paper deep reading, thematic synthesis maps, citation networks, research-gap maps, or presentation-ready summaries.
 
-For detailed guidance on creating schematics, refer to the scientific-schematics skill documentation.
+Route visual work to `markdown-mermaid-writing` for text-first diagrams, `scientific-visualization` for data-driven plots, `scientific-schematics` for publication-style conceptual figures, and presentation skills for decks or journal-club materials. A summary-only request can remain text-only.
 
 ---
 

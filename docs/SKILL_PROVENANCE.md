@@ -5,15 +5,15 @@ This report records what can be proven from files currently in this repository. 
 ## Summary
 
 - Scope: `active_and_non_archived`
-- Skills audited: 150
+- Skills audited: 149
 - Skills with explicit source fields: 11
 - User-authored skills: 18
 - External adapted skills: 11
 - External vendored skills: 0
 - Generated skills: 0
 - Local legacy skills: 6
-- Unknown-origin historical skills: 115
-- Skills containing URLs in the body: 67
+- Unknown-origin historical skills: 114
+- Skills containing URLs in the body: 66
 - Skills containing local license files: 11
 
 ## Provenance Counts
@@ -22,7 +22,7 @@ This report records what can be proven from files currently in this repository. 
 | --- | --- |
 | external-adapted | 11 |
 | local | 6 |
-| unknown | 115 |
+| unknown | 114 |
 | user-authored | 18 |
 
 ## User Authored
@@ -62,7 +62,7 @@ This report records what can be proven from files currently in this repository. 
 | citation-verification | skills/writing/research/citation-verification | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from citation-check-skill, Nature-Paper-Skills citation-verifier/reference-audit, claude-scholar citation-verification, and paperpipe verification workflows.", "source_path": ".", "source_ref": "b9deb7077099f56b05c9b6ecea744c2ca0a6d324", "source_repo_url": "https://github.com/serenakeyitan/citation-check-skill"} |
 | latex-paper-authoring | skills/writing/research/latex-paper-authoring | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from latex-paper-skills, latex-document-skill, claude-scholar LaTeX template organizer, and existing render-chinese-math-pdf practice.", "source_path": ".", "source_ref": "d0f106108cb09e448604a56ce973d35b340cf497", "source_repo_url": "https://github.com/yunshenwuchuxun/latex-paper-skills"} |
 | nature-manuscript-workflow | skills/writing/research/nature-manuscript-workflow | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from Nature-Paper-Skills, nature-skills, and claude-scholar Nature writing/response/data skills.", "source_path": ".", "source_ref": "44cff42ac22a5ac4dcfb7ba01b2e81c21d689ea6", "source_repo_url": "https://github.com/Boom5426/Nature-Paper-Skills"} |
-| paper-workflow-orchestrator | skills/writing/research/paper-workflow-orchestrator | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from PaperSpine, academic-research-skills, Nature-Paper-Skills, paper-writing-skill, and Research-Paper-Writing-Skills; see docs/provenance/INTEGRATION_HISTORY.md.", "source_path": ".", "source_ref": "d4529208cda72aa075767611b0265b95b709b550", "source_repo_url": "https://github.com/WUBING2023/PaperSpine"} |
+| paper-workflow-orchestrator | skills/writing/research/paper-workflow-orchestrator | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from recorded paper-workflow sources; see docs/provenance/INTEGRATION_HISTORY.md.", "source_path": ".", "source_ref": "d4529208cda72aa075767611b0265b95b709b550", "source_repo_url": "https://github.com/WUBING2023/PaperSpine"} |
 
 ## External Vendored
 
@@ -194,7 +194,6 @@ None.
 | seaborn | skills/tools/visualization/seaborn | unknown |  |
 | theme-factory | skills/tools/visualization/theme-factory | unknown |  |
 | academic-paper-writer-pro | skills/writing/research/academic-paper-writer-pro | unknown |  |
-| content-generation | skills/writing/research/content-generation | unknown |  |
 | literature-review | skills/writing/research/literature-review | unknown |  |
 | ocr-kb | skills/writing/research/ocr-kb | unknown |  |
 | peer-review | skills/writing/research/peer-review | unknown |  |
@@ -272,7 +271,6 @@ URLs below are evidence of related projects or references found in skill bodies.
 | markdown-mermaid-writing | skills/tools/visualization/markdown-mermaid-writing | 3 | https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/, https://github.com/SuperiorByteWorks-LLC/agent-project, https://mermaid.js.org/ |
 | matplotlib | skills/tools/visualization/matplotlib | 4 | https://matplotlib.org/, https://matplotlib.org/cheatsheets/, https://matplotlib.org/stable/gallery/index.html |
 | plotly | skills/tools/visualization/plotly | 3 | https://community.plotly.com/, https://plotly.com/python-api-reference/, https://plotly.com/python/ |
-| academic-paper-writer-pro | skills/writing/research/academic-paper-writer-pro | 1 | https://github.com/tfboy1/academic-paper-writer |
 | literature-review | skills/writing/research/literature-review | 10 | http://www.prisma-statement.org/, https://amstar.ca/, https://apastyle.apa.org/ |
 | scholar-evaluation | skills/writing/research/scholar-evaluation | 1 | https://arxiv.org/abs/2510.16234 |
 | venue-templates | skills/writing/research/venue-templates | 10 | https://cvpr.thecvf.com/Conferences/2024/AuthorGuidelines, https://grants.nih.gov/grants/how-to-apply-application-guide.html, https://icml.cc/Conferences/2024/StyleAuthorInstructions |
@@ -281,12 +279,12 @@ URLs below are evidence of related projects or references found in skill bodies.
 
 | Skill | Path | License | License files |
 | --- | --- | --- | --- |
-| mcp-builder | skills/core/codex-system/mcp-builder | Complete terms in LICENSE.txt | LICENSE.txt, license.txt |
-| imagegen | skills/core/codex-system/system-skills/imagegen |  | LICENSE.txt, license.txt |
-| openai-docs | skills/core/codex-system/system-skills/openai-docs |  | LICENSE.txt, license.txt |
+| mcp-builder | skills/core/codex-system/mcp-builder | Complete terms in LICENSE.txt | LICENSE.txt |
+| imagegen | skills/core/codex-system/system-skills/imagegen |  | LICENSE.txt |
+| openai-docs | skills/core/codex-system/system-skills/openai-docs |  | LICENSE.txt |
 | plugin-creator | skills/core/codex-system/system-skills/plugin-creator |  |  |
-| skill-creator | skills/core/codex-system/system-skills/skill-creator |  | LICENSE.txt, license.txt |
-| skill-installer | skills/core/codex-system/system-skills/skill-installer |  | LICENSE.txt, license.txt |
+| skill-creator | skills/core/codex-system/system-skills/skill-creator |  | license.txt |
+| skill-installer | skills/core/codex-system/system-skills/skill-installer |  | LICENSE.txt |
 | bayesian-ppl-diagnostics | skills/domains/bayesian/bayesian-ppl-diagnostics | Apache-2.0 |  |
 | pymc | skills/domains/bayesian/pymc | Apache License, Version 2.0 |  |
 | simpy | skills/domains/bayesian/simpy | MIT License |  |
@@ -364,34 +362,33 @@ URLs below are evidence of related projects or references found in skill bodies.
 | sympy | skills/tools/data-science/sympy | https://github.com/sympy/sympy/blob/master/LICENSE |  |
 | umap-learn | skills/tools/data-science/umap-learn | BSD-3-Clause license |  |
 | vaex | skills/tools/data-science/vaex | MIT license |  |
-| docx | skills/tools/documents-media/docx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt, license.txt |
+| docx | skills/tools/documents-media/docx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt |
 | get-available-resources | skills/tools/documents-media/get-available-resources | MIT license |  |
 | markitdown | skills/tools/documents-media/markitdown | MIT license |  |
 | open-notebook | skills/tools/documents-media/open-notebook | MIT |  |
 | parallel-web | skills/tools/documents-media/parallel-web | MIT license |  |
-| pdf | skills/tools/documents-media/pdf | Proprietary. LICENSE.txt has complete terms | LICENSE.txt, license.txt |
+| pdf | skills/tools/documents-media/pdf | Proprietary. LICENSE.txt has complete terms | LICENSE.txt |
 | perplexity-search | skills/tools/documents-media/perplexity-search | MIT license |  |
-| xlsx | skills/tools/documents-media/xlsx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt, license.txt |
+| xlsx | skills/tools/documents-media/xlsx | Proprietary. LICENSE.txt has complete terms | LICENSE.txt |
 | brand-creative-assets | skills/tools/frontend/brand-creative-assets |  |  |
 | design-system-tokens | skills/tools/frontend/design-system-tokens |  |  |
 | implementation-react-tailwind | skills/tools/frontend/implementation-react-tailwind |  |  |
 | product-ux-planning | skills/tools/frontend/product-ux-planning |  |  |
 | responsive-accessibility-review | skills/tools/frontend/responsive-accessibility-review |  |  |
 | visual-direction | skills/tools/frontend/visual-direction |  |  |
-| webapp-testing | skills/tools/frontend/webapp-testing | Complete terms in LICENSE.txt | LICENSE.txt, license.txt |
-| canvas-design | skills/tools/visualization/canvas-design | Complete terms in LICENSE.txt | LICENSE.txt, license.txt |
+| webapp-testing | skills/tools/frontend/webapp-testing | Complete terms in LICENSE.txt | LICENSE.txt |
+| canvas-design | skills/tools/visualization/canvas-design | Complete terms in LICENSE.txt | LICENSE.txt |
 | generate-image | skills/tools/visualization/generate-image | MIT license |  |
 | infographics | skills/tools/visualization/infographics |  |  |
 | markdown-mermaid-writing | skills/tools/visualization/markdown-mermaid-writing | Apache-2.0 |  |
 | matplotlib | skills/tools/visualization/matplotlib | https://github.com/matplotlib/matplotlib/tree/main/LICENSE |  |
 | plotly | skills/tools/visualization/plotly | MIT license |  |
 | seaborn | skills/tools/visualization/seaborn | BSD-3-Clause license |  |
-| theme-factory | skills/tools/visualization/theme-factory | Complete terms in LICENSE.txt | LICENSE.txt, license.txt |
+| theme-factory | skills/tools/visualization/theme-factory | Complete terms in LICENSE.txt | LICENSE.txt |
 | academic-paper-writer-pro | skills/writing/research/academic-paper-writer-pro |  |  |
-| content-generation | skills/writing/research/content-generation |  |  |
 | literature-review | skills/writing/research/literature-review | MIT license |  |
 | ocr-kb | skills/writing/research/ocr-kb | Proprietary. LICENSE.txt has complete terms |  |
-| peer-review | skills/writing/research/peer-review | MIT license |  |
+| peer-review | skills/writing/research/peer-review | MIT base skill plus locally rewritten ICLR workflow from no-license-observed source; see provenance |  |
 | research-grants | skills/writing/research/research-grants | MIT license |  |
 | scholar-evaluation | skills/writing/research/scholar-evaluation | MIT license |  |
 | scientific-writing | skills/writing/research/scientific-writing | MIT license |  |

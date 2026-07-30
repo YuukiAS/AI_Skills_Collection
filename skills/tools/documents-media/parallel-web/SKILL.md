@@ -1,6 +1,6 @@
 ---
 name: parallel-web
-description: Search the web, extract URL content, and run deep research using the Parallel Chat API and Extract API. Use for ALL web searches, research queries, and general information gathering. Provides synthesized summaries with citations.
+description: Web search and content extraction through Parallel Search API when this provider is requested or when research results must be saved with reproducible source files. Follow host browsing/tool instructions when they specify another search path.
 status: active
 provenance: unknown
 trusted: false
@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-28
 profile_tags:
 recommended_scope: project
 license: MIT license

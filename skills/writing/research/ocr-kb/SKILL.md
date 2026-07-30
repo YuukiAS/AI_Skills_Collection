@@ -1,6 +1,6 @@
 ---
 name: ocr-kb
-description: 使用多模态大模型逐页读取长文档图片，精确提取文本、LaTeX公式和独立科研配图。支持环境清理、断点恢复、全局编号管理、失败页标记与部分重跑。逐页生成DOCX并每两页核查质量。本 Skill 专用于 Pipeline A（OCR 管道），处理 PDF 输入。中间产物全部放在 resources/，最终交付物放在 outputs/。Pipeline B / C 定义在主 SKILL.md 中。
+description: 长文档 OCR、扫描 PDF 恢复、公式/表格/图注提取、断点续跑和 DOCX/Markdown 交付工作流。用于把 PDF 页面安全转成可编辑文本并做质量核查；内部处理模式可记录为 OCR，但用户不需要说旧 pipeline 名。
 status: active
 provenance: unknown
 trusted: false
@@ -8,16 +8,16 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-28
 profile_tags:
 recommended_scope: project
 license: Proprietary. LICENSE.txt has complete terms
 ---
-# 论文排版与整理完全工作流 (Iterative OCR & Typesetting Pipeline)
+# 扫描 PDF OCR 与排版恢复工作流
 
 ## 0. 目录规范 (Directory Convention)
 
-所有中间文件和最终产物必须严格遵守以下目录结构，**禁止在项目根目录下放置任何生成文件**：
+所有中间文件和最终产物应放入任务目录下的 `resources/` 与 `outputs/`，避免污染项目根目录；不得移动或删除用户原始文件：
 
 ```
 项目根目录/
@@ -68,7 +68,7 @@ license: Proprietary. LICENSE.txt has complete terms
 | `created_at` | 任务创建时间 |
 
 > [!NOTE]
-> Pipeline A 固定使用 `source_type: "pdf"`, `pipeline: "A"`, `unit_type: "page"`。
+> OCR 模式通常使用 `source_type: "pdf"`, `pipeline: "ocr"` 或兼容旧 checkpoint 的 `pipeline: "A"`, `unit_type: "page"`。
 
 ---
 
@@ -250,7 +250,7 @@ stderr: 转换失败时输出错误信息（不支持的 LaTeX 命令等）
 - 连续处理 **4 页**后，必须主动悬挂（suspend）：
   1. 将 `checkpoint.json` 的 `status` 设为 `"suspended"`。
   2. 保存当前 DOCX 中间版本到 `outputs/`（命名规则见 §2.4）。
-  3. 使用 `notify_user` 通知用户发送"继续"以刷新上下文窗口。
+  3. 使用 `保存 checkpoint 并向用户说明下一步` 通知用户发送"继续"以刷新上下文窗口。
 - 恢复后读取 `checkpoint.json`，从 `current_unit` 继续。
 
 ### 2.4 中间版本命名规则

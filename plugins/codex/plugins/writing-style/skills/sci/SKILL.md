@@ -1,6 +1,6 @@
 ---
 name: scientific-prose
-description: English scientific report writing and revision pass. Use for research reports, progress reports, figure-heavy PDFs, manuscripts, technical summaries, and slide text that must keep evidence, uncertainty, captions, and conclusions scientifically defensible without AI-sounding prose.
+description: English scientific report writing and revision pass. Use for research reports, progress reports, figure-heavy PDFs, manuscripts, rebuttals, technical summaries, and slide text that must keep evidence, uncertainty, captions, and conclusions scientifically defensible without AI-sounding or defensive/self-undermining prose.
 status: active
 provenance: local
 trusted: true
@@ -25,6 +25,7 @@ Use this skill as the final English writing pass for scientific reports and rese
 - Turning experiment notes, ablations, error analysis, tables, or figures into report prose.
 - Checking whether a result statement overclaims beyond the evidence.
 - Making slide/report text sound like a researcher describing evidence, not a generic AI summary.
+- Removing defensive or self-undermining scientific phrasing while preserving exact limitations.
 
 Do not use it for pure citation search, document conversion, or journal formatting. Use the relevant discovery, PDF, DOCX, PPTX, or venue skill for those tasks.
 
@@ -54,6 +55,22 @@ If any part is missing, keep the wording bounded rather than filling the gap wit
 6. Check information flow: old/context information first, new/emphasized result last.
 7. For figures, check that captions and body text do different jobs.
 8. Return the revised text. If the input is risky, add a short "Evidence notes" section listing overclaims or missing evidence.
+
+
+## Confident, Non-Defensive Scientific Framing
+
+Use this pass when a draft sounds apologetic, self-undermining, or organized like a lab diary rather than an evidence-backed scientific argument. The goal is confident precision, not overclaiming.
+
+1. Identify the strongest claim that the supplied evidence can honestly support.
+2. Organize the paragraph around problem, gap, approach, evidence, and significance rather than chronology of attempts or failures.
+3. Classify material as central proof, supporting context, required limitation, optional detail, process history, failed attempt, or distraction.
+4. Remove unnecessary self-weakening language such as "unfortunately", "only", "merely", "fails to", "not ideal", or broad labels like "severe weakness" unless the evidence truly requires that judgment.
+5. If a result is mixed, narrow the claim, change the evaluation dimension, or present the result as a scoped tradeoff. Do not set up a contest the work does not need to win.
+6. Keep required limitations exact and proportional: what is limited, where the evidence still holds, and what would be needed to extend the claim.
+7. In reviewer responses, admit real errors cleanly, describe the fix, and return to evidence. Avoid over-apology and avoid conceding claims the paper never made.
+8. Before returning a revision, check whether any sentence gives readers a broader attack surface than the evidence requires.
+
+Source distilled from `Tina0514/prevent-defensive-ai-writing-skill` at `9686ccbacad5`; see `docs/provenance/WRITING_SKILL_REPOS_2026_07_28.md`.
 
 ## Report Paragraph Pattern
 

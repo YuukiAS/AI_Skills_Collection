@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-28
 profile_tags:
 recommended_scope: project
 license: MIT license
@@ -32,40 +32,11 @@ This skill should be used when:
 - Conducting literature-based hypothesis generation
 - Planning mechanistic studies across scientific domains
 
-## Visual Enhancement with Scientific Schematics
+## Conditional Visual Support
 
-**⚠️ MANDATORY: Every hypothesis generation report MUST include at least 1-2 AI-generated figures using the scientific-schematics skill.**
+Hypothesis reports do not require AI-generated figures by default. Add diagrams, mechanism schematics, concept maps, or presentation visuals only when the user asks for them or when the hypothesis depends on a complex pathway, experimental design, causal chain, or model architecture that text alone cannot communicate clearly.
 
-This is not optional. Hypothesis reports without visual elements are incomplete. Before finalizing any document:
-1. Generate at minimum ONE schematic or diagram (e.g., hypothesis framework showing competing explanations)
-2. Prefer 2-3 figures for comprehensive reports (mechanistic pathway, experimental design flowchart, prediction decision tree)
-
-**How to generate figures:**
-- Use the **scientific-schematics** skill to generate AI-powered publication-quality diagrams
-- Simply describe your desired diagram in natural language
-- Nano Banana Pro will automatically generate, review, and refine the schematic
-
-**How to generate schematics:**
-```bash
-python scripts/generate_schematic.py "your diagram description" -o figures/output.png
-```
-
-The AI will automatically:
-- Create publication-quality images with proper formatting
-- Review and refine through multiple iterations
-- Ensure accessibility (colorblind-friendly, high contrast)
-- Save outputs in the figures/ directory
-
-**When to add schematics:**
-- Hypothesis framework diagrams showing competing explanations
-- Experimental design flowcharts
-- Mechanistic pathway diagrams
-- Prediction decision trees
-- Causal relationship diagrams
-- Theoretical model visualizations
-- Any complex concept that benefits from visualization
-
-For detailed guidance on creating schematics, refer to the scientific-schematics skill documentation.
+When creating visuals, keep them tied to the stated hypothesis, evidence gaps, experimental variables, and validation plan. Do not use generated artwork as a substitute for evidence.
 
 ---
 

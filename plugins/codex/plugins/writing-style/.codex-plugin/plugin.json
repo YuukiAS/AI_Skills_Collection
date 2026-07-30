@@ -1,7 +1,7 @@
 {
   "name": "writing-style",
   "version": "4.0.0",
-  "description": "Source-faithful rewriting, Chinese technical expression, and local scientific prose cleanup without deciding research structure.",
+  "description": "Source-faithful rewriting, Chinese-first say-it-plain reports, version-label fidelity, and scientific prose cleanup without deciding research structure.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Writing Style",
-    "shortDescription": "Source-faithful rewriting, Chinese technical expression, and local scientific prose cleanup without deciding research structure.",
-    "longDescription": "Source-faithful rewriting, Chinese technical expression, and local scientific prose cleanup without deciding research structure. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Source-faithful rewriting, Chinese-first say-it-plain reports, version-label fidelity, and scientific prose cleanup without deciding research structure.",
+    "longDescription": "Source-faithful rewriting, Chinese-first say-it-plain reports, version-label fidelity, and scientific prose cleanup without deciding research structure. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [

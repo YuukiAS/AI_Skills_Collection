@@ -1,0 +1,17 @@
+{
+  "positive": [
+    "这份 controller_report 太像 audit 记录了，改成中文为主、说人话的版本。",
+    "把这段组会材料改成我能直接讲的中文，路径和 token 放到最后。",
+    "这个 Markdown/PDF 终稿不要堆英文，audit reviewer pipeline 这种普通词翻成中文。",
+    "用中文写给作者看的结论，先说判断，再放证据和机器字段。"
+  ],
+  "negative": [
+    "Translate this Chinese paragraph into formal English.",
+    "Verify these citation metadata fields against DOI records."
+  ],
+  "near_miss": [
+    "Polish this English scientific paragraph.",
+    "Render this Chinese Markdown to PDF and inspect glyphs."
+  ],
+  "notes": "Use for Chinese-first, say-it-plain, group-meeting, report readability, and nonessential-English cleanup."
+}

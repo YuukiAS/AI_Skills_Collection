@@ -1,6 +1,6 @@
 ---
 name: literature-and-citations
-description: Literature search, review synthesis, citation verification, BibTeX hygiene, and Zotero-oriented citation workflows.
+description: Literature search, single-paper evidence cards, review synthesis, citation verification, BibTeX hygiene, and Zotero-oriented citation workflows.
 status: active
 provenance: generated
 trusted: false
@@ -29,13 +29,13 @@ default_prompt:
 
 ## Trigger Boundary
 
-Literature search, review synthesis, citation verification, BibTeX hygiene, and Zotero-oriented citation workflows.
+Literature search, single-paper evidence cards, review synthesis, citation verification, BibTeX hygiene, and Zotero-oriented citation workflows.
 
 Use this aggregate Codex App skill when the task matches one of the source workflows below.
 
 ## Source Workflows
 
-- `literature-review`: Conduct comprehensive, systematic literature reviews using multiple academic databases (PubMed, arXiv, bioRxiv, Semantic Scholar, etc.). Reference: `_src/lit/source.md`
+- `literature-review`: Conduct literature reviews and single-paper evidence cards. Use for systematic reviews, related work, paper精读, paper cards, claim-evidence extraction from one paper/PDF/arXiv/DOI, method-map reconstruction, research-gap synthesis, and citation-backed writing. Reference: `_src/lit/source.md`
 - `citation-verification`: Verify academic citations, references, BibTeX entries, DOI/PMID metadata, citation claims, and figure/table evidence before manuscript submission, review response, or report delivery. Use when citation existence or claim support matters more than citation formatting alone. Reference: `_src/verify/source.md`
 - `citation-management`: Comprehensive citation management for academic research. Search Google Scholar and PubMed for papers, extract accurate metadata, validate citations, and generate properly formatted BibTeX entries. Reference: `_src/cite/source.md`
 - `research-lookup`: Look up current research information using the Parallel Chat API (primary) or Perplexity sonar-pro-search (academic paper searches). Automatically routes queries to the best backend. Use for finding papers, gathering research data, and verifying scientific information. Reference: `_src/lookup/source.md`

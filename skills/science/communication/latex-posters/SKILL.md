@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-28
 profile_tags:
 recommended_scope: project
 icon_small: assets/app-facing.svg
@@ -40,15 +40,15 @@ This skill should be used when:
 
 ## AI-Powered Visual Element Generation
 
-**STANDARD WORKFLOW: Generate ALL major visual elements using AI before creating the LaTeX poster.**
+**STANDARD WORKFLOW: Plan poster visuals before creating the LaTeX poster; use existing evidence figures first and generate new visuals only when needed.**
 
 This is the recommended approach for creating visually compelling posters:
 1. Plan all visual elements needed (title, intro, methods, results, conclusions)
-2. Generate each element using scientific-schematics or Nano Banana Pro
+2. Generate new elements with a visualization skill only when existing evidence figures are insufficient
 3. Assemble generated images in the LaTeX template
 4. Add text content around the visuals
 
-**Target: 60-70% of poster area should be AI-generated visuals, 30-40% text.**
+**Target: A poster should be visually led, but generated visuals are optional and must serve the evidence and venue, 30-40% text.**
 
 ---
 
@@ -119,7 +119,7 @@ grep -i "overfull" poster.log
 
 ### CRITICAL: Poster-Size Font Requirements
 
-**⚠️ ALL text within AI-generated visualizations MUST be poster-readable.**
+**⚠️ ALL text within Visualizations should be poster-readable.**
 
 When generating graphics for posters, you MUST include font size specifications in EVERY prompt. Poster graphics are viewed from 4-6 feet away, so text must be LARGE.
 
@@ -133,7 +133,7 @@ The #1 issue with AI-generated poster graphics is **TOO MUCH CONTENT**. This cau
 
 **SOLUTION: Generate SIMPLE graphics with MINIMAL content.**
 
-**MANDATORY prompt requirements for EVERY poster graphic:**
+**Prompt requirements when generating new visuals for EVERY poster graphic:**
 
 ```
 POSTER FORMAT REQUIREMENTS (STRICTLY ENFORCE):
@@ -347,7 +347,7 @@ python scripts/generate_schematic.py "POSTER FORMAT for A0. ONE case study: Larg
 # If you need 3 cases → make 3 separate simple graphics (not one complex graphic)
 ```
 
-**For Stylized Blocks and Graphics (Nano Banana Pro):**
+**For Stylized Blocks and Graphics:**
 ```bash
 # Title block - SIMPLE
 python scripts/generate_schematic.py "POSTER FORMAT for A0. Title block: 'ML FOR DRUG DISCOVERY' in HUGE bold text (120pt+). Dark blue background. ONE subtle icon. NO other text. 40% white space. Readable from 15 feet." -o figures/title_block.png
@@ -576,7 +576,7 @@ grep "Overfull" poster.log
 For detailed guidance on creating schematics, refer to the **scientific-schematics** skill documentation.
 
 **Key capabilities:**
-- Nano Banana Pro automatically generates, reviews, and refines diagrams
+- the configured visualization workflow can generate, review, and refine diagrams when needed
 - Creates publication-quality images with proper formatting
 - Ensures accessibility (colorblind-friendly, high contrast)
 - Supports iterative refinement for complex diagrams
@@ -1515,7 +1515,7 @@ Guidance beyond LaTeX for effective poster sessions:
 
 This skill works effectively with:
 - **Scientific Schematics**: CRITICAL - Use for generating all poster diagrams and flowcharts
-- **Generate Image / Nano Banana Pro**: For stylized graphics, conceptual illustrations, and summary visuals
+- **Generate Image**: For stylized graphics, conceptual illustrations, and summary visuals when a generated visual is needed
 - **Scientific Writing**: For developing poster content from papers
 - **Literature Review**: For contextualizing research
 - **Data Analysis**: For creating result figures and charts

@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-05-14
+last_reviewed: 2026-07-28
 profile_tags:
 recommended_scope: project
 license: MIT license
@@ -69,7 +69,7 @@ The skill runs `scripts/detect_resources.py` to automatically detect:
 
 ### Output Format
 
-The skill generates a `.claude_resources.json` file in the current working directory containing:
+The skill generates a `.codex_resources.json` file in the current working directory. If an older project already has `.codex_resources.json`, treat it as legacy compatibility input and prefer writing the Codex-named file for new runs:
 
 ```json
 {
@@ -166,18 +166,18 @@ python scripts/detect_resources.py
 ```
 
 Optional arguments:
-- `-o, --output <path>`: Specify custom output path (default: `.claude_resources.json`)
+- `-o, --output <path>`: Specify custom output path (default: `.codex_resources.json`)
 - `-v, --verbose`: Print full resource information to stdout
 
 ### Step 2: Read and Apply Recommendations
 
-After running detection, read the generated `.claude_resources.json` file to inform computational decisions:
+After running detection, read the generated `.codex_resources.json` file to inform computational decisions:
 
 ```python
 # Example: Use recommendations in code
 import json
 
-with open('.claude_resources.json', 'r') as f:
+with open('.codex_resources.json', 'r') as f:
     resources = json.load(f)
 
 # Check parallel processing strategy
@@ -262,7 +262,7 @@ All other functionality uses Python standard library modules (json, os, platform
 1. **Run early**: Execute resource detection at the start of projects or before major computational tasks
 2. **Re-run periodically**: System resources change over time (memory usage, disk space)
 3. **Check before scaling**: Verify resources before scaling up parallel workers or data sizes
-4. **Document decisions**: Keep the `.claude_resources.json` file in project directories to document resource-aware decisions
+4. **Document decisions**: Keep the `.codex_resources.json` file in project directories to document resource-aware decisions
 5. **Use with versioning**: Different machines have different capabilities; resource files help maintain portability
 
 ## Troubleshooting

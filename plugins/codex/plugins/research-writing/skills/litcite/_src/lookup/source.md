@@ -42,17 +42,11 @@ Use this skill when you need:
 - **Market/Industry Data**: Current statistics, trends, competitive intelligence
 - **Recent Developments**: Emerging trends, breakthroughs, announcements
 
-## Visual Enhancement with Scientific Schematics
+## Visual and Figure Routing
 
-**When creating documents with this skill, always consider adding scientific diagrams and schematics to enhance visual communication.**
+Research lookup outputs should preserve source evidence first. Do not generate diagrams just because research was retrieved. Add visuals only when the user asks for them or when a search strategy, evidence map, timeline, or synthesis workflow would be clearer as a diagram.
 
-If your document does not already contain schematics or diagrams:
-- Use the **scientific-schematics** skill to generate AI-powered publication-quality diagrams
-- Simply describe your desired diagram in natural language
-
-```bash
-python scripts/generate_schematic.py "your diagram description" -o figures/output.png
-```
+Use tables for source lists, claim verification, and evidence strength. Route optional diagrams to `markdown-mermaid-writing`, `drawio-diagrams`, or `d2-diagrams`; route data-driven plots to `scientific-visualization` when actual data are supplied.
 
 ---
 

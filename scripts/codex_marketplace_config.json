@@ -57,7 +57,7 @@
       "name": "writing-style",
       "version": "4.0.0",
       "displayName": "Writing Style",
-      "description": "Source-faithful rewriting, Chinese technical expression, and local scientific prose cleanup without deciding research structure.",
+      "description": "Source-faithful rewriting, Chinese-first say-it-plain reports, version-label fidelity, and scientific prose cleanup without deciding research structure.",
       "category": "Research",
       "brandColor": "#7C3AED",
       "composerIcon": "./assets/codex/plugin-icons/writing-style/composer.svg",
@@ -65,7 +65,11 @@
       "defaultPrompt": [
         "Make this text clearer without changing meaning.",
         "Polish this Chinese technical text.",
-        "Improve this scientific prose locally."
+        "Improve this scientific prose locally.",
+        "Fix version labels in this Markdown/PDF without changing facts.",
+        "Remove defensive scientific framing without overclaiming.",
+        "Rewrite this in Chinese-first, say-it-plain style.",
+        "Final-check this Markdown/PDF report for human-readable Chinese and version fidelity."
       ],
       "skills": [
         {
@@ -82,7 +86,7 @@
           "type": "copy",
           "source": "skills/writing/core/chinese-prose",
           "artifact_id": "zh",
-          "description": "Chinese technical and scientific prose polishing without document rendering responsibilities."
+          "description": "Chinese-first technical, scientific, report, group-meeting, and say-it-plain prose cleanup without document rendering responsibilities."
         }
       ]
     },
@@ -90,7 +94,7 @@
       "name": "research-writing",
       "version": "4.0.0",
       "displayName": "Research Writing",
-      "description": "Repo reports, research documents, manuscripts, literature review, citations, and claim-evidence organization.",
+      "description": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization.",
       "category": "Research",
       "brandColor": "#1D4ED8",
       "composerIcon": "./assets/codex/plugin-icons/research-writing/composer.svg",
@@ -98,7 +102,11 @@
       "defaultPrompt": [
         "Write a repo-grounded research report.",
         "Plan this paper workflow.",
-        "Check literature and citations."
+        "Check literature and citations.",
+        "Plan this manuscript with a claim-evidence workflow.",
+        "Create a single-paper evidence card.",
+        "Run a pre-submission reviewer-style acceptance-risk check.",
+        "Check whether these results support the manuscript claims."
       ],
       "skills": [
         {
@@ -110,7 +118,7 @@
           "type": "aggregate",
           "name": "research-paper-workflow",
           "artifact_id": "paper",
-          "description": "Formal manuscript, supplement, rebuttal, grant, claim-evidence, citation, and LaTeX authoring workflow coordination.",
+          "description": "Formal manuscript, supplement, rebuttal, pre-submission review, claim-evidence workflow, result-to-claim gates, grant, citation, and LaTeX authoring coordination.",
           "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
           "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
           "source_skills": [
@@ -133,6 +141,10 @@
             {
               "source": "skills/writing/research/venue-templates",
               "artifact_id": "venue"
+            },
+            {
+              "source": "skills/writing/research/peer-review",
+              "artifact_id": "review"
             }
           ]
         },
@@ -140,7 +152,7 @@
           "type": "aggregate",
           "name": "literature-and-citations",
           "artifact_id": "litcite",
-          "description": "Literature search, review synthesis, citation verification, BibTeX hygiene, and Zotero-oriented citation workflows.",
+          "description": "Literature search, single-paper evidence cards, review synthesis, citation verification, BibTeX hygiene, and Zotero-oriented citation workflows.",
           "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
           "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
           "source_skills": [
