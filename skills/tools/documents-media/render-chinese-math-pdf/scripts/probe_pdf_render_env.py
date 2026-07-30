@@ -58,11 +58,7 @@ LATIN_FONT_CANDIDATES = [
     "Times New Roman",
 ]
 
-SHARED_RESOURCE_ROOTS = [
-    Path("/users/a/e/aereinh/render_resources/chinese_math_pdf"),
-    Path("/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf"),
-    Path("/overflow/htzhu/render_resources/chinese_math_pdf"),
-]
+SHARED_RESOURCE_ROOTS: list[Path] = []
 LOCAL_OVERRIDE_RELATIVE = Path(".config") / "ai-skills" / "local-overrides.toml"
 
 VIEWER_COMPATIBLE_CJK_RESOURCE_FONTS = {

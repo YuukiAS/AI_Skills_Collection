@@ -39,38 +39,22 @@ fc-match 'Source Han Serif SC'
 colon-separated list, then local overrides under the current Codex namespace
 (`CODEX_NAMESPACE_ROOT/.config/ai-skills/local-overrides.toml` and the parent
 of `CODEX_GLOBAL_HOME`) before falling back to `HOME`. This matters on clusters
-where `HOME` may still be `/nas` while the active Codex namespace is `/users`.
-After local overrides, the probe checks shared host resource locations used on
-this machine, including `/users/a/e/aereinh/render_resources`,
-`/overflow/htzhu/mingcheng_new/render_resources`, and
-`/overflow/htzhu/render_resources`. In the `/users` CARE namespace,
-`/users/a/e/aereinh/render_resources/chinese_math_pdf` is the preferred
-self-contained resource bundle; `/overflow/.../render_resources` is only a
-compatibility fallback.
+where `HOME` may point at a restricted or inactive remote home while the active
+Codex namespace lives elsewhere. After local overrides, the probe only uses
+generic project and ancestor resource discovery. Host-specific resource
+locations belong in the local override file or in
+`CHINESE_MATH_PDF_RESOURCE_DIRS`, not in the reusable skill.
 
 This mirrors the Slurm skill's site-profile pattern: the reusable skill stays
 generic, while private or machine-local facts live in a local override/profile.
 For rendering, the local fact is usually only `render_resource_dirs`.
 
-Known namespace-local examples on this host:
-
-```toml
-[sites.local]
-render_resource_dirs = "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf"
-```
-
-```toml
-[sites.local]
-render_resource_dirs = "/users/a/e/aereinh/render_resources/chinese_math_pdf"
-```
-
-Keep those examples as local configuration, not as a required public dependency.
-
 ## Font Downloads For A New Server
 
 Use official font sources and keep the downloaded files in a server-local
-resource directory, for example `/overflow/htzhu/render_resources/chinese_math_pdf`
-or `$HOME/render_resources/chinese_math_pdf`. Record the path in `~/.config/ai-skills/local-overrides.toml` as
+resource directory, for example `$HOME/render_resources/chinese_math_pdf` or a
+project-adjacent `render_resources/chinese_math_pdf`. Record the path in
+`~/.config/ai-skills/local-overrides.toml` as
 `render_resource_dirs = "/that/path"`, or set
 `CHINESE_MATH_PDF_RESOURCE_DIRS=/that/path` for one-off sessions when the
 directory is not under the project or one of the known host roots.

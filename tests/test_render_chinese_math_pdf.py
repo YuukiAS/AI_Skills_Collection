@@ -108,7 +108,7 @@ class RenderChineseMathPdfTests(unittest.TestCase):
 
     def test_unreadable_local_override_is_ignored(self) -> None:
         with mock.patch.object(probe.Path, "exists", side_effect=PermissionError("denied")):
-            roots = probe.local_override_resource_roots(Path("/nas/blocked/local-overrides.toml"))
+            roots = probe.local_override_resource_roots(Path("/restricted/home/local-overrides.toml"))
         self.assertEqual(roots, [])
 
     def test_resource_bundle_detected_from_environment_variable(self) -> None:

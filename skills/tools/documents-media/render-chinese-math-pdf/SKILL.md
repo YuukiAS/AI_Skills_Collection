@@ -39,10 +39,9 @@ workflow.
 3. Choose the narrowest viable route:
    - Existing project render command when documented and current.
    - Project-local render resources for fonts, TeX headers, or `texmf`.
-   - User-namespace render resources when available, especially
-     `/users/a/e/aereinh/render_resources/chinese_math_pdf` for `/users`
-     CARE work. Treat `/overflow/.../render_resources` only as a migration or
-     compatibility fallback, not as the preferred dependency for `/users`.
+   - Namespace-local render resources discovered by `CHINESE_MATH_PDF_RESOURCE_DIRS`
+     or `.config/ai-skills/local-overrides.toml`. Treat machine paths as local
+     facts from the probe, not as reusable skill requirements.
    - For final reports, group-meeting PDFs, manuscripts, or anything where
      font provenance matters, prefer Pandoc plus XeLaTeX with named fonts
      (`TeX Gyre Termes` or another Times-compatible TeX font for Latin, and a
