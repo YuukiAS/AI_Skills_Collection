@@ -10,6 +10,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 PROBE_PATH = REPO_ROOT / "skills/tools/documents-media/render-chinese-math-pdf/scripts/probe_pdf_render_env.py"
 QA_PATH = REPO_ROOT / "skills/tools/documents-media/render-chinese-math-pdf/scripts/validate_pdf_layout.py"
 RENDER_CHROMIUM_PATH = REPO_ROOT / "skills/tools/documents-media/render-chinese-math-pdf/scripts/render_markdown_pdf_chromium.py"
+HEADER_PATH = REPO_ROOT / "skills/tools/documents-media/render-chinese-math-pdf/scripts/build_chinese_math_header.py"
 
 
 def load_module(path: Path, name: str):
@@ -23,6 +24,7 @@ def load_module(path: Path, name: str):
 probe = load_module(PROBE_PATH, "probe_pdf_render_env")
 qa = load_module(QA_PATH, "validate_pdf_layout")
 render_chromium = load_module(RENDER_CHROMIUM_PATH, "render_markdown_pdf_chromium")
+header_builder = load_module(HEADER_PATH, "build_chinese_math_header")
 
 
 class RenderChineseMathPdfTests(unittest.TestCase):
@@ -135,6 +137,46 @@ class RenderChineseMathPdfTests(unittest.TestCase):
                 result = qa.validate_pdf(pdf)
         self.assertFalse(result["errors"])
         self.assertTrue(result["preview_paths"][0].endswith("out-1.png"))
+
+    def test_validate_pdf_rejects_cjk_font_without_unicode_mapping(self) -> None:
+        pdffonts = (
+            "name type encoding emb sub uni object ID\n"
+            "FandolSong-Regular CID Type 0C Identity-H yes yes no 9 0\n"
+        )
+        result = qa.validate_font_compatibility(pdffonts, "中文测试内容")
+        self.assertIn("CJK font(s) lack ToUnicode mapping", result["errors"][0])
+
+    def test_header_prefers_system_cjk_font_over_resource_fandol(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            resource = root / "render_resources/chinese_math_pdf/texmf/fonts/opentype/public/fandol"
+            resource.mkdir(parents=True)
+            (resource / "FandolSong-Regular.otf").write_text("font", encoding="utf-8")
+            system_font = root / "fonts/DroidSansFallbackFull.ttf"
+            system_font.parent.mkdir(parents=True)
+            system_font.write_text("font", encoding="utf-8")
+
+            def fake_fc_match(font_name: str):
+                return system_font if font_name == "Droid Sans Fallback" else None
+
+            args = type(
+                "Args",
+                (),
+                {
+                    "root": root,
+                    "resource_dir": root / "render_resources/chinese_math_pdf",
+                    "cjk_font": "Noto Serif CJK SC",
+                    "main_font": "TeX Gyre Termes",
+                    "mono_font": "TeX Gyre Cursor",
+                    "prefer_resource_cjk": False,
+                },
+            )()
+
+            with mock.patch.object(header_builder, "fc_match_font", side_effect=fake_fc_match):
+                header = header_builder.build_header(args)
+
+        self.assertIn("DroidSansFallbackFull.ttf", header)
+        self.assertNotIn("FandolSong-Regular.otf", header)
 
     def test_cjk_fragmentation_flags_excessive_short_lines(self) -> None:
         fragmented = "\n".join(["中", "文", "测", "试", "数", "学", "表", "格", "正常 English"])

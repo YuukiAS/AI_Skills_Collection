@@ -7,11 +7,17 @@ import argparse
 import json
 import re
 import subprocess
+import tempfile
 from pathlib import Path
 from typing import Any
 
 CJK_RE = re.compile(r"[\u3400-\u9fff]")
 BAD_GLYPH_RE = re.compile(r"[\ue000-\uf8ff\ufffd]")
+CJK_FONT_NAME_RE = re.compile(
+    r"(Fandol|Noto.*CJK|SourceHan|Source[- ]Han|DroidSansFallback|Droid.*Fallback|"
+    r"WenQuanYi|ARPL|UMing|SimSun|SimHei|KaiTi|Songti|Heiti)",
+    re.IGNORECASE,
+)
 
 
 def run_command(args: list[str], timeout: int = 30) -> tuple[int, str]:
@@ -89,6 +95,48 @@ def fonts_embedded(pdffonts: str) -> bool | None:
     return any(re.search(r"\byes\b", line) for line in body)
 
 
+def parse_pdffonts_rows(pdffonts: str) -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
+    for line in pdffonts.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("name") or set(stripped) <= {"-", " "}:
+            continue
+        parts = stripped.split()
+        if len(parts) < 6:
+            continue
+        rows.append(
+            {
+                "raw": stripped,
+                "name": parts[0],
+                "embedded": parts[-5] if len(parts) >= 5 else "",
+                "subset": parts[-4] if len(parts) >= 4 else "",
+                "unicode": parts[-3] if len(parts) >= 3 else "",
+            }
+        )
+    return rows
+
+
+def validate_font_compatibility(pdffonts: str, extracted_text: str) -> dict[str, Any]:
+    errors: list[str] = []
+    warnings: list[str] = []
+    rows = parse_pdffonts_rows(pdffonts)
+    cjk_rows = [row for row in rows if CJK_FONT_NAME_RE.search(row["name"])]
+    has_cjk_text = bool(CJK_RE.search(extracted_text))
+    cjk_unicode_failures = [row for row in cjk_rows if row["unicode"].lower() != "yes"]
+    if has_cjk_text and cjk_unicode_failures:
+        failed_names = ", ".join(row["name"] for row in cjk_unicode_failures)
+        errors.append(f"CJK font(s) lack ToUnicode mapping according to pdffonts uni column: {failed_names}")
+    if has_cjk_text and not cjk_rows:
+        warnings.append("CJK text found but no obvious CJK font name was detected in pdffonts")
+    return {
+        "errors": errors,
+        "warnings": warnings,
+        "font_rows": rows,
+        "cjk_font_rows": cjk_rows,
+        "cjk_unicode_failures": cjk_unicode_failures,
+    }
+
+
 def validate_text(extracted_text: str, source_text: str | None = None) -> dict[str, Any]:
     errors: list[str] = []
     warnings: list[str] = []
@@ -125,28 +173,30 @@ def validate_pdf(
         result["errors"].append("pdfinfo failed")
     if pages is not None and pages < 1:
         result["errors"].append("PDF has no pages")
-    code, pdffonts = run_command(["pdffonts", str(pdf)])
+    font_code, pdffonts = run_command(["pdffonts", str(pdf)])
     result["pdffonts"] = pdffonts
     embedded = fonts_embedded(pdffonts)
     result["fonts_embedded"] = embedded
-    if code == 0 and embedded is False:
+    if font_code == 0 and embedded is False:
         result["errors"].append("no embedded fonts reported by pdffonts")
-    text_path = pdf.with_suffix(".layout.txt")
-    code, text_output = run_command(["pdftotext", "-layout", str(pdf), str(text_path)])
-    if code != 0:
-        result["errors"].append("pdftotext -layout failed")
-        extracted = text_output
-    else:
-        extracted = text_path.read_text(encoding="utf-8", errors="replace")
-        try:
-            text_path.unlink()
-        except OSError:
-            pass
+    with tempfile.TemporaryDirectory(prefix="pdf-layout-text-") as tmp:
+        text_path = Path(tmp) / f"{pdf.stem}.layout.txt"
+        code, text_output = run_command(["pdftotext", "-layout", str(pdf), str(text_path)])
+        if code != 0:
+            result["errors"].append("pdftotext -layout failed")
+            extracted = text_output
+        else:
+            extracted = text_path.read_text(encoding="utf-8", errors="replace")
     source_text = source.read_text(encoding="utf-8", errors="replace") if source else None
     text_result = validate_text(extracted, source_text)
     result["text_checks"] = text_result
     result["errors"].extend(text_result["errors"])
     result["warnings"].extend(text_result["warnings"])
+    if font_code == 0:
+        font_result = validate_font_compatibility(pdffonts, extracted)
+        result["font_checks"] = font_result
+        result["errors"].extend(font_result["errors"])
+        result["warnings"].extend(font_result["warnings"])
     if preview_dir is None and require_preview:
         preview_dir = pdf.parent / f"{pdf.stem}_preview"
     if preview_dir:

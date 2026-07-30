@@ -45,9 +45,11 @@ workflow.
      compatibility fallback, not as the preferred dependency for `/users`.
    - For final reports, group-meeting PDFs, manuscripts, or anything where
      font provenance matters, prefer Pandoc plus XeLaTeX with named fonts
-     (`TeX Gyre Termes` or another Times-compatible TeX font for Latin, and
-     Fandol/Noto/Source Han for CJK). Do not require Times New Roman; it is not
-     a portable Linux dependency.
+     (`TeX Gyre Termes` or another Times-compatible TeX font for Latin, and a
+     viewer-compatible CJK font such as Noto/Source Han/Droid fallback when
+     available). Do not require Times New Roman; it is not a portable Linux
+     dependency. Treat Fandol as a compact TeX fallback, not as automatically
+     final-standard on every viewer.
    - Pandoc plus XeLaTeX for Markdown with CJK and conventional math when the
      CJK font chain is known to render visibly.
    - Pandoc HTML plus headless Chromium for Chinese Markdown when TeX CJK fonts
@@ -76,14 +78,16 @@ workflow.
    - `pdftotext -layout` for extractable Chinese, English, formula context,
      abnormal CJK line fragmentation, and table row survival.
    - `pdffonts` for embedded/subset fonts when available. For a final-standard
-     PDF, named TrueType/OpenType/CID fonts are preferred; an all-Type-3
-     Chrome export is acceptable only after reporting that limitation.
+     PDF, named TrueType/OpenType/CID fonts are preferred, and every obvious
+     CJK font used for Chinese text must report `uni yes`. If a CJK font such
+     as Fandol reports `uni no`, treat the PDF as viewer-risky even when
+     Poppler PNG previews or `pdftotext` look acceptable.
    - `python scripts/validate_pdf_layout.py <pdf> --source <source.md>` when the
      source is Markdown or table-heavy; by default this emits a first-page PNG
      preview beside the PDF.
    - Always inspect at least the first-page PNG, and inspect any equation/table
-     heavy pages when risk exists. Text extraction is not proof that Chinese
-     glyphs are visible in a PDF viewer.
+     heavy pages when risk exists. Text extraction and Poppler previews are not
+     proof that Chinese glyphs are visible in the user's PDF viewer.
 8. For Chinese documents meant for an author, collaborator, or non-technical
    reader, do a reader-facing pass before delivery: remove raw TeX/log blocks
    unless they are the subject, avoid unnecessary English process words, keep

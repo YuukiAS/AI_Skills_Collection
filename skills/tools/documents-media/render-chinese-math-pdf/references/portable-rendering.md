@@ -9,9 +9,10 @@ Prefer routes in this order:
 2. Project-local render resources, for example `render_resources/chinese_math_pdf`
    or a checked-in `texmf/` tree.
 3. System `pandoc` with `xelatex` for Markdown sources when the CJK font chain
-   is visible in a raster preview. This is the preferred route for final
-   reports, group-meeting PDFs, manuscripts, and documents where font
-   provenance should remain auditable in `pdffonts`.
+   is visible in a raster preview and `pdffonts` reports `uni yes` for the CJK
+   font. This is the preferred route for final reports, group-meeting PDFs,
+   manuscripts, and documents where font provenance should remain auditable in
+   `pdffonts`.
 4. Pandoc HTML plus headless Chromium for Chinese Markdown when TeX CJK fonts
    are missing, invisible, unstable, or consuming repeated header fixes.
 5. System `xelatex` or `lualatex` for LaTeX sources.
@@ -80,7 +81,10 @@ Recommended download links:
   from the CTAN `fandol` package. Use these for a portable
   `texmf/fonts/opentype/public/fandol/` bundle containing
   `FandolSong-Regular.otf`, `FandolHei-Regular.otf`, and
-  `FandolKai-Regular.otf`.
+  `FandolKai-Regular.otf`. Fandol is useful when no system CJK font exists, but
+  do not accept it blindly for final PDFs: if `pdffonts` reports `uni no` for
+  Fandol or the user's viewer renders Chinese as blank, rerender with a
+  viewer-compatible system CJK font.
 - Noto Sans Simplified Chinese, robust browser/system sans font:
   `https://github.com/notofonts/noto-cjk/releases/download/Sans2.004/18_NotoSansSC.zip`.
 - Noto Serif Simplified Chinese, robust browser/system serif font:
@@ -110,7 +114,11 @@ confirm with `fc-match 'Noto Serif SC'` or `fc-match 'Source Han Serif SC'`.
 
 Use this route when the PDF needs clean font provenance, stable Chinese glyphs,
 and reviewable tables. It avoids requiring Times New Roman; TeX Gyre Termes is
-the portable Times-compatible default on TeX Live systems.
+the portable Times-compatible default on TeX Live systems. For CJK, prefer a
+system font that survives the target viewer and reports `uni yes`, such as
+Noto/Source Han when installed or Droid Sans Fallback on this host. The helper
+falls back to bundled Fandol only when no exact system CJK font is found, unless
+`--prefer-resource-cjk` is explicitly passed.
 
 ```bash
 python scripts/build_chinese_math_header.py --root <project-root> --output /tmp/chinese-math-header.tex
@@ -165,6 +173,8 @@ what font the PDF uses.
 
 A zero exit code is not enough. The final answer should include evidence that
 the PDF is readable: page count, text extraction sample or summary, font
-embedding status, and a first-page PNG visual spot check. If Chinese text is
-meant for a collaborator or author, also check that the document reads like a
-clean Chinese note rather than a build log.
+embedding status, `pdffonts` `uni` status for CJK fonts, and a first-page PNG
+visual spot check. If Chinese text is meant for a collaborator or author, also
+check that the document reads like a clean Chinese note rather than a build log.
+When the user reports a PDF viewer rendering Chinese as blank, treat that viewer
+as the acceptance target; Poppler preview success is not enough.
