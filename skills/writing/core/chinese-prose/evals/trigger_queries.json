@@ -3,7 +3,12 @@
     "这份 controller_report 太像 audit 记录了，改成中文为主、说人话的版本。",
     "把这段组会材料改成我能直接讲的中文，路径和 token 放到最后。",
     "这个 Markdown/PDF 终稿不要堆英文，audit reviewer pipeline 这种普通词翻成中文。",
-    "用中文写给作者看的结论，先说判断，再放证据和机器字段。"
+    "用中文写给作者看的结论，先说判断，再放证据和机器字段。",
+    "把这份中文 Markdown 终稿做最后检查，第一屏要让读者看懂，不要先堆 branch 和日志。",
+    "这份中文 PDF 报告要交给老板看，帮我确认开头说人话，路径和命令放到证据区。",
+    "给这个项目写中文 README，开头先说明这是什么、给谁用、怎么开始和当前状态。",
+    "把这段中文状态更新改成用户能看懂的版本，不要中英混杂地写 audit candidate pipeline status。",
+    "输出给作者看的中文结论，必须先说目前完成了什么、为什么、下一步是什么。"
   ],
   "negative": [
     "Translate this Chinese paragraph into formal English.",
@@ -13,5 +18,5 @@
     "Polish this English scientific paragraph.",
     "Render this Chinese Markdown to PDF and inspect glyphs."
   ],
-  "notes": "Use for Chinese-first, say-it-plain, group-meeting, report readability, and nonessential-English cleanup."
+  "notes": "Use automatically for Chinese Markdown/PDF/report/README final outputs, Chinese-first say-it-plain, group-meeting, report readability, and nonessential-English cleanup."
 }

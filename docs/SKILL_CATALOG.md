@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Generated at `2026-07-28T05:23:11+00:00` from `registry.json` metadata. Do not edit by hand.
+Generated at `2026-07-30T09:16:11+00:00` from `registry.json` metadata. Do not edit by hand.
 
 Budget warnings in this catalog are guidance for context hygiene; they do not make complete domain installation invalid.
 
@@ -259,6 +259,6 @@ Budget warnings in this catalog are guidance for context hygiene; they do not ma
 
 | Skill | Path | Description | Recommended scope | Network | Executes code | Writes files | Last reviewed | Install |
 |---|---|---|---|---:|---:|---:|---|---|
-| `chinese-prose` | `skills/writing/core/chinese-prose` | 中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和“说人话”终审。用于中文为主、降低 AI 味/翻译腔/模板腔/宣传腔、移除非必要英文、修正版本/阶段名误用和机器字段先行，同时保护事实、数字、术语、命令、引用、实验结果、证据边界和中文读者习惯。 | `project` | False | False | True | `2026-07-08` | `ai-skills install --target repo --skill writing/core/chinese-prose --mode symlink --write-agents-md` |
+| `chinese-prose` | `skills/writing/core/chinese-prose` | 中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和“说人话”终审。任何中文 Markdown/PDF/报告/README/面向用户或读者的中文内容都应自动触发本 skill，用于中文为主、降低 AI 味/翻译腔/模板腔/宣传腔、移除非必要英文、修正版本/阶段名误用和机器字段先行，同时保护事实、数字、术语、命令、引用、实验结果、证据边界和中文读者习惯。 | `global` | False | False | True | `2026-07-30` | `ai-skills install --target repo --skill writing/core/chinese-prose --mode symlink --write-agents-md` |
 | `scientific-prose` | `skills/writing/core/scientific-prose` | English scientific report writing and revision pass. Use for research reports, progress reports, figure-heavy PDFs, manuscripts, rebuttals, technical summaries, and slide text that must keep evidence, uncertainty, captions, and conclusions scientifically defensible without AI-sounding or defensive/self-undermining prose. | `project` | False | False | True | `2026-06-01` | `ai-skills install --target repo --skill writing/core/scientific-prose --mode symlink --write-agents-md` |
-| `writing-fidelity` | `skills/writing/core/writing-fidelity` | Prevent deletion, over-rewriting, mistranslation, formatting breakage, false completion, wrong version labels, and report/audit substitutes. Use for source-faithful Markdown, LaTeX, PDF, slides, reports, notes, best/final labels, month/date labels, author-approved rows, headings, and evidence-bound writing. | `global` | False | False | True | `2026-06-19` | `ai-skills install --target repo --skill writing/core/writing-fidelity --mode symlink --write-agents-md` |
+| `writing-fidelity` | `skills/writing/core/writing-fidelity` | Prevent deletion, over-rewriting, mistranslation, formatting breakage, false completion, wrong version labels, unreadable Chinese final artifacts, and report/audit substitutes. Use for source-faithful Markdown, LaTeX, PDF, slides, reports, notes, best/final labels, month/date labels, author-approved rows, headings, and evidence-bound writing. | `global` | False | False | True | `2026-07-30` | `ai-skills install --target repo --skill writing/core/writing-fidelity --mode symlink --write-agents-md` |

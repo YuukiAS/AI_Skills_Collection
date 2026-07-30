@@ -1,7 +1,7 @@
 {
   "name": "writing-style",
   "version": "4.0.0",
-  "description": "Source-faithful rewriting, Chinese-first say-it-plain reports, version-label fidelity, and scientific prose cleanup without deciding research structure.",
+  "description": "Source-faithful rewriting, automatic Chinese Markdown/PDF/report say-it-plain final passes, version-label fidelity, and scientific prose cleanup without deciding research structure.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Writing Style",
-    "shortDescription": "Source-faithful rewriting, Chinese-first say-it-plain reports, version-label fidelity, and scientific prose cleanup without deciding research structure.",
-    "longDescription": "Source-faithful rewriting, Chinese-first say-it-plain reports, version-label fidelity, and scientific prose cleanup without deciding research structure. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Source-faithful rewriting, automatic Chinese Markdown/PDF/report say-it-plain final passes, version-label fidelity, and scientific prose cleanup without deciding research structure.",
+    "longDescription": "Source-faithful rewriting, automatic Chinese Markdown/PDF/report say-it-plain final passes, version-label fidelity, and scientific prose cleanup without deciding research structure. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [
@@ -29,7 +29,7 @@
     "defaultPrompt": [
       "Make this text clearer without changing meaning.",
       "Polish this Chinese technical text.",
-      "Improve this scientific prose locally."
+      "Final-check this Chinese Markdown/PDF/report/README for reader-facing say-it-plain output."
     ],
     "brandColor": "#7C3AED",
     "composerIcon": "./.codex-plugin/assets/composer.svg",

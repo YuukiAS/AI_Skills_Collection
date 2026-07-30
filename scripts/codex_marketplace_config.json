@@ -57,7 +57,7 @@
       "name": "writing-style",
       "version": "4.0.0",
       "displayName": "Writing Style",
-      "description": "Source-faithful rewriting, Chinese-first say-it-plain reports, version-label fidelity, and scientific prose cleanup without deciding research structure.",
+      "description": "Source-faithful rewriting, automatic Chinese Markdown/PDF/report say-it-plain final passes, version-label fidelity, and scientific prose cleanup without deciding research structure.",
       "category": "Research",
       "brandColor": "#7C3AED",
       "composerIcon": "./assets/codex/plugin-icons/writing-style/composer.svg",
@@ -65,6 +65,7 @@
       "defaultPrompt": [
         "Make this text clearer without changing meaning.",
         "Polish this Chinese technical text.",
+        "Final-check this Chinese Markdown/PDF/report/README for reader-facing say-it-plain output.",
         "Improve this scientific prose locally.",
         "Fix version labels in this Markdown/PDF without changing facts.",
         "Remove defensive scientific framing without overclaiming.",
@@ -86,7 +87,7 @@
           "type": "copy",
           "source": "skills/writing/core/chinese-prose",
           "artifact_id": "zh",
-          "description": "Chinese-first technical, scientific, report, group-meeting, and say-it-plain prose cleanup without document rendering responsibilities."
+          "description": "Automatic Chinese Markdown/PDF/report/README final pass for reader-facing, Chinese-first, say-it-plain technical and scientific prose without document rendering responsibilities."
         }
       ]
     },

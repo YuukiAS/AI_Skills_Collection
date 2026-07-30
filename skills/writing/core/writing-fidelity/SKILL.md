@@ -1,6 +1,6 @@
 ---
 name: writing-fidelity
-description: Prevent deletion, over-rewriting, mistranslation, formatting breakage, false completion, wrong version labels, and report/audit substitutes. Use for source-faithful Markdown, LaTeX, PDF, slides, reports, notes, best/final labels, month/date labels, author-approved rows, headings, and evidence-bound writing.
+description: Prevent deletion, over-rewriting, mistranslation, formatting breakage, false completion, wrong version labels, unreadable Chinese final artifacts, and report/audit substitutes. Use for source-faithful Markdown, LaTeX, PDF, slides, reports, notes, best/final labels, month/date labels, author-approved rows, headings, and evidence-bound writing.
 status: active
 provenance: user-authored
 trusted: false
@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-06-19
+last_reviewed: 2026-07-30
 profile_tags:
   - writing
   - global
@@ -60,6 +60,7 @@ silently satisfy one constraint by violating another.
    previews, audits, or side-by-side candidates as substitutes for the requested
    final artifact.
 8. For Chinese, Markdown, PDF, slide, or report acceptance, verify readability authority before status: the first visible conclusion must be human-readable, and machine fields, paths, commands, status tokens, and audit trails must support rather than replace the conclusion.
+9. If a Chinese Markdown/PDF/slide/report starts with machine fields, paths, commands, status tokens, audit trails, or mixed English process labels before a readable Chinese judgment, classify the deliverable as `qa_failed` until it is rewritten with a reader-facing conclusion first.
 
 ## Version and Label Fidelity
 
@@ -97,6 +98,9 @@ than normalizing names into a cleaner but false story.
   `start/final` project labels instead of the best-supported version.
 - Machine fields, paths, status tokens, or checklist fragments appear before
   the human-readable conclusion in a user-facing report.
+- A Chinese Markdown/PDF/slide/report is technically rendered but its first
+  visible section cannot be understood by the intended reader without reading
+  audit logs, file paths, branch names, or English process tokens.
 
 ## References
 
