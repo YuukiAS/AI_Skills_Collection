@@ -103,6 +103,7 @@ h1, h2, h3, strong, th {{
 }}
 code, pre {{
   font-family: 'Noto Sans Mono CJK SC', 'Source Han Mono SC', monospace;
+  overflow-wrap: anywhere;
 }}
 pre {{
   white-space: pre-wrap;
@@ -111,12 +112,18 @@ pre {{
 table {{
   border-collapse: collapse;
   width: 100%;
+  table-layout: fixed;
+  display: table;
   margin: 1em 0;
+  font-size: 9.5pt;
+  overflow-wrap: anywhere;
 }}
 th, td {{
   border: 1px solid #bbb;
   padding: 4px 7px;
   vertical-align: top;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }}
 img {{
   max-width: 100%;

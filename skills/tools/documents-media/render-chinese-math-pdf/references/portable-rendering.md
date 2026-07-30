@@ -9,7 +9,9 @@ Prefer routes in this order:
 2. Project-local render resources, for example `render_resources/chinese_math_pdf`
    or a checked-in `texmf/` tree.
 3. System `pandoc` with `xelatex` for Markdown sources when the CJK font chain
-   is visible in a raster preview.
+   is visible in a raster preview. This is the preferred route for final
+   reports, group-meeting PDFs, manuscripts, and documents where font
+   provenance should remain auditable in `pdffonts`.
 4. Pandoc HTML plus headless Chromium for Chinese Markdown when TeX CJK fonts
    are missing, invisible, unstable, or consuming repeated header fixes.
 5. System `xelatex` or `lualatex` for LaTeX sources.
@@ -33,9 +35,35 @@ fc-match 'Source Han Serif SC'
 ```
 
 `probe_pdf_render_env.py` also checks `CHINESE_MATH_PDF_RESOURCE_DIRS` as a
-colon-separated list, then shared host resource locations used on this machine,
-including `/overflow/htzhu/mingcheng_new/render_resources`,
-`/overflow/htzhu/render_resources`, and `/users/a/e/aereinh/render_resources`.
+colon-separated list, then local overrides under the current Codex namespace
+(`CODEX_NAMESPACE_ROOT/.config/ai-skills/local-overrides.toml` and the parent
+of `CODEX_GLOBAL_HOME`) before falling back to `HOME`. This matters on clusters
+where `HOME` may still be `/nas` while the active Codex namespace is `/users`.
+After local overrides, the probe checks shared host resource locations used on
+this machine, including `/users/a/e/aereinh/render_resources`,
+`/overflow/htzhu/mingcheng_new/render_resources`, and
+`/overflow/htzhu/render_resources`. In the `/users` CARE namespace,
+`/users/a/e/aereinh/render_resources/chinese_math_pdf` is the preferred
+self-contained resource bundle; `/overflow/.../render_resources` is only a
+compatibility fallback.
+
+This mirrors the Slurm skill's site-profile pattern: the reusable skill stays
+generic, while private or machine-local facts live in a local override/profile.
+For rendering, the local fact is usually only `render_resource_dirs`.
+
+Known namespace-local examples on this host:
+
+```toml
+[sites.local]
+render_resource_dirs = "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf"
+```
+
+```toml
+[sites.local]
+render_resource_dirs = "/users/a/e/aereinh/render_resources/chinese_math_pdf"
+```
+
+Keep those examples as local configuration, not as a required public dependency.
 
 ## Font Downloads For A New Server
 
@@ -78,14 +106,19 @@ is stronger than relying only on Fandol. Without root, unzip the font files unde
 `$HOME/.local/share/fonts`, then run `fc-cache -f $HOME/.local/share/fonts` and
 confirm with `fc-match 'Noto Serif SC'` or `fc-match 'Source Han Serif SC'`.
 
-## Pandoc Skeleton
+## Final-Standard Pandoc/XeLaTeX Skeleton
+
+Use this route when the PDF needs clean font provenance, stable Chinese glyphs,
+and reviewable tables. It avoids requiring Times New Roman; TeX Gyre Termes is
+the portable Times-compatible default on TeX Live systems.
 
 ```bash
-python scripts/build_chinese_math_header.py --output /tmp/chinese-math-header.tex
+python scripts/build_chinese_math_header.py --root <project-root> --output /tmp/chinese-math-header.tex
 mkdir -p /tmp/tex-cache
 TEXMFVAR=/tmp/tex-cache/var \
 TEXMFCONFIG=/tmp/tex-cache/config \
 TEXMFCACHE=/tmp/tex-cache/cache \
+TEXINPUTS="$(python scripts/probe_pdf_render_env.py --root <project-root> | python -c 'import json,sys; d=json.load(sys.stdin); p=d["summary"].get("recommended_resource_dir"); print((p + "/texmf//:") if p else "")')" \
 pandoc input.md \
   --from markdown+tex_math_dollars+tex_math_single_backslash \
   --pdf-engine=xelatex \
@@ -112,7 +145,9 @@ The helper converts Markdown to standalone HTML with Pandoc, injects local
 Fandol fonts from `render_resources/chinese_math_pdf` when present, prints with
 headless Chromium, suppresses browser headers/footers, and leaves PDF QA to
 `validate_pdf_layout.py`. It is a fallback render route, not a reason to skip
-source cleanup or visual inspection.
+source cleanup or visual inspection. Chrome/Skia may report local CJK fonts as
+unnamed Type 3 fonts in `pdffonts`; report that limitation when the user asks
+what font the PDF uses.
 
 ## Dependency Failure Handling
 

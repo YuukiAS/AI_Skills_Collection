@@ -34,14 +34,29 @@ workflow.
    `python scripts/probe_pdf_render_env.py --root <project-root> --pretty`.
    Treat a usable `render_resources/chinese_math_pdf` bundle as a valid CJK
    render route even when system `kpsewhich` cannot find `xeCJK` or `ctex`.
+   The probe is the local layer of this skill: it should find namespace-local
+   resources and overrides without baking private paths into the reusable skill.
 3. Choose the narrowest viable route:
    - Existing project render command when documented and current.
    - Project-local render resources for fonts, TeX headers, or `texmf`.
+   - User-namespace render resources when available, especially
+     `/users/a/e/aereinh/render_resources/chinese_math_pdf` for `/users`
+     CARE work. Treat `/overflow/.../render_resources` only as a migration or
+     compatibility fallback, not as the preferred dependency for `/users`.
+   - For final reports, group-meeting PDFs, manuscripts, or anything where
+     font provenance matters, prefer Pandoc plus XeLaTeX with named fonts
+     (`TeX Gyre Termes` or another Times-compatible TeX font for Latin, and
+     Fandol/Noto/Source Han for CJK). Do not require Times New Roman; it is not
+     a portable Linux dependency.
    - Pandoc plus XeLaTeX for Markdown with CJK and conventional math when the
      CJK font chain is known to render visibly.
    - Pandoc HTML plus headless Chromium for Chinese Markdown when TeX CJK fonts
      are missing, invisible, unstable, or taking repeated header tweaks. Use
      `python scripts/render_markdown_pdf_chromium.py input.md output.pdf --root <project-root>`.
+     Treat this as an internal-report fallback unless visual QA confirms that
+     wide tables, equations, and font embedding are acceptable. Chrome/Skia may
+     embed local fonts as unnamed Type 3 fonts, so it is not the best route when
+     the deliverable must expose clean font names in `pdffonts`.
    - Direct XeLaTeX/LuaLaTeX for already-authored `.tex`.
    - Block with exact missing dependencies if no available route can render CJK
      safely.
@@ -49,7 +64,8 @@ workflow.
    TeX cache variables when needed, for example `TEXMFVAR`, `TEXMFCONFIG`, and
    `TEXMFCACHE`, so rendering does not fail on read-only home/cache paths.
 5. If a Pandoc header is needed, generate a portable starting point:
-   `python scripts/build_chinese_math_header.py --output /tmp/chinese-math-header.tex`.
+   `python scripts/build_chinese_math_header.py --root <project-root> --output /tmp/chinese-math-header.tex`.
+   The helper should pick the same local resource bundle reported by the probe.
    Override fonts or resource paths only after confirming they exist.
 6. Preserve source meaning. Do not delete equations, tables, references, or
    Chinese prose to make compilation easier. If AI citation handles or private
@@ -59,7 +75,9 @@ workflow.
    - `pdfinfo` for page count and metadata when available.
    - `pdftotext -layout` for extractable Chinese, English, formula context,
      abnormal CJK line fragmentation, and table row survival.
-   - `pdffonts` for embedded/subset fonts when available.
+   - `pdffonts` for embedded/subset fonts when available. For a final-standard
+     PDF, named TrueType/OpenType/CID fonts are preferred; an all-Type-3
+     Chrome export is acceptable only after reporting that limitation.
    - `python scripts/validate_pdf_layout.py <pdf> --source <source.md>` when the
      source is Markdown or table-heavy; by default this emits a first-page PNG
      preview beside the PDF.
