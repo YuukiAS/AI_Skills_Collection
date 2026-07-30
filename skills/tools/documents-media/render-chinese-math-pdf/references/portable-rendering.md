@@ -92,6 +92,16 @@ Recommended download links:
 - Source Han Sans Simplified Chinese: `https://github.com/adobe-fonts/source-han-sans/releases/download/2.005R/09_SourceHanSansSC.zip`.
 - Source Han Serif Simplified Chinese: `https://github.com/adobe-fonts/source-han-serif/releases/download/2.003R/09_SourceHanSerifSC.zip`.
 
+For final-standard XeLaTeX PDFs, a local resource bundle should prefer one of
+the viewer-compatible CJK families above. Place the extracted files under a
+stable subdirectory such as `texmf/fonts/opentype/public/noto-cjk/` or
+`texmf/fonts/opentype/public/source-han/`. The probe and header helper recognize
+common `NotoSerifCJKsc-*`, `NotoSansCJKsc-*`, `NotoSerifSC-*`,
+`NotoSansSC-*`, `SourceHanSerifSC-*`, `SourceHanSansSC-*`, and
+`DroidSansFallback*.ttf` filenames. Fandol can stay in the same bundle as a
+small fallback, but it should not outrank Noto, Source Han, or Droid for
+deliverables where the user's PDF viewer is the acceptance target.
+
 Minimal no-root setup using the Fandol bundle:
 
 ```bash
@@ -115,10 +125,11 @@ confirm with `fc-match 'Noto Serif SC'` or `fc-match 'Source Han Serif SC'`.
 Use this route when the PDF needs clean font provenance, stable Chinese glyphs,
 and reviewable tables. It avoids requiring Times New Roman; TeX Gyre Termes is
 the portable Times-compatible default on TeX Live systems. For CJK, prefer a
-system font that survives the target viewer and reports `uni yes`, such as
-Noto/Source Han when installed or Droid Sans Fallback on this host. The helper
-falls back to bundled Fandol only when no exact system CJK font is found, unless
-`--prefer-resource-cjk` is explicitly passed.
+system font that survives the target viewer and reports `uni yes`, then
+viewer-compatible fonts from the selected local resource bundle, such as
+Noto/Source Han or Droid. The helper falls back to bundled Fandol only when no
+exact system CJK font and no stronger resource CJK font is found. Pass
+`--prefer-resource-cjk` when validating a newly downloaded resource bundle.
 
 ```bash
 python scripts/build_chinese_math_header.py --root <project-root> --output /tmp/chinese-math-header.tex

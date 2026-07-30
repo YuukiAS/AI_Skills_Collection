@@ -45,6 +45,21 @@ class RenderChineseMathPdfTests(unittest.TestCase):
         self.assertTrue(matching[0]["tex_files"]["xeCJK.sty"].endswith("xeCJK.sty"))
 
 
+    def test_resource_bundle_reports_viewer_compatible_cjk_fonts(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            bundle = root / "render_resources/chinese_math_pdf"
+            font_dir = bundle / "texmf/fonts/opentype/public/noto-cjk"
+            font_dir.mkdir(parents=True)
+            (font_dir / "NotoSerifCJKsc-Regular.otf").write_text("font", encoding="utf-8")
+            info = probe.resource_bundle_info(bundle)
+
+        self.assertTrue(info["has_viewer_compatible_cjk_font"])
+        self.assertFalse(info["has_fandol_fallback"])
+        self.assertIn("Noto Serif CJK SC", info["viewer_compatible_cjk_font_files"])
+        self.assertTrue(info["viewer_compatible_cjk_font_files"]["Noto Serif CJK SC"][0].endswith("NotoSerifCJKsc-Regular.otf"))
+
+
     def test_resource_bundle_detected_from_shared_roots(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -75,6 +90,26 @@ class RenderChineseMathPdfTests(unittest.TestCase):
             override.write_text(f'[sites.local]\nrender_resource_dirs = "{override_root}"\n', encoding="utf-8")
             bundles = probe.find_project_resource_bundles(root / "project", local_override=override)
         self.assertTrue(any(item["path"] == str(override_root) for item in bundles))
+
+    def test_local_override_precedes_parent_resource_fallback(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            override_root = root / "override/chinese_math_pdf"
+            parent_root = root / "render_resources/chinese_math_pdf"
+            override_root.mkdir(parents=True)
+            parent_root.mkdir(parents=True)
+            override = root / "local-overrides.toml"
+            override.write_text(f'[sites.local]\nrender_resource_dirs = "{override_root}"\n', encoding="utf-8")
+            bundles = probe.find_project_resource_bundles(root / "project", local_override=override)
+
+        self.assertGreaterEqual(len(bundles), 2)
+        self.assertEqual(bundles[0]["path"], str(override_root))
+        self.assertEqual(bundles[1]["path"], str(parent_root))
+
+    def test_unreadable_local_override_is_ignored(self) -> None:
+        with mock.patch.object(probe.Path, "exists", side_effect=PermissionError("denied")):
+            roots = probe.local_override_resource_roots(Path("/nas/blocked/local-overrides.toml"))
+        self.assertEqual(roots, [])
 
     def test_resource_bundle_detected_from_environment_variable(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -176,6 +211,38 @@ class RenderChineseMathPdfTests(unittest.TestCase):
                 header = header_builder.build_header(args)
 
         self.assertIn("DroidSansFallbackFull.ttf", header)
+        self.assertNotIn("FandolSong-Regular.otf", header)
+
+    def test_header_prefers_viewer_compatible_resource_font_over_fandol(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            resource = root / "render_resources/chinese_math_pdf"
+            font_dir = resource / "texmf/fonts/opentype/public/noto-cjk"
+            fandol_dir = resource / "texmf/fonts/opentype/public/fandol"
+            font_dir.mkdir(parents=True)
+            fandol_dir.mkdir(parents=True)
+            (font_dir / "NotoSerifCJKsc-Regular.otf").write_text("font", encoding="utf-8")
+            (font_dir / "NotoSerifCJKsc-Bold.otf").write_text("font", encoding="utf-8")
+            (fandol_dir / "FandolSong-Regular.otf").write_text("font", encoding="utf-8")
+
+            args = type(
+                "Args",
+                (),
+                {
+                    "root": root,
+                    "resource_dir": resource,
+                    "cjk_font": "Noto Serif CJK SC",
+                    "main_font": "TeX Gyre Termes",
+                    "mono_font": "TeX Gyre Cursor",
+                    "prefer_resource_cjk": True,
+                },
+            )()
+
+            with mock.patch.object(header_builder, "fc_match_font", return_value=None):
+                header = header_builder.build_header(args)
+
+        self.assertIn("NotoSerifCJKsc-Regular.otf", header)
+        self.assertIn("NotoSerifCJKsc-Bold.otf", header)
         self.assertNotIn("FandolSong-Regular.otf", header)
 
     def test_cjk_fragmentation_flags_excessive_short_lines(self) -> None:

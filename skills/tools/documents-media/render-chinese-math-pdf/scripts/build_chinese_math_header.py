@@ -21,6 +21,34 @@ FANDOL_FILES = {
     "kai": "FandolKai-Regular.otf",
 }
 
+RESOURCE_CJK_FONT_CANDIDATES = [
+    {
+        "name": "Noto Serif CJK SC",
+        "regular": ["NotoSerifCJKsc-Regular.otf", "NotoSerifSC-Regular.otf"],
+        "bold": ["NotoSerifCJKsc-Bold.otf", "NotoSerifSC-Bold.otf"],
+    },
+    {
+        "name": "Source Han Serif SC",
+        "regular": ["SourceHanSerifSC-Regular.otf"],
+        "bold": ["SourceHanSerifSC-Bold.otf", "SourceHanSerifSC-Heavy.otf"],
+    },
+    {
+        "name": "Noto Sans CJK SC",
+        "regular": ["NotoSansCJKsc-Regular.otf", "NotoSansSC-Regular.otf"],
+        "bold": ["NotoSansCJKsc-Bold.otf", "NotoSansSC-Bold.otf"],
+    },
+    {
+        "name": "Source Han Sans SC",
+        "regular": ["SourceHanSansSC-Regular.otf"],
+        "bold": ["SourceHanSansSC-Bold.otf", "SourceHanSansSC-Heavy.otf"],
+    },
+    {
+        "name": "Droid Sans Fallback",
+        "regular": ["DroidSansFallbackFull.ttf", "DroidSansFallback.ttf"],
+        "bold": [],
+    },
+]
+
 CJK_SYSTEM_FONT_CANDIDATES = [
     "Noto Serif CJK SC",
     "Source Han Serif SC",
@@ -47,6 +75,14 @@ TEX_GYRE_CURSOR_FILES = {
 def find_file(root: Path, filename: str) -> Path | None:
     matches = list(root.rglob(filename))
     return matches[0] if matches else None
+
+
+def find_first_file(root: Path, filenames: list[str]) -> Path | None:
+    for filename in filenames:
+        found = find_file(root, filename)
+        if found:
+            return found
+    return None
 
 
 def kpsewhich_file(filename: str) -> Path | None:
@@ -122,6 +158,17 @@ def system_cjk_font_block(cjk_font: str) -> str | None:
 def resource_font_block(resource_dir: Path | None) -> str | None:
     if not resource_dir:
         return None
+    for candidate in RESOURCE_CJK_FONT_CANDIDATES:
+        regular = find_first_file(resource_dir, candidate["regular"])
+        if not regular:
+            continue
+        font_dir = regular.parent
+        options = [f"Path={{{font_dir.as_posix()}/}}"]
+        bold = find_first_file(resource_dir, candidate["bold"])
+        if bold and bold.parent == font_dir:
+            options.append(f"BoldFont={{{bold.name}}}")
+        return "\\setCJKmainfont[\n  " + ",\n  ".join(options) + f"\n]{{{regular.name}}}"
+
     files = {key: find_file(resource_dir, name) for key, name in FANDOL_FILES.items()}
     if not files["song"]:
         return None
@@ -211,7 +258,7 @@ def main() -> int:
     parser.add_argument(
         "--prefer-resource-cjk",
         action="store_true",
-        help="Prefer bundled Fandol CJK fonts over system viewer-compatible CJK fonts.",
+        help="Prefer bundled resource CJK fonts over system viewer-compatible CJK fonts.",
     )
     args = parser.parse_args()
 

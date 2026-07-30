@@ -68,7 +68,9 @@ workflow.
 5. If a Pandoc header is needed, generate a portable starting point:
    `python scripts/build_chinese_math_header.py --root <project-root> --output /tmp/chinese-math-header.tex`.
    The helper should pick the same local resource bundle reported by the probe.
-   Override fonts or resource paths only after confirming they exist.
+   It should prefer viewer-compatible resource fonts such as Noto, Source Han,
+   or Droid over bundled Fandol when those files exist. Override fonts or
+   resource paths only after confirming they exist.
 6. Preserve source meaning. Do not delete equations, tables, references, or
    Chinese prose to make compilation easier. If AI citation handles or private
    placeholder characters are present, clean them using the citation cleanup

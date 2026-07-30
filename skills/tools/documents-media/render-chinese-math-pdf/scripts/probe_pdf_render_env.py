@@ -44,6 +44,7 @@ CJK_FONT_CANDIDATES = [
     "Noto Sans CJK SC",
     "Source Han Serif SC",
     "Source Han Sans SC",
+    "Droid Sans Fallback",
     "FandolSong",
     "AR PL UMing CN",
     "WenQuanYi Micro Hei",
@@ -63,6 +64,41 @@ SHARED_RESOURCE_ROOTS = [
     Path("/overflow/htzhu/render_resources/chinese_math_pdf"),
 ]
 LOCAL_OVERRIDE_RELATIVE = Path(".config") / "ai-skills" / "local-overrides.toml"
+
+VIEWER_COMPATIBLE_CJK_RESOURCE_FONTS = {
+    "Noto Serif CJK SC": [
+        "NotoSerifCJKsc-Regular.otf",
+        "NotoSerifSC-Regular.otf",
+        "NotoSerifCJKsc-Bold.otf",
+        "NotoSerifSC-Bold.otf",
+    ],
+    "Source Han Serif SC": [
+        "SourceHanSerifSC-Regular.otf",
+        "SourceHanSerifSC-Bold.otf",
+        "SourceHanSerifSC-Heavy.otf",
+    ],
+    "Noto Sans CJK SC": [
+        "NotoSansCJKsc-Regular.otf",
+        "NotoSansSC-Regular.otf",
+        "NotoSansCJKsc-Bold.otf",
+        "NotoSansSC-Bold.otf",
+    ],
+    "Source Han Sans SC": [
+        "SourceHanSansSC-Regular.otf",
+        "SourceHanSansSC-Bold.otf",
+        "SourceHanSansSC-Heavy.otf",
+    ],
+    "Droid Sans Fallback": [
+        "DroidSansFallbackFull.ttf",
+        "DroidSansFallback.ttf",
+    ],
+}
+
+FANDOL_RESOURCE_FONTS = {
+    "FandolSong": ["FandolSong-Regular.otf"],
+    "FandolHei": ["FandolHei-Regular.otf"],
+    "FandolKai": ["FandolKai-Regular.otf"],
+}
 
 
 def run_version(command: str) -> str | None:
@@ -182,15 +218,26 @@ def split_resource_list(raw: str | None) -> list[Path]:
     return items
 
 
+def path_exists(path: Path) -> bool:
+    try:
+        return path.exists()
+    except OSError:
+        return False
+
+
 def env_resource_roots() -> list[Path]:
     return split_resource_list(os.environ.get("CHINESE_MATH_PDF_RESOURCE_DIRS", ""))
 
 
 def local_override_resource_roots(path: Path) -> list[Path]:
-    if not path.exists():
+    if not path_exists(path):
         return []
     roots: list[Path] = []
-    for raw_line in path.read_text(encoding="utf-8").splitlines():
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return []
+    for raw_line in lines:
         line = raw_line.strip()
         if not line or line.startswith("#") or "=" not in line:
             continue
@@ -213,28 +260,49 @@ def find_file(root: Path, filename: str) -> str | None:
     return str(matches[0]) if matches else None
 
 
+def find_files(root: Path, filenames: list[str]) -> list[str]:
+    found: list[str] = []
+    for filename in filenames:
+        path = find_file(root, filename)
+        if path:
+            found.append(path)
+    return found
+
+
 def resource_bundle_info(path: Path) -> dict[str, Any]:
     texmf = path / "texmf" if (path / "texmf").exists() else path
     scripts = path / "scripts"
     templates = path / "templates"
     tex_files = {filename: find_file(texmf, filename) for filename in TEX_FILES}
+    viewer_cjk_font_files = {
+        family: find_files(texmf, filenames) for family, filenames in VIEWER_COMPATIBLE_CJK_RESOURCE_FONTS.items()
+    }
+    fallback_cjk_font_files = {
+        family: find_files(texmf, filenames) for family, filenames in FANDOL_RESOURCE_FONTS.items()
+    }
     font_files = {
-        "FandolSong-Regular.otf": find_file(texmf, "FandolSong-Regular.otf"),
-        "FandolHei-Regular.otf": find_file(texmf, "FandolHei-Regular.otf"),
-        "FandolKai-Regular.otf": find_file(texmf, "FandolKai-Regular.otf"),
+        filename: find_file(texmf, filename)
+        for filenames in [*VIEWER_COMPATIBLE_CJK_RESOURCE_FONTS.values(), *FANDOL_RESOURCE_FONTS.values()]
+        for filename in filenames
     }
     wrappers = {
         "render_markdown_pdf.sh": str(scripts / "render_markdown_pdf.sh") if (scripts / "render_markdown_pdf.sh").exists() else None,
         "validate_pdf.sh": str(scripts / "validate_pdf.sh") if (scripts / "validate_pdf.sh").exists() else None,
     }
     template = templates / "chinese_math_pandoc_header.tex.in"
-    usable = bool(tex_files.get("xeCJK.sty") and tex_files.get("ctexart.cls") and font_files.get("FandolSong-Regular.otf"))
+    has_viewer_cjk = any(paths for paths in viewer_cjk_font_files.values())
+    has_fandol = bool(fallback_cjk_font_files["FandolSong"])
+    usable = bool(tex_files.get("xeCJK.sty") and tex_files.get("ctexart.cls") and (has_viewer_cjk or has_fandol))
     return {
         "path": str(path),
         "texmf": str(texmf),
         "usable_chinese_math_bundle": usable,
         "tex_files": tex_files,
         "font_files": font_files,
+        "viewer_compatible_cjk_font_files": viewer_cjk_font_files,
+        "fallback_cjk_font_files": fallback_cjk_font_files,
+        "has_viewer_compatible_cjk_font": has_viewer_cjk,
+        "has_fandol_fallback": has_fandol,
         "header_template": str(template) if template.exists() else None,
         "wrappers": wrappers,
     }
@@ -286,7 +354,18 @@ def find_project_resource_bundles(
     if local_override is not None:
         local_overrides = [local_override]
     candidates: list[Path] = []
-    for base in ancestor_dirs(root):
+    resolved_root = root.resolve()
+    candidates.extend(
+        [
+            resolved_root / "render_resources" / "chinese_math_pdf",
+            resolved_root / "texmf",
+            resolved_root / ".texlive" / "texmf",
+        ]
+    )
+    candidates.extend(env_resource_roots())
+    for local_override in local_overrides or default_local_override_paths(root):
+        candidates.extend(local_override_resource_roots(local_override))
+    for base in resolved_root.parents:
         candidates.extend(
             [
                 base / "render_resources" / "chinese_math_pdf",
@@ -294,9 +373,6 @@ def find_project_resource_bundles(
                 base / ".texlive" / "texmf",
             ]
         )
-    candidates.extend(env_resource_roots())
-    for local_override in local_overrides or default_local_override_paths(root):
-        candidates.extend(local_override_resource_roots(local_override))
     candidates.extend(SHARED_RESOURCE_ROOTS)
     found: list[dict[str, Any]] = []
     seen: set[Path] = set()
@@ -344,6 +420,12 @@ def main() -> int:
         local_override_roots.extend(local_override_resource_roots(local_override))
     resource_bundles = find_project_resource_bundles(args.root, local_overrides=local_overrides)
     usable_bundles = [item for item in resource_bundles if item["usable_chinese_math_bundle"]]
+    resource_font_bundles = [
+        item for item in resource_bundles if item["has_viewer_compatible_cjk_font"] or item["has_fandol_fallback"]
+    ]
+    viewer_compatible_resource_bundles = [
+        item for item in resource_bundles if item["has_viewer_compatible_cjk_font"]
+    ]
     chromium_command = first_available_command(["chromium-browser", "chromium", "google-chrome", "google-chrome-stable"])
     usable_system_cjk_fonts = [font for font, info in fontconfig_fonts.items() if info["available"]]
     usable_latin_fonts = [font for font, info in latin_fontconfig_fonts.items() if info["available"]]
@@ -352,12 +434,12 @@ def main() -> int:
         and commands["xelatex"]["available"]
         and tex_files["fontspec.sty"]["available"]
         and (tex_files["xeCJK.sty"]["available"] or bool(usable_bundles))
-        and (bool(usable_bundles) or bool(usable_system_cjk_fonts))
+        and (bool(resource_font_bundles) or bool(usable_system_cjk_fonts))
     )
     html_chromium_candidate = (
         bool(chromium_command)
         and commands["pandoc"]["available"]
-        and (bool(usable_bundles) or bool(usable_system_cjk_fonts))
+        and (bool(resource_font_bundles) or bool(usable_system_cjk_fonts))
     )
     if xelatex_named_fonts_candidate:
         preferred_route = "pandoc_xelatex_named_fonts"
@@ -377,8 +459,8 @@ def main() -> int:
         "latin_fontconfig_fonts": latin_fontconfig_fonts,
         "local_override": {
             "paths": [str(path) for path in local_overrides],
-            "existing_paths": [str(path) for path in local_overrides if path.exists()],
-            "exists": any(path.exists() for path in local_overrides),
+            "existing_paths": [str(path) for path in local_overrides if path_exists(path)],
+            "exists": any(path_exists(path) for path in local_overrides),
             "render_resource_dirs": [str(path) for path in local_override_roots],
         },
         "project_resources": [item["path"] for item in resource_bundles],
@@ -393,11 +475,22 @@ def main() -> int:
             "usable_system_cjk_fonts": usable_system_cjk_fonts,
             "usable_latin_fonts": usable_latin_fonts,
             "usable_resource_bundle_count": len(usable_bundles),
-            "recommended_resource_dir": usable_bundles[0]["path"] if usable_bundles else None,
+            "resource_font_bundle_count": len(resource_font_bundles),
+            "viewer_compatible_resource_bundle_count": len(viewer_compatible_resource_bundles),
+            "recommended_resource_dir": (
+                usable_bundles[0]["path"]
+                if usable_bundles
+                else resource_font_bundles[0]["path"]
+                if resource_font_bundles
+                else None
+            ),
+            "recommended_viewer_compatible_resource_dir": (
+                viewer_compatible_resource_bundles[0]["path"] if viewer_compatible_resource_bundles else None
+            ),
             "preferred_route": preferred_route,
             "font_policy": {
                 "preferred_latin": "TeX Gyre Termes",
-                "preferred_cjk": "FandolSong from the selected resource bundle, or Noto/Source Han CJK",
+                "preferred_cjk": "system Noto/Source Han/Droid with uni yes; otherwise Noto/Source Han/Droid from the selected local resource bundle; Fandol only as compact fallback",
                 "avoid_required_times_new_roman": True,
                 "chromium_type3_warning": "Chromium/Skia PDF output may embed local CJK fonts as unnamed Type 3 fonts.",
             },
