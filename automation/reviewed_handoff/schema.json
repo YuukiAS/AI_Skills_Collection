@@ -1,0 +1,38 @@
+{
+  "schema": "AI_BRIDGE_REVIEWED_HANDOFF_SCHEMA_V1",
+  "roles": ["Planner", "Executor", "Reviewer"],
+  "task_states": [
+    "PLAN_REQUESTED",
+    "PLAN_FROZEN",
+    "EXECUTING",
+    "WAITING_FOR_CI",
+    "NEEDS_GPT_PLANNER",
+    "READY_FOR_GPT_REVIEW",
+    "REVISE",
+    "PASS",
+    "AWAIT_HUMAN_DECISION",
+    "BLOCKED"
+  ],
+  "review_decisions": ["PASS", "REVISE", "BLOCKED"],
+  "max_review_rounds": 2,
+  "max_plan_revisions": 1,
+  "allowed_transitions": {
+    "PLAN_REQUESTED": ["PLAN_FROZEN", "BLOCKED"],
+    "PLAN_FROZEN": ["EXECUTING", "BLOCKED"],
+    "EXECUTING": ["WAITING_FOR_CI", "READY_FOR_GPT_REVIEW", "NEEDS_GPT_PLANNER", "BLOCKED"],
+    "WAITING_FOR_CI": ["READY_FOR_GPT_REVIEW", "REVISE", "BLOCKED"],
+    "NEEDS_GPT_PLANNER": ["PLAN_FROZEN", "AWAIT_HUMAN_DECISION", "BLOCKED"],
+    "READY_FOR_GPT_REVIEW": ["REVISE", "PASS", "BLOCKED"],
+    "REVISE": ["EXECUTING", "NEEDS_GPT_PLANNER", "AWAIT_HUMAN_DECISION", "BLOCKED"],
+    "PASS": ["AWAIT_HUMAN_DECISION"],
+    "AWAIT_HUMAN_DECISION": [],
+    "BLOCKED": []
+  },
+  "anti_overengineering": {
+    "semantic_hash_identity": false,
+    "requirement_ledger": false,
+    "role_receipt_graph": false,
+    "stable_review_snapshot": false,
+    "git_commits_are_locators_only": true
+  }
+}
