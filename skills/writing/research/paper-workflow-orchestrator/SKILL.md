@@ -18,6 +18,8 @@ last_reviewed: 2026-07-09
 profile_tags:
   - research-writing
 recommended_scope: project
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 metadata:
   skill-author: AI Skills Collection maintainers with recorded upstream sources
 ---

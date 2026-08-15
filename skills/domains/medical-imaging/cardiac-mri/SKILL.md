@@ -13,6 +13,8 @@ profile_tags:
   - medical-imaging
   - cmr
 recommended_scope: project
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 ---
 # Cardiac MRI / CMR
 

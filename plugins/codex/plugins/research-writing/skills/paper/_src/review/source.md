@@ -11,6 +11,8 @@ secrets_needed:
 last_reviewed: 2026-05-14
 profile_tags:
 recommended_scope: project
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 license: MIT base skill plus locally rewritten ICLR workflow from no-license-observed source; see provenance
 metadata:
   skill-author: K-Dense Inc.

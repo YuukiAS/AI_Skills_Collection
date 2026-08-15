@@ -14,6 +14,7 @@ from skill_utils import ROOT, active_skill_records, read_frontmatter
 
 CONFIG = ROOT / "scripts" / "codex_marketplace_config.json"
 SVG_SCRIPT_RE = re.compile(r"<\s*script|\bon\w+\s*=", re.IGNORECASE)
+ICON_FIELDS = ("icon_small", "icon_large")
 
 
 def load_config() -> dict:
@@ -29,6 +30,17 @@ def check_svg(path: Path, errors: list[str]) -> None:
         errors.append(f"not an svg: {path.relative_to(ROOT).as_posix()}")
     if SVG_SCRIPT_RE.search(text):
         errors.append(f"unsafe svg content: {path.relative_to(ROOT).as_posix()}")
+
+
+def check_icon_file(path: Path, errors: list[str]) -> None:
+    suffix = path.suffix.lower()
+    if suffix == ".svg":
+        check_svg(path, errors)
+    elif suffix == ".png":
+        if not path.exists():
+            errors.append(f"missing icon: {path.relative_to(ROOT).as_posix()}")
+    else:
+        errors.append(f"unsupported icon type: {path.relative_to(ROOT).as_posix()}")
 
 
 def marketplace_errors() -> list[str]:
@@ -80,20 +92,20 @@ def marketplace_app_skill_errors() -> list[str]:
                 source = entry.get("source")
                 skill_dir = ROOT / str(source)
                 meta, _ = read_frontmatter(skill_dir / "SKILL.md")
-                for field in ("icon_small", "icon_large"):
+                for field in ICON_FIELDS:
                     icon = skill_asset(skill_dir, meta.get(field))
                     if icon is None:
                         errors.append(f"plugin {plugin_name} skill {source}: missing {field}")
                     else:
-                        check_svg(icon, errors)
+                        check_icon_file(icon, errors)
             elif entry_type == "aggregate":
                 name = entry.get("name", "<unknown>")
-                for field in ("icon_small", "icon_large"):
+                for field in ICON_FIELDS:
                     icon = repo_asset(entry.get(field))
                     if icon is None:
                         errors.append(f"plugin {plugin_name} aggregate {name}: missing {field}")
                     else:
-                        check_svg(icon, errors)
+                        check_icon_file(icon, errors)
     return errors
 
 
@@ -101,6 +113,13 @@ def active_skill_errors() -> list[str]:
     errors: list[str] = []
     for record in active_skill_records(include_archive=False):
         skill_dir = ROOT / record["path"]
+        meta, _ = read_frontmatter(skill_dir / "SKILL.md")
+        for field in ICON_FIELDS:
+            icon = skill_asset(skill_dir, meta.get(field))
+            if icon is None:
+                errors.append(f"active skill {record['name']} ({record['path']}): missing {field}")
+            else:
+                check_icon_file(icon, errors)
         assets = skill_dir / "assets"
         if not assets.exists():
             continue

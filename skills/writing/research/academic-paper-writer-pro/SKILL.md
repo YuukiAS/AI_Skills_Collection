@@ -11,6 +11,8 @@ secrets_needed:
 last_reviewed: 2026-07-28
 profile_tags:
 recommended_scope: project
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 ---
 # 学术论文排版与交付工作流
 

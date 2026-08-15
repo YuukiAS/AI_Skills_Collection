@@ -19,6 +19,8 @@ profile_tags:
   - maintenance
   - skills
 recommended_scope: project
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 metadata:
   skill-author: AI Skills Collection maintainers with recorded upstream sources
 ---

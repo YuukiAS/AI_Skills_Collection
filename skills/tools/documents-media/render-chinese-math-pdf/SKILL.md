@@ -11,6 +11,8 @@ secrets_needed:
 last_reviewed: 2026-07-02
 profile_tags:
 recommended_scope: global
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 ---
 # render-chinese-math-pdf
 

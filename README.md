@@ -100,7 +100,7 @@ ai-skills install --target repo --profile frontend-research-product --mode copy 
 ai-skills install --target repo --profile server-research-baseline --mode copy --write-agents-md
 ```
 
-完整 domain 安装仍支持。`audit` 的 active skill 数量或描述长度提示是上下文预算提醒，不是安装失败。
+完整 domain 安装仍支持。`profiles/README.md` 记录当前推荐 profile 和保留的兼容 `codex-*` profile；`audit` 的 active skill 数量或描述长度提示是上下文预算提醒，不是安装失败。
 
 ## Server Overlay
 
@@ -122,7 +122,7 @@ ai-skills environment apply --site cuhk-central-cluster --target user
 ai-skills environment diff --site cuhk-central-cluster --target user
 ```
 
-`plan` 只读；`apply` 先 staging 再替换；`doctor` 默认不提交 Slurm 作业，只有显式 `--submit-smoke-job` 才允许进入提交路径。
+`plan` 只读；`doctor` 默认不提交 Slurm 作业；`apply` 先 staging 再替换。只有用户明确要求并提供认证环境时，才做真实登录、Codex App sparse install、CUHK/UNC 远端检查或 Slurm smoke job。
 
 更多本地配置说明见 `docs/LOCAL_CONFIGURATION.md`。
 
@@ -135,7 +135,7 @@ CUHK 模板材料位于：
 skills/tools/documents-media/presentations/shared/templates/cuhk/
 ```
 
-其中保留 Beamer 源、样式、必要 PNG、`design-tokens.json`、PPTX reference deck、生成脚本和本地资源 importer；`.vscode`、XCF、样例 Fig/Table 等 zip 非必要资源不提交。
+其中保留 Beamer 源、样式、必要 PNG、`design-tokens.json`、PPTX reference deck、生成脚本和本地资源 importer；`.vscode`、XCF、样例 Fig/Table 等 zip 非必要资源不提交。仓库测试会检查 CUHK payload 结构和 PPTX zip 有效性；完整 PDF/PPTX render 还要求宿主安装 TeX 包、Times New Roman 兼容字体和 `python-pptx`。
 
 ## 目录边界
 

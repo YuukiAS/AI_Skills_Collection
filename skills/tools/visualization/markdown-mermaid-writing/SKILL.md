@@ -11,6 +11,8 @@ secrets_needed:
 last_reviewed: 2026-07-28
 profile_tags:
 recommended_scope: project
+icon_small: assets/app-facing.svg
+icon_large: assets/app-facing.svg
 license: Apache-2.0
 metadata:
   skill-author: Clayton Young / Superior Byte Works, LLC (@borealBytes)

@@ -157,6 +157,8 @@ def write_frontmatter(skill_file: Path, meta: dict[str, Any], body: str) -> None
         "last_reviewed",
         "profile_tags",
         "recommended_scope",
+        "icon_small",
+        "icon_large",
         "license",
         "source_skills",
         "metadata",
