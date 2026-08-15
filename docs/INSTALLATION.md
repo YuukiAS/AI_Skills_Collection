@@ -137,6 +137,36 @@ ai-skills install --target codex-home --profile global-baseline --mode symlink -
 
 The path is `${CODEX_HOME:-$HOME/.codex}/skills`. The CLI prints detected `CODEX_HOME`, resolved codex home, target skills root, whether `config.toml` exists, writability, and a legacy target warning.
 
+## Server-Local Installation Smoke
+
+Use this when a server should verify the repository install shape without any
+external login, SSH, Codex App UI check, or Slurm submission:
+
+```bash
+ai-skills verify-server-installation
+python3 scripts/verify_server_installation.py --profile server-research-baseline --json
+```
+
+The command defaults to `server-research-baseline`, installs into an
+auto-created temporary Codex home with `--mode copy`, validates the generated
+`.ai-skills-collection-manifest.json`, installed `SKILL.md` frontmatter, icon
+references, and marketplace payload paths, then reports local optional tooling
+such as TeX, Slurm commands, `pandoc`, and `python-pptx`. Missing optional tools
+are warnings by default; install or payload integrity errors are failures.
+
+To inspect the temporary install:
+
+```bash
+ai-skills verify-server-installation --keep
+```
+
+The command refuses existing or real Codex homes unless explicitly allowed:
+
+```bash
+ai-skills verify-server-installation --codex-home /tmp/ai-skills-codex-home-smoke
+ai-skills verify-server-installation --codex-home ~/.codex --allow-real-home
+```
+
 ## Domain, Profile, And Single Skills
 
 Complete domain:

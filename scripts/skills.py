@@ -1364,6 +1364,30 @@ def command_environment_uninstall(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_verify_server_installation(args: argparse.Namespace) -> int:
+    from verify_server_installation import main as verify_main
+
+    forwarded: list[str] = []
+    for value in args.profile:
+        forwarded.extend(["--profile", value])
+    for value in args.domain:
+        forwarded.extend(["--domain", value])
+    for value in args.category:
+        forwarded.extend(["--category", value])
+    for value in args.skill:
+        forwarded.extend(["--skill", value])
+    forwarded.extend(["--mode", args.mode])
+    if args.codex_home:
+        forwarded.extend(["--codex-home", args.codex_home])
+    if args.allow_real_home:
+        forwarded.append("--allow-real-home")
+    if args.keep:
+        forwarded.append("--keep")
+    if args.json:
+        forwarded.append("--json")
+    return verify_main(forwarded)
+
+
 def validate_eval_file(path: Path) -> list[str]:
     errors: list[str] = []
     try:
@@ -1961,6 +1985,21 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--dry-run", action="store_true", help="Plan migration without writing")
     p.add_argument("--yes", action="store_true", help="Reserved for explicit non-interactive confirmation")
     p.set_defaults(func=command_migrate_legacy)
+
+    p = sub.add_parser(
+        "verify-server-installation",
+        help="Run a server-local install smoke test without login, SSH, Codex App, or Slurm submission",
+    )
+    p.add_argument("--profile", action="append", default=[], help="Profile to install; defaults to server-research-baseline")
+    p.add_argument("--domain", action="append", default=[], help="Domain selector to install; repeatable")
+    p.add_argument("--category", action="append", default=[], help="Category selector to install; repeatable")
+    p.add_argument("--skill", action="append", default=[], help="Precise skill selector to install; repeatable")
+    p.add_argument("--mode", choices=["copy", "symlink"], default="copy", help="Install mode for the smoke target")
+    p.add_argument("--codex-home", help="Codex home to use. Omit for an auto-created temporary home")
+    p.add_argument("--allow-real-home", action="store_true", help="Allow writing to an existing or real Codex home")
+    p.add_argument("--keep", action="store_true", help="Keep an auto-created temporary Codex home for inspection")
+    p.add_argument("--json", action="store_true", help="Print machine-readable JSON")
+    p.set_defaults(func=command_verify_server_installation)
 
     return parser
 

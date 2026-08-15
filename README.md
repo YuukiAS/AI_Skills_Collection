@@ -124,6 +124,15 @@ ai-skills environment diff --site cuhk-central-cluster --target user
 
 `plan` 只读；`doctor` 默认不提交 Slurm 作业；`apply` 先 staging 再替换。只有用户明确要求并提供认证环境时，才做真实登录、Codex App sparse install、CUHK/UNC 远端检查或 Slurm smoke job。
 
+服务器本地安装烟测使用临时 Codex home，不登录、不 SSH、不打开 Codex App、不提交 Slurm 作业：
+
+```bash
+ai-skills verify-server-installation
+python3 scripts/verify_server_installation.py --profile server-research-baseline --json
+```
+
+这个 gate 验证 profile 能安装到 Codex home 形状目录、安装后的 `SKILL.md` 与 icon 引用自洽、generated marketplace payload 路径有效，并报告本机 TeX/Slurm/PPTX 等可选工具是否存在。可选工具缺失默认只作为 warning；真正阻断的是安装或 payload 结构错误。
+
 更多本地配置说明见 `docs/LOCAL_CONFIGURATION.md`。
 
 ## Presentation 与 CUHK 模板
@@ -171,4 +180,5 @@ python scripts/build_codex_marketplace.py --write --validate --check --path-repo
 python scripts/provenance_audit.py --check
 python scripts/icon_audit.py --scope marketplace --check
 python -m unittest discover -s tests
+python scripts/verify_server_installation.py --json
 ```
