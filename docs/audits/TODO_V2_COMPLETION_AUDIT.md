@@ -9,7 +9,7 @@ Status vocabulary is limited to `PASS | PARTIAL | FAIL | DEFERRED_USER_ACTION | 
 | `presentations` split from `research-writing` | PASS | `presentations` owns research/business routes and shared CUHK payload; `research-writing` no longer publishes legacy `pptx` or `scientific-slides`. |
 | Chinese README direction | PARTIAL | Main README is Chinese-first; v3.1 continues tightening profile and environment sections. |
 | CUHK LaTeX/PPTX template payload | PARTIAL | Beamer source, design tokens, PPTX builder/reference deck, and importer are tracked; live LaTeX/PPTX render verification depends on local tool availability. |
-| CardiacNexus migration package | DEFERRED_USER_ACTION | Export package remains under `exports/cardiacnexus-repo-local/`; user will merge it into the CardiacNexus repo and then remove the temporary export package. |
+| CardiacNexus migration package | PASS | Temporary export package is absent from this repository; `docs/provenance/INTEGRATION_HISTORY.md` records the repo-local migration; CardiacNexus now tracks the four project skills under `.agents/skills/projects-cmr-cardiacnexus-*` and removes the old tracked `.codex/skills` package. |
 | Historical source compression | PASS | Canonical history lives in `docs/provenance/INTEGRATION_HISTORY.md`; scratch intake remains outside tracked source. |
 | Legacy bundles | PASS | Bundle JSON files moved under `archive/legacy-bundles/`; `scripts/install_bundle.py` is a compatibility shim. |
 | Icon/provenance audit hooks | PARTIAL | Marketplace and app-facing icon audit exists; full source-skill icon coverage remains a planned P1, not a v3.1 blocker. |

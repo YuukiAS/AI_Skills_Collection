@@ -40,4 +40,4 @@ ai-skills install --target repo --skill domain/bayesian/pymc --mode symlink --wr
 - `codex-bioinformatics-light`
 - `codex-skill-maintenance`
 
-`codex-cardiacnexus` 只保留通用支持组合；项目专用 CardiacNexus skills 在 `exports/cardiacnexus-repo-local/`，后续应合并进 CardiacNexus repo。
+`codex-cardiacnexus` 只保留通用支持组合；项目专用 CardiacNexus skills 已迁移为 CardiacNexus repo-local tracked copies under `.agents/skills/projects-cmr-cardiacnexus-*`。
