@@ -73,6 +73,9 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertIn("skills/writing/core/writing-fidelity", profile_skills)
         self.assertIn("skills/writing/core/chinese-prose", profile_skills)
         self.assertIn("skills/writing/core/scientific-prose", profile_skills)
+        self.assertIn("skills/tools/documents-media/render-chinese-math-pdf", profile_skills)
+        self.assertIn("skills/writing/research/citation-verification", profile_skills)
+        self.assertEqual(profile["secondary_skills"], [])
 
     def test_cuhk_template_payload_is_complete_and_reference_deck_is_valid(self) -> None:
         root = SHARED / "templates/cuhk"

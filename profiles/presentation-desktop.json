@@ -7,10 +7,9 @@
     "skills/tools/documents-media/presentations/business-presentations",
     "skills/writing/core/writing-fidelity",
     "skills/writing/core/scientific-prose",
-    "skills/writing/core/chinese-prose"
-  ],
-  "secondary_skills": [
+    "skills/writing/core/chinese-prose",
     "skills/tools/documents-media/render-chinese-math-pdf",
     "skills/writing/research/citation-verification"
-  ]
+  ],
+  "secondary_skills": []
 }

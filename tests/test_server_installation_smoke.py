@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import sys
 import tempfile
 import unittest
@@ -53,6 +54,29 @@ class ServerInstallationSmokeTests(unittest.TestCase):
         errors = smoke.validate_marketplace_payload(checks)
         self.assertEqual(errors, [])
         self.assertTrue(all(check["ok"] for check in checks))
+
+    def test_presentation_desktop_smoke_installs_required_support_skills(self) -> None:
+        args = argparse.Namespace(
+            profile=["presentation-desktop"],
+            domain=[],
+            category=[],
+            skill=[],
+            mode="copy",
+            codex_home=None,
+            allow_real_home=False,
+            keep=True,
+            json=True,
+        )
+        report = smoke.build_report(args)
+        try:
+            self.assertTrue(report["ok"], report)
+            self.assertEqual(report["installed_skill_count"], 7)
+            manifest = json.loads(Path(report["manifest_path"]).read_text(encoding="utf-8"))
+            installed_paths = {item["path"] for item in manifest["installed_skills"]}
+            self.assertIn("skills/tools/documents-media/render-chinese-math-pdf", installed_paths)
+            self.assertIn("skills/writing/research/citation-verification", installed_paths)
+        finally:
+            shutil.rmtree(report["codex_home"], ignore_errors=True)
 
     def test_json_report_is_serializable(self) -> None:
         args = argparse.Namespace(
