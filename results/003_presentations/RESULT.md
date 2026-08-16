@@ -7,12 +7,22 @@ self_declared_pass: false
 
 ## Commit
 
-- implementation_commit: `b2ac1b246007ee848ea058bc54bf9eaef1c3e1a0`
+- implementation_commit: `71db67690b2ce37523c4d7924244f5892f6d8a4a`
+- previous_implementation_commit: `b2ac1b246007ee848ea058bc54bf9eaef1c3e1a0`
 - base_commit: `ebc48dc8ff9a28477f27f8c80167104272cbc55b`
 - branch: `main`
 - remote: `origin/main`
 - branch_policy: no branch or PR created
 - backup_branch_check: no local or remote `backup*` refs found
+
+## Revision Round 1
+
+- planner_review: `results/003_presentations/PLANNER_REVIEW.md`
+- planner_decision: `REVISE`
+- blocker_fixed: connected Chinese slide-text final-pass handoff to the shared PPT routing notes and `business-presentations`, not only `research-presentations`.
+- writing_handoff: Chinese research, business, executive, strategy, product, teaching, and decision deck text now routes to `writing-fidelity` plus `chinese-prose` when installed; English scientific slide text can route to `scientific-prose`.
+- generated_layer: regenerated the presentations plugin snapshot so `plugins/codex/plugins/presentations/shared/ppt-skill-routing.md` and `plugins/codex/plugins/presentations/skills/business/SKILL.md` match source.
+- regression_test: `tests/test_presentations.py` now checks the shared/business Chinese writing handoff and verifies `presentation-desktop` installs the three writing skills.
 
 ## Scope Implemented
 
@@ -38,17 +48,17 @@ self_declared_pass: false
 - `python3 scripts/build_codex_marketplace.py --write --validate --check --path-report`: `plugins=10 active_skills=25 source_snapshots=63`, Windows path budget overage `0`.
 - `python3 scripts/provenance_audit.py --check`: provenance audit passed.
 - `python3 scripts/icon_audit.py --scope marketplace --check`: marketplace icon audit passed.
-- `python3 -m unittest tests.test_presentations`: ran 7 tests, OK.
+- `python3 -m unittest tests.test_presentations`: ran 8 tests, OK.
 - `python3 -m unittest tests.test_codex_marketplace`: ran 26 tests, OK.
-- `python3 -m unittest discover -s tests`: ran 101 tests, OK.
+- `python3 -m unittest discover -s tests`: ran 102 tests, OK.
 - `git diff --check`: passed with no output.
 
 ## GitHub Actions
 
 - workflow: `Codex Marketplace`
-- run_id: `31962376344`
-- url: `https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/31962376344`
-- head_sha: `b2ac1b246007ee848ea058bc54bf9eaef1c3e1a0`
+- run_id: `31965757522`
+- url: `https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/31965757522`
+- head_sha: `71db67690b2ce37523c4d7924244f5892f6d8a4a`
 - status: `completed`
 - conclusion: `success`
 
