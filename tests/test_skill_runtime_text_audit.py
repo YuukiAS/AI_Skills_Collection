@@ -26,6 +26,26 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
         self.assertIn("classify the deliverable as `qa_failed`", text)
         self.assertIn("Chinese Markdown/PDF/slide/report", text)
 
+    def test_writing_style_phase_two_boundaries(self):
+        fidelity = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")
+        chinese = (REPO_ROOT / "skills/writing/core/chinese-prose/SKILL.md").read_text(encoding="utf-8")
+        scientific = (REPO_ROOT / "skills/writing/core/scientific-prose/SKILL.md").read_text(encoding="utf-8")
+
+        self.assertIn("This is the preservation layer, not the style layer", fidelity)
+        self.assertIn("Route Chinese natural-prose passes to chinese-prose", fidelity)
+        self.assertIn("Hand off English scientific prose", fidelity)
+        self.assertIn("detector evasion", fidelity)
+
+        self.assertIn("正文优先用连贯段落", chinese)
+        self.assertIn("不要为了显得结构化把每句话拆成 bullet", chinese)
+        self.assertIn("是否保留英文靠语义判断，不靠禁词表", chinese)
+        self.assertIn("不能为了自然而改掉证据边界", chinese)
+
+        self.assertIn("not the manuscript planner", scientific)
+        self.assertIn("citation verifier", scientific)
+        self.assertIn("Use `research-paper-workflow` for paper-level structure", scientific)
+        self.assertIn("Do not erase real limitations", scientific)
+
 
 if __name__ == "__main__":
     unittest.main()

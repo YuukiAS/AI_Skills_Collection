@@ -1,7 +1,7 @@
 {
   "name": "writing-style",
   "version": "4.0.0",
-  "description": "Source-faithful rewriting, automatic Chinese Markdown/PDF/report say-it-plain final passes, version-label fidelity, and scientific prose cleanup without deciding research structure.",
+  "description": "Writing quality layer with source-fidelity guardrails, Chinese reader-facing say-it-plain final passes, and English scientific prose cleanup without detector evasion or research-structure decisions.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Writing Style",
-    "shortDescription": "Source-faithful rewriting, automatic Chinese Markdown/PDF/report say-it-plain final passes, version-label fidelity, and scientific prose cleanup without deciding research structure.",
-    "longDescription": "Source-faithful rewriting, automatic Chinese Markdown/PDF/report say-it-plain final passes, version-label fidelity, and scientific prose cleanup without deciding research structure. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Writing quality layer with source-fidelity guardrails, Chinese reader-facing say-it-plain final passes, and English scientific prose cleanup without detector evasion or research-structure decisions.",
+    "longDescription": "Writing quality layer with source-fidelity guardrails, Chinese reader-facing say-it-plain final passes, and English scientific prose cleanup without detector evasion or research-structure decisions. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [
@@ -27,9 +27,9 @@
     ],
     "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
     "defaultPrompt": [
-      "Make this text clearer without changing meaning.",
+      "Make this text clearer without changing meaning or protected facts.",
       "Polish this Chinese technical text.",
-      "Final-check this Chinese Markdown/PDF/report/README for reader-facing say-it-plain output."
+      "Rewrite this Chinese report as normal reader-facing prose, not a log."
     ],
     "brandColor": "#7C3AED",
     "composerIcon": "./.codex-plugin/assets/composer.svg",

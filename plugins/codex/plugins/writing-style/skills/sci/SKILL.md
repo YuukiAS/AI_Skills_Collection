@@ -19,6 +19,11 @@ license: MIT-compatible synthesis from cited public/academic writing guidance
 
 Use this skill as the final English writing pass for scientific reports and research communication. It is not a layout tool. It makes prose scientifically defensible, readable, and less template-like.
 
+This is not the manuscript planner, citation verifier, Chinese final pass, or an
+AI-detector evasion tool. Use it after the evidence and intended section are
+known, and keep `writing-fidelity` active when exact numbers, labels, equations,
+citations, source wording, or author-approved structure must be preserved.
+
 ## Use When
 
 - Writing or revising English research reports, progress PDFs, lab updates, manuscripts, thesis sections, figure captions, or technical summaries.
@@ -27,7 +32,7 @@ Use this skill as the final English writing pass for scientific reports and rese
 - Making slide/report text sound like a researcher describing evidence, not a generic AI summary.
 - Removing defensive or self-undermining scientific phrasing while preserving exact limitations.
 
-Do not use it for pure citation search, document conversion, or journal formatting. Use the relevant discovery, PDF, DOCX, PPTX, or venue skill for those tasks.
+Do not use it for pure citation search, document conversion, journal formatting, whole-paper structure planning, reviewer-style risk assessment, or Chinese "say it plainly" final passes. Use `research-paper-workflow` for paper-level structure, `citation-verification` for source/claim support checks, `chinese-prose` for Chinese reader-facing prose, and the relevant PDF, DOCX, PPTX, or venue skill for file or formatting work.
 
 ## Core Rule
 
@@ -56,6 +61,10 @@ If any part is missing, keep the wording bounded rather than filling the gap wit
 7. For figures, check that captions and body text do different jobs.
 8. Return the revised text. If the input is risky, add a short "Evidence notes" section listing overclaims or missing evidence.
 
+Do not erase real limitations to make the text sound more confident. If the
+limitation is real, make it exact and proportional: where it applies, what still
+holds, and what evidence would be needed to go further.
+
 
 ## Confident, Non-Defensive Scientific Framing
 
@@ -81,6 +90,10 @@ Prefer this order in English scientific reports:
 ```
 
 Keep it in normal prose. Do not mechanically label every sentence unless the user asked for a checklist.
+
+Avoid formulaic three-part summaries and generic transitions when the evidence
+does not need them. The structure should follow the scientific argument, not a
+fixed "first/second/finally" template.
 
 ## Claim Boundaries
 

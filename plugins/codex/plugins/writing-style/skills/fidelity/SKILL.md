@@ -1,6 +1,6 @@
 ---
 name: writing-fidelity
-description: Prevent deletion, over-rewriting, mistranslation, formatting breakage, false completion, wrong version labels, unreadable Chinese final artifacts, and report/audit substitutes. Use for source-faithful Markdown, LaTeX, PDF, slides, reports, notes, best/final labels, month/date labels, author-approved rows, headings, and evidence-bound writing.
+description: Preserve facts, corrections, labels, structure, equations, citations, version authority, and final artifact identity during writing edits. Use for source-faithful Markdown, LaTeX, PDF, slides, reports, notes, and evidence-bound writing. Route Chinese natural-prose passes to chinese-prose and English scientific style passes to scientific-prose.
 status: active
 provenance: user-authored
 trusted: false
@@ -22,6 +22,13 @@ Use this skill as a guardrail before editing or finalizing user-facing writing.
 Its purpose is to stop Codex from creating a cleaner-looking substitute that
 violates the user's source, constraints, correction history, or requested
 artifact.
+
+This is the preservation layer, not the style layer. Use it before or alongside
+style work when facts, protected spans, version labels, page/rendered artifact
+identity, or user corrections could be lost. Hand off natural Chinese prose,
+reader-facing "say it plainly" rewrites, and ordinary Chinese de-AI/template
+cleanup to `chinese-prose`. Hand off English scientific prose, evidence-strength
+calibration, and defensive/self-undermining wording to `scientific-prose`.
 
 ## Non-Negotiable Rule
 
@@ -61,6 +68,20 @@ silently satisfy one constraint by violating another.
    final artifact.
 8. For Chinese, Markdown, PDF, slide, or report acceptance, verify readability authority before status: the first visible conclusion must be human-readable, and machine fields, paths, commands, status tokens, and audit trails must support rather than replace the conclusion.
 9. If a Chinese Markdown/PDF/slide/report starts with machine fields, paths, commands, status tokens, audit trails, or mixed English process labels before a readable Chinese judgment, classify the deliverable as `qa_failed` until it is rewritten with a reader-facing conclusion first.
+
+## Hand Off
+
+- Use `chinese-prose` when the main request is "中文说人话", "改自然一点",
+  "不要 AI 味", "别像日志", "普通英文能翻就翻", or "别每句话一个 bullet".
+- Use `scientific-prose` when the main request is polishing English Results,
+  captions, rebuttals, slide text, or scientific reports without overclaiming or
+  sounding defensive.
+- Keep `writing-fidelity` active as a guardrail when those style passes must
+  preserve numbers, equations, citations, paths, headings, user-approved rows,
+  final/best labels, or rendered artifact identity.
+- Do not treat "去 AI 味" as detector evasion, source laundering, or permission
+  to hide authorship. The allowed goal is clearer prose that preserves facts and
+  evidence boundaries.
 
 ## Version and Label Fidelity
 

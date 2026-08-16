@@ -1,6 +1,6 @@
 {
   "name": "global-baseline",
-  "description": "Minimal general-purpose global profile for workflow routing and source-faithful writing.",
+  "description": "Minimal general-purpose global profile for workflow routing, source-faithful writing, Chinese natural prose, and English scientific prose.",
   "max_active_skills": 8,
   "skills": [
     "skills/core/codex-system/codex-workflow-protocol",

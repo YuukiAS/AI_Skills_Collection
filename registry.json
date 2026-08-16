@@ -1,6 +1,6 @@
 {
   "version": "4.0.0",
-  "generated_at": "2026-08-16T15:52:42+00:00",
+  "generated_at": "2026-08-16T16:12:16+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
   "skill_count": 149,
@@ -5872,7 +5872,7 @@
       "subcategory": "core",
       "slug": "writing-fidelity",
       "install_selector": "writing/core/writing-fidelity",
-      "description": "Prevent deletion, over-rewriting, mistranslation, formatting breakage, false completion, wrong version labels, unreadable Chinese final artifacts, and report/audit substitutes. Use for source-faithful Markdown, LaTeX, PDF, slides, reports, notes, best/final labels, month/date labels, author-approved rows, headings, and evidence-bound writing.",
+      "description": "Preserve facts, corrections, labels, structure, equations, citations, version authority, and final artifact identity during writing edits. Use for source-faithful Markdown, LaTeX, PDF, slides, reports, notes, and evidence-bound writing. Route Chinese natural-prose passes to chinese-prose and English scientific style passes to scientific-prose.",
       "status": "active",
       "provenance": "user-authored",
       "source_repo_url": "",
