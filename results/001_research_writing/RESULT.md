@@ -7,11 +7,21 @@ self_declared_pass: false
 
 ## Commit
 
-- implementation_commit: `6354ea48753368b2c5c4738d005abcee34c65491`
+- implementation_commit: `ed5508ab6e20be905f9c89de2f928b135f8dc5ed`
+- previous_implementation_commit: `6354ea48753368b2c5c4738d005abcee34c65491`
 - branch: `main`
 - remote: `origin/main`
 - branch_policy: no branch or PR created
 - backup_branch_check: no local or remote `backup*` refs found
+
+## Revision Round 1
+
+- planner_review: `results/001_research_writing/PLANNER_REVIEW.md`
+- planner_decision: `REVISE`
+- blocker_fixed: narrowed `citation-management` so it no longer presents topic-level Google Scholar / PubMed paper discovery as a normal responsibility.
+- retained_boundary: DOI / PMID / arXiv / URL / exact-title / author-year / known candidate records remain citation-management inputs for BibTeX, metadata repair, duplicate cleanup, and bibliography hygiene.
+- routed_elsewhere: topic-level paper discovery, recent-paper lookup, candidate expansion, and "what should I cite for X" now explicitly route to `research-lookup`.
+- regression_test: `tests/test_research_writing_routing.py` now checks the positive known-record boundary and rejects the old `Paper Discovery and Search` / topic-discovery wording.
 
 ## Scope Implemented
 
@@ -46,13 +56,13 @@ self_declared_pass: false
 ## GitHub Actions
 
 - workflow: `Codex Marketplace`
-- run_id: `31942880283`
-- url: `https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/31942880283`
-- head_sha: `6354ea48753368b2c5c4738d005abcee34c65491`
+- run_id: `31957076027`
+- url: `https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/31957076027`
+- head_sha: `ed5508ab6e20be905f9c89de2f928b135f8dc5ed`
 - status: `completed`
 - conclusion: `success`
-- created_at: `2026-08-16T10:54:00Z`
-- updated_at: `2026-08-16T10:54:38Z`
+- created_at: `2026-08-16T15:55:05Z`
+- updated_at: `2026-08-16T15:55:43Z`
 
 ## Notes For Planner
 

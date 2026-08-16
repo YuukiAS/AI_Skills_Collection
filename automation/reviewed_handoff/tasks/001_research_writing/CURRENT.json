@@ -2,15 +2,15 @@
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "001_research_writing",
   "state": "READY_FOR_GPT_REVIEW",
-  "review_round": 0,
+  "review_round": 1,
   "max_review_rounds": 2,
   "plan_revision": 0,
   "max_plan_revisions": 1,
   "base_commit": "ba38b4643e1078e72f4b8c630eea42ab2b26ebad",
   "base_branch": "main",
-  "implementation_commit": "6354ea48753368b2c5c4738d005abcee34c65491",
+  "implementation_commit": "ed5508ab6e20be905f9c89de2f928b135f8dc5ed",
   "ci_required": true,
   "ci_status": "PASS",
-  "last_review_decision": null,
+  "last_review_decision": "REVISE",
   "next_action": "RUN_GPT_REVIEW"
 }
