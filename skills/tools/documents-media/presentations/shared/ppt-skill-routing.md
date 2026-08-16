@@ -13,7 +13,9 @@ Use whole-slide images only when the user explicitly asks for image/PDF/social-c
 | User intent | Route |
 |---|---|
 | Professional editable PowerPoint with conventional layouts | Editable PPTX through official Presentation/Slides or ChatGPT for PowerPoint, with this repo providing deck plan and QA |
-| Academic, research, technical, group-meeting, seminar, conference, journal-club, or defense slides | LaTeX plus Beamer by default; create `.tex` and PDF, and use PPTX only when the user explicitly requests editable PowerPoint |
+| PPT, PowerPoint, `.pptx`, editable, Slides, or later manual editing | Editable PPTX/Slides through official Presentation/Slides or ChatGPT for PowerPoint, with this repo providing deck plan, source fidelity, and QA |
+| Group meeting, research update, journal club, seminar, defense, paper talk, or technical research slides with no format specified in `presentation-desktop` | Editable Presentation/Slides route by default; do not switch to Beamer only because the content is academic |
+| Explicit Beamer, LaTeX slides, `.tex`, academic PDF, or venue/project-locked TeX template | LaTeX plus Beamer; create `.tex` and PDF, then render and QA |
 | High visual ceiling, multi-format visual outputs, or poster-like pages | Visual direction first, then confirm whether the user accepts image-heavy slides |
 | Narrative, storyline, decision logic, or quality control | `research-presentations` or `business-presentations` deck plan before file creation |
 | HTML-style expressive slides | Frontend visual system plus explicit HTML/PDF routing; do not pretend it is an editable PPTX |
@@ -32,7 +34,7 @@ Known limitations to account for in prompts and QA:
 - vague instructions can change or remove content unexpectedly;
 - users should give concrete edit instructions, review output, and keep a backup of important decks.
 
-Python PowerPoint libraries are not the default implementation path for academic decks. `python-pptx` or python-ppt may be used only for non-academic editable PPTX work, reference-deck scaffolds, or explicitly requested PowerPoint deliverables.
+Python PowerPoint libraries are not the default implementation path for production deck creation when official Presentation/Slides tooling is available. `python-pptx` or python-ppt may be used for reference-deck scaffolds, tests, or explicit fallback work, but do not use a rendered PDF page or whole-slide image to fake an editable PPTX.
 
 ## Prompt Intake Pattern
 
@@ -42,6 +44,7 @@ For non-trivial decks, collect:
 - time limit and slide count;
 - source anchors and required citations;
 - editable PPTX, Google Slides, Beamer, HTML, PDF, or image-slide output;
+- editability expectation: editable deck, Beamer source, static PDF/image, or deck plan only;
 - visual reference and template constraints;
 - whether presenter notes, handout version, or script is required.
 

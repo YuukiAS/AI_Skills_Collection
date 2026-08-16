@@ -22,20 +22,38 @@ class PresentationSharedTests(unittest.TestCase):
         actual = markdown_to_deck_plan.markdown_to_deck_plan(markdown, "Deidentified Research Update")
         self.assertEqual(actual, expected)
 
-    def test_research_markdown_defaults_to_latex_beamer_output(self) -> None:
+    def test_research_markdown_defaults_to_editable_pptx_output(self) -> None:
         actual = markdown_to_deck_plan.markdown_to_deck_plan("# One\nBody", "Research Update")
-        self.assertEqual(actual["metadata"]["output"], "tex")
+        self.assertEqual(actual["metadata"]["output"], "pptx")
+        self.assertEqual(actual["metadata"]["editability"], "editable")
+        self.assertEqual(actual["slides"][0]["slide_purpose"], "communicate one research update message")
+        self.assertIn("evidence-bearing visual", actual["slides"][0]["visual_intent"])
 
-    def test_academic_routing_blocks_pptx_and_requires_render_skill(self) -> None:
+    def test_explicit_tex_still_routes_to_source_editable_latex(self) -> None:
+        actual = markdown_to_deck_plan.markdown_to_deck_plan("# One\nBody", "Research Update", output="tex")
+        self.assertEqual(actual["metadata"]["output"], "tex")
+        self.assertEqual(actual["metadata"]["editability"], "source-editable")
+
+    def test_research_routing_prefers_requested_editability_not_academic_default_beamer(self) -> None:
         research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")
+        ppt_routing = (SHARED / "ppt-skill-routing.md").read_text(encoding="utf-8")
         template_routing = (SHARED / "template-routing.md").read_text(encoding="utf-8")
         latex_notes = (SHARED / "compatibility/openai-latex.md").read_text(encoding="utf-8")
         cuhk_readme = (SHARED / "templates/cuhk/README.md").read_text(encoding="utf-8")
+        visual_qa = (SHARED / "visual-qa.md").read_text(encoding="utf-8")
 
-        self.assertIn("LaTeX plus Beamer by default", research_skill)
-        self.assertIn("Do not use `python-pptx`, python-ppt", research_skill)
+        self.assertIn("Do not default academic or research decks to Beamer", research_skill)
+        self.assertIn("Group meeting, research update, or research slides in a desktop presentation context with no format specified -> editable Presentation/Slides route", research_skill)
+        self.assertIn("PPT, PowerPoint, `.pptx`, editable, Slides, or later manual editing", ppt_routing)
+        self.assertIn("do not switch to Beamer only because the content is academic", ppt_routing)
+        self.assertIn("Explicit Beamer, LaTeX slides, `.tex`, academic PDF", ppt_routing)
+        self.assertIn("Group meeting, research update, paper talk", template_routing)
+        self.assertIn("Do not route academic decks to Beamer only because they are academic", template_routing)
+        self.assertIn("file exists", research_skill)
+        self.assertIn("file existence alone is not completion", visual_qa)
+        self.assertNotIn("LaTeX plus Beamer by default", research_skill)
+        self.assertNotIn("LaTeX plus Beamer by default", template_routing)
         self.assertIn("If the local skill is not installed", research_skill)
-        self.assertIn("Do not route academic decks to `python-pptx`", template_routing)
         self.assertIn("Academic presentation compilation must first use", latex_notes)
         self.assertIn("render-chinese-math-pdf", latex_notes)
         self.assertIn("Preserve the first/title slide layout", cuhk_readme)

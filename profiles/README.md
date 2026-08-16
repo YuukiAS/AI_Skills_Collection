@@ -18,7 +18,7 @@ ai-skills install --target repo --skill domain/bayesian/pymc --mode symlink --wr
 
 - `global-baseline`：最小全局基线，包含流程路由和写作保真。
 - `research-main`：科研写作主力，包含报告、论文、文献、引用、PDF/DOCX/可视化支持。
-- `presentation-desktop`：桌面演示工作，包含 research/business deck planning。
+- `presentation-desktop`：桌面演示工作，包含 research/business deck planning、可编辑 PPTX/Slides 路由和视觉 QA。
 - `frontend-research-product`：科研产品前端、视觉系统、参考研究和实现 QA。
 - `medical-imaging-project`：通用医学影像项目，不复制 CardiacNexus 专用 skill。
 - `bioinformatics-project`：常用生物信息项目组合。

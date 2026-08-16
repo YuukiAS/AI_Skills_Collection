@@ -1,7 +1,7 @@
 {
   "name": "presentations",
   "version": "4.0.0",
-  "description": "Research and business presentation planning, PPT style routing, deck-plan schema, CUHK templates, source fidelity, and visual QA.",
+  "description": "Research and business presentation planning with editable PPTX/Slides routing, explicit Beamer/LaTeX routing, deck-plan schema, source fidelity, and render-based visual QA.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -17,8 +17,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Presentations",
-    "shortDescription": "Research and business presentation planning, PPT style routing, deck-plan schema, CUHK templates, source fidelity, and visual QA.",
-    "longDescription": "Research and business presentation planning, PPT style routing, deck-plan schema, CUHK templates, source fidelity, and visual QA. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Research and business presentation planning with editable PPTX/Slides routing, explicit Beamer/LaTeX routing, deck-plan schema, source fidelity, and render-based visual QA.",
+    "longDescription": "Research and business presentation planning with editable PPTX/Slides routing, explicit Beamer/LaTeX routing, deck-plan schema, source fidelity, and render-based visual QA. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [
@@ -26,9 +26,9 @@
     ],
     "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
     "defaultPrompt": [
-      "Plan a CUHK research presentation.",
-      "Turn this Markdown into a deck plan.",
-      "Choose the right PPT workflow and editability route."
+      "Plan an editable group-meeting research PPT.",
+      "Turn this Markdown into an editable deck plan.",
+      "Choose the right PPTX/Slides vs Beamer route."
     ],
     "brandColor": "#72256D",
     "composerIcon": "./.codex-plugin/assets/composer.svg",

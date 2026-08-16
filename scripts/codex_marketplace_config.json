@@ -190,7 +190,7 @@
       "name": "presentations",
       "version": "4.0.0",
       "displayName": "Presentations",
-      "description": "Research and business presentation planning, PPT style routing, deck-plan schema, CUHK templates, source fidelity, and visual QA.",
+      "description": "Research and business presentation planning with editable PPTX/Slides routing, explicit Beamer/LaTeX routing, deck-plan schema, source fidelity, and render-based visual QA.",
       "category": "Research",
       "brandColor": "#72256D",
       "composerIcon": "./assets/codex/plugin-icons/presentations/composer.svg",
@@ -202,9 +202,10 @@
         }
       ],
       "defaultPrompt": [
-        "Plan a CUHK research presentation.",
-        "Turn this Markdown into a deck plan.",
-        "Choose the right PPT workflow and editability route.",
+        "Plan an editable group-meeting research PPT.",
+        "Turn this Markdown into an editable deck plan.",
+        "Choose the right PPTX/Slides vs Beamer route.",
+        "Plan a Beamer talk when LaTeX slides are explicitly requested.",
         "Plan a business decision deck."
       ],
       "skills": [

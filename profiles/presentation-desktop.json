@@ -1,6 +1,6 @@
 {
   "name": "presentation-desktop",
-  "description": "Desktop presentation profile for research and business deck planning with editable PPTX/Slides handoff.",
+  "description": "Desktop presentation profile for research and business deck planning with editable PPTX/Slides default routing, writing final passes, and visual QA.",
   "max_active_skills": 10,
   "skills": [
     "skills/tools/documents-media/presentations/research-presentations",

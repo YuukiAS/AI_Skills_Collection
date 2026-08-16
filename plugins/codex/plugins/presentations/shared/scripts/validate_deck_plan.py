@@ -9,12 +9,13 @@ from pathlib import Path
 from typing import Any
 
 
-REQUIRED_METADATA = {"title", "audience", "mode", "purpose", "duration_minutes", "language", "template", "output"}
+REQUIRED_METADATA = {"title", "audience", "mode", "purpose", "duration_minutes", "language", "template", "output", "editability"}
 AUDIENCES = {"specialist", "mixed", "general", "executive"}
 MODES = {"research", "business"}
 PURPOSES = {"group-meeting", "conference", "defense", "journal-club", "company", "other"}
 LANGUAGES = {"en", "zh", "mixed"}
 OUTPUTS = {"pptx", "tex", "pdf", "google-slides"}
+EDITABILITY = {"editable", "source-editable", "static", "plan-only"}
 
 
 def validate_deck_plan(data: dict[str, Any]) -> list[str]:
@@ -34,6 +35,7 @@ def validate_deck_plan(data: dict[str, Any]) -> list[str]:
         "purpose": PURPOSES,
         "language": LANGUAGES,
         "output": OUTPUTS,
+        "editability": EDITABILITY,
     }.items():
         if key in metadata and metadata[key] not in allowed:
             errors.append(f"metadata.{key} must be one of {', '.join(sorted(allowed))}")
@@ -49,7 +51,7 @@ def validate_deck_plan(data: dict[str, Any]) -> list[str]:
         if not isinstance(slide, dict):
             errors.append(f"slides[{index}] must be an object")
             continue
-        for field in ("id", "title", "key_message"):
+        for field in ("id", "title", "key_message", "slide_purpose", "visual_intent"):
             if not slide.get(field):
                 errors.append(f"slides[{index}] missing {field}")
         slide_id = str(slide.get("id") or "")

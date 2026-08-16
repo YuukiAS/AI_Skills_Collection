@@ -8,7 +8,7 @@
     "schema_version": { "const": 1 },
     "metadata": {
       "type": "object",
-      "required": ["title", "audience", "mode", "purpose", "duration_minutes", "language", "template", "output"],
+      "required": ["title", "audience", "mode", "purpose", "duration_minutes", "language", "template", "output", "editability"],
       "properties": {
         "title": { "type": "string" },
         "author": { "type": "string" },
@@ -20,6 +20,7 @@
         "language": { "enum": ["en", "zh", "mixed"] },
         "template": { "type": "string", "default": "cuhk-default" },
         "output": { "enum": ["pptx", "tex", "pdf", "google-slides"] },
+        "editability": { "enum": ["editable", "source-editable", "static", "plan-only"] },
         "source_files": { "type": "array", "items": { "type": "string" } }
       },
       "additionalProperties": true
@@ -28,11 +29,13 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "title", "key_message"],
+        "required": ["id", "title", "key_message", "slide_purpose", "visual_intent"],
         "properties": {
           "id": { "type": "string" },
           "title": { "type": "string" },
           "key_message": { "type": "string" },
+          "slide_purpose": { "type": "string" },
+          "visual_intent": { "type": "string" },
           "source_anchors": { "type": "array", "items": { "type": "string" } },
           "content": { "type": "array" },
           "equations": { "type": "array", "items": { "type": "string" } },

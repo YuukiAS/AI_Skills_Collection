@@ -9,12 +9,13 @@ Use the most specific trustworthy template available.
 
 Default routing:
 
-- Academic/research/technical decks, including "组会汇报", seminar, journal club, conference, defense, paper reading, method/result update, "slides", or "deck" in a research context -> LaTeX plus Beamer, with `.tex` and PDF output.
-- Explicit "Beamer", "Overleaf", "LaTeX", or ".tex" -> `.tex` plus PDF.
-- Business, teaching, operations, marketing, or explicitly editable PowerPoint requests -> editable `.pptx` through official Presentation/Slides or ChatGPT for PowerPoint.
+- Explicit PPT, PowerPoint, `.pptx`, editable, Slides, Google Slides, or "I will edit it later" -> editable Presentation/Slides route.
+- Group meeting, research update, paper talk, seminar, journal club, defense, method/result update, "research slides", or "deck" in the `presentation-desktop` context without a specified format -> editable Presentation/Slides route by default.
+- Explicit "Beamer", "Overleaf", "LaTeX slides", ".tex", academic PDF, or a venue/project-locked TeX template -> `.tex` plus PDF.
+- Business, teaching, operations, marketing, or executive decision decks -> editable `.pptx` through official Presentation/Slides or ChatGPT for PowerPoint unless the user asks for another format.
 - Existing PPTX/Google Slides minor edit -> official Presentation/Slides only.
 
-Do not route academic decks to `python-pptx`, python-ppt, or generated editable PPTX unless the user explicitly asks for `.pptx` and accepts the template-fidelity tradeoff.
+Do not route academic decks to Beamer only because they are academic. Do not use `python-pptx`, python-ppt, rendered PDF pages, or whole-slide images to fake an editable PPTX when official Presentation/Slides should create editable objects.
 
 CUHK exact mode:
 
