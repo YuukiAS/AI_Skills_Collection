@@ -109,6 +109,16 @@ class ResearchWritingRoutingTests(unittest.TestCase):
         self.assertIn("claim support", citation_management)
         self.assertIn("literature synthesis", citation_management)
         self.assertIn("zotero operations", citation_management)
+        self.assertIn("known papers or identifier-backed records", citation_management)
+        self.assertIn("bibliography record resolution", citation_management)
+        self.assertIn("exact-record lookup", citation_management)
+        self.assertIn("find papers by topic", citation_management)
+        self.assertIn("use `research-lookup`", citation_management)
+        self.assertNotIn("paper discovery and search", citation_management)
+        self.assertNotIn("searching for specific papers on google scholar or pubmed", citation_management)
+        self.assertNotIn("search for papers on your topic", citation_management)
+        self.assertNotIn("find key papers on your topic", citation_management)
+        self.assertNotIn("finding and citing seminal papers", citation_management)
 
 
 if __name__ == "__main__":

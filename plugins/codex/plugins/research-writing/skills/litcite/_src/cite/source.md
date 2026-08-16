@@ -29,7 +29,7 @@ This is a technical reference-management skill, not the final authority on wheth
 ## When to Use This Skill
 
 Use this skill when:
-- Searching for specific papers on Google Scholar or PubMed
+- Locating known papers by exact title, author/year, DOI, PMID, arXiv ID, URL, or an existing candidate list so their records can be added to a bibliography
 - Converting DOIs, PMIDs, or arXiv IDs to properly formatted BibTeX
 - Extracting complete metadata for citations (authors, title, journal, year, etc.)
 - Checking metadata consistency for existing bibliography entries
@@ -42,7 +42,7 @@ Use this skill when:
 Do not use this skill as the primary route when:
 - A sentence, table, figure, or claim must be checked against the cited source; use `citation-verification`.
 - The user needs a systematic, scoping, narrative, or related-work synthesis; use `literature-review`.
-- The user asks for a quick scan of recent papers or current evidence; use `research-lookup`.
+- The user asks to find papers by topic, find recent papers, discover new candidate sources, expand a bibliography, or scan current evidence; use `research-lookup`.
 - The user needs Zotero collection reads, exports, or local library operations; use `pyzotero`.
 
 ## Visual and Figure Routing
@@ -57,78 +57,69 @@ Use tables for citation audits, duplicate checks, metadata repair plans, and sou
 
 Citation management follows a systematic process:
 
-### Phase 1: Paper Discovery and Search
+### Phase 1: Bibliography Record Resolution
 
-**Goal**: Find relevant papers using academic search engines.
+**Goal**: Resolve known papers or known identifiers into reliable bibliographic records. This phase starts from user-supplied DOIs, PMIDs, arXiv IDs, URLs, exact titles, author/year pairs, or candidate records produced by `research-lookup` or `literature-review`.
 
-#### Google Scholar Search
+Do not use this phase to discover papers by topic. For "find recent papers about X," "search the literature on X," "expand this candidate set," or "what should I cite for X," route to `research-lookup` first and return here only after candidate records or identifiers exist.
 
-Google Scholar provides the most comprehensive coverage across disciplines.
+#### Known-Record Lookup
 
-**Basic Search**:
+Use exact-title, exact-author, or identifier-backed lookups only when metadata is incomplete and the record is already known.
+
+**Google Scholar record lookup examples**:
 ```bash
-# Search for papers on a topic
-python scripts/search_google_scholar.py "CRISPR gene editing" \
-  --limit 50 \
-  --output results.json
+# Locate a known paper by exact title for metadata repair
+python scripts/search_google_scholar.py '"Attention Is All You Need"' \
+  --limit 5 \
+  --output known_title_record.json
 
-# Search with year filter
-python scripts/search_google_scholar.py "machine learning protein folding" \
-  --year-start 2020 \
-  --year-end 2024 \
-  --limit 100 \
-  --output ml_proteins.json
+# Locate a known author/year/title fragment when no DOI was supplied
+python scripts/search_google_scholar.py '"Vaswani" "Attention Is All You Need" 2017' \
+  --limit 5 \
+  --output author_year_record.json
 ```
 
-**Advanced Search Strategies** (see `references/google_scholar_search.md`):
+**Known-record strategies**:
 - Use quotation marks for exact phrases: `"deep learning"`
 - Search by author: `author:LeCun`
 - Search in title: `intitle:"neural networks"`
-- Exclude terms: `machine learning -survey`
-- Find highly cited papers using sort options
-- Filter by date ranges to get recent work
+- Keep result limits small and inspect matches manually
+- Prefer DOI, PMID, arXiv ID, publisher pages, CrossRef, PubMed, or arXiv when available
 
-**Best Practices**:
-- Use specific, targeted search terms
-- Include key technical terms and acronyms
-- Filter by recent years for fast-moving fields
-- Check "Cited by" to find seminal papers
-- Export top results for further analysis
+If the query is broad, topical, recent, or exploratory, stop and use `research-lookup`.
 
-#### PubMed Search
+#### PubMed Record Lookup
 
-PubMed specializes in biomedical and life sciences literature (35+ million citations).
+PubMed is used here to resolve known biomedical records, PMIDs, MeSH-backed publication records, and citation metadata.
 
-**Basic Search**:
+**Record lookup examples**:
 ```bash
-# Search PubMed
-python scripts/search_pubmed.py "Alzheimer's disease treatment" \
-  --limit 100 \
-  --output alzheimers.json
+# Resolve a known PMID or exact title
+python scripts/search_pubmed.py '"BNT162b2 mRNA Covid-19 Vaccine in a Nationwide Mass Vaccination Setting"' \
+  --limit 5 \
+  --output known_pubmed_record.json
 
-# Search with MeSH terms and filters
+# Resolve known biomedical records from an existing candidate list
 python scripts/search_pubmed.py \
-  --query '"Alzheimer Disease"[MeSH] AND "Drug Therapy"[MeSH]' \
-  --date-start 2020 \
-  --date-end 2024 \
-  --publication-types "Clinical Trial,Review" \
-  --output alzheimers_trials.json
+  --query '"Polack FP"[Author] AND "BNT162b2"[Title/Abstract] AND 2020[Publication Date]' \
+  --limit 5 \
+  --output candidate_record.json
 ```
 
-**Advanced PubMed Queries** (see `references/pubmed_search.md`):
+**Record lookup patterns** (see `references/pubmed_search.md`):
 - Use MeSH terms: `"Diabetes Mellitus"[MeSH]`
 - Field tags: `"cancer"[Title]`, `"Smith J"[Author]`
 - Boolean operators: `AND`, `OR`, `NOT`
 - Date filters: `2020:2024[Publication Date]`
 - Publication types: `"Review"[Publication Type]`
-- Combine with E-utilities API for automation
+- Combine with E-utilities API for metadata retrieval
 
 **Best Practices**:
 - Use MeSH Browser to find correct controlled vocabulary
-- Construct complex queries in PubMed Advanced Search Builder first
-- Include multiple synonyms with OR
-- Retrieve PMIDs for easy metadata extraction
-- Export to JSON or directly to BibTeX
+- Retrieve PMIDs for stable metadata extraction
+- Export resolved records to JSON or BibTeX
+- Keep lookup queries tied to known papers, known authors, known titles, or known identifiers
 
 ### Phase 2: Metadata Extraction
 
@@ -376,16 +367,14 @@ python scripts/validate_citations.py references.bib \
 Complete workflow for creating a bibliography:
 
 ```bash
-# 1. Search for papers on your topic
-python scripts/search_pubmed.py \
-  '"CRISPR-Cas Systems"[MeSH] AND "Gene Editing"[MeSH]' \
-  --date-start 2020 \
-  --limit 200 \
-  --output crispr_papers.json
+# 1. Start from known records or candidates supplied by the user,
+# research-lookup, or literature-review.
+# candidate_ids.txt may contain DOI, PMID, arXiv ID, URL, or exact title lines.
+cat candidate_ids.txt
 
-# 2. Extract DOIs from search results and convert to BibTeX
+# 2. Resolve metadata and convert candidate records to BibTeX
 python scripts/extract_metadata.py \
-  --input crispr_papers.json \
+  --input candidate_ids.txt \
   --output crispr_refs.bib
 
 # 3. Add specific papers by DOI
@@ -437,78 +426,48 @@ python scripts/format_bibtex.py my_review_references.bib \
   --output formatted_refs.bib
 ```
 
-## Search Strategies
+## Record Location Strategies
 
-### Google Scholar Best Practices
+### Known-Record Lookup Best Practices
 
-**Finding Seminal and High-Impact Papers** (CRITICAL):
+This skill may use Google Scholar or PubMed only to locate records that are already known from a title, author/year pair, identifier, source URL, or upstream candidate list.
 
-Always prioritize papers based on citation count, venue quality, and author reputation:
+Do not use this section to choose what the user should cite. For topic-level discovery, recent-paper lookup, seminal-paper discovery, citation chasing, or candidate expansion, use `research-lookup` first.
 
-**Citation Count Thresholds:**
-| Paper Age | Citations | Classification |
-|-----------|-----------|----------------|
-| 0-3 years | 20+ | Noteworthy |
-| 0-3 years | 100+ | Highly Influential |
-| 3-7 years | 100+ | Significant |
-| 3-7 years | 500+ | Landmark Paper |
-| 7+ years | 500+ | Seminal Work |
-| 7+ years | 1000+ | Foundational |
+**Record quality signals:**
+- DOI, PMID, PMCID, arXiv ID, ISBN, or publisher URL is present.
+- Title and author order match the source supplied by the user or upstream lookup.
+- Journal/conference name, year, volume, pages, and DOI match authoritative metadata.
+- Preprint and published versions are not mixed unless explicitly documented.
 
-**Venue Quality Tiers:**
-- **Tier 1 (Prefer):** Nature, Science, Cell, NEJM, Lancet, JAMA, PNAS
-- **Tier 2 (High Priority):** Impact Factor >10, top conferences (NeurIPS, ICML, ICLR)
-- **Tier 3 (Good):** Specialized journals (IF 5-10)
-- **Tier 4 (Sparingly):** Lower-impact peer-reviewed venues
-
-**Author Reputation Indicators:**
-- Senior researchers with h-index >40
-- Multiple publications in Tier-1 venues
-- Leadership at recognized institutions
-- Awards and editorial positions
-
-**Search Strategies for High-Impact Papers:**
-- Sort by citation count (most cited first)
-- Look for review articles from Tier-1 journals for overview
-- Check "Cited by" for impact assessment and recent follow-up work
-- Use citation alerts for tracking new citations to key papers
-- Filter by top venues using `source:Nature` or `source:Science`
-- Search for papers by known field leaders using `author:LastName`
-
-**Advanced Operators** (full list in `references/google_scholar_search.md`):
+**Exact lookup operators** (full list in `references/google_scholar_search.md`):
 ```
 "exact phrase"           # Exact phrase matching
 author:lastname          # Search by author
 intitle:keyword          # Search in title only
 source:journal           # Search specific journal
--exclude                 # Exclude terms
-OR                       # Alternative terms
-2020..2024              # Year range
 ```
 
 **Example Searches**:
 ```
-# Find recent reviews on a topic
-"CRISPR" intitle:review 2023..2024
+# Locate a known record by exact title
+"Attention Is All You Need"
 
-# Find papers by specific author on topic
-author:Church "synthetic biology"
+# Locate a known record by author and title fragment
+author:Vaswani intitle:"Attention"
 
-# Find highly cited foundational work
-"deep learning" 2012..2015 sort:citations
-
-# Exclude surveys and focus on methods
-"protein folding" -survey -review intitle:method
+# Locate a known journal record when a citation is incomplete
+"BNT162b2" "Polack" "New England Journal of Medicine"
 ```
 
-### PubMed Best Practices
+### PubMed Record Lookup Best Practices
 
-**Using MeSH Terms**:
+**Using MeSH Terms for record resolution**:
 MeSH (Medical Subject Headings) provides controlled vocabulary for precise searching.
 
 1. **Find MeSH terms** at https://meshb.nlm.nih.gov/search
-2. **Use in queries**: `"Diabetes Mellitus, Type 2"[MeSH]`
-3. **Combine with keywords** for comprehensive coverage
+2. **Use in known-record queries**: `"Diabetes Mellitus, Type 2"[MeSH]`
+3. **Combine with exact title, author, year, PMID, or DOI information when available.**
 
 **Field Tags**:
 ```
@@ -523,15 +482,11 @@ MeSH (Medical Subject Headings) provides controlled vocabulary for precise searc
 
 **Building Complex Queries**:
 ```bash
-# Clinical trials on diabetes treatment published recently
-"Diabetes Mellitus, Type 2"[MeSH] AND "Drug Therapy"[MeSH] 
-AND "Clinical Trial"[Publication Type] AND 2020:2024[Publication Date]
+# Known author/title/year record
+"Polack FP"[Author] AND "BNT162b2"[Title/Abstract] AND 2020[Publication Date]
 
-# Reviews on CRISPR in specific journal
-"CRISPR-Cas Systems"[MeSH] AND "Nature"[Journal] AND "Review"[Publication Type]
-
-# Specific author's recent work
-"Smith AB"[Author] AND cancer[Title/Abstract] AND 2022:2024[Publication Date]
+# Known journal/title fragment record
+"NEJM"[Journal] AND "BNT162b2"[Title/Abstract]
 ```
 
 **E-utilities for Automation**:
@@ -547,65 +502,59 @@ See `references/pubmed_search.md` for complete API documentation.
 
 ### search_google_scholar.py
 
-Search Google Scholar and export results.
+Locate known Google Scholar records and export candidate metadata. Do not use this tool here for topic discovery; route topic discovery to `research-lookup`.
 
 **Features**:
 - Automated searching with rate limiting
-- Pagination support
-- Year range filtering
+- Small-result exact-record lookup
+- Exact title and author/year filtering
 - Export to JSON or BibTeX
-- Citation count information
+- Metadata candidates for manual confirmation
 
 **Usage**:
 ```bash
-# Basic search
-python scripts/search_google_scholar.py "quantum computing"
+# Exact-title record lookup
+python scripts/search_google_scholar.py '"Attention Is All You Need"'
 
-# Advanced search with filters
-python scripts/search_google_scholar.py "quantum computing" \
-  --year-start 2020 \
-  --year-end 2024 \
-  --limit 100 \
-  --sort-by citations \
-  --output quantum_papers.json
+# Known author/title fragment lookup
+python scripts/search_google_scholar.py '"Vaswani" "Attention Is All You Need"' \
+  --limit 5 \
+  --output known_record.json
 
-# Export directly to BibTeX
-python scripts/search_google_scholar.py "machine learning" \
-  --limit 50 \
+# Export a resolved record directly to BibTeX
+python scripts/search_google_scholar.py '"Attention Is All You Need"' \
+  --limit 5 \
   --format bibtex \
-  --output ml_papers.bib
+  --output known_record.bib
 ```
 
 ### search_pubmed.py
 
-Search PubMed using E-utilities API.
+Resolve known PubMed records using E-utilities API. Do not use this tool here for topic-level biomedical discovery; route discovery to `research-lookup`.
 
 **Features**:
 - Complex query support (MeSH, field tags, Boolean)
-- Date range filtering
-- Publication type filtering
-- Batch retrieval with metadata
+- Date, author, title, PMID, and publication type filtering
+- Batch retrieval for known candidate records
 - Export to JSON or BibTeX
 
 **Usage**:
 ```bash
-# Simple keyword search
-python scripts/search_pubmed.py "CRISPR gene editing"
+# Exact-title or title-fragment lookup
+python scripts/search_pubmed.py '"BNT162b2 mRNA Covid-19 Vaccine"' \
+  --limit 5
 
-# Complex query with filters
+# Known author/title/year lookup
 python scripts/search_pubmed.py \
-  --query '"CRISPR-Cas Systems"[MeSH] AND "therapeutic"[Title/Abstract]' \
-  --date-start 2020-01-01 \
-  --date-end 2024-12-31 \
-  --publication-types "Clinical Trial,Review" \
-  --limit 200 \
-  --output crispr_therapeutic.json
+  --query '"Polack FP"[Author] AND "BNT162b2"[Title/Abstract] AND 2020[Publication Date]' \
+  --limit 5 \
+  --output known_pubmed_record.json
 
 # Export to BibTeX
-python scripts/search_pubmed.py "Alzheimer's disease" \
-  --limit 100 \
+python scripts/search_pubmed.py '"BNT162b2 mRNA Covid-19 Vaccine"' \
+  --limit 5 \
   --format bibtex \
-  --output alzheimers.bib
+  --output known_pubmed_record.bib
 ```
 
 ### extract_metadata.py
@@ -744,28 +693,28 @@ python scripts/doi_to_bibtex.py 10.1038/nature12345 --clipboard
 
 ## Best Practices
 
-### Search Strategy
+### Record Resolution Strategy
 
-1. **Start broad, then narrow**:
-   - Begin with general terms to understand the field
-   - Refine with specific keywords and filters
-   - Use synonyms and related terms
+1. **Start from identifiers or known records**:
+   - Prefer DOI, PMID, PMCID, arXiv ID, ISBN, publisher URL, exact title, or author/year pairs
+   - Treat topic-only requests as discovery requests and route them to `research-lookup`
+   - Return to citation-management only after candidate records exist
 
-2. **Use multiple sources**:
-   - Google Scholar for comprehensive coverage
-   - PubMed for biomedical focus
+2. **Use authoritative metadata sources**:
+   - CrossRef for DOI-backed journal records
+   - PubMed for biomedical PMIDs and PMCIDs
    - arXiv for preprints
-   - Combine results for completeness
+   - Publisher pages when automated metadata conflicts
 
-3. **Leverage citations**:
-   - Check "Cited by" for seminal papers
-   - Review references from key papers
-   - Use citation networks to discover related work
+3. **Resolve ambiguity explicitly**:
+   - Compare exact title, authors, venue, year, DOI, and pages
+   - Keep preprint and published versions separate until the user chooses one
+   - Mark ambiguous matches instead of silently picking the first result
 
-4. **Document your searches**:
-   - Save search queries and dates
-   - Record number of results
-   - Note any filters or restrictions applied
+4. **Document record provenance**:
+   - Record identifier source and lookup date
+   - Note metadata source used for each repair
+   - Flag records that need citation-verification for source existence or claim support
 
 ### Metadata Extraction
 
@@ -806,8 +755,8 @@ python scripts/doi_to_bibtex.py 10.1038/nature12345 --clipboard
    - Validate syntax regularly
 
 3. **Organize systematically**:
-   - Sort by year or topic
-   - Group related papers
+   - Sort by year, author, or citation key
+   - Group entries by manuscript section or source list when useful
    - Use separate files for different projects
    - Merge carefully to avoid duplicates
 
@@ -832,8 +781,8 @@ python scripts/doi_to_bibtex.py 10.1038/nature12345 --clipboard
 
 ## Common Pitfalls to Avoid
 
-1. **Single source bias**: Only using Google Scholar or PubMed
-   - **Solution**: Search multiple databases for comprehensive coverage
+1. **Using citation-management for discovery**: Asking this skill to find new papers by topic
+   - **Solution**: Use `research-lookup` for topic discovery and return here only after candidate records or identifiers exist
 
 2. **Accepting metadata blindly**: Not verifying extracted information
    - **Solution**: Spot-check extracted metadata against original sources
@@ -867,32 +816,22 @@ python scripts/doi_to_bibtex.py 10.1038/nature12345 --clipboard
 ### Example 1: Building a Bibliography for a Paper
 
 ```bash
-# Step 1: Find key papers on your topic
-python scripts/search_google_scholar.py "transformer neural networks" \
-  --year-start 2017 \
-  --limit 50 \
-  --output transformers_gs.json
+# Step 1: Start from candidate records supplied by the user,
+# research-lookup, or literature-review.
+# candidate_ids.txt contains DOI, PMID, arXiv ID, URL, or exact title lines.
+cat candidate_ids.txt
 
-python scripts/search_pubmed.py "deep learning medical imaging" \
-  --date-start 2020 \
-  --limit 50 \
-  --output medical_dl_pm.json
-
-# Step 2: Extract metadata from search results
+# Step 2: Extract metadata from candidate records
 python scripts/extract_metadata.py \
-  --input transformers_gs.json \
-  --output transformers.bib
-
-python scripts/extract_metadata.py \
-  --input medical_dl_pm.json \
-  --output medical.bib
+  --input candidate_ids.txt \
+  --output candidate_records.bib
 
 # Step 3: Add specific papers you already know
 python scripts/doi_to_bibtex.py 10.1038/s41586-021-03819-2 >> specific.bib
 python scripts/doi_to_bibtex.py 10.1126/science.aam9317 >> specific.bib
 
 # Step 4: Combine all BibTeX files
-cat transformers.bib medical.bib specific.bib > combined.bib
+cat candidate_records.bib specific.bib > combined.bib
 
 # Step 5: Format and deduplicate
 python scripts/format_bibtex.py combined.bib \
@@ -965,26 +904,28 @@ python scripts/validate_citations.py clean_references.bib \
 cat final_validation.json
 ```
 
-### Example 4: Finding and Citing Seminal Papers
+### Example 4: Resolving Known Records Without DOIs
 
 ```bash
-# Find highly cited papers on a topic
-python scripts/search_google_scholar.py "AlphaFold protein structure" \
-  --year-start 2020 \
-  --year-end 2024 \
-  --sort-by citations \
-  --limit 20 \
-  --output alphafold_seminal.json
+# Locate known papers when the user supplied exact titles but no DOI
+python scripts/search_google_scholar.py '"Attention Is All You Need"' \
+  --limit 5 \
+  --output attention_record.json
 
-# Extract the top 10 by citation count
-# (script will have included citation counts in JSON)
+python scripts/search_pubmed.py '"BNT162b2 mRNA Covid-19 Vaccine"' \
+  --limit 5 \
+  --output vaccine_record.json
 
 # Convert to BibTeX
 python scripts/extract_metadata.py \
-  --input alphafold_seminal.json \
-  --output alphafold_refs.bib
+  --input attention_record.json \
+  --output attention_refs.bib
 
-# The BibTeX file now contains the most influential papers
+python scripts/extract_metadata.py \
+  --input vaccine_record.json \
+  --output vaccine_refs.bib
+
+# The BibTeX files now contain resolved metadata for known records
 ```
 
 ## Integration with Other Skills
@@ -1024,15 +965,15 @@ python scripts/extract_metadata.py \
 ### Bundled Resources
 
 **References** (in `references/`):
-- `google_scholar_search.md`: Complete Google Scholar search guide
-- `pubmed_search.md`: PubMed and E-utilities API documentation
+- `google_scholar_search.md`: Google Scholar exact-record lookup guide
+- `pubmed_search.md`: PubMed and E-utilities metadata lookup documentation
 - `metadata_extraction.md`: Metadata sources and field requirements
 - `citation_validation.md`: Validation criteria and quality checks
 - `bibtex_formatting.md`: BibTeX entry types and formatting rules
 
 **Scripts** (in `scripts/`):
-- `search_google_scholar.py`: Google Scholar search automation
-- `search_pubmed.py`: PubMed E-utilities API client
+- `search_google_scholar.py`: Google Scholar known-record lookup automation
+- `search_pubmed.py`: PubMed E-utilities metadata lookup client
 - `extract_metadata.py`: Universal metadata extractor
 - `validate_citations.py`: Citation validation and verification
 - `format_bibtex.py`: BibTeX formatter and cleaner
@@ -1044,7 +985,7 @@ python scripts/extract_metadata.py \
 
 ### External Resources
 
-**Search Engines**:
+**Record Lookup Services**:
 - Google Scholar: https://scholar.google.com/
 - PubMed: https://pubmed.ncbi.nlm.nih.gov/
 - PubMed Advanced Search: https://pubmed.ncbi.nlm.nih.gov/advanced/
@@ -1092,7 +1033,7 @@ pip install pylatexenc  # LaTeX special character handling
 
 The citation-management skill provides:
 
-1. **Comprehensive search capabilities** for Google Scholar and PubMed
+1. **Known-record lookup** for exact titles, author/year pairs, and identifier-backed records
 2. **Automated metadata extraction** from DOI, PMID, arXiv ID, URLs
 3. **Citation validation** with DOI verification and completeness checking
 4. **BibTeX formatting** with standardization and cleaning tools
