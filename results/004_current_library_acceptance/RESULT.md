@@ -7,12 +7,22 @@ self_declared_achieved: false
 
 ## Commit
 
-- implementation_commit: `0e7939bcd914448e2dfef94ae2b98b25a213ce85`
+- implementation_commit: `77eb83618e97d9194ffc23a6074465b1e438eb71`
+- previous_implementation_commit: `0e7939bcd914448e2dfef94ae2b98b25a213ce85`
 - base_commit: `30882f3856ec342ceca75467f04a583bc82b6205`
 - branch: `main`
 - remote: `origin/main`
 - branch_policy: no branch or PR created
 - backup_branch_check: no local or remote `backup*` refs found
+
+## Revision Round 1
+
+- planner_review: `results/004_current_library_acceptance/PLANNER_REVIEW.md`
+- planner_decision: `REVISE`
+- blocker_fixed: `presentation-desktop` now installs its two required support skills during normal `--profile presentation-desktop` installs.
+- implementation_detail: moved `skills/tools/documents-media/render-chinese-math-pdf` and `skills/writing/research/citation-verification` from `secondary_skills` into the actual `skills` list for `presentation-desktop`; left `secondary_skills` empty for this profile.
+- scope_control: did not change global `secondary_skills` semantics for other profiles.
+- regression_tests: added presentation profile assertions and a server-local smoke regression proving the profile installs the two support skills.
 
 ## Scope Implemented
 
@@ -35,7 +45,7 @@ self_declared_achieved: false
 - `python3 scripts/build_codex_marketplace.py --write --validate --check --path-report`: `plugins=10 active_skills=25 source_snapshots=63`, Windows path budget overage `0`.
 - `python3 scripts/provenance_audit.py --check`: provenance audit passed.
 - `python3 scripts/icon_audit.py --scope marketplace --check`: marketplace icon audit passed.
-- `python3 -m unittest discover -s tests`: ran 102 tests, OK.
+- `python3 -m unittest discover -s tests`: ran 103 tests, OK.
 - `git diff --check`: passed with no output.
 
 ## Version And Generated-Layer Checks
@@ -48,9 +58,9 @@ self_declared_achieved: false
 ## GitHub Actions
 
 - workflow: `Codex Marketplace`
-- run_id: `31969240116`
-- url: `https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/31969240116`
-- head_sha: `0e7939bcd914448e2dfef94ae2b98b25a213ce85`
+- run_id: `31972800810`
+- url: `https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/31972800810`
+- head_sha: `77eb83618e97d9194ffc23a6074465b1e438eb71`
 - status: `completed`
 - conclusion: `success`
 
@@ -66,15 +76,17 @@ self_declared_achieved: false
 
 ## Source CLI Install Smoke
 
-- command: `python3 scripts/skills.py install --target repo --project /tmp/ai-skills-presentation-profile-smoke-31969240116 --profile presentation-desktop --mode copy --write-agents-md --json`.
-- result: installed 5 skills with `copy` mode from collection commit `0e7939bcd914448e2dfef94ae2b98b25a213ce85`.
+- command: `python3 scripts/skills.py install --target repo --project /tmp/ai-skills-presentation-profile-smoke-31972800810 --profile presentation-desktop --mode copy --write-agents-md --json`.
+- result: installed 7 skills with `copy` mode from collection commit `77eb83618e97d9194ffc23a6074465b1e438eb71`.
 - installed `SKILL.md` files:
   - `research-presentations`
   - `business-presentations`
   - `writing-fidelity`
   - `scientific-prose`
   - `chinese-prose`
-- `python3 scripts/verify_server_installation.py --profile presentation-desktop --json`: `ok=true`, installed 5 skills, marketplace manifest `plugins=10`, payload errors `0`.
+  - `render-chinese-math-pdf`
+  - `citation-verification`
+- `python3 scripts/verify_server_installation.py --profile presentation-desktop --json`: `ok=true`, installed 7 skills, marketplace manifest `plugins=10`, payload errors `0`, collection commit `77eb83618e97d9194ffc23a6074465b1e438eb71`.
 - `python3 scripts/verify_server_installation.py --json`: `ok=true`, installed 7 `server-research-baseline` skills, marketplace manifest `plugins=10`, payload errors `0`.
 - Optional tooling warnings: `latexmk` and Python `pptx` were not found; these are warnings only and did not block installation or payload validation.
 

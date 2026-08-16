@@ -4,6 +4,8 @@
 版本：`4.3.0`  
 发布实现提交：`0e7939bcd914448e2dfef94ae2b98b25a213ce85`
 
+最终安装修复提交：`77eb83618e97d9194ffc23a6074465b1e438eb71`
+
 这轮修的不是“再多加几个技能”，而是把当前最常用的入口理顺：用户用自然语言说科研写作、文献、引用、中文报告、英文科研表达、组会 PPT 或 Beamer 时，不需要记住内部 skill 名，也不应该被旧规则带到错误路线。
 
 ## 1. 这轮修了什么
@@ -115,9 +117,9 @@ Marketplace smoke 使用最终 `origin/main` 的 Git marketplace：
 
 Source CLI smoke：
 
-- `presentation-desktop` 安装到临时 repo 成功，commit `0e7939bcd914448e2dfef94ae2b98b25a213ce85`。
-- 目标 `.agents/skills/` 包含 `research-presentations`、`business-presentations`、`writing-fidelity`、`scientific-prose`、`chinese-prose`。
-- `verify_server_installation.py --profile presentation-desktop --json` 通过，安装 5 个 skills，marketplace manifest 检查为 10 plugins，payload errors 为 0。
+- `presentation-desktop` 安装到临时 repo 成功，commit `77eb83618e97d9194ffc23a6074465b1e438eb71`。
+- 目标 `.agents/skills/` 包含 `research-presentations`、`business-presentations`、`writing-fidelity`、`scientific-prose`、`chinese-prose`、`render-chinese-math-pdf`、`citation-verification`。
+- `verify_server_installation.py --profile presentation-desktop --json` 通过，安装 7 个 skills，marketplace manifest 检查为 10 plugins，payload errors 为 0。
 - 默认 `verify_server_installation.py --json` 也通过，安装 7 个 `server-research-baseline` skills，payload errors 为 0。
 
 最终 GitHub Actions：
@@ -144,6 +146,7 @@ Source CLI smoke：
 - 003 initial implementation：`b2ac1b246007ee848ea058bc54bf9eaef1c3e1a0`
 - 003 revision implementation：`71db67690b2ce37523c4d7924244f5892f6d8a4a`
 - 4.3.0 release implementation：`0e7939bcd914448e2dfef94ae2b98b25a213ce85`
+- 004 presentation-desktop install fix：`77eb83618e97d9194ffc23a6074465b1e438eb71`
 
 ### 版本文件
 
@@ -175,7 +178,7 @@ git diff --check
 - profiles：18
 - marketplace：10 plugins、25 active skills、63 source snapshots
 - Windows path budget overage：0
-- unittest：102 tests，OK
+- unittest：103 tests，OK
 
 ### 安装 Smoke 命令
 
@@ -192,11 +195,11 @@ codex plugin list --marketplace yuukias-ai-skills --json
 Source CLI：
 
 ```bash
-python3 scripts/skills.py install --target repo --project /tmp/ai-skills-presentation-profile-smoke-31969240116 --profile presentation-desktop --mode copy --write-agents-md --json
+python3 scripts/skills.py install --target repo --project /tmp/ai-skills-presentation-profile-smoke-31972800810 --profile presentation-desktop --mode copy --write-agents-md --json
 python3 scripts/verify_server_installation.py --profile presentation-desktop --json
 python3 scripts/verify_server_installation.py --json
 ```
 
 ### Git State
 
-提交本报告前，发布实现提交 `0e7939bcd914448e2dfef94ae2b98b25a213ce85` 已推送到 `origin/main`，对应 GitHub Actions 成功。最终 Planner 复核应以包含本报告和 `results/004_current_library_acceptance/RESULT.md` 的最新 `origin/main` 为准。
+提交本报告更新前，最终安装修复提交 `77eb83618e97d9194ffc23a6074465b1e438eb71` 已推送到 `origin/main`，对应 GitHub Actions 成功。最终 Planner 复核应以包含本报告和 `results/004_current_library_acceptance/RESULT.md` 的最新 `origin/main` 为准。
