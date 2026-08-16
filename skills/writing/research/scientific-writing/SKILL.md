@@ -1,6 +1,6 @@
 ---
 name: scientific-writing
-description: Draft, revise, and acceptance-check scientific manuscripts and sections. Use for 写论文/改论文, abstracts, introductions, methods, results, discussion, reviewer-response edits, claim-supported prose, reporting-guideline coverage, and final manuscript text in full paragraphs rather than bullet points.
+description: Draft and revise scientific manuscript prose: abstracts, IMRaD sections, reviewer-response wording, claim-supported paragraphs, and reporting-guideline text. Route whole-paper planning, reviewer-risk critique, literature discovery, citation verification, BibTeX, figures, venue formatting, and LaTeX issues to neighboring skills.
 status: active
 provenance: unknown
 trusted: false
@@ -22,25 +22,30 @@ allowed-tools: Read Write Edit Bash
 
 ## Overview
 
-Use this skill to draft, revise, and acceptance-check scientific manuscript prose. When new literature claims or citation-dependent context are introduced, back them with literature search and citation verification; do not force a new search for pure style edits, source-faithful revisions, or user-supplied evidence.
+Use this skill to draft and revise scientific manuscript prose. It is the paragraph-writing skill, not the front door for every paper-related task. When new literature claims or citation-dependent context are introduced, back them with literature search and citation verification; do not force a new search for pure style edits, source-faithful revisions, or user-supplied evidence.
 
-Scientific writing is a process for communicating research with precision and clarity. Write manuscripts using IMRAD structure, citations (APA/AMA/Vancouver), figures/tables when needed, and reporting guidelines (CONSORT/STROBE/PRISMA). Apply this skill for research papers and journal submissions.
+Scientific writing is a process for communicating research with precision and clarity. Write manuscript sections using IMRAD structure, evidence-bounded claims, complete paragraphs, and applicable reporting-guideline language. Use neighboring skills for the paper plan, submission package, venue format, bibliography, citation support verdict, figures, diagrams, or LaTeX mechanics.
 
-**Critical Principle: Always write in full paragraphs with flowing prose. Never submit bullet points in the final manuscript.** Use a two-stage process: first create section outlines with key points using research-lookup, then convert those outlines into complete paragraphs.
+**Critical Principle: Always write in full paragraphs with flowing prose. Never submit bullet points in the final manuscript.** Use a two-stage process when drafting from notes: first create section outlines from the available evidence and any required lookup results, then convert those outlines into complete paragraphs.
 
 ## When to Use This Skill
 
 This skill should be used when:
 - Writing or revising any section of a scientific manuscript (abstract, introduction, methods, results, discussion)
-- Structuring a research paper using IMRAD or other standard formats
-- Formatting citations and references in specific styles (APA, AMA, Vancouver, Chicago, IEEE)
-- Creating, formatting, or improving figures, tables, and data visualizations
-- Applying study-specific reporting guidelines (CONSORT for trials, STROBE for observational studies, PRISMA for reviews)
+- Turning existing results, methods, figure notes, or reviewer-response facts into complete manuscript paragraphs
+- Applying study-specific reporting-guideline wording inside manuscript prose (CONSORT for trials, STROBE for observational studies, PRISMA for reviews)
 - Drafting abstracts that meet journal requirements (structured or unstructured)
-- Preparing manuscripts for submission to specific journals
 - Improving writing clarity, conciseness, and precision
 - Ensuring proper use of field-specific terminology and nomenclature
 - Addressing reviewer comments and revising manuscripts
+
+Do not use this skill as the primary route for:
+- Whole-paper process planning, claim-evidence spines, section contracts, or figure/text synchronization; use `paper-workflow-orchestrator`.
+- Reviewer-style critique, acceptance-risk diagnosis, or rebuttal assessment; use `peer-review`.
+- Rubric-based quantitative scholarly scoring; use `scholar-evaluation`.
+- Current-paper discovery, related-work synthesis, or single-paper evidence cards; use `literature-review` or `research-lookup`.
+- Citation existence, DOI/PMID metadata, claim-support verdicts, BibTeX cleanup, or Zotero operations; use `literature-and-citations`.
+- Venue formatting, LaTeX build state, or editable figure production; use the venue, LaTeX, or visualization skills.
 
 ## Visual and Figure Routing
 
@@ -202,7 +207,7 @@ Scientific papers must be written in complete, flowing prose. Use this two-stage
 **Stage 1: Create Section Outlines with Key Points**
 
 When starting a new section:
-1. Use the research-lookup skill to gather relevant literature and data
+1. Gather the user-supplied evidence and, only when the section needs new current sources, use `research-lookup` or `literature-review` to collect them
 2. Create a structured outline with bullet points marking:
    - Main arguments or findings to present
    - Key studies to cite
@@ -287,13 +292,13 @@ Lists may appear in scientific papers only in specific contexts:
 - ✅ **ALWAYS** write as flowing paragraph(s) with natural transitions
 - Exception: Only use structured format if journal explicitly requires it in author guidelines
 
-**Integration with Research Lookup:**
+**Integration with literature and citation skills:**
 
-The research-lookup skill is essential for Stage 1 (creating outlines):
-1. Search for relevant papers using research-lookup
-2. Extract key findings, methods, and data
-3. Organize findings as bullet points in your outline
-4. Then convert the outline to full paragraphs in Stage 2
+Use the literature/citation skills only when the prose task needs them:
+1. Use `research-lookup` for fast current paper discovery or targeted evidence gathering.
+2. Use `literature-review` for field-level synthesis or single-paper evidence cards.
+3. Use `citation-verification` when a source must be checked for existence or claim support.
+4. Then convert the verified evidence outline to full paragraphs in Stage 2.
 
 This two-stage process ensures you:
 - Gather and organize information systematically
@@ -547,7 +552,7 @@ Adapt language, terminology, and conventions to match the specific scientific di
 **Stage 2: Drafting** (Use two-stage writing process for each section)
 1. Start with figures and tables (the core data story)
 2. For each section below, follow the two-stage process:
-   - **First**: Create outline with bullet points using research-lookup
+   - **First**: Create an evidence outline from supplied material and only the lookup or review work the section actually needs
    - **Second**: Convert bullet points to full paragraphs with flowing prose
 3. Write Methods (often easiest to draft first)
 4. Draft Results (describing figures/tables objectively)
@@ -646,4 +651,3 @@ This skill includes LaTeX style packages and templates for professional report f
 **For venue-specific writing styles** (tone, voice, abstract format, reviewer expectations), see the **venue-templates** skill which provides comprehensive style guides for Nature/Science, Cell Press, medical journals, ML conferences, and CS conferences.
 
 Load these references as needed when working on specific aspects of scientific writing.
-

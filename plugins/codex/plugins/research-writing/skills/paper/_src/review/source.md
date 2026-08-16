@@ -1,6 +1,6 @@
 ---
 name: peer-review
-description: Structured manuscript/grant review and writing acceptance check. Use for pre-submission self-review, paper验收, reviewer-style critique, likely objections, acceptance-risk diagnosis, rebuttal assessment, claim-evidence audit, methodology/statistical validity, reporting standards, ICLR/top-conference review, and constructive feedback.
+description: Reviewer-style manuscript or grant critique and acceptance-risk assessment. Use for pre-submission self-review, paper验收, likely objections, rebuttal assessment, claim-evidence audit, methods/statistics critique, reporting standards, and concern ledgers. Route prose drafting to scientific-writing and scoring to scholar-evaluation.
 status: active
 provenance: unknown
 trusted: false
@@ -23,6 +23,8 @@ allowed-tools: Read Write Edit Bash
 ## Overview
 
 Peer review is a systematic process for evaluating scientific manuscripts. Assess methodology, statistics, design, reproducibility, ethics, and reporting standards. Apply this skill for manuscript and grant review across disciplines with constructive, rigorous evaluation.
+
+This is not the default skill for ordinary manuscript drafting, paragraph polishing, or fixed-rubric scoring. Use `scientific-writing` for writing/revision of prose, `paper-workflow-orchestrator` for paper process planning, and `scholar-evaluation` when the user explicitly asks for dimension-by-dimension rubric scoring or benchmarking.
 
 ## Evidence-Grounded Acceptance Review
 
@@ -92,6 +94,8 @@ This skill should be used when:
 - Providing constructive feedback on scientific writing
 - Reviewing as a top ML conference, including ICLR when the venue is explicit
 - Diagnosing acceptance risk, likely reviewer objections, or rebuttal response quality
+
+Do not use this skill when the user only asks to draft or polish Results, Methods, Discussion, captions, or response text without asking for reviewer risk or critique. Do not use it for quantitative ScholarEval-style scoring unless the user asks for a rubric, dimensions, benchmark, or numeric quality score.
 
 ## Visual and Figure Routing
 
@@ -623,4 +627,3 @@ Before finalizing the review, verify:
 - [ ] Tone is constructive and professional throughout
 - [ ] Review is thorough but proportionate to manuscript scope
 - [ ] Recommendation is consistent with identified issues
-

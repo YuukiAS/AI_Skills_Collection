@@ -1,6 +1,6 @@
 ---
 name: literature-review
-description: Conduct literature reviews and single-paper evidence cards. Use for systematic reviews, related work, paper精读, paper cards, claim-evidence extraction from one paper/PDF/arXiv/DOI, method-map reconstruction, research-gap synthesis, and citation-backed writing.
+description: Synthesize scholarly literature and create single-paper evidence cards. Use for systematic/scoping/narrative reviews, related work, paper精读, paper cards, claim-evidence extraction, method maps, thematic synthesis, and research-gap analysis. Route quick lookup, DOI/claim checks, BibTeX, and Zotero to citation skills.
 status: active
 provenance: unknown
 trusted: false
@@ -22,9 +22,11 @@ allowed-tools: Read Write Edit Bash
 
 ## Overview
 
-Conduct systematic, comprehensive literature reviews following rigorous academic methodology. Search multiple literature databases, synthesize findings thematically, verify all citations for accuracy, and generate professional output documents in markdown and PDF formats.
+Conduct systematic, comprehensive literature reviews following rigorous academic methodology. Search or organize literature when synthesis is the deliverable, then synthesize findings thematically and identify research gaps. Use `citation-verification` for final claim-support verdicts and `citation-management` for bibliography/BibTeX hygiene.
 
 This skill integrates with multiple scientific skills for database access (gget, bioservices, datacommons-client) and provides specialized tools for citation verification, result aggregation, and document generation.
+
+This is not the fast lookup tool for "find a few recent papers," and it is not the bibliography cleanup tool. Use `research-lookup` for current paper discovery, `citation-verification` for DOI/PMID existence or sentence-level support checks, `citation-management` for BibTeX/metadata cleanup, and `pyzotero` for Zotero collection operations.
 
 ## When to Use This Skill
 
@@ -38,6 +40,8 @@ Use this skill when:
 - Requiring verified citations and professional formatting
 - Creating a single-paper deep reading card, evidence card, method map, or paper card
 - Extracting a claim-evidence chain, method map, limitations, and research ideas from one supplied paper/PDF/arXiv/DOI
+
+Do not use this skill when the user only asks to find a small set of recent papers, check whether one DOI/PMID is real, decide whether a citation supports one sentence, clean a `.bib` file, or organize a Zotero library. Route those tasks to `research-lookup`, `citation-verification`, `citation-management`, or `pyzotero` respectively.
 
 
 ## Single-Paper Deep Reading Card
@@ -634,4 +638,3 @@ This literature-review skill provides:
 7. **Reproducibility** through detailed documentation requirements
 
 Conduct thorough, rigorous literature reviews that meet academic standards and provide comprehensive synthesis of current knowledge in any domain.
-

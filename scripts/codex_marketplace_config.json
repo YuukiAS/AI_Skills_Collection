@@ -119,7 +119,7 @@
           "type": "aggregate",
           "name": "research-paper-workflow",
           "artifact_id": "paper",
-          "description": "Formal manuscript, supplement, rebuttal, pre-submission review, claim-evidence workflow, result-to-claim gates, grant, citation, and LaTeX authoring coordination.",
+          "description": "Formal manuscript planning, drafting, revision, reviewer-style critique, rubric scoring, rebuttal, supplement, venue, and LaTeX coordination; route literature discovery and citation checks to literature-and-citations.",
           "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
           "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
           "source_skills": [
@@ -146,6 +146,10 @@
             {
               "source": "skills/writing/research/peer-review",
               "artifact_id": "review"
+            },
+            {
+              "source": "skills/writing/research/scholar-evaluation",
+              "artifact_id": "score"
             }
           ]
         },
@@ -153,7 +157,7 @@
           "type": "aggregate",
           "name": "literature-and-citations",
           "artifact_id": "litcite",
-          "description": "Literature search, single-paper evidence cards, review synthesis, citation verification, BibTeX hygiene, and Zotero-oriented citation workflows.",
+          "description": "Current paper lookup, literature synthesis, single-paper evidence cards, citation support checks, BibTeX and reference metadata hygiene, and Zotero-oriented workflows.",
           "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
           "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
           "source_skills": [

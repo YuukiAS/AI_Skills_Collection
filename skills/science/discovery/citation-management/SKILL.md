@@ -1,6 +1,6 @@
 ---
 name: citation-management
-description: Comprehensive citation management for academic research. Search Google Scholar and PubMed for papers, extract accurate metadata, validate citations, and generate properly formatted BibTeX entries.
+description: Manage bibliography, BibTeX, citation metadata, and reference-library hygiene. Use for DOI/PMID/arXiv-to-BibTeX conversion, metadata extraction, duplicate repair, and style formatting. Route claim support to citation-verification, literature synthesis to literature-review, paper lookup to research-lookup, and Zotero operations to pyzotero.
 status: active
 provenance: unknown
 trusted: false
@@ -22,9 +22,9 @@ allowed-tools: Read Write Edit Bash
 
 ## Overview
 
-Manage citations systematically throughout the research and writing process. This skill provides tools and strategies for searching academic databases (Google Scholar, PubMed), extracting accurate metadata from multiple sources (CrossRef, PubMed, arXiv), validating citation information, and generating properly formatted BibTeX entries.
+Manage citations systematically throughout the research and writing process. This skill provides tools and strategies for bibliography construction, BibTeX generation, metadata extraction from multiple sources (CrossRef, PubMed, arXiv), duplicate cleanup, and citation-style formatting.
 
-Critical for maintaining citation accuracy, avoiding reference errors, and ensuring reproducible research. Integrates seamlessly with the literature-review skill for comprehensive research workflows.
+This is a technical reference-management skill, not the final authority on whether a cited source supports a manuscript claim. Use `citation-verification` for source-existence, DOI/PMID consistency, claim-support, and citation-drift verdicts.
 
 ## When to Use This Skill
 
@@ -32,13 +32,18 @@ Use this skill when:
 - Searching for specific papers on Google Scholar or PubMed
 - Converting DOIs, PMIDs, or arXiv IDs to properly formatted BibTeX
 - Extracting complete metadata for citations (authors, title, journal, year, etc.)
-- Validating existing citations for accuracy
+- Checking metadata consistency for existing bibliography entries
 - Cleaning and formatting BibTeX files
-- Finding highly cited papers in a specific field
-- Verifying that citation information matches the actual publication
+- Finding known papers or identifier-backed records needed for a bibliography
 - Building a bibliography for a manuscript or thesis
 - Checking for duplicate citations
 - Ensuring consistent citation formatting
+
+Do not use this skill as the primary route when:
+- A sentence, table, figure, or claim must be checked against the cited source; use `citation-verification`.
+- The user needs a systematic, scoping, narrative, or related-work synthesis; use `literature-review`.
+- The user asks for a quick scan of recent papers or current evidence; use `research-lookup`.
+- The user needs Zotero collection reads, exports, or local library operations; use `pyzotero`.
 
 ## Visual and Figure Routing
 
@@ -416,9 +421,10 @@ This skill complements the `literature-review` skill:
 
 **Combined Workflow**:
 1. Use `literature-review` for comprehensive multi-database search
-2. Use `citation-management` to extract and validate all citations
+2. Use `citation-management` to extract metadata, generate BibTeX, and clean duplicate references
 3. Use `literature-review` to synthesize findings thematically
-4. Use `citation-management` to verify final bibliography accuracy
+4. Use `citation-verification` for final source-existence and claim-support checks
+5. Use `citation-management` to apply final bibliography formatting
 
 ```bash
 # After completing literature review
@@ -992,16 +998,17 @@ python scripts/extract_metadata.py \
 
 **Combined workflow**:
 1. Use literature-review for systematic search methodology
-2. Use citation-management to extract and validate citations
+2. Use citation-management to extract metadata, generate BibTeX, and clean duplicate references
 3. Use literature-review to synthesize findings
-4. Use citation-management to ensure bibliography accuracy
+4. Use citation-verification to confirm source existence and claim support
+5. Use citation-management to apply final bibliography formatting
 
 ### Scientific Writing Skill
 
 **Citation Management** ensures accurate references for **Scientific Writing**:
 
 - Export validated BibTeX for use in LaTeX manuscripts
-- Verify citations match publication standards
+- Keep citation metadata and bibliography formatting consistent with publication standards
 - Format references according to journal requirements
 
 ### Venue Templates Skill
@@ -1094,5 +1101,3 @@ The citation-management skill provides:
 7. **Reproducibility** through documented search and extraction methods
 
 Use this skill to maintain accurate, complete citations throughout your research and ensure publication-ready bibliographies.
-
-

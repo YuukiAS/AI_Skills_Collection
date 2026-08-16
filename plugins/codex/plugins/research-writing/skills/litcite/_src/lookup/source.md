@@ -1,6 +1,6 @@
 ---
 name: research-lookup
-description: Look up current research information using the Parallel Chat API (primary) or Perplexity sonar-pro-search (academic paper searches). Automatically routes queries to the best backend. Use for finding papers, gathering research data, and verifying scientific information.
+description: Find current research information and recent papers quickly. Use for latest papers, targeted evidence gathering, methods/protocol checks, and source-backed facts. Route systematic or related-work synthesis to literature-review, claim-support verdicts to citation-verification, and BibTeX or library cleanup to citation-management or pyzotero.
 status: active
 provenance: unknown
 trusted: false
@@ -25,24 +25,31 @@ compatibility: PARALLEL_API_KEY and OPENROUTER_API_KEY required
 
 ## Overview
 
-This skill provides real-time research information lookup with **intelligent backend routing**:
+This skill provides real-time research information lookup for current evidence and paper discovery. Users should be able to ask naturally for "recent papers," "latest studies," or "current evidence"; backend names are implementation details.
+
+Backend routing:
 
 - **Parallel Chat API** (`core` model): Default backend for all general research queries. Provides comprehensive, multi-source research reports with inline citations via the OpenAI-compatible Chat API at `https://api.parallel.ai`.
 - **Perplexity sonar-pro-search** (via OpenRouter): Used only for academic-specific paper searches where scholarly database access is critical.
 
-The skill automatically detects query type and routes to the optimal backend.
+The skill automatically detects query type and routes to the optimal backend. Do not expose backend names as the user-facing trigger boundary unless the user asks for a specific provider.
 
 ## When to Use This Skill
 
 Use this skill when you need:
 
 - **Current Research Information**: Latest studies, papers, and findings
-- **Literature Verification**: Check facts, statistics, or claims against current research
+- **Targeted Evidence Lookup**: Check a research fact, statistic, method, or protocol against current sources
 - **Background Research**: Gather context and supporting evidence for scientific writing
 - **Citation Sources**: Find relevant papers and studies to cite
 - **Technical Documentation**: Look up specifications, protocols, or methodologies
-- **Market/Industry Data**: Current statistics, trends, competitive intelligence
-- **Recent Developments**: Emerging trends, breakthroughs, announcements
+- **Recent Developments**: Emerging research trends, breakthroughs, announcements
+
+Do not use this skill as the final deliverable for:
+- Field-level related-work synthesis, systematic reviews, scoping reviews, or single-paper deep reading; use `literature-review`.
+- Citation existence, DOI/PMID metadata consistency, or whether one source supports one sentence; use `citation-verification`.
+- BibTeX cleanup, duplicate reference repair, bibliography formatting, or Zotero collection maintenance; use `citation-management` or `pyzotero`.
+- Non-academic company/product/current-events lookup unless no narrower project skill applies.
 
 ## Visual and Figure Routing
 
@@ -68,14 +75,14 @@ Query arrives
             --> Parallel Chat API (core model)
 ```
 
-### Academic Keywords (Routes to Perplexity)
+### Academic Requests (Routes to academic search)
 
-Queries containing these terms are routed to Perplexity for academic-focused search:
+Academic paper-discovery requests are routed to the academic backend. Examples include:
 
 - Paper finding: `find papers`, `find articles`, `research papers on`, `published studies`
 - Citations: `cite`, `citation`, `doi`, `pubmed`, `pmid`
 - Academic sources: `peer-reviewed`, `journal article`, `scholarly`, `arxiv`, `preprint`
-- Review types: `systematic review`, `meta-analysis`, `literature search`
+- Targeted review lookup: `recent systematic reviews on`, `latest meta-analysis about`
 - Paper quality: `foundational papers`, `seminal papers`, `landmark papers`, `highly cited`
 
 ### Everything Else (Routes to Parallel)
@@ -338,11 +345,11 @@ When saving research results, always log:
 
 This skill enhances scientific writing by providing:
 
-1. **Literature Review Support**: Gather current research for introduction and discussion — **save to `sources/`**
+1. **Literature Review Support**: Gather current papers for a downstream `literature-review` synthesis — **save to `sources/`**
 2. **Methods Validation**: Verify protocols against current standards — **save to `sources/`**
 3. **Results Contextualization**: Compare findings with recent similar studies — **save to `sources/`**
 4. **Discussion Enhancement**: Support arguments with latest evidence — **save to `sources/`**
-5. **Citation Management**: Provide properly formatted citations — **save to `sources/`**
+5. **Citation Leads**: Provide source candidates for later citation verification or BibTeX management — **save to `sources/`**
 
 ## Complementary Tools
 

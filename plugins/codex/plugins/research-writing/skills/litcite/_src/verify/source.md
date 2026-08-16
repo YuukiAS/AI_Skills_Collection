@@ -50,6 +50,7 @@ Use this as a verification gate. Formatting a bibliography is not enough; check 
 
 ## Hand Off
 
-- Use `citation-management` for search, BibTeX generation, and reference-library operations.
+- Use `citation-management` for BibTeX generation, metadata cleanup, duplicate repair, style formatting, and reference-library hygiene.
+- Use `research-lookup` when verification shows a missing or stale citation and the next step is to find current candidate sources.
 - Use `paper-workflow-orchestrator` when citation issues imply a larger manuscript-claim problem.
-- Use `literature-review` when a missing citation requires field-level source discovery.
+- Use `literature-review` when a missing citation requires field-level synthesis or related-work coverage.
