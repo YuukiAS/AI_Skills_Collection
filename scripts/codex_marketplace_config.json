@@ -1,7 +1,7 @@
 {
   "name": "yuukias-ai-skills",
   "displayName": "YuukiAS AI Skills",
-  "marketplacePluginBudget": 6,
+  "marketplacePluginBudget": 10,
   "plugins": [
     {
       "name": "workflow-core",
@@ -176,6 +176,277 @@
             {
               "source": "skills/science/discovery/pyzotero",
               "artifact_id": "zotero"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "presentations",
+      "version": "4.0.0",
+      "displayName": "Presentations",
+      "description": "Research and business presentation planning, PPT style routing, deck-plan schema, CUHK templates, source fidelity, and visual QA.",
+      "category": "Research",
+      "brandColor": "#72256D",
+      "composerIcon": "./assets/codex/plugin-icons/presentations/composer.svg",
+      "logo": "./assets/codex/plugin-icons/presentations/composer.svg",
+      "shared": [
+        {
+          "source": "skills/tools/documents-media/presentations/shared",
+          "target": "shared"
+        }
+      ],
+      "defaultPrompt": [
+        "Plan a CUHK research presentation.",
+        "Turn this Markdown into a deck plan.",
+        "Choose the right PPT workflow and editability route.",
+        "Plan a business decision deck."
+      ],
+      "skills": [
+        {
+          "type": "copy",
+          "source": "skills/tools/documents-media/presentations/research-presentations",
+          "artifact_id": "research"
+        },
+        {
+          "type": "copy",
+          "source": "skills/tools/documents-media/presentations/business-presentations",
+          "artifact_id": "business"
+        }
+      ]
+    },
+    {
+      "name": "scientific-visualization",
+      "version": "4.2.0",
+      "displayName": "Scientific Visualization",
+      "description": "Publication-ready scientific figures with contextual palette discovery, Notion-derived references, figure QA, schematics, and posters.",
+      "category": "Research",
+      "brandColor": "#0E7490",
+      "composerIcon": "./assets/codex/plugin-icons/scientific-visualization/composer.svg",
+      "logo": "./assets/codex/plugin-icons/scientific-visualization/composer.svg",
+      "shared": [
+        {
+          "source": "palette",
+          "target": "shared/palette"
+        },
+        {
+          "source": "scripts/palette_library.py",
+          "target": "shared/scripts/palette_library.py"
+        },
+        {
+          "source": "scripts/palette.py",
+          "target": "shared/scripts/palette.py"
+        }
+      ],
+      "defaultPrompt": [
+        "Create or refine a publication-ready scientific figure with contextual palette discovery.",
+        "Discover safe palettes, Notion-derived references, and figure examples for a venue or figure type.",
+        "Audit this figure for accessibility, export, and venue readiness."
+      ],
+      "skills": [
+        {
+          "type": "aggregate",
+          "name": "publication-figures",
+          "artifact_id": "figures",
+          "description": "Publication figure orchestration with contextual palette discovery, Matplotlib, Seaborn, Plotly, and export-ready layout.",
+          "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
+          "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
+          "workflow_notes": [
+            "When no palette is specified, or when a venue/figure type/domain context is provided, first run contextual discovery with `publication-figure-palettes` or `../../shared/scripts/palette.py discover`.",
+            "Keep discovery and application separate: safe canonical palettes are plotting defaults; Notion candidates are contextual, non-official, and gated for snippets.",
+            "For figure readiness checks, use `scientific-figure-qa` after plotting or layout decisions.",
+            "Venue templates belong to research-writing; this plugin owns figure color, plotting code, visual examples, schematics, and posters."
+          ],
+          "source_skills": [
+            {
+              "source": "skills/science/communication/scientific-visualization",
+              "artifact_id": "publication"
+            },
+            {
+              "source": "skills/tools/visualization/matplotlib",
+              "artifact_id": "mpl"
+            },
+            {
+              "source": "skills/tools/visualization/seaborn",
+              "artifact_id": "seaborn"
+            },
+            {
+              "source": "skills/tools/visualization/plotly",
+              "artifact_id": "plotly"
+            }
+          ]
+        },
+        {
+          "type": "copy",
+          "source": "skills/science/communication/publication-figure-palettes",
+          "artifact_id": "palettes"
+        },
+        {
+          "type": "copy",
+          "source": "skills/science/communication/scientific-figure-qa",
+          "artifact_id": "qa"
+        },
+        {
+          "type": "copy",
+          "source": "skills/science/communication/scientific-schematics",
+          "artifact_id": "schematics"
+        },
+        {
+          "type": "copy",
+          "source": "skills/science/communication/latex-posters",
+          "artifact_id": "posters"
+        }
+      ]
+    },
+    {
+      "name": "web-development",
+      "version": "4.0.0",
+      "displayName": "Web Development",
+      "description": "Frontend reference research, visual taste systems, motion/icon resource routing, and research product frontend constraints that complement official build-web-apps and Figma.",
+      "category": "Web Development",
+      "brandColor": "#EA580C",
+      "composerIcon": "./assets/codex/plugin-icons/web-development/composer.svg",
+      "logo": "./assets/codex/plugin-icons/web-development/composer.svg",
+      "defaultPrompt": [
+        "Research frontend references.",
+        "Distill AI frontend taste and motion resources.",
+        "Create a visual system brief.",
+        "Plan a research product UI."
+      ],
+      "skills": [
+        {
+          "type": "copy",
+          "source": "skills/tools/frontend/frontend-reference-research",
+          "artifact_id": "refs"
+        },
+        {
+          "type": "aggregate",
+          "name": "frontend-visual-systems",
+          "artifact_id": "visual",
+          "description": "Frontend visual direction, design tokens, typography, palette, icon, layout, density, and motion brief.",
+          "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
+          "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
+          "source_skills": [
+            {
+              "source": "skills/tools/frontend/frontend-visual-systems",
+              "artifact_id": "system"
+            },
+            {
+              "source": "skills/tools/frontend/visual-direction",
+              "artifact_id": "direction"
+            },
+            {
+              "source": "skills/tools/frontend/design-system-tokens",
+              "artifact_id": "tokens"
+            }
+          ]
+        },
+        {
+          "type": "aggregate",
+          "name": "research-product-frontend",
+          "artifact_id": "research",
+          "description": "High-density research product frontend planning for imaging, phenotype, model comparison, provenance, and experiment interfaces.",
+          "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
+          "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
+          "source_skills": [
+            {
+              "source": "skills/tools/frontend/research-product-frontend",
+              "artifact_id": "product"
+            },
+            {
+              "source": "skills/tools/frontend/product-ux-planning",
+              "artifact_id": "ux"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "statistical-modeling",
+      "version": "4.0.0",
+      "displayName": "Statistical Modeling",
+      "description": "Statistical models, Bayesian workflows, Python data analysis, diagnostics, experiment design, and scientific visualization.",
+      "category": "Research",
+      "brandColor": "#0891B2",
+      "composerIcon": "./assets/codex/plugin-icons/statistical-modeling/composer.svg",
+      "logo": "./assets/codex/plugin-icons/statistical-modeling/composer.svg",
+      "defaultPrompt": [
+        "Plan a statistical analysis.",
+        "Diagnose a Bayesian model.",
+        "Visualize scientific results."
+      ],
+      "skills": [
+        {
+          "type": "aggregate",
+          "name": "bayesian-modeling",
+          "artifact_id": "bayes",
+          "description": "Bayesian and statistical modeling workflows with PyMC, diagnostics, simulation, and model reporting.",
+          "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
+          "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
+          "source_skills": [
+            {
+              "source": "skills/domains/bayesian/bayesian-ppl-diagnostics",
+              "artifact_id": "diag"
+            },
+            {
+              "source": "skills/domains/bayesian/pymc",
+              "artifact_id": "pymc"
+            },
+            {
+              "source": "skills/domains/bayesian/statsmodels",
+              "artifact_id": "stats"
+            },
+            {
+              "source": "skills/domains/bayesian/statistical-analysis",
+              "artifact_id": "analysis"
+            },
+            {
+              "source": "skills/domains/bayesian/simpy",
+              "artifact_id": "sim"
+            }
+          ]
+        },
+        {
+          "type": "aggregate",
+          "name": "data-analysis-python",
+          "artifact_id": "data",
+          "description": "Python data analysis workflows with EDA, Polars, scikit-learn, and symbolic math.",
+          "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
+          "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
+          "source_skills": [
+            {
+              "source": "skills/tools/data-science/exploratory-data-analysis",
+              "artifact_id": "eda"
+            },
+            {
+              "source": "skills/tools/data-science/polars",
+              "artifact_id": "polars"
+            },
+            {
+              "source": "skills/tools/data-science/scikit-learn",
+              "artifact_id": "sklearn"
+            },
+            {
+              "source": "skills/tools/data-science/sympy",
+              "artifact_id": "sympy"
+            }
+          ]
+        },
+        {
+          "type": "aggregate",
+          "name": "statistical-visualization",
+          "artifact_id": "viz",
+          "description": "Statistical result visualization with Matplotlib and Plotly. For publication-ready figure palettes, venue figure QA, and manuscript figure styling, use the scientific-visualization plugin.",
+          "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
+          "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
+          "source_skills": [
+            {
+              "source": "skills/tools/visualization/matplotlib",
+              "artifact_id": "mpl"
+            },
+            {
+              "source": "skills/tools/visualization/plotly",
+              "artifact_id": "plotly"
             }
           ]
         }

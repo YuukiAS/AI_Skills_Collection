@@ -1,0 +1,59 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{amsmath,amssymb,booktabs,tikz}
+\usetheme{Madrid}
+\definecolor{cuhkPurple}{HTML}{72256D}
+\definecolor{cuhkInk}{HTML}{201A2A}
+\definecolor{cuhkLightBar}{HTML}{E8E0EC}
+\definecolor{cuhkGold}{HTML}{D4AF37}
+\setbeamercolor{title}{fg=white,bg=cuhkPurple}
+\setbeamercolor{frametitle}{fg=white,bg=cuhkPurple}
+\setbeamercolor{structure}{fg=cuhkPurple}
+\setbeamercolor{normal text}{fg=cuhkInk}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{%
+  \leavevmode\hbox{%
+    \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.5ex,dp=1ex,leftskip=1em]{author in head/foot}\insertsection\end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.5ex,dp=1ex,rightskip=1em plus 1fil]{date in head/foot}\hfill\insertframenumber/\inserttotalframenumber\end{beamercolorbox}}%
+}
+\title{Presentation Title}
+\subtitle{Subtitle or source paper}
+\author{Author Name}
+\institute{Department of Statistics and Data Science}
+\date{\today}
+\begin{document}
+\begin{frame}[plain]
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[cuhkPurple] (current page.south west) rectangle (current page.north east);
+    \fill[cuhkLightBar,opacity=.55] (current page.north east) -- ++(-4.8,0) -- ++(2.2,-7.5) -- (current page.south east) -- cycle;
+    \fill[cuhkGold,opacity=.85] (current page.south west) -- ++(3.2,0) -- ++(-1.1,1.0) -- cycle;
+  \end{tikzpicture}
+  \vspace{1.2cm}
+  {\usebeamerfont{title}\color{white}\inserttitle\par}
+  \vspace{0.35cm}
+  {\color{white}\insertsubtitle\par}
+  \vfill
+  {\color{white}\insertauthor\par\insertinstitute\par\insertdate}
+\end{frame}
+\section{Introduction}
+\begin{frame}{Introduction}
+Add one main message here.
+\end{frame}
+\section{Methods}
+\begin{frame}{Methods}
+Add one main message here.
+\end{frame}
+\section{Results}
+\begin{frame}{Results}
+Add one main message here.
+\end{frame}
+\section{Discussion}
+\begin{frame}{Discussion}
+Add one main message here.
+\end{frame}
+\begin{frame}[plain]
+  \centering
+  \vfill
+  {\Huge\color{cuhkPurple}Thank you}
+  \vfill
+\end{frame}
+\end{document}

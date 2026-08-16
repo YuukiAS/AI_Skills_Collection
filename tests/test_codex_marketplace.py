@@ -119,7 +119,7 @@ def copy_sparse_paths(source: Path, target: Path, *paths: str) -> None:
 
 
 class CodexMarketplaceTests(unittest.TestCase):
-    def test_repository_config_has_server_plugin_set(self) -> None:
+    def test_repository_config_has_marketplace_plugin_set(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         self.assertEqual(
             [plugin["name"] for plugin in data["plugins"]],
@@ -128,11 +128,15 @@ class CodexMarketplaceTests(unittest.TestCase):
                 "ai-skills-core",
                 "writing-style",
                 "research-writing",
+                "presentations",
+                "scientific-visualization",
+                "web-development",
+                "statistical-modeling",
                 "bioinformatics",
                 "medical-imaging",
             ],
         )
-        self.assertEqual(data["marketplacePluginBudget"], 6)
+        self.assertEqual(data["marketplacePluginBudget"], 10)
 
     def test_repository_config_keeps_cardiacnexus_out_of_marketplace(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
@@ -141,10 +145,10 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertFalse((REPO_ROOT / "exports/cardiacnexus-repo-local").exists())
         self.assertFalse((REPO_ROOT / "skills/projects/cmr/cardiacnexus-feature-contracts/SKILL.md").exists())
 
-    def test_excluded_plugins_are_not_published_for_server_set(self) -> None:
+    def test_restored_plugins_are_published_for_marketplace_set(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         plugin_names = {plugin["name"] for plugin in data["plugins"]}
-        self.assertFalse({"presentations", "scientific-visualization", "web-development", "statistical-modeling"} & plugin_names)
+        self.assertTrue({"presentations", "scientific-visualization", "web-development", "statistical-modeling"} <= plugin_names)
 
     def test_render_and_slurm_are_not_central_marketplace_skills(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
@@ -153,9 +157,9 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertNotIn("skills/tools/hpc/slurm-workflows", serialized)
         self.assertTrue((REPO_ROOT / "skills/tools/hpc/slurm-workflows/SKILL.md").exists())
 
-    def test_excluded_plugin_payload_directories_are_removed(self) -> None:
+    def test_restored_plugin_payload_directories_are_present(self) -> None:
         for name in ["presentations", "scientific-visualization", "web-development", "statistical-modeling"]:
-            self.assertFalse((REPO_ROOT / "plugins/codex/plugins" / name).exists())
+            self.assertTrue((REPO_ROOT / "plugins/codex/plugins" / name / ".codex-plugin" / "plugin.json").exists())
 
     def test_canonical_integration_history_exists(self) -> None:
         history = REPO_ROOT / "docs/provenance/INTEGRATION_HISTORY.md"

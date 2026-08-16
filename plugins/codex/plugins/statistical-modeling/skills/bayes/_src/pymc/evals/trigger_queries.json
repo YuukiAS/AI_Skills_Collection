@@ -1,0 +1,15 @@
+{
+  "positive": [
+    "Build a hierarchical Bayesian model in PyMC and check NUTS diagnostics.",
+    "Review this PyMC model for prior predictive checks, divergences, and posterior predictive validation."
+  ],
+  "negative": [
+    "Run a frequentist OLS regression with coefficient tables in statsmodels.",
+    "Explain basic probability concepts without building a model."
+  ],
+  "near_miss": [
+    "Compare Bayesian models from Stan output using ArviZ diagnostics.",
+    "Choose an appropriate statistical test for two groups."
+  ],
+  "notes": "Use pymc when PyMC implementation or review is central; route broader PPL diagnostics to bayesian-ppl-diagnostics."
+}

@@ -1,0 +1,858 @@
+{
+  "library_id": "ai_skills_notion_palette_review_queue",
+  "version": "1.0.0",
+  "source": "palette/notion-palette-candidates.json",
+  "queue_count": 50,
+  "entries": [
+    {
+      "candidate_id": "notion_cvpr25_1",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_aaai_3",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_aaai_2",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_aaai_1",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_10",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_9",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_8",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_7",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_6",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_5",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_4",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_3",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_journal_reviewer_9_2",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_icml_clean_3",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_icml_clean_2",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_icml_clean_1",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_8",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_7",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_6",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_5",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_4",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_3",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_2",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_inspiration_1",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_8",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_7",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_6",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_5",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_4",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_3",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_2",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_nature_same_palette_1",
+      "priority": "high",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_18",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_17",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_16",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_15",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_14",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_13",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_12",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_11",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_10",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_9",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_8",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_7",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_6",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_5",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_4",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_3",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_2",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    },
+    {
+      "candidate_id": "notion_python_bar_distribution_1",
+      "priority": "low",
+      "review_status": "unreviewed",
+      "required_checks": [
+        "visible HEX transcription",
+        "semantic color roles",
+        "color vision deficiency",
+        "grayscale distinguishability",
+        "white-background contrast",
+        "thin-line usability",
+        "category count",
+        "figure-type suitability",
+        "non-official venue disclaimer"
+      ],
+      "notes": "Do not promote until manual transcription, accessibility, and figure suitability are checked."
+    }
+  ]
+}

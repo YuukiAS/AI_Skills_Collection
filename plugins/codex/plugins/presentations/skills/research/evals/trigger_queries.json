@@ -1,0 +1,17 @@
+{
+  "positive": [
+    "把这篇论文做成组会汇报用的中文 slides。",
+    "Create a conference talk deck from this manuscript with faithful figures and citations.",
+    "Make an editable PPTX for this experiment update.",
+    "Prepare a Beamer PDF for my thesis defense."
+  ],
+  "negative": [
+    "Convert this DOCX to Markdown.",
+    "Review whether this manuscript is ready for submission."
+  ],
+  "near_miss": [
+    "Summarize this paper in one page.",
+    "Create a poster from this project."
+  ],
+  "notes": "Format choice follows the requested deliverable; Beamer is not the universal default."
+}

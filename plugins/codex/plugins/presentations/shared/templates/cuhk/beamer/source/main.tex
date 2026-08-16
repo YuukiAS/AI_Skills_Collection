@@ -1,0 +1,57 @@
+% \documentclass[hyperref={CJKbookmarks=true}]{beamer}
+\documentclass{beamer}
+\usepackage{amsfonts,amsmath,amssymb,oldgerm,mathrsfs,booktabs}
+\usepackage{tcolorbox}   % For more usage, refer to https://liam.page/2016/07/22/using-the-tcolorbox-package-to-create-a-new-theorem-environment
+
+% \usepackage[UTF8]{ctex}
+\makeatletter
+\def\input@path{{styles/}}
+\makeatother
+\usetheme{sintef}
+\titlebackground*{assets/background}
+\tcbset{
+  colback=maincolor!5,
+  colframe=maincolor
+}
+\setbeameroption{show notes}
+\bibliographystyle{unsrt}
+
+\title{Title}
+\subtitle{
+First Author, Second Author, \textit{et al.} \\
+\textit{Journal Name}, 20XX
+}
+\author{Hu, Mingcheng}
+\institute{Department of Statistics \& Data Science}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+\begin{frame}{Introduction}
+Add your content here.
+\end{frame}
+
+\section{Methods}
+\begin{frame}{Methods}
+Add your content here.
+\end{frame}
+
+\section{Results}
+\begin{frame}{Results}
+Add your content here.
+\end{frame}
+
+\section{Discussion}
+\begin{frame}{Discussion}
+Add your content here.
+\end{frame}
+
+\section{References}
+\begin{frame}[t,allowframebreaks]{References}
+  \bibliography{bibliography}
+\end{frame}
+
+\backmatter
+\end{document}
