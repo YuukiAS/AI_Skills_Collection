@@ -1,6 +1,6 @@
 {
   "name": "presentations",
-  "version": "4.0.0",
+  "version": "4.3.0",
   "description": "Research and business presentation planning with editable PPTX/Slides routing, explicit Beamer/LaTeX routing, deck-plan schema, source fidelity, and render-based visual QA.",
   "author": {
     "name": "YuukiAS",

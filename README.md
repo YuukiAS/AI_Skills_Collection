@@ -35,7 +35,7 @@ cd /path/to/project
 ai-skills install --target repo --profile research-main --mode symlink --write-agents-md
 ```
 
-`v4.0.0` 起中央插件版本与 CLI package 版本同步；此前 `setup.py` 的 `0.1.0` 只表示早期本地命令包装器版本。
+当前正式版本是 `v4.3.0`。`v4.0.0` 起中央插件版本与 CLI package 版本同步；此前 `setup.py` 的 `0.1.0` 只表示早期本地命令包装器版本。
 
 ## 先决定装什么
 
@@ -85,6 +85,10 @@ codex plugin marketplace add \
 | `ai-skills-core` | `project-skill-installer`、`ai-skills-repository-maintainer` |
 | `writing-style` | `writing-fidelity`、`scientific-prose`、`chinese-prose` |
 | `research-writing` | `research-reporting`、`research-paper-workflow`、`literature-and-citations` |
+| `presentations` | `research-presentations`、`business-presentations` |
+| `scientific-visualization` | `publication-figures`、`publication-figure-palettes`、`scientific-figure-qa`、`scientific-schematics`、`latex-posters` |
+| `web-development` | `frontend-reference-research`、`frontend-visual-systems`、`research-product-frontend` |
+| `statistical-modeling` | `bayesian-modeling`、`data-analysis-python`、`statistical-visualization` |
 | `bioinformatics` | `bioinformatics-workflows` |
 | `medical-imaging` | `medical-imaging-workflows`、`ai-ml-imaging` |
 
