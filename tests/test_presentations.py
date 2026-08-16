@@ -59,6 +59,21 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertIn("Preserve the first/title slide layout", cuhk_readme)
         self.assertIn("Times New Roman Regular, Bold, Italic, and Bold Italic", cuhk_readme)
 
+    def test_business_and_shared_routes_connect_chinese_writing_handoff(self) -> None:
+        business_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/business-presentations/SKILL.md").read_text(encoding="utf-8")
+        ppt_routing = (SHARED / "ppt-skill-routing.md").read_text(encoding="utf-8")
+        profile = json.loads((REPO_ROOT / "profiles/presentation-desktop.json").read_text(encoding="utf-8"))
+
+        self.assertIn("Chinese business, executive, product, strategy, or decision slide text", business_skill)
+        self.assertIn("writing-fidelity` plus `chinese-prose", business_skill)
+        self.assertIn("Chinese presentation text, including research, business, executive, strategy, product, and teaching decks", ppt_routing)
+        self.assertIn("must pass through `writing-fidelity` plus `chinese-prose`", ppt_routing)
+        self.assertIn("English scientific slide text can pass through `scientific-prose`", ppt_routing)
+        profile_skills = "\n".join(profile["skills"])
+        self.assertIn("skills/writing/core/writing-fidelity", profile_skills)
+        self.assertIn("skills/writing/core/chinese-prose", profile_skills)
+        self.assertIn("skills/writing/core/scientific-prose", profile_skills)
+
     def test_cuhk_template_payload_is_complete_and_reference_deck_is_valid(self) -> None:
         root = SHARED / "templates/cuhk"
         source = root / "beamer/source"

@@ -26,6 +26,7 @@ Use this skill for decision-oriented decks. File creation, object editing, expor
 - Do not trigger for small edits to an existing PPTX/Google Slides file.
 - Use business presentation themes/templates for deck-wide color. Do not use journal-inspired scientific palettes from `palette/` as business deck themes.
 - Use `../../shared/deck-plan.schema.json` as the default intermediate representation.
+- For Chinese business, executive, product, strategy, or decision slide text, route the final wording pass through `writing-fidelity` plus `chinese-prose` when those writing skills are installed. Keep factual numbers, claims, and source labels stable while making the Chinese read naturally.
 
 ## Narrative
 
@@ -41,7 +42,8 @@ answer/request -> problem or opportunity -> evidence and impact -> plan -> resou
 2. Produce `deck-plan.yaml` for non-trivial decks.
 3. Keep each slide tied to one decision-relevant message.
 4. Use the CUHK default visual system only when no company, client, course, or event template is specified.
-5. Route editable deck creation to official Presentation/Slides and keep visual QA evidence.
+5. Apply the shared writing handoff before final deck creation: Chinese slide text gets `writing-fidelity` plus `chinese-prose`; English scientific slide prose can use `scientific-prose` when the deck includes research evidence.
+6. Route editable deck creation to official Presentation/Slides and keep visual QA evidence.
 
 ## References
 
