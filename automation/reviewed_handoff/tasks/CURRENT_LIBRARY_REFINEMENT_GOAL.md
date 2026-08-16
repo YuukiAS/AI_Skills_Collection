@@ -11,6 +11,43 @@
 3. `003_presentations`：整理研究/商业演示工作流，修正当前“学术默认 Beamer”与桌面可编辑 PPTX/Slides 工作流之间的矛盾，并把叙事、写作终审、可编辑性和视觉验收接起来。
 4. `004_current_library_acceptance`：不再主动扩展能力，只检查前三批修改后的整个当前仓库是否还有明显阻断问题；发现明确问题时做有限返修，没有明显问题时进入版本发布与真实安装验收。
 
+## Planner 与 Codex 的阶段交接
+
+本轮不使用常驻 watcher。Planner 与同一个 Codex Goal 通过 GitHub tracked files 交接，避免 Codex 自己兼任 Planner。
+
+每个阶段 `<task_key>` 使用：
+
+- 冻结合同：`automation/reviewed_handoff/tasks/<task_key>/PLAN.md`
+- Codex 执行结果：`results/<task_key>/RESULT.md`
+- GPT Planner 当前审阅：`results/<task_key>/PLANNER_REVIEW.md`
+
+Codex 完成一个阶段实现后必须先 push `main`，再写/更新 `RESULT.md`，至少记录：
+
+- 本阶段实现前的基线提交；
+- 实际实现提交；
+- 具体修改了什么；
+- 本地测试/生成/安装检查结果；
+- 仍然已知的限制；
+- 当前是否等待 Planner。
+
+定时 GPT Planner 只在看到新的 `RESULT.md` / 新实现提交后做审阅。它必须读取真实 diff、相关 source、测试和 GitHub Actions，而不是照抄 RESULT。审阅写入 `PLANNER_REVIEW.md`，至少包含：
+
+- `reviewed_commit`；
+- `decision: PASS | REVISE | WAIT_CI | BLOCKED | ACHIEVED`；
+- 如果 `REVISE`，每个 blocker 的冻结依据、真实证据、最小修复和修复后验收方式；
+- 如果 `PASS`，明确下一阶段 task_key；
+- `004` 只有满足版本、CHANGELOG、真实安装与 GitHub Actions 门槛后才允许 `ACHIEVED`。
+
+Codex 不能在等待 Planner 时自行宣布 PASS。它只能：
+
+- `REVISE` → 只修 Planner 列出的 blocker，重新验证、push、更新 RESULT；
+- `PASS` → 进入下一阶段冻结 PLAN；
+- `WAIT_CI` → 不改源码，等待 Planner 下一轮读取远端 Actions；
+- `BLOCKED` → 停止并报告用户；
+- `ACHIEVED` → 结束整个 Goal。
+
+为避免无意义 token 消耗，Codex 等待 Planner 时不得反复重新分析整个仓库；只需要低频检查远端 `PLANNER_REVIEW.md` 是否针对新的实现提交发生变化。Planner 也不得在没有新实现、CI 状态变化或实际 blocker 的情况下重复写相同 review。
+
 ## 复核方式
 
 每个批次都必须先按对应 `PLAN.md` 实现，再由与实现步骤分离的 GPT Planner/Reviewer 定时检查真实远端 diff、当前技能说明、用户自然语言调用案例、GitHub Actions 和完整测试。复核只允许阻断：
