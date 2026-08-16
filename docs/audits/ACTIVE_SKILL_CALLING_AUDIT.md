@@ -1,238 +1,209 @@
-# Active Skill Calling Audit
-## Scope And Baseline
-- Frozen baseline: `main @ 157552aae0d4871a4a333ed14fd1e56a000472ee`; `origin/main` verified at that SHA after `git fetch origin main`.
-- Source active skill count: `149` from `registry.json`; generated plugin copies are excluded.
-- Audit purpose: capability discovery, calling boundary, entrance, and marketplace/profile exposure. No code changes or topology changes are proposed here.
+# 活跃技能调用审计
+## 范围与结论
+本次是 Reviewer blocker 的定向返修，不进入第二阶段，也不改任何现有技能实现。源技能覆盖仍为 `149/149`。原始技能内容冻结在 `157552aae0d4871a4a333ed14fd1e56a000472ee`；本次返修基于 `ad1bdee51e1c29df8119ba7c91ffdcee06cc695d`。
 
-## Duplicate Capability And Calling Conflict Clusters
-| Cluster | Involved source skills | Conflict type | Current evidence | Possible calling consequence |
+## 安装可达性与自然调用性分离
+上一版把 插件市场 暴露、profile/domain/单技能安装和 description 触发能力混成一个入口状态。本版改为两个独立维度：
+- **安装可达性**：能力能否通过插件市场、推荐 profile、兼容 profile、domain 安装或单技能安装进入运行环境。
+- **自然调用性**：假设技能已经安装并可见，用户只描述真实任务、不说内部 skill 名时，description 是否足以让模型选择该技能。
+
+### 安装可达性结果
+- 插件市场 可见：`35` 个源技能。
+- 插件市场 不可见：`114` 个源技能。这里不能直接推导“没有入口”或“必须知道内部名”。
+- 不在 插件市场 但推荐 profile 可达：`24`。
+- 不在 插件市场 且主要靠兼容 profile/domain/单技能安装：`90`。
+- 没有已知安装路径：`0`。
+
+### 自然调用性结果
+- 自然清晰：`64`。
+- 边界模糊：`65`。
+- 描述过窄：`1`。
+- 依赖工具/产品名：`13`。
+- 被宽技能遮蔽：`6`。
+- 证据不足：`0`。
+
+### 只是安装覆盖问题，不是调用说明问题的代表技能
+这些技能不在 6 个 插件市场 插件中，但 description 本身已经覆盖自然任务语义；第二阶段不能仅凭 插件市场 不可见就要求改 description：
+- `mcp-builder`：构建 MCP server；自然调用证据：description 给出了任务语义，用户不必说内部 skill 名。
+- `plugin-creator`：创建 Codex plugin；自然调用证据：description 给出了任务语义，用户不必说内部 skill 名。
+- `skill-creator`：创建或更新 Codex skill；自然调用证据：description 给出了任务语义，用户不必说内部 skill 名。
+- `skill-installer`：技能安装与 profile 设置；自然调用证据：description 给出了任务语义，用户不必说内部 skill 名。
+- `skill-library-analysis`：AI_Skills_Collection 维护与技能引入审计；自然调用证据：description 给出了任务语义，用户不必说内部 skill 名。
+- `bayesian-ppl-diagnostics`：统计建模、贝叶斯分析与仿真；自然调用证据：description 给出了任务语义，用户不必说内部 skill 名。
+- `pymc`：统计建模、贝叶斯分析与仿真；自然调用证据：description 给出了任务语义，用户不必说内部 skill 名。
+- `simpy`：统计建模、贝叶斯分析与仿真；自然调用证据：description 给出了任务语义，用户不必说内部 skill 名。
+- `statistical-analysis`：统计建模、贝叶斯分析与仿真；自然调用证据：description 给出了任务语义，用户不必说内部 skill 名。
+- `statsmodels`：统计建模、贝叶斯分析与仿真；自然调用证据：description 给出了任务语义，用户不必说内部 skill 名。
+- `esm`：生物信息数据库、单细胞、组学与基因组文件工作流；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `etetoolkit`：生物信息数据库、单细胞、组学与基因组文件工作流；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `flowio`：生物信息数据库、单细胞、组学与基因组文件工作流；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `neuropixels-analysis`：生物信息数据库、单细胞、组学与基因组文件工作流；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `phylogenetics`：生物信息数据库、单细胞、组学与基因组文件工作流；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `zarr-python`：生物信息数据库、单细胞、组学与基因组文件工作流；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `neurokit2`：临床医学证据、报告与安全边界文档；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `pyhealth`：临床医学证据、报告与安全边界文档；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `scikit-survival`：临床医学证据、报告与安全边界文档；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `consciousness-council`：科研构思、实验规划与策略推演；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `experiment-execution`：科研构思、实验规划与策略推演；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `hypogenic`：科研构思、实验规划与策略推演；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `hypothesis-generation`：科研构思、实验规划与策略推演；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `scientific-brainstorming`：科研构思、实验规划与策略推演；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `scientific-critical-thinking`：科研构思、实验规划与策略推演；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `what-if-oracle`：科研构思、实验规划与策略推演；自然调用证据：description 覆盖自然任务表达；未发现必须依赖内部名称的证据。
+- `modal`：AI/ML 框架、实验与模型工程；自然调用证据：description 给出了任务语义，用户不必说内部 skill 名。
+- `pufferlib`：AI/ML 框架、实验与模型工程；自然调用证据：description 给出了任务语义，用户不必说内部 skill 名。
+- `stable-baselines3`：AI/ML 框架、实验与模型工程；自然调用证据：description 给出了任务语义，用户不必说内部 skill 名。
+- `timesfm-forecasting`：AI/ML 框架、实验与模型工程；自然调用证据：description 给出了任务语义，用户不必说内部 skill 名。
+
+## 重点冲突组
+| 冲突组 | 涉及源技能 | 冲突类型 | 当前证据 | 可能调用后果 |
 |---|---|---|---|---|
-| Research paper workflow overlap | `scientific-writing`, `paper-workflow-orchestrator`, `nature-manuscript-workflow`, `peer-review`, `scholar-evaluation` | Broad-vs-specific / duplicate boundary | All describe manuscript drafting, claim-evidence, acceptance/reviewer checks, or broad-journal readiness under research-writing. | A broad manuscript request may be caught by several source skills unless the aggregate decides route precisely. |
-| Literature and citation provider overlap | `literature-review`, `citation-verification`, `citation-management`, `research-lookup`, `arxiv-database`, `biorxiv-database`, `pubmed-database`, `openalex-database`, `valyu-scientific-search`, `bgpt-paper-search`, `pyzotero` | Tool/provider competition | The aggregate includes literature-review, citation-verification, citation-management, research-lookup, and pyzotero; provider/database skills also expose direct search tasks. | A natural paper search request could route to a provider skill before the evidence/citation workflow is chosen. |
-| OCR academic document recovery overlap | `academic-paper-writer-pro`, `ocr-kb`, `markitdown`, `pdf` | Duplicate/adjacent task boundary | academic-paper-writer-pro and ocr-kb both cover scanned PDF/OCR recovery and DOCX/Markdown delivery; markitdown/pdf also trigger on PDF conversion. | Scanned paper cleanup may start as generic PDF conversion instead of OCR recovery or manuscript artifact repair. |
-| Visualization and diagram entry spread | `markdown-mermaid-writing`, `drawio-diagrams`, `d2-diagrams`, `plantuml-diagrams`, `excalidraw-diagrams`, `scientific-schematics`, `scientific-visualization`, `scientific-figure-qa`, `generate-image`, `imagegen`, `canvas-design`, `infographics` | Multiple front doors / medium competition | Diagram DSL, scientific figure, image generation, infographic, and canvas-design skills all respond to visual artifact requests. | Users asking for a diagram/figure may need to know desired medium before routing is clear. |
-| Frontend planning/build/QA chain lacks marketplace front door | `product-ux-planning`, `visual-direction`, `design-system-tokens`, `implementation-react-tailwind`, `responsive-accessibility-review`, `webapp-testing`, `research-product-frontend`, `frontend-reference-research`, `frontend-visual-systems`, `figma-design-to-code`, `motion-interaction` | No marketplace front door / broad-vs-specific | Frontend skills exist in profiles and direct skills, but none of six marketplace plugins exposes them. | A user-visible marketplace install path does not advertise frontend design/build capability. |
-| Bioinformatics provider granularity | `bioinformatics-database-retrieval`, `biopython`, `pubmed-database`, `pysam`, `tiledbvcf`, `zarr-python`, `polars-bio`, `gtars`, `geniml`, `deeptools`, `arboreto`, `scanpy`, `scvi-tools`, `anndata`, `scvelo` | Aggregate versus named-library boundary | Bioinformatics aggregate exposes 10 core source skills, while many specialized active provider/tool skills remain direct/profile only. | Common bioinformatics tasks are covered, but specialized requests may require naming the specific library/platform. |
-| Medical imaging aggregate coverage gap | `cardiac-mri`, `pydicom`, `medical-imaging-classical-features`, `medical-imaging-deep-learning`, `pathml`, `medical-imaging-terminology-measurement` | Aggregate coverage gap | Medical Imaging aggregate source list covers CMR/DICOM/features/deep learning/pathology source skills, while terminology-measurement is active but not in the plugin aggregate. | Terminology/measurement caveat requests may miss the marketplace medical-imaging front door. |
-| Clinical medicine has no marketplace front door | `clinical-guideline-checking`, `medical-literature-evidence-review`, `clinical-reports`, `clinical-decision-support`, `treatment-plans`, `medical-safety-boundaries` | No front door / safety boundary risk | Clinical skills are active direct/profile skills but not in the six marketplace plugins. | Clinical evidence/report requests may route through generic research-writing or web search without clinical safety boundary skill. |
-| Data-science library direct-name dependence | `polars`, `dask`, `vaex`, `geopandas`, `networkx`, `scikit-learn`, `shap`, `umap-learn`, `aeon`, `pymoo`, `sympy`, `matlab`, `exploratory-data-analysis` | Internal/library name dependent | Most data-science skills are active source skills in profiles or direct selectors; no marketplace data-science aggregate. | Users with natural analytics tasks may need to name the library or profile to discover the skill. |
-| AI/ML framework exposure is partial | `pytorch-lightning`, `transformers`, `torch-geometric`, `langchain`, `llamaindex`, `opencv`, `fastai`, `timesfm-forecasting` | Plugin/profile exposure mismatch | Medical Imaging plugin exposes PyTorch Lightning and Transformers via ai-ml-imaging; other AI/ML framework skills remain direct/profile only. | General AI/ML implementation tasks may be incorrectly perceived as medical-imaging-only or not discoverable through marketplace. |
-| Presentation and poster skills split by audience/format | `research-presentations`, `business-presentations`, `latex-posters`, `pptx-posters`, `paper-2-web` | Adjacent task boundary / no marketplace front door | Presentation profile exposes research/business decks; poster and paper-to-media skills are active but outside marketplace. | A request for slides/poster/web summary may require route choice by output format and audience. |
-| OpenAI docs/system helpers depend on exact capability names | `openai-docs`, `mcp-builder`, `skill-creator`, `plugin-creator` | Internal-name dependent | Descriptions are concrete but direct/profile exposed; no user-facing marketplace front door groups OpenAI docs, MCP, skill, and plugin authoring together. | Users may ask for API help or a plugin/skill vaguely and miss the correct helper unless the runtime already has system routing. |
+| 论文写作、论文流程与评审边界 | `scientific-writing`, `paper-workflow-orchestrator`, `nature-manuscript-workflow`, `peer-review`, `scholar-evaluation` | 宽技能与窄技能边界模糊 | 这些技能都覆盖论文文本、主张-证据、投稿准备、审稿意见或接受风险检查。 | 宽泛的“帮我改论文/审论文”可能需要先判断是正文写作、流程编排还是评审诊断。 |
+| 文献检索、引用核验与数据库提供商边界 | `literature-review`, `citation-verification`, `citation-management`, `research-lookup`, `arxiv-database`, `biorxiv-database`, `pubmed-database`, `openalex-database`, `valyu-scientific-search`, `bgpt-paper-search`, `pyzotero` | 工作流与提供商工具竞争 | Research Writing 聚合入口含文献、引用、引用管理和 research-lookup；多个数据库技能也能直接响应检索。 | 自然检索请求可能先落到提供商，而不是先判断综述、证据卡或引用核验目标。 |
+| OCR、PDF、DOCX 与通用转换边界 | `academic-paper-writer-pro`, `ocr-kb`, `markitdown`, `pdf` | 相邻任务边界模糊 | academic-paper-writer-pro 与 ocr-kb 都覆盖扫描 PDF/OCR 恢复和 DOCX/Markdown 交付；markitdown/pdf 覆盖更通用的转换。 | 扫描论文清理可能被当作普通 PDF 转换，而不是 OCR 质量恢复或学术交付修复。 |
+| 图、流程图、科学插图与图片生成边界 | `markdown-mermaid-writing`, `drawio-diagrams`, `d2-diagrams`, `plantuml-diagrams`, `excalidraw-diagrams`, `scientific-schematics`, `scientific-visualization`, `scientific-figure-qa`, `generate-image`, `imagegen`, `canvas-design`, `infographics` | 输出媒介与任务目的竞争 | 文本图 DSL、可编辑图、科学插图、图像生成、信息图和静态设计都响应可视化请求。 | 用户说“画个图/做个 figure”时，需要第二阶段判断是结构图、出版图、位图还是信息图。 |
+| 前端规划、实现与验收链路 | `product-ux-planning`, `visual-direction`, `design-system-tokens`, `implementation-react-tailwind`, `responsive-accessibility-review`, `webapp-testing`, `research-product-frontend`, `frontend-reference-research`, `frontend-visual-systems`, `figma-design-to-code`, `motion-interaction` | 安装入口主要在 profile，内部链路边界较长 | 前端技能在 profile/direct 可达，但不在 6 个 插件市场 插件中；自然任务从规划到实现到验收跨度大。 | 这是插件市场覆盖缺口，不等于 description 不可调用；第二阶段应判断是否需要更清晰的上游入口。 |
+| 生物信息聚合能力与具体工具边界 | `bioinformatics-database-retrieval`, `biopython`, `pubmed-database`, `pysam`, `tiledbvcf`, `zarr-python`, `polars-bio`, `gtars`, `geniml`, `deeptools`, `arboreto`, `scanpy`, `scvi-tools`, `anndata`, `scvelo` | 聚合入口与命名工具边界 | Bioinformatics 聚合覆盖 10 个核心技能，另有多个专门工具、平台和数据结构 active 技能通过 profile/domain/direct 可达。 | 常见生信任务有聚合入口，专门平台或工具请求仍可能需要说出工具名或由聚合入口二次路由。 |
+| 医学影像聚合覆盖与术语测量边界 | `cardiac-mri`, `pydicom`, `medical-imaging-classical-features`, `medical-imaging-deep-learning`, `pathml`, `medical-imaging-terminology-measurement` | 聚合覆盖缺口 | Medical Imaging 插件聚合 CMR/DICOM/features/deep learning/pathology，但 active 的 terminology-measurement 不在插件聚合源列表中。 | 术语、测量约定、结构化报告边界请求可能不从 插件市场 医学影像入口自然进入。 |
+| 临床医学证据与安全边界 | `clinical-guideline-checking`, `medical-literature-evidence-review`, `clinical-reports`, `clinical-decision-support`, `treatment-plans`, `medical-safety-boundaries` | 插件市场覆盖缺口与安全边界风险 | 临床技能 active 且可通过 domain/单技能安装，但不在 6 个 插件市场 插件中。 | 这不是全库不可达；问题是 插件市场 没有临床顶级入口，安装后仍需确保安全边界技能不被泛科研写作遮蔽。 |
+| 数据科学工具相邻边界 | `polars`, `dask`, `vaex`, `geopandas`, `networkx`, `scikit-learn`, `shap`, `umap-learn`, `aeon`, `pymoo`, `sympy`, `matlab`, `exploratory-data-analysis` | 自然任务与工具选择边界 | 多数 description 有任务语义，不只是库名；但加速、分布式、超大表格、地理数据、网络、解释性、降维等边界相邻。 | 没有 插件市场 统计/数据科学入口是安装覆盖问题；已安装后的主要风险是工具选择边界，而非必须知道内部名。 |
+| AI/ML 框架曝光不均 | `pytorch-lightning`, `transformers`, `torch-geometric`, `langchain`, `llamaindex`, `opencv`, `fastai`, `timesfm-forecasting` | 插件暴露与通用 AI/ML 任务边界不一致 | Medical Imaging 插件通过 ai-ml-imaging 暴露 PyTorch Lightning 和 Transformers，其他 AI/ML 技能主要依赖 profile/domain/direct。 | 通用模型工程任务可能被误认为只属于医学影像插件；但如 timesfm-forecasting 的 description 本身可自然触发单变量预测任务。 |
+| 演示、海报与论文转传播材料边界 | `research-presentations`, `business-presentations`, `latex-posters`, `pptx-posters`, `paper-2-web` | 受众和格式边界相邻 | presentation-desktop profile 覆盖研究/商业 deck，海报和 paper-to-media 技能另行 active。 | 用户请求 slides/poster/web summary 时，需要区分受众、格式和是否来自论文。 |
+| OpenAI 文档与系统构建辅助技能 | `openai-docs`, `mcp-builder`, `skill-creator`, `plugin-creator` | description 宽窄不均 | mcp-builder、skill-creator、plugin-creator 有明确构建任务语义；openai-docs description 更强调 openai docs workflow 名称。 | 这里不应整体判为内部名依赖；真正需要复查的是 openai-docs 的自然任务覆盖是否过窄。 |
 
-## Broad-Vs-Specific Risks
-- **Research paper workflow overlap**: All describe manuscript drafting, claim-evidence, acceptance/reviewer checks, or broad-journal readiness under research-writing. Consequence: A broad manuscript request may be caught by several source skills unless the aggregate decides route precisely.
-- **Visualization and diagram entry spread**: Diagram DSL, scientific figure, image generation, infographic, and canvas-design skills all respond to visual artifact requests. Consequence: Users asking for a diagram/figure may need to know desired medium before routing is clear.
-- **Frontend planning/build/QA chain lacks marketplace front door**: Frontend skills exist in profiles and direct skills, but none of six marketplace plugins exposes them. Consequence: A user-visible marketplace install path does not advertise frontend design/build capability.
-- **Bioinformatics provider granularity**: Bioinformatics aggregate exposes 10 core source skills, while many specialized active provider/tool skills remain direct/profile only. Consequence: Common bioinformatics tasks are covered, but specialized requests may require naming the specific library/platform.
-- **Medical imaging aggregate coverage gap**: Medical Imaging aggregate source list covers CMR/DICOM/features/deep learning/pathology source skills, while terminology-measurement is active but not in the plugin aggregate. Consequence: Terminology/measurement caveat requests may miss the marketplace medical-imaging front door.
-- **Clinical medicine has no marketplace front door**: Clinical skills are active direct/profile skills but not in the six marketplace plugins. Consequence: Clinical evidence/report requests may route through generic research-writing or web search without clinical safety boundary skill.
-- **AI/ML framework exposure is partial**: Medical Imaging plugin exposes PyTorch Lightning and Transformers via ai-ml-imaging; other AI/ML framework skills remain direct/profile only. Consequence: General AI/ML implementation tasks may be incorrectly perceived as medical-imaging-only or not discoverable through marketplace.
-- **Presentation and poster skills split by audience/format**: Presentation profile exposes research/business decks; poster and paper-to-media skills are active but outside marketplace. Consequence: A request for slides/poster/web summary may require route choice by output format and audience.
+## 12 组冲突的成对边界样例
+### 论文写作、论文流程与评审边界
+- 区分 `scientific-writing` 与 `paper-workflow-orchestrator`：
+  - 应进入 `scientific-writing`：把 Results 第一节改成完整论文段落，保留统计量和图号。
+  - 应进入 `paper-workflow-orchestrator`：先帮我规划这篇论文的主张-证据骨架、每节职责和图文同步检查。
+  - 真实模糊边界：这篇论文结构有点乱，帮我改到能投稿。
+- 区分 `peer-review` 与 `scholar-evaluation`：
+  - 应进入 `peer-review`：按审稿人视角指出这篇稿子的主要拒稿风险和 rebuttal 准备点。
+  - 应进入 `scholar-evaluation`：按一套评分维度系统评价这篇工作的研究质量、方法、分析和写作。
+  - 真实模糊边界：帮我判断这篇论文质量够不够。
+### 文献检索、引用核验与数据库提供商边界
+- 区分 `literature-review` 与 `research-lookup`：
+  - 应进入 `literature-review`：围绕这个方向做相关工作梳理，按方法路线和研究空白组织。
+  - 应进入 `research-lookup`：帮我现在查几篇最新论文，给出题名、年份和链接。
+  - 真实模糊边界：找一些论文并总结现状。
+- 区分 `citation-verification` 与 `pubmed-database`：
+  - 应进入 `citation-verification`：检查这条 PMID/DOI 是否真实存在，并确认正文主张有没有被引用支持。
+  - 应进入 `pubmed-database`：用 PubMed MeSH 布尔查询检索这类疾病的临床研究。
+  - 真实模糊边界：查一下这篇医学论文引用是否可靠。
+### OCR、PDF、DOCX 与通用转换边界
+- 区分 `ocr-kb` 与 `markitdown`：
+  - 应进入 `ocr-kb`：这份扫描 PDF 有公式和表格，按页 OCR 成可编辑 Markdown 并做质量核查。
+  - 应进入 `markitdown`：把这个 DOCX、PPTX 和网页批量转成 Markdown。
+  - 真实模糊边界：把这个 PDF 转成 Markdown。
+- 区分 `academic-paper-writer-pro` 与 `pdf`：
+  - 应进入 `academic-paper-writer-pro`：修复这篇扫描论文的版式、参考文献和断点，交付 DOCX/Markdown。
+  - 应进入 `pdf`：合并这几个 PDF 并提取其中的图片。
+  - 真实模糊边界：处理这篇 PDF 论文，最后给我可编辑版本。
+### 图、流程图、科学插图与图片生成边界
+- 区分 `markdown-mermaid-writing` 与 `drawio-diagrams`：
+  - 应进入 `markdown-mermaid-writing`：在 Markdown 报告里加一个 Mermaid 流程图说明数据流。
+  - 应进入 `drawio-diagrams`：做一个可编辑 draw.io 架构图，后面我要手工改节点。
+  - 真实模糊边界：给这个流程画个图。
+- 区分 `scientific-schematics` 与 `generate-image`：
+  - 应进入 `scientific-schematics`：按论文方法画一张源事实一致的机制示意图，用于投稿前讨论。
+  - 应进入 `generate-image`：生成一张产品 hero 背景图，偏写实插画风格。
+  - 真实模糊边界：帮我生成一张方法图。
+### 前端规划、实现与验收链路
+- 区分 `product-ux-planning` 与 `implementation-react-tailwind`：
+  - 应进入 `product-ux-planning`：先把这个实验平台的信息架构、导航、状态和核心流程规划清楚。
+  - 应进入 `implementation-react-tailwind`：直接实现一个 React/Tailwind 表格和筛选面板，接到现有数据。
+  - 真实模糊边界：帮我做一个实验结果 dashboard。
+- 区分 `responsive-accessibility-review` 与 `webapp-testing`：
+  - 应进入 `responsive-accessibility-review`：检查这个页面移动端、键盘访问、对比度和文字溢出问题。
+  - 应进入 `webapp-testing`：用 Playwright 跑一下本地 app，截图并抓 console error。
+  - 真实模糊边界：验收一下这个前端页面。
+### 生物信息聚合能力与具体工具边界
+- 区分 `bioinformatics-database-retrieval` 与 `scanpy`：
+  - 应进入 `bioinformatics-database-retrieval`：查这些基因、通路和疾病关联，整理数据库证据。
+  - 应进入 `scanpy`：对这个 h5ad 做单细胞 QC、聚类和 marker gene 分析。
+  - 真实模糊边界：分析这些单细胞基因表达结果。
+- 区分 `pysam` 与 `tiledbvcf`：
+  - 应进入 `pysam`：读取 BAM/CRAM 的指定区域并计算覆盖度。
+  - 应进入 `tiledbvcf`：把大规模 VCF 样本集合导入 TileDB 并做并行查询。
+  - 真实模糊边界：处理这些变异和比对文件。
+### 医学影像聚合覆盖与术语测量边界
+- 区分 `cardiac-mri` 与 `medical-imaging-terminology-measurement`：
+  - 应进入 `cardiac-mri`：解释 CMR cine SAX 的 ED/ES 选择和 LV/RV 功能指标。
+  - 应进入 `medical-imaging-terminology-measurement`：核对这份影像报告里的术语、测量单位和不确定性表述是否规范。
+  - 真实模糊边界：检查这份 CMR 结果写法是否准确。
+- 区分 `pydicom` 与 `medical-imaging-classical-features`：
+  - 应进入 `pydicom`：读取 DICOM 并保留 spacing、orientation 和 tag provenance。
+  - 应进入 `medical-imaging-classical-features`：设计可复现的物理空间预处理、配准 baseline 和 radiomics 协议。
+  - 真实模糊边界：帮我核查医学影像预处理流程。
+### 临床医学证据与安全边界
+- 区分 `clinical-guideline-checking` 与 `medical-literature-evidence-review`：
+  - 应进入 `clinical-guideline-checking`：核对这条指南推荐在当前年份、地区和人群里是否仍成立。
+  - 应进入 `medical-literature-evidence-review`：按证据等级综述这种治疗在目标人群中的研究结果。
+  - 真实模糊边界：帮我查这个临床建议有没有依据。
+- 区分 `clinical-reports` 与 `treatment-plans`：
+  - 应进入 `clinical-reports`：把这些去标识化信息整理成病例报告摘要。
+  - 应进入 `treatment-plans`：起草一份需要临床医生复核的治疗计划文档，列目标、干预和监测。
+  - 真实模糊边界：帮我写一份病人的临床文档。
+### 数据科学工具相邻边界
+- 区分 `polars` 与 `dask`：
+  - 应进入 `polars`：这个 30GB parquet 能进内存，帮我把 pandas ETL 改成更快的 Polars lazy pipeline。
+  - 应进入 `dask`：这个数据超出单机内存，需要把 pandas/NumPy 工作流扩到集群并行。
+  - 真实模糊边界：这个表格分析太慢，帮我优化。
+- 区分 `geopandas` 与 `networkx`：
+  - 应进入 `geopandas`：读取 shapefile/GeoJSON，做空间 join 并画交互地图。
+  - 应进入 `networkx`：分析这个节点-边关系网络的中心性和社区结构。
+  - 真实模糊边界：分析这些位置和连接关系。
+- 区分 `shap` 与 `scikit-learn`：
+  - 应进入 `shap`：解释这个训练好模型的特征贡献，生成 SHAP summary plot。
+  - 应进入 `scikit-learn`：建立 sklearn pipeline，做交叉验证、预处理和模型选择。
+  - 真实模糊边界：帮我分析这个模型为什么表现这样。
+### AI/ML 框架曝光不均
+- 区分 `timesfm-forecasting` 与 `aeon`：
+  - 应进入 `timesfm-forecasting`：不用训练自定义模型，直接预测这条单变量传感器时间序列。
+  - 应进入 `aeon`：做时间序列分类、聚类或异常检测实验。
+  - 真实模糊边界：分析这些时间序列并预测后续趋势。
+- 区分 `pytorch-lightning` 与 `transformers`：
+  - 应进入 `pytorch-lightning`：整理训练循环、checkpoint、logger 和多 GPU 配置。
+  - 应进入 `transformers`：用预训练 transformer 做文本、图像或多模态推理/微调。
+  - 真实模糊边界：帮我训练这个深度学习模型。
+### 演示、海报与论文转传播材料边界
+- 区分 `research-presentations` 与 `business-presentations`：
+  - 应进入 `research-presentations`：把这篇论文和实验结果整理成组会汇报。
+  - 应进入 `business-presentations`：做一份给管理层看的产品决策 deck，突出资源和取舍。
+  - 真实模糊边界：帮我做一份汇报 PPT。
+- 区分 `latex-posters` 与 `pptx-posters`：
+  - 应进入 `latex-posters`：做一张会议用 LaTeX beamerposter。
+  - 应进入 `pptx-posters`：做一张可导出 PowerPoint/PPTX 的研究海报。
+  - 真实模糊边界：帮我做一张科研 poster。
+### OpenAI 文档与系统构建辅助技能
+- 区分 `mcp-builder` 与 `plugin-creator`：
+  - 应进入 `mcp-builder`：为这个外部 API 设计一个 FastMCP server，包括工具 schema 和鉴权边界。
+  - 应进入 `plugin-creator`：创建一个 Codex plugin 目录和 plugin.json，打包技能、MCP 或 app 能力。
+  - 真实模糊边界：给这个服务做一个 Codex 可用的集成。
+- 区分 `skill-creator` 与 `openai-docs`：
+  - 应进入 `skill-creator`：把这个重复工作流沉淀成一个新的 Codex skill。
+  - 应进入 `openai-docs`：查官方 OpenAI API 文档，确认当前模型和参数怎么用。
+  - 真实模糊边界：帮我写一个 OpenAI 相关的 Codex 能力。
 
-## Hard-To-Call Capabilities
-- Skills with `NO_FRONT_DOOR` or `INTERNAL_NAME_DEPENDENT`: `58`.
-- `INTERNAL_NAME_DEPENDENT` `timesfm-forecasting` (`skills/tools/ai-ml/timesfm-forecasting`): primary task AI/ML frameworks, experiments, and model engineering; exposure direct-only; evidence description “Zero-shot time series forecasting with Google's TimesFM foundation model. Use for any univariate time series (sales, sensors, energy, vitals, weather) without training a custom mod”.
-- `INTERNAL_NAME_DEPENDENT` `torch-geometric` (`skills/tools/ai-ml/torch-geometric`): primary task AI/ML frameworks, experiments, and model engineering; exposure direct-only; evidence description “Graph Neural Networks (PyG). Node/graph classification, link prediction, GCN, GAT, GraphSAGE, heterogeneous graphs, molecular property prediction, for geometric deep learning.”.
-- `INTERNAL_NAME_DEPENDENT` `arboreto` (`skills/domains/bioinformatics/omics-analysis/arboreto`): primary task Bioinformatics databases, single-cell, genomics I/O, and omics workflows; exposure direct-only; evidence description “Infer gene regulatory networks (GRNs) from gene expression data using scalable algorithms (GRNBoost2, GENIE3). Use when analyzing transcriptomics data (bulk RNA-seq, single-cell RN”.
-- `INTERNAL_NAME_DEPENDENT` `dnanexus-integration` (`skills/domains/bioinformatics/platforms/dnanexus-integration`): primary task Bioinformatics databases, single-cell, genomics I/O, and omics workflows; exposure direct-only; evidence description “DNAnexus cloud genomics platform. Build apps/applets, manage data (upload/download), dxpy Python SDK, run workflows, FASTQ/BAM/VCF, for genomics pipeline development and execution.”.
-- `INTERNAL_NAME_DEPENDENT` `flowio` (`skills/domains/bioinformatics/omics-analysis/flowio`): primary task Bioinformatics databases, single-cell, genomics I/O, and omics workflows; exposure direct-only; evidence description “Parse FCS (Flow Cytometry Standard) files v2.0-3.1. Extract events as NumPy arrays, read metadata/channels, convert to CSV/DataFrame, for flow cytometry data preprocessing.”.
-- `INTERNAL_NAME_DEPENDENT` `gtars` (`skills/domains/bioinformatics/omics-analysis/gtars`): primary task Bioinformatics databases, single-cell, genomics I/O, and omics workflows; exposure direct-only; evidence description “High-performance toolkit for genomic interval analysis in Rust with Python bindings. Use when working with genomic regions, BED files, coverage tracks, overlap detection, tokenizat”.
-- `INTERNAL_NAME_DEPENDENT` `lamindb` (`skills/domains/bioinformatics/platforms/lamindb`): primary task Bioinformatics databases, single-cell, genomics I/O, and omics workflows; exposure direct-only; evidence description “This skill should be used when working with LaminDB, an open-source data framework for biology that makes data queryable, traceable, reproducible, and FAIR.”.
-- `INTERNAL_NAME_DEPENDENT` `latchbio-integration` (`skills/domains/bioinformatics/platforms/latchbio-integration`): primary task Bioinformatics databases, single-cell, genomics I/O, and omics workflows; exposure direct-only; evidence description “Latch platform for bioinformatics workflows. Build pipelines with Latch SDK, @workflow/@task decorators, deploy serverless workflows, LatchFile/LatchDir, Nextflow/Snakemake integra”.
-- `INTERNAL_NAME_DEPENDENT` `zarr-python` (`skills/domains/bioinformatics/genomics-io/zarr-python`): primary task Bioinformatics databases, single-cell, genomics I/O, and omics workflows; exposure direct-only; evidence description “Chunked N-D arrays for cloud storage. Compressed arrays, parallel I/O, S3/GCS integration, NumPy/Dask/Xarray compatible, for large-scale scientific computing pipelines.”.
-- `INTERNAL_NAME_DEPENDENT` `neurokit2` (`skills/domains/medicine-clinical/neurokit2`): primary task Clinical medicine evidence, reporting, and safety-bounded documents; exposure direct-only; evidence description “Comprehensive biosignal processing toolkit for analyzing physiological data including ECG, EEG, EDA, RSP, PPG, EMG, and EOG signals.”.
-- `INTERNAL_NAME_DEPENDENT` `pyhealth` (`skills/domains/medicine-clinical/pyhealth`): primary task Clinical medicine evidence, reporting, and safety-bounded documents; exposure direct-only; evidence description “Comprehensive healthcare AI toolkit for developing, testing, and deploying machine learning models with clinical data.”.
-- `INTERNAL_NAME_DEPENDENT` `scikit-survival` (`skills/domains/medicine-clinical/scikit-survival`): primary task Clinical medicine evidence, reporting, and safety-bounded documents; exposure direct-only; evidence description “Comprehensive toolkit for survival analysis and time-to-event modeling in Python using scikit-survival.”.
-- `INTERNAL_NAME_DEPENDENT` `aeon` (`skills/tools/data-science/aeon`): primary task Data science, tabular analytics, geospatial, time series, and optimization; exposure direct-only; evidence description “This skill should be used for time series machine learning tasks including classification, regression, clustering, forecasting, anomaly detection, segmentation, and similarity sear”.
-- `INTERNAL_NAME_DEPENDENT` `geopandas` (`skills/tools/data-science/geopandas`): primary task Data science, tabular analytics, geospatial, time series, and optimization; exposure direct-only; evidence description “Python library for working with geospatial vector data including shapefiles, GeoJSON, and GeoPackage files. Supports PostGIS databases, interactive maps, and integration with matpl”.
-- `INTERNAL_NAME_DEPENDENT` `networkx` (`skills/tools/data-science/networkx`): primary task Data science, tabular analytics, geospatial, time series, and optimization; exposure direct-only; evidence description “Comprehensive toolkit for creating, analyzing, and visualizing complex networks and graphs in Python. Applicable to social networks, biological networks, transportation systems, ci”.
-- `INTERNAL_NAME_DEPENDENT` `pymoo` (`skills/tools/data-science/pymoo`): primary task Data science, tabular analytics, geospatial, time series, and optimization; exposure direct-only; evidence description “Multi-objective optimization framework. NSGA-II, NSGA-III, MOEA/D, Pareto fronts, constraint handling, benchmarks (ZDT, DTLZ), for engineering design and optimization problems.”.
-- `INTERNAL_NAME_DEPENDENT` `shap` (`skills/tools/data-science/shap`): primary task Data science, tabular analytics, geospatial, time series, and optimization; exposure direct-only; evidence description “Model interpretability and explainability using SHAP (SHapley Additive exPlanations). Works with tree-based models (XGBoost, LightGBM, Random Forest), deep learning (TensorFlow, Py”.
-- `INTERNAL_NAME_DEPENDENT` `vaex` (`skills/tools/data-science/vaex`): primary task Data science, tabular analytics, geospatial, time series, and optimization; exposure direct-only; evidence description “Use this skill for processing and analyzing large tabular datasets (billions of rows) that exceed available RAM.”.
-- `INTERNAL_NAME_DEPENDENT` `seaborn` (`skills/tools/visualization/seaborn`): primary task Figures, diagrams, visualization, and visual assets; exposure direct-only; evidence description “Statistical visualization with pandas integration. Use for quick exploration of distributions, relationships, and categorical comparisons with attractive defaults. Best for box plo”.
-- `INTERNAL_NAME_DEPENDENT` `biorxiv-database` (`skills/science/discovery/biorxiv-database`): primary task Literature search, citations, and reference management; exposure direct-only; evidence description “Efficient database search tool for bioRxiv preprint server. Use this skill when searching for life sciences preprints by keywords, authors, date ranges, or categories, retrieving p”.
-- `NO_FRONT_DOOR` `modal` (`skills/tools/ai-ml/modal`): primary task AI/ML frameworks, experiments, and model engineering; exposure direct-only; evidence description “Run Python code in the cloud with serverless containers, GPUs, and autoscaling. Use when deploying ML models, running batch processing jobs, scheduling compute-intensive tasks, or ”.
-- `NO_FRONT_DOOR` `pufferlib` (`skills/tools/ai-ml/pufferlib`): primary task AI/ML frameworks, experiments, and model engineering; exposure direct-only; evidence description “High-performance reinforcement learning framework optimized for speed and scale. Use when you need fast parallel training, vectorized environments, multi-agent systems, or integrat”.
-- `NO_FRONT_DOOR` `stable-baselines3` (`skills/tools/ai-ml/stable-baselines3`): primary task AI/ML frameworks, experiments, and model engineering; exposure direct-only; evidence description “Production-ready reinforcement learning algorithms (PPO, SAC, DQN, TD3, DDPG, A2C) with scikit-learn-like API. Use for standard RL experiments, quick prototyping, and well-document”.
-- `NO_FRONT_DOOR` `esm` (`skills/domains/bioinformatics/biology-toolkits/esm`): primary task Bioinformatics databases, single-cell, genomics I/O, and omics workflows; exposure direct-only; evidence description “Comprehensive toolkit for protein language models including ESM3 (generative multimodal protein design across sequence, structure, and function) and ESM C (efficient protein embedd”.
-- `NO_FRONT_DOOR` `etetoolkit` (`skills/domains/bioinformatics/biology-toolkits/etetoolkit`): primary task Bioinformatics databases, single-cell, genomics I/O, and omics workflows; exposure direct-only; evidence description “Phylogenetic tree toolkit (ETE). Tree manipulation (Newick/NHX), evolutionary event detection, orthology/paralogy, NCBI taxonomy, visualization (PDF/SVG), for phylogenomics.”.
-- `NO_FRONT_DOOR` `geniml` (`skills/domains/bioinformatics/omics-analysis/geniml`): primary task Bioinformatics databases, single-cell, genomics I/O, and omics workflows; exposure direct-only; evidence description “This skill should be used when working with genomic interval data (BED files) for machine learning tasks. Applies to BED file collections, scATAC-seq data, chromatin accessibility ”.
-- `NO_FRONT_DOOR` `neuropixels-analysis` (`skills/domains/bioinformatics/specialized/neuropixels-analysis`): primary task Bioinformatics databases, single-cell, genomics I/O, and omics workflows; exposure direct-only; evidence description “Neuropixels neural recording analysis. Load SpikeGLX/OpenEphys data, preprocess, motion correction, Kilosort4 spike sorting, quality metrics, Allen/IBL curation, AI-assisted visual”.
-- `NO_FRONT_DOOR` `phylogenetics` (`skills/domains/bioinformatics/biology-toolkits/phylogenetics`): primary task Bioinformatics databases, single-cell, genomics I/O, and omics workflows; exposure direct-only; evidence description “Build and analyze phylogenetic trees using MAFFT (multiple alignment), IQ-TREE 2 (maximum likelihood), and FastTree (fast NJ/ML). Visualize with ETE3 or FigTree. For evolutionary a”.
-- `NO_FRONT_DOOR` `clinical-decision-support` (`skills/domains/medicine-clinical/clinical-decision-support`): primary task Clinical medicine evidence, reporting, and safety-bounded documents; exposure direct-only; evidence description “Produce group-level clinical decision support, cohort evidence summaries, biomarker-stratified analyses, and guideline-style recommendation documents. Use for research, pharmaceuti”.
-- `NO_FRONT_DOOR` `clinical-guideline-checking` (`skills/domains/medicine-clinical/clinical-guideline-checking`): primary task Clinical medicine evidence, reporting, and safety-bounded documents; exposure direct-only; evidence description “Check clinical guideline claims against current authoritative sources, jurisdictions, population boundaries, recommendation strength, and update dates before using them in medical ”.
-- `NO_FRONT_DOOR` `clinical-reports` (`skills/domains/medicine-clinical/clinical-reports`): primary task Clinical medicine evidence, reporting, and safety-bounded documents; exposure direct-only; evidence description “Draft clinical case reports, diagnostic summaries, trial reports, SOAP/H&P/discharge-style documentation, and de-identified medical report templates with privacy, source, and guide”.
-- `NO_FRONT_DOOR` `medical-literature-evidence-review` (`skills/domains/medicine-clinical/medical-literature-evidence-review`): primary task Clinical medicine evidence, reporting, and safety-bounded documents; exposure direct-only; evidence description “Review medical literature evidence with dated source notes, evidence hierarchy, population applicability, uncertainty, and safety boundaries. Use for medical evidence summaries, no”.
-- `NO_FRONT_DOOR` `medical-safety-boundaries` (`skills/domains/medicine-clinical/medical-safety-boundaries`): primary task Clinical medicine evidence, reporting, and safety-bounded documents; exposure direct-only; evidence description “Apply safety boundaries for medical tasks: no autonomous diagnosis or prescribing, current-source verification, privacy checks, missing-data caveats, emergency escalation, and clin”.
-- `NO_FRONT_DOOR` `treatment-plans` (`skills/domains/medicine-clinical/treatment-plans`): primary task Clinical medicine evidence, reporting, and safety-bounded documents; exposure direct-only; evidence description “Draft concise, clinician-reviewed treatment plan documents with goals, interventions, monitoring, and follow-up. Use only as documentation support with current-source verification,”.
-- `NO_FRONT_DOOR` `matlab` (`skills/tools/data-science/matlab`): primary task Data science, tabular analytics, geospatial, time series, and optimization; exposure direct-only; evidence description “MATLAB and GNU Octave numerical computing for matrix operations, data analysis, visualization, and scientific computing. Also use when the user needs help with MATLAB syntax, funct”.
-- `NO_FRONT_DOOR` `umap-learn` (`skills/tools/data-science/umap-learn`): primary task Data science, tabular analytics, geospatial, time series, and optimization; exposure direct-only; evidence description “UMAP dimensionality reduction. Fast nonlinear manifold learning for 2D/3D visualization, clustering preprocessing (HDBSCAN), supervised/parametric UMAP, for high-dimensional data.”.
-- `NO_FRONT_DOOR` `open-notebook` (`skills/tools/documents-media/open-notebook`): primary task Document/media conversion, office files, PDFs, and web extraction; exposure direct-only; evidence description “Self-hosted, open-source alternative to Google NotebookLM for AI-powered research and document analysis. Supports 16+ AI providers including OpenAI, Anthropic, Google, Ollama, Groq”.
-- `NO_FRONT_DOOR` `parallel-web` (`skills/tools/documents-media/parallel-web`): primary task Document/media conversion, office files, PDFs, and web extraction; exposure direct-only; evidence description “Web search and content extraction through Parallel Search API when this provider is requested or when research results must be saved with reproducible source files. Follow host bro”.
-- `NO_FRONT_DOOR` `perplexity-search` (`skills/tools/documents-media/perplexity-search`): primary task Document/media conversion, office files, PDFs, and web extraction; exposure direct-only; evidence description “Perform AI-powered web searches with real-time information using Perplexity models via LiteLLM and OpenRouter.”.
-- `NO_FRONT_DOOR` `canvas-design` (`skills/tools/visualization/canvas-design`): primary task Figures, diagrams, visualization, and visual assets; exposure direct-only; evidence description “Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other stat”.
-- `NO_FRONT_DOOR` `infographics` (`skills/tools/visualization/infographics`): primary task Figures, diagrams, visualization, and visual assets; exposure direct-only; evidence description “Create professional infographics from text, data, or research using configured research, image-generation, and quality-review providers. Produces polished, source-faithful visual e”.
-- `NO_FRONT_DOOR` `publication-figure-palettes` (`skills/science/communication/publication-figure-palettes`): primary task Figures, diagrams, visualization, and visual assets; exposure direct-only; evidence description “Choose publication figure palettes, contextual Notion-derived style candidates, presets, and snippets with provenance and experimental gates.”.
-- `NO_FRONT_DOOR` `scientific-figure-qa` (`skills/science/communication/scientific-figure-qa`): primary task Figures, diagrams, visualization, and visual assets; exposure direct-only; evidence description “Audit scientific figures for publication readiness, accessibility, grayscale readability, export quality, and venue visual constraints.”.
-- `NO_FRONT_DOOR` `brand-creative-assets` (`skills/tools/frontend/brand-creative-assets`): primary task Frontend product design, implementation, and QA; exposure direct-only; evidence description “Create and review brand-related frontend assets: brand identity, visual guidelines, banners, hero visuals, slides, social images, icons, and marketing creative. Use for branded cam”.
-- `NO_FRONT_DOOR` `get-available-resources` (`skills/tools/documents-media/get-available-resources`): primary task HPC resources and Slurm workflows; exposure direct-only; evidence description “This skill should be used at the start of any computationally intensive scientific task to detect and report available system resources (CPU cores, GPUs, memory, disk space).”.
-- `NO_FRONT_DOOR` `bgpt-paper-search` (`skills/science/discovery/bgpt-paper-search`): primary task Literature search, citations, and reference management; exposure direct-only; evidence description “Search scientific papers and retrieve structured experimental data extracted from full-text studies via the BGPT MCP server. Returns 25+ fields per paper including methods, results”.
-- `NO_FRONT_DOOR` `scholar-evaluation` (`skills/writing/research/scholar-evaluation`): primary task Manuscript, grant, review, and submission workflows; exposure direct-only; evidence description “Systematically evaluate scholarly work using the ScholarEval framework, providing structured assessment across research quality dimensions including problem formulation, methodolog”.
-- `NO_FRONT_DOOR` `medical-imaging-terminology-measurement` (`skills/domains/medical-imaging/medical-imaging-terminology-measurement`): primary task Medical imaging, CMR, DICOM, pathology, and imaging ML; exposure direct-only; evidence description “Use medical imaging terminology and measurement conventions with source checks, modality-specific caveats, structured reporting boundaries, and uncertainty language.”.
-- `NO_FRONT_DOOR` `ocr-kb` (`skills/writing/research/ocr-kb`): primary task OCR and scanned academic document recovery; exposure direct-only; evidence description “长文档 OCR、扫描 PDF 恢复、公式/表格/图注提取、断点续跑和 DOCX/Markdown 交付工作流。用于把 PDF 页面安全转成可编辑文本并做质量核查；内部处理模式可记录为 OCR，但用户不需要说旧 pipeline 名。”.
-- `NO_FRONT_DOOR` `paper-2-web` (`skills/science/communication/paper-2-web`): primary task Presentations, posters, and paper-to-media communication; exposure direct-only; evidence description “This skill should be used when converting academic papers into promotional and presentation formats including interactive websites (Paper2Web), presentation videos (Paper2Video), a”.
-- `NO_FRONT_DOOR` `pptx-posters` (`skills/science/communication/pptx-posters`): primary task Presentations, posters, and paper-to-media communication; exposure direct-only; evidence description “Create research posters using HTML/CSS that can be exported to PDF or PPTX. Use this skill ONLY when the user explicitly requests PowerPoint/PPTX poster format. For standard resear”.
-- `NO_FRONT_DOOR` `imagegen` (`skills/core/codex-system/system-skills/imagegen`): primary task Raster image generation and editing; exposure direct-only; evidence description “Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts.”.
-- `NO_FRONT_DOOR` `consciousness-council` (`skills/science/ideation/consciousness-council`): primary task Research ideation, experiment planning, and strategic reasoning; exposure direct-only; evidence description “Run a multi-perspective Mind Council deliberation on any question, decision, or creative challenge. Also trigger when the user faces a dilemma, trade-off, or complex choice with no”.
-- `NO_FRONT_DOOR` `hypogenic` (`skills/science/ideation/hypogenic`): primary task Research ideation, experiment planning, and strategic reasoning; exposure direct-only; evidence description “Automated LLM-driven hypothesis generation and testing on tabular datasets. Use when you want to systematically explore hypotheses about patterns in empirical data (e.g., deception”.
-- `NO_FRONT_DOOR` `hypothesis-generation` (`skills/science/ideation/hypothesis-generation`): primary task Research ideation, experiment planning, and strategic reasoning; exposure direct-only; evidence description “Structured hypothesis formulation from observations. Use when you have experimental observations or data and need to formulate testable hypotheses with predictions, propose mechani”.
-- `NO_FRONT_DOOR` `scientific-brainstorming` (`skills/science/ideation/scientific-brainstorming`): primary task Research ideation, experiment planning, and strategic reasoning; exposure direct-only; evidence description “Creative research ideation and exploration. Use for open-ended brainstorming sessions, exploring interdisciplinary connections, challenging assumptions, or identifying research gap”.
-- `NO_FRONT_DOOR` `scientific-critical-thinking` (`skills/science/ideation/scientific-critical-thinking`): primary task Research ideation, experiment planning, and strategic reasoning; exposure direct-only; evidence description “Evaluate scientific claims and evidence quality. Use for assessing experimental design validity, identifying biases and confounders, applying evidence grading frameworks (GRADE, Co”.
-- `NO_FRONT_DOOR` `what-if-oracle` (`skills/science/ideation/what-if-oracle`): primary task Research ideation, experiment planning, and strategic reasoning; exposure direct-only; evidence description “Run structured What-If scenario analysis with multi-branch possibility exploration. Also trigger when the user faces a fork-in-the-road decision, wants to stress-test an idea, or n”.
+## 插件层级审计
+- **`workflow-core`**：名称和描述与单一工作流技能一致，主要覆盖复杂执行、核查和完成门槛。
+- **`ai-skills-core`**：插件市场只暴露 project-skill-installer 和 ai-skills-repository-maintainer；skill-library-analysis 通过 maintainer profile 可达。
+- **`writing-style`**：覆盖 writing-fidelity、scientific-prose、chinese-prose；与 research-writing 在论文/报告润色上相邻。
+- **`research-writing`**：覆盖报告、论文流程、文献和引用；内部需要区分正文写作、流程编排、审稿和引用核验。
+- **`bioinformatics`**：覆盖 10 个核心生信源技能；若干专门平台、数据库和工具 active 技能不在 插件市场 聚合中。
+- **`medical-imaging`**：覆盖 CMR、DICOM、经典特征、深度学习和病理；terminology-measurement 未进入 插件市场 聚合。
+- **`marketplace-global`**：前端、数据科学/统计、可视化、文档/OCR、演示、临床医学、HPC、科研构思主要通过 profile/domain/单技能安装可达，而不是 插件市场 顶级插件。
 
-## Ambiguous Main Entrance Problems
-- Skills with `AMBIGUOUS` entry status: `55`.
-- **AI_Skills_Collection maintenance and skill intake**: 1 ambiguous skills: `skill-library-analysis`.
-- **Bioinformatics databases, single-cell, genomics I/O, and omics workflows**: 2 ambiguous skills: `deeptools`, `scvelo`.
-- **Build MCP servers**: 1 ambiguous skills: `mcp-builder`.
-- **Create Codex plugins**: 1 ambiguous skills: `plugin-creator`.
-- **Create or update Codex skills**: 1 ambiguous skills: `skill-creator`.
-- **Data science, tabular analytics, geospatial, time series, and optimization**: 5 ambiguous skills: `dask`, `exploratory-data-analysis`, `polars`, `scikit-learn`, `sympy`.
-- **Document/media conversion, office files, PDFs, and web extraction**: 5 ambiguous skills: `docx`, `markitdown`, `pdf`, `render-chinese-math-pdf`, `xlsx`.
-- **Figures, diagrams, visualization, and visual assets**: 11 ambiguous skills: `scientific-schematics`, `scientific-visualization`, `d2-diagrams`, `drawio-diagrams`, `excalidraw-diagrams`, `generate-image`, `markdown-mermaid-writing`, `matplotlib`, `plantuml-diagrams`, `plotly`, `theme-factory`.
-- **Frontend product design, implementation, and QA**: 11 ambiguous skills: `design-system-tokens`, `figma-design-to-code`, `frontend-reference-research`, `frontend-visual-systems`, `implementation-react-tailwind`, `motion-interaction`, `product-ux-planning`, `research-product-frontend`, `responsive-accessibility-review`, `visual-direction`, `webapp-testing`.
-- **Literature search, citations, and reference management**: 4 ambiguous skills: `arxiv-database`, `openalex-database`, `pubmed-database`, `valyu-scientific-search`.
-- **Manuscript, grant, review, and submission workflows**: 1 ambiguous skills: `research-grants`.
-- **OCR and scanned academic document recovery**: 1 ambiguous skills: `academic-paper-writer-pro`.
-- **OpenAI API/product documentation**: 1 ambiguous skills: `openai-docs`.
-- **Presentations, posters, and paper-to-media communication**: 3 ambiguous skills: `latex-posters`, `business-presentations`, `research-presentations`.
-- **Research ideation, experiment planning, and strategic reasoning**: 1 ambiguous skills: `experiment-execution`.
-- **Skill installation and profile setup**: 1 ambiguous skills: `skill-installer`.
-- **Statistical modeling, Bayesian analysis, and simulation**: 5 ambiguous skills: `bayesian-ppl-diagnostics`, `pymc`, `simpy`, `statistical-analysis`, `statsmodels`.
+## 第二阶段需要判断的问题
+- 插件市场 顶级入口是否需要覆盖 profile/domain 中高价值但当前不可见的能力。
+- 研究写作聚合内部是否需要更清晰地区分正文写作、流程编排、审稿诊断和投稿格式。
+- OCR、PDF、DOCX 与通用转换请求是否需要按“是否扫描/是否学术交付/是否只转换格式”建立边界。
+- 可视化请求是否需要先判断媒介：Mermaid、draw.io、UML、科学插图、位图或信息图。
+- 数据科学和 AI/ML 工具是否需要自然任务优先的选择测试，而不是按库名触发。
+- 临床医学技能的安全边界是否需要在安装入口和调用入口两层都可见。
 
-## Plugin Boundary Audit
-| Plugin boundary | Current evidence | Issue type |
-|---|---|---|
-| `workflow-core` | Name and description align with single exposed workflow skill; broad enough to catch complex tasks. Boundary with general coding remains broad but intentional. | plugin-level boundary/coverage observation |
-| `ai-skills-core` | Name may look like general AI-skill usage but description is repository infrastructure only; includes project installer and repository maintainer, not skill-library-analysis in marketplace. | plugin-level boundary/coverage observation |
-| `writing-style` | Description matches three child skills; overlaps with research-writing for scientific prose in manuscripts and reports. | plugin-level boundary/coverage observation |
-| `research-writing` | Description matches report/paper/literature aggregates; broad enough that peer review, grants, LaTeX authoring, and venue templates rely on aggregate routing. | plugin-level boundary/coverage observation |
-| `bioinformatics` | Description names broad workflows; aggregate source list covers 10 core skills but specialized active bioinformatics tools/platforms are not all included. | plugin-level boundary/coverage observation |
-| `medical-imaging` | Description names CMR/DICOM/segmentation/registration/features/ML; aggregate omits medical-imaging-terminology-measurement while exposing two AI/ML framework skills. | plugin-level boundary/coverage observation |
-| `marketplace-global` | No top-level marketplace front door for frontend, data-science, visualization, documents/PDF/OCR, presentations, Bayesian/statistics, clinical medicine, HPC, or research ideation skills; these rely on profiles/direct selectors. | plugin-level boundary/coverage observation |
-
-## Second-Phase Questions Worth Judging
-- Whether marketplace-visible aggregate descriptions should be judged against natural requests rather than source package names.
-- Whether manuscript/review/grant skills need a sharper routing contract inside the research-paper aggregate.
-- Whether OCR/PDF/DOCX requests should enter through document conversion first or through academic document recovery when scanned evidence is central.
-- Whether visualization/diagram/image tasks need medium-first routing tests to prevent image generation from swallowing technical diagrams.
-- Whether profile-only domains such as frontend, data science/statistics, clinical medicine, and presentations are acceptable without marketplace front doors.
-- Whether specialized bioinformatics and AI/ML framework skills should remain direct/provider-name dependent or be reachable from existing aggregates.
-
-## Phase-Two Calling Test Corpus
-### workflow-core
-should-trigger:
-- Implement this repo change with a source-of-truth check and tell me when verification passes.
-- Audit this risky migration in phases and stop if the evidence does not support proceeding.
-- Coordinate planner/executor/reviewer work for this release and give me completion gates.
-should-not-trigger:
-- Polish this paragraph so it sounds less stiff.
-- Convert this DOCX to Markdown and keep the tables.
-
-### ai-skills-core
-should-trigger:
-- Audit which skills in this collection are exposed through marketplace plugins.
-- Install the research-main profile into this project and verify the installed SKILL.md files.
-- Update the AI Skills registry and marketplace generated layer after source skill edits.
-should-not-trigger:
-- Build a React dashboard for these experiment results.
-- Summarize this Nature paper and check the references.
-
-### writing-style
-should-trigger:
-- Final-check this Chinese Markdown report so it reads naturally and preserves every fact.
-- Make this scientific paragraph clearer without changing the claim strength.
-- Fix version labels and headings in this report without dropping evidence.
-should-not-trigger:
-- Plan the whole manuscript structure from these results.
-- Search for recent papers about diffusion MRI segmentation.
-
-### research-writing
-should-trigger:
-- Write a repo-grounded experiment report from these logs and figures.
-- Plan a manuscript claim-evidence workflow for these results.
-- Check whether the references support every claim in this draft.
-should-not-trigger:
-- Fix keyboard accessibility bugs in this web app.
-- Render this Chinese LaTeX file to PDF and debug fonts.
-
-### bioinformatics
-should-trigger:
-- Analyze this single-cell RNA-seq dataset with QC, clustering, and marker genes.
-- Look up gene and pathway information for these variants and summarize the evidence.
-- Process BAM and VCF files for coverage and variant queries.
-should-not-trigger:
-- Review DICOM geometry and segmentation provenance.
-- Design a PowerPoint pitch deck for investors.
-
-### medical-imaging
-should-trigger:
-- Audit this CMR segmentation pipeline for ED/ES timing and LV/RV measurements.
-- Read these DICOM files and preserve spacing/orientation metadata.
-- Compare MONAI and nnU-Net baselines for medical image segmentation.
-should-not-trigger:
-- Run differential expression analysis on RNA-seq counts.
-- Create a brand identity and hero image for this product.
-
-### frontend-profile
-should-trigger:
-- Build a responsive React/Tailwind dashboard for these model comparisons.
-- Review this app for mobile layout, keyboard access, and contrast issues.
-- Turn these product requirements into navigation, states, and UI flows.
-should-not-trigger:
-- Check whether these citations exist and match the DOI metadata.
-- Run a Slurm job array for this training sweep.
-
-### document-pdf-ocr
-should-trigger:
-- Convert this scanned paper PDF into clean Markdown with tables and equations checked.
-- Edit this DOCX report and preserve headings, citations, and tables.
-- Render this Chinese math Markdown to PDF and verify fonts.
-should-not-trigger:
-- Infer a gene regulatory network from expression data.
-- Plan a DICOM segmentation validation protocol.
-
-### data-science-statistics
-should-trigger:
-- Choose and run an appropriate statistical model for this outcome and report effect sizes.
-- Make this pandas workflow faster on a 50GB parquet dataset.
-- Build a time-series forecasting baseline for these sensor readings.
-should-not-trigger:
-- Create an editable draw.io architecture diagram.
-- Write a reviewer response letter for this manuscript.
-
-### visualization-diagrams
-should-trigger:
-- Create an editable architecture diagram for this pipeline.
-- Make publication-ready multi-panel plots with colorblind-safe palettes.
-- Generate an infographic explaining these study results from the source text.
-should-not-trigger:
-- Install the medical-imaging project profile into this repo.
-- Draft a clinician-reviewed treatment plan document.
-
-### clinical-medicine
-should-trigger:
-- Check this clinical guideline claim against current authoritative sources.
-- Draft a de-identified case report summary with privacy caveats.
-- Summarize medical evidence for a cohort-level decision-support document.
-should-not-trigger:
-- Tune a PyTorch Lightning training loop.
-- Convert an academic paper into a promotional website.
-
-## Audit Guardrails Checked
-- Active source coverage: `149/149`.
-- Generated copies under `plugins/codex/plugins/`: counted only as `12` user-visible generated snapshots, not as source skills.
-- Marketplace plugins audited: `6` named plugins plus one global marketplace coverage row.
-- Conflict clusters recorded: `12`.
-- No deletion, merge, description edit, profile edit, generation command, or plugin topology change was performed.
+## 审计边界确认
+- 覆盖：`149/149` active 源技能。
+- 冲突组：`12`，均已补成对边界样例。
+- 本次没有给出删除、合并、改 description、新增 umbrella、新增 plugin 或调整 profile 的方案。
+- 本次没有修改任何现有 `SKILL.md`、profile、plugin、marketplace 配置或生成层。
