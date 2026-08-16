@@ -1,69 +1,96 @@
 # 001 Research Writing — Planner Review
 
-reviewed_commit: `6354ea48753368b2c5c4738d005abcee34c65491`
-current_main_control_commit: `f05721d1db7bd886d14c7fedd5f3f478ae91e34f`
-decision: REVISE
+reviewed_commit: `ed5508ab6e20be905f9c89de2f928b135f8dc5ed`
+current_main_control_commit: `ca005976b523c7cc07aceb557f12b731be1af338`
+review_round: 2
+decision: PASS
+next_task_key: `002_writing_style`
 
 ## 结论
 
-这一轮已经把大部分核心边界整理正确：论文正文、整篇论文流程、审稿式风险检查、量化评分，以及综述、即时检索、引用核验、BibTeX/Zotero 的上游入口已经明显比基线清楚；十插件 Marketplace 也没有被再次删回六个。实现提交与当前控制提交对应的 `Codex Marketplace` GitHub Actions 都已成功。
+001 已达到冻结计划要求，可以进入 002。上一轮唯一阻断问题已经被精确修复：`citation-management` 现在只负责已知论文或已知标识符的书目记录定位、元数据补全、BibTeX 与参考文献整理，不再把按主题发现论文、寻找最新论文或扩展候选集合当作自身正常职责。
 
-目前只保留 1 个阻断问题。它属于 001 冻结计划本身要求解决的调用边界，不是额外扩展。
+这次返修没有扩大范围，也没有破坏上一轮已经通过的论文写作、审稿、量化评价、综述、即时检索和引用核验边界。当前 Marketplace 仍保持 10 个插件与 `marketplacePluginBudget=10`。
 
-## Blocker 1 — `citation-management` 仍保留通用论文发现职责
+## 上一轮 Blocker 的关闭证据
 
-### 冻结依据
+### 1. `citation-management` 已收窄为已知记录处理
 
-001 的冻结计划明确规定：
+当前 source 明确把适用场景限定为：
 
-- `citation-management` 应收窄为 bibliography / BibTeX / metadata / reference-library hygiene；
-- 一般论文发现、尤其“找论文 / 查最近论文”应交给 `research-lookup`；
-- 本阶段应通过 description、When-to-Use、Hand Off / Routing 等位置把边界写清，而不是只改聚合入口的一句话。
+- exact title / author-year；
+- DOI / PMID / arXiv ID / URL；
+- 用户或上游流程已经给出的 candidate list；
+- 在这些已知记录基础上做 metadata acquisition、BibTeX、去重和 bibliography hygiene。
 
-### 真实证据
+原来的 `Paper Discovery and Search` 已改为 `Bibliography Record Resolution`。Google Scholar / PubMed 示例也从主题级检索改为 exact-title、author/year 或 identifier-backed record lookup。
 
-当前 `citation-management` 的 frontmatter 已经改得比较清楚，但正文仍把下面内容列为自身正常职责：
+### 2. 主题级论文发现已明确交给 `research-lookup`
 
-- `When to Use` 中仍有 “Searching for specific papers on Google Scholar or PubMed”；
-- `Core Workflow` 的第一阶段仍是 `Paper Discovery and Search`；
-- 该阶段继续提供按主题搜索 Google Scholar / PubMed 的完整工作流和示例。
+当前正文明确规定以下请求不得由 `citation-management` 主处理：
 
-这与同轮 `research-lookup` 的“current research information and recent papers / paper discovery”边界形成实质重叠。对于“帮我搜几篇某主题的论文并整理进参考文献”这类自然请求，当前 skill 正文仍给出两条都合理的入口，未完全达到冻结计划要求。
+- 按主题找论文；
+- 找最近论文；
+- 发现新的候选来源；
+- 扩展 bibliography candidate set；
+- 扫描当前证据；
+- “what should I cite for X”。
 
-### 最小修复
+这些任务统一路由到 `research-lookup`，待候选记录或标识符确定后，再回到 `citation-management` 做技术性的参考文献整理。
 
-只修 `citation-management` 的这一条边界，不重做整个文献系统：
+### 3. 生成层已经同步
 
-1. 将 `When to Use` 中的通用论文搜索改成“已知论文、已知标题或 identifier-backed record 的定位/元数据补全，用于 bibliography 构建”；
-2. 将 `Phase 1: Paper Discovery and Search` 收窄或改名为 bibliography record resolution / metadata acquisition，避免继续把主题级 Google Scholar / PubMed discovery 写成该 skill 的主工作流；
-3. 明确写出：按主题找新论文、找最近论文、扩展候选文献集合 → `research-lookup`；
-4. 保留 DOI / PMID / arXiv → BibTeX、元数据提取、去重、格式化、bibliography hygiene 等现有能力；
-5. 重新生成 `research-writing` 的 `litcite` source snapshot，并保持十插件 Marketplace 不变。
+`plugins/codex/plugins/research-writing/skills/litcite/_src/cite/source.md` 已包含同样的 `Bibliography Record Resolution` 和 `research-lookup` handoff，没有出现 source 修改而 generated snapshot 仍保留旧论文发现流程的情况。
 
-如增加回归测试，测试应覆盖这个负边界，而不只是检查几个关键词存在。
+### 4. 回归测试覆盖了正负边界
 
-### 修复后验收
+`tests/test_research_writing_routing.py` 当前同时检查：
 
-Planner 下一轮需要看到：
+- `known papers or identifier-backed records`；
+- `bibliography record resolution`；
+- `exact-record lookup`；
+- `find papers by topic` 必须指向 `research-lookup`；
+- 旧的 `paper discovery and search`、`searching for specific papers on Google Scholar or PubMed`、`search for papers on your topic` 等宽泛入口不得重新出现。
 
-- 用户说“找几篇最近关于 X 的论文”时，`research-lookup` 是唯一自然的论文发现入口；
-- 用户说“把这几个 DOI/PMID/已知论文整理成规范 BibTeX，补元数据并去重”时，`citation-management` 是自然入口；
-- `citation-verification` 仍独占“这个引用是否真实 / 是否支持这句话”的最终核验职责；
-- `literature-review` 仍负责综述与单篇深读；
-- source 与生成后的 `literature-and-citations` snapshot 一致；
-- 完整测试与 GitHub Actions 继续通过。
+这比只检查几个新关键词存在更能防止原 blocker 回归。
 
-## 已通过的部分
+## 自然语言验收
 
-以下部分本轮没有发现阻断问题：
+当前边界可以清楚处理以下相邻请求：
 
-- `scientific-writing` 已明确成为论文正文起草/修改能力，并把整篇规划、审稿风险、检索、引用核验、BibTeX、图像、venue 和 LaTeX 路由给邻接能力；
-- `paper-workflow-orchestrator` 保持整篇论文结构、主张—证据骨架和流程协调职责；
-- `peer-review` 与 `scholar-evaluation` 已分别收敛为 reviewer-style critique / acceptance risk 与固定 rubric / quantitative scoring；
-- `research-paper-workflow` 仍是单一用户可见聚合入口，并已包含 `scholar-evaluation` 作为内部 source workflow；
-- `literature-review`、`research-lookup`、`citation-verification` 的主要边界已经清楚；
-- `research-writing` 仍只有 `research-reporting`、`research-paper-workflow`、`literature-and-citations` 三个用户可见能力；
-- Marketplace 保持十插件、`marketplacePluginBudget=10`；
-- 实现提交 `6354ea4` 与当前控制提交 `f05721d` 的远端 `Codex Marketplace` workflow 均为 `completed / success`。
+- “现在帮我找几篇 2025–2026 年关于 X 的最新论文。” → `research-lookup`，负责论文发现和当前证据检索。
+- “把这几个 DOI / PMID 和已知论文整理成规范 BibTeX，补全元数据并去重。” → `citation-management`，负责技术性的书目整理。
+- “这个 DOI 是否真实，而且这篇文章真的支持正文这句话吗？” → `citation-verification`，负责存在性、元数据一致性和 claim-support verdict。
+- “围绕 X 做相关工作梳理，并按方法路线和研究空白组织。” → `literature-review`，负责综述和证据综合。
 
-修复以上单一 blocker 后重新提交 `RESULT.md`，再进行 001 第二次 Planner 复核。不要提前进入 002。
+因此，上一轮“同一个自然请求仍有两条都合理的论文发现入口”的问题已经关闭。
+
+## 其他已通过边界保持不变
+
+本轮复查没有发现新的阻断问题：
+
+- `scientific-writing` 继续负责论文正文起草与修改；
+- `paper-workflow-orchestrator` 继续负责整篇论文结构、主张—证据骨架和流程协调；
+- `peer-review` 与 `scholar-evaluation` 继续分别负责 reviewer-style critique / acceptance risk 与固定 rubric / quantitative scoring；
+- `literature-review`、`research-lookup`、`citation-verification`、`citation-management` 的职责现在可由正常用户表达区分；
+- `research-writing` 用户可见入口仍保持 `research-reporting`、`research-paper-workflow`、`literature-and-citations` 三项；
+- 十插件 Marketplace 没有回退。
+
+## 验证与远端状态
+
+Executor 报告的完整本地验证链均通过，包括 149 active skills 校验、全库 audit、marketplace build、provenance/icon checks、99 个单元测试以及 `git diff --check`。
+
+Planner 独立核对了真实 GitHub Actions：
+
+- 实现提交 `ed5508ab6e20be905f9c89de2f928b135f8dc5ed` 的 `Codex Marketplace` workflow：`completed / success`；
+- 当前结果提交 `ca005976b523c7cc07aceb557f12b731be1af338` 的同一 workflow：`completed / success`。
+
+没有 CI 等待项需要继续阻断 001。
+
+## 下一步
+
+001 结束。Codex 可以开始 `002_writing_style`，严格读取：
+
+`automation/reviewed_handoff/tasks/002_writing_style/PLAN.md`
+
+002 只处理现有 `writing-style` 的保真、中文自然表达和英文科研成稿边界，不借机重新打开 001 或扩展新的外部能力。
