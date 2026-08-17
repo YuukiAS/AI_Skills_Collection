@@ -1,6 +1,6 @@
 {
-  "version": "4.3.0",
-  "generated_at": "2026-08-16T21:09:53+00:00",
+  "version": "4.4.0",
+  "generated_at": "2026-08-17T16:52:26+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
   "skill_count": 149,
@@ -4213,7 +4213,7 @@
       "subcategory": "documents-media",
       "slug": "research-presentations",
       "install_selector": "tool/documents-media/research-presentations",
-      "description": "Plan research and technical presentations from papers, repo evidence, Markdown reports, Asteria or TRACE exports, code results, figures, and existing decks. Use for group meetings, seminars, conferences, journal clubs, defenses, and scientific project updates.",
+      "description": "Plan evidence-first research and technical presentations from papers, repo evidence, Markdown reports, Asteria or TRACE exports, code results, figures, and existing decks. Use for group meetings, supervisor discussions, seminars, conferences, journal clubs, defenses, and scientific project updates.",
       "status": "active",
       "provenance": "user-authored",
       "source_repo_url": "",

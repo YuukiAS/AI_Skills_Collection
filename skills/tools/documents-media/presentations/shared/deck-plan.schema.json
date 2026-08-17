@@ -14,7 +14,7 @@
         "author": { "type": "string" },
         "affiliation": { "type": "string" },
         "audience": { "enum": ["specialist", "mixed", "general", "executive"] },
-        "mode": { "enum": ["research", "business"] },
+        "mode": { "enum": ["research", "research-group-meeting", "business"] },
         "purpose": { "enum": ["group-meeting", "conference", "defense", "journal-club", "company", "other"] },
         "duration_minutes": { "type": "integer", "minimum": 1 },
         "language": { "enum": ["en", "zh", "mixed"] },
@@ -43,11 +43,72 @@
           "layout_hint": { "type": "string" },
           "citations": { "type": "array", "items": { "type": "string" } },
           "speaker_notes": { "type": "string" },
-          "backup": { "type": "boolean", "default": false }
+          "backup": { "type": "boolean", "default": false },
+          "page_function": { "type": "string" },
+          "required_evidence": { "type": "array", "items": { "type": "string" } },
+          "source_evidence_ids": { "type": "array", "items": { "type": "string" } },
+          "scientific_objects": { "type": "array", "items": { "type": "string" } },
+          "evidence_status": { "enum": ["available", "partial", "missing", "planned", "not-needed"] },
+          "uncertainty_status": { "type": "string" },
+          "layout_rationale": { "type": "string" },
+          "audience_decision": { "type": "string" },
+          "allowed_fallback": { "type": "string" },
+          "forbidden_fallback": { "type": "string" },
+          "qa_criteria": { "type": "array", "items": { "type": "string" } }
         },
         "additionalProperties": true
       }
+    },
+    "research_state": {
+      "type": "object",
+      "properties": {
+        "previous_question": { "type": "string" },
+        "prior_belief": { "type": "string" },
+        "new_evidence": { "type": "string" },
+        "evidence_quality": { "type": "string" },
+        "belief_update": { "type": "string" },
+        "successes": { "type": "string" },
+        "failures": { "type": "string" },
+        "largest_uncertainty": { "type": "string" },
+        "frozen_items": { "type": "string" },
+        "stop_items": { "type": "string" },
+        "next_discriminating_experiment": { "type": "string" },
+        "decision_needed": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "evidence_board": {
+      "type": "object",
+      "properties": {
+        "available_figures": { "type": "array", "items": { "type": "object" } },
+        "medical_images": { "type": "array", "items": { "type": "object" } },
+        "qualitative_examples": { "type": "array", "items": { "type": "object" } },
+        "quantitative_plots": { "type": "array", "items": { "type": "object" } },
+        "model_diagrams": { "type": "array", "items": { "type": "object" } },
+        "equations": { "type": "array", "items": { "type": "object" } },
+        "experiment_logs": { "type": "array", "items": { "type": "object" } },
+        "failed_experiments": { "type": "array", "items": { "type": "object" } },
+        "literature_figures_to_redraw": { "type": "array", "items": { "type": "object" } },
+        "missing_evidence": { "type": "array", "items": { "type": "object" } }
+      },
+      "additionalProperties": true
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "metadata": {
+            "properties": {
+              "mode": { "const": "research-group-meeting" }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": ["research_state", "evidence_board"]
+      }
+    }
+  ],
   "additionalProperties": true
 }

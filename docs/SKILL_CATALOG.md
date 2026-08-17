@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Generated at `2026-08-16T21:10:02+00:00` from `registry.json` metadata. Do not edit by hand.
+Generated at `2026-08-17T16:52:34+00:00` from `registry.json` metadata. Do not edit by hand.
 
 Budget warnings in this catalog are guidance for context hygiene; they do not make complete domain installation invalid.
 
@@ -194,7 +194,7 @@ Budget warnings in this catalog are guidance for context hygiene; they do not ma
 | `pdf` | `skills/tools/documents-media/pdf` | Use this skill whenever the user wants to do anything with PDF files. If the user mentions a .pdf file or asks to produce one, use this skill. | `project` | False | False | True | `2026-05-14` | `ai-skills install --target repo --skill tool/documents-media/pdf --mode symlink --write-agents-md` |
 | `perplexity-search` | `skills/tools/documents-media/perplexity-search` | Perform AI-powered web searches with real-time information using Perplexity models via LiteLLM and OpenRouter. | `project` | False | False | True | `2026-05-14` | `ai-skills install --target repo --skill tool/documents-media/perplexity-search --mode symlink --write-agents-md` |
 | `render-chinese-math-pdf` | `skills/tools/documents-media/render-chinese-math-pdf` | Render and validate Chinese or mixed Chinese/English mathematical Markdown/LaTeX as PDF. Use for CJK text, Unicode math, equations, tables, Pandoc/XeLaTeX/LuaLaTeX, TeX font/cache failures, citation cleanup, or readable PDF QA. | `global` | False | True | True | `2026-07-02` | `ai-skills install --target repo --skill tool/documents-media/render-chinese-math-pdf --mode symlink --write-agents-md` |
-| `research-presentations` | `skills/tools/documents-media/presentations/research-presentations` | Plan research and technical presentations from papers, repo evidence, Markdown reports, Asteria or TRACE exports, code results, figures, and existing decks. Use for group meetings, seminars, conferences, journal clubs, defenses, and scientific project updates. | `project` | False | False | True | `2026-07-28` | `ai-skills install --target repo --skill tool/documents-media/research-presentations --mode symlink --write-agents-md` |
+| `research-presentations` | `skills/tools/documents-media/presentations/research-presentations` | Plan evidence-first research and technical presentations from papers, repo evidence, Markdown reports, Asteria or TRACE exports, code results, figures, and existing decks. Use for group meetings, supervisor discussions, seminars, conferences, journal clubs, defenses, and scientific project updates. | `project` | False | False | True | `2026-07-28` | `ai-skills install --target repo --skill tool/documents-media/research-presentations --mode symlink --write-agents-md` |
 | `xlsx` | `skills/tools/documents-media/xlsx` | Use this skill any time a spreadsheet file is the primary input or output. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \"the xlsx in my downloads\") — and wants something done to it or produced from it. | `project` | False | False | True | `2026-05-14` | `ai-skills install --target repo --skill tool/documents-media/xlsx --mode symlink --write-agents-md` |
 
 ## tool / frontend / frontend

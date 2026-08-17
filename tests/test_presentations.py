@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 import json
+import csv
+import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from zipfile import ZipFile
@@ -119,6 +122,107 @@ class PresentationSharedTests(unittest.TestCase):
         errors = validate_deck_plan.validate_deck_plan({"schema_version": 1, "metadata": {}, "slides": [{}]})
         self.assertTrue(any("metadata missing required fields" in error for error in errors))
         self.assertTrue(any("missing id" in error for error in errors))
+
+    def test_research_group_meeting_mode_requires_evidence_board_and_scientific_fields(self) -> None:
+        actual = markdown_to_deck_plan.markdown_to_deck_plan(
+            "# Updated Result\nEndpoint-specific ranking changed the interpretation.",
+            "Group Meeting Regression",
+            mode="research-group-meeting",
+        )
+        self.assertEqual(actual["metadata"]["mode"], "research-group-meeting")
+        self.assertIn("research_state", actual)
+        self.assertIn("evidence_board", actual)
+        self.assertIn("missing_evidence", actual["evidence_board"])
+        slide = actual["slides"][0]
+        self.assertEqual(slide["page_function"], "RESEARCH_UPDATE")
+        self.assertIn("scientific_objects", slide)
+        self.assertEqual(validate_deck_plan.validate_deck_plan(actual), [])
+
+    def test_research_group_meeting_validator_rejects_consulting_or_card_substitutes(self) -> None:
+        bad_plan = {
+            "schema_version": 1,
+            "metadata": {
+                "title": "Bad Group Meeting",
+                "audience": "specialist",
+                "mode": "research-group-meeting",
+                "purpose": "group-meeting",
+                "duration_minutes": 10,
+                "language": "en",
+                "template": "cuhk-default",
+                "output": "pptx",
+                "editability": "editable",
+            },
+            "research_state": {field: "known" for field in validate_deck_plan.RESEARCH_STATE_FIELDS},
+            "evidence_board": {field: [] for field in validate_deck_plan.EVIDENCE_BOARD_FIELDS},
+            "slides": [
+                {
+                    "id": "s01",
+                    "title": "Three strategic pillars unlock the roadmap",
+                    "key_message": "Use a rounded-card dashboard",
+                    "slide_purpose": "present a slogan",
+                    "visual_intent": "generic arrows",
+                    "layout_hint": "cards",
+                    "page_function": "RESULT_FIGURE",
+                    "required_evidence": ["real endpoint result"],
+                    "source_evidence_ids": [],
+                    "scientific_objects": [],
+                    "evidence_status": "available",
+                    "layout_rationale": "card",
+                    "allowed_fallback": "missing evidence or next experiment",
+                    "forbidden_fallback": "cards",
+                    "qa_criteria": ["real evidence visible"],
+                }
+            ],
+        }
+        errors = validate_deck_plan.validate_deck_plan(bad_plan)
+        self.assertTrue(any("available evidence requires source_evidence_ids" in error for error in errors))
+        self.assertTrue(any("layout_hint cannot be only cards" in error for error in errors))
+        self.assertTrue(any("anti-pattern term" in error for error in errors))
+
+    def test_research_group_meeting_references_are_packaged(self) -> None:
+        references = SHARED / "references"
+        for name in [
+            "RESEARCH_GROUP_MEETING_MODE.md",
+            "RESEARCH_SLIDE_ARCHETYPES.md",
+            "RESEARCH_PRESENTATION_ANTIPATTERNS.md",
+            "research_slide_reference_index.csv",
+        ]:
+            self.assertTrue((references / name).exists(), name)
+        index_text = (references / "research_slide_reference_index.csv").read_text(encoding="utf-8")
+        self.assertIn("source_url,page_number,page_function,visual_lesson", index_text)
+        self.assertIn("RESULT_FIGURE", index_text)
+        self.assertIn("SUPERVISOR_DECISION", index_text)
+        rows = list(csv.DictReader(index_text.splitlines()))
+        self.assertGreaterEqual(len(rows), 20)
+        for row in rows:
+            self.assertTrue(row["source_url"])
+            self.assertTrue(row["page_number"])
+            self.assertTrue(row["page_function"])
+            self.assertTrue(row["visual_lesson"])
+            self.assertTrue(row["what_to_learn"])
+            self.assertTrue(row["what_not_to_copy"])
+            self.assertTrue(row["rights_note"])
+
+    def test_research_group_meeting_regression_generator_outputs_artifacts(self) -> None:
+        script = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/generate_research_group_meeting_regression.py"
+        with tempfile.TemporaryDirectory() as tmp:
+            result = subprocess.run(
+                [sys.executable, str(script), "--out-dir", tmp],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertTrue(Path(payload["pptx"]).exists())
+            self.assertTrue(Path(payload["pdf"]).exists())
+            qa = json.loads(Path(payload["qa"]).read_text(encoding="utf-8"))
+            self.assertEqual(qa["status"], "PASS")
+            self.assertEqual(qa["editable_slide_count"], 4)
+            self.assertEqual(len(qa["scientific_qa"]), 4)
+            with ZipFile(payload["pptx"]) as deck:
+                slide_names = [name for name in deck.namelist() if name.startswith("ppt/slides/slide") and name.endswith(".xml")]
+            self.assertEqual(len(slide_names), 4)
 
 
 if __name__ == "__main__":

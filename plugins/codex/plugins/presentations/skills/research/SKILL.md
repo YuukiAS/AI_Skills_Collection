@@ -1,6 +1,6 @@
 ---
 name: research-presentations
-description: Plan research and technical presentations from papers, repo evidence, Markdown reports, Asteria or TRACE exports, code results, figures, and existing decks. Use for group meetings, seminars, conferences, journal clubs, defenses, and scientific project updates.
+description: Plan evidence-first research and technical presentations from papers, repo evidence, Markdown reports, Asteria or TRACE exports, code results, figures, and existing decks. Use for group meetings, supervisor discussions, seminars, conferences, journal clubs, defenses, and scientific project updates.
 status: active
 provenance: user-authored
 trusted: false
@@ -29,6 +29,8 @@ Use this skill for research presentation planning and quality control. File crea
 - Choose the presentation format from the user's deliverable: PPT, PowerPoint, `.pptx`, editable, Slides, or "I need to edit it later" means editable Presentation/Slides; Beamer, LaTeX slides, `.tex`, academic PDF, or a venue/project-locked TeX template means Beamer/LaTeX; outline/storyline-only requests can stop at the deck plan. Do not default academic or research decks to Beamer.
 - In the `presentation-desktop` profile, an unspecified group-meeting, research update, or "research slides" request defaults to an editable deck plan for Presentation/Slides, not Beamer.
 - Use `../../shared/deck-plan.schema.json` as the default intermediate representation.
+- Use `metadata.mode: research-group-meeting` for PhD group meetings, supervisor discussions, and research progress updates where the primary job is to update beliefs, expose failures, define next experiments, or ask for a supervisor decision.
+- `research-group-meeting` mode must create a Research State and Evidence Board before slide planning. The state fields are internal planning data and must not be pasted mechanically onto slides.
 - Chinese slide text uses `writing-fidelity` plus `chinese-prose` for final wording; English scientific slide text can use `scientific-prose`. These are handoffs to installed writing skills, not duplicate writing rules inside this skill.
 
 ## Narrative
@@ -39,19 +41,51 @@ Research decks should answer:
 why this was done -> what changed -> mechanism/method -> evidence -> limits -> discussion needed -> next step
 ```
 
+Group-meeting decks should additionally answer:
+
+```text
+previous question -> prior belief -> new evidence -> belief update -> failures -> largest uncertainty -> next discriminating experiment -> decision needed
+```
+
+Do not expose internal labels such as `belief_update`, `evidence_quality`, `route promotion`, `handoff`, or `deck implication` as slide body text. Translate them into scientific questions, evidence, limits, failure diagnosis, and advisor decisions.
+
 ## Workflow
 
 1. Read source material and identify source anchors: Markdown sections, PDF pages, figures, tables, code outputs, prior slides, or review comments.
-2. Produce `deck-plan.yaml` before creating non-trivial slides.
-3. Keep one main message per slide. Slide titles should carry information, not only labels such as "Background" or "Result 1".
-4. Decide the format from the user's requested deliverable:
+2. For `research-group-meeting`, build the Research State and Evidence Board first. Inventory available figures, medical images, qualitative examples, quantitative plots, model diagrams, equations, experiment logs, failed experiments, literature figures to redraw, and missing evidence.
+3. Choose page archetypes from the scientific job: `RESULT_FIGURE`, `FAILURE_CASE`, `MEDICAL_IMAGE_COMPARISON`, `STATISTICAL_MODEL`, `METHOD_DIAGRAM`, `EXPERIMENT_DESIGN`, `NEGATIVE_RESULT`, `RESEARCH_UPDATE`, `NEXT_EXPERIMENT`, or `SUPERVISOR_DECISION`.
+4. Produce `deck-plan.yaml` before creating non-trivial slides. In `research-group-meeting` mode, every slide must include `page_function`, `required_evidence`, `source_evidence_ids`, `scientific_objects`, `evidence_status`, `layout_rationale`, `allowed_fallback`, `forbidden_fallback`, and `qa_criteria`.
+5. Keep one main research action per slide. Slide titles may be claim titles for mature results, but exploratory updates, negative results, and uncertainty pages may use question or in-progress titles.
+6. Decide the format from the user's requested deliverable:
    - PPT, PowerPoint, `.pptx`, editable, Slides, or later manual edits -> editable Presentation/Slides route.
    - Beamer, LaTeX slides, `.tex`, academic PDF, or a locked TeX venue/project template -> Beamer/LaTeX route.
    - Group meeting, research update, or research slides in a desktop presentation context with no format specified -> editable Presentation/Slides route.
    - Outline, storyline, or page-by-page plan only -> stop at `deck-plan.yaml`.
-5. Preserve equations in LaTeX inside the deck plan. Before compiling `.tex` or producing Beamer/PDF, invoke the locally installed `render-chinese-math-pdf` skill. Use that skill to probe for the LaTeX compiler, TeX packages, font availability, writable TeX caches, and PDF QA tools instead of assuming `xelatex`/`lualatex` paths. If the local skill is not installed in the active environment, block and report that missing dependency.
-6. Use the CUHK default template when no stronger project, course, company, or conference template is specified. For exact CUHK Beamer reproduction, use `../../shared/templates/cuhk/beamer/source/` as the canonical source; the title slide layout is locked and only content fields such as title, subtitle, author, institute, and date may change.
-7. After file creation, render the deck to PDF/images and run visual QA. A deck is not `complete` merely because a file exists.
+7. If a slide claim has no real evidence, convert it to missing evidence, next experiment, speaker notes, backup, or delete it. Do not fill it with rounded cards, icons, slogans, empty tables, or generic arrows.
+8. Preserve equations in LaTeX inside the deck plan. Before compiling `.tex` or producing Beamer/PDF, invoke the locally installed `render-chinese-math-pdf` skill. Use that skill to probe for the LaTeX compiler, TeX packages, font availability, writable TeX caches, and PDF QA tools instead of assuming `xelatex`/`lualatex` paths. If the local skill is not installed in the active environment, block and report that missing dependency.
+9. Use the CUHK default template when no stronger project, course, company, or conference template is specified. For exact CUHK Beamer reproduction, use `../../shared/templates/cuhk/beamer/source/` as the canonical source; the title slide layout is locked and only content fields such as title, subtitle, author, institute, and date may change.
+10. After file creation, render the deck to PDF/images and run scientific visual QA. A deck is not `complete` merely because a file exists or mechanical checks pass.
+
+## Research Group Meeting QA
+
+Rendered-slide QA must answer these questions per page:
+
+- Does the page have a real scientific object?
+- What evidence supports the page?
+- Does the visual encode data, mechanism, experimental unit, case, formula, comparison, or uncertainty?
+- Can the main question or result be understood in 5-10 seconds?
+- Are figures, axes, legends, case labels, and formulas readable?
+- Does the page look like consulting, a report page, or a card dashboard?
+- If decorative frames are removed, is scientific content still present?
+- Is the page worth 30-90 seconds in a group meeting?
+
+If the answer is clearly no for scientific content, the page must not pass.
+
+## Anti-Patterns
+
+Treat these as QA failures when they replace evidence: title plus slogan plus giant empty table; rounded-card dashboard; consulting language; generic arrows without scientific objects; fake visualization; paragraph pasted onto slide; unreadably shrunk paper figure; every slide using the same layout; decorative icons replacing evidence; vague next steps; internal planning language leaking onto slides; evidence-free roadmap.
+
+If an urgent real group meeting must be delivered before the editable PPTX path passes regression, use mature Beamer or the user's older template first. Plugin experimentation must not block the real meeting.
 
 ## References
 
@@ -60,4 +94,8 @@ why this was done -> what changed -> mechanism/method -> evidence -> limits -> d
 - `../../shared/ppt-skill-routing.md`
 - `../../shared/source-fidelity.md`
 - `../../shared/visual-qa.md`
+- `../../shared/references/RESEARCH_GROUP_MEETING_MODE.md`
+- `../../shared/references/RESEARCH_SLIDE_ARCHETYPES.md`
+- `../../shared/references/RESEARCH_PRESENTATION_ANTIPATTERNS.md`
+- `../../shared/references/research_slide_reference_index.csv`
 - `../../shared/templates/cuhk/`

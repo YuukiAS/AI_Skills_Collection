@@ -1,7 +1,7 @@
 {
   "name": "presentations",
-  "version": "4.3.0",
-  "description": "Research and business presentation planning with editable PPTX/Slides routing, explicit Beamer/LaTeX routing, deck-plan schema, source fidelity, and render-based visual QA.",
+  "version": "4.4.0",
+  "description": "Evidence-first research-group-meeting, research, and business presentation planning with editable PPTX/Slides routing, explicit Beamer/LaTeX fallback, deck-plan schema, source fidelity, archetypes, and rendered scientific QA.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -17,8 +17,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Presentations",
-    "shortDescription": "Research and business presentation planning with editable PPTX/Slides routing, explicit Beamer/LaTeX routing, deck-plan schema, source fidelity, and render-based visual QA.",
-    "longDescription": "Research and business presentation planning with editable PPTX/Slides routing, explicit Beamer/LaTeX routing, deck-plan schema, source fidelity, and render-based visual QA. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Evidence-first research-group-meeting, research, and business presentation planning with editable PPTX/Slides routing, explicit Beamer/LaTeX fallback, deck-plan schema, source fidelity, archetypes, and rendered scientific QA.",
+    "longDescription": "Evidence-first research-group-meeting, research, and business presentation planning with editable PPTX/Slides routing, explicit Beamer/LaTeX fallback, deck-plan schema, source fidelity, archetypes, and rendered scientific QA. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [
@@ -26,9 +26,9 @@
     ],
     "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
     "defaultPrompt": [
-      "Plan an editable group-meeting research PPT.",
-      "Turn this Markdown into an editable deck plan.",
-      "Choose the right PPTX/Slides vs Beamer route."
+      "Plan an editable evidence-first group-meeting research PPT.",
+      "Build a research-group-meeting deck plan with an Evidence Board and scientific QA.",
+      "Turn this Markdown into an editable deck plan."
     ],
     "brandColor": "#72256D",
     "composerIcon": "./.codex-plugin/assets/composer.svg",

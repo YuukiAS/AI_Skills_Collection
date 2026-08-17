@@ -3,7 +3,10 @@
     "把这篇论文做成组会汇报用的中文 slides。",
     "Create a conference talk deck from this manuscript with faithful figures and citations.",
     "Make an editable PPTX for this experiment update.",
-    "Prepare a Beamer PDF for my thesis defense."
+    "Prepare a Beamer PDF for my thesis defense.",
+    "给我做一个博士组会 research update，重点讲新证据、失败原因、下一步实验和导师需要决定什么。",
+    "Plan a supervisor meeting deck from these failed runs and hard cases without turning it into cards.",
+    "Build a research-group-meeting deck plan with an evidence board before slide generation."
   ],
   "negative": [
     "Convert this DOCX to Markdown.",
@@ -11,7 +14,8 @@
   ],
   "near_miss": [
     "Summarize this paper in one page.",
-    "Create a poster from this project."
+    "Create a poster from this project.",
+    "Make a dashboard summarizing project management milestones."
   ],
-  "notes": "Format choice follows the requested deliverable; Beamer is not the universal default."
+  "notes": "Format choice follows the requested deliverable; Beamer is not the universal default. PhD group meeting and supervisor discussion requests use research-group-meeting mode with Research State, Evidence Board, archetypes, and scientific QA."
 }
