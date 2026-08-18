@@ -1,6 +1,6 @@
 {
   "name": "presentations",
-  "version": "4.4.0",
+  "version": "4.4.1",
   "description": "Evidence-first research-group-meeting, research, and business presentation planning with editable PPTX/Slides routing, explicit Beamer/LaTeX fallback, deck-plan schema, source fidelity, archetypes, and rendered scientific QA.",
   "author": {
     "name": "YuukiAS",

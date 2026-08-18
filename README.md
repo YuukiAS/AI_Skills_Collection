@@ -35,7 +35,7 @@ cd /path/to/project
 ai-skills install --target repo --profile research-main --mode symlink --write-agents-md
 ```
 
-当前正式版本是 `v4.4.0`。`v4.0.0` 起中央插件版本与 CLI package 版本同步；此前 `setup.py` 的 `0.1.0` 只表示早期本地命令包装器版本。
+当前正式版本是 `v4.4.1`。`v4.0.0` 起中央插件版本与 CLI package 版本同步；此前 `setup.py` 的 `0.1.0` 只表示早期本地命令包装器版本。
 
 ## 先决定装什么
 
@@ -142,6 +142,8 @@ python3 scripts/verify_server_installation.py --profile server-research-baseline
 ## Presentation 与 CUHK 模板
 
 `presentations` 插件从 `v4.4.0` 起包含 evidence-first `research-group-meeting` 模式。博士组会、导师讨论和科研进展汇报会先建立 Research State 与 Evidence Board，再选择 `RESULT_FIGURE`、`FAILURE_CASE`、`MEDICAL_IMAGE_COMPARISON`、`STATISTICAL_MODEL`、`METHOD_DIAGRAM`、`EXPERIMENT_DESIGN`、`NEGATIVE_RESULT`、`RESEARCH_UPDATE`、`NEXT_EXPERIMENT`、`SUPERVISOR_DECISION` 等科研页面原型。
+
+`v4.4.1` 加固了该路径：reference library 改为长期 `.cache` + metadata-only 索引，deck-plan validator 区分 `planning` 和 `final`，Evidence Board 的 `source_evidence_ids` 会做引用完整性检查，4 页回归必须经真实 PPTX -> PDF -> PNG 渲染和独立 scientific visual reviewer 后才可 PASS。
 
 这一路径明确禁止用空表格、圆角卡片仪表盘、咨询语言、装饰图标、无科研对象箭头或证据缺失 roadmap 填补页面。真实组会紧急交付时，如果 editable PPTX 路径尚未通过当前环境回归，优先使用成熟 Beamer 或用户旧模板，不让插件实验阻塞科研工作。
 

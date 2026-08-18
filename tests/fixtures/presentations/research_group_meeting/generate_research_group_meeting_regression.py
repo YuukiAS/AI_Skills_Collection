@@ -319,11 +319,14 @@ def render_pptx(pptx_path: Path, out_dir: Path) -> dict:
     renderer = find_renderer()
     render_dir = out_dir / "rendered"
     pdf_dir = out_dir / "pdf"
+    profile_dir = out_dir / "lo-profile"
     render_dir.mkdir(parents=True, exist_ok=True)
     pdf_dir.mkdir(parents=True, exist_ok=True)
+    profile_dir.mkdir(parents=True, exist_ok=True)
     if not renderer:
         return {"status": "BLOCKED_REAL_PPTX_RENDER", "reason": "no soffice/libreoffice/RESEARCH_PPTX_RENDERER found", "png_count": 0}
-    cmd = [renderer, "--headless", "--convert-to", "pdf", "--outdir", str(pdf_dir), str(pptx_path)]
+    profile_uri = profile_dir.resolve().as_uri()
+    cmd = [renderer, f"-env:UserInstallation={profile_uri}", "--headless", "--convert-to", "pdf", "--outdir", str(pdf_dir), str(pptx_path)]
     result = subprocess.run(cmd, check=False, capture_output=True, text=True, timeout=120)
     pdf_candidates = sorted(pdf_dir.glob("*.pdf"))
     if result.returncode != 0 or not pdf_candidates:

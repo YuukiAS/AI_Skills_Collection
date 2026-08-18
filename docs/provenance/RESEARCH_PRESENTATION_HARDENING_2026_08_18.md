@@ -12,9 +12,9 @@ Scope: post-4.4.0 hardening for editable `research-group-meeting` presentation s
 |---|---|---|
 | `001_reference_library_expansion` | PASS | Added rebuildable metadata source manifest, search matrix, 72 page-level reference rows, and workflow documentation. Local `.cache` expanded but not committed. |
 | `002_validator_and_evidence_integrity` | PASS | `validate_deck_plan.py` now supports `planning` and `final` phases, structured Evidence Board items, and `source_evidence_ids` referential integrity. |
-| `003_real_pptx_regression_generation` | PARTIAL | Generator creates a real PPTX, synthetic scientific objects, evidence manifest, and render status. It no longer writes final QA/PASS. |
-| `004_independent_scientific_visual_review` | BLOCKED_REAL_PPTX_RENDER in this environment | Independent reviewer exists and refuses to PASS without PNGs rendered from the PPTX by `soffice`, `libreoffice`, or an explicit renderer. No such renderer was found on this host. |
-| `005_release_acceptance` | BLOCKED | Do not claim 4.4.1 release acceptance until a real PPTX renderer produces PNGs and the independent reviewer returns PASS. |
+| `003_real_pptx_regression_generation` | PASS | Generator creates a real PPTX, synthetic scientific objects, evidence manifest, and render status. It no longer writes final QA/PASS. |
+| `004_independent_scientific_visual_review` | PASS | A user-space LibreOffice AppImage was downloaded to ignored `.cache/tools/`, extracted without FUSE, and used as the explicit renderer. The reviewer saw 4 PNGs rendered from the PPTX and returned PASS. |
+| `005_release_acceptance` | PASS | Release acceptance for `v4.4.1` is based on real PPTX rendering plus independent reviewer PASS. |
 
 ## Reference Library State
 
@@ -41,18 +41,33 @@ Committed metadata:
 
 ## Renderer Status
 
-Renderer probes did not find:
+System renderer probes did not find `soffice`, `libreoffice`, `unoconv`, `chromium`, `google-chrome`, `docker`, or `podman`.
 
-- `soffice`
-- `libreoffice`
-- `unoconv`
-- `chromium`
-- `google-chrome`
-- `docker`
-- `podman`
+User-space renderer used for acceptance:
 
-The regression therefore records `BLOCKED_REAL_PPTX_RENDER` rather than producing a parallel PDF or marking visual QA as PASS.
+```text
+.cache/tools/LibreOffice-still.basic-x86_64.AppImage
+.cache/tools/squashfs-root/opt/libreoffice25.8/program/soffice
+```
+
+AppImage details:
+
+```text
+size_bytes=291239104
+sha256=e9c7d9a2c2f9cc1123452c13ebf5d0e09cd399789e2447d5e0a04bb69c6c2b2d
+```
+
+The AppImage could not mount through FUSE, so it was extracted in `.cache/tools/`. The generator now passes a cache-local `-env:UserInstallation=file://.../lo-profile` to LibreOffice so headless profile initialization succeeds.
+
+Regression acceptance artifact:
+
+```text
+.cache/research-group-meeting-regression-lo2/RENDER_STATUS.json
+.cache/research-group-meeting-regression-lo2/SCIENTIFIC_VISUAL_REVIEW.json
+```
+
+Result: `render_status.status=ok`, `png_count=4`, `review.status=PASS`.
 
 ## Release Rule
 
-This hardening can be committed as architecture and test coverage. It must not be described as a completed 4.4.1 release until phase `004_independent_scientific_visual_review` passes on PNGs produced from the editable PPTX by a real presentation renderer.
+This hardening is accepted as `v4.4.1` because phase `004_independent_scientific_visual_review` passed on PNGs produced from the editable PPTX by a real presentation renderer.
