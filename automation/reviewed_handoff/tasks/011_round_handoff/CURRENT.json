@@ -1,16 +1,16 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "011_round_handoff",
-  "state": "REVISE",
+  "state": "READY_FOR_EXTERNAL_PLANNER_REVIEW",
   "review_round": 1,
   "max_review_rounds": 2,
   "plan_revision": 0,
   "max_plan_revisions": 1,
   "base_commit": "e2bb7260b9543e4a4cdb2de389de13089b067a53",
   "base_branch": "main",
-  "implementation_commit": "846e3d96c2037e3efc1bb9e325f61ea8097ae32d",
+  "implementation_commit": "2c54c52f287be94c5919bc5886fb52804f94fc49",
   "ci_required": false,
   "ci_status": "NOT_REQUIRED",
   "last_review_decision": "REVISE",
-  "next_action": "RUN_CODEX_EXECUTOR"
+  "next_action": "READY_FOR_EXTERNAL_PLANNER_REVIEW"
 }
