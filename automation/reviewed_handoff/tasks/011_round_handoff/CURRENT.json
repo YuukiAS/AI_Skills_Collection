@@ -12,5 +12,5 @@
   "ci_required": false,
   "ci_status": "NOT_REQUIRED",
   "last_review_decision": "BLOCKED",
-  "next_action": "EXTERNAL_PLANNER_REVIEW"
+  "next_action": "WAIT_EXTERNAL_VISUAL_ACCESS"
 }
