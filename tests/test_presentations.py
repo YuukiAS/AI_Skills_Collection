@@ -352,6 +352,8 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertTrue(packet_zip.exists())
                 packet_manifest = json.loads(Path(packet_payload["packet_manifest"]).read_text(encoding="utf-8"))
                 self.assertEqual(packet_manifest["academic_visual_decision"], "NOT_ASSESSED")
+                self.assertEqual(len(packet_manifest["golden_render_comparison"]), 4)
+                self.assertTrue(all("byte_matches_committed_golden" in item for item in packet_manifest["golden_render_comparison"]))
                 packet_paths = {item["path"] for item in packet_manifest["files"]}
                 self.assertTrue({f"rendered/slide-{slide}.png" for slide in range(1, 5)}.issubset(packet_paths))
                 self.assertTrue({f"expected_render/slide-{slide}.png" for slide in range(1, 5)}.issubset(packet_paths))

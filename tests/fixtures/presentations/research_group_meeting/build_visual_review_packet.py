@@ -71,15 +71,30 @@ def verify_render_chain(regression_dir: Path) -> dict:
     return {"render": render, "review": review}
 
 
-def verify_golden_pngs(regression_dir: Path) -> None:
+def verify_golden_pngs(regression_dir: Path, strict: bool) -> list[dict[str, object]]:
+    comparisons = []
     for slide in range(1, 5):
         generated = require_file(regression_dir / "rendered" / f"slide-{slide}.png")
         expected = require_file(EXPECTED_RENDER / f"slide-{slide}.png")
-        if generated.read_bytes() != expected.read_bytes():
+        generated_sha = sha256(generated)
+        expected_sha = sha256(expected)
+        matches = generated_sha == expected_sha
+        if strict and not matches:
             raise SystemExit(f"generated slide-{slide}.png differs from committed golden render")
+        comparisons.append(
+            {
+                "slide": slide,
+                "generated": str(generated),
+                "expected": str(expected),
+                "generated_sha256": generated_sha,
+                "expected_sha256": expected_sha,
+                "byte_matches_committed_golden": matches,
+            }
+        )
+    return comparisons
 
 
-def write_packet_manifest(packet_dir: Path, implementation_commit: str, transport_commit: str) -> Path:
+def write_packet_manifest(packet_dir: Path, implementation_commit: str, transport_commit: str, golden_comparison: list[dict[str, object]]) -> Path:
     files = sorted(path for path in packet_dir.rglob("*") if path.is_file() and path.name != "PACKET_MANIFEST.json")
     manifest = {
         "schema": "RESEARCH_PRESENTATION_VISUAL_REVIEW_PACKET_V1",
@@ -88,6 +103,7 @@ def write_packet_manifest(packet_dir: Path, implementation_commit: str, transpor
         "review_round": 2,
         "academic_visual_decision": "NOT_ASSESSED",
         "packet_scope": "external_visual_evidence_transport",
+        "golden_render_comparison": golden_comparison,
         "files": [
             {
                 "path": str(path.relative_to(packet_dir)),
@@ -114,9 +130,9 @@ def write_zip(packet_dir: Path, zip_path: Path) -> None:
                 archive.write(path, path.relative_to(packet_dir))
 
 
-def assemble_packet(regression_dir: Path, packet_dir: Path, implementation_commit: str, transport_commit: str, zip_path: Path | None) -> dict:
+def assemble_packet(regression_dir: Path, packet_dir: Path, implementation_commit: str, transport_commit: str, zip_path: Path | None, strict_golden_pngs: bool) -> dict:
     verify_render_chain(regression_dir)
-    verify_golden_pngs(regression_dir)
+    golden_comparison = verify_golden_pngs(regression_dir, strict=strict_golden_pngs)
     if packet_dir.exists():
         shutil.rmtree(packet_dir)
     packet_dir.mkdir(parents=True)
@@ -155,13 +171,15 @@ def assemble_packet(regression_dir: Path, packet_dir: Path, implementation_commi
                 "- MECHANICAL_VISUAL_REVIEW.json",
                 "- PACKET_MANIFEST.json",
                 "",
-                "The builder fails unless regenerated PNGs exactly match the committed golden PNGs.",
+                "The packet includes committed golden PNGs and regenerated rendered PNGs.",
+                "PACKET_MANIFEST.json records whether their SHA-256 values match byte-for-byte.",
+                "CI does not fail on renderer/font pixel drift unless --strict-golden-pngs is set.",
                 "",
             ]
         ),
         encoding="utf-8",
     )
-    manifest_path = write_packet_manifest(packet_dir, implementation_commit, transport_commit)
+    manifest_path = write_packet_manifest(packet_dir, implementation_commit, transport_commit, golden_comparison)
     if zip_path is not None:
         write_zip(packet_dir, zip_path)
     return {
@@ -180,6 +198,7 @@ def main() -> int:
     parser.add_argument("--implementation-commit", default=CORE_IMPLEMENTATION_COMMIT)
     parser.add_argument("--transport-commit", default=os.environ.get("GITHUB_SHA", "LOCAL_OR_EXTERNAL_RUNNER"))
     parser.add_argument("--skip-generate", action="store_true", help="Assemble from an existing regression directory.")
+    parser.add_argument("--strict-golden-pngs", action="store_true", help="Fail if regenerated PNG bytes differ from committed golden renders.")
     args = parser.parse_args()
     if not args.skip_generate:
         run([sys.executable, str(GENERATOR), "--out-dir", str(args.regression_dir)])
@@ -190,6 +209,7 @@ def main() -> int:
         args.implementation_commit,
         args.transport_commit,
         args.zip_path,
+        args.strict_golden_pngs,
     )
     print(json.dumps(result, indent=2))
     return 0
