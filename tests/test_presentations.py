@@ -384,6 +384,47 @@ class PresentationSharedTests(unittest.TestCase):
                 )
                 self.assertEqual(source_packet_result.returncode, 0, source_packet_result.stderr)
                 self.assertTrue(source_packet_zip.exists())
+                pages_builder = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/build_visual_review_pages.py"
+                pages_dir = Path(tmp) / "pages"
+                pages_result = subprocess.run(
+                    [
+                        sys.executable,
+                        str(pages_builder),
+                        "--source-dir",
+                        str(REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source"),
+                        "--pages-dir",
+                        str(pages_dir),
+                        "--implementation-commit",
+                        "TEST_IMPLEMENTATION_COMMIT",
+                        "--transport-commit",
+                        "TEST_TRANSPORT_COMMIT",
+                        "--copy-latest",
+                    ],
+                    check=False,
+                    capture_output=True,
+                    text=True,
+                )
+                self.assertEqual(pages_result.returncode, 0, pages_result.stderr)
+                pages_payload = json.loads(pages_result.stdout)
+                immutable_dir = Path(pages_payload["immutable_dir"])
+                self.assertTrue((immutable_dir / "research_group_meeting_regression.pdf").exists())
+                self.assertTrue((immutable_dir / "packet_manifest.json").exists())
+                pages_manifest = json.loads((immutable_dir / "packet_manifest.json").read_text(encoding="utf-8"))
+                self.assertEqual(pages_manifest["transport"], "github_pages_pdf")
+                self.assertEqual(pages_manifest["academic_visual_decision"], "NOT_ASSESSED")
+                self.assertEqual(pages_manifest["pdf"]["page_count"], 4)
+                published_paths = {item["path"] for item in pages_manifest["published_files"]}
+                self.assertEqual(
+                    published_paths,
+                    {
+                        "EVIDENCE_MANIFEST.json",
+                        "MECHANICAL_VISUAL_REVIEW.json",
+                        "RENDER_STATUS.json",
+                        "research_group_meeting_regression.pdf",
+                    },
+                )
+                self.assertFalse((immutable_dir / "research_group_meeting_regression.pptx").exists())
+                self.assertFalse((immutable_dir / "rendered").exists())
             else:
                 self.assertEqual(review["status"], "BLOCKED_REAL_PPTX_RENDER")
             with ZipFile(payload["pptx"]) as deck:
