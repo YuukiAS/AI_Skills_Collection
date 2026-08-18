@@ -1,7 +1,7 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 011_round_handoff
-implementation_commit: 4fda5c0d28fa054ee7a99187ea03bfc7d6787ea3
+implementation_commit: a1f697c3558f3a039baf382904ad1e36f72a7936
 ---
 
 # Codex Result
@@ -21,6 +21,7 @@ implementation_commit: 4fda5c0d28fa054ee7a99187ea03bfc7d6787ea3
   - `MECHANICAL_VISUAL_REVIEW.json`;
   - `VISUAL_REVIEW_PACKET.md`, `PACKET_MANIFEST.json`, and `SHA256SUMS.txt`.
 - Packet metadata records original implementation commit `2c54c52f287be94c5919bc5886fb52804f94fc49`, transport commit `${{ github.sha }}`, review round `2`, and `academic_visual_decision=NOT_ASSESSED`.
+- The Actions runner install was reduced to `libreoffice-impress`, `poppler-utils`, and basic fonts with `--no-install-recommends` and a 20-minute job timeout after the first artifact run stalled in full LibreOffice installation.
 
 ## Implemented
 
@@ -56,6 +57,7 @@ implementation_commit: 4fda5c0d28fa054ee7a99187ea03bfc7d6787ea3
 - `python -c 'import yaml; yaml.safe_load(open(".github/workflows/research-presentation-visual-packet.yml", encoding="utf-8")); print("yaml ok")'`: workflow YAML parsed successfully.
 - `python tests/fixtures/presentations/research_group_meeting/build_visual_review_packet.py --regression-dir .cache/research-group-meeting-regression-current --packet-dir .cache/research-presentation-visual-review-packet --zip-path .cache/research-presentation-visual-review-packet.zip --implementation-commit 2c54c52f287be94c5919bc5886fb52804f94fc49 --transport-commit LOCAL_VALIDATION --skip-generate`: produced packet directory, ZIP, and `PACKET_MANIFEST.json` with 16 files plus four `golden_render_comparison` records.
 - `python -m unittest tests.test_presentations`: 13 tests passed after adding packet builder coverage.
+- `python -c 'import yaml; yaml.safe_load(open(".github/workflows/research-presentation-visual-packet.yml", encoding="utf-8")); print("yaml ok")'`: workflow YAML parsed after reducing the runner install.
 
 ## Deviations / blockers
 
