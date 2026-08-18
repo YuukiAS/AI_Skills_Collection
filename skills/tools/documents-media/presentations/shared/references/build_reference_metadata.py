@@ -23,6 +23,8 @@ REPO_ROOT = ROOT.parents[5]
 CACHE_ROOT = REPO_ROOT / ".cache" / "research-presentation-reference-library"
 SOURCE_CACHE = CACHE_ROOT / "sources"
 RENDER_CACHE = CACHE_ROOT / "inspection" / "rendered_pages"
+INSPECTION_DATE = "2026-08-18"
+INSPECTION_MEANS = "local cached PDF page inspected with pdftotext and rendered with pdftoppm for page-specific checksum during reviewed-handoff corpus round"
 
 SOURCE_FIELDS = [
     "source_id",
@@ -66,6 +68,8 @@ PAGE_FIELDS = [
     "verification_status",
     "source_file_sha256",
     "rendered_page_sha256",
+    "inspection_date",
+    "inspection_means",
     "visible_page_title",
     "short_page_specific_observation",
 ]
@@ -272,7 +276,7 @@ INSPECTED_PAGE_SPECS = [
     spec("SRC-005", 40, "REAL_DATA_APPLICATION", "IAA prediction from images regression results", "predictive model result", "question title", "forest/point plot", "0.65/0.35", "none", "model uncertainty shown by intervals", "none", "The result answers whether image-only prediction carries signal and shows model comparison.", "Put the question, model family, and effect-size plot on the same page.", "Regression and classification heads are compared for IAA prediction."),
     spec("SRC-005", 52, "NEGATIVE_RESULT", "multi-task models diagnose better than diagnosis-only models", "model comparison", "result title", "line plots", "0.70/0.30", "none", "performance curves visible", "diagnosis-only comparison is explicit", "The slide states a negative comparator and shows why the multi-task setup improves the endpoint.", "Keep the failing baseline visible when it is scientifically informative.", "Diagnosis-only baseline is shown against multi-task alternatives."),
     spec("SRC-006", 3, "EXPERIMENT_DESIGN", "automatic lesion segmentation applications", "task overview", "introduction title", "pipeline plus examples", "0.70/0.30", "none", "not explicit", "none", "The page links PET segmentation to concrete downstream tasks before the model architecture.", "Start method talks by connecting task, data, and application unit.", "PET applications and lesion examples appear before architecture details."),
-    spec("SRC-006", 8, "STATISTICAL_MODEL", "PET-Disentangler loss with segmentation and reconstruction", "model objective", "method title", "architecture diagram", "0.65/0.35", "central", "loss components visible", "none", "The objective page connects architecture branches to the exact losses being optimized.", "For model pages, make the loss terms visibly correspond to diagram parts.", "Segmentation and image decoder branches are tied to their losses."),
+    spec("SRC-006", 17, "STATISTICAL_MODEL", "PET-Disentangler overall objective function", "model objective", "objective title", "formula and explanatory text", "0.35/0.65", "central", "critic and overall objective losses are explicit", "none", "The objective page states that the critic is optimized separately and names the overall objective for the encoder, segmentation decoder, and image decoder.", "For model pages, make objective/loss roles visibly correspond to model components.", "Overall objective function page states critic loss and network-component objective."),
     spec("SRC-006", 20, "RESULT_FIGURE", "lesion segmentation Dice table", "quantitative table", "result title", "table dominant", "0.60/0.40", "none", "standard deviations visible", "none", "The result table has disease subgroup columns and method rows, making the endpoint structure explicit.", "Medical-imaging result pages should keep subgroups and endpoints visible.", "Healthy/disease/overall Dice values are compared across methods."),
     spec("SRC-006", 21, "MEDICAL_IMAGE_COMPARISON", "PET input, GT, predictions, reconstruction panels", "image comparison", "result evidence", "image grid", "0.90/0.10", "none", "qualitative uncertainty implicit", "failure/success differences visible", "The same-case panel makes qualitative performance inspectable rather than relying only on Dice.", "Use aligned panels for image, GT, prediction, and reconstruction in failure/result pages.", "Rows show input, ground truth, baselines, model output, probability and reconstruction."),
     spec("SRC-013", 8, "RESULT_FIGURE", "team-quality estimate forest plot", "posterior interval plot", "graph title", "forest plot", "0.80/0.20", "none", "credible intervals visible", "none", "The forest plot ranks many groups while preserving uncertainty intervals.", "Use interval plots when ranking is uncertain.", "Team-quality estimates are shown with intervals and ordering."),
@@ -324,6 +328,8 @@ def page_rows(sources: list[dict[str, str]]) -> list[dict[str, Any]]:
             "verification_status": "inspected",
             "source_file_sha256": sha256(pdf),
             "rendered_page_sha256": rendered_page_hash(pdf, page),
+            "inspection_date": INSPECTION_DATE,
+            "inspection_means": INSPECTION_MEANS,
             "visible_page_title": visible_title(pdf, page, str(item["short_page_specific_observation"])),
         }
         row.update(item)

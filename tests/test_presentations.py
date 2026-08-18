@@ -210,6 +210,8 @@ class PresentationSharedTests(unittest.TestCase):
             "why_this_specific_page_works",
             "source_file_sha256",
             "rendered_page_sha256",
+            "inspection_date",
+            "inspection_means",
             "visible_page_title",
             "short_page_specific_observation",
             "suitable_contexts",
@@ -227,6 +229,13 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(row["verification_status"], "inspected")
             self.assertEqual(len(row["source_file_sha256"]), 64)
             self.assertEqual(len(row["rendered_page_sha256"]), 64)
+            self.assertRegex(row["inspection_date"], r"^20\d\d-\d\d-\d\d$")
+            self.assertIn("pdftotext", row["inspection_means"])
+        by_id = {row["reference_id"]: row for row in rows}
+        self.assertEqual(by_id["RRL-020"]["source_id"], "SRC-006")
+        self.assertEqual(by_id["RRL-020"]["actual_page_number"], "17")
+        self.assertEqual(by_id["RRL-020"]["visible_page_title"], "Overall objective function")
+        self.assertIn("objective", by_id["RRL-020"]["scientific_object"].lower())
         manifest = json.loads((references / "reference_sources_manifest.json").read_text(encoding="utf-8"))
         self.assertGreaterEqual(len(manifest["candidate_sources"]), 50)
         self.assertEqual(
@@ -256,6 +265,9 @@ class PresentationSharedTests(unittest.TestCase):
     def test_research_group_meeting_regression_generator_outputs_artifacts(self) -> None:
         script = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/generate_research_group_meeting_regression.py"
         reviewer = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/review_research_group_meeting_regression.py"
+        script_text = script.read_text(encoding="utf-8")
+        self.assertNotIn('["RRL-003", "RRL-020", "RRL-022", "RRL-029"]', script_text)
+        self.assertIn("retrieve_references", script_text)
         with tempfile.TemporaryDirectory() as tmp:
             result = subprocess.run(
                 [sys.executable, str(script), "--out-dir", tmp],
@@ -279,7 +291,20 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertGreater(png.stat().st_size, 10_000)
             for slide in manifest["slides"]:
                 self.assertGreaterEqual(len(slide["reference_ids"]), 2)
+                self.assertLessEqual(len(slide["reference_ids"]), 5)
                 self.assertTrue(slide["expected_scientific_objects"])
+                retrieval = slide["reference_retrieval"]
+                self.assertEqual(slide["reference_ids"], retrieval["selected_ids"])
+                self.assertGreaterEqual(len(retrieval["candidate_ids"]), len(retrieval["selected_ids"]))
+                self.assertIn("intent", retrieval["query"])
+                self.assertIn("page_functions", retrieval["query"])
+                self.assertIn("evidence_types", retrieval["query"])
+                self.assertTrue(retrieval["source_tiers"])
+                self.assertEqual(set(retrieval["selected_ids"]), set(retrieval["ranking_relevance_reason"]))
+                for selected_id in retrieval["selected_ids"]:
+                    self.assertIn(selected_id, retrieval["candidate_ids"])
+                    self.assertIn("source_tier=", retrieval["ranking_relevance_reason"][selected_id])
+                self.assertIn("No full-slide screenshots", retrieval["what_was_not_copied"])
             render = json.loads(Path(payload["render_status"]).read_text(encoding="utf-8"))
             self.assertIn(render["status"], {"ok", "BLOCKED_REAL_PPTX_RENDER"})
             review_result = subprocess.run(

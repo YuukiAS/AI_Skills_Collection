@@ -8,6 +8,7 @@ final scientific PASS; that decision belongs to the independent reviewer.
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import math
 import os
@@ -25,6 +26,10 @@ from pptx.util import Inches, Pt
 
 
 W, H = 13.333, 7.5
+REPO_ROOT = Path(__file__).resolve().parents[4]
+REFERENCE_ROOT = REPO_ROOT / "skills" / "tools" / "documents-media" / "presentations" / "shared" / "references"
+REFERENCE_INDEX = REFERENCE_ROOT / "research_slide_reference_index.csv"
+REFERENCE_MANIFEST = REFERENCE_ROOT / "reference_sources_manifest.json"
 P = {
     "bg": "F7F7F9",
     "ink": "17202A",
@@ -39,6 +44,48 @@ P = {
     "soft_blue": "E5EEF8",
     "soft_gold": "FBF1D6",
     "soft_red": "F8E3E1",
+}
+
+REFERENCE_QUERIES = {
+    "RESULT_FIGURE": {
+        "intent": "Show endpoint-wise quantitative results where interpretation changes with metric choice.",
+        "page_functions": ["RESULT_FIGURE", "CONFIDENCE_INTERVAL", "SENSITIVITY_ANALYSIS", "REAL_DATA_APPLICATION"],
+        "scientific_domain": ["medical imaging", "statistics", "biostatistics"],
+        "statistical_subdomain": ["lesion segmentation", "annotation variability", "survey nonresponse / MRP", "Bayesian workflow"],
+        "evidence_types": ["quantitative plot", "quantitative table", "uncertainty interval", "time-series interval", "subgroup comparison"],
+        "organization_lesson": "Put the endpoint, comparator, uncertainty, and decision implication adjacent to the main result graphic.",
+    },
+    "FAILURE_CASE": {
+        "intent": "Show a single synthetic hard case with aligned image, GT, prediction, error overlay, and metrics.",
+        "page_functions": ["MEDICAL_IMAGE_COMPARISON", "NEGATIVE_RESULT", "MODEL_CHECK", "RESULT_FIGURE"],
+        "scientific_domain": ["medical imaging", "statistics"],
+        "statistical_subdomain": ["lesion segmentation", "annotation variability", "Bayesian workflow"],
+        "evidence_types": ["image comparison", "model comparison", "negative/fix title", "posterior predictive check"],
+        "organization_lesson": "Keep the failing object visible next to the metric so the audience can inspect the mechanism, not only the score.",
+    },
+    "EXPERIMENT_DESIGN": {
+        "intent": "Explain a multi-center experiment with local data, transmitted summaries, estimator, comparator, and endpoint gate.",
+        "page_functions": ["EXPERIMENT_DESIGN", "METHOD_DIAGRAM", "ESTIMATOR", "NEXT_EXPERIMENT", "ASSUMPTION"],
+        "scientific_domain": ["medical imaging", "statistics", "research communication"],
+        "statistical_subdomain": ["lesion segmentation", "hybrid resource-bound analysis", "doctoral update", "survey nonresponse / MRP"],
+        "evidence_types": ["task overview", "method mechanism", "estimator pipeline", "planned evidence", "assumption / challenge"],
+        "organization_lesson": "Connect units, local estimators, shared summaries, and evaluation endpoints in one inspectable flow.",
+    },
+    "STATISTICAL_MODEL": {
+        "intent": "Show a measured-variable inference mechanism where AI phenotype error changes the target estimand.",
+        "page_functions": ["STATISTICAL_MODEL", "BAYESIAN_MODEL", "ESTIMATOR", "MODEL_CHECK", "POSTERIOR_DIAGNOSTIC"],
+        "scientific_domain": ["statistics", "biostatistics", "medical imaging"],
+        "statistical_subdomain": ["lesion segmentation", "Bayesian workflow", "Bayesian priors", "Bayesian data analysis", "survey nonresponse / MRP"],
+        "evidence_types": ["model objective", "Bayesian model", "estimator formula", "modeling workflow", "posterior diagnostic"],
+        "organization_lesson": "Name the estimand, observed proxy, validation subset, model correction, and inference boundary explicitly.",
+    },
+}
+
+TIER_PRIORITY = {
+    "PRIMARY_RESEARCH_PRESENTATION": 0,
+    "SECONDARY_TEACHING_REFERENCE": 1,
+    "PRESENTATION_GUIDANCE": 2,
+    "CANDIDATE_BACKLOG": 3,
 }
 
 
@@ -101,6 +148,98 @@ def header(slide, number: int, title: str, message: str):
     add_text(slide, title, 0.55, 0.38, 9.5, 0.36, 21, "ink", True)
     add_text(slide, f"{number:02d}/04", 11.6, 0.42, 0.95, 0.22, 9, "muted", False, PP_ALIGN.RIGHT)
     add_text(slide, message, 0.65, 0.88, 11.7, 0.34, 12.4, "purple", True)
+
+
+def tokens(value: str) -> set[str]:
+    return {part.lower() for part in value.replace("/", " ").replace("-", " ").replace("_", " ").split() if len(part) > 2}
+
+
+def load_reference_rows() -> list[dict[str, str]]:
+    manifest = json.loads(REFERENCE_MANIFEST.read_text(encoding="utf-8"))
+    source_tiers = {item["source_id"]: item["source_tier"] for item in manifest["candidate_sources"]}
+    source_domains = {item["source_id"]: item["domain_family"] for item in manifest["candidate_sources"]}
+    source_subdomains = {item["source_id"]: item["statistical_subdomain"] for item in manifest["candidate_sources"]}
+    rows = []
+    with REFERENCE_INDEX.open(encoding="utf-8", newline="") as fh:
+        for row in csv.DictReader(fh):
+            if row.get("verification_status") != "inspected":
+                continue
+            if not (row.get("source_file_sha256") and row.get("rendered_page_sha256")):
+                continue
+            if not (row.get("inspection_date") and row.get("inspection_means")):
+                continue
+            row["source_tier"] = source_tiers.get(row["source_id"], "")
+            row["domain_family"] = source_domains.get(row["source_id"], "")
+            row["statistical_subdomain"] = source_subdomains.get(row["source_id"], "")
+            rows.append(row)
+    return rows
+
+
+def score_reference(row: dict[str, str], query: dict[str, object]) -> tuple[int, list[str]]:
+    score = 0
+    reasons: list[str] = []
+    page_functions = query["page_functions"]
+    evidence_types = query["evidence_types"]
+    domains = query["scientific_domain"]
+    subdomains = query["statistical_subdomain"]
+    if row["page_function"] in page_functions:
+        score += 10
+        reasons.append(f"page_function={row['page_function']} matches query")
+    if row["evidence_type"] in evidence_types:
+        score += 6
+        reasons.append(f"evidence_type={row['evidence_type']} matches query")
+    if row["domain_family"] in domains:
+        score += 4
+        reasons.append(f"domain={row['domain_family']} matches query")
+    if row["statistical_subdomain"] in subdomains:
+        score += 4
+        reasons.append(f"subdomain={row['statistical_subdomain']} matches query")
+    query_terms = tokens(" ".join([str(query["intent"]), " ".join(page_functions), " ".join(evidence_types)]))
+    row_terms = tokens(" ".join([
+        row["scientific_object"],
+        row["why_this_specific_page_works"],
+        row["what_to_learn"],
+        row["short_page_specific_observation"],
+    ]))
+    overlap = sorted(query_terms & row_terms)
+    if overlap:
+        score += min(5, len(overlap))
+        reasons.append("semantic tokens overlap: " + ", ".join(overlap[:6]))
+    tier_bonus = max(0, 3 - TIER_PRIORITY.get(row["source_tier"], 3))
+    score += tier_bonus
+    reasons.append(f"source_tier={row['source_tier']} priority_bonus={tier_bonus}")
+    return score, reasons
+
+
+def retrieve_references(archetype: str) -> dict[str, object]:
+    query = REFERENCE_QUERIES[archetype]
+    scored = []
+    for row in load_reference_rows():
+        score, reasons = score_reference(row, query)
+        if score <= 0:
+            continue
+        scored.append((score, TIER_PRIORITY.get(row["source_tier"], 3), row["reference_id"], row, reasons))
+    scored.sort(key=lambda item: (-item[0], item[1], item[2]))
+    candidate_rows = scored[:8]
+    selected_rows = candidate_rows[:5]
+    if len(selected_rows) < 2:
+        raise RuntimeError(f"reference retrieval for {archetype} found fewer than two inspected references")
+    return {
+        "query": query,
+        "candidate_ids": [row["reference_id"] for _, _, _, row, _ in candidate_rows],
+        "selected_ids": [row["reference_id"] for _, _, _, row, _ in selected_rows],
+        "source_tiers": {row["reference_id"]: row["source_tier"] for _, _, _, row, _ in selected_rows},
+        "ranking_relevance_reason": {
+            row["reference_id"]: "; ".join(reasons)
+            for _, _, _, row, reasons in selected_rows
+        },
+        "organization_lesson": query["organization_lesson"],
+        "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied.",
+    }
+
+
+def reference_footer(refs: list[str], purpose: str) -> str:
+    return f"Reference retrieval: {purpose} selected inspected pages {', '.join(refs)}; trace in EVIDENCE_MANIFEST; style not copied."
 
 
 ENDPOINT_DATA = {
@@ -216,24 +355,24 @@ def draw_phantom(path: Path) -> dict:
     return {"dice": round(dice, 3), "lesion_recall": round(recall, 3), "burden_error": round(burden_error, 3), "tp": tp, "fp": fp, "fn": fn}
 
 
-def draw_result_page(slide, assets: Path, manifest: dict):
+def draw_result_page(slide, assets: Path, manifest: dict, refs: list[str]):
     chart_path = assets / "endpoint_ranking_chart.png"
     manifest["synthetic_endpoint_data"] = draw_endpoint_chart(chart_path)
     slide.shapes.add_picture(str(chart_path), inch(0.78), inch(1.42), width=inch(7.8))
     rect(slide, "Interpretation\nCalibrated wins recall and burden error;\nBaseline wins Dice only.", 9.0, 1.75, 3.25, 1.3, "soft_teal", "teal", 12.2, True)
     rect(slide, "Meeting decision\nFreeze endpoint priority before ranking methods.", 9.0, 3.65, 3.25, 1.0, "soft_gold", "gold", 12.2, True)
-    add_text(slide, "Reference pull: inspected result/interval pages RRL-003/RRL-020/RRL-022/RRL-029; style not copied.", 0.95, 6.55, 11.2, 0.35, 8.8, "muted")
+    add_text(slide, reference_footer(refs, "result/interval query"), 0.95, 6.55, 11.2, 0.35, 8.4, "muted")
 
 
-def draw_failure_page(slide, assets: Path, manifest: dict):
+def draw_failure_page(slide, assets: Path, manifest: dict, refs: list[str]):
     phantom_path = assets / "synthetic_segmentation_phantom.png"
     manifest["synthetic_phantom_metrics"] = draw_phantom(phantom_path)
     slide.shapes.add_picture(str(phantom_path), inch(0.72), inch(1.38), width=inch(11.85))
     add_text(slide, "Scientific object: same synthetic case, aligned GT/prediction/error overlay, case metric next to visual.", 0.95, 6.35, 11.2, 0.32, 12.2, "ink", True)
-    add_text(slide, "Reference pull: inspected image/failure pages RRL-013/RRL-017/RRL-021/RRL-022; no clinical image or public slide copied.", 0.95, 6.72, 11.2, 0.25, 8.8, "muted")
+    add_text(slide, reference_footer(refs, "failure-case query"), 0.95, 6.72, 11.2, 0.25, 8.4, "muted")
 
 
-def draw_experiment_page(slide, assets: Path, manifest: dict):
+def draw_experiment_page(slide, assets: Path, manifest: dict, refs: list[str]):
     for i, site in enumerate(["Center A", "Center B", "Center C"]):
         rect(slide, f"{site}\nlocal image + local label\nexperimental unit: lesion-case", 0.75, 1.45 + i * 1.05, 2.75, 0.78, "soft_teal", "teal", 10.6, True)
         rect(slide, "local estimator\ncalibration score", 3.85, 1.5 + i * 1.05, 1.65, 0.65, "soft_blue", "blue", 10.3, True)
@@ -244,10 +383,10 @@ def draw_experiment_page(slide, assets: Path, manifest: dict):
     rect(slide, "Global estimator\ncompare local-only vs summary-sharing", 9.2, 2.08, 3.2, 0.95, "soft_blue", "blue", 11.4, True)
     rect(slide, "Success endpoint\nlesion recall + burden error\nworst-center gap < 5%", 9.2, 3.78, 3.2, 1.05, "soft_red", "red", 11.4, True)
     add_text(slide, "Comparator: local-only model. What moves: score summaries and likelihood updates. What stays local: images, labels, case identifiers.", 0.95, 5.75, 11.3, 0.42, 12.2, "ink", True)
-    add_text(slide, "Reference pull: inspected method/design pages RRL-002/RRL-006/RRL-008/RRL-019; no roadmap/card substitute.", 0.95, 6.55, 11.2, 0.35, 8.8, "muted")
+    add_text(slide, reference_footer(refs, "method/design query"), 0.95, 6.55, 11.2, 0.35, 8.4, "muted")
 
 
-def draw_model_page(slide, assets: Path, manifest: dict):
+def draw_model_page(slide, assets: Path, manifest: dict, refs: list[str]):
     add_text(slide, "Target estimand", 0.95, 1.4, 2.5, 0.25, 12, "muted", True)
     rect(slide, "beta1: effect of true lesion burden T_i\non downstream outcome Y_i", 0.9, 1.75, 2.9, 1.0, "soft_teal", "teal", 11.2, True)
     rect(slide, "Observed AI phenotype\nM_i = T_i + U_i\nerror varies by center", 4.15, 1.75, 2.7, 1.0, "soft_gold", "gold", 11.2, True)
@@ -257,14 +396,14 @@ def draw_model_page(slide, assets: Path, manifest: dict):
         line(slide, x, 2.25, x + 0.25, 2.25, "purple", 1.8)
     add_text(slide, "Toy calibration: E[T|M,center] = alpha_center + gamma_center M. Report beta1 after validation-calibrated correction, not a raw AI burden coefficient.", 1.0, 3.55, 11.0, 0.45, 13, "ink", True)
     rect(slide, "Evidence boundary\nThis page is a generated-variable inference mechanism,\nnot completed clinical validity evidence.", 2.5, 4.65, 8.3, 0.95, "soft_teal", "teal", 12.2, True)
-    add_text(slide, "Reference pull: inspected estimator/model-check pages RRL-024/RRL-025/RRL-035/RRL-038/RRL-044; formula is editable text.", 0.95, 6.55, 11.2, 0.35, 8.8, "muted")
+    add_text(slide, reference_footer(refs, "estimator/model query"), 0.95, 6.55, 11.2, 0.35, 8.4, "muted")
 
 
 SLIDES = [
-    ("Endpoint Choice Changes the Method Ranking", "The method story changes when the endpoint changes.", "RESULT_FIGURE", draw_result_page, ["RRL-003", "RRL-020", "RRL-022", "RRL-029"]),
-    ("Average Dice Can Hide the Hard Case", "A case page binds image, GT, prediction, error overlay, and metric.", "FAILURE_CASE", draw_failure_page, ["RRL-013", "RRL-017", "RRL-021", "RRL-022"]),
-    ("Limited-Information Multi-Center Experiment", "Raw data stay local; shared summaries are judged by endpoint-level evidence.", "EXPERIMENT_DESIGN", draw_experiment_page, ["RRL-002", "RRL-006", "RRL-008", "RRL-019"]),
-    ("AI Phenotype Error Changes Inference", "Segmentation output is a measured variable whose error can attenuate inference.", "STATISTICAL_MODEL", draw_model_page, ["RRL-024", "RRL-025", "RRL-035", "RRL-038", "RRL-044"]),
+    ("Endpoint Choice Changes the Method Ranking", "The method story changes when the endpoint changes.", "RESULT_FIGURE", draw_result_page),
+    ("Average Dice Can Hide the Hard Case", "A case page binds image, GT, prediction, error overlay, and metric.", "FAILURE_CASE", draw_failure_page),
+    ("Limited-Information Multi-Center Experiment", "Raw data stay local; shared summaries are judged by endpoint-level evidence.", "EXPERIMENT_DESIGN", draw_experiment_page),
+    ("AI Phenotype Error Changes Inference", "Segmentation output is a measured variable whose error can attenuate inference.", "STATISTICAL_MODEL", draw_model_page),
 ]
 
 
@@ -274,19 +413,22 @@ def build_pptx(path: Path, assets: Path, manifest: dict) -> None:
     prs.slide_height = inch(H)
     blank = prs.slide_layouts[6]
     manifest["slides"] = []
-    for index, (title, message, archetype, drawer, refs) in enumerate(SLIDES, start=1):
+    for index, (title, message, archetype, drawer) in enumerate(SLIDES, start=1):
+        retrieval = retrieve_references(archetype)
+        refs = list(retrieval["selected_ids"])
         slide = prs.slides.add_slide(blank)
         header(slide, index, title, message)
-        drawer(slide, assets, manifest)
+        drawer(slide, assets, manifest, refs)
         manifest["slides"].append({
             "slide": index,
             "title": title,
             "archetype": archetype,
             "reference_ids": refs,
-                "learned_organization": "Use the referenced page function to organize scientific objects and evidence adjacency.",
-                "reference_rationale": "References are inspected page records with rendered-page checksums; they supply page-function patterns, not copied visual assets.",
-                "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical image is copied.",
-                "what_not_copied": "No source images, full-slide screenshots, institutional templates, public figures, or private clinical data are copied.",
+            "reference_retrieval": retrieval,
+            "learned_organization": retrieval["organization_lesson"],
+            "reference_rationale": "References are selected by an auditable query over inspected page records with rendered-page checksums and inspection evidence; they supply page-function patterns, not copied visual assets.",
+            "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical image is copied.",
+            "what_not_copied": retrieval["what_was_not_copied"],
             "expected_scientific_objects": {
                 "RESULT_FIGURE": ["endpoint-wise data", "error intervals", "method ranking", "endpoint decision"],
                 "FAILURE_CASE": ["synthetic image", "GT mask", "prediction mask", "FP/FN overlay", "case metrics"],
