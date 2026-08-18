@@ -1,94 +1,98 @@
 # 011 Round Handoff — Planner Review
 
-reviewed_commit: `846e3d96c2037e3efc1bb9e325f61ea8097ae32d`
-review_round: 1
-decision: REVISE
+reviewed_commit: `2c54c52f287be94c5919bc5886fb52804f94fc49`
+current_main_control_commit: `ee6719ba397cb060b47b01a9308bfeb06061f48d`
+review_round: 2
+decision: BLOCKED
 
 ## 结论
 
-本轮已经修掉上一版最严重的两类伪证据：`build_reference_metadata.py` 不再从 source metadata 自动轮转生成 page-level 记录；机械视觉 reviewer 也不再替外部 Planner 写 academic PASS。现有四页 regression 仍走真实 `PPTX -> LibreOffice -> PDF -> PNG` 链，方向正确。
+上一轮两个可由 Executor 修复的完整性问题已经基本关闭：Inspected Page Library 不再包含已知的 `RRL-020` 错页记录，并补齐了 inspection date / means；四页 regression 也已经从 literal `RRL-*` 列表改成基于 inspected index 的可审计检索，并为每页留下 query、candidate、selected ids、source tier、相关性理由和未复制整页的边界。
 
-但当前 round 还不能 PASS，原因不是数量不足，而是还有两个实质性 integrity blocker，外加一个尚未完成的外部视觉验收门槛。
+当前 round 仍不能 `PASS`，但这次原因不再是 corpus implementation。唯一剩余硬门槛是 **external academic visual review 仍无法在当前 Planner 运行环境中真正看到四张 rendered PNG**。长期合同明确禁止只凭 PNG 数量、manifest、expected object contract 或机械 QA 判学术视觉通过；因此本轮必须 `BLOCKED`，不能用 `MECHANICAL_PASS` 替代。
 
-## Blocker 1 — Inspected Page Library 仍有页面特异记录与真实页内容不一致，且 inspection evidence 字段不完整
+## 上一轮 Blocker 1 closure — Inspected Page Library
 
-### 冻结依据
+### 实现证据
 
-长期合同和原 corpus integrity PLAN 要求 inspected page 只能来自真正打开/渲染过的实际页面，每条至少绑定真实页码、实际 scientific object、页面特异观察、rights/provenance，以及可复核的 inspection evidence（包括 cache/source checksum、page/slide、inspection date/means）。随机抽查发现任何无法解释实际页内容的记录都必须 REVISE。
+当前 `research_slide_reference_index.csv` 的 inspected rows 已包含：真实 source URL、实际页码、scientific object、页面特异观察、rights note、source/rendered-page SHA256、`inspection_date` 和 `inspection_means`。已知错误记录 `RRL-020 / SRC-006` 已从错误的第 8 页修正为第 17 页 `Overall objective function`，scientific object 也改为 PET-Disentangler overall objective function。
 
-### 当前证据
+### Planner 独立抽查
 
-自动 page-row synthesis 已经移除，这一点通过：当前 `page_rows()` 只消费显式 inspected-page specs，并校验 source/rendered-page checksum。
+本轮没有只采用 Executor 自报结果，而是重新核公开原 deck：
 
-但随机核查 committed index 与公开原 deck 时发现至少一条实质不一致：
+- `RRL-020 / SRC-006 / actual_page_number=17`：SFU 公开 ISBI 2025 PDF 对应页明确写出 critic 单独优化、critic loss，以及 encoder / segmentation decoder / image decoder 的 overall objective，和当前 record 对应。
+- `RRL-003 / SRC-001 / actual_page_number=13`：MIT AeroAstro 公开 committee PDF 实际页面以 training-step reward curve 为主对象，并显示 global/local information baselines 与 InforMARL，和当前 `RESULT_FIGURE` 记录对应。
+- `RRL-028 / SRC-054 / actual_page_number=14`：Gelman CDC talk 对应页面是 `The poststratification identity`，核心对象为单独呈现的 estimator/identity 公式，和当前 record 对应。
 
-- `RRL-020 / SRC-006 / ISBI2025_Presentation.pdf / actual_page_number=8` 被记录为 `STATISTICAL_MODEL`，scientific object 写成 “PET-Disentangler loss with segmentation and reconstruction”，并写明 “loss components visible”。
-- 对公开原 PDF 的第 8 页（1-based）核查时，实际页面是 PET-Disentangler method overview：Encoder、Mask prediction、Seg. Decoder、Image Decoder、Skip connections、GT/Ground truth 等对象；总体 objective/loss 页面出现在更后面的页，而不是这里。
+这三个跨 source 抽样没有再发现上一轮那种“页码存在但页面对象完全不对应”的错误。当前显式 `INSPECTED_PAGE_SPECS` 也没有恢复 metadata rotation、模板轮转或自动猜 `page_function/page_number` 的旧实现。
 
-同一抽样中，`RRL-026` 对 Bayesian Workflow 的 fake-data simulation、`RRL-028` 对 CDC MRP talk 的 poststratification identity 与公开 PDF 内容基本对应，说明问题不是整个索引都无效，而是当前仍存在具体的错页/错观察记录，不能因为 hash 存在就整体接受 48 rows。
+因此上一轮 Blocker 1 关闭。这里的结论只代表当前抽样未发现新的完整性阻断，不代表 48 条记录被逐条重新人工复审。
 
-此外，当前 `research_slide_reference_index.csv` 虽然包含 source checksum、rendered-page checksum、page number 和 `verification_status=inspected`，但没有显式的 `inspection_date` / `inspection_means`（或等价 inspection-evidence 字段）。仅有 hash 不能说明何时、以什么方式真正检查过该页。
+## 上一轮 Blocker 2 closure — Reference retrieval 已进入生成链
 
-### 最小修复
+当前 regression generator 已存在独立 `REFERENCE_QUERIES` 和 `retrieve_references()`：
 
-1. 重新检查 `SRC-006` 的所有 inspected rows，至少纠正或删除 `RRL-020`；若发现同一 source 有页码偏移或 observation 迁移，整体修正该 source 的 records。
-2. 对其余 inspected rows 做一次有限 integrity sweep，重点找 page number 与 visible title / scientific object / page-specific observation 不一致的情况；不要新增 corpus 数量。
-3. 为 inspected records 增加可复核的 inspection evidence 字段，至少包含 inspection date 和 inspection means；保留现有 source/rendered-page checksum。
-4. 更新 regression test：hash 存在不能单独成为 inspected 的充分条件；字段完整性和 source/page identity 必须可验证。
+- 只从 `verification_status=inspected` 且具有 source/rendered hash、inspection date/means 的 rows 中检索；
+- 按 page function、evidence type、domain/subdomain、token overlap 与 source tier 评分；
+- 每个 archetype 从候选中选择 2–5 条 inspected references；
+- 每页 manifest 记录 query、candidate ids、selected ids、source tiers、ranking/relevance reason、organization lesson 与 `what_was_not_copied`；
+- 测试明确禁止退化回上一轮 literal RRL 列表，并检查 selected ids 与 retrieval trace 一致。
 
-### 复验
+这已经达到当前 round 要求的“简单、可审计、真正使用 inspected corpus”的最低门槛。它不需要在本轮升级成向量检索或更复杂的推荐系统。
 
-Planner 下一轮随机抽查跨 source 的 inspected records，并再次核公开 deck。任何错页、模板化 observation、无法解释实际页面的记录继续 REVISE。
+因此上一轮 Blocker 2 关闭。
 
-## Blocker 2 — Regression 目前只是硬编码 reference ids，不是“检索 2–5 个 inspected pages”
+## Mechanical reviewer boundary — 通过
 
-### 冻结依据
+当前 `review_research_group_meeting_regression.py` 的职责已经正确收窄：
 
-原 corpus integrity PLAN 明确要求生成链在需要参考时，按 `page_function + scientific_domain/statistical_subdomain + evidence_type` 等任务语义检索 2–5 个真实 inspected records，PRIMARY 默认优先，并留下 retrieval trace：候选、最终选择、为什么相关、学到的组织/证据关系。Reference index 不能只是存在而不真正进入生成链。
+- 只检查真实 PPTX render 链、PNG 数量/尺寸、非空、基本对比度、对象合同等机械信号；
+- 输出类型为 `MECHANICAL_VISUAL_REVIEW`；
+- `academic_visual_decision` 固定为 `NOT_ASSESSED`；
+- 不生成 `SCIENTIFIC_VISUAL_REVIEW.json`；
+- 不再把 manifest 中存在 expected scientific objects 直接扩写成十项 academic PASS。
 
-### 当前证据
+这一边界符合长期合同。
 
-当前 `generate_research_group_meeting_regression.py` 在 `SLIDES` 常量中直接写死：
+## Blocking Gate — 当前 Planner 无法实际查看四张 rendered PNG
 
-- RESULT_FIGURE → `RRL-003/RRL-020/RRL-022/RRL-029`
-- FAILURE_CASE → `RRL-013/RRL-017/RRL-021/RRL-022`
-- EXPERIMENT_DESIGN → `RRL-002/RRL-006/RRL-008/RRL-019`
-- STATISTICAL_MODEL → `RRL-024/RRL-025/RRL-035/RRL-038/RRL-044`
+当前仓库确实提交了四张 golden PNG：
 
-manifest 中只有通用的 `learned_organization` 与 `reference_rationale`，没有查询条件、候选集合、排序/筛选依据，也没有说明为什么某个具体 inspected page 对当前 slide 的对象拓扑或证据关系相关。
+- `tests/fixtures/presentations/research_group_meeting/expected_render/slide-1.png`
+- `slide-2.png`
+- `slide-3.png`
+- `slide-4.png`
 
-因此当前只能证明“生成器引用了 index 中存在的 ID”，不能证明 reference corpus 被真正检索和使用。
+GitHub connector 能定位这些 binary blobs，也能以 base64 形式返回文件内容；但本次 Planner 运行环境没有可将 connector 返回的 binary/base64 无损落到本地图像文件并交给视觉查看器的可用通道。公开 GitHub raw URL 在当前网页读取链路中也返回 cache miss，因此本轮没有真正看到四张 regression PNG。
 
-### 最小修复
+这意味着我无法诚实完成以下学术视觉验收：
 
-1. 增加一个简单、可审计的 reference retrieval 层；不需要复杂模型。按 slide intent/archetype、page function、domain/subdomain、evidence type 和 source tier 从 inspected index 筛选/排序即可。
-2. generator 不再以 literal RRL list 作为唯一来源；每页运行 retrieval 后选择 2–5 条 inspected references。
-3. EVIDENCE_MANIFEST / deck-plan evidence 中为每页留下 retrieval trace，至少记录 query intent、候选 ids、最终 ids、选择理由，以及实际学习的组织/证据关系。
-4. PRIMARY 默认优先，但允许为了某个统计/教学对象使用 SECONDARY；必须在 trace 中说明原因。
-5. 不复制 source 页面的视觉身份或整页内容。
+- scientific object 是否真的可读；
+- object relationship 是否正确；
+- 是否退化为 card / table / dashboard；
+- 主图、公式、标签是否具有组会可读性；
+- evidence boundary 是否在实际页面上清楚；
+- 四页是否存在结构重复、空洞装饰或视觉失衡。
 
-### 复验
+按照 Program 合同，**未实际查看 rendered PNG 就不得写 academic visual PASS**。因此当前 round 状态必须是 `BLOCKED`。
 
-Planner 下一轮应能从同一 regression packet 反向看到：为什么每页得到这 2–5 个 references，而不是只看到预先写好的 RRL 编号。测试应明确禁止退化回纯 hard-coded reference list。
+### 最小解阻条件
 
-## Pending Gate — Academic visual review 尚未完成
+下一次外部 Planner review 必须获得一个真正可由当前工具链下载并打开的视觉 review packet，且必须绑定 implementation commit `2c54c52f287be94c5919bc5886fb52804f94fc49` 或其后续只改变 review transport 的等价提交。推荐最小方案是让 Codex/仓库提供一个 connector 可下载的 GitHub Actions artifact（ZIP 内含四张 rendered PNG、对应 PDF/PPTX locator、`EVIDENCE_MANIFEST.json` 和 render status），或其他能在 Planner 环境中落成实际 PNG/PDF 文件的等价通道。
 
-机械 reviewer 的职责拆分已经正确：当前输出只到 `MECHANICAL_PASS`，`academic_visual_decision=NOT_ASSESSED`，没有再伪造科学视觉 PASS；这部分实现方向通过。
-
-仓库也已经提交四张真实 LibreOffice regression PNG，因此后续 Planner 必须实际查看四张 rendered PNG，并逐页记录页面特异观察后，才能关闭 academic visual gate。本轮检查尝试通过 GitHub connector 读取 PNG；connector 能返回 base64 binary，但当前自动化运行环境没有建立可把该 connector binary 安全解码并交给图像查看器的通道，因此本次没有、也不会写 academic visual PASS。
-
-由于当前已经存在上述两个可由 Executor 修复的 implementation blocker，本轮总体决定为 `REVISE` 而不是用工具可见性问题替代实现返修。下一轮在 Blocker 1/2 修复后必须再次尝试实际图像审阅；若届时仍无法真正看到 rendered PNG，则应 `BLOCKED`，不能 PASS。
+这只是 evidence transport，不得由脚本代替学术判断。即使 packet 完整，最终 decision 仍必须由外部 Planner 实际看图后逐页写页面特异观察。
 
 ## Source Scout
 
-本轮不新增 Source Scout 搜索。当前 commit 已新增 10 条 statistics/biostatistics candidate backlog，并且本轮首先需要修复 corpus integrity 和 retrieval 使用链；继续堆来源不会关闭当前 blocker。
+本轮不新增 Source Scout。当前 round 的 statistics/biostatistics candidate backlog 已被当前合同判定为足够，且上一轮至今没有形成新的 acquisition gap；继续搜索新来源不会解除当前视觉 review blocker。
 
-下一轮 acquisition priority 仍保持：完成本轮 integrity 后，优先做 3–6 张 `statistical-method group meeting` 关键页 benchmark，再根据实际失败模式决定 theorem-heavy / biostatistics validation-study / PhD proposal 的次序。
+如果视觉 gate 后续通过，下一轮最高价值 benchmark 仍是 `statistical-method group meeting`，优先 3–6 张关键页，覆盖 estimator/formula、simulation/uncertainty、model checking 或 failure analysis，再根据实际失败决定 theorem-heavy / biostatistics validation-study / PhD proposal 的顺序。
 
-## CI / release
+## Program maturity
 
-本轮不以版本发布为成功条件。当前 connector 没有返回 `846e3d96...` 的 commit status 条目，因此本次不把 CI 记为 PASS。由于已有 implementation blocker，先修复上述两项并重新运行 Presentation/Marketplace tests 与远端 Actions；下一轮再核 CI。
+当前远未满足 `PROGRAM_MATURE`：现阶段仍只有有限 corpus round 与四页 regression，且外部 academic visual gate 尚未完成。版本、测试数量、source 数量或 mechanical QA 均不能替代多类真实 benchmark 的连续稳定证据。
 
 ## 下一动作
 
-Executor 只修上述 Blocker 1 和 Blocker 2，并准备下一轮可实际视觉审阅的 regression evidence。不要扩充 corpus 数量，不要 bump release，不要重做已经稳定的 editable PPTX/Beamer 路由。
+当前 task 不再要求扩大 corpus，也不要求重新设计 retrieval。先解决 external Planner 对 rendered visual evidence 的可访问性；在真正看完四张 PNG 之前，本 round 保持 `BLOCKED`，不得发布 academic visual PASS 或宣称 program mature。
