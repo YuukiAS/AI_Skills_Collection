@@ -243,6 +243,22 @@ Planner/Reviewer 对当前 HEAD 做独立复核：
 
 用户不读技术附录也必须能理解这轮是否达标、修了什么、现在怎么用。
 
+## Frozen decisions
+
+对应本计划中的 `## 目标`、`## Planner 必须重新读取`、`## 什么算阻断问题` 和 `## 达标与停止规则`。本节只补 Reviewed Handoff v0.5 validator 的英文标准章节名。
+
+## Implementation scope
+
+对应本计划中的 `## 4.1.0 发布要求`、`## 真实安装验收` 和 `## 完整验证`。旧文中的版本数字已由后续 Planner review 明确更新到实际 4.3.0 基线。
+
+## Acceptance and regression gates
+
+对应本计划中的 `## 真实安装验收`、`## 完整验证`、`## GitHub Actions 规则` 和 `## 最终报告格式`。
+
+## Out of scope
+
+对应本计划中的 `## 本任务不做`。
+
 ## 本任务不做
 
 - 不处理新的外部内容 intake。

@@ -1,3 +1,9 @@
+---
+schema: AI_BRIDGE_REVIEWED_RESULT_V1
+task_key: 001_research_writing
+implementation_commit: ed5508ab6e20be905f9c89de2f928b135f8dc5ed
+---
+
 # 001 Research Writing Result
 
 task_key: 001_research_writing

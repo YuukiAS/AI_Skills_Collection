@@ -24,6 +24,25 @@ Regenerate metadata after source changes:
 python skills/tools/documents-media/presentations/shared/references/build_reference_metadata.py
 ```
 
+## Metadata Layers
+
+The committed library has three separate layers:
+
+- Source Registry: candidate and downloaded sources in `reference_sources_manifest.json` and `reference_source_search_matrix.csv`.
+- Inspected Page Library: actual page-level records in `research_slide_reference_index.csv`.
+- Synthesized Knowledge: derived lessons in `reference_sources_manifest.json`.
+
+Do not create an inspected page row unless a specific cached page was opened or rendered. A row must have an actual page number, source checksum, rendered page checksum, visible page title, page-specific observation, and `verification_status=inspected`.
+
+## Source Tiers
+
+Use these tiers when adding sources:
+
+- `PRIMARY_RESEARCH_PRESENTATION`: real research talks, proposal talks, committee decks, conference decks, invited statistics/biostatistics talks, or research group style decks.
+- `SECONDARY_TEACHING_REFERENCE`: lectures, papers, or teaching materials that are useful for statistical intuition but should not drive main-slide layout.
+- `PRESENTATION_GUIDANCE`: communication-lab or writing guidance pages.
+- `CANDIDATE_BACKLOG`: URLs or leads that still need download, cache checksum, and page inspection before page-level use.
+
 ## Local Cache Manifest
 
 Keep a local, untracked cache manifest at:

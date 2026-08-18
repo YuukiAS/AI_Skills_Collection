@@ -94,6 +94,22 @@ decision: PLAN_FROZEN
 - 原来每句话一个 bullet 的说明改成连贯段落，仅在真正需要扫描时保留列表。
 - 英文科研段落去掉空泛价值拔高和 defensive wording，但没有把真实 limitation 删除。
 
+## Frozen decisions
+
+对应本计划中的 `## 冻结决定`、`## 调用边界` 和 `## 不在本任务范围`。本节为 Reviewed Handoff v0.5 validator 的英文标准章节别名，不改变原冻结合同。
+
+## Implementation scope
+
+对应本计划中的 `## 允许修改`。执行范围仍以原中文章节为准。
+
+## Acceptance and regression gates
+
+对应本计划中的 `## 验收门槛` 和 `## 用户可见示例`。验收语义不变。
+
+## Out of scope
+
+对应本计划中的 `## 不在本任务范围`。
+
 ## 不在本任务范围
 
 - 不处理科研论文各阶段 routing；001 单独负责。

@@ -1,3 +1,9 @@
+---
+schema: AI_BRIDGE_REVIEWED_RESULT_V1
+task_key: 003_presentations
+implementation_commit: 71db67690b2ce37523c4d7924244f5892f6d8a4a
+---
+
 # 003 Presentations Result
 
 task_key: 003_presentations

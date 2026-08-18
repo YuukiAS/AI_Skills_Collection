@@ -222,7 +222,7 @@ def draw_result_page(slide, assets: Path, manifest: dict):
     slide.shapes.add_picture(str(chart_path), inch(0.78), inch(1.42), width=inch(7.8))
     rect(slide, "Interpretation\nCalibrated wins recall and burden error;\nBaseline wins Dice only.", 9.0, 1.75, 3.25, 1.3, "soft_teal", "teal", 12.2, True)
     rect(slide, "Meeting decision\nFreeze endpoint priority before ranking methods.", 9.0, 3.65, 3.25, 1.0, "soft_gold", "gold", 12.2, True)
-    add_text(slide, "Reference pull: figure-dominant result pages from RRL-002/RRL-012; style not copied.", 0.95, 6.55, 11.2, 0.35, 8.8, "muted")
+    add_text(slide, "Reference pull: inspected result/interval pages RRL-003/RRL-020/RRL-022/RRL-029; style not copied.", 0.95, 6.55, 11.2, 0.35, 8.8, "muted")
 
 
 def draw_failure_page(slide, assets: Path, manifest: dict):
@@ -230,7 +230,7 @@ def draw_failure_page(slide, assets: Path, manifest: dict):
     manifest["synthetic_phantom_metrics"] = draw_phantom(phantom_path)
     slide.shapes.add_picture(str(phantom_path), inch(0.72), inch(1.38), width=inch(11.85))
     add_text(slide, "Scientific object: same synthetic case, aligned GT/prediction/error overlay, case metric next to visual.", 0.95, 6.35, 11.2, 0.32, 12.2, "ink", True)
-    add_text(slide, "Reference pull: aligned comparison/failure pages from RRL-010/RRL-011/RRL-017; no clinical image or public slide copied.", 0.95, 6.72, 11.2, 0.25, 8.8, "muted")
+    add_text(slide, "Reference pull: inspected image/failure pages RRL-013/RRL-017/RRL-021/RRL-022; no clinical image or public slide copied.", 0.95, 6.72, 11.2, 0.25, 8.8, "muted")
 
 
 def draw_experiment_page(slide, assets: Path, manifest: dict):
@@ -244,7 +244,7 @@ def draw_experiment_page(slide, assets: Path, manifest: dict):
     rect(slide, "Global estimator\ncompare local-only vs summary-sharing", 9.2, 2.08, 3.2, 0.95, "soft_blue", "blue", 11.4, True)
     rect(slide, "Success endpoint\nlesion recall + burden error\nworst-center gap < 5%", 9.2, 3.78, 3.2, 1.05, "soft_red", "red", 11.4, True)
     add_text(slide, "Comparator: local-only model. What moves: score summaries and likelihood updates. What stays local: images, labels, case identifiers.", 0.95, 5.75, 11.3, 0.42, 12.2, "ink", True)
-    add_text(slide, "Reference pull: experiment-design topology from RRL-005/RRL-013; no roadmap/card substitute.", 0.95, 6.55, 11.2, 0.35, 8.8, "muted")
+    add_text(slide, "Reference pull: inspected method/design pages RRL-002/RRL-006/RRL-008/RRL-019; no roadmap/card substitute.", 0.95, 6.55, 11.2, 0.35, 8.8, "muted")
 
 
 def draw_model_page(slide, assets: Path, manifest: dict):
@@ -257,14 +257,14 @@ def draw_model_page(slide, assets: Path, manifest: dict):
         line(slide, x, 2.25, x + 0.25, 2.25, "purple", 1.8)
     add_text(slide, "Toy calibration: E[T|M,center] = alpha_center + gamma_center M. Report beta1 after validation-calibrated correction, not a raw AI burden coefficient.", 1.0, 3.55, 11.0, 0.45, 13, "ink", True)
     rect(slide, "Evidence boundary\nThis page is a generated-variable inference mechanism,\nnot completed clinical validity evidence.", 2.5, 4.65, 8.3, 0.95, "soft_teal", "teal", 12.2, True)
-    add_text(slide, "Reference pull: formula-with-variable-semantics pages from RRL-007/RRL-016 plus Bayesian workflow model-check pages; formula is editable text.", 0.95, 6.55, 11.2, 0.35, 8.8, "muted")
+    add_text(slide, "Reference pull: inspected estimator/model-check pages RRL-024/RRL-025/RRL-035/RRL-038/RRL-044; formula is editable text.", 0.95, 6.55, 11.2, 0.35, 8.8, "muted")
 
 
 SLIDES = [
-    ("Endpoint Choice Changes the Method Ranking", "The method story changes when the endpoint changes.", "RESULT_FIGURE", draw_result_page, ["RRL-002", "RRL-012"]),
-    ("Average Dice Can Hide the Hard Case", "A case page binds image, GT, prediction, error overlay, and metric.", "FAILURE_CASE", draw_failure_page, ["RRL-010", "RRL-011", "RRL-017"]),
-    ("Limited-Information Multi-Center Experiment", "Raw data stay local; shared summaries are judged by endpoint-level evidence.", "EXPERIMENT_DESIGN", draw_experiment_page, ["RRL-005", "RRL-013"]),
-    ("AI Phenotype Error Changes Inference", "Segmentation output is a measured variable whose error can attenuate inference.", "STATISTICAL_MODEL", draw_model_page, ["RRL-007", "RRL-016", "RRL-025"]),
+    ("Endpoint Choice Changes the Method Ranking", "The method story changes when the endpoint changes.", "RESULT_FIGURE", draw_result_page, ["RRL-003", "RRL-020", "RRL-022", "RRL-029"]),
+    ("Average Dice Can Hide the Hard Case", "A case page binds image, GT, prediction, error overlay, and metric.", "FAILURE_CASE", draw_failure_page, ["RRL-013", "RRL-017", "RRL-021", "RRL-022"]),
+    ("Limited-Information Multi-Center Experiment", "Raw data stay local; shared summaries are judged by endpoint-level evidence.", "EXPERIMENT_DESIGN", draw_experiment_page, ["RRL-002", "RRL-006", "RRL-008", "RRL-019"]),
+    ("AI Phenotype Error Changes Inference", "Segmentation output is a measured variable whose error can attenuate inference.", "STATISTICAL_MODEL", draw_model_page, ["RRL-024", "RRL-025", "RRL-035", "RRL-038", "RRL-044"]),
 ]
 
 
@@ -283,8 +283,10 @@ def build_pptx(path: Path, assets: Path, manifest: dict) -> None:
             "title": title,
             "archetype": archetype,
             "reference_ids": refs,
-            "learned_organization": "Use the referenced page function to organize scientific objects and evidence adjacency.",
-            "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical image is copied.",
+                "learned_organization": "Use the referenced page function to organize scientific objects and evidence adjacency.",
+                "reference_rationale": "References are inspected page records with rendered-page checksums; they supply page-function patterns, not copied visual assets.",
+                "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical image is copied.",
+                "what_not_copied": "No source images, full-slide screenshots, institutional templates, public figures, or private clinical data are copied.",
             "expected_scientific_objects": {
                 "RESULT_FIGURE": ["endpoint-wise data", "error intervals", "method ranking", "endpoint decision"],
                 "FAILURE_CASE": ["synthetic image", "GT mask", "prediction mask", "FP/FN overlay", "case metrics"],
@@ -310,6 +312,9 @@ def find_renderer() -> str | None:
             return found
     tools = Path(".cache/tools")
     if tools.exists():
+        extracted = tools / "squashfs-root" / "AppRun"
+        if extracted.exists():
+            return str(extracted)
         for candidate in sorted(tools.glob("LibreOffice*.AppImage")):
             return str(candidate)
     return None
@@ -320,14 +325,30 @@ def render_pptx(pptx_path: Path, out_dir: Path) -> dict:
     render_dir = out_dir / "rendered"
     pdf_dir = out_dir / "pdf"
     profile_dir = out_dir / "lo-profile"
+    home_dir = out_dir / "lo-home"
+    cache_dir = out_dir / "fontconfig-cache"
     render_dir.mkdir(parents=True, exist_ok=True)
     pdf_dir.mkdir(parents=True, exist_ok=True)
     profile_dir.mkdir(parents=True, exist_ok=True)
+    home_dir.mkdir(parents=True, exist_ok=True)
+    cache_dir.mkdir(parents=True, exist_ok=True)
     if not renderer:
         return {"status": "BLOCKED_REAL_PPTX_RENDER", "reason": "no soffice/libreoffice/RESEARCH_PPTX_RENDERER found", "png_count": 0}
     profile_uri = profile_dir.resolve().as_uri()
-    cmd = [renderer, f"-env:UserInstallation={profile_uri}", "--headless", "--convert-to", "pdf", "--outdir", str(pdf_dir), str(pptx_path)]
-    result = subprocess.run(cmd, check=False, capture_output=True, text=True, timeout=120)
+    env = os.environ.copy()
+    env["HOME"] = str(home_dir.resolve())
+    env["XDG_CACHE_HOME"] = str(cache_dir.resolve())
+    cmd = [
+        renderer,
+        f"-env:UserInstallation={profile_uri}",
+        "--headless",
+        "--convert-to",
+        "pdf",
+        "--outdir",
+        str(pdf_dir.resolve()),
+        str(pptx_path.resolve()),
+    ]
+    result = subprocess.run(cmd, check=False, capture_output=True, text=True, timeout=120, env=env)
     pdf_candidates = sorted(pdf_dir.glob("*.pdf"))
     if result.returncode != 0 or not pdf_candidates:
         return {"status": "BLOCKED_REAL_PPTX_RENDER", "renderer": renderer, "returncode": result.returncode, "stderr": result.stderr[-1000:], "png_count": 0}

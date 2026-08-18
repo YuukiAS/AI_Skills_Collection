@@ -190,36 +190,54 @@ class PresentationSharedTests(unittest.TestCase):
         ]:
             self.assertTrue((references / name).exists(), name)
         index_text = (references / "research_slide_reference_index.csv").read_text(encoding="utf-8")
-        self.assertIn("source_url,local_cache_file,page_number,page_function,scientific_object,evidence_type", index_text)
+        self.assertIn("source_url,local_cache_file,actual_page_number,page_function,scientific_object,evidence_type", index_text)
         self.assertIn("RESULT_FIGURE", index_text)
         self.assertIn("SUPERVISOR_DECISION", index_text)
+        self.assertNotIn("metadata page-function record", index_text)
         rows = list(csv.DictReader(index_text.splitlines()))
-        self.assertGreaterEqual(len(rows), 60)
+        self.assertGreaterEqual(len(rows), 40)
         required_fields = {
             "reference_id",
-            "statistical_subdomain",
+            "source_id",
+            "talk_title",
             "local_cache_file",
+            "actual_page_number",
             "scientific_object",
             "evidence_type",
             "approximate_figure_text_ratio",
             "uncertainty_handling",
             "negative_result_handling",
-            "academic_credibility",
+            "why_this_specific_page_works",
+            "source_file_sha256",
+            "rendered_page_sha256",
+            "visible_page_title",
+            "short_page_specific_observation",
             "suitable_contexts",
         }
         self.assertTrue(required_fields.issubset(rows[0]))
         for row in rows:
             self.assertTrue(row["source_url"])
-            self.assertTrue(row["page_number"])
+            self.assertTrue(row["actual_page_number"].isdigit())
             self.assertTrue(row["page_function"])
             self.assertTrue(row["scientific_object"])
             self.assertTrue(row["evidence_type"])
             self.assertTrue(row["what_to_learn"])
             self.assertTrue(row["what_not_to_copy"])
             self.assertTrue(row["rights_note"])
+            self.assertEqual(row["verification_status"], "inspected")
+            self.assertEqual(len(row["source_file_sha256"]), 64)
+            self.assertEqual(len(row["rendered_page_sha256"]), 64)
         manifest = json.loads((references / "reference_sources_manifest.json").read_text(encoding="utf-8"))
         self.assertGreaterEqual(len(manifest["candidate_sources"]), 50)
-        self.assertGreaterEqual(len([source for source in manifest["candidate_sources"] if source["domain_family"] in {"statistics", "biostatistics"}]), 30)
+        self.assertEqual(
+            manifest["retrieval_priority"],
+            ["PRIMARY_RESEARCH_PRESENTATION", "SECONDARY_TEACHING_REFERENCE", "PRESENTATION_GUIDANCE", "CANDIDATE_BACKLOG"],
+        )
+        tiers = {source["source_tier"] for source in manifest["candidate_sources"]}
+        self.assertTrue({"PRIMARY_RESEARCH_PRESENTATION", "SECONDARY_TEACHING_REFERENCE", "PRESENTATION_GUIDANCE", "CANDIDATE_BACKLOG"}.issubset(tiers))
+        stats_sources = [source for source in manifest["candidate_sources"] if source["domain_family"] in {"statistics", "biostatistics"}]
+        self.assertGreaterEqual(len(stats_sources), 30)
+        self.assertGreaterEqual(len([source for source in stats_sources if source["verification_status"] == "candidate_backlog"]), 10)
 
     def test_research_group_meeting_final_validation_rejects_unknown_and_checks_evidence_refs(self) -> None:
         draft = markdown_to_deck_plan.markdown_to_deck_plan(
@@ -254,6 +272,11 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertFalse(manifest["generator_may_pass"])
             self.assertEqual(manifest["editable_slide_count"], 4)
             self.assertEqual(len(manifest["slides"]), 4)
+            expected_render = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/expected_render"
+            for slide_number in range(1, 5):
+                png = expected_render / f"slide-{slide_number}.png"
+                self.assertTrue(png.exists(), png)
+                self.assertGreater(png.stat().st_size, 10_000)
             for slide in manifest["slides"]:
                 self.assertGreaterEqual(len(slide["reference_ids"]), 2)
                 self.assertTrue(slide["expected_scientific_objects"])
@@ -268,9 +291,12 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(review_result.returncode, 0, review_result.stderr)
             review_payload = json.loads(review_result.stdout)
             review = json.loads(Path(review_payload["review"]).read_text(encoding="utf-8"))
+            self.assertEqual(review["review_type"], "MECHANICAL_VISUAL_REVIEW")
+            self.assertEqual(review["academic_visual_decision"], "NOT_ASSESSED")
+            self.assertFalse((Path(tmp) / "SCIENTIFIC_VISUAL_REVIEW.json").exists())
             self.assertTrue(review.get("reviewer_independent_from_generator") or review["status"] == "BLOCKED_REAL_PPTX_RENDER")
             if render["status"] == "ok":
-                self.assertEqual(review["status"], "PASS")
+                self.assertEqual(review["status"], "MECHANICAL_PASS")
                 self.assertEqual(review["rendered_png_count"], 4)
             else:
                 self.assertEqual(review["status"], "BLOCKED_REAL_PPTX_RENDER")

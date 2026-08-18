@@ -1,3 +1,9 @@
+---
+schema: AI_BRIDGE_REVIEWED_RESULT_V1
+task_key: 002_writing_style
+implementation_commit: 0ecd81fd82157a4f2dbc53a942b2070b1624c4f6
+---
+
 # 002 Writing Style Result
 
 task_key: 002_writing_style

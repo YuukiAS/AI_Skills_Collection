@@ -1,0 +1,16 @@
+{
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "task_key": "009_visual_reviewer_split",
+  "state": "PLAN_FROZEN",
+  "review_round": 0,
+  "max_review_rounds": 2,
+  "plan_revision": 0,
+  "max_plan_revisions": 1,
+  "base_commit": "e2bb7260b9543e4a4cdb2de389de13089b067a53",
+  "base_branch": "main",
+  "implementation_commit": "",
+  "ci_required": false,
+  "ci_status": "NOT_REQUIRED",
+  "last_review_decision": "",
+  "next_action": "READY_FOR_EXTERNAL_PLANNER_REVIEW"
+}

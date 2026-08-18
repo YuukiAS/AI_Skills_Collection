@@ -87,6 +87,22 @@ decision: PLAN_FROZEN
 - render/visual QA 如何决定 `complete`；
 - 没有采用的新 plugin/新 skill/整页图片默认方案及原因。
 
+## Frozen decisions
+
+对应本计划中的 `## 冻结决定`、`## 研究型演示验收案例`、`## 商业演示边界` 和 `## 不在本任务范围`。本节只补 Reviewed Handoff v0.5 validator 的英文标准章节名。
+
+## Implementation scope
+
+对应本计划中的 `## 允许修改`。执行范围仍以原中文章节为准。
+
+## Acceptance and regression gates
+
+对应本计划中的 `## 视觉和文字质量门槛`、`## 完整验证` 和 `## 最终报告必须展示`。
+
+## Out of scope
+
+对应本计划中的 `## 不在本任务范围`。
+
 ## 不在本任务范围
 
 - 不实际制作某一个具体项目的 PPT 作为仓库 release artifact；可以用 fixture/示例验证路由。
