@@ -23,32 +23,16 @@ jobs:
       DEBIAN_FRONTEND: noninteractive
       IMPLEMENTATION_COMMIT: 2c54c52f287be94c5919bc5886fb52804f94fc49
       REVIEW_ROUND: "2"
-      REGRESSION_DIR: .cache/research-group-meeting-regression-current
       PACKET_DIR: .cache/research-presentation-visual-review-packet
+      PACKET_SOURCE_DIR: tests/fixtures/presentations/research_group_meeting/visual_review_packet_source
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Install render tooling
-        timeout-minutes: 12
-        run: |
-          if command -v soffice >/dev/null 2>&1 || command -v libreoffice >/dev/null 2>&1; then
-            echo "LibreOffice already available on runner."
-          else
-            timeout 600s bash -c 'sudo apt-get update && sudo apt-get -o DPkg::Lock::Timeout=120 install -y --no-install-recommends libreoffice-impress poppler-utils fonts-dejavu-core fonts-liberation'
-          fi
-          command -v soffice || command -v libreoffice
-          command -v pdftoppm
-
-      - name: Install Python dependencies
-        run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install pillow python-pptx
-
       - name: Build visual review packet
         run: |
           python3 tests/fixtures/presentations/research_group_meeting/build_visual_review_packet.py \
-            --regression-dir "$REGRESSION_DIR" \
+            --source-dir "$PACKET_SOURCE_DIR" \
             --packet-dir "$PACKET_DIR" \
             --zip-path ".cache/research-presentation-visual-review-packet.zip" \
             --implementation-commit "$IMPLEMENTATION_COMMIT" \

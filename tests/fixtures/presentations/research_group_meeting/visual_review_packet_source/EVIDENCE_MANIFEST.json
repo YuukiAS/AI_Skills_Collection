@@ -1,0 +1,424 @@
+{
+  "status": "GENERATED_SOURCE_ARTIFACTS_ONLY",
+  "generator_may_pass": false,
+  "rights_note": "No downloaded public deck, private CARE figure, whole-slide screenshot, or clinical image is copied.",
+  "slides": [
+    {
+      "slide": 1,
+      "title": "Endpoint Choice Changes the Method Ranking",
+      "archetype": "RESULT_FIGURE",
+      "reference_ids": [
+        "RRL-015",
+        "RRL-021",
+        "RRL-030",
+        "RRL-016",
+        "RRL-023"
+      ],
+      "reference_retrieval": {
+        "query": {
+          "intent": "Show endpoint-wise quantitative results where interpretation changes with metric choice.",
+          "page_functions": [
+            "RESULT_FIGURE",
+            "CONFIDENCE_INTERVAL",
+            "SENSITIVITY_ANALYSIS",
+            "REAL_DATA_APPLICATION"
+          ],
+          "scientific_domain": [
+            "medical imaging",
+            "statistics",
+            "biostatistics"
+          ],
+          "statistical_subdomain": [
+            "lesion segmentation",
+            "annotation variability",
+            "survey nonresponse / MRP",
+            "Bayesian workflow"
+          ],
+          "evidence_types": [
+            "quantitative plot",
+            "quantitative table",
+            "uncertainty interval",
+            "time-series interval",
+            "subgroup comparison"
+          ],
+          "organization_lesson": "Put the endpoint, comparator, uncertainty, and decision implication adjacent to the main result graphic."
+        },
+        "candidate_ids": [
+          "RRL-015",
+          "RRL-021",
+          "RRL-030",
+          "RRL-016",
+          "RRL-023",
+          "RRL-017",
+          "RRL-003",
+          "RRL-033"
+        ],
+        "selected_ids": [
+          "RRL-015",
+          "RRL-021",
+          "RRL-030",
+          "RRL-016",
+          "RRL-023"
+        ],
+        "source_tiers": {
+          "RRL-015": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-021": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-030": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-016": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-023": "PRIMARY_RESEARCH_PRESENTATION"
+        },
+        "ranking_relevance_reason": {
+          "RRL-015": "page_function=CONFIDENCE_INTERVAL matches query; evidence_type=uncertainty interval matches query; domain=medical imaging matches query; subdomain=annotation variability matches query; semantic tokens overlap: confidence, interval, show, uncertainty; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-021": "page_function=RESULT_FIGURE matches query; evidence_type=quantitative table matches query; domain=medical imaging matches query; subdomain=lesion segmentation matches query; semantic tokens overlap: endpoint, result, subgroup, table; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-030": "page_function=CONFIDENCE_INTERVAL matches query; evidence_type=time-series interval matches query; domain=biostatistics matches query; subdomain=survey nonresponse / MRP matches query; semantic tokens overlap: interval, plot, show, uncertainty; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-016": "page_function=REAL_DATA_APPLICATION matches query; evidence_type=subgroup comparison matches query; domain=medical imaging matches query; subdomain=annotation variability matches query; semantic tokens overlap: subgroup, table, with; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-023": "page_function=RESULT_FIGURE matches query; domain=statistics matches query; subdomain=Bayesian workflow matches query; semantic tokens overlap: interval, plot, uncertainty, with; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3"
+        },
+        "organization_lesson": "Put the endpoint, comparator, uncertainty, and decision implication adjacent to the main result graphic.",
+        "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied."
+      },
+      "learned_organization": "Put the endpoint, comparator, uncertainty, and decision implication adjacent to the main result graphic.",
+      "reference_rationale": "References are selected by an auditable query over inspected page records with rendered-page checksums and inspection evidence; they supply page-function patterns, not copied visual assets.",
+      "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical image is copied.",
+      "what_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied.",
+      "expected_scientific_objects": [
+        "endpoint-wise data",
+        "error intervals",
+        "method ranking",
+        "endpoint decision"
+      ]
+    },
+    {
+      "slide": 2,
+      "title": "Average Dice Can Hide the Hard Case",
+      "archetype": "FAILURE_CASE",
+      "reference_ids": [
+        "RRL-022",
+        "RRL-024",
+        "RRL-018",
+        "RRL-013",
+        "RRL-025"
+      ],
+      "reference_retrieval": {
+        "query": {
+          "intent": "Show a single synthetic hard case with aligned image, GT, prediction, error overlay, and metrics.",
+          "page_functions": [
+            "MEDICAL_IMAGE_COMPARISON",
+            "NEGATIVE_RESULT",
+            "MODEL_CHECK",
+            "RESULT_FIGURE"
+          ],
+          "scientific_domain": [
+            "medical imaging",
+            "statistics"
+          ],
+          "statistical_subdomain": [
+            "lesion segmentation",
+            "annotation variability",
+            "Bayesian workflow"
+          ],
+          "evidence_types": [
+            "image comparison",
+            "model comparison",
+            "negative/fix title",
+            "posterior predictive check"
+          ],
+          "organization_lesson": "Keep the failing object visible next to the metric so the audience can inspect the mechanism, not only the score."
+        },
+        "candidate_ids": [
+          "RRL-022",
+          "RRL-024",
+          "RRL-018",
+          "RRL-013",
+          "RRL-025",
+          "RRL-021",
+          "RRL-023",
+          "RRL-043"
+        ],
+        "selected_ids": [
+          "RRL-022",
+          "RRL-024",
+          "RRL-018",
+          "RRL-013",
+          "RRL-025"
+        ],
+        "source_tiers": {
+          "RRL-022": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-024": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-018": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-013": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-025": "PRIMARY_RESEARCH_PRESENTATION"
+        },
+        "ranking_relevance_reason": {
+          "RRL-022": "page_function=MEDICAL_IMAGE_COMPARISON matches query; evidence_type=image comparison matches query; domain=medical imaging matches query; subdomain=lesion segmentation matches query; semantic tokens overlap: aligned, and, case, gt,, image,, model; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-024": "page_function=MODEL_CHECK matches query; evidence_type=posterior predictive check matches query; domain=statistics matches query; subdomain=Bayesian workflow matches query; semantic tokens overlap: case, check, comparison, model, with; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-018": "page_function=NEGATIVE_RESULT matches query; evidence_type=model comparison matches query; domain=medical imaging matches query; subdomain=annotation variability matches query; semantic tokens overlap: and, negative; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-013": "page_function=MEDICAL_IMAGE_COMPARISON matches query; domain=medical imaging matches query; subdomain=annotation variability matches query; semantic tokens overlap: image, medical, metrics., show, with; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-025": "page_function=NEGATIVE_RESULT matches query; domain=statistics matches query; subdomain=Bayesian workflow matches query; semantic tokens overlap: and, check, comparison, fix, model, predictive; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3"
+        },
+        "organization_lesson": "Keep the failing object visible next to the metric so the audience can inspect the mechanism, not only the score.",
+        "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied."
+      },
+      "learned_organization": "Keep the failing object visible next to the metric so the audience can inspect the mechanism, not only the score.",
+      "reference_rationale": "References are selected by an auditable query over inspected page records with rendered-page checksums and inspection evidence; they supply page-function patterns, not copied visual assets.",
+      "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical image is copied.",
+      "what_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied.",
+      "expected_scientific_objects": [
+        "synthetic image",
+        "GT mask",
+        "prediction mask",
+        "FP/FN overlay",
+        "case metrics"
+      ]
+    },
+    {
+      "slide": 3,
+      "title": "Limited-Information Multi-Center Experiment",
+      "archetype": "EXPERIMENT_DESIGN",
+      "reference_ids": [
+        "RRL-002",
+        "RRL-008",
+        "RRL-019",
+        "RRL-005",
+        "RRL-009"
+      ],
+      "reference_retrieval": {
+        "query": {
+          "intent": "Explain a multi-center experiment with local data, transmitted summaries, estimator, comparator, and endpoint gate.",
+          "page_functions": [
+            "EXPERIMENT_DESIGN",
+            "METHOD_DIAGRAM",
+            "ESTIMATOR",
+            "NEXT_EXPERIMENT",
+            "ASSUMPTION"
+          ],
+          "scientific_domain": [
+            "medical imaging",
+            "statistics",
+            "research communication"
+          ],
+          "statistical_subdomain": [
+            "lesion segmentation",
+            "hybrid resource-bound analysis",
+            "doctoral update",
+            "survey nonresponse / MRP"
+          ],
+          "evidence_types": [
+            "task overview",
+            "method mechanism",
+            "estimator pipeline",
+            "planned evidence",
+            "assumption / challenge"
+          ],
+          "organization_lesson": "Connect units, local estimators, shared summaries, and evaluation endpoints in one inspectable flow."
+        },
+        "candidate_ids": [
+          "RRL-002",
+          "RRL-008",
+          "RRL-019",
+          "RRL-005",
+          "RRL-009",
+          "RRL-014",
+          "RRL-028",
+          "RRL-035"
+        ],
+        "selected_ids": [
+          "RRL-002",
+          "RRL-008",
+          "RRL-019",
+          "RRL-005",
+          "RRL-009"
+        ],
+        "source_tiers": {
+          "RRL-002": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-008": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-019": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-005": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-009": "PRIMARY_RESEARCH_PRESENTATION"
+        },
+        "ranking_relevance_reason": {
+          "RRL-002": "page_function=METHOD_DIAGRAM matches query; evidence_type=method mechanism matches query; domain=research communication matches query; subdomain=doctoral update matches query; semantic tokens overlap: and, diagram, explain, mechanism, method; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-008": "page_function=ASSUMPTION matches query; evidence_type=assumption / challenge matches query; domain=statistics matches query; subdomain=hybrid resource-bound analysis matches query; semantic tokens overlap: and, challenge, method, with; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-019": "page_function=EXPERIMENT_DESIGN matches query; evidence_type=task overview matches query; domain=medical imaging matches query; subdomain=lesion segmentation matches query; semantic tokens overlap: and, data,, method; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-005": "page_function=NEXT_EXPERIMENT matches query; evidence_type=planned evidence matches query; domain=research communication matches query; subdomain=doctoral update matches query; semantic tokens overlap: and, next; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-009": "page_function=ESTIMATOR matches query; evidence_type=estimator pipeline matches query; domain=statistics matches query; subdomain=hybrid resource-bound analysis matches query; semantic tokens overlap: and, estimator; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3"
+        },
+        "organization_lesson": "Connect units, local estimators, shared summaries, and evaluation endpoints in one inspectable flow.",
+        "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied."
+      },
+      "learned_organization": "Connect units, local estimators, shared summaries, and evaluation endpoints in one inspectable flow.",
+      "reference_rationale": "References are selected by an auditable query over inspected page records with rendered-page checksums and inspection evidence; they supply page-function patterns, not copied visual assets.",
+      "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical image is copied.",
+      "what_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied.",
+      "expected_scientific_objects": [
+        "centers",
+        "local image/label",
+        "local estimator",
+        "transmitted summary",
+        "global estimator",
+        "endpoint evaluation"
+      ]
+    },
+    {
+      "slide": 4,
+      "title": "AI Phenotype Error Changes Inference",
+      "archetype": "STATISTICAL_MODEL",
+      "reference_ids": [
+        "RRL-044",
+        "RRL-027",
+        "RRL-020",
+        "RRL-028",
+        "RRL-007"
+      ],
+      "reference_retrieval": {
+        "query": {
+          "intent": "Show a measured-variable inference mechanism where AI phenotype error changes the target estimand.",
+          "page_functions": [
+            "STATISTICAL_MODEL",
+            "BAYESIAN_MODEL",
+            "ESTIMATOR",
+            "MODEL_CHECK",
+            "POSTERIOR_DIAGNOSTIC"
+          ],
+          "scientific_domain": [
+            "statistics",
+            "biostatistics",
+            "medical imaging"
+          ],
+          "statistical_subdomain": [
+            "lesion segmentation",
+            "Bayesian workflow",
+            "Bayesian priors",
+            "Bayesian data analysis",
+            "survey nonresponse / MRP"
+          ],
+          "evidence_types": [
+            "model objective",
+            "Bayesian model",
+            "estimator formula",
+            "modeling workflow",
+            "posterior diagnostic"
+          ],
+          "organization_lesson": "Name the estimand, observed proxy, validation subset, model correction, and inference boundary explicitly."
+        },
+        "candidate_ids": [
+          "RRL-044",
+          "RRL-027",
+          "RRL-020",
+          "RRL-028",
+          "RRL-007",
+          "RRL-036",
+          "RRL-024",
+          "RRL-038"
+        ],
+        "selected_ids": [
+          "RRL-044",
+          "RRL-027",
+          "RRL-020",
+          "RRL-028",
+          "RRL-007"
+        ],
+        "source_tiers": {
+          "RRL-044": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-027": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-020": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-028": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-007": "PRIMARY_RESEARCH_PRESENTATION"
+        },
+        "ranking_relevance_reason": {
+          "RRL-044": "page_function=BAYESIAN_MODEL matches query; evidence_type=modeling workflow matches query; domain=statistics matches query; subdomain=Bayesian data analysis matches query; semantic tokens overlap: bayesian, inference, model, posterior, the, workflow; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-027": "page_function=POSTERIOR_DIAGNOSTIC matches query; evidence_type=posterior diagnostic matches query; domain=statistics matches query; subdomain=Bayesian workflow matches query; semantic tokens overlap: diagnostic, posterior, show, the; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-020": "page_function=STATISTICAL_MODEL matches query; evidence_type=model objective matches query; domain=medical imaging matches query; subdomain=lesion segmentation matches query; semantic tokens overlap: model, objective, the; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-028": "page_function=ESTIMATOR matches query; evidence_type=estimator formula matches query; domain=biostatistics matches query; subdomain=survey nonresponse / MRP matches query; semantic tokens overlap: estimator, target, the; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-007": "page_function=BAYESIAN_MODEL matches query; evidence_type=Bayesian model matches query; domain=statistics matches query; semantic tokens overlap: bayesian, model, posterior, show, the; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3"
+        },
+        "organization_lesson": "Name the estimand, observed proxy, validation subset, model correction, and inference boundary explicitly.",
+        "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied."
+      },
+      "learned_organization": "Name the estimand, observed proxy, validation subset, model correction, and inference boundary explicitly.",
+      "reference_rationale": "References are selected by an auditable query over inspected page records with rendered-page checksums and inspection evidence; they supply page-function patterns, not copied visual assets.",
+      "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical image is copied.",
+      "what_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied.",
+      "expected_scientific_objects": [
+        "estimand",
+        "observed AI phenotype",
+        "measurement error",
+        "validation subset",
+        "inference target"
+      ]
+    }
+  ],
+  "synthetic_endpoint_data": {
+    "data": {
+      "Dice": {
+        "Baseline": [
+          0.82,
+          0.03
+        ],
+        "Calibrated": [
+          0.79,
+          0.04
+        ],
+        "Federated": [
+          0.76,
+          0.05
+        ],
+        "Local-only": [
+          0.72,
+          0.06
+        ]
+      },
+      "Lesion recall": {
+        "Baseline": [
+          0.58,
+          0.07
+        ],
+        "Calibrated": [
+          0.74,
+          0.05
+        ],
+        "Federated": [
+          0.69,
+          0.06
+        ],
+        "Local-only": [
+          0.63,
+          0.07
+        ]
+      },
+      "Burden error": {
+        "Baseline": [
+          0.31,
+          0.05
+        ],
+        "Calibrated": [
+          0.18,
+          0.04
+        ],
+        "Federated": [
+          0.22,
+          0.05
+        ],
+        "Local-only": [
+          0.35,
+          0.06
+        ]
+      }
+    },
+    "best_by_endpoint": {
+      "Dice": "Baseline",
+      "Lesion recall": "Calibrated",
+      "Burden error": "Calibrated"
+    }
+  },
+  "synthetic_phantom_metrics": {
+    "dice": 0.775,
+    "lesion_recall": 0.765,
+    "burden_error": -0.026,
+    "tp": 1372,
+    "fp": 376,
+    "fn": 422
+  },
+  "pptx": ".cache/research-group-meeting-regression-current/research_group_meeting_regression.pptx",
+  "editable_slide_count": 4
+}

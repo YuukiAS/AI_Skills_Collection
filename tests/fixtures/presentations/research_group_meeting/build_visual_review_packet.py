@@ -23,7 +23,23 @@ FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures" / "presentations" / "research_gr
 GENERATOR = FIXTURE_ROOT / "generate_research_group_meeting_regression.py"
 REVIEWER = FIXTURE_ROOT / "review_research_group_meeting_regression.py"
 EXPECTED_RENDER = FIXTURE_ROOT / "expected_render"
+COMMITTED_SOURCE = FIXTURE_ROOT / "visual_review_packet_source"
 CORE_IMPLEMENTATION_COMMIT = "2c54c52f287be94c5919bc5886fb52804f94fc49"
+REQUIRED_PACKET_FILES = [
+    "EVIDENCE_MANIFEST.json",
+    "RENDER_STATUS.json",
+    "MECHANICAL_VISUAL_REVIEW.json",
+    "research_group_meeting_regression.pptx",
+    "pdf/research_group_meeting_regression.pdf",
+    "rendered/slide-1.png",
+    "rendered/slide-2.png",
+    "rendered/slide-3.png",
+    "rendered/slide-4.png",
+    "expected_render/slide-1.png",
+    "expected_render/slide-2.png",
+    "expected_render/slide-3.png",
+    "expected_render/slide-4.png",
+]
 
 
 def sha256(path: Path) -> str:
@@ -53,6 +69,20 @@ def require_file(path: Path) -> Path:
 def copy_file(source: Path, destination: Path) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, destination)
+
+
+def verify_packet_source(source_dir: Path) -> None:
+    missing = [path for path in REQUIRED_PACKET_FILES if not (source_dir / path).is_file()]
+    if missing:
+        raise SystemExit(f"packet source is missing required files: {missing}")
+    render = json.loads((source_dir / "RENDER_STATUS.json").read_text(encoding="utf-8"))
+    review = json.loads((source_dir / "MECHANICAL_VISUAL_REVIEW.json").read_text(encoding="utf-8"))
+    if render.get("status") != "ok" or render.get("png_count") != 4:
+        raise SystemExit(f"packet source does not record a successful four-PNG render: {render}")
+    if review.get("status") != "MECHANICAL_PASS":
+        raise SystemExit(f"packet source mechanical review did not pass: {review.get('status')}")
+    if review.get("academic_visual_decision") != "NOT_ASSESSED":
+        raise SystemExit("packet source must not claim academic visual PASS")
 
 
 def verify_render_chain(regression_dir: Path) -> dict:
@@ -130,6 +160,26 @@ def write_zip(packet_dir: Path, zip_path: Path) -> None:
                 archive.write(path, path.relative_to(packet_dir))
 
 
+def compare_packet_pngs(packet_dir: Path) -> list[dict[str, object]]:
+    comparisons = []
+    for slide in range(1, 5):
+        generated = require_file(packet_dir / "rendered" / f"slide-{slide}.png")
+        expected = require_file(packet_dir / "expected_render" / f"slide-{slide}.png")
+        generated_sha = sha256(generated)
+        expected_sha = sha256(expected)
+        comparisons.append(
+            {
+                "slide": slide,
+                "generated": str(generated.relative_to(packet_dir)),
+                "expected": str(expected.relative_to(packet_dir)),
+                "generated_sha256": generated_sha,
+                "expected_sha256": expected_sha,
+                "byte_matches_committed_golden": generated_sha == expected_sha,
+            }
+        )
+    return comparisons
+
+
 def assemble_packet(regression_dir: Path, packet_dir: Path, implementation_commit: str, transport_commit: str, zip_path: Path | None, strict_golden_pngs: bool) -> dict:
     verify_render_chain(regression_dir)
     golden_comparison = verify_golden_pngs(regression_dir, strict=strict_golden_pngs)
@@ -190,16 +240,61 @@ def assemble_packet(regression_dir: Path, packet_dir: Path, implementation_commi
     }
 
 
+def assemble_packet_from_source(source_dir: Path, packet_dir: Path, implementation_commit: str, transport_commit: str, zip_path: Path | None) -> dict:
+    verify_packet_source(source_dir)
+    if packet_dir.exists():
+        shutil.rmtree(packet_dir)
+    shutil.copytree(source_dir, packet_dir)
+    (packet_dir / "VISUAL_REVIEW_PACKET.md").write_text(
+        "\n".join(
+            [
+                "# Research Presentation Visual Review Packet",
+                "",
+                f"implementation_commit: {implementation_commit}",
+                f"transport_commit: {transport_commit}",
+                "review_round: 2",
+                "packet_scope: evidence transport only",
+                "academic_visual_decision: NOT_ASSESSED",
+                "",
+                "This packet is for external academic visual review. It does not claim academic visual PASS.",
+                "The rendered PNGs in this packet are committed synthetic golden regression renders produced by the real PPTX -> LibreOffice -> PDF -> PNG chain and validated by the mechanical reviewer.",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    manifest_path = write_packet_manifest(packet_dir, implementation_commit, transport_commit, compare_packet_pngs(packet_dir))
+    if zip_path is not None:
+        write_zip(packet_dir, zip_path)
+    return {
+        "packet_dir": str(packet_dir),
+        "packet_manifest": str(manifest_path),
+        "zip_path": str(zip_path) if zip_path is not None else None,
+        "file_count": len([path for path in packet_dir.rglob("*") if path.is_file()]),
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--regression-dir", type=Path, default=Path(".cache/research-group-meeting-regression-current"))
     parser.add_argument("--packet-dir", type=Path, default=Path(".cache/research-presentation-visual-review-packet"))
     parser.add_argument("--zip-path", type=Path, default=Path(".cache/research-presentation-visual-review-packet.zip"))
+    parser.add_argument("--source-dir", type=Path, default=None, help="Assemble from a committed visual packet source directory.")
     parser.add_argument("--implementation-commit", default=CORE_IMPLEMENTATION_COMMIT)
     parser.add_argument("--transport-commit", default=os.environ.get("GITHUB_SHA", "LOCAL_OR_EXTERNAL_RUNNER"))
     parser.add_argument("--skip-generate", action="store_true", help="Assemble from an existing regression directory.")
     parser.add_argument("--strict-golden-pngs", action="store_true", help="Fail if regenerated PNG bytes differ from committed golden renders.")
     args = parser.parse_args()
+    if args.source_dir is not None:
+        result = assemble_packet_from_source(
+            args.source_dir,
+            args.packet_dir,
+            args.implementation_commit,
+            args.transport_commit,
+            args.zip_path,
+        )
+        print(json.dumps(result, indent=2))
+        return 0
     if not args.skip_generate:
         run([sys.executable, str(GENERATOR), "--out-dir", str(args.regression_dir)])
         run([sys.executable, str(REVIEWER), "--out-dir", str(args.regression_dir)])

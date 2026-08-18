@@ -361,6 +361,29 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertIn("research_group_meeting_regression.pptx", packet_paths)
                 self.assertIn("EVIDENCE_MANIFEST.json", packet_paths)
                 self.assertIn("RENDER_STATUS.json", packet_paths)
+                source_packet_dir = Path(tmp) / "visual-review-packet-source"
+                source_packet_zip = Path(tmp) / "visual-review-packet-source.zip"
+                source_packet_result = subprocess.run(
+                    [
+                        sys.executable,
+                        str(packet_builder),
+                        "--source-dir",
+                        str(REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source"),
+                        "--packet-dir",
+                        str(source_packet_dir),
+                        "--zip-path",
+                        str(source_packet_zip),
+                        "--implementation-commit",
+                        "TEST_IMPLEMENTATION_COMMIT",
+                        "--transport-commit",
+                        "TEST_TRANSPORT_COMMIT",
+                    ],
+                    check=False,
+                    capture_output=True,
+                    text=True,
+                )
+                self.assertEqual(source_packet_result.returncode, 0, source_packet_result.stderr)
+                self.assertTrue(source_packet_zip.exists())
             else:
                 self.assertEqual(review["status"], "BLOCKED_REAL_PPTX_RENDER")
             with ZipFile(payload["pptx"]) as deck:

@@ -1,0 +1,224 @@
+{
+  "review_type": "MECHANICAL_VISUAL_REVIEW",
+  "status": "MECHANICAL_PASS",
+  "academic_visual_decision": "NOT_ASSESSED",
+  "reviewer_independent_from_generator": true,
+  "criteria_scope": [
+    "png_from_real_pptx_render",
+    "dimensions_nontrivial",
+    "not_blank",
+    "contrast_present",
+    "dominant_object_present",
+    "edge_clipping_not_obvious",
+    "text_density_proxy_bounded",
+    "required_object_contract_present"
+  ],
+  "editable_slide_count": 4,
+  "rendered_png_count": 4,
+  "render_status": {
+    "status": "ok",
+    "renderer": ".cache/tools/squashfs-root/AppRun",
+    "pptx_to_pdf": ".cache/research-group-meeting-regression-current/pdf/research_group_meeting_regression.pdf",
+    "png_count": 4,
+    "rendered_pngs": [
+      ".cache/research-group-meeting-regression-current/rendered/slide-1.png",
+      ".cache/research-group-meeting-regression-current/rendered/slide-2.png",
+      ".cache/research-group-meeting-regression-current/rendered/slide-3.png",
+      ".cache/research-group-meeting-regression-current/rendered/slide-4.png"
+    ],
+    "returncode": 0
+  },
+  "pptx_object_summary": {
+    "editable_slide_count": 4,
+    "media_count": 2,
+    "shape_count": 56,
+    "picture_count": 2
+  },
+  "slide_reviews": [
+    {
+      "slide": 1,
+      "archetype": "RESULT_FIGURE",
+      "status": "MECHANICAL_PASS",
+      "criteria": {
+        "png_from_real_pptx_render": "PASS",
+        "dimensions_nontrivial": "PASS",
+        "not_blank": "PASS",
+        "contrast_present": "PASS",
+        "dominant_object_present": "PASS",
+        "edge_clipping_not_obvious": "PASS",
+        "text_density_proxy_bounded": "PASS",
+        "required_object_contract_present": "PASS"
+      },
+      "metrics": {
+        "path": ".cache/research-group-meeting-regression-current/rendered/slide-1.png",
+        "width": 2134,
+        "height": 1200,
+        "blank_area_ratio": 0.8123,
+        "contrast_range": 225,
+        "dominant_object_area": 0.895,
+        "edge_margin_px": 0,
+        "text_density_proxy": 0.0538,
+        "content_bbox": [
+          0,
+          0,
+          2133,
+          1073
+        ]
+      },
+      "reference_ids": [
+        "RRL-015",
+        "RRL-021",
+        "RRL-030",
+        "RRL-016",
+        "RRL-023"
+      ],
+      "expected_object_contract": [
+        "endpoint-wise data",
+        "error intervals",
+        "method ranking",
+        "endpoint decision"
+      ],
+      "style_boundary": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical image is copied."
+    },
+    {
+      "slide": 2,
+      "archetype": "FAILURE_CASE",
+      "status": "MECHANICAL_PASS",
+      "criteria": {
+        "png_from_real_pptx_render": "PASS",
+        "dimensions_nontrivial": "PASS",
+        "not_blank": "PASS",
+        "contrast_present": "PASS",
+        "dominant_object_present": "PASS",
+        "edge_clipping_not_obvious": "PASS",
+        "text_density_proxy_bounded": "PASS",
+        "required_object_contract_present": "PASS"
+      },
+      "metrics": {
+        "path": ".cache/research-group-meeting-regression-current/rendered/slide-2.png",
+        "width": 2134,
+        "height": 1200,
+        "blank_area_ratio": 0.8543,
+        "contrast_range": 225,
+        "dominant_object_area": 0.9183,
+        "edge_margin_px": 0,
+        "text_density_proxy": 0.0382,
+        "content_bbox": [
+          0,
+          0,
+          2133,
+          1101
+        ]
+      },
+      "reference_ids": [
+        "RRL-022",
+        "RRL-024",
+        "RRL-018",
+        "RRL-013",
+        "RRL-025"
+      ],
+      "expected_object_contract": [
+        "synthetic image",
+        "GT mask",
+        "prediction mask",
+        "FP/FN overlay",
+        "case metrics"
+      ],
+      "style_boundary": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical image is copied."
+    },
+    {
+      "slide": 3,
+      "archetype": "EXPERIMENT_DESIGN",
+      "status": "MECHANICAL_PASS",
+      "criteria": {
+        "png_from_real_pptx_render": "PASS",
+        "dimensions_nontrivial": "PASS",
+        "not_blank": "PASS",
+        "contrast_present": "PASS",
+        "dominant_object_present": "PASS",
+        "edge_clipping_not_obvious": "PASS",
+        "text_density_proxy_bounded": "PASS",
+        "required_object_contract_present": "PASS"
+      },
+      "metrics": {
+        "path": ".cache/research-group-meeting-regression-current/rendered/slide-3.png",
+        "width": 2134,
+        "height": 1200,
+        "blank_area_ratio": 0.7215,
+        "contrast_range": 225,
+        "dominant_object_area": 0.895,
+        "edge_margin_px": 0,
+        "text_density_proxy": 0.0475,
+        "content_bbox": [
+          0,
+          0,
+          2133,
+          1073
+        ]
+      },
+      "reference_ids": [
+        "RRL-002",
+        "RRL-008",
+        "RRL-019",
+        "RRL-005",
+        "RRL-009"
+      ],
+      "expected_object_contract": [
+        "centers",
+        "local image/label",
+        "local estimator",
+        "transmitted summary",
+        "global estimator",
+        "endpoint evaluation"
+      ],
+      "style_boundary": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical image is copied."
+    },
+    {
+      "slide": 4,
+      "archetype": "STATISTICAL_MODEL",
+      "status": "MECHANICAL_PASS",
+      "criteria": {
+        "png_from_real_pptx_render": "PASS",
+        "dimensions_nontrivial": "PASS",
+        "not_blank": "PASS",
+        "contrast_present": "PASS",
+        "dominant_object_present": "PASS",
+        "edge_clipping_not_obvious": "PASS",
+        "text_density_proxy_bounded": "PASS",
+        "required_object_contract_present": "PASS"
+      },
+      "metrics": {
+        "path": ".cache/research-group-meeting-regression-current/rendered/slide-4.png",
+        "width": 2134,
+        "height": 1200,
+        "blank_area_ratio": 0.7315,
+        "contrast_range": 225,
+        "dominant_object_area": 0.895,
+        "edge_margin_px": 0,
+        "text_density_proxy": 0.0447,
+        "content_bbox": [
+          0,
+          0,
+          2133,
+          1073
+        ]
+      },
+      "reference_ids": [
+        "RRL-044",
+        "RRL-027",
+        "RRL-020",
+        "RRL-028",
+        "RRL-007"
+      ],
+      "expected_object_contract": [
+        "estimand",
+        "observed AI phenotype",
+        "measurement error",
+        "validation subset",
+        "inference target"
+      ],
+      "style_boundary": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical image is copied."
+    }
+  ],
+  "rights_note": "No downloaded public deck, private CARE figure, whole-slide screenshot, or clinical image is copied."
+}
