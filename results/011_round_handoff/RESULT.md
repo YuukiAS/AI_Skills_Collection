@@ -1,10 +1,35 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 011_round_handoff
-implementation_commit: ff8ff1ddb48cb9c511b3e3fecc7f0c4964adab46
+implementation_commit: 38d7bbc137fb8bbaa13d830bbfb1907be32066c6
 ---
 
 # Codex Result
+
+## Public visual review transport
+
+```yaml
+external_visual_review:
+  transport: github_pages_pdf
+  status: PUBLIC_VISUAL_TRANSPORT_READY
+  implementation_commit: ff8ff1ddb48cb9c511b3e3fecc7f0c4964adab46
+  transport_commit: 38d7bbc137fb8bbaa13d830bbfb1907be32066c6
+  pages_run_id: 32167690731
+  pdf_url: https://yuukias.github.io/AI_Skills_Collection/presentation-review/ff8ff1ddb48cb9c511b3e3fecc7f0c4964adab46/research_group_meeting_regression.pdf
+  page_count: 4
+  sha256: ebb0cec2e4009a784989c4166a8dc335d8705b1c41f9ce6c3cba72644e888f0b
+  content_type: application/pdf
+```
+
+- Enabled GitHub Pages for `YuukiAS/AI_Skills_Collection` with `build_type=workflow`; site base URL is `https://yuukias.github.io/AI_Skills_Collection/`.
+- Updated `.github/workflows/research-presentation-visual-packet.yml` to keep the existing Actions artifact and additionally deploy the same committed synthetic true-render PDF to GitHub Pages.
+- Pages payload is restricted to `research_group_meeting_regression.pdf`, `EVIDENCE_MANIFEST.json`, `RENDER_STATUS.json`, `MECHANICAL_VISUAL_REVIEW.json`, and `packet_manifest.json`.
+- No `.cache` reference corpus, downloaded public decks, CARE/private clinical images, patient data, credentials, private project artifacts, PPTX, or PNG files are published by the Pages payload.
+- The public PDF is the committed real `PPTX -> LibreOffice -> PDF` render from `tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/pdf/research_group_meeting_regression.pdf`; no ReportLab/HTML/image-composed substitute was generated.
+- `gh run watch 32167690731 --repo YuukiAS/AI_Skills_Collection --exit-status`: `Research Presentation Visual Packet` succeeded at head `38d7bbc137fb8bbaa13d830bbfb1907be32066c6`; the `Deploy GitHub Pages` step completed successfully.
+- Public consumer verification for the immutable PDF URL returned HTTP `200`, final URL matching the implementation path, `Content-Type: application/pdf`, download size `197374`, page count `4`, and SHA-256 matching the committed local PDF.
+- Public `packet_manifest.json` returned HTTP `200`, `Content-Type: application/json; charset=utf-8`, `transport=github_pages_pdf`, `implementation_commit=ff8ff1ddb48cb9c511b3e3fecc7f0c4964adab46`, `pdf.page_count=4`, and the same PDF SHA-256.
+- This proves `PUBLIC_VISUAL_TRANSPORT_READY` only. It does not claim academic visual PASS.
 
 ## Visual review packet transport
 
