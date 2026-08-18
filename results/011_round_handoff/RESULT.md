@@ -1,10 +1,25 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 011_round_handoff
-implementation_commit: 2c54c52f287be94c5919bc5886fb52804f94fc49
+implementation_commit: c23a05866474e49d6efd9be921ee300c51e0ccbf
 ---
 
 # Codex Result
+
+## Visual review packet transport
+
+- Added `.github/workflows/research-presentation-visual-packet.yml` as a transport-only successor to core implementation commit `2c54c52f287be94c5919bc5886fb52804f94fc49`.
+- The workflow regenerates the four-slide research group meeting regression on GitHub Actions, runs the mechanical visual reviewer, and fails unless generated `rendered/slide-1.png` through `rendered/slide-4.png` exactly match the committed golden PNGs.
+- The workflow uploads artifact `research-presentation-visual-review-packet-${{ github.sha }}` containing:
+  - `rendered/slide-1.png` through `rendered/slide-4.png`;
+  - `expected_render/slide-1.png` through `expected_render/slide-4.png`;
+  - `pdf/research_group_meeting_regression.pdf`;
+  - `research_group_meeting_regression.pptx`;
+  - `EVIDENCE_MANIFEST.json`;
+  - `RENDER_STATUS.json`;
+  - `MECHANICAL_VISUAL_REVIEW.json`;
+  - `VISUAL_REVIEW_PACKET.md`, `PACKET_MANIFEST.json`, and `SHA256SUMS.txt`.
+- Packet metadata records original implementation commit `2c54c52f287be94c5919bc5886fb52804f94fc49`, transport commit `${{ github.sha }}`, review round `2`, and `academic_visual_decision=NOT_ASSESSED`.
 
 ## Implemented
 
@@ -33,6 +48,11 @@ implementation_commit: 2c54c52f287be94c5919bc5886fb52804f94fc49
 - `python scripts/skills.py catalog --write`: wrote catalog; timestamp-only output was not committed.
 - `python scripts/build_codex_marketplace.py --validate --check --path-report`: passed, 10 plugins, 25 active skills, path `over_budget=0`.
 - `python -m unittest discover -s tests`: 108 tests passed.
+- `python tests/fixtures/presentations/research_group_meeting/generate_research_group_meeting_regression.py --out-dir .cache/research-group-meeting-regression-current`: regenerated the regression deck and render evidence after the transport workflow was added.
+- `python tests/fixtures/presentations/research_group_meeting/review_research_group_meeting_regression.py --out-dir .cache/research-group-meeting-regression-current`: `MECHANICAL_PASS` after the transport workflow was added.
+- `cmp .cache/research-group-meeting-regression-current/rendered/slide-{1,2,3,4}.png tests/fixtures/presentations/research_group_meeting/expected_render/slide-{1,2,3,4}.png`: all four generated PNGs exactly match committed golden renders.
+- Local packet assembly check produced `EVIDENCE_MANIFEST.json`, `MECHANICAL_VISUAL_REVIEW.json`, `PACKET_MANIFEST.json`, `RENDER_STATUS.json`, `SHA256SUMS.txt`, `VISUAL_REVIEW_PACKET.md`, four `rendered/*.png`, four `expected_render/*.png`, `pdf/research_group_meeting_regression.pdf`, and `research_group_meeting_regression.pptx`.
+- `python -c 'import yaml; yaml.safe_load(open(".github/workflows/research-presentation-visual-packet.yml", encoding="utf-8")); print("yaml ok")'`: workflow YAML parsed successfully.
 
 ## Deviations / blockers
 
