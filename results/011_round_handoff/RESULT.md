@@ -1,7 +1,7 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 011_round_handoff
-implementation_commit: c23a05866474e49d6efd9be921ee300c51e0ccbf
+implementation_commit: f6c3b4bcf39de300ff25997ac8e42c6762cfcbe4
 ---
 
 # Codex Result
@@ -9,7 +9,8 @@ implementation_commit: c23a05866474e49d6efd9be921ee300c51e0ccbf
 ## Visual review packet transport
 
 - Added `.github/workflows/research-presentation-visual-packet.yml` as a transport-only successor to core implementation commit `2c54c52f287be94c5919bc5886fb52804f94fc49`.
-- The workflow regenerates the four-slide research group meeting regression on GitHub Actions, runs the mechanical visual reviewer, and fails unless generated `rendered/slide-1.png` through `rendered/slide-4.png` exactly match the committed golden PNGs.
+- Added `tests/fixtures/presentations/research_group_meeting/build_visual_review_packet.py` so local runs and GitHub Actions use the same packet assembly and SHA manifest logic.
+- The workflow regenerates the four-slide research group meeting regression on GitHub Actions through the packet builder, runs the mechanical visual reviewer, and fails unless generated `rendered/slide-1.png` through `rendered/slide-4.png` exactly match the committed golden PNGs.
 - The workflow uploads artifact `research-presentation-visual-review-packet-${{ github.sha }}` containing:
   - `rendered/slide-1.png` through `rendered/slide-4.png`;
   - `expected_render/slide-1.png` through `expected_render/slide-4.png`;
@@ -53,6 +54,8 @@ implementation_commit: c23a05866474e49d6efd9be921ee300c51e0ccbf
 - `cmp .cache/research-group-meeting-regression-current/rendered/slide-{1,2,3,4}.png tests/fixtures/presentations/research_group_meeting/expected_render/slide-{1,2,3,4}.png`: all four generated PNGs exactly match committed golden renders.
 - Local packet assembly check produced `EVIDENCE_MANIFEST.json`, `MECHANICAL_VISUAL_REVIEW.json`, `PACKET_MANIFEST.json`, `RENDER_STATUS.json`, `SHA256SUMS.txt`, `VISUAL_REVIEW_PACKET.md`, four `rendered/*.png`, four `expected_render/*.png`, `pdf/research_group_meeting_regression.pdf`, and `research_group_meeting_regression.pptx`.
 - `python -c 'import yaml; yaml.safe_load(open(".github/workflows/research-presentation-visual-packet.yml", encoding="utf-8")); print("yaml ok")'`: workflow YAML parsed successfully.
+- `python tests/fixtures/presentations/research_group_meeting/build_visual_review_packet.py --regression-dir .cache/research-group-meeting-regression-current --packet-dir .cache/research-presentation-visual-review-packet --zip-path .cache/research-presentation-visual-review-packet.zip --implementation-commit 2c54c52f287be94c5919bc5886fb52804f94fc49 --transport-commit LOCAL_VALIDATION --skip-generate`: produced packet directory, ZIP, and `PACKET_MANIFEST.json` with 16 files.
+- `python -m unittest tests.test_presentations`: 13 tests passed after adding packet builder coverage.
 
 ## Deviations / blockers
 
