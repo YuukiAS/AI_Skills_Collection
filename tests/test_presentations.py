@@ -186,25 +186,58 @@ class PresentationSharedTests(unittest.TestCase):
             "RESEARCH_SLIDE_ARCHETYPES.md",
             "RESEARCH_PRESENTATION_ANTIPATTERNS.md",
             "research_slide_reference_index.csv",
+            "reference_sources_manifest.json",
         ]:
             self.assertTrue((references / name).exists(), name)
         index_text = (references / "research_slide_reference_index.csv").read_text(encoding="utf-8")
-        self.assertIn("source_url,page_number,page_function,visual_lesson", index_text)
+        self.assertIn("source_url,local_cache_file,page_number,page_function,scientific_object,evidence_type", index_text)
         self.assertIn("RESULT_FIGURE", index_text)
         self.assertIn("SUPERVISOR_DECISION", index_text)
         rows = list(csv.DictReader(index_text.splitlines()))
-        self.assertGreaterEqual(len(rows), 20)
+        self.assertGreaterEqual(len(rows), 60)
+        required_fields = {
+            "reference_id",
+            "statistical_subdomain",
+            "local_cache_file",
+            "scientific_object",
+            "evidence_type",
+            "approximate_figure_text_ratio",
+            "uncertainty_handling",
+            "negative_result_handling",
+            "academic_credibility",
+            "suitable_contexts",
+        }
+        self.assertTrue(required_fields.issubset(rows[0]))
         for row in rows:
             self.assertTrue(row["source_url"])
             self.assertTrue(row["page_number"])
             self.assertTrue(row["page_function"])
-            self.assertTrue(row["visual_lesson"])
+            self.assertTrue(row["scientific_object"])
+            self.assertTrue(row["evidence_type"])
             self.assertTrue(row["what_to_learn"])
             self.assertTrue(row["what_not_to_copy"])
             self.assertTrue(row["rights_note"])
+        manifest = json.loads((references / "reference_sources_manifest.json").read_text(encoding="utf-8"))
+        self.assertGreaterEqual(len(manifest["candidate_sources"]), 50)
+        self.assertGreaterEqual(len([source for source in manifest["candidate_sources"] if source["domain_family"] in {"statistics", "biostatistics"}]), 30)
+
+    def test_research_group_meeting_final_validation_rejects_unknown_and_checks_evidence_refs(self) -> None:
+        draft = markdown_to_deck_plan.markdown_to_deck_plan(
+            "# Updated Result\nEndpoint-specific ranking changed the interpretation.",
+            "Group Meeting Regression",
+            mode="research-group-meeting",
+        )
+        self.assertEqual(validate_deck_plan.validate_deck_plan(draft, phase="planning"), [])
+        final_errors = validate_deck_plan.validate_deck_plan(draft, phase="final")
+        self.assertTrue(any("final validation rejects UNKNOWN" in error for error in final_errors))
+        draft["research_state"] = {field: "source-supported value" for field in validate_deck_plan.RESEARCH_STATE_FIELDS}
+        draft["slides"][0]["source_evidence_ids"] = ["missing-id"]
+        ref_errors = validate_deck_plan.validate_deck_plan(draft, phase="planning")
+        self.assertTrue(any("references missing evidence_board item" in error for error in ref_errors))
 
     def test_research_group_meeting_regression_generator_outputs_artifacts(self) -> None:
         script = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/generate_research_group_meeting_regression.py"
+        reviewer = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/review_research_group_meeting_regression.py"
         with tempfile.TemporaryDirectory() as tmp:
             result = subprocess.run(
                 [sys.executable, str(script), "--out-dir", tmp],
@@ -215,14 +248,37 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             payload = json.loads(result.stdout)
             self.assertTrue(Path(payload["pptx"]).exists())
-            self.assertTrue(Path(payload["pdf"]).exists())
-            qa = json.loads(Path(payload["qa"]).read_text(encoding="utf-8"))
-            self.assertEqual(qa["status"], "PASS")
-            self.assertEqual(qa["editable_slide_count"], 4)
-            self.assertEqual(len(qa["scientific_qa"]), 4)
+            self.assertFalse((Path(tmp) / "SCIENTIFIC_QA.json").exists())
+            manifest = json.loads(Path(payload["evidence_manifest"]).read_text(encoding="utf-8"))
+            self.assertEqual(manifest["status"], "GENERATED_SOURCE_ARTIFACTS_ONLY")
+            self.assertFalse(manifest["generator_may_pass"])
+            self.assertEqual(manifest["editable_slide_count"], 4)
+            self.assertEqual(len(manifest["slides"]), 4)
+            for slide in manifest["slides"]:
+                self.assertGreaterEqual(len(slide["reference_ids"]), 2)
+                self.assertTrue(slide["expected_scientific_objects"])
+            render = json.loads(Path(payload["render_status"]).read_text(encoding="utf-8"))
+            self.assertIn(render["status"], {"ok", "BLOCKED_REAL_PPTX_RENDER"})
+            review_result = subprocess.run(
+                [sys.executable, str(reviewer), "--out-dir", tmp],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(review_result.returncode, 0, review_result.stderr)
+            review_payload = json.loads(review_result.stdout)
+            review = json.loads(Path(review_payload["review"]).read_text(encoding="utf-8"))
+            self.assertTrue(review.get("reviewer_independent_from_generator") or review["status"] == "BLOCKED_REAL_PPTX_RENDER")
+            if render["status"] == "ok":
+                self.assertEqual(review["status"], "PASS")
+                self.assertEqual(review["rendered_png_count"], 4)
+            else:
+                self.assertEqual(review["status"], "BLOCKED_REAL_PPTX_RENDER")
             with ZipFile(payload["pptx"]) as deck:
                 slide_names = [name for name in deck.namelist() if name.startswith("ppt/slides/slide") and name.endswith(".xml")]
+                media_names = [name for name in deck.namelist() if name.startswith("ppt/media/")]
             self.assertEqual(len(slide_names), 4)
+            self.assertLess(len(media_names), 5)
 
 
 if __name__ == "__main__":

@@ -54,7 +54,7 @@ Do not expose internal labels such as `belief_update`, `evidence_quality`, `rout
 1. Read source material and identify source anchors: Markdown sections, PDF pages, figures, tables, code outputs, prior slides, or review comments.
 2. For `research-group-meeting`, build the Research State and Evidence Board first. Inventory available figures, medical images, qualitative examples, quantitative plots, model diagrams, equations, experiment logs, failed experiments, literature figures to redraw, and missing evidence.
 3. Choose page archetypes from the scientific job: `RESULT_FIGURE`, `FAILURE_CASE`, `MEDICAL_IMAGE_COMPARISON`, `STATISTICAL_MODEL`, `METHOD_DIAGRAM`, `EXPERIMENT_DESIGN`, `NEGATIVE_RESULT`, `RESEARCH_UPDATE`, `NEXT_EXPERIMENT`, or `SUPERVISOR_DECISION`.
-4. Produce `deck-plan.yaml` before creating non-trivial slides. In `research-group-meeting` mode, every slide must include `page_function`, `required_evidence`, `source_evidence_ids`, `scientific_objects`, `evidence_status`, `layout_rationale`, `allowed_fallback`, `forbidden_fallback`, and `qa_criteria`.
+4. Produce `deck-plan.yaml` before creating non-trivial slides. In `research-group-meeting` mode, every slide must include `page_function`, `required_evidence`, `source_evidence_ids`, `scientific_objects`, `evidence_status`, `layout_rationale`, `allowed_fallback`, `forbidden_fallback`, and `qa_criteria`. Run planning validation while evidence is still being gathered, then final validation before generation.
 5. Keep one main research action per slide. Slide titles may be claim titles for mature results, but exploratory updates, negative results, and uncertainty pages may use question or in-progress titles.
 6. Decide the format from the user's requested deliverable:
    - PPT, PowerPoint, `.pptx`, editable, Slides, or later manual edits -> editable Presentation/Slides route.
@@ -64,7 +64,8 @@ Do not expose internal labels such as `belief_update`, `evidence_quality`, `rout
 7. If a slide claim has no real evidence, convert it to missing evidence, next experiment, speaker notes, backup, or delete it. Do not fill it with rounded cards, icons, slogans, empty tables, or generic arrows.
 8. Preserve equations in LaTeX inside the deck plan. Before compiling `.tex` or producing Beamer/PDF, invoke the locally installed `render-chinese-math-pdf` skill. Use that skill to probe for the LaTeX compiler, TeX packages, font availability, writable TeX caches, and PDF QA tools instead of assuming `xelatex`/`lualatex` paths. If the local skill is not installed in the active environment, block and report that missing dependency.
 9. Use the CUHK default template when no stronger project, course, company, or conference template is specified. For exact CUHK Beamer reproduction, use `../../shared/templates/cuhk/beamer/source/` as the canonical source; the title slide layout is locked and only content fields such as title, subtitle, author, institute, and date may change.
-10. After file creation, render the deck to PDF/images and run scientific visual QA. A deck is not `complete` merely because a file exists or mechanical checks pass.
+10. After file creation, render the deck to PDF/images and run scientific visual QA. A deck is not `complete` merely because a file exists or mechanical checks pass. For editable PPTX regression, the PDF/images must come from the PPTX through a real presentation engine such as `soffice`, `libreoffice`, or an explicitly configured renderer.
+11. Use the research presentation reference library by page function, scientific domain, statistical subdomain, and evidence type. Keep downloaded source assets in `.cache/research-presentation-reference-library/`; commit only metadata indexes and page-level lessons.
 
 ## Research Group Meeting QA
 
@@ -80,6 +81,8 @@ Rendered-slide QA must answer these questions per page:
 - Is the page worth 30-90 seconds in a group meeting?
 
 If the answer is clearly no for scientific content, the page must not pass.
+
+The generator must not assign final `PASS`. It may write PPTX, raw assets, evidence manifests, and render status. An independent scientific visual reviewer must read the plan/evidence/rendered PNGs/reference IDs before assigning `PASS`, `REVISE`, or `BLOCKED`. If real PPTX rendering is unavailable, status is `BLOCKED_REAL_PPTX_RENDER`; do not reconstruct a parallel PDF and claim it represents the PPTX.
 
 ## Anti-Patterns
 
@@ -98,4 +101,7 @@ If an urgent real group meeting must be delivered before the editable PPTX path 
 - `../../shared/references/RESEARCH_SLIDE_ARCHETYPES.md`
 - `../../shared/references/RESEARCH_PRESENTATION_ANTIPATTERNS.md`
 - `../../shared/references/research_slide_reference_index.csv`
+- `../../shared/references/reference_sources_manifest.json`
+- `../../shared/references/reference_source_search_matrix.csv`
+- `../../../../../docs/workflows/RESEARCH_PRESENTATION_REFERENCE_LIBRARY.md`
 - `../../shared/templates/cuhk/`

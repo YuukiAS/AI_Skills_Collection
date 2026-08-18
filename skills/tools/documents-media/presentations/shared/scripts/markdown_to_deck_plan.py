@@ -58,7 +58,7 @@ def enrich_research_group_slide(slide: dict) -> dict:
     enriched.update({
         "page_function": "RESEARCH_UPDATE",
         "required_evidence": ["source-tracked evidence or explicit missing-evidence note"],
-        "source_evidence_ids": ["markdown"],
+        "source_evidence_ids": ["SRC-001"],
         "scientific_objects": ["research question", "source-backed observation"],
         "evidence_status": "partial",
         "uncertainty_status": "requires evidence-board review",
@@ -127,10 +127,23 @@ def markdown_to_deck_plan(markdown: str, title: str, output: str = "pptx", mode:
     if mode == "research-group-meeting":
         plan["research_state"] = default_research_state(title)
         plan["evidence_board"] = empty_evidence_board()
+        plan["evidence_board"]["experiment_logs"].append({
+            "id": "SRC-001",
+            "type": "source_markdown",
+            "source": "input markdown",
+            "provenance": "User-provided Markdown converted by markdown_to_deck_plan.py.",
+            "rights": "User-provided input; do not copy external assets unless separately cleared.",
+            "supports": ["draft slide structure and source anchors"],
+            "status": "partial",
+        })
         plan["evidence_board"]["missing_evidence"].append({
             "id": "ME-001",
-            "claim_or_question": "Populate source-backed evidence before final slide generation.",
-            "rights_note": "No external assets copied by the Markdown adapter.",
+            "type": "missing_evidence",
+            "source": "planning validator",
+            "provenance": "Inserted to prevent a draft outline from being mistaken for final evidence.",
+            "rights": "No external assets copied by the Markdown adapter.",
+            "supports": ["Populate source-backed evidence before final slide generation."],
+            "status": "missing",
         })
         plan["slides"] = [enrich_research_group_slide(slide) for slide in slides]
     return plan

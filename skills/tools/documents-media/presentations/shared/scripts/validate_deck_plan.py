@@ -42,6 +42,7 @@ EVIDENCE_BOARD_FIELDS = {
     "literature_figures_to_redraw",
     "missing_evidence",
 }
+EVIDENCE_ITEM_FIELDS = {"id", "type", "source", "provenance", "rights", "supports", "status"}
 RESEARCH_SLIDE_FIELDS = {
     "page_function",
     "required_evidence",
@@ -54,6 +55,8 @@ RESEARCH_SLIDE_FIELDS = {
     "qa_criteria",
 }
 EVIDENCE_STATUSES = {"available", "partial", "missing", "planned", "not-needed"}
+VALIDATION_PHASES = {"planning", "final"}
+FINAL_PLACEHOLDER_TERMS = {"unknown", "tbd", "todo", "placeholder", "dummy", "example only"}
 ANTI_PATTERN_TERMS = {
     "strategic pillar",
     "unlock",
@@ -68,8 +71,41 @@ ANTI_PATTERN_TERMS = {
 WEAK_LAYOUT_HINTS = {"card", "cards", "table", "matrix", "dashboard", "timeline"}
 
 
-def validate_deck_plan(data: dict[str, Any]) -> list[str]:
+def _contains_final_placeholder(value: Any) -> bool:
+    if isinstance(value, str):
+        lowered = value.lower()
+        return any(term in lowered for term in FINAL_PLACEHOLDER_TERMS)
+    if isinstance(value, list):
+        return any(_contains_final_placeholder(item) for item in value)
+    if isinstance(value, dict):
+        return any(_contains_final_placeholder(item) for item in value.values())
+    return False
+
+
+def _collect_evidence_ids(evidence_board: dict[str, Any], errors: list[str]) -> set[str]:
+    evidence_ids: set[str] = set()
+    for field in sorted(EVIDENCE_BOARD_FIELDS & set(evidence_board)):
+        if not isinstance(evidence_board[field], list):
+            continue
+        for item_index, item in enumerate(evidence_board[field], start=1):
+            if not isinstance(item, dict):
+                errors.append(f"evidence_board.{field}[{item_index}] must be an object")
+                continue
+            missing_item_fields = sorted(EVIDENCE_ITEM_FIELDS - set(item))
+            if missing_item_fields:
+                errors.append(f"evidence_board.{field}[{item_index}] missing required fields: {', '.join(missing_item_fields)}")
+            item_id = str(item.get("id") or "")
+            if item_id:
+                if item_id in evidence_ids:
+                    errors.append(f"duplicate evidence_board item id: {item_id}")
+                evidence_ids.add(item_id)
+    return evidence_ids
+
+
+def validate_deck_plan(data: dict[str, Any], phase: str = "planning") -> list[str]:
     errors: list[str] = []
+    if phase not in VALIDATION_PHASES:
+        errors.append(f"validation phase must be one of {', '.join(sorted(VALIDATION_PHASES))}")
     if data.get("schema_version") != 1:
         errors.append("schema_version must be 1")
     metadata = data.get("metadata")
@@ -92,6 +128,7 @@ def validate_deck_plan(data: dict[str, Any]) -> list[str]:
     if not isinstance(metadata.get("duration_minutes", 1), int) or metadata.get("duration_minutes", 1) < 1:
         errors.append("metadata.duration_minutes must be a positive integer")
     research_group_mode = metadata.get("mode") == "research-group-meeting"
+    evidence_ids: set[str] = set()
     if research_group_mode:
         if metadata.get("purpose") != "group-meeting":
             errors.append("research-group-meeting mode requires metadata.purpose=group-meeting")
@@ -112,6 +149,16 @@ def validate_deck_plan(data: dict[str, Any]) -> list[str]:
         for field in sorted(EVIDENCE_BOARD_FIELDS & set(evidence_board)):
             if not isinstance(evidence_board[field], list):
                 errors.append(f"evidence_board.{field} must be an array")
+        evidence_ids = _collect_evidence_ids(evidence_board, errors)
+        if phase == "final":
+            if _contains_final_placeholder(research_state):
+                errors.append("final validation rejects UNKNOWN/TBD/TODO/placeholder/dummy values in research_state")
+            for field in sorted(EVIDENCE_BOARD_FIELDS & set(evidence_board)):
+                items = evidence_board.get(field, [])
+                if field != "missing_evidence" and isinstance(items, list) and not items:
+                    errors.append(f"final validation requires populated evidence_board.{field} or an explicit missing_evidence item")
+                if field != "missing_evidence" and _contains_final_placeholder(items):
+                    errors.append(f"final validation rejects placeholder values in evidence_board.{field}")
 
     slides = data.get("slides")
     if not isinstance(slides, list) or not slides:
@@ -144,6 +191,10 @@ def validate_deck_plan(data: dict[str, Any]) -> list[str]:
                     errors.append(f"slides[{index}].{field} must be an array")
             if evidence_status in {"available", "partial"} and not slide.get("source_evidence_ids"):
                 errors.append(f"slides[{index}] available evidence requires source_evidence_ids")
+            if isinstance(slide.get("source_evidence_ids"), list):
+                for evidence_id in slide["source_evidence_ids"]:
+                    if str(evidence_id) not in evidence_ids:
+                        errors.append(f"slides[{index}].source_evidence_ids references missing evidence_board item: {evidence_id}")
             if evidence_status == "missing" and not (
                 str(slide.get("allowed_fallback", "")).lower().find("missing evidence") >= 0
                 or str(slide.get("allowed_fallback", "")).lower().find("next experiment") >= 0
@@ -167,16 +218,26 @@ def validate_deck_plan(data: dict[str, Any]) -> list[str]:
             layout_hint = str(slide.get("layout_hint", "")).strip().lower()
             if layout_hint in WEAK_LAYOUT_HINTS:
                 errors.append(f"slides[{index}].layout_hint cannot be only {layout_hint}; describe the scientific object topology")
+            final_allows_missing = slide.get("page_function") in {"MISSING_EVIDENCE", "NEXT_EXPERIMENT"} or evidence_status in {"missing", "planned"}
+            if phase == "final" and not final_allows_missing and _contains_final_placeholder({
+                "required_evidence": slide.get("required_evidence"),
+                "scientific_objects": slide.get("scientific_objects"),
+                "key_message": slide.get("key_message"),
+                "visual_intent": slide.get("visual_intent"),
+                "layout_rationale": slide.get("layout_rationale"),
+            }):
+                errors.append(f"slides[{index}] final validation rejects UNKNOWN/TBD/TODO/placeholder/dummy values")
     return errors
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("deck_plan", type=Path)
+    parser.add_argument("--phase", choices=sorted(VALIDATION_PHASES), default="planning")
     parser.add_argument("--check", action="store_true", help="Return non-zero on validation errors")
     args = parser.parse_args()
     data = json.loads(args.deck_plan.read_text(encoding="utf-8"))
-    errors = validate_deck_plan(data)
+    errors = validate_deck_plan(data, phase=args.phase)
     for error in errors:
         print(f"ERROR: {error}")
     if not errors:

@@ -22,8 +22,13 @@ For `research-group-meeting` decks, mechanical checks are necessary but not suff
 - Does the page look like a management-consulting page, report page, or card dashboard?
 - If decorative frames are removed, is any scientific content left?
 - Is this page worth discussing for 30-90 seconds in a group meeting?
+- Is the evidence boundary clear enough that missing, synthetic, preliminary, or validation-subset evidence cannot be mistaken for completed scientific proof?
 
 If a page fails these questions, do not mark it `PASS` only because it has no overflow, no overlap, editable objects, or a visible shape.
+
+An independent scientific visual reviewer must output `PASS`, `REVISE`, or `BLOCKED` per page. The reviewer checks ten criteria: real scientific object, real evidence or generated dataset, relationship correctness, archetype match, no fake visual, no consulting/card/dashboard substitute, main figure readability, formula/label readability, worth 30-90 seconds, and evidence boundary clarity.
+
+For editable PPTX regression, rendered PNGs must be produced from the PPTX by a real presentation engine. If `soffice`, `libreoffice`, or an explicitly configured renderer is unavailable, the correct status is `BLOCKED_REAL_PPTX_RENDER`. A separately hand-built PDF is not evidence that the PPTX rendered correctly.
 
 ## Research Anti-Pattern Gate
 
