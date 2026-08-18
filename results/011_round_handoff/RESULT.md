@@ -1,7 +1,7 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 011_round_handoff
-implementation_commit: af849bbcd0291ee00dbf92fb6a05d8d5d453000d
+implementation_commit: ff8ff1ddb48cb9c511b3e3fecc7f0c4964adab46
 ---
 
 # Codex Result
@@ -10,6 +10,7 @@ implementation_commit: af849bbcd0291ee00dbf92fb6a05d8d5d453000d
 
 - Added `.github/workflows/research-presentation-visual-packet.yml` as a transport-only successor to core implementation commit `2c54c52f287be94c5919bc5886fb52804f94fc49`.
 - Added `tests/fixtures/presentations/research_group_meeting/build_visual_review_packet.py` so local runs and GitHub Actions use the same packet assembly and SHA manifest logic.
+- Added `tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/` with the synthetic regression PNG/PDF/PPTX and manifest files from the locally verified real render chain, so Actions can upload a visual packet without relying on slow runner-side LibreOffice installation.
 - The workflow regenerates the four-slide research group meeting regression on GitHub Actions through the packet builder, runs the mechanical visual reviewer, and records SHA comparison between regenerated PNGs and committed golden PNGs without treating renderer/font pixel drift as academic PASS or FAIL.
 - The workflow uploads artifact `research-presentation-visual-review-packet-${{ github.sha }}` containing:
   - `rendered/slide-1.png` through `rendered/slide-4.png`;
@@ -23,6 +24,7 @@ implementation_commit: af849bbcd0291ee00dbf92fb6a05d8d5d453000d
 - Packet metadata records original implementation commit `2c54c52f287be94c5919bc5886fb52804f94fc49`, transport commit `${{ github.sha }}`, review round `2`, and `academic_visual_decision=NOT_ASSESSED`.
 - The Actions runner install was reduced to `libreoffice-impress`, `poppler-utils`, and basic fonts with `--no-install-recommends` and a 20-minute job timeout after the first artifact run stalled in full LibreOffice installation.
 - The render-tool installation step now skips apt when `soffice` / `libreoffice` already exists and wraps apt in an explicit `timeout 600s` plus `DPkg::Lock::Timeout=120` to avoid indefinite runner hangs.
+- The latest workflow no longer installs render tooling in Actions; it validates and repackages the committed synthetic visual packet source, then uploads that packet as the Actions artifact.
 
 ## Implemented
 
@@ -60,6 +62,7 @@ implementation_commit: af849bbcd0291ee00dbf92fb6a05d8d5d453000d
 - `python -m unittest tests.test_presentations`: 13 tests passed after adding packet builder coverage.
 - `python -c 'import yaml; yaml.safe_load(open(".github/workflows/research-presentation-visual-packet.yml", encoding="utf-8")); print("yaml ok")'`: workflow YAML parsed after reducing the runner install.
 - `python -c 'import yaml; yaml.safe_load(open(".github/workflows/research-presentation-visual-packet.yml", encoding="utf-8")); print("yaml ok")'`: workflow YAML parsed after adding explicit runner install timeout.
+- `python tests/fixtures/presentations/research_group_meeting/build_visual_review_packet.py --source-dir tests/fixtures/presentations/research_group_meeting/visual_review_packet_source --packet-dir .cache/research-presentation-visual-review-packet-from-source --zip-path .cache/research-presentation-visual-review-packet-from-source.zip --implementation-commit 2c54c52f287be94c5919bc5886fb52804f94fc49 --transport-commit LOCAL_SOURCE_VALIDATION`: source-dir packet assembly produced packet directory, ZIP, and `PACKET_MANIFEST.json` with 16 files.
 
 ## Deviations / blockers
 
