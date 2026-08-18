@@ -323,6 +323,42 @@ class PresentationSharedTests(unittest.TestCase):
             if render["status"] == "ok":
                 self.assertEqual(review["status"], "MECHANICAL_PASS")
                 self.assertEqual(review["rendered_png_count"], 4)
+                packet_builder = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/build_visual_review_packet.py"
+                packet_dir = Path(tmp) / "visual-review-packet"
+                packet_zip = Path(tmp) / "visual-review-packet.zip"
+                packet_result = subprocess.run(
+                    [
+                        sys.executable,
+                        str(packet_builder),
+                        "--regression-dir",
+                        tmp,
+                        "--packet-dir",
+                        str(packet_dir),
+                        "--zip-path",
+                        str(packet_zip),
+                        "--implementation-commit",
+                        "TEST_IMPLEMENTATION_COMMIT",
+                        "--transport-commit",
+                        "TEST_TRANSPORT_COMMIT",
+                        "--skip-generate",
+                    ],
+                    check=False,
+                    capture_output=True,
+                    text=True,
+                )
+                self.assertEqual(packet_result.returncode, 0, packet_result.stderr)
+                packet_payload = json.loads(packet_result.stdout)
+                self.assertTrue(Path(packet_payload["packet_manifest"]).exists())
+                self.assertTrue(packet_zip.exists())
+                packet_manifest = json.loads(Path(packet_payload["packet_manifest"]).read_text(encoding="utf-8"))
+                self.assertEqual(packet_manifest["academic_visual_decision"], "NOT_ASSESSED")
+                packet_paths = {item["path"] for item in packet_manifest["files"]}
+                self.assertTrue({f"rendered/slide-{slide}.png" for slide in range(1, 5)}.issubset(packet_paths))
+                self.assertTrue({f"expected_render/slide-{slide}.png" for slide in range(1, 5)}.issubset(packet_paths))
+                self.assertIn("pdf/research_group_meeting_regression.pdf", packet_paths)
+                self.assertIn("research_group_meeting_regression.pptx", packet_paths)
+                self.assertIn("EVIDENCE_MANIFEST.json", packet_paths)
+                self.assertIn("RENDER_STATUS.json", packet_paths)
             else:
                 self.assertEqual(review["status"], "BLOCKED_REAL_PPTX_RENDER")
             with ZipFile(payload["pptx"]) as deck:

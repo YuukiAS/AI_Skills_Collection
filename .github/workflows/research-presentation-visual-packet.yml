@@ -23,7 +23,6 @@ jobs:
       REVIEW_ROUND: "2"
       REGRESSION_DIR: .cache/research-group-meeting-regression-current
       PACKET_DIR: .cache/research-presentation-visual-review-packet
-      FIXTURE_DIR: tests/fixtures/presentations/research_group_meeting
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -38,92 +37,21 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install pillow python-pptx
 
-      - name: Generate research group meeting regression
+      - name: Build visual review packet
         run: |
-          python3 tests/fixtures/presentations/research_group_meeting/generate_research_group_meeting_regression.py \
-            --out-dir "$REGRESSION_DIR"
-
-      - name: Run mechanical visual review
-        run: |
-          python3 tests/fixtures/presentations/research_group_meeting/review_research_group_meeting_regression.py \
-            --out-dir "$REGRESSION_DIR"
-
-      - name: Verify generated PNGs match committed golden renders
-        run: |
-          set -euo pipefail
-          for slide in 1 2 3 4; do
-            cmp "$REGRESSION_DIR/rendered/slide-${slide}.png" "$FIXTURE_DIR/expected_render/slide-${slide}.png"
-          done
-
-      - name: Assemble visual review packet
-        run: |
-          set -euo pipefail
-          mkdir -p "$PACKET_DIR/rendered" "$PACKET_DIR/expected_render" "$PACKET_DIR/pdf"
-          cp "$REGRESSION_DIR/EVIDENCE_MANIFEST.json" "$PACKET_DIR/"
-          cp "$REGRESSION_DIR/RENDER_STATUS.json" "$PACKET_DIR/"
-          cp "$REGRESSION_DIR/MECHANICAL_VISUAL_REVIEW.json" "$PACKET_DIR/"
-          cp "$REGRESSION_DIR/research_group_meeting_regression.pptx" "$PACKET_DIR/"
-          cp "$REGRESSION_DIR/pdf/research_group_meeting_regression.pdf" "$PACKET_DIR/pdf/"
-          cp "$REGRESSION_DIR/rendered"/slide-*.png "$PACKET_DIR/rendered/"
-          cp "$FIXTURE_DIR/expected_render"/slide-*.png "$PACKET_DIR/expected_render/"
-          cat > "$PACKET_DIR/VISUAL_REVIEW_PACKET.md" <<EOF
-          # Research Presentation Visual Review Packet
-
-          implementation_commit: ${IMPLEMENTATION_COMMIT}
-          transport_commit: ${GITHUB_SHA}
-          review_round: ${REVIEW_ROUND}
-          packet_scope: evidence transport only
-
-          This packet is for external academic visual review. It does not claim academic visual PASS.
-
-          Required files:
-          - rendered/slide-1.png
-          - rendered/slide-2.png
-          - rendered/slide-3.png
-          - rendered/slide-4.png
-          - pdf/research_group_meeting_regression.pdf
-          - research_group_meeting_regression.pptx
-          - EVIDENCE_MANIFEST.json
-          - RENDER_STATUS.json
-          - MECHANICAL_VISUAL_REVIEW.json
-
-          The workflow fails unless the regenerated rendered PNGs exactly match the committed golden PNGs.
-          EOF
-          python3 - <<'PY'
-          import hashlib
-          import json
-          import os
-          from pathlib import Path
-
-          packet = Path(os.environ["PACKET_DIR"])
-          files = sorted(path for path in packet.rglob("*") if path.is_file())
-          manifest = {
-              "schema": "RESEARCH_PRESENTATION_VISUAL_REVIEW_PACKET_V1",
-              "implementation_commit": os.environ["IMPLEMENTATION_COMMIT"],
-              "transport_commit": os.environ["GITHUB_SHA"],
-              "review_round": int(os.environ["REVIEW_ROUND"]),
-              "academic_visual_decision": "NOT_ASSESSED",
-              "packet_scope": "external_visual_evidence_transport",
-              "files": [
-                  {
-                      "path": str(path.relative_to(packet)),
-                      "size_bytes": path.stat().st_size,
-                      "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-                  }
-                  for path in files
-              ],
-          }
-          (packet / "PACKET_MANIFEST.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-          (packet / "SHA256SUMS.txt").write_text(
-              "".join(f"{item['sha256']}  {item['path']}\n" for item in manifest["files"]),
-              encoding="utf-8",
-          )
-          PY
+          python3 tests/fixtures/presentations/research_group_meeting/build_visual_review_packet.py \
+            --regression-dir "$REGRESSION_DIR" \
+            --packet-dir "$PACKET_DIR" \
+            --zip-path ".cache/research-presentation-visual-review-packet.zip" \
+            --implementation-commit "$IMPLEMENTATION_COMMIT" \
+            --transport-commit "$GITHUB_SHA"
 
       - name: Upload visual review packet
         uses: actions/upload-artifact@v4
         with:
           name: research-presentation-visual-review-packet-${{ github.sha }}
-          path: .cache/research-presentation-visual-review-packet/
+          path: |
+            .cache/research-presentation-visual-review-packet/
+            .cache/research-presentation-visual-review-packet.zip
           if-no-files-found: error
           retention-days: 14
