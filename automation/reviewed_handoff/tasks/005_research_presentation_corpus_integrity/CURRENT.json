@@ -1,0 +1,16 @@
+{
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "task_key": "005_research_presentation_corpus_integrity",
+  "state": "PLAN_FROZEN",
+  "review_round": 0,
+  "max_review_rounds": 2,
+  "plan_revision": 0,
+  "max_plan_revisions": 1,
+  "base_commit": "ddf4f9185d945dc5ce3cdc429ce4ed1572f8ddf9",
+  "base_branch": "main",
+  "implementation_commit": "",
+  "ci_required": true,
+  "ci_status": "PENDING",
+  "last_review_decision": "REVISE",
+  "next_action": "RUN_CODEX_EXECUTOR"
+}
