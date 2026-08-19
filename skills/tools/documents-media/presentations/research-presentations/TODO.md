@@ -42,13 +42,15 @@
 - [ ] 每个 simulation 主 slide 至少包含：
   1. **DGP / generative equations**；
   2. **one manipulated axis / stress factor**；
-  3. **comparators / ablations**；
+  3. **comparators / ablations**（仅在 comparator 本身是本轮实验问题时；不要为了模板完整性强塞）；
   4. **primary estimand or prediction type**；
   5. **evaluation metrics**；
-  6. **planned plot(s)**，明确 x/y axis 或 panel 含义。
+  6. **planned plot(s)**，说明最终准备画什么即可，不要求机械拆成 Panel A/B/C。
 - [ ] Simulation metric 必须匹配 scientific estimand，而不是机械复用 AUC。对 JSDM / binary community prediction，应区分 marginal prediction、joint prediction、species-richness/discovery prediction，并选择相应的 Brier/log score、PR-AUC/AUC、community dissimilarity、richness error、joint likelihood/log score、coverage 等指标。
 - [ ] 极端不平衡 rare-species 场景不得只报告 AUC；至少考虑 PR-AUC、Brier/log score 或其他对 rare positives / probability calibration 更敏感的指标。
 - [ ] 若 simulation 有已知真值，可将 coefficient/correlation recovery 作为 mechanism check；但不能让 parameter MSE 取代真正关心的 predictive/discovery target。
+- [ ] Metric 不能只列名字。至少用半句说明统计含义，例如 Brier score 衡量概率预测平方误差、PR-AUC 强调稀有正类排序、coverage 检查 posterior uncertainty 是否达到名义覆盖率。
+- [ ] Planned figure 默认用一两句自然语言说明，不要为了“设计感”预先固定 `Panel A / Panel B / Panel C`。真正产生结果后再按数据决定 figure layout。
 
 ### 7. Data slides are scientific arguments, not dataset inventory cards
 
@@ -57,6 +59,8 @@
 - [ ] 图片必须足够大，图和正文之间保留明确留白。一个 slide 不应同时塞入过多小图、rare-tail panel、三组 caption 和大段文字。
 - [ ] Composite image 中每个 panel 有独立 caption 时，应优先真正裁成独立 panel，而不是依赖整张 PNG 的内部白边与外部 tabular caption 对齐。
 - [ ] Render QA 必须检查“scientific content 实际占据的像素区域”，而不是只检查图片 bounding box。PNG canvas 很大但内容很小仍应判为失败。
+- [ ] 当图太小时，第一反应应是**减少图的数量**，而不是继续压缩正文或把所有图同时放大。一个 dataset 页默认只保留 1 个主图，必要时再加 1 个辅助图。
+- [ ] 主图应真正成为页面视觉中心。若主图只占页面约四分之一，却同时存在大量正文/小图，应判为 layout failure。
 
 ### 8. Diagram semantics must match the probabilistic story
 
@@ -82,6 +86,8 @@
 - [ ] 搜索并人工审阅重复模板短语，特别是连续页面使用 `What ...`, `Role in the deck`, `Why it matters`, `Current plan`, `This slide...` 等元话语。
 - [ ] Slide 应直接陈述 scientific object / claim，不解释“这一页在 deck 中扮演什么角色”。
 - [ ] 允许非对称结构。不要为了视觉整齐把每页强行压成同样的三栏、三卡、三 bullet。
+- [ ] `Interpretation note`, `Prediction target`, `Main takeaway`, `Key message` 等标签默认视为可疑；若删掉标签后正文完全成立，就应直接删掉标签。
+- [ ] Speaker notes 也要去生成过程语言。`This slide...`, `Use this page...`, `reference point for the deck` 等应改成真实讲稿提示，而不是把制作说明伪装成 speaker cue。
 
 ### 12. Rendered-slide QA must be semantic, not only mechanical
 
@@ -89,10 +95,46 @@
 - [ ] 独立 reviewer 必须逐页判断：第一次看到这一页的人，是否能在 5-10 秒内知道变量是什么、图表示什么、比较对象是什么、单位是什么。
 - [ ] 对 figure-heavy slides 检查字体和 scientific panel 的实际尺寸；对 equation-heavy slides 检查符号是否在首次出现时解释；对 discussion slides 检查阅读路径是否自然。
 - [ ] Contact sheet 只能做全局密度筛查，关键 slide 必须单页放大检查。
+- [ ] 对投影场景建立字号软门槛：如果核心内容依赖 `scriptsize` 才能装下，默认判为 scope/layout failure，应拆页或删内容；不能把缩小字号当成完成任务。
+
+### 13. Visual restraint: not every scientific idea needs a diagram
+
+- [ ] Presentation generator 不得把“可视化”理解为“凡是有流程就画 TikZ”。很多统计内容用一条公式加两三句自然语言比流程图更清楚。
+- [ ] 对每个拟议 diagram 先问：**图是否比文字更快地传达一个真实的结构关系？** 如果只是把三句话装进三个方框再用箭头连接，应删除图，恢复为 prose/equation。
+- [ ] TRACE calibration、CORAL 两阶段机制、matching 逻辑等内容只有在图真正降低理解成本时才绘制；否则优先使用普通数学叙述。
+- [ ] 禁止“卡片化就是设计”的默认审美。真实科研汇报可以是一页正常标题、一个公式、一段解释和一张大图。
+- [ ] 对图形化 architecture，组件数量越多越应克制颜色。默认使用一个主色 + 中性灰，不用五六种语义相近的紫/红/粉来区分概念。
+
+### 14. One slide, one intellectual job
+
+- [ ] 一页不能同时承担两个独立教学任务。例如 matching 页不应同时解释 discovery decomposition；已有工作页不应同时承担 novelty enumeration；dataset 页不应同时塞采样设计、rare-tail 图、已有模型历史和新方法问题。
+- [ ] 若一页标题中出现 `and`，应检查是否实际上是两个可拆开的认知任务；只有它们共享同一个核心公式或结论时才允许合并。
+- [ ] 每页先写出一句内部问题：`After this slide, what should the audience now understand that they did not understand before?`。如果答案包含两个以上互相独立的概念，优先拆分或删除次要内容。
+
+### 15. Layout should follow scientific hierarchy, not symmetry
+
+- [ ] 左右 50/50、三栏 1/3-1/3-1/3 不得作为默认布局。版面面积应按科学重要性分配，而不是追求几何对称。
+- [ ] 主图、主公式、主结论应获得最多空间；辅助 context 可以不对称地放在边缘或删除。
+- [ ] 当用户反复指出“图片太小”，禁止继续在同一页保留所有原图后做微调。必须重新决定信息优先级，删掉低价值对象。
+- [ ] 同页同时出现多张图片时，应检查每张是否仍达到会议室投影可读性；若任何一张只能靠靠近屏幕才能辨认，应删图或拆页。
+
+### 16. Existing-method slides should sound like a statistician explaining a model
+
+- [ ] HMSC/CORAL/TRACE 等已有方法页优先使用“模型式 + 两三句解释”，不使用 marketing-style boxes 或 process cards。
+- [ ] 对 CORAL 这类 transfer-learning 方法，首次介绍至少回答：先拟合什么、从中得到什么、如何传给 rare species、rare species 是否已经 observed。
+- [ ] closest prior work 的边界必须说清楚，但不要堆优劣评价。成熟组会叙事优先是 `what it solves -> what remains unresolved`，而不是 `ours is better`。
+
+### 17. Scientific labels must be content, not editorial metadata
+
+- [ ] Slide 上出现的加粗标签应当是科学对象，例如 `Catalogue discovery`, `Open-tail discovery`, `Marginal calibration`，而不是编辑/叙事标签，例如 `Interpretation note`, `Prediction target`, `Role in the deck`。
+- [ ] 如果一行标签只是在告诉作者“这一段起什么作用”，而不是告诉 audience 一个科学概念，就应移到 source comment / speaker notes。
 
 ## 后续实现建议
 
 - [ ] 将上述 audience-first、simulation-minimum-spec、dataset-unit、no-internal-ID、no-default-backup 规则加入 `deck-plan.schema` 或 `validate_deck_plan.py` 可验证字段。
 - [ ] 为 research group meeting 新增 semantic QA checklist：`symbol_defined_on_first_use`, `units_present`, `dgp_present`, `planned_plot_present`, `comparator_explained`, `internal_ids_hidden`, `backup_justified`。
-- [ ] 在 `RESEARCH_PRESENTATION_ANTIPATTERNS.md` 中加入真实失败案例：三列 discussion、prose-only prior slide、DGP-free simulation summary、tiny multi-panel dataset slide、dangling definition under diagram。
+- [ ] 扩展 semantic QA checklist：`main_visual_large_enough`, `scriptsize_core_content_absent`, `diagram_adds_information`, `one_intellectual_job_per_slide`, `editorial_labels_absent`, `planned_figure_not_overpanelized`。
+- [ ] 在 `RESEARCH_PRESENTATION_ANTIPATTERNS.md` 中加入真实失败案例：三列 discussion、prose-only prior slide、DGP-free simulation summary、tiny multi-panel dataset slide、dangling definition under diagram、three-box CORAL flow、five-box TRACE calibration flow、editorial `Interpretation note`、主图被多个辅助图挤小。
+- [ ] 为 dataset-heavy 组会建立 visual dominance regression：主图实际 scientific-content bbox 占 slide 面积过低时给 soft fail，而不是只检查图片 object bbox。
+- [ ] 为 simulation plan 建立结构化字段，但 `comparators` 设为 optional；`planned_figures` 应允许一句自然语言计划，不强制 panel 数量。
 - [ ] 在后续 presentation plugin 版本中把这些规则同步到 Codex plugin mirror，并补 regression eval。
