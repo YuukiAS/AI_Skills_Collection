@@ -393,3 +393,23 @@
   - multiple distinct theory claims were compressed into one page solely to reduce slide count；
   - vague discussion keyword strings were presented as if they were useful answers。
 - [ ] 将这些规则同步到 Codex plugin mirror，并加入 regression eval，避免每个真实项目再次人工返修同类问题。
+
+## 29. Concept grounding：抽象概念第一次出现时优先给一个真实研究对象
+
+- [ ] 在真实科研汇报里，第一次引入抽象概念（group、mark、trait、latent factor、catalogue、matching evidence、phylogenetic/taxonomic borrowing、residual association 等）时，如果 active dataset 中存在对应对象，应在同页给一个**极短、真实、已审计**的例子。例子可以只有半句，但不能只剩 `group 1 | group 2 | ... | group G` 这种占位符。
+- [ ] “定义正确”不等于“听众理解”。例如写出 `$g=1,\ldots,G$ is a coarse group` 后，还应回答“在我们实际数据里，$g$ 可能是什么？”；写出 `$t_j$ is a trait vector` 后，还应回答“实际 trait 有哪些？”。
+- [ ] 真实例子必须来自 source audit / active data，不得凭领域常识猜。若数据表中已有 category/trait 字段，应优先直接读取真实列名和真实类别；若源字段是 cryptic code，必须先找 codebook。找不到 codebook 时，只使用语义明确的字段，或明确标记 `code meaning not yet verified`，不得擅自翻译。
+- [ ] 当真实分类字段已经存在时，禁止用 `group 1`, `group 2`, `group G` 作为最终 audience-facing 示例。应至少展示 2–3 个真实类别；类别太多时可写 `e.g., A, B, C, ...`。
+- [ ] 一个例子不仅要说明“对象长什么样”，还要尽可能回答**为什么生态学家/领域专家会关心它**。例如 taxonomic group mark 的价值不是“可以分组”，而是能够预测未来发现的组成是否偏向某些类群；dispersal trait 的价值是它可能对应 colonization / spatial response differences。
+- [ ] 生态解释必须服从数据实际支持的分辨率。只有 taxonomy 时就讲 taxonomic composition，不得包装成 functional guild；只有 taxonomy proxy 时就写 taxonomy-based relatedness，不得称为 branch-length phylogeny。
+- [ ] 对可选信息层，真实例子应同时说明 availability boundary。例如某数据集有 traits 和 taxonomy，但没有已确认 branch-length tree，则汇报应明确“本数据的主 borrowing 实例是 traits + taxonomy；phylogeny 仅在外部可靠树可匹配时启用”。
+- [ ] Real-data grounding 应克制：通常一行 `Example:` 或 2–3 个短 bullet 足够。不要因为要求真实例子又重新制造三个大 cards、复杂图或一页 inventory。
+- [ ] 每页生成前建立 `concept_grounding_map`：列出本页第一次引入的概念、是否已有 active-data 实例、实例来源、是否应该在 slide 显示。不能只做全 deck glossary 而让概念页继续空洞。
+- [ ] Rendered QA 新增问题：**如果删掉公式符号，听众还能否说出这个抽象对象在本研究中的一个真实实例？** 如果不能，且 active data 明明支持实例，则该页应 REVISE。
+- [ ] 建议新增机器/人工 QA 字段：
+  - `new_concepts_grounded_when_data_available`
+  - `placeholder_categories_absent_when_real_categories_available`
+  - `real_trait_examples_present_when_traits_are_core`
+  - `ecological_relevance_stated`
+  - `opaque_field_codes_not_unverified`
+  - `availability_boundary_stated_for_optional_information`
