@@ -260,7 +260,57 @@
   - fixed columns: node centers belong to declared x coordinates。
 - [ ] Root-cause fix 优先于 symptom fix。用户指出“斜箭头”后，不能只把 arrowhead 变大、线变粗、改颜色；必须重新布局节点直到斜线本身消失。
 
-## 22. Plugin / tooling implementation TODO
+## 22. Targeted revision scope：修一个问题，不得顺手破坏已经认可的结构
+
+- [ ] 用户指出某一页、某一元素的问题时，默认只修改与该问题直接相关的对象。**Targeted feedback 不授权全局重设计。**
+- [ ] 如果用户要求“把 peer blocks 等高”，合法修复是统一高度/宽度/对齐；未经明确要求，不得把 blocks 整体删除并替换成纯文字。
+- [ ] 如果用户只批评某一页的 card/diagram，不得由此推断“用户不喜欢所有 blocks”。是否保留 block 必须按该页的 scientific semantics 判断，并参考此前用户已经接受的 render。
+- [ ] 每次返修前维护 `accepted_element_ledger`：哪些 slide/组件已被用户明确接受、哪些只能局部改、哪些可以重构。已接受组件默认受 regression protection。
+- [ ] 返修必须与“上一版用户实际看到并评论的 render”做视觉 diff；新版本若在未被要求的区域发生大幅变化，应报告并说明必要性，否则视为 scope creep。
+- [ ] 修复不得通过“删除原有内容”制造新的信息缺口。例如为消除拥挤而删掉真实数据例子、模型条件或解释文字，必须确认这些信息已在同页或前文被等价保留。
+
+## 23. Compact notation layout：短定义不要滥用居中 display math
+
+- [ ] 纯定义型短句优先 inline / aligned-row 形式，而不是每个符号单独占一行居中公式。连续的 `f=...`、`s_f=...` 若可在一行或两行紧凑表达，就不要做成页面中央两条孤立 display equations。
+- [ ] 当公式本身不是推导对象，只是“符号 + 含义”，推荐格式：`$f\in\mathcal F$: observed feature;  $s_f$: identity evidence for $f$.` 或使用左对齐 `aligned` / definition list。
+- [ ] 两个互补/并列概率量必须**对称解释**。不能只解释 `q_0` 而不解释 `q_k`；如果两个公式成对出现，二者的语义、归一化关系和适用对象都要交代。
+- [ ] 对简单公式，优先“公式 + 解释同一行”的 bullet：`$q_k=...$: probability of matching candidate k.`，而不是先堆两条公式、再在页面底部单独解释其中一条。
+- [ ] `cases` 仅在多个分支共享同一个左侧对象且分支语义确实互斥时使用；如果只是两个相关定义，两个清晰 bullet 往往比 `cases` 更易读。
+- [ ] 解释密度要平衡：同层级符号要么都解释，要么都已在此前定义。禁止“一个有 prose，一个靠 audience 猜”。
+
+## 24. Real-data grounding：用户要求真实例子时，不得用 generic toy example 代替
+
+- [ ] 当用户要求“用我们实际数据举例”时，必须从当前 active datasets / audited source 中抽取具体字段、对象或观测流程。Generic `a sequence + classifier score` 不能冒充真实数据例子。
+- [ ] 真实例子必须区分“当前处理后文件里直接存在的 evidence”和“原始流程中理论上可能存在但当前未保留的 evidence”。后者必须明确标记，不得写成已验证字段。
+- [ ] 若多个 active datasets 提供不同层次的 evidence，应简短对照，例如：一个数据集适合 soft matching、一个适合 near-hard name matching、一个当前只保留较弱 taxonomy-like labels。
+- [ ] 不要为了举例而虚构 classifier probability、alignment score、trait field 或 sequence object。Source audit 未确认的字段必须写成 `not currently retained/verified`。
+- [ ] 抽象 notation 页最好至少有一个“最佳真实例子”，并在需要时用一行说明其他数据集的对应形式；这比完全 generic 的生态例子更能降低认知负担。
+
+## 25. Section taxonomy：导航应反映实际研究阶段，不要用过宽的 umbrella section
+
+- [ ] 顶部 section/navigation 名称应帮助 audience 定位当前研究阶段。若 simulation 和 real-data analysis 是两个不同的论证阶段，应使用两个 section，而不是统一塞进 `Validation`。
+- [ ] `Validation` 仅在其下内容真的共享一个验证任务且不会造成导航歧义时使用。Simulation design 与 real-data application 通常应区分。
+- [ ] Dataset 页标题应显式告诉 audience 已进入真实数据部分，例如 `Dataset 1: ...`, `Dataset 2: ...`。不要依赖内部编号或让听众从内容猜“现在是不是 dataset section”。
+- [ ] Audience-facing dataset numbering 可以用于汇报导航，但不能使用 repo 内部 ID、文件夹名或数据资产代号。
+- [ ] Section 改名后必须检查顶栏宽度、section dots、页码和导航一致性，避免新增 section 导致 header 拥挤或截断。
+
+## 26. Theory coverage：页数由理论结构决定，不由“压缩”目标决定
+
+- [ ] 在决定 theory 用几页之前，先建立 `theory_coverage_map`：每个 theorem/proposition/lemma 的作用、是否 main claim、是否已证明、是否只适合 supplement、对应哪张 slide。
+- [ ] 若两个理论结果回答不同问题（例如一个控制 asymptotic richness，一个保证 estimand decomposition / marginal preservation），不应仅因为“都是 theory”强塞在同一页。
+- [ ] Main theory slide 应突出真正承担论文方法合法性的结果；简单 corollary 可以跟随主 theorem，但不同 intellectual job 的 proposition 应独立成页或在前文正式呈现。
+- [ ] Supplementary / extension theorem 不应因为“文件里有”就全部进入主 deck；反过来，也不能因为“主 deck 只想一页 theory”而漏掉支撑核心架构的 formal property。
+- [ ] 对 stronger-result assumptions 要守住 claim boundary。例如 first-moment theorem 不自动推出 Poisson limit、projective consistency 或 full infinite-process existence；没有证明就不能靠一行 bullet 暗示。
+
+## 27. Discussion hints：要么不写，要写就具体，不要 AI 式关键词串
+
+- [ ] Discussion question 下方默认**不自动生成 answer/hint**。如果主问题本身清楚，留白让导师回答往往更自然。
+- [ ] 如果确实需要 presenter 的 current position，必须写成具体判断或 trade-off，例如“当前担忧是 group effect 与 phylogenetic deviation 可能共享同一部分 variation；尚未确定仅 centering 是否足够”。
+- [ ] 禁止写 `centering, sum-to-zero, orthogonality and shrinkage determine interpretability` 这类关键词串：它既不像回答，也没有说明哪种约束解决哪类 confounding。
+- [ ] `Possible verbal prompts:`、`Things to consider:` 等编辑式提示应放 speaker notes，不放 audience-facing slide。
+- [ ] Discussion slide 的辅助文字必须通过同一标准：删掉以后如果问题更干净，就删掉；保留则必须真正降低教授理解问题所需的背景成本。
+
+## 28. Plugin / tooling implementation TODO
 
 - [ ] 将 audience-first、units、DGP、planned-figure、internal-ID、backup 等规则加入 `deck-plan.schema` 或 `validate_deck_plan.py`。
 - [ ] 新增 semantic QA 字段：
@@ -271,6 +321,13 @@
   - `scriptsize_core_content_absent`
   - `editorial_labels_absent`
   - `backup_justified`
+  - `accepted_element_ledger_present`
+  - `targeted_revision_scope_respected`
+  - `related_quantities_explained_symmetrically`
+  - `real_data_example_grounded`
+  - `section_semantics_match_content`
+  - `theory_coverage_map_present`
+  - `discussion_hint_actionable_or_absent`
 - [ ] 新增 explicit-constraint QA：
   - `explicit_constraint_ledger_present`
   - `explicit_layout_constraints_satisfied`
@@ -326,6 +383,13 @@
   - tiny default arrowheads；
   - rainbow node palette；
   - editorial labels masquerading as scientific content；
-  - **user explicitly requested all-vertical arrows, generator kept diagonals because the nodes were not re-laid out**；
-  - **QA text claimed a constraint was satisfied while the rendered slide visibly violated it**。
+  - user explicitly requested all-vertical arrows, generator kept diagonals because the nodes were not re-laid out；
+  - QA text claimed a constraint was satisfied while the rendered slide visibly violated it；
+  - targeted feedback caused unrelated accepted slide structures to be deleted；
+  - short notation definitions were centered as separate display equations and wasted visual space；
+  - only one of two complementary probabilities received a semantic explanation；
+  - generic toy evidence replaced a requested real-data example；
+  - simulation and real-data analysis were hidden under an over-broad navigation section；
+  - multiple distinct theory claims were compressed into one page solely to reduce slide count；
+  - vague discussion keyword strings were presented as if they were useful answers。
 - [ ] 将这些规则同步到 Codex plugin mirror，并加入 regression eval，避免每个真实项目再次人工返修同类问题。
