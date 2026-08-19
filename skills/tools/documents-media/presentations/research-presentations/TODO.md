@@ -222,7 +222,45 @@
 - [ ] Contact sheet 只能做全局密度筛查，关键页必须单页放大检查。
 - [ ] Core content 若依赖 `scriptsize`，默认 REVISE。
 
-## 20. Plugin / tooling implementation TODO
+## 20. Explicit user constraints are hard constraints, not design suggestions
+
+- [ ] 用户对布局、箭头、颜色、页数、方向、对齐、保留/删除内容给出的**明确指令**，默认视为 hard constraint。Generator 不得因为“更美观”“更自然”“更容易排版”而自行改写成近似方案。
+- [ ] 如果用户明确要求 `all arrows vertical downward`，任何 diagonal、horizontal、upward 或 orthogonal-return edge 都是直接 QA FAIL；不能以“整体仍然向下”为理由放宽。
+- [ ] 如果用户明确要求 `two-column aligned structure`，必须先固定两列 x 坐标，再从该几何约束反推 shared nodes、ports 和 box width；不能画完后再用斜箭头把错位节点连起来。
+- [ ] 如果用户明确要求某个对象“不要单独成 block / 不要画图 / 不要三栏 / 不要 comparator”，不得通过换一个名字、换一种 box 或移动到相邻区域变相保留。
+- [ ] 显式 constraint 只有两种合法处理：**严格满足**，或在物理/语义上确实无法满足时明确报告冲突并请求选择。禁止静默违反。
+- [ ] 不允许 generator 用自己的“设计判断”覆盖用户反复强调的失败模式。用户已经指出过的视觉错误应进入当前任务的 regression constraints，后续版本若再次出现同类错误，应直接 BLOCK / REVISE，而不是视为新的审美讨论。
+- [ ] 生成前先建立 `explicit_constraint_ledger`，逐条写出：原始要求、是否 hard、如何落实、如何在 render 后验证。不要只在 prompt 中“读过”要求但不落成可测试约束。
+- [ ] 任何声称“所有箭头已垂直”“所有 peer boxes 已等高”等验收结论，都必须由 rendered slide 支持。**自报满足但像素结果相反**属于 QA/provenance failure。
+
+## 21. Constraint-driven diagram construction：先满足拓扑和几何，再谈美化
+
+- [ ] Diagram 构造顺序必须固定为：
+  1. semantic graph；
+  2. explicit layout constraints；
+  3. node levels / columns；
+  4. legal edge orientations；
+  5. ports / anchors；
+  6. box sizes；
+  7. arrow style；
+  8. color / polish。
+  不允许反过来先摆 box，再用斜线“补连”。
+- [ ] 当 edge orientation 被限制为 vertical 时，**节点位置必须为箭头让路**。不要为了保持 box 原位置而破坏 edge 方向。
+- [ ] 两个并列输入需要汇入一个 shared process 且要求全垂直箭头时，shared process 应横跨两列，并提供与两个输入 x 坐标对齐的 top ports；两个输入各自垂直落入对应 port。不能把 shared node 做窄后用两根斜线汇入中心。
+- [ ] 一个 shared process 需要分到左右两个 peer outputs 且要求全垂直箭头时，应使用横跨两列的 process / routing layer，或显式的水平 bus/junction（若用户允许水平无箭头 connector），再从对应 x 坐标垂直向下；不能从中心节点斜着射向左右目标。
+- [ ] 两个 peer outputs 再进入一个 shared container / working set 且要求全垂直箭头时，shared container 应横跨两列，并在两个 peer 的正下方提供独立 top ports；两条边垂直向下。**扩大 shared node / container 是合法的，斜箭头不是。**
+- [ ] “全部向下”不等于“箭头大致朝下”。必须验证每条 edge 的几何方向。若要求 vertical，则起点和终点 anchor 的 x 坐标应在容差内相等。
+- [ ] `two-column` 不意味着所有节点都必须是两个窄框。共享层（matching / aggregation / working set 等）可以跨两列；它的宽度应服从连接几何和语义，而不是强行保持与 peer node 同宽。
+- [ ] 如果用户要求“所有箭头垂直向下”，允许的视觉关系应优先通过**宽 shared node、对齐 ports、分层 spacing**实现；不要自行改成 diagonal，因为 diagonal 是排版捷径，不是设计升级。
+- [ ] 对所有 hard geometry constraints 在 render 后做数值或视觉验证：
+  - vertical edge: `|x_start - x_end| <= tolerance`；
+  - downward edge: `y_end > y_start`（按渲染坐标定义调整符号）；
+  - peer alignment: center/baseline deviation <= tolerance；
+  - equal-size peers: width/height variation <= tolerance；
+  - fixed columns: node centers belong to declared x coordinates。
+- [ ] Root-cause fix 优先于 symptom fix。用户指出“斜箭头”后，不能只把 arrowhead 变大、线变粗、改颜色；必须重新布局节点直到斜线本身消失。
+
+## 22. Plugin / tooling implementation TODO
 
 - [ ] 将 audience-first、units、DGP、planned-figure、internal-ID、backup 等规则加入 `deck-plan.schema` 或 `validate_deck_plan.py`。
 - [ ] 新增 semantic QA 字段：
@@ -233,6 +271,12 @@
   - `scriptsize_core_content_absent`
   - `editorial_labels_absent`
   - `backup_justified`
+- [ ] 新增 explicit-constraint QA：
+  - `explicit_constraint_ledger_present`
+  - `explicit_layout_constraints_satisfied`
+  - `no_unapproved_layout_reinterpretation`
+  - `render_matches_declared_geometry`
+  - `repeated_user_failure_modes_regressed`
 - [ ] 新增 diagram QA 字段：
   - `diagram_needed`
   - `reading_direction_single`
@@ -246,10 +290,30 @@
   - `edge_box_clearance_ok`
   - `diagram_palette_restrained`
   - `container_vs_process_style_distinct`
+  - `all_edges_vertical_if_required`
+  - `all_edges_downward_if_required`
+  - `fixed_columns_respected`
+  - `shared_nodes_span_columns_when_required`
+- [ ] 在 deck-plan / diagram spec 中增加机器可读字段：
+  ```yaml
+  diagram_constraints:
+    reading_direction: top-to-bottom
+    columns: 2
+    allowed_edge_orientations: [vertical]
+    edge_direction: downward
+    peer_alignment: strict
+    shared_nodes_may_span_columns: true
+    arrow_style: canonical
+    palette: one-accent-plus-neutral
+  ```
+  若这些字段来自用户明确要求，validator 必须将其视为 hard constraints。
 - [ ] 在 shared presentation styles 中提供 canonical `diagram node`, `diagram container`, `diagram edge`, `diagram optional edge`，让 generator 复用，而不是每个任务重新 invent TikZ style。
-- [ ] `validate_deck_plan.py` 对 diagram 页增加软警告：超过 7 个节点、超过 8 条边、超过 2 类 edge style、存在多阅读方向时要求 justification。
+- [ ] 提供 shared layout primitives：`two-column-level`, `full-width-shared-node`, `aligned-top-ports`, `aligned-bottom-ports`, `vertical-merge`, `vertical-split`。Generator 应组合这些 primitive，而不是自由手摆坐标。
+- [ ] `validate_deck_plan.py` 对 diagram 页增加软警告：超过 7 个节点、超过 8 条边、超过 2 类 edge style、存在多阅读方向时要求 justification；对**显式 hard constraint 违规**则直接 fail，而不是 warning。
 - [ ] 增加 rendered-diagram regression：检测 node bbox 对齐、peer node size variance、edge crossing、edge-to-node overlap、arrowhead 最小像素尺寸。
+- [ ] 增加 edge-orientation regression：从 rendered geometry 或源图形对象检查每条 edge 是否满足 declared orientation；用户要求 vertical 时，任何斜边直接 fail。
 - [ ] 对箭头做投影可读性检查：150–200 dpi render 后 arrowhead 若低于最小 pixel footprint，判为 soft fail。
+- [ ] QA 报告禁止只写“已改为两列/全部垂直”等自然语言结论；必须附可核验的 rendered evidence 或 geometry summary。
 - [ ] 在 `RESEARCH_PRESENTATION_ANTIPATTERNS.md` 中加入通用失败案例：
   - 三列 discussion；
   - prose-only prior slide；
@@ -261,5 +325,7 @@
   - peer boxes unequal size；
   - tiny default arrowheads；
   - rainbow node palette；
-  - editorial labels masquerading as scientific content。
+  - editorial labels masquerading as scientific content；
+  - **user explicitly requested all-vertical arrows, generator kept diagonals because the nodes were not re-laid out**；
+  - **QA text claimed a constraint was satisfied while the rendered slide visibly violated it**。
 - [ ] 将这些规则同步到 Codex plugin mirror，并加入 regression eval，避免每个真实项目再次人工返修同类问题。
