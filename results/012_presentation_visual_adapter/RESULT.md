@@ -1,9 +1,9 @@
 ---
 schema: AI_BRIDGE_VISUAL_ADAPTER_RESULT_V1
 task_key: 012_presentation_visual_adapter
-adapter_commit: 6c1039680768e5440eef1dd3e2dce26bef34f287
-evidence_commit: 81cabe4d451e1f29f542168cac7c3a446d0567df
-bridge_kit_commit: e915d04756490fafbd111eaa445295f0103b2c94
+adapter_commit: c6968a738c5d4d8e81ecdee06063d590633aa856
+evidence_commit: c0b88de5c8c475794987bf5abae644b231a72344
+bridge_kit_commit: f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e
 ---
 
 # 012 Presentation Visual Adapter Result
@@ -31,6 +31,29 @@ The manifest keeps the Research Presentation rubric in this repository, not in B
 
 ## Live smoke evidence
 
+### Current production smoke
+
+- Bridge Kit 0.5.4 commit: `f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e`
+- Consumer pin / manifest identity commit: `c6968a738c5d4d8e81ecdee06063d590633aa856`
+- Generated Terra visual evidence commit: `c0b88de5c8c475794987bf5abae644b231a72344`
+- GitHub Actions run: `32466775342`
+- Model: `gpt-5.6-terra`
+- Canonical evidence: `results/012_presentation_visual_adapter/visual_review/VISUAL_REVIEW.json`
+- Result: `overall_decision=REVISE`, `blocking_findings=3`
+
+The four input images remain SHA-bound in both `visual_inputs.json` and `VISUAL_REVIEW.json`:
+
+| Page | Image SHA | Terra visual result |
+| --- | --- | --- |
+| slide_1 | `94a8ef8d40471ee5675066cc137a2e0f9ea663df39b1f6660fc53d73967e5a88` | REVISE |
+| slide_2 | `44ebe447b025f86b307c9b961ced7102720378c096f7a013966c9e062eef09c3` | REVISE |
+| slide_3 | `bc92d7263823f05f4d3b0628b60a894c983e93a35d5fc9d5226d720f40863227` | REVISE |
+| slide_4 | `4ab75ebf472cbee18808dfc7029d78a979e11e180374a16d2e9c1db18a04ff1e` | PASS |
+
+The Terra run proves the migrated transport works with the new shared default model, Responses API image input, Structured Output validation, and bot write-back. Its `REVISE` decision is model visual evidence for the Planner to consume; it is not a transport failure.
+
+### Historical first smoke
+
 - Adapter implementation commit: `6c1039680768e5440eef1dd3e2dce26bef34f287`
 - Generated visual evidence commit: `81cabe4d451e1f29f542168cac7c3a446d0567df`
 - Bridge Kit pinned commit: `e915d04756490fafbd111eaa445295f0103b2c94`
@@ -54,8 +77,10 @@ The workflow uses only the repository secret name `OPENAI_VISUAL_REVIEW_API_KEY`
 
 Evidence commit `81cabe4d451e1f29f542168cac7c3a446d0567df` did not start a second Visual Review run. The workflow ignores `results/**/visual_review/**`, so generated evidence commits do not self-trigger the visual review job.
 
+Evidence commit `c0b88de5c8c475794987bf5abae644b231a72344` is also evidence-only under `results/**/visual_review/**`; it did not start a second Visual Review run.
+
 ## Conclusion
 
 `VISUAL_TRANSPORT_PASS`.
 
-The active machine visual-evidence path is now Bridge Kit tracked `VISUAL_REVIEW.json`, not GitHub Pages PDF screenshots. This does not mean the Research Presentation Corpus Program has passed. `Planner academic decision still pending`: the external Presentation Corpus Planner still needs to read `VISUAL_REVIEW.json`, `visual_inputs.json`, the mechanical evidence, and the current program contract before making the final academic visual gate decision.
+The active machine visual-evidence path is now Bridge Kit tracked `VISUAL_REVIEW.json`, not GitHub Pages PDF screenshots. The current production evidence is the `gpt-5.6-terra` run, whose visual decision is `REVISE`. This does not mean the Research Presentation Corpus Program has passed or failed. `Planner academic decision still pending`: the external Presentation Corpus Planner still needs to read `VISUAL_REVIEW.json`, `visual_inputs.json`, the mechanical evidence, and the current program contract before making the final academic visual gate decision.
