@@ -1,0 +1,23 @@
+{
+  "external_upload_authorization": "",
+  "identity_bindings": {
+    "implementation_commit": "",
+    "review_target_id": ""
+  },
+  "inputs": [
+    {
+      "description": "Rendered artifact to review.",
+      "logical_id": "primary",
+      "path": "results/<task_key>/visual_review/primary.png"
+    }
+  ],
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_kind": "rendered-artifact",
+  "rubric": {
+    "instructions": "Describe the visual requirements for this task. Keep domain-specific rubric rules in the target repository, not in Bridge Kit core."
+  },
+  "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+  "task_key": "<task_key>",
+  "workflow_type": "generic"
+}

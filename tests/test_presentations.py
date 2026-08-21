@@ -262,6 +262,47 @@ class PresentationSharedTests(unittest.TestCase):
         ref_errors = validate_deck_plan.validate_deck_plan(draft, phase="planning")
         self.assertTrue(any("references missing evidence_board item" in error for error in ref_errors))
 
+    def test_research_group_meeting_ai_bridge_visual_inputs_adapter(self) -> None:
+        adapter = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/build_ai_bridge_visual_inputs.py"
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "visual_inputs.json"
+            result = subprocess.run(
+                [sys.executable, str(adapter), "--output", str(output)],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["input_count"], 4)
+            manifest = json.loads(output.read_text(encoding="utf-8"))
+            self.assertEqual(manifest["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
+            self.assertEqual(manifest["task_key"], "012_presentation_visual_adapter")
+            self.assertEqual(manifest["workflow_type"], "generic")
+            self.assertEqual(manifest["review_kind"], "research-presentation-four-page-smoke")
+            self.assertEqual(manifest["privacy_policy"], "PUBLIC_SAFE_ONLY")
+            bindings = manifest["identity_bindings"]
+            self.assertEqual(bindings["bridge_kit_commit"], "e915d04756490fafbd111eaa445295f0103b2c94")
+            self.assertEqual(bindings["legacy_task_key"], "011_round_handoff")
+            self.assertEqual(bindings["source_render_status"], "ok")
+            self.assertEqual(bindings["source_mechanical_status"], "MECHANICAL_PASS")
+            self.assertEqual(bindings["source_academic_visual_decision"], "NOT_ASSESSED")
+            self.assertEqual(len(manifest["inputs"]), 4)
+            for index, item in enumerate(manifest["inputs"], start=1):
+                self.assertEqual(item["logical_id"], f"slide_{index}")
+                self.assertEqual(item["mime_type"], "image/png")
+                self.assertEqual(len(item["sha256"]), 64)
+                self.assertTrue((REPO_ROOT / item["path"]).is_file())
+                self.assertIn(f"slide_{index}", bindings["input_png_sha256_by_slide"])
+                self.assertEqual(bindings["input_png_sha256_by_slide"][f"slide_{index}"], item["sha256"])
+            rubric = manifest["rubric"]["instructions"]
+            self.assertIn("Inspect the actual image pixels page by page", rubric)
+            self.assertIn("Do not infer PASS from SHA", rubric)
+            self.assertIn("rounded cards, tables, dashboards", rubric)
+            self.assertIn("30-90 seconds", rubric)
+            self.assertIn("smallest concrete page-specific repair", rubric)
+            self.assertIn("skills/tools/documents-media/presentations/shared/visual-qa.md", manifest["rubric"]["source_contracts"])
+
     def test_research_group_meeting_regression_generator_outputs_artifacts(self) -> None:
         script = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/generate_research_group_meeting_regression.py"
         reviewer = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/review_research_group_meeting_regression.py"
