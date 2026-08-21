@@ -1,71 +1,56 @@
 # Research Presentation Current Round
 
-## Current Round
+当前 improvement cycle 已进入 **Phase A：TODO consolidation**。
 
-本轮是 `research_presentation_corpus_round_001`。范围固定为：
-
-- `001_reference_integrity_cleanup`
-- `002_source_tiering`
-- `003_existing_cache_page_inspection`
-- `004_statistics_primary_acquisition`
-- `005_visual_reviewer_split`
-- `006_four_slide_regression`
-- `007_round_handoff`
-
-## Coverage Matrix
-
-| Area | Current evidence | State |
-| --- | --- | --- |
-| Fake page records | `metadata page-function record` count is 0；metadata rotation synthesis 已移除 | implementation direction accepted, record integrity needs repair |
-| Inspected page library | 48 inspected page rows, 11 inspected decks, source/render hashes present, `inspection_date` / `inspection_means` present | READY_FOR_EXTERNAL_PLANNER_REVIEW：`RRL-020` corrected to `SRC-006` actual page 17 `Overall objective function` |
-| Source tiers | `PRIMARY_RESEARCH_PRESENTATION`, `SECONDARY_TEACHING_REFERENCE`, `PRESENTATION_GUIDANCE`, `CANDIDATE_BACKLOG` | accepted for this round |
-| Statistics/biostatistics sources | 30+ stats/biostats sources in manifest, 10 candidate backlog rows | sufficient for current round; no new scout needed |
-| Visual reviewer | emits `MECHANICAL_VISUAL_REVIEW.json`, not scientific PASS | split accepted; academic visual decision remains NOT_ASSESSED |
-| Four-slide regression | PPTX generated; LibreOffice PDF render produced 4 PNGs; reviewer says `MECHANICAL_PASS`; manifest now includes retrieval query/candidates/selected ids/reasons | ready for academic visual judgment, but mechanical review alone is not scientific PASS |
-| Legacy visual transport | `011_round_handoff` GitHub Pages PDF + external Planner screenshot route reached `BLOCKED_EXTERNAL_VISUAL_ACCESS` in `results/011_round_handoff/PLANNER_REVIEW.md` | historical / provenance only; do not retroactively rewrite the old BLOCKED result |
-| Current primary visual transport | `012_presentation_visual_adapter`: real PPTX render PNGs -> mechanical visual review -> Bridge Kit OpenAI Visual Review -> tracked `VISUAL_REVIEW.json` | `VISUAL_TRANSPORT_PASS`; current canonical visual evidence is `results/012_presentation_visual_adapter/visual_review/VISUAL_REVIEW.json`, with Terra `overall_decision=REVISE` |
-| Remote review | previous implementation commit `846e3d96c2037e3efc1bb9e325f61ea8097ae32d` reviewed on remote main; Executor revision commit `2c54c52f287be94c5919bc5886fb52804f94fc49` prepared; Pages transport commit `38d7bbc137fb8bbaa13d830bbfb1907be32066c6` deployed; Bridge Kit adapter commit `6c1039680768e5440eef1dd3e2dce26bef34f287`, first evidence commit `81cabe4d451e1f29f542168cac7c3a446d0567df`, Terra consumer pin commit `c6968a738c5d4d8e81ecdee06063d590633aa856`, and Terra evidence commit `c0b88de5c8c475794987bf5abae644b231a72344` are now tracked | waiting for external Presentation Corpus Planner to consume structured visual evidence, not to open the Pages PDF |
-
-## Round History
-
-- `2026-08-18`: Installed Lite Handoff templates without `.agents` writes; Reviewed Handoff validates after schema migration.
-- `2026-08-18`: Rebuilt research presentation reference metadata from explicit inspected page specs instead of metadata-derived page rows.
-- `2026-08-18`: Generated four regression PNGs through the real PPTX → LibreOffice → PDF → PNG chain; mechanical reviewer correctly stopped at `NOT_ASSESSED` for academic visual judgment.
-- `2026-08-18`: External Planner independently reviewed the round and returned `REVISE` because inspected-page fidelity is not yet clean and the regression generator still uses hard-coded `RRL-*` lists instead of semantic retrieval with a trace.
-- `2026-08-18`: Executor corrected `SRC-006/RRL-020`, added inspection evidence fields, implemented semantic inspected-page retrieval with trace, regenerated four golden PNGs, and passed local validation.
-- `2026-08-18`: Executor added GitHub Pages transport for the same synthetic true-render PDF. Public URL validation returned HTTP 200, `Content-Type: application/pdf`, page count 4, and SHA-256 `ebb0cec2e4009a784989c4166a8dc335d8705b1c41f9ce6c3cba72644e888f0b`.
-- `2026-08-21`: Bridge Kit Visual Review adapter `012_presentation_visual_adapter` was added at commit `6c1039680768e5440eef1dd3e2dce26bef34f287`, pinned to Bridge Kit commit `e915d04756490fafbd111eaa445295f0103b2c94`, and reused the existing four true-render PNGs without changing the old `011_round_handoff` history.
-- `2026-08-21`: GitHub Actions run `32463908616` executed the Bridge Kit OpenAI Visual Review workflow with model `gpt-4.1-mini`; evidence commit `81cabe4d451e1f29f542168cac7c3a446d0567df` wrote tracked `results/012_presentation_visual_adapter/visual_review/VISUAL_REVIEW.json` with `overall_decision=PASS`, `blocking_findings=[]`, and four image SHA bindings matching `visual_inputs.json`.
-- `2026-08-21`: The `81cabe4d451e1f29f542168cac7c3a446d0567df` evidence-only commit did not trigger another AI Bridge Visual Review run because `.github/workflows/ai-bridge-visual-review.yml` ignores `results/**/visual_review/**`. The workflow exposes only the secret name `OPENAI_VISUAL_REVIEW_API_KEY`; no API key value is tracked in repository files.
-- `2026-08-21`: Bridge Kit 0.5.4 changed the Shared Visual Review production default model to `gpt-5.6-terra` at commit `f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e`. AI_Skills_Collection pinned that commit and regenerated `visual_inputs.json` identity at `c6968a738c5d4d8e81ecdee06063d590633aa856` without creating `OPENAI_VISUAL_REVIEW_MODEL`; the per-repository `OPENAI_VISUAL_REVIEW_API_KEY` secret contract stayed unchanged.
-- `2026-08-21`: GitHub Actions run `32466775342` executed exactly one Terra compatibility smoke with no model variable override. Evidence commit `c0b88de5c8c475794987bf5abae644b231a72344` wrote tracked `VISUAL_REVIEW.json` with `review_model=gpt-5.6-terra`, `overall_decision=REVISE`, slide decisions `REVISE, REVISE, REVISE, PASS`, and four image SHA bindings matching `visual_inputs.json`. This proves the production transport works; the `REVISE` content is visual evidence for Planner, not a transport failure. No visual workflow run was created for the evidence-only commit `c0b88de5c8c475794987bf5abae644b231a72344`.
-
-## Current State
-
-`READY_FOR_EXTERNAL_PLANNER_REVIEW`
-
-Legacy review: `results/011_round_handoff/PLANNER_REVIEW.md`.
-
-Legacy immutable external visual review PDF:
-
-`https://yuukias.github.io/AI_Skills_Collection/presentation-review/ff8ff1ddb48cb9c511b3e3fecc7f0c4964adab46/research_group_meeting_regression.pdf`
-
-This Pages PDF route is retained as historical provenance and debugging / archival transport only. It is no longer the primary machine-consumption path for academic visual review.
-
-Current canonical visual evidence:
-
-`results/012_presentation_visual_adapter/visual_review/VISUAL_REVIEW.json`
-
-Current evidence route:
+当前标准 Reviewed Handoff task：
 
 ```text
-real PPTX render PNGs
--> mechanical visual review
--> Bridge Kit OpenAI Visual Review
--> tracked VISUAL_REVIEW.json
--> Scheduled Presentation Planner consumes structured visual evidence
+013_presentation_todo_consolidation
 ```
 
-The current Bridge Kit visual evidence records `overall_decision=REVISE`, model `gpt-5.6-terra`, workflow run `32466775342`, consumer pin commit `c6968a738c5d4d8e81ecdee06063d590633aa856`, evidence commit `c0b88de5c8c475794987bf5abae644b231a72344`, Bridge Kit commit `f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e`, and four input image SHA bindings. This is a visual evidence producer result, not the final Presentation Corpus Planner decision. The earlier `gpt-4.1-mini` PASS from run `32463908616` remains historical transport evidence only.
+当前状态：
 
-Next action: External Presentation Corpus Planner reads the current tracked `VISUAL_REVIEW.json`, corresponding `visual_inputs.json`, mechanical evidence, and current program contract, then makes the final Planner judgment for this round's academic visual gate. Do not expand source count, bump release, claim Planner PASS, claim program maturity, or ask Planner to reopen the old Pages PDF screenshot route as the primary path.
+```text
+PLAN_FROZEN
+```
+
+下一动作：本地 Reviewed Handoff watcher 启动 Codex Executor，严格执行 `013_presentation_todo_consolidation/PLAN.md`。本轮只整理 `research-presentations/TODO.md`、提升 Planner 已冻结的少量高价值通用规则并补 regression tests；不扩 source corpus，不做 Source Scout，不开始新的 benchmark，不返修当前 Terra 四页 regression。
+
+## 当前视觉证据基线
+
+`012_presentation_visual_adapter` 已建立 Bridge Kit Shared Visual Review 主路径。当前 canonical Terra evidence 仍为：
+
+```text
+results/012_presentation_visual_adapter/visual_review/visual_inputs.json
+results/012_presentation_visual_adapter/visual_review/VISUAL_REVIEW.json
+```
+
+当前 canonical review provider/model：
+
+```text
+openai / gpt-5.6-terra
+```
+
+该 evidence 的总体结论仍为 `REVISE`；已知视觉 findings 将在 Phase A 独立 PASS 后进入新的 bounded Phase B task。旧 `011_round_handoff` Pages/screenshot route 只保留历史 provenance，不再是 primary machine-consumption path。
+
+## Phase A 冻结边界
+
+TODO 中每个 checklist item / 独立规则必须归入且只归入：
+
+- `ALREADY_IMPLEMENTED`
+- `PROMOTE_NOW`
+- `KEEP_BACKLOG`
+- `DUPLICATE_OR_SUPERSEDED`
+
+有用历史经验必须保留。当前已经存在于 active archetype/skill 的 metric favorable-direction、medical evidence area、experiment-design comparator path 等规则不得重复造第二套；当前 Terra failure 说明实现未遵守规则，不说明规则不存在。
+
+本轮只允许提升三类已经有真实返修证据的通用规则：revision scope/correction regression、diagram semantic gate + structural connectors、real evidence vs conceptual grounding。theorem/simulation/derivation/prior/scaling 等更细规则若尚缺对应 benchmark，则保留 backlog 或按已有更强规则标注，不在本轮强行硬编码。
+
+## 后续顺序
+
+只有 013 经独立 Planner review PASS 后才进入：
+
+1. Phase B：建立新的 bounded task，核对并修复当前 canonical Terra visual blockers，生成新 visual identity 后只做一次正常 Terra review，再由 Planner 独立判断；
+2. Phase C：至少完成一轮 statistical/biostatistical method group meeting 和一轮 medical-imaging research group meeting benchmark，均需真实 render + mechanical QA + current Terra evidence + Planner review。
+
+当前不执行 Source Scout。
