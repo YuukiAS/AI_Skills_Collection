@@ -24,7 +24,7 @@ env:
   OPENAI_API_KEY: ${{ secrets.OPENAI_VISUAL_REVIEW_API_KEY }}
 ```
 
-The model name is not secret. Set `OPENAI_VISUAL_REVIEW_MODEL` as a GitHub Actions variable or plain environment variable when the default model should be changed.
+The production default Visual Review model is `gpt-5.6-terra`. Ordinary consumer repositories do not need to set a model variable. Set `OPENAI_VISUAL_REVIEW_MODEL` as a GitHub Actions variable or plain environment variable only when a project has an explicit quality, cost, permission, or model-freeze reason to override the shared default. An explicit CLI `--model` value takes priority over `OPENAI_VISUAL_REVIEW_MODEL`, which takes priority over the Bridge Kit shared default.
 
 Recommended OpenAI setup:
 

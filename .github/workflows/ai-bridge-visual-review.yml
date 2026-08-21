@@ -29,7 +29,7 @@ jobs:
       OPENAI_VISUAL_REVIEW_MODEL: ${{ vars.OPENAI_VISUAL_REVIEW_MODEL }}
       AI_BRIDGE_VISUAL_REVIEW_MANIFEST: ${{ github.event.inputs.manifest || vars.AI_BRIDGE_VISUAL_REVIEW_MANIFEST }}
       AI_BRIDGE_VISUAL_REVIEW_OUTPUT: ${{ github.event.inputs.output || vars.AI_BRIDGE_VISUAL_REVIEW_OUTPUT }}
-      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@e915d04756490fafbd111eaa445295f0103b2c94
+      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e
     steps:
       - uses: actions/checkout@v4
         with:

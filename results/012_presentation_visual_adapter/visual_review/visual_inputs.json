@@ -2,7 +2,7 @@
   "external_upload_authorization": "",
   "identity_bindings": {
     "adapter_identity": "012_presentation_visual_adapter",
-    "bridge_kit_commit": "e915d04756490fafbd111eaa445295f0103b2c94",
+    "bridge_kit_commit": "f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e",
     "evidence_manifest_sha256": "ed42abe283837167a94e73d34b6b723bb0fc127159b5a5d2f67c2e7022a0d3ba",
     "input_png_sha256_by_slide": {
       "slide_1": "94a8ef8d40471ee5675066cc137a2e0f9ea663df39b1f6660fc53d73967e5a88",
