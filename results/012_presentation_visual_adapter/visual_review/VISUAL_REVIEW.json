@@ -1,0 +1,148 @@
+{
+  "blocking_findings": [],
+  "created_at": "2026-08-21T08:36:23Z",
+  "evidence_id": "visual-review-012_presentation_visual_adapter-b39042059327",
+  "images": [
+    {
+      "logical_id": "slide_1",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-1.png",
+      "sha256": "94a8ef8d40471ee5675066cc137a2e0f9ea663df39b1f6660fc53d73967e5a88"
+    },
+    {
+      "logical_id": "slide_2",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-2.png",
+      "sha256": "44ebe447b025f86b307c9b961ced7102720378c096f7a013966c9e062eef09c3"
+    },
+    {
+      "logical_id": "slide_3",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+      "sha256": "bc92d7263823f05f4d3b0628b60a894c983e93a35d5fc9d5226d720f40863227"
+    },
+    {
+      "logical_id": "slide_4",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-4.png",
+      "sha256": "4ab75ebf472cbee18808dfc7029d78a979e11e180374a16d2e9c1db18a04ff1e"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "adapter_identity": "012_presentation_visual_adapter",
+      "bridge_kit_commit": "e915d04756490fafbd111eaa445295f0103b2c94",
+      "evidence_manifest_sha256": "ed42abe283837167a94e73d34b6b723bb0fc127159b5a5d2f67c2e7022a0d3ba",
+      "input_png_sha256_by_slide": {
+        "slide_1": "94a8ef8d40471ee5675066cc137a2e0f9ea663df39b1f6660fc53d73967e5a88",
+        "slide_2": "44ebe447b025f86b307c9b961ced7102720378c096f7a013966c9e062eef09c3",
+        "slide_3": "bc92d7263823f05f4d3b0628b60a894c983e93a35d5fc9d5226d720f40863227",
+        "slide_4": "4ab75ebf472cbee18808dfc7029d78a979e11e180374a16d2e9c1db18a04ff1e"
+      },
+      "legacy_external_visual_implementation_commit": "ff8ff1ddb48cb9c511b3e3fecc7f0c4964adab46",
+      "legacy_pages_transport_commit": "38d7bbc137fb8bbaa13d830bbfb1907be32066c6",
+      "legacy_task_key": "011_round_handoff",
+      "mechanical_review_sha256": "6a29b2a80c740382cc0abf4da678ce1a358de27ba25ba84c1c6f03dd7f3859d7",
+      "pdf_sha256": "ebb0cec2e4009a784989c4166a8dc335d8705b1c41f9ce6c3cba72644e888f0b",
+      "pptx_sha256": "fcf289996cd3cd659f854962b99f26719e457758d22fe70a4cb1b7408bb8944a",
+      "render_status_sha256": "0e7e1b0b6614ceaa1bfe1bacaa53104e326013088e2c70238215ae118abe90a5",
+      "source_academic_visual_decision": "NOT_ASSESSED",
+      "source_dir": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source",
+      "source_mechanical_status": "MECHANICAL_PASS",
+      "source_render_status": "ok"
+    },
+    "manifest_sha256": "b39042059327bd811f6b5c2ed4adcdd19b39d0fafea7cde8e0385a49a5dc8bb3",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "You are reviewing four real rendered PNG pages from an editable PPTX research group meeting regression.\nInspect the actual image pixels page by page. Do not infer PASS from SHA, file existence, page count, mechanical PASS, metadata, expected object text, or reference IDs.\nFor each page, identify the primary scientific object visible in the image.\nFor each page, judge whether the declared page archetype is visually satisfied.\nCheck whether the main figure, medical case, experiment design, statistical model, formula, label, axis, legend, or core research object is immediately visible.\nReject pages that degrade into rounded cards, tables, dashboards, generic consulting layouts, slogans, or decorative shapes replacing evidence.\nCheck for meaningless blank space, obvious visual imbalance, clipping, unreadable labels, unreadable formulas, unreadable legends, or insufficient projection readability.\nCheck that the evidence boundary is visually clear: synthetic, preliminary, validation-subset, generated, or missing evidence must not look like completed proof.\nJudge whether each page contains enough research information to support about 30-90 seconds of group-meeting discussion.\nReturn PASS only when every page satisfies its research visual job. Return REVISE if any page needs a concrete visual fix. Return BLOCKED only if the supplied pixels cannot be assessed.\nFor REVISE, give the smallest concrete page-specific repair recommendation.\n\nDeclared page contracts:\n- slide_1: title=Endpoint Choice Changes the Method Ranking; declared_archetype=RESULT_FIGURE; expected_scientific_objects=endpoint-wise data, error intervals, method ranking, endpoint decision; reference_ids=RRL-015, RRL-021, RRL-030, RRL-016, RRL-023; retrieval_intent=Show endpoint-wise quantitative results where interpretation changes with metric choice.\n- slide_2: title=Average Dice Can Hide the Hard Case; declared_archetype=FAILURE_CASE; expected_scientific_objects=synthetic image, GT mask, prediction mask, FP/FN overlay, case metrics; reference_ids=RRL-022, RRL-024, RRL-018, RRL-013, RRL-025; retrieval_intent=Show a single synthetic hard case with aligned image, GT, prediction, error overlay, and metrics.\n- slide_3: title=Limited-Information Multi-Center Experiment; declared_archetype=EXPERIMENT_DESIGN; expected_scientific_objects=centers, local image/label, local estimator, transmitted summary, global estimator, endpoint evaluation; reference_ids=RRL-002, RRL-008, RRL-019, RRL-005, RRL-009; retrieval_intent=Explain a multi-center experiment with local data, transmitted summaries, estimator, comparator, and endpoint gate.\n- slide_4: title=AI Phenotype Error Changes Inference; declared_archetype=STATISTICAL_MODEL; expected_scientific_objects=estimand, observed AI phenotype, measurement error, validation subset, inference target; reference_ids=RRL-044, RRL-027, RRL-020, RRL-028, RRL-007; retrieval_intent=Show a measured-variable inference mechanism where AI phenotype error changes the target estimand.",
+      "source_contracts": [
+        "skills/tools/documents-media/presentations/research-presentations/SKILL.md",
+        "skills/tools/documents-media/presentations/shared/visual-qa.md",
+        "skills/tools/documents-media/presentations/shared/references/RESEARCH_SLIDE_ARCHETYPES.md"
+      ]
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "PASS",
+      "item_id": "slide_1",
+      "observations": [
+        "Page contains a clear bar chart with endpoint-wise data (Dice, Lesion recall, Burden error) for multiple methods with error intervals visible.",
+        "Method ranking differences by endpoint are clearly shown visually.",
+        "Labels, axis, legend, and numeric values on bars are readable.",
+        "Interpretation and meeting decision text boxes reinforce the main research objects: endpoint choice affects method ranking."
+      ],
+      "requirement_ids": [
+        "RRL-015",
+        "RRL-021",
+        "RRL-030",
+        "RRL-016",
+        "RRL-023"
+      ],
+      "summary": "Slide 1 meets RESULT_FIGURE archetype with clear endpoint-wise data and method ranking presentation."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_2",
+      "observations": [
+        "Page displays the synthetic image, GT mask, prediction mask, and FP/FN overlay side-by-side as expected for failure case.",
+        "Case metrics (Dice, lesion recall, burden error) are present and legible below the images.",
+        "Visuals are aligned and clear, supporting examination of failure mode visually and quantitatively."
+      ],
+      "requirement_ids": [
+        "RRL-022",
+        "RRL-024",
+        "RRL-018",
+        "RRL-013",
+        "RRL-025"
+      ],
+      "summary": "Slide 2 satisfies FAILURE_CASE archetype with clear aligned images and metrics of a hard case."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_3",
+      "observations": [
+        "Page shows an experiment design with three centers, local data and labels, local estimators, transmitted summaries converging to a global estimator, and success endpoint annotation.",
+        "Boxes and arrows illustrate the data flow and design clearly.",
+        "Labels and text inside blocks are readable and interpretable."
+      ],
+      "requirement_ids": [
+        "RRL-002",
+        "RRL-008",
+        "RRL-019",
+        "RRL-005",
+        "RRL-009"
+      ],
+      "summary": "Slide 3 meets EXPERIMENT_DESIGN archetype with a clear visual flow diagram and labeled components."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_4",
+      "observations": [
+        "Page shows a statistical model with a chain of four boxes representing estimand, observed AI phenotype, validation subset, and inference target.",
+        "Mathematical notation is clearly visible and readable.",
+        "An evidence boundary statement is included to clarify this is a generated-variable inference mechanism.",
+        "Layout and text size enable about 30-90 seconds group-meeting discussion of core concept."
+      ],
+      "requirement_ids": [
+        "RRL-044",
+        "RRL-027",
+        "RRL-020",
+        "RRL-028",
+        "RRL-007"
+      ],
+      "summary": "Slide 4 satisfies STATISTICAL_MODEL archetype and clearly presents the inferred variable mechanism with formulae."
+    }
+  ],
+  "non_blocking_notes": [],
+  "overall_decision": "PASS",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "b39042059327bd811f6b5c2ed4adcdd19b39d0fafea7cde8e0385a49a5dc8bb3",
+  "review_kind": "research-presentation-four-page-smoke",
+  "review_model": "gpt-4.1-mini",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "PASS",
+  "task_key": "012_presentation_visual_adapter",
+  "workflow_type": "generic"
+}
