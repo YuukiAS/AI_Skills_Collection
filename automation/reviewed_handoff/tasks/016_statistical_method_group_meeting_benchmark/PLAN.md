@@ -14,7 +14,9 @@ decision: PLAN_FROZEN
 
 本任务的完成标准不是“测试 fixture 通过”，而是：**五页均达到可以直接投影给统计/生统导师、PI 或顶会研究听众的成熟组会水平，视觉完成度至少不低于成熟 oral / invited research talk，同时保留组会需要的技术深度。**
 
-## Frozen scientific story — unchanged
+## Frozen decisions
+
+### Frozen scientific story — unchanged
 
 使用完全 synthetic、固定随机种子的多中心连续结局模拟。科学故事保持不变：中心内相关可能让点估计看起来稳定，但把个体当作独立观测会使区间覆盖率失真；center-cluster-robust inference 修复大部分问题，但 small-G / high-ICC / imbalance 条件仍出现覆盖不足。
 
@@ -287,7 +289,7 @@ Executor 完成后必须：
    - `git diff --check`
 8. 写 RESULT、push implementation/handoff，进入真实 CI；CI bridge 发布 current-tip `reviewed-handoff/ci-summary`。
 
-## Acceptance gates
+## Acceptance and regression gates
 
 第二轮 Reviewer 只有在以下全部成立时才可 PASS：
 
