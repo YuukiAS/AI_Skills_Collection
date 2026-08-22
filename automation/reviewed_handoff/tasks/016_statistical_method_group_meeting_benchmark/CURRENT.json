@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "016_statistical_method_group_meeting_benchmark",
-  "state": "PLAN_FROZEN",
+  "state": "EXECUTING",
   "review_round": 1,
   "max_review_rounds": 2,
   "plan_revision": 1,
