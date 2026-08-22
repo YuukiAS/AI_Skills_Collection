@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "016_statistical_method_group_meeting_benchmark",
-  "state": "REVISE",
+  "state": "NEEDS_GPT_PLANNER",
   "review_round": 1,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -14,5 +14,5 @@
   "last_review_decision": "REVISE",
   "review_limit_reached": false,
   "human_gate_reason": null,
-  "next_action": "RUN_CODEX_REPAIR"
+  "next_action": "RUN_GPT_PLANNER"
 }
