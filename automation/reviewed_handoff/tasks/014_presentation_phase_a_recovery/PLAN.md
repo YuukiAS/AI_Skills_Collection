@@ -6,11 +6,11 @@ decision: PLAN_FROZEN
 
 # 014 Presentation Phase A Recovery — Plan
 
-## 目标
+## Objective and value
 
 在不改写 013 历史结论、也不绕过 review-limit 的前提下，执行用户已经明确授权的人工恢复路径：验证 Presentation regression 的完整 CI/test dependency contract，恢复真实 GitHub CI，然后对 013 原冻结计划下的 TODO consolidation 做一次新的、独立的 recovery review。这里的人工授权是合法的新入口；014 不是 013 的自动第三轮返修。
 
-## 已冻结事实
+## Frozen decisions
 
 1. `013_presentation_todo_consolidation` 已在第 2/2 轮因为 CI 测试环境依赖未完整声明而进入 `AWAIT_HUMAN_DECISION`。其历史 `REVIEW_1.md`、`REVIEW_2.md`、`FINAL_REPORT.md` 和 CURRENT 终态必须保持原样，不能迁移成 PASS。
 2. 用户已明确授权一次人工依赖修复，授权范围只有 Presentation regression 的 CI/test dependency contract；不得借此改 TODO 分类语义、当前 Terra 四页、source corpus、benchmark 或插件架构。
@@ -18,7 +18,7 @@ decision: PLAN_FROZEN
 4. 现有 regression generator 的第三方顶层导入链至少包括 `PIL` 和 `pptx`；本任务不得继续采用“看到一个 ImportError 补一个包”的策略。Executor 必须先检查 generator 及其直接调用链的第三方导入，再确认当前声明是完整集合。
 5. 013 原始内容实现仍以其冻结 PLAN、`base_commit=eec33062f39c2799c46f907ff0869bd627272173`、原 TODO/skill/QA/archetype/tests diff 和 generated/plugin mirror 为审核对象；014 的依赖修复不能替代对这些内容的独立审核。
 
-## Executor 范围
+## Implementation scope
 
 Executor 首先同步最新 main，并做以下工作：
 
@@ -48,7 +48,7 @@ Executor 首先同步最新 main，并做以下工作：
 - failure 的 `target_url` 指向最关键失败 run；success 指向主要 required CI run。
 - CI bridge 不写 REVIEW、不改 Planner decision、不自行把 CURRENT 设为 PASS/REVISE。
 
-## 独立审核门槛
+## Acceptance and regression gates
 
 只有以下全部成立，014 才可 PASS，并把 Phase A 视为通过人工授权恢复：
 
@@ -61,7 +61,11 @@ Executor 首先同步最新 main，并做以下工作：
 7. 013/014 均未扩 source corpus、未做 Source Scout、未创建统计/医学 benchmark、未修改当前 Terra 四页实现或 visual evidence。
 8. 013 的历史 review-limit 事实保持可追溯；014 的 PASS 只能表示“用户授权后的 Phase A recovery 完成”，不能重写 013 为从未失败过。
 
-## Review 行为
+## Natural-language usage / routing expectations
+
+本任务不新增用户调用入口。它恢复的是 Phase A 的审核/CI 通路：后续用户继续提出 Presentation improvement 请求时，系统应把 013 的 TODO consolidation 视为仍需通过 014 recovery closure，而不是把 013 历史失败改写成 PASS。
+
+## Review behavior
 
 014 是用户人工授权后的新 bounded recovery task，拥有正常最多两轮独立 review；这不是对 013 自动增加第三轮。若 014 第一轮发现与本授权范围直接相关的最小实现/CI blocker，可 `REVISE` 一次；第二轮仍不能关闭则重新进入 human gate。若发现需要改变 TODO 产品语义、Presentation 科学内容或扩大依赖修复范围，直接停止并报告，不自行扩 scope。
 

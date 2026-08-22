@@ -4,15 +4,31 @@ task_key: 013_presentation_todo_consolidation
 status: AWAIT_HUMAN_DECISION
 ---
 
-# 013 Presentation TODO Consolidation — Final Report
+# 013 Presentation TODO Consolidation - Final Report
 
-## 本轮已经解决了什么
+## What this task solved
 
 013 已完成 TODO consolidation 的实现阶段：`research-presentations/TODO.md` 中原有开放规则被系统分成 `ALREADY_IMPLEMENTED`、`PROMOTE_NOW`、`KEEP_BACKLOG`、`DUPLICATE_OR_SUPERSEDED` 四类；冻结计划允许提升的三类通用规则已经进入 active presentation guidance，并补了相应 regression coverage 与 generated/plugin mirror 一致性检查。Executor 的本地 targeted/full tests、skills validation、marketplace validation 和 Reviewed Handoff validation 均曾通过。
 
 本 task 没有越界进入后续 Phase B/C：没有扩 source corpus、没有 Source Scout、没有修改 Terra 四页 regression、没有启动统计/生统或医学影像 benchmark，也没有调用新的 Terra visual review。
 
-## 为什么现在不能 PASS
+## What changed
+
+013 的实现改动集中在 TODO consolidation、三类冻结 `PROMOTE_NOW` 规则提升、对应 regression tests 与 generated/plugin mirror 同步。后续第一轮人工授权 repair 只触及 `Codex Marketplace` CI 的 Presentation regression dependency bootstrap，没有修改 TODO 分类语义、Presentation generator 输出或 Terra evidence。
+
+## New capabilities / behavior
+
+Phase A 现在具备一份可审核的 TODO 分类基线：后续 recovery review 可以逐项检查哪些规则已实现、哪些被提升、哪些保留 backlog、哪些被更强规则覆盖。该能力尚未被最终 PASS，因为真实 CI gate 仍未闭环。
+
+## Deliberately not adopted / unchanged
+
+013 没有把 review-limit 失败伪装成 PASS，也没有把 Phase B/C 内容并入本任务。当前 Terra slide 1-3 blocker、统计/生统 benchmark、医学影像 benchmark和 source corpus 扩展全部保持未开始状态。
+
+## Example usage
+
+用户后续要求“继续 Presentation improvement cycle”时，应先关闭 014 recovery；只有 recovery PASS 后，Planner 才能进入 Terra blocker repair。用户要求“做统计方法组会”或“做医学影像 failure case”时，也应等 Phase A recovery 完成后再进入对应 bounded benchmark。
+
+## Regression and remaining limitations
 
 冻结计划要求真实 GitHub CI 通过后才能做最终独立实现审核。第一轮 GitHub CI 暴露 Presentation regression generator 的 CI 测试环境缺少 Pillow；Reviewer 要求只修复测试环境/依赖声明，不动 TODO 语义或 Presentation 输出。
 
@@ -40,3 +56,13 @@ Reviewed Handoff 规定单个 bounded task 最多两轮 review。013 已经历�
 当前 TODO consolidation 的代码/文档改动已经存在，并有本地验证；但它还没有获得真实 CI 闭环后的最终 Planner PASS。主要剩余风险不是规则分类本身，而是仓库标准 CI 尚不能完整复现 Presentation regression 的依赖环境。
 
 在 013 被人工处理并重新闭环前，Presentation improvement cycle 不得进入 Terra blocker repair、统计/生统 benchmark 或医学影像 benchmark。
+
+## Technical appendix
+
+- Task: `013_presentation_todo_consolidation`
+- Status: `AWAIT_HUMAN_DECISION`
+- Human gate reason: `REVIEW_LIMIT`
+- First implementation commit: `5f3263fff41401f569cbc78e8fa71de9b8ff56ba`
+- First repair implementation commit: `525eae3faad63c332b53c0961d73a86cf952478a`
+- CI evidence: `reviewed-handoff/ci-summary=failure` on `50f38341ba63265b8c714afe14e51e2f62e7a674`, run `32550559050`
+- Review artifacts: `results/013_presentation_todo_consolidation/REVIEW_1.md`, `results/013_presentation_todo_consolidation/REVIEW_2.md`
