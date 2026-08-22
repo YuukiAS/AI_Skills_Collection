@@ -140,10 +140,13 @@ class CodexMarketplaceTests(unittest.TestCase):
 
     def test_codex_marketplace_ci_installs_presentation_test_dependencies(self) -> None:
         workflow = (REPO_ROOT / ".github/workflows/codex-marketplace.yml").read_text(encoding="utf-8")
-        install_step = workflow.index("Install Codex marketplace test dependencies")
+        install_step = workflow.index("Install presentation regression test dependencies")
+        import_check_step = workflow.index("Verify presentation regression imports")
         unittest_step = workflow.index("Test Codex marketplace builder")
         self.assertLess(install_step, unittest_step)
-        self.assertIn('python3 -m pip install "Pillow>=10"', workflow)
+        self.assertLess(import_check_step, unittest_step)
+        self.assertIn('python3 -m pip install "Pillow>=10" "python-pptx>=1.0"', workflow)
+        self.assertIn('from PIL import Image, ImageDraw, ImageFont; from pptx import Presentation', workflow)
 
     def test_repository_config_keeps_cardiacnexus_out_of_marketplace(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
