@@ -7,13 +7,13 @@ implementation_commit: 3a0f813c7669502e6e6781adb8b1e66238994521
 
 # 017 Medical-Imaging Group Meeting Benchmark — Final Report
 
-## 本轮解决了什么
+## What this task solved
 
 本轮建立并通过了一套真正以医学影像科研对象为中心的 5 页组会 benchmark。目标不是验证某个分割算法优于现有方法，而是验证 Presentation 系统能否把影像、GT/prediction、定量 endpoint、同病例 failure、负结果与下一验证实验组织成成熟研究汇报，而不是退化成卡片式模板或漂亮但不可审查的示意图。
 
 最终结果通过独立 Planner review。真实 GitHub CI、真实 editable PPTX -> PDF/PNG 渲染、机械视觉检查和最终 `gpt-5.6-terra` 视觉证据均有效。
 
-## 以前没有、现在具备的能力
+## New capabilities / behavior
 
 1. **医学影像优先的页面组织**：图像/overlay、结果图和 failure case 成为页面主要 scientific object，而不是被 UI/card/装饰框包围。
 2. **同一 synthetic pipeline 的完整证据链**：3 个 center、每 center 30 个 fixed-seed cases；图像、GT、prediction、Dice、lesion recall 与 FP burden 全部可追溯到同一 deterministic generator。
@@ -22,7 +22,7 @@ implementation_commit: 3a0f813c7669502e6e6781adb8b1e66238994521
 5. **reference-informed design audit**：每页 2–5 个 inspected references 的视觉经验被记录为内部设计决策；RRL/retrieval/provenance 不再泄漏到观众页面。
 6. **医学影像成熟度视觉审核**：017 专用 Terra rubric 明确检查 modality/anatomy/target grounding、image prominence、legend/annotation、same-case alignment、endpoint direction、synthetic-only scope、AI/meta-language 和成熟组会完成度。
 
-## 五页最终叙事
+## What changed
 
 - Slide 1：用大幅 synthetic short-axis cardiac-MR-like slice 与 GT/prediction overlay 定义任务，直接标注 myocardial ring 与 small lesion target，并说明 lesion-level 与 mask-level endpoint。
 - Slide 2：用单一左到右路径解释 center appearance shift 如何进入 image+GT、prediction、case metrics 与 center/lesion-strata summary。
@@ -36,13 +36,13 @@ implementation_commit: 3a0f813c7669502e6e6781adb8b1e66238994521
 
 本轮也明确拒绝了以下做法：使用真实患者/私有临床影像、扩 source corpus、把 RRL/reference retrieval 打到 slide 页脚、用医学 UI/card 代替 scientific object、把 planned validation 写成 completed evidence，以及修改 Bridge Kit 通用视觉审核核心。
 
-## 回归风险
+## Regression and remaining limitations
 
 当前主要剩余风险不是本 benchmark 的 correctness，而是长期泛化：synthetic cardiac-MR-like phantom 不能代表真实临床图像复杂度；5 页 benchmark 也不能覆盖所有医学影像 page function。后续真实项目仍应继续检查 modality-specific annotation、multi-modal alignment、不同任务的 endpoint semantics 与真实数据 privacy/evidence boundary。
 
 本轮没有发现需要阻断的 source/generated/tests/visual evidence inconsistency。
 
-## 可直接查看的产物
+## Example usage
 
 可编辑 PPTX：
 
@@ -58,7 +58,7 @@ implementation_commit: 3a0f813c7669502e6e6781adb8b1e66238994521
 
 示例使用方式：把这套 5 页作为 Presentation plugin 的医学影像回归 benchmark。新的生成或规则修改若让图像退回小 inset、overlay legend 消失、endpoint direction 不清、同病例 panel 不一致、内部 QA/RRL 信息泄漏或页面重新 card/dashboard 化，应在机械 QA、Terra 或 Planner 任一层被阻断。
 
-## 技术附录
+## Technical appendix
 
 - implementation commit: `3a0f813c7669502e6e6781adb8b1e66238994521`
 - handoff tip CI locator: `d64cdfad03e5bfdf4a3a0c20354264b8361477f6`
