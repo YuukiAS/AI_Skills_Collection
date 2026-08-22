@@ -1,18 +1,26 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 016_statistical_method_group_meeting_benchmark
-implementation_commit: 7e3a4658909781d34899f6ad0b7d784648f1ac50
+implementation_commit: 124657abc79828bfdf1101554fe369b13d423ffe
 ---
 
 # 016 Statistical Method Group Meeting Benchmark - Revised Executor Result
 
 ## Implementation commit
 
-`7e3a4658909781d34899f6ad0b7d784648f1ac50`
+Current human-authorized CI recovery implementation commit: `124657abc79828bfdf1101554fe369b13d423ffe`.
+
+Revised presentation implementation commit: `7e3a4658909781d34899f6ad0b7d784648f1ac50`.
 
 Related control-plane compatibility commit: `97f687f` restored the current schema-required PLAN headings without changing revised PLAN semantics.
 
 Earlier revised implementation commit: `99c010e`. Final Terra-driven visual repair commit: `7e3a465`.
+
+## Human-authorized CI recovery
+
+Planner review round 2 routed 016 to `AWAIT_HUMAN_DECISION` after current-tip GitHub Actions run `32575849316` failed in `Codex Marketplace` with `ModuleNotFoundError: No module named 'matplotlib'`. The user authorized a strictly mechanical recovery of this CI/test dependency contract.
+
+The recovery in `124657abc79828bfdf1101554fe369b13d423ffe` only adds `matplotlib>=3.8` to the `Codex Marketplace` workflow's presentation regression dependency install/import probe and updates the corresponding workflow-contract unit test. It does not change the 016 DGP, simulation values, rendered slides, Terra rubric, reference corpus, visual evidence, or presentation content.
 
 ## What changed
 
@@ -98,4 +106,4 @@ Rendered PNG SHA:
 
 `ci_required=true`; `CURRENT.ci_status` remains `PENDING`.
 
-This handoff moves 016 to `WAITING_FOR_CI`. The mechanical CI bridge should publish current-tip `reviewed-handoff/ci-summary` after GitHub Actions finish. Planner review remains independent; this RESULT does not declare Presentation quality PASS.
+This handoff moves 016 back to `WAITING_FOR_CI` after the user-authorized mechanical CI recovery. The mechanical CI bridge should publish current-tip `reviewed-handoff/ci-summary` after GitHub Actions finish. Planner review remains independent; this RESULT does not declare Presentation quality PASS.
