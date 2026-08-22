@@ -1,0 +1,159 @@
+{
+  "blocking_findings": [],
+  "created_at": "2026-08-22T15:29:50Z",
+  "evidence_id": "visual-review-017_medical_imaging_group_meeting_benchmark-1f07ab3488db",
+  "images": [
+    {
+      "logical_id": "slide_1",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-1.png",
+      "sha256": "c09b1ae54588179394511e3ed81debe17de4585b22221b89a970de111a7fdd79"
+    },
+    {
+      "logical_id": "slide_2",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-2.png",
+      "sha256": "4adf2262ad4cfa265412da471182d647f83480f94c4915b6dc86d453e18b6213"
+    },
+    {
+      "logical_id": "slide_3",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+      "sha256": "dc729eaceaa1c33fc096018f40e2f023f46da31d71cc21b589f4209bf6eb6edf"
+    },
+    {
+      "logical_id": "slide_4",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-4.png",
+      "sha256": "0bb8f74444bb640c73f3c57b9cf7a05c3545ca3afe437699ed1bd6d6a1bfa9c4"
+    },
+    {
+      "logical_id": "slide_5",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-5.png",
+      "sha256": "eb29de0eb7d3e58775e440e55c7e880aeb42bfa7241fc46740e004742295f564"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "adapter_identity": "017_medical_imaging_group_meeting_benchmark",
+      "bridge_kit_commit": "f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e",
+      "evidence_manifest_sha256": "403e9f1a2a869d3841d1f8626742d23a65b0edf281b0216a7acdd5ab3d48d0ec",
+      "input_png_sha256_by_slide": {
+        "slide_1": "c09b1ae54588179394511e3ed81debe17de4585b22221b89a970de111a7fdd79",
+        "slide_2": "4adf2262ad4cfa265412da471182d647f83480f94c4915b6dc86d453e18b6213",
+        "slide_3": "dc729eaceaa1c33fc096018f40e2f023f46da31d71cc21b589f4209bf6eb6edf",
+        "slide_4": "0bb8f74444bb640c73f3c57b9cf7a05c3545ca3afe437699ed1bd6d6a1bfa9c4",
+        "slide_5": "eb29de0eb7d3e58775e440e55c7e880aeb42bfa7241fc46740e004742295f564"
+      },
+      "mechanical_review_sha256": "704bb0a397766e13238c2475dcb4af9282a4dac44e81099718d1a504cf266108",
+      "pdf_sha256": "88b747c3d8979e46b2f5e3992ba8fd57c4693e1d096da2176f3466ccacdcba60",
+      "pptx_sha256": "8a80754a946057bd3a3999f3da8d65829ba7e7298690ac4fd5fd9b66574c9a59",
+      "reference_design_audit_sha256": "a0548485cf850e95f62d63ab5471f16804887668c27bada6a3e80b9791e4323b",
+      "render_status_sha256": "b375091504a5873062b7f0cf5c436a07ca1e50e31682d5ef866e39b1d8aff9d3",
+      "simulation_summary_sha256": "7020272e487d2720cff4787fc50be426880d71447dad5d963634d591b0903a48",
+      "source_academic_visual_decision": "NOT_ASSESSED",
+      "source_dir": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source",
+      "source_mechanical_status": "MECHANICAL_PASS",
+      "source_render_status": "ok"
+    },
+    "manifest_sha256": "1f07ab3488dbe7f721b5eac37f5373ea0ff90fd495f25bff2035e072d1b0855b",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "You are reviewing five real rendered PNG pages from an editable PPTX medical-imaging research group meeting benchmark.\nInspect the actual image pixels page by page. Do not infer PASS from SHA, file existence, page count, mechanical PASS, metadata, expected object text, or reference IDs.\nFor each page, identify the primary scientific object visible in the image: image pixels, GT/prediction masks, endpoint figure, same-case overlay, or negative-result plot.\nScientific correctness: check that claims match the visible image, mask, figure, endpoint direction, uncertainty/variation, and synthetic-only scope. Planned validation must not be presented as completed evidence.\nMedical-imaging grounding: reject pages where modality, anatomy, lesion/target, GT/prediction relation, overlay legend, or endpoint semantics are unclear at projection scale.\nAudience-facing language: reject visible internal IDs or QA/provenance/meta language, including RRL IDs, Reference retrieval, EVIDENCE_MANIFEST, Diagram contract, style not copied, Reading target, Observed in this synthetic run, repo paths, run IDs, implementation commits, and review-target language.\nVisual maturity: explicitly answer this question for each page: Would this slide look professionally finished if projected in a strong medical-imaging PI's group meeting or a MICCAI/RSNA-style research talk?\nCheck hierarchy, image/figure prominence, panel alignment, legend readability, color discipline, intentional whitespace, information density, typography, captions, direct annotations, and projection readability.\nReject pages that become pastel cards, dashboards, generic consulting layouts, wireframes, decorative medical UI, fake plots, placeholder visuals, or unsupported clinical claims.\nReference-informed quality: use the supplied page-specific reference lessons to judge whether the slide actually adopted the relevant mature-slide lesson; do not require copying source styling.\nFor diagram pages, check connector direction, visible arrowheads, edge crossing, and whether the flow can be understood in about 5 seconds.\nFor result pages, check metric direction explicitly: Dice and lesion recall are higher-is-better; false-positive burden is lower-is-better.\nFor failure-case pages, verify that input, GT, prediction, and error overlay appear aligned and from the same case; the TP/FP/FN legend must be readable and tied to the pixels.\nCheck that synthetic phantom evidence is visibly bounded and not represented as patient validation, clinical deployment, or a real multi-center study.\nReturn PASS only when every page satisfies its research visual job and looks like a mature scientific talk page. Return REVISE if any page needs a concrete visual fix. Return BLOCKED only if the supplied pixels cannot be assessed.\nFor REVISE, give the smallest concrete page-specific repair recommendation.\n\nDeclared page contracts:\n- slide_1: title=A small lesion is the unit of failure; declared_archetype=MEDICAL_IMAGE_COMPARISON; expected_scientific_objects=synthetic cardiac-MR-like slice, GT lesion mask, prediction overlay, endpoint names, synthetic-only qualifier; reference_ids=RRL-022, RRL-039, RRL-013, RRL-019, RRL-024; retrieval_intent=Ground a segmentation task with actual image pixels, anatomy, lesion target, GT/prediction overlay, and endpoint semantics.; reference_informed_design=Make the slice/overlay the largest object so the task is readable from pixels.; Place endpoint and synthetic scope adjacent to the image, not in separate cards.; Use direct lesion/anatomy labels instead of a detached glossary.\n- slide_2: title=The stress test follows one image-to-endpoint path; declared_archetype=EXPERIMENT_DESIGN; expected_scientific_objects=center appearance shifts, synthetic image and GT generation, prediction step, case metrics, center aggregation; reference_ids=RRL-019, RRL-010, RRL-022, RRL-026, RRL-002; retrieval_intent=Show center-specific appearance shift, synthetic image/GT generation, prediction, endpoint calculation, and aggregation.; reference_informed_design=Use one left-to-right data path from center shift to endpoint aggregation.; Use compact image thumbnails as scientific objects inside the path.; Keep connectors semantic and visible instead of decorative workflow arrows.\n- slide_3: title=Average Dice can hide a lesion-level failure; declared_archetype=RESULT_FIGURE; expected_scientific_objects=Dice panel, lesion recall panel, FP burden panel, uncertainty intervals, endpoint disagreement annotation; reference_ids=RRL-021, RRL-039, RRL-003, RRL-004, RRL-023; retrieval_intent=Compare Dice, lesion-level recall, and false-positive burden across center shift with uncertainty or variation.; reference_informed_design=Let aligned quantitative panels dominate the page.; Show cross-case variation/uncertainty in the plot grammar.; Annotate the endpoint disagreement directly at the high-shift condition.\n- slide_4: title=The failure is visible in the same-case overlay; declared_archetype=FAILURE_CASE; expected_scientific_objects=same-case input, GT panel, prediction panel, TP/FP/FN overlay, case metrics; reference_ids=RRL-022, RRL-039, RRL-041, RRL-013, RRL-017; retrieval_intent=Show one same-case input, GT, prediction, and error overlay with directly interpretable color legend and case metrics.; reference_informed_design=Use same-case aligned panels so GT, prediction, and error are spatially comparable.; Put TP/FP/FN color semantics in a clear projection-scale legend.; Tie case metrics to the visible missed lesion region.\n- slide_5: title=Validate the small-lesion shift explicitly next; declared_archetype=NEGATIVE_RESULT; expected_scientific_objects=lesion-size recall plot, failure regime annotation, completed evidence boundary, planned validation experiment; reference_ids=RRL-021, RRL-041, RRL-005, RRL-003, RRL-004; retrieval_intent=Show the supported failure regime and a planned validation experiment without presenting it as completed evidence.; reference_informed_design=Make the small-lesion failure curve the main evidence object.; Separate completed synthetic evidence from the planned held-out-center validation.; Keep the mechanism statement short and directly supported by the plotted evidence.",
+      "source_contracts": [
+        "automation/reviewed_handoff/tasks/017_medical_imaging_group_meeting_benchmark/PLAN.md",
+        "skills/tools/documents-media/presentations/research-presentations/SKILL.md",
+        "skills/tools/documents-media/presentations/shared/visual-qa.md",
+        "skills/tools/documents-media/presentations/shared/references/RESEARCH_SLIDE_ARCHETYPES.md"
+      ]
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "REVISE",
+      "item_id": "slide_1",
+      "observations": [
+        "Primary scientific object: synthetic cardiac-MR-like ring slice with a small annotated lesion and a GT/prediction overlay.",
+        "The large image comparison is prominent and the synthetic-only / not-clinical-validation boundary is visible adjacent to the images.",
+        "The red lesion outline/arrow appears in both panels, while the green prediction mark is only a small adjacent outline. The displayed colors do not make the GT-versus-prediction relation immediately interpretable.",
+        "The legend assigns red to both GT and FN, making the error semantics ambiguous at projection scale.",
+        "Professional projection readiness: REVISE; the image prominence and typography are strong, but mask/error color semantics are not unambiguous."
+      ],
+      "requirement_ids": [
+        "slide_1"
+      ],
+      "summary": "Strong image-led layout, but the overlay and legend do not clearly distinguish GT, prediction, and FN."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_2",
+      "observations": [
+        "Primary scientific object: left-to-right experiment workflow from a synthetic slice through prediction and metrics to center aggregation.",
+        "Arrowheads are visible, connectors run left-to-right without crossings, and the workflow can be followed quickly.",
+        "Only one image thumbnail is shown; the stated three center conditions (contrast, noise, bias) are text-only and no visibly distinct center-specific appearance shifts are presented.",
+        "The central workflow is composed mainly of generic rounded text cards rather than compact image/GT/prediction scientific objects, so synthetic generation and the effect of center shift are not visually grounded.",
+        "Professional projection readiness: REVISE; alignment and hierarchy are clean, but the slide reads as a generic process diagram rather than a mature imaging-experiment design figure."
+      ],
+      "requirement_ids": [
+        "slide_2"
+      ],
+      "summary": "The process direction is clear, but center-specific appearance shifts and image/GT generation need to be visible in the workflow."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_3",
+      "observations": [
+        "Primary scientific object: three aligned endpoint plots for Dice overlap, lesion recall, and FP burden across centers A–C.",
+        "Dice and lesion-recall panels visibly include vertical uncertainty intervals. The plot labels explicitly state Dice/recall are higher-is-better and FP burden is lower-is-better.",
+        "The bottom claim says Center C small-lesion recall drops to 0.00, but the visible Center C point in the lesion-recall panel is about 0.57. No small-lesion-only series is visibly identified in that panel.",
+        "The FP-burden points occupy the visual baseline on a 0.00–0.08 axis, making the cross-center differences very difficult to read; no uncertainty interval is visible for FP burden.",
+        "Professional projection readiness: REVISE; the aligned panels are clean and prominent, but the stated endpoint disagreement is not supported by the visible lesion-recall plot."
+      ],
+      "requirement_ids": [
+        "slide_3"
+      ],
+      "summary": "Repair the mismatch between the small-lesion-recall claim and the plotted recall series, and rescale or annotate FP burden for readable variation."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_4",
+      "observations": [
+        "Primary scientific object: four spatially aligned same-case panels labelled Input, GT, Prediction, and Error overlay.",
+        "The anatomy/image geometry and highlighted lesion location are aligned across panels, and the case-level Dice, recall, and FN-pixel statement is visible.",
+        "GT, Prediction, and Error overlay appear visually almost identical: each shows the same red arrow and small red outlined lesion, with no clearly visible GT mask, absent prediction mask, or distinct TP/FP/FN pixel overlay.",
+        "The legend is readable, but its red GT and red FN entries use the same color, so it cannot resolve the overlay semantics.",
+        "Professional projection readiness: REVISE; panel alignment is good, but the claimed missed lesion is not visibly demonstrated by distinct GT, prediction, and error pixels."
+      ],
+      "requirement_ids": [
+        "slide_4"
+      ],
+      "summary": "Render distinct same-case GT mask, missing/empty prediction, and a clear FN-only overlay; use nonconflicting GT and TP/FP/FN colors."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_5",
+      "observations": [
+        "Primary scientific object: lesion-size versus lesion-level recall plot for Centers A–C, with a completed-synthetic-evidence boundary and a separately labeled planned validation section.",
+        "The completed synthetic scope and the planned held-out-center experiment are visibly separated; planned work is not presented as completed patient validation.",
+        "The plotted Center C small-lesion point is visibly at 0.00, but the red “failure regime” annotation arrow points toward an empty baseline region near the medium/large side rather than to that point.",
+        "Professional projection readiness: REVISE; the plot is the dominant evidence object and the scope boundary is clear, but the key annotation is spatially detached from the visible failure."
+      ],
+      "requirement_ids": [
+        "slide_5"
+      ],
+      "summary": "Move the failure-regime callout and arrow to the Center C small-lesion point at recall 0.00, and label that point directly."
+    }
+  ],
+  "non_blocking_notes": [],
+  "overall_decision": "REVISE",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "1f07ab3488dbe7f721b5eac37f5373ea0ff90fd495f25bff2035e072d1b0855b",
+  "review_kind": "medical-imaging-group-meeting-benchmark",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "REVISE",
+  "task_key": "017_medical_imaging_group_meeting_benchmark",
+  "workflow_type": "generic"
+}
