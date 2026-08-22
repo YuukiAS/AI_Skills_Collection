@@ -31,9 +31,9 @@
   },
   "pptx_object_summary": {
     "editable_slide_count": 5,
-    "media_count": 8,
-    "shape_count": 67,
-    "picture_count": 9
+    "media_count": 11,
+    "shape_count": 70,
+    "picture_count": 13
   },
   "slide_reviews": [
     {
@@ -56,14 +56,14 @@
         "height": 1200,
         "blank_area_ratio": 0.0007,
         "contrast_range": 244,
-        "dominant_object_area": 0.8542,
+        "dominant_object_area": 0.85,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0326,
+        "text_density_proxy": 0.0331,
         "content_bbox": [
           0,
           0,
           2133,
-          1024
+          1019
         ]
       },
       "reference_ids": [
@@ -100,16 +100,16 @@
         "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-2.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.0671,
-        "contrast_range": 244,
-        "dominant_object_area": 0.7183,
+        "blank_area_ratio": 0.0274,
+        "contrast_range": 248,
+        "dominant_object_area": 0.8033,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.036,
+        "text_density_proxy": 0.0447,
         "content_bbox": [
           0,
           0,
           2133,
-          861
+          963
         ]
       },
       "reference_ids": [
@@ -146,11 +146,11 @@
         "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-3.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.4747,
+        "blank_area_ratio": 0.4738,
         "contrast_range": 221,
         "dominant_object_area": 0.8192,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0362,
+        "text_density_proxy": 0.0365,
         "content_bbox": [
           0,
           0,
@@ -196,7 +196,7 @@
         "contrast_range": 247,
         "dominant_object_area": 0.8383,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0405,
+        "text_density_proxy": 0.0403,
         "content_bbox": [
           0,
           0,
@@ -238,11 +238,11 @@
         "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-5.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.3551,
+        "blank_area_ratio": 0.3544,
         "contrast_range": 255,
         "dominant_object_area": 0.785,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0424,
+        "text_density_proxy": 0.0432,
         "content_bbox": [
           0,
           0,

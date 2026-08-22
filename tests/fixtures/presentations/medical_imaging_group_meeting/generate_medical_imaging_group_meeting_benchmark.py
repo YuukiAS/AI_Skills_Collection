@@ -55,6 +55,14 @@ P = {
     "panel": "FBFBF8",
 }
 
+OVERLAY_RGBA = {
+    "gt": (154, 106, 22, 155),
+    "tp": (42, 124, 84, 170),
+    "prediction": (42, 124, 84, 150),
+    "fp": (47, 102, 179, 170),
+    "fn": (176, 71, 63, 190),
+}
+
 CENTER_CONFIGS = [
     {"center": "Center A", "condition": "reference contrast", "contrast": 1.00, "noise": 5.0, "bias": 0.02, "miss_small": 0.10, "fp": 0.02},
     {"center": "Center B", "condition": "low contrast + bias", "contrast": 0.78, "noise": 8.0, "bias": 0.13, "miss_small": 0.35, "fp": 0.04},
@@ -362,6 +370,15 @@ def draw_mask_outline(draw: ImageDraw.ImageDraw, mask: set[tuple[int, int]], col
     draw.ellipse([min(xs), min(ys), max(xs), max(ys)], outline=color, width=width)
 
 
+def draw_mask_boundary(draw: ImageDraw.ImageDraw, mask: set[tuple[int, int]], color: tuple[int, int, int, int], width: int = 3):
+    if not mask:
+        return
+    xs = [x for x, _ in mask]
+    ys = [y for _, y in mask]
+    pad = max(2, width)
+    draw.ellipse([min(xs) - pad, min(ys) - pad, max(xs) + pad, max(ys) + pad], outline=color, width=width)
+
+
 def make_case(center_index: int, case_index: int, config: dict[str, object]) -> dict[str, object]:
     rng = random.Random(SEED + center_index * 1000 + case_index)
     lesion_size = ["small", "medium", "large"][case_index % 3]
@@ -526,26 +543,40 @@ def rgba_from_mask(base: Image.Image, gt: set[tuple[int, int]], pred: set[tuple[
     pix = overlay.load()
     if mode == "gt_pred":
         for x, y in gt:
-            pix[x, y] = (176, 71, 63, 104)
+            pix[x, y] = OVERLAY_RGBA["gt"]
         for x, y in pred:
-            pix[x, y] = (42, 124, 84, 112)
+            pix[x, y] = OVERLAY_RGBA["prediction"]
     elif mode == "gt":
         for x, y in gt:
-            pix[x, y] = (176, 71, 63, 126)
+            pix[x, y] = OVERLAY_RGBA["gt"]
     elif mode == "pred":
         for x, y in pred:
-            pix[x, y] = (42, 124, 84, 126)
+            pix[x, y] = OVERLAY_RGBA["prediction"]
     elif mode == "error":
         for x, y in gt & pred:
-            pix[x, y] = (42, 124, 84, 138)
+            pix[x, y] = OVERLAY_RGBA["tp"]
         for x, y in pred - gt:
-            pix[x, y] = (47, 102, 179, 138)
+            pix[x, y] = OVERLAY_RGBA["fp"]
         for x, y in gt - pred:
-            pix[x, y] = (176, 71, 63, 170)
+            pix[x, y] = OVERLAY_RGBA["fn"]
+    draw = ImageDraw.Draw(overlay)
+    if mode in {"gt_pred", "gt"}:
+        draw_mask_boundary(draw, gt, OVERLAY_RGBA["gt"], width=3)
+    if mode in {"gt_pred", "pred"}:
+        draw_mask_boundary(draw, pred, OVERLAY_RGBA["prediction"], width=3)
+    if mode == "error":
+        draw_mask_boundary(draw, gt & pred, OVERLAY_RGBA["tp"], width=3)
+        draw_mask_boundary(draw, pred - gt, OVERLAY_RGBA["fp"], width=3)
+        draw_mask_boundary(draw, gt - pred, OVERLAY_RGBA["fn"], width=4)
     return Image.alpha_composite(rgb.convert("RGBA"), overlay)
 
 
-def annotate_image(image: Image.Image, label: str, lesion_xy: list[float] | None = None) -> Image.Image:
+def annotate_image(
+    image: Image.Image,
+    label: str,
+    lesion_xy: list[float] | None = None,
+    marker_color: tuple[int, int, int, int] = OVERLAY_RGBA["gt"],
+) -> Image.Image:
     canvas = image.convert("RGBA").resize((420, 420), Image.Resampling.BICUBIC)
     draw = ImageDraw.Draw(canvas)
     font = load_font(18)
@@ -554,8 +585,8 @@ def annotate_image(image: Image.Image, label: str, lesion_xy: list[float] | None
     if lesion_xy:
         x, y = lesion_xy
         sx, sy = x / SIZE * 420, y / SIZE * 420
-        draw.line([sx - 42, sy - 34, sx - 8, sy - 8], fill=(176, 71, 63, 255), width=3)
-        draw.ellipse([sx - 7, sy - 7, sx + 7, sy + 7], outline=(176, 71, 63, 255), width=3)
+        draw.line([sx - 42, sy - 34, sx - 8, sy - 8], fill=marker_color, width=3)
+        draw.ellipse([sx - 7, sy - 7, sx + 7, sy + 7], outline=marker_color, width=3)
     return canvas
 
 
@@ -565,13 +596,20 @@ def save_case_assets(assets: Path, data: dict[str, object]) -> dict[str, str]:
     slide1_case = next(case for case in cases if case["case_id"] == "C2-04")
     failure_case = next(case for case in cases if case["case_id"] == data["summary"]["failure_case_id"])
     paths: dict[str, str] = {}
+    center_examples = {
+        config["center"]: next(case for case in cases if case["center"] == config["center"] and case["case_id"].endswith("-04"))
+        for config in CENTER_CONFIGS
+    }
     image_defs = {
         "slide1_input": annotate_image(slide1_case["image"], "Synthetic cardiac-MR-like slice", slide1_case["lesion_center"]),
-        "slide1_overlay": annotate_image(rgba_from_mask(slide1_case["image"], slide1_case["gt"], slide1_case["pred"], "gt_pred"), "GT lesion + prediction", slide1_case["lesion_center"]),
+        "slide1_overlay": annotate_image(rgba_from_mask(slide1_case["image"], slide1_case["gt"], slide1_case["pred"], "gt_pred"), "GT + prediction"),
         "failure_input": annotate_image(failure_case["image"], "Input", failure_case["lesion_center"]),
-        "failure_gt": annotate_image(rgba_from_mask(failure_case["image"], failure_case["gt"], failure_case["pred"], "gt"), "GT", failure_case["lesion_center"]),
-        "failure_pred": annotate_image(rgba_from_mask(failure_case["image"], failure_case["gt"], failure_case["pred"], "pred"), "Prediction", failure_case["lesion_center"]),
-        "failure_error": annotate_image(rgba_from_mask(failure_case["image"], failure_case["gt"], failure_case["pred"], "error"), "Error overlay", failure_case["lesion_center"]),
+        "failure_gt": annotate_image(rgba_from_mask(failure_case["image"], failure_case["gt"], failure_case["pred"], "gt"), "GT lesion"),
+        "failure_pred": annotate_image(rgba_from_mask(failure_case["image"], failure_case["gt"], failure_case["pred"], "pred"), "Prediction"),
+        "failure_error": annotate_image(rgba_from_mask(failure_case["image"], failure_case["gt"], failure_case["pred"], "error"), "TP / FP / FN"),
+        "center_a_shift": annotate_image(rgba_from_mask(center_examples["Center A"]["image"], center_examples["Center A"]["gt"], center_examples["Center A"]["pred"], "gt_pred"), "A reference"),
+        "center_b_shift": annotate_image(rgba_from_mask(center_examples["Center B"]["image"], center_examples["Center B"]["gt"], center_examples["Center B"]["pred"], "gt_pred"), "B low contrast"),
+        "center_c_shift": annotate_image(rgba_from_mask(center_examples["Center C"]["image"], center_examples["Center C"]["gt"], center_examples["Center C"]["pred"], "gt_pred"), "C high shift"),
     }
     for name, image in image_defs.items():
         path = assets / f"{name}.png"
@@ -582,18 +620,27 @@ def save_case_assets(assets: Path, data: dict[str, object]) -> dict[str, str]:
 
 def plot_main_results(path: Path, summary: dict[str, object]) -> None:
     rows = summary["center_summary"]
+    size_rows = summary["lesion_size_summary"]
     labels = [row["center"].replace("Center ", "") for row in rows]
     x = list(range(len(rows)))
+    small_recall_rows = []
+    for row in rows:
+        small = next(item for item in size_rows if item["center"] == row["center"] and item["lesion_size"] == "small")
+        small_recall_rows.append({
+            "center": row["center"],
+            "lesion_recall": small["lesion_recall"],
+        })
+    fp_max = max(row["fp_burden"]["mean"] + row["fp_burden"]["se"] * 1.96 for row in rows)
     metrics = [
-        ("Dice overlap", "dice", "higher is better", 0.0, 1.0, "teal"),
-        ("Lesion recall", "lesion_recall", "higher is better", 0.0, 1.0, "red"),
-        ("FP burden", "fp_burden", "lower is better", 0.0, 0.08, "blue"),
+        ("Dice overlap", rows, "dice", "higher is better", 0.0, 1.0, "teal"),
+        ("Small-lesion recall", small_recall_rows, "lesion_recall", "higher is better", 0.0, 1.0, "red"),
+        ("FP burden", rows, "fp_burden", "lower is better", 0.0, max(0.012, fp_max * 1.55), "blue"),
     ]
     fig, axes = plt.subplots(1, 3, figsize=(11.5, 3.6), dpi=220)
     fig.patch.set_facecolor(hex_color("panel"))
-    for ax, (title, key, subtitle, ymin, ymax, color) in zip(axes, metrics, strict=True):
-        means = [row[key]["mean"] for row in rows]
-        ses = [row[key]["se"] * 1.96 for row in rows]
+    for ax, (title, metric_rows, key, subtitle, ymin, ymax, color) in zip(axes, metrics, strict=True):
+        means = [row[key]["mean"] for row in metric_rows]
+        ses = [row[key]["se"] * 1.96 for row in metric_rows]
         ax.errorbar(x, means, yerr=ses, fmt="o", color=hex_color(color), ecolor=hex_color(color), elinewidth=2.0, capsize=5, markersize=7)
         ax.plot(x, means, color=hex_color(color), linewidth=2.0, alpha=0.7)
         ax.set_title(title, fontsize=13, weight="bold", color=hex_color("ink"))
@@ -605,9 +652,9 @@ def plot_main_results(path: Path, summary: dict[str, object]) -> None:
             spine.set_visible(False)
         ax.tick_params(labelsize=10, colors=hex_color("ink"))
     axes[1].annotate(
-        "high shift separates recall\nfrom average overlap",
-        xy=(2, rows[2]["lesion_recall"]["mean"]),
-        xytext=(1.15, 0.30),
+        "small lesions missed\nunder high shift",
+        xy=(2, small_recall_rows[2]["lesion_recall"]["mean"]),
+        xytext=(1.12, 0.28),
         arrowprops={"arrowstyle": "->", "color": hex_color("red"), "lw": 1.4},
         fontsize=9.5,
         color=hex_color("red"),
@@ -642,9 +689,9 @@ def plot_size_results(path: Path, summary: dict[str, object]) -> None:
     ax.legend(loc="upper left", frameon=False, fontsize=10)
     c_row = next(row for row in rows if row["center"] == "Center C" and row["lesion_size"] == "small")
     ax.annotate(
-        "failure regime",
-        xy=(2 - 0.22, c_row["lesion_recall"]["mean"]),
-        xytext=(1.22, 0.20),
+        f"Center C small\nrecall = {c_row['lesion_recall']['mean']:.2f}",
+        xy=(0 + 0.22, c_row["lesion_recall"]["mean"]),
+        xytext=(0.52, 0.22),
         arrowprops={"arrowstyle": "->", "color": hex_color("red"), "lw": 1.5},
         color=hex_color("red"),
         fontsize=12,
@@ -675,13 +722,13 @@ def add_image(slide, path: str, x: float, y: float, w: float, h: float | None = 
 
 
 def add_legend(slide, x: float, y: float):
-    entries = [("GT", "red"), ("Prediction / TP", "green"), ("FP", "blue"), ("FN", "red")]
+    entries = [("GT", "gold"), ("Pred / TP", "green"), ("FP", "blue"), ("FN", "red")]
     for i, (label, color) in enumerate(entries):
-        shape = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, inch(x + i * 1.12), inch(y), inch(0.16), inch(0.16))
+        shape = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, inch(x + i * 1.25), inch(y), inch(0.16), inch(0.16))
         shape.fill.solid()
         shape.fill.fore_color.rgb = rgb(color)
         shape.line.fill.background()
-        add_text(slide, label, x + i * 1.12 + 0.22, y - 0.02, 0.82, 0.22, 8.5, "muted")
+        add_text(slide, label, x + i * 1.25 + 0.22, y - 0.02, 0.92, 0.22, 8.5, "muted")
 
 
 def draw_slide1(slide, assets: dict[str, str], manifest: dict, refs: list[str], data: dict[str, object]):
@@ -712,21 +759,27 @@ def node(slide, text: str, x: float, y: float, w: float, h: float, fill: str = "
 
 
 def draw_slide2(slide, assets: dict[str, str], manifest: dict, refs: list[str], data: dict[str, object]):
-    add_image(slide, assets["slide1_input"], 0.72, 1.55, 1.75)
-    add_text(slide, "3 center conditions", 0.65, 3.48, 1.90, 0.30, 10.5, "ink", True, PP_ALIGN.CENTER)
-    add_text(slide, "contrast, noise, bias", 0.65, 3.82, 1.90, 0.28, 9.4, "muted", False, PP_ALIGN.CENTER)
-    node(slide, "synthetic image\n+ GT lesion", 3.00, 2.02, 1.78, 1.05)
-    node(slide, "deterministic\nprediction", 5.34, 2.02, 1.78, 1.05)
-    node(slide, "case metrics\nDice, recall, FP", 7.68, 2.02, 1.78, 1.05)
-    node(slide, "center summary\n+ lesion strata", 10.02, 2.02, 1.78, 1.05)
-    arrow(slide, 2.48, 2.55, 3.00, 2.55)
-    arrow(slide, 4.78, 2.55, 5.34, 2.55)
-    arrow(slide, 7.12, 2.55, 7.68, 2.55)
-    arrow(slide, 9.46, 2.55, 10.02, 2.55)
-    add_text(slide, "Case-level metrics stay attached to the same image, GT and prediction before any center-level average.", 3.02, 3.55, 7.80, 0.44, 13.2, "teal", True)
-    add_text(slide, "The stress test asks whether center-level average Dice hides lesion-level failures under appearance shift.", 3.02, 4.20, 7.80, 0.48, 12.0, "muted")
-    add_rule(slide, 2.95, 4.95, 10.8, 4.95, "line", dash=True)
-    add_text(slide, "Aggregation is descriptive: no clinical validation claim is made from these phantoms.", 3.20, 5.18, 7.30, 0.40, 11.0, "muted", False, PP_ALIGN.CENTER)
+    center_assets = [("Center A", "center_a_shift"), ("Center B", "center_b_shift"), ("Center C", "center_c_shift")]
+    for y, (label, key) in zip([1.34, 2.76, 4.18], center_assets, strict=True):
+        add_image(slide, assets[key], 0.68, y, 1.18, 1.18)
+        condition = next(config["condition"] for config in CENTER_CONFIGS if config["center"] == label)
+        add_text(slide, label, 1.96, y + 0.20, 1.02, 0.24, 10.0, "ink", True)
+        add_text(slide, condition, 1.96, y + 0.53, 1.12, 0.32, 8.7, "muted")
+    add_text(slide, "appearance shift", 0.75, 5.56, 2.06, 0.28, 10.2, "teal", True, PP_ALIGN.CENTER)
+    add_image(slide, assets["slide1_overlay"], 3.36, 2.00, 1.42, 1.42)
+    add_panel_label(slide, "image + GT", 3.36, 3.54, 1.42)
+    add_image(slide, assets["failure_pred"], 5.42, 2.00, 1.42, 1.42)
+    add_panel_label(slide, "prediction", 5.42, 3.54, 1.42)
+    node(slide, "case metrics\nDice, recall, FP", 7.56, 2.15, 1.66, 0.90)
+    node(slide, "center summary\n+ lesion strata", 9.94, 2.15, 1.78, 0.90)
+    arrow(slide, 2.92, 2.55, 3.36, 2.55)
+    arrow(slide, 4.78, 2.55, 5.42, 2.55)
+    arrow(slide, 6.84, 2.55, 7.56, 2.55)
+    arrow(slide, 9.22, 2.55, 9.94, 2.55)
+    add_text(slide, "The same synthetic case carries image pixels, lesion mask, prediction and metrics before center-level averaging.", 3.26, 4.20, 7.95, 0.44, 13.0, "teal", True)
+    add_text(slide, "The stress test asks whether center-level average Dice hides lesion-level failures under appearance shift.", 3.26, 4.85, 7.95, 0.48, 12.0, "muted")
+    add_rule(slide, 3.20, 5.58, 11.2, 5.58, "line", dash=True)
+    add_text(slide, "Aggregation is descriptive: no clinical validation claim is made from these phantoms.", 3.45, 5.82, 7.50, 0.40, 11.0, "muted", False, PP_ALIGN.CENTER)
     manifest["experiment_design_diagram"] = {
         "reading_direction": "left_to_right",
         "edge_crossing": "none",
@@ -736,6 +789,9 @@ def draw_slide2(slide, assets: dict[str, str], manifest: dict, refs: list[str], 
     manifest.setdefault("audience_text_by_archetype", {})["EXPERIMENT_DESIGN"] = [
         "3 center conditions",
         "contrast, noise, bias",
+        "Center A reference contrast",
+        "Center B low contrast + bias",
+        "Center C high shift",
         "synthetic image + GT lesion",
         "deterministic prediction",
         "case metrics Dice, recall, FP",

@@ -3,17 +3,17 @@
   "identity_bindings": {
     "adapter_identity": "017_medical_imaging_group_meeting_benchmark",
     "bridge_kit_commit": "f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e",
-    "evidence_manifest_sha256": "403e9f1a2a869d3841d1f8626742d23a65b0edf281b0216a7acdd5ab3d48d0ec",
+    "evidence_manifest_sha256": "0aac9d4e75593ac9f2076f13ceebdf7b2590495b699ef1a8e933f002cec490f8",
     "input_png_sha256_by_slide": {
-      "slide_1": "c09b1ae54588179394511e3ed81debe17de4585b22221b89a970de111a7fdd79",
-      "slide_2": "4adf2262ad4cfa265412da471182d647f83480f94c4915b6dc86d453e18b6213",
-      "slide_3": "dc729eaceaa1c33fc096018f40e2f023f46da31d71cc21b589f4209bf6eb6edf",
-      "slide_4": "0bb8f74444bb640c73f3c57b9cf7a05c3545ca3afe437699ed1bd6d6a1bfa9c4",
-      "slide_5": "eb29de0eb7d3e58775e440e55c7e880aeb42bfa7241fc46740e004742295f564"
+      "slide_1": "9e81d3e545a3fb2c2c9bf6810543e70663b0fbe6566d06458da1e9beab5a422b",
+      "slide_2": "cdd51a9916ec773e2c876b9a69e9ac676643b8643844892014231fb7b8c98a00",
+      "slide_3": "9af0f7e098b48dfd7c8dfabb1c2c8ad31f809579e054688d5cea51c4c38d44e4",
+      "slide_4": "a143082374c3974eb90525b48876d0c0a312bf633654bb2a622b30cde7346e0f",
+      "slide_5": "7f32f4540873269b8ab7f256afa1b53c25dbaeca91f7673f73559b732efb8ddf"
     },
-    "mechanical_review_sha256": "704bb0a397766e13238c2475dcb4af9282a4dac44e81099718d1a504cf266108",
-    "pdf_sha256": "88b747c3d8979e46b2f5e3992ba8fd57c4693e1d096da2176f3466ccacdcba60",
-    "pptx_sha256": "8a80754a946057bd3a3999f3da8d65829ba7e7298690ac4fd5fd9b66574c9a59",
+    "mechanical_review_sha256": "2a971db887e017dbbf9395b53ff62b80a1b1dd197de0d122102250f54fe9c106",
+    "pdf_sha256": "59b833a663667bea2ee2f1b51baf95ea70ae44b92b8136693eb06b3b832756dd",
+    "pptx_sha256": "4e5231da3da02aac6bc63624afbdca9a16f2e7427debfde270bba2815e35d427",
     "reference_design_audit_sha256": "a0548485cf850e95f62d63ab5471f16804887668c27bada6a3e80b9791e4323b",
     "render_status_sha256": "b375091504a5873062b7f0cf5c436a07ca1e50e31682d5ef866e39b1d8aff9d3",
     "simulation_summary_sha256": "7020272e487d2720cff4787fc50be426880d71447dad5d963634d591b0903a48",
@@ -28,35 +28,35 @@
       "logical_id": "slide_1",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-1.png",
-      "sha256": "c09b1ae54588179394511e3ed81debe17de4585b22221b89a970de111a7fdd79"
+      "sha256": "9e81d3e545a3fb2c2c9bf6810543e70663b0fbe6566d06458da1e9beab5a422b"
     },
     {
       "description": "Slide 2: The stress test follows one image-to-endpoint path | archetype=EXPERIMENT_DESIGN | expected_objects=center appearance shifts, synthetic image and GT generation, prediction step, case metrics, center aggregation",
       "logical_id": "slide_2",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-2.png",
-      "sha256": "4adf2262ad4cfa265412da471182d647f83480f94c4915b6dc86d453e18b6213"
+      "sha256": "cdd51a9916ec773e2c876b9a69e9ac676643b8643844892014231fb7b8c98a00"
     },
     {
       "description": "Slide 3: Average Dice can hide a lesion-level failure | archetype=RESULT_FIGURE | expected_objects=Dice panel, lesion recall panel, FP burden panel, uncertainty intervals, endpoint disagreement annotation",
       "logical_id": "slide_3",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-3.png",
-      "sha256": "dc729eaceaa1c33fc096018f40e2f023f46da31d71cc21b589f4209bf6eb6edf"
+      "sha256": "9af0f7e098b48dfd7c8dfabb1c2c8ad31f809579e054688d5cea51c4c38d44e4"
     },
     {
       "description": "Slide 4: The failure is visible in the same-case overlay | archetype=FAILURE_CASE | expected_objects=same-case input, GT panel, prediction panel, TP/FP/FN overlay, case metrics",
       "logical_id": "slide_4",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-4.png",
-      "sha256": "0bb8f74444bb640c73f3c57b9cf7a05c3545ca3afe437699ed1bd6d6a1bfa9c4"
+      "sha256": "a143082374c3974eb90525b48876d0c0a312bf633654bb2a622b30cde7346e0f"
     },
     {
       "description": "Slide 5: Validate the small-lesion shift explicitly next | archetype=NEGATIVE_RESULT | expected_objects=lesion-size recall plot, failure regime annotation, completed evidence boundary, planned validation experiment",
       "logical_id": "slide_5",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-5.png",
-      "sha256": "eb29de0eb7d3e58775e440e55c7e880aeb42bfa7241fc46740e004742295f564"
+      "sha256": "7f32f4540873269b8ab7f256afa1b53c25dbaeca91f7673f73559b732efb8ddf"
     }
   ],
   "privacy_policy": "PUBLIC_SAFE_ONLY",

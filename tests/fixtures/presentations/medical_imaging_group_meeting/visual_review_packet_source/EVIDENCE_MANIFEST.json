@@ -303,6 +303,9 @@
     "failure_gt": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_gt.png",
     "failure_pred": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
     "failure_error": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+    "center_a_shift": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/center_a_shift.png",
+    "center_b_shift": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/center_b_shift.png",
+    "center_c_shift": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/center_c_shift.png",
     "main_plot": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/slide3_endpoint_disagreement.png",
     "size_plot": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/slide5_lesion_size_recall.png"
   },
@@ -703,6 +706,9 @@
       "audience_text": [
         "3 center conditions",
         "contrast, noise, bias",
+        "Center A reference contrast",
+        "Center B low contrast + bias",
+        "Center C high shift",
         "synthetic image + GT lesion",
         "deterministic prediction",
         "case metrics Dice, recall, FP",
@@ -1685,6 +1691,9 @@
     "EXPERIMENT_DESIGN": [
       "3 center conditions",
       "contrast, noise, bias",
+      "Center A reference contrast",
+      "Center B low contrast + bias",
+      "Center C high shift",
       "synthetic image + GT lesion",
       "deterministic prediction",
       "case metrics Dice, recall, FP",
