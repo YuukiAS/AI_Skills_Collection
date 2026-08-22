@@ -1,0 +1,159 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": "On slide_1, the visible arrowheads create a serial path from the DGP equation to the u_j random-effect box and then from u_j to the epsilon_ij residual box. This visually implies that the random effect generates the individual residual, although the displayed additive model presents them as separate components.",
+      "finding_id": "F-01",
+      "item_id": "slide_1",
+      "recommendation": "Replace the serial u_j → epsilon_ij connector with separate, clearly directed connectors from the u_j and epsilon_ij boxes into the outcome/DGP equation (or remove the connectors and label both as independent additive components).",
+      "requirement_id": "slide_1",
+      "severity": "blocking",
+      "summary": "The model diagram’s connector direction miscommunicates the DGP."
+    }
+  ],
+  "created_at": "2026-08-22T11:25:19Z",
+  "evidence_id": "visual-review-016_statistical_method_group_meeting_benchmark-69b32c720633",
+  "images": [
+    {
+      "logical_id": "slide_1",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-1.png",
+      "sha256": "9e6d59d16c89b27a65e579ca7708cad868a86c19b697e2217e50e13ba0901ac6"
+    },
+    {
+      "logical_id": "slide_2",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-2.png",
+      "sha256": "c619fc34a361d31f2ba0d8c6586404e3c2e797870622dccb83c1d0d6c39e67ce"
+    },
+    {
+      "logical_id": "slide_3",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+      "sha256": "26e6c96c653fc56df5a2786802fb51ceb2c6c802ce584cd1d5aba7b092650f89"
+    },
+    {
+      "logical_id": "slide_4",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-4.png",
+      "sha256": "aa04f8120509e5ef2d3721477ed2b9a342382701611b7bf448d46476170986eb"
+    },
+    {
+      "logical_id": "slide_5",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-5.png",
+      "sha256": "05e6e2c3dc18dd810d526c15097e88d754ccdae41844fe6b8a8d11348d2a8c2e"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "adapter_identity": "016_statistical_method_group_meeting_benchmark",
+      "bridge_kit_commit": "f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e",
+      "evidence_manifest_sha256": "9010bfae11016931720f164d43453072fba136f7797c8392dbb91b9299168db3",
+      "input_png_sha256_by_slide": {
+        "slide_1": "9e6d59d16c89b27a65e579ca7708cad868a86c19b697e2217e50e13ba0901ac6",
+        "slide_2": "c619fc34a361d31f2ba0d8c6586404e3c2e797870622dccb83c1d0d6c39e67ce",
+        "slide_3": "26e6c96c653fc56df5a2786802fb51ceb2c6c802ce584cd1d5aba7b092650f89",
+        "slide_4": "aa04f8120509e5ef2d3721477ed2b9a342382701611b7bf448d46476170986eb",
+        "slide_5": "05e6e2c3dc18dd810d526c15097e88d754ccdae41844fe6b8a8d11348d2a8c2e"
+      },
+      "mechanical_review_sha256": "360715a588841f9f81c504c727e2d6552ad05c6f71c3c2581827a050dc3ae0ea",
+      "pdf_sha256": "e510c61c559b8e53ce4861cb6c8247c8cb13faeba3a02d6d6ea313e28245adfb",
+      "pptx_sha256": "6220d656b77c40122aff9600f64acbba6d64f0fb57f446ddc38d3489f0ce6ecc",
+      "render_status_sha256": "5aa4e873dbdf97d78cc53286fd1b515c8b05031a60a3bd2857e80045222045be",
+      "simulation_summary_sha256": "e8ac5e5ecd5aee768df9510f3e22148827aa11c4f2b45437d259c8e2f5f90f94",
+      "source_academic_visual_decision": "NOT_ASSESSED",
+      "source_dir": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source",
+      "source_mechanical_status": "MECHANICAL_PASS",
+      "source_render_status": "ok"
+    },
+    "manifest_sha256": "69b32c7206331e997291b33729927979a3e1a74605bb2ef59460b248c52ba2c5",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "You are reviewing five real rendered PNG pages from an editable PPTX statistical/biostatistical method group meeting benchmark.\nInspect the actual image pixels page by page. Do not infer PASS from SHA, file existence, page count, mechanical PASS, metadata, expected object text, or reference IDs.\nFor each page, identify the primary scientific object visible in the image.\nCheck statistical communication: estimand, DGP, formulas, interval methods, simulation design, coverage target, uncertainty, negative result, and planned next experiment.\nReject pages that become cards, dashboards, generic consulting layouts, decorative arrows, fake plots, or unsupported theorem-like claims.\nFor diagram pages, check connector direction, visible arrowheads, edge crossing, and whether the flow can be understood in about 5 seconds.\nFor result pages, coverage near nominal 0.95 is the target; do not reward over-coverage as simply higher-is-better.\nCheck that synthetic simulation evidence is visibly bounded and not represented as clinical validation or a general statistical theorem.\nReturn PASS only when every page satisfies its research visual job. Return REVISE if any page needs a concrete visual fix. Return BLOCKED only if the supplied pixels cannot be assessed.\nFor REVISE, give the smallest concrete page-specific repair recommendation.\n\nDeclared page contracts:\n- slide_1: title=Why iid intervals fail with center correlation; declared_archetype=STATISTICAL_MODEL; expected_scientific_objects=beta_1 estimand, DGP formula, u_j random effect, epsilon_ij residual, ICC rho, center inference unit; reference_ids=RRL-044, RRL-007, RRL-008, RRL-043, RRL-042; retrieval_intent=Explain estimand, DGP, cluster correlation, and why unbiased point estimates can still have wrong interval coverage.\n- slide_2: title=Cluster sandwich changes the variance object; declared_archetype=ESTIMATOR; expected_scientific_objects=naive variance formula, cluster sandwich formula, X_g block, u_g residual vector, center aggregation; reference_ids=RRL-040, RRL-009, RRL-028, RRL-030, RRL-015; retrieval_intent=Show how a variance estimator changes when score contributions are aggregated by center.\n- slide_3: title=Simulation design tests interval behavior; declared_archetype=SIMULATION_DESIGN; expected_scientific_objects=DGP knobs, replicates, naive interval branch, cluster-robust interval branch, coverage endpoint gate; reference_ids=RRL-009, RRL-010, RRL-019, RRL-026, RRL-002; retrieval_intent=Connect DGP knobs, generated centers, interval methods, replicates, and coverage endpoints in one experiment design.\n- slide_4: title=Coverage falls when ICC and imbalance rise; declared_archetype=RESULT_FIGURE; expected_scientific_objects=coverage plot, nominal 95% line, method comparison, Monte Carlo uncertainty, synthetic boundary; reference_ids=RRL-030, RRL-033, RRL-010, RRL-023, RRL-039; retrieval_intent=Show coverage against ICC with nominal target line, method comparison, and Monte Carlo uncertainty.\n- slide_5: title=Small-G stress remains the negative result; declared_archetype=NEGATIVE_RESULT; expected_scientific_objects=small-G stress evidence, coverage shortfall, failure mechanism, planned CR2/wild bootstrap experiment; reference_ids=RRL-011, RRL-024, RRL-025, RRL-041, RRL-005; retrieval_intent=Show the stress regime where the current interval still fails and define the next discriminating experiment.",
+      "source_contracts": [
+        "automation/reviewed_handoff/tasks/016_statistical_method_group_meeting_benchmark/PLAN.md",
+        "skills/tools/documents-media/presentations/research-presentations/SKILL.md",
+        "skills/tools/documents-media/presentations/shared/visual-qa.md",
+        "skills/tools/documents-media/presentations/shared/references/RESEARCH_SLIDE_ARCHETYPES.md"
+      ]
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "REVISE",
+      "item_id": "slide_1",
+      "observations": [
+        "Primary object: additive clustered-outcome DGP with beta_1 treatment-effect estimand, center random effect, residual noise, and ICC.",
+        "The synthetic-only boundary and the distinction between centered point estimates and failed interval coverage are visibly stated.",
+        "Arrow direction serializes u_j and epsilon_ij rather than showing them as separate DGP terms."
+      ],
+      "requirement_ids": [
+        "slide_1"
+      ],
+      "summary": "Scientifically complete model page, but repair the misleading causal/structural connector path."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_2",
+      "observations": [
+        "Primary object: cluster-sandwich variance formula contrasted with naive iid OLS variance.",
+        "The center g block, X_g rows, residual vector u_g, and aggregation of center score contributions are visible.",
+        "Converging arrows clearly direct the naive and center-block concepts to the variance object; the page states that the estimand is unchanged while interval variance changes."
+      ],
+      "requirement_ids": [
+        "slide_2"
+      ],
+      "summary": "Clear estimator comparison with the required variance objects."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_3",
+      "observations": [
+        "Primary object: left-to-right simulation workflow from DGP knobs through 400 Monte Carlo replicates to two interval branches and an endpoint evaluation.",
+        "Arrowheads are visible, branch directions are unambiguous, and no connector crossings are present.",
+        "The endpoint explicitly targets coverage near 0.95 and includes bias and interval width; the synthetic experiment is bounded as not a general theorem."
+      ],
+      "requirement_ids": [
+        "slide_3"
+      ],
+      "summary": "The simulation design is readable quickly and communicates the experimental comparison."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_4",
+      "observations": [
+        "Primary object: three-panel coverage-versus-ICC plot for G=8, 20, and 50 under imbalanced clusters.",
+        "A nominal 0.95 reference line, naive and cluster-robust methods, and Monte Carlo ±1.96 SE error bars are visibly shown.",
+        "The annotation correctly frames closeness to 0.95—not simply higher coverage—as the goal, and the conclusion is limited to the synthetic simulation."
+      ],
+      "requirement_ids": [
+        "slide_4"
+      ],
+      "summary": "Result figure visibly communicates undercoverage, the nominal target, and simulation uncertainty."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_5",
+      "observations": [
+        "Primary object: small-G (G=8), imbalanced-cluster coverage bar chart across ICC values.",
+        "The cluster-robust shortfall at rho=0.5 is explicitly shown as 0.78 versus the 0.95 target, alongside a visible failure mechanism.",
+        "The proposed CR2 and wild-cluster-bootstrap comparison is explicitly marked as planned rather than completed, and the completed evidence is bounded as synthetic."
+      ],
+      "requirement_ids": [
+        "slide_5"
+      ],
+      "summary": "Clear negative-result page with a specific future discriminating experiment."
+    }
+  ],
+  "non_blocking_notes": [],
+  "overall_decision": "REVISE",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "69b32c7206331e997291b33729927979a3e1a74605bb2ef59460b248c52ba2c5",
+  "review_kind": "statistical-method-group-meeting-benchmark",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "REVISE",
+  "task_key": "016_statistical_method_group_meeting_benchmark",
+  "workflow_type": "generic"
+}
