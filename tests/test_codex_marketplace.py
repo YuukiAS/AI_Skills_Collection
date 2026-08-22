@@ -138,6 +138,13 @@ class CodexMarketplaceTests(unittest.TestCase):
         )
         self.assertEqual(data["marketplacePluginBudget"], 10)
 
+    def test_codex_marketplace_ci_installs_presentation_test_dependencies(self) -> None:
+        workflow = (REPO_ROOT / ".github/workflows/codex-marketplace.yml").read_text(encoding="utf-8")
+        install_step = workflow.index("Install Codex marketplace test dependencies")
+        unittest_step = workflow.index("Test Codex marketplace builder")
+        self.assertLess(install_step, unittest_step)
+        self.assertIn('python3 -m pip install "Pillow>=10"', workflow)
+
     def test_repository_config_keeps_cardiacnexus_out_of_marketplace(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         plugin_names = [plugin["name"] for plugin in data["plugins"]]
