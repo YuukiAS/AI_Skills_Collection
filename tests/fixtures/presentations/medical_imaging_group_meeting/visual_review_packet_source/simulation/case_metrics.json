@@ -1,0 +1,1802 @@
+[
+  {
+    "case_id": "C1-00",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "small",
+    "lesion_center": [
+      116.68,
+      75.16
+    ],
+    "metrics": {
+      "dice": 1.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 0,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C1-01",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "medium",
+    "lesion_center": [
+      124.17,
+      84.74
+    ],
+    "metrics": {
+      "dice": 1.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 0,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C1-02",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "large",
+    "lesion_center": [
+      135.95,
+      96.54
+    ],
+    "metrics": {
+      "dice": 0.9377,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 213,
+      "pred_area": 188,
+      "tp": 188,
+      "fp": 0,
+      "fn": 25
+    }
+  },
+  {
+    "case_id": "C1-03",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "small",
+    "lesion_center": [
+      129.67,
+      88.63
+    ],
+    "metrics": {
+      "dice": 1.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 0,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C1-04",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "medium",
+    "lesion_center": [
+      124.12,
+      108.8
+    ],
+    "metrics": {
+      "dice": 0.8571,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 4,
+      "pred_area": 3,
+      "tp": 3,
+      "fp": 0,
+      "fn": 1
+    }
+  },
+  {
+    "case_id": "C1-05",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "large",
+    "lesion_center": [
+      131.9,
+      93.02
+    ],
+    "metrics": {
+      "dice": 0.9524,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 154,
+      "pred_area": 140,
+      "tp": 140,
+      "fp": 0,
+      "fn": 14
+    }
+  },
+  {
+    "case_id": "C1-06",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "small",
+    "lesion_center": [
+      135.19,
+      97.22
+    ],
+    "metrics": {
+      "dice": 0.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 33,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 33
+    }
+  },
+  {
+    "case_id": "C1-07",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "medium",
+    "lesion_center": [
+      122.07,
+      114.99
+    ],
+    "metrics": {
+      "dice": 0.8947,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 21,
+      "pred_area": 17,
+      "tp": 17,
+      "fp": 0,
+      "fn": 4
+    }
+  },
+  {
+    "case_id": "C1-08",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "large",
+    "lesion_center": [
+      128.77,
+      114.52
+    ],
+    "metrics": {
+      "dice": 0.9614,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 175,
+      "pred_area": 162,
+      "tp": 162,
+      "fp": 0,
+      "fn": 13
+    }
+  },
+  {
+    "case_id": "C1-09",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "small",
+    "lesion_center": [
+      126.93,
+      96.87
+    ],
+    "metrics": {
+      "dice": 1.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 0,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C1-10",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "medium",
+    "lesion_center": [
+      100.38,
+      126.79
+    ],
+    "metrics": {
+      "dice": 0.9346,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 57,
+      "pred_area": 50,
+      "tp": 50,
+      "fp": 0,
+      "fn": 7
+    }
+  },
+  {
+    "case_id": "C1-11",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "large",
+    "lesion_center": [
+      133.08,
+      92.68
+    ],
+    "metrics": {
+      "dice": 0.9551,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 198,
+      "pred_area": 181,
+      "tp": 181,
+      "fp": 0,
+      "fn": 17
+    }
+  },
+  {
+    "case_id": "C1-12",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "small",
+    "lesion_center": [
+      107.47,
+      124.38
+    ],
+    "metrics": {
+      "dice": 0.75,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 5,
+      "pred_area": 3,
+      "tp": 3,
+      "fp": 0,
+      "fn": 2
+    }
+  },
+  {
+    "case_id": "C1-13",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "medium",
+    "lesion_center": [
+      112.49,
+      125.49
+    ],
+    "metrics": {
+      "dice": 0.9625,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 83,
+      "pred_area": 77,
+      "tp": 77,
+      "fp": 0,
+      "fn": 6
+    }
+  },
+  {
+    "case_id": "C1-14",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "large",
+    "lesion_center": [
+      129.53,
+      104.81
+    ],
+    "metrics": {
+      "dice": 0.9345,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 179,
+      "pred_area": 157,
+      "tp": 157,
+      "fp": 0,
+      "fn": 22
+    }
+  },
+  {
+    "case_id": "C1-15",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "small",
+    "lesion_center": [
+      124.46,
+      82.97
+    ],
+    "metrics": {
+      "dice": 1.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 0,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C1-16",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "medium",
+    "lesion_center": [
+      133.52,
+      99.41
+    ],
+    "metrics": {
+      "dice": 0.9655,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 60,
+      "pred_area": 56,
+      "tp": 56,
+      "fp": 0,
+      "fn": 4
+    }
+  },
+  {
+    "case_id": "C1-17",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "large",
+    "lesion_center": [
+      128.02,
+      93.26
+    ],
+    "metrics": {
+      "dice": 0.898,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 54,
+      "pred_area": 44,
+      "tp": 44,
+      "fp": 0,
+      "fn": 10
+    }
+  },
+  {
+    "case_id": "C1-18",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "small",
+    "lesion_center": [
+      118.47,
+      119.7
+    ],
+    "metrics": {
+      "dice": 0.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 6,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 6
+    }
+  },
+  {
+    "case_id": "C1-19",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "medium",
+    "lesion_center": [
+      135.2,
+      101.21
+    ],
+    "metrics": {
+      "dice": 0.956,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 83,
+      "pred_area": 76,
+      "tp": 76,
+      "fp": 0,
+      "fn": 7
+    }
+  },
+  {
+    "case_id": "C1-20",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "large",
+    "lesion_center": [
+      105.6,
+      121.8
+    ],
+    "metrics": {
+      "dice": 0.9375,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 85,
+      "pred_area": 75,
+      "tp": 75,
+      "fp": 0,
+      "fn": 10
+    }
+  },
+  {
+    "case_id": "C1-21",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "small",
+    "lesion_center": [
+      124.21,
+      71.55
+    ],
+    "metrics": {
+      "dice": 0.9,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 33,
+      "pred_area": 27,
+      "tp": 27,
+      "fp": 0,
+      "fn": 6
+    }
+  },
+  {
+    "case_id": "C1-22",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "medium",
+    "lesion_center": [
+      125.67,
+      117.62
+    ],
+    "metrics": {
+      "dice": 0.9605,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 79,
+      "pred_area": 73,
+      "tp": 73,
+      "fp": 0,
+      "fn": 6
+    }
+  },
+  {
+    "case_id": "C1-23",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "large",
+    "lesion_center": [
+      116.72,
+      72.6
+    ],
+    "metrics": {
+      "dice": 0.9585,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 113,
+      "pred_area": 104,
+      "tp": 104,
+      "fp": 0,
+      "fn": 9
+    }
+  },
+  {
+    "case_id": "C1-24",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "small",
+    "lesion_center": [
+      118.84,
+      70.88
+    ],
+    "metrics": {
+      "dice": 0.7917,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 29,
+      "pred_area": 19,
+      "tp": 19,
+      "fp": 0,
+      "fn": 10
+    }
+  },
+  {
+    "case_id": "C1-25",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "medium",
+    "lesion_center": [
+      136.09,
+      91.96
+    ],
+    "metrics": {
+      "dice": 0.9684,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 98,
+      "pred_area": 92,
+      "tp": 92,
+      "fp": 0,
+      "fn": 6
+    }
+  },
+  {
+    "case_id": "C1-26",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "large",
+    "lesion_center": [
+      126.23,
+      108.39
+    ],
+    "metrics": {
+      "dice": 0.9161,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 84,
+      "pred_area": 71,
+      "tp": 71,
+      "fp": 0,
+      "fn": 13
+    }
+  },
+  {
+    "case_id": "C1-27",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "small",
+    "lesion_center": [
+      118.11,
+      122.69
+    ],
+    "metrics": {
+      "dice": 0.8852,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 34,
+      "pred_area": 27,
+      "tp": 27,
+      "fp": 0,
+      "fn": 7
+    }
+  },
+  {
+    "case_id": "C1-28",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "medium",
+    "lesion_center": [
+      130.78,
+      112.96
+    ],
+    "metrics": {
+      "dice": 0.9442,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 123,
+      "pred_area": 110,
+      "tp": 110,
+      "fp": 0,
+      "fn": 13
+    }
+  },
+  {
+    "case_id": "C1-29",
+    "center": "Center A",
+    "condition": "reference contrast",
+    "lesion_size": "large",
+    "lesion_center": [
+      105.73,
+      120.82
+    ],
+    "metrics": {
+      "dice": 0.9326,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 103,
+      "pred_area": 90,
+      "tp": 90,
+      "fp": 0,
+      "fn": 13
+    }
+  },
+  {
+    "case_id": "C2-00",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "small",
+    "lesion_center": [
+      126.62,
+      79.68
+    ],
+    "metrics": {
+      "dice": 0.8462,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0004,
+      "gt_area": 11,
+      "pred_area": 15,
+      "tp": 11,
+      "fp": 4,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C2-01",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "medium",
+    "lesion_center": [
+      120.61,
+      118.32
+    ],
+    "metrics": {
+      "dice": 0.8764,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 50,
+      "pred_area": 39,
+      "tp": 39,
+      "fp": 0,
+      "fn": 11
+    }
+  },
+  {
+    "case_id": "C2-02",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "large",
+    "lesion_center": [
+      129.6,
+      108.19
+    ],
+    "metrics": {
+      "dice": 0.9259,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 174,
+      "pred_area": 150,
+      "tp": 150,
+      "fp": 0,
+      "fn": 24
+    }
+  },
+  {
+    "case_id": "C2-03",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "small",
+    "lesion_center": [
+      131.89,
+      78.62
+    ],
+    "metrics": {
+      "dice": 0.8308,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0002,
+      "gt_area": 36,
+      "pred_area": 29,
+      "tp": 27,
+      "fp": 2,
+      "fn": 9
+    }
+  },
+  {
+    "case_id": "C2-04",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "medium",
+    "lesion_center": [
+      120.78,
+      68.88
+    ],
+    "metrics": {
+      "dice": 0.9339,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0005,
+      "gt_area": 124,
+      "pred_area": 118,
+      "tp": 113,
+      "fp": 5,
+      "fn": 11
+    }
+  },
+  {
+    "case_id": "C2-05",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "large",
+    "lesion_center": [
+      132.52,
+      105.14
+    ],
+    "metrics": {
+      "dice": 0.9425,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 138,
+      "pred_area": 123,
+      "tp": 123,
+      "fp": 0,
+      "fn": 15
+    }
+  },
+  {
+    "case_id": "C2-06",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "small",
+    "lesion_center": [
+      105.78,
+      126.15
+    ],
+    "metrics": {
+      "dice": 0.6207,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 20,
+      "pred_area": 9,
+      "tp": 9,
+      "fp": 0,
+      "fn": 11
+    }
+  },
+  {
+    "case_id": "C2-07",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "medium",
+    "lesion_center": [
+      131.53,
+      109.33
+    ],
+    "metrics": {
+      "dice": 0.8951,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0007,
+      "gt_area": 72,
+      "pred_area": 71,
+      "tp": 64,
+      "fp": 7,
+      "fn": 8
+    }
+  },
+  {
+    "case_id": "C2-08",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "large",
+    "lesion_center": [
+      123.06,
+      115.2
+    ],
+    "metrics": {
+      "dice": 0.9091,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 168,
+      "pred_area": 140,
+      "tp": 140,
+      "fp": 0,
+      "fn": 28
+    }
+  },
+  {
+    "case_id": "C2-09",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "small",
+    "lesion_center": [
+      119.28,
+      120.94
+    ],
+    "metrics": {
+      "dice": 0.7895,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 23,
+      "pred_area": 15,
+      "tp": 15,
+      "fp": 0,
+      "fn": 8
+    }
+  },
+  {
+    "case_id": "C2-10",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "medium",
+    "lesion_center": [
+      126.02,
+      79.88
+    ],
+    "metrics": {
+      "dice": 0.9455,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 29,
+      "pred_area": 26,
+      "tp": 26,
+      "fp": 0,
+      "fn": 3
+    }
+  },
+  {
+    "case_id": "C2-11",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "large",
+    "lesion_center": [
+      116.76,
+      117.72
+    ],
+    "metrics": {
+      "dice": 0.8571,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 96,
+      "pred_area": 72,
+      "tp": 72,
+      "fp": 0,
+      "fn": 24
+    }
+  },
+  {
+    "case_id": "C2-12",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "small",
+    "lesion_center": [
+      109.21,
+      121.05
+    ],
+    "metrics": {
+      "dice": 1.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 0,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C2-13",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "medium",
+    "lesion_center": [
+      127.89,
+      107.92
+    ],
+    "metrics": {
+      "dice": 0.8611,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0005,
+      "gt_area": 36,
+      "pred_area": 36,
+      "tp": 31,
+      "fp": 5,
+      "fn": 5
+    }
+  },
+  {
+    "case_id": "C2-14",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "large",
+    "lesion_center": [
+      134.35,
+      87.48
+    ],
+    "metrics": {
+      "dice": 0.9364,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 251,
+      "pred_area": 221,
+      "tp": 221,
+      "fp": 0,
+      "fn": 30
+    }
+  },
+  {
+    "case_id": "C2-15",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "small",
+    "lesion_center": [
+      124.1,
+      84.98
+    ],
+    "metrics": {
+      "dice": 1.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 0,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C2-16",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "medium",
+    "lesion_center": [
+      111.11,
+      121.87
+    ],
+    "metrics": {
+      "dice": 0.7857,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 34,
+      "pred_area": 22,
+      "tp": 22,
+      "fp": 0,
+      "fn": 12
+    }
+  },
+  {
+    "case_id": "C2-17",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "large",
+    "lesion_center": [
+      108.15,
+      71.18
+    ],
+    "metrics": {
+      "dice": 0.952,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 131,
+      "pred_area": 119,
+      "tp": 119,
+      "fp": 0,
+      "fn": 12
+    }
+  },
+  {
+    "case_id": "C2-18",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "small",
+    "lesion_center": [
+      132.76,
+      102.3
+    ],
+    "metrics": {
+      "dice": 0.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 18,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 18
+    }
+  },
+  {
+    "case_id": "C2-19",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "medium",
+    "lesion_center": [
+      134.87,
+      87.62
+    ],
+    "metrics": {
+      "dice": 0.9595,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0002,
+      "gt_area": 75,
+      "pred_area": 73,
+      "tp": 71,
+      "fp": 2,
+      "fn": 4
+    }
+  },
+  {
+    "case_id": "C2-20",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "large",
+    "lesion_center": [
+      115.41,
+      72.29
+    ],
+    "metrics": {
+      "dice": 0.9606,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0002,
+      "gt_area": 143,
+      "pred_area": 136,
+      "tp": 134,
+      "fp": 2,
+      "fn": 9
+    }
+  },
+  {
+    "case_id": "C2-21",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "small",
+    "lesion_center": [
+      117.98,
+      77.16
+    ],
+    "metrics": {
+      "dice": 1.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 0,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C2-22",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "medium",
+    "lesion_center": [
+      122.08,
+      117.22
+    ],
+    "metrics": {
+      "dice": 0.8943,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 68,
+      "pred_area": 55,
+      "tp": 55,
+      "fp": 0,
+      "fn": 13
+    }
+  },
+  {
+    "case_id": "C2-23",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "large",
+    "lesion_center": [
+      126.41,
+      82.86
+    ],
+    "metrics": {
+      "dice": 0.9362,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0004,
+      "gt_area": 71,
+      "pred_area": 70,
+      "tp": 66,
+      "fp": 4,
+      "fn": 5
+    }
+  },
+  {
+    "case_id": "C2-24",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "small",
+    "lesion_center": [
+      131.33,
+      79.86
+    ],
+    "metrics": {
+      "dice": 0.8889,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 40,
+      "pred_area": 32,
+      "tp": 32,
+      "fp": 0,
+      "fn": 8
+    }
+  },
+  {
+    "case_id": "C2-25",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "medium",
+    "lesion_center": [
+      102.3,
+      126.17
+    ],
+    "metrics": {
+      "dice": 0.8553,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 87,
+      "pred_area": 65,
+      "tp": 65,
+      "fp": 0,
+      "fn": 22
+    }
+  },
+  {
+    "case_id": "C2-26",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "large",
+    "lesion_center": [
+      128.84,
+      88.66
+    ],
+    "metrics": {
+      "dice": 0.9514,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0003,
+      "gt_area": 94,
+      "pred_area": 91,
+      "tp": 88,
+      "fp": 3,
+      "fn": 6
+    }
+  },
+  {
+    "case_id": "C2-27",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "small",
+    "lesion_center": [
+      112.73,
+      120.89
+    ],
+    "metrics": {
+      "dice": 1.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 0,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C2-28",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "medium",
+    "lesion_center": [
+      131.59,
+      89.6
+    ],
+    "metrics": {
+      "dice": 0.7105,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0042,
+      "gt_area": 58,
+      "pred_area": 94,
+      "tp": 54,
+      "fp": 40,
+      "fn": 4
+    }
+  },
+  {
+    "case_id": "C2-29",
+    "center": "Center B",
+    "condition": "low contrast + bias",
+    "lesion_size": "large",
+    "lesion_center": [
+      126.85,
+      79.69
+    ],
+    "metrics": {
+      "dice": 0.9756,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0002,
+      "gt_area": 124,
+      "pred_area": 122,
+      "tp": 120,
+      "fp": 2,
+      "fn": 4
+    }
+  },
+  {
+    "case_id": "C3-00",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "small",
+    "lesion_center": [
+      117.9,
+      74.28
+    ],
+    "metrics": {
+      "dice": 1.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 0,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C3-01",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "medium",
+    "lesion_center": [
+      109.1,
+      66.61
+    ],
+    "metrics": {
+      "dice": 0.8571,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0012,
+      "gt_area": 69,
+      "pred_area": 71,
+      "tp": 60,
+      "fp": 11,
+      "fn": 9
+    }
+  },
+  {
+    "case_id": "C3-02",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "large",
+    "lesion_center": [
+      130.73,
+      91.94
+    ],
+    "metrics": {
+      "dice": 0.9417,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 118,
+      "pred_area": 105,
+      "tp": 105,
+      "fp": 0,
+      "fn": 13
+    }
+  },
+  {
+    "case_id": "C3-03",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "small",
+    "lesion_center": [
+      124.37,
+      116.4
+    ],
+    "metrics": {
+      "dice": 0.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 20,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 20
+    }
+  },
+  {
+    "case_id": "C3-04",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "medium",
+    "lesion_center": [
+      111.69,
+      123.03
+    ],
+    "metrics": {
+      "dice": 0.6667,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0003,
+      "gt_area": 47,
+      "pred_area": 28,
+      "tp": 25,
+      "fp": 3,
+      "fn": 22
+    }
+  },
+  {
+    "case_id": "C3-05",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "large",
+    "lesion_center": [
+      134.06,
+      89.41
+    ],
+    "metrics": {
+      "dice": 0.804,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0073,
+      "gt_area": 226,
+      "pred_area": 269,
+      "tp": 199,
+      "fp": 70,
+      "fn": 27
+    }
+  },
+  {
+    "case_id": "C3-06",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "small",
+    "lesion_center": [
+      124.98,
+      111.56
+    ],
+    "metrics": {
+      "dice": 0.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0102,
+      "gt_area": 1,
+      "pred_area": 97,
+      "tp": 0,
+      "fp": 97,
+      "fn": 1
+    }
+  },
+  {
+    "case_id": "C3-07",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "medium",
+    "lesion_center": [
+      134.45,
+      95.39
+    ],
+    "metrics": {
+      "dice": 0.8595,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0012,
+      "gt_area": 58,
+      "pred_area": 63,
+      "tp": 52,
+      "fp": 11,
+      "fn": 6
+    }
+  },
+  {
+    "case_id": "C3-08",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "large",
+    "lesion_center": [
+      125.23,
+      112.84
+    ],
+    "metrics": {
+      "dice": 0.8223,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0005,
+      "gt_area": 111,
+      "pred_area": 86,
+      "tp": 81,
+      "fp": 5,
+      "fn": 30
+    }
+  },
+  {
+    "case_id": "C3-09",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "small",
+    "lesion_center": [
+      105.67,
+      129.96
+    ],
+    "metrics": {
+      "dice": 0.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 60,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 60
+    }
+  },
+  {
+    "case_id": "C3-10",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "medium",
+    "lesion_center": [
+      114.51,
+      118.45
+    ],
+    "metrics": {
+      "dice": 0.0465,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0038,
+      "gt_area": 6,
+      "pred_area": 37,
+      "tp": 1,
+      "fp": 36,
+      "fn": 5
+    }
+  },
+  {
+    "case_id": "C3-11",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "large",
+    "lesion_center": [
+      118.76,
+      120.7
+    ],
+    "metrics": {
+      "dice": 0.844,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0002,
+      "gt_area": 187,
+      "pred_area": 140,
+      "tp": 138,
+      "fp": 2,
+      "fn": 49
+    }
+  },
+  {
+    "case_id": "C3-12",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "small",
+    "lesion_center": [
+      128.82,
+      104.22
+    ],
+    "metrics": {
+      "dice": 1.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 0,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C3-13",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "medium",
+    "lesion_center": [
+      127.61,
+      90.28
+    ],
+    "metrics": {
+      "dice": 0.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0004,
+      "gt_area": 0,
+      "pred_area": 4,
+      "tp": 0,
+      "fp": 4,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C3-14",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "large",
+    "lesion_center": [
+      120.06,
+      78.23
+    ],
+    "metrics": {
+      "dice": 0.9885,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0,
+      "gt_area": 44,
+      "pred_area": 43,
+      "tp": 43,
+      "fp": 0,
+      "fn": 1
+    }
+  },
+  {
+    "case_id": "C3-15",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "small",
+    "lesion_center": [
+      113.47,
+      75.2
+    ],
+    "metrics": {
+      "dice": 1.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 0,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C3-16",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "medium",
+    "lesion_center": [
+      126.0,
+      77.33
+    ],
+    "metrics": {
+      "dice": 0.6099,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0057,
+      "gt_area": 44,
+      "pred_area": 97,
+      "tp": 43,
+      "fp": 54,
+      "fn": 1
+    }
+  },
+  {
+    "case_id": "C3-17",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "large",
+    "lesion_center": [
+      119.05,
+      75.69
+    ],
+    "metrics": {
+      "dice": 0.9272,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0017,
+      "gt_area": 146,
+      "pred_area": 156,
+      "tp": 140,
+      "fp": 16,
+      "fn": 6
+    }
+  },
+  {
+    "case_id": "C3-18",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "small",
+    "lesion_center": [
+      132.57,
+      106.3
+    ],
+    "metrics": {
+      "dice": 0.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 24,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 24
+    }
+  },
+  {
+    "case_id": "C3-19",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "medium",
+    "lesion_center": [
+      123.56,
+      81.31
+    ],
+    "metrics": {
+      "dice": 0.2857,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0005,
+      "gt_area": 1,
+      "pred_area": 6,
+      "tp": 1,
+      "fp": 5,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C3-20",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "large",
+    "lesion_center": [
+      127.19,
+      111.31
+    ],
+    "metrics": {
+      "dice": 0.8,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0023,
+      "gt_area": 149,
+      "pred_area": 136,
+      "tp": 114,
+      "fp": 22,
+      "fn": 35
+    }
+  },
+  {
+    "case_id": "C3-21",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "small",
+    "lesion_center": [
+      115.89,
+      69.13
+    ],
+    "metrics": {
+      "dice": 0.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.005,
+      "gt_area": 28,
+      "pred_area": 48,
+      "tp": 0,
+      "fp": 48,
+      "fn": 28
+    }
+  },
+  {
+    "case_id": "C3-22",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "medium",
+    "lesion_center": [
+      119.78,
+      78.19
+    ],
+    "metrics": {
+      "dice": 0.125,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0029,
+      "gt_area": 2,
+      "pred_area": 30,
+      "tp": 2,
+      "fp": 28,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C3-23",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "large",
+    "lesion_center": [
+      125.98,
+      86.87
+    ],
+    "metrics": {
+      "dice": 0.7136,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0057,
+      "gt_area": 83,
+      "pred_area": 130,
+      "tp": 76,
+      "fp": 54,
+      "fn": 7
+    }
+  },
+  {
+    "case_id": "C3-24",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "small",
+    "lesion_center": [
+      126.32,
+      98.53
+    ],
+    "metrics": {
+      "dice": 1.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 0,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C3-25",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "medium",
+    "lesion_center": [
+      116.88,
+      122.58
+    ],
+    "metrics": {
+      "dice": 0.6426,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0068,
+      "gt_area": 104,
+      "pred_area": 145,
+      "tp": 80,
+      "fp": 65,
+      "fn": 24
+    }
+  },
+  {
+    "case_id": "C3-26",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "large",
+    "lesion_center": [
+      118.01,
+      71.94
+    ],
+    "metrics": {
+      "dice": 0.9474,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0004,
+      "gt_area": 186,
+      "pred_area": 175,
+      "tp": 171,
+      "fp": 4,
+      "fn": 15
+    }
+  },
+  {
+    "case_id": "C3-27",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "small",
+    "lesion_center": [
+      132.14,
+      108.89
+    ],
+    "metrics": {
+      "dice": 0.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0,
+      "gt_area": 26,
+      "pred_area": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 26
+    }
+  },
+  {
+    "case_id": "C3-28",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "medium",
+    "lesion_center": [
+      128.09,
+      98.31
+    ],
+    "metrics": {
+      "dice": 0.0,
+      "lesion_recall": 0.0,
+      "fp_burden": 0.0003,
+      "gt_area": 0,
+      "pred_area": 3,
+      "tp": 0,
+      "fp": 3,
+      "fn": 0
+    }
+  },
+  {
+    "case_id": "C3-29",
+    "center": "Center C",
+    "condition": "high shift",
+    "lesion_size": "large",
+    "lesion_center": [
+      119.45,
+      72.21
+    ],
+    "metrics": {
+      "dice": 0.9394,
+      "lesion_recall": 1.0,
+      "fp_burden": 0.0005,
+      "gt_area": 135,
+      "pred_area": 129,
+      "tp": 124,
+      "fp": 5,
+      "fn": 11
+    }
+  }
+]

@@ -731,6 +731,140 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertIn("Would this slide look professionally finished", rubric)
                 self.assertIn("Reference-informed quality", rubric)
 
+    def test_medical_imaging_group_meeting_benchmark_generator_outputs_artifacts(self) -> None:
+        fixture = REPO_ROOT / "tests/fixtures/presentations/medical_imaging_group_meeting"
+        script = fixture / "generate_medical_imaging_group_meeting_benchmark.py"
+        reviewer = fixture / "review_medical_imaging_group_meeting_benchmark.py"
+        adapter = fixture / "build_ai_bridge_visual_inputs.py"
+        with tempfile.TemporaryDirectory() as tmp:
+            result = subprocess.run(
+                [sys.executable, str(script), "--out-dir", tmp],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertTrue(Path(payload["pptx"]).exists())
+            manifest = json.loads(Path(payload["evidence_manifest"]).read_text(encoding="utf-8"))
+            self.assertEqual(manifest["task_key"], "017_medical_imaging_group_meeting_benchmark")
+            self.assertEqual(manifest["status"], "GENERATED_SOURCE_ARTIFACTS_ONLY")
+            self.assertFalse(manifest["generator_may_pass"])
+            self.assertEqual(manifest["editable_slide_count"], 5)
+            self.assertEqual([slide["archetype"] for slide in manifest["slides"]], [
+                "MEDICAL_IMAGE_COMPARISON",
+                "EXPERIMENT_DESIGN",
+                "RESULT_FIGURE",
+                "FAILURE_CASE",
+                "NEGATIVE_RESULT",
+            ])
+            summary = manifest["synthetic_dataset_summary"]
+            self.assertEqual(summary["seed"], 20260822)
+            self.assertEqual(summary["cases_per_center"], 30)
+            self.assertEqual(summary["endpoints"], ["Dice overlap", "lesion-level recall", "false-positive burden"])
+            self.assertEqual([row["center"] for row in summary["center_summary"]], ["Center A", "Center B", "Center C"])
+            self.assertGreater(summary["negative_result"]["center_c_dice"], 0.40)
+            self.assertLess(summary["negative_result"]["small_lesion_recall"], 0.45)
+            self.assertIn("planned", summary["negative_result"]["planned_validation"])
+            gates = manifest["deterministic_quality_gates"]
+            self.assertEqual(gates["status"], "PASS", gates.get("failures"))
+            self.assertIn("same_case_failure_panels", gates["checked_gates"])
+            self.assertIn("endpoint_disagreement_supported_by_metrics", gates["checked_gates"])
+            failure = manifest["failure_case"]
+            self.assertTrue(failure["same_slice_geometry"])
+            self.assertEqual(failure["center"], "Center C")
+            self.assertEqual(failure["lesion_size"], "small")
+            self.assertIn("TP / FP / FN", failure["panels"])
+            design = manifest["experiment_design_diagram"]
+            self.assertEqual(design["edge_crossing"], "none")
+            self.assertEqual(design["reading_direction"], "left_to_right")
+            self.assertIn("tailEnd", design["arrowheads"])
+            audit_path = Path(tmp) / "reference_design_audit.json"
+            self.assertTrue(audit_path.exists())
+            reference_audit = json.loads(audit_path.read_text(encoding="utf-8"))
+            self.assertEqual(len(reference_audit), 5)
+            for slide in manifest["slides"]:
+                self.assertGreaterEqual(len(slide["reference_ids"]), 2)
+                self.assertLessEqual(len(slide["reference_ids"]), 5)
+                self.assertEqual(slide["reference_design_audit"]["selected_reference_ids"], slide["reference_ids"])
+                self.assertTrue(slide["reference_design_audit"]["adopted_design_decisions"])
+                self.assertTrue(slide["audience_text"])
+                audience_blob = "\n".join(slide["audience_text"])
+                for forbidden in [
+                    "RRL-",
+                    "Reference retrieval",
+                    "EVIDENCE_MANIFEST",
+                    "Diagram contract",
+                    "style not copied",
+                    "Reading target",
+                    "Observed in this synthetic run",
+                    "evidence boundary",
+                ]:
+                    self.assertNotIn(forbidden, audience_blob)
+                retrieval = slide["reference_retrieval"]
+                self.assertEqual(slide["reference_ids"], retrieval["selected_ids"])
+                self.assertGreaterEqual(len(retrieval["candidate_ids"]), len(retrieval["selected_ids"]))
+                self.assertIn("intent", retrieval["query"])
+                for selected_id in retrieval["selected_ids"]:
+                    self.assertIn(selected_id, retrieval["candidate_ids"])
+                    self.assertIn("source_tier=", retrieval["ranking_relevance_reason"][selected_id])
+            render = json.loads(Path(payload["render_status"]).read_text(encoding="utf-8"))
+            self.assertIn(render["status"], {"ok", "BLOCKED_REAL_PPTX_RENDER"})
+            review_result = subprocess.run(
+                [sys.executable, str(reviewer), "--out-dir", tmp],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(review_result.returncode, 0, review_result.stderr)
+            review_payload = json.loads(review_result.stdout)
+            review = json.loads(Path(review_payload["review"]).read_text(encoding="utf-8"))
+            self.assertEqual(review["review_type"], "MECHANICAL_VISUAL_REVIEW")
+            self.assertEqual(review["academic_visual_decision"], "NOT_ASSESSED")
+            if render["status"] == "ok":
+                self.assertEqual(review["status"], "MECHANICAL_PASS")
+                self.assertEqual(review["rendered_png_count"], 5)
+            with ZipFile(payload["pptx"]) as deck:
+                slide_names = [name for name in deck.namelist() if name.startswith("ppt/slides/slide") and name.endswith(".xml")]
+                media_names = [name for name in deck.namelist() if name.startswith("ppt/media/")]
+                slide_xml = "\n".join(deck.read(name).decode("utf-8") for name in slide_names)
+            self.assertEqual(len(slide_names), 5)
+            for forbidden in ["RRL-", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "Reading target", "Observed in this synthetic run"]:
+                self.assertNotIn(forbidden, slide_xml)
+            self.assertIn("Synthetic cardiac-MR-like", slide_xml)
+            self.assertIn("lesion recall", slide_xml)
+            self.assertIn("Planned validation", slide_xml)
+            self.assertIn("tailEnd", slide_xml)
+            self.assertGreaterEqual(len(media_names), 8)
+
+            committed_source = fixture / "visual_review_packet_source"
+            self.assertTrue(committed_source.exists())
+            output = Path(tmp) / "visual_inputs.json"
+            adapter_result = subprocess.run(
+                [sys.executable, str(adapter), "--source-dir", str(committed_source), "--output", str(output)],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(adapter_result.returncode, 0, adapter_result.stderr)
+            adapter_payload = json.loads(adapter_result.stdout)
+            self.assertEqual(adapter_payload["input_count"], 5)
+            visual_manifest = json.loads(output.read_text(encoding="utf-8"))
+            self.assertEqual(visual_manifest["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
+            self.assertEqual(visual_manifest["task_key"], "017_medical_imaging_group_meeting_benchmark")
+            self.assertEqual(visual_manifest["review_kind"], "medical-imaging-group-meeting-benchmark")
+            self.assertEqual(visual_manifest["privacy_policy"], "PUBLIC_SAFE_ONLY")
+            self.assertEqual(len(visual_manifest["inputs"]), 5)
+            self.assertEqual(visual_manifest["identity_bindings"]["source_render_status"], "ok")
+            self.assertEqual(visual_manifest["identity_bindings"]["source_mechanical_status"], "MECHANICAL_PASS")
+            self.assertIn("reference_design_audit_sha256", visual_manifest["identity_bindings"])
+            rubric = visual_manifest["rubric"]["instructions"]
+            self.assertIn("medical-imaging research group meeting benchmark", rubric)
+            self.assertIn("actual image pixels", rubric)
+            self.assertIn("MICCAI/RSNA-style research talk", rubric)
+            self.assertIn("TP/FP/FN legend", rubric)
+            self.assertIn("false-positive burden is lower-is-better", rubric)
+
 
 if __name__ == "__main__":
     unittest.main()

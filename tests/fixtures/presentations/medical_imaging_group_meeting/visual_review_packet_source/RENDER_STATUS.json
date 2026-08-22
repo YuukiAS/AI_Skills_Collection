@@ -1,0 +1,14 @@
+{
+  "status": "ok",
+  "renderer": ".cache/tools/squashfs-root/opt/libreoffice25.8/program/soffice",
+  "pptx_to_pdf": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/pdf/medical_imaging_group_meeting_benchmark.pdf",
+  "png_count": 5,
+  "rendered_pngs": [
+    "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-1.png",
+    "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-2.png",
+    "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+    "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-4.png",
+    "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-5.png"
+  ],
+  "returncode": 0
+}

@@ -1,0 +1,292 @@
+{
+  "seed": 20260822,
+  "cases_per_center": 30,
+  "centers": [
+    {
+      "center": "Center A",
+      "condition": "reference contrast",
+      "contrast": 1.0,
+      "noise": 5.0,
+      "bias": 0.02
+    },
+    {
+      "center": "Center B",
+      "condition": "low contrast + bias",
+      "contrast": 0.78,
+      "noise": 8.0,
+      "bias": 0.13
+    },
+    {
+      "center": "Center C",
+      "condition": "high shift",
+      "contrast": 0.58,
+      "noise": 12.0,
+      "bias": -0.18
+    }
+  ],
+  "endpoints": [
+    "Dice overlap",
+    "lesion-level recall",
+    "false-positive burden"
+  ],
+  "center_summary": [
+    {
+      "center": "Center A",
+      "condition": "reference contrast",
+      "n_cases": 30,
+      "dice": {
+        "mean": 0.8718,
+        "sd": 0.2438,
+        "se": 0.0445
+      },
+      "lesion_recall": {
+        "mean": 0.7667,
+        "sd": 0.4302,
+        "se": 0.0785
+      },
+      "fp_burden": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    {
+      "center": "Center B",
+      "condition": "low contrast + bias",
+      "n_cases": 30,
+      "dice": {
+        "mean": 0.868,
+        "sd": 0.1856,
+        "se": 0.0339
+      },
+      "lesion_recall": {
+        "mean": 0.8333,
+        "sd": 0.379,
+        "se": 0.0692
+      },
+      "fp_burden": {
+        "mean": 0.0003,
+        "sd": 0.0008,
+        "se": 0.0001
+      }
+    },
+    {
+      "center": "Center C",
+      "condition": "high shift",
+      "n_cases": 30,
+      "dice": {
+        "mean": 0.5607,
+        "sd": 0.4176,
+        "se": 0.0763
+      },
+      "lesion_recall": {
+        "mean": 0.5667,
+        "sd": 0.504,
+        "se": 0.092
+      },
+      "fp_burden": {
+        "mean": 0.0019,
+        "sd": 0.0028,
+        "se": 0.0005
+      }
+    }
+  ],
+  "lesion_size_summary": [
+    {
+      "center": "Center A",
+      "condition": "reference contrast",
+      "lesion_size": "small",
+      "n_cases": 10,
+      "dice": {
+        "mean": 0.7327,
+        "sd": 0.3964,
+        "se": 0.1254
+      },
+      "lesion_recall": {
+        "mean": 0.4,
+        "sd": 0.5164,
+        "se": 0.1633
+      },
+      "fp_burden": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    {
+      "center": "Center A",
+      "condition": "reference contrast",
+      "lesion_size": "medium",
+      "n_cases": 10,
+      "dice": {
+        "mean": 0.9444,
+        "sd": 0.0409,
+        "se": 0.0129
+      },
+      "lesion_recall": {
+        "mean": 0.9,
+        "sd": 0.3162,
+        "se": 0.1
+      },
+      "fp_burden": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    {
+      "center": "Center A",
+      "condition": "reference contrast",
+      "lesion_size": "large",
+      "n_cases": 10,
+      "dice": {
+        "mean": 0.9384,
+        "sd": 0.02,
+        "se": 0.0063
+      },
+      "lesion_recall": {
+        "mean": 1.0,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "fp_burden": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "se": 0.0
+      }
+    },
+    {
+      "center": "Center B",
+      "condition": "low contrast + bias",
+      "lesion_size": "small",
+      "n_cases": 10,
+      "dice": {
+        "mean": 0.7976,
+        "sd": 0.3061,
+        "se": 0.0968
+      },
+      "lesion_recall": {
+        "mean": 0.5,
+        "sd": 0.527,
+        "se": 0.1667
+      },
+      "fp_burden": {
+        "mean": 0.0001,
+        "sd": 0.0001,
+        "se": 0.0
+      }
+    },
+    {
+      "center": "Center B",
+      "condition": "low contrast + bias",
+      "lesion_size": "medium",
+      "n_cases": 10,
+      "dice": {
+        "mean": 0.8717,
+        "sd": 0.0759,
+        "se": 0.024
+      },
+      "lesion_recall": {
+        "mean": 1.0,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "fp_burden": {
+        "mean": 0.0006,
+        "sd": 0.0013,
+        "se": 0.0004
+      }
+    },
+    {
+      "center": "Center B",
+      "condition": "low contrast + bias",
+      "lesion_size": "large",
+      "n_cases": 10,
+      "dice": {
+        "mean": 0.9347,
+        "sd": 0.0329,
+        "se": 0.0104
+      },
+      "lesion_recall": {
+        "mean": 1.0,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "fp_burden": {
+        "mean": 0.0001,
+        "sd": 0.0002,
+        "se": 0.0
+      }
+    },
+    {
+      "center": "Center C",
+      "condition": "high shift",
+      "lesion_size": "small",
+      "n_cases": 10,
+      "dice": {
+        "mean": 0.4,
+        "sd": 0.5164,
+        "se": 0.1633
+      },
+      "lesion_recall": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "fp_burden": {
+        "mean": 0.0015,
+        "sd": 0.0034,
+        "se": 0.0011
+      }
+    },
+    {
+      "center": "Center C",
+      "condition": "high shift",
+      "lesion_size": "medium",
+      "n_cases": 10,
+      "dice": {
+        "mean": 0.4093,
+        "sd": 0.3539,
+        "se": 0.1119
+      },
+      "lesion_recall": {
+        "mean": 0.7,
+        "sd": 0.483,
+        "se": 0.1528
+      },
+      "fp_burden": {
+        "mean": 0.0023,
+        "sd": 0.0024,
+        "se": 0.0008
+      }
+    },
+    {
+      "center": "Center C",
+      "condition": "high shift",
+      "lesion_size": "large",
+      "n_cases": 10,
+      "dice": {
+        "mean": 0.8728,
+        "sd": 0.0881,
+        "se": 0.0279
+      },
+      "lesion_recall": {
+        "mean": 1.0,
+        "sd": 0.0,
+        "se": 0.0
+      },
+      "fp_burden": {
+        "mean": 0.0019,
+        "sd": 0.0026,
+        "se": 0.0008
+      }
+    }
+  ],
+  "failure_case_id": "C3-03",
+  "negative_result": {
+    "condition": "Center C high shift, small lesions",
+    "small_lesion_recall": 0.0,
+    "center_c_dice": 0.5607,
+    "planned_validation": "planned held-out-center lesion-size stratification with threshold/calibration sensitivity"
+  }
+}

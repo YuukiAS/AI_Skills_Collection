@@ -1,0 +1,332 @@
+{
+  "slide_1": {
+    "selected_reference_ids": [
+      "RRL-022",
+      "RRL-039",
+      "RRL-013",
+      "RRL-019",
+      "RRL-024"
+    ],
+    "page_specific_lessons": {
+      "RRL-022": {
+        "primary_object": "PET input, GT, predictions, reconstruction panels",
+        "page_function": "MEDICAL_IMAGE_COMPARISON",
+        "evidence_type": "image comparison",
+        "information_density": "0.90/0.10",
+        "annotation_style": "Rows show input, ground truth, baselines, model output, probability and reconstruction.",
+        "useful_lesson": "Use aligned panels for image, GT, prediction, and reconstruction in failure/result pages.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-039": {
+        "primary_object": "data and regression figure",
+        "page_function": "REAL_DATA_APPLICATION",
+        "evidence_type": "clinical regression example",
+        "information_density": "0.70/0.30",
+        "annotation_style": "Regression line and shaded uncertainty are visible.",
+        "useful_lesson": "Clinical stats pages should expose the observed trend and uncertainty before prose.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-013": {
+        "primary_object": "representative skin lesion samples",
+        "page_function": "MEDICAL_IMAGE_COMPARISON",
+        "evidence_type": "image evidence",
+        "information_density": "0.85/0.15",
+        "annotation_style": "Grid of lesion samples makes the annotation problem concrete.",
+        "useful_lesson": "Introduce medical-image datasets with actual sample diversity before statistics.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-019": {
+        "primary_object": "automatic lesion segmentation applications",
+        "page_function": "EXPERIMENT_DESIGN",
+        "evidence_type": "task overview",
+        "information_density": "0.70/0.30",
+        "annotation_style": "PET applications and lesion examples appear before architecture details.",
+        "useful_lesson": "Start method talks by connecting task, data, and application unit.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-024": {
+        "primary_object": "prediction comparison against model",
+        "page_function": "MODEL_CHECK",
+        "evidence_type": "posterior predictive check",
+        "information_density": "0.75/0.25",
+        "annotation_style": "Predictions are compared with observed game-score differentials.",
+        "useful_lesson": "Model-check pages should compare model output to real held-out structure.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      }
+    },
+    "adopted_design_decisions": [
+      "Make the slice/overlay the largest object so the task is readable from pixels.",
+      "Place endpoint and synthetic scope adjacent to the image, not in separate cards.",
+      "Use direct lesion/anatomy labels instead of a detached glossary."
+    ],
+    "deliberately_not_adopted": [
+      "Do not copy source images, clinical cases, color styling, or institutional layout.",
+      "Do not print reference IDs or retrieval traces on the audience-facing slide."
+    ],
+    "current_slide_application": "Let the image and mask relationship be the main object before introducing aggregate metrics."
+  },
+  "slide_2": {
+    "selected_reference_ids": [
+      "RRL-019",
+      "RRL-010",
+      "RRL-022",
+      "RRL-026",
+      "RRL-002"
+    ],
+    "page_specific_lessons": {
+      "RRL-019": {
+        "primary_object": "automatic lesion segmentation applications",
+        "page_function": "EXPERIMENT_DESIGN",
+        "evidence_type": "task overview",
+        "information_density": "0.70/0.30",
+        "annotation_style": "PET applications and lesion examples appear before architecture details.",
+        "useful_lesson": "Start method talks by connecting task, data, and application unit.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-010": {
+        "primary_object": "quicksort evaluation curves",
+        "page_function": "SIMULATION",
+        "evidence_type": "simulation comparison",
+        "information_density": "0.65/0.35",
+        "annotation_style": "Quicksort resource metrics compare Bayesian analysis and hybrid analysis.",
+        "useful_lesson": "Simulation pages need DGP/example, comparator, and performance curve together.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-022": {
+        "primary_object": "PET input, GT, predictions, reconstruction panels",
+        "page_function": "MEDICAL_IMAGE_COMPARISON",
+        "evidence_type": "image comparison",
+        "information_density": "0.90/0.10",
+        "annotation_style": "Rows show input, ground truth, baselines, model output, probability and reconstruction.",
+        "useful_lesson": "Use aligned panels for image, GT, prediction, and reconstruction in failure/result pages.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-026": {
+        "primary_object": "simulate fake data in R",
+        "page_function": "SIMULATION",
+        "evidence_type": "fake-data simulation",
+        "information_density": "0.45/0.55",
+        "annotation_style": "R code and simulated scatter expose the model-generated data.",
+        "useful_lesson": "Simulation pages need visible data-generating mechanism and output.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-002": {
+        "primary_object": "graph neural network concept diagram",
+        "page_function": "METHOD_DIAGRAM",
+        "evidence_type": "method mechanism",
+        "information_density": "0.70/0.30",
+        "annotation_style": "Simple objects and arrows explain satellites/debris graph representation.",
+        "useful_lesson": "Use one mechanism diagram before algorithm details.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      }
+    },
+    "adopted_design_decisions": [
+      "Use one left-to-right data path from center shift to endpoint aggregation.",
+      "Use compact image thumbnails as scientific objects inside the path.",
+      "Keep connectors semantic and visible instead of decorative workflow arrows."
+    ],
+    "deliberately_not_adopted": [
+      "Do not show diagram QA language or diagram contracts.",
+      "Do not make every operation a pastel dashboard card."
+    ],
+    "current_slide_application": "Use one clear computation path and make image examples do part of the explanatory work."
+  },
+  "slide_3": {
+    "selected_reference_ids": [
+      "RRL-021",
+      "RRL-039",
+      "RRL-003",
+      "RRL-004",
+      "RRL-023"
+    ],
+    "page_specific_lessons": {
+      "RRL-021": {
+        "primary_object": "lesion segmentation Dice table",
+        "page_function": "RESULT_FIGURE",
+        "evidence_type": "quantitative table",
+        "information_density": "0.60/0.40",
+        "annotation_style": "Healthy/disease/overall Dice values are compared across methods.",
+        "useful_lesson": "Medical-imaging result pages should keep subgroups and endpoints visible.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-039": {
+        "primary_object": "data and regression figure",
+        "page_function": "REAL_DATA_APPLICATION",
+        "evidence_type": "clinical regression example",
+        "information_density": "0.70/0.30",
+        "annotation_style": "Regression line and shaded uncertainty are visible.",
+        "useful_lesson": "Clinical stats pages should expose the observed trend and uncertainty before prose.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-003": {
+        "primary_object": "training-step reward curve with baselines",
+        "page_function": "RESULT_FIGURE",
+        "evidence_type": "quantitative plot",
+        "information_density": "0.75/0.25",
+        "annotation_style": "Learning curve compares local/global information methods.",
+        "useful_lesson": "For result pages, make the graph the main object and keep interpretation close to it.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-004": {
+        "primary_object": "ranked sensitivity bars and interpretation note",
+        "page_function": "SENSITIVITY_ANALYSIS",
+        "evidence_type": "sensitivity analysis",
+        "information_density": "0.65/0.35",
+        "annotation_style": "Sensitivity bars and yellow reviewer notes expose the unresolved issue.",
+        "useful_lesson": "Mark in-progress sensitivity honestly; do not hide it behind a polished conclusion.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-023": {
+        "primary_object": "team-quality estimate forest plot",
+        "page_function": "RESULT_FIGURE",
+        "evidence_type": "posterior interval plot",
+        "information_density": "0.80/0.20",
+        "annotation_style": "Team-quality estimates are shown with intervals and ordering.",
+        "useful_lesson": "Use interval plots when ranking is uncertain.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      }
+    },
+    "adopted_design_decisions": [
+      "Let aligned quantitative panels dominate the page.",
+      "Show cross-case variation/uncertainty in the plot grammar.",
+      "Annotate the endpoint disagreement directly at the high-shift condition."
+    ],
+    "deliberately_not_adopted": [
+      "Do not replace the result with three isolated metric tiles.",
+      "Do not imply all endpoints share the same favorable direction."
+    ],
+    "current_slide_application": "Make endpoint disagreement visible in one aligned figure instead of using separate metric cards."
+  },
+  "slide_4": {
+    "selected_reference_ids": [
+      "RRL-022",
+      "RRL-039",
+      "RRL-041",
+      "RRL-013",
+      "RRL-017"
+    ],
+    "page_specific_lessons": {
+      "RRL-022": {
+        "primary_object": "PET input, GT, predictions, reconstruction panels",
+        "page_function": "MEDICAL_IMAGE_COMPARISON",
+        "evidence_type": "image comparison",
+        "information_density": "0.90/0.10",
+        "annotation_style": "Rows show input, ground truth, baselines, model output, probability and reconstruction.",
+        "useful_lesson": "Use aligned panels for image, GT, prediction, and reconstruction in failure/result pages.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-039": {
+        "primary_object": "data and regression figure",
+        "page_function": "REAL_DATA_APPLICATION",
+        "evidence_type": "clinical regression example",
+        "information_density": "0.70/0.30",
+        "annotation_style": "Regression line and shaded uncertainty are visible.",
+        "useful_lesson": "Clinical stats pages should expose the observed trend and uncertainty before prose.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-041": {
+        "primary_object": "histogram of p-values for fertility relationship",
+        "page_function": "NEGATIVE_RESULT",
+        "evidence_type": "p-value distribution",
+        "information_density": "0.65/0.35",
+        "annotation_style": "Histogram of p-values appears after possible analyses are enumerated.",
+        "useful_lesson": "Negative statistical-method pages should show the failure distribution.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-013": {
+        "primary_object": "representative skin lesion samples",
+        "page_function": "MEDICAL_IMAGE_COMPARISON",
+        "evidence_type": "image evidence",
+        "information_density": "0.85/0.15",
+        "annotation_style": "Grid of lesion samples makes the annotation problem concrete.",
+        "useful_lesson": "Introduce medical-image datasets with actual sample diversity before statistics.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-017": {
+        "primary_object": "IAA prediction from images regression results",
+        "page_function": "REAL_DATA_APPLICATION",
+        "evidence_type": "predictive model result",
+        "information_density": "0.65/0.35",
+        "annotation_style": "Regression and classification heads are compared for IAA prediction.",
+        "useful_lesson": "Put the question, model family, and effect-size plot on the same page.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      }
+    },
+    "adopted_design_decisions": [
+      "Use same-case aligned panels so GT, prediction, and error are spatially comparable.",
+      "Put TP/FP/FN color semantics in a clear projection-scale legend.",
+      "Tie case metrics to the visible missed lesion region."
+    ],
+    "deliberately_not_adopted": [
+      "Do not crop the lesion into a tiny inset that cannot be inspected.",
+      "Do not combine panels from different cases for layout convenience."
+    ],
+    "current_slide_application": "Align same-case panels and put the error color legend close to the pixels."
+  },
+  "slide_5": {
+    "selected_reference_ids": [
+      "RRL-021",
+      "RRL-041",
+      "RRL-005",
+      "RRL-003",
+      "RRL-004"
+    ],
+    "page_specific_lessons": {
+      "RRL-021": {
+        "primary_object": "lesion segmentation Dice table",
+        "page_function": "RESULT_FIGURE",
+        "evidence_type": "quantitative table",
+        "information_density": "0.60/0.40",
+        "annotation_style": "Healthy/disease/overall Dice values are compared across methods.",
+        "useful_lesson": "Medical-imaging result pages should keep subgroups and endpoints visible.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-041": {
+        "primary_object": "histogram of p-values for fertility relationship",
+        "page_function": "NEGATIVE_RESULT",
+        "evidence_type": "p-value distribution",
+        "information_density": "0.65/0.35",
+        "annotation_style": "Histogram of p-values appears after possible analyses are enumerated.",
+        "useful_lesson": "Negative statistical-method pages should show the failure distribution.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-005": {
+        "primary_object": "future work bullets tied to robustness and interpretability",
+        "page_function": "NEXT_EXPERIMENT",
+        "evidence_type": "planned evidence",
+        "information_density": "0.25/0.75",
+        "annotation_style": "Highlighted note asks how much uncertainty to present as future work.",
+        "useful_lesson": "Use future-work pages to ask for decisions, not to claim completed evidence.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-003": {
+        "primary_object": "training-step reward curve with baselines",
+        "page_function": "RESULT_FIGURE",
+        "evidence_type": "quantitative plot",
+        "information_density": "0.75/0.25",
+        "annotation_style": "Learning curve compares local/global information methods.",
+        "useful_lesson": "For result pages, make the graph the main object and keep interpretation close to it.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      },
+      "RRL-004": {
+        "primary_object": "ranked sensitivity bars and interpretation note",
+        "page_function": "SENSITIVITY_ANALYSIS",
+        "evidence_type": "sensitivity analysis",
+        "information_density": "0.65/0.35",
+        "annotation_style": "Sensitivity bars and yellow reviewer notes expose the unresolved issue.",
+        "useful_lesson": "Mark in-progress sensitivity honestly; do not hide it behind a polished conclusion.",
+        "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+      }
+    },
+    "adopted_design_decisions": [
+      "Make the small-lesion failure curve the main evidence object.",
+      "Separate completed synthetic evidence from the planned held-out-center validation.",
+      "Keep the mechanism statement short and directly supported by the plotted evidence."
+    ],
+    "deliberately_not_adopted": [
+      "Do not build three status cards for failure, mechanism, and next work.",
+      "Do not describe planned validation as a completed experiment."
+    ],
+    "current_slide_application": "Keep the failure evidence dominant and make the next validation question a bounded proposal."
+  }
+}

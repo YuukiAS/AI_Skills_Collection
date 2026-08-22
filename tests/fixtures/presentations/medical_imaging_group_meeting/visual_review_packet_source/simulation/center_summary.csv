@@ -1,0 +1,4 @@
+center,condition,n_cases,dice_mean,dice_se,lesion_recall_mean,lesion_recall_se,fp_burden_mean,fp_burden_se
+Center A,reference contrast,30,0.8718,0.0445,0.7667,0.0785,0.0,0.0
+Center B,low contrast + bias,30,0.868,0.0339,0.8333,0.0692,0.0003,0.0001
+Center C,high shift,30,0.5607,0.0763,0.5667,0.092,0.0019,0.0005

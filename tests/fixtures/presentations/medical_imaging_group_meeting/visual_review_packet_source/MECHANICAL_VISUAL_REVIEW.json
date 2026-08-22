@@ -1,0 +1,270 @@
+{
+  "review_type": "MECHANICAL_VISUAL_REVIEW",
+  "status": "MECHANICAL_PASS",
+  "academic_visual_decision": "NOT_ASSESSED",
+  "reviewer_independent_from_generator": true,
+  "criteria_scope": [
+    "png_from_real_pptx_render",
+    "dimensions_nontrivial",
+    "not_blank",
+    "contrast_present",
+    "dominant_object_present",
+    "edge_clipping_not_obvious",
+    "text_density_proxy_bounded",
+    "required_object_contract_present"
+  ],
+  "editable_slide_count": 5,
+  "rendered_png_count": 5,
+  "render_status": {
+    "status": "ok",
+    "renderer": ".cache/tools/squashfs-root/opt/libreoffice25.8/program/soffice",
+    "pptx_to_pdf": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/pdf/medical_imaging_group_meeting_benchmark.pdf",
+    "png_count": 5,
+    "rendered_pngs": [
+      "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-1.png",
+      "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-2.png",
+      "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+      "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-4.png",
+      "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-5.png"
+    ],
+    "returncode": 0
+  },
+  "pptx_object_summary": {
+    "editable_slide_count": 5,
+    "media_count": 8,
+    "shape_count": 67,
+    "picture_count": 9
+  },
+  "slide_reviews": [
+    {
+      "slide": 1,
+      "archetype": "MEDICAL_IMAGE_COMPARISON",
+      "status": "MECHANICAL_PASS",
+      "criteria": {
+        "png_from_real_pptx_render": "PASS",
+        "dimensions_nontrivial": "PASS",
+        "not_blank": "PASS",
+        "contrast_present": "PASS",
+        "dominant_object_present": "PASS",
+        "edge_clipping_not_obvious": "PASS",
+        "text_density_proxy_bounded": "PASS",
+        "required_object_contract_present": "PASS"
+      },
+      "metrics": {
+        "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-1.png",
+        "width": 2134,
+        "height": 1200,
+        "blank_area_ratio": 0.0007,
+        "contrast_range": 244,
+        "dominant_object_area": 0.8542,
+        "edge_margin_px": 0,
+        "text_density_proxy": 0.0326,
+        "content_bbox": [
+          0,
+          0,
+          2133,
+          1024
+        ]
+      },
+      "reference_ids": [
+        "RRL-022",
+        "RRL-039",
+        "RRL-013",
+        "RRL-019",
+        "RRL-024"
+      ],
+      "expected_object_contract": [
+        "synthetic cardiac-MR-like slice",
+        "GT lesion mask",
+        "prediction overlay",
+        "endpoint names",
+        "synthetic-only qualifier"
+      ],
+      "style_boundary": "No source medical image, public slide styling, private clinical figure, patient image, or whole-slide screenshot is copied."
+    },
+    {
+      "slide": 2,
+      "archetype": "EXPERIMENT_DESIGN",
+      "status": "MECHANICAL_PASS",
+      "criteria": {
+        "png_from_real_pptx_render": "PASS",
+        "dimensions_nontrivial": "PASS",
+        "not_blank": "PASS",
+        "contrast_present": "PASS",
+        "dominant_object_present": "PASS",
+        "edge_clipping_not_obvious": "PASS",
+        "text_density_proxy_bounded": "PASS",
+        "required_object_contract_present": "PASS"
+      },
+      "metrics": {
+        "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-2.png",
+        "width": 2134,
+        "height": 1200,
+        "blank_area_ratio": 0.0671,
+        "contrast_range": 244,
+        "dominant_object_area": 0.7183,
+        "edge_margin_px": 0,
+        "text_density_proxy": 0.036,
+        "content_bbox": [
+          0,
+          0,
+          2133,
+          861
+        ]
+      },
+      "reference_ids": [
+        "RRL-019",
+        "RRL-010",
+        "RRL-022",
+        "RRL-026",
+        "RRL-002"
+      ],
+      "expected_object_contract": [
+        "center appearance shifts",
+        "synthetic image and GT generation",
+        "prediction step",
+        "case metrics",
+        "center aggregation"
+      ],
+      "style_boundary": "No source medical image, public slide styling, private clinical figure, patient image, or whole-slide screenshot is copied."
+    },
+    {
+      "slide": 3,
+      "archetype": "RESULT_FIGURE",
+      "status": "MECHANICAL_PASS",
+      "criteria": {
+        "png_from_real_pptx_render": "PASS",
+        "dimensions_nontrivial": "PASS",
+        "not_blank": "PASS",
+        "contrast_present": "PASS",
+        "dominant_object_present": "PASS",
+        "edge_clipping_not_obvious": "PASS",
+        "text_density_proxy_bounded": "PASS",
+        "required_object_contract_present": "PASS"
+      },
+      "metrics": {
+        "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+        "width": 2134,
+        "height": 1200,
+        "blank_area_ratio": 0.4747,
+        "contrast_range": 221,
+        "dominant_object_area": 0.8192,
+        "edge_margin_px": 0,
+        "text_density_proxy": 0.0362,
+        "content_bbox": [
+          0,
+          0,
+          2133,
+          982
+        ]
+      },
+      "reference_ids": [
+        "RRL-021",
+        "RRL-039",
+        "RRL-003",
+        "RRL-004",
+        "RRL-023"
+      ],
+      "expected_object_contract": [
+        "Dice panel",
+        "lesion recall panel",
+        "FP burden panel",
+        "uncertainty intervals",
+        "endpoint disagreement annotation"
+      ],
+      "style_boundary": "No source medical image, public slide styling, private clinical figure, patient image, or whole-slide screenshot is copied."
+    },
+    {
+      "slide": 4,
+      "archetype": "FAILURE_CASE",
+      "status": "MECHANICAL_PASS",
+      "criteria": {
+        "png_from_real_pptx_render": "PASS",
+        "dimensions_nontrivial": "PASS",
+        "not_blank": "PASS",
+        "contrast_present": "PASS",
+        "dominant_object_present": "PASS",
+        "edge_clipping_not_obvious": "PASS",
+        "text_density_proxy_bounded": "PASS",
+        "required_object_contract_present": "PASS"
+      },
+      "metrics": {
+        "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-4.png",
+        "width": 2134,
+        "height": 1200,
+        "blank_area_ratio": 0.0005,
+        "contrast_range": 247,
+        "dominant_object_area": 0.8383,
+        "edge_margin_px": 0,
+        "text_density_proxy": 0.0405,
+        "content_bbox": [
+          0,
+          0,
+          2133,
+          1005
+        ]
+      },
+      "reference_ids": [
+        "RRL-022",
+        "RRL-039",
+        "RRL-041",
+        "RRL-013",
+        "RRL-017"
+      ],
+      "expected_object_contract": [
+        "same-case input",
+        "GT panel",
+        "prediction panel",
+        "TP/FP/FN overlay",
+        "case metrics"
+      ],
+      "style_boundary": "No source medical image, public slide styling, private clinical figure, patient image, or whole-slide screenshot is copied."
+    },
+    {
+      "slide": 5,
+      "archetype": "NEGATIVE_RESULT",
+      "status": "MECHANICAL_PASS",
+      "criteria": {
+        "png_from_real_pptx_render": "PASS",
+        "dimensions_nontrivial": "PASS",
+        "not_blank": "PASS",
+        "contrast_present": "PASS",
+        "dominant_object_present": "PASS",
+        "edge_clipping_not_obvious": "PASS",
+        "text_density_proxy_bounded": "PASS",
+        "required_object_contract_present": "PASS"
+      },
+      "metrics": {
+        "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-5.png",
+        "width": 2134,
+        "height": 1200,
+        "blank_area_ratio": 0.3551,
+        "contrast_range": 255,
+        "dominant_object_area": 0.785,
+        "edge_margin_px": 0,
+        "text_density_proxy": 0.0424,
+        "content_bbox": [
+          0,
+          0,
+          2133,
+          941
+        ]
+      },
+      "reference_ids": [
+        "RRL-021",
+        "RRL-041",
+        "RRL-005",
+        "RRL-003",
+        "RRL-004"
+      ],
+      "expected_object_contract": [
+        "lesion-size recall plot",
+        "failure regime annotation",
+        "completed evidence boundary",
+        "planned validation experiment"
+      ],
+      "style_boundary": "No source medical image, public slide styling, private clinical figure, patient image, or whole-slide screenshot is copied."
+    }
+  ],
+  "rights_note": "Synthetic cardiac-MR-like phantoms only; no public slide image, private clinical figure, real patient image, or hospital data is copied."
+}
