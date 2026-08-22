@@ -145,8 +145,8 @@ class CodexMarketplaceTests(unittest.TestCase):
         unittest_step = workflow.index("Test Codex marketplace builder")
         self.assertLess(install_step, unittest_step)
         self.assertLess(import_check_step, unittest_step)
-        self.assertIn('python3 -m pip install "Pillow>=10" "python-pptx>=1.0"', workflow)
-        self.assertIn('from PIL import Image, ImageDraw, ImageFont; from pptx import Presentation', workflow)
+        self.assertIn('python3 -m pip install "Pillow>=10" "python-pptx>=1.0" "matplotlib>=3.8"', workflow)
+        self.assertIn('from PIL import Image, ImageDraw, ImageFont; import matplotlib; from pptx import Presentation', workflow)
 
     def test_repository_config_keeps_cardiacnexus_out_of_marketplace(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))

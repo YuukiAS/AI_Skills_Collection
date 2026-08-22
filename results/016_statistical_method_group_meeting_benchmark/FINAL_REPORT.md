@@ -6,13 +6,13 @@ final_decision: REVISE
 
 # 016 Statistical / Biostatistical Method Group Meeting Benchmark — Final Report
 
-## 本轮解决了什么
+## What this task solved
 
 016 原本只是一个“统计主题 benchmark fixture”，第一版虽然科学对象齐全，却明显低于成熟统计/生统组会的成品标准。用户检查真实 rendered slides 后明确指出：核心公式仍是源码式文本、RRL/reference retrieval 与 QA 元语言泄漏到观众页面、布局过度依赖 pastel boxes / wireframe、文案有明显自动生成痕迹。
 
 本任务因此使用唯一一次 Plan revision，把目标重新冻结为“可以直接投影给统计/生统导师、PI 或顶会研究听众”的成熟科研汇报质量。Executor 随后重做了全部五页，而不是只修第一轮的单根错误箭头。
 
-## 实际改了哪里
+## What changed
 
 Revised implementation 保留原 DGP、固定随机种子、simulation grid、方法比较和全部数值结果，但重构了 audience-facing Presentation：
 
@@ -25,11 +25,15 @@ Revised implementation 保留原 DGP、固定随机种子、simulation grid、�
 
 第一次 revised Terra review 又指出两个真实问题：slide 4 的标题/不确定性措辞过度概括，slide 5 的负结果图缺 Monte Carlo uncertainty。Executor 随后只修这两项，新的 visual identity 再运行一次 `gpt-5.6-terra` 后，五页全部得到 PASS，且没有 blocking finding。
 
-## 以前没有、现在已经验证的能力
+## New capabilities / behavior
 
 016 已经验证 Presentation 系统可以处理一条完整统计方法组会链路：从 clustered-data DGP 和 estimand，到 cluster-robust sandwich covariance、simulation design、带 Monte Carlo uncertainty 的主结果，再到 small-G undercoverage negative result 与 planned CR2 / wild-cluster-bootstrap experiment。
 
 同时，本轮第一次把“成熟科研 slide”质量门槛真正落实到机器可执行与独立视觉审核中：核心数学不能继续是源码字符串，内部检索/QA 元数据不能进入观众页面，参考大牛 deck 必须转化为具体页面设计决策，Terra 不能只检查对象存在和箭头方向。
+
+## Example usage
+
+本任务产物是 regression benchmark 和 review evidence，不是新增用户命令。Planner/Reviewer 可以直接查看 016 的真实 PPTX/PDF/PNG render、`reference_design_audit.json`、`VISUAL_REVIEW.json` 与 GitHub Actions run `32575849316`，判断 revised statistical group-meeting deck 的内容质量与当前 CI failure。
 
 ## 当前为什么仍不能 PASS
 
@@ -63,13 +67,13 @@ ModuleNotFoundError: No module named 'matplotlib'
 
 修复后只需要重新跑真实 GitHub CI，并在 CI PASS 后恢复对当前 revised implementation 的内容级独立结算。
 
-## 回归风险与剩余工作
+## Regression and remaining limitations
 
 当前最大的短期风险不是页面质量回退，而是 CI 环境没有显式表达统计 Presentation fixture 的完整测试依赖。如果不修，后续 medical-imaging / statistical benchmark 仍可能在干净 runner 重复暴露环境差异。
 
 即使 016 最终通过，本次 Presentation improvement cycle 仍未完成；后续还必须做一轮 medical-imaging research group meeting benchmark，并继续使用真实 editable PPTX render、mechanical QA、成熟度增强后的 `gpt-5.6-terra` evidence 与 Planner 独立审核。
 
-## 技术附录
+## Technical appendix
 
 Revised implementation commit：`7e3a4658909781d34899f6ad0b7d784648f1ac50`。
 

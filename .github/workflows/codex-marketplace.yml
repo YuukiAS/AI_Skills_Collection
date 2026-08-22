@@ -21,10 +21,10 @@ jobs:
           fetch-depth: 0
 
       - name: Install presentation regression test dependencies
-        run: python3 -m pip install "Pillow>=10" "python-pptx>=1.0"
+        run: python3 -m pip install "Pillow>=10" "python-pptx>=1.0" "matplotlib>=3.8"
 
       - name: Verify presentation regression imports
-        run: python3 -c "from PIL import Image, ImageDraw, ImageFont; from pptx import Presentation"
+        run: python3 -c "from PIL import Image, ImageDraw, ImageFont; import matplotlib; from pptx import Presentation"
 
       - name: Test Codex marketplace builder
         run: python3 -m unittest discover -s tests
