@@ -1,56 +1,70 @@
 # Research Presentation Current Round
 
-当前 improvement cycle 已进入 **Phase B：Terra blocker repair**。
+当前 improvement cycle 已进入 **Phase C：跨领域 Presentation benchmark**。
 
-Phase A 已通过用户授权后的 recovery task `014_presentation_phase_a_recovery` 关闭。013 的两轮 `REVISE`、review-limit 与人工决策历史保持可追溯；014 没有把 013 改写成“从未失败”，而是验证了完整 Presentation regression CI/test dependency contract，并在真实 GitHub runner 上恢复了全库测试与独立 closure review。014 的 `REVIEW_1.md` 结论为 PASS，真实 CI run `32562190645` 的 `codex-marketplace`、Windows sparse checkout、Windows/Linux editable-install smoke 均成功。
+Phase A 已通过人工授权后的 `014_presentation_phase_a_recovery` 合法关闭；013 的两轮 `REVISE`、review-limit 与人工决策历史保持可追溯。Phase B 的 `015_presentation_terra_blocker_repair` 也已完成第二轮独立审核并 PASS：最初的 metric-direction、medical-image area、comparator-path 三个 blocker，以及 REVIEW_1 追加的 synthetic evidence-boundary 与 TP/FP/FN overlay legend 两个局部 blocker均已关闭。
 
-当前标准 Reviewed Handoff task：
+015 第二轮最新 `gpt-5.6-terra` evidence 对 slide 1、2、4 给出 PASS；对 slide 3 新提出 connector direction/arrowhead 可读性意见。但 slide 3 当前 PNG SHA 与上一轮 Terra 给 PASS 时完全相同，且第二轮 implementation 未修改该页，因此该观察被记录为 **non-blocking reviewer-variance / diagram-clarity note**，不以模型对同一像素的重复判断差异推翻已冻结 accepted element。该观察将转入 Phase C statistical benchmark 的真实新页面中继续验证 connector direction、arrowhead、crossing 与 5 秒可读性。
 
-```text
-015_presentation_terra_blocker_repair
-```
-
-本阶段只处理当前 canonical `gpt-5.6-terra` 四页 regression 已有证据支持的三个 blocker，不扩 corpus、不做 Source Scout、不提前开始 Phase C benchmark。
-
-## 当前视觉证据基线
-
-当前 canonical evidence 仍为：
+## 当前 bounded task
 
 ```text
-results/012_presentation_visual_adapter/visual_review/visual_inputs.json
-results/012_presentation_visual_adapter/visual_review/VISUAL_REVIEW.json
+016_statistical_method_group_meeting_benchmark
 ```
 
-当前 identity 的总体结论为 `REVISE`：
+这是 Phase C 的第一类 benchmark：statistical / biostatistical method group meeting。
 
-- slide 1 / RESULT_FIGURE：burden error 的 favorable direction 与 winner claim 不一致；
-- slide 2 / FAILURE_CASE：image / GT / prediction / FP-FN overlay 在 oversized panel 中过小，投影可读性不足；
-- slide 3 / EXPERIMENT_DESIGN：local-only comparator 只存在于 prose/footer，global/local comparator 没有共同连接到 endpoint evaluation；
-- slide 4 / STATISTICAL_MODEL：PASS，是本阶段 accepted element，不得随意重做。
+### 016 冻结目标
 
-旧 `011_round_handoff` Pages/screenshot route 仅保留历史 provenance，不再是 primary machine-consumption path。
+建立一个 5 页、public-safe、真实可编辑/渲染的统计方法组会 benchmark，使用 coherent synthetic multi-center inference story：中心内相关会让 naive iid interval coverage 失真；cluster-robust inference 修正主要问题，但 small-center stress regime 可能仍暴露负结果。
 
-## Phase B 冻结边界
+五页分别承担：
 
-015 以 `automation/reviewed_handoff/tasks/015_presentation_terra_blocker_repair/PLAN.md` 为唯一冻结语义。核心要求：
+1. statistical model / estimand；
+2. estimator / variance derivation；
+3. simulation design；
+4. result figure + uncertainty；
+5. negative result + next discriminating experiment。
 
-1. slide 1 保留 synthetic 数值，只修 favorable-direction 表达和错误 winner claim；
-2. slide 2 保留同一 synthetic case/metrics，只扩大真实科学图像对象的页面占比；
-3. slide 3 把现有 local-only comparator 变成真实 branch，并让两种 comparator 输出都连接 endpoint gate；
-4. slide 4 作为 accepted element 保持稳定；
-5. 返修后必须重新走真实 editable PPTX -> presentation engine -> PDF/PNG -> mechanical QA；
-6. 重新生成 `visual_inputs.json` identity，并对新 identity 只做一次 `gpt-5.6-terra` live review；
-7. conventional CI 与 Terra transport 均通过后，由 Scheduled Planner 独立判断旧 blocker 是否真正关闭。
+具体冻结语义以：
 
-本阶段不得重新提升 Phase A 已存在的同义规则，不得扩 Source Registry / Inspected Page Library / Synthesized Knowledge，不得启动新的统计/医学影像 benchmark。
+```text
+automation/reviewed_handoff/tasks/016_statistical_method_group_meeting_benchmark/PLAN.md
+```
+
+为准。
+
+本任务使用现有 inspected reference corpus，不扩 source corpus、不做 Source Scout。Simulation 结果必须由 deterministic script 实际生成，不允许手工编造结果图。每页语义检索 2–5 个 inspected reference pages，并保留 retrieval trace。
+
+Slide 3 如果使用 diagram，必须使用真实结构 connector、可见 arrowhead、单一阅读方向并避免 edge crossing；这一要求用于在新 benchmark 中检验 015 留下的 diagram-clarity note，而不是回头重做已接受的 015 slide。
+
+## 视觉与 CI 链路
+
+016 必须重新建立自己的 evidence identity：
+
+```text
+editable PPTX
+-> real presentation engine
+-> PDF / PNG
+-> mechanical QA
+-> results/016_statistical_method_group_meeting_benchmark/visual_review/visual_inputs.json
+-> Bridge Kit gpt-5.6-terra Visual Review
+-> tracked VISUAL_REVIEW.json
+-> Scheduled Planner independent review
+```
+
+每个新 visual identity 正常 live review 一次，不为追求 PASS 重刷 API。Terra 的学术 `REVISE` 不等于 transport failure。
 
 ## 后续顺序
 
-只有 015 经真实 render、mechanical QA、current Terra evidence 与独立 Planner review PASS 后才进入 **Phase C**。Phase C 至少需要分别完成一轮：
+016 独立 PASS 后，Phase C 仍必须再完成一轮：
 
-1. statistical/biostatistical method group meeting benchmark；
-2. medical-imaging research group meeting benchmark。
+```text
+medical-imaging research group meeting benchmark
+```
 
-两类都必须经过真实 render + mechanical QA + `gpt-5.6-terra` evidence + Planner independent review，并继续沿用 Phase A 已保留的 audience-first、notation grounding、one-slide-one-job、scientific-object-first、source fidelity、diagram semantics/geometry、scientific hierarchy、主图面积、evidence boundary、revision scope、real-data grounding 等规则。
+医学影像 benchmark 必须真实检验 image / GT / prediction / overlay、failure case、quantitative result、method/experiment diagram、validation/endpoint semantics 等科研对象，并继续经过 real render + mechanical QA + `gpt-5.6-terra` evidence + Planner review。
+
+只有统计/生统和医学影像两类 benchmark 都通过，且 source/generated/tests/visual evidence 没有未关闭 blocker，才能判断本次 Presentation improvement cycle 是否可以收口。cycle PASS 不等于长期 `PROGRAM_MATURE`。
 
 当前不执行 Source Scout。
