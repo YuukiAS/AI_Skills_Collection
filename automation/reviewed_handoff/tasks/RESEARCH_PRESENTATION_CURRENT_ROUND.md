@@ -1,68 +1,74 @@
 # Research Presentation Current Round
 
-当前 improvement cycle 已进入 **Phase C：跨领域 Presentation benchmark**，但统计/生统 benchmark 正在执行一次由用户质量纠偏触发的合法 Plan revision。
+当前 improvement cycle 仍处于 **Phase C：跨领域 Presentation benchmark**。统计/生统 benchmark `016_statistical_method_group_meeting_benchmark` 已在用户质量纠偏、Plan revision、成熟度重构、两轮独立审核以及一次人工授权的机械 CI 依赖恢复后正式关闭。
 
-Phase A 已通过人工授权后的 `014_presentation_phase_a_recovery` 合法关闭；013 的两轮 `REVISE`、review-limit 与人工决策历史保持可追溯。Phase B 的 `015_presentation_terra_blocker_repair` 已完成第二轮独立审核并 PASS。
+016 的两轮审核历史保持不变：第二轮 `REVISE` 的唯一 blocker 是干净 GitHub runner 缺少 `matplotlib`，而不是当前五页内容重新被判差。用户随后授权一次严格限定的 CI/test dependency recovery；恢复只补齐测试依赖，没有修改 DGP、simulation 数值、五页 Presentation、Terra rubric、reference corpus 或 visual evidence。新的 GitHub Actions run `32577691334` 中 required jobs 全部成功，因此该人工恢复关闭了第二轮剩余 blocker，没有伪造第三轮自动 Reviewer。
 
-015 留下的 diagram-clarity 观察已经在 016 的初版 slide 3 中得到部分验证，但 016 第一轮真实 rendered slides 暴露出更重要的问题：旧审查过度强调“对象存在、语义基本正确、机械 QA 和 Terra PASS”，没有把**成熟科研组会成品的专业完成度**作为硬门槛。用户明确否定当前 016 的整体视觉质量，因此旧 Terra 对 slide 2–5 的 PASS 不再作为视觉 accepted-element lock。
+016 最终保留的质量基线包括：真正数学排版、禁止 audience-facing RRL/QA/provenance 泄漏、scientific object 作为视觉中心、reference-design audit、deterministic anti-leak / math-source QA，以及成熟度增强后的 `gpt-5.6-terra` rubric。最终 Terra identity 五页均 PASS、无 blocking finding。
 
 ## 当前 bounded task
 
 ```text
-016_statistical_method_group_meeting_benchmark
+017_medical_imaging_group_meeting_benchmark
 ```
 
-这是 Phase C 第一类 benchmark：statistical / biostatistical method group meeting。
+这是 Phase C 第二类 benchmark：medical-imaging research group meeting。
 
-### 016 当前 revision 目标
+### 017 冻结目标
 
-科学故事、DGP、simulation 和真实数值保持不变，但全部 5 页重新按成熟统计/生统组会标准实现。新版冻结语义以：
+建立一个 5 页、public-safe、真实可编辑/渲染的医学影像研究组会 benchmark，使用 deterministic synthetic cardiac-MR-like lesion-segmentation story，真正检验：
+
+1. imaging task / anatomy / endpoint；
+2. multi-center appearance-shift experiment design；
+3. quantitative result + uncertainty + endpoint disagreement；
+4. same-case image / GT / prediction / error overlay failure analysis；
+5. negative result / validation decision + planned next experiment。
+
+具体冻结语义以：
 
 ```text
-automation/reviewed_handoff/tasks/016_statistical_method_group_meeting_benchmark/PLAN.md
+automation/reviewed_handoff/tasks/017_medical_imaging_group_meeting_benchmark/PLAN.md
 ```
 
 为准。
 
-这次 revision 新增以下硬门槛：
+本任务不使用真实或私有 patient image，不扩 source corpus。现有 inspected medical-imaging library 已覆盖 representative samples、metric+mask、uncertainty、subgroup result、negative comparator、task overview、objective、result table 与 same-case image/GT/prediction panels，足够完成首轮 benchmark。每页仍需语义检索 2–5 个 inspected references，并用内部 `reference_design_audit` 记录真正吸收的设计经验；RRL ID 和 retrieval trace 不得进入 audience-facing slide。
 
-- 核心统计公式必须真正 typeset/render，不能把 `beta_1`、`rho`、`sum_g`、`(X'X)^(-1)` 等源码式文本直接给 audience；
-- `RRL-*`、`Reference retrieval`、`EVIDENCE_MANIFEST`、`Diagram contract`、`Reading target`、`style not copied` 等内部 QA/provenance 文案不得进入 audience-facing slide；
-- 旧 pastel cards / boxy wireframe 不是 accepted element，可以在保持科学证据不变的前提下重构；
-- formula / result figure / simulation evidence / negative evidence 必须成为真正的视觉中心；
-- English slide text 必须去掉明显 AI/制作元话语，使用自然学术标题、annotation 和 caption；
-- 参考页必须真正影响信息密度、公式/图层级与 annotation，而不是只留下 retrieval IDs。
+## 医学影像成熟度门槛
 
-## Reference-informed quality
+017 不接受“图都放进去了”作为 PASS。必须满足：
 
-016 不扩 source corpus；现有 inspected library 已有足够的统计页面用于本次重构。重点 lesson 包括：
+- image / GT / prediction / overlay 是主要 scientific object，而不是被 UI/card/装饰框吞掉；
+- modality、slice/anatomy、lesion/target 与 endpoint 在同页自然 grounding；
+- overlay / annotation / legend 足够大，听众无需猜颜色和 panel 语义；
+- same-case qualitative evidence 与 case metric 一致；
+- quantitative result 直接编码 uncertainty / variation，不以 pastel metric cards 代替结果图；
+- average Dice 与 lesion-level / burden endpoint 的差异必须由真实 synthetic evidence 支持；
+- planned validation 与 completed evidence 严格区分；
+- audience-facing slide 不出现 `RRL-*`、`Reference retrieval`、`Diagram contract`、`Reading target`、repo/run/provenance 等内部元语言；
+- 页面整体应达到强 medical-imaging PI 组会或 MICCAI/RSNA 风格 research talk 可直接投影的完成度。
 
-- `RRL-028`：公式可以独立成为页面主对象；
-- `RRL-030` / `RRL-033`：不确定性应直接编码在占主导面积的结果图中；
-- `RRL-023`：区间图直接承载比较与不确定性；
-- `RRL-025`：负结果/修正应由真实 evidence 主导，而不是卡片式总结；
-- `RRL-026`：simulation 页面应同时暴露生成机制与实际输出；
-- `RRL-009`：只有真实 estimator mechanism 才值得画 diagram；
-- `RRL-044`：推断目标、模型成分与检查对象需要视觉层级清楚，不能用错误方向箭头制造因果含义。
+## Visual Review 与 CI 链路
 
-同时以 MIT EECS/NSE Communication Lab 的 one-message-per-slide、message title、visuals-over-text、signal-to-noise、direct annotation 等公开规范作为最低沟通质量基线；NeurIPS/CVPR 的大字体、少文字、主视觉足够大等要求只用于视觉完成度下限，不削弱统计组会的技术深度。
+017 必须建立独立 evidence identity：
 
-## Visual Review 与 QA 修订
+```text
+editable PPTX
+-> real presentation engine
+-> PDF / PNG
+-> mechanical QA
+-> results/017_medical_imaging_group_meeting_benchmark/visual_review/visual_inputs.json
+-> Bridge Kit gpt-5.6-terra Visual Review
+-> tracked VISUAL_REVIEW.json
+-> Scheduled Planner independent review
+```
 
-新的 016 visual identity 必须升级 consumer-specific Terra rubric，明确检查：数学排版、内部元语言泄漏、AI-template/wireframe 痕迹、scientific hierarchy、自然学术文案、reference-informed quality 和真实会场可读性。
+Terra rubric 必须检查真实 image pixels、panel alignment、legend/annotation、endpoint semantics、failure mechanism、visual maturity、anti-AI/meta-language 与 reference-informed quality；Terra PASS 仍不能替代 Planner 独立判断。
 
-可机械识别的低级问题必须在 Terra 之前由 deterministic QA 拦截：内部 ID/QA 文案泄漏、核心公式仍是 source-like ASCII、slide 1 错误串行 connector 等都应直接失败。Mechanical QA 仍不得冒充最终学术 PASS。
-
-Terra 只是视觉证据生产器，不是最终 Reviewer。即使 Terra PASS，只要 Planner 独立查看真实 rendered pixels 后认为页面仍明显不像成熟统计/生统组会成品，仍必须判 `REVISE`。
+为了避免再次出现干净 CI runner 缺依赖，017 首轮 generator 优先只使用当前 CI 已声明的 stdlib、Pillow、python-pptx、matplotlib；如必须新增第三方包，Executor 先请求 Planner，不得直接留下新的 undeclared import。
 
 ## 后续顺序
 
-016 第二轮独立 PASS 后，Phase C 仍必须再完成一轮：
+017 独立 PASS 后，Planner 才能判断本次 Presentation improvement cycle 是否已经满足当前轮次的收口条件。收口前仍需核对 source/generated/tests/visual evidence consistency 与是否存在未关闭 blocker。
 
-```text
-medical-imaging research group meeting benchmark
-```
-
-医学影像 benchmark 使用同等级别的成熟度门槛，并进一步按 MICCAI/RSNA 风格检查 image / GT / prediction / overlay、failure case、quantitative result、method/experiment diagram、validation/endpoint semantics、直接 annotation/legend 与真实会场可读性。
-
-只有统计/生统和医学影像两类 benchmark 都通过，且 source/generated/tests/visual evidence 没有未关闭 blocker，才能判断本次 Presentation improvement cycle 是否可以收口。cycle PASS 不等于长期 `PROGRAM_MATURE`。
+即使本 cycle PASS，也不等于长期 `PROGRAM_MATURE`；长期成熟度仍需要更多领域、page function 和多轮真实 regression 证据。
