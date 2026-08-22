@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import csv
+import re
 import subprocess
 import sys
 import tempfile
@@ -247,6 +248,75 @@ class PresentationSharedTests(unittest.TestCase):
         stats_sources = [source for source in manifest["candidate_sources"] if source["domain_family"] in {"statistics", "biostatistics"}]
         self.assertGreaterEqual(len(stats_sources), 30)
         self.assertGreaterEqual(len([source for source in stats_sources if source["verification_status"] == "candidate_backlog"]), 10)
+
+    def test_research_presentation_todo_consolidation_and_promotions(self) -> None:
+        todo = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/TODO.md").read_text(encoding="utf-8")
+        research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")
+        visual_qa = (SHARED / "visual-qa.md").read_text(encoding="utf-8")
+        archetypes = (SHARED / "references/RESEARCH_SLIDE_ARCHETYPES.md").read_text(encoding="utf-8")
+
+        self.assertNotRegex(todo, r"- \[ \]")
+        categories = set(re.findall(r"- \[(ALREADY_IMPLEMENTED|PROMOTE_NOW|KEEP_BACKLOG|DUPLICATE_OR_SUPERSEDED)\]", todo))
+        self.assertEqual(categories, {"ALREADY_IMPLEMENTED", "PROMOTE_NOW", "KEEP_BACKLOG", "DUPLICATE_OR_SUPERSEDED"})
+        checklist_count = len(re.findall(r"^- \[(?:ALREADY_IMPLEMENTED|PROMOTE_NOW|KEEP_BACKLOG|DUPLICATE_OR_SUPERSEDED)\]", todo, flags=re.MULTILINE))
+        basis_count = todo.count("Classification basis:")
+        self.assertGreaterEqual(checklist_count, 100)
+        self.assertEqual(checklist_count, basis_count)
+
+        for required in [
+            "## Classification Legend",
+            "`[PROMOTE_NOW]`",
+            "`[KEEP_BACKLOG]`",
+            "`[DUPLICATE_OR_SUPERSEDED]`",
+            "Phase B",
+            "statistical/biostatistical benchmark",
+            "medical-imaging benchmark",
+        ]:
+            self.assertIn(required, todo)
+
+        for required in [
+            "## Revision Scope",
+            "accepted_element_ledger",
+            "## Evidence And Concept Grounding",
+            "fabricated proxy",
+            "## Diagram Gate",
+            "connectors must be structural connectors",
+        ]:
+            self.assertIn(required, research_skill)
+
+        for required in [
+            "## Evidence Versus Concept QA",
+            "## Diagram Semantic QA",
+            "## Revision Scope QA",
+            "typed arrow characters",
+            "scope creep",
+        ]:
+            self.assertIn(required, visual_qa)
+
+        for required in [
+            "metric semantics, favorable direction, graphical encoding",
+            "visually central and large enough to inspect",
+            "complete comparison path",
+            "every connector represents a true relationship",
+        ]:
+            self.assertIn(required, archetypes)
+
+        mirrors = [
+            (
+                REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md",
+                REPO_ROOT / "plugins/codex/plugins/presentations/skills/research/SKILL.md",
+            ),
+            (
+                SHARED / "visual-qa.md",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/visual-qa.md",
+            ),
+            (
+                SHARED / "references/RESEARCH_SLIDE_ARCHETYPES.md",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/references/RESEARCH_SLIDE_ARCHETYPES.md",
+            ),
+        ]
+        for source, mirror in mirrors:
+            self.assertEqual(source.read_text(encoding="utf-8"), mirror.read_text(encoding="utf-8"))
 
     def test_research_group_meeting_final_validation_rejects_unknown_and_checks_evidence_refs(self) -> None:
         draft = markdown_to_deck_plan.markdown_to_deck_plan(
