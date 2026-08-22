@@ -197,7 +197,7 @@
         "contrast_range": 225,
         "dominant_object_area": 1.0,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0421,
+        "text_density_proxy": 0.0442,
         "content_bbox": [
           0,
           0,
@@ -239,11 +239,11 @@
         "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-5.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.2659,
+        "blank_area_ratio": 0.2646,
         "contrast_range": 225,
         "dominant_object_area": 1.0,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0508,
+        "text_density_proxy": 0.0521,
         "content_bbox": [
           0,
           0,

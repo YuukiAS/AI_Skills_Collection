@@ -597,10 +597,18 @@ def draw_negative_plot(path: Path, summary: dict[str, object]) -> None:
         cx = x0 + 105 + i * 210
         for j, method in enumerate(["naive_iid_ols_z", "cluster_robust_z"]):
             value = row["methods"][method]["coverage"]
+            mc = row["methods"][method]["mc_se"]
             bar_h = int((value - 0.45) / 0.55 * 310)
             x = cx + j * 50
             draw.rectangle((x, y0 - bar_h, x + 36, y0), fill=colors[method])
-            draw.text((x - 2, y0 - bar_h - 28), f"{value:.2f}", fill=hex_color("ink"), font=small)
+            center_x = x + 18
+            lo = y0 - int((value - 1.96 * mc - 0.45) / 0.55 * 310)
+            hi = y0 - int((value + 1.96 * mc - 0.45) / 0.55 * 310)
+            draw.line((center_x, hi, center_x, lo), fill=hex_color("ink"), width=2)
+            draw.line((center_x - 8, hi, center_x + 8, hi), fill=hex_color("ink"), width=2)
+            draw.line((center_x - 8, lo, center_x + 8, lo), fill=hex_color("ink"), width=2)
+            label_y = min(hi, y0 - bar_h) - 30
+            draw.text((x - 2, label_y), f"{value:.2f}", fill=hex_color("ink"), font=small)
         draw.text((cx + 4, y0 + 20), f"ρ={rho:.1f}", fill=hex_color("muted"), font=font)
     final_x = x0 + 105 + 3 * 210 + 50
     stress_y = y0 - int((summary["negative_result"]["cluster_robust_coverage"] - 0.45) / 0.55 * 310)
@@ -611,6 +619,7 @@ def draw_negative_plot(path: Path, summary: dict[str, object]) -> None:
     draw.text((828, 29), "naive", fill=hex_color("ink"), font=small)
     draw.rectangle((790, 65, 818, 86), fill=colors["cluster_robust_z"])
     draw.text((828, 62), "cluster-robust", fill=hex_color("ink"), font=small)
+    draw.text((132, 472), "Error bars show Monte Carlo +/- 1.96 SE", fill=hex_color("muted"), font=small)
     img.save(path)
 
 
@@ -753,8 +762,8 @@ def draw_design_page(slide, assets: Path, manifest: dict, refs: list[str], summa
 
 def draw_result_page(slide, assets: Path, manifest: dict, refs: list[str], summary: dict[str, object]):
     audience_text = [
-        "Synthetic imbalanced-cluster simulation; bands show Monte Carlo uncertainty.",
-        "Cluster-robust intervals recover much of the lost coverage, but small-G stress remains below nominal.",
+        "Synthetic imbalanced-cluster simulation; vertical marks show Monte Carlo error bars.",
+        "Cluster-robust intervals reduce undercoverage, but finite-center shortfall remains visible.",
     ]
     manifest.setdefault("audience_text_by_archetype", {})["RESULT_FIGURE"] = audience_text
     plot = assets / "coverage_by_icc.png"
@@ -769,6 +778,7 @@ def draw_negative_page(slide, assets: Path, manifest: dict, refs: list[str], sum
         f"At G=8, ICC ρ=.5, imbalanced clusters, cluster-robust coverage is {stress['cluster_robust_coverage']:.2f}.",
         "Few centers make the sandwich variance noisy; imbalance increases center leverage.",
         "Planned comparison: CR2 small-sample correction and wild cluster bootstrap on the same grid.",
+        "Bar intervals show Monte Carlo error bars.",
     ]
     manifest.setdefault("audience_text_by_archetype", {})["NEGATIVE_RESULT"] = audience_text
     plot = assets / "small_g_negative_result.png"
@@ -779,7 +789,7 @@ def draw_negative_page(slide, assets: Path, manifest: dict, refs: list[str], sum
     add_text(slide, audience_text[1], 9.25, 2.86, 2.9, 0.72, 12.1, "ink", True)
     add_rule(slide, 9.25, 3.82, 11.85, 3.82, "line", 1.0)
     add_text(slide, audience_text[2], 9.25, 4.10, 2.9, 0.86, 11.8, "teal", True)
-    add_text(slide, "Completed evidence is limited to the two intervals shown; the correction methods are future tests.", 0.95, 6.2, 11.1, 0.32, 11.8, "muted")
+    add_text(slide, "Completed evidence is limited to the two intervals shown; bar intervals show Monte Carlo error bars.", 0.95, 6.2, 11.1, 0.32, 11.8, "muted")
     manifest["negative_result_claim"] = stress
 
 
@@ -787,7 +797,7 @@ SLIDES = [
     ("Center correlation breaks iid intervals", "The point estimate targets β₁, but the uncertainty model changes.", "STATISTICAL_MODEL", draw_model_page),
     ("The sandwich variance aggregates by center", "The middle term is a center-level score covariance, not a row-level residual pool.", "ESTIMATOR", draw_estimator_page),
     ("A stress grid separates interval behavior", "The same generated samples feed two intervals and the same coverage endpoint.", "SIMULATION_DESIGN", draw_design_page),
-    ("Cluster adjustment recovers coverage except at small G", "Coverage near 0.95 is the target; uncertainty is part of the figure.", "RESULT_FIGURE", draw_result_page),
+    ("Cluster adjustment reduces, but does not erase, undercoverage", "Coverage near 0.95 is the target; Monte Carlo error bars are part of the evidence.", "RESULT_FIGURE", draw_result_page),
     ("The remaining failure is finite-center undercoverage", "The next experiment tests small-sample corrections under the same grid.", "NEGATIVE_RESULT", draw_negative_page),
 ]
 

@@ -1132,7 +1132,7 @@
     },
     {
       "slide": 4,
-      "title": "Cluster adjustment recovers coverage except at small G",
+      "title": "Cluster adjustment reduces, but does not erase, undercoverage",
       "archetype": "RESULT_FIGURE",
       "reference_ids": [
         "RRL-030",
@@ -1318,8 +1318,8 @@
         "current_slide_application": "Let the plot dominate and keep uncertainty and interpretation adjacent to the graph."
       },
       "audience_text": [
-        "Synthetic imbalanced-cluster simulation; bands show Monte Carlo uncertainty.",
-        "Cluster-robust intervals recover much of the lost coverage, but small-G stress remains below nominal."
+        "Synthetic imbalanced-cluster simulation; vertical marks show Monte Carlo error bars.",
+        "Cluster-robust intervals reduce undercoverage, but finite-center shortfall remains visible."
       ],
       "learned_organization": "Let the plot dominate and keep uncertainty and interpretation adjacent to the graph.",
       "reference_rationale": "References are selected by auditable semantic query over inspected page records with rendered-page checksums; they inform organization only.",
@@ -1524,7 +1524,8 @@
       "audience_text": [
         "At G=8, ICC ρ=.5, imbalanced clusters, cluster-robust coverage is 0.78.",
         "Few centers make the sandwich variance noisy; imbalance increases center leverage.",
-        "Planned comparison: CR2 small-sample correction and wild cluster bootstrap on the same grid."
+        "Planned comparison: CR2 small-sample correction and wild cluster bootstrap on the same grid.",
+        "Bar intervals show Monte Carlo error bars."
       ],
       "learned_organization": "Keep the failure visible and separate completed evidence from the next planned method.",
       "reference_rationale": "References are selected by auditable semantic query over inspected page records with rendered-page checksums; they inform organization only.",
@@ -1895,13 +1896,14 @@
       "The design asks whether center aggregation repairs interval coverage across the stress grid."
     ],
     "RESULT_FIGURE": [
-      "Synthetic imbalanced-cluster simulation; bands show Monte Carlo uncertainty.",
-      "Cluster-robust intervals recover much of the lost coverage, but small-G stress remains below nominal."
+      "Synthetic imbalanced-cluster simulation; vertical marks show Monte Carlo error bars.",
+      "Cluster-robust intervals reduce undercoverage, but finite-center shortfall remains visible."
     ],
     "NEGATIVE_RESULT": [
       "At G=8, ICC ρ=.5, imbalanced clusters, cluster-robust coverage is 0.78.",
       "Few centers make the sandwich variance noisy; imbalance increases center leverage.",
-      "Planned comparison: CR2 small-sample correction and wild cluster bootstrap on the same grid."
+      "Planned comparison: CR2 small-sample correction and wild cluster bootstrap on the same grid.",
+      "Bar intervals show Monte Carlo error bars."
     ]
   },
   "math_assets": {
