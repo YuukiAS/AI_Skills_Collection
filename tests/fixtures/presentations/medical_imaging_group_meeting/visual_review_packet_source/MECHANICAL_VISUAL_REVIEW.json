@@ -32,7 +32,7 @@
   "pptx_object_summary": {
     "editable_slide_count": 5,
     "media_count": 11,
-    "shape_count": 70,
+    "shape_count": 74,
     "picture_count": 13
   },
   "slide_reviews": [
@@ -54,11 +54,11 @@
         "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-1.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.0007,
+        "blank_area_ratio": 0.001,
         "contrast_range": 244,
         "dominant_object_area": 0.85,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0331,
+        "text_density_proxy": 0.0339,
         "content_bbox": [
           0,
           0,

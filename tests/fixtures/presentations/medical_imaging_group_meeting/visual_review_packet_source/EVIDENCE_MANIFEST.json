@@ -499,6 +499,8 @@
       },
       "audience_text": [
         "Evaluation unit: lesion detection + mask overlap",
+        "myocardial ring",
+        "small lesion target",
         "Dice summarizes mask overlap, but a missed small lesion is counted at the lesion level.",
         "Endpoints: Dice overlap, lesion recall, false-positive burden",
         "Synthetic cardiac-MR-like phantoms; not clinical validation."
@@ -1684,6 +1686,8 @@
   "audience_text_by_archetype": {
     "MEDICAL_IMAGE_COMPARISON": [
       "Evaluation unit: lesion detection + mask overlap",
+      "myocardial ring",
+      "small lesion target",
       "Dice summarizes mask overlap, but a missed small lesion is counted at the lesion level.",
       "Endpoints: Dice overlap, lesion recall, false-positive burden",
       "Synthetic cardiac-MR-like phantoms; not clinical validation."

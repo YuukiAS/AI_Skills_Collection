@@ -223,6 +223,15 @@ def add_rule(slide, x1: float, y1: float, x2: float, y2: float, color: str = "li
     return connector
 
 
+def image_label(slide, text: str, x: float, y: float, w: float = 1.18):
+    shape = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, inch(x), inch(y), inch(w), inch(0.26))
+    shape.fill.solid()
+    shape.fill.fore_color.rgb = rgb("navy")
+    shape.line.fill.background()
+    add_text(slide, text, x + 0.06, y + 0.03, w - 0.12, 0.18, 8.0, "white", True, PP_ALIGN.CENTER)
+    return shape
+
+
 def arrow(slide, x1: float, y1: float, x2: float, y2: float, color: str = "teal", width: float = 1.6):
     connector = slide.shapes.add_connector(MSO_CONNECTOR.STRAIGHT, inch(x1), inch(y1), inch(x2), inch(y2))
     connector.line.color.rgb = rgb(color)
@@ -734,6 +743,10 @@ def add_legend(slide, x: float, y: float):
 def draw_slide1(slide, assets: dict[str, str], manifest: dict, refs: list[str], data: dict[str, object]):
     add_image(slide, assets["slide1_input"], 0.70, 1.42, 4.20, 4.20)
     add_image(slide, assets["slide1_overlay"], 4.95, 1.42, 4.20, 4.20)
+    image_label(slide, "myocardial ring", 1.15, 4.38, 1.08)
+    add_rule(slide, 2.08, 4.34, 2.52, 3.58, "gold", 1.4)
+    image_label(slide, "small lesion target", 3.36, 2.78, 1.30)
+    add_rule(slide, 3.88, 3.04, 3.64, 3.26, "gold", 1.4)
     add_text(slide, "Evaluation unit: lesion detection + mask overlap", 9.55, 1.50, 2.85, 0.78, 15, "ink", True)
     add_text(slide, "Dice summarizes mask overlap, but a missed small lesion is counted at the lesion level.", 9.55, 2.44, 2.75, 0.76, 12.2, "muted")
     add_text(slide, "Endpoints: Dice overlap, lesion recall, false-positive burden", 9.55, 3.52, 2.75, 0.58, 12.2, "teal", True)
@@ -742,6 +755,8 @@ def draw_slide1(slide, assets: dict[str, str], manifest: dict, refs: list[str], 
     add_legend(slide, 1.05, 6.15)
     manifest.setdefault("audience_text_by_archetype", {})["MEDICAL_IMAGE_COMPARISON"] = [
         "Evaluation unit: lesion detection + mask overlap",
+        "myocardial ring",
+        "small lesion target",
         "Dice summarizes mask overlap, but a missed small lesion is counted at the lesion level.",
         "Endpoints: Dice overlap, lesion recall, false-positive burden",
         "Synthetic cardiac-MR-like phantoms; not clinical validation.",
