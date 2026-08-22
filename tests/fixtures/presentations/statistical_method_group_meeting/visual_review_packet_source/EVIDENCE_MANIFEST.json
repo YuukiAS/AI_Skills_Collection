@@ -1,0 +1,972 @@
+{
+  "status": "GENERATED_SOURCE_ARTIFACTS_ONLY",
+  "generator_may_pass": false,
+  "task_key": "016_statistical_method_group_meeting_benchmark",
+  "rights_note": "Synthetic data only; no downloaded public deck image, private CARE figure, whole-slide screenshot, or patient image is copied.",
+  "benchmark_story": "Multi-center correlation can leave beta_1 estimates nearly unbiased while interval coverage fails; cluster-robust z intervals repair much of the issue but small-G/high-ICC stress remains a negative result.",
+  "simulation_summary": {
+    "seed": 20260822,
+    "replicates_per_cell": 400,
+    "dgp": {
+      "formula": "Y_ij = beta_0 + beta_1 T_ij + u_j + epsilon_ij",
+      "beta_1": 0.25,
+      "u_j": "N(0, tau^2)",
+      "epsilon_ij": "N(0, sigma^2)",
+      "icc": "rho = tau^2 / (tau^2 + sigma^2)"
+    },
+    "grid": {
+      "center_count": [
+        8,
+        20,
+        50
+      ],
+      "icc": [
+        0.0,
+        0.1,
+        0.3,
+        0.5
+      ],
+      "imbalance": [
+        "balanced",
+        "imbalanced"
+      ]
+    },
+    "methods": [
+      "naive_iid_ols_z",
+      "cluster_robust_z"
+    ],
+    "endpoints": [
+      "95% interval coverage",
+      "mean bias",
+      "mean interval width"
+    ],
+    "nominal_coverage": 0.95,
+    "rows": [
+      {
+        "G": 8,
+        "rho": 0.0,
+        "imbalance": "balanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.95,
+            "mc_se": 0.0109,
+            "mean_width": 0.567
+          },
+          "cluster_robust_z": {
+            "coverage": 0.905,
+            "mc_se": 0.0147,
+            "mean_width": 0.5522
+          }
+        },
+        "bias": -0.0155
+      },
+      {
+        "G": 8,
+        "rho": 0.1,
+        "imbalance": "balanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.945,
+            "mc_se": 0.0114,
+            "mean_width": 0.5931
+          },
+          "cluster_robust_z": {
+            "coverage": 0.8975,
+            "mc_se": 0.0152,
+            "mean_width": 0.5791
+          }
+        },
+        "bias": 0.015
+      },
+      {
+        "G": 8,
+        "rho": 0.3,
+        "imbalance": "balanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.9675,
+            "mc_se": 0.0089,
+            "mean_width": 0.6604
+          },
+          "cluster_robust_z": {
+            "coverage": 0.92,
+            "mc_se": 0.0136,
+            "mean_width": 0.6331
+          }
+        },
+        "bias": 0.0039
+      },
+      {
+        "G": 8,
+        "rho": 0.5,
+        "imbalance": "balanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.9525,
+            "mc_se": 0.0106,
+            "mean_width": 0.7671
+          },
+          "cluster_robust_z": {
+            "coverage": 0.8725,
+            "mc_se": 0.0167,
+            "mean_width": 0.7279
+          }
+        },
+        "bias": 0.0057
+      },
+      {
+        "G": 20,
+        "rho": 0.0,
+        "imbalance": "balanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.9525,
+            "mc_se": 0.0106,
+            "mean_width": 0.358
+          },
+          "cluster_robust_z": {
+            "coverage": 0.94,
+            "mc_se": 0.0119,
+            "mean_width": 0.3544
+          }
+        },
+        "bias": -0.0049
+      },
+      {
+        "G": 20,
+        "rho": 0.1,
+        "imbalance": "balanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.945,
+            "mc_se": 0.0114,
+            "mean_width": 0.3776
+          },
+          "cluster_robust_z": {
+            "coverage": 0.9325,
+            "mc_se": 0.0125,
+            "mean_width": 0.3696
+          }
+        },
+        "bias": -0.0016
+      },
+      {
+        "G": 20,
+        "rho": 0.3,
+        "imbalance": "balanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.955,
+            "mc_se": 0.0104,
+            "mean_width": 0.4253
+          },
+          "cluster_robust_z": {
+            "coverage": 0.93,
+            "mc_se": 0.0128,
+            "mean_width": 0.4183
+          }
+        },
+        "bias": 0.0017
+      },
+      {
+        "G": 20,
+        "rho": 0.5,
+        "imbalance": "balanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.9575,
+            "mc_se": 0.0101,
+            "mean_width": 0.4998
+          },
+          "cluster_robust_z": {
+            "coverage": 0.93,
+            "mc_se": 0.0128,
+            "mean_width": 0.4787
+          }
+        },
+        "bias": -0.0024
+      },
+      {
+        "G": 50,
+        "rho": 0.0,
+        "imbalance": "balanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.96,
+            "mc_se": 0.0098,
+            "mean_width": 0.2263
+          },
+          "cluster_robust_z": {
+            "coverage": 0.9525,
+            "mc_se": 0.0106,
+            "mean_width": 0.2255
+          }
+        },
+        "bias": -0.0031
+      },
+      {
+        "G": 50,
+        "rho": 0.1,
+        "imbalance": "balanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.95,
+            "mc_se": 0.0109,
+            "mean_width": 0.2381
+          },
+          "cluster_robust_z": {
+            "coverage": 0.945,
+            "mc_se": 0.0114,
+            "mean_width": 0.2381
+          }
+        },
+        "bias": 0.0028
+      },
+      {
+        "G": 50,
+        "rho": 0.3,
+        "imbalance": "balanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.9325,
+            "mc_se": 0.0125,
+            "mean_width": 0.2693
+          },
+          "cluster_robust_z": {
+            "coverage": 0.95,
+            "mc_se": 0.0109,
+            "mean_width": 0.2693
+          }
+        },
+        "bias": 0.0015
+      },
+      {
+        "G": 50,
+        "rho": 0.5,
+        "imbalance": "balanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.945,
+            "mc_se": 0.0114,
+            "mean_width": 0.3182
+          },
+          "cluster_robust_z": {
+            "coverage": 0.9425,
+            "mc_se": 0.0116,
+            "mean_width": 0.3157
+          }
+        },
+        "bias": 0.0091
+      },
+      {
+        "G": 8,
+        "rho": 0.0,
+        "imbalance": "imbalanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.9525,
+            "mc_se": 0.0106,
+            "mean_width": 0.5639
+          },
+          "cluster_robust_z": {
+            "coverage": 0.87,
+            "mc_se": 0.0168,
+            "mean_width": 0.5055
+          }
+        },
+        "bias": -0.0082
+      },
+      {
+        "G": 8,
+        "rho": 0.1,
+        "imbalance": "imbalanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.8275,
+            "mc_se": 0.0189,
+            "mean_width": 0.5865
+          },
+          "cluster_robust_z": {
+            "coverage": 0.8325,
+            "mc_se": 0.0187,
+            "mean_width": 0.6377
+          }
+        },
+        "bias": -0.0005
+      },
+      {
+        "G": 8,
+        "rho": 0.3,
+        "imbalance": "imbalanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.6475,
+            "mc_se": 0.0239,
+            "mean_width": 0.6475
+          },
+          "cluster_robust_z": {
+            "coverage": 0.8175,
+            "mc_se": 0.0193,
+            "mean_width": 0.9306
+          }
+        },
+        "bias": -0.0035
+      },
+      {
+        "G": 8,
+        "rho": 0.5,
+        "imbalance": "imbalanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.52,
+            "mc_se": 0.025,
+            "mean_width": 0.7468
+          },
+          "cluster_robust_z": {
+            "coverage": 0.7775,
+            "mc_se": 0.0208,
+            "mean_width": 1.2566
+          }
+        },
+        "bias": 0.0381
+      },
+      {
+        "G": 20,
+        "rho": 0.0,
+        "imbalance": "imbalanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.95,
+            "mc_se": 0.0109,
+            "mean_width": 0.3726
+          },
+          "cluster_robust_z": {
+            "coverage": 0.935,
+            "mc_se": 0.0123,
+            "mean_width": 0.3569
+          }
+        },
+        "bias": -0.0077
+      },
+      {
+        "G": 20,
+        "rho": 0.1,
+        "imbalance": "imbalanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.855,
+            "mc_se": 0.0176,
+            "mean_width": 0.3891
+          },
+          "cluster_robust_z": {
+            "coverage": 0.91,
+            "mc_se": 0.0143,
+            "mean_width": 0.4642
+          }
+        },
+        "bias": -0.0119
+      },
+      {
+        "G": 20,
+        "rho": 0.3,
+        "imbalance": "imbalanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.76,
+            "mc_se": 0.0214,
+            "mean_width": 0.4375
+          },
+          "cluster_robust_z": {
+            "coverage": 0.9275,
+            "mc_se": 0.013,
+            "mean_width": 0.6962
+          }
+        },
+        "bias": -0.0058
+      },
+      {
+        "G": 20,
+        "rho": 0.5,
+        "imbalance": "imbalanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.6525,
+            "mc_se": 0.0238,
+            "mean_width": 0.5096
+          },
+          "cluster_robust_z": {
+            "coverage": 0.91,
+            "mc_se": 0.0143,
+            "mean_width": 0.9737
+          }
+        },
+        "bias": 0.0003
+      },
+      {
+        "G": 50,
+        "rho": 0.0,
+        "imbalance": "imbalanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.945,
+            "mc_se": 0.0114,
+            "mean_width": 0.2267
+          },
+          "cluster_robust_z": {
+            "coverage": 0.9425,
+            "mc_se": 0.0116,
+            "mean_width": 0.2236
+          }
+        },
+        "bias": -0.0021
+      },
+      {
+        "G": 50,
+        "rho": 0.1,
+        "imbalance": "imbalanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.875,
+            "mc_se": 0.0165,
+            "mean_width": 0.2384
+          },
+          "cluster_robust_z": {
+            "coverage": 0.9425,
+            "mc_se": 0.0116,
+            "mean_width": 0.3012
+          }
+        },
+        "bias": 0.0001
+      },
+      {
+        "G": 50,
+        "rho": 0.3,
+        "imbalance": "imbalanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.7175,
+            "mc_se": 0.0225,
+            "mean_width": 0.2688
+          },
+          "cluster_robust_z": {
+            "coverage": 0.93,
+            "mc_se": 0.0128,
+            "mean_width": 0.4619
+          }
+        },
+        "bias": 0.006
+      },
+      {
+        "G": 50,
+        "rho": 0.5,
+        "imbalance": "imbalanced",
+        "replicates": 400,
+        "methods": {
+          "naive_iid_ols_z": {
+            "coverage": 0.63,
+            "mc_se": 0.0241,
+            "mean_width": 0.3171
+          },
+          "cluster_robust_z": {
+            "coverage": 0.9425,
+            "mc_se": 0.0116,
+            "mean_width": 0.6622
+          }
+        },
+        "bias": 0.0059
+      }
+    ],
+    "negative_result": {
+      "condition": "G=8, rho=0.5, imbalanced cluster sizes and treatment shares",
+      "cluster_robust_coverage": 0.7775,
+      "naive_iid_coverage": 0.52,
+      "claim": "small-G/high-ICC stress remains under nominal for cluster-robust z intervals",
+      "next_experiment": "planned: compare CR2 small-sample correction and wild cluster bootstrap under the same DGP grid"
+    }
+  },
+  "slides": [
+    {
+      "slide": 1,
+      "title": "Why iid intervals fail with center correlation",
+      "archetype": "STATISTICAL_MODEL",
+      "reference_ids": [
+        "RRL-044",
+        "RRL-007",
+        "RRL-008",
+        "RRL-043",
+        "RRL-042"
+      ],
+      "reference_retrieval": {
+        "query": {
+          "intent": "Explain estimand, DGP, cluster correlation, and why unbiased point estimates can still have wrong interval coverage.",
+          "page_functions": [
+            "STATISTICAL_MODEL",
+            "BAYESIAN_MODEL",
+            "ASSUMPTION",
+            "MODEL_CHECK"
+          ],
+          "scientific_domain": [
+            "statistics",
+            "biostatistics"
+          ],
+          "statistical_subdomain": [
+            "Bayesian workflow",
+            "Bayesian data analysis",
+            "survey nonresponse / MRP",
+            "Bayesian clinical research"
+          ],
+          "evidence_types": [
+            "model objective",
+            "Bayesian model",
+            "assumption / challenge",
+            "modeling workflow",
+            "confidence interval principle"
+          ],
+          "organization_lesson": "Make the estimand and data-generating mechanism the main object before discussing results."
+        },
+        "candidate_ids": [
+          "RRL-044",
+          "RRL-007",
+          "RRL-008",
+          "RRL-043",
+          "RRL-042",
+          "RRL-024",
+          "RRL-020",
+          "RRL-036"
+        ],
+        "selected_ids": [
+          "RRL-044",
+          "RRL-007",
+          "RRL-008",
+          "RRL-043",
+          "RRL-042"
+        ],
+        "source_tiers": {
+          "RRL-044": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-007": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-008": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-043": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-042": "PRIMARY_RESEARCH_PRESENTATION"
+        },
+        "ranking_relevance_reason": {
+          "RRL-044": "page_function=BAYESIAN_MODEL matches query; evidence_type=modeling workflow matches query; domain=statistics matches query; subdomain=Bayesian data analysis matches query; semantic tokens overlap: and, bayesian, model, workflow; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-007": "page_function=BAYESIAN_MODEL matches query; evidence_type=Bayesian model matches query; domain=statistics matches query; semantic tokens overlap: and, bayesian, model; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-008": "page_function=ASSUMPTION matches query; evidence_type=assumption / challenge matches query; domain=statistics matches query; semantic tokens overlap: and, can, challenge; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-043": "page_function=MODEL_CHECK matches query; domain=statistics matches query; subdomain=Bayesian data analysis matches query; semantic tokens overlap: and, bayesian, can, model; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-042": "page_function=BAYESIAN_MODEL matches query; domain=biostatistics matches query; subdomain=Bayesian clinical research matches query; semantic tokens overlap: and, bayesian, modeling; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3"
+        },
+        "organization_lesson": "Make the estimand and data-generating mechanism the main object before discussing results.",
+        "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied."
+      },
+      "learned_organization": "Make the estimand and data-generating mechanism the main object before discussing results.",
+      "reference_rationale": "References are selected by auditable semantic query over inspected page records with rendered-page checksums; they inform organization only.",
+      "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied.",
+      "what_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied.",
+      "evidence_status": "synthetic_model_or_simulation_context",
+      "expected_scientific_objects": [
+        "beta_1 estimand",
+        "DGP formula",
+        "u_j random effect",
+        "epsilon_ij residual",
+        "ICC rho",
+        "center inference unit"
+      ]
+    },
+    {
+      "slide": 2,
+      "title": "Cluster sandwich changes the variance object",
+      "archetype": "ESTIMATOR",
+      "reference_ids": [
+        "RRL-040",
+        "RRL-009",
+        "RRL-028",
+        "RRL-030",
+        "RRL-015"
+      ],
+      "reference_retrieval": {
+        "query": {
+          "intent": "Show how a variance estimator changes when score contributions are aggregated by center.",
+          "page_functions": [
+            "ESTIMATOR",
+            "CONFIDENCE_INTERVAL",
+            "STATISTICAL_MODEL",
+            "ASSUMPTION"
+          ],
+          "scientific_domain": [
+            "statistics",
+            "biostatistics"
+          ],
+          "statistical_subdomain": [
+            "hybrid resource-bound analysis",
+            "survey nonresponse / MRP",
+            "Bayesian clinical research",
+            "Bayesian workflow"
+          ],
+          "evidence_types": [
+            "estimator formula",
+            "estimator pipeline",
+            "uncertainty interval",
+            "confidence interval principle",
+            "metric definition"
+          ],
+          "organization_lesson": "Put the formula next to definitions of the grouped objects it operates on."
+        },
+        "candidate_ids": [
+          "RRL-040",
+          "RRL-009",
+          "RRL-028",
+          "RRL-030",
+          "RRL-015",
+          "RRL-006",
+          "RRL-008",
+          "RRL-014"
+        ],
+        "selected_ids": [
+          "RRL-040",
+          "RRL-009",
+          "RRL-028",
+          "RRL-030",
+          "RRL-015"
+        ],
+        "source_tiers": {
+          "RRL-040": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-009": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-028": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-030": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-015": "PRIMARY_RESEARCH_PRESENTATION"
+        },
+        "ranking_relevance_reason": {
+          "RRL-040": "page_function=CONFIDENCE_INTERVAL matches query; evidence_type=confidence interval principle matches query; domain=biostatistics matches query; subdomain=Bayesian clinical research matches query; semantic tokens overlap: confidence, interval, principle, when; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-009": "page_function=ESTIMATOR matches query; evidence_type=estimator pipeline matches query; domain=statistics matches query; subdomain=hybrid resource-bound analysis matches query; semantic tokens overlap: are, estimator, show; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-028": "page_function=ESTIMATOR matches query; evidence_type=estimator formula matches query; domain=biostatistics matches query; subdomain=survey nonresponse / MRP matches query; semantic tokens overlap: estimator, when; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-030": "page_function=CONFIDENCE_INTERVAL matches query; domain=biostatistics matches query; subdomain=survey nonresponse / MRP matches query; semantic tokens overlap: interval, show, uncertainty, when; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-015": "page_function=CONFIDENCE_INTERVAL matches query; evidence_type=uncertainty interval matches query; semantic tokens overlap: are, confidence, interval, show, uncertainty, when; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3"
+        },
+        "organization_lesson": "Put the formula next to definitions of the grouped objects it operates on.",
+        "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied."
+      },
+      "learned_organization": "Put the formula next to definitions of the grouped objects it operates on.",
+      "reference_rationale": "References are selected by auditable semantic query over inspected page records with rendered-page checksums; they inform organization only.",
+      "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied.",
+      "what_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied.",
+      "evidence_status": "synthetic_model_or_simulation_context",
+      "expected_scientific_objects": [
+        "naive variance formula",
+        "cluster sandwich formula",
+        "X_g block",
+        "u_g residual vector",
+        "center aggregation"
+      ]
+    },
+    {
+      "slide": 3,
+      "title": "Simulation design tests interval behavior",
+      "archetype": "SIMULATION_DESIGN",
+      "reference_ids": [
+        "RRL-009",
+        "RRL-010",
+        "RRL-019",
+        "RRL-026",
+        "RRL-002"
+      ],
+      "reference_retrieval": {
+        "query": {
+          "intent": "Connect DGP knobs, generated centers, interval methods, replicates, and coverage endpoints in one experiment design.",
+          "page_functions": [
+            "EXPERIMENT_DESIGN",
+            "METHOD_DIAGRAM",
+            "SIMULATION",
+            "NEXT_EXPERIMENT",
+            "ESTIMATOR"
+          ],
+          "scientific_domain": [
+            "statistics",
+            "biostatistics",
+            "medical imaging"
+          ],
+          "statistical_subdomain": [
+            "Bayesian workflow",
+            "hybrid resource-bound analysis",
+            "survey nonresponse / MRP",
+            "lesion segmentation"
+          ],
+          "evidence_types": [
+            "task overview",
+            "method mechanism",
+            "simulation comparison",
+            "planned evidence",
+            "estimator pipeline"
+          ],
+          "organization_lesson": "Use one left-to-right experimental path with explicit endpoints and visible comparator branches."
+        },
+        "candidate_ids": [
+          "RRL-009",
+          "RRL-010",
+          "RRL-019",
+          "RRL-026",
+          "RRL-002",
+          "RRL-028",
+          "RRL-005",
+          "RRL-037"
+        ],
+        "selected_ids": [
+          "RRL-009",
+          "RRL-010",
+          "RRL-019",
+          "RRL-026",
+          "RRL-002"
+        ],
+        "source_tiers": {
+          "RRL-009": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-010": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-019": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-026": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-002": "PRIMARY_RESEARCH_PRESENTATION"
+        },
+        "ranking_relevance_reason": {
+          "RRL-009": "page_function=ESTIMATOR matches query; evidence_type=estimator pipeline matches query; domain=statistics matches query; subdomain=hybrid resource-bound analysis matches query; semantic tokens overlap: and, estimator, one; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-010": "page_function=SIMULATION matches query; evidence_type=simulation comparison matches query; domain=statistics matches query; subdomain=hybrid resource-bound analysis matches query; semantic tokens overlap: and, dgp, simulation; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-019": "page_function=EXPERIMENT_DESIGN matches query; evidence_type=task overview matches query; domain=medical imaging matches query; subdomain=lesion segmentation matches query; semantic tokens overlap: and, method; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-026": "page_function=SIMULATION matches query; domain=statistics matches query; subdomain=Bayesian workflow matches query; semantic tokens overlap: and, generated, mechanism, simulation; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-002": "page_function=METHOD_DIAGRAM matches query; evidence_type=method mechanism matches query; semantic tokens overlap: and, diagram, mechanism, method, one; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3"
+        },
+        "organization_lesson": "Use one left-to-right experimental path with explicit endpoints and visible comparator branches.",
+        "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied."
+      },
+      "learned_organization": "Use one left-to-right experimental path with explicit endpoints and visible comparator branches.",
+      "reference_rationale": "References are selected by auditable semantic query over inspected page records with rendered-page checksums; they inform organization only.",
+      "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied.",
+      "what_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied.",
+      "evidence_status": "synthetic_model_or_simulation_context",
+      "expected_scientific_objects": [
+        "DGP knobs",
+        "replicates",
+        "naive interval branch",
+        "cluster-robust interval branch",
+        "coverage endpoint gate"
+      ]
+    },
+    {
+      "slide": 4,
+      "title": "Coverage falls when ICC and imbalance rise",
+      "archetype": "RESULT_FIGURE",
+      "reference_ids": [
+        "RRL-030",
+        "RRL-033",
+        "RRL-010",
+        "RRL-023",
+        "RRL-039"
+      ],
+      "reference_retrieval": {
+        "query": {
+          "intent": "Show coverage against ICC with nominal target line, method comparison, and Monte Carlo uncertainty.",
+          "page_functions": [
+            "RESULT_FIGURE",
+            "CONFIDENCE_INTERVAL",
+            "SIMULATION",
+            "REAL_DATA_APPLICATION",
+            "SENSITIVITY_ANALYSIS"
+          ],
+          "scientific_domain": [
+            "statistics",
+            "biostatistics"
+          ],
+          "statistical_subdomain": [
+            "Bayesian workflow",
+            "survey nonresponse / MRP",
+            "Bayesian inference design",
+            "Bayesian clinical research"
+          ],
+          "evidence_types": [
+            "quantitative plot",
+            "uncertainty interval",
+            "simulation comparison",
+            "time-series interval",
+            "forest plot"
+          ],
+          "organization_lesson": "Let the plot dominate and keep uncertainty and interpretation adjacent to the graph."
+        },
+        "candidate_ids": [
+          "RRL-030",
+          "RRL-033",
+          "RRL-010",
+          "RRL-023",
+          "RRL-039",
+          "RRL-015",
+          "RRL-026",
+          "RRL-003"
+        ],
+        "selected_ids": [
+          "RRL-030",
+          "RRL-033",
+          "RRL-010",
+          "RRL-023",
+          "RRL-039"
+        ],
+        "source_tiers": {
+          "RRL-030": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-033": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-010": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-023": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-039": "PRIMARY_RESEARCH_PRESENTATION"
+        },
+        "ranking_relevance_reason": {
+          "RRL-030": "page_function=CONFIDENCE_INTERVAL matches query; evidence_type=time-series interval matches query; domain=biostatistics matches query; subdomain=survey nonresponse / MRP matches query; semantic tokens overlap: and, interval, plot, show, uncertainty; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-033": "page_function=CONFIDENCE_INTERVAL matches query; evidence_type=forest plot matches query; domain=statistics matches query; semantic tokens overlap: and, interval, plot, real, sensitivity, show; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-010": "page_function=SIMULATION matches query; evidence_type=simulation comparison matches query; domain=statistics matches query; semantic tokens overlap: analysis, and, simulation, with; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-023": "page_function=RESULT_FIGURE matches query; domain=statistics matches query; subdomain=Bayesian workflow matches query; semantic tokens overlap: and, forest, interval, plot, uncertainty, with; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-039": "page_function=REAL_DATA_APPLICATION matches query; domain=biostatistics matches query; subdomain=Bayesian clinical research matches query; semantic tokens overlap: and, data, figure, uncertainty; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3"
+        },
+        "organization_lesson": "Let the plot dominate and keep uncertainty and interpretation adjacent to the graph.",
+        "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied."
+      },
+      "learned_organization": "Let the plot dominate and keep uncertainty and interpretation adjacent to the graph.",
+      "reference_rationale": "References are selected by auditable semantic query over inspected page records with rendered-page checksums; they inform organization only.",
+      "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied.",
+      "what_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied.",
+      "evidence_status": "synthetic_simulation_generated",
+      "expected_scientific_objects": [
+        "coverage plot",
+        "nominal 95% line",
+        "method comparison",
+        "Monte Carlo uncertainty",
+        "synthetic boundary"
+      ]
+    },
+    {
+      "slide": 5,
+      "title": "Small-G stress remains the negative result",
+      "archetype": "NEGATIVE_RESULT",
+      "reference_ids": [
+        "RRL-011",
+        "RRL-024",
+        "RRL-025",
+        "RRL-041",
+        "RRL-005"
+      ],
+      "reference_retrieval": {
+        "query": {
+          "intent": "Show the stress regime where the current interval still fails and define the next discriminating experiment.",
+          "page_functions": [
+            "NEGATIVE_RESULT",
+            "FINITE_SAMPLE",
+            "MODEL_CHECK",
+            "NEXT_EXPERIMENT",
+            "SENSITIVITY_ANALYSIS"
+          ],
+          "scientific_domain": [
+            "statistics",
+            "biostatistics"
+          ],
+          "statistical_subdomain": [
+            "Bayesian workflow",
+            "Bayesian clinical research",
+            "hybrid resource-bound analysis",
+            "Bayesian inference design"
+          ],
+          "evidence_types": [
+            "negative/fix title",
+            "limitation analysis",
+            "posterior predictive check",
+            "planned evidence",
+            "sensitivity analysis"
+          ],
+          "organization_lesson": "Keep the failure visible and separate completed evidence from the next planned method."
+        },
+        "candidate_ids": [
+          "RRL-011",
+          "RRL-024",
+          "RRL-025",
+          "RRL-041",
+          "RRL-005",
+          "RRL-004",
+          "RRL-032",
+          "RRL-043"
+        ],
+        "selected_ids": [
+          "RRL-011",
+          "RRL-024",
+          "RRL-025",
+          "RRL-041",
+          "RRL-005"
+        ],
+        "source_tiers": {
+          "RRL-011": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-024": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-025": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-041": "PRIMARY_RESEARCH_PRESENTATION",
+          "RRL-005": "PRIMARY_RESEARCH_PRESENTATION"
+        },
+        "ranking_relevance_reason": {
+          "RRL-011": "page_function=FINITE_SAMPLE matches query; evidence_type=limitation analysis matches query; domain=statistics matches query; subdomain=hybrid resource-bound analysis matches query; semantic tokens overlap: and, limitation, show, the, where; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-024": "page_function=MODEL_CHECK matches query; evidence_type=posterior predictive check matches query; domain=statistics matches query; subdomain=Bayesian workflow matches query; semantic tokens overlap: check, model, the; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-025": "page_function=NEGATIVE_RESULT matches query; domain=statistics matches query; subdomain=Bayesian workflow matches query; semantic tokens overlap: and, check, fix, model, predictive, show; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-041": "page_function=NEGATIVE_RESULT matches query; domain=biostatistics matches query; subdomain=Bayesian clinical research matches query; semantic tokens overlap: negative, show, the; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
+          "RRL-005": "page_function=NEXT_EXPERIMENT matches query; evidence_type=planned evidence matches query; semantic tokens overlap: and, next, result, the; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3"
+        },
+        "organization_lesson": "Keep the failure visible and separate completed evidence from the next planned method.",
+        "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied."
+      },
+      "learned_organization": "Keep the failure visible and separate completed evidence from the next planned method.",
+      "reference_rationale": "References are selected by auditable semantic query over inspected page records with rendered-page checksums; they inform organization only.",
+      "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied.",
+      "what_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied.",
+      "evidence_status": "synthetic_simulation_generated",
+      "expected_scientific_objects": [
+        "small-G stress evidence",
+        "coverage shortfall",
+        "failure mechanism",
+        "planned CR2/wild bootstrap experiment"
+      ]
+    }
+  ],
+  "simulation_design_diagram": {
+    "structural_connectors": [
+      "dgp_to_data",
+      "data_to_naive",
+      "data_to_cluster",
+      "naive_to_endpoint",
+      "cluster_to_endpoint"
+    ],
+    "arrowheads": "DrawingML a:tailEnd type=triangle on every connector",
+    "edge_crossing": "none",
+    "reading_direction": "left_to_right",
+    "endpoint_semantics": [
+      "95% interval coverage",
+      "bias",
+      "interval width"
+    ]
+  },
+  "negative_result_claim": {
+    "condition": "G=8, rho=0.5, imbalanced cluster sizes and treatment shares",
+    "cluster_robust_coverage": 0.7775,
+    "naive_iid_coverage": 0.52,
+    "claim": "small-G/high-ICC stress remains under nominal for cluster-robust z intervals",
+    "next_experiment": "planned: compare CR2 small-sample correction and wild cluster bootstrap under the same DGP grid"
+  },
+  "pptx": ".cache/016-statistical-benchmark-source/statistical_method_group_meeting_benchmark.pptx",
+  "editable_slide_count": 5
+}

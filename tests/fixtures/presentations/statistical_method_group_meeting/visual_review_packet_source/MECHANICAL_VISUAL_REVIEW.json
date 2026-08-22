@@ -1,0 +1,271 @@
+{
+  "review_type": "MECHANICAL_VISUAL_REVIEW",
+  "status": "MECHANICAL_PASS",
+  "academic_visual_decision": "NOT_ASSESSED",
+  "reviewer_independent_from_generator": true,
+  "criteria_scope": [
+    "png_from_real_pptx_render",
+    "dimensions_nontrivial",
+    "not_blank",
+    "contrast_present",
+    "dominant_object_present",
+    "edge_clipping_not_obvious",
+    "text_density_proxy_bounded",
+    "required_object_contract_present"
+  ],
+  "editable_slide_count": 5,
+  "rendered_png_count": 5,
+  "render_status": {
+    "status": "ok",
+    "renderer": ".cache/tools/squashfs-root/opt/libreoffice25.8/program/soffice",
+    "pptx_to_pdf": ".cache/016-statistical-benchmark-source/pdf/statistical_method_group_meeting_benchmark.pdf",
+    "png_count": 5,
+    "rendered_pngs": [
+      ".cache/016-statistical-benchmark-source/rendered/slide-1.png",
+      ".cache/016-statistical-benchmark-source/rendered/slide-2.png",
+      ".cache/016-statistical-benchmark-source/rendered/slide-3.png",
+      ".cache/016-statistical-benchmark-source/rendered/slide-4.png",
+      ".cache/016-statistical-benchmark-source/rendered/slide-5.png"
+    ],
+    "returncode": 0
+  },
+  "pptx_object_summary": {
+    "editable_slide_count": 5,
+    "media_count": 2,
+    "shape_count": 71,
+    "picture_count": 2
+  },
+  "slide_reviews": [
+    {
+      "slide": 1,
+      "archetype": "STATISTICAL_MODEL",
+      "status": "MECHANICAL_PASS",
+      "criteria": {
+        "png_from_real_pptx_render": "PASS",
+        "dimensions_nontrivial": "PASS",
+        "not_blank": "PASS",
+        "contrast_present": "PASS",
+        "dominant_object_present": "PASS",
+        "edge_clipping_not_obvious": "PASS",
+        "text_density_proxy_bounded": "PASS",
+        "required_object_contract_present": "PASS"
+      },
+      "metrics": {
+        "path": ".cache/016-statistical-benchmark-source/rendered/slide-1.png",
+        "width": 2134,
+        "height": 1200,
+        "blank_area_ratio": 0.7186,
+        "contrast_range": 225,
+        "dominant_object_area": 0.895,
+        "edge_margin_px": 0,
+        "text_density_proxy": 0.052,
+        "content_bbox": [
+          0,
+          0,
+          2133,
+          1073
+        ]
+      },
+      "reference_ids": [
+        "RRL-044",
+        "RRL-007",
+        "RRL-008",
+        "RRL-043",
+        "RRL-042"
+      ],
+      "expected_object_contract": [
+        "beta_1 estimand",
+        "DGP formula",
+        "u_j random effect",
+        "epsilon_ij residual",
+        "ICC rho",
+        "center inference unit"
+      ],
+      "style_boundary": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied."
+    },
+    {
+      "slide": 2,
+      "archetype": "ESTIMATOR",
+      "status": "MECHANICAL_PASS",
+      "criteria": {
+        "png_from_real_pptx_render": "PASS",
+        "dimensions_nontrivial": "PASS",
+        "not_blank": "PASS",
+        "contrast_present": "PASS",
+        "dominant_object_present": "PASS",
+        "edge_clipping_not_obvious": "PASS",
+        "text_density_proxy_bounded": "PASS",
+        "required_object_contract_present": "PASS"
+      },
+      "metrics": {
+        "path": ".cache/016-statistical-benchmark-source/rendered/slide-2.png",
+        "width": 2134,
+        "height": 1200,
+        "blank_area_ratio": 0.8008,
+        "contrast_range": 225,
+        "dominant_object_area": 0.895,
+        "edge_margin_px": 0,
+        "text_density_proxy": 0.0447,
+        "content_bbox": [
+          0,
+          0,
+          2133,
+          1073
+        ]
+      },
+      "reference_ids": [
+        "RRL-040",
+        "RRL-009",
+        "RRL-028",
+        "RRL-030",
+        "RRL-015"
+      ],
+      "expected_object_contract": [
+        "naive variance formula",
+        "cluster sandwich formula",
+        "X_g block",
+        "u_g residual vector",
+        "center aggregation"
+      ],
+      "style_boundary": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied."
+    },
+    {
+      "slide": 3,
+      "archetype": "SIMULATION_DESIGN",
+      "status": "MECHANICAL_PASS",
+      "criteria": {
+        "png_from_real_pptx_render": "PASS",
+        "dimensions_nontrivial": "PASS",
+        "not_blank": "PASS",
+        "contrast_present": "PASS",
+        "dominant_object_present": "PASS",
+        "edge_clipping_not_obvious": "PASS",
+        "text_density_proxy_bounded": "PASS",
+        "required_object_contract_present": "PASS"
+      },
+      "metrics": {
+        "path": ".cache/016-statistical-benchmark-source/rendered/slide-3.png",
+        "width": 2134,
+        "height": 1200,
+        "blank_area_ratio": 0.8068,
+        "contrast_range": 225,
+        "dominant_object_area": 0.895,
+        "edge_margin_px": 0,
+        "text_density_proxy": 0.0355,
+        "content_bbox": [
+          0,
+          0,
+          2133,
+          1073
+        ]
+      },
+      "reference_ids": [
+        "RRL-009",
+        "RRL-010",
+        "RRL-019",
+        "RRL-026",
+        "RRL-002"
+      ],
+      "expected_object_contract": [
+        "DGP knobs",
+        "replicates",
+        "naive interval branch",
+        "cluster-robust interval branch",
+        "coverage endpoint gate"
+      ],
+      "style_boundary": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied."
+    },
+    {
+      "slide": 4,
+      "archetype": "RESULT_FIGURE",
+      "status": "MECHANICAL_PASS",
+      "criteria": {
+        "png_from_real_pptx_render": "PASS",
+        "dimensions_nontrivial": "PASS",
+        "not_blank": "PASS",
+        "contrast_present": "PASS",
+        "dominant_object_present": "PASS",
+        "edge_clipping_not_obvious": "PASS",
+        "text_density_proxy_bounded": "PASS",
+        "required_object_contract_present": "PASS"
+      },
+      "metrics": {
+        "path": ".cache/016-statistical-benchmark-source/rendered/slide-4.png",
+        "width": 2134,
+        "height": 1200,
+        "blank_area_ratio": 0.8409,
+        "contrast_range": 225,
+        "dominant_object_area": 0.905,
+        "edge_margin_px": 0,
+        "text_density_proxy": 0.0516,
+        "content_bbox": [
+          0,
+          0,
+          2133,
+          1085
+        ]
+      },
+      "reference_ids": [
+        "RRL-030",
+        "RRL-033",
+        "RRL-010",
+        "RRL-023",
+        "RRL-039"
+      ],
+      "expected_object_contract": [
+        "coverage plot",
+        "nominal 95% line",
+        "method comparison",
+        "Monte Carlo uncertainty",
+        "synthetic boundary"
+      ],
+      "style_boundary": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied."
+    },
+    {
+      "slide": 5,
+      "archetype": "NEGATIVE_RESULT",
+      "status": "MECHANICAL_PASS",
+      "criteria": {
+        "png_from_real_pptx_render": "PASS",
+        "dimensions_nontrivial": "PASS",
+        "not_blank": "PASS",
+        "contrast_present": "PASS",
+        "dominant_object_present": "PASS",
+        "edge_clipping_not_obvious": "PASS",
+        "text_density_proxy_bounded": "PASS",
+        "required_object_contract_present": "PASS"
+      },
+      "metrics": {
+        "path": ".cache/016-statistical-benchmark-source/rendered/slide-5.png",
+        "width": 2134,
+        "height": 1200,
+        "blank_area_ratio": 0.7884,
+        "contrast_range": 225,
+        "dominant_object_area": 0.905,
+        "edge_margin_px": 0,
+        "text_density_proxy": 0.049,
+        "content_bbox": [
+          0,
+          0,
+          2133,
+          1085
+        ]
+      },
+      "reference_ids": [
+        "RRL-011",
+        "RRL-024",
+        "RRL-025",
+        "RRL-041",
+        "RRL-005"
+      ],
+      "expected_object_contract": [
+        "small-G stress evidence",
+        "coverage shortfall",
+        "failure mechanism",
+        "planned CR2/wild bootstrap experiment"
+      ],
+      "style_boundary": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied."
+    }
+  ],
+  "rights_note": "Synthetic data only; no downloaded public deck image, private CARE figure, whole-slide screenshot, or patient image is copied."
+}

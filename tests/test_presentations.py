@@ -578,6 +578,121 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(len(slide_names), 4)
             self.assertLess(len(media_names), 5)
 
+    def test_statistical_method_group_meeting_benchmark_generator_outputs_artifacts(self) -> None:
+        fixture = REPO_ROOT / "tests/fixtures/presentations/statistical_method_group_meeting"
+        script = fixture / "generate_statistical_method_group_meeting_benchmark.py"
+        reviewer = fixture / "review_statistical_method_group_meeting_benchmark.py"
+        adapter = fixture / "build_ai_bridge_visual_inputs.py"
+        with tempfile.TemporaryDirectory() as tmp:
+            result = subprocess.run(
+                [sys.executable, str(script), "--out-dir", tmp],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertTrue(Path(payload["pptx"]).exists())
+            manifest = json.loads(Path(payload["evidence_manifest"]).read_text(encoding="utf-8"))
+            self.assertEqual(manifest["task_key"], "016_statistical_method_group_meeting_benchmark")
+            self.assertEqual(manifest["status"], "GENERATED_SOURCE_ARTIFACTS_ONLY")
+            self.assertFalse(manifest["generator_may_pass"])
+            self.assertEqual(manifest["editable_slide_count"], 5)
+            self.assertEqual([slide["archetype"] for slide in manifest["slides"]], [
+                "STATISTICAL_MODEL",
+                "ESTIMATOR",
+                "SIMULATION_DESIGN",
+                "RESULT_FIGURE",
+                "NEGATIVE_RESULT",
+            ])
+            summary = manifest["simulation_summary"]
+            self.assertEqual(summary["seed"], 20260822)
+            self.assertEqual(summary["replicates_per_cell"], 400)
+            self.assertEqual(summary["grid"]["center_count"], [8, 20, 50])
+            self.assertEqual(summary["grid"]["icc"], [0.0, 0.1, 0.3, 0.5])
+            self.assertEqual(summary["grid"]["imbalance"], ["balanced", "imbalanced"])
+            self.assertEqual(summary["methods"], ["naive_iid_ols_z", "cluster_robust_z"])
+            self.assertIn("95% interval coverage", summary["endpoints"])
+            stress = summary["negative_result"]
+            self.assertEqual(stress["condition"], "G=8, rho=0.5, imbalanced cluster sizes and treatment shares")
+            self.assertLess(stress["cluster_robust_coverage"], 0.90)
+            self.assertLess(stress["naive_iid_coverage"], stress["cluster_robust_coverage"])
+            self.assertIn("planned", stress["next_experiment"])
+            design = manifest["simulation_design_diagram"]
+            self.assertEqual(design["edge_crossing"], "none")
+            self.assertEqual(design["reading_direction"], "left_to_right")
+            self.assertIn("tailEnd", design["arrowheads"])
+            self.assertIn("cluster_to_endpoint", design["structural_connectors"])
+            for slide in manifest["slides"]:
+                self.assertGreaterEqual(len(slide["reference_ids"]), 2)
+                self.assertLessEqual(len(slide["reference_ids"]), 5)
+                retrieval = slide["reference_retrieval"]
+                self.assertEqual(slide["reference_ids"], retrieval["selected_ids"])
+                self.assertGreaterEqual(len(retrieval["candidate_ids"]), len(retrieval["selected_ids"]))
+                self.assertIn("intent", retrieval["query"])
+                self.assertIn("source_tiers", retrieval)
+                for selected_id in retrieval["selected_ids"]:
+                    self.assertIn(selected_id, retrieval["candidate_ids"])
+                    self.assertIn("source_tier=", retrieval["ranking_relevance_reason"][selected_id])
+                self.assertIn("No full-slide screenshots", retrieval["what_was_not_copied"])
+            render = json.loads(Path(payload["render_status"]).read_text(encoding="utf-8"))
+            self.assertIn(render["status"], {"ok", "BLOCKED_REAL_PPTX_RENDER"})
+            review_result = subprocess.run(
+                [sys.executable, str(reviewer), "--out-dir", tmp],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(review_result.returncode, 0, review_result.stderr)
+            review_payload = json.loads(review_result.stdout)
+            review = json.loads(Path(review_payload["review"]).read_text(encoding="utf-8"))
+            self.assertEqual(review["review_type"], "MECHANICAL_VISUAL_REVIEW")
+            self.assertEqual(review["academic_visual_decision"], "NOT_ASSESSED")
+            if render["status"] == "ok":
+                self.assertEqual(review["status"], "MECHANICAL_PASS")
+                self.assertEqual(review["rendered_png_count"], 5)
+            else:
+                self.assertEqual(review["status"], "BLOCKED_REAL_PPTX_RENDER")
+            with ZipFile(payload["pptx"]) as deck:
+                slide_names = [name for name in deck.namelist() if name.startswith("ppt/slides/slide") and name.endswith(".xml")]
+                media_names = [name for name in deck.namelist() if name.startswith("ppt/media/")]
+                slide_xml = "\n".join(deck.read(name).decode("utf-8") for name in slide_names)
+            self.assertEqual(len(slide_names), 5)
+            self.assertIn("Y_ij = beta_0 + beta_1 T_ij + u_j + epsilon_ij", slide_xml)
+            self.assertIn("ICC rho", slide_xml)
+            self.assertIn("V_CR", slide_xml)
+            self.assertIn("cluster-robust z interval", slide_xml)
+            self.assertIn("Coverage close to nominal 0.95 is the goal", slide_xml)
+            self.assertIn("Next experiment is planned, not completed", slide_xml)
+            self.assertIn("tailEnd", slide_xml)
+            self.assertLessEqual(len(media_names), 3)
+
+            committed_source = fixture / "visual_review_packet_source"
+            if committed_source.exists():
+                output = Path(tmp) / "visual_inputs.json"
+                adapter_result = subprocess.run(
+                    [sys.executable, str(adapter), "--source-dir", str(committed_source), "--output", str(output)],
+                    check=False,
+                    capture_output=True,
+                    text=True,
+                )
+                self.assertEqual(adapter_result.returncode, 0, adapter_result.stderr)
+                adapter_payload = json.loads(adapter_result.stdout)
+                self.assertEqual(adapter_payload["input_count"], 5)
+                visual_manifest = json.loads(output.read_text(encoding="utf-8"))
+                self.assertEqual(visual_manifest["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
+                self.assertEqual(visual_manifest["task_key"], "016_statistical_method_group_meeting_benchmark")
+                self.assertEqual(visual_manifest["review_kind"], "statistical-method-group-meeting-benchmark")
+                self.assertEqual(visual_manifest["privacy_policy"], "PUBLIC_SAFE_ONLY")
+                self.assertEqual(len(visual_manifest["inputs"]), 5)
+                self.assertEqual(visual_manifest["identity_bindings"]["source_render_status"], "ok")
+                self.assertEqual(visual_manifest["identity_bindings"]["source_mechanical_status"], "MECHANICAL_PASS")
+                self.assertEqual(visual_manifest["identity_bindings"]["source_academic_visual_decision"], "NOT_ASSESSED")
+                rubric = visual_manifest["rubric"]["instructions"]
+                self.assertIn("statistical/biostatistical method group meeting benchmark", rubric)
+                self.assertIn("coverage near nominal 0.95 is the target", rubric)
+                self.assertIn("visible arrowheads", rubric)
+
 
 if __name__ == "__main__":
     unittest.main()

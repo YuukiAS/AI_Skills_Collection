@@ -1,0 +1,76 @@
+{
+  "external_upload_authorization": "",
+  "identity_bindings": {
+    "adapter_identity": "016_statistical_method_group_meeting_benchmark",
+    "bridge_kit_commit": "f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e",
+    "evidence_manifest_sha256": "9010bfae11016931720f164d43453072fba136f7797c8392dbb91b9299168db3",
+    "input_png_sha256_by_slide": {
+      "slide_1": "9e6d59d16c89b27a65e579ca7708cad868a86c19b697e2217e50e13ba0901ac6",
+      "slide_2": "c619fc34a361d31f2ba0d8c6586404e3c2e797870622dccb83c1d0d6c39e67ce",
+      "slide_3": "26e6c96c653fc56df5a2786802fb51ceb2c6c802ce584cd1d5aba7b092650f89",
+      "slide_4": "aa04f8120509e5ef2d3721477ed2b9a342382701611b7bf448d46476170986eb",
+      "slide_5": "05e6e2c3dc18dd810d526c15097e88d754ccdae41844fe6b8a8d11348d2a8c2e"
+    },
+    "mechanical_review_sha256": "360715a588841f9f81c504c727e2d6552ad05c6f71c3c2581827a050dc3ae0ea",
+    "pdf_sha256": "e510c61c559b8e53ce4861cb6c8247c8cb13faeba3a02d6d6ea313e28245adfb",
+    "pptx_sha256": "6220d656b77c40122aff9600f64acbba6d64f0fb57f446ddc38d3489f0ce6ecc",
+    "render_status_sha256": "5aa4e873dbdf97d78cc53286fd1b515c8b05031a60a3bd2857e80045222045be",
+    "simulation_summary_sha256": "e8ac5e5ecd5aee768df9510f3e22148827aa11c4f2b45437d259c8e2f5f90f94",
+    "source_academic_visual_decision": "NOT_ASSESSED",
+    "source_dir": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source",
+    "source_mechanical_status": "MECHANICAL_PASS",
+    "source_render_status": "ok"
+  },
+  "inputs": [
+    {
+      "description": "Slide 1: Why iid intervals fail with center correlation | archetype=STATISTICAL_MODEL | expected_objects=beta_1 estimand, DGP formula, u_j random effect, epsilon_ij residual, ICC rho, center inference unit",
+      "logical_id": "slide_1",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-1.png",
+      "sha256": "9e6d59d16c89b27a65e579ca7708cad868a86c19b697e2217e50e13ba0901ac6"
+    },
+    {
+      "description": "Slide 2: Cluster sandwich changes the variance object | archetype=ESTIMATOR | expected_objects=naive variance formula, cluster sandwich formula, X_g block, u_g residual vector, center aggregation",
+      "logical_id": "slide_2",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-2.png",
+      "sha256": "c619fc34a361d31f2ba0d8c6586404e3c2e797870622dccb83c1d0d6c39e67ce"
+    },
+    {
+      "description": "Slide 3: Simulation design tests interval behavior | archetype=SIMULATION_DESIGN | expected_objects=DGP knobs, replicates, naive interval branch, cluster-robust interval branch, coverage endpoint gate",
+      "logical_id": "slide_3",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+      "sha256": "26e6c96c653fc56df5a2786802fb51ceb2c6c802ce584cd1d5aba7b092650f89"
+    },
+    {
+      "description": "Slide 4: Coverage falls when ICC and imbalance rise | archetype=RESULT_FIGURE | expected_objects=coverage plot, nominal 95% line, method comparison, Monte Carlo uncertainty, synthetic boundary",
+      "logical_id": "slide_4",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-4.png",
+      "sha256": "aa04f8120509e5ef2d3721477ed2b9a342382701611b7bf448d46476170986eb"
+    },
+    {
+      "description": "Slide 5: Small-G stress remains the negative result | archetype=NEGATIVE_RESULT | expected_objects=small-G stress evidence, coverage shortfall, failure mechanism, planned CR2/wild bootstrap experiment",
+      "logical_id": "slide_5",
+      "mime_type": "image/png",
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-5.png",
+      "sha256": "05e6e2c3dc18dd810d526c15097e88d754ccdae41844fe6b8a8d11348d2a8c2e"
+    }
+  ],
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_kind": "statistical-method-group-meeting-benchmark",
+  "rubric": {
+    "instructions": "You are reviewing five real rendered PNG pages from an editable PPTX statistical/biostatistical method group meeting benchmark.\nInspect the actual image pixels page by page. Do not infer PASS from SHA, file existence, page count, mechanical PASS, metadata, expected object text, or reference IDs.\nFor each page, identify the primary scientific object visible in the image.\nCheck statistical communication: estimand, DGP, formulas, interval methods, simulation design, coverage target, uncertainty, negative result, and planned next experiment.\nReject pages that become cards, dashboards, generic consulting layouts, decorative arrows, fake plots, or unsupported theorem-like claims.\nFor diagram pages, check connector direction, visible arrowheads, edge crossing, and whether the flow can be understood in about 5 seconds.\nFor result pages, coverage near nominal 0.95 is the target; do not reward over-coverage as simply higher-is-better.\nCheck that synthetic simulation evidence is visibly bounded and not represented as clinical validation or a general statistical theorem.\nReturn PASS only when every page satisfies its research visual job. Return REVISE if any page needs a concrete visual fix. Return BLOCKED only if the supplied pixels cannot be assessed.\nFor REVISE, give the smallest concrete page-specific repair recommendation.\n\nDeclared page contracts:\n- slide_1: title=Why iid intervals fail with center correlation; declared_archetype=STATISTICAL_MODEL; expected_scientific_objects=beta_1 estimand, DGP formula, u_j random effect, epsilon_ij residual, ICC rho, center inference unit; reference_ids=RRL-044, RRL-007, RRL-008, RRL-043, RRL-042; retrieval_intent=Explain estimand, DGP, cluster correlation, and why unbiased point estimates can still have wrong interval coverage.\n- slide_2: title=Cluster sandwich changes the variance object; declared_archetype=ESTIMATOR; expected_scientific_objects=naive variance formula, cluster sandwich formula, X_g block, u_g residual vector, center aggregation; reference_ids=RRL-040, RRL-009, RRL-028, RRL-030, RRL-015; retrieval_intent=Show how a variance estimator changes when score contributions are aggregated by center.\n- slide_3: title=Simulation design tests interval behavior; declared_archetype=SIMULATION_DESIGN; expected_scientific_objects=DGP knobs, replicates, naive interval branch, cluster-robust interval branch, coverage endpoint gate; reference_ids=RRL-009, RRL-010, RRL-019, RRL-026, RRL-002; retrieval_intent=Connect DGP knobs, generated centers, interval methods, replicates, and coverage endpoints in one experiment design.\n- slide_4: title=Coverage falls when ICC and imbalance rise; declared_archetype=RESULT_FIGURE; expected_scientific_objects=coverage plot, nominal 95% line, method comparison, Monte Carlo uncertainty, synthetic boundary; reference_ids=RRL-030, RRL-033, RRL-010, RRL-023, RRL-039; retrieval_intent=Show coverage against ICC with nominal target line, method comparison, and Monte Carlo uncertainty.\n- slide_5: title=Small-G stress remains the negative result; declared_archetype=NEGATIVE_RESULT; expected_scientific_objects=small-G stress evidence, coverage shortfall, failure mechanism, planned CR2/wild bootstrap experiment; reference_ids=RRL-011, RRL-024, RRL-025, RRL-041, RRL-005; retrieval_intent=Show the stress regime where the current interval still fails and define the next discriminating experiment.",
+    "source_contracts": [
+      "automation/reviewed_handoff/tasks/016_statistical_method_group_meeting_benchmark/PLAN.md",
+      "skills/tools/documents-media/presentations/research-presentations/SKILL.md",
+      "skills/tools/documents-media/presentations/shared/visual-qa.md",
+      "skills/tools/documents-media/presentations/shared/references/RESEARCH_SLIDE_ARCHETYPES.md"
+    ]
+  },
+  "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+  "task_key": "016_statistical_method_group_meeting_benchmark",
+  "workflow_type": "generic"
+}

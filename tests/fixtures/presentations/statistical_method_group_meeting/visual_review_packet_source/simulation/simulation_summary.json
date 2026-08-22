@@ -1,0 +1,503 @@
+{
+  "seed": 20260822,
+  "replicates_per_cell": 400,
+  "dgp": {
+    "formula": "Y_ij = beta_0 + beta_1 T_ij + u_j + epsilon_ij",
+    "beta_1": 0.25,
+    "u_j": "N(0, tau^2)",
+    "epsilon_ij": "N(0, sigma^2)",
+    "icc": "rho = tau^2 / (tau^2 + sigma^2)"
+  },
+  "grid": {
+    "center_count": [
+      8,
+      20,
+      50
+    ],
+    "icc": [
+      0.0,
+      0.1,
+      0.3,
+      0.5
+    ],
+    "imbalance": [
+      "balanced",
+      "imbalanced"
+    ]
+  },
+  "methods": [
+    "naive_iid_ols_z",
+    "cluster_robust_z"
+  ],
+  "endpoints": [
+    "95% interval coverage",
+    "mean bias",
+    "mean interval width"
+  ],
+  "nominal_coverage": 0.95,
+  "rows": [
+    {
+      "G": 8,
+      "rho": 0.0,
+      "imbalance": "balanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.95,
+          "mc_se": 0.0109,
+          "mean_width": 0.567
+        },
+        "cluster_robust_z": {
+          "coverage": 0.905,
+          "mc_se": 0.0147,
+          "mean_width": 0.5522
+        }
+      },
+      "bias": -0.0155
+    },
+    {
+      "G": 8,
+      "rho": 0.1,
+      "imbalance": "balanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.945,
+          "mc_se": 0.0114,
+          "mean_width": 0.5931
+        },
+        "cluster_robust_z": {
+          "coverage": 0.8975,
+          "mc_se": 0.0152,
+          "mean_width": 0.5791
+        }
+      },
+      "bias": 0.015
+    },
+    {
+      "G": 8,
+      "rho": 0.3,
+      "imbalance": "balanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.9675,
+          "mc_se": 0.0089,
+          "mean_width": 0.6604
+        },
+        "cluster_robust_z": {
+          "coverage": 0.92,
+          "mc_se": 0.0136,
+          "mean_width": 0.6331
+        }
+      },
+      "bias": 0.0039
+    },
+    {
+      "G": 8,
+      "rho": 0.5,
+      "imbalance": "balanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.9525,
+          "mc_se": 0.0106,
+          "mean_width": 0.7671
+        },
+        "cluster_robust_z": {
+          "coverage": 0.8725,
+          "mc_se": 0.0167,
+          "mean_width": 0.7279
+        }
+      },
+      "bias": 0.0057
+    },
+    {
+      "G": 20,
+      "rho": 0.0,
+      "imbalance": "balanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.9525,
+          "mc_se": 0.0106,
+          "mean_width": 0.358
+        },
+        "cluster_robust_z": {
+          "coverage": 0.94,
+          "mc_se": 0.0119,
+          "mean_width": 0.3544
+        }
+      },
+      "bias": -0.0049
+    },
+    {
+      "G": 20,
+      "rho": 0.1,
+      "imbalance": "balanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.945,
+          "mc_se": 0.0114,
+          "mean_width": 0.3776
+        },
+        "cluster_robust_z": {
+          "coverage": 0.9325,
+          "mc_se": 0.0125,
+          "mean_width": 0.3696
+        }
+      },
+      "bias": -0.0016
+    },
+    {
+      "G": 20,
+      "rho": 0.3,
+      "imbalance": "balanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.955,
+          "mc_se": 0.0104,
+          "mean_width": 0.4253
+        },
+        "cluster_robust_z": {
+          "coverage": 0.93,
+          "mc_se": 0.0128,
+          "mean_width": 0.4183
+        }
+      },
+      "bias": 0.0017
+    },
+    {
+      "G": 20,
+      "rho": 0.5,
+      "imbalance": "balanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.9575,
+          "mc_se": 0.0101,
+          "mean_width": 0.4998
+        },
+        "cluster_robust_z": {
+          "coverage": 0.93,
+          "mc_se": 0.0128,
+          "mean_width": 0.4787
+        }
+      },
+      "bias": -0.0024
+    },
+    {
+      "G": 50,
+      "rho": 0.0,
+      "imbalance": "balanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.96,
+          "mc_se": 0.0098,
+          "mean_width": 0.2263
+        },
+        "cluster_robust_z": {
+          "coverage": 0.9525,
+          "mc_se": 0.0106,
+          "mean_width": 0.2255
+        }
+      },
+      "bias": -0.0031
+    },
+    {
+      "G": 50,
+      "rho": 0.1,
+      "imbalance": "balanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.95,
+          "mc_se": 0.0109,
+          "mean_width": 0.2381
+        },
+        "cluster_robust_z": {
+          "coverage": 0.945,
+          "mc_se": 0.0114,
+          "mean_width": 0.2381
+        }
+      },
+      "bias": 0.0028
+    },
+    {
+      "G": 50,
+      "rho": 0.3,
+      "imbalance": "balanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.9325,
+          "mc_se": 0.0125,
+          "mean_width": 0.2693
+        },
+        "cluster_robust_z": {
+          "coverage": 0.95,
+          "mc_se": 0.0109,
+          "mean_width": 0.2693
+        }
+      },
+      "bias": 0.0015
+    },
+    {
+      "G": 50,
+      "rho": 0.5,
+      "imbalance": "balanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.945,
+          "mc_se": 0.0114,
+          "mean_width": 0.3182
+        },
+        "cluster_robust_z": {
+          "coverage": 0.9425,
+          "mc_se": 0.0116,
+          "mean_width": 0.3157
+        }
+      },
+      "bias": 0.0091
+    },
+    {
+      "G": 8,
+      "rho": 0.0,
+      "imbalance": "imbalanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.9525,
+          "mc_se": 0.0106,
+          "mean_width": 0.5639
+        },
+        "cluster_robust_z": {
+          "coverage": 0.87,
+          "mc_se": 0.0168,
+          "mean_width": 0.5055
+        }
+      },
+      "bias": -0.0082
+    },
+    {
+      "G": 8,
+      "rho": 0.1,
+      "imbalance": "imbalanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.8275,
+          "mc_se": 0.0189,
+          "mean_width": 0.5865
+        },
+        "cluster_robust_z": {
+          "coverage": 0.8325,
+          "mc_se": 0.0187,
+          "mean_width": 0.6377
+        }
+      },
+      "bias": -0.0005
+    },
+    {
+      "G": 8,
+      "rho": 0.3,
+      "imbalance": "imbalanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.6475,
+          "mc_se": 0.0239,
+          "mean_width": 0.6475
+        },
+        "cluster_robust_z": {
+          "coverage": 0.8175,
+          "mc_se": 0.0193,
+          "mean_width": 0.9306
+        }
+      },
+      "bias": -0.0035
+    },
+    {
+      "G": 8,
+      "rho": 0.5,
+      "imbalance": "imbalanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.52,
+          "mc_se": 0.025,
+          "mean_width": 0.7468
+        },
+        "cluster_robust_z": {
+          "coverage": 0.7775,
+          "mc_se": 0.0208,
+          "mean_width": 1.2566
+        }
+      },
+      "bias": 0.0381
+    },
+    {
+      "G": 20,
+      "rho": 0.0,
+      "imbalance": "imbalanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.95,
+          "mc_se": 0.0109,
+          "mean_width": 0.3726
+        },
+        "cluster_robust_z": {
+          "coverage": 0.935,
+          "mc_se": 0.0123,
+          "mean_width": 0.3569
+        }
+      },
+      "bias": -0.0077
+    },
+    {
+      "G": 20,
+      "rho": 0.1,
+      "imbalance": "imbalanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.855,
+          "mc_se": 0.0176,
+          "mean_width": 0.3891
+        },
+        "cluster_robust_z": {
+          "coverage": 0.91,
+          "mc_se": 0.0143,
+          "mean_width": 0.4642
+        }
+      },
+      "bias": -0.0119
+    },
+    {
+      "G": 20,
+      "rho": 0.3,
+      "imbalance": "imbalanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.76,
+          "mc_se": 0.0214,
+          "mean_width": 0.4375
+        },
+        "cluster_robust_z": {
+          "coverage": 0.9275,
+          "mc_se": 0.013,
+          "mean_width": 0.6962
+        }
+      },
+      "bias": -0.0058
+    },
+    {
+      "G": 20,
+      "rho": 0.5,
+      "imbalance": "imbalanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.6525,
+          "mc_se": 0.0238,
+          "mean_width": 0.5096
+        },
+        "cluster_robust_z": {
+          "coverage": 0.91,
+          "mc_se": 0.0143,
+          "mean_width": 0.9737
+        }
+      },
+      "bias": 0.0003
+    },
+    {
+      "G": 50,
+      "rho": 0.0,
+      "imbalance": "imbalanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.945,
+          "mc_se": 0.0114,
+          "mean_width": 0.2267
+        },
+        "cluster_robust_z": {
+          "coverage": 0.9425,
+          "mc_se": 0.0116,
+          "mean_width": 0.2236
+        }
+      },
+      "bias": -0.0021
+    },
+    {
+      "G": 50,
+      "rho": 0.1,
+      "imbalance": "imbalanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.875,
+          "mc_se": 0.0165,
+          "mean_width": 0.2384
+        },
+        "cluster_robust_z": {
+          "coverage": 0.9425,
+          "mc_se": 0.0116,
+          "mean_width": 0.3012
+        }
+      },
+      "bias": 0.0001
+    },
+    {
+      "G": 50,
+      "rho": 0.3,
+      "imbalance": "imbalanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.7175,
+          "mc_se": 0.0225,
+          "mean_width": 0.2688
+        },
+        "cluster_robust_z": {
+          "coverage": 0.93,
+          "mc_se": 0.0128,
+          "mean_width": 0.4619
+        }
+      },
+      "bias": 0.006
+    },
+    {
+      "G": 50,
+      "rho": 0.5,
+      "imbalance": "imbalanced",
+      "replicates": 400,
+      "methods": {
+        "naive_iid_ols_z": {
+          "coverage": 0.63,
+          "mc_se": 0.0241,
+          "mean_width": 0.3171
+        },
+        "cluster_robust_z": {
+          "coverage": 0.9425,
+          "mc_se": 0.0116,
+          "mean_width": 0.6622
+        }
+      },
+      "bias": 0.0059
+    }
+  ],
+  "negative_result": {
+    "condition": "G=8, rho=0.5, imbalanced cluster sizes and treatment shares",
+    "cluster_robust_coverage": 0.7775,
+    "naive_iid_coverage": 0.52,
+    "claim": "small-G/high-ICC stress remains under nominal for cluster-robust z intervals",
+    "next_experiment": "planned: compare CR2 small-sample correction and wild cluster bootstrap under the same DGP grid"
+  }
+}

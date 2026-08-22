@@ -1,0 +1,14 @@
+{
+  "status": "ok",
+  "renderer": ".cache/tools/squashfs-root/opt/libreoffice25.8/program/soffice",
+  "pptx_to_pdf": ".cache/016-statistical-benchmark-source/pdf/statistical_method_group_meeting_benchmark.pdf",
+  "png_count": 5,
+  "rendered_pngs": [
+    ".cache/016-statistical-benchmark-source/rendered/slide-1.png",
+    ".cache/016-statistical-benchmark-source/rendered/slide-2.png",
+    ".cache/016-statistical-benchmark-source/rendered/slide-3.png",
+    ".cache/016-statistical-benchmark-source/rendered/slide-4.png",
+    ".cache/016-statistical-benchmark-source/rendered/slide-5.png"
+  ],
+  "returncode": 0
+}
