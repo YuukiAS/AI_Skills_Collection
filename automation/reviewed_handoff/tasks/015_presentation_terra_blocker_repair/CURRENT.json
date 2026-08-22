@@ -1,8 +1,8 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "015_presentation_terra_blocker_repair",
-  "state": "READY_FOR_GPT_REVIEW",
-  "review_round": 0,
+  "state": "REVISE",
+  "review_round": 1,
   "max_review_rounds": 2,
   "plan_revision": 0,
   "max_plan_revisions": 1,
@@ -11,8 +11,8 @@
   "implementation_commit": "7dc892715ce91fb2d59f97036d25ec0bbec0548d",
   "ci_required": true,
   "ci_status": "PASS",
-  "last_review_decision": null,
+  "last_review_decision": "REVISE",
   "review_limit_reached": false,
   "human_gate_reason": null,
-  "next_action": "RUN_GPT_REVIEW"
+  "next_action": "RUN_CODEX_REPAIR"
 }
