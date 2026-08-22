@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "005_research_presentation_corpus_integrity",
-  "state": "PLAN_FROZEN",
+  "state": "AWAIT_HUMAN_DECISION",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -11,6 +11,8 @@
   "implementation_commit": "",
   "ci_required": true,
   "ci_status": "PENDING",
-  "last_review_decision": "REVISE",
-  "next_action": "RUN_CODEX_EXECUTOR"
+  "last_review_decision": null,
+  "review_limit_reached": false,
+  "human_gate_reason": "PLANNER_DECISION",
+  "next_action": "HISTORICAL_TASK_SUPERSEDED_BY_005_012_SPLIT_TASKS"
 }

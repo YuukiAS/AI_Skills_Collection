@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "006_source_tiering",
-  "state": "PLAN_FROZEN",
+  "state": "AWAIT_HUMAN_DECISION",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -12,5 +12,7 @@
   "ci_required": false,
   "ci_status": "NOT_REQUIRED",
   "last_review_decision": "",
-  "next_action": "READY_FOR_EXTERNAL_PLANNER_REVIEW"
+  "review_limit_reached": false,
+  "human_gate_reason": "PLANNER_DECISION",
+  "next_action": "HISTORICAL_PHASE_A_SLICE_RECORDED_IN_CURRENT_ROUND"
 }

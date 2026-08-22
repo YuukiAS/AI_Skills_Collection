@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "011_round_handoff",
-  "state": "READY_FOR_EXTERNAL_VISUAL_REVIEW",
+  "state": "BLOCKED",
   "review_round": 2,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -12,7 +12,7 @@
   "ci_required": false,
   "ci_status": "NOT_REQUIRED",
   "last_review_decision": "BLOCKED",
-  "next_action": "EXTERNAL_PLANNER_OPEN_PUBLIC_PDF_AND_REVIEW",
+  "next_action": "HISTORICAL_PAGES_ROUTE_BLOCKED_SUPERSEDED_BY_012_VISUAL_ADAPTER",
   "external_visual_review": {
     "transport": "github_pages_pdf",
     "status": "PUBLIC_VISUAL_TRANSPORT_READY",

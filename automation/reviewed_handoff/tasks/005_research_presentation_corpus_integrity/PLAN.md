@@ -6,9 +6,25 @@ decision: PLAN_FROZEN
 
 # 005 Research Presentation Corpus Integrity — Plan
 
-## 目标
+## Objective and value
 
 本 round 只修复长期 corpus 与 academic visual QA 的可信度基础，不扩张来源数量，不追求新 release，不重做已经稳定的 Presentation 格式路由。
+
+## Frozen decisions
+
+保持原冻结语义：只关闭长期 corpus 与 academic visual QA 的可信度基础问题，不扩 source corpus、不追求 release、不重做 Presentation 格式路由。后续更细任务已经把本大任务拆分为 `005_reference_integrity_cleanup` 到 `012_presentation_visual_adapter` 的历史链路；本兼容段落不改变这些后续任务的结论。
+
+## Implementation scope
+
+原 scope 覆盖三类 blocker：删除伪 page-level metadata、拆分 mechanical visual QA 与 academic visual review、让 regression deck 使用真实 inspected page retrieval trace。具体实现证据保留在后续拆分 task 的 `RESULT.md` 和当前 round handoff 中。
+
+## Acceptance and regression gates
+
+验收边界保持原文：不得出现 `metadata page-function record`、轮转 page function、未看图的 academic PASS、或 regression deck 继续引用自动制造 page records。当前兼容迁移不重新执行这些科研实现，也不把历史状态伪造成 PASS。
+
+## Out of scope
+
+不扩张来源数量，不新增 benchmark，不重做 Presentation plugin 架构，不调用 Terra，不修当前四页 regression。旧大任务只作为被后续 bounded tasks supersede 的历史 control-plane artifact 保留。
 
 ## Blocker A — 伪 page-level metadata 必须删除
 
