@@ -1,26 +1,7 @@
 {
-  "blocking_findings": [
-    {
-      "evidence": "Slide 4’s green cluster-robust points remain visibly below the 0.95 target at several ICC values for G=20 and G=50, while the title says coverage is recovered except at small G. The caption also calls the visible vertical uncertainty marks “bands.”",
-      "finding_id": "F1",
-      "item_id": "slide_4",
-      "recommendation": "Retitle/restate the result to say cluster adjustment substantially reduces undercoverage but finite-G shortfall remains, and change “bands” to “Monte Carlo error bars” (or render actual bands).",
-      "requirement_id": "slide_4 scientific correctness; uncertainty interpretation",
-      "severity": "non_blocking",
-      "summary": "The stated recovery claim and uncertainty terminology do not match the plotted evidence."
-    },
-    {
-      "evidence": "Slide 5 shows bar heights and a 0.95 target line, but no Monte Carlo uncertainty marks or interval information accompany the synthetic coverage estimates.",
-      "finding_id": "F2",
-      "item_id": "slide_5",
-      "recommendation": "Add Monte Carlo error bars (or clearly labeled uncertainty intervals) to the two-method bars and identify them in the caption.",
-      "requirement_id": "slide_5 quantitative evidence grammar; synthetic simulation evidence",
-      "severity": "non_blocking",
-      "summary": "The negative-result chart lacks visible uncertainty for its simulated coverage estimates."
-    }
-  ],
-  "created_at": "2026-08-22T13:18:02Z",
-  "evidence_id": "visual-review-016_statistical_method_group_meeting_benchmark-bc54599f74da",
+  "blocking_findings": [],
+  "created_at": "2026-08-22T13:24:34Z",
+  "evidence_id": "visual-review-016_statistical_method_group_meeting_benchmark-82abc553945f",
   "images": [
     {
       "logical_id": "slide_1",
@@ -44,30 +25,30 @@
       "logical_id": "slide_4",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-4.png",
-      "sha256": "147b84ed8960283604cc9b7b50e0de1720951f43892b4471fae774970a4d95bc"
+      "sha256": "9b0dd1ba796eb26f47ed08c5b0868fdcb549d14804def9cd5129df00984837a1"
     },
     {
       "logical_id": "slide_5",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-5.png",
-      "sha256": "9329e6645b91fa8841a01476775a227877cb35cfe862e4b6ba734d935a06dfef"
+      "sha256": "d9dbfdc696e9ab0582dbdc3593436a740f77ef381685778639470caef0a76821"
     }
   ],
   "input_manifest": {
     "identity_bindings": {
       "adapter_identity": "016_statistical_method_group_meeting_benchmark",
       "bridge_kit_commit": "f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e",
-      "evidence_manifest_sha256": "489b68f74d7a68dc874085483c330b4903a4bd965db5c7a4f24e3dd9597e9fc3",
+      "evidence_manifest_sha256": "1ae31810f697558c8831219e56180b6a89e8fc04ab24212ec451b0486c27b1f0",
       "input_png_sha256_by_slide": {
         "slide_1": "5193c27de468a38b8aa4284474262a1d4dcaea09d89d1cf0f8d0c62ad7dc7117",
         "slide_2": "4fd2da3db5be4eb45054855621ceef5addb26361f24b3ecca9fc99624d490406",
         "slide_3": "c7f08151deca50d477e73779f4fcd8b6b2b2b8e6d4d9ca876c9302d4d87d60c2",
-        "slide_4": "147b84ed8960283604cc9b7b50e0de1720951f43892b4471fae774970a4d95bc",
-        "slide_5": "9329e6645b91fa8841a01476775a227877cb35cfe862e4b6ba734d935a06dfef"
+        "slide_4": "9b0dd1ba796eb26f47ed08c5b0868fdcb549d14804def9cd5129df00984837a1",
+        "slide_5": "d9dbfdc696e9ab0582dbdc3593436a740f77ef381685778639470caef0a76821"
       },
-      "mechanical_review_sha256": "262383dbf22e284bdbb27a5d2d5480285aac87bed8f18dde7603c56ab35d91c5",
-      "pdf_sha256": "d128ad2c2f5336db5919f6a7a6037a8ffbd0420fae323266eca7bc8737a01956",
-      "pptx_sha256": "e7bac1a6cc5d1bcf6f73b9a9465219f35312d6631d29e3cb610e9ff7a32a35ac",
+      "mechanical_review_sha256": "63963e6ff8d8ff0a77c41967c42f58df22df204d9b06f519856ed49df01d6d4d",
+      "pdf_sha256": "0f496e39284811fbe0c07b52ec3f4a398eb004976c6c91d5f67e615e074140cf",
+      "pptx_sha256": "d3f3eccf64244209021924e0f5fc063219702ef9cf59d5c614f49d3cd497876d",
       "reference_design_audit_sha256": "e9d279bec967edf30a6b3af2988b12b469c03de75ed2176bd92a7dfcc0b4cfd0",
       "render_status_sha256": "09ba2a78c7bc35d24866ad5b94a1e11118cb82a5a9653aa5d228def8084fe210",
       "simulation_summary_sha256": "e8ac5e5ecd5aee768df9510f3e22148827aa11c4f2b45437d259c8e2f5f90f94",
@@ -76,10 +57,10 @@
       "source_mechanical_status": "MECHANICAL_PASS",
       "source_render_status": "ok"
     },
-    "manifest_sha256": "bc54599f74daf6f7c4809a4591184a3e3045a39b53de1c6cf720d0f238ffd087",
+    "manifest_sha256": "82abc553945faf5d5911b86b4189680ae5b00f457b37617d976a1e8caa5cf97b",
     "privacy_policy": "PUBLIC_SAFE_ONLY",
     "rubric": {
-      "instructions": "You are reviewing five real rendered PNG pages from an editable PPTX statistical/biostatistical method group meeting benchmark.\nInspect the actual image pixels page by page. Do not infer PASS from SHA, file existence, page count, mechanical PASS, metadata, expected object text, or reference IDs.\nFor each page, identify the primary scientific object visible in the image.\nScientific correctness: check that claims match the visible formula or figure, the DGP does not imply a wrong connector relationship, interval interpretations are correct, uncertainty is explained, and planned work is not presented as completed evidence.\nMathematical typesetting: reject core formulas that still look like source code or ASCII strings such as beta_1, epsilon_ij, sum_g, X'X, or ^(-1). PASS requires readable mathematical notation at projection scale.\nAudience-facing language: reject visible internal IDs or QA/provenance/meta language, including RRL IDs, Reference retrieval, EVIDENCE_MANIFEST, Diagram contract, style not copied, Reading target, Observed in this synthetic run, repo paths, run IDs, implementation commits, and review-target language.\nVisual maturity: explicitly answer this question for each page: Would this slide look professionally finished if projected in a strong PI's research group meeting or a top-conference oral talk?\nCheck hierarchy, figure/formula prominence, alignment, color discipline, intentional whitespace, information density, typography, captions, direct annotations, and projection readability.\nReject pages that become pastel cards, dashboards, generic consulting layouts, wireframes, decorative arrows, fake plots, placeholder visuals, or unsupported theorem-like claims.\nReference-informed quality: use the supplied page-specific reference lessons to judge whether the slide actually adopted the relevant mature-slide lesson; do not require copying source styling.\nFor diagram pages, check connector direction, visible arrowheads, edge crossing, and whether the flow can be understood in about 5 seconds.\nFor result pages, coverage near nominal 0.95 is the target; do not reward over-coverage as simply higher-is-better.\nCheck that synthetic simulation evidence is visibly bounded and not represented as clinical validation or a general statistical theorem.\nReturn PASS only when every page satisfies its research visual job and looks like a mature scientific talk page. Return REVISE if any page needs a concrete visual fix. Return BLOCKED only if the supplied pixels cannot be assessed.\nFor REVISE, give the smallest concrete page-specific repair recommendation.\n\nDeclared page contracts:\n- slide_1: title=Center correlation breaks iid intervals; declared_archetype=STATISTICAL_MODEL; expected_scientific_objects=beta_1 estimand, DGP formula, u_j random effect, epsilon_ij residual, ICC rho, center inference unit; reference_ids=RRL-044, RRL-007, RRL-008, RRL-043, RRL-042; retrieval_intent=Explain estimand, DGP, cluster correlation, and why unbiased point estimates can still have wrong interval coverage.; reference_informed_design=Use the DGP formula as the dominant object rather than prose cards.; Ground notation adjacent to the displayed formula with short semantic labels.; Use containment and spacing for additive components instead of causal arrows.\n- slide_2: title=The sandwich variance aggregates by center; declared_archetype=ESTIMATOR; expected_scientific_objects=naive variance formula, cluster sandwich formula, X_g block, u_g residual vector, center aggregation; reference_ids=RRL-040, RRL-009, RRL-028, RRL-030, RRL-015; retrieval_intent=Show how a variance estimator changes when score contributions are aggregated by center.; reference_informed_design=Make the sandwich covariance formula the largest object on the page.; Annotate the middle score-aggregation term directly beside the formula.; Keep the naive comparator compact so it supports rather than competes with the main formula.\n- slide_3: title=A stress grid separates interval behavior; declared_archetype=SIMULATION_DESIGN; expected_scientific_objects=DGP knobs, replicates, naive interval branch, cluster-robust interval branch, coverage endpoint gate; reference_ids=RRL-009, RRL-010, RRL-019, RRL-026, RRL-002; retrieval_intent=Connect DGP knobs, generated centers, interval methods, replicates, and coverage endpoints in one experiment design.; reference_informed_design=Keep one left-to-right experimental path from DGP knobs to endpoints.; Use only scientific operations as nodes and keep branch labels short.; Use a restrained neutral layout with one accent color for the cluster-robust branch.\n- slide_4: title=Cluster adjustment recovers coverage except at small G; declared_archetype=RESULT_FIGURE; expected_scientific_objects=coverage plot, nominal 95% line, method comparison, Monte Carlo uncertainty, synthetic boundary; reference_ids=RRL-030, RRL-033, RRL-010, RRL-023, RRL-039; retrieval_intent=Show coverage against ICC with nominal target line, method comparison, and Monte Carlo uncertainty.; reference_informed_design=Let the coverage plot occupy most of the slide area.; Place uncertainty and the nominal target directly in the figure grammar.; Use direct annotation at the small-G stress point instead of a separate reading card.\n- slide_5: title=The remaining failure is finite-center undercoverage; declared_archetype=NEGATIVE_RESULT; expected_scientific_objects=small-G stress evidence, coverage shortfall, failure mechanism, planned CR2/wild bootstrap experiment; reference_ids=RRL-011, RRL-024, RRL-025, RRL-041, RRL-005; retrieval_intent=Show the stress regime where the current interval still fails and define the next discriminating experiment.; reference_informed_design=Use the same quantitative evidence grammar as the main result page.; Make the undercoverage point visible and annotated in the chart.; Keep the planned CR2 / wild-bootstrap experiment as a small secondary statement.",
+      "instructions": "You are reviewing five real rendered PNG pages from an editable PPTX statistical/biostatistical method group meeting benchmark.\nInspect the actual image pixels page by page. Do not infer PASS from SHA, file existence, page count, mechanical PASS, metadata, expected object text, or reference IDs.\nFor each page, identify the primary scientific object visible in the image.\nScientific correctness: check that claims match the visible formula or figure, the DGP does not imply a wrong connector relationship, interval interpretations are correct, uncertainty is explained, and planned work is not presented as completed evidence.\nMathematical typesetting: reject core formulas that still look like source code or ASCII strings such as beta_1, epsilon_ij, sum_g, X'X, or ^(-1). PASS requires readable mathematical notation at projection scale.\nAudience-facing language: reject visible internal IDs or QA/provenance/meta language, including RRL IDs, Reference retrieval, EVIDENCE_MANIFEST, Diagram contract, style not copied, Reading target, Observed in this synthetic run, repo paths, run IDs, implementation commits, and review-target language.\nVisual maturity: explicitly answer this question for each page: Would this slide look professionally finished if projected in a strong PI's research group meeting or a top-conference oral talk?\nCheck hierarchy, figure/formula prominence, alignment, color discipline, intentional whitespace, information density, typography, captions, direct annotations, and projection readability.\nReject pages that become pastel cards, dashboards, generic consulting layouts, wireframes, decorative arrows, fake plots, placeholder visuals, or unsupported theorem-like claims.\nReference-informed quality: use the supplied page-specific reference lessons to judge whether the slide actually adopted the relevant mature-slide lesson; do not require copying source styling.\nFor diagram pages, check connector direction, visible arrowheads, edge crossing, and whether the flow can be understood in about 5 seconds.\nFor result pages, coverage near nominal 0.95 is the target; do not reward over-coverage as simply higher-is-better.\nCheck that synthetic simulation evidence is visibly bounded and not represented as clinical validation or a general statistical theorem.\nReturn PASS only when every page satisfies its research visual job and looks like a mature scientific talk page. Return REVISE if any page needs a concrete visual fix. Return BLOCKED only if the supplied pixels cannot be assessed.\nFor REVISE, give the smallest concrete page-specific repair recommendation.\n\nDeclared page contracts:\n- slide_1: title=Center correlation breaks iid intervals; declared_archetype=STATISTICAL_MODEL; expected_scientific_objects=beta_1 estimand, DGP formula, u_j random effect, epsilon_ij residual, ICC rho, center inference unit; reference_ids=RRL-044, RRL-007, RRL-008, RRL-043, RRL-042; retrieval_intent=Explain estimand, DGP, cluster correlation, and why unbiased point estimates can still have wrong interval coverage.; reference_informed_design=Use the DGP formula as the dominant object rather than prose cards.; Ground notation adjacent to the displayed formula with short semantic labels.; Use containment and spacing for additive components instead of causal arrows.\n- slide_2: title=The sandwich variance aggregates by center; declared_archetype=ESTIMATOR; expected_scientific_objects=naive variance formula, cluster sandwich formula, X_g block, u_g residual vector, center aggregation; reference_ids=RRL-040, RRL-009, RRL-028, RRL-030, RRL-015; retrieval_intent=Show how a variance estimator changes when score contributions are aggregated by center.; reference_informed_design=Make the sandwich covariance formula the largest object on the page.; Annotate the middle score-aggregation term directly beside the formula.; Keep the naive comparator compact so it supports rather than competes with the main formula.\n- slide_3: title=A stress grid separates interval behavior; declared_archetype=SIMULATION_DESIGN; expected_scientific_objects=DGP knobs, replicates, naive interval branch, cluster-robust interval branch, coverage endpoint gate; reference_ids=RRL-009, RRL-010, RRL-019, RRL-026, RRL-002; retrieval_intent=Connect DGP knobs, generated centers, interval methods, replicates, and coverage endpoints in one experiment design.; reference_informed_design=Keep one left-to-right experimental path from DGP knobs to endpoints.; Use only scientific operations as nodes and keep branch labels short.; Use a restrained neutral layout with one accent color for the cluster-robust branch.\n- slide_4: title=Cluster adjustment reduces, but does not erase, undercoverage; declared_archetype=RESULT_FIGURE; expected_scientific_objects=coverage plot, nominal 95% line, method comparison, Monte Carlo uncertainty, synthetic boundary; reference_ids=RRL-030, RRL-033, RRL-010, RRL-023, RRL-039; retrieval_intent=Show coverage against ICC with nominal target line, method comparison, and Monte Carlo uncertainty.; reference_informed_design=Let the coverage plot occupy most of the slide area.; Place uncertainty and the nominal target directly in the figure grammar.; Use direct annotation at the small-G stress point instead of a separate reading card.\n- slide_5: title=The remaining failure is finite-center undercoverage; declared_archetype=NEGATIVE_RESULT; expected_scientific_objects=small-G stress evidence, coverage shortfall, failure mechanism, planned CR2/wild bootstrap experiment; reference_ids=RRL-011, RRL-024, RRL-025, RRL-041, RRL-005; retrieval_intent=Show the stress regime where the current interval still fails and define the next discriminating experiment.; reference_informed_design=Use the same quantitative evidence grammar as the main result page.; Make the undercoverage point visible and annotated in the chart.; Keep the planned CR2 / wild-bootstrap experiment as a small secondary statement.",
       "source_contracts": [
         "automation/reviewed_handoff/tasks/016_statistical_method_group_meeting_benchmark/PLAN.md",
         "skills/tools/documents-media/presentations/research-presentations/SKILL.md",
@@ -94,96 +75,86 @@
       "decision": "PASS",
       "item_id": "slide_1",
       "observations": [
-        "Primary scientific object: clustered-outcome DGP, Yᵢⱼ = β₀ + β₁Tᵢⱼ + uⱼ + εᵢⱼ, with an ICC formula.",
-        "The formula is the dominant visual object and uses readable mathematical notation rather than source-code-style strings.",
-        "Short colored labels ground β₁, uⱼ, εᵢⱼ, and ρ; the page explicitly identifies center j as the inference unit.",
-        "The concluding statement distinguishes centered point estimates from interval coverage. The slide is clean, aligned, and projection-readable."
+        "Primary scientific object: the mixed-model DGP, Yᵢⱼ = β₀ + β₁Tᵢⱼ + uⱼ + εᵢⱼ, paired with the ICC formula.",
+        "β₁, the center-level shared effect uⱼ, individual residual εᵢⱼ, ICC, and center inference unit are visibly and correctly identified adjacent to the mathematical objects.",
+        "The DGP formula is dominant, professionally typeset, and free of source-code-style notation. Additive components are explained through spacing and labels rather than misleading causal connectors.",
+        "The slide clearly distinguishes a stable point-estimate target from degraded iid-interval coverage and bounds the setting as a synthetic multi-center simulation.",
+        "Would look professionally finished when projected: yes; hierarchy, whitespace, alignment, and restrained color use are strong."
       ],
       "requirement_ids": [
-        "slide_1 scientific correctness",
-        "slide_1 mathematical typesetting",
-        "slide_1 reference-informed design",
-        "slide_1 visual maturity"
+        "slide_1"
       ],
-      "summary": "Yes. This would look professionally finished when projected in a strong research-group meeting: the DGP and ICC relationship are prominent, legible, and scientifically coherent."
+      "summary": "Mature statistical-model slide with a readable dominant DGP and correct clustering interpretation."
     },
     {
       "decision": "PASS",
       "item_id": "slide_2",
       "observations": [
-        "Primary scientific object: the cluster-sandwich covariance formula with center-indexed score aggregation.",
-        "The sandwich formula is substantially more prominent than the compact naive iid comparator, and all core notation is properly typeset.",
-        "The underline and arrow directly identify the middle aggregation term; the accompanying text correctly describes center-level score covariance.",
-        "The slide visibly labels CR2 and wild bootstrap as planned comparisons, not completed evidence."
+        "Primary scientific object: the cluster sandwich covariance formula with center-indexed score aggregation.",
+        "The large formula correctly places the cluster sum around X_gᵀ û_g û_gᵀ X_g, and the direct arrow annotation accurately explains that center score contributions are aggregated before covariance formation.",
+        "The naive iid comparator is compact and visually subordinate; its row-independence assumption is stated plainly.",
+        "All core notation is rendered as mathematical typography rather than ASCII/source notation. The statement that CR2 and wild bootstrap are planned comparisons is visibly prospective, not presented as completed evidence.",
+        "Would look professionally finished when projected: yes; the formula is prominent, balanced, and readable."
       ],
       "requirement_ids": [
-        "slide_2 scientific correctness",
-        "slide_2 mathematical typesetting",
-        "slide_2 reference-informed design",
-        "slide_2 visual maturity"
+        "slide_2"
       ],
-      "summary": "Yes. This is a professionally finished estimator slide with a clear hierarchy and direct explanation of the sandwich middle term."
+      "summary": "Clear estimator slide that correctly contrasts row-level iid variance with center-aggregated sandwich variance."
     },
     {
       "decision": "PASS",
       "item_id": "slide_3",
       "observations": [
-        "Primary scientific object: left-to-right simulation workflow from DGP knobs through generated samples, two interval methods, and coverage/bias/width endpoints.",
-        "Arrowheads are visible and the split-and-merge flow is understandable quickly without edge crossings.",
-        "The naive and cluster-robust branches are short, visually differentiated, and use restrained red/teal accents.",
-        "The slide explicitly frames the work as a synthetic simulation and reports 400 replicates per cell."
+        "Primary scientific object: the left-to-right simulation-design flow from DGP knobs through generated samples and two interval methods to coverage, bias, and interval-width endpoints.",
+        "Arrowheads are visible and directionally unambiguous; the branch split and reconvergence can be understood immediately without edge crossings.",
+        "The naive iid and cluster-robust interval branches are clearly distinguished, with restrained accent colors and concise scientific node labels.",
+        "Replicate count and stress-grid dimensions are visible, while the slide explicitly identifies the setting as a synthetic experiment.",
+        "Would look professionally finished when projected: yes; the flow is aligned, sparse enough to scan, and avoids decorative diagram elements."
       ],
       "requirement_ids": [
-        "slide_3 scientific correctness",
-        "slide_3 diagram readability",
-        "slide_3 reference-informed design",
-        "slide_3 visual maturity"
+        "slide_3"
       ],
-      "summary": "Yes. This is a clear, projection-readable experimental design diagram with an appropriately restrained scientific workflow."
+      "summary": "Professional simulation-design diagram with a clear experimental path and method comparison."
     },
     {
-      "decision": "REVISE",
+      "decision": "PASS",
       "item_id": "slide_4",
       "observations": [
-        "Primary scientific object: three-panel simulated coverage-by-ICC plot for G=8, 20, and 50, comparing naive iid OLS z with cluster-robust z.",
-        "The nominal 0.95 line, method legend, vertical uncertainty marks, and direct small-G annotation are all visible in the figure.",
-        "The plotted green series is still generally below the nominal line for G=20 and G=50, so “recovers coverage except at small G” overstates the displayed result.",
-        "The caption says uncertainty is shown as “bands,” but the visible marks are vertical error bars."
+        "Primary scientific object: a three-panel coverage-versus-ICC plot comparing naive iid OLS z and cluster-robust z intervals across G=8, 20, and 50 centers.",
+        "The nominal 0.95 target is drawn directly in every panel, and the visual evidence correctly treats proximity to 0.95—not over-coverage—as the target.",
+        "Vertical Monte Carlo error bars are visibly incorporated into the plotting grammar and identified in the caption.",
+        "The G=8, high-ICC cluster-robust result is directly annotated as a small-G stress point with coverage 0.78; the figure shows that cluster adjustment improves high-ICC coverage relative to naive intervals but does not restore nominal coverage in that stress regime.",
+        "The synthetic imbalanced-cluster scope is visibly stated. Would look professionally finished when projected: yes; the chart occupies the visual focus and uses a legible, disciplined figure grammar."
       ],
       "requirement_ids": [
-        "slide_4 scientific correctness",
-        "slide_4 uncertainty interpretation",
-        "slide_4 reference-informed design",
-        "slide_4 visual maturity"
+        "slide_4"
       ],
-      "summary": "No. The figure itself is mature and readable, but the result claim must be brought into agreement with the visibly sub-nominal green estimates outside G=8."
+      "summary": "Strong result figure with nominal-reference context, uncertainty marks, direct stress-point annotation, and explicit synthetic scope."
     },
     {
-      "decision": "REVISE",
+      "decision": "PASS",
       "item_id": "slide_5",
       "observations": [
-        "Primary scientific object: G=8 imbalanced-cluster coverage bar chart, with the 0.78 cluster-robust result at ICC ρ=0.5 directly annotated.",
-        "The target 0.95 line and bar labels make the finite-center shortfall immediately legible.",
-        "The CR2 and wild-cluster-bootstrap work is explicitly labeled as planned, and the footer correctly limits completed evidence to the two shown intervals.",
-        "Unlike the preceding result plot, the synthetic coverage bars have no visible Monte Carlo uncertainty, limiting interpretation of the reported shortfall."
+        "Primary scientific object: the G=8 imbalanced-cluster coverage bar chart by ICC, with the high-ICC cluster-robust shortfall highlighted.",
+        "The ρ=0.5 cluster-robust bar is visibly labeled 0.78 and directly annotated as still below the 0.95 target; its error bar is shown.",
+        "The chart demonstrates that the cluster-robust interval improves on the naive interval at higher ICC while retaining finite-center undercoverage, consistent with the slide title and mechanism statement.",
+        "The proposed CR2 small-sample correction and wild cluster bootstrap are explicitly labeled as a planned comparison, while the footer limits completed evidence to the two displayed intervals.",
+        "Would look professionally finished when projected: yes; the chart, concise mechanism explanation, and clearly separated prospective next step form a coherent negative-result slide."
       ],
       "requirement_ids": [
-        "slide_5 scientific correctness",
-        "slide_5 synthetic-evidence boundary",
-        "slide_5 reference-informed design",
-        "slide_5 visual maturity"
+        "slide_5"
       ],
-      "summary": "Nearly professionally finished, but add visible simulation uncertainty to the bars so the negative result uses the same evidence grammar as the main result figure."
+      "summary": "Mature negative-result slide that makes the finite-center failure visible and cleanly separates observed evidence from planned work."
     }
   ],
   "non_blocking_notes": [],
-  "overall_decision": "REVISE",
+  "overall_decision": "PASS",
   "prompt_version": "ai-bridge.visual-review.v1",
-  "review_identity": "bc54599f74daf6f7c4809a4591184a3e3045a39b53de1c6cf720d0f238ffd087",
+  "review_identity": "82abc553945faf5d5911b86b4189680ae5b00f457b37617d976a1e8caa5cf97b",
   "review_kind": "statistical-method-group-meeting-benchmark",
   "review_model": "gpt-5.6-terra",
   "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
-  "status": "REVISE",
+  "status": "PASS",
   "task_key": "016_statistical_method_group_meeting_benchmark",
   "workflow_type": "generic"
 }
