@@ -12,7 +12,9 @@ decision: PLAN_FROZEN
 
 这条故事线用于检验 Presentation skill 对 statistical model、estimator/derivation、simulation design、uncertainty/result、negative result / next discriminating experiment 的表达能力。页面必须以公式、DGP、结果图、诊断和实验设计等真实统计对象为中心，不能退化成 cards/dashboard。
 
-## Frozen benchmark story
+## Frozen decisions
+
+### Frozen benchmark story
 
 使用完全 synthetic、固定随机种子的多中心连续结局模拟，不宣称真实临床或真实研究结果。DGP 为：
 
@@ -172,7 +174,7 @@ output=results/016_statistical_method_group_meeting_benchmark/visual_review/VISU
 
 默认模型必须是 `gpt-5.6-terra`，不创建 repo-level model override。五张 PNG SHA 必须与 manifest identity 一致。Terra `REVISE` 是学术视觉证据，不是 transport CI failure；Planner 独立决定 PASS/REVISE。
 
-## Acceptance gates
+## Acceptance and regression gates
 
 本 task 只有以下全部成立才可 PASS：
 
