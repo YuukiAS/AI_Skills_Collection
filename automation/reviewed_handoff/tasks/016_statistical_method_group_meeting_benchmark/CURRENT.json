@@ -12,7 +12,7 @@
   "ci_required": true,
   "ci_status": "PASS",
   "last_review_decision": "PASS",
-  "review_limit_reached": true,
+  "review_limit_reached": false,
   "human_gate_reason": "PASS",
   "next_action": "WAIT_FOR_HUMAN_DECISION"
 }

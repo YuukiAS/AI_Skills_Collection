@@ -6,13 +6,13 @@ final_decision: PASS
 
 # 016 Statistical / Biostatistical Method Group Meeting Benchmark — Final Report
 
-## 本轮解决了什么
+## What this task solved
 
 016 最初虽然具备统计模型、估计量、模拟设计、结果图和负结果等科学对象，但真实渲染明显仍像自动生成的 benchmark fixture，而不是成熟统计/生统组会成品。用户在查看真实页面后明确指出了核心问题：公式以源码式文本出现、内部检索与 QA 元语言泄漏到观众页面、布局依赖 pastel boxes / wireframe、文案有明显自动生成痕迹。
 
 因此本任务使用唯一一次 Plan revision，把目标重新冻结为“可以直接投影给统计/生统导师、PI 或顶会研究听众”的成熟科研汇报质量，并重做全部五页，而不是只修第一轮发现的一根错误连接线。
 
-## 实际改了哪里
+## What changed
 
 Revised implementation 保留原 DGP、固定随机种子、simulation grid、方法比较和全部数值结果，但系统性重构 audience-facing Presentation：
 
@@ -25,7 +25,7 @@ Revised implementation 保留原 DGP、固定随机种子、simulation grid、�
 
 第一版 revised Terra review 继续指出两个真实问题：slide 4 的标题/不确定性措辞过度概括，slide 5 的负结果图缺 Monte Carlo uncertainty。Executor 随后只修这两项；最终 visual identity 的 Terra 结果为五页全部 PASS、无 blocking finding。
 
-## 以前没有、现在已经验证的能力
+## New capabilities / behavior
 
 016 已验证 Presentation 系统能够处理一条完整统计方法组会叙事：从 clustered-data DGP 与 estimand，到 cluster-robust sandwich covariance、simulation design、带 Monte Carlo uncertainty 的主结果，再到 small-G undercoverage negative result 与 planned CR2 / wild-cluster-bootstrap experiment。
 
@@ -47,7 +47,7 @@ Revised implementation 保留原 DGP、固定随机种子、simulation grid、�
 
 本任务产物是统计/生统组会 regression benchmark 和 review evidence，不是新增用户命令。后续 Planner/Reviewer 可直接使用真实 editable PPTX、PDF/PNG render、`reference_design_audit.json`、deterministic QA 与 `VISUAL_REVIEW.json` 作为统计方法类 Presentation 的质量回归基线。
 
-## 回归风险与剩余工作
+## Regression and remaining limitations
 
 统计/生统 benchmark 已关闭，但本次 Presentation improvement cycle 还没有完成。下一步必须再完成一轮 medical-imaging research group meeting benchmark，并使用同等级别的成熟度门槛，额外检验 image / GT / prediction / overlay、failure case、定量结果、method/experiment diagram、validation/endpoint semantics、直接 annotation/legend 与真实会场可读性。
 
