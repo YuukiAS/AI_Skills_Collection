@@ -138,6 +138,15 @@ def line(slide, x1: float, y1: float, x2: float, y2: float, color: str = "muted"
     return c
 
 
+def swatch(slide, x: float, y: float, color: str):
+    shape = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, inch(x), inch(y), inch(0.12), inch(0.12))
+    shape.fill.solid()
+    shape.fill.fore_color.rgb = rgb(color)
+    shape.line.color.rgb = rgb(color)
+    shape.line.width = Pt(0.5)
+    return shape
+
+
 def header(slide, number: int, title: str, message: str):
     slide.background.fill.solid()
     slide.background.fill.fore_color.rgb = rgb("bg")
@@ -381,8 +390,10 @@ def draw_phantom(path: Path) -> dict:
 def draw_result_page(slide, assets: Path, manifest: dict, refs: list[str]):
     chart_path = assets / "endpoint_ranking_chart.png"
     manifest["synthetic_endpoint_data"] = draw_endpoint_chart(chart_path)
+    manifest["result_page_evidence_boundary"] = "Illustrative synthetic results - not completed validation"
     slide.shapes.add_picture(str(chart_path), inch(0.78), inch(1.42), width=inch(7.8))
-    rect(slide, "Interpretation\nCalibrated wins recall; burden error is lower-is-better and lowest for Calibrated.\nBaseline wins Dice only.", 9.0, 1.62, 3.25, 1.55, "soft_teal", "teal", 11.5, True)
+    rect(slide, "Evidence boundary: illustrative synthetic results - not completed validation", 0.95, 1.21, 7.4, 0.28, "soft_gold", "gold", 8.6, True)
+    rect(slide, "Interpretation\nIn this synthetic example, Calibrated wins recall; burden error is lower-is-better and lowest for Calibrated.\nBaseline wins Dice only.", 9.0, 1.62, 3.25, 1.62, "soft_teal", "teal", 11.1, True)
     rect(slide, "Meeting decision\nFreeze endpoint priority before ranking methods.", 9.0, 3.65, 3.25, 1.0, "soft_gold", "gold", 12.2, True)
     add_text(slide, reference_footer(refs, "result/interval query"), 0.95, 6.55, 11.2, 0.35, 8.4, "muted")
 
@@ -390,7 +401,15 @@ def draw_result_page(slide, assets: Path, manifest: dict, refs: list[str]):
 def draw_failure_page(slide, assets: Path, manifest: dict, refs: list[str]):
     phantom_path = assets / "synthetic_segmentation_phantom.png"
     manifest["synthetic_phantom_metrics"] = draw_phantom(phantom_path)
+    manifest["phantom_overlay_legend"] = {"green": "TP/overlap", "red": "FP", "blue": "FN"}
     slide.shapes.add_picture(str(phantom_path), inch(0.72), inch(1.38), width=inch(11.85))
+    add_text(slide, "Overlay legend", 9.45, 4.88, 1.2, 0.16, 8.2, "muted", True)
+    swatch(slide, 9.45, 5.08, "teal")
+    add_text(slide, "green = TP/overlap", 9.6, 5.06, 1.45, 0.16, 8.2, "ink", False)
+    swatch(slide, 11.0, 5.08, "red")
+    add_text(slide, "red = FP", 11.15, 5.06, 0.7, 0.16, 8.2, "ink", False)
+    swatch(slide, 11.85, 5.08, "blue")
+    add_text(slide, "blue = FN", 12.0, 5.06, 0.78, 0.16, 8.2, "ink", False)
     add_text(slide, "Scientific object: same synthetic case, aligned GT/prediction/error overlay, case metric next to visual.", 0.95, 6.35, 11.2, 0.32, 12.2, "ink", True)
     add_text(slide, reference_footer(refs, "failure-case query"), 0.95, 6.72, 11.2, 0.25, 8.4, "muted")
 

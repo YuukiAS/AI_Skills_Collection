@@ -3,19 +3,19 @@
   "identity_bindings": {
     "adapter_identity": "012_presentation_visual_adapter",
     "bridge_kit_commit": "f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e",
-    "evidence_manifest_sha256": "1cdb89fecce9821b9f19fa03aab6f017781f31ef3cfdcbdbbca54d1be1ec4780",
+    "evidence_manifest_sha256": "b5db3786d5cb4ac13d1264d103beb9d030efe27f7bedb8a7356ae4489353ec1e",
     "input_png_sha256_by_slide": {
-      "slide_1": "1791b52c95182d34e7b951eeb28e1b2f19531df5a5aa12de06c8b6730abd5bd2",
-      "slide_2": "00f194849213f180565b87051a2ad3a87d867382ae835e5f7d6900a0a184b7db",
+      "slide_1": "6ea97abb12e6bde629421731fa1ba0fd4b22650aeb0b8d9d6ce3ad370d523d4b",
+      "slide_2": "8b118fb4d926eaac90cafbb9e3a2729416e5fd60fdfe759ded0237b7a86ca6f6",
       "slide_3": "21d002f3756646098d2ec53fa5ce6542ee1c9db4afe5e7481c94df064b3ff116",
       "slide_4": "77c025dbe17ea5c48b03cb9db2052e496f6bc2cdc28b9d9d76771d2ff21aa92e"
     },
     "legacy_external_visual_implementation_commit": "ff8ff1ddb48cb9c511b3e3fecc7f0c4964adab46",
     "legacy_pages_transport_commit": "38d7bbc137fb8bbaa13d830bbfb1907be32066c6",
     "legacy_task_key": "011_round_handoff",
-    "mechanical_review_sha256": "6368086db4bb9fef9e2fbfb9478d4556e5db2f3989afe12a84f340319cf47973",
-    "pdf_sha256": "2ee5e6b2d07e8c1583bee35e6889c6ffe98d5d74ddd888025b8c289f32f760fd",
-    "pptx_sha256": "2db7476d441b8f169384ce8d0f664723c2f3b48f6cde4e44c36c646bcf4e549b",
+    "mechanical_review_sha256": "b23635dd4569e0cc63610fd91e2b566a963505e1ad8a998717f48ca318502752",
+    "pdf_sha256": "5aa989a8d471ed7a9c842f04e9f2d1f0f45a404f48c9f6db03a969bbb6588959",
+    "pptx_sha256": "a6ed6fe02c8a6ff54db248fd2f5e9426ccd0644a07f7e61ae0906d163cebc348",
     "render_status_sha256": "e94cc1c38bd3e04d26c8c31a17baf41eb17b18adcb2eda2b15c9fba70fcd5702",
     "source_academic_visual_decision": "NOT_ASSESSED",
     "source_dir": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source",
@@ -28,14 +28,14 @@
       "logical_id": "slide_1",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-1.png",
-      "sha256": "1791b52c95182d34e7b951eeb28e1b2f19531df5a5aa12de06c8b6730abd5bd2"
+      "sha256": "6ea97abb12e6bde629421731fa1ba0fd4b22650aeb0b8d9d6ce3ad370d523d4b"
     },
     {
       "description": "Slide 2: Average Dice Can Hide the Hard Case | archetype=FAILURE_CASE | expected_objects=synthetic image, GT mask, prediction mask, FP/FN overlay, case metrics",
       "logical_id": "slide_2",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-2.png",
-      "sha256": "00f194849213f180565b87051a2ad3a87d867382ae835e5f7d6900a0a184b7db"
+      "sha256": "8b118fb4d926eaac90cafbb9e3a2729416e5fd60fdfe759ded0237b7a86ca6f6"
     },
     {
       "description": "Slide 3: Limited-Information Multi-Center Experiment | archetype=EXPERIMENT_DESIGN | expected_objects=centers, local image/label, local estimator, transmitted summary, global estimator, endpoint evaluation",

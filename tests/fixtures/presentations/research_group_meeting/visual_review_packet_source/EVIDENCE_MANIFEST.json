@@ -415,6 +415,7 @@
       "Burden error": "raw_error_value_lower_is_better"
     }
   },
+  "result_page_evidence_boundary": "Illustrative synthetic results - not completed validation",
   "synthetic_phantom_metrics": {
     "dice": 0.775,
     "lesion_recall": 0.765,
@@ -428,6 +429,11 @@
       "rendered_case_pixels": 188,
       "panel_pixels": 235
     }
+  },
+  "phantom_overlay_legend": {
+    "green": "TP/overlap",
+    "red": "FP",
+    "blue": "FN"
   },
   "experiment_design_paths": {
     "explicit_local_only_comparator_branch": true,

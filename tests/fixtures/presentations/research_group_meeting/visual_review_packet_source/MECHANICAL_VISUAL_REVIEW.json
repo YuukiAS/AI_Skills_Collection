@@ -31,7 +31,7 @@
   "pptx_object_summary": {
     "editable_slide_count": 4,
     "media_count": 2,
-    "shape_count": 58,
+    "shape_count": 67,
     "picture_count": 2
   },
   "slide_reviews": [
@@ -53,11 +53,11 @@
         "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-1.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.8143,
+        "blank_area_ratio": 0.7831,
         "contrast_range": 225,
         "dominant_object_area": 0.895,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0487,
+        "text_density_proxy": 0.0512,
         "content_bbox": [
           0,
           0,
@@ -98,11 +98,11 @@
         "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-2.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.7422,
+        "blank_area_ratio": 0.7402,
         "contrast_range": 225,
         "dominant_object_area": 0.9183,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0447,
+        "text_density_proxy": 0.0463,
         "content_bbox": [
           0,
           0,

@@ -399,6 +399,10 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(endpoint_data["best_by_endpoint"]["Burden error"], "Calibrated")
             self.assertEqual(endpoint_data["burden_error_favorable_direction"], "lower_is_better")
             self.assertEqual(endpoint_data["display_encoding"]["Burden error"], "raw_error_value_lower_is_better")
+            self.assertEqual(
+                manifest["result_page_evidence_boundary"],
+                "Illustrative synthetic results - not completed validation",
+            )
             phantom_layout = manifest["synthetic_phantom_metrics"]["layout"]
             self.assertTrue(phantom_layout["same_synthetic_case"])
             self.assertEqual(phantom_layout["source_grid_pixels"], 120)
@@ -406,6 +410,10 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertGreaterEqual(
                 phantom_layout["rendered_case_pixels"] / phantom_layout["panel_pixels"],
                 0.75,
+            )
+            self.assertEqual(
+                manifest["phantom_overlay_legend"],
+                {"green": "TP/overlap", "red": "FP", "blue": "FN"},
             )
             experiment_paths = manifest["experiment_design_paths"]
             self.assertTrue(experiment_paths["explicit_local_only_comparator_branch"])
@@ -560,6 +568,11 @@ class PresentationSharedTests(unittest.TestCase):
                 slide_xml = "\n".join(deck.read(name).decode("utf-8") for name in slide_names)
             self.assertIn("lower-is-better", slide_xml)
             self.assertIn("lowest for Calibrated", slide_xml)
+            self.assertIn("illustrative synthetic results", slide_xml)
+            self.assertIn("not completed validation", slide_xml)
+            self.assertIn("green = TP/overlap", slide_xml)
+            self.assertIn("red = FP", slide_xml)
+            self.assertIn("blue = FN", slide_xml)
             self.assertIn("Local-only comparator", slide_xml)
             self.assertIn("Endpoint evaluation", slide_xml)
             self.assertEqual(len(slide_names), 4)
