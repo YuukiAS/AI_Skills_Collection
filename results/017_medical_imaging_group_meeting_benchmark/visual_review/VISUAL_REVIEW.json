@@ -1,23 +1,13 @@
 {
-  "blocking_findings": [
-    {
-      "evidence": "slide_1 shows a synthetic annular phantom with a direct arrow to the small lesion, but no visible label identifies the anatomical structure/target surrounding the lesion. The visible label only says “Synthetic cardiac-MR-like slice.”",
-      "finding_id": "F1",
-      "item_id": "slide_1",
-      "recommendation": "Add one concise direct anatomy/target label on the image (for example, identify the myocardial ring and lesion location) while retaining the existing lesion arrow.",
-      "requirement_id": "slide_1_medical_imaging_grounding",
-      "severity": "non_blocking",
-      "summary": "Anatomy is not interpretable at projection scale from the image or annotations."
-    }
-  ],
-  "created_at": "2026-08-22T15:52:22Z",
-  "evidence_id": "visual-review-017_medical_imaging_group_meeting_benchmark-2dd3592c4fe5",
+  "blocking_findings": [],
+  "created_at": "2026-08-22T16:11:13Z",
+  "evidence_id": "visual-review-017_medical_imaging_group_meeting_benchmark-1303eb7ddd9a",
   "images": [
     {
       "logical_id": "slide_1",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-1.png",
-      "sha256": "9e81d3e545a3fb2c2c9bf6810543e70663b0fbe6566d06458da1e9beab5a422b"
+      "sha256": "edcafbc47b3fa98aa7303a79950c2fc86e8ffdd13cfb073478a31429414f5ca7"
     },
     {
       "logical_id": "slide_2",
@@ -48,17 +38,17 @@
     "identity_bindings": {
       "adapter_identity": "017_medical_imaging_group_meeting_benchmark",
       "bridge_kit_commit": "f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e",
-      "evidence_manifest_sha256": "0aac9d4e75593ac9f2076f13ceebdf7b2590495b699ef1a8e933f002cec490f8",
+      "evidence_manifest_sha256": "1cf313e1c61f918bd93572d7de72a55a045e8e27f725b0503b0cd5922fbf124c",
       "input_png_sha256_by_slide": {
-        "slide_1": "9e81d3e545a3fb2c2c9bf6810543e70663b0fbe6566d06458da1e9beab5a422b",
+        "slide_1": "edcafbc47b3fa98aa7303a79950c2fc86e8ffdd13cfb073478a31429414f5ca7",
         "slide_2": "cdd51a9916ec773e2c876b9a69e9ac676643b8643844892014231fb7b8c98a00",
         "slide_3": "9af0f7e098b48dfd7c8dfabb1c2c8ad31f809579e054688d5cea51c4c38d44e4",
         "slide_4": "a143082374c3974eb90525b48876d0c0a312bf633654bb2a622b30cde7346e0f",
         "slide_5": "7f32f4540873269b8ab7f256afa1b53c25dbaeca91f7673f73559b732efb8ddf"
       },
-      "mechanical_review_sha256": "2a971db887e017dbbf9395b53ff62b80a1b1dd197de0d122102250f54fe9c106",
-      "pdf_sha256": "59b833a663667bea2ee2f1b51baf95ea70ae44b92b8136693eb06b3b832756dd",
-      "pptx_sha256": "4e5231da3da02aac6bc63624afbdca9a16f2e7427debfde270bba2815e35d427",
+      "mechanical_review_sha256": "d11af2956614ca9fad0d84d2ba09da3612420932ecc6fd260b16d16f6952d075",
+      "pdf_sha256": "729dc24c9a832f65b7301873d3e8f89b819634f52e4a8f4cb825915b55fd33a4",
+      "pptx_sha256": "9b03e65b1c54d9c6d441b78b34e9f11cefa975416395b30adfbe92748d0e1663",
       "reference_design_audit_sha256": "a0548485cf850e95f62d63ab5471f16804887668c27bada6a3e80b9791e4323b",
       "render_status_sha256": "b375091504a5873062b7f0cf5c436a07ca1e50e31682d5ef866e39b1d8aff9d3",
       "simulation_summary_sha256": "7020272e487d2720cff4787fc50be426880d71447dad5d963634d591b0903a48",
@@ -67,7 +57,7 @@
       "source_mechanical_status": "MECHANICAL_PASS",
       "source_render_status": "ok"
     },
-    "manifest_sha256": "2dd3592c4fe5a4db5114e2cb8a4f115928821692c111f82f16116ad32dc01fcf",
+    "manifest_sha256": "1303eb7ddd9ae75fb8365a8844c4d8397aeefc83b93cce2ce2cfede511c4d200",
     "privacy_policy": "PUBLIC_SAFE_ONLY",
     "rubric": {
       "instructions": "You are reviewing five real rendered PNG pages from an editable PPTX medical-imaging research group meeting benchmark.\nInspect the actual image pixels page by page. Do not infer PASS from SHA, file existence, page count, mechanical PASS, metadata, expected object text, or reference IDs.\nFor each page, identify the primary scientific object visible in the image: image pixels, GT/prediction masks, endpoint figure, same-case overlay, or negative-result plot.\nScientific correctness: check that claims match the visible image, mask, figure, endpoint direction, uncertainty/variation, and synthetic-only scope. Planned validation must not be presented as completed evidence.\nMedical-imaging grounding: reject pages where modality, anatomy, lesion/target, GT/prediction relation, overlay legend, or endpoint semantics are unclear at projection scale.\nAudience-facing language: reject visible internal IDs or QA/provenance/meta language, including RRL IDs, Reference retrieval, EVIDENCE_MANIFEST, Diagram contract, style not copied, Reading target, Observed in this synthetic run, repo paths, run IDs, implementation commits, and review-target language.\nVisual maturity: explicitly answer this question for each page: Would this slide look professionally finished if projected in a strong medical-imaging PI's group meeting or a MICCAI/RSNA-style research talk?\nCheck hierarchy, image/figure prominence, panel alignment, legend readability, color discipline, intentional whitespace, information density, typography, captions, direct annotations, and projection readability.\nReject pages that become pastel cards, dashboards, generic consulting layouts, wireframes, decorative medical UI, fake plots, placeholder visuals, or unsupported clinical claims.\nReference-informed quality: use the supplied page-specific reference lessons to judge whether the slide actually adopted the relevant mature-slide lesson; do not require copying source styling.\nFor diagram pages, check connector direction, visible arrowheads, edge crossing, and whether the flow can be understood in about 5 seconds.\nFor result pages, check metric direction explicitly: Dice and lesion recall are higher-is-better; false-positive burden is lower-is-better.\nFor failure-case pages, verify that input, GT, prediction, and error overlay appear aligned and from the same case; the TP/FP/FN legend must be readable and tied to the pixels.\nCheck that synthetic phantom evidence is visibly bounded and not represented as patient validation, clinical deployment, or a real multi-center study.\nReturn PASS only when every page satisfies its research visual job and looks like a mature scientific talk page. Return REVISE if any page needs a concrete visual fix. Return BLOCKED only if the supplied pixels cannot be assessed.\nFor REVISE, give the smallest concrete page-specific repair recommendation.\n\nDeclared page contracts:\n- slide_1: title=A small lesion is the unit of failure; declared_archetype=MEDICAL_IMAGE_COMPARISON; expected_scientific_objects=synthetic cardiac-MR-like slice, GT lesion mask, prediction overlay, endpoint names, synthetic-only qualifier; reference_ids=RRL-022, RRL-039, RRL-013, RRL-019, RRL-024; retrieval_intent=Ground a segmentation task with actual image pixels, anatomy, lesion target, GT/prediction overlay, and endpoint semantics.; reference_informed_design=Make the slice/overlay the largest object so the task is readable from pixels.; Place endpoint and synthetic scope adjacent to the image, not in separate cards.; Use direct lesion/anatomy labels instead of a detached glossary.\n- slide_2: title=The stress test follows one image-to-endpoint path; declared_archetype=EXPERIMENT_DESIGN; expected_scientific_objects=center appearance shifts, synthetic image and GT generation, prediction step, case metrics, center aggregation; reference_ids=RRL-019, RRL-010, RRL-022, RRL-026, RRL-002; retrieval_intent=Show center-specific appearance shift, synthetic image/GT generation, prediction, endpoint calculation, and aggregation.; reference_informed_design=Use one left-to-right data path from center shift to endpoint aggregation.; Use compact image thumbnails as scientific objects inside the path.; Keep connectors semantic and visible instead of decorative workflow arrows.\n- slide_3: title=Average Dice can hide a lesion-level failure; declared_archetype=RESULT_FIGURE; expected_scientific_objects=Dice panel, lesion recall panel, FP burden panel, uncertainty intervals, endpoint disagreement annotation; reference_ids=RRL-021, RRL-039, RRL-003, RRL-004, RRL-023; retrieval_intent=Compare Dice, lesion-level recall, and false-positive burden across center shift with uncertainty or variation.; reference_informed_design=Let aligned quantitative panels dominate the page.; Show cross-case variation/uncertainty in the plot grammar.; Annotate the endpoint disagreement directly at the high-shift condition.\n- slide_4: title=The failure is visible in the same-case overlay; declared_archetype=FAILURE_CASE; expected_scientific_objects=same-case input, GT panel, prediction panel, TP/FP/FN overlay, case metrics; reference_ids=RRL-022, RRL-039, RRL-041, RRL-013, RRL-017; retrieval_intent=Show one same-case input, GT, prediction, and error overlay with directly interpretable color legend and case metrics.; reference_informed_design=Use same-case aligned panels so GT, prediction, and error are spatially comparable.; Put TP/FP/FN color semantics in a clear projection-scale legend.; Tie case metrics to the visible missed lesion region.\n- slide_5: title=Validate the small-lesion shift explicitly next; declared_archetype=NEGATIVE_RESULT; expected_scientific_objects=lesion-size recall plot, failure regime annotation, completed evidence boundary, planned validation experiment; reference_ids=RRL-021, RRL-041, RRL-005, RRL-003, RRL-004; retrieval_intent=Show the supported failure regime and a planned validation experiment without presenting it as completed evidence.; reference_informed_design=Make the small-lesion failure curve the main evidence object.; Separate completed synthetic evidence from the planned held-out-center validation.; Keep the mechanism statement short and directly supported by the plotted evidence.",
@@ -82,99 +72,86 @@
   },
   "item_reviews": [
     {
-      "decision": "REVISE",
+      "decision": "PASS",
       "item_id": "slide_1",
       "observations": [
-        "Primary object: synthetic cardiac-MR-like image pixels beside a GT/prediction overlay.",
-        "The small lesion is directly indicated and the GT/prediction colors correspond to the visible legend.",
-        "Dice, lesion recall, and false-positive burden are named adjacent to the images.",
-        "Synthetic-only scope is visibly and repeatedly bounded as not clinical validation.",
-        "Professional projection finish: largely yes—large aligned images, restrained palette, and readable labels—but the anatomy/target context is not directly labeled."
+        "Primary scientific object: large synthetic cardiac-MR-like slice paired with a GT/prediction lesion overlay.",
+        "The myocardial ring and small lesion target are directly annotated; the colored lesion overlay and bottom GT/Pred-TP/FP/FN legend are visible at projection scale.",
+        "Dice, lesion recall, and false-positive burden are named adjacent to the imagery, and the slide visibly states that the evidence is synthetic and not clinical validation.",
+        "Professionally finished for projection: yes. The image panels dominate, labels are restrained, and the explanatory column is legible without dashboard-like clutter."
       ],
       "requirement_ids": [
-        "slide_1_medical_imaging_grounding",
-        "slide_1_synthetic_scope",
-        "slide_1_visual_maturity"
+        "slide_1"
       ],
-      "summary": "Add a direct anatomy/target label to make the medical-imaging task interpretable from the pixels."
+      "summary": "Clear image-grounded framing of a synthetic small-lesion segmentation task and its lesion-level endpoints."
     },
     {
       "decision": "PASS",
       "item_id": "slide_2",
       "observations": [
-        "Primary object: a left-to-right image-to-endpoint experimental path with center-specific appearance-shift thumbnails.",
-        "Center A/B/C appearance conditions feed into image + GT, prediction, case metrics, and center/lesion-strata aggregation.",
-        "Teal connectors have visible rightward arrowheads and do not cross.",
-        "Image thumbnails are compact but visibly scientific rather than decorative; the synthetic/non-clinical scope is stated at the bottom.",
-        "Professional projection finish: yes—clear hierarchy, aligned workflow, semantic connectors, and readable endpoint stages."
+        "Primary scientific object: a left-to-right experiment path from center-specific appearance shifts through image+GT, prediction, case metrics, and center aggregation.",
+        "Three compact center thumbnails visibly depict reference, low-contrast/bias, and high-shift appearances; the workflow connectors are directional, have visible arrowheads, and do not cross.",
+        "The image and prediction thumbnails are embedded in the data path rather than replaced by decorative icons.",
+        "The lower qualifier explicitly limits aggregation to descriptive synthetic phantom evidence rather than clinical validation.",
+        "Professionally finished for projection: yes. The workflow is understandable in a few seconds, with clean alignment and readable semantic steps."
       ],
       "requirement_ids": [
-        "slide_2_experiment_design",
-        "slide_2_synthetic_scope",
-        "slide_2_visual_maturity"
+        "slide_2"
       ],
-      "summary": "Passes as a readable image-to-endpoint stress-test workflow."
+      "summary": "A coherent, image-grounded stress-test workflow with an explicit synthetic-only boundary."
     },
     {
       "decision": "PASS",
       "item_id": "slide_3",
       "observations": [
-        "Primary object: three aligned quantitative panels for Dice overlap, small-lesion recall, and FP burden.",
-        "Each panel shows point estimates and vertical uncertainty intervals.",
-        "Metric direction is explicit: Dice and recall are higher-is-better; FP burden is lower-is-better.",
-        "At Center C, Dice remains 0.56 while small-lesion recall reaches 0.00; the direct red annotation identifies the disagreement. FP burden rises to about 0.002, which is unfavorable under its lower-is-better direction.",
-        "Professional projection finish: yes—the plots dominate, axes and intervals are legible, and the endpoint disagreement is directly annotated."
+        "Primary scientific object: three aligned quantitative endpoint panels for Dice overlap, small-lesion recall, and FP burden across centers A–C.",
+        "All panels show cross-case uncertainty intervals. Dice and recall are explicitly labeled higher-is-better; FP burden is explicitly labeled lower-is-better.",
+        "At center C, the visible Dice value remains about 0.56 while small-lesion recall reaches 0.00; the direct red annotation identifies the missed-small-lesion disagreement. FP burden visibly rises at C, consistent with its lower-is-better direction.",
+        "Professionally finished for projection: yes. The plots dominate the slide, share a disciplined visual grammar, and the endpoint conclusion is directly supported by the visible data."
       ],
       "requirement_ids": [
-        "slide_3_result_figure",
-        "slide_3_metric_direction",
-        "slide_3_visual_maturity"
+        "slide_3"
       ],
-      "summary": "Passes as a mature result slide with correctly expressed endpoint disagreement."
+      "summary": "The endpoint disagreement is quantitatively visible, directionally correct, and accompanied by uncertainty."
     },
     {
       "decision": "PASS",
       "item_id": "slide_4",
       "observations": [
-        "Primary object: four same-case aligned panels showing input pixels, GT lesion, prediction, and TP/FP/FN overlay.",
-        "The lesion occupies the same lower-right ring location in the input, GT, and overlay; prediction lacks the lesion there.",
-        "The overlay shows the missed region in red, matching the readable FN legend; no TP or FP region is visibly present.",
-        "Case metrics explicitly report Dice 0.00, lesion recall 0, and FN pixels 20, supporting the visible missed-lesion region.",
-        "Professional projection finish: yes—large aligned panels, consistent captions, readable legend, and an unambiguous same-case failure."
+        "Primary scientific object: same-case four-panel comparison of input, GT lesion, prediction, and TP/FP/FN overlay.",
+        "The lesion is in the same lower-right myocardial location in the input and GT panels; prediction is absent there, and the corresponding overlay is red FN at that same location.",
+        "The GT, Pred/TP, FP, and FN color legend is readable, and the case metrics explicitly connect the visible missed lesion to Dice 0.00, recall 0, and FN pixels 20.",
+        "The slide visibly identifies all panels as the same synthetic slice geometry, preventing presentation as patient evidence.",
+        "Professionally finished for projection: yes. The aligned panels, projection-scale labels, and concise metrics make the failure immediately interpretable."
       ],
       "requirement_ids": [
-        "slide_4_failure_case",
-        "slide_4_same_case_alignment",
-        "slide_4_visual_maturity"
+        "slide_4"
       ],
-      "summary": "Passes as a clear, pixel-grounded failure-case slide."
+      "summary": "A clear same-case missed-lesion failure visualization with aligned spatial evidence and readable error semantics."
     },
     {
       "decision": "PASS",
       "item_id": "slide_5",
       "observations": [
-        "Primary object: lesion-level recall by lesion size across Centers A, B, and C, with variation intervals.",
-        "The plot directly shows Center C small-lesion recall at 0.00 and marks that failure regime with an arrow annotation.",
-        "Completed evidence is explicitly bounded to deterministic synthetic phantoms, while the held-out-center experiment is visibly labeled “Planned validation.”",
-        "The slide explicitly says the next validation is planned rather than completed and disclaims patient-validation status.",
-        "Professional projection finish: yes—the failure curve is dominant, the completed-versus-planned boundary is clear, and the planned experiment is not represented as completed evidence."
+        "Primary scientific object: lesion-level recall versus lesion-size plot, with separate center curves and uncertainty intervals.",
+        "The plotted supported regime is explicit: Center C recall is 0.00 for small lesions while medium and large lesions are higher; the annotation points directly to that plotted failure.",
+        "The page visibly separates 'Completed evidence' from 'Planned validation,' and states that the completed evidence is deterministic synthetic phantom evidence only and that the next validation is not completed.",
+        "Professionally finished for projection: yes. The failure curve is the largest evidence object, the planned work is visually secondary, and the synthetic-only scope is unambiguous."
       ],
       "requirement_ids": [
-        "slide_5_negative_result",
-        "slide_5_synthetic_scope",
-        "slide_5_visual_maturity"
+        "slide_5"
       ],
-      "summary": "Passes as a properly bounded negative-result and next-step slide."
+      "summary": "The negative result is visibly bounded to completed synthetic evidence while the held-out-center validation is clearly future work."
     }
   ],
   "non_blocking_notes": [],
-  "overall_decision": "REVISE",
+  "overall_decision": "PASS",
   "prompt_version": "ai-bridge.visual-review.v1",
-  "review_identity": "2dd3592c4fe5a4db5114e2cb8a4f115928821692c111f82f16116ad32dc01fcf",
+  "review_identity": "1303eb7ddd9ae75fb8365a8844c4d8397aeefc83b93cce2ce2cfede511c4d200",
   "review_kind": "medical-imaging-group-meeting-benchmark",
   "review_model": "gpt-5.6-terra",
   "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
-  "status": "REVISE",
+  "status": "PASS",
   "task_key": "017_medical_imaging_group_meeting_benchmark",
   "workflow_type": "generic"
 }
