@@ -17,21 +17,21 @@
   "rendered_png_count": 4,
   "render_status": {
     "status": "ok",
-    "renderer": ".cache/tools/squashfs-root/AppRun",
-    "pptx_to_pdf": ".cache/research-group-meeting-regression-current/pdf/research_group_meeting_regression.pdf",
+    "renderer": ".cache/tools/squashfs-root/opt/libreoffice25.8/program/soffice",
+    "pptx_to_pdf": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/pdf/research_group_meeting_regression.pdf",
     "png_count": 4,
     "rendered_pngs": [
-      ".cache/research-group-meeting-regression-current/rendered/slide-1.png",
-      ".cache/research-group-meeting-regression-current/rendered/slide-2.png",
-      ".cache/research-group-meeting-regression-current/rendered/slide-3.png",
-      ".cache/research-group-meeting-regression-current/rendered/slide-4.png"
+      "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-1.png",
+      "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-2.png",
+      "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+      "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-4.png"
     ],
     "returncode": 0
   },
   "pptx_object_summary": {
     "editable_slide_count": 4,
     "media_count": 2,
-    "shape_count": 56,
+    "shape_count": 58,
     "picture_count": 2
   },
   "slide_reviews": [
@@ -50,14 +50,14 @@
         "required_object_contract_present": "PASS"
       },
       "metrics": {
-        "path": ".cache/research-group-meeting-regression-current/rendered/slide-1.png",
+        "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-1.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.8123,
+        "blank_area_ratio": 0.8143,
         "contrast_range": 225,
         "dominant_object_area": 0.895,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0538,
+        "text_density_proxy": 0.0487,
         "content_bbox": [
           0,
           0,
@@ -95,14 +95,14 @@
         "required_object_contract_present": "PASS"
       },
       "metrics": {
-        "path": ".cache/research-group-meeting-regression-current/rendered/slide-2.png",
+        "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-2.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.8543,
+        "blank_area_ratio": 0.7422,
         "contrast_range": 225,
         "dominant_object_area": 0.9183,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0382,
+        "text_density_proxy": 0.0447,
         "content_bbox": [
           0,
           0,
@@ -141,14 +141,14 @@
         "required_object_contract_present": "PASS"
       },
       "metrics": {
-        "path": ".cache/research-group-meeting-regression-current/rendered/slide-3.png",
+        "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-3.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.7215,
+        "blank_area_ratio": 0.7308,
         "contrast_range": 225,
         "dominant_object_area": 0.895,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0475,
+        "text_density_proxy": 0.0502,
         "content_bbox": [
           0,
           0,
@@ -188,14 +188,14 @@
         "required_object_contract_present": "PASS"
       },
       "metrics": {
-        "path": ".cache/research-group-meeting-regression-current/rendered/slide-4.png",
+        "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-4.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.7315,
+        "blank_area_ratio": 0.7351,
         "contrast_range": 225,
         "dominant_object_area": 0.895,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0447,
+        "text_density_proxy": 0.0398,
         "content_bbox": [
           0,
           0,

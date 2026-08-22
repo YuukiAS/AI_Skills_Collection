@@ -395,6 +395,22 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertFalse(manifest["generator_may_pass"])
             self.assertEqual(manifest["editable_slide_count"], 4)
             self.assertEqual(len(manifest["slides"]), 4)
+            endpoint_data = manifest["synthetic_endpoint_data"]
+            self.assertEqual(endpoint_data["best_by_endpoint"]["Burden error"], "Calibrated")
+            self.assertEqual(endpoint_data["burden_error_favorable_direction"], "lower_is_better")
+            self.assertEqual(endpoint_data["display_encoding"]["Burden error"], "raw_error_value_lower_is_better")
+            phantom_layout = manifest["synthetic_phantom_metrics"]["layout"]
+            self.assertTrue(phantom_layout["same_synthetic_case"])
+            self.assertEqual(phantom_layout["source_grid_pixels"], 120)
+            self.assertGreaterEqual(phantom_layout["rendered_case_pixels"], 180)
+            self.assertGreaterEqual(
+                phantom_layout["rendered_case_pixels"] / phantom_layout["panel_pixels"],
+                0.75,
+            )
+            experiment_paths = manifest["experiment_design_paths"]
+            self.assertTrue(experiment_paths["explicit_local_only_comparator_branch"])
+            self.assertIn("global_to_endpoint", experiment_paths["structural_connectors"])
+            self.assertIn("local_only_to_endpoint", experiment_paths["structural_connectors"])
             expected_render = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/expected_render"
             for slide_number in range(1, 5):
                 png = expected_render / f"slide-{slide_number}.png"
@@ -541,6 +557,11 @@ class PresentationSharedTests(unittest.TestCase):
             with ZipFile(payload["pptx"]) as deck:
                 slide_names = [name for name in deck.namelist() if name.startswith("ppt/slides/slide") and name.endswith(".xml")]
                 media_names = [name for name in deck.namelist() if name.startswith("ppt/media/")]
+                slide_xml = "\n".join(deck.read(name).decode("utf-8") for name in slide_names)
+            self.assertIn("lower-is-better", slide_xml)
+            self.assertIn("lowest for Calibrated", slide_xml)
+            self.assertIn("Local-only comparator", slide_xml)
+            self.assertIn("Endpoint evaluation", slide_xml)
             self.assertEqual(len(slide_names), 4)
             self.assertLess(len(media_names), 5)
 

@@ -1,13 +1,13 @@
 {
   "status": "ok",
-  "renderer": ".cache/tools/squashfs-root/AppRun",
-  "pptx_to_pdf": ".cache/research-group-meeting-regression-current/pdf/research_group_meeting_regression.pdf",
+  "renderer": ".cache/tools/squashfs-root/opt/libreoffice25.8/program/soffice",
+  "pptx_to_pdf": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/pdf/research_group_meeting_regression.pdf",
   "png_count": 4,
   "rendered_pngs": [
-    ".cache/research-group-meeting-regression-current/rendered/slide-1.png",
-    ".cache/research-group-meeting-regression-current/rendered/slide-2.png",
-    ".cache/research-group-meeting-regression-current/rendered/slide-3.png",
-    ".cache/research-group-meeting-regression-current/rendered/slide-4.png"
+    "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-1.png",
+    "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-2.png",
+    "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+    "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-4.png"
   ],
   "returncode": 0
 }

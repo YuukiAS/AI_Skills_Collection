@@ -409,6 +409,10 @@
       "Dice": "Baseline",
       "Lesion recall": "Calibrated",
       "Burden error": "Calibrated"
+    },
+    "burden_error_favorable_direction": "lower_is_better",
+    "display_encoding": {
+      "Burden error": "raw_error_value_lower_is_better"
     }
   },
   "synthetic_phantom_metrics": {
@@ -417,8 +421,24 @@
     "burden_error": -0.026,
     "tp": 1372,
     "fp": 376,
-    "fn": 422
+    "fn": 422,
+    "layout": {
+      "same_synthetic_case": true,
+      "source_grid_pixels": 120,
+      "rendered_case_pixels": 188,
+      "panel_pixels": 235
+    }
   },
-  "pptx": ".cache/research-group-meeting-regression-current/research_group_meeting_regression.pptx",
+  "experiment_design_paths": {
+    "explicit_local_only_comparator_branch": true,
+    "endpoint_gate": "lesion recall + burden error + worst-center gap",
+    "structural_connectors": [
+      "summaries_to_global",
+      "local_scores_to_local_only",
+      "global_to_endpoint",
+      "local_only_to_endpoint"
+    ]
+  },
+  "pptx": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/research_group_meeting_regression.pptx",
   "editable_slide_count": 4
 }

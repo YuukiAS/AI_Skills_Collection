@@ -276,10 +276,11 @@ def draw_endpoint_chart(path: Path) -> dict:
     group_w = 270
     for i, endpoint in enumerate(endpoints):
         gx = x0 + 60 + i * group_w
-        draw.text((gx + 30, 420), endpoint, fill="#17202A", font=font)
+        endpoint_label = endpoint if endpoint != "Burden error" else "Burden error\nlower is better"
+        draw.multiline_text((gx + 30, 420), endpoint_label, fill="#17202A", font=font, spacing=2)
         for j, method in enumerate(methods):
             value, err = ENDPOINT_DATA[endpoint][method]
-            score = 1 - value if endpoint == "Burden error" else value
+            score = value
             x = gx + j * (bar_w + 12)
             y = y0 - int(score * 300)
             draw.rectangle((x, y, x + bar_w, y0), fill=colors[method])
@@ -296,7 +297,12 @@ def draw_endpoint_chart(path: Path) -> dict:
         endpoint: min(values, key=lambda key: values[key][0]) if endpoint == "Burden error" else max(values, key=lambda key: values[key][0])
         for endpoint, values in ENDPOINT_DATA.items()
     }
-    return {"data": ENDPOINT_DATA, "best_by_endpoint": best_by_endpoint}
+    return {
+        "data": ENDPOINT_DATA,
+        "best_by_endpoint": best_by_endpoint,
+        "burden_error_favorable_direction": "lower_is_better",
+        "display_encoding": {"Burden error": "raw_error_value_lower_is_better"},
+    }
 
 
 def inside_ellipse(x: int, y: int, cx: int, cy: int, rx: int, ry: int) -> bool:
@@ -309,7 +315,9 @@ def draw_phantom(path: Path) -> dict:
     draw = ImageDraw.Draw(img)
     font = load_font(17)
     small = load_font(13)
-    panel_w = 230
+    panel_w = 235
+    source_size = 120
+    rendered_case_size = 188
     labels = ["Synthetic image", "GT mask", "Prediction", "FP/FN overlay"]
     gt: set[tuple[int, int]] = set()
     pred: set[tuple[int, int]] = set()
@@ -326,40 +334,55 @@ def draw_phantom(path: Path) -> dict:
     recall = tp / len(gt)
     burden_error = (len(pred) - len(gt)) / len(gt)
     for i, label in enumerate(labels):
-        xoff = 35 + i * 250
-        draw.text((xoff + 35, 24), label, fill="#17202A", font=font)
-        draw.rectangle((xoff, 58, xoff + panel_w, 288), outline="#C6CCD6", width=2)
-        for yy in range(120):
-            for xx in range(120):
-                px0 = xoff + 55 + xx
-                py0 = 100 + yy
-                base = int(210 - 75 * math.exp(-(((xx - 60) ** 2 + (yy - 64) ** 2) / 1900)))
+        xoff = 25 + i * 250
+        draw.text((xoff + 32, 24), label, fill="#17202A", font=font)
+        draw.rectangle((xoff, 58, xoff + panel_w, 293), outline="#C6CCD6", width=2)
+        for yy in range(rendered_case_size):
+            for xx in range(rendered_case_size):
+                source_x = min(source_size - 1, int(xx * source_size / rendered_case_size))
+                source_y = min(source_size - 1, int(yy * source_size / rendered_case_size))
+                px0 = xoff + 24 + xx
+                py0 = 82 + yy
+                base = int(210 - 75 * math.exp(-(((source_x - 60) ** 2 + (source_y - 64) ** 2) / 1900)))
                 if i == 0:
                     img.putpixel((px0, py0), (base, base, base))
                 elif i == 1:
-                    img.putpixel((px0, py0), (15, 118, 110) if (xx, yy) in gt else (238, 242, 246))
+                    img.putpixel((px0, py0), (15, 118, 110) if (source_x, source_y) in gt else (238, 242, 246))
                 elif i == 2:
-                    img.putpixel((px0, py0), (154, 106, 22) if (xx, yy) in pred else (238, 242, 246))
+                    img.putpixel((px0, py0), (154, 106, 22) if (source_x, source_y) in pred else (238, 242, 246))
                 else:
-                    if (xx, yy) in gt & pred:
+                    if (source_x, source_y) in gt & pred:
                         img.putpixel((px0, py0), (42, 124, 84))
-                    elif (xx, yy) in pred - gt:
+                    elif (source_x, source_y) in pred - gt:
                         img.putpixel((px0, py0), (180, 58, 52))
-                    elif (xx, yy) in gt - pred:
+                    elif (source_x, source_y) in gt - pred:
                         img.putpixel((px0, py0), (31, 78, 121))
                     else:
                         img.putpixel((px0, py0), (238, 242, 246))
     draw.text((55, 330), f"Dice={dice:.2f}    lesion recall={recall:.2f}    burden error={burden_error:+.1%}", fill="#17202A", font=font)
     draw.text((55, 365), f"TP pixels={tp}, FP={fp}, FN={fn}; failure mechanism: small false-positive island plus shifted lesion boundary.", fill="#606977", font=small)
     img.save(path)
-    return {"dice": round(dice, 3), "lesion_recall": round(recall, 3), "burden_error": round(burden_error, 3), "tp": tp, "fp": fp, "fn": fn}
+    return {
+        "dice": round(dice, 3),
+        "lesion_recall": round(recall, 3),
+        "burden_error": round(burden_error, 3),
+        "tp": tp,
+        "fp": fp,
+        "fn": fn,
+        "layout": {
+            "same_synthetic_case": True,
+            "source_grid_pixels": source_size,
+            "rendered_case_pixels": rendered_case_size,
+            "panel_pixels": panel_w,
+        },
+    }
 
 
 def draw_result_page(slide, assets: Path, manifest: dict, refs: list[str]):
     chart_path = assets / "endpoint_ranking_chart.png"
     manifest["synthetic_endpoint_data"] = draw_endpoint_chart(chart_path)
     slide.shapes.add_picture(str(chart_path), inch(0.78), inch(1.42), width=inch(7.8))
-    rect(slide, "Interpretation\nCalibrated wins recall and burden error;\nBaseline wins Dice only.", 9.0, 1.75, 3.25, 1.3, "soft_teal", "teal", 12.2, True)
+    rect(slide, "Interpretation\nCalibrated wins recall; burden error is lower-is-better and lowest for Calibrated.\nBaseline wins Dice only.", 9.0, 1.62, 3.25, 1.55, "soft_teal", "teal", 11.5, True)
     rect(slide, "Meeting decision\nFreeze endpoint priority before ranking methods.", 9.0, 3.65, 3.25, 1.0, "soft_gold", "gold", 12.2, True)
     add_text(slide, reference_footer(refs, "result/interval query"), 0.95, 6.55, 11.2, 0.35, 8.4, "muted")
 
@@ -377,12 +400,21 @@ def draw_experiment_page(slide, assets: Path, manifest: dict, refs: list[str]):
         rect(slide, f"{site}\nlocal image + local label\nexperimental unit: lesion-case", 0.75, 1.45 + i * 1.05, 2.75, 0.78, "soft_teal", "teal", 10.6, True)
         rect(slide, "local estimator\ncalibration score", 3.85, 1.5 + i * 1.05, 1.65, 0.65, "soft_blue", "blue", 10.3, True)
         line(slide, 3.55, 1.84 + i * 1.05, 3.82, 1.84 + i * 1.05, "purple", 1.6)
-        line(slide, 5.55, 1.84 + i * 1.05, 6.3, 3.0, "purple", 1.4)
-    rect(slide, "Transmitted\nlikelihood / score / summary update\n(raw images stay local)", 6.25, 2.38, 2.4, 1.25, "soft_gold", "gold", 11.2, True)
-    line(slide, 8.72, 3.0, 9.18, 3.0, "purple", 1.8)
-    rect(slide, "Global estimator\ncompare local-only vs summary-sharing", 9.2, 2.08, 3.2, 0.95, "soft_blue", "blue", 11.4, True)
-    rect(slide, "Success endpoint\nlesion recall + burden error\nworst-center gap < 5%", 9.2, 3.78, 3.2, 1.05, "soft_red", "red", 11.4, True)
-    add_text(slide, "Comparator: local-only model. What moves: score summaries and likelihood updates. What stays local: images, labels, case identifiers.", 0.95, 5.75, 11.3, 0.42, 12.2, "ink", True)
+        line(slide, 5.55, 1.84 + i * 1.05, 6.12, 2.92, "purple", 1.4)
+        line(slide, 5.55, 1.84 + i * 1.05, 8.48, 3.78, "muted", 1.1)
+    rect(slide, "Transmitted\nlikelihood / score / summary update\n(raw images stay local)", 6.1, 2.38, 2.05, 1.25, "soft_gold", "gold", 10.7, True)
+    line(slide, 8.2, 2.92, 8.48, 2.25, "purple", 1.8)
+    rect(slide, "Global estimator\nsummary-sharing analysis", 8.52, 1.82, 2.05, 0.86, "soft_blue", "blue", 10.7, True)
+    rect(slide, "Local-only comparator\nno shared summaries", 8.52, 3.32, 2.05, 0.86, "soft_teal", "teal", 10.7, True)
+    rect(slide, "Endpoint evaluation\nlesion recall + burden error\nworst-center gap < 5%", 10.95, 2.55, 1.95, 1.15, "soft_red", "red", 10.4, True)
+    line(slide, 10.62, 2.25, 10.92, 3.0, "purple", 1.8)
+    line(slide, 10.62, 3.78, 10.92, 3.28, "purple", 1.8)
+    add_text(slide, "Comparator path: local-only uses the same local scores without summary sharing; both branches enter the same endpoint gate.", 0.95, 5.75, 11.3, 0.42, 12.2, "ink", True)
+    manifest["experiment_design_paths"] = {
+        "explicit_local_only_comparator_branch": True,
+        "endpoint_gate": "lesion recall + burden error + worst-center gap",
+        "structural_connectors": ["summaries_to_global", "local_scores_to_local_only", "global_to_endpoint", "local_only_to_endpoint"],
+    }
     add_text(slide, reference_footer(refs, "method/design query"), 0.95, 6.55, 11.2, 0.35, 8.4, "muted")
 
 
@@ -454,6 +486,8 @@ def find_renderer() -> str | None:
             return found
     tools = Path(".cache/tools")
     if tools.exists():
+        for extracted_soffice in sorted(tools.glob("squashfs-root/opt/libreoffice*/program/soffice")):
+            return str(extracted_soffice)
         extracted = tools / "squashfs-root" / "AppRun"
         if extracted.exists():
             return str(extracted)

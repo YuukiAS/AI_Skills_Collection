@@ -3,20 +3,20 @@
   "identity_bindings": {
     "adapter_identity": "012_presentation_visual_adapter",
     "bridge_kit_commit": "f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e",
-    "evidence_manifest_sha256": "ed42abe283837167a94e73d34b6b723bb0fc127159b5a5d2f67c2e7022a0d3ba",
+    "evidence_manifest_sha256": "1cdb89fecce9821b9f19fa03aab6f017781f31ef3cfdcbdbbca54d1be1ec4780",
     "input_png_sha256_by_slide": {
-      "slide_1": "94a8ef8d40471ee5675066cc137a2e0f9ea663df39b1f6660fc53d73967e5a88",
-      "slide_2": "44ebe447b025f86b307c9b961ced7102720378c096f7a013966c9e062eef09c3",
-      "slide_3": "bc92d7263823f05f4d3b0628b60a894c983e93a35d5fc9d5226d720f40863227",
-      "slide_4": "4ab75ebf472cbee18808dfc7029d78a979e11e180374a16d2e9c1db18a04ff1e"
+      "slide_1": "1791b52c95182d34e7b951eeb28e1b2f19531df5a5aa12de06c8b6730abd5bd2",
+      "slide_2": "00f194849213f180565b87051a2ad3a87d867382ae835e5f7d6900a0a184b7db",
+      "slide_3": "21d002f3756646098d2ec53fa5ce6542ee1c9db4afe5e7481c94df064b3ff116",
+      "slide_4": "77c025dbe17ea5c48b03cb9db2052e496f6bc2cdc28b9d9d76771d2ff21aa92e"
     },
     "legacy_external_visual_implementation_commit": "ff8ff1ddb48cb9c511b3e3fecc7f0c4964adab46",
     "legacy_pages_transport_commit": "38d7bbc137fb8bbaa13d830bbfb1907be32066c6",
     "legacy_task_key": "011_round_handoff",
-    "mechanical_review_sha256": "6a29b2a80c740382cc0abf4da678ce1a358de27ba25ba84c1c6f03dd7f3859d7",
-    "pdf_sha256": "ebb0cec2e4009a784989c4166a8dc335d8705b1c41f9ce6c3cba72644e888f0b",
-    "pptx_sha256": "fcf289996cd3cd659f854962b99f26719e457758d22fe70a4cb1b7408bb8944a",
-    "render_status_sha256": "0e7e1b0b6614ceaa1bfe1bacaa53104e326013088e2c70238215ae118abe90a5",
+    "mechanical_review_sha256": "6368086db4bb9fef9e2fbfb9478d4556e5db2f3989afe12a84f340319cf47973",
+    "pdf_sha256": "2ee5e6b2d07e8c1583bee35e6889c6ffe98d5d74ddd888025b8c289f32f760fd",
+    "pptx_sha256": "2db7476d441b8f169384ce8d0f664723c2f3b48f6cde4e44c36c646bcf4e549b",
+    "render_status_sha256": "e94cc1c38bd3e04d26c8c31a17baf41eb17b18adcb2eda2b15c9fba70fcd5702",
     "source_academic_visual_decision": "NOT_ASSESSED",
     "source_dir": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source",
     "source_mechanical_status": "MECHANICAL_PASS",
@@ -28,28 +28,28 @@
       "logical_id": "slide_1",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-1.png",
-      "sha256": "94a8ef8d40471ee5675066cc137a2e0f9ea663df39b1f6660fc53d73967e5a88"
+      "sha256": "1791b52c95182d34e7b951eeb28e1b2f19531df5a5aa12de06c8b6730abd5bd2"
     },
     {
       "description": "Slide 2: Average Dice Can Hide the Hard Case | archetype=FAILURE_CASE | expected_objects=synthetic image, GT mask, prediction mask, FP/FN overlay, case metrics",
       "logical_id": "slide_2",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-2.png",
-      "sha256": "44ebe447b025f86b307c9b961ced7102720378c096f7a013966c9e062eef09c3"
+      "sha256": "00f194849213f180565b87051a2ad3a87d867382ae835e5f7d6900a0a184b7db"
     },
     {
       "description": "Slide 3: Limited-Information Multi-Center Experiment | archetype=EXPERIMENT_DESIGN | expected_objects=centers, local image/label, local estimator, transmitted summary, global estimator, endpoint evaluation",
       "logical_id": "slide_3",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-3.png",
-      "sha256": "bc92d7263823f05f4d3b0628b60a894c983e93a35d5fc9d5226d720f40863227"
+      "sha256": "21d002f3756646098d2ec53fa5ce6542ee1c9db4afe5e7481c94df064b3ff116"
     },
     {
       "description": "Slide 4: AI Phenotype Error Changes Inference | archetype=STATISTICAL_MODEL | expected_objects=estimand, observed AI phenotype, measurement error, validation subset, inference target",
       "logical_id": "slide_4",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-4.png",
-      "sha256": "4ab75ebf472cbee18808dfc7029d78a979e11e180374a16d2e9c1db18a04ff1e"
+      "sha256": "77c025dbe17ea5c48b03cb9db2052e496f6bc2cdc28b9d9d76771d2ff21aa92e"
     }
   ],
   "privacy_policy": "PUBLIC_SAFE_ONLY",
