@@ -1,14 +1,16 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 015_presentation_terra_blocker_repair
-implementation_commit: 7dc892715ce91fb2d59f97036d25ec0bbec0548d
+implementation_commit: e7a398d8f6bd194da9430b1fe93dfd9a29f03648
 ---
 
 # 015 Presentation Terra Blocker Repair - Executor Result
 
-## Implementation commit
+## Latest implementation commit
 
-`7dc892715ce91fb2d59f97036d25ec0bbec0548d`
+`e7a398d8f6bd194da9430b1fe93dfd9a29f03648`
+
+Initial implementation commit: `7dc892715ce91fb2d59f97036d25ec0bbec0548d`.
 
 ## What changed
 
@@ -28,8 +30,8 @@ Old canonical visual-input SHA values from `results/012_presentation_visual_adap
 
 New canonical visual-input SHA values in `results/012_presentation_visual_adapter/visual_review/visual_inputs.json`:
 
-- slide_1: `1791b52c95182d34e7b951eeb28e1b2f19531df5a5aa12de06c8b6730abd5bd2`
-- slide_2: `00f194849213f180565b87051a2ad3a87d867382ae835e5f7d6900a0a184b7db`
+- slide_1: `6ea97abb12e6bde629421731fa1ba0fd4b22650aeb0b8d9d6ce3ad370d523d4b`
+- slide_2: `8b118fb4d926eaac90cafbb9e3a2729416e5fd60fdfe759ded0237b7a86ca6f6`
 - slide_3: `21d002f3756646098d2ec53fa5ce6542ee1c9db4afe5e7481c94df064b3ff116`
 - slide_4: `77c025dbe17ea5c48b03cb9db2052e496f6bc2cdc28b9d9d76771d2ff21aa92e`
 
@@ -39,6 +41,15 @@ The render source is the real editable PPTX chain:
 
 `RENDER_STATUS.json` reports `status=ok`, `png_count=4`, `returncode=0`.
 `MECHANICAL_VISUAL_REVIEW.json` reports `status=MECHANICAL_PASS`, `rendered_png_count=4`, and `academic_visual_decision=NOT_ASSESSED`.
+
+## Repair 1
+
+Addressed `REVIEW_1.md` findings without changing the accepted elements:
+
+- `F-015-01`: added a visible slide 1 evidence-boundary label next to the result figure: `illustrative synthetic results - not completed validation`; the interpretation now says `In this synthetic example`.
+- `F-015-02`: added a slide 2 overlay legend with swatches and labels: `green = TP/overlap`, `red = FP`, `blue = FN`.
+- Kept slide 1 endpoint values/ranking, slide 2 synthetic case/metrics/crop geometry, slide 3, slide 4, and reference retrieval unchanged.
+- Regenerated the real editable PPTX -> PDF -> PNG evidence and AI Bridge visual input manifest for the new identity.
 
 ## Validation
 
