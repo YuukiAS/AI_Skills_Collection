@@ -18,22 +18,22 @@
   "render_status": {
     "status": "ok",
     "renderer": ".cache/tools/squashfs-root/opt/libreoffice25.8/program/soffice",
-    "pptx_to_pdf": ".cache/016-statistical-benchmark-source/pdf/statistical_method_group_meeting_benchmark.pdf",
+    "pptx_to_pdf": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/pdf/statistical_method_group_meeting_benchmark.pdf",
     "png_count": 5,
     "rendered_pngs": [
-      ".cache/016-statistical-benchmark-source/rendered/slide-1.png",
-      ".cache/016-statistical-benchmark-source/rendered/slide-2.png",
-      ".cache/016-statistical-benchmark-source/rendered/slide-3.png",
-      ".cache/016-statistical-benchmark-source/rendered/slide-4.png",
-      ".cache/016-statistical-benchmark-source/rendered/slide-5.png"
+      "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-1.png",
+      "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-2.png",
+      "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+      "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-4.png",
+      "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-5.png"
     ],
     "returncode": 0
   },
   "pptx_object_summary": {
     "editable_slide_count": 5,
-    "media_count": 2,
-    "shape_count": 71,
-    "picture_count": 2
+    "media_count": 7,
+    "shape_count": 49,
+    "picture_count": 7
   },
   "slide_reviews": [
     {
@@ -51,19 +51,19 @@
         "required_object_contract_present": "PASS"
       },
       "metrics": {
-        "path": ".cache/016-statistical-benchmark-source/rendered/slide-1.png",
+        "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-1.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.7186,
-        "contrast_range": 225,
-        "dominant_object_area": 0.895,
+        "blank_area_ratio": 0.0005,
+        "contrast_range": 251,
+        "dominant_object_area": 1.0,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.052,
+        "text_density_proxy": 0.0447,
         "content_bbox": [
           0,
           0,
           2133,
-          1073
+          1199
         ]
       },
       "reference_ids": [
@@ -98,19 +98,19 @@
         "required_object_contract_present": "PASS"
       },
       "metrics": {
-        "path": ".cache/016-statistical-benchmark-source/rendered/slide-2.png",
+        "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-2.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.8008,
-        "contrast_range": 225,
-        "dominant_object_area": 0.895,
+        "blank_area_ratio": 0.0005,
+        "contrast_range": 250,
+        "dominant_object_area": 1.0,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0447,
+        "text_density_proxy": 0.0407,
         "content_bbox": [
           0,
           0,
           2133,
-          1073
+          1199
         ]
       },
       "reference_ids": [
@@ -144,19 +144,19 @@
         "required_object_contract_present": "PASS"
       },
       "metrics": {
-        "path": ".cache/016-statistical-benchmark-source/rendered/slide-3.png",
+        "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-3.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.8068,
+        "blank_area_ratio": 0.1094,
         "contrast_range": 225,
-        "dominant_object_area": 0.895,
+        "dominant_object_area": 1.0,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0355,
+        "text_density_proxy": 0.042,
         "content_bbox": [
           0,
           0,
           2133,
-          1073
+          1199
         ]
       },
       "reference_ids": [
@@ -190,19 +190,19 @@
         "required_object_contract_present": "PASS"
       },
       "metrics": {
-        "path": ".cache/016-statistical-benchmark-source/rendered/slide-4.png",
+        "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-4.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.8409,
+        "blank_area_ratio": 0.5374,
         "contrast_range": 225,
-        "dominant_object_area": 0.905,
+        "dominant_object_area": 1.0,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.0516,
+        "text_density_proxy": 0.0421,
         "content_bbox": [
           0,
           0,
           2133,
-          1085
+          1199
         ]
       },
       "reference_ids": [
@@ -236,19 +236,19 @@
         "required_object_contract_present": "PASS"
       },
       "metrics": {
-        "path": ".cache/016-statistical-benchmark-source/rendered/slide-5.png",
+        "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-5.png",
         "width": 2134,
         "height": 1200,
-        "blank_area_ratio": 0.7884,
+        "blank_area_ratio": 0.2659,
         "contrast_range": 225,
-        "dominant_object_area": 0.905,
+        "dominant_object_area": 1.0,
         "edge_margin_px": 0,
-        "text_density_proxy": 0.049,
+        "text_density_proxy": 0.0508,
         "content_bbox": [
           0,
           0,
           2133,
-          1085
+          1199
         ]
       },
       "reference_ids": [

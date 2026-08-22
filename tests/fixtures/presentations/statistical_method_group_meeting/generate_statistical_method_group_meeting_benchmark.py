@@ -15,9 +15,15 @@ import sys
 from pathlib import Path
 from zipfile import ZipFile
 
+os.environ.setdefault("MPLCONFIGDIR", "/tmp/ai-skills-matplotlib")
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw, ImageFont
 from pptx import Presentation
 from pptx.dml.color import RGBColor
+from pptx.enum.dml import MSO_LINE_DASH_STYLE
 from pptx.enum.shapes import MSO_CONNECTOR, MSO_SHAPE
 from pptx.enum.text import PP_ALIGN
 from pptx.oxml.xmlchemy import OxmlElement
@@ -36,7 +42,7 @@ ICC_GRID = [0.0, 0.1, 0.3, 0.5]
 IMBALANCE_GRID = ["balanced", "imbalanced"]
 BETA1 = 0.25
 P = {
-    "bg": "F7F7F9",
+    "bg": "F1F2F4",
     "ink": "17202A",
     "muted": "606977",
     "line": "C6CCD6",
@@ -46,6 +52,7 @@ P = {
     "gold": "9A6A16",
     "red": "A33A34",
     "green": "2A7C54",
+    "white": "FFFFFF",
     "soft_teal": "E1F4F1",
     "soft_blue": "E5EEF8",
     "soft_gold": "FBF1D6",
@@ -135,14 +142,23 @@ def add_text(slide, text: str, x: float, y: float, w: float, h: float, size: flo
     return box
 
 
-def rect(slide, text: str, x: float, y: float, w: float, h: float, fill: str = "soft_blue", color: str = "ink", size: float = 12, bold: bool = False):
+def rect(slide, text: str, x: float, y: float, w: float, h: float, fill: str = "white", color: str = "ink", size: float = 12, bold: bool = False, line: str = "line"):
     shape = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, inch(x), inch(y), inch(w), inch(h))
     shape.fill.solid()
     shape.fill.fore_color.rgb = rgb(fill)
-    shape.line.color.rgb = rgb("line")
+    shape.line.color.rgb = rgb(line)
     shape.line.width = Pt(1)
     add_text(slide, text, x + 0.06, y + 0.05, w - 0.12, h - 0.1, size, color, bold, PP_ALIGN.CENTER)
     return shape
+
+
+def add_rule(slide, x1: float, y1: float, x2: float, y2: float, color: str = "line", width: float = 1.1, dash: bool = False):
+    connector = slide.shapes.add_connector(MSO_CONNECTOR.STRAIGHT, inch(x1), inch(y1), inch(x2), inch(y2))
+    connector.line.color.rgb = rgb(color)
+    connector.line.width = Pt(width)
+    if dash:
+        connector.line.dash_style = MSO_LINE_DASH_STYLE.DASH
+    return connector
 
 
 def arrow(slide, x1: float, y1: float, x2: float, y2: float, color: str = "purple", width: float = 1.7):
@@ -173,6 +189,33 @@ def load_font(size: int):
         if Path(path).exists():
             return ImageFont.truetype(path, size)
     return ImageFont.load_default()
+
+
+def render_math_asset(path: Path, expression: str, fontsize: int = 36, color: str = "ink") -> dict[str, object]:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fig = plt.figure(figsize=(1, 1), dpi=360)
+    fig.patch.set_alpha(0)
+    text = fig.text(0.0, 0.5, expression, fontsize=fontsize, color=hex_color(color), va="center", ha="left")
+    fig.canvas.draw()
+    bbox = text.get_window_extent(renderer=fig.canvas.get_renderer()).expanded(1.08, 1.35)
+    fig.savefig(path, transparent=True, bbox_inches=bbox.transformed(fig.dpi_scale_trans.inverted()), pad_inches=0.04)
+    plt.close(fig)
+    with Image.open(path) as image:
+        width, height = image.size
+    return {
+        "path": str(path),
+        "source": expression,
+        "format": "matplotlib_mathtext_png_transparent",
+        "dpi": 360,
+        "pixel_width": width,
+        "pixel_height": height,
+    }
+
+
+def add_math(slide, assets: Path, manifest: dict, key: str, expression: str, x: float, y: float, w: float, fontsize: int = 36, color: str = "ink"):
+    asset_path = assets / f"{key}.png"
+    manifest.setdefault("math_assets", {})[key] = render_math_asset(asset_path, expression, fontsize=fontsize, color=color)
+    return slide.shapes.add_picture(str(asset_path), inch(x), inch(y), width=inch(w))
 
 
 def tokens(value: str) -> set[str]:
@@ -243,6 +286,18 @@ def retrieve_references(archetype: str) -> dict[str, object]:
         "selected_ids": [row["reference_id"] for _, _, _, row, _ in selected_rows],
         "source_tiers": {row["reference_id"]: row["source_tier"] for _, _, _, row, _ in selected_rows},
         "ranking_relevance_reason": {row["reference_id"]: "; ".join(reasons) for _, _, _, row, reasons in selected_rows},
+        "selected_page_lessons": {
+            row["reference_id"]: {
+                "primary_object": row["scientific_object"],
+                "page_function": row["page_function"],
+                "evidence_type": row["evidence_type"],
+                "information_density": row["approximate_figure_text_ratio"],
+                "annotation_style": row["short_page_specific_observation"],
+                "useful_lesson": row["what_to_learn"],
+                "not_copied": row["what_not_to_copy"],
+            }
+            for _, _, _, row, _ in selected_rows
+        },
         "organization_lesson": query["organization_lesson"],
         "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied.",
     }
@@ -250,6 +305,76 @@ def retrieve_references(archetype: str) -> dict[str, object]:
 
 def reference_footer(refs: list[str], purpose: str) -> str:
     return f"Reference retrieval: {purpose} selected inspected pages {', '.join(refs)}; trace in EVIDENCE_MANIFEST; style not copied."
+
+
+REFERENCE_DESIGN_DECISIONS = {
+    "STATISTICAL_MODEL": {
+        "adopted_design_decisions": [
+            "Use the DGP formula as the dominant object rather than prose cards.",
+            "Ground notation adjacent to the displayed formula with short semantic labels.",
+            "Use containment and spacing for additive components instead of causal arrows.",
+        ],
+        "deliberately_not_adopted": [
+            "Do not copy any source deck styling or full-slide imagery.",
+            "Do not use reference IDs or retrieval traces as slide footer content.",
+        ],
+    },
+    "ESTIMATOR": {
+        "adopted_design_decisions": [
+            "Make the sandwich covariance formula the largest object on the page.",
+            "Annotate the middle score-aggregation term directly beside the formula.",
+            "Keep the naive comparator compact so it supports rather than competes with the main formula.",
+        ],
+        "deliberately_not_adopted": [
+            "Do not turn the variance comparison into three pastel explanation cards.",
+            "Do not show source-like ASCII formula strings to the audience.",
+        ],
+    },
+    "SIMULATION_DESIGN": {
+        "adopted_design_decisions": [
+            "Keep one left-to-right experimental path from DGP knobs to endpoints.",
+            "Use only scientific operations as nodes and keep branch labels short.",
+            "Use a restrained neutral layout with one accent color for the cluster-robust branch.",
+        ],
+        "deliberately_not_adopted": [
+            "Do not show diagram QA contracts or reading instructions on the slide.",
+            "Do not use decorative workflow boxes when a node is not a real scientific operation.",
+        ],
+    },
+    "RESULT_FIGURE": {
+        "adopted_design_decisions": [
+            "Let the coverage plot occupy most of the slide area.",
+            "Place uncertainty and the nominal target directly in the figure grammar.",
+            "Use direct annotation at the small-G stress point instead of a separate reading card.",
+        ],
+        "deliberately_not_adopted": [
+            "Do not move interpretation into pastel side cards.",
+            "Do not describe the result as a general theorem.",
+        ],
+    },
+    "NEGATIVE_RESULT": {
+        "adopted_design_decisions": [
+            "Use the same quantitative evidence grammar as the main result page.",
+            "Make the undercoverage point visible and annotated in the chart.",
+            "Keep the planned CR2 / wild-bootstrap experiment as a small secondary statement.",
+        ],
+        "deliberately_not_adopted": [
+            "Do not create separate negative-result, mechanism, and next-experiment cards.",
+            "Do not make planned methods look like completed evidence.",
+        ],
+    },
+}
+
+
+def reference_design_audit(archetype: str, retrieval: dict[str, object]) -> dict[str, object]:
+    decisions = REFERENCE_DESIGN_DECISIONS[archetype]
+    return {
+        "selected_reference_ids": retrieval["selected_ids"],
+        "page_specific_lessons": retrieval["selected_page_lessons"],
+        "adopted_design_decisions": decisions["adopted_design_decisions"],
+        "deliberately_not_adopted": decisions["deliberately_not_adopted"],
+        "current_slide_application": retrieval["organization_lesson"],
+    }
 
 
 def invert_2x2(a: float, b: float, c: float, d: float) -> tuple[tuple[float, float], tuple[float, float]]:
@@ -397,126 +522,226 @@ def run_simulation(out_dir: Path) -> dict[str, object]:
 
 
 def draw_coverage_plot(path: Path, summary: dict[str, object]) -> None:
-    img = Image.new("RGB", (1180, 610), "white")
+    img = Image.new("RGB", (1480, 700), "white")
     draw = ImageDraw.Draw(img)
-    font = load_font(18)
-    small = load_font(13)
-    title = load_font(22)
-    draw.text((48, 22), "Imbalanced clusters: 95% coverage by ICC", fill=hex_color("ink"), font=title)
-    panels = [(8, 60), (20, 430), (50, 800)]
+    font = load_font(21)
+    small = load_font(16)
+    tiny = load_font(14)
+    title = load_font(27)
+    draw.text((54, 24), "Imbalanced clusters: 95% interval coverage by ICC", fill=hex_color("ink"), font=title)
+    panels = [(8, 92), (20, 555), (50, 1018)]
     rows = summary["rows"]
     method_colors = {"naive_iid_ols_z": hex_color("red"), "cluster_robust_z": hex_color("teal")}
     for g_count, x0 in panels:
-        y0 = 505
-        plot_w = 300
-        plot_h = 355
-        draw.rectangle((x0, 105, x0 + plot_w, y0), outline=hex_color("line"), width=2)
-        draw.text((x0 + 105, 78), f"G={g_count}", fill=hex_color("ink"), font=font)
+        y0 = 575
+        plot_w = 360
+        plot_h = 410
+        draw.rectangle((x0, 122, x0 + plot_w, y0), outline=hex_color("line"), width=2)
+        draw.text((x0 + 135, 88), f"G={g_count}", fill=hex_color("ink"), font=font)
         nominal_y = y0 - int((0.95 - 0.45) / 0.55 * plot_h)
         draw.line((x0, nominal_y, x0 + plot_w, nominal_y), fill=hex_color("gold"), width=3)
-        draw.text((x0 + 210, nominal_y - 18), "nominal 0.95", fill=hex_color("gold"), font=small)
+        draw.text((x0 + 230, nominal_y - 25), "nominal 0.95", fill=hex_color("gold"), font=tiny)
         for tick in [0.5, 0.7, 0.9, 1.0]:
             y = y0 - int((tick - 0.45) / 0.55 * plot_h)
             draw.line((x0 - 4, y, x0, y), fill=hex_color("muted"), width=1)
-            draw.text((x0 - 38, y - 8), f"{tick:.1f}", fill=hex_color("muted"), font=small)
+            draw.text((x0 - 48, y - 9), f"{tick:.1f}", fill=hex_color("muted"), font=tiny)
         for i, rho in enumerate(ICC_GRID):
-            x = x0 + 35 + i * 75
+            x = x0 + 44 + i * 90
             draw.line((x, y0, x, y0 + 5), fill=hex_color("muted"), width=1)
-            draw.text((x - 10, y0 + 12), f"{rho:.1f}", fill=hex_color("muted"), font=small)
+            draw.text((x - 12, y0 + 14), f"{rho:.1f}", fill=hex_color("muted"), font=tiny)
         for method in ["naive_iid_ols_z", "cluster_robust_z"]:
             points = []
             for i, rho in enumerate(ICC_GRID):
                 row = next(item for item in rows if item["G"] == g_count and item["rho"] == rho and item["imbalance"] == "imbalanced")
                 value = row["methods"][method]["coverage"]
                 mc = row["methods"][method]["mc_se"]
-                x = x0 + 35 + i * 75
+                x = x0 + 44 + i * 90
                 y = y0 - int((value - 0.45) / 0.55 * plot_h)
                 lo = y0 - int((value - 1.96 * mc - 0.45) / 0.55 * plot_h)
                 hi = y0 - int((value + 1.96 * mc - 0.45) / 0.55 * plot_h)
                 draw.line((x, hi, x, lo), fill=method_colors[method], width=2)
-                draw.ellipse((x - 5, y - 5, x + 5, y + 5), fill=method_colors[method])
+                draw.ellipse((x - 7, y - 7, x + 7, y + 7), fill=method_colors[method])
                 points.append((x, y))
-            draw.line(points, fill=method_colors[method], width=3)
-    draw.rectangle((880, 24, 902, 42), fill=method_colors["naive_iid_ols_z"])
-    draw.text((910, 22), "naive iid OLS z", fill=hex_color("ink"), font=small)
-    draw.rectangle((880, 50, 902, 68), fill=method_colors["cluster_robust_z"])
-    draw.text((910, 48), "cluster-robust z", fill=hex_color("ink"), font=small)
-    draw.text((500, 565), "ICC rho; vertical bars = Monte Carlo +/- 1.96 SE", fill=hex_color("muted"), font=small)
+            draw.line(points, fill=method_colors[method], width=4)
+    stress = summary["negative_result"]
+    x_arrow = 92 + 44 + 3 * 90
+    y_arrow = 575 - int((stress["cluster_robust_coverage"] - 0.45) / 0.55 * 410)
+    draw.line((x_arrow + 52, y_arrow - 88, x_arrow + 10, y_arrow - 12), fill=hex_color("purple"), width=3)
+    draw.polygon([(x_arrow + 10, y_arrow - 12), (x_arrow + 22, y_arrow - 16), (x_arrow + 15, y_arrow - 26)], fill=hex_color("purple"))
+    draw.text((x_arrow + 58, y_arrow - 112), "small-G stress", fill=hex_color("purple"), font=small)
+    draw.text((x_arrow + 58, y_arrow - 88), f"cluster={stress['cluster_robust_coverage']:.2f}", fill=hex_color("purple"), font=tiny)
+    draw.rectangle((1115, 28, 1142, 49), fill=method_colors["naive_iid_ols_z"])
+    draw.text((1152, 25), "naive iid OLS z", fill=hex_color("ink"), font=small)
+    draw.rectangle((1115, 60, 1142, 81), fill=method_colors["cluster_robust_z"])
+    draw.text((1152, 57), "cluster-robust z", fill=hex_color("ink"), font=small)
     img.save(path)
 
 
 def draw_negative_plot(path: Path, summary: dict[str, object]) -> None:
-    img = Image.new("RGB", (980, 430), "white")
+    img = Image.new("RGB", (1180, 520), "white")
     draw = ImageDraw.Draw(img)
-    font = load_font(18)
-    small = load_font(13)
-    title = load_font(22)
-    draw.text((40, 24), "Stress regime: G=8, imbalanced clusters", fill=hex_color("ink"), font=title)
-    x0, y0 = 95, 350
-    draw.line((x0, 70, x0, y0), fill=hex_color("muted"), width=2)
-    draw.line((x0, y0, 900, y0), fill=hex_color("muted"), width=2)
-    nominal_y = y0 - int((0.95 - 0.45) / 0.55 * 260)
-    draw.line((x0, nominal_y, 900, nominal_y), fill=hex_color("gold"), width=3)
-    draw.text((760, nominal_y - 22), "target 0.95", fill=hex_color("gold"), font=small)
+    font = load_font(22)
+    small = load_font(16)
+    title = load_font(27)
+    draw.text((46, 28), "G=8 with imbalanced clusters: coverage by ICC", fill=hex_color("ink"), font=title)
+    x0, y0 = 112, 425
+    draw.line((x0, 88, x0, y0), fill=hex_color("muted"), width=2)
+    draw.line((x0, y0, 1060, y0), fill=hex_color("muted"), width=2)
+    nominal_y = y0 - int((0.95 - 0.45) / 0.55 * 310)
+    draw.line((x0, nominal_y, 1060, nominal_y), fill=hex_color("gold"), width=3)
+    draw.text((900, nominal_y - 28), "target 0.95", fill=hex_color("gold"), font=small)
     rows = summary["rows"]
     colors = {"naive_iid_ols_z": hex_color("red"), "cluster_robust_z": hex_color("teal")}
     for i, rho in enumerate(ICC_GRID):
         row = next(item for item in rows if item["G"] == 8 and item["rho"] == rho and item["imbalance"] == "imbalanced")
-        cx = x0 + 90 + i * 180
+        cx = x0 + 105 + i * 210
         for j, method in enumerate(["naive_iid_ols_z", "cluster_robust_z"]):
             value = row["methods"][method]["coverage"]
-            bar_h = int((value - 0.45) / 0.55 * 260)
-            x = cx + j * 38
-            draw.rectangle((x, y0 - bar_h, x + 28, y0), fill=colors[method])
-            draw.text((x - 4, y0 - bar_h - 22), f"{value:.2f}", fill=hex_color("ink"), font=small)
-        draw.text((cx + 2, y0 + 16), f"rho={rho:.1f}", fill=hex_color("muted"), font=font)
-    draw.rectangle((650, 26, 672, 44), fill=colors["naive_iid_ols_z"])
-    draw.text((680, 24), "naive", fill=hex_color("ink"), font=small)
-    draw.rectangle((650, 52, 672, 70), fill=colors["cluster_robust_z"])
-    draw.text((680, 50), "cluster", fill=hex_color("ink"), font=small)
+            bar_h = int((value - 0.45) / 0.55 * 310)
+            x = cx + j * 50
+            draw.rectangle((x, y0 - bar_h, x + 36, y0), fill=colors[method])
+            draw.text((x - 2, y0 - bar_h - 28), f"{value:.2f}", fill=hex_color("ink"), font=small)
+        draw.text((cx + 4, y0 + 20), f"ρ={rho:.1f}", fill=hex_color("muted"), font=font)
+    final_x = x0 + 105 + 3 * 210 + 50
+    stress_y = y0 - int((summary["negative_result"]["cluster_robust_coverage"] - 0.45) / 0.55 * 310)
+    draw.line((final_x + 105, stress_y - 92, final_x + 43, stress_y - 14), fill=hex_color("purple"), width=3)
+    draw.polygon([(final_x + 43, stress_y - 14), (final_x + 56, stress_y - 18), (final_x + 49, stress_y - 30)], fill=hex_color("purple"))
+    draw.text((final_x + 112, stress_y - 114), "still below nominal", fill=hex_color("purple"), font=small)
+    draw.rectangle((790, 32, 818, 53), fill=colors["naive_iid_ols_z"])
+    draw.text((828, 29), "naive", fill=hex_color("ink"), font=small)
+    draw.rectangle((790, 65, 818, 86), fill=colors["cluster_robust_z"])
+    draw.text((828, 62), "cluster-robust", fill=hex_color("ink"), font=small)
     img.save(path)
 
 
 def draw_model_page(slide, assets: Path, manifest: dict, refs: list[str], summary: dict[str, object]):
-    add_text(slide, "Synthetic benchmark evidence boundary: generated DGP only, not completed validation or clinical evidence.", 0.82, 1.18, 11.8, 0.26, 10.6, "gold", True)
-    add_text(slide, "DGP", 0.92, 1.58, 1.3, 0.24, 13, "muted", True)
-    rect(slide, "Y_ij = beta_0 + beta_1 T_ij + u_j + epsilon_ij\n\nEstimand: beta_1 = treatment effect", 0.9, 1.9, 5.1, 1.65, "soft_blue", "blue", 17, True)
-    rect(slide, "u_j ~ N(0, tau^2)\ncenter-level random effect\nshared inside center j", 6.42, 1.65, 2.65, 1.25, "soft_teal", "teal", 12.6, True)
-    rect(slide, "epsilon_ij ~ N(0, sigma^2)\nindividual residual noise", 9.55, 1.65, 2.55, 1.25, "soft_gold", "gold", 12.6, True)
-    rect(slide, "ICC rho = tau^2 / (tau^2 + sigma^2)\ncenter is the correlation and inference unit", 6.65, 3.28, 5.25, 0.92, "soft_red", "red", 13, True)
-    arrow(slide, 6.0, 2.7, 6.38, 2.28)
-    arrow(slide, 9.08, 2.28, 9.5, 2.28)
-    arrow(slide, 8.7, 3.05, 8.7, 3.25)
-    add_text(slide, "Why this page matters: point estimates can remain centered near beta_1 while interval coverage fails when residuals are correlated within center.", 0.95, 4.8, 11.0, 0.48, 14.2, "ink", True)
-    add_text(slide, f"Simulation grid: G={CENTER_GRID}, rho={ICC_GRID}, imbalance={IMBALANCE_GRID}, seed={summary['seed']}.", 0.95, 5.58, 11.0, 0.32, 11.2, "muted")
-    add_text(slide, reference_footer(refs, "statistical-model query"), 0.95, 6.55, 11.2, 0.35, 8.4, "muted")
+    audience_text = [
+        "Synthetic multi-center simulation; treatment effect β₁=0.25.",
+        "β₁ is the treatment effect.",
+        "uⱼ: center-level shift shared within center j.",
+        "εᵢⱼ: individual residual noise.",
+        "ρ is the intraclass correlation; center j is the inference unit.",
+        "Point estimates can remain centered while iid intervals lose coverage.",
+    ]
+    manifest.setdefault("audience_text_by_archetype", {})["STATISTICAL_MODEL"] = audience_text
+    add_text(slide, audience_text[0], 0.82, 1.16, 11.8, 0.26, 11.2, "muted", True)
+    add_math(
+        slide,
+        assets,
+        manifest,
+        "slide1_dgp",
+        r"$Y_{ij}=\beta_0+\beta_1T_{ij}+u_j+\varepsilon_{ij}$",
+        0.85,
+        1.74,
+        7.15,
+        fontsize=42,
+    )
+    add_math(
+        slide,
+        assets,
+        manifest,
+        "slide1_components",
+        r"$u_j\sim N(0,\tau^2),\qquad \varepsilon_{ij}\sim N(0,\sigma^2)$",
+        0.92,
+        3.02,
+        6.85,
+        fontsize=31,
+    )
+    add_math(
+        slide,
+        assets,
+        manifest,
+        "slide1_icc",
+        r"$\rho=\frac{\tau^2}{\tau^2+\sigma^2}$",
+        8.72,
+        2.0,
+        2.45,
+        fontsize=44,
+        color="purple",
+    )
+    add_text(slide, audience_text[1], 0.98, 4.12, 2.6, 0.28, 13.2, "blue", True)
+    add_text(slide, audience_text[2], 3.7, 4.12, 3.35, 0.35, 12.2, "teal", True)
+    add_text(slide, audience_text[3], 7.15, 4.12, 2.65, 0.35, 12.2, "gold", True)
+    add_text(slide, audience_text[4], 8.55, 3.05, 3.2, 0.62, 12.4, "purple", True)
+    add_rule(slide, 0.95, 4.82, 11.75, 4.82, "line", 1.0)
+    add_text(slide, audience_text[5], 1.0, 5.14, 8.9, 0.48, 15.2, "ink", True)
+    add_text(slide, "Grid: G=8/20/50 centers, ICC ρ=0/.1/.3/.5, balanced and imbalanced cluster sizes.", 1.0, 5.78, 10.9, 0.32, 11.6, "muted")
+    manifest["model_page_structure"] = {
+        "additive_components": ["u_j", "epsilon_ij"],
+        "connector_policy": "center random effect and individual residual are parallel additive components; notation is grounded by proximity and labels",
+        "math_asset_keys": ["slide1_dgp", "slide1_components", "slide1_icc"],
+    }
 
 
 def draw_estimator_page(slide, assets: Path, manifest: dict, refs: list[str], summary: dict[str, object]):
-    add_text(slide, "Naive iid variance treats rows as independent; cluster sandwich groups score contributions by center.", 0.85, 1.17, 11.5, 0.26, 11, "gold", True)
-    rect(slide, "Naive iid OLS interval\nVar(beta_hat) = sigma_hat^2 (X'X)^(-1)\nrow residuals are pooled one by one", 0.9, 1.65, 3.1, 1.28, "soft_red", "red", 12.3, True)
-    rect(slide, "V_CR = (X'X)^(-1) [ sum_g X_g' u_g u_g' X_g ] (X'X)^(-1)", 3.25, 2.7, 6.95, 0.78, "soft_blue", "blue", 16.5, True)
-    rect(slide, "Center g block\nX_g rows + residual vector u_g\naggregated before variance", 10.45, 1.65, 2.05, 1.28, "soft_teal", "teal", 11.2, True)
-    arrow(slide, 4.0, 2.28, 5.0, 2.65)
-    arrow(slide, 10.4, 2.3, 9.45, 2.65)
-    add_text(slide, "Key change: the middle term preserves within-center covariance in the score. The current benchmark uses cluster-robust z intervals; small-G correction is reserved for the planned next experiment.", 1.0, 4.18, 11.1, 0.56, 13.2, "ink", True)
-    add_text(slide, "Synthetic method labels: naive_iid_ols_z versus cluster_robust_z. Both estimate the same beta_1; only the interval variance changes.", 1.0, 5.15, 11.1, 0.34, 11.3, "muted")
-    add_text(slide, reference_footer(refs, "estimator/variance query"), 0.95, 6.55, 11.2, 0.35, 8.4, "muted")
+    audience_text = [
+        "Both intervals estimate β₁; only the variance object changes.",
+        "Cluster meat: score contributions are summed by center before forming covariance.",
+        "Naive variance treats rows as independent.",
+        "The simulation uses cluster-robust z intervals; CR2 and wild bootstrap remain planned comparisons.",
+    ]
+    manifest.setdefault("audience_text_by_archetype", {})["ESTIMATOR"] = audience_text
+    add_text(slide, audience_text[0], 0.85, 1.16, 11.5, 0.28, 11.8, "muted", True)
+    add_math(
+        slide,
+        assets,
+        manifest,
+        "slide2_sandwich",
+        r"$\widehat V_{\mathrm{CR}}=(X^\top X)^{-1}\left(\sum_g X_g^\top \hat u_g\hat u_g^\top X_g\right)(X^\top X)^{-1}$",
+        0.76,
+        1.78,
+        10.1,
+        fontsize=36,
+        color="ink",
+    )
+    add_rule(slide, 5.15, 3.0, 7.48, 3.0, "purple", 3.0)
+    arrow(slide, 6.45, 3.08, 6.45, 3.72, "purple", 1.8)
+    add_text(slide, audience_text[1], 4.15, 3.86, 4.9, 0.46, 13.0, "purple", True, PP_ALIGN.CENTER)
+    add_math(
+        slide,
+        assets,
+        manifest,
+        "slide2_naive",
+        r"$\widehat V_{\mathrm{iid}}=\hat\sigma^2(X^\top X)^{-1}$",
+        0.98,
+        4.98,
+        3.2,
+        fontsize=30,
+        color="red",
+    )
+    add_text(slide, audience_text[2], 1.05, 5.76, 3.7, 0.26, 11.6, "red", True)
+    add_text(slide, audience_text[3], 5.28, 5.03, 6.55, 0.58, 13.4, "ink", True)
+    manifest["estimator_page_structure"] = {
+        "math_asset_keys": ["slide2_sandwich", "slide2_naive"],
+        "annotated_term": "sum_g X_g^T u_g u_g^T X_g",
+        "source_like_formula_text_in_audience_objects": False,
+    }
 
 
 def draw_design_page(slide, assets: Path, manifest: dict, refs: list[str], summary: dict[str, object]):
-    rect(slide, "DGP knobs\nG: 8 / 20 / 50\nrho: 0 / .1 / .3 / .5\ncluster imbalance", 0.85, 2.28, 2.3, 1.25, "soft_gold", "gold", 11.3, True)
-    rect(slide, f"Monte Carlo data\n{REPLICATES} replicates per cell\nY_ij, T_ij, center j", 3.7, 2.28, 2.25, 1.25, "soft_blue", "blue", 11.3, True)
-    rect(slide, "naive iid OLS z interval", 6.65, 1.66, 2.2, 0.72, "soft_red", "red", 11.3, True)
-    rect(slide, "cluster-robust z interval\ncenter scores aggregated", 6.65, 3.18, 2.2, 0.82, "soft_teal", "teal", 10.7, True)
-    rect(slide, "Endpoint evaluation\ncoverage near 0.95\nbias and interval width", 9.7, 2.36, 2.35, 1.18, "soft_blue", "blue", 11.3, True)
-    arrow(slide, 3.15, 2.9, 3.68, 2.9)
-    arrow(slide, 5.95, 2.9, 6.62, 2.05)
-    arrow(slide, 5.95, 2.9, 6.62, 3.58)
-    arrow(slide, 8.86, 2.05, 9.68, 2.72)
-    arrow(slide, 8.86, 3.58, 9.68, 3.1)
-    add_text(slide, "Diagram contract: structural connectors, visible arrowheads, left-to-right reading, no edge crossing.", 0.95, 4.9, 11.1, 0.34, 12.6, "ink", True)
-    add_text(slide, "Synthetic simulation evidence boundary: this experiment distinguishes interval behavior; it is not a general theorem.", 0.95, 5.45, 11.1, 0.3, 11.1, "gold", True)
+    audience_text = [
+        "Synthetic experiment: vary center count, ICC, and cluster-size balance.",
+        f"{REPLICATES} replicates per cell",
+        "naive iid OLS z interval",
+        "cluster-robust z interval",
+        "coverage, bias, interval width",
+        "The design asks whether center aggregation repairs interval coverage across the stress grid.",
+    ]
+    manifest.setdefault("audience_text_by_archetype", {})["SIMULATION_DESIGN"] = audience_text
+    add_text(slide, audience_text[0], 0.85, 1.16, 11.5, 0.28, 11.8, "muted", True)
+    rect(slide, "DGP knobs\nG=8,20,50 centers\nICC ρ=0,.1,.3,.5\nbalanced vs imbalanced", 0.82, 2.08, 2.55, 1.36, "white", "ink", 11.8, True, line="gold")
+    rect(slide, f"Generated samples\n{audience_text[1]}\noutcome, treatment, center", 3.94, 2.08, 2.55, 1.36, "white", "ink", 11.8, True, line="blue")
+    rect(slide, audience_text[2], 7.05, 1.64, 2.36, 0.58, "white", "red", 11.8, True, line="red")
+    rect(slide, audience_text[3] + "\ncenter scores aggregated", 7.05, 3.05, 2.36, 0.78, "white", "teal", 11.0, True, line="teal")
+    rect(slide, audience_text[4], 10.08, 2.33, 2.3, 0.94, "white", "ink", 11.8, True, line="purple")
+    arrow(slide, 3.38, 2.76, 3.9, 2.76, "muted", 1.6)
+    arrow(slide, 6.5, 2.76, 7.02, 1.94, "muted", 1.6)
+    arrow(slide, 6.5, 2.76, 7.02, 3.42, "muted", 1.6)
+    arrow(slide, 9.43, 1.94, 10.05, 2.62, "muted", 1.6)
+    arrow(slide, 9.43, 3.42, 10.05, 2.98, "muted", 1.6)
+    add_rule(slide, 0.95, 4.82, 11.85, 4.82, "line", 1.0)
+    add_text(slide, audience_text[5], 1.0, 5.18, 10.8, 0.48, 14.0, "ink", True)
+    add_text(slide, "Simulation study; endpoints are computed from the deterministic output for the same DGP grid.", 1.0, 5.84, 10.8, 0.32, 11.5, "muted")
     manifest["simulation_design_diagram"] = {
         "structural_connectors": ["dgp_to_data", "data_to_naive", "data_to_cluster", "naive_to_endpoint", "cluster_to_endpoint"],
         "arrowheads": "DrawingML a:tailEnd type=triangle on every connector",
@@ -524,40 +749,78 @@ def draw_design_page(slide, assets: Path, manifest: dict, refs: list[str], summa
         "reading_direction": "left_to_right",
         "endpoint_semantics": ["95% interval coverage", "bias", "interval width"],
     }
-    add_text(slide, reference_footer(refs, "simulation-design query"), 0.95, 6.55, 11.2, 0.35, 8.4, "muted")
 
 
 def draw_result_page(slide, assets: Path, manifest: dict, refs: list[str], summary: dict[str, object]):
+    audience_text = [
+        "Synthetic imbalanced-cluster simulation; bands show Monte Carlo uncertainty.",
+        "Cluster-robust intervals recover much of the lost coverage, but small-G stress remains below nominal.",
+    ]
+    manifest.setdefault("audience_text_by_archetype", {})["RESULT_FIGURE"] = audience_text
     plot = assets / "coverage_by_icc.png"
     draw_coverage_plot(plot, summary)
-    slide.shapes.add_picture(str(plot), inch(0.55), inch(1.28), width=inch(8.65))
-    rect(slide, "Reading target\nCoverage close to nominal 0.95 is the goal.\nAbove or below nominal is not automatically better.", 9.55, 1.45, 2.9, 1.18, "soft_gold", "gold", 11.4, True)
-    stress = summary["negative_result"]
-    rect(slide, f"Observed in this synthetic run\nG=8, rho=.5, imbalanced:\nnaive={stress['naive_iid_coverage']:.2f}\ncluster={stress['cluster_robust_coverage']:.2f}", 9.55, 3.05, 2.9, 1.38, "soft_teal", "teal", 11.4, True)
-    add_text(slide, "Conclusion limited to this simulation: cluster-robust intervals repair much of the iid undercoverage, but finite-center stress remains visible.", 0.95, 5.77, 11.0, 0.38, 12.8, "ink", True)
-    add_text(slide, "Synthetic simulation evidence boundary; error bars are Monte Carlo uncertainty from deterministic simulation output.", 0.95, 6.22, 11.0, 0.28, 10.6, "gold", True)
-    add_text(slide, reference_footer(refs, "coverage-result query"), 0.95, 6.62, 11.2, 0.28, 8.4, "muted")
+    slide.shapes.add_picture(str(plot), inch(0.82), inch(1.28), width=inch(10.9))
+    add_text(slide, audience_text[0], 0.95, 6.42, 8.9, 0.28, 10.5, "muted")
 
 
 def draw_negative_page(slide, assets: Path, manifest: dict, refs: list[str], summary: dict[str, object]):
+    stress = summary["negative_result"]
+    audience_text = [
+        f"At G=8, ICC ρ=.5, imbalanced clusters, cluster-robust coverage is {stress['cluster_robust_coverage']:.2f}.",
+        "Few centers make the sandwich variance noisy; imbalance increases center leverage.",
+        "Planned comparison: CR2 small-sample correction and wild cluster bootstrap on the same grid.",
+    ]
+    manifest.setdefault("audience_text_by_archetype", {})["NEGATIVE_RESULT"] = audience_text
     plot = assets / "small_g_negative_result.png"
     draw_negative_plot(plot, summary)
-    slide.shapes.add_picture(str(plot), inch(0.75), inch(1.38), width=inch(6.7))
-    stress = summary["negative_result"]
-    rect(slide, f"Negative result\n{stress['condition']}\ncluster-robust z coverage = {stress['cluster_robust_coverage']:.2f}", 8.0, 1.48, 3.55, 1.18, "soft_red", "red", 11.7, True)
-    rect(slide, "Failure mechanism\nFew independent centers make the sandwich variance noisy; imbalance amplifies center-level leverage.", 8.0, 3.05, 3.55, 1.1, "soft_gold", "gold", 11.4, True)
-    rect(slide, "Next experiment is planned, not completed\nCompare CR2 small-sample correction and wild cluster bootstrap on the same grid.", 8.0, 4.56, 3.55, 1.2, "soft_teal", "teal", 11.2, True)
-    add_text(slide, "This page uses completed synthetic evidence only for the failure diagnosis; the proposed correction methods are explicitly future work.", 0.95, 6.1, 11.1, 0.35, 12.2, "ink", True)
+    slide.shapes.add_picture(str(plot), inch(0.58), inch(1.38), width=inch(8.3))
+    add_text(slide, audience_text[0], 9.25, 1.55, 2.75, 0.8, 13.0, "red", True)
+    add_rule(slide, 9.25, 2.58, 11.85, 2.58, "line", 1.0)
+    add_text(slide, audience_text[1], 9.25, 2.86, 2.9, 0.72, 12.1, "ink", True)
+    add_rule(slide, 9.25, 3.82, 11.85, 3.82, "line", 1.0)
+    add_text(slide, audience_text[2], 9.25, 4.10, 2.9, 0.86, 11.8, "teal", True)
+    add_text(slide, "Completed evidence is limited to the two intervals shown; the correction methods are future tests.", 0.95, 6.2, 11.1, 0.32, 11.8, "muted")
     manifest["negative_result_claim"] = stress
-    add_text(slide, reference_footer(refs, "negative-result query"), 0.95, 6.62, 11.2, 0.28, 8.4, "muted")
 
 
 SLIDES = [
-    ("Why iid intervals fail with center correlation", "The estimand is stable, but the uncertainty model changes.", "STATISTICAL_MODEL", draw_model_page),
-    ("Cluster sandwich changes the variance object", "The center, not the row, becomes the covariance aggregation unit.", "ESTIMATOR", draw_estimator_page),
-    ("Simulation design tests interval behavior", "DGP knobs flow into two interval methods and one endpoint gate.", "SIMULATION_DESIGN", draw_design_page),
-    ("Coverage falls when ICC and imbalance rise", "Coverage near 0.95 is the target; uncertainty must be visible.", "RESULT_FIGURE", draw_result_page),
-    ("Small-G stress remains the negative result", "The next experiment must test finite-center corrections.", "NEGATIVE_RESULT", draw_negative_page),
+    ("Center correlation breaks iid intervals", "The point estimate targets β₁, but the uncertainty model changes.", "STATISTICAL_MODEL", draw_model_page),
+    ("The sandwich variance aggregates by center", "The middle term is a center-level score covariance, not a row-level residual pool.", "ESTIMATOR", draw_estimator_page),
+    ("A stress grid separates interval behavior", "The same generated samples feed two intervals and the same coverage endpoint.", "SIMULATION_DESIGN", draw_design_page),
+    ("Cluster adjustment recovers coverage except at small G", "Coverage near 0.95 is the target; uncertainty is part of the figure.", "RESULT_FIGURE", draw_result_page),
+    ("The remaining failure is finite-center undercoverage", "The next experiment tests small-sample corrections under the same grid.", "NEGATIVE_RESULT", draw_negative_page),
+]
+
+
+INTERNAL_LEAK_PATTERNS = [
+    "RRL-",
+    "Reference retrieval",
+    "EVIDENCE_MANIFEST",
+    "Diagram contract",
+    "style not copied",
+    "Reading target",
+    "Observed in this synthetic run",
+    "repo path",
+    "run ID",
+    "implementation commit",
+    "review target",
+]
+
+ANTI_META_PHRASES = [
+    "Evidence boundary",
+    "Key change",
+    "Role in the deck",
+    "This slide",
+    "This page",
+]
+
+MATH_SOURCE_PATTERNS = [
+    "beta_",
+    "epsilon_",
+    "sum_",
+    "^(-1)",
+    "X'X",
+    "rho =",
 ]
 
 
@@ -567,18 +830,23 @@ def build_pptx(path: Path, assets: Path, manifest: dict, summary: dict[str, obje
     prs.slide_height = inch(H)
     blank = prs.slide_layouts[6]
     manifest["slides"] = []
+    manifest["reference_design_audit"] = {}
     for index, (title, message, archetype, drawer) in enumerate(SLIDES, start=1):
         retrieval = retrieve_references(archetype)
         refs = list(retrieval["selected_ids"])
         slide = prs.slides.add_slide(blank)
         header(slide, index, title, message)
         drawer(slide, assets, manifest, refs, summary)
+        audit = reference_design_audit(archetype, retrieval)
+        manifest["reference_design_audit"][f"slide_{index}"] = audit
         manifest["slides"].append({
             "slide": index,
             "title": title,
             "archetype": archetype,
             "reference_ids": refs,
             "reference_retrieval": retrieval,
+            "reference_design_audit": audit,
+            "audience_text": manifest.get("audience_text_by_archetype", {}).get(archetype, []),
             "learned_organization": retrieval["organization_lesson"],
             "reference_rationale": "References are selected by auditable semantic query over inspected page records with rendered-page checksums; they inform organization only.",
             "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied.",
@@ -593,6 +861,63 @@ def build_pptx(path: Path, assets: Path, manifest: dict, summary: dict[str, obje
             }[archetype],
         })
     prs.save(path)
+
+
+def pptx_slide_text(pptx_path: Path) -> str:
+    with ZipFile(pptx_path) as zf:
+        slide_names = [name for name in zf.namelist() if name.startswith("ppt/slides/slide") and name.endswith(".xml")]
+        return "\n".join(zf.read(name).decode("utf-8", errors="ignore") for name in slide_names)
+
+
+def run_quality_gates(pptx_path: Path, manifest: dict[str, object]) -> dict[str, object]:
+    slide_xml = pptx_slide_text(pptx_path)
+    audience_text = "\n".join(
+        "\n".join(slide.get("audience_text", []))
+        for slide in manifest.get("slides", [])
+        if isinstance(slide, dict)
+    )
+    failures: list[str] = []
+    for pattern in INTERNAL_LEAK_PATTERNS:
+        if pattern in slide_xml or pattern in audience_text:
+            failures.append(f"audience-facing internal leak: {pattern}")
+    for phrase in ANTI_META_PHRASES:
+        if phrase in slide_xml or phrase in audience_text:
+            failures.append(f"audience-facing meta language: {phrase}")
+    math_pages = "\n".join(
+        "\n".join(slide.get("audience_text", []))
+        for slide in manifest.get("slides", [])
+        if isinstance(slide, dict) and slide.get("archetype") in {"STATISTICAL_MODEL", "ESTIMATOR"}
+    )
+    for pattern in MATH_SOURCE_PATTERNS:
+        if pattern in math_pages or pattern in slide_xml:
+            failures.append(f"source-like math leaked into audience text: {pattern}")
+    math_assets = manifest.get("math_assets", {})
+    for required in ["slide1_dgp", "slide1_components", "slide1_icc", "slide2_sandwich", "slide2_naive"]:
+        asset = math_assets.get(required) if isinstance(math_assets, dict) else None
+        if not isinstance(asset, dict) or not Path(str(asset.get("path", ""))).is_file():
+            failures.append(f"missing rendered math asset: {required}")
+    if "u_j_to_epsilon_ij" in json.dumps(manifest.get("model_page_structure", {})):
+        failures.append("model page still records serial u_j_to_epsilon_ij connector")
+    audit = manifest.get("reference_design_audit", {})
+    if not isinstance(audit, dict) or len(audit) != 5:
+        failures.append("reference_design_audit must cover five slides")
+    audit_items = audit.items() if isinstance(audit, dict) else []
+    for slide_key, item in audit_items:
+        if len(item.get("selected_reference_ids", [])) < 2:
+            failures.append(f"{slide_key} has fewer than two inspected reference IDs")
+        if not item.get("adopted_design_decisions"):
+            failures.append(f"{slide_key} lacks adopted design decisions")
+    return {
+        "status": "PASS" if not failures else "FAIL",
+        "failures": failures,
+        "checked_gates": [
+            "audience_facing_internal_leak",
+            "math_source_leak",
+            "rendered_math_assets_present",
+            "anti_meta_language",
+            "reference_design_audit",
+        ],
+    }
 
 
 def editable_slide_count(pptx_path: Path) -> int:
@@ -678,6 +1003,7 @@ def main() -> int:
     summary = run_simulation(args.out_dir)
     pptx_path = args.out_dir / "statistical_method_group_meeting_benchmark.pptx"
     manifest_path = args.out_dir / "EVIDENCE_MANIFEST.json"
+    reference_audit_path = args.out_dir / "reference_design_audit.json"
     render_status_path = args.out_dir / "RENDER_STATUS.json"
     manifest: dict = {
         "status": "GENERATED_SOURCE_ARTIFACTS_ONLY",
@@ -690,7 +1016,12 @@ def main() -> int:
     build_pptx(pptx_path, assets, manifest, summary)
     manifest["pptx"] = str(pptx_path)
     manifest["editable_slide_count"] = editable_slide_count(pptx_path)
+    manifest["deterministic_quality_gates"] = run_quality_gates(pptx_path, manifest)
+    if manifest["deterministic_quality_gates"]["status"] != "PASS":
+        manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        raise SystemExit("deterministic presentation QA failed: " + "; ".join(manifest["deterministic_quality_gates"]["failures"]))
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    reference_audit_path.write_text(json.dumps(manifest["reference_design_audit"], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     render = render_pptx(pptx_path, args.out_dir)
     render_status_path.write_text(json.dumps(render, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"pptx": str(pptx_path), "evidence_manifest": str(manifest_path), "render_status": str(render_status_path)}, indent=2))

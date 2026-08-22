@@ -613,6 +613,20 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(summary["grid"]["imbalance"], ["balanced", "imbalanced"])
             self.assertEqual(summary["methods"], ["naive_iid_ols_z", "cluster_robust_z"])
             self.assertIn("95% interval coverage", summary["endpoints"])
+            gates = manifest["deterministic_quality_gates"]
+            self.assertEqual(gates["status"], "PASS", gates.get("failures"))
+            self.assertIn("audience_facing_internal_leak", gates["checked_gates"])
+            self.assertIn("math_source_leak", gates["checked_gates"])
+            self.assertEqual(set(manifest["math_assets"]), {"slide1_dgp", "slide1_components", "slide1_icc", "slide2_sandwich", "slide2_naive"})
+            for asset in manifest["math_assets"].values():
+                self.assertEqual(asset["format"], "matplotlib_mathtext_png_transparent")
+                self.assertGreater(asset["pixel_width"], 100)
+                self.assertGreater(asset["pixel_height"], 40)
+                self.assertTrue(Path(asset["path"]).is_file())
+            audit_path = Path(tmp) / "reference_design_audit.json"
+            self.assertTrue(audit_path.exists())
+            reference_audit = json.loads(audit_path.read_text(encoding="utf-8"))
+            self.assertEqual(len(reference_audit), 5)
             stress = summary["negative_result"]
             self.assertEqual(stress["condition"], "G=8, rho=0.5, imbalanced cluster sizes and treatment shares")
             self.assertLess(stress["cluster_robust_coverage"], 0.90)
@@ -626,6 +640,20 @@ class PresentationSharedTests(unittest.TestCase):
             for slide in manifest["slides"]:
                 self.assertGreaterEqual(len(slide["reference_ids"]), 2)
                 self.assertLessEqual(len(slide["reference_ids"]), 5)
+                self.assertEqual(slide["reference_design_audit"]["selected_reference_ids"], slide["reference_ids"])
+                self.assertTrue(slide["reference_design_audit"]["adopted_design_decisions"])
+                self.assertTrue(slide["audience_text"])
+                audience_blob = "\n".join(slide["audience_text"])
+                for forbidden in [
+                    "RRL-",
+                    "Reference retrieval",
+                    "EVIDENCE_MANIFEST",
+                    "Diagram contract",
+                    "style not copied",
+                    "Reading target",
+                    "Observed in this synthetic run",
+                ]:
+                    self.assertNotIn(forbidden, audience_blob)
                 retrieval = slide["reference_retrieval"]
                 self.assertEqual(slide["reference_ids"], retrieval["selected_ids"])
                 self.assertGreaterEqual(len(retrieval["candidate_ids"]), len(retrieval["selected_ids"]))
@@ -658,14 +686,20 @@ class PresentationSharedTests(unittest.TestCase):
                 media_names = [name for name in deck.namelist() if name.startswith("ppt/media/")]
                 slide_xml = "\n".join(deck.read(name).decode("utf-8") for name in slide_names)
             self.assertEqual(len(slide_names), 5)
-            self.assertIn("Y_ij = beta_0 + beta_1 T_ij + u_j + epsilon_ij", slide_xml)
-            self.assertIn("ICC rho", slide_xml)
-            self.assertIn("V_CR", slide_xml)
+            self.assertNotIn("Y_ij = beta_0 + beta_1 T_ij + u_j + epsilon_ij", slide_xml)
+            self.assertNotIn("V_CR", slide_xml)
+            self.assertNotIn("Reference retrieval", slide_xml)
+            self.assertNotIn("Diagram contract", slide_xml)
+            self.assertNotIn("Reading target", slide_xml)
+            self.assertNotIn("Observed in this synthetic run", slide_xml)
+            self.assertNotIn("beta_1", slide_xml)
+            self.assertNotIn("epsilon_ij", slide_xml)
+            self.assertNotIn("X'X", slide_xml)
             self.assertIn("cluster-robust z interval", slide_xml)
-            self.assertIn("Coverage close to nominal 0.95 is the goal", slide_xml)
-            self.assertIn("Next experiment is planned, not completed", slide_xml)
+            self.assertIn("coverage, bias, interval", slide_xml)
+            self.assertIn("Planned comparison", slide_xml)
             self.assertIn("tailEnd", slide_xml)
-            self.assertLessEqual(len(media_names), 3)
+            self.assertGreaterEqual(len(media_names), 7)
 
             committed_source = fixture / "visual_review_packet_source"
             if committed_source.exists():
@@ -688,10 +722,14 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertEqual(visual_manifest["identity_bindings"]["source_render_status"], "ok")
                 self.assertEqual(visual_manifest["identity_bindings"]["source_mechanical_status"], "MECHANICAL_PASS")
                 self.assertEqual(visual_manifest["identity_bindings"]["source_academic_visual_decision"], "NOT_ASSESSED")
+                self.assertIn("reference_design_audit_sha256", visual_manifest["identity_bindings"])
                 rubric = visual_manifest["rubric"]["instructions"]
                 self.assertIn("statistical/biostatistical method group meeting benchmark", rubric)
                 self.assertIn("coverage near nominal 0.95 is the target", rubric)
                 self.assertIn("visible arrowheads", rubric)
+                self.assertIn("Mathematical typesetting", rubric)
+                self.assertIn("Would this slide look professionally finished", rubric)
+                self.assertIn("Reference-informed quality", rubric)
 
 
 if __name__ == "__main__":

@@ -510,7 +510,7 @@
   "slides": [
     {
       "slide": 1,
-      "title": "Why iid intervals fail with center correlation",
+      "title": "Center correlation breaks iid intervals",
       "archetype": "STATISTICAL_MODEL",
       "reference_ids": [
         "RRL-044",
@@ -578,9 +578,130 @@
           "RRL-043": "page_function=MODEL_CHECK matches query; domain=statistics matches query; subdomain=Bayesian data analysis matches query; semantic tokens overlap: and, bayesian, can, model; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
           "RRL-042": "page_function=BAYESIAN_MODEL matches query; domain=biostatistics matches query; subdomain=Bayesian clinical research matches query; semantic tokens overlap: and, bayesian, modeling; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3"
         },
+        "selected_page_lessons": {
+          "RRL-044": {
+            "primary_object": "Bayesian inference workflow for a pharmacokinetic model",
+            "page_function": "BAYESIAN_MODEL",
+            "evidence_type": "modeling workflow",
+            "information_density": "0.30/0.70",
+            "annotation_style": "Inference bullets separate PK parameters, concentration predictions, and checks.",
+            "useful_lesson": "Bayesian workflow pages should separate inference targets and checks.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-007": {
+            "primary_object": "Bayesian data-driven analysis generative model",
+            "page_function": "BAYESIAN_MODEL",
+            "evidence_type": "Bayesian model",
+            "information_density": "0.45/0.55",
+            "annotation_style": "Bayesian formulation is introduced with model components and posterior samples.",
+            "useful_lesson": "For Bayesian pages, show prior/likelihood/posterior roles and the object of inference.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-008": {
+            "primary_object": "hybrid analysis goal/challenge with posterior samples",
+            "page_function": "ASSUMPTION",
+            "evidence_type": "assumption / challenge",
+            "information_density": "0.55/0.45",
+            "annotation_style": "Hybrid challenge asks how constraints and posterior samples can be combined.",
+            "useful_lesson": "Put assumptions and interface questions in the main method flow, not hidden backup.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-043": {
+            "primary_object": "Bayesian data analysis model checking",
+            "page_function": "MODEL_CHECK",
+            "evidence_type": "model checking checklist",
+            "information_density": "0.20/0.80",
+            "annotation_style": "Questions ask if inferences make sense and whether model predictions fit data.",
+            "useful_lesson": "Checklist pages can be useful when each question maps to a later diagnostic.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-042": {
+            "primary_object": "Bayesian solution to comparison multiplicity",
+            "page_function": "BAYESIAN_MODEL",
+            "evidence_type": "Bayesian workflow list",
+            "information_density": "0.20/0.80",
+            "annotation_style": "Bayesian solution bullets follow the p-value problem.",
+            "useful_lesson": "Pair negative-result pages with a concrete modeling response.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          }
+        },
         "organization_lesson": "Make the estimand and data-generating mechanism the main object before discussing results.",
         "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied."
       },
+      "reference_design_audit": {
+        "selected_reference_ids": [
+          "RRL-044",
+          "RRL-007",
+          "RRL-008",
+          "RRL-043",
+          "RRL-042"
+        ],
+        "page_specific_lessons": {
+          "RRL-044": {
+            "primary_object": "Bayesian inference workflow for a pharmacokinetic model",
+            "page_function": "BAYESIAN_MODEL",
+            "evidence_type": "modeling workflow",
+            "information_density": "0.30/0.70",
+            "annotation_style": "Inference bullets separate PK parameters, concentration predictions, and checks.",
+            "useful_lesson": "Bayesian workflow pages should separate inference targets and checks.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-007": {
+            "primary_object": "Bayesian data-driven analysis generative model",
+            "page_function": "BAYESIAN_MODEL",
+            "evidence_type": "Bayesian model",
+            "information_density": "0.45/0.55",
+            "annotation_style": "Bayesian formulation is introduced with model components and posterior samples.",
+            "useful_lesson": "For Bayesian pages, show prior/likelihood/posterior roles and the object of inference.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-008": {
+            "primary_object": "hybrid analysis goal/challenge with posterior samples",
+            "page_function": "ASSUMPTION",
+            "evidence_type": "assumption / challenge",
+            "information_density": "0.55/0.45",
+            "annotation_style": "Hybrid challenge asks how constraints and posterior samples can be combined.",
+            "useful_lesson": "Put assumptions and interface questions in the main method flow, not hidden backup.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-043": {
+            "primary_object": "Bayesian data analysis model checking",
+            "page_function": "MODEL_CHECK",
+            "evidence_type": "model checking checklist",
+            "information_density": "0.20/0.80",
+            "annotation_style": "Questions ask if inferences make sense and whether model predictions fit data.",
+            "useful_lesson": "Checklist pages can be useful when each question maps to a later diagnostic.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-042": {
+            "primary_object": "Bayesian solution to comparison multiplicity",
+            "page_function": "BAYESIAN_MODEL",
+            "evidence_type": "Bayesian workflow list",
+            "information_density": "0.20/0.80",
+            "annotation_style": "Bayesian solution bullets follow the p-value problem.",
+            "useful_lesson": "Pair negative-result pages with a concrete modeling response.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          }
+        },
+        "adopted_design_decisions": [
+          "Use the DGP formula as the dominant object rather than prose cards.",
+          "Ground notation adjacent to the displayed formula with short semantic labels.",
+          "Use containment and spacing for additive components instead of causal arrows."
+        ],
+        "deliberately_not_adopted": [
+          "Do not copy any source deck styling or full-slide imagery.",
+          "Do not use reference IDs or retrieval traces as slide footer content."
+        ],
+        "current_slide_application": "Make the estimand and data-generating mechanism the main object before discussing results."
+      },
+      "audience_text": [
+        "Synthetic multi-center simulation; treatment effect β₁=0.25.",
+        "β₁ is the treatment effect.",
+        "uⱼ: center-level shift shared within center j.",
+        "εᵢⱼ: individual residual noise.",
+        "ρ is the intraclass correlation; center j is the inference unit.",
+        "Point estimates can remain centered while iid intervals lose coverage."
+      ],
       "learned_organization": "Make the estimand and data-generating mechanism the main object before discussing results.",
       "reference_rationale": "References are selected by auditable semantic query over inspected page records with rendered-page checksums; they inform organization only.",
       "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied.",
@@ -597,7 +718,7 @@
     },
     {
       "slide": 2,
-      "title": "Cluster sandwich changes the variance object",
+      "title": "The sandwich variance aggregates by center",
       "archetype": "ESTIMATOR",
       "reference_ids": [
         "RRL-040",
@@ -665,9 +786,128 @@
           "RRL-030": "page_function=CONFIDENCE_INTERVAL matches query; domain=biostatistics matches query; subdomain=survey nonresponse / MRP matches query; semantic tokens overlap: interval, show, uncertainty, when; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
           "RRL-015": "page_function=CONFIDENCE_INTERVAL matches query; evidence_type=uncertainty interval matches query; semantic tokens overlap: are, confidence, interval, show, uncertainty, when; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3"
         },
+        "selected_page_lessons": {
+          "RRL-040": {
+            "primary_object": "confidence intervals do not respect prior information",
+            "page_function": "CONFIDENCE_INTERVAL",
+            "evidence_type": "confidence interval principle",
+            "information_density": "0.15/0.85",
+            "annotation_style": "Confidence-interval limitation is stated in one sentence.",
+            "useful_lesson": "Use principle pages sparingly when they frame later evidence.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-009": {
+            "primary_object": "hybrid AARA plus BayesPC algorithm flow",
+            "page_function": "ESTIMATOR",
+            "evidence_type": "estimator pipeline",
+            "information_density": "0.70/0.30",
+            "annotation_style": "AARA and BayesPC are connected through posterior samples and cost constraints.",
+            "useful_lesson": "Show estimator inputs, restrictions, and outputs in one editable diagram.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-028": {
+            "primary_object": "poststratification identity",
+            "page_function": "ESTIMATOR",
+            "evidence_type": "estimator formula",
+            "information_density": "0.35/0.65",
+            "annotation_style": "Poststratification identity is shown as the sole object.",
+            "useful_lesson": "Put estimand/estimator formulas on sparse pages when they define the rest of the talk.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-030": {
+            "primary_object": "XBox estimates adjusting for demographics",
+            "page_function": "CONFIDENCE_INTERVAL",
+            "evidence_type": "time-series interval",
+            "information_density": "0.75/0.25",
+            "annotation_style": "Grey interval band and smoothed estimate show poll movement.",
+            "useful_lesson": "Show adjusted estimate and uncertainty together when discussing survey quality.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-015": {
+            "primary_object": "bootstrap confidence interval surface",
+            "page_function": "CONFIDENCE_INTERVAL",
+            "evidence_type": "uncertainty interval",
+            "information_density": "0.70/0.30",
+            "annotation_style": "Observed distribution and 95 percent CI are called out on a surface plot.",
+            "useful_lesson": "Show interval behavior, not just a single metric, when annotation variability matters.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          }
+        },
         "organization_lesson": "Put the formula next to definitions of the grouped objects it operates on.",
         "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied."
       },
+      "reference_design_audit": {
+        "selected_reference_ids": [
+          "RRL-040",
+          "RRL-009",
+          "RRL-028",
+          "RRL-030",
+          "RRL-015"
+        ],
+        "page_specific_lessons": {
+          "RRL-040": {
+            "primary_object": "confidence intervals do not respect prior information",
+            "page_function": "CONFIDENCE_INTERVAL",
+            "evidence_type": "confidence interval principle",
+            "information_density": "0.15/0.85",
+            "annotation_style": "Confidence-interval limitation is stated in one sentence.",
+            "useful_lesson": "Use principle pages sparingly when they frame later evidence.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-009": {
+            "primary_object": "hybrid AARA plus BayesPC algorithm flow",
+            "page_function": "ESTIMATOR",
+            "evidence_type": "estimator pipeline",
+            "information_density": "0.70/0.30",
+            "annotation_style": "AARA and BayesPC are connected through posterior samples and cost constraints.",
+            "useful_lesson": "Show estimator inputs, restrictions, and outputs in one editable diagram.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-028": {
+            "primary_object": "poststratification identity",
+            "page_function": "ESTIMATOR",
+            "evidence_type": "estimator formula",
+            "information_density": "0.35/0.65",
+            "annotation_style": "Poststratification identity is shown as the sole object.",
+            "useful_lesson": "Put estimand/estimator formulas on sparse pages when they define the rest of the talk.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-030": {
+            "primary_object": "XBox estimates adjusting for demographics",
+            "page_function": "CONFIDENCE_INTERVAL",
+            "evidence_type": "time-series interval",
+            "information_density": "0.75/0.25",
+            "annotation_style": "Grey interval band and smoothed estimate show poll movement.",
+            "useful_lesson": "Show adjusted estimate and uncertainty together when discussing survey quality.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-015": {
+            "primary_object": "bootstrap confidence interval surface",
+            "page_function": "CONFIDENCE_INTERVAL",
+            "evidence_type": "uncertainty interval",
+            "information_density": "0.70/0.30",
+            "annotation_style": "Observed distribution and 95 percent CI are called out on a surface plot.",
+            "useful_lesson": "Show interval behavior, not just a single metric, when annotation variability matters.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          }
+        },
+        "adopted_design_decisions": [
+          "Make the sandwich covariance formula the largest object on the page.",
+          "Annotate the middle score-aggregation term directly beside the formula.",
+          "Keep the naive comparator compact so it supports rather than competes with the main formula."
+        ],
+        "deliberately_not_adopted": [
+          "Do not turn the variance comparison into three pastel explanation cards.",
+          "Do not show source-like ASCII formula strings to the audience."
+        ],
+        "current_slide_application": "Put the formula next to definitions of the grouped objects it operates on."
+      },
+      "audience_text": [
+        "Both intervals estimate β₁; only the variance object changes.",
+        "Cluster meat: score contributions are summed by center before forming covariance.",
+        "Naive variance treats rows as independent.",
+        "The simulation uses cluster-robust z intervals; CR2 and wild bootstrap remain planned comparisons."
+      ],
       "learned_organization": "Put the formula next to definitions of the grouped objects it operates on.",
       "reference_rationale": "References are selected by auditable semantic query over inspected page records with rendered-page checksums; they inform organization only.",
       "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied.",
@@ -683,7 +923,7 @@
     },
     {
       "slide": 3,
-      "title": "Simulation design tests interval behavior",
+      "title": "A stress grid separates interval behavior",
       "archetype": "SIMULATION_DESIGN",
       "reference_ids": [
         "RRL-009",
@@ -753,9 +993,130 @@
           "RRL-026": "page_function=SIMULATION matches query; domain=statistics matches query; subdomain=Bayesian workflow matches query; semantic tokens overlap: and, generated, mechanism, simulation; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
           "RRL-002": "page_function=METHOD_DIAGRAM matches query; evidence_type=method mechanism matches query; semantic tokens overlap: and, diagram, mechanism, method, one; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3"
         },
+        "selected_page_lessons": {
+          "RRL-009": {
+            "primary_object": "hybrid AARA plus BayesPC algorithm flow",
+            "page_function": "ESTIMATOR",
+            "evidence_type": "estimator pipeline",
+            "information_density": "0.70/0.30",
+            "annotation_style": "AARA and BayesPC are connected through posterior samples and cost constraints.",
+            "useful_lesson": "Show estimator inputs, restrictions, and outputs in one editable diagram.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-010": {
+            "primary_object": "quicksort evaluation curves",
+            "page_function": "SIMULATION",
+            "evidence_type": "simulation comparison",
+            "information_density": "0.65/0.35",
+            "annotation_style": "Quicksort resource metrics compare Bayesian analysis and hybrid analysis.",
+            "useful_lesson": "Simulation pages need DGP/example, comparator, and performance curve together.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-019": {
+            "primary_object": "automatic lesion segmentation applications",
+            "page_function": "EXPERIMENT_DESIGN",
+            "evidence_type": "task overview",
+            "information_density": "0.70/0.30",
+            "annotation_style": "PET applications and lesion examples appear before architecture details.",
+            "useful_lesson": "Start method talks by connecting task, data, and application unit.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-026": {
+            "primary_object": "simulate fake data in R",
+            "page_function": "SIMULATION",
+            "evidence_type": "fake-data simulation",
+            "information_density": "0.45/0.55",
+            "annotation_style": "R code and simulated scatter expose the model-generated data.",
+            "useful_lesson": "Simulation pages need visible data-generating mechanism and output.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-002": {
+            "primary_object": "graph neural network concept diagram",
+            "page_function": "METHOD_DIAGRAM",
+            "evidence_type": "method mechanism",
+            "information_density": "0.70/0.30",
+            "annotation_style": "Simple objects and arrows explain satellites/debris graph representation.",
+            "useful_lesson": "Use one mechanism diagram before algorithm details.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          }
+        },
         "organization_lesson": "Use one left-to-right experimental path with explicit endpoints and visible comparator branches.",
         "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied."
       },
+      "reference_design_audit": {
+        "selected_reference_ids": [
+          "RRL-009",
+          "RRL-010",
+          "RRL-019",
+          "RRL-026",
+          "RRL-002"
+        ],
+        "page_specific_lessons": {
+          "RRL-009": {
+            "primary_object": "hybrid AARA plus BayesPC algorithm flow",
+            "page_function": "ESTIMATOR",
+            "evidence_type": "estimator pipeline",
+            "information_density": "0.70/0.30",
+            "annotation_style": "AARA and BayesPC are connected through posterior samples and cost constraints.",
+            "useful_lesson": "Show estimator inputs, restrictions, and outputs in one editable diagram.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-010": {
+            "primary_object": "quicksort evaluation curves",
+            "page_function": "SIMULATION",
+            "evidence_type": "simulation comparison",
+            "information_density": "0.65/0.35",
+            "annotation_style": "Quicksort resource metrics compare Bayesian analysis and hybrid analysis.",
+            "useful_lesson": "Simulation pages need DGP/example, comparator, and performance curve together.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-019": {
+            "primary_object": "automatic lesion segmentation applications",
+            "page_function": "EXPERIMENT_DESIGN",
+            "evidence_type": "task overview",
+            "information_density": "0.70/0.30",
+            "annotation_style": "PET applications and lesion examples appear before architecture details.",
+            "useful_lesson": "Start method talks by connecting task, data, and application unit.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-026": {
+            "primary_object": "simulate fake data in R",
+            "page_function": "SIMULATION",
+            "evidence_type": "fake-data simulation",
+            "information_density": "0.45/0.55",
+            "annotation_style": "R code and simulated scatter expose the model-generated data.",
+            "useful_lesson": "Simulation pages need visible data-generating mechanism and output.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-002": {
+            "primary_object": "graph neural network concept diagram",
+            "page_function": "METHOD_DIAGRAM",
+            "evidence_type": "method mechanism",
+            "information_density": "0.70/0.30",
+            "annotation_style": "Simple objects and arrows explain satellites/debris graph representation.",
+            "useful_lesson": "Use one mechanism diagram before algorithm details.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          }
+        },
+        "adopted_design_decisions": [
+          "Keep one left-to-right experimental path from DGP knobs to endpoints.",
+          "Use only scientific operations as nodes and keep branch labels short.",
+          "Use a restrained neutral layout with one accent color for the cluster-robust branch."
+        ],
+        "deliberately_not_adopted": [
+          "Do not show diagram QA contracts or reading instructions on the slide.",
+          "Do not use decorative workflow boxes when a node is not a real scientific operation."
+        ],
+        "current_slide_application": "Use one left-to-right experimental path with explicit endpoints and visible comparator branches."
+      },
+      "audience_text": [
+        "Synthetic experiment: vary center count, ICC, and cluster-size balance.",
+        "400 replicates per cell",
+        "naive iid OLS z interval",
+        "cluster-robust z interval",
+        "coverage, bias, interval width",
+        "The design asks whether center aggregation repairs interval coverage across the stress grid."
+      ],
       "learned_organization": "Use one left-to-right experimental path with explicit endpoints and visible comparator branches.",
       "reference_rationale": "References are selected by auditable semantic query over inspected page records with rendered-page checksums; they inform organization only.",
       "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied.",
@@ -771,7 +1132,7 @@
     },
     {
       "slide": 4,
-      "title": "Coverage falls when ICC and imbalance rise",
+      "title": "Cluster adjustment recovers coverage except at small G",
       "archetype": "RESULT_FIGURE",
       "reference_ids": [
         "RRL-030",
@@ -840,9 +1201,126 @@
           "RRL-023": "page_function=RESULT_FIGURE matches query; domain=statistics matches query; subdomain=Bayesian workflow matches query; semantic tokens overlap: and, forest, interval, plot, uncertainty, with; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
           "RRL-039": "page_function=REAL_DATA_APPLICATION matches query; domain=biostatistics matches query; subdomain=Bayesian clinical research matches query; semantic tokens overlap: and, data, figure, uncertainty; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3"
         },
+        "selected_page_lessons": {
+          "RRL-030": {
+            "primary_object": "XBox estimates adjusting for demographics",
+            "page_function": "CONFIDENCE_INTERVAL",
+            "evidence_type": "time-series interval",
+            "information_density": "0.75/0.25",
+            "annotation_style": "Grey interval band and smoothed estimate show poll movement.",
+            "useful_lesson": "Show adjusted estimate and uncertainty together when discussing survey quality.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-033": {
+            "primary_object": "design sensitivity in criminal justice experiments",
+            "page_function": "CONFIDENCE_INTERVAL",
+            "evidence_type": "forest plot",
+            "information_density": "0.70/0.30",
+            "annotation_style": "Effect estimates across cities are shown with intervals and notes about null effects.",
+            "useful_lesson": "Tie applied-study pages to the source paper and the interval evidence.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-010": {
+            "primary_object": "quicksort evaluation curves",
+            "page_function": "SIMULATION",
+            "evidence_type": "simulation comparison",
+            "information_density": "0.65/0.35",
+            "annotation_style": "Quicksort resource metrics compare Bayesian analysis and hybrid analysis.",
+            "useful_lesson": "Simulation pages need DGP/example, comparator, and performance curve together.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-023": {
+            "primary_object": "team-quality estimate forest plot",
+            "page_function": "RESULT_FIGURE",
+            "evidence_type": "posterior interval plot",
+            "information_density": "0.80/0.20",
+            "annotation_style": "Team-quality estimates are shown with intervals and ordering.",
+            "useful_lesson": "Use interval plots when ranking is uncertain.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-039": {
+            "primary_object": "data and regression figure",
+            "page_function": "REAL_DATA_APPLICATION",
+            "evidence_type": "clinical regression example",
+            "information_density": "0.70/0.30",
+            "annotation_style": "Regression line and shaded uncertainty are visible.",
+            "useful_lesson": "Clinical stats pages should expose the observed trend and uncertainty before prose.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          }
+        },
         "organization_lesson": "Let the plot dominate and keep uncertainty and interpretation adjacent to the graph.",
         "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied."
       },
+      "reference_design_audit": {
+        "selected_reference_ids": [
+          "RRL-030",
+          "RRL-033",
+          "RRL-010",
+          "RRL-023",
+          "RRL-039"
+        ],
+        "page_specific_lessons": {
+          "RRL-030": {
+            "primary_object": "XBox estimates adjusting for demographics",
+            "page_function": "CONFIDENCE_INTERVAL",
+            "evidence_type": "time-series interval",
+            "information_density": "0.75/0.25",
+            "annotation_style": "Grey interval band and smoothed estimate show poll movement.",
+            "useful_lesson": "Show adjusted estimate and uncertainty together when discussing survey quality.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-033": {
+            "primary_object": "design sensitivity in criminal justice experiments",
+            "page_function": "CONFIDENCE_INTERVAL",
+            "evidence_type": "forest plot",
+            "information_density": "0.70/0.30",
+            "annotation_style": "Effect estimates across cities are shown with intervals and notes about null effects.",
+            "useful_lesson": "Tie applied-study pages to the source paper and the interval evidence.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-010": {
+            "primary_object": "quicksort evaluation curves",
+            "page_function": "SIMULATION",
+            "evidence_type": "simulation comparison",
+            "information_density": "0.65/0.35",
+            "annotation_style": "Quicksort resource metrics compare Bayesian analysis and hybrid analysis.",
+            "useful_lesson": "Simulation pages need DGP/example, comparator, and performance curve together.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-023": {
+            "primary_object": "team-quality estimate forest plot",
+            "page_function": "RESULT_FIGURE",
+            "evidence_type": "posterior interval plot",
+            "information_density": "0.80/0.20",
+            "annotation_style": "Team-quality estimates are shown with intervals and ordering.",
+            "useful_lesson": "Use interval plots when ranking is uncertain.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-039": {
+            "primary_object": "data and regression figure",
+            "page_function": "REAL_DATA_APPLICATION",
+            "evidence_type": "clinical regression example",
+            "information_density": "0.70/0.30",
+            "annotation_style": "Regression line and shaded uncertainty are visible.",
+            "useful_lesson": "Clinical stats pages should expose the observed trend and uncertainty before prose.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          }
+        },
+        "adopted_design_decisions": [
+          "Let the coverage plot occupy most of the slide area.",
+          "Place uncertainty and the nominal target directly in the figure grammar.",
+          "Use direct annotation at the small-G stress point instead of a separate reading card."
+        ],
+        "deliberately_not_adopted": [
+          "Do not move interpretation into pastel side cards.",
+          "Do not describe the result as a general theorem."
+        ],
+        "current_slide_application": "Let the plot dominate and keep uncertainty and interpretation adjacent to the graph."
+      },
+      "audience_text": [
+        "Synthetic imbalanced-cluster simulation; bands show Monte Carlo uncertainty.",
+        "Cluster-robust intervals recover much of the lost coverage, but small-G stress remains below nominal."
+      ],
       "learned_organization": "Let the plot dominate and keep uncertainty and interpretation adjacent to the graph.",
       "reference_rationale": "References are selected by auditable semantic query over inspected page records with rendered-page checksums; they inform organization only.",
       "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied.",
@@ -858,7 +1336,7 @@
     },
     {
       "slide": 5,
-      "title": "Small-G stress remains the negative result",
+      "title": "The remaining failure is finite-center undercoverage",
       "archetype": "NEGATIVE_RESULT",
       "reference_ids": [
         "RRL-011",
@@ -927,9 +1405,127 @@
           "RRL-041": "page_function=NEGATIVE_RESULT matches query; domain=biostatistics matches query; subdomain=Bayesian clinical research matches query; semantic tokens overlap: negative, show, the; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3",
           "RRL-005": "page_function=NEXT_EXPERIMENT matches query; evidence_type=planned evidence matches query; semantic tokens overlap: and, next, result, the; source_tier=PRIMARY_RESEARCH_PRESENTATION priority_bonus=3"
         },
+        "selected_page_lessons": {
+          "RRL-011": {
+            "primary_object": "limitations of hybrid AARA",
+            "page_function": "FINITE_SAMPLE",
+            "evidence_type": "limitation analysis",
+            "information_density": "0.55/0.45",
+            "annotation_style": "Bounded sort and memoization examples reveal where hybrid assumptions break.",
+            "useful_lesson": "Use limitation pages to name failure conditions and show why they matter.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-024": {
+            "primary_object": "prediction comparison against model",
+            "page_function": "MODEL_CHECK",
+            "evidence_type": "posterior predictive check",
+            "information_density": "0.75/0.25",
+            "annotation_style": "Predictions are compared with observed game-score differentials.",
+            "useful_lesson": "Model-check pages should compare model output to real held-out structure.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-025": {
+            "primary_object": "after finding and fixing a bug comparison",
+            "page_function": "NEGATIVE_RESULT",
+            "evidence_type": "bug-fix model check",
+            "information_density": "0.75/0.25",
+            "annotation_style": "A bug-fix comparison is shown with the same predictive-check structure.",
+            "useful_lesson": "Keep bug/failure pages when they change interpretation and show the corrected evidence.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-041": {
+            "primary_object": "histogram of p-values for fertility relationship",
+            "page_function": "NEGATIVE_RESULT",
+            "evidence_type": "p-value distribution",
+            "information_density": "0.65/0.35",
+            "annotation_style": "Histogram of p-values appears after possible analyses are enumerated.",
+            "useful_lesson": "Negative statistical-method pages should show the failure distribution.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-005": {
+            "primary_object": "future work bullets tied to robustness and interpretability",
+            "page_function": "NEXT_EXPERIMENT",
+            "evidence_type": "planned evidence",
+            "information_density": "0.25/0.75",
+            "annotation_style": "Highlighted note asks how much uncertainty to present as future work.",
+            "useful_lesson": "Use future-work pages to ask for decisions, not to claim completed evidence.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          }
+        },
         "organization_lesson": "Keep the failure visible and separate completed evidence from the next planned method.",
         "what_was_not_copied": "No full-slide screenshots, source images, institutional styling, public figures, private clinical data, or source-specific visual identity were copied."
       },
+      "reference_design_audit": {
+        "selected_reference_ids": [
+          "RRL-011",
+          "RRL-024",
+          "RRL-025",
+          "RRL-041",
+          "RRL-005"
+        ],
+        "page_specific_lessons": {
+          "RRL-011": {
+            "primary_object": "limitations of hybrid AARA",
+            "page_function": "FINITE_SAMPLE",
+            "evidence_type": "limitation analysis",
+            "information_density": "0.55/0.45",
+            "annotation_style": "Bounded sort and memoization examples reveal where hybrid assumptions break.",
+            "useful_lesson": "Use limitation pages to name failure conditions and show why they matter.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-024": {
+            "primary_object": "prediction comparison against model",
+            "page_function": "MODEL_CHECK",
+            "evidence_type": "posterior predictive check",
+            "information_density": "0.75/0.25",
+            "annotation_style": "Predictions are compared with observed game-score differentials.",
+            "useful_lesson": "Model-check pages should compare model output to real held-out structure.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-025": {
+            "primary_object": "after finding and fixing a bug comparison",
+            "page_function": "NEGATIVE_RESULT",
+            "evidence_type": "bug-fix model check",
+            "information_density": "0.75/0.25",
+            "annotation_style": "A bug-fix comparison is shown with the same predictive-check structure.",
+            "useful_lesson": "Keep bug/failure pages when they change interpretation and show the corrected evidence.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-041": {
+            "primary_object": "histogram of p-values for fertility relationship",
+            "page_function": "NEGATIVE_RESULT",
+            "evidence_type": "p-value distribution",
+            "information_density": "0.65/0.35",
+            "annotation_style": "Histogram of p-values appears after possible analyses are enumerated.",
+            "useful_lesson": "Negative statistical-method pages should show the failure distribution.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          },
+          "RRL-005": {
+            "primary_object": "future work bullets tied to robustness and interpretability",
+            "page_function": "NEXT_EXPERIMENT",
+            "evidence_type": "planned evidence",
+            "information_density": "0.25/0.75",
+            "annotation_style": "Highlighted note asks how much uncertainty to present as future work.",
+            "useful_lesson": "Use future-work pages to ask for decisions, not to claim completed evidence.",
+            "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+          }
+        },
+        "adopted_design_decisions": [
+          "Use the same quantitative evidence grammar as the main result page.",
+          "Make the undercoverage point visible and annotated in the chart.",
+          "Keep the planned CR2 / wild-bootstrap experiment as a small secondary statement."
+        ],
+        "deliberately_not_adopted": [
+          "Do not create separate negative-result, mechanism, and next-experiment cards.",
+          "Do not make planned methods look like completed evidence."
+        ],
+        "current_slide_application": "Keep the failure visible and separate completed evidence from the next planned method."
+      },
+      "audience_text": [
+        "At G=8, ICC ρ=.5, imbalanced clusters, cluster-robust coverage is 0.78.",
+        "Few centers make the sandwich variance noisy; imbalance increases center leverage.",
+        "Planned comparison: CR2 small-sample correction and wild cluster bootstrap on the same grid."
+      ],
       "learned_organization": "Keep the failure visible and separate completed evidence from the next planned method.",
       "reference_rationale": "References are selected by auditable semantic query over inspected page records with rendered-page checksums; they inform organization only.",
       "style_not_copied": "No whole-slide screenshot, public slide styling, private CARE figure, or clinical/patient image is copied.",
@@ -943,6 +1539,433 @@
       ]
     }
   ],
+  "reference_design_audit": {
+    "slide_1": {
+      "selected_reference_ids": [
+        "RRL-044",
+        "RRL-007",
+        "RRL-008",
+        "RRL-043",
+        "RRL-042"
+      ],
+      "page_specific_lessons": {
+        "RRL-044": {
+          "primary_object": "Bayesian inference workflow for a pharmacokinetic model",
+          "page_function": "BAYESIAN_MODEL",
+          "evidence_type": "modeling workflow",
+          "information_density": "0.30/0.70",
+          "annotation_style": "Inference bullets separate PK parameters, concentration predictions, and checks.",
+          "useful_lesson": "Bayesian workflow pages should separate inference targets and checks.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-007": {
+          "primary_object": "Bayesian data-driven analysis generative model",
+          "page_function": "BAYESIAN_MODEL",
+          "evidence_type": "Bayesian model",
+          "information_density": "0.45/0.55",
+          "annotation_style": "Bayesian formulation is introduced with model components and posterior samples.",
+          "useful_lesson": "For Bayesian pages, show prior/likelihood/posterior roles and the object of inference.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-008": {
+          "primary_object": "hybrid analysis goal/challenge with posterior samples",
+          "page_function": "ASSUMPTION",
+          "evidence_type": "assumption / challenge",
+          "information_density": "0.55/0.45",
+          "annotation_style": "Hybrid challenge asks how constraints and posterior samples can be combined.",
+          "useful_lesson": "Put assumptions and interface questions in the main method flow, not hidden backup.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-043": {
+          "primary_object": "Bayesian data analysis model checking",
+          "page_function": "MODEL_CHECK",
+          "evidence_type": "model checking checklist",
+          "information_density": "0.20/0.80",
+          "annotation_style": "Questions ask if inferences make sense and whether model predictions fit data.",
+          "useful_lesson": "Checklist pages can be useful when each question maps to a later diagnostic.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-042": {
+          "primary_object": "Bayesian solution to comparison multiplicity",
+          "page_function": "BAYESIAN_MODEL",
+          "evidence_type": "Bayesian workflow list",
+          "information_density": "0.20/0.80",
+          "annotation_style": "Bayesian solution bullets follow the p-value problem.",
+          "useful_lesson": "Pair negative-result pages with a concrete modeling response.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        }
+      },
+      "adopted_design_decisions": [
+        "Use the DGP formula as the dominant object rather than prose cards.",
+        "Ground notation adjacent to the displayed formula with short semantic labels.",
+        "Use containment and spacing for additive components instead of causal arrows."
+      ],
+      "deliberately_not_adopted": [
+        "Do not copy any source deck styling or full-slide imagery.",
+        "Do not use reference IDs or retrieval traces as slide footer content."
+      ],
+      "current_slide_application": "Make the estimand and data-generating mechanism the main object before discussing results."
+    },
+    "slide_2": {
+      "selected_reference_ids": [
+        "RRL-040",
+        "RRL-009",
+        "RRL-028",
+        "RRL-030",
+        "RRL-015"
+      ],
+      "page_specific_lessons": {
+        "RRL-040": {
+          "primary_object": "confidence intervals do not respect prior information",
+          "page_function": "CONFIDENCE_INTERVAL",
+          "evidence_type": "confidence interval principle",
+          "information_density": "0.15/0.85",
+          "annotation_style": "Confidence-interval limitation is stated in one sentence.",
+          "useful_lesson": "Use principle pages sparingly when they frame later evidence.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-009": {
+          "primary_object": "hybrid AARA plus BayesPC algorithm flow",
+          "page_function": "ESTIMATOR",
+          "evidence_type": "estimator pipeline",
+          "information_density": "0.70/0.30",
+          "annotation_style": "AARA and BayesPC are connected through posterior samples and cost constraints.",
+          "useful_lesson": "Show estimator inputs, restrictions, and outputs in one editable diagram.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-028": {
+          "primary_object": "poststratification identity",
+          "page_function": "ESTIMATOR",
+          "evidence_type": "estimator formula",
+          "information_density": "0.35/0.65",
+          "annotation_style": "Poststratification identity is shown as the sole object.",
+          "useful_lesson": "Put estimand/estimator formulas on sparse pages when they define the rest of the talk.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-030": {
+          "primary_object": "XBox estimates adjusting for demographics",
+          "page_function": "CONFIDENCE_INTERVAL",
+          "evidence_type": "time-series interval",
+          "information_density": "0.75/0.25",
+          "annotation_style": "Grey interval band and smoothed estimate show poll movement.",
+          "useful_lesson": "Show adjusted estimate and uncertainty together when discussing survey quality.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-015": {
+          "primary_object": "bootstrap confidence interval surface",
+          "page_function": "CONFIDENCE_INTERVAL",
+          "evidence_type": "uncertainty interval",
+          "information_density": "0.70/0.30",
+          "annotation_style": "Observed distribution and 95 percent CI are called out on a surface plot.",
+          "useful_lesson": "Show interval behavior, not just a single metric, when annotation variability matters.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        }
+      },
+      "adopted_design_decisions": [
+        "Make the sandwich covariance formula the largest object on the page.",
+        "Annotate the middle score-aggregation term directly beside the formula.",
+        "Keep the naive comparator compact so it supports rather than competes with the main formula."
+      ],
+      "deliberately_not_adopted": [
+        "Do not turn the variance comparison into three pastel explanation cards.",
+        "Do not show source-like ASCII formula strings to the audience."
+      ],
+      "current_slide_application": "Put the formula next to definitions of the grouped objects it operates on."
+    },
+    "slide_3": {
+      "selected_reference_ids": [
+        "RRL-009",
+        "RRL-010",
+        "RRL-019",
+        "RRL-026",
+        "RRL-002"
+      ],
+      "page_specific_lessons": {
+        "RRL-009": {
+          "primary_object": "hybrid AARA plus BayesPC algorithm flow",
+          "page_function": "ESTIMATOR",
+          "evidence_type": "estimator pipeline",
+          "information_density": "0.70/0.30",
+          "annotation_style": "AARA and BayesPC are connected through posterior samples and cost constraints.",
+          "useful_lesson": "Show estimator inputs, restrictions, and outputs in one editable diagram.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-010": {
+          "primary_object": "quicksort evaluation curves",
+          "page_function": "SIMULATION",
+          "evidence_type": "simulation comparison",
+          "information_density": "0.65/0.35",
+          "annotation_style": "Quicksort resource metrics compare Bayesian analysis and hybrid analysis.",
+          "useful_lesson": "Simulation pages need DGP/example, comparator, and performance curve together.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-019": {
+          "primary_object": "automatic lesion segmentation applications",
+          "page_function": "EXPERIMENT_DESIGN",
+          "evidence_type": "task overview",
+          "information_density": "0.70/0.30",
+          "annotation_style": "PET applications and lesion examples appear before architecture details.",
+          "useful_lesson": "Start method talks by connecting task, data, and application unit.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-026": {
+          "primary_object": "simulate fake data in R",
+          "page_function": "SIMULATION",
+          "evidence_type": "fake-data simulation",
+          "information_density": "0.45/0.55",
+          "annotation_style": "R code and simulated scatter expose the model-generated data.",
+          "useful_lesson": "Simulation pages need visible data-generating mechanism and output.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-002": {
+          "primary_object": "graph neural network concept diagram",
+          "page_function": "METHOD_DIAGRAM",
+          "evidence_type": "method mechanism",
+          "information_density": "0.70/0.30",
+          "annotation_style": "Simple objects and arrows explain satellites/debris graph representation.",
+          "useful_lesson": "Use one mechanism diagram before algorithm details.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        }
+      },
+      "adopted_design_decisions": [
+        "Keep one left-to-right experimental path from DGP knobs to endpoints.",
+        "Use only scientific operations as nodes and keep branch labels short.",
+        "Use a restrained neutral layout with one accent color for the cluster-robust branch."
+      ],
+      "deliberately_not_adopted": [
+        "Do not show diagram QA contracts or reading instructions on the slide.",
+        "Do not use decorative workflow boxes when a node is not a real scientific operation."
+      ],
+      "current_slide_application": "Use one left-to-right experimental path with explicit endpoints and visible comparator branches."
+    },
+    "slide_4": {
+      "selected_reference_ids": [
+        "RRL-030",
+        "RRL-033",
+        "RRL-010",
+        "RRL-023",
+        "RRL-039"
+      ],
+      "page_specific_lessons": {
+        "RRL-030": {
+          "primary_object": "XBox estimates adjusting for demographics",
+          "page_function": "CONFIDENCE_INTERVAL",
+          "evidence_type": "time-series interval",
+          "information_density": "0.75/0.25",
+          "annotation_style": "Grey interval band and smoothed estimate show poll movement.",
+          "useful_lesson": "Show adjusted estimate and uncertainty together when discussing survey quality.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-033": {
+          "primary_object": "design sensitivity in criminal justice experiments",
+          "page_function": "CONFIDENCE_INTERVAL",
+          "evidence_type": "forest plot",
+          "information_density": "0.70/0.30",
+          "annotation_style": "Effect estimates across cities are shown with intervals and notes about null effects.",
+          "useful_lesson": "Tie applied-study pages to the source paper and the interval evidence.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-010": {
+          "primary_object": "quicksort evaluation curves",
+          "page_function": "SIMULATION",
+          "evidence_type": "simulation comparison",
+          "information_density": "0.65/0.35",
+          "annotation_style": "Quicksort resource metrics compare Bayesian analysis and hybrid analysis.",
+          "useful_lesson": "Simulation pages need DGP/example, comparator, and performance curve together.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-023": {
+          "primary_object": "team-quality estimate forest plot",
+          "page_function": "RESULT_FIGURE",
+          "evidence_type": "posterior interval plot",
+          "information_density": "0.80/0.20",
+          "annotation_style": "Team-quality estimates are shown with intervals and ordering.",
+          "useful_lesson": "Use interval plots when ranking is uncertain.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-039": {
+          "primary_object": "data and regression figure",
+          "page_function": "REAL_DATA_APPLICATION",
+          "evidence_type": "clinical regression example",
+          "information_density": "0.70/0.30",
+          "annotation_style": "Regression line and shaded uncertainty are visible.",
+          "useful_lesson": "Clinical stats pages should expose the observed trend and uncertainty before prose.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        }
+      },
+      "adopted_design_decisions": [
+        "Let the coverage plot occupy most of the slide area.",
+        "Place uncertainty and the nominal target directly in the figure grammar.",
+        "Use direct annotation at the small-G stress point instead of a separate reading card."
+      ],
+      "deliberately_not_adopted": [
+        "Do not move interpretation into pastel side cards.",
+        "Do not describe the result as a general theorem."
+      ],
+      "current_slide_application": "Let the plot dominate and keep uncertainty and interpretation adjacent to the graph."
+    },
+    "slide_5": {
+      "selected_reference_ids": [
+        "RRL-011",
+        "RRL-024",
+        "RRL-025",
+        "RRL-041",
+        "RRL-005"
+      ],
+      "page_specific_lessons": {
+        "RRL-011": {
+          "primary_object": "limitations of hybrid AARA",
+          "page_function": "FINITE_SAMPLE",
+          "evidence_type": "limitation analysis",
+          "information_density": "0.55/0.45",
+          "annotation_style": "Bounded sort and memoization examples reveal where hybrid assumptions break.",
+          "useful_lesson": "Use limitation pages to name failure conditions and show why they matter.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-024": {
+          "primary_object": "prediction comparison against model",
+          "page_function": "MODEL_CHECK",
+          "evidence_type": "posterior predictive check",
+          "information_density": "0.75/0.25",
+          "annotation_style": "Predictions are compared with observed game-score differentials.",
+          "useful_lesson": "Model-check pages should compare model output to real held-out structure.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-025": {
+          "primary_object": "after finding and fixing a bug comparison",
+          "page_function": "NEGATIVE_RESULT",
+          "evidence_type": "bug-fix model check",
+          "information_density": "0.75/0.25",
+          "annotation_style": "A bug-fix comparison is shown with the same predictive-check structure.",
+          "useful_lesson": "Keep bug/failure pages when they change interpretation and show the corrected evidence.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-041": {
+          "primary_object": "histogram of p-values for fertility relationship",
+          "page_function": "NEGATIVE_RESULT",
+          "evidence_type": "p-value distribution",
+          "information_density": "0.65/0.35",
+          "annotation_style": "Histogram of p-values appears after possible analyses are enumerated.",
+          "useful_lesson": "Negative statistical-method pages should show the failure distribution.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        },
+        "RRL-005": {
+          "primary_object": "future work bullets tied to robustness and interpretability",
+          "page_function": "NEXT_EXPERIMENT",
+          "evidence_type": "planned evidence",
+          "information_density": "0.25/0.75",
+          "annotation_style": "Highlighted note asks how much uncertainty to present as future work.",
+          "useful_lesson": "Use future-work pages to ask for decisions, not to claim completed evidence.",
+          "not_copied": "Do not copy whole-slide screenshots, institutional styling, public figures, private clinical data, or source-specific visual identity; redraw the organization with owned or synthetic evidence."
+        }
+      },
+      "adopted_design_decisions": [
+        "Use the same quantitative evidence grammar as the main result page.",
+        "Make the undercoverage point visible and annotated in the chart.",
+        "Keep the planned CR2 / wild-bootstrap experiment as a small secondary statement."
+      ],
+      "deliberately_not_adopted": [
+        "Do not create separate negative-result, mechanism, and next-experiment cards.",
+        "Do not make planned methods look like completed evidence."
+      ],
+      "current_slide_application": "Keep the failure visible and separate completed evidence from the next planned method."
+    }
+  },
+  "audience_text_by_archetype": {
+    "STATISTICAL_MODEL": [
+      "Synthetic multi-center simulation; treatment effect β₁=0.25.",
+      "β₁ is the treatment effect.",
+      "uⱼ: center-level shift shared within center j.",
+      "εᵢⱼ: individual residual noise.",
+      "ρ is the intraclass correlation; center j is the inference unit.",
+      "Point estimates can remain centered while iid intervals lose coverage."
+    ],
+    "ESTIMATOR": [
+      "Both intervals estimate β₁; only the variance object changes.",
+      "Cluster meat: score contributions are summed by center before forming covariance.",
+      "Naive variance treats rows as independent.",
+      "The simulation uses cluster-robust z intervals; CR2 and wild bootstrap remain planned comparisons."
+    ],
+    "SIMULATION_DESIGN": [
+      "Synthetic experiment: vary center count, ICC, and cluster-size balance.",
+      "400 replicates per cell",
+      "naive iid OLS z interval",
+      "cluster-robust z interval",
+      "coverage, bias, interval width",
+      "The design asks whether center aggregation repairs interval coverage across the stress grid."
+    ],
+    "RESULT_FIGURE": [
+      "Synthetic imbalanced-cluster simulation; bands show Monte Carlo uncertainty.",
+      "Cluster-robust intervals recover much of the lost coverage, but small-G stress remains below nominal."
+    ],
+    "NEGATIVE_RESULT": [
+      "At G=8, ICC ρ=.5, imbalanced clusters, cluster-robust coverage is 0.78.",
+      "Few centers make the sandwich variance noisy; imbalance increases center leverage.",
+      "Planned comparison: CR2 small-sample correction and wild cluster bootstrap on the same grid."
+    ]
+  },
+  "math_assets": {
+    "slide1_dgp": {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/slide1_dgp.png",
+      "source": "$Y_{ij}=\\beta_0+\\beta_1T_{ij}+u_j+\\varepsilon_{ij}$",
+      "format": "matplotlib_mathtext_png_transparent",
+      "dpi": 360,
+      "pixel_width": 2490,
+      "pixel_height": 309
+    },
+    "slide1_components": {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/slide1_components.png",
+      "source": "$u_j\\sim N(0,\\tau^2),\\qquad \\varepsilon_{ij}\\sim N(0,\\sigma^2)$",
+      "format": "matplotlib_mathtext_png_transparent",
+      "dpi": 360,
+      "pixel_width": 2390,
+      "pixel_height": 259
+    },
+    "slide1_icc": {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/slide1_icc.png",
+      "source": "$\\rho=\\frac{\\tau^2}{\\tau^2+\\sigma^2}$",
+      "format": "matplotlib_mathtext_png_transparent",
+      "dpi": 360,
+      "pixel_width": 1026,
+      "pixel_height": 475
+    },
+    "slide2_sandwich": {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/slide2_sandwich.png",
+      "source": "$\\widehat V_{\\mathrm{CR}}=(X^\\top X)^{-1}\\left(\\sum_g X_g^\\top \\hat u_g\\hat u_g^\\top X_g\\right)(X^\\top X)^{-1}$",
+      "format": "matplotlib_mathtext_png_transparent",
+      "dpi": 360,
+      "pixel_width": 3668,
+      "pixel_height": 497
+    },
+    "slide2_naive": {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/slide2_naive.png",
+      "source": "$\\widehat V_{\\mathrm{iid}}=\\hat\\sigma^2(X^\\top X)^{-1}$",
+      "format": "matplotlib_mathtext_png_transparent",
+      "dpi": 360,
+      "pixel_width": 1299,
+      "pixel_height": 245
+    }
+  },
+  "model_page_structure": {
+    "additive_components": [
+      "u_j",
+      "epsilon_ij"
+    ],
+    "connector_policy": "center random effect and individual residual are parallel additive components; notation is grounded by proximity and labels",
+    "math_asset_keys": [
+      "slide1_dgp",
+      "slide1_components",
+      "slide1_icc"
+    ]
+  },
+  "estimator_page_structure": {
+    "math_asset_keys": [
+      "slide2_sandwich",
+      "slide2_naive"
+    ],
+    "annotated_term": "sum_g X_g^T u_g u_g^T X_g",
+    "source_like_formula_text_in_audience_objects": false
+  },
   "simulation_design_diagram": {
     "structural_connectors": [
       "dgp_to_data",
@@ -967,6 +1990,17 @@
     "claim": "small-G/high-ICC stress remains under nominal for cluster-robust z intervals",
     "next_experiment": "planned: compare CR2 small-sample correction and wild cluster bootstrap under the same DGP grid"
   },
-  "pptx": ".cache/016-statistical-benchmark-source/statistical_method_group_meeting_benchmark.pptx",
-  "editable_slide_count": 5
+  "pptx": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/statistical_method_group_meeting_benchmark.pptx",
+  "editable_slide_count": 5,
+  "deterministic_quality_gates": {
+    "status": "PASS",
+    "failures": [],
+    "checked_gates": [
+      "audience_facing_internal_leak",
+      "math_source_leak",
+      "rendered_math_assets_present",
+      "anti_meta_language",
+      "reference_design_audit"
+    ]
+  }
 }

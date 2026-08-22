@@ -56,12 +56,17 @@ def verify_source_chain(source_dir: Path) -> tuple[dict[str, Any], dict[str, Any
     evidence = load_json(require_file(source_dir / "EVIDENCE_MANIFEST.json"))
     render = load_json(require_file(source_dir / "RENDER_STATUS.json"))
     mechanical = load_json(require_file(source_dir / "MECHANICAL_VISUAL_REVIEW.json"))
+    reference_audit = load_json(require_file(source_dir / "reference_design_audit.json"))
     require_file(source_dir / "statistical_method_group_meeting_benchmark.pptx")
     require_file(source_dir / "pdf" / "statistical_method_group_meeting_benchmark.pdf")
     if evidence.get("status") != "GENERATED_SOURCE_ARTIFACTS_ONLY" or evidence.get("generator_may_pass") is not False:
         raise SystemExit("evidence manifest must be generated-source-only and must not claim PASS")
     if evidence.get("editable_slide_count") != 5 or len(evidence.get("slides", [])) != 5:
         raise SystemExit("evidence manifest must describe exactly five editable slides")
+    if evidence.get("deterministic_quality_gates", {}).get("status") != "PASS":
+        raise SystemExit("deterministic presentation QA gates must pass before visual review")
+    if len(reference_audit) != 5:
+        raise SystemExit("reference_design_audit.json must cover exactly five slides")
     if render.get("status") != "ok" or render.get("png_count") != 5 or render.get("returncode") != 0:
         raise SystemExit("render status must prove a successful real PPTX render to five PNGs")
     if mechanical.get("status") != "MECHANICAL_PASS":
@@ -82,6 +87,8 @@ def verify_source_chain(source_dir: Path) -> tuple[dict[str, Any], dict[str, Any
             raise SystemExit(f"reference id mismatch for slide {slide_number}")
         if slide.get("expected_scientific_objects") != review.get("expected_object_contract"):
             raise SystemExit(f"expected scientific object mismatch for slide {slide_number}")
+        if slide.get("reference_design_audit", {}).get("selected_reference_ids") != slide.get("reference_ids"):
+            raise SystemExit(f"reference design audit mismatch for slide {slide_number}")
         rendered = require_file(source_dir / "rendered" / f"slide-{slide_number}.png")
         expected = require_file(source_dir / "expected_render" / f"slide-{slide_number}.png")
         if sha256(rendered) != sha256(expected):
@@ -91,16 +98,21 @@ def verify_source_chain(source_dir: Path) -> tuple[dict[str, Any], dict[str, Any
 
 def rubric_instructions(evidence: dict[str, Any]) -> str:
     slide_lines = []
+    audit = evidence.get("reference_design_audit", {})
     for slide in evidence["slides"]:
+        slide_audit = slide.get("reference_design_audit") or audit.get(f"slide_{slide['slide']}", {})
+        lessons = "; ".join(slide_audit.get("adopted_design_decisions", []))
         slide_lines.append(
             "- slide_{slide}: title={title}; declared_archetype={archetype}; "
-            "expected_scientific_objects={objects}; reference_ids={refs}; retrieval_intent={intent}".format(
+            "expected_scientific_objects={objects}; reference_ids={refs}; retrieval_intent={intent}; "
+            "reference_informed_design={lessons}".format(
                 slide=slide["slide"],
                 title=slide["title"],
                 archetype=slide["archetype"],
                 objects=", ".join(slide["expected_scientific_objects"]),
                 refs=", ".join(slide["reference_ids"]),
                 intent=slide["reference_retrieval"]["query"]["intent"],
+                lessons=lessons,
             )
         )
     return "\n".join(
@@ -108,12 +120,17 @@ def rubric_instructions(evidence: dict[str, Any]) -> str:
             "You are reviewing five real rendered PNG pages from an editable PPTX statistical/biostatistical method group meeting benchmark.",
             "Inspect the actual image pixels page by page. Do not infer PASS from SHA, file existence, page count, mechanical PASS, metadata, expected object text, or reference IDs.",
             "For each page, identify the primary scientific object visible in the image.",
-            "Check statistical communication: estimand, DGP, formulas, interval methods, simulation design, coverage target, uncertainty, negative result, and planned next experiment.",
-            "Reject pages that become cards, dashboards, generic consulting layouts, decorative arrows, fake plots, or unsupported theorem-like claims.",
+            "Scientific correctness: check that claims match the visible formula or figure, the DGP does not imply a wrong connector relationship, interval interpretations are correct, uncertainty is explained, and planned work is not presented as completed evidence.",
+            "Mathematical typesetting: reject core formulas that still look like source code or ASCII strings such as beta_1, epsilon_ij, sum_g, X'X, or ^(-1). PASS requires readable mathematical notation at projection scale.",
+            "Audience-facing language: reject visible internal IDs or QA/provenance/meta language, including RRL IDs, Reference retrieval, EVIDENCE_MANIFEST, Diagram contract, style not copied, Reading target, Observed in this synthetic run, repo paths, run IDs, implementation commits, and review-target language.",
+            "Visual maturity: explicitly answer this question for each page: Would this slide look professionally finished if projected in a strong PI's research group meeting or a top-conference oral talk?",
+            "Check hierarchy, figure/formula prominence, alignment, color discipline, intentional whitespace, information density, typography, captions, direct annotations, and projection readability.",
+            "Reject pages that become pastel cards, dashboards, generic consulting layouts, wireframes, decorative arrows, fake plots, placeholder visuals, or unsupported theorem-like claims.",
+            "Reference-informed quality: use the supplied page-specific reference lessons to judge whether the slide actually adopted the relevant mature-slide lesson; do not require copying source styling.",
             "For diagram pages, check connector direction, visible arrowheads, edge crossing, and whether the flow can be understood in about 5 seconds.",
             "For result pages, coverage near nominal 0.95 is the target; do not reward over-coverage as simply higher-is-better.",
             "Check that synthetic simulation evidence is visibly bounded and not represented as clinical validation or a general statistical theorem.",
-            "Return PASS only when every page satisfies its research visual job. Return REVISE if any page needs a concrete visual fix. Return BLOCKED only if the supplied pixels cannot be assessed.",
+            "Return PASS only when every page satisfies its research visual job and looks like a mature scientific talk page. Return REVISE if any page needs a concrete visual fix. Return BLOCKED only if the supplied pixels cannot be assessed.",
             "For REVISE, give the smallest concrete page-specific repair recommendation.",
             "",
             "Declared page contracts:",
@@ -158,6 +175,7 @@ def build_manifest(source_dir: Path, task_key: str) -> dict[str, Any]:
             "source_academic_visual_decision": mechanical["academic_visual_decision"],
             "source_render_status": render["status"],
             "simulation_summary_sha256": sha256(source_dir / "simulation" / "simulation_summary.json"),
+            "reference_design_audit_sha256": sha256(source_dir / "reference_design_audit.json"),
             "input_png_sha256_by_slide": image_shas,
         },
         "inputs": inputs,

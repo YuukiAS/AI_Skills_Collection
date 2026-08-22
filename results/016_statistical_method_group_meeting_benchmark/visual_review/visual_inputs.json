@@ -3,18 +3,19 @@
   "identity_bindings": {
     "adapter_identity": "016_statistical_method_group_meeting_benchmark",
     "bridge_kit_commit": "f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e",
-    "evidence_manifest_sha256": "9010bfae11016931720f164d43453072fba136f7797c8392dbb91b9299168db3",
+    "evidence_manifest_sha256": "489b68f74d7a68dc874085483c330b4903a4bd965db5c7a4f24e3dd9597e9fc3",
     "input_png_sha256_by_slide": {
-      "slide_1": "9e6d59d16c89b27a65e579ca7708cad868a86c19b697e2217e50e13ba0901ac6",
-      "slide_2": "c619fc34a361d31f2ba0d8c6586404e3c2e797870622dccb83c1d0d6c39e67ce",
-      "slide_3": "26e6c96c653fc56df5a2786802fb51ceb2c6c802ce584cd1d5aba7b092650f89",
-      "slide_4": "aa04f8120509e5ef2d3721477ed2b9a342382701611b7bf448d46476170986eb",
-      "slide_5": "05e6e2c3dc18dd810d526c15097e88d754ccdae41844fe6b8a8d11348d2a8c2e"
+      "slide_1": "5193c27de468a38b8aa4284474262a1d4dcaea09d89d1cf0f8d0c62ad7dc7117",
+      "slide_2": "4fd2da3db5be4eb45054855621ceef5addb26361f24b3ecca9fc99624d490406",
+      "slide_3": "c7f08151deca50d477e73779f4fcd8b6b2b2b8e6d4d9ca876c9302d4d87d60c2",
+      "slide_4": "147b84ed8960283604cc9b7b50e0de1720951f43892b4471fae774970a4d95bc",
+      "slide_5": "9329e6645b91fa8841a01476775a227877cb35cfe862e4b6ba734d935a06dfef"
     },
-    "mechanical_review_sha256": "360715a588841f9f81c504c727e2d6552ad05c6f71c3c2581827a050dc3ae0ea",
-    "pdf_sha256": "e510c61c559b8e53ce4861cb6c8247c8cb13faeba3a02d6d6ea313e28245adfb",
-    "pptx_sha256": "6220d656b77c40122aff9600f64acbba6d64f0fb57f446ddc38d3489f0ce6ecc",
-    "render_status_sha256": "5aa4e873dbdf97d78cc53286fd1b515c8b05031a60a3bd2857e80045222045be",
+    "mechanical_review_sha256": "262383dbf22e284bdbb27a5d2d5480285aac87bed8f18dde7603c56ab35d91c5",
+    "pdf_sha256": "d128ad2c2f5336db5919f6a7a6037a8ffbd0420fae323266eca7bc8737a01956",
+    "pptx_sha256": "e7bac1a6cc5d1bcf6f73b9a9465219f35312d6631d29e3cb610e9ff7a32a35ac",
+    "reference_design_audit_sha256": "e9d279bec967edf30a6b3af2988b12b469c03de75ed2176bd92a7dfcc0b4cfd0",
+    "render_status_sha256": "09ba2a78c7bc35d24866ad5b94a1e11118cb82a5a9653aa5d228def8084fe210",
     "simulation_summary_sha256": "e8ac5e5ecd5aee768df9510f3e22148827aa11c4f2b45437d259c8e2f5f90f94",
     "source_academic_visual_decision": "NOT_ASSESSED",
     "source_dir": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source",
@@ -23,46 +24,46 @@
   },
   "inputs": [
     {
-      "description": "Slide 1: Why iid intervals fail with center correlation | archetype=STATISTICAL_MODEL | expected_objects=beta_1 estimand, DGP formula, u_j random effect, epsilon_ij residual, ICC rho, center inference unit",
+      "description": "Slide 1: Center correlation breaks iid intervals | archetype=STATISTICAL_MODEL | expected_objects=beta_1 estimand, DGP formula, u_j random effect, epsilon_ij residual, ICC rho, center inference unit",
       "logical_id": "slide_1",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-1.png",
-      "sha256": "9e6d59d16c89b27a65e579ca7708cad868a86c19b697e2217e50e13ba0901ac6"
+      "sha256": "5193c27de468a38b8aa4284474262a1d4dcaea09d89d1cf0f8d0c62ad7dc7117"
     },
     {
-      "description": "Slide 2: Cluster sandwich changes the variance object | archetype=ESTIMATOR | expected_objects=naive variance formula, cluster sandwich formula, X_g block, u_g residual vector, center aggregation",
+      "description": "Slide 2: The sandwich variance aggregates by center | archetype=ESTIMATOR | expected_objects=naive variance formula, cluster sandwich formula, X_g block, u_g residual vector, center aggregation",
       "logical_id": "slide_2",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-2.png",
-      "sha256": "c619fc34a361d31f2ba0d8c6586404e3c2e797870622dccb83c1d0d6c39e67ce"
+      "sha256": "4fd2da3db5be4eb45054855621ceef5addb26361f24b3ecca9fc99624d490406"
     },
     {
-      "description": "Slide 3: Simulation design tests interval behavior | archetype=SIMULATION_DESIGN | expected_objects=DGP knobs, replicates, naive interval branch, cluster-robust interval branch, coverage endpoint gate",
+      "description": "Slide 3: A stress grid separates interval behavior | archetype=SIMULATION_DESIGN | expected_objects=DGP knobs, replicates, naive interval branch, cluster-robust interval branch, coverage endpoint gate",
       "logical_id": "slide_3",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-3.png",
-      "sha256": "26e6c96c653fc56df5a2786802fb51ceb2c6c802ce584cd1d5aba7b092650f89"
+      "sha256": "c7f08151deca50d477e73779f4fcd8b6b2b2b8e6d4d9ca876c9302d4d87d60c2"
     },
     {
-      "description": "Slide 4: Coverage falls when ICC and imbalance rise | archetype=RESULT_FIGURE | expected_objects=coverage plot, nominal 95% line, method comparison, Monte Carlo uncertainty, synthetic boundary",
+      "description": "Slide 4: Cluster adjustment recovers coverage except at small G | archetype=RESULT_FIGURE | expected_objects=coverage plot, nominal 95% line, method comparison, Monte Carlo uncertainty, synthetic boundary",
       "logical_id": "slide_4",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-4.png",
-      "sha256": "aa04f8120509e5ef2d3721477ed2b9a342382701611b7bf448d46476170986eb"
+      "sha256": "147b84ed8960283604cc9b7b50e0de1720951f43892b4471fae774970a4d95bc"
     },
     {
-      "description": "Slide 5: Small-G stress remains the negative result | archetype=NEGATIVE_RESULT | expected_objects=small-G stress evidence, coverage shortfall, failure mechanism, planned CR2/wild bootstrap experiment",
+      "description": "Slide 5: The remaining failure is finite-center undercoverage | archetype=NEGATIVE_RESULT | expected_objects=small-G stress evidence, coverage shortfall, failure mechanism, planned CR2/wild bootstrap experiment",
       "logical_id": "slide_5",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-5.png",
-      "sha256": "05e6e2c3dc18dd810d526c15097e88d754ccdae41844fe6b8a8d11348d2a8c2e"
+      "sha256": "9329e6645b91fa8841a01476775a227877cb35cfe862e4b6ba734d935a06dfef"
     }
   ],
   "privacy_policy": "PUBLIC_SAFE_ONLY",
   "prompt_version": "ai-bridge.visual-review.v1",
   "review_kind": "statistical-method-group-meeting-benchmark",
   "rubric": {
-    "instructions": "You are reviewing five real rendered PNG pages from an editable PPTX statistical/biostatistical method group meeting benchmark.\nInspect the actual image pixels page by page. Do not infer PASS from SHA, file existence, page count, mechanical PASS, metadata, expected object text, or reference IDs.\nFor each page, identify the primary scientific object visible in the image.\nCheck statistical communication: estimand, DGP, formulas, interval methods, simulation design, coverage target, uncertainty, negative result, and planned next experiment.\nReject pages that become cards, dashboards, generic consulting layouts, decorative arrows, fake plots, or unsupported theorem-like claims.\nFor diagram pages, check connector direction, visible arrowheads, edge crossing, and whether the flow can be understood in about 5 seconds.\nFor result pages, coverage near nominal 0.95 is the target; do not reward over-coverage as simply higher-is-better.\nCheck that synthetic simulation evidence is visibly bounded and not represented as clinical validation or a general statistical theorem.\nReturn PASS only when every page satisfies its research visual job. Return REVISE if any page needs a concrete visual fix. Return BLOCKED only if the supplied pixels cannot be assessed.\nFor REVISE, give the smallest concrete page-specific repair recommendation.\n\nDeclared page contracts:\n- slide_1: title=Why iid intervals fail with center correlation; declared_archetype=STATISTICAL_MODEL; expected_scientific_objects=beta_1 estimand, DGP formula, u_j random effect, epsilon_ij residual, ICC rho, center inference unit; reference_ids=RRL-044, RRL-007, RRL-008, RRL-043, RRL-042; retrieval_intent=Explain estimand, DGP, cluster correlation, and why unbiased point estimates can still have wrong interval coverage.\n- slide_2: title=Cluster sandwich changes the variance object; declared_archetype=ESTIMATOR; expected_scientific_objects=naive variance formula, cluster sandwich formula, X_g block, u_g residual vector, center aggregation; reference_ids=RRL-040, RRL-009, RRL-028, RRL-030, RRL-015; retrieval_intent=Show how a variance estimator changes when score contributions are aggregated by center.\n- slide_3: title=Simulation design tests interval behavior; declared_archetype=SIMULATION_DESIGN; expected_scientific_objects=DGP knobs, replicates, naive interval branch, cluster-robust interval branch, coverage endpoint gate; reference_ids=RRL-009, RRL-010, RRL-019, RRL-026, RRL-002; retrieval_intent=Connect DGP knobs, generated centers, interval methods, replicates, and coverage endpoints in one experiment design.\n- slide_4: title=Coverage falls when ICC and imbalance rise; declared_archetype=RESULT_FIGURE; expected_scientific_objects=coverage plot, nominal 95% line, method comparison, Monte Carlo uncertainty, synthetic boundary; reference_ids=RRL-030, RRL-033, RRL-010, RRL-023, RRL-039; retrieval_intent=Show coverage against ICC with nominal target line, method comparison, and Monte Carlo uncertainty.\n- slide_5: title=Small-G stress remains the negative result; declared_archetype=NEGATIVE_RESULT; expected_scientific_objects=small-G stress evidence, coverage shortfall, failure mechanism, planned CR2/wild bootstrap experiment; reference_ids=RRL-011, RRL-024, RRL-025, RRL-041, RRL-005; retrieval_intent=Show the stress regime where the current interval still fails and define the next discriminating experiment.",
+    "instructions": "You are reviewing five real rendered PNG pages from an editable PPTX statistical/biostatistical method group meeting benchmark.\nInspect the actual image pixels page by page. Do not infer PASS from SHA, file existence, page count, mechanical PASS, metadata, expected object text, or reference IDs.\nFor each page, identify the primary scientific object visible in the image.\nScientific correctness: check that claims match the visible formula or figure, the DGP does not imply a wrong connector relationship, interval interpretations are correct, uncertainty is explained, and planned work is not presented as completed evidence.\nMathematical typesetting: reject core formulas that still look like source code or ASCII strings such as beta_1, epsilon_ij, sum_g, X'X, or ^(-1). PASS requires readable mathematical notation at projection scale.\nAudience-facing language: reject visible internal IDs or QA/provenance/meta language, including RRL IDs, Reference retrieval, EVIDENCE_MANIFEST, Diagram contract, style not copied, Reading target, Observed in this synthetic run, repo paths, run IDs, implementation commits, and review-target language.\nVisual maturity: explicitly answer this question for each page: Would this slide look professionally finished if projected in a strong PI's research group meeting or a top-conference oral talk?\nCheck hierarchy, figure/formula prominence, alignment, color discipline, intentional whitespace, information density, typography, captions, direct annotations, and projection readability.\nReject pages that become pastel cards, dashboards, generic consulting layouts, wireframes, decorative arrows, fake plots, placeholder visuals, or unsupported theorem-like claims.\nReference-informed quality: use the supplied page-specific reference lessons to judge whether the slide actually adopted the relevant mature-slide lesson; do not require copying source styling.\nFor diagram pages, check connector direction, visible arrowheads, edge crossing, and whether the flow can be understood in about 5 seconds.\nFor result pages, coverage near nominal 0.95 is the target; do not reward over-coverage as simply higher-is-better.\nCheck that synthetic simulation evidence is visibly bounded and not represented as clinical validation or a general statistical theorem.\nReturn PASS only when every page satisfies its research visual job and looks like a mature scientific talk page. Return REVISE if any page needs a concrete visual fix. Return BLOCKED only if the supplied pixels cannot be assessed.\nFor REVISE, give the smallest concrete page-specific repair recommendation.\n\nDeclared page contracts:\n- slide_1: title=Center correlation breaks iid intervals; declared_archetype=STATISTICAL_MODEL; expected_scientific_objects=beta_1 estimand, DGP formula, u_j random effect, epsilon_ij residual, ICC rho, center inference unit; reference_ids=RRL-044, RRL-007, RRL-008, RRL-043, RRL-042; retrieval_intent=Explain estimand, DGP, cluster correlation, and why unbiased point estimates can still have wrong interval coverage.; reference_informed_design=Use the DGP formula as the dominant object rather than prose cards.; Ground notation adjacent to the displayed formula with short semantic labels.; Use containment and spacing for additive components instead of causal arrows.\n- slide_2: title=The sandwich variance aggregates by center; declared_archetype=ESTIMATOR; expected_scientific_objects=naive variance formula, cluster sandwich formula, X_g block, u_g residual vector, center aggregation; reference_ids=RRL-040, RRL-009, RRL-028, RRL-030, RRL-015; retrieval_intent=Show how a variance estimator changes when score contributions are aggregated by center.; reference_informed_design=Make the sandwich covariance formula the largest object on the page.; Annotate the middle score-aggregation term directly beside the formula.; Keep the naive comparator compact so it supports rather than competes with the main formula.\n- slide_3: title=A stress grid separates interval behavior; declared_archetype=SIMULATION_DESIGN; expected_scientific_objects=DGP knobs, replicates, naive interval branch, cluster-robust interval branch, coverage endpoint gate; reference_ids=RRL-009, RRL-010, RRL-019, RRL-026, RRL-002; retrieval_intent=Connect DGP knobs, generated centers, interval methods, replicates, and coverage endpoints in one experiment design.; reference_informed_design=Keep one left-to-right experimental path from DGP knobs to endpoints.; Use only scientific operations as nodes and keep branch labels short.; Use a restrained neutral layout with one accent color for the cluster-robust branch.\n- slide_4: title=Cluster adjustment recovers coverage except at small G; declared_archetype=RESULT_FIGURE; expected_scientific_objects=coverage plot, nominal 95% line, method comparison, Monte Carlo uncertainty, synthetic boundary; reference_ids=RRL-030, RRL-033, RRL-010, RRL-023, RRL-039; retrieval_intent=Show coverage against ICC with nominal target line, method comparison, and Monte Carlo uncertainty.; reference_informed_design=Let the coverage plot occupy most of the slide area.; Place uncertainty and the nominal target directly in the figure grammar.; Use direct annotation at the small-G stress point instead of a separate reading card.\n- slide_5: title=The remaining failure is finite-center undercoverage; declared_archetype=NEGATIVE_RESULT; expected_scientific_objects=small-G stress evidence, coverage shortfall, failure mechanism, planned CR2/wild bootstrap experiment; reference_ids=RRL-011, RRL-024, RRL-025, RRL-041, RRL-005; retrieval_intent=Show the stress regime where the current interval still fails and define the next discriminating experiment.; reference_informed_design=Use the same quantitative evidence grammar as the main result page.; Make the undercoverage point visible and annotated in the chart.; Keep the planned CR2 / wild-bootstrap experiment as a small secondary statement.",
     "source_contracts": [
       "automation/reviewed_handoff/tasks/016_statistical_method_group_meeting_benchmark/PLAN.md",
       "skills/tools/documents-media/presentations/research-presentations/SKILL.md",
