@@ -1,85 +1,76 @@
 {
   "blocking_findings": [
     {
-      "evidence": "slide_1’s plotted burden-error bars show Calibrated as the tallest bar (about 0.82), while the adjacent interpretation states “Calibrated wins recall and burden error.” For an error endpoint, the displayed direction and conclusion are visually contradictory or unspecified.",
+      "evidence": "Slide 1 shows a fully quantified bar chart with error intervals, numerical value labels, a method legend, and definitive interpretation/decision panels, but no visible label marks the plotted results as synthetic, preliminary, illustrative, or otherwise bounded.",
       "finding_id": "F-01",
       "item_id": "slide_1",
-      "recommendation": "State the favorable direction for burden error and revise either the conclusion or the plotted encoding so the claimed winner matches the visible result.",
-      "requirement_id": "slide_1.RESULT_FIGURE",
+      "recommendation": "Add a compact, high-visibility evidence-boundary label adjacent to the figure (for example, “Illustrative synthetic results — not completed validation”) and qualify the interpretation accordingly.",
+      "requirement_id": "slide_1",
       "severity": "blocking",
-      "summary": "The endpoint decision is not visually supported by the main result figure."
+      "summary": "The result figure can be read as completed proof without a visible evidence boundary."
     },
     {
-      "evidence": "slide_2 has four large framed panels, but each actual image/mask/overlay occupies only a small central square with extensive unused white space. The case visual details and FP/FN boundaries are consequently small for projection viewing.",
+      "evidence": "Slide 2 contains a three-color overlay, including red edge/island regions, blue regions, and green overlap, but no visible legend identifies which colors denote TP, FP, and FN.",
       "finding_id": "F-02",
       "item_id": "slide_2",
-      "recommendation": "Enlarge the aligned image, GT, prediction, and overlay crops substantially within their panels; keep the metrics immediately adjacent to the enlarged case visual.",
-      "requirement_id": "slide_2.FAILURE_CASE",
+      "recommendation": "Add a small, directly adjacent TP/FP/FN color legend for the overlay.",
+      "requirement_id": "slide_2",
       "severity": "blocking",
-      "summary": "The required hard-case evidence is present but under-scaled relative to the available slide area."
-    },
-    {
-      "evidence": "slide_3 visibly routes center summaries to a global estimator, but the “Success endpoint” box is disconnected from that estimator. The stated local-only comparator appears only as footer text, not as a comparable branch in the experiment diagram.",
-      "finding_id": "F-03",
-      "item_id": "slide_3",
-      "recommendation": "Add a visible local-only comparator branch and arrows from both comparison outputs to the endpoint-evaluation gate.",
-      "requirement_id": "slide_3.EXPERIMENT_DESIGN",
-      "severity": "blocking",
-      "summary": "The experiment flow does not visually establish how the estimator comparison reaches endpoint evaluation."
+      "summary": "The error overlay is visible but its color semantics are not immediately interpretable."
     }
   ],
-  "created_at": "2026-08-21T09:13:01Z",
-  "evidence_id": "visual-review-012_presentation_visual_adapter-c36108cc198e",
+  "created_at": "2026-08-22T09:08:48Z",
+  "evidence_id": "visual-review-012_presentation_visual_adapter-9f75dab861b5",
   "images": [
     {
       "logical_id": "slide_1",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-1.png",
-      "sha256": "94a8ef8d40471ee5675066cc137a2e0f9ea663df39b1f6660fc53d73967e5a88"
+      "sha256": "1791b52c95182d34e7b951eeb28e1b2f19531df5a5aa12de06c8b6730abd5bd2"
     },
     {
       "logical_id": "slide_2",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-2.png",
-      "sha256": "44ebe447b025f86b307c9b961ced7102720378c096f7a013966c9e062eef09c3"
+      "sha256": "00f194849213f180565b87051a2ad3a87d867382ae835e5f7d6900a0a184b7db"
     },
     {
       "logical_id": "slide_3",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-3.png",
-      "sha256": "bc92d7263823f05f4d3b0628b60a894c983e93a35d5fc9d5226d720f40863227"
+      "sha256": "21d002f3756646098d2ec53fa5ce6542ee1c9db4afe5e7481c94df064b3ff116"
     },
     {
       "logical_id": "slide_4",
       "mime_type": "image/png",
       "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-4.png",
-      "sha256": "4ab75ebf472cbee18808dfc7029d78a979e11e180374a16d2e9c1db18a04ff1e"
+      "sha256": "77c025dbe17ea5c48b03cb9db2052e496f6bc2cdc28b9d9d76771d2ff21aa92e"
     }
   ],
   "input_manifest": {
     "identity_bindings": {
       "adapter_identity": "012_presentation_visual_adapter",
       "bridge_kit_commit": "f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e",
-      "evidence_manifest_sha256": "ed42abe283837167a94e73d34b6b723bb0fc127159b5a5d2f67c2e7022a0d3ba",
+      "evidence_manifest_sha256": "1cdb89fecce9821b9f19fa03aab6f017781f31ef3cfdcbdbbca54d1be1ec4780",
       "input_png_sha256_by_slide": {
-        "slide_1": "94a8ef8d40471ee5675066cc137a2e0f9ea663df39b1f6660fc53d73967e5a88",
-        "slide_2": "44ebe447b025f86b307c9b961ced7102720378c096f7a013966c9e062eef09c3",
-        "slide_3": "bc92d7263823f05f4d3b0628b60a894c983e93a35d5fc9d5226d720f40863227",
-        "slide_4": "4ab75ebf472cbee18808dfc7029d78a979e11e180374a16d2e9c1db18a04ff1e"
+        "slide_1": "1791b52c95182d34e7b951eeb28e1b2f19531df5a5aa12de06c8b6730abd5bd2",
+        "slide_2": "00f194849213f180565b87051a2ad3a87d867382ae835e5f7d6900a0a184b7db",
+        "slide_3": "21d002f3756646098d2ec53fa5ce6542ee1c9db4afe5e7481c94df064b3ff116",
+        "slide_4": "77c025dbe17ea5c48b03cb9db2052e496f6bc2cdc28b9d9d76771d2ff21aa92e"
       },
       "legacy_external_visual_implementation_commit": "ff8ff1ddb48cb9c511b3e3fecc7f0c4964adab46",
       "legacy_pages_transport_commit": "38d7bbc137fb8bbaa13d830bbfb1907be32066c6",
       "legacy_task_key": "011_round_handoff",
-      "mechanical_review_sha256": "6a29b2a80c740382cc0abf4da678ce1a358de27ba25ba84c1c6f03dd7f3859d7",
-      "pdf_sha256": "ebb0cec2e4009a784989c4166a8dc335d8705b1c41f9ce6c3cba72644e888f0b",
-      "pptx_sha256": "fcf289996cd3cd659f854962b99f26719e457758d22fe70a4cb1b7408bb8944a",
-      "render_status_sha256": "0e7e1b0b6614ceaa1bfe1bacaa53104e326013088e2c70238215ae118abe90a5",
+      "mechanical_review_sha256": "6368086db4bb9fef9e2fbfb9478d4556e5db2f3989afe12a84f340319cf47973",
+      "pdf_sha256": "2ee5e6b2d07e8c1583bee35e6889c6ffe98d5d74ddd888025b8c289f32f760fd",
+      "pptx_sha256": "2db7476d441b8f169384ce8d0f664723c2f3b48f6cde4e44c36c646bcf4e549b",
+      "render_status_sha256": "e94cc1c38bd3e04d26c8c31a17baf41eb17b18adcb2eda2b15c9fba70fcd5702",
       "source_academic_visual_decision": "NOT_ASSESSED",
       "source_dir": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source",
       "source_mechanical_status": "MECHANICAL_PASS",
       "source_render_status": "ok"
     },
-    "manifest_sha256": "c36108cc198e92bae05d12330a781bdb30a76e98760680df00fdca59abe1b9e7",
+    "manifest_sha256": "9f75dab861b5256a2395ae6d52192e1028d1454b0e26585e2ff6a5375788314a",
     "privacy_policy": "PUBLIC_SAFE_ONLY",
     "rubric": {
       "instructions": "You are reviewing four real rendered PNG pages from an editable PPTX research group meeting regression.\nInspect the actual image pixels page by page. Do not infer PASS from SHA, file existence, page count, mechanical PASS, metadata, expected object text, or reference IDs.\nFor each page, identify the primary scientific object visible in the image.\nFor each page, judge whether the declared page archetype is visually satisfied.\nCheck whether the main figure, medical case, experiment design, statistical model, formula, label, axis, legend, or core research object is immediately visible.\nReject pages that degrade into rounded cards, tables, dashboards, generic consulting layouts, slogans, or decorative shapes replacing evidence.\nCheck for meaningless blank space, obvious visual imbalance, clipping, unreadable labels, unreadable formulas, unreadable legends, or insufficient projection readability.\nCheck that the evidence boundary is visually clear: synthetic, preliminary, validation-subset, generated, or missing evidence must not look like completed proof.\nJudge whether each page contains enough research information to support about 30-90 seconds of group-meeting discussion.\nReturn PASS only when every page satisfies its research visual job. Return REVISE if any page needs a concrete visual fix. Return BLOCKED only if the supplied pixels cannot be assessed.\nFor REVISE, give the smallest concrete page-specific repair recommendation.\n\nDeclared page contracts:\n- slide_1: title=Endpoint Choice Changes the Method Ranking; declared_archetype=RESULT_FIGURE; expected_scientific_objects=endpoint-wise data, error intervals, method ranking, endpoint decision; reference_ids=RRL-015, RRL-021, RRL-030, RRL-016, RRL-023; retrieval_intent=Show endpoint-wise quantitative results where interpretation changes with metric choice.\n- slide_2: title=Average Dice Can Hide the Hard Case; declared_archetype=FAILURE_CASE; expected_scientific_objects=synthetic image, GT mask, prediction mask, FP/FN overlay, case metrics; reference_ids=RRL-022, RRL-024, RRL-018, RRL-013, RRL-025; retrieval_intent=Show a single synthetic hard case with aligned image, GT, prediction, error overlay, and metrics.\n- slide_3: title=Limited-Information Multi-Center Experiment; declared_archetype=EXPERIMENT_DESIGN; expected_scientific_objects=centers, local image/label, local estimator, transmitted summary, global estimator, endpoint evaluation; reference_ids=RRL-002, RRL-008, RRL-019, RRL-005, RRL-009; retrieval_intent=Explain a multi-center experiment with local data, transmitted summaries, estimator, comparator, and endpoint gate.\n- slide_4: title=AI Phenotype Error Changes Inference; declared_archetype=STATISTICAL_MODEL; expected_scientific_objects=estimand, observed AI phenotype, measurement error, validation subset, inference target; reference_ids=RRL-044, RRL-027, RRL-020, RRL-028, RRL-007; retrieval_intent=Show a measured-variable inference mechanism where AI phenotype error changes the target estimand.",
@@ -96,62 +87,59 @@
       "decision": "REVISE",
       "item_id": "slide_1",
       "observations": [
-        "Primary scientific object: grouped endpoint-wise bar chart with error intervals for four methods across Dice, lesion recall, and burden error.",
-        "The bar chart, legend, axes, and interval marks are immediately visible and support a result-figure archetype.",
-        "The interpretation card conflicts with the visible burden-error bar ordering unless an unstated favorable direction is intended."
+        "Primary scientific object: endpoint-wise grouped bar chart comparing Baseline, Calibrated, Federated, and Local-only across Dice, lesion recall, and lower-is-better burden error.",
+        "Error intervals, value labels, axes, legend, and endpoint-specific ranking changes are immediately visible and projection-readable.",
+        "The quantitative presentation and decisive callouts are visually unqualified as synthetic, preliminary, or validation-limited."
       ],
       "requirement_ids": [
-        "slide_1.RESULT_FIGURE"
+        "slide_1"
       ],
-      "summary": "Result figure is visually legible, but its central endpoint decision needs correction or explicit directionality."
+      "summary": "RESULT_FIGURE layout is visually satisfied, but needs an explicit evidence boundary."
     },
     {
       "decision": "REVISE",
       "item_id": "slide_2",
       "observations": [
-        "Primary scientific object: a single aligned synthetic lesion case shown as source image, GT mask, prediction, and FP/FN overlay, with Dice, recall, burden error, and TP/FP/FN counts.",
-        "The failure-case archetype is clearly recognizable, and the synthetic status is directly labeled.",
-        "The scientific imagery and error overlay are noticeably too small inside oversized framed panels."
+        "Primary scientific object: aligned synthetic image, GT mask, prediction mask, and FP/FN overlay for one lesion case.",
+        "The four aligned panels and case metrics are large and readable; the synthetic status is visibly stated.",
+        "Overlay colors are not decoded by a TP/FP/FN legend, so the error mechanism cannot be fully read from the visual alone."
       ],
       "requirement_ids": [
-        "slide_2.FAILURE_CASE"
+        "slide_2"
       ],
-      "summary": "Required case evidence is present, but enlarging it is necessary for adequate projection readability."
+      "summary": "FAILURE_CASE layout is visually satisfied, with one needed overlay-labeling repair."
     },
     {
-      "decision": "REVISE",
+      "decision": "PASS",
       "item_id": "slide_3",
       "observations": [
-        "Primary scientific object: multi-center information-sharing workflow from three local image/label sites through local estimators and transmitted score summaries to a global estimator.",
-        "The center, local-data, estimator, transmitted-summary, and global-estimator stages are visible.",
-        "The endpoint box is visually isolated, and no local-only comparator path is shown in the diagram."
+        "Primary scientific object: multi-center limited-information experiment flow diagram.",
+        "Three centers with local image/label inputs feed local calibration scores, transmitted summaries, a global estimator, a local-only comparator, and a shared endpoint evaluation gate.",
+        "The parallel comparator path and raw-data-local constraint are visually clear; labels are readable and the diagram supports substantive discussion."
       ],
       "requirement_ids": [
-        "slide_3.EXPERIMENT_DESIGN"
+        "slide_3"
       ],
-      "summary": "The experiment-design diagram has the major components but omits the visible comparison-to-endpoint connection."
+      "summary": "EXPERIMENT_DESIGN archetype is clearly and adequately rendered."
     },
     {
       "decision": "PASS",
       "item_id": "slide_4",
       "observations": [
-        "Primary scientific object: measured-variable inference chain linking true lesion burden, observed AI phenotype with error, validation subset, and inference target.",
-        "The target estimand, measurement-error relationship, validation step, calibration expression, and attenuated naive inference are immediately visible.",
-        "The large evidence-boundary statement explicitly identifies this as a generated-variable inference mechanism rather than completed clinical-validity evidence."
+        "Primary scientific object: measured-variable inference mechanism linking a true-burden estimand, observed AI phenotype, validation subset, and inference target.",
+        "The linear sequence, measurement-error relation, calibration statement, and inference consequence are immediately visible and readable.",
+        "A prominent evidence-boundary panel explicitly states that this is a generated-variable inference mechanism rather than completed clinical-validity evidence."
       ],
       "requirement_ids": [
-        "slide_4.STATISTICAL_MODEL"
+        "slide_4"
       ],
-      "summary": "Statistical-model archetype is clear, readable, and appropriately bounded."
+      "summary": "STATISTICAL_MODEL archetype is clearly rendered with an explicit evidence boundary."
     }
   ],
-  "non_blocking_notes": [
-    "Slides use clear high-contrast headings and no visible clipping.",
-    "The reference-retrieval footer text is small but does not obscure the primary research objects."
-  ],
+  "non_blocking_notes": [],
   "overall_decision": "REVISE",
   "prompt_version": "ai-bridge.visual-review.v1",
-  "review_identity": "c36108cc198e92bae05d12330a781bdb30a76e98760680df00fdca59abe1b9e7",
+  "review_identity": "9f75dab861b5256a2395ae6d52192e1028d1454b0e26585e2ff6a5375788314a",
   "review_kind": "research-presentation-four-page-smoke",
   "review_model": "gpt-5.6-terra",
   "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
