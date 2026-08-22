@@ -1,50 +1,56 @@
 # Research Presentation Current Round
 
-当前 improvement cycle 仍处于 **Phase A：TODO consolidation recovery**。
+当前 improvement cycle 已进入 **Phase B：Terra blocker repair**。
 
-`013_presentation_todo_consolidation` 已完成实现，但两轮独立审查都被 GitHub CI 测试环境的依赖声明问题截住：第一轮暴露 Pillow 缺失，第二轮暴露 `python-pptx` 缺失，因此按 Reviewed Handoff 上限进入人工决策点。其 `REVIEW_1.md`、`REVIEW_2.md`、`FINAL_REPORT.md` 与 `AWAIT_HUMAN_DECISION` 历史终态保持不变，不得改写成 PASS。
+Phase A 已通过用户授权后的 recovery task `014_presentation_phase_a_recovery` 关闭。013 的两轮 `REVISE`、review-limit 与人工决策历史保持可追溯；014 没有把 013 改写成“从未失败”，而是验证了完整 Presentation regression CI/test dependency contract，并在真实 GitHub runner 上恢复了全库测试与独立 closure review。014 的 `REVIEW_1.md` 结论为 PASS，真实 CI run `32562190645` 的 `codex-marketplace`、Windows sparse checkout、Windows/Linux editable-install smoke 均成功。
 
-用户随后明确授权一次人工依赖修复。当前 main 已包含授权后的最小修复提交 `fdc2ddf30e6782362af7e3ff1c9322e48dfbef8e`：Presentation regression 的 CI/test environment 同时安装 `Pillow>=10` 与 `python-pptx>=1.0`，并在全库测试前做显式 import check。
-
-为遵守 013 的 review-limit，同时合法消费这次人工授权，当前标准 Reviewed Handoff task 切换为：
+当前标准 Reviewed Handoff task：
 
 ```text
-014_presentation_phase_a_recovery
+015_presentation_terra_blocker_repair
 ```
 
-当前目标不是重新做 TODO consolidation，而是：
-
-1. 验证授权后的 Presentation regression 依赖 contract 是完整集合，而不是继续逐个追 ImportError；
-2. 恢复真实 GitHub CI；
-3. 在 CI 通过后，对 013 原冻结计划下的 TODO consolidation 内容做一次新的独立 recovery review；
-4. 只有 014 PASS 后，Phase A 才视为通过人工授权恢复并关闭。
+本阶段只处理当前 canonical `gpt-5.6-terra` 四页 regression 已有证据支持的三个 blocker，不扩 corpus、不做 Source Scout、不提前开始 Phase C benchmark。
 
 ## 当前视觉证据基线
 
-`012_presentation_visual_adapter` 仍是 Bridge Kit Shared Visual Review 主路径。当前 canonical Terra evidence 保持不变：
+当前 canonical evidence 仍为：
 
 ```text
 results/012_presentation_visual_adapter/visual_review/visual_inputs.json
 results/012_presentation_visual_adapter/visual_review/VISUAL_REVIEW.json
 ```
 
-当前 review provider/model：`openai / gpt-5.6-terra`。该 evidence 的总体结论仍为 `REVISE`；已知 slide 1–3 findings 仍属于 Phase B，014 不得修改这些页面或生成新的 visual identity。旧 `011_round_handoff` Pages/screenshot route 仅保留历史 provenance。
+当前 identity 的总体结论为 `REVISE`：
 
-## Phase A recovery 边界
+- slide 1 / RESULT_FIGURE：burden error 的 favorable direction 与 winner claim 不一致；
+- slide 2 / FAILURE_CASE：image / GT / prediction / FP-FN overlay 在 oversized panel 中过小，投影可读性不足；
+- slide 3 / EXPERIMENT_DESIGN：local-only comparator 只存在于 prose/footer，global/local comparator 没有共同连接到 endpoint evaluation；
+- slide 4 / STATISTICAL_MODEL：PASS，是本阶段 accepted element，不得随意重做。
 
-013 已完成的 TODO 四分类和三类冻结 `PROMOTE_NOW` 是 recovery review 的内容对象，不在 014 中重新设计。014 只允许处理用户已授权的 CI/test dependency contract、必要验证、CI handoff 和独立 closure review。
+旧 `011_round_handoff` Pages/screenshot route 仅保留历史 provenance，不再是 primary machine-consumption path。
 
-本轮仍禁止：source corpus 扩张、Source Scout、新 benchmark、Terra 四页返修、Presentation plugin 架构重做。
+## Phase B 冻结边界
 
-## CI evidence
+015 以 `automation/reviewed_handoff/tasks/015_presentation_terra_blocker_repair/PLAN.md` 为唯一冻结语义。核心要求：
 
-当 014 进入 `WAITING_FOR_CI` 后，本地 Codex/CI bridge 使用 `gh run` 读取真实 required workflows，并机械发布当前 main tip 上 context=`reviewed-handoff/ci-summary` 的 commit status。Scheduled Planner 以该 status 与可访问的 CI evidence 为事实来源；CI bridge 不做语义 review。
+1. slide 1 保留 synthetic 数值，只修 favorable-direction 表达和错误 winner claim；
+2. slide 2 保留同一 synthetic case/metrics，只扩大真实科学图像对象的页面占比；
+3. slide 3 把现有 local-only comparator 变成真实 branch，并让两种 comparator 输出都连接 endpoint gate；
+4. slide 4 作为 accepted element 保持稳定；
+5. 返修后必须重新走真实 editable PPTX -> presentation engine -> PDF/PNG -> mechanical QA；
+6. 重新生成 `visual_inputs.json` identity，并对新 identity 只做一次 `gpt-5.6-terra` live review；
+7. conventional CI 与 Terra transport 均通过后，由 Scheduled Planner 独立判断旧 blocker 是否真正关闭。
+
+本阶段不得重新提升 Phase A 已存在的同义规则，不得扩 Source Registry / Inspected Page Library / Synthesized Knowledge，不得启动新的统计/医学影像 benchmark。
 
 ## 后续顺序
 
-只有 014 经真实 CI + 独立 Planner review PASS 后才进入：
+只有 015 经真实 render、mechanical QA、current Terra evidence 与独立 Planner review PASS 后才进入 **Phase C**。Phase C 至少需要分别完成一轮：
 
-1. **Phase B**：建立新的 bounded task，核对并修复当前 canonical Terra visual blockers；生成新 visual identity 后只做一次正常 Terra review，再由 Planner 独立判断；
-2. **Phase C**：至少完成一轮 statistical/biostatistical method group meeting 和一轮 medical-imaging research group meeting benchmark，均需真实 render + mechanical QA + current Terra evidence + Planner review。
+1. statistical/biostatistical method group meeting benchmark；
+2. medical-imaging research group meeting benchmark。
+
+两类都必须经过真实 render + mechanical QA + `gpt-5.6-terra` evidence + Planner independent review，并继续沿用 Phase A 已保留的 audience-first、notation grounding、one-slide-one-job、scientific-object-first、source fidelity、diagram semantics/geometry、scientific hierarchy、主图面积、evidence boundary、revision scope、real-data grounding 等规则。
 
 当前不执行 Source Scout。
