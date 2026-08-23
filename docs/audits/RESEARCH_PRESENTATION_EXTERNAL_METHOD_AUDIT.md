@@ -118,20 +118,28 @@ Inspected commit: `76bfca23f908b299d9e4737717b88b31a67cbcb2`
 
 License: MIT for repository, plus `LICENSE-CODE` present.
 
-Files inspected: `LICENSE`, `LICENSE-CODE`, `SKILL.md`, `skills/many-ppt-skills/SKILL.md`, `data/skills.json`, `principles/07-render-and-look.md`, `principles/08-distill-dont-design.md`, `scripts/render.py`.
+Files inspected: `LICENSE`, `LICENSE-CODE`, `SKILL.md`, `skills/many-ppt-skills/SKILL.md`, `data/skills.json`, `principles/README.md`, all eight original principle files (`principles/01-show-dont-tell.md` through `principles/08-distill-dont-design.md`), and `scripts/render.py`.
 
 Actual mechanism:
 
 - It is a registry and comparison method, not a deck generator.
 - It separates route choice by real constraints such as editable PowerPoint versus HTML-native, speaker notes, template mandate, offline, PDF.
 - It records capability claims as documentation-backed verdicts, not tested truth.
-- Its principles emphasize rendered visual QA and contact sheets; source code correctness is insufficient.
-- It argues quality rules should be distilled from repeated real successful runs, not imagined up front.
+- Its eight principles add a compact evidence-backed method layer:
+  - `01-show-dont-tell`: use real-content visual options; do not ask users to specify taste abstractly.
+  - `02-anti-ai-slop`: concrete banned lists work better than aspirational "make it beautiful" language.
+  - `03-fixed-stage`: slides are fixed presentation compositions, not responsive web pages.
+  - `04-constraint-beats-freedom`: lock palette/type/layout inventory where consistency matters.
+  - `05-progressive-disclosure`: keep always-loaded skill files as workflow maps, loading detail only when needed.
+  - `06-single-file`: for HTML artifacts, portability argues for self-contained output when the deck is an artifact.
+  - `07-render-and-look`: rendered visual QA and contact sheets catch the defects source inspection misses.
+  - `08-distill-dont-design`: durable rules should be distilled from repeated successful runs and failures, not imagined up front.
 
 Research relevance:
 
 - The route-question discipline is valuable: editable PPTX and HTML/Beamer have different design ceilings and should not be collapsed.
-- `render and look` matches this repository's post-016/017 direction.
+- `show-don't-tell`, `constraint beats freedom`, and `render-and-look` together support same-content candidate comparison plus design-system lock.
+- `progressive disclosure` supports a future architecture where composition catalogs are indexed compactly and only selected records are expanded.
 - `distill, don't design` is a warning that synthetic 5-page fixtures cannot alone define mature research quality.
 
 Gap versus current repo:
@@ -140,6 +148,8 @@ Gap versus current repo:
 - Current rule set is partly distilled from failures, but the next stage needs positive exemplar-derived composition records.
 
 Disposition: `concept_only`.
+
+Repair note after `REVIEW_1`: all eight principle files were read and checked against the current recommendation. The conclusion remains unchanged: the transferable value for this repository is not to copy another registry, but to add a compact, reference-derived composition representation that can later drive candidate generation, design-system constraints and comparative rendered review.
 
 ### 4. RFYoung/slideweaver
 

@@ -68,6 +68,13 @@
         "SKILL.md",
         "skills/many-ppt-skills/SKILL.md",
         "data/skills.json",
+        "principles/README.md",
+        "principles/01-show-dont-tell.md",
+        "principles/02-anti-ai-slop.md",
+        "principles/03-fixed-stage.md",
+        "principles/04-constraint-beats-freedom.md",
+        "principles/05-progressive-disclosure.md",
+        "principles/06-single-file.md",
         "principles/07-render-and-look.md",
         "principles/08-distill-dont-design.md",
         "scripts/render.py"
@@ -75,6 +82,12 @@
       "mechanisms": [
         "route selection by real deliverable constraints",
         "documented capability comparison with provenance quotes",
+        "show-dont-tell real-content options",
+        "anti-slop banned lists",
+        "fixed-stage slide composition",
+        "design-system constraints over free parameters",
+        "progressive-disclosure skill structure",
+        "single-file HTML portability tradeoff",
         "rendered image and contact-sheet QA principle",
         "distill skill rules from repeated successful manual runs"
       ],
