@@ -93,3 +93,27 @@ Executor 记录的 targeted Presentation tests、全库测试、skills validatio
 下一 bounded task 应实现 **reference-calibrated internal multi-candidate design search**：让同一真实 scientific slide content 基于不同 inspected composition exemplars 产生真正不同的 candidate compositions，并留下可审计的 reference-to-candidate geometry transfer。比较与最终视觉 adjudication 仍应留给后续独立 task，不在 019 中偷跑。
 
 长期 `PROGRAM_MATURE=false`，本轮 `REFERENCE_CALIBRATED_ONE_SHOT_QUALITY` 仍未完成。
+
+## What this task solved
+
+019 converted inspected research-slide references from prose-only lessons into renderer-neutral composition records with normalized geometry, semantic roles, hierarchy, reading flow, and canonical RRL/rendered-page identity.
+
+## What changed
+
+The repository now contains the composition schema, family vocabulary, 13-record composition index, validator, selector, abstract debug montage, report, tests, and generated/plugin mirror for the new reference-to-composition layer.
+
+## New capabilities / behavior
+
+Future Presentation tasks can query composition exemplars by scientific job and inspect primary object geometry before generating candidates. No active user-facing slide generator behavior changed in 019.
+
+## Example usage
+
+A later task can query an estimator, result figure, medical-image comparison, negative-result, or decision page and receive matching exemplar IDs, layout families, primary bboxes, reading flow, and portable composition lessons.
+
+## Regression and remaining limitations
+
+019 does not generate slide candidates, select a winning layout, compare references against candidates, lock a deck-wide design system, run holdout benchmarks, or declare `ONE_SHOT_QUALITY_PASS`.
+
+## Technical appendix
+
+The final 019 handoff tip was `2b4f9bd3d2d427fbfe6b764db773ac7b2881464e`; `reviewed-handoff/ci-summary` was `success`, with GitHub Actions run `32625441399`.
