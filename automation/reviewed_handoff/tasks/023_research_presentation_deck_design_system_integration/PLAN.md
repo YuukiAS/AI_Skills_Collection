@@ -6,6 +6,13 @@ decision: PLAN_FROZEN
 
 # 023 Research Presentation Deck-Wide Design-System Integration — Plan
 
+## Frozen decisions
+
+This plan is frozen for 023. The frozen objective, implementation scope,
+acceptance gates, validation, and out-of-scope boundaries below are binding for
+the Executor. This section is a schema-compatible heading; it does not add work
+beyond the already frozen task.
+
 ## Frozen objective
 
 把 019–022 已验证的单页能力接入完整多页生成链，建立 renderer-neutral 的 **deck design profile**：统一 typography、palette、spacing、caption/annotation、chart/diagram/image/equation treatment，但不统一每页 composition。目标是证明“同一 deck 有一个稳定设计系统，同时不同 scientific page function 仍由 matched exemplar / composition family 决定布局”。
@@ -26,6 +33,13 @@ Executor 至少读取：
 - 021 comparative preparation / identity map / review decoder
 - 022 visual-finish renderer / candidate manifests
 - current research-presentation skill / shared visual QA / deck-plan schema
+
+## Implementation scope
+
+023 implementation is limited to deck-wide design-system locking and
+multi-page generation integration as detailed below. It must not expand the
+reference corpus, redefine the reviewer, start real holdouts, or declare
+program maturity.
 
 ## 1. Add a renderer-neutral deck design profile
 
@@ -199,7 +213,7 @@ Executor 可以生成调试 montage/contact sheet，但不得把“有 montage�
 - 开始 Beamer holdout；
 - 宣告 `ONE_SHOT_QUALITY_PASS` 或 `PROGRAM_MATURE`。
 
-## Acceptance gates
+## Acceptance and regression gates
 
 Planner 只有在以下全部满足时才可 PASS 023：
 
