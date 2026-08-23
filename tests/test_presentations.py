@@ -380,6 +380,38 @@ class PresentationSharedTests(unittest.TestCase):
         rrl013_bboxes = [region["bbox"] for region in rrl013_regions if region["role"] == "primary_scientific_object"]
         self.assertNotEqual(rrl022_bboxes, rrl013_bboxes)
 
+    def test_candidate_visual_finish_repair_manifests(self) -> None:
+        validator = SHARED / "scripts/validate_reference_candidate_manifests.py"
+        output_root = REPO_ROOT / "docs/audits/research_presentation_candidate_visual_finish_repair/generated"
+        manifests = [
+            output_root / "statistical_estimator_cluster_robust_variance/candidate_manifest.json",
+            output_root / "medical_image_lesion_overlay_comparison/candidate_manifest.json",
+        ]
+        for manifest in manifests:
+            self.assertTrue(manifest.exists(), manifest)
+        validation = subprocess.run([sys.executable, str(validator), *[str(path) for path in manifests]], check=False, capture_output=True, text=True)
+        self.assertEqual(validation.returncode, 0, validation.stderr)
+        for manifest_path in manifests:
+            payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+            visual_tokens = [candidate["visual_finish"]["visual_tokens"] for candidate in payload["candidates"]]
+            self.assertEqual({tokens["token_set_id"] for tokens in visual_tokens}, {"research-presentation-visual-finish-v1"})
+            self.assertEqual(len({json.dumps(tokens, sort_keys=True) for tokens in visual_tokens}), 1)
+            for candidate in payload["candidates"]:
+                finish = candidate["visual_finish"]
+                self.assertFalse(finish["primary_object_treatment"]["decorative_card_used"])
+                self.assertEqual(finish["primary_object_treatment"]["container_role"], "none")
+                self.assertNotIn("RRL-", "\n".join(candidate["audience_text"]))
+                old_root = "docs/audits/research_presentation_candidate_search/generated"
+                self.assertNotIn(old_root, candidate["preview_artifact"]["path"])
+            if payload["request"]["page_function"] == "ESTIMATOR":
+                for candidate in payload["candidates"]:
+                    self.assertEqual(candidate["visual_finish"]["equation_rendering"]["contrast"], "high")
+                    self.assertTrue(candidate["visual_finish"]["annotation_targets"])
+            if payload["request"]["page_function"] == "MEDICAL_IMAGE_COMPARISON":
+                for candidate in payload["candidates"]:
+                    self.assertTrue(candidate["visual_finish"]["panel_correspondence"]["panel_region_ids"])
+                    self.assertTrue(candidate["visual_finish"]["legend_binding"]["legend_region_id"])
+
     def test_comparative_reference_calibrated_visual_review_inputs(self) -> None:
         scripts = SHARED / "scripts"
         for name in [
@@ -409,6 +441,40 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual([item["logical_id"] for item in manifest["inputs"]], ["item_A", "item_B", "item_C", "item_D", "item_E"])
         validator = scripts / "validate_comparative_visual_review.py"
         validation = subprocess.run([sys.executable, str(validator)], check=False, capture_output=True, text=True)
+        self.assertEqual(validation.returncode, 0, validation.stderr)
+        self.assertIn("validated 2 comparative visual-review case(s)", validation.stdout)
+
+    def test_candidate_visual_finish_comparative_inputs(self) -> None:
+        root = REPO_ROOT / "results/022_research_presentation_candidate_visual_finish_repair/visual_review"
+        for case in ["statistical", "medical"]:
+            manifest_path = root / case / "visual_inputs.json"
+            map_path = root / case / "review_identity_map.json"
+            self.assertTrue(manifest_path.exists(), manifest_path)
+            self.assertTrue(map_path.exists(), map_path)
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            identity_map = json.loads(map_path.read_text(encoding="utf-8"))
+            self.assertEqual(manifest["task_key"], "022_visual_finish_comparison")
+            self.assertEqual(manifest["workflow_type"], "generic")
+            self.assertEqual(len(manifest["inputs"]), 5)
+            self.assertEqual(len([item for item in identity_map["items"] if item["item_class"] == "candidate"]), 3)
+            self.assertEqual(len([item for item in identity_map["items"] if item["item_class"] == "reference"]), 2)
+            visible_text = json.dumps(manifest, sort_keys=True)
+            for forbidden in ["RRL-", "SRC-", "candidate", "reference", "generated", "gold", "baseline", "reference_faithful", "alternative_composition", "controlled_wildcard"]:
+                self.assertNotIn(forbidden, visible_text)
+            for item in identity_map["items"]:
+                if item["item_class"] == "candidate":
+                    self.assertIn("research_presentation_candidate_visual_finish_repair", item["source_path"])
+        validator = SHARED / "scripts/validate_comparative_visual_review.py"
+        validation = subprocess.run([
+            sys.executable,
+            str(validator),
+            "--task-key",
+            "022_research_presentation_candidate_visual_finish_repair",
+            "--visible-task-key",
+            "022_visual_finish_comparison",
+            "--cache-key",
+            "022",
+        ], check=False, capture_output=True, text=True)
         self.assertEqual(validation.returncode, 0, validation.stderr)
         self.assertIn("validated 2 comparative visual-review case(s)", validation.stdout)
 

@@ -1,0 +1,1075 @@
+{
+  "schema": "RESEARCH_SLIDE_CANDIDATE_MANIFEST_V1",
+  "request": {
+    "schema": "RESEARCH_SLIDE_CANDIDATE_REQUEST_V1",
+    "request_id": "medical_image_lesion_overlay_comparison",
+    "page_function": "MEDICAL_IMAGE_COMPARISON",
+    "scientific_object": "synthetic lesion image with ground-truth and prediction overlay",
+    "evidence_type": "image comparison",
+    "content_slots": [
+      {
+        "slot_id": "title",
+        "role": "title",
+        "content_type": "title",
+        "text": "Overlay errors localize the small-lesion failure mode"
+      },
+      {
+        "slot_id": "input_image",
+        "role": "primary_scientific_object",
+        "content_type": "image_asset",
+        "asset_path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/slide1_input.png",
+        "alt_text": "Synthetic lesion image input"
+      },
+      {
+        "slot_id": "overlay_image",
+        "role": "primary_scientific_object",
+        "content_type": "image_asset",
+        "asset_path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/slide1_overlay.png",
+        "alt_text": "Synthetic GT and prediction overlay"
+      },
+      {
+        "slot_id": "prediction_image",
+        "role": "secondary_scientific_object",
+        "content_type": "image_asset",
+        "asset_path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
+        "alt_text": "Synthetic prediction mask"
+      },
+      {
+        "slot_id": "error_image",
+        "role": "secondary_scientific_object",
+        "content_type": "image_asset",
+        "asset_path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+        "alt_text": "Synthetic error overlay"
+      },
+      {
+        "slot_id": "annotation",
+        "role": "annotation",
+        "content_type": "text",
+        "text": "The miss is spatially small but changes lesion-level recall."
+      },
+      {
+        "slot_id": "legend",
+        "role": "legend",
+        "content_type": "legend",
+        "text": "Green: overlap; red: false positive; blue: false negative."
+      }
+    ],
+    "required_roles": [
+      "title",
+      "primary_scientific_object",
+      "secondary_scientific_object",
+      "annotation",
+      "legend"
+    ],
+    "primary_scientific_object_role": "primary_scientific_object",
+    "audience_mode": "research_group_meeting",
+    "density_mode": "visual",
+    "candidate_count": 3
+  },
+  "retrieved_composition_records": [
+    {
+      "reference_id": "RRL-022",
+      "source_id": "SRC-006",
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "evidence_type": "image comparison",
+      "scientific_object": "PET input, GT, predictions, reconstruction panels",
+      "layout_family": "aligned-multi-panel",
+      "reading_flow": "panel-grid-by-row-and-column",
+      "primary_object_area_ratio": 0.5928,
+      "primary_bbox": {
+        "x": 0.1,
+        "y": 0.08,
+        "w": 0.78,
+        "h": 0.76
+      },
+      "compatible": true,
+      "compatibility_reasons": [
+        "medical_image_comparison_page"
+      ]
+    },
+    {
+      "reference_id": "RRL-013",
+      "source_id": "SRC-005",
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "evidence_type": "image evidence",
+      "scientific_object": "representative skin lesion samples",
+      "layout_family": "aligned-multi-panel",
+      "reading_flow": "title-to-category-columns-to-sample-grid",
+      "primary_object_area_ratio": 0.235,
+      "primary_bbox": {
+        "x": 0.03,
+        "y": 0.25,
+        "w": 0.94,
+        "h": 0.25
+      },
+      "compatible": true,
+      "compatibility_reasons": [
+        "medical_image_comparison_page"
+      ]
+    }
+  ],
+  "content_payload_sha256": "1b3452084ba827e7946682c48d47a4d8001447da2aa24a01bd5c80a1c2f2b607",
+  "candidates": [
+    {
+      "candidate_id": "medical_image_lesion_overlay_comparison__reference_faithful",
+      "strategy": "reference_faithful",
+      "source_reference_ids": [
+        "RRL-022"
+      ],
+      "source_composition_families": [
+        "aligned-multi-panel"
+      ],
+      "layout_family": "aligned-multi-panel",
+      "regions": [
+        {
+          "region_id": "title",
+          "role": "title",
+          "bbox": {
+            "x": 0.1,
+            "y": 0.04,
+            "w": 0.78,
+            "h": 0.08
+          },
+          "content_mode": "text",
+          "content_slot_id": "title"
+        },
+        {
+          "region_id": "image_input",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.1,
+            "y": 0.1901,
+            "w": 0.1755,
+            "h": 0.5092
+          },
+          "content_mode": "medical_image",
+          "content_slot_id": "input_image"
+        },
+        {
+          "region_id": "image_overlay",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.3015,
+            "y": 0.1901,
+            "w": 0.1755,
+            "h": 0.5092
+          },
+          "content_mode": "medical_image",
+          "content_slot_id": "overlay_image"
+        },
+        {
+          "region_id": "image_prediction",
+          "role": "secondary_scientific_object",
+          "bbox": {
+            "x": 0.503,
+            "y": 0.1901,
+            "w": 0.1755,
+            "h": 0.5092
+          },
+          "content_mode": "medical_image",
+          "content_slot_id": "prediction_image"
+        },
+        {
+          "region_id": "image_error",
+          "role": "secondary_scientific_object",
+          "bbox": {
+            "x": 0.7045,
+            "y": 0.1901,
+            "w": 0.1755,
+            "h": 0.5092
+          },
+          "content_mode": "medical_image",
+          "content_slot_id": "error_image"
+        },
+        {
+          "region_id": "legend",
+          "role": "legend",
+          "bbox": {
+            "x": 0.1,
+            "y": 0.7243,
+            "w": 0.78,
+            "h": 0.07
+          },
+          "content_mode": "legend",
+          "content_slot_id": "legend"
+        }
+      ],
+      "primary_object_area_ratio": 0.1787,
+      "reading_flow": "panel-grid-by-row-and-column",
+      "content_bindings": [
+        {
+          "region_id": "title",
+          "content_slot_id": "title",
+          "role": "title"
+        },
+        {
+          "region_id": "image_input",
+          "content_slot_id": "input_image",
+          "role": "primary_scientific_object"
+        },
+        {
+          "region_id": "image_overlay",
+          "content_slot_id": "overlay_image",
+          "role": "primary_scientific_object"
+        },
+        {
+          "region_id": "image_prediction",
+          "content_slot_id": "prediction_image",
+          "role": "secondary_scientific_object"
+        },
+        {
+          "region_id": "image_error",
+          "content_slot_id": "error_image",
+          "role": "secondary_scientific_object"
+        },
+        {
+          "region_id": "legend",
+          "content_slot_id": "legend",
+          "role": "legend"
+        }
+      ],
+      "geometry_transfer": [
+        {
+          "source_reference_id": "RRL-022",
+          "source_region_id": "image_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.1,
+            "y": 0.08,
+            "w": 0.78,
+            "h": 0.76
+          },
+          "candidate_region_id": "title",
+          "candidate_content_slot_id": "title",
+          "candidate_bbox": {
+            "x": 0.1,
+            "y": 0.04,
+            "w": 0.78,
+            "h": 0.08
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "derived a title band from the source primary object top edge because the source record has no title region"
+        },
+        {
+          "source_reference_id": "RRL-022",
+          "source_region_id": "image_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.1,
+            "y": 0.08,
+            "w": 0.78,
+            "h": 0.76
+          },
+          "candidate_region_id": "image_input",
+          "candidate_content_slot_id": "input_image",
+          "candidate_bbox": {
+            "x": 0.1,
+            "y": 0.1901,
+            "w": 0.1755,
+            "h": 0.5092
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split the source image-grid bbox into equal evidence panels for the current content slots"
+        },
+        {
+          "source_reference_id": "RRL-022",
+          "source_region_id": "image_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.1,
+            "y": 0.08,
+            "w": 0.78,
+            "h": 0.76
+          },
+          "candidate_region_id": "image_overlay",
+          "candidate_content_slot_id": "overlay_image",
+          "candidate_bbox": {
+            "x": 0.3015,
+            "y": 0.1901,
+            "w": 0.1755,
+            "h": 0.5092
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split the source image-grid bbox into equal evidence panels for the current content slots"
+        },
+        {
+          "source_reference_id": "RRL-022",
+          "source_region_id": "image_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.1,
+            "y": 0.08,
+            "w": 0.78,
+            "h": 0.76
+          },
+          "candidate_region_id": "image_prediction",
+          "candidate_content_slot_id": "prediction_image",
+          "candidate_bbox": {
+            "x": 0.503,
+            "y": 0.1901,
+            "w": 0.1755,
+            "h": 0.5092
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split the source image-grid bbox into equal evidence panels for the current content slots"
+        },
+        {
+          "source_reference_id": "RRL-022",
+          "source_region_id": "image_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.1,
+            "y": 0.08,
+            "w": 0.78,
+            "h": 0.76
+          },
+          "candidate_region_id": "image_error",
+          "candidate_content_slot_id": "error_image",
+          "candidate_bbox": {
+            "x": 0.7045,
+            "y": 0.1901,
+            "w": 0.1755,
+            "h": 0.5092
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split the source image-grid bbox into equal evidence panels for the current content slots"
+        },
+        {
+          "source_reference_id": "RRL-022",
+          "source_region_id": "column_labels",
+          "source_role": "legend",
+          "source_bbox": {
+            "x": 0.14,
+            "y": 0.82,
+            "w": 0.7,
+            "h": 0.05
+          },
+          "candidate_region_id": "legend",
+          "candidate_content_slot_id": "legend",
+          "candidate_bbox": {
+            "x": 0.1,
+            "y": 0.7243,
+            "w": 0.78,
+            "h": 0.07
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "translated the source legend band below the derived image grid"
+        }
+      ],
+      "distinctness_signature": {
+        "layout_family": "aligned-multi-panel",
+        "primary_bbox": {
+          "x": 0.1,
+          "y": 0.1901,
+          "w": 0.1755,
+          "h": 0.5092
+        },
+        "primary_bboxes": [
+          {
+            "x": 0.1,
+            "y": 0.1901,
+            "w": 0.1755,
+            "h": 0.5092
+          },
+          {
+            "x": 0.3015,
+            "y": 0.1901,
+            "w": 0.1755,
+            "h": 0.5092
+          }
+        ],
+        "region_roles": [
+          "title",
+          "primary_scientific_object",
+          "primary_scientific_object",
+          "secondary_scientific_object",
+          "secondary_scientific_object",
+          "legend"
+        ],
+        "region_count": 6,
+        "reading_flow": "panel-grid-by-row-and-column",
+        "pairwise_distances": {
+          "medical_image_lesion_overlay_comparison__alternative_composition": 0.1864,
+          "medical_image_lesion_overlay_comparison__controlled_wildcard": 0.6597
+        }
+      },
+      "preview_artifact": {
+        "path": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/medical_image_lesion_overlay_comparison/previews/medical_image_lesion_overlay_comparison__reference_faithful.png",
+        "mime_type": "image/png",
+        "sha256": "89c63ca162020df3b7718693f5b01e7dc42d4ed7c5795d6ceda2b9cf62870173"
+      },
+      "preview_sha256": "89c63ca162020df3b7718693f5b01e7dc42d4ed7c5795d6ceda2b9cf62870173",
+      "audience_text": [
+        "Overlay errors localize the small-lesion failure mode",
+        "The miss is spatially small but changes lesion-level recall.",
+        "Green: overlap; red: false positive; blue: false negative."
+      ],
+      "source_reference_pixels_used": false,
+      "visual_finish": {
+        "visual_tokens": {
+          "token_set_id": "research-presentation-visual-finish-v1",
+          "background": "warm-white",
+          "ink": "near-black",
+          "accent": "teal",
+          "secondary_accent": "amber",
+          "shared_across_candidates": true
+        },
+        "primary_object_treatment": {
+          "primary_region_ids": [
+            "image_input",
+            "image_overlay"
+          ],
+          "container_role": "none",
+          "decorative_card_used": false,
+          "scale_policy": "use source-derived candidate region without non-semantic padding"
+        },
+        "audience_leak_guard": {
+          "internal_ids_visible": false,
+          "candidate_strategy_visible": false,
+          "source_provenance_visible": false
+        },
+        "panel_correspondence": {
+          "panel_region_ids": [
+            "image_input",
+            "image_overlay",
+            "image_prediction",
+            "image_error"
+          ],
+          "label_policy": "label adjacent to each panel",
+          "image_fill_policy": "cover crop inside semantic panel bounds"
+        },
+        "legend_binding": {
+          "legend_region_id": "legend",
+          "binding": "shared legend aligned with image evidence area"
+        },
+        "synthetic_evidence_boundary": "synthetic regression fixture; not real clinical evidence"
+      }
+    },
+    {
+      "candidate_id": "medical_image_lesion_overlay_comparison__alternative_composition",
+      "strategy": "alternative_composition",
+      "source_reference_ids": [
+        "RRL-013"
+      ],
+      "source_composition_families": [
+        "aligned-multi-panel"
+      ],
+      "layout_family": "aligned-multi-panel",
+      "regions": [
+        {
+          "region_id": "title",
+          "role": "title",
+          "bbox": {
+            "x": 0.06,
+            "y": 0.09,
+            "w": 0.9,
+            "h": 0.08
+          },
+          "content_mode": "text",
+          "content_slot_id": "title"
+        },
+        {
+          "region_id": "image_input",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.03,
+            "y": 0.2328,
+            "w": 0.296,
+            "h": 0.323
+          },
+          "content_mode": "medical_image",
+          "content_slot_id": "input_image"
+        },
+        {
+          "region_id": "image_overlay",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.352,
+            "y": 0.2328,
+            "w": 0.296,
+            "h": 0.323
+          },
+          "content_mode": "medical_image",
+          "content_slot_id": "overlay_image"
+        },
+        {
+          "region_id": "image_error",
+          "role": "secondary_scientific_object",
+          "bbox": {
+            "x": 0.674,
+            "y": 0.2328,
+            "w": 0.296,
+            "h": 0.323
+          },
+          "content_mode": "medical_image",
+          "content_slot_id": "error_image"
+        },
+        {
+          "region_id": "annotation",
+          "role": "annotation",
+          "bbox": {
+            "x": 0.352,
+            "y": 0.5808,
+            "w": 0.618,
+            "h": 0.1
+          },
+          "content_mode": "text",
+          "content_slot_id": "annotation"
+        },
+        {
+          "region_id": "legend",
+          "role": "legend",
+          "bbox": {
+            "x": 0.03,
+            "y": 0.7028,
+            "w": 0.94,
+            "h": 0.065
+          },
+          "content_mode": "legend",
+          "content_slot_id": "legend"
+        }
+      ],
+      "primary_object_area_ratio": 0.1912,
+      "reading_flow": "title-to-category-columns-to-sample-grid",
+      "content_bindings": [
+        {
+          "region_id": "title",
+          "content_slot_id": "title",
+          "role": "title"
+        },
+        {
+          "region_id": "image_input",
+          "content_slot_id": "input_image",
+          "role": "primary_scientific_object"
+        },
+        {
+          "region_id": "image_overlay",
+          "content_slot_id": "overlay_image",
+          "role": "primary_scientific_object"
+        },
+        {
+          "region_id": "image_error",
+          "content_slot_id": "error_image",
+          "role": "secondary_scientific_object"
+        },
+        {
+          "region_id": "annotation",
+          "content_slot_id": "annotation",
+          "role": "annotation"
+        },
+        {
+          "region_id": "legend",
+          "content_slot_id": "legend",
+          "role": "legend"
+        }
+      ],
+      "geometry_transfer": [
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "title",
+          "source_role": "title",
+          "source_bbox": {
+            "x": 0.06,
+            "y": 0.09,
+            "w": 0.55,
+            "h": 0.08
+          },
+          "candidate_region_id": "title",
+          "candidate_content_slot_id": "title",
+          "candidate_bbox": {
+            "x": 0.06,
+            "y": 0.09,
+            "w": 0.9,
+            "h": 0.08
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "scaled the source title band into a readable presentation title span"
+        },
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "sample_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.03,
+            "y": 0.25,
+            "w": 0.94,
+            "h": 0.25
+          },
+          "candidate_region_id": "image_input",
+          "candidate_content_slot_id": "input_image",
+          "candidate_bbox": {
+            "x": 0.03,
+            "y": 0.2328,
+            "w": 0.296,
+            "h": 0.323
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split the source sample-grid bbox into a three-panel comparison row"
+        },
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "sample_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.03,
+            "y": 0.25,
+            "w": 0.94,
+            "h": 0.25
+          },
+          "candidate_region_id": "image_overlay",
+          "candidate_content_slot_id": "overlay_image",
+          "candidate_bbox": {
+            "x": 0.352,
+            "y": 0.2328,
+            "w": 0.296,
+            "h": 0.323
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split the source sample-grid bbox into a three-panel comparison row"
+        },
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "sample_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.03,
+            "y": 0.25,
+            "w": 0.94,
+            "h": 0.25
+          },
+          "candidate_region_id": "image_error",
+          "candidate_content_slot_id": "error_image",
+          "candidate_bbox": {
+            "x": 0.674,
+            "y": 0.2328,
+            "w": 0.296,
+            "h": 0.323
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split the source sample-grid bbox into a three-panel comparison row"
+        },
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "sample_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.03,
+            "y": 0.25,
+            "w": 0.94,
+            "h": 0.25
+          },
+          "candidate_region_id": "annotation",
+          "candidate_content_slot_id": "annotation",
+          "candidate_bbox": {
+            "x": 0.352,
+            "y": 0.5808,
+            "w": 0.618,
+            "h": 0.1
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "translated the source grid centerline into a concise failure annotation"
+        },
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "column_labels",
+          "source_role": "legend",
+          "source_bbox": {
+            "x": 0.08,
+            "y": 0.19,
+            "w": 0.78,
+            "h": 0.05
+          },
+          "candidate_region_id": "legend",
+          "candidate_content_slot_id": "legend",
+          "candidate_bbox": {
+            "x": 0.03,
+            "y": 0.7028,
+            "w": 0.94,
+            "h": 0.065
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "kept the source legend relationship below the evidence row"
+        }
+      ],
+      "distinctness_signature": {
+        "layout_family": "aligned-multi-panel",
+        "primary_bbox": {
+          "x": 0.03,
+          "y": 0.2328,
+          "w": 0.296,
+          "h": 0.323
+        },
+        "primary_bboxes": [
+          {
+            "x": 0.03,
+            "y": 0.2328,
+            "w": 0.296,
+            "h": 0.323
+          },
+          {
+            "x": 0.352,
+            "y": 0.2328,
+            "w": 0.296,
+            "h": 0.323
+          }
+        ],
+        "region_roles": [
+          "title",
+          "primary_scientific_object",
+          "primary_scientific_object",
+          "secondary_scientific_object",
+          "annotation",
+          "legend"
+        ],
+        "region_count": 6,
+        "reading_flow": "title-to-category-columns-to-sample-grid",
+        "pairwise_distances": {
+          "medical_image_lesion_overlay_comparison__reference_faithful": 0.1864,
+          "medical_image_lesion_overlay_comparison__controlled_wildcard": 0.6637
+        }
+      },
+      "preview_artifact": {
+        "path": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/medical_image_lesion_overlay_comparison/previews/medical_image_lesion_overlay_comparison__alternative_composition.png",
+        "mime_type": "image/png",
+        "sha256": "e16022d1e05c772dacf8d079a1b725be0e141438fd444c3bd48c25da3e251e6c"
+      },
+      "preview_sha256": "e16022d1e05c772dacf8d079a1b725be0e141438fd444c3bd48c25da3e251e6c",
+      "audience_text": [
+        "Overlay errors localize the small-lesion failure mode",
+        "The miss is spatially small but changes lesion-level recall.",
+        "Green: overlap; red: false positive; blue: false negative."
+      ],
+      "source_reference_pixels_used": false,
+      "visual_finish": {
+        "visual_tokens": {
+          "token_set_id": "research-presentation-visual-finish-v1",
+          "background": "warm-white",
+          "ink": "near-black",
+          "accent": "teal",
+          "secondary_accent": "amber",
+          "shared_across_candidates": true
+        },
+        "primary_object_treatment": {
+          "primary_region_ids": [
+            "image_input",
+            "image_overlay"
+          ],
+          "container_role": "none",
+          "decorative_card_used": false,
+          "scale_policy": "use source-derived candidate region without non-semantic padding"
+        },
+        "audience_leak_guard": {
+          "internal_ids_visible": false,
+          "candidate_strategy_visible": false,
+          "source_provenance_visible": false
+        },
+        "panel_correspondence": {
+          "panel_region_ids": [
+            "image_input",
+            "image_overlay",
+            "image_error"
+          ],
+          "label_policy": "label adjacent to each panel",
+          "image_fill_policy": "cover crop inside semantic panel bounds"
+        },
+        "legend_binding": {
+          "legend_region_id": "legend",
+          "binding": "shared legend aligned with image evidence area"
+        },
+        "synthetic_evidence_boundary": "synthetic regression fixture; not real clinical evidence"
+      }
+    },
+    {
+      "candidate_id": "medical_image_lesion_overlay_comparison__controlled_wildcard",
+      "strategy": "controlled_wildcard",
+      "source_reference_ids": [
+        "RRL-013"
+      ],
+      "source_composition_families": [
+        "aligned-multi-panel"
+      ],
+      "layout_family": "aligned-multi-panel-focus-callout",
+      "regions": [
+        {
+          "region_id": "title",
+          "role": "title",
+          "bbox": {
+            "x": 0.06,
+            "y": 0.09,
+            "w": 0.9,
+            "h": 0.08
+          },
+          "content_mode": "text",
+          "content_slot_id": "title"
+        },
+        {
+          "region_id": "image_overlay",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.03,
+            "y": 0.2285,
+            "w": 0.376,
+            "h": 0.3825
+          },
+          "content_mode": "medical_image",
+          "content_slot_id": "overlay_image"
+        },
+        {
+          "region_id": "image_error",
+          "role": "secondary_scientific_object",
+          "bbox": {
+            "x": 0.5188,
+            "y": 0.2412,
+            "w": 0.282,
+            "h": 0.1955
+          },
+          "content_mode": "medical_image",
+          "content_slot_id": "error_image"
+        },
+        {
+          "region_id": "annotation",
+          "role": "annotation",
+          "bbox": {
+            "x": 0.5,
+            "y": 0.4537,
+            "w": 0.4512,
+            "h": 0.0765
+          },
+          "content_mode": "text",
+          "content_slot_id": "annotation"
+        },
+        {
+          "region_id": "legend",
+          "role": "legend",
+          "bbox": {
+            "x": 0.5,
+            "y": 0.5515,
+            "w": 0.4512,
+            "h": 0.0595
+          },
+          "content_mode": "legend",
+          "content_slot_id": "legend"
+        }
+      ],
+      "primary_object_area_ratio": 0.1438,
+      "reading_flow": "title-to-category-columns-to-sample-grid-focus-callout",
+      "content_bindings": [
+        {
+          "region_id": "title",
+          "content_slot_id": "title",
+          "role": "title"
+        },
+        {
+          "region_id": "image_overlay",
+          "content_slot_id": "overlay_image",
+          "role": "primary_scientific_object"
+        },
+        {
+          "region_id": "image_error",
+          "content_slot_id": "error_image",
+          "role": "secondary_scientific_object"
+        },
+        {
+          "region_id": "annotation",
+          "content_slot_id": "annotation",
+          "role": "annotation"
+        },
+        {
+          "region_id": "legend",
+          "content_slot_id": "legend",
+          "role": "legend"
+        }
+      ],
+      "geometry_transfer": [
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "title",
+          "source_role": "title",
+          "source_bbox": {
+            "x": 0.06,
+            "y": 0.09,
+            "w": 0.55,
+            "h": 0.08
+          },
+          "candidate_region_id": "title",
+          "candidate_content_slot_id": "title",
+          "candidate_bbox": {
+            "x": 0.06,
+            "y": 0.09,
+            "w": 0.9,
+            "h": 0.08
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "scaled the source title band into a readable presentation title span"
+        },
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "sample_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.03,
+            "y": 0.25,
+            "w": 0.94,
+            "h": 0.25
+          },
+          "candidate_region_id": "image_overlay",
+          "candidate_content_slot_id": "overlay_image",
+          "candidate_bbox": {
+            "x": 0.03,
+            "y": 0.2285,
+            "w": 0.376,
+            "h": 0.3825
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "scaled the source image-grid bbox into a dominant overlay panel"
+        },
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "sample_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.03,
+            "y": 0.25,
+            "w": 0.94,
+            "h": 0.25
+          },
+          "candidate_region_id": "image_error",
+          "candidate_content_slot_id": "error_image",
+          "candidate_bbox": {
+            "x": 0.5188,
+            "y": 0.2412,
+            "w": 0.282,
+            "h": 0.1955
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split a small diagnostic error panel from the source image-grid area"
+        },
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "sample_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.03,
+            "y": 0.25,
+            "w": 0.94,
+            "h": 0.25
+          },
+          "candidate_region_id": "annotation",
+          "candidate_content_slot_id": "annotation",
+          "candidate_bbox": {
+            "x": 0.5,
+            "y": 0.4537,
+            "w": 0.4512,
+            "h": 0.0765
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split the source grid side area into a failure annotation"
+        },
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "column_labels",
+          "source_role": "legend",
+          "source_bbox": {
+            "x": 0.08,
+            "y": 0.19,
+            "w": 0.78,
+            "h": 0.05
+          },
+          "candidate_region_id": "legend",
+          "candidate_content_slot_id": "legend",
+          "candidate_bbox": {
+            "x": 0.5,
+            "y": 0.5515,
+            "w": 0.4512,
+            "h": 0.0595
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "translated the source legend relationship into the sidecar area"
+        }
+      ],
+      "distinctness_signature": {
+        "layout_family": "aligned-multi-panel-focus-callout",
+        "primary_bbox": {
+          "x": 0.03,
+          "y": 0.2285,
+          "w": 0.376,
+          "h": 0.3825
+        },
+        "primary_bboxes": [
+          {
+            "x": 0.03,
+            "y": 0.2285,
+            "w": 0.376,
+            "h": 0.3825
+          }
+        ],
+        "region_roles": [
+          "title",
+          "primary_scientific_object",
+          "secondary_scientific_object",
+          "annotation",
+          "legend"
+        ],
+        "region_count": 5,
+        "reading_flow": "title-to-category-columns-to-sample-grid-focus-callout",
+        "pairwise_distances": {
+          "medical_image_lesion_overlay_comparison__reference_faithful": 0.6597,
+          "medical_image_lesion_overlay_comparison__alternative_composition": 0.6637
+        }
+      },
+      "preview_artifact": {
+        "path": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/medical_image_lesion_overlay_comparison/previews/medical_image_lesion_overlay_comparison__controlled_wildcard.png",
+        "mime_type": "image/png",
+        "sha256": "9230b6d48cefd5dffaf0180844139ac2475bbe7742b6e84423636b1bee628c66"
+      },
+      "preview_sha256": "9230b6d48cefd5dffaf0180844139ac2475bbe7742b6e84423636b1bee628c66",
+      "audience_text": [
+        "Overlay errors localize the small-lesion failure mode",
+        "The miss is spatially small but changes lesion-level recall.",
+        "Green: overlap; red: false positive; blue: false negative."
+      ],
+      "source_reference_pixels_used": false,
+      "visual_finish": {
+        "visual_tokens": {
+          "token_set_id": "research-presentation-visual-finish-v1",
+          "background": "warm-white",
+          "ink": "near-black",
+          "accent": "teal",
+          "secondary_accent": "amber",
+          "shared_across_candidates": true
+        },
+        "primary_object_treatment": {
+          "primary_region_ids": [
+            "image_overlay"
+          ],
+          "container_role": "none",
+          "decorative_card_used": false,
+          "scale_policy": "use source-derived candidate region without non-semantic padding"
+        },
+        "audience_leak_guard": {
+          "internal_ids_visible": false,
+          "candidate_strategy_visible": false,
+          "source_provenance_visible": false
+        },
+        "panel_correspondence": {
+          "panel_region_ids": [
+            "image_overlay",
+            "image_error"
+          ],
+          "label_policy": "label adjacent to each panel",
+          "image_fill_policy": "cover crop inside semantic panel bounds"
+        },
+        "legend_binding": {
+          "legend_region_id": "legend",
+          "binding": "shared legend aligned with image evidence area"
+        },
+        "synthetic_evidence_boundary": "synthetic regression fixture; not real clinical evidence"
+      }
+    }
+  ],
+  "comparison_sheet": {
+    "path": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/medical_image_lesion_overlay_comparison/comparison_sheet.png",
+    "mime_type": "image/png",
+    "sha256": "83f95a01afb2a2879dd577837b88fb4ff9d796ce4b6e7cf359d462931a28c774"
+  }
+}

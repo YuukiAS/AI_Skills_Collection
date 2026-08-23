@@ -83,6 +83,7 @@ def validate_manifest(path: Path) -> list[str]:
     records_by_id = composition_records_by_id()
     request = data.get("request", {})
     candidates = data.get("candidates", [])
+    require_visual_finish = "research_presentation_candidate_visual_finish_repair" in path.parts
     if data.get("schema") != "RESEARCH_SLIDE_CANDIDATE_MANIFEST_V1":
         errors.append(f"{path}: invalid schema")
     if request.get("candidate_count") != 3:
@@ -146,6 +147,20 @@ def validate_manifest(path: Path) -> list[str]:
                 errors.append(f"{path}/{cid}: region bbox out of bounds")
         if not candidate.get("content_bindings"):
             errors.append(f"{path}/{cid}: content_bindings missing")
+        visual_finish = candidate.get("visual_finish", {})
+        if require_visual_finish and not visual_finish:
+            errors.append(f"{path}/{cid}: visual_finish missing")
+        elif visual_finish:
+            tokens = visual_finish.get("visual_tokens", {})
+            if tokens.get("token_set_id") != "research-presentation-visual-finish-v1":
+                errors.append(f"{path}/{cid}: invalid visual token set")
+            if tokens.get("shared_across_candidates") is not True:
+                errors.append(f"{path}/{cid}: visual tokens must be shared across candidates")
+            primary_treatment = visual_finish.get("primary_object_treatment", {})
+            if primary_treatment.get("decorative_card_used") is not False:
+                errors.append(f"{path}/{cid}: primary object uses a decorative card")
+            if primary_treatment.get("container_role") != "none":
+                errors.append(f"{path}/{cid}: primary object container_role must be none")
         transfer = candidate.get("geometry_transfer", [])
         if not transfer:
             errors.append(f"{path}/{cid}: geometry_transfer missing")
@@ -165,9 +180,21 @@ def validate_manifest(path: Path) -> list[str]:
         if request.get("page_function") == "ESTIMATOR":
             if not any(region.get("content_mode") == "equation" for region in regions):
                 errors.append(f"{path}/{cid}: estimator request lacks equation content")
+            equation_rendering = candidate.get("visual_finish", {}).get("equation_rendering", {})
+            if require_visual_finish and equation_rendering.get("contrast") != "high":
+                errors.append(f"{path}/{cid}: estimator equation contrast must be high")
+            targets = candidate.get("visual_finish", {}).get("annotation_targets", [])
+            if require_visual_finish and not any(item.get("annotation_region_id") == "annotation" and item.get("target_region_id") == "equation" for item in targets):
+                errors.append(f"{path}/{cid}: estimator annotation must target the equation")
         if request.get("page_function") == "MEDICAL_IMAGE_COMPARISON":
             if not any(region.get("content_mode") == "medical_image" for region in regions):
                 errors.append(f"{path}/{cid}: medical request lacks image content")
+            panel = candidate.get("visual_finish", {}).get("panel_correspondence", {})
+            legend = candidate.get("visual_finish", {}).get("legend_binding", {})
+            if require_visual_finish and not panel.get("panel_region_ids"):
+                errors.append(f"{path}/{cid}: medical panel correspondence missing")
+            if require_visual_finish and not legend.get("legend_region_id"):
+                errors.append(f"{path}/{cid}: medical legend binding missing")
 
     comparison = data.get("comparison_sheet", {})
     comparison_path = REPO_ROOT / comparison.get("path", "")

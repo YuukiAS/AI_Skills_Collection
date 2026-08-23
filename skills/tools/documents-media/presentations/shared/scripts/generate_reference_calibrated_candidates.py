@@ -23,12 +23,14 @@ COMPOSITION_INDEX = REFERENCES / "research_slide_composition_index.json"
 
 WIDTH = 1600
 HEIGHT = 900
-INK = (24, 31, 42)
-MUTED = (85, 96, 111)
-LINE = (200, 208, 218)
-ACCENT = (0, 108, 112)
-SECONDARY = (67, 56, 202)
-WARNING = (171, 91, 28)
+CANVAS_BG = (252, 252, 250)
+INK = (23, 28, 38)
+MUTED = (82, 92, 105)
+LINE = (188, 196, 208)
+ACCENT = (0, 105, 112)
+ACCENT_SOFT = (225, 244, 245)
+SECONDARY = (63, 69, 120)
+WARNING = (174, 94, 25)
 STOPWORDS = {
     "and",
     "are",
@@ -98,16 +100,41 @@ def draw_wrapped(draw: ImageDraw.ImageDraw, text: str, xy: tuple[int, int], max_
         draw.text((x, y + i * line_height), value, font=font, fill=fill)
 
 
-def paste_contain(canvas: Image.Image, source: Image.Image, box: tuple[int, int, int, int], bg=(255, 255, 255)) -> None:
+def flatten_on_bg(source: Image.Image, bg=(255, 255, 255)) -> Image.Image:
+    image = source.convert("RGBA")
+    base = Image.new("RGBA", image.size, bg + (255,))
+    base.alpha_composite(image)
+    return base.convert("RGB")
+
+
+def paste_contain(canvas: Image.Image, source: Image.Image, box: tuple[int, int, int, int], bg=(255, 255, 255), crop_top_ratio: float = 0.0) -> None:
     x1, y1, x2, y2 = box
     w, h = x2 - x1, y2 - y1
     region = Image.new("RGB", (w, h), bg)
-    image = source.convert("RGBA")
+    image = flatten_on_bg(source, bg)
+    if crop_top_ratio > 0:
+        top_crop = round(image.height * crop_top_ratio)
+        image = image.crop((0, top_crop, image.width, image.height))
     image.thumbnail((w, h), Image.Resampling.LANCZOS)
     px = (w - image.width) // 2
     py = (h - image.height) // 2
-    region.paste(image.convert("RGB"), (px, py))
+    region.paste(image, (px, py))
     canvas.paste(region, (x1, y1))
+
+
+def paste_cover(canvas: Image.Image, source: Image.Image, box: tuple[int, int, int, int], bg=(255, 255, 255), crop_top_ratio: float = 0.0, anchor_y: float = 0.5) -> None:
+    x1, y1, x2, y2 = box
+    w, h = x2 - x1, y2 - y1
+    image = flatten_on_bg(source, bg)
+    if crop_top_ratio > 0:
+        top_crop = round(image.height * crop_top_ratio)
+        image = image.crop((0, top_crop, image.width, image.height))
+    scale = max(w / image.width, h / image.height)
+    resized = image.resize((round(image.width * scale), round(image.height * scale)), Image.Resampling.LANCZOS)
+    left = max(0, (resized.width - w) // 2)
+    top = max(0, round((resized.height - h) * anchor_y))
+    cropped = resized.crop((left, top, left + w, top + h))
+    canvas.paste(cropped, (x1, y1))
 
 
 def load_composition_records() -> list[dict[str, Any]]:
@@ -324,7 +351,10 @@ def slot_mode(slot: dict[str, Any]) -> str:
 def title_region_from_source(source: dict[str, Any], primary: dict[str, Any]) -> tuple[dict[str, float], dict[str, Any], str, str]:
     title = source_region(source, role="title")
     if title:
-        return clamp_bbox(title["bbox"]), title, "scale", "scaled the source title band into the neutral preview coordinate system"
+        bbox = dict(title["bbox"])
+        if float(bbox["w"]) < 0.78:
+            bbox["w"] = min(0.90, 0.98 - float(bbox["x"]))
+        return clamp_bbox(bbox), title, "scale", "scaled the source title band into a readable presentation title span"
     primary_bbox = primary["bbox"]
     derived = clamp_bbox({
         "x": primary_bbox["x"],
@@ -426,14 +456,14 @@ def derived_medical_regions(request: dict[str, Any], strategy: str, source: dict
     layout_family = source["layout_family"]
     reading_flow = source["reading_flow"]
     evidence_box = content_bbox_after_title(
-        expand_around_center(content_box, min_w=min(float(content_box["w"]), 0.68), min_h=0.42, max_w=float(content_box["w"]), max_h=0.58),
+        expand_around_center(content_box, min_w=min(float(content_box["w"]), 0.72), min_h=0.54, max_w=float(content_box["w"]), max_h=0.68),
         title_bbox,
     )
     evidence_row = clamp_bbox({
         "x": evidence_box["x"],
-        "y": evidence_box["y"] + evidence_box["h"] * 0.05,
+        "y": evidence_box["y"] + evidence_box["h"] * 0.03,
         "w": evidence_box["w"],
-        "h": min(evidence_box["h"] * 0.68, 0.42),
+        "h": min(evidence_box["h"] * 0.76, 0.52),
     })
     if strategy == "reference_faithful":
         panels = split_horizontal(evidence_row, 4)
@@ -444,7 +474,7 @@ def derived_medical_regions(request: dict[str, Any], strategy: str, source: dict
             ("image_error", "error_image", "secondary_scientific_object", panels[3]),
         ]:
             add_region(regions, transfers, source, primary, region_id, role, panel, slot_id, "medical_image", "split", "split the source image-grid bbox into equal evidence panels for the current content slots")
-        legend_bbox = clamp_bbox({"x": evidence_box["x"], "y": evidence_row["y"] + evidence_row["h"] + 0.04, "w": evidence_box["w"], "h": 0.08})
+        legend_bbox = clamp_bbox({"x": evidence_box["x"], "y": evidence_row["y"] + evidence_row["h"] + 0.025, "w": evidence_box["w"], "h": 0.07})
         add_region(regions, transfers, source, legend, "legend", "legend", legend_bbox, "legend", "legend", "translate", "translated the source legend band below the derived image grid")
     elif strategy == "alternative_composition":
         panels = split_horizontal(evidence_row, 3)
@@ -454,17 +484,17 @@ def derived_medical_regions(request: dict[str, Any], strategy: str, source: dict
             ("image_error", "error_image", "secondary_scientific_object", panels[2]),
         ]:
             add_region(regions, transfers, source, primary, region_id, role, panel, slot_id, "medical_image", "split", "split the source sample-grid bbox into a three-panel comparison row")
-        annotation_bbox = clamp_bbox({"x": panels[1]["x"], "y": evidence_row["y"] + evidence_row["h"] + 0.04, "w": panels[1]["w"] + panels[2]["w"] + 0.026, "h": 0.12})
-        legend_bbox = clamp_bbox({"x": evidence_box["x"], "y": annotation_bbox["y"] + annotation_bbox["h"] + 0.03, "w": evidence_box["w"], "h": 0.07})
+        annotation_bbox = clamp_bbox({"x": panels[1]["x"], "y": evidence_row["y"] + evidence_row["h"] + 0.025, "w": panels[1]["w"] + panels[2]["w"] + 0.026, "h": 0.10})
+        legend_bbox = clamp_bbox({"x": evidence_box["x"], "y": annotation_bbox["y"] + annotation_bbox["h"] + 0.022, "w": evidence_box["w"], "h": 0.065})
         add_region(regions, transfers, source, primary, "annotation", "annotation", annotation_bbox, "annotation", "text", "translate", "translated the source grid centerline into a concise failure annotation")
         add_region(regions, transfers, source, legend, "legend", "legend", legend_bbox, "legend", "legend", "translate", "kept the source legend relationship below the evidence row")
     else:
         layout_family = f"{source['layout_family']}-focus-callout"
         reading_flow = f"{source['reading_flow']}-focus-callout"
-        main_bbox = bbox_inside(evidence_box, 0.00, 0.02, 0.58, 0.88)
-        error_bbox = bbox_inside(evidence_box, 0.66, 0.04, 0.25, 0.34)
-        annotation_bbox = bbox_inside(evidence_box, 0.64, 0.48, 0.34, 0.24)
-        legend_bbox = bbox_inside(evidence_box, 0.64, 0.78, 0.34, 0.16)
+        main_bbox = bbox_inside(evidence_box, 0.00, 0.02, 0.40, 0.90)
+        error_bbox = bbox_inside(evidence_box, 0.52, 0.05, 0.30, 0.46)
+        annotation_bbox = bbox_inside(evidence_box, 0.50, 0.55, 0.48, 0.18)
+        legend_bbox = bbox_inside(evidence_box, 0.50, 0.78, 0.48, 0.14)
         add_region(regions, transfers, source, primary, "image_overlay", "primary_scientific_object", main_bbox, "overlay_image", "medical_image", "scale", "scaled the source image-grid bbox into a dominant overlay panel")
         add_region(regions, transfers, source, primary, "image_error", "secondary_scientific_object", error_bbox, "error_image", "medical_image", "split", "split a small diagnostic error panel from the source image-grid area")
         add_region(regions, transfers, source, primary, "annotation", "annotation", annotation_bbox, "annotation", "text", "split", "split the source grid side area into a failure annotation")
@@ -478,34 +508,101 @@ def candidate_regions(request: dict[str, Any], strategy: str, source: dict[str, 
     return derived_estimator_regions(request, strategy, source)
 
 
+def slot_label(slot_id: str) -> str:
+    labels = {
+        "input_image": "Input",
+        "overlay_image": "GT / prediction",
+        "prediction_image": "Prediction",
+        "error_image": "Error map",
+    }
+    return labels.get(slot_id, slot_id.replace("_", " ").title())
+
+
+def draw_panel_label(draw: ImageDraw.ImageDraw, label: str, box: tuple[int, int, int, int], font: ImageFont.ImageFont) -> None:
+    x1, y1, x2, _ = box
+    draw.text((x1, max(8, y1 - 30)), label, font=font, fill=MUTED)
+    draw.line((x1, y1 - 6, x2, y1 - 6), fill=LINE, width=1)
+
+
+def draw_semantic_legend(draw: ImageDraw.ImageDraw, text: str, box: tuple[int, int, int, int], font: ImageFont.ImageFont) -> None:
+    x1, y1, x2, _ = box
+    swatches = [
+        ((45, 140, 83), "overlap"),
+        ((202, 74, 74), "false positive"),
+        ((72, 116, 196), "false negative"),
+    ]
+    x = x1
+    for color, label in swatches:
+        draw.rectangle((x, y1 + 10, x + 18, y1 + 28), fill=color)
+        draw.text((x + 28, y1 + 4), label, font=font, fill=MUTED)
+        x += max(178, draw.textbbox((0, 0), label, font=font)[2] + 56)
+        if x > x2 - 130:
+            break
+    if x == x1:
+        draw_wrapped(draw, text, (x1, y1), x2 - x1, font, fill=MUTED)
+
+
+def draw_equation_target(draw: ImageDraw.ImageDraw, equation_box: tuple[int, int, int, int]) -> tuple[int, int]:
+    x1, y1, x2, y2 = equation_box
+    width = x2 - x1
+    height = y2 - y1
+    hx1 = x1 + round(width * 0.43)
+    hx2 = x1 + round(width * 0.77)
+    hy = y1 + round(height * 0.82)
+    draw.line((hx1, hy, hx2, hy), fill=WARNING, width=5)
+    draw.arc((hx1, hy - 20, hx1 + 36, hy + 20), 90, 270, fill=WARNING, width=3)
+    draw.arc((hx2 - 36, hy - 20, hx2, hy + 20), -90, 90, fill=WARNING, width=3)
+    return ((hx1 + hx2) // 2, hy + 4)
+
+
+def draw_leader(draw: ImageDraw.ImageDraw, start: tuple[int, int], target: tuple[int, int]) -> None:
+    sx, sy = start
+    tx, ty = target
+    mid = (sx, ty)
+    draw.line((sx, sy, mid[0], mid[1], tx, ty), fill=ACCENT, width=3)
+    draw.ellipse((tx - 5, ty - 5, tx + 5, ty + 5), fill=ACCENT)
+
+
 def draw_candidate(request: dict[str, Any], candidate: dict[str, Any], output: Path) -> None:
-    canvas = Image.new("RGB", (WIDTH, HEIGHT), (250, 250, 248))
+    canvas = Image.new("RGB", (WIDTH, HEIGHT), CANVAS_BG)
     draw = ImageDraw.Draw(canvas)
-    title_font = load_font(42, bold=True)
-    text_font = load_font(25)
-    small_font = load_font(20)
-    draw.rectangle((0, 0, WIDTH, 900), fill=(250, 250, 248))
-    draw.line((96, 150, 1504, 150), fill=LINE, width=2)
+    title_font = load_font(39, bold=True)
+    text_font = load_font(24)
+    small_font = load_font(18)
+    label_font = load_font(18, bold=True)
     slot_by_id = {slot["slot_id"]: slot for slot in request["content_slots"]}
+    region_by_id = {region["region_id"]: region for region in candidate["regions"]}
+    equation_target: tuple[int, int] | None = None
+    annotation_start: tuple[int, int] | None = None
+
     for region in candidate["regions"]:
         slot = slot_by_id[region["content_slot_id"]]
         box = bbox_px(region["bbox"])
         x1, y1, x2, y2 = box
         if region["role"] == "title":
-            draw_wrapped(draw, slot["text"], (x1, y1), x2 - x1, title_font)
+            draw_wrapped(draw, slot["text"], (x1, y1), x2 - x1, title_font, fill=INK, line_spacing=4)
             continue
-        if slot["content_type"] in {"equation_asset", "plot_asset", "image_asset"}:
-            draw.rounded_rectangle((x1, y1, x2, y2), radius=10, fill=(255, 255, 255), outline=LINE, width=2)
-            paste_contain(canvas, Image.open(REPO_ROOT / slot["asset_path"]), (x1 + 12, y1 + 12, x2 - 12, y2 - 12))
+        if slot["content_type"] == "equation_asset":
+            paste_contain(canvas, Image.open(REPO_ROOT / slot["asset_path"]), box, bg=CANVAS_BG)
+            equation_target = draw_equation_target(draw, box)
+        elif slot["content_type"] == "plot_asset":
+            paste_contain(canvas, Image.open(REPO_ROOT / slot["asset_path"]), box, bg=CANVAS_BG)
+        elif slot["content_type"] == "image_asset":
+            draw_panel_label(draw, slot_label(slot["slot_id"]), box, label_font)
+            draw.rectangle((x1, y1, x2, y2), outline=LINE, width=1)
+            paste_contain(canvas, Image.open(REPO_ROOT / slot["asset_path"]), (x1 + 2, y1 + 2, x2 - 2, y2 - 2), bg=(248, 248, 246), crop_top_ratio=0.10)
         elif slot["content_type"] == "legend":
-            draw.rounded_rectangle((x1, y1, x2, y2), radius=8, fill=(241, 245, 249), outline=LINE, width=1)
-            draw_wrapped(draw, slot["text"], (x1 + 14, y1 + 12), x2 - x1 - 28, small_font, fill=MUTED)
+            draw_semantic_legend(draw, slot["text"], box, small_font)
         elif slot["content_type"] == "caption":
             draw_wrapped(draw, slot["text"], (x1, y1), x2 - x1, small_font, fill=MUTED)
         else:
-            draw.rounded_rectangle((x1, y1, x2, y2), radius=8, fill=(236, 253, 245), outline=ACCENT, width=2)
-            draw_wrapped(draw, slot["text"], (x1 + 16, y1 + 14), x2 - x1 - 32, text_font, fill=INK)
-    # Draw structural arrows for flow-like candidates after images.
+            annotation_start = (x1, y1 + 10)
+            draw.line((x1, y1 + 2, x1, y2 - 2), fill=ACCENT, width=4)
+            draw_wrapped(draw, slot["text"], (x1 + 18, y1), x2 - x1 - 18, text_font, fill=INK, line_spacing=6)
+
+    if equation_target and annotation_start:
+        draw_leader(draw, annotation_start, equation_target)
+
     if candidate["layout_family"] == "horizontal-process-flow":
         y = 405
         draw.line((430, y, 580, y), fill=ACCENT, width=8)
@@ -564,6 +661,62 @@ def candidate_signature(candidate: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def visual_finish_metadata(request: dict[str, Any], candidate: dict[str, Any]) -> dict[str, Any]:
+    primary_ids = [region["region_id"] for region in candidate["regions"] if region["role"] == "primary_scientific_object"]
+    data: dict[str, Any] = {
+        "visual_tokens": {
+            "token_set_id": "research-presentation-visual-finish-v1",
+            "background": "warm-white",
+            "ink": "near-black",
+            "accent": "teal",
+            "secondary_accent": "amber",
+            "shared_across_candidates": True,
+        },
+        "primary_object_treatment": {
+            "primary_region_ids": primary_ids,
+            "container_role": "none",
+            "decorative_card_used": False,
+            "scale_policy": "use source-derived candidate region without non-semantic padding",
+        },
+        "audience_leak_guard": {
+            "internal_ids_visible": False,
+            "candidate_strategy_visible": False,
+            "source_provenance_visible": False,
+        },
+    }
+    if request["page_function"] == "MEDICAL_IMAGE_COMPARISON":
+        data.update({
+            "panel_correspondence": {
+                "panel_region_ids": [region["region_id"] for region in candidate["regions"] if region["content_mode"] == "medical_image"],
+                "label_policy": "label adjacent to each panel",
+                "image_fill_policy": "cover crop inside semantic panel bounds",
+            },
+            "legend_binding": {
+                "legend_region_id": next((region["region_id"] for region in candidate["regions"] if region["role"] == "legend"), None),
+                "binding": "shared legend aligned with image evidence area",
+            },
+            "synthetic_evidence_boundary": "synthetic regression fixture; not real clinical evidence",
+        })
+    else:
+        data.update({
+            "equation_rendering": {
+                "region_id": next((region["region_id"] for region in candidate["regions"] if region["content_mode"] == "equation"), None),
+                "background": "canvas",
+                "contrast": "high",
+                "asset_alpha_policy": "flatten transparent pixels onto warm-white background before scaling",
+            },
+            "annotation_targets": [
+                {
+                    "annotation_region_id": "annotation",
+                    "target_region_id": "equation",
+                    "target_relation": "leader_to_middle_term",
+                    "target_segment": "middle_term",
+                }
+            ],
+        })
+    return data
+
+
 def build_candidate(request: dict[str, Any], strategy: str, source: dict[str, Any], request_out: Path) -> dict[str, Any]:
     regions, transfers, layout_family, reading_flow = candidate_regions(request, strategy, source)
     primary_regions = [region for region in regions if region["role"] == "primary_scientific_object"]
@@ -585,6 +738,7 @@ def build_candidate(request: dict[str, Any], strategy: str, source: dict[str, An
         "audience_text": audience_text(request),
         "source_reference_pixels_used": False,
     }
+    candidate["visual_finish"] = visual_finish_metadata(request, candidate)
     candidate["distinctness_signature"] = candidate_signature(candidate)
     preview = request_out / "previews" / f"{candidate_id}.png"
     draw_candidate(request, candidate, preview)

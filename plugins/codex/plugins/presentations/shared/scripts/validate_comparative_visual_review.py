@@ -16,7 +16,7 @@ REPO_ROOT = Path(__file__).resolve().parents[6]
 TASK_KEY = "021_research_presentation_comparative_reference_calibrated_visual_review"
 VISIBLE_TASK_KEY = "021_visual_comparison"
 VISIBLE_WORKFLOW_TYPE = "generic"
-RESULT_ROOT = REPO_ROOT / "results" / TASK_KEY / "visual_review"
+CACHE_KEY = "021"
 REFERENCE_INDEX = REPO_ROOT / "skills/tools/documents-media/presentations/shared/references/research_slide_reference_index.csv"
 COMPOSITION_INDEX = REPO_ROOT / "skills/tools/documents-media/presentations/shared/references/research_slide_composition_index.json"
 FORBIDDEN_VISIBLE = [
@@ -49,7 +49,7 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
-def validate_case(case_dir: Path, require_review: bool = False, require_bytes: bool = False) -> list[str]:
+def validate_case(case_dir: Path, cache_key: str, visible_task_key: str, require_review: bool = False, require_bytes: bool = False) -> list[str]:
     errors: list[str] = []
     manifest_path = case_dir / "visual_inputs.json"
     map_path = case_dir / "review_identity_map.json"
@@ -67,7 +67,7 @@ def validate_case(case_dir: Path, require_review: bool = False, require_bytes: b
             errors.append(f"{manifest_path}: Terra-visible manifest leaks {forbidden}")
     if manifest.get("schema") != "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1":
         errors.append(f"{manifest_path}: invalid manifest schema")
-    if manifest.get("task_key") != VISIBLE_TASK_KEY:
+    if manifest.get("task_key") != visible_task_key:
         errors.append(f"{manifest_path}: invalid task_key")
     if manifest.get("workflow_type") != VISIBLE_WORKFLOW_TYPE:
         errors.append(f"{manifest_path}: invalid workflow_type")
@@ -89,7 +89,7 @@ def validate_case(case_dir: Path, require_review: bool = False, require_bytes: b
         errors.append(f"{case_dir}: identity map ids do not match manifest inputs")
     for item in inputs:
         path_value = item.get("path", "")
-        if not re.fullmatch(r"\.cache/research-presentation-comparative-review/021/[a-z]+/item_[A-Z]\.png", path_value):
+        if not re.fullmatch(rf"\.cache/research-presentation-comparative-review/{re.escape(cache_key)}/[a-z]+/item_[A-Z]\.png", path_value):
             errors.append(f"{case_dir}: non-anonymous input path {path_value}")
         if item.get("mime_type") != "image/png":
             errors.append(f"{case_dir}: input {item.get('logical_id')} is not image/png")
@@ -125,13 +125,17 @@ def validate_case(case_dir: Path, require_review: bool = False, require_bytes: b
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--case", choices=["statistical", "medical"], action="append")
+    parser.add_argument("--task-key", default=TASK_KEY)
+    parser.add_argument("--visible-task-key", default=VISIBLE_TASK_KEY)
+    parser.add_argument("--cache-key", default=CACHE_KEY)
     parser.add_argument("--require-review", action="store_true")
     parser.add_argument("--require-bytes", action="store_true")
     args = parser.parse_args()
     cases = args.case or ["statistical", "medical"]
+    result_root = REPO_ROOT / "results" / args.task_key / "visual_review"
     errors: list[str] = []
     for case in cases:
-        errors.extend(validate_case(RESULT_ROOT / case, require_review=args.require_review, require_bytes=args.require_bytes))
+        errors.extend(validate_case(result_root / case, args.cache_key, args.visible_task_key, require_review=args.require_review, require_bytes=args.require_bytes))
     if errors:
         for error in errors:
             print(error, file=sys.stderr)

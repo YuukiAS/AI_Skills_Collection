@@ -1,0 +1,18 @@
+{
+  "anonymous_item_count": 5,
+  "candidate_count": 3,
+  "case_key": "statistical",
+  "reference_count": 2,
+  "review_identity_sha256": "74323acbdc227eeb2b18905f33d1cceefe16aecc2f5d5031334c0f2a36571662",
+  "review_input_sha256_by_anonymous_id": {
+    "item_A": "76ff6138d5d64b96af1e41dcae4b8a94bb618558d49b66489d5cb01742ae1e7c",
+    "item_B": "9bc66555d4fe50d6124655e0839c421673e3638c99b4d6a313d7340169516033",
+    "item_C": "3e8c2ca21e5605d1b447dcbb268093126434ff6afa59eb3dc1551a8bad2bc671",
+    "item_D": "82d62f066b98bcb4b27213474125faca7e26a914cecdfb100c262a1e547b2098",
+    "item_E": "efb992119ec7da688c8e2b825f7b1c6125c51b78452eb68d4a92c563e27d0b74"
+  },
+  "rubric_sha256": "6ace038353388d6b6e38c8c157c7ab4e8873f43336e726c857680b06223da6a2",
+  "schema": "RESEARCH_PRESENTATION_COMPARATIVE_REVIEW_IDENTITY_V1",
+  "task_key": "022_research_presentation_candidate_visual_finish_repair",
+  "visual_inputs_sha256": "7ce25216b8b0660826bd3ba70294f1530dfd53575bc4ef918e877e24760799a0"
+}

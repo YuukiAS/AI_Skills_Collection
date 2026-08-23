@@ -1,0 +1,844 @@
+{
+  "schema": "RESEARCH_SLIDE_CANDIDATE_MANIFEST_V1",
+  "request": {
+    "schema": "RESEARCH_SLIDE_CANDIDATE_REQUEST_V1",
+    "request_id": "statistical_estimator_cluster_robust_variance",
+    "page_function": "ESTIMATOR",
+    "scientific_object": "cluster-robust sandwich variance estimator equation",
+    "evidence_type": "estimator formula",
+    "content_slots": [
+      {
+        "slot_id": "title",
+        "role": "title",
+        "content_type": "title",
+        "text": "Cluster-robust variance centers uncertainty at the group level"
+      },
+      {
+        "slot_id": "equation",
+        "role": "primary_scientific_object",
+        "content_type": "equation_asset",
+        "asset_path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/slide2_sandwich.png",
+        "alt_text": "Cluster-robust sandwich covariance estimator"
+      },
+      {
+        "slot_id": "annotation",
+        "role": "annotation",
+        "content_type": "text",
+        "text": "Middle term aggregates score contributions by center."
+      },
+      {
+        "slot_id": "caption",
+        "role": "caption",
+        "content_type": "caption",
+        "text": "Deterministic synthetic clustered-data regression content."
+      }
+    ],
+    "required_roles": [
+      "title",
+      "primary_scientific_object",
+      "annotation",
+      "caption"
+    ],
+    "primary_scientific_object_role": "primary_scientific_object",
+    "audience_mode": "research_group_meeting",
+    "density_mode": "compact",
+    "candidate_count": 3
+  },
+  "retrieved_composition_records": [
+    {
+      "reference_id": "RRL-028",
+      "source_id": "SRC-054",
+      "page_function": "ESTIMATOR",
+      "evidence_type": "estimator formula",
+      "scientific_object": "poststratification identity",
+      "layout_family": "equation-dominant",
+      "reading_flow": "title-to-centered-equation",
+      "primary_object_area_ratio": 0.1242,
+      "primary_bbox": {
+        "x": 0.2,
+        "y": 0.28,
+        "w": 0.46,
+        "h": 0.27
+      },
+      "compatible": true,
+      "compatibility_reasons": [
+        "equation_compatible_page"
+      ]
+    },
+    {
+      "reference_id": "RRL-014",
+      "source_id": "SRC-005",
+      "page_function": "ESTIMATOR",
+      "evidence_type": "metric definition",
+      "scientific_object": "inter-annotator agreement formula with masks",
+      "layout_family": "split-visual-explanation",
+      "reading_flow": "title-to-left-formula-then-right-mask-examples",
+      "primary_object_area_ratio": 0.3936,
+      "primary_bbox": {
+        "x": 0.06,
+        "y": 0.15,
+        "w": 0.82,
+        "h": 0.48
+      },
+      "compatible": true,
+      "compatibility_reasons": [
+        "equation_compatible_page"
+      ]
+    }
+  ],
+  "content_payload_sha256": "6213795fac17766c910e243f1f1d6d1c8c604f9a32290ac930cb2f36a5dd0930",
+  "candidates": [
+    {
+      "candidate_id": "statistical_estimator_cluster_robust_variance__reference_faithful",
+      "strategy": "reference_faithful",
+      "source_reference_ids": [
+        "RRL-028"
+      ],
+      "source_composition_families": [
+        "equation-dominant"
+      ],
+      "layout_family": "equation-dominant",
+      "regions": [
+        {
+          "region_id": "title",
+          "role": "title",
+          "bbox": {
+            "x": 0.02,
+            "y": 0.03,
+            "w": 0.96,
+            "h": 0.1
+          },
+          "content_mode": "text",
+          "content_slot_id": "title"
+        },
+        {
+          "region_id": "equation",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.17,
+            "y": 0.28,
+            "w": 0.52,
+            "h": 0.27
+          },
+          "content_mode": "equation",
+          "content_slot_id": "equation"
+        },
+        {
+          "region_id": "annotation",
+          "role": "annotation",
+          "bbox": {
+            "x": 0.222,
+            "y": 0.6364,
+            "w": 0.416,
+            "h": 0.1404
+          },
+          "content_mode": "text",
+          "content_slot_id": "annotation"
+        },
+        {
+          "region_id": "caption",
+          "role": "caption",
+          "bbox": {
+            "x": 0.246,
+            "y": 0.577,
+            "w": 0.368,
+            "h": 0.0405
+          },
+          "content_mode": "caption",
+          "content_slot_id": "caption"
+        }
+      ],
+      "primary_object_area_ratio": 0.1404,
+      "reading_flow": "title-to-centered-equation",
+      "content_bindings": [
+        {
+          "region_id": "title",
+          "content_slot_id": "title",
+          "role": "title"
+        },
+        {
+          "region_id": "equation",
+          "content_slot_id": "equation",
+          "role": "primary_scientific_object"
+        },
+        {
+          "region_id": "annotation",
+          "content_slot_id": "annotation",
+          "role": "annotation"
+        },
+        {
+          "region_id": "caption",
+          "content_slot_id": "caption",
+          "role": "caption"
+        }
+      ],
+      "geometry_transfer": [
+        {
+          "source_reference_id": "RRL-028",
+          "source_region_id": "title",
+          "source_role": "title",
+          "source_bbox": {
+            "x": 0.02,
+            "y": 0.03,
+            "w": 0.96,
+            "h": 0.1
+          },
+          "candidate_region_id": "title",
+          "candidate_content_slot_id": "title",
+          "candidate_bbox": {
+            "x": 0.02,
+            "y": 0.03,
+            "w": 0.96,
+            "h": 0.1
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "scaled the source title band into a readable presentation title span"
+        },
+        {
+          "source_reference_id": "RRL-028",
+          "source_region_id": "poststratification_formula",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.2,
+            "y": 0.28,
+            "w": 0.46,
+            "h": 0.27
+          },
+          "candidate_region_id": "equation",
+          "candidate_content_slot_id": "equation",
+          "candidate_bbox": {
+            "x": 0.17,
+            "y": 0.28,
+            "w": 0.52,
+            "h": 0.27
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "scaled the selected source equation region around its original center for legible preview math"
+        },
+        {
+          "source_reference_id": "RRL-028",
+          "source_region_id": "poststratification_formula",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.2,
+            "y": 0.28,
+            "w": 0.46,
+            "h": 0.27
+          },
+          "candidate_region_id": "annotation",
+          "candidate_content_slot_id": "annotation",
+          "candidate_bbox": {
+            "x": 0.222,
+            "y": 0.6364,
+            "w": 0.416,
+            "h": 0.1404
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "placed annotation below the source-derived equation centerline"
+        },
+        {
+          "source_reference_id": "RRL-028",
+          "source_region_id": "poststratification_formula",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.2,
+            "y": 0.28,
+            "w": 0.46,
+            "h": 0.27
+          },
+          "candidate_region_id": "caption",
+          "candidate_content_slot_id": "caption",
+          "candidate_bbox": {
+            "x": 0.246,
+            "y": 0.577,
+            "w": 0.368,
+            "h": 0.0405
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "placed caption beneath the source primary object span"
+        }
+      ],
+      "distinctness_signature": {
+        "layout_family": "equation-dominant",
+        "primary_bbox": {
+          "x": 0.17,
+          "y": 0.28,
+          "w": 0.52,
+          "h": 0.27
+        },
+        "primary_bboxes": [
+          {
+            "x": 0.17,
+            "y": 0.28,
+            "w": 0.52,
+            "h": 0.27
+          }
+        ],
+        "region_roles": [
+          "title",
+          "primary_scientific_object",
+          "annotation",
+          "caption"
+        ],
+        "region_count": 4,
+        "reading_flow": "title-to-centered-equation",
+        "pairwise_distances": {
+          "statistical_estimator_cluster_robust_variance__alternative_composition": 0.8454,
+          "statistical_estimator_cluster_robust_variance__controlled_wildcard": 0.6549
+        }
+      },
+      "preview_artifact": {
+        "path": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/statistical_estimator_cluster_robust_variance/previews/statistical_estimator_cluster_robust_variance__reference_faithful.png",
+        "mime_type": "image/png",
+        "sha256": "3e8c2ca21e5605d1b447dcbb268093126434ff6afa59eb3dc1551a8bad2bc671"
+      },
+      "preview_sha256": "3e8c2ca21e5605d1b447dcbb268093126434ff6afa59eb3dc1551a8bad2bc671",
+      "audience_text": [
+        "Cluster-robust variance centers uncertainty at the group level",
+        "Middle term aggregates score contributions by center.",
+        "Deterministic synthetic clustered-data regression content."
+      ],
+      "source_reference_pixels_used": false,
+      "visual_finish": {
+        "visual_tokens": {
+          "token_set_id": "research-presentation-visual-finish-v1",
+          "background": "warm-white",
+          "ink": "near-black",
+          "accent": "teal",
+          "secondary_accent": "amber",
+          "shared_across_candidates": true
+        },
+        "primary_object_treatment": {
+          "primary_region_ids": [
+            "equation"
+          ],
+          "container_role": "none",
+          "decorative_card_used": false,
+          "scale_policy": "use source-derived candidate region without non-semantic padding"
+        },
+        "audience_leak_guard": {
+          "internal_ids_visible": false,
+          "candidate_strategy_visible": false,
+          "source_provenance_visible": false
+        },
+        "equation_rendering": {
+          "region_id": "equation",
+          "background": "canvas",
+          "contrast": "high",
+          "asset_alpha_policy": "flatten transparent pixels onto warm-white background before scaling"
+        },
+        "annotation_targets": [
+          {
+            "annotation_region_id": "annotation",
+            "target_region_id": "equation",
+            "target_relation": "leader_to_middle_term",
+            "target_segment": "middle_term"
+          }
+        ]
+      }
+    },
+    {
+      "candidate_id": "statistical_estimator_cluster_robust_variance__alternative_composition",
+      "strategy": "alternative_composition",
+      "source_reference_ids": [
+        "RRL-014"
+      ],
+      "source_composition_families": [
+        "split-visual-explanation"
+      ],
+      "layout_family": "split-visual-explanation",
+      "regions": [
+        {
+          "region_id": "title",
+          "role": "title",
+          "bbox": {
+            "x": 0.05,
+            "y": 0.06,
+            "w": 0.9,
+            "h": 0.08
+          },
+          "content_mode": "text",
+          "content_slot_id": "title"
+        },
+        {
+          "region_id": "equation",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.02,
+            "y": 0.17,
+            "w": 0.5,
+            "h": 0.17
+          },
+          "content_mode": "equation",
+          "content_slot_id": "equation"
+        },
+        {
+          "region_id": "annotation",
+          "role": "annotation",
+          "bbox": {
+            "x": 0.58,
+            "y": 0.16,
+            "w": 0.2652,
+            "h": 0.1728
+          },
+          "content_mode": "text",
+          "content_slot_id": "annotation"
+        },
+        {
+          "region_id": "caption",
+          "role": "caption",
+          "bbox": {
+            "x": 0.0764,
+            "y": 0.6444,
+            "w": 0.574,
+            "h": 0.0672
+          },
+          "content_mode": "caption",
+          "content_slot_id": "caption"
+        }
+      ],
+      "primary_object_area_ratio": 0.085,
+      "reading_flow": "title-to-left-formula-then-right-mask-examples",
+      "content_bindings": [
+        {
+          "region_id": "title",
+          "content_slot_id": "title",
+          "role": "title"
+        },
+        {
+          "region_id": "equation",
+          "content_slot_id": "equation",
+          "role": "primary_scientific_object"
+        },
+        {
+          "region_id": "annotation",
+          "content_slot_id": "annotation",
+          "role": "annotation"
+        },
+        {
+          "region_id": "caption",
+          "content_slot_id": "caption",
+          "role": "caption"
+        }
+      ],
+      "geometry_transfer": [
+        {
+          "source_reference_id": "RRL-014",
+          "source_region_id": "title",
+          "source_role": "title",
+          "source_bbox": {
+            "x": 0.05,
+            "y": 0.06,
+            "w": 0.6,
+            "h": 0.08
+          },
+          "candidate_region_id": "title",
+          "candidate_content_slot_id": "title",
+          "candidate_bbox": {
+            "x": 0.05,
+            "y": 0.06,
+            "w": 0.9,
+            "h": 0.08
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "scaled the source title band into a readable presentation title span"
+        },
+        {
+          "source_reference_id": "RRL-014",
+          "source_region_id": "formula_text",
+          "source_role": "equation",
+          "source_bbox": {
+            "x": 0.07,
+            "y": 0.18,
+            "w": 0.38,
+            "h": 0.15
+          },
+          "candidate_region_id": "equation",
+          "candidate_content_slot_id": "equation",
+          "candidate_bbox": {
+            "x": 0.02,
+            "y": 0.17,
+            "w": 0.5,
+            "h": 0.17
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "scaled the source equation region while preserving its side of the split layout"
+        },
+        {
+          "source_reference_id": "RRL-014",
+          "source_region_id": "mask_examples",
+          "source_role": "secondary_scientific_object",
+          "source_bbox": {
+            "x": 0.58,
+            "y": 0.13,
+            "w": 0.34,
+            "h": 0.48
+          },
+          "candidate_region_id": "annotation",
+          "candidate_content_slot_id": "annotation",
+          "candidate_bbox": {
+            "x": 0.58,
+            "y": 0.16,
+            "w": 0.2652,
+            "h": 0.1728
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "translated the source secondary object lane into a compact explanatory annotation"
+        },
+        {
+          "source_reference_id": "RRL-014",
+          "source_region_id": "primary_metric_definition",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.06,
+            "y": 0.15,
+            "w": 0.82,
+            "h": 0.48
+          },
+          "candidate_region_id": "caption",
+          "candidate_content_slot_id": "caption",
+          "candidate_bbox": {
+            "x": 0.0764,
+            "y": 0.6444,
+            "w": 0.574,
+            "h": 0.0672
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "anchored caption to the lower edge of the source primary composition"
+        }
+      ],
+      "distinctness_signature": {
+        "layout_family": "split-visual-explanation",
+        "primary_bbox": {
+          "x": 0.02,
+          "y": 0.17,
+          "w": 0.5,
+          "h": 0.17
+        },
+        "primary_bboxes": [
+          {
+            "x": 0.02,
+            "y": 0.17,
+            "w": 0.5,
+            "h": 0.17
+          }
+        ],
+        "region_roles": [
+          "title",
+          "primary_scientific_object",
+          "annotation",
+          "caption"
+        ],
+        "region_count": 4,
+        "reading_flow": "title-to-left-formula-then-right-mask-examples",
+        "pairwise_distances": {
+          "statistical_estimator_cluster_robust_variance__reference_faithful": 0.8454,
+          "statistical_estimator_cluster_robust_variance__controlled_wildcard": 0.6913
+        }
+      },
+      "preview_artifact": {
+        "path": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/statistical_estimator_cluster_robust_variance/previews/statistical_estimator_cluster_robust_variance__alternative_composition.png",
+        "mime_type": "image/png",
+        "sha256": "76ff6138d5d64b96af1e41dcae4b8a94bb618558d49b66489d5cb01742ae1e7c"
+      },
+      "preview_sha256": "76ff6138d5d64b96af1e41dcae4b8a94bb618558d49b66489d5cb01742ae1e7c",
+      "audience_text": [
+        "Cluster-robust variance centers uncertainty at the group level",
+        "Middle term aggregates score contributions by center.",
+        "Deterministic synthetic clustered-data regression content."
+      ],
+      "source_reference_pixels_used": false,
+      "visual_finish": {
+        "visual_tokens": {
+          "token_set_id": "research-presentation-visual-finish-v1",
+          "background": "warm-white",
+          "ink": "near-black",
+          "accent": "teal",
+          "secondary_accent": "amber",
+          "shared_across_candidates": true
+        },
+        "primary_object_treatment": {
+          "primary_region_ids": [
+            "equation"
+          ],
+          "container_role": "none",
+          "decorative_card_used": false,
+          "scale_policy": "use source-derived candidate region without non-semantic padding"
+        },
+        "audience_leak_guard": {
+          "internal_ids_visible": false,
+          "candidate_strategy_visible": false,
+          "source_provenance_visible": false
+        },
+        "equation_rendering": {
+          "region_id": "equation",
+          "background": "canvas",
+          "contrast": "high",
+          "asset_alpha_policy": "flatten transparent pixels onto warm-white background before scaling"
+        },
+        "annotation_targets": [
+          {
+            "annotation_region_id": "annotation",
+            "target_region_id": "equation",
+            "target_relation": "leader_to_middle_term",
+            "target_segment": "middle_term"
+          }
+        ]
+      }
+    },
+    {
+      "candidate_id": "statistical_estimator_cluster_robust_variance__controlled_wildcard",
+      "strategy": "controlled_wildcard",
+      "source_reference_ids": [
+        "RRL-014"
+      ],
+      "source_composition_families": [
+        "split-visual-explanation"
+      ],
+      "layout_family": "split-visual-explanation-reordered-callout",
+      "regions": [
+        {
+          "region_id": "title",
+          "role": "title",
+          "bbox": {
+            "x": 0.05,
+            "y": 0.06,
+            "w": 0.9,
+            "h": 0.08
+          },
+          "content_mode": "text",
+          "content_slot_id": "title"
+        },
+        {
+          "region_id": "equation",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.1584,
+            "y": 0.2252,
+            "w": 0.574,
+            "h": 0.1496
+          },
+          "content_mode": "equation",
+          "content_slot_id": "equation"
+        },
+        {
+          "region_id": "annotation",
+          "role": "annotation",
+          "bbox": {
+            "x": 0.4864,
+            "y": 0.4364,
+            "w": 0.3116,
+            "h": 0.132
+          },
+          "content_mode": "text",
+          "content_slot_id": "annotation"
+        },
+        {
+          "region_id": "caption",
+          "role": "caption",
+          "bbox": {
+            "x": 0.1584,
+            "y": 0.5948,
+            "w": 0.4592,
+            "h": 0.0704
+          },
+          "content_mode": "caption",
+          "content_slot_id": "caption"
+        }
+      ],
+      "primary_object_area_ratio": 0.0859,
+      "reading_flow": "title-to-left-formula-then-right-mask-examples-reordered-callout",
+      "content_bindings": [
+        {
+          "region_id": "title",
+          "content_slot_id": "title",
+          "role": "title"
+        },
+        {
+          "region_id": "equation",
+          "content_slot_id": "equation",
+          "role": "primary_scientific_object"
+        },
+        {
+          "region_id": "annotation",
+          "content_slot_id": "annotation",
+          "role": "annotation"
+        },
+        {
+          "region_id": "caption",
+          "content_slot_id": "caption",
+          "role": "caption"
+        }
+      ],
+      "geometry_transfer": [
+        {
+          "source_reference_id": "RRL-014",
+          "source_region_id": "title",
+          "source_role": "title",
+          "source_bbox": {
+            "x": 0.05,
+            "y": 0.06,
+            "w": 0.6,
+            "h": 0.08
+          },
+          "candidate_region_id": "title",
+          "candidate_content_slot_id": "title",
+          "candidate_bbox": {
+            "x": 0.05,
+            "y": 0.06,
+            "w": 0.9,
+            "h": 0.08
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "scaled the source title band into a readable presentation title span"
+        },
+        {
+          "source_reference_id": "RRL-014",
+          "source_region_id": "primary_metric_definition",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.06,
+            "y": 0.15,
+            "w": 0.82,
+            "h": 0.48
+          },
+          "candidate_region_id": "equation",
+          "candidate_content_slot_id": "equation",
+          "candidate_bbox": {
+            "x": 0.1584,
+            "y": 0.2252,
+            "w": 0.574,
+            "h": 0.1496
+          },
+          "adaptation_type": "reorder",
+          "adaptation_reason": "reordered the source primary object into an equation-first focus with a lower-right callout"
+        },
+        {
+          "source_reference_id": "RRL-014",
+          "source_region_id": "primary_metric_definition",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.06,
+            "y": 0.15,
+            "w": 0.82,
+            "h": 0.48
+          },
+          "candidate_region_id": "annotation",
+          "candidate_content_slot_id": "annotation",
+          "candidate_bbox": {
+            "x": 0.4864,
+            "y": 0.4364,
+            "w": 0.3116,
+            "h": 0.132
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split the source primary object area to create a secondary explanatory callout"
+        },
+        {
+          "source_reference_id": "RRL-014",
+          "source_region_id": "primary_metric_definition",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.06,
+            "y": 0.15,
+            "w": 0.82,
+            "h": 0.48
+          },
+          "candidate_region_id": "caption",
+          "candidate_content_slot_id": "caption",
+          "candidate_bbox": {
+            "x": 0.1584,
+            "y": 0.5948,
+            "w": 0.4592,
+            "h": 0.0704
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "translated caption to the source primary lower edge after the reorder"
+        }
+      ],
+      "distinctness_signature": {
+        "layout_family": "split-visual-explanation-reordered-callout",
+        "primary_bbox": {
+          "x": 0.1584,
+          "y": 0.2252,
+          "w": 0.574,
+          "h": 0.1496
+        },
+        "primary_bboxes": [
+          {
+            "x": 0.1584,
+            "y": 0.2252,
+            "w": 0.574,
+            "h": 0.1496
+          }
+        ],
+        "region_roles": [
+          "title",
+          "primary_scientific_object",
+          "annotation",
+          "caption"
+        ],
+        "region_count": 4,
+        "reading_flow": "title-to-left-formula-then-right-mask-examples-reordered-callout",
+        "pairwise_distances": {
+          "statistical_estimator_cluster_robust_variance__reference_faithful": 0.6549,
+          "statistical_estimator_cluster_robust_variance__alternative_composition": 0.6913
+        }
+      },
+      "preview_artifact": {
+        "path": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/statistical_estimator_cluster_robust_variance/previews/statistical_estimator_cluster_robust_variance__controlled_wildcard.png",
+        "mime_type": "image/png",
+        "sha256": "efb992119ec7da688c8e2b825f7b1c6125c51b78452eb68d4a92c563e27d0b74"
+      },
+      "preview_sha256": "efb992119ec7da688c8e2b825f7b1c6125c51b78452eb68d4a92c563e27d0b74",
+      "audience_text": [
+        "Cluster-robust variance centers uncertainty at the group level",
+        "Middle term aggregates score contributions by center.",
+        "Deterministic synthetic clustered-data regression content."
+      ],
+      "source_reference_pixels_used": false,
+      "visual_finish": {
+        "visual_tokens": {
+          "token_set_id": "research-presentation-visual-finish-v1",
+          "background": "warm-white",
+          "ink": "near-black",
+          "accent": "teal",
+          "secondary_accent": "amber",
+          "shared_across_candidates": true
+        },
+        "primary_object_treatment": {
+          "primary_region_ids": [
+            "equation"
+          ],
+          "container_role": "none",
+          "decorative_card_used": false,
+          "scale_policy": "use source-derived candidate region without non-semantic padding"
+        },
+        "audience_leak_guard": {
+          "internal_ids_visible": false,
+          "candidate_strategy_visible": false,
+          "source_provenance_visible": false
+        },
+        "equation_rendering": {
+          "region_id": "equation",
+          "background": "canvas",
+          "contrast": "high",
+          "asset_alpha_policy": "flatten transparent pixels onto warm-white background before scaling"
+        },
+        "annotation_targets": [
+          {
+            "annotation_region_id": "annotation",
+            "target_region_id": "equation",
+            "target_relation": "leader_to_middle_term",
+            "target_segment": "middle_term"
+          }
+        ]
+      }
+    }
+  ],
+  "comparison_sheet": {
+    "path": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/statistical_estimator_cluster_robust_variance/comparison_sheet.png",
+    "mime_type": "image/png",
+    "sha256": "d244df4802df33a201cc1f7c8905607f1ea59541f7f94177438e1917cfbcaecd"
+  }
+}

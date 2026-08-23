@@ -23,22 +23,19 @@ COMPOSITION_INDEX = SHARED / "references" / "research_slide_composition_index.js
 TASK_KEY = "021_research_presentation_comparative_reference_calibrated_visual_review"
 VISIBLE_TASK_KEY = "021_visual_comparison"
 VISIBLE_WORKFLOW_TYPE = "generic"
-RESULT_ROOT = REPO_ROOT / "results" / TASK_KEY / "visual_review"
-CACHE_ROOT = REPO_ROOT / ".cache" / "research-presentation-comparative-review" / "021"
+DEFAULT_CANDIDATE_ROOT = "docs/audits/research_presentation_candidate_search/generated"
 SOURCE_CACHE = REPO_ROOT / ".cache" / "research-presentation-reference-library" / "sources"
 
 CASES = {
     "statistical": {
         "page_job_contract": "estimator/equation comparative review",
         "request_id": "statistical_estimator_cluster_robust_variance",
-        "candidate_manifest": "docs/audits/research_presentation_candidate_search/generated/statistical_estimator_cluster_robust_variance/candidate_manifest.json",
         "reference_ids": ["RRL-028", "RRL-014"],
         "rubric_focus": "For this estimator/equation page job, judge whether the equation is a mature scientific object with clear composition, direct annotation, projection-scale typography, and non-generic academic language.",
     },
     "medical": {
         "page_job_contract": "medical-image comparison comparative review",
         "request_id": "medical_image_lesion_overlay_comparison",
-        "candidate_manifest": "docs/audits/research_presentation_candidate_search/generated/medical_image_lesion_overlay_comparison/candidate_manifest.json",
         "reference_ids": ["RRL-022", "RRL-013"],
         "rubric_focus": "For this medical-image comparison page job, judge whether image pixels are the visual center, whether panel correspondence and legend are natural, and whether annotation supports rather than overwhelms the images.",
     },
@@ -149,14 +146,21 @@ def write_json(path: Path, data: dict[str, Any]) -> None:
     path.write_text(json.dumps(data, indent=2, sort_keys=True), encoding="utf-8")
 
 
-def prepare_case(case_key: str) -> dict[str, str]:
+def candidate_manifest_path(spec: dict[str, Any], candidate_root: str) -> Path:
+    return REPO_ROOT / candidate_root / spec["request_id"] / "candidate_manifest.json"
+
+
+def prepare_case(case_key: str, task_key: str, visible_task_key: str, cache_key: str, candidate_root: str) -> dict[str, str]:
     spec = CASES[case_key]
-    out_dir = RESULT_ROOT / case_key
-    runtime_dir = CACHE_ROOT / case_key
+    result_root = REPO_ROOT / "results" / task_key / "visual_review"
+    cache_root = REPO_ROOT / ".cache" / "research-presentation-comparative-review" / cache_key
+    out_dir = result_root / case_key
+    runtime_dir = cache_root / case_key
     if runtime_dir.exists():
         shutil.rmtree(runtime_dir)
     runtime_dir.mkdir(parents=True, exist_ok=True)
-    candidate_manifest = json.loads((REPO_ROOT / spec["candidate_manifest"]).read_text(encoding="utf-8"))
+    candidate_manifest_file = candidate_manifest_path(spec, candidate_root)
+    candidate_manifest = json.loads(candidate_manifest_file.read_text(encoding="utf-8"))
     references = load_reference_rows()
     compositions = load_composition_records()
     entries: list[dict[str, Any]] = []
@@ -232,14 +236,14 @@ def prepare_case(case_key: str) -> dict[str, str]:
     rubric = comparative_rubric(case_key, spec["page_job_contract"], spec["rubric_focus"])
     visible_manifest = {
         "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
-        "task_key": VISIBLE_TASK_KEY,
+        "task_key": visible_task_key,
         "workflow_type": VISIBLE_WORKFLOW_TYPE,
         "review_kind": f"comparative-calibrated-{case_key}",
         "prompt_version": "ai-bridge.visual-review.v1",
         "privacy_policy": "PUBLIC_SAFE_ONLY",
         "external_upload_authorization": "",
         "identity_bindings": {
-            "adapter_identity": f"{VISIBLE_TASK_KEY}:{case_key}",
+            "adapter_identity": f"{visible_task_key}:{case_key}",
             "case_key": case_key,
             "page_job_contract": spec["page_job_contract"],
             "item_sha256_by_anonymous_id": item_sha,
@@ -259,17 +263,17 @@ def prepare_case(case_key: str) -> dict[str, str]:
 
     identity_map = {
         "schema": "RESEARCH_PRESENTATION_COMPARATIVE_REVIEW_IDENTITY_MAP_V1",
-        "task_key": TASK_KEY,
+        "task_key": task_key,
         "case_key": case_key,
         "page_job_contract": spec["page_job_contract"],
         "review_identity_sha256": manifest_sha,
-        "candidate_manifest": spec["candidate_manifest"],
+        "candidate_manifest": str(candidate_manifest_file.relative_to(REPO_ROOT)),
         "reference_ids": spec["reference_ids"],
         "items": identity_items,
     }
     identity_meta = {
         "schema": "RESEARCH_PRESENTATION_COMPARATIVE_REVIEW_IDENTITY_V1",
-        "task_key": TASK_KEY,
+        "task_key": task_key,
         "case_key": case_key,
         "review_identity_sha256": manifest_sha,
         "visual_inputs_sha256": hashlib.sha256(json.dumps(visible_manifest, sort_keys=True).encode("utf-8")).hexdigest(),
@@ -294,9 +298,13 @@ def prepare_case(case_key: str) -> dict[str, str]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--case", choices=sorted(CASES), action="append")
+    parser.add_argument("--task-key", default=TASK_KEY)
+    parser.add_argument("--visible-task-key", default=VISIBLE_TASK_KEY)
+    parser.add_argument("--cache-key", default="021")
+    parser.add_argument("--candidate-root", default=DEFAULT_CANDIDATE_ROOT)
     args = parser.parse_args()
     cases = args.case or sorted(CASES)
-    outputs = [prepare_case(case_key) for case_key in cases]
+    outputs = [prepare_case(case_key, args.task_key, args.visible_task_key, args.cache_key, args.candidate_root) for case_key in cases]
     print(json.dumps({"prepared": outputs}, indent=2, sort_keys=True))
     return 0
 

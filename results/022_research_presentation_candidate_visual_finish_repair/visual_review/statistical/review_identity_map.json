@@ -1,0 +1,118 @@
+{
+  "candidate_manifest": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/statistical_estimator_cluster_robust_variance/candidate_manifest.json",
+  "case_key": "statistical",
+  "items": [
+    {
+      "actual_page_number": null,
+      "anonymous_id": "item_A",
+      "candidate_id": "statistical_estimator_cluster_robust_variance__alternative_composition",
+      "candidate_strategy": "alternative_composition",
+      "canonical_rendered_page_sha256": null,
+      "item_class": "candidate",
+      "materialization_method": "copied committed 020 candidate preview to anonymous runtime filename",
+      "review_input_path": ".cache/research-presentation-comparative-review/022/statistical/item_A.png",
+      "review_input_sha256": "76ff6138d5d64b96af1e41dcae4b8a94bb618558d49b66489d5cb01742ae1e7c",
+      "rights_note": "owned deterministic candidate preview",
+      "sha256": "76ff6138d5d64b96af1e41dcae4b8a94bb618558d49b66489d5cb01742ae1e7c",
+      "source_composition_families": [
+        "split-visual-explanation"
+      ],
+      "source_file_sha256": null,
+      "source_path": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/statistical_estimator_cluster_robust_variance/previews/statistical_estimator_cluster_robust_variance__alternative_composition.png",
+      "source_reference_ids": [
+        "RRL-014"
+      ],
+      "stable_identity": "statistical_estimator_cluster_robust_variance__alternative_composition"
+    },
+    {
+      "actual_page_number": 18,
+      "anonymous_id": "item_B",
+      "canonical_rendered_page_sha256": "bc7a72ab5809fe7e8a3f7d950a15607168e10c4fda573591e6d8250217ba9b68",
+      "item_class": "reference",
+      "local_cache_file": "sfu_isic2025_presentation.pdf",
+      "materialization_method": "download/verify public PDF, render inspected page with pdftoppm -r 140, and mask corner provenance marks before Terra input",
+      "page_function": "ESTIMATOR",
+      "reference_id": "RRL-014",
+      "review_input_path": ".cache/research-presentation-comparative-review/022/statistical/item_B.png",
+      "review_input_sha256": "9bc66555d4fe50d6124655e0839c421673e3638c99b4d6a313d7340169516033",
+      "rights_note": "public PDF; metadata lessons only",
+      "scientific_object": "inter-annotator agreement formula with masks",
+      "sha256": "9bc66555d4fe50d6124655e0839c421673e3638c99b4d6a313d7340169516033",
+      "source_file_sha256": "7280463da41e6919a0e29c9fb129cee260dd6e332dcecf34710e5054a4995b24",
+      "source_id": "SRC-005",
+      "source_url": "https://www.sfu.ca/~kabhishe/data/files/ISIC2025_Presentation.pdf",
+      "stable_identity": "RRL-014"
+    },
+    {
+      "actual_page_number": null,
+      "anonymous_id": "item_C",
+      "candidate_id": "statistical_estimator_cluster_robust_variance__reference_faithful",
+      "candidate_strategy": "reference_faithful",
+      "canonical_rendered_page_sha256": null,
+      "item_class": "candidate",
+      "materialization_method": "copied committed 020 candidate preview to anonymous runtime filename",
+      "review_input_path": ".cache/research-presentation-comparative-review/022/statistical/item_C.png",
+      "review_input_sha256": "3e8c2ca21e5605d1b447dcbb268093126434ff6afa59eb3dc1551a8bad2bc671",
+      "rights_note": "owned deterministic candidate preview",
+      "sha256": "3e8c2ca21e5605d1b447dcbb268093126434ff6afa59eb3dc1551a8bad2bc671",
+      "source_composition_families": [
+        "equation-dominant"
+      ],
+      "source_file_sha256": null,
+      "source_path": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/statistical_estimator_cluster_robust_variance/previews/statistical_estimator_cluster_robust_variance__reference_faithful.png",
+      "source_reference_ids": [
+        "RRL-028"
+      ],
+      "stable_identity": "statistical_estimator_cluster_robust_variance__reference_faithful"
+    },
+    {
+      "actual_page_number": 14,
+      "anonymous_id": "item_D",
+      "canonical_rendered_page_sha256": "2870d8b698a549f76ae398de63b1340ce2ca66e3433e4ab281321c148f5b5dd4",
+      "item_class": "reference",
+      "local_cache_file": "gelman_actual_mrp_talk_cdc.pdf",
+      "materialization_method": "download/verify public PDF, render inspected page with pdftoppm -r 140, and mask corner provenance marks before Terra input",
+      "page_function": "ESTIMATOR",
+      "reference_id": "RRL-028",
+      "review_input_path": ".cache/research-presentation-comparative-review/022/statistical/item_D.png",
+      "review_input_sha256": "82d62f066b98bcb4b27213474125faca7e26a914cecdfb100c262a1e547b2098",
+      "rights_note": "public PDF linked from speaker presentation archive; metadata lessons only",
+      "scientific_object": "poststratification identity",
+      "sha256": "82d62f066b98bcb4b27213474125faca7e26a914cecdfb100c262a1e547b2098",
+      "source_file_sha256": "40ee6a3462d158c57806e546d54ecd55664ac4cd9fe9f3a2dd6cf8b1eb603500",
+      "source_id": "SRC-054",
+      "source_url": "https://sites.stat.columbia.edu/gelman/presentations/mrp_talk_cdc.pdf",
+      "stable_identity": "RRL-028"
+    },
+    {
+      "actual_page_number": null,
+      "anonymous_id": "item_E",
+      "candidate_id": "statistical_estimator_cluster_robust_variance__controlled_wildcard",
+      "candidate_strategy": "controlled_wildcard",
+      "canonical_rendered_page_sha256": null,
+      "item_class": "candidate",
+      "materialization_method": "copied committed 020 candidate preview to anonymous runtime filename",
+      "review_input_path": ".cache/research-presentation-comparative-review/022/statistical/item_E.png",
+      "review_input_sha256": "efb992119ec7da688c8e2b825f7b1c6125c51b78452eb68d4a92c563e27d0b74",
+      "rights_note": "owned deterministic candidate preview",
+      "sha256": "efb992119ec7da688c8e2b825f7b1c6125c51b78452eb68d4a92c563e27d0b74",
+      "source_composition_families": [
+        "split-visual-explanation"
+      ],
+      "source_file_sha256": null,
+      "source_path": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/statistical_estimator_cluster_robust_variance/previews/statistical_estimator_cluster_robust_variance__controlled_wildcard.png",
+      "source_reference_ids": [
+        "RRL-014"
+      ],
+      "stable_identity": "statistical_estimator_cluster_robust_variance__controlled_wildcard"
+    }
+  ],
+  "page_job_contract": "estimator/equation comparative review",
+  "reference_ids": [
+    "RRL-028",
+    "RRL-014"
+  ],
+  "review_identity_sha256": "74323acbdc227eeb2b18905f33d1cceefe16aecc2f5d5031334c0f2a36571662",
+  "schema": "RESEARCH_PRESENTATION_COMPARATIVE_REVIEW_IDENTITY_MAP_V1",
+  "task_key": "022_research_presentation_candidate_visual_finish_repair"
+}

@@ -1,0 +1,118 @@
+{
+  "candidate_manifest": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/medical_image_lesion_overlay_comparison/candidate_manifest.json",
+  "case_key": "medical",
+  "items": [
+    {
+      "actual_page_number": null,
+      "anonymous_id": "item_A",
+      "candidate_id": "medical_image_lesion_overlay_comparison__alternative_composition",
+      "candidate_strategy": "alternative_composition",
+      "canonical_rendered_page_sha256": null,
+      "item_class": "candidate",
+      "materialization_method": "copied committed 020 candidate preview to anonymous runtime filename",
+      "review_input_path": ".cache/research-presentation-comparative-review/022/medical/item_A.png",
+      "review_input_sha256": "e16022d1e05c772dacf8d079a1b725be0e141438fd444c3bd48c25da3e251e6c",
+      "rights_note": "owned deterministic candidate preview",
+      "sha256": "e16022d1e05c772dacf8d079a1b725be0e141438fd444c3bd48c25da3e251e6c",
+      "source_composition_families": [
+        "aligned-multi-panel"
+      ],
+      "source_file_sha256": null,
+      "source_path": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/medical_image_lesion_overlay_comparison/previews/medical_image_lesion_overlay_comparison__alternative_composition.png",
+      "source_reference_ids": [
+        "RRL-013"
+      ],
+      "stable_identity": "medical_image_lesion_overlay_comparison__alternative_composition"
+    },
+    {
+      "actual_page_number": 14,
+      "anonymous_id": "item_B",
+      "canonical_rendered_page_sha256": "e89c5cc1368990d4dda3fc7e74ed5c08928f34467b0a43e4856a34f224b26271",
+      "item_class": "reference",
+      "local_cache_file": "sfu_isic2025_presentation.pdf",
+      "materialization_method": "download/verify public PDF, render inspected page with pdftoppm -r 140, and mask corner provenance marks before Terra input",
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "reference_id": "RRL-013",
+      "review_input_path": ".cache/research-presentation-comparative-review/022/medical/item_B.png",
+      "review_input_sha256": "5b2c8dd0e0abeace036587de487446e0c75e9e862227a6be192741d0dcfb8c7e",
+      "rights_note": "public PDF; metadata lessons only",
+      "scientific_object": "representative skin lesion samples",
+      "sha256": "5b2c8dd0e0abeace036587de487446e0c75e9e862227a6be192741d0dcfb8c7e",
+      "source_file_sha256": "7280463da41e6919a0e29c9fb129cee260dd6e332dcecf34710e5054a4995b24",
+      "source_id": "SRC-005",
+      "source_url": "https://www.sfu.ca/~kabhishe/data/files/ISIC2025_Presentation.pdf",
+      "stable_identity": "RRL-013"
+    },
+    {
+      "actual_page_number": 21,
+      "anonymous_id": "item_C",
+      "canonical_rendered_page_sha256": "3859a1913a078e3e60ad8aa166a1ab262af56a93d6ecf57dbf1f269b84b7bef4",
+      "item_class": "reference",
+      "local_cache_file": "sfu_isbi2025_presentation.pdf",
+      "materialization_method": "download/verify public PDF, render inspected page with pdftoppm -r 140, and mask corner provenance marks before Terra input",
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "reference_id": "RRL-022",
+      "review_input_path": ".cache/research-presentation-comparative-review/022/medical/item_C.png",
+      "review_input_sha256": "3f304aa00bd0bf04150557d2a86b3a005a624120361f0eec71c450cc9b152b6f",
+      "rights_note": "public PDF; metadata lessons only",
+      "scientific_object": "PET input, GT, predictions, reconstruction panels",
+      "sha256": "3f304aa00bd0bf04150557d2a86b3a005a624120361f0eec71c450cc9b152b6f",
+      "source_file_sha256": "645a7c27e633525f81a302bce2135cd75439dc06eaf51d52c707a52197466927",
+      "source_id": "SRC-006",
+      "source_url": "https://www.sfu.ca/~kabhishe/data/files/ISBI2025_Presentation.pdf",
+      "stable_identity": "RRL-022"
+    },
+    {
+      "actual_page_number": null,
+      "anonymous_id": "item_D",
+      "candidate_id": "medical_image_lesion_overlay_comparison__reference_faithful",
+      "candidate_strategy": "reference_faithful",
+      "canonical_rendered_page_sha256": null,
+      "item_class": "candidate",
+      "materialization_method": "copied committed 020 candidate preview to anonymous runtime filename",
+      "review_input_path": ".cache/research-presentation-comparative-review/022/medical/item_D.png",
+      "review_input_sha256": "89c63ca162020df3b7718693f5b01e7dc42d4ed7c5795d6ceda2b9cf62870173",
+      "rights_note": "owned deterministic candidate preview",
+      "sha256": "89c63ca162020df3b7718693f5b01e7dc42d4ed7c5795d6ceda2b9cf62870173",
+      "source_composition_families": [
+        "aligned-multi-panel"
+      ],
+      "source_file_sha256": null,
+      "source_path": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/medical_image_lesion_overlay_comparison/previews/medical_image_lesion_overlay_comparison__reference_faithful.png",
+      "source_reference_ids": [
+        "RRL-022"
+      ],
+      "stable_identity": "medical_image_lesion_overlay_comparison__reference_faithful"
+    },
+    {
+      "actual_page_number": null,
+      "anonymous_id": "item_E",
+      "candidate_id": "medical_image_lesion_overlay_comparison__controlled_wildcard",
+      "candidate_strategy": "controlled_wildcard",
+      "canonical_rendered_page_sha256": null,
+      "item_class": "candidate",
+      "materialization_method": "copied committed 020 candidate preview to anonymous runtime filename",
+      "review_input_path": ".cache/research-presentation-comparative-review/022/medical/item_E.png",
+      "review_input_sha256": "9230b6d48cefd5dffaf0180844139ac2475bbe7742b6e84423636b1bee628c66",
+      "rights_note": "owned deterministic candidate preview",
+      "sha256": "9230b6d48cefd5dffaf0180844139ac2475bbe7742b6e84423636b1bee628c66",
+      "source_composition_families": [
+        "aligned-multi-panel"
+      ],
+      "source_file_sha256": null,
+      "source_path": "docs/audits/research_presentation_candidate_visual_finish_repair/generated/medical_image_lesion_overlay_comparison/previews/medical_image_lesion_overlay_comparison__controlled_wildcard.png",
+      "source_reference_ids": [
+        "RRL-013"
+      ],
+      "stable_identity": "medical_image_lesion_overlay_comparison__controlled_wildcard"
+    }
+  ],
+  "page_job_contract": "medical-image comparison comparative review",
+  "reference_ids": [
+    "RRL-022",
+    "RRL-013"
+  ],
+  "review_identity_sha256": "2f2b56f48379e46f63a243cb6f7e38f14177ef60b07fc10f23632cb1ba3c0640",
+  "schema": "RESEARCH_PRESENTATION_COMPARATIVE_REVIEW_IDENTITY_MAP_V1",
+  "task_key": "022_research_presentation_candidate_visual_finish_repair"
+}
