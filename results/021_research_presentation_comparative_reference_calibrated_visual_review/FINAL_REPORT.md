@@ -140,3 +140,25 @@ reference
 - required CI: PASS
 - GitHub Actions run: `32635425215`
 - Planner review: `REVIEW_1 = PASS`
+
+## New capabilities / behavior
+
+021 added an internal comparative visual-review capability for research
+presentation candidates. It can place three generated candidates and matched
+inspected reference renders into the same anonymous Terra package, then decode
+the blind relative findings after review. This capability is evidence
+infrastructure only; it does not make the current generated candidates or the
+long-term Presentation Program complete.
+
+## Example usage
+
+The task-owned evidence was produced by the consumer workflow and helper:
+
+```bash
+python skills/tools/documents-media/presentations/shared/scripts/prepare_comparative_visual_review.py
+python skills/tools/documents-media/presentations/shared/scripts/validate_comparative_visual_review.py --require-review --require-bytes
+```
+
+For 021, the resulting evidence lives under:
+
+`results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review/`

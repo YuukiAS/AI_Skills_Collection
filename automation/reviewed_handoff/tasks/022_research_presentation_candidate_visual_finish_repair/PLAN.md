@@ -234,6 +234,19 @@ Executor 不得自行决定“够好了”。
 - 把 synthetic image 当作真实临床证据；
 - 宣告长期质量目标完成。
 
+## Out of scope
+
+Out of scope for 022:
+
+- reference corpus expansion;
+- Bridge Kit core changes;
+- 019 composition record changes;
+- deck-wide design-system locking;
+- full-deck generation;
+- real statistical / medical-imaging holdout;
+- Beamer holdout;
+- `ONE_SHOT_QUALITY_PASS`, `PROGRAM_MATURE`, or equivalent final quality claims.
+
 ## Acceptance and regression gates
 
 Planner/Reviewer 只有在以下全部满足时才可 PASS 022：
