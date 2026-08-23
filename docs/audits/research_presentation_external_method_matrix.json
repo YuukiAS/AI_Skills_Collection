@@ -1,0 +1,285 @@
+{
+  "schema": "RESEARCH_PRESENTATION_EXTERNAL_METHOD_MATRIX_V1",
+  "audit_date": "2026-08-23",
+  "task_key": "018_presentation_external_method_audit",
+  "sources": [
+    {
+      "source_name": "zarazhangrui/frontend-slides",
+      "source_url": "https://github.com/zarazhangrui/frontend-slides",
+      "source_type": "presentation_skill_workflow",
+      "upstream_commit_or_version": "9906a34d640d2111f724544cbc50f7f130569ae1",
+      "license": "MIT",
+      "files_actually_inspected": [
+        "LICENSE",
+        "SKILL.md",
+        "plugins/frontend-slides/skills/frontend-slides/SKILL.md",
+        "html-template.md",
+        "bold-template-pack/templates/raw-grid/design.md",
+        "bold-template-pack/templates/blue-professional/design.md"
+      ],
+      "mechanisms": [
+        "three real slide style previews before full generation",
+        "safe preset plus bold template plus wildcard preview mix",
+        "selected preview or design.md becomes deck design recipe",
+        "fixed 1920x1080 stage with rendered screenshot checks",
+        "audience-facing preview metadata forbidden"
+      ],
+      "research_relevance": "Strong for visual-direction discovery and design-system lock, but HTML-first and commercially expressive defaults need academic adaptation.",
+      "current_repo_equivalent": "Reference lessons, scientific QA and real render exist; no same-content preview gate or design-recipe lock exists.",
+      "gap": "Need research-content composition candidates instead of prose-only reference lessons.",
+      "reuse_boundary": "MIT code/concepts can be considered in a separate intake; template aesthetics should not be copied into active research slides here.",
+      "recommended_disposition": "candidate_for_future_adoption"
+    },
+    {
+      "source_name": "andyqiu847-ai/high-quality-slides",
+      "source_url": "https://github.com/andyqiu847-ai/high-quality-slides",
+      "source_type": "presentation_skill_workflow",
+      "upstream_commit_or_version": "30a90be3561e61580cd52800a43f867513a8b144",
+      "license": "MIT",
+      "files_actually_inspected": [
+        "LICENSE",
+        "README.md",
+        "plugin/skills/high-quality-slides/SKILL.md",
+        "plugin/skills/high-quality-slides/layouts.md",
+        "plugin/skills/high-quality-slides/html-template.md"
+      ],
+      "mechanisms": [
+        "five gated phases from strategy to build",
+        "headline assertion plus supporting fact plus intended visual per slide",
+        "deck-wide design tokens",
+        "layout pattern vocabulary",
+        "self-check for source trace, overflow, color discipline and repeated layouts"
+      ],
+      "research_relevance": "Useful for enforcing evidence plus narrative plus visual system; generic business presets are not a scientific-talk quality bar.",
+      "current_repo_equivalent": "Scientific archetypes and QA exist, but no construction packet forces headline/evidence/intended-visual/layout per page.",
+      "gap": "Need a structured slide-candidate object that binds evidence and composition before generation.",
+      "reuse_boundary": "Use as concept guidance only in this task; do not import broad preset taxonomy.",
+      "recommended_disposition": "concept_only"
+    },
+    {
+      "source_name": "brycewang-stanford/many-ppt-skills",
+      "source_url": "https://github.com/brycewang-stanford/many-ppt-skills",
+      "source_type": "presentation_skill_registry_and_principles",
+      "upstream_commit_or_version": "76bfca23f908b299d9e4737717b88b31a67cbcb2",
+      "license": "MIT; LICENSE-CODE also present",
+      "files_actually_inspected": [
+        "LICENSE",
+        "LICENSE-CODE",
+        "SKILL.md",
+        "skills/many-ppt-skills/SKILL.md",
+        "data/skills.json",
+        "principles/07-render-and-look.md",
+        "principles/08-distill-dont-design.md",
+        "scripts/render.py"
+      ],
+      "mechanisms": [
+        "route selection by real deliverable constraints",
+        "documented capability comparison with provenance quotes",
+        "rendered image and contact-sheet QA principle",
+        "distill skill rules from repeated successful manual runs"
+      ],
+      "research_relevance": "Useful for separating PPTX/HTML/Beamer constraints and for treating rendered pixels as required evidence.",
+      "current_repo_equivalent": "Format routing and render QA exist; no registry of composition mechanisms or positive exemplar distillation exists.",
+      "gap": "Need reference-derived positive composition records, not only failure-derived rules.",
+      "reuse_boundary": "Concept-only; registry data is not an adoption decision source for this repo.",
+      "recommended_disposition": "concept_only"
+    },
+    {
+      "source_name": "RFYoung/slideweaver",
+      "source_url": "https://github.com/RFYoung/slideweaver",
+      "source_type": "academic_native_pptx_skill",
+      "upstream_commit_or_version": "8735c40d5c7bfe647f35f293a902fc02cc81c9a4",
+      "license": "MIT",
+      "files_actually_inspected": [
+        "LICENSE",
+        "README.md",
+        "SKILL.md",
+        "assets/smart_layout.py",
+        "assets/deck_profile.py",
+        "assets/render_qa.py",
+        "assets/shape_cookbook.py"
+      ],
+      "mechanisms": [
+        "native editable PPTX object discipline",
+        "layout solver before python-pptx drawing",
+        "bounds, overlap, text capacity and connector clearance validation",
+        "deck profile for font/color/safe-frame lock",
+        "rendered PNG heuristic QA for focus, balance, density, whitespace and contrast"
+      ],
+      "research_relevance": "High relevance for academic PPTX and for preventing hand-placed diagram failures.",
+      "current_repo_equivalent": "PPTX/render regression exists, but no shared native geometry solver for research pages.",
+      "gap": "Need a small research-focused geometry/composition layer before broader PPTX renderer changes.",
+      "reuse_boundary": "MIT allows future code review, but this task only recommends; no code copied.",
+      "recommended_disposition": "candidate_for_future_adoption"
+    },
+    {
+      "source_name": "wmyung/manuscript-to-editable-slides",
+      "source_url": "https://github.com/wmyung/manuscript-to-editable-slides",
+      "source_type": "scientific_manuscript_to_pptx_skill",
+      "upstream_commit_or_version": "2b7c9b5b234384d69ee0c153aa98107fc3f037bc",
+      "license": "MIT",
+      "files_actually_inspected": [
+        "LICENSE",
+        "README.md",
+        "SKILL.md",
+        "references/layout_families.md",
+        "references/layout_rhythm.md",
+        "references/acceptance_tests.md",
+        "references/render_repair_loop.md",
+        "scripts/render_pptx.js",
+        "scripts/render_slide_previews.py"
+      ],
+      "mechanisms": [
+        "normalized paper bundle",
+        "source coverage map and asset inventory",
+        "layout families selected by scientific function",
+        "deck rhythm constraints",
+        "hard gates for completeness, typography, visual integrity, canvas hygiene, layout quality and editability",
+        "render preview montage and repair loop"
+      ],
+      "research_relevance": "High relevance for real paper holdouts and source-fidelity preservation.",
+      "current_repo_equivalent": "Evidence ids and reference audits exist, but no full paper source-to-slide coverage map or structured deck rhythm map.",
+      "gap": "Need source coverage and rhythm representation before real manuscript one-shot benchmarks.",
+      "reuse_boundary": "MIT permits future intake; density and paragraph-preservation policy must be adapted to oral/seminar context.",
+      "recommended_disposition": "candidate_for_future_adoption"
+    },
+    {
+      "source_name": "sunzhejian/academic-paper-image-ppt",
+      "source_url": "https://github.com/sunzhejian/academic-paper-image-ppt",
+      "source_type": "academic_paper_visual_preview_to_editable_pptx_skill",
+      "upstream_commit_or_version": "85cb24e365d1f81d7ad320836b105a156b3a4b16",
+      "license": "MIT",
+      "files_actually_inspected": [
+        "LICENSE",
+        "README.en.md",
+        "skill/SKILL.md",
+        "skill/references/evidence-contract.md",
+        "skill/references/run-contract.md",
+        "skill/scripts/validate_run.mjs",
+        "skill/scripts/assemble_editable_deck.mjs",
+        "tests/validate_run.test.mjs",
+        "tests/assemble_editable_deck.test.mjs"
+      ],
+      "mechanisms": [
+        "exactly four style-preview imagegen calls",
+        "common six-slide audition packet",
+        "mandatory style-selection state gate",
+        "final deck assembled from native editable objects",
+        "strict paper figures remain byte-identical independent image objects",
+        "run-root path and SHA validation"
+      ],
+      "research_relevance": "Strong for comparing visual systems on the same scientific story and separating preview imagery from final editable slides.",
+      "current_repo_equivalent": "Reference design audit exists, but no audition packet or strict source-figure byte identity contract.",
+      "gap": "Need same-content candidate preview/search and stronger strict source-asset identity for paper figures.",
+      "reuse_boundary": "Use mechanism only unless a later intake approves code; do not make imagegen mandatory for all final research slides.",
+      "recommended_disposition": "candidate_for_future_adoption"
+    },
+    {
+      "source_name": "hugohe3/ppt-master",
+      "source_url": "https://github.com/hugohe3/ppt-master",
+      "source_type": "routed_native_pptx_workflow_and_composition_system",
+      "upstream_commit_or_version": "65bb2eca59a36270819caba377097910c4466c6e",
+      "license": "MIT",
+      "files_actually_inspected": [
+        "LICENSE",
+        "README.md",
+        "skills/ppt-master/SKILL.md",
+        "skills/ppt-master/workflows/generate-pptx.md",
+        "skills/ppt-master/workflows/stages/visual-review.md",
+        "skills/ppt-master/workflows/stages/live-preview.md",
+        "skills/ppt-master/references/image-layout-spec.md",
+        "skills/ppt-master/references/image-layout-patterns.md",
+        "skills/ppt-master/templates/layouts/layouts_index.json",
+        "skills/ppt-master/workflows/create-template/create-layout.md"
+      ],
+      "mechanisms": [
+        "explicit route authorities for generate, template, fill and enhance workflows",
+        "project workspace with imported source profiles",
+        "SVG page-design closure with native PPTX conversion boundary",
+        "image geometry math for contain, fill, weighted tracks and free composition",
+        "image layout pattern catalog with native overlays and cross-page continuity",
+        "optional rendered PNG visual-review stage with atomic fixes",
+        "brand-neutral reusable layout workspaces"
+      ],
+      "research_relevance": "Very high for composition vocabulary and native PPTX geometry; too broad for wholesale adoption.",
+      "current_repo_equivalent": "Scientific archetypes exist but lack detailed composition grammar and image geometry math.",
+      "gap": "Need a small research-specific composition representation before considering runtime/code intake.",
+      "reuse_boundary": "MIT permits future intake, but this task only references mechanisms; no workflow or assets copied.",
+      "recommended_disposition": "candidate_for_future_adoption"
+    },
+    {
+      "source_name": "Assertion-Evidence Approach",
+      "source_url": "https://www.assertion-evidence.org/",
+      "source_type": "scientific_presentation_guidance",
+      "upstream_commit_or_version": "accessed 2026-08-23",
+      "license": "public website; template/text reuse not assumed without separate verification",
+      "files_actually_inspected": [
+        "Home page",
+        "links to AE tutorials, templates and model talks"
+      ],
+      "mechanisms": [
+        "build slides on assertion messages rather than topic phrases",
+        "support assertions with visual evidence rather than bullet lists",
+        "use speaking practice rather than slide text as the explanation channel"
+      ],
+      "research_relevance": "Core scientific-talk principle; strongly aligned with claim-title and visual-evidence requirements.",
+      "current_repo_equivalent": "Claim-title and scientific-object rules exist.",
+      "gap": "Need to verify that the visual evidence composition actually supports the assertion.",
+      "reuse_boundary": "Reference principles only; no template/model-talk assets copied.",
+      "recommended_disposition": "reference_only"
+    },
+    {
+      "source_name": "MIT Communication Lab slide guidance",
+      "source_url": "https://mitcommlab.mit.edu/eecs/commkit/slideshow/ and https://mitcommlab.mit.edu/aeroastro/commkit/slide-design/",
+      "source_type": "scientific_presentation_guidance",
+      "upstream_commit_or_version": "accessed 2026-08-23",
+      "license": "CC BY-NC 4.0 unless otherwise noted",
+      "files_actually_inspected": [
+        "MIT EECS Communication Lab Slide Presentation",
+        "MIT AeroAstro Communication Lab Slide Design"
+      ],
+      "mechanisms": [
+        "one message per slide",
+        "slide title states takeaway",
+        "visuals over text",
+        "introduce data before demanding interpretation",
+        "simplify paper figures for presentation",
+        "control visual hierarchy and remove distractions",
+        "large readable figures and text"
+      ],
+      "research_relevance": "High-level quality standard for mature scientific talks and group meetings.",
+      "current_repo_equivalent": "Rules are present in SKILL.md, visual-qa.md and archetypes.",
+      "gap": "Rules need conversion into executable composition and comparative QA.",
+      "reuse_boundary": "Guidance only; do not copy CommLab images/templates.",
+      "recommended_disposition": "reference_only"
+    },
+    {
+      "source_name": "PLOS Computational Biology Ten Simple Rules for Effective Presentation Slides",
+      "source_url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009554",
+      "source_type": "scientific_presentation_guidance",
+      "upstream_commit_or_version": "published 2021-12-02; accessed 2026-08-23",
+      "license": "CC BY",
+      "files_actually_inspected": [
+        "PLOS article HTML"
+      ],
+      "mechanisms": [
+        "one idea per slide",
+        "approximately one minute per slide as planning pressure",
+        "heading states the message",
+        "include only essential points",
+        "progressively build complex diagrams",
+        "avoid distracting animation and salience"
+      ],
+      "research_relevance": "Good public scientific-slide standard, especially for splitting dense material and using headings as claims.",
+      "current_repo_equivalent": "One-main-action and anti-overcrowding rules exist.",
+      "gap": "Need automatic split-versus-shrink decisions encoded in composition candidates.",
+      "reuse_boundary": "Can cite/paraphrase under CC BY; no figure/template import in this task.",
+      "recommended_disposition": "reference_only"
+    }
+  ],
+  "single_next_recommendation": {
+    "task_key_suggestion": "019_research_presentation_exemplar_composition_representation",
+    "direction": "exemplar composition representation",
+    "reason": "It is the smallest missing layer that turns reference lessons into generator constraints. Multi-candidate search and comparative Terra review should come after this representation exists."
+  }
+}
