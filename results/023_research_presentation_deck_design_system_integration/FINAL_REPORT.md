@@ -12,6 +12,64 @@ status: AWAIT_HUMAN_DECISION
 
 真实 GitHub CI 已通过，因此当前阻断不是 CI 或工程可运行性，而是 023 冻结目标本身尚未完整成立。由于本任务已经使用两轮正式 review，按 Reviewed Handoff 规则必须进入人工决策点，不能自动开启第三轮返修，也不能提前进入 deck-rhythm 或真实 holdout。
 
+## What this task solved
+
+023 solved the first multi-page integration step for the reference-calibrated
+research-presentation pipeline: it created two coherent 4-page editable PPTX
+engineering mini-decks, rendered them through LibreOffice to PDF/PNG, preserved
+composition diversity, and established a deck design profile that partially
+drives native PPTX output.
+
+This does not mean 023 passed. The task is still at `AWAIT_HUMAN_DECISION`
+because the deck design profile has not fully become the executable renderer
+contract required by the frozen Plan.
+
+## What changed
+
+The implementation added a renderer-neutral deck profile, task-owned generated
+PPTX/PDF/PNG artifacts, per-slide identity manifests, mechanical QA, a combined
+review PDF, and profile-token mutation regression evidence. The round-1 repair
+changed the renderer so font, type scale, color roles, annotation leader width,
+and equation highlight / leader roles are read from
+`profile["locked_properties"]` instead of being only audit metadata.
+
+## New capabilities / behavior
+
+The repository can now generate controlled multi-page research-presentation
+PPTX fixtures where a shared design profile coexists with page-local
+composition geometry. The profile mutation regression proves that changing
+`accent` and `title_pt` changes the native PPTX XML while preserving the
+page-local geometry signature.
+
+## Example usage
+
+Current task-owned review artifact:
+
+```text
+results/023_research_presentation_deck_design_system_integration/REVIEW_PACK.pdf
+```
+
+Current deterministic validators:
+
+```bash
+python skills/tools/documents-media/presentations/shared/scripts/generate_deck_design_system_integration.py
+python skills/tools/documents-media/presentations/shared/scripts/validate_deck_design_system_integration.py
+```
+
+These commands are regression fixtures only. They are not a one-shot
+quality-holdout workflow and do not establish `ONE_SHOT_QUALITY_PASS`.
+
+## Regression and remaining limitations
+
+Regression evidence shows editable PPTX generation, real render, mechanical QA,
+composition diversity, anti-meta leakage checks, source/plugin mirror checks,
+and partial profile-driven rendering all work.
+
+Remaining limitation: spacing, caption treatment, and image-panel treatment are
+still only partially executable design-profile inputs. Because this is the same
+F-023-01 blocker after two formal reviews, 023 must remain at the human gate
+until the user explicitly authorizes a strictly bounded recovery.
+
 ## 已经完成的能力
 
 023 已建立两套 coherent 4-page engineering mini-decks，并通过同一 shared integration path 生成真实 editable PPTX，再经 LibreOffice 真实渲染为 PDF/PNG。统计与医学影像两套 fixture 都保持至少三种 major composition families，019 source geometry、020 semantic compatibility 与 022 equation / medical-image visual-finish layer 没有被统一模板覆盖。
