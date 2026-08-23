@@ -1,0 +1,39 @@
+{
+  "schema": "RESEARCH_SLIDE_CANDIDATE_REQUEST_V1",
+  "request_id": "statistical_estimator_cluster_robust_variance",
+  "page_function": "ESTIMATOR",
+  "scientific_object": "cluster-robust sandwich variance estimator equation",
+  "evidence_type": "estimator formula",
+  "content_slots": [
+    {
+      "slot_id": "title",
+      "role": "title",
+      "content_type": "title",
+      "text": "Cluster-robust variance centers uncertainty at the group level"
+    },
+    {
+      "slot_id": "equation",
+      "role": "primary_scientific_object",
+      "content_type": "equation_asset",
+      "asset_path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/slide2_sandwich.png",
+      "alt_text": "Cluster-robust sandwich covariance estimator"
+    },
+    {
+      "slot_id": "annotation",
+      "role": "annotation",
+      "content_type": "text",
+      "text": "Middle term aggregates score contributions by center."
+    },
+    {
+      "slot_id": "caption",
+      "role": "caption",
+      "content_type": "caption",
+      "text": "Deterministic synthetic clustered-data regression content."
+    }
+  ],
+  "required_roles": ["title", "primary_scientific_object", "annotation", "caption"],
+  "primary_scientific_object_role": "primary_scientific_object",
+  "audience_mode": "research_group_meeting",
+  "density_mode": "compact",
+  "candidate_count": 3
+}

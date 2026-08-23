@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Research Slide Candidate Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "request",
+    "retrieved_composition_records",
+    "content_payload_sha256",
+    "candidates",
+    "comparison_sheet"
+  ],
+  "properties": {
+    "schema": { "const": "RESEARCH_SLIDE_CANDIDATE_MANIFEST_V1" },
+    "request": { "type": "object" },
+    "retrieved_composition_records": { "type": "array" },
+    "content_payload_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "candidates": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/candidate" }
+    },
+    "comparison_sheet": { "$ref": "#/$defs/artifact" }
+  },
+  "$defs": {
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id",
+        "strategy",
+        "source_reference_ids",
+        "source_composition_families",
+        "layout_family",
+        "regions",
+        "primary_object_area_ratio",
+        "reading_flow",
+        "content_bindings",
+        "geometry_transfer",
+        "distinctness_signature",
+        "preview_artifact",
+        "preview_sha256",
+        "audience_text",
+        "source_reference_pixels_used"
+      ],
+      "properties": {
+        "candidate_id": { "type": "string", "minLength": 1 },
+        "strategy": { "enum": ["reference_faithful", "alternative_composition", "controlled_wildcard"] },
+        "source_reference_ids": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^RRL-[0-9]{3}$" } },
+        "source_composition_families": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "layout_family": { "type": "string", "minLength": 1 },
+        "regions": { "type": "array", "minItems": 1 },
+        "primary_object_area_ratio": { "type": "number", "minimum": 0, "maximum": 1 },
+        "reading_flow": { "type": "string", "minLength": 1 },
+        "content_bindings": { "type": "array", "minItems": 1 },
+        "geometry_transfer": { "type": "array", "minItems": 1 },
+        "distinctness_signature": { "type": "object" },
+        "preview_artifact": { "$ref": "#/$defs/artifact" },
+        "preview_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "audience_text": { "type": "array", "items": { "type": "string" } },
+        "source_reference_pixels_used": { "const": false }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "mime_type", "sha256"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "mime_type": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    }
+  }
+}

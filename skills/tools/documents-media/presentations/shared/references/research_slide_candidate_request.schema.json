@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Research Slide Candidate Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "request_id",
+    "page_function",
+    "scientific_object",
+    "content_slots",
+    "required_roles",
+    "primary_scientific_object_role",
+    "audience_mode",
+    "density_mode",
+    "candidate_count"
+  ],
+  "properties": {
+    "schema": { "const": "RESEARCH_SLIDE_CANDIDATE_REQUEST_V1" },
+    "request_id": { "type": "string", "minLength": 1 },
+    "page_function": { "type": "string", "minLength": 1 },
+    "scientific_object": { "type": "string", "minLength": 1 },
+    "evidence_type": { "type": "string" },
+    "content_slots": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/content_slot" }
+    },
+    "required_roles": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "primary_scientific_object_role": { "type": "string", "minLength": 1 },
+    "audience_mode": { "type": "string", "minLength": 1 },
+    "density_mode": { "type": "string", "minLength": 1 },
+    "candidate_count": { "const": 3 }
+  },
+  "$defs": {
+    "content_slot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slot_id", "role", "content_type"],
+      "properties": {
+        "slot_id": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "content_type": { "enum": ["title", "text", "equation_asset", "plot_asset", "image_asset", "caption", "legend"] },
+        "text": { "type": "string" },
+        "asset_path": { "type": "string" },
+        "alt_text": { "type": "string" },
+        "evidence_label": { "type": "string" }
+      }
+    }
+  }
+}

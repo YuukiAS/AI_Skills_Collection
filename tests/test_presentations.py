@@ -307,6 +307,59 @@ class PresentationSharedTests(unittest.TestCase):
         for forbidden in ["<image", "data:image", "base64,", ".png", ".jpg", ".jpeg", ".pdf", "/home/", ".cache/"]:
             self.assertNotIn(forbidden, montage_text)
 
+    def test_reference_calibrated_candidate_search(self) -> None:
+        references = SHARED / "references"
+        for name in [
+            "research_slide_candidate_request.schema.json",
+            "research_slide_candidate_manifest.schema.json",
+        ]:
+            self.assertTrue((references / name).exists(), name)
+
+        generator = SHARED / "scripts/generate_reference_calibrated_candidates.py"
+        validator = SHARED / "scripts/validate_reference_candidate_manifests.py"
+        generator_text = generator.read_text(encoding="utf-8")
+        self.assertIn("select_reference_compositions.select", generator_text)
+        self.assertNotRegex(generator_text, r"RRL-\d{3}")
+
+        output_root = REPO_ROOT / "docs/audits/research_presentation_candidate_search/generated"
+        manifests = [
+            output_root / "statistical_estimator_cluster_robust_variance/candidate_manifest.json",
+            output_root / "medical_image_lesion_overlay_comparison/candidate_manifest.json",
+        ]
+        for manifest in manifests:
+            self.assertTrue(manifest.exists(), manifest)
+        validation = subprocess.run([sys.executable, str(validator), *[str(path) for path in manifests]], check=False, capture_output=True, text=True)
+        self.assertEqual(validation.returncode, 0, validation.stderr)
+        self.assertIn("validated 2 candidate manifest(s)", validation.stdout)
+
+        for manifest_path in manifests:
+            payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+            self.assertEqual(payload["schema"], "RESEARCH_SLIDE_CANDIDATE_MANIFEST_V1")
+            self.assertEqual(payload["request"]["candidate_count"], 3)
+            candidates = payload["candidates"]
+            self.assertEqual(len(candidates), 3)
+            self.assertEqual(
+                {candidate["strategy"] for candidate in candidates},
+                {"reference_faithful", "alternative_composition", "controlled_wildcard"},
+            )
+            self.assertEqual(len({candidate["preview_sha256"] for candidate in candidates}), 3)
+            self.assertGreaterEqual(len({candidate["layout_family"] for candidate in candidates}), 2)
+            self.assertTrue(payload["retrieved_composition_records"])
+            for candidate in candidates:
+                self.assertFalse(candidate["source_reference_pixels_used"])
+                self.assertTrue(candidate["geometry_transfer"])
+                self.assertTrue(candidate["content_bindings"])
+                preview = REPO_ROOT / candidate["preview_artifact"]["path"]
+                self.assertTrue(preview.exists(), preview)
+                self.assertGreater(preview.stat().st_size, 10_000)
+                audience = "\n".join(candidate["audience_text"])
+                for forbidden in ["reference_faithful", "alternative_composition", "controlled_wildcard", "RRL-", "Reference retrieval", "EVIDENCE_MANIFEST"]:
+                    self.assertNotIn(forbidden, audience)
+            if payload["request"]["page_function"] == "ESTIMATOR":
+                self.assertTrue(any(region["content_mode"] == "equation" for candidate in candidates for region in candidate["regions"]))
+            if payload["request"]["page_function"] == "MEDICAL_IMAGE_COMPARISON":
+                self.assertTrue(any(region["content_mode"] == "medical_image" for candidate in candidates for region in candidate["regions"]))
+
     def test_research_presentation_todo_consolidation_and_promotions(self) -> None:
         todo = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/TODO.md").read_text(encoding="utf-8")
         research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")

@@ -1,0 +1,60 @@
+{
+  "schema": "RESEARCH_SLIDE_CANDIDATE_REQUEST_V1",
+  "request_id": "medical_image_lesion_overlay_comparison",
+  "page_function": "MEDICAL_IMAGE_COMPARISON",
+  "scientific_object": "synthetic lesion image with ground-truth and prediction overlay",
+  "evidence_type": "image comparison",
+  "content_slots": [
+    {
+      "slot_id": "title",
+      "role": "title",
+      "content_type": "title",
+      "text": "Overlay errors localize the small-lesion failure mode"
+    },
+    {
+      "slot_id": "input_image",
+      "role": "primary_scientific_object",
+      "content_type": "image_asset",
+      "asset_path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/slide1_input.png",
+      "alt_text": "Synthetic lesion image input"
+    },
+    {
+      "slot_id": "overlay_image",
+      "role": "primary_scientific_object",
+      "content_type": "image_asset",
+      "asset_path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/slide1_overlay.png",
+      "alt_text": "Synthetic GT and prediction overlay"
+    },
+    {
+      "slot_id": "prediction_image",
+      "role": "secondary_scientific_object",
+      "content_type": "image_asset",
+      "asset_path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
+      "alt_text": "Synthetic prediction mask"
+    },
+    {
+      "slot_id": "error_image",
+      "role": "secondary_scientific_object",
+      "content_type": "image_asset",
+      "asset_path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+      "alt_text": "Synthetic error overlay"
+    },
+    {
+      "slot_id": "annotation",
+      "role": "annotation",
+      "content_type": "text",
+      "text": "The miss is spatially small but changes lesion-level recall."
+    },
+    {
+      "slot_id": "legend",
+      "role": "legend",
+      "content_type": "legend",
+      "text": "Green: overlap; red: false positive; blue: false negative."
+    }
+  ],
+  "required_roles": ["title", "primary_scientific_object", "secondary_scientific_object", "annotation", "legend"],
+  "primary_scientific_object_role": "primary_scientific_object",
+  "audience_mode": "research_group_meeting",
+  "density_mode": "visual",
+  "candidate_count": 3
+}
