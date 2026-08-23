@@ -1,14 +1,14 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 018_presentation_external_method_audit
-implementation_commit: 6613d13d81149fbfa2af438ac72d47b7c4429bf6
+implementation_commit: ccfae9733f9d716c6e284f67aa09762729b68bae
 ---
 
 # 018 Research Presentation External Method Audit - Executor Result
 
 ## Implementation commit
 
-Current implementation commit: `6613d13d81149fbfa2af438ac72d47b7c4429bf6`.
+Current implementation commit: `ccfae9733f9d716c6e284f67aa09762729b68bae`.
 
 ## Implemented
 
@@ -34,6 +34,22 @@ It also inspected the required public scientific presentation guidance:
 - PLOS Computational Biology, "Ten simple rules for effective presentation slides"
 
 The main conclusion is that the current largest architecture gap is not another rule list, but a missing reference-calibrated `exemplar composition representation` layer. The report recommends this as the single minimal 019 direction, before broader multi-candidate search, comparative Terra review, native PPTX solver work, or real holdout benchmarks.
+
+## REVIEW_1 repair
+
+Addressed `F-018-01` by reading and recording the complete `brycewang-stanford/many-ppt-skills` principle set:
+
+- `principles/README.md`
+- `principles/01-show-dont-tell.md`
+- `principles/02-anti-ai-slop.md`
+- `principles/03-fixed-stage.md`
+- `principles/04-constraint-beats-freedom.md`
+- `principles/05-progressive-disclosure.md`
+- `principles/06-single-file.md`
+- `principles/07-render-and-look.md`
+- `principles/08-distill-dont-design.md`
+
+The report and structured matrix now list all eight principle files and summarize their relevant mechanisms. The overall 018 conclusion is unchanged: this repository should not copy another skill registry, but should add a compact, reference-derived composition representation in the next planning phase.
 
 ## Evidence and source handling
 
