@@ -22,46 +22,59 @@
 
 `020_research_presentation_reference_calibrated_candidate_search` 已在第二轮独立审核中 PASS。
 
-020 现在证明：
+020 证明：
 
 - 同一 scientific content 可以内部生成恰好 3 个 compositionally distinct candidates；
-- selected 019 source record 的真实 normalized geometry 已进入 candidate bbox 推导，而不是只选 family 后套固定坐标；
+- selected 019 source record 的真实 normalized geometry 已进入 candidate bbox 推导；
 - source-to-candidate split / scale / translate / reorder 可审计；
 - statistical estimator 与 medical-image 两类 request 共用同一 shared candidate engine；
-- wildcard / alternative source selection 只在 scientific-job compatible pool 中工作；
-- candidate 仍使用相同 neutral preview skin，因此差异主要来自 composition，不是换色；
-- old synthetic assets 仍只承担 regression content，不是 gold visual baseline。
+- wildcard / alternative source selection 只在 scientific-job compatible pool 中工作。
 
-020 最终 required CI 已 PASS。020 仍不证明任何 candidate 已达到成熟科研汇报视觉质量。
+## 已完成：021 Comparative Reference-Calibrated Visual Review
+
+`021_research_presentation_comparative_reference_calibrated_visual_review` 已在第一轮独立审核中 PASS。
+
+021 证明 comparative review mechanism 已成立：
+
+- statistical / medical 两个 case 都真实包含 3 个 generated candidates 与 2 个 inspected reference renders；
+- reference pixels 真实送入 `gpt-5.6-terra`；
+- Terra-visible 输入使用匿名 ID，不暴露作者、机构、RRL/SRC、candidate strategy 或 generated/reference 身份；
+- canonical inspected render SHA 与本次 actual reviewer-input SHA 分开绑定；
+- 每个 immutable case identity 只运行一次 live Terra；
+- no-winner 是合法结果，没有 best-of-three 强制晋级；
+- required CI 已 PASS。
+
+更重要的是，021 第一次给出了可信的负面质量结论：
+
+- statistical estimator/equation：真实成熟 reference RRL-028 明显优于全部三个 generated candidates；generated 最好的一版仍存在 equation contrast / legibility 与 direct mathematical annotation 差距；
+- medical-image comparison：所有 items 都低于 mature research-group-meeting / strong conference-talk bar；generated candidates 的可修问题包括 image prominence、panel integration 与 sparse fixture 感，同时 synthetic/demo-like evidence 本身也是当前 regression 的上限。
+
+因此 021 的 PASS 只代表“比较机制可信”，不代表 candidate quality PASS。
 
 ## 当前 bounded task
 
 当前任务：
 
-`021_research_presentation_comparative_reference_calibrated_visual_review`
+`022_research_presentation_candidate_visual_finish_repair`
 
-目标：把 020 的三个 generated candidate previews 与匹配的真实 inspected reference renders 放进同一个匿名相对视觉审查框架，第一次真正回答：
+目标：在保持 019/020 reference geometry transfer 与 semantic compatibility 的前提下，修 candidate visual finish / scientific-object treatment，而不是继续扩 reference metadata。
 
-> candidate 和成熟科研 reference 放在一起时，到底差多少？
+022 重点冻结为：
 
-021 的关键要求：
+- statistical equation page：提高公式对比度、投影可读性，annotation 必须直接绑定具体数学对象/term，而不是远距离解释文字；
+- medical-image page：让 image/overlay 真正占据 source-derived primary region，panel labels / legend / annotation 直接整合，去掉 generic card/padding 与小图 + 大块空白的 fixture 感；
+- 三候选继续共享同一 page-level visual tokens，差异仍来自 composition，而不是换 theme；
+- old candidate identities 保留，repair 后产生新的 preview SHA；
+- 复用 021 comparative pipeline，对新的 immutable statistical / medical identities 各只运行一次 live Terra；
+- 不把 synthetic medical fixture 美化成真实临床证据；若剩余差距主要来自 synthetic evidence realism，必须明确留给后续 real holdout。
 
-- statistical estimator 与 medical-image 两个 case 各使用 3 个 020 candidates + 2–4 个真实 inspected reference renders；
-- reference pixels 必须真实送入 `gpt-5.6-terra`，不能用 RRL prose / bbox metadata 替代；
-- Terra-visible inputs 使用匿名 item IDs，不暴露作者、机构、RRL/SRC、candidate strategy，也不告诉 reviewer 哪些是 generated / reference；
-- 同时记录 019 canonical render SHA 与本次实际 reviewer-input SHA；
-- 每个 immutable case identity 只运行一次 live Terra；
-- reviewer 必须给出逐 item 的相对成熟度 / ordering / visual gap，而不是只给全局绝对 PASS；
-- 解码后允许 `NO_CANDIDATE_MEETS_REFERENCE_BAR`，不得强制 best-of-three 晋级；
-- 不提交外部 reference pixels，不修改 Bridge Kit core，也不修改 020 candidate geometry 追求本轮结果。
-
-021 的 PASS 只表示 comparative review 机制可信，不代表 candidate 质量 PASS。
+022 通过前不得进入 deck-wide design-system locking / generation integration。
 
 ## 后续 roadmap（非 Executor 授权）
 
-021 PASS 后，Planner 根据真实 comparative evidence 决定下一 bounded task。若 candidate 明显低于 reference bar，优先修 design/candidate layer；只有 candidate 已接近 reference bar，才进入 deck-wide design-system locking / generation integration。
+只有 repaired candidates 已接近真实 reference bar，Planner 才创建下一 bounded task 进入 deck-wide design-system locking / generation integration。
 
-长期仍需至少完成：
+长期仍需完成：
 
 - deck-wide design-system locking / generation integration；
 - contact-sheet / deck-rhythm QA；
@@ -73,6 +86,6 @@
 
 ## 当前完成条件
 
-本 round 只有在 reference-to-composition transfer、内部设计探索、comparative review、deck-rhythm QA 与两个真实 holdout one-shot benchmark 全部成立后，才有资格写 `ONE_SHOT_QUALITY_PASS`。
+本 round 只有在 reference-to-composition transfer、内部设计探索、comparative review、candidate visual quality、deck-rhythm QA 与两个真实 holdout one-shot benchmark 全部成立后，才有资格写 `ONE_SHOT_QUALITY_PASS`。
 
 当前绝不能宣告本轮 PASS，也不能再次用单一 Terra absolute PASS 关闭 design-quality 目标。
