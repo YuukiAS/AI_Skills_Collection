@@ -1,44 +1,60 @@
 # Research Presentation Current Round
 
-本次 improvement cycle 已完成并关闭，当前结论为 **cycle PASS / READY_FOR_EXTERNAL_PLANNER_REVIEW**。
+用户已提出新的明确产品目标，因此上一轮“cycle PASS 后不自动继续”的停止条件已经被新的用户要求解除。当前进入新的 **REFERENCE_CALIBRATED_ONE_SHOT_QUALITY** round。
 
-这不是长期 `PROGRAM_MATURE` 声明。长期成熟度仍需要更多领域、更多 page function、更多真实科研项目和多轮 regression 证据。
+上一轮 statistical / medical-imaging synthetic benchmark 的结论不被删除，也不被伪造成失败；但其意义重新限定为：工程链路、科学正确性、真实 render、机械 QA、Terra 与 Planner 协作已经建立。它**不是**成熟科研汇报的 gold visual baseline，也不能证明一次调用即可稳定生成高质量 PPTX / Beamer。
 
-## 本轮关闭情况
+长期 `PROGRAM_MATURE=false`。
 
-Phase A 已通过人工授权后的 `014_presentation_phase_a_recovery` 合法关闭。`013_presentation_todo_consolidation` 原有两轮 `REVISE`、review-limit 与 CI failure 历史继续保留，没有被改写成 PASS；014 只负责完成授权后的依赖恢复与内容级 closure。
+## 本轮核心问题
 
-Phase B 的 `015_presentation_terra_blocker_repair` 已 PASS：metric direction、medical-image scientific-object size、comparator path、synthetic qualifier 与 TP/FP/FN overlay legend 等 blocker 已关闭。
-
-Phase C 的两类 benchmark 也均已 PASS：
-
-- `016_statistical_method_group_meeting_benchmark`：成熟统计/生统方法组会 benchmark；核心数学真正 typeset，禁止 audience-facing RRL/QA/provenance，scientific object 成为视觉中心，具有 reference-design audit、deterministic anti-leak/math-source QA、成熟度增强后的 `gpt-5.6-terra` rubric 与独立 Planner review。
-- `017_medical_imaging_group_meeting_benchmark`：成熟医学影像研究组会 benchmark；image/GT/prediction/overlay、anatomy/target、endpoint disagreement、same-case failure、negative result 与 planned validation 形成同一条 deterministic synthetic evidence chain，并经过真实 PPTX render、mechanical QA、Terra 与独立 Planner review。
-
-017 最终 handoff 的 required CI 已通过，最终 `gpt-5.6-terra` identity 五页全部 PASS、无 blocking finding；Planner 独立核对 frozen Plan、实现逻辑、simulation evidence、reference-design audit、anti-leak gates、CI 与 visual identity 后判 PASS。
-
-## 当前形成的质量基线
-
-本轮之后，Research Presentation 至少保留以下门槛：
-
-- editable PPTX 不是完成标准，必须真实 render；
-- mechanical QA 不得冒充 academic visual PASS；
-- Terra 必须基于真实 rendered pixels 检查 scientific semantics 与视觉成熟度；
-- Planner 必须独立结合 frozen Plan、真实 diff、CI、simulation/metric evidence、reference-design audit 与 Terra evidence 作最终判断；
-- ASCII/source-like 数学、RRL/retrieval/QA/provenance 泄漏、card/dashboard/wireframe、AI 元语言、主 scientific object 过小等问题默认阻断；
-- inspected reference pages 必须真正影响信息密度、主对象占比、annotation 与 figure/formula hierarchy，不能只留下检索 ID；
-- 统计页让公式/结果图承担叙事；医学影像页让 image/GT/prediction/overlay、legend、anatomy/target 和 endpoint 直接绑定。
-
-## 当前状态
-
-当前没有新的 active Presentation bounded task。
-
-本轮 cycle final report：
+当前最大风险不是缺少更多规则，而是：
 
 ```text
-results/RESEARCH_PRESENTATION_CURRENT_CYCLE_FINAL_REPORT.md
+inspected reference slide
+-> RRL / prose lesson
+-> generator重新凭空设计
 ```
 
-后续不应为了“继续优化”自动创建新任务。下一轮只有在出现新的明确产品目标、真实项目回归失败、用户要求或新的高价值 evidence 时再启动。
+参考资料没有足够进入真实 composition decision。新 round 要逐步建立：
 
-长期 Program 仍为：**NOT PROGRAM_MATURE**。
+```text
+reference
+-> composition representation
+-> candidate design search
+-> comparative review
+-> locked design system
+-> real holdout one-shot generation
+```
+
+同时保留 Reviewed Handoff：每个阶段都必须拆成独立 bounded task，最多两轮 review；Codex Executor 不得根据长期 roadmap 自主连续实现多个阶段。
+
+## 当前 bounded task
+
+当前任务：
+
+`018_presentation_external_method_audit`
+
+目标：先对当前公开 Presentation skill / workflow 与本仓库已有机制进行源码级方法审计，确认哪些机制真正值得进入下一阶段，以及许可证/复用边界。至少覆盖 `frontend-slides`、`high-quality-slides`、`many-ppt-skills`、`slideweaver`、`manuscript-to-editable-slides`、`academic-paper-image-ppt`、可访问时的 `ppt-master`，以及 Assertion-Evidence、MIT Communication Lab、PLOS 科研演示指导。
+
+018 只做 comparative audit，不修改 active Presentation skill、generator、Terra rubric、reference corpus，也不提前实现 composition layer / multi-candidate search / holdout benchmark。
+
+## 后续 roadmap（非 Executor 授权）
+
+018 PASS 后，Planner 根据真实审计证据只冻结一个下一任务。候选方向包括：
+
+- exemplar composition representation；
+- internal multi-candidate design search；
+- comparative reference-calibrated visual review；
+- contact-sheet / deck-rhythm QA；
+- real statistical holdout；
+- real medical-imaging holdout；
+- 必要时独立 Beamer holdout。
+
+这些只是长期顺序候选。没有对应 `PLAN_FROZEN` 时，Executor 不得自行开始。
+
+## 当前完成条件
+
+本 round 只有在真实 reference-to-composition transfer、内部设计探索、comparative review、deck-rhythm QA 与两个真实 holdout one-shot benchmark 全部成立后，才有资格写 `ONE_SHOT_QUALITY_PASS`。
+
+当前绝不能宣告本轮 PASS，也不能再次用“Terra 5/5 PASS”单独关闭 design-quality 目标。
