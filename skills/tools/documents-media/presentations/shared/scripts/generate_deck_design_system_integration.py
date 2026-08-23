@@ -98,7 +98,27 @@ def color(value: str) -> RGBColor:
     return RGBColor(int(value[0:2], 16), int(value[2:4], 16), int(value[4:6], 16))
 
 
-def add_text(slide: Any, text: str, bbox: dict[str, float], *, size: int, bold: bool = False, fill: str = INK, align: int | None = None) -> Any:
+def locked(profile: dict[str, Any]) -> dict[str, Any]:
+    return profile["locked_properties"]
+
+
+def profile_color(profile: dict[str, Any], role: str) -> str:
+    return locked(profile)["color_roles"][role]
+
+
+def profile_font(profile: dict[str, Any], role: str = "primary") -> str:
+    return locked(profile)["fonts"][role]
+
+
+def profile_type_size(profile: dict[str, Any], role: str) -> int:
+    return int(locked(profile)["type_scale"][role])
+
+
+def profile_line_width(profile: dict[str, Any], section: str, key: str) -> float:
+    return float(locked(profile)[section][key])
+
+
+def add_text(slide: Any, profile: dict[str, Any], text: str, bbox: dict[str, float], *, type_role: str = "body_pt", bold: bool = False, color_role: str = "ink", align: int | None = None) -> Any:
     x, y, w, h = bbox_to_inches(bbox)
     shape = slide.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h))
     frame = shape.text_frame
@@ -112,21 +132,21 @@ def add_text(slide: Any, text: str, bbox: dict[str, float], *, size: int, bold: 
         p.alignment = align
     run = p.add_run()
     run.text = text
-    run.font.name = "Aptos"
-    run.font.size = Pt(size)
+    run.font.name = profile_font(profile)
+    run.font.size = Pt(profile_type_size(profile, type_role))
     run.font.bold = bold
-    run.font.color.rgb = color(fill)
+    run.font.color.rgb = color(profile_color(profile, color_role))
     return shape
 
 
-def add_shape(slide: Any, kind: Any, bbox: dict[str, float], *, line: str = LINE, fill: str | None = None, width: float = 1.0) -> Any:
+def add_shape(slide: Any, profile: dict[str, Any], kind: Any, bbox: dict[str, float], *, line_role: str = "line", fill_role: str | None = None, width: float = 1.0) -> Any:
     x, y, w, h = bbox_to_inches(bbox)
     shape = slide.shapes.add_shape(kind, Inches(x), Inches(y), Inches(w), Inches(h))
-    shape.line.color.rgb = color(line)
+    shape.line.color.rgb = color(profile_color(profile, line_role))
     shape.line.width = Pt(width)
-    if fill:
+    if fill_role:
         shape.fill.solid()
-        shape.fill.fore_color.rgb = color(fill)
+        shape.fill.fore_color.rgb = color(profile_color(profile, fill_role))
     else:
         shape.fill.background()
     return shape
@@ -247,14 +267,14 @@ def slot_map(request: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return {slot["slot_id"]: slot for slot in request["content_slots"]}
 
 
-def add_slide_bg(slide: Any) -> None:
+def add_slide_bg(slide: Any, profile: dict[str, Any]) -> None:
     bg = slide.background.fill
     bg.solid()
-    bg.fore_color.rgb = color(BG)
+    bg.fore_color.rgb = color(profile_color(profile, "background"))
 
 
-def add_footer(slide: Any, text: str) -> None:
-    add_text(slide, text, caption_bbox(), size=10, fill=MUTED)
+def add_footer(slide: Any, profile: dict[str, Any], text: str) -> None:
+    add_text(slide, profile, text, caption_bbox(), type_role="caption_pt", color_role="muted")
 
 
 def add_equation_slide(prs: Presentation, profile: dict[str, Any], slide_spec: dict[str, Any]) -> dict[str, Any]:
@@ -268,28 +288,28 @@ def add_equation_slide(prs: Presentation, profile: dict[str, Any], slide_spec: d
             copy["bbox"] = {"x": 0.62, "y": 0.57, "w": 0.26, "h": 0.10}
         render_regions.append(copy)
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    add_slide_bg(slide)
+    add_slide_bg(slide, profile)
     slots = slot_map(request)
     for region in render_regions:
         bbox = region["bbox"]
         slot = slots[region["content_slot_id"]]
         if region["role"] == "title":
-            add_text(slide, slide_spec["title"], title_bbox(), size=27, bold=True)
+            add_text(slide, profile, slide_spec["title"], title_bbox(), type_role="title_pt", bold=True)
         elif region["content_mode"] == "equation":
             add_picture_contain(slide, REPO_ROOT / slot["asset_path"], bbox)
             x, y, w, h = bbox_to_inches(bbox)
             line = slide.shapes.add_shape(MSO_SHAPE.LEFT_BRACE, Inches(x + w * 0.42), Inches(y + h * 0.72), Inches(w * 0.35), Inches(h * 0.19))
-            line.line.color.rgb = color(WARNING)
-            line.line.width = Pt(2.5)
+            line.line.color.rgb = color(profile_color(profile, locked(profile)["equation"]["highlight_role"]))
+            line.line.width = Pt(profile_line_width(profile, "annotation", "leader_width_pt") + 0.5)
             line.fill.background()
         elif region["role"] == "annotation":
-            add_text(slide, slots["annotation"]["text"], bbox, size=13, fill=INK)
+            add_text(slide, profile, slots["annotation"]["text"], bbox, type_role="annotation_pt", color_role="ink")
             x, y, w, h = bbox_to_inches(bbox)
             connector = slide.shapes.add_connector(MSO_CONNECTOR.STRAIGHT, Inches(x), Inches(y - 0.08), Inches(6.9), Inches(3.95))
-            connector.line.color.rgb = color(ACCENT)
-            connector.line.width = Pt(2)
+            connector.line.color.rgb = color(profile_color(profile, locked(profile)["equation"]["leader_role"]))
+            connector.line.width = Pt(profile_line_width(profile, "annotation", "leader_width_pt"))
         elif region["role"] == "caption":
-            add_footer(slide, "Synthetic clustered-data fixture; design profile is deck-wide, geometry remains page-local.")
+            add_footer(slide, profile, "Synthetic clustered-data fixture; design profile is deck-wide, geometry remains page-local.")
     return slide_manifest(slide_spec, source, family, reading_flow, render_regions, transfers, profile)
 
 
@@ -305,11 +325,11 @@ def add_plot_slide(prs: Presentation, profile: dict[str, Any], slide_spec: dict[
     }
     ann_bbox = {"x": plot_bbox["x"] + 0.03, "y": min(0.78, plot_bbox["y"] + plot_bbox["h"] + 0.025), "w": min(0.70, plot_bbox["w"] - 0.06), "h": 0.07}
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    add_slide_bg(slide)
-    add_text(slide, slide_spec["title"], title, size=27, bold=True)
+    add_slide_bg(slide, profile)
+    add_text(slide, profile, slide_spec["title"], title, type_role="title_pt", bold=True)
     add_picture_contain(slide, image_path, plot_bbox)
-    add_text(slide, annotation, ann_bbox, size=13, fill=INK)
-    add_footer(slide, slide_spec["caption"])
+    add_text(slide, profile, annotation, ann_bbox, type_role="annotation_pt", color_role="ink")
+    add_footer(slide, profile, slide_spec["caption"])
     regions = [
         region("title", "title", title, "title", "text"),
         region("plot", "primary_scientific_object", plot_bbox, "plot", "figure"),
@@ -324,8 +344,8 @@ def add_flow_slide(prs: Presentation, profile: dict[str, Any], slide_spec: dict[
     source = records_by_id()[reference_id]
     primary = source_primary_bbox(reference_id)
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    add_slide_bg(slide)
-    add_text(slide, slide_spec["title"], title_bbox(), size=27, bold=True)
+    add_slide_bg(slide, profile)
+    add_text(slide, profile, slide_spec["title"], title_bbox(), type_role="title_pt", bold=True)
     flow_bbox = {
         "x": max(0.08, float(primary["x"])),
         "y": max(0.26, float(primary["y"])),
@@ -339,8 +359,8 @@ def add_flow_slide(prs: Presentation, profile: dict[str, Any], slide_spec: dict[
     start_x = flow_bbox["x"]
     end_x = flow_bbox["x"] + flow_bbox["w"]
     spine = slide.shapes.add_connector(MSO_CONNECTOR.STRAIGHT, Inches(start_x * SLIDE_W), Inches(y_mid * SLIDE_H), Inches(end_x * SLIDE_W), Inches(y_mid * SLIDE_H))
-    spine.line.color.rgb = color(ACCENT)
-    spine.line.width = Pt(2.5)
+    spine.line.color.rgb = color(profile_color(profile, locked(profile)["annotation"]["leader_color_role"]))
+    spine.line.width = Pt(profile_line_width(profile, "annotation", "leader_width_pt") + 0.5)
     previous_right: tuple[float, float] | None = None
     for index, label in enumerate(nodes):
         bbox = {
@@ -351,16 +371,16 @@ def add_flow_slide(prs: Presentation, profile: dict[str, Any], slide_spec: dict[
         }
         marker = slide.shapes.add_shape(MSO_SHAPE.OVAL, Inches((bbox["x"] + bbox["w"] / 2) * SLIDE_W - 0.08), Inches(y_mid * SLIDE_H - 0.08), Inches(0.16), Inches(0.16))
         marker.fill.solid()
-        marker.fill.fore_color.rgb = color(BG)
-        marker.line.color.rgb = color(ACCENT)
-        marker.line.width = Pt(2)
-        add_text(slide, label, {"x": bbox["x"], "y": bbox["y"] + 0.02, "w": bbox["w"], "h": 0.08}, size=14, bold=True, fill=INK, align=PP_ALIGN.CENTER)
-        add_text(slide, stage_microcopy(label), {"x": bbox["x"] + 0.008, "y": y_mid + 0.055, "w": bbox["w"] - 0.016, "h": 0.10}, size=10, fill=MUTED, align=PP_ALIGN.CENTER)
+        marker.fill.fore_color.rgb = color(profile_color(profile, "background"))
+        marker.line.color.rgb = color(profile_color(profile, locked(profile)["annotation"]["leader_color_role"]))
+        marker.line.width = Pt(profile_line_width(profile, "annotation", "leader_width_pt"))
+        add_text(slide, profile, label, {"x": bbox["x"], "y": bbox["y"] + 0.02, "w": bbox["w"], "h": 0.08}, type_role="subtitle_pt", bold=True, color_role="ink", align=PP_ALIGN.CENTER)
+        add_text(slide, profile, stage_microcopy(label), {"x": bbox["x"] + 0.008, "y": y_mid + 0.055, "w": bbox["w"] - 0.016, "h": 0.10}, type_role="caption_pt", color_role="muted", align=PP_ALIGN.CENTER)
         regions.append(region(f"node_{index + 1}", "primary_scientific_object" if index == 1 else "secondary_scientific_object", bbox, f"node_{index + 1}", "diagram"))
         if previous_right:
             pass
         previous_right = ((bbox["x"] + bbox["w"]) * SLIDE_W, (bbox["y"] + bbox["h"] / 2) * SLIDE_H)
-    add_footer(slide, caption)
+    add_footer(slide, profile, caption)
     regions.append(region("caption", "caption", caption_bbox(), "caption", "caption"))
     transfers = [transfer(source, primary_region(source), "node_2", flow_bbox, "split")]
     return slide_manifest(slide_spec, source, source["layout_family"], source["reading_flow"], regions, transfers, profile)
@@ -385,27 +405,27 @@ def add_medical_slide(prs: Presentation, profile: dict[str, Any], slide_spec: di
     source = records_by_id()[source_id]
     regions, transfers, family, reading_flow = candidate_gen.candidate_regions(request, strategy, source)
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    add_slide_bg(slide)
+    add_slide_bg(slide, profile)
     slots = slot_map(request)
     for item in regions:
         slot = slots[item["content_slot_id"]]
         bbox = item["bbox"]
         if item["role"] == "title":
-            add_text(slide, slide_spec["title"], title_bbox(), size=27, bold=True)
+            add_text(slide, profile, slide_spec["title"], title_bbox(), type_role="title_pt", bold=True)
         elif item["content_mode"] == "medical_image":
             label_box = {"x": bbox["x"], "y": max(0.17, bbox["y"] - 0.045), "w": bbox["w"], "h": 0.035}
-            add_text(slide, panel_label(slot["slot_id"]), label_box, size=10, bold=True, fill=MUTED)
-            add_shape(slide, MSO_SHAPE.RECTANGLE, bbox, line=LINE, width=0.8)
+            add_text(slide, profile, panel_label(slot["slot_id"]), label_box, type_role="caption_pt", bold=True, color_role="muted")
+            add_shape(slide, profile, MSO_SHAPE.RECTANGLE, bbox, line_role="line", width=0.8)
             add_picture_contain(slide, REPO_ROOT / slot["asset_path"], bbox)
         elif item["role"] == "legend":
-            add_legend(slide, bbox)
+            add_legend(slide, profile, bbox)
         elif item["role"] == "annotation":
-            add_text(slide, slot["text"], bbox, size=13, fill=INK)
-    add_footer(slide, "Synthetic public-safe image fixture; image treatment is integrated, clinical realism remains out of scope.")
+            add_text(slide, profile, slot["text"], bbox, type_role="annotation_pt", color_role="ink")
+    add_footer(slide, profile, "Synthetic public-safe image fixture; image treatment is integrated, clinical realism remains out of scope.")
     return slide_manifest(slide_spec, source, family, reading_flow, regions, transfers, profile)
 
 
-def add_legend(slide: Any, bbox: dict[str, float]) -> None:
+def add_legend(slide: Any, profile: dict[str, Any], bbox: dict[str, float]) -> None:
     labels = [("2D8C53", "overlap"), ("CA4A4A", "false positive"), ("4874C4", "false negative")]
     x, y, w, h = bbox_to_inches(bbox)
     cursor = x
@@ -414,7 +434,7 @@ def add_legend(slide: Any, bbox: dict[str, float]) -> None:
         swatch.fill.solid()
         swatch.fill.fore_color.rgb = color(hex_color)
         swatch.line.color.rgb = color(hex_color)
-        add_text(slide, label, {"x": cursor / SLIDE_W + 0.015, "y": (y + 0.02) / SLIDE_H, "w": 0.13, "h": h / SLIDE_H}, size=9, fill=MUTED)
+        add_text(slide, profile, label, {"x": cursor / SLIDE_W + 0.015, "y": (y + 0.02) / SLIDE_H, "w": 0.13, "h": h / SLIDE_H}, type_role="caption_pt", color_role="muted")
         cursor += 1.55
 
 
@@ -581,6 +601,73 @@ def build_review_pack(decks: list[dict[str, Any]], pack_path: Path) -> dict[str,
     }
 
 
+def pptx_xml_sha(path: Path) -> str:
+    return hashlib.sha256(pptx_text(path).encode("utf-8")).hexdigest()
+
+
+def geometry_signature(manifest: dict[str, Any]) -> str:
+    geometry = [
+        {
+            "slide_id": slide["slide_id"],
+            "layout_family": slide["layout_family"],
+            "primary_bboxes": slide["primary_bboxes"],
+            "geometry_transfer": slide["geometry_transfer"],
+        }
+        for slide in manifest["slides"]
+    ]
+    return stable_json_sha(geometry)
+
+
+def build_profile_mutation_regression(profile: dict[str, Any], baseline_deck: dict[str, Any], out_root: Path) -> dict[str, Any]:
+    probe_root = out_root / "profile_mutation_regression"
+    mutated_profile = json.loads(json.dumps(profile))
+    mutated_locked = mutated_profile["locked_properties"]
+    mutated_locked["color_roles"]["accent"] = "#8A2C69"
+    mutated_locked["type_scale"]["title_pt"] = int(mutated_locked["type_scale"]["title_pt"]) + 2
+    mutated_profile["locked_properties_sha256"] = stable_json_sha(mutated_locked)
+    mutated_profile["profile_id"] = f"{PROFILE_ID}-mutation-probe"
+    mutated_profile_path = probe_root / "mutated_deck_design_profile.json"
+    mutated_profile_path.parent.mkdir(parents=True, exist_ok=True)
+    mutated_profile_path.write_text(json.dumps(mutated_profile, indent=2), encoding="utf-8")
+
+    mutated_deck = build_deck(
+        "statistical_design_system_fixture_mutated_profile",
+        statistical_specs(),
+        mutated_profile,
+        probe_root / "statistical_design_system_fixture_mutated_profile",
+    )
+    baseline_manifest = json.loads((REPO_ROOT / baseline_deck["manifest"]).read_text(encoding="utf-8"))
+    mutated_manifest = json.loads((REPO_ROOT / mutated_deck["manifest"]).read_text(encoding="utf-8"))
+    baseline_pptx = REPO_ROOT / baseline_deck["pptx"]
+    mutated_pptx = REPO_ROOT / mutated_deck["pptx"]
+    checks = {
+        "profile_sha_changed": baseline_manifest["locked_properties_sha256"] != mutated_manifest["locked_properties_sha256"],
+        "native_pptx_xml_changed": pptx_xml_sha(baseline_pptx) != pptx_xml_sha(mutated_pptx),
+        "page_local_geometry_stable": geometry_signature(baseline_manifest) == geometry_signature(mutated_manifest),
+        "render_still_ok": mutated_manifest["render_status"].get("status") == "ok",
+    }
+    result = {
+        "schema": "RESEARCH_DECK_DESIGN_PROFILE_MUTATION_REGRESSION_V1",
+        "status": "PASS" if all(checks.values()) else "FAIL",
+        "purpose": "prove locked design-profile tokens drive native PPTX output while page-local geometry remains composition-derived",
+        "mutated_tokens": {
+            "color_roles.accent": mutated_locked["color_roles"]["accent"],
+            "type_scale.title_pt": mutated_locked["type_scale"]["title_pt"],
+        },
+        "baseline_manifest": baseline_deck["manifest"],
+        "mutated_profile": rel(mutated_profile_path),
+        "mutated_manifest": mutated_deck["manifest"],
+        "baseline_pptx_xml_sha256": pptx_xml_sha(baseline_pptx),
+        "mutated_pptx_xml_sha256": pptx_xml_sha(mutated_pptx),
+        "baseline_geometry_signature": geometry_signature(baseline_manifest),
+        "mutated_geometry_signature": geometry_signature(mutated_manifest),
+        "checks": checks,
+    }
+    result_path = probe_root / "PROFILE_MUTATION_REGRESSION.json"
+    result_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    return {"path": rel(result_path), "status": result["status"], "mutated_deck": mutated_deck}
+
+
 def editable_slide_count(pptx_path: Path) -> int:
     with ZipFile(pptx_path) as zf:
         return len([name for name in zf.namelist() if name.startswith("ppt/slides/slide") and name.endswith(".xml")])
@@ -714,12 +801,14 @@ def main() -> int:
         build_deck("medical_design_system_fixture", medical_specs(), profile, out_root / "medical_design_system_fixture"),
     ]
     review_pack = build_review_pack(decks, out_root.parent / "REVIEW_PACK.pdf")
+    profile_mutation_regression = build_profile_mutation_regression(profile, decks[0], out_root)
     outputs = {
         "schema": "RESEARCH_DECK_DESIGN_SYSTEM_INTEGRATION_OUTPUTS_V1",
         "task_key": TASK_KEY,
         "deck_design_profile": rel(profile_path),
         "decks": decks,
         "review_pack_pdf": review_pack,
+        "profile_mutation_regression": profile_mutation_regression,
     }
     outputs_path = out_root / "OUTPUTS.json"
     outputs_path.write_text(json.dumps(outputs, indent=2), encoding="utf-8")

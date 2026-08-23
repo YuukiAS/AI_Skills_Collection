@@ -1,0 +1,22 @@
+{
+  "schema": "RESEARCH_DECK_DESIGN_PROFILE_MUTATION_REGRESSION_V1",
+  "status": "PASS",
+  "purpose": "prove locked design-profile tokens drive native PPTX output while page-local geometry remains composition-derived",
+  "mutated_tokens": {
+    "color_roles.accent": "#8A2C69",
+    "type_scale.title_pt": 29
+  },
+  "baseline_manifest": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/SOURCE_GENERATED_IDENTITY_MANIFEST.json",
+  "mutated_profile": "results/023_research_presentation_deck_design_system_integration/generated/profile_mutation_regression/mutated_deck_design_profile.json",
+  "mutated_manifest": "results/023_research_presentation_deck_design_system_integration/generated/profile_mutation_regression/statistical_design_system_fixture_mutated_profile/SOURCE_GENERATED_IDENTITY_MANIFEST.json",
+  "baseline_pptx_xml_sha256": "706f8dbc4c7716970544f8a1aefe0b9462cf02d24d4025481496c50b19120fc8",
+  "mutated_pptx_xml_sha256": "5db10a58a62e5de732a7988758e30a30503d58f72e6b893e66bd485844cdaf60",
+  "baseline_geometry_signature": "d6bb15ef7a06b83f5d5c334f2fb46ecc2baf2e20b26976d241952babed795712",
+  "mutated_geometry_signature": "d6bb15ef7a06b83f5d5c334f2fb46ecc2baf2e20b26976d241952babed795712",
+  "checks": {
+    "profile_sha_changed": true,
+    "native_pptx_xml_changed": true,
+    "page_local_geometry_stable": true,
+    "render_still_ok": true
+  }
+}

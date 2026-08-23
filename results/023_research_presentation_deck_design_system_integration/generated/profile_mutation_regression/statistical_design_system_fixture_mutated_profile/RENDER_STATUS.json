@@ -1,0 +1,24 @@
+{
+  "status": "ok",
+  "renderer": "/home/yuukias/AI_Skills_Collection/.cache/tools/squashfs-root/opt/libreoffice25.8/program/soffice",
+  "pptx_to_pdf": "results/023_research_presentation_deck_design_system_integration/generated/profile_mutation_regression/statistical_design_system_fixture_mutated_profile/pdf/statistical_design_system_fixture_mutated_profile.pdf",
+  "png_count": 4,
+  "rendered_png": [
+    {
+      "path": "results/023_research_presentation_deck_design_system_integration/generated/profile_mutation_regression/statistical_design_system_fixture_mutated_profile/rendered/slide-1.png",
+      "sha256": "4983a9bfabf232b4f272de84dd3df818bf6fd77832a8eb69d1716e14a3023764"
+    },
+    {
+      "path": "results/023_research_presentation_deck_design_system_integration/generated/profile_mutation_regression/statistical_design_system_fixture_mutated_profile/rendered/slide-2.png",
+      "sha256": "81b697e781374a9ef89eacd50ced5b6e7d4c2c0228462e01e3c5d38ac490d294"
+    },
+    {
+      "path": "results/023_research_presentation_deck_design_system_integration/generated/profile_mutation_regression/statistical_design_system_fixture_mutated_profile/rendered/slide-3.png",
+      "sha256": "31ad1ba93f8eb811227e3f5eaad76739ce4f7d2c550caa82466965b5bff5b2bd"
+    },
+    {
+      "path": "results/023_research_presentation_deck_design_system_integration/generated/profile_mutation_regression/statistical_design_system_fixture_mutated_profile/rendered/slide-4.png",
+      "sha256": "e1fcfdd931e79c3710cb17a7345ee5ebab69f2a69db6ac9ee990cfb0324449d0"
+    }
+  ]
+}

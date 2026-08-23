@@ -7,7 +7,7 @@
   "deck_plan": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/DECK_PLAN.json",
   "locked_properties_sha256": "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8",
   "pptx": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/medical_design_system_fixture.pptx",
-  "pptx_sha256": "b8b01dcaba784f178cd5664ffb15a1fcef4b442280d0bbb3fa1140507cea79d2",
+  "pptx_sha256": "ecdb3e06b384e966685da9cff235045ef3ca9a842dc56de5590bb61140873ab8",
   "editable_slide_count": 4,
   "slides": [
     {
@@ -693,11 +693,11 @@
     "rendered_png": [
       {
         "path": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/rendered/slide-1.png",
-        "sha256": "1ab9dc3579cd2f8fffcc12d6e0dbdf9c65e12ddd021f31012af8fc24b4015557"
+        "sha256": "63ee63fb3c4941e84d720d6530a10031de82e91b254271c733a2cd6b982334c8"
       },
       {
         "path": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/rendered/slide-2.png",
-        "sha256": "52e07efd37fb391b446b50ab25f667c7a9a1bc6e6ca50e3661a3567dd4c6b3cc"
+        "sha256": "e39bcf9f1a455b060e349e0775e9176559c3b387d0b16f50e2172cca371b75ee"
       },
       {
         "path": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/rendered/slide-3.png",
@@ -705,7 +705,7 @@
       },
       {
         "path": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/rendered/slide-4.png",
-        "sha256": "b3a54b91352d233f17975de7163fedab6b463fb568b5e371cb6e06d3007e7322"
+        "sha256": "0a5ed098bb88d654b04ffe900b3e67438d5dd5d061667888de025bdefd8a3bb5"
       }
     ]
   },

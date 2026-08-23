@@ -169,6 +169,23 @@ def validate_outputs(path: Path) -> list[str]:
         errors.append(f"{path}: combined review pack PDF missing or too small")
     if len(review_pack.get("source_pdfs", [])) != 2:
         errors.append(f"{path}: combined review pack must cite two source PDFs")
+    mutation = outputs.get("profile_mutation_regression", {})
+    mutation_path = resolve(mutation.get("path", ""))
+    if not mutation_path.exists():
+        errors.append(f"{path}: profile mutation regression missing")
+    else:
+        mutation_result = load_json(mutation_path)
+        if mutation_result.get("schema") != "RESEARCH_DECK_DESIGN_PROFILE_MUTATION_REGRESSION_V1":
+            errors.append(f"{path}: invalid profile mutation regression schema")
+        if mutation_result.get("status") != "PASS":
+            errors.append(f"{path}: profile mutation regression did not pass")
+        checks = mutation_result.get("checks", {})
+        for key in ["profile_sha_changed", "native_pptx_xml_changed", "page_local_geometry_stable", "render_still_ok"]:
+            if checks.get(key) is not True:
+                errors.append(f"{path}: profile mutation regression check failed: {key}")
+        for key in ["mutated_profile", "mutated_manifest"]:
+            if not resolve(mutation_result.get(key, "")).exists():
+                errors.append(f"{path}: profile mutation regression missing {key}")
     deck_keys = {deck.get("manifest", "").split("/")[-2] for deck in decks}
     if deck_keys != {"statistical_design_system_fixture", "medical_design_system_fixture"}:
         errors.append(f"{path}: unexpected deck keys {sorted(deck_keys)}")
