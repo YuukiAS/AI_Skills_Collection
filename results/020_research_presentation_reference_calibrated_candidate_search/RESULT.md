@@ -1,16 +1,37 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 020_research_presentation_reference_calibrated_candidate_search
-implementation_commit: e37d7bd228853f5c385f81e9915baeebf8f91dc1
+implementation_commit: 59147c7aff097cff91d103a8ec28d2297a4306a8
 ---
 
 # 020 Research Presentation Reference-Calibrated Candidate Search - Executor Result
 
 ## Implementation commit
 
-Current implementation commit: `e37d7bd228853f5c385f81e9915baeebf8f91dc1`.
+Current implementation commit: `59147c7aff097cff91d103a8ec28d2297a4306a8`.
 
 Control-plane compatibility repair before implementation: `98bf15c` appended schema-required report sections to the 019 final report without changing 019 semantics or the 020 plan.
+
+Initial 020 implementation commit: `e37d7bd228853f5c385f81e9915baeebf8f91dc1`.
+
+`REVIEW_1` repair commit: `59147c7aff097cff91d103a8ec28d2297a4306a8`.
+
+## REVIEW_1 repair
+
+`REVIEW_1` identified two blockers:
+
+1. Candidate bboxes were selected from family-specific fixed coordinate templates instead of being derived from selected 019 source geometry.
+2. The compatible source pool allowed generic-token pollution, causing the medical wildcard to use an unrelated Bayesian model page.
+
+The repair keeps the 020 scope unchanged and fixes only those blockers:
+
+- candidate regions are now derived from the selected source record's title, primary object, equation, secondary object, and legend bboxes;
+- the generator records the actual split/scale/translate/reorder operation in `geometry_transfer`;
+- medical-image requests are gated to inspected medical-image comparison records with `medical_image` content;
+- estimator requests are gated to equation/estimator-compatible records;
+- when fewer than three strongly compatible sources exist, wildcard candidates stay inside the compatible source set and use source-derived alternate topology rather than unrelated page functions;
+- the medical manifest no longer includes or selects `RRL-034`;
+- regression tests prove that two same-family medical records with different source bboxes produce different candidate geometry.
 
 ## Implemented
 
@@ -35,9 +56,9 @@ The generator imports and calls the 019 composition selector, reads `research_sl
 
 ## Regression requests
 
-The statistical estimator request uses existing deterministic statistical fixture content, including a rendered cluster-robust sandwich covariance equation asset. It generated the `equation-dominant`, `split-visual-explanation`, and `result-with-callout` candidate families.
+The statistical estimator request uses existing deterministic statistical fixture content, including a rendered cluster-robust sandwich covariance equation asset. It generated the `equation-dominant`, `split-visual-explanation`, and `split-visual-explanation-reordered-callout` candidate families.
 
-The medical image comparison request uses existing deterministic medical-imaging fixture assets, including synthetic input, overlay, prediction, and error images. It generated the `aligned-multi-panel`, `horizontal-process-flow`, and `split-visual-explanation` candidate families.
+The medical image comparison request uses existing deterministic medical-imaging fixture assets, including synthetic input, overlay, prediction, and error images. It generated `aligned-multi-panel` variants and the `aligned-multi-panel-focus-callout` candidate family.
 
 The previews contain real scientific content rather than wireframes. Audience-facing preview text does not contain candidate strategies, `RRL-` IDs, reference retrieval text, provenance IDs, repo paths, QA labels, or implementation metadata.
 
@@ -56,7 +77,7 @@ Each candidate manifest records:
 - renderer-neutral distinctness signature;
 - preview artifact path and SHA.
 
-The deterministic validator checks exact three-candidate output, matching content payload, distinct preview SHA values, at least two families, non-identical signatures, complete transfer traces, primary-object presence and area, equation/image page semantics, clean audience text, and absence of source reference pixels.
+The deterministic validator checks exact three-candidate output, matching content payload, distinct preview SHA values, at least two families, non-identical signatures, complete transfer traces, primary-object presence and area, equation/image page semantics, source compatibility, clean audience text, and absence of source reference pixels.
 
 ## Plugin mirror
 
@@ -66,8 +87,8 @@ The generated/plugin mirror under `plugins/codex/plugins/presentations/shared/` 
 
 I inspected both internal comparison sheets:
 
-- statistical estimator: equation-dominant, split visual explanation, and result-with-callout previews are compositionally distinct and use the same rendered equation content.
-- medical image comparison: aligned multi-panel, horizontal process flow, and split visual explanation previews are compositionally distinct and use the same local synthetic image evidence.
+- statistical estimator: equation-dominant, split visual explanation, and split visual explanation reordered callout previews are compositionally distinct and use the same rendered equation content.
+- medical image comparison: aligned multi-panel variants and an aligned multi-panel focus callout preview are compositionally distinct, source-derived, and use the same local synthetic image evidence.
 
 The comparison sheets are internal audit artifacts, not full-deck contact sheets and not comparative Terra evidence.
 
