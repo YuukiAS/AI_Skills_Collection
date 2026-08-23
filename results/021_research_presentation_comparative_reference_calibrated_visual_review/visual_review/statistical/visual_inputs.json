@@ -3,7 +3,7 @@
   "identity_bindings": {
     "adapter_identity": "021_visual_comparison:statistical",
     "case_key": "statistical",
-    "immutable_review_identity_sha256": "618afde7eb8ed8ac39e3fa40fc88ae3b6a89a9a8567f9ae375054f2c164df8a0",
+    "immutable_review_identity_sha256": "6d47c1c2dee99aece49a7f0dd2c57ed89e4766b1f8799bb36f2aeee0f2d4c9af",
     "item_sha256_by_anonymous_id": {
       "item_A": "9bc66555d4fe50d6124655e0839c421673e3638c99b4d6a313d7340169516033",
       "item_B": "4964d0056724766b8c8d0f34e0c91df9d5c9799f208ee2aa4ab31ddb61d76f7d",
@@ -59,5 +59,5 @@
   },
   "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
   "task_key": "021_visual_comparison",
-  "workflow_type": "comparative-calibrated"
+  "workflow_type": "generic"
 }

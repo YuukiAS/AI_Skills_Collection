@@ -3,7 +3,7 @@
   "candidate_count": 3,
   "case_key": "medical",
   "reference_count": 2,
-  "review_identity_sha256": "6b2849091c7509bf642df1a11c9e84fca7cb7aa987e766c8906cc17381ff21d7",
+  "review_identity_sha256": "2f999af8a606c65187c0f819289c6e78c525b50b1e4b19158ecc345f296b6dda",
   "review_input_sha256_by_anonymous_id": {
     "item_A": "5b2c8dd0e0abeace036587de487446e0c75e9e862227a6be192741d0dcfb8c7e",
     "item_B": "08ec78b40bb40c389f30f1888c938083a9f1eac979345902c1ba316d387ac83f",
@@ -14,5 +14,5 @@
   "rubric_sha256": "9ba6acc7cb738e44a04e3d9c57155071f6c0878b8d76091579f3267bc29febdd",
   "schema": "RESEARCH_PRESENTATION_COMPARATIVE_REVIEW_IDENTITY_V1",
   "task_key": "021_research_presentation_comparative_reference_calibrated_visual_review",
-  "visual_inputs_sha256": "ab16d98117144edb9bdfe96aea6d050be10318783e965130f0e54b147b1b42eb"
+  "visual_inputs_sha256": "9f2fa7a6cfc2e6a1da96d6879168f06a8dd9d3890ff1c36969ff4c669fd48502"
 }

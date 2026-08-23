@@ -399,7 +399,7 @@ class PresentationSharedTests(unittest.TestCase):
             identity_map = json.loads(map_path.read_text(encoding="utf-8"))
             self.assertEqual(manifest["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
             self.assertEqual(manifest["task_key"], "021_visual_comparison")
-            self.assertEqual(manifest["workflow_type"], "comparative-calibrated")
+            self.assertEqual(manifest["workflow_type"], "generic")
             self.assertEqual(len(manifest["inputs"]), 5)
             self.assertEqual(len([item for item in identity_map["items"] if item["item_class"] == "candidate"]), 3)
             self.assertGreaterEqual(len([item for item in identity_map["items"] if item["item_class"] == "reference"]), 2)

@@ -112,7 +112,7 @@
     "RRL-028",
     "RRL-014"
   ],
-  "review_identity_sha256": "618afde7eb8ed8ac39e3fa40fc88ae3b6a89a9a8567f9ae375054f2c164df8a0",
+  "review_identity_sha256": "6d47c1c2dee99aece49a7f0dd2c57ed89e4766b1f8799bb36f2aeee0f2d4c9af",
   "schema": "RESEARCH_PRESENTATION_COMPARATIVE_REVIEW_IDENTITY_MAP_V1",
   "task_key": "021_research_presentation_comparative_reference_calibrated_visual_review"
 }

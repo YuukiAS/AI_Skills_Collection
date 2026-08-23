@@ -3,7 +3,7 @@
   "identity_bindings": {
     "adapter_identity": "021_visual_comparison:medical",
     "case_key": "medical",
-    "immutable_review_identity_sha256": "6b2849091c7509bf642df1a11c9e84fca7cb7aa987e766c8906cc17381ff21d7",
+    "immutable_review_identity_sha256": "2f999af8a606c65187c0f819289c6e78c525b50b1e4b19158ecc345f296b6dda",
     "item_sha256_by_anonymous_id": {
       "item_A": "5b2c8dd0e0abeace036587de487446e0c75e9e862227a6be192741d0dcfb8c7e",
       "item_B": "08ec78b40bb40c389f30f1888c938083a9f1eac979345902c1ba316d387ac83f",
@@ -59,5 +59,5 @@
   },
   "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
   "task_key": "021_visual_comparison",
-  "workflow_type": "comparative-calibrated"
+  "workflow_type": "generic"
 }

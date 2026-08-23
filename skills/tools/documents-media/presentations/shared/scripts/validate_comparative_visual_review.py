@@ -15,6 +15,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[6]
 TASK_KEY = "021_research_presentation_comparative_reference_calibrated_visual_review"
 VISIBLE_TASK_KEY = "021_visual_comparison"
+VISIBLE_WORKFLOW_TYPE = "generic"
 RESULT_ROOT = REPO_ROOT / "results" / TASK_KEY / "visual_review"
 REFERENCE_INDEX = REPO_ROOT / "skills/tools/documents-media/presentations/shared/references/research_slide_reference_index.csv"
 COMPOSITION_INDEX = REPO_ROOT / "skills/tools/documents-media/presentations/shared/references/research_slide_composition_index.json"
@@ -68,7 +69,7 @@ def validate_case(case_dir: Path, require_review: bool = False, require_bytes: b
         errors.append(f"{manifest_path}: invalid manifest schema")
     if manifest.get("task_key") != VISIBLE_TASK_KEY:
         errors.append(f"{manifest_path}: invalid task_key")
-    if manifest.get("workflow_type") != "comparative-calibrated":
+    if manifest.get("workflow_type") != VISIBLE_WORKFLOW_TYPE:
         errors.append(f"{manifest_path}: invalid workflow_type")
     inputs = manifest.get("inputs", [])
     items = identity_map.get("items", [])

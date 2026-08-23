@@ -22,6 +22,7 @@ REFERENCE_INDEX = SHARED / "references" / "research_slide_reference_index.csv"
 COMPOSITION_INDEX = SHARED / "references" / "research_slide_composition_index.json"
 TASK_KEY = "021_research_presentation_comparative_reference_calibrated_visual_review"
 VISIBLE_TASK_KEY = "021_visual_comparison"
+VISIBLE_WORKFLOW_TYPE = "generic"
 RESULT_ROOT = REPO_ROOT / "results" / TASK_KEY / "visual_review"
 CACHE_ROOT = REPO_ROOT / ".cache" / "research-presentation-comparative-review" / "021"
 SOURCE_CACHE = REPO_ROOT / ".cache" / "research-presentation-reference-library" / "sources"
@@ -232,7 +233,7 @@ def prepare_case(case_key: str) -> dict[str, str]:
     visible_manifest = {
         "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
         "task_key": VISIBLE_TASK_KEY,
-        "workflow_type": "comparative-calibrated",
+        "workflow_type": VISIBLE_WORKFLOW_TYPE,
         "review_kind": f"comparative-calibrated-{case_key}",
         "prompt_version": "ai-bridge.visual-review.v1",
         "privacy_policy": "PUBLIC_SAFE_ONLY",

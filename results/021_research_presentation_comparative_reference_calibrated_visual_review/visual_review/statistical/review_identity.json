@@ -3,7 +3,7 @@
   "candidate_count": 3,
   "case_key": "statistical",
   "reference_count": 2,
-  "review_identity_sha256": "618afde7eb8ed8ac39e3fa40fc88ae3b6a89a9a8567f9ae375054f2c164df8a0",
+  "review_identity_sha256": "6d47c1c2dee99aece49a7f0dd2c57ed89e4766b1f8799bb36f2aeee0f2d4c9af",
   "review_input_sha256_by_anonymous_id": {
     "item_A": "9bc66555d4fe50d6124655e0839c421673e3638c99b4d6a313d7340169516033",
     "item_B": "4964d0056724766b8c8d0f34e0c91df9d5c9799f208ee2aa4ab31ddb61d76f7d",
@@ -14,5 +14,5 @@
   "rubric_sha256": "6ace038353388d6b6e38c8c157c7ab4e8873f43336e726c857680b06223da6a2",
   "schema": "RESEARCH_PRESENTATION_COMPARATIVE_REVIEW_IDENTITY_V1",
   "task_key": "021_research_presentation_comparative_reference_calibrated_visual_review",
-  "visual_inputs_sha256": "e4f0e12a7483ef5c6d5b1f4388e6863d3b5583b0f49148784ab3b9e2f7ad8c58"
+  "visual_inputs_sha256": "b16a32f02dbfaba7de480f8e95ecbc02f491d45ab8f1de7b68a6ff5f912290e0"
 }
