@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "018_presentation_external_method_audit",
-  "state": "PASS",
+  "state": "AWAIT_HUMAN_DECISION",
   "review_round": 2,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -13,6 +13,6 @@
   "ci_status": "PASS",
   "last_review_decision": "PASS",
   "review_limit_reached": false,
-  "human_gate_reason": null,
-  "next_action": "FINALIZE"
+  "human_gate_reason": "PASS",
+  "next_action": "WAIT_FOR_HUMAN_DECISION"
 }
