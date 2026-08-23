@@ -111,5 +111,58 @@ The package writes its task-owned visual evidence under:
 `results/022_research_presentation_candidate_visual_finish_repair/visual_review`
 
 Visible review identity uses `022_visual_finish_comparison`, anonymous item IDs,
-and the same matched references as 021. Live Terra results are recorded in the
-task result after the GitHub Actions visual review workflow completes.
+and the same matched references as 021.
+
+The GitHub Actions workflow completed successfully on run `32639276412` and
+committed the live Terra evidence in `9b7b5bc`.
+
+### Statistical estimator/equation decoded result
+
+Evidence:
+
+- `results/022_research_presentation_candidate_visual_finish_repair/visual_review/statistical/VISUAL_REVIEW.json`
+- `review_identity_sha256=e68fc684220a87f638e7670bccf1be7c3745b079429af5bc0642f56a55f45637`
+- `review_identity=f1fa4cc1b301f2717ca9316a31e0741d0c28efabaa7bbc6f5e39dfb682db1aca`
+- `status=PASS`, with no package-level blocking findings
+
+Decoded anonymous mapping:
+
+| Anonymous item | Real identity | Terra decision | Decoded meaning |
+| --- | --- | --- | --- |
+| `item_A` | 022 `alternative_composition` candidate | `REVISE` | Readable, but detached lower text and excess whitespace keep it below the mature-talk bar. |
+| `item_B` | reference `RRL-014`, page 18 | `REVISE` | Weak estimator comparison for this page job because the imagery is fragmented and edge-cropped. |
+| `item_C` | 022 `reference_faithful` candidate | `PASS` | Strongest item; direct math annotation and balanced central composition reach mature research-group-meeting quality. |
+| `item_D` | reference `RRL-028`, page 14 | `REVISE` | Clean equation, but under-annotated and mostly blank. |
+| `item_E` | 022 `controlled_wildcard` candidate | `REVISE` | Solid and readable, but lower content split weakens composition versus `item_C`. |
+
+Terra's relative ordering places the repaired `reference_faithful` statistical
+candidate first. This is the only statistical item judged to reach the mature
+research-group-meeting / strong conference-talk bar. The result specifically
+validates the 022 repair focus: high-contrast equation treatment, direct
+middle-term annotation, and removal of generic card framing.
+
+### Medical-image comparison decoded result
+
+Evidence:
+
+- `results/022_research_presentation_candidate_visual_finish_repair/visual_review/medical/VISUAL_REVIEW.json`
+- `review_identity_sha256=68fef1307429e6792d548eb8363bb37239f5164aafb6ad997fe7a818d4741ac3`
+- `review_identity=20e12347bfbb02ffeded337d9b9d1203b930467db2240ab11d1adbd6e5c6cf47`
+- `status=PASS`, with no package-level blocking findings
+
+Decoded anonymous mapping:
+
+| Anonymous item | Real identity | Terra decision | Decoded meaning |
+| --- | --- | --- | --- |
+| `item_A` | 022 `alternative_composition` candidate | `PASS` | Coherent three-panel comparison that reaches mature research-group-meeting quality, with some unused lower whitespace. |
+| `item_B` | reference `RRL-013`, page 14 | `REVISE` | Image-specific but cluttered; contour encodings are not explained. |
+| `item_C` | reference `RRL-022`, page 21 | `REVISE` | Scientifically specific but visibly cropped/incompletely framed in this rendered page. |
+| `item_D` | 022 `reference_faithful` candidate | `REVISE` | Clean and legible, but images remain underscaled and interpretation is under-integrated. |
+| `item_E` | 022 `controlled_wildcard` candidate | `PASS` | Best item; asymmetric layout gives the lesion overlay visual priority and groups the error map, takeaway, and legend as support. |
+
+Terra's relative ordering places the repaired `controlled_wildcard` medical
+candidate first, followed by the repaired `alternative_composition` candidate.
+Both are judged to reach mature research-group-meeting quality. The result also
+records a remaining implementation lesson: the reference-faithful medical path
+is clean but still too conservative because the evidence bands remain
+underscaled.
