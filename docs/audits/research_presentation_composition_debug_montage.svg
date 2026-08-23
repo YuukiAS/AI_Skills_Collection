@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1088" height="1282" viewBox="0 0 1088 1282" role="img" aria-label="Research presentation composition debug montage">
+<rect width="100%" height="100%" fill="#f8fafc"/>
+<style>text{font-family:Arial,Helvetica,sans-serif} .small{font-size:10px;fill:#334155}.label{font-size:8px;fill:#0f172a}.head{font-size:12px;font-weight:bold;fill:#0f172a}</style>
+<text class="head" x="32" y="44">RRL-014 | split-visual-explanation</text>
+<text class="small" x="32" y="60">ESTIMATOR | primary area 0.394</text>
+<rect x="32" y="72" width="320" height="180" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="48.0" y="82.8" width="192.0" height="14.4" fill="none" stroke="#334155" stroke-width="1.5"/>
+<text class="label" x="51.0" y="93.8">title:title</text>
+<rect x="51.2" y="99.0" width="262.4" height="86.4" fill="none" stroke="#0f766e" stroke-width="3"/>
+<text class="label" x="54.2" y="110.0">primary_scientific_object:primary_metric_definition</text>
+<rect x="54.4" y="104.4" width="121.6" height="27.0" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+<text class="label" x="57.4" y="115.4">equation:formula_text</text>
+<rect x="217.6" y="95.4" width="108.8" height="86.4" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<text class="label" x="220.6" y="106.4">secondary_scientific_object:mask_examples</text>
+<text class="small" x="32" y="270">title-to-left-formula-then-right-mask-examples</text>
+<text class="head" x="384" y="44">RRL-028 | equation-dominant</text>
+<text class="small" x="384" y="60">ESTIMATOR | primary area 0.124</text>
+<rect x="384" y="72" width="320" height="180" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="390.4" y="77.4" width="307.2" height="18.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<text class="label" x="393.4" y="88.4">title:title</text>
+<rect x="448.0" y="122.4" width="147.2" height="48.6" fill="none" stroke="#0f766e" stroke-width="3"/>
+<text class="label" x="451.0" y="133.4">primary_scientific_object:poststratification_formula</text>
+<text class="small" x="384" y="270">title-to-centered-equation</text>
+<text class="head" x="736" y="44">RRL-034 | split-visual-explanation</text>
+<text class="small" x="736" y="60">STATISTICAL_MODEL | primary area 0.060</text>
+<rect x="736" y="72" width="320" height="180" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="742.4" y="77.4" width="307.2" height="18.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<text class="label" x="745.4" y="88.4">title:title</text>
+<rect x="864.0" y="118.8" width="80.0" height="43.2" fill="none" stroke="#0f766e" stroke-width="3"/>
+<text class="label" x="867.0" y="129.8">primary_scientific_object:model_specification</text>
+<rect x="960.0" y="104.4" width="70.4" height="84.6" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<text class="label" x="963.0" y="115.4">secondary_scientific_object:concrete_example</text>
+<text class="small" x="736" y="270">title-to-model-bullets-to-concrete-example</text>
+<text class="head" x="32" y="294">RRL-023 | single-visual-dominant</text>
+<text class="small" x="32" y="310">RESULT_FIGURE | primary area 0.415</text>
+<rect x="32" y="322" width="320" height="180" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="38.4" y="327.4" width="307.2" height="18.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<text class="label" x="41.4" y="338.4">title:title</text>
+<rect x="99.2" y="358.0" width="198.4" height="120.6" fill="none" stroke="#0f766e" stroke-width="3"/>
+<text class="label" x="102.2" y="369.0">primary_scientific_object:forest_plot</text>
+<text class="small" x="32" y="520">title-to-large-forest-plot</text>
+<text class="head" x="384" y="294">RRL-030 | result-with-callout</text>
+<text class="small" x="384" y="310">CONFIDENCE_INTERVAL | primary area 0.546</text>
+<rect x="384" y="322" width="320" height="180" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="409.6" y="332.8" width="224.0" height="14.4" fill="none" stroke="#334155" stroke-width="1.5"/>
+<text class="label" x="412.6" y="343.8">title:title</text>
+<rect x="428.8" y="350.8" width="249.6" height="126.0" fill="none" stroke="#0f766e" stroke-width="3"/>
+<text class="label" x="431.8" y="361.8">primary_scientific_object:interval_curve</text>
+<rect x="492.8" y="350.8" width="115.2" height="126.0" fill="none" stroke="#b45309" stroke-width="1.5"/>
+<text class="label" x="495.8" y="361.8">annotation:reference_lines</text>
+<text class="small" x="384" y="520">claim-title-to-interval-curve-to-reference-lines</text>
+<text class="head" x="736" y="294">RRL-039 | result-with-callout</text>
+<text class="small" x="736" y="310">REAL_DATA_APPLICATION | primary area 0.546</text>
+<rect x="736" y="322" width="320" height="180" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="742.4" y="327.4" width="307.2" height="18.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<text class="label" x="745.4" y="338.4">title:title</text>
+<rect x="784.0" y="347.2" width="249.6" height="126.0" fill="none" stroke="#0f766e" stroke-width="3"/>
+<text class="label" x="787.0" y="358.2">primary_scientific_object:regression_plot</text>
+<rect x="790.4" y="376.0" width="185.6" height="63.0" fill="none" stroke="#b45309" stroke-width="1.5"/>
+<text class="label" x="793.4" y="387.0">annotation:effect_labels</text>
+<text class="small" x="736" y="520">title-to-regression-figure-to-inline-effect-labels</text>
+<text class="head" x="32" y="544">RRL-019 | horizontal-process-flow</text>
+<text class="small" x="32" y="560">EXPERIMENT_DESIGN | primary area 0.395</text>
+<rect x="32" y="572" width="320" height="180" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="51.2" y="584.6" width="153.6" height="14.4" fill="none" stroke="#334155" stroke-width="1.5"/>
+<text class="label" x="54.2" y="595.6">title:title</text>
+<rect x="51.2" y="600.8" width="201.6" height="27.0" fill="none" stroke="#475569" stroke-width="1.5"/>
+<text class="label" x="54.2" y="611.8">body_text:context_text</text>
+<rect x="51.2" y="635.0" width="268.8" height="84.6" fill="none" stroke="#0f766e" stroke-width="3"/>
+<text class="label" x="54.2" y="646.0">primary_scientific_object:application_flow</text>
+<text class="small" x="32" y="770">title-to-short-context-to-application-flow</text>
+<text class="head" x="384" y="544">RRL-002 | horizontal-process-flow</text>
+<text class="small" x="384" y="560">METHOD_DIAGRAM | primary area 0.204</text>
+<rect x="384" y="572" width="320" height="180" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="403.2" y="588.2" width="176.0" height="14.4" fill="none" stroke="#334155" stroke-width="1.5"/>
+<text class="label" x="406.2" y="599.2">title:title</text>
+<rect x="403.2" y="606.2" width="224.0" height="23.4" fill="none" stroke="#475569" stroke-width="1.5"/>
+<text class="label" x="406.2" y="617.2">body_text:mechanism_explanation</text>
+<rect x="400.0" y="658.4" width="272.0" height="43.2" fill="none" stroke="#0f766e" stroke-width="3"/>
+<text class="label" x="403.0" y="669.4">primary_scientific_object:graph_mechanism</text>
+<rect x="444.8" y="696.2" width="121.6" height="30.6" fill="none" stroke="#b45309" stroke-width="1.5"/>
+<text class="label" x="447.8" y="707.2">annotation:committee_note</text>
+<text class="small" x="384" y="770">title-to-explanation-to-left-right-mechanism</text>
+<text class="head" x="736" y="544">RRL-022 | aligned-multi-panel</text>
+<text class="small" x="736" y="560">MEDICAL_IMAGE_COMPARISON | primary area 0.593</text>
+<rect x="736" y="572" width="320" height="180" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="768.0" y="586.4" width="249.6" height="136.8" fill="none" stroke="#0f766e" stroke-width="3"/>
+<text class="label" x="771.0" y="597.4">primary_scientific_object:image_grid</text>
+<rect x="780.8" y="719.6" width="224.0" height="9.0" fill="none" stroke="#0369a1" stroke-width="1.5"/>
+<text class="label" x="783.8" y="730.6">legend:column_labels</text>
+<text class="small" x="736" y="770">panel-grid-by-row-and-column</text>
+<text class="head" x="32" y="794">RRL-013 | aligned-multi-panel</text>
+<text class="small" x="32" y="810">MEDICAL_IMAGE_COMPARISON | primary area 0.235</text>
+<rect x="32" y="822" width="320" height="180" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="51.2" y="838.2" width="176.0" height="14.4" fill="none" stroke="#334155" stroke-width="1.5"/>
+<text class="label" x="54.2" y="849.2">title:title</text>
+<rect x="41.6" y="867.0" width="300.8" height="45.0" fill="none" stroke="#0f766e" stroke-width="3"/>
+<text class="label" x="44.6" y="878.0">primary_scientific_object:sample_grid</text>
+<rect x="57.6" y="856.2" width="249.6" height="9.0" fill="none" stroke="#0369a1" stroke-width="1.5"/>
+<text class="label" x="60.6" y="867.2">legend:column_labels</text>
+<text class="small" x="32" y="1020">title-to-category-columns-to-sample-grid</text>
+<text class="head" x="384" y="794">RRL-025 | model-check-or-negative</text>
+<text class="small" x="384" y="810">NEGATIVE_RESULT | primary area 0.449</text>
+<rect x="384" y="822" width="320" height="180" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="390.4" y="827.4" width="307.2" height="18.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<text class="label" x="393.4" y="838.4">title:title</text>
+<rect x="444.8" y="863.4" width="208.0" height="124.2" fill="none" stroke="#0f766e" stroke-width="3"/>
+<text class="label" x="447.8" y="874.4">primary_scientific_object:corrected_interval_plot</text>
+<text class="small" x="384" y="1020">title-to-corrected-interval-plot</text>
+<text class="head" x="736" y="794">RRL-031 | decision-or-next-step</text>
+<text class="small" x="736" y="810">REFERENCE_COVERAGE_GAP | primary area 0.176</text>
+<rect x="736" y="822" width="320" height="180" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="742.4" y="827.4" width="307.2" height="18.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<text class="label" x="745.4" y="838.4">title:title</text>
+<rect x="800.0" y="879.6" width="176.0" height="57.6" fill="none" stroke="#be123c" stroke-width="3"/>
+<text class="label" x="803.0" y="890.6">decision_or_next_step:open_problem_list</text>
+<text class="small" x="736" y="1020">title-to-short-open-problem-list</text>
+<text class="head" x="32" y="1044">RRL-041 | model-check-or-negative</text>
+<text class="small" x="32" y="1060">NEGATIVE_RESULT | primary area 0.394</text>
+<rect x="32" y="1072" width="320" height="180" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="38.4" y="1077.4" width="307.2" height="18.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<text class="label" x="41.4" y="1088.4">title:title</text>
+<rect x="86.4" y="1104.4" width="217.6" height="104.4" fill="none" stroke="#0f766e" stroke-width="3"/>
+<text class="label" x="89.4" y="1115.4">primary_scientific_object:p_value_distribution</text>
+<rect x="70.4" y="1208.8" width="240.0" height="21.6" fill="none" stroke="#b45309" stroke-width="1.5"/>
+<text class="label" x="73.4" y="1219.8">annotation:interpretive_boundary</text>
+<text class="small" x="32" y="1270">title-to-distribution-evidence-to-interpretive-boundary</text>
+</svg>

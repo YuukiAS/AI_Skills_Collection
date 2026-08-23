@@ -1,0 +1,442 @@
+{
+  "schema": "RESEARCH_SLIDE_COMPOSITION_INDEX_V1",
+  "schema_path": "skills/tools/documents-media/presentations/shared/references/research_slide_composition.schema.json",
+  "generated_from": "019_research_presentation_exemplar_composition_representation",
+  "records": [
+    {
+      "reference_id": "RRL-014",
+      "source_id": "SRC-005",
+      "actual_page_number": 18,
+      "page_function": "ESTIMATOR",
+      "scientific_object": "inter-annotator agreement formula with masks",
+      "evidence_type": "metric definition",
+      "rendered_page_sha256": "bc7a72ab5809fe7e8a3f7d950a15607168e10c4fda573591e6d8250217ba9b68",
+      "inspection_basis": "rendered_page_annotation",
+      "layout_family": "split-visual-explanation",
+      "reading_flow": "title-to-left-formula-then-right-mask-examples",
+      "regions": [
+        { "region_id": "title", "role": "title", "bbox": { "x": 0.05, "y": 0.06, "w": 0.60, "h": 0.08 }, "hierarchy_rank": 1, "alignment_group": "top-left", "content_mode": "text" },
+        { "region_id": "primary_metric_definition", "role": "primary_scientific_object", "bbox": { "x": 0.06, "y": 0.15, "w": 0.82, "h": 0.48 }, "hierarchy_rank": 2, "alignment_group": "metric-examples", "content_mode": "mixed" },
+        { "region_id": "formula_text", "role": "equation", "bbox": { "x": 0.07, "y": 0.18, "w": 0.38, "h": 0.15 }, "hierarchy_rank": 3, "alignment_group": "metric-examples", "content_mode": "equation" },
+        { "region_id": "mask_examples", "role": "secondary_scientific_object", "bbox": { "x": 0.58, "y": 0.13, "w": 0.34, "h": 0.48 }, "hierarchy_rank": 3, "alignment_group": "metric-examples", "content_mode": "medical_image" }
+      ],
+      "primary_scientific_object_region_id": "primary_metric_definition",
+      "primary_object_area_ratio": 0.3936,
+      "alignment_groups": [
+        { "alignment_group_id": "metric-examples", "region_ids": ["primary_metric_definition", "formula_text", "mask_examples"], "relationship": "formula and masks share one metric-definition band" }
+      ],
+      "visual_hierarchy": [
+        { "rank": 1, "region_id": "title", "reason": "metric being defined is announced before examples" },
+        { "rank": 2, "region_id": "primary_metric_definition", "reason": "formula and masks jointly define the estimator" },
+        { "rank": 3, "region_id": "mask_examples", "reason": "small images ground the variables without becoming the main result" }
+      ],
+      "color_role_summary": "white background with black equation and sparse clinical-image color; no decorative accent controls attention",
+      "composition_inspection_means": "cached source PDF rendered with pdftoppm at 140 dpi; page image manually inspected during 019; source pixels are not committed",
+      "portable_composition_lessons": [
+        "Pair a compact estimator formula with concrete variable examples instead of explanatory cards.",
+        "Keep examples near the equation so viewers can map symbols to scientific objects."
+      ],
+      "reuse_boundary": "Use only the equation-example organization; do not copy lesion images, source styling, or screenshot pixels."
+    },
+    {
+      "reference_id": "RRL-028",
+      "source_id": "SRC-054",
+      "actual_page_number": 14,
+      "page_function": "ESTIMATOR",
+      "scientific_object": "poststratification identity",
+      "evidence_type": "estimator formula",
+      "rendered_page_sha256": "2870d8b698a549f76ae398de63b1340ce2ca66e3433e4ab281321c148f5b5dd4",
+      "inspection_basis": "rendered_page_annotation",
+      "layout_family": "equation-dominant",
+      "reading_flow": "title-to-centered-equation",
+      "regions": [
+        { "region_id": "title", "role": "title", "bbox": { "x": 0.02, "y": 0.03, "w": 0.96, "h": 0.10 }, "hierarchy_rank": 1, "alignment_group": "top-band", "content_mode": "text" },
+        { "region_id": "poststratification_formula", "role": "primary_scientific_object", "bbox": { "x": 0.20, "y": 0.28, "w": 0.46, "h": 0.27 }, "hierarchy_rank": 2, "alignment_group": "center-equation", "content_mode": "equation" }
+      ],
+      "primary_scientific_object_region_id": "poststratification_formula",
+      "primary_object_area_ratio": 0.1242,
+      "alignment_groups": [
+        { "alignment_group_id": "center-equation", "region_ids": ["poststratification_formula"], "relationship": "formula is centered with broad surrounding whitespace" }
+      ],
+      "visual_hierarchy": [
+        { "rank": 1, "region_id": "title", "reason": "short title names the identity" },
+        { "rank": 2, "region_id": "poststratification_formula", "reason": "large isolated formula is the scientific object" }
+      ],
+      "color_role_summary": "single blue title band plus monochrome math; whitespace carries emphasis",
+      "composition_inspection_means": "cached source PDF rendered with pdftoppm at 140 dpi; page image manually inspected during 019; source pixels are not committed",
+      "portable_composition_lessons": [
+        "For an identity slide, let the formula stand alone at readable scale.",
+        "Avoid competing cards or diagrams when the estimator itself is the message."
+      ],
+      "reuse_boundary": "Use only the equation-first composition; do not copy title-band styling or source theme."
+    },
+    {
+      "reference_id": "RRL-034",
+      "source_id": "SRC-055",
+      "actual_page_number": 24,
+      "page_function": "STATISTICAL_MODEL",
+      "scientific_object": "Bayesian toy model construction",
+      "evidence_type": "model reveal",
+      "rendered_page_sha256": "bbe4f5e059bae096312395f66f36a848e7f2a1ceeb3ddf40c2f3f86aa1ba6948",
+      "inspection_basis": "rendered_page_annotation",
+      "layout_family": "split-visual-explanation",
+      "reading_flow": "title-to-model-bullets-to-concrete-example",
+      "regions": [
+        { "region_id": "title", "role": "title", "bbox": { "x": 0.02, "y": 0.03, "w": 0.96, "h": 0.10 }, "hierarchy_rank": 1, "alignment_group": "top-band", "content_mode": "text" },
+        { "region_id": "model_specification", "role": "primary_scientific_object", "bbox": { "x": 0.40, "y": 0.26, "w": 0.25, "h": 0.24 }, "hierarchy_rank": 2, "alignment_group": "split-center", "content_mode": "mixed" },
+        { "region_id": "concrete_example", "role": "secondary_scientific_object", "bbox": { "x": 0.70, "y": 0.18, "w": 0.22, "h": 0.47 }, "hierarchy_rank": 3, "alignment_group": "split-center", "content_mode": "figure" }
+      ],
+      "primary_scientific_object_region_id": "model_specification",
+      "primary_object_area_ratio": 0.0600,
+      "alignment_groups": [
+        { "alignment_group_id": "split-center", "region_ids": ["model_specification", "concrete_example"], "relationship": "model assumptions sit immediately beside the toy example" }
+      ],
+      "visual_hierarchy": [
+        { "rank": 1, "region_id": "title", "reason": "informal title frames the reveal" },
+        { "rank": 2, "region_id": "model_specification", "reason": "model bullets and symbols define the statistical object" },
+        { "rank": 3, "region_id": "concrete_example", "reason": "example image grounds the abstraction" }
+      ],
+      "color_role_summary": "one title accent with mostly white stage; illustrative object carries secondary color",
+      "composition_inspection_means": "cached source PDF rendered with pdftoppm at 140 dpi; page image manually inspected during 019; source pixels are not committed",
+      "portable_composition_lessons": [
+        "Introduce a model with the minimum assumptions and a nearby concrete object.",
+        "Let the model text stay sparse when an example carries intuition."
+      ],
+      "reuse_boundary": "Use only the model-plus-example organization; do not copy the illustrative character or source theme."
+    },
+    {
+      "reference_id": "RRL-023",
+      "source_id": "SRC-013",
+      "actual_page_number": 8,
+      "page_function": "RESULT_FIGURE",
+      "scientific_object": "team-quality estimate forest plot",
+      "evidence_type": "posterior interval plot",
+      "rendered_page_sha256": "bfee697e0c591051c9b9e503967e896dea75403da5b16ed1c9fcc725a19bd7a4",
+      "inspection_basis": "rendered_page_annotation",
+      "layout_family": "single-visual-dominant",
+      "reading_flow": "title-to-large-forest-plot",
+      "regions": [
+        { "region_id": "title", "role": "title", "bbox": { "x": 0.02, "y": 0.03, "w": 0.96, "h": 0.10 }, "hierarchy_rank": 1, "alignment_group": "top-band", "content_mode": "text" },
+        { "region_id": "forest_plot", "role": "primary_scientific_object", "bbox": { "x": 0.21, "y": 0.20, "w": 0.62, "h": 0.67 }, "hierarchy_rank": 2, "alignment_group": "center-plot", "content_mode": "figure" }
+      ],
+      "primary_scientific_object_region_id": "forest_plot",
+      "primary_object_area_ratio": 0.4154,
+      "alignment_groups": [
+        { "alignment_group_id": "center-plot", "region_ids": ["forest_plot"], "relationship": "plot is centered and vertically dominant under the title" }
+      ],
+      "visual_hierarchy": [
+        { "rank": 1, "region_id": "title", "reason": "imperative title sets the graph-reading task" },
+        { "rank": 2, "region_id": "forest_plot", "reason": "interval plot occupies most of the page and carries the result" }
+      ],
+      "color_role_summary": "one title accent, monochrome plot, and a faint reference line",
+      "composition_inspection_means": "cached source PDF rendered with pdftoppm at 140 dpi; page image manually inspected during 019; source pixels are not committed",
+      "portable_composition_lessons": [
+        "Give a statistical result plot enough vertical space for labels and intervals.",
+        "Use minimal surrounding text when the plot is self-explanatory."
+      ],
+      "reuse_boundary": "Use only the single dominant forest-plot structure; do not copy data values or source styling."
+    },
+    {
+      "reference_id": "RRL-030",
+      "source_id": "SRC-054",
+      "actual_page_number": 21,
+      "page_function": "CONFIDENCE_INTERVAL",
+      "scientific_object": "XBox estimates adjusting for demographics",
+      "evidence_type": "time-series interval",
+      "rendered_page_sha256": "ffda9252e683ce92c36237805399cff57e849851a431b064ada03187e666d1ad",
+      "inspection_basis": "rendered_page_annotation",
+      "layout_family": "result-with-callout",
+      "reading_flow": "claim-title-to-interval-curve-to-reference-lines",
+      "regions": [
+        { "region_id": "title", "role": "title", "bbox": { "x": 0.08, "y": 0.06, "w": 0.70, "h": 0.08 }, "hierarchy_rank": 1, "alignment_group": "top-left", "content_mode": "text" },
+        { "region_id": "interval_curve", "role": "primary_scientific_object", "bbox": { "x": 0.14, "y": 0.16, "w": 0.78, "h": 0.70 }, "hierarchy_rank": 2, "alignment_group": "plot-frame", "content_mode": "figure" },
+        { "region_id": "reference_lines", "role": "annotation", "bbox": { "x": 0.34, "y": 0.16, "w": 0.36, "h": 0.70 }, "hierarchy_rank": 3, "alignment_group": "plot-frame", "content_mode": "figure" }
+      ],
+      "primary_scientific_object_region_id": "interval_curve",
+      "primary_object_area_ratio": 0.5460,
+      "alignment_groups": [
+        { "alignment_group_id": "plot-frame", "region_ids": ["interval_curve", "reference_lines"], "relationship": "reference lines are anchored inside the plot frame, not detached in a card" }
+      ],
+      "visual_hierarchy": [
+        { "rank": 1, "region_id": "title", "reason": "title states the adjusted estimate context" },
+        { "rank": 2, "region_id": "interval_curve", "reason": "uncertainty band and trajectory are the evidence" },
+        { "rank": 3, "region_id": "reference_lines", "reason": "lines guide temporal reading without becoming separate objects" }
+      ],
+      "color_role_summary": "monochrome line plot with gray uncertainty band and dotted reference markers",
+      "composition_inspection_means": "cached source PDF rendered with pdftoppm at 140 dpi; page image manually inspected during 019; source pixels are not committed",
+      "portable_composition_lessons": [
+        "Put uncertainty directly around the curve rather than in explanatory side boxes.",
+        "Keep callouts inside the figure coordinate system when they interpret a result."
+      ],
+      "reuse_boundary": "Use only the result-with-reference-lines organization; do not copy source data, theme, or plot styling."
+    },
+    {
+      "reference_id": "RRL-039",
+      "source_id": "SRC-057",
+      "actual_page_number": 14,
+      "page_function": "REAL_DATA_APPLICATION",
+      "scientific_object": "data and regression figure",
+      "evidence_type": "clinical regression example",
+      "rendered_page_sha256": "612ba02ff02b65f89cb03724497a9ae846c4bfb6a428e08754d30084c1acf0f2",
+      "inspection_basis": "rendered_page_annotation",
+      "layout_family": "result-with-callout",
+      "reading_flow": "title-to-regression-figure-to-inline-effect-labels",
+      "regions": [
+        { "region_id": "title", "role": "title", "bbox": { "x": 0.02, "y": 0.03, "w": 0.96, "h": 0.10 }, "hierarchy_rank": 1, "alignment_group": "top-band", "content_mode": "text" },
+        { "region_id": "regression_plot", "role": "primary_scientific_object", "bbox": { "x": 0.15, "y": 0.14, "w": 0.78, "h": 0.70 }, "hierarchy_rank": 2, "alignment_group": "plot-frame", "content_mode": "figure" },
+        { "region_id": "effect_labels", "role": "annotation", "bbox": { "x": 0.17, "y": 0.30, "w": 0.58, "h": 0.35 }, "hierarchy_rank": 3, "alignment_group": "plot-frame", "content_mode": "text" }
+      ],
+      "primary_scientific_object_region_id": "regression_plot",
+      "primary_object_area_ratio": 0.5460,
+      "alignment_groups": [
+        { "alignment_group_id": "plot-frame", "region_ids": ["regression_plot", "effect_labels"], "relationship": "effect labels sit inside the plotted relationship" }
+      ],
+      "visual_hierarchy": [
+        { "rank": 1, "region_id": "title", "reason": "title names the data and regression task" },
+        { "rank": 2, "region_id": "regression_plot", "reason": "figure dominates the page" },
+        { "rank": 3, "region_id": "effect_labels", "reason": "short labels interpret slopes at relevant positions" }
+      ],
+      "color_role_summary": "muted plot background with one fitted-line accent and dashed comparator lines",
+      "composition_inspection_means": "cached source PDF rendered with pdftoppm at 140 dpi; page image manually inspected during 019; source pixels are not committed",
+      "portable_composition_lessons": [
+        "When a clinical regression figure is the evidence, annotations belong on the figure.",
+        "Use only a few lines/colors with explicit roles."
+      ],
+      "reuse_boundary": "Use only the annotated regression-figure organization; do not copy source data or visual theme."
+    },
+    {
+      "reference_id": "RRL-019",
+      "source_id": "SRC-006",
+      "actual_page_number": 3,
+      "page_function": "EXPERIMENT_DESIGN",
+      "scientific_object": "automatic lesion segmentation applications",
+      "evidence_type": "task overview",
+      "rendered_page_sha256": "3403aba3c209bce280a8e15456feea972da75ed3200d35e67131024eb1dfea93",
+      "inspection_basis": "rendered_page_annotation",
+      "layout_family": "horizontal-process-flow",
+      "reading_flow": "title-to-short-context-to-application-flow",
+      "regions": [
+        { "region_id": "title", "role": "title", "bbox": { "x": 0.06, "y": 0.07, "w": 0.48, "h": 0.08 }, "hierarchy_rank": 1, "alignment_group": "left-column", "content_mode": "text" },
+        { "region_id": "context_text", "role": "body_text", "bbox": { "x": 0.06, "y": 0.16, "w": 0.63, "h": 0.15 }, "hierarchy_rank": 3, "alignment_group": "left-column", "content_mode": "text" },
+        { "region_id": "application_flow", "role": "primary_scientific_object", "bbox": { "x": 0.06, "y": 0.35, "w": 0.84, "h": 0.47 }, "hierarchy_rank": 2, "alignment_group": "bottom-flow", "content_mode": "diagram" }
+      ],
+      "primary_scientific_object_region_id": "application_flow",
+      "primary_object_area_ratio": 0.3948,
+      "alignment_groups": [
+        { "alignment_group_id": "left-column", "region_ids": ["title", "context_text"], "relationship": "context stays above the diagram and does not compete with it" },
+        { "alignment_group_id": "bottom-flow", "region_ids": ["application_flow"], "relationship": "applications are organized in one connected lower-band flow" }
+      ],
+      "visual_hierarchy": [
+        { "rank": 1, "region_id": "title", "reason": "task context is introduced first" },
+        { "rank": 2, "region_id": "application_flow", "reason": "flow diagram carries the experiment/application structure" },
+        { "rank": 3, "region_id": "context_text", "reason": "short text frames why segmentation matters" }
+      ],
+      "color_role_summary": "white stage with small medical thumbnails and one connector accent; background watermark is non-essential",
+      "composition_inspection_means": "cached source PDF rendered with pdftoppm at 140 dpi; page image manually inspected during 019; source pixels are not committed",
+      "portable_composition_lessons": [
+        "Use a single connected flow for task applications instead of separate cards.",
+        "Keep explanatory text short when thumbnails and connectors encode the task."
+      ],
+      "reuse_boundary": "Use only the flow organization; do not copy medical thumbnails, logos, watermark, or source connector styling."
+    },
+    {
+      "reference_id": "RRL-002",
+      "source_id": "SRC-001",
+      "actual_page_number": 8,
+      "page_function": "METHOD_DIAGRAM",
+      "scientific_object": "graph neural network concept diagram",
+      "evidence_type": "method mechanism",
+      "rendered_page_sha256": "d11b6d009e93a8058f5a8015dd12475cd7714f38893eafc41b338fb3f21bb860",
+      "inspection_basis": "rendered_page_annotation",
+      "layout_family": "horizontal-process-flow",
+      "reading_flow": "title-to-explanation-to-left-right-mechanism",
+      "regions": [
+        { "region_id": "title", "role": "title", "bbox": { "x": 0.06, "y": 0.09, "w": 0.55, "h": 0.08 }, "hierarchy_rank": 1, "alignment_group": "left-column", "content_mode": "text" },
+        { "region_id": "mechanism_explanation", "role": "body_text", "bbox": { "x": 0.06, "y": 0.19, "w": 0.70, "h": 0.13 }, "hierarchy_rank": 3, "alignment_group": "left-column", "content_mode": "text" },
+        { "region_id": "graph_mechanism", "role": "primary_scientific_object", "bbox": { "x": 0.05, "y": 0.48, "w": 0.85, "h": 0.24 }, "hierarchy_rank": 2, "alignment_group": "mechanism-row", "content_mode": "diagram" },
+        { "region_id": "committee_note", "role": "annotation", "bbox": { "x": 0.19, "y": 0.69, "w": 0.38, "h": 0.17 }, "hierarchy_rank": 4, "alignment_group": "mechanism-row", "content_mode": "text" }
+      ],
+      "primary_scientific_object_region_id": "graph_mechanism",
+      "primary_object_area_ratio": 0.2040,
+      "alignment_groups": [
+        { "alignment_group_id": "mechanism-row", "region_ids": ["graph_mechanism", "committee_note"], "relationship": "annotation sits below the mechanism row without becoming a separate slide section" }
+      ],
+      "visual_hierarchy": [
+        { "rank": 1, "region_id": "title", "reason": "method name anchors the slide" },
+        { "rank": 2, "region_id": "graph_mechanism", "reason": "left-to-right transformation is the method object" },
+        { "rank": 3, "region_id": "mechanism_explanation", "reason": "short prose prepares the diagram" }
+      ],
+      "color_role_summary": "mostly neutral diagram with one arrow accent and one reviewer-note highlight",
+      "composition_inspection_means": "cached source PDF rendered with pdftoppm at 140 dpi; page image manually inspected during 019; source pixels are not committed",
+      "portable_composition_lessons": [
+        "For a method diagram, let the connector encode transformation rather than decorate text.",
+        "A teaching annotation can sit near the mechanism, but the mechanism remains primary."
+      ],
+      "reuse_boundary": "Use only the left-to-right mechanism organization; do not copy note wording, icons, logos, or source styling."
+    },
+    {
+      "reference_id": "RRL-022",
+      "source_id": "SRC-006",
+      "actual_page_number": 21,
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "scientific_object": "PET input, GT, predictions, reconstruction panels",
+      "evidence_type": "image comparison",
+      "rendered_page_sha256": "3859a1913a078e3e60ad8aa166a1ab262af56a93d6ecf57dbf1f269b84b7bef4",
+      "inspection_basis": "rendered_page_annotation",
+      "layout_family": "aligned-multi-panel",
+      "reading_flow": "panel-grid-by-row-and-column",
+      "regions": [
+        { "region_id": "image_grid", "role": "primary_scientific_object", "bbox": { "x": 0.10, "y": 0.08, "w": 0.78, "h": 0.76 }, "hierarchy_rank": 1, "alignment_group": "aligned-grid", "content_mode": "medical_image" },
+        { "region_id": "column_labels", "role": "legend", "bbox": { "x": 0.14, "y": 0.82, "w": 0.70, "h": 0.05 }, "hierarchy_rank": 2, "alignment_group": "aligned-grid", "content_mode": "legend" }
+      ],
+      "primary_scientific_object_region_id": "image_grid",
+      "primary_object_area_ratio": 0.5928,
+      "alignment_groups": [
+        { "alignment_group_id": "aligned-grid", "region_ids": ["image_grid", "column_labels"], "relationship": "same case/method semantics are carried by the grid and labels" }
+      ],
+      "visual_hierarchy": [
+        { "rank": 1, "region_id": "image_grid", "reason": "medical image comparison is the full-page object" },
+        { "rank": 2, "region_id": "column_labels", "reason": "labels are needed to read methods but stay small" }
+      ],
+      "color_role_summary": "medical colormap and mask colors are evidence encodings; other styling is quiet",
+      "composition_inspection_means": "cached source PDF rendered with pdftoppm at 140 dpi; page image manually inspected during 019; source pixels are not committed",
+      "portable_composition_lessons": [
+        "Use a large aligned grid when the same case is compared across methods.",
+        "Preserve stable row and column semantics so viewers compare evidence, not layout."
+      ],
+      "reuse_boundary": "Use only the aligned-panel organization; do not copy patient imagery, masks, logos, or source pixels."
+    },
+    {
+      "reference_id": "RRL-013",
+      "source_id": "SRC-005",
+      "actual_page_number": 14,
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "scientific_object": "representative skin lesion samples",
+      "evidence_type": "image evidence",
+      "rendered_page_sha256": "e89c5cc1368990d4dda3fc7e74ed5c08928f34467b0a43e4856a34f224b26271",
+      "inspection_basis": "rendered_page_annotation",
+      "layout_family": "aligned-multi-panel",
+      "reading_flow": "title-to-category-columns-to-sample-grid",
+      "regions": [
+        { "region_id": "title", "role": "title", "bbox": { "x": 0.06, "y": 0.09, "w": 0.55, "h": 0.08 }, "hierarchy_rank": 1, "alignment_group": "top-left", "content_mode": "text" },
+        { "region_id": "sample_grid", "role": "primary_scientific_object", "bbox": { "x": 0.03, "y": 0.25, "w": 0.94, "h": 0.25 }, "hierarchy_rank": 2, "alignment_group": "sample-columns", "content_mode": "medical_image" },
+        { "region_id": "column_labels", "role": "legend", "bbox": { "x": 0.08, "y": 0.19, "w": 0.78, "h": 0.05 }, "hierarchy_rank": 3, "alignment_group": "sample-columns", "content_mode": "legend" }
+      ],
+      "primary_scientific_object_region_id": "sample_grid",
+      "primary_object_area_ratio": 0.2350,
+      "alignment_groups": [
+        { "alignment_group_id": "sample-columns", "region_ids": ["sample_grid", "column_labels"], "relationship": "sample categories are aligned by columns above the image grid" }
+      ],
+      "visual_hierarchy": [
+        { "rank": 1, "region_id": "title", "reason": "page announces representative samples" },
+        { "rank": 2, "region_id": "sample_grid", "reason": "image examples carry the medical evidence" },
+        { "rank": 3, "region_id": "column_labels", "reason": "labels organize annotator-count categories" }
+      ],
+      "color_role_summary": "clinical image color dominates; outlines encode annotation differences; background is neutral",
+      "composition_inspection_means": "cached source PDF rendered with pdftoppm at 140 dpi; page image manually inspected during 019; source pixels are not committed",
+      "portable_composition_lessons": [
+        "Representative image slides need stable category columns and enough pixel area for inspection.",
+        "Keep labels close to image groups; avoid separate explanatory cards."
+      ],
+      "reuse_boundary": "Use only the representative-sample grid organization; do not copy clinical images, annotations, or source pixels."
+    },
+    {
+      "reference_id": "RRL-025",
+      "source_id": "SRC-013",
+      "actual_page_number": 11,
+      "page_function": "NEGATIVE_RESULT",
+      "scientific_object": "after finding and fixing a bug comparison",
+      "evidence_type": "bug-fix model check",
+      "rendered_page_sha256": "acd4ebbe63dc1d671fe3527284944639588080c1f8ff0cf1335b526c6a878fea",
+      "inspection_basis": "rendered_page_annotation",
+      "layout_family": "model-check-or-negative",
+      "reading_flow": "title-to-corrected-interval-plot",
+      "regions": [
+        { "region_id": "title", "role": "title", "bbox": { "x": 0.02, "y": 0.03, "w": 0.96, "h": 0.10 }, "hierarchy_rank": 1, "alignment_group": "top-band", "content_mode": "text" },
+        { "region_id": "corrected_interval_plot", "role": "primary_scientific_object", "bbox": { "x": 0.19, "y": 0.23, "w": 0.65, "h": 0.69 }, "hierarchy_rank": 2, "alignment_group": "center-plot", "content_mode": "figure" }
+      ],
+      "primary_scientific_object_region_id": "corrected_interval_plot",
+      "primary_object_area_ratio": 0.4485,
+      "alignment_groups": [
+        { "alignment_group_id": "center-plot", "region_ids": ["corrected_interval_plot"], "relationship": "negative/model-check evidence is centered as the main object" }
+      ],
+      "visual_hierarchy": [
+        { "rank": 1, "region_id": "title", "reason": "title makes the bug-fix status explicit" },
+        { "rank": 2, "region_id": "corrected_interval_plot", "reason": "corrected intervals provide the model-check evidence" }
+      ],
+      "color_role_summary": "monochrome interval plot with one title accent; no positive-result decoration",
+      "composition_inspection_means": "cached source PDF rendered with pdftoppm at 140 dpi; page image manually inspected during 019; source pixels are not committed",
+      "portable_composition_lessons": [
+        "When presenting a bug-fix or negative check, keep the corrected evidence central.",
+        "Let the title mark the epistemic status instead of using workflow labels."
+      ],
+      "reuse_boundary": "Use only the corrected-evidence composition; do not copy data values, labels, or source styling."
+    },
+    {
+      "reference_id": "RRL-031",
+      "source_id": "SRC-054",
+      "actual_page_number": 30,
+      "page_function": "REFERENCE_COVERAGE_GAP",
+      "scientific_object": "open problems in MRP",
+      "evidence_type": "coverage gap",
+      "rendered_page_sha256": "b4b0240ad15e6eba92bbc41880532c5057fd4ecfcd24714b79004660877c1a27",
+      "inspection_basis": "rendered_page_annotation",
+      "layout_family": "decision-or-next-step",
+      "reading_flow": "title-to-short-open-problem-list",
+      "regions": [
+        { "region_id": "title", "role": "title", "bbox": { "x": 0.02, "y": 0.03, "w": 0.96, "h": 0.10 }, "hierarchy_rank": 1, "alignment_group": "top-band", "content_mode": "text" },
+        { "region_id": "open_problem_list", "role": "decision_or_next_step", "bbox": { "x": 0.20, "y": 0.32, "w": 0.55, "h": 0.32 }, "hierarchy_rank": 2, "alignment_group": "decision-list", "content_mode": "text" }
+      ],
+      "primary_scientific_object_region_id": "open_problem_list",
+      "primary_object_area_ratio": 0.1760,
+      "alignment_groups": [
+        { "alignment_group_id": "decision-list", "region_ids": ["open_problem_list"], "relationship": "open problems are grouped as one decision/next-step object" }
+      ],
+      "visual_hierarchy": [
+        { "rank": 1, "region_id": "title", "reason": "title states the gap category" },
+        { "rank": 2, "region_id": "open_problem_list", "reason": "bounded list is the next research decision object" }
+      ],
+      "color_role_summary": "single title accent and neutral body text; bullets are structural rather than decorative",
+      "composition_inspection_means": "cached source PDF rendered with pdftoppm at 140 dpi; page image manually inspected during 019; source pixels are not committed",
+      "portable_composition_lessons": [
+        "A decision or open-problems slide can be sparse if the list is bounded and consequential.",
+        "Keep proposed work distinct from completed evidence."
+      ],
+      "reuse_boundary": "Use only the bounded open-problems organization; do not copy source wording or theme."
+    },
+    {
+      "reference_id": "RRL-041",
+      "source_id": "SRC-057",
+      "actual_page_number": 28,
+      "page_function": "NEGATIVE_RESULT",
+      "scientific_object": "histogram of p-values for fertility relationship",
+      "evidence_type": "p-value distribution",
+      "rendered_page_sha256": "37d4b73fe2ded49d3e4f7da1c08ef1b26b9b6a5c7f5e983f7296e2a52bd6026e",
+      "inspection_basis": "rendered_page_annotation",
+      "layout_family": "model-check-or-negative",
+      "reading_flow": "title-to-distribution-evidence-to-interpretive-boundary",
+      "regions": [
+        { "region_id": "title", "role": "title", "bbox": { "x": 0.02, "y": 0.03, "w": 0.96, "h": 0.10 }, "hierarchy_rank": 1, "alignment_group": "top-band", "content_mode": "text" },
+        { "region_id": "p_value_distribution", "role": "primary_scientific_object", "bbox": { "x": 0.17, "y": 0.18, "w": 0.68, "h": 0.58 }, "hierarchy_rank": 2, "alignment_group": "center-plot", "content_mode": "figure" },
+        { "region_id": "interpretive_boundary", "role": "annotation", "bbox": { "x": 0.12, "y": 0.76, "w": 0.75, "h": 0.12 }, "hierarchy_rank": 3, "alignment_group": "center-plot", "content_mode": "text" }
+      ],
+      "primary_scientific_object_region_id": "p_value_distribution",
+      "primary_object_area_ratio": 0.3944,
+      "alignment_groups": [
+        { "alignment_group_id": "center-plot", "region_ids": ["p_value_distribution", "interpretive_boundary"], "relationship": "diagnostic distribution and interpretation are vertically linked" }
+      ],
+      "visual_hierarchy": [
+        { "rank": 1, "region_id": "title", "reason": "title frames the possible relationships" },
+        { "rank": 2, "region_id": "p_value_distribution", "reason": "distribution shape is the diagnostic evidence" },
+        { "rank": 3, "region_id": "interpretive_boundary", "reason": "short interpretation bounds the negative result" }
+      ],
+      "color_role_summary": "single accent title, one diagnostic plot, and restrained annotation",
+      "composition_inspection_means": "cached source PDF rendered with pdftoppm at 140 dpi; page image manually inspected during 019; source pixels are not committed",
+      "portable_composition_lessons": [
+        "Make the diagnostic distribution the visual center of a negative-result page.",
+        "Place the interpretation adjacent to the diagnostic, not in a detached status card."
+      ],
+      "reuse_boundary": "Use only the diagnostic-plus-boundary organization; do not copy source data, wording, or styling."
+    }
+  ]
+}

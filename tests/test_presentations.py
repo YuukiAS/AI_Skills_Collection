@@ -249,6 +249,64 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertGreaterEqual(len(stats_sources), 30)
         self.assertGreaterEqual(len([source for source in stats_sources if source["verification_status"] == "candidate_backlog"]), 10)
 
+    def test_research_slide_composition_representation(self) -> None:
+        references = SHARED / "references"
+        schema = references / "research_slide_composition.schema.json"
+        families = references / "RESEARCH_COMPOSITION_FAMILIES.md"
+        composition_index = references / "research_slide_composition_index.json"
+        debug_montage = REPO_ROOT / "docs/audits/research_presentation_composition_debug_montage.svg"
+        for path in [schema, families, composition_index, debug_montage]:
+            self.assertTrue(path.exists(), path)
+
+        validator = SHARED / "scripts/validate_reference_compositions.py"
+        result = subprocess.run([sys.executable, str(validator)], check=False, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertRegex(result.stdout, r"validated 1[2-9] research slide composition records")
+
+        rows = {
+            row["reference_id"]: row
+            for row in csv.DictReader((references / "research_slide_reference_index.csv").read_text(encoding="utf-8").splitlines())
+        }
+        index = json.loads(composition_index.read_text(encoding="utf-8"))
+        records = index["records"]
+        self.assertGreaterEqual(len(records), 12)
+        self.assertGreaterEqual(len({record["source_id"] for record in records}), 4)
+        self.assertGreaterEqual(len({record["page_function"] for record in records}), 6)
+        self.assertTrue(any(record["page_function"] in {"STATISTICAL_MODEL", "ESTIMATOR", "THEOREM"} for record in records))
+        self.assertGreaterEqual(len([record for record in records if record["page_function"] in {"RESULT_FIGURE", "CONFIDENCE_INTERVAL", "REAL_DATA_APPLICATION"}]), 2)
+        self.assertGreaterEqual(len([record for record in records if record["page_function"] == "MEDICAL_IMAGE_COMPARISON"]), 2)
+        self.assertTrue(any(record["layout_family"] == "model-check-or-negative" for record in records))
+        self.assertTrue(any(any(region["role"] == "decision_or_next_step" for region in record["regions"]) for record in records))
+        for record in records:
+            row = rows[record["reference_id"]]
+            self.assertEqual(row["verification_status"], "inspected")
+            self.assertEqual(record["source_id"], row["source_id"])
+            self.assertEqual(str(record["actual_page_number"]), row["actual_page_number"])
+            self.assertEqual(record["page_function"], row["page_function"])
+            self.assertEqual(record["rendered_page_sha256"], row["rendered_page_sha256"])
+            primary = next(region for region in record["regions"] if region["region_id"] == record["primary_scientific_object_region_id"])
+            self.assertAlmostEqual(primary["bbox"]["w"] * primary["bbox"]["h"], record["primary_object_area_ratio"], places=3)
+
+        selector = SHARED / "scripts/select_reference_compositions.py"
+        queries = [
+            ["--page-function", "RESULT_FIGURE", "--limit", "2"],
+            ["--page-function", "ESTIMATOR", "--scientific-object", "equation formula", "--limit", "2"],
+            ["--page-function", "MEDICAL_IMAGE_COMPARISON", "--scientific-object", "aligned panel medical image", "--limit", "2"],
+        ]
+        for query in queries:
+            selected = subprocess.run([sys.executable, str(selector), *query], check=False, capture_output=True, text=True)
+            self.assertEqual(selected.returncode, 0, selected.stderr)
+            payload = json.loads(selected.stdout)
+            self.assertTrue(payload["matches"], query)
+            self.assertIn("layout_family", payload["matches"][0])
+            self.assertIn("primary_bbox", payload["matches"][0])
+
+        montage_text = debug_montage.read_text(encoding="utf-8")
+        self.assertIn("<svg", montage_text)
+        self.assertIn("primary_scientific_object", montage_text)
+        for forbidden in ["<image", "data:image", "base64,", ".png", ".jpg", ".jpeg", ".pdf", "/home/", ".cache/"]:
+            self.assertNotIn(forbidden, montage_text)
+
     def test_research_presentation_todo_consolidation_and_promotions(self) -> None:
         todo = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/TODO.md").read_text(encoding="utf-8")
         research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")

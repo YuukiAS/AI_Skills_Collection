@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Research Slide Composition Index",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "RESEARCH_SLIDE_COMPOSITION_INDEX_V1" },
+    "schema_path": { "type": "string" },
+    "generated_from": { "type": "string" },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/composition_record" }
+    }
+  },
+  "$defs": {
+    "composition_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference_id",
+        "source_id",
+        "actual_page_number",
+        "page_function",
+        "scientific_object",
+        "evidence_type",
+        "rendered_page_sha256",
+        "inspection_basis",
+        "layout_family",
+        "reading_flow",
+        "regions",
+        "primary_scientific_object_region_id",
+        "primary_object_area_ratio",
+        "alignment_groups",
+        "visual_hierarchy",
+        "color_role_summary",
+        "composition_inspection_means",
+        "portable_composition_lessons",
+        "reuse_boundary"
+      ],
+      "properties": {
+        "reference_id": { "type": "string", "pattern": "^RRL-[0-9]{3}$" },
+        "source_id": { "type": "string", "pattern": "^SRC-[0-9]{3}$" },
+        "actual_page_number": { "type": "integer", "minimum": 1 },
+        "page_function": { "type": "string", "minLength": 1 },
+        "scientific_object": { "type": "string", "minLength": 1 },
+        "evidence_type": { "type": "string", "minLength": 1 },
+        "rendered_page_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "inspection_basis": { "enum": ["pptx_geometry", "rendered_page_annotation"] },
+        "layout_family": { "type": "string", "minLength": 1 },
+        "reading_flow": { "type": "string", "minLength": 1 },
+        "regions": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/region" }
+        },
+        "primary_scientific_object_region_id": { "type": "string", "minLength": 1 },
+        "primary_object_area_ratio": { "type": "number", "minimum": 0, "maximum": 1 },
+        "alignment_groups": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/alignment_group" }
+        },
+        "visual_hierarchy": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/hierarchy_item" }
+        },
+        "color_role_summary": { "type": "string", "minLength": 1 },
+        "composition_inspection_means": { "type": "string", "minLength": 1 },
+        "portable_composition_lessons": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "reuse_boundary": { "type": "string", "minLength": 1 }
+      }
+    },
+    "region": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["region_id", "role", "bbox", "hierarchy_rank", "alignment_group", "content_mode"],
+      "properties": {
+        "region_id": { "type": "string", "minLength": 1 },
+        "role": {
+          "enum": [
+            "title",
+            "primary_scientific_object",
+            "secondary_scientific_object",
+            "equation",
+            "body_text",
+            "annotation",
+            "caption",
+            "legend",
+            "decision_or_next_step"
+          ]
+        },
+        "bbox": { "$ref": "#/$defs/bbox" },
+        "hierarchy_rank": { "type": "integer", "minimum": 1 },
+        "alignment_group": { "type": ["string", "null"] },
+        "content_mode": {
+          "enum": ["text", "figure", "equation", "medical_image", "diagram", "table", "mixed", "caption", "legend"]
+        }
+      }
+    },
+    "bbox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "w", "h"],
+      "properties": {
+        "x": { "type": "number", "minimum": 0, "maximum": 1 },
+        "y": { "type": "number", "minimum": 0, "maximum": 1 },
+        "w": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+        "h": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+      }
+    },
+    "alignment_group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["alignment_group_id", "region_ids", "relationship"],
+      "properties": {
+        "alignment_group_id": { "type": "string", "minLength": 1 },
+        "region_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "relationship": { "type": "string", "minLength": 1 }
+      }
+    },
+    "hierarchy_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rank", "region_id", "reason"],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1 },
+        "region_id": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
