@@ -290,7 +290,7 @@ composition representation 只允许保存：
 - 它现在还不能解决什么；
 - 为什么下一阶段可以基于它做 candidate search，而不能直接宣告 design quality 成熟。
 
-## Tests and regression
+## Acceptance and regression gates
 
 至少更新 Presentation tests，验证：
 
@@ -302,7 +302,7 @@ composition representation 只允许保存：
 6. debug montage 存在且不包含 source screenshot / embedded binary；
 7. source / generated plugin mirror 如果当前 packaging contract 要求同步，则保持一致。
 
-## Explicitly out of scope
+## Out of scope
 
 019 禁止：
 

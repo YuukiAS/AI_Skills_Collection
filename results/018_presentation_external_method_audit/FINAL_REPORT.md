@@ -61,3 +61,27 @@ Executor 本地记录的全库单元测试、skills validation、marketplace val
 ## 长期状态
 
 018 `PASS` 只关闭方法审计任务。新的 `REFERENCE_CALIBRATED_ONE_SHOT_QUALITY` round 仍远未完成，长期 `PROGRAM_MATURE=false`，当前也不允许声明 `ONE_SHOT_QUALITY_PASS`。
+
+## What this task solved
+
+018 closed the external-method audit by showing that the next required Presentation layer is a reference-derived composition representation, not more abstract visual rules.
+
+## What changed
+
+The audit report and structured matrix now record inspected external presentation mechanisms, public scientific presentation guidance, reuse boundaries, and the repaired full eight-principle review for `many-ppt-skills`.
+
+## New capabilities / behavior
+
+No active generator behavior changed. The new capability is planning evidence for the next bounded task: converting inspected reference pages into machine-usable composition records.
+
+## Example usage
+
+Planner should use the 018 audit to freeze bounded composition-representation work before any multi-candidate design search, comparative Terra review, contact-sheet rhythm gate, or real holdout benchmark.
+
+## Regression and remaining limitations
+
+018 did not vendor external skills, copy templates or screenshots, change Terra, change Presentation generation, or declare the long-term program mature. Synthetic 016/017 pages remain medium-quality engineering baselines, not gold exemplars.
+
+## Technical appendix
+
+The final 018 handoff tip was `4d5b37d232966f09b77b65ec1f2062d2ac376839`; `reviewed-handoff/ci-summary` was `success`, with GitHub Actions run `32621974939`.
