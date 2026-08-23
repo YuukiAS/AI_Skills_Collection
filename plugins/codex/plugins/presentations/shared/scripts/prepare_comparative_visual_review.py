@@ -136,7 +136,8 @@ def comparative_rubric(case_key: str, page_job_contract: str, focus: str) -> str
         "Then give relative tiers or ordering across the anonymous items. Explicitly explain the visual gaps between stronger and weaker items.\n"
         "Mark which anonymous items appear to reach mature research-group-meeting or strong conference-talk level, and which are merely technically readable.\n"
         "Do not treat the best item in this set as automatically good enough. It is valid to conclude that no anonymous item reaches the mature talk-quality bar.\n"
-        "Return PASS if the comparative evidence is assessable and sufficiently detailed for downstream Planner use. Return REVISE only if the input package or rubric prevents a valid comparative judgment. Return BLOCKED only if the pixels cannot be assessed.\n"
+        "Top-level decision and blocking_findings are about package assessability only, not item quality. Put weak item quality, below-bar quality, no-winner conclusions, and mature-bar gaps in item reviews or non_blocking_notes, not in top-level blocking_findings.\n"
+        "Return top-level PASS if the comparative evidence is assessable and sufficiently detailed for downstream Planner use, even when every anonymous item is below the mature bar. Return top-level REVISE only if the input package or rubric prevents a valid comparative judgment. Return BLOCKED only if the pixels cannot be assessed.\n"
         f"Case key for engineering trace only: {case_key}."
     )
 
