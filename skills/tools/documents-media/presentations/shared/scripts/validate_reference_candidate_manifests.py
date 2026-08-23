@@ -48,6 +48,31 @@ def composition_records_by_id() -> dict[str, dict[str, Any]]:
     return {record["reference_id"]: record for record in records}
 
 
+def content_modes(record: dict[str, Any]) -> set[str]:
+    return {region["content_mode"] for region in record["regions"]}
+
+
+def is_compatible_source(request: dict[str, Any], record: dict[str, Any]) -> bool:
+    modes = content_modes(record)
+    page_function = request.get("page_function")
+    if page_function == "MEDICAL_IMAGE_COMPARISON":
+        return record.get("page_function") == "MEDICAL_IMAGE_COMPARISON" and "medical_image" in modes
+    if page_function in {"ESTIMATOR", "STATISTICAL_MODEL", "THEOREM", "DERIVATION"}:
+        return record.get("page_function") in {"ESTIMATOR", "STATISTICAL_MODEL", "THEOREM", "DERIVATION", "BAYESIAN_MODEL"} and "equation" in modes
+    requested_modes = {
+        "equation"
+        if slot.get("content_type") == "equation_asset"
+        else "medical_image"
+        if slot.get("content_type") == "image_asset"
+        else "figure"
+        if slot.get("content_type") == "plot_asset"
+        else None
+        for slot in request.get("content_slots", [])
+    }
+    requested_modes.discard(None)
+    return record.get("page_function") == page_function or bool(requested_modes & modes)
+
+
 def area(bbox: dict[str, Any]) -> float:
     return round(float(bbox["w"]) * float(bbox["h"]), 4)
 
@@ -101,6 +126,8 @@ def validate_manifest(path: Path) -> list[str]:
         for reference_id in source_ids:
             if reference_id not in records_by_id:
                 errors.append(f"{path}/{cid}: source reference {reference_id} not in composition index")
+            elif not is_compatible_source(request, records_by_id[reference_id]):
+                errors.append(f"{path}/{cid}: source reference {reference_id} is not compatible with request page_function={request.get('page_function')}")
         regions = candidate.get("regions", [])
         primary_regions = [region for region in regions if region.get("role") == "primary_scientific_object"]
         if not primary_regions:

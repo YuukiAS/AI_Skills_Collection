@@ -31,6 +31,8 @@ The generator imports the 019 selector and reads `research_slide_composition_ind
 
 The shared search logic does not hard-code fixed RRL IDs or fixed fixture-to-family mappings. Tests verify that the production candidate generator does not contain literal `RRL-xxx` selections.
 
+The `REVIEW_1` repair adds a compatibility gate before composition-distance ranking. Medical-image requests only use inspected medical-image comparison compositions, and estimator requests only use inspected equation/estimator-compatible compositions. Generic terms such as `and` or `with` cannot make an unrelated source eligible for wildcard selection.
+
 ## Candidate Strategies
 
 Each request produces exactly three candidates:
@@ -40,6 +42,8 @@ Each request produces exactly three candidates:
 - `controlled_wildcard`: selects the feasible composition direction with the largest simple composition distance from the first two candidates.
 
 Strategy names are internal manifest metadata only. They are not drawn into individual preview pixels.
+
+When fewer than three strongly compatible source records exist, the wildcard remains inside the compatible source set and uses a source-derived alternate topology, rather than falling back to an unrelated page function.
 
 ## Geometry Transfer
 
@@ -55,6 +59,8 @@ Each candidate manifest records:
 
 This makes the reference-to-candidate link auditable: Reviewer can see whether a candidate preserved, scaled, translated, or otherwise adapted the real exemplar composition.
 
+Candidate bboxes are derived from the selected source record's title, primary scientific object, equation, secondary object, and legend bboxes. The generator performs small renderer-neutral operations such as split, scale, translate, and reorder while recording the actual operation in `geometry_transfer`; it does not choose a family name and then apply a fixed family coordinate template.
+
 ## Regression Requests
 
 ### Statistical Estimator
@@ -65,7 +71,7 @@ Content uses existing deterministic statistical fixture assets, including the re
 
 - `equation-dominant`;
 - `split-visual-explanation`;
-- `result-with-callout`.
+- `split-visual-explanation-reordered-callout`.
 
 The preview contains a real rendered equation asset and concise interpretation/caption text. It is not ASCII math and not a wireframe.
 
@@ -76,8 +82,8 @@ Request: `medical_image_lesion_overlay_comparison`.
 Content uses existing deterministic medical-imaging fixture assets: synthetic input, overlay, prediction, and error images. The three generated families are:
 
 - `aligned-multi-panel`;
-- `horizontal-process-flow`;
-- `split-visual-explanation`.
+- `aligned-multi-panel`;
+- `aligned-multi-panel-focus-callout`.
 
 The preview contains real image/overlay evidence from local synthetic fixtures. It does not use source reference screenshots or clinical source pixels.
 
@@ -100,10 +106,13 @@ The validator checks:
 - primary scientific object presence and area;
 - estimator preview contains equation content;
 - medical preview contains image content;
+- candidate sources pass the page-function/content-mode compatibility gate;
 - audience-facing preview text has no candidate strategy, RRL, QA, provenance, repo path, or implementation metadata;
 - preview/comparison artifacts are PNGs with matching SHA values.
 
 The distance is a simple renderer-neutral signature over layout family, primary bbox center/area, region topology, and reading flow. It is a distinctness guard, not a visual quality score.
+
+Regression tests also call the generator directly with two same-family medical-image records and assert that their different source bboxes produce different candidate geometry. This proves source normalized geometry enters candidate layout calculation.
 
 ## Current Limits
 

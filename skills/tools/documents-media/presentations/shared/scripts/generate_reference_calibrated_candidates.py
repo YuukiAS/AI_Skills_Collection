@@ -29,6 +29,20 @@ LINE = (200, 208, 218)
 ACCENT = (0, 108, 112)
 SECONDARY = (67, 56, 202)
 WARNING = (171, 91, 28)
+STOPWORDS = {
+    "and",
+    "are",
+    "but",
+    "can",
+    "for",
+    "from",
+    "into",
+    "the",
+    "this",
+    "that",
+    "with",
+    "without",
+}
 
 
 def sha256(path: Path) -> str:
@@ -105,7 +119,7 @@ def by_reference_id() -> dict[str, dict[str, Any]]:
 
 
 def tokens(value: str) -> set[str]:
-    return {part.lower() for part in value.replace("/", " ").replace("-", " ").replace("_", " ").split() if len(part) > 2}
+    return {part.lower() for part in value.replace("/", " ").replace("-", " ").replace("_", " ").split() if len(part) > 2 and part.lower() not in STOPWORDS}
 
 
 def primary_region(record: dict[str, Any]) -> dict[str, Any]:
@@ -124,16 +138,55 @@ def composition_distance(a: dict[str, Any], b: dict[str, Any]) -> float:
     return round(family + center + area + topology, 4)
 
 
+def content_modes(record: dict[str, Any]) -> set[str]:
+    return {region["content_mode"] for region in record["regions"]}
+
+
+def is_compatible_source(request: dict[str, Any], record: dict[str, Any]) -> tuple[bool, list[str]]:
+    modes = content_modes(record)
+    page_function = request["page_function"]
+    reasons: list[str] = []
+    if page_function == "MEDICAL_IMAGE_COMPARISON":
+        if record["page_function"] == "MEDICAL_IMAGE_COMPARISON" and "medical_image" in modes:
+            reasons.append("medical_image_comparison_page")
+            return True, reasons
+        return False, reasons
+    if page_function in {"ESTIMATOR", "STATISTICAL_MODEL", "THEOREM", "DERIVATION"}:
+        if record["page_function"] in {"ESTIMATOR", "STATISTICAL_MODEL", "THEOREM", "DERIVATION", "BAYESIAN_MODEL"} and "equation" in modes:
+            reasons.append("equation_compatible_page")
+            return True, reasons
+        return False, reasons
+    if record["page_function"] == page_function:
+        reasons.append("exact_page_function")
+        return True, reasons
+    requested_modes = {
+        "equation"
+        if slot["content_type"] == "equation_asset"
+        else "medical_image"
+        if slot["content_type"] == "image_asset"
+        else "figure"
+        if slot["content_type"] == "plot_asset"
+        else None
+        for slot in request["content_slots"]
+    }
+    requested_modes.discard(None)
+    if requested_modes & modes:
+        reasons.append("content_mode_overlap")
+        return True, reasons
+    return False, reasons
+
+
 def compatible_records(request: dict[str, Any], initial_ids: list[str]) -> list[dict[str, Any]]:
-    records_by_id = by_reference_id()
-    selected = [records_by_id[reference_id] for reference_id in initial_ids if reference_id in records_by_id]
-    seen = {record["reference_id"] for record in selected}
+    initial_set = set(initial_ids)
     query_terms = tokens(" ".join([request["page_function"], request["scientific_object"], request.get("evidence_type", "")]))
     scored: list[tuple[int, str, dict[str, Any]]] = []
     for record in load_composition_records():
-        if record["reference_id"] in seen:
+        compatible, compatibility_reasons = is_compatible_source(request, record)
+        if not compatible:
             continue
         score = 0
+        if record["reference_id"] in initial_set:
+            score += 6
         if record["page_function"] == request["page_function"]:
             score += 20
         if request.get("evidence_type") and str(request["evidence_type"]).lower() in str(record["evidence_type"]).lower():
@@ -146,39 +199,50 @@ def compatible_records(request: dict[str, Any], initial_ids: list[str]) -> list[
             " ".join(region["content_mode"] for region in record["regions"]),
         ]))
         score += min(10, len(query_terms & record_terms) * 2)
-        content_modes = {region["content_mode"] for region in record["regions"]}
-        if request["page_function"] in {"ESTIMATOR", "STATISTICAL_MODEL", "THEOREM"} and "equation" in content_modes:
+        modes = content_modes(record)
+        if request["page_function"] in {"ESTIMATOR", "STATISTICAL_MODEL", "THEOREM"} and "equation" in modes:
             score += 6
-        if request["page_function"] == "ESTIMATOR" and record["page_function"] in {"STATISTICAL_MODEL", "BAYESIAN_MODEL"}:
-            score += 4
-        if request["page_function"] == "ESTIMATOR" and record["page_function"] in {"RESULT_FIGURE", "CONFIDENCE_INTERVAL", "REAL_DATA_APPLICATION"}:
-            score += 2
-        if request["page_function"] == "MEDICAL_IMAGE_COMPARISON" and "medical_image" in content_modes:
+        if request["page_function"] == "MEDICAL_IMAGE_COMPARISON" and "medical_image" in modes:
             score += 6
+        score += len(compatibility_reasons)
         if score > 0:
             scored.append((score, record["reference_id"], record))
     scored.sort(key=lambda item: (-item[0], item[1]))
-    selected.extend(record for _, _, record in scored)
-    return selected
+    return [record for _, _, record in scored]
 
 
 def choose_sources(request: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
-    retrieved = select_reference_compositions.select(
+    raw_retrieved = select_reference_compositions.select(
         request.get("page_function"),
         request.get("evidence_type"),
         request.get("scientific_object"),
         8,
     )
-    initial_ids = [item["reference_id"] for item in retrieved]
+    initial_ids = [item["reference_id"] for item in raw_retrieved]
     pool = compatible_records(request, initial_ids)
-    if len(pool) < 3:
-        raise RuntimeError(f"{request['request_id']}: fewer than three compatible composition records")
+    if not pool:
+        raise RuntimeError(f"{request['request_id']}: no compatible composition records")
     first = pool[0]
-    second = next((record for record in pool[1:] if record["layout_family"] != first["layout_family"]), pool[1])
-    third = max(
-        (record for record in pool if record["reference_id"] not in {first["reference_id"], second["reference_id"]}),
-        key=lambda record: composition_distance(first, record) + composition_distance(second, record),
-    )
+    second = next((record for record in pool[1:] if record["layout_family"] != first["layout_family"]), pool[1] if len(pool) > 1 else first)
+    remaining = [record for record in pool if record["reference_id"] not in {first["reference_id"], second["reference_id"]}]
+    third = max(remaining, key=lambda record: composition_distance(first, record) + composition_distance(second, record)) if remaining else second
+    retrieved = []
+    for record in pool[:8]:
+        primary = primary_region(record)
+        compatible, reasons = is_compatible_source(request, record)
+        retrieved.append({
+            "reference_id": record["reference_id"],
+            "source_id": record["source_id"],
+            "page_function": record["page_function"],
+            "evidence_type": record["evidence_type"],
+            "scientific_object": record["scientific_object"],
+            "layout_family": record["layout_family"],
+            "reading_flow": record["reading_flow"],
+            "primary_object_area_ratio": record["primary_object_area_ratio"],
+            "primary_bbox": primary["bbox"],
+            "compatible": compatible,
+            "compatibility_reasons": reasons,
+        })
     return retrieved, {
         "reference_faithful": first,
         "alternative_composition": second,
@@ -198,67 +262,220 @@ def text_slot(request: dict[str, Any], role: str) -> dict[str, Any] | None:
     return next((slot for slot in request["content_slots"] if slot["role"] == role and slot.get("text")), None)
 
 
-def candidate_regions(request: dict[str, Any], strategy: str, source: dict[str, Any]) -> list[dict[str, Any]]:
-    family = source["layout_family"]
-    if request["page_function"] == "MEDICAL_IMAGE_COMPARISON":
-        if family == "aligned-multi-panel" and strategy == "reference_faithful":
-            boxes = [
-                ("image_input", "primary_scientific_object", {"x": 0.07, "y": 0.22, "w": 0.20, "h": 0.36}, "input_image"),
-                ("image_overlay", "primary_scientific_object", {"x": 0.30, "y": 0.22, "w": 0.20, "h": 0.36}, "overlay_image"),
-                ("image_prediction", "secondary_scientific_object", {"x": 0.53, "y": 0.22, "w": 0.20, "h": 0.36}, "prediction_image"),
-                ("image_error", "secondary_scientific_object", {"x": 0.76, "y": 0.22, "w": 0.17, "h": 0.36}, "error_image"),
-                ("legend", "legend", {"x": 0.09, "y": 0.66, "w": 0.80, "h": 0.09}, "legend"),
-            ]
-        elif family in {"split-visual-explanation", "result-with-callout"}:
-            boxes = [
-                ("image_overlay", "primary_scientific_object", {"x": 0.07, "y": 0.20, "w": 0.48, "h": 0.56}, "overlay_image"),
-                ("image_error", "secondary_scientific_object", {"x": 0.60, "y": 0.23, "w": 0.22, "h": 0.25}, "error_image"),
-                ("annotation", "annotation", {"x": 0.60, "y": 0.52, "w": 0.30, "h": 0.18}, "annotation"),
-                ("legend", "legend", {"x": 0.60, "y": 0.73, "w": 0.30, "h": 0.10}, "legend"),
-            ]
-        else:
-            boxes = [
-                ("image_input", "primary_scientific_object", {"x": 0.06, "y": 0.24, "w": 0.21, "h": 0.34}, "input_image"),
-                ("image_overlay", "primary_scientific_object", {"x": 0.38, "y": 0.24, "w": 0.21, "h": 0.34}, "overlay_image"),
-                ("image_error", "secondary_scientific_object", {"x": 0.70, "y": 0.24, "w": 0.21, "h": 0.34}, "error_image"),
-                ("annotation", "annotation", {"x": 0.30, "y": 0.64, "w": 0.42, "h": 0.14}, "annotation"),
-                ("legend", "legend", {"x": 0.21, "y": 0.80, "w": 0.58, "h": 0.08}, "legend"),
-            ]
+def round_bbox(bbox: dict[str, float]) -> dict[str, float]:
+    return {key: round(float(bbox[key]), 4) for key in ["x", "y", "w", "h"]}
+
+
+def clamp_bbox(bbox: dict[str, float]) -> dict[str, float]:
+    x = min(max(float(bbox["x"]), 0.02), 0.96)
+    y = min(max(float(bbox["y"]), 0.02), 0.94)
+    w = min(max(float(bbox["w"]), 0.04), 0.98 - x)
+    h = min(max(float(bbox["h"]), 0.04), 0.98 - y)
+    return round_bbox({"x": x, "y": y, "w": w, "h": h})
+
+
+def bbox_inside(parent: dict[str, float], x: float, y: float, w: float, h: float) -> dict[str, float]:
+    return clamp_bbox({
+        "x": float(parent["x"]) + float(parent["w"]) * x,
+        "y": float(parent["y"]) + float(parent["h"]) * y,
+        "w": float(parent["w"]) * w,
+        "h": float(parent["h"]) * h,
+    })
+
+
+def expand_around_center(bbox: dict[str, float], min_w: float, min_h: float, max_w: float = 0.88, max_h: float = 0.34) -> dict[str, float]:
+    cx = float(bbox["x"]) + float(bbox["w"]) / 2
+    cy = float(bbox["y"]) + float(bbox["h"]) / 2
+    w = min(max(float(bbox["w"]), min_w), max_w)
+    h = min(max(float(bbox["h"]), min_h), max_h)
+    return clamp_bbox({"x": cx - w / 2, "y": cy - h / 2, "w": w, "h": h})
+
+
+def split_horizontal(bbox: dict[str, float], count: int, gap: float | None = None) -> list[dict[str, float]]:
+    gap = min(0.026, float(bbox["w"]) * 0.045) if gap is None else gap
+    width = (float(bbox["w"]) - gap * (count - 1)) / count
+    return [clamp_bbox({"x": float(bbox["x"]) + i * (width + gap), "y": float(bbox["y"]), "w": width, "h": float(bbox["h"])}) for i in range(count)]
+
+
+def source_region(source: dict[str, Any], *, role: str | None = None, content_mode: str | None = None) -> dict[str, Any] | None:
+    for region in source["regions"]:
+        if role and region["role"] != role:
+            continue
+        if content_mode and region["content_mode"] != content_mode:
+            continue
+        return region
+    return None
+
+
+def slot_mode(slot: dict[str, Any]) -> str:
+    if slot["content_type"] == "equation_asset":
+        return "equation"
+    if slot["content_type"] == "image_asset":
+        return "medical_image"
+    if slot["content_type"] == "plot_asset":
+        return "figure"
+    if slot["content_type"] == "legend":
+        return "legend"
+    if slot["content_type"] == "caption":
+        return "caption"
+    return "text"
+
+
+def title_region_from_source(source: dict[str, Any], primary: dict[str, Any]) -> tuple[dict[str, float], dict[str, Any], str, str]:
+    title = source_region(source, role="title")
+    if title:
+        return clamp_bbox(title["bbox"]), title, "scale", "scaled the source title band into the neutral preview coordinate system"
+    primary_bbox = primary["bbox"]
+    derived = clamp_bbox({
+        "x": primary_bbox["x"],
+        "y": max(0.04, float(primary_bbox["y"]) - 0.08),
+        "w": min(float(primary_bbox["w"]), 0.86),
+        "h": 0.08,
+    })
+    return derived, primary, "translate", "derived a title band from the source primary object top edge because the source record has no title region"
+
+
+def content_bbox_after_title(primary_bbox: dict[str, float], title_bbox: dict[str, float]) -> dict[str, float]:
+    bbox = dict(primary_bbox)
+    min_y = float(title_bbox["y"]) + float(title_bbox["h"]) + 0.05
+    if float(bbox["y"]) < min_y:
+        delta = min_y - float(bbox["y"])
+        bbox["y"] = min_y
+        bbox["h"] = max(0.16, float(bbox["h"]) - delta)
+    return clamp_bbox(bbox)
+
+
+def add_region(
+    regions: list[dict[str, Any]],
+    transfers: list[dict[str, Any]],
+    source: dict[str, Any],
+    source_item: dict[str, Any],
+    region_id: str,
+    role: str,
+    bbox: dict[str, float],
+    slot_id: str,
+    mode: str,
+    adaptation_type: str,
+    adaptation_reason: str,
+) -> None:
+    candidate_bbox = clamp_bbox(bbox)
+    regions.append({"region_id": region_id, "role": role, "bbox": candidate_bbox, "content_mode": mode, "content_slot_id": slot_id})
+    transfers.append({
+        "source_reference_id": source["reference_id"],
+        "source_region_id": source_item["region_id"],
+        "source_role": source_item["role"],
+        "source_bbox": source_item["bbox"],
+        "candidate_region_id": region_id,
+        "candidate_content_slot_id": slot_id,
+        "candidate_bbox": candidate_bbox,
+        "adaptation_type": adaptation_type,
+        "adaptation_reason": adaptation_reason,
+    })
+
+
+def derived_estimator_regions(request: dict[str, Any], strategy: str, source: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]], str, str]:
+    primary = primary_region(source)
+    source_equation = source_region(source, content_mode="equation") or primary
+    source_secondary = source_region(source, role="secondary_scientific_object") or primary
+    title_bbox, title_source, title_adaptation, title_reason = title_region_from_source(source, primary)
+    content_box = content_bbox_after_title(primary["bbox"], title_bbox)
+    regions: list[dict[str, Any]] = []
+    transfers: list[dict[str, Any]] = []
+    add_region(regions, transfers, source, title_source, "title", "title", title_bbox, "title", "text", title_adaptation, title_reason)
+    layout_family = source["layout_family"]
+    reading_flow = source["reading_flow"]
+    if strategy == "reference_faithful":
+        equation_bbox = expand_around_center(source_equation["bbox"], 0.52, 0.16)
+        annotation_bbox = bbox_inside(equation_bbox, 0.10, 1.32, 0.80, 0.52)
+        caption_bbox = bbox_inside(content_box, 0.10, 1.10, 0.80, 0.15)
+        add_region(regions, transfers, source, source_equation, "equation", "primary_scientific_object", equation_bbox, "equation", "equation", "scale", "scaled the selected source equation region around its original center for legible preview math")
+        add_region(regions, transfers, source, source_equation, "annotation", "annotation", annotation_bbox, "annotation", "text", "translate", "placed annotation below the source-derived equation centerline")
+        add_region(regions, transfers, source, primary, "caption", "caption", caption_bbox, "caption", "caption", "translate", "placed caption beneath the source primary object span")
+    elif strategy == "alternative_composition":
+        equation_bbox = expand_around_center(source_equation["bbox"], 0.50, 0.17)
+        annotation_bbox = clamp_bbox({
+            "x": max(float(source_secondary["bbox"]["x"]), float(equation_bbox["x"]) + float(equation_bbox["w"]) + 0.04),
+            "y": min(float(source_secondary["bbox"]["y"]) + 0.03, 0.62),
+            "w": min(max(float(source_secondary["bbox"]["w"]) * 0.78, 0.22), 0.32),
+            "h": min(max(float(source_secondary["bbox"]["h"]) * 0.36, 0.14), 0.22),
+        })
+        caption_bbox = bbox_inside(primary["bbox"], 0.02, 1.03, 0.70, 0.14)
+        add_region(regions, transfers, source, source_equation, "equation", "primary_scientific_object", equation_bbox, "equation", "equation", "scale", "scaled the source equation region while preserving its side of the split layout")
+        add_region(regions, transfers, source, source_secondary, "annotation", "annotation", annotation_bbox, "annotation", "text", "translate", "translated the source secondary object lane into a compact explanatory annotation")
+        add_region(regions, transfers, source, primary, "caption", "caption", caption_bbox, "caption", "caption", "translate", "anchored caption to the lower edge of the source primary composition")
     else:
-        if family == "equation-dominant":
-            boxes = [
-                ("equation", "primary_scientific_object", {"x": 0.10, "y": 0.28, "w": 0.80, "h": 0.22}, "equation"),
-                ("annotation", "annotation", {"x": 0.20, "y": 0.56, "w": 0.60, "h": 0.12}, "annotation"),
-                ("caption", "caption", {"x": 0.18, "y": 0.76, "w": 0.64, "h": 0.07}, "caption"),
-            ]
-        elif family == "split-visual-explanation":
-            boxes = [
-                ("equation", "primary_scientific_object", {"x": 0.07, "y": 0.27, "w": 0.58, "h": 0.20}, "equation"),
-                ("annotation", "annotation", {"x": 0.69, "y": 0.25, "w": 0.24, "h": 0.20}, "annotation"),
-                ("caption", "caption", {"x": 0.07, "y": 0.62, "w": 0.60, "h": 0.08}, "caption"),
-            ]
-        elif family == "result-with-callout":
-            boxes = [
-                ("equation", "primary_scientific_object", {"x": 0.12, "y": 0.23, "w": 0.72, "h": 0.18}, "equation"),
-                ("annotation", "annotation", {"x": 0.52, "y": 0.49, "w": 0.34, "h": 0.16}, "annotation"),
-                ("caption", "caption", {"x": 0.12, "y": 0.73, "w": 0.50, "h": 0.08}, "caption"),
-            ]
-        else:
-            boxes = [
-                ("equation", "primary_scientific_object", {"x": 0.17, "y": 0.22, "w": 0.66, "h": 0.18}, "equation"),
-                ("annotation", "annotation", {"x": 0.16, "y": 0.47, "w": 0.68, "h": 0.12}, "annotation"),
-                ("caption", "caption", {"x": 0.16, "y": 0.68, "w": 0.68, "h": 0.08}, "caption"),
-            ]
-    regions = [{"region_id": "title", "role": "title", "bbox": {"x": 0.06, "y": 0.06, "w": 0.82, "h": 0.10}, "content_mode": "text", "content_slot_id": "title"}]
-    for region_id, role, bbox, slot_id in boxes:
-        slot = next(slot for slot in request["content_slots"] if slot["slot_id"] == slot_id)
-        mode = "equation" if slot["content_type"] == "equation_asset" else "medical_image" if slot["content_type"] == "image_asset" else "text"
-        if slot["content_type"] == "legend":
-            mode = "legend"
-        if slot["content_type"] == "caption":
-            mode = "caption"
-        regions.append({"region_id": region_id, "role": role, "bbox": bbox, "content_mode": mode, "content_slot_id": slot_id})
-    return regions
+        layout_family = f"{source['layout_family']}-reordered-callout"
+        reading_flow = f"{source['reading_flow']}-reordered-callout"
+        equation_bbox = bbox_inside(content_box, 0.12, 0.08, 0.70, 0.34)
+        annotation_bbox = bbox_inside(content_box, 0.52, 0.56, 0.38, 0.30)
+        caption_bbox = bbox_inside(content_box, 0.12, 0.92, 0.56, 0.16)
+        add_region(regions, transfers, source, primary, "equation", "primary_scientific_object", equation_bbox, "equation", "equation", "reorder", "reordered the source primary object into an equation-first focus with a lower-right callout")
+        add_region(regions, transfers, source, primary, "annotation", "annotation", annotation_bbox, "annotation", "text", "split", "split the source primary object area to create a secondary explanatory callout")
+        add_region(regions, transfers, source, primary, "caption", "caption", caption_bbox, "caption", "caption", "translate", "translated caption to the source primary lower edge after the reorder")
+    return regions, transfers, layout_family, reading_flow
+
+
+def derived_medical_regions(request: dict[str, Any], strategy: str, source: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]], str, str]:
+    primary = primary_region(source)
+    legend = source_region(source, role="legend") or primary
+    title_bbox, title_source, title_adaptation, title_reason = title_region_from_source(source, primary)
+    content_box = content_bbox_after_title(primary["bbox"], title_bbox)
+    regions: list[dict[str, Any]] = []
+    transfers: list[dict[str, Any]] = []
+    add_region(regions, transfers, source, title_source, "title", "title", title_bbox, "title", "text", title_adaptation, title_reason)
+    layout_family = source["layout_family"]
+    reading_flow = source["reading_flow"]
+    evidence_box = content_bbox_after_title(
+        expand_around_center(content_box, min_w=min(float(content_box["w"]), 0.68), min_h=0.42, max_w=float(content_box["w"]), max_h=0.58),
+        title_bbox,
+    )
+    evidence_row = clamp_bbox({
+        "x": evidence_box["x"],
+        "y": evidence_box["y"] + evidence_box["h"] * 0.05,
+        "w": evidence_box["w"],
+        "h": min(evidence_box["h"] * 0.68, 0.42),
+    })
+    if strategy == "reference_faithful":
+        panels = split_horizontal(evidence_row, 4)
+        for region_id, slot_id, role, panel in [
+            ("image_input", "input_image", "primary_scientific_object", panels[0]),
+            ("image_overlay", "overlay_image", "primary_scientific_object", panels[1]),
+            ("image_prediction", "prediction_image", "secondary_scientific_object", panels[2]),
+            ("image_error", "error_image", "secondary_scientific_object", panels[3]),
+        ]:
+            add_region(regions, transfers, source, primary, region_id, role, panel, slot_id, "medical_image", "split", "split the source image-grid bbox into equal evidence panels for the current content slots")
+        legend_bbox = clamp_bbox({"x": evidence_box["x"], "y": evidence_row["y"] + evidence_row["h"] + 0.04, "w": evidence_box["w"], "h": 0.08})
+        add_region(regions, transfers, source, legend, "legend", "legend", legend_bbox, "legend", "legend", "translate", "translated the source legend band below the derived image grid")
+    elif strategy == "alternative_composition":
+        panels = split_horizontal(evidence_row, 3)
+        for region_id, slot_id, role, panel in [
+            ("image_input", "input_image", "primary_scientific_object", panels[0]),
+            ("image_overlay", "overlay_image", "primary_scientific_object", panels[1]),
+            ("image_error", "error_image", "secondary_scientific_object", panels[2]),
+        ]:
+            add_region(regions, transfers, source, primary, region_id, role, panel, slot_id, "medical_image", "split", "split the source sample-grid bbox into a three-panel comparison row")
+        annotation_bbox = clamp_bbox({"x": panels[1]["x"], "y": evidence_row["y"] + evidence_row["h"] + 0.04, "w": panels[1]["w"] + panels[2]["w"] + 0.026, "h": 0.12})
+        legend_bbox = clamp_bbox({"x": evidence_box["x"], "y": annotation_bbox["y"] + annotation_bbox["h"] + 0.03, "w": evidence_box["w"], "h": 0.07})
+        add_region(regions, transfers, source, primary, "annotation", "annotation", annotation_bbox, "annotation", "text", "translate", "translated the source grid centerline into a concise failure annotation")
+        add_region(regions, transfers, source, legend, "legend", "legend", legend_bbox, "legend", "legend", "translate", "kept the source legend relationship below the evidence row")
+    else:
+        layout_family = f"{source['layout_family']}-focus-callout"
+        reading_flow = f"{source['reading_flow']}-focus-callout"
+        main_bbox = bbox_inside(evidence_box, 0.00, 0.02, 0.58, 0.88)
+        error_bbox = bbox_inside(evidence_box, 0.66, 0.04, 0.25, 0.34)
+        annotation_bbox = bbox_inside(evidence_box, 0.64, 0.48, 0.34, 0.24)
+        legend_bbox = bbox_inside(evidence_box, 0.64, 0.78, 0.34, 0.16)
+        add_region(regions, transfers, source, primary, "image_overlay", "primary_scientific_object", main_bbox, "overlay_image", "medical_image", "scale", "scaled the source image-grid bbox into a dominant overlay panel")
+        add_region(regions, transfers, source, primary, "image_error", "secondary_scientific_object", error_bbox, "error_image", "medical_image", "split", "split a small diagnostic error panel from the source image-grid area")
+        add_region(regions, transfers, source, primary, "annotation", "annotation", annotation_bbox, "annotation", "text", "split", "split the source grid side area into a failure annotation")
+        add_region(regions, transfers, source, legend, "legend", "legend", legend_bbox, "legend", "legend", "translate", "translated the source legend relationship into the sidecar area")
+    return regions, transfers, layout_family, reading_flow
+
+
+def candidate_regions(request: dict[str, Any], strategy: str, source: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]], str, str]:
+    if request["page_function"] == "MEDICAL_IMAGE_COMPARISON":
+        return derived_medical_regions(request, strategy, source)
+    return derived_estimator_regions(request, strategy, source)
 
 
 def draw_candidate(request: dict[str, Any], candidate: dict[str, Any], output: Path) -> None:
@@ -336,10 +553,11 @@ def audience_text(request: dict[str, Any]) -> list[str]:
 
 def candidate_signature(candidate: dict[str, Any]) -> dict[str, Any]:
     roles = [region["role"] for region in candidate["regions"]]
-    primary = next(region for region in candidate["regions"] if region["role"] == "primary_scientific_object")
+    primary_regions = [region for region in candidate["regions"] if region["role"] == "primary_scientific_object"]
     return {
         "layout_family": candidate["layout_family"],
-        "primary_bbox": primary["bbox"],
+        "primary_bbox": primary_regions[0]["bbox"],
+        "primary_bboxes": [region["bbox"] for region in primary_regions],
         "region_roles": roles,
         "region_count": len(candidate["regions"]),
         "reading_flow": candidate["reading_flow"],
@@ -347,27 +565,26 @@ def candidate_signature(candidate: dict[str, Any]) -> dict[str, Any]:
 
 
 def build_candidate(request: dict[str, Any], strategy: str, source: dict[str, Any], request_out: Path) -> dict[str, Any]:
-    regions = candidate_regions(request, strategy, source)
-    primary = next(region for region in regions if region["role"] == "primary_scientific_object")
+    regions, transfers, layout_family, reading_flow = candidate_regions(request, strategy, source)
+    primary_regions = [region for region in regions if region["role"] == "primary_scientific_object"]
     candidate_id = f"{request['request_id']}__{strategy}"
     candidate = {
         "candidate_id": candidate_id,
         "strategy": strategy,
         "source_reference_ids": [source["reference_id"]],
         "source_composition_families": [source["layout_family"]],
-        "layout_family": source["layout_family"],
+        "layout_family": layout_family,
         "regions": regions,
-        "primary_object_area_ratio": round(primary["bbox"]["w"] * primary["bbox"]["h"], 4),
-        "reading_flow": source["reading_flow"],
+        "primary_object_area_ratio": round(sum(region["bbox"]["w"] * region["bbox"]["h"] for region in primary_regions), 4),
+        "reading_flow": reading_flow,
         "content_bindings": content_bindings(regions),
-        "geometry_transfer": [],
+        "geometry_transfer": transfers,
         "distinctness_signature": {},
         "preview_artifact": {"path": "", "mime_type": "image/png", "sha256": ""},
         "preview_sha256": "",
         "audience_text": audience_text(request),
         "source_reference_pixels_used": False,
     }
-    candidate["geometry_transfer"] = transfer_trace(source, candidate)
     candidate["distinctness_signature"] = candidate_signature(candidate)
     preview = request_out / "previews" / f"{candidate_id}.png"
     draw_candidate(request, candidate, preview)
@@ -380,15 +597,15 @@ def build_candidate(request: dict[str, Any], strategy: str, source: dict[str, An
 def make_comparison_sheet(candidates: list[dict[str, Any]], request_out: Path) -> dict[str, str]:
     previews = [Image.open(REPO_ROOT / candidate["preview_artifact"]["path"]).convert("RGB") for candidate in candidates]
     thumb_w, thumb_h = 500, 281
-    sheet = Image.new("RGB", (thumb_w * 3 + 80, thumb_h + 110), (248, 250, 252))
+    sheet = Image.new("RGB", (thumb_w * 3 + 80, thumb_h + 125), (248, 250, 252))
     draw = ImageDraw.Draw(sheet)
-    font = load_font(22, bold=True)
+    font = load_font(19, bold=True)
     for i, (candidate, image) in enumerate(zip(candidates, previews)):
         image.thumbnail((thumb_w, thumb_h), Image.Resampling.LANCZOS)
         x = 20 + i * (thumb_w + 20)
-        y = 60
+        y = 75
         sheet.paste(image, (x, y))
-        draw.text((x, 20), f"{i + 1}. {candidate['layout_family']}", font=font, fill=INK)
+        draw_wrapped(draw, f"{i + 1}. {candidate['layout_family']}", (x, 16), thumb_w, font, fill=INK, line_spacing=4)
     out = request_out / "comparison_sheet.png"
     out.parent.mkdir(parents=True, exist_ok=True)
     sheet.save(out)

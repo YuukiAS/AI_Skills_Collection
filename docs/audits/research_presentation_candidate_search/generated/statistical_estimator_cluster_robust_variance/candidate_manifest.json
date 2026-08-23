@@ -60,11 +60,9 @@
         "w": 0.46,
         "h": 0.27
       },
-      "score": 34,
-      "match_reasons": [
-        "page_function=ESTIMATOR",
-        "evidence_type~=estimator formula",
-        "scientific_object_overlap=equation,estimator"
+      "compatible": true,
+      "compatibility_reasons": [
+        "equation_compatible_page"
       ]
     },
     {
@@ -82,10 +80,9 @@
         "w": 0.82,
         "h": 0.48
       },
-      "score": 24,
-      "match_reasons": [
-        "page_function=ESTIMATOR",
-        "scientific_object_overlap=equation,estimator"
+      "compatible": true,
+      "compatibility_reasons": [
+        "equation_compatible_page"
       ]
     }
   ],
@@ -106,9 +103,9 @@
           "region_id": "title",
           "role": "title",
           "bbox": {
-            "x": 0.06,
-            "y": 0.06,
-            "w": 0.82,
+            "x": 0.02,
+            "y": 0.03,
+            "w": 0.96,
             "h": 0.1
           },
           "content_mode": "text",
@@ -118,10 +115,10 @@
           "region_id": "equation",
           "role": "primary_scientific_object",
           "bbox": {
-            "x": 0.1,
+            "x": 0.17,
             "y": 0.28,
-            "w": 0.8,
-            "h": 0.22
+            "w": 0.52,
+            "h": 0.27
           },
           "content_mode": "equation",
           "content_slot_id": "equation"
@@ -130,10 +127,10 @@
           "region_id": "annotation",
           "role": "annotation",
           "bbox": {
-            "x": 0.2,
-            "y": 0.56,
-            "w": 0.6,
-            "h": 0.12
+            "x": 0.222,
+            "y": 0.6364,
+            "w": 0.416,
+            "h": 0.1404
           },
           "content_mode": "text",
           "content_slot_id": "annotation"
@@ -142,16 +139,16 @@
           "region_id": "caption",
           "role": "caption",
           "bbox": {
-            "x": 0.18,
-            "y": 0.76,
-            "w": 0.64,
-            "h": 0.07
+            "x": 0.246,
+            "y": 0.577,
+            "w": 0.368,
+            "h": 0.0405
           },
           "content_mode": "caption",
           "content_slot_id": "caption"
         }
       ],
-      "primary_object_area_ratio": 0.176,
+      "primary_object_area_ratio": 0.1404,
       "reading_flow": "title-to-centered-equation",
       "content_bindings": [
         {
@@ -189,13 +186,13 @@
           "candidate_region_id": "title",
           "candidate_content_slot_id": "title",
           "candidate_bbox": {
-            "x": 0.06,
-            "y": 0.06,
-            "w": 0.82,
+            "x": 0.02,
+            "y": 0.03,
+            "w": 0.96,
             "h": 0.1
           },
           "adaptation_type": "scale",
-          "adaptation_reason": "fit the same scientific content into a neutral 16:9 regression preview while preserving the source role hierarchy"
+          "adaptation_reason": "scaled the source title band into the neutral preview coordinate system"
         },
         {
           "source_reference_id": "RRL-028",
@@ -210,13 +207,13 @@
           "candidate_region_id": "equation",
           "candidate_content_slot_id": "equation",
           "candidate_bbox": {
-            "x": 0.1,
+            "x": 0.17,
             "y": 0.28,
-            "w": 0.8,
-            "h": 0.22
+            "w": 0.52,
+            "h": 0.27
           },
           "adaptation_type": "scale",
-          "adaptation_reason": "fit the same scientific content into a neutral 16:9 regression preview while preserving the source role hierarchy"
+          "adaptation_reason": "scaled the selected source equation region around its original center for legible preview math"
         },
         {
           "source_reference_id": "RRL-028",
@@ -231,13 +228,13 @@
           "candidate_region_id": "annotation",
           "candidate_content_slot_id": "annotation",
           "candidate_bbox": {
-            "x": 0.2,
-            "y": 0.56,
-            "w": 0.6,
-            "h": 0.12
+            "x": 0.222,
+            "y": 0.6364,
+            "w": 0.416,
+            "h": 0.1404
           },
-          "adaptation_type": "scale",
-          "adaptation_reason": "fit the same scientific content into a neutral 16:9 regression preview while preserving the source role hierarchy"
+          "adaptation_type": "translate",
+          "adaptation_reason": "placed annotation below the source-derived equation centerline"
         },
         {
           "source_reference_id": "RRL-028",
@@ -252,23 +249,31 @@
           "candidate_region_id": "caption",
           "candidate_content_slot_id": "caption",
           "candidate_bbox": {
-            "x": 0.18,
-            "y": 0.76,
-            "w": 0.64,
-            "h": 0.07
+            "x": 0.246,
+            "y": 0.577,
+            "w": 0.368,
+            "h": 0.0405
           },
-          "adaptation_type": "scale",
-          "adaptation_reason": "fit the same scientific content into a neutral 16:9 regression preview while preserving the source role hierarchy"
+          "adaptation_type": "translate",
+          "adaptation_reason": "placed caption beneath the source primary object span"
         }
       ],
       "distinctness_signature": {
         "layout_family": "equation-dominant",
         "primary_bbox": {
-          "x": 0.1,
+          "x": 0.17,
           "y": 0.28,
-          "w": 0.8,
-          "h": 0.22
+          "w": 0.52,
+          "h": 0.27
         },
+        "primary_bboxes": [
+          {
+            "x": 0.17,
+            "y": 0.28,
+            "w": 0.52,
+            "h": 0.27
+          }
+        ],
         "region_roles": [
           "title",
           "primary_scientific_object",
@@ -278,16 +283,16 @@
         "region_count": 4,
         "reading_flow": "title-to-centered-equation",
         "pairwise_distances": {
-          "statistical_estimator_cluster_robust_variance__alternative_composition": 0.69,
-          "statistical_estimator_cluster_robust_variance__controlled_wildcard": 0.6064
+          "statistical_estimator_cluster_robust_variance__alternative_composition": 0.8454,
+          "statistical_estimator_cluster_robust_variance__controlled_wildcard": 0.6549
         }
       },
       "preview_artifact": {
         "path": "docs/audits/research_presentation_candidate_search/generated/statistical_estimator_cluster_robust_variance/previews/statistical_estimator_cluster_robust_variance__reference_faithful.png",
         "mime_type": "image/png",
-        "sha256": "96654b68e0605e5bab12b85a5c0e32a70dfb7c3da1b7577563b6d33dc64ad55b"
+        "sha256": "cb7c0ee7ae7806b09699ee902a81d009677f95beaf775deea300577efbf1138e"
       },
-      "preview_sha256": "96654b68e0605e5bab12b85a5c0e32a70dfb7c3da1b7577563b6d33dc64ad55b",
+      "preview_sha256": "cb7c0ee7ae7806b09699ee902a81d009677f95beaf775deea300577efbf1138e",
       "audience_text": [
         "Cluster-robust variance centers uncertainty at the group level",
         "Middle term aggregates score contributions by center.",
@@ -310,10 +315,10 @@
           "region_id": "title",
           "role": "title",
           "bbox": {
-            "x": 0.06,
+            "x": 0.05,
             "y": 0.06,
-            "w": 0.82,
-            "h": 0.1
+            "w": 0.6,
+            "h": 0.08
           },
           "content_mode": "text",
           "content_slot_id": "title"
@@ -322,10 +327,10 @@
           "region_id": "equation",
           "role": "primary_scientific_object",
           "bbox": {
-            "x": 0.07,
-            "y": 0.27,
-            "w": 0.58,
-            "h": 0.2
+            "x": 0.02,
+            "y": 0.17,
+            "w": 0.5,
+            "h": 0.17
           },
           "content_mode": "equation",
           "content_slot_id": "equation"
@@ -334,10 +339,10 @@
           "region_id": "annotation",
           "role": "annotation",
           "bbox": {
-            "x": 0.69,
-            "y": 0.25,
-            "w": 0.24,
-            "h": 0.2
+            "x": 0.58,
+            "y": 0.16,
+            "w": 0.2652,
+            "h": 0.1728
           },
           "content_mode": "text",
           "content_slot_id": "annotation"
@@ -346,16 +351,16 @@
           "region_id": "caption",
           "role": "caption",
           "bbox": {
-            "x": 0.07,
-            "y": 0.62,
-            "w": 0.6,
-            "h": 0.08
+            "x": 0.0764,
+            "y": 0.6444,
+            "w": 0.574,
+            "h": 0.0672
           },
           "content_mode": "caption",
           "content_slot_id": "caption"
         }
       ],
-      "primary_object_area_ratio": 0.116,
+      "primary_object_area_ratio": 0.085,
       "reading_flow": "title-to-left-formula-then-right-mask-examples",
       "content_bindings": [
         {
@@ -393,55 +398,55 @@
           "candidate_region_id": "title",
           "candidate_content_slot_id": "title",
           "candidate_bbox": {
-            "x": 0.06,
+            "x": 0.05,
             "y": 0.06,
-            "w": 0.82,
-            "h": 0.1
+            "w": 0.6,
+            "h": 0.08
           },
           "adaptation_type": "scale",
-          "adaptation_reason": "fit the same scientific content into a neutral 16:9 regression preview while preserving the source role hierarchy"
+          "adaptation_reason": "scaled the source title band into the neutral preview coordinate system"
         },
         {
           "source_reference_id": "RRL-014",
-          "source_region_id": "primary_metric_definition",
-          "source_role": "primary_scientific_object",
+          "source_region_id": "formula_text",
+          "source_role": "equation",
           "source_bbox": {
-            "x": 0.06,
-            "y": 0.15,
-            "w": 0.82,
-            "h": 0.48
+            "x": 0.07,
+            "y": 0.18,
+            "w": 0.38,
+            "h": 0.15
           },
           "candidate_region_id": "equation",
           "candidate_content_slot_id": "equation",
           "candidate_bbox": {
-            "x": 0.07,
-            "y": 0.27,
-            "w": 0.58,
-            "h": 0.2
+            "x": 0.02,
+            "y": 0.17,
+            "w": 0.5,
+            "h": 0.17
           },
           "adaptation_type": "scale",
-          "adaptation_reason": "fit the same scientific content into a neutral 16:9 regression preview while preserving the source role hierarchy"
+          "adaptation_reason": "scaled the source equation region while preserving its side of the split layout"
         },
         {
           "source_reference_id": "RRL-014",
-          "source_region_id": "primary_metric_definition",
-          "source_role": "primary_scientific_object",
+          "source_region_id": "mask_examples",
+          "source_role": "secondary_scientific_object",
           "source_bbox": {
-            "x": 0.06,
-            "y": 0.15,
-            "w": 0.82,
+            "x": 0.58,
+            "y": 0.13,
+            "w": 0.34,
             "h": 0.48
           },
           "candidate_region_id": "annotation",
           "candidate_content_slot_id": "annotation",
           "candidate_bbox": {
-            "x": 0.69,
-            "y": 0.25,
-            "w": 0.24,
-            "h": 0.2
+            "x": 0.58,
+            "y": 0.16,
+            "w": 0.2652,
+            "h": 0.1728
           },
-          "adaptation_type": "scale",
-          "adaptation_reason": "fit the same scientific content into a neutral 16:9 regression preview while preserving the source role hierarchy"
+          "adaptation_type": "translate",
+          "adaptation_reason": "translated the source secondary object lane into a compact explanatory annotation"
         },
         {
           "source_reference_id": "RRL-014",
@@ -456,23 +461,31 @@
           "candidate_region_id": "caption",
           "candidate_content_slot_id": "caption",
           "candidate_bbox": {
-            "x": 0.07,
-            "y": 0.62,
-            "w": 0.6,
-            "h": 0.08
+            "x": 0.0764,
+            "y": 0.6444,
+            "w": 0.574,
+            "h": 0.0672
           },
-          "adaptation_type": "scale",
-          "adaptation_reason": "fit the same scientific content into a neutral 16:9 regression preview while preserving the source role hierarchy"
+          "adaptation_type": "translate",
+          "adaptation_reason": "anchored caption to the lower edge of the source primary composition"
         }
       ],
       "distinctness_signature": {
         "layout_family": "split-visual-explanation",
         "primary_bbox": {
-          "x": 0.07,
-          "y": 0.27,
-          "w": 0.58,
-          "h": 0.2
+          "x": 0.02,
+          "y": 0.17,
+          "w": 0.5,
+          "h": 0.17
         },
+        "primary_bboxes": [
+          {
+            "x": 0.02,
+            "y": 0.17,
+            "w": 0.5,
+            "h": 0.17
+          }
+        ],
         "region_roles": [
           "title",
           "primary_scientific_object",
@@ -482,16 +495,16 @@
         "region_count": 4,
         "reading_flow": "title-to-left-formula-then-right-mask-examples",
         "pairwise_distances": {
-          "statistical_estimator_cluster_robust_variance__reference_faithful": 0.69,
-          "statistical_estimator_cluster_robust_variance__controlled_wildcard": 0.6536
+          "statistical_estimator_cluster_robust_variance__reference_faithful": 0.8454,
+          "statistical_estimator_cluster_robust_variance__controlled_wildcard": 0.6913
         }
       },
       "preview_artifact": {
         "path": "docs/audits/research_presentation_candidate_search/generated/statistical_estimator_cluster_robust_variance/previews/statistical_estimator_cluster_robust_variance__alternative_composition.png",
         "mime_type": "image/png",
-        "sha256": "23d4f0fff6c28d5af30504f62b5a21fdd69b8666852f97e514eb201231213126"
+        "sha256": "4964d0056724766b8c8d0f34e0c91df9d5c9799f208ee2aa4ab31ddb61d76f7d"
       },
-      "preview_sha256": "23d4f0fff6c28d5af30504f62b5a21fdd69b8666852f97e514eb201231213126",
+      "preview_sha256": "4964d0056724766b8c8d0f34e0c91df9d5c9799f208ee2aa4ab31ddb61d76f7d",
       "audience_text": [
         "Cluster-robust variance centers uncertainty at the group level",
         "Middle term aggregates score contributions by center.",
@@ -503,21 +516,21 @@
       "candidate_id": "statistical_estimator_cluster_robust_variance__controlled_wildcard",
       "strategy": "controlled_wildcard",
       "source_reference_ids": [
-        "RRL-030"
+        "RRL-014"
       ],
       "source_composition_families": [
-        "result-with-callout"
+        "split-visual-explanation"
       ],
-      "layout_family": "result-with-callout",
+      "layout_family": "split-visual-explanation-reordered-callout",
       "regions": [
         {
           "region_id": "title",
           "role": "title",
           "bbox": {
-            "x": 0.06,
+            "x": 0.05,
             "y": 0.06,
-            "w": 0.82,
-            "h": 0.1
+            "w": 0.6,
+            "h": 0.08
           },
           "content_mode": "text",
           "content_slot_id": "title"
@@ -526,10 +539,10 @@
           "region_id": "equation",
           "role": "primary_scientific_object",
           "bbox": {
-            "x": 0.12,
-            "y": 0.23,
-            "w": 0.72,
-            "h": 0.18
+            "x": 0.1584,
+            "y": 0.2252,
+            "w": 0.574,
+            "h": 0.1496
           },
           "content_mode": "equation",
           "content_slot_id": "equation"
@@ -538,10 +551,10 @@
           "region_id": "annotation",
           "role": "annotation",
           "bbox": {
-            "x": 0.52,
-            "y": 0.49,
-            "w": 0.34,
-            "h": 0.16
+            "x": 0.4864,
+            "y": 0.4364,
+            "w": 0.3116,
+            "h": 0.132
           },
           "content_mode": "text",
           "content_slot_id": "annotation"
@@ -550,17 +563,17 @@
           "region_id": "caption",
           "role": "caption",
           "bbox": {
-            "x": 0.12,
-            "y": 0.73,
-            "w": 0.5,
-            "h": 0.08
+            "x": 0.1584,
+            "y": 0.5948,
+            "w": 0.4592,
+            "h": 0.0704
           },
           "content_mode": "caption",
           "content_slot_id": "caption"
         }
       ],
-      "primary_object_area_ratio": 0.1296,
-      "reading_flow": "claim-title-to-interval-curve-to-reference-lines",
+      "primary_object_area_ratio": 0.0859,
+      "reading_flow": "title-to-left-formula-then-right-mask-examples-reordered-callout",
       "content_bindings": [
         {
           "region_id": "title",
@@ -585,98 +598,106 @@
       ],
       "geometry_transfer": [
         {
-          "source_reference_id": "RRL-030",
+          "source_reference_id": "RRL-014",
           "source_region_id": "title",
           "source_role": "title",
           "source_bbox": {
-            "x": 0.08,
+            "x": 0.05,
             "y": 0.06,
-            "w": 0.7,
+            "w": 0.6,
             "h": 0.08
           },
           "candidate_region_id": "title",
           "candidate_content_slot_id": "title",
           "candidate_bbox": {
-            "x": 0.06,
+            "x": 0.05,
             "y": 0.06,
-            "w": 0.82,
-            "h": 0.1
+            "w": 0.6,
+            "h": 0.08
           },
           "adaptation_type": "scale",
-          "adaptation_reason": "fit the same scientific content into a neutral 16:9 regression preview while preserving the source role hierarchy"
+          "adaptation_reason": "scaled the source title band into the neutral preview coordinate system"
         },
         {
-          "source_reference_id": "RRL-030",
-          "source_region_id": "interval_curve",
+          "source_reference_id": "RRL-014",
+          "source_region_id": "primary_metric_definition",
           "source_role": "primary_scientific_object",
           "source_bbox": {
-            "x": 0.14,
-            "y": 0.16,
-            "w": 0.78,
-            "h": 0.7
+            "x": 0.06,
+            "y": 0.15,
+            "w": 0.82,
+            "h": 0.48
           },
           "candidate_region_id": "equation",
           "candidate_content_slot_id": "equation",
           "candidate_bbox": {
-            "x": 0.12,
-            "y": 0.23,
-            "w": 0.72,
-            "h": 0.18
+            "x": 0.1584,
+            "y": 0.2252,
+            "w": 0.574,
+            "h": 0.1496
           },
-          "adaptation_type": "scale",
-          "adaptation_reason": "fit the same scientific content into a neutral 16:9 regression preview while preserving the source role hierarchy"
+          "adaptation_type": "reorder",
+          "adaptation_reason": "reordered the source primary object into an equation-first focus with a lower-right callout"
         },
         {
-          "source_reference_id": "RRL-030",
-          "source_region_id": "reference_lines",
-          "source_role": "annotation",
+          "source_reference_id": "RRL-014",
+          "source_region_id": "primary_metric_definition",
+          "source_role": "primary_scientific_object",
           "source_bbox": {
-            "x": 0.34,
-            "y": 0.16,
-            "w": 0.36,
-            "h": 0.7
+            "x": 0.06,
+            "y": 0.15,
+            "w": 0.82,
+            "h": 0.48
           },
           "candidate_region_id": "annotation",
           "candidate_content_slot_id": "annotation",
           "candidate_bbox": {
-            "x": 0.52,
-            "y": 0.49,
-            "w": 0.34,
-            "h": 0.16
+            "x": 0.4864,
+            "y": 0.4364,
+            "w": 0.3116,
+            "h": 0.132
           },
-          "adaptation_type": "scale",
-          "adaptation_reason": "fit the same scientific content into a neutral 16:9 regression preview while preserving the source role hierarchy"
+          "adaptation_type": "split",
+          "adaptation_reason": "split the source primary object area to create a secondary explanatory callout"
         },
         {
-          "source_reference_id": "RRL-030",
-          "source_region_id": "interval_curve",
+          "source_reference_id": "RRL-014",
+          "source_region_id": "primary_metric_definition",
           "source_role": "primary_scientific_object",
           "source_bbox": {
-            "x": 0.14,
-            "y": 0.16,
-            "w": 0.78,
-            "h": 0.7
+            "x": 0.06,
+            "y": 0.15,
+            "w": 0.82,
+            "h": 0.48
           },
           "candidate_region_id": "caption",
           "candidate_content_slot_id": "caption",
           "candidate_bbox": {
-            "x": 0.12,
-            "y": 0.73,
-            "w": 0.5,
-            "h": 0.08
+            "x": 0.1584,
+            "y": 0.5948,
+            "w": 0.4592,
+            "h": 0.0704
           },
-          "adaptation_type": "scale",
-          "adaptation_reason": "fit the same scientific content into a neutral 16:9 regression preview while preserving the source role hierarchy"
+          "adaptation_type": "translate",
+          "adaptation_reason": "translated caption to the source primary lower edge after the reorder"
         }
       ],
       "distinctness_signature": {
-        "layout_family": "result-with-callout",
+        "layout_family": "split-visual-explanation-reordered-callout",
         "primary_bbox": {
-          "x": 0.12,
-          "y": 0.23,
-          "w": 0.72,
-          "h": 0.18
+          "x": 0.1584,
+          "y": 0.2252,
+          "w": 0.574,
+          "h": 0.1496
         },
+        "primary_bboxes": [
+          {
+            "x": 0.1584,
+            "y": 0.2252,
+            "w": 0.574,
+            "h": 0.1496
+          }
+        ],
         "region_roles": [
           "title",
           "primary_scientific_object",
@@ -684,18 +705,18 @@
           "caption"
         ],
         "region_count": 4,
-        "reading_flow": "claim-title-to-interval-curve-to-reference-lines",
+        "reading_flow": "title-to-left-formula-then-right-mask-examples-reordered-callout",
         "pairwise_distances": {
-          "statistical_estimator_cluster_robust_variance__reference_faithful": 0.6064,
-          "statistical_estimator_cluster_robust_variance__alternative_composition": 0.6536
+          "statistical_estimator_cluster_robust_variance__reference_faithful": 0.6549,
+          "statistical_estimator_cluster_robust_variance__alternative_composition": 0.6913
         }
       },
       "preview_artifact": {
         "path": "docs/audits/research_presentation_candidate_search/generated/statistical_estimator_cluster_robust_variance/previews/statistical_estimator_cluster_robust_variance__controlled_wildcard.png",
         "mime_type": "image/png",
-        "sha256": "c2b837c430f1fc5303117de628dc74575b92409135a02e4ec2f5c64b29b781d9"
+        "sha256": "43f2c9c6d94959f2bb89f775c1f4e72477c9025ee942b06c93b83ff95c3c9efc"
       },
-      "preview_sha256": "c2b837c430f1fc5303117de628dc74575b92409135a02e4ec2f5c64b29b781d9",
+      "preview_sha256": "43f2c9c6d94959f2bb89f775c1f4e72477c9025ee942b06c93b83ff95c3c9efc",
       "audience_text": [
         "Cluster-robust variance centers uncertainty at the group level",
         "Middle term aggregates score contributions by center.",
@@ -707,6 +728,6 @@
   "comparison_sheet": {
     "path": "docs/audits/research_presentation_candidate_search/generated/statistical_estimator_cluster_robust_variance/comparison_sheet.png",
     "mime_type": "image/png",
-    "sha256": "f715d24e5e04d10685cd533ee20a3f3d5bb69ae925927fd00a3c052725a2c6ac"
+    "sha256": "88ec0ed8d92501a6c5eac6c4d05328796fcb880616ed993a5ff760368ff91bfb"
   }
 }

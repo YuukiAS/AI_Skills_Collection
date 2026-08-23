@@ -320,6 +320,7 @@ class PresentationSharedTests(unittest.TestCase):
         generator_text = generator.read_text(encoding="utf-8")
         self.assertIn("select_reference_compositions.select", generator_text)
         self.assertNotRegex(generator_text, r"RRL-\d{3}")
+        import generate_reference_calibrated_candidates as candidate_generator
 
         output_root = REPO_ROOT / "docs/audits/research_presentation_candidate_search/generated"
         manifests = [
@@ -357,8 +358,27 @@ class PresentationSharedTests(unittest.TestCase):
                     self.assertNotIn(forbidden, audience)
             if payload["request"]["page_function"] == "ESTIMATOR":
                 self.assertTrue(any(region["content_mode"] == "equation" for candidate in candidates for region in candidate["regions"]))
+                for candidate in candidates:
+                    for reference_id in candidate["source_reference_ids"]:
+                        source = candidate_generator.by_reference_id()[reference_id]
+                        self.assertEqual(source["page_function"], "ESTIMATOR")
+                        self.assertIn("equation", {region["content_mode"] for region in source["regions"]})
             if payload["request"]["page_function"] == "MEDICAL_IMAGE_COMPARISON":
                 self.assertTrue(any(region["content_mode"] == "medical_image" for candidate in candidates for region in candidate["regions"]))
+                for candidate in candidates:
+                    for reference_id in candidate["source_reference_ids"]:
+                        source = candidate_generator.by_reference_id()[reference_id]
+                        self.assertEqual(source["page_function"], "MEDICAL_IMAGE_COMPARISON")
+                        self.assertIn("medical_image", {region["content_mode"] for region in source["regions"]})
+                self.assertNotIn("RRL-034", {reference_id for candidate in candidates for reference_id in candidate["source_reference_ids"]})
+
+        records = candidate_generator.by_reference_id()
+        medical_request = json.loads((REPO_ROOT / "docs/audits/research_presentation_candidate_search/requests/medical_image_comparison_request.json").read_text(encoding="utf-8"))
+        rrl022_regions, _, _, _ = candidate_generator.candidate_regions(medical_request, "reference_faithful", records["RRL-022"])
+        rrl013_regions, _, _, _ = candidate_generator.candidate_regions(medical_request, "reference_faithful", records["RRL-013"])
+        rrl022_bboxes = [region["bbox"] for region in rrl022_regions if region["role"] == "primary_scientific_object"]
+        rrl013_bboxes = [region["bbox"] for region in rrl013_regions if region["role"] == "primary_scientific_object"]
+        self.assertNotEqual(rrl022_bboxes, rrl013_bboxes)
 
     def test_research_presentation_todo_consolidation_and_promotions(self) -> None:
         todo = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/TODO.md").read_text(encoding="utf-8")
