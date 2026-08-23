@@ -1,0 +1,18 @@
+{
+  "anonymous_item_count": 5,
+  "candidate_count": 3,
+  "case_key": "medical",
+  "reference_count": 2,
+  "review_identity_sha256": "6b2849091c7509bf642df1a11c9e84fca7cb7aa987e766c8906cc17381ff21d7",
+  "review_input_sha256_by_anonymous_id": {
+    "item_A": "5b2c8dd0e0abeace036587de487446e0c75e9e862227a6be192741d0dcfb8c7e",
+    "item_B": "08ec78b40bb40c389f30f1888c938083a9f1eac979345902c1ba316d387ac83f",
+    "item_C": "3f304aa00bd0bf04150557d2a86b3a005a624120361f0eec71c450cc9b152b6f",
+    "item_D": "5f599c2a9ffecee90291fe7c91050f9a57925894ad226a83bb58a82f5fb3da26",
+    "item_E": "fc5d853706e7f39b694e9c91eb18a9a2b33600e2f7df56ef5f5e78b715b967f0"
+  },
+  "rubric_sha256": "9ba6acc7cb738e44a04e3d9c57155071f6c0878b8d76091579f3267bc29febdd",
+  "schema": "RESEARCH_PRESENTATION_COMPARATIVE_REVIEW_IDENTITY_V1",
+  "task_key": "021_research_presentation_comparative_reference_calibrated_visual_review",
+  "visual_inputs_sha256": "ab16d98117144edb9bdfe96aea6d050be10318783e965130f0e54b147b1b42eb"
+}

@@ -1,0 +1,73 @@
+name: Research Presentation Comparative Visual Review
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  comparative-visual-review:
+    runs-on: ubuntu-latest
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_VISUAL_REVIEW_API_KEY }}
+      OPENAI_VISUAL_REVIEW_MODEL: ${{ vars.OPENAI_VISUAL_REVIEW_MODEL }}
+      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install runtime dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install "${AI_BRIDGE_KIT_PIP_SPEC}"
+          python -m pip install pillow
+
+      - name: Refuse missing visual review secret
+        shell: bash
+        run: |
+          if [ -z "${OPENAI_API_KEY}" ]; then
+            echo "OPENAI_VISUAL_REVIEW_API_KEY is not configured."
+            exit 1
+          fi
+
+      - name: Prepare anonymous comparative inputs
+        run: |
+          python skills/tools/documents-media/presentations/shared/scripts/prepare_comparative_visual_review.py
+          python skills/tools/documents-media/presentations/shared/scripts/validate_comparative_visual_review.py --require-bytes
+
+      - name: Run statistical comparative review
+        run: |
+          ai-bridge visual-review run \
+            --target . \
+            --manifest results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review/statistical/visual_inputs.json \
+            --output results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review/statistical/VISUAL_REVIEW.json \
+            --timeout 900
+
+      - name: Run medical comparative review
+        run: |
+          ai-bridge visual-review run \
+            --target . \
+            --manifest results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review/medical/visual_inputs.json \
+            --output results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review/medical/VISUAL_REVIEW.json \
+            --timeout 900
+
+      - name: Validate and commit comparative evidence
+        shell: bash
+        run: |
+          python skills/tools/documents-media/presentations/shared/scripts/validate_comparative_visual_review.py --require-review --require-bytes
+          git add results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review/*/*.json
+          if git diff --cached --quiet; then
+            echo "No comparative visual review evidence changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Add 021 comparative visual review evidence"
+          git push

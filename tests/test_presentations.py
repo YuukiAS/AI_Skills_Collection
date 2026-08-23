@@ -380,6 +380,38 @@ class PresentationSharedTests(unittest.TestCase):
         rrl013_bboxes = [region["bbox"] for region in rrl013_regions if region["role"] == "primary_scientific_object"]
         self.assertNotEqual(rrl022_bboxes, rrl013_bboxes)
 
+    def test_comparative_reference_calibrated_visual_review_inputs(self) -> None:
+        scripts = SHARED / "scripts"
+        for name in [
+            "prepare_comparative_visual_review.py",
+            "validate_comparative_visual_review.py",
+        ]:
+            self.assertTrue((scripts / name).exists(), name)
+        root = REPO_ROOT / "results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review"
+        for case in ["statistical", "medical"]:
+            manifest_path = root / case / "visual_inputs.json"
+            map_path = root / case / "review_identity_map.json"
+            identity_path = root / case / "review_identity.json"
+            self.assertTrue(manifest_path.exists(), manifest_path)
+            self.assertTrue(map_path.exists(), map_path)
+            self.assertTrue(identity_path.exists(), identity_path)
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            identity_map = json.loads(map_path.read_text(encoding="utf-8"))
+            self.assertEqual(manifest["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
+            self.assertEqual(manifest["task_key"], "021_visual_comparison")
+            self.assertEqual(manifest["workflow_type"], "comparative-calibrated")
+            self.assertEqual(len(manifest["inputs"]), 5)
+            self.assertEqual(len([item for item in identity_map["items"] if item["item_class"] == "candidate"]), 3)
+            self.assertGreaterEqual(len([item for item in identity_map["items"] if item["item_class"] == "reference"]), 2)
+            visible_text = json.dumps(manifest, sort_keys=True)
+            for forbidden in ["RRL-", "SRC-", "candidate", "reference", "generated", "gold", "baseline", "reference_faithful", "alternative_composition", "controlled_wildcard"]:
+                self.assertNotIn(forbidden, visible_text)
+            self.assertEqual([item["logical_id"] for item in manifest["inputs"]], ["item_A", "item_B", "item_C", "item_D", "item_E"])
+        validator = scripts / "validate_comparative_visual_review.py"
+        validation = subprocess.run([sys.executable, str(validator)], check=False, capture_output=True, text=True)
+        self.assertEqual(validation.returncode, 0, validation.stderr)
+        self.assertIn("validated 2 comparative visual-review case(s)", validation.stdout)
+
     def test_research_presentation_todo_consolidation_and_promotions(self) -> None:
         todo = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/TODO.md").read_text(encoding="utf-8")
         research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")

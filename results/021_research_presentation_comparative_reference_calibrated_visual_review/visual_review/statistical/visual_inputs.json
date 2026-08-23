@@ -1,0 +1,63 @@
+{
+  "external_upload_authorization": "",
+  "identity_bindings": {
+    "adapter_identity": "021_visual_comparison:statistical",
+    "case_key": "statistical",
+    "immutable_review_identity_sha256": "618afde7eb8ed8ac39e3fa40fc88ae3b6a89a9a8567f9ae375054f2c164df8a0",
+    "item_sha256_by_anonymous_id": {
+      "item_A": "9bc66555d4fe50d6124655e0839c421673e3638c99b4d6a313d7340169516033",
+      "item_B": "4964d0056724766b8c8d0f34e0c91df9d5c9799f208ee2aa4ab31ddb61d76f7d",
+      "item_C": "cb7c0ee7ae7806b09699ee902a81d009677f95beaf775deea300577efbf1138e",
+      "item_D": "43f2c9c6d94959f2bb89f775c1f4e72477c9025ee942b06c93b83ff95c3c9efc",
+      "item_E": "82d62f066b98bcb4b27213474125faca7e26a914cecdfb100c262a1e547b2098"
+    },
+    "page_job_contract": "estimator/equation comparative review"
+  },
+  "inputs": [
+    {
+      "description": "Anonymous item_A for estimator/equation comparative review. Judge only visible pixels and shared page-job fit.",
+      "logical_id": "item_A",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/statistical/item_A.png",
+      "sha256": "9bc66555d4fe50d6124655e0839c421673e3638c99b4d6a313d7340169516033"
+    },
+    {
+      "description": "Anonymous item_B for estimator/equation comparative review. Judge only visible pixels and shared page-job fit.",
+      "logical_id": "item_B",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/statistical/item_B.png",
+      "sha256": "4964d0056724766b8c8d0f34e0c91df9d5c9799f208ee2aa4ab31ddb61d76f7d"
+    },
+    {
+      "description": "Anonymous item_C for estimator/equation comparative review. Judge only visible pixels and shared page-job fit.",
+      "logical_id": "item_C",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/statistical/item_C.png",
+      "sha256": "cb7c0ee7ae7806b09699ee902a81d009677f95beaf775deea300577efbf1138e"
+    },
+    {
+      "description": "Anonymous item_D for estimator/equation comparative review. Judge only visible pixels and shared page-job fit.",
+      "logical_id": "item_D",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/statistical/item_D.png",
+      "sha256": "43f2c9c6d94959f2bb89f775c1f4e72477c9025ee942b06c93b83ff95c3c9efc"
+    },
+    {
+      "description": "Anonymous item_E for estimator/equation comparative review. Judge only visible pixels and shared page-job fit.",
+      "logical_id": "item_E",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/statistical/item_E.png",
+      "sha256": "82d62f066b98bcb4b27213474125faca7e26a914cecdfb100c262a1e547b2098"
+    }
+  ],
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_kind": "comparative-calibrated-statistical",
+  "rubric": {
+    "instructions": "You are reviewing anonymous visual items for one shared page job: estimator/equation comparative review.\nInspect the actual pixels for every anonymous item before judging. Do not infer quality from file names, order, metadata, or SHA values.\nYou are intentionally not told which items are produced by a generator and which come from mature public research slides. Do not guess provenance; judge only visible quality.\nFirst review each item independently. For each anonymous item, identify the primary scientific object and assess composition maturity, balance, whitespace, typography hierarchy, scientific-object prominence, equation/figure/image treatment, annotation/caption/legend integration, visual specificity versus generic template, natural academic language, AI-template or fixture fingerprints, and projection readability.\nFor this estimator/equation page job, judge whether the equation is a mature scientific object with clear composition, direct annotation, projection-scale typography, and non-generic academic language.\nThen give relative tiers or ordering across the anonymous items. Explicitly explain the visual gaps between stronger and weaker items.\nMark which anonymous items appear to reach mature research-group-meeting or strong conference-talk level, and which are merely technically readable.\nDo not treat the best item in this set as automatically good enough. It is valid to conclude that no anonymous item reaches the mature talk-quality bar.\nReturn PASS if the comparative evidence is assessable and sufficiently detailed for downstream Planner use. Return REVISE only if the input package or rubric prevents a valid comparative judgment. Return BLOCKED only if the pixels cannot be assessed.\nCase key for engineering trace only: statistical.",
+    "source_contracts": []
+  },
+  "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+  "task_key": "021_visual_comparison",
+  "workflow_type": "comparative-calibrated"
+}
