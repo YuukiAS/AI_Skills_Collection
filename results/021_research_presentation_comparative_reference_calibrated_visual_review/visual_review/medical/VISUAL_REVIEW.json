@@ -1,0 +1,150 @@
+{
+  "blocking_findings": [],
+  "created_at": "2026-08-23T10:44:33Z",
+  "evidence_id": "visual-review-021_visual_comparison-8f3aa043d534",
+  "images": [
+    {
+      "logical_id": "item_A",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/medical/item_A.png",
+      "sha256": "5b2c8dd0e0abeace036587de487446e0c75e9e862227a6be192741d0dcfb8c7e"
+    },
+    {
+      "logical_id": "item_B",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/medical/item_B.png",
+      "sha256": "08ec78b40bb40c389f30f1888c938083a9f1eac979345902c1ba316d387ac83f"
+    },
+    {
+      "logical_id": "item_C",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/medical/item_C.png",
+      "sha256": "3f304aa00bd0bf04150557d2a86b3a005a624120361f0eec71c450cc9b152b6f"
+    },
+    {
+      "logical_id": "item_D",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/medical/item_D.png",
+      "sha256": "5f599c2a9ffecee90291fe7c91050f9a57925894ad226a83bb58a82f5fb3da26"
+    },
+    {
+      "logical_id": "item_E",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/medical/item_E.png",
+      "sha256": "fc5d853706e7f39b694e9c91eb18a9a2b33600e2f7df56ef5f5e78b715b967f0"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "adapter_identity": "021_visual_comparison:medical",
+      "case_key": "medical",
+      "immutable_review_identity_sha256": "2f999af8a606c65187c0f819289c6e78c525b50b1e4b19158ecc345f296b6dda",
+      "item_sha256_by_anonymous_id": {
+        "item_A": "5b2c8dd0e0abeace036587de487446e0c75e9e862227a6be192741d0dcfb8c7e",
+        "item_B": "08ec78b40bb40c389f30f1888c938083a9f1eac979345902c1ba316d387ac83f",
+        "item_C": "3f304aa00bd0bf04150557d2a86b3a005a624120361f0eec71c450cc9b152b6f",
+        "item_D": "5f599c2a9ffecee90291fe7c91050f9a57925894ad226a83bb58a82f5fb3da26",
+        "item_E": "fc5d853706e7f39b694e9c91eb18a9a2b33600e2f7df56ef5f5e78b715b967f0"
+      },
+      "page_job_contract": "medical-image comparison comparative review"
+    },
+    "manifest_sha256": "8f3aa043d534335b7d9c2342717c0f1b193c448e4585cf16578c056eff03a445",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "You are reviewing anonymous visual items for one shared page job: medical-image comparison comparative review.\nInspect the actual pixels for every anonymous item before judging. Do not infer quality from file names, order, metadata, or SHA values.\nYou are intentionally not told which items are produced by a generator and which come from mature public research slides. Do not guess provenance; judge only visible quality.\nFirst review each item independently. For each anonymous item, identify the primary scientific object and assess composition maturity, balance, whitespace, typography hierarchy, scientific-object prominence, equation/figure/image treatment, annotation/caption/legend integration, visual specificity versus generic template, natural academic language, AI-template or fixture fingerprints, and projection readability.\nFor this medical-image comparison page job, judge whether image pixels are the visual center, whether panel correspondence and legend are natural, and whether annotation supports rather than overwhelms the images.\nThen give relative tiers or ordering across the anonymous items. Explicitly explain the visual gaps between stronger and weaker items.\nMark which anonymous items appear to reach mature research-group-meeting or strong conference-talk level, and which are merely technically readable.\nDo not treat the best item in this set as automatically good enough. It is valid to conclude that no anonymous item reaches the mature talk-quality bar.\nReturn PASS if the comparative evidence is assessable and sufficiently detailed for downstream Planner use. Return REVISE only if the input package or rubric prevents a valid comparative judgment. Return BLOCKED only if the pixels cannot be assessed.\nCase key for engineering trace only: medical.",
+      "source_contracts": []
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "REVISE",
+      "item_id": "item_A",
+      "observations": [
+        "Primary object: dermoscopic lesion photographs with multiple colored segmentation contours.",
+        "The image grid is visually specific and image-led, but it packs 12 samples into four loosely separated groups without a contour legend or panel-level labels.",
+        "The very large title and substantial unused lower-page whitespace leave the actual image strip compressed into a shallow band.",
+        "Column headers (“2 masks” through “5 masks”) establish an experimental progression, but the correspondence of individual images and colored outlines is not explained.",
+        "Uneven crops, varying lesion scales, and several overlapping outlines make projection-level inspection difficult."
+      ],
+      "requirement_ids": [
+        "comparative-calibrated-medical"
+      ],
+      "summary": "Technically readable lesion examples, but the unlabeled contour treatment and weak grid structure prevent it from functioning as a mature comparison slide."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_B",
+      "observations": [
+        "Primary object: a synthetic grayscale cross-sectional cardiac-like image with a small colored lesion overlay.",
+        "The central image is clear, but it occupies only a small portion of a large outlined container; a second tiny duplicate appears in a separate card at upper right.",
+        "The headline, callout, and color legend use a coherent typographic treatment and make the intended claim readable.",
+        "The comparison is incomplete visually: there is no side-by-side source, prediction, or error panel at a useful scale.",
+        "Large empty areas and the isolated thumbnail make the layout feel unfinished rather than intentionally sparse."
+      ],
+      "requirement_ids": [
+        "comparative-calibrated-medical"
+      ],
+      "summary": "Clear narrative and natural legend wording, but underfilled composition and inadequate visual comparison make it merely technically readable."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_C",
+      "observations": [
+        "Primary object: a multi-row PET-style image, mask, and reconstruction comparison grid.",
+        "The dense image matrix offers the strongest real image-to-image correspondence in the set, with method names aligned beneath columns.",
+        "Several red arrows identify local mask differences, but the large red rectangle around only the left portion of the grid looks like an external markup rather than an integrated annotation.",
+        "The rightmost method label is visibly cut off (“Reconstru”), and a pale oversized background graphic intrudes behind the lower-right grid area.",
+        "There is no title, legend, or explanatory framing for the colors and arrows; the crowded crops and small panels limit projection readability."
+      ],
+      "requirement_ids": [
+        "comparative-calibrated-medical"
+      ],
+      "summary": "The most scientifically substantive comparison grid, but visible cropping, intrusive markup, and absent explanatory integration keep it below polished talk quality."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_D",
+      "observations": [
+        "Primary object: four matched synthetic cardiac-like panels for source image, ground-truth/prediction overlay, prediction, and TP/FP/FN error display.",
+        "The four equally sized cards form the cleanest and most immediately scannable comparison sequence in the set.",
+        "Title, rule, card geometry, labels, and the single bottom legend are consistently aligned and legible from a presentation distance.",
+        "The explanatory legend is clear, but the “Prediction” panel appears visually indistinguishable from the underlying grayscale image, weakening the intended panel-to-panel comparison.",
+        "The synthetic ring anatomy, simple lesion marks, and UI-like labels make the figure read as a fixture/demo rather than a mature medical-image result."
+      ],
+      "requirement_ids": [
+        "comparative-calibrated-medical"
+      ],
+      "summary": "Strongest overall layout and visual hierarchy; nevertheless, the low-specificity synthetic imagery and weakly informative prediction panel keep it short of mature research-group-meeting quality."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_E",
+      "observations": [
+        "Primary object: three synthetic cardiac-like panels showing source, GT/prediction overlay, and TP/FP/FN overlay.",
+        "The three cards are consistently sized and ordered, and the callout directly states the diagnostic interpretation of the small miss.",
+        "The callout is centered only beneath the latter two cards, creating an asymmetric relationship to the three-panel comparison; the legend is separated below all panels.",
+        "The images are large enough to inspect, but the content remains synthetic and the blank lower half of the page is substantial.",
+        "Color-coded overlays are limited and supportive rather than overwhelming, although the legend’s blue false-negative category is not readily visible in the displayed example."
+      ],
+      "requirement_ids": [
+        "comparative-calibrated-medical"
+      ],
+      "summary": "A readable, focused failure-mode explanation with better narrative integration than item_B, but it remains sparse, synthetic, and not fully balanced."
+    }
+  ],
+  "non_blocking_notes": [
+    "Relative order: item_D is strongest for balanced comparison structure and projection readability; item_E follows for its focused annotation and coherent three-panel story; item_B follows because its callout and legend are clear but the comparison is underdeveloped; item_C has richer real comparison evidence but is visibly rougher through crop failure and foreign-looking markup; item_A is weakest for shared-page fit because its dense dermoscopy gallery lacks a legend and coherent panel correspondence.",
+    "No item reaches a mature research-group-meeting or strong conference-talk bar. Items D and E are the closest in presentation structure, while item_C has the strongest underlying comparison content but needs substantial cleanup and framing.",
+    "The main gap between D/E and the weaker items is consistent card geometry, readable hierarchy, and integrated explanatory text. The main remaining gap from D/E to mature quality is scientific specificity and fully informative image panels rather than synthetic/demo-like fixtures."
+  ],
+  "overall_decision": "PASS",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "8f3aa043d534335b7d9c2342717c0f1b193c448e4585cf16578c056eff03a445",
+  "review_kind": "comparative-calibrated-medical",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "PASS",
+  "task_key": "021_visual_comparison",
+  "workflow_type": "generic"
+}

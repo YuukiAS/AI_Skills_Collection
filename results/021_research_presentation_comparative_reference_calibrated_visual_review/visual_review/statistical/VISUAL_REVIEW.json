@@ -1,0 +1,165 @@
+{
+  "blocking_findings": [],
+  "created_at": "2026-08-23T10:44:13Z",
+  "evidence_id": "visual-review-021_visual_comparison-d97821e39442",
+  "images": [
+    {
+      "logical_id": "item_A",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/statistical/item_A.png",
+      "sha256": "9bc66555d4fe50d6124655e0839c421673e3638c99b4d6a313d7340169516033"
+    },
+    {
+      "logical_id": "item_B",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/statistical/item_B.png",
+      "sha256": "4964d0056724766b8c8d0f34e0c91df9d5c9799f208ee2aa4ab31ddb61d76f7d"
+    },
+    {
+      "logical_id": "item_C",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/statistical/item_C.png",
+      "sha256": "cb7c0ee7ae7806b09699ee902a81d009677f95beaf775deea300577efbf1138e"
+    },
+    {
+      "logical_id": "item_D",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/statistical/item_D.png",
+      "sha256": "43f2c9c6d94959f2bb89f775c1f4e72477c9025ee942b06c93b83ff95c3c9efc"
+    },
+    {
+      "logical_id": "item_E",
+      "mime_type": "image/png",
+      "path": ".cache/research-presentation-comparative-review/021/statistical/item_E.png",
+      "sha256": "82d62f066b98bcb4b27213474125faca7e26a914cecdfb100c262a1e547b2098"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "adapter_identity": "021_visual_comparison:statistical",
+      "case_key": "statistical",
+      "immutable_review_identity_sha256": "6d47c1c2dee99aece49a7f0dd2c57ed89e4766b1f8799bb36f2aeee0f2d4c9af",
+      "item_sha256_by_anonymous_id": {
+        "item_A": "9bc66555d4fe50d6124655e0839c421673e3638c99b4d6a313d7340169516033",
+        "item_B": "4964d0056724766b8c8d0f34e0c91df9d5c9799f208ee2aa4ab31ddb61d76f7d",
+        "item_C": "cb7c0ee7ae7806b09699ee902a81d009677f95beaf775deea300577efbf1138e",
+        "item_D": "43f2c9c6d94959f2bb89f775c1f4e72477c9025ee942b06c93b83ff95c3c9efc",
+        "item_E": "82d62f066b98bcb4b27213474125faca7e26a914cecdfb100c262a1e547b2098"
+      },
+      "page_job_contract": "estimator/equation comparative review"
+    },
+    "manifest_sha256": "d97821e39442db72ad90d3855a1f9fc514f9e9e7ddfe62517a7aeb2f560df1c8",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "You are reviewing anonymous visual items for one shared page job: estimator/equation comparative review.\nInspect the actual pixels for every anonymous item before judging. Do not infer quality from file names, order, metadata, or SHA values.\nYou are intentionally not told which items are produced by a generator and which come from mature public research slides. Do not guess provenance; judge only visible quality.\nFirst review each item independently. For each anonymous item, identify the primary scientific object and assess composition maturity, balance, whitespace, typography hierarchy, scientific-object prominence, equation/figure/image treatment, annotation/caption/legend integration, visual specificity versus generic template, natural academic language, AI-template or fixture fingerprints, and projection readability.\nFor this estimator/equation page job, judge whether the equation is a mature scientific object with clear composition, direct annotation, projection-scale typography, and non-generic academic language.\nThen give relative tiers or ordering across the anonymous items. Explicitly explain the visual gaps between stronger and weaker items.\nMark which anonymous items appear to reach mature research-group-meeting or strong conference-talk level, and which are merely technically readable.\nDo not treat the best item in this set as automatically good enough. It is valid to conclude that no anonymous item reaches the mature talk-quality bar.\nReturn PASS if the comparative evidence is assessable and sufficiently detailed for downstream Planner use. Return REVISE only if the input package or rubric prevents a valid comparative judgment. Return BLOCKED only if the pixels cannot be assessed.\nCase key for engineering trace only: statistical.",
+      "source_contracts": []
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "REVISE",
+      "item_id": "item_A",
+      "observations": [
+        "Primary object is an inter-annotator-agreement definition, accompanied by a dermoscopic image and three binary masks.",
+        "The equation is legible, but is embedded in oversized gray sentence text rather than presented as a composed mathematical object.",
+        "The right-side images are widely separated, inconsistently sized, and lack labels tying each mask to an annotator or to the source image.",
+        "Very large unused areas and the bottom-edge cropped mask make the page look unfinished.",
+        "The title and body typography are disproportionately large relative to the small scientific images."
+      ],
+      "requirement_ids": [
+        "composition",
+        "equation_prominence",
+        "annotation_integration",
+        "projection_readability"
+      ],
+      "summary": "Technically readable equation slide, but weak image/mask integration and visibly unfinished spatial composition prevent mature talk quality."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_B",
+      "observations": [
+        "Primary object is a cluster-robust variance estimator with a prose callout.",
+        "The two-line title collides visually with the thin divider, and the equation panel is crowded directly beneath it.",
+        "Equation glyphs are very dark against a black rectangle, making the estimator difficult to read at projection scale.",
+        "The callout is separated from the expression it describes, with no direct visual link to the middle term.",
+        "Most of the lower page is blank; the small footer sentence does not provide meaningful supporting structure."
+      ],
+      "requirement_ids": [
+        "composition",
+        "equation_prominence",
+        "annotation_integration",
+        "projection_readability"
+      ],
+      "summary": "The title and callout state a clear topic, but the nearly unreadable equation and top-heavy layout make this only marginally usable."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_C",
+      "observations": [
+        "Primary object is the same cluster-robust variance estimator, centered in a bordered panel with an explanatory callout below.",
+        "The centered equation card creates a clearer hierarchy than the more top-loaded variants.",
+        "The equation remains dark-on-black and is not reliably legible from the displayed pixels.",
+        "The callout is centered below the formula but does not point to or highlight the claimed middle term.",
+        "The page has substantial empty space; the centered elements are orderly but feel like isolated template cards rather than an integrated scientific explanation."
+      ],
+      "requirement_ids": [
+        "composition",
+        "equation_prominence",
+        "annotation_integration",
+        "projection_readability"
+      ],
+      "summary": "The best-composed of the cluster-robust slides, but poor equation contrast and indirect annotation keep it below mature presentation quality."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_D",
+      "observations": [
+        "Primary object is the cluster-robust variance estimator with an explanatory callout placed to its lower right.",
+        "The formula panel is positioned cleanly beneath the title, but its dark equation on black is again difficult to decipher.",
+        "The callout has natural academic wording but is detached from the specific mathematical term and lacks a connector or highlighting.",
+        "The footer sits isolated below the equation while the lower half of the page remains empty.",
+        "The layout is more balanced than item_B, though less cohesive than item_C because the explanation floats to one side."
+      ],
+      "requirement_ids": [
+        "composition",
+        "equation_prominence",
+        "annotation_integration",
+        "projection_readability"
+      ],
+      "summary": "Readable slide structure and sensible wording, but the key estimator is visually inaccessible and the components do not form a unified explanation."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "item_E",
+      "observations": [
+        "Primary object is the poststratification identity, shown as a single large, sharply typeset fraction.",
+        "The equation has strong contrast, crisp mathematical typography, and sufficient scale for projection.",
+        "The restrained blue title strip and ample white space establish a simple, coherent hierarchy without competing decorations.",
+        "There are no direct annotations, variable definitions, examples, or captions, so the slide supports a concise identity statement rather than a self-contained explanation.",
+        "The large lower blank area is intentional-looking and does not disrupt the primary equation."
+      ],
+      "requirement_ids": [
+        "composition",
+        "equation_prominence",
+        "projection_readability",
+        "academic_language"
+      ],
+      "summary": "A visually mature and projection-ready equation slide. It reaches a strong research-group-meeting/conference-talk baseline for introducing one identity, while remaining intentionally minimal."
+    }
+  ],
+  "non_blocking_notes": [
+    "Relative visual tier: item_E is clearly strongest; item_A is second for equation readability but has markedly weaker figure integration and unfinished composition; item_C leads the cluster-robust variants through clearer central hierarchy; item_D follows; item_B is weakest due to title/divider crowding and top-heavy spacing.",
+    "The main gap between item_E and items_B–D is that item_E makes its equation the visibly legible scientific object, whereas the estimator glyphs in items_B–D nearly disappear into black equation panels.",
+    "Items_A–D are technically interpretable in parts but do not reach mature talk quality. Item_E is the only item that reaches that bar."
+  ],
+  "overall_decision": "PASS",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "d97821e39442db72ad90d3855a1f9fc514f9e9e7ddfe62517a7aeb2f560df1c8",
+  "review_kind": "comparative-calibrated-statistical",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "PASS",
+  "task_key": "021_visual_comparison",
+  "workflow_type": "generic"
+}
