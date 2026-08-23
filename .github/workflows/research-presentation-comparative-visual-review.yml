@@ -44,19 +44,25 @@ jobs:
 
       - name: Run statistical comparative review
         run: |
+          mkdir -p results/021_visual_comparison/visual_review/statistical
           ai-bridge visual-review run \
             --target . \
             --manifest results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review/statistical/visual_inputs.json \
-            --output results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review/statistical/VISUAL_REVIEW.json \
+            --output results/021_visual_comparison/visual_review/statistical/VISUAL_REVIEW.json \
             --timeout 900
+          cp results/021_visual_comparison/visual_review/statistical/VISUAL_REVIEW.json \
+            results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review/statistical/VISUAL_REVIEW.json
 
       - name: Run medical comparative review
         run: |
+          mkdir -p results/021_visual_comparison/visual_review/medical
           ai-bridge visual-review run \
             --target . \
             --manifest results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review/medical/visual_inputs.json \
-            --output results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review/medical/VISUAL_REVIEW.json \
+            --output results/021_visual_comparison/visual_review/medical/VISUAL_REVIEW.json \
             --timeout 900
+          cp results/021_visual_comparison/visual_review/medical/VISUAL_REVIEW.json \
+            results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review/medical/VISUAL_REVIEW.json
 
       - name: Validate and commit comparative evidence
         shell: bash
