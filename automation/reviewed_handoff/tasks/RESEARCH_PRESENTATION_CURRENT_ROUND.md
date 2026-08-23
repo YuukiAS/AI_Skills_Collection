@@ -8,65 +8,68 @@
 
 `018_presentation_external_method_audit` 已 PASS。
 
-018 的核心结论保持不变：当前最大架构缺口不是更多抽象设计规则，而是 reference library 缺少机器可用的 composition representation，因此新链路应按：
-
-```text
-inspected reference page
--> structured composition representation
--> internal candidate design search
--> comparative reference-calibrated visual review
--> locked design system
--> real holdout one-shot generation
-```
-
-逐步推进。
+核心结论：当前主要缺口不是继续堆抽象规则，而是把真实优秀 reference slide 转成机器可用、可进入生成决策的设计表示。
 
 ## 已完成：019 Reference Composition Representation
 
-`019_research_presentation_exemplar_composition_representation` 已在第一轮独立审核中 PASS。
+`019_research_presentation_exemplar_composition_representation` 已 PASS。
 
-当前新增 composition layer 已包含：
+当前 composition layer 已包含 13 个真实 inspected composition records、8 类 renderer-neutral composition families、normalized geometry / hierarchy / alignment / reading flow、deterministic validator、只读 selector 与不含 source pixels 的 abstract debug montage。
 
-- 13 个绑定真实 inspected RRL / canonical rendered-page SHA 的 composition records；
-- 8 个 renderer-neutral composition families；
-- normalized regions / primary scientific-object area / hierarchy / alignment / reading flow；
-- deterministic validator；
-- 只读 composition selector；
-- 不含 source pixels 的 abstract debug montage。
+019 证明系统已经能机器读取“优秀科研页面怎么构图”。
 
-019 证明系统现在能够机器读取“优秀科研页面怎么构图”，但还没有证明生成器会真正使用这些 geometry，也没有 multi-candidate visual search、comparative review 或真实 holdout 证据。
+## 已完成：020 Reference-Calibrated Candidate Search
+
+`020_research_presentation_reference_calibrated_candidate_search` 已在第二轮独立审核中 PASS。
+
+020 现在证明：
+
+- 同一 scientific content 可以内部生成恰好 3 个 compositionally distinct candidates；
+- selected 019 source record 的真实 normalized geometry 已进入 candidate bbox 推导，而不是只选 family 后套固定坐标；
+- source-to-candidate split / scale / translate / reorder 可审计；
+- statistical estimator 与 medical-image 两类 request 共用同一 shared candidate engine；
+- wildcard / alternative source selection 只在 scientific-job compatible pool 中工作；
+- candidate 仍使用相同 neutral preview skin，因此差异主要来自 composition，不是换色；
+- old synthetic assets 仍只承担 regression content，不是 gold visual baseline。
+
+020 最终 required CI 已 PASS。020 仍不证明任何 candidate 已达到成熟科研汇报视觉质量。
 
 ## 当前 bounded task
 
 当前任务：
 
-`020_research_presentation_reference_calibrated_candidate_search`
+`021_research_presentation_comparative_reference_calibrated_visual_review`
 
-目标：让同一份 scientific slide content 真正基于 019 的 inspected composition exemplars 产生三个内部候选构图，并保留 source-to-candidate geometry transfer，而不是继续单次默认布局。
+目标：把 020 的三个 generated candidate previews 与匹配的真实 inspected reference renders 放进同一个匿名相对视觉审查框架，第一次真正回答：
 
-020 的关键要求：
+> candidate 和成熟科研 reference 放在一起时，到底差多少？
 
-- 同一 content payload 内部生成恰好 3 个 candidate previews；
-- 三个方向分别承担 reference-faithful、alternative composition、controlled wildcard；
-- 差异必须主要来自 composition / object hierarchy，不是换三个颜色；
-- candidate search 必须动态消费 019 selector/index，不得硬编码 RRL / fixture layout；
-- preview 必须含真实 scientific object，而不是纯 wireframe；
-- 至少覆盖一个统计公式/估计量 regression request 和一个医学影像/aligned-evidence regression request；
-- old synthetic fixtures 只允许作为 candidate-engine regression content，不得提升为 gold visual baseline；
-- 020 不做 comparative Terra、不选 winner、不锁定全稿 design system，也不做真实 holdout。
+021 的关键要求：
+
+- statistical estimator 与 medical-image 两个 case 各使用 3 个 020 candidates + 2–4 个真实 inspected reference renders；
+- reference pixels 必须真实送入 `gpt-5.6-terra`，不能用 RRL prose / bbox metadata 替代；
+- Terra-visible inputs 使用匿名 item IDs，不暴露作者、机构、RRL/SRC、candidate strategy，也不告诉 reviewer 哪些是 generated / reference；
+- 同时记录 019 canonical render SHA 与本次实际 reviewer-input SHA；
+- 每个 immutable case identity 只运行一次 live Terra；
+- reviewer 必须给出逐 item 的相对成熟度 / ordering / visual gap，而不是只给全局绝对 PASS；
+- 解码后允许 `NO_CANDIDATE_MEETS_REFERENCE_BAR`，不得强制 best-of-three 晋级；
+- 不提交外部 reference pixels，不修改 Bridge Kit core，也不修改 020 candidate geometry 追求本轮结果。
+
+021 的 PASS 只表示 comparative review 机制可信，不代表 candidate 质量 PASS。
 
 ## 后续 roadmap（非 Executor 授权）
 
-020 PASS 后，Planner 再单独冻结下一任务。后续仍需至少完成：
+021 PASS 后，Planner 根据真实 comparative evidence 决定下一 bounded task。若 candidate 明显低于 reference bar，优先修 design/candidate layer；只有 candidate 已接近 reference bar，才进入 deck-wide design-system locking / generation integration。
 
-- comparative reference-calibrated visual review；
+长期仍需至少完成：
+
 - deck-wide design-system locking / generation integration；
 - contact-sheet / deck-rhythm QA；
 - real statistical holdout one-shot；
 - real medical-imaging holdout one-shot；
 - 必要时独立 Beamer holdout。
 
-这些仍只是长期方向。没有对应 `PLAN_FROZEN` 时，Executor 不得自行开始。
+没有对应 `PLAN_FROZEN` 时，Executor 不得自行开始这些阶段。
 
 ## 当前完成条件
 
