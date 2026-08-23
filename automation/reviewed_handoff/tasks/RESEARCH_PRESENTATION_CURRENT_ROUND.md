@@ -44,40 +44,47 @@
 - no-winner 是合法结果，没有 best-of-three 强制晋级；
 - required CI 已 PASS。
 
-更重要的是，021 第一次给出了可信的负面质量结论：
+021 同时给出了可信的负面质量基线：统计 generated candidates 全部低于成熟公式页 reference bar，医学影像 candidates 也存在 image prominence / panel integration / fixture 感问题。
 
-- statistical estimator/equation：真实成熟 reference RRL-028 明显优于全部三个 generated candidates；generated 最好的一版仍存在 equation contrast / legibility 与 direct mathematical annotation 差距；
-- medical-image comparison：所有 items 都低于 mature research-group-meeting / strong conference-talk bar；generated candidates 的可修问题包括 image prominence、panel integration 与 sparse fixture 感，同时 synthetic/demo-like evidence 本身也是当前 regression 的上限。
+## 已完成：022 Candidate Visual Finish Repair
 
-因此 021 的 PASS 只代表“比较机制可信”，不代表 candidate quality PASS。
+`022_research_presentation_candidate_visual_finish_repair` 已在第一轮独立审核中 PASS。
+
+022 关闭了 021 暴露出的 candidate-layer visual-finish blocker，同时保持 019/020 reference-to-geometry 与 semantic compatibility：
+
+- statistical generated `reference_faithful` candidate 在匿名 comparative review 中达到 mature research-group-meeting / strong conference-talk bar；公式对比度、投影可读性与 direct mathematical annotation 已实质修复；
+- medical generated `controlled_wildcard` 与 `alternative_composition` 达到成熟组会水平；image prominence、panel labels、legend 与 annotation integration 已明显改善；
+- 三候选继续共享同一 page-level visual tokens，差异来自 composition 而不是换 theme；
+- old candidate identities 保留，repair 后产生新的 preview SHA；
+- 每个 repaired immutable identity 只运行一次 live Terra；
+- required CI 已 PASS。
+
+这证明单页 candidate engine 已开始接近真实成熟 reference bar，但还不能推出完整 deck 已成熟。
 
 ## 当前 bounded task
 
 当前任务：
 
-`022_research_presentation_candidate_visual_finish_repair`
+`023_research_presentation_deck_design_system_integration`
 
-目标：在保持 019/020 reference geometry transfer 与 semantic compatibility 的前提下，修 candidate visual finish / scientific-object treatment，而不是继续扩 reference metadata。
+目标：把 019–022 已验证的 reference retrieval、composition transfer、candidate search 与 visual-finish primitives 接入完整多页 PPTX generation，并建立 renderer-neutral **deck design profile**。
 
-022 重点冻结为：
+023 冻结重点：
 
-- statistical equation page：提高公式对比度、投影可读性，annotation 必须直接绑定具体数学对象/term，而不是远距离解释文字；
-- medical-image page：让 image/overlay 真正占据 source-derived primary region，panel labels / legend / annotation 直接整合，去掉 generic card/padding 与小图 + 大块空白的 fixture 感；
-- 三候选继续共享同一 page-level visual tokens，差异仍来自 composition，而不是换 theme；
-- old candidate identities 保留，repair 后产生新的 preview SHA；
-- 复用 021 comparative pipeline，对新的 immutable statistical / medical identities 各只运行一次 live Terra；
-- 不把 synthetic medical fixture 美化成真实临床证据；若剩余差距主要来自 synthetic evidence realism，必须明确留给后续 real holdout。
-
-022 通过前不得进入 deck-wide design-system locking / generation integration。
+- deck-wide 锁定 typography、palette、spacing、caption/annotation、chart/diagram/image/equation treatment；
+- page-local scientific composition 继续由 page function + matched inspected composition records 决定，不允许统一模板覆盖；
+- 使用两个 coherent multi-page engineering mini-decks 验证同一 shared integration path；
+- 至少 3 种 major composition families / mini-deck；
+- 生成真实 editable PPTX，并从真实 presentation engine 渲染 PDF/PNG；
+- 保持 019 geometry、020 semantic compatibility、022 equation / medical-image visual-finish semantics；
+- 不把工程 fixture 当 gold holdout，不提前宣告 contact-sheet rhythm QA 已完成。
 
 ## 后续 roadmap（非 Executor 授权）
 
-只有 repaired candidates 已接近真实 reference bar，Planner 才创建下一 bounded task 进入 deck-wide design-system locking / generation integration。
+023 PASS 后，Planner 才创建下一 bounded task 进入正式 **contact-sheet / deck-rhythm QA**。
 
-长期仍需完成：
+随后长期仍需完成：
 
-- deck-wide design-system locking / generation integration；
-- contact-sheet / deck-rhythm QA；
 - real statistical holdout one-shot；
 - real medical-imaging holdout one-shot；
 - 必要时独立 Beamer holdout。
@@ -86,6 +93,6 @@
 
 ## 当前完成条件
 
-本 round 只有在 reference-to-composition transfer、内部设计探索、comparative review、candidate visual quality、deck-rhythm QA 与两个真实 holdout one-shot benchmark 全部成立后，才有资格写 `ONE_SHOT_QUALITY_PASS`。
+本 round 只有在 reference-to-composition transfer、内部设计探索、comparative review、candidate visual quality、deck-wide design-system integration、deck-rhythm QA 与两个真实 holdout one-shot benchmark 全部成立后，才有资格写 `ONE_SHOT_QUALITY_PASS`。
 
 当前绝不能宣告本轮 PASS，也不能再次用单一 Terra absolute PASS 关闭 design-quality 目标。
