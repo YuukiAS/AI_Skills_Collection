@@ -1,18 +1,18 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "023_research_presentation_deck_design_system_integration",
-  "state": "REVISE",
+  "state": "WAITING_FOR_CI",
   "review_round": 1,
   "max_review_rounds": 2,
   "plan_revision": 0,
   "max_plan_revisions": 1,
   "base_commit": "2f61841b955083685f33d0cdbaf286aade71232c",
   "base_branch": "main",
-  "implementation_commit": "4ac8a553e7c5383e7ac53f0c7da7ee182e088068",
+  "implementation_commit": "1ca5c01df418518f52a287bad1c3d90db63587cc",
   "ci_required": true,
-  "ci_status": "PASS",
+  "ci_status": "PENDING",
   "last_review_decision": "REVISE",
   "review_limit_reached": false,
   "human_gate_reason": null,
-  "next_action": "RUN_CODEX_EXECUTOR"
+  "next_action": "WAIT_FOR_CI"
 }

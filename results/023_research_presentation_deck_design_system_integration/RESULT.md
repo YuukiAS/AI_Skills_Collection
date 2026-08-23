@@ -1,14 +1,19 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 023_research_presentation_deck_design_system_integration
-implementation_commit: 4ac8a553e7c5383e7ac53f0c7da7ee182e088068
+implementation_commit: 1ca5c01df418518f52a287bad1c3d90db63587cc
 ---
 
 # 023 Research Presentation Deck Design-System Integration - Executor Result
 
 ## Implementation commit
 
-Current implementation commit: `4ac8a553e7c5383e7ac53f0c7da7ee182e088068`.
+Current implementation commit: `1ca5c01df418518f52a287bad1c3d90db63587cc`.
+
+Task commits:
+
+- `4ac8a553e7c5383e7ac53f0c7da7ee182e088068` - initial 023 deck design-system integration implementation.
+- `1ca5c01df418518f52a287bad1c3d90db63587cc` - repaired F-023-01 by making the PPTX renderer consume locked profile tokens as real input and adding profile-token mutation regression evidence.
 
 ## Implemented
 
@@ -30,6 +35,12 @@ The implementation preserves the 019/020/022 layering: inspected composition
 records and candidate geometry inform page-local layout, while the new design
 profile locks typography, color roles, spacing, annotation treatment, chart
 treatment, image-panel treatment, equation treatment, and caption treatment.
+
+Round-1 repair made the renderer profile-driven: font family, type scale,
+background/ink/muted/accent/warning/line colors, annotation leader width,
+equation highlight/leader roles, caption text, and image-panel borders are read
+from `profile["locked_properties"]` during native PPTX drawing. Module constants
+remain only as default profile-construction values.
 
 ## Generated artifacts
 
@@ -62,6 +73,13 @@ Generated evidence includes:
 - `generated/medical_design_system_fixture/pdf/medical_design_system_fixture.pdf`
 - `generated/medical_design_system_fixture/rendered/slide-1.png` through `slide-4.png`
 - `generated/medical_design_system_fixture/MECHANICAL_VISUAL_REVIEW.json`
+- `generated/profile_mutation_regression/PROFILE_MUTATION_REGRESSION.json`
+- `generated/profile_mutation_regression/mutated_deck_design_profile.json`
+- `generated/profile_mutation_regression/statistical_design_system_fixture_mutated_profile/**`
+
+The mutation regression changes `color_roles.accent` and `type_scale.title_pt`,
+then regenerates the statistical fixture. It records that the native PPTX XML
+SHA changes while the page-local geometry signature remains stable.
 
 ## Regression coverage
 
@@ -79,6 +97,7 @@ Generated evidence includes:
 - stable locked profile SHA across slides;
 - variation in primary scientific-object roles;
 - rendered combined review pack presence;
+- profile-token mutation changes native PPTX XML while preserving geometry;
 - audience-facing anti-meta leakage checks.
 
 ## Verification
