@@ -67,21 +67,27 @@
 
 `023_research_presentation_deck_design_system_integration`
 
-目标：把 019–022 已验证的 reference retrieval、composition transfer、candidate search 与 visual-finish primitives 接入完整多页 PPTX generation，并建立 renderer-neutral **deck design profile**。
+023 已完成两轮正式 review，当前停在人工决策点，**尚未 PASS**。真实 CI 已成功；第二轮继续 `REVISE` 的原因不是工程失败，而是第一轮同一个 design-profile integration blocker 只部分关闭。
 
-023 冻结重点：
+已经成立的部分：
 
-- deck-wide 锁定 typography、palette、spacing、caption/annotation、chart/diagram/image/equation treatment；
-- page-local scientific composition 继续由 page function + matched inspected composition records 决定，不允许统一模板覆盖；
-- 使用两个 coherent multi-page engineering mini-decks 验证同一 shared integration path；
-- 至少 3 种 major composition families / mini-deck；
-- 生成真实 editable PPTX，并从真实 presentation engine 渲染 PDF/PNG；
-- 保持 019 geometry、020 semantic compatibility、022 equation / medical-image visual-finish semantics；
-- 不把工程 fixture 当 gold holdout，不提前宣告 contact-sheet rhythm QA 已完成。
+- deck profile 已真正驱动字体、字号、颜色角色、annotation leader 与 equation highlight / leader role；
+- profile mutation 已证明修改 `accent` / `title_pt` 会改变 native PPTX XML，同时 page-local geometry signature 保持稳定；
+- 两套 coherent multi-page PPTX engineering fixtures、real render、mechanical QA 与 composition diversity 都继续通过。
+
+仍未闭合的部分：
+
+- `spacing.outer_margin/object_gap/annotation_gap/panel_label_gap` 仍主要只是 profile metadata，实际 title/caption/panel-label 等位置仍存在固定字面坐标；
+- `image_panel.label_position/legend_binding/container_role` 与 `caption.position/style` 仍没有完整驱动 renderer；
+- 当前 mutation regression 只覆盖颜色和标题字号，不能证明剩余 spacing / caption / image-panel contract 已成为 executable design-system input。
+
+因此 023 已达到两轮 review limit，当前状态为 `AWAIT_HUMAN_DECISION`。在用户明确授权恢复之前，不得自动开启第三轮修复，也不得提前创建 contact-sheet / deck-rhythm QA task。
 
 ## 后续 roadmap（非 Executor 授权）
 
-023 PASS 后，Planner 才创建下一 bounded task 进入正式 **contact-sheet / deck-rhythm QA**。
+如果用户授权一次严格限定的 023 recovery，应只补齐剩余 design-profile executable contract，并通过新的 mutation regression + real CI 做 recovery closure；不得改 reference corpus、019/020/021/022 机制，也不得提前开始 holdout。
+
+只有 023 recovery 独立关闭后，Planner 才创建下一 bounded task 进入正式 **contact-sheet / deck-rhythm QA**。
 
 随后长期仍需完成：
 
