@@ -1,8 +1,8 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "022_research_presentation_candidate_visual_finish_repair",
-  "state": "WAITING_FOR_CI",
-  "review_round": 0,
+  "state": "AWAIT_HUMAN_DECISION",
+  "review_round": 1,
   "max_review_rounds": 2,
   "plan_revision": 0,
   "max_plan_revisions": 1,
@@ -10,9 +10,9 @@
   "base_branch": "main",
   "implementation_commit": "9beea8af62478ed1adc4de55aa5dd2d8f434b8ac",
   "ci_required": true,
-  "ci_status": "PENDING",
-  "last_review_decision": null,
+  "ci_status": "PASS",
+  "last_review_decision": "PASS",
   "review_limit_reached": false,
-  "human_gate_reason": null,
-  "next_action": "WAIT_FOR_CI"
+  "human_gate_reason": "PASS",
+  "next_action": "WAIT_FOR_HUMAN_DECISION"
 }
