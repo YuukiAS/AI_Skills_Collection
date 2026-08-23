@@ -1,0 +1,37 @@
+{
+  "schema": "RESEARCH_DECK_DESIGN_SYSTEM_FIXTURE_PLAN_V1",
+  "task_key": "023_research_presentation_deck_design_system_integration",
+  "deck_key": "medical_design_system_fixture",
+  "fixture_boundary": "engineering integration fixture, not final design-quality holdout",
+  "deck_design_profile": "results/023_research_presentation_deck_design_system_integration/generated/deck_design_profile.json",
+  "slides": [
+    {
+      "slide_id": "med_s01",
+      "deck_role": "image_target",
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "title": "Overlay errors localize the small-lesion failure mode",
+      "caption": "Synthetic public-safe image fixture."
+    },
+    {
+      "slide_id": "med_s02",
+      "deck_role": "method_path",
+      "page_function": "EXPERIMENT_DESIGN",
+      "title": "The evaluation path keeps image evidence and endpoints paired",
+      "caption": "Input, mask, prediction, and endpoint summaries are generated from the same synthetic case."
+    },
+    {
+      "slide_id": "med_s03",
+      "deck_role": "quantitative_result",
+      "page_function": "RESULT_FIGURE",
+      "title": "Lesion-size recall exposes the endpoint-level weakness",
+      "caption": "Deterministic fixture result; not clinical validation."
+    },
+    {
+      "slide_id": "med_s04",
+      "deck_role": "same_case_error",
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "title": "Same-case error maps show where the endpoint is lost",
+      "caption": "Synthetic case-level comparison keeps GT, prediction, and error map tied together."
+    }
+  ]
+}

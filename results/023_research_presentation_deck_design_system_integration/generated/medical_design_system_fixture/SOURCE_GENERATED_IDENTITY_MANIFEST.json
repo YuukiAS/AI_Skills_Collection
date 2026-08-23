@@ -1,0 +1,737 @@
+{
+  "schema": "RESEARCH_DECK_DESIGN_SYSTEM_INTEGRATION_MANIFEST_V1",
+  "task_key": "023_research_presentation_deck_design_system_integration",
+  "deck_key": "medical_design_system_fixture",
+  "fixture_boundary": "engineering integration fixture, not final design-quality holdout",
+  "deck_design_profile": "results/023_research_presentation_deck_design_system_integration/generated/deck_design_profile.json",
+  "deck_plan": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/DECK_PLAN.json",
+  "locked_properties_sha256": "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8",
+  "pptx": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/medical_design_system_fixture.pptx",
+  "pptx_sha256": "b8b01dcaba784f178cd5664ffb15a1fcef4b442280d0bbb3fa1140507cea79d2",
+  "editable_slide_count": 4,
+  "slides": [
+    {
+      "slide_id": "med_s01",
+      "title": "Overlay errors localize the small-lesion failure mode",
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "deck_role": "image_target",
+      "source_reference_ids": [
+        "RRL-022"
+      ],
+      "source_page_function": "MEDICAL_IMAGE_COMPARISON",
+      "source_layout_family": "aligned-multi-panel",
+      "layout_family": "aligned-multi-panel-focus-callout",
+      "reading_flow": "panel-grid-by-row-and-column-focus-callout",
+      "primary_object_roles": [
+        "medical_image"
+      ],
+      "primary_bboxes": [
+        {
+          "x": 0.1,
+          "y": 0.1834,
+          "w": 0.312,
+          "h": 0.603
+        }
+      ],
+      "regions": [
+        {
+          "region_id": "title",
+          "role": "title",
+          "bbox": {
+            "x": 0.1,
+            "y": 0.04,
+            "w": 0.78,
+            "h": 0.08
+          },
+          "content_mode": "text",
+          "content_slot_id": "title"
+        },
+        {
+          "region_id": "image_overlay",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.1,
+            "y": 0.1834,
+            "w": 0.312,
+            "h": 0.603
+          },
+          "content_mode": "medical_image",
+          "content_slot_id": "overlay_image"
+        },
+        {
+          "region_id": "image_error",
+          "role": "secondary_scientific_object",
+          "bbox": {
+            "x": 0.5056,
+            "y": 0.2035,
+            "w": 0.234,
+            "h": 0.3082
+          },
+          "content_mode": "medical_image",
+          "content_slot_id": "error_image"
+        },
+        {
+          "region_id": "annotation",
+          "role": "annotation",
+          "bbox": {
+            "x": 0.49,
+            "y": 0.5385,
+            "w": 0.3744,
+            "h": 0.1206
+          },
+          "content_mode": "text",
+          "content_slot_id": "annotation"
+        },
+        {
+          "region_id": "legend",
+          "role": "legend",
+          "bbox": {
+            "x": 0.49,
+            "y": 0.6926,
+            "w": 0.3744,
+            "h": 0.0938
+          },
+          "content_mode": "legend",
+          "content_slot_id": "legend"
+        }
+      ],
+      "geometry_transfer": [
+        {
+          "source_reference_id": "RRL-022",
+          "source_region_id": "image_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.1,
+            "y": 0.08,
+            "w": 0.78,
+            "h": 0.76
+          },
+          "candidate_region_id": "title",
+          "candidate_content_slot_id": "title",
+          "candidate_bbox": {
+            "x": 0.1,
+            "y": 0.04,
+            "w": 0.78,
+            "h": 0.08
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "derived a title band from the source primary object top edge because the source record has no title region"
+        },
+        {
+          "source_reference_id": "RRL-022",
+          "source_region_id": "image_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.1,
+            "y": 0.08,
+            "w": 0.78,
+            "h": 0.76
+          },
+          "candidate_region_id": "image_overlay",
+          "candidate_content_slot_id": "overlay_image",
+          "candidate_bbox": {
+            "x": 0.1,
+            "y": 0.1834,
+            "w": 0.312,
+            "h": 0.603
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "scaled the source image-grid bbox into a dominant overlay panel"
+        },
+        {
+          "source_reference_id": "RRL-022",
+          "source_region_id": "image_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.1,
+            "y": 0.08,
+            "w": 0.78,
+            "h": 0.76
+          },
+          "candidate_region_id": "image_error",
+          "candidate_content_slot_id": "error_image",
+          "candidate_bbox": {
+            "x": 0.5056,
+            "y": 0.2035,
+            "w": 0.234,
+            "h": 0.3082
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split a small diagnostic error panel from the source image-grid area"
+        },
+        {
+          "source_reference_id": "RRL-022",
+          "source_region_id": "image_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.1,
+            "y": 0.08,
+            "w": 0.78,
+            "h": 0.76
+          },
+          "candidate_region_id": "annotation",
+          "candidate_content_slot_id": "annotation",
+          "candidate_bbox": {
+            "x": 0.49,
+            "y": 0.5385,
+            "w": 0.3744,
+            "h": 0.1206
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split the source grid side area into a failure annotation"
+        },
+        {
+          "source_reference_id": "RRL-022",
+          "source_region_id": "column_labels",
+          "source_role": "legend",
+          "source_bbox": {
+            "x": 0.14,
+            "y": 0.82,
+            "w": 0.7,
+            "h": 0.05
+          },
+          "candidate_region_id": "legend",
+          "candidate_content_slot_id": "legend",
+          "candidate_bbox": {
+            "x": 0.49,
+            "y": 0.6926,
+            "w": 0.3744,
+            "h": 0.0938
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "translated the source legend relationship into the sidecar area"
+        }
+      ],
+      "locked_profile_id": "research-deck-design-profile-v1",
+      "locked_properties_sha256": "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8",
+      "page_local_geometry_preserved": true,
+      "audience_text": [
+        "Overlay errors localize the small-lesion failure mode",
+        "Synthetic public-safe image fixture."
+      ]
+    },
+    {
+      "slide_id": "med_s02",
+      "title": "The evaluation path keeps image evidence and endpoints paired",
+      "page_function": "EXPERIMENT_DESIGN",
+      "deck_role": "method_path",
+      "source_reference_ids": [
+        "RRL-019"
+      ],
+      "source_page_function": "EXPERIMENT_DESIGN",
+      "source_layout_family": "horizontal-process-flow",
+      "layout_family": "horizontal-process-flow",
+      "reading_flow": "title-to-short-context-to-application-flow",
+      "primary_object_roles": [
+        "diagram"
+      ],
+      "primary_bboxes": [
+        {
+          "x": 0.3,
+          "y": 0.35,
+          "w": 0.18,
+          "h": 0.3
+        }
+      ],
+      "regions": [
+        {
+          "region_id": "title",
+          "role": "title",
+          "bbox": {
+            "x": 0.065,
+            "y": 0.055,
+            "w": 0.84,
+            "h": 0.105
+          },
+          "content_slot_id": "title",
+          "content_mode": "text"
+        },
+        {
+          "region_id": "node_1",
+          "role": "secondary_scientific_object",
+          "bbox": {
+            "x": 0.08,
+            "y": 0.35,
+            "w": 0.18,
+            "h": 0.3
+          },
+          "content_slot_id": "node_1",
+          "content_mode": "diagram"
+        },
+        {
+          "region_id": "node_2",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.3,
+            "y": 0.35,
+            "w": 0.18,
+            "h": 0.3
+          },
+          "content_slot_id": "node_2",
+          "content_mode": "diagram"
+        },
+        {
+          "region_id": "node_3",
+          "role": "secondary_scientific_object",
+          "bbox": {
+            "x": 0.52,
+            "y": 0.35,
+            "w": 0.18,
+            "h": 0.3
+          },
+          "content_slot_id": "node_3",
+          "content_mode": "diagram"
+        },
+        {
+          "region_id": "node_4",
+          "role": "secondary_scientific_object",
+          "bbox": {
+            "x": 0.74,
+            "y": 0.35,
+            "w": 0.18,
+            "h": 0.3
+          },
+          "content_slot_id": "node_4",
+          "content_mode": "diagram"
+        },
+        {
+          "region_id": "caption",
+          "role": "caption",
+          "bbox": {
+            "x": 0.075,
+            "y": 0.865,
+            "w": 0.76,
+            "h": 0.055
+          },
+          "content_slot_id": "caption",
+          "content_mode": "caption"
+        }
+      ],
+      "geometry_transfer": [
+        {
+          "source_reference_id": "RRL-019",
+          "source_region_id": "application_flow",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.06,
+            "y": 0.35,
+            "w": 0.84,
+            "h": 0.47
+          },
+          "candidate_region_id": "node_2",
+          "candidate_bbox": {
+            "x": 0.08,
+            "y": 0.35,
+            "w": 0.84,
+            "h": 0.3
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "used source-derived normalized geometry while applying locked deck design profile"
+        }
+      ],
+      "locked_profile_id": "research-deck-design-profile-v1",
+      "locked_properties_sha256": "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8",
+      "page_local_geometry_preserved": true,
+      "audience_text": [
+        "The evaluation path keeps image evidence and endpoints paired",
+        "Input, mask, prediction, and endpoint summaries are generated from the same synthetic case."
+      ]
+    },
+    {
+      "slide_id": "med_s03",
+      "title": "Lesion-size recall exposes the endpoint-level weakness",
+      "page_function": "RESULT_FIGURE",
+      "deck_role": "quantitative_result",
+      "source_reference_ids": [
+        "RRL-023"
+      ],
+      "source_page_function": "RESULT_FIGURE",
+      "source_layout_family": "single-visual-dominant",
+      "layout_family": "single-visual-dominant",
+      "reading_flow": "title-to-large-forest-plot",
+      "primary_object_roles": [
+        "figure"
+      ],
+      "primary_bboxes": [
+        {
+          "x": 0.19,
+          "y": 0.2,
+          "w": 0.7,
+          "h": 0.58
+        }
+      ],
+      "regions": [
+        {
+          "region_id": "title",
+          "role": "title",
+          "bbox": {
+            "x": 0.065,
+            "y": 0.055,
+            "w": 0.84,
+            "h": 0.105
+          },
+          "content_slot_id": "title",
+          "content_mode": "text"
+        },
+        {
+          "region_id": "plot",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.19,
+            "y": 0.2,
+            "w": 0.7,
+            "h": 0.58
+          },
+          "content_slot_id": "plot",
+          "content_mode": "figure"
+        },
+        {
+          "region_id": "annotation",
+          "role": "annotation",
+          "bbox": {
+            "x": 0.22,
+            "y": 0.78,
+            "w": 0.64,
+            "h": 0.07
+          },
+          "content_slot_id": "annotation",
+          "content_mode": "text"
+        },
+        {
+          "region_id": "caption",
+          "role": "caption",
+          "bbox": {
+            "x": 0.075,
+            "y": 0.865,
+            "w": 0.76,
+            "h": 0.055
+          },
+          "content_slot_id": "caption",
+          "content_mode": "caption"
+        }
+      ],
+      "geometry_transfer": [
+        {
+          "source_reference_id": "RRL-023",
+          "source_region_id": "forest_plot",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.21,
+            "y": 0.2,
+            "w": 0.62,
+            "h": 0.67
+          },
+          "candidate_region_id": "plot",
+          "candidate_bbox": {
+            "x": 0.19,
+            "y": 0.2,
+            "w": 0.7,
+            "h": 0.58
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "used source-derived normalized geometry while applying locked deck design profile"
+        }
+      ],
+      "locked_profile_id": "research-deck-design-profile-v1",
+      "locked_properties_sha256": "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8",
+      "page_local_geometry_preserved": true,
+      "audience_text": [
+        "Lesion-size recall exposes the endpoint-level weakness",
+        "Deterministic fixture result; not clinical validation."
+      ]
+    },
+    {
+      "slide_id": "med_s04",
+      "title": "Same-case error maps show where the endpoint is lost",
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "deck_role": "same_case_error",
+      "source_reference_ids": [
+        "RRL-013"
+      ],
+      "source_page_function": "MEDICAL_IMAGE_COMPARISON",
+      "source_layout_family": "aligned-multi-panel",
+      "layout_family": "aligned-multi-panel",
+      "reading_flow": "title-to-category-columns-to-sample-grid",
+      "primary_object_roles": [
+        "medical_image"
+      ],
+      "primary_bboxes": [
+        {
+          "x": 0.03,
+          "y": 0.2328,
+          "w": 0.296,
+          "h": 0.323
+        },
+        {
+          "x": 0.352,
+          "y": 0.2328,
+          "w": 0.296,
+          "h": 0.323
+        }
+      ],
+      "regions": [
+        {
+          "region_id": "title",
+          "role": "title",
+          "bbox": {
+            "x": 0.06,
+            "y": 0.09,
+            "w": 0.9,
+            "h": 0.08
+          },
+          "content_mode": "text",
+          "content_slot_id": "title"
+        },
+        {
+          "region_id": "image_input",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.03,
+            "y": 0.2328,
+            "w": 0.296,
+            "h": 0.323
+          },
+          "content_mode": "medical_image",
+          "content_slot_id": "input_image"
+        },
+        {
+          "region_id": "image_overlay",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.352,
+            "y": 0.2328,
+            "w": 0.296,
+            "h": 0.323
+          },
+          "content_mode": "medical_image",
+          "content_slot_id": "overlay_image"
+        },
+        {
+          "region_id": "image_error",
+          "role": "secondary_scientific_object",
+          "bbox": {
+            "x": 0.674,
+            "y": 0.2328,
+            "w": 0.296,
+            "h": 0.323
+          },
+          "content_mode": "medical_image",
+          "content_slot_id": "error_image"
+        },
+        {
+          "region_id": "annotation",
+          "role": "annotation",
+          "bbox": {
+            "x": 0.352,
+            "y": 0.5808,
+            "w": 0.618,
+            "h": 0.1
+          },
+          "content_mode": "text",
+          "content_slot_id": "annotation"
+        },
+        {
+          "region_id": "legend",
+          "role": "legend",
+          "bbox": {
+            "x": 0.03,
+            "y": 0.7028,
+            "w": 0.94,
+            "h": 0.065
+          },
+          "content_mode": "legend",
+          "content_slot_id": "legend"
+        }
+      ],
+      "geometry_transfer": [
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "title",
+          "source_role": "title",
+          "source_bbox": {
+            "x": 0.06,
+            "y": 0.09,
+            "w": 0.55,
+            "h": 0.08
+          },
+          "candidate_region_id": "title",
+          "candidate_content_slot_id": "title",
+          "candidate_bbox": {
+            "x": 0.06,
+            "y": 0.09,
+            "w": 0.9,
+            "h": 0.08
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "scaled the source title band into a readable presentation title span"
+        },
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "sample_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.03,
+            "y": 0.25,
+            "w": 0.94,
+            "h": 0.25
+          },
+          "candidate_region_id": "image_input",
+          "candidate_content_slot_id": "input_image",
+          "candidate_bbox": {
+            "x": 0.03,
+            "y": 0.2328,
+            "w": 0.296,
+            "h": 0.323
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split the source sample-grid bbox into a three-panel comparison row"
+        },
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "sample_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.03,
+            "y": 0.25,
+            "w": 0.94,
+            "h": 0.25
+          },
+          "candidate_region_id": "image_overlay",
+          "candidate_content_slot_id": "overlay_image",
+          "candidate_bbox": {
+            "x": 0.352,
+            "y": 0.2328,
+            "w": 0.296,
+            "h": 0.323
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split the source sample-grid bbox into a three-panel comparison row"
+        },
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "sample_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.03,
+            "y": 0.25,
+            "w": 0.94,
+            "h": 0.25
+          },
+          "candidate_region_id": "image_error",
+          "candidate_content_slot_id": "error_image",
+          "candidate_bbox": {
+            "x": 0.674,
+            "y": 0.2328,
+            "w": 0.296,
+            "h": 0.323
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "split the source sample-grid bbox into a three-panel comparison row"
+        },
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "sample_grid",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.03,
+            "y": 0.25,
+            "w": 0.94,
+            "h": 0.25
+          },
+          "candidate_region_id": "annotation",
+          "candidate_content_slot_id": "annotation",
+          "candidate_bbox": {
+            "x": 0.352,
+            "y": 0.5808,
+            "w": 0.618,
+            "h": 0.1
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "translated the source grid centerline into a concise failure annotation"
+        },
+        {
+          "source_reference_id": "RRL-013",
+          "source_region_id": "column_labels",
+          "source_role": "legend",
+          "source_bbox": {
+            "x": 0.08,
+            "y": 0.19,
+            "w": 0.78,
+            "h": 0.05
+          },
+          "candidate_region_id": "legend",
+          "candidate_content_slot_id": "legend",
+          "candidate_bbox": {
+            "x": 0.03,
+            "y": 0.7028,
+            "w": 0.94,
+            "h": 0.065
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "kept the source legend relationship below the evidence row"
+        }
+      ],
+      "locked_profile_id": "research-deck-design-profile-v1",
+      "locked_properties_sha256": "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8",
+      "page_local_geometry_preserved": true,
+      "audience_text": [
+        "Same-case error maps show where the endpoint is lost",
+        "Synthetic case-level comparison keeps GT, prediction, and error map tied together."
+      ]
+    }
+  ],
+  "major_composition_families": [
+    "aligned-multi-panel",
+    "horizontal-process-flow",
+    "single-visual-dominant"
+  ],
+  "render_status": {
+    "status": "ok",
+    "renderer": "/home/yuukias/AI_Skills_Collection/.cache/tools/squashfs-root/opt/libreoffice25.8/program/soffice",
+    "pptx_to_pdf": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/pdf/medical_design_system_fixture.pdf",
+    "png_count": 4,
+    "rendered_png": [
+      {
+        "path": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/rendered/slide-1.png",
+        "sha256": "1ab9dc3579cd2f8fffcc12d6e0dbdf9c65e12ddd021f31012af8fc24b4015557"
+      },
+      {
+        "path": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/rendered/slide-2.png",
+        "sha256": "52e07efd37fb391b446b50ab25f667c7a9a1bc6e6ca50e3661a3567dd4c6b3cc"
+      },
+      {
+        "path": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/rendered/slide-3.png",
+        "sha256": "94599503a2fa999ee6f2ce0cf2958671458ac4da93cd823b765e67357381047c"
+      },
+      {
+        "path": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/rendered/slide-4.png",
+        "sha256": "b3a54b91352d233f17975de7163fedab6b463fb568b5e371cb6e06d3007e7322"
+      }
+    ]
+  },
+  "mechanical_qa": {
+    "schema": "RESEARCH_DECK_DESIGN_SYSTEM_MECHANICAL_QA_V1",
+    "status": "MECHANICAL_PASS",
+    "checks": {
+      "editable_pptx": true,
+      "real_render": true,
+      "deck_wide_profile_locked": true,
+      "composition_diversity": true,
+      "audience_meta_leakage": true,
+      "fixture_boundary_recorded": true
+    },
+    "forbidden_audience_hits": [],
+    "rendered_png_count": 4,
+    "pptx_object_summary": {
+      "editable_slide_count": 4,
+      "major_composition_families": [
+        "aligned-multi-panel",
+        "horizontal-process-flow",
+        "single-visual-dominant"
+      ],
+      "locked_properties_sha256": [
+        "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8"
+      ]
+    }
+  }
+}

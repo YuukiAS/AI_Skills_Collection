@@ -1,0 +1,25 @@
+{
+  "schema": "RESEARCH_DECK_DESIGN_SYSTEM_INTEGRATION_OUTPUTS_V1",
+  "task_key": "023_research_presentation_deck_design_system_integration",
+  "deck_design_profile": "results/023_research_presentation_deck_design_system_integration/generated/deck_design_profile.json",
+  "decks": [
+    {
+      "manifest": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/SOURCE_GENERATED_IDENTITY_MANIFEST.json",
+      "pptx": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/statistical_design_system_fixture.pptx",
+      "render_status": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/RENDER_STATUS.json"
+    },
+    {
+      "manifest": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/SOURCE_GENERATED_IDENTITY_MANIFEST.json",
+      "pptx": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/medical_design_system_fixture.pptx",
+      "render_status": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/RENDER_STATUS.json"
+    }
+  ],
+  "review_pack_pdf": {
+    "path": "results/023_research_presentation_deck_design_system_integration/REVIEW_PACK.pdf",
+    "source_pdfs": [
+      "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/pdf/statistical_design_system_fixture.pdf",
+      "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/pdf/medical_design_system_fixture.pdf"
+    ],
+    "sha256": "1bdf3d3952d64c5d305f43483b53221ac25512505afdaba850203df45fb3ebc9"
+  }
+}

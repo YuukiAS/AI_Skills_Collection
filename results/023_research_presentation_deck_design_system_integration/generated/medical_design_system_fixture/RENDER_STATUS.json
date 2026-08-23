@@ -1,0 +1,24 @@
+{
+  "status": "ok",
+  "renderer": "/home/yuukias/AI_Skills_Collection/.cache/tools/squashfs-root/opt/libreoffice25.8/program/soffice",
+  "pptx_to_pdf": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/pdf/medical_design_system_fixture.pdf",
+  "png_count": 4,
+  "rendered_png": [
+    {
+      "path": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/rendered/slide-1.png",
+      "sha256": "1ab9dc3579cd2f8fffcc12d6e0dbdf9c65e12ddd021f31012af8fc24b4015557"
+    },
+    {
+      "path": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/rendered/slide-2.png",
+      "sha256": "52e07efd37fb391b446b50ab25f667c7a9a1bc6e6ca50e3661a3567dd4c6b3cc"
+    },
+    {
+      "path": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/rendered/slide-3.png",
+      "sha256": "94599503a2fa999ee6f2ce0cf2958671458ac4da93cd823b765e67357381047c"
+    },
+    {
+      "path": "results/023_research_presentation_deck_design_system_integration/generated/medical_design_system_fixture/rendered/slide-4.png",
+      "sha256": "b3a54b91352d233f17975de7163fedab6b463fb568b5e371cb6e06d3007e7322"
+    }
+  ]
+}

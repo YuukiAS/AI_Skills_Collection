@@ -1,0 +1,82 @@
+{
+  "schema": "RESEARCH_DECK_DESIGN_PROFILE_V1",
+  "profile_id": "research-deck-design-profile-v1",
+  "provenance": {
+    "task_key": "023_research_presentation_deck_design_system_integration",
+    "source_layers": [
+      "019 composition records",
+      "020 candidate search",
+      "022 visual-finish primitives"
+    ],
+    "audience": "research group meeting",
+    "medium": "editable PPTX rendered through real presentation engine",
+    "content_density": "compact specialist scientific update"
+  },
+  "locked_properties": {
+    "fonts": {
+      "primary": "Aptos",
+      "secondary": "Aptos",
+      "equation_asset_policy": "vector-or-high-resolution-raster-asset-inside-native-PPTX-frame"
+    },
+    "type_scale": {
+      "title_pt": 27,
+      "subtitle_pt": 15,
+      "body_pt": 17,
+      "caption_pt": 10,
+      "annotation_pt": 13,
+      "equation_min_height": 0.16
+    },
+    "color_roles": {
+      "background": "#FCFCFA",
+      "ink": "#171C26",
+      "muted": "#586274",
+      "line": "#BCC4D0",
+      "accent": "#006970",
+      "secondary": "#3F4578",
+      "warning": "#AE5E19",
+      "uncertainty": "#7A8798"
+    },
+    "spacing": {
+      "outer_margin": 0.065,
+      "object_gap": 0.026,
+      "annotation_gap": 0.03,
+      "panel_label_gap": 0.012
+    },
+    "annotation": {
+      "leader_color_role": "accent",
+      "leader_width_pt": 2.0,
+      "callout_rule": "left-rule plus direct leader to scientific object"
+    },
+    "chart": {
+      "axis_color_role": "muted",
+      "uncertainty_style": "thin muted interval or nominal reference line",
+      "legend_position": "adjacent to plotted evidence"
+    },
+    "image_panel": {
+      "label_position": "adjacent-above-panel",
+      "legend_binding": "shared legend aligned with image evidence",
+      "container_role": "semantic-panel-border-only"
+    },
+    "equation": {
+      "background": "slide-canvas",
+      "highlight_role": "warning",
+      "leader_role": "accent",
+      "decorative_card_used": false
+    },
+    "caption": {
+      "position": "near supporting evidence",
+      "style": "short scientific qualifier",
+      "internal_provenance_allowed": false
+    }
+  },
+  "locked_properties_sha256": "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8",
+  "page_local_properties": [
+    "scientific_object_bbox",
+    "layout_family",
+    "panel_count",
+    "primary_object_role",
+    "annotation_target",
+    "page_specific_accent_placement",
+    "relative_positions_of_equation_image_plot_diagram"
+  ]
+}

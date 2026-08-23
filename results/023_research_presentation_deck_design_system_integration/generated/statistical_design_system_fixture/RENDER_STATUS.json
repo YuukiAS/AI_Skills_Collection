@@ -1,0 +1,24 @@
+{
+  "status": "ok",
+  "renderer": "/home/yuukias/AI_Skills_Collection/.cache/tools/squashfs-root/opt/libreoffice25.8/program/soffice",
+  "pptx_to_pdf": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/pdf/statistical_design_system_fixture.pdf",
+  "png_count": 4,
+  "rendered_png": [
+    {
+      "path": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/rendered/slide-1.png",
+      "sha256": "951a4b2061e67274140a997c0042e728ee148833022fa5c6310624f33288f709"
+    },
+    {
+      "path": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/rendered/slide-2.png",
+      "sha256": "85f600616b869b27b0036932e48976ae17a3a9409ac5ce6f1fff1c9c9fab3328"
+    },
+    {
+      "path": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/rendered/slide-3.png",
+      "sha256": "bcf8a4bf0157c976be5d58ec979b57f3d6de9a940992dbb3d50c405ecf00b41d"
+    },
+    {
+      "path": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/rendered/slide-4.png",
+      "sha256": "8daea677d5025fa958c1aec17c9aa782125dd8f61236813c233f342fe80588c2"
+    }
+  ]
+}

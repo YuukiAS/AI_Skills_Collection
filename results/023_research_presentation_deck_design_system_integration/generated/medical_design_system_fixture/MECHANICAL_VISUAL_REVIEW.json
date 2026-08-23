@@ -1,0 +1,25 @@
+{
+  "schema": "RESEARCH_DECK_DESIGN_SYSTEM_MECHANICAL_QA_V1",
+  "status": "MECHANICAL_PASS",
+  "checks": {
+    "editable_pptx": true,
+    "real_render": true,
+    "deck_wide_profile_locked": true,
+    "composition_diversity": true,
+    "audience_meta_leakage": true,
+    "fixture_boundary_recorded": true
+  },
+  "forbidden_audience_hits": [],
+  "rendered_png_count": 4,
+  "pptx_object_summary": {
+    "editable_slide_count": 4,
+    "major_composition_families": [
+      "aligned-multi-panel",
+      "horizontal-process-flow",
+      "single-visual-dominant"
+    ],
+    "locked_properties_sha256": [
+      "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8"
+    ]
+  }
+}

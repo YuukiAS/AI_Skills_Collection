@@ -1,0 +1,37 @@
+{
+  "schema": "RESEARCH_DECK_DESIGN_SYSTEM_FIXTURE_PLAN_V1",
+  "task_key": "023_research_presentation_deck_design_system_integration",
+  "deck_key": "statistical_design_system_fixture",
+  "fixture_boundary": "engineering integration fixture, not final design-quality holdout",
+  "deck_design_profile": "results/023_research_presentation_deck_design_system_integration/generated/deck_design_profile.json",
+  "slides": [
+    {
+      "slide_id": "stat_s01",
+      "deck_role": "estimator",
+      "page_function": "ESTIMATOR",
+      "title": "Cluster-robust variance centers uncertainty at the group level",
+      "caption": "Synthetic clustered-data fixture."
+    },
+    {
+      "slide_id": "stat_s02",
+      "deck_role": "simulation_design",
+      "page_function": "EXPERIMENT_DESIGN",
+      "title": "Simulation varies clustering before interval evaluation",
+      "caption": "DGP knobs feed generated samples and interval procedures."
+    },
+    {
+      "slide_id": "stat_s03",
+      "deck_role": "main_result",
+      "page_function": "RESULT_FIGURE",
+      "title": "Cluster-robust intervals recover coverage, but small-G remains stressed",
+      "caption": "Deterministic simulation; nominal 0.95 reference line shown in the plotted evidence."
+    },
+    {
+      "slide_id": "stat_s04",
+      "deck_role": "negative_result",
+      "page_function": "NEGATIVE_RESULT",
+      "title": "Small center counts remain anti-conservative",
+      "caption": "Negative result motivates CR2 or wild cluster bootstrap as the next discriminating experiment."
+    }
+  ]
+}

@@ -478,6 +478,75 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(validation.returncode, 0, validation.stderr)
         self.assertIn("validated 2 comparative visual-review case(s)", validation.stdout)
 
+    def test_deck_design_system_integration_artifacts(self) -> None:
+        schema = SHARED / "references/research_deck_design_profile.schema.json"
+        generator = SHARED / "scripts/generate_deck_design_system_integration.py"
+        validator = SHARED / "scripts/validate_deck_design_system_integration.py"
+        for path in [schema, generator, validator]:
+            self.assertTrue(path.exists(), path)
+        mirrors = [
+            (
+                schema,
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/references/research_deck_design_profile.schema.json",
+            ),
+            (
+                generator,
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/generate_deck_design_system_integration.py",
+            ),
+            (
+                validator,
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_deck_design_system_integration.py",
+            ),
+        ]
+        for source, mirror in mirrors:
+            self.assertEqual(source.read_text(encoding="utf-8"), mirror.read_text(encoding="utf-8"))
+
+        validation = subprocess.run([sys.executable, str(validator)], check=False, capture_output=True, text=True)
+        self.assertEqual(validation.returncode, 0, validation.stderr)
+        self.assertIn("validated 2 deck-design-system integration mini-deck(s)", validation.stdout)
+
+        root = REPO_ROOT / "results/023_research_presentation_deck_design_system_integration/generated"
+        outputs = json.loads((root / "OUTPUTS.json").read_text(encoding="utf-8"))
+        profile = json.loads((root / "deck_design_profile.json").read_text(encoding="utf-8"))
+        self.assertEqual(profile["schema"], "RESEARCH_DECK_DESIGN_PROFILE_V1")
+        self.assertIn("fonts", profile["locked_properties"])
+        self.assertIn("equation", profile["locked_properties"])
+        self.assertIn("image_panel", profile["locked_properties"])
+        self.assertIn("scientific_object_bbox", profile["page_local_properties"])
+        self.assertIn("layout_family", profile["page_local_properties"])
+        locked_sha = profile["locked_properties_sha256"]
+        self.assertEqual(len(outputs["decks"]), 2)
+        review_pack = REPO_ROOT / outputs["review_pack_pdf"]["path"]
+        self.assertTrue(review_pack.exists(), review_pack)
+        self.assertGreater(review_pack.stat().st_size, 100_000)
+        self.assertEqual(len(outputs["review_pack_pdf"]["source_pdfs"]), 2)
+        for deck in outputs["decks"]:
+            manifest = json.loads((REPO_ROOT / deck["manifest"]).read_text(encoding="utf-8"))
+            self.assertEqual(manifest["schema"], "RESEARCH_DECK_DESIGN_SYSTEM_INTEGRATION_MANIFEST_V1")
+            self.assertEqual(manifest["task_key"], "023_research_presentation_deck_design_system_integration")
+            self.assertEqual(manifest["editable_slide_count"], 4)
+            self.assertEqual(manifest["render_status"]["status"], "ok")
+            self.assertEqual(manifest["render_status"]["png_count"], 4)
+            self.assertEqual(manifest["mechanical_qa"]["status"], "MECHANICAL_PASS")
+            self.assertGreaterEqual(len(manifest["major_composition_families"]), 3)
+            self.assertEqual({slide["locked_properties_sha256"] for slide in manifest["slides"]}, {locked_sha})
+            self.assertGreaterEqual(len({tuple(slide["primary_object_roles"]) for slide in manifest["slides"]}), 2)
+            with ZipFile(REPO_ROOT / manifest["pptx"]) as deck_zip:
+                names = set(deck_zip.namelist())
+            self.assertIn("[Content_Types].xml", names)
+            self.assertEqual(
+                len([name for name in names if name.startswith("ppt/slides/slide") and name.endswith(".xml")]),
+                4,
+            )
+            for slide in manifest["slides"]:
+                self.assertTrue(slide["source_reference_ids"])
+                self.assertTrue(slide["geometry_transfer"])
+                self.assertTrue(slide["primary_bboxes"])
+                self.assertTrue(slide["page_local_geometry_preserved"])
+                audience = "\n".join(slide["audience_text"])
+                for forbidden in ["RRL-", "SRC-", "candidate", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "QA"]:
+                    self.assertNotIn(forbidden, audience)
+
     def test_research_presentation_todo_consolidation_and_promotions(self) -> None:
         todo = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/TODO.md").read_text(encoding="utf-8")
         research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")

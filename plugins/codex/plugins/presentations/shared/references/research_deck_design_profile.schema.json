@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Research deck design profile",
+  "type": "object",
+  "required": [
+    "schema",
+    "profile_id",
+    "provenance",
+    "locked_properties",
+    "page_local_properties"
+  ],
+  "properties": {
+    "schema": {
+      "const": "RESEARCH_DECK_DESIGN_PROFILE_V1"
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "task_key",
+        "source_layers",
+        "audience",
+        "medium",
+        "content_density"
+      ]
+    },
+    "locked_properties": {
+      "type": "object",
+      "required": [
+        "fonts",
+        "type_scale",
+        "color_roles",
+        "spacing",
+        "annotation",
+        "chart",
+        "image_panel",
+        "equation",
+        "caption"
+      ]
+    },
+    "page_local_properties": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 5
+    }
+  },
+  "additionalProperties": false
+}

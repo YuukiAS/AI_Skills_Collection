@@ -1,0 +1,570 @@
+{
+  "schema": "RESEARCH_DECK_DESIGN_SYSTEM_INTEGRATION_MANIFEST_V1",
+  "task_key": "023_research_presentation_deck_design_system_integration",
+  "deck_key": "statistical_design_system_fixture",
+  "fixture_boundary": "engineering integration fixture, not final design-quality holdout",
+  "deck_design_profile": "results/023_research_presentation_deck_design_system_integration/generated/deck_design_profile.json",
+  "deck_plan": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/DECK_PLAN.json",
+  "locked_properties_sha256": "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8",
+  "pptx": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/statistical_design_system_fixture.pptx",
+  "pptx_sha256": "96de70cf1c105d4b53af0fed6a2eb4595222e03e0c78b230763fa205bd2a5b3a",
+  "editable_slide_count": 4,
+  "slides": [
+    {
+      "slide_id": "stat_s01",
+      "title": "Cluster-robust variance centers uncertainty at the group level",
+      "page_function": "ESTIMATOR",
+      "deck_role": "estimator",
+      "source_reference_ids": [
+        "RRL-028"
+      ],
+      "source_page_function": "ESTIMATOR",
+      "source_layout_family": "equation-dominant",
+      "layout_family": "equation-dominant",
+      "reading_flow": "title-to-centered-equation",
+      "primary_object_roles": [
+        "equation"
+      ],
+      "primary_bboxes": [
+        {
+          "x": 0.17,
+          "y": 0.28,
+          "w": 0.52,
+          "h": 0.27
+        }
+      ],
+      "regions": [
+        {
+          "region_id": "title",
+          "role": "title",
+          "bbox": {
+            "x": 0.02,
+            "y": 0.03,
+            "w": 0.96,
+            "h": 0.1
+          },
+          "content_mode": "text",
+          "content_slot_id": "title"
+        },
+        {
+          "region_id": "equation",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.17,
+            "y": 0.28,
+            "w": 0.52,
+            "h": 0.27
+          },
+          "content_mode": "equation",
+          "content_slot_id": "equation"
+        },
+        {
+          "region_id": "annotation",
+          "role": "annotation",
+          "bbox": {
+            "x": 0.62,
+            "y": 0.57,
+            "w": 0.26,
+            "h": 0.1
+          },
+          "content_mode": "text",
+          "content_slot_id": "annotation"
+        },
+        {
+          "region_id": "caption",
+          "role": "caption",
+          "bbox": {
+            "x": 0.246,
+            "y": 0.577,
+            "w": 0.368,
+            "h": 0.0405
+          },
+          "content_mode": "caption",
+          "content_slot_id": "caption"
+        }
+      ],
+      "geometry_transfer": [
+        {
+          "source_reference_id": "RRL-028",
+          "source_region_id": "title",
+          "source_role": "title",
+          "source_bbox": {
+            "x": 0.02,
+            "y": 0.03,
+            "w": 0.96,
+            "h": 0.1
+          },
+          "candidate_region_id": "title",
+          "candidate_content_slot_id": "title",
+          "candidate_bbox": {
+            "x": 0.02,
+            "y": 0.03,
+            "w": 0.96,
+            "h": 0.1
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "scaled the source title band into a readable presentation title span"
+        },
+        {
+          "source_reference_id": "RRL-028",
+          "source_region_id": "poststratification_formula",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.2,
+            "y": 0.28,
+            "w": 0.46,
+            "h": 0.27
+          },
+          "candidate_region_id": "equation",
+          "candidate_content_slot_id": "equation",
+          "candidate_bbox": {
+            "x": 0.17,
+            "y": 0.28,
+            "w": 0.52,
+            "h": 0.27
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "scaled the selected source equation region around its original center for legible preview math"
+        },
+        {
+          "source_reference_id": "RRL-028",
+          "source_region_id": "poststratification_formula",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.2,
+            "y": 0.28,
+            "w": 0.46,
+            "h": 0.27
+          },
+          "candidate_region_id": "annotation",
+          "candidate_content_slot_id": "annotation",
+          "candidate_bbox": {
+            "x": 0.222,
+            "y": 0.6364,
+            "w": 0.416,
+            "h": 0.1404
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "placed annotation below the source-derived equation centerline"
+        },
+        {
+          "source_reference_id": "RRL-028",
+          "source_region_id": "poststratification_formula",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.2,
+            "y": 0.28,
+            "w": 0.46,
+            "h": 0.27
+          },
+          "candidate_region_id": "caption",
+          "candidate_content_slot_id": "caption",
+          "candidate_bbox": {
+            "x": 0.246,
+            "y": 0.577,
+            "w": 0.368,
+            "h": 0.0405
+          },
+          "adaptation_type": "translate",
+          "adaptation_reason": "placed caption beneath the source primary object span"
+        }
+      ],
+      "locked_profile_id": "research-deck-design-profile-v1",
+      "locked_properties_sha256": "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8",
+      "page_local_geometry_preserved": true,
+      "audience_text": [
+        "Cluster-robust variance centers uncertainty at the group level",
+        "Synthetic clustered-data fixture."
+      ]
+    },
+    {
+      "slide_id": "stat_s02",
+      "title": "Simulation varies clustering before interval evaluation",
+      "page_function": "EXPERIMENT_DESIGN",
+      "deck_role": "simulation_design",
+      "source_reference_ids": [
+        "RRL-019"
+      ],
+      "source_page_function": "EXPERIMENT_DESIGN",
+      "source_layout_family": "horizontal-process-flow",
+      "layout_family": "horizontal-process-flow",
+      "reading_flow": "title-to-short-context-to-application-flow",
+      "primary_object_roles": [
+        "diagram"
+      ],
+      "primary_bboxes": [
+        {
+          "x": 0.3,
+          "y": 0.35,
+          "w": 0.18,
+          "h": 0.3
+        }
+      ],
+      "regions": [
+        {
+          "region_id": "title",
+          "role": "title",
+          "bbox": {
+            "x": 0.065,
+            "y": 0.055,
+            "w": 0.84,
+            "h": 0.105
+          },
+          "content_slot_id": "title",
+          "content_mode": "text"
+        },
+        {
+          "region_id": "node_1",
+          "role": "secondary_scientific_object",
+          "bbox": {
+            "x": 0.08,
+            "y": 0.35,
+            "w": 0.18,
+            "h": 0.3
+          },
+          "content_slot_id": "node_1",
+          "content_mode": "diagram"
+        },
+        {
+          "region_id": "node_2",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.3,
+            "y": 0.35,
+            "w": 0.18,
+            "h": 0.3
+          },
+          "content_slot_id": "node_2",
+          "content_mode": "diagram"
+        },
+        {
+          "region_id": "node_3",
+          "role": "secondary_scientific_object",
+          "bbox": {
+            "x": 0.52,
+            "y": 0.35,
+            "w": 0.18,
+            "h": 0.3
+          },
+          "content_slot_id": "node_3",
+          "content_mode": "diagram"
+        },
+        {
+          "region_id": "node_4",
+          "role": "secondary_scientific_object",
+          "bbox": {
+            "x": 0.74,
+            "y": 0.35,
+            "w": 0.18,
+            "h": 0.3
+          },
+          "content_slot_id": "node_4",
+          "content_mode": "diagram"
+        },
+        {
+          "region_id": "caption",
+          "role": "caption",
+          "bbox": {
+            "x": 0.075,
+            "y": 0.865,
+            "w": 0.76,
+            "h": 0.055
+          },
+          "content_slot_id": "caption",
+          "content_mode": "caption"
+        }
+      ],
+      "geometry_transfer": [
+        {
+          "source_reference_id": "RRL-019",
+          "source_region_id": "application_flow",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.06,
+            "y": 0.35,
+            "w": 0.84,
+            "h": 0.47
+          },
+          "candidate_region_id": "node_2",
+          "candidate_bbox": {
+            "x": 0.08,
+            "y": 0.35,
+            "w": 0.84,
+            "h": 0.3
+          },
+          "adaptation_type": "split",
+          "adaptation_reason": "used source-derived normalized geometry while applying locked deck design profile"
+        }
+      ],
+      "locked_profile_id": "research-deck-design-profile-v1",
+      "locked_properties_sha256": "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8",
+      "page_local_geometry_preserved": true,
+      "audience_text": [
+        "Simulation varies clustering before interval evaluation",
+        "DGP knobs feed generated samples and interval procedures."
+      ]
+    },
+    {
+      "slide_id": "stat_s03",
+      "title": "Cluster-robust intervals recover coverage, but small-G remains stressed",
+      "page_function": "RESULT_FIGURE",
+      "deck_role": "main_result",
+      "source_reference_ids": [
+        "RRL-030"
+      ],
+      "source_page_function": "CONFIDENCE_INTERVAL",
+      "source_layout_family": "result-with-callout",
+      "layout_family": "result-with-callout",
+      "reading_flow": "claim-title-to-interval-curve-to-reference-lines",
+      "primary_object_roles": [
+        "figure"
+      ],
+      "primary_bboxes": [
+        {
+          "x": 0.12,
+          "y": 0.2,
+          "w": 0.8,
+          "h": 0.58
+        }
+      ],
+      "regions": [
+        {
+          "region_id": "title",
+          "role": "title",
+          "bbox": {
+            "x": 0.065,
+            "y": 0.055,
+            "w": 0.84,
+            "h": 0.105
+          },
+          "content_slot_id": "title",
+          "content_mode": "text"
+        },
+        {
+          "region_id": "plot",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.12,
+            "y": 0.2,
+            "w": 0.8,
+            "h": 0.58
+          },
+          "content_slot_id": "plot",
+          "content_mode": "figure"
+        },
+        {
+          "region_id": "annotation",
+          "role": "annotation",
+          "bbox": {
+            "x": 0.15,
+            "y": 0.78,
+            "w": 0.7,
+            "h": 0.07
+          },
+          "content_slot_id": "annotation",
+          "content_mode": "text"
+        },
+        {
+          "region_id": "caption",
+          "role": "caption",
+          "bbox": {
+            "x": 0.075,
+            "y": 0.865,
+            "w": 0.76,
+            "h": 0.055
+          },
+          "content_slot_id": "caption",
+          "content_mode": "caption"
+        }
+      ],
+      "geometry_transfer": [
+        {
+          "source_reference_id": "RRL-030",
+          "source_region_id": "interval_curve",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.14,
+            "y": 0.16,
+            "w": 0.78,
+            "h": 0.7
+          },
+          "candidate_region_id": "plot",
+          "candidate_bbox": {
+            "x": 0.12,
+            "y": 0.2,
+            "w": 0.8,
+            "h": 0.58
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "used source-derived normalized geometry while applying locked deck design profile"
+        }
+      ],
+      "locked_profile_id": "research-deck-design-profile-v1",
+      "locked_properties_sha256": "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8",
+      "page_local_geometry_preserved": true,
+      "audience_text": [
+        "Cluster-robust intervals recover coverage, but small-G remains stressed",
+        "Deterministic simulation; nominal 0.95 reference line shown in the plotted evidence."
+      ]
+    },
+    {
+      "slide_id": "stat_s04",
+      "title": "Small center counts remain anti-conservative",
+      "page_function": "NEGATIVE_RESULT",
+      "deck_role": "negative_result",
+      "source_reference_ids": [
+        "RRL-025"
+      ],
+      "source_page_function": "NEGATIVE_RESULT",
+      "source_layout_family": "model-check-or-negative",
+      "layout_family": "model-check-or-negative",
+      "reading_flow": "title-to-corrected-interval-plot",
+      "primary_object_roles": [
+        "figure"
+      ],
+      "primary_bboxes": [
+        {
+          "x": 0.17,
+          "y": 0.23,
+          "w": 0.73,
+          "h": 0.58
+        }
+      ],
+      "regions": [
+        {
+          "region_id": "title",
+          "role": "title",
+          "bbox": {
+            "x": 0.065,
+            "y": 0.055,
+            "w": 0.84,
+            "h": 0.105
+          },
+          "content_slot_id": "title",
+          "content_mode": "text"
+        },
+        {
+          "region_id": "plot",
+          "role": "primary_scientific_object",
+          "bbox": {
+            "x": 0.17,
+            "y": 0.23,
+            "w": 0.73,
+            "h": 0.58
+          },
+          "content_slot_id": "plot",
+          "content_mode": "figure"
+        },
+        {
+          "region_id": "annotation",
+          "role": "annotation",
+          "bbox": {
+            "x": 0.2,
+            "y": 0.78,
+            "w": 0.67,
+            "h": 0.07
+          },
+          "content_slot_id": "annotation",
+          "content_mode": "text"
+        },
+        {
+          "region_id": "caption",
+          "role": "caption",
+          "bbox": {
+            "x": 0.075,
+            "y": 0.865,
+            "w": 0.76,
+            "h": 0.055
+          },
+          "content_slot_id": "caption",
+          "content_mode": "caption"
+        }
+      ],
+      "geometry_transfer": [
+        {
+          "source_reference_id": "RRL-025",
+          "source_region_id": "corrected_interval_plot",
+          "source_role": "primary_scientific_object",
+          "source_bbox": {
+            "x": 0.19,
+            "y": 0.23,
+            "w": 0.65,
+            "h": 0.69
+          },
+          "candidate_region_id": "plot",
+          "candidate_bbox": {
+            "x": 0.17,
+            "y": 0.23,
+            "w": 0.73,
+            "h": 0.58
+          },
+          "adaptation_type": "scale",
+          "adaptation_reason": "used source-derived normalized geometry while applying locked deck design profile"
+        }
+      ],
+      "locked_profile_id": "research-deck-design-profile-v1",
+      "locked_properties_sha256": "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8",
+      "page_local_geometry_preserved": true,
+      "audience_text": [
+        "Small center counts remain anti-conservative",
+        "Negative result motivates CR2 or wild cluster bootstrap as the next discriminating experiment."
+      ]
+    }
+  ],
+  "major_composition_families": [
+    "equation-dominant",
+    "horizontal-process-flow",
+    "model-check-or-negative",
+    "result-with-callout"
+  ],
+  "render_status": {
+    "status": "ok",
+    "renderer": "/home/yuukias/AI_Skills_Collection/.cache/tools/squashfs-root/opt/libreoffice25.8/program/soffice",
+    "pptx_to_pdf": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/pdf/statistical_design_system_fixture.pdf",
+    "png_count": 4,
+    "rendered_png": [
+      {
+        "path": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/rendered/slide-1.png",
+        "sha256": "951a4b2061e67274140a997c0042e728ee148833022fa5c6310624f33288f709"
+      },
+      {
+        "path": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/rendered/slide-2.png",
+        "sha256": "85f600616b869b27b0036932e48976ae17a3a9409ac5ce6f1fff1c9c9fab3328"
+      },
+      {
+        "path": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/rendered/slide-3.png",
+        "sha256": "bcf8a4bf0157c976be5d58ec979b57f3d6de9a940992dbb3d50c405ecf00b41d"
+      },
+      {
+        "path": "results/023_research_presentation_deck_design_system_integration/generated/statistical_design_system_fixture/rendered/slide-4.png",
+        "sha256": "8daea677d5025fa958c1aec17c9aa782125dd8f61236813c233f342fe80588c2"
+      }
+    ]
+  },
+  "mechanical_qa": {
+    "schema": "RESEARCH_DECK_DESIGN_SYSTEM_MECHANICAL_QA_V1",
+    "status": "MECHANICAL_PASS",
+    "checks": {
+      "editable_pptx": true,
+      "real_render": true,
+      "deck_wide_profile_locked": true,
+      "composition_diversity": true,
+      "audience_meta_leakage": true,
+      "fixture_boundary_recorded": true
+    },
+    "forbidden_audience_hits": [],
+    "rendered_png_count": 4,
+    "pptx_object_summary": {
+      "editable_slide_count": 4,
+      "major_composition_families": [
+        "equation-dominant",
+        "horizontal-process-flow",
+        "model-check-or-negative",
+        "result-with-callout"
+      ],
+      "locked_properties_sha256": [
+        "ad84b705c80199e7f021c7676f0b55da05809f8705caebeb17dd7e847f198fa8"
+      ]
+    }
+  }
+}
