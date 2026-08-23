@@ -6,7 +6,9 @@ decision: PLAN_FROZEN
 
 # 018 Research Presentation External Method Audit — Plan
 
-## Objective and value
+## Frozen decisions
+
+### Objective and value
 
 先回答一个比“继续加规则”更重要的问题：**当前公开 Presentation skill / workflow 中，哪些机制已经被真实实践证明能减少 AI 模板脸、提高构图质量和一次生成成功率；本仓库当前缺的到底是规则、设计搜索、布局约束、参考迁移，还是审查方法。**
 
@@ -14,7 +16,7 @@ decision: PLAN_FROZEN
 
 上一轮 10 页 synthetic review pack 明确保留为 medium / negative baseline，不得在本任务中提升为 gold exemplar。
 
-## Required reading inside this repository
+### Required reading inside this repository
 
 Executor 必须先读取：
 
@@ -33,7 +35,9 @@ Executor 必须先读取：
 
 由于本任务处理外部 skill repo，必须遵守 `REVIEWED_HANDOFF_SKILL_INTAKE.md` 的外部来源与许可证边界。但本任务**不是 skill intake/adoption task**：只允许形成 comparative audit 和 future-adoption recommendation，不得自行 merge / partially merge / create skill / create plugin。
 
-## External audit set
+## Implementation scope
+
+### External audit set
 
 至少实际检查以下公开来源；若某一源在执行时不可访问，必须记录失败原因，不得用 README 摘要或二手文章假装完成源码审计。
 
@@ -75,7 +79,7 @@ Executor 必须先读取：
 
 这些指导只用于总结科研表达与视觉组织原则。除非页面有明确可复用许可证，不复制长段原文、图例或模板资产。
 
-## Audit questions
+### Audit questions
 
 对每个外部项目 / 指导源至少回答：
 
@@ -90,7 +94,7 @@ Executor 必须先读取：
 9. 当前许可证是什么；可借的是思想、数据结构、少量 MIT-compatible implementation，还是只能 reference-only？
 10. 与本仓库当前 `research-presentations` / `visual-qa` / reference library 相比，缺口在哪里？
 
-## Required deliverables
+### Required deliverables
 
 ### 1. Main audit report
 
@@ -150,7 +154,7 @@ Executor 必须先读取：
 
 只能推荐一个作为 019 的首要目标，并解释为什么它是当前瓶颈；其余放后续 roadmap。
 
-## Evidence requirements
+### Evidence requirements
 
 - 每个外部 skill repo 至少检查 README 以外的一个实际实现/skill/design/QA 文件；核心项目应检查多个文件。
 - 报告中区分“上游明确实现”“根据源码推断”“公开指导原则”三类证据。
@@ -172,7 +176,9 @@ Executor 必须先读取：
 - 把任何 external source 直接判为 merged / partially merged / adopted；
 - 宣告 `ONE_SHOT_QUALITY_PASS` 或 `PROGRAM_MATURE`。
 
-## Acceptance gates
+## Acceptance and regression gates
+
+### Acceptance gates
 
 Planner/Reviewer 只有在以下全部满足时才可 PASS：
 
@@ -187,7 +193,7 @@ Planner/Reviewer 只有在以下全部满足时才可 PASS：
 9. 只推荐一个最小 019 方向，没有提前实现；
 10. repository validation / CI 通过。
 
-## Validation
+### Validation
 
 至少运行：
 
@@ -201,6 +207,6 @@ git diff --check
 
 如果本机缺少某个非本任务引入的依赖，记录真实 blocker，不得为了让审计 task 通过而扩展 CI 依赖或修改无关 workflow。
 
-## Handoff
+### Handoff
 
 本任务 `ci_required=true`。Executor 完成 audit artifact 后写 `RESULT.md`，提交实现，然后把 task 置为等待真实 CI。Scheduled Planner 在 CI 成功后独立审查报告和实际外部证据；不得因为文档存在就自动 PASS。
