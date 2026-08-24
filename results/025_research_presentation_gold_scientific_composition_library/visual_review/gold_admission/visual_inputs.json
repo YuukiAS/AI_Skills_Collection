@@ -1,6 +1,6 @@
 {
   "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
-  "task_key": "025_gold_composition_admission",
+  "task_key": "025_research_presentation_gold_scientific_composition_library",
   "workflow_type": "generic",
   "review_kind": "research-gold-composition-admission",
   "privacy_policy": "PUBLIC_SAFE_ONLY",
