@@ -1,3 +1,9 @@
+---
+schema: AI_BRIDGE_REVIEWED_RESULT_V1
+task_key: 026_research_presentation_discussion_next_experiment_gold_recovery
+implementation_commit: 45ac2a0647fb9a486ba47f64bed300c3e09f4c73
+---
+
 # 026 Result — Discussion / Next-Experiment Gold Recovery
 
 ## Implementation commit
@@ -59,19 +65,15 @@ Passed:
 - `python -m unittest discover -s tests`
 - `python scripts/skills.py validate`
 - `python scripts/build_codex_marketplace.py --validate --check --path-report`
+- `python -m ai_bridge_kit.bridge_cli reviewed-handoff validate --target /home/yuukias/AI_Skills_Collection`
 - `git diff --check`
 
-Not passed:
+Planner follow-up resolved the earlier control-plane compatibility issue:
 
-- `python -m ai_bridge_kit.bridge_cli reviewed-handoff validate --target /home/yuukias/AI_Skills_Collection`
-
-The failure is control-plane compatibility, not a 026 implementation failure:
-
-- `025_research_presentation_gold_scientific_composition_library/FINAL_REPORT.md` lacks currently required final-report section headings.
-- `026_research_presentation_discussion_next_experiment_gold_recovery/PLAN.md` lacks currently required plan section headings.
-
-Those files are Planner-owned or historical artifacts under the frozen Plan constraints, so Executor did not edit them.
+- `025_research_presentation_gold_scientific_composition_library/FINAL_REPORT.md` now has the required compatibility headings while preserving the historical `REVIEW_LIMIT / REVISE` semantics.
+- `026_research_presentation_discussion_next_experiment_gold_recovery/PLAN.md` now has the required schema-compatible headings without changing the frozen business scope.
+- Repository-wide Reviewed Handoff validation now passes.
 
 ## Remaining limitation
 
-026 business scope is complete, but repository-wide Reviewed Handoff validation needs Planner/control-plane compatibility repair before CI handoff can proceed normally.
+026 business scope is complete. CI is still required and remains pending until GitHub checks run on the final handoff commit.
