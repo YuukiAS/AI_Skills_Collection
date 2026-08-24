@@ -30,25 +30,41 @@
 4. **One-Call Production Entry + Quality Loop**：普通 `research-presentations` 入口真实自动走 source fidelity、reference retrieval、generation、render、Terra item-level/page review、deck-rhythm review与 bounded repair。
 5. **Two Real Paper Holdouts + Human Closure**：一篇真实 statistics/biostatistics/methodology paper + 一篇真实 medical-imaging paper，完整 one-shot CUHK group-meeting decks；Terra、Planner 均 PASS 后进入用户人工门，只有用户明确接受两套结果才可 `ONE_SHOT_QUALITY_PASS`。
 
+## Completed: Stage 1 — Product Contract Reset
+
+`024_research_presentation_product_contract_reset` 已在第一轮独立审核中 PASS，真实 CI 通过。
+
+Stage 1 已真实改变 production contract：
+
+- 未指定格式的科研组会 / paper talk / research update 默认 route 已改为 exact CUHK Beamer；
+- `markdown_to_deck_plan.py` 普通 research 默认 output 已从 `pptx/editable` 改为 `tex/source-editable`；
+- 显式 PowerPoint / `.pptx` / editable / Slides 请求仍可覆盖默认；
+- exact CUHK canonical source 明确绑定 `shared/templates/cuhk/beamer/source/`；derived PPTX/scaffold 不再冒充 exact production source；
+- required tests / validation / CI 已通过。
+
+024 的 task-local PASS gate 不构成 program-level approval gate；本轮不等待用户回复，继续 Stage 2。
+
 ## Current bounded task
 
 当前任务：
 
-`024_research_presentation_product_contract_reset`
+`025_research_presentation_gold_scientific_composition_library`
 
-024 已由 Planner 创建并冻结，只负责 Stage 1 — Product Contract Reset。Executor 应按其 `REQUEST.md` / `PLAN.md` 执行；不得自行继续 Stage 2。
+025 已由 Planner 创建并冻结，只负责 Stage 2 — Gold Scientific Composition Library。Executor 应按其 `REQUEST.md` / `PLAN.md` 执行；不得自行继续 Stage 3。
 
-024 必须最小但完整地关闭以下矛盾：
+025 的核心不是继续扩 reference corpus，而是把现有 inspected/downloaded 页面重新筛成真正的 production gold subset，并证明：
 
-- active `research-presentations/SKILL.md` 当前仍把未指定格式 research/group-meeting 默认路由到 editable PPTX；
-- `template-routing.md` / `ppt-skill-routing.md` 与测试仍锁定旧默认；
-- `markdown_to_deck_plan.py` 默认 output 仍为 `pptx`；
-- exact CUHK README 已经声明 `beamer/source/` 才是 canonical，而 derived PPTX scaffold 不是 exact workflow；
-- Program Goal 已改为第一成熟 route 默认 exact CUHK Beamer/PDF。
+```text
+RUNTIME_SELECTED
+-> ACTUALLY_CONSUMED
+-> OUTPUT_AFFECTED
+```
 
-024 不得开始新 layout、扩 reference corpus、跑最终 holdout或修 023 renderer。它只负责让 production contract/source/tests 与 Program Goal 一致。
+Gold admission 必须基于真实 rendered pixels，而不是 metadata/prose lesson；低于 mature research-group-meeting bar 的页面不能为了凑覆盖强行纳入。Gold selector 必须按 scientific job/object/domain/density 做语义兼容选择，并把 source-derived geometry/hierarchy/annotation relation 真正转成 Stage 3 可消费的 renderer-neutral composition recipe。
 
-024 PASS 后，Planner 才能创建 Stage 2 task。
+025 不得扩 corpus、不得实现 Stage 3 LaTeX/TikZ renderer、不得恢复 023、不得开始最终 holdout。
+
+025 PASS 后，Planner 才能创建 Stage 3 — Executable CUHK Scientific Layout System。
 
 ## Non-negotiable final acceptance
 
