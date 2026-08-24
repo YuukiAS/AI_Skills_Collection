@@ -1,0 +1,18 @@
+{
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "task_key": "024_research_presentation_product_contract_reset",
+  "state": "PLAN_FROZEN",
+  "review_round": 0,
+  "max_review_rounds": 2,
+  "plan_revision": 0,
+  "max_plan_revisions": 1,
+  "base_commit": "9b9acae7ab4cbc8ba76233c4b90801ba69cf14d4",
+  "base_branch": "main",
+  "implementation_commit": null,
+  "ci_required": true,
+  "ci_status": "PENDING",
+  "last_review_decision": null,
+  "review_limit_reached": false,
+  "human_gate_reason": null,
+  "next_action": "RUN_CODEX_EXECUTOR"
+}
