@@ -1,45 +1,40 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 025_research_presentation_gold_scientific_composition_library
-implementation_commit: a58104329cb4c05ddef777812c1738c3d4c510ca
+implementation_commit: d6fafda2819d406c88a2f363a22bdfd9564989cf
 ---
 
 # 025 Research Presentation Gold Scientific Composition Library — Result
 
 ## Summary
 
-Implemented the Stage 2 gold scientific composition library from the existing inspected reference corpus. The new library is a production subset with explicit admission semantics, source/render identity, rights boundaries, scientific-job compatibility metadata, selector traces, renderer-neutral recipe output, and deterministic probes that verify selected gold records are actually consumed.
+Implemented the revised Stage 2 gold scientific composition library from the existing inspected reference corpus. The current library is a production subset admitted only by 025 item-level pixel evidence, with explicit source/render identity, rights boundaries, scientific-job compatibility metadata, selector traces, renderer-neutral recipe output, and deterministic probes that verify selected gold records are actually consumed.
 
 Implementation commit:
 
 ```text
-a58104329cb4c05ddef777812c1738c3d4c510ca
+d6fafda2819d406c88a2f363a22bdfd9564989cf
 ```
 
 ## Gold Coverage
 
-The gold index contains 10 records, not a blanket promotion of all 019 composition records:
+The gold index contains 9 records, not a blanket promotion of all 019 composition records:
 
-- `GSC-001`: motivation / research question (`RRL-001`)
-- `GSC-002`: estimator / mathematical identity (`RRL-028`)
-- `GSC-003`: metric definition with examples (`RRL-014`)
 - `GSC-004`: method / experiment design (`RRL-019`)
-- `GSC-005`: quantitative result with uncertainty (`RRL-030`)
-- `GSC-006`: negative result / model check (`RRL-041`)
-- `GSC-007`: medical-image aligned panels (`RRL-022`)
 - `GSC-008`: medical sample introduction (`RRL-013`)
-- `GSC-009`: discussion / next experiment (`RRL-005`)
-- `GSC-010`: interval / forest result plot (`RRL-023`)
+- `GSC-011`: motivation / research question (`RRL-009`)
+- `GSC-012`: method / experiment design (`RRL-011`)
+- `GSC-013`: mathematical / theorem-like comparison (`RRL-015`)
+- `GSC-014`: biostatistics quantitative result (`RRL-016`)
+- `GSC-015`: biostatistics quantitative result alternate (`RRL-017`)
+- `GSC-016`: negative result / uncertainty comparison (`RRL-020`)
+- `GSC-017`: medical / task visual comparison (`RRL-021`)
 
 The index preserves composition-only reuse boundaries and keeps source pixels, logos, and donor branding out of the reusable payload.
 
 ## Rejected Candidates
 
-The admission report records retained inspected references that were not promoted into the first production gold set:
-
-- `RRL-034`: retained as an inspected model-teaching reference, but the primary scientific object is too small for the first production gold set.
-- `RRL-031`: retained as an inspected open-problems reference; next-experiment coverage is better represented by `RRL-005`.
-- `RRL-002`: retained as an inspected method-diagram reference; `RRL-019` provides stronger scientific task-flow coverage for this first gold set.
+The admission report records all 025 admission and bounded-recovery item-level decisions. Rejected candidates remain ordinary inspected references and were not promoted for coverage. The bounded existing-corpus screen did not admit a discussion / next-experiment page at the production gold threshold.
 
 The full admission artifact is:
 
@@ -57,12 +52,15 @@ docs/audits/research_presentation_gold_composition_library/runtime_probe_traces.
 
 It contains two deterministic probes:
 
-- `statistics_estimator_identity`: selected `GSC-002`, compared against compatible alternate `GSC-003`.
-- `medical_aligned_prediction_error`: selected `GSC-007`, compared against compatible alternate `GSC-008`.
+- `statistics_estimator_identity`: selected `GSC-014`, compared against compatible alternate `GSC-015`.
+- `medical_aligned_prediction_error`: selected `GSC-008`, compared against compatible alternate `GSC-004`.
 
 Both probes verify:
 
 - `runtime_selected = true`
+- `alternate_runtime_selected = true`
+- `alternate_is_distinct = true`
+- `alternate_has_compatibility_reasons = true`
 - `actually_consumed = true`
 - `output_affected = true`
 - `primary_bbox_changed = true`
@@ -115,7 +113,6 @@ python skills/tools/documents-media/presentations/shared/scripts/generate_gold_c
 python -m unittest tests.test_presentations
 python -m unittest discover -s tests
 python scripts/skills.py validate
-python scripts/build_codex_marketplace.py --write --validate --check --path-report
 python scripts/build_codex_marketplace.py --validate --check --path-report
 PYTHONPATH=/home/yuukias/GPT_Codex_AI_Bridge_Kit python -m ai_bridge_kit.bridge_cli reviewed-handoff validate --target /home/yuukias/AI_Skills_Collection
 git diff --check
@@ -123,7 +120,7 @@ git diff --check
 
 Observed results:
 
-- gold validator: `validated 10 gold scientific composition records`
+- gold validator: `validated 9 gold scientific composition records`
 - runtime probes: `status = PASS`, `probe_count = 2`
 - targeted Presentation tests: 25 tests passed
 - full unittest discovery: 121 tests passed
@@ -131,6 +128,8 @@ Observed results:
 - marketplace validation/path report: passed
 - Reviewed Handoff validation: passed
 - whitespace check: passed
+
+`python scripts/build_codex_marketplace.py --write --validate --check --path-report` was not rerun during Revision 1 because the broader write command was not approved in the current executor environment. The source/plugin mirror files were mechanically synchronized for the changed schema/index/scripts, and the non-writing marketplace validation/check/path-report passed afterward.
 
 ## Scope Boundaries
 
@@ -206,3 +205,119 @@ Given the 025 gold-admission Terra evidence admits only RRL-019 and RRL-013 from
 ```
 
 Executor did not modify the gold index, selector, recipe builder, tests, or workflow state beyond this routing escalation after the new evidence made the frozen repair impossible to complete safely.
+
+## Revision 1 Bounded In-Corpus Recovery Implementation
+
+Planner revised the frozen Plan to allow bounded in-corpus recovery without lowering the mature-pixel bar, expanding the source corpus, or using older evidence to override 025 admission-specific `REVISE` decisions.
+
+Implementation commit:
+
+```text
+d6fafda2819d406c88a2f363a22bdfd9564989cf
+```
+
+The first admission packet remains authoritative for its 13 inputs:
+
+```text
+run: https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/32708205168
+evidence_id: visual-review-025_research_presentation_gold_scientific_composition_library-1b0ba053dfa0
+admitted: RRL-019, RRL-013
+```
+
+The revised Plan allowed one additional bounded packet from existing inspected/downloaded references only:
+
+```text
+run: https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/32714094088
+evidence: results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json
+evidence_id: visual-review-025_research_presentation_gold_scientific_composition_library-2fba9c5deb45
+admitted: RRL-009, RRL-011, RRL-015, RRL-016, RRL-017, RRL-020, RRL-021
+```
+
+Final gold library:
+
+```text
+GSC-004 -> RRL-019
+GSC-008 -> RRL-013
+GSC-011 -> RRL-009
+GSC-012 -> RRL-011
+GSC-013 -> RRL-015
+GSC-014 -> RRL-016
+GSC-015 -> RRL-017
+GSC-016 -> RRL-020
+GSC-017 -> RRL-021
+```
+
+Every retained gold record now has item-level `PASS` evidence from the 025 gold-admission or bounded-recovery visual review packet, with `visual_review_item_id`, `visual_review_evidence_id`, `visual_review_path`, `identity_map_path`, and matching reviewer-input SHA. `RRL-028` and all other item-level `REVISE` pages remain ordinary inspected references and were not force-admitted.
+
+Coverage limitation:
+
+```text
+No discussion / next-experiment page reached item-level PASS in the bounded existing-corpus screen.
+```
+
+Runtime probes were repaired to avoid fake compatible alternates:
+
+```text
+statistics_estimator_identity:
+  baseline: GSC-014
+  alternate: GSC-015
+
+medical_aligned_prediction_error:
+  baseline: GSC-008
+  alternate: GSC-004
+```
+
+Both baseline and alternate records are selected by the normal semantic compatibility selector. The `force_gold_id` path now calls the same selector against the forced record and rejects incompatible requests with `forced gold composition is not compatible with query`; it no longer emits `score=999` or `forced compatible probe`.
+
+The runtime artifact:
+
+```text
+docs/audits/research_presentation_gold_composition_library/runtime_probe_traces.json
+```
+
+records:
+
+- `runtime_selected = true`
+- `alternate_runtime_selected = true`
+- `alternate_is_distinct = true`
+- `alternate_has_compatibility_reasons = true`
+- `actually_consumed = true`
+- `output_affected = true`
+- `primary_bbox_changed = true`
+- `composition_family_available = true`
+
+Validation executed successfully before handoff:
+
+```text
+python skills/tools/documents-media/presentations/shared/scripts/validate_gold_compositions.py
+python skills/tools/documents-media/presentations/shared/scripts/generate_gold_composition_probe_artifacts.py
+python -m unittest tests.test_presentations
+python -m unittest discover -s tests
+python scripts/skills.py validate
+python scripts/build_codex_marketplace.py --validate --check --path-report
+PYTHONPATH=/home/yuukias/GPT_Codex_AI_Bridge_Kit python -m ai_bridge_kit.bridge_cli reviewed-handoff validate --target /home/yuukias/AI_Skills_Collection
+git diff --check
+```
+
+Observed results:
+
+- gold validator: `validated 9 gold scientific composition records`
+- runtime probes: `status = PASS`, `probe_count = 2`
+- targeted Presentation tests: 25 tests passed
+- full unittest discovery: 121 tests passed
+- skills validation: 149 active skills, 18 profiles, templates, and trigger eval scaffolds passed
+- marketplace validation/check/path report: passed
+- Reviewed Handoff validation: passed
+- whitespace check: passed
+
+`python scripts/build_codex_marketplace.py --write --validate --check --path-report` was not rerun during this revision because the broader write command was not approved in the current executor environment. The source/plugin mirror files were mechanically synchronized for the changed schema/index/scripts, and the non-writing marketplace validation/check/path-report passed afterward.
+
+Scope boundaries respected:
+
+- no new source scout;
+- no new downloads;
+- no Stage 3 renderer/layout implementation;
+- no 023 modification;
+- no real statistical or medical-imaging holdout;
+- no Terra core change;
+- no `ONE_SHOT_QUALITY_PASS` or `PROGRAM_MATURE` declaration.
