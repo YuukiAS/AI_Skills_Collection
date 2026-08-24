@@ -1,18 +1,18 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "026_research_presentation_discussion_next_experiment_gold_recovery",
-  "state": "PLAN_FROZEN",
+  "state": "NEEDS_GPT_PLANNER",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
   "max_plan_revisions": 1,
   "base_commit": "04d2f2fd19c6c17e2da6c1e386d8551edde969e9",
   "base_branch": "main",
-  "implementation_commit": null,
+  "implementation_commit": "45ac2a0647fb9a486ba47f64bed300c3e09f4c73",
   "ci_required": true,
   "ci_status": "PENDING",
   "last_review_decision": null,
   "review_limit_reached": false,
   "human_gate_reason": null,
-  "next_action": "RUN_CODEX_EXECUTOR"
+  "next_action": "RUN_GPT_PLANNER"
 }
