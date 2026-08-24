@@ -80,11 +80,25 @@
         "gold_admission_evidence": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["basis", "maturity_bar", "item_level_judgement", "evidence_paths", "why_admitted"],
+          "required": [
+            "basis",
+            "maturity_bar",
+            "item_level_judgement",
+            "visual_review_item_id",
+            "visual_review_evidence_id",
+            "visual_review_path",
+            "identity_map_path",
+            "evidence_paths",
+            "why_admitted"
+          ],
           "properties": {
             "basis": { "type": "string", "minLength": 1 },
             "maturity_bar": { "type": "string", "minLength": 1 },
-            "item_level_judgement": { "enum": ["PASS", "REFERENCE_ACCEPTED", "REFERENCE_ADMITTED_WITH_LIMITATION"] },
+            "item_level_judgement": { "const": "PASS" },
+            "visual_review_item_id": { "type": "string", "pattern": "^item_[A-Z0-9]+$" },
+            "visual_review_evidence_id": { "type": "string", "minLength": 1 },
+            "visual_review_path": { "type": "string", "minLength": 1 },
+            "identity_map_path": { "type": "string", "minLength": 1 },
             "evidence_paths": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
             "why_admitted": { "type": "string", "minLength": 1 }
           }

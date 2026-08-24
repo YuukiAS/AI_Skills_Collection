@@ -6,81 +6,91 @@
     {
       "probe_id": "statistics_estimator_identity",
       "query": {
-        "page_function": "ESTIMATOR",
-        "scientific_object": "estimator equation identity formula",
-        "domain_family": "statistics",
-        "dominant_object_type": "equation",
-        "evidence_type": "estimator formula",
-        "density": "low",
-        "panel_count": 0
+        "page_function": "REAL_DATA_APPLICATION",
+        "scientific_object": "biostatistics quantitative model comparison result table figure",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "plot table",
+        "evidence_type": "quantitative comparison result",
+        "density": "moderate",
+        "panel_count": 1
       },
       "baseline_recipe": {
         "schema": "RESEARCH_GOLD_COMPOSITION_RECIPE_V1",
         "query": {
-          "page_function": "ESTIMATOR",
-          "scientific_object": "estimator equation identity formula",
-          "domain_family": "statistics",
-          "dominant_object_type": "equation",
-          "evidence_type": "estimator formula",
-          "density": "low",
-          "panel_count": 0
+          "page_function": "REAL_DATA_APPLICATION",
+          "scientific_object": "biostatistics quantitative model comparison result table figure",
+          "domain_family": "biostatistics",
+          "dominant_object_type": "plot table",
+          "evidence_type": "quantitative comparison result",
+          "density": "moderate",
+          "panel_count": 1
         },
-        "selected_gold_id": "GSC-002",
-        "selected_reference_id": "RRL-028",
+        "selected_gold_id": "GSC-014",
+        "selected_reference_id": "RRL-016",
         "source_identity": {
-          "source_id": "SRC-054",
-          "actual_page_number": 14,
-          "canonical_rendered_page_sha256": "2870d8b698a549f76ae398de63b1340ce2ca66e3433e4ab281321c148f5b5dd4",
-          "review_input_sha256": "2870d8b698a549f76ae398de63b1340ce2ca66e3433e4ab281321c148f5b5dd4",
+          "source_id": "SRC-005",
+          "actual_page_number": 28,
+          "canonical_rendered_page_sha256": "c7ac668ca7b33103b6684ac11fd21fe040ef372af5288e722f383986076c62ea",
+          "review_input_sha256": "c7ac668ca7b33103b6684ac11fd21fe040ef372af5288e722f383986076c62ea",
           "rights_reuse_boundary": "COMPOSITION_ONLY"
         },
         "composition_constraints": {
-          "composition_family": "equation-dominant",
-          "primary_scientific_object_role": "centered estimator identity",
+          "composition_family": "claim-centered-result-table",
+          "primary_scientific_object_role": "large result table with claim and conclusion",
           "primary_bbox": {
-            "x": 0.2,
-            "y": 0.28,
-            "w": 0.46,
-            "h": 0.27
+            "x": 0.43,
+            "y": 0.35,
+            "w": 0.42,
+            "h": 0.31
           },
-          "primary_object_area_ratio": 0.1242,
+          "primary_object_area_ratio": 0.1302,
           "supporting_region_roles": [
-            "short title"
+            "claim title",
+            "factor note",
+            "bottom conclusion"
           ],
           "visual_hierarchy": [
             {
               "rank": 1,
-              "role": "short title",
-              "reason": "names the identity before detail"
+              "role": "claim title",
+              "reason": "states the result before the table"
             },
             {
               "rank": 2,
-              "role": "centered estimator identity",
-              "reason": "formula is the only scientific object and receives whitespace"
+              "role": "large result table",
+              "reason": "numeric comparison is the evidence"
+            },
+            {
+              "rank": 3,
+              "role": "bottom conclusion",
+              "reason": "interprets the table in one sentence"
             }
           ],
           "alignment_groups": [
             {
-              "group_id": "center-equation",
+              "group_id": "table-evidence",
               "roles": [
-                "centered estimator identity"
+                "group columns",
+                "IAA row",
+                "p-value row",
+                "effect-size row"
               ],
-              "relationship": "formula is centered with broad surrounding whitespace"
+              "relationship": "headers and rows organize evidence-to-claim"
             }
           ],
-          "reading_flow": "title-to-centered-equation",
+          "reading_flow": "claim-title-to-factor-note-to-table-to-conclusion",
           "annotation_legend_caption_panel_relations": [
-            "no detached caption; explanation belongs near the equation if needed"
+            "conclusion sits close to the table and does not replace numeric evidence"
           ],
           "content_capacity": {
-            "density": "low",
-            "text_budget": "short title plus one optional adjacent annotation",
-            "panel_count": 0,
-            "primary_object_min_area": 0.1
+            "density": "moderate",
+            "text_budget": "claim plus one conclusion sentence",
+            "panel_count": 1,
+            "primary_object_min_area": 0.12
           }
         },
         "audience_safe_instruction": {
-          "layout_lesson": "For a single identity, let the formula stand alone at readable scale instead of surrounding it with cards.",
+          "layout_lesson": "For biostatistical group comparisons, let the table be large and connect a concise conclusion to the numbers.",
           "do_not_expose_internal_ids": true,
           "do_not_copy_source_pixels_or_branding": true
         },
@@ -97,88 +107,66 @@
           "selection": {
             "schema": "RESEARCH_GOLD_COMPOSITION_SELECTION_V1",
             "query": {
-              "page_function": "ESTIMATOR",
-              "scientific_object": "estimator equation identity formula",
-              "domain_family": "statistics",
-              "dominant_object_type": "equation",
-              "evidence_type": "estimator formula",
-              "density": "low",
-              "panel_count": 0
+              "page_function": "REAL_DATA_APPLICATION",
+              "scientific_object": "biostatistics quantitative model comparison result table figure",
+              "domain_family": "biostatistics",
+              "dominant_object_type": "plot table",
+              "evidence_type": "quantitative comparison result",
+              "density": "moderate",
+              "panel_count": 1
             },
             "matches": [
               {
-                "gold_id": "GSC-002",
-                "reference_id": "RRL-028",
-                "source_id": "SRC-054",
-                "page_function": "ESTIMATOR",
-                "composition_family": "equation-dominant",
+                "gold_id": "GSC-014",
+                "reference_id": "RRL-016",
+                "source_id": "SRC-005",
+                "page_function": "REAL_DATA_APPLICATION",
+                "composition_family": "claim-centered-result-table",
                 "primary_bbox": {
-                  "x": 0.2,
-                  "y": 0.28,
-                  "w": 0.46,
-                  "h": 0.27
+                  "x": 0.43,
+                  "y": 0.35,
+                  "w": 0.42,
+                  "h": 0.31
                 },
-                "score": 15,
+                "score": 16,
                 "compatibility_reasons": [
                   "page_function exact match",
                   "domain_family match",
                   "density match",
                   "panel_count exact match",
-                  "scientific object overlap: equation, estimator, formula, identity"
+                  "scientific object overlap: biostatistics, comparison, quantitative, result, table"
+                ],
+                "rights_reuse_boundary": "COMPOSITION_ONLY"
+              },
+              {
+                "gold_id": "GSC-015",
+                "reference_id": "RRL-017",
+                "source_id": "SRC-005",
+                "page_function": "REAL_DATA_APPLICATION",
+                "composition_family": "dominant-labeled-scatterplot",
+                "primary_bbox": {
+                  "x": 0.43,
+                  "y": 0.17,
+                  "w": 0.5,
+                  "h": 0.64
+                },
+                "score": 16,
+                "compatibility_reasons": [
+                  "page_function exact match",
+                  "domain_family match",
+                  "density match",
+                  "panel_count exact match",
+                  "scientific object overlap: biostatistics, comparison, model, plot, quantitative"
                 ],
                 "rights_reuse_boundary": "COMPOSITION_ONLY"
               }
             ],
             "excluded": [
               {
-                "gold_id": "GSC-001",
-                "reference_id": "RRL-001",
-                "exclusion_reasons": [
-                  "page_function mismatch",
-                  "no scientific-object overlap",
-                  "semantic incompatibility: query matches rejected job 'estimator'"
-                ]
-              },
-              {
-                "gold_id": "GSC-003",
-                "reference_id": "RRL-014",
-                "exclusion_reasons": [
-                  "domain_family mismatch"
-                ]
-              },
-              {
                 "gold_id": "GSC-004",
                 "reference_id": "RRL-019",
                 "exclusion_reasons": [
-                  "page_function mismatch",
-                  "no scientific-object overlap",
-                  "semantic incompatibility: query matches rejected job 'equation identity'"
-                ]
-              },
-              {
-                "gold_id": "GSC-005",
-                "reference_id": "RRL-030",
-                "exclusion_reasons": [
-                  "page_function mismatch",
-                  "no scientific-object overlap"
-                ]
-              },
-              {
-                "gold_id": "GSC-006",
-                "reference_id": "RRL-041",
-                "exclusion_reasons": [
-                  "page_function mismatch",
-                  "no scientific-object overlap"
-                ]
-              },
-              {
-                "gold_id": "GSC-007",
-                "reference_id": "RRL-022",
-                "exclusion_reasons": [
-                  "page_function mismatch",
-                  "domain_family mismatch",
-                  "no scientific-object overlap",
-                  "semantic incompatibility: query matches rejected job 'equation identity'"
+                  "page_function mismatch"
                 ]
               },
               {
@@ -186,101 +174,126 @@
                 "reference_id": "RRL-013",
                 "exclusion_reasons": [
                   "page_function mismatch",
-                  "domain_family mismatch",
-                  "no scientific-object overlap",
-                  "semantic incompatibility: query matches rejected job 'estimator'"
+                  "domain_family mismatch"
                 ]
               },
               {
-                "gold_id": "GSC-009",
-                "reference_id": "RRL-005",
+                "gold_id": "GSC-011",
+                "reference_id": "RRL-009",
                 "exclusion_reasons": [
-                  "page_function mismatch",
-                  "no scientific-object overlap"
+                  "page_function mismatch"
                 ]
               },
               {
-                "gold_id": "GSC-010",
-                "reference_id": "RRL-023",
+                "gold_id": "GSC-012",
+                "reference_id": "RRL-011",
                 "exclusion_reasons": [
-                  "page_function mismatch",
-                  "no scientific-object overlap"
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-013",
+                "reference_id": "RRL-015",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-016",
+                "reference_id": "RRL-020",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-017",
+                "reference_id": "RRL-021",
+                "exclusion_reasons": [
+                  "page_function mismatch"
                 ]
               }
             ]
           }
         },
-        "recipe_sha256": "295da59e1baac3b5374926990ebf6e13c520cf044fb1fa941f9608acd194ae46"
+        "recipe_sha256": "d89a1516ff3e5f9becdf2e92a9e642dc9e2c472d93dfa9449a15ffb59db60564"
       },
       "alternate_recipe": {
         "schema": "RESEARCH_GOLD_COMPOSITION_RECIPE_V1",
         "query": {
-          "page_function": "ESTIMATOR",
-          "scientific_object": "estimator equation identity formula",
-          "domain_family": "statistics",
-          "dominant_object_type": "equation",
-          "evidence_type": "estimator formula",
-          "density": "low",
-          "panel_count": 0
+          "page_function": "REAL_DATA_APPLICATION",
+          "scientific_object": "biostatistics quantitative model comparison result table figure",
+          "domain_family": "biostatistics",
+          "dominant_object_type": "plot table",
+          "evidence_type": "quantitative comparison result",
+          "density": "moderate",
+          "panel_count": 1
         },
-        "selected_gold_id": "GSC-003",
-        "selected_reference_id": "RRL-014",
+        "selected_gold_id": "GSC-015",
+        "selected_reference_id": "RRL-017",
         "source_identity": {
           "source_id": "SRC-005",
-          "actual_page_number": 18,
-          "canonical_rendered_page_sha256": "bc7a72ab5809fe7e8a3f7d950a15607168e10c4fda573591e6d8250217ba9b68",
-          "review_input_sha256": "9bc66555d4fe50d6124655e0839c421673e3638c99b4d6a313d7340169516033",
+          "actual_page_number": 40,
+          "canonical_rendered_page_sha256": "d315d4747f9ddf2547f82fba8255214420b9e86edb870a70abaf1305110ba3f4",
+          "review_input_sha256": "2735be6951a2b75f41606691dbbc837bb6dc4d3b238ffe07e309f85b2942b935",
           "rights_reuse_boundary": "COMPOSITION_ONLY"
         },
         "composition_constraints": {
-          "composition_family": "split-visual-explanation",
-          "primary_scientific_object_role": "metric formula paired with example masks",
+          "composition_family": "dominant-labeled-scatterplot",
+          "primary_scientific_object_role": "dominant labeled model-comparison plot",
           "primary_bbox": {
-            "x": 0.06,
-            "y": 0.15,
-            "w": 0.82,
-            "h": 0.48
+            "x": 0.43,
+            "y": 0.17,
+            "w": 0.5,
+            "h": 0.64
           },
-          "primary_object_area_ratio": 0.3936,
+          "primary_object_area_ratio": 0.32,
           "supporting_region_roles": [
-            "formula",
-            "mask examples"
+            "short context bullets",
+            "legend",
+            "axis labels"
           ],
           "visual_hierarchy": [
             {
               "rank": 1,
-              "role": "metric title",
-              "reason": "announces what is being defined"
+              "role": "result title",
+              "reason": "states what is being compared"
             },
             {
               "rank": 2,
-              "role": "formula plus masks",
-              "reason": "equation and examples jointly define the metric"
+              "role": "model comparison plot",
+              "reason": "positions models by two metrics"
+            },
+            {
+              "rank": 3,
+              "role": "context bullets",
+              "reason": "keep task setup secondary"
             }
           ],
           "alignment_groups": [
             {
-              "group_id": "metric-examples",
+              "group_id": "model-comparison-plot",
               "roles": [
-                "formula",
-                "mask examples"
+                "points",
+                "labels",
+                "legend",
+                "axes"
               ],
-              "relationship": "examples sit beside the formula to map symbols to objects"
+              "relationship": "labels and legend decode the dominant quantitative object"
             }
           ],
-          "reading_flow": "title-to-left-formula-then-right-mask-examples",
+          "reading_flow": "title-to-context-to-dominant-plot",
           "annotation_legend_caption_panel_relations": [
-            "variable examples are colocated with the formula rather than described in a footer"
+            "legend and point labels stay attached to the plotted comparison"
           ],
           "content_capacity": {
             "density": "moderate",
-            "text_budget": "formula plus two or three labels",
-            "panel_count": 2,
+            "text_budget": "two context bullets plus plot labels",
+            "panel_count": 1,
             "primary_object_min_area": 0.3
           }
         },
         "audience_safe_instruction": {
-          "layout_lesson": "Bind a metric formula to the exact visual objects being scored.",
+          "layout_lesson": "For model-comparison results, make the plotted tradeoff dominant and label points directly.",
           "do_not_expose_internal_ids": true,
           "do_not_copy_source_pixels_or_branding": true
         },
@@ -297,30 +310,99 @@
           "selection": {
             "schema": "RESEARCH_GOLD_COMPOSITION_SELECTION_V1",
             "query": {
-              "page_function": "ESTIMATOR",
-              "scientific_object": "estimator equation identity formula",
-              "domain_family": "statistics",
-              "dominant_object_type": "equation",
-              "evidence_type": "estimator formula",
-              "density": "low",
-              "panel_count": 0
+              "page_function": "REAL_DATA_APPLICATION",
+              "scientific_object": "biostatistics quantitative model comparison result table figure",
+              "domain_family": "biostatistics",
+              "dominant_object_type": "plot table",
+              "evidence_type": "quantitative comparison result",
+              "density": "moderate",
+              "panel_count": 1
             },
             "matches": [
               {
-                "gold_id": "GSC-003",
-                "score": 999,
+                "gold_id": "GSC-015",
+                "reference_id": "RRL-017",
+                "source_id": "SRC-005",
+                "page_function": "REAL_DATA_APPLICATION",
+                "composition_family": "dominant-labeled-scatterplot",
+                "primary_bbox": {
+                  "x": 0.43,
+                  "y": 0.17,
+                  "w": 0.5,
+                  "h": 0.64
+                },
+                "score": 16,
                 "compatibility_reasons": [
-                  "forced compatible probe"
-                ]
+                  "page_function exact match",
+                  "domain_family match",
+                  "density match",
+                  "panel_count exact match",
+                  "scientific object overlap: biostatistics, comparison, model, plot, quantitative"
+                ],
+                "rights_reuse_boundary": "COMPOSITION_ONLY"
               }
             ],
-            "excluded": []
+            "excluded": [
+              {
+                "gold_id": "GSC-004",
+                "reference_id": "RRL-019",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-008",
+                "reference_id": "RRL-013",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "domain_family mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-011",
+                "reference_id": "RRL-009",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-012",
+                "reference_id": "RRL-011",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-013",
+                "reference_id": "RRL-015",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-016",
+                "reference_id": "RRL-020",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-017",
+                "reference_id": "RRL-021",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              }
+            ]
           }
         },
-        "recipe_sha256": "9a67c4089c95a54101e7b305cea6612294d47946bb8dc14860eeadd2798307fb"
+        "recipe_sha256": "1179203ab1a9ce6c51bb07e1f437b16a6d6831475f8af110b29917b302736aae"
       },
       "checks": {
         "runtime_selected": true,
+        "alternate_runtime_selected": true,
+        "alternate_is_distinct": true,
+        "alternate_has_compatibility_reasons": true,
         "actually_consumed": true,
         "output_affected": true,
         "primary_bbox_changed": true,
@@ -331,10 +413,10 @@
       "probe_id": "medical_aligned_prediction_error",
       "query": {
         "page_function": "MEDICAL_IMAGE_COMPARISON",
-        "scientific_object": "medical image aligned panel prediction ground truth error overlay",
+        "scientific_object": "medical image lesion samples task applications visual comparison",
         "domain_family": "medical_imaging",
         "dominant_object_type": "medical_image",
-        "evidence_type": "same-case prediction error",
+        "evidence_type": "representative image comparison",
         "density": "high",
         "panel_count": 4
       },
@@ -342,219 +424,10 @@
         "schema": "RESEARCH_GOLD_COMPOSITION_RECIPE_V1",
         "query": {
           "page_function": "MEDICAL_IMAGE_COMPARISON",
-          "scientific_object": "medical image aligned panel prediction ground truth error overlay",
+          "scientific_object": "medical image lesion samples task applications visual comparison",
           "domain_family": "medical_imaging",
           "dominant_object_type": "medical_image",
-          "evidence_type": "same-case prediction error",
-          "density": "high",
-          "panel_count": 4
-        },
-        "selected_gold_id": "GSC-007",
-        "selected_reference_id": "RRL-022",
-        "source_identity": {
-          "source_id": "SRC-006",
-          "actual_page_number": 21,
-          "canonical_rendered_page_sha256": "3859a1913a078e3e60ad8aa166a1ab262af56a93d6ecf57dbf1f269b84b7bef4",
-          "review_input_sha256": "3f304aa00bd0bf04150557d2a86b3a005a624120361f0eec71c450cc9b152b6f",
-          "rights_reuse_boundary": "COMPARATIVE_GOLD"
-        },
-        "composition_constraints": {
-          "composition_family": "aligned-multi-panel",
-          "primary_scientific_object_role": "aligned medical image comparison grid",
-          "primary_bbox": {
-            "x": 0.05,
-            "y": 0.2,
-            "w": 0.76,
-            "h": 0.78
-          },
-          "primary_object_area_ratio": 0.5928,
-          "supporting_region_roles": [
-            "panel labels",
-            "legend",
-            "short interpretation"
-          ],
-          "visual_hierarchy": [
-            {
-              "rank": 1,
-              "role": "case comparison title",
-              "reason": "frames what to inspect"
-            },
-            {
-              "rank": 2,
-              "role": "aligned image grid",
-              "reason": "image/GT/prediction/error panels are the evidence"
-            },
-            {
-              "rank": 3,
-              "role": "legend and labels",
-              "reason": "labels decode panels without taking over the page"
-            }
-          ],
-          "alignment_groups": [
-            {
-              "group_id": "aligned-panels",
-              "roles": [
-                "input",
-                "ground truth",
-                "prediction",
-                "error"
-              ],
-              "relationship": "same-case panels align by row and share labels"
-            }
-          ],
-          "reading_flow": "title-to-panel-labels-to-left-to-right-image-comparison",
-          "annotation_legend_caption_panel_relations": [
-            "legend binds overlay/error colors to the aligned panels"
-          ],
-          "content_capacity": {
-            "density": "high",
-            "text_budget": "panel labels plus one short interpretation",
-            "panel_count": 4,
-            "primary_object_min_area": 0.5
-          }
-        },
-        "audience_safe_instruction": {
-          "layout_lesson": "Let same-case medical panels dominate the slide and bind labels/legend directly to the grid.",
-          "do_not_expose_internal_ids": true,
-          "do_not_copy_source_pixels_or_branding": true
-        },
-        "runtime_trace": {
-          "runtime_selected": true,
-          "actually_consumed_fields": [
-            "primary_bbox",
-            "visual_hierarchy",
-            "alignment_groups",
-            "reading_flow",
-            "annotation_legend_caption_panel_relations",
-            "content_capacity"
-          ],
-          "selection": {
-            "schema": "RESEARCH_GOLD_COMPOSITION_SELECTION_V1",
-            "query": {
-              "page_function": "MEDICAL_IMAGE_COMPARISON",
-              "scientific_object": "medical image aligned panel prediction ground truth error overlay",
-              "domain_family": "medical_imaging",
-              "dominant_object_type": "medical_image",
-              "evidence_type": "same-case prediction error",
-              "density": "high",
-              "panel_count": 4
-            },
-            "matches": [
-              {
-                "gold_id": "GSC-007",
-                "reference_id": "RRL-022",
-                "source_id": "SRC-006",
-                "page_function": "MEDICAL_IMAGE_COMPARISON",
-                "composition_family": "aligned-multi-panel",
-                "primary_bbox": {
-                  "x": 0.05,
-                  "y": 0.2,
-                  "w": 0.76,
-                  "h": 0.78
-                },
-                "score": 16,
-                "compatibility_reasons": [
-                  "page_function exact match",
-                  "domain_family match",
-                  "density match",
-                  "panel_count exact match",
-                  "scientific object overlap: aligned, error, ground, image, medical"
-                ],
-                "rights_reuse_boundary": "COMPARATIVE_GOLD"
-              }
-            ],
-            "excluded": [
-              {
-                "gold_id": "GSC-001",
-                "reference_id": "RRL-001",
-                "exclusion_reasons": [
-                  "page_function mismatch",
-                  "semantic incompatibility: query matches rejected job 'medical overlay comparison'"
-                ]
-              },
-              {
-                "gold_id": "GSC-002",
-                "reference_id": "RRL-028",
-                "exclusion_reasons": [
-                  "page_function mismatch",
-                  "domain_family mismatch",
-                  "panel_count incompatible",
-                  "no scientific-object overlap"
-                ]
-              },
-              {
-                "gold_id": "GSC-003",
-                "reference_id": "RRL-014",
-                "exclusion_reasons": [
-                  "page_function mismatch"
-                ]
-              },
-              {
-                "gold_id": "GSC-004",
-                "reference_id": "RRL-019",
-                "exclusion_reasons": [
-                  "page_function mismatch",
-                  "no scientific-object overlap"
-                ]
-              },
-              {
-                "gold_id": "GSC-005",
-                "reference_id": "RRL-030",
-                "exclusion_reasons": [
-                  "page_function mismatch",
-                  "domain_family mismatch",
-                  "no scientific-object overlap",
-                  "semantic incompatibility: query matches rejected job 'medical image overlay'"
-                ]
-              },
-              {
-                "gold_id": "GSC-006",
-                "reference_id": "RRL-041",
-                "exclusion_reasons": [
-                  "page_function mismatch",
-                  "domain_family mismatch",
-                  "no scientific-object overlap"
-                ]
-              },
-              {
-                "gold_id": "GSC-008",
-                "reference_id": "RRL-013",
-                "exclusion_reasons": [
-                  "semantic incompatibility: query matches rejected job 'prediction error overlay'"
-                ]
-              },
-              {
-                "gold_id": "GSC-009",
-                "reference_id": "RRL-005",
-                "exclusion_reasons": [
-                  "page_function mismatch",
-                  "panel_count incompatible",
-                  "no scientific-object overlap",
-                  "semantic incompatibility: query matches rejected job 'medical image comparison'"
-                ]
-              },
-              {
-                "gold_id": "GSC-010",
-                "reference_id": "RRL-023",
-                "exclusion_reasons": [
-                  "page_function mismatch",
-                  "domain_family mismatch",
-                  "no scientific-object overlap"
-                ]
-              }
-            ]
-          }
-        },
-        "recipe_sha256": "7aff4965d74a3bdb91eefc0f062dd1266ea4c4a5cf3fe2552c5ab98d3f2ca993"
-      },
-      "alternate_recipe": {
-        "schema": "RESEARCH_GOLD_COMPOSITION_RECIPE_V1",
-        "query": {
-          "page_function": "MEDICAL_IMAGE_COMPARISON",
-          "scientific_object": "medical image aligned panel prediction ground truth error overlay",
-          "domain_family": "medical_imaging",
-          "dominant_object_type": "medical_image",
-          "evidence_type": "same-case prediction error",
+          "evidence_type": "representative image comparison",
           "density": "high",
           "panel_count": 4
         },
@@ -564,57 +437,65 @@
           "source_id": "SRC-005",
           "actual_page_number": 14,
           "canonical_rendered_page_sha256": "e89c5cc1368990d4dda3fc7e74ed5c08928f34467b0a43e4856a34f224b26271",
-          "review_input_sha256": "5b2c8dd0e0abeace036587de487446e0c75e9e862227a6be192741d0dcfb8c7e",
-          "rights_reuse_boundary": "COMPARATIVE_GOLD"
+          "review_input_sha256": "e89c5cc1368990d4dda3fc7e74ed5c08928f34467b0a43e4856a34f224b26271",
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
         },
         "composition_constraints": {
-          "composition_family": "aligned-multi-panel",
-          "primary_scientific_object_role": "representative medical image sample grid",
+          "composition_family": "grouped-image-samples",
+          "primary_scientific_object_role": "grouped dermoscopic lesion sample comparison",
           "primary_bbox": {
-            "x": 0.12,
-            "y": 0.24,
-            "w": 0.56,
-            "h": 0.42
+            "x": 0.03,
+            "y": 0.31,
+            "w": 0.86,
+            "h": 0.31
           },
-          "primary_object_area_ratio": 0.235,
+          "primary_object_area_ratio": 0.2666,
           "supporting_region_roles": [
-            "sample labels",
-            "dataset title"
+            "mask-count group labels",
+            "image contour overlays"
           ],
           "visual_hierarchy": [
             {
               "rank": 1,
-              "role": "dataset/sample title",
-              "reason": "names the visual unit"
+              "role": "sample overview title",
+              "reason": "announces the representative sample set"
             },
             {
               "rank": 2,
-              "role": "sample grid",
-              "reason": "sample diversity is visible before metrics"
+              "role": "grouped lesion image grid",
+              "reason": "images and colored contours dominate the evidence"
+            },
+            {
+              "rank": 3,
+              "role": "mask-count labels",
+              "reason": "labels organize the comparison without overwhelming images"
             }
           ],
           "alignment_groups": [
             {
-              "group_id": "sample-grid",
+              "group_id": "mask-count-columns",
               "roles": [
-                "representative image samples"
+                "2 masks",
+                "3 masks",
+                "4 masks",
+                "5 masks"
               ],
-              "relationship": "samples share size and spacing to show visual diversity"
+              "relationship": "same task samples are grouped by annotation count"
             }
           ],
-          "reading_flow": "sample-title-to-grid-to-short-dataset-note",
+          "reading_flow": "title-to-mask-count-groups-to-image-grid",
           "annotation_legend_caption_panel_relations": [
-            "sample labels remain attached to the grid"
+            "group labels bind contour examples to annotation-count categories"
           ],
           "content_capacity": {
-            "density": "moderate",
-            "text_budget": "dataset title plus minimal labels",
-            "panel_count": 6,
-            "primary_object_min_area": 0.2
+            "density": "high",
+            "text_budget": "title plus compact group labels",
+            "panel_count": 8,
+            "primary_object_min_area": 0.23
           }
         },
         "audience_safe_instruction": {
-          "layout_lesson": "Introduce medical-image data with actual sample diversity before showing metrics.",
+          "layout_lesson": "For representative medical samples, make the image grid prominent and group comparable cases with compact labels.",
           "do_not_expose_internal_ids": true,
           "do_not_copy_source_pixels_or_branding": true
         },
@@ -632,29 +513,301 @@
             "schema": "RESEARCH_GOLD_COMPOSITION_SELECTION_V1",
             "query": {
               "page_function": "MEDICAL_IMAGE_COMPARISON",
-              "scientific_object": "medical image aligned panel prediction ground truth error overlay",
+              "scientific_object": "medical image lesion samples task applications visual comparison",
               "domain_family": "medical_imaging",
               "dominant_object_type": "medical_image",
-              "evidence_type": "same-case prediction error",
+              "evidence_type": "representative image comparison",
               "density": "high",
               "panel_count": 4
             },
             "matches": [
               {
                 "gold_id": "GSC-008",
-                "score": 999,
+                "reference_id": "RRL-013",
+                "source_id": "SRC-005",
+                "page_function": "MEDICAL_IMAGE_COMPARISON",
+                "composition_family": "grouped-image-samples",
+                "primary_bbox": {
+                  "x": 0.03,
+                  "y": 0.31,
+                  "w": 0.86,
+                  "h": 0.31
+                },
+                "score": 14,
                 "compatibility_reasons": [
-                  "forced compatible probe"
-                ]
+                  "page_function exact match",
+                  "domain_family match",
+                  "density match",
+                  "scientific object overlap: comparison, image, lesion, medical, representative"
+                ],
+                "rights_reuse_boundary": "COMPOSITION_ONLY"
+              },
+              {
+                "gold_id": "GSC-004",
+                "reference_id": "RRL-019",
+                "source_id": "SRC-006",
+                "page_function": "EXPERIMENT_DESIGN",
+                "composition_family": "application-task-map",
+                "primary_bbox": {
+                  "x": 0.06,
+                  "y": 0.35,
+                  "w": 0.84,
+                  "h": 0.47
+                },
+                "score": 12,
+                "compatibility_reasons": [
+                  "page_function matches scientific job",
+                  "domain_family match",
+                  "panel_count near match",
+                  "scientific object overlap: comparison, image, lesion, medical, task"
+                ],
+                "rights_reuse_boundary": "COMPOSITION_ONLY"
               }
             ],
-            "excluded": []
+            "excluded": [
+              {
+                "gold_id": "GSC-011",
+                "reference_id": "RRL-009",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "no scientific-object overlap",
+                  "semantic incompatibility: query matches rejected job 'medical image samples'"
+                ]
+              },
+              {
+                "gold_id": "GSC-012",
+                "reference_id": "RRL-011",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-013",
+                "reference_id": "RRL-015",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-014",
+                "reference_id": "RRL-016",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-015",
+                "reference_id": "RRL-017",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-016",
+                "reference_id": "RRL-020",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "panel_count incompatible"
+                ]
+              },
+              {
+                "gold_id": "GSC-017",
+                "reference_id": "RRL-021",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              }
+            ]
           }
         },
-        "recipe_sha256": "761d2c2830b5f357060bfda021b3e38c7b3ba19ca267962c0be9c2ad85ff1886"
+        "recipe_sha256": "4518fd8ce790ecf3c6fa69b07f75fac8c61e0dc5512bac80c050bbd84fbe0ee8"
+      },
+      "alternate_recipe": {
+        "schema": "RESEARCH_GOLD_COMPOSITION_RECIPE_V1",
+        "query": {
+          "page_function": "MEDICAL_IMAGE_COMPARISON",
+          "scientific_object": "medical image lesion samples task applications visual comparison",
+          "domain_family": "medical_imaging",
+          "dominant_object_type": "medical_image",
+          "evidence_type": "representative image comparison",
+          "density": "high",
+          "panel_count": 4
+        },
+        "selected_gold_id": "GSC-004",
+        "selected_reference_id": "RRL-019",
+        "source_identity": {
+          "source_id": "SRC-006",
+          "actual_page_number": 3,
+          "canonical_rendered_page_sha256": "3403aba3c209bce280a8e15456feea972da75ed3200d35e67131024eb1dfea93",
+          "review_input_sha256": "3403aba3c209bce280a8e15456feea972da75ed3200d35e67131024eb1dfea93",
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        },
+        "composition_constraints": {
+          "composition_family": "application-task-map",
+          "primary_scientific_object_role": "medical imaging application task map with examples",
+          "primary_bbox": {
+            "x": 0.06,
+            "y": 0.35,
+            "w": 0.84,
+            "h": 0.47
+          },
+          "primary_object_area_ratio": 0.3948,
+          "supporting_region_roles": [
+            "short context text",
+            "medical thumbnails",
+            "task hubs"
+          ],
+          "visual_hierarchy": [
+            {
+              "rank": 1,
+              "role": "introduction title",
+              "reason": "sets the application context"
+            },
+            {
+              "rank": 2,
+              "role": "application task map",
+              "reason": "links lesion examples to downstream tasks"
+            },
+            {
+              "rank": 3,
+              "role": "thumbnail examples",
+              "reason": "ground the task map in visual medical evidence"
+            }
+          ],
+          "alignment_groups": [
+            {
+              "group_id": "task-map",
+              "roles": [
+                "lesion examples",
+                "task hubs",
+                "application connectors"
+              ],
+              "relationship": "examples and task labels are grouped as one application map"
+            }
+          ],
+          "reading_flow": "title-to-context-to-application-task-map",
+          "annotation_legend_caption_panel_relations": [
+            "connectors encode scientific task relationships; thumbnails remain supporting evidence"
+          ],
+          "content_capacity": {
+            "density": "moderate",
+            "text_budget": "one short context block plus concise node labels",
+            "panel_count": 6,
+            "primary_object_min_area": 0.3
+          }
+        },
+        "audience_safe_instruction": {
+          "layout_lesson": "Use a single application map to introduce medical-imaging tasks from concrete examples before details.",
+          "do_not_expose_internal_ids": true,
+          "do_not_copy_source_pixels_or_branding": true
+        },
+        "runtime_trace": {
+          "runtime_selected": true,
+          "actually_consumed_fields": [
+            "primary_bbox",
+            "visual_hierarchy",
+            "alignment_groups",
+            "reading_flow",
+            "annotation_legend_caption_panel_relations",
+            "content_capacity"
+          ],
+          "selection": {
+            "schema": "RESEARCH_GOLD_COMPOSITION_SELECTION_V1",
+            "query": {
+              "page_function": "MEDICAL_IMAGE_COMPARISON",
+              "scientific_object": "medical image lesion samples task applications visual comparison",
+              "domain_family": "medical_imaging",
+              "dominant_object_type": "medical_image",
+              "evidence_type": "representative image comparison",
+              "density": "high",
+              "panel_count": 4
+            },
+            "matches": [
+              {
+                "gold_id": "GSC-004",
+                "reference_id": "RRL-019",
+                "source_id": "SRC-006",
+                "page_function": "EXPERIMENT_DESIGN",
+                "composition_family": "application-task-map",
+                "primary_bbox": {
+                  "x": 0.06,
+                  "y": 0.35,
+                  "w": 0.84,
+                  "h": 0.47
+                },
+                "score": 12,
+                "compatibility_reasons": [
+                  "page_function matches scientific job",
+                  "domain_family match",
+                  "panel_count near match",
+                  "scientific object overlap: comparison, image, lesion, medical, task"
+                ],
+                "rights_reuse_boundary": "COMPOSITION_ONLY"
+              }
+            ],
+            "excluded": [
+              {
+                "gold_id": "GSC-011",
+                "reference_id": "RRL-009",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "no scientific-object overlap",
+                  "semantic incompatibility: query matches rejected job 'medical image samples'"
+                ]
+              },
+              {
+                "gold_id": "GSC-012",
+                "reference_id": "RRL-011",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-013",
+                "reference_id": "RRL-015",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-014",
+                "reference_id": "RRL-016",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-015",
+                "reference_id": "RRL-017",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-016",
+                "reference_id": "RRL-020",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "panel_count incompatible"
+                ]
+              },
+              {
+                "gold_id": "GSC-017",
+                "reference_id": "RRL-021",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              }
+            ]
+          }
+        },
+        "recipe_sha256": "5dbe6ce6df54dd7bef04ac7d7400495f6b5a8f2aa7b9401973d5cbe2d17b5e13"
       },
       "checks": {
         "runtime_selected": true,
+        "alternate_runtime_selected": true,
+        "alternate_is_distinct": true,
+        "alternate_has_compatibility_reasons": true,
         "actually_consumed": true,
         "output_affected": true,
         "primary_bbox_changed": true,

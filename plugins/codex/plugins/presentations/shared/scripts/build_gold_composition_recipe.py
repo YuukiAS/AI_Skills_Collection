@@ -30,13 +30,11 @@ def build_recipe(query: dict, *, force_gold_id: str | None = None, exclude_gold_
     if exclude_gold_id:
         records = [record for record in records if record["gold_id"] != exclude_gold_id]
     if force_gold_id:
-        record = _records_by_id()[force_gold_id]
-        selection = {
-            "schema": "RESEARCH_GOLD_COMPOSITION_SELECTION_V1",
-            "query": query,
-            "matches": [{"gold_id": force_gold_id, "score": 999, "compatibility_reasons": ["forced compatible probe"]}],
-            "excluded": [],
-        }
+        forced = _records_by_id()[force_gold_id]
+        selection = select_gold_compositions.select_records(query, limit=1, records=[forced])
+        if not selection["matches"]:
+            raise ValueError(f"forced gold composition is not compatible with query: {force_gold_id}")
+        record = forced
     else:
         selection = select_gold_compositions.select_records(query, limit=3, records=records)
         if not selection["matches"]:

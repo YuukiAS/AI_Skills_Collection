@@ -326,12 +326,12 @@ class PresentationSharedTests(unittest.TestCase):
         validator = SHARED / "scripts/validate_gold_compositions.py"
         result = subprocess.run([sys.executable, str(validator)], check=False, capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
-        self.assertIn("validated 10 gold scientific composition records", result.stdout)
+        self.assertIn("validated 9 gold scientific composition records", result.stdout)
 
         index = json.loads((references / "research_gold_composition_index.json").read_text(encoding="utf-8"))
         records = index["records"]
         self.assertLess(len(records), 13)
-        self.assertGreaterEqual(len({record["source_id"] for record in records}), 4)
+        self.assertGreaterEqual(len({record["source_id"] for record in records}), 3)
         jobs = {job for record in records for job in record["scientific_jobs"]}
         for required in [
             "motivation",
@@ -340,31 +340,37 @@ class PresentationSharedTests(unittest.TestCase):
             "quantitative_result",
             "negative_result",
             "medical_image_comparison",
-            "discussion",
         ]:
             self.assertTrue(any(required in job for job in jobs), required)
         for record in records:
             self.assertIn(record["rights_reuse_boundary"], {"COMPOSITION_ONLY", "COMPARATIVE_GOLD"})
             self.assertTrue(record["gold_admission_evidence"]["evidence_paths"])
+            self.assertEqual(record["gold_admission_evidence"]["item_level_judgement"], "PASS")
+            self.assertTrue(record["gold_admission_evidence"]["visual_review_item_id"].startswith("item_"))
+            self.assertTrue(record["gold_admission_evidence"]["visual_review_path"].endswith("VISUAL_REVIEW.json"))
             self.assertNotIn("metadata-only", record["gold_admission_evidence"]["basis"].lower())
             self.assertGreater(record["primary_object_area_ratio"], 0)
             self.assertTrue(record["annotation_legend_caption_panel_relations"])
             audience_contract = record["portable_composition_lesson"] + " " + " ".join(record["scientific_jobs"])
             for forbidden in ["RRL-", "SRC-", "GSC-", "QA", "provenance"]:
                 self.assertNotIn(forbidden, audience_contract)
+        report = json.loads((REPO_ROOT / "docs/audits/research_presentation_gold_composition_library/gold_admission_report.json").read_text(encoding="utf-8"))
+        self.assertEqual(set(report["admitted_gold_ids"]), {record["gold_id"] for record in records})
+        self.assertIn("discussion", " ".join(report["coverage_limitations"]).lower())
+        self.assertGreaterEqual(len(report["rejected_candidate_examples"]), 20)
 
         selector = SHARED / "scripts/select_gold_compositions.py"
         stat_selected = subprocess.run(
             [
                 sys.executable,
                 str(selector),
-                "--page-function", "ESTIMATOR",
-                "--scientific-object", "estimator equation identity formula",
-                "--domain-family", "statistics",
-                "--dominant-object-type", "equation",
-                "--evidence-type", "estimator formula",
-                "--density", "low",
-                "--panel-count", "0",
+                "--page-function", "REAL_DATA_APPLICATION",
+                "--scientific-object", "biostatistics quantitative model comparison result table figure",
+                "--domain-family", "biostatistics",
+                "--dominant-object-type", "plot table",
+                "--evidence-type", "quantitative comparison result",
+                "--density", "moderate",
+                "--panel-count", "1",
                 "--limit", "2",
             ],
             check=False,
@@ -373,7 +379,8 @@ class PresentationSharedTests(unittest.TestCase):
         )
         self.assertEqual(stat_selected.returncode, 0, stat_selected.stderr)
         stat_payload = json.loads(stat_selected.stdout)
-        self.assertEqual(stat_payload["matches"][0]["gold_id"], "GSC-002")
+        self.assertEqual(stat_payload["matches"][0]["gold_id"], "GSC-014")
+        self.assertEqual(stat_payload["matches"][1]["gold_id"], "GSC-015")
         self.assertTrue(any(item["exclusion_reasons"] for item in stat_payload["excluded"]))
 
         med_selected = subprocess.run(
@@ -381,10 +388,10 @@ class PresentationSharedTests(unittest.TestCase):
                 sys.executable,
                 str(selector),
                 "--page-function", "MEDICAL_IMAGE_COMPARISON",
-                "--scientific-object", "medical image aligned panel prediction ground truth error overlay",
+                "--scientific-object", "medical image lesion samples task applications visual comparison",
                 "--domain-family", "medical_imaging",
                 "--dominant-object-type", "medical_image",
-                "--evidence-type", "same-case prediction error",
+                "--evidence-type", "representative image comparison",
                 "--density", "high",
                 "--panel-count", "4",
                 "--limit", "2",
@@ -395,8 +402,27 @@ class PresentationSharedTests(unittest.TestCase):
         )
         self.assertEqual(med_selected.returncode, 0, med_selected.stderr)
         med_payload = json.loads(med_selected.stdout)
-        self.assertEqual(med_payload["matches"][0]["gold_id"], "GSC-007")
-        self.assertFalse(any(item["gold_id"] == "GSC-002" for item in med_payload["matches"]))
+        self.assertEqual(med_payload["matches"][0]["gold_id"], "GSC-008")
+        self.assertEqual(med_payload["matches"][1]["gold_id"], "GSC-004")
+        self.assertFalse(any(item["gold_id"] == "GSC-014" for item in med_payload["matches"]))
+
+        recipe_builder = SHARED / "scripts/build_gold_composition_recipe.py"
+        incompatible_force = subprocess.run(
+            [
+                sys.executable,
+                str(recipe_builder),
+                "--page-function", "MEDICAL_IMAGE_COMPARISON",
+                "--scientific-object", "medical image lesion samples",
+                "--domain-family", "medical_imaging",
+                "--dominant-object-type", "medical_image",
+                "--force-gold-id", "GSC-014",
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertNotEqual(incompatible_force.returncode, 0)
+        self.assertIn("not compatible", incompatible_force.stderr + incompatible_force.stdout)
 
         probe_generator = SHARED / "scripts/generate_gold_composition_probe_artifacts.py"
         probe_result = subprocess.run([sys.executable, str(probe_generator)], check=False, capture_output=True, text=True)
@@ -407,10 +433,14 @@ class PresentationSharedTests(unittest.TestCase):
         for probe in probes["probes"]:
             checks = probe["checks"]
             self.assertTrue(checks["runtime_selected"])
+            self.assertTrue(checks["alternate_runtime_selected"])
+            self.assertTrue(checks["alternate_is_distinct"])
+            self.assertTrue(checks["alternate_has_compatibility_reasons"])
             self.assertTrue(checks["actually_consumed"])
             self.assertTrue(checks["output_affected"])
             self.assertTrue(checks["primary_bbox_changed"])
             self.assertNotEqual(probe["baseline_recipe"]["recipe_sha256"], probe["alternate_recipe"]["recipe_sha256"])
+            self.assertNotIn("forced compatible probe", json.dumps(probe, ensure_ascii=False))
             consumed = set(probe["baseline_recipe"]["runtime_trace"]["actually_consumed_fields"])
             self.assertTrue({"primary_bbox", "visual_hierarchy", "alignment_groups"}.issubset(consumed))
 

@@ -3,8 +3,107 @@
   "task_key": "025_research_presentation_gold_scientific_composition_library",
   "admission_policy": "Only existing inspected references with rendered-page identity, rights boundary, composition lesson, and mature-bar evidence are admitted.",
   "admitted_gold_ids": [
-    "GSC-002",
-    "GSC-007"
+    "GSC-004",
+    "GSC-008",
+    "GSC-011",
+    "GSC-012",
+    "GSC-013",
+    "GSC-014",
+    "GSC-015",
+    "GSC-016",
+    "GSC-017"
+  ],
+  "admitted_references": [
+    {
+      "reference_id": "RRL-019",
+      "source_id": "SRC-006",
+      "page_function": "EXPERIMENT_DESIGN",
+      "visual_review_item_id": "item_D",
+      "decision": "PASS",
+      "summary": "Admit. This is a mature scientific introduction composition with a clear object, useful visual relationships, and coherent conference-talk hierarchy.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json",
+      "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/review_identity_map.json"
+    },
+    {
+      "reference_id": "RRL-013",
+      "source_id": "SRC-005",
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "visual_review_item_id": "item_H",
+      "decision": "PASS",
+      "summary": "Admit. This is a strong, mature visual comparison page with clear scientific-object prominence and a projection-ready grouping hierarchy.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json",
+      "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/review_identity_map.json"
+    },
+    {
+      "reference_id": "RRL-009",
+      "source_id": "SRC-004",
+      "page_function": "ESTIMATOR",
+      "visual_review_item_id": "item_C",
+      "decision": "PASS",
+      "summary": "Mature scientific workflow composition with useful panel and annotation relationships.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
+      "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+    },
+    {
+      "reference_id": "RRL-011",
+      "source_id": "SRC-004",
+      "page_function": "FINITE_SAMPLE",
+      "visual_review_item_id": "item_D",
+      "decision": "PASS",
+      "summary": "Strong explanatory comparison slide suitable as a gold composition reference.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
+      "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+    },
+    {
+      "reference_id": "RRL-015",
+      "source_id": "SRC-005",
+      "page_function": "CONFIDENCE_INTERVAL",
+      "visual_review_item_id": "item_F",
+      "decision": "PASS",
+      "summary": "Mature quantitative figure slide with a clear analytical object.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
+      "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+    },
+    {
+      "reference_id": "RRL-016",
+      "source_id": "SRC-005",
+      "page_function": "REAL_DATA_APPLICATION",
+      "visual_review_item_id": "item_G",
+      "decision": "PASS",
+      "summary": "Strong results composition centered on interpretable statistical evidence.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
+      "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+    },
+    {
+      "reference_id": "RRL-017",
+      "source_id": "SRC-005",
+      "page_function": "REAL_DATA_APPLICATION",
+      "visual_review_item_id": "item_H",
+      "decision": "PASS",
+      "summary": "Mature conference-style quantitative comparison slide.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
+      "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+    },
+    {
+      "reference_id": "RRL-020",
+      "source_id": "SRC-006",
+      "page_function": "STATISTICAL_MODEL",
+      "visual_review_item_id": "item_J",
+      "decision": "PASS",
+      "summary": "Clear, mature equation-focused research slide.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
+      "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+    },
+    {
+      "reference_id": "RRL-021",
+      "source_id": "SRC-006",
+      "page_function": "RESULT_FIGURE",
+      "visual_review_item_id": "item_K",
+      "decision": "PASS",
+      "summary": "Strong table-centric results slide suitable for gold reuse.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
+      "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+    }
   ],
   "runtime_probe_artifact": "docs/audits/research_presentation_gold_composition_library/runtime_probe_traces.json",
   "coverage_summary": [
@@ -15,20 +114,180 @@
     "quantitative result with uncertainty",
     "negative result / model check",
     "medical-image aligned panels",
-    "discussion / next experiment"
+    "discussion / next experiment: COVERAGE_LIMITATION_NO_ITEM_LEVEL_PASS_IN_EXISTING_SCREEN"
+  ],
+  "coverage_limitations": [
+    "No discussion / next-experiment page reached 025 admission-specific production-gold maturity in the bounded existing-corpus screen.",
+    "Medical-image runtime alternate uses a compatible medical visual-task introduction page because the only second aligned prediction grid candidate was rejected by 025 admission-specific Terra."
   ],
   "rejected_candidate_examples": [
     {
+      "reference_id": "RRL-001",
+      "page_function": "REAL_DATA_APPLICATION",
+      "visual_review_item_id": "item_A",
+      "reason": "Useful motivation-slide reference, but the visible coaching overlay makes it an internal/unfinished artifact rather than a mature reusable scientific composition.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-028",
+      "page_function": "ESTIMATOR",
+      "visual_review_item_id": "item_B",
+      "reason": "Typography is readable but the page has insufficient hierarchy, context, annotation, or visual structure for gold admission; it reads as a sparse lecture-template page.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-014",
+      "page_function": "ESTIMATOR",
+      "visual_review_item_id": "item_C",
+      "reason": "The intended scientific relationship is apparent, but cropped objects and unbalanced scaling make this an immature composition rather than a production reference.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-030",
+      "page_function": "CONFIDENCE_INTERVAL",
+      "visual_review_item_id": "item_E",
+      "reason": "A competent chart rendering, but it lacks slide-level hierarchy, takeaway annotation, and polished page framing needed for gold composition reuse.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-041",
+      "page_function": "NEGATIVE_RESULT",
+      "visual_review_item_id": "item_F",
+      "reason": "Reject for gold admission: this reads as a basic plot inserted into a lecture-template slide, not a mature scientific communication page.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-022",
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "visual_review_item_id": "item_G",
+      "reason": "The comparative imaging content is useful, but the unexplained outline and missing slide-level framing make the visible composition insufficiently resolved for gold reuse.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-005",
+      "page_function": "NEXT_EXPERIMENT",
+      "visual_review_item_id": "item_I",
+      "reason": "Reject for gold admission because the visible instructional overlay makes it an internal presentation-development artifact.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-023",
+      "page_function": "RESULT_FIGURE",
+      "visual_review_item_id": "item_J",
+      "reason": "The scientific chart is useful as ordinary reference, but clipping and template residue prevent admission as a polished composition.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json"
+    },
+    {
       "reference_id": "RRL-034",
-      "reason": "model teaching page retained as inspected reference but primary scientific object is too small for first production gold set"
+      "page_function": "STATISTICAL_MODEL",
+      "visual_review_item_id": "item_K",
+      "reason": "Readable but not mature as a scientific composition: the page reads as a casual teaching example with a decorative image rather than a production research-slide reference.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json"
     },
     {
       "reference_id": "RRL-031",
-      "reason": "open-problems page retained as inspected reference; coverage is better represented by RRL-005 for next-experiment decisions"
+      "page_function": "REFERENCE_COVERAGE_GAP",
+      "visual_review_item_id": "item_L",
+      "reason": "This is an unfinished-looking template/list slide with no scientific object, supporting visual structure, or annotation relationship suitable for gold admission.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json"
     },
     {
       "reference_id": "RRL-002",
-      "reason": "method diagram retained as inspected reference; RRL-019 provides stronger scientific task-flow coverage for this first gold set"
+      "page_function": "METHOD_DIAGRAM",
+      "visual_review_item_id": "item_M",
+      "reason": "The underlying explanatory diagram is serviceable, but the visible coaching overlay makes the rendered page an internal guidance artifact rather than an admissible finished composition.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-006",
+      "page_function": "STATISTICAL_MODEL",
+      "visual_review_item_id": "item_A",
+      "reason": "Clear idea, but insufficiently developed visual and scientific structure for gold admission.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-007",
+      "page_function": "BAYESIAN_MODEL",
+      "visual_review_item_id": "item_B",
+      "reason": "Readable technical content, but ordinary lecture-style composition.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-012",
+      "page_function": "SUPERVISOR_DECISION",
+      "visual_review_item_id": "item_E",
+      "reason": "Scientifically coherent but visually overfilled for admission.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-018",
+      "page_function": "NEGATIVE_RESULT",
+      "visual_review_item_id": "item_I",
+      "reason": "Useful result, but visible bottom-edge clipping prevents gold admission.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-024",
+      "page_function": "MODEL_CHECK",
+      "visual_review_item_id": "item_L",
+      "reason": "Assessable, but too weakly composed and too small-scale for admission.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-025",
+      "page_function": "NEGATIVE_RESULT",
+      "visual_review_item_id": "item_M",
+      "reason": "Ordinary sparse chart slide.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-027",
+      "page_function": "POSTERIOR_DIAGNOSTIC",
+      "visual_review_item_id": "item_N",
+      "reason": "Visible and assessable, but an underdeveloped chart layout.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-029",
+      "page_function": "REAL_DATA_APPLICATION",
+      "visual_review_item_id": "item_O",
+      "reason": "Visible truncation and export residue prevent admission.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-032",
+      "page_function": "SENSITIVITY_ANALYSIS",
+      "visual_review_item_id": "item_P",
+      "reason": "Clear teaching diagram, but generic instructional residue rather than gold scientific composition.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-033",
+      "page_function": "CONFIDENCE_INTERVAL",
+      "visual_review_item_id": "item_Q",
+      "reason": "Assessable chart slide, but not compositionally mature enough for admission.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-036",
+      "page_function": "BAYESIAN_MODEL",
+      "visual_review_item_id": "item_R",
+      "reason": "Generic bullet slide; reject from gold composition recovery.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-039",
+      "page_function": "REAL_DATA_APPLICATION",
+      "visual_review_item_id": "item_S",
+      "reason": "Useful analytical graphic, but visually ordinary.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-048",
+      "page_function": "THEOREM",
+      "visual_review_item_id": "item_T",
+      "reason": "Publication-layout residue rather than a reusable research-slide composition.",
+      "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json"
     }
   ]
 }
