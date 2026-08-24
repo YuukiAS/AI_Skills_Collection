@@ -2,7 +2,7 @@
 
 当前仍属于 `REFERENCE_CALIBRATED_ONE_SHOT_QUALITY`，但产品路线已根据用户最终要求重新冻结。长期 `PROGRAM_MATURE=false`。
 
-**Source of truth：** `RESEARCH_PRESENTATION_CORPUS_PROGRAM_GOAL.md` 的 Five-Stage Closure Roadmap 与 Final Quality Gates。
+**Source of truth：** `RESEARCH_PRESENTATION_CORPUS_PROGRAM_GOAL.md` 的 Five-Stage Closure Roadmap、Quality-Preserving Continuation Policy 与 Final Quality Gates。
 
 ## Human decision on 023
 
@@ -44,9 +44,9 @@ Stage 1 已真实改变 production contract：
 
 024 的 task-local PASS gate 不构成 program-level approval gate。
 
-## Stage 2 — Current human decision point
+## Stage 2 — Authorized coverage recovery
 
-当前任务：
+当前历史 task：
 
 `025_research_presentation_gold_scientific_composition_library`
 
@@ -55,13 +55,29 @@ Stage 1 已真实改变 production contract：
 - 最终 9 条 gold records 均有 025 item-level pixel `PASS` 与 identity binding；
 - statistics / medical runtime probes 均通过正常 semantic compatibility 路径证明 `RUNTIME_SELECTED -> ACTUALLY_CONSUMED -> OUTPUT_AFFECTED`。
 
-但冻结的 Stage 2 coverage 仍缺 `discussion / next experiment`：Revision 1 已额外送审 20 个现有 inspected candidates，达到有界筛选上限，仍无该类页面达到 production-gold item-level `PASS`。
+冻结的 Stage 2 coverage 仍缺 `discussion / next experiment`：Revision 1 已额外送审 20 个现有 inspected candidates，达到有界筛选上限，仍无该类页面达到 production-gold item-level `PASS`。
 
-因此 025 当前合法停在人工决策点，不创建第三轮 review，也不提前创建 Stage 3。
+025 历史继续保持 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE`，不得伪造第三轮或改写成 PASS。
 
-推荐的人工作品决策：保持 mature-bar 不变，授权一个新的、严格限定的 Stage 2 coverage recovery task，只针对 `discussion / next experiment` 缺口做小规模外部 source scouting / intake / real-pixel admission；保留现有 9 条 gold 和 025 历史 evidence。该 recovery PASS 后再进入 Stage 3。
+用户现已明确授权新的、严格限定的 **Stage 2 coverage recovery**：
 
-备选方案是用户明确接受这一 coverage gap 并放宽 Stage 2 contract；Planner 不自行做该质量标准变更。
+- 保持现有 production-gold mature bar，不允许为了推进 Stage 3 而放宽 coverage/视觉质量合同；
+- 保留现有 9 条已通过 gold、selector、runtime probes 与全部 025 evidence，不重审、不重做已 PASS 部分；
+- 新 recovery 只处理 `discussion / next experiment` coverage gap；
+- 允许小规模、定向、rights-safe 的公开外部 source scouting / intake / real-pixel Terra admission；
+- 不得扩成通用 corpus 增长，不得开始 Stage 3 renderer/layout，不得修改 023 或最终 holdout；
+- 新候选只有真实 rendered-pixel item-level mature-bar `PASS` 才能进入 production gold；
+- 一旦足以关闭该 coverage gap 即停止 scouting；若有界新搜索空间仍无成熟候选，不降低门槛，应按 Program Goal 的 Quality-Preserving Continuation Policy 判断是否存在新的、真正需要用户决定的问题。
+
+Planner 下一步应创建一个新的 bounded recovery task，不能给 025 开 `REVIEW_3`。该 recovery 独立 PASS 后，Stage 2 才可整体视为关闭，并进入 Stage 3。
+
+## Standing workflow decision — preserve quality before asking human
+
+用户已明确：本 Presentation program 始终按最高冻结质量标准推进，不允许为了少一轮 review、少搜资源或更快进入下一 Stage 而偷工减料。
+
+后续若 review limit 到达，而唯一实质选择是“创建一个范围清楚、质量保持的 bounded recovery”或“放宽已有质量合同”，Planner 应自动选择前者；这类显然的质量保持 continuation 不再要求用户重复授权。
+
+保持每个 bounded task 的少量 review 上限，用新的 recovery task 隔离新增 scope；不要简单提高单 task review 次数形成无限返修。只有真正涉及产品/科学语义冲突、明显新的成本/风险/隐私/许可问题、必须降低质量门槛，或 Stage 5 最终两套 deck 验收时才进入需要用户决定的 human gate。
 
 ## Non-negotiable final acceptance
 
