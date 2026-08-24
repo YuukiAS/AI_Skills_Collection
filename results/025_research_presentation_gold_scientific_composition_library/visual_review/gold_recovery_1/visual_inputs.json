@@ -1,0 +1,182 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+  "task_key": "025_research_presentation_gold_scientific_composition_library",
+  "workflow_type": "generic",
+  "review_kind": "research-gold-composition-admission-recovery",
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "external_upload_authorization": "",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "identity_bindings": {
+    "adapter_identity": "025_gold_recovery_1",
+    "immutable_review_identity_sha256": "8916a0c57f353f5d0468a567201a6fb598b66538c945ce2fa4b46b81f9e19d59",
+    "item_sha256_by_anonymous_id": {
+      "item_A": "da68f99f36e8fb4c964cdf762f3154b59b27c741e644553203cd30439cff3b31",
+      "item_B": "6e5aac41fe449f45d00cf46a45ceebd963671cf568e741097e35b9a87c476b00",
+      "item_C": "538820f050d9e5a4455ecafd4c246ac4ee6e94b5180b3b340c4dc9e28f6dc158",
+      "item_D": "412ce5792335c8f838820cbab321f8a12059655c3881bf8e51e869e9bace156b",
+      "item_E": "6e18f88787975f47470663223b10bb29fd2ad229ea17676662fbc163909652b4",
+      "item_F": "ba2da3997e903783feb223458fd76019e0f2c60b3341aaf912f50b837c316dba",
+      "item_G": "c7ac668ca7b33103b6684ac11fd21fe040ef372af5288e722f383986076c62ea",
+      "item_H": "2735be6951a2b75f41606691dbbc837bb6dc4d3b238ffe07e309f85b2942b935",
+      "item_I": "4f6e1dc62e22bfae528591268eaf2e6cef6326dc3a019671d578ec8ef4e965a3",
+      "item_J": "4ed6a522d244cfb81914f785baa41ec369824de34730a3e3fbeb0251ffe01427",
+      "item_K": "ddd9a2f55ddfa79eaf31f1cdd51f80d600560f0566e524bc4e9ba3c326461db1",
+      "item_L": "7d3908c3a8c621b7fdb1848ea67ddfadc8e78ef62f8c237470955a068fa6eb76",
+      "item_M": "acd4ebbe63dc1d671fe3527284944639588080c1f8ff0cf1335b526c6a878fea",
+      "item_N": "2a176c23a9e8df4e4f97690b585c05e7777a58be485b8c6a9aef2180c47f01d8",
+      "item_O": "92b41286083146dbedfa07996bf444ba79c79091decc6cba8c10a6aabf10da22",
+      "item_P": "cabc496c31d43e0001c12cd01a2764f4d684e43706810487e21d33b633a598ed",
+      "item_Q": "532f441373b48cc711b38adc7d3e22f252777ba0e410a0928b152281aa5b1d82",
+      "item_R": "0a6ee4ca03a58d21a2b6fe7ea22f62258da62f12de03ac1d84d839460b4378f4",
+      "item_S": "612ba02ff02b65f89cb03724497a9ae846c4bfb6a428e08754d30084c1acf0f2",
+      "item_T": "f14992669cf74c81aeb71c7ac5fadd7b11daee7798e6a8659f62ba10f792f6c9"
+    },
+    "page_job_contract": "bounded in-corpus recovery for production gold scientific composition records"
+  },
+  "inputs": [
+    {
+      "logical_id": "item_A",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_A.png",
+      "mime_type": "image/png",
+      "sha256": "da68f99f36e8fb4c964cdf762f3154b59b27c741e644553203cd30439cff3b31",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_B",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_B.png",
+      "mime_type": "image/png",
+      "sha256": "6e5aac41fe449f45d00cf46a45ceebd963671cf568e741097e35b9a87c476b00",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_C",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_C.png",
+      "mime_type": "image/png",
+      "sha256": "538820f050d9e5a4455ecafd4c246ac4ee6e94b5180b3b340c4dc9e28f6dc158",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_D",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_D.png",
+      "mime_type": "image/png",
+      "sha256": "412ce5792335c8f838820cbab321f8a12059655c3881bf8e51e869e9bace156b",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_E",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_E.png",
+      "mime_type": "image/png",
+      "sha256": "6e18f88787975f47470663223b10bb29fd2ad229ea17676662fbc163909652b4",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_F",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_F.png",
+      "mime_type": "image/png",
+      "sha256": "ba2da3997e903783feb223458fd76019e0f2c60b3341aaf912f50b837c316dba",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_G",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_G.png",
+      "mime_type": "image/png",
+      "sha256": "c7ac668ca7b33103b6684ac11fd21fe040ef372af5288e722f383986076c62ea",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_H",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_H.png",
+      "mime_type": "image/png",
+      "sha256": "2735be6951a2b75f41606691dbbc837bb6dc4d3b238ffe07e309f85b2942b935",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_I",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_I.png",
+      "mime_type": "image/png",
+      "sha256": "4f6e1dc62e22bfae528591268eaf2e6cef6326dc3a019671d578ec8ef4e965a3",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_J",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_J.png",
+      "mime_type": "image/png",
+      "sha256": "4ed6a522d244cfb81914f785baa41ec369824de34730a3e3fbeb0251ffe01427",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_K",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_K.png",
+      "mime_type": "image/png",
+      "sha256": "ddd9a2f55ddfa79eaf31f1cdd51f80d600560f0566e524bc4e9ba3c326461db1",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_L",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_L.png",
+      "mime_type": "image/png",
+      "sha256": "7d3908c3a8c621b7fdb1848ea67ddfadc8e78ef62f8c237470955a068fa6eb76",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_M",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_M.png",
+      "mime_type": "image/png",
+      "sha256": "acd4ebbe63dc1d671fe3527284944639588080c1f8ff0cf1335b526c6a878fea",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_N",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_N.png",
+      "mime_type": "image/png",
+      "sha256": "2a176c23a9e8df4e4f97690b585c05e7777a58be485b8c6a9aef2180c47f01d8",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_O",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_O.png",
+      "mime_type": "image/png",
+      "sha256": "92b41286083146dbedfa07996bf444ba79c79091decc6cba8c10a6aabf10da22",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_P",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_P.png",
+      "mime_type": "image/png",
+      "sha256": "cabc496c31d43e0001c12cd01a2764f4d684e43706810487e21d33b633a598ed",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_Q",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_Q.png",
+      "mime_type": "image/png",
+      "sha256": "532f441373b48cc711b38adc7d3e22f252777ba0e410a0928b152281aa5b1d82",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_R",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_R.png",
+      "mime_type": "image/png",
+      "sha256": "0a6ee4ca03a58d21a2b6fe7ea22f62258da62f12de03ac1d84d839460b4378f4",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_S",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_S.png",
+      "mime_type": "image/png",
+      "sha256": "612ba02ff02b65f89cb03724497a9ae846c4bfb6a428e08754d30084c1acf0f2",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    },
+    {
+      "logical_id": "item_T",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_T.png",
+      "mime_type": "image/png",
+      "sha256": "f14992669cf74c81aeb71c7ac5fadd7b11daee7798e6a8659f62ba10f792f6c9",
+      "description": "Anonymous existing inspected research-slide render for bounded in-corpus gold recovery. Judge only visible pixels and scientific composition maturity."
+    }
+  ],
+  "rubric": {
+    "instructions": "You are reviewing anonymous public-safe rendered research-slide pages for bounded in-corpus recovery of a production gold scientific composition library. Inspect actual pixels for every item. Do not infer quality from order, file names, metadata, SHA values, or presumed provenance.\nFor each item, decide whether visible composition reaches a mature doctoral research-group meeting or strong conference-talk bar for reuse as a gold composition reference. PASS means the page has a clear scientific object, mature scientific hierarchy, projection-readable typography, disciplined whitespace, useful annotation/caption/legend/panel relationships, and does not read as an unfinished template, fixture, generic lecture residue, or internal QA/coaching artifact. REVISE means it remains an ordinary inspected reference only. BLOCKED means pixels cannot be assessed.\nAssess each item independently and explain primary scientific object, page-job fit, visual maturity, typography/projection readability, and admission/rejection reason. Do not admit weak pages for coverage. Top-level PASS means the evidence packet is assessable; item-level decisions carry admission semantics.",
+    "source_contracts": []
+  }
+}
