@@ -1,7 +1,7 @@
 {
   "schema": "RESEARCH_GOLD_COMPOSITION_ADMISSION_REPORT_V1",
-  "task_key": "025_research_presentation_gold_scientific_composition_library",
-  "admission_policy": "Only existing inspected references with rendered-page identity, rights boundary, composition lesson, and mature-bar evidence are admitted.",
+  "task_key": "025_research_presentation_gold_scientific_composition_library_and_026_recovery",
+  "admission_policy": "Only inspected references with rendered-page identity, rights boundary, composition lesson, and task-specific mature-bar item-level PASS evidence are admitted.",
   "admitted_gold_ids": [
     "GSC-004",
     "GSC-008",
@@ -11,7 +11,8 @@
     "GSC-014",
     "GSC-015",
     "GSC-016",
-    "GSC-017"
+    "GSC-017",
+    "GSC-018"
   ],
   "admitted_references": [
     {
@@ -103,6 +104,16 @@
       "summary": "Strong table-centric results slide suitable for gold reuse.",
       "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
       "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+    },
+    {
+      "reference_id": "RRL-059",
+      "source_id": "SRC-077",
+      "page_function": "NEXT_EXPERIMENT",
+      "visual_review_item_id": "item_C",
+      "decision": "PASS",
+      "summary": "Admit: a mature, visually grounded next-methods page that uses comparative scientific objects to support specific next selection strategies.",
+      "visual_review_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/VISUAL_REVIEW.json",
+      "identity_map_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/review_identity_map.json"
     }
   ],
   "runtime_probe_artifact": "docs/audits/research_presentation_gold_composition_library/runtime_probe_traces.json",
@@ -114,10 +125,9 @@
     "quantitative result with uncertainty",
     "negative result / model check",
     "medical-image aligned panels",
-    "discussion / next experiment: COVERAGE_LIMITATION_NO_ITEM_LEVEL_PASS_IN_EXISTING_SCREEN"
+    "discussion / next experiment"
   ],
   "coverage_limitations": [
-    "No discussion / next-experiment page reached 025 admission-specific production-gold maturity in the bounded existing-corpus screen.",
     "Medical-image runtime alternate uses a compatible medical visual-task introduction page because the only second aligned prediction grid candidate was rejected by 025 admission-specific Terra."
   ],
   "rejected_candidate_examples": [
@@ -288,6 +298,83 @@
       "visual_review_item_id": "item_T",
       "reason": "Publication-layout residue rather than a reusable research-slide composition.",
       "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-049",
+      "page_function": "DISCUSSION",
+      "visual_review_item_id": "item_A",
+      "reason": "Readable discussion divider, not an admissible scientific discussion or next-experiment reference.",
+      "visual_review_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-050",
+      "page_function": "DISCUSSION",
+      "visual_review_item_id": "item_B",
+      "reason": "Clear conclusion slide, but insufficiently object-led or experiment-oriented for gold admission.",
+      "visual_review_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-051",
+      "page_function": "NEXT_EXPERIMENT",
+      "visual_review_item_id": "item_C",
+      "reason": "Legible future-research prompt, but not a mature next-experiment reasoning composition.",
+      "visual_review_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-052",
+      "page_function": "NEXT_EXPERIMENT",
+      "visual_review_item_id": "item_D",
+      "reason": "Relevant illustrative object and polished styling, but too broad and text-led for gold next-experiment reuse.",
+      "visual_review_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-053",
+      "page_function": "DISCUSSION",
+      "visual_review_item_id": "item_E",
+      "reason": "Contains a useful trade-off object, but clipping and lack of an explicit next-action relationship prevent admission.",
+      "visual_review_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-054",
+      "page_function": "OPEN_QUESTION",
+      "visual_review_item_id": "item_F",
+      "reason": "Useful scientific comparison, but incomplete page finish and missing next-experiment logic make it an ordinary reference.",
+      "visual_review_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-055",
+      "page_function": "NEXT_EXPERIMENT",
+      "visual_review_item_id": "item_G",
+      "reason": "Closest to the target page-job, but not polished or readable enough for gold reuse.",
+      "visual_review_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-056",
+      "page_function": "DISCUSSION",
+      "visual_review_item_id": "item_H",
+      "reason": "Topic overview rather than an admissible discussion or next-experiment composition.",
+      "visual_review_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-057",
+      "page_function": "NEXT_EXPERIMENT",
+      "visual_review_item_id": "item_A",
+      "reason": "Assessable and cleanly laid out, but it is an applications overview rather than a discussion or next-experiment reasoning page.",
+      "visual_review_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-058",
+      "page_function": "NEXT_EXPERIMENT",
+      "visual_review_item_id": "item_B",
+      "reason": "A legible technical-methods slide, but not a sufficiently developed discussion/next-experiment composition for admission.",
+      "visual_review_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/VISUAL_REVIEW.json"
+    },
+    {
+      "reference_id": "RRL-060",
+      "page_function": "LIMITATION_TO_NEXT_TEST",
+      "visual_review_item_id": "item_D",
+      "reason": "Assessable and legible, but insufficient for admission because the limitations are not connected to a visible next experiment or scientific object.",
+      "visual_review_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/VISUAL_REVIEW.json"
     }
   ]
 }

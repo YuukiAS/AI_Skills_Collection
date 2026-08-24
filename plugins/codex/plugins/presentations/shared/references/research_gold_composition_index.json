@@ -913,6 +913,131 @@
         "single formula",
         "motivation image"
       ]
+    },
+    {
+      "gold_id": "GSC-018",
+      "reference_id": "RRL-059",
+      "source_id": "SRC-077",
+      "actual_page_number": 51,
+      "source_file_sha256": "bb1b197bbc76727d3ae985e03f715bf1d51a501fc064f340f50209ccec2d6ece",
+      "canonical_rendered_page_sha256": "3b4307974922ee9582d25a63bc446a2885b0146befb2b318653897a54a3de6a1",
+      "gold_admission_review_input_sha256": "98b93e9ffac8243e4c0271bcd572eaa60594838edd303d8fe73755c736a20612",
+      "scientific_jobs": [
+        "next_experiment",
+        "discussion",
+        "open_question",
+        "batch_query_selection",
+        "experimental_design"
+      ],
+      "domain_families": [
+        "statistics",
+        "general_research"
+      ],
+      "page_function": "NEXT_EXPERIMENT",
+      "composition_family": "comparative-next-query-strategy",
+      "primary_scientific_object_role": "paired DPP/Independent and Mondrian-process diagrams showing how next query batches are selected",
+      "primary_bbox": {
+        "x": 0.1,
+        "y": 0.36,
+        "w": 0.78,
+        "h": 0.46
+      },
+      "primary_object_area_ratio": 0.3588,
+      "supporting_region_roles": [
+        "strategy bullets",
+        "DPP versus Independent comparison labels",
+        "Mondrian partition diagram",
+        "thumbnail examples",
+        "source captions"
+      ],
+      "visual_hierarchy": [
+        {
+          "rank": 1,
+          "role": "next-query strategy title",
+          "reason": "states the page function"
+        },
+        {
+          "rank": 2,
+          "role": "paired selection diagrams",
+          "reason": "visual objects show concrete next-query behavior"
+        },
+        {
+          "rank": 3,
+          "role": "strategy bullets",
+          "reason": "name the proposed selection mechanisms"
+        },
+        {
+          "rank": 4,
+          "role": "citations/captions",
+          "reason": "secondary provenance for the displayed mechanisms"
+        }
+      ],
+      "alignment_groups": [
+        {
+          "group_id": "strategy-comparison-row",
+          "roles": [
+            "DPP point set",
+            "Independent point set",
+            "Mondrian partition"
+          ],
+          "relationship": "aligned row compares next-query proposal mechanisms"
+        },
+        {
+          "group_id": "bullet-to-object-bindings",
+          "roles": [
+            "diverse-set bullet",
+            "one-query-per-partition bullet",
+            "lower diagrams"
+          ],
+          "relationship": "text names selection rules and nearby diagrams instantiate them"
+        }
+      ],
+      "reading_flow": "title-to-two-strategy-bullets-to-paired-selection-diagrams",
+      "annotation_legend_caption_panel_relations": [
+        "DPP and Independent labels sit directly below the paired point-cloud panels",
+        "Mondrian partition diagram and thumbnails occupy the same visual row as the paired comparison",
+        "citations remain secondary and do not replace the scientific object"
+      ],
+      "content_capacity": {
+        "density": "moderate",
+        "text_budget": "two short bullets plus concise panel labels",
+        "panel_count": 4,
+        "primary_object_min_area": 0.3
+      },
+      "portable_composition_lesson": "For a discussion or next-experiment page, show the proposed next action through paired scientific objects that make the selection strategy visible.",
+      "rights_reuse_boundary": "COMPOSITION_ONLY",
+      "gold_admission_evidence": {
+        "basis": "026 admission-specific gpt-5.6-terra item-level PASS on real rendered reference pixels.",
+        "maturity_bar": "mature doctoral research-group meeting / strong conference-talk composition reference",
+        "item_level_judgement": "PASS",
+        "visual_review_item_id": "item_C",
+        "visual_review_evidence_id": "visual-review-026_discussion_gold_admission-a47e7662341b",
+        "visual_review_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/VISUAL_REVIEW.json",
+        "identity_map_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/review_identity_map.json",
+        "evidence_paths": [
+          "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/VISUAL_REVIEW.json",
+          "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/review_identity_map.json"
+        ],
+        "why_admitted": "Mature, visually grounded next-methods page that uses comparative scientific objects to support specific next selection strategies."
+      },
+      "selection_keywords": [
+        "discussion",
+        "next experiment",
+        "next query",
+        "batch query",
+        "bayesian optimization",
+        "active learning",
+        "DPP",
+        "Mondrian",
+        "diverse selection",
+        "partition",
+        "experimental design"
+      ],
+      "rejected_for_jobs": [
+        "medical image panel",
+        "single equation",
+        "completed result only"
+      ]
     }
   ]
 }

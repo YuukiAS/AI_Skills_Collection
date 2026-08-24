@@ -52,6 +52,8 @@ def _admission_decisions() -> dict[str, dict]:
     for folder in [
         repo_root / "results" / "025_research_presentation_gold_scientific_composition_library" / "visual_review" / "gold_admission",
         repo_root / "results" / "025_research_presentation_gold_scientific_composition_library" / "visual_review" / "gold_recovery_1",
+        repo_root / "results" / "026_research_presentation_discussion_next_experiment_gold_recovery" / "visual_review" / "gold_admission_1",
+        repo_root / "results" / "026_research_presentation_discussion_next_experiment_gold_recovery" / "visual_review" / "gold_admission_2",
     ]:
         review_path = folder / "VISUAL_REVIEW.json"
         identity_path = folder / "review_identity_map.json"
@@ -132,7 +134,7 @@ def validate_gold_index(index: dict) -> list[str]:
             errors.append(f"{prefix}: gold admission evidence must include VISUAL_REVIEW.json")
         decision = admission_decisions.get(record.get("reference_id"))
         if not decision:
-            errors.append(f"{prefix}: no 025 admission visual-review decision for reference")
+            errors.append(f"{prefix}: no admission visual-review decision for reference")
         elif decision["decision"] != "PASS":
             errors.append(f"{prefix}: admission visual-review decision is {decision['decision']}, not PASS")
         else:
@@ -172,6 +174,8 @@ def validate_gold_index(index: dict) -> list[str]:
         "quantitative_result",
         "negative_result",
         "medical_image_comparison",
+        "discussion",
+        "next_experiment",
     ]
     for fragment in required_job_fragments:
         if not any(fragment in job for job in jobs):
@@ -181,10 +185,8 @@ def validate_gold_index(index: dict) -> list[str]:
         if set(report.get("admitted_gold_ids", [])) != gold_ids:
             errors.append("gold admission report admitted_gold_ids must match index gold_ids")
         limitations = " ".join(report.get("coverage_limitations", [])).lower()
-        if not any("discussion" in job for job in jobs) and "discussion" not in limitations:
-            errors.append("missing required scientific job coverage: discussion")
-    elif not any("discussion" in job for job in jobs):
-        errors.append("missing required scientific job coverage: discussion")
+        if any("discussion" in job for job in jobs) and "no discussion" in limitations:
+            errors.append("gold admission report still claims a discussion coverage limitation")
     return errors
 
 

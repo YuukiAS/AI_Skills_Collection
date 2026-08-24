@@ -26,7 +26,7 @@
       "scientific_object": "parallel evaluation settings motivating batch query selection",
       "semantic_prescreen": "visible page content carries discussion, next-experiment, open-question, or limitation-to-next-test research reasoning",
       "source_file_sha256": "bb1b197bbc76727d3ae985e03f715bf1d51a501fc064f340f50209ccec2d6ece",
-      "source_id": "SRC-061",
+      "source_id": "SRC-077",
       "source_url": "https://zi-wang.com/pub/bayesopt_tutorial.pdf",
       "speaker": "Zi Wang",
       "title": "A tutorial on Bayesian optimization"
@@ -49,7 +49,7 @@
       "scientific_object": "mathematical criteria for selecting a batch of next queries",
       "semantic_prescreen": "visible page content carries discussion, next-experiment, open-question, or limitation-to-next-test research reasoning",
       "source_file_sha256": "bb1b197bbc76727d3ae985e03f715bf1d51a501fc064f340f50209ccec2d6ece",
-      "source_id": "SRC-061",
+      "source_id": "SRC-077",
       "source_url": "https://zi-wang.com/pub/bayesopt_tutorial.pdf",
       "speaker": "Zi Wang",
       "title": "A tutorial on Bayesian optimization"
@@ -72,7 +72,7 @@
       "scientific_object": "DPP and Mondrian-process diagrams for diverse next-query proposals",
       "semantic_prescreen": "visible page content carries discussion, next-experiment, open-question, or limitation-to-next-test research reasoning",
       "source_file_sha256": "bb1b197bbc76727d3ae985e03f715bf1d51a501fc064f340f50209ccec2d6ece",
-      "source_id": "SRC-061",
+      "source_id": "SRC-077",
       "source_url": "https://zi-wang.com/pub/bayesopt_tutorial.pdf",
       "speaker": "Zi Wang",
       "title": "A tutorial on Bayesian optimization"
@@ -95,7 +95,7 @@
       "scientific_object": "limitations of existing parallel Bayesian optimization methods",
       "semantic_prescreen": "visible page content carries discussion, next-experiment, open-question, or limitation-to-next-test research reasoning",
       "source_file_sha256": "bb1b197bbc76727d3ae985e03f715bf1d51a501fc064f340f50209ccec2d6ece",
-      "source_id": "SRC-061",
+      "source_id": "SRC-077",
       "source_url": "https://zi-wang.com/pub/bayesopt_tutorial.pdf",
       "speaker": "Zi Wang",
       "title": "A tutorial on Bayesian optimization"

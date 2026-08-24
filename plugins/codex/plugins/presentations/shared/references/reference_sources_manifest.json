@@ -763,6 +763,51 @@
       "source_tier": "CANDIDATE_BACKLOG",
       "verification_status": "candidate_backlog",
       "rights_note": "candidate URL only; inspect and download before page-level use"
+    },
+    {
+      "source_id": "SRC-075",
+      "title": "On the Limitations of Stochastic Pre-processing Defenses",
+      "speaker": "Yue Gao, Ilia Shumailov, Kassem Fawaz, Nicolas Papernot",
+      "institution": "NeurIPS 2022",
+      "year": "2022",
+      "talk_type": "conference research talk",
+      "domain_family": "machine learning",
+      "statistical_subdomain": "robustness and stochastic defenses",
+      "source_url": "https://neurips.cc/media/neurips-2022/Slides/54675.pdf",
+      "expected_cache_file": "neurips2022_stochastic_preprocessing_defenses.pdf",
+      "source_tier": "PRIMARY_RESEARCH_PRESENTATION",
+      "verification_status": "downloaded_inspected",
+      "rights_note": "public NeurIPS slide PDF; composition lessons only"
+    },
+    {
+      "source_id": "SRC-076",
+      "title": "Digital Twins: Research Gaps & Future Directions",
+      "speaker": "Karen E. Willcox",
+      "institution": "Institute for Mathematical and Statistical Innovation",
+      "year": "2025",
+      "talk_type": "seminar research talk",
+      "domain_family": "statistics",
+      "statistical_subdomain": "uncertainty quantification and digital twins",
+      "source_url": "https://cdn.imsi.institute/videos/73339/pHUmxZztZj/slides.pdf",
+      "expected_cache_file": "imsi_research_gaps_future_directions.pdf",
+      "source_tier": "PRIMARY_RESEARCH_PRESENTATION",
+      "verification_status": "downloaded_inspected",
+      "rights_note": "public IMSI slide PDF; composition lessons only"
+    },
+    {
+      "source_id": "SRC-077",
+      "title": "A tutorial on Bayesian optimization",
+      "speaker": "Zi Wang",
+      "institution": "Google Brain",
+      "year": "unknown",
+      "talk_type": "academic tutorial talk",
+      "domain_family": "statistics",
+      "statistical_subdomain": "Bayesian optimization and active experimental design",
+      "source_url": "https://zi-wang.com/pub/bayesopt_tutorial.pdf",
+      "expected_cache_file": "ziwang_bayesopt_tutorial.pdf",
+      "source_tier": "PRIMARY_RESEARCH_PRESENTATION",
+      "verification_status": "downloaded_inspected",
+      "rights_note": "public author slide PDF; composition lessons only"
     }
   ],
   "synthesized_knowledge": [

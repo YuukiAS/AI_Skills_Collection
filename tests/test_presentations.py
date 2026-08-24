@@ -326,7 +326,7 @@ class PresentationSharedTests(unittest.TestCase):
         validator = SHARED / "scripts/validate_gold_compositions.py"
         result = subprocess.run([sys.executable, str(validator)], check=False, capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
-        self.assertIn("validated 9 gold scientific composition records", result.stdout)
+        self.assertIn("validated 10 gold scientific composition records", result.stdout)
 
         index = json.loads((references / "research_gold_composition_index.json").read_text(encoding="utf-8"))
         records = index["records"]
@@ -340,6 +340,8 @@ class PresentationSharedTests(unittest.TestCase):
             "quantitative_result",
             "negative_result",
             "medical_image_comparison",
+            "discussion",
+            "next_experiment",
         ]:
             self.assertTrue(any(required in job for job in jobs), required)
         for record in records:
@@ -356,7 +358,8 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertNotIn(forbidden, audience_contract)
         report = json.loads((REPO_ROOT / "docs/audits/research_presentation_gold_composition_library/gold_admission_report.json").read_text(encoding="utf-8"))
         self.assertEqual(set(report["admitted_gold_ids"]), {record["gold_id"] for record in records})
-        self.assertIn("discussion", " ".join(report["coverage_limitations"]).lower())
+        self.assertIn("discussion / next experiment", report["coverage_summary"])
+        self.assertNotIn("no discussion", " ".join(report["coverage_limitations"]).lower())
         self.assertGreaterEqual(len(report["rejected_candidate_examples"]), 20)
 
         selector = SHARED / "scripts/select_gold_compositions.py"
@@ -406,6 +409,28 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(med_payload["matches"][1]["gold_id"], "GSC-004")
         self.assertFalse(any(item["gold_id"] == "GSC-014" for item in med_payload["matches"]))
 
+        discussion_selected = subprocess.run(
+            [
+                sys.executable,
+                str(selector),
+                "--page-function", "NEXT_EXPERIMENT",
+                "--scientific-object", "discussion next experiment batch query bayesian optimization active learning DPP Mondrian diverse selection partition",
+                "--domain-family", "statistics",
+                "--dominant-object-type", "diagram plot comparison",
+                "--evidence-type", "next-query experimental design",
+                "--density", "moderate",
+                "--panel-count", "4",
+                "--limit", "2",
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(discussion_selected.returncode, 0, discussion_selected.stderr)
+        discussion_payload = json.loads(discussion_selected.stdout)
+        self.assertEqual(discussion_payload["matches"][0]["gold_id"], "GSC-018")
+        self.assertTrue(discussion_payload["matches"][0]["compatibility_reasons"])
+
         recipe_builder = SHARED / "scripts/build_gold_composition_recipe.py"
         incompatible_force = subprocess.run(
             [
@@ -429,20 +454,28 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(probe_result.returncode, 0, probe_result.stderr + probe_result.stdout)
         probes = json.loads((REPO_ROOT / "docs/audits/research_presentation_gold_composition_library/runtime_probe_traces.json").read_text(encoding="utf-8"))
         self.assertEqual(probes["status"], "PASS")
-        self.assertEqual(len(probes["probes"]), 2)
+        self.assertEqual(len(probes["probes"]), 3)
         for probe in probes["probes"]:
             checks = probe["checks"]
             self.assertTrue(checks["runtime_selected"])
-            self.assertTrue(checks["alternate_runtime_selected"])
-            self.assertTrue(checks["alternate_is_distinct"])
-            self.assertTrue(checks["alternate_has_compatibility_reasons"])
+            if probe["alternate_error"] == "no compatible gold composition record":
+                self.assertFalse(checks["alternate_runtime_selected"])
+                self.assertTrue(checks["exclusion_changes_behavior"])
+            else:
+                self.assertTrue(checks["alternate_runtime_selected"])
+                self.assertTrue(checks["alternate_is_distinct"])
+                self.assertTrue(checks["alternate_has_compatibility_reasons"])
+                self.assertTrue(checks["primary_bbox_changed"])
             self.assertTrue(checks["actually_consumed"])
             self.assertTrue(checks["output_affected"])
-            self.assertTrue(checks["primary_bbox_changed"])
-            self.assertNotEqual(probe["baseline_recipe"]["recipe_sha256"], probe["alternate_recipe"]["recipe_sha256"])
+            if probe["alternate_recipe"]:
+                self.assertNotEqual(probe["baseline_recipe"]["recipe_sha256"], probe["alternate_recipe"]["recipe_sha256"])
             self.assertNotIn("forced compatible probe", json.dumps(probe, ensure_ascii=False))
             consumed = set(probe["baseline_recipe"]["runtime_trace"]["actually_consumed_fields"])
             self.assertTrue({"primary_bbox", "visual_hierarchy", "alignment_groups"}.issubset(consumed))
+        discussion_probe = next(item for item in probes["probes"] if item["probe_id"] == "discussion_next_experiment_batch_query")
+        self.assertEqual(discussion_probe["baseline_recipe"]["selected_gold_id"], "GSC-018")
+        self.assertEqual(discussion_probe["alternate_error"], "no compatible gold composition record")
 
     def test_reference_calibrated_candidate_search(self) -> None:
         references = SHARED / "references"
@@ -792,6 +825,10 @@ class PresentationSharedTests(unittest.TestCase):
             (
                 SHARED / "scripts/generate_gold_composition_probe_artifacts.py",
                 REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/generate_gold_composition_probe_artifacts.py",
+            ),
+            (
+                SHARED / "scripts/prepare_discussion_gold_admission_review.py",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/prepare_discussion_gold_admission_review.py",
             ),
         ]
         for source, mirror in mirrors:

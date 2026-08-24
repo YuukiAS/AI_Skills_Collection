@@ -1,6 +1,6 @@
 {
   "schema": "RESEARCH_GOLD_COMPOSITION_RUNTIME_PROBES_V1",
-  "task_key": "025_research_presentation_gold_scientific_composition_library",
+  "task_key": "025_research_presentation_gold_scientific_composition_library_and_026_recovery",
   "status": "PASS",
   "probes": [
     {
@@ -211,11 +211,19 @@
                 "exclusion_reasons": [
                   "page_function mismatch"
                 ]
+              },
+              {
+                "gold_id": "GSC-018",
+                "reference_id": "RRL-059",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "no scientific-object overlap"
+                ]
               }
             ]
           }
         },
-        "recipe_sha256": "d89a1516ff3e5f9becdf2e92a9e642dc9e2c472d93dfa9449a15ffb59db60564"
+        "recipe_sha256": "35bb4df61a490a1fcafe781d876ff751a9da9723efa40e0848c7fc777b7b2923"
       },
       "alternate_recipe": {
         "schema": "RESEARCH_GOLD_COMPOSITION_RECIPE_V1",
@@ -392,17 +400,27 @@
                 "exclusion_reasons": [
                   "page_function mismatch"
                 ]
+              },
+              {
+                "gold_id": "GSC-018",
+                "reference_id": "RRL-059",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "no scientific-object overlap"
+                ]
               }
             ]
           }
         },
-        "recipe_sha256": "1179203ab1a9ce6c51bb07e1f437b16a6d6831475f8af110b29917b302736aae"
+        "recipe_sha256": "51d3371062e75f9c4df025d42b761b74f479cb5e8e3a1f87ddf8c6223be0a633"
       },
+      "alternate_error": null,
       "checks": {
         "runtime_selected": true,
         "alternate_runtime_selected": true,
         "alternate_is_distinct": true,
         "alternate_has_compatibility_reasons": true,
+        "exclusion_changes_behavior": true,
         "actually_consumed": true,
         "output_affected": true,
         "primary_bbox_changed": true,
@@ -616,11 +634,19 @@
                 "exclusion_reasons": [
                   "page_function mismatch"
                 ]
+              },
+              {
+                "gold_id": "GSC-018",
+                "reference_id": "RRL-059",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "no scientific-object overlap"
+                ]
               }
             ]
           }
         },
-        "recipe_sha256": "4518fd8ce790ecf3c6fa69b07f75fac8c61e0dc5512bac80c050bbd84fbe0ee8"
+        "recipe_sha256": "e0857ec57c757cb3818126083fe24f4a3002a5e3ff6980ae9daff4a7940c7c85"
       },
       "alternate_recipe": {
         "schema": "RESEARCH_GOLD_COMPOSITION_RECIPE_V1",
@@ -797,20 +823,275 @@
                 "exclusion_reasons": [
                   "page_function mismatch"
                 ]
+              },
+              {
+                "gold_id": "GSC-018",
+                "reference_id": "RRL-059",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "no scientific-object overlap"
+                ]
               }
             ]
           }
         },
-        "recipe_sha256": "5dbe6ce6df54dd7bef04ac7d7400495f6b5a8f2aa7b9401973d5cbe2d17b5e13"
+        "recipe_sha256": "324dc7bbee95e48355b0de0625eef959d10cff79ac5fd8724ccb4641e46d07f2"
       },
+      "alternate_error": null,
       "checks": {
         "runtime_selected": true,
         "alternate_runtime_selected": true,
         "alternate_is_distinct": true,
         "alternate_has_compatibility_reasons": true,
+        "exclusion_changes_behavior": true,
         "actually_consumed": true,
         "output_affected": true,
         "primary_bbox_changed": true,
+        "composition_family_available": true
+      }
+    },
+    {
+      "probe_id": "discussion_next_experiment_batch_query",
+      "query": {
+        "page_function": "NEXT_EXPERIMENT",
+        "scientific_object": "discussion next experiment batch query bayesian optimization active learning DPP Mondrian diverse selection partition",
+        "domain_family": "statistics",
+        "dominant_object_type": "diagram plot comparison",
+        "evidence_type": "next-query experimental design",
+        "density": "moderate",
+        "panel_count": 4
+      },
+      "baseline_recipe": {
+        "schema": "RESEARCH_GOLD_COMPOSITION_RECIPE_V1",
+        "query": {
+          "page_function": "NEXT_EXPERIMENT",
+          "scientific_object": "discussion next experiment batch query bayesian optimization active learning DPP Mondrian diverse selection partition",
+          "domain_family": "statistics",
+          "dominant_object_type": "diagram plot comparison",
+          "evidence_type": "next-query experimental design",
+          "density": "moderate",
+          "panel_count": 4
+        },
+        "selected_gold_id": "GSC-018",
+        "selected_reference_id": "RRL-059",
+        "source_identity": {
+          "source_id": "SRC-077",
+          "actual_page_number": 51,
+          "canonical_rendered_page_sha256": "3b4307974922ee9582d25a63bc446a2885b0146befb2b318653897a54a3de6a1",
+          "review_input_sha256": "98b93e9ffac8243e4c0271bcd572eaa60594838edd303d8fe73755c736a20612",
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        },
+        "composition_constraints": {
+          "composition_family": "comparative-next-query-strategy",
+          "primary_scientific_object_role": "paired DPP/Independent and Mondrian-process diagrams showing how next query batches are selected",
+          "primary_bbox": {
+            "x": 0.1,
+            "y": 0.36,
+            "w": 0.78,
+            "h": 0.46
+          },
+          "primary_object_area_ratio": 0.3588,
+          "supporting_region_roles": [
+            "strategy bullets",
+            "DPP versus Independent comparison labels",
+            "Mondrian partition diagram",
+            "thumbnail examples",
+            "source captions"
+          ],
+          "visual_hierarchy": [
+            {
+              "rank": 1,
+              "role": "next-query strategy title",
+              "reason": "states the page function"
+            },
+            {
+              "rank": 2,
+              "role": "paired selection diagrams",
+              "reason": "visual objects show concrete next-query behavior"
+            },
+            {
+              "rank": 3,
+              "role": "strategy bullets",
+              "reason": "name the proposed selection mechanisms"
+            },
+            {
+              "rank": 4,
+              "role": "citations/captions",
+              "reason": "secondary provenance for the displayed mechanisms"
+            }
+          ],
+          "alignment_groups": [
+            {
+              "group_id": "strategy-comparison-row",
+              "roles": [
+                "DPP point set",
+                "Independent point set",
+                "Mondrian partition"
+              ],
+              "relationship": "aligned row compares next-query proposal mechanisms"
+            },
+            {
+              "group_id": "bullet-to-object-bindings",
+              "roles": [
+                "diverse-set bullet",
+                "one-query-per-partition bullet",
+                "lower diagrams"
+              ],
+              "relationship": "text names selection rules and nearby diagrams instantiate them"
+            }
+          ],
+          "reading_flow": "title-to-two-strategy-bullets-to-paired-selection-diagrams",
+          "annotation_legend_caption_panel_relations": [
+            "DPP and Independent labels sit directly below the paired point-cloud panels",
+            "Mondrian partition diagram and thumbnails occupy the same visual row as the paired comparison",
+            "citations remain secondary and do not replace the scientific object"
+          ],
+          "content_capacity": {
+            "density": "moderate",
+            "text_budget": "two short bullets plus concise panel labels",
+            "panel_count": 4,
+            "primary_object_min_area": 0.3
+          }
+        },
+        "audience_safe_instruction": {
+          "layout_lesson": "For a discussion or next-experiment page, show the proposed next action through paired scientific objects that make the selection strategy visible.",
+          "do_not_expose_internal_ids": true,
+          "do_not_copy_source_pixels_or_branding": true
+        },
+        "runtime_trace": {
+          "runtime_selected": true,
+          "actually_consumed_fields": [
+            "primary_bbox",
+            "visual_hierarchy",
+            "alignment_groups",
+            "reading_flow",
+            "annotation_legend_caption_panel_relations",
+            "content_capacity"
+          ],
+          "selection": {
+            "schema": "RESEARCH_GOLD_COMPOSITION_SELECTION_V1",
+            "query": {
+              "page_function": "NEXT_EXPERIMENT",
+              "scientific_object": "discussion next experiment batch query bayesian optimization active learning DPP Mondrian diverse selection partition",
+              "domain_family": "statistics",
+              "dominant_object_type": "diagram plot comparison",
+              "evidence_type": "next-query experimental design",
+              "density": "moderate",
+              "panel_count": 4
+            },
+            "matches": [
+              {
+                "gold_id": "GSC-018",
+                "reference_id": "RRL-059",
+                "source_id": "SRC-077",
+                "page_function": "NEXT_EXPERIMENT",
+                "composition_family": "comparative-next-query-strategy",
+                "primary_bbox": {
+                  "x": 0.1,
+                  "y": 0.36,
+                  "w": 0.78,
+                  "h": 0.46
+                },
+                "score": 16,
+                "compatibility_reasons": [
+                  "page_function exact match",
+                  "domain_family match",
+                  "density match",
+                  "panel_count exact match",
+                  "scientific object overlap: active, batch, bayesian, design, discussion"
+                ],
+                "rights_reuse_boundary": "COMPOSITION_ONLY"
+              }
+            ],
+            "excluded": [
+              {
+                "gold_id": "GSC-004",
+                "reference_id": "RRL-019",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-008",
+                "reference_id": "RRL-013",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "domain_family mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-011",
+                "reference_id": "RRL-009",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "no scientific-object overlap"
+                ]
+              },
+              {
+                "gold_id": "GSC-012",
+                "reference_id": "RRL-011",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-013",
+                "reference_id": "RRL-015",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "domain_family mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-014",
+                "reference_id": "RRL-016",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "domain_family mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-015",
+                "reference_id": "RRL-017",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "domain_family mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-016",
+                "reference_id": "RRL-020",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "domain_family mismatch",
+                  "panel_count incompatible",
+                  "no scientific-object overlap"
+                ]
+              },
+              {
+                "gold_id": "GSC-017",
+                "reference_id": "RRL-021",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "domain_family mismatch"
+                ]
+              }
+            ]
+          }
+        },
+        "recipe_sha256": "5ff51c819553d350ceb0e76c1315bf894fe61845e95ebb13f88c4c350892b464"
+      },
+      "alternate_recipe": null,
+      "alternate_error": "no compatible gold composition record",
+      "checks": {
+        "runtime_selected": true,
+        "alternate_runtime_selected": false,
+        "alternate_is_distinct": false,
+        "alternate_has_compatibility_reasons": false,
+        "exclusion_changes_behavior": true,
+        "actually_consumed": true,
+        "output_affected": true,
+        "primary_bbox_changed": false,
         "composition_family_available": true
       }
     }

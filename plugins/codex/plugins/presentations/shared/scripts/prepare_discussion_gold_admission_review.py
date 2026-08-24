@@ -24,7 +24,7 @@ PACKETS = {
     "gold_admission_1": [
     {
         "reference_id": "RRL-049",
-        "source_id": "SRC-059",
+        "source_id": "SRC-075",
         "title": "On the Limitations of Stochastic Pre-processing Defenses",
         "speaker": "Yue Gao, Ilia Shumailov, Kassem Fawaz, Nicolas Papernot",
         "institution": "NeurIPS 2022",
@@ -38,7 +38,7 @@ PACKETS = {
     },
     {
         "reference_id": "RRL-050",
-        "source_id": "SRC-059",
+        "source_id": "SRC-075",
         "title": "On the Limitations of Stochastic Pre-processing Defenses",
         "speaker": "Yue Gao, Ilia Shumailov, Kassem Fawaz, Nicolas Papernot",
         "institution": "NeurIPS 2022",
@@ -52,7 +52,7 @@ PACKETS = {
     },
     {
         "reference_id": "RRL-051",
-        "source_id": "SRC-059",
+        "source_id": "SRC-075",
         "title": "On the Limitations of Stochastic Pre-processing Defenses",
         "speaker": "Yue Gao, Ilia Shumailov, Kassem Fawaz, Nicolas Papernot",
         "institution": "NeurIPS 2022",
@@ -66,7 +66,7 @@ PACKETS = {
     },
     {
         "reference_id": "RRL-052",
-        "source_id": "SRC-060",
+        "source_id": "SRC-076",
         "title": "Digital Twins: Research Gaps & Future Directions",
         "speaker": "Karen E. Willcox",
         "institution": "Institute for Mathematical and Statistical Innovation",
@@ -81,7 +81,7 @@ PACKETS = {
     },
     {
         "reference_id": "RRL-053",
-        "source_id": "SRC-060",
+        "source_id": "SRC-076",
         "title": "Digital Twins: Research Gaps & Future Directions",
         "speaker": "Karen E. Willcox",
         "institution": "Institute for Mathematical and Statistical Innovation",
@@ -96,7 +96,7 @@ PACKETS = {
     },
     {
         "reference_id": "RRL-054",
-        "source_id": "SRC-060",
+        "source_id": "SRC-076",
         "title": "Digital Twins: Research Gaps & Future Directions",
         "speaker": "Karen E. Willcox",
         "institution": "Institute for Mathematical and Statistical Innovation",
@@ -111,7 +111,7 @@ PACKETS = {
     },
     {
         "reference_id": "RRL-055",
-        "source_id": "SRC-060",
+        "source_id": "SRC-076",
         "title": "Digital Twins: Research Gaps & Future Directions",
         "speaker": "Karen E. Willcox",
         "institution": "Institute for Mathematical and Statistical Innovation",
@@ -126,7 +126,7 @@ PACKETS = {
     },
     {
         "reference_id": "RRL-056",
-        "source_id": "SRC-060",
+        "source_id": "SRC-076",
         "title": "Digital Twins: Research Gaps & Future Directions",
         "speaker": "Karen E. Willcox",
         "institution": "Institute for Mathematical and Statistical Innovation",
@@ -143,7 +143,7 @@ PACKETS = {
     "gold_admission_2": [
         {
             "reference_id": "RRL-057",
-            "source_id": "SRC-061",
+            "source_id": "SRC-077",
             "title": "A tutorial on Bayesian optimization",
             "speaker": "Zi Wang",
             "institution": "Google Brain",
@@ -158,7 +158,7 @@ PACKETS = {
         },
         {
             "reference_id": "RRL-058",
-            "source_id": "SRC-061",
+            "source_id": "SRC-077",
             "title": "A tutorial on Bayesian optimization",
             "speaker": "Zi Wang",
             "institution": "Google Brain",
@@ -173,7 +173,7 @@ PACKETS = {
         },
         {
             "reference_id": "RRL-059",
-            "source_id": "SRC-061",
+            "source_id": "SRC-077",
             "title": "A tutorial on Bayesian optimization",
             "speaker": "Zi Wang",
             "institution": "Google Brain",
@@ -188,7 +188,7 @@ PACKETS = {
         },
         {
             "reference_id": "RRL-060",
-            "source_id": "SRC-061",
+            "source_id": "SRC-077",
             "title": "A tutorial on Bayesian optimization",
             "speaker": "Zi Wang",
             "institution": "Google Brain",

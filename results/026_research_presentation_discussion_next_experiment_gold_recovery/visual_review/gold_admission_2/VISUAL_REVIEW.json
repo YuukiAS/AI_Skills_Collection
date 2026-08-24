@@ -1,0 +1,131 @@
+{
+  "blocking_findings": [],
+  "created_at": "2026-08-24T19:27:22Z",
+  "evidence_id": "visual-review-026_discussion_gold_admission-a47e7662341b",
+  "images": [
+    {
+      "logical_id": "item_A",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/inputs/item_A.png",
+      "sha256": "943572431ed883fbd1f15f3da8efbf8913cea37aeec8a6d647432186b14c7cd0"
+    },
+    {
+      "logical_id": "item_B",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/inputs/item_B.png",
+      "sha256": "1dce1f7b3ba50668103062bd5fd6909f005bd3e1228e3a369ca46af926320202"
+    },
+    {
+      "logical_id": "item_C",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/inputs/item_C.png",
+      "sha256": "98b93e9ffac8243e4c0271bcd572eaa60594838edd303d8fe73755c736a20612"
+    },
+    {
+      "logical_id": "item_D",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/inputs/item_D.png",
+      "sha256": "fe6fb2c000fdb09ddd10baab6f9e81cfe221e162611ab1a51cab60d08c884e4c"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "adapter_identity": "026_gold_admission_2",
+      "immutable_review_identity_sha256": "c39424696dac236eb8bdc80a7c5f32b2ec909f52e153a42a3c8a9da967d01bf3",
+      "item_sha256_by_anonymous_id": {
+        "item_A": "943572431ed883fbd1f15f3da8efbf8913cea37aeec8a6d647432186b14c7cd0",
+        "item_B": "1dce1f7b3ba50668103062bd5fd6909f005bd3e1228e3a369ca46af926320202",
+        "item_C": "98b93e9ffac8243e4c0271bcd572eaa60594838edd303d8fe73755c736a20612",
+        "item_D": "fe6fb2c000fdb09ddd10baab6f9e81cfe221e162611ab1a51cab60d08c884e4c"
+      },
+      "page_job_contract": "discussion / next experiment production gold composition admission"
+    },
+    "manifest_sha256": "a47e7662341bf508d90aabf32c163d196da57952d1b3d5d6c4a77f661ed03d31",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "You are reviewing anonymous public-safe rendered research-slide pages for 026 discussion/next-experiment production-gold admission. Inspect the actual pixels for every item. Do not infer quality from order, file names, metadata, SHA values, or presumed provenance.\nFor each item, decide whether the visible composition reaches a mature doctoral research-group meeting or strong conference-talk bar for reuse as an abstract composition reference for DISCUSSION, NEXT_EXPERIMENT, OPEN_QUESTION, or LIMITATION_TO_NEXT_TEST pages. PASS means the page has a real scientific object, a clear relationship between present evidence or limitation and the next research action, mature hierarchy, projection-readable typography, disciplined whitespace, useful annotation/caption/legend/panel relations, and no generic future-work/card-dashboard/template feel. REVISE means it remains an ordinary inspected reference only. BLOCKED means pixels cannot be assessed.\nFor every item, state the primary scientific object, the discussion/next-experiment page-job fit, visual maturity, projection readability, and the admission or rejection reason. Do not admit a page merely because it says future work, discussion, or open question; the visible composition must actually support scientific reasoning or next validation planning. Top-level PASS means the packet is assessable; item-level decisions carry admission semantics.",
+      "source_contracts": []
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "REVISE",
+      "item_id": "item_A",
+      "observations": [
+        "Primary scientific objects are a neural-network schematic and photographs of a robot workcell and wet laboratory.",
+        "The title and bullets identify parallel-compute application domains, but no visible result, limitation, or proposed validation links these objects to a next experiment.",
+        "Large title and bullets are projection-readable; the small schematic and source line are not.",
+        "The three bottom visuals are illustrative examples rather than an annotated scientific comparison or experiment plan."
+      ],
+      "requirement_ids": [
+        "scientific_object",
+        "evidence_to_next_action",
+        "visual_maturity",
+        "projection_readability"
+      ],
+      "summary": "Assessable and cleanly laid out, but it is an applications overview rather than a discussion or next-experiment reasoning page."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_B",
+      "observations": [
+        "Primary scientific objects are two acquisition-function equations for batch-query selection.",
+        "The bullets describe alternatives for proposing query batches, but the visible page provides no present evidence, stated limitation, comparison, or concrete validation action.",
+        "Title and explanatory bullets are readable at projection scale; the dense mathematical expressions are comparatively small and difficult to parse at distance.",
+        "The composition is text-and-formula dominant, with substantial unused lower-page whitespace and no visual annotation structure."
+      ],
+      "requirement_ids": [
+        "scientific_object",
+        "evidence_to_next_action",
+        "visual_maturity",
+        "projection_readability"
+      ],
+      "summary": "A legible technical-methods slide, but not a sufficiently developed discussion/next-experiment composition for admission."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "item_C",
+      "observations": [
+        "Primary scientific objects are the side-by-side blue DPP versus red Independent point distributions and the partitioned Mondrian-process diagram with associated thumbnail examples.",
+        "The page visibly connects two proposed batch-query actions—diverse selection and one query per partition—to concrete visual examples of the sampling/partition behavior.",
+        "The paired plots, labels, cited captions, and aligned lower visual row provide a coherent evidence-to-proposal structure without a card-dashboard treatment.",
+        "Title and main bullets are projection-readable; fine plot marks, axis labels, and thumbnail details are secondary and small but do not obscure the central comparison."
+      ],
+      "requirement_ids": [
+        "scientific_object",
+        "evidence_to_next_action",
+        "visual_maturity",
+        "projection_readability"
+      ],
+      "summary": "Admit: a mature, visually grounded next-methods page that uses comparative scientific objects to support specific next selection strategies."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_D",
+      "observations": [
+        "Primary scientific object is a textual limitation set concerning cost, asynchronous parallel settings, debugging, and high-dimensional problems.",
+        "The page clearly frames limitations, but it contains no data, schematic, comparison, or proposed next test that turns any limitation into an actionable validation plan.",
+        "Large title and bullets are projection-readable with ample whitespace.",
+        "The otherwise clean composition is a generic bullet-list discussion page and lacks annotation, evidence, or visual scientific reasoning."
+      ],
+      "requirement_ids": [
+        "scientific_object",
+        "evidence_to_next_action",
+        "visual_maturity",
+        "projection_readability"
+      ],
+      "summary": "Assessable and legible, but insufficient for admission because the limitations are not connected to a visible next experiment or scientific object."
+    }
+  ],
+  "non_blocking_notes": [],
+  "overall_decision": "PASS",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "a47e7662341bf508d90aabf32c163d196da57952d1b3d5d6c4a77f661ed03d31",
+  "review_kind": "research-gold-discussion-next-experiment-admission",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "PASS",
+  "task_key": "026_discussion_gold_admission",
+  "workflow_type": "generic"
+}
