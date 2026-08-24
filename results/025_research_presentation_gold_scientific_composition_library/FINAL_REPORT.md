@@ -5,6 +5,38 @@ task_key: 025_research_presentation_gold_scientific_composition_library
 
 # 025 Gold Scientific Composition Library — Final Report
 
+## What this task solved
+
+025 将 Stage 2 从普通 inspected reference 列表推进成可被 production selector 与 recipe builder 实际消费的 Gold Scientific Composition Library，并在两轮正式审核内关闭了像素级准入和正常语义兼容运行时证明两个实现问题。该任务最终仍因 `discussion / next experiment` 覆盖缺口停在历史 review limit；这里仅补充当前 Reviewed Handoff 要求的兼容标题，不改变任何历史结论、证据或状态。
+
+## What changed
+
+任务建立了 production gold schema/index、validator、selector、renderer-neutral recipe builder、逐条真实像素准入证据、rights/reuse boundary、source/plugin mirror 与确定性 runtime probes。第一轮后又通过有界现有库筛选，把最终 gold 收敛为 9 条全部具有 025 item-level `PASS` 的记录，并移除了绕过正常 compatibility gate 的 forced alternate 证明路径。
+
+## New capabilities / behavior
+
+现有 9 条 gold 已能按 scientific job、domain、scientific object、density/panel capacity 做兼容选择，并把 source-derived geometry、hierarchy、reading flow 与 annotation/panel relations 真正送入下游 composition recipe。statistics/biostatistics 与 medical-imaging 两类 probe 均证明 `selected -> consumed -> output affected`。
+
+## Example usage
+
+给一个 biostatistics quantitative-result page job，正常 selector 会选择兼容的 `GSC-014`，屏蔽后可选择兼容 alternate `GSC-015`；两者的 source-derived primary bbox、hierarchy 与 reading flow 会产生可解释的 recipe 差异。给一个 medical-image comparison page job，则可在 `GSC-008` 与兼容的 `GSC-004` 之间产生同类受约束变化。
+
+## Regression and remaining limitations
+
+当前 9 条 gold 与运行时消费链没有已知 regression。025 唯一未关闭的问题仍是冻结合同中的 `discussion / next experiment` gold coverage；现有库额外送审 20 个候选后仍没有该类页面达到 mature bar，因此 025 历史保持 `REVIEW_LIMIT / AWAIT_HUMAN_DECISION / REVISE`，后续由独立 recovery task 处理，不把本文件改写成 PASS。
+
+## Technical appendix
+
+- implementation commit: `d6fafda2819d406c88a2f363a22bdfd9564989cf`
+- handoff CI locator: `9054368082dfacdf995a772115c0cef091273ab9`
+- CI: `reviewed-handoff/ci-summary = success`
+- GitHub Actions run: `32721702586`
+- final gold count: 9
+- targeted Presentation tests: 25 passed
+- full unittest discovery: 121 passed
+- review rounds used: 2 / 2
+- plan revisions used: 1 / 1
+
 ## 本轮解决了什么
 
 025 已经把 Stage 2 从“普通 inspected reference 列表”推进成真正可被 production 选择和消费的 Gold Scientific Composition Library。当前 9 条 gold records 都来自既有 inspected/downloaded corpus，并且每条都经过 025 专用真实像素审查达到 item-level `PASS`；被判 `REVISE` 的页面继续保留为普通参考，不会因为覆盖需要被强行提升。
