@@ -44,9 +44,9 @@ Stage 1 已真实改变 production contract：
 
 024 的 task-local PASS gate 不构成 program-level approval gate。
 
-## Stage 2 — Authorized coverage recovery
+## Stage 2 — Active coverage recovery
 
-当前历史 task：
+历史 task：
 
 `025_research_presentation_gold_scientific_composition_library`
 
@@ -59,17 +59,21 @@ Stage 1 已真实改变 production contract：
 
 025 历史继续保持 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE`，不得伪造第三轮或改写成 PASS。
 
-用户现已明确授权新的、严格限定的 **Stage 2 coverage recovery**：
+用户已授权新的、严格限定的 Stage 2 coverage recovery；Planner 已创建并冻结：
 
-- 保持现有 production-gold mature bar，不允许为了推进 Stage 3 而放宽 coverage/视觉质量合同；
+`026_research_presentation_discussion_next_experiment_gold_recovery`
+
+026 只处理 `discussion / next experiment` coverage gap：
+
 - 保留现有 9 条已通过 gold、selector、runtime probes 与全部 025 evidence，不重审、不重做已 PASS 部分；
-- 新 recovery 只处理 `discussion / next experiment` coverage gap；
-- 允许小规模、定向、rights-safe 的公开外部 source scouting / intake / real-pixel Terra admission；
-- 不得扩成通用 corpus 增长，不得开始 Stage 3 renderer/layout，不得修改 023 或最终 holdout；
+- 保持 production-gold mature bar，不允许为了推进 Stage 3 而放宽 coverage/视觉质量合同；
+- 允许一次新的、有界、rights-safe 的公开 source scouting / intake / real-pixel Terra admission；
+- 搜索资源上限固定为最多检查 8 个公开 source URLs、最多 intake 4 个 decks、最多 Terra 审查 12 个真实 rendered pages、最多 2 个 admission packets；
 - 新候选只有真实 rendered-pixel item-level mature-bar `PASS` 才能进入 production gold；
-- 一旦足以关闭该 coverage gap 即停止 scouting；若有界新搜索空间仍无成熟候选，不降低门槛，应按 Program Goal 的 Quality-Preserving Continuation Policy 判断是否存在新的、真正需要用户决定的问题。
+- 一旦至少一个成熟 discussion / next-experiment gold 被正常 selector 选择、recipe builder 消费并证明 output affected，即停止 scouting；
+- 不得开始 Stage 3 renderer/layout，不得修改 023 或最终 holdout。
 
-Planner 下一步应创建一个新的 bounded recovery task，不能给 025 开 `REVIEW_3`。该 recovery 独立 PASS 后，Stage 2 才可整体视为关闭，并进入 Stage 3。
+当前 026 已 `PLAN_FROZEN`，下一步交给 Codex Executor。026 独立 PASS 后，Stage 2 才可整体视为关闭，并进入 Stage 3。
 
 ## Standing workflow decision — preserve quality before asking human
 
