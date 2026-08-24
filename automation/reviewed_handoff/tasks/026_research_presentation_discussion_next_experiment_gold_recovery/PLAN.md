@@ -6,6 +6,10 @@ decision: PLAN_FROZEN
 
 # 026 Research Presentation Discussion / Next-Experiment Gold Recovery — Plan
 
+## Frozen decisions
+
+本 Plan 的业务语义保持不变：只关闭 025 留下的 `discussion / next experiment` Stage 2 coverage blocker；保留既有 9 条 production gold 与全部已通过能力；使用一次新的、有界、rights-safe 的公开 source scouting / intake / real-pixel admission；不得降低 mature bar，也不得开始 Stage 3。本节仅补足当前 Reviewed Handoff 的 schema-compatible heading，不新增业务范围。
+
 ## Frozen objective
 
 只关闭 025 留下的一个 Stage 2 coverage blocker：为 `discussion / next experiment` scientific job 找到并准入至少一个真正达到 production-gold mature bar 的真实科研演示构图，并证明现有正常 runtime selection / consumption 路径能使用它。
@@ -25,6 +29,10 @@ Executor 至少读取：
 - 025 当前 gold index、gold schema、validator、selector、recipe builder、admission report、runtime probe traces
 - 019–022 中与 source identity、real-pixel inspection、comparative mature-bar 和 rights/reuse boundary 有关的既有机制
 - 当前 `research-presentations/SKILL.md` 与 `shared/visual-qa.md`
+
+## Implementation scope
+
+026 的实现范围仅限下述 recovery boundaries、有限 source scouting、真实像素准入、单一 discussion / next-experiment gold integration 与对应 runtime proof。不得扩成通用 corpus growth、Stage 3 renderer/layout、023 recovery、Terra core 修改或最终 holdout。本节仅补足当前 schema-compatible heading，不改变已冻结的细节边界。
 
 ## Frozen recovery boundaries
 
@@ -126,7 +134,9 @@ Terra 前必须先做轻量语义预筛。候选页面必须有可见 evidence �
 - 不进入 Stage 3；
 - 在 RESULT 中记录实际搜索空间、被拒绝候选和原因，并路由回 Planner 判断是否存在新的质量保持机制或真正需要用户决定的问题。
 
-## Tests and validation
+## Validation
+
+### Tests and validation
 
 至少验证：
 
@@ -141,7 +151,7 @@ Terra 前必须先做轻量语义预筛。候选页面必须有可见 evidence �
 - audience-facing anti-meta leakage；
 - source/generated plugin mirror（若现有架构要求）；
 - 不修改 canonical CUHK template；
-- 不修改 025 REVIEW/CURRENT/FINAL_REPORT。
+- 不修改 025 REVIEW/CURRENT/FINAL_REPORT 的历史语义与结论。
 
 继续运行：
 
@@ -160,7 +170,7 @@ Terra 前必须先做轻量语义预筛。候选页面必须有可见 evidence �
 
 - 扩成通用 reference-corpus growth；
 - 重做现有 9 条 gold；
-- 改写 025 历史；
+- 改写 025 的历史结论、REVIEW/CURRENT 或 PASS/REVISE 语义；
 - 修改 Stage 2 mature bar；
 - 实现 Stage 3 LaTeX/TikZ/figure/image layouts；
 - 修改 canonical CUHK visual identity；
@@ -169,7 +179,7 @@ Terra 前必须先做轻量语义预筛。候选页面必须有可见 evidence �
 - 修改 Terra core / Bridge Kit reviewer semantics；
 - 宣告 `ONE_SHOT_QUALITY_PASS` 或 `PROGRAM_MATURE`。
 
-## Acceptance gates
+## Acceptance and regression gates
 
 Planner 只有在以下全部成立时才可 PASS 026：
 
