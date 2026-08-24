@@ -42,29 +42,26 @@ Stage 1 已真实改变 production contract：
 - exact CUHK canonical source 明确绑定 `shared/templates/cuhk/beamer/source/`；derived PPTX/scaffold 不再冒充 exact production source；
 - required tests / validation / CI 已通过。
 
-024 的 task-local PASS gate 不构成 program-level approval gate；本轮不等待用户回复，继续 Stage 2。
+024 的 task-local PASS gate 不构成 program-level approval gate。
 
-## Current bounded task
+## Stage 2 — Current human decision point
 
 当前任务：
 
 `025_research_presentation_gold_scientific_composition_library`
 
-025 已由 Planner 创建并冻结，只负责 Stage 2 — Gold Scientific Composition Library。Executor 应按其 `REQUEST.md` / `PLAN.md` 执行；不得自行继续 Stage 3。
+025 已完成 Revision 1 的有界现有库 recovery，并在第二轮独立审核后达到 review limit。真实 CI 通过，REVIEW_1 的两个实现 blocker 已关闭：
 
-025 的核心不是继续扩 reference corpus，而是把现有 inspected/downloaded 页面重新筛成真正的 production gold subset，并证明：
+- 最终 9 条 gold records 均有 025 item-level pixel `PASS` 与 identity binding；
+- statistics / medical runtime probes 均通过正常 semantic compatibility 路径证明 `RUNTIME_SELECTED -> ACTUALLY_CONSUMED -> OUTPUT_AFFECTED`。
 
-```text
-RUNTIME_SELECTED
--> ACTUALLY_CONSUMED
--> OUTPUT_AFFECTED
-```
+但冻结的 Stage 2 coverage 仍缺 `discussion / next experiment`：Revision 1 已额外送审 20 个现有 inspected candidates，达到有界筛选上限，仍无该类页面达到 production-gold item-level `PASS`。
 
-Gold admission 必须基于真实 rendered pixels，而不是 metadata/prose lesson；低于 mature research-group-meeting bar 的页面不能为了凑覆盖强行纳入。Gold selector 必须按 scientific job/object/domain/density 做语义兼容选择，并把 source-derived geometry/hierarchy/annotation relation 真正转成 Stage 3 可消费的 renderer-neutral composition recipe。
+因此 025 当前合法停在人工决策点，不创建第三轮 review，也不提前创建 Stage 3。
 
-025 不得扩 corpus、不得实现 Stage 3 LaTeX/TikZ renderer、不得恢复 023、不得开始最终 holdout。
+推荐的人工作品决策：保持 mature-bar 不变，授权一个新的、严格限定的 Stage 2 coverage recovery task，只针对 `discussion / next experiment` 缺口做小规模外部 source scouting / intake / real-pixel admission；保留现有 9 条 gold 和 025 历史 evidence。该 recovery PASS 后再进入 Stage 3。
 
-025 PASS 后，Planner 才能创建 Stage 3 — Executable CUHK Scientific Layout System。
+备选方案是用户明确接受这一 coverage gap 并放宽 Stage 2 contract；Planner 不自行做该质量标准变更。
 
 ## Non-negotiable final acceptance
 
