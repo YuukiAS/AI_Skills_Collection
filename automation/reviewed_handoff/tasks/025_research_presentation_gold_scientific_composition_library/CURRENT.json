@@ -1,18 +1,18 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "025_research_presentation_gold_scientific_composition_library",
-  "state": "REVISE",
+  "state": "NEEDS_GPT_PLANNER",
   "review_round": 1,
   "max_review_rounds": 2,
   "plan_revision": 0,
   "max_plan_revisions": 1,
   "base_commit": "d054379a2c732607b8814193b73d2eedbf528947",
   "base_branch": "main",
-  "implementation_commit": "a58104329cb4c05ddef777812c1738c3d4c510ca",
+  "implementation_commit": "1f77b4fc803d55b59ff726833254ad357c615663",
   "ci_required": true,
   "ci_status": "PASS",
   "last_review_decision": "REVISE",
   "review_limit_reached": false,
   "human_gate_reason": null,
-  "next_action": "RUN_CODEX_EXECUTOR"
+  "next_action": "RUN_GPT_PLANNER"
 }

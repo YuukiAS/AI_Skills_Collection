@@ -148,3 +148,61 @@ This task did not:
 ## Remaining Limitations
 
 This is the first production gold subset from the existing inspected corpus. It proves gold admission, selection, and recipe consumption for Stage 2, but it is not the final executable layout system or a real-paper holdout result. Source pixels remain evidence only and are not reusable runtime assets.
+
+## Revision 1 Evidence And Planner Escalation
+
+REVIEW_1 correctly identified that the original 10-record gold index did not have per-record pixel-level mature-bar admission evidence, and that the statistics runtime probe used `force_gold_id` to bypass semantic compatibility for its alternate record.
+
+Executor prepared a bounded gold-admission visual packet from existing inspected reference renders only:
+
+```text
+results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/visual_inputs.json
+results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/review_identity_map.json
+```
+
+The packet included the 10 original gold candidates plus the three previously reported rejected examples, for 13 total reference-render inputs. No source corpus was expanded.
+
+GitHub Actions executed one live `gpt-5.6-terra` review:
+
+```text
+run: https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/32708205168
+evidence: results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json
+evidence_id: visual-review-025_research_presentation_gold_scientific_composition_library-1b0ba053dfa0
+```
+
+Item-level gold-admission decisions:
+
+- `RRL-019`: `PASS`
+- `RRL-013`: `PASS`
+- `RRL-001`: `REVISE`
+- `RRL-028`: `REVISE`
+- `RRL-014`: `REVISE`
+- `RRL-030`: `REVISE`
+- `RRL-041`: `REVISE`
+- `RRL-022`: `REVISE`
+- `RRL-005`: `REVISE`
+- `RRL-023`: `REVISE`
+- `RRL-034`: `REVISE`
+- `RRL-031`: `REVISE`
+- `RRL-002`: `REVISE`
+
+This creates a Planner-level conflict that Executor cannot resolve without changing the frozen Plan:
+
+- Keeping the rejected records would violate REVIEW_1's instruction not to force low-maturity pages into gold for coverage.
+- Reducing the gold set to the two newly admitted records would fail the frozen Stage 2 coverage and runtime-probe requirements, including the required statistics/biostatistics probe.
+- Reusing old 021 evidence for `RRL-028` now conflicts with the newer, admission-specific 025 Terra evidence that directly judged the same page below the production gold bar.
+- Expanding the corpus or running a new Source Scout is explicitly out of scope for 025.
+
+Therefore this revision is routed to `NEEDS_GPT_PLANNER` rather than continuing with a fabricated PASS or an out-of-scope corpus expansion.
+
+Minimal Planner question:
+
+```text
+Given the 025 gold-admission Terra evidence admits only RRL-019 and RRL-013 from the existing candidate packet, should 025 be revised to:
+1. accept a smaller gold set and record Stage 2 coverage gaps for a follow-up acquisition task;
+2. allow a targeted in-corpus re-screen beyond the original 13 packet;
+3. authorize targeted new source scouting for missing statistics/result/negative/discussion mature gold pages; or
+4. explicitly allow older 021 evidence to override the 025 admission-specific REVISE for RRL-028?
+```
+
+Executor did not modify the gold index, selector, recipe builder, tests, or workflow state beyond this routing escalation after the new evidence made the frozen repair impossible to complete safely.
