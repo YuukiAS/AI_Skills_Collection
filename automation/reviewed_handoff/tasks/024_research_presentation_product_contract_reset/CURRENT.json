@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "024_research_presentation_product_contract_reset",
-  "state": "WAITING_FOR_CI",
+  "state": "READY_FOR_GPT_REVIEW",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -10,9 +10,9 @@
   "base_branch": "main",
   "implementation_commit": "01886bd84841a388f034f504ca8e3b640f267796",
   "ci_required": true,
-  "ci_status": "PENDING",
+  "ci_status": "PASS",
   "last_review_decision": null,
   "review_limit_reached": false,
   "human_gate_reason": null,
-  "next_action": "WAIT_FOR_CI"
+  "next_action": "RUN_GPT_REVIEW"
 }
