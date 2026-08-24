@@ -123,7 +123,7 @@ Executor 至少运行：
 
 若本地 Python/命令名不同，使用仓库当前已验证 runtime；不要因为环境差异改变产品语义。
 
-## Acceptance gates
+## Acceptance and regression gates
 
 Planner 只有在以下全部成立时才可 PASS 024：
 
