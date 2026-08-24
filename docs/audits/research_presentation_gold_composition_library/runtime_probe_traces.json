@@ -1,0 +1,665 @@
+{
+  "schema": "RESEARCH_GOLD_COMPOSITION_RUNTIME_PROBES_V1",
+  "task_key": "025_research_presentation_gold_scientific_composition_library",
+  "status": "PASS",
+  "probes": [
+    {
+      "probe_id": "statistics_estimator_identity",
+      "query": {
+        "page_function": "ESTIMATOR",
+        "scientific_object": "estimator equation identity formula",
+        "domain_family": "statistics",
+        "dominant_object_type": "equation",
+        "evidence_type": "estimator formula",
+        "density": "low",
+        "panel_count": 0
+      },
+      "baseline_recipe": {
+        "schema": "RESEARCH_GOLD_COMPOSITION_RECIPE_V1",
+        "query": {
+          "page_function": "ESTIMATOR",
+          "scientific_object": "estimator equation identity formula",
+          "domain_family": "statistics",
+          "dominant_object_type": "equation",
+          "evidence_type": "estimator formula",
+          "density": "low",
+          "panel_count": 0
+        },
+        "selected_gold_id": "GSC-002",
+        "selected_reference_id": "RRL-028",
+        "source_identity": {
+          "source_id": "SRC-054",
+          "actual_page_number": 14,
+          "canonical_rendered_page_sha256": "2870d8b698a549f76ae398de63b1340ce2ca66e3433e4ab281321c148f5b5dd4",
+          "review_input_sha256": "2870d8b698a549f76ae398de63b1340ce2ca66e3433e4ab281321c148f5b5dd4",
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        },
+        "composition_constraints": {
+          "composition_family": "equation-dominant",
+          "primary_scientific_object_role": "centered estimator identity",
+          "primary_bbox": {
+            "x": 0.2,
+            "y": 0.28,
+            "w": 0.46,
+            "h": 0.27
+          },
+          "primary_object_area_ratio": 0.1242,
+          "supporting_region_roles": [
+            "short title"
+          ],
+          "visual_hierarchy": [
+            {
+              "rank": 1,
+              "role": "short title",
+              "reason": "names the identity before detail"
+            },
+            {
+              "rank": 2,
+              "role": "centered estimator identity",
+              "reason": "formula is the only scientific object and receives whitespace"
+            }
+          ],
+          "alignment_groups": [
+            {
+              "group_id": "center-equation",
+              "roles": [
+                "centered estimator identity"
+              ],
+              "relationship": "formula is centered with broad surrounding whitespace"
+            }
+          ],
+          "reading_flow": "title-to-centered-equation",
+          "annotation_legend_caption_panel_relations": [
+            "no detached caption; explanation belongs near the equation if needed"
+          ],
+          "content_capacity": {
+            "density": "low",
+            "text_budget": "short title plus one optional adjacent annotation",
+            "panel_count": 0,
+            "primary_object_min_area": 0.1
+          }
+        },
+        "audience_safe_instruction": {
+          "layout_lesson": "For a single identity, let the formula stand alone at readable scale instead of surrounding it with cards.",
+          "do_not_expose_internal_ids": true,
+          "do_not_copy_source_pixels_or_branding": true
+        },
+        "runtime_trace": {
+          "runtime_selected": true,
+          "actually_consumed_fields": [
+            "primary_bbox",
+            "visual_hierarchy",
+            "alignment_groups",
+            "reading_flow",
+            "annotation_legend_caption_panel_relations",
+            "content_capacity"
+          ],
+          "selection": {
+            "schema": "RESEARCH_GOLD_COMPOSITION_SELECTION_V1",
+            "query": {
+              "page_function": "ESTIMATOR",
+              "scientific_object": "estimator equation identity formula",
+              "domain_family": "statistics",
+              "dominant_object_type": "equation",
+              "evidence_type": "estimator formula",
+              "density": "low",
+              "panel_count": 0
+            },
+            "matches": [
+              {
+                "gold_id": "GSC-002",
+                "reference_id": "RRL-028",
+                "source_id": "SRC-054",
+                "page_function": "ESTIMATOR",
+                "composition_family": "equation-dominant",
+                "primary_bbox": {
+                  "x": 0.2,
+                  "y": 0.28,
+                  "w": 0.46,
+                  "h": 0.27
+                },
+                "score": 15,
+                "compatibility_reasons": [
+                  "page_function exact match",
+                  "domain_family match",
+                  "density match",
+                  "panel_count exact match",
+                  "scientific object overlap: equation, estimator, formula, identity"
+                ],
+                "rights_reuse_boundary": "COMPOSITION_ONLY"
+              }
+            ],
+            "excluded": [
+              {
+                "gold_id": "GSC-001",
+                "reference_id": "RRL-001",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "no scientific-object overlap",
+                  "semantic incompatibility: query matches rejected job 'estimator'"
+                ]
+              },
+              {
+                "gold_id": "GSC-003",
+                "reference_id": "RRL-014",
+                "exclusion_reasons": [
+                  "domain_family mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-004",
+                "reference_id": "RRL-019",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "no scientific-object overlap",
+                  "semantic incompatibility: query matches rejected job 'equation identity'"
+                ]
+              },
+              {
+                "gold_id": "GSC-005",
+                "reference_id": "RRL-030",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "no scientific-object overlap"
+                ]
+              },
+              {
+                "gold_id": "GSC-006",
+                "reference_id": "RRL-041",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "no scientific-object overlap"
+                ]
+              },
+              {
+                "gold_id": "GSC-007",
+                "reference_id": "RRL-022",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "domain_family mismatch",
+                  "no scientific-object overlap",
+                  "semantic incompatibility: query matches rejected job 'equation identity'"
+                ]
+              },
+              {
+                "gold_id": "GSC-008",
+                "reference_id": "RRL-013",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "domain_family mismatch",
+                  "no scientific-object overlap",
+                  "semantic incompatibility: query matches rejected job 'estimator'"
+                ]
+              },
+              {
+                "gold_id": "GSC-009",
+                "reference_id": "RRL-005",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "no scientific-object overlap"
+                ]
+              },
+              {
+                "gold_id": "GSC-010",
+                "reference_id": "RRL-023",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "no scientific-object overlap"
+                ]
+              }
+            ]
+          }
+        },
+        "recipe_sha256": "295da59e1baac3b5374926990ebf6e13c520cf044fb1fa941f9608acd194ae46"
+      },
+      "alternate_recipe": {
+        "schema": "RESEARCH_GOLD_COMPOSITION_RECIPE_V1",
+        "query": {
+          "page_function": "ESTIMATOR",
+          "scientific_object": "estimator equation identity formula",
+          "domain_family": "statistics",
+          "dominant_object_type": "equation",
+          "evidence_type": "estimator formula",
+          "density": "low",
+          "panel_count": 0
+        },
+        "selected_gold_id": "GSC-003",
+        "selected_reference_id": "RRL-014",
+        "source_identity": {
+          "source_id": "SRC-005",
+          "actual_page_number": 18,
+          "canonical_rendered_page_sha256": "bc7a72ab5809fe7e8a3f7d950a15607168e10c4fda573591e6d8250217ba9b68",
+          "review_input_sha256": "9bc66555d4fe50d6124655e0839c421673e3638c99b4d6a313d7340169516033",
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        },
+        "composition_constraints": {
+          "composition_family": "split-visual-explanation",
+          "primary_scientific_object_role": "metric formula paired with example masks",
+          "primary_bbox": {
+            "x": 0.06,
+            "y": 0.15,
+            "w": 0.82,
+            "h": 0.48
+          },
+          "primary_object_area_ratio": 0.3936,
+          "supporting_region_roles": [
+            "formula",
+            "mask examples"
+          ],
+          "visual_hierarchy": [
+            {
+              "rank": 1,
+              "role": "metric title",
+              "reason": "announces what is being defined"
+            },
+            {
+              "rank": 2,
+              "role": "formula plus masks",
+              "reason": "equation and examples jointly define the metric"
+            }
+          ],
+          "alignment_groups": [
+            {
+              "group_id": "metric-examples",
+              "roles": [
+                "formula",
+                "mask examples"
+              ],
+              "relationship": "examples sit beside the formula to map symbols to objects"
+            }
+          ],
+          "reading_flow": "title-to-left-formula-then-right-mask-examples",
+          "annotation_legend_caption_panel_relations": [
+            "variable examples are colocated with the formula rather than described in a footer"
+          ],
+          "content_capacity": {
+            "density": "moderate",
+            "text_budget": "formula plus two or three labels",
+            "panel_count": 2,
+            "primary_object_min_area": 0.3
+          }
+        },
+        "audience_safe_instruction": {
+          "layout_lesson": "Bind a metric formula to the exact visual objects being scored.",
+          "do_not_expose_internal_ids": true,
+          "do_not_copy_source_pixels_or_branding": true
+        },
+        "runtime_trace": {
+          "runtime_selected": true,
+          "actually_consumed_fields": [
+            "primary_bbox",
+            "visual_hierarchy",
+            "alignment_groups",
+            "reading_flow",
+            "annotation_legend_caption_panel_relations",
+            "content_capacity"
+          ],
+          "selection": {
+            "schema": "RESEARCH_GOLD_COMPOSITION_SELECTION_V1",
+            "query": {
+              "page_function": "ESTIMATOR",
+              "scientific_object": "estimator equation identity formula",
+              "domain_family": "statistics",
+              "dominant_object_type": "equation",
+              "evidence_type": "estimator formula",
+              "density": "low",
+              "panel_count": 0
+            },
+            "matches": [
+              {
+                "gold_id": "GSC-003",
+                "score": 999,
+                "compatibility_reasons": [
+                  "forced compatible probe"
+                ]
+              }
+            ],
+            "excluded": []
+          }
+        },
+        "recipe_sha256": "9a67c4089c95a54101e7b305cea6612294d47946bb8dc14860eeadd2798307fb"
+      },
+      "checks": {
+        "runtime_selected": true,
+        "actually_consumed": true,
+        "output_affected": true,
+        "primary_bbox_changed": true,
+        "composition_family_available": true
+      }
+    },
+    {
+      "probe_id": "medical_aligned_prediction_error",
+      "query": {
+        "page_function": "MEDICAL_IMAGE_COMPARISON",
+        "scientific_object": "medical image aligned panel prediction ground truth error overlay",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "medical_image",
+        "evidence_type": "same-case prediction error",
+        "density": "high",
+        "panel_count": 4
+      },
+      "baseline_recipe": {
+        "schema": "RESEARCH_GOLD_COMPOSITION_RECIPE_V1",
+        "query": {
+          "page_function": "MEDICAL_IMAGE_COMPARISON",
+          "scientific_object": "medical image aligned panel prediction ground truth error overlay",
+          "domain_family": "medical_imaging",
+          "dominant_object_type": "medical_image",
+          "evidence_type": "same-case prediction error",
+          "density": "high",
+          "panel_count": 4
+        },
+        "selected_gold_id": "GSC-007",
+        "selected_reference_id": "RRL-022",
+        "source_identity": {
+          "source_id": "SRC-006",
+          "actual_page_number": 21,
+          "canonical_rendered_page_sha256": "3859a1913a078e3e60ad8aa166a1ab262af56a93d6ecf57dbf1f269b84b7bef4",
+          "review_input_sha256": "3f304aa00bd0bf04150557d2a86b3a005a624120361f0eec71c450cc9b152b6f",
+          "rights_reuse_boundary": "COMPARATIVE_GOLD"
+        },
+        "composition_constraints": {
+          "composition_family": "aligned-multi-panel",
+          "primary_scientific_object_role": "aligned medical image comparison grid",
+          "primary_bbox": {
+            "x": 0.05,
+            "y": 0.2,
+            "w": 0.76,
+            "h": 0.78
+          },
+          "primary_object_area_ratio": 0.5928,
+          "supporting_region_roles": [
+            "panel labels",
+            "legend",
+            "short interpretation"
+          ],
+          "visual_hierarchy": [
+            {
+              "rank": 1,
+              "role": "case comparison title",
+              "reason": "frames what to inspect"
+            },
+            {
+              "rank": 2,
+              "role": "aligned image grid",
+              "reason": "image/GT/prediction/error panels are the evidence"
+            },
+            {
+              "rank": 3,
+              "role": "legend and labels",
+              "reason": "labels decode panels without taking over the page"
+            }
+          ],
+          "alignment_groups": [
+            {
+              "group_id": "aligned-panels",
+              "roles": [
+                "input",
+                "ground truth",
+                "prediction",
+                "error"
+              ],
+              "relationship": "same-case panels align by row and share labels"
+            }
+          ],
+          "reading_flow": "title-to-panel-labels-to-left-to-right-image-comparison",
+          "annotation_legend_caption_panel_relations": [
+            "legend binds overlay/error colors to the aligned panels"
+          ],
+          "content_capacity": {
+            "density": "high",
+            "text_budget": "panel labels plus one short interpretation",
+            "panel_count": 4,
+            "primary_object_min_area": 0.5
+          }
+        },
+        "audience_safe_instruction": {
+          "layout_lesson": "Let same-case medical panels dominate the slide and bind labels/legend directly to the grid.",
+          "do_not_expose_internal_ids": true,
+          "do_not_copy_source_pixels_or_branding": true
+        },
+        "runtime_trace": {
+          "runtime_selected": true,
+          "actually_consumed_fields": [
+            "primary_bbox",
+            "visual_hierarchy",
+            "alignment_groups",
+            "reading_flow",
+            "annotation_legend_caption_panel_relations",
+            "content_capacity"
+          ],
+          "selection": {
+            "schema": "RESEARCH_GOLD_COMPOSITION_SELECTION_V1",
+            "query": {
+              "page_function": "MEDICAL_IMAGE_COMPARISON",
+              "scientific_object": "medical image aligned panel prediction ground truth error overlay",
+              "domain_family": "medical_imaging",
+              "dominant_object_type": "medical_image",
+              "evidence_type": "same-case prediction error",
+              "density": "high",
+              "panel_count": 4
+            },
+            "matches": [
+              {
+                "gold_id": "GSC-007",
+                "reference_id": "RRL-022",
+                "source_id": "SRC-006",
+                "page_function": "MEDICAL_IMAGE_COMPARISON",
+                "composition_family": "aligned-multi-panel",
+                "primary_bbox": {
+                  "x": 0.05,
+                  "y": 0.2,
+                  "w": 0.76,
+                  "h": 0.78
+                },
+                "score": 16,
+                "compatibility_reasons": [
+                  "page_function exact match",
+                  "domain_family match",
+                  "density match",
+                  "panel_count exact match",
+                  "scientific object overlap: aligned, error, ground, image, medical"
+                ],
+                "rights_reuse_boundary": "COMPARATIVE_GOLD"
+              }
+            ],
+            "excluded": [
+              {
+                "gold_id": "GSC-001",
+                "reference_id": "RRL-001",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "semantic incompatibility: query matches rejected job 'medical overlay comparison'"
+                ]
+              },
+              {
+                "gold_id": "GSC-002",
+                "reference_id": "RRL-028",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "domain_family mismatch",
+                  "panel_count incompatible",
+                  "no scientific-object overlap"
+                ]
+              },
+              {
+                "gold_id": "GSC-003",
+                "reference_id": "RRL-014",
+                "exclusion_reasons": [
+                  "page_function mismatch"
+                ]
+              },
+              {
+                "gold_id": "GSC-004",
+                "reference_id": "RRL-019",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "no scientific-object overlap"
+                ]
+              },
+              {
+                "gold_id": "GSC-005",
+                "reference_id": "RRL-030",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "domain_family mismatch",
+                  "no scientific-object overlap",
+                  "semantic incompatibility: query matches rejected job 'medical image overlay'"
+                ]
+              },
+              {
+                "gold_id": "GSC-006",
+                "reference_id": "RRL-041",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "domain_family mismatch",
+                  "no scientific-object overlap"
+                ]
+              },
+              {
+                "gold_id": "GSC-008",
+                "reference_id": "RRL-013",
+                "exclusion_reasons": [
+                  "semantic incompatibility: query matches rejected job 'prediction error overlay'"
+                ]
+              },
+              {
+                "gold_id": "GSC-009",
+                "reference_id": "RRL-005",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "panel_count incompatible",
+                  "no scientific-object overlap",
+                  "semantic incompatibility: query matches rejected job 'medical image comparison'"
+                ]
+              },
+              {
+                "gold_id": "GSC-010",
+                "reference_id": "RRL-023",
+                "exclusion_reasons": [
+                  "page_function mismatch",
+                  "domain_family mismatch",
+                  "no scientific-object overlap"
+                ]
+              }
+            ]
+          }
+        },
+        "recipe_sha256": "7aff4965d74a3bdb91eefc0f062dd1266ea4c4a5cf3fe2552c5ab98d3f2ca993"
+      },
+      "alternate_recipe": {
+        "schema": "RESEARCH_GOLD_COMPOSITION_RECIPE_V1",
+        "query": {
+          "page_function": "MEDICAL_IMAGE_COMPARISON",
+          "scientific_object": "medical image aligned panel prediction ground truth error overlay",
+          "domain_family": "medical_imaging",
+          "dominant_object_type": "medical_image",
+          "evidence_type": "same-case prediction error",
+          "density": "high",
+          "panel_count": 4
+        },
+        "selected_gold_id": "GSC-008",
+        "selected_reference_id": "RRL-013",
+        "source_identity": {
+          "source_id": "SRC-005",
+          "actual_page_number": 14,
+          "canonical_rendered_page_sha256": "e89c5cc1368990d4dda3fc7e74ed5c08928f34467b0a43e4856a34f224b26271",
+          "review_input_sha256": "5b2c8dd0e0abeace036587de487446e0c75e9e862227a6be192741d0dcfb8c7e",
+          "rights_reuse_boundary": "COMPARATIVE_GOLD"
+        },
+        "composition_constraints": {
+          "composition_family": "aligned-multi-panel",
+          "primary_scientific_object_role": "representative medical image sample grid",
+          "primary_bbox": {
+            "x": 0.12,
+            "y": 0.24,
+            "w": 0.56,
+            "h": 0.42
+          },
+          "primary_object_area_ratio": 0.235,
+          "supporting_region_roles": [
+            "sample labels",
+            "dataset title"
+          ],
+          "visual_hierarchy": [
+            {
+              "rank": 1,
+              "role": "dataset/sample title",
+              "reason": "names the visual unit"
+            },
+            {
+              "rank": 2,
+              "role": "sample grid",
+              "reason": "sample diversity is visible before metrics"
+            }
+          ],
+          "alignment_groups": [
+            {
+              "group_id": "sample-grid",
+              "roles": [
+                "representative image samples"
+              ],
+              "relationship": "samples share size and spacing to show visual diversity"
+            }
+          ],
+          "reading_flow": "sample-title-to-grid-to-short-dataset-note",
+          "annotation_legend_caption_panel_relations": [
+            "sample labels remain attached to the grid"
+          ],
+          "content_capacity": {
+            "density": "moderate",
+            "text_budget": "dataset title plus minimal labels",
+            "panel_count": 6,
+            "primary_object_min_area": 0.2
+          }
+        },
+        "audience_safe_instruction": {
+          "layout_lesson": "Introduce medical-image data with actual sample diversity before showing metrics.",
+          "do_not_expose_internal_ids": true,
+          "do_not_copy_source_pixels_or_branding": true
+        },
+        "runtime_trace": {
+          "runtime_selected": true,
+          "actually_consumed_fields": [
+            "primary_bbox",
+            "visual_hierarchy",
+            "alignment_groups",
+            "reading_flow",
+            "annotation_legend_caption_panel_relations",
+            "content_capacity"
+          ],
+          "selection": {
+            "schema": "RESEARCH_GOLD_COMPOSITION_SELECTION_V1",
+            "query": {
+              "page_function": "MEDICAL_IMAGE_COMPARISON",
+              "scientific_object": "medical image aligned panel prediction ground truth error overlay",
+              "domain_family": "medical_imaging",
+              "dominant_object_type": "medical_image",
+              "evidence_type": "same-case prediction error",
+              "density": "high",
+              "panel_count": 4
+            },
+            "matches": [
+              {
+                "gold_id": "GSC-008",
+                "score": 999,
+                "compatibility_reasons": [
+                  "forced compatible probe"
+                ]
+              }
+            ],
+            "excluded": []
+          }
+        },
+        "recipe_sha256": "761d2c2830b5f357060bfda021b3e38c7b3ba19ca267962c0be9c2ad85ff1886"
+      },
+      "checks": {
+        "runtime_selected": true,
+        "actually_consumed": true,
+        "output_affected": true,
+        "primary_bbox_changed": true,
+        "composition_family_available": true
+      }
+    }
+  ]
+}

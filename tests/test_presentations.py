@@ -315,6 +315,105 @@ class PresentationSharedTests(unittest.TestCase):
         for forbidden in ["<image", "data:image", "base64,", ".png", ".jpg", ".jpeg", ".pdf", "/home/", ".cache/"]:
             self.assertNotIn(forbidden, montage_text)
 
+    def test_gold_scientific_composition_library_and_runtime_recipe(self) -> None:
+        references = SHARED / "references"
+        for name in [
+            "research_gold_composition.schema.json",
+            "research_gold_composition_index.json",
+        ]:
+            self.assertTrue((references / name).exists(), name)
+
+        validator = SHARED / "scripts/validate_gold_compositions.py"
+        result = subprocess.run([sys.executable, str(validator)], check=False, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+        self.assertIn("validated 10 gold scientific composition records", result.stdout)
+
+        index = json.loads((references / "research_gold_composition_index.json").read_text(encoding="utf-8"))
+        records = index["records"]
+        self.assertLess(len(records), 13)
+        self.assertGreaterEqual(len({record["source_id"] for record in records}), 4)
+        jobs = {job for record in records for job in record["scientific_jobs"]}
+        for required in [
+            "motivation",
+            "estimator",
+            "method",
+            "quantitative_result",
+            "negative_result",
+            "medical_image_comparison",
+            "discussion",
+        ]:
+            self.assertTrue(any(required in job for job in jobs), required)
+        for record in records:
+            self.assertIn(record["rights_reuse_boundary"], {"COMPOSITION_ONLY", "COMPARATIVE_GOLD"})
+            self.assertTrue(record["gold_admission_evidence"]["evidence_paths"])
+            self.assertNotIn("metadata-only", record["gold_admission_evidence"]["basis"].lower())
+            self.assertGreater(record["primary_object_area_ratio"], 0)
+            self.assertTrue(record["annotation_legend_caption_panel_relations"])
+            audience_contract = record["portable_composition_lesson"] + " " + " ".join(record["scientific_jobs"])
+            for forbidden in ["RRL-", "SRC-", "GSC-", "QA", "provenance"]:
+                self.assertNotIn(forbidden, audience_contract)
+
+        selector = SHARED / "scripts/select_gold_compositions.py"
+        stat_selected = subprocess.run(
+            [
+                sys.executable,
+                str(selector),
+                "--page-function", "ESTIMATOR",
+                "--scientific-object", "estimator equation identity formula",
+                "--domain-family", "statistics",
+                "--dominant-object-type", "equation",
+                "--evidence-type", "estimator formula",
+                "--density", "low",
+                "--panel-count", "0",
+                "--limit", "2",
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(stat_selected.returncode, 0, stat_selected.stderr)
+        stat_payload = json.loads(stat_selected.stdout)
+        self.assertEqual(stat_payload["matches"][0]["gold_id"], "GSC-002")
+        self.assertTrue(any(item["exclusion_reasons"] for item in stat_payload["excluded"]))
+
+        med_selected = subprocess.run(
+            [
+                sys.executable,
+                str(selector),
+                "--page-function", "MEDICAL_IMAGE_COMPARISON",
+                "--scientific-object", "medical image aligned panel prediction ground truth error overlay",
+                "--domain-family", "medical_imaging",
+                "--dominant-object-type", "medical_image",
+                "--evidence-type", "same-case prediction error",
+                "--density", "high",
+                "--panel-count", "4",
+                "--limit", "2",
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(med_selected.returncode, 0, med_selected.stderr)
+        med_payload = json.loads(med_selected.stdout)
+        self.assertEqual(med_payload["matches"][0]["gold_id"], "GSC-007")
+        self.assertFalse(any(item["gold_id"] == "GSC-002" for item in med_payload["matches"]))
+
+        probe_generator = SHARED / "scripts/generate_gold_composition_probe_artifacts.py"
+        probe_result = subprocess.run([sys.executable, str(probe_generator)], check=False, capture_output=True, text=True)
+        self.assertEqual(probe_result.returncode, 0, probe_result.stderr + probe_result.stdout)
+        probes = json.loads((REPO_ROOT / "docs/audits/research_presentation_gold_composition_library/runtime_probe_traces.json").read_text(encoding="utf-8"))
+        self.assertEqual(probes["status"], "PASS")
+        self.assertEqual(len(probes["probes"]), 2)
+        for probe in probes["probes"]:
+            checks = probe["checks"]
+            self.assertTrue(checks["runtime_selected"])
+            self.assertTrue(checks["actually_consumed"])
+            self.assertTrue(checks["output_affected"])
+            self.assertTrue(checks["primary_bbox_changed"])
+            self.assertNotEqual(probe["baseline_recipe"]["recipe_sha256"], probe["alternate_recipe"]["recipe_sha256"])
+            consumed = set(probe["baseline_recipe"]["runtime_trace"]["actually_consumed_fields"])
+            self.assertTrue({"primary_bbox", "visual_hierarchy", "alignment_groups"}.issubset(consumed))
+
     def test_reference_calibrated_candidate_search(self) -> None:
         references = SHARED / "references"
         for name in [
@@ -639,6 +738,30 @@ class PresentationSharedTests(unittest.TestCase):
             (
                 SHARED / "references/RESEARCH_SLIDE_ARCHETYPES.md",
                 REPO_ROOT / "plugins/codex/plugins/presentations/shared/references/RESEARCH_SLIDE_ARCHETYPES.md",
+            ),
+            (
+                SHARED / "references/research_gold_composition.schema.json",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/references/research_gold_composition.schema.json",
+            ),
+            (
+                SHARED / "references/research_gold_composition_index.json",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/references/research_gold_composition_index.json",
+            ),
+            (
+                SHARED / "scripts/validate_gold_compositions.py",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_gold_compositions.py",
+            ),
+            (
+                SHARED / "scripts/select_gold_compositions.py",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/select_gold_compositions.py",
+            ),
+            (
+                SHARED / "scripts/build_gold_composition_recipe.py",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/build_gold_composition_recipe.py",
+            ),
+            (
+                SHARED / "scripts/generate_gold_composition_probe_artifacts.py",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/generate_gold_composition_probe_artifacts.py",
             ),
         ]
         for source, mirror in mirrors:

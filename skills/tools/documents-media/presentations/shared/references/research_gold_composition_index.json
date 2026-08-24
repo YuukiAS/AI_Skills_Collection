@@ -1,0 +1,388 @@
+{
+  "schema": "RESEARCH_GOLD_COMPOSITION_INDEX_V1",
+  "generated_from": "025_research_presentation_gold_scientific_composition_library",
+  "records": [
+    {
+      "gold_id": "GSC-001",
+      "reference_id": "RRL-001",
+      "source_id": "SRC-001",
+      "actual_page_number": 6,
+      "source_file_sha256": "79c87119d88bf17444a637c43818c952e4f0928c26c0dc671803e5bc59dfa404",
+      "canonical_rendered_page_sha256": "7ec4d89172893fea0ab6cb4c7b34a2d9e67d5abff3968584b0841b93fcd6aa7a",
+      "gold_admission_review_input_sha256": "7ec4d89172893fea0ab6cb4c7b34a2d9e67d5abff3968584b0841b93fcd6aa7a",
+      "scientific_jobs": ["motivation", "research_question", "real_data_context"],
+      "domain_families": ["general_research"],
+      "page_function": "REAL_DATA_APPLICATION",
+      "composition_family": "motivation-data-anchor",
+      "primary_scientific_object_role": "domain image plus growth plot evidence context",
+      "primary_bbox": {"x": 0.08, "y": 0.18, "w": 0.78, "h": 0.58},
+      "primary_object_area_ratio": 0.4524,
+      "supporting_region_roles": ["short context caption", "research question title"],
+      "visual_hierarchy": [
+        {"rank": 1, "role": "research question title", "reason": "frames why the audience should care"},
+        {"rank": 2, "role": "domain image plus growth plot", "reason": "motivation is anchored in visible data rather than a paragraph"},
+        {"rank": 3, "role": "short caption", "reason": "keeps interpretation close to the evidence"}
+      ],
+      "alignment_groups": [
+        {"group_id": "motivation-evidence-band", "roles": ["domain image", "growth plot", "caption"], "relationship": "image and data share one evidence band below the title"}
+      ],
+      "reading_flow": "question-title-to-domain-image-and-data-context-to-short-caption",
+      "annotation_legend_caption_panel_relations": ["caption sits adjacent to the visual evidence and does not become a separate card"],
+      "content_capacity": {"density": "moderate", "text_budget": "one question title plus one short caption", "panel_count": 2, "primary_object_min_area": 0.35},
+      "portable_composition_lesson": "Open a doctoral update with a concrete domain object and one data view; do not start from abstract bullets.",
+      "rights_reuse_boundary": "COMPOSITION_ONLY",
+      "gold_admission_evidence": {
+        "basis": "Existing inspected rendered page with source/render SHA in research_slide_reference_index.csv.",
+        "maturity_bar": "mature research-group-meeting motivation page",
+        "item_level_judgement": "REFERENCE_ACCEPTED",
+        "evidence_paths": ["skills/tools/documents-media/presentations/shared/references/research_slide_reference_index.csv"],
+        "why_admitted": "The page uses real visual evidence to establish motivation and has a clear figure/text hierarchy."
+      },
+      "selection_keywords": ["motivation", "research question", "data context", "domain image", "growth plot"],
+      "rejected_for_jobs": ["estimator", "medical overlay comparison", "negative result"]
+    },
+    {
+      "gold_id": "GSC-002",
+      "reference_id": "RRL-028",
+      "source_id": "SRC-054",
+      "actual_page_number": 14,
+      "source_file_sha256": "40ee6a3462d158c57806e546d54ecd55664ac4cd9fe9f3a2dd6cf8b1eb603500",
+      "canonical_rendered_page_sha256": "2870d8b698a549f76ae398de63b1340ce2ca66e3433e4ab281321c148f5b5dd4",
+      "gold_admission_review_input_sha256": "2870d8b698a549f76ae398de63b1340ce2ca66e3433e4ab281321c148f5b5dd4",
+      "scientific_jobs": ["estimator", "identity", "equation_first"],
+      "domain_families": ["statistics", "biostatistics"],
+      "page_function": "ESTIMATOR",
+      "composition_family": "equation-dominant",
+      "primary_scientific_object_role": "centered estimator identity",
+      "primary_bbox": {"x": 0.20, "y": 0.28, "w": 0.46, "h": 0.27},
+      "primary_object_area_ratio": 0.1242,
+      "supporting_region_roles": ["short title"],
+      "visual_hierarchy": [
+        {"rank": 1, "role": "short title", "reason": "names the identity before detail"},
+        {"rank": 2, "role": "centered estimator identity", "reason": "formula is the only scientific object and receives whitespace"}
+      ],
+      "alignment_groups": [
+        {"group_id": "center-equation", "roles": ["centered estimator identity"], "relationship": "formula is centered with broad surrounding whitespace"}
+      ],
+      "reading_flow": "title-to-centered-equation",
+      "annotation_legend_caption_panel_relations": ["no detached caption; explanation belongs near the equation if needed"],
+      "content_capacity": {"density": "low", "text_budget": "short title plus one optional adjacent annotation", "panel_count": 0, "primary_object_min_area": 0.10},
+      "portable_composition_lesson": "For a single identity, let the formula stand alone at readable scale instead of surrounding it with cards.",
+      "rights_reuse_boundary": "COMPOSITION_ONLY",
+      "gold_admission_evidence": {
+        "basis": "019 rendered-page composition record plus 021 Terra reference item PASS.",
+        "maturity_bar": "strong research-group-meeting/conference-talk equation slide",
+        "item_level_judgement": "PASS",
+        "evidence_paths": ["skills/tools/documents-media/presentations/shared/references/research_slide_composition_index.json", "results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review/statistical/VISUAL_REVIEW.json"],
+        "why_admitted": "Terra judged the anonymized reference item visually mature and projection-ready for one identity."
+      },
+      "selection_keywords": ["estimator", "identity", "equation", "formula", "poststratification", "statistics"],
+      "rejected_for_jobs": ["multi-panel medical image", "process flow"]
+    },
+    {
+      "gold_id": "GSC-003",
+      "reference_id": "RRL-014",
+      "source_id": "SRC-005",
+      "actual_page_number": 18,
+      "source_file_sha256": "7280463da41e6919a0e29c9fb129cee260dd6e332dcecf34710e5054a4995b24",
+      "canonical_rendered_page_sha256": "bc7a72ab5809fe7e8a3f7d950a15607168e10c4fda573591e6d8250217ba9b68",
+      "gold_admission_review_input_sha256": "9bc66555d4fe50d6124655e0839c421673e3638c99b4d6a313d7340169516033",
+      "scientific_jobs": ["metric_definition", "estimator_with_examples", "medical_metric"],
+      "domain_families": ["biostatistics", "medical_imaging"],
+      "page_function": "ESTIMATOR",
+      "composition_family": "split-visual-explanation",
+      "primary_scientific_object_role": "metric formula paired with example masks",
+      "primary_bbox": {"x": 0.06, "y": 0.15, "w": 0.82, "h": 0.48},
+      "primary_object_area_ratio": 0.3936,
+      "supporting_region_roles": ["formula", "mask examples"],
+      "visual_hierarchy": [
+        {"rank": 1, "role": "metric title", "reason": "announces what is being defined"},
+        {"rank": 2, "role": "formula plus masks", "reason": "equation and examples jointly define the metric"}
+      ],
+      "alignment_groups": [
+        {"group_id": "metric-examples", "roles": ["formula", "mask examples"], "relationship": "examples sit beside the formula to map symbols to objects"}
+      ],
+      "reading_flow": "title-to-left-formula-then-right-mask-examples",
+      "annotation_legend_caption_panel_relations": ["variable examples are colocated with the formula rather than described in a footer"],
+      "content_capacity": {"density": "moderate", "text_budget": "formula plus two or three labels", "panel_count": 2, "primary_object_min_area": 0.30},
+      "portable_composition_lesson": "Bind a metric formula to the exact visual objects being scored.",
+      "rights_reuse_boundary": "COMPOSITION_ONLY",
+      "gold_admission_evidence": {
+        "basis": "019 rendered-page composition record and 021/022 visual-review reference materialization.",
+        "maturity_bar": "usable comparative gold for metric-definition composition",
+        "item_level_judgement": "REFERENCE_ADMITTED_WITH_LIMITATION",
+        "evidence_paths": ["skills/tools/documents-media/presentations/shared/references/research_slide_composition_index.json", "results/022_research_presentation_candidate_visual_finish_repair/visual_review/statistical/review_identity_map.json"],
+        "why_admitted": "The composition is mature as a formula-example organization, while not used as the single best equation-only slide."
+      },
+      "selection_keywords": ["metric", "estimator", "formula", "mask", "segmentation", "agreement"],
+      "rejected_for_jobs": ["single identity", "plot result"]
+    },
+    {
+      "gold_id": "GSC-004",
+      "reference_id": "RRL-019",
+      "source_id": "SRC-006",
+      "actual_page_number": 3,
+      "source_file_sha256": "645a7c27e633525f81a302bce2135cd75439dc06eaf51d52c707a52197466927",
+      "canonical_rendered_page_sha256": "3403aba3c209bce280a8e15456feea972da75ed3200d35e67131024eb1dfea93",
+      "gold_admission_review_input_sha256": "3403aba3c209bce280a8e15456feea972da75ed3200d35e67131024eb1dfea93",
+      "scientific_jobs": ["method", "experiment_design", "task_flow"],
+      "domain_families": ["medical_imaging", "general_research"],
+      "page_function": "EXPERIMENT_DESIGN",
+      "composition_family": "horizontal-process-flow",
+      "primary_scientific_object_role": "connected application/task flow",
+      "primary_bbox": {"x": 0.06, "y": 0.35, "w": 0.84, "h": 0.47},
+      "primary_object_area_ratio": 0.3948,
+      "supporting_region_roles": ["short context text", "medical thumbnails"],
+      "visual_hierarchy": [
+        {"rank": 1, "role": "task title", "reason": "sets the application context"},
+        {"rank": 2, "role": "connected flow", "reason": "encodes application structure across the slide"}
+      ],
+      "alignment_groups": [
+        {"group_id": "bottom-flow", "roles": ["connected application/task flow"], "relationship": "task applications are organized as one lower-band flow"}
+      ],
+      "reading_flow": "title-to-short-context-to-lower-band-flow",
+      "annotation_legend_caption_panel_relations": ["connectors encode scientific task flow; text stays above the diagram"],
+      "content_capacity": {"density": "moderate", "text_budget": "one short context block plus node labels", "panel_count": 4, "primary_object_min_area": 0.30},
+      "portable_composition_lesson": "Use a single connected flow for experiment or task structure; avoid separate decorative cards.",
+      "rights_reuse_boundary": "COMPOSITION_ONLY",
+      "gold_admission_evidence": {
+        "basis": "019 rendered-page composition record.",
+        "maturity_bar": "mature task-flow reference for method/experiment pages",
+        "item_level_judgement": "REFERENCE_ACCEPTED",
+        "evidence_paths": ["skills/tools/documents-media/presentations/shared/references/research_slide_composition_index.json"],
+        "why_admitted": "The diagram encodes a real task relationship with concise supporting text."
+      },
+      "selection_keywords": ["method", "experiment", "design", "flow", "task", "pipeline"],
+      "rejected_for_jobs": ["equation identity", "single result plot"]
+    },
+    {
+      "gold_id": "GSC-005",
+      "reference_id": "RRL-030",
+      "source_id": "SRC-054",
+      "actual_page_number": 21,
+      "source_file_sha256": "40ee6a3462d158c57806e546d54ecd55664ac4cd9fe9f3a2dd6cf8b1eb603500",
+      "canonical_rendered_page_sha256": "ffda9252e683ce92c36237805399cff57e849851a431b064ada03187e666d1ad",
+      "gold_admission_review_input_sha256": "ffda9252e683ce92c36237805399cff57e849851a431b064ada03187e666d1ad",
+      "scientific_jobs": ["quantitative_result", "uncertainty", "comparison"],
+      "domain_families": ["statistics", "biostatistics"],
+      "page_function": "CONFIDENCE_INTERVAL",
+      "composition_family": "result-with-callout",
+      "primary_scientific_object_role": "uncertainty curve with reference lines",
+      "primary_bbox": {"x": 0.14, "y": 0.16, "w": 0.78, "h": 0.70},
+      "primary_object_area_ratio": 0.546,
+      "supporting_region_roles": ["reference lines", "claim title"],
+      "visual_hierarchy": [
+        {"rank": 1, "role": "claim title", "reason": "states the adjusted-estimate context"},
+        {"rank": 2, "role": "uncertainty curve", "reason": "trajectory and band are the evidence"}
+      ],
+      "alignment_groups": [
+        {"group_id": "plot-frame", "roles": ["uncertainty curve", "reference lines"], "relationship": "callouts are anchored inside the coordinate system"}
+      ],
+      "reading_flow": "claim-title-to-interval-curve-to-reference-lines",
+      "annotation_legend_caption_panel_relations": ["reference markers stay inside the plotted coordinate frame"],
+      "content_capacity": {"density": "moderate", "text_budget": "claim title plus direct labels", "panel_count": 1, "primary_object_min_area": 0.45},
+      "portable_composition_lesson": "Put uncertainty directly around the result and keep interpretation anchored in the figure.",
+      "rights_reuse_boundary": "COMPOSITION_ONLY",
+      "gold_admission_evidence": {
+        "basis": "019 rendered-page composition record.",
+        "maturity_bar": "mature quantitative-result slide",
+        "item_level_judgement": "REFERENCE_ACCEPTED",
+        "evidence_paths": ["skills/tools/documents-media/presentations/shared/references/research_slide_composition_index.json"],
+        "why_admitted": "The figure dominates the slide, exposes uncertainty, and keeps callouts on the scientific object."
+      },
+      "selection_keywords": ["result", "uncertainty", "confidence interval", "comparison", "curve", "plot"],
+      "rejected_for_jobs": ["medical image overlay", "method flow"]
+    },
+    {
+      "gold_id": "GSC-006",
+      "reference_id": "RRL-041",
+      "source_id": "SRC-057",
+      "actual_page_number": 28,
+      "source_file_sha256": "6d049d35472424dcf13744570d407a13cec07867db19d26693a996cb4f22a06c",
+      "canonical_rendered_page_sha256": "37d4b73fe2ded49d3e4f7da1c08ef1b26b9b6a5c7f5e983f7296e2a52bd6026e",
+      "gold_admission_review_input_sha256": "37d4b73fe2ded49d3e4f7da1c08ef1b26b9b6a5c7f5e983f7296e2a52bd6026e",
+      "scientific_jobs": ["negative_result", "failure_analysis", "model_check"],
+      "domain_families": ["statistics", "biostatistics"],
+      "page_function": "NEGATIVE_RESULT",
+      "composition_family": "model-check-or-negative",
+      "primary_scientific_object_role": "failure distribution histogram",
+      "primary_bbox": {"x": 0.12, "y": 0.22, "w": 0.68, "h": 0.58},
+      "primary_object_area_ratio": 0.3944,
+      "supporting_region_roles": ["problem title", "short failure note"],
+      "visual_hierarchy": [
+        {"rank": 1, "role": "problem title", "reason": "names the failure mode"},
+        {"rank": 2, "role": "failure distribution", "reason": "histogram makes many-choices problem visible"}
+      ],
+      "alignment_groups": [
+        {"group_id": "negative-evidence", "roles": ["failure distribution histogram", "short failure note"], "relationship": "text interprets the distribution without replacing it"}
+      ],
+      "reading_flow": "problem-title-to-histogram-to-short-failure-note",
+      "annotation_legend_caption_panel_relations": ["failure explanation stays adjacent to the distribution"],
+      "content_capacity": {"density": "moderate", "text_budget": "one sentence plus axis labels", "panel_count": 1, "primary_object_min_area": 0.35},
+      "portable_composition_lesson": "Show the negative evidence distribution; do not summarize failure as a slogan.",
+      "rights_reuse_boundary": "COMPOSITION_ONLY",
+      "gold_admission_evidence": {
+        "basis": "019 rendered-page composition record.",
+        "maturity_bar": "mature negative-result / model-check reference",
+        "item_level_judgement": "REFERENCE_ACCEPTED",
+        "evidence_paths": ["skills/tools/documents-media/presentations/shared/references/research_slide_composition_index.json"],
+        "why_admitted": "The page keeps quantitative negative evidence central and separates it from proposed remedies."
+      },
+      "selection_keywords": ["negative", "failure", "model check", "p-value", "histogram", "distribution"],
+      "rejected_for_jobs": ["motivation", "medical aligned panels"]
+    },
+    {
+      "gold_id": "GSC-007",
+      "reference_id": "RRL-022",
+      "source_id": "SRC-006",
+      "actual_page_number": 21,
+      "source_file_sha256": "645a7c27e633525f81a302bce2135cd75439dc06eaf51d52c707a52197466927",
+      "canonical_rendered_page_sha256": "3859a1913a078e3e60ad8aa166a1ab262af56a93d6ecf57dbf1f269b84b7bef4",
+      "gold_admission_review_input_sha256": "3f304aa00bd0bf04150557d2a86b3a005a624120361f0eec71c450cc9b152b6f",
+      "scientific_jobs": ["medical_image_comparison", "aligned_panels", "prediction_error"],
+      "domain_families": ["medical_imaging"],
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "composition_family": "aligned-multi-panel",
+      "primary_scientific_object_role": "aligned medical image comparison grid",
+      "primary_bbox": {"x": 0.05, "y": 0.20, "w": 0.76, "h": 0.78},
+      "primary_object_area_ratio": 0.5928,
+      "supporting_region_roles": ["panel labels", "legend", "short interpretation"],
+      "visual_hierarchy": [
+        {"rank": 1, "role": "case comparison title", "reason": "frames what to inspect"},
+        {"rank": 2, "role": "aligned image grid", "reason": "image/GT/prediction/error panels are the evidence"},
+        {"rank": 3, "role": "legend and labels", "reason": "labels decode panels without taking over the page"}
+      ],
+      "alignment_groups": [
+        {"group_id": "aligned-panels", "roles": ["input", "ground truth", "prediction", "error"], "relationship": "same-case panels align by row and share labels"}
+      ],
+      "reading_flow": "title-to-panel-labels-to-left-to-right-image-comparison",
+      "annotation_legend_caption_panel_relations": ["legend binds overlay/error colors to the aligned panels"],
+      "content_capacity": {"density": "high", "text_budget": "panel labels plus one short interpretation", "panel_count": 4, "primary_object_min_area": 0.50},
+      "portable_composition_lesson": "Let same-case medical panels dominate the slide and bind labels/legend directly to the grid.",
+      "rights_reuse_boundary": "COMPARATIVE_GOLD",
+      "gold_admission_evidence": {
+        "basis": "019 rendered-page composition record and 021/022 reference materialization with real pixels.",
+        "maturity_bar": "comparative gold for medical-image aligned panels",
+        "item_level_judgement": "REFERENCE_ACCEPTED",
+        "evidence_paths": ["skills/tools/documents-media/presentations/shared/references/research_slide_composition_index.json", "results/022_research_presentation_candidate_visual_finish_repair/visual_review/medical/review_identity_map.json"],
+        "why_admitted": "The page has a large aligned image comparison with panel semantics required for medical-imaging holdouts."
+      },
+      "selection_keywords": ["medical", "image", "aligned", "panel", "prediction", "ground truth", "error", "overlay"],
+      "rejected_for_jobs": ["equation identity", "abstract motivation"]
+    },
+    {
+      "gold_id": "GSC-008",
+      "reference_id": "RRL-013",
+      "source_id": "SRC-005",
+      "actual_page_number": 14,
+      "source_file_sha256": "7280463da41e6919a0e29c9fb129cee260dd6e332dcecf34710e5054a4995b24",
+      "canonical_rendered_page_sha256": "e89c5cc1368990d4dda3fc7e74ed5c08928f34467b0a43e4856a34f224b26271",
+      "gold_admission_review_input_sha256": "5b2c8dd0e0abeace036587de487446e0c75e9e862227a6be192741d0dcfb8c7e",
+      "scientific_jobs": ["medical_dataset_intro", "medical_image_samples", "visual_unit"],
+      "domain_families": ["medical_imaging"],
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "composition_family": "aligned-multi-panel",
+      "primary_scientific_object_role": "representative medical image sample grid",
+      "primary_bbox": {"x": 0.12, "y": 0.24, "w": 0.56, "h": 0.42},
+      "primary_object_area_ratio": 0.235,
+      "supporting_region_roles": ["sample labels", "dataset title"],
+      "visual_hierarchy": [
+        {"rank": 1, "role": "dataset/sample title", "reason": "names the visual unit"},
+        {"rank": 2, "role": "sample grid", "reason": "sample diversity is visible before metrics"}
+      ],
+      "alignment_groups": [
+        {"group_id": "sample-grid", "roles": ["representative image samples"], "relationship": "samples share size and spacing to show visual diversity"}
+      ],
+      "reading_flow": "sample-title-to-grid-to-short-dataset-note",
+      "annotation_legend_caption_panel_relations": ["sample labels remain attached to the grid"],
+      "content_capacity": {"density": "moderate", "text_budget": "dataset title plus minimal labels", "panel_count": 6, "primary_object_min_area": 0.20},
+      "portable_composition_lesson": "Introduce medical-image data with actual sample diversity before showing metrics.",
+      "rights_reuse_boundary": "COMPARATIVE_GOLD",
+      "gold_admission_evidence": {
+        "basis": "019 rendered-page composition record and 021/022 real reference render materialization.",
+        "maturity_bar": "comparative gold for dataset/sample introduction",
+        "item_level_judgement": "REFERENCE_ADMITTED_WITH_LIMITATION",
+        "evidence_paths": ["skills/tools/documents-media/presentations/shared/references/research_slide_composition_index.json", "results/022_research_presentation_candidate_visual_finish_repair/visual_review/medical/review_identity_map.json"],
+        "why_admitted": "Useful for dataset/sample-introduction composition, but not selected for same-case overlay/error comparison."
+      },
+      "selection_keywords": ["medical", "sample", "dataset", "representative", "lesion", "image grid"],
+      "rejected_for_jobs": ["prediction error overlay", "estimator"]
+    },
+    {
+      "gold_id": "GSC-009",
+      "reference_id": "RRL-005",
+      "source_id": "SRC-001",
+      "actual_page_number": 16,
+      "source_file_sha256": "79c87119d88bf17444a637c43818c952e4f0928c26c0dc671803e5bc59dfa404",
+      "canonical_rendered_page_sha256": "72ee16356dca2a7ae9d06d3cce3b3b6bf5746975b7303545fa6e4eda923ecfe7",
+      "gold_admission_review_input_sha256": "72ee16356dca2a7ae9d06d3cce3b3b6bf5746975b7303545fa6e4eda923ecfe7",
+      "scientific_jobs": ["discussion", "next_experiment", "supervisor_decision"],
+      "domain_families": ["general_research"],
+      "page_function": "NEXT_EXPERIMENT",
+      "composition_family": "decision-or-next-step",
+      "primary_scientific_object_role": "next-step decision note tied to future evidence",
+      "primary_bbox": {"x": 0.12, "y": 0.22, "w": 0.68, "h": 0.44},
+      "primary_object_area_ratio": 0.2992,
+      "supporting_region_roles": ["future-work bullets", "decision highlight"],
+      "visual_hierarchy": [
+        {"rank": 1, "role": "future-work title", "reason": "signals planned rather than completed evidence"},
+        {"rank": 2, "role": "decision highlight", "reason": "names the supervisor-facing question"}
+      ],
+      "alignment_groups": [
+        {"group_id": "decision-note", "roles": ["future-work bullets", "decision highlight"], "relationship": "planned work is linked to the decision needed"}
+      ],
+      "reading_flow": "future-work-title-to-next-experiment-list-to-decision-highlight",
+      "annotation_legend_caption_panel_relations": ["highlight distinguishes decision need from completed evidence"],
+      "content_capacity": {"density": "moderate", "text_budget": "three to five short next-step bullets", "panel_count": 0, "primary_object_min_area": 0.25},
+      "portable_composition_lesson": "Use next-experiment pages to ask a concrete decision; do not disguise plans as completed results.",
+      "rights_reuse_boundary": "COMPOSITION_ONLY",
+      "gold_admission_evidence": {
+        "basis": "Existing inspected rendered page with source/render SHA in research_slide_reference_index.csv.",
+        "maturity_bar": "mature group-meeting next-step/decision page",
+        "item_level_judgement": "REFERENCE_ACCEPTED",
+        "evidence_paths": ["skills/tools/documents-media/presentations/shared/references/research_slide_reference_index.csv"],
+        "why_admitted": "The page separates planned work from evidence and turns it into a supervisor-facing decision."
+      },
+      "selection_keywords": ["discussion", "next experiment", "future work", "decision", "supervisor"],
+      "rejected_for_jobs": ["result figure", "medical image comparison"]
+    },
+    {
+      "gold_id": "GSC-010",
+      "reference_id": "RRL-023",
+      "source_id": "SRC-013",
+      "actual_page_number": 8,
+      "source_file_sha256": "00558f5289645182a95963da272ece15629b3c1479ba9e306c402ac2f8676394",
+      "canonical_rendered_page_sha256": "bfee697e0c591051c9b9e503967e896dea75403da5b16ed1c9fcc725a19bd7a4",
+      "gold_admission_review_input_sha256": "bfee697e0c591051c9b9e503967e896dea75403da5b16ed1c9fcc725a19bd7a4",
+      "scientific_jobs": ["quantitative_result", "forest_plot", "interval_comparison"],
+      "domain_families": ["statistics", "biostatistics"],
+      "page_function": "RESULT_FIGURE",
+      "composition_family": "single-visual-dominant",
+      "primary_scientific_object_role": "large interval/forest plot",
+      "primary_bbox": {"x": 0.21, "y": 0.20, "w": 0.62, "h": 0.67},
+      "primary_object_area_ratio": 0.4154,
+      "supporting_region_roles": ["imperative title", "faint reference line"],
+      "visual_hierarchy": [
+        {"rank": 1, "role": "imperative title", "reason": "sets graph-reading task"},
+        {"rank": 2, "role": "forest plot", "reason": "interval plot carries the result"}
+      ],
+      "alignment_groups": [
+        {"group_id": "center-plot", "roles": ["large interval/forest plot"], "relationship": "plot is centered and vertically dominant under the title"}
+      ],
+      "reading_flow": "title-to-large-forest-plot",
+      "annotation_legend_caption_panel_relations": ["legend and reference line stay subordinate to intervals"],
+      "content_capacity": {"density": "moderate", "text_budget": "title plus direct labels", "panel_count": 1, "primary_object_min_area": 0.38},
+      "portable_composition_lesson": "Give a statistical result plot enough vertical space for labels and intervals.",
+      "rights_reuse_boundary": "COMPOSITION_ONLY",
+      "gold_admission_evidence": {
+        "basis": "019 rendered-page composition record.",
+        "maturity_bar": "mature single-result figure reference",
+        "item_level_judgement": "REFERENCE_ACCEPTED",
+        "evidence_paths": ["skills/tools/documents-media/presentations/shared/references/research_slide_composition_index.json"],
+        "why_admitted": "The result plot is dominant, sparse, and has a clear reading path."
+      },
+      "selection_keywords": ["result", "forest plot", "interval", "comparison", "estimate"],
+      "rejected_for_jobs": ["method flow", "discussion"]
+    }
+  ]
+}

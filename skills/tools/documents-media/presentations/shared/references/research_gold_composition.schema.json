@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Research Gold Scientific Composition Index",
+  "type": "object",
+  "required": ["schema", "generated_from", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "RESEARCH_GOLD_COMPOSITION_INDEX_V1" },
+    "generated_from": { "type": "string", "minLength": 1 },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/gold_record" }
+    }
+  },
+  "$defs": {
+    "gold_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gold_id",
+        "reference_id",
+        "source_id",
+        "actual_page_number",
+        "source_file_sha256",
+        "canonical_rendered_page_sha256",
+        "gold_admission_review_input_sha256",
+        "scientific_jobs",
+        "domain_families",
+        "page_function",
+        "composition_family",
+        "primary_scientific_object_role",
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "supporting_region_roles",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity",
+        "portable_composition_lesson",
+        "rights_reuse_boundary",
+        "gold_admission_evidence",
+        "selection_keywords",
+        "rejected_for_jobs"
+      ],
+      "properties": {
+        "gold_id": { "type": "string", "pattern": "^GSC-[0-9]{3}$" },
+        "reference_id": { "type": "string", "pattern": "^RRL-[0-9]{3}$" },
+        "source_id": { "type": "string", "pattern": "^SRC-[0-9]{3}$" },
+        "actual_page_number": { "type": "integer", "minimum": 1 },
+        "source_file_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "canonical_rendered_page_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "gold_admission_review_input_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "scientific_jobs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "domain_families": { "type": "array", "minItems": 1, "items": { "enum": ["statistics", "biostatistics", "medical_imaging", "general_research"] } },
+        "page_function": { "type": "string", "minLength": 1 },
+        "composition_family": { "type": "string", "minLength": 1 },
+        "primary_scientific_object_role": { "type": "string", "minLength": 1 },
+        "primary_bbox": { "$ref": "#/$defs/bbox" },
+        "primary_object_area_ratio": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+        "supporting_region_roles": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "visual_hierarchy": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/hierarchy_item" } },
+        "alignment_groups": { "type": "array", "items": { "$ref": "#/$defs/alignment_group" } },
+        "reading_flow": { "type": "string", "minLength": 1 },
+        "annotation_legend_caption_panel_relations": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "content_capacity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["density", "text_budget", "panel_count", "primary_object_min_area"],
+          "properties": {
+            "density": { "enum": ["low", "moderate", "high"] },
+            "text_budget": { "type": "string", "minLength": 1 },
+            "panel_count": { "type": "integer", "minimum": 0 },
+            "primary_object_min_area": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+          }
+        },
+        "portable_composition_lesson": { "type": "string", "minLength": 1 },
+        "rights_reuse_boundary": { "enum": ["COMPOSITION_ONLY", "COMPARATIVE_GOLD"] },
+        "gold_admission_evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["basis", "maturity_bar", "item_level_judgement", "evidence_paths", "why_admitted"],
+          "properties": {
+            "basis": { "type": "string", "minLength": 1 },
+            "maturity_bar": { "type": "string", "minLength": 1 },
+            "item_level_judgement": { "enum": ["PASS", "REFERENCE_ACCEPTED", "REFERENCE_ADMITTED_WITH_LIMITATION"] },
+            "evidence_paths": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+            "why_admitted": { "type": "string", "minLength": 1 }
+          }
+        },
+        "selection_keywords": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "rejected_for_jobs": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "bbox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "w", "h"],
+      "properties": {
+        "x": { "type": "number", "minimum": 0, "maximum": 1 },
+        "y": { "type": "number", "minimum": 0, "maximum": 1 },
+        "w": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+        "h": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+      }
+    },
+    "hierarchy_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rank", "role", "reason"],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string", "minLength": 1 }
+      }
+    },
+    "alignment_group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["group_id", "roles", "relationship"],
+      "properties": {
+        "group_id": { "type": "string", "minLength": 1 },
+        "roles": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "relationship": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

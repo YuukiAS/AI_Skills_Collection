@@ -1,0 +1,34 @@
+{
+  "schema": "RESEARCH_GOLD_COMPOSITION_ADMISSION_REPORT_V1",
+  "task_key": "025_research_presentation_gold_scientific_composition_library",
+  "admission_policy": "Only existing inspected references with rendered-page identity, rights boundary, composition lesson, and mature-bar evidence are admitted.",
+  "admitted_gold_ids": [
+    "GSC-002",
+    "GSC-007"
+  ],
+  "runtime_probe_artifact": "docs/audits/research_presentation_gold_composition_library/runtime_probe_traces.json",
+  "coverage_summary": [
+    "motivation / research question",
+    "estimator / mathematical identity",
+    "metric definition with examples",
+    "method / experiment design",
+    "quantitative result with uncertainty",
+    "negative result / model check",
+    "medical-image aligned panels",
+    "discussion / next experiment"
+  ],
+  "rejected_candidate_examples": [
+    {
+      "reference_id": "RRL-034",
+      "reason": "model teaching page retained as inspected reference but primary scientific object is too small for first production gold set"
+    },
+    {
+      "reference_id": "RRL-031",
+      "reason": "open-problems page retained as inspected reference; coverage is better represented by RRL-005 for next-experiment decisions"
+    },
+    {
+      "reference_id": "RRL-002",
+      "reason": "method diagram retained as inspected reference; RRL-019 provides stronger scientific task-flow coverage for this first gold set"
+    }
+  ]
+}
