@@ -198,3 +198,54 @@ Planner 只有在以下全部成立时才可 PASS 025：
 12. `RESULT.md` 明确列出 gold coverage、被拒绝的候选及原因、runtime consumption evidence 与仍缺失的 page-job coverage。
 
 025 PASS 只关闭 Stage 2。Planner PASS 后创建 Stage 3 — Executable CUHK Scientific Layout System 的独立 bounded task；Executor 不得自行继续。
+
+## Plan Revision 1 — Targeted In-Corpus Gold Recovery
+
+本次 revision 只解决 REVIEW_1 后出现的一个实质歧义：原 13 页 admission packet 中只有 `RRL-019` 与 `RRL-013` 达到新的 production-gold 像素级门槛，而 frozen Stage 2 又要求更广的 scientific-job 覆盖与 statistics / medical runtime proof。该冲突不得通过降低视觉标准、复用更旧且更宽松的 judgement，或外部扩 corpus 解决。
+
+### Revision decision
+
+采用**有界的现有库内重新筛选**。Executor 可以在当前 repository 已经 inspected/downloaded、已有真实 rendered-page identity 的 reference universe 中继续寻找候选，不限于第一轮的 13 页 packet；仍然禁止任何外部 Source Scout、下载新 deck、把未检查页面临时加入 corpus，或修改 019–022 的历史 evidence。
+
+### Evidence precedence
+
+- `025` 本轮 admission-specific Terra 对已经审过的 13 页具有当前 gold-admission 语义上的优先级。
+- 对这些相同像素，不得用较旧的 021/022 comparative judgement 覆盖新的 `025` item-level `REVISE`；特别是 `RRL-028` 继续视为 **not admitted to production gold**。
+- `RRL-019` 与 `RRL-013` 可保留为当前已准入 gold，但其用途仍受各自 scientific-job / domain compatibility 约束。
+- 对尚未进入 025 admission packet 的页面，旧 evidence 只有在它本身明确对同一真实 rendered pixels 给出 mature-bar item-level judgement 时才可复用；否则必须走新的 admission packet。
+
+### Bounded candidate expansion
+
+为了避免把“重新筛选现有库”变成无界视觉搜索：
+
+1. 只从现有 `research_slide_reference_index.csv` / `research_slide_composition_index.json` 中已有 inspected records 取候选，并排除已经在 13 页 packet 中被判 `REVISE` 的同一页面。
+2. 先按当前 Stage 2 缺口做语义预筛，优先寻找：
+   - statistics / biostatistics 的 mathematical model / estimator / theorem / quantitative-result；
+   - single-result / uncertainty / comparison；
+   - negative result / failure / model check；
+   - motivation / research question；
+   - discussion / next experiment；
+   - 若需要支撑 medical alternate，再补同领域 image-comparison / failure-analysis。
+3. 每个缺失 job family 最多送审 2–4 个最相关的现有 inspected candidates；新增送审总量最多 20 页，最多拆成 2 个 admission packets。不要为了凑满 20 页而送明显不兼容页面。
+4. 所有新增候选仍必须基于真实 rendered pixels、匿名 item-level Terra judgement 与 reviewer-input SHA。`PASS` 才能进入 gold；`REVISE` 继续留在普通 inspected library。
+5. 若在上述有界筛选后仍无法满足主要 coverage 或 runtime proof，不降低门槛、不外部扩库；明确写出 coverage limitation，并按 Reviewed Handoff 路由回 Planner / human decision。
+
+### Runtime probe clarification
+
+REVIEW_1 对 `force_gold_id` 的阻断结论保持不变：
+
+- 删除 `score=999` / `forced compatible probe` 这类绕过正常 compatibility gate 的证明路径，或让任何显式 alternate 先通过与 production selector 相同的 compatibility validation。
+- statistics 与 medical probes 的 baseline 必须由正常 selector 选择。
+- alternate 优先采用“屏蔽 baseline 后由同一个 selector 选择下一条兼容 gold”的方式；若显式指定 alternate，也必须由 selector 的 compatibility check 证明兼容。
+- trace 必须保存 baseline / alternate 的真实 compatibility reasons、被排除候选及 source-derived recipe 差异。
+- 若某个 probe 在当前 gold set 下找不到第二个兼容候选，不得伪造 alternate；应把它作为 Stage 2 coverage limitation，而不是绕过门槛。
+
+### Revision acceptance
+
+本 revision 不改变原 Acceptance Gates，只明确关闭这次 Planner conflict。第二轮审核时，Planner 仍必须看到：
+
+- 最终 gold index 中**每一条**记录都有一致、可追溯的像素级 admission evidence；
+- 新 admission report 完整列出 admitted / rejected candidates，而不是只列 runtime baseline；
+- 主要 scientific-job coverage 是由实际 admitted gold 支撑的；
+- statistics 与 medical runtime probes 均通过正常语义兼容路径证明 selected -> consumed -> output-affected；
+- 没有新 source、没有 Stage 3 实现、没有通过降低 mature-bar 标准来补覆盖。
