@@ -1,0 +1,435 @@
+{
+  "blocking_findings": [],
+  "created_at": "2026-08-24T09:56:08Z",
+  "evidence_id": "visual-review-025_research_presentation_gold_scientific_composition_library-2fba9c5deb45",
+  "images": [
+    {
+      "logical_id": "item_A",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_A.png",
+      "sha256": "da68f99f36e8fb4c964cdf762f3154b59b27c741e644553203cd30439cff3b31"
+    },
+    {
+      "logical_id": "item_B",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_B.png",
+      "sha256": "6e5aac41fe449f45d00cf46a45ceebd963671cf568e741097e35b9a87c476b00"
+    },
+    {
+      "logical_id": "item_C",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_C.png",
+      "sha256": "538820f050d9e5a4455ecafd4c246ac4ee6e94b5180b3b340c4dc9e28f6dc158"
+    },
+    {
+      "logical_id": "item_D",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_D.png",
+      "sha256": "412ce5792335c8f838820cbab321f8a12059655c3881bf8e51e869e9bace156b"
+    },
+    {
+      "logical_id": "item_E",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_E.png",
+      "sha256": "6e18f88787975f47470663223b10bb29fd2ad229ea17676662fbc163909652b4"
+    },
+    {
+      "logical_id": "item_F",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_F.png",
+      "sha256": "ba2da3997e903783feb223458fd76019e0f2c60b3341aaf912f50b837c316dba"
+    },
+    {
+      "logical_id": "item_G",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_G.png",
+      "sha256": "c7ac668ca7b33103b6684ac11fd21fe040ef372af5288e722f383986076c62ea"
+    },
+    {
+      "logical_id": "item_H",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_H.png",
+      "sha256": "2735be6951a2b75f41606691dbbc837bb6dc4d3b238ffe07e309f85b2942b935"
+    },
+    {
+      "logical_id": "item_I",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_I.png",
+      "sha256": "4f6e1dc62e22bfae528591268eaf2e6cef6326dc3a019671d578ec8ef4e965a3"
+    },
+    {
+      "logical_id": "item_J",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_J.png",
+      "sha256": "4ed6a522d244cfb81914f785baa41ec369824de34730a3e3fbeb0251ffe01427"
+    },
+    {
+      "logical_id": "item_K",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_K.png",
+      "sha256": "ddd9a2f55ddfa79eaf31f1cdd51f80d600560f0566e524bc4e9ba3c326461db1"
+    },
+    {
+      "logical_id": "item_L",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_L.png",
+      "sha256": "7d3908c3a8c621b7fdb1848ea67ddfadc8e78ef62f8c237470955a068fa6eb76"
+    },
+    {
+      "logical_id": "item_M",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_M.png",
+      "sha256": "acd4ebbe63dc1d671fe3527284944639588080c1f8ff0cf1335b526c6a878fea"
+    },
+    {
+      "logical_id": "item_N",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_N.png",
+      "sha256": "2a176c23a9e8df4e4f97690b585c05e7777a58be485b8c6a9aef2180c47f01d8"
+    },
+    {
+      "logical_id": "item_O",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_O.png",
+      "sha256": "92b41286083146dbedfa07996bf444ba79c79091decc6cba8c10a6aabf10da22"
+    },
+    {
+      "logical_id": "item_P",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_P.png",
+      "sha256": "cabc496c31d43e0001c12cd01a2764f4d684e43706810487e21d33b633a598ed"
+    },
+    {
+      "logical_id": "item_Q",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_Q.png",
+      "sha256": "532f441373b48cc711b38adc7d3e22f252777ba0e410a0928b152281aa5b1d82"
+    },
+    {
+      "logical_id": "item_R",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_R.png",
+      "sha256": "0a6ee4ca03a58d21a2b6fe7ea22f62258da62f12de03ac1d84d839460b4378f4"
+    },
+    {
+      "logical_id": "item_S",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_S.png",
+      "sha256": "612ba02ff02b65f89cb03724497a9ae846c4bfb6a428e08754d30084c1acf0f2"
+    },
+    {
+      "logical_id": "item_T",
+      "mime_type": "image/png",
+      "path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/inputs/item_T.png",
+      "sha256": "f14992669cf74c81aeb71c7ac5fadd7b11daee7798e6a8659f62ba10f792f6c9"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "adapter_identity": "025_gold_recovery_1",
+      "immutable_review_identity_sha256": "8916a0c57f353f5d0468a567201a6fb598b66538c945ce2fa4b46b81f9e19d59",
+      "item_sha256_by_anonymous_id": {
+        "item_A": "da68f99f36e8fb4c964cdf762f3154b59b27c741e644553203cd30439cff3b31",
+        "item_B": "6e5aac41fe449f45d00cf46a45ceebd963671cf568e741097e35b9a87c476b00",
+        "item_C": "538820f050d9e5a4455ecafd4c246ac4ee6e94b5180b3b340c4dc9e28f6dc158",
+        "item_D": "412ce5792335c8f838820cbab321f8a12059655c3881bf8e51e869e9bace156b",
+        "item_E": "6e18f88787975f47470663223b10bb29fd2ad229ea17676662fbc163909652b4",
+        "item_F": "ba2da3997e903783feb223458fd76019e0f2c60b3341aaf912f50b837c316dba",
+        "item_G": "c7ac668ca7b33103b6684ac11fd21fe040ef372af5288e722f383986076c62ea",
+        "item_H": "2735be6951a2b75f41606691dbbc837bb6dc4d3b238ffe07e309f85b2942b935",
+        "item_I": "4f6e1dc62e22bfae528591268eaf2e6cef6326dc3a019671d578ec8ef4e965a3",
+        "item_J": "4ed6a522d244cfb81914f785baa41ec369824de34730a3e3fbeb0251ffe01427",
+        "item_K": "ddd9a2f55ddfa79eaf31f1cdd51f80d600560f0566e524bc4e9ba3c326461db1",
+        "item_L": "7d3908c3a8c621b7fdb1848ea67ddfadc8e78ef62f8c237470955a068fa6eb76",
+        "item_M": "acd4ebbe63dc1d671fe3527284944639588080c1f8ff0cf1335b526c6a878fea",
+        "item_N": "2a176c23a9e8df4e4f97690b585c05e7777a58be485b8c6a9aef2180c47f01d8",
+        "item_O": "92b41286083146dbedfa07996bf444ba79c79091decc6cba8c10a6aabf10da22",
+        "item_P": "cabc496c31d43e0001c12cd01a2764f4d684e43706810487e21d33b633a598ed",
+        "item_Q": "532f441373b48cc711b38adc7d3e22f252777ba0e410a0928b152281aa5b1d82",
+        "item_R": "0a6ee4ca03a58d21a2b6fe7ea22f62258da62f12de03ac1d84d839460b4378f4",
+        "item_S": "612ba02ff02b65f89cb03724497a9ae846c4bfb6a428e08754d30084c1acf0f2",
+        "item_T": "f14992669cf74c81aeb71c7ac5fadd7b11daee7798e6a8659f62ba10f792f6c9"
+      },
+      "page_job_contract": "bounded in-corpus recovery for production gold scientific composition records"
+    },
+    "manifest_sha256": "2fba9c5deb4526a712455646077c00656536608df91e852ab03be4411c1212d9",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "You are reviewing anonymous public-safe rendered research-slide pages for bounded in-corpus recovery of a production gold scientific composition library. Inspect actual pixels for every item. Do not infer quality from order, file names, metadata, SHA values, or presumed provenance.\nFor each item, decide whether visible composition reaches a mature doctoral research-group meeting or strong conference-talk bar for reuse as a gold composition reference. PASS means the page has a clear scientific object, mature scientific hierarchy, projection-readable typography, disciplined whitespace, useful annotation/caption/legend/panel relationships, and does not read as an unfinished template, fixture, generic lecture residue, or internal QA/coaching artifact. REVISE means it remains an ordinary inspected reference only. BLOCKED means pixels cannot be assessed.\nAssess each item independently and explain primary scientific object, page-job fit, visual maturity, typography/projection readability, and admission/rejection reason. Do not admit weak pages for coverage. Top-level PASS means the evidence packet is assessable; item-level decisions carry admission semantics.",
+      "source_contracts": []
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "REVISE",
+      "item_id": "item_A",
+      "observations": [
+        "Primary object is a two-stream schematic joining code-analysis outputs into an overall cost bound.",
+        "Large title and sentence are readable, but the page is mostly empty and the central drawing is a very simple, lightly annotated sketch.",
+        "The composition reads as an early proposal/lecture slide rather than a mature scientific reference."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Clear idea, but insufficiently developed visual and scientific structure for gold admission."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_B",
+      "observations": [
+        "Primary object is a Bayesian-analysis procedure expressed as numbered text and a displayed posterior equation.",
+        "Typography is large and readable, but the page is a dense text-and-equation explanation with little visual organization beyond underlined headings.",
+        "It reads as a conventional instructional slide rather than a reusable mature composition."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Readable technical content, but ordinary lecture-style composition."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "item_C",
+      "observations": [
+        "Primary object is a boxed workflow linking code annotation, constraints, runtime data, posterior type judgments, and substitution safety.",
+        "Panel borders, directional arrows, color-coded concepts, and a callout establish a coherent process hierarchy.",
+        "Despite substantial technical notation, the relationships are visibly structured and projection-readable."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Mature scientific workflow composition with useful panel and annotation relationships."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "item_D",
+      "observations": [
+        "Primary object is a side-by-side merge-sort versus bubble-sort comparison with recursion-depth and per-iteration-cost annotations.",
+        "The diagrams, brackets, labels, color emphasis, and callouts directly support the stated limitations.",
+        "The page has clear comparison hierarchy and disciplined use of white space."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Strong explanatory comparison slide suitable as a gold composition reference."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_E",
+      "observations": [
+        "Primary object is a conclusion schematic connecting Analysis A and Analysis B under hybrid resource analysis.",
+        "The central arrow and three code boxes provide a visible narrative, but the surrounding three long conclusions compete strongly with it.",
+        "Several lines are crowded or awkwardly wrapped, weakening the conclusion-page hierarchy."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Scientifically coherent but visually overfilled for admission."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "item_F",
+      "observations": [
+        "Primary object is a joint density/contour visualization relating Dice-based IAA to Hausdorff distance, with marginal distributions.",
+        "The formula, short bullets, plot, axis labels, and marginal panels form a clear explanatory relationship.",
+        "The slide has a strong research-talk visual hierarchy and large readable typography."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Mature quantitative figure slide with a clear analytical object."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "item_G",
+      "observations": [
+        "Primary object is a malignancy-group comparison table reporting IAA, p-value, and Cohen's d.",
+        "The result statement, large numerical table, color-blocked headers, and bottom conclusion create an immediately legible evidence-to-claim sequence.",
+        "Typography and table scale are strong for projection."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Strong results composition centered on interpretable statistical evidence."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "item_H",
+      "observations": [
+        "Primary object is a labeled bubble plot of model MAE versus mean squared error.",
+        "The plot occupies the dominant area while the title and concise left-side context establish the page job.",
+        "Axes, point labels, legend, and sparse grid are visibly coordinated and readable."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Mature conference-style quantitative comparison slide."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_I",
+      "observations": [
+        "Primary object is a multi-task versus diagnosis-only AUROC comparison over alpha, shown in the lower chart.",
+        "The upper claim and two bullets are readable, but the chart is pushed into the bottom portion and lower mathematical labels are visibly cut by the page edge.",
+        "The composition has an avoidable overflow/cropping appearance."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Useful result, but visible bottom-edge clipping prevents gold admission."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "item_J",
+      "observations": [
+        "Primary object is the overall objective-function equation, framed by short explanatory statements.",
+        "The equation is large and central, with a restrained title hierarchy and substantial breathing room.",
+        "A pale background motif remains unobtrusive enough to preserve formula legibility."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Clear, mature equation-focused research slide."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "item_K",
+      "observations": [
+        "Primary object is a lower-torso lesion-segmentation Dice results table comparing four methods across cohorts.",
+        "The table caption, column grouping, bold best row, and conference identity create clear scientific table hierarchy.",
+        "The visual is clean, balanced, and projection-readable."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Strong table-centric results slide suitable for gold reuse."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_L",
+      "observations": [
+        "Primary object is a forest plot of game-score differentials against a predictive interval.",
+        "The plot is small relative to the page and surrounded by large unused white space; row labels and intervals are difficult to inspect at presentation distance.",
+        "The plain header and isolated chart read as an ordinary template page."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Assessable, but too weakly composed and too small-scale for admission."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_M",
+      "observations": [
+        "Primary object is another forest plot, now presented after a bug fix.",
+        "The plot is centered and readable only at close inspection, with substantial unused whitespace and no visible interpretation on the page.",
+        "The thin header-bar template and minimal composition do not meet the mature reference bar."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Ordinary sparse chart slide."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_N",
+      "observations": [
+        "Primary object is a pair of posterior-simulation scatter plots for parameters and their inverses.",
+        "Both charts are small, leave most of the page blank, and use very small titles, labels, and dots.",
+        "The header is clear but the scientific graphics are not projection-scaled."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Visible and assessable, but an underdeveloped chart layout."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_O",
+      "observations": [
+        "Primary object is a faceted line chart across demographic categories.",
+        "The rightmost panel is visibly truncated and small pale editor/control artifacts appear at the bottom edge.",
+        "The page reads as an unfinished plotting export rather than a polished slide."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Visible truncation and export residue prevent admission."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_P",
+      "observations": [
+        "Primary object is a normal-curve illustration explaining low statistical power, sign error, and exaggeration.",
+        "The annotations and curve are legible, but the informal coaching phrase “Get used to it” makes the page read as generic lecture material.",
+        "Small editor/control artifacts are visible along the bottom."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Clear teaching diagram, but generic instructional residue rather than gold scientific composition."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_Q",
+      "observations": [
+        "Primary object is a forest plot of coefficients predicting change in attitude.",
+        "The plot is clean but very small and isolated in the upper half, while the bottom notes carry most of the page meaning.",
+        "Minimal styling and excessive blank space make it an ordinary presentation page."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Assessable chart slide, but not compositionally mature enough for admission."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_R",
+      "observations": [
+        "Primary object is a short bulleted list proposing hierarchical modeling and informative priors.",
+        "The slide has no supporting scientific object beyond bullets and leaves a large unused lower field.",
+        "Visible bottom control artifacts reinforce an unfinished template/export appearance."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Generic bullet slide; reject from gold composition recovery."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_S",
+      "observations": [
+        "Primary object is a regression plot with observed points, fitted line, alternative trends, and effect annotations.",
+        "The plot is coherent, but it is relatively small, uses a generic title bar, and provides limited slide-level hierarchy beyond the chart.",
+        "It remains a conventional inspected chart reference rather than a strong gold composition."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Useful analytical graphic, but visually ordinary."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_T",
+      "observations": [
+        "Primary object is a two-column journal appendix/proof and references page.",
+        "The page is densely typeset as a publication page, with proof equations and bibliography rather than slide-scale hierarchy.",
+        "It is visually assessable but does not fit the rendered research-slide page job."
+      ],
+      "requirement_ids": [
+        "rubric"
+      ],
+      "summary": "Publication-layout residue rather than a reusable research-slide composition."
+    }
+  ],
+  "non_blocking_notes": [],
+  "overall_decision": "PASS",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "2fba9c5deb4526a712455646077c00656536608df91e852ab03be4411c1212d9",
+  "review_kind": "research-gold-composition-admission-recovery",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "PASS",
+  "task_key": "025_research_presentation_gold_scientific_composition_library",
+  "workflow_type": "generic"
+}
