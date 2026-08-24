@@ -28,7 +28,7 @@ implementation_commit: 45ac2a0647fb9a486ba47f64bed300c3e09f4c73
 026 used:
 
 - 4 checked source URLs total, including one failed Google Drive PDF fetch that was not intaken.
-- 4 intaken/rendered public decks total.
+- 3 intaken/rendered public decks total: `SRC-075`, `SRC-076`, and `SRC-077`.
 - 12 Terra-reviewed rendered pages total.
 - 2 admission packets total.
 
