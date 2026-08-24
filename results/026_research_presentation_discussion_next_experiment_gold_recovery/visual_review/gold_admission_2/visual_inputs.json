@@ -1,0 +1,54 @@
+{
+  "external_upload_authorization": "",
+  "identity_bindings": {
+    "adapter_identity": "026_gold_admission_2",
+    "immutable_review_identity_sha256": "c39424696dac236eb8bdc80a7c5f32b2ec909f52e153a42a3c8a9da967d01bf3",
+    "item_sha256_by_anonymous_id": {
+      "item_A": "943572431ed883fbd1f15f3da8efbf8913cea37aeec8a6d647432186b14c7cd0",
+      "item_B": "1dce1f7b3ba50668103062bd5fd6909f005bd3e1228e3a369ca46af926320202",
+      "item_C": "98b93e9ffac8243e4c0271bcd572eaa60594838edd303d8fe73755c736a20612",
+      "item_D": "fe6fb2c000fdb09ddd10baab6f9e81cfe221e162611ab1a51cab60d08c884e4c"
+    },
+    "page_job_contract": "discussion / next experiment production gold composition admission"
+  },
+  "inputs": [
+    {
+      "description": "Anonymous discussion/next-experiment research-slide render. Judge only visible pixels and page-job fit.",
+      "logical_id": "item_A",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/inputs/item_A.png",
+      "sha256": "943572431ed883fbd1f15f3da8efbf8913cea37aeec8a6d647432186b14c7cd0"
+    },
+    {
+      "description": "Anonymous discussion/next-experiment research-slide render. Judge only visible pixels and page-job fit.",
+      "logical_id": "item_B",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/inputs/item_B.png",
+      "sha256": "1dce1f7b3ba50668103062bd5fd6909f005bd3e1228e3a369ca46af926320202"
+    },
+    {
+      "description": "Anonymous discussion/next-experiment research-slide render. Judge only visible pixels and page-job fit.",
+      "logical_id": "item_C",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/inputs/item_C.png",
+      "sha256": "98b93e9ffac8243e4c0271bcd572eaa60594838edd303d8fe73755c736a20612"
+    },
+    {
+      "description": "Anonymous discussion/next-experiment research-slide render. Judge only visible pixels and page-job fit.",
+      "logical_id": "item_D",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/inputs/item_D.png",
+      "sha256": "fe6fb2c000fdb09ddd10baab6f9e81cfe221e162611ab1a51cab60d08c884e4c"
+    }
+  ],
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_kind": "research-gold-discussion-next-experiment-admission",
+  "rubric": {
+    "instructions": "You are reviewing anonymous public-safe rendered research-slide pages for 026 discussion/next-experiment production-gold admission. Inspect the actual pixels for every item. Do not infer quality from order, file names, metadata, SHA values, or presumed provenance.\nFor each item, decide whether the visible composition reaches a mature doctoral research-group meeting or strong conference-talk bar for reuse as an abstract composition reference for DISCUSSION, NEXT_EXPERIMENT, OPEN_QUESTION, or LIMITATION_TO_NEXT_TEST pages. PASS means the page has a real scientific object, a clear relationship between present evidence or limitation and the next research action, mature hierarchy, projection-readable typography, disciplined whitespace, useful annotation/caption/legend/panel relations, and no generic future-work/card-dashboard/template feel. REVISE means it remains an ordinary inspected reference only. BLOCKED means pixels cannot be assessed.\nFor every item, state the primary scientific object, the discussion/next-experiment page-job fit, visual maturity, projection readability, and the admission or rejection reason. Do not admit a page merely because it says future work, discussion, or open question; the visible composition must actually support scientific reasoning or next validation planning. Top-level PASS means the packet is assessable; item-level decisions carry admission semantics.",
+    "source_contracts": []
+  },
+  "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+  "task_key": "026_discussion_gold_admission",
+  "workflow_type": "generic"
+}

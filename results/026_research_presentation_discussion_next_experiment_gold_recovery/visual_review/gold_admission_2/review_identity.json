@@ -1,0 +1,14 @@
+{
+  "anonymous_item_count": 4,
+  "review_identity_sha256": "c39424696dac236eb8bdc80a7c5f32b2ec909f52e153a42a3c8a9da967d01bf3",
+  "review_input_sha256_by_anonymous_id": {
+    "item_A": "943572431ed883fbd1f15f3da8efbf8913cea37aeec8a6d647432186b14c7cd0",
+    "item_B": "1dce1f7b3ba50668103062bd5fd6909f005bd3e1228e3a369ca46af926320202",
+    "item_C": "98b93e9ffac8243e4c0271bcd572eaa60594838edd303d8fe73755c736a20612",
+    "item_D": "fe6fb2c000fdb09ddd10baab6f9e81cfe221e162611ab1a51cab60d08c884e4c"
+  },
+  "rubric_sha256": "50e80fbb6ae76508f07f5a00498869de8c367801a302a73f4bc18b8d7e7f5512",
+  "schema": "RESEARCH_PRESENTATION_GOLD_DISCUSSION_ADMISSION_IDENTITY_V1",
+  "task_key": "026_research_presentation_discussion_next_experiment_gold_recovery",
+  "visual_inputs_sha256": "d303390fa9eb3a87f6dba84c2de88841cbc58b35b7a90af01bbfea8731565d1a"
+}

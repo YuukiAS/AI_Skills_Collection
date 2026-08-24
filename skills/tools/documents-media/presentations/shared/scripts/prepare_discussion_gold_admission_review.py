@@ -7,6 +7,7 @@ import hashlib
 import json
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 from PIL import Image, ImageDraw
@@ -17,10 +18,10 @@ TASK_KEY = "026_research_presentation_discussion_next_experiment_gold_recovery"
 VISIBLE_TASK_KEY = "026_discussion_gold_admission"
 SOURCE_CACHE = REPO_ROOT / ".cache" / "research-presentation-reference-library" / "sources"
 RENDER_CACHE = REPO_ROOT / ".cache" / "research-presentation-reference-library" / "inspection" / "rendered_pages"
-OUT_DIR = REPO_ROOT / "results" / TASK_KEY / "visual_review" / "gold_admission_1"
 
 
-CANDIDATES = [
+PACKETS = {
+    "gold_admission_1": [
     {
         "reference_id": "RRL-049",
         "source_id": "SRC-059",
@@ -138,7 +139,70 @@ CANDIDATES = [
         "evidence_type": "discussion synthesis",
         "rights_note": "public IMSI slide PDF; composition lessons only",
     },
-]
+    ],
+    "gold_admission_2": [
+        {
+            "reference_id": "RRL-057",
+            "source_id": "SRC-061",
+            "title": "A tutorial on Bayesian optimization",
+            "speaker": "Zi Wang",
+            "institution": "Google Brain",
+            "source_url": "https://zi-wang.com/pub/bayesopt_tutorial.pdf",
+            "landing_page_url": "https://ziw.mit.edu/talks/",
+            "local_cache_file": "ziwang_bayesopt_tutorial.pdf",
+            "actual_page_number": 49,
+            "page_function": "NEXT_EXPERIMENT",
+            "scientific_object": "parallel evaluation settings motivating batch query selection",
+            "evidence_type": "next batch experiment motivation",
+            "rights_note": "public author slide PDF; composition lessons only",
+        },
+        {
+            "reference_id": "RRL-058",
+            "source_id": "SRC-061",
+            "title": "A tutorial on Bayesian optimization",
+            "speaker": "Zi Wang",
+            "institution": "Google Brain",
+            "source_url": "https://zi-wang.com/pub/bayesopt_tutorial.pdf",
+            "landing_page_url": "https://ziw.mit.edu/talks/",
+            "local_cache_file": "ziwang_bayesopt_tutorial.pdf",
+            "actual_page_number": 50,
+            "page_function": "NEXT_EXPERIMENT",
+            "scientific_object": "mathematical criteria for selecting a batch of next queries",
+            "evidence_type": "next-query experimental design",
+            "rights_note": "public author slide PDF; composition lessons only",
+        },
+        {
+            "reference_id": "RRL-059",
+            "source_id": "SRC-061",
+            "title": "A tutorial on Bayesian optimization",
+            "speaker": "Zi Wang",
+            "institution": "Google Brain",
+            "source_url": "https://zi-wang.com/pub/bayesopt_tutorial.pdf",
+            "landing_page_url": "https://ziw.mit.edu/talks/",
+            "local_cache_file": "ziwang_bayesopt_tutorial.pdf",
+            "actual_page_number": 51,
+            "page_function": "NEXT_EXPERIMENT",
+            "scientific_object": "DPP and Mondrian-process diagrams for diverse next-query proposals",
+            "evidence_type": "next-query experimental design",
+            "rights_note": "public author slide PDF; composition lessons only",
+        },
+        {
+            "reference_id": "RRL-060",
+            "source_id": "SRC-061",
+            "title": "A tutorial on Bayesian optimization",
+            "speaker": "Zi Wang",
+            "institution": "Google Brain",
+            "source_url": "https://zi-wang.com/pub/bayesopt_tutorial.pdf",
+            "landing_page_url": "https://ziw.mit.edu/talks/",
+            "local_cache_file": "ziwang_bayesopt_tutorial.pdf",
+            "actual_page_number": 52,
+            "page_function": "LIMITATION_TO_NEXT_TEST",
+            "scientific_object": "limitations of existing parallel Bayesian optimization methods",
+            "evidence_type": "limitation motivating next method",
+            "rights_note": "public author slide PDF; composition lessons only",
+        },
+    ],
+}
 
 FORBIDDEN_VISIBLE_TERMS = [
     "RRL-",
@@ -148,7 +212,9 @@ FORBIDDEN_VISIBLE_TERMS = [
     "IMSI",
     "Willcox",
     "Gao",
+    "Wang",
     "Wisconsin",
+    "Google",
 ]
 
 
@@ -210,17 +276,23 @@ def admission_rubric() -> str:
 
 
 def main() -> int:
-    if len(CANDIDATES) > 12:
+    packet_name = sys.argv[1] if len(sys.argv) == 2 else "gold_admission_1"
+    if packet_name not in PACKETS:
+        raise RuntimeError(f"unknown packet {packet_name}; expected one of {sorted(PACKETS)}")
+    candidates = PACKETS[packet_name]
+    out_dir = REPO_ROOT / "results" / TASK_KEY / "visual_review" / packet_name
+
+    if len(candidates) > 12:
         raise RuntimeError("026 Terra page cap exceeded")
-    input_dir = OUT_DIR / "inputs"
-    if OUT_DIR.exists():
-        shutil.rmtree(OUT_DIR)
+    input_dir = out_dir / "inputs"
+    if out_dir.exists():
+        shutil.rmtree(out_dir)
     input_dir.mkdir(parents=True, exist_ok=True)
 
     inputs = []
     identity_items = []
     item_sha = {}
-    for index, candidate in enumerate(CANDIDATES):
+    for index, candidate in enumerate(candidates):
         anonymous_id = f"item_{chr(ord('A') + index)}"
         rendered = render_page(candidate)
         anonymous_path = input_dir / f"{anonymous_id}.png"
@@ -257,7 +329,7 @@ def main() -> int:
         "external_upload_authorization": "",
         "prompt_version": "ai-bridge.visual-review.v1",
         "identity_bindings": {
-            "adapter_identity": "026_gold_admission_1",
+            "adapter_identity": f"026_{packet_name}",
             "page_job_contract": "discussion / next experiment production gold composition admission",
             "item_sha256_by_anonymous_id": item_sha,
         },
@@ -278,9 +350,9 @@ def main() -> int:
         "schema": "RESEARCH_PRESENTATION_GOLD_DISCUSSION_ADMISSION_IDENTITY_MAP_V1",
         "task_key": TASK_KEY,
         "review_identity_sha256": manifest_sha,
-        "source_url_count": len({item["source_url"] for item in CANDIDATES}),
-        "deck_intake_count": len({item["local_cache_file"] for item in CANDIDATES}),
-        "terra_page_count": len(CANDIDATES),
+        "source_url_count": len({item["source_url"] for item in candidates}),
+        "deck_intake_count": len({item["local_cache_file"] for item in candidates}),
+        "terra_page_count": len(candidates),
         "admission_packet_count": 1,
         "caps": {
             "max_source_urls": 8,
@@ -302,15 +374,16 @@ def main() -> int:
         "anonymous_item_count": len(inputs),
     }
     for path, payload in [
-        (OUT_DIR / "visual_inputs.json", visible_manifest),
-        (OUT_DIR / "review_identity_map.json", identity_map),
-        (OUT_DIR / "review_identity.json", review_identity),
+        (out_dir / "visual_inputs.json", visible_manifest),
+        (out_dir / "review_identity_map.json", identity_map),
+        (out_dir / "review_identity.json", review_identity),
     ]:
         path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps({
-        "manifest": str((OUT_DIR / "visual_inputs.json").relative_to(REPO_ROOT)),
-        "identity_map": str((OUT_DIR / "review_identity_map.json").relative_to(REPO_ROOT)),
-        "terra_page_count": len(CANDIDATES),
+        "manifest": str((out_dir / "visual_inputs.json").relative_to(REPO_ROOT)),
+        "identity_map": str((out_dir / "review_identity_map.json").relative_to(REPO_ROOT)),
+        "packet": packet_name,
+        "terra_page_count": len(candidates),
         "source_url_count": identity_map["source_url_count"],
         "deck_intake_count": identity_map["deck_intake_count"],
     }, indent=2, sort_keys=True))
