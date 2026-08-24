@@ -74,7 +74,7 @@ def enrich_research_group_slide(slide: dict) -> dict:
     return enriched
 
 
-def markdown_to_deck_plan(markdown: str, title: str, output: str = "pptx", mode: str = "research") -> dict:
+def markdown_to_deck_plan(markdown: str, title: str, output: str = "tex", mode: str = "research") -> dict:
     slides = []
     current: dict | None = None
     for line_no, line in enumerate(markdown.splitlines(), start=1):
@@ -153,7 +153,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("markdown", type=Path)
     parser.add_argument("--title", default=None)
-    parser.add_argument("--output", choices=["pptx", "tex", "pdf", "google-slides"], default="pptx")
+    parser.add_argument("--output", choices=["pptx", "tex", "pdf", "google-slides"], default="tex")
     parser.add_argument("--mode", choices=["research", "research-group-meeting"], default="research")
     parser.add_argument("--write", type=Path, help="Write JSON deck plan to this path")
     args = parser.parse_args()

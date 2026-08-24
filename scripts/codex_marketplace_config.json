@@ -190,7 +190,7 @@
       "name": "presentations",
       "version": "4.4.1",
       "displayName": "Presentations",
-      "description": "Evidence-first research-group-meeting, research, and business presentation planning with editable PPTX/Slides routing, explicit Beamer/LaTeX fallback, deck-plan schema, source fidelity, archetypes, and rendered scientific QA.",
+      "description": "Evidence-first research-group-meeting, research, and business presentation planning with exact CUHK Beamer/PDF as the default research route, explicit editable PPTX/Slides overrides, deck-plan schema, source fidelity, archetypes, and rendered scientific QA.",
       "category": "Research",
       "brandColor": "#72256D",
       "composerIcon": "./assets/codex/plugin-icons/presentations/composer.svg",
@@ -202,9 +202,9 @@
         }
       ],
       "defaultPrompt": [
-        "Plan an editable evidence-first group-meeting research PPT.",
+        "Plan an exact CUHK Beamer/PDF group-meeting research deck.",
         "Build a research-group-meeting deck plan with an Evidence Board and scientific QA.",
-        "Turn this Markdown into an editable deck plan.",
+        "Turn this Markdown into a source-editable CUHK Beamer deck plan.",
         "Choose the right PPTX/Slides vs Beamer route.",
         "Plan a Beamer talk when LaTeX slides are explicitly requested.",
         "Plan a business decision deck."
