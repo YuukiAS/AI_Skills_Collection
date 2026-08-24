@@ -30,20 +30,25 @@
 4. **One-Call Production Entry + Quality Loop**：普通 `research-presentations` 入口真实自动走 source fidelity、reference retrieval、generation、render、Terra item-level/page review、deck-rhythm review与 bounded repair。
 5. **Two Real Paper Holdouts + Human Closure**：一篇真实 statistics/biostatistics/methodology paper + 一篇真实 medical-imaging paper，完整 one-shot CUHK group-meeting decks；Terra、Planner 均 PASS 后进入用户人工门，只有用户明确接受两套结果才可 `ONE_SHOT_QUALITY_PASS`。
 
-## Next bounded task
+## Current bounded task
 
-Planner 下一步只允许创建 **Stage 1 — Product Contract Reset** 的新 task。
+当前任务：
 
-该 task 应最小但完整地关闭以下矛盾：
+`024_research_presentation_product_contract_reset`
+
+024 已由 Planner 创建并冻结，只负责 Stage 1 — Product Contract Reset。Executor 应按其 `REQUEST.md` / `PLAN.md` 执行；不得自行继续 Stage 2。
+
+024 必须最小但完整地关闭以下矛盾：
 
 - active `research-presentations/SKILL.md` 当前仍把未指定格式 research/group-meeting 默认路由到 editable PPTX；
 - `template-routing.md` / `ppt-skill-routing.md` 与测试仍锁定旧默认；
+- `markdown_to_deck_plan.py` 默认 output 仍为 `pptx`；
 - exact CUHK README 已经声明 `beamer/source/` 才是 canonical，而 derived PPTX scaffold 不是 exact workflow；
 - Program Goal 已改为第一成熟 route 默认 exact CUHK Beamer/PDF。
 
-Stage 1 task 不得开始做新 layout、扩 reference corpus、跑最终 holdout或修 023 renderer。它只负责让 production contract/source/tests 与 Program Goal 一致，并明确下一阶段入口。
+024 不得开始新 layout、扩 reference corpus、跑最终 holdout或修 023 renderer。它只负责让 production contract/source/tests 与 Program Goal 一致。
 
-Stage 1 PASS 后，Planner 才能创建 Stage 2 task。
+024 PASS 后，Planner 才能创建 Stage 2 task。
 
 ## Non-negotiable final acceptance
 
