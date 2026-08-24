@@ -1,14 +1,14 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 026_research_presentation_discussion_next_experiment_gold_recovery
-implementation_commit: 45ac2a0647fb9a486ba47f64bed300c3e09f4c73
+implementation_commit: 490f879f1794603b0c906719e6321ec068e07de5
 ---
 
 # 026 Result — Discussion / Next-Experiment Gold Recovery
 
 ## Implementation commit
 
-`45ac2a0647fb9a486ba47f64bed300c3e09f4c73`
+`490f879f1794603b0c906719e6321ec068e07de5`
 
 ## What changed
 
