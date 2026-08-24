@@ -1,104 +1,62 @@
 # Research Presentation Current Round
 
-上一轮 synthetic statistical / medical-imaging benchmark 继续只作为工程链路、科学正确性和基础视觉 QA baseline，不是高质量科研汇报的 gold visual baseline。长期 `PROGRAM_MATURE=false`。
+当前仍属于 `REFERENCE_CALIBRATED_ONE_SHOT_QUALITY`，但产品路线已根据用户最终要求重新冻结。长期 `PROGRAM_MATURE=false`。
 
-当前仍处于 **REFERENCE_CALIBRATED_ONE_SHOT_QUALITY** round。Reviewed Handoff 继续作为主流程：每个阶段拆成独立 bounded task，最多两轮 review；Codex Executor 不得根据长期 roadmap 自主连续实现多个阶段。
+**Source of truth：** `RESEARCH_PRESENTATION_CORPUS_PROGRAM_GOAL.md` 的 Five-Stage Closure Roadmap 与 Final Quality Gates。
 
-## 已完成：018 外部 Presentation 方法审计
+## Human decision on 023
 
-`018_presentation_external_method_audit` 已 PASS。
+`023_research_presentation_deck_design_system_integration` 保持历史 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE`，不伪造第三轮，也不做 recovery。
 
-核心结论：当前主要缺口不是继续堆抽象规则，而是把真实优秀 reference slide 转成机器可用、可进入生成决策的设计表示。
+用户决定：023 所修复的 low-level editable-PPTX design-profile renderer **不再是当前第一成熟 production route**。因此 023 作为 engineering history / reusable evidence 保留，但其剩余 spacing/caption/image-panel blocker 不再阻止新的 production program。
 
-## 已完成：019 Reference Composition Representation
+不要修改 023 的历史 REVIEW/CURRENT 为 PASS。
 
-`019_research_presentation_exemplar_composition_representation` 已 PASS。
+## Corrected product direction
 
-当前 composition layer 已包含 13 个真实 inspected composition records、8 类 renderer-neutral composition families、normalized geometry / hierarchy / alignment / reading flow、deterministic validator、只读 selector 与不含 source pixels 的 abstract debug montage。
+第一成熟目标是：用户只给一篇真实科研 paper，普通 `research-presentations` 调用一次，即得到可直接用于博士组会的、exact CUHK 风格、内容具体、审美成熟、无明显 AI 模板感的完整 `.tex + PDF`。
 
-019 证明系统已经能机器读取“优秀科研页面怎么构图”。
+未显式要求 editable PowerPoint 时，不再把 PPTX/scaffold 作为当前主路线。Exact CUHK 必须直接使用：
 
-## 已完成：020 Reference-Calibrated Candidate Search
+`skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/`
 
-`020_research_presentation_reference_calibrated_candidate_search` 已在第二轮独立审核中 PASS。
+现有 `design-tokens.json`、`pptx/build_reference_deck.py`、`cuhk-reference-deck.pptx` 只属于 derived/non-exact scaffold，不得作为 exact production visual source。
 
-020 证明：
+## Five stages
 
-- 同一 scientific content 可以内部生成恰好 3 个 compositionally distinct candidates；
-- selected 019 source record 的真实 normalized geometry 已进入 candidate bbox 推导；
-- source-to-candidate split / scale / translate / reorder 可审计；
-- statistical estimator 与 medical-image 两类 request 共用同一 shared candidate engine；
-- wildcard / alternative source selection 只在 scientific-job compatible pool 中工作。
+1. **Product Contract Reset**：修正式 skill/routing/tests，使普通科研组会默认 exact CUHK Beamer/PDF，并明确 023/PPTX scaffold 非当前 production default。
+2. **Gold Scientific Composition Library**：从已经 inspected/downloaded 的成熟科研 slides 中筛 gold compositions，按真实 scientific job 进入 runtime；不无界扩 corpus。
+3. **Executable CUHK Scientific Layout System**：把 gold composition 变成 CUHK content area 的 native LaTeX/TikZ/figure/image layouts；禁止退回 generic cards/box-arrow/default plot。
+4. **One-Call Production Entry + Quality Loop**：普通 `research-presentations` 入口真实自动走 source fidelity、reference retrieval、generation、render、Terra item-level/page review、deck-rhythm review与 bounded repair。
+5. **Two Real Paper Holdouts + Human Closure**：一篇真实 statistics/biostatistics/methodology paper + 一篇真实 medical-imaging paper，完整 one-shot CUHK group-meeting decks；Terra、Planner 均 PASS 后进入用户人工门，只有用户明确接受两套结果才可 `ONE_SHOT_QUALITY_PASS`。
 
-## 已完成：021 Comparative Reference-Calibrated Visual Review
+## Next bounded task
 
-`021_research_presentation_comparative_reference_calibrated_visual_review` 已在第一轮独立审核中 PASS。
+Planner 下一步只允许创建 **Stage 1 — Product Contract Reset** 的新 task。
 
-021 证明 comparative review mechanism 已成立：
+该 task 应最小但完整地关闭以下矛盾：
 
-- statistical / medical 两个 case 都真实包含 3 个 generated candidates 与 2 个 inspected reference renders；
-- reference pixels 真实送入 `gpt-5.6-terra`；
-- Terra-visible 输入使用匿名 ID，不暴露作者、机构、RRL/SRC、candidate strategy 或 generated/reference 身份；
-- canonical inspected render SHA 与本次 actual reviewer-input SHA 分开绑定；
-- 每个 immutable case identity 只运行一次 live Terra；
-- no-winner 是合法结果，没有 best-of-three 强制晋级；
-- required CI 已 PASS。
+- active `research-presentations/SKILL.md` 当前仍把未指定格式 research/group-meeting 默认路由到 editable PPTX；
+- `template-routing.md` / `ppt-skill-routing.md` 与测试仍锁定旧默认；
+- exact CUHK README 已经声明 `beamer/source/` 才是 canonical，而 derived PPTX scaffold 不是 exact workflow；
+- Program Goal 已改为第一成熟 route 默认 exact CUHK Beamer/PDF。
 
-021 同时给出了可信的负面质量基线：统计 generated candidates 全部低于成熟公式页 reference bar，医学影像 candidates 也存在 image prominence / panel integration / fixture 感问题。
+Stage 1 task 不得开始做新 layout、扩 reference corpus、跑最终 holdout或修 023 renderer。它只负责让 production contract/source/tests 与 Program Goal 一致，并明确下一阶段入口。
 
-## 已完成：022 Candidate Visual Finish Repair
+Stage 1 PASS 后，Planner 才能创建 Stage 2 task。
 
-`022_research_presentation_candidate_visual_finish_repair` 已在第一轮独立审核中 PASS。
+## Non-negotiable final acceptance
 
-022 关闭了 021 暴露出的 candidate-layer visual-finish blocker，同时保持 019/020 reference-to-geometry 与 semantic compatibility：
+最终两个真实 paper deck 必须满足：
 
-- statistical generated `reference_faithful` candidate 在匿名 comparative review 中达到 mature research-group-meeting / strong conference-talk bar；公式对比度、投影可读性与 direct mathematical annotation 已实质修复；
-- medical generated `controlled_wildcard` 与 `alternative_composition` 达到成熟组会水平；image prominence、panel labels、legend 与 annotation integration 已明显改善；
-- 三候选继续共享同一 page-level visual tokens，差异来自 composition 而不是换 theme；
-- old candidate identities 保留，repair 后产生新的 preview SHA；
-- 每个 repaired immutable identity 只运行一次 live Terra；
-- required CI 已 PASS。
+- 真实 paper notation / model / dataset / endpoint / figures / medical images 主导页面；不得用泛化 `alpha/beta/x/y` 占位符替代具体科研对象（除非它们本来就是 paper 的正式定义记号）；
+- 不允许 rounded-card dashboard、空表格、generic box-arrow、默认流程图、默认 Matplotlib 脸、AI 元语言填页；
+- 不是论文摘要分页，而是像优秀博士生真正读懂 paper 后给导师组会做的汇报；
+- exact CUHK template 真实加载；
+- 已下载/检查资源只有在 runtime selected/consumed 并改变输出时才算利用；
+- Terra 必须读 item-level/page-level 质量，不能拿 top-level package PASS 冒充成熟质量；
+- 正常 production entrypoint 真实工作；
+- statistics 和 medical-imaging 两套完整 deck 都经过 Planner 独立验收；
+- 最后由用户本人查看并明确接受。
 
-这证明单页 candidate engine 已开始接近真实成熟 reference bar，但还不能推出完整 deck 已成熟。
-
-## 当前 bounded task
-
-当前任务：
-
-`023_research_presentation_deck_design_system_integration`
-
-023 已完成两轮正式 review，当前停在人工决策点，**尚未 PASS**。真实 CI 已成功；第二轮继续 `REVISE` 的原因不是工程失败，而是第一轮同一个 design-profile integration blocker 只部分关闭。
-
-已经成立的部分：
-
-- deck profile 已真正驱动字体、字号、颜色角色、annotation leader 与 equation highlight / leader role；
-- profile mutation 已证明修改 `accent` / `title_pt` 会改变 native PPTX XML，同时 page-local geometry signature 保持稳定；
-- 两套 coherent multi-page PPTX engineering fixtures、real render、mechanical QA 与 composition diversity 都继续通过。
-
-仍未闭合的部分：
-
-- `spacing.outer_margin/object_gap/annotation_gap/panel_label_gap` 仍主要只是 profile metadata，实际 title/caption/panel-label 等位置仍存在固定字面坐标；
-- `image_panel.label_position/legend_binding/container_role` 与 `caption.position/style` 仍没有完整驱动 renderer；
-- 当前 mutation regression 只覆盖颜色和标题字号，不能证明剩余 spacing / caption / image-panel contract 已成为 executable design-system input。
-
-因此 023 已达到两轮 review limit，当前状态为 `AWAIT_HUMAN_DECISION`。在用户明确授权恢复之前，不得自动开启第三轮修复，也不得提前创建 contact-sheet / deck-rhythm QA task。
-
-## 后续 roadmap（非 Executor 授权）
-
-如果用户授权一次严格限定的 023 recovery，应只补齐剩余 design-profile executable contract，并通过新的 mutation regression + real CI 做 recovery closure；不得改 reference corpus、019/020/021/022 机制，也不得提前开始 holdout。
-
-只有 023 recovery 独立关闭后，Planner 才创建下一 bounded task 进入正式 **contact-sheet / deck-rhythm QA**。
-
-随后长期仍需完成：
-
-- real statistical holdout one-shot；
-- real medical-imaging holdout one-shot；
-- 必要时独立 Beamer holdout。
-
-没有对应 `PLAN_FROZEN` 时，Executor 不得自行开始这些阶段。
-
-## 当前完成条件
-
-本 round 只有在 reference-to-composition transfer、内部设计探索、comparative review、candidate visual quality、deck-wide design-system integration、deck-rhythm QA 与两个真实 holdout one-shot benchmark 全部成立后，才有资格写 `ONE_SHOT_QUALITY_PASS`。
-
-当前绝不能宣告本轮 PASS，也不能再次用单一 Terra absolute PASS 关闭 design-quality 目标。
+任何 synthetic fixture、engineering mini-deck、单页 candidate、CI PASS、mechanical QA 或 Terra top-level `PASS` 都不能代替上述最终验收。
