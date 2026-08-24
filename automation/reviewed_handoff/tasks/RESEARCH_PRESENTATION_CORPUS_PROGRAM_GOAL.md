@@ -30,6 +30,24 @@ Audience-facing slide 必须使用目标 paper / data / experiment 的真实科�
 
 目标观感：像一名优秀博士生认真读完 paper、理解方法和证据后，为导师组会重新组织并制作的汇报，而不是“AI 把论文摘要分页”。
 
+## Quality-Preserving Continuation Policy
+
+本 program 默认选择**保持最高冻结质量标准**，而不是为了少跑一轮、少搜几个 source 或更快进入下一 Stage 而放宽合同。
+
+Human gate 只用于真正需要用户改变产品/科学语义、接受质量下降、承担明显新的成本/风险，或最终 Stage 5 artifact 验收；不用于“一个选项保持冻结质量门槛、另一个选项只是放宽门槛”的显然选择。遇到这种情况，Planner 必须自动选择保持质量门槛的路线。
+
+如果某个 bounded task 达到 review/plan limit，但 blocker 已被真实 evidence 明确定位，并且存在唯一、质量保持、范围可界定的后续修复路径：
+
+- 保留原 task 的 `REVIEW_LIMIT / AWAIT_HUMAN_DECISION` 历史，不伪造第三轮；
+- Planner 可直接创建一个新的 bounded recovery task，不必再次等待用户；
+- recovery 必须只处理尚未关闭的 blocker，保留已经 PASS 的实现/evidence，不重做已通过部分；
+- recovery 必须使用新的、与 blocker 对应的有限搜索空间或实现机制，禁止重复同一失败动作形成无限 task/retry 链；
+- 必须写清停止条件和资源边界；无法在新边界内取得新增 evidence 时再判断是否出现了真正需要用户决定的新问题。
+
+为补齐明确的 reference-coverage 缺口，小规模、定向、rights-safe 的公开 source scouting / intake / real-pixel admission 视为本 program 已预授权的质量保持 recovery，只要它不涉及私有数据、付费采购、许可不明素材或无界 corpus 扩张。
+
+不要通过增加单 task 的无限 review 次数来实现上述 continuation。每个 bounded task 仍保持少量独立 review；跨任务 recovery 用于隔离新 scope、保留失败历史并避免 sunk-cost repair。
+
 ## Five-Stage Closure Roadmap
 
 ### Stage 1 — Product Contract Reset
