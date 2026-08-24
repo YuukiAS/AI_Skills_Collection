@@ -1,0 +1,198 @@
+{
+  "blocking_findings": [],
+  "created_at": "2026-08-24T18:17:49Z",
+  "evidence_id": "visual-review-026_discussion_gold_admission-dc18bf0b4732",
+  "images": [
+    {
+      "logical_id": "item_A",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/inputs/item_A.png",
+      "sha256": "e1577f27dcd0201d793ec1c7b29ff185201891a86e233fdcf946af5c4bc64000"
+    },
+    {
+      "logical_id": "item_B",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/inputs/item_B.png",
+      "sha256": "3d5a141db16bd6a66a6940732a896008d84e7460e8d9a86b9d761d2f42c8a74a"
+    },
+    {
+      "logical_id": "item_C",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/inputs/item_C.png",
+      "sha256": "577e6342e60ab7c2edad94bc91f66b04fc93da41d35f2bf49fdff428d02f736b"
+    },
+    {
+      "logical_id": "item_D",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/inputs/item_D.png",
+      "sha256": "34fa344ded6ee08b8c42b8ae6420b3ae25c21b104ede25f592c8aca50ca650f5"
+    },
+    {
+      "logical_id": "item_E",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/inputs/item_E.png",
+      "sha256": "1af681f77f1460b3b54fa006e612d5e984a12fbcbb3e179e869d2317f28b158c"
+    },
+    {
+      "logical_id": "item_F",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/inputs/item_F.png",
+      "sha256": "8ea703a1586142d8ba1d8d716532a7ceeefe1b64cb6aecb52d52b8a94e38b9a4"
+    },
+    {
+      "logical_id": "item_G",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/inputs/item_G.png",
+      "sha256": "96fc3c75027ae418fb8f41c6cc49b55a80234c99faa06be27570ac6d23b19af5"
+    },
+    {
+      "logical_id": "item_H",
+      "mime_type": "image/png",
+      "path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_1/inputs/item_H.png",
+      "sha256": "e4d4ea14ab8e55666ca3a3fd0ddba288963218ca183eff1f46361f13444ca84c"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "adapter_identity": "026_gold_admission_1",
+      "immutable_review_identity_sha256": "5d5b674567c76383ea75f7a7302c3b17921a0d40d3d17288d1859a53e83bd201",
+      "item_sha256_by_anonymous_id": {
+        "item_A": "e1577f27dcd0201d793ec1c7b29ff185201891a86e233fdcf946af5c4bc64000",
+        "item_B": "3d5a141db16bd6a66a6940732a896008d84e7460e8d9a86b9d761d2f42c8a74a",
+        "item_C": "577e6342e60ab7c2edad94bc91f66b04fc93da41d35f2bf49fdff428d02f736b",
+        "item_D": "34fa344ded6ee08b8c42b8ae6420b3ae25c21b104ede25f592c8aca50ca650f5",
+        "item_E": "1af681f77f1460b3b54fa006e612d5e984a12fbcbb3e179e869d2317f28b158c",
+        "item_F": "8ea703a1586142d8ba1d8d716532a7ceeefe1b64cb6aecb52d52b8a94e38b9a4",
+        "item_G": "96fc3c75027ae418fb8f41c6cc49b55a80234c99faa06be27570ac6d23b19af5",
+        "item_H": "e4d4ea14ab8e55666ca3a3fd0ddba288963218ca183eff1f46361f13444ca84c"
+      },
+      "page_job_contract": "discussion / next experiment production gold composition admission"
+    },
+    "manifest_sha256": "dc18bf0b4732293e6cc003806cc2688a9d6e7a026da388da4496019f16c78193",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "You are reviewing anonymous public-safe rendered research-slide pages for 026 discussion/next-experiment production-gold admission. Inspect the actual pixels for every item. Do not infer quality from order, file names, metadata, SHA values, or presumed provenance.\nFor each item, decide whether the visible composition reaches a mature doctoral research-group meeting or strong conference-talk bar for reuse as an abstract composition reference for DISCUSSION, NEXT_EXPERIMENT, OPEN_QUESTION, or LIMITATION_TO_NEXT_TEST pages. PASS means the page has a real scientific object, a clear relationship between present evidence or limitation and the next research action, mature hierarchy, projection-readable typography, disciplined whitespace, useful annotation/caption/legend/panel relations, and no generic future-work/card-dashboard/template feel. REVISE means it remains an ordinary inspected reference only. BLOCKED means pixels cannot be assessed.\nFor every item, state the primary scientific object, the discussion/next-experiment page-job fit, visual maturity, projection readability, and the admission or rejection reason. Do not admit a page merely because it says future work, discussion, or open question; the visible composition must actually support scientific reasoning or next validation planning. Top-level PASS means the packet is assessable; item-level decisions carry admission semantics.",
+      "source_contracts": []
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "REVISE",
+      "item_id": "item_A",
+      "observations": [
+        "Primary scientific object: none; the page is a red section divider with the prompt “What can we learn from these two limitations?”",
+        "Page-job fit: announces a discussion but provides neither the limitations nor a next validation action.",
+        "Visual maturity: clean, high-contrast section styling, but it is only a title-card composition.",
+        "Projection readability: the large white title and subtitle are highly readable.",
+        "Rejection reason: lacks evidence, an explanatory object, annotations, and a limitation-to-test relationship."
+      ],
+      "requirement_ids": [],
+      "summary": "Readable discussion divider, not an admissible scientific discussion or next-experiment reference."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_B",
+      "observations": [
+        "Primary scientific object: a text-only conclusion about stochastic defenses and input-distribution shifts.",
+        "Page-job fit: presents interpretation of results, but no visible evidence object or concrete next experiment.",
+        "Visual maturity: orderly typographic hierarchy and spacing, but visually generic bullet formatting.",
+        "Projection readability: large dark text and red bullets are readable from projection distance.",
+        "Rejection reason: the claims are unsupported by a plot, model, or annotated mechanism and do not specify a next validation action."
+      ],
+      "requirement_ids": [],
+      "summary": "Clear conclusion slide, but insufficiently object-led or experiment-oriented for gold admission."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_C",
+      "observations": [
+        "Primary scientific object: a brace grouping “Orthogonal Models,” “Independent Patches,” and “Different Modalities.”",
+        "Page-job fit: asks future-research questions and lists possible directions, yet the relationship to a demonstrated limitation or planned test is not visualized.",
+        "Visual maturity: clean hierarchy and restrained accent color, but the composition remains a conventional question-and-bullet slide.",
+        "Projection readability: title and major bullets are large and clear; the brace grouping is smaller but legible.",
+        "Rejection reason: generic future-work structure without present evidence, measurable validation logic, or a substantive scientific object."
+      ],
+      "requirement_ids": [],
+      "summary": "Legible future-research prompt, but not a mature next-experiment reasoning composition."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_D",
+      "observations": [
+        "Primary scientific object: a two-part human/digital-twin lifecycle illustration showing treatment and a networked modeling loop.",
+        "Page-job fit: the recommendation identifies VV UQ as important, but the bullets describe broad needs rather than a specific limitation-to-next-test plan.",
+        "Visual maturity: strong dark/light split and a relevant illustrative object, though the four long bullets create a dense, recommendation-style layout.",
+        "Projection readability: the heading is clear; body bullets and fine labels within the illustration are comparatively small.",
+        "Rejection reason: the visual supports a broad recommendation, not a concrete research decision, evidence interpretation, or next validation design."
+      ],
+      "requirement_ids": [],
+      "summary": "Relevant illustrative object and polished styling, but too broad and text-led for gold next-experiment reuse."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_E",
+      "observations": [
+        "Primary scientific object: a multi-panel digital-twin trade-off diagram spanning development, operation, trust, speed, and update cadence.",
+        "Page-job fit: connects a broad digital-twin framing to trade-offs, but does not turn a visible limitation into a discrete next experiment.",
+        "Visual maturity: the diagram provides useful conceptual structure, but the oversized headline dominates and the lower closing sentence is visibly cut off at the bottom.",
+        "Projection readability: headline is very large; several diagram labels, citation text, and the cropped lower text are not projection-ready.",
+        "Rejection reason: visible cropping and small embedded labels undermine reuse; the page is conceptual framing rather than next-test planning."
+      ],
+      "requirement_ids": [],
+      "summary": "Contains a useful trade-off object, but clipping and lack of an explicit next-action relationship prevent admission."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_F",
+      "observations": [
+        "Primary scientific object: a side-by-side system diagram contrasting a monolithic digital twin with two coupled subsystem twins.",
+        "Page-job fit: the question about modular formulation is supported by the comparison, but no limitation, evaluation criterion, or proposed validating experiment is stated.",
+        "Visual maturity: meaningful comparative diagram, but the right edge truncates the headline and a portrait/name block intrudes at the lower left.",
+        "Projection readability: major subsystem labels are readable; smaller connection labels are dense, and the title is visibly clipped.",
+        "Rejection reason: a promising conceptual comparison is compromised by clipping and lacks a clear evidence-to-test discussion structure."
+      ],
+      "requirement_ids": [],
+      "summary": "Useful scientific comparison, but incomplete page finish and missing next-experiment logic make it an ordinary reference."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_G",
+      "observations": [
+        "Primary scientific object: a federated-digital-twin coupling diagram linked by a red curved arrow to a battery-state-of-charge uncertainty plot.",
+        "Page-job fit: strongest in the packet; it explicitly asks whether coupling and update rates can achieve acceptable uncertainty and trusted stability, tying an observable uncertainty object to a research question.",
+        "Visual maturity: purposeful diagram–plot–question relationship with a clear directional annotation, though the title is cut off at the right edge and the plot is very small.",
+        "Projection readability: the large question is readable; plot axes, tick labels, and internal diagram labels are too small for reliable projection viewing.",
+        "Rejection reason: despite strong scientific reasoning structure, visible title truncation and undersized evidence detail prevent production-gold admission."
+      ],
+      "requirement_ids": [],
+      "summary": "Closest to the target page-job, but not polished or readable enough for gold reuse."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "item_H",
+      "observations": [
+        "Primary scientific object: a layered collage of colored digital-twin topic labels over a faint background flow diagram.",
+        "Page-job fit: presents a field/topic landscape rather than a discussion conclusion, limitation, open question, or next experiment.",
+        "Visual maturity: visually energetic but reads as a thematic tag collage; labels overlap a washed-out background without an argument path.",
+        "Projection readability: large colored labels are readable, but the background model is intentionally faint and not usable as evidence.",
+        "Rejection reason: no specific scientific relationship, evidence interpretation, or next validation action; the composition has a generic topic-dashboard feel."
+      ],
+      "requirement_ids": [],
+      "summary": "Topic overview rather than an admissible discussion or next-experiment composition."
+    }
+  ],
+  "non_blocking_notes": [
+    "All eight rendered pages are visually assessable.",
+    "No item reaches admission quality; item_G is the strongest reasoning-oriented reference but has visible clipping and insufficiently large evidence detail."
+  ],
+  "overall_decision": "PASS",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "dc18bf0b4732293e6cc003806cc2688a9d6e7a026da388da4496019f16c78193",
+  "review_kind": "research-gold-discussion-next-experiment-admission",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "PASS",
+  "task_key": "026_discussion_gold_admission",
+  "workflow_type": "generic"
+}
