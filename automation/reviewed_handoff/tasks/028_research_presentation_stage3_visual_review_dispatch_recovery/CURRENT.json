@@ -1,0 +1,18 @@
+{
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "task_key": "028_research_presentation_stage3_visual_review_dispatch_recovery",
+  "state": "PLAN_FROZEN",
+  "review_round": 0,
+  "max_review_rounds": 2,
+  "plan_revision": 0,
+  "max_plan_revisions": 1,
+  "base_commit": "af39dec968eeaca5e2bbb829bf98c0216f8f0dec",
+  "base_branch": "main",
+  "implementation_commit": null,
+  "ci_required": false,
+  "ci_status": "NOT_REQUIRED",
+  "last_review_decision": null,
+  "review_limit_reached": false,
+  "human_gate_reason": null,
+  "next_action": "RUN_CODEX_EXECUTOR"
+}
