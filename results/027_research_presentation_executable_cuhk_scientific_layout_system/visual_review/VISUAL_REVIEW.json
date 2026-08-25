@@ -1,43 +1,52 @@
 {
   "blocking_findings": [
     {
-      "evidence": "The coverage chart occupies a small central area; its panel axes, legend, and callout text are extremely small relative to the page.",
-      "finding_id": "F-01",
+      "evidence": "The coverage plot occupies a relatively small central area; its facet titles, axes, legend, and annotation are visibly tiny at the rendered page scale.",
+      "finding_id": "F1",
       "item_id": "slide_3_real_data_application",
-      "recommendation": "Enlarge the coverage figure substantially and scale its labels, legend, and annotations for projection reading.",
-      "requirement_id": "projection-readable scientific object",
+      "recommendation": "Enlarge the plot substantially and scale its axes, legend, facet labels, and callouts for projection viewing.",
+      "requirement_id": "main_scientific_object_projection_readable",
       "severity": "blocking",
-      "summary": "Primary evidence plot is too small to inspect."
+      "summary": "Coverage evidence is too small to inspect confidently."
     },
     {
-      "evidence": "The lower explanatory text visibly overlaps itself beneath the bar chart, creating an illegible doubled line.",
-      "finding_id": "F-02",
-      "item_id": "slide_5_negative_result",
-      "recommendation": "Reflow or remove the overlapping text and reserve clear space for a readable interpretation tied to the plot.",
-      "requirement_id": "no clipped or overlapping content",
-      "severity": "blocking",
-      "summary": "Negative-result page contains visibly illegible overlapping text."
-    },
-    {
-      "evidence": "The page consists of four uniform outlined boxes joined by arrows, with very large unused white areas and no scientific diagram detail beyond the labels.",
-      "finding_id": "F-03",
+      "evidence": "The page is a sparse four-box, arrow-linked workflow with no scientific quantities, design settings, or visual evidence beyond generic labels.",
+      "finding_id": "F2",
       "item_id": "slide_4_experiment_design",
-      "recommendation": "Replace the generic pipeline fixture with a scientifically specific design diagram showing variables, experimental factors, measurements, and decision points.",
-      "requirement_id": "scientific specificity / no generic box-arrow fixture",
+      "recommendation": "Replace the generic workflow fixture with a scientifically specific design diagram that exposes clustering factors, sampled units, procedures, and evaluated outcomes.",
+      "requirement_id": "scientific_specificity_no_generic_box_arrow",
       "severity": "blocking",
-      "summary": "Experiment-design diagram is a generic box-and-arrow sequence."
+      "summary": "Experiment-design page reads as a generic box-arrow template."
     },
     {
-      "evidence": "The page uses the same four-box arrow chain as the design page, with only a short sentence below and large empty space.",
-      "finding_id": "F-04",
-      "item_id": "slide_7_next_experiment",
-      "recommendation": "Show the proposed experiment's hypothesis, comparison arms, measurable endpoints, and decision criterion in a research-specific reasoning graphic.",
-      "requirement_id": "concrete next-experiment reasoning / no generic box-arrow fixture",
+      "evidence": "The explanatory text beneath the bar chart visibly overlaps itself, creating an illegible dark band across the lower center of the page.",
+      "finding_id": "F3",
+      "item_id": "slide_5_negative_result",
+      "recommendation": "Reflow or remove the overlapping text, then enlarge the negative-evidence chart and retain a single readable interpretation tied to the marked failure.",
+      "requirement_id": "no_clipping_or_overlapping_content",
       "severity": "blocking",
-      "summary": "Next-experiment content is presented as a generic workflow rather than inspectable experimental reasoning."
+      "summary": "Overlapping body text makes the negative-result page visually broken."
+    },
+    {
+      "evidence": "Each medical panel is small, and the lesion/error markings are minute; the GT and error details cannot be meaningfully inspected at normal projection scale.",
+      "finding_id": "F4",
+      "item_id": "slide_6_medical_image_comparison",
+      "recommendation": "Enlarge the same-case panels and lesion/error overlays, with larger panel-specific annotations or zoomed crops.",
+      "requirement_id": "medical_panels_large_enough_to_inspect",
+      "severity": "blocking",
+      "summary": "Medical comparison evidence is too small for inspection."
+    },
+    {
+      "evidence": "The page is another sparse sequence of four rounded boxes and arrows; it states proposed comparators but does not visually show a concrete test design, decision criterion, or expected diagnostic outcome.",
+      "finding_id": "F5",
+      "item_id": "slide_7_next_experiment",
+      "recommendation": "Show the experimental factors, selection rule, comparator setup, coverage criterion, and resulting decision path in a research-specific visual.",
+      "requirement_id": "next_experiment_concrete_research_reasoning",
+      "severity": "blocking",
+      "summary": "Next-experiment content is a generic workflow rather than mature experimental reasoning."
     }
   ],
-  "created_at": "2026-08-25T05:45:36Z",
+  "created_at": "2026-08-25T05:49:42Z",
   "evidence_id": "visual-review-027_research_presentation_executable_cuhk_scientific_layout_system-6e2e6dab29b0",
   "images": [
     {
@@ -129,100 +138,94 @@
   },
   "item_reviews": [
     {
-      "decision": "REVISE",
+      "decision": "PASS",
       "item_id": "slide_2_statistical_model",
       "observations": [
-        "Typeset statistical notation is clean and prominent.",
-        "Most of the page is empty; the equation and one explanatory sentence provide little visible model structure or scientific context.",
-        "No explicit CUHK name or mark is visible; only the purple navigation strip is present."
+        "Purple section navigation and page framing are visible.",
+        "The mixed-effects model is centered, large, and genuinely typeset.",
+        "The supporting ICC relation is typeset and directly explains why cluster count affects calibration.",
+        "The sparse composition keeps the model as the dominant readable scientific object."
       ],
       "requirement_ids": [
-        "CUHK Beamer identity visible",
-        "scientific specificity",
-        "meaningful use of page space",
-        "genuinely typeset math"
+        "CUHK_beamer_identity_visible",
+        "main_scientific_object_projection_readable",
+        "math_genuinely_typeset"
       ],
-      "summary": "Readable native math, but the page is overly sparse and the visible institutional identity is not explicit."
+      "summary": "A clean model page with prominent readable mathematics."
     },
     {
       "decision": "REVISE",
       "item_id": "slide_3_real_data_application",
       "observations": [
-        "The three-panel coverage plot, axis labels, legend, and callout are too small for inspection at page scale.",
-        "The large left text block and unused whitespace dominate the page rather than the stated main plot.",
-        "No explicit CUHK name or mark is visible."
+        "The plot is visually subordinate to large empty space.",
+        "Three-panel coverage traces are present, but fine labels and legend text are too small for reliable projection reading.",
+        "The left takeaway is readable and tied to the small-center stress condition."
       ],
       "requirement_ids": [
-        "CUHK Beamer identity visible",
-        "projection-readable scientific object",
-        "readable panel labels legends and annotations"
+        "main_scientific_object_projection_readable",
+        "figure_labels_legends_readable"
       ],
-      "summary": "Coverage evidence is visibly undersized."
+      "summary": "Scientific message is present, but the central evidence is undersized."
     },
     {
       "decision": "REVISE",
       "item_id": "slide_4_experiment_design",
       "observations": [
-        "The central object is a uniform four-step box-and-arrow chain.",
-        "It does not visibly encode concrete simulation factors, relationships, or diagnostics beyond short labels.",
-        "No explicit CUHK name or mark is visible."
+        "Purple navigation and heading styling are consistent.",
+        "The central object consists only of four rounded boxes joined by arrows.",
+        "Labels such as “DGP knobs” and “Coverage diagnostics” do not expose a concrete experimental design."
       ],
       "requirement_ids": [
-        "CUHK Beamer identity visible",
-        "scientific specificity / no generic box-arrow fixture",
-        "meaningful use of page space"
+        "scientific_specificity_no_generic_box_arrow"
       ],
-      "summary": "Generic workflow styling does not meet the scientific-layout bar."
+      "summary": "Readable but generic workflow styling does not meet the scientific-layout bar."
     },
     {
       "decision": "REVISE",
       "item_id": "slide_5_negative_result",
       "observations": [
-        "The bar chart is readable at a basic level and includes a target line and a callout.",
-        "Two explanatory lines under the chart overlap, making the interpretation visibly illegible.",
-        "The chart and surrounding text leave substantial unused space; no explicit CUHK name or mark is visible."
+        "The bar chart has a useful target line, error bars, values, legend, and a callout to the failure.",
+        "The explanatory lines below the chart overlap and are illegible.",
+        "The overlap visibly compromises the page despite the otherwise interpretable chart."
       ],
       "requirement_ids": [
-        "CUHK Beamer identity visible",
-        "no clipped or overlapping content",
-        "readable annotations tied to scientific object"
+        "no_clipping_or_overlapping_content",
+        "negative_evidence_readable"
       ],
-      "summary": "Visible text collision blocks presentation readiness."
+      "summary": "Negative evidence is present, but the page has a major legibility defect."
     },
     {
       "decision": "REVISE",
       "item_id": "slide_6_medical_image_comparison",
       "observations": [
-        "Four same-case panels are clearly titled Input, GT, Prediction, and Error.",
-        "The lesion/error overlays and the small in-panel labels are difficult to inspect at this displayed size.",
-        "No explicit CUHK name or mark is visible."
+        "Input, GT, Prediction, and Error are clearly arranged as same-case panels.",
+        "Panel headings are readable and the caption explicitly connects the error panel to the failure explanation.",
+        "The image panels and colored lesion/error marks are too small to inspect in detail."
       ],
       "requirement_ids": [
-        "CUHK Beamer identity visible",
-        "medical panels large enough to inspect",
-        "readable panel labels and annotations"
+        "medical_panels_large_enough_to_inspect",
+        "panel_labels_annotations_readable"
       ],
-      "summary": "Same-case comparison is present, but the medical evidence and annotations are too small for detailed inspection."
+      "summary": "The comparison structure is clear, but the medical evidence is undersized."
     },
     {
       "decision": "REVISE",
       "item_id": "slide_7_next_experiment",
       "observations": [
-        "The main object repeats the uniform outlined-box-and-arrow workflow used on the experiment-design page.",
-        "The labels name possible steps, but the visible graphic does not show hypotheses, endpoints, or a concrete validation decision rule.",
-        "No explicit CUHK name or mark is visible."
+        "The narrative sentence names batch query, CR2, and wild bootstrap comparators.",
+        "The visual itself is a generic four-box arrow sequence with substantial unused space.",
+        "No displayed decision metric, factor variation, or expected outcome makes the proposed experiment operational."
       ],
       "requirement_ids": [
-        "CUHK Beamer identity visible",
-        "concrete next-experiment reasoning",
-        "scientific specificity / no generic box-arrow fixture"
+        "next_experiment_concrete_research_reasoning",
+        "scientific_specificity_no_generic_box_arrow"
       ],
-      "summary": "The next-experiment page is generic and visually repetitive rather than a concrete research decision plan."
+      "summary": "The page names a direction but does not visually articulate a concrete experiment."
     }
   ],
   "non_blocking_notes": [
-    "Purple top navigation is consistent across pages, but it does not visibly identify CUHK by name or mark.",
-    "The repeated sparse white-page composition makes several pages feel underdeveloped."
+    "The purple header/navigation and consistent serif typography provide a coherent deck-level identity across pages.",
+    "Several pages use large blank regions effectively for focus, but the generic workflow pages do not use that space to add scientific detail."
   ],
   "overall_decision": "REVISE",
   "prompt_version": "ai-bridge.visual-review.v1",
