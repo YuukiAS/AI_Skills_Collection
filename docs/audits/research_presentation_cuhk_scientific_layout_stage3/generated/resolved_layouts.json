@@ -1,0 +1,903 @@
+{
+  "schema": "RESEARCH_CUHK_STAGE3_RESOLVED_LAYOUTS_V1",
+  "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+  "layouts": [
+    {
+      "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
+      "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+      "page_id": "equation_statistical_model",
+      "page_job": "STATISTICAL_MODEL",
+      "dominant_scientific_object": "native_latex_math",
+      "selected_gold_id": "GSC-016",
+      "selected_reference_id": "RRL-020",
+      "recipe_sha256": "9615cc4bcd20f8ec2a7c1a15c91f4dd030754ac21f08b5003be5ec79a565d023",
+      "compatibility_trace": [
+        "page_function exact match",
+        "domain_family match",
+        "density match",
+        "panel_count exact match",
+        "scientific object overlap: equation, imaging, mathematical, medical, model"
+      ],
+      "exact_cuhk_content_safe_region": {
+        "x": 0.06,
+        "y": 0.185,
+        "w": 0.88,
+        "h": 0.675
+      },
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "source_to_cuhk_transform": [
+        "source primary_bbox mapped into canonical CUHK content safe region",
+        "equation primary object expanded to projection-readable floor"
+      ],
+      "resolved_primary_object_geometry": {
+        "x": 0.1988,
+        "y": 0.4283,
+        "w": 0.62,
+        "h": 0.2
+      },
+      "resolved_supporting_object_geometry": {
+        "annotation": {
+          "x": 0.1988,
+          "y": 0.6533,
+          "w": 0.62,
+          "h": 0.12
+        },
+        "caption": {
+          "x": 0.1988,
+          "y": 0.6533,
+          "w": 0.62,
+          "h": 0.12
+        }
+      },
+      "visual_hierarchy_mapping": [
+        {
+          "rank": 1,
+          "role": "objective title",
+          "reason": "names the model component"
+        },
+        {
+          "rank": 2,
+          "role": "objective equation",
+          "reason": "formula is centered and readable"
+        },
+        {
+          "rank": 3,
+          "role": "short setup text",
+          "reason": "explains optimization context"
+        }
+      ],
+      "alignment_mapping": [
+        {
+          "group_id": "objective-equation",
+          "roles": [
+            "loss terms",
+            "network components",
+            "short explanation"
+          ],
+          "relationship": "text frames the equation without crowding it"
+        }
+      ],
+      "reading_flow_mapping": "title-to-short-setup-to-centered-equation",
+      "annotation_legend_caption_panel_mapping": [
+        "explanatory text is adjacent to the equation but remains secondary"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "native_objects": [
+        {
+          "object_id": "equation_statistical_model_primary",
+          "role": "primary_scientific_object",
+          "native_type": "equation",
+          "bbox": {
+            "x": 0.1988,
+            "y": 0.4283,
+            "w": 0.62,
+            "h": 0.2
+          }
+        },
+        {
+          "object_id": "equation_statistical_model_annotation",
+          "role": "annotation",
+          "native_type": "text_callout",
+          "bbox": {
+            "x": 0.1988,
+            "y": 0.6533,
+            "w": 0.62,
+            "h": 0.12
+          }
+        },
+        {
+          "object_id": "equation_statistical_model_caption",
+          "role": "caption",
+          "native_type": "text_caption",
+          "bbox": {
+            "x": 0.1988,
+            "y": 0.6533,
+            "w": 0.62,
+            "h": 0.12
+          }
+        }
+      ],
+      "audience_safe_output_contract": {
+        "internal_ids_exposed": false,
+        "source_pixels_or_branding_reused": false,
+        "forbidden_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "review target",
+          "fixture",
+          "workflow"
+        ]
+      },
+      "resolved_layout_sha256": "700b820ff92338330fc4d65d3c7cbe77a7e9789f34fa2e5642981325293cb4bd"
+    },
+    {
+      "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
+      "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+      "page_id": "quantitative_result_uncertainty",
+      "page_job": "REAL_DATA_APPLICATION",
+      "dominant_scientific_object": "coverage_plot",
+      "selected_gold_id": "GSC-014",
+      "selected_reference_id": "RRL-016",
+      "recipe_sha256": "c409cd71c5831d4e4ad49ef4cb7d3c6cdf85deee1f19a1fc11a191adc51c11bc",
+      "compatibility_trace": [
+        "page_function exact match",
+        "domain_family match",
+        "density match",
+        "panel_count exact match",
+        "scientific object overlap: biostatistics, comparison, quantitative, result, table"
+      ],
+      "exact_cuhk_content_safe_region": {
+        "x": 0.06,
+        "y": 0.185,
+        "w": 0.88,
+        "h": 0.675
+      },
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "source_to_cuhk_transform": [
+        "source primary_bbox mapped into canonical CUHK content safe region",
+        "figure primary object expanded to projection-readable floor"
+      ],
+      "resolved_primary_object_geometry": {
+        "x": 0.28,
+        "y": 0.346,
+        "w": 0.66,
+        "h": 0.36
+      },
+      "resolved_supporting_object_geometry": {
+        "annotation": {
+          "x": 0.06,
+          "y": 0.346,
+          "w": 0.195,
+          "h": 0.36
+        },
+        "caption": {
+          "x": 0.28,
+          "y": 0.731,
+          "w": 0.66,
+          "h": 0.12
+        }
+      },
+      "visual_hierarchy_mapping": [
+        {
+          "rank": 1,
+          "role": "claim title",
+          "reason": "states the result before the table"
+        },
+        {
+          "rank": 2,
+          "role": "large result table",
+          "reason": "numeric comparison is the evidence"
+        },
+        {
+          "rank": 3,
+          "role": "bottom conclusion",
+          "reason": "interprets the table in one sentence"
+        }
+      ],
+      "alignment_mapping": [
+        {
+          "group_id": "table-evidence",
+          "roles": [
+            "group columns",
+            "IAA row",
+            "p-value row",
+            "effect-size row"
+          ],
+          "relationship": "headers and rows organize evidence-to-claim"
+        }
+      ],
+      "reading_flow_mapping": "claim-title-to-factor-note-to-table-to-conclusion",
+      "annotation_legend_caption_panel_mapping": [
+        "conclusion sits close to the table and does not replace numeric evidence"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "native_objects": [
+        {
+          "object_id": "quantitative_result_uncertainty_primary",
+          "role": "primary_scientific_object",
+          "native_type": "figure",
+          "bbox": {
+            "x": 0.28,
+            "y": 0.346,
+            "w": 0.66,
+            "h": 0.36
+          }
+        },
+        {
+          "object_id": "quantitative_result_uncertainty_annotation",
+          "role": "annotation",
+          "native_type": "text_callout",
+          "bbox": {
+            "x": 0.06,
+            "y": 0.346,
+            "w": 0.195,
+            "h": 0.36
+          }
+        },
+        {
+          "object_id": "quantitative_result_uncertainty_caption",
+          "role": "caption",
+          "native_type": "text_caption",
+          "bbox": {
+            "x": 0.28,
+            "y": 0.731,
+            "w": 0.66,
+            "h": 0.12
+          }
+        }
+      ],
+      "audience_safe_output_contract": {
+        "internal_ids_exposed": false,
+        "source_pixels_or_branding_reused": false,
+        "forbidden_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "review target",
+          "fixture",
+          "workflow"
+        ]
+      },
+      "resolved_layout_sha256": "2aa49a8ef75ec40f0e381c845d04b73eacfce13e0b11f1b79ebd69231bc96c8d"
+    },
+    {
+      "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
+      "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+      "page_id": "method_experiment_design",
+      "page_job": "EXPERIMENT_DESIGN",
+      "dominant_scientific_object": "scientific_relation_diagram",
+      "selected_gold_id": "GSC-004",
+      "selected_reference_id": "RRL-019",
+      "recipe_sha256": "a08385437ea881fedf1c5bd1f0007522933b48b4684fba79753f97692b79a80e",
+      "compatibility_trace": [
+        "page_function exact match",
+        "domain_family match",
+        "density match",
+        "panel_count near match",
+        "scientific object overlap: comparison, design, experiment, imaging, map"
+      ],
+      "exact_cuhk_content_safe_region": {
+        "x": 0.06,
+        "y": 0.185,
+        "w": 0.88,
+        "h": 0.675
+      },
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "source_to_cuhk_transform": [
+        "source primary_bbox mapped into canonical CUHK content safe region"
+      ],
+      "resolved_primary_object_geometry": {
+        "x": 0.1128,
+        "y": 0.4213,
+        "w": 0.7392,
+        "h": 0.3172
+      },
+      "resolved_supporting_object_geometry": {
+        "annotation": {
+          "x": 0.1128,
+          "y": 0.7635,
+          "w": 0.7392,
+          "h": 0.0965
+        },
+        "caption": {
+          "x": 0.1128,
+          "y": 0.7635,
+          "w": 0.7392,
+          "h": 0.0965
+        }
+      },
+      "visual_hierarchy_mapping": [
+        {
+          "rank": 1,
+          "role": "introduction title",
+          "reason": "sets the application context"
+        },
+        {
+          "rank": 2,
+          "role": "application task map",
+          "reason": "links lesion examples to downstream tasks"
+        },
+        {
+          "rank": 3,
+          "role": "thumbnail examples",
+          "reason": "ground the task map in visual medical evidence"
+        }
+      ],
+      "alignment_mapping": [
+        {
+          "group_id": "task-map",
+          "roles": [
+            "lesion examples",
+            "task hubs",
+            "application connectors"
+          ],
+          "relationship": "examples and task labels are grouped as one application map"
+        }
+      ],
+      "reading_flow_mapping": "title-to-context-to-application-task-map",
+      "annotation_legend_caption_panel_mapping": [
+        "connectors encode scientific task relationships; thumbnails remain supporting evidence"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "native_objects": [
+        {
+          "object_id": "method_experiment_design_primary",
+          "role": "primary_scientific_object",
+          "native_type": "tikz_connector_diagram",
+          "bbox": {
+            "x": 0.1128,
+            "y": 0.4213,
+            "w": 0.7392,
+            "h": 0.3172
+          }
+        },
+        {
+          "object_id": "method_experiment_design_annotation",
+          "role": "annotation",
+          "native_type": "text_callout",
+          "bbox": {
+            "x": 0.1128,
+            "y": 0.7635,
+            "w": 0.7392,
+            "h": 0.0965
+          }
+        },
+        {
+          "object_id": "method_experiment_design_caption",
+          "role": "caption",
+          "native_type": "text_caption",
+          "bbox": {
+            "x": 0.1128,
+            "y": 0.7635,
+            "w": 0.7392,
+            "h": 0.0965
+          }
+        }
+      ],
+      "audience_safe_output_contract": {
+        "internal_ids_exposed": false,
+        "source_pixels_or_branding_reused": false,
+        "forbidden_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "review target",
+          "fixture",
+          "workflow"
+        ]
+      },
+      "resolved_layout_sha256": "65a69dc16ba0d3f4b274dadeb2dbab51e2d92e1b592756bace05d9d99d00e708"
+    },
+    {
+      "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
+      "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+      "page_id": "negative_failure_model_check",
+      "page_job": "NEGATIVE_RESULT",
+      "dominant_scientific_object": "negative_evidence_plot",
+      "selected_gold_id": "GSC-012",
+      "selected_reference_id": "RRL-011",
+      "recipe_sha256": "4aae3a6bbe7cda1c0346dd1ea5c5f7c786ec42c08a7d03a07a646ee3472b0b7f",
+      "compatibility_trace": [
+        "page_function exact match",
+        "domain_family match",
+        "density match",
+        "panel_count exact match",
+        "scientific object overlap: analysis, comparison, failure, finite, negative"
+      ],
+      "exact_cuhk_content_safe_region": {
+        "x": 0.06,
+        "y": 0.185,
+        "w": 0.88,
+        "h": 0.675
+      },
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "source_to_cuhk_transform": [
+        "source primary_bbox mapped into canonical CUHK content safe region",
+        "figure primary object expanded to projection-readable floor"
+      ],
+      "resolved_primary_object_geometry": {
+        "x": 0.104,
+        "y": 0.3628,
+        "w": 0.7568,
+        "h": 0.36
+      },
+      "resolved_supporting_object_geometry": {
+        "annotation": {
+          "x": 0.104,
+          "y": 0.7478,
+          "w": 0.7568,
+          "h": 0.1122
+        },
+        "caption": {
+          "x": 0.104,
+          "y": 0.7478,
+          "w": 0.7568,
+          "h": 0.1122
+        }
+      },
+      "visual_hierarchy_mapping": [
+        {
+          "rank": 1,
+          "role": "limitation title",
+          "reason": "states the failure mode"
+        },
+        {
+          "rank": 2,
+          "role": "side-by-side algorithm diagrams",
+          "reason": "comparison explains why one case fails"
+        },
+        {
+          "rank": 3,
+          "role": "red callouts",
+          "reason": "mark the specific violated assumptions"
+        }
+      ],
+      "alignment_mapping": [
+        {
+          "group_id": "failure-comparison",
+          "roles": [
+            "merge sort diagram",
+            "bubble sort diagram",
+            "red callouts"
+          ],
+          "relationship": "paired diagrams expose the contrast in assumptions"
+        }
+      ],
+      "reading_flow_mapping": "limitation-title-to-paired-diagrams-to-callouts",
+      "annotation_legend_caption_panel_mapping": [
+        "callouts attach to the diagram elements that cause the limitation"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "native_objects": [
+        {
+          "object_id": "negative_failure_model_check_primary",
+          "role": "primary_scientific_object",
+          "native_type": "figure",
+          "bbox": {
+            "x": 0.104,
+            "y": 0.3628,
+            "w": 0.7568,
+            "h": 0.36
+          }
+        },
+        {
+          "object_id": "negative_failure_model_check_annotation",
+          "role": "annotation",
+          "native_type": "text_callout",
+          "bbox": {
+            "x": 0.104,
+            "y": 0.7478,
+            "w": 0.7568,
+            "h": 0.1122
+          }
+        },
+        {
+          "object_id": "negative_failure_model_check_caption",
+          "role": "caption",
+          "native_type": "text_caption",
+          "bbox": {
+            "x": 0.104,
+            "y": 0.7478,
+            "w": 0.7568,
+            "h": 0.1122
+          }
+        }
+      ],
+      "audience_safe_output_contract": {
+        "internal_ids_exposed": false,
+        "source_pixels_or_branding_reused": false,
+        "forbidden_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "review target",
+          "fixture",
+          "workflow"
+        ]
+      },
+      "resolved_layout_sha256": "5e3064d885ddb2e571582a137bf2a670128304b98b79ccdb0ff966095b793e79"
+    },
+    {
+      "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
+      "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+      "page_id": "medical_image_aligned_comparison",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "dominant_scientific_object": "same_case_medical_panels",
+      "selected_gold_id": "GSC-008",
+      "selected_reference_id": "RRL-013",
+      "recipe_sha256": "f2099fe794caab01779329db7bc8cb1775aa3f43b01837badc91b80a0dd5ac78",
+      "compatibility_trace": [
+        "page_function exact match",
+        "domain_family match",
+        "density match",
+        "scientific object overlap: comparison, image, lesion, medical, representative"
+      ],
+      "exact_cuhk_content_safe_region": {
+        "x": 0.06,
+        "y": 0.185,
+        "w": 0.88,
+        "h": 0.675
+      },
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "source_to_cuhk_transform": [
+        "source primary_bbox mapped into canonical CUHK content safe region",
+        "image_panel primary object expanded to projection-readable floor"
+      ],
+      "resolved_primary_object_geometry": {
+        "x": 0.0864,
+        "y": 0.3589,
+        "w": 0.7568,
+        "h": 0.28
+      },
+      "resolved_supporting_object_geometry": {
+        "annotation": {
+          "x": 0.0864,
+          "y": 0.6639,
+          "w": 0.7568,
+          "h": 0.12
+        },
+        "caption": {
+          "x": 0.0864,
+          "y": 0.6639,
+          "w": 0.7568,
+          "h": 0.12
+        }
+      },
+      "visual_hierarchy_mapping": [
+        {
+          "rank": 1,
+          "role": "sample overview title",
+          "reason": "announces the representative sample set"
+        },
+        {
+          "rank": 2,
+          "role": "grouped lesion image grid",
+          "reason": "images and colored contours dominate the evidence"
+        },
+        {
+          "rank": 3,
+          "role": "mask-count labels",
+          "reason": "labels organize the comparison without overwhelming images"
+        }
+      ],
+      "alignment_mapping": [
+        {
+          "group_id": "mask-count-columns",
+          "roles": [
+            "2 masks",
+            "3 masks",
+            "4 masks",
+            "5 masks"
+          ],
+          "relationship": "same task samples are grouped by annotation count"
+        }
+      ],
+      "reading_flow_mapping": "title-to-mask-count-groups-to-image-grid",
+      "annotation_legend_caption_panel_mapping": [
+        "group labels bind contour examples to annotation-count categories"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "native_objects": [
+        {
+          "object_id": "medical_image_aligned_comparison_primary",
+          "role": "primary_scientific_object",
+          "native_type": "image_panel",
+          "bbox": {
+            "x": 0.0864,
+            "y": 0.3589,
+            "w": 0.7568,
+            "h": 0.28
+          }
+        },
+        {
+          "object_id": "medical_image_aligned_comparison_annotation",
+          "role": "annotation",
+          "native_type": "text_callout",
+          "bbox": {
+            "x": 0.0864,
+            "y": 0.6639,
+            "w": 0.7568,
+            "h": 0.12
+          }
+        },
+        {
+          "object_id": "medical_image_aligned_comparison_caption",
+          "role": "caption",
+          "native_type": "text_caption",
+          "bbox": {
+            "x": 0.0864,
+            "y": 0.6639,
+            "w": 0.7568,
+            "h": 0.12
+          }
+        }
+      ],
+      "audience_safe_output_contract": {
+        "internal_ids_exposed": false,
+        "source_pixels_or_branding_reused": false,
+        "forbidden_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "review target",
+          "fixture",
+          "workflow"
+        ]
+      },
+      "resolved_layout_sha256": "1fbd7bc0cf2486ec385ffd30529a47247ed2c2a1cd35d77767a6a2dc6ebb3565"
+    },
+    {
+      "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
+      "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+      "page_id": "discussion_next_experiment",
+      "page_job": "NEXT_EXPERIMENT",
+      "dominant_scientific_object": "next_experiment_reasoning",
+      "selected_gold_id": "GSC-018",
+      "selected_reference_id": "RRL-059",
+      "recipe_sha256": "5ff51c819553d350ceb0e76c1315bf894fe61845e95ebb13f88c4c350892b464",
+      "compatibility_trace": [
+        "page_function exact match",
+        "domain_family match",
+        "density match",
+        "panel_count exact match",
+        "scientific object overlap: active, batch, bayesian, design, discussion"
+      ],
+      "exact_cuhk_content_safe_region": {
+        "x": 0.06,
+        "y": 0.185,
+        "w": 0.88,
+        "h": 0.675
+      },
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "source_to_cuhk_transform": [
+        "source primary_bbox mapped into canonical CUHK content safe region"
+      ],
+      "resolved_primary_object_geometry": {
+        "x": 0.148,
+        "y": 0.428,
+        "w": 0.6864,
+        "h": 0.3105
+      },
+      "resolved_supporting_object_geometry": {
+        "annotation": {
+          "x": 0.148,
+          "y": 0.7635,
+          "w": 0.6864,
+          "h": 0.0965
+        },
+        "caption": {
+          "x": 0.148,
+          "y": 0.7635,
+          "w": 0.6864,
+          "h": 0.0965
+        }
+      },
+      "visual_hierarchy_mapping": [
+        {
+          "rank": 1,
+          "role": "next-query strategy title",
+          "reason": "states the page function"
+        },
+        {
+          "rank": 2,
+          "role": "paired selection diagrams",
+          "reason": "visual objects show concrete next-query behavior"
+        },
+        {
+          "rank": 3,
+          "role": "strategy bullets",
+          "reason": "name the proposed selection mechanisms"
+        },
+        {
+          "rank": 4,
+          "role": "citations/captions",
+          "reason": "secondary provenance for the displayed mechanisms"
+        }
+      ],
+      "alignment_mapping": [
+        {
+          "group_id": "strategy-comparison-row",
+          "roles": [
+            "DPP point set",
+            "Independent point set",
+            "Mondrian partition"
+          ],
+          "relationship": "aligned row compares next-query proposal mechanisms"
+        },
+        {
+          "group_id": "bullet-to-object-bindings",
+          "roles": [
+            "diverse-set bullet",
+            "one-query-per-partition bullet",
+            "lower diagrams"
+          ],
+          "relationship": "text names selection rules and nearby diagrams instantiate them"
+        }
+      ],
+      "reading_flow_mapping": "title-to-two-strategy-bullets-to-paired-selection-diagrams",
+      "annotation_legend_caption_panel_mapping": [
+        "DPP and Independent labels sit directly below the paired point-cloud panels",
+        "Mondrian partition diagram and thumbnails occupy the same visual row as the paired comparison",
+        "citations remain secondary and do not replace the scientific object"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "native_objects": [
+        {
+          "object_id": "discussion_next_experiment_primary",
+          "role": "primary_scientific_object",
+          "native_type": "tikz_reasoning_diagram",
+          "bbox": {
+            "x": 0.148,
+            "y": 0.428,
+            "w": 0.6864,
+            "h": 0.3105
+          }
+        },
+        {
+          "object_id": "discussion_next_experiment_annotation",
+          "role": "annotation",
+          "native_type": "text_callout",
+          "bbox": {
+            "x": 0.148,
+            "y": 0.7635,
+            "w": 0.6864,
+            "h": 0.0965
+          }
+        },
+        {
+          "object_id": "discussion_next_experiment_caption",
+          "role": "caption",
+          "native_type": "text_caption",
+          "bbox": {
+            "x": 0.148,
+            "y": 0.7635,
+            "w": 0.6864,
+            "h": 0.0965
+          }
+        }
+      ],
+      "audience_safe_output_contract": {
+        "internal_ids_exposed": false,
+        "source_pixels_or_branding_reused": false,
+        "forbidden_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "review target",
+          "fixture",
+          "workflow"
+        ]
+      },
+      "resolved_layout_sha256": "dc10c2a3d1b32aecc0524d67d80a18c4162a11fb2e639095218326a233a14cad"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1",
+  "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+  "commands": {
+    "xelatex": {
+      "available": true,
+      "path": "/tmp/texlive-027/bin/x86_64-linux/xelatex",
+      "source": "PATH"
+    },
+    "lualatex": {
+      "available": true,
+      "path": "/tmp/texlive-027/bin/x86_64-linux/lualatex",
+      "source": "PATH"
+    },
+    "pdflatex": {
+      "available": true,
+      "path": "/tmp/texlive-027/bin/x86_64-linux/pdflatex",
+      "source": "PATH"
+    },
+    "tectonic": {
+      "available": false,
+      "path": null,
+      "source": null
+    },
+    "pdftoppm": {
+      "available": true,
+      "path": "/usr/bin/pdftoppm",
+      "source": "PATH"
+    },
+    "pdfinfo": {
+      "available": true,
+      "path": "/usr/bin/pdfinfo",
+      "source": "PATH"
+    },
+    "pdftotext": {
+      "available": true,
+      "path": "/usr/bin/pdftotext",
+      "source": "PATH"
+    },
+    "pdffonts": {
+      "available": true,
+      "path": "/usr/bin/pdffonts",
+      "source": "PATH"
+    }
+  },
+  "local_render_resources": {
+    "source": "render-chinese-math-pdf probe / host-local render resources",
+    "resource_dir": "/home/yuukias/render_resources/chinese_math_pdf",
+    "resource_dir_exists": true,
+    "texmf": "/home/yuukias/render_resources/chinese_math_pdf/texmf",
+    "texmf_exists": true,
+    "fandol_dir": "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/fandol",
+    "fandol_dir_exists": true,
+    "noto_cjk_dir": "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk",
+    "noto_cjk_dir_exists": true,
+    "times_font_dir": "/home/yuukias/code/TRACE/presentations/group_meetings/2026-07-16/cat_trace_demo/fonts",
+    "times_font_dir_exists": true,
+    "tex_cache_env": {
+      "TEXMFVAR": "/tmp/tex-cache-yuukias/var",
+      "TEXMFCONFIG": "/tmp/tex-cache-yuukias/config",
+      "TEXMFCACHE": "/tmp/tex-cache-yuukias/cache"
+    }
+  },
+  "tex_engine_available": true,
+  "pdf_renderer_available": true,
+  "preferred_route": "latex_to_pdf_to_png"
+}

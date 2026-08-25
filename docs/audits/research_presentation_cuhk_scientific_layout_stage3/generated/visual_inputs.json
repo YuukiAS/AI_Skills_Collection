@@ -1,0 +1,98 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+  "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "027-stage3-cuhk-scientific-layout-item-page-review",
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "external_upload_authorization": "",
+  "rubric": {
+    "instructions": "You are reviewing rendered pixels from the 027 Stage 3 exact-CUHK scientific layout integration deck. Judge each content page independently at item/page level. PASS for an item only if the visible page reaches a mature doctoral research-group meeting or strong conference-talk bar for its page job. Check that the CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math is genuinely typeset rather than source-like text; figures, negative evidence, and medical panels are large enough to inspect; panel labels, captions, legends, and annotations are readable and directly tied to the scientific object; discussion/next-experiment content shows concrete research reasoning rather than generic future-work boxes. Mark REVISE for any page that looks like a generic card/dashboard/box-arrow fixture, has internal provenance or QA language, has source-like math, hides the evidence in a tiny figure, clips content, uses meaningless whitespace, or repeats one template face without scientific specificity. Top-level PASS means all six content items pass; top-level REVISE if any item has a blocking visual maturity issue. Do not infer quality from filenames, hashes, metadata, or presumed provenance; inspect the actual pixels.",
+    "source_contracts": [
+      "Stage 2 gold/reference pixels are evidence only and are not runtime assets.",
+      "This is a Stage 3 engineering integration deck, not a final real-paper holdout."
+    ]
+  },
+  "identity_bindings": {
+    "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+    "build_manifest": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/BUILD_MANIFEST.json",
+    "build_manifest_sha256": "47ded95a99bac02c77c122ab9b9259b1333216c755f5ed37e67ba0c0fd90e406",
+    "pdf_sha256": "403d939bcd5b42bb195ab2fbff2765c80114ce91aabebf3f990772835bb0b439",
+    "page_job_by_logical_id": {
+      "slide_2_statistical_model": "STATISTICAL_MODEL",
+      "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+      "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+      "slide_5_negative_result": "NEGATIVE_RESULT",
+      "slide_6_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON",
+      "slide_7_next_experiment": "NEXT_EXPERIMENT"
+    },
+    "dominant_object_by_logical_id": {
+      "slide_2_statistical_model": "native_latex_math",
+      "slide_3_real_data_application": "coverage_plot",
+      "slide_4_experiment_design": "scientific_relation_diagram",
+      "slide_5_negative_result": "negative_evidence_plot",
+      "slide_6_medical_image_comparison": "same_case_medical_panels",
+      "slide_7_next_experiment": "next_experiment_reasoning"
+    },
+    "selected_gold_id_by_logical_id": {
+      "slide_2_statistical_model": "GSC-016",
+      "slide_3_real_data_application": "GSC-014",
+      "slide_4_experiment_design": "GSC-004",
+      "slide_5_negative_result": "GSC-012",
+      "slide_6_medical_image_comparison": "GSC-008",
+      "slide_7_next_experiment": "GSC-018"
+    },
+    "rendered_png_sha256_by_logical_id": {
+      "slide_2_statistical_model": "0e8fdb402b69fa871148351986be1bdba67d4fe8c3b36db2d59ac138d3bf596c",
+      "slide_3_real_data_application": "91eb2d5df6e56032ef28cc58fd0b62afbe1174c7fd5b515c8fc195cc85871df7",
+      "slide_4_experiment_design": "c17eb23f12f5119eb1eaeb06200fb6ac4ff9a229700338815cded91f572c01a6",
+      "slide_5_negative_result": "66d2e45f567bf717d746c81a30c144bcede6cbb7198967b1f31e743c53b045a0",
+      "slide_6_medical_image_comparison": "1768adbdae99b4ee28642a0d98dbe8d64bc626cf142726f590f3408874f25397",
+      "slide_7_next_experiment": "a1322fb190e99788927a63152aad92480622aadfdbe2b2c03d01bf9346d08f57"
+    }
+  },
+  "inputs": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-2.png",
+      "mime_type": "image/png",
+      "sha256": "0e8fdb402b69fa871148351986be1bdba67d4fe8c3b36db2d59ac138d3bf596c",
+      "description": "Rendered exact-CUHK content page for STATISTICAL_MODEL with native_latex_math as the main scientific object."
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-3.png",
+      "mime_type": "image/png",
+      "sha256": "91eb2d5df6e56032ef28cc58fd0b62afbe1174c7fd5b515c8fc195cc85871df7",
+      "description": "Rendered exact-CUHK content page for REAL_DATA_APPLICATION with coverage_plot as the main scientific object."
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-4.png",
+      "mime_type": "image/png",
+      "sha256": "c17eb23f12f5119eb1eaeb06200fb6ac4ff9a229700338815cded91f572c01a6",
+      "description": "Rendered exact-CUHK content page for EXPERIMENT_DESIGN with scientific_relation_diagram as the main scientific object."
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-5.png",
+      "mime_type": "image/png",
+      "sha256": "66d2e45f567bf717d746c81a30c144bcede6cbb7198967b1f31e743c53b045a0",
+      "description": "Rendered exact-CUHK content page for NEGATIVE_RESULT with negative_evidence_plot as the main scientific object."
+    },
+    {
+      "logical_id": "slide_6_medical_image_comparison",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-6.png",
+      "mime_type": "image/png",
+      "sha256": "1768adbdae99b4ee28642a0d98dbe8d64bc626cf142726f590f3408874f25397",
+      "description": "Rendered exact-CUHK content page for MEDICAL_IMAGE_COMPARISON with same_case_medical_panels as the main scientific object."
+    },
+    {
+      "logical_id": "slide_7_next_experiment",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-7.png",
+      "mime_type": "image/png",
+      "sha256": "a1322fb190e99788927a63152aad92480622aadfdbe2b2c03d01bf9346d08f57",
+      "description": "Rendered exact-CUHK content page for NEXT_EXPERIMENT with next_experiment_reasoning as the main scientific object."
+    }
+  ]
+}

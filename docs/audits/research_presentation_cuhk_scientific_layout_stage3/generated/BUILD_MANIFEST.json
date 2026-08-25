@@ -1,0 +1,92 @@
+{
+  "schema": "RESEARCH_CUHK_STAGE3_BUILD_MANIFEST_V1",
+  "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+  "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
+  "canonical_files": {
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/background.png": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/background_negative.png": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/logo_RGB.png": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/logo_RGB_negative.png": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/bibliography.bib": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/main.tex": "a7c6826e94c6f08647200f3472381d882dd8bf405df42a68f5dc903a4010da07",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/beamerthemesintef.sty": "4e112f0a103a89fcfd905345a8385faa015f15bc01f89cd9bf5d2db6be9dfbb3",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/sintefcolor.sty": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+  },
+  "build_workspace": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build",
+  "tex": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/main.tex",
+  "scientific_layout_include": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/scientific_layouts.tex",
+  "compile_status": {
+    "status": "COMPILED",
+    "engine": "xelatex",
+    "engine_path": "/tmp/texlive-027/bin/x86_64-linux/xelatex",
+    "compile_passes": 2,
+    "fontconfig": {
+      "fontconfig_file": "/home/yuukias/AI_Skills_Collection/docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/fontconfig/fonts.conf",
+      "fontconfig_file_repo_path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/fontconfig/fonts.conf",
+      "font_cache_dir": "/tmp/fontconfig-cache-027",
+      "times_font_dir": "/home/yuukias/code/TRACE/presentations/group_meetings/2026-07-16/cat_trace_demo/fonts",
+      "times_font_dir_exists": true,
+      "times_font_files_present": true
+    },
+    "pdf": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/main.pdf",
+    "pdf_sha256": "403d939bcd5b42bb195ab2fbff2765c80114ce91aabebf3f990772835bb0b439",
+    "log": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/compile.log"
+  },
+  "render_status": {
+    "status": "ok",
+    "png_count": 7,
+    "rendered_png": [
+      {
+        "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-1.png",
+        "sha256": "1e3b961e9e261a2047375038277dfc7440e64118201f14269201ce912f3fac6c"
+      },
+      {
+        "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-2.png",
+        "sha256": "0e8fdb402b69fa871148351986be1bdba67d4fe8c3b36db2d59ac138d3bf596c"
+      },
+      {
+        "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-3.png",
+        "sha256": "91eb2d5df6e56032ef28cc58fd0b62afbe1174c7fd5b515c8fc195cc85871df7"
+      },
+      {
+        "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-4.png",
+        "sha256": "c17eb23f12f5119eb1eaeb06200fb6ac4ff9a229700338815cded91f572c01a6"
+      },
+      {
+        "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-5.png",
+        "sha256": "66d2e45f567bf717d746c81a30c144bcede6cbb7198967b1f31e743c53b045a0"
+      },
+      {
+        "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-6.png",
+        "sha256": "1768adbdae99b4ee28642a0d98dbe8d64bc626cf142726f590f3408874f25397"
+      },
+      {
+        "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-7.png",
+        "sha256": "a1322fb190e99788927a63152aad92480622aadfdbe2b2c03d01bf9346d08f57"
+      }
+    ]
+  },
+  "mechanical_qa": {
+    "status": "MECHANICAL_PASS",
+    "checks": {
+      "canonical_source_copied": true,
+      "scientific_layout_include_loaded": true,
+      "six_content_page_jobs": true,
+      "title_plus_content_pages_expected": 7,
+      "rendered_pages_available": true
+    }
+  },
+  "cleaned_latex_intermediates": [
+    "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/main.aux",
+    "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/main.nav",
+    "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/main.out",
+    "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/main.snm",
+    "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/main.toc"
+  ],
+  "resolved_layouts": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/resolved_layouts.json",
+  "runtime_trace": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/runtime_trace.json",
+  "mutation_regression": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/mutation_regression.json",
+  "capacity_failure_contract": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/capacity_failure_contract.json",
+  "dependency_probe": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/dependency_probe.json",
+  "render_chinese_math_pdf_probe": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/render_chinese_math_pdf_probe.json"
+}

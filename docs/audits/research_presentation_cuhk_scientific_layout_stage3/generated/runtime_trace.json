@@ -1,0 +1,159 @@
+{
+  "schema": "RESEARCH_CUHK_STAGE3_TRACE_V1",
+  "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+  "fixture_boundary": "Stage 3 engineering integration fixture; not a real-paper holdout and not ONE_SHOT_QUALITY_PASS.",
+  "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
+  "build_workspace": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build",
+  "slides": [
+    {
+      "page_id": "equation_statistical_model",
+      "page_job": "STATISTICAL_MODEL",
+      "selector_query": {
+        "page_function": "STATISTICAL_MODEL",
+        "scientific_object": "medical imaging objective equation mathematical model variance components",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "equation",
+        "evidence_type": "mathematical model",
+        "density": "low",
+        "panel_count": 0
+      },
+      "selected_gold_id": "GSC-016",
+      "recipe_sha256": "9615cc4bcd20f8ec2a7c1a15c91f4dd030754ac21f08b5003be5ec79a565d023",
+      "resolved_layout_sha256": "700b820ff92338330fc4d65d3c7cbe77a7e9789f34fa2e5642981325293cb4bd",
+      "emitted_tex_object_ids": [
+        "equation_statistical_model_primary",
+        "equation_statistical_model_annotation",
+        "equation_statistical_model_caption"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      }
+    },
+    {
+      "page_id": "quantitative_result_uncertainty",
+      "page_job": "REAL_DATA_APPLICATION",
+      "selector_query": {
+        "page_function": "REAL_DATA_APPLICATION",
+        "scientific_object": "biostatistics quantitative model comparison result table figure coverage uncertainty",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "plot table",
+        "evidence_type": "quantitative comparison result",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "selected_gold_id": "GSC-014",
+      "recipe_sha256": "c409cd71c5831d4e4ad49ef4cb7d3c6cdf85deee1f19a1fc11a191adc51c11bc",
+      "resolved_layout_sha256": "2aa49a8ef75ec40f0e381c845d04b73eacfce13e0b11f1b79ebd69231bc96c8d",
+      "emitted_tex_object_ids": [
+        "quantitative_result_uncertainty_primary",
+        "quantitative_result_uncertainty_annotation",
+        "quantitative_result_uncertainty_caption"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      }
+    },
+    {
+      "page_id": "method_experiment_design",
+      "page_job": "EXPERIMENT_DESIGN",
+      "selector_query": {
+        "page_function": "EXPERIMENT_DESIGN",
+        "scientific_object": "medical imaging task map experiment design clustered simulation procedure comparison",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "diagram",
+        "evidence_type": "experiment design",
+        "density": "moderate",
+        "panel_count": 4
+      },
+      "selected_gold_id": "GSC-004",
+      "recipe_sha256": "a08385437ea881fedf1c5bd1f0007522933b48b4684fba79753f97692b79a80e",
+      "resolved_layout_sha256": "65a69dc16ba0d3f4b274dadeb2dbab51e2d92e1b592756bace05d9d99d00e708",
+      "emitted_tex_object_ids": [
+        "method_experiment_design_primary",
+        "method_experiment_design_annotation",
+        "method_experiment_design_caption"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      }
+    },
+    {
+      "page_id": "negative_failure_model_check",
+      "page_job": "NEGATIVE_RESULT",
+      "selector_query": {
+        "page_function": "NEGATIVE_RESULT",
+        "scientific_object": "negative result failure analysis finite sample model check coverage comparison",
+        "domain_family": "statistics",
+        "dominant_object_type": "plot",
+        "evidence_type": "failure evidence",
+        "density": "moderate",
+        "panel_count": 2
+      },
+      "selected_gold_id": "GSC-012",
+      "recipe_sha256": "4aae3a6bbe7cda1c0346dd1ea5c5f7c786ec42c08a7d03a07a646ee3472b0b7f",
+      "resolved_layout_sha256": "5e3064d885ddb2e571582a137bf2a670128304b98b79ccdb0ff966095b793e79",
+      "emitted_tex_object_ids": [
+        "negative_failure_model_check_primary",
+        "negative_failure_model_check_annotation",
+        "negative_failure_model_check_caption"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      }
+    },
+    {
+      "page_id": "medical_image_aligned_comparison",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "selector_query": {
+        "page_function": "MEDICAL_IMAGE_COMPARISON",
+        "scientific_object": "medical image lesion samples task applications visual comparison same case overlay error",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "medical_image",
+        "evidence_type": "representative image comparison",
+        "density": "high",
+        "panel_count": 4
+      },
+      "selected_gold_id": "GSC-008",
+      "recipe_sha256": "f2099fe794caab01779329db7bc8cb1775aa3f43b01837badc91b80a0dd5ac78",
+      "resolved_layout_sha256": "1fbd7bc0cf2486ec385ffd30529a47247ed2c2a1cd35d77767a6a2dc6ebb3565",
+      "emitted_tex_object_ids": [
+        "medical_image_aligned_comparison_primary",
+        "medical_image_aligned_comparison_annotation",
+        "medical_image_aligned_comparison_caption"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      }
+    },
+    {
+      "page_id": "discussion_next_experiment",
+      "page_job": "NEXT_EXPERIMENT",
+      "selector_query": {
+        "page_function": "NEXT_EXPERIMENT",
+        "scientific_object": "discussion next experiment batch query bayesian optimization active learning DPP Mondrian diverse selection partition",
+        "domain_family": "statistics",
+        "dominant_object_type": "diagram plot comparison",
+        "evidence_type": "next-query experimental design",
+        "density": "moderate",
+        "panel_count": 4
+      },
+      "selected_gold_id": "GSC-018",
+      "recipe_sha256": "5ff51c819553d350ceb0e76c1315bf894fe61845e95ebb13f88c4c350892b464",
+      "resolved_layout_sha256": "dc10c2a3d1b32aecc0524d67d80a18c4162a11fb2e639095218326a233a14cad",
+      "emitted_tex_object_ids": [
+        "discussion_next_experiment_primary",
+        "discussion_next_experiment_annotation",
+        "discussion_next_experiment_caption"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      }
+    }
+  ]
+}

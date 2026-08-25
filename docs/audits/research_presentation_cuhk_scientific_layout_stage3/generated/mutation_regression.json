@@ -1,0 +1,17 @@
+{
+  "schema": "RESEARCH_CUHK_STAGE3_MUTATION_REGRESSION_V1",
+  "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+  "status": "PASS",
+  "mutated_field": "composition_constraints.primary_bbox",
+  "baseline_gold_id": "GSC-014",
+  "baseline_recipe_sha256": "c409cd71c5831d4e4ad49ef4cb7d3c6cdf85deee1f19a1fc11a191adc51c11bc",
+  "mutated_recipe_sha256": "1d12640addb03f4dd7bed335ba7e5e124bfd301f9e215cb55fea15ff4de5a9bd",
+  "baseline_geometry_signature": "0.2800,0.3460,0.6600,0.3600",
+  "mutated_geometry_signature": "0.2800,0.3496,0.6600,0.3600",
+  "checks": {
+    "source_geometry_changed": true,
+    "resolved_geometry_changed": true,
+    "emitted_geometry_changes_with_recipe": true,
+    "page_job_unchanged": true
+  }
+}

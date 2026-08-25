@@ -1,0 +1,12 @@
+{
+  "schema": "RESEARCH_CUHK_STAGE3_CAPACITY_FAILURE_CONTRACT_V1",
+  "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+  "page_id": "medical_image_aligned_comparison",
+  "selected_gold_id": "GSC-008",
+  "requested_panel_count": 12,
+  "selected_layout_panel_capacity": 8,
+  "status": "SPLIT_REQUIRED",
+  "reason": "requested 12 panels exceeds selected layout capacity 8",
+  "fallback_used": "SPLIT_REQUIRED",
+  "generic_layout_fallback_used": false
+}

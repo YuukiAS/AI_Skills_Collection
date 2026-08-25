@@ -477,6 +477,125 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(discussion_probe["baseline_recipe"]["selected_gold_id"], "GSC-018")
         self.assertEqual(discussion_probe["alternate_error"], "no compatible gold composition record")
 
+    def test_cuhk_scientific_layout_stage3_contract(self) -> None:
+        generator = SHARED / "scripts/generate_cuhk_scientific_layout_stage3.py"
+        validator = SHARED / "scripts/validate_cuhk_scientific_layout_stage3.py"
+        with tempfile.TemporaryDirectory() as tmp:
+            generated = Path(tmp) / "stage3"
+            result = subprocess.run([sys.executable, str(generator), "--out-dir", str(generated)], check=False, capture_output=True, text=True)
+            self.assertIn(result.returncode, {0, 2}, result.stderr + result.stdout)
+
+            validation = subprocess.run(
+                [sys.executable, str(validator), "--out-dir", str(generated), "--allow-missing-render"],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(validation.returncode, 0, validation.stderr + validation.stdout)
+
+            manifest = json.loads((generated / "BUILD_MANIFEST.json").read_text(encoding="utf-8"))
+            self.assertEqual(manifest["schema"], "RESEARCH_CUHK_STAGE3_BUILD_MANIFEST_V1")
+            self.assertEqual(manifest["task_key"], "027_research_presentation_executable_cuhk_scientific_layout_system")
+            self.assertIn("templates/cuhk/beamer/source", manifest["canonical_cuhk_source"])
+            self.assertTrue(manifest["canonical_files"])
+            self.assertTrue((REPO_ROOT / manifest["tex"]).exists())
+            self.assertTrue((REPO_ROOT / manifest["scientific_layout_include"]).exists())
+
+            layouts = json.loads((generated / "resolved_layouts.json").read_text(encoding="utf-8"))["layouts"]
+            self.assertEqual(len(layouts), 6)
+            self.assertEqual(
+                {layout["page_job"] for layout in layouts},
+                {
+                    "STATISTICAL_MODEL",
+                    "REAL_DATA_APPLICATION",
+                    "EXPERIMENT_DESIGN",
+                    "NEGATIVE_RESULT",
+                    "MEDICAL_IMAGE_COMPARISON",
+                    "NEXT_EXPERIMENT",
+                },
+            )
+            self.assertIn("GSC-018", {layout["selected_gold_id"] for layout in layouts})
+            for layout in layouts:
+                consumed = set(layout["source_recipe_fields_consumed"])
+                self.assertTrue(
+                    {
+                        "primary_bbox",
+                        "primary_object_area_ratio",
+                        "visual_hierarchy",
+                        "alignment_groups",
+                        "reading_flow",
+                        "annotation_legend_caption_panel_relations",
+                        "content_capacity",
+                    }.issubset(consumed)
+                )
+                self.assertFalse(layout["audience_safe_output_contract"]["internal_ids_exposed"])
+                safe = layout["exact_cuhk_content_safe_region"]
+                bbox = layout["resolved_primary_object_geometry"]
+                self.assertGreaterEqual(bbox["x"], safe["x"])
+                self.assertGreaterEqual(bbox["y"], safe["y"])
+                self.assertLessEqual(bbox["x"] + bbox["w"], safe["x"] + safe["w"] + 0.0001)
+                self.assertLessEqual(bbox["y"] + bbox["h"], safe["y"] + safe["h"] + 0.0001)
+                for support in layout["resolved_supporting_object_geometry"].values():
+                    self.assertGreaterEqual(support["x"], safe["x"] - 0.0001)
+                    self.assertGreaterEqual(support["y"], safe["y"] - 0.0001)
+                    self.assertLessEqual(support["x"] + support["w"], safe["x"] + safe["w"] + 0.0001)
+                    self.assertLessEqual(support["y"] + support["h"], safe["y"] + safe["h"] + 0.0001)
+
+            trace = json.loads((generated / "runtime_trace.json").read_text(encoding="utf-8"))
+            self.assertEqual(len(trace["slides"]), 6)
+            for slide in trace["slides"]:
+                self.assertTrue(slide["selected_gold_id"])
+                self.assertTrue(slide["emitted_tex_object_ids"])
+
+            mutation = json.loads((generated / "mutation_regression.json").read_text(encoding="utf-8"))
+            self.assertEqual(mutation["status"], "PASS")
+            self.assertTrue(mutation["checks"]["resolved_geometry_changed"])
+            self.assertNotEqual(mutation["baseline_geometry_signature"], mutation["mutated_geometry_signature"])
+
+            capacity_failure = json.loads((generated / "capacity_failure_contract.json").read_text(encoding="utf-8"))
+            self.assertEqual(capacity_failure["status"], "SPLIT_REQUIRED")
+            self.assertFalse(capacity_failure["generic_layout_fallback_used"])
+
+            dependency_probe = json.loads((generated / "dependency_probe.json").read_text(encoding="utf-8"))
+            self.assertEqual(dependency_probe["schema"], "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1")
+            self.assertIn("pdftoppm", dependency_probe["commands"])
+            self.assertEqual(
+                manifest["compile_status"]["status"] == "COMPILED",
+                dependency_probe["tex_engine_available"],
+            )
+            visual_inputs = json.loads((generated / "visual_inputs.json").read_text(encoding="utf-8"))
+            self.assertEqual(visual_inputs["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
+            self.assertEqual(visual_inputs["task_key"], "027_research_presentation_executable_cuhk_scientific_layout_system")
+            self.assertEqual(visual_inputs["workflow_type"], "reviewed_handoff")
+            if manifest["render_status"]["status"] == "ok":
+                self.assertEqual(len(visual_inputs["inputs"]), 6)
+            else:
+                self.assertEqual(len(visual_inputs["inputs"]), 0)
+            self.assertIn("build_manifest_sha256", visual_inputs["identity_bindings"])
+
+            tex = (REPO_ROOT / manifest["tex"]).read_text(encoding="utf-8")
+            self.assertIn(r"\usetheme{sintef}", tex)
+            self.assertIn(r"\input{scientific_layouts.tex}", tex)
+            self.assertIn(r"\StageThreeNode", tex)
+            self.assertIn(r"\displaystyle", tex)
+            self.assertIn(r"\includegraphics", tex)
+            for forbidden in ["RRL-", "SRC-", "GSC-", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "run ID", "fixture", "workflow"]:
+                self.assertNotIn(forbidden, tex)
+            plugin_generator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/generate_cuhk_scientific_layout_stage3.py"
+            plugin_validator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_cuhk_scientific_layout_stage3.py"
+            self.assertEqual(generator.read_text(encoding="utf-8"), plugin_generator.read_text(encoding="utf-8"))
+            self.assertEqual(validator.read_text(encoding="utf-8"), plugin_validator.read_text(encoding="utf-8"))
+
+            strict = subprocess.run([sys.executable, str(validator), "--out-dir", str(generated)], check=False, capture_output=True, text=True)
+            if manifest["render_status"]["status"] == "ok":
+                self.assertEqual(strict.returncode, 0, strict.stderr + strict.stdout)
+                self.assertEqual(manifest["mechanical_qa"]["status"], "MECHANICAL_PASS")
+                self.assertGreaterEqual(manifest["render_status"]["png_count"], 7)
+            else:
+                self.assertNotEqual(strict.returncode, 0)
+                self.assertIn(manifest["render_status"]["status"], strict.stderr + strict.stdout)
+                self.assertNotEqual(manifest["mechanical_qa"]["status"], "MECHANICAL_PASS")
+
     def test_reference_calibrated_candidate_search(self) -> None:
         references = SHARED / "references"
         for name in [
@@ -829,6 +948,14 @@ class PresentationSharedTests(unittest.TestCase):
             (
                 SHARED / "scripts/prepare_discussion_gold_admission_review.py",
                 REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/prepare_discussion_gold_admission_review.py",
+            ),
+            (
+                SHARED / "scripts/generate_cuhk_scientific_layout_stage3.py",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/generate_cuhk_scientific_layout_stage3.py",
+            ),
+            (
+                SHARED / "scripts/validate_cuhk_scientific_layout_stage3.py",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_cuhk_scientific_layout_stage3.py",
             ),
         ]
         for source, mirror in mirrors:
