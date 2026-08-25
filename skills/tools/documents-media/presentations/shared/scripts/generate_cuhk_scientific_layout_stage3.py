@@ -31,6 +31,7 @@ LOCAL_RENDER_TEXMF = LOCAL_RENDER_RESOURCE_DIR / "texmf"
 LOCAL_FANDOL_DIR = LOCAL_RENDER_TEXMF / "fonts" / "opentype" / "public" / "fandol"
 LOCAL_NOTO_CJK_DIR = LOCAL_RENDER_TEXMF / "fonts" / "opentype" / "public" / "noto-cjk"
 TRACE_TIMES_FONT_DIR = Path("/home/yuukias/code/TRACE/presentations/group_meetings/2026-07-16/cat_trace_demo/fonts")
+LOCAL_TINYTEX_BIN = Path("/home/yuukias/.TinyTeX/bin/x86_64-linux")
 FORBIDDEN_AUDIENCE_TERMS = [
     "RRL-",
     "SRC-",
@@ -117,10 +118,10 @@ def fit_bbox(source_bbox: dict[str, float], capacity: dict[str, Any]) -> tuple[d
 def expand_bbox_for_content(primary: dict[str, float], content_kind: str, transforms: list[str]) -> dict[str, float]:
     floors = {
         "equation": (0.62, 0.20),
-        "figure": (0.66, 0.36),
-        "image_panel": (0.74, 0.28),
-        "flow": (0.68, 0.24),
-        "next_experiment": (0.68, 0.24),
+        "figure": (0.78, 0.42),
+        "image_panel": (0.86, 0.50),
+        "flow": (0.80, 0.42),
+        "next_experiment": (0.80, 0.42),
     }
     min_w, min_h = floors.get(content_kind, (primary["w"], primary["h"]))
     safe = SAFE_REGION
@@ -138,6 +139,36 @@ def expand_bbox_for_content(primary: dict[str, float], content_kind: str, transf
     }
     transforms.append(f"{content_kind} primary object expanded to projection-readable floor")
     return {key: round(value, 4) for key, value in expanded.items()}
+
+
+def job_primary_geometry(spec: dict[str, Any], primary: dict[str, float], transforms: list[str]) -> dict[str, float]:
+    safe = SAFE_REGION
+    page_job = spec["page_job"]
+    if page_job == "REAL_DATA_APPLICATION":
+        target = {"w": 0.84, "h": 0.47, "y": 0.230}
+        transforms.append("quantitative-result plot receives dominant projection-scale figure region")
+    elif page_job == "NEGATIVE_RESULT":
+        target = {"w": 0.66, "h": 0.46, "x": safe["x"], "y": 0.285}
+        transforms.append("negative-result evidence keeps a right diagnostic column without text overlap")
+    elif page_job == "MEDICAL_IMAGE_COMPARISON":
+        target = {"w": safe["w"], "h": 0.52, "x": safe["x"], "y": 0.270}
+        transforms.append("four-panel medical comparison receives full-width projection-scale image band")
+    elif page_job == "EXPERIMENT_DESIGN":
+        target = {"w": 0.82, "h": 0.49, "x": 0.09, "y": 0.270}
+        transforms.append("experiment design uses a scientific-factor diagram region")
+    elif page_job == "NEXT_EXPERIMENT":
+        target = {"w": 0.82, "h": 0.49, "x": 0.09, "y": 0.270}
+        transforms.append("next-experiment reasoning uses a decision-and-comparator diagram region")
+    else:
+        return primary
+    target.setdefault("x", primary["x"] + primary["w"] / 2 - target["w"] / 2)
+    target.setdefault("y", primary["y"] + primary["h"] / 2 - target["h"] / 2)
+    return {
+        "x": round(clamp(target["x"], safe["x"], safe["x"] + safe["w"] - target["w"]), 4),
+        "y": round(clamp(target["y"], safe["y"], safe["y"] + safe["h"] - target["h"]), 4),
+        "w": round(min(target["w"], safe["w"]), 4),
+        "h": round(min(target["h"], safe["h"]), 4),
+    }
 
 
 def support_bbox(primary: dict[str, float], role: str) -> dict[str, float]:
@@ -158,6 +189,43 @@ def support_bbox(primary: dict[str, float], role: str) -> dict[str, float]:
         h = min(0.12, max(0.08, safe["y"] + safe["h"] - y))
         return {"x": primary["x"], "y": y, "w": primary["w"], "h": h}
     return {"x": safe["x"], "y": safe["y"], "w": safe["w"], "h": 0.09}
+
+
+def support_geometry(spec: dict[str, Any], primary: dict[str, float]) -> dict[str, dict[str, float]]:
+    safe = SAFE_REGION
+    page_job = spec["page_job"]
+    if page_job == "REAL_DATA_APPLICATION":
+        return {
+            "annotation": {"x": 0.08, "y": 0.735, "w": 0.52, "h": 0.055},
+            "caption": {"x": 0.64, "y": 0.735, "w": 0.30, "h": 0.055},
+        }
+    if page_job == "NEGATIVE_RESULT":
+        return {
+            "annotation": {"x": 0.745, "y": 0.300, "w": 0.185, "h": 0.195},
+            "caption": {"x": 0.745, "y": 0.535, "w": 0.185, "h": 0.170},
+        }
+    if page_job == "MEDICAL_IMAGE_COMPARISON":
+        return {
+            "annotation": {"x": safe["x"], "y": 0.810, "w": safe["w"], "h": 0.045},
+            "caption": {"x": safe["x"], "y": 0.810, "w": safe["w"], "h": 0.045},
+        }
+    if page_job in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"}:
+        return {
+            "annotation": {"x": primary["x"], "y": 0.795, "w": primary["w"], "h": 0.060},
+            "caption": {"x": primary["x"], "y": 0.795, "w": primary["w"], "h": 0.060},
+        }
+    annotation = annotation_bbox(primary)
+    caption = {key: round(value, 4) for key, value in support_bbox(primary, "below").items()}
+    return {"annotation": annotation, "caption": caption}
+
+
+def bbox_overlap(a: dict[str, float], b: dict[str, float]) -> bool:
+    return not (
+        a["x"] + a["w"] <= b["x"] + 0.0001
+        or b["x"] + b["w"] <= a["x"] + 0.0001
+        or a["y"] + a["h"] <= b["y"] + 0.0001
+        or b["y"] + b["h"] <= a["y"] + 0.0001
+    )
 
 
 def annotation_bbox(primary: dict[str, float]) -> dict[str, float]:
@@ -200,7 +268,10 @@ def tex_cache_env() -> dict[str, str]:
 
 
 def render_search_path() -> str:
-    return os.environ.get("PATH", "")
+    path_parts = [os.environ.get("PATH", "")]
+    if LOCAL_TINYTEX_BIN.exists():
+        path_parts.insert(0, str(LOCAL_TINYTEX_BIN))
+    return os.pathsep.join(part for part in path_parts if part)
 
 
 def write_fontconfig(build_dir: Path) -> dict[str, Any]:
@@ -312,7 +383,8 @@ def page_specs() -> list[dict[str, Any]]:
             "content_kind": "figure",
             "dominant_object": "coverage_plot",
             "asset": f"{stat_assets}/coverage_by_icc.png",
-            "annotation": "Nominal 0.95 remains visible; the stress point is the small-center setting.",
+            "image_trim": "30 40 55 80",
+            "annotation": "Red = naive iid; teal = cluster-robust. Nominal 0.95 and the small-center stress point remain visible.",
             "caption": "Synthetic clustered-data example; intervals compared on coverage, width, and bias.",
             "required_panel_count": 1,
         },
@@ -333,6 +405,20 @@ def page_specs() -> list[dict[str, Any]]:
             "content_kind": "flow",
             "dominant_object": "scientific_relation_diagram",
             "nodes": ["DGP knobs", "Clustered samples", "Interval procedures", "Coverage diagnostics"],
+            "design_factors": [
+                r"centers \(G=8,20,50\)",
+                r"ICC \(\rho=0,.1,.3,.5\)",
+                "balanced or imbalanced clusters",
+            ],
+            "procedures": [
+                "naive iid OLS z interval",
+                "cluster-robust z interval with center scores",
+            ],
+            "endpoints": [
+                "95% coverage vs 0.95 target",
+                "mean interval width",
+                "bias of treatment-effect estimate",
+            ],
             "annotation": "The connector direction encodes data generation before interval estimation and coverage diagnostics.",
             "required_panel_count": 4,
         },
@@ -400,6 +486,17 @@ def page_specs() -> list[dict[str, Any]]:
             "content_kind": "next_experiment",
             "dominant_object": "next_experiment_reasoning",
             "nodes": ["Small-G limit", "DPP batch query", "Mondrian partition", "CR2 / wild bootstrap"],
+            "current_limit": "G=8, ICC=.5 and imbalanced clusters remain below nominal coverage.",
+            "strategy_variation": [
+                "DPP diverse batch",
+                "independent random batch",
+                "Mondrian-partition batch",
+            ],
+            "comparator_setup": [
+                "CR2 small-sample correction",
+                "wild cluster bootstrap",
+            ],
+            "decision_criterion": "PASS if coverage >= .94 and width inflation is controlled; otherwise stratify by Mondrian cell and recheck leverage.",
             "annotation": "Coverage evidence determines which batch-query strategy to validate next; CR2 and wild bootstrap remain proposed comparators.",
             "required_panel_count": 4,
         },
@@ -411,9 +508,19 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
     constraints = recipe["composition_constraints"]
     primary, transforms = fit_bbox(constraints["primary_bbox"], constraints["content_capacity"])
     primary = expand_bbox_for_content(primary, spec["content_kind"], transforms)
-    annotation = annotation_bbox(primary)
-    caption = {key: round(value, 4) for key, value in support_bbox(primary, "below").items()}
+    primary = job_primary_geometry(spec, primary, transforms)
+    supporting = support_geometry(spec, primary)
+    annotation = {key: round(value, 4) for key, value in supporting["annotation"].items()}
+    caption = {key: round(value, 4) for key, value in supporting["caption"].items()}
     capacity = capacity_status(spec, recipe)
+    emitted_text_regions = [annotation]
+    if spec.get("caption"):
+        emitted_text_regions.append(caption)
+    text_overlap_free = all(
+        not bbox_overlap(left, right)
+        for idx, left in enumerate(emitted_text_regions)
+        for right in emitted_text_regions[idx + 1 :]
+    )
     objects = [
         {
             "object_id": f"{spec['page_id']}_primary",
@@ -472,6 +579,10 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
         "reading_flow_mapping": constraints["reading_flow"],
         "annotation_legend_caption_panel_mapping": constraints["annotation_legend_caption_panel_relations"],
         "content_capacity_check": capacity,
+        "text_region_packing": {
+            "emitted_text_region_count": len(emitted_text_regions),
+            "non_overlapping": text_overlap_free,
+        },
         "native_objects": objects,
         "audience_safe_output_contract": {
             "internal_ids_exposed": False,
@@ -501,14 +612,19 @@ def emit_figure(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[st
     annotation = layout["resolved_supporting_object_geometry"]["annotation"]
     caption = layout["resolved_supporting_object_geometry"]["caption"]
     asset = asset_map[spec["asset"]]
+    trim = f",trim={spec['image_trim']},clip" if spec.get("image_trim") else ""
     return "\n".join([
-        tex_node(primary["x"], primary["y"], primary["w"], rf"\includegraphics[width={primary['w']:.4f}\paperwidth,height={primary['h']:.4f}\paperheight,keepaspectratio]{{{asset}}}", align="center"),
-        tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\small {tex_escape(spec['annotation'])}"),
+        tex_node(primary["x"], primary["y"], primary["w"], rf"\includegraphics[width={primary['w']:.4f}\paperwidth,height={primary['h']:.4f}\paperheight,keepaspectratio{trim}]{{{asset}}}", align="center"),
+        tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}"),
         tex_node(caption["x"], caption["y"], caption["w"], rf"\scriptsize {tex_escape(spec['caption'])}"),
     ])
 
 
 def emit_flow(spec: dict[str, Any], layout: dict[str, Any]) -> str:
+    if spec["page_job"] == "EXPERIMENT_DESIGN":
+        return emit_experiment_design(spec, layout)
+    if spec["page_job"] == "NEXT_EXPERIMENT":
+        return emit_next_experiment(spec, layout)
     primary = layout["resolved_primary_object_geometry"]
     nodes = spec["nodes"]
     gap = 0.018
@@ -532,21 +648,108 @@ def emit_flow(spec: dict[str, Any], layout: dict[str, Any]) -> str:
     return "\n".join(parts)
 
 
+def emit_experiment_design(spec: dict[str, Any], layout: dict[str, Any]) -> str:
+    primary = layout["resolved_primary_object_geometry"]
+    x = primary["x"]
+    y = primary["y"]
+    w = primary["w"]
+    h = primary["h"]
+    factor_w = w * 0.25
+    data_w = w * 0.21
+    proc_w = w * 0.22
+    endpoint_w = w * 0.22
+    gap = w * 0.035
+    top_h = h * 0.84
+    data_x = x + factor_w + gap
+    proc_x = data_x + data_w + gap
+    endpoint_x = proc_x + proc_w + gap
+    parts = [
+        rf"\StageThreePanel{{{x:.4f}}}{{{y:.4f}}}{{{x+factor_w:.4f}}}{{{y+top_h:.4f}}};",
+        rf"\StageThreePanel{{{data_x:.4f}}}{{{y+0.060:.4f}}}{{{data_x+data_w:.4f}}}{{{y+top_h-0.035:.4f}}};",
+        rf"\StageThreePanel{{{proc_x:.4f}}}{{{y:.4f}}}{{{proc_x+proc_w:.4f}}}{{{y+top_h:.4f}}};",
+        rf"\StageThreePanel{{{endpoint_x:.4f}}}{{{y+0.030:.4f}}}{{{endpoint_x+endpoint_w:.4f}}}{{{y+top_h-0.010:.4f}}};",
+        tex_node(x + 0.012, y + 0.020, factor_w - 0.024, r"\scriptsize\textbf{DGP stress grid}", align="center"),
+        tex_node(data_x + 0.012, y + 0.088, data_w - 0.024, r"\scriptsize\textbf{Generated units}\\centers -> subjects\\treatment shares", align="center"),
+        tex_node(proc_x + 0.012, y + 0.020, proc_w - 0.024, r"\scriptsize\textbf{Interval procedures}", align="center"),
+        tex_node(endpoint_x + 0.012, y + 0.055, endpoint_w - 0.024, r"\scriptsize\textbf{Evaluation endpoints}", align="center"),
+    ]
+    for idx, factor in enumerate(spec["design_factors"]):
+        parts.append(tex_node(x + 0.018, y + 0.092 + idx * 0.078, factor_w - 0.036, rf"\scriptsize {factor}", align="left"))
+    parts.append(tex_node(data_x + 0.018, y + 0.230, data_w - 0.036, r"\tiny 400 reps/cell\\records: \(Y_{ij},T_{ij},j\)", align="center"))
+    for idx, procedure in enumerate(spec["procedures"]):
+        py = y + 0.115 + idx * 0.130
+        parts.append(rf"\StageThreeSubPanel{{{proc_x+0.018:.4f}}}{{{py:.4f}}}{{{proc_x+proc_w-0.018:.4f}}}{{{py+0.090:.4f}}};")
+        parts.append(tex_node(proc_x + 0.026, py + 0.020, proc_w - 0.052, rf"\tiny {tex_escape(procedure)}", align="center"))
+    for idx, endpoint in enumerate(spec["endpoints"]):
+        parts.append(tex_node(endpoint_x + 0.018, y + 0.125 + idx * 0.080, endpoint_w - 0.036, rf"\tiny {tex_escape(endpoint)}", align="left"))
+    mid_y = y + top_h * 0.50
+    parts.extend([
+        rf"\StageThreeConnector{{{x+factor_w+0.006:.4f}}}{{{mid_y:.4f}}}{{{data_x-0.008:.4f}}}{{{mid_y:.4f}}};",
+        rf"\StageThreeConnector{{{data_x+data_w+0.006:.4f}}}{{{mid_y:.4f}}}{{{proc_x-0.008:.4f}}}{{{mid_y:.4f}}};",
+        rf"\StageThreeConnector{{{proc_x+proc_w+0.006:.4f}}}{{{mid_y:.4f}}}{{{endpoint_x-0.008:.4f}}}{{{mid_y:.4f}}};",
+    ])
+    annotation = layout["resolved_supporting_object_geometry"]["annotation"]
+    parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}", align="left"))
+    return "\n".join(parts)
+
+
+def emit_next_experiment(spec: dict[str, Any], layout: dict[str, Any]) -> str:
+    primary = layout["resolved_primary_object_geometry"]
+    x = primary["x"]
+    y = primary["y"]
+    w = primary["w"]
+    h = primary["h"]
+    col_w = (w - 0.05) / 3
+    x2 = x + col_w + 0.025
+    x3 = x2 + col_w + 0.025
+    panel_h = h * 0.78
+    parts = [
+        rf"\StageThreePanel{{{x:.4f}}}{{{y:.4f}}}{{{x+col_w:.4f}}}{{{y+panel_h:.4f}}};",
+        rf"\StageThreePanel{{{x2:.4f}}}{{{y:.4f}}}{{{x2+col_w:.4f}}}{{{y+panel_h:.4f}}};",
+        rf"\StageThreePanel{{{x3:.4f}}}{{{y:.4f}}}{{{x3+col_w:.4f}}}{{{y+panel_h:.4f}}};",
+        tex_node(x + 0.014, y + 0.020, col_w - 0.028, r"\scriptsize\textbf{Current limit}", align="center"),
+        tex_node(x + 0.018, y + 0.088, col_w - 0.036, rf"\scriptsize {tex_escape(spec['current_limit'])}", align="left"),
+        tex_node(x2 + 0.014, y + 0.020, col_w - 0.028, r"\scriptsize\textbf{Batch-query factor}", align="center"),
+        tex_node(x3 + 0.014, y + 0.020, col_w - 0.028, r"\scriptsize\textbf{Comparator and criterion}", align="center"),
+    ]
+    for idx, strategy in enumerate(spec["strategy_variation"]):
+        sy = y + 0.082 + idx * 0.072
+        parts.append(rf"\StageThreeSubPanel{{{x2+0.018:.4f}}}{{{sy:.4f}}}{{{x2+col_w-0.018:.4f}}}{{{sy+0.048:.4f}}};")
+        parts.append(tex_node(x2 + 0.026, sy + 0.011, col_w - 0.052, rf"\scriptsize {tex_escape(strategy)}", align="center"))
+    for idx, comparator in enumerate(spec["comparator_setup"]):
+        parts.append(tex_node(x3 + 0.022, y + 0.090 + idx * 0.058, col_w - 0.044, rf"\scriptsize {tex_escape(comparator)}", align="left"))
+    parts.append(tex_node(x3 + 0.022, y + 0.215, col_w - 0.044, rf"\tiny {tex_escape(spec['decision_criterion'])}", align="left"))
+    mid_y = y + panel_h * 0.47
+    parts.extend([
+        rf"\StageThreeConnector{{{x+col_w+0.008:.4f}}}{{{mid_y:.4f}}}{{{x2-0.010:.4f}}}{{{mid_y:.4f}}};",
+        rf"\StageThreeConnector{{{x2+col_w+0.008:.4f}}}{{{mid_y:.4f}}}{{{x3-0.010:.4f}}}{{{mid_y:.4f}}};",
+    ])
+    annotation = layout["resolved_supporting_object_geometry"]["annotation"]
+    parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}", align="left"))
+    return "\n".join(parts)
+
+
 def emit_image_panel(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str, str]) -> str:
     primary = layout["resolved_primary_object_geometry"]
     labels = spec["panel_labels"]
     assets = [asset_map[item] for item in spec["assets"]]
-    gap = 0.012
+    gap = 0.010
     panel_w = (primary["w"] - gap * 3) / 4
-    panel_h = min(primary["h"] * 0.76, panel_w * SLIDE_W / SLIDE_H)
-    y = primary["y"] + 0.025
+    panel_h = min(primary["h"] * 0.72, panel_w * SLIDE_W / SLIDE_H)
+    y = primary["y"] + 0.050
     parts = []
     for idx, (label, asset) in enumerate(zip(labels, assets)):
         x = primary["x"] + idx * (panel_w + gap)
-        parts.append(tex_node(x, y - 0.028, panel_w, rf"\scriptsize\textbf{{{tex_escape(label)}}}", align="center"))
+        parts.append(tex_node(x, y - 0.037, panel_w, rf"\footnotesize\textbf{{{tex_escape(label)}}}", align="center"))
         parts.append(tex_node(x, y, panel_w, rf"\includegraphics[width={panel_w:.4f}\paperwidth,height={panel_h:.4f}\paperheight,keepaspectratio]{{{asset}}}", align="center"))
+    zoom_x = primary["x"] + primary["w"] * 0.34
+    zoom_y = y + panel_h + 0.020
+    zoom_w = primary["w"] * 0.32
+    zoom_h = min(0.135, primary["y"] + primary["h"] - zoom_y)
+    parts.append(rf"\StageThreeSubPanel{{{zoom_x:.4f}}}{{{zoom_y:.4f}}}{{{zoom_x+zoom_w:.4f}}}{{{zoom_y+zoom_h:.4f}}};")
+    parts.append(tex_node(zoom_x + 0.010, zoom_y + 0.012, zoom_w - 0.020, r"\scriptsize\textbf{Error zoom: TP / FP / FN colors remain bound to the same case}", align="center"))
     annotation = layout["resolved_supporting_object_geometry"]["caption"]
-    parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\scriptsize {tex_escape(spec['annotation'])}"))
+    parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\scriptsize {tex_escape(spec['annotation'])}", align="center"))
     return "\n".join(parts)
 
 
@@ -575,6 +778,9 @@ def scientific_layout_macros() -> str:
 \newcommand{\StageThreeNode}[5]{\node[anchor=north west,align=#4,text width=#3\paperwidth,inner sep=0pt] at (#1,#2) {#5}}
 \newcommand{\StageThreeBox}[4]{\draw[rounded corners=1.5pt,line width=0.7pt,draw=maincolor!75,fill=white] (#1,#2) rectangle (#3,#4)}
 \newcommand{\StageThreeArrow}[4]{\draw[-{Latex[length=2mm]},line width=0.8pt,draw=maincolor!75] (#1,#2) -- (#3,#4)}
+\newcommand{\StageThreePanel}[4]{\draw[rounded corners=1pt,line width=0.7pt,draw=maincolor!70,fill=maincolor!3] (#1,#2) rectangle (#3,#4)}
+\newcommand{\StageThreeSubPanel}[4]{\draw[rounded corners=0.8pt,line width=0.55pt,draw=maincolor!45,fill=white] (#1,#2) rectangle (#3,#4)}
+\newcommand{\StageThreeConnector}[4]{\draw[-{Latex[length=2.2mm]},line width=0.9pt,draw=maincolor!80] (#1,#2) -- (#3,#4)}
 """
 
 
@@ -649,6 +855,8 @@ def dependency_probe() -> dict[str, Any]:
             "noto_cjk_dir_exists": LOCAL_NOTO_CJK_DIR.exists(),
             "times_font_dir": str(TRACE_TIMES_FONT_DIR),
             "times_font_dir_exists": TRACE_TIMES_FONT_DIR.exists(),
+            "tinytex_bin": str(LOCAL_TINYTEX_BIN),
+            "tinytex_bin_exists": LOCAL_TINYTEX_BIN.exists(),
             "tex_cache_env": tex_cache_env(),
         },
         "tex_engine_available": tex_engine_available,
@@ -762,6 +970,18 @@ def clean_latex_intermediates(build_dir: Path) -> list[str]:
             path.unlink()
             removed.append(rel(path))
     return removed
+
+
+def normalize_generated_logs(build_dir: Path) -> list[str]:
+    normalized: list[str] = []
+    for name in ["compile.log", "main.log"]:
+        path = build_dir / name
+        if not path.exists():
+            continue
+        lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+        path.write_text("\n".join(line.rstrip() for line in lines) + "\n", encoding="utf-8")
+        normalized.append(rel(path))
+    return normalized
 
 
 def mutation_regression(spec: dict[str, Any], baseline_layout: dict[str, Any]) -> dict[str, Any]:
@@ -911,7 +1131,7 @@ def generate(out_dir: Path, *, write_result_visual_inputs: bool = False) -> dict
     }
     (out_dir / "resolved_layouts.json").write_text(json.dumps({"schema": "RESEARCH_CUHK_STAGE3_RESOLVED_LAYOUTS_V1", "task_key": TASK_KEY, "layouts": layouts}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     (out_dir / "runtime_trace.json").write_text(json.dumps(trace, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    mutation = mutation_regression(specs[1], layouts[1])
+    mutation = mutation_regression(specs[0], layouts[0])
     (out_dir / "mutation_regression.json").write_text(json.dumps(mutation, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     capacity_failure = capacity_failure_contract(specs[4])
     (out_dir / "capacity_failure_contract.json").write_text(json.dumps(capacity_failure, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -922,6 +1142,7 @@ def generate(out_dir: Path, *, write_result_visual_inputs: bool = False) -> dict
     compile_status = compile_pdf(build_dir)
     render_status = render_pdf(build_dir, compile_status)
     cleaned_intermediates = clean_latex_intermediates(build_dir)
+    normalized_logs = normalize_generated_logs(build_dir)
     manifest = {
         "schema": "RESEARCH_CUHK_STAGE3_BUILD_MANIFEST_V1",
         "task_key": TASK_KEY,
@@ -947,6 +1168,7 @@ def generate(out_dir: Path, *, write_result_visual_inputs: bool = False) -> dict
             },
         },
         "cleaned_latex_intermediates": cleaned_intermediates,
+        "normalized_generated_logs": normalized_logs,
         "resolved_layouts": rel(out_dir / "resolved_layouts.json"),
         "runtime_trace": rel(out_dir / "runtime_trace.json"),
         "mutation_regression": rel(out_dir / "mutation_regression.json"),

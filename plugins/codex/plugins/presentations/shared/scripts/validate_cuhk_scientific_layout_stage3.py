@@ -160,6 +160,16 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False) -> list[str]:
                     errors.append(f"{layouts_path}: {layout.get('page_id')} {role} bbox exceeds safe height")
         if layout.get("content_capacity_check", {}).get("status") not in {"FIT", "SPLIT_REQUIRED", "NO_COMPATIBLE_LAYOUT"}:
             errors.append(f"{layouts_path}: invalid capacity status for {layout.get('page_id')}")
+        packing = layout.get("text_region_packing", {})
+        if packing.get("non_overlapping") is not True:
+            errors.append(f"{layouts_path}: emitted text regions overlap for {layout.get('page_id')}")
+        page_job = layout.get("page_job")
+        if page_job == "REAL_DATA_APPLICATION" and bbox.get("w", 0) * bbox.get("h", 0) < 0.34:
+            errors.append(f"{layouts_path}: quantitative result figure below projection-scale area")
+        if page_job == "MEDICAL_IMAGE_COMPARISON" and (bbox.get("w", 0) < 0.84 or bbox.get("h", 0) < 0.48):
+            errors.append(f"{layouts_path}: medical panel band below readable-area floor")
+        if page_job in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"} and bbox.get("w", 0) * bbox.get("h", 0) < 0.36:
+            errors.append(f"{layouts_path}: scientific diagram region below specificity floor for {layout.get('page_id')}")
         if layout.get("audience_safe_output_contract", {}).get("internal_ids_exposed") is not False:
             errors.append(f"{layouts_path}: audience-safe contract violated for {layout.get('page_id')}")
 

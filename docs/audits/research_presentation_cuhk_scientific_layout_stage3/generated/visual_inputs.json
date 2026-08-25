@@ -16,8 +16,8 @@
   "identity_bindings": {
     "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
     "build_manifest": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/BUILD_MANIFEST.json",
-    "build_manifest_sha256": "47ded95a99bac02c77c122ab9b9259b1333216c755f5ed37e67ba0c0fd90e406",
-    "pdf_sha256": "403d939bcd5b42bb195ab2fbff2765c80114ce91aabebf3f990772835bb0b439",
+    "build_manifest_sha256": "4c6a27da8687a4ee1987a8191a435d2b66c0b37cd517d66bad53e63dec6dafa5",
+    "pdf_sha256": "b2dace9cb16a32ab832275a8d1c2c9c7c665015dd76bf94525543cf47b4cf194",
     "page_job_by_logical_id": {
       "slide_2_statistical_model": "STATISTICAL_MODEL",
       "slide_3_real_data_application": "REAL_DATA_APPLICATION",
@@ -43,12 +43,12 @@
       "slide_7_next_experiment": "GSC-018"
     },
     "rendered_png_sha256_by_logical_id": {
-      "slide_2_statistical_model": "0e8fdb402b69fa871148351986be1bdba67d4fe8c3b36db2d59ac138d3bf596c",
-      "slide_3_real_data_application": "91eb2d5df6e56032ef28cc58fd0b62afbe1174c7fd5b515c8fc195cc85871df7",
-      "slide_4_experiment_design": "c17eb23f12f5119eb1eaeb06200fb6ac4ff9a229700338815cded91f572c01a6",
-      "slide_5_negative_result": "66d2e45f567bf717d746c81a30c144bcede6cbb7198967b1f31e743c53b045a0",
-      "slide_6_medical_image_comparison": "1768adbdae99b4ee28642a0d98dbe8d64bc626cf142726f590f3408874f25397",
-      "slide_7_next_experiment": "a1322fb190e99788927a63152aad92480622aadfdbe2b2c03d01bf9346d08f57"
+      "slide_2_statistical_model": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491",
+      "slide_3_real_data_application": "15f35966635192b0b07818394d5402a98a40e247c2abc376434e92332b604437",
+      "slide_4_experiment_design": "f7631db19453fca82efddcb8afab1a5b8c024221d9080ba5359a6377d5de77a9",
+      "slide_5_negative_result": "3ae702392aa81f62881f3d1533c269fe07ed99f0c9eb4e619d8338656cbca7e7",
+      "slide_6_medical_image_comparison": "61db6033b6868a06ba05becd3cd82279df87dd61657571c985ade84003a87421",
+      "slide_7_next_experiment": "09859b9a192bd1657bedbf59cc648cfaa492478b40bbb98b0ef466ca2d6481cb"
     }
   },
   "inputs": [
@@ -56,42 +56,42 @@
       "logical_id": "slide_2_statistical_model",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-2.png",
       "mime_type": "image/png",
-      "sha256": "0e8fdb402b69fa871148351986be1bdba67d4fe8c3b36db2d59ac138d3bf596c",
+      "sha256": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491",
       "description": "Rendered exact-CUHK content page for STATISTICAL_MODEL with native_latex_math as the main scientific object."
     },
     {
       "logical_id": "slide_3_real_data_application",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-3.png",
       "mime_type": "image/png",
-      "sha256": "91eb2d5df6e56032ef28cc58fd0b62afbe1174c7fd5b515c8fc195cc85871df7",
+      "sha256": "15f35966635192b0b07818394d5402a98a40e247c2abc376434e92332b604437",
       "description": "Rendered exact-CUHK content page for REAL_DATA_APPLICATION with coverage_plot as the main scientific object."
     },
     {
       "logical_id": "slide_4_experiment_design",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-4.png",
       "mime_type": "image/png",
-      "sha256": "c17eb23f12f5119eb1eaeb06200fb6ac4ff9a229700338815cded91f572c01a6",
+      "sha256": "f7631db19453fca82efddcb8afab1a5b8c024221d9080ba5359a6377d5de77a9",
       "description": "Rendered exact-CUHK content page for EXPERIMENT_DESIGN with scientific_relation_diagram as the main scientific object."
     },
     {
       "logical_id": "slide_5_negative_result",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-5.png",
       "mime_type": "image/png",
-      "sha256": "66d2e45f567bf717d746c81a30c144bcede6cbb7198967b1f31e743c53b045a0",
+      "sha256": "3ae702392aa81f62881f3d1533c269fe07ed99f0c9eb4e619d8338656cbca7e7",
       "description": "Rendered exact-CUHK content page for NEGATIVE_RESULT with negative_evidence_plot as the main scientific object."
     },
     {
       "logical_id": "slide_6_medical_image_comparison",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-6.png",
       "mime_type": "image/png",
-      "sha256": "1768adbdae99b4ee28642a0d98dbe8d64bc626cf142726f590f3408874f25397",
+      "sha256": "61db6033b6868a06ba05becd3cd82279df87dd61657571c985ade84003a87421",
       "description": "Rendered exact-CUHK content page for MEDICAL_IMAGE_COMPARISON with same_case_medical_panels as the main scientific object."
     },
     {
       "logical_id": "slide_7_next_experiment",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-7.png",
       "mime_type": "image/png",
-      "sha256": "a1322fb190e99788927a63152aad92480622aadfdbe2b2c03d01bf9346d08f57",
+      "sha256": "09859b9a192bd1657bedbf59cc648cfaa492478b40bbb98b0ef466ca2d6481cb",
       "description": "Rendered exact-CUHK content page for NEXT_EXPERIMENT with next_experiment_reasoning as the main scientific object."
     }
   ]

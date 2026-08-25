@@ -18,7 +18,7 @@
   "compile_status": {
     "status": "COMPILED",
     "engine": "xelatex",
-    "engine_path": "/tmp/texlive-027/bin/x86_64-linux/xelatex",
+    "engine_path": "/home/yuukias/.TinyTeX/bin/x86_64-linux/xelatex",
     "compile_passes": 2,
     "fontconfig": {
       "fontconfig_file": "/home/yuukias/AI_Skills_Collection/docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/fontconfig/fonts.conf",
@@ -29,7 +29,7 @@
       "times_font_files_present": true
     },
     "pdf": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/main.pdf",
-    "pdf_sha256": "403d939bcd5b42bb195ab2fbff2765c80114ce91aabebf3f990772835bb0b439",
+    "pdf_sha256": "b2dace9cb16a32ab832275a8d1c2c9c7c665015dd76bf94525543cf47b4cf194",
     "log": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/compile.log"
   },
   "render_status": {
@@ -38,31 +38,31 @@
     "rendered_png": [
       {
         "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-1.png",
-        "sha256": "1e3b961e9e261a2047375038277dfc7440e64118201f14269201ce912f3fac6c"
+        "sha256": "fa895847c0ad06d4bb19100a3a048cb88b30e1ab9422b1cc142d6aae74ae6e49"
       },
       {
         "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-2.png",
-        "sha256": "0e8fdb402b69fa871148351986be1bdba67d4fe8c3b36db2d59ac138d3bf596c"
+        "sha256": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491"
       },
       {
         "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-3.png",
-        "sha256": "91eb2d5df6e56032ef28cc58fd0b62afbe1174c7fd5b515c8fc195cc85871df7"
+        "sha256": "15f35966635192b0b07818394d5402a98a40e247c2abc376434e92332b604437"
       },
       {
         "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-4.png",
-        "sha256": "c17eb23f12f5119eb1eaeb06200fb6ac4ff9a229700338815cded91f572c01a6"
+        "sha256": "f7631db19453fca82efddcb8afab1a5b8c024221d9080ba5359a6377d5de77a9"
       },
       {
         "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-5.png",
-        "sha256": "66d2e45f567bf717d746c81a30c144bcede6cbb7198967b1f31e743c53b045a0"
+        "sha256": "3ae702392aa81f62881f3d1533c269fe07ed99f0c9eb4e619d8338656cbca7e7"
       },
       {
         "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-6.png",
-        "sha256": "1768adbdae99b4ee28642a0d98dbe8d64bc626cf142726f590f3408874f25397"
+        "sha256": "61db6033b6868a06ba05becd3cd82279df87dd61657571c985ade84003a87421"
       },
       {
         "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-7.png",
-        "sha256": "a1322fb190e99788927a63152aad92480622aadfdbe2b2c03d01bf9346d08f57"
+        "sha256": "09859b9a192bd1657bedbf59cc648cfaa492478b40bbb98b0ef466ca2d6481cb"
       }
     ]
   },
@@ -82,6 +82,10 @@
     "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/main.out",
     "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/main.snm",
     "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/main.toc"
+  ],
+  "normalized_generated_logs": [
+    "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/compile.log",
+    "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/main.log"
   ],
   "resolved_layouts": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/resolved_layouts.json",
   "runtime_trace": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/runtime_trace.json",

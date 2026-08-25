@@ -529,6 +529,7 @@ class PresentationSharedTests(unittest.TestCase):
                     }.issubset(consumed)
                 )
                 self.assertFalse(layout["audience_safe_output_contract"]["internal_ids_exposed"])
+                self.assertTrue(layout["text_region_packing"]["non_overlapping"])
                 safe = layout["exact_cuhk_content_safe_region"]
                 bbox = layout["resolved_primary_object_geometry"]
                 self.assertGreaterEqual(bbox["x"], safe["x"])
@@ -540,6 +541,13 @@ class PresentationSharedTests(unittest.TestCase):
                     self.assertGreaterEqual(support["y"], safe["y"] - 0.0001)
                     self.assertLessEqual(support["x"] + support["w"], safe["x"] + safe["w"] + 0.0001)
                     self.assertLessEqual(support["y"] + support["h"], safe["y"] + safe["h"] + 0.0001)
+                if layout["page_job"] == "REAL_DATA_APPLICATION":
+                    self.assertGreaterEqual(bbox["w"] * bbox["h"], 0.34)
+                if layout["page_job"] == "MEDICAL_IMAGE_COMPARISON":
+                    self.assertGreaterEqual(bbox["w"], 0.84)
+                    self.assertGreaterEqual(bbox["h"], 0.48)
+                if layout["page_job"] in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"}:
+                    self.assertGreaterEqual(bbox["w"] * bbox["h"], 0.36)
 
             trace = json.loads((generated / "runtime_trace.json").read_text(encoding="utf-8"))
             self.assertEqual(len(trace["slides"]), 6)
@@ -579,6 +587,14 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertIn(r"\StageThreeNode", tex)
             self.assertIn(r"\displaystyle", tex)
             self.assertIn(r"\includegraphics", tex)
+            self.assertIn(r"centers \(G=8,20,50\)", tex)
+            self.assertIn(r"ICC \(\rho=0,.1,.3,.5\)", tex)
+            self.assertIn("naive iid OLS z interval", tex)
+            self.assertIn("95\\% coverage vs 0.95 target", tex)
+            self.assertIn("DPP diverse batch", tex)
+            self.assertIn("independent random batch", tex)
+            self.assertIn("coverage >= .94", tex)
+            self.assertIn("Error zoom: TP / FP / FN colors remain bound to the same case", tex)
             for forbidden in ["RRL-", "SRC-", "GSC-", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "run ID", "fixture", "workflow"]:
                 self.assertNotIn(forbidden, tex)
             plugin_generator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/generate_cuhk_scientific_layout_stage3.py"

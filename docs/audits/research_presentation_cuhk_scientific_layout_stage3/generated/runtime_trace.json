@@ -19,7 +19,7 @@
       },
       "selected_gold_id": "GSC-016",
       "recipe_sha256": "9615cc4bcd20f8ec2a7c1a15c91f4dd030754ac21f08b5003be5ec79a565d023",
-      "resolved_layout_sha256": "700b820ff92338330fc4d65d3c7cbe77a7e9789f34fa2e5642981325293cb4bd",
+      "resolved_layout_sha256": "608049c4cfc1af09d9b602c81ceb13be7aed26bbda9d1b5870da4b730e488fb7",
       "emitted_tex_object_ids": [
         "equation_statistical_model_primary",
         "equation_statistical_model_annotation",
@@ -44,7 +44,7 @@
       },
       "selected_gold_id": "GSC-014",
       "recipe_sha256": "c409cd71c5831d4e4ad49ef4cb7d3c6cdf85deee1f19a1fc11a191adc51c11bc",
-      "resolved_layout_sha256": "2aa49a8ef75ec40f0e381c845d04b73eacfce13e0b11f1b79ebd69231bc96c8d",
+      "resolved_layout_sha256": "dfc13bf224146e3e10bfffc8583fc1c87ca6db45324c46d115a5b734d51f8ac0",
       "emitted_tex_object_ids": [
         "quantitative_result_uncertainty_primary",
         "quantitative_result_uncertainty_annotation",
@@ -69,7 +69,7 @@
       },
       "selected_gold_id": "GSC-004",
       "recipe_sha256": "a08385437ea881fedf1c5bd1f0007522933b48b4684fba79753f97692b79a80e",
-      "resolved_layout_sha256": "65a69dc16ba0d3f4b274dadeb2dbab51e2d92e1b592756bace05d9d99d00e708",
+      "resolved_layout_sha256": "09e422a899ce9c7f2a3afb87484d596f709e0a50ab3eb49e9873bd934edc7fe1",
       "emitted_tex_object_ids": [
         "method_experiment_design_primary",
         "method_experiment_design_annotation",
@@ -94,7 +94,7 @@
       },
       "selected_gold_id": "GSC-012",
       "recipe_sha256": "4aae3a6bbe7cda1c0346dd1ea5c5f7c786ec42c08a7d03a07a646ee3472b0b7f",
-      "resolved_layout_sha256": "5e3064d885ddb2e571582a137bf2a670128304b98b79ccdb0ff966095b793e79",
+      "resolved_layout_sha256": "3462095a6606fa6ee5f5b9678aea58f898cd1f7f2c436ab940c50aca070eb06f",
       "emitted_tex_object_ids": [
         "negative_failure_model_check_primary",
         "negative_failure_model_check_annotation",
@@ -119,7 +119,7 @@
       },
       "selected_gold_id": "GSC-008",
       "recipe_sha256": "f2099fe794caab01779329db7bc8cb1775aa3f43b01837badc91b80a0dd5ac78",
-      "resolved_layout_sha256": "1fbd7bc0cf2486ec385ffd30529a47247ed2c2a1cd35d77767a6a2dc6ebb3565",
+      "resolved_layout_sha256": "ba8450df0e53192d27d4aeccab7c5ac910d01399ccaeed1f0a5835f033eaa39a",
       "emitted_tex_object_ids": [
         "medical_image_aligned_comparison_primary",
         "medical_image_aligned_comparison_annotation",
@@ -144,7 +144,7 @@
       },
       "selected_gold_id": "GSC-018",
       "recipe_sha256": "5ff51c819553d350ceb0e76c1315bf894fe61845e95ebb13f88c4c350892b464",
-      "resolved_layout_sha256": "dc10c2a3d1b32aecc0524d67d80a18c4162a11fb2e639095218326a233a14cad",
+      "resolved_layout_sha256": "950267c5152c396d5fb9231dc5bec88db27cd4dbdf5599ffa882eca0dca537e7",
       "emitted_tex_object_ids": [
         "discussion_next_experiment_primary",
         "discussion_next_experiment_annotation",
