@@ -1,18 +1,18 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
-  "state": "PLAN_FROZEN",
+  "state": "NEEDS_GPT_PLANNER",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
   "max_plan_revisions": 1,
   "base_commit": "388530eec3c9a9c7012721ba6ae4caa768ccffb5",
   "base_branch": "main",
-  "implementation_commit": null,
+  "implementation_commit": "2b0942ed34896eeb28788f113319858ea1e78ad7",
   "ci_required": true,
   "ci_status": "PENDING",
   "last_review_decision": null,
   "review_limit_reached": false,
   "human_gate_reason": null,
-  "next_action": "RUN_CODEX_EXECUTOR"
+  "next_action": "RUN_GPT_PLANNER"
 }
