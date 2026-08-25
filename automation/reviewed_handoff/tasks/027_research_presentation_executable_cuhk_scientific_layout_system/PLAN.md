@@ -242,3 +242,29 @@ Planner 只有在以下全部成立时才可 PASS 027：
 12. RESULT / FINAL_REPORT 明确列出 implemented layout families、gold-to-layout runtime traces、render/visual evidence、失败/拒绝路径与 remaining limitations。
 
 027 PASS 只关闭 Stage 3。Planner PASS 后才创建 Stage 4 — One-Call Production Entry + Bounded Quality Loop 的独立 bounded task；Executor 不得自行继续。
+
+## Plan revision 1 — staged GitHub visual review transport
+
+本次修订只解决一个控制面循环依赖，不改变任何 Stage 3 业务范围、成熟度门槛或验收标准。当前已发布到 `main` 的 `2b0942ed34896eeb28788f113319858ea1e78ad7` 及其后续 staged handoff 已包含现有 implementation、真实 PDF/PNG、mechanical QA 与 027 visual manifest；这些只视为**已发布的视觉审查输入快照**，不是 027 PASS，也不是最终 implementation handoff。
+
+由于本地 Executor 按设计拿不到 GitHub Actions secret，而 `AI Bridge Visual Review` 工作流可以使用 repository secret，后续执行改为以下合法 staged flow：
+
+1. 不重新生成已发布视觉输入，除非后续真实代码修复使页面像素发生变化；先确认以下文件仍存在且 identity binding 与当前渲染一致：
+   - `results/027_research_presentation_executable_cuhk_scientific_layout_system/visual_review/visual_inputs.json`
+   - `docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/`
+2. Executor **不得直接 `git push`**。对当前已经跟踪的 manifest，使用 GitHub CLI 触发：
+
+```bash
+gh workflow run "AI Bridge Visual Review" \
+  -f manifest=results/027_research_presentation_executable_cuhk_scientific_layout_system/visual_review/visual_inputs.json \
+  -f output=results/027_research_presentation_executable_cuhk_scientific_layout_system/visual_review/VISUAL_REVIEW.json
+```
+
+3. 等待该 GitHub Actions run 完成。工作流必须使用 repository secret 运行真实 `gpt-5.6-terra`，并将 `VISUAL_REVIEW.json` 写回 `main`。如果 run 仍在运行，只等待；不得把“尚未返回 evidence”记为 review failure，也不得消耗 `review_round`。
+4. Evidence 写回后，Executor `git fetch` 并只做 fast-forward 同步到最新 `main`；不得覆盖或改写 GitHub Actions 产生的 visual evidence。
+5. 读取 `VISUAL_REVIEW.json` 的六个主要内容页 item/page-level decision、observation 与 mature-talk judgement，并在最终 `RESULT.md` 中逐页准确汇总。不得用 top-level package PASS 代替 item-level 判断。
+6. 若 Terra 对任何主要内容页给出 `REVISE`，Executor 不自行降低标准或扩大修复范围；保留真实 evidence，完成正常 handoff，由 Scheduled GPT Reviewer 依据原冻结 Plan 决定第一轮 `REVISE` 及最小修复。
+7. 若六个主要内容页均达到冻结 mature bar，也仍不能由 Executor 宣告 PASS。Executor 完成剩余确定性验证并按 Reviewed Handoff 正常进入 CI 交接；最终 PASS 仍由 Scheduled GPT Reviewer 在真实 CI、真实 diff 与 item-level Terra evidence 全部核对后决定。
+8. 如果 GitHub Actions 因真正的 secret/service/permission 外部故障无法产生 evidence，应保留失败 run 的真实信息并交回 Planner；不得伪造 `VISUAL_REVIEW.json`、不得改成本地无 secret 的降级审查，也不得绕过 Terra 门槛。
+
+当前 consumer 的 `CURRENT.json` schema 没有 task-local visual-review waiting 字段，因此本次不新增状态机或机器字段；缺少 `VISUAL_REVIEW.json` 时的“等待且不消耗审核轮次”语义由本 Plan revision 明确约束。后续新视觉任务若 consumer/runtime 已支持 Bridge Kit 的 task-local visual-review evidence contract，应直接使用该正式 contract。
