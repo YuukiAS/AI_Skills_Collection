@@ -2,130 +2,80 @@
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 027_research_presentation_executable_cuhk_scientific_layout_system
 executor: Codex
-implementation_commit: 2b0942ed34896eeb28788f113319858ea1e78ad7
+implementation_commit: 7dadb5e027013253c23025a847bae5d3e3039bd7
 status: WAITING_FOR_CI
 ---
 
-# 027 Executable CUHK Scientific Layout System — Result
+# 027 Executable CUHK Scientific Layout System - Revision Result
 
 ## Implementation Commit
 
-`2b0942ed34896eeb28788f113319858ea1e78ad7`
+`7dadb5e027013253c23025a847bae5d3e3039bd7`
 
-## What Was Implemented
+## Repair Summary
 
-027 Stage 3 implementation/render work has been preserved in clean commits without pushing directly.
+This revision addresses REVIEW_1's five visual-maturity blockers without redesigning the frozen Plan or changing Stage 2 gold admission.
 
-- Added a reusable Stage 3 exact-CUHK scientific layout generator:
-  `skills/tools/documents-media/presentations/shared/scripts/generate_cuhk_scientific_layout_stage3.py`
-- Added the mirrored plugin generator:
-  `plugins/codex/plugins/presentations/shared/scripts/generate_cuhk_scientific_layout_stage3.py`
-- Added a Stage 3 validator:
-  `skills/tools/documents-media/presentations/shared/scripts/validate_cuhk_scientific_layout_stage3.py`
-- Added the mirrored plugin validator:
-  `plugins/codex/plugins/presentations/shared/scripts/validate_cuhk_scientific_layout_stage3.py`
-- Added regression coverage in `tests/test_presentations.py`.
-- Generated the Stage 3 exact-CUHK integration deck and evidence under:
-  `docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/`
-- Wrote the official 027 visual input manifest:
-  `results/027_research_presentation_executable_cuhk_scientific_layout_system/visual_review/visual_inputs.json`
+- Quantitative result pages now allocate a larger projection-scale result figure region, apply bounded figure trim, and add native readable red/teal method binding beside the plot.
+- Experiment-design pages now emit a scientific-factor diagram with centers `G=8,20,50`, ICC levels, cluster balance, generated units, interval procedures, and coverage/width/bias endpoints, instead of the previous generic four-box sequence.
+- Negative-result pages now split the evidence figure from the diagnostic explanation/caption column; emitted audience text regions are validated as non-overlapping.
+- Medical-image pages now use a full-width same-case image band with larger Input / GT / Prediction / Error panels and an explicit same-case error zoom/callout relation.
+- Discussion / next-experiment pages still consume `GSC-018`, but now show current limit, batch-query strategy variation, CR2/wild-bootstrap comparator setup, and an explicit coverage/width decision criterion.
 
-The generated evidence includes:
+The accepted statistical-model page was kept structurally stable except for regenerated render identity.
 
-- canonical CUHK source file identity hashes;
-- resolved six-page scientific layout contract;
-- selector / recipe / resolved-layout runtime trace;
-- mutation regression proving source-derived geometry changes output geometry;
-- capacity failure contract returning `SPLIT_REQUIRED` without generic fallback;
-- dependency and render-resource probes;
-- real `xelatex` PDF compilation;
-- real PNG renders for the title page plus six content pages;
-- mechanical QA status `MECHANICAL_PASS`.
+## Updated Evidence
 
-## Page Jobs Covered
+Regenerated Stage 3 artifacts are under:
 
-The integration deck covers the six frozen Stage 3 page-job families:
+```text
+docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/
+```
 
-- `STATISTICAL_MODEL`
-- `REAL_DATA_APPLICATION`
-- `EXPERIMENT_DESIGN`
-- `NEGATIVE_RESULT`
-- `MEDICAL_IMAGE_COMPARISON`
-- `NEXT_EXPERIMENT`
+Current generated evidence records:
 
-Runtime selected gold records include:
+- real canonical CUHK source copy and file hashes;
+- six resolved page-job layouts with selected gold IDs `GSC-016`, `GSC-014`, `GSC-004`, `GSC-012`, `GSC-008`, and `GSC-018`;
+- mutation regression status `PASS` for source `primary_bbox` affecting resolved/emitted geometry;
+- capacity failure contract status `SPLIT_REQUIRED` with no generic fallback;
+- real `xelatex` compile status `COMPILED`;
+- real PDF-to-PNG render status `ok`, `png_count=7`;
+- mechanical QA status `MECHANICAL_PASS`;
+- updated task-local visual input manifest at `results/027_research_presentation_executable_cuhk_scientific_layout_system/visual_review/visual_inputs.json`.
 
-- `GSC-016`
-- `GSC-014`
-- `GSC-004`
-- `GSC-012`
-- `GSC-008`
-- `GSC-018`
+The new visual input manifest has new rendered PNG SHA values. The existing `VISUAL_REVIEW.json` belongs to the pre-repair identity `6e2e6dab29b0688cc0fde5fe6d68925c5043339fc07df522edb966dc11a44ca1` and is stale for the repaired pixels. Because this Codex run must not push, the new task-local Terra review cannot be truthfully triggered against the repaired commit from GitHub yet; watcher/GitHub Actions must publish and review the new manifest through the repository-secret path.
 
 ## Validation Performed
 
-The following local gates passed in the current Executor run:
+Passed locally:
 
 ```text
+python skills/tools/documents-media/presentations/shared/scripts/generate_cuhk_scientific_layout_stage3.py --write-result-visual-inputs
 python skills/tools/documents-media/presentations/shared/scripts/validate_cuhk_scientific_layout_stage3.py --out-dir docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated
-python -m unittest tests.test_presentations -k cuhk_scientific_layout_stage3_contract
+python -m unittest tests.test_presentations.PresentationSharedTests.test_cuhk_scientific_layout_stage3_contract
 python -m unittest tests.test_presentations
 python -m unittest discover -s tests
-git diff --check
 python scripts/skills.py validate
 python scripts/build_codex_marketplace.py --validate --check --path-report
-python scripts/build_codex_marketplace.py --write --validate --check --path-report
 PYTHONPATH=/home/yuukias/GPT_Codex_AI_Bridge_Kit python -m ai_bridge_kit.bridge_cli reviewed-handoff validate --target /home/yuukias/AI_Skills_Collection
+git diff --check
+pdftotext docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/main.pdf - | rg -n "RRL-|SRC-|GSC-|Reference retrieval|EVIDENCE_MANIFEST|Diagram contract|QA|repo path|run ID|implementation commit|review target|fixture|workflow"
 ```
 
 Observed results:
 
-- strict Stage 3 rendered contract validation: PASS.
-- 027 targeted test: PASS, 1 test.
-- Presentation targeted tests: PASS, 26 tests.
-- full unittest discovery: PASS, 122 tests.
-- `scripts/skills.py validate`: PASS, 149 active skills, 18 profiles, templates, and trigger eval scaffolds.
-- marketplace validate/check/path-report: PASS.
-- marketplace write/validate/check/path-report: PASS after running outside the read-only Codex sandbox for `.agents/plugins/marketplace.json`.
-- Reviewed Handoff validation: PASS, 27 tasks.
-- `git diff --check`: PASS.
+- strict Stage 3 rendered contract validation: PASS;
+- 027 targeted test: PASS, 1 test;
+- Presentation targeted tests: PASS, 26 tests;
+- full unittest discovery: PASS, 122 tests;
+- `scripts/skills.py validate`: PASS, 149 active skills, 18 profiles, templates, and trigger eval scaffolds;
+- marketplace validate/check/path-report: PASS, 10 plugins, 25 active skills, 63 source snapshots, no path-budget overages;
+- Reviewed Handoff validation: PASS, 27 tasks;
+- `git diff --check`: PASS;
+- PDF audience-text leak grep: no matches.
 
-## Visual Review Status
-
-The staged GitHub visual-review transport required by Plan revision 1 completed successfully.
-
-Workflow run:
-
-```text
-https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/32814336641
-```
-
-Evidence:
-
-```text
-results/027_research_presentation_executable_cuhk_scientific_layout_system/visual_review/VISUAL_REVIEW.json
-evidence_id: visual-review-027_research_presentation_executable_cuhk_scientific_layout_system-6e2e6dab29b0
-review_model: gpt-5.6-terra
-overall_decision: REVISE
-```
-
-Item/page-level decisions:
-
-- `slide_2_statistical_model`: `PASS`. Terra judged the native mixed-effects model page clean, centered, large, and genuinely typeset.
-- `slide_3_real_data_application`: `REVISE`. The coverage plot is undersized; axes, legend, facet labels, and annotation are too small for projection.
-- `slide_4_experiment_design`: `REVISE`. The page reads as a generic four-box arrow workflow rather than a scientifically specific design diagram.
-- `slide_5_negative_result`: `REVISE`. Negative evidence is present, but lower explanatory text overlaps and becomes illegible.
-- `slide_6_medical_image_comparison`: `REVISE`. Same-case panel structure is clear, but panels and lesion/error markings are too small to inspect.
-- `slide_7_next_experiment`: `REVISE`. The page names next-step comparators but uses a generic box-arrow sequence without concrete experimental factors, decision metric, or expected diagnostic outcome.
-
-Per Plan revision 1, Executor does not lower the visual bar, fabricate a PASS, or perform an unplanned visual repair after Terra returned item-level `REVISE`. The evidence is preserved for Scheduled GPT Reviewer to decide the first formal review outcome and any bounded repair scope.
+`python scripts/build_codex_marketplace.py --write --validate --check --path-report` could not be completed in this Codex process: sandbox execution hit read-only `.agents/plugins/marketplace.json`, and the sandbox-external retry was rejected by the active safety policy because it would write marketplace outputs outside the task-owned repair. The read-only marketplace validation/check passed after the source/plugin mirror was synchronized.
 
 ## Current Routing
 
-This is not a 027 PASS claim and not a Stage 4 entry. The implementation commit remains:
-
-```text
-2b0942ed34896eeb28788f113319858ea1e78ad7
-```
-
-Because `ci_required=true`, `CURRENT.ci_status` remains `PENDING` and this handoff enters `WAITING_FOR_CI`. GitHub CI PASS must be established by the watcher/Scheduled GPT path before Reviewer adjudication.
+This is not a 027 PASS claim and not a Stage 4 entry. Because `ci_required=true`, `CURRENT.ci_status` is `PENDING` and the task is handed off as `WAITING_FOR_CI`. GitHub CI and new task-local Terra item/page-level review must be established through the watcher/GitHub path before Scheduled GPT Reviewer adjudication.
