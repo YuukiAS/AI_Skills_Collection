@@ -5,6 +5,33 @@ task_key: 026_research_presentation_discussion_next_experiment_gold_recovery
 
 # 026 Discussion / Next-Experiment Gold Recovery — Final Report
 
+## What this task solved
+
+026 closed the Stage 2 `discussion / next experiment` coverage gap without lowering the production-gold mature bar or changing the 025 gold history.
+
+## What changed
+
+The task admitted exactly one new production-gold composition record, `GSC-018`, from `RRL-059 / SRC-077 / page 51`, backed by 026 item-level Terra PASS evidence and normal selector / recipe consumption proof.
+
+## New capabilities / behavior
+
+The Stage 2 gold library now covers discussion / next-experiment page jobs, and the normal selector can route compatible next-experiment requests to a source-derived composition recipe that affects downstream layout.
+
+## Example usage
+
+A next-experiment page job can select `GSC-018` and reuse its abstract composition structure for paired next-query strategy reasoning without copying donor pixels, branding, or exact styling.
+
+## Regression and remaining limitations
+
+026 did not modify the existing 025 nine-record gold set. Stage 3 still had to prove that renderer-neutral gold constraints can become exact CUHK native layouts, so 026 PASS was not a final product-quality PASS.
+
+## Technical appendix
+
+- implementation commit: `490f879f1794603b0c906719e6321ec068e07de5`
+- CI: `reviewed-handoff/ci-summary = success`
+- newly admitted gold: `GSC-018`
+- review rounds used: 2 / 2
+
 ## 本轮解决了什么
 
 026 只处理 Stage 2 最后一个未关闭的覆盖缺口：`discussion / next experiment`。它没有重做 025 已经通过的 9 条 production gold，也没有降低成熟度门槛，而是在新的、严格有界的公开 source 搜索空间里寻找可用页面，并用真实 rendered pixels 做 026 专用 Terra 准入。
