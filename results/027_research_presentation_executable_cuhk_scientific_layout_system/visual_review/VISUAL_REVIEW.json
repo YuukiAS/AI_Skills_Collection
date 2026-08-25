@@ -1,0 +1,236 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": "The coverage chart occupies a small central area; its panel axes, legend, and callout text are extremely small relative to the page.",
+      "finding_id": "F-01",
+      "item_id": "slide_3_real_data_application",
+      "recommendation": "Enlarge the coverage figure substantially and scale its labels, legend, and annotations for projection reading.",
+      "requirement_id": "projection-readable scientific object",
+      "severity": "blocking",
+      "summary": "Primary evidence plot is too small to inspect."
+    },
+    {
+      "evidence": "The lower explanatory text visibly overlaps itself beneath the bar chart, creating an illegible doubled line.",
+      "finding_id": "F-02",
+      "item_id": "slide_5_negative_result",
+      "recommendation": "Reflow or remove the overlapping text and reserve clear space for a readable interpretation tied to the plot.",
+      "requirement_id": "no clipped or overlapping content",
+      "severity": "blocking",
+      "summary": "Negative-result page contains visibly illegible overlapping text."
+    },
+    {
+      "evidence": "The page consists of four uniform outlined boxes joined by arrows, with very large unused white areas and no scientific diagram detail beyond the labels.",
+      "finding_id": "F-03",
+      "item_id": "slide_4_experiment_design",
+      "recommendation": "Replace the generic pipeline fixture with a scientifically specific design diagram showing variables, experimental factors, measurements, and decision points.",
+      "requirement_id": "scientific specificity / no generic box-arrow fixture",
+      "severity": "blocking",
+      "summary": "Experiment-design diagram is a generic box-and-arrow sequence."
+    },
+    {
+      "evidence": "The page uses the same four-box arrow chain as the design page, with only a short sentence below and large empty space.",
+      "finding_id": "F-04",
+      "item_id": "slide_7_next_experiment",
+      "recommendation": "Show the proposed experiment's hypothesis, comparison arms, measurable endpoints, and decision criterion in a research-specific reasoning graphic.",
+      "requirement_id": "concrete next-experiment reasoning / no generic box-arrow fixture",
+      "severity": "blocking",
+      "summary": "Next-experiment content is presented as a generic workflow rather than inspectable experimental reasoning."
+    }
+  ],
+  "created_at": "2026-08-25T05:45:36Z",
+  "evidence_id": "visual-review-027_research_presentation_executable_cuhk_scientific_layout_system-6e2e6dab29b0",
+  "images": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-2.png",
+      "sha256": "0e8fdb402b69fa871148351986be1bdba67d4fe8c3b36db2d59ac138d3bf596c"
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-3.png",
+      "sha256": "91eb2d5df6e56032ef28cc58fd0b62afbe1174c7fd5b515c8fc195cc85871df7"
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-4.png",
+      "sha256": "c17eb23f12f5119eb1eaeb06200fb6ac4ff9a229700338815cded91f572c01a6"
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-5.png",
+      "sha256": "66d2e45f567bf717d746c81a30c144bcede6cbb7198967b1f31e743c53b045a0"
+    },
+    {
+      "logical_id": "slide_6_medical_image_comparison",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-6.png",
+      "sha256": "1768adbdae99b4ee28642a0d98dbe8d64bc626cf142726f590f3408874f25397"
+    },
+    {
+      "logical_id": "slide_7_next_experiment",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-7.png",
+      "sha256": "a1322fb190e99788927a63152aad92480622aadfdbe2b2c03d01bf9346d08f57"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "build_manifest": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/BUILD_MANIFEST.json",
+      "build_manifest_sha256": "47ded95a99bac02c77c122ab9b9259b1333216c755f5ed37e67ba0c0fd90e406",
+      "dominant_object_by_logical_id": {
+        "slide_2_statistical_model": "native_latex_math",
+        "slide_3_real_data_application": "coverage_plot",
+        "slide_4_experiment_design": "scientific_relation_diagram",
+        "slide_5_negative_result": "negative_evidence_plot",
+        "slide_6_medical_image_comparison": "same_case_medical_panels",
+        "slide_7_next_experiment": "next_experiment_reasoning"
+      },
+      "page_job_by_logical_id": {
+        "slide_2_statistical_model": "STATISTICAL_MODEL",
+        "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+        "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+        "slide_5_negative_result": "NEGATIVE_RESULT",
+        "slide_6_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON",
+        "slide_7_next_experiment": "NEXT_EXPERIMENT"
+      },
+      "pdf_sha256": "403d939bcd5b42bb195ab2fbff2765c80114ce91aabebf3f990772835bb0b439",
+      "rendered_png_sha256_by_logical_id": {
+        "slide_2_statistical_model": "0e8fdb402b69fa871148351986be1bdba67d4fe8c3b36db2d59ac138d3bf596c",
+        "slide_3_real_data_application": "91eb2d5df6e56032ef28cc58fd0b62afbe1174c7fd5b515c8fc195cc85871df7",
+        "slide_4_experiment_design": "c17eb23f12f5119eb1eaeb06200fb6ac4ff9a229700338815cded91f572c01a6",
+        "slide_5_negative_result": "66d2e45f567bf717d746c81a30c144bcede6cbb7198967b1f31e743c53b045a0",
+        "slide_6_medical_image_comparison": "1768adbdae99b4ee28642a0d98dbe8d64bc626cf142726f590f3408874f25397",
+        "slide_7_next_experiment": "a1322fb190e99788927a63152aad92480622aadfdbe2b2c03d01bf9346d08f57"
+      },
+      "selected_gold_id_by_logical_id": {
+        "slide_2_statistical_model": "GSC-016",
+        "slide_3_real_data_application": "GSC-014",
+        "slide_4_experiment_design": "GSC-004",
+        "slide_5_negative_result": "GSC-012",
+        "slide_6_medical_image_comparison": "GSC-008",
+        "slide_7_next_experiment": "GSC-018"
+      },
+      "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system"
+    },
+    "manifest_sha256": "6e2e6dab29b0688cc0fde5fe6d68925c5043339fc07df522edb966dc11a44ca1",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "You are reviewing rendered pixels from the 027 Stage 3 exact-CUHK scientific layout integration deck. Judge each content page independently at item/page level. PASS for an item only if the visible page reaches a mature doctoral research-group meeting or strong conference-talk bar for its page job. Check that the CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math is genuinely typeset rather than source-like text; figures, negative evidence, and medical panels are large enough to inspect; panel labels, captions, legends, and annotations are readable and directly tied to the scientific object; discussion/next-experiment content shows concrete research reasoning rather than generic future-work boxes. Mark REVISE for any page that looks like a generic card/dashboard/box-arrow fixture, has internal provenance or QA language, has source-like math, hides the evidence in a tiny figure, clips content, uses meaningless whitespace, or repeats one template face without scientific specificity. Top-level PASS means all six content items pass; top-level REVISE if any item has a blocking visual maturity issue. Do not infer quality from filenames, hashes, metadata, or presumed provenance; inspect the actual pixels.",
+      "source_contracts": [
+        "Stage 2 gold/reference pixels are evidence only and are not runtime assets.",
+        "This is a Stage 3 engineering integration deck, not a final real-paper holdout."
+      ]
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "REVISE",
+      "item_id": "slide_2_statistical_model",
+      "observations": [
+        "Typeset statistical notation is clean and prominent.",
+        "Most of the page is empty; the equation and one explanatory sentence provide little visible model structure or scientific context.",
+        "No explicit CUHK name or mark is visible; only the purple navigation strip is present."
+      ],
+      "requirement_ids": [
+        "CUHK Beamer identity visible",
+        "scientific specificity",
+        "meaningful use of page space",
+        "genuinely typeset math"
+      ],
+      "summary": "Readable native math, but the page is overly sparse and the visible institutional identity is not explicit."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_3_real_data_application",
+      "observations": [
+        "The three-panel coverage plot, axis labels, legend, and callout are too small for inspection at page scale.",
+        "The large left text block and unused whitespace dominate the page rather than the stated main plot.",
+        "No explicit CUHK name or mark is visible."
+      ],
+      "requirement_ids": [
+        "CUHK Beamer identity visible",
+        "projection-readable scientific object",
+        "readable panel labels legends and annotations"
+      ],
+      "summary": "Coverage evidence is visibly undersized."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_4_experiment_design",
+      "observations": [
+        "The central object is a uniform four-step box-and-arrow chain.",
+        "It does not visibly encode concrete simulation factors, relationships, or diagnostics beyond short labels.",
+        "No explicit CUHK name or mark is visible."
+      ],
+      "requirement_ids": [
+        "CUHK Beamer identity visible",
+        "scientific specificity / no generic box-arrow fixture",
+        "meaningful use of page space"
+      ],
+      "summary": "Generic workflow styling does not meet the scientific-layout bar."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_5_negative_result",
+      "observations": [
+        "The bar chart is readable at a basic level and includes a target line and a callout.",
+        "Two explanatory lines under the chart overlap, making the interpretation visibly illegible.",
+        "The chart and surrounding text leave substantial unused space; no explicit CUHK name or mark is visible."
+      ],
+      "requirement_ids": [
+        "CUHK Beamer identity visible",
+        "no clipped or overlapping content",
+        "readable annotations tied to scientific object"
+      ],
+      "summary": "Visible text collision blocks presentation readiness."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_6_medical_image_comparison",
+      "observations": [
+        "Four same-case panels are clearly titled Input, GT, Prediction, and Error.",
+        "The lesion/error overlays and the small in-panel labels are difficult to inspect at this displayed size.",
+        "No explicit CUHK name or mark is visible."
+      ],
+      "requirement_ids": [
+        "CUHK Beamer identity visible",
+        "medical panels large enough to inspect",
+        "readable panel labels and annotations"
+      ],
+      "summary": "Same-case comparison is present, but the medical evidence and annotations are too small for detailed inspection."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_7_next_experiment",
+      "observations": [
+        "The main object repeats the uniform outlined-box-and-arrow workflow used on the experiment-design page.",
+        "The labels name possible steps, but the visible graphic does not show hypotheses, endpoints, or a concrete validation decision rule.",
+        "No explicit CUHK name or mark is visible."
+      ],
+      "requirement_ids": [
+        "CUHK Beamer identity visible",
+        "concrete next-experiment reasoning",
+        "scientific specificity / no generic box-arrow fixture"
+      ],
+      "summary": "The next-experiment page is generic and visually repetitive rather than a concrete research decision plan."
+    }
+  ],
+  "non_blocking_notes": [
+    "Purple top navigation is consistent across pages, but it does not visibly identify CUHK by name or mark.",
+    "The repeated sparse white-page composition makes several pages feel underdeveloped."
+  ],
+  "overall_decision": "REVISE",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "6e2e6dab29b0688cc0fde5fe6d68925c5043339fc07df522edb966dc11a44ca1",
+  "review_kind": "027-stage3-cuhk-scientific-layout-item-page-review",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "REVISE",
+  "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+  "workflow_type": "reviewed_handoff"
+}
