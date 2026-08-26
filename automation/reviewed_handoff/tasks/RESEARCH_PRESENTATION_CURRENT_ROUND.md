@@ -20,7 +20,7 @@
 
 当前 production gold 已覆盖 roadmap 所需主要 scientific jobs。026 新增 `GSC-018`，来自真实 rendered-pixel item-level Terra `PASS` 的 discussion / next-experiment 页面；正常 selector 可选择它，recipe builder 实际消费 source-derived composition fields，移除后得到 no-compatible-result，因此 `RUNTIME_SELECTED -> ACTUALLY_CONSUMED -> OUTPUT_AFFECTED` 已成立。Stage 2 整体关闭。
 
-## Stage 3 status — not passed
+## Stage 3 status — active recovery, not yet passed
 
 ### 027 historical result
 
@@ -41,33 +41,42 @@
 
 `028_research_presentation_stage3_visual_review_dispatch_recovery` 已独立 PASS。真实 workflow_dispatch run `32923111244` 成功生成并写回与返修后六张 PNG identity 一致的新 Terra evidence。028 只关闭 visual-review dispatch gap，不替代 027 REVIEW_2，也不代表 Stage 3 PASS。
 
-## Active bounded task — 029 visual contract consumer adaptation
+### 029 visual contract consumer adaptation — completed
+
+`029_reviewed_handoff_visual_contract_adaptation` 已在第一轮独立审核中 PASS。真实 `Codex Marketplace` CI 与 `AI Bridge Visual Review` push run 均成功；push-mode resolver 已真实执行 0-task no-op，确定性回归覆盖 1-task、fresh evidence、invalid identity 与 multiple eligible fail-closed 行为。普通 push 不再依赖 repository-level 固定 manifest/output vars，显式 `workflow_dispatch` 仍保留。
+
+029 只关闭 consumer control-plane seam，不构成 Stage 3 PASS，也不发送 stage notifier。
+
+### Active bounded task — 030 Stage 3 visual-maturity recovery
 
 当前 active task：
 
-`029_reviewed_handoff_visual_contract_adaptation`
+`030_stage3_visual_recovery`
 
-027/028 暴露出 AI_Skills_Collection consumer 尚未真正接入 Bridge Kit 已有 task-local Visual Review contract：当前 push workflow 在没有 repository-level manifest/output vars 时会静默 skip live review。为避免下一次 Stage 3 视觉返修再次创建显式 dispatch recovery，029 先做一个严格限定的控制面 consumer adaptation。
+030 是 027 review limit 后的质量保持业务 recovery，只处理四类已被 fresh Terra 明确定位的 layout blocker：
 
-029 只允许：
+- quantitative result：建立 presentation-native result-figure path，直接控制 axes/tick/facet/legend/reference line/callout 的投影可读性，不再只扩大不可读 raster；
+- experiment design：建立 typed scientific hierarchy / relation primitive，让 center-subject 层级、DGP 因素、procedure branches 与 endpoints 由结构本身表达，不再使用 generic card/arrow；
+- medical comparison：建立真实 same-case ROI crop/zoom image primitive、callout 与邻近 TP/FP/FN legend；
+- next experiment：建立 evidence -> manipulation/comparator -> endpoint -> decision criterion 的科研推理布局，并继续通过正常 discussion-compatible gold path。
 
-- 让 push-mode GitHub Actions 从 tracked `CURRENT.visual_review_required`、task-local manifest/evidence path 自动发现唯一 pending visual task；
-- 0 eligible task 正常 no-op；1 个 task 自动运行；多个或 identity 非法时 fail closed；
-- 保留 explicit `workflow_dispatch` 作为人工恢复入口；
-- 使用包含 task-local Reviewed Handoff visual contract 的稳定 Bridge Kit pin；
-- 增加确定性 regression 和真实 CI。
+027 已通过的 exact CUHK、Stage 2 selector/recipe、geometry transfer、`SPLIT_REQUIRED`、statistical-model page、negative-result page 与 anti-meta gate 必须保持。
 
-029 不修改 Presentation 页面、Stage 2 gold、027/028 历史、Terra 核心、Reviewed Handoff state machine 或 review budget。
+030 已真实启用 task-local Visual Review contract：
 
-029 独立 PASS 后，Planner 立即创建新的 bounded Stage 3 visual-maturity recovery，只修 027 剩余四类 layout primitive，并真实启用 `visual_review_required` + task-local manifest/evidence path。该 recovery 必须使用新的 job-specific mechanism，而不是继续给旧 generic card/arrow primitive 填更多文字。
+- `visual_review_required=true`；
+- manifest: `results/030_stage3_visual_recovery/visual_review/visual_inputs.json`；
+- evidence: `results/030_stage3_visual_recovery/visual_review/VISUAL_REVIEW.json`。
 
-Stage 3 只有在新的 recovery 对所有主要内容页取得 fresh item-level mature-bar PASS 后才整体关闭；此前不得开始 Stage 4。
+真实 CI 通过并进入视觉证据阶段后，029 已验证的 push resolver 应自动发现唯一 030 target，由 GitHub Actions secret 路径运行 Terra 并写回 evidence；缺 evidence 只等待，不消耗 review round，不再创建手工 dispatch recovery。
+
+Stage 3 只有在 030 对六个主要内容页取得与当前 identity 一致的 fresh item/page-level mature-bar PASS、Planner 独立审核通过后才整体关闭。届时发送一次 Stage 3 PASS notifier，并自动创建 Stage 4；此前不得开始 Stage 4。
 
 ## Standing workflow decisions
 
 - 始终保持最高冻结质量标准；review limit 后若存在唯一、范围清楚、质量保持的 bounded recovery，自动创建新 task，不要求用户在“继续保持质量”和“降低质量”之间重复选择。
 - 每个 bounded task 仍最多两轮 review；不得增加 REVIEW_3。
-- 视觉型 Reviewed Handoff 优先使用 Bridge Kit task-local Visual Review contract；缺 evidence 属于等待，不消耗 review round。当前 consumer wiring 由 029 负责补齐，不新造状态机。
+- 视觉型 Reviewed Handoff 优先使用 Bridge Kit task-local Visual Review contract；缺 evidence 属于等待，不消耗 review round。
 - 只有真正存在互斥产品/科学选择、显著架构改变、新成本/风险/隐私/许可问题、必须降低质量门槛，或 Stage 5 最终双 deck 验收时才打断用户。
 
 ## Non-negotiable final acceptance
