@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "028_research_presentation_stage3_visual_review_dispatch_recovery",
-  "state": "PASS",
+  "state": "AWAIT_HUMAN_DECISION",
   "review_round": 1,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -13,6 +13,6 @@
   "ci_status": "NOT_REQUIRED",
   "last_review_decision": "PASS",
   "review_limit_reached": false,
-  "human_gate_reason": null,
-  "next_action": "CLOSE_PASS"
+  "human_gate_reason": "PASS",
+  "next_action": "NONE"
 }
