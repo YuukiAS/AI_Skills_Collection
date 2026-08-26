@@ -1,8 +1,8 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "029_reviewed_handoff_visual_contract_adaptation",
-  "state": "READY_FOR_GPT_REVIEW",
-  "review_round": 0,
+  "state": "PASS",
+  "review_round": 1,
   "max_review_rounds": 2,
   "plan_revision": 0,
   "max_plan_revisions": 1,
@@ -11,8 +11,8 @@
   "implementation_commit": "9f067118efe528241e45c425555a6061fa342d41",
   "ci_required": true,
   "ci_status": "PASS",
-  "last_review_decision": null,
+  "last_review_decision": "PASS",
   "review_limit_reached": false,
   "human_gate_reason": null,
-  "next_action": "RUN_GPT_REVIEW"
+  "next_action": "CLOSE_AFTER_PASS"
 }
