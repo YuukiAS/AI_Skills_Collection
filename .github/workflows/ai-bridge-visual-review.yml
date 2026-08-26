@@ -27,9 +27,9 @@ jobs:
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_VISUAL_REVIEW_API_KEY }}
       OPENAI_VISUAL_REVIEW_MODEL: ${{ vars.OPENAI_VISUAL_REVIEW_MODEL }}
-      AI_BRIDGE_VISUAL_REVIEW_MANIFEST: ${{ github.event.inputs.manifest || vars.AI_BRIDGE_VISUAL_REVIEW_MANIFEST }}
-      AI_BRIDGE_VISUAL_REVIEW_OUTPUT: ${{ github.event.inputs.output || vars.AI_BRIDGE_VISUAL_REVIEW_OUTPUT }}
-      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e
+      AI_BRIDGE_VISUAL_REVIEW_MANIFEST: ${{ github.event.inputs.manifest }}
+      AI_BRIDGE_VISUAL_REVIEW_OUTPUT: ${{ github.event.inputs.output }}
+      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@647f63c49ccea828a0ac76a6e9adce026531c906
     steps:
       - uses: actions/checkout@v4
         with:
@@ -42,13 +42,26 @@ jobs:
       - name: Install Bridge Kit visual review extra
         run: python -m pip install "${AI_BRIDGE_KIT_PIP_SPEC}"
 
+      - name: Resolve visual review target
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Using explicit workflow_dispatch visual review target."
+            echo "AI_BRIDGE_VISUAL_REVIEW_SKIP=0" >> "$GITHUB_ENV"
+            exit 0
+          fi
+          python scripts/resolve_reviewed_handoff_visual_target.py --target . --github-env "$GITHUB_ENV"
+          if grep -q '^AI_BRIDGE_VISUAL_REVIEW_SKIP=1$' "$GITHUB_ENV"; then
+            echo "no task-local visual review pending"
+          fi
+
       - name: Refuse missing visual review secret
+        if: env.AI_BRIDGE_VISUAL_REVIEW_SKIP != '1'
         shell: bash
         run: |
           if [ -z "${OPENAI_API_KEY}" ]; then
-            echo "OPENAI_VISUAL_REVIEW_API_KEY is not configured; skipping live visual review."
-            echo "AI_BRIDGE_VISUAL_REVIEW_SKIP=1" >> "$GITHUB_ENV"
-            exit 0
+            echo "OPENAI_VISUAL_REVIEW_API_KEY is not configured; cannot run pending live visual review."
+            exit 1
           fi
 
       - name: Run visual review

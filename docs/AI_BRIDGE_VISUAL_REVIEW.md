@@ -17,6 +17,21 @@ the ref rendered at install time. It does not vendor-copy `ai_bridge_kit/` into
 the consumer repository and does not run `pip install -e .` against the
 consumer project.
 
+For Reviewed Handoff push events, the workflow resolves task-local visual
+review targets from tracked task state instead of repository-level fixed
+manifest variables. A task is eligible only when its
+`automation/reviewed_handoff/tasks/<task_key>/CURRENT.json` declares
+`visual_review_required=true`, is in `READY_FOR_GPT_REVIEW`, has
+repository-relative `visual_review_manifest_path` and
+`visual_review_evidence_path`, and the manifest binds
+`workflow_type=reviewed_handoff`, the same `task_key`, and the same
+`identity_bindings.implementation_commit`. Zero eligible tasks are a normal
+no-op. Exactly one eligible task runs live review. Multiple eligible tasks or
+manifest identity conflicts fail closed.
+
+`workflow_dispatch` remains the manual recovery/debug route and its explicit
+`manifest` and `output` inputs take priority over automatic push resolution.
+
 Use the repository secret name `OPENAI_VISUAL_REVIEW_API_KEY`. In the workflow, map it only inside the visual review job:
 
 ```yaml
