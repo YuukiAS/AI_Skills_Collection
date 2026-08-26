@@ -145,3 +145,16 @@ Planner 只有在以下全部成立时才可 PASS 028：
 7. 没有开始 Stage 4/5。
 
 028 PASS 只表示视觉证据通路恢复。之后必须回到 027 做第二轮独立审核；028 PASS 不能替代 027 PASS，也不触发 Stage 3 PASS notifier。
+
+## Out of scope
+
+028 明确不包括以下相邻工作：
+
+- 不修改 027 Stage 3 页面、layout、generator、TeX、gold 或 CUHK theme；
+- 不重新生成 027 PDF/PNG；
+- 不修改 027 Planner/Reviewer-owned PLAN/REVIEW_1/CURRENT；
+- 不消耗或伪造 027 REVIEW_2；
+- 不自行判断 027 PASS/REVISE；
+- 不降低 Terra mature-talk 质量门槛；
+- 不开始 Stage 4 或 Stage 5；
+- 028 只恢复返修后 027 的真实 `workflow_dispatch` Visual Review evidence。
