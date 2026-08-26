@@ -1,18 +1,18 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "029_reviewed_handoff_visual_contract_adaptation",
-  "state": "PLAN_FROZEN",
+  "state": "WAITING_FOR_CI",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
   "max_plan_revisions": 1,
   "base_commit": "e474d497cbc8818f4fd8dc47657651aae65edcde",
   "base_branch": "main",
-  "implementation_commit": null,
+  "implementation_commit": "9f067118efe528241e45c425555a6061fa342d41",
   "ci_required": true,
   "ci_status": "PENDING",
   "last_review_decision": null,
   "review_limit_reached": false,
   "human_gate_reason": null,
-  "next_action": "RUN_CODEX_EXECUTOR"
+  "next_action": "WAIT_FOR_GITHUB_CI"
 }
