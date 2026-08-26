@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import os
@@ -18,10 +19,11 @@ import build_gold_composition_recipe
 
 SHARED = Path(__file__).resolve().parents[1]
 REPO_ROOT = Path(__file__).resolve().parents[6]
-TASK_KEY = "027_research_presentation_executable_cuhk_scientific_layout_system"
+DEFAULT_TASK_KEY = "027_research_presentation_executable_cuhk_scientific_layout_system"
+RECOVERY_TASK_KEY = "030_stage3_visual_recovery"
+TASK_KEY = DEFAULT_TASK_KEY
 CANONICAL_CUHK = SHARED / "templates" / "cuhk" / "beamer" / "source"
 DEFAULT_OUT = REPO_ROOT / "docs" / "audits" / "research_presentation_cuhk_scientific_layout_stage3" / "generated"
-RESULT_VISUAL_REVIEW_DIR = REPO_ROOT / "results" / TASK_KEY / "visual_review"
 
 SLIDE_W = 16.0
 SLIDE_H = 9.0
@@ -119,6 +121,7 @@ def expand_bbox_for_content(primary: dict[str, float], content_kind: str, transf
     floors = {
         "equation": (0.62, 0.20),
         "figure": (0.78, 0.42),
+        "result_figure": (0.82, 0.46),
         "image_panel": (0.86, 0.50),
         "flow": (0.80, 0.42),
         "next_experiment": (0.80, 0.42),
@@ -151,10 +154,10 @@ def job_primary_geometry(spec: dict[str, Any], primary: dict[str, float], transf
         target = {"w": 0.66, "h": 0.46, "x": safe["x"], "y": 0.285}
         transforms.append("negative-result evidence keeps a right diagnostic column without text overlap")
     elif page_job == "MEDICAL_IMAGE_COMPARISON":
-        target = {"w": safe["w"], "h": 0.52, "x": safe["x"], "y": 0.270}
+        target = {"w": safe["w"], "h": 0.58, "x": safe["x"], "y": 0.235}
         transforms.append("four-panel medical comparison receives full-width projection-scale image band")
     elif page_job == "EXPERIMENT_DESIGN":
-        target = {"w": 0.82, "h": 0.49, "x": 0.09, "y": 0.270}
+        target = {"w": 0.86, "h": 0.49, "x": 0.07, "y": 0.270}
         transforms.append("experiment design uses a scientific-factor diagram region")
     elif page_job == "NEXT_EXPERIMENT":
         target = {"w": 0.82, "h": 0.49, "x": 0.09, "y": 0.270}
@@ -206,8 +209,8 @@ def support_geometry(spec: dict[str, Any], primary: dict[str, float]) -> dict[st
         }
     if page_job == "MEDICAL_IMAGE_COMPARISON":
         return {
-            "annotation": {"x": safe["x"], "y": 0.810, "w": safe["w"], "h": 0.045},
-            "caption": {"x": safe["x"], "y": 0.810, "w": safe["w"], "h": 0.045},
+            "annotation": {"x": safe["x"], "y": 0.832, "w": safe["w"], "h": 0.024},
+            "caption": {"x": safe["x"], "y": 0.832, "w": safe["w"], "h": 0.024},
         }
     if page_job in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"}:
         return {
@@ -296,7 +299,7 @@ def write_fontconfig(build_dir: Path) -> dict[str, Any]:
         encoding="utf-8",
     )
     return {
-        "fontconfig_file": str(config),
+        "fontconfig_file": str(config.resolve()),
         "fontconfig_file_repo_path": rel(config),
         "font_cache_dir": str(cache_dir),
         "times_font_dir": str(TRACE_TIMES_FONT_DIR),
@@ -344,6 +347,7 @@ def render_skill_probe() -> dict[str, Any]:
 
 def page_specs() -> list[dict[str, Any]]:
     stat_assets = "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets"
+    stat_simulation = "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/simulation/simulation_summary.csv"
     med_assets = "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets"
     return [
         {
@@ -380,11 +384,17 @@ def page_specs() -> list[dict[str, Any]]:
                 "density": "moderate",
                 "panel_count": 1,
             },
-            "content_kind": "figure",
-            "dominant_object": "coverage_plot",
-            "asset": f"{stat_assets}/coverage_by_icc.png",
-            "image_trim": "30 40 55 80",
-            "annotation": "Red = naive iid; teal = cluster-robust. Nominal 0.95 and the small-center stress point remain visible.",
+            "content_kind": "result_figure",
+            "dominant_object": "presentation_native_coverage_figure",
+            "data_source": stat_simulation,
+            "figure_filter": {"imbalance": "imbalanced"},
+            "methods": [
+                {"id": "naive_iid_ols_z", "label": "naive iid", "color": "red!72!black"},
+                {"id": "cluster_robust_z", "label": "cluster-robust", "color": "teal!70!black"},
+            ],
+            "nominal_coverage": 0.95,
+            "callout": {"G": 8, "rho": 0.5, "label": "small-G stress"},
+            "annotation": "Native axes, facets, method key, nominal line, and interval callout are bound inside the result figure.",
             "caption": "Synthetic clustered-data example; intervals compared on coverage, width, and bias.",
             "required_panel_count": 1,
         },
@@ -415,9 +425,9 @@ def page_specs() -> list[dict[str, Any]]:
                 "cluster-robust z interval with center scores",
             ],
             "endpoints": [
-                "95% coverage vs 0.95 target",
+                "Coverage target 0.95",
                 "mean interval width",
-                "bias of treatment-effect estimate",
+                "treatment-effect bias",
             ],
             "annotation": "The connector direction encodes data generation before interval estimation and coverage diagnostics.",
             "required_panel_count": 4,
@@ -466,7 +476,14 @@ def page_specs() -> list[dict[str, Any]]:
                 f"{med_assets}/failure_error.png",
             ],
             "panel_labels": ["Input", "GT", "Prediction", "Error"],
-            "annotation": "All four panels come from the same case; the error panel binds the failure explanation.",
+            "roi_source_asset": f"{med_assets}/failure_error.png",
+            "roi_crop_assets": [
+                f"{med_assets}/failure_gt.png",
+                f"{med_assets}/failure_pred.png",
+                f"{med_assets}/failure_error.png",
+            ],
+            "roi_crop_labels": ["GT crop", "Prediction crop", "Error crop"],
+            "annotation": "All panels and zoom crops come from one case and one ROI; TP/FP/FN colors remain adjacent to the error crop.",
             "required_panel_count": 4,
         },
         {
@@ -489,14 +506,14 @@ def page_specs() -> list[dict[str, Any]]:
             "current_limit": "G=8, ICC=.5 and imbalanced clusters remain below nominal coverage.",
             "strategy_variation": [
                 "DPP diverse batch",
-                "independent random batch",
-                "Mondrian-partition batch",
+                "random batch",
+                "Mondrian partition",
             ],
             "comparator_setup": [
                 "CR2 small-sample correction",
                 "wild cluster bootstrap",
             ],
-            "decision_criterion": "PASS if coverage >= .94 and width inflation is controlled; otherwise stratify by Mondrian cell and recheck leverage.",
+            "decision_criterion": "Go if coverage >= .94 with controlled width; no-go stratifies by Mondrian cell.",
             "annotation": "Coverage evidence determines which batch-query strategy to validate next; CR2 and wild bootstrap remain proposed comparators.",
             "required_panel_count": 4,
         },
@@ -528,6 +545,7 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
             "native_type": {
                 "equation": "equation",
                 "figure": "figure",
+                "result_figure": "presentation_native_result_figure",
                 "flow": "tikz_connector_diagram",
                 "image_panel": "image_panel",
                 "next_experiment": "tikz_reasoning_diagram",
@@ -547,6 +565,25 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
             "bbox": caption,
         },
     ]
+    if spec.get("same_case_roi_zoom"):
+        objects.append(
+            {
+                "object_id": f"{spec['page_id']}_same_case_roi_zoom",
+                "role": "same_case_error_roi_zoom",
+                "native_type": "same_case_roi_crop_image",
+                "source_assets": spec.get("roi_crop_assets", []),
+                "roi_source_asset": spec.get("roi_source_asset"),
+                "roi_xywh": spec["same_case_roi_zoom"]["roi_xywh"],
+                "crop_records": spec["same_case_roi_zoom"]["crop_records"],
+                "same_case_coordinate_space": True,
+                "bbox": {
+                    "x": round(primary["x"] + primary["w"] * 0.42, 4),
+                    "y": round(primary["y"] + primary["h"] * 0.56, 4),
+                    "w": round(primary["w"] * 0.42, 4),
+                    "h": round(primary["h"] * 0.32, 4),
+                },
+            }
+        )
     consumed = [
         "primary_bbox",
         "primary_object_area_ratio",
@@ -562,6 +599,12 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
         "page_id": spec["page_id"],
         "page_job": spec["page_job"],
         "dominant_scientific_object": spec["dominant_object"],
+        "executable_layout_family": {
+            "REAL_DATA_APPLICATION": "presentation_native_quantitative_result",
+            "EXPERIMENT_DESIGN": "typed_experiment_design_hierarchy",
+            "MEDICAL_IMAGE_COMPARISON": "same_case_medical_roi_zoom",
+            "NEXT_EXPERIMENT": "evidence_to_decision_next_experiment",
+        }.get(spec["page_job"], "accepted_stage3_foundation"),
         "selected_gold_id": recipe["selected_gold_id"],
         "selected_reference_id": recipe["selected_reference_id"],
         "recipe_sha256": recipe["recipe_sha256"],
@@ -579,6 +622,16 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
         "reading_flow_mapping": constraints["reading_flow"],
         "annotation_legend_caption_panel_mapping": constraints["annotation_legend_caption_panel_relations"],
         "content_capacity_check": capacity,
+        "job_specific_runtime_contract": {
+            "primitive": {
+                "REAL_DATA_APPLICATION": "csv_driven_tikz_result_figure",
+                "EXPERIMENT_DESIGN": "typed_scientific_hierarchy_relation_map",
+                "MEDICAL_IMAGE_COMPARISON": "same_case_roi_crop_zoom",
+                "NEXT_EXPERIMENT": "evidence_manipulation_comparator_decision_map",
+            }.get(spec["page_job"], "accepted_foundation"),
+            "source_fields_consumed": [key for key in ["data_source", "figure_filter", "roi_source_asset", "same_case_roi_zoom"] if key in spec],
+            "same_case_roi_zoom": spec.get("same_case_roi_zoom"),
+        },
         "text_region_packing": {
             "emitted_text_region_count": len(emitted_text_regions),
             "non_overlapping": text_overlap_free,
@@ -605,6 +658,129 @@ def emit_equation(spec: dict[str, Any], layout: dict[str, Any]) -> str:
         tex_node(primary["x"], primary["y"], primary["w"], rf"\Large \[\displaystyle {spec['math']}\]", align="center"),
         tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\small {spec['annotation']}"),
     ])
+
+
+def load_result_series(spec: dict[str, Any]) -> dict[int, dict[str, list[dict[str, float]]]]:
+    source = REPO_ROOT / spec["data_source"]
+    filtered: dict[int, dict[str, list[dict[str, float]]]] = {}
+    with source.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            if row.get("imbalance") != spec["figure_filter"]["imbalance"]:
+                continue
+            center_count = int(row["G"])
+            method = row["method"]
+            filtered.setdefault(center_count, {}).setdefault(method, []).append(
+                {
+                    "rho": float(row["rho"]),
+                    "coverage": float(row["coverage"]),
+                    "mc_se": float(row["mc_se"]),
+                }
+            )
+    for methods in filtered.values():
+        for points in methods.values():
+            points.sort(key=lambda item: item["rho"])
+    return filtered
+
+
+def emit_result_figure(spec: dict[str, Any], layout: dict[str, Any]) -> str:
+    primary = layout["resolved_primary_object_geometry"]
+    annotation = layout["resolved_supporting_object_geometry"]["annotation"]
+    caption = layout["resolved_supporting_object_geometry"]["caption"]
+    data = load_result_series(spec)
+    x = primary["x"]
+    y = primary["y"]
+    w = primary["w"]
+    h = primary["h"]
+    plot_x = x + 0.070
+    plot_y = y + 0.065
+    plot_h = h * 0.58
+    legend_x = x + w * 0.805
+    legend_w = x + w - legend_x
+    gap = 0.026
+    facet_w = (legend_x - plot_x - gap * 2 - 0.020) / 3
+    ymin = 0.50
+    ymax = 1.00
+    rho_min = 0.0
+    rho_max = 0.5
+
+    def px(facet_index: int, rho: float) -> float:
+        fx = plot_x + facet_index * (facet_w + gap)
+        return fx + (rho - rho_min) / (rho_max - rho_min) * facet_w
+
+    def py(coverage: float) -> float:
+        return plot_y + (1.0 - (coverage - ymin) / (ymax - ymin)) * plot_h
+
+    def point_chain(facet_index: int, points: list[dict[str, float]]) -> str:
+        return " -- ".join(f"({px(facet_index, item['rho']):.4f},{py(item['coverage']):.4f})" for item in points)
+
+    parts = [
+        tex_node(x, y + 0.005, w, r"\small\textbf{Coverage by ICC under imbalanced clusters}", align="center"),
+        tex_node(x, y + h - 0.038, w * 0.62, r"\scriptsize Data source: 400 simulation replicates per cell; y-axis shows 95\% interval coverage.", align="left"),
+    ]
+    nominal_y = py(float(spec["nominal_coverage"]))
+    center_counts = sorted(data)
+    for facet_index, center_count in enumerate(center_counts):
+        fx = plot_x + facet_index * (facet_w + gap)
+        parts.extend(
+            [
+                rf"\draw[line width=0.55pt,draw=black!55] ({fx:.4f},{plot_y:.4f}) rectangle ({fx+facet_w:.4f},{plot_y+plot_h:.4f});",
+                rf"\draw[line width=0.75pt,draw=orange!85!black] ({fx:.4f},{nominal_y:.4f}) -- ({fx+facet_w:.4f},{nominal_y:.4f});",
+                tex_node(fx, plot_y - 0.032, facet_w, rf"\footnotesize\textbf{{G={center_count}}}", align="center"),
+            ]
+        )
+        for tick, label in [(0.50, "0.50"), (0.75, "0.75"), (0.95, "0.95"), (1.00, "1.00")]:
+            ty = py(tick)
+            parts.append(rf"\draw[line width=0.35pt,draw=black!22] ({fx:.4f},{ty:.4f}) -- ({fx+facet_w:.4f},{ty:.4f});")
+            if facet_index == 0:
+                parts.append(tex_node(fx - 0.038, ty - 0.008, 0.032, rf"\scriptsize {label}", align="right"))
+        for rho, label in [(0.0, "0"), (0.1, ".1"), (0.3, ".3"), (0.5, ".5")]:
+            tx = px(facet_index, rho)
+            parts.extend(
+                [
+                    rf"\draw[line width=0.4pt,draw=black!45] ({tx:.4f},{plot_y+plot_h:.4f}) -- ({tx:.4f},{plot_y+plot_h+0.008:.4f});",
+                    tex_node(tx - 0.011, plot_y + plot_h + 0.014, 0.030, rf"\scriptsize {label}", align="center"),
+                ]
+            )
+        for method in spec["methods"]:
+            points = data[center_count][method["id"]]
+            parts.append(rf"\draw[line width=1.15pt,draw={method['color']}] {point_chain(facet_index, points)};")
+            for item in points:
+                parts.append(rf"\fill[fill={method['color']}] ({px(facet_index, item['rho']):.4f},{py(item['coverage']):.4f}) circle (1.45pt);")
+                err = item["mc_se"]
+                parts.append(
+                    rf"\draw[line width=0.45pt,draw={method['color']}] "
+                    rf"({px(facet_index, item['rho']):.4f},{py(item['coverage'] - err):.4f}) -- "
+                    rf"({px(facet_index, item['rho']):.4f},{py(item['coverage'] + err):.4f});"
+                )
+
+    callout = spec["callout"]
+    callout_facet = center_counts.index(int(callout["G"]))
+    callout_x = px(callout_facet, float(callout["rho"]))
+    callout_y = py(data[int(callout["G"])]["cluster_robust_z"][-1]["coverage"])
+    label_x = callout_x - 0.122
+    label_y = callout_y - 0.125
+    parts.extend(
+        [
+            rf"\draw[-{{Latex[length=2mm]}},line width=0.75pt,draw=maincolor!80] ({label_x+0.114:.4f},{label_y+0.032:.4f}) -- ({callout_x:.4f},{callout_y:.4f});",
+            tex_node(label_x, label_y, 0.142, rf"\scriptsize\textbf{{{tex_escape(callout['label'])}}}\\cluster robust = 0.78", align="left"),
+            tex_node(legend_x, plot_y + 0.010, legend_w, r"\footnotesize\textbf{Method key}", align="left"),
+        ]
+    )
+    for idx, method in enumerate(spec["methods"]):
+        ly = plot_y + 0.064 + idx * 0.054
+        parts.append(rf"\draw[line width=1.4pt,draw={method['color']}] ({legend_x:.4f},{ly:.4f}) -- ({legend_x+0.032:.4f},{ly:.4f});")
+        parts.append(rf"\fill[fill={method['color']}] ({legend_x+0.016:.4f},{ly:.4f}) circle (1.5pt);")
+        parts.append(tex_node(legend_x + 0.041, ly - 0.015, legend_w - 0.045, rf"\footnotesize {tex_escape(method['label'])}", align="left"))
+    parts.extend(
+        [
+            rf"\draw[line width=1.0pt,draw=orange!85!black] ({legend_x:.4f},{plot_y+0.174:.4f}) -- ({legend_x+0.032:.4f},{plot_y+0.174:.4f});",
+            tex_node(legend_x + 0.041, plot_y + 0.159, legend_w - 0.045, r"\footnotesize nominal 0.95", align="left"),
+            tex_node(plot_x + facet_w * 1.12, plot_y + plot_h + 0.040, facet_w, r"\footnotesize ICC \(\rho\)", align="center"),
+            tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}"),
+            tex_node(caption["x"], caption["y"], caption["w"], rf"\scriptsize {tex_escape(spec['caption'])}"),
+        ]
+    )
+    return "\n".join(parts)
 
 
 def emit_figure(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str, str]) -> str:
@@ -654,39 +830,55 @@ def emit_experiment_design(spec: dict[str, Any], layout: dict[str, Any]) -> str:
     y = primary["y"]
     w = primary["w"]
     h = primary["h"]
-    factor_w = w * 0.25
-    data_w = w * 0.21
-    proc_w = w * 0.22
-    endpoint_w = w * 0.22
-    gap = w * 0.035
-    top_h = h * 0.84
-    data_x = x + factor_w + gap
-    proc_x = data_x + data_w + gap
-    endpoint_x = proc_x + proc_w + gap
+    factor_x = x + 0.020
+    hierarchy_x = x + w * 0.315
+    proc_x = x + w * 0.575
+    endpoint_x = x + w * 0.785
+    top = y + 0.030
+    center_y = y + h * 0.430
     parts = [
-        rf"\StageThreePanel{{{x:.4f}}}{{{y:.4f}}}{{{x+factor_w:.4f}}}{{{y+top_h:.4f}}};",
-        rf"\StageThreePanel{{{data_x:.4f}}}{{{y+0.060:.4f}}}{{{data_x+data_w:.4f}}}{{{y+top_h-0.035:.4f}}};",
-        rf"\StageThreePanel{{{proc_x:.4f}}}{{{y:.4f}}}{{{proc_x+proc_w:.4f}}}{{{y+top_h:.4f}}};",
-        rf"\StageThreePanel{{{endpoint_x:.4f}}}{{{y+0.030:.4f}}}{{{endpoint_x+endpoint_w:.4f}}}{{{y+top_h-0.010:.4f}}};",
-        tex_node(x + 0.012, y + 0.020, factor_w - 0.024, r"\scriptsize\textbf{DGP stress grid}", align="center"),
-        tex_node(data_x + 0.012, y + 0.088, data_w - 0.024, r"\scriptsize\textbf{Generated units}\\centers -> subjects\\treatment shares", align="center"),
-        tex_node(proc_x + 0.012, y + 0.020, proc_w - 0.024, r"\scriptsize\textbf{Interval procedures}", align="center"),
-        tex_node(endpoint_x + 0.012, y + 0.055, endpoint_w - 0.024, r"\scriptsize\textbf{Evaluation endpoints}", align="center"),
+        tex_node(factor_x, top, 0.205, r"\footnotesize\textbf{DGP stress grid}", align="left"),
+        tex_node(hierarchy_x - 0.018, top, 0.205, r"\footnotesize\textbf{Center hierarchy}", align="center"),
+        tex_node(proc_x - 0.018, top, 0.195, r"\footnotesize\textbf{Interval procedures}", align="center"),
+        tex_node(endpoint_x - 0.006, top, 0.170, r"\footnotesize\textbf{Endpoints}", align="center"),
     ]
     for idx, factor in enumerate(spec["design_factors"]):
-        parts.append(tex_node(x + 0.018, y + 0.092 + idx * 0.078, factor_w - 0.036, rf"\scriptsize {factor}", align="left"))
-    parts.append(tex_node(data_x + 0.018, y + 0.230, data_w - 0.036, r"\tiny 400 reps/cell\\records: \(Y_{ij},T_{ij},j\)", align="center"))
+        fy = y + 0.112 + idx * 0.078
+        parts.extend(
+            [
+                rf"\fill[fill=maincolor!75] ({factor_x:.4f},{fy+0.006:.4f}) circle (2.1pt);",
+                tex_node(factor_x + 0.015, fy - 0.004, 0.205, rf"\scriptsize {factor}", align="left"),
+            ]
+        )
+    parts.extend(
+        [
+            rf"\draw[line width=0.8pt,draw=maincolor!60] ({hierarchy_x+0.042:.4f},{center_y-0.088:.4f}) ellipse (0.056 and 0.076);",
+            rf"\draw[line width=0.8pt,draw=maincolor!60] ({hierarchy_x+0.042:.4f},{center_y+0.086:.4f}) ellipse (0.056 and 0.076);",
+            tex_node(hierarchy_x - 0.026, center_y + 0.170, 0.160, r"\scriptsize Subject records nested inside each center; 400 reps per cell", align="center"),
+        ]
+    )
+    for base_y in [center_y - 0.088, center_y + 0.086]:
+        for offset in [-0.024, 0.0, 0.024]:
+            parts.append(rf"\fill[fill=teal!70!black] ({hierarchy_x+0.042+offset:.4f},{base_y+0.021:.4f}) circle (1.6pt);")
+            parts.append(rf"\fill[fill=red!70!black] ({hierarchy_x+0.042+offset:.4f},{base_y-0.020:.4f}) circle (1.6pt);")
     for idx, procedure in enumerate(spec["procedures"]):
-        py = y + 0.115 + idx * 0.130
-        parts.append(rf"\StageThreeSubPanel{{{proc_x+0.018:.4f}}}{{{py:.4f}}}{{{proc_x+proc_w-0.018:.4f}}}{{{py+0.090:.4f}}};")
-        parts.append(tex_node(proc_x + 0.026, py + 0.020, proc_w - 0.052, rf"\tiny {tex_escape(procedure)}", align="center"))
+        py = y + 0.145 + idx * 0.140
+        parts.append(rf"\draw[line width=0.9pt,draw=maincolor!75] ({proc_x:.4f},{py:.4f}) -- ({proc_x+0.148:.4f},{py:.4f});")
+        parts.append(rf"\fill[fill=white,draw=maincolor!75,line width=0.8pt] ({proc_x+0.074:.4f},{py:.4f}) circle (8.0pt);")
+        parts.append(tex_node(proc_x + 0.006, py + 0.020, 0.142, rf"\scriptsize {tex_escape(procedure)}", align="center"))
     for idx, endpoint in enumerate(spec["endpoints"]):
-        parts.append(tex_node(endpoint_x + 0.018, y + 0.125 + idx * 0.080, endpoint_w - 0.036, rf"\tiny {tex_escape(endpoint)}", align="left"))
-    mid_y = y + top_h * 0.50
+        ey = y + 0.118 + idx * 0.087
+        parts.append(rf"\draw[line width=1.1pt,draw=orange!80!black] ({endpoint_x:.4f},{ey:.4f}) -- ({endpoint_x+0.030:.4f},{ey:.4f});")
+        parts.append(rf"\draw[line width=0.55pt,draw=black!50] ({endpoint_x:.4f},{ey-0.012:.4f}) -- ({endpoint_x:.4f},{ey+0.012:.4f});")
+        parts.append(tex_node(endpoint_x + 0.036, ey - 0.020, 0.172, rf"\tiny {tex_escape(endpoint)}", align="left"))
+    mid_y = center_y
     parts.extend([
-        rf"\StageThreeConnector{{{x+factor_w+0.006:.4f}}}{{{mid_y:.4f}}}{{{data_x-0.008:.4f}}}{{{mid_y:.4f}}};",
-        rf"\StageThreeConnector{{{data_x+data_w+0.006:.4f}}}{{{mid_y:.4f}}}{{{proc_x-0.008:.4f}}}{{{mid_y:.4f}}};",
-        rf"\StageThreeConnector{{{proc_x+proc_w+0.006:.4f}}}{{{mid_y:.4f}}}{{{endpoint_x-0.008:.4f}}}{{{mid_y:.4f}}};",
+        rf"\StageThreeConnector{{{factor_x+0.220:.4f}}}{{{mid_y:.4f}}}{{{hierarchy_x-0.004:.4f}}}{{{mid_y:.4f}}};",
+        tex_node(factor_x + 0.224, mid_y + 0.018, 0.078, r"\scriptsize generates", align="center"),
+        rf"\StageThreeConnector{{{hierarchy_x+0.185:.4f}}}{{{mid_y:.4f}}}{{{proc_x-0.018:.4f}}}{{{mid_y:.4f}}};",
+        tex_node(hierarchy_x + 0.150, mid_y + 0.018, 0.082, r"\scriptsize estimates", align="center"),
+        rf"\StageThreeConnector{{{proc_x+0.145:.4f}}}{{{mid_y:.4f}}}{{{endpoint_x-0.010:.4f}}}{{{mid_y:.4f}}};",
+        tex_node(proc_x + 0.148, mid_y + 0.018, 0.082, r"\scriptsize evaluates", align="center"),
     ])
     annotation = layout["resolved_supporting_object_geometry"]["annotation"]
     parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}", align="left"))
@@ -699,30 +891,44 @@ def emit_next_experiment(spec: dict[str, Any], layout: dict[str, Any]) -> str:
     y = primary["y"]
     w = primary["w"]
     h = primary["h"]
-    col_w = (w - 0.05) / 3
-    x2 = x + col_w + 0.025
-    x3 = x2 + col_w + 0.025
-    panel_h = h * 0.78
+    evidence_x = x + 0.015
+    strategy_x = x + w * 0.295
+    comparator_x = x + w * 0.630
+    decision_x = x + w * 0.855
+    mid_y = y + h * 0.395
     parts = [
-        rf"\StageThreePanel{{{x:.4f}}}{{{y:.4f}}}{{{x+col_w:.4f}}}{{{y+panel_h:.4f}}};",
-        rf"\StageThreePanel{{{x2:.4f}}}{{{y:.4f}}}{{{x2+col_w:.4f}}}{{{y+panel_h:.4f}}};",
-        rf"\StageThreePanel{{{x3:.4f}}}{{{y:.4f}}}{{{x3+col_w:.4f}}}{{{y+panel_h:.4f}}};",
-        tex_node(x + 0.014, y + 0.020, col_w - 0.028, r"\scriptsize\textbf{Current limit}", align="center"),
-        tex_node(x + 0.018, y + 0.088, col_w - 0.036, rf"\scriptsize {tex_escape(spec['current_limit'])}", align="left"),
-        tex_node(x2 + 0.014, y + 0.020, col_w - 0.028, r"\scriptsize\textbf{Batch-query factor}", align="center"),
-        tex_node(x3 + 0.014, y + 0.020, col_w - 0.028, r"\scriptsize\textbf{Comparator and criterion}", align="center"),
+        tex_node(evidence_x, y + 0.020, 0.210, r"\footnotesize\textbf{Failure evidence}", align="left"),
+        tex_node(evidence_x, y + 0.085, 0.218, rf"\scriptsize {tex_escape(spec['current_limit'])}", align="left"),
+        rf"\draw[line width=1.1pt,draw=red!70!black] ({evidence_x:.4f},{mid_y+0.055:.4f}) -- ({evidence_x+0.180:.4f},{mid_y+0.055:.4f});",
+        rf"\draw[line width=1.1pt,draw=orange!80!black] ({evidence_x:.4f},{mid_y+0.018:.4f}) -- ({evidence_x+0.180:.4f},{mid_y+0.018:.4f});",
+        rf"\draw[line width=1.1pt,draw=teal!70!black] ({evidence_x:.4f},{mid_y-0.018:.4f}) -- ({evidence_x+0.180:.4f},{mid_y-0.018:.4f});",
+        tex_node(evidence_x + 0.010, mid_y + 0.073, 0.185, r"\scriptsize coverage shortfall at high ICC", align="left"),
+        tex_node(strategy_x, y + 0.020, 0.210, r"\footnotesize\textbf{Manipulate sampling}", align="center"),
     ]
     for idx, strategy in enumerate(spec["strategy_variation"]):
-        sy = y + 0.082 + idx * 0.072
-        parts.append(rf"\StageThreeSubPanel{{{x2+0.018:.4f}}}{{{sy:.4f}}}{{{x2+col_w-0.018:.4f}}}{{{sy+0.048:.4f}}};")
-        parts.append(tex_node(x2 + 0.026, sy + 0.011, col_w - 0.052, rf"\scriptsize {tex_escape(strategy)}", align="center"))
+        sy = y + 0.110 + idx * 0.076
+        parts.append(rf"\draw[line width=0.9pt,draw=maincolor!70] ({strategy_x:.4f},{mid_y:.4f}) -- ({strategy_x+0.080:.4f},{sy+0.010:.4f});")
+        parts.append(rf"\fill[fill=white,draw=maincolor!70,line width=0.85pt] ({strategy_x+0.102:.4f},{sy+0.010:.4f}) circle (7.0pt);")
+        parts.append(tex_node(strategy_x + 0.122, sy - 0.008, 0.128, rf"\scriptsize {tex_escape(strategy)}", align="left"))
+    parts.append(tex_node(comparator_x, y + 0.020, 0.180, r"\footnotesize\textbf{Comparator arms}", align="center"))
     for idx, comparator in enumerate(spec["comparator_setup"]):
-        parts.append(tex_node(x3 + 0.022, y + 0.090 + idx * 0.058, col_w - 0.044, rf"\scriptsize {tex_escape(comparator)}", align="left"))
-    parts.append(tex_node(x3 + 0.022, y + 0.215, col_w - 0.044, rf"\tiny {tex_escape(spec['decision_criterion'])}", align="left"))
-    mid_y = y + panel_h * 0.47
+        cy = y + 0.148 + idx * 0.112
+        parts.append(rf"\draw[line width=0.9pt,draw=teal!65!black] ({comparator_x:.4f},{mid_y:.4f}) -- ({comparator_x+0.060:.4f},{cy:.4f});")
+        parts.append(rf"\draw[line width=1.1pt,draw=teal!65!black] ({comparator_x+0.060:.4f},{cy:.4f}) -- ({comparator_x+0.182:.4f},{cy:.4f});")
+        parts.append(tex_node(comparator_x + 0.066, cy + 0.010, 0.116, rf"\scriptsize {tex_escape(comparator)}", align="center"))
+    parts.extend(
+        [
+            tex_node(decision_x - 0.005, y + 0.020, 0.150, r"\footnotesize\textbf{Decision rule}", align="center"),
+            rf"\draw[line width=0.9pt,draw=orange!85!black] ({decision_x+0.070:.4f},{mid_y-0.070:.4f}) -- ({decision_x+0.140:.4f},{mid_y:.4f}) -- ({decision_x+0.070:.4f},{mid_y+0.070:.4f}) -- ({decision_x:.4f},{mid_y:.4f}) -- cycle;",
+            tex_node(decision_x + 0.018, mid_y - 0.018, 0.104, r"\scriptsize go/no-go", align="center"),
+            tex_node(decision_x - 0.002, mid_y + 0.090, 0.148, rf"\scriptsize {tex_escape(spec['decision_criterion'])}", align="left"),
+        ]
+    )
     parts.extend([
-        rf"\StageThreeConnector{{{x+col_w+0.008:.4f}}}{{{mid_y:.4f}}}{{{x2-0.010:.4f}}}{{{mid_y:.4f}}};",
-        rf"\StageThreeConnector{{{x2+col_w+0.008:.4f}}}{{{mid_y:.4f}}}{{{x3-0.010:.4f}}}{{{mid_y:.4f}}};",
+        rf"\StageThreeConnector{{{evidence_x+0.198:.4f}}}{{{mid_y:.4f}}}{{{strategy_x-0.020:.4f}}}{{{mid_y:.4f}}};",
+        tex_node(evidence_x + 0.204, mid_y - 0.066, 0.075, r"\scriptsize motivates", align="center"),
+        rf"\StageThreeConnector{{{strategy_x+0.255:.4f}}}{{{mid_y:.4f}}}{{{comparator_x-0.016:.4f}}}{{{mid_y:.4f}}};",
+        rf"\StageThreeConnector{{{comparator_x+0.184:.4f}}}{{{mid_y:.4f}}}{{{decision_x-0.016:.4f}}}{{{mid_y:.4f}}};",
     ])
     annotation = layout["resolved_supporting_object_geometry"]["annotation"]
     parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}", align="left"))
@@ -734,20 +940,52 @@ def emit_image_panel(spec: dict[str, Any], layout: dict[str, Any], asset_map: di
     labels = spec["panel_labels"]
     assets = [asset_map[item] for item in spec["assets"]]
     gap = 0.010
-    panel_w = (primary["w"] - gap * 3) / 4
-    panel_h = min(primary["h"] * 0.72, panel_w * SLIDE_W / SLIDE_H)
-    y = primary["y"] + 0.050
+    panel_w = min((primary["w"] - gap * 3) / 4, 0.170)
+    panel_h = panel_w * SLIDE_W / SLIDE_H
+    row_x = primary["x"] + (primary["w"] - (panel_w * 4 + gap * 3)) / 2
+    y = primary["y"] + 0.048
     parts = []
     for idx, (label, asset) in enumerate(zip(labels, assets)):
-        x = primary["x"] + idx * (panel_w + gap)
+        x = row_x + idx * (panel_w + gap)
         parts.append(tex_node(x, y - 0.037, panel_w, rf"\footnotesize\textbf{{{tex_escape(label)}}}", align="center"))
         parts.append(tex_node(x, y, panel_w, rf"\includegraphics[width={panel_w:.4f}\paperwidth,height={panel_h:.4f}\paperheight,keepaspectratio]{{{asset}}}", align="center"))
-    zoom_x = primary["x"] + primary["w"] * 0.34
-    zoom_y = y + panel_h + 0.020
-    zoom_w = primary["w"] * 0.32
-    zoom_h = min(0.135, primary["y"] + primary["h"] - zoom_y)
-    parts.append(rf"\StageThreeSubPanel{{{zoom_x:.4f}}}{{{zoom_y:.4f}}}{{{zoom_x+zoom_w:.4f}}}{{{zoom_y+zoom_h:.4f}}};")
-    parts.append(tex_node(zoom_x + 0.010, zoom_y + 0.012, zoom_w - 0.020, r"\scriptsize\textbf{Error zoom: TP / FP / FN colors remain bound to the same case}", align="center"))
+    roi = spec["same_case_roi_zoom"]["roi_xywh"]
+    source_w = spec["same_case_roi_zoom"]["crop_records"][0]["source_image_size"]["w"]
+    source_h = spec["same_case_roi_zoom"]["crop_records"][0]["source_image_size"]["h"]
+    error_panel_x = row_x + 3 * (panel_w + gap)
+    roi_x = error_panel_x + roi["x"] / source_w * panel_w
+    roi_y = y + roi["y"] / source_h * panel_h
+    roi_w = roi["w"] / source_w * panel_w
+    roi_h = roi["h"] / source_h * panel_h
+    zoom_y = y + panel_h + 0.030
+    zoom_panel_w = 0.098
+    zoom_panel_h = zoom_panel_w * SLIDE_W / SLIDE_H
+    zoom_gap = 0.020
+    zoom_x = primary["x"] + 0.072
+    parts.extend(
+        [
+            rf"\draw[line width=0.9pt,draw=orange!85!black] ({roi_x:.4f},{roi_y:.4f}) rectangle ({roi_x+roi_w:.4f},{roi_y+roi_h:.4f});",
+            rf"\StageThreeConnector{{{roi_x+roi_w:.4f}}}{{{roi_y+roi_h:.4f}}}{{{zoom_x+zoom_panel_w*2+zoom_gap*2:.4f}}}{{{zoom_y:.4f}}};",
+            tex_node(zoom_x, zoom_y - 0.030, 0.435, r"\footnotesize\textbf{Same-case ROI zoom}", align="left"),
+        ]
+    )
+    for idx, (label, raw) in enumerate(zip(spec["roi_crop_labels"], spec["roi_crop_assets"])):
+        zx = zoom_x + idx * (zoom_panel_w + zoom_gap)
+        crop_asset = asset_map[f"{raw}#roi_zoom"]
+        parts.append(tex_node(zx, zoom_y, zoom_panel_w, rf"\includegraphics[width={zoom_panel_w:.4f}\paperwidth,height={zoom_panel_h:.4f}\paperheight,keepaspectratio]{{{crop_asset}}}", align="center"))
+        parts.append(tex_node(zx, zoom_y + zoom_panel_h + 0.008, zoom_panel_w, rf"\scriptsize {tex_escape(label)}", align="center"))
+    legend_x = zoom_x + 3 * (zoom_panel_w + zoom_gap) + 0.020
+    parts.extend(
+        [
+            tex_node(legend_x, zoom_y + 0.006, 0.205, r"\footnotesize\textbf{Overlay legend}", align="left"),
+            rf"\fill[fill=teal!70!black] ({legend_x+0.010:.4f},{zoom_y+0.060:.4f}) circle (2.4pt);",
+            tex_node(legend_x + 0.025, zoom_y + 0.047, 0.145, r"\scriptsize TP: overlap", align="left"),
+            rf"\fill[fill=red!70!black] ({legend_x+0.010:.4f},{zoom_y+0.105:.4f}) circle (2.4pt);",
+            tex_node(legend_x + 0.025, zoom_y + 0.092, 0.145, r"\scriptsize FP: prediction only", align="left"),
+            rf"\fill[fill=orange!85!black] ({legend_x+0.010:.4f},{zoom_y+0.150:.4f}) circle (2.4pt);",
+            tex_node(legend_x + 0.025, zoom_y + 0.137, 0.145, r"\scriptsize FN: missed GT", align="left"),
+        ]
+    )
     annotation = layout["resolved_supporting_object_geometry"]["caption"]
     parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\scriptsize {tex_escape(spec['annotation'])}", align="center"))
     return "\n".join(parts)
@@ -756,6 +994,8 @@ def emit_image_panel(spec: dict[str, Any], layout: dict[str, Any], asset_map: di
 def emit_frame(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str, str]) -> str:
     if spec["content_kind"] == "equation":
         body = emit_equation(spec, layout)
+    elif spec["content_kind"] == "result_figure":
+        body = emit_result_figure(spec, layout)
     elif spec["content_kind"] == "figure":
         body = emit_figure(spec, layout, asset_map)
     elif spec["content_kind"] == "image_panel":
@@ -811,6 +1051,69 @@ def build_main_tex(specs: list[dict[str, Any]], layouts: list[dict[str, Any]], a
 """
 
 
+def detect_colored_roi(path: Path, *, pad: int = 42) -> dict[str, int]:
+    from PIL import Image
+
+    image = Image.open(path).convert("RGB")
+    xs: list[int] = []
+    ys: list[int] = []
+    for py in range(image.height):
+        for px in range(image.width):
+            red, green, blue = image.getpixel((px, py))
+            if max(red, green, blue) > 40 and max(red, green, blue) - min(red, green, blue) > 20:
+                xs.append(px)
+                ys.append(py)
+    if not xs or not ys:
+        raise RuntimeError(f"cannot locate colored error ROI in {path}")
+    left = max(0, min(xs) - pad)
+    right = min(image.width, max(xs) + 1 + pad)
+    top = max(0, min(ys) - pad)
+    bottom = min(image.height, max(ys) + 1 + pad)
+    width = right - left
+    height = bottom - top
+    if width > height:
+        extra = width - height
+        top = max(0, top - extra // 2)
+        bottom = min(image.height, bottom + extra - extra // 2)
+    elif height > width:
+        extra = height - width
+        left = max(0, left - extra // 2)
+        right = min(image.width, right + extra - extra // 2)
+    return {"x": left, "y": top, "w": right - left, "h": bottom - top, "source_w": image.width, "source_h": image.height}
+
+
+def crop_same_case_roi(spec: dict[str, Any], asset_dir: Path, asset_map: dict[str, str]) -> None:
+    from PIL import Image
+
+    roi_source = REPO_ROOT / spec["roi_source_asset"]
+    roi = detect_colored_roi(roi_source)
+    crop_records = []
+    for raw in spec["roi_crop_assets"]:
+        source = REPO_ROOT / raw
+        target = asset_dir / f"{source.stem}_roi_zoom.png"
+        image = Image.open(source).convert("RGB")
+        box = (roi["x"], roi["y"], roi["x"] + roi["w"], roi["y"] + roi["h"])
+        resampling = getattr(getattr(Image, "Resampling", Image), "BICUBIC")
+        image.crop(box).resize((320, 320), resampling).save(target)
+        crop_key = f"{raw}#roi_zoom"
+        asset_map[crop_key] = f"stage3_assets/{target.name}"
+        crop_records.append(
+            {
+                "source_asset": raw,
+                "zoom_asset": asset_map[crop_key],
+                "roi_source_asset": spec["roi_source_asset"],
+                "roi_xywh": {key: roi[key] for key in ["x", "y", "w", "h"]},
+                "source_image_size": {"w": roi["source_w"], "h": roi["source_h"]},
+                "same_case_coordinate_space": True,
+            }
+        )
+    spec["same_case_roi_zoom"] = {
+        "roi_source_asset": spec["roi_source_asset"],
+        "roi_xywh": {key: roi[key] for key in ["x", "y", "w", "h"]},
+        "crop_records": crop_records,
+    }
+
+
 def copy_assets(specs: list[dict[str, Any]], build_dir: Path) -> dict[str, str]:
     asset_dir = build_dir / "stage3_assets"
     asset_dir.mkdir(parents=True, exist_ok=True)
@@ -825,6 +1128,8 @@ def copy_assets(specs: list[dict[str, Any]], build_dir: Path) -> dict[str, str]:
             target = asset_dir / source.name
             shutil.copy2(source, target)
             asset_map[raw] = f"stage3_assets/{target.name}"
+        if spec.get("roi_crop_assets"):
+            crop_same_case_roi(spec, asset_dir, asset_map)
     return asset_map
 
 
@@ -1037,6 +1342,7 @@ def visual_review_manifest(
     layouts: list[dict[str, Any]],
     build_manifest: dict[str, Any],
     build_manifest_path: Path,
+    implementation_commit: str | None = None,
 ) -> dict[str, Any]:
     rendered = render_status.get("rendered_png", [])
     inputs = []
@@ -1067,15 +1373,15 @@ def visual_review_manifest(
         "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
         "task_key": TASK_KEY,
         "workflow_type": "reviewed_handoff",
-        "review_kind": "027-stage3-cuhk-scientific-layout-item-page-review",
+        "review_kind": f"{TASK_KEY}-stage3-cuhk-scientific-layout-item-page-review",
         "privacy_policy": "PUBLIC_SAFE_ONLY",
         "prompt_version": "ai-bridge.visual-review.v1",
         "external_upload_authorization": "",
         "rubric": {
             "instructions": (
-                "You are reviewing rendered pixels from the 027 Stage 3 exact-CUHK scientific layout integration deck. "
+                "You are reviewing rendered pixels from the Stage 3 exact-CUHK scientific layout integration deck. "
                 "Judge each content page independently at item/page level. PASS for an item only if the visible page reaches a mature doctoral research-group meeting or strong conference-talk bar for its page job. "
-                "Check that the CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math is genuinely typeset rather than source-like text; figures, negative evidence, and medical panels are large enough to inspect; panel labels, captions, legends, and annotations are readable and directly tied to the scientific object; discussion/next-experiment content shows concrete research reasoning rather than generic future-work boxes. "
+                "Check that the CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math is genuinely typeset rather than source-like text; result figures use readable native axes, ticks, facets, method legend, nominal line, and callout; experiment design shows typed hierarchy, DGP factors, procedures, endpoints, and directional scientific relations; medical comparison uses same-case ROI crop/zoom imagery with adjacent TP/FP/FN legend; discussion/next-experiment content shows evidence-to-decision research reasoning rather than generic future-work boxes. "
                 "Mark REVISE for any page that looks like a generic card/dashboard/box-arrow fixture, has internal provenance or QA language, has source-like math, hides the evidence in a tiny figure, clips content, uses meaningless whitespace, or repeats one template face without scientific specificity. "
                 "Top-level PASS means all six content items pass; top-level REVISE if any item has a blocking visual maturity issue. Do not infer quality from filenames, hashes, metadata, or presumed provenance; inspect the actual pixels."
             ),
@@ -1086,6 +1392,7 @@ def visual_review_manifest(
         },
         "identity_bindings": {
             "task_key": TASK_KEY,
+            "implementation_commit": implementation_commit,
             "build_manifest": rel(build_manifest_path),
             "build_manifest_sha256": file_sha(build_manifest_path),
             "pdf_sha256": build_manifest.get("compile_status", {}).get("pdf_sha256"),
@@ -1098,7 +1405,16 @@ def visual_review_manifest(
     }
 
 
-def generate(out_dir: Path, *, write_result_visual_inputs: bool = False) -> dict[str, Any]:
+def generate(
+    out_dir: Path,
+    *,
+    write_result_visual_inputs: bool = False,
+    task_key: str = DEFAULT_TASK_KEY,
+    implementation_commit: str | None = None,
+) -> dict[str, Any]:
+    global TASK_KEY
+    TASK_KEY = task_key
+    out_dir = out_dir.resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
     build_dir = out_dir / "cuhk_stage3_build"
     if build_dir.exists():
@@ -1124,6 +1440,8 @@ def generate(out_dir: Path, *, write_result_visual_inputs: bool = False) -> dict
                 "recipe_sha256": layout["recipe_sha256"],
                 "resolved_layout_sha256": layout["resolved_layout_sha256"],
                 "emitted_tex_object_ids": [item["object_id"] for item in layout["native_objects"]],
+                "executable_layout_family": layout["executable_layout_family"],
+                "job_specific_runtime_contract": layout["job_specific_runtime_contract"],
                 "content_capacity_check": layout["content_capacity_check"],
             }
             for spec, layout in zip(specs, layouts)
@@ -1146,6 +1464,7 @@ def generate(out_dir: Path, *, write_result_visual_inputs: bool = False) -> dict
     manifest = {
         "schema": "RESEARCH_CUHK_STAGE3_BUILD_MANIFEST_V1",
         "task_key": TASK_KEY,
+        "implementation_commit": implementation_commit,
         "canonical_cuhk_source": rel(CANONICAL_CUHK),
         "canonical_files": {
             rel(path): file_sha(path)
@@ -1184,11 +1503,13 @@ def generate(out_dir: Path, *, write_result_visual_inputs: bool = False) -> dict
         layouts=layouts,
         build_manifest=manifest,
         build_manifest_path=build_manifest_path,
+        implementation_commit=implementation_commit,
     )
     (out_dir / "visual_inputs.json").write_text(json.dumps(visual_inputs, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     if write_result_visual_inputs:
-        RESULT_VISUAL_REVIEW_DIR.mkdir(parents=True, exist_ok=True)
-        (RESULT_VISUAL_REVIEW_DIR / "visual_inputs.json").write_text(json.dumps(visual_inputs, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        result_visual_review_dir = REPO_ROOT / "results" / task_key / "visual_review"
+        result_visual_review_dir.mkdir(parents=True, exist_ok=True)
+        (result_visual_review_dir / "visual_inputs.json").write_text(json.dumps(visual_inputs, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return manifest
 
 
@@ -1196,8 +1517,15 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--write-result-visual-inputs", action="store_true")
+    parser.add_argument("--task-key", default=DEFAULT_TASK_KEY)
+    parser.add_argument("--implementation-commit")
     args = parser.parse_args()
-    manifest = generate(args.out_dir, write_result_visual_inputs=args.write_result_visual_inputs)
+    manifest = generate(
+        args.out_dir,
+        write_result_visual_inputs=args.write_result_visual_inputs,
+        task_key=args.task_key,
+        implementation_commit=args.implementation_commit,
+    )
     print(json.dumps({"status": manifest["mechanical_qa"]["status"], "out_dir": rel(args.out_dir), "render_status": manifest["render_status"]["status"]}, indent=2))
     return 0 if manifest["mechanical_qa"]["status"] == "MECHANICAL_PASS" else 2
 

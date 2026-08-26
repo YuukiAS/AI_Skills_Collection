@@ -1,13 +1,14 @@
 {
   "schema": "RESEARCH_CUHK_STAGE3_RESOLVED_LAYOUTS_V1",
-  "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+  "task_key": "030_stage3_visual_recovery",
   "layouts": [
     {
       "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
-      "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+      "task_key": "030_stage3_visual_recovery",
       "page_id": "equation_statistical_model",
       "page_job": "STATISTICAL_MODEL",
       "dominant_scientific_object": "native_latex_math",
+      "executable_layout_family": "accepted_stage3_foundation",
       "selected_gold_id": "GSC-016",
       "selected_reference_id": "RRL-020",
       "recipe_sha256": "9615cc4bcd20f8ec2a7c1a15c91f4dd030754ac21f08b5003be5ec79a565d023",
@@ -93,6 +94,11 @@
         "status": "FIT",
         "reason": "requested content fits selected gold content_capacity"
       },
+      "job_specific_runtime_contract": {
+        "primitive": "accepted_foundation",
+        "source_fields_consumed": [],
+        "same_case_roi_zoom": null
+      },
       "text_region_packing": {
         "emitted_text_region_count": 1,
         "non_overlapping": true
@@ -151,14 +157,15 @@
           "workflow"
         ]
       },
-      "resolved_layout_sha256": "608049c4cfc1af09d9b602c81ceb13be7aed26bbda9d1b5870da4b730e488fb7"
+      "resolved_layout_sha256": "54672b0096a78bd483a56d80c54c24b6f1fefdf7486cfa2cf43e6246541fe81f"
     },
     {
       "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
-      "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+      "task_key": "030_stage3_visual_recovery",
       "page_id": "quantitative_result_uncertainty",
       "page_job": "REAL_DATA_APPLICATION",
-      "dominant_scientific_object": "coverage_plot",
+      "dominant_scientific_object": "presentation_native_coverage_figure",
+      "executable_layout_family": "presentation_native_quantitative_result",
       "selected_gold_id": "GSC-014",
       "selected_reference_id": "RRL-016",
       "recipe_sha256": "c409cd71c5831d4e4ad49ef4cb7d3c6cdf85deee1f19a1fc11a191adc51c11bc",
@@ -186,7 +193,7 @@
       ],
       "source_to_cuhk_transform": [
         "source primary_bbox mapped into canonical CUHK content safe region",
-        "figure primary object expanded to projection-readable floor",
+        "result_figure primary object expanded to projection-readable floor",
         "quantitative-result plot receives dominant projection-scale figure region"
       ],
       "resolved_primary_object_geometry": {
@@ -246,6 +253,14 @@
         "status": "FIT",
         "reason": "requested content fits selected gold content_capacity"
       },
+      "job_specific_runtime_contract": {
+        "primitive": "csv_driven_tikz_result_figure",
+        "source_fields_consumed": [
+          "data_source",
+          "figure_filter"
+        ],
+        "same_case_roi_zoom": null
+      },
       "text_region_packing": {
         "emitted_text_region_count": 2,
         "non_overlapping": true
@@ -254,7 +269,7 @@
         {
           "object_id": "quantitative_result_uncertainty_primary",
           "role": "primary_scientific_object",
-          "native_type": "figure",
+          "native_type": "presentation_native_result_figure",
           "bbox": {
             "x": 0.1,
             "y": 0.23,
@@ -304,14 +319,15 @@
           "workflow"
         ]
       },
-      "resolved_layout_sha256": "dfc13bf224146e3e10bfffc8583fc1c87ca6db45324c46d115a5b734d51f8ac0"
+      "resolved_layout_sha256": "c5bb500ff0c6eb6276917f6d0a590712e8349a0f577e178b5ef018fdfd7d9043"
     },
     {
       "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
-      "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+      "task_key": "030_stage3_visual_recovery",
       "page_id": "method_experiment_design",
       "page_job": "EXPERIMENT_DESIGN",
       "dominant_scientific_object": "scientific_relation_diagram",
+      "executable_layout_family": "typed_experiment_design_hierarchy",
       "selected_gold_id": "GSC-004",
       "selected_reference_id": "RRL-019",
       "recipe_sha256": "a08385437ea881fedf1c5bd1f0007522933b48b4684fba79753f97692b79a80e",
@@ -343,22 +359,22 @@
         "experiment design uses a scientific-factor diagram region"
       ],
       "resolved_primary_object_geometry": {
-        "x": 0.09,
+        "x": 0.07,
         "y": 0.27,
-        "w": 0.82,
+        "w": 0.86,
         "h": 0.49
       },
       "resolved_supporting_object_geometry": {
         "annotation": {
-          "x": 0.09,
+          "x": 0.07,
           "y": 0.795,
-          "w": 0.82,
+          "w": 0.86,
           "h": 0.06
         },
         "caption": {
-          "x": 0.09,
+          "x": 0.07,
           "y": 0.795,
-          "w": 0.82,
+          "w": 0.86,
           "h": 0.06
         }
       },
@@ -398,6 +414,11 @@
         "status": "FIT",
         "reason": "requested content fits selected gold content_capacity"
       },
+      "job_specific_runtime_contract": {
+        "primitive": "typed_scientific_hierarchy_relation_map",
+        "source_fields_consumed": [],
+        "same_case_roi_zoom": null
+      },
       "text_region_packing": {
         "emitted_text_region_count": 1,
         "non_overlapping": true
@@ -408,9 +429,9 @@
           "role": "primary_scientific_object",
           "native_type": "tikz_connector_diagram",
           "bbox": {
-            "x": 0.09,
+            "x": 0.07,
             "y": 0.27,
-            "w": 0.82,
+            "w": 0.86,
             "h": 0.49
           }
         },
@@ -419,9 +440,9 @@
           "role": "annotation",
           "native_type": "text_callout",
           "bbox": {
-            "x": 0.09,
+            "x": 0.07,
             "y": 0.795,
-            "w": 0.82,
+            "w": 0.86,
             "h": 0.06
           }
         },
@@ -430,9 +451,9 @@
           "role": "caption",
           "native_type": "text_caption",
           "bbox": {
-            "x": 0.09,
+            "x": 0.07,
             "y": 0.795,
-            "w": 0.82,
+            "w": 0.86,
             "h": 0.06
           }
         }
@@ -456,14 +477,15 @@
           "workflow"
         ]
       },
-      "resolved_layout_sha256": "09e422a899ce9c7f2a3afb87484d596f709e0a50ab3eb49e9873bd934edc7fe1"
+      "resolved_layout_sha256": "3cd5d7123eca4d70229b63b88fde0507f0a19a37c959cb44878ea1fdd6c92d73"
     },
     {
       "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
-      "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+      "task_key": "030_stage3_visual_recovery",
       "page_id": "negative_failure_model_check",
       "page_job": "NEGATIVE_RESULT",
       "dominant_scientific_object": "negative_evidence_plot",
+      "executable_layout_family": "accepted_stage3_foundation",
       "selected_gold_id": "GSC-012",
       "selected_reference_id": "RRL-011",
       "recipe_sha256": "4aae3a6bbe7cda1c0346dd1ea5c5f7c786ec42c08a7d03a07a646ee3472b0b7f",
@@ -550,6 +572,11 @@
         "status": "FIT",
         "reason": "requested content fits selected gold content_capacity"
       },
+      "job_specific_runtime_contract": {
+        "primitive": "accepted_foundation",
+        "source_fields_consumed": [],
+        "same_case_roi_zoom": null
+      },
       "text_region_packing": {
         "emitted_text_region_count": 2,
         "non_overlapping": true
@@ -608,14 +635,15 @@
           "workflow"
         ]
       },
-      "resolved_layout_sha256": "3462095a6606fa6ee5f5b9678aea58f898cd1f7f2c436ab940c50aca070eb06f"
+      "resolved_layout_sha256": "62363b5558681288ab6cef8b505711c406762bef05634af54275eb0a0f7fa0a1"
     },
     {
       "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
-      "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+      "task_key": "030_stage3_visual_recovery",
       "page_id": "medical_image_aligned_comparison",
       "page_job": "MEDICAL_IMAGE_COMPARISON",
       "dominant_scientific_object": "same_case_medical_panels",
+      "executable_layout_family": "same_case_medical_roi_zoom",
       "selected_gold_id": "GSC-008",
       "selected_reference_id": "RRL-013",
       "recipe_sha256": "f2099fe794caab01779329db7bc8cb1775aa3f43b01837badc91b80a0dd5ac78",
@@ -647,22 +675,22 @@
       ],
       "resolved_primary_object_geometry": {
         "x": 0.06,
-        "y": 0.27,
+        "y": 0.235,
         "w": 0.88,
-        "h": 0.52
+        "h": 0.58
       },
       "resolved_supporting_object_geometry": {
         "annotation": {
           "x": 0.06,
-          "y": 0.81,
+          "y": 0.832,
           "w": 0.88,
-          "h": 0.045
+          "h": 0.024
         },
         "caption": {
           "x": 0.06,
-          "y": 0.81,
+          "y": 0.832,
           "w": 0.88,
-          "h": 0.045
+          "h": 0.024
         }
       },
       "visual_hierarchy_mapping": [
@@ -702,6 +730,72 @@
         "status": "FIT",
         "reason": "requested content fits selected gold content_capacity"
       },
+      "job_specific_runtime_contract": {
+        "primitive": "same_case_roi_crop_zoom",
+        "source_fields_consumed": [
+          "roi_source_asset",
+          "same_case_roi_zoom"
+        ],
+        "same_case_roi_zoom": {
+          "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+          "roi_xywh": {
+            "x": 218,
+            "y": 199,
+            "w": 118,
+            "h": 118
+          },
+          "crop_records": [
+            {
+              "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_gt.png",
+              "zoom_asset": "stage3_assets/failure_gt_roi_zoom.png",
+              "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+              "roi_xywh": {
+                "x": 218,
+                "y": 199,
+                "w": 118,
+                "h": 118
+              },
+              "source_image_size": {
+                "w": 420,
+                "h": 420
+              },
+              "same_case_coordinate_space": true
+            },
+            {
+              "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
+              "zoom_asset": "stage3_assets/failure_pred_roi_zoom.png",
+              "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+              "roi_xywh": {
+                "x": 218,
+                "y": 199,
+                "w": 118,
+                "h": 118
+              },
+              "source_image_size": {
+                "w": 420,
+                "h": 420
+              },
+              "same_case_coordinate_space": true
+            },
+            {
+              "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+              "zoom_asset": "stage3_assets/failure_error_roi_zoom.png",
+              "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+              "roi_xywh": {
+                "x": 218,
+                "y": 199,
+                "w": 118,
+                "h": 118
+              },
+              "source_image_size": {
+                "w": 420,
+                "h": 420
+              },
+              "same_case_coordinate_space": true
+            }
+          ]
+        }
+      },
       "text_region_packing": {
         "emitted_text_region_count": 1,
         "non_overlapping": true
@@ -713,9 +807,9 @@
           "native_type": "image_panel",
           "bbox": {
             "x": 0.06,
-            "y": 0.27,
+            "y": 0.235,
             "w": 0.88,
-            "h": 0.52
+            "h": 0.58
           }
         },
         {
@@ -724,9 +818,9 @@
           "native_type": "text_callout",
           "bbox": {
             "x": 0.06,
-            "y": 0.81,
+            "y": 0.832,
             "w": 0.88,
-            "h": 0.045
+            "h": 0.024
           }
         },
         {
@@ -735,9 +829,83 @@
           "native_type": "text_caption",
           "bbox": {
             "x": 0.06,
-            "y": 0.81,
+            "y": 0.832,
             "w": 0.88,
-            "h": 0.045
+            "h": 0.024
+          }
+        },
+        {
+          "object_id": "medical_image_aligned_comparison_same_case_roi_zoom",
+          "role": "same_case_error_roi_zoom",
+          "native_type": "same_case_roi_crop_image",
+          "source_assets": [
+            "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_gt.png",
+            "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
+            "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png"
+          ],
+          "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+          "roi_xywh": {
+            "x": 218,
+            "y": 199,
+            "w": 118,
+            "h": 118
+          },
+          "crop_records": [
+            {
+              "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_gt.png",
+              "zoom_asset": "stage3_assets/failure_gt_roi_zoom.png",
+              "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+              "roi_xywh": {
+                "x": 218,
+                "y": 199,
+                "w": 118,
+                "h": 118
+              },
+              "source_image_size": {
+                "w": 420,
+                "h": 420
+              },
+              "same_case_coordinate_space": true
+            },
+            {
+              "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
+              "zoom_asset": "stage3_assets/failure_pred_roi_zoom.png",
+              "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+              "roi_xywh": {
+                "x": 218,
+                "y": 199,
+                "w": 118,
+                "h": 118
+              },
+              "source_image_size": {
+                "w": 420,
+                "h": 420
+              },
+              "same_case_coordinate_space": true
+            },
+            {
+              "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+              "zoom_asset": "stage3_assets/failure_error_roi_zoom.png",
+              "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+              "roi_xywh": {
+                "x": 218,
+                "y": 199,
+                "w": 118,
+                "h": 118
+              },
+              "source_image_size": {
+                "w": 420,
+                "h": 420
+              },
+              "same_case_coordinate_space": true
+            }
+          ],
+          "same_case_coordinate_space": true,
+          "bbox": {
+            "x": 0.4296,
+            "y": 0.5598,
+            "w": 0.3696,
+            "h": 0.1856
           }
         }
       ],
@@ -760,14 +928,15 @@
           "workflow"
         ]
       },
-      "resolved_layout_sha256": "ba8450df0e53192d27d4aeccab7c5ac910d01399ccaeed1f0a5835f033eaa39a"
+      "resolved_layout_sha256": "9301553f8e98224c2f116676a83cda493aea49ff5674bb1c91487652a0565aec"
     },
     {
       "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
-      "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+      "task_key": "030_stage3_visual_recovery",
       "page_id": "discussion_next_experiment",
       "page_job": "NEXT_EXPERIMENT",
       "dominant_scientific_object": "next_experiment_reasoning",
+      "executable_layout_family": "evidence_to_decision_next_experiment",
       "selected_gold_id": "GSC-018",
       "selected_reference_id": "RRL-059",
       "recipe_sha256": "5ff51c819553d350ceb0e76c1315bf894fe61845e95ebb13f88c4c350892b464",
@@ -870,6 +1039,11 @@
         "status": "FIT",
         "reason": "requested content fits selected gold content_capacity"
       },
+      "job_specific_runtime_contract": {
+        "primitive": "evidence_manipulation_comparator_decision_map",
+        "source_fields_consumed": [],
+        "same_case_roi_zoom": null
+      },
       "text_region_packing": {
         "emitted_text_region_count": 1,
         "non_overlapping": true
@@ -928,7 +1102,7 @@
           "workflow"
         ]
       },
-      "resolved_layout_sha256": "950267c5152c396d5fb9231dc5bec88db27cd4dbdf5599ffa882eca0dca537e7"
+      "resolved_layout_sha256": "0fed355ca3ba82493397aec9c5fbd3cd7e592146660414a75ad7e2a8d39730ae"
     }
   ]
 }

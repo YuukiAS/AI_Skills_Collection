@@ -12,7 +12,8 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[6]
-TASK_KEY = "027_research_presentation_executable_cuhk_scientific_layout_system"
+DEFAULT_TASK_KEY = "027_research_presentation_executable_cuhk_scientific_layout_system"
+TASK_KEY = DEFAULT_TASK_KEY
 DEFAULT_OUT = REPO_ROOT / "docs" / "audits" / "research_presentation_cuhk_scientific_layout_stage3" / "generated"
 FORBIDDEN_AUDIENCE_TERMS = [
     "RRL-",
@@ -41,7 +42,7 @@ def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def validate(out_dir: Path, *, allow_missing_render: bool = False) -> list[str]:
+def validate(out_dir: Path, *, allow_missing_render: bool = False, task_key: str = DEFAULT_TASK_KEY) -> list[str]:
     errors: list[str] = []
     manifest_path = out_dir / "BUILD_MANIFEST.json"
     layouts_path = out_dir / "resolved_layouts.json"
@@ -64,7 +65,7 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False) -> list[str]:
     render_probe = load_json(render_probe_path)
     if manifest.get("schema") != "RESEARCH_CUHK_STAGE3_BUILD_MANIFEST_V1":
         errors.append(f"{manifest_path}: invalid schema")
-    if manifest.get("task_key") != TASK_KEY:
+    if manifest.get("task_key") != task_key:
         errors.append(f"{manifest_path}: task_key mismatch")
     if "templates/cuhk/beamer/source" not in manifest.get("canonical_cuhk_source", ""):
         errors.append(f"{manifest_path}: canonical CUHK source not recorded")
@@ -104,6 +105,19 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False) -> list[str]:
         for source_like in [r"(?<![\\A-Za-z])beta_", r"(?<![\\A-Za-z])sum_", r"X'X", r"\^\(-1\)", r"(?<![\\A-Za-z])epsilon_"]:
             if re.search(source_like, tex):
                 errors.append(f"{tex_path}: source-like math leak {source_like}")
+        if "coverage_by_icc.png" in tex:
+            errors.append(f"{tex_path}: quantitative result still uses raster coverage plot")
+        if "centers -> subjects" in tex or "Error zoom:" in tex:
+            errors.append(f"{tex_path}: old visual-maturity blocker text still present")
+        for required in [
+            "Coverage by ICC under imbalanced clusters",
+            "Subject records nested inside each center",
+            "Same-case ROI zoom",
+            "Failure evidence",
+            "Decision rule",
+        ]:
+            if required not in tex:
+                errors.append(f"{tex_path}: missing Stage 3 recovery primitive text {required}")
 
     if layouts_payload.get("schema") != "RESEARCH_CUHK_STAGE3_RESOLVED_LAYOUTS_V1":
         errors.append(f"{layouts_path}: invalid schema")
@@ -164,12 +178,46 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False) -> list[str]:
         if packing.get("non_overlapping") is not True:
             errors.append(f"{layouts_path}: emitted text regions overlap for {layout.get('page_id')}")
         page_job = layout.get("page_job")
+        family = layout.get("executable_layout_family")
+        contract = layout.get("job_specific_runtime_contract", {})
         if page_job == "REAL_DATA_APPLICATION" and bbox.get("w", 0) * bbox.get("h", 0) < 0.34:
             errors.append(f"{layouts_path}: quantitative result figure below projection-scale area")
+        if page_job == "REAL_DATA_APPLICATION":
+            if family != "presentation_native_quantitative_result":
+                errors.append(f"{layouts_path}: quantitative result did not use presentation-native layout family")
+            if contract.get("primitive") != "csv_driven_tikz_result_figure":
+                errors.append(f"{layouts_path}: quantitative result did not record csv-driven native figure primitive")
+            native_types = {item.get("native_type") for item in layout.get("native_objects", [])}
+            if "presentation_native_result_figure" not in native_types:
+                errors.append(f"{layouts_path}: quantitative result still lacks native result figure object")
         if page_job == "MEDICAL_IMAGE_COMPARISON" and (bbox.get("w", 0) < 0.84 or bbox.get("h", 0) < 0.48):
             errors.append(f"{layouts_path}: medical panel band below readable-area floor")
+        if page_job == "MEDICAL_IMAGE_COMPARISON":
+            zoom = contract.get("same_case_roi_zoom")
+            if family != "same_case_medical_roi_zoom" or contract.get("primitive") != "same_case_roi_crop_zoom":
+                errors.append(f"{layouts_path}: medical comparison did not use same-case ROI zoom family")
+            if not isinstance(zoom, dict) or not zoom.get("crop_records"):
+                errors.append(f"{layouts_path}: medical comparison missing same-case crop ROI records")
+            else:
+                build_workspace = manifest.get("build_workspace", "")
+                for record in zoom["crop_records"]:
+                    zoom_asset = record.get("zoom_asset")
+                    if not zoom_asset or not resolve(str(Path(build_workspace) / zoom_asset)).exists():
+                        errors.append(f"{layouts_path}: medical ROI zoom asset missing {zoom_asset}")
+                    if record.get("same_case_coordinate_space") is not True:
+                        errors.append(f"{layouts_path}: medical ROI crop not marked same-case coordinate space")
         if page_job in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"} and bbox.get("w", 0) * bbox.get("h", 0) < 0.36:
             errors.append(f"{layouts_path}: scientific diagram region below specificity floor for {layout.get('page_id')}")
+        if page_job == "EXPERIMENT_DESIGN":
+            if family != "typed_experiment_design_hierarchy":
+                errors.append(f"{layouts_path}: experiment design did not use typed hierarchy family")
+            if contract.get("primitive") != "typed_scientific_hierarchy_relation_map":
+                errors.append(f"{layouts_path}: experiment design did not record typed relation primitive")
+        if page_job == "NEXT_EXPERIMENT":
+            if family != "evidence_to_decision_next_experiment":
+                errors.append(f"{layouts_path}: next experiment did not use evidence-to-decision family")
+            if contract.get("primitive") != "evidence_manipulation_comparator_decision_map":
+                errors.append(f"{layouts_path}: next experiment did not record evidence-to-decision primitive")
         if layout.get("audience_safe_output_contract", {}).get("internal_ids_exposed") is not False:
             errors.append(f"{layouts_path}: audience-safe contract violated for {layout.get('page_id')}")
 
@@ -246,8 +294,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--allow-missing-render", action="store_true")
+    parser.add_argument("--task-key", default=DEFAULT_TASK_KEY)
     args = parser.parse_args()
-    errors = validate(args.out_dir, allow_missing_render=args.allow_missing_render)
+    errors = validate(args.out_dir, allow_missing_render=args.allow_missing_render, task_key=args.task_key)
     if errors:
         for error in errors:
             print(error, file=sys.stderr)

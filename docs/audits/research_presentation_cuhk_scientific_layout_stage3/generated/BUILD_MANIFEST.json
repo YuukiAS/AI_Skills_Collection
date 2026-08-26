@@ -1,6 +1,7 @@
 {
   "schema": "RESEARCH_CUHK_STAGE3_BUILD_MANIFEST_V1",
-  "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+  "task_key": "030_stage3_visual_recovery",
+  "implementation_commit": null,
   "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
   "canonical_files": {
     "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/background.png": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa",
@@ -29,7 +30,7 @@
       "times_font_files_present": true
     },
     "pdf": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/main.pdf",
-    "pdf_sha256": "b2dace9cb16a32ab832275a8d1c2c9c7c665015dd76bf94525543cf47b4cf194",
+    "pdf_sha256": "4a723e4578645c61b15dd87a5e0ee0892773be8311fb20ce821a123ef6430b4d",
     "log": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/compile.log"
   },
   "render_status": {
@@ -38,7 +39,7 @@
     "rendered_png": [
       {
         "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-1.png",
-        "sha256": "fa895847c0ad06d4bb19100a3a048cb88b30e1ab9422b1cc142d6aae74ae6e49"
+        "sha256": "564981f0cfa1667fae42998e8ce0cefd447a139c55864e7d6ee5fdfd9ac5279d"
       },
       {
         "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-2.png",
@@ -46,11 +47,11 @@
       },
       {
         "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-3.png",
-        "sha256": "15f35966635192b0b07818394d5402a98a40e247c2abc376434e92332b604437"
+        "sha256": "0d6f29a79f6a369d8465699de03373057e97d47bb0f45467cf95ea32624bbffc"
       },
       {
         "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-4.png",
-        "sha256": "f7631db19453fca82efddcb8afab1a5b8c024221d9080ba5359a6377d5de77a9"
+        "sha256": "3d421cdcd5b9eb8f2bf407bbb15947a501811aa37fdd3d9a5a81d1278d9ca671"
       },
       {
         "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-5.png",
@@ -58,11 +59,11 @@
       },
       {
         "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-6.png",
-        "sha256": "61db6033b6868a06ba05becd3cd82279df87dd61657571c985ade84003a87421"
+        "sha256": "f7aebcb3a9af980e4f64817ccd86003db7bcd03d5d812a638477ed2eb3fcad55"
       },
       {
         "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-7.png",
-        "sha256": "09859b9a192bd1657bedbf59cc648cfaa492478b40bbb98b0ef466ca2d6481cb"
+        "sha256": "e083b8340a94f459e0796c035aba5c40e35f0a597b32bda892a45bc84c08f16b"
       }
     ]
   },

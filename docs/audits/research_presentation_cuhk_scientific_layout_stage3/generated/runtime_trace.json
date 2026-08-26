@@ -1,6 +1,6 @@
 {
   "schema": "RESEARCH_CUHK_STAGE3_TRACE_V1",
-  "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+  "task_key": "030_stage3_visual_recovery",
   "fixture_boundary": "Stage 3 engineering integration fixture; not a real-paper holdout and not ONE_SHOT_QUALITY_PASS.",
   "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
   "build_workspace": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build",
@@ -19,12 +19,18 @@
       },
       "selected_gold_id": "GSC-016",
       "recipe_sha256": "9615cc4bcd20f8ec2a7c1a15c91f4dd030754ac21f08b5003be5ec79a565d023",
-      "resolved_layout_sha256": "608049c4cfc1af09d9b602c81ceb13be7aed26bbda9d1b5870da4b730e488fb7",
+      "resolved_layout_sha256": "54672b0096a78bd483a56d80c54c24b6f1fefdf7486cfa2cf43e6246541fe81f",
       "emitted_tex_object_ids": [
         "equation_statistical_model_primary",
         "equation_statistical_model_annotation",
         "equation_statistical_model_caption"
       ],
+      "executable_layout_family": "accepted_stage3_foundation",
+      "job_specific_runtime_contract": {
+        "primitive": "accepted_foundation",
+        "source_fields_consumed": [],
+        "same_case_roi_zoom": null
+      },
       "content_capacity_check": {
         "status": "FIT",
         "reason": "requested content fits selected gold content_capacity"
@@ -44,12 +50,21 @@
       },
       "selected_gold_id": "GSC-014",
       "recipe_sha256": "c409cd71c5831d4e4ad49ef4cb7d3c6cdf85deee1f19a1fc11a191adc51c11bc",
-      "resolved_layout_sha256": "dfc13bf224146e3e10bfffc8583fc1c87ca6db45324c46d115a5b734d51f8ac0",
+      "resolved_layout_sha256": "c5bb500ff0c6eb6276917f6d0a590712e8349a0f577e178b5ef018fdfd7d9043",
       "emitted_tex_object_ids": [
         "quantitative_result_uncertainty_primary",
         "quantitative_result_uncertainty_annotation",
         "quantitative_result_uncertainty_caption"
       ],
+      "executable_layout_family": "presentation_native_quantitative_result",
+      "job_specific_runtime_contract": {
+        "primitive": "csv_driven_tikz_result_figure",
+        "source_fields_consumed": [
+          "data_source",
+          "figure_filter"
+        ],
+        "same_case_roi_zoom": null
+      },
       "content_capacity_check": {
         "status": "FIT",
         "reason": "requested content fits selected gold content_capacity"
@@ -69,12 +84,18 @@
       },
       "selected_gold_id": "GSC-004",
       "recipe_sha256": "a08385437ea881fedf1c5bd1f0007522933b48b4684fba79753f97692b79a80e",
-      "resolved_layout_sha256": "09e422a899ce9c7f2a3afb87484d596f709e0a50ab3eb49e9873bd934edc7fe1",
+      "resolved_layout_sha256": "3cd5d7123eca4d70229b63b88fde0507f0a19a37c959cb44878ea1fdd6c92d73",
       "emitted_tex_object_ids": [
         "method_experiment_design_primary",
         "method_experiment_design_annotation",
         "method_experiment_design_caption"
       ],
+      "executable_layout_family": "typed_experiment_design_hierarchy",
+      "job_specific_runtime_contract": {
+        "primitive": "typed_scientific_hierarchy_relation_map",
+        "source_fields_consumed": [],
+        "same_case_roi_zoom": null
+      },
       "content_capacity_check": {
         "status": "FIT",
         "reason": "requested content fits selected gold content_capacity"
@@ -94,12 +115,18 @@
       },
       "selected_gold_id": "GSC-012",
       "recipe_sha256": "4aae3a6bbe7cda1c0346dd1ea5c5f7c786ec42c08a7d03a07a646ee3472b0b7f",
-      "resolved_layout_sha256": "3462095a6606fa6ee5f5b9678aea58f898cd1f7f2c436ab940c50aca070eb06f",
+      "resolved_layout_sha256": "62363b5558681288ab6cef8b505711c406762bef05634af54275eb0a0f7fa0a1",
       "emitted_tex_object_ids": [
         "negative_failure_model_check_primary",
         "negative_failure_model_check_annotation",
         "negative_failure_model_check_caption"
       ],
+      "executable_layout_family": "accepted_stage3_foundation",
+      "job_specific_runtime_contract": {
+        "primitive": "accepted_foundation",
+        "source_fields_consumed": [],
+        "same_case_roi_zoom": null
+      },
       "content_capacity_check": {
         "status": "FIT",
         "reason": "requested content fits selected gold content_capacity"
@@ -119,12 +146,80 @@
       },
       "selected_gold_id": "GSC-008",
       "recipe_sha256": "f2099fe794caab01779329db7bc8cb1775aa3f43b01837badc91b80a0dd5ac78",
-      "resolved_layout_sha256": "ba8450df0e53192d27d4aeccab7c5ac910d01399ccaeed1f0a5835f033eaa39a",
+      "resolved_layout_sha256": "9301553f8e98224c2f116676a83cda493aea49ff5674bb1c91487652a0565aec",
       "emitted_tex_object_ids": [
         "medical_image_aligned_comparison_primary",
         "medical_image_aligned_comparison_annotation",
-        "medical_image_aligned_comparison_caption"
+        "medical_image_aligned_comparison_caption",
+        "medical_image_aligned_comparison_same_case_roi_zoom"
       ],
+      "executable_layout_family": "same_case_medical_roi_zoom",
+      "job_specific_runtime_contract": {
+        "primitive": "same_case_roi_crop_zoom",
+        "source_fields_consumed": [
+          "roi_source_asset",
+          "same_case_roi_zoom"
+        ],
+        "same_case_roi_zoom": {
+          "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+          "roi_xywh": {
+            "x": 218,
+            "y": 199,
+            "w": 118,
+            "h": 118
+          },
+          "crop_records": [
+            {
+              "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_gt.png",
+              "zoom_asset": "stage3_assets/failure_gt_roi_zoom.png",
+              "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+              "roi_xywh": {
+                "x": 218,
+                "y": 199,
+                "w": 118,
+                "h": 118
+              },
+              "source_image_size": {
+                "w": 420,
+                "h": 420
+              },
+              "same_case_coordinate_space": true
+            },
+            {
+              "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
+              "zoom_asset": "stage3_assets/failure_pred_roi_zoom.png",
+              "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+              "roi_xywh": {
+                "x": 218,
+                "y": 199,
+                "w": 118,
+                "h": 118
+              },
+              "source_image_size": {
+                "w": 420,
+                "h": 420
+              },
+              "same_case_coordinate_space": true
+            },
+            {
+              "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+              "zoom_asset": "stage3_assets/failure_error_roi_zoom.png",
+              "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+              "roi_xywh": {
+                "x": 218,
+                "y": 199,
+                "w": 118,
+                "h": 118
+              },
+              "source_image_size": {
+                "w": 420,
+                "h": 420
+              },
+              "same_case_coordinate_space": true
+            }
+          ]
+        }
+      },
       "content_capacity_check": {
         "status": "FIT",
         "reason": "requested content fits selected gold content_capacity"
@@ -144,12 +239,18 @@
       },
       "selected_gold_id": "GSC-018",
       "recipe_sha256": "5ff51c819553d350ceb0e76c1315bf894fe61845e95ebb13f88c4c350892b464",
-      "resolved_layout_sha256": "950267c5152c396d5fb9231dc5bec88db27cd4dbdf5599ffa882eca0dca537e7",
+      "resolved_layout_sha256": "0fed355ca3ba82493397aec9c5fbd3cd7e592146660414a75ad7e2a8d39730ae",
       "emitted_tex_object_ids": [
         "discussion_next_experiment_primary",
         "discussion_next_experiment_annotation",
         "discussion_next_experiment_caption"
       ],
+      "executable_layout_family": "evidence_to_decision_next_experiment",
+      "job_specific_runtime_contract": {
+        "primitive": "evidence_manipulation_comparator_decision_map",
+        "source_fields_consumed": [],
+        "same_case_roi_zoom": null
+      },
       "content_capacity_check": {
         "status": "FIT",
         "reason": "requested content fits selected gold content_capacity"

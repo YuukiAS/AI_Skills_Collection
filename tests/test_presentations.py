@@ -482,11 +482,34 @@ class PresentationSharedTests(unittest.TestCase):
         validator = SHARED / "scripts/validate_cuhk_scientific_layout_stage3.py"
         with tempfile.TemporaryDirectory() as tmp:
             generated = Path(tmp) / "stage3"
-            result = subprocess.run([sys.executable, str(generator), "--out-dir", str(generated)], check=False, capture_output=True, text=True)
+            implementation_commit = "a" * 40
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(generator),
+                    "--out-dir",
+                    str(generated),
+                    "--task-key",
+                    "030_stage3_visual_recovery",
+                    "--implementation-commit",
+                    implementation_commit,
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
             self.assertIn(result.returncode, {0, 2}, result.stderr + result.stdout)
 
             validation = subprocess.run(
-                [sys.executable, str(validator), "--out-dir", str(generated), "--allow-missing-render"],
+                [
+                    sys.executable,
+                    str(validator),
+                    "--out-dir",
+                    str(generated),
+                    "--allow-missing-render",
+                    "--task-key",
+                    "030_stage3_visual_recovery",
+                ],
                 check=False,
                 capture_output=True,
                 text=True,
@@ -495,7 +518,8 @@ class PresentationSharedTests(unittest.TestCase):
 
             manifest = json.loads((generated / "BUILD_MANIFEST.json").read_text(encoding="utf-8"))
             self.assertEqual(manifest["schema"], "RESEARCH_CUHK_STAGE3_BUILD_MANIFEST_V1")
-            self.assertEqual(manifest["task_key"], "027_research_presentation_executable_cuhk_scientific_layout_system")
+            self.assertEqual(manifest["task_key"], "030_stage3_visual_recovery")
+            self.assertEqual(manifest["implementation_commit"], implementation_commit)
             self.assertIn("templates/cuhk/beamer/source", manifest["canonical_cuhk_source"])
             self.assertTrue(manifest["canonical_files"])
             self.assertTrue((REPO_ROOT / manifest["tex"]).exists())
@@ -543,11 +567,29 @@ class PresentationSharedTests(unittest.TestCase):
                     self.assertLessEqual(support["y"] + support["h"], safe["y"] + safe["h"] + 0.0001)
                 if layout["page_job"] == "REAL_DATA_APPLICATION":
                     self.assertGreaterEqual(bbox["w"] * bbox["h"], 0.34)
+                    self.assertEqual(layout["executable_layout_family"], "presentation_native_quantitative_result")
+                    self.assertEqual(layout["job_specific_runtime_contract"]["primitive"], "csv_driven_tikz_result_figure")
+                    self.assertIn(
+                        "presentation_native_result_figure",
+                        {item["native_type"] for item in layout["native_objects"]},
+                    )
                 if layout["page_job"] == "MEDICAL_IMAGE_COMPARISON":
                     self.assertGreaterEqual(bbox["w"], 0.84)
                     self.assertGreaterEqual(bbox["h"], 0.48)
+                    self.assertEqual(layout["executable_layout_family"], "same_case_medical_roi_zoom")
+                    zoom = layout["job_specific_runtime_contract"]["same_case_roi_zoom"]
+                    self.assertEqual(len(zoom["crop_records"]), 3)
+                    for record in zoom["crop_records"]:
+                        self.assertTrue(record["same_case_coordinate_space"])
+                        self.assertTrue((generated / "cuhk_stage3_build" / record["zoom_asset"]).exists())
                 if layout["page_job"] in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"}:
                     self.assertGreaterEqual(bbox["w"] * bbox["h"], 0.36)
+                if layout["page_job"] == "EXPERIMENT_DESIGN":
+                    self.assertEqual(layout["executable_layout_family"], "typed_experiment_design_hierarchy")
+                    self.assertEqual(layout["job_specific_runtime_contract"]["primitive"], "typed_scientific_hierarchy_relation_map")
+                if layout["page_job"] == "NEXT_EXPERIMENT":
+                    self.assertEqual(layout["executable_layout_family"], "evidence_to_decision_next_experiment")
+                    self.assertEqual(layout["job_specific_runtime_contract"]["primitive"], "evidence_manipulation_comparator_decision_map")
 
             trace = json.loads((generated / "runtime_trace.json").read_text(encoding="utf-8"))
             self.assertEqual(len(trace["slides"]), 6)
@@ -573,8 +615,9 @@ class PresentationSharedTests(unittest.TestCase):
             )
             visual_inputs = json.loads((generated / "visual_inputs.json").read_text(encoding="utf-8"))
             self.assertEqual(visual_inputs["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
-            self.assertEqual(visual_inputs["task_key"], "027_research_presentation_executable_cuhk_scientific_layout_system")
+            self.assertEqual(visual_inputs["task_key"], "030_stage3_visual_recovery")
             self.assertEqual(visual_inputs["workflow_type"], "reviewed_handoff")
+            self.assertEqual(visual_inputs["identity_bindings"]["implementation_commit"], implementation_commit)
             if manifest["render_status"]["status"] == "ok":
                 self.assertEqual(len(visual_inputs["inputs"]), 6)
             else:
@@ -587,14 +630,21 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertIn(r"\StageThreeNode", tex)
             self.assertIn(r"\displaystyle", tex)
             self.assertIn(r"\includegraphics", tex)
+            self.assertIn("Coverage by ICC under imbalanced clusters", tex)
+            self.assertNotIn("coverage_by_icc.png", tex)
             self.assertIn(r"centers \(G=8,20,50\)", tex)
             self.assertIn(r"ICC \(\rho=0,.1,.3,.5\)", tex)
             self.assertIn("naive iid OLS z interval", tex)
-            self.assertIn("95\\% coverage vs 0.95 target", tex)
+            self.assertIn("Subject records nested inside each center", tex)
+            self.assertNotIn("centers -> subjects", tex)
+            self.assertIn("Coverage target 0.95", tex)
             self.assertIn("DPP diverse batch", tex)
-            self.assertIn("independent random batch", tex)
+            self.assertIn("random batch", tex)
             self.assertIn("coverage >= .94", tex)
-            self.assertIn("Error zoom: TP / FP / FN colors remain bound to the same case", tex)
+            self.assertIn("Same-case ROI zoom", tex)
+            self.assertIn("Overlay legend", tex)
+            self.assertIn("Decision rule", tex)
+            self.assertNotIn("Error zoom:", tex)
             for forbidden in ["RRL-", "SRC-", "GSC-", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "run ID", "fixture", "workflow"]:
                 self.assertNotIn(forbidden, tex)
             plugin_generator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/generate_cuhk_scientific_layout_stage3.py"
@@ -602,7 +652,19 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(generator.read_text(encoding="utf-8"), plugin_generator.read_text(encoding="utf-8"))
             self.assertEqual(validator.read_text(encoding="utf-8"), plugin_validator.read_text(encoding="utf-8"))
 
-            strict = subprocess.run([sys.executable, str(validator), "--out-dir", str(generated)], check=False, capture_output=True, text=True)
+            strict = subprocess.run(
+                [
+                    sys.executable,
+                    str(validator),
+                    "--out-dir",
+                    str(generated),
+                    "--task-key",
+                    "030_stage3_visual_recovery",
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
             if manifest["render_status"]["status"] == "ok":
                 self.assertEqual(strict.returncode, 0, strict.stderr + strict.stdout)
                 self.assertEqual(manifest["mechanical_qa"]["status"], "MECHANICAL_PASS")

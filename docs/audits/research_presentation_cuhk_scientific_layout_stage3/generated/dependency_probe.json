@@ -1,6 +1,6 @@
 {
   "schema": "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1",
-  "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+  "task_key": "030_stage3_visual_recovery",
   "commands": {
     "xelatex": {
       "available": true,
