@@ -1,95 +1,86 @@
 {
   "blocking_findings": [
     {
-      "evidence": "The coverage plot occupies a relatively small central area; its facet titles, axes, legend, and annotation are visibly tiny at the rendered page scale.",
-      "finding_id": "F1",
+      "evidence": "The three coverage panels occupy a relatively small central band; axis labels, point labels, and the in-panel “nominal 0.95” annotations are very small. A lone teal line key labeled “G=50” appears above the right panel, while the red/teal method mapping is relegated to the lower caption.",
+      "finding_id": "F01",
       "item_id": "slide_3_real_data_application",
-      "recommendation": "Enlarge the plot substantially and scale its axes, legend, facet labels, and callouts for projection viewing.",
-      "requirement_id": "main_scientific_object_projection_readable",
+      "recommendation": "Enlarge the coverage plot substantially and provide a complete, adjacent method legend; increase all axes and annotation text to projection-readable sizes.",
+      "requirement_id": "coverage_plot_readability",
       "severity": "blocking",
-      "summary": "Coverage evidence is too small to inspect confidently."
+      "summary": "Coverage evidence and its labeling are too small and incompletely keyed for a presentation-quality results page."
     },
     {
-      "evidence": "The page is a sparse four-box, arrow-linked workflow with no scientific quantities, design settings, or visual evidence beyond generic labels.",
-      "finding_id": "F2",
+      "evidence": "The page is dominated by four lightly outlined rectangular cards connected by arrows. The procedure labels use source-like arrow text (“centers -> subjects”), and the actual scientific relation is presented as a generic box-and-arrow workflow rather than a readable experimental-design object.",
+      "finding_id": "F02",
       "item_id": "slide_4_experiment_design",
-      "recommendation": "Replace the generic workflow fixture with a scientifically specific design diagram that exposes clustering factors, sampled units, procedures, and evaluated outcomes.",
-      "requirement_id": "scientific_specificity_no_generic_box_arrow",
+      "recommendation": "Replace the generic workflow-card treatment with a scientifically specific design diagram showing the hierarchy, assignment/imbalance mechanism, and analysis paths visually; enlarge the embedded procedure and endpoint details.",
+      "requirement_id": "scientific_relation_diagram_specificity",
       "severity": "blocking",
-      "summary": "Experiment-design page reads as a generic box-arrow template."
+      "summary": "The experiment-design page has a generic box-arrow fixture appearance rather than a mature scientific design visualization."
     },
     {
-      "evidence": "The explanatory text beneath the bar chart visibly overlaps itself, creating an illegible dark band across the lower center of the page.",
-      "finding_id": "F3",
-      "item_id": "slide_5_negative_result",
-      "recommendation": "Reflow or remove the overlapping text, then enlarge the negative-evidence chart and retain a single readable interpretation tied to the marked failure.",
-      "requirement_id": "no_clipping_or_overlapping_content",
-      "severity": "blocking",
-      "summary": "Overlapping body text makes the negative-result page visually broken."
-    },
-    {
-      "evidence": "Each medical panel is small, and the lesion/error markings are minute; the GT and error details cannot be meaningfully inspected at normal projection scale.",
-      "finding_id": "F4",
+      "evidence": "Although the four image tiles are reasonably large, the lesion/error regions are only tiny ring-shaped marks. The purported “Error zoom” is a text box rather than an enlarged image crop, so the TP/FP/FN evidence cannot be inspected from the rendered page.",
+      "finding_id": "F03",
       "item_id": "slide_6_medical_image_comparison",
-      "recommendation": "Enlarge the same-case panels and lesion/error overlays, with larger panel-specific annotations or zoomed crops.",
-      "requirement_id": "medical_panels_large_enough_to_inspect",
+      "recommendation": "Add a genuine enlarged crop of the error region, with readable TP/FP/FN color legend and linked callouts from each relevant same-case panel.",
+      "requirement_id": "medical_panel_inspectability",
       "severity": "blocking",
-      "summary": "Medical comparison evidence is too small for inspection."
+      "summary": "The medical comparison does not make the segmentation error visually inspectable."
     },
     {
-      "evidence": "The page is another sparse sequence of four rounded boxes and arrows; it states proposed comparators but does not visually show a concrete test design, decision criterion, or expected diagnostic outcome.",
-      "finding_id": "F5",
+      "evidence": "The next-experiment page is composed entirely of three outlined cards and arrow connectors. Despite naming specific comparators, the content is presented as a generic workflow fixture rather than an evidence-to-decision reasoning visual.",
+      "finding_id": "F04",
       "item_id": "slide_7_next_experiment",
-      "recommendation": "Show the experimental factors, selection rule, comparator setup, coverage criterion, and resulting decision path in a research-specific visual.",
-      "requirement_id": "next_experiment_concrete_research_reasoning",
+      "recommendation": "Recast the page as a visual decision experiment: explicitly link the observed low-coverage condition, batch-selection arms, expected diagnostic outcomes, and decision criterion with readable quantitative endpoints.",
+      "requirement_id": "next_experiment_reasoning",
       "severity": "blocking",
-      "summary": "Next-experiment content is a generic workflow rather than mature experimental reasoning."
+      "summary": "Concrete terms are present, but the generic card-and-arrow presentation falls below the requested scientific-layout maturity bar."
     }
   ],
-  "created_at": "2026-08-25T05:49:42Z",
-  "evidence_id": "visual-review-027_research_presentation_executable_cuhk_scientific_layout_system-6e2e6dab29b0",
+  "created_at": "2026-08-26T02:33:20Z",
+  "evidence_id": "visual-review-027_research_presentation_executable_cuhk_scientific_layout_system-326dcf0971a8",
   "images": [
     {
       "logical_id": "slide_2_statistical_model",
       "mime_type": "image/png",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-2.png",
-      "sha256": "0e8fdb402b69fa871148351986be1bdba67d4fe8c3b36db2d59ac138d3bf596c"
+      "sha256": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491"
     },
     {
       "logical_id": "slide_3_real_data_application",
       "mime_type": "image/png",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-3.png",
-      "sha256": "91eb2d5df6e56032ef28cc58fd0b62afbe1174c7fd5b515c8fc195cc85871df7"
+      "sha256": "15f35966635192b0b07818394d5402a98a40e247c2abc376434e92332b604437"
     },
     {
       "logical_id": "slide_4_experiment_design",
       "mime_type": "image/png",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-4.png",
-      "sha256": "c17eb23f12f5119eb1eaeb06200fb6ac4ff9a229700338815cded91f572c01a6"
+      "sha256": "f7631db19453fca82efddcb8afab1a5b8c024221d9080ba5359a6377d5de77a9"
     },
     {
       "logical_id": "slide_5_negative_result",
       "mime_type": "image/png",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-5.png",
-      "sha256": "66d2e45f567bf717d746c81a30c144bcede6cbb7198967b1f31e743c53b045a0"
+      "sha256": "3ae702392aa81f62881f3d1533c269fe07ed99f0c9eb4e619d8338656cbca7e7"
     },
     {
       "logical_id": "slide_6_medical_image_comparison",
       "mime_type": "image/png",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-6.png",
-      "sha256": "1768adbdae99b4ee28642a0d98dbe8d64bc626cf142726f590f3408874f25397"
+      "sha256": "61db6033b6868a06ba05becd3cd82279df87dd61657571c985ade84003a87421"
     },
     {
       "logical_id": "slide_7_next_experiment",
       "mime_type": "image/png",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-7.png",
-      "sha256": "a1322fb190e99788927a63152aad92480622aadfdbe2b2c03d01bf9346d08f57"
+      "sha256": "09859b9a192bd1657bedbf59cc648cfaa492478b40bbb98b0ef466ca2d6481cb"
     }
   ],
   "input_manifest": {
     "identity_bindings": {
       "build_manifest": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/BUILD_MANIFEST.json",
-      "build_manifest_sha256": "47ded95a99bac02c77c122ab9b9259b1333216c755f5ed37e67ba0c0fd90e406",
+      "build_manifest_sha256": "4c6a27da8687a4ee1987a8191a435d2b66c0b37cd517d66bad53e63dec6dafa5",
       "dominant_object_by_logical_id": {
         "slide_2_statistical_model": "native_latex_math",
         "slide_3_real_data_application": "coverage_plot",
@@ -106,14 +97,14 @@
         "slide_6_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON",
         "slide_7_next_experiment": "NEXT_EXPERIMENT"
       },
-      "pdf_sha256": "403d939bcd5b42bb195ab2fbff2765c80114ce91aabebf3f990772835bb0b439",
+      "pdf_sha256": "b2dace9cb16a32ab832275a8d1c2c9c7c665015dd76bf94525543cf47b4cf194",
       "rendered_png_sha256_by_logical_id": {
-        "slide_2_statistical_model": "0e8fdb402b69fa871148351986be1bdba67d4fe8c3b36db2d59ac138d3bf596c",
-        "slide_3_real_data_application": "91eb2d5df6e56032ef28cc58fd0b62afbe1174c7fd5b515c8fc195cc85871df7",
-        "slide_4_experiment_design": "c17eb23f12f5119eb1eaeb06200fb6ac4ff9a229700338815cded91f572c01a6",
-        "slide_5_negative_result": "66d2e45f567bf717d746c81a30c144bcede6cbb7198967b1f31e743c53b045a0",
-        "slide_6_medical_image_comparison": "1768adbdae99b4ee28642a0d98dbe8d64bc626cf142726f590f3408874f25397",
-        "slide_7_next_experiment": "a1322fb190e99788927a63152aad92480622aadfdbe2b2c03d01bf9346d08f57"
+        "slide_2_statistical_model": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491",
+        "slide_3_real_data_application": "15f35966635192b0b07818394d5402a98a40e247c2abc376434e92332b604437",
+        "slide_4_experiment_design": "f7631db19453fca82efddcb8afab1a5b8c024221d9080ba5359a6377d5de77a9",
+        "slide_5_negative_result": "3ae702392aa81f62881f3d1533c269fe07ed99f0c9eb4e619d8338656cbca7e7",
+        "slide_6_medical_image_comparison": "61db6033b6868a06ba05becd3cd82279df87dd61657571c985ade84003a87421",
+        "slide_7_next_experiment": "09859b9a192bd1657bedbf59cc648cfaa492478b40bbb98b0ef466ca2d6481cb"
       },
       "selected_gold_id_by_logical_id": {
         "slide_2_statistical_model": "GSC-016",
@@ -125,7 +116,7 @@
       },
       "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system"
     },
-    "manifest_sha256": "6e2e6dab29b0688cc0fde5fe6d68925c5043339fc07df522edb966dc11a44ca1",
+    "manifest_sha256": "326dcf0971a8aba0a32ae9bf671167667f1ec5cd52c379fb7e9dea2e57bbff8d",
     "privacy_policy": "PUBLIC_SAFE_ONLY",
     "rubric": {
       "instructions": "You are reviewing rendered pixels from the 027 Stage 3 exact-CUHK scientific layout integration deck. Judge each content page independently at item/page level. PASS for an item only if the visible page reaches a mature doctoral research-group meeting or strong conference-talk bar for its page job. Check that the CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math is genuinely typeset rather than source-like text; figures, negative evidence, and medical panels are large enough to inspect; panel labels, captions, legends, and annotations are readable and directly tied to the scientific object; discussion/next-experiment content shows concrete research reasoning rather than generic future-work boxes. Mark REVISE for any page that looks like a generic card/dashboard/box-arrow fixture, has internal provenance or QA language, has source-like math, hides the evidence in a tiny figure, clips content, uses meaningless whitespace, or repeats one template face without scientific specificity. Top-level PASS means all six content items pass; top-level REVISE if any item has a blocking visual maturity issue. Do not infer quality from filenames, hashes, metadata, or presumed provenance; inspect the actual pixels.",
@@ -141,95 +132,100 @@
       "decision": "PASS",
       "item_id": "slide_2_statistical_model",
       "observations": [
-        "Purple section navigation and page framing are visible.",
-        "The mixed-effects model is centered, large, and genuinely typeset.",
-        "The supporting ICC relation is typeset and directly explains why cluster count affects calibration.",
-        "The sparse composition keeps the model as the dominant readable scientific object."
+        "The large centered mixed-model equation is visibly typeset with mathematical glyphs, subscripts, Greek symbols, and distributions rather than source-like text.",
+        "The title, equation, and ICC interpretation form a focused and projection-readable model page.",
+        "The purple top navigation and active Model marker provide a consistent visible deck identity."
       ],
       "requirement_ids": [
-        "CUHK_beamer_identity_visible",
-        "main_scientific_object_projection_readable",
-        "math_genuinely_typeset"
+        "native_latex_math",
+        "cuhk_beamer_identity",
+        "scientific_object_prominence"
       ],
-      "summary": "A clean model page with prominent readable mathematics."
+      "summary": "A clean, focused statistical-model page with legible native mathematical typesetting."
     },
     {
       "decision": "REVISE",
       "item_id": "slide_3_real_data_application",
       "observations": [
-        "The plot is visually subordinate to large empty space.",
-        "Three-panel coverage traces are present, but fine labels and legend text are too small for reliable projection reading.",
-        "The left takeaway is readable and tied to the small-center stress condition."
+        "Three G-specific coverage plots are visible, but their plotting and annotation text is small.",
+        "The method color mapping is primarily in a lower caption, and the visible plot-area key only identifies G=50.",
+        "The main result trend is visible, but detailed evidence is not comfortably projection-readable."
       ],
       "requirement_ids": [
-        "main_scientific_object_projection_readable",
-        "figure_labels_legends_readable"
+        "coverage_plot_readability",
+        "figure_annotation_readability",
+        "scientific_object_prominence"
       ],
-      "summary": "Scientific message is present, but the central evidence is undersized."
+      "summary": "The scientific result is present but under-scaled and insufficiently keyed."
     },
     {
       "decision": "REVISE",
       "item_id": "slide_4_experiment_design",
       "observations": [
-        "Purple navigation and heading styling are consistent.",
-        "The central object consists only of four rounded boxes joined by arrows.",
-        "Labels such as “DGP knobs” and “Coverage diagnostics” do not expose a concrete experimental design."
+        "The purple deck navigation identity is visible.",
+        "The central visual is a repeated outlined-card and arrow sequence.",
+        "Several small internal labels and source-like “->” notation reduce presentation polish."
       ],
       "requirement_ids": [
-        "scientific_specificity_no_generic_box_arrow"
+        "scientific_relation_diagram_specificity",
+        "experiment_design_readability",
+        "avoid_generic_box_arrow_fixture"
       ],
-      "summary": "Readable but generic workflow styling does not meet the scientific-layout bar."
+      "summary": "The page needs a scientifically specific experimental-design visual rather than a generic workflow layout."
     },
     {
-      "decision": "REVISE",
+      "decision": "PASS",
       "item_id": "slide_5_negative_result",
       "observations": [
-        "The bar chart has a useful target line, error bars, values, legend, and a callout to the failure.",
-        "The explanatory lines below the chart overlap and are illegible.",
-        "The overlap visibly compromises the page despite the otherwise interpretable chart."
+        "The G=8 bar chart is the dominant object and clearly displays the coverage decline and target-0.95 reference line.",
+        "The bar values, legend, error bars, and “still below nominal” callout directly support the stated failure claim.",
+        "The adjacent text gives a specific diagnostic interpretation and names CR2 and wild-cluster bootstrap as next tests."
       ],
       "requirement_ids": [
-        "no_clipping_or_overlapping_content",
-        "negative_evidence_readable"
+        "negative_evidence_plot",
+        "figure_annotation_readability",
+        "concrete_research_reasoning"
       ],
-      "summary": "Negative evidence is present, but the page has a major legibility defect."
+      "summary": "A readable negative-evidence page with a prominent diagnostic plot and specific follow-up reasoning."
     },
     {
       "decision": "REVISE",
       "item_id": "slide_6_medical_image_comparison",
       "observations": [
-        "Input, GT, Prediction, and Error are clearly arranged as same-case panels.",
-        "Panel headings are readable and the caption explicitly connects the error panel to the failure explanation.",
-        "The image panels and colored lesion/error marks are too small to inspect in detail."
+        "The Input, GT, Prediction, and Error panels are visibly arranged as a same-case comparison.",
+        "The highlighted lesion and error areas are extremely small relative to the panels.",
+        "The labeled “Error zoom” area contains explanatory text only, not a magnified error image."
       ],
       "requirement_ids": [
-        "medical_panels_large_enough_to_inspect",
-        "panel_labels_annotations_readable"
+        "same_case_medical_panels",
+        "medical_panel_inspectability",
+        "error_annotation_readability"
       ],
-      "summary": "The comparison structure is clear, but the medical evidence is undersized."
+      "summary": "The same-case arrangement is clear, but the clinically relevant discrepancy is too small to inspect."
     },
     {
       "decision": "REVISE",
       "item_id": "slide_7_next_experiment",
       "observations": [
-        "The narrative sentence names batch query, CR2, and wild bootstrap comparators.",
-        "The visual itself is a generic four-box arrow sequence with substantial unused space.",
-        "No displayed decision metric, factor variation, or expected outcome makes the proposed experiment operational."
+        "The page states a specific current limit (G=8, ICC=.5, imbalanced clusters), candidate batch strategies, comparators, and a coverage/width criterion.",
+        "All reasoning is housed in three similarly styled rectangular cards connected by arrows.",
+        "The resulting visual remains a generic workflow/card treatment rather than a scientific decision diagram."
       ],
       "requirement_ids": [
-        "next_experiment_concrete_research_reasoning",
-        "scientific_specificity_no_generic_box_arrow"
+        "next_experiment_reasoning",
+        "avoid_generic_box_arrow_fixture",
+        "scientific_layout_maturity"
       ],
-      "summary": "The page names a direction but does not visually articulate a concrete experiment."
+      "summary": "The content has concrete research terms but requires a more scientific, evidence-linked visual treatment."
     }
   ],
   "non_blocking_notes": [
-    "The purple header/navigation and consistent serif typography provide a coherent deck-level identity across pages.",
-    "Several pages use large blank regions effectively for focus, but the generic workflow pages do not use that space to add scientific detail."
+    "The purple navigation strip and active section markers are consistently visible across all pages.",
+    "Several slides have abundant whitespace; this is effective on the focused equation page but makes the diagrammatic pages feel less information-dense than their page jobs require."
   ],
   "overall_decision": "REVISE",
   "prompt_version": "ai-bridge.visual-review.v1",
-  "review_identity": "6e2e6dab29b0688cc0fde5fe6d68925c5043339fc07df522edb966dc11a44ca1",
+  "review_identity": "326dcf0971a8aba0a32ae9bf671167667f1ec5cd52c379fb7e9dea2e57bbff8d",
   "review_kind": "027-stage3-cuhk-scientific-layout-item-page-review",
   "review_model": "gpt-5.6-terra",
   "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
