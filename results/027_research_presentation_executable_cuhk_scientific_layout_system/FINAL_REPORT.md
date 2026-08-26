@@ -6,17 +6,25 @@ final_decision: REVISE
 
 # 027 Final Report — Executable CUHK Scientific Layout System
 
-## What 027 achieved
+## What this task solved
 
 027 已经建立了 Stage 3 的核心执行链：真实科研 page job 会通过正常 Stage 2 gold selector 与 recipe，进入 CUHK content-space resolver，再生成 native LaTeX/TikZ/figure/image-panel 对象，最终使用 canonical exact CUHK Beamer source 编译成真实 PDF/PNG。source-derived geometry 会影响实际 emitted geometry，容量不匹配时会返回 `SPLIT_REQUIRED`，而不是退回 generic fallback。
 
 这意味着 Stage 3 已经不再是“选完参考页后重新手写一套布局”的假集成。exact CUHK 身份、gold-to-layout trace、native LaTeX 数学、真实 xelatex 编译、PDF-to-PNG 渲染、机械检查、audience-meta leak gate 与真实 CI 都已经成立。
 
-## What improved after Review 1
+## What changed
 
 第一轮返修后，统计模型页继续保持成熟；negative-result 页已经从真实文本重叠的失败状态修到 item-level `PASS`。实验设计、医学影像和下一实验页也加入了更具体的科研对象，说明上一轮 blocker 并非完全没有改善。
 
-## Why 027 still cannot pass
+## New capabilities / behavior
+
+027 让 Stage 3 具备可执行的 CUHK scientific layout path：从 gold composition 到 native Beamer/PDF/PNG artifact 的链路可以被 CI 与视觉审核共同检查，并且会把容量失败暴露为显式 contract failure。
+
+## Example usage
+
+后续 Stage 3 recovery 可以沿用 027 已建立的 render/build/audit artifacts，直接针对仍为 `REVISE` 的页面成熟度 blocker 做 bounded repair，而不是重建 CUHK identity、selector、recipe 或 render pipeline。
+
+## Regression and remaining limitations
 
 返修后的 fresh Terra evidence 来自真实 `workflow_dispatch`，并与当前六张 PNG identity 一致。六个主要内容页里，slide 2 与 slide 5 为 `PASS`，但 slide 3、4、6、7 仍为 `REVISE`：
 
@@ -35,7 +43,7 @@ final_decision: REVISE
 
 后续 recovery 不应重做或回归：canonical CUHK identity、normal gold selector/recipe 路径、geometry-transfer regression、`SPLIT_REQUIRED` capacity contract、native LaTeX model page、已通过的 negative-result layout、audience-meta leak gate、现有 Stage 2 gold library与 027 的真实 CI/build evidence。
 
-## User-checkable artifacts
+## Technical appendix
 
 - `results/027_research_presentation_executable_cuhk_scientific_layout_system/REVIEW_1.md`
 - `results/027_research_presentation_executable_cuhk_scientific_layout_system/REVIEW_2.md`
