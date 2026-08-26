@@ -1,8 +1,8 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
-  "state": "READY_FOR_GPT_REVIEW",
-  "review_round": 1,
+  "state": "AWAIT_HUMAN_DECISION",
+  "review_round": 2,
   "max_review_rounds": 2,
   "plan_revision": 1,
   "max_plan_revisions": 1,
@@ -12,7 +12,7 @@
   "ci_required": true,
   "ci_status": "PASS",
   "last_review_decision": "REVISE",
-  "review_limit_reached": false,
-  "human_gate_reason": null,
-  "next_action": "RUN_GPT_REVIEW"
+  "review_limit_reached": true,
+  "human_gate_reason": "REVIEW_LIMIT",
+  "next_action": "NONE"
 }
