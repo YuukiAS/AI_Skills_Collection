@@ -1,358 +1,260 @@
-# Research presentation review notes — CAT-TRACE v2, 2026-08-27
+# CAT-TRACE v2 组会 PPT 批注整理（2026-08-27）
 
-This file records the user's Acrobat review of the CAT-TRACE group-meeting deck version **v2**. It is a project-specific review record, not yet a set of general presentation rules.
+本文件记录 CAT-TRACE 组会 PPT **v2** 的 Acrobat 批注。它首先保存项目事实：用户具体对哪些页面、哪些表达和哪些视觉结果不满意。可泛化的科研汇报规则另行提炼，不把 CAT-TRACE 特例直接当作通用规范。
 
-The review source is the annotated PDF `group_meeting-v2(1).pdf`, 27 pages. Acrobat contains 74 highlight annotations across pages 2–25 and 27. The user's color convention is approximate rather than absolute: blue is usually a style-system issue; purple is usually unnatural / AI-like wording; yellow and orange are mixed; green was used once for terminology presentation.
+## 1. 批注来源与颜色约定
 
-## Scope and workflow status
+- 审阅文件：`group_meeting-v2(1).pdf`，27 页。
+- 共读取到 74 个高亮批注，覆盖 P2–P25 和 P27；P1、P26 没有本轮 Acrobat 批注。
+- 颜色大致分布：黄色 43、紫色 14、橙色 10、蓝色 6、绿色 1。
+- 用户的颜色约定是经验性的：蓝色通常表示 **style / 格式体系**；紫色通常表示 **不像人说话 / AI 味**；黄色和橙色混合记录具体内容、逻辑、格式与视觉问题；绿色用于术语呈现方式。
 
-- **Current step:** preserve all v2 complaints and group them by failure type.
-- **Do not yet change active presentation rules or `research-presentations/TODO.md`.**
-- **Next step:** discuss the review with the user page by page and agree on concrete fixes.
-- **Only after that agreement:** extract the genuinely reusable rules, compare them against existing skill/TODO coverage, and update the general presentation guidance through the normal review path.
-- CAT-TRACE-specific scientific decisions must stay in this record / TRACE work, not become universal presentation rules.
-
-## External language-style research consulted for the later rule-design step
-
-The user specifically asked for a more systematic treatment of AI-like prose. The following evidence was checked now but is not yet promoted into active rules:
-
-- Juzek & Ward, COLING 2025, documented lexical over-representation in LLM-generated scientific English, including words such as *delve*, *intricate*, and *underscore*. This supports maintaining a lexical warning list, but it does **not** justify treating any single word as proof of AI authorship.
-- Broader public editing guidance on AI-like writing also flags stock rhetorical shells and repeated contrastive patterns as warning signs. For this deck, the user's strongest objections are not mainly vocabulary; they are formulaic sentence architecture such as “This is not X; it is Y”, “X does ..., it does not ...”, “not only ...”, meta-commentary about what the slide is doing, and overly compressed label-like prose.
-- Microsoft style guidance uses sentence-style capitalization for most titles/headings. This is relevant to the unresolved capitalization inconsistency in the deck, but the final CAT-TRACE / CUHK slide rule still needs to be chosen deliberately rather than copied mechanically.
-- MIT/Broad scientific-presentation guidance recommends one main point per slide and titles that convey the page's main message. This supports a stronger slide-title contract, but the exact CUHK template convention still needs a project decision.
-
-## Annotation inventory by page
+## 2. 逐页不满点
 
 ### P1
 
-No Acrobat complaint annotation.
+本轮无批注。标题页此前已经接受，后续返修默认受保护。
 
-### P2 — Biodiversity surveys reveal an expanding species space
+### P2 — expanding species space
 
-1. **Rendered overlap was not caught before delivery.** The labels “known catalogue taxa” and “catalogue-external” overlap in the diagram. User explicitly asks for a pre-delivery rendered check that can catch this even without manual screenshots.
-2. **Terminology needs a defined presentation style.** `OTU (operational taxonomic unit)` raises a larger question: when a domain term deserves its own mini-slide / callout versus a compact same-slide definition.
-3. **A biological example may need a real image.** `arthropod` is understandable to specialists but a small image may reduce audience effort.
-4. **Example wording should use audience language.** For a spoken example, “columns appearing in exactly one sample” feels too matrix-centric; use the real-world object once the concept is grounded.
+- 图中 `known catalogue taxa` 与 `catalogue-external` 发生文字重叠，说明此前所谓 render QA 没有真正检查最终页面。
+- OTU 首次出现没有一套稳定的术语样式；需要明确术语是和当前页一起解释还是单独用背景页解释。
+- `arthropod` 对统计听众仍然偏领域化，最好配真实或直观视觉对象。
+- `Example: ... 255,188 OTUs ... singletons ...` 像把多个事实塞成一条 column 文本；例子应有自己的视觉层级，而不是继续堆正文。
 
-### P3 — Two types of future discovery
+### P3 — future discovery
 
-1. **“Victoria example” is rejected as unnatural project shorthand.** Same issue applies to the highlighted “Malagasy example”.
-2. **COI appears before it has been explained.** Every domain-specific term must be checked against previous pages, not merely expanded somewhere later.
-3. **Example-label wording is inconsistent across the deck.** “Victoria example”, “Malagasy example”, and later “Victoria plant examples” should not coexist as ad hoc variants.
+- `Victoria example` / `Malagasy example` 属于生硬的模板标签，不像自然科研汇报。
+- COI 在这里直接出现，但此前没有解释；必须做全 deck 的 first-use 检查，不能只看当前页。
 
-### P4 — TRACE: keeping an infinite response space locally sparse
+### P4 — TRACE sparsity
 
-1. **The sentence defining `p` is technically correct but unnatural.** User prefers direct speech-like scientific explanation: define `p`, then say explicitly that the infinite model is approximated with a finite truncation.
-2. **Problem and solution are separated badly.** The fixed-prior failure is presented as a bullet, but the corresponding mechanism / why the scaling fixes it is not paired clearly enough.
-3. **Meta-slide narration is unacceptable.** “This page explains ...; the next page shows ...” is explicitly rejected and should be caught automatically before delivery.
+- `p is a computational truncation: ...` 的句子结构机械，不像现场会说的话；应直接先定义 `p`，再解释截断在实际模型中是什么意思。
+- “固定 prior 会导致 richness 随 truncation 膨胀”既然是 challenge，就必须和解决方案、为什么能解决形成清楚逻辑，不可只作为孤立 bullet。
+- `This page explains ... the next page ...` 属于纯元话语，以后任何 audience-facing slide 都不应再出现。
 
-### P5 — TRACE: calibrating expected richness as `p` grows
+### P5 — TRACE richness calibration
 
-1. **“Two sources are distinct” should become visible structure, not compressed prose.** If there are two logically separate points, use a two-item list / two-step structure.
-2. **Formula order is hard to follow.** Several equations are stacked without enough narrative connection; related equations should be grouped, and minimal explanatory text should establish why each equation follows from the previous one.
-3. **Mathematical slides need an explicit layout rule.** “More equations” is not automatically clearer; use line grouping, alignment, and textual bridges based on derivational structure.
+- `Two sources are distinct` 后面却继续塞成一句话；既然是两个来源，应在视觉上分开。
+- 四个公式只是纵向堆叠，没有推导顺序、没有文字桥接、相近式子也没有对齐；需要一套固定的数学排版规范，而不是“有公式就居中”。
 
-### P6 — HMSC and CORAL
+### P6 — HMSC / CORAL
 
-1. **CORAL flow diagram was highlighted without a comment, indicating dissatisfaction with the current diagram execution.** Later comments make clear that box-and-arrow diagrams need a stronger necessity and geometry check.
-2. **HMSC needs a reason for appearing in the story, not only a definition.** The slide should state why it is a relevant baseline/reference and what it is good at, with appropriate citation / status.
-3. **The sentence “CORAL helps ... It does not ...” is rejected as strongly AI-like.** The scientific boundary is valid; the rhetorical shell is not.
+- CORAL 流程图仍然过于压缩。
+- HMSC 不能只解释定义，还要说明为什么它是重要 reference / baseline：其已被广泛使用、能利用 traits / phylogeny / latent factors 等结构，以及 CAT-TRACE 为什么要在它基础上继续推进。
+- `CORAL helps ... It does not ...` 这种正反对偶句式 AI 味明显，用户明确要求以后不要再出现同类句式。
 
-### P7 — CAT-TRACE: one model with a finite catalogue and an open tail
+### P7 — CAT-TRACE model
 
-1. **Peer headings use inconsistent font treatment.** “Finite catalogue component” does not visually match the opposite side.
-2. **Residual dependence and discovery target are dropped below the two columns without a heading.** User questions both the lack of a title and the reflexive use of two columns.
-3. **Need a clear rule for when two columns are justified.** Two columns should encode a true parallel comparison, not be the default layout for any two model pieces.
+- 两栏 peer heading 字体不一致。
+- 两栏下面突然悬着 residual dependence 和 discovery equations，却没有清楚的小标题，层级混乱。
+- 两栏本身可以保留，但必须真正等高、对称；若下面还有 full-width 内容，必须预留足够空间，否则应拆页。
 
-### P8 — CAT-TRACE architecture
+### P8 — architecture
 
-1. **A highlighted phrase (“whether / not observed in first n”) is visually / linguistically awkward even without a typed comment.**
-2. **Arrow geometry failed.** Short, overlapping arrows and connectors were not caught by QA. The entire diagram needs connector spacing / overlap / direction validation.
+- 箭头仍然太短、相互压叠/overlay，且有不清楚的连线路径；此前已经多轮返修仍未通过。
+- `known-but-unseen catalogue taxa = ...` 又变成 diagram 外的一句公式/说明，破坏图的完整阅读路径。
+- 以后 architecture diagram 必须先定拓扑、阅读方向、节点层级、edge routing，再做美化；diagram 本身应成为页面视觉中心。
 
-### P9 — Matching observed features to the catalogue
+### P9 — matching
 
-1. **Avoid symbolic shorthand when words are clearer.** The isolated `+` in “sequence + taxonomy-like labels” is called out as unnecessary notation in prose/table cells.
-2. **“currently hard/partial only” is rejected as AI/project-status shorthand.** It sounds like an internal note rather than audience-facing scientific wording.
+- 正文中随意使用 `+` 连接普通语言，不自然。
+- `currently hard/partial only` 像内部项目状态，不像给统计老师看的科研表达。
 
-### P10 — Identity-aware catalogue borrowing
+### P10 — catalogue borrowing
 
-1. **Text does not fit inside the component boxes.** Basic rendered containment/alignment should have failed QA.
-2. **Raw code / encoding names are unacceptable on audience slides.** `Poll_Abiotic`, `Disp_Wind`, `Glycophyte` are implementation field names; slides should show complete human-readable trait descriptions.
-3. **Example naming is inconsistent.** “Victoria plant examples” conflicts with earlier “Victoria example”. User wants one consistent example convention across the deck.
+- 公式下面五个解释框的文字实际溢出框外，最终 render 没有被验收。
+- `Poll_Abiotic`、`Disp_Wind`、`Glycophyte` 等内部字段/编码不应直接出现在 audience-facing slide；应写真实含义。
+- `Victoria plant examples` 与此前 `Victoria example` 又是另一套标签，说明 example style 没有统一。
+- 五个公式项需要有清楚区分度；不能全部同色。可以让“公式项 + 对应标签”共享同色，同时采用一套和 CUHK 模板兼容的受控 palette。
 
-### P11 — What information exists before a species is discovered?
+### P11 — information before discovery
 
-1. **Capitalization of table headers / first column is unresolved.** Need one fixed capitalization convention for slide tables.
-2. **Many table cells sound compressed and machine-written.** Examples the user dislikes include telegraphic fragments such as `generally unavailable`, `only coarse mark if modeled`, `unavailable without later placement`, `not defensible before identity exists`. Later revision must identify which cells need full human phrasing and which can remain terse labels.
+- 表格首行、首列是否 sentence case 没有规范。
+- `may be available / generally unavailable / only coarse mark if modeled / not defensible...` 等短语像数据库状态字段，句式生硬，需要改成真正给人读的表格语言。
 
-### P12 — From one TRACE tail to several marked groups
+### P12 — marked groups
 
-1. **Examples need a dedicated visual treatment.** Instead of a loose label “Malagasy order-level examples”, consider one explicit example callout or a clearly delimited example block.
-2. **The closing sentence is AI-like and poorly ordered.** In particular, ending with “not only how many OTUs will appear” feels like generated contrastive rhetoric.
-3. **The main equation is too small.** If it is the core scientific object, it should dominate the slide.
-4. **New notation should be visually distinguished.** Color or another controlled emphasis can show which group-specific terms are new relative to original TRACE.
+- `Malagasy order-level examples` 不像明确的 example 视觉对象；应统一成规范的 example / callout style。
+- `not only how many ...` 等反向补充式句子 AI 味明显，核心结论应正面直接说。
+- 本页主变换式太小；既然它是核心科学对象，就应该更大，并用受控颜色突出真正新增的 group index / parameters。
 
-### P13 — Residual dependence
+### P13 — residual dependence
 
-1. **The HMSC vs CAT-TRACE comparison is badly laid out.** User again questions default two-column composition.
-2. **“This is not just a different factor notation” is explicitly rejected as AI-like.**
-3. **“Residual association is ..., not evidence of ...” is also rejected as AI-like.** Scientific caution is needed, but the contrastive template is not.
+- 当前 HMSC vs CAT-TRACE 的自由两栏排版差，阅读路径不清楚；用户明确反感为了“两件事”就机械两栏。
+- `This is not just ...`、`..., not evidence of ...` 等句式 AI 味明显。
+- 更适合用纵向逻辑：HMSC mean structure → CAT-TRACE mean/residual split → normalized correlation → marginal probability。
 
-### P14 — Priors for the open tail and residual factors
+### P14 — priors
 
-1. **“Part 1 / Part 2” needs a rule.** User questions when `Part` is appropriate versus using descriptive subheads or a sequential list.
-2. **Mathematical environment choice needs a standard.** User accepts the current multi-line equations but wants a rule for when to use ordinary display math, `align`, or `cases`.
-3. **The explanatory paragraph may be better as bullets.** Need a rule for when short consequence statements should be bullets rather than paragraph prose.
+- `Part 1 / Part 2` 没有必要，应该用真正说明内容的小标题。
+- MGP 公式本身可以，但以后必须明确什么时候用 `align`、什么时候 `cases`、什么时候普通 display / inline definitions。
+- 末尾两句解释更适合 bullet；同时要建立“什么时候用 bullet”的统一规则。
 
-### P15 — Theorem: group-marked open-tail richness
+### P15 — theorem
 
-1. **One theorem is not enough for the current theory section.** User expects the deck to consider the full set of theorem/proposition results rather than presenting a single theorem as the whole theory contribution.
-2. **“Why this matters” is explicitly rejected as AI-like / generic heading language.**
-3. **“the theorem says ...” is rejected as unnatural spoken/scientific phrasing.**
-4. **“G=1 ... preserves TRACE calibration” may be too absolute.** Scientific strength/qualification must match what is actually proved.
+- 只出现一个 theorem，无法体现 CAT-TRACE 相比现有模型到底多解决了哪些正式问题；用户要求至少形成三个清楚的 theorem / proposition / corollary 层级结果。
+- `Why this matters` 是典型 AI / 模板标签，禁止继续使用。
+- `the theorem says ...` 等解释口吻不自然。
+- `preserves TRACE calibration` 需要守住 claim boundary，避免没有证明到的绝对表述。
 
-### P16 — Proof idea and relation to TRACE
+### P16 — proof
 
-1. **Do not call it “Proof idea”.** User wants the actual proof / proof structure rather than a loose “idea” label on a statistics group-meeting slide.
+- 当前 `Proof idea and relation to TRACE` 删除。真正证明尚未整理完之前，不在主 deck 放 proof idea；以后证明完成后再补正式 proof slide。
 
-### P17 — Discovery and marginal preservation
+### P17 — discovery / marginal preservation
 
-1. **“Under hard matching” is questioned as unnecessary lead-in.** If hard and soft matching are separate cases, structure them explicitly rather than using repeated sentence-openers.
-2. **Meaning of formula components is placed after the equation in awkward prose.** Prefer introducing the two terms before the formula or using mathematical annotation such as underbraces when appropriate.
-3. **Hard vs soft matching should be a list / parallel structure, not two inline prose fragments.**
-4. **The sentence explaining that the decomposition is “scientifically important but mathematically ...” is questioned as unnecessary audience-facing self-commentary.**
-5. **“Open theory question:” exposes an unresolved style rule.** Need a standard for when a bold inline lead-in is acceptable versus when a true subheading followed by a new line is required.
+- `Under hard matching` / `Under soft matching` 不应碎片化塞进连续 prose；如果要对比，就用统一的 list / subheading 结构。
+- `is an estimand partition: ...` 放在公式后面不好看；若需要解释两项，可在公式前解释，或用 `underbrace` 直接标注。
+- `This decomposition is scientifically important, but ...` 这种对 PPT 没有实际信息增量的自我评论应删除。
+- `Open theory question:` 触发通用 style 问题：什么时候允许“粗体 label + 同行正文”，什么时候必须独立小标题换行，需要统一规则。
 
-### P18 — Simulation 1A
+### P18 — oracle simulation
 
-1. **The main figure is slightly too small.** Need an objective figure-size / legibility acceptance rule rather than ad hoc trial and error.
-2. **Capitalization inside the right-side fact list is inconsistent (`at ...`).**
-3. **Theoretical total target `10.822` is dropped without derivation/context.** Since there are three groups, the audience needs to see where the total comes from, possibly with a small table or visible summation.
-4. **“this is an oracle ... not a fitted ...” is explicitly rejected as an overused AI contrast template.**
+- 主图仍然偏小；不能每次靠人工提醒，要建立 main-visual size contract。
+- bullet 首字母大小写不统一。
+- `theoretical total target: 10.822` 没有说明三组 target 如何组成 10.822；需要表格或结构化解释。
+- `this is an oracle ... not a fitted ...` 是用户明确不接受的 AI 对偶句式。事实可以保留，但应直接正面说明实验性质。
 
-### P19 — Simulation 1B
+### P19 — fitted discovery simulation
 
-1. **The standalone `n` and `m` line is disconnected from the design list.** If it is the most important setup, it needs a clear structural role; otherwise integrate it into a compact design block.
-2. **Metrics are dumped as terminology.** Each metric should communicate what aspect of performance it measures and why more than one metric is needed.
-3. **The sentence explaining `n_max=1000` is scientifically fine but stylistically AI-like.** Need to isolate the rhetorical pattern causing that impression.
-4. **Simulation / Dataset title capitalization needs to be consistent.**
-5. **`1B` has inconsistent glyph sizing between numeral and letter.** Typography must be checked visually, not only syntactically.
+- `n in {...}, m=...` 莫名其妙单独居中在首行。首行居中的公式必须是当前 slide 的核心 scientific object；普通 design parameters 应进入 Design 区域。
+- metrics 只是术语堆砌，没有方向（高/低好）、没有解释各 metric 衡量什么、为什么需要多个 metric。
+- real-data scale 的解释意思可以，但 `for advisor feedback rather than claimed...` AI 味明显。
+- simulation 标题大小写需要统一。
+- `1B` 中数字与字母视觉大小不一致，属于格式 QA 失败。
 
-### P20 — Simulation 2
+### P20 — borrowing simulation
 
-1. **Ablation options separated by vertical bars are unacceptable.** Parallel model variants need a proper visual/list structure.
-2. **Metrics again appear as an unexplained list.** Brier score, log score, PR-AUC, coverage must each have a purpose in the experiment.
+- ablation 用 `|` 生硬隔开不可接受；应使用表格、对齐列表或真正的比较结构。
+- metrics 同 P19：不能只列名词，必须说明评价目标和好坏方向。
 
-### P21 — Simulation 3
+### P21 — residual-dependence simulation
 
-1. **“Low-rank truth uses rank 3 or rank 5” is under-explained.** Audience needs to know which matrix/object has that rank and why those values matter.
-2. **The `n` / `|W|` grid is again dropped as standalone notation with no narrative role.** Same structural problem as P19.
-3. **Questions need a dedicated style.** `Core question:` should not be invented slide by slide; capitalization and header treatment must be standardized.
-4. **The final working-set sentence sounds AI-like.** User specifically asks whether the `rather than ...` construction and punctuation contribute to that feel.
+- `Low-rank truth uses rank 3 or 5` 没解释“哪个矩阵的 rank”，统计老师也不能靠猜。
+- `n`、`|W|` 又被作为孤立居中内容，违反信息层级。
+- `Core question` 应有 deck-level question style；标题/问句 sentence case 也要统一。
+- `rather than forcing all 255k OTUs...` 句子可表达同样事实，但需要去掉模板化对照口吻。
 
-### P22 — Dataset 1: Finland airborne fungi
+### P22 — Finland dataset
 
-1. **Images are too small.** Dataset-image sizing needs a reusable acceptance rule.
-2. **Right-side prose is hard to scan.** It mixes sampling explanation, OTU caveat, dimensions, rarity counts, covariates, and study purpose in one column.
-3. **Repeated `This ...` sentence openings are explicitly disliked.** Dataset pages should use a human scientific structure rather than explanatory chatbot prose.
+- 主视觉偏小。
+- 右侧整块文字可读性差，连续出现 `This ... This ...`；事实、数据规模、问题应拆成明确层级。
+- dataset slide 要让第一次看到的统计老师迅速知道采了什么、数据长什么样、这个数据用于回答什么问题。
 
-### P23 — Dataset 2: Malagasy arthropod metabarcoding
+### P23 — Madagascar dataset
 
-1. **`Main question:` needs the same standardized question style as P21.**
-2. **Inline arrows in body text are rejected.** Arrows should be reserved for real diagrams / transformations with explicit semantics; ordinary prose should not use decorative mini-process arrows.
-3. **Capitalization / naming of Simulation vs Dataset titles is inconsistent across pages.**
-4. **Images are too small.**
-5. **One caption for multiple unrelated panels is not informative enough.** Captions must actually identify what each panel shows.
+- question 需要统一 style。
+- 正文不应把多个普通步骤用 `→` 串起来；如果流程值得画，就画真正 diagram，否则写正常 prose。
+- 多个 context image 太小，且两/三个不同图共用一个模糊 caption，caption 失去解释作用。
 
-### P24 — Victoria plant communities
+### P24 — Victoria dataset
 
-1. **`30,955 × 1,116 → 25,955 × 622` is not self-explanatory.** The transformation must name what is being filtered and why.
-2. **Semicolon-separated covariate and trait lists are hard to read.** Need a standard format for presenting variable groups on slides.
-3. **“This is not the main ... It checks ...” is explicitly rejected as AI-like.**
-4. **Title naming regressed: Dataset 1 and 2 have `Dataset`, page 24 does not.**
-5. **Images / captions are again inadequate.** User reports poor sizing, missing/weak captions, and inconsistency with the previous two dataset pages.
+- `30,955 × 1,116 → 25,955 × 622` 单独甩数字和箭头，听众不知道过滤了什么；必须说明 raw → filtered 的规则/含义。
+- covariates / traits 用大量分号串成一句，不适合 slide；需要明确的变量呈现规范。
+- `This is not the main ... It checks ...` 属于已被反复指出的 AI 句式。
+- dataset title、主图、辅助图、caption 层级混乱；标题也没有统一成 `Dataset 3: ...`。
 
-### P25 — Questions for discussion
+### P25 — discussion
 
-1. **A/B/C options are unexpectedly centered.** Option alignment must be standardized.
-2. **Option capitalization is unresolved.**
-3. **“Current theorem solves ...” is rejected as unclear / low-value wording.**
-4. **Question 2 abandons the A/B/C structure used by question 1.** All discussion questions should use the same option grammar if they are meant to be parallel decisions.
-5. **`first-paper` wording is rejected.** It assumes a future second paper and sounds like internal project planning rather than advisor-facing science.
-6. **Question 3 puts A/B/C on one line, creating a third formatting style on the same slide.** Strong consistency failure.
+- 同一页三个问题出现三套格式：第一题 ABC 居中，第二题没有 ABC，第三题 ABC 全挤在一行。
+- 选项是否 sentence case 没统一。
+- `Current theorem solves ...` 信息价值不清楚。
+- `first-paper` 假定存在后续论文，不适合组会 audience-facing 文案。
+- Discussion question 必须由我们根据科研问题和听众决定，不交给 Codex 自己想；统计教授不一定熟悉具体 topic，因此问题必须给足必要背景且能基于统计判断作答。
 
 ### P26
 
-No Acrobat complaint annotation.
+本轮无批注。后续只做 regression check，除非上下文重构迫使局部调整。
 
-### P27 — References
+### P27 — references
 
-1. **Reference text is still too small.** Use the full page more efficiently before reducing font size.
+- 字体仍太小，页面下半部大量空白。
+- Reference slide 必须主动利用纵向空间；条目少时提高字号/行距，而不是固定小字号后留下大片空白。
 
-## Failure categories and affected pages
+## 3. 跨页问题分类
 
-### A. Missing / weak presentation style system
+### A. 缺少统一的 presentation style system
 
-The largest root cause. The deck lacks a fixed rule for recurring object types, so each page invents local formatting.
+集中页：P2、P5、P7、P10–P14、P17–P25、P27。
 
-Affected pages: **P2, P5, P7, P10, P11, P12, P13, P14, P17, P18, P19, P20, P21, P23, P24, P25**.
+需要统一：sentence case、术语 first-use、example、question、mini-header、inline label、bullet、table header、two-column、formula hierarchy、metrics、caption、reference、dataset/simulation numbering。
 
-Subproblems:
+### B. 最终 render 没有真正验收
 
-- terminology definition / callout style — P2, P3;
-- example style — P2, P3, P10, P12;
-- question style — P17, P21, P23, P25;
-- heading vs bold inline lead-in — P14, P17, P21, P23;
-- bullet vs paragraph — P5, P14, P22, P24;
-- single-column vs two-column — P7, P13;
-- table capitalization / label casing — P11, P18, P19, P23, P25;
-- equation layout (`display`, `align`, `cases`, annotation) — P5, P14, P17;
-- arrow usage — P6, P8, P20, P23, P24;
-- metric presentation — P19, P20, P21;
-- variable-list presentation — P24;
-- dataset / simulation title pattern — P19, P23, P24;
-- option / A-B-C decision layout — P25.
+集中页：P2、P7、P8、P10、P12、P13、P18、P19、P22–P24、P27。
 
-### B. Cross-slide inconsistency
+反复出现：文字重叠、box overflow、箭头 overlay / 过短、主图过小、caption 失效、两栏不等高、字号不统一、大片未利用空白。以后编译成功不能视为交付成功。
 
-Affected pages: **P3, P7, P10, P11, P18, P19, P23, P24, P25**.
+### C. AI 味 / 模板化句式
 
-Examples:
+集中页：P3、P4、P6、P9、P11–P13、P15、P17–P19、P21、P22、P24、P25。
 
-- `Victoria example` / `Malagasy example` / `Victoria plant examples`;
-- peer component headings using different font treatments;
-- Dataset 1 / Dataset 2 / unnumbered Victoria page;
-- inconsistent capitalization of Simulation/Dataset subtitles;
-- question options switching among centered A/B/C, prose-only, and inline A/B/C;
-- inconsistent list-item capitalization.
+用户反复不接受的模式包括：
 
-### C. Rendered visual QA failures
+- `This page / This slide ...`
+- `This is not X; it is Y` / `this is X, not Y`
+- `X does ..., it does not ...` 的机械正反对偶
+- `Why this matters`
+- `the theorem says ...`
+- `not only ...` 作为模板化补充
+- `rather than ...` 仅为制造对比语气
+- `currently ... only` 等内部状态语言
+- `for advisor feedback rather than claimed ...`
+- `first-paper ...`
+- `Victoria example / Malagasy example / Role / regime / anchor` 等项目标签式语言
 
-Affected pages: **P2, P7, P8, P10, P12, P13, P18, P19, P22, P23, P24, P27**.
+### D. Audience grounding 不足
 
-Observed failures:
+集中页：P2–P4、P6、P9–P12、P18–P24。
 
-- overlapping labels — P2;
-- inconsistent font / uncontained text — P7, P10;
-- overlapping / too-short connectors — P8;
-- key equation too small — P12;
-- weak two-column balance — P7, P13;
-- main result / dataset figures too small — P18, P22, P23, P24;
-- weak or missing multi-panel captions — P23, P24;
-- mixed-size title token (`1B`) — P19;
-- references unnecessarily small — P27.
+目标听众是统计学教授：可以假设懂 Bayesian / regression / asymptotics / latent factors，但不能假设懂 OTU、COI、metabarcoding、GBIF、arthropod taxonomy、具体 plant trait encoding、CAT-TRACE 内部 notation。
 
-### D. Unnatural / AI-like wording
+### E. 数学与信息层级没有规范
 
-Affected pages: **P3, P4, P6, P9, P11, P12, P13, P15, P17, P18, P19, P21, P22, P24, P25**.
+集中页：P4、P5、P7、P10、P12–P21、P24。
 
-Specific patterns called out by the user:
+问题包括：核心公式和普通参数同样居中；不相关公式堆叠；`align` / `cases` / inline definition / `underbrace` 没有选择标准；公式与解释脱节。
 
-1. **Meta-commentary about the slide itself**
-   - “This page explains ...; the next page shows ...” — P4.
-2. **Formulaic negative contrast**
-   - “CORAL helps ... It does not ...” — P6;
-   - “This is not just ...” — P13;
-   - “..., not evidence of ...” — P13;
-   - “this is an oracle ..., not a fitted ...” — P18;
-   - “This is not the main ... It checks ...” — P24.
-3. **Generic explanatory headers / shells**
-   - “Why this matters” — P15;
-   - “the theorem says ...” — P15;
-   - “This decomposition is scientifically important, but mathematically ...” — P17.
-4. **Internal/project-status shorthand**
-   - “currently hard/partial only” — P9;
-   - “for advisor feedback rather than claimed ...” — P19;
-   - `first-paper` — P25.
-5. **Over-compressed telegraphic table prose**
-   - `generally unavailable`, `only coarse mark if modeled`, `not defensible before identity exists` — P11.
-6. **Generated contrastive endings**
-   - “..., not only how many OTUs will appear” — P12;
-   - “... rather than forcing all 255k OTUs ...” — P21.
-7. **Repeated demonstrative openings**
-   - repeated `This ...` on dataset prose — P22.
-8. **Project-location labels masquerading as prose**
-   - `Victoria example`, `Malagasy example` — P3.
+### F. Theory 没有围绕“模型真正新增什么”组织
 
-Important: the later general rule should target **sentence architecture and rhetorical function**, not merely ban a few words. A lexical warning list can be a secondary detector, not the sole solution.
+集中页：P15–P17、P25。
 
-### E. Audience comprehension / domain grounding failures
+Theory 的出发点不是“手稿里有什么 theorem 就放什么”，而是：**CAT-TRACE 解决了哪些 TRACE、HMSC、fixed-list JSDM 单独解决不了的问题？** 主 deck 至少需要三个正式结果层级，并清楚说明它们之间的逻辑关系。当前 proof idea 暂时删除。
 
-Affected pages: **P2, P3, P4, P6, P9, P10, P18, P19, P20, P21, P22, P23, P24**.
+### G. Simulation / metrics 没有让统计老师快速判断实验
 
-Examples:
+集中页：P18–P21。
 
-- COI used before explanation — P3;
-- `p` described in an unnatural abstract way — P4;
-- HMSC introduced without enough reason for inclusion — P6;
-- raw implementation trait names shown to audience — P10;
-- theoretical total target appears without decomposition — P18;
-- metric names given without their inferential purpose — P19, P20;
-- low-rank truth / rank object undefined — P21;
-- dataset pages mix too many unprioritized facts — P22;
-- body-arrow pipeline tries to substitute symbols for explanation — P23;
-- raw-to-filtered matrix transformation is unexplained — P24.
+需要分清 Design、DGP、estimand、metrics、comparison；metric 既要说明方向，也要说明它检查哪种统计性质。普通 design grid 不允许作为首行居中公式。
 
-### F. Scientific logic / completeness issues
+### H. Dataset 页缺少统一交付标准
 
-Affected pages: **P4, P5, P6, P15, P16, P17, P18, P19, P20, P21, P25**.
+集中页：P22–P24。
 
-Examples:
+需要统一 dataset 标题与层级，但不强制三页同一布局。主图必须足够大；不同图片需要对应 caption/subcaption；真正重要的 rarity 需要定量 visual；字段/变量需要正常人能扫读的结构。
 
-- problem and solution relationship not explicit enough — P4;
-- derivation order unclear — P5;
-- comparator's scientific role insufficiently motivated — P6;
-- theory section appears to have only one theorem — P15;
-- strength of `G=1` reduction statement may exceed what is actually established — P15;
-- “Proof idea” undersells what a statistics meeting needs — P16;
-- discovery partition is over-framed as theory rather than shown honestly — P17;
-- oracle target lacks visible group-level calculation — P18;
-- simulation metrics are not tied to claims — P19, P20, P21;
-- discussion question wording should expose real choices consistently — P25.
+## 4. 第二轮已经确认的方向
 
-### G. Internal implementation / project language leaking into slides
+用户在本记录之后确认：
 
-Affected pages: **P9, P10, P19, P25**.
+1. 全 deck 使用 sentence case。
+2. 新增一页简短背景，集中讲清 metabarcoding / OTU / COI 与 species 的关系。
+3. HMSC 与 CORAL 拆成两页。
+4. CAT-TRACE finite catalogue vs open tail 保留两栏，但必须等高、对称；底部 full-width 内容只能在有足够空间时保留。
+5. residual dependence 改成纵向逻辑，不再机械两栏。
+6. Theory 以至少三个正式结果体现 CAT-TRACE 相比现有模型新增解决的问题；当前 proof idea 删除，完整 proof 等真正完成后再补。
+7. Dataset 1–3 统一标题与文字层级，但不强迫同一种图片布局。
+8. 新术语需要统一 first-use style（粗体/颜色/斜体组合应服从模板）。
+9. Metrics 推荐 table 或括号结构，并使用 `↑/↓`（或 target，如 coverage → nominal level）表达评价方向，同时解释 metric 作用；多个同类 RMSE 不机械重复箭头。
+10. 首行居中的公式只允许核心 scientific object；`n={...}` 等 design settings 不得孤立居中。
+11. Diagram QA 进一步收紧：箭头不得 overlay、不得过短，关系必须完整收进图中，diagram 应成为页面视觉中心。
+12. 需要建立模板兼容的受控 palette；公式项与对应标签可同色，但不同项需要足够区分度。
+13. 图片大小、reference 纵向空间利用、question style、数学环境选择都必须变成可复用标准，而不是每次人工判断。
+14. AI 味是当前最大问题，需要多道写作与验收关口；不能只要求 Codex “最后润色一遍”。
 
-Examples:
+## 5. 下一步
 
-- `currently hard/partial only`;
-- `Poll_Abiotic`, `Disp_Wind`, `Glycophyte`;
-- `advisor feedback rather than claimed ...` phrasing;
-- `first-paper`.
-
-### H. Mathematical layout and notation presentation
-
-Affected pages: **P5, P12, P14, P17, P24**.
-
-Issues:
-
-- formulas stacked without narrative grouping — P5;
-- central equation too small and new notation not emphasized — P12;
-- no explicit rule for `align` / `cases` / ordinary display math — P14;
-- formula components explained awkwardly after the equation — P17;
-- naked matrix-dimension arrow used where named filtering steps are needed — P24.
-
-### I. Figures, captions, and visual evidence
-
-Affected pages: **P2, P18, P22, P23, P24, P27**.
-
-Issues:
-
-- real-world image may help biological grounding — P2;
-- main simulation figure slightly too small — P18;
-- dataset figures too small — P22–P24;
-- captions do not identify multiple panels adequately — P23, P24;
-- references do not use available page area — P27.
-
-## Root-cause summary to resolve before more Codex editing
-
-The user's dissatisfaction is not a list of 74 isolated defects. Most defects trace to five missing controls:
-
-1. **No stable object-style system.** Recurring slide objects (term, example, question, theorem, proof, metric, variable list, comparison, options, caption) are styled ad hoc.
-2. **No deck-wide consistency pass.** The deck is checked locally but not audited for naming, capitalization, typography, list grammar, and repeated archetypes across all pages.
-3. **No robust human-language pass.** Scientifically correct English is being accepted even when it sounds generated, project-internal, telegraphic, or unlike a researcher speaking to colleagues.
-4. **No semantic audience check.** Undefined domain terms, code fields, metrics, dimensions, and simulation settings survive because mechanical correctness is mistaken for comprehensibility.
-5. **Rendered QA is too weak.** Overlap, connector geometry, figure size, caption utility, box containment, and reference-font size pass even though they are obvious when projected.
-
-These five controls should become the organizing framework for the next discussion. The exact universal rules should be written only after the user approves the concrete v2 fixes.
+- CAT-TRACE v2 → v3 的具体执行说明写入 TRACE repo，由 Codex 读取后实现。
+- 本轮可泛化经验单独整理为 research-presentation TODO candidates，并记录 AI-like scientific slide prose 的外部研究依据。
+- active presentation skill / `scientific-prose` 的正式升级仍应走 AI_Skills_Collection 自己的审阅与合并流程，避免一次项目返修直接改坏全局规则。
