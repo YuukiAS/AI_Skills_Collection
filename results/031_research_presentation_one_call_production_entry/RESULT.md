@@ -2,45 +2,28 @@
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 031_research_presentation_one_call_production_entry
 executor: Codex
-implementation_commit: 93c99427012d771098f4116b81cb7e86e406fbbc
+implementation_commit: 11509b5e2bf7959433f1616c1d4ad77f77f4000e
 status: WAITING_FOR_CI
 ci_status: PENDING
 ---
 
-# 031 Research Presentation One-Call Production Entry - Result
+# 031 Research Presentation One-Call Production Entry - Repair Result
 
 ## Implementation Commit
 
-`93c99427012d771098f4116b81cb7e86e406fbbc`
+`11509b5e2bf7959433f1616c1d4ad77f77f4000e`
 
-## What Changed
+## Repair Scope
 
-- Added the normal one-call exact-CUHK production entry:
+- Repaired canonical exact-CUHK rendered identity by restoring the template's visible CUHK crest in the final Beamer headline after the `miniframes` outer theme is loaded. The repair uses the canonical copied `assets/logo_RGB` image and keeps the section navigation and footline geometry.
+- Repaired shared medical comparison inspectability by deriving semantic display overlays from the same-case GT, prediction, and error assets. The generated full panels and ROI zoom crops now expose missed-GT (`fn`) in GT, prediction-only (`fp`) in Prediction, and both classes in Error without changing the source case, ROI coordinates, gold selection, or layout family.
+- Synchronized the presentation plugin mirror and added deterministic regression assertions for the CUHK headline contract, medical overlay artifacts, and source/plugin mirror parity.
 
-```text
-skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py
-```
-
-- Added a strict validator:
-
-```text
-skills/tools/documents-media/presentations/shared/scripts/validate_research_presentation_production_entry.py
-```
-
-- Added a repository-owned public-safe engineering input bundle, mirrored into the presentation plugin, and explicitly marked it ineligible for Stage 5 holdouts:
-
-```text
-skills/tools/documents-media/presentations/shared/fixtures/stage4_engineering_research_bundle/
-plugins/codex/plugins/presentations/shared/fixtures/stage4_engineering_research_bundle/
-```
-
-- Documented the one-call route in `research-presentations/SKILL.md` and added deterministic regression coverage proving the normal route, source-fidelity map, selector/layout path, anti-helper boundary, exact CUHK source use, task-local visual manifest, and source/plugin mirror sync.
-
-031 does not claim Stage 4 PASS, `PROGRAM_MATURE`, `ONE_SHOT_QUALITY_PASS`, or final human acceptance.
+031 still does not claim Stage 4 PASS, `PROGRAM_MATURE`, `ONE_SHOT_QUALITY_PASS`, or final human acceptance.
 
 ## Generated Production Evidence
 
-Generated exact-CUHK production artifacts:
+Regenerated exact-CUHK production artifacts:
 
 ```text
 results/031_research_presentation_one_call_production_entry/generated/
@@ -67,7 +50,7 @@ results/031_research_presentation_one_call_production_entry/visual_review/visual
 Manifest bindings:
 
 ```text
-implementation_commit=93c99427012d771098f4116b81cb7e86e406fbbc
+implementation_commit=11509b5e2bf7959433f1616c1d4ad77f77f4000e
 workflow_type=reviewed_handoff
 task_key=031_research_presentation_one_call_production_entry
 input_count=6
@@ -76,12 +59,20 @@ input_count=6
 Rendered content-page identities:
 
 ```text
-slide_2_statistical_model              508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491
-slide_3_real_data_application          826c92ebcafe16bec41fa08357b7734360ada9295b547e2c99259b793e8a25d4
-slide_4_experiment_design              3d421cdcd5b9eb8f2bf407bbb15947a501811aa37fdd3d9a5a81d1278d9ca671
-slide_5_negative_result                ac54cbb287a3208b5a36587cf393936aeb140a5388915784b63d8beb880aac6a
-slide_6_medical_image_comparison       f7aebcb3a9af980e4f64817ccd86003db7bcd03d5d812a638477ed2eb3fcad55
-slide_7_next_experiment                e4578e43331fa076a8ed65bba4492e076bd3bc1fee1b9b955cd1691ad4a6a63d
+slide_2_statistical_model              185b02f15bd7c524c3f8fe656f58c0d23882228d996a236730dbeb8c61c860bf
+slide_3_real_data_application          ec4bdc7aaefefc57518079b1483790f0ab25d0ab37d494bee9e097a4107196a7
+slide_4_experiment_design              ed55c2329a3945e4d46d548dec3315c639d24a0af940507f6752b6979639b8da
+slide_5_negative_result                81d14477c77d30f39439cf37d12ac320677da2f2c7768762caa18ff35a54a932
+slide_6_medical_image_comparison       5ef013e4431e89eebb51462a8ee41c93e8025d798165a86b5bb01534acdf92c6
+slide_7_next_experiment                ddc285ac857251131f3cf6d47a6a14b344dbcf6ae7e6c2793f59d9cfcdc02c85
+```
+
+Medical semantic overlay trace:
+
+```text
+failure_gt.png       display=stage3_assets/failure_gt_semantic_overlay.png       zoom=stage3_assets/failure_gt_semantic_overlay_roi_zoom.png       visible_error_classes=[fn]
+failure_pred.png     display=stage3_assets/failure_pred_semantic_overlay.png     zoom=stage3_assets/failure_pred_semantic_overlay_roi_zoom.png     visible_error_classes=[fp]
+failure_error.png    display=stage3_assets/failure_error_semantic_overlay.png    zoom=stage3_assets/failure_error_semantic_overlay_roi_zoom.png    visible_error_classes=[fn, fp]
 ```
 
 Local render status:
@@ -90,38 +81,50 @@ Local render status:
 mechanical_qa=MECHANICAL_PASS
 render_status=ok
 pdf_pages=7
+pdf_size=1062008 bytes
 ```
+
+I inspected the regenerated rendered pixels for the two repair blockers: the content pages now show a visible CUHK crest in the top-left headline, and `slide_6_medical_image_comparison` shows orange GT missed-region pixels, red prediction-only pixels, and red/orange Error pixels in both the full row and ROI zoom row.
 
 ## Local Verification
 
 Passed locally:
 
 ```text
+python -m py_compile skills/tools/documents-media/presentations/shared/scripts/generate_cuhk_scientific_layout_stage3.py skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py skills/tools/documents-media/presentations/shared/scripts/validate_research_presentation_production_entry.py
 python -m pytest tests/test_presentations.py::PresentationSharedTests::test_research_presentation_one_call_production_entry -q
-python -m pytest tests/test_presentations.py::PresentationSharedTests::test_cuhk_scientific_layout_stage3_contract tests/test_presentations.py::PresentationSharedTests::test_research_presentation_todo_consolidation_and_promotions tests/test_presentations.py::PresentationSharedTests::test_research_presentation_one_call_production_entry -q
-python -m py_compile skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py skills/tools/documents-media/presentations/shared/scripts/validate_research_presentation_production_entry.py plugins/codex/plugins/presentations/shared/scripts/generate_research_presentation_production_entry.py plugins/codex/plugins/presentations/shared/scripts/validate_research_presentation_production_entry.py
-python -m unittest discover -s tests
-python scripts/build_codex_marketplace.py --validate
-python scripts/build_codex_marketplace.py --check
-python scripts/build_codex_marketplace.py --path-report
+python -m pytest tests/test_presentations.py::PresentationSharedTests::test_cuhk_template_payload_is_complete_and_reference_deck_is_valid -q
+python -m pytest tests/test_presentations.py::PresentationSharedTests::test_research_presentation_todo_consolidation_and_promotions -q
+python -m pytest tests/test_presentations.py::PresentationSharedTests::test_cuhk_scientific_layout_stage3_contract -q
+python -m pytest tests/test_presentations.py -q
+python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --implementation-commit 11509b5e2bf7959433f1616c1d4ad77f77f4000e --write-result-visual-inputs
+python skills/tools/documents-media/presentations/shared/scripts/validate_research_presentation_production_entry.py
+python skills/tools/documents-media/presentations/shared/scripts/validate_cuhk_scientific_layout_stage3.py --out-dir docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated --task-key 030_stage3_visual_recovery
+python -m pytest -q
 python scripts/skills.py validate
-python scripts/skills.py audit --all
-git diff --check
-ai-bridge reviewed-handoff validate --target /home/yuukias/AI_Skills_Collection
+python scripts/build_codex_marketplace.py --validate --check --path-report
 python -m ai_bridge_kit.bridge_cli reviewed-handoff validate --target /home/yuukias/AI_Skills_Collection
-python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --implementation-commit 93c99427012d771098f4116b81cb7e86e406fbbc --write-result-visual-inputs
-python skills/tools/documents-media/presentations/shared/scripts/validate_research_presentation_production_entry.py --out-dir results/031_research_presentation_one_call_production_entry/generated
 pdfinfo results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/main.pdf
+git diff --check
 ```
 
-Observed local results: full unittest passed 134 tests; marketplace validation/check/path-report passed with 10 plugins, 25 active skills, and `over_budget=0`; skills validation passed 149 active skills and 18 profiles; Reviewed Handoff validation passed; strict 031 production validator passed; generated PDF has 7 pages and size 644923 bytes. I also inspected a local contact sheet of the 7 rendered PNGs for nonblank pages and obvious overlap.
+Observed local results:
+
+```text
+tests/test_presentations.py: 27 passed
+full pytest: 135 passed
+skills validate: validated 149 active skills, 18 profiles, templates, and trigger eval scaffolds
+marketplace validate/check/path-report: plugins=10 active_skills=25 over_budget=0
+Reviewed Handoff validation passed
+031 strict rendered validator passed
+Stage 3 strict rendered validator passed with task_key=030_stage3_visual_recovery
+pdfinfo: Pages=7, File size=1062008 bytes
+```
+
+The default Stage 3 validator invocation without `--task-key` was not the relevant gate for the currently committed historical Stage 3 artifact: it failed on `task_key mismatch`. The matching invocation above passed.
 
 ## Handoff State
 
-GitHub CI is required and is not claimed locally. Per protocol, `ci_status` remains `PENDING` and this task is left in `WAITING_FOR_CI` for watcher publication, real GitHub checks, and subsequent task-local visual-review evidence generation.
+GitHub CI is required and is not claimed locally. Per protocol, `ci_status` remains `PENDING` and this task is left in `WAITING_FOR_CI` for watcher publication and real GitHub checks.
 
-No local `VISUAL_REVIEW.json` evidence is claimed or fabricated. At local handoff time, the evidence path remains pending:
-
-```text
-results/031_research_presentation_one_call_production_entry/visual_review/VISUAL_REVIEW.json
-```
+The current generated `visual_inputs.json` is bound to implementation commit `11509b5e2bf7959433f1616c1d4ad77f77f4000e`. I did not fabricate a new `VISUAL_REVIEW.json`; the existing file was stale review evidence from the previous implementation and has been removed so the published handoff can wait for fresh task-local visual review after CI.

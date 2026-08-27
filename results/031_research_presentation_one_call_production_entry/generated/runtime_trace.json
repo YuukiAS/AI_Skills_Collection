@@ -364,7 +364,7 @@
       "selected_reference_id": "RRL-013",
       "source_composition_identity": {
         "recipe_sha256": "f2099fe794caab01779329db7bc8cb1775aa3f43b01837badc91b80a0dd5ac78",
-        "resolved_layout_sha256": "9bd15b812ff35d3d92f9b5d232010c58494f5ef81070e2015a357edb01b91e99"
+        "resolved_layout_sha256": "68f420fee4efc7df33293c1a9cfef9557623853f511a0984f8b0f474508f82eb"
       },
       "source_derived_composition_fields_consumed": [
         "primary_bbox",

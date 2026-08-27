@@ -16,13 +16,13 @@
   },
   "identity_bindings": {
     "task_key": "031_research_presentation_one_call_production_entry",
-    "implementation_commit": "93c99427012d771098f4116b81cb7e86e406fbbc",
+    "implementation_commit": "11509b5e2bf7959433f1616c1d4ad77f77f4000e",
     "input_title": "Clustered Interval Calibration And Synthetic Segmentation Robustness",
     "build_manifest": "results/031_research_presentation_one_call_production_entry/generated/BUILD_MANIFEST.json",
-    "build_manifest_sha256": "defa07167b5fb127d6397ff53c780373ef438075a87b8d3da6300d12231bb7b0",
+    "build_manifest_sha256": "1de1ea8bab54787eeea8b77a48b715c3020ab8e83fe3314bfff65caef062af99",
     "source_fidelity_map": "results/031_research_presentation_one_call_production_entry/generated/source_fidelity_map.json",
     "source_fidelity_map_sha256": "55a7e3cc9b119b4afaf4b2bdbf8baabf790520e5a0653c7e66ec80e5064f552c",
-    "pdf_sha256": "2f99d1b7c7920d9eeee4f63270e17262184ce646e35aacdf552ab7e737400d46",
+    "pdf_sha256": "bf856adb85398f781fc542d82d974f0189fe1b22d3e89a1dac222d236b80521b",
     "page_job_by_logical_id": {
       "slide_2_statistical_model": "STATISTICAL_MODEL",
       "slide_3_real_data_application": "REAL_DATA_APPLICATION",
@@ -65,42 +65,42 @@
       "logical_id": "slide_2_statistical_model",
       "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-2.png",
       "mime_type": "image/png",
-      "sha256": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491",
+      "sha256": "185b02f15bd7c524c3f8fe656f58c0d23882228d996a236730dbeb8c61c860bf",
       "description": "Rendered exact-CUHK production page for STATISTICAL_MODEL using source evidence EV-MODEL-001."
     },
     {
       "logical_id": "slide_3_real_data_application",
       "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-3.png",
       "mime_type": "image/png",
-      "sha256": "826c92ebcafe16bec41fa08357b7734360ada9295b547e2c99259b793e8a25d4",
+      "sha256": "ec4bdc7aaefefc57518079b1483790f0ab25d0ab37d494bee9e097a4107196a7",
       "description": "Rendered exact-CUHK production page for REAL_DATA_APPLICATION using source evidence EV-RESULT-001."
     },
     {
       "logical_id": "slide_4_experiment_design",
       "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-4.png",
       "mime_type": "image/png",
-      "sha256": "3d421cdcd5b9eb8f2bf407bbb15947a501811aa37fdd3d9a5a81d1278d9ca671",
+      "sha256": "ed55c2329a3945e4d46d548dec3315c639d24a0af940507f6752b6979639b8da",
       "description": "Rendered exact-CUHK production page for EXPERIMENT_DESIGN using source evidence EV-DESIGN-001."
     },
     {
       "logical_id": "slide_5_negative_result",
       "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-5.png",
       "mime_type": "image/png",
-      "sha256": "ac54cbb287a3208b5a36587cf393936aeb140a5388915784b63d8beb880aac6a",
+      "sha256": "81d14477c77d30f39439cf37d12ac320677da2f2c7768762caa18ff35a54a932",
       "description": "Rendered exact-CUHK production page for NEGATIVE_RESULT using source evidence EV-NEGATIVE-001."
     },
     {
       "logical_id": "slide_6_medical_image_comparison",
       "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-6.png",
       "mime_type": "image/png",
-      "sha256": "f7aebcb3a9af980e4f64817ccd86003db7bcd03d5d812a638477ed2eb3fcad55",
+      "sha256": "5ef013e4431e89eebb51462a8ee41c93e8025d798165a86b5bb01534acdf92c6",
       "description": "Rendered exact-CUHK production page for MEDICAL_IMAGE_COMPARISON using source evidence EV-MEDICAL-001."
     },
     {
       "logical_id": "slide_7_next_experiment",
       "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-7.png",
       "mime_type": "image/png",
-      "sha256": "e4578e43331fa076a8ed65bba4492e076bd3bc1fee1b9b955cd1691ad4a6a63d",
+      "sha256": "ddc285ac857251131f3cf6d47a6a14b344dbcf6ae7e6c2793f59d9cfcdc02c85",
       "description": "Rendered exact-CUHK production page for NEXT_EXPERIMENT using source evidence EV-NEXT-001."
     }
   ]

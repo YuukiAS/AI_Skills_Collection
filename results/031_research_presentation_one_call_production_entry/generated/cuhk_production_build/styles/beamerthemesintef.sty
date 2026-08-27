@@ -333,6 +333,16 @@
 \setbeamercolor{footline}{fg=maincolor,bg=white}
 \setbeamerfont{footline}{size=\scriptsize,series=\mdseries}
 \setbeamertemplate{navigation symbols}{}
+\setbeamercolor{section in head/foot}{fg=white,bg=maincolor}
+\setbeamercolor{subsection in head/foot}{fg=white,bg=maincolor}
+\setbeamertemplate{headline}{%
+  \leavevmode%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=4.4ex,dp=1.2ex,leftskip=0.10cm,rightskip=0.20cm]{section in head/foot}%
+    \raisebox{-1.10ex}{\includegraphics[height=4.0ex,trim=340 260 340 650,clip]{assets/logo_RGB}}%
+    \hspace{0.8em}%
+    \insertsectionnavigationhorizontal{0.87\paperwidth}{}{}%
+  \end{beamercolorbox}%
+}
 \setbeamertemplate{footline}{%
   \textcolor{maincolor}{\rule{\paperwidth}{0.65pt}}\par\nointerlineskip
   \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.1ex,leftskip=0.85cm,rightskip=0.45cm]{footline}%

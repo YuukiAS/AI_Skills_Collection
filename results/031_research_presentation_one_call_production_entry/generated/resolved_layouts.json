@@ -747,7 +747,8 @@
           "crop_records": [
             {
               "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_gt.png",
-              "zoom_asset": "stage3_assets/failure_gt_roi_zoom.png",
+              "display_asset": "stage3_assets/failure_gt_semantic_overlay.png",
+              "zoom_asset": "stage3_assets/failure_gt_semantic_overlay_roi_zoom.png",
               "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
               "roi_xywh": {
                 "x": 218,
@@ -759,11 +760,17 @@
                 "w": 420,
                 "h": 420
               },
-              "same_case_coordinate_space": true
+              "same_case_coordinate_space": true,
+              "semantic_overlay": true,
+              "overlay_role": "gt_with_overlap_and_missed_gt",
+              "visible_error_classes": [
+                "fn"
+              ]
             },
             {
               "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
-              "zoom_asset": "stage3_assets/failure_pred_roi_zoom.png",
+              "display_asset": "stage3_assets/failure_pred_semantic_overlay.png",
+              "zoom_asset": "stage3_assets/failure_pred_semantic_overlay_roi_zoom.png",
               "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
               "roi_xywh": {
                 "x": 218,
@@ -775,11 +782,17 @@
                 "w": 420,
                 "h": 420
               },
-              "same_case_coordinate_space": true
+              "same_case_coordinate_space": true,
+              "semantic_overlay": true,
+              "overlay_role": "prediction_with_overlap_and_prediction_only",
+              "visible_error_classes": [
+                "fp"
+              ]
             },
             {
               "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
-              "zoom_asset": "stage3_assets/failure_error_roi_zoom.png",
+              "display_asset": "stage3_assets/failure_error_semantic_overlay.png",
+              "zoom_asset": "stage3_assets/failure_error_semantic_overlay_roi_zoom.png",
               "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
               "roi_xywh": {
                 "x": 218,
@@ -791,7 +804,13 @@
                 "w": 420,
                 "h": 420
               },
-              "same_case_coordinate_space": true
+              "same_case_coordinate_space": true,
+              "semantic_overlay": true,
+              "overlay_role": "error_classification_overlay",
+              "visible_error_classes": [
+                "fn",
+                "fp"
+              ]
             }
           ]
         }
@@ -853,7 +872,8 @@
           "crop_records": [
             {
               "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_gt.png",
-              "zoom_asset": "stage3_assets/failure_gt_roi_zoom.png",
+              "display_asset": "stage3_assets/failure_gt_semantic_overlay.png",
+              "zoom_asset": "stage3_assets/failure_gt_semantic_overlay_roi_zoom.png",
               "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
               "roi_xywh": {
                 "x": 218,
@@ -865,11 +885,17 @@
                 "w": 420,
                 "h": 420
               },
-              "same_case_coordinate_space": true
+              "same_case_coordinate_space": true,
+              "semantic_overlay": true,
+              "overlay_role": "gt_with_overlap_and_missed_gt",
+              "visible_error_classes": [
+                "fn"
+              ]
             },
             {
               "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
-              "zoom_asset": "stage3_assets/failure_pred_roi_zoom.png",
+              "display_asset": "stage3_assets/failure_pred_semantic_overlay.png",
+              "zoom_asset": "stage3_assets/failure_pred_semantic_overlay_roi_zoom.png",
               "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
               "roi_xywh": {
                 "x": 218,
@@ -881,11 +907,17 @@
                 "w": 420,
                 "h": 420
               },
-              "same_case_coordinate_space": true
+              "same_case_coordinate_space": true,
+              "semantic_overlay": true,
+              "overlay_role": "prediction_with_overlap_and_prediction_only",
+              "visible_error_classes": [
+                "fp"
+              ]
             },
             {
               "source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
-              "zoom_asset": "stage3_assets/failure_error_roi_zoom.png",
+              "display_asset": "stage3_assets/failure_error_semantic_overlay.png",
+              "zoom_asset": "stage3_assets/failure_error_semantic_overlay_roi_zoom.png",
               "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
               "roi_xywh": {
                 "x": 218,
@@ -897,7 +929,13 @@
                 "w": 420,
                 "h": 420
               },
-              "same_case_coordinate_space": true
+              "same_case_coordinate_space": true,
+              "semantic_overlay": true,
+              "overlay_role": "error_classification_overlay",
+              "visible_error_classes": [
+                "fn",
+                "fp"
+              ]
             }
           ],
           "same_case_coordinate_space": true,
@@ -928,7 +966,7 @@
           "workflow"
         ]
       },
-      "resolved_layout_sha256": "9bd15b812ff35d3d92f9b5d232010c58494f5ef81070e2015a357edb01b91e99"
+      "resolved_layout_sha256": "68f420fee4efc7df33293c1a9cfef9557623853f511a0984f8b0f474508f82eb"
     },
     {
       "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",

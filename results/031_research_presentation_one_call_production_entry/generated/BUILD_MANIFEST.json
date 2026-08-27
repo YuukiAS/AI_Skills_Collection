@@ -1,7 +1,7 @@
 {
   "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1",
   "task_key": "031_research_presentation_one_call_production_entry",
-  "implementation_commit": "93c99427012d771098f4116b81cb7e86e406fbbc",
+  "implementation_commit": "11509b5e2bf7959433f1616c1d4ad77f77f4000e",
   "input_bundle": "skills/tools/documents-media/presentations/shared/fixtures/stage4_engineering_research_bundle/bundle.json",
   "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
   "canonical_files": {
@@ -11,7 +11,7 @@
     "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/logo_RGB_negative.png": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516",
     "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/bibliography.bib": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/main.tex": "a7c6826e94c6f08647200f3472381d882dd8bf405df42a68f5dc903a4010da07",
-    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/beamerthemesintef.sty": "4e112f0a103a89fcfd905345a8385faa015f15bc01f89cd9bf5d2db6be9dfbb3",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/beamerthemesintef.sty": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08",
     "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/sintefcolor.sty": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
   },
   "build_workspace": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build",
@@ -36,7 +36,7 @@
       "times_font_files_present": true
     },
     "pdf": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/main.pdf",
-    "pdf_sha256": "2f99d1b7c7920d9eeee4f63270e17262184ce646e35aacdf552ab7e737400d46",
+    "pdf_sha256": "bf856adb85398f781fc542d82d974f0189fe1b22d3e89a1dac222d236b80521b",
     "log": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/compile.log"
   },
   "render_status": {
@@ -45,31 +45,31 @@
     "rendered_png": [
       {
         "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-1.png",
-        "sha256": "6a7c16b61ac25c93cd72bdc5b74c9b9098b072a9a7b6cd9b744a9993627e9a04"
+        "sha256": "b5c5c6b5e2ffb93a316303d4caac78950beaa329120e1622fe17494a23608c0a"
       },
       {
         "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-2.png",
-        "sha256": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491"
+        "sha256": "185b02f15bd7c524c3f8fe656f58c0d23882228d996a236730dbeb8c61c860bf"
       },
       {
         "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-3.png",
-        "sha256": "826c92ebcafe16bec41fa08357b7734360ada9295b547e2c99259b793e8a25d4"
+        "sha256": "ec4bdc7aaefefc57518079b1483790f0ab25d0ab37d494bee9e097a4107196a7"
       },
       {
         "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-4.png",
-        "sha256": "3d421cdcd5b9eb8f2bf407bbb15947a501811aa37fdd3d9a5a81d1278d9ca671"
+        "sha256": "ed55c2329a3945e4d46d548dec3315c639d24a0af940507f6752b6979639b8da"
       },
       {
         "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-5.png",
-        "sha256": "ac54cbb287a3208b5a36587cf393936aeb140a5388915784b63d8beb880aac6a"
+        "sha256": "81d14477c77d30f39439cf37d12ac320677da2f2c7768762caa18ff35a54a932"
       },
       {
         "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-6.png",
-        "sha256": "f7aebcb3a9af980e4f64817ccd86003db7bcd03d5d812a638477ed2eb3fcad55"
+        "sha256": "5ef013e4431e89eebb51462a8ee41c93e8025d798165a86b5bb01534acdf92c6"
       },
       {
         "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-7.png",
-        "sha256": "e4578e43331fa076a8ed65bba4492e076bd3bc1fee1b9b955cd1691ad4a6a63d"
+        "sha256": "ddc285ac857251131f3cf6d47a6a14b344dbcf6ae7e6c2793f59d9cfcdc02c85"
       }
     ]
   },
