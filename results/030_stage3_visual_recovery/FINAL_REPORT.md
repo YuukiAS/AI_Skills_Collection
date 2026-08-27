@@ -3,7 +3,7 @@ schema: AI_BRIDGE_REVIEWED_FINAL_REPORT_V1
 task_key: 030_stage3_visual_recovery
 ---
 
-# 030 Stage 3 Visual-Maturity Recovery — Final Report
+# Final Report
 
 ## What this task solved
 
@@ -21,13 +21,13 @@ The shared Stage 3 layout system now contains production-scale paths for:
 
 The second-round repair additionally removed audience-facing QA wording from the result page, added readable coverage ticks to the negative-result page, and corrected the final comparator-to-decision connector direction.
 
-## What this adds beyond previous behavior
+## New capabilities / behavior
 
 Before 030, Stage 3 could compile exact CUHK Beamer pages and consume Stage 2 gold geometry, but several page jobs still fell back to visually weak or misleading representations: tiny raster-like result figures, generic card/arrow experiment diagrams, non-inspectable medical errors, or generic future-work workflows.
 
 After 030, the same normal selector -> gold recipe -> CUHK resolver -> native TeX/TikZ/figure/image path can emit mature examples for all six holdout-relevant page families in one exact-CUHK integration deck. The task-local visual review path also ran end-to-end automatically after CI and wrote fresh evidence for the current implementation identity.
 
-## Rejected alternatives and why
+## Deliberately not adopted / unchanged
 
 The task did not accept any of the following shortcuts:
 
@@ -38,6 +38,16 @@ The task did not accept any of the following shortcuts:
 - treating Terra top-level package PASS as a substitute for six item-level judgements;
 - lowering the visual bar because 027 had already reached its review limit;
 - rewriting 027/028/029 history or fabricating a third 027 review.
+
+## Example usage
+
+A statistical model page can use native LaTeX as the primary projected visual rather than pasted equation imagery.
+
+A quantitative result page can automatically use presentation-scale axes, ticks, facets, legends, nominal reference lines and scientific callouts.
+
+A medical comparison page can show same-case full panels with ROI zoom and adjacent TP/FP/FN explanation so the error evidence is inspectable.
+
+A next-experiment page can present observed evidence, sampling manipulation, comparator arms and go/no-go thresholds as an evidence-to-decision relation.
 
 ## Regression and remaining limitations
 
