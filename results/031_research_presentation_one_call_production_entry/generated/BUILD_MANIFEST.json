@@ -1,0 +1,106 @@
+{
+  "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1",
+  "task_key": "031_research_presentation_one_call_production_entry",
+  "implementation_commit": "93c99427012d771098f4116b81cb7e86e406fbbc",
+  "input_bundle": "skills/tools/documents-media/presentations/shared/fixtures/stage4_engineering_research_bundle/bundle.json",
+  "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
+  "canonical_files": {
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/background.png": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/background_negative.png": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/logo_RGB.png": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/logo_RGB_negative.png": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/bibliography.bib": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/main.tex": "a7c6826e94c6f08647200f3472381d882dd8bf405df42a68f5dc903a4010da07",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/beamerthemesintef.sty": "4e112f0a103a89fcfd905345a8385faa015f15bc01f89cd9bf5d2db6be9dfbb3",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/sintefcolor.sty": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+  },
+  "build_workspace": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build",
+  "tex": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/main.tex",
+  "scientific_layout_include": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/scientific_layouts.tex",
+  "deck_plan": "results/031_research_presentation_one_call_production_entry/generated/deck_plan.json",
+  "source_fidelity_map": "results/031_research_presentation_one_call_production_entry/generated/source_fidelity_map.json",
+  "runtime_trace": "results/031_research_presentation_one_call_production_entry/generated/runtime_trace.json",
+  "dependency_probe": "results/031_research_presentation_one_call_production_entry/generated/dependency_probe.json",
+  "render_chinese_math_pdf_probe": "results/031_research_presentation_one_call_production_entry/generated/render_chinese_math_pdf_probe.json",
+  "compile_status": {
+    "status": "COMPILED",
+    "engine": "xelatex",
+    "engine_path": "/home/yuukias/.TinyTeX/bin/x86_64-linux/xelatex",
+    "compile_passes": 2,
+    "fontconfig": {
+      "fontconfig_file": "/home/yuukias/AI_Skills_Collection/results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/fontconfig/fonts.conf",
+      "fontconfig_file_repo_path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/fontconfig/fonts.conf",
+      "font_cache_dir": "/tmp/fontconfig-cache-027",
+      "times_font_dir": "/home/yuukias/code/TRACE/presentations/group_meetings/2026-07-16/cat_trace_demo/fonts",
+      "times_font_dir_exists": true,
+      "times_font_files_present": true
+    },
+    "pdf": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/main.pdf",
+    "pdf_sha256": "2f99d1b7c7920d9eeee4f63270e17262184ce646e35aacdf552ab7e737400d46",
+    "log": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/compile.log"
+  },
+  "render_status": {
+    "status": "ok",
+    "png_count": 7,
+    "rendered_png": [
+      {
+        "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-1.png",
+        "sha256": "6a7c16b61ac25c93cd72bdc5b74c9b9098b072a9a7b6cd9b744a9993627e9a04"
+      },
+      {
+        "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-2.png",
+        "sha256": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491"
+      },
+      {
+        "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-3.png",
+        "sha256": "826c92ebcafe16bec41fa08357b7734360ada9295b547e2c99259b793e8a25d4"
+      },
+      {
+        "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-4.png",
+        "sha256": "3d421cdcd5b9eb8f2bf407bbb15947a501811aa37fdd3d9a5a81d1278d9ca671"
+      },
+      {
+        "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-5.png",
+        "sha256": "ac54cbb287a3208b5a36587cf393936aeb140a5388915784b63d8beb880aac6a"
+      },
+      {
+        "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-6.png",
+        "sha256": "f7aebcb3a9af980e4f64817ccd86003db7bcd03d5d812a638477ed2eb3fcad55"
+      },
+      {
+        "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-7.png",
+        "sha256": "e4578e43331fa076a8ed65bba4492e076bd3bc1fee1b9b955cd1691ad4a6a63d"
+      }
+    ]
+  },
+  "mechanical_qa": {
+    "status": "MECHANICAL_PASS",
+    "checks": {
+      "normal_research_presentations_entry": true,
+      "input_bundle_read_from_path": true,
+      "canonical_source_copied": true,
+      "scientific_layout_include_loaded": true,
+      "content_page_jobs": 6,
+      "rendered_pages_available": true
+    }
+  },
+  "quality_loop_handoff": {
+    "schema": "RESEARCH_PRESENTATION_STAGE4_QUALITY_HANDOFF_V1",
+    "status": "READY_FOR_PAGE_LEVEL_FINDINGS",
+    "visual_review_manifest": "results/031_research_presentation_one_call_production_entry/visual_review/visual_inputs.json",
+    "visual_review_evidence": "results/031_research_presentation_one_call_production_entry/visual_review/VISUAL_REVIEW.json",
+    "next_bounded_stage4_task": "deck-rhythm review and bounded visual repair loop"
+  },
+  "stage4_boundary": "031 proves one-call production entry only; Stage 4 PASS, PROGRAM_MATURE, and ONE_SHOT_QUALITY_PASS are not claimed.",
+  "cleaned_latex_intermediates": [
+    "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/main.aux",
+    "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/main.nav",
+    "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/main.out",
+    "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/main.snm",
+    "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/main.toc"
+  ],
+  "normalized_generated_logs": [
+    "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/compile.log",
+    "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/main.log"
+  ]
+}

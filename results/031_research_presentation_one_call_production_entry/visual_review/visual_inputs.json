@@ -1,0 +1,107 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+  "task_key": "031_research_presentation_one_call_production_entry",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "031_research_presentation_one_call_production_entry-one-call-production-research-deck-review",
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "external_upload_authorization": "",
+  "rubric": {
+    "instructions": "Review the rendered pixels from one normal research-presentations production invocation. Check that each page contains source-specific content from the supplied engineering bundle rather than placeholders; exact CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math, native plots, and medical images are semantically correct where present; no internal RRL/GSC/SRC, QA, provenance, workflow, repo path, run ID, or implementation language leaks into audience-facing slides; repeated generic cards or one-template pages are rejected; and the deck reads as one coherent research update rather than disconnected benchmark pages. Do not infer visual quality from filenames or hashes.",
+    "source_contracts": [
+      "The engineering regression bundle is public-safe and explicitly excluded from Stage 5 holdouts.",
+      "Stage 2 gold/reference pixels are used only for compatible composition selection.",
+      "031 is a bounded Stage 4 production-entry proof, not full Stage 4 PASS or ONE_SHOT_QUALITY_PASS."
+    ]
+  },
+  "identity_bindings": {
+    "task_key": "031_research_presentation_one_call_production_entry",
+    "implementation_commit": "93c99427012d771098f4116b81cb7e86e406fbbc",
+    "input_title": "Clustered Interval Calibration And Synthetic Segmentation Robustness",
+    "build_manifest": "results/031_research_presentation_one_call_production_entry/generated/BUILD_MANIFEST.json",
+    "build_manifest_sha256": "defa07167b5fb127d6397ff53c780373ef438075a87b8d3da6300d12231bb7b0",
+    "source_fidelity_map": "results/031_research_presentation_one_call_production_entry/generated/source_fidelity_map.json",
+    "source_fidelity_map_sha256": "55a7e3cc9b119b4afaf4b2bdbf8baabf790520e5a0653c7e66ec80e5064f552c",
+    "pdf_sha256": "2f99d1b7c7920d9eeee4f63270e17262184ce646e35aacdf552ab7e737400d46",
+    "page_job_by_logical_id": {
+      "slide_2_statistical_model": "STATISTICAL_MODEL",
+      "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+      "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+      "slide_5_negative_result": "NEGATIVE_RESULT",
+      "slide_6_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON",
+      "slide_7_next_experiment": "NEXT_EXPERIMENT"
+    },
+    "source_evidence_ids_by_logical_id": {
+      "slide_2_statistical_model": [
+        "EV-MODEL-001"
+      ],
+      "slide_3_real_data_application": [
+        "EV-RESULT-001"
+      ],
+      "slide_4_experiment_design": [
+        "EV-DESIGN-001"
+      ],
+      "slide_5_negative_result": [
+        "EV-NEGATIVE-001"
+      ],
+      "slide_6_medical_image_comparison": [
+        "EV-MEDICAL-001"
+      ],
+      "slide_7_next_experiment": [
+        "EV-NEXT-001"
+      ]
+    },
+    "selected_gold_by_page_id": {
+      "production_model": "GSC-016",
+      "production_quantitative_result": "GSC-014",
+      "production_experiment_design": "GSC-004",
+      "production_negative_result": "GSC-012",
+      "production_medical_comparison": "GSC-008",
+      "production_next_experiment": "GSC-018"
+    }
+  },
+  "inputs": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-2.png",
+      "mime_type": "image/png",
+      "sha256": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491",
+      "description": "Rendered exact-CUHK production page for STATISTICAL_MODEL using source evidence EV-MODEL-001."
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-3.png",
+      "mime_type": "image/png",
+      "sha256": "826c92ebcafe16bec41fa08357b7734360ada9295b547e2c99259b793e8a25d4",
+      "description": "Rendered exact-CUHK production page for REAL_DATA_APPLICATION using source evidence EV-RESULT-001."
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-4.png",
+      "mime_type": "image/png",
+      "sha256": "3d421cdcd5b9eb8f2bf407bbb15947a501811aa37fdd3d9a5a81d1278d9ca671",
+      "description": "Rendered exact-CUHK production page for EXPERIMENT_DESIGN using source evidence EV-DESIGN-001."
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-5.png",
+      "mime_type": "image/png",
+      "sha256": "ac54cbb287a3208b5a36587cf393936aeb140a5388915784b63d8beb880aac6a",
+      "description": "Rendered exact-CUHK production page for NEGATIVE_RESULT using source evidence EV-NEGATIVE-001."
+    },
+    {
+      "logical_id": "slide_6_medical_image_comparison",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-6.png",
+      "mime_type": "image/png",
+      "sha256": "f7aebcb3a9af980e4f64817ccd86003db7bcd03d5d812a638477ed2eb3fcad55",
+      "description": "Rendered exact-CUHK production page for MEDICAL_IMAGE_COMPARISON using source evidence EV-MEDICAL-001."
+    },
+    {
+      "logical_id": "slide_7_next_experiment",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-7.png",
+      "mime_type": "image/png",
+      "sha256": "e4578e43331fa076a8ed65bba4492e076bd3bc1fee1b9b955cd1691ad4a6a63d",
+      "description": "Rendered exact-CUHK production page for NEXT_EXPERIMENT using source evidence EV-NEXT-001."
+    }
+  ]
+}
