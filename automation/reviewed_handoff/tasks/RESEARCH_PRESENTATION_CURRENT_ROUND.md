@@ -20,63 +20,58 @@
 
 当前 production gold 已覆盖 roadmap 所需主要 scientific jobs。026 新增 `GSC-018`，来自真实 rendered-pixel item-level Terra `PASS` 的 discussion / next-experiment 页面；正常 selector 可选择它，recipe builder 实际消费 source-derived composition fields，移除后得到 no-compatible-result，因此 `RUNTIME_SELECTED -> ACTUALLY_CONSUMED -> OUTPUT_AFFECTED` 已成立。Stage 2 整体关闭。
 
-## Stage 3 status — active recovery, not yet passed
+### Stage 3 — Executable CUHK Scientific Layout System
 
-### 027 historical result
+Stage 3 已首次整体 PASS。
 
-`027_research_presentation_executable_cuhk_scientific_layout_system` 已建立 Stage 3 核心工程链：normal Stage 2 selector -> gold recipe -> CUHK content-space resolver -> native LaTeX/TikZ/figure/image objects -> canonical exact CUHK compile/render。geometry mutation、`SPLIT_REQUIRED` capacity contract、native LaTeX model page、negative-result layout、audience-meta leak gate、真实 xelatex/PDF/PNG/mechanical QA 与真实 CI 均已成立。
+`027_research_presentation_executable_cuhk_scientific_layout_system` 建立了核心工程链：normal Stage 2 selector -> gold recipe -> CUHK content-space resolver -> native LaTeX/TikZ/figure/image objects -> canonical exact CUHK compile/render，并证明 geometry mutation、`SPLIT_REQUIRED` capacity contract、native LaTeX model page、真实 xelatex/PDF/PNG/mechanical QA 与真实 CI。
 
-第一轮 Review 为 `REVISE`。返修后通过 028 恢复的 fresh `gpt-5.6-terra` evidence 显示：
+027 第二轮达到 review limit 后保留历史 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE`，没有伪造第三轮。028 独立关闭旧 visual dispatch gap；029 独立完成 task-local Visual Review consumer adaptation，使 push-mode resolver 可以按当前 task identity 自动发现唯一待审视觉任务。
 
-- slide 2 statistical model：PASS；
-- slide 5 negative result：PASS；
-- slide 3 quantitative result：REVISE，图内字号/legend 仍不具备投影尺度可读性；
-- slide 4 experiment design：REVISE，仍以 generic card/arrow primitive 承载具体实验语义；
-- slide 6 medical comparison：REVISE，没有真实可检查的 error image crop/zoom；
-- slide 7 next experiment：REVISE，仍是卡片化 workflow，而不是 evidence-to-decision 研究推理视觉。
+质量保持 recovery `030_stage3_visual_recovery` 在第二轮独立审核中 PASS，真实 CI 与 task-local `gpt-5.6-terra` evidence 均绑定当前 implementation identity。六个主要内容页全部达到 item/page-level mature research-group-meeting / strong conference-talk bar：
 
-027 第二轮已正式 `REVISE` 并达到 review limit。027 保留 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE` 历史，不得伪造 REVIEW_3，也不得把真实 CI/机械 PASS 当 Stage 3 PASS。
+- statistical model：native LaTeX 数学为主视觉；
+- quantitative result：presentation-native axes/ticks/facets/method mapping/nominal line/callout 可投影阅读；
+- experiment design：DGP factors、center/subject hierarchy、procedures 与 endpoints 通过 typed scientific relations 表达；
+- negative result：coverage scale、target、uncertainty 与 failure conclusion 完整；
+- medical comparison：same-case full panels + real ROI crop/zoom + adjacent TP/FP/FN legend；
+- next experiment：normal `GSC-018` compatible path 形成 evidence -> manipulation/comparator -> endpoint -> go/no-go decision reasoning。
 
-### 028 control-plane recovery
+030 同时真实证明 CI PASS 后，029 的 task-local push resolver 可自动触发 GitHub Actions secret 路径并写回 fresh Visual Review evidence，不再需要人为 `workflow_dispatch` recovery。
 
-`028_research_presentation_stage3_visual_review_dispatch_recovery` 已独立 PASS。真实 workflow_dispatch run `32923111244` 成功生成并写回与返修后六张 PNG identity 一致的新 Terra evidence。028 只关闭 visual-review dispatch gap，不替代 027 REVIEW_2，也不代表 Stage 3 PASS。
+Stage 3 PASS 只说明成熟受约束科研布局可以在 exact CUHK content area 中执行；它不等于普通用户的一次调用已经走完整生产链，也不等于最终真实 paper holdout 通过。
 
-### 029 visual contract consumer adaptation — completed
+## Stage 4 — active
 
-`029_reviewed_handoff_visual_contract_adaptation` 已在第一轮独立审核中 PASS。真实 `Codex Marketplace` CI 与 `AI Bridge Visual Review` push run 均成功；push-mode resolver 已真实执行 0-task no-op，确定性回归覆盖 1-task、fresh evidence、invalid identity 与 multiple eligible fail-closed 行为。普通 push 不再依赖 repository-level 固定 manifest/output vars，显式 `workflow_dispatch` 仍保留。
-
-029 只关闭 consumer control-plane seam，不构成 Stage 3 PASS，也不发送 stage notifier。
-
-### Active bounded task — 030 Stage 3 visual-maturity recovery
+### Active bounded task — 031 One-Call Production Entry
 
 当前 active task：
 
-`030_stage3_visual_recovery`
+`031_research_presentation_one_call_production_entry`
 
-030 是 027 review limit 后的质量保持业务 recovery，只处理四类已被 fresh Terra 明确定位的 layout blocker：
+031 是 Stage 4 的第一项 bounded integration，只证明正常 `research-presentations` production route 能把用户提供的 public-safe engineering research input 一次性连接到：
 
-- quantitative result：建立 presentation-native result-figure path，直接控制 axes/tick/facet/legend/reference line/callout 的投影可读性，不再只扩大不可读 raster；
-- experiment design：建立 typed scientific hierarchy / relation primitive，让 center-subject 层级、DGP 因素、procedure branches 与 endpoints 由结构本身表达，不再使用 generic card/arrow；
-- medical comparison：建立真实 same-case ROI crop/zoom image primitive、callout 与邻近 TP/FP/FN legend；
-- next experiment：建立 evidence -> manipulation/comparator -> endpoint -> decision criterion 的科研推理布局，并继续通过正常 discussion-compatible gold path。
+source ingestion / source-fidelity evidence map -> storyline/page jobs -> normal gold retrieval -> Stage 3 executable layouts -> canonical exact CUHK `.tex + PDF` -> real render -> task-local visual-review handoff。
 
-027 已通过的 exact CUHK、Stage 2 selector/recipe、geometry transfer、`SPLIT_REQUIRED`、statistical-model page、negative-result page 与 anti-meta gate 必须保持。
+关键边界：
 
-030 已真实启用 task-local Visual Review contract：
+- 必须走 normal user-facing production entry，不得把 027/030 benchmark generator 当产品入口；
+- engineering regression input 只用于 Stage 4 集成证明，明确排除在 Stage 5 holdout 之外；
+- production code 不得硬编码该 fixture 的 title、notation、page sequence、gold IDs 或 layout；
+- 不允许 force-id / score override 绕过 Stage 2 compatibility；
+- 必须保存 source -> plan -> gold -> layout -> output runtime trace；
+- 必须真实使用 canonical exact CUHK source 并 compile/render；
+- 必须启用 031 task-local Visual Review contract；
+- 031 PASS 本身不自动等于 Stage 4 PASS。若 deck-rhythm review / bounded repair loop 尚未通过 normal production path 真实建立，Planner 将创建下一项有限 Stage 4 task，而不是降低合同。
 
-- `visual_review_required=true`；
-- manifest: `results/030_stage3_visual_recovery/visual_review/visual_inputs.json`；
-- evidence: `results/030_stage3_visual_recovery/visual_review/VISUAL_REVIEW.json`。
-
-真实 CI 通过并进入视觉证据阶段后，029 已验证的 push resolver 应自动发现唯一 030 target，由 GitHub Actions secret 路径运行 Terra 并写回 evidence；缺 evidence 只等待，不消耗 review round，不再创建手工 dispatch recovery。
-
-Stage 3 只有在 030 对六个主要内容页取得与当前 identity 一致的 fresh item/page-level mature-bar PASS、Planner 独立审核通过后才整体关闭。届时发送一次 Stage 3 PASS notifier，并自动创建 Stage 4；此前不得开始 Stage 4。
+当前 031 已 `PLAN_FROZEN`，下一步由现有 Reviewed Handoff watcher 交给 Codex Executor。
 
 ## Standing workflow decisions
 
 - 始终保持最高冻结质量标准；review limit 后若存在唯一、范围清楚、质量保持的 bounded recovery，自动创建新 task，不要求用户在“继续保持质量”和“降低质量”之间重复选择。
 - 每个 bounded task 仍最多两轮 review；不得增加 REVIEW_3。
 - 视觉型 Reviewed Handoff 优先使用 Bridge Kit task-local Visual Review contract；缺 evidence 属于等待，不消耗 review round。
+- Stage 1–4 某 stage 首次独立 PASS 时发送一次旁路 notifier，但 notifier 不是 approval gate，不暂停后续 stage。
 - 只有真正存在互斥产品/科学选择、显著架构改变、新成本/风险/隐私/许可问题、必须降低质量门槛，或 Stage 5 最终双 deck 验收时才打断用户。
 
 ## Non-negotiable final acceptance
