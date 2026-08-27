@@ -803,7 +803,7 @@ def emit_negative_evidence_plot(spec: dict[str, Any], layout: dict[str, Any], as
     annotation = layout["resolved_supporting_object_geometry"]["annotation"]
     caption = layout["resolved_supporting_object_geometry"]["caption"]
     asset = asset_map[spec["asset"]]
-    plot_x = primary["x"] + 0.032
+    plot_x = primary["x"] + 0.148
     plot_y = primary["y"] + 0.078
     plot_h = primary["h"] * 0.642
     ymin = 0.45
@@ -826,7 +826,7 @@ def emit_negative_evidence_plot(spec: dict[str, Any], layout: dict[str, Any], as
         )
     parts.extend(
         [
-            tex_node(plot_x - 0.052, plot_y + plot_h * 0.43, 0.060, r"\scriptsize coverage", align="right"),
+            tex_node(plot_x - 0.066, plot_y - 0.030, 0.060, r"\scriptsize coverage", align="right"),
             tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}"),
             tex_node(caption["x"], caption["y"], caption["w"], rf"\scriptsize {tex_escape(spec['caption'])}"),
         ]
