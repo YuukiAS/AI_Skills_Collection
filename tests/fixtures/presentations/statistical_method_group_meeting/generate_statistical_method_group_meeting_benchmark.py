@@ -590,6 +590,11 @@ def draw_negative_plot(path: Path, summary: dict[str, object]) -> None:
     nominal_y = y0 - int((0.95 - 0.45) / 0.55 * 310)
     draw.line((x0, nominal_y, 1060, nominal_y), fill=hex_color("gold"), width=3)
     draw.text((900, nominal_y - 28), "target 0.95", fill=hex_color("gold"), font=small)
+    for tick in [0.50, 0.75, 0.95, 1.00]:
+        ty = y0 - int((tick - 0.45) / 0.55 * 310)
+        draw.line((x0 - 8, ty, x0, ty), fill=hex_color("muted"), width=2)
+        draw.text((58, ty - 11), f"{tick:.2f}", fill=hex_color("ink"), font=small)
+    draw.text((39, 229), "coverage", fill=hex_color("muted"), font=small)
     rows = summary["rows"]
     colors = {"naive_iid_ols_z": hex_color("red"), "cluster_robust_z": hex_color("teal")}
     for i, rho in enumerate(ICC_GRID):

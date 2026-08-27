@@ -109,6 +109,18 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False, task_key: str
             errors.append(f"{tex_path}: quantitative result still uses raster coverage plot")
         if "centers -> subjects" in tex or "Error zoom:" in tex:
             errors.append(f"{tex_path}: old visual-maturity blocker text still present")
+        if "Native axes, facets, method key, nominal line, and interval callout" in tex:
+            errors.append(f"{tex_path}: quantitative result leaks implementation/QA wording")
+        if "small_g_negative_result.png" in tex and r"\scriptsize coverage" not in tex:
+            errors.append(f"{tex_path}: negative result plot lacks readable coverage y-axis label")
+        connector_pattern = re.compile(r"\\StageThreeConnector\{([0-9.]+)\}\{([0-9.]+)\}\{([0-9.]+)\}\{([0-9.]+)\};")
+        leftward_midline_connectors = [
+            (float(x1), float(y1), float(x2), float(y2))
+            for x1, y1, x2, y2 in connector_pattern.findall(tex)
+            if abs(float(y1) - float(y2)) < 0.0001 and float(x2) <= float(x1)
+        ]
+        if leftward_midline_connectors:
+            errors.append(f"{tex_path}: found non-left-to-right Stage 3 connector {leftward_midline_connectors[0]}")
         for required in [
             "Coverage by ICC under imbalanced clusters",
             "Subject records nested inside each center",

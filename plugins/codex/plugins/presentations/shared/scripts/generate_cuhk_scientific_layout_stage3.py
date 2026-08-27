@@ -394,7 +394,7 @@ def page_specs() -> list[dict[str, Any]]:
             ],
             "nominal_coverage": 0.95,
             "callout": {"G": 8, "rho": 0.5, "label": "small-G stress"},
-            "annotation": "Native axes, facets, method key, nominal line, and interval callout are bound inside the result figure.",
+            "annotation": "Small-G, high-ICC imbalance still suppresses coverage; center-robust intervals recover toward nominal as clusters increase.",
             "caption": "Synthetic clustered-data example; intervals compared on coverage, width, and bias.",
             "required_panel_count": 1,
         },
@@ -784,6 +784,8 @@ def emit_result_figure(spec: dict[str, Any], layout: dict[str, Any]) -> str:
 
 
 def emit_figure(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str, str]) -> str:
+    if spec.get("dominant_object") == "negative_evidence_plot":
+        return emit_negative_evidence_plot(spec, layout, asset_map)
     primary = layout["resolved_primary_object_geometry"]
     annotation = layout["resolved_supporting_object_geometry"]["annotation"]
     caption = layout["resolved_supporting_object_geometry"]["caption"]
@@ -794,6 +796,42 @@ def emit_figure(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[st
         tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}"),
         tex_node(caption["x"], caption["y"], caption["w"], rf"\scriptsize {tex_escape(spec['caption'])}"),
     ])
+
+
+def emit_negative_evidence_plot(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str, str]) -> str:
+    primary = layout["resolved_primary_object_geometry"]
+    annotation = layout["resolved_supporting_object_geometry"]["annotation"]
+    caption = layout["resolved_supporting_object_geometry"]["caption"]
+    asset = asset_map[spec["asset"]]
+    plot_x = primary["x"] + 0.032
+    plot_y = primary["y"] + 0.078
+    plot_h = primary["h"] * 0.642
+    ymin = 0.45
+    ymax = 1.00
+
+    def py(coverage: float) -> float:
+        return plot_y + (1.0 - (coverage - ymin) / (ymax - ymin)) * plot_h
+
+    parts = [
+        tex_node(primary["x"], primary["y"], primary["w"], rf"\includegraphics[width={primary['w']:.4f}\paperwidth,height={primary['h']:.4f}\paperheight,keepaspectratio]{{{asset}}}", align="center"),
+        rf"\draw[line width=0.7pt,draw=black!62] ({plot_x:.4f},{plot_y:.4f}) -- ({plot_x:.4f},{plot_y+plot_h:.4f});",
+    ]
+    for tick, label in [(0.50, "0.50"), (0.75, "0.75"), (0.95, "0.95"), (1.00, "1.00")]:
+        ty = py(tick)
+        parts.extend(
+            [
+                rf"\draw[line width=0.55pt,draw=black!62] ({plot_x-0.006:.4f},{ty:.4f}) -- ({plot_x+0.006:.4f},{ty:.4f});",
+                tex_node(plot_x - 0.050, ty - 0.010, 0.040, rf"\scriptsize {label}", align="right"),
+            ]
+        )
+    parts.extend(
+        [
+            tex_node(plot_x - 0.052, plot_y + plot_h * 0.43, 0.060, r"\scriptsize coverage", align="right"),
+            tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}"),
+            tex_node(caption["x"], caption["y"], caption["w"], rf"\scriptsize {tex_escape(spec['caption'])}"),
+        ]
+    )
+    return "\n".join(parts)
 
 
 def emit_flow(spec: dict[str, Any], layout: dict[str, Any]) -> str:
@@ -928,7 +966,7 @@ def emit_next_experiment(spec: dict[str, Any], layout: dict[str, Any]) -> str:
         rf"\StageThreeConnector{{{evidence_x+0.198:.4f}}}{{{mid_y:.4f}}}{{{strategy_x-0.020:.4f}}}{{{mid_y:.4f}}};",
         tex_node(evidence_x + 0.204, mid_y - 0.066, 0.075, r"\scriptsize motivates", align="center"),
         rf"\StageThreeConnector{{{strategy_x+0.255:.4f}}}{{{mid_y:.4f}}}{{{comparator_x-0.016:.4f}}}{{{mid_y:.4f}}};",
-        rf"\StageThreeConnector{{{comparator_x+0.184:.4f}}}{{{mid_y:.4f}}}{{{decision_x-0.016:.4f}}}{{{mid_y:.4f}}};",
+        rf"\StageThreeConnector{{{comparator_x+0.148:.4f}}}{{{mid_y:.4f}}}{{{decision_x-0.016:.4f}}}{{{mid_y:.4f}}};",
     ])
     annotation = layout["resolved_supporting_object_geometry"]["annotation"]
     parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}", align="left"))
