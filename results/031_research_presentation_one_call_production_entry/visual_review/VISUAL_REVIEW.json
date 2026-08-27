@@ -1,0 +1,241 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": "Across slides 2–7, the only header identity visible is a purple navigation bar with section labels (Model, Results, Design, Failure, Medical Image, Next). No CUHK name, crest, logo, or other explicit CUHK Beamer identifier is visible on any rendered page.",
+      "finding_id": "F-001",
+      "item_id": "slide_2_statistical_model",
+      "recommendation": "Render the required exact CUHK Beamer branding/identity visibly on every audience-facing slide, then re-review the deck.",
+      "requirement_id": "R-CUHK-IDENTITY",
+      "severity": "blocking",
+      "summary": "Required CUHK Beamer identity is not visibly established."
+    },
+    {
+      "evidence": "The medical-image Error panel and Error crop display adjacent/overlapping red and orange markings, while the Prediction panel/crop does not visibly show a correspondingly colored prediction overlay at that lesion location. The legend assigns red to FP and orange to FN, making the displayed error encoding difficult to reconcile with the prediction view.",
+      "finding_id": "F-002",
+      "item_id": "slide_6_medical_image_comparison",
+      "recommendation": "Make GT and prediction masks visibly distinguishable and ensure the TP/FP/FN error colors correspond unambiguously to those masks in the full panel and ROI crop.",
+      "requirement_id": "R-MEDICAL-SEMANTICS",
+      "severity": "blocking",
+      "summary": "The displayed segmentation-error color coding is visually ambiguous relative to the prediction panel."
+    }
+  ],
+  "created_at": "2026-08-27T21:52:17Z",
+  "evidence_id": "visual-review-031_research_presentation_one_call_production_entry-3ba600361c6d",
+  "images": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "mime_type": "image/png",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-2.png",
+      "sha256": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491"
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "mime_type": "image/png",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-3.png",
+      "sha256": "826c92ebcafe16bec41fa08357b7734360ada9295b547e2c99259b793e8a25d4"
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "mime_type": "image/png",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-4.png",
+      "sha256": "3d421cdcd5b9eb8f2bf407bbb15947a501811aa37fdd3d9a5a81d1278d9ca671"
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "mime_type": "image/png",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-5.png",
+      "sha256": "ac54cbb287a3208b5a36587cf393936aeb140a5388915784b63d8beb880aac6a"
+    },
+    {
+      "logical_id": "slide_6_medical_image_comparison",
+      "mime_type": "image/png",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-6.png",
+      "sha256": "f7aebcb3a9af980e4f64817ccd86003db7bcd03d5d812a638477ed2eb3fcad55"
+    },
+    {
+      "logical_id": "slide_7_next_experiment",
+      "mime_type": "image/png",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-7.png",
+      "sha256": "e4578e43331fa076a8ed65bba4492e076bd3bc1fee1b9b955cd1691ad4a6a63d"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "build_manifest": "results/031_research_presentation_one_call_production_entry/generated/BUILD_MANIFEST.json",
+      "build_manifest_sha256": "defa07167b5fb127d6397ff53c780373ef438075a87b8d3da6300d12231bb7b0",
+      "implementation_commit": "93c99427012d771098f4116b81cb7e86e406fbbc",
+      "input_title": "Clustered Interval Calibration And Synthetic Segmentation Robustness",
+      "page_job_by_logical_id": {
+        "slide_2_statistical_model": "STATISTICAL_MODEL",
+        "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+        "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+        "slide_5_negative_result": "NEGATIVE_RESULT",
+        "slide_6_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON",
+        "slide_7_next_experiment": "NEXT_EXPERIMENT"
+      },
+      "pdf_sha256": "2f99d1b7c7920d9eeee4f63270e17262184ce646e35aacdf552ab7e737400d46",
+      "selected_gold_by_page_id": {
+        "production_experiment_design": "GSC-004",
+        "production_medical_comparison": "GSC-008",
+        "production_model": "GSC-016",
+        "production_negative_result": "GSC-012",
+        "production_next_experiment": "GSC-018",
+        "production_quantitative_result": "GSC-014"
+      },
+      "source_evidence_ids_by_logical_id": {
+        "slide_2_statistical_model": [
+          "EV-MODEL-001"
+        ],
+        "slide_3_real_data_application": [
+          "EV-RESULT-001"
+        ],
+        "slide_4_experiment_design": [
+          "EV-DESIGN-001"
+        ],
+        "slide_5_negative_result": [
+          "EV-NEGATIVE-001"
+        ],
+        "slide_6_medical_image_comparison": [
+          "EV-MEDICAL-001"
+        ],
+        "slide_7_next_experiment": [
+          "EV-NEXT-001"
+        ]
+      },
+      "source_fidelity_map": "results/031_research_presentation_one_call_production_entry/generated/source_fidelity_map.json",
+      "source_fidelity_map_sha256": "55a7e3cc9b119b4afaf4b2bdbf8baabf790520e5a0653c7e66ec80e5064f552c",
+      "task_key": "031_research_presentation_one_call_production_entry"
+    },
+    "manifest_sha256": "3ba600361c6d4a146d5b9d1bf41a9fd42d05a36fb814eb7b4ca312822e89698b",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "Review the rendered pixels from one normal research-presentations production invocation. Check that each page contains source-specific content from the supplied engineering bundle rather than placeholders; exact CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math, native plots, and medical images are semantically correct where present; no internal RRL/GSC/SRC, QA, provenance, workflow, repo path, run ID, or implementation language leaks into audience-facing slides; repeated generic cards or one-template pages are rejected; and the deck reads as one coherent research update rather than disconnected benchmark pages. Do not infer visual quality from filenames or hashes.",
+      "source_contracts": [
+        "The engineering regression bundle is public-safe and explicitly excluded from Stage 5 holdouts.",
+        "Stage 2 gold/reference pixels are used only for compatible composition selection.",
+        "031 is a bounded Stage 4 production-entry proof, not full Stage 4 PASS or ONE_SHOT_QUALITY_PASS."
+      ]
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "BLOCKED",
+      "item_id": "slide_2_statistical_model",
+      "observations": [
+        "Substantive model content is visible: a mixed-effects-style equation with center random effect and individual residual terms, plus an ICC definition and interpretation.",
+        "The equation is the central scientific object and is large/readable against a clean background.",
+        "No visible workflow, repository, run-ID, implementation-language, RRL/GSC/SRC, QA, or provenance leak.",
+        "No explicit CUHK name, crest, logo, or other exact CUHK identifier is visible."
+      ],
+      "requirement_ids": [
+        "R-SOURCE-SPECIFIC-CONTENT",
+        "R-MAIN-OBJECT-PROMINENCE",
+        "R-NO-INTERNAL-LEAKS",
+        "R-CUHK-IDENTITY"
+      ],
+      "summary": "Scientifically specific model slide, but blocked by missing visible CUHK identity."
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "slide_3_real_data_application",
+      "observations": [
+        "A source-specific coverage plot is visible with G=8, G=20, and G=50 panels, ICC values, method key, nominal-coverage reference, annotation, and simulation-replicate note.",
+        "The plot’s trends and labels are visually legible and support the stated coverage conclusion.",
+        "No prohibited internal/process text is visible.",
+        "No explicit CUHK name, crest, logo, or other exact CUHK identifier is visible."
+      ],
+      "requirement_ids": [
+        "R-SOURCE-SPECIFIC-CONTENT",
+        "R-PLOT-SEMANTICS",
+        "R-NO-INTERNAL-LEAKS",
+        "R-CUHK-IDENTITY"
+      ],
+      "summary": "Specific, readable analysis page, but blocked by missing visible CUHK identity."
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "slide_4_experiment_design",
+      "observations": [
+        "The page presents a specific simulation workflow: stress grid, center hierarchy, interval procedures, and endpoints connected in a left-to-right diagram.",
+        "The content is visually distinct from the results chart and coherently relates to the interval-coverage topic.",
+        "No prohibited internal/process text is visible.",
+        "No explicit CUHK name, crest, logo, or other exact CUHK identifier is visible."
+      ],
+      "requirement_ids": [
+        "R-SOURCE-SPECIFIC-CONTENT",
+        "R-DECK-COHERENCE",
+        "R-NO-TEMPLATE-REPETITION",
+        "R-NO-INTERNAL-LEAKS",
+        "R-CUHK-IDENTITY"
+      ],
+      "summary": "Specific design diagram rather than a generic repeated card, but blocked by missing visible CUHK identity."
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "slide_5_negative_result",
+      "observations": [
+        "The negative-result slide includes a specific G=8 imbalanced-cluster bar chart, uncertainty bars, nominal target, method labels, values, and an adjacent explanation of anti-conservative coverage.",
+        "The failure result directly connects to the earlier coverage comparison and proposed follow-up methods.",
+        "No prohibited internal/process text is visible.",
+        "No explicit CUHK name, crest, logo, or other exact CUHK identifier is visible."
+      ],
+      "requirement_ids": [
+        "R-SOURCE-SPECIFIC-CONTENT",
+        "R-PLOT-SEMANTICS",
+        "R-DECK-COHERENCE",
+        "R-NO-INTERNAL-LEAKS",
+        "R-CUHK-IDENTITY"
+      ],
+      "summary": "Coherent negative-evidence slide with a readable native chart, but blocked by missing visible CUHK identity."
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "slide_6_medical_image_comparison",
+      "observations": [
+        "The slide uses same-case Input, GT, Prediction, and Error image panels, a highlighted ROI, zoom crops, and a TP/FP/FN legend; it is not a placeholder or repeated generic card.",
+        "The Error panel/crop show red and orange markings, but the corresponding prediction view does not visibly make the predicted lesion overlay clear; the red-FP/orange-FN mapping is therefore difficult to verify from the pixels.",
+        "No prohibited internal/process text is visible.",
+        "No explicit CUHK name, crest, logo, or other exact CUHK identifier is visible."
+      ],
+      "requirement_ids": [
+        "R-SOURCE-SPECIFIC-CONTENT",
+        "R-MEDICAL-SEMANTICS",
+        "R-NO-INTERNAL-LEAKS",
+        "R-CUHK-IDENTITY"
+      ],
+      "summary": "Uses substantive medical imagery and a linked ROI, but the error-mask semantics are ambiguous and required CUHK identity is absent."
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "slide_7_next_experiment",
+      "observations": [
+        "The page presents a concrete next-experiment chain from high-ICC/G=8 failure evidence to sampling choices, comparator arms, and a go/no-go rule.",
+        "It closes the research-update narrative by tying the next test to the preceding coverage failure.",
+        "No prohibited internal/process text is visible.",
+        "No explicit CUHK name, crest, logo, or other exact CUHK identifier is visible."
+      ],
+      "requirement_ids": [
+        "R-SOURCE-SPECIFIC-CONTENT",
+        "R-DECK-COHERENCE",
+        "R-NO-TEMPLATE-REPETITION",
+        "R-NO-INTERNAL-LEAKS",
+        "R-CUHK-IDENTITY"
+      ],
+      "summary": "Specific and coherent continuation of the research narrative, but blocked by missing visible CUHK identity."
+    }
+  ],
+  "non_blocking_notes": [
+    "The deck uses varied page forms—equation, multi-panel plot, process diagram, bar chart, medical-image comparison, and decision workflow—and reads as a connected research update rather than disconnected template pages.",
+    "Slides 2–7 visibly use a consistent section-navigation treatment and slide numbering, supporting deck-level continuity."
+  ],
+  "overall_decision": "BLOCKED",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "3ba600361c6d4a146d5b9d1bf41a9fd42d05a36fb814eb7b4ca312822e89698b",
+  "review_kind": "031_research_presentation_one_call_production_entry-one-call-production-research-deck-review",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "BLOCKED",
+  "task_key": "031_research_presentation_one_call_production_entry",
+  "workflow_type": "reviewed_handoff"
+}
