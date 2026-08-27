@@ -1,0 +1,221 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": "The results page contains visible self-referential QA/provenance wording beneath the chart: “Native axes, facets, method key, nominal line, and interval callout are bound inside the result figure.”",
+      "finding_id": "F1",
+      "item_id": "slide_3_real_data_application",
+      "recommendation": "Replace the implementation/QA statement with a scientific interpretation of the coverage pattern or a concise result takeaway.",
+      "requirement_id": "no_internal_provenance_or_QA_language",
+      "severity": "blocking",
+      "summary": "Internal QA language is visible on the scientific results page."
+    },
+    {
+      "evidence": "The negative-result bar chart has category labels and numeric labels over bars, but its vertical axis has no visible tick marks or scale; the 0.95 reference is only a horizontal line labeled “target 0.95.”",
+      "finding_id": "F2",
+      "item_id": "slide_5_negative_result",
+      "recommendation": "Add a readable labeled y-axis with ticks and retain the nominal reference line so the coverage shortfall can be quantitatively read from the plot itself.",
+      "requirement_id": "result_figure_readable_native_axes_ticks_nominal_line",
+      "severity": "blocking",
+      "summary": "The main negative-evidence plot lacks a readable native y-axis/tick scale."
+    },
+    {
+      "evidence": "In the next-experiment diagram, the arrow between the comparator-arm shape and the “go/no-go” diamond points leftward, visually directing from the decision node back to comparator arms rather than continuing the left-to-right workflow.",
+      "finding_id": "F3",
+      "item_id": "slide_7_next_experiment",
+      "recommendation": "Reverse or redraw this connector so the evidenced workflow visibly proceeds from failure evidence through manipulation and comparison to the final decision rule.",
+      "requirement_id": "next_experiment_evidence_to_decision_reasoning",
+      "severity": "blocking",
+      "summary": "The decision-flow direction is visually inconsistent at the final comparator-to-decision step."
+    }
+  ],
+  "created_at": "2026-08-27T04:53:13Z",
+  "evidence_id": "visual-review-030_stage3_visual_recovery-1768e6458b38",
+  "images": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-2.png",
+      "sha256": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491"
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-3.png",
+      "sha256": "0d6f29a79f6a369d8465699de03373057e97d47bb0f45467cf95ea32624bbffc"
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-4.png",
+      "sha256": "3d421cdcd5b9eb8f2bf407bbb15947a501811aa37fdd3d9a5a81d1278d9ca671"
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-5.png",
+      "sha256": "3ae702392aa81f62881f3d1533c269fe07ed99f0c9eb4e619d8338656cbca7e7"
+    },
+    {
+      "logical_id": "slide_6_medical_image_comparison",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-6.png",
+      "sha256": "f7aebcb3a9af980e4f64817ccd86003db7bcd03d5d812a638477ed2eb3fcad55"
+    },
+    {
+      "logical_id": "slide_7_next_experiment",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-7.png",
+      "sha256": "e083b8340a94f459e0796c035aba5c40e35f0a597b32bda892a45bc84c08f16b"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "build_manifest": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/BUILD_MANIFEST.json",
+      "build_manifest_sha256": "aebdeab511dae5d72d33efc4affe0b696d1a7ebf3763e10c30abb0150c232e22",
+      "dominant_object_by_logical_id": {
+        "slide_2_statistical_model": "native_latex_math",
+        "slide_3_real_data_application": "presentation_native_coverage_figure",
+        "slide_4_experiment_design": "scientific_relation_diagram",
+        "slide_5_negative_result": "negative_evidence_plot",
+        "slide_6_medical_image_comparison": "same_case_medical_panels",
+        "slide_7_next_experiment": "next_experiment_reasoning"
+      },
+      "implementation_commit": "f0a23caa17bdc4cc1f2756e6dd8f587e6a32acf8",
+      "page_job_by_logical_id": {
+        "slide_2_statistical_model": "STATISTICAL_MODEL",
+        "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+        "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+        "slide_5_negative_result": "NEGATIVE_RESULT",
+        "slide_6_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON",
+        "slide_7_next_experiment": "NEXT_EXPERIMENT"
+      },
+      "pdf_sha256": "4a723e4578645c61b15dd87a5e0ee0892773be8311fb20ce821a123ef6430b4d",
+      "rendered_png_sha256_by_logical_id": {
+        "slide_2_statistical_model": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491",
+        "slide_3_real_data_application": "0d6f29a79f6a369d8465699de03373057e97d47bb0f45467cf95ea32624bbffc",
+        "slide_4_experiment_design": "3d421cdcd5b9eb8f2bf407bbb15947a501811aa37fdd3d9a5a81d1278d9ca671",
+        "slide_5_negative_result": "3ae702392aa81f62881f3d1533c269fe07ed99f0c9eb4e619d8338656cbca7e7",
+        "slide_6_medical_image_comparison": "f7aebcb3a9af980e4f64817ccd86003db7bcd03d5d812a638477ed2eb3fcad55",
+        "slide_7_next_experiment": "e083b8340a94f459e0796c035aba5c40e35f0a597b32bda892a45bc84c08f16b"
+      },
+      "selected_gold_id_by_logical_id": {
+        "slide_2_statistical_model": "GSC-016",
+        "slide_3_real_data_application": "GSC-014",
+        "slide_4_experiment_design": "GSC-004",
+        "slide_5_negative_result": "GSC-012",
+        "slide_6_medical_image_comparison": "GSC-008",
+        "slide_7_next_experiment": "GSC-018"
+      },
+      "task_key": "030_stage3_visual_recovery"
+    },
+    "manifest_sha256": "1768e6458b3819d82a16d03154b9978a51561ed211d1e98d065373a71d783a9a",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "You are reviewing rendered pixels from the Stage 3 exact-CUHK scientific layout integration deck. Judge each content page independently at item/page level. PASS for an item only if the visible page reaches a mature doctoral research-group meeting or strong conference-talk bar for its page job. Check that the CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math is genuinely typeset rather than source-like text; result figures use readable native axes, ticks, facets, method legend, nominal line, and callout; experiment design shows typed hierarchy, DGP factors, procedures, endpoints, and directional scientific relations; medical comparison uses same-case ROI crop/zoom imagery with adjacent TP/FP/FN legend; discussion/next-experiment content shows evidence-to-decision research reasoning rather than generic future-work boxes. Mark REVISE for any page that looks like a generic card/dashboard/box-arrow fixture, has internal provenance or QA language, has source-like math, hides the evidence in a tiny figure, clips content, uses meaningless whitespace, or repeats one template face without scientific specificity. Top-level PASS means all six content items pass; top-level REVISE if any item has a blocking visual maturity issue. Do not infer quality from filenames, hashes, metadata, or presumed provenance; inspect the actual pixels.",
+      "source_contracts": [
+        "Stage 2 gold/reference pixels are evidence only and are not runtime assets.",
+        "This is a Stage 3 engineering integration deck, not a final real-paper holdout."
+      ]
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "PASS",
+      "item_id": "slide_2_statistical_model",
+      "observations": [
+        "A large, centered rendered mathematical model is the dominant visual object and uses proper mathematical glyphs, subscripts, Greek letters, and distribution notation rather than source-like text.",
+        "The title and the short interpretation line clearly connect center effects/ICC to interval calibration.",
+        "The purple Beamer navigation band and active Model marker are visible."
+      ],
+      "requirement_ids": [
+        "CUHK_Beamer_identity_visible",
+        "native_latex_math_prominent_projection_readable"
+      ],
+      "summary": "Clear and projection-readable statistical-model page with genuinely typeset math."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_3_real_data_application",
+      "observations": [
+        "The three-facet coverage plot is prominent and visibly includes axes, facet labels, a method key, a nominal 0.95 line, and a small-G stress callout.",
+        "The explanatory text beneath the plot visibly states that the figure components are “bound inside the result figure,” which reads as internal QA/provenance language rather than scientific content."
+      ],
+      "requirement_ids": [
+        "presentation_native_coverage_figure",
+        "no_internal_provenance_or_QA_language"
+      ],
+      "summary": "The chart is strong, but visible QA/provenance wording prevents a mature presentation finish."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_4_experiment_design",
+      "observations": [
+        "The page visibly lays out DGP stress factors, a center/subject hierarchy, two named interval procedures, endpoints, and directional connectors.",
+        "Specific factors including centers, ICC levels, balance condition, and 400 repetitions per cell are readable.",
+        "The purple navigation band and active Design marker are visible."
+      ],
+      "requirement_ids": [
+        "CUHK_Beamer_identity_visible",
+        "scientific_relation_diagram_typed_hierarchy_DGP_procedures_endpoints"
+      ],
+      "summary": "Scientific design is specific, typed, and visibly organized as a directional experimental workflow."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_5_negative_result",
+      "observations": [
+        "The paired bars, uncertainty bars, method key, per-bar numeric labels, 0.95 target line, and “still below nominal” callout make the failure pattern visible.",
+        "The chart has no visible y-axis tick marks or labeled vertical scale, limiting quantitative reading of coverage from the plotted axes.",
+        "The right-side explanation is adjacent to the diagnostic plot."
+      ],
+      "requirement_ids": [
+        "negative_evidence_plot",
+        "result_figure_readable_native_axes_ticks_nominal_line"
+      ],
+      "summary": "Negative evidence is visible, but the primary plot does not provide the required readable native y-axis/tick scale."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_6_medical_image_comparison",
+      "observations": [
+        "Input, GT, Prediction, and Error panels visibly show the same ring-shaped case with a localized lesion/error region.",
+        "A boxed ROI in the Error panel is connected to adjacent GT crop, Prediction crop, and Error crop views.",
+        "The TP/FP/FN overlay legend is positioned directly beside the crops and uses distinguishable colored markers."
+      ],
+      "requirement_ids": [
+        "same_case_medical_panels",
+        "ROI_crop_zoom",
+        "adjacent_TP_FP_FN_legend"
+      ],
+      "summary": "Same-case image comparison, localized ROI zoom, and adjacent error legend are visibly coherent and readable."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_7_next_experiment",
+      "observations": [
+        "The page contains specific failure evidence, sampling manipulations, named comparator arms, and a stated coverage/width go/no-go criterion.",
+        "The connector at the final stage visibly has its arrowhead on the comparator side, making the flow appear to run from the go/no-go diamond back toward comparator arms.",
+        "This contradicts the otherwise left-to-right evidence-to-decision structure."
+      ],
+      "requirement_ids": [
+        "next_experiment_evidence_to_decision_reasoning",
+        "directional_scientific_relations"
+      ],
+      "summary": "The reasoning content is specific, but the final connector direction makes the decision workflow visually ambiguous."
+    }
+  ],
+  "non_blocking_notes": [
+    "Across the pages, the purple navigation band and active section indicators provide a consistent Beamer-style visual identity.",
+    "Several pages use substantial white space, but the main objects remain large and projection-readable."
+  ],
+  "overall_decision": "REVISE",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "1768e6458b3819d82a16d03154b9978a51561ed211d1e98d065373a71d783a9a",
+  "review_kind": "030_stage3_visual_recovery-stage3-cuhk-scientific-layout-item-page-review",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "REVISE",
+  "task_key": "030_stage3_visual_recovery",
+  "workflow_type": "reviewed_handoff"
+}
