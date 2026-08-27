@@ -1,25 +1,16 @@
 {
   "blocking_findings": [
     {
-      "evidence": "Across slides 2–7, the only header identity visible is a purple navigation bar with section labels (Model, Results, Design, Failure, Medical Image, Next). No CUHK name, crest, logo, or other explicit CUHK Beamer identifier is visible on any rendered page.",
-      "finding_id": "F-001",
+      "evidence": "Across pages 2/7 through 7/7, the rendered header shows only section labels (“Model,” “Results,” “Design,” “Failure,” “Medical Image,” “Next”) on a purple strip. No CUHK wordmark, crest, university name, or other identifiable CUHK Beamer branding is visible.",
+      "finding_id": "BF-01",
       "item_id": "slide_2_statistical_model",
-      "recommendation": "Render the required exact CUHK Beamer branding/identity visibly on every audience-facing slide, then re-review the deck.",
-      "requirement_id": "R-CUHK-IDENTITY",
+      "recommendation": "Render the required exact CUHK Beamer theme/identity visibly on the deck, including its recognizable institutional branding.",
+      "requirement_id": "exact_cuhk_beamer_identity_visible",
       "severity": "blocking",
-      "summary": "Required CUHK Beamer identity is not visibly established."
-    },
-    {
-      "evidence": "The medical-image Error panel and Error crop display adjacent/overlapping red and orange markings, while the Prediction panel/crop does not visibly show a correspondingly colored prediction overlay at that lesion location. The legend assigns red to FP and orange to FN, making the displayed error encoding difficult to reconcile with the prediction view.",
-      "finding_id": "F-002",
-      "item_id": "slide_6_medical_image_comparison",
-      "recommendation": "Make GT and prediction masks visibly distinguishable and ensure the TP/FP/FN error colors correspond unambiguously to those masks in the full panel and ROI crop.",
-      "requirement_id": "R-MEDICAL-SEMANTICS",
-      "severity": "blocking",
-      "summary": "The displayed segmentation-error color coding is visually ambiguous relative to the prediction panel."
+      "summary": "Required CUHK identity is not visibly present."
     }
   ],
-  "created_at": "2026-08-27T21:52:17Z",
+  "created_at": "2026-08-27T22:40:55Z",
   "evidence_id": "visual-review-031_research_presentation_one_call_production_entry-3ba600361c6d",
   "images": [
     {
@@ -123,111 +114,97 @@
       "decision": "BLOCKED",
       "item_id": "slide_2_statistical_model",
       "observations": [
-        "Substantive model content is visible: a mixed-effects-style equation with center random effect and individual residual terms, plus an ICC definition and interpretation.",
-        "The equation is the central scientific object and is large/readable against a clean background.",
-        "No visible workflow, repository, run-ID, implementation-language, RRL/GSC/SRC, QA, or provenance leak.",
-        "No explicit CUHK name, crest, logo, or other exact CUHK identifier is visible."
+        "The page has a specific mixed-model equation and a sentence defining ICC rho; it is not placeholder content.",
+        "The central equation is readable but the page has substantial unused white space.",
+        "No visible CUHK institutional identity appears in the rendered pixels."
       ],
       "requirement_ids": [
-        "R-SOURCE-SPECIFIC-CONTENT",
-        "R-MAIN-OBJECT-PROMINENCE",
-        "R-NO-INTERNAL-LEAKS",
-        "R-CUHK-IDENTITY"
+        "source_specific_content",
+        "main_scientific_object_prominent",
+        "exact_cuhk_beamer_identity_visible"
       ],
-      "summary": "Scientifically specific model slide, but blocked by missing visible CUHK identity."
+      "summary": "Source-specific statistical-model content is present, but the deck-wide CUHK identity requirement is not met."
     },
     {
       "decision": "BLOCKED",
       "item_id": "slide_3_real_data_application",
       "observations": [
-        "A source-specific coverage plot is visible with G=8, G=20, and G=50 panels, ICC values, method key, nominal-coverage reference, annotation, and simulation-replicate note.",
-        "The plot’s trends and labels are visually legible and support the stated coverage conclusion.",
-        "No prohibited internal/process text is visible.",
-        "No explicit CUHK name, crest, logo, or other exact CUHK identifier is visible."
+        "Three distinct coverage plots show G=8, G=20, and G=50, with naive iid, cluster-robust, and nominal-0.95 series.",
+        "The plot annotations, method key, and interpretation are visible and scientifically connected to ICC and cluster imbalance.",
+        "No visible CUHK institutional identity appears in the rendered pixels."
       ],
       "requirement_ids": [
-        "R-SOURCE-SPECIFIC-CONTENT",
-        "R-PLOT-SEMANTICS",
-        "R-NO-INTERNAL-LEAKS",
-        "R-CUHK-IDENTITY"
+        "source_specific_content",
+        "native_plots_semantically_correct",
+        "exact_cuhk_beamer_identity_visible"
       ],
-      "summary": "Specific, readable analysis page, but blocked by missing visible CUHK identity."
+      "summary": "The results page is a legible, content-specific research result, but lacks visible CUHK identity."
     },
     {
       "decision": "BLOCKED",
       "item_id": "slide_4_experiment_design",
       "observations": [
-        "The page presents a specific simulation workflow: stress grid, center hierarchy, interval procedures, and endpoints connected in a left-to-right diagram.",
-        "The content is visually distinct from the results chart and coherently relates to the interval-coverage topic.",
-        "No prohibited internal/process text is visible.",
-        "No explicit CUHK name, crest, logo, or other exact CUHK identifier is visible."
+        "The page presents a DGP stress grid, center hierarchy graphic, interval procedures, and endpoints joined by directional connectors.",
+        "The content is specific to clustered-data simulation, including G values, ICC settings, balance conditions, and 400 repetitions per cell.",
+        "No visible CUHK institutional identity appears in the rendered pixels."
       ],
       "requirement_ids": [
-        "R-SOURCE-SPECIFIC-CONTENT",
-        "R-DECK-COHERENCE",
-        "R-NO-TEMPLATE-REPETITION",
-        "R-NO-INTERNAL-LEAKS",
-        "R-CUHK-IDENTITY"
+        "source_specific_content",
+        "coherent_research_update",
+        "exact_cuhk_beamer_identity_visible"
       ],
-      "summary": "Specific design diagram rather than a generic repeated card, but blocked by missing visible CUHK identity."
+      "summary": "The experiment-design page is specific and coherent, but the required CUHK identity is absent."
     },
     {
       "decision": "BLOCKED",
       "item_id": "slide_5_negative_result",
       "observations": [
-        "The negative-result slide includes a specific G=8 imbalanced-cluster bar chart, uncertainty bars, nominal target, method labels, values, and an adjacent explanation of anti-conservative coverage.",
-        "The failure result directly connects to the earlier coverage comparison and proposed follow-up methods.",
-        "No prohibited internal/process text is visible.",
-        "No explicit CUHK name, crest, logo, or other exact CUHK identifier is visible."
+        "A grouped bar chart presents naive versus cluster-robust coverage across rho values, with visible error bars and a 0.95 target line.",
+        "The adjacent text explicitly interprets the remaining small-G anti-conservatism and names proposed follow-up tests.",
+        "No visible CUHK institutional identity appears in the rendered pixels."
       ],
       "requirement_ids": [
-        "R-SOURCE-SPECIFIC-CONTENT",
-        "R-PLOT-SEMANTICS",
-        "R-DECK-COHERENCE",
-        "R-NO-INTERNAL-LEAKS",
-        "R-CUHK-IDENTITY"
+        "source_specific_content",
+        "native_plots_semantically_correct",
+        "exact_cuhk_beamer_identity_visible"
       ],
-      "summary": "Coherent negative-evidence slide with a readable native chart, but blocked by missing visible CUHK identity."
+      "summary": "The negative-result evidence is concrete and interpretable, but visible CUHK identity is missing."
     },
     {
       "decision": "BLOCKED",
       "item_id": "slide_6_medical_image_comparison",
       "observations": [
-        "The slide uses same-case Input, GT, Prediction, and Error image panels, a highlighted ROI, zoom crops, and a TP/FP/FN legend; it is not a placeholder or repeated generic card.",
-        "The Error panel/crop show red and orange markings, but the corresponding prediction view does not visibly make the predicted lesion overlay clear; the red-FP/orange-FN mapping is therefore difficult to verify from the pixels.",
-        "No prohibited internal/process text is visible.",
-        "No explicit CUHK name, crest, logo, or other exact CUHK identifier is visible."
+        "The same-case sequence is visibly labeled Input, GT, Prediction, and Error, with a highlighted ROI and corresponding zoom crops.",
+        "The TP/FP/FN overlay legend is adjacent to the error visualization and uses distinct colors.",
+        "No visible CUHK institutional identity appears in the rendered pixels."
       ],
       "requirement_ids": [
-        "R-SOURCE-SPECIFIC-CONTENT",
-        "R-MEDICAL-SEMANTICS",
-        "R-NO-INTERNAL-LEAKS",
-        "R-CUHK-IDENTITY"
+        "source_specific_content",
+        "medical_images_semantically_correct",
+        "exact_cuhk_beamer_identity_visible"
       ],
-      "summary": "Uses substantive medical imagery and a linked ROI, but the error-mask semantics are ambiguous and required CUHK identity is absent."
+      "summary": "The medical-image comparison is semantically organized and case-specific, but lacks visible CUHK identity."
     },
     {
       "decision": "BLOCKED",
       "item_id": "slide_7_next_experiment",
       "observations": [
-        "The page presents a concrete next-experiment chain from high-ICC/G=8 failure evidence to sampling choices, comparator arms, and a go/no-go rule.",
-        "It closes the research-update narrative by tying the next test to the preceding coverage failure.",
-        "No prohibited internal/process text is visible.",
-        "No explicit CUHK name, crest, logo, or other exact CUHK identifier is visible."
+        "The page uses a connected progression from failure evidence through sampling choices and comparator arms to a go/no-go decision rule.",
+        "Its text links the planned experiment to the earlier coverage failure, supporting a coherent research-update narrative.",
+        "No visible CUHK institutional identity appears in the rendered pixels."
       ],
       "requirement_ids": [
-        "R-SOURCE-SPECIFIC-CONTENT",
-        "R-DECK-COHERENCE",
-        "R-NO-TEMPLATE-REPETITION",
-        "R-NO-INTERNAL-LEAKS",
-        "R-CUHK-IDENTITY"
+        "source_specific_content",
+        "coherent_research_update",
+        "exact_cuhk_beamer_identity_visible"
       ],
-      "summary": "Specific and coherent continuation of the research narrative, but blocked by missing visible CUHK identity."
+      "summary": "The next-experiment page is content-specific and connected to prior findings, but the CUHK identity requirement is unmet."
     }
   ],
   "non_blocking_notes": [
-    "The deck uses varied page forms—equation, multi-panel plot, process diagram, bar chart, medical-image comparison, and decision workflow—and reads as a connected research update rather than disconnected template pages.",
-    "Slides 2–7 visibly use a consistent section-navigation treatment and slide numbering, supporting deck-level continuity."
+    "The section-progress header and page numbering consistently connect the six pages as one research update rather than disconnected benchmark pages.",
+    "No audience-facing RRL, GSC, SRC, QA, provenance, workflow, repository-path, run-ID, or implementation-language text is visible.",
+    "The pages use varied structures—equation, multi-panel plot, process schematic, bar chart, image comparison, and decision flow—rather than a repeated generic-card template."
   ],
   "overall_decision": "BLOCKED",
   "prompt_version": "ai-bridge.visual-review.v1",
