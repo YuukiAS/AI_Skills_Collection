@@ -1,0 +1,184 @@
+{
+  "blocking_findings": [],
+  "created_at": "2026-08-27T06:52:52Z",
+  "evidence_id": "visual-review-030_stage3_visual_recovery-a0161cdd5953",
+  "images": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-2.png",
+      "sha256": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491"
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-3.png",
+      "sha256": "826c92ebcafe16bec41fa08357b7734360ada9295b547e2c99259b793e8a25d4"
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-4.png",
+      "sha256": "3d421cdcd5b9eb8f2bf407bbb15947a501811aa37fdd3d9a5a81d1278d9ca671"
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-5.png",
+      "sha256": "ac54cbb287a3208b5a36587cf393936aeb140a5388915784b63d8beb880aac6a"
+    },
+    {
+      "logical_id": "slide_6_medical_image_comparison",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-6.png",
+      "sha256": "f7aebcb3a9af980e4f64817ccd86003db7bcd03d5d812a638477ed2eb3fcad55"
+    },
+    {
+      "logical_id": "slide_7_next_experiment",
+      "mime_type": "image/png",
+      "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-7.png",
+      "sha256": "e4578e43331fa076a8ed65bba4492e076bd3bc1fee1b9b955cd1691ad4a6a63d"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "build_manifest": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/BUILD_MANIFEST.json",
+      "build_manifest_sha256": "b583a95b5809dada16a320682fda3776b26c39ec48174da375aab12423cddc41",
+      "dominant_object_by_logical_id": {
+        "slide_2_statistical_model": "native_latex_math",
+        "slide_3_real_data_application": "presentation_native_coverage_figure",
+        "slide_4_experiment_design": "scientific_relation_diagram",
+        "slide_5_negative_result": "negative_evidence_plot",
+        "slide_6_medical_image_comparison": "same_case_medical_panels",
+        "slide_7_next_experiment": "next_experiment_reasoning"
+      },
+      "implementation_commit": "7b731bca03f0fd9819fa5da54f8590a6c4559245",
+      "page_job_by_logical_id": {
+        "slide_2_statistical_model": "STATISTICAL_MODEL",
+        "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+        "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+        "slide_5_negative_result": "NEGATIVE_RESULT",
+        "slide_6_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON",
+        "slide_7_next_experiment": "NEXT_EXPERIMENT"
+      },
+      "pdf_sha256": "1576303dc729ec41fe1eb57c8f631d43dbd122b292def8a8f2f58ca546833414",
+      "rendered_png_sha256_by_logical_id": {
+        "slide_2_statistical_model": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491",
+        "slide_3_real_data_application": "826c92ebcafe16bec41fa08357b7734360ada9295b547e2c99259b793e8a25d4",
+        "slide_4_experiment_design": "3d421cdcd5b9eb8f2bf407bbb15947a501811aa37fdd3d9a5a81d1278d9ca671",
+        "slide_5_negative_result": "ac54cbb287a3208b5a36587cf393936aeb140a5388915784b63d8beb880aac6a",
+        "slide_6_medical_image_comparison": "f7aebcb3a9af980e4f64817ccd86003db7bcd03d5d812a638477ed2eb3fcad55",
+        "slide_7_next_experiment": "e4578e43331fa076a8ed65bba4492e076bd3bc1fee1b9b955cd1691ad4a6a63d"
+      },
+      "selected_gold_id_by_logical_id": {
+        "slide_2_statistical_model": "GSC-016",
+        "slide_3_real_data_application": "GSC-014",
+        "slide_4_experiment_design": "GSC-004",
+        "slide_5_negative_result": "GSC-012",
+        "slide_6_medical_image_comparison": "GSC-008",
+        "slide_7_next_experiment": "GSC-018"
+      },
+      "task_key": "030_stage3_visual_recovery"
+    },
+    "manifest_sha256": "a0161cdd59537217c1f26a909bdd2c85f2816087ed4c2e14cc646bbc0e1c6901",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "You are reviewing rendered pixels from the Stage 3 exact-CUHK scientific layout integration deck. Judge each content page independently at item/page level. PASS for an item only if the visible page reaches a mature doctoral research-group meeting or strong conference-talk bar for its page job. Check that the CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math is genuinely typeset rather than source-like text; result figures use readable native axes, ticks, facets, method legend, nominal line, and callout; experiment design shows typed hierarchy, DGP factors, procedures, endpoints, and directional scientific relations; medical comparison uses same-case ROI crop/zoom imagery with adjacent TP/FP/FN legend; discussion/next-experiment content shows evidence-to-decision research reasoning rather than generic future-work boxes. Mark REVISE for any page that looks like a generic card/dashboard/box-arrow fixture, has internal provenance or QA language, has source-like math, hides the evidence in a tiny figure, clips content, uses meaningless whitespace, or repeats one template face without scientific specificity. Top-level PASS means all six content items pass; top-level REVISE if any item has a blocking visual maturity issue. Do not infer quality from filenames, hashes, metadata, or presumed provenance; inspect the actual pixels.",
+      "source_contracts": [
+        "Stage 2 gold/reference pixels are evidence only and are not runtime assets.",
+        "This is a Stage 3 engineering integration deck, not a final real-paper holdout."
+      ]
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "PASS",
+      "item_id": "slide_2_statistical_model",
+      "observations": [
+        "Purple navigation band and consistent academic slide styling are visible.",
+        "The centered mixed-effects model is genuinely typeset, large, and projection-readable.",
+        "The accompanying ICC relation is typeset and directly explains the model implication."
+      ],
+      "requirement_ids": [
+        "STATISTICAL_MODEL"
+      ],
+      "summary": "A clean model page with the mathematical object as the dominant visible evidence."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_3_real_data_application",
+      "observations": [
+        "The coverage figure has three readable G facets, native axes and ticks, a labeled 0.95 nominal line, two method series, and a method key.",
+        "The small-G callout directly points to the cluster-robust estimate.",
+        "Captions and takeaway text explain the figure without obscuring it."
+      ],
+      "requirement_ids": [
+        "REAL_DATA_APPLICATION"
+      ],
+      "summary": "A readable multi-facet result figure with visible comparison, reference line, and interpretation."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_4_experiment_design",
+      "observations": [
+        "The page visibly sequences DGP stress factors, nested center hierarchy, interval procedures, and endpoints with directional connectors.",
+        "DGP factors include centers, ICC values, and cluster balance; the hierarchy and repeated-replicate procedure are explicitly shown.",
+        "Endpoint labels cover coverage target, interval width, and treatment-effect bias."
+      ],
+      "requirement_ids": [
+        "EXPERIMENT_DESIGN"
+      ],
+      "summary": "The experiment design is scientifically specific and visibly encodes the generation-to-estimation-to-evaluation relation."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_5_negative_result",
+      "observations": [
+        "The negative-evidence bar chart has native y-axis ticks, method colors, error bars, labeled values, and a visible 0.95 target line.",
+        "The high-ICC cluster-robust result is explicitly annotated as still below nominal.",
+        "Adjacent prose states the failure implication and names the next comparison procedures."
+      ],
+      "requirement_ids": [
+        "NEGATIVE_RESULT"
+      ],
+      "summary": "A clear failure-result page with interpretable evidence and an adjacent diagnostic conclusion."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_6_medical_image_comparison",
+      "observations": [
+        "Input, GT, Prediction, and Error panels visibly depict the same annular case.",
+        "The error panel contains a highlighted ROI, with a connector leading to same-case GT, prediction, and error zoom crops.",
+        "The adjacent overlay legend clearly identifies TP, FP, and FN colors."
+      ],
+      "requirement_ids": [
+        "MEDICAL_IMAGE_COMPARISON"
+      ],
+      "summary": "Same-case full panels, ROI zooms, and the TP/FP/FN legend make the segmentation error interpretable."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_7_next_experiment",
+      "observations": [
+        "The flow visibly connects observed high-ICC coverage shortfall to sampling manipulations, comparator arms, and a go/no-go rule.",
+        "Sampling alternatives and comparator methods are named rather than left as generic placeholders.",
+        "The decision criterion specifies coverage threshold and controlled-width condition, with a stated no-go stratification action."
+      ],
+      "requirement_ids": [
+        "NEXT_EXPERIMENT"
+      ],
+      "summary": "A concrete evidence-to-decision next-experiment plan rather than generic future-work content."
+    }
+  ],
+  "non_blocking_notes": [],
+  "overall_decision": "PASS",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "a0161cdd59537217c1f26a909bdd2c85f2816087ed4c2e14cc646bbc0e1c6901",
+  "review_kind": "030_stage3_visual_recovery-stage3-cuhk-scientific-layout-item-page-review",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "PASS",
+  "task_key": "030_stage3_visual_recovery",
+  "workflow_type": "reviewed_handoff"
+}
