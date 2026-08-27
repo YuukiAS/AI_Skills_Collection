@@ -15,10 +15,10 @@
   },
   "identity_bindings": {
     "task_key": "030_stage3_visual_recovery",
-    "implementation_commit": null,
+    "implementation_commit": "7b731bca03f0fd9819fa5da54f8590a6c4559245",
     "build_manifest": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/BUILD_MANIFEST.json",
-    "build_manifest_sha256": "aebdeab511dae5d72d33efc4affe0b696d1a7ebf3763e10c30abb0150c232e22",
-    "pdf_sha256": "4a723e4578645c61b15dd87a5e0ee0892773be8311fb20ce821a123ef6430b4d",
+    "build_manifest_sha256": "b583a95b5809dada16a320682fda3776b26c39ec48174da375aab12423cddc41",
+    "pdf_sha256": "1576303dc729ec41fe1eb57c8f631d43dbd122b292def8a8f2f58ca546833414",
     "page_job_by_logical_id": {
       "slide_2_statistical_model": "STATISTICAL_MODEL",
       "slide_3_real_data_application": "REAL_DATA_APPLICATION",
@@ -45,11 +45,11 @@
     },
     "rendered_png_sha256_by_logical_id": {
       "slide_2_statistical_model": "508d5842483139f703c646efdd1c117eed7323e8d5214c78c29302cf974ad491",
-      "slide_3_real_data_application": "0d6f29a79f6a369d8465699de03373057e97d47bb0f45467cf95ea32624bbffc",
+      "slide_3_real_data_application": "826c92ebcafe16bec41fa08357b7734360ada9295b547e2c99259b793e8a25d4",
       "slide_4_experiment_design": "3d421cdcd5b9eb8f2bf407bbb15947a501811aa37fdd3d9a5a81d1278d9ca671",
-      "slide_5_negative_result": "3ae702392aa81f62881f3d1533c269fe07ed99f0c9eb4e619d8338656cbca7e7",
+      "slide_5_negative_result": "ac54cbb287a3208b5a36587cf393936aeb140a5388915784b63d8beb880aac6a",
       "slide_6_medical_image_comparison": "f7aebcb3a9af980e4f64817ccd86003db7bcd03d5d812a638477ed2eb3fcad55",
-      "slide_7_next_experiment": "e083b8340a94f459e0796c035aba5c40e35f0a597b32bda892a45bc84c08f16b"
+      "slide_7_next_experiment": "e4578e43331fa076a8ed65bba4492e076bd3bc1fee1b9b955cd1691ad4a6a63d"
     }
   },
   "inputs": [
@@ -64,7 +64,7 @@
       "logical_id": "slide_3_real_data_application",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-3.png",
       "mime_type": "image/png",
-      "sha256": "0d6f29a79f6a369d8465699de03373057e97d47bb0f45467cf95ea32624bbffc",
+      "sha256": "826c92ebcafe16bec41fa08357b7734360ada9295b547e2c99259b793e8a25d4",
       "description": "Rendered exact-CUHK content page for REAL_DATA_APPLICATION with presentation_native_coverage_figure as the main scientific object."
     },
     {
@@ -78,7 +78,7 @@
       "logical_id": "slide_5_negative_result",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-5.png",
       "mime_type": "image/png",
-      "sha256": "3ae702392aa81f62881f3d1533c269fe07ed99f0c9eb4e619d8338656cbca7e7",
+      "sha256": "ac54cbb287a3208b5a36587cf393936aeb140a5388915784b63d8beb880aac6a",
       "description": "Rendered exact-CUHK content page for NEGATIVE_RESULT with negative_evidence_plot as the main scientific object."
     },
     {
@@ -92,7 +92,7 @@
       "logical_id": "slide_7_next_experiment",
       "path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/rendered/slide-7.png",
       "mime_type": "image/png",
-      "sha256": "e083b8340a94f459e0796c035aba5c40e35f0a597b32bda892a45bc84c08f16b",
+      "sha256": "e4578e43331fa076a8ed65bba4492e076bd3bc1fee1b9b955cd1691ad4a6a63d",
       "description": "Rendered exact-CUHK content page for NEXT_EXPERIMENT with next_experiment_reasoning as the main scientific object."
     }
   ]
