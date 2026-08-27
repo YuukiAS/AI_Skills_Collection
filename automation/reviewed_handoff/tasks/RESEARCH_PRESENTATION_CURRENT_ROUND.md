@@ -49,22 +49,16 @@ Stage 3 PASS 只说明成熟受约束科研布局可以在 exact CUHK content ar
 
 `031_research_presentation_one_call_production_entry`
 
-031 是 Stage 4 的第一项 bounded integration，只证明正常 `research-presentations` production route 能把用户提供的 public-safe engineering research input 一次性连接到：
+031 第一轮独立审核已完成，结论为 `REVISE`。主体 one-call production integration 已得到正向 evidence：普通 `research-presentations` file/path 入口可以完成 source ingestion / source-fidelity map -> storyline/page jobs -> normal gold retrieval -> Stage 3 executable layouts -> canonical CUHK `.tex + PDF` -> real render -> task-local visual-review handoff；runtime trace 也证明没有 benchmark-helper orchestration、force-id 或 score override。
 
-source ingestion / source-fidelity evidence map -> storyline/page jobs -> normal gold retrieval -> Stage 3 executable layouts -> canonical exact CUHK `.tex + PDF` -> real render -> task-local visual-review handoff。
+当前只保留两个冻结范围内的视觉 blocker：
 
-关键边界：
+1. source-side canonical CUHK provenance 成立，但 fresh rendered-pixel review 无法在六个 content pages 上识别出 canonical CUHK logo/identity；生成 build 的 canonical theme 本身声明每页 headline/logo，因此必须先解决 source contract 与实际 pixels 的不一致，而不是靠额外文字贴片伪造 identity；
+2. medical comparison 使用 same-case Input / GT / Prediction / Error + ROI zoom，但当前 Prediction view 没有让 prediction mask 与 Error panel 的 TP/FP/FN 颜色在像素上无歧义对应，属于 image semantic inspectability blocker。
 
-- 必须走 normal user-facing production entry，不得把 027/030 benchmark generator 当产品入口；
-- engineering regression input 只用于 Stage 4 集成证明，明确排除在 Stage 5 holdout 之外；
-- production code 不得硬编码该 fixture 的 title、notation、page sequence、gold IDs 或 layout；
-- 不允许 force-id / score override 绕过 Stage 2 compatibility；
-- 必须保存 source -> plan -> gold -> layout -> output runtime trace；
-- 必须真实使用 canonical exact CUHK source 并 compile/render；
-- 必须启用 031 task-local Visual Review contract；
-- 031 PASS 本身不自动等于 Stage 4 PASS。若 deck-rhythm review / bounded repair loop 尚未通过 normal production path 真实建立，Planner 将创建下一项有限 Stage 4 task，而不是降低合同。
+第一轮已接受并冻结保护：source-fidelity evidence map、正常 selector/recipe/layout consumption、canonical source copy/compile、real render/mechanical QA、anti-meta leakage、数学/结果图/实验设计/负结果/下一实验的 current page content，以及 031 明确不声称 Stage 4 PASS。
 
-当前 031 已 `PLAN_FROZEN`，下一步由现有 Reviewed Handoff watcher 交给 Codex Executor。
+下一步只允许 Codex 做上述两个最小修复，随后重新生成当前 task 的 `.tex + PDF + PNG`、真实 CI 与 fresh task-local Visual Review evidence。031 PASS 后仍不自动等于 Stage 4 PASS；若 deck-level rhythm review / bounded repair loop 尚未通过 normal production path 建立，Planner 将创建下一项有限 Stage 4 task。
 
 ## Standing workflow decisions
 
