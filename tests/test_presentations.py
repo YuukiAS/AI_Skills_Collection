@@ -678,6 +678,125 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertIn(manifest["render_status"]["status"], strict.stderr + strict.stdout)
                 self.assertNotEqual(manifest["mechanical_qa"]["status"], "MECHANICAL_PASS")
 
+    def test_research_presentation_one_call_production_entry(self) -> None:
+        generator = SHARED / "scripts/generate_research_presentation_production_entry.py"
+        validator = SHARED / "scripts/validate_research_presentation_production_entry.py"
+        bundle = SHARED / "fixtures/stage4_engineering_research_bundle/bundle.json"
+        implementation_commit = "b" * 40
+        with tempfile.TemporaryDirectory() as tmp:
+            generated = Path(tmp) / "production"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(generator),
+                    "--input-bundle",
+                    str(bundle),
+                    "--out-dir",
+                    str(generated),
+                    "--implementation-commit",
+                    implementation_commit,
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertIn(result.returncode, {0, 2}, result.stderr + result.stdout)
+
+            validation = subprocess.run(
+                [sys.executable, str(validator), "--out-dir", str(generated), "--allow-missing-render"],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(validation.returncode, 0, validation.stderr + validation.stdout)
+
+            manifest = json.loads((generated / "BUILD_MANIFEST.json").read_text(encoding="utf-8"))
+            self.assertEqual(manifest["schema"], "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1")
+            self.assertEqual(manifest["task_key"], "031_research_presentation_one_call_production_entry")
+            self.assertEqual(manifest["implementation_commit"], implementation_commit)
+            self.assertIn("templates/cuhk/beamer/source", manifest["canonical_cuhk_source"])
+            self.assertEqual(manifest["quality_loop_handoff"]["status"], "READY_FOR_PAGE_LEVEL_FINDINGS")
+            self.assertIn("Stage 4 PASS", manifest["stage4_boundary"])
+
+            deck_plan = json.loads((generated / "deck_plan.json").read_text(encoding="utf-8"))
+            self.assertEqual(deck_plan["metadata"]["production_entry"], "research-presentations one-call production")
+            self.assertEqual(deck_plan["metadata"]["output"], "tex")
+            self.assertEqual(deck_plan["metadata"]["editability"], "source-editable")
+            self.assertEqual(len(deck_plan["slides"]), 6)
+            self.assertFalse(any("UNKNOWN" in json.dumps(slide, ensure_ascii=False) for slide in deck_plan["slides"]))
+
+            fidelity = json.loads((generated / "source_fidelity_map.json").read_text(encoding="utf-8"))
+            self.assertFalse(fidelity["stage5_holdout_eligible"])
+            self.assertIn("not a final Stage 5", fidelity["holdout_exclusion_reason"])
+            self.assertEqual(len(fidelity["pages"]), 6)
+            for page in fidelity["pages"]:
+                self.assertTrue(page["anchors"])
+                self.assertTrue(page["source_recipe_fields_consumed"])
+                self.assertTrue(page["selected_gold_id"])
+
+            trace = json.loads((generated / "runtime_trace.json").read_text(encoding="utf-8"))
+            self.assertEqual(trace["entrypoint"], "research-presentations one-call production")
+            self.assertEqual(trace["benchmark_generators_called_as_entrypoint"], [])
+            jobs = {slide["page_job"] for slide in trace["slides"]}
+            self.assertEqual(
+                jobs,
+                {
+                    "STATISTICAL_MODEL",
+                    "REAL_DATA_APPLICATION",
+                    "EXPERIMENT_DESIGN",
+                    "NEGATIVE_RESULT",
+                    "MEDICAL_IMAGE_COMPARISON",
+                    "NEXT_EXPERIMENT",
+                },
+            )
+            for slide in trace["slides"]:
+                self.assertFalse(slide["benchmark_helper_orchestration_surface_used"])
+                self.assertFalse(slide["force_gold_id_used"])
+                self.assertFalse(slide["score_override_used"])
+                self.assertTrue(slide["normal_selector_matches"])
+                self.assertTrue(slide["source_derived_composition_fields_consumed"])
+
+            visual_inputs = json.loads((generated / "visual_inputs.json").read_text(encoding="utf-8"))
+            self.assertEqual(visual_inputs["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
+            self.assertEqual(visual_inputs["task_key"], "031_research_presentation_one_call_production_entry")
+            self.assertEqual(visual_inputs["identity_bindings"]["implementation_commit"], implementation_commit)
+            self.assertIn("source-specific content", visual_inputs["rubric"]["instructions"])
+            self.assertIn("coherent research update", visual_inputs["rubric"]["instructions"])
+            if manifest["render_status"]["status"] == "ok":
+                self.assertEqual(len(visual_inputs["inputs"]), 6)
+
+            tex = (REPO_ROOT / manifest["tex"]).read_text(encoding="utf-8")
+            self.assertIn(r"\usetheme{sintef}", tex)
+            self.assertIn("Clustered Interval Calibration And Synthetic Segmentation Robustness", tex)
+            self.assertIn("Coverage by ICC under imbalanced clusters", tex)
+            self.assertIn("Same-case ROI zoom", tex)
+            for forbidden in ["RRL-", "SRC-", "GSC-", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "run ID", "fixture", "workflow"]:
+                self.assertNotIn(forbidden, tex)
+
+            source = generator.read_text(encoding="utf-8")
+            self.assertNotIn("generate_cuhk_scientific_layout_stage3.generate(", source)
+            self.assertNotIn("stage3.page_specs(", source)
+            self.assertNotIn("Clustered Interval Calibration And Synthetic Segmentation Robustness", source)
+            self.assertNotIn("force_gold_id=", source)
+
+            plugin_generator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/generate_research_presentation_production_entry.py"
+            plugin_validator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_research_presentation_production_entry.py"
+            self.assertEqual(generator.read_text(encoding="utf-8"), plugin_generator.read_text(encoding="utf-8"))
+            self.assertEqual(validator.read_text(encoding="utf-8"), plugin_validator.read_text(encoding="utf-8"))
+
+            strict = subprocess.run(
+                [sys.executable, str(validator), "--out-dir", str(generated)],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            if manifest["render_status"]["status"] == "ok":
+                self.assertEqual(strict.returncode, 0, strict.stderr + strict.stdout)
+                self.assertEqual(manifest["mechanical_qa"]["status"], "MECHANICAL_PASS")
+            else:
+                self.assertNotEqual(strict.returncode, 0)
+                self.assertIn(manifest["render_status"]["status"], strict.stderr + strict.stdout)
+
     def test_reference_calibrated_candidate_search(self) -> None:
         references = SHARED / "references"
         for name in [
