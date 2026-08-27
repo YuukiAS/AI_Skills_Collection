@@ -6,7 +6,7 @@
   "max_review_rounds": 2,
   "plan_revision": 0,
   "max_plan_revisions": 1,
-  "base_commit": "f0a909dc75c5105aab745c425555a6061fa342d41",
+  "base_commit": "f0a909dc75c5105aab745673784d1c9ae3b3d261",
   "base_branch": "main",
   "implementation_commit": "7b731bca03f0fd9819fa5da54f8590a6c4559245",
   "ci_required": true,
