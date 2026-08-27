@@ -110,9 +110,13 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertTrue(path.exists(), path)
 
         text = (source / "main.tex").read_text(encoding="utf-8")
+        style_text = (source / "styles/beamerthemesintef.sty").read_text(encoding="utf-8")
         self.assertIn(r"\usetheme{sintef}", text)
         self.assertIn(r"\titlebackground*{assets/background}", text)
         self.assertIn(r"\usepackage{tcolorbox}", text)
+        self.assertIn(r"\setbeamertemplate{headline}", style_text)
+        self.assertIn(r"\includegraphics[height=4.0ex", style_text)
+        self.assertIn(r"\insertsectionnavigationhorizontal", style_text)
 
         tokens = json.loads((root / "design-tokens.json").read_text(encoding="utf-8"))
         self.assertEqual(tokens["slide"]["width_in"], 13.333)
@@ -579,8 +583,14 @@ class PresentationSharedTests(unittest.TestCase):
                     self.assertEqual(layout["executable_layout_family"], "same_case_medical_roi_zoom")
                     zoom = layout["job_specific_runtime_contract"]["same_case_roi_zoom"]
                     self.assertEqual(len(zoom["crop_records"]), 3)
+                    semantic_records = {Path(record["source_asset"]).stem: record for record in zoom["crop_records"]}
+                    self.assertEqual(semantic_records["failure_gt"]["visible_error_classes"], ["fn"])
+                    self.assertEqual(semantic_records["failure_pred"]["visible_error_classes"], ["fp"])
+                    self.assertEqual(sorted(semantic_records["failure_error"]["visible_error_classes"]), ["fn", "fp"])
                     for record in zoom["crop_records"]:
                         self.assertTrue(record["same_case_coordinate_space"])
+                        self.assertTrue(record["semantic_overlay"])
+                        self.assertTrue((generated / "cuhk_stage3_build" / record["display_asset"]).exists())
                         self.assertTrue((generated / "cuhk_stage3_build" / record["zoom_asset"]).exists())
                 if layout["page_job"] in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"}:
                     self.assertGreaterEqual(bbox["w"] * bbox["h"], 0.36)
@@ -755,6 +765,20 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertFalse(slide["score_override_used"])
                 self.assertTrue(slide["normal_selector_matches"])
                 self.assertTrue(slide["source_derived_composition_fields_consumed"])
+
+            layouts = json.loads((generated / "resolved_layouts.json").read_text(encoding="utf-8"))["layouts"]
+            medical_layout = next(layout for layout in layouts if layout["page_job"] == "MEDICAL_IMAGE_COMPARISON")
+            semantic_records = {
+                Path(record["source_asset"]).stem: record
+                for record in medical_layout["job_specific_runtime_contract"]["same_case_roi_zoom"]["crop_records"]
+            }
+            self.assertEqual(semantic_records["failure_gt"]["visible_error_classes"], ["fn"])
+            self.assertEqual(semantic_records["failure_pred"]["visible_error_classes"], ["fp"])
+            self.assertEqual(sorted(semantic_records["failure_error"]["visible_error_classes"]), ["fn", "fp"])
+            for record in semantic_records.values():
+                self.assertTrue(record["semantic_overlay"])
+                self.assertTrue((generated / "cuhk_production_build" / record["display_asset"]).exists())
+                self.assertTrue((generated / "cuhk_production_build" / record["zoom_asset"]).exists())
 
             visual_inputs = json.loads((generated / "visual_inputs.json").read_text(encoding="utf-8"))
             self.assertEqual(visual_inputs["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
@@ -1157,6 +1181,10 @@ class PresentationSharedTests(unittest.TestCase):
             (
                 SHARED / "scripts/validate_cuhk_scientific_layout_stage3.py",
                 REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_cuhk_scientific_layout_stage3.py",
+            ),
+            (
+                SHARED / "templates/cuhk/beamer/source/styles/beamerthemesintef.sty",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/templates/cuhk/beamer/source/styles/beamerthemesintef.sty",
             ),
         ]
         for source, mirror in mirrors:

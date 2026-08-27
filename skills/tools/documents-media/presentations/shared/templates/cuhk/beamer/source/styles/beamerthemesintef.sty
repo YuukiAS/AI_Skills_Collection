@@ -2,7 +2,7 @@
 %
 % Adapted by Andrea Gasparini, andrea@gasparini.cloud for
 % Sapienza presentations.
-% 
+%
 % Original template by Federico Zenith, federico.zenith@sintef.no.
 % Derived (through several iterations) from Håvard Berland's
 % beamerthementnu class.
@@ -79,7 +79,7 @@
 \newcommand{\@logo}{logo}
 
 % Set colours
-% NOTE! Beamer colors should be set in the preamble. It often works fine in the 
+% NOTE! Beamer colors should be set in the preamble. It often works fine in the
 %       document itself, but NOT for normal text foreground.
 %       \themecolor should only be called from the preamble.
 \newcommand{\themecolor}[1]{
@@ -161,15 +161,15 @@
   \vspace{22mm}
   \begin{beamercolorbox}[wd=0.78\textwidth,sep=12pt,leftskip=9mm]{title}%
     {\usebeamerfont{title}\inserttitle}
-  
+
     {\usebeamerfont{subtitle}\insertsubtitle}
 
     {\usebeamerfont{subtitle}\@courseLabel}
-    
+
     {\usebeamerfont{author}\usebeamercolor[fg]{author}\textbf{\insertauthor} \ifdefempty{\@IDnumber}{}{(\@IDnumber)}}
 
     \ifdefempty{\@supervisor}{}{Supervisor: \usebeamerfont{author}\usebeamercolor[fg]{author}\textbf{\@supervisor}}
-  
+
     {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate}
   \end{beamercolorbox}
 }
@@ -179,10 +179,10 @@
   \rule{0.56\paperwidth}{0pt}%
   \begin{tikzpicture}
     \begin{scope}
-      \clip (-0.1\paperwidth,-0.5\paperheight) -- 
-            ( 0.5\paperwidth,-0.5\paperheight) -- 
-            ( 0.5\paperwidth, 0.5\paperheight) -- 
-            ( 0.1\paperwidth, 0.5\paperheight) -- cycle; 
+      \clip (-0.1\paperwidth,-0.5\paperheight) --
+            ( 0.5\paperwidth,-0.5\paperheight) --
+            ( 0.5\paperwidth, 0.5\paperheight) --
+            ( 0.1\paperwidth, 0.5\paperheight) -- cycle;
       \node at (0.2\paperwidth,0) {%
         \includegraphics[height=\paperheight]{#1}%
       };
@@ -333,6 +333,16 @@
 \setbeamercolor{footline}{fg=maincolor,bg=white}
 \setbeamerfont{footline}{size=\scriptsize,series=\mdseries}
 \setbeamertemplate{navigation symbols}{}
+\setbeamercolor{section in head/foot}{fg=white,bg=maincolor}
+\setbeamercolor{subsection in head/foot}{fg=white,bg=maincolor}
+\setbeamertemplate{headline}{%
+  \leavevmode%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=4.4ex,dp=1.2ex,leftskip=0.10cm,rightskip=0.20cm]{section in head/foot}%
+    \raisebox{-1.10ex}{\includegraphics[height=4.0ex,trim=340 260 340 650,clip]{assets/logo_RGB}}%
+    \hspace{0.8em}%
+    \insertsectionnavigationhorizontal{0.87\paperwidth}{}{}%
+  \end{beamercolorbox}%
+}
 \setbeamertemplate{footline}{%
   \textcolor{maincolor}{\rule{\paperwidth}{0.65pt}}\par\nointerlineskip
   \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.1ex,leftskip=0.85cm,rightskip=0.45cm]{footline}%

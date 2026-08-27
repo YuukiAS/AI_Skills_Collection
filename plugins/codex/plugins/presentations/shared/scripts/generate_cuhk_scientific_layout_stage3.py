@@ -49,6 +49,11 @@ FORBIDDEN_AUDIENCE_TERMS = [
     "fixture",
     "workflow",
 ]
+MEDICAL_ERROR_COLORS = {
+    "tp": (0, 120, 112),
+    "fp": (205, 20, 20),
+    "fn": (225, 126, 0),
+}
 
 
 def stable_sha(payload: Any) -> str:
@@ -1120,31 +1125,112 @@ def detect_colored_roi(path: Path, *, pad: int = 42) -> dict[str, int]:
     return {"x": left, "y": top, "w": right - left, "h": bottom - top, "source_w": image.width, "source_h": image.height}
 
 
+def classify_medical_error_pixel(pixel: tuple[int, int, int]) -> str | None:
+    red, green, blue = pixel
+    if max(pixel) < 70 or max(pixel) - min(pixel) <= 18:
+        return None
+    if green > red + 18 and green > blue + 18:
+        return "tp"
+    if red > 95 and red > green + 18 and red > blue + 18:
+        if green >= 72 and blue <= 105 and red - green <= 88:
+            return "fn"
+        return "fp"
+    return None
+
+
+def classified_medical_error_points(error_image: Any, roi: dict[str, int]) -> dict[str, set[tuple[int, int]]]:
+    points: dict[str, set[tuple[int, int]]] = {"tp": set(), "fp": set(), "fn": set()}
+    for py in range(roi["y"], roi["y"] + roi["h"]):
+        for px in range(roi["x"], roi["x"] + roi["w"]):
+            label = classify_medical_error_pixel(error_image.getpixel((px, py)))
+            if label:
+                points[label].add((px, py))
+    return points
+
+
+def semantic_medical_overlay(source: Any, points: dict[str, set[tuple[int, int]]], visible_classes: set[str]) -> Any:
+    from PIL import Image
+
+    base = source.convert("RGBA")
+    overlay = Image.new("RGBA", base.size, (0, 0, 0, 0))
+    overlay_pixels = overlay.load()
+    radius = 3
+    for class_name in visible_classes:
+        color = MEDICAL_ERROR_COLORS[class_name]
+        for px, py in points[class_name]:
+            for dx in range(-radius, radius + 1):
+                for dy in range(-radius, radius + 1):
+                    if dx * dx + dy * dy > radius * radius:
+                        continue
+                    tx = px + dx
+                    ty = py + dy
+                    if 0 <= tx < source.width and 0 <= ty < source.height:
+                        overlay_pixels[tx, ty] = (*color, 218)
+    return Image.alpha_composite(base, overlay).convert("RGB")
+
+
+def build_medical_semantic_display_assets(spec: dict[str, Any], asset_dir: Path, asset_map: dict[str, str], roi: dict[str, int]) -> dict[str, dict[str, Any]]:
+    from PIL import Image
+
+    assets = spec.get("assets", [])
+    labels = [label.lower() for label in spec.get("panel_labels", [])]
+    by_label = dict(zip(labels, assets))
+    gt_raw = by_label.get("gt")
+    pred_raw = by_label.get("prediction")
+    error_raw = spec.get("roi_source_asset")
+    if not gt_raw or not pred_raw or not error_raw:
+        return {}
+    error_image = Image.open(REPO_ROOT / error_raw).convert("RGB")
+    points = classified_medical_error_points(error_image, roi)
+    display_specs = {
+        gt_raw: {"classes": {"tp", "fn"}, "role": "gt_with_overlap_and_missed_gt"},
+        pred_raw: {"classes": {"tp", "fp"}, "role": "prediction_with_overlap_and_prediction_only"},
+        error_raw: {"classes": {"tp", "fp", "fn"}, "role": "error_classification_overlay"},
+    }
+    display_records: dict[str, dict[str, Any]] = {}
+    for raw, contract in display_specs.items():
+        visible = {class_name for class_name in contract["classes"] if points[class_name]}
+        if not visible:
+            continue
+        source = Image.open(REPO_ROOT / raw).convert("RGB")
+        target = asset_dir / f"{Path(raw).stem}_semantic_overlay.png"
+        semantic_medical_overlay(source, points, visible).save(target)
+        asset_map[raw] = f"stage3_assets/{target.name}"
+        display_records[raw] = {
+            "display_asset": asset_map[raw],
+            "semantic_overlay": True,
+            "overlay_role": contract["role"],
+            "visible_error_classes": sorted(visible),
+        }
+    return display_records
+
+
 def crop_same_case_roi(spec: dict[str, Any], asset_dir: Path, asset_map: dict[str, str]) -> None:
     from PIL import Image
 
     roi_source = REPO_ROOT / spec["roi_source_asset"]
     roi = detect_colored_roi(roi_source)
+    display_records = build_medical_semantic_display_assets(spec, asset_dir, asset_map, roi)
     crop_records = []
     for raw in spec["roi_crop_assets"]:
-        source = REPO_ROOT / raw
-        target = asset_dir / f"{source.stem}_roi_zoom.png"
-        image = Image.open(source).convert("RGB")
+        display_source = asset_dir / Path(asset_map[raw]).name
+        target = asset_dir / f"{display_source.stem}_roi_zoom.png"
+        image = Image.open(display_source).convert("RGB")
         box = (roi["x"], roi["y"], roi["x"] + roi["w"], roi["y"] + roi["h"])
         resampling = getattr(getattr(Image, "Resampling", Image), "BICUBIC")
         image.crop(box).resize((320, 320), resampling).save(target)
         crop_key = f"{raw}#roi_zoom"
         asset_map[crop_key] = f"stage3_assets/{target.name}"
-        crop_records.append(
-            {
-                "source_asset": raw,
-                "zoom_asset": asset_map[crop_key],
-                "roi_source_asset": spec["roi_source_asset"],
-                "roi_xywh": {key: roi[key] for key in ["x", "y", "w", "h"]},
-                "source_image_size": {"w": roi["source_w"], "h": roi["source_h"]},
-                "same_case_coordinate_space": True,
-            }
-        )
+        crop_records.append({
+            "source_asset": raw,
+            "display_asset": asset_map[raw],
+            "zoom_asset": asset_map[crop_key],
+            "roi_source_asset": spec["roi_source_asset"],
+            "roi_xywh": {key: roi[key] for key in ["x", "y", "w", "h"]},
+            "source_image_size": {"w": roi["source_w"], "h": roi["source_h"]},
+            "same_case_coordinate_space": True,
+            **display_records.get(raw, {}),
+        })
     spec["same_case_roi_zoom"] = {
         "roi_source_asset": spec["roi_source_asset"],
         "roi_xywh": {key: roi[key] for key in ["x", "y", "w", "h"]},
