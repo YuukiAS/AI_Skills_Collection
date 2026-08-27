@@ -23,13 +23,21 @@ Scheduled GPT 的真实执行面是 GitHub connector，不是目标机器 shell�
 3. 最后写 `automation/reviewed_handoff/tasks/<task_key>/CURRENT.json`；
 4. 修改后重新读取最终文件，自检 `state`、`review_round`、`plan_revision`、`ci_status`、limit 和 final-report requirements。
 
+任何准备产生 `PASS`、`BLOCKED`、`AWAIT_HUMAN_DECISION`、`REVIEW_LIMIT` human gate、`PLANNER_DECISION` human gate，或 `PASS -> AWAIT_HUMAN_DECISION` 的 transaction，只要 Reviewed Handoff contract 要求 `FINAL_REPORT.md`，都必须先做 FINAL_REPORT preflight：
+
+1. 重新读取 `automation/reviewed_handoff/templates/FINAL_REPORT.md`，以运行时当前 template 为 source of truth，不允许凭记忆猜 headings；
+2. 写或更新 `results/<task_key>/FINAL_REPORT.md`；
+3. 重新读取刚写出的 `FINAL_REPORT.md`；
+4. 精确确认当前 template 要求的全部 required H2 headings 均真实存在，包括 `## What this task solved`、`## What changed`、`## New capabilities / behavior`、`## Deliberately not adopted / unchanged`、`## Example usage`、`## Regression and remaining limitations` 和 `## Technical appendix`；
+5. 只有 FINAL_REPORT preflight 通过后，才允许最后写 `CURRENT.json` 的 `PASS`、`BLOCKED` 或 terminal / human-gate transition。若 FINAL_REPORT 不满足当前 template，先修 report，不得写 terminal CURRENT。
+
 优先使用一个 Git commit 包含完整 transaction。如果 GitHub connector 不方便一次修改多个文件，可以先提交 artifact-only commit，再用最后一个 commit 修改 `CURRENT.json`。artifact-only commit 不代表新 workflow state；本地 watcher 只以 `CURRENT.json` 作为 routing source of truth。
 
 Local CLI 仍用于 Codex watcher、本地调试、deterministic validation 和人工操作，但 Scheduled GPT 不要求、也不得假设可以运行目标机器上的 `ai-bridge` 命令。
 
 ## NEEDS_GPT_PLANNER
 
-读取 REQUEST、当前 PLAN、RESULT/Reviewer finding 和真实 repository 状态。只允许一次最小 Plan revision，只解决 Executor 无法从原 Plan 安全推导的实质歧义。不要因为想到更好的架构而扩大 scope。修改 `PLAN.md` 后，在最后的 `CURRENT.json` transaction 中设置 `plan_revision += 1`、`state=PLAN_FROZEN` 和正确 `next_action`。若已达到 planner revision limit，或需要用户改变产品/科学语义，先写 `FINAL_REPORT.md` 解释需要用户决定的具体问题与已完成工作，再在最后的 `CURRENT.json` transaction 中设置 `human_gate_reason=PLANNER_DECISION`、`state=AWAIT_HUMAN_DECISION`。
+读取 REQUEST、当前 PLAN、RESULT/Reviewer finding 和真实 repository 状态。只允许一次最小 Plan revision，只解决 Executor 无法从原 Plan 安全推导的实质歧义。不要因为想到更好的架构而扩大 scope。修改 `PLAN.md` 后，在最后的 `CURRENT.json` transaction 中设置 `plan_revision += 1`、`state=PLAN_FROZEN` 和正确 `next_action`。若已达到 planner revision limit，或需要用户改变产品/科学语义，先写 `FINAL_REPORT.md` 解释需要用户决定的具体问题与已完成工作，并完成 FINAL_REPORT preflight，再在最后的 `CURRENT.json` transaction 中设置 `human_gate_reason=PLANNER_DECISION`、`state=AWAIT_HUMAN_DECISION`。
 
 ## WAITING_FOR_CI
 
@@ -64,9 +72,9 @@ Review 的唯一目标是判断当前实现是否满足冻结 Plan 且没有造�
 
 写 `REVIEW_<round>.md`，decision 只能是 `PASS`、`REVISE` 或 `BLOCKED`。
 
-- `PASS`：先写 `REVIEW_<round>.md` 和 `FINAL_REPORT.md`。若保持当前 state graph，需要先把 `CURRENT.state` 设为 `PASS`，再用下一次机械 `CURRENT.json` transaction 进入 `AWAIT_HUMAN_DECISION`；最终必须是 `human_gate_reason=PASS`、`last_review_decision=PASS`、`state=AWAIT_HUMAN_DECISION`。不要为了少一次 commit 改坏状态机。
+- `PASS`：先写 `REVIEW_<round>.md` 和 `FINAL_REPORT.md`，并完成 FINAL_REPORT preflight。若保持当前 state graph，需要先把 `CURRENT.state` 设为 `PASS`，再用下一次机械 `CURRENT.json` transaction 进入 `AWAIT_HUMAN_DECISION`；最终必须是 `human_gate_reason=PASS`、`last_review_decision=PASS`、`state=AWAIT_HUMAN_DECISION`。不要为了少一次 commit 改坏状态机。
 - 第一轮 `REVISE`：先写 `REVIEW_1.md`，最后写 `CURRENT.json`：`review_round=1`、`last_review_decision=REVISE`、`state=REVISE`。本地 Codex watcher 后续自动启动一次最小 repair。
-- 第二轮仍 `REVISE`：先写 `REVIEW_2.md` 和 `FINAL_REPORT.md`，最后写 `CURRENT.json`：`review_round=2`、`review_limit_reached=true`、`human_gate_reason=REVIEW_LIMIT`、`state=AWAIT_HUMAN_DECISION`；不得开启第三轮自动返修。
-- `BLOCKED`：先写 `FINAL_REPORT.md`，说明真实外部 blocker、已有成果和恢复方式，最后写 `CURRENT.json` 进入 `BLOCKED`。
+- 第二轮仍 `REVISE`：先写 `REVIEW_2.md` 和 `FINAL_REPORT.md`，并完成 FINAL_REPORT preflight，最后写 `CURRENT.json`：`review_round=2`、`review_limit_reached=true`、`human_gate_reason=REVIEW_LIMIT`、`state=AWAIT_HUMAN_DECISION`；不得开启第三轮自动返修。
+- `BLOCKED`：先写 `FINAL_REPORT.md`，说明真实外部 blocker、已有成果和恢复方式，并完成 FINAL_REPORT preflight，最后写 `CURRENT.json` 进入 `BLOCKED`。
 
 所有终态必须有 `FINAL_REPORT.md`。FINAL_REPORT 面向用户，不是 CI 日志。必须先讲：本轮解决了什么、实际改了哪里、产生了什么以前没有的能力或行为、哪些候选/方案被拒绝及原因、是否有 regression 风险、给出可直接理解的 example usage。技术 appendix 再列 commit、tests/CI 和 remaining limitations。
