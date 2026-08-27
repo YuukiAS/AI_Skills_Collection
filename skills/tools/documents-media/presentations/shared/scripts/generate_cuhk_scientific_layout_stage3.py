@@ -826,7 +826,7 @@ def emit_negative_evidence_plot(spec: dict[str, Any], layout: dict[str, Any], as
         )
     parts.extend(
         [
-            tex_node(plot_x - 0.066, plot_y - 0.030, 0.060, r"\scriptsize coverage", align="right"),
+            tex_node(plot_x - 0.072, plot_y + plot_h + 0.012, 0.066, r"\scriptsize coverage", align="right"),
             tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}"),
             tex_node(caption["x"], caption["y"], caption["w"], rf"\scriptsize {tex_escape(spec['caption'])}"),
         ]
