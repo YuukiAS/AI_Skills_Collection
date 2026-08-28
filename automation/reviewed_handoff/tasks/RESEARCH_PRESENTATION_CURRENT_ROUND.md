@@ -53,23 +53,37 @@ fresh Terra 对六个主要内容页全部 item-level `PASS`，并确认 coverag
 
 032 PASS 只表示 production storyline 已关闭；Stage 4 仍需完整 deck-level rhythm review 与 bounded quality-repair loop。
 
-### Active bounded task — 033 Deck Rhythm + Bounded Quality Loop
+### 033 Deck Rhythm + Bounded Quality Loop — review limit history
+
+`033_research_presentation_deck_rhythm_quality_loop` 已完成两轮独立审核并合法停在 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE`；不得创建 `REVIEW_3` 或改写成 PASS。
+
+033 已真实建立并保留以下共享生产能力：完整 deck contact sheet / sequence summary、deck-level reviewer-evidence consumer、受限 repair intent、automatic repair cycle 上限 1、unknown/unsafe finding fail-closed / no-winner，以及 task-local Visual Review 对 page/contact-sheet/build/quality-loop evidence 的绑定。它没有使用 Stage 5 holdout，也没有引入 033-only production generator。
+
+Review 1 的 clean-run contact-sheet manifest blocker 已局部修复，但第二轮真实 `Codex Marketplace` CI 再次失败并把剩余问题收敛为一个 evidence-identity 语义缺口：
+
+- GitHub runner 无真实 PNG render 时，`rendered_page_sha256` 合法为空，但 clean regression 仍无条件把它当成 64-char pixel SHA；
+- deterministic `ADJUST_TRANSITION_CUE` repair 已真实改变 production `deck_plan` 与 `main.tex`，但当前 `deck_identity_sha256` 主要绑定 page-order / pixel SHA / contact-sheet SHA 等字段；在 no-render runner 中 pixel SHA 都不存在，导致 initial 与 repaired identity 相同，无法证明 actual render input 已改变。
+
+当前 033 visual-review 目录没有 fresh `VISUAL_REVIEW.json`。对应 Visual Review workflow 的 top-level success 不能替代 deck/contact-sheet item-level judgement，因此 033 没有进入视觉质量 PASS。
+
+### Active bounded recovery — 034 Render Identity CI Recovery
 
 当前 active task：
 
-`033_research_presentation_deck_rhythm_quality_loop`
+`034_research_presentation_render_identity_ci_recovery`
 
-033 已冻结 Plan，下一步交给 Codex Executor。它只关闭 Stage 4 最后剩余的工程合同：
+034 是 033 review-limit 后按 Quality-Preserving Continuation Policy 自动创建的最小 recovery；不需要用户决定，也不降低任何质量门槛。它使用与 blocker 对应的新有限机制，而不是继续逐项放宽 validator/test：
 
-- normal production render 后生成完整 sequence/contact-sheet 级 deck evidence；
-- task-local Terra 除逐页审查外，必须对完整 deck 的信息密度、重复构图、过密/过空、结果->失败->下一实验节奏、workstream transition 与整体成熟度给出独立 judgement；
-- shared quality-loop consumer 将真实 blocker 映射到有限、source-faithful repair intent；
-- automatic repair cycle 上限固定为 1；repair 后仍失败或 finding 无安全 mapping 时必须 `NO_WINNER / FAIL`，不得无限重试或强制选垃圾结果；
-- clean deck 无 blocker时直接 `READY_TO_DELIVER`，不做无意义返修；
-- 保留 source fidelity、032 storyline、normal gold/recipe/layout、exact CUHK identity、medical semantics 与 anti-meta leakage；
-- 使用当前 engineering bundle 做 Stage 4 工程回归，不使用 Stage 5 holdout。
+- 明确区分始终存在的 **render-input / production-representation identity** 与只有真实渲染成功后才存在的 **rendered-pixel identity**；
+- render-input identity 必须直接绑定本次实际生成的 `main.tex`、`scientific_layouts.tex` 和必要 scientific asset SHA，因此即使 CI 没有完整 TeX/PNG 栈也能审计“送去渲染的东西是否发生变化”；
+- no-render path 不得伪造 page/contact-sheet pixel SHA，而要 machine-readable 地标记 pixel evidence unavailable；
+- real-render path 继续严格核对真实 per-page PNG SHA、contact-sheet SHA 和 task-local visual manifest binding；
+- deterministic transition repair 前后 render-input identity 必须不同，并保留 regression 对实际 `deck_plan` / `main.tex` 变化的直接检查；
+- 033 已有 contact sheet、deck-level rubric、一次 repair budget、fail-closed/no-winner、source fidelity、032 storyline、gold/layout、CUHK identity 与 medical semantics 全部冻结保护。
 
-033 独立 PASS 后，Planner 才可判断 Stage 4 是否整体首次 PASS。若 Stage 4 整体 PASS，应发送一次 Stage 4 旁路 notifier，并随后创建 Stage 5 的真实双-paper holdout bounded task；不得跳过 Stage 5 最终用户人工门。
+034 必须先通过修复后的 targeted/full regression 与真实 GitHub CI；之后再按现有 task-local Visual Review contract等待 fresh deck/contact-sheet item-level evidence。缺 visual evidence 时只等待，不消耗 review round。
+
+034 独立 PASS 后，Planner 才可重新判断 Stage 4 是否整体首次 PASS。若 Stage 4 整体 PASS，应发送一次 Stage 4 旁路 notifier，并随后创建 Stage 5 的真实双-paper holdout bounded task；不得跳过 Stage 5 最终用户人工门。
 
 ## Standing workflow decisions
 
