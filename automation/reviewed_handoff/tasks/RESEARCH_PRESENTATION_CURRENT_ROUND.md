@@ -28,37 +28,47 @@ Stage 3 已首次整体 PASS。
 
 027 第二轮达到 review limit 后保留历史 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE`，没有伪造第三轮。028 独立关闭旧 visual dispatch gap；029 独立完成 task-local Visual Review consumer adaptation，使 push-mode resolver 可以按当前 task identity 自动发现唯一待审视觉任务。
 
-质量保持 recovery `030_stage3_visual_recovery` 在第二轮独立审核中 PASS，真实 CI 与 task-local `gpt-5.6-terra` evidence 均绑定当前 implementation identity。六个主要内容页全部达到 item/page-level mature research-group-meeting / strong conference-talk bar：
-
-- statistical model：native LaTeX 数学为主视觉；
-- quantitative result：presentation-native axes/ticks/facets/method mapping/nominal line/callout 可投影阅读；
-- experiment design：DGP factors、center/subject hierarchy、procedures 与 endpoints 通过 typed scientific relations 表达；
-- negative result：coverage scale、target、uncertainty 与 failure conclusion 完整；
-- medical comparison：same-case full panels + real ROI crop/zoom + adjacent TP/FP/FN legend；
-- next experiment：normal `GSC-018` compatible path 形成 evidence -> manipulation/comparator -> endpoint -> go/no-go decision reasoning。
-
-030 同时真实证明 CI PASS 后，029 的 task-local push resolver 可自动触发 GitHub Actions secret 路径并写回 fresh Visual Review evidence，不再需要人为 `workflow_dispatch` recovery。
+质量保持 recovery `030_stage3_visual_recovery` 在第二轮独立审核中 PASS，真实 CI 与 task-local `gpt-5.6-terra` evidence 均绑定当前 implementation identity。六个主要内容页全部达到 item/page-level mature research-group-meeting / strong conference-talk bar：statistical model、quantitative result、experiment design、negative result、medical comparison、next experiment。
 
 Stage 3 PASS 只说明成熟受约束科研布局可以在 exact CUHK content area 中执行；它不等于普通用户的一次调用已经走完整生产链，也不等于最终真实 paper holdout 通过。
 
 ## Stage 4 — active
 
-### Active bounded task — 031 One-Call Production Entry
+### 031 One-Call Production Entry — review limit history
+
+`031_research_presentation_one_call_production_entry` 已完成两轮独立审核并合法停在 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE`；不得创建 `REVIEW_3` 或改写成 PASS。
+
+031 已真实建立并通过以下 production integration 能力：普通 `research-presentations` file/path entry 可以完成 source ingestion / source-fidelity map -> storyline/page jobs -> normal gold retrieval -> Stage 3 executable layouts -> canonical CUHK `.tex + PDF` -> real render -> task-local visual-review handoff；runtime trace 没有 benchmark-helper orchestration、force-id 或 score override。
+
+第一轮两个视觉 blocker 在 repair implementation `11509b5e2bf7959433f1616c1d4ad77f77f4000e` 中已关闭：
+
+- canonical CUHK crest / purple navigation identity 已在六张真实 content-page pixels 中可见；
+- medical comparison 的 GT / Prediction / Error full panels 与 ROI zoom 已使用同病例、同 ROI 的可检查 TP/FP/FN semantic overlays。
+
+真实 repair CI 已通过；fresh task-local Terra 对五页给出 item-level PASS，医学页内部 image semantics 也通过。
+
+031 第二轮唯一剩余 blocker 是 deck-level storyline coherence：当前 engineering bundle 包含 clustered interval-calibration 与 synthetic segmentation-robustness 两个独立 workstream，但 normal production ordering 将 medical page 插在 coverage failure 与其 next experiment 之间，且没有足够强的 workstream transition。source 不支持把两者虚构为同一因果故事，因此必须通过 production storyline grouping 修复，而不是修改页面科学内容。
+
+### Active bounded recovery — 032 Storyline Coherence Recovery
 
 当前 active task：
 
-`031_research_presentation_one_call_production_entry`
+`032_research_presentation_storyline_coherence_recovery`
 
-031 第一轮独立审核已完成，结论为 `REVISE`。主体 one-call production integration 已得到正向 evidence：普通 `research-presentations` file/path 入口可以完成 source ingestion / source-fidelity map -> storyline/page jobs -> normal gold retrieval -> Stage 3 executable layouts -> canonical CUHK `.tex + PDF` -> real render -> task-local visual-review handoff；runtime trace 也证明没有 benchmark-helper orchestration、force-id 或 score override。
+032 是 Program Goal Quality-Preserving Continuation Policy 下的自动 bounded recovery，只关闭 031 的 storyline blocker，不降低 deck coherence bar，也不重做 031 已通过部分。
 
-当前只保留两个冻结范围内的视觉 blocker：
+冻结机制：
 
-1. source-side canonical CUHK provenance 成立，但 fresh rendered-pixel review 无法在六个 content pages 上识别出 canonical CUHK logo/identity；生成 build 的 canonical theme 本身声明每页 headline/logo，因此必须先解决 source contract 与实际 pixels 的不一致，而不是靠额外文字贴片伪造 identity；
-2. medical comparison 使用 same-case Input / GT / Prediction / Error + ROI zoom，但当前 Prediction view 没有让 prediction mask 与 Error panel 的 TP/FP/FN 颜色在像素上无歧义对应，属于 image semantic inspectability blocker。
+- normal production path 增加 source-derived workstream grouping / ordering / transition contract；
+- 不 hardcode 当前 fixture 的页号、标题或 `GSC-*` ID；
+- 同一 workstream 的科研依赖链保持连续；
+- 对 source 没有科学关系的 workstream 不虚构因果桥；
+- 当前 regression 中 coverage 的 `Model -> Results -> Design -> Negative -> Next Experiment` 连续，segmentation comparison 作为清楚标识的第二 workstream；
+- workstream 切换必须有强于现有顶部 miniframe 的 audience-facing transition cue；
+- 保留 normal one-call entry、source fidelity、gold/recipe/layout consumption、exact CUHK identity、medical semantics 与 anti-meta leakage；
+- 重新生成真实 `.tex + PDF + PNG`、真实 CI 与 032 task-local fresh Visual Review evidence。
 
-第一轮已接受并冻结保护：source-fidelity evidence map、正常 selector/recipe/layout consumption、canonical source copy/compile、real render/mechanical QA、anti-meta leakage、数学/结果图/实验设计/负结果/下一实验的 current page content，以及 031 明确不声称 Stage 4 PASS。
-
-下一步只允许 Codex 做上述两个最小修复，随后重新生成当前 task 的 `.tex + PDF + PNG`、真实 CI 与 fresh task-local Visual Review evidence。031 PASS 后仍不自动等于 Stage 4 PASS；若 deck-level rhythm review / bounded repair loop 尚未通过 normal production path 建立，Planner 将创建下一项有限 Stage 4 task。
+032 PASS 只表示 031 的 production-storyline gap 被关闭。完整 Stage 4 仍需后续独立 bounded task 建立 deck-level rhythm review 与 bounded quality-repair loop；不得因为 032 PASS 提前进入 Stage 5。
 
 ## Standing workflow decisions
 
