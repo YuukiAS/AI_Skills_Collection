@@ -973,6 +973,13 @@ def emit_flow(spec: dict[str, Any], layout: dict[str, Any]) -> str:
 
 def emit_experiment_design(spec: dict[str, Any], layout: dict[str, Any]) -> str:
     primary = layout["resolved_primary_object_geometry"]
+    nodes = list(spec.get("nodes", []))
+    section_labels = [
+        nodes[0] if len(nodes) > 0 else "Design factors",
+        nodes[1] if len(nodes) > 1 else "Study hierarchy",
+        nodes[2] if len(nodes) > 2 else "Procedures",
+        nodes[3] if len(nodes) > 3 else "Endpoints",
+    ]
     x = primary["x"]
     y = primary["y"]
     w = primary["w"]
@@ -985,10 +992,10 @@ def emit_experiment_design(spec: dict[str, Any], layout: dict[str, Any]) -> str:
     top = y + 0.020
     center_y = y + h * 0.470
     parts = [
-        tex_node(factor_x, top, factor_w, r"\small\textbf{DGP stress grid}", align="left"),
-        tex_node(hierarchy_x - 0.040, top, 0.200, r"\small\textbf{Center hierarchy}", align="center"),
-        tex_node(proc_x - 0.022, top, 0.185, r"\small\textbf{Interval procedures}", align="center"),
-        tex_node(endpoint_x - 0.010, top, 0.175, r"\small\textbf{Endpoints}", align="center"),
+        tex_node(factor_x, top, factor_w, rf"\small\textbf{{{tex_escape(section_labels[0])}}}", align="left"),
+        tex_node(hierarchy_x - 0.040, top, 0.200, rf"\small\textbf{{{tex_escape(section_labels[1])}}}", align="center"),
+        tex_node(proc_x - 0.022, top, 0.185, rf"\small\textbf{{{tex_escape(section_labels[2])}}}", align="center"),
+        tex_node(endpoint_x - 0.010, top, 0.175, rf"\small\textbf{{{tex_escape(section_labels[3])}}}", align="center"),
     ]
     factor_rows = spread_positions(y + h * 0.185, y + h * 0.560, len(spec["design_factors"]))
     for factor, fy in zip(spec["design_factors"], factor_rows):
@@ -1002,7 +1009,7 @@ def emit_experiment_design(spec: dict[str, Any], layout: dict[str, Any]) -> str:
         [
             rf"\draw[line width=1.0pt,draw=maincolor!60] ({hierarchy_x+0.048:.4f},{center_y-0.094:.4f}) ellipse (0.068 and 0.090);",
             rf"\draw[line width=1.0pt,draw=maincolor!60] ({hierarchy_x+0.048:.4f},{center_y+0.094:.4f}) ellipse (0.068 and 0.090);",
-            tex_node(hierarchy_x - 0.038, center_y + 0.205, 0.185, r"\footnotesize Subject records nested inside each center; 400 reps per cell", align="center"),
+            tex_node(hierarchy_x - 0.038, center_y + 0.205, 0.185, rf"\footnotesize {tex_escape(section_labels[1])}", align="center"),
         ]
     )
     for base_y in [center_y - 0.094, center_y + 0.094]:
@@ -1032,6 +1039,8 @@ def emit_experiment_design(spec: dict[str, Any], layout: dict[str, Any]) -> str:
 
 def emit_next_experiment(spec: dict[str, Any], layout: dict[str, Any]) -> str:
     primary = layout["resolved_primary_object_geometry"]
+    nodes = list(spec.get("nodes", []))
+    evidence_label = nodes[0] if nodes else "Observed limit"
     x = primary["x"]
     y = primary["y"]
     w = primary["w"]
@@ -1047,7 +1056,7 @@ def emit_next_experiment(spec: dict[str, Any], layout: dict[str, Any]) -> str:
         rf"\draw[line width=1.35pt,draw=red!70!black] ({evidence_x:.4f},{mid_y+0.064:.4f}) -- ({evidence_x+0.198:.4f},{mid_y+0.064:.4f});",
         rf"\draw[line width=1.35pt,draw=orange!80!black] ({evidence_x:.4f},{mid_y+0.021:.4f}) -- ({evidence_x+0.198:.4f},{mid_y+0.021:.4f});",
         rf"\draw[line width=1.35pt,draw=teal!70!black] ({evidence_x:.4f},{mid_y-0.021:.4f}) -- ({evidence_x+0.198:.4f},{mid_y-0.021:.4f});",
-        tex_node(evidence_x + 0.010, mid_y + 0.088, 0.210, r"\footnotesize coverage shortfall at high ICC", align="left"),
+        tex_node(evidence_x + 0.010, mid_y + 0.088, 0.210, rf"\footnotesize {tex_escape(evidence_label)}", align="left"),
         tex_node(strategy_x, y + 0.020, 0.230, r"\small\textbf{Manipulate sampling}", align="center"),
     ]
     strategy_rows = spread_positions(y + h * 0.205, y + h * 0.575, len(spec["strategy_variation"]))

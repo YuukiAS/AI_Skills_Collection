@@ -123,7 +123,7 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False, task_key: str
             errors.append(f"{tex_path}: found non-left-to-right Stage 3 connector {leftward_midline_connectors[0]}")
         for required in [
             "Coverage by ICC under imbalanced clusters",
-            "Subject records nested inside each center",
+            "The connector direction encodes data generation before interval estimation",
             "Same-case ROI zoom",
             "Failure evidence",
             "Decision rule",

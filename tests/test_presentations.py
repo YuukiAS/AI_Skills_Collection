@@ -656,7 +656,7 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertIn(r"centers \(G=8,20,50\)", tex)
             self.assertIn(r"ICC \(\rho=0,.1,.3,.5\)", tex)
             self.assertIn("naive iid OLS z interval", tex)
-            self.assertIn("Subject records nested inside each center", tex)
+            self.assertIn("The connector direction encodes data generation before interval estimation", tex)
             self.assertNotIn("centers -> subjects", tex)
             self.assertIn("Coverage target 0.95", tex)
             self.assertIn(r"\scriptsize coverage", tex)
@@ -768,12 +768,27 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertGreater(float(x2), float(x1))
         experiment_tex = stage3.emit_flow(experiment_spec, stage3.resolve_layout(experiment_spec))
         self.assertIn("site count", experiment_tex)
+        self.assertIn("Nested samples", experiment_tex)
         self.assertIn("regularized estimator", experiment_tex)
         self.assertIn("bias check", experiment_tex)
         next_tex = stage3.emit_flow(next_spec, stage3.resolve_layout(next_spec))
         self.assertIn("unstable endpoint", next_tex)
         self.assertIn("stratified batch", next_tex)
         self.assertIn("resampling baseline", next_tex)
+        for unrelated_tex in [experiment_tex, next_tex]:
+            for fixture_only in [
+                "DGP stress grid",
+                "Center hierarchy",
+                "Interval procedures",
+                "Subject records nested inside each center",
+                "400 reps per cell",
+                "coverage shortfall at high ICC",
+                "G=8",
+                "ICC=.5",
+                "CR2",
+                "wild cluster bootstrap",
+            ]:
+                self.assertNotIn(fixture_only, unrelated_tex)
 
     def test_research_presentation_one_call_production_entry(self) -> None:
         generator = SHARED / "scripts/generate_research_presentation_production_entry.py"
