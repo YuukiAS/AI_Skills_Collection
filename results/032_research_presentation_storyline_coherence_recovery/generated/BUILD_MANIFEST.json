@@ -1,0 +1,107 @@
+{
+  "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1",
+  "task_key": "032_research_presentation_storyline_coherence_recovery",
+  "implementation_commit": "bbc71ae442940d2f43af954eee8f13b9e8648393",
+  "input_bundle": "skills/tools/documents-media/presentations/shared/fixtures/stage4_engineering_research_bundle/bundle.json",
+  "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
+  "canonical_files": {
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/background.png": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/background_negative.png": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/logo_RGB.png": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/logo_RGB_negative.png": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/bibliography.bib": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/main.tex": "a7c6826e94c6f08647200f3472381d882dd8bf405df42a68f5dc903a4010da07",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/beamerthemesintef.sty": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/sintefcolor.sty": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+  },
+  "build_workspace": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build",
+  "tex": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/main.tex",
+  "scientific_layout_include": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/scientific_layouts.tex",
+  "deck_plan": "results/032_research_presentation_storyline_coherence_recovery/generated/deck_plan.json",
+  "source_fidelity_map": "results/032_research_presentation_storyline_coherence_recovery/generated/source_fidelity_map.json",
+  "runtime_trace": "results/032_research_presentation_storyline_coherence_recovery/generated/runtime_trace.json",
+  "storyline_trace": "results/032_research_presentation_storyline_coherence_recovery/generated/storyline_trace.json",
+  "dependency_probe": "results/032_research_presentation_storyline_coherence_recovery/generated/dependency_probe.json",
+  "render_chinese_math_pdf_probe": "results/032_research_presentation_storyline_coherence_recovery/generated/render_chinese_math_pdf_probe.json",
+  "compile_status": {
+    "status": "COMPILED",
+    "engine": "xelatex",
+    "engine_path": "/home/yuukias/.TinyTeX/bin/x86_64-linux/xelatex",
+    "compile_passes": 2,
+    "fontconfig": {
+      "fontconfig_file": "/home/yuukias/AI_Skills_Collection/results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/fontconfig/fonts.conf",
+      "fontconfig_file_repo_path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/fontconfig/fonts.conf",
+      "font_cache_dir": "/tmp/fontconfig-cache-027",
+      "times_font_dir": "/home/yuukias/code/TRACE/presentations/group_meetings/2026-07-16/cat_trace_demo/fonts",
+      "times_font_dir_exists": true,
+      "times_font_files_present": true
+    },
+    "pdf": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/main.pdf",
+    "pdf_sha256": "85693ea7177146785a287bf4a47bcef8cfb62af236ca912ff31b9bf3ba9063eb",
+    "log": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/compile.log"
+  },
+  "render_status": {
+    "status": "ok",
+    "png_count": 7,
+    "rendered_png": [
+      {
+        "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-1.png",
+        "sha256": "6088f1dfdbacf71229ef1e98915ec6adc3fe30237d3e0fd16df2d23b7b688c32"
+      },
+      {
+        "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-2.png",
+        "sha256": "489c286b74f9b4cf0ea74338e0e0fb7dd0a6da1d8fdb9bb0f80583881a71aa0e"
+      },
+      {
+        "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-3.png",
+        "sha256": "4c609896aff98b3d8dc24941ace84690b9e858d370af330682500e735df6af2d"
+      },
+      {
+        "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-4.png",
+        "sha256": "e1775c71ddee184155cd69bc7c9858a5967be5c6a220cd0c6c25b33e372f69f1"
+      },
+      {
+        "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-5.png",
+        "sha256": "daf79c0f303860e8d4c01fe6bb810ef80a4f0d454bc681d100e017e02c45eb06"
+      },
+      {
+        "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-6.png",
+        "sha256": "0fc4574ecbb5deb5ffac2cecbddcdd66967e2301c3199a931ffe06507f1e95aa"
+      },
+      {
+        "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-7.png",
+        "sha256": "af5b29da99fe6aef8464023383e7634f0cc40f2df32ead582d584b96d5d9e000"
+      }
+    ]
+  },
+  "mechanical_qa": {
+    "status": "MECHANICAL_PASS",
+    "checks": {
+      "normal_research_presentations_entry": true,
+      "input_bundle_read_from_path": true,
+      "canonical_source_copied": true,
+      "scientific_layout_include_loaded": true,
+      "content_page_jobs": 6,
+      "rendered_pages_available": true
+    }
+  },
+  "quality_loop_handoff": {
+    "schema": "RESEARCH_PRESENTATION_STAGE4_QUALITY_HANDOFF_V1",
+    "status": "READY_FOR_PAGE_LEVEL_FINDINGS",
+    "visual_review_manifest": "results/032_research_presentation_storyline_coherence_recovery/visual_review/visual_inputs.json",
+    "visual_review_evidence": "results/032_research_presentation_storyline_coherence_recovery/visual_review/VISUAL_REVIEW.json",
+    "next_bounded_stage4_task": "deck-rhythm review and bounded visual repair loop"
+  },
+  "stage4_boundary": "This one-call production entry recovery does not claim Stage 4 PASS, PROGRAM_MATURE, or ONE_SHOT_QUALITY_PASS.",
+  "cleaned_latex_intermediates": [
+    "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/main.aux",
+    "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/main.nav",
+    "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/main.out",
+    "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/main.snm",
+    "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/main.toc"
+  ],
+  "normalized_generated_logs": [
+    "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/compile.log",
+    "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/main.log"
+  ]
+}

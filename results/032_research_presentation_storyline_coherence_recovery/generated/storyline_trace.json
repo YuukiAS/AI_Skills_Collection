@@ -1,0 +1,167 @@
+{
+  "schema": "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1",
+  "source_derivation": "workstream assignment uses page-job, evidence-board, source-anchor, source-path, and source-supported claim text; titles, page numbers, and gold IDs are not classification keys",
+  "cross_workstream_relation_policy": "do not infer causal bridges between distinct workstreams without explicit source support",
+  "workstreams": [
+    {
+      "workstream_id": "clustered_interval_calibration",
+      "label": "Clustered interval calibration",
+      "scope": "model, coverage evidence, failure mode, and next experiment",
+      "first_source_order": 1,
+      "page_jobs": [
+        "production_model",
+        "production_quantitative_result",
+        "production_experiment_design",
+        "production_negative_result",
+        "production_next_experiment"
+      ],
+      "workstream_order": 1,
+      "source_supported_cross_workstream_relation_to_previous": null,
+      "transition_label": "Clustered interval calibration"
+    },
+    {
+      "workstream_id": "segmentation_robustness",
+      "label": "Segmentation robustness",
+      "scope": "independent visual failure analysis",
+      "first_source_order": 5,
+      "page_jobs": [
+        "production_medical_comparison"
+      ],
+      "workstream_order": 2,
+      "source_supported_cross_workstream_relation_to_previous": false,
+      "transition_label": "Segmentation robustness: independent visual failure analysis",
+      "relation_to_previous": "independent workstream; no source-supported causal bridge is asserted"
+    }
+  ],
+  "page_assignments": [
+    {
+      "page_id": "production_model",
+      "page_job": "STATISTICAL_MODEL",
+      "original_order": 1,
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+      "assignment_basis": [
+        "source/evidence token: center",
+        "source/evidence token: clustered",
+        "source/evidence token: equations"
+      ],
+      "intra_workstream_sort_key": [
+        10,
+        1
+      ],
+      "storyline_order": 1,
+      "workstream_order": 1
+    },
+    {
+      "page_id": "production_quantitative_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "original_order": 2,
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+      "assignment_basis": [
+        "source/evidence token: center",
+        "source/evidence token: coverage",
+        "source/evidence token: icc",
+        "source/evidence token: interval",
+        "source/evidence token: quantitative_plots"
+      ],
+      "intra_workstream_sort_key": [
+        20,
+        2
+      ],
+      "storyline_order": 2,
+      "workstream_order": 1
+    },
+    {
+      "page_id": "production_experiment_design",
+      "page_job": "EXPERIMENT_DESIGN",
+      "original_order": 3,
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+      "assignment_basis": [
+        "source/evidence token: clustered",
+        "source/evidence token: coverage",
+        "source/evidence token: dgp",
+        "source/evidence token: interval"
+      ],
+      "intra_workstream_sort_key": [
+        30,
+        3
+      ],
+      "storyline_order": 3,
+      "workstream_order": 1
+    },
+    {
+      "page_id": "production_negative_result",
+      "page_job": "NEGATIVE_RESULT",
+      "original_order": 4,
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+      "assignment_basis": [
+        "source/evidence token: coverage",
+        "source/evidence token: failed_experiments",
+        "source/evidence token: finite-sample",
+        "source/evidence token: small-g"
+      ],
+      "intra_workstream_sort_key": [
+        40,
+        4
+      ],
+      "storyline_order": 4,
+      "workstream_order": 1
+    },
+    {
+      "page_id": "production_next_experiment",
+      "page_job": "NEXT_EXPERIMENT",
+      "original_order": 6,
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+      "assignment_basis": [
+        "source/evidence token: bootstrap",
+        "source/evidence token: cr2",
+        "source/evidence token: small-g"
+      ],
+      "intra_workstream_sort_key": [
+        50,
+        6
+      ],
+      "storyline_order": 5,
+      "workstream_order": 1
+    },
+    {
+      "page_id": "production_medical_comparison",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "original_order": 5,
+      "workstream_id": "segmentation_robustness",
+      "workstream_label": "Segmentation robustness",
+      "workstream_scope": "independent visual failure analysis",
+      "assignment_basis": [
+        "source/evidence token: error",
+        "source/evidence token: gt",
+        "source/evidence token: lesion",
+        "source/evidence token: medical",
+        "source/evidence token: medical_images",
+        "source/evidence token: prediction"
+      ],
+      "intra_workstream_sort_key": [
+        100,
+        5
+      ],
+      "storyline_order": 6,
+      "workstream_order": 2
+    }
+  ],
+  "storyline_order": [
+    "STATISTICAL_MODEL",
+    "REAL_DATA_APPLICATION",
+    "EXPERIMENT_DESIGN",
+    "NEGATIVE_RESULT",
+    "NEXT_EXPERIMENT",
+    "MEDICAL_IMAGE_COMPARISON"
+  ]
+}

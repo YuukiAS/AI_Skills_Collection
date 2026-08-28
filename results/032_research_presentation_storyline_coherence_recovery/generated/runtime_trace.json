@@ -1,0 +1,707 @@
+{
+  "schema": "RESEARCH_PRESENTATION_PRODUCTION_TRACE_V1",
+  "task_key": "032_research_presentation_storyline_coherence_recovery",
+  "entrypoint": "research-presentations one-call production",
+  "input_bundle": "skills/tools/documents-media/presentations/shared/fixtures/stage4_engineering_research_bundle/bundle.json",
+  "normal_skill_route": "research-presentations",
+  "storyline_trace": {
+    "schema": "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1",
+    "source_derivation": "workstream assignment uses page-job, evidence-board, source-anchor, source-path, and source-supported claim text; titles, page numbers, and gold IDs are not classification keys",
+    "cross_workstream_relation_policy": "do not infer causal bridges between distinct workstreams without explicit source support",
+    "workstreams": [
+      {
+        "workstream_id": "clustered_interval_calibration",
+        "label": "Clustered interval calibration",
+        "scope": "model, coverage evidence, failure mode, and next experiment",
+        "first_source_order": 1,
+        "page_jobs": [
+          "production_model",
+          "production_quantitative_result",
+          "production_experiment_design",
+          "production_negative_result",
+          "production_next_experiment"
+        ],
+        "workstream_order": 1,
+        "source_supported_cross_workstream_relation_to_previous": null,
+        "transition_label": "Clustered interval calibration"
+      },
+      {
+        "workstream_id": "segmentation_robustness",
+        "label": "Segmentation robustness",
+        "scope": "independent visual failure analysis",
+        "first_source_order": 5,
+        "page_jobs": [
+          "production_medical_comparison"
+        ],
+        "workstream_order": 2,
+        "source_supported_cross_workstream_relation_to_previous": false,
+        "transition_label": "Segmentation robustness: independent visual failure analysis",
+        "relation_to_previous": "independent workstream; no source-supported causal bridge is asserted"
+      }
+    ],
+    "page_assignments": [
+      {
+        "page_id": "production_model",
+        "page_job": "STATISTICAL_MODEL",
+        "original_order": 1,
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+        "assignment_basis": [
+          "source/evidence token: center",
+          "source/evidence token: clustered",
+          "source/evidence token: equations"
+        ],
+        "intra_workstream_sort_key": [
+          10,
+          1
+        ],
+        "storyline_order": 1,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "production_quantitative_result",
+        "page_job": "REAL_DATA_APPLICATION",
+        "original_order": 2,
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+        "assignment_basis": [
+          "source/evidence token: center",
+          "source/evidence token: coverage",
+          "source/evidence token: icc",
+          "source/evidence token: interval",
+          "source/evidence token: quantitative_plots"
+        ],
+        "intra_workstream_sort_key": [
+          20,
+          2
+        ],
+        "storyline_order": 2,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "production_experiment_design",
+        "page_job": "EXPERIMENT_DESIGN",
+        "original_order": 3,
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+        "assignment_basis": [
+          "source/evidence token: clustered",
+          "source/evidence token: coverage",
+          "source/evidence token: dgp",
+          "source/evidence token: interval"
+        ],
+        "intra_workstream_sort_key": [
+          30,
+          3
+        ],
+        "storyline_order": 3,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "production_negative_result",
+        "page_job": "NEGATIVE_RESULT",
+        "original_order": 4,
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+        "assignment_basis": [
+          "source/evidence token: coverage",
+          "source/evidence token: failed_experiments",
+          "source/evidence token: finite-sample",
+          "source/evidence token: small-g"
+        ],
+        "intra_workstream_sort_key": [
+          40,
+          4
+        ],
+        "storyline_order": 4,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "production_next_experiment",
+        "page_job": "NEXT_EXPERIMENT",
+        "original_order": 6,
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+        "assignment_basis": [
+          "source/evidence token: bootstrap",
+          "source/evidence token: cr2",
+          "source/evidence token: small-g"
+        ],
+        "intra_workstream_sort_key": [
+          50,
+          6
+        ],
+        "storyline_order": 5,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "production_medical_comparison",
+        "page_job": "MEDICAL_IMAGE_COMPARISON",
+        "original_order": 5,
+        "workstream_id": "segmentation_robustness",
+        "workstream_label": "Segmentation robustness",
+        "workstream_scope": "independent visual failure analysis",
+        "assignment_basis": [
+          "source/evidence token: error",
+          "source/evidence token: gt",
+          "source/evidence token: lesion",
+          "source/evidence token: medical",
+          "source/evidence token: medical_images",
+          "source/evidence token: prediction"
+        ],
+        "intra_workstream_sort_key": [
+          100,
+          5
+        ],
+        "storyline_order": 6,
+        "workstream_order": 2
+      }
+    ],
+    "storyline_order": [
+      "STATISTICAL_MODEL",
+      "REAL_DATA_APPLICATION",
+      "EXPERIMENT_DESIGN",
+      "NEGATIVE_RESULT",
+      "NEXT_EXPERIMENT",
+      "MEDICAL_IMAGE_COMPARISON"
+    ]
+  },
+  "benchmark_generators_called_as_entrypoint": [],
+  "stage5_holdout_eligible": false,
+  "slides": [
+    {
+      "page_id": "production_model",
+      "page_job": "STATISTICAL_MODEL",
+      "scientific_object_query": {
+        "page_function": "STATISTICAL_MODEL",
+        "scientific_object": "medical imaging objective equation mathematical model variance components",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "equation",
+        "evidence_type": "mathematical model",
+        "density": "low",
+        "panel_count": 0
+      },
+      "source_evidence_ids": [
+        "EV-MODEL-001"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-016",
+          "reference_id": "RRL-020",
+          "source_id": "SRC-006",
+          "page_function": "STATISTICAL_MODEL",
+          "composition_family": "equation-centered-objective",
+          "primary_bbox": {
+            "x": 0.25,
+            "y": 0.39,
+            "w": 0.52,
+            "h": 0.18
+          },
+          "score": 16,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "density match",
+            "panel_count exact match",
+            "scientific object overlap: equation, imaging, mathematical, medical, model"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        },
+        {
+          "gold_id": "GSC-011",
+          "reference_id": "RRL-009",
+          "source_id": "SRC-004",
+          "page_function": "ESTIMATOR",
+          "composition_family": "annotated-algorithm-workflow",
+          "primary_bbox": {
+            "x": 0.07,
+            "y": 0.2,
+            "w": 0.86,
+            "h": 0.56
+          },
+          "score": 5,
+          "compatibility_reasons": [
+            "page_function matches scientific job",
+            "general research fallback",
+            "scientific object overlap: model"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-016",
+      "selected_reference_id": "RRL-020",
+      "source_composition_identity": {
+        "recipe_sha256": "9615cc4bcd20f8ec2a7c1a15c91f4dd030754ac21f08b5003be5ec79a565d023",
+        "resolved_layout_sha256": "cd6c29ac9b2d47b25aa898a89344a660ec44955f7ad1550e851b03051cff3748"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+        "storyline_order": 1,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "source/evidence token: center",
+          "source/evidence token: clustered",
+          "source/evidence token: equations"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "accepted_stage3_foundation",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    },
+    {
+      "page_id": "production_quantitative_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "scientific_object_query": {
+        "page_function": "REAL_DATA_APPLICATION",
+        "scientific_object": "biostatistics quantitative model comparison result table figure coverage uncertainty",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "plot table",
+        "evidence_type": "quantitative comparison result",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "source_evidence_ids": [
+        "EV-RESULT-001"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-014",
+          "reference_id": "RRL-016",
+          "source_id": "SRC-005",
+          "page_function": "REAL_DATA_APPLICATION",
+          "composition_family": "claim-centered-result-table",
+          "primary_bbox": {
+            "x": 0.43,
+            "y": 0.35,
+            "w": 0.42,
+            "h": 0.31
+          },
+          "score": 16,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "density match",
+            "panel_count exact match",
+            "scientific object overlap: biostatistics, comparison, quantitative, result, table"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        },
+        {
+          "gold_id": "GSC-015",
+          "reference_id": "RRL-017",
+          "source_id": "SRC-005",
+          "page_function": "REAL_DATA_APPLICATION",
+          "composition_family": "dominant-labeled-scatterplot",
+          "primary_bbox": {
+            "x": 0.43,
+            "y": 0.17,
+            "w": 0.5,
+            "h": 0.64
+          },
+          "score": 16,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "density match",
+            "panel_count exact match",
+            "scientific object overlap: biostatistics, comparison, model, plot, quantitative"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-014",
+      "selected_reference_id": "RRL-016",
+      "source_composition_identity": {
+        "recipe_sha256": "c409cd71c5831d4e4ad49ef4cb7d3c6cdf85deee1f19a1fc11a191adc51c11bc",
+        "resolved_layout_sha256": "d7a5cb7ed9c6959cdea8ffac9db8f37cc0aba7064a65db13c21652d68e48200d"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+        "storyline_order": 2,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "source/evidence token: center",
+          "source/evidence token: coverage",
+          "source/evidence token: icc",
+          "source/evidence token: interval",
+          "source/evidence token: quantitative_plots"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "presentation_native_quantitative_result",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    },
+    {
+      "page_id": "production_experiment_design",
+      "page_job": "EXPERIMENT_DESIGN",
+      "scientific_object_query": {
+        "page_function": "EXPERIMENT_DESIGN",
+        "scientific_object": "medical imaging task map experiment design clustered simulation procedure comparison",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "diagram",
+        "evidence_type": "experiment design",
+        "density": "moderate",
+        "panel_count": 4
+      },
+      "source_evidence_ids": [
+        "EV-DESIGN-001"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-004",
+          "reference_id": "RRL-019",
+          "source_id": "SRC-006",
+          "page_function": "EXPERIMENT_DESIGN",
+          "composition_family": "application-task-map",
+          "primary_bbox": {
+            "x": 0.06,
+            "y": 0.35,
+            "w": 0.84,
+            "h": 0.47
+          },
+          "score": 15,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "density match",
+            "panel_count near match",
+            "scientific object overlap: comparison, design, experiment, imaging, map"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-004",
+      "selected_reference_id": "RRL-019",
+      "source_composition_identity": {
+        "recipe_sha256": "a08385437ea881fedf1c5bd1f0007522933b48b4684fba79753f97692b79a80e",
+        "resolved_layout_sha256": "8aaba6f7aef35cff406052dc13093a8ae274ad845d5b2838634a93657dac418b"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+        "storyline_order": 3,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "source/evidence token: clustered",
+          "source/evidence token: coverage",
+          "source/evidence token: dgp",
+          "source/evidence token: interval"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "typed_experiment_design_hierarchy",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    },
+    {
+      "page_id": "production_negative_result",
+      "page_job": "NEGATIVE_RESULT",
+      "scientific_object_query": {
+        "page_function": "NEGATIVE_RESULT",
+        "scientific_object": "negative result failure analysis finite sample model check coverage comparison",
+        "domain_family": "statistics",
+        "dominant_object_type": "plot",
+        "evidence_type": "failure evidence",
+        "density": "moderate",
+        "panel_count": 2
+      },
+      "source_evidence_ids": [
+        "EV-NEGATIVE-001"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-012",
+          "reference_id": "RRL-011",
+          "source_id": "SRC-004",
+          "page_function": "NEGATIVE_RESULT",
+          "composition_family": "side-by-side-failure-comparison",
+          "primary_bbox": {
+            "x": 0.05,
+            "y": 0.28,
+            "w": 0.86,
+            "h": 0.5
+          },
+          "score": 16,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "density match",
+            "panel_count exact match",
+            "scientific object overlap: analysis, comparison, failure, finite, negative"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-012",
+      "selected_reference_id": "RRL-011",
+      "source_composition_identity": {
+        "recipe_sha256": "4aae3a6bbe7cda1c0346dd1ea5c5f7c786ec42c08a7d03a07a646ee3472b0b7f",
+        "resolved_layout_sha256": "d95063a2adc785c68c5b88b2753385ee5d8de004ab3b3b95d7714c3653af7f58"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+        "storyline_order": 4,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "source/evidence token: coverage",
+          "source/evidence token: failed_experiments",
+          "source/evidence token: finite-sample",
+          "source/evidence token: small-g"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "accepted_stage3_foundation",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    },
+    {
+      "page_id": "production_next_experiment",
+      "page_job": "NEXT_EXPERIMENT",
+      "scientific_object_query": {
+        "page_function": "NEXT_EXPERIMENT",
+        "scientific_object": "discussion next experiment batch query bayesian optimization active learning DPP Mondrian diverse selection partition",
+        "domain_family": "statistics",
+        "dominant_object_type": "diagram plot comparison",
+        "evidence_type": "next-query experimental design",
+        "density": "moderate",
+        "panel_count": 4
+      },
+      "source_evidence_ids": [
+        "EV-NEXT-001"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-018",
+          "reference_id": "RRL-059",
+          "source_id": "SRC-077",
+          "page_function": "NEXT_EXPERIMENT",
+          "composition_family": "comparative-next-query-strategy",
+          "primary_bbox": {
+            "x": 0.1,
+            "y": 0.36,
+            "w": 0.78,
+            "h": 0.46
+          },
+          "score": 16,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "density match",
+            "panel_count exact match",
+            "scientific object overlap: active, batch, bayesian, design, discussion"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-018",
+      "selected_reference_id": "RRL-059",
+      "source_composition_identity": {
+        "recipe_sha256": "5ff51c819553d350ceb0e76c1315bf894fe61845e95ebb13f88c4c350892b464",
+        "resolved_layout_sha256": "adf76a445d861d7491cda664dfe4b02a0577d11f5d37703787a0aa62456e07de"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
+        "storyline_order": 5,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "source/evidence token: bootstrap",
+          "source/evidence token: cr2",
+          "source/evidence token: small-g"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "evidence_to_decision_next_experiment",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    },
+    {
+      "page_id": "production_medical_comparison",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "scientific_object_query": {
+        "page_function": "MEDICAL_IMAGE_COMPARISON",
+        "scientific_object": "medical image lesion samples task applications visual comparison same case overlay error",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "medical_image",
+        "evidence_type": "representative image comparison",
+        "density": "high",
+        "panel_count": 4
+      },
+      "source_evidence_ids": [
+        "EV-MEDICAL-001"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-008",
+          "reference_id": "RRL-013",
+          "source_id": "SRC-005",
+          "page_function": "MEDICAL_IMAGE_COMPARISON",
+          "composition_family": "grouped-image-samples",
+          "primary_bbox": {
+            "x": 0.03,
+            "y": 0.31,
+            "w": 0.86,
+            "h": 0.31
+          },
+          "score": 14,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "density match",
+            "scientific object overlap: comparison, image, lesion, medical, representative"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        },
+        {
+          "gold_id": "GSC-004",
+          "reference_id": "RRL-019",
+          "source_id": "SRC-006",
+          "page_function": "EXPERIMENT_DESIGN",
+          "composition_family": "application-task-map",
+          "primary_bbox": {
+            "x": 0.06,
+            "y": 0.35,
+            "w": 0.84,
+            "h": 0.47
+          },
+          "score": 12,
+          "compatibility_reasons": [
+            "page_function matches scientific job",
+            "domain_family match",
+            "panel_count near match",
+            "scientific object overlap: comparison, image, lesion, medical, task"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-008",
+      "selected_reference_id": "RRL-013",
+      "source_composition_identity": {
+        "recipe_sha256": "f2099fe794caab01779329db7bc8cb1775aa3f43b01837badc91b80a0dd5ac78",
+        "resolved_layout_sha256": "ccb71972fa3049b3c3296ced94b598d74bf6974b4f7e3e2fe5e2268fe62f11ef"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "segmentation_robustness",
+        "workstream_label": "Segmentation robustness",
+        "workstream_scope": "independent visual failure analysis",
+        "storyline_order": 6,
+        "workstream_order": 2,
+        "assignment_basis": [
+          "source/evidence token: error",
+          "source/evidence token: gt",
+          "source/evidence token: lesion",
+          "source/evidence token: medical",
+          "source/evidence token: medical_images",
+          "source/evidence token: prediction"
+        ]
+      },
+      "storyline_transition": {
+        "label": "Segmentation robustness",
+        "audience_text": "independent workstream; no causal bridge asserted",
+        "relation_to_previous": "independent workstream; no source-supported causal bridge is asserted"
+      },
+      "resolved_stage3_layout_family": "same_case_medical_roi_zoom",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+  "task_key": "032_research_presentation_storyline_coherence_recovery",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "032_research_presentation_storyline_coherence_recovery-one-call-production-research-deck-review",
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "external_upload_authorization": "",
+  "rubric": {
+    "instructions": "Review the rendered pixels from one normal research-presentations production invocation. Check that each page contains source-specific content from the supplied engineering bundle rather than placeholders; exact CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math, native plots, and medical images are semantically correct where present; no internal RRL/GSC/SRC, QA, provenance, workflow, repo path, run ID, or implementation language leaks into audience-facing slides; repeated generic cards or one-template pages are rejected; and the deck reads as one coherent research update rather than disconnected benchmark pages. For multi-workstream bundles, confirm that each workstream stays internally continuous and that any independent workstream transition is visible without inventing a causal relation. Do not infer visual quality from filenames or hashes.",
+    "source_contracts": [
+      "The engineering regression bundle is public-safe and explicitly excluded from Stage 5 holdouts.",
+      "Stage 2 gold/reference pixels are used only for compatible composition selection.",
+      "031 is a bounded Stage 4 production-entry proof, not full Stage 4 PASS or ONE_SHOT_QUALITY_PASS."
+    ]
+  },
+  "identity_bindings": {
+    "task_key": "032_research_presentation_storyline_coherence_recovery",
+    "implementation_commit": "bbc71ae442940d2f43af954eee8f13b9e8648393",
+    "input_title": "Clustered Interval Calibration And Synthetic Segmentation Robustness",
+    "build_manifest": "results/032_research_presentation_storyline_coherence_recovery/generated/BUILD_MANIFEST.json",
+    "build_manifest_sha256": "a456d976b057597ab60fbeaade171bbe9d044fcfc04f5d1b50c5215fe01ff6f4",
+    "source_fidelity_map": "results/032_research_presentation_storyline_coherence_recovery/generated/source_fidelity_map.json",
+    "source_fidelity_map_sha256": "41052e6f6a1f423acbae542c3bc83817f405fcf63c0c0d3875dfd05293123bc3",
+    "pdf_sha256": "85693ea7177146785a287bf4a47bcef8cfb62af236ca912ff31b9bf3ba9063eb",
+    "page_job_by_logical_id": {
+      "slide_2_statistical_model": "STATISTICAL_MODEL",
+      "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+      "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+      "slide_5_negative_result": "NEGATIVE_RESULT",
+      "slide_6_next_experiment": "NEXT_EXPERIMENT",
+      "slide_7_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON"
+    },
+    "source_evidence_ids_by_logical_id": {
+      "slide_2_statistical_model": [
+        "EV-MODEL-001"
+      ],
+      "slide_3_real_data_application": [
+        "EV-RESULT-001"
+      ],
+      "slide_4_experiment_design": [
+        "EV-DESIGN-001"
+      ],
+      "slide_5_negative_result": [
+        "EV-NEGATIVE-001"
+      ],
+      "slide_6_next_experiment": [
+        "EV-NEXT-001"
+      ],
+      "slide_7_medical_image_comparison": [
+        "EV-MEDICAL-001"
+      ]
+    },
+    "selected_gold_by_page_id": {
+      "production_model": "GSC-016",
+      "production_quantitative_result": "GSC-014",
+      "production_experiment_design": "GSC-004",
+      "production_negative_result": "GSC-012",
+      "production_next_experiment": "GSC-018",
+      "production_medical_comparison": "GSC-008"
+    }
+  },
+  "inputs": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-2.png",
+      "mime_type": "image/png",
+      "sha256": "489c286b74f9b4cf0ea74338e0e0fb7dd0a6da1d8fdb9bb0f80583881a71aa0e",
+      "description": "Rendered exact-CUHK production page for STATISTICAL_MODEL using source evidence EV-MODEL-001."
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-3.png",
+      "mime_type": "image/png",
+      "sha256": "4c609896aff98b3d8dc24941ace84690b9e858d370af330682500e735df6af2d",
+      "description": "Rendered exact-CUHK production page for REAL_DATA_APPLICATION using source evidence EV-RESULT-001."
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-4.png",
+      "mime_type": "image/png",
+      "sha256": "e1775c71ddee184155cd69bc7c9858a5967be5c6a220cd0c6c25b33e372f69f1",
+      "description": "Rendered exact-CUHK production page for EXPERIMENT_DESIGN using source evidence EV-DESIGN-001."
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-5.png",
+      "mime_type": "image/png",
+      "sha256": "daf79c0f303860e8d4c01fe6bb810ef80a4f0d454bc681d100e017e02c45eb06",
+      "description": "Rendered exact-CUHK production page for NEGATIVE_RESULT using source evidence EV-NEGATIVE-001."
+    },
+    {
+      "logical_id": "slide_6_next_experiment",
+      "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-6.png",
+      "mime_type": "image/png",
+      "sha256": "0fc4574ecbb5deb5ffac2cecbddcdd66967e2301c3199a931ffe06507f1e95aa",
+      "description": "Rendered exact-CUHK production page for NEXT_EXPERIMENT using source evidence EV-NEXT-001."
+    },
+    {
+      "logical_id": "slide_7_medical_image_comparison",
+      "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-7.png",
+      "mime_type": "image/png",
+      "sha256": "af5b29da99fe6aef8464023383e7634f0cc40f2df32ead582d584b96d5d9e000",
+      "description": "Rendered exact-CUHK production page for MEDICAL_IMAGE_COMPARISON using source evidence EV-MEDICAL-001."
+    }
+  ]
+}
