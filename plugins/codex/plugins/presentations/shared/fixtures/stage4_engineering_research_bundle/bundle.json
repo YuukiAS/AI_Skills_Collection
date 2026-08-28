@@ -103,6 +103,11 @@
       "page_id": "production_model",
       "page_job": "STATISTICAL_MODEL",
       "section": "Model",
+      "workstream": {
+        "id": "clustered_interval_calibration",
+        "label": "Clustered interval calibration",
+        "scope": "model, coverage evidence, failure mode, and next experiment"
+      },
       "title": "Clustered outcomes separate center and individual variation",
       "key_message": "The source model makes center-level dependence explicit before interval comparison.",
       "slide_purpose": "explain the method object",
@@ -134,6 +139,11 @@
       "page_id": "production_quantitative_result",
       "page_job": "REAL_DATA_APPLICATION",
       "section": "Results",
+      "workstream": {
+        "id": "clustered_interval_calibration",
+        "label": "Clustered interval calibration",
+        "scope": "model, coverage evidence, failure mode, and next experiment"
+      },
       "title": "Cluster-robust intervals recover coverage as ICC increases",
       "key_message": "The source simulation shows method-specific coverage under imbalanced clusters.",
       "slide_purpose": "show quantitative evidence",
@@ -173,6 +183,11 @@
       "page_id": "production_experiment_design",
       "page_job": "EXPERIMENT_DESIGN",
       "section": "Design",
+      "workstream": {
+        "id": "clustered_interval_calibration",
+        "label": "Clustered interval calibration",
+        "scope": "model, coverage evidence, failure mode, and next experiment"
+      },
       "title": "Simulation varies clustering before interval procedures are compared",
       "key_message": "The source design routes DGP factors into procedures and endpoints.",
       "slide_purpose": "explain experiment design",
@@ -207,6 +222,11 @@
       "page_id": "production_negative_result",
       "page_job": "NEGATIVE_RESULT",
       "section": "Failure",
+      "workstream": {
+        "id": "clustered_interval_calibration",
+        "label": "Clustered interval calibration",
+        "scope": "model, coverage evidence, failure mode, and next experiment"
+      },
       "title": "Small-G settings remain anti-conservative after robustification",
       "key_message": "The negative evidence identifies a remaining finite-sample failure mode.",
       "slide_purpose": "show failure evidence",
@@ -239,6 +259,11 @@
       "page_id": "production_medical_comparison",
       "page_job": "MEDICAL_IMAGE_COMPARISON",
       "section": "Medical Image",
+      "workstream": {
+        "id": "segmentation_robustness",
+        "label": "Segmentation robustness",
+        "scope": "independent visual failure analysis"
+      },
       "title": "Same-case panels keep the segmentation error interpretable",
       "key_message": "The image comparison preserves one-case geometry from source pixels to ROI zoom.",
       "slide_purpose": "show image evidence",
@@ -283,6 +308,11 @@
       "page_id": "production_next_experiment",
       "page_job": "NEXT_EXPERIMENT",
       "section": "Next",
+      "workstream": {
+        "id": "clustered_interval_calibration",
+        "label": "Clustered interval calibration",
+        "scope": "model, coverage evidence, failure mode, and next experiment"
+      },
       "title": "Next experiment tests whether batch selection reduces fragile coverage",
       "key_message": "The next experiment links failure evidence to the comparator decision.",
       "slide_purpose": "propose next discriminating experiment",

@@ -792,7 +792,7 @@ class PresentationSharedTests(unittest.TestCase):
 
             storyline = json.loads((generated / "storyline_trace.json").read_text(encoding="utf-8"))
             self.assertEqual(storyline["schema"], "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1")
-            self.assertIn("titles, page numbers, and gold IDs are not classification keys", storyline["source_derivation"])
+            self.assertIn("domain token profiles", storyline["source_derivation"])
             self.assertEqual(
                 storyline["storyline_order"],
                 [
@@ -848,6 +848,9 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertNotIn(forbidden, tex)
 
             source = generator.read_text(encoding="utf-8")
+            self.assertNotIn("WORKSTREAM_PROFILES", source)
+            self.assertNotIn("clustered_interval_calibration", source)
+            self.assertNotIn("segmentation_robustness", source)
             self.assertNotIn("generate_cuhk_scientific_layout_stage3.generate(", source)
             self.assertNotIn("stage3.page_specs(", source)
             self.assertNotIn("Clustered Interval Calibration And Synthetic Segmentation Robustness", source)
@@ -892,7 +895,61 @@ class PresentationSharedTests(unittest.TestCase):
         for assignment in storyline["page_assignments"]:
             self.assertTrue(assignment["assignment_basis"])
             self.assertNotIn("Retitled", " ".join(assignment["assignment_basis"]))
-        self.assertIn("titles, page numbers, and gold IDs are not classification keys", storyline["source_derivation"])
+        self.assertIn("domain token profiles", storyline["source_derivation"])
+
+    def test_research_presentation_storyline_grouping_uses_generic_workstream_metadata(self) -> None:
+        generic = {
+            "evidence": [
+                {"id": "EV-A1", "board": "analysis_block"},
+                {"id": "EV-A2", "board": "decision_block"},
+                {"id": "EV-B1", "board": "audit_block"},
+            ],
+            "page_jobs": [
+                {
+                    "page_id": "alpha_model",
+                    "page_job": "STATISTICAL_MODEL",
+                    "source_evidence_ids": ["EV-A1"],
+                    "workstream": {"id": "alpha_path", "label": "Alpha pathway", "scope": "model, failure, and next decision"},
+                },
+                {
+                    "page_id": "beta_result",
+                    "page_job": "REAL_DATA_APPLICATION",
+                    "source_evidence_ids": ["EV-B1"],
+                    "workstream": {"id": "beta_audit", "label": "Beta audit", "scope": "measurement audit and next decision"},
+                },
+                {
+                    "page_id": "alpha_failure",
+                    "page_job": "NEGATIVE_RESULT",
+                    "source_evidence_ids": ["EV-A2"],
+                    "workstream": {"id": "alpha_path", "label": "Alpha pathway", "scope": "model, failure, and next decision"},
+                },
+                {
+                    "page_id": "beta_next",
+                    "page_job": "NEXT_EXPERIMENT",
+                    "source_evidence_ids": ["EV-B1"],
+                    "workstream": {"id": "beta_audit", "label": "Beta audit", "scope": "measurement audit and next decision"},
+                },
+                {
+                    "page_id": "alpha_next",
+                    "page_job": "NEXT_EXPERIMENT",
+                    "source_evidence_ids": ["EV-A2"],
+                    "workstream": {"id": "alpha_path", "label": "Alpha pathway", "scope": "model, failure, and next decision"},
+                },
+            ],
+        }
+        self.assertNotRegex(json.dumps(generic, ensure_ascii=False).lower(), r"cluster|coverage|segmentation|medical|lesion|roi")
+
+        ordered_jobs, storyline = production_entry.build_storyline(generic)
+        self.assertEqual(
+            [job["page_id"] for job in ordered_jobs],
+            ["alpha_model", "alpha_failure", "alpha_next", "beta_result", "beta_next"],
+        )
+        self.assertEqual([item["workstream_id"] for item in storyline["workstreams"]], ["alpha_path", "beta_audit"])
+        beta_result = next(job for job in ordered_jobs if job["page_id"] == "beta_result")
+        self.assertEqual(beta_result["storyline_transition"]["label"], "Beta audit")
+        self.assertIn("independent workstream", beta_result["storyline_transition"]["audience_text"])
+        for assignment in storyline["page_assignments"]:
+            self.assertEqual(assignment["assignment_basis"], ["explicit source workstream metadata"])
 
     def test_research_presentation_single_workstream_has_no_forced_transition(self) -> None:
         bundle = json.loads((SHARED / "fixtures/stage4_engineering_research_bundle/bundle.json").read_text(encoding="utf-8"))

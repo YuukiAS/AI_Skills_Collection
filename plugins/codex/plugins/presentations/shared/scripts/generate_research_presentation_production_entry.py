@@ -29,47 +29,6 @@ STORYLINE_JOB_ORDER = {
     "NEGATIVE_RESULT": 40,
     "NEXT_EXPERIMENT": 50,
 }
-WORKSTREAM_PROFILES = [
-    {
-        "id": "segmentation_robustness",
-        "label": "Segmentation robustness",
-        "scope": "independent visual failure analysis",
-        "tokens": {
-            "medical",
-            "medical_images",
-            "segmentation",
-            "lesion",
-            "gt",
-            "prediction",
-            "error",
-            "roi",
-            "same-case",
-            "same_case",
-        },
-    },
-    {
-        "id": "clustered_interval_calibration",
-        "label": "Clustered interval calibration",
-        "scope": "model, coverage evidence, failure mode, and next experiment",
-        "tokens": {
-            "cluster",
-            "clustered",
-            "coverage",
-            "interval",
-            "icc",
-            "center",
-            "centers",
-            "dgp",
-            "cr2",
-            "bootstrap",
-            "finite-sample",
-            "small-g",
-            "equations",
-            "quantitative_plots",
-            "failed_experiments",
-        },
-    },
-]
 
 
 def rel(path: Path) -> str:
@@ -97,34 +56,6 @@ def slug(value: str) -> str:
     return normalized or "general_research_update"
 
 
-def text_tokens(value: str) -> set[str]:
-    return set(re.findall(r"[a-z0-9]+(?:[-_][a-z0-9]+)?", value.lower()))
-
-
-def job_storyline_text(job: dict[str, Any], evidence_by_id: dict[str, dict[str, Any]]) -> str:
-    evidence_items = [evidence_by_id[evidence_id] for evidence_id in job.get("source_evidence_ids", []) if evidence_id in evidence_by_id]
-    parts: list[Any] = [
-        job.get("page_job", ""),
-        job.get("content_kind", ""),
-        job.get("dominant_object", ""),
-        job.get("scientific_objects", []),
-        job.get("query", {}),
-        job.get("source_anchors", []),
-    ]
-    for evidence in evidence_items:
-        parts.extend(
-            [
-                evidence.get("board", ""),
-                evidence.get("type", ""),
-                evidence.get("source_path", ""),
-                evidence.get("source_anchor", ""),
-                evidence.get("supports", ""),
-                evidence.get("consumed_as", ""),
-            ]
-        )
-    return json.dumps(parts, ensure_ascii=False, sort_keys=True)
-
-
 def classify_workstream(job: dict[str, Any], evidence_by_id: dict[str, dict[str, Any]]) -> dict[str, Any]:
     if explicit := job.get("workstream"):
         return {
@@ -132,20 +63,6 @@ def classify_workstream(job: dict[str, Any], evidence_by_id: dict[str, dict[str,
             "label": str(explicit.get("label") or explicit.get("id") or "Research workstream"),
             "scope": str(explicit.get("scope") or "source-declared workstream"),
             "assignment_basis": ["explicit source workstream metadata"],
-        }
-
-    tokens = text_tokens(job_storyline_text(job, evidence_by_id))
-    scored = []
-    for profile in WORKSTREAM_PROFILES:
-        matches = sorted(tokens.intersection(profile["tokens"]))
-        scored.append((len(matches), profile, matches))
-    score, profile, matches = max(scored, key=lambda item: item[0])
-    if score > 0:
-        return {
-            "id": profile["id"],
-            "label": profile["label"],
-            "scope": profile["scope"],
-            "assignment_basis": [f"source/evidence token: {token}" for token in matches[:6]],
         }
 
     evidence_boards = [
@@ -256,7 +173,7 @@ def build_storyline(bundle: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[
 
     trace = {
         "schema": "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1",
-        "source_derivation": "workstream assignment uses page-job, evidence-board, source-anchor, source-path, and source-supported claim text; titles, page numbers, and gold IDs are not classification keys",
+        "source_derivation": "workstream assignment uses explicit page-job/source workstream metadata when present, otherwise evidence-board fallback; titles, page numbers, domain token profiles, and gold IDs are not classification keys",
         "cross_workstream_relation_policy": "do not infer causal bridges between distinct workstreams without explicit source support",
         "workstreams": ordered_workstream_payload,
         "page_assignments": sorted(assignments, key=lambda item: item["storyline_order"]),
