@@ -1,8 +1,8 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "035_research_presentation_generic_model_support_recovery",
-  "state": "READY_FOR_GPT_REVIEW",
-  "review_round": 0,
+  "state": "REVISE",
+  "review_round": 1,
   "max_review_rounds": 2,
   "plan_revision": 0,
   "max_plan_revisions": 1,
@@ -11,11 +11,11 @@
   "implementation_commit": "5501edce262254547bbcefbe04a0827172a73861",
   "ci_required": true,
   "ci_status": "PASS",
-  "last_review_decision": null,
+  "last_review_decision": "REVISE",
   "review_limit_reached": false,
   "human_gate_reason": null,
   "visual_review_required": true,
   "visual_review_manifest_path": "results/035_research_presentation_generic_model_support_recovery/visual_review/visual_inputs.json",
   "visual_review_evidence_path": "results/035_research_presentation_generic_model_support_recovery/visual_review/VISUAL_REVIEW.json",
-  "next_action": "WAIT_FOR_VISUAL_REVIEW"
+  "next_action": "RUN_CODEX_EXECUTOR"
 }
