@@ -47,9 +47,7 @@
         "storyline_order": 1,
         "workstream_order": 1,
         "assignment_basis": [
-          "source/evidence token: center",
-          "source/evidence token: clustered",
-          "source/evidence token: equations"
+          "explicit source workstream metadata"
         ]
       },
       "layout_rationale": "equation is the main scientific object",
@@ -92,11 +90,7 @@
         "storyline_order": 2,
         "workstream_order": 1,
         "assignment_basis": [
-          "source/evidence token: center",
-          "source/evidence token: coverage",
-          "source/evidence token: icc",
-          "source/evidence token: interval",
-          "source/evidence token: quantitative_plots"
+          "explicit source workstream metadata"
         ]
       },
       "layout_rationale": "quantitative result figure receives the dominant area",
@@ -140,10 +134,7 @@
         "storyline_order": 3,
         "workstream_order": 1,
         "assignment_basis": [
-          "source/evidence token: clustered",
-          "source/evidence token: coverage",
-          "source/evidence token: dgp",
-          "source/evidence token: interval"
+          "explicit source workstream metadata"
         ]
       },
       "layout_rationale": "diagram must encode scientific dependencies, not generic arrows",
@@ -186,10 +177,7 @@
         "storyline_order": 4,
         "workstream_order": 1,
         "assignment_basis": [
-          "source/evidence token: coverage",
-          "source/evidence token: failed_experiments",
-          "source/evidence token: finite-sample",
-          "source/evidence token: small-g"
+          "explicit source workstream metadata"
         ]
       },
       "layout_rationale": "failure plot remains visible with diagnostic explanation adjacent",
@@ -233,9 +221,7 @@
         "storyline_order": 5,
         "workstream_order": 1,
         "assignment_basis": [
-          "source/evidence token: bootstrap",
-          "source/evidence token: cr2",
-          "source/evidence token: small-g"
+          "explicit source workstream metadata"
         ]
       },
       "layout_rationale": "next experiment must show evidence, manipulation, comparator, and decision rule",
@@ -283,12 +269,7 @@
         "storyline_order": 6,
         "workstream_order": 2,
         "assignment_basis": [
-          "source/evidence token: error",
-          "source/evidence token: gt",
-          "source/evidence token: lesion",
-          "source/evidence token: medical",
-          "source/evidence token: medical_images",
-          "source/evidence token: prediction"
+          "explicit source workstream metadata"
         ]
       },
       "storyline_transition": {
@@ -400,7 +381,7 @@
   },
   "storyline": {
     "schema": "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1",
-    "source_derivation": "workstream assignment uses page-job, evidence-board, source-anchor, source-path, and source-supported claim text; titles, page numbers, and gold IDs are not classification keys",
+    "source_derivation": "workstream assignment uses explicit page-job/source workstream metadata when present, otherwise evidence-board fallback; titles, page numbers, domain token profiles, and gold IDs are not classification keys",
     "cross_workstream_relation_policy": "do not infer causal bridges between distinct workstreams without explicit source support",
     "workstreams": [
       {
@@ -442,9 +423,7 @@
         "workstream_label": "Clustered interval calibration",
         "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
         "assignment_basis": [
-          "source/evidence token: center",
-          "source/evidence token: clustered",
-          "source/evidence token: equations"
+          "explicit source workstream metadata"
         ],
         "intra_workstream_sort_key": [
           10,
@@ -461,11 +440,7 @@
         "workstream_label": "Clustered interval calibration",
         "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
         "assignment_basis": [
-          "source/evidence token: center",
-          "source/evidence token: coverage",
-          "source/evidence token: icc",
-          "source/evidence token: interval",
-          "source/evidence token: quantitative_plots"
+          "explicit source workstream metadata"
         ],
         "intra_workstream_sort_key": [
           20,
@@ -482,10 +457,7 @@
         "workstream_label": "Clustered interval calibration",
         "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
         "assignment_basis": [
-          "source/evidence token: clustered",
-          "source/evidence token: coverage",
-          "source/evidence token: dgp",
-          "source/evidence token: interval"
+          "explicit source workstream metadata"
         ],
         "intra_workstream_sort_key": [
           30,
@@ -502,10 +474,7 @@
         "workstream_label": "Clustered interval calibration",
         "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
         "assignment_basis": [
-          "source/evidence token: coverage",
-          "source/evidence token: failed_experiments",
-          "source/evidence token: finite-sample",
-          "source/evidence token: small-g"
+          "explicit source workstream metadata"
         ],
         "intra_workstream_sort_key": [
           40,
@@ -522,9 +491,7 @@
         "workstream_label": "Clustered interval calibration",
         "workstream_scope": "model, coverage evidence, failure mode, and next experiment",
         "assignment_basis": [
-          "source/evidence token: bootstrap",
-          "source/evidence token: cr2",
-          "source/evidence token: small-g"
+          "explicit source workstream metadata"
         ],
         "intra_workstream_sort_key": [
           50,
@@ -541,12 +508,7 @@
         "workstream_label": "Segmentation robustness",
         "workstream_scope": "independent visual failure analysis",
         "assignment_basis": [
-          "source/evidence token: error",
-          "source/evidence token: gt",
-          "source/evidence token: lesion",
-          "source/evidence token: medical",
-          "source/evidence token: medical_images",
-          "source/evidence token: prediction"
+          "explicit source workstream metadata"
         ],
         "intra_workstream_sort_key": [
           100,

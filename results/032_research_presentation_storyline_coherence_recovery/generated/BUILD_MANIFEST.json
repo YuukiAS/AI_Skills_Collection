@@ -1,7 +1,7 @@
 {
   "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1",
   "task_key": "032_research_presentation_storyline_coherence_recovery",
-  "implementation_commit": "bbc71ae442940d2f43af954eee8f13b9e8648393",
+  "implementation_commit": "7c7aab455efb4bb51005e1362aef25f54f98184a",
   "input_bundle": "skills/tools/documents-media/presentations/shared/fixtures/stage4_engineering_research_bundle/bundle.json",
   "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
   "canonical_files": {
@@ -37,7 +37,7 @@
       "times_font_files_present": true
     },
     "pdf": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/main.pdf",
-    "pdf_sha256": "85693ea7177146785a287bf4a47bcef8cfb62af236ca912ff31b9bf3ba9063eb",
+    "pdf_sha256": "c1b6ddcfa980e07ff613c469fdf982e156573d490335f5a800130737ab2a7740",
     "log": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/compile.log"
   },
   "render_status": {
@@ -70,7 +70,7 @@
       },
       {
         "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-7.png",
-        "sha256": "af5b29da99fe6aef8464023383e7634f0cc40f2df32ead582d584b96d5d9e000"
+        "sha256": "6a095ca7983eeafe285a2b491b3288d21f1b5deaa10b4f7877fa969df0d21d76"
       }
     ]
   },

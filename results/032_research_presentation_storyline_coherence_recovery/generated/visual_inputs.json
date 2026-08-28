@@ -16,13 +16,13 @@
   },
   "identity_bindings": {
     "task_key": "032_research_presentation_storyline_coherence_recovery",
-    "implementation_commit": "bbc71ae442940d2f43af954eee8f13b9e8648393",
+    "implementation_commit": "7c7aab455efb4bb51005e1362aef25f54f98184a",
     "input_title": "Clustered Interval Calibration And Synthetic Segmentation Robustness",
     "build_manifest": "results/032_research_presentation_storyline_coherence_recovery/generated/BUILD_MANIFEST.json",
-    "build_manifest_sha256": "a456d976b057597ab60fbeaade171bbe9d044fcfc04f5d1b50c5215fe01ff6f4",
+    "build_manifest_sha256": "7a6b64c5b41ed4d7c7cfb6a0985ee26f421c53f6e29c9493726ba9a3a66ed206",
     "source_fidelity_map": "results/032_research_presentation_storyline_coherence_recovery/generated/source_fidelity_map.json",
     "source_fidelity_map_sha256": "41052e6f6a1f423acbae542c3bc83817f405fcf63c0c0d3875dfd05293123bc3",
-    "pdf_sha256": "85693ea7177146785a287bf4a47bcef8cfb62af236ca912ff31b9bf3ba9063eb",
+    "pdf_sha256": "c1b6ddcfa980e07ff613c469fdf982e156573d490335f5a800130737ab2a7740",
     "page_job_by_logical_id": {
       "slide_2_statistical_model": "STATISTICAL_MODEL",
       "slide_3_real_data_application": "REAL_DATA_APPLICATION",
@@ -100,7 +100,7 @@
       "logical_id": "slide_7_medical_image_comparison",
       "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-7.png",
       "mime_type": "image/png",
-      "sha256": "af5b29da99fe6aef8464023383e7634f0cc40f2df32ead582d584b96d5d9e000",
+      "sha256": "6a095ca7983eeafe285a2b491b3288d21f1b5deaa10b4f7877fa969df0d21d76",
       "description": "Rendered exact-CUHK production page for MEDICAL_IMAGE_COMPARISON using source evidence EV-MEDICAL-001."
     }
   ]
