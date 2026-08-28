@@ -63,14 +63,18 @@ def build_sequence_summary(
     layouts: list[dict[str, Any]],
     render_status: dict[str, Any],
     storyline_trace: dict[str, Any],
+    render_input_identity: dict[str, Any],
     contact_sheet_path: str | None,
     contact_sheet_sha256: str | None,
 ) -> dict[str, Any]:
     rendered = render_status.get("rendered_png", [])
+    render_ok = render_status.get("status") == "ok"
     pages = []
     for index, (spec, layout) in enumerate(zip(specs, layouts), start=1):
         rendered_index = index
         rendered_page = rendered[rendered_index] if rendered_index < len(rendered) else {}
+        rendered_sha = rendered_page.get("sha256")
+        rendered_path = rendered_page.get("path")
         logical_id = f"slide_{index + 1}_{spec['page_job'].lower()}"
         story = spec.get("storyline", {})
         pages.append(
@@ -91,21 +95,42 @@ def build_sequence_summary(
                 "primary_scientific_object_type": spec.get("dominant_object") or spec.get("content_kind"),
                 "scientific_objects": spec.get("scientific_objects", []),
                 "visual_density": visual_density(spec, layout),
-                "rendered_page_path": rendered_page.get("path"),
-                "rendered_page_sha256": rendered_page.get("sha256"),
+                "rendered_page_path": rendered_path,
+                "rendered_page_sha256": rendered_sha,
+                "rendered_pixel_status": "AVAILABLE" if rendered_path and rendered_sha else "UNAVAILABLE_RENDER_NOT_OK",
                 "transition_cue": spec.get("storyline_transition"),
             }
         )
-    identity_payload = {
+    all_page_pixels_available = all(page["rendered_page_sha256"] for page in pages)
+    pixel_evidence_available = render_ok and all_page_pixels_available and bool(contact_sheet_sha256)
+    pixel_identity_payload = {
         "page_order": [page["logical_id"] for page in pages],
         "rendered_page_sha256": [page["rendered_page_sha256"] for page in pages],
+        "contact_sheet_sha256": contact_sheet_sha256,
+    }
+    rendered_pixel_identity = stable_sha(pixel_identity_payload) if pixel_evidence_available else None
+    pixel_status = {
+        "status": "AVAILABLE" if pixel_evidence_available else "UNAVAILABLE_RENDER_NOT_OK",
+        "render_status": render_status.get("status"),
+        "rendered_png_count": render_status.get("png_count", len(rendered)),
+        "rendered_page_sha256_nullable": not pixel_evidence_available,
+        "contact_sheet_sha256_nullable": not pixel_evidence_available,
+    }
+    deck_identity_payload = {
+        "render_input_identity_sha256": render_input_identity["sha256"],
+        "rendered_pixel_identity_sha256": rendered_pixel_identity,
+        "pixel_evidence_status": pixel_status["status"],
+        "page_order": [page["logical_id"] for page in pages],
         "workstream_sequence": [page["workstream_id"] for page in pages],
         "title_sequence": [page["title"] for page in pages],
-        "contact_sheet_sha256": contact_sheet_sha256,
     }
     return {
         "schema": "RESEARCH_PRESENTATION_DECK_SEQUENCE_SUMMARY_V1",
         "page_count": len(pages),
+        "render_input_identity_sha256": render_input_identity["sha256"],
+        "render_input_manifest": render_input_identity,
+        "pixel_evidence_status": pixel_status,
+        "rendered_pixel_identity_sha256": rendered_pixel_identity,
         "page_order": [page["logical_id"] for page in pages],
         "title_sequence": [page["title"] for page in pages],
         "section_sequence": [page["section"] for page in pages],
@@ -126,7 +151,7 @@ def build_sequence_summary(
             "serves_audience": False,
             "review_role": "deck_sequence_context",
         },
-        "deck_identity_sha256": stable_sha(identity_payload),
+        "deck_identity_sha256": stable_sha(deck_identity_payload),
     }
 
 
@@ -217,13 +242,19 @@ def consume_review_evidence(
     review_evidence_sha256: str | None,
     sequence_summary: dict[str, Any],
     initial_render_identity: str,
+    initial_rendered_pixel_identity: str | None = None,
+    initial_render_input_manifest: dict[str, Any] | None = None,
     repair_cycle_count: int = 0,
 ) -> dict[str, Any]:
     state: dict[str, Any] = {
         "schema": "RESEARCH_PRESENTATION_DECK_QUALITY_LOOP_STATE_V1",
         "max_repair_cycles": MAX_REPAIR_CYCLES,
         "repair_cycle_count": repair_cycle_count,
+        "render_identity_kind": "render_input_identity_sha256",
         "initial_render_identity": initial_render_identity,
+        "initial_render_input_identity": initial_render_identity,
+        "initial_rendered_pixel_identity": initial_rendered_pixel_identity,
+        "initial_render_input_manifest": initial_render_input_manifest,
         "review_evidence_identity": review_evidence_sha256,
         "deck_level_decision": None,
         "blocking_findings": [],
@@ -231,6 +262,9 @@ def consume_review_evidence(
         "repair_allowed": False,
         "fail_closed_reason": None,
         "repaired_render_identity": None,
+        "repaired_render_input_identity": None,
+        "repaired_rendered_pixel_identity": None,
+        "repaired_render_input_manifest": None,
         "final_decision": None,
     }
     if review_evidence is None:

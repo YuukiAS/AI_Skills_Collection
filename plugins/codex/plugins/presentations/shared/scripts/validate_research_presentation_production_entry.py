@@ -82,6 +82,10 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         errors.append("BUILD_MANIFEST.json: storyline_trace not recorded")
     if "templates/cuhk/beamer/source" not in manifest.get("canonical_cuhk_source", ""):
         errors.append("BUILD_MANIFEST.json: canonical exact CUHK source not recorded")
+    if not re.fullmatch(r"[0-9a-f]{64}", str(manifest.get("render_input_identity_sha256", ""))):
+        errors.append("BUILD_MANIFEST.json: missing render-input identity sha")
+    if manifest.get("render_input_identity", {}).get("sha256") != manifest.get("render_input_identity_sha256"):
+        errors.append("BUILD_MANIFEST.json: render-input identity manifest mismatch")
     handoff_status = manifest.get("quality_loop_handoff", {}).get("status")
     if handoff_status not in {
         "WAITING_FOR_DECK_VISUAL_REVIEW",
@@ -192,6 +196,26 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         errors.append("deck_sequence_summary.json: missing storyline order")
     if not re.fullmatch(r"[0-9a-f]{64}", str(deck_sequence.get("deck_identity_sha256", ""))):
         errors.append("deck_sequence_summary.json: missing deck identity sha")
+    if not re.fullmatch(r"[0-9a-f]{64}", str(deck_sequence.get("render_input_identity_sha256", ""))):
+        errors.append("deck_sequence_summary.json: missing render-input identity sha")
+    render_input_manifest = deck_sequence.get("render_input_manifest", {})
+    if render_input_manifest.get("schema") != "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1":
+        errors.append("deck_sequence_summary.json: invalid render-input identity manifest")
+    if render_input_manifest.get("sha256") != deck_sequence.get("render_input_identity_sha256"):
+        errors.append("deck_sequence_summary.json: render-input manifest sha mismatch")
+    render_input_files = render_input_manifest.get("files", [])
+    render_input_roles = {item.get("role") for item in render_input_files}
+    if not {"main_tex", "scientific_layout_include"}.issubset(render_input_roles):
+        errors.append("deck_sequence_summary.json: render-input identity does not bind generated TeX inputs")
+    if "copied_scientific_asset" not in render_input_roles:
+        errors.append("deck_sequence_summary.json: render-input identity does not bind copied scientific assets")
+    for item in render_input_files:
+        if not item.get("path") or not re.fullmatch(r"[0-9a-f]{64}", str(item.get("sha256", ""))):
+            errors.append("deck_sequence_summary.json: render-input file entry missing path or sha")
+            break
+    pixel_status = deck_sequence.get("pixel_evidence_status", {})
+    if pixel_status.get("status") not in {"AVAILABLE", "UNAVAILABLE_RENDER_NOT_OK"}:
+        errors.append("deck_sequence_summary.json: invalid pixel evidence status")
     contact = deck_sequence.get("deck_contact_sheet", {})
     if render_status.get("status") == "ok":
         if contact.get("serves_audience") is not False:
@@ -201,14 +225,28 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
             errors.append("deck_sequence_summary.json: deck_contact_sheet PNG missing")
         if not re.fullmatch(r"[0-9a-f]{64}", str(contact.get("sha256", ""))):
             errors.append("deck_sequence_summary.json: deck_contact_sheet sha missing")
+        if not re.fullmatch(r"[0-9a-f]{64}", str(deck_sequence.get("rendered_pixel_identity_sha256", ""))):
+            errors.append("deck_sequence_summary.json: missing rendered-pixel identity sha")
         for page in deck_sequence.get("pages", []):
-            if not page.get("rendered_page_sha256"):
+            if not re.fullmatch(r"[0-9a-f]{64}", str(page.get("rendered_page_sha256", ""))):
                 errors.append(f"deck_sequence_summary.json: {page.get('logical_id')} missing rendered sha")
+            if page.get("rendered_pixel_status") != "AVAILABLE":
+                errors.append(f"deck_sequence_summary.json: {page.get('logical_id')} rendered pixel status not available")
             density = page.get("visual_density", {})
             if density.get("machine_density") not in {"low", "moderate", "high"}:
                 errors.append(f"deck_sequence_summary.json: {page.get('logical_id')} missing machine density")
             if not page.get("primary_scientific_object_type"):
                 errors.append(f"deck_sequence_summary.json: {page.get('logical_id')} missing primary object type")
+    else:
+        if deck_sequence.get("rendered_pixel_identity_sha256") is not None:
+            errors.append("deck_sequence_summary.json: rendered-pixel identity must be null when render is unavailable")
+        if contact.get("path") is not None or contact.get("sha256") is not None:
+            errors.append("deck_sequence_summary.json: contact sheet pixel fields must be null when render is unavailable")
+        for page in deck_sequence.get("pages", []):
+            if page.get("rendered_page_sha256") is not None or page.get("rendered_page_path") is not None:
+                errors.append(f"deck_sequence_summary.json: {page.get('logical_id')} pixel fields must be null when render is unavailable")
+            if page.get("rendered_pixel_status") != "UNAVAILABLE_RENDER_NOT_OK":
+                errors.append(f"deck_sequence_summary.json: {page.get('logical_id')} missing unavailable pixel status")
 
     if quality_loop.get("schema") != "RESEARCH_PRESENTATION_DECK_QUALITY_LOOP_STATE_V1":
         errors.append("quality_loop_state.json: invalid schema")
@@ -216,6 +254,21 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         errors.append("quality_loop_state.json: repair cycle cap is not 1")
     if quality_loop.get("repair_cycle_count", 0) > 1:
         errors.append("quality_loop_state.json: repair cycle count exceeds cap")
+    if quality_loop.get("render_identity_kind") != "render_input_identity_sha256":
+        errors.append("quality_loop_state.json: render identity kind is not explicit")
+    if not re.fullmatch(r"[0-9a-f]{64}", str(quality_loop.get("initial_render_input_identity", ""))):
+        errors.append("quality_loop_state.json: missing initial render-input identity")
+    if quality_loop.get("initial_render_identity") != quality_loop.get("initial_render_input_identity"):
+        errors.append("quality_loop_state.json: legacy initial render identity does not match render-input identity")
+    if quality_loop.get("initial_render_input_manifest", {}).get("sha256") != quality_loop.get("initial_render_input_identity"):
+        errors.append("quality_loop_state.json: initial render-input manifest mismatch")
+    if quality_loop.get("repair_cycle_count", 0) > 0:
+        if not re.fullmatch(r"[0-9a-f]{64}", str(quality_loop.get("repaired_render_input_identity", ""))):
+            errors.append("quality_loop_state.json: missing repaired render-input identity")
+        if quality_loop.get("repaired_render_identity") != quality_loop.get("repaired_render_input_identity"):
+            errors.append("quality_loop_state.json: legacy repaired render identity does not match render-input identity")
+        if quality_loop.get("repaired_render_input_manifest", {}).get("sha256") != quality_loop.get("repaired_render_input_identity"):
+            errors.append("quality_loop_state.json: repaired render-input manifest mismatch")
     decision = quality_loop.get("final_decision") or quality_loop.get("deck_level_decision")
     if decision not in {
         "WAITING_FOR_DECK_VISUAL_REVIEW",
@@ -295,13 +348,17 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
     if render_status.get("status") == "ok" and not any(item.get("logical_id") == "deck_contact_sheet" for item in visual_inputs.get("inputs", [])):
         errors.append("visual_inputs.json: deck contact sheet input missing")
     bindings = visual_inputs.get("identity_bindings", {})
-    for key in ["deck_sequence_summary", "deck_sequence_summary_sha256", "quality_loop_state", "quality_loop_state_sha256", "deck_identity_sha256"]:
+    for key in ["deck_sequence_summary", "deck_sequence_summary_sha256", "quality_loop_state", "quality_loop_state_sha256", "deck_identity_sha256", "render_input_identity_sha256"]:
         if not bindings.get(key):
             errors.append(f"visual_inputs.json: identity binding missing {key}")
+    if bindings.get("render_input_identity_sha256") != deck_sequence.get("render_input_identity_sha256"):
+        errors.append("visual_inputs.json: render-input identity binding does not match deck sequence")
     if render_status.get("status") == "ok":
         for key in ["deck_contact_sheet", "deck_contact_sheet_sha256"]:
             if not bindings.get(key):
                 errors.append(f"visual_inputs.json: identity binding missing {key}")
+        if bindings.get("rendered_pixel_identity_sha256") != deck_sequence.get("rendered_pixel_identity_sha256"):
+            errors.append("visual_inputs.json: rendered-pixel identity binding does not match deck sequence")
         contact_sheet = manifest.get("deck_contact_sheet", {})
         if bindings.get("deck_contact_sheet") != contact_sheet.get("path"):
             errors.append("visual_inputs.json: deck_contact_sheet binding does not match BUILD_MANIFEST.json")
@@ -310,6 +367,8 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         contact_input = next((item for item in visual_inputs.get("inputs", []) if item.get("logical_id") == "deck_contact_sheet"), {})
         if contact_input.get("path") != contact_sheet.get("path") or contact_input.get("sha256") != contact_sheet.get("sha256"):
             errors.append("visual_inputs.json: deck_contact_sheet input does not match BUILD_MANIFEST.json")
+    elif bindings.get("rendered_pixel_identity_sha256") is not None:
+        errors.append("visual_inputs.json: rendered-pixel identity binding must be null when render is unavailable")
     return errors
 
 

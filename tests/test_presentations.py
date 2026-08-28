@@ -727,6 +727,8 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(manifest["schema"], "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1")
             self.assertEqual(manifest["task_key"], "031_research_presentation_one_call_production_entry")
             self.assertEqual(manifest["implementation_commit"], implementation_commit)
+            self.assertRegex(manifest["render_input_identity_sha256"], r"^[0-9a-f]{64}$")
+            self.assertEqual(manifest["render_input_identity"]["sha256"], manifest["render_input_identity_sha256"])
             self.assertIn("templates/cuhk/beamer/source", manifest["canonical_cuhk_source"])
             self.assertEqual(manifest["quality_loop_handoff"]["status"], "WAITING_FOR_DECK_VISUAL_REVIEW")
             self.assertIn("Stage 4 PASS", manifest["stage4_boundary"])
@@ -837,8 +839,12 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(visual_inputs["identity_bindings"]["implementation_commit"], implementation_commit)
             self.assertIn("deck_sequence_summary", visual_inputs["identity_bindings"])
             self.assertIn("quality_loop_state", visual_inputs["identity_bindings"])
+            self.assertEqual(visual_inputs["identity_bindings"]["render_input_identity_sha256"], manifest["render_input_identity_sha256"])
             if manifest["render_status"]["status"] == "ok":
                 self.assertEqual(visual_inputs["identity_bindings"]["deck_contact_sheet_sha256"], manifest["deck_contact_sheet"]["sha256"])
+                self.assertRegex(visual_inputs["identity_bindings"]["rendered_pixel_identity_sha256"], r"^[0-9a-f]{64}$")
+            else:
+                self.assertIsNone(visual_inputs["identity_bindings"]["rendered_pixel_identity_sha256"])
             self.assertIn("source-specific content", visual_inputs["rubric"]["instructions"])
             self.assertIn("coherent research update", visual_inputs["rubric"]["instructions"])
             self.assertIn("deck_contact_sheet", visual_inputs["rubric"]["instructions"])
@@ -850,8 +856,19 @@ class PresentationSharedTests(unittest.TestCase):
             deck_sequence = json.loads((generated / "deck_sequence_summary.json").read_text(encoding="utf-8"))
             self.assertEqual(deck_sequence["schema"], "RESEARCH_PRESENTATION_DECK_SEQUENCE_SUMMARY_V1")
             self.assertEqual(deck_sequence["page_count"], 6)
+            self.assertRegex(deck_sequence["render_input_identity_sha256"], r"^[0-9a-f]{64}$")
+            self.assertEqual(deck_sequence["render_input_manifest"]["sha256"], deck_sequence["render_input_identity_sha256"])
+            render_input_roles = {item["role"] for item in deck_sequence["render_input_manifest"]["files"]}
+            self.assertTrue({"main_tex", "scientific_layout_include", "copied_scientific_asset"}.issubset(render_input_roles))
             if manifest["render_status"]["status"] == "ok":
                 self.assertEqual(deck_sequence["deck_contact_sheet"]["sha256"], manifest["deck_contact_sheet"]["sha256"])
+                self.assertEqual(deck_sequence["pixel_evidence_status"]["status"], "AVAILABLE")
+                self.assertRegex(deck_sequence["rendered_pixel_identity_sha256"], r"^[0-9a-f]{64}$")
+            else:
+                self.assertEqual(deck_sequence["pixel_evidence_status"]["status"], "UNAVAILABLE_RENDER_NOT_OK")
+                self.assertIsNone(deck_sequence["rendered_pixel_identity_sha256"])
+                self.assertIsNone(deck_sequence["deck_contact_sheet"]["path"])
+                self.assertIsNone(deck_sequence["deck_contact_sheet"]["sha256"])
             self.assertEqual(
                 deck_sequence["page_order"],
                 [
@@ -866,13 +883,23 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(len(deck_sequence["title_sequence"]), 6)
             for page in deck_sequence["pages"]:
                 self.assertIn(page["visual_density"]["machine_density"], {"low", "moderate", "high"})
-                self.assertEqual(len(page["rendered_page_sha256"]), 64)
+                if manifest["render_status"]["status"] == "ok":
+                    self.assertEqual(page["rendered_pixel_status"], "AVAILABLE")
+                    self.assertRegex(page["rendered_page_sha256"], r"^[0-9a-f]{64}$")
+                else:
+                    self.assertEqual(page["rendered_pixel_status"], "UNAVAILABLE_RENDER_NOT_OK")
+                    self.assertIsNone(page["rendered_page_sha256"])
+                    self.assertIsNone(page["rendered_page_path"])
                 self.assertTrue(page["primary_scientific_object_type"])
 
             quality_loop = json.loads((generated / "quality_loop_state.json").read_text(encoding="utf-8"))
             self.assertEqual(quality_loop["schema"], "RESEARCH_PRESENTATION_DECK_QUALITY_LOOP_STATE_V1")
             self.assertEqual(quality_loop["max_repair_cycles"], 1)
             self.assertEqual(quality_loop["repair_cycle_count"], 0)
+            self.assertEqual(quality_loop["render_identity_kind"], "render_input_identity_sha256")
+            self.assertEqual(quality_loop["initial_render_identity"], quality_loop["initial_render_input_identity"])
+            self.assertRegex(quality_loop["initial_render_input_identity"], r"^[0-9a-f]{64}$")
+            self.assertEqual(quality_loop["initial_render_input_manifest"]["sha256"], quality_loop["initial_render_input_identity"])
             self.assertEqual(quality_loop["deck_level_decision"], "WAITING_FOR_DECK_VISUAL_REVIEW")
             self.assertIsNone(quality_loop["final_decision"])
 
@@ -958,6 +985,12 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(len(state["selected_repair_directives"]), 1)
             self.assertEqual(state["selected_repair_directives"][0]["intent"], "ADJUST_TRANSITION_CUE")
             self.assertNotEqual(state["initial_render_identity"], state["repaired_render_identity"])
+            self.assertEqual(state["initial_render_identity"], state["initial_render_input_identity"])
+            self.assertEqual(state["repaired_render_identity"], state["repaired_render_input_identity"])
+            self.assertNotEqual(state["initial_render_input_identity"], state["repaired_render_input_identity"])
+            initial_main = next(item for item in state["initial_render_input_manifest"]["files"] if item["role"] == "main_tex")
+            repaired_main = next(item for item in state["repaired_render_input_manifest"]["files"] if item["role"] == "main_tex")
+            self.assertNotEqual(initial_main["sha256"], repaired_main["sha256"])
             deck_plan = json.loads((repaired / "deck_plan.json").read_text(encoding="utf-8"))
             transition_slide = next(slide for slide in deck_plan["slides"] if slide["page_function"] == "MEDICAL_IMAGE_COMPARISON")
             self.assertEqual(transition_slide["storyline_transition"]["cue_variant"], "compact")
@@ -972,7 +1005,9 @@ class PresentationSharedTests(unittest.TestCase):
                 review_evidence=unsafe_review,
                 review_evidence_sha256=unsafe_sha,
                 sequence_summary=sequence,
-                initial_render_identity=sequence["deck_identity_sha256"],
+                initial_render_identity=sequence["render_input_identity_sha256"],
+                initial_rendered_pixel_identity=sequence["rendered_pixel_identity_sha256"],
+                initial_render_input_manifest=sequence["render_input_manifest"],
             )
             self.assertEqual(unsafe["final_decision"], "QUALITY_LOOP_FAIL_NO_WINNER")
             self.assertIn("unsupported repair intent", unsafe["fail_closed_reason"])

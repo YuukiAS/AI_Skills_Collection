@@ -327,6 +327,32 @@ def build_main_tex(bundle: dict[str, Any], specs: list[dict[str, Any]], layouts:
 """
 
 
+def build_render_input_identity(build_dir: Path) -> dict[str, Any]:
+    files = []
+    for path in sorted(item for item in build_dir.rglob("*") if item.is_file()):
+        relative = path.relative_to(build_dir).as_posix()
+        if relative == "main.tex":
+            role = "main_tex"
+        elif relative == "scientific_layouts.tex":
+            role = "scientific_layout_include"
+        elif relative.startswith("stage3_assets/"):
+            role = "copied_scientific_asset"
+        elif relative.startswith("styles/"):
+            role = "canonical_cuhk_style"
+        elif relative.startswith("assets/"):
+            role = "canonical_cuhk_asset"
+        else:
+            role = "canonical_cuhk_support"
+        files.append({"path": rel(path), "role": role, "sha256": stage3.file_sha(path)})
+    payload = {
+        "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+        "build_workspace": rel(build_dir),
+        "files": files,
+    }
+    payload["sha256"] = deck_quality_loop.stable_sha(payload)
+    return payload
+
+
 def source_fidelity_map(bundle: dict[str, Any], specs: list[dict[str, Any]], layouts: list[dict[str, Any]]) -> dict[str, Any]:
     evidence_by_id = {item["id"]: item for item in bundle["evidence"]}
     pages = []
@@ -415,6 +441,7 @@ def render_specs(bundle: dict[str, Any], specs: list[dict[str, Any]], out_dir: P
         layouts = [stage3.resolve_layout(spec) for spec in specs]
         (build_dir / "scientific_layouts.tex").write_text(stage3.scientific_layout_macros(), encoding="utf-8")
         (build_dir / "main.tex").write_text(build_main_tex(bundle, specs, layouts, asset_map), encoding="utf-8")
+        render_input_identity = build_render_input_identity(build_dir)
         dependency_probe = stage3.dependency_probe()
         render_probe = stage3.render_skill_probe()
         compile_status = stage3.compile_pdf(build_dir)
@@ -426,6 +453,7 @@ def render_specs(bundle: dict[str, Any], specs: list[dict[str, Any]], out_dir: P
     return {
         "build_dir": build_dir,
         "layouts": layouts,
+        "render_input_identity": render_input_identity,
         "dependency_probe": dependency_probe,
         "render_probe": render_probe,
         "compile_status": compile_status,
@@ -564,6 +592,9 @@ def visual_manifest(
             "deck_contact_sheet": contact_sheet.get("path"),
             "deck_contact_sheet_sha256": contact_sheet.get("sha256"),
             "deck_identity_sha256": build_manifest.get("deck_sequence_summary", {}).get("deck_identity_sha256"),
+            "render_input_identity_sha256": build_manifest.get("deck_sequence_summary", {}).get("render_input_identity_sha256"),
+            "render_input_identity": build_manifest.get("render_input_identity"),
+            "rendered_pixel_identity_sha256": build_manifest.get("deck_sequence_summary", {}).get("rendered_pixel_identity_sha256"),
             "pdf_sha256": build_manifest.get("compile_status", {}).get("pdf_sha256"),
             "page_job_by_logical_id": page_jobs,
             "source_evidence_ids_by_logical_id": evidence,
@@ -597,6 +628,7 @@ def generate(
         layouts=initial_render["layouts"],
         render_status=initial_render["render_status"],
         storyline_trace=storyline_trace,
+        render_input_identity=initial_render["render_input_identity"],
         contact_sheet_path=initial_contact.get("path"),
         contact_sheet_sha256=initial_contact.get("sha256"),
     )
@@ -605,7 +637,9 @@ def generate(
         review_evidence=review_evidence,
         review_evidence_sha256=review_evidence_sha256,
         sequence_summary=initial_sequence,
-        initial_render_identity=initial_sequence["deck_identity_sha256"],
+        initial_render_identity=initial_sequence["render_input_identity_sha256"],
+        initial_rendered_pixel_identity=initial_sequence["rendered_pixel_identity_sha256"],
+        initial_render_input_manifest=initial_sequence["render_input_manifest"],
     )
     final_render = initial_render
     final_contact = initial_contact
@@ -620,17 +654,23 @@ def generate(
             layouts=final_render["layouts"],
             render_status=final_render["render_status"],
             storyline_trace=storyline_trace,
+            render_input_identity=final_render["render_input_identity"],
             contact_sheet_path=final_contact.get("path"),
             contact_sheet_sha256=final_contact.get("sha256"),
         )
         quality_loop_state["repair_cycle_count"] = 1
-        quality_loop_state["repaired_render_identity"] = final_sequence["deck_identity_sha256"]
+        quality_loop_state["repaired_render_identity"] = final_sequence["render_input_identity_sha256"]
+        quality_loop_state["repaired_render_input_identity"] = final_sequence["render_input_identity_sha256"]
+        quality_loop_state["repaired_rendered_pixel_identity"] = final_sequence["rendered_pixel_identity_sha256"]
+        quality_loop_state["repaired_render_input_manifest"] = final_sequence["render_input_manifest"]
         rereview_evidence, rereview_evidence_sha256 = deck_quality_loop.load_review_evidence(rereview_evidence_path.resolve() if rereview_evidence_path else None)
         rereview_state = deck_quality_loop.consume_review_evidence(
             review_evidence=rereview_evidence,
             review_evidence_sha256=rereview_evidence_sha256,
             sequence_summary=final_sequence,
-            initial_render_identity=initial_sequence["deck_identity_sha256"],
+            initial_render_identity=initial_sequence["render_input_identity_sha256"],
+            initial_rendered_pixel_identity=initial_sequence["rendered_pixel_identity_sha256"],
+            initial_render_input_manifest=initial_sequence["render_input_manifest"],
             repair_cycle_count=1,
         )
         quality_loop_state["rereview_evidence_identity"] = rereview_evidence_sha256
@@ -670,6 +710,8 @@ def generate(
         "canonical_cuhk_source": rel(CANONICAL_CUHK),
         "canonical_files": {rel(path): stage3.file_sha(path) for path in sorted(CANONICAL_CUHK.rglob("*")) if path.is_file()},
         "build_workspace": rel(final_render["build_dir"]),
+        "render_input_identity_sha256": final_sequence["render_input_identity_sha256"],
+        "render_input_identity": final_render["render_input_identity"],
         "tex": rel(final_render["build_dir"] / "main.tex"),
         "scientific_layout_include": rel(final_render["build_dir"] / "scientific_layouts.tex"),
         "deck_plan": rel(out_dir / "deck_plan.json"),
@@ -704,6 +746,8 @@ def generate(
             "visual_review_evidence": f"results/{task_key}/visual_review/VISUAL_REVIEW.json",
             "quality_loop_state": rel(quality_loop_path),
             "deck_contact_sheet": final_contact.get("path"),
+            "render_input_identity_sha256": final_sequence["render_input_identity_sha256"],
+            "rendered_pixel_identity_sha256": final_sequence["rendered_pixel_identity_sha256"],
         },
         "stage4_boundary": "This one-call production entry recovery does not claim Stage 4 PASS, PROGRAM_MATURE, or ONE_SHOT_QUALITY_PASS.",
         "cleaned_latex_intermediates": final_render["cleaned"],
