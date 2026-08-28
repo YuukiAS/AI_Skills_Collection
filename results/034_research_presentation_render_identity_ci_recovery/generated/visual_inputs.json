@@ -16,20 +16,20 @@
   },
   "identity_bindings": {
     "task_key": "034_research_presentation_render_identity_ci_recovery",
-    "implementation_commit": "68cc193ec09d29617a8f2642dac49615a0c5df76",
+    "implementation_commit": "fc0b8908b865de464c0d1ddf4475a9e57c11bbd5",
     "input_title": "Clustered Interval Calibration And Synthetic Segmentation Robustness",
     "build_manifest": "results/034_research_presentation_render_identity_ci_recovery/generated/BUILD_MANIFEST.json",
-    "build_manifest_sha256": "a5689079e98046f118f78b74f6dd2cc1012f2e418340d8b8e7828c06013f3a0d",
+    "build_manifest_sha256": "cf597c03c7b8ecd5419c4262d3c782b00e7db884e1051df40bcc91ff43979c99",
     "source_fidelity_map": "results/034_research_presentation_render_identity_ci_recovery/generated/source_fidelity_map.json",
-    "source_fidelity_map_sha256": "41052e6f6a1f423acbae542c3bc83817f405fcf63c0c0d3875dfd05293123bc3",
+    "source_fidelity_map_sha256": "cc7b9fccba4cfba4a273722488bfd4cae6a92d8faead894ec20ae77099d4dc6c",
     "deck_sequence_summary": "results/034_research_presentation_render_identity_ci_recovery/generated/deck_sequence_summary.json",
-    "deck_sequence_summary_sha256": "6bf81dc6cbfe5530da36a99d26132ebf90e1230c6bc0f5e33b9c0b7b1cb60180",
+    "deck_sequence_summary_sha256": "883731e996f79010002d16db8106c6b00fc52dab46298f64d7284b6ef9d5bf88",
     "quality_loop_state": "results/034_research_presentation_render_identity_ci_recovery/generated/quality_loop_state.json",
-    "quality_loop_state_sha256": "9e08c79f546283a2ae67470a1397b9741e552ecfde552812d7d78cf920eb74c1",
+    "quality_loop_state_sha256": "82d6835c53f9ac134a9eb78e5d2c6e3c52bf0c800a5f863723d595ce3fa48353",
     "deck_contact_sheet": "results/034_research_presentation_render_identity_ci_recovery/generated/deck_contact_sheet.png",
-    "deck_contact_sheet_sha256": "83d88d572e648d2b32b0bb368faba1be536f7a3f23917c4260464233e090c71c",
-    "deck_identity_sha256": "7736bda04aeada434f474d96f1e5704859b65d5fba4e4b9577fde9ac9d66fdd0",
-    "render_input_identity_sha256": "c4129f2b2e2f7c3a7e65af93e5c663ea63d08aef9b1d844d0355291c6d32831b",
+    "deck_contact_sheet_sha256": "5ba36bbd97f465e5bd05729113dc5f570243f5ec371e705758f98f747d55065a",
+    "deck_identity_sha256": "ad09c78061797eb547237df6f07e43a9661b48914fd243aa14d4664bce981737",
+    "render_input_identity_sha256": "a960ec005fc46f12fccb396bda639535e911273f7592dfa91f4494af5d8b5118",
     "render_input_identity": {
       "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
       "build_workspace": "results/034_research_presentation_render_identity_ci_recovery/generated/cuhk_production_build",
@@ -62,7 +62,7 @@
         {
           "path": "results/034_research_presentation_render_identity_ci_recovery/generated/cuhk_production_build/main.tex",
           "role": "main_tex",
-          "sha256": "fe7c71a11c12040224ebd35e913a7ae9d2ffc53a07bfd811f39950b59f5fca71"
+          "sha256": "2e50b6cc7820d6faae79dc6892b2ad96df364cdbfd4fbafc0ef2afe9fe9964d7"
         },
         {
           "path": "results/034_research_presentation_render_identity_ci_recovery/generated/cuhk_production_build/scientific_layouts.tex",
@@ -77,12 +77,12 @@
         {
           "path": "results/034_research_presentation_render_identity_ci_recovery/generated/cuhk_production_build/stage3_assets/failure_error_semantic_overlay.png",
           "role": "copied_scientific_asset",
-          "sha256": "0b19ba2824e4cc218ded74852e7a727ada39b0167b0e43afb32d416da008c33b"
+          "sha256": "09887ef143045d3262dc08623bd62cd0321c892590dd8e08287417b17ccf09cf"
         },
         {
           "path": "results/034_research_presentation_render_identity_ci_recovery/generated/cuhk_production_build/stage3_assets/failure_error_semantic_overlay_roi_zoom.png",
           "role": "copied_scientific_asset",
-          "sha256": "714215004c184be2ed205b0d37c13d28ff8b93afd71536c68aeb0fd90e300870"
+          "sha256": "3226c315eb3fb83d83f8129d0931d6876518d1dd8c029a43e05793c4d2cb76d8"
         },
         {
           "path": "results/034_research_presentation_render_identity_ci_recovery/generated/cuhk_production_build/stage3_assets/failure_gt.png",
@@ -135,10 +135,10 @@
           "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
         }
       ],
-      "sha256": "c4129f2b2e2f7c3a7e65af93e5c663ea63d08aef9b1d844d0355291c6d32831b"
+      "sha256": "a960ec005fc46f12fccb396bda639535e911273f7592dfa91f4494af5d8b5118"
     },
-    "rendered_pixel_identity_sha256": "ebd4e6ac8e1176f8e99d458d49fca980c0260488751642ade5be6004bb9a4bf9",
-    "pdf_sha256": "ff4e842a6b5466b2c56494c89f3ecb89a9fe7fb73cf57a2021b2be967f24a8db",
+    "rendered_pixel_identity_sha256": "d9048ee78d41e307821d1bb52a9430c05c212fea8c653f4d621a145e5eafd2c1",
+    "pdf_sha256": "f55c396428cd1e11657717b0a8b64ddc73e6637c860bb5745a2327905e49470b",
     "page_job_by_logical_id": {
       "slide_2_statistical_model": "STATISTICAL_MODEL",
       "slide_3_real_data_application": "REAL_DATA_APPLICATION",
@@ -181,7 +181,7 @@
       "logical_id": "slide_2_statistical_model",
       "path": "results/034_research_presentation_render_identity_ci_recovery/generated/cuhk_production_build/rendered/slide-2.png",
       "mime_type": "image/png",
-      "sha256": "489c286b74f9b4cf0ea74338e0e0fb7dd0a6da1d8fdb9bb0f80583881a71aa0e",
+      "sha256": "fa2cbb20122692ea9d8517d8ad19d7bb8568a814608acd5b3521d6f451800ee2",
       "description": "Rendered exact-CUHK production page for STATISTICAL_MODEL using source evidence EV-MODEL-001."
     },
     {
@@ -216,14 +216,14 @@
       "logical_id": "slide_7_medical_image_comparison",
       "path": "results/034_research_presentation_render_identity_ci_recovery/generated/cuhk_production_build/rendered/slide-7.png",
       "mime_type": "image/png",
-      "sha256": "af5b29da99fe6aef8464023383e7634f0cc40f2df32ead582d584b96d5d9e000",
+      "sha256": "6a095ca7983eeafe285a2b491b3288d21f1b5deaa10b4f7877fa969df0d21d76",
       "description": "Rendered exact-CUHK production page for MEDICAL_IMAGE_COMPARISON using source evidence EV-MEDICAL-001."
     },
     {
       "logical_id": "deck_contact_sheet",
       "path": "results/034_research_presentation_render_identity_ci_recovery/generated/deck_contact_sheet.png",
       "mime_type": "image/png",
-      "sha256": "83d88d572e648d2b32b0bb368faba1be536f7a3f23917c4260464233e090c71c",
+      "sha256": "5ba36bbd97f465e5bd05729113dc5f570243f5ec371e705758f98f747d55065a",
       "description": "Deck-level contact sheet preserving the rendered slide sequence for rhythm, density, transition, and template-repeat review.",
       "review_role": "deck_sequence_context"
     }

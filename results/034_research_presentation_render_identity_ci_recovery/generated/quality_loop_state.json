@@ -3,9 +3,9 @@
   "max_repair_cycles": 1,
   "repair_cycle_count": 0,
   "render_identity_kind": "render_input_identity_sha256",
-  "initial_render_identity": "c4129f2b2e2f7c3a7e65af93e5c663ea63d08aef9b1d844d0355291c6d32831b",
-  "initial_render_input_identity": "c4129f2b2e2f7c3a7e65af93e5c663ea63d08aef9b1d844d0355291c6d32831b",
-  "initial_rendered_pixel_identity": "ebd4e6ac8e1176f8e99d458d49fca980c0260488751642ade5be6004bb9a4bf9",
+  "initial_render_identity": "a960ec005fc46f12fccb396bda639535e911273f7592dfa91f4494af5d8b5118",
+  "initial_render_input_identity": "a960ec005fc46f12fccb396bda639535e911273f7592dfa91f4494af5d8b5118",
+  "initial_rendered_pixel_identity": "d9048ee78d41e307821d1bb52a9430c05c212fea8c653f4d621a145e5eafd2c1",
   "initial_render_input_manifest": {
     "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
     "build_workspace": "results/034_research_presentation_render_identity_ci_recovery/generated/cuhk_production_build",
@@ -38,7 +38,7 @@
       {
         "path": "results/034_research_presentation_render_identity_ci_recovery/generated/cuhk_production_build/main.tex",
         "role": "main_tex",
-        "sha256": "fe7c71a11c12040224ebd35e913a7ae9d2ffc53a07bfd811f39950b59f5fca71"
+        "sha256": "2e50b6cc7820d6faae79dc6892b2ad96df364cdbfd4fbafc0ef2afe9fe9964d7"
       },
       {
         "path": "results/034_research_presentation_render_identity_ci_recovery/generated/cuhk_production_build/scientific_layouts.tex",
@@ -53,12 +53,12 @@
       {
         "path": "results/034_research_presentation_render_identity_ci_recovery/generated/cuhk_production_build/stage3_assets/failure_error_semantic_overlay.png",
         "role": "copied_scientific_asset",
-        "sha256": "0b19ba2824e4cc218ded74852e7a727ada39b0167b0e43afb32d416da008c33b"
+        "sha256": "09887ef143045d3262dc08623bd62cd0321c892590dd8e08287417b17ccf09cf"
       },
       {
         "path": "results/034_research_presentation_render_identity_ci_recovery/generated/cuhk_production_build/stage3_assets/failure_error_semantic_overlay_roi_zoom.png",
         "role": "copied_scientific_asset",
-        "sha256": "714215004c184be2ed205b0d37c13d28ff8b93afd71536c68aeb0fd90e300870"
+        "sha256": "3226c315eb3fb83d83f8129d0931d6876518d1dd8c029a43e05793c4d2cb76d8"
       },
       {
         "path": "results/034_research_presentation_render_identity_ci_recovery/generated/cuhk_production_build/stage3_assets/failure_gt.png",
@@ -111,7 +111,7 @@
         "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
       }
     ],
-    "sha256": "c4129f2b2e2f7c3a7e65af93e5c663ea63d08aef9b1d844d0355291c6d32831b"
+    "sha256": "a960ec005fc46f12fccb396bda639535e911273f7592dfa91f4494af5d8b5118"
   },
   "review_evidence_identity": null,
   "deck_level_decision": "WAITING_FOR_DECK_VISUAL_REVIEW",

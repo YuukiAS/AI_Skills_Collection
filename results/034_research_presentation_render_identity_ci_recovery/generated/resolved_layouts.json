@@ -36,26 +36,27 @@
       ],
       "source_to_cuhk_transform": [
         "source primary_bbox mapped into canonical CUHK content safe region",
-        "equation primary object expanded to projection-readable floor"
+        "equation primary object expanded to projection-readable floor",
+        "statistical-model equation remains primary while source-grounded supporting roles fill the page"
       ],
       "resolved_primary_object_geometry": {
-        "x": 0.1988,
-        "y": 0.4283,
+        "x": 0.2267,
+        "y": 0.2845,
         "w": 0.62,
-        "h": 0.2
+        "h": 0.215
       },
       "resolved_supporting_object_geometry": {
         "annotation": {
-          "x": 0.1988,
-          "y": 0.6533,
-          "w": 0.62,
-          "h": 0.12
+          "x": 0.155,
+          "y": 0.5,
+          "w": 0.69,
+          "h": 0.055
         },
         "caption": {
-          "x": 0.1988,
-          "y": 0.6533,
-          "w": 0.62,
-          "h": 0.12
+          "x": 0.155,
+          "y": 0.782,
+          "w": 0.69,
+          "h": 0.036
         }
       },
       "visual_hierarchy_mapping": [
@@ -96,7 +97,10 @@
       },
       "job_specific_runtime_contract": {
         "primitive": "accepted_foundation",
-        "source_fields_consumed": [],
+        "source_fields_consumed": [
+          "key_message",
+          "scientific_objects"
+        ],
         "same_case_roi_zoom": null
       },
       "text_region_packing": {
@@ -109,10 +113,10 @@
           "role": "primary_scientific_object",
           "native_type": "equation",
           "bbox": {
-            "x": 0.1988,
-            "y": 0.4283,
+            "x": 0.2267,
+            "y": 0.2845,
             "w": 0.62,
-            "h": 0.2
+            "h": 0.215
           }
         },
         {
@@ -120,10 +124,10 @@
           "role": "annotation",
           "native_type": "text_callout",
           "bbox": {
-            "x": 0.1988,
-            "y": 0.6533,
-            "w": 0.62,
-            "h": 0.12
+            "x": 0.155,
+            "y": 0.5,
+            "w": 0.69,
+            "h": 0.055
           }
         },
         {
@@ -131,10 +135,39 @@
           "role": "caption",
           "native_type": "text_caption",
           "bbox": {
-            "x": 0.1988,
-            "y": 0.6533,
-            "w": 0.62,
-            "h": 0.12
+            "x": 0.155,
+            "y": 0.782,
+            "w": 0.69,
+            "h": 0.036
+          }
+        },
+        {
+          "object_id": "production_model_model_roles",
+          "role": "source_grounded_model_roles",
+          "native_type": "text_explanation_block",
+          "source_fields": [
+            "scientific_objects"
+          ],
+          "bbox": {
+            "x": 0.155,
+            "y": 0.632,
+            "w": 0.32,
+            "h": 0.115
+          }
+        },
+        {
+          "object_id": "production_model_calibration_link",
+          "role": "source_grounded_calibration_link",
+          "native_type": "text_explanation_block",
+          "source_fields": [
+            "key_message",
+            "annotation"
+          ],
+          "bbox": {
+            "x": 0.525,
+            "y": 0.632,
+            "w": 0.32,
+            "h": 0.115
           }
         }
       ],
@@ -152,12 +185,16 @@
           "repo path",
           "run ID",
           "implementation commit",
+          "implementation language",
+          "production regression",
+          "source bundle",
+          "provenance",
           "review target",
           "fixture",
           "workflow"
         ]
       },
-      "resolved_layout_sha256": "1faa614626f5a2adec620edfb9c5967ac9c8edf8645b9891b60c08efdca43e5d"
+      "resolved_layout_sha256": "61361065261389857975900c5d7b0479be70c08ef27364cc0a73d9afcf5ba2d4"
     },
     {
       "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
@@ -257,7 +294,9 @@
         "primitive": "csv_driven_tikz_result_figure",
         "source_fields_consumed": [
           "data_source",
-          "figure_filter"
+          "figure_filter",
+          "key_message",
+          "scientific_objects"
         ],
         "same_case_roi_zoom": null
       },
@@ -314,12 +353,16 @@
           "repo path",
           "run ID",
           "implementation commit",
+          "implementation language",
+          "production regression",
+          "source bundle",
+          "provenance",
           "review target",
           "fixture",
           "workflow"
         ]
       },
-      "resolved_layout_sha256": "cb36d0ef6fbd6a4c0f2066c404049efd4fbf8e01060c479c05ba00960db2e3ff"
+      "resolved_layout_sha256": "b8a36e0a85b7df387aada4901479828a5fc538748dbe2b5f0256e325cbfd7cf8"
     },
     {
       "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
@@ -416,7 +459,10 @@
       },
       "job_specific_runtime_contract": {
         "primitive": "typed_scientific_hierarchy_relation_map",
-        "source_fields_consumed": [],
+        "source_fields_consumed": [
+          "key_message",
+          "scientific_objects"
+        ],
         "same_case_roi_zoom": null
       },
       "text_region_packing": {
@@ -472,12 +518,16 @@
           "repo path",
           "run ID",
           "implementation commit",
+          "implementation language",
+          "production regression",
+          "source bundle",
+          "provenance",
           "review target",
           "fixture",
           "workflow"
         ]
       },
-      "resolved_layout_sha256": "d638859b1914525dac13db7faefeab1f92dbdb50ff5479e5a9271406a720cfc1"
+      "resolved_layout_sha256": "4a92fc90aa67b4ea9fad0e994a9bf042d1a0d8eb58a82139cc3df1e3d8379a33"
     },
     {
       "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
@@ -574,7 +624,10 @@
       },
       "job_specific_runtime_contract": {
         "primitive": "accepted_foundation",
-        "source_fields_consumed": [],
+        "source_fields_consumed": [
+          "key_message",
+          "scientific_objects"
+        ],
         "same_case_roi_zoom": null
       },
       "text_region_packing": {
@@ -630,12 +683,16 @@
           "repo path",
           "run ID",
           "implementation commit",
+          "implementation language",
+          "production regression",
+          "source bundle",
+          "provenance",
           "review target",
           "fixture",
           "workflow"
         ]
       },
-      "resolved_layout_sha256": "fa9703572e7ac96e3632a64a04c73cac4abbd0bd27ba7b2f4bfe4967d9e90d1b"
+      "resolved_layout_sha256": "162cf1cfbb86c5baefcc334d1bbd4be1cd7bdb606b2a6effcac894121d7c296a"
     },
     {
       "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
@@ -748,7 +805,10 @@
       },
       "job_specific_runtime_contract": {
         "primitive": "evidence_manipulation_comparator_decision_map",
-        "source_fields_consumed": [],
+        "source_fields_consumed": [
+          "key_message",
+          "scientific_objects"
+        ],
         "same_case_roi_zoom": null
       },
       "text_region_packing": {
@@ -804,12 +864,16 @@
           "repo path",
           "run ID",
           "implementation commit",
+          "implementation language",
+          "production regression",
+          "source bundle",
+          "provenance",
           "review target",
           "fixture",
           "workflow"
         ]
       },
-      "resolved_layout_sha256": "e5ac386a16d537a3612f409aaeca8d0021f0f454976181b6770437e07eabcbf4"
+      "resolved_layout_sha256": "cd0dd4a9d761323fe32f510576e932dcf8bca9ee5b7c49ae51154b3910a15198"
     },
     {
       "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
@@ -908,7 +972,9 @@
         "primitive": "same_case_roi_crop_zoom",
         "source_fields_consumed": [
           "roi_source_asset",
-          "same_case_roi_zoom"
+          "same_case_roi_zoom",
+          "key_message",
+          "scientific_objects"
         ],
         "same_case_roi_zoom": {
           "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
@@ -1135,12 +1201,16 @@
           "repo path",
           "run ID",
           "implementation commit",
+          "implementation language",
+          "production regression",
+          "source bundle",
+          "provenance",
           "review target",
           "fixture",
           "workflow"
         ]
       },
-      "resolved_layout_sha256": "54bd3216bc23da24b6b4157508ed7cedc33aa24382201f63c57824d5f4b0cffb"
+      "resolved_layout_sha256": "62a3161441a548bef6d0c715ceb92c99b34358a7cf35e26dfe2ecccbd5e883b6"
     }
   ]
 }

@@ -23,22 +23,22 @@ Package hyperref Warning: Rerun to get /PageLabels entry.
 (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-environment-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-months-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-numbers-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict)
 No file main.nav.
 [1] (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd)
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 28--28
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 33--33
 [][]
 [2]
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 154--154
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 159--159
 [][]
 [3]
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 208--208
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 213--213
 [][]
 [4]
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 228--228
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 233--233
 [][]
 [5]
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 267--267
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 272--272
 [][]
 [6]
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 302--302
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 307--307
 [][]
 [7] (./main.aux)
 
@@ -72,22 +72,22 @@ For additional information on amsmath, use the `?' option.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 (./main.out) (./main.out) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-environment-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-months-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-numbers-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict) (./main.nav) [1] (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd)
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 28--28
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 33--33
 [][]
 [2]
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 154--154
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 159--159
 [][]
 [3]
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 208--208
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 213--213
 [][]
 [4]
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 228--228
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 233--233
 [][]
 [5]
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 267--267
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 272--272
 [][]
 [6]
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 302--302
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 307--307
 [][]
 [7] (./main.aux) )
 (see the transcript file for additional information)

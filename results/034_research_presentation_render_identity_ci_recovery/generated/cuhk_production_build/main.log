@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.12.14)  29 AUG 2026 00:56
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.12.14)  29 AUG 2026 01:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1206,15 +1206,15 @@ File: assets/logo_RGB.png Graphic file (type bmp)
 ]
 File: assets/logo_RGB.png Graphic file (type bmp)
 <assets/logo_RGB.png>
-LaTeX Font Info:    Trying to load font information for U+msa on input line 28.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 33.
  (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 28.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 33.
  (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 28--28
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 33--33
 [][]
  []
 
@@ -1226,7 +1226,7 @@ File: assets/logo_RGB.png Graphic file (type bmp)
 File: assets/logo_RGB.png Graphic file (type bmp)
 <assets/logo_RGB.png>
 
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 154--154
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 159--159
 [][]
  []
 
@@ -1238,7 +1238,7 @@ File: assets/logo_RGB.png Graphic file (type bmp)
 File: assets/logo_RGB.png Graphic file (type bmp)
 <assets/logo_RGB.png>
 
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 208--208
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 213--213
 [][]
  []
 
@@ -1252,7 +1252,7 @@ File: assets/logo_RGB.png Graphic file (type bmp)
 File: stage3_assets/small_g_negative_result.png Graphic file (type bmp)
 <stage3_assets/small_g_negative_result.png>
 
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 228--228
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 233--233
 [][]
  []
 
@@ -1264,7 +1264,7 @@ File: assets/logo_RGB.png Graphic file (type bmp)
 File: assets/logo_RGB.png Graphic file (type bmp)
 <assets/logo_RGB.png>
 
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 267--267
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 272--272
 [][]
  []
 
@@ -1290,7 +1290,7 @@ File: stage3_assets/failure_pred_semantic_overlay_roi_zoom.png Graphic file (typ
 File: stage3_assets/failure_error_semantic_overlay_roi_zoom.png Graphic file (type bmp)
 <stage3_assets/failure_error_semantic_overlay_roi_zoom.png>
 
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 302--302
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 307--307
 [][]
  []
 
@@ -1319,7 +1319,7 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Here is how much of TeX's memory you used:
  27947 strings out of 470134
  604458 string characters out of 5476762
- 1099669 words of memory out of 5000000
+ 1102138 words of memory out of 5000000
  55939 multiletter control sequences out of 15000+600000
  636298 words of font info for 114 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191

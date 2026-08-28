@@ -11,7 +11,7 @@
 \bibliographystyle{unsrt}
 
 \title{Clustered Interval Calibration And Synthetic Segmentation Robustness}
-\subtitle{One-call production regression from source bundle to exact CUHK deck}
+\subtitle{Uncertainty calibration across clustered data and segmentation stress cases}
 \author{Research Presentation Program}
 \institute{Department of Statistics \& Data Science}
 \date{2026-08-27}
@@ -22,8 +22,13 @@
 \begin{frame}[t]{Clustered outcomes separate center and individual variation}
 \begin{tikzpicture}[x=\paperwidth,y=-\paperheight]
 \path[use as bounding box] (0,0.12) rectangle (1,0.82);
-\StageThreeNode{0.1988}{0.4283}{0.6200}{center}{\Large \[\displaystyle Y_{ij}=\beta_0+\beta_1T_{ij}+u_j+\varepsilon_{ij},\quad u_j\sim N(0,\tau^2),\quad \varepsilon_{ij}\sim N(0,\sigma^2)\]};
-\StageThreeNode{0.1988}{0.6533}{0.6200}{left}{\small Center effects set \(\rho=\tau^2/(\tau^2+\sigma^2)\), so interval calibration depends on cluster count.};
+\StageThreeNode{0.2267}{0.2845}{0.6200}{center}{\Large \[\displaystyle Y_{ij}=\beta_0+\beta_1T_{ij}+u_j+\varepsilon_{ij},\quad u_j\sim N(0,\tau^2),\quad \varepsilon_{ij}\sim N(0,\sigma^2)\]};
+\StageThreeNode{0.1550}{0.5000}{0.6900}{left}{\small Center effects set \(\rho=\tau^2/(\tau^2+\sigma^2)\), so interval calibration depends on cluster count.};
+\StageThreePanel{0.1400}{0.6150}{0.4900}{0.7620};
+\StageThreePanel{0.5100}{0.6150}{0.8600}{0.7620};
+\StageThreeNode{0.1550}{0.6370}{0.3200}{left}{\scriptsize\textbf{Model roles}\\[-0.15em]\scriptsize\textbullet\ clustered outcome equation\\\scriptsize\textbullet\ center random effect\\\scriptsize\textbullet\ individual error};
+\StageThreeNode{0.5250}{0.6370}{0.3200}{left}{\scriptsize\textbf{Calibration link}\\[-0.15em]The source model makes center-level dependence explicit before interval comparison.};
+\StageThreeNode{0.1550}{0.7820}{0.6900}{center}{\scriptsize Center variation and individual variation define the ICC before the interval comparison.};
 \end{tikzpicture}
 \end{frame}
 

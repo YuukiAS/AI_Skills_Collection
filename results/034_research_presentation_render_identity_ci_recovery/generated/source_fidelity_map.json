@@ -21,7 +21,9 @@
       "generated_object_ids": [
         "production_model_primary",
         "production_model_annotation",
-        "production_model_caption"
+        "production_model_caption",
+        "production_model_model_roles",
+        "production_model_calibration_link"
       ],
       "selected_gold_id": "GSC-016",
       "selected_reference_id": "RRL-020",

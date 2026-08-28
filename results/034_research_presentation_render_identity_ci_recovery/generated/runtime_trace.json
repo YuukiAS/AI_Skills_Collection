@@ -218,7 +218,7 @@
       "selected_reference_id": "RRL-020",
       "source_composition_identity": {
         "recipe_sha256": "9615cc4bcd20f8ec2a7c1a15c91f4dd030754ac21f08b5003be5ec79a565d023",
-        "resolved_layout_sha256": "1faa614626f5a2adec620edfb9c5967ac9c8edf8645b9891b60c08efdca43e5d"
+        "resolved_layout_sha256": "61361065261389857975900c5d7b0479be70c08ef27364cc0a73d9afcf5ba2d4"
       },
       "source_derived_composition_fields_consumed": [
         "primary_bbox",
@@ -314,7 +314,7 @@
       "selected_reference_id": "RRL-016",
       "source_composition_identity": {
         "recipe_sha256": "c409cd71c5831d4e4ad49ef4cb7d3c6cdf85deee1f19a1fc11a191adc51c11bc",
-        "resolved_layout_sha256": "cb36d0ef6fbd6a4c0f2066c404049efd4fbf8e01060c479c05ba00960db2e3ff"
+        "resolved_layout_sha256": "b8a36e0a85b7df387aada4901479828a5fc538748dbe2b5f0256e325cbfd7cf8"
       },
       "source_derived_composition_fields_consumed": [
         "primary_bbox",
@@ -388,7 +388,7 @@
       "selected_reference_id": "RRL-019",
       "source_composition_identity": {
         "recipe_sha256": "a08385437ea881fedf1c5bd1f0007522933b48b4684fba79753f97692b79a80e",
-        "resolved_layout_sha256": "d638859b1914525dac13db7faefeab1f92dbdb50ff5479e5a9271406a720cfc1"
+        "resolved_layout_sha256": "4a92fc90aa67b4ea9fad0e994a9bf042d1a0d8eb58a82139cc3df1e3d8379a33"
       },
       "source_derived_composition_fields_consumed": [
         "primary_bbox",
@@ -462,7 +462,7 @@
       "selected_reference_id": "RRL-011",
       "source_composition_identity": {
         "recipe_sha256": "4aae3a6bbe7cda1c0346dd1ea5c5f7c786ec42c08a7d03a07a646ee3472b0b7f",
-        "resolved_layout_sha256": "fa9703572e7ac96e3632a64a04c73cac4abbd0bd27ba7b2f4bfe4967d9e90d1b"
+        "resolved_layout_sha256": "162cf1cfbb86c5baefcc334d1bbd4be1cd7bdb606b2a6effcac894121d7c296a"
       },
       "source_derived_composition_fields_consumed": [
         "primary_bbox",
@@ -536,7 +536,7 @@
       "selected_reference_id": "RRL-059",
       "source_composition_identity": {
         "recipe_sha256": "5ff51c819553d350ceb0e76c1315bf894fe61845e95ebb13f88c4c350892b464",
-        "resolved_layout_sha256": "e5ac386a16d537a3612f409aaeca8d0021f0f454976181b6770437e07eabcbf4"
+        "resolved_layout_sha256": "cd0dd4a9d761323fe32f510576e932dcf8bca9ee5b7c49ae51154b3910a15198"
       },
       "source_derived_composition_fields_consumed": [
         "primary_bbox",
@@ -630,7 +630,7 @@
       "selected_reference_id": "RRL-013",
       "source_composition_identity": {
         "recipe_sha256": "f2099fe794caab01779329db7bc8cb1775aa3f43b01837badc91b80a0dd5ac78",
-        "resolved_layout_sha256": "54bd3216bc23da24b6b4157508ed7cedc33aa24382201f63c57824d5f4b0cffb"
+        "resolved_layout_sha256": "62a3161441a548bef6d0c715ceb92c99b34358a7cf35e26dfe2ecccbd5e883b6"
       },
       "source_derived_composition_fields_consumed": [
         "primary_bbox",
@@ -672,7 +672,7 @@
     "deck_contact_sheet": {
       "status": "GENERATED",
       "path": "results/034_research_presentation_render_identity_ci_recovery/generated/deck_contact_sheet.png",
-      "sha256": "83d88d572e648d2b32b0bb368faba1be536f7a3f23917c4260464233e090c71c"
+      "sha256": "5ba36bbd97f465e5bd05729113dc5f570243f5ec371e705758f98f747d55065a"
     }
   }
 }
