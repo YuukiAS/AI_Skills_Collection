@@ -99,6 +99,28 @@ def storyline_job_rank(job: dict[str, Any]) -> int:
     return STORYLINE_JOB_ORDER.get(str(job.get("page_job", "")), 100)
 
 
+UNSAFE_AUDIENCE_TRANSITION_TERMS = (
+    "workstream",
+    "causal bridge",
+    "workflow",
+    "implementation",
+    "provenance",
+    "qa",
+    "fixture",
+    "source bundle",
+    "run id",
+)
+
+
+def audience_transition_text(workstream_scope: str) -> str:
+    scope = workstream_scope.strip()
+    if not scope:
+        return ""
+    if any(term in scope.lower() for term in UNSAFE_AUDIENCE_TRANSITION_TERMS):
+        return ""
+    return scope
+
+
 def build_storyline(bundle: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     evidence_by_id = {item["id"]: item for item in bundle["evidence"]}
     assignments: list[dict[str, Any]] = []
@@ -168,7 +190,6 @@ def build_storyline(bundle: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[
     for job in ordered_jobs:
         enriched = dict(job)
         assignment = assignment_by_page[job["page_id"]]
-        workstream_payload = ordered_workstream_payload[assignment["workstream_order"] - 1]
         enriched["section"] = assignment["workstream_label"]
         enriched["storyline"] = {
             "workstream_id": assignment["workstream_id"],
@@ -181,8 +202,7 @@ def build_storyline(bundle: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[
         if len(ordered_workstreams) > 1 and assignment["storyline_order"] == first_page_by_workstream[assignment["workstream_id"]] and assignment["workstream_order"] > 1:
             enriched["storyline_transition"] = {
                 "label": assignment["workstream_label"],
-                "audience_text": "independent workstream; no causal bridge asserted",
-                "relation_to_previous": workstream_payload["relation_to_previous"],
+                "audience_text": audience_transition_text(assignment["workstream_scope"]),
             }
         enriched_jobs.append(enriched)
 

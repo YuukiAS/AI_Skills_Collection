@@ -32,6 +32,9 @@ FORBIDDEN_AUDIENCE_TERMS = [
     "review target",
     "fixture",
     "workflow",
+    "Workstream transition",
+    "independent workstream",
+    "no causal bridge asserted",
 ]
 
 

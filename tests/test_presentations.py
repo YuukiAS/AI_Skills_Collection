@@ -1022,9 +1022,12 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertIn("Same-case ROI zoom", tex)
             self.assertLess(tex.index("Small-G settings remain anti-conservative"), tex.index("Next experiment tests whether batch selection"))
             self.assertLess(tex.index("Next experiment tests whether batch selection"), tex.index("Same-case panels keep the segmentation error interpretable"))
-            self.assertIn("Workstream transition", tex)
+            self.assertIn("Research direction", tex)
             self.assertIn("Segmentation robustness", tex)
-            self.assertIn("no causal bridge asserted", tex)
+            self.assertIn("independent visual failure analysis", tex)
+            self.assertNotIn("Workstream transition", tex)
+            self.assertNotIn("independent workstream", tex)
+            self.assertNotIn("no causal bridge asserted", tex)
             for forbidden in ["RRL-", "SRC-", "GSC-", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "run ID", "fixture", "workflow", "production regression", "source bundle"]:
                 self.assertNotIn(forbidden, tex)
 
@@ -1195,7 +1198,11 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(transition_slide["storyline_transition"]["cue_variant"], "compact")
             tex = (repaired / "cuhk_production_build/main.tex").read_text(encoding="utf-8")
             self.assertIn(r"\StageThreePanel{0.0600}{0.1450}{0.9400}{0.2020}", tex)
-            self.assertIn("no causal bridge asserted", tex)
+            self.assertIn("Research direction", tex)
+            self.assertIn("Segmentation robustness", tex)
+            self.assertNotIn("Workstream transition", tex)
+            self.assertNotIn("independent workstream", tex)
+            self.assertNotIn("no causal bridge asserted", tex)
             self.assertNotIn("deck-transition-too-heavy", tex)
 
             sequence = json.loads((repaired / "deck_sequence_summary.json").read_text(encoding="utf-8"))
@@ -1284,7 +1291,12 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual([item["workstream_id"] for item in storyline["workstreams"]], ["alpha_path", "beta_audit"])
         beta_result = next(job for job in ordered_jobs if job["page_id"] == "beta_result")
         self.assertEqual(beta_result["storyline_transition"]["label"], "Beta audit")
-        self.assertIn("independent workstream", beta_result["storyline_transition"]["audience_text"])
+        self.assertEqual(beta_result["storyline_transition"]["audience_text"], "measurement audit and next decision")
+        transition_payload = json.dumps(beta_result["storyline_transition"], ensure_ascii=False).lower()
+        for forbidden in ["workstream transition", "independent workstream", "no causal bridge asserted", "segmentation robustness"]:
+            self.assertNotIn(forbidden, transition_payload)
+        for causal_connector in ["therefore", "because", "causes", "applies to", "derived from"]:
+            self.assertNotIn(causal_connector, transition_payload)
         for assignment in storyline["page_assignments"]:
             self.assertEqual(assignment["assignment_basis"], ["explicit source workstream metadata"])
 
