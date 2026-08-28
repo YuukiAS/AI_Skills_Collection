@@ -1,0 +1,379 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": "On slide 6, the four-stage experiment diagram spreads thin connector lines and small multi-line labels across almost the full width. The failure-evidence text, comparator-arm labels, and go/no-go criterion are notably smaller than the slide title and require close viewing.",
+      "finding_id": "F-001",
+      "item_id": "slide_6_next_experiment",
+      "recommendation": "Enlarge the decision criterion and key arm labels, and simplify the failure-evidence and comparator text so the experiment logic is projection-readable at normal viewing distance.",
+      "requirement_id": "R-PROJECTION-READABILITY",
+      "severity": "non_blocking",
+      "summary": "The next-experiment slide is visually coherent but its key operational details are too small for a strong presentation-reading standard."
+    },
+    {
+      "evidence": "The contact sheet shows a pronounced density change from the very sparse formula page (slide 2) to the multi-panel results page (slide 3), then another highly information-dense process page (slide 6). Slide 6 is especially text-heavy at contact-sheet scale.",
+      "finding_id": "F-002",
+      "item_id": "deck_contact_sheet",
+      "recommendation": "Rebalance page rhythm by using some of the unused vertical space on slides 2 and 6 to enlarge the scientific object and reduce fine-print explanatory text.",
+      "requirement_id": "R-DECK-RHYTHM",
+      "severity": "non_blocking",
+      "summary": "The deck has good content alternation, but adjacent-page density and type scale are not fully even."
+    }
+  ],
+  "created_at": "2026-08-28T20:39:47Z",
+  "evidence_id": "visual-review-035_research_presentation_generic_model_support_recovery-96b43925694b",
+  "images": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "mime_type": "image/png",
+      "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/rendered/slide-2.png",
+      "sha256": "27565a9f18924e0668a535631d896c12c6d8e567819554e3c81f69c43f4e6f18"
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "mime_type": "image/png",
+      "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/rendered/slide-3.png",
+      "sha256": "4c609896aff98b3d8dc24941ace84690b9e858d370af330682500e735df6af2d"
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "mime_type": "image/png",
+      "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/rendered/slide-4.png",
+      "sha256": "e1775c71ddee184155cd69bc7c9858a5967be5c6a220cd0c6c25b33e372f69f1"
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "mime_type": "image/png",
+      "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/rendered/slide-5.png",
+      "sha256": "daf79c0f303860e8d4c01fe6bb810ef80a4f0d454bc681d100e017e02c45eb06"
+    },
+    {
+      "logical_id": "slide_6_next_experiment",
+      "mime_type": "image/png",
+      "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/rendered/slide-6.png",
+      "sha256": "0fc4574ecbb5deb5ffac2cecbddcdd66967e2301c3199a931ffe06507f1e95aa"
+    },
+    {
+      "logical_id": "slide_7_medical_image_comparison",
+      "mime_type": "image/png",
+      "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/rendered/slide-7.png",
+      "sha256": "af5b29da99fe6aef8464023383e7634f0cc40f2df32ead582d584b96d5d9e000"
+    },
+    {
+      "logical_id": "deck_contact_sheet",
+      "mime_type": "image/png",
+      "path": "results/035_research_presentation_generic_model_support_recovery/generated/deck_contact_sheet.png",
+      "sha256": "ee9fa5f1584be97f966ad0bd72967e1f7976919c82ecdd93b7b633b87f567052"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "build_manifest": "results/035_research_presentation_generic_model_support_recovery/generated/BUILD_MANIFEST.json",
+      "build_manifest_sha256": "38f4801ebcf0a322e40cbccd271669b38cbf11dc83eba34f5b8e0e9c12fea296",
+      "deck_contact_sheet": "results/035_research_presentation_generic_model_support_recovery/generated/deck_contact_sheet.png",
+      "deck_contact_sheet_sha256": "ee9fa5f1584be97f966ad0bd72967e1f7976919c82ecdd93b7b633b87f567052",
+      "deck_identity_sha256": "b7a13b01b53af8211ee9c2785df73ba3f10af36ad8ec1eb23a5b037c9f3e73f5",
+      "deck_sequence_summary": "results/035_research_presentation_generic_model_support_recovery/generated/deck_sequence_summary.json",
+      "deck_sequence_summary_sha256": "4b2e608ca06edc2f8585584eb119ebb5412e6e0d33fd9431552f21d638b42f2b",
+      "implementation_commit": "5501edce262254547bbcefbe04a0827172a73861",
+      "input_title": "Clustered Interval Calibration And Synthetic Segmentation Robustness",
+      "page_job_by_logical_id": {
+        "slide_2_statistical_model": "STATISTICAL_MODEL",
+        "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+        "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+        "slide_5_negative_result": "NEGATIVE_RESULT",
+        "slide_6_next_experiment": "NEXT_EXPERIMENT",
+        "slide_7_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON"
+      },
+      "pdf_sha256": "db917bfe05ec2150947b03cd22b8c8636382e55be4badd29e2ae66089bfe7786",
+      "quality_loop_state": "results/035_research_presentation_generic_model_support_recovery/generated/quality_loop_state.json",
+      "quality_loop_state_sha256": "f1a15e85dd675e8536f4f37dda824864be5748413e24a0b8ccac96f8b5a47012",
+      "render_input_identity": {
+        "build_workspace": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build",
+        "files": [
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/assets/background.png",
+            "role": "canonical_cuhk_asset",
+            "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/assets/background_negative.png",
+            "role": "canonical_cuhk_asset",
+            "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/assets/logo_RGB.png",
+            "role": "canonical_cuhk_asset",
+            "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+            "role": "canonical_cuhk_asset",
+            "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/bibliography.bib",
+            "role": "canonical_cuhk_support",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/main.tex",
+            "role": "main_tex",
+            "sha256": "0d929287db15fdd8e7affae22b2a3009ac22f4566308322897304a5bd23d8d28"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/scientific_layouts.tex",
+            "role": "scientific_layout_include",
+            "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/stage3_assets/failure_error.png",
+            "role": "copied_scientific_asset",
+            "sha256": "9c196b9f214495095402d579b524e77c30144a3831aa065ecb990e964960440f"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/stage3_assets/failure_error_semantic_overlay.png",
+            "role": "copied_scientific_asset",
+            "sha256": "0b19ba2824e4cc218ded74852e7a727ada39b0167b0e43afb32d416da008c33b"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/stage3_assets/failure_error_semantic_overlay_roi_zoom.png",
+            "role": "copied_scientific_asset",
+            "sha256": "714215004c184be2ed205b0d37c13d28ff8b93afd71536c68aeb0fd90e300870"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/stage3_assets/failure_gt.png",
+            "role": "copied_scientific_asset",
+            "sha256": "70fe06d3c80ba25484ceaf0484820fea0ab6378d0852d64deda972d175d7dbaf"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/stage3_assets/failure_gt_semantic_overlay.png",
+            "role": "copied_scientific_asset",
+            "sha256": "123680750fecb846a0164b476094e47d123e5a6dbc43a4d9a451b0de3deb59f7"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/stage3_assets/failure_gt_semantic_overlay_roi_zoom.png",
+            "role": "copied_scientific_asset",
+            "sha256": "bcedb58f27502ca8978bbbcc4e435a77c4e014ea61a6f923864161ccc11d370a"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/stage3_assets/failure_input.png",
+            "role": "copied_scientific_asset",
+            "sha256": "dbb133c18d2b0879cb193be19034ba6cfeeeb2b35876d506ca1af2faaed745e5"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/stage3_assets/failure_pred.png",
+            "role": "copied_scientific_asset",
+            "sha256": "41ed6a894559333c82a5bc2e2885528060684a40ffd7de2e4e725eba982c5c7a"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/stage3_assets/failure_pred_semantic_overlay.png",
+            "role": "copied_scientific_asset",
+            "sha256": "cd4c4f94bf816155425dbbaabd2efb17c884848d67acf38f6774933107ab40bb"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/stage3_assets/failure_pred_semantic_overlay_roi_zoom.png",
+            "role": "copied_scientific_asset",
+            "sha256": "19e88c9a264c8e98f369d7e890f7e44e1122da90fef34c3da9f0146724d1abd2"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/stage3_assets/small_g_negative_result.png",
+            "role": "copied_scientific_asset",
+            "sha256": "69b2c66637554bd9fb44c319cbdeab52037906aadd1e49a145dae657c5252e8b"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+            "role": "canonical_cuhk_style",
+            "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+          },
+          {
+            "path": "results/035_research_presentation_generic_model_support_recovery/generated/cuhk_production_build/styles/sintefcolor.sty",
+            "role": "canonical_cuhk_style",
+            "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+          }
+        ],
+        "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+        "sha256": "aa05d12a3a1a5966b9a9f75e07bacd4d0d96dd55ecc584dac3f6f4b205676517"
+      },
+      "render_input_identity_sha256": "aa05d12a3a1a5966b9a9f75e07bacd4d0d96dd55ecc584dac3f6f4b205676517",
+      "rendered_pixel_identity_sha256": "b270b96400201a6ec8a69127e943eafd028e9b6014ea8dcb820172bbdc41c256",
+      "selected_gold_by_page_id": {
+        "production_experiment_design": "GSC-004",
+        "production_medical_comparison": "GSC-008",
+        "production_model": "GSC-016",
+        "production_negative_result": "GSC-012",
+        "production_next_experiment": "GSC-018",
+        "production_quantitative_result": "GSC-014"
+      },
+      "source_evidence_ids_by_logical_id": {
+        "slide_2_statistical_model": [
+          "EV-MODEL-001"
+        ],
+        "slide_3_real_data_application": [
+          "EV-RESULT-001"
+        ],
+        "slide_4_experiment_design": [
+          "EV-DESIGN-001"
+        ],
+        "slide_5_negative_result": [
+          "EV-NEGATIVE-001"
+        ],
+        "slide_6_next_experiment": [
+          "EV-NEXT-001"
+        ],
+        "slide_7_medical_image_comparison": [
+          "EV-MEDICAL-001"
+        ]
+      },
+      "source_fidelity_map": "results/035_research_presentation_generic_model_support_recovery/generated/source_fidelity_map.json",
+      "source_fidelity_map_sha256": "7efecd91cdbbf8ddf153c20303fa99953ffb4d47fbe558ea9067614e3849a1bf",
+      "task_key": "035_research_presentation_generic_model_support_recovery"
+    },
+    "manifest_sha256": "96b43925694bf50c235f191d7920d4feb8176fd09aff790c48170e81773b382e",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "Review the rendered pixels from one normal research-presentations production invocation. Check that each page contains source-specific content from the supplied engineering bundle rather than placeholders; exact CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math, native plots, and medical images are semantically correct where present; no internal RRL/GSC/SRC, QA, provenance, workflow, repo path, run ID, or implementation language leaks into audience-facing slides; repeated generic cards or one-template pages are rejected; and the deck reads as one coherent research update rather than disconnected benchmark pages. For multi-workstream bundles, confirm that each workstream stays internally continuous and that any independent workstream transition is visible without inventing a causal relation. Separately review the deck_contact_sheet item as a deck-level rhythm object: adjacent-page density jumps, repeated composition face, overfull or empty pages, redundant summary filler, result -> failure -> next-experiment rhythm, workstream transition balance, and title/object/formula/image alternation must meet a mature doctoral group-meeting or strong conference-talk bar. The top-level package PASS is not enough; provide item-level judgement and observations for deck_contact_sheet. Do not infer visual quality from filenames or hashes.",
+      "source_contracts": [
+        "The engineering regression bundle is public-safe and explicitly excluded from Stage 5 holdouts.",
+        "Stage 2 gold/reference pixels are used only for compatible composition selection.",
+        "The deck-quality loop may repair at most once and must fail closed/no-winner for unsafe findings or unresolved blockers."
+      ]
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "PASS",
+      "item_id": "slide_2_statistical_model",
+      "observations": [
+        "A large mixed-effects equation is the central scientific object and is clear against the white field.",
+        "The supporting ICC relation and two labeled interpretation boxes directly explain the displayed model.",
+        "CUHK-styled purple header, crest, typography, and slide numbering are visibly consistent.",
+        "No audience-facing workflow, repository, run-ID, or implementation-language text is visible."
+      ],
+      "requirement_ids": [
+        "R-SOURCE-SPECIFIC-CONTENT",
+        "R-CUHK-IDENTITY",
+        "R-SCIENTIFIC-OBJECT",
+        "R-NO-INTERNAL-LEAKS"
+      ],
+      "summary": "A clean, source-specific model slide with an appropriately prominent formula."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_3_real_data_application",
+      "observations": [
+        "Three native line-chart panels visibly compare naïve iid and cluster-robust coverage across G=8, G=20, and G=50.",
+        "The plot annotations, nominal 0.95 reference, method key, and data-source statement make the result interpretable.",
+        "The scientific claim in the title is supported by the plotted trajectories rather than by generic text.",
+        "No prohibited internal-process wording is visible."
+      ],
+      "requirement_ids": [
+        "R-SOURCE-SPECIFIC-CONTENT",
+        "R-NATIVE-PLOTS",
+        "R-SCIENTIFIC-OBJECT",
+        "R-NO-INTERNAL-LEAKS"
+      ],
+      "summary": "A coherent results page whose central coverage comparison is visually and semantically clear."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_4_experiment_design",
+      "observations": [
+        "The DGP stress grid, nested-center schematic, interval procedures, and endpoints form a continuous left-to-right design explanation.",
+        "Connector arrows explicitly distinguish generation, estimation, and evaluation.",
+        "Specific design factors are visible, including center counts, ICC values, balance condition, and 400 replications per cell.",
+        "The page is not a generic card layout; its diagram is tailored to the simulation design."
+      ],
+      "requirement_ids": [
+        "R-SOURCE-SPECIFIC-CONTENT",
+        "R-SCIENTIFIC-OBJECT",
+        "R-COHERENT-STORY"
+      ],
+      "summary": "A source-specific experiment-design schematic that remains continuous with the preceding model and coverage result."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_5_negative_result",
+      "observations": [
+        "The bar chart clearly shows declining naïve coverage and still-subnominal cluster-robust coverage at high ICC for G=8.",
+        "The 0.95 target line, error bars, numeric labels, and arrow annotation make the failure region explicit.",
+        "Adjacent prose gives a substantive interpretation and names proposed follow-up tests without internal workflow leakage.",
+        "The negative-result content follows naturally from the preceding simulation setup and results."
+      ],
+      "requirement_ids": [
+        "R-SOURCE-SPECIFIC-CONTENT",
+        "R-NATIVE-PLOTS",
+        "R-NEGATIVE-RESULT-RHYTHM",
+        "R-COHERENT-STORY"
+      ],
+      "summary": "A readable negative-evidence slide with a clear diagnostic message."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_6_next_experiment",
+      "observations": [
+        "The slide visibly connects the preceding G=8, ICC=.5 coverage shortfall to sampling strategies, comparator arms, and a go/no-go decision.",
+        "The process is scientifically specific and preserves the result-to-failure-to-next-experiment progression.",
+        "Key body text and decision-rule details are small relative to the broad, sparse layout, reducing projection readability.",
+        "No prohibited internal IDs, paths, QA language, or implementation details are visible."
+      ],
+      "requirement_ids": [
+        "R-SOURCE-SPECIFIC-CONTENT",
+        "R-PROJECTION-READABILITY",
+        "R-NEGATIVE-RESULT-RHYTHM",
+        "R-COHERENT-STORY"
+      ],
+      "summary": "Scientifically connected and specific, but the central operational details need larger type and simplification."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_7_medical_image_comparison",
+      "observations": [
+        "The page visibly marks an independent segmentation-robustness workstream and explicitly states that no causal bridge is asserted.",
+        "Input, ground truth, prediction, and error panels are matched to the same case, with the ROI and magnified crops visibly linked.",
+        "The TP/FP/FN overlay legend is adjacent to the error display and uses distinct colors consistent with the displayed overlays.",
+        "The imagery and labels support a semantic segmentation comparison rather than a generic image montage."
+      ],
+      "requirement_ids": [
+        "R-WORKSTREAM-TRANSITION",
+        "R-MEDICAL-IMAGE-SEMANTICS",
+        "R-SOURCE-SPECIFIC-CONTENT",
+        "R-NO-INTERNAL-LEAKS"
+      ],
+      "summary": "A clear independent-workstream transition and an interpretable same-case segmentation error analysis."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "deck_contact_sheet",
+      "observations": [
+        "The rendered sequence visibly establishes CUHK identity on the title page through the crest, purple Beamer-style banding, and full university name, then maintains the same presentation system on slides 2–7.",
+        "The deck has a coherent first workstream: model, coverage result, simulation design, failure result, and next experiment. It then explicitly transitions to an independent segmentation workstream without asserting causality.",
+        "Visual alternation is substantive: equation, line plots, design schematic, bar plot, experimental flow, and image comparison. The pages do not repeat a single generic-card composition.",
+        "Slide 2 is substantially more open than slide 3, while slide 6 concentrates several small text blocks and decision details; this creates uneven density at deck level.",
+        "There is no visible audience-facing RRL, GSC, SRC, QA, provenance, repo-path, run-ID, or implementation-language leakage."
+      ],
+      "requirement_ids": [
+        "R-CUHK-IDENTITY",
+        "R-DECK-RHYTHM",
+        "R-WORKSTREAM-TRANSITION",
+        "R-NO-TEMPLATE-REPETITION",
+        "R-NO-INTERNAL-LEAKS"
+      ],
+      "summary": "The deck reads as one mature research update with a properly labeled independent second workstream, but density and type-scale rebalancing—especially on the next-experiment page—would improve its group-meeting/conference readiness."
+    }
+  ],
+  "non_blocking_notes": [
+    "The slide sequence has a strong result → failure → next-experiment rhythm before the explicitly independent segmentation workstream.",
+    "No repeated generic-card page pattern is visible; each page uses a different scientific object or evidence form.",
+    "The primary improvement is presentation-scale readability, not content provenance or semantic correctness."
+  ],
+  "overall_decision": "REVISE",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "96b43925694bf50c235f191d7920d4feb8176fd09aff790c48170e81773b382e",
+  "review_kind": "035_research_presentation_generic_model_support_recovery-one-call-production-research-deck-review",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "REVISE",
+  "task_key": "035_research_presentation_generic_model_support_recovery",
+  "workflow_type": "reviewed_handoff"
+}
