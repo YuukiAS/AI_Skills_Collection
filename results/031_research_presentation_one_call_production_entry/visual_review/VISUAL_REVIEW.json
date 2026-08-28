@@ -1,0 +1,226 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": "Slides 2–5 and 7 concern clustered-data interval coverage, ICC, center counts, and CR2/bootstrap testing, while slide 6 abruptly presents a same-case lesion-segmentation comparison (Input/GT/Prediction/Error) with no visible bridge, shared outcome, or explanation of its role in the update.",
+      "finding_id": "F-001",
+      "item_id": "slide_6_medical_image_comparison",
+      "recommendation": "Add a visible transition or framing that connects the segmentation case to the interval-coverage research question, or separate it into a clearly identified second workstream with an explanatory agenda/section cue.",
+      "requirement_id": "deck_coherence",
+      "severity": "blocking",
+      "summary": "The medical-image page reads as an unrelated benchmark page rather than part of the clustered-inference research update."
+    }
+  ],
+  "created_at": "2026-08-28T03:35:49Z",
+  "evidence_id": "visual-review-031_research_presentation_one_call_production_entry-bc543a99163b",
+  "images": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "mime_type": "image/png",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-2.png",
+      "sha256": "185b02f15bd7c524c3f8fe656f58c0d23882228d996a236730dbeb8c61c860bf"
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "mime_type": "image/png",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-3.png",
+      "sha256": "ec4bdc7aaefefc57518079b1483790f0ab25d0ab37d494bee9e097a4107196a7"
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "mime_type": "image/png",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-4.png",
+      "sha256": "ed55c2329a3945e4d46d548dec3315c639d24a0af940507f6752b6979639b8da"
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "mime_type": "image/png",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-5.png",
+      "sha256": "81d14477c77d30f39439cf37d12ac320677da2f2c7768762caa18ff35a54a932"
+    },
+    {
+      "logical_id": "slide_6_medical_image_comparison",
+      "mime_type": "image/png",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-6.png",
+      "sha256": "5ef013e4431e89eebb51462a8ee41c93e8025d798165a86b5bb01534acdf92c6"
+    },
+    {
+      "logical_id": "slide_7_next_experiment",
+      "mime_type": "image/png",
+      "path": "results/031_research_presentation_one_call_production_entry/generated/cuhk_production_build/rendered/slide-7.png",
+      "sha256": "ddc285ac857251131f3cf6d47a6a14b344dbcf6ae7e6c2793f59d9cfcdc02c85"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "build_manifest": "results/031_research_presentation_one_call_production_entry/generated/BUILD_MANIFEST.json",
+      "build_manifest_sha256": "1de1ea8bab54787eeea8b77a48b715c3020ab8e83fe3314bfff65caef062af99",
+      "implementation_commit": "11509b5e2bf7959433f1616c1d4ad77f77f4000e",
+      "input_title": "Clustered Interval Calibration And Synthetic Segmentation Robustness",
+      "page_job_by_logical_id": {
+        "slide_2_statistical_model": "STATISTICAL_MODEL",
+        "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+        "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+        "slide_5_negative_result": "NEGATIVE_RESULT",
+        "slide_6_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON",
+        "slide_7_next_experiment": "NEXT_EXPERIMENT"
+      },
+      "pdf_sha256": "bf856adb85398f781fc542d82d974f0189fe1b22d3e89a1dac222d236b80521b",
+      "selected_gold_by_page_id": {
+        "production_experiment_design": "GSC-004",
+        "production_medical_comparison": "GSC-008",
+        "production_model": "GSC-016",
+        "production_negative_result": "GSC-012",
+        "production_next_experiment": "GSC-018",
+        "production_quantitative_result": "GSC-014"
+      },
+      "source_evidence_ids_by_logical_id": {
+        "slide_2_statistical_model": [
+          "EV-MODEL-001"
+        ],
+        "slide_3_real_data_application": [
+          "EV-RESULT-001"
+        ],
+        "slide_4_experiment_design": [
+          "EV-DESIGN-001"
+        ],
+        "slide_5_negative_result": [
+          "EV-NEGATIVE-001"
+        ],
+        "slide_6_medical_image_comparison": [
+          "EV-MEDICAL-001"
+        ],
+        "slide_7_next_experiment": [
+          "EV-NEXT-001"
+        ]
+      },
+      "source_fidelity_map": "results/031_research_presentation_one_call_production_entry/generated/source_fidelity_map.json",
+      "source_fidelity_map_sha256": "55a7e3cc9b119b4afaf4b2bdbf8baabf790520e5a0653c7e66ec80e5064f552c",
+      "task_key": "031_research_presentation_one_call_production_entry"
+    },
+    "manifest_sha256": "bc543a99163bebb8ffd274f0dc7834edb531f6fecd5d21ed2600ac5ef6c24ed2",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "Review the rendered pixels from one normal research-presentations production invocation. Check that each page contains source-specific content from the supplied engineering bundle rather than placeholders; exact CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math, native plots, and medical images are semantically correct where present; no internal RRL/GSC/SRC, QA, provenance, workflow, repo path, run ID, or implementation language leaks into audience-facing slides; repeated generic cards or one-template pages are rejected; and the deck reads as one coherent research update rather than disconnected benchmark pages. Do not infer visual quality from filenames or hashes.",
+      "source_contracts": [
+        "The engineering regression bundle is public-safe and explicitly excluded from Stage 5 holdouts.",
+        "Stage 2 gold/reference pixels are used only for compatible composition selection.",
+        "031 is a bounded Stage 4 production-entry proof, not full Stage 4 PASS or ONE_SHOT_QUALITY_PASS."
+      ]
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "PASS",
+      "item_id": "slide_2_statistical_model",
+      "observations": [
+        "CUHK crest and purple navigation treatment are visible.",
+        "The clustered-outcome model is centered, large, and projection-readable.",
+        "The ICC definition and its implication for interval calibration are visibly stated.",
+        "No workflow, repository, run-ID, provenance-code, or implementation-language text is visible."
+      ],
+      "requirement_ids": [
+        "cuhk_identity",
+        "source_specific_content",
+        "prominent_scientific_object",
+        "no_internal_leaks"
+      ],
+      "summary": "Clear model page with a prominent, legible mixed-effects specification."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_3_real_data_application",
+      "observations": [
+        "The page contains three distinct coverage plots for G=8, G=20, and G=50, a method key, a nominal-coverage reference, and an adjacent annotation.",
+        "The plotted red and teal trajectories visibly support the stated ICC/cluster-count comparison.",
+        "The data-source sentence describes simulation replicates and the plotted outcome without exposing internal identifiers.",
+        "CUHK identity and the active Results navigation state are visible."
+      ],
+      "requirement_ids": [
+        "cuhk_identity",
+        "source_specific_content",
+        "native_plots_semantically_correct",
+        "no_internal_leaks"
+      ],
+      "summary": "A readable, source-specific coverage-results page with meaningful plot variation across conditions."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_4_experiment_design",
+      "observations": [
+        "The design is shown as a non-repeated workflow diagram specific to clustered simulation: stress grid, nested center hierarchy, interval procedures, and coverage/width/bias endpoints.",
+        "Connector directions and labels visibly communicate generation, estimation, and evaluation.",
+        "The slide uses distinct diagrammatic content rather than a generic card layout.",
+        "CUHK identity is visible and no prohibited internal workflow metadata is shown."
+      ],
+      "requirement_ids": [
+        "cuhk_identity",
+        "source_specific_content",
+        "coherent_research_narrative",
+        "no_internal_leaks"
+      ],
+      "summary": "The experiment-design diagram is specific, interpretable, and visually distinct from the result pages."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_5_negative_result",
+      "observations": [
+        "The bar chart visibly identifies the small-G, imbalanced-cluster failure regime and compares naive with cluster-robust coverage over ICC values.",
+        "The target 0.95 line, values, error bars, and high-ICC annotation make the negative result interpretable.",
+        "The adjacent text explains the diagnostic consequence and proposed follow-up tests.",
+        "CUHK identity is visible; no internal IDs or implementation details are displayed."
+      ],
+      "requirement_ids": [
+        "cuhk_identity",
+        "source_specific_content",
+        "native_plots_semantically_correct",
+        "no_internal_leaks"
+      ],
+      "summary": "Strong negative-result page with an interpretable chart and adjacent diagnostic explanation."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_6_medical_image_comparison",
+      "observations": [
+        "The Input, GT, Prediction, and Error panels, ROI zooms, TP/FP/FN legend, and matching error-region callout are visually coherent within the page.",
+        "The lesion overlay semantics are explicitly labeled and the same-case comparison is interpretable.",
+        "However, this segmentation content has no visible connection to the surrounding clustered-interval coverage study, simulation design, failure analysis, or next experiment."
+      ],
+      "requirement_ids": [
+        "medical_images_semantically_correct",
+        "source_specific_content",
+        "deck_coherence"
+      ],
+      "summary": "The medical comparison is internally interpretable but visually disconnected from the deck’s otherwise clustered-inference narrative."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_7_next_experiment",
+      "observations": [
+        "The page directly carries forward the high-ICC small-G coverage shortfall from the failure page into proposed sampling strategies, comparator arms, and a go/no-go rule.",
+        "The decision flow is specific to the prior coverage analysis rather than a generic next-steps card.",
+        "CUHK identity is visible and no internal provenance, QA, repository, run, or implementation-language strings appear."
+      ],
+      "requirement_ids": [
+        "cuhk_identity",
+        "source_specific_content",
+        "coherent_research_narrative",
+        "no_internal_leaks"
+      ],
+      "summary": "A coherent continuation of the clustered-coverage failure analysis into a concrete follow-up experiment."
+    }
+  ],
+  "non_blocking_notes": [
+    "Slide 7 shows visibly awkward line breaks/hyphenation in the failure-evidence text (for example, “clus- / ters” and “cover- / age”), which slightly reduces polish.",
+    "The footer navigation icons and page numerals are present but very small at the lower right."
+  ],
+  "overall_decision": "REVISE",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "bc543a99163bebb8ffd274f0dc7834edb531f6fecd5d21ed2600ac5ef6c24ed2",
+  "review_kind": "031_research_presentation_one_call_production_entry-one-call-production-research-deck-review",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "REVISE",
+  "task_key": "031_research_presentation_one_call_production_entry",
+  "workflow_type": "reviewed_handoff"
+}
