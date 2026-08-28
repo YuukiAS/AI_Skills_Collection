@@ -84,25 +84,47 @@ Review 1 的 clean-run contact-sheet manifest blocker 已局部修复，但第�
 
 该 blocker 不需要用户改变产品/科学语义，且存在唯一、范围清楚、质量保持的新机制，因此按 Quality-Preserving Continuation Policy 自动进入 035；034 的 dual identity、title anti-leak 与已通过视觉证据全部保留，不重做。
 
-### Active bounded recovery — 035 Generic Model Support Recovery
+### 035 Generic Model Support Recovery — review limit history
+
+`035_research_presentation_generic_model_support_recovery` 已完成两轮独立审核并合法停在 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE`；不得创建 `REVIEW_3` 或改写成 PASS。
+
+035 的原始 generic-model source-grounding blocker 已被真实关闭：
+
+- shared `STATISTICAL_MODEL` renderer 不再无条件输出 `Calibration link`、固定 ICC / center-variation / interval-comparison supporting caption 或 `Source-grounded terms` 制作型 fallback；
+- supporting model body 只消费当前 spec/source 的 scientific objects、key message、annotation 等 source-backed fields，允许中性布局标签但不携带当前 fixture 科学结论；
+- unrelated Cox regression 真实经过同一共享 model path，并证明不会泄露 clustered-calibration 专用术语；
+- 当前 engineering model page 继续保持公式主导、信息完整，fresh Terra 对 `slide_2_statistical_model` 给出 item-level `PASS`；
+- shared/plugin parity 与真实 GitHub `Codex Marketplace` CI 已通过。
+
+035 第一轮只允许对模型页做 in-scope 视觉重平衡，并明确冻结 slides 3–7。第二轮 fresh Terra 与 implementation/render/pixel/contact-sheet identity 一致后，模型页继续 PASS，但最新完整审查把两个此前未变化的 process pages 判为 `REVISE`：
+
+- `slide_4_experiment_design` 的中央 DGP → hierarchy → procedures → endpoints pipeline 相对可用画布明显过小，上下留白过多，endpoint 与 connector annotations 投影字号偏小；
+- `slide_6_next_experiment` 的 failure evidence、sampling/manipulation、comparators 与 decision-rule copy 仍偏小；
+- `deck_contact_sheet` 因 slides 4 / 6 的 density / scale dips 未稳定达到 strong projection-ready doctoral group-meeting bar。
+
+slides 4 / 6 的当前 PNG SHA 与 034 当时 item-level PASS 的像素完全一致，因此这不是 035 引入的 regression；但 Program Goal 要求使用当前 fresh evidence，而不能挑选旧 PASS 覆盖新的真实质量发现。由于 035 已用满两轮且 Review 1 禁止越界修改 slides 3–7，本任务保留 terminal history，不在 035 内继续修复。
+
+这个新 blocker 不需要用户改变产品/科学选择，也不需要降低质量门槛；共享 `EXPERIMENT_DESIGN` / `NEXT_EXPERIMENT` geometry/emission 已提供一个新的、范围清楚的 bounded implementation mechanism，因此按 Quality-Preserving Continuation Policy 自动进入 036。
+
+### Active bounded recovery — 036 Process Page Projection Recovery
 
 当前 active task：
 
-`035_research_presentation_generic_model_support_recovery`
+`036_research_presentation_process_page_projection_recovery`
 
-035 只关闭 034 Review 2 的 generic-model source-grounding blocker：
+036 只处理当前 fresh Terra 已明确指出的两个 process-page projection-scale 问题：
 
-- `STATISTICAL_MODEL` supporting body 只能消费当前 spec/source 已有的 `scientific_objects`、`key_message`、`annotation` 或显式 source-backed caption/label；
-- 中性布局标签可以保留，但不得携带当前 clustered/ICC/interval-calibration 科学语义；
-- 没有 supporting source field 时宁可少一个 block/caption，也不得生成 `source-grounded` 制作元语言或虚构 clustered 内容；
-- 新增至少一个与 clustered calibration 完全无关的 bounded synthetic model regression，真实经过共享 model path，证明不会泄露 `ICC`、center variation、interval comparison、`Calibration link` 或 `Source-grounded terms`；
-- 当前 engineering model page 必须继续保持公式主导且视觉成熟，不能为消除 hardcode 退回欠填充页面；
-- 034 dual identity、metadata anti-leak、deck quality loop、一次 repair budget、032 storyline、gold/layout、exact CUHK identity 与 medical TP/FP/FN 全部冻结保护；
-- shared/plugin parity、targeted/full tests 与真实 GitHub CI 必须通过；若当前 engineering pixels 改变，则必须等待与新 identity 绑定的 fresh task-local Terra item/contact-sheet evidence，缺证据时不消耗 review round。
+- 通用放大/重排共享 `EXPERIMENT_DESIGN` scientific pipeline，让 source-backed DGP factors、hierarchy、procedures、endpoints 与 connector annotations 更充分使用 CUHK safe region 并达到投影可读尺度；
+- 通用放大/重排共享 `NEXT_EXPERIMENT` evidence-to-decision path，让 prior failure、sampling/manipulation、comparators 与 decision rule 在成熟字号下形成连续推理；
+- 修复只能依据 page-job/general capacity/layout semantics，不得按当前 clustered fixture 的标题、术语、页号或 test ID 写死；
+- 不新增无来源科学内容，不以 generic filler/cards/box-arrow 假装密度；若一页容量无法在成熟字号下容纳现有内容，必须走现有 capacity/no-winner/split/fail-closed 路线，而不是缩小字体强塞；
+- 增加与当前 fixture 文案解耦的 bounded regressions，直接约束两类 page-job 的 projection geometry / readability mechanism；
+- 035 model source-grounding、034 dual identity/title anti-meta、032 storyline、多 workstream transition、gold retrieval、exact CUHK identity、result/failure/medical 页面、medical TP/FP/FN、一次 repair budget 全部冻结保护；
+- shared/plugin parity、targeted/full tests 与真实 GitHub CI 必须通过；pixels 改变后必须等待 task-local fresh Terra，至少 `slide_4_experiment_design`、`slide_6_next_experiment`、`deck_contact_sheet` 全部 item-level `PASS`，且 model/result/failure/medical 等无新的 blocker。
 
-035 不运行 Stage 5 holdout，不扩 corpus，不重设计 Stage 3 layout system。其停止条件是：共享 model-support path 的 current-fixture hardcode 被移除、unrelated-model regression 通过、当前 engineering model page 仍成熟、真实 CI 与所需 visual evidence闭合。
+036 不运行 Stage 5 holdout、不扩 corpus、不重写 deck-quality-loop 状态机。其停止条件是：两类 process-page projection mechanism 经 bounded regression 成立，当前 slides 4 / 6 与 contact sheet 获得 fresh item-level PASS，真实 CI 闭合且冻结能力无回归。
 
-035 独立 PASS 后，Planner 才可重新判断 Stage 4 是否整体首次 PASS。若 Stage 4 整体 PASS，应发送一次 Stage 4 旁路 notifier，并随后创建 Stage 5 的真实双-paper holdout bounded task；不得跳过 Stage 5 最终用户人工门。
+036 独立 PASS 后，Planner 才可重新判断 Stage 4 是否整体首次 PASS。若 Stage 4 整体 PASS，应发送一次 Stage 4 旁路 notifier，并随后创建 Stage 5 的真实双-paper holdout bounded task；不得跳过 Stage 5 最终用户人工门。
 
 ## Standing workflow decisions
 
