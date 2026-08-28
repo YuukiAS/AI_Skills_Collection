@@ -23,6 +23,9 @@ Package hyperref Warning: Rerun to get /PageLabels entry.
 (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-environment-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-months-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-numbers-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict)
 No file main.nav.
 [1] (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd)
+Overfull \hbox (25.59486pt too wide) detected at line 32
+\OML/cmm/m/it/17.28 Y[] \OT1/cmr/m/n/17.28 = \OML/cmm/m/it/17.28 ^^L[] \OT1/cmr/m/n/17.28 + \OML/cmm/m/it/17.28 ^^L[]T[] \OT1/cmr/m/n/17.28 + \OML/cmm/m/it/17.28 u[] \OT1/cmr/m/n/17.28 + \OML/cmm/m/it/17.28 "[];  u[] \OMS/cmsy/m/n/17.28 ^^X \OML/cmm/m/it/17.28 N\OT1/cmr/m/n/17.28 (0\OML/cmm/m/it/17.28 ; ^^\[]\OT1/cmr/m/n/17.28 )\OML/cmm/m/it/17.28 ;  "[] \OMS/cmsy/m/n/17.28 ^^X \OML/cmm/m/it/17.28 N\OT1/cmr/m/n/17.28 (0\OML/cmm/m/it/17.28 ; ^^[[]\OT1/cmr/m/n/17.28 )
+
 Overfull \hbox (56.90549pt too wide) in paragraph at lines 32--32
 [][]
 [2]
@@ -72,6 +75,9 @@ For additional information on amsmath, use the `?' option.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 (./main.out) (./main.out) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-environment-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-months-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-numbers-dictionary-English.dict) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict) (./main.nav) [1] (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd)
+Overfull \hbox (25.59486pt too wide) detected at line 32
+\OML/cmm/m/it/17.28 Y[] \OT1/cmr/m/n/17.28 = \OML/cmm/m/it/17.28 ^^L[] \OT1/cmr/m/n/17.28 + \OML/cmm/m/it/17.28 ^^L[]T[] \OT1/cmr/m/n/17.28 + \OML/cmm/m/it/17.28 u[] \OT1/cmr/m/n/17.28 + \OML/cmm/m/it/17.28 "[];  u[] \OMS/cmsy/m/n/17.28 ^^X \OML/cmm/m/it/17.28 N\OT1/cmr/m/n/17.28 (0\OML/cmm/m/it/17.28 ; ^^\[]\OT1/cmr/m/n/17.28 )\OML/cmm/m/it/17.28 ;  "[] \OMS/cmsy/m/n/17.28 ^^X \OML/cmm/m/it/17.28 N\OT1/cmr/m/n/17.28 (0\OML/cmm/m/it/17.28 ; ^^[[]\OT1/cmr/m/n/17.28 )
+
 Overfull \hbox (56.90549pt too wide) in paragraph at lines 32--32
 [][]
 [2]

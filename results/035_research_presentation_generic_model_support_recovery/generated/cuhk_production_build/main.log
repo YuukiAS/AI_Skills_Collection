@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.12.14)  29 AUG 2026 03:59
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.12.14)  29 AUG 2026 04:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1214,6 +1214,11 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 32.
  (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+Overfull \hbox (25.59486pt too wide) detected at line 32
+\OML/cmm/m/it/17.28 Y[] \OT1/cmr/m/n/17.28 = \OML/cmm/m/it/17.28 ^^L[] \OT1/cmr/m/n/17.28 + \OML/cmm/m/it/17.28 ^^L[]T[] \OT1/cmr/m/n/17.28 + \OML/cmm/m/it/17.28 u[] \OT1/cmr/m/n/17.28 + \OML/cmm/m/it/17.28 "[];  u[] \OMS/cmsy/m/n/17.28 ^^X \OML/cmm/m/it/17.28 N\OT1/cmr/m/n/17.28 (0\OML/cmm/m/it/17.28 ; ^^\[]\OT1/cmr/m/n/17.28 )\OML/cmm/m/it/17.28 ;  "[] \OMS/cmsy/m/n/17.28 ^^X \OML/cmm/m/it/17.28 N\OT1/cmr/m/n/17.28 (0\OML/cmm/m/it/17.28 ; ^^[[]\OT1/cmr/m/n/17.28 )
+ []
+
+
 Overfull \hbox (56.90549pt too wide) in paragraph at lines 32--32
 [][]
  []
@@ -1317,11 +1322,11 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 7F0EC647F671B8FF9B2FC7D2D1AA6CFB;1156.
  )
 Here is how much of TeX's memory you used:
- 27947 strings out of 470134
- 604458 string characters out of 5476762
- 1101781 words of memory out of 5000000
- 55939 multiletter control sequences out of 15000+600000
- 636298 words of font info for 114 fonts, out of 8000000 for 9000
+ 27959 strings out of 470134
+ 604709 string characters out of 5476762
+ 1101790 words of memory out of 5000000
+ 55949 multiletter control sequences out of 15000+600000
+ 638754 words of font info for 124 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  101i,16n,132p,704b,1002s stack positions out of 10000i,1000n,20000p,200000b,200000s
 

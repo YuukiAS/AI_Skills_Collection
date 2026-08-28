@@ -218,7 +218,7 @@
       "selected_reference_id": "RRL-020",
       "source_composition_identity": {
         "recipe_sha256": "9615cc4bcd20f8ec2a7c1a15c91f4dd030754ac21f08b5003be5ec79a565d023",
-        "resolved_layout_sha256": "197d5889a5d7f830187f884d7f1d043137c988f6ab448d24126bec9c08af571a"
+        "resolved_layout_sha256": "6abac0fefb5a2e995acb3d6ff788f983820960c1cf877afbfa981bbbcbe31f58"
       },
       "source_derived_composition_fields_consumed": [
         "primary_bbox",
@@ -672,7 +672,7 @@
     "deck_contact_sheet": {
       "status": "GENERATED",
       "path": "results/035_research_presentation_generic_model_support_recovery/generated/deck_contact_sheet.png",
-      "sha256": "ee9fa5f1584be97f966ad0bd72967e1f7976919c82ecdd93b7b633b87f567052"
+      "sha256": "e47b99e2c698574f000ae668c41aea33ae7a974baf4761fc2f871be2d75577a8"
     }
   }
 }

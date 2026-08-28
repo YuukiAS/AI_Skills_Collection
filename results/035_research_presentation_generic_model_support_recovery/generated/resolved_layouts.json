@@ -40,23 +40,23 @@
         "statistical-model equation remains primary while source-grounded supporting roles fill the page"
       ],
       "resolved_primary_object_geometry": {
-        "x": 0.2267,
-        "y": 0.2845,
-        "w": 0.62,
-        "h": 0.215
+        "x": 0.205,
+        "y": 0.2596,
+        "w": 0.68,
+        "h": 0.245
       },
       "resolved_supporting_object_geometry": {
         "annotation": {
-          "x": 0.155,
-          "y": 0.5,
-          "w": 0.69,
-          "h": 0.055
+          "x": 0.12,
+          "y": 0.47,
+          "w": 0.76,
+          "h": 0.07
         },
         "caption": {
-          "x": 0.155,
-          "y": 0.782,
-          "w": 0.69,
-          "h": 0.036
+          "x": 0.12,
+          "y": 0.79,
+          "w": 0.76,
+          "h": 0.038
         }
       },
       "visual_hierarchy_mapping": [
@@ -105,7 +105,7 @@
         "same_case_roi_zoom": null
       },
       "text_region_packing": {
-        "emitted_text_region_count": 1,
+        "emitted_text_region_count": 3,
         "non_overlapping": true
       },
       "native_objects": [
@@ -114,10 +114,10 @@
           "role": "primary_scientific_object",
           "native_type": "equation",
           "bbox": {
-            "x": 0.2267,
-            "y": 0.2845,
-            "w": 0.62,
-            "h": 0.215
+            "x": 0.205,
+            "y": 0.2596,
+            "w": 0.68,
+            "h": 0.245
           }
         },
         {
@@ -125,10 +125,10 @@
           "role": "annotation",
           "native_type": "text_callout",
           "bbox": {
-            "x": 0.155,
-            "y": 0.5,
-            "w": 0.69,
-            "h": 0.055
+            "x": 0.12,
+            "y": 0.47,
+            "w": 0.76,
+            "h": 0.07
           }
         },
         {
@@ -136,10 +136,10 @@
           "role": "caption",
           "native_type": "text_caption",
           "bbox": {
-            "x": 0.155,
-            "y": 0.782,
-            "w": 0.69,
-            "h": 0.036
+            "x": 0.12,
+            "y": 0.79,
+            "w": 0.76,
+            "h": 0.038
           }
         },
         {
@@ -150,10 +150,10 @@
             "scientific_objects"
           ],
           "bbox": {
-            "x": 0.155,
-            "y": 0.632,
-            "w": 0.32,
-            "h": 0.115
+            "x": 0.105,
+            "y": 0.6,
+            "w": 0.385,
+            "h": 0.15
           }
         },
         {
@@ -164,10 +164,10 @@
             "key_message"
           ],
           "bbox": {
-            "x": 0.525,
-            "y": 0.632,
-            "w": 0.32,
-            "h": 0.115
+            "x": 0.51,
+            "y": 0.6,
+            "w": 0.385,
+            "h": 0.15
           }
         }
       ],
@@ -194,7 +194,7 @@
           "workflow"
         ]
       },
-      "resolved_layout_sha256": "197d5889a5d7f830187f884d7f1d043137c988f6ab448d24126bec9c08af571a"
+      "resolved_layout_sha256": "6abac0fefb5a2e995acb3d6ff788f983820960c1cf877afbfa981bbbcbe31f58"
     },
     {
       "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
