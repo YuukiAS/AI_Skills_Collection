@@ -40,13 +40,14 @@ def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def validate(out_dir: Path, *, allow_missing_render: bool = False) -> list[str]:
+def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_render: bool = False) -> list[str]:
     errors: list[str] = []
     required = {
         "manifest": out_dir / "BUILD_MANIFEST.json",
         "deck_plan": out_dir / "deck_plan.json",
         "source_fidelity": out_dir / "source_fidelity_map.json",
         "trace": out_dir / "runtime_trace.json",
+        "storyline": out_dir / "storyline_trace.json",
         "layouts": out_dir / "resolved_layouts.json",
         "dependency": out_dir / "dependency_probe.json",
         "render_probe": out_dir / "render_chinese_math_pdf_probe.json",
@@ -62,6 +63,7 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False) -> list[str]:
     deck_plan = load_json(required["deck_plan"])
     fidelity = load_json(required["source_fidelity"])
     trace = load_json(required["trace"])
+    storyline = load_json(required["storyline"])
     layouts = load_json(required["layouts"])
     dependency = load_json(required["dependency"])
     render_probe = load_json(required["render_probe"])
@@ -69,8 +71,10 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False) -> list[str]:
 
     if manifest.get("schema") != "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1":
         errors.append("BUILD_MANIFEST.json: invalid schema")
-    if manifest.get("task_key") != DEFAULT_TASK_KEY:
+    if manifest.get("task_key") != task_key:
         errors.append("BUILD_MANIFEST.json: task_key mismatch")
+    if "storyline_trace" not in manifest:
+        errors.append("BUILD_MANIFEST.json: storyline_trace not recorded")
     if "templates/cuhk/beamer/source" not in manifest.get("canonical_cuhk_source", ""):
         errors.append("BUILD_MANIFEST.json: canonical exact CUHK source not recorded")
     if manifest.get("quality_loop_handoff", {}).get("status") != "READY_FOR_PAGE_LEVEL_FINDINGS":
@@ -109,6 +113,8 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False) -> list[str]:
     trace_jobs = {item.get("page_job") for item in trace.get("slides", [])}
     if trace.get("schema") != "RESEARCH_PRESENTATION_PRODUCTION_TRACE_V1":
         errors.append("runtime_trace.json: invalid schema")
+    if trace.get("task_key") != task_key:
+        errors.append("runtime_trace.json: task_key mismatch")
     if trace.get("entrypoint") != "research-presentations one-call production":
         errors.append("runtime_trace.json: not the normal production entry")
     if trace.get("benchmark_generators_called_as_entrypoint"):
@@ -126,6 +132,35 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False) -> list[str]:
             errors.append(f"runtime_trace.json: {item.get('page_id')} used benchmark helper orchestration")
         if not item.get("source_derived_composition_fields_consumed"):
             errors.append(f"runtime_trace.json: {item.get('page_id')} did not consume Stage 3 fields")
+
+    if storyline.get("schema") != "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1":
+        errors.append("storyline_trace.json: invalid schema")
+    workstreams = storyline.get("workstreams", [])
+    assignments = storyline.get("page_assignments", [])
+    if len(workstreams) >= 2:
+        order = storyline.get("storyline_order", [])
+        coverage_order = [
+            "STATISTICAL_MODEL",
+            "REAL_DATA_APPLICATION",
+            "EXPERIMENT_DESIGN",
+            "NEGATIVE_RESULT",
+            "NEXT_EXPERIMENT",
+        ]
+        if order[:5] != coverage_order:
+            errors.append(f"storyline_trace.json: clustered coverage workstream is not continuous: {order}")
+        if order[5:6] != ["MEDICAL_IMAGE_COMPARISON"]:
+            errors.append(f"storyline_trace.json: medical page is not the independent second workstream: {order}")
+        medical = next((item for item in assignments if item.get("page_job") == "MEDICAL_IMAGE_COMPARISON"), None)
+        if not medical or medical.get("workstream_id") == assignments[0].get("workstream_id"):
+            errors.append("storyline_trace.json: medical page was not assigned to an independent workstream")
+        second = next((item for item in workstreams if item.get("workstream_order") == 2), {})
+        if second.get("source_supported_cross_workstream_relation_to_previous") is not False:
+            errors.append("storyline_trace.json: independent cross-workstream relation not explicit")
+        if "independent" not in str(second.get("relation_to_previous", "")).lower():
+            errors.append("storyline_trace.json: transition does not state independent workstream relation")
+    for item in assignments:
+        if not item.get("assignment_basis"):
+            errors.append(f"storyline_trace.json: {item.get('page_id')} has no workstream assignment basis")
 
     if layouts.get("schema") != "RESEARCH_PRESENTATION_PRODUCTION_RESOLVED_LAYOUTS_V1":
         errors.append("resolved_layouts.json: invalid schema")
@@ -166,7 +201,7 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False) -> list[str]:
 
     if visual_inputs.get("schema") != "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1":
         errors.append("visual_inputs.json: invalid schema")
-    if visual_inputs.get("task_key") != DEFAULT_TASK_KEY:
+    if visual_inputs.get("task_key") != task_key:
         errors.append("visual_inputs.json: task_key mismatch")
     rubric = visual_inputs.get("rubric", {}).get("instructions", "")
     for required_text in ["source-specific content", "exact CUHK", "internal RRL/GSC/SRC", "coherent research update"]:
@@ -180,9 +215,10 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False) -> list[str]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT)
+    parser.add_argument("--task-key", default=DEFAULT_TASK_KEY)
     parser.add_argument("--allow-missing-render", action="store_true")
     args = parser.parse_args()
-    errors = validate(args.out_dir, allow_missing_render=args.allow_missing_render)
+    errors = validate(args.out_dir, task_key=args.task_key, allow_missing_render=args.allow_missing_render)
     if errors:
         for error in errors:
             print(error, file=sys.stderr)

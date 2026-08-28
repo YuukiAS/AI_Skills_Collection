@@ -1045,6 +1045,16 @@ def emit_frame(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str
         body = emit_image_panel(spec, layout, asset_map)
     else:
         body = emit_flow(spec, layout)
+    if transition := spec.get("storyline_transition"):
+        audience_text = transition.get("audience_text") or transition["relation_to_previous"]
+        cue = (
+            rf"\StageThreePanel{{0.0600}}{{0.1450}}{{0.9400}}{{0.2140}};"
+            "\n"
+            rf"\StageThreeNode{{0.0780}}{{0.1580}}{{0.1850}}{{left}}{{\scriptsize\textbf{{Workstream transition}}}};"
+            "\n"
+            rf"\StageThreeNode{{0.2700}}{{0.1580}}{{0.6350}}{{left}}{{\scriptsize\textbf{{{tex_escape(transition['label'])}}}: {tex_escape(audience_text)}.}};"
+        )
+        body = cue + "\n" + body
     return rf"""\section{{{tex_escape(spec['section'])}}}
 \begin{{frame}}[t]{{{tex_escape(spec['title'])}}}
 \begin{{tikzpicture}}[x=\paperwidth,y=-\paperheight]

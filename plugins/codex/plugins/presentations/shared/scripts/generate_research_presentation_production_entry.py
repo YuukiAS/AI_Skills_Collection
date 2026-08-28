@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import shutil
 from pathlib import Path
 from typing import Any
@@ -21,6 +22,54 @@ DEFAULT_TASK_KEY = "031_research_presentation_one_call_production_entry"
 DEFAULT_BUNDLE = SHARED / "fixtures" / "stage4_engineering_research_bundle" / "bundle.json"
 DEFAULT_OUT = REPO_ROOT / "results" / DEFAULT_TASK_KEY / "generated"
 FORBIDDEN_AUDIENCE_TERMS = stage3.FORBIDDEN_AUDIENCE_TERMS
+STORYLINE_JOB_ORDER = {
+    "STATISTICAL_MODEL": 10,
+    "REAL_DATA_APPLICATION": 20,
+    "EXPERIMENT_DESIGN": 30,
+    "NEGATIVE_RESULT": 40,
+    "NEXT_EXPERIMENT": 50,
+}
+WORKSTREAM_PROFILES = [
+    {
+        "id": "segmentation_robustness",
+        "label": "Segmentation robustness",
+        "scope": "independent visual failure analysis",
+        "tokens": {
+            "medical",
+            "medical_images",
+            "segmentation",
+            "lesion",
+            "gt",
+            "prediction",
+            "error",
+            "roi",
+            "same-case",
+            "same_case",
+        },
+    },
+    {
+        "id": "clustered_interval_calibration",
+        "label": "Clustered interval calibration",
+        "scope": "model, coverage evidence, failure mode, and next experiment",
+        "tokens": {
+            "cluster",
+            "clustered",
+            "coverage",
+            "interval",
+            "icc",
+            "center",
+            "centers",
+            "dgp",
+            "cr2",
+            "bootstrap",
+            "finite-sample",
+            "small-g",
+            "equations",
+            "quantitative_plots",
+            "failed_experiments",
+        },
+    },
+]
 
 
 def rel(path: Path) -> str:
@@ -43,7 +92,180 @@ def load_bundle(path: Path) -> dict[str, Any]:
     return bundle
 
 
-def build_deck_plan(bundle: dict[str, Any], bundle_path: Path) -> dict[str, Any]:
+def slug(value: str) -> str:
+    normalized = re.sub(r"[^a-z0-9]+", "_", value.lower()).strip("_")
+    return normalized or "general_research_update"
+
+
+def text_tokens(value: str) -> set[str]:
+    return set(re.findall(r"[a-z0-9]+(?:[-_][a-z0-9]+)?", value.lower()))
+
+
+def job_storyline_text(job: dict[str, Any], evidence_by_id: dict[str, dict[str, Any]]) -> str:
+    evidence_items = [evidence_by_id[evidence_id] for evidence_id in job.get("source_evidence_ids", []) if evidence_id in evidence_by_id]
+    parts: list[Any] = [
+        job.get("page_job", ""),
+        job.get("content_kind", ""),
+        job.get("dominant_object", ""),
+        job.get("scientific_objects", []),
+        job.get("query", {}),
+        job.get("source_anchors", []),
+    ]
+    for evidence in evidence_items:
+        parts.extend(
+            [
+                evidence.get("board", ""),
+                evidence.get("type", ""),
+                evidence.get("source_path", ""),
+                evidence.get("source_anchor", ""),
+                evidence.get("supports", ""),
+                evidence.get("consumed_as", ""),
+            ]
+        )
+    return json.dumps(parts, ensure_ascii=False, sort_keys=True)
+
+
+def classify_workstream(job: dict[str, Any], evidence_by_id: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    if explicit := job.get("workstream"):
+        return {
+            "id": slug(str(explicit.get("id") or explicit.get("label") or "explicit_workstream")),
+            "label": str(explicit.get("label") or explicit.get("id") or "Research workstream"),
+            "scope": str(explicit.get("scope") or "source-declared workstream"),
+            "assignment_basis": ["explicit source workstream metadata"],
+        }
+
+    tokens = text_tokens(job_storyline_text(job, evidence_by_id))
+    scored = []
+    for profile in WORKSTREAM_PROFILES:
+        matches = sorted(tokens.intersection(profile["tokens"]))
+        scored.append((len(matches), profile, matches))
+    score, profile, matches = max(scored, key=lambda item: item[0])
+    if score > 0:
+        return {
+            "id": profile["id"],
+            "label": profile["label"],
+            "scope": profile["scope"],
+            "assignment_basis": [f"source/evidence token: {token}" for token in matches[:6]],
+        }
+
+    evidence_boards = [
+        evidence_by_id[evidence_id]["board"]
+        for evidence_id in job.get("source_evidence_ids", [])
+        if evidence_id in evidence_by_id and evidence_by_id[evidence_id].get("board")
+    ]
+    board = evidence_boards[0] if evidence_boards else str(job.get("page_job", "research_update")).lower()
+    label = board.replace("_", " ").title()
+    return {
+        "id": slug(board),
+        "label": label,
+        "scope": "source-local research update",
+        "assignment_basis": [f"evidence board: {board}"],
+    }
+
+
+def storyline_job_rank(job: dict[str, Any]) -> int:
+    return STORYLINE_JOB_ORDER.get(str(job.get("page_job", "")), 100)
+
+
+def build_storyline(bundle: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    evidence_by_id = {item["id"]: item for item in bundle["evidence"]}
+    assignments: list[dict[str, Any]] = []
+    workstreams: dict[str, dict[str, Any]] = {}
+    for original_index, job in enumerate(bundle["page_jobs"], start=1):
+        profile = classify_workstream(job, evidence_by_id)
+        workstream = workstreams.setdefault(
+            profile["id"],
+            {
+                "workstream_id": profile["id"],
+                "label": profile["label"],
+                "scope": profile["scope"],
+                "first_source_order": original_index,
+                "page_jobs": [],
+            },
+        )
+        workstream["page_jobs"].append(job["page_id"])
+        assignments.append(
+            {
+                "page_id": job["page_id"],
+                "page_job": job["page_job"],
+                "original_order": original_index,
+                "workstream_id": profile["id"],
+                "workstream_label": profile["label"],
+                "workstream_scope": profile["scope"],
+                "assignment_basis": profile["assignment_basis"],
+                "intra_workstream_sort_key": [storyline_job_rank(job), original_index],
+            }
+        )
+
+    ordered_workstreams = sorted(workstreams.values(), key=lambda item: item["first_source_order"])
+    workstream_order = {item["workstream_id"]: index for index, item in enumerate(ordered_workstreams, start=1)}
+    assignment_by_page = {item["page_id"]: item for item in assignments}
+    ordered_jobs = sorted(
+        bundle["page_jobs"],
+        key=lambda job: (
+            workstream_order[assignment_by_page[job["page_id"]]["workstream_id"]],
+            storyline_job_rank(job),
+            assignment_by_page[job["page_id"]]["original_order"],
+        ),
+    )
+
+    for new_index, job in enumerate(ordered_jobs, start=1):
+        assignment_by_page[job["page_id"]]["storyline_order"] = new_index
+        assignment_by_page[job["page_id"]]["workstream_order"] = workstream_order[assignment_by_page[job["page_id"]]["workstream_id"]]
+
+    ordered_workstream_payload = []
+    previous_workstream: dict[str, Any] | None = None
+    for workstream in ordered_workstreams:
+        payload = dict(workstream)
+        payload["workstream_order"] = workstream_order[workstream["workstream_id"]]
+        if previous_workstream is None:
+            payload["source_supported_cross_workstream_relation_to_previous"] = None
+            payload["transition_label"] = workstream["label"]
+        else:
+            payload["source_supported_cross_workstream_relation_to_previous"] = False
+            payload["transition_label"] = f"{workstream['label']}: {workstream['scope']}"
+            payload["relation_to_previous"] = "independent workstream; no source-supported causal bridge is asserted"
+        ordered_workstream_payload.append(payload)
+        previous_workstream = workstream
+
+    first_page_by_workstream = {
+        workstream_id: min(item["storyline_order"] for item in assignments if item["workstream_id"] == workstream_id)
+        for workstream_id in workstream_order
+    }
+    enriched_jobs = []
+    for job in ordered_jobs:
+        enriched = dict(job)
+        assignment = assignment_by_page[job["page_id"]]
+        workstream_payload = ordered_workstream_payload[assignment["workstream_order"] - 1]
+        enriched["section"] = assignment["workstream_label"]
+        enriched["storyline"] = {
+            "workstream_id": assignment["workstream_id"],
+            "workstream_label": assignment["workstream_label"],
+            "workstream_scope": assignment["workstream_scope"],
+            "storyline_order": assignment["storyline_order"],
+            "workstream_order": assignment["workstream_order"],
+            "assignment_basis": assignment["assignment_basis"],
+        }
+        if len(ordered_workstreams) > 1 and assignment["storyline_order"] == first_page_by_workstream[assignment["workstream_id"]] and assignment["workstream_order"] > 1:
+            enriched["storyline_transition"] = {
+                "label": assignment["workstream_label"],
+                "audience_text": "independent workstream; no causal bridge asserted",
+                "relation_to_previous": workstream_payload["relation_to_previous"],
+            }
+        enriched_jobs.append(enriched)
+
+    trace = {
+        "schema": "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1",
+        "source_derivation": "workstream assignment uses page-job, evidence-board, source-anchor, source-path, and source-supported claim text; titles, page numbers, and gold IDs are not classification keys",
+        "cross_workstream_relation_policy": "do not infer causal bridges between distinct workstreams without explicit source support",
+        "workstreams": ordered_workstream_payload,
+        "page_assignments": sorted(assignments, key=lambda item: item["storyline_order"]),
+        "storyline_order": [job["page_job"] for job in enriched_jobs],
+    }
+    return enriched_jobs, trace
+
+
+def build_deck_plan(bundle: dict[str, Any], bundle_path: Path, page_jobs: list[dict[str, Any]], storyline_trace: dict[str, Any]) -> dict[str, Any]:
     markdown_path = REPO_ROOT / bundle["source_material"]["primary_markdown"]
     plan = markdown_to_deck_plan.markdown_to_deck_plan(
         markdown_path.read_text(encoding="utf-8"),
@@ -79,6 +301,7 @@ def build_deck_plan(bundle: dict[str, Any], bundle_path: Path) -> dict[str, Any]
         evidence_board[evidence["board"]].append(evidence)
     plan["evidence_board"] = evidence_board
     plan["research_state"] = bundle["research_state"]
+    plan["storyline"] = storyline_trace
     plan["slides"] = [
         {
             "id": f"s{index:02d}",
@@ -93,20 +316,22 @@ def build_deck_plan(bundle: dict[str, Any], bundle_path: Path) -> dict[str, Any]
             "scientific_objects": job["scientific_objects"],
             "evidence_status": job["evidence_status"],
             "uncertainty_status": job["uncertainty_status"],
+            "storyline": job["storyline"],
+            **({"storyline_transition": job["storyline_transition"]} if "storyline_transition" in job else {}),
             "layout_rationale": job["layout_rationale"],
             "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
             "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
             "qa_criteria": job["qa_criteria"],
             "content": job.get("audience_notes", []),
         }
-        for index, job in enumerate(bundle["page_jobs"], start=1)
+        for index, job in enumerate(page_jobs, start=1)
     ]
     return plan
 
 
-def build_specs(bundle: dict[str, Any]) -> list[dict[str, Any]]:
+def build_specs(page_jobs: list[dict[str, Any]]) -> list[dict[str, Any]]:
     specs: list[dict[str, Any]] = []
-    for job in bundle["page_jobs"]:
+    for job in page_jobs:
         spec = {
             key: value
             for key, value in job.items()
@@ -142,6 +367,8 @@ def build_specs(bundle: dict[str, Any]) -> list[dict[str, Any]]:
                 "strategy_variation",
                 "comparator_setup",
                 "decision_criterion",
+                "storyline",
+                "storyline_transition",
             }
         }
         spec["source_evidence_ids"] = list(job["source_evidence_ids"])
@@ -218,7 +445,7 @@ def source_fidelity_map(bundle: dict[str, Any], specs: list[dict[str, Any]], lay
     }
 
 
-def production_trace(bundle: dict[str, Any], specs: list[dict[str, Any]], layouts: list[dict[str, Any]], bundle_path: Path) -> dict[str, Any]:
+def production_trace(bundle: dict[str, Any], specs: list[dict[str, Any]], layouts: list[dict[str, Any]], bundle_path: Path, task_key: str, storyline_trace: dict[str, Any]) -> dict[str, Any]:
     slides = []
     for spec, layout in zip(specs, layouts):
         selection = build_gold_composition_recipe.build_recipe(spec["query"])["runtime_trace"]["selection"]
@@ -236,6 +463,8 @@ def production_trace(bundle: dict[str, Any], specs: list[dict[str, Any]], layout
                     "resolved_layout_sha256": layout["resolved_layout_sha256"],
                 },
                 "source_derived_composition_fields_consumed": layout["source_recipe_fields_consumed"],
+                "storyline": spec["storyline"],
+                "storyline_transition": spec.get("storyline_transition"),
                 "resolved_stage3_layout_family": layout["executable_layout_family"],
                 "content_capacity_check": layout["content_capacity_check"],
                 "benchmark_helper_orchestration_surface_used": False,
@@ -245,10 +474,11 @@ def production_trace(bundle: dict[str, Any], specs: list[dict[str, Any]], layout
         )
     return {
         "schema": "RESEARCH_PRESENTATION_PRODUCTION_TRACE_V1",
-        "task_key": DEFAULT_TASK_KEY,
+        "task_key": task_key,
         "entrypoint": "research-presentations one-call production",
         "input_bundle": rel(bundle_path),
         "normal_skill_route": "research-presentations",
+        "storyline_trace": storyline_trace,
         "benchmark_generators_called_as_entrypoint": [],
         "stage5_holdout_eligible": False,
         "slides": slides,
@@ -264,6 +494,7 @@ def visual_manifest(
     build_manifest: dict[str, Any],
     build_manifest_path: Path,
     source_fidelity_path: Path,
+    task_key: str,
     implementation_commit: str | None,
 ) -> dict[str, Any]:
     rendered = render_status.get("rendered_png", [])
@@ -288,9 +519,9 @@ def visual_manifest(
         evidence[logical_id] = spec["source_evidence_ids"]
     return {
         "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
-        "task_key": DEFAULT_TASK_KEY,
+        "task_key": task_key,
         "workflow_type": "reviewed_handoff",
-        "review_kind": f"{DEFAULT_TASK_KEY}-one-call-production-research-deck-review",
+        "review_kind": f"{task_key}-one-call-production-research-deck-review",
         "privacy_policy": "PUBLIC_SAFE_ONLY",
         "prompt_version": "ai-bridge.visual-review.v1",
         "external_upload_authorization": "",
@@ -298,6 +529,7 @@ def visual_manifest(
             "instructions": (
                 "Review the rendered pixels from one normal research-presentations production invocation. "
                 "Check that each page contains source-specific content from the supplied engineering bundle rather than placeholders; exact CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math, native plots, and medical images are semantically correct where present; no internal RRL/GSC/SRC, QA, provenance, workflow, repo path, run ID, or implementation language leaks into audience-facing slides; repeated generic cards or one-template pages are rejected; and the deck reads as one coherent research update rather than disconnected benchmark pages. "
+                "For multi-workstream bundles, confirm that each workstream stays internally continuous and that any independent workstream transition is visible without inventing a causal relation. "
                 "Do not infer visual quality from filenames or hashes."
             ),
             "source_contracts": [
@@ -307,7 +539,7 @@ def visual_manifest(
             ],
         },
         "identity_bindings": {
-            "task_key": DEFAULT_TASK_KEY,
+            "task_key": task_key,
             "implementation_commit": implementation_commit,
             "input_title": bundle["metadata"]["title"],
             "build_manifest": rel(build_manifest_path),
@@ -323,19 +555,27 @@ def visual_manifest(
     }
 
 
-def generate(bundle_path: Path, out_dir: Path, *, implementation_commit: str | None = None, write_result_visual_inputs: bool = False) -> dict[str, Any]:
+def generate(
+    bundle_path: Path,
+    out_dir: Path,
+    *,
+    task_key: str = DEFAULT_TASK_KEY,
+    implementation_commit: str | None = None,
+    write_result_visual_inputs: bool = False,
+) -> dict[str, Any]:
     bundle_path = bundle_path.resolve()
     out_dir = out_dir.resolve()
     bundle = load_bundle(bundle_path)
-    deck_plan = build_deck_plan(bundle, bundle_path)
-    specs = build_specs(bundle)
+    deck_jobs, storyline_trace = build_storyline(bundle)
+    deck_plan = build_deck_plan(bundle, bundle_path, deck_jobs, storyline_trace)
+    specs = build_specs(deck_jobs)
     out_dir.mkdir(parents=True, exist_ok=True)
     build_dir = out_dir / "cuhk_production_build"
     if build_dir.exists():
         shutil.rmtree(build_dir)
     shutil.copytree(CANONICAL_CUHK, build_dir)
     previous_task_key = stage3.TASK_KEY
-    stage3.TASK_KEY = DEFAULT_TASK_KEY
+    stage3.TASK_KEY = task_key
     try:
         asset_map = stage3.copy_assets(specs, build_dir)
         layouts = [stage3.resolve_layout(spec) for spec in specs]
@@ -355,13 +595,14 @@ def generate(bundle_path: Path, out_dir: Path, *, implementation_commit: str | N
     fidelity = source_fidelity_map(bundle, specs, layouts)
     fidelity_path = out_dir / "source_fidelity_map.json"
     write_json(fidelity_path, fidelity)
-    trace = production_trace(bundle, specs, layouts, bundle_path)
+    write_json(out_dir / "storyline_trace.json", storyline_trace)
+    trace = production_trace(bundle, specs, layouts, bundle_path, task_key, storyline_trace)
     write_json(out_dir / "runtime_trace.json", trace)
     write_json(out_dir / "dependency_probe.json", dependency_probe)
     write_json(out_dir / "render_chinese_math_pdf_probe.json", render_probe)
     build_manifest = {
         "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1",
-        "task_key": DEFAULT_TASK_KEY,
+        "task_key": task_key,
         "implementation_commit": implementation_commit,
         "input_bundle": rel(bundle_path),
         "canonical_cuhk_source": rel(CANONICAL_CUHK),
@@ -372,6 +613,7 @@ def generate(bundle_path: Path, out_dir: Path, *, implementation_commit: str | N
         "deck_plan": rel(out_dir / "deck_plan.json"),
         "source_fidelity_map": rel(fidelity_path),
         "runtime_trace": rel(out_dir / "runtime_trace.json"),
+        "storyline_trace": rel(out_dir / "storyline_trace.json"),
         "dependency_probe": rel(out_dir / "dependency_probe.json"),
         "render_chinese_math_pdf_probe": rel(out_dir / "render_chinese_math_pdf_probe.json"),
         "compile_status": compile_status,
@@ -390,11 +632,11 @@ def generate(bundle_path: Path, out_dir: Path, *, implementation_commit: str | N
         "quality_loop_handoff": {
             "schema": "RESEARCH_PRESENTATION_STAGE4_QUALITY_HANDOFF_V1",
             "status": "READY_FOR_PAGE_LEVEL_FINDINGS",
-            "visual_review_manifest": f"results/{DEFAULT_TASK_KEY}/visual_review/visual_inputs.json",
-            "visual_review_evidence": f"results/{DEFAULT_TASK_KEY}/visual_review/VISUAL_REVIEW.json",
+            "visual_review_manifest": f"results/{task_key}/visual_review/visual_inputs.json",
+            "visual_review_evidence": f"results/{task_key}/visual_review/VISUAL_REVIEW.json",
             "next_bounded_stage4_task": "deck-rhythm review and bounded visual repair loop",
         },
-        "stage4_boundary": "031 proves one-call production entry only; Stage 4 PASS, PROGRAM_MATURE, and ONE_SHOT_QUALITY_PASS are not claimed.",
+        "stage4_boundary": "This one-call production entry recovery does not claim Stage 4 PASS, PROGRAM_MATURE, or ONE_SHOT_QUALITY_PASS.",
         "cleaned_latex_intermediates": cleaned,
         "normalized_generated_logs": normalized,
     }
@@ -408,11 +650,12 @@ def generate(bundle_path: Path, out_dir: Path, *, implementation_commit: str | N
         build_manifest=build_manifest,
         build_manifest_path=manifest_path,
         source_fidelity_path=fidelity_path,
+        task_key=task_key,
         implementation_commit=implementation_commit,
     )
     write_json(out_dir / "visual_inputs.json", visual_inputs)
     if write_result_visual_inputs:
-        write_json(REPO_ROOT / "results" / DEFAULT_TASK_KEY / "visual_review" / "visual_inputs.json", visual_inputs)
+        write_json(REPO_ROOT / "results" / task_key / "visual_review" / "visual_inputs.json", visual_inputs)
     return build_manifest
 
 
@@ -420,12 +663,14 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input-bundle", type=Path, default=DEFAULT_BUNDLE)
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT)
+    parser.add_argument("--task-key", default=DEFAULT_TASK_KEY)
     parser.add_argument("--implementation-commit")
     parser.add_argument("--write-result-visual-inputs", action="store_true")
     args = parser.parse_args()
     manifest = generate(
         args.input_bundle,
         args.out_dir,
+        task_key=args.task_key,
         implementation_commit=args.implementation_commit,
         write_result_visual_inputs=args.write_result_visual_inputs,
     )
@@ -436,7 +681,7 @@ def main() -> int:
                 "out_dir": rel(args.out_dir),
                 "render_status": manifest["render_status"]["status"],
                 "tex": manifest["tex"],
-                "visual_inputs": f"results/{DEFAULT_TASK_KEY}/visual_review/visual_inputs.json" if args.write_result_visual_inputs else manifest["runtime_trace"],
+                "visual_inputs": f"results/{args.task_key}/visual_review/visual_inputs.json" if args.write_result_visual_inputs else manifest["runtime_trace"],
             },
             indent=2,
         )

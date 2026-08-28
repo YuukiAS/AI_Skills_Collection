@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import csv
+import copy
 import re
 import subprocess
 import sys
@@ -17,6 +18,7 @@ sys.path.insert(0, str(SHARED / "scripts"))
 
 import markdown_to_deck_plan  # noqa: E402
 import validate_deck_plan  # noqa: E402
+import generate_research_presentation_production_entry as production_entry  # noqa: E402
 
 
 class PresentationSharedTests(unittest.TestCase):
@@ -734,6 +736,17 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(deck_plan["metadata"]["editability"], "source-editable")
             self.assertEqual(len(deck_plan["slides"]), 6)
             self.assertFalse(any("UNKNOWN" in json.dumps(slide, ensure_ascii=False) for slide in deck_plan["slides"]))
+            self.assertEqual(
+                [slide["page_function"] for slide in deck_plan["slides"]],
+                [
+                    "STATISTICAL_MODEL",
+                    "REAL_DATA_APPLICATION",
+                    "EXPERIMENT_DESIGN",
+                    "NEGATIVE_RESULT",
+                    "NEXT_EXPERIMENT",
+                    "MEDICAL_IMAGE_COMPARISON",
+                ],
+            )
 
             fidelity = json.loads((generated / "source_fidelity_map.json").read_text(encoding="utf-8"))
             self.assertFalse(fidelity["stage5_holdout_eligible"])
@@ -747,6 +760,17 @@ class PresentationSharedTests(unittest.TestCase):
             trace = json.loads((generated / "runtime_trace.json").read_text(encoding="utf-8"))
             self.assertEqual(trace["entrypoint"], "research-presentations one-call production")
             self.assertEqual(trace["benchmark_generators_called_as_entrypoint"], [])
+            self.assertEqual(
+                [slide["page_job"] for slide in trace["slides"]],
+                [
+                    "STATISTICAL_MODEL",
+                    "REAL_DATA_APPLICATION",
+                    "EXPERIMENT_DESIGN",
+                    "NEGATIVE_RESULT",
+                    "NEXT_EXPERIMENT",
+                    "MEDICAL_IMAGE_COMPARISON",
+                ],
+            )
             jobs = {slide["page_job"] for slide in trace["slides"]}
             self.assertEqual(
                 jobs,
@@ -765,6 +789,27 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertFalse(slide["score_override_used"])
                 self.assertTrue(slide["normal_selector_matches"])
                 self.assertTrue(slide["source_derived_composition_fields_consumed"])
+
+            storyline = json.loads((generated / "storyline_trace.json").read_text(encoding="utf-8"))
+            self.assertEqual(storyline["schema"], "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1")
+            self.assertIn("titles, page numbers, and gold IDs are not classification keys", storyline["source_derivation"])
+            self.assertEqual(
+                storyline["storyline_order"],
+                [
+                    "STATISTICAL_MODEL",
+                    "REAL_DATA_APPLICATION",
+                    "EXPERIMENT_DESIGN",
+                    "NEGATIVE_RESULT",
+                    "NEXT_EXPERIMENT",
+                    "MEDICAL_IMAGE_COMPARISON",
+                ],
+            )
+            medical_assignment = next(item for item in storyline["page_assignments"] if item["page_job"] == "MEDICAL_IMAGE_COMPARISON")
+            self.assertEqual(medical_assignment["workstream_order"], 2)
+            self.assertEqual(medical_assignment["workstream_label"], "Segmentation robustness")
+            second_workstream = next(item for item in storyline["workstreams"] if item["workstream_order"] == 2)
+            self.assertFalse(second_workstream["source_supported_cross_workstream_relation_to_previous"])
+            self.assertIn("independent workstream", second_workstream["relation_to_previous"])
 
             layouts = json.loads((generated / "resolved_layouts.json").read_text(encoding="utf-8"))["layouts"]
             medical_layout = next(layout for layout in layouts if layout["page_job"] == "MEDICAL_IMAGE_COMPARISON")
@@ -794,6 +839,11 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertIn("Clustered Interval Calibration And Synthetic Segmentation Robustness", tex)
             self.assertIn("Coverage by ICC under imbalanced clusters", tex)
             self.assertIn("Same-case ROI zoom", tex)
+            self.assertLess(tex.index("Small-G settings remain anti-conservative"), tex.index("Next experiment tests whether batch selection"))
+            self.assertLess(tex.index("Next experiment tests whether batch selection"), tex.index("Same-case panels keep the segmentation error interpretable"))
+            self.assertIn("Workstream transition", tex)
+            self.assertIn("Segmentation robustness", tex)
+            self.assertIn("no causal bridge asserted", tex)
             for forbidden in ["RRL-", "SRC-", "GSC-", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "run ID", "fixture", "workflow"]:
                 self.assertNotIn(forbidden, tex)
 
@@ -820,6 +870,46 @@ class PresentationSharedTests(unittest.TestCase):
             else:
                 self.assertNotEqual(strict.returncode, 0)
                 self.assertIn(manifest["render_status"]["status"], strict.stderr + strict.stdout)
+
+    def test_research_presentation_storyline_grouping_is_source_derived(self) -> None:
+        bundle = json.loads((SHARED / "fixtures/stage4_engineering_research_bundle/bundle.json").read_text(encoding="utf-8"))
+        mutated = copy.deepcopy(bundle)
+        for index, job in enumerate(mutated["page_jobs"], start=1):
+            job["title"] = f"Retitled page {index}"
+            job["section"] = f"Retitled section {index}"
+        ordered_jobs, storyline = production_entry.build_storyline(mutated)
+        self.assertEqual(
+            [job["page_job"] for job in ordered_jobs],
+            [
+                "STATISTICAL_MODEL",
+                "REAL_DATA_APPLICATION",
+                "EXPERIMENT_DESIGN",
+                "NEGATIVE_RESULT",
+                "NEXT_EXPERIMENT",
+                "MEDICAL_IMAGE_COMPARISON",
+            ],
+        )
+        for assignment in storyline["page_assignments"]:
+            self.assertTrue(assignment["assignment_basis"])
+            self.assertNotIn("Retitled", " ".join(assignment["assignment_basis"]))
+        self.assertIn("titles, page numbers, and gold IDs are not classification keys", storyline["source_derivation"])
+
+    def test_research_presentation_single_workstream_has_no_forced_transition(self) -> None:
+        bundle = json.loads((SHARED / "fixtures/stage4_engineering_research_bundle/bundle.json").read_text(encoding="utf-8"))
+        bundle["page_jobs"] = [job for job in bundle["page_jobs"] if job["page_job"] != "MEDICAL_IMAGE_COMPARISON"]
+        ordered_jobs, storyline = production_entry.build_storyline(bundle)
+        self.assertEqual(len(storyline["workstreams"]), 1)
+        self.assertFalse(any("storyline_transition" in job for job in ordered_jobs))
+        self.assertEqual(
+            [job["page_job"] for job in ordered_jobs],
+            [
+                "STATISTICAL_MODEL",
+                "REAL_DATA_APPLICATION",
+                "EXPERIMENT_DESIGN",
+                "NEGATIVE_RESULT",
+                "NEXT_EXPERIMENT",
+            ],
+        )
 
     def test_reference_calibrated_candidate_search(self) -> None:
         references = SHARED / "references"
