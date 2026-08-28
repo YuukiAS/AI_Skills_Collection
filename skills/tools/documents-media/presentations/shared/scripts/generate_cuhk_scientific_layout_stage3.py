@@ -158,10 +158,10 @@ def job_primary_geometry(spec: dict[str, Any], primary: dict[str, float], transf
     page_job = spec["page_job"]
     if page_job == "STATISTICAL_MODEL":
         target = {
-            "w": clamp(primary["w"], 0.58, 0.72),
-            "h": clamp(primary["h"] + 0.015, 0.205, 0.260),
-            "x": primary["x"] + primary["w"] * 0.045,
-            "y": 0.265 + (primary["y"] - safe["y"]) * 0.080,
+            "w": clamp(primary["w"] + 0.060, 0.66, 0.780),
+            "h": clamp(primary["h"] + 0.045, 0.235, 0.295),
+            "x": primary["x"] + primary["w"] * 0.010,
+            "y": 0.245 + (primary["y"] - safe["y"]) * 0.060,
         }
         transforms.append("statistical-model equation remains primary while source-grounded supporting roles fill the page")
     elif page_job == "REAL_DATA_APPLICATION":
@@ -221,8 +221,8 @@ def support_geometry(spec: dict[str, Any], primary: dict[str, float]) -> dict[st
         }
     if page_job == "STATISTICAL_MODEL":
         return {
-            "annotation": {"x": 0.155, "y": 0.500, "w": 0.690, "h": 0.055},
-            "caption": {"x": 0.155, "y": 0.782, "w": 0.690, "h": 0.036},
+            "annotation": {"x": 0.120, "y": 0.470, "w": 0.760, "h": 0.070},
+            "caption": {"x": 0.120, "y": 0.790, "w": 0.760, "h": 0.038},
         }
     if page_job == "NEGATIVE_RESULT":
         return {
@@ -552,9 +552,11 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
     annotation = {key: round(value, 4) for key, value in supporting["annotation"].items()}
     caption = {key: round(value, 4) for key, value in supporting["caption"].items()}
     capacity = capacity_status(spec, recipe)
+    model_blocks = model_support_blocks(spec) if spec["page_job"] == "STATISTICAL_MODEL" else []
     emitted_text_regions = [annotation]
     if spec.get("caption"):
         emitted_text_regions.append(caption)
+    emitted_text_regions.extend(block["bbox"] for block in model_blocks)
     text_overlap_free = all(
         not bbox_overlap(left, right)
         for idx, left in enumerate(emitted_text_regions)
@@ -596,7 +598,7 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
                 "source_fields": block["source_fields"],
                 "bbox": block["bbox"],
             }
-            for block in model_support_blocks(spec)
+            for block in model_blocks
         )
     if spec.get("same_case_roi_zoom"):
         objects.append(
@@ -715,7 +717,7 @@ def model_support_blocks(spec: dict[str, Any]) -> list[dict[str, Any]]:
                 "role": "source_field_model_components",
                 "label": "Model components",
                 "source_fields": ["scientific_objects"],
-                "bbox": {"x": 0.1550, "y": 0.6320, "w": 0.3200, "h": 0.1150},
+                "bbox": {"x": 0.1050, "y": 0.6000, "w": 0.3850, "h": 0.1500},
                 "tex_body": r"\\".join(role_lines),
             }
         )
@@ -726,7 +728,7 @@ def model_support_blocks(spec: dict[str, Any]) -> list[dict[str, Any]]:
                 "role": "source_field_model_interpretation",
                 "label": "Interpretation",
                 "source_fields": ["key_message"],
-                "bbox": {"x": 0.5250, "y": 0.6320, "w": 0.3200, "h": 0.1150},
+                "bbox": {"x": 0.5100, "y": 0.6000, "w": 0.3850, "h": 0.1500},
                 "tex_body": tex_escape(key_message),
             }
         )
@@ -738,18 +740,18 @@ def emit_equation(spec: dict[str, Any], layout: dict[str, Any]) -> str:
     annotation = layout["resolved_supporting_object_geometry"]["annotation"]
     caption = layout["resolved_supporting_object_geometry"]["caption"]
     parts = [
-        tex_node(primary["x"], primary["y"], primary["w"], rf"\Large \[\displaystyle {spec['math']}\]", align="center"),
-        tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\small {spec['annotation']}"),
+        tex_node(primary["x"], primary["y"], primary["w"], rf"\LARGE \[\displaystyle {spec['math']}\]", align="center"),
+        tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\normalsize {spec['annotation']}", align="center"),
     ]
     for block in model_support_blocks(spec):
         bbox = block["bbox"]
-        parts.append(rf"\StageThreePanel{{{bbox['x'] - 0.015:.4f}}}{{0.6150}}{{{bbox['x'] + bbox['w'] + 0.015:.4f}}}{{0.7620}};")
+        parts.append(rf"\StageThreePanel{{{bbox['x'] - 0.015:.4f}}}{{{bbox['y'] - 0.020:.4f}}}{{{bbox['x'] + bbox['w'] + 0.015:.4f}}}{{{bbox['y'] + bbox['h'] + 0.020:.4f}}};")
         parts.append(
             tex_node(
                 bbox["x"],
-                0.6370,
+                bbox["y"],
                 bbox["w"],
-                rf"\scriptsize\textbf{{{block['label']}}}\\[-0.15em]{block['tex_body']}",
+                rf"\footnotesize\textbf{{{block['label']}}}\\[-0.10em]{block['tex_body']}",
             )
         )
     if caption_text := str(spec.get("caption") or "").strip():
@@ -1263,7 +1265,9 @@ def semantic_medical_overlay(source: Any, points: dict[str, set[tuple[int, int]]
     overlay = Image.new("RGBA", base.size, (0, 0, 0, 0))
     overlay_pixels = overlay.load()
     radius = 3
-    for class_name in visible_classes:
+    for class_name in MEDICAL_ERROR_COLORS:
+        if class_name not in visible_classes:
+            continue
         color = MEDICAL_ERROR_COLORS[class_name]
         for px, py in points[class_name]:
             for dx in range(-radius, radius + 1):
