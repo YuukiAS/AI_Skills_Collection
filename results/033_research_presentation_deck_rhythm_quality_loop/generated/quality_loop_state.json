@@ -2,7 +2,7 @@
   "schema": "RESEARCH_PRESENTATION_DECK_QUALITY_LOOP_STATE_V1",
   "max_repair_cycles": 1,
   "repair_cycle_count": 0,
-  "initial_render_identity": "d19be3045ecc36519de9efee39dd6ca671be2f1f4545a3780545ef3932cb6d7b",
+  "initial_render_identity": "8f6f18631201485b8d5c5738eddab17ea1b49aa7ef944ce779f9e084fe01c800",
   "review_evidence_identity": null,
   "deck_level_decision": "WAITING_FOR_DECK_VISUAL_REVIEW",
   "blocking_findings": [],

@@ -243,7 +243,7 @@
         "capacity_status": "FIT"
       },
       "rendered_page_path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/cuhk_production_build/rendered/slide-7.png",
-      "rendered_page_sha256": "6a095ca7983eeafe285a2b491b3288d21f1b5deaa10b4f7877fa969df0d21d76",
+      "rendered_page_sha256": "af5b29da99fe6aef8464023383e7634f0cc40f2df32ead582d584b96d5d9e000",
       "transition_cue": {
         "label": "Segmentation robustness",
         "audience_text": "independent workstream; no causal bridge asserted",
@@ -253,9 +253,9 @@
   ],
   "deck_contact_sheet": {
     "path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/deck_contact_sheet.png",
-    "sha256": "c4a3a30289381218f03f2091cf982ce9b2754fc03074bf43d392c580f2d616ec",
+    "sha256": "83d88d572e648d2b32b0bb368faba1be536f7a3f23917c4260464233e090c71c",
     "serves_audience": false,
     "review_role": "deck_sequence_context"
   },
-  "deck_identity_sha256": "d19be3045ecc36519de9efee39dd6ca671be2f1f4545a3780545ef3932cb6d7b"
+  "deck_identity_sha256": "8f6f18631201485b8d5c5738eddab17ea1b49aa7ef944ce779f9e084fe01c800"
 }
