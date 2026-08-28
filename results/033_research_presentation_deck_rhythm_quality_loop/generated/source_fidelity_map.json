@@ -1,0 +1,200 @@
+{
+  "schema": "RESEARCH_PRESENTATION_SOURCE_FIDELITY_MAP_V1",
+  "stage5_holdout_eligible": false,
+  "holdout_exclusion_reason": "Repository-owned synthetic engineering regression bundle for Stage 4 integration only; not a final Stage 5 paper or medical-imaging holdout.",
+  "pages": [
+    {
+      "page_id": "production_model",
+      "page_job": "STATISTICAL_MODEL",
+      "source_evidence_ids": [
+        "EV-MODEL-001"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "EV-MODEL-001",
+          "source_path": "skills/tools/documents-media/presentations/shared/fixtures/stage4_engineering_research_bundle/source.md",
+          "source_anchor": "## Model",
+          "claim_supported": "Clustered model separates center and individual variation.",
+          "consumed_as": "native LaTeX statistical model"
+        }
+      ],
+      "generated_object_ids": [
+        "production_model_primary",
+        "production_model_annotation",
+        "production_model_caption"
+      ],
+      "selected_gold_id": "GSC-016",
+      "selected_reference_id": "RRL-020",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "production_quantitative_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "source_evidence_ids": [
+        "EV-RESULT-001"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "EV-RESULT-001",
+          "source_path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/simulation/simulation_summary.csv",
+          "source_anchor": "columns G,rho,imbalance,method,coverage,mc_se",
+          "claim_supported": "Coverage differs by center count, ICC, imbalance, and interval method.",
+          "consumed_as": "presentation-native quantitative result figure"
+        }
+      ],
+      "generated_object_ids": [
+        "production_quantitative_result_primary",
+        "production_quantitative_result_annotation",
+        "production_quantitative_result_caption"
+      ],
+      "selected_gold_id": "GSC-014",
+      "selected_reference_id": "RRL-016",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "production_experiment_design",
+      "page_job": "EXPERIMENT_DESIGN",
+      "source_evidence_ids": [
+        "EV-DESIGN-001"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "EV-DESIGN-001",
+          "source_path": "skills/tools/documents-media/presentations/shared/fixtures/stage4_engineering_research_bundle/source.md",
+          "source_anchor": "## Experiment Design",
+          "claim_supported": "DGP knobs feed clustered samples, interval procedures, and coverage diagnostics.",
+          "consumed_as": "typed experiment relation diagram"
+        }
+      ],
+      "generated_object_ids": [
+        "production_experiment_design_primary",
+        "production_experiment_design_annotation",
+        "production_experiment_design_caption"
+      ],
+      "selected_gold_id": "GSC-004",
+      "selected_reference_id": "RRL-019",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "production_negative_result",
+      "page_job": "NEGATIVE_RESULT",
+      "source_evidence_ids": [
+        "EV-NEGATIVE-001"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "EV-NEGATIVE-001",
+          "source_path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/small_g_negative_result.png",
+          "source_anchor": "small-G negative result figure",
+          "claim_supported": "Small-G high-ICC imbalance remains anti-conservative.",
+          "consumed_as": "negative-evidence plot"
+        }
+      ],
+      "generated_object_ids": [
+        "production_negative_result_primary",
+        "production_negative_result_annotation",
+        "production_negative_result_caption"
+      ],
+      "selected_gold_id": "GSC-012",
+      "selected_reference_id": "RRL-011",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "production_next_experiment",
+      "page_job": "NEXT_EXPERIMENT",
+      "source_evidence_ids": [
+        "EV-NEXT-001"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "EV-NEXT-001",
+          "source_path": "skills/tools/documents-media/presentations/shared/fixtures/stage4_engineering_research_bundle/source.md",
+          "source_anchor": "## Next Experiment",
+          "claim_supported": "DPP, random batch, Mondrian partition, CR2, and wild bootstrap define the next comparison.",
+          "consumed_as": "next-experiment decision diagram"
+        }
+      ],
+      "generated_object_ids": [
+        "production_next_experiment_primary",
+        "production_next_experiment_annotation",
+        "production_next_experiment_caption"
+      ],
+      "selected_gold_id": "GSC-018",
+      "selected_reference_id": "RRL-059",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "production_medical_comparison",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "source_evidence_ids": [
+        "EV-MEDICAL-001"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "EV-MEDICAL-001",
+          "source_path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/",
+          "source_anchor": "failure_input/failure_gt/failure_pred/failure_error same-case image set",
+          "claim_supported": "Same-case segmentation error pattern with TP/FP/FN colors.",
+          "consumed_as": "same-case medical image panel and ROI crop"
+        }
+      ],
+      "generated_object_ids": [
+        "production_medical_comparison_primary",
+        "production_medical_comparison_annotation",
+        "production_medical_comparison_caption",
+        "production_medical_comparison_same_case_roi_zoom"
+      ],
+      "selected_gold_id": "GSC-008",
+      "selected_reference_id": "RRL-013",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    }
+  ]
+}

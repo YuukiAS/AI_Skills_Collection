@@ -1,0 +1,14 @@
+{
+  "schema": "RESEARCH_PRESENTATION_DECK_QUALITY_LOOP_STATE_V1",
+  "max_repair_cycles": 1,
+  "repair_cycle_count": 0,
+  "initial_render_identity": "d19be3045ecc36519de9efee39dd6ca671be2f1f4545a3780545ef3932cb6d7b",
+  "review_evidence_identity": null,
+  "deck_level_decision": "WAITING_FOR_DECK_VISUAL_REVIEW",
+  "blocking_findings": [],
+  "selected_repair_directives": [],
+  "repair_allowed": false,
+  "fail_closed_reason": null,
+  "repaired_render_identity": null,
+  "final_decision": null
+}

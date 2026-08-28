@@ -1,0 +1,261 @@
+{
+  "schema": "RESEARCH_PRESENTATION_DECK_SEQUENCE_SUMMARY_V1",
+  "page_count": 6,
+  "page_order": [
+    "slide_2_statistical_model",
+    "slide_3_real_data_application",
+    "slide_4_experiment_design",
+    "slide_5_negative_result",
+    "slide_6_next_experiment",
+    "slide_7_medical_image_comparison"
+  ],
+  "title_sequence": [
+    "Clustered outcomes separate center and individual variation",
+    "Cluster-robust intervals recover coverage as ICC increases",
+    "Simulation varies clustering before interval procedures are compared",
+    "Small-G settings remain anti-conservative after robustification",
+    "Next experiment tests whether batch selection reduces fragile coverage",
+    "Same-case panels keep the segmentation error interpretable"
+  ],
+  "section_sequence": [
+    "Clustered interval calibration",
+    "Clustered interval calibration",
+    "Clustered interval calibration",
+    "Clustered interval calibration",
+    "Clustered interval calibration",
+    "Segmentation robustness"
+  ],
+  "workstream_sequence": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_order": 1
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_order": 1
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_order": 1
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_order": 1
+    },
+    {
+      "logical_id": "slide_6_next_experiment",
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_order": 1
+    },
+    {
+      "logical_id": "slide_7_medical_image_comparison",
+      "workstream_id": "segmentation_robustness",
+      "workstream_label": "Segmentation robustness",
+      "workstream_order": 2
+    }
+  ],
+  "storyline_order": [
+    "STATISTICAL_MODEL",
+    "REAL_DATA_APPLICATION",
+    "EXPERIMENT_DESIGN",
+    "NEGATIVE_RESULT",
+    "NEXT_EXPERIMENT",
+    "MEDICAL_IMAGE_COMPARISON"
+  ],
+  "pages": [
+    {
+      "sequence_index": 1,
+      "rendered_slide_number": 2,
+      "logical_id": "slide_2_statistical_model",
+      "page_id": "production_model",
+      "page_job": "STATISTICAL_MODEL",
+      "title": "Clustered outcomes separate center and individual variation",
+      "section": "Clustered interval calibration",
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_order": 1,
+      "source_evidence_ids": [
+        "EV-MODEL-001"
+      ],
+      "selected_gold_id": "GSC-016",
+      "selected_reference_id": "RRL-020",
+      "primary_scientific_object_type": "native_latex_math",
+      "scientific_objects": [],
+      "visual_density": {
+        "declared_density": "low",
+        "machine_density": "low",
+        "primary_area": 0.0,
+        "native_object_count": 3,
+        "capacity_status": "FIT"
+      },
+      "rendered_page_path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/cuhk_production_build/rendered/slide-2.png",
+      "rendered_page_sha256": "489c286b74f9b4cf0ea74338e0e0fb7dd0a6da1d8fdb9bb0f80583881a71aa0e",
+      "transition_cue": null
+    },
+    {
+      "sequence_index": 2,
+      "rendered_slide_number": 3,
+      "logical_id": "slide_3_real_data_application",
+      "page_id": "production_quantitative_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "title": "Cluster-robust intervals recover coverage as ICC increases",
+      "section": "Clustered interval calibration",
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_order": 1,
+      "source_evidence_ids": [
+        "EV-RESULT-001"
+      ],
+      "selected_gold_id": "GSC-014",
+      "selected_reference_id": "RRL-016",
+      "primary_scientific_object_type": "presentation_native_coverage_figure",
+      "scientific_objects": [],
+      "visual_density": {
+        "declared_density": "moderate",
+        "machine_density": "low",
+        "primary_area": 0.0,
+        "native_object_count": 3,
+        "capacity_status": "FIT"
+      },
+      "rendered_page_path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/cuhk_production_build/rendered/slide-3.png",
+      "rendered_page_sha256": "4c609896aff98b3d8dc24941ace84690b9e858d370af330682500e735df6af2d",
+      "transition_cue": null
+    },
+    {
+      "sequence_index": 3,
+      "rendered_slide_number": 4,
+      "logical_id": "slide_4_experiment_design",
+      "page_id": "production_experiment_design",
+      "page_job": "EXPERIMENT_DESIGN",
+      "title": "Simulation varies clustering before interval procedures are compared",
+      "section": "Clustered interval calibration",
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_order": 1,
+      "source_evidence_ids": [
+        "EV-DESIGN-001"
+      ],
+      "selected_gold_id": "GSC-004",
+      "selected_reference_id": "RRL-019",
+      "primary_scientific_object_type": "scientific_relation_diagram",
+      "scientific_objects": [],
+      "visual_density": {
+        "declared_density": "moderate",
+        "machine_density": "low",
+        "primary_area": 0.0,
+        "native_object_count": 3,
+        "capacity_status": "FIT"
+      },
+      "rendered_page_path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/cuhk_production_build/rendered/slide-4.png",
+      "rendered_page_sha256": "e1775c71ddee184155cd69bc7c9858a5967be5c6a220cd0c6c25b33e372f69f1",
+      "transition_cue": null
+    },
+    {
+      "sequence_index": 4,
+      "rendered_slide_number": 5,
+      "logical_id": "slide_5_negative_result",
+      "page_id": "production_negative_result",
+      "page_job": "NEGATIVE_RESULT",
+      "title": "Small-G settings remain anti-conservative after robustification",
+      "section": "Clustered interval calibration",
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_order": 1,
+      "source_evidence_ids": [
+        "EV-NEGATIVE-001"
+      ],
+      "selected_gold_id": "GSC-012",
+      "selected_reference_id": "RRL-011",
+      "primary_scientific_object_type": "negative_evidence_plot",
+      "scientific_objects": [],
+      "visual_density": {
+        "declared_density": "moderate",
+        "machine_density": "low",
+        "primary_area": 0.0,
+        "native_object_count": 3,
+        "capacity_status": "FIT"
+      },
+      "rendered_page_path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/cuhk_production_build/rendered/slide-5.png",
+      "rendered_page_sha256": "daf79c0f303860e8d4c01fe6bb810ef80a4f0d454bc681d100e017e02c45eb06",
+      "transition_cue": null
+    },
+    {
+      "sequence_index": 5,
+      "rendered_slide_number": 6,
+      "logical_id": "slide_6_next_experiment",
+      "page_id": "production_next_experiment",
+      "page_job": "NEXT_EXPERIMENT",
+      "title": "Next experiment tests whether batch selection reduces fragile coverage",
+      "section": "Clustered interval calibration",
+      "workstream_id": "clustered_interval_calibration",
+      "workstream_label": "Clustered interval calibration",
+      "workstream_order": 1,
+      "source_evidence_ids": [
+        "EV-NEXT-001"
+      ],
+      "selected_gold_id": "GSC-018",
+      "selected_reference_id": "RRL-059",
+      "primary_scientific_object_type": "next_experiment_reasoning",
+      "scientific_objects": [],
+      "visual_density": {
+        "declared_density": "moderate",
+        "machine_density": "low",
+        "primary_area": 0.0,
+        "native_object_count": 3,
+        "capacity_status": "FIT"
+      },
+      "rendered_page_path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/cuhk_production_build/rendered/slide-6.png",
+      "rendered_page_sha256": "0fc4574ecbb5deb5ffac2cecbddcdd66967e2301c3199a931ffe06507f1e95aa",
+      "transition_cue": null
+    },
+    {
+      "sequence_index": 6,
+      "rendered_slide_number": 7,
+      "logical_id": "slide_7_medical_image_comparison",
+      "page_id": "production_medical_comparison",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "title": "Same-case panels keep the segmentation error interpretable",
+      "section": "Segmentation robustness",
+      "workstream_id": "segmentation_robustness",
+      "workstream_label": "Segmentation robustness",
+      "workstream_order": 2,
+      "source_evidence_ids": [
+        "EV-MEDICAL-001"
+      ],
+      "selected_gold_id": "GSC-008",
+      "selected_reference_id": "RRL-013",
+      "primary_scientific_object_type": "same_case_medical_panels",
+      "scientific_objects": [],
+      "visual_density": {
+        "declared_density": "high",
+        "machine_density": "moderate",
+        "primary_area": 0.0,
+        "native_object_count": 4,
+        "capacity_status": "FIT"
+      },
+      "rendered_page_path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/cuhk_production_build/rendered/slide-7.png",
+      "rendered_page_sha256": "6a095ca7983eeafe285a2b491b3288d21f1b5deaa10b4f7877fa969df0d21d76",
+      "transition_cue": {
+        "label": "Segmentation robustness",
+        "audience_text": "independent workstream; no causal bridge asserted",
+        "relation_to_previous": "independent workstream; no source-supported causal bridge is asserted"
+      }
+    }
+  ],
+  "deck_contact_sheet": {
+    "path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/deck_contact_sheet.png",
+    "sha256": "c4a3a30289381218f03f2091cf982ce9b2754fc03074bf43d392c580f2d616ec",
+    "serves_audience": false,
+    "review_role": "deck_sequence_context"
+  },
+  "deck_identity_sha256": "d19be3045ecc36519de9efee39dd6ca671be2f1f4545a3780545ef3932cb6d7b"
+}

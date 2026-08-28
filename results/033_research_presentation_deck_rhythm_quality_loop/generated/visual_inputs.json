@@ -1,0 +1,122 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+  "task_key": "033_research_presentation_deck_rhythm_quality_loop",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "033_research_presentation_deck_rhythm_quality_loop-one-call-production-research-deck-review",
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "external_upload_authorization": "",
+  "rubric": {
+    "instructions": "Review the rendered pixels from one normal research-presentations production invocation. Check that each page contains source-specific content from the supplied engineering bundle rather than placeholders; exact CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math, native plots, and medical images are semantically correct where present; no internal RRL/GSC/SRC, QA, provenance, workflow, repo path, run ID, or implementation language leaks into audience-facing slides; repeated generic cards or one-template pages are rejected; and the deck reads as one coherent research update rather than disconnected benchmark pages. For multi-workstream bundles, confirm that each workstream stays internally continuous and that any independent workstream transition is visible without inventing a causal relation. Separately review the deck_contact_sheet item as a deck-level rhythm object: adjacent-page density jumps, repeated composition face, overfull or empty pages, redundant summary filler, result -> failure -> next-experiment rhythm, workstream transition balance, and title/object/formula/image alternation must meet a mature doctoral group-meeting or strong conference-talk bar. The top-level package PASS is not enough; provide item-level judgement and observations for deck_contact_sheet. Do not infer visual quality from filenames or hashes.",
+    "source_contracts": [
+      "The engineering regression bundle is public-safe and explicitly excluded from Stage 5 holdouts.",
+      "Stage 2 gold/reference pixels are used only for compatible composition selection.",
+      "The deck-quality loop may repair at most once and must fail closed/no-winner for unsafe findings or unresolved blockers."
+    ]
+  },
+  "identity_bindings": {
+    "task_key": "033_research_presentation_deck_rhythm_quality_loop",
+    "implementation_commit": "d89161077b13c80b0ce7b20e50eddb608f57e8b4",
+    "input_title": "Clustered Interval Calibration And Synthetic Segmentation Robustness",
+    "build_manifest": "results/033_research_presentation_deck_rhythm_quality_loop/generated/BUILD_MANIFEST.json",
+    "build_manifest_sha256": "1aad8d4d32f7abe52719360c5bb06c50e3c476c6c8dbedb39ca11417666f9984",
+    "source_fidelity_map": "results/033_research_presentation_deck_rhythm_quality_loop/generated/source_fidelity_map.json",
+    "source_fidelity_map_sha256": "41052e6f6a1f423acbae542c3bc83817f405fcf63c0c0d3875dfd05293123bc3",
+    "deck_sequence_summary": "results/033_research_presentation_deck_rhythm_quality_loop/generated/deck_sequence_summary.json",
+    "deck_sequence_summary_sha256": "0a5145b2597e69ecd215b2083de30c1ddc6bd4188367deec59758e03cd8d2577",
+    "quality_loop_state": "results/033_research_presentation_deck_rhythm_quality_loop/generated/quality_loop_state.json",
+    "quality_loop_state_sha256": "f85f92d8ed2627e9eeab64a952ec8ee78bf0ac5edced03b728a5b0b610056e92",
+    "deck_contact_sheet": "results/033_research_presentation_deck_rhythm_quality_loop/generated/deck_contact_sheet.png",
+    "deck_contact_sheet_sha256": "c4a3a30289381218f03f2091cf982ce9b2754fc03074bf43d392c580f2d616ec",
+    "deck_identity_sha256": "d19be3045ecc36519de9efee39dd6ca671be2f1f4545a3780545ef3932cb6d7b",
+    "pdf_sha256": "29cdf2e85cd6a5b554f10576ae65dfd4eb18b807ad3233055ad7a50f06b7b3d3",
+    "page_job_by_logical_id": {
+      "slide_2_statistical_model": "STATISTICAL_MODEL",
+      "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+      "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+      "slide_5_negative_result": "NEGATIVE_RESULT",
+      "slide_6_next_experiment": "NEXT_EXPERIMENT",
+      "slide_7_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON"
+    },
+    "source_evidence_ids_by_logical_id": {
+      "slide_2_statistical_model": [
+        "EV-MODEL-001"
+      ],
+      "slide_3_real_data_application": [
+        "EV-RESULT-001"
+      ],
+      "slide_4_experiment_design": [
+        "EV-DESIGN-001"
+      ],
+      "slide_5_negative_result": [
+        "EV-NEGATIVE-001"
+      ],
+      "slide_6_next_experiment": [
+        "EV-NEXT-001"
+      ],
+      "slide_7_medical_image_comparison": [
+        "EV-MEDICAL-001"
+      ]
+    },
+    "selected_gold_by_page_id": {
+      "production_model": "GSC-016",
+      "production_quantitative_result": "GSC-014",
+      "production_experiment_design": "GSC-004",
+      "production_negative_result": "GSC-012",
+      "production_next_experiment": "GSC-018",
+      "production_medical_comparison": "GSC-008"
+    }
+  },
+  "inputs": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/cuhk_production_build/rendered/slide-2.png",
+      "mime_type": "image/png",
+      "sha256": "489c286b74f9b4cf0ea74338e0e0fb7dd0a6da1d8fdb9bb0f80583881a71aa0e",
+      "description": "Rendered exact-CUHK production page for STATISTICAL_MODEL using source evidence EV-MODEL-001."
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/cuhk_production_build/rendered/slide-3.png",
+      "mime_type": "image/png",
+      "sha256": "4c609896aff98b3d8dc24941ace84690b9e858d370af330682500e735df6af2d",
+      "description": "Rendered exact-CUHK production page for REAL_DATA_APPLICATION using source evidence EV-RESULT-001."
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/cuhk_production_build/rendered/slide-4.png",
+      "mime_type": "image/png",
+      "sha256": "e1775c71ddee184155cd69bc7c9858a5967be5c6a220cd0c6c25b33e372f69f1",
+      "description": "Rendered exact-CUHK production page for EXPERIMENT_DESIGN using source evidence EV-DESIGN-001."
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/cuhk_production_build/rendered/slide-5.png",
+      "mime_type": "image/png",
+      "sha256": "daf79c0f303860e8d4c01fe6bb810ef80a4f0d454bc681d100e017e02c45eb06",
+      "description": "Rendered exact-CUHK production page for NEGATIVE_RESULT using source evidence EV-NEGATIVE-001."
+    },
+    {
+      "logical_id": "slide_6_next_experiment",
+      "path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/cuhk_production_build/rendered/slide-6.png",
+      "mime_type": "image/png",
+      "sha256": "0fc4574ecbb5deb5ffac2cecbddcdd66967e2301c3199a931ffe06507f1e95aa",
+      "description": "Rendered exact-CUHK production page for NEXT_EXPERIMENT using source evidence EV-NEXT-001."
+    },
+    {
+      "logical_id": "slide_7_medical_image_comparison",
+      "path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/cuhk_production_build/rendered/slide-7.png",
+      "mime_type": "image/png",
+      "sha256": "6a095ca7983eeafe285a2b491b3288d21f1b5deaa10b4f7877fa969df0d21d76",
+      "description": "Rendered exact-CUHK production page for MEDICAL_IMAGE_COMPARISON using source evidence EV-MEDICAL-001."
+    },
+    {
+      "logical_id": "deck_contact_sheet",
+      "path": "results/033_research_presentation_deck_rhythm_quality_loop/generated/deck_contact_sheet.png",
+      "mime_type": "image/png",
+      "sha256": "c4a3a30289381218f03f2091cf982ce9b2754fc03074bf43d392c580f2d616ec",
+      "description": "Deck-level contact sheet preserving the rendered slide sequence for rhythm, density, transition, and template-repeat review.",
+      "review_role": "deck_sequence_context"
+    }
+  ]
+}
