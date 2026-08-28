@@ -161,10 +161,10 @@
 \begin{frame}[t]{Simulation varies clustering before interval procedures are compared}
 \begin{tikzpicture}[x=\paperwidth,y=-\paperheight]
 \path[use as bounding box] (0,0.12) rectangle (1,0.82);
-\StageThreeNode{0.0758}{0.2250}{0.2156}{left}{\small\textbf{DGP stress grid}};
-\StageThreeNode{0.2998}{0.2250}{0.2000}{center}{\small\textbf{Center hierarchy}};
+\StageThreeNode{0.0758}{0.2250}{0.2156}{left}{\small\textbf{DGP knobs}};
+\StageThreeNode{0.2998}{0.2250}{0.2000}{center}{\small\textbf{Clustered samples}};
 \StageThreeNode{0.5132}{0.2250}{0.1850}{center}{\small\textbf{Interval procedures}};
-\StageThreeNode{0.7082}{0.2250}{0.1750}{center}{\small\textbf{Endpoints}};
+\StageThreeNode{0.7082}{0.2250}{0.1750}{center}{\small\textbf{Coverage diagnostics}};
 \fill[fill=maincolor!75] (0.0758,0.3221) circle (2.7pt);
 \StageThreeNode{0.0938}{0.3081}{0.1976}{left}{\footnotesize centers \(G=8,20,50\)};
 \fill[fill=maincolor!75] (0.0758,0.4336) circle (2.7pt);
@@ -173,7 +173,7 @@
 \StageThreeNode{0.0938}{0.5312}{0.1976}{left}{\footnotesize balanced or imbalanced clusters};
 \draw[line width=1.0pt,draw=maincolor!60] (0.3878,0.3906) ellipse (0.068 and 0.090);
 \draw[line width=1.0pt,draw=maincolor!60] (0.3878,0.5786) ellipse (0.068 and 0.090);
-\StageThreeNode{0.3018}{0.6896}{0.1850}{center}{\footnotesize Subject records nested inside each center; 400 reps per cell};
+\StageThreeNode{0.3018}{0.6896}{0.1850}{center}{\footnotesize Clustered samples};
 \fill[fill=teal!70!black] (0.3588,0.4146) circle (2.0pt);
 \fill[fill=red!70!black] (0.3588,0.3666) circle (2.0pt);
 \fill[fill=teal!70!black] (0.3878,0.4146) circle (2.0pt);
@@ -237,7 +237,7 @@
 \draw[line width=1.35pt,draw=red!70!black] (0.0741,0.5427) -- (0.2721,0.5427);
 \draw[line width=1.35pt,draw=orange!80!black] (0.0741,0.4997) -- (0.2721,0.4997);
 \draw[line width=1.35pt,draw=teal!70!black] (0.0741,0.4577) -- (0.2721,0.4577);
-\StageThreeNode{0.0841}{0.5667}{0.2100}{left}{\footnotesize coverage shortfall at high ICC};
+\StageThreeNode{0.0841}{0.5667}{0.2100}{left}{\footnotesize Small-G limit};
 \StageThreeNode{0.3240}{0.2250}{0.2300}{center}{\small\textbf{Manipulate sampling}};
 \draw[line width=1.05pt,draw=maincolor!70] (0.3240,0.4787) -- (0.4060,0.3390);
 \fill[fill=white,draw=maincolor!70,line width=1.0pt] (0.4280,0.3390) circle (8.8pt);

@@ -1,7 +1,7 @@
 {
   "schema": "RESEARCH_PRESENTATION_DECK_SEQUENCE_SUMMARY_V1",
   "page_count": 6,
-  "render_input_identity_sha256": "424386beec49171891b6a158df3601f113d64f0ad83b1fd4573f7243e72e3b3a",
+  "render_input_identity_sha256": "eef1037690a953c78fdcb290907ee795bef9e6b7bbb5b0a6f564b9d2fc8f1e7b",
   "render_input_manifest": {
     "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
     "build_workspace": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build",
@@ -34,7 +34,7 @@
       {
         "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/main.tex",
         "role": "main_tex",
-        "sha256": "35370c9ff7a1c4e0120ef98dad2df46079f47673e56e250f114da1e832ac8999"
+        "sha256": "cd9e2d1d082ccd866507e974355262cff8b619efc8f275e7eeb32f3442beea80"
       },
       {
         "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/scientific_layouts.tex",
@@ -107,7 +107,7 @@
         "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
       }
     ],
-    "sha256": "424386beec49171891b6a158df3601f113d64f0ad83b1fd4573f7243e72e3b3a"
+    "sha256": "eef1037690a953c78fdcb290907ee795bef9e6b7bbb5b0a6f564b9d2fc8f1e7b"
   },
   "pixel_evidence_status": {
     "status": "AVAILABLE",
@@ -116,7 +116,7 @@
     "rendered_page_sha256_nullable": false,
     "contact_sheet_sha256_nullable": false
   },
-  "rendered_pixel_identity_sha256": "0fb039c9c714e2577dc78694a66599e76ef2d9c55d1c9ec43959f41896c50fc1",
+  "rendered_pixel_identity_sha256": "0b2a489ca3c7f0cdb3a14d0de7d76adcc582b7e6027d3e491ea024d585a66443",
   "page_order": [
     "slide_2_statistical_model",
     "slide_3_real_data_application",
@@ -287,7 +287,7 @@
         "capacity_status": "FIT"
       },
       "rendered_page_path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-4.png",
-      "rendered_page_sha256": "d2cea85a95b24d0788db0024d14374cda340637006da382c726fe3c48573b678",
+      "rendered_page_sha256": "608d79cb5c2858255b28f97c4f3296adac08803827a9007a9b0a27485ada501c",
       "rendered_pixel_status": "AVAILABLE",
       "transition_cue": null
     },
@@ -355,7 +355,7 @@
         "capacity_status": "FIT"
       },
       "rendered_page_path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-6.png",
-      "rendered_page_sha256": "94621c2e7296b98cdd670932f16e53e47624b69b5f0147a64b4fa0fc5991f475",
+      "rendered_page_sha256": "19f261a6bff83351b5cb59f972d8433692a32708c506c0b055f02605c445d4bb",
       "rendered_pixel_status": "AVAILABLE",
       "transition_cue": null
     },
@@ -402,9 +402,9 @@
   ],
   "deck_contact_sheet": {
     "path": "results/036_research_presentation_process_page_projection_recovery/generated/deck_contact_sheet.png",
-    "sha256": "a5abd59489f224c94506ba1830a429fc631f3d043732480af785bfd8fcf57a93",
+    "sha256": "75bf60339ba39b5b61ced0ad358401e9e3b2bea9d93bbbba4113b8033c10b434",
     "serves_audience": false,
     "review_role": "deck_sequence_context"
   },
-  "deck_identity_sha256": "3705fbd6239547c092a1331d1e545ea831e0e8e57250040ec9cec6e79af0e65a"
+  "deck_identity_sha256": "762b6c9e8caed7a910ffc21661688b4b56a2ab269975c4fe0016748c2e184e32"
 }
