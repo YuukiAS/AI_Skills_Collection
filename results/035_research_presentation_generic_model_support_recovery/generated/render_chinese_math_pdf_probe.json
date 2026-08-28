@@ -1,0 +1,309 @@
+{
+  "schema": "RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1",
+  "status": "ok",
+  "probe": "skills/tools/documents-media/render-chinese-math-pdf/scripts/probe_pdf_render_env.py",
+  "returncode": 0,
+  "stderr": "",
+  "payload": {
+    "root": "/home/yuukias/AI_Skills_Collection",
+    "namespace_roots": [
+      "/home/yuukias"
+    ],
+    "commands": {
+      "pandoc": {
+        "available": true,
+        "path": "/home/yuukias/conda/bin/pandoc",
+        "version": "pandoc 2.12"
+      },
+      "chromium-browser": {
+        "available": false,
+        "path": null,
+        "version": null
+      },
+      "chromium": {
+        "available": false,
+        "path": null,
+        "version": null
+      },
+      "google-chrome": {
+        "available": false,
+        "path": null,
+        "version": null
+      },
+      "google-chrome-stable": {
+        "available": false,
+        "path": null,
+        "version": null
+      },
+      "xelatex": {
+        "available": false,
+        "path": null,
+        "version": null
+      },
+      "lualatex": {
+        "available": false,
+        "path": null,
+        "version": null
+      },
+      "kpsewhich": {
+        "available": false,
+        "path": null,
+        "version": null
+      },
+      "pdfinfo": {
+        "available": true,
+        "path": "/usr/bin/pdfinfo",
+        "version": "pdfinfo version 24.02.0"
+      },
+      "pdftotext": {
+        "available": true,
+        "path": "/usr/bin/pdftotext",
+        "version": "pdftotext version 24.02.0"
+      },
+      "pdffonts": {
+        "available": true,
+        "path": "/usr/bin/pdffonts",
+        "version": "pdffonts version 24.02.0"
+      },
+      "pdftoppm": {
+        "available": true,
+        "path": "/usr/bin/pdftoppm",
+        "version": "pdftoppm version 24.02.0"
+      },
+      "fc-match": {
+        "available": true,
+        "path": "/home/yuukias/conda/bin/fc-match",
+        "version": "fontconfig version 2.14.1"
+      }
+    },
+    "tex_files": {
+      "xeCJK.sty": {
+        "available": false,
+        "path": null,
+        "reason": "kpsewhich not found"
+      },
+      "ctexart.cls": {
+        "available": false,
+        "path": null,
+        "reason": "kpsewhich not found"
+      },
+      "fontspec.sty": {
+        "available": false,
+        "path": null,
+        "reason": "kpsewhich not found"
+      },
+      "amsmath.sty": {
+        "available": false,
+        "path": null,
+        "reason": "kpsewhich not found"
+      },
+      "booktabs.sty": {
+        "available": false,
+        "path": null,
+        "reason": "kpsewhich not found"
+      },
+      "longtable.sty": {
+        "available": false,
+        "path": null,
+        "reason": "kpsewhich not found"
+      },
+      "hyperref.sty": {
+        "available": false,
+        "path": null,
+        "reason": "kpsewhich not found"
+      }
+    },
+    "fontconfig_fonts": {
+      "Noto Serif CJK SC": {
+        "available": false,
+        "matched": "DejaVu Sans",
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "reason": "fontconfig matched fallback family: DejaVu Sans"
+      },
+      "Noto Sans CJK SC": {
+        "available": false,
+        "matched": "DejaVu Sans",
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "reason": "fontconfig matched fallback family: DejaVu Sans"
+      },
+      "Source Han Serif SC": {
+        "available": false,
+        "matched": "DejaVu Sans",
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "reason": "fontconfig matched fallback family: DejaVu Sans"
+      },
+      "Source Han Sans SC": {
+        "available": false,
+        "matched": "DejaVu Sans",
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "reason": "fontconfig matched fallback family: DejaVu Sans"
+      },
+      "Droid Sans Fallback": {
+        "available": true,
+        "matched": "Droid Sans Fallback",
+        "path": "/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf",
+        "reason": null
+      },
+      "FandolSong": {
+        "available": false,
+        "matched": "DejaVu Sans",
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "reason": "fontconfig matched fallback family: DejaVu Sans"
+      },
+      "AR PL UMing CN": {
+        "available": false,
+        "matched": "DejaVu Sans",
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "reason": "fontconfig matched fallback family: DejaVu Sans"
+      },
+      "WenQuanYi Micro Hei": {
+        "available": false,
+        "matched": "DejaVu Sans",
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "reason": "fontconfig matched fallback family: DejaVu Sans"
+      }
+    },
+    "latin_fontconfig_fonts": {
+      "TeX Gyre Termes": {
+        "available": false,
+        "matched": "DejaVu Serif",
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+        "reason": "fontconfig matched fallback family: DejaVu Serif"
+      },
+      "Liberation Serif": {
+        "available": false,
+        "matched": "DejaVu Serif",
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+        "reason": "fontconfig matched fallback family: DejaVu Serif"
+      },
+      "Nimbus Roman": {
+        "available": true,
+        "matched": "Nimbus Roman",
+        "path": "/usr/share/fonts/opentype/urw-base35/NimbusRoman-Regular.otf",
+        "reason": null
+      },
+      "STIX Two Text": {
+        "available": false,
+        "matched": "DejaVu Sans",
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "reason": "fontconfig matched fallback family: DejaVu Sans"
+      },
+      "Times New Roman": {
+        "available": false,
+        "matched": "DejaVu Serif",
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+        "reason": "fontconfig matched fallback family: DejaVu Serif"
+      }
+    },
+    "local_override": {
+      "paths": [
+        "/home/yuukias/.config/ai-skills/local-overrides.toml"
+      ],
+      "existing_paths": [],
+      "exists": false,
+      "render_resource_dirs": []
+    },
+    "project_resources": [
+      "/home/yuukias/render_resources/chinese_math_pdf"
+    ],
+    "project_resource_bundles": [
+      {
+        "path": "/home/yuukias/render_resources/chinese_math_pdf",
+        "texmf": "/home/yuukias/render_resources/chinese_math_pdf/texmf",
+        "usable_chinese_math_bundle": true,
+        "tex_files": {
+          "xeCJK.sty": "/home/yuukias/render_resources/chinese_math_pdf/texmf/tex/xelatex/xecjk/xeCJK.sty",
+          "ctexart.cls": "/home/yuukias/render_resources/chinese_math_pdf/texmf/tex/latex/ctex/ctexart.cls",
+          "fontspec.sty": null,
+          "amsmath.sty": null,
+          "booktabs.sty": null,
+          "longtable.sty": null,
+          "hyperref.sty": null
+        },
+        "font_files": {
+          "NotoSerifCJKsc-Regular.otf": null,
+          "NotoSerifSC-Regular.otf": "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSerifSC-Regular.otf",
+          "NotoSerifCJKsc-Bold.otf": null,
+          "NotoSerifSC-Bold.otf": "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSerifSC-Bold.otf",
+          "SourceHanSerifSC-Regular.otf": null,
+          "SourceHanSerifSC-Bold.otf": null,
+          "SourceHanSerifSC-Heavy.otf": null,
+          "NotoSansCJKsc-Regular.otf": null,
+          "NotoSansSC-Regular.otf": "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSansSC-Regular.otf",
+          "NotoSansCJKsc-Bold.otf": null,
+          "NotoSansSC-Bold.otf": "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSansSC-Bold.otf",
+          "SourceHanSansSC-Regular.otf": null,
+          "SourceHanSansSC-Bold.otf": null,
+          "SourceHanSansSC-Heavy.otf": null,
+          "DroidSansFallbackFull.ttf": null,
+          "DroidSansFallback.ttf": null,
+          "FandolSong-Regular.otf": "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/fandol/FandolSong-Regular.otf",
+          "FandolHei-Regular.otf": "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/fandol/FandolHei-Regular.otf",
+          "FandolKai-Regular.otf": "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/fandol/FandolKai-Regular.otf"
+        },
+        "viewer_compatible_cjk_font_files": {
+          "Noto Serif CJK SC": [
+            "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSerifSC-Regular.otf",
+            "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSerifSC-Bold.otf"
+          ],
+          "Source Han Serif SC": [],
+          "Noto Sans CJK SC": [
+            "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSansSC-Regular.otf",
+            "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSansSC-Bold.otf"
+          ],
+          "Source Han Sans SC": [],
+          "Droid Sans Fallback": []
+        },
+        "fallback_cjk_font_files": {
+          "FandolSong": [
+            "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/fandol/FandolSong-Regular.otf"
+          ],
+          "FandolHei": [
+            "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/fandol/FandolHei-Regular.otf"
+          ],
+          "FandolKai": [
+            "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/fandol/FandolKai-Regular.otf"
+          ]
+        },
+        "has_viewer_compatible_cjk_font": true,
+        "has_fandol_fallback": true,
+        "header_template": "/home/yuukias/render_resources/chinese_math_pdf/templates/chinese_math_pandoc_header.tex.in",
+        "wrappers": {
+          "render_markdown_pdf.sh": "/home/yuukias/render_resources/chinese_math_pdf/scripts/render_markdown_pdf.sh",
+          "validate_pdf.sh": "/home/yuukias/render_resources/chinese_math_pdf/scripts/validate_pdf.sh"
+        }
+      }
+    ],
+    "summary": {
+      "markdown_to_pdf_candidate": false,
+      "cjk_xelatex_candidate": false,
+      "final_standard_pdf_candidate": false,
+      "html_chromium_candidate": false,
+      "chromium_command": null,
+      "usable_system_cjk_fonts": [
+        "Droid Sans Fallback"
+      ],
+      "usable_latin_fonts": [
+        "Nimbus Roman"
+      ],
+      "usable_resource_bundle_count": 1,
+      "resource_font_bundle_count": 1,
+      "viewer_compatible_resource_bundle_count": 1,
+      "recommended_resource_dir": "/home/yuukias/render_resources/chinese_math_pdf",
+      "recommended_viewer_compatible_resource_dir": "/home/yuukias/render_resources/chinese_math_pdf",
+      "preferred_route": "blocked_missing_dependency",
+      "font_policy": {
+        "preferred_latin": "TeX Gyre Termes",
+        "preferred_cjk": "system Noto/Source Han/Droid with uni yes; otherwise Noto/Source Han/Droid from the selected local resource bundle; Fandol only as compact fallback",
+        "avoid_required_times_new_roman": true,
+        "chromium_type3_warning": "Chromium/Skia PDF output may embed local CJK fonts as unnamed Type 3 fonts."
+      },
+      "pdf_qa_tools": [
+        "pdfinfo",
+        "pdftotext",
+        "pdffonts",
+        "pdftoppm"
+      ]
+    }
+  }
+}
