@@ -1,0 +1,210 @@
+{
+  "blocking_findings": [],
+  "created_at": "2026-08-28T07:37:47Z",
+  "evidence_id": "visual-review-032_research_presentation_storyline_coherence_recovery-90ae49d92c5b",
+  "images": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "mime_type": "image/png",
+      "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-2.png",
+      "sha256": "489c286b74f9b4cf0ea74338e0e0fb7dd0a6da1d8fdb9bb0f80583881a71aa0e"
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "mime_type": "image/png",
+      "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-3.png",
+      "sha256": "4c609896aff98b3d8dc24941ace84690b9e858d370af330682500e735df6af2d"
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "mime_type": "image/png",
+      "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-4.png",
+      "sha256": "e1775c71ddee184155cd69bc7c9858a5967be5c6a220cd0c6c25b33e372f69f1"
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "mime_type": "image/png",
+      "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-5.png",
+      "sha256": "daf79c0f303860e8d4c01fe6bb810ef80a4f0d454bc681d100e017e02c45eb06"
+    },
+    {
+      "logical_id": "slide_6_next_experiment",
+      "mime_type": "image/png",
+      "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-6.png",
+      "sha256": "0fc4574ecbb5deb5ffac2cecbddcdd66967e2301c3199a931ffe06507f1e95aa"
+    },
+    {
+      "logical_id": "slide_7_medical_image_comparison",
+      "mime_type": "image/png",
+      "path": "results/032_research_presentation_storyline_coherence_recovery/generated/cuhk_production_build/rendered/slide-7.png",
+      "sha256": "6a095ca7983eeafe285a2b491b3288d21f1b5deaa10b4f7877fa969df0d21d76"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "build_manifest": "results/032_research_presentation_storyline_coherence_recovery/generated/BUILD_MANIFEST.json",
+      "build_manifest_sha256": "7a6b64c5b41ed4d7c7cfb6a0985ee26f421c53f6e29c9493726ba9a3a66ed206",
+      "implementation_commit": "7c7aab455efb4bb51005e1362aef25f54f98184a",
+      "input_title": "Clustered Interval Calibration And Synthetic Segmentation Robustness",
+      "page_job_by_logical_id": {
+        "slide_2_statistical_model": "STATISTICAL_MODEL",
+        "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+        "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+        "slide_5_negative_result": "NEGATIVE_RESULT",
+        "slide_6_next_experiment": "NEXT_EXPERIMENT",
+        "slide_7_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON"
+      },
+      "pdf_sha256": "c1b6ddcfa980e07ff613c469fdf982e156573d490335f5a800130737ab2a7740",
+      "selected_gold_by_page_id": {
+        "production_experiment_design": "GSC-004",
+        "production_medical_comparison": "GSC-008",
+        "production_model": "GSC-016",
+        "production_negative_result": "GSC-012",
+        "production_next_experiment": "GSC-018",
+        "production_quantitative_result": "GSC-014"
+      },
+      "source_evidence_ids_by_logical_id": {
+        "slide_2_statistical_model": [
+          "EV-MODEL-001"
+        ],
+        "slide_3_real_data_application": [
+          "EV-RESULT-001"
+        ],
+        "slide_4_experiment_design": [
+          "EV-DESIGN-001"
+        ],
+        "slide_5_negative_result": [
+          "EV-NEGATIVE-001"
+        ],
+        "slide_6_next_experiment": [
+          "EV-NEXT-001"
+        ],
+        "slide_7_medical_image_comparison": [
+          "EV-MEDICAL-001"
+        ]
+      },
+      "source_fidelity_map": "results/032_research_presentation_storyline_coherence_recovery/generated/source_fidelity_map.json",
+      "source_fidelity_map_sha256": "41052e6f6a1f423acbae542c3bc83817f405fcf63c0c0d3875dfd05293123bc3",
+      "task_key": "032_research_presentation_storyline_coherence_recovery"
+    },
+    "manifest_sha256": "90ae49d92c5b3250efd6fa5828e29a8756d51398a56eb79cceaee4e67ca672e9",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "Review the rendered pixels from one normal research-presentations production invocation. Check that each page contains source-specific content from the supplied engineering bundle rather than placeholders; exact CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math, native plots, and medical images are semantically correct where present; no internal RRL/GSC/SRC, QA, provenance, workflow, repo path, run ID, or implementation language leaks into audience-facing slides; repeated generic cards or one-template pages are rejected; and the deck reads as one coherent research update rather than disconnected benchmark pages. For multi-workstream bundles, confirm that each workstream stays internally continuous and that any independent workstream transition is visible without inventing a causal relation. Do not infer visual quality from filenames or hashes.",
+      "source_contracts": [
+        "The engineering regression bundle is public-safe and explicitly excluded from Stage 5 holdouts.",
+        "Stage 2 gold/reference pixels are used only for compatible composition selection.",
+        "031 is a bounded Stage 4 production-entry proof, not full Stage 4 PASS or ONE_SHOT_QUALITY_PASS."
+      ]
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "PASS",
+      "item_id": "slide_2_statistical_model",
+      "observations": [
+        "CUHK crest and purple Beamer-style navigation/header are visible.",
+        "The slide presents a centered mixed-effects model with defined center effect and residual distributions, followed by an ICC interpretation.",
+        "No audience-facing workflow, repository, provenance, or implementation-language text is visible."
+      ],
+      "requirement_ids": [
+        "source-specific-content",
+        "cuhk-identity",
+        "scientific-object",
+        "no-internal-leaks"
+      ],
+      "summary": "Source-specific statistical model page with readable mathematical content."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_3_real_data_application",
+      "observations": [
+        "A three-panel coverage-versus-ICC plot is prominent and projection-readable, with distinct G=8, G=20, and G=50 panels.",
+        "The legend identifies naïve iid, cluster-robust, and nominal 0.95; plot annotations and data-source statement support the stated coverage finding.",
+        "The page visually continues the clustered-interval-calibration topic rather than using a generic card."
+      ],
+      "requirement_ids": [
+        "source-specific-content",
+        "native-plots",
+        "scientific-object",
+        "storyline-coherence"
+      ],
+      "summary": "Specific simulation-result evidence is clearly visualized and interpreted."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_4_experiment_design",
+      "observations": [
+        "The DGP stress grid, center hierarchy, interval procedures, and endpoints are linked in a left-to-right experimental flow.",
+        "Content specifies centers, ICC levels, balanced/imbalanced clusters, 400 repetitions per cell, and coverage/width/bias endpoints.",
+        "The design page directly supports the preceding coverage comparison."
+      ],
+      "requirement_ids": [
+        "source-specific-content",
+        "scientific-object",
+        "storyline-coherence"
+      ],
+      "summary": "Experiment-design page is specific, legible, and continuous with the results narrative."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_5_negative_result",
+      "observations": [
+        "The large bar chart shows naïve and cluster-robust coverage across ICC values for G=8 imbalanced clusters, including uncertainty bars and a nominal-target line.",
+        "The title and adjacent interpretation explicitly identify persistent anti-conservatism at small G, while naming the next methods to test.",
+        "The negative finding is presented as scientific evidence, not as hidden QA or production commentary."
+      ],
+      "requirement_ids": [
+        "source-specific-content",
+        "native-plots",
+        "negative-result",
+        "storyline-coherence",
+        "no-internal-leaks"
+      ],
+      "summary": "Clear, source-specific negative-result page that advances the research update."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_6_next_experiment",
+      "observations": [
+        "The diagram explicitly connects the high-ICC coverage shortfall to batch-selection manipulations, comparator arms, and a go/no-go rule.",
+        "Specific proposed arms—DPP diverse batch, random batch, Mondrian partition, CR2 correction, and wild cluster bootstrap—are visible.",
+        "This page follows logically from the prior negative-result evidence."
+      ],
+      "requirement_ids": [
+        "source-specific-content",
+        "scientific-object",
+        "storyline-coherence"
+      ],
+      "summary": "Specific next-experiment plan visibly follows from the identified failure mode."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "slide_7_medical_image_comparison",
+      "observations": [
+        "A visible workstream-transition banner states that segmentation robustness is an independent workstream and that no causal bridge is asserted.",
+        "Input, GT, prediction, and TP/FP/FN error panels show the same ring-shaped case and localized ROI; matching zoom crops preserve the comparison.",
+        "The overlay legend makes true positive, false positive, and false negative colors interpretable.",
+        "No internal workflow or provenance material is visible."
+      ],
+      "requirement_ids": [
+        "source-specific-content",
+        "medical-images",
+        "independent-workstream-transition",
+        "no-internal-leaks"
+      ],
+      "summary": "Semantically coherent same-case medical-image comparison with an explicit independent-workstream transition."
+    }
+  ],
+  "non_blocking_notes": [],
+  "overall_decision": "PASS",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "90ae49d92c5b3250efd6fa5828e29a8756d51398a56eb79cceaee4e67ca672e9",
+  "review_kind": "032_research_presentation_storyline_coherence_recovery-one-call-production-research-deck-review",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "PASS",
+  "task_key": "032_research_presentation_storyline_coherence_recovery",
+  "workflow_type": "reviewed_handoff"
+}
