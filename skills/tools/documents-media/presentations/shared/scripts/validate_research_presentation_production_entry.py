@@ -295,9 +295,21 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
     if render_status.get("status") == "ok" and not any(item.get("logical_id") == "deck_contact_sheet" for item in visual_inputs.get("inputs", [])):
         errors.append("visual_inputs.json: deck contact sheet input missing")
     bindings = visual_inputs.get("identity_bindings", {})
-    for key in ["deck_sequence_summary", "deck_sequence_summary_sha256", "quality_loop_state", "quality_loop_state_sha256", "deck_contact_sheet", "deck_contact_sheet_sha256", "deck_identity_sha256"]:
+    for key in ["deck_sequence_summary", "deck_sequence_summary_sha256", "quality_loop_state", "quality_loop_state_sha256", "deck_identity_sha256"]:
         if not bindings.get(key):
             errors.append(f"visual_inputs.json: identity binding missing {key}")
+    if render_status.get("status") == "ok":
+        for key in ["deck_contact_sheet", "deck_contact_sheet_sha256"]:
+            if not bindings.get(key):
+                errors.append(f"visual_inputs.json: identity binding missing {key}")
+        contact_sheet = manifest.get("deck_contact_sheet", {})
+        if bindings.get("deck_contact_sheet") != contact_sheet.get("path"):
+            errors.append("visual_inputs.json: deck_contact_sheet binding does not match BUILD_MANIFEST.json")
+        if bindings.get("deck_contact_sheet_sha256") != contact_sheet.get("sha256"):
+            errors.append("visual_inputs.json: deck_contact_sheet_sha256 binding does not match BUILD_MANIFEST.json")
+        contact_input = next((item for item in visual_inputs.get("inputs", []) if item.get("logical_id") == "deck_contact_sheet"), {})
+        if contact_input.get("path") != contact_sheet.get("path") or contact_input.get("sha256") != contact_sheet.get("sha256"):
+            errors.append("visual_inputs.json: deck_contact_sheet input does not match BUILD_MANIFEST.json")
     return errors
 
 
