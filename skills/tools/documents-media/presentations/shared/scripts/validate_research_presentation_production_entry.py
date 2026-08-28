@@ -25,6 +25,10 @@ FORBIDDEN_AUDIENCE_TERMS = [
     "repo path",
     "run ID",
     "implementation commit",
+    "implementation language",
+    "production regression",
+    "source bundle",
+    "provenance",
     "review target",
     "fixture",
     "workflow",
@@ -106,6 +110,12 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         errors.append("deck_plan.json: production route did not resolve to tex")
     if any("UNKNOWN" in json.dumps(slide, ensure_ascii=False) for slide in deck_plan.get("slides", [])):
         errors.append("deck_plan.json: generated slide still contains UNKNOWN planning placeholders")
+    for field in ["title", "subtitle"]:
+        text = str(deck_plan.get("metadata", {}).get(field, ""))
+        lower_text = text.lower()
+        for forbidden in FORBIDDEN_AUDIENCE_TERMS:
+            if forbidden.lower() in lower_text:
+                errors.append(f"deck_plan.json: metadata.{field} leaks audience-facing internal term {forbidden}")
 
     pages = fidelity.get("pages", [])
     if fidelity.get("schema") != "RESEARCH_PRESENTATION_SOURCE_FIDELITY_MAP_V1":

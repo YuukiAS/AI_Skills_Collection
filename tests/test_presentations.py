@@ -820,6 +820,11 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertIn("independent workstream", second_workstream["relation_to_previous"])
 
             layouts = json.loads((generated / "resolved_layouts.json").read_text(encoding="utf-8"))["layouts"]
+            model_layout = next(layout for layout in layouts if layout["page_job"] == "STATISTICAL_MODEL")
+            self.assertGreaterEqual(len(model_layout["native_objects"]), 5)
+            self.assertIn("key_message", model_layout["job_specific_runtime_contract"]["source_fields_consumed"])
+            self.assertIn("scientific_objects", model_layout["job_specific_runtime_contract"]["source_fields_consumed"])
+            self.assertIn("source-grounded supporting roles", " ".join(model_layout["source_to_cuhk_transform"]))
             medical_layout = next(layout for layout in layouts if layout["page_job"] == "MEDICAL_IMAGE_COMPARISON")
             semantic_records = {
                 Path(record["source_asset"]).stem: record
@@ -906,14 +911,18 @@ class PresentationSharedTests(unittest.TestCase):
             tex = (REPO_ROOT / manifest["tex"]).read_text(encoding="utf-8")
             self.assertIn(r"\usetheme{sintef}", tex)
             self.assertIn("Clustered Interval Calibration And Synthetic Segmentation Robustness", tex)
+            self.assertIn("Uncertainty calibration across clustered data and segmentation stress cases", tex)
             self.assertIn("Coverage by ICC under imbalanced clusters", tex)
+            self.assertIn("Model roles", tex)
+            self.assertIn("center random effect", tex)
+            self.assertIn("Calibration link", tex)
             self.assertIn("Same-case ROI zoom", tex)
             self.assertLess(tex.index("Small-G settings remain anti-conservative"), tex.index("Next experiment tests whether batch selection"))
             self.assertLess(tex.index("Next experiment tests whether batch selection"), tex.index("Same-case panels keep the segmentation error interpretable"))
             self.assertIn("Workstream transition", tex)
             self.assertIn("Segmentation robustness", tex)
             self.assertIn("no causal bridge asserted", tex)
-            for forbidden in ["RRL-", "SRC-", "GSC-", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "run ID", "fixture", "workflow"]:
+            for forbidden in ["RRL-", "SRC-", "GSC-", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "run ID", "fixture", "workflow", "production regression", "source bundle"]:
                 self.assertNotIn(forbidden, tex)
 
             source = generator.read_text(encoding="utf-8")
@@ -931,6 +940,28 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(validator.read_text(encoding="utf-8"), plugin_validator.read_text(encoding="utf-8"))
             plugin_quality_loop = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/deck_quality_loop.py"
             self.assertEqual((SHARED / "scripts/deck_quality_loop.py").read_text(encoding="utf-8"), plugin_quality_loop.read_text(encoding="utf-8"))
+
+            blocked_bundle = json.loads(bundle.read_text(encoding="utf-8"))
+            blocked_bundle["metadata"]["subtitle"] = "Production regression from source bundle"
+            blocked_path = Path(tmp) / "blocked_bundle.json"
+            blocked_path.write_text(json.dumps(blocked_bundle, indent=2) + "\n", encoding="utf-8")
+            blocked = subprocess.run(
+                [
+                    sys.executable,
+                    str(generator),
+                    "--input-bundle",
+                    str(blocked_path),
+                    "--out-dir",
+                    str(Path(tmp) / "blocked"),
+                    "--implementation-commit",
+                    implementation_commit,
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(blocked.returncode, 0)
+            self.assertIn("metadata.subtitle leaks audience-facing internal term", blocked.stderr)
 
             strict = subprocess.run(
                 [sys.executable, str(validator), "--out-dir", str(generated)],

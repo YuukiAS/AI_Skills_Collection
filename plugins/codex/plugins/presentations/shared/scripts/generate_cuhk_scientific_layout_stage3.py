@@ -45,6 +45,10 @@ FORBIDDEN_AUDIENCE_TERMS = [
     "repo path",
     "run ID",
     "implementation commit",
+    "implementation language",
+    "production regression",
+    "source bundle",
+    "provenance",
     "review target",
     "fixture",
     "workflow",
@@ -152,7 +156,15 @@ def expand_bbox_for_content(primary: dict[str, float], content_kind: str, transf
 def job_primary_geometry(spec: dict[str, Any], primary: dict[str, float], transforms: list[str]) -> dict[str, float]:
     safe = SAFE_REGION
     page_job = spec["page_job"]
-    if page_job == "REAL_DATA_APPLICATION":
+    if page_job == "STATISTICAL_MODEL":
+        target = {
+            "w": clamp(primary["w"], 0.58, 0.72),
+            "h": clamp(primary["h"] + 0.015, 0.205, 0.260),
+            "x": primary["x"] + primary["w"] * 0.045,
+            "y": 0.265 + (primary["y"] - safe["y"]) * 0.080,
+        }
+        transforms.append("statistical-model equation remains primary while source-grounded supporting roles fill the page")
+    elif page_job == "REAL_DATA_APPLICATION":
         target = {"w": 0.84, "h": 0.47, "y": 0.230}
         transforms.append("quantitative-result plot receives dominant projection-scale figure region")
     elif page_job == "NEGATIVE_RESULT":
@@ -206,6 +218,11 @@ def support_geometry(spec: dict[str, Any], primary: dict[str, float]) -> dict[st
         return {
             "annotation": {"x": 0.08, "y": 0.735, "w": 0.52, "h": 0.055},
             "caption": {"x": 0.64, "y": 0.735, "w": 0.30, "h": 0.055},
+        }
+    if page_job == "STATISTICAL_MODEL":
+        return {
+            "annotation": {"x": 0.155, "y": 0.500, "w": 0.690, "h": 0.055},
+            "caption": {"x": 0.155, "y": 0.782, "w": 0.690, "h": 0.036},
         }
     if page_job == "NEGATIVE_RESULT":
         return {
@@ -570,6 +587,25 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
             "bbox": caption,
         },
     ]
+    if spec["page_job"] == "STATISTICAL_MODEL" and spec.get("scientific_objects"):
+        objects.extend(
+            [
+                {
+                    "object_id": f"{spec['page_id']}_model_roles",
+                    "role": "source_grounded_model_roles",
+                    "native_type": "text_explanation_block",
+                    "source_fields": ["scientific_objects"],
+                    "bbox": {"x": 0.1550, "y": 0.6320, "w": 0.3200, "h": 0.1150},
+                },
+                {
+                    "object_id": f"{spec['page_id']}_calibration_link",
+                    "role": "source_grounded_calibration_link",
+                    "native_type": "text_explanation_block",
+                    "source_fields": ["key_message", "annotation"],
+                    "bbox": {"x": 0.5250, "y": 0.6320, "w": 0.3200, "h": 0.1150},
+                },
+            ]
+        )
     if spec.get("same_case_roi_zoom"):
         objects.append(
             {
@@ -634,7 +670,18 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
                 "MEDICAL_IMAGE_COMPARISON": "same_case_roi_crop_zoom",
                 "NEXT_EXPERIMENT": "evidence_manipulation_comparator_decision_map",
             }.get(spec["page_job"], "accepted_foundation"),
-            "source_fields_consumed": [key for key in ["data_source", "figure_filter", "roi_source_asset", "same_case_roi_zoom"] if key in spec],
+            "source_fields_consumed": [
+                key
+                for key in [
+                    "data_source",
+                    "figure_filter",
+                    "roi_source_asset",
+                    "same_case_roi_zoom",
+                    "key_message",
+                    "scientific_objects",
+                ]
+                if key in spec
+            ],
             "same_case_roi_zoom": spec.get("same_case_roi_zoom"),
         },
         "text_region_packing": {
@@ -659,9 +706,25 @@ def tex_node(x: float, y: float, w: float, body: str, *, align: str = "left") ->
 def emit_equation(spec: dict[str, Any], layout: dict[str, Any]) -> str:
     primary = layout["resolved_primary_object_geometry"]
     annotation = layout["resolved_supporting_object_geometry"]["annotation"]
+    caption = layout["resolved_supporting_object_geometry"]["caption"]
+    scientific_objects = [str(item) for item in spec.get("scientific_objects", [])[:3]]
+    if scientific_objects:
+        role_lines = [
+            rf"\scriptsize\textbullet\ {tex_escape(item)}"
+            for item in scientific_objects
+        ]
+        roles = r"\scriptsize\textbf{Model roles}\\[-0.15em]" + r"\\".join(role_lines)
+    else:
+        roles = r"\scriptsize\textbf{Model roles}\\[-0.15em]\scriptsize Source-grounded terms remain attached to the equation."
+    key_message = tex_escape(str(spec.get("key_message") or spec["annotation"]))
     return "\n".join([
         tex_node(primary["x"], primary["y"], primary["w"], rf"\Large \[\displaystyle {spec['math']}\]", align="center"),
         tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\small {spec['annotation']}"),
+        r"\StageThreePanel{0.1400}{0.6150}{0.4900}{0.7620};",
+        r"\StageThreePanel{0.5100}{0.6150}{0.8600}{0.7620};",
+        tex_node(0.1550, 0.6370, 0.3200, roles),
+        tex_node(0.5250, 0.6370, 0.3200, rf"\scriptsize\textbf{{Calibration link}}\\[-0.15em]{key_message}"),
+        tex_node(caption["x"], caption["y"], caption["w"], r"\scriptsize Center variation and individual variation define the ICC before the interval comparison.", align="center"),
     ])
 
 

@@ -32,6 +32,18 @@ STORYLINE_JOB_ORDER = {
 }
 
 
+def audience_metadata_violations(metadata: dict[str, Any]) -> list[str]:
+    violations: list[str] = []
+    forbidden = [term.lower() for term in FORBIDDEN_AUDIENCE_TERMS]
+    for field in ["title", "subtitle"]:
+        text = str(metadata.get(field, ""))
+        lowered = text.lower()
+        for term in forbidden:
+            if term and term in lowered:
+                violations.append(f"metadata.{field} leaks audience-facing internal term {term}")
+    return violations
+
+
 def rel(path: Path) -> str:
     return stage3.rel(path)
 
@@ -49,6 +61,8 @@ def load_bundle(path: Path) -> dict[str, Any]:
         raise ValueError(f"{path}: engineering regression bundle must be excluded from Stage 5 holdouts")
     if not bundle.get("page_jobs"):
         raise ValueError(f"{path}: production bundle contains no page jobs")
+    if violations := audience_metadata_violations(bundle.get("metadata", {})):
+        raise ValueError(f"{path}: " + "; ".join(violations))
     return bundle
 
 
@@ -259,6 +273,7 @@ def build_specs(page_jobs: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "page_job",
                 "section",
                 "title",
+                "key_message",
                 "query",
                 "content_kind",
                 "dominant_object",
@@ -287,6 +302,7 @@ def build_specs(page_jobs: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "decision_criterion",
                 "storyline",
                 "storyline_transition",
+                "scientific_objects",
             }
         }
         spec["source_evidence_ids"] = list(job["source_evidence_ids"])

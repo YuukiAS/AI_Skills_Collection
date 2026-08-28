@@ -4,7 +4,7 @@
   "holdout_exclusion_reason": "Repository-owned synthetic engineering regression bundle for Stage 4 integration only; not a final Stage 5 paper or medical-imaging holdout.",
   "metadata": {
     "title": "Clustered Interval Calibration And Synthetic Segmentation Robustness",
-    "subtitle": "One-call production regression from source bundle to exact CUHK deck",
+    "subtitle": "Uncertainty calibration across clustered data and segmentation stress cases",
     "author": "Research Presentation Program",
     "institute": "Department of Statistics & Data Science",
     "date": "2026-08-27",
