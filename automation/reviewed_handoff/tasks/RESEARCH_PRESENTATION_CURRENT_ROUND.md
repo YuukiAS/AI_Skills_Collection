@@ -64,26 +64,45 @@ Review 1 的 clean-run contact-sheet manifest blocker 已局部修复，但第�
 - GitHub runner 无真实 PNG render 时，`rendered_page_sha256` 合法为空，但 clean regression 仍无条件把它当成 64-char pixel SHA；
 - deterministic `ADJUST_TRANSITION_CUE` repair 已真实改变 production `deck_plan` 与 `main.tex`，但当前 `deck_identity_sha256` 主要绑定 page-order / pixel SHA / contact-sheet SHA 等字段；在 no-render runner 中 pixel SHA 都不存在，导致 initial 与 repaired identity 相同，无法证明 actual render input 已改变。
 
-当前 033 visual-review 目录没有 fresh `VISUAL_REVIEW.json`。对应 Visual Review workflow 的 top-level success 不能替代 deck/contact-sheet item-level judgement，因此 033 没有进入视觉质量 PASS。
+033 没有取得与当前实现绑定的完整 deck/contact-sheet item-level visual quality PASS，因此保留 review-limit 历史，由 034 质量保持 recovery 接续。
 
-### Active bounded recovery — 034 Render Identity CI Recovery
+### 034 Render Identity CI Recovery — review limit history
+
+`034_research_presentation_render_identity_ci_recovery` 已完成两轮独立审核并合法停在 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE`；不得创建 `REVIEW_3` 或改写成 PASS。
+
+034 已真实关闭 033 的 evidence-identity 根问题：
+
+- 始终存在的 render-input identity 直接绑定实际 `main.tex`、`scientific_layouts.tex`、canonical CUHK support 与必要 scientific assets；
+- no-render CI path 明确允许 pixel evidence unavailable，不伪造 page/contact-sheet SHA；
+- real-render path 继续严格绑定 per-page PNG、contact sheet 与 PDF；
+- deterministic repair 改变真实生产表示时，render-input identity 随之改变；
+- 真实 GitHub `Codex Marketplace` CI 已通过。
+
+034 第一轮 visual review 又发现并修复了两个 presentation blocker：标题页工程元语言泄漏被移除并加入通用 metadata anti-leak gate；统计模型页从公式+单句的明显欠填充状态补足为公式主对象、模型角色与解释层。修复后 fresh Terra 对六个内容页及整套 `deck_contact_sheet` 均给出 item-level `PASS`，确认当前工程样例的 CUHK 身份、跨页节奏、workstream transition 与医学影像语义均成熟可评估。
+
+034 第二轮独立代码审核仍发现唯一 blocker：共享 `STATISTICAL_MODEL` equation renderer 的 supporting copy 里残留当前 clustered-calibration fixture 专用文本，包括 `Calibration link`、固定 ICC/center-variation/interval-comparison caption，以及缺少 scientific objects 时的 `Source-grounded terms...` 制作型 fallback。当前 engineering fixture 恰好语义匹配，所以 Terra 像素 PASS 不能证明这一 normal production path 对未见模型 source-faithful。这个 finding 直接违反 034 Review 1 已冻结的“supporting content 必须由通用 source/page-job fields 驱动、不得按当前 clustered fixture 术语写死”的修复边界。
+
+该 blocker 不需要用户改变产品/科学语义，且存在唯一、范围清楚、质量保持的新机制，因此按 Quality-Preserving Continuation Policy 自动进入 035；034 的 dual identity、title anti-leak 与已通过视觉证据全部保留，不重做。
+
+### Active bounded recovery — 035 Generic Model Support Recovery
 
 当前 active task：
 
-`034_research_presentation_render_identity_ci_recovery`
+`035_research_presentation_generic_model_support_recovery`
 
-034 是 033 review-limit 后按 Quality-Preserving Continuation Policy 自动创建的最小 recovery；不需要用户决定，也不降低任何质量门槛。它使用与 blocker 对应的新有限机制，而不是继续逐项放宽 validator/test：
+035 只关闭 034 Review 2 的 generic-model source-grounding blocker：
 
-- 明确区分始终存在的 **render-input / production-representation identity** 与只有真实渲染成功后才存在的 **rendered-pixel identity**；
-- render-input identity 必须直接绑定本次实际生成的 `main.tex`、`scientific_layouts.tex` 和必要 scientific asset SHA，因此即使 CI 没有完整 TeX/PNG 栈也能审计“送去渲染的东西是否发生变化”；
-- no-render path 不得伪造 page/contact-sheet pixel SHA，而要 machine-readable 地标记 pixel evidence unavailable；
-- real-render path 继续严格核对真实 per-page PNG SHA、contact-sheet SHA 和 task-local visual manifest binding；
-- deterministic transition repair 前后 render-input identity 必须不同，并保留 regression 对实际 `deck_plan` / `main.tex` 变化的直接检查；
-- 033 已有 contact sheet、deck-level rubric、一次 repair budget、fail-closed/no-winner、source fidelity、032 storyline、gold/layout、CUHK identity 与 medical semantics 全部冻结保护。
+- `STATISTICAL_MODEL` supporting body 只能消费当前 spec/source 已有的 `scientific_objects`、`key_message`、`annotation` 或显式 source-backed caption/label；
+- 中性布局标签可以保留，但不得携带当前 clustered/ICC/interval-calibration 科学语义；
+- 没有 supporting source field 时宁可少一个 block/caption，也不得生成 `source-grounded` 制作元语言或虚构 clustered 内容；
+- 新增至少一个与 clustered calibration 完全无关的 bounded synthetic model regression，真实经过共享 model path，证明不会泄露 `ICC`、center variation、interval comparison、`Calibration link` 或 `Source-grounded terms`；
+- 当前 engineering model page 必须继续保持公式主导且视觉成熟，不能为消除 hardcode 退回欠填充页面；
+- 034 dual identity、metadata anti-leak、deck quality loop、一次 repair budget、032 storyline、gold/layout、exact CUHK identity 与 medical TP/FP/FN 全部冻结保护；
+- shared/plugin parity、targeted/full tests 与真实 GitHub CI 必须通过；若当前 engineering pixels 改变，则必须等待与新 identity 绑定的 fresh task-local Terra item/contact-sheet evidence，缺证据时不消耗 review round。
 
-034 必须先通过修复后的 targeted/full regression 与真实 GitHub CI；之后再按现有 task-local Visual Review contract等待 fresh deck/contact-sheet item-level evidence。缺 visual evidence 时只等待，不消耗 review round。
+035 不运行 Stage 5 holdout，不扩 corpus，不重设计 Stage 3 layout system。其停止条件是：共享 model-support path 的 current-fixture hardcode 被移除、unrelated-model regression 通过、当前 engineering model page 仍成熟、真实 CI 与所需 visual evidence闭合。
 
-034 独立 PASS 后，Planner 才可重新判断 Stage 4 是否整体首次 PASS。若 Stage 4 整体 PASS，应发送一次 Stage 4 旁路 notifier，并随后创建 Stage 5 的真实双-paper holdout bounded task；不得跳过 Stage 5 最终用户人工门。
+035 独立 PASS 后，Planner 才可重新判断 Stage 4 是否整体首次 PASS。若 Stage 4 整体 PASS，应发送一次 Stage 4 旁路 notifier，并随后创建 Stage 5 的真实双-paper holdout bounded task；不得跳过 Stage 5 最终用户人工门。
 
 ## Standing workflow decisions
 
