@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 import build_gold_composition_recipe
+import deck_quality_loop
 import generate_cuhk_scientific_layout_stage3 as stage3
 import markdown_to_deck_plan
 
@@ -402,6 +403,84 @@ def production_trace(bundle: dict[str, Any], specs: list[dict[str, Any]], layout
     }
 
 
+def render_specs(bundle: dict[str, Any], specs: list[dict[str, Any]], out_dir: Path, task_key: str) -> dict[str, Any]:
+    build_dir = out_dir / "cuhk_production_build"
+    if build_dir.exists():
+        shutil.rmtree(build_dir)
+    shutil.copytree(CANONICAL_CUHK, build_dir)
+    previous_task_key = stage3.TASK_KEY
+    stage3.TASK_KEY = task_key
+    try:
+        asset_map = stage3.copy_assets(specs, build_dir)
+        layouts = [stage3.resolve_layout(spec) for spec in specs]
+        (build_dir / "scientific_layouts.tex").write_text(stage3.scientific_layout_macros(), encoding="utf-8")
+        (build_dir / "main.tex").write_text(build_main_tex(bundle, specs, layouts, asset_map), encoding="utf-8")
+        dependency_probe = stage3.dependency_probe()
+        render_probe = stage3.render_skill_probe()
+        compile_status = stage3.compile_pdf(build_dir)
+        render_status = stage3.render_pdf(build_dir, compile_status)
+        cleaned = stage3.clean_latex_intermediates(build_dir)
+        normalized = stage3.normalize_generated_logs(build_dir)
+    finally:
+        stage3.TASK_KEY = previous_task_key
+    return {
+        "build_dir": build_dir,
+        "layouts": layouts,
+        "dependency_probe": dependency_probe,
+        "render_probe": render_probe,
+        "compile_status": compile_status,
+        "render_status": render_status,
+        "cleaned": cleaned,
+        "normalized": normalized,
+    }
+
+
+def make_deck_contact_sheet(render_status: dict[str, Any], out_dir: Path) -> dict[str, Any]:
+    rendered = render_status.get("rendered_png", [])
+    if render_status.get("status") != "ok" or not rendered:
+        return {"status": "NOT_GENERATED_RENDER_UNAVAILABLE", "path": None, "sha256": None}
+    from PIL import Image, ImageDraw, ImageFont
+
+    thumbs = []
+    for item in rendered:
+        source = REPO_ROOT / item["path"]
+        with Image.open(source) as image:
+            thumbnail = image.convert("RGB")
+            thumbnail.thumbnail((360, 204), Image.Resampling.LANCZOS)
+            canvas = Image.new("RGB", (360, 236), "white")
+            x = (360 - thumbnail.width) // 2
+            canvas.paste(thumbnail, (x, 0))
+            thumbs.append((canvas, f"{len(thumbs) + 1}: {Path(item['path']).name}"))
+
+    columns = min(3, len(thumbs))
+    rows = (len(thumbs) + columns - 1) // columns
+    sheet = Image.new("RGB", (columns * 380 + 20, rows * 268 + 20), "#f7f7f7")
+    draw = ImageDraw.Draw(sheet)
+    font = ImageFont.load_default()
+    for index, (thumb, label) in enumerate(thumbs):
+        col = index % columns
+        row = index // columns
+        x = 20 + col * 380
+        y = 20 + row * 268
+        sheet.paste(thumb, (x, y))
+        draw.text((x, y + 216), label, fill="#222222", font=font)
+    path = out_dir / "deck_contact_sheet.png"
+    sheet.save(path)
+    return {"status": "GENERATED", "path": rel(path), "sha256": stage3.file_sha(path)}
+
+
+def update_deck_plan_from_specs(deck_plan: dict[str, Any], specs: list[dict[str, Any]]) -> dict[str, Any]:
+    updated = dict(deck_plan)
+    slides = []
+    for slide, spec in zip(deck_plan.get("slides", []), specs):
+        enriched = dict(slide)
+        if "storyline_transition" in spec:
+            enriched["storyline_transition"] = spec["storyline_transition"]
+        slides.append(enriched)
+    updated["slides"] = slides
+    return updated
+
+
 def visual_manifest(
     *,
     bundle: dict[str, Any],
@@ -411,6 +490,8 @@ def visual_manifest(
     build_manifest: dict[str, Any],
     build_manifest_path: Path,
     source_fidelity_path: Path,
+    deck_sequence_summary_path: Path,
+    quality_loop_state_path: Path,
     task_key: str,
     implementation_commit: str | None,
 ) -> dict[str, Any]:
@@ -434,6 +515,18 @@ def visual_manifest(
         )
         page_jobs[logical_id] = spec["page_job"]
         evidence[logical_id] = spec["source_evidence_ids"]
+    contact_sheet = build_manifest.get("deck_contact_sheet", {})
+    if contact_sheet.get("status") == "GENERATED":
+        inputs.append(
+            {
+                "logical_id": "deck_contact_sheet",
+                "path": contact_sheet["path"],
+                "mime_type": "image/png",
+                "sha256": contact_sheet["sha256"],
+                "description": "Deck-level contact sheet preserving the rendered slide sequence for rhythm, density, transition, and template-repeat review.",
+                "review_role": "deck_sequence_context",
+            }
+        )
     return {
         "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
         "task_key": task_key,
@@ -447,12 +540,13 @@ def visual_manifest(
                 "Review the rendered pixels from one normal research-presentations production invocation. "
                 "Check that each page contains source-specific content from the supplied engineering bundle rather than placeholders; exact CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math, native plots, and medical images are semantically correct where present; no internal RRL/GSC/SRC, QA, provenance, workflow, repo path, run ID, or implementation language leaks into audience-facing slides; repeated generic cards or one-template pages are rejected; and the deck reads as one coherent research update rather than disconnected benchmark pages. "
                 "For multi-workstream bundles, confirm that each workstream stays internally continuous and that any independent workstream transition is visible without inventing a causal relation. "
-                "Do not infer visual quality from filenames or hashes."
+                "Separately review the deck_contact_sheet item as a deck-level rhythm object: adjacent-page density jumps, repeated composition face, overfull or empty pages, redundant summary filler, result -> failure -> next-experiment rhythm, workstream transition balance, and title/object/formula/image alternation must meet a mature doctoral group-meeting or strong conference-talk bar. "
+                "The top-level package PASS is not enough; provide item-level judgement and observations for deck_contact_sheet. Do not infer visual quality from filenames or hashes."
             ),
             "source_contracts": [
                 "The engineering regression bundle is public-safe and explicitly excluded from Stage 5 holdouts.",
                 "Stage 2 gold/reference pixels are used only for compatible composition selection.",
-                "031 is a bounded Stage 4 production-entry proof, not full Stage 4 PASS or ONE_SHOT_QUALITY_PASS.",
+                "The deck-quality loop may repair at most once and must fail closed/no-winner for unsafe findings or unresolved blockers.",
             ],
         },
         "identity_bindings": {
@@ -463,6 +557,13 @@ def visual_manifest(
             "build_manifest_sha256": stage3.file_sha(build_manifest_path),
             "source_fidelity_map": rel(source_fidelity_path),
             "source_fidelity_map_sha256": stage3.file_sha(source_fidelity_path),
+            "deck_sequence_summary": rel(deck_sequence_summary_path),
+            "deck_sequence_summary_sha256": stage3.file_sha(deck_sequence_summary_path),
+            "quality_loop_state": rel(quality_loop_state_path),
+            "quality_loop_state_sha256": stage3.file_sha(quality_loop_state_path),
+            "deck_contact_sheet": contact_sheet.get("path"),
+            "deck_contact_sheet_sha256": contact_sheet.get("sha256"),
+            "deck_identity_sha256": build_manifest.get("deck_sequence_summary", {}).get("deck_identity_sha256"),
             "pdf_sha256": build_manifest.get("compile_status", {}).get("pdf_sha256"),
             "page_job_by_logical_id": page_jobs,
             "source_evidence_ids_by_logical_id": evidence,
@@ -479,6 +580,8 @@ def generate(
     task_key: str = DEFAULT_TASK_KEY,
     implementation_commit: str | None = None,
     write_result_visual_inputs: bool = False,
+    review_evidence_path: Path | None = None,
+    rereview_evidence_path: Path | None = None,
 ) -> dict[str, Any]:
     bundle_path = bundle_path.resolve()
     out_dir = out_dir.resolve()
@@ -487,36 +590,78 @@ def generate(
     deck_plan = build_deck_plan(bundle, bundle_path, deck_jobs, storyline_trace)
     specs = build_specs(deck_jobs)
     out_dir.mkdir(parents=True, exist_ok=True)
-    build_dir = out_dir / "cuhk_production_build"
-    if build_dir.exists():
-        shutil.rmtree(build_dir)
-    shutil.copytree(CANONICAL_CUHK, build_dir)
-    previous_task_key = stage3.TASK_KEY
-    stage3.TASK_KEY = task_key
-    try:
-        asset_map = stage3.copy_assets(specs, build_dir)
-        layouts = [stage3.resolve_layout(spec) for spec in specs]
-        (build_dir / "scientific_layouts.tex").write_text(stage3.scientific_layout_macros(), encoding="utf-8")
-        (build_dir / "main.tex").write_text(build_main_tex(bundle, specs, layouts, asset_map), encoding="utf-8")
-        dependency_probe = stage3.dependency_probe()
-        render_probe = stage3.render_skill_probe()
-        compile_status = stage3.compile_pdf(build_dir)
-        render_status = stage3.render_pdf(build_dir, compile_status)
-        cleaned = stage3.clean_latex_intermediates(build_dir)
-        normalized = stage3.normalize_generated_logs(build_dir)
-    finally:
-        stage3.TASK_KEY = previous_task_key
+    initial_render = render_specs(bundle, specs, out_dir, task_key)
+    initial_contact = make_deck_contact_sheet(initial_render["render_status"], out_dir)
+    initial_sequence = deck_quality_loop.build_sequence_summary(
+        specs=specs,
+        layouts=initial_render["layouts"],
+        render_status=initial_render["render_status"],
+        storyline_trace=storyline_trace,
+        contact_sheet_path=initial_contact.get("path"),
+        contact_sheet_sha256=initial_contact.get("sha256"),
+    )
+    review_evidence, review_evidence_sha256 = deck_quality_loop.load_review_evidence(review_evidence_path.resolve() if review_evidence_path else None)
+    quality_loop_state = deck_quality_loop.consume_review_evidence(
+        review_evidence=review_evidence,
+        review_evidence_sha256=review_evidence_sha256,
+        sequence_summary=initial_sequence,
+        initial_render_identity=initial_sequence["deck_identity_sha256"],
+    )
+    final_render = initial_render
+    final_contact = initial_contact
+    final_sequence = initial_sequence
+    if quality_loop_state["repair_allowed"]:
+        specs = deck_quality_loop.apply_repair_directives(specs, quality_loop_state["selected_repair_directives"])
+        deck_plan = update_deck_plan_from_specs(deck_plan, specs)
+        final_render = render_specs(bundle, specs, out_dir, task_key)
+        final_contact = make_deck_contact_sheet(final_render["render_status"], out_dir)
+        final_sequence = deck_quality_loop.build_sequence_summary(
+            specs=specs,
+            layouts=final_render["layouts"],
+            render_status=final_render["render_status"],
+            storyline_trace=storyline_trace,
+            contact_sheet_path=final_contact.get("path"),
+            contact_sheet_sha256=final_contact.get("sha256"),
+        )
+        quality_loop_state["repair_cycle_count"] = 1
+        quality_loop_state["repaired_render_identity"] = final_sequence["deck_identity_sha256"]
+        rereview_evidence, rereview_evidence_sha256 = deck_quality_loop.load_review_evidence(rereview_evidence_path.resolve() if rereview_evidence_path else None)
+        rereview_state = deck_quality_loop.consume_review_evidence(
+            review_evidence=rereview_evidence,
+            review_evidence_sha256=rereview_evidence_sha256,
+            sequence_summary=final_sequence,
+            initial_render_identity=initial_sequence["deck_identity_sha256"],
+            repair_cycle_count=1,
+        )
+        quality_loop_state["rereview_evidence_identity"] = rereview_evidence_sha256
+        if rereview_evidence is None:
+            quality_loop_state["deck_level_decision"] = "WAITING_FOR_REPAIRED_DECK_REVIEW"
+            quality_loop_state["final_decision"] = None
+        else:
+            quality_loop_state["post_repair_deck_level_decision"] = rereview_state["deck_level_decision"]
+            quality_loop_state["final_decision"] = rereview_state["final_decision"]
+            quality_loop_state["post_repair_blocking_findings"] = rereview_state["blocking_findings"]
+            quality_loop_state["post_repair_fail_closed_reason"] = rereview_state["fail_closed_reason"]
 
     write_json(out_dir / "deck_plan.json", deck_plan)
-    write_json(out_dir / "resolved_layouts.json", {"schema": "RESEARCH_PRESENTATION_PRODUCTION_RESOLVED_LAYOUTS_V1", "task_key": DEFAULT_TASK_KEY, "layouts": layouts})
-    fidelity = source_fidelity_map(bundle, specs, layouts)
+    write_json(out_dir / "resolved_layouts.json", {"schema": "RESEARCH_PRESENTATION_PRODUCTION_RESOLVED_LAYOUTS_V1", "task_key": task_key, "layouts": final_render["layouts"]})
+    fidelity = source_fidelity_map(bundle, specs, final_render["layouts"])
     fidelity_path = out_dir / "source_fidelity_map.json"
     write_json(fidelity_path, fidelity)
     write_json(out_dir / "storyline_trace.json", storyline_trace)
-    trace = production_trace(bundle, specs, layouts, bundle_path, task_key, storyline_trace)
+    trace = production_trace(bundle, specs, final_render["layouts"], bundle_path, task_key, storyline_trace)
+    trace["deck_quality_loop"] = {
+        "quality_loop_state": rel(out_dir / "quality_loop_state.json"),
+        "deck_sequence_summary": rel(out_dir / "deck_sequence_summary.json"),
+        "deck_contact_sheet": final_contact,
+    }
     write_json(out_dir / "runtime_trace.json", trace)
-    write_json(out_dir / "dependency_probe.json", dependency_probe)
-    write_json(out_dir / "render_chinese_math_pdf_probe.json", render_probe)
+    write_json(out_dir / "dependency_probe.json", final_render["dependency_probe"])
+    write_json(out_dir / "render_chinese_math_pdf_probe.json", final_render["render_probe"])
+    sequence_path = out_dir / "deck_sequence_summary.json"
+    write_json(sequence_path, final_sequence)
+    quality_loop_path = out_dir / "quality_loop_state.json"
+    write_json(quality_loop_path, quality_loop_state)
     build_manifest = {
         "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1",
         "task_key": task_key,
@@ -524,49 +669,58 @@ def generate(
         "input_bundle": rel(bundle_path),
         "canonical_cuhk_source": rel(CANONICAL_CUHK),
         "canonical_files": {rel(path): stage3.file_sha(path) for path in sorted(CANONICAL_CUHK.rglob("*")) if path.is_file()},
-        "build_workspace": rel(build_dir),
-        "tex": rel(build_dir / "main.tex"),
-        "scientific_layout_include": rel(build_dir / "scientific_layouts.tex"),
+        "build_workspace": rel(final_render["build_dir"]),
+        "tex": rel(final_render["build_dir"] / "main.tex"),
+        "scientific_layout_include": rel(final_render["build_dir"] / "scientific_layouts.tex"),
         "deck_plan": rel(out_dir / "deck_plan.json"),
         "source_fidelity_map": rel(fidelity_path),
         "runtime_trace": rel(out_dir / "runtime_trace.json"),
         "storyline_trace": rel(out_dir / "storyline_trace.json"),
+        "deck_sequence_summary_path": rel(sequence_path),
+        "deck_sequence_summary": final_sequence,
+        "deck_contact_sheet": final_contact,
+        "quality_loop_state": rel(quality_loop_path),
         "dependency_probe": rel(out_dir / "dependency_probe.json"),
         "render_chinese_math_pdf_probe": rel(out_dir / "render_chinese_math_pdf_probe.json"),
-        "compile_status": compile_status,
-        "render_status": render_status,
+        "compile_status": final_render["compile_status"],
+        "render_status": final_render["render_status"],
         "mechanical_qa": {
-            "status": "MECHANICAL_PASS" if render_status.get("status") == "ok" and render_status.get("png_count", 0) >= len(specs) + 1 else "BLOCKED_RENDER_QA",
+            "status": "MECHANICAL_PASS" if final_render["render_status"].get("status") == "ok" and final_render["render_status"].get("png_count", 0) >= len(specs) + 1 else "BLOCKED_RENDER_QA",
             "checks": {
                 "normal_research_presentations_entry": True,
                 "input_bundle_read_from_path": True,
                 "canonical_source_copied": True,
                 "scientific_layout_include_loaded": True,
                 "content_page_jobs": len(specs),
-                "rendered_pages_available": render_status.get("status") == "ok",
+                "rendered_pages_available": final_render["render_status"].get("status") == "ok",
+                "deck_contact_sheet_generated": final_contact.get("status") == "GENERATED",
+                "quality_loop_budget_enforced": quality_loop_state["repair_cycle_count"] <= deck_quality_loop.MAX_REPAIR_CYCLES,
             },
         },
         "quality_loop_handoff": {
             "schema": "RESEARCH_PRESENTATION_STAGE4_QUALITY_HANDOFF_V1",
-            "status": "READY_FOR_PAGE_LEVEL_FINDINGS",
+            "status": quality_loop_state["final_decision"] or quality_loop_state["deck_level_decision"],
             "visual_review_manifest": f"results/{task_key}/visual_review/visual_inputs.json",
             "visual_review_evidence": f"results/{task_key}/visual_review/VISUAL_REVIEW.json",
-            "next_bounded_stage4_task": "deck-rhythm review and bounded visual repair loop",
+            "quality_loop_state": rel(quality_loop_path),
+            "deck_contact_sheet": final_contact.get("path"),
         },
         "stage4_boundary": "This one-call production entry recovery does not claim Stage 4 PASS, PROGRAM_MATURE, or ONE_SHOT_QUALITY_PASS.",
-        "cleaned_latex_intermediates": cleaned,
-        "normalized_generated_logs": normalized,
+        "cleaned_latex_intermediates": final_render["cleaned"],
+        "normalized_generated_logs": final_render["normalized"],
     }
     manifest_path = out_dir / "BUILD_MANIFEST.json"
     write_json(manifest_path, build_manifest)
     visual_inputs = visual_manifest(
         bundle=bundle,
         specs=specs,
-        layouts=layouts,
-        render_status=render_status,
+        layouts=final_render["layouts"],
+        render_status=final_render["render_status"],
         build_manifest=build_manifest,
         build_manifest_path=manifest_path,
         source_fidelity_path=fidelity_path,
+        deck_sequence_summary_path=sequence_path,
+        quality_loop_state_path=quality_loop_path,
         task_key=task_key,
         implementation_commit=implementation_commit,
     )
@@ -583,6 +737,8 @@ def main() -> int:
     parser.add_argument("--task-key", default=DEFAULT_TASK_KEY)
     parser.add_argument("--implementation-commit")
     parser.add_argument("--write-result-visual-inputs", action="store_true")
+    parser.add_argument("--review-evidence", type=Path)
+    parser.add_argument("--rereview-evidence", type=Path)
     args = parser.parse_args()
     manifest = generate(
         args.input_bundle,
@@ -590,6 +746,8 @@ def main() -> int:
         task_key=args.task_key,
         implementation_commit=args.implementation_commit,
         write_result_visual_inputs=args.write_result_visual_inputs,
+        review_evidence_path=args.review_evidence,
+        rereview_evidence_path=args.rereview_evidence,
     )
     print(
         json.dumps(

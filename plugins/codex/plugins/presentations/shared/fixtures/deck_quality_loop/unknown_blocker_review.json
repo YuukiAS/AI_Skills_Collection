@@ -1,0 +1,31 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "task_key": "shared_deck_quality_loop_fixture",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "research-deck-rhythm-review",
+  "status": "REVISE",
+  "overall_decision": "REVISE",
+  "blocking_findings": [
+    {
+      "finding_id": "deck-needs-new-causal-story",
+      "scope": "deck",
+      "category": "unsupported_cross_workstream_rewrite",
+      "repair_intent": "INVENT_CAUSAL_BRIDGE",
+      "target_logical_ids": [
+        "slide_7_medical_image_comparison"
+      ],
+      "summary": "This fixture asks for a repair outside the allowed source-fidelity contract."
+    }
+  ],
+  "item_reviews": [
+    {
+      "item_id": "deck_contact_sheet",
+      "scope": "deck",
+      "decision": "REVISE",
+      "summary": "Unsupported repair request.",
+      "observations": [
+        "The requested change would invent a relationship not present in source evidence."
+      ]
+    }
+  ]
+}

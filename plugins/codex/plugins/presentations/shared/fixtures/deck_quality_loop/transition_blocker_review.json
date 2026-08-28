@@ -1,0 +1,35 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "task_key": "shared_deck_quality_loop_fixture",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "research-deck-rhythm-review",
+  "status": "REVISE",
+  "overall_decision": "REVISE",
+  "blocking_findings": [
+    {
+      "finding_id": "deck-transition-too-heavy",
+      "scope": "deck",
+      "category": "workstream_transition_balance",
+      "repair_intent": "ADJUST_TRANSITION_CUE",
+      "target_logical_ids": [
+        "slide_7_medical_image_comparison"
+      ],
+      "summary": "The independent-workstream cue should be made more compact while preserving the no-causal-bridge statement."
+    }
+  ],
+  "item_reviews": [
+    {
+      "item_id": "deck_contact_sheet",
+      "scope": "deck",
+      "decision": "REVISE",
+      "summary": "The deck-level transition cue is too visually dominant.",
+      "observations": [
+        "The transition is source-faithful, but its visual weight interrupts the final evidence page."
+      ],
+      "repair_intent": "ADJUST_TRANSITION_CUE",
+      "target_logical_ids": [
+        "slide_7_medical_image_comparison"
+      ]
+    }
+  ]
+}

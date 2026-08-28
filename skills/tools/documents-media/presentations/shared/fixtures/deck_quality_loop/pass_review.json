@@ -1,0 +1,26 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "task_key": "shared_deck_quality_loop_fixture",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "research-deck-rhythm-review",
+  "status": "PASS",
+  "overall_decision": "PASS",
+  "blocking_findings": [],
+  "item_reviews": [
+    {
+      "item_id": "deck_contact_sheet",
+      "scope": "deck",
+      "decision": "PASS",
+      "summary": "Deck rhythm is mature.",
+      "observations": [
+        "The page sequence alternates equation, plot, design diagram, negative result, next experiment, and medical image comparison.",
+        "The independent workstream transition is visible without overwhelming the medical page."
+      ],
+      "requirement_ids": [
+        "deck-rhythm",
+        "transition-balance",
+        "density-continuity"
+      ]
+    }
+  ]
+}

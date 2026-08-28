@@ -19,6 +19,7 @@ sys.path.insert(0, str(SHARED / "scripts"))
 import markdown_to_deck_plan  # noqa: E402
 import validate_deck_plan  # noqa: E402
 import generate_research_presentation_production_entry as production_entry  # noqa: E402
+import deck_quality_loop  # noqa: E402
 
 
 class PresentationSharedTests(unittest.TestCase):
@@ -727,8 +728,12 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(manifest["task_key"], "031_research_presentation_one_call_production_entry")
             self.assertEqual(manifest["implementation_commit"], implementation_commit)
             self.assertIn("templates/cuhk/beamer/source", manifest["canonical_cuhk_source"])
-            self.assertEqual(manifest["quality_loop_handoff"]["status"], "READY_FOR_PAGE_LEVEL_FINDINGS")
+            self.assertEqual(manifest["quality_loop_handoff"]["status"], "WAITING_FOR_DECK_VISUAL_REVIEW")
             self.assertIn("Stage 4 PASS", manifest["stage4_boundary"])
+            self.assertEqual(manifest["deck_contact_sheet"]["status"], "GENERATED")
+            self.assertTrue((REPO_ROOT / manifest["deck_contact_sheet"]["path"]).exists())
+            self.assertTrue(manifest["mechanical_qa"]["checks"]["deck_contact_sheet_generated"])
+            self.assertTrue(manifest["mechanical_qa"]["checks"]["quality_loop_budget_enforced"])
 
             deck_plan = json.loads((generated / "deck_plan.json").read_text(encoding="utf-8"))
             self.assertEqual(deck_plan["metadata"]["production_entry"], "research-presentations one-call production")
@@ -829,10 +834,44 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(visual_inputs["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
             self.assertEqual(visual_inputs["task_key"], "031_research_presentation_one_call_production_entry")
             self.assertEqual(visual_inputs["identity_bindings"]["implementation_commit"], implementation_commit)
+            self.assertIn("deck_sequence_summary", visual_inputs["identity_bindings"])
+            self.assertIn("quality_loop_state", visual_inputs["identity_bindings"])
+            self.assertEqual(visual_inputs["identity_bindings"]["deck_contact_sheet_sha256"], manifest["deck_contact_sheet"]["sha256"])
             self.assertIn("source-specific content", visual_inputs["rubric"]["instructions"])
             self.assertIn("coherent research update", visual_inputs["rubric"]["instructions"])
+            self.assertIn("deck_contact_sheet", visual_inputs["rubric"]["instructions"])
+            self.assertIn("top-level package PASS is not enough", visual_inputs["rubric"]["instructions"])
             if manifest["render_status"]["status"] == "ok":
-                self.assertEqual(len(visual_inputs["inputs"]), 6)
+                self.assertEqual(len(visual_inputs["inputs"]), 7)
+                self.assertEqual(visual_inputs["inputs"][-1]["logical_id"], "deck_contact_sheet")
+
+            deck_sequence = json.loads((generated / "deck_sequence_summary.json").read_text(encoding="utf-8"))
+            self.assertEqual(deck_sequence["schema"], "RESEARCH_PRESENTATION_DECK_SEQUENCE_SUMMARY_V1")
+            self.assertEqual(deck_sequence["page_count"], 6)
+            self.assertEqual(deck_sequence["deck_contact_sheet"]["sha256"], manifest["deck_contact_sheet"]["sha256"])
+            self.assertEqual(
+                deck_sequence["page_order"],
+                [
+                    "slide_2_statistical_model",
+                    "slide_3_real_data_application",
+                    "slide_4_experiment_design",
+                    "slide_5_negative_result",
+                    "slide_6_next_experiment",
+                    "slide_7_medical_image_comparison",
+                ],
+            )
+            self.assertEqual(len(deck_sequence["title_sequence"]), 6)
+            for page in deck_sequence["pages"]:
+                self.assertIn(page["visual_density"]["machine_density"], {"low", "moderate", "high"})
+                self.assertEqual(len(page["rendered_page_sha256"]), 64)
+                self.assertTrue(page["primary_scientific_object_type"])
+
+            quality_loop = json.loads((generated / "quality_loop_state.json").read_text(encoding="utf-8"))
+            self.assertEqual(quality_loop["schema"], "RESEARCH_PRESENTATION_DECK_QUALITY_LOOP_STATE_V1")
+            self.assertEqual(quality_loop["max_repair_cycles"], 1)
+            self.assertEqual(quality_loop["repair_cycle_count"], 0)
+            self.assertEqual(quality_loop["deck_level_decision"], "WAITING_FOR_DECK_VISUAL_REVIEW")
+            self.assertIsNone(quality_loop["final_decision"])
 
             tex = (REPO_ROOT / manifest["tex"]).read_text(encoding="utf-8")
             self.assertIn(r"\usetheme{sintef}", tex)
@@ -860,6 +899,8 @@ class PresentationSharedTests(unittest.TestCase):
             plugin_validator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_research_presentation_production_entry.py"
             self.assertEqual(generator.read_text(encoding="utf-8"), plugin_generator.read_text(encoding="utf-8"))
             self.assertEqual(validator.read_text(encoding="utf-8"), plugin_validator.read_text(encoding="utf-8"))
+            plugin_quality_loop = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/deck_quality_loop.py"
+            self.assertEqual((SHARED / "scripts/deck_quality_loop.py").read_text(encoding="utf-8"), plugin_quality_loop.read_text(encoding="utf-8"))
 
             strict = subprocess.run(
                 [sys.executable, str(validator), "--out-dir", str(generated)],
@@ -873,6 +914,65 @@ class PresentationSharedTests(unittest.TestCase):
             else:
                 self.assertNotEqual(strict.returncode, 0)
                 self.assertIn(manifest["render_status"]["status"], strict.stderr + strict.stdout)
+
+    def test_research_presentation_deck_quality_loop_consumes_review_and_fails_closed(self) -> None:
+        generator = SHARED / "scripts/generate_research_presentation_production_entry.py"
+        validator = SHARED / "scripts/validate_research_presentation_production_entry.py"
+        bundle = SHARED / "fixtures/stage4_engineering_research_bundle/bundle.json"
+        fixtures = SHARED / "fixtures/deck_quality_loop"
+        with tempfile.TemporaryDirectory() as tmp:
+            repaired = Path(tmp) / "repaired"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(generator),
+                    "--input-bundle",
+                    str(bundle),
+                    "--out-dir",
+                    str(repaired),
+                    "--implementation-commit",
+                    "c" * 40,
+                    "--review-evidence",
+                    str(fixtures / "transition_blocker_review.json"),
+                    "--rereview-evidence",
+                    str(fixtures / "pass_review.json"),
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertIn(result.returncode, {0, 2}, result.stderr + result.stdout)
+            validation = subprocess.run(
+                [sys.executable, str(validator), "--out-dir", str(repaired), "--allow-missing-render"],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(validation.returncode, 0, validation.stderr + validation.stdout)
+            state = json.loads((repaired / "quality_loop_state.json").read_text(encoding="utf-8"))
+            self.assertEqual(state["repair_cycle_count"], 1)
+            self.assertEqual(state["final_decision"], "READY_TO_DELIVER")
+            self.assertEqual(len(state["selected_repair_directives"]), 1)
+            self.assertEqual(state["selected_repair_directives"][0]["intent"], "ADJUST_TRANSITION_CUE")
+            self.assertNotEqual(state["initial_render_identity"], state["repaired_render_identity"])
+            deck_plan = json.loads((repaired / "deck_plan.json").read_text(encoding="utf-8"))
+            transition_slide = next(slide for slide in deck_plan["slides"] if slide["page_function"] == "MEDICAL_IMAGE_COMPARISON")
+            self.assertEqual(transition_slide["storyline_transition"]["cue_variant"], "compact")
+            tex = (repaired / "cuhk_production_build/main.tex").read_text(encoding="utf-8")
+            self.assertIn(r"\StageThreePanel{0.0600}{0.1450}{0.9400}{0.2020}", tex)
+            self.assertIn("no causal bridge asserted", tex)
+            self.assertNotIn("deck-transition-too-heavy", tex)
+
+            sequence = json.loads((repaired / "deck_sequence_summary.json").read_text(encoding="utf-8"))
+            unsafe_review, unsafe_sha = deck_quality_loop.load_review_evidence(fixtures / "unknown_blocker_review.json")
+            unsafe = deck_quality_loop.consume_review_evidence(
+                review_evidence=unsafe_review,
+                review_evidence_sha256=unsafe_sha,
+                sequence_summary=sequence,
+                initial_render_identity=sequence["deck_identity_sha256"],
+            )
+            self.assertEqual(unsafe["final_decision"], "QUALITY_LOOP_FAIL_NO_WINNER")
+            self.assertIn("unsupported repair intent", unsafe["fail_closed_reason"])
 
     def test_research_presentation_storyline_grouping_is_source_derived(self) -> None:
         bundle = json.loads((SHARED / "fixtures/stage4_engineering_research_bundle/bundle.json").read_text(encoding="utf-8"))

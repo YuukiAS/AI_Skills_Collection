@@ -48,6 +48,8 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         "source_fidelity": out_dir / "source_fidelity_map.json",
         "trace": out_dir / "runtime_trace.json",
         "storyline": out_dir / "storyline_trace.json",
+        "deck_sequence": out_dir / "deck_sequence_summary.json",
+        "quality_loop": out_dir / "quality_loop_state.json",
         "layouts": out_dir / "resolved_layouts.json",
         "dependency": out_dir / "dependency_probe.json",
         "render_probe": out_dir / "render_chinese_math_pdf_probe.json",
@@ -64,10 +66,13 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
     fidelity = load_json(required["source_fidelity"])
     trace = load_json(required["trace"])
     storyline = load_json(required["storyline"])
+    deck_sequence = load_json(required["deck_sequence"])
+    quality_loop = load_json(required["quality_loop"])
     layouts = load_json(required["layouts"])
     dependency = load_json(required["dependency"])
     render_probe = load_json(required["render_probe"])
     visual_inputs = load_json(required["visual_inputs"])
+    render_status = manifest.get("render_status", {})
 
     if manifest.get("schema") != "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1":
         errors.append("BUILD_MANIFEST.json: invalid schema")
@@ -77,8 +82,17 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         errors.append("BUILD_MANIFEST.json: storyline_trace not recorded")
     if "templates/cuhk/beamer/source" not in manifest.get("canonical_cuhk_source", ""):
         errors.append("BUILD_MANIFEST.json: canonical exact CUHK source not recorded")
-    if manifest.get("quality_loop_handoff", {}).get("status") != "READY_FOR_PAGE_LEVEL_FINDINGS":
-        errors.append("BUILD_MANIFEST.json: missing machine-readable quality-loop handoff")
+    handoff_status = manifest.get("quality_loop_handoff", {}).get("status")
+    if handoff_status not in {
+        "WAITING_FOR_DECK_VISUAL_REVIEW",
+        "WAITING_FOR_REPAIRED_DECK_REVIEW",
+        "READY_TO_DELIVER",
+        "QUALITY_LOOP_FAIL_NO_WINNER",
+        "UNSAFE_REPAIR_MAPPING",
+        "REPAIR_SELECTED",
+        "PASS",
+    }:
+        errors.append("BUILD_MANIFEST.json: missing machine-readable deck quality-loop handoff")
     if "Stage 4 PASS" not in manifest.get("stage4_boundary", ""):
         errors.append("BUILD_MANIFEST.json: Stage 4 non-PASS boundary not documented")
 
@@ -162,6 +176,76 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         if not item.get("assignment_basis"):
             errors.append(f"storyline_trace.json: {item.get('page_id')} has no workstream assignment basis")
 
+    if deck_sequence.get("schema") != "RESEARCH_PRESENTATION_DECK_SEQUENCE_SUMMARY_V1":
+        errors.append("deck_sequence_summary.json: invalid schema")
+    if deck_sequence.get("page_count") != len(trace.get("slides", [])):
+        errors.append("deck_sequence_summary.json: page_count mismatch")
+    if len(deck_sequence.get("page_order", [])) != len(trace.get("slides", [])):
+        errors.append("deck_sequence_summary.json: page order does not cover all content pages")
+    if len(deck_sequence.get("pages", [])) != len(trace.get("slides", [])):
+        errors.append("deck_sequence_summary.json: page summaries do not cover all content pages")
+    if len(deck_sequence.get("title_sequence", [])) != len(trace.get("slides", [])):
+        errors.append("deck_sequence_summary.json: missing title sequence")
+    if len(deck_sequence.get("workstream_sequence", [])) != len(trace.get("slides", [])):
+        errors.append("deck_sequence_summary.json: missing workstream sequence")
+    if len(deck_sequence.get("storyline_order", [])) != len(trace.get("slides", [])):
+        errors.append("deck_sequence_summary.json: missing storyline order")
+    if not re.fullmatch(r"[0-9a-f]{64}", str(deck_sequence.get("deck_identity_sha256", ""))):
+        errors.append("deck_sequence_summary.json: missing deck identity sha")
+    contact = deck_sequence.get("deck_contact_sheet", {})
+    if render_status.get("status") == "ok":
+        if contact.get("serves_audience") is not False:
+            errors.append("deck_sequence_summary.json: contact sheet must be review-only")
+        contact_path = resolve(str(contact.get("path", "")))
+        if not contact_path.exists() or contact_path.suffix.lower() != ".png":
+            errors.append("deck_sequence_summary.json: deck_contact_sheet PNG missing")
+        if not re.fullmatch(r"[0-9a-f]{64}", str(contact.get("sha256", ""))):
+            errors.append("deck_sequence_summary.json: deck_contact_sheet sha missing")
+        for page in deck_sequence.get("pages", []):
+            if not page.get("rendered_page_sha256"):
+                errors.append(f"deck_sequence_summary.json: {page.get('logical_id')} missing rendered sha")
+            density = page.get("visual_density", {})
+            if density.get("machine_density") not in {"low", "moderate", "high"}:
+                errors.append(f"deck_sequence_summary.json: {page.get('logical_id')} missing machine density")
+            if not page.get("primary_scientific_object_type"):
+                errors.append(f"deck_sequence_summary.json: {page.get('logical_id')} missing primary object type")
+
+    if quality_loop.get("schema") != "RESEARCH_PRESENTATION_DECK_QUALITY_LOOP_STATE_V1":
+        errors.append("quality_loop_state.json: invalid schema")
+    if quality_loop.get("max_repair_cycles") != 1:
+        errors.append("quality_loop_state.json: repair cycle cap is not 1")
+    if quality_loop.get("repair_cycle_count", 0) > 1:
+        errors.append("quality_loop_state.json: repair cycle count exceeds cap")
+    decision = quality_loop.get("final_decision") or quality_loop.get("deck_level_decision")
+    if decision not in {
+        "WAITING_FOR_DECK_VISUAL_REVIEW",
+        "WAITING_FOR_REPAIRED_DECK_REVIEW",
+        "READY_TO_DELIVER",
+        "QUALITY_LOOP_FAIL_NO_WINNER",
+        "UNSAFE_REPAIR_MAPPING",
+        "REPAIR_SELECTED",
+        "PASS",
+    }:
+        errors.append("quality_loop_state.json: invalid deck-level decision")
+    for directive in quality_loop.get("selected_repair_directives", []):
+        if directive.get("intent") not in {
+            "REORDER_WITHIN_SOURCE_DEPENDENCY",
+            "ADJUST_TRANSITION_CUE",
+            "SPLIT_OVERDENSE_PAGE",
+            "REMOVE_OR_MERGE_REDUNDANT_PAGE",
+            "SWAP_COMPATIBLE_GOLD_LAYOUT",
+            "RESCALE_PRIMARY_OBJECT",
+            "REPAIR_ANNOTATION_LEGEND",
+        }:
+            errors.append(f"quality_loop_state.json: unsupported repair intent {directive.get('intent')}")
+        constraints = directive.get("source_fidelity_constraints", {})
+        if constraints.get("may_rewrite_scientific_claims") is not False:
+            errors.append("quality_loop_state.json: repair directive may rewrite scientific claims")
+        if constraints.get("may_invent_source_relationships") is not False:
+            errors.append("quality_loop_state.json: repair directive may invent source relationships")
+        if constraints.get("may_force_gold_id") is not False or constraints.get("may_override_scores") is not False:
+            errors.append("quality_loop_state.json: repair directive allows selector bypass")
+
     if layouts.get("schema") != "RESEARCH_PRESENTATION_PRODUCTION_RESOLVED_LAYOUTS_V1":
         errors.append("resolved_layouts.json: invalid schema")
     for layout in layouts.get("layouts", []):
@@ -190,7 +274,6 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
             if re.search(source_like, tex):
                 errors.append(f"{tex_path}: source-like math leak {source_like}")
 
-    render_status = manifest.get("render_status", {})
     if render_status.get("status") == "ok":
         if render_status.get("png_count", 0) < len(trace.get("slides", [])) + 1:
             errors.append("BUILD_MANIFEST.json: expected title plus content rendered pages")
@@ -204,11 +287,17 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
     if visual_inputs.get("task_key") != task_key:
         errors.append("visual_inputs.json: task_key mismatch")
     rubric = visual_inputs.get("rubric", {}).get("instructions", "")
-    for required_text in ["source-specific content", "exact CUHK", "internal RRL/GSC/SRC", "coherent research update"]:
+    for required_text in ["source-specific content", "exact CUHK", "internal RRL/GSC/SRC", "coherent research update", "deck_contact_sheet", "top-level package PASS is not enough"]:
         if required_text not in rubric:
             errors.append(f"visual_inputs.json: rubric missing {required_text}")
-    if render_status.get("status") == "ok" and len(visual_inputs.get("inputs", [])) != len(trace.get("slides", [])):
+    if render_status.get("status") == "ok" and len(visual_inputs.get("inputs", [])) != len(trace.get("slides", [])) + 1:
         errors.append("visual_inputs.json: rendered page inputs do not match content pages")
+    if render_status.get("status") == "ok" and not any(item.get("logical_id") == "deck_contact_sheet" for item in visual_inputs.get("inputs", [])):
+        errors.append("visual_inputs.json: deck contact sheet input missing")
+    bindings = visual_inputs.get("identity_bindings", {})
+    for key in ["deck_sequence_summary", "deck_sequence_summary_sha256", "quality_loop_state", "quality_loop_state_sha256", "deck_contact_sheet", "deck_contact_sheet_sha256", "deck_identity_sha256"]:
+        if not bindings.get(key):
+            errors.append(f"visual_inputs.json: identity binding missing {key}")
     return errors
 
 
