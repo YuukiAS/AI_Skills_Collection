@@ -1,0 +1,637 @@
+{
+  "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1",
+  "task_key": "036_research_presentation_process_page_projection_recovery",
+  "implementation_commit": "b061ecc99c549bf90f2de0ad80e4379a3bd59451",
+  "input_bundle": "skills/tools/documents-media/presentations/shared/fixtures/stage4_engineering_research_bundle/bundle.json",
+  "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
+  "canonical_files": {
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/background.png": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/background_negative.png": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/logo_RGB.png": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/logo_RGB_negative.png": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/bibliography.bib": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/main.tex": "a7c6826e94c6f08647200f3472381d882dd8bf405df42a68f5dc903a4010da07",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/beamerthemesintef.sty": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/sintefcolor.sty": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+  },
+  "build_workspace": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build",
+  "render_input_identity_sha256": "424386beec49171891b6a158df3601f113d64f0ad83b1fd4573f7243e72e3b3a",
+  "render_input_identity": {
+    "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+    "build_workspace": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build",
+    "files": [
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/assets/background.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/assets/background_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/assets/logo_RGB.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/bibliography.bib",
+        "role": "canonical_cuhk_support",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/main.tex",
+        "role": "main_tex",
+        "sha256": "35370c9ff7a1c4e0120ef98dad2df46079f47673e56e250f114da1e832ac8999"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/scientific_layouts.tex",
+        "role": "scientific_layout_include",
+        "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_error.png",
+        "role": "copied_scientific_asset",
+        "sha256": "9c196b9f214495095402d579b524e77c30144a3831aa065ecb990e964960440f"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_error_semantic_overlay.png",
+        "role": "copied_scientific_asset",
+        "sha256": "0b19ba2824e4cc218ded74852e7a727ada39b0167b0e43afb32d416da008c33b"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_error_semantic_overlay_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "714215004c184be2ed205b0d37c13d28ff8b93afd71536c68aeb0fd90e300870"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_gt.png",
+        "role": "copied_scientific_asset",
+        "sha256": "70fe06d3c80ba25484ceaf0484820fea0ab6378d0852d64deda972d175d7dbaf"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_gt_semantic_overlay.png",
+        "role": "copied_scientific_asset",
+        "sha256": "123680750fecb846a0164b476094e47d123e5a6dbc43a4d9a451b0de3deb59f7"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_gt_semantic_overlay_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "bcedb58f27502ca8978bbbcc4e435a77c4e014ea61a6f923864161ccc11d370a"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_input.png",
+        "role": "copied_scientific_asset",
+        "sha256": "dbb133c18d2b0879cb193be19034ba6cfeeeb2b35876d506ca1af2faaed745e5"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_pred.png",
+        "role": "copied_scientific_asset",
+        "sha256": "41ed6a894559333c82a5bc2e2885528060684a40ffd7de2e4e725eba982c5c7a"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_pred_semantic_overlay.png",
+        "role": "copied_scientific_asset",
+        "sha256": "cd4c4f94bf816155425dbbaabd2efb17c884848d67acf38f6774933107ab40bb"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_pred_semantic_overlay_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "19e88c9a264c8e98f369d7e890f7e44e1122da90fef34c3da9f0146724d1abd2"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/small_g_negative_result.png",
+        "role": "copied_scientific_asset",
+        "sha256": "69b2c66637554bd9fb44c319cbdeab52037906aadd1e49a145dae657c5252e8b"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/styles/sintefcolor.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+      }
+    ],
+    "sha256": "424386beec49171891b6a158df3601f113d64f0ad83b1fd4573f7243e72e3b3a"
+  },
+  "tex": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/main.tex",
+  "scientific_layout_include": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/scientific_layouts.tex",
+  "deck_plan": "results/036_research_presentation_process_page_projection_recovery/generated/deck_plan.json",
+  "source_fidelity_map": "results/036_research_presentation_process_page_projection_recovery/generated/source_fidelity_map.json",
+  "runtime_trace": "results/036_research_presentation_process_page_projection_recovery/generated/runtime_trace.json",
+  "storyline_trace": "results/036_research_presentation_process_page_projection_recovery/generated/storyline_trace.json",
+  "deck_sequence_summary_path": "results/036_research_presentation_process_page_projection_recovery/generated/deck_sequence_summary.json",
+  "deck_sequence_summary": {
+    "schema": "RESEARCH_PRESENTATION_DECK_SEQUENCE_SUMMARY_V1",
+    "page_count": 6,
+    "render_input_identity_sha256": "424386beec49171891b6a158df3601f113d64f0ad83b1fd4573f7243e72e3b3a",
+    "render_input_manifest": {
+      "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+      "build_workspace": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build",
+      "files": [
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/assets/background.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/assets/background_negative.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/assets/logo_RGB.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/bibliography.bib",
+          "role": "canonical_cuhk_support",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/main.tex",
+          "role": "main_tex",
+          "sha256": "35370c9ff7a1c4e0120ef98dad2df46079f47673e56e250f114da1e832ac8999"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/scientific_layouts.tex",
+          "role": "scientific_layout_include",
+          "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_error.png",
+          "role": "copied_scientific_asset",
+          "sha256": "9c196b9f214495095402d579b524e77c30144a3831aa065ecb990e964960440f"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_error_semantic_overlay.png",
+          "role": "copied_scientific_asset",
+          "sha256": "0b19ba2824e4cc218ded74852e7a727ada39b0167b0e43afb32d416da008c33b"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_error_semantic_overlay_roi_zoom.png",
+          "role": "copied_scientific_asset",
+          "sha256": "714215004c184be2ed205b0d37c13d28ff8b93afd71536c68aeb0fd90e300870"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_gt.png",
+          "role": "copied_scientific_asset",
+          "sha256": "70fe06d3c80ba25484ceaf0484820fea0ab6378d0852d64deda972d175d7dbaf"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_gt_semantic_overlay.png",
+          "role": "copied_scientific_asset",
+          "sha256": "123680750fecb846a0164b476094e47d123e5a6dbc43a4d9a451b0de3deb59f7"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_gt_semantic_overlay_roi_zoom.png",
+          "role": "copied_scientific_asset",
+          "sha256": "bcedb58f27502ca8978bbbcc4e435a77c4e014ea61a6f923864161ccc11d370a"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_input.png",
+          "role": "copied_scientific_asset",
+          "sha256": "dbb133c18d2b0879cb193be19034ba6cfeeeb2b35876d506ca1af2faaed745e5"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_pred.png",
+          "role": "copied_scientific_asset",
+          "sha256": "41ed6a894559333c82a5bc2e2885528060684a40ffd7de2e4e725eba982c5c7a"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_pred_semantic_overlay.png",
+          "role": "copied_scientific_asset",
+          "sha256": "cd4c4f94bf816155425dbbaabd2efb17c884848d67acf38f6774933107ab40bb"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/failure_pred_semantic_overlay_roi_zoom.png",
+          "role": "copied_scientific_asset",
+          "sha256": "19e88c9a264c8e98f369d7e890f7e44e1122da90fef34c3da9f0146724d1abd2"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/stage3_assets/small_g_negative_result.png",
+          "role": "copied_scientific_asset",
+          "sha256": "69b2c66637554bd9fb44c319cbdeab52037906aadd1e49a145dae657c5252e8b"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+          "role": "canonical_cuhk_style",
+          "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+        },
+        {
+          "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/styles/sintefcolor.sty",
+          "role": "canonical_cuhk_style",
+          "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+        }
+      ],
+      "sha256": "424386beec49171891b6a158df3601f113d64f0ad83b1fd4573f7243e72e3b3a"
+    },
+    "pixel_evidence_status": {
+      "status": "AVAILABLE",
+      "render_status": "ok",
+      "rendered_png_count": 7,
+      "rendered_page_sha256_nullable": false,
+      "contact_sheet_sha256_nullable": false
+    },
+    "rendered_pixel_identity_sha256": "0fb039c9c714e2577dc78694a66599e76ef2d9c55d1c9ec43959f41896c50fc1",
+    "page_order": [
+      "slide_2_statistical_model",
+      "slide_3_real_data_application",
+      "slide_4_experiment_design",
+      "slide_5_negative_result",
+      "slide_6_next_experiment",
+      "slide_7_medical_image_comparison"
+    ],
+    "title_sequence": [
+      "Clustered outcomes separate center and individual variation",
+      "Cluster-robust intervals recover coverage as ICC increases",
+      "Simulation varies clustering before interval procedures are compared",
+      "Small-G settings remain anti-conservative after robustification",
+      "Next experiment tests whether batch selection reduces fragile coverage",
+      "Same-case panels keep the segmentation error interpretable"
+    ],
+    "section_sequence": [
+      "Clustered interval calibration",
+      "Clustered interval calibration",
+      "Clustered interval calibration",
+      "Clustered interval calibration",
+      "Clustered interval calibration",
+      "Segmentation robustness"
+    ],
+    "workstream_sequence": [
+      {
+        "logical_id": "slide_2_statistical_model",
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_order": 1
+      },
+      {
+        "logical_id": "slide_3_real_data_application",
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_order": 1
+      },
+      {
+        "logical_id": "slide_4_experiment_design",
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_order": 1
+      },
+      {
+        "logical_id": "slide_5_negative_result",
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_order": 1
+      },
+      {
+        "logical_id": "slide_6_next_experiment",
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_order": 1
+      },
+      {
+        "logical_id": "slide_7_medical_image_comparison",
+        "workstream_id": "segmentation_robustness",
+        "workstream_label": "Segmentation robustness",
+        "workstream_order": 2
+      }
+    ],
+    "storyline_order": [
+      "STATISTICAL_MODEL",
+      "REAL_DATA_APPLICATION",
+      "EXPERIMENT_DESIGN",
+      "NEGATIVE_RESULT",
+      "NEXT_EXPERIMENT",
+      "MEDICAL_IMAGE_COMPARISON"
+    ],
+    "pages": [
+      {
+        "sequence_index": 1,
+        "rendered_slide_number": 2,
+        "logical_id": "slide_2_statistical_model",
+        "page_id": "production_model",
+        "page_job": "STATISTICAL_MODEL",
+        "title": "Clustered outcomes separate center and individual variation",
+        "section": "Clustered interval calibration",
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "EV-MODEL-001"
+        ],
+        "selected_gold_id": "GSC-016",
+        "selected_reference_id": "RRL-020",
+        "primary_scientific_object_type": "native_latex_math",
+        "scientific_objects": [
+          "clustered outcome equation",
+          "center random effect",
+          "individual error"
+        ],
+        "visual_density": {
+          "declared_density": "low",
+          "machine_density": "moderate",
+          "primary_area": 0.0,
+          "native_object_count": 5,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-2.png",
+        "rendered_page_sha256": "18260a71aef6d59a0e02ffa87e5defb4bc03b44d0235984c2cc6eceebe7f9123",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      },
+      {
+        "sequence_index": 2,
+        "rendered_slide_number": 3,
+        "logical_id": "slide_3_real_data_application",
+        "page_id": "production_quantitative_result",
+        "page_job": "REAL_DATA_APPLICATION",
+        "title": "Cluster-robust intervals recover coverage as ICC increases",
+        "section": "Clustered interval calibration",
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "EV-RESULT-001"
+        ],
+        "selected_gold_id": "GSC-014",
+        "selected_reference_id": "RRL-016",
+        "primary_scientific_object_type": "presentation_native_coverage_figure",
+        "scientific_objects": [
+          "coverage curve",
+          "nominal 0.95 target",
+          "method comparison"
+        ],
+        "visual_density": {
+          "declared_density": "moderate",
+          "machine_density": "low",
+          "primary_area": 0.0,
+          "native_object_count": 3,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-3.png",
+        "rendered_page_sha256": "4c609896aff98b3d8dc24941ace84690b9e858d370af330682500e735df6af2d",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      },
+      {
+        "sequence_index": 3,
+        "rendered_slide_number": 4,
+        "logical_id": "slide_4_experiment_design",
+        "page_id": "production_experiment_design",
+        "page_job": "EXPERIMENT_DESIGN",
+        "title": "Simulation varies clustering before interval procedures are compared",
+        "section": "Clustered interval calibration",
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "EV-DESIGN-001"
+        ],
+        "selected_gold_id": "GSC-004",
+        "selected_reference_id": "RRL-019",
+        "primary_scientific_object_type": "scientific_relation_diagram",
+        "scientific_objects": [
+          "DGP knobs",
+          "clustered samples",
+          "interval procedures",
+          "coverage diagnostics"
+        ],
+        "visual_density": {
+          "declared_density": "moderate",
+          "machine_density": "low",
+          "primary_area": 0.0,
+          "native_object_count": 3,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-4.png",
+        "rendered_page_sha256": "d2cea85a95b24d0788db0024d14374cda340637006da382c726fe3c48573b678",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      },
+      {
+        "sequence_index": 4,
+        "rendered_slide_number": 5,
+        "logical_id": "slide_5_negative_result",
+        "page_id": "production_negative_result",
+        "page_job": "NEGATIVE_RESULT",
+        "title": "Small-G settings remain anti-conservative after robustification",
+        "section": "Clustered interval calibration",
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "EV-NEGATIVE-001"
+        ],
+        "selected_gold_id": "GSC-012",
+        "selected_reference_id": "RRL-011",
+        "primary_scientific_object_type": "negative_evidence_plot",
+        "scientific_objects": [
+          "small-G failure plot",
+          "finite-sample coverage gap"
+        ],
+        "visual_density": {
+          "declared_density": "moderate",
+          "machine_density": "low",
+          "primary_area": 0.0,
+          "native_object_count": 3,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-5.png",
+        "rendered_page_sha256": "daf79c0f303860e8d4c01fe6bb810ef80a4f0d454bc681d100e017e02c45eb06",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      },
+      {
+        "sequence_index": 5,
+        "rendered_slide_number": 6,
+        "logical_id": "slide_6_next_experiment",
+        "page_id": "production_next_experiment",
+        "page_job": "NEXT_EXPERIMENT",
+        "title": "Next experiment tests whether batch selection reduces fragile coverage",
+        "section": "Clustered interval calibration",
+        "workstream_id": "clustered_interval_calibration",
+        "workstream_label": "Clustered interval calibration",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "EV-NEXT-001"
+        ],
+        "selected_gold_id": "GSC-018",
+        "selected_reference_id": "RRL-059",
+        "primary_scientific_object_type": "next_experiment_reasoning",
+        "scientific_objects": [
+          "small-G limit",
+          "DPP batch query",
+          "Mondrian partition",
+          "CR2 / wild bootstrap"
+        ],
+        "visual_density": {
+          "declared_density": "moderate",
+          "machine_density": "low",
+          "primary_area": 0.0,
+          "native_object_count": 3,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-6.png",
+        "rendered_page_sha256": "94621c2e7296b98cdd670932f16e53e47624b69b5f0147a64b4fa0fc5991f475",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      },
+      {
+        "sequence_index": 6,
+        "rendered_slide_number": 7,
+        "logical_id": "slide_7_medical_image_comparison",
+        "page_id": "production_medical_comparison",
+        "page_job": "MEDICAL_IMAGE_COMPARISON",
+        "title": "Same-case panels keep the segmentation error interpretable",
+        "section": "Segmentation robustness",
+        "workstream_id": "segmentation_robustness",
+        "workstream_label": "Segmentation robustness",
+        "workstream_order": 2,
+        "source_evidence_ids": [
+          "EV-MEDICAL-001"
+        ],
+        "selected_gold_id": "GSC-008",
+        "selected_reference_id": "RRL-013",
+        "primary_scientific_object_type": "same_case_medical_panels",
+        "scientific_objects": [
+          "synthetic slice",
+          "GT lesion",
+          "prediction",
+          "error overlay",
+          "same-case ROI"
+        ],
+        "visual_density": {
+          "declared_density": "high",
+          "machine_density": "moderate",
+          "primary_area": 0.0,
+          "native_object_count": 4,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-7.png",
+        "rendered_page_sha256": "af5b29da99fe6aef8464023383e7634f0cc40f2df32ead582d584b96d5d9e000",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": {
+          "label": "Segmentation robustness",
+          "audience_text": "independent workstream; no causal bridge asserted",
+          "relation_to_previous": "independent workstream; no source-supported causal bridge is asserted"
+        }
+      }
+    ],
+    "deck_contact_sheet": {
+      "path": "results/036_research_presentation_process_page_projection_recovery/generated/deck_contact_sheet.png",
+      "sha256": "a5abd59489f224c94506ba1830a429fc631f3d043732480af785bfd8fcf57a93",
+      "serves_audience": false,
+      "review_role": "deck_sequence_context"
+    },
+    "deck_identity_sha256": "3705fbd6239547c092a1331d1e545ea831e0e8e57250040ec9cec6e79af0e65a"
+  },
+  "deck_contact_sheet": {
+    "status": "GENERATED",
+    "path": "results/036_research_presentation_process_page_projection_recovery/generated/deck_contact_sheet.png",
+    "sha256": "a5abd59489f224c94506ba1830a429fc631f3d043732480af785bfd8fcf57a93"
+  },
+  "quality_loop_state": "results/036_research_presentation_process_page_projection_recovery/generated/quality_loop_state.json",
+  "dependency_probe": "results/036_research_presentation_process_page_projection_recovery/generated/dependency_probe.json",
+  "render_chinese_math_pdf_probe": "results/036_research_presentation_process_page_projection_recovery/generated/render_chinese_math_pdf_probe.json",
+  "compile_status": {
+    "status": "COMPILED",
+    "engine": "xelatex",
+    "engine_path": "/home/yuukias/.TinyTeX/bin/x86_64-linux/xelatex",
+    "compile_passes": 2,
+    "fontconfig": {
+      "fontconfig_file": "/home/yuukias/AI_Skills_Collection/results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/fontconfig/fonts.conf",
+      "fontconfig_file_repo_path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/fontconfig/fonts.conf",
+      "font_cache_dir": "/tmp/fontconfig-cache-027",
+      "times_font_dir": "/home/yuukias/code/TRACE/presentations/group_meetings/2026-07-16/cat_trace_demo/fonts",
+      "times_font_dir_exists": true,
+      "times_font_files_present": true
+    },
+    "pdf": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/main.pdf",
+    "pdf_sha256": "9060bd8c68ee3e9442fb292dbd0bf9483102498440fe662cf5de24a3acee4fda",
+    "log": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/compile.log"
+  },
+  "render_status": {
+    "status": "ok",
+    "png_count": 7,
+    "rendered_png": [
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-1.png",
+        "sha256": "a30aea3d31116e6421f926f0af9b7d1029aacb631520491caee1ee9dcfa3ccab"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-2.png",
+        "sha256": "18260a71aef6d59a0e02ffa87e5defb4bc03b44d0235984c2cc6eceebe7f9123"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-3.png",
+        "sha256": "4c609896aff98b3d8dc24941ace84690b9e858d370af330682500e735df6af2d"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-4.png",
+        "sha256": "d2cea85a95b24d0788db0024d14374cda340637006da382c726fe3c48573b678"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-5.png",
+        "sha256": "daf79c0f303860e8d4c01fe6bb810ef80a4f0d454bc681d100e017e02c45eb06"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-6.png",
+        "sha256": "94621c2e7296b98cdd670932f16e53e47624b69b5f0147a64b4fa0fc5991f475"
+      },
+      {
+        "path": "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/rendered/slide-7.png",
+        "sha256": "af5b29da99fe6aef8464023383e7634f0cc40f2df32ead582d584b96d5d9e000"
+      }
+    ]
+  },
+  "mechanical_qa": {
+    "status": "MECHANICAL_PASS",
+    "checks": {
+      "normal_research_presentations_entry": true,
+      "input_bundle_read_from_path": true,
+      "canonical_source_copied": true,
+      "scientific_layout_include_loaded": true,
+      "content_page_jobs": 6,
+      "rendered_pages_available": true,
+      "deck_contact_sheet_generated": true,
+      "quality_loop_budget_enforced": true
+    }
+  },
+  "quality_loop_handoff": {
+    "schema": "RESEARCH_PRESENTATION_STAGE4_QUALITY_HANDOFF_V1",
+    "status": "WAITING_FOR_DECK_VISUAL_REVIEW",
+    "visual_review_manifest": "results/036_research_presentation_process_page_projection_recovery/visual_review/visual_inputs.json",
+    "visual_review_evidence": "results/036_research_presentation_process_page_projection_recovery/visual_review/VISUAL_REVIEW.json",
+    "quality_loop_state": "results/036_research_presentation_process_page_projection_recovery/generated/quality_loop_state.json",
+    "deck_contact_sheet": "results/036_research_presentation_process_page_projection_recovery/generated/deck_contact_sheet.png",
+    "render_input_identity_sha256": "424386beec49171891b6a158df3601f113d64f0ad83b1fd4573f7243e72e3b3a",
+    "rendered_pixel_identity_sha256": "0fb039c9c714e2577dc78694a66599e76ef2d9c55d1c9ec43959f41896c50fc1"
+  },
+  "stage4_boundary": "This one-call production entry recovery does not claim Stage 4 PASS, PROGRAM_MATURE, or ONE_SHOT_QUALITY_PASS.",
+  "cleaned_latex_intermediates": [
+    "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/main.aux",
+    "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/main.nav",
+    "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/main.out",
+    "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/main.snm",
+    "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/main.toc"
+  ],
+  "normalized_generated_logs": [
+    "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/compile.log",
+    "results/036_research_presentation_process_page_projection_recovery/generated/cuhk_production_build/main.log"
+  ]
+}
