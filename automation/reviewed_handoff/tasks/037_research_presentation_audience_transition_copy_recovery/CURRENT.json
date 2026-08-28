@@ -1,0 +1,21 @@
+{
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "task_key": "037_research_presentation_audience_transition_copy_recovery",
+  "state": "PLAN_FROZEN",
+  "review_round": 0,
+  "max_review_rounds": 2,
+  "plan_revision": 0,
+  "max_plan_revisions": 1,
+  "base_commit": "795f82164d5cd0e8d0026a47f730c655613e5aa1",
+  "base_branch": "main",
+  "implementation_commit": null,
+  "ci_required": true,
+  "ci_status": "PENDING",
+  "last_review_decision": null,
+  "review_limit_reached": false,
+  "human_gate_reason": null,
+  "visual_review_required": true,
+  "visual_review_manifest_path": "results/037_research_presentation_audience_transition_copy_recovery/visual_review/visual_inputs.json",
+  "visual_review_evidence_path": "results/037_research_presentation_audience_transition_copy_recovery/visual_review/VISUAL_REVIEW.json",
+  "next_action": "RUN_CODEX_EXECUTOR"
+}
