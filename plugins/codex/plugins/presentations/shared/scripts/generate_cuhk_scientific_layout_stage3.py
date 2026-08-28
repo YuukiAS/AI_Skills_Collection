@@ -1047,12 +1047,18 @@ def emit_frame(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str
         body = emit_flow(spec, layout)
     if transition := spec.get("storyline_transition"):
         audience_text = transition.get("audience_text") or transition["relation_to_previous"]
+        compact = transition.get("cue_variant") == "compact"
+        cue_y = 0.1580 if compact else 0.1580
+        cue_y2 = 0.2020 if compact else 0.2140
+        label_w = 0.1500 if compact else 0.1850
+        text_x = 0.2380 if compact else 0.2700
+        text_w = 0.6670 if compact else 0.6350
         cue = (
-            rf"\StageThreePanel{{0.0600}}{{0.1450}}{{0.9400}}{{0.2140}};"
+            rf"\StageThreePanel{{0.0600}}{{0.1450}}{{0.9400}}{{{cue_y2:.4f}}};"
             "\n"
-            rf"\StageThreeNode{{0.0780}}{{0.1580}}{{0.1850}}{{left}}{{\scriptsize\textbf{{Workstream transition}}}};"
+            rf"\StageThreeNode{{0.0780}}{{{cue_y:.4f}}}{{{label_w:.4f}}}{{left}}{{\scriptsize\textbf{{Workstream transition}}}};"
             "\n"
-            rf"\StageThreeNode{{0.2700}}{{0.1580}}{{0.6350}}{{left}}{{\scriptsize\textbf{{{tex_escape(transition['label'])}}}: {tex_escape(audience_text)}.}};"
+            rf"\StageThreeNode{{{text_x:.4f}}}{{{cue_y:.4f}}}{{{text_w:.4f}}}{{left}}{{\scriptsize\textbf{{{tex_escape(transition['label'])}}}: {tex_escape(audience_text)}.}};"
         )
         body = cue + "\n" + body
     return rf"""\section{{{tex_escape(spec['section'])}}}
