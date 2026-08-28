@@ -587,24 +587,16 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
             "bbox": caption,
         },
     ]
-    if spec["page_job"] == "STATISTICAL_MODEL" and spec.get("scientific_objects"):
+    if spec["page_job"] == "STATISTICAL_MODEL":
         objects.extend(
-            [
-                {
-                    "object_id": f"{spec['page_id']}_model_roles",
-                    "role": "source_grounded_model_roles",
-                    "native_type": "text_explanation_block",
-                    "source_fields": ["scientific_objects"],
-                    "bbox": {"x": 0.1550, "y": 0.6320, "w": 0.3200, "h": 0.1150},
-                },
-                {
-                    "object_id": f"{spec['page_id']}_calibration_link",
-                    "role": "source_grounded_calibration_link",
-                    "native_type": "text_explanation_block",
-                    "source_fields": ["key_message", "annotation"],
-                    "bbox": {"x": 0.5250, "y": 0.6320, "w": 0.3200, "h": 0.1150},
-                },
-            ]
+            {
+                "object_id": f"{spec['page_id']}_{block['suffix']}",
+                "role": block["role"],
+                "native_type": "text_explanation_block",
+                "source_fields": block["source_fields"],
+                "bbox": block["bbox"],
+            }
+            for block in model_support_blocks(spec)
         )
     if spec.get("same_case_roi_zoom"):
         objects.append(
@@ -678,6 +670,8 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
                     "roi_source_asset",
                     "same_case_roi_zoom",
                     "key_message",
+                    "annotation",
+                    "caption",
                     "scientific_objects",
                 ]
                 if key in spec
@@ -703,29 +697,64 @@ def tex_node(x: float, y: float, w: float, body: str, *, align: str = "left") ->
     return rf"\StageThreeNode{{{x:.4f}}}{{{y:.4f}}}{{{w:.4f}}}{{{align}}}{{{body}}};"
 
 
-def emit_equation(spec: dict[str, Any], layout: dict[str, Any]) -> str:
-    primary = layout["resolved_primary_object_geometry"]
-    annotation = layout["resolved_supporting_object_geometry"]["annotation"]
-    caption = layout["resolved_supporting_object_geometry"]["caption"]
-    scientific_objects = [str(item) for item in spec.get("scientific_objects", [])[:3]]
+def model_support_blocks(spec: dict[str, Any]) -> list[dict[str, Any]]:
+    blocks: list[dict[str, Any]] = []
+    scientific_objects = [
+        str(item).strip()
+        for item in spec.get("scientific_objects", [])[:3]
+        if str(item).strip()
+    ]
     if scientific_objects:
         role_lines = [
             rf"\scriptsize\textbullet\ {tex_escape(item)}"
             for item in scientific_objects
         ]
-        roles = r"\scriptsize\textbf{Model roles}\\[-0.15em]" + r"\\".join(role_lines)
-    else:
-        roles = r"\scriptsize\textbf{Model roles}\\[-0.15em]\scriptsize Source-grounded terms remain attached to the equation."
-    key_message = tex_escape(str(spec.get("key_message") or spec["annotation"]))
-    return "\n".join([
+        blocks.append(
+            {
+                "suffix": "model_components",
+                "role": "source_field_model_components",
+                "label": "Model components",
+                "source_fields": ["scientific_objects"],
+                "bbox": {"x": 0.1550, "y": 0.6320, "w": 0.3200, "h": 0.1150},
+                "tex_body": r"\\".join(role_lines),
+            }
+        )
+    if key_message := str(spec.get("key_message") or "").strip():
+        blocks.append(
+            {
+                "suffix": "model_interpretation",
+                "role": "source_field_model_interpretation",
+                "label": "Interpretation",
+                "source_fields": ["key_message"],
+                "bbox": {"x": 0.5250, "y": 0.6320, "w": 0.3200, "h": 0.1150},
+                "tex_body": tex_escape(key_message),
+            }
+        )
+    return blocks
+
+
+def emit_equation(spec: dict[str, Any], layout: dict[str, Any]) -> str:
+    primary = layout["resolved_primary_object_geometry"]
+    annotation = layout["resolved_supporting_object_geometry"]["annotation"]
+    caption = layout["resolved_supporting_object_geometry"]["caption"]
+    parts = [
         tex_node(primary["x"], primary["y"], primary["w"], rf"\Large \[\displaystyle {spec['math']}\]", align="center"),
         tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\small {spec['annotation']}"),
-        r"\StageThreePanel{0.1400}{0.6150}{0.4900}{0.7620};",
-        r"\StageThreePanel{0.5100}{0.6150}{0.8600}{0.7620};",
-        tex_node(0.1550, 0.6370, 0.3200, roles),
-        tex_node(0.5250, 0.6370, 0.3200, rf"\scriptsize\textbf{{Calibration link}}\\[-0.15em]{key_message}"),
-        tex_node(caption["x"], caption["y"], caption["w"], r"\scriptsize Center variation and individual variation define the ICC before the interval comparison.", align="center"),
-    ])
+    ]
+    for block in model_support_blocks(spec):
+        bbox = block["bbox"]
+        parts.append(rf"\StageThreePanel{{{bbox['x'] - 0.015:.4f}}}{{0.6150}}{{{bbox['x'] + bbox['w'] + 0.015:.4f}}}{{0.7620}};")
+        parts.append(
+            tex_node(
+                bbox["x"],
+                0.6370,
+                bbox["w"],
+                rf"\scriptsize\textbf{{{block['label']}}}\\[-0.15em]{block['tex_body']}",
+            )
+        )
+    if caption_text := str(spec.get("caption") or "").strip():
+        parts.append(tex_node(caption["x"], caption["y"], caption["w"], rf"\scriptsize {tex_escape(caption_text)}", align="center"))
+    return "\n".join(parts)
 
 
 def load_result_series(spec: dict[str, Any]) -> dict[int, dict[str, list[dict[str, float]]]]:

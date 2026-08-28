@@ -18,6 +18,7 @@ sys.path.insert(0, str(SHARED / "scripts"))
 
 import markdown_to_deck_plan  # noqa: E402
 import validate_deck_plan  # noqa: E402
+import generate_cuhk_scientific_layout_stage3 as stage3  # noqa: E402
 import generate_research_presentation_production_entry as production_entry  # noqa: E402
 import deck_quality_loop  # noqa: E402
 
@@ -913,9 +914,13 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertIn("Clustered Interval Calibration And Synthetic Segmentation Robustness", tex)
             self.assertIn("Uncertainty calibration across clustered data and segmentation stress cases", tex)
             self.assertIn("Coverage by ICC under imbalanced clusters", tex)
-            self.assertIn("Model roles", tex)
+            self.assertIn("Model components", tex)
+            self.assertIn("Interpretation", tex)
             self.assertIn("center random effect", tex)
-            self.assertIn("Calibration link", tex)
+            self.assertIn("The source model makes center-level dependence explicit before interval comparison.", tex)
+            self.assertNotIn("Calibration link", tex)
+            self.assertNotIn("Source-grounded terms", tex)
+            self.assertNotIn("Center variation and individual variation define the ICC before the interval comparison.", tex)
             self.assertIn("Same-case ROI zoom", tex)
             self.assertLess(tex.index("Small-G settings remain anti-conservative"), tex.index("Next experiment tests whether batch selection"))
             self.assertLess(tex.index("Next experiment tests whether batch selection"), tex.index("Same-case panels keep the segmentation error interpretable"))
@@ -975,6 +980,71 @@ class PresentationSharedTests(unittest.TestCase):
             else:
                 self.assertNotEqual(strict.returncode, 0)
                 self.assertIn(manifest["render_status"]["status"], strict.stderr + strict.stdout)
+
+    def test_statistical_model_support_copy_is_source_driven_for_unrelated_model(self) -> None:
+        spec = {
+            "page_id": "synthetic_cox_model",
+            "page_job": "STATISTICAL_MODEL",
+            "section": "Model",
+            "title": "Time-to-event model separates baseline risk from covariate effects",
+            "query": {
+                "page_function": "STATISTICAL_MODEL",
+                "scientific_object": "survival analysis cox proportional hazards equation",
+                "domain_family": "survival_analysis",
+                "dominant_object_type": "equation",
+                "evidence_type": "mathematical model",
+                "density": "low",
+                "panel_count": 0,
+            },
+            "content_kind": "equation",
+            "dominant_object": "native_latex_math",
+            "math": r"h(t\mid x)=h_0(t)\exp(x^\top\beta)",
+            "annotation": "Hazard ratios are multiplicative shifts from the baseline hazard.",
+            "key_message": "Partial likelihood estimates covariate effects without specifying the baseline hazard.",
+            "scientific_objects": [
+                "baseline hazard",
+                "covariate log hazard ratio",
+                "risk set partial likelihood",
+            ],
+            "required_panel_count": 0,
+        }
+        layout = stage3.resolve_layout(spec)
+        tex = stage3.emit_equation(spec, layout)
+
+        self.assertIn(r"\displaystyle h(t\mid x)=h_0(t)\exp(x^\top\beta)", tex)
+        self.assertIn("Model components", tex)
+        self.assertIn("baseline hazard", tex)
+        self.assertIn("covariate log hazard ratio", tex)
+        self.assertIn("Partial likelihood estimates covariate effects", tex)
+        for forbidden in [
+            "ICC",
+            "center variation",
+            "interval comparison",
+            "Calibration link",
+            "Source-grounded terms",
+        ]:
+            self.assertNotIn(forbidden, tex)
+        self.assertIn(
+            "scientific_objects",
+            next(item for item in layout["native_objects"] if item["role"] == "source_field_model_components")["source_fields"],
+        )
+        self.assertIn(
+            "key_message",
+            next(item for item in layout["native_objects"] if item["role"] == "source_field_model_interpretation")["source_fields"],
+        )
+
+        minimal_spec = dict(spec)
+        minimal_spec.pop("scientific_objects")
+        minimal_spec.pop("key_message")
+        minimal_tex = stage3.emit_equation(minimal_spec, stage3.resolve_layout(minimal_spec))
+        self.assertIn("Hazard ratios are multiplicative shifts", minimal_tex)
+        self.assertNotIn("Model components", minimal_tex)
+        self.assertNotIn("Interpretation", minimal_tex)
+        self.assertNotIn("Source-grounded terms", minimal_tex)
+
+        source = (SHARED / "scripts/generate_cuhk_scientific_layout_stage3.py").read_text(encoding="utf-8")
+        self.assertNotIn("baseline hazard", source)
+        self.assertNotIn("covariate log hazard ratio", source)
 
     def test_research_presentation_deck_quality_loop_consumes_review_and_fails_closed(self) -> None:
         generator = SHARED / "scripts/generate_research_presentation_production_entry.py"
