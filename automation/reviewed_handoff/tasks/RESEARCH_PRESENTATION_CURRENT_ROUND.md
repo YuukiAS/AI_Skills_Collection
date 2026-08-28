@@ -106,25 +106,39 @@ slides 4 / 6 的当前 PNG SHA 与 034 当时 item-level PASS 的像素完全一
 
 这个新 blocker 不需要用户改变产品/科学选择，也不需要降低质量门槛；共享 `EXPERIMENT_DESIGN` / `NEXT_EXPERIMENT` geometry/emission 已提供一个新的、范围清楚的 bounded implementation mechanism，因此按 Quality-Preserving Continuation Policy 自动进入 036。
 
-### Active bounded recovery — 036 Process Page Projection Recovery
+### 036 Process Page Projection Recovery — PASS
+
+`036_research_presentation_process_page_projection_recovery` 已在第二轮独立审核中 PASS，真实 GitHub CI 与 implementation `6045675e...` 对应的 fresh task-local Terra 均闭合。
+
+036 关闭了两个 process-page projection blocker，并在 Review 1 后同时关闭了共享 emitter 的 source-fidelity 缺口：
+
+- `EXPERIMENT_DESIGN` 与 `NEXT_EXPERIMENT` 已使用更充分的 CUHK safe region，节点、endpoint、connector annotation、failure evidence、comparator 与 decision rule 均保持成熟投影尺度；
+- shared process-page supporting copy 由当前 page-job/spec 的 source-backed nodes/evidence 驱动，不再无条件注入 `DGP stress grid`、`Center hierarchy`、`Interval procedures`、`400 reps per cell`、`coverage shortfall at high ICC` 等 clustered fixture 文案；
+- unrelated acquisition / measurement-noise regression 显式证明同一共享路径不会泄漏当前 clustered fixture 的 ICC/center/interval/CR2/wild-bootstrap 等固定文本；
+- shared/plugin parity 与真实 `Codex Marketplace` CI 通过；
+- fresh Terra 与当前 implementation、render-input、rendered-pixel 和 contact-sheet identity 一致，slides 2–7 与 `deck_contact_sheet` 本轮均获得 item-level `PASS`，其中 slides 4 / 6 的投影尺度没有因第二轮 source-grounding repair 回退。
+
+036 单 task PASS 不自动等于 Stage 4 PASS。Planner 独立检查当前真实 `main.tex` 仍确认医学影像页顶部直接显示 `Workstream transition` 与 `independent workstream; no causal bridge asserted.`。该内容在 036 Plan 中被冻结、不是 036 引入的 regression；fresh Terra 本轮虽然对同一像素给 PASS，但 Program Goal 明确禁止 audience-facing workflow / implementation / 制作型元语言，因此不能仅用该 PASS 覆盖仓库长期质量政策。这个剩余缺口范围清楚、无需改变产品/科学语义，按 Quality-Preserving Continuation Policy 自动进入 037。
+
+### Active bounded recovery — 037 Audience Transition Copy Recovery
 
 当前 active task：
 
-`036_research_presentation_process_page_projection_recovery`
+`037_research_presentation_audience_transition_copy_recovery`
 
-036 只处理当前 fresh Terra 已明确指出的两个 process-page projection-scale 问题：
+037 只处理 multi-workstream transition 的 audience-facing copy / structural cue：
 
-- 通用放大/重排共享 `EXPERIMENT_DESIGN` scientific pipeline，让 source-backed DGP factors、hierarchy、procedures、endpoints 与 connector annotations 更充分使用 CUHK safe region 并达到投影可读尺度；
-- 通用放大/重排共享 `NEXT_EXPERIMENT` evidence-to-decision path，让 prior failure、sampling/manipulation、comparators 与 decision rule 在成熟字号下形成连续推理；
-- 修复只能依据 page-job/general capacity/layout semantics，不得按当前 clustered fixture 的标题、术语、页号或 test ID 写死；
-- 不新增无来源科学内容，不以 generic filler/cards/box-arrow 假装密度；若一页容量无法在成熟字号下容纳现有内容，必须走现有 capacity/no-winner/split/fail-closed 路线，而不是缩小字体强塞；
-- 增加与当前 fixture 文案解耦的 bounded regressions，直接约束两类 page-job 的 projection geometry / readability mechanism；
-- 035 model source-grounding、034 dual identity/title anti-meta、032 storyline、多 workstream transition、gold retrieval、exact CUHK identity、result/failure/medical 页面、medical TP/FP/FN、一次 repair budget 全部冻结保护；
-- shared/plugin parity、targeted/full tests 与真实 GitHub CI 必须通过；pixels 改变后必须等待 task-local fresh Terra，至少 `slide_4_experiment_design`、`slide_6_next_experiment`、`deck_contact_sheet` 全部 item-level `PASS`，且 model/result/failure/medical 等无新的 blocker。
+- 将 `Workstream transition`、`independent workstream`、`no causal bridge asserted` 等内部制作/控制说明从最终 slide 移除；
+- 第二 workstream 仍必须通过 source/workstream metadata 驱动的科学主题、section cue 或等价结构清楚可见；
+- “不虚构 causal bridge”继续作为内部 storyline constraint 保留，但不作为听众需要阅读的免责声明；
+- 不得为当前 `Segmentation robustness`、医学标题、页号、fixture 或 test ID 写 production special case；
+- unrelated dual-workstream regression 必须证明 transition 由 source/workstream metadata 驱动、无当前 fixture copy、无内部 meta language、无 invented causal connector；single-workstream 仍不插入多余 transition；
+- 医学影像的 same-case Input/GT/Prediction/Error、ROI、TP/FP/FN，以及 036 process pages、035 model、结果/失败页、CUHK identity、gold retrieval、dual identity、一次 repair budget 全部冻结保护；
+- shared/plugin parity、targeted/full tests 与真实 GitHub CI 必须通过；像素改变后必须等待 task-local fresh Terra，至少 `slide_7_medical_image_comparison` 与 `deck_contact_sheet` 均 item-level `PASS`，且其他主要页无新的 blocker。
 
-036 不运行 Stage 5 holdout、不扩 corpus、不重写 deck-quality-loop 状态机。其停止条件是：两类 process-page projection mechanism 经 bounded regression 成立，当前 slides 4 / 6 与 contact sheet 获得 fresh item-level PASS，真实 CI 闭合且冻结能力无回归。
+037 不运行 Stage 5 holdout、不扩 corpus、不重写 storyline grouping 或 deck-quality-loop 状态机。停止条件是：通用 audience-facing transition mechanism 经 bounded regression 成立、真实 CI 闭合、当前医学页与 contact sheet 获得 identity-matched fresh item-level PASS 且冻结能力无回归。
 
-036 独立 PASS 后，Planner 才可重新判断 Stage 4 是否整体首次 PASS。若 Stage 4 整体 PASS，应发送一次 Stage 4 旁路 notifier，并随后创建 Stage 5 的真实双-paper holdout bounded task；不得跳过 Stage 5 最终用户人工门。
+037 独立 PASS 后，Planner 才重新判断 Stage 4 是否首次整体 PASS。只有 Stage 4 整体首次 PASS 后才发送一次 Stage 4 旁路 notifier，并创建 Stage 5 的真实双-paper holdout bounded task；不得跳过最终用户人工门。
 
 ## Standing workflow decisions
 
