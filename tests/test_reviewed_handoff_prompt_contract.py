@@ -9,6 +9,20 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class ReviewedHandoffPromptContractTests(unittest.TestCase):
+    def test_scheduled_reviewer_requires_plan_frozen_preflight(self) -> None:
+        prompt = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(encoding="utf-8")
+
+        self.assertIn("automation/reviewed_handoff/templates/PLAN.md", prompt)
+        self.assertIn("重新读取刚写出的 `PLAN.md`", prompt)
+        self.assertIn("frontmatter 与全部 required sections", prompt)
+        self.assertIn("`## Frozen decisions`", prompt)
+        self.assertIn("`## Implementation scope`", prompt)
+        self.assertIn("`## Acceptance and regression gates`", prompt)
+        self.assertIn("`## Out of scope`", prompt)
+        self.assertIn("只有 PLAN preflight PASS 后，才允许最后写 `CURRENT.json`", prompt)
+        self.assertIn("CURRENT.state=PLAN_FROZEN", prompt)
+        self.assertIn("不得 freeze", prompt)
+
     def test_scheduled_reviewer_requires_final_report_preflight(self) -> None:
         prompt = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(encoding="utf-8")
         template = (ROOT / "automation/reviewed_handoff/templates/FINAL_REPORT.md").read_text(encoding="utf-8")

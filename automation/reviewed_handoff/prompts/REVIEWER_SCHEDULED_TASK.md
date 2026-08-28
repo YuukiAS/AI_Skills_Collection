@@ -23,6 +23,15 @@ Scheduled GPT 的真实执行面是 GitHub connector，不是目标机器 shell�
 3. 最后写 `automation/reviewed_handoff/tasks/<task_key>/CURRENT.json`；
 4. 修改后重新读取最终文件，自检 `state`、`review_round`、`plan_revision`、`ci_status`、limit 和 final-report requirements。
 
+任何准备把 `CURRENT.state` 写为 `PLAN_FROZEN` 的 transaction，都必须先做 PLAN preflight：
+
+1. 重新读取当前 `automation/reviewed_handoff/templates/PLAN.md`，以运行时当前 template 为 source of truth，不允许凭记忆猜 headings；
+2. 写或更新当前 task 的 `PLAN.md`；
+3. 重新读取刚写出的 `PLAN.md`；
+4. 以当前 template 为 source of truth，精确检查 frontmatter 与全部 required sections，至少包括 `## Frozen decisions`、`## Implementation scope`、`## Acceptance and regression gates` 和 `## Out of scope`；
+5. 只有 PLAN preflight PASS 后，才允许最后写 `CURRENT.json` 的 `CURRENT.state=PLAN_FROZEN`；
+6. 若 PLAN 不合法，不得 freeze，不得写 `CURRENT=PLAN_FROZEN`，也不得依赖后续 repository validator 才发现。
+
 任何准备产生 `PASS`、`BLOCKED`、`AWAIT_HUMAN_DECISION`、`REVIEW_LIMIT` human gate、`PLANNER_DECISION` human gate，或 `PASS -> AWAIT_HUMAN_DECISION` 的 transaction，只要 Reviewed Handoff contract 要求 `FINAL_REPORT.md`，都必须先做 FINAL_REPORT preflight：
 
 1. 重新读取 `automation/reviewed_handoff/templates/FINAL_REPORT.md`，以运行时当前 template 为 source of truth，不允许凭记忆猜 headings；

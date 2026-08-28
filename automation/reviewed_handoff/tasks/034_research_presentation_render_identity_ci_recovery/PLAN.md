@@ -6,13 +6,15 @@ decision: PLAN_FROZEN
 
 # 034 Research Presentation Render Identity CI Recovery — Plan
 
-## Objective and value
+## Frozen decisions
+
+### Objective and value
 
 只关闭 033 Review 2 已明确定位的两个 clean-CI identity blocker，使同一 normal production path 在“真实像素可渲染”和“CI 环境缺少系统级渲染能力”两种情况下都拥有一致、可审计的 evidence semantics。
 
 本 recovery 不重新设计 deck quality loop，也不降低 033 冻结的 mature-quality / Terra / source-fidelity bar。完成后应能回到 033 尚未真正进行的 deck/contact-sheet 视觉质量审核，而不是把 CI compatibility 本身当成 Stage 4 PASS。
 
-## Preserved decisions
+### Preserved decisions
 
 以下 033 已有能力全部冻结保护：
 
@@ -28,7 +30,9 @@ decision: PLAN_FROZEN
 
 不得修改 Stage 2/3 mature bar，不得增加第二次 automatic repair，不得运行 Stage 5 holdout。
 
-## Recovery mechanism — dual evidence identity, not validator relaxation
+## Implementation scope
+
+### Recovery mechanism — dual evidence identity, not validator relaxation
 
 033 Review 1 已尝试只放宽 no-render validator 条件，但第二轮 CI 证明这种逐项补条件会遗漏 identity semantics。本 recovery 必须改用一个新的、有限机制：明确区分 **render-input identity** 与 **rendered-pixel identity**。
 
@@ -82,11 +86,11 @@ render unavailable 时：
 
 禁止仅删除断言让测试通过。每个被放宽的 pixel-only assertion 都必须由对应的 unavailable-state + always-present render-input identity assertion替代。
 
-## Production / plugin parity
+### Production / plugin parity
 
 如果 shared presentation scripts 同步镜像到 `plugins/codex/plugins/presentations/...`，相关 generator / validator / quality-loop changes 必须保持 parity，现有 parity regression 继续通过。不得只修 skill source 而留下 marketplace copy 漂移。
 
-## Fresh evidence requirements
+### Fresh evidence requirements
 
 Executor 完成后必须重新生成当前 Stage 4 engineering bundle 的 normal production artifacts，并记录：
 
@@ -98,7 +102,7 @@ Executor 完成后必须重新生成当前 Stage 4 engineering bundle 的 normal
 
 不得复用 033 当前缺失的 Terra evidence。真实 GitHub CI 通过后，按现有 task-local Visual Review contract等待 fresh `VISUAL_REVIEW.json`；缺 evidence 时不消耗 review round。
 
-## Acceptance gates
+## Acceptance and regression gates
 
 Planner 只有在以下全部成立时才可 PASS 034：
 
@@ -112,6 +116,19 @@ Planner 只有在以下全部成立时才可 PASS 034：
 8. 真实 GitHub `Codex Marketplace` CI 通过；
 9. fresh task-local Visual Review evidence 与当前 implementation/render/contact-sheet identity 一致，并对 deck/contact-sheet 给出 item-level judgement；top-level workflow success 不能替代 evidence；
 10. source fidelity、032 storyline、gold/layout、CUHK identity、medical semantics 无 regression。
+
+## Out of scope
+
+034 不得：
+
+- 重新设计 deck quality loop；
+- 降低 mature-quality、Terra 或 source-fidelity bar；
+- 增加第二次 automatic repair；
+- 扩展 Stage 2 或 Stage 3 mature layout scope；
+- 运行 Stage 5 holdout；
+- 把 CI compatibility 本身当成 Stage 4 PASS；
+- 伪造 pixel identity、PNG SHA 或 contact-sheet SHA；
+- 新造 Reviewed Handoff 状态机、role、receipt 或 hash graph。
 
 ## Stop condition
 
