@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "032_research_presentation_storyline_coherence_recovery",
-  "state": "PASS",
+  "state": "AWAIT_HUMAN_DECISION",
   "review_round": 2,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -13,9 +13,9 @@
   "ci_status": "PASS",
   "last_review_decision": "PASS",
   "review_limit_reached": false,
-  "human_gate_reason": null,
+  "human_gate_reason": "PASS",
   "visual_review_required": true,
   "visual_review_manifest_path": "results/032_research_presentation_storyline_coherence_recovery/visual_review/visual_inputs.json",
   "visual_review_evidence_path": "results/032_research_presentation_storyline_coherence_recovery/visual_review/VISUAL_REVIEW.json",
-  "next_action": "FINALIZE_PASS"
+  "next_action": "NONE"
 }
