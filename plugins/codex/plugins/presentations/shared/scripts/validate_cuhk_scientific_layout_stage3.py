@@ -218,8 +218,9 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False, task_key: str
                         errors.append(f"{layouts_path}: medical ROI zoom asset missing {zoom_asset}")
                     if record.get("same_case_coordinate_space") is not True:
                         errors.append(f"{layouts_path}: medical ROI crop not marked same-case coordinate space")
-        if page_job in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"} and bbox.get("w", 0) * bbox.get("h", 0) < 0.36:
-            errors.append(f"{layouts_path}: scientific diagram region below specificity floor for {layout.get('page_id')}")
+        if page_job in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"}:
+            if bbox.get("w", 0) < 0.87 or bbox.get("h", 0) < 0.55 or bbox.get("w", 0) * bbox.get("h", 0) < 0.49:
+                errors.append(f"{layouts_path}: scientific diagram region below projection-scale floor for {layout.get('page_id')}")
         if page_job == "EXPERIMENT_DESIGN":
             if family != "typed_experiment_design_hierarchy":
                 errors.append(f"{layouts_path}: experiment design did not use typed hierarchy family")

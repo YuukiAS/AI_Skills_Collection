@@ -597,7 +597,12 @@ class PresentationSharedTests(unittest.TestCase):
                         self.assertTrue((generated / "cuhk_stage3_build" / record["display_asset"]).exists())
                         self.assertTrue((generated / "cuhk_stage3_build" / record["zoom_asset"]).exists())
                 if layout["page_job"] in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"}:
-                    self.assertGreaterEqual(bbox["w"] * bbox["h"], 0.36)
+                    self.assertGreaterEqual(bbox["w"], 0.87)
+                    self.assertGreaterEqual(bbox["h"], 0.55)
+                    self.assertGreaterEqual(bbox["w"] * bbox["h"], 0.49)
+                    support = layout["resolved_supporting_object_geometry"]["annotation"]
+                    self.assertGreaterEqual(support["w"], 0.87)
+                    self.assertGreaterEqual(support["y"], bbox["y"] + bbox["h"])
                 if layout["page_job"] == "EXPERIMENT_DESIGN":
                     self.assertEqual(layout["executable_layout_family"], "typed_experiment_design_hierarchy")
                     self.assertEqual(layout["job_specific_runtime_contract"]["primitive"], "typed_scientific_hierarchy_relation_map")
@@ -661,7 +666,14 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertIn("Same-case ROI zoom", tex)
             self.assertIn("Overlay legend", tex)
             self.assertIn("Decision rule", tex)
-            self.assertIn(r"\StageThreeConnector{0.7546}{0.4636}{0.7751}{0.4636};", tex)
+            process_tex = "\n".join(
+                stage3.emit_flow(spec, stage3.resolve_layout(spec))
+                for spec in stage3.page_specs()
+                if spec["page_job"] in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"}
+            )
+            self.assertNotIn(r"\tiny", process_tex)
+            self.assertNotIn(r"\scriptsize", process_tex)
+            self.assertIn(r"\footnotesize", process_tex)
             self.assertNotIn("Error zoom:", tex)
             for forbidden in ["RRL-", "SRC-", "GSC-", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "run ID", "fixture", "workflow"]:
                 self.assertNotIn(forbidden, tex)
@@ -691,6 +703,77 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertNotEqual(strict.returncode, 0)
                 self.assertIn(manifest["render_status"]["status"], strict.stderr + strict.stdout)
                 self.assertNotEqual(manifest["mechanical_qa"]["status"], "MECHANICAL_PASS")
+
+    def test_process_page_projection_scale_is_page_job_generic(self) -> None:
+        experiment_spec = {
+            "page_id": "agnostic_design_map",
+            "page_job": "EXPERIMENT_DESIGN",
+            "section": "Design",
+            "title": "Acquisition design links perturbations to endpoint checks",
+            "query": {
+                "page_function": "EXPERIMENT_DESIGN",
+                "scientific_object": "acquisition design perturbation procedure endpoint hierarchy",
+                "domain_family": "method_evaluation",
+                "dominant_object_type": "diagram",
+                "evidence_type": "experiment design",
+                "density": "moderate",
+                "panel_count": 4,
+            },
+            "content_kind": "flow",
+            "dominant_object": "scientific_relation_diagram",
+            "nodes": ["Input factors", "Nested samples", "Procedures", "Endpoint checks"],
+            "design_factors": ["site count", "measurement noise", "held-out calibration"],
+            "procedures": ["baseline estimator", "regularized estimator"],
+            "endpoints": ["coverage floor", "width budget", "bias check"],
+            "annotation": "Perturbations feed nested samples before procedures and endpoint checks.",
+            "required_panel_count": 4,
+        }
+        next_spec = {
+            "page_id": "agnostic_next_decision",
+            "page_job": "NEXT_EXPERIMENT",
+            "section": "Next",
+            "title": "Next acquisition tests whether design choices reduce failure",
+            "query": {
+                "page_function": "NEXT_EXPERIMENT",
+                "scientific_object": "next experiment evidence manipulation comparator decision",
+                "domain_family": "method_evaluation",
+                "dominant_object_type": "diagram plot comparison",
+                "evidence_type": "next-query experimental design",
+                "density": "moderate",
+                "panel_count": 4,
+            },
+            "content_kind": "next_experiment",
+            "dominant_object": "next_experiment_reasoning",
+            "nodes": ["Failure case", "Sampling choice", "Comparator", "Decision"],
+            "current_limit": "The current acquisition leaves one endpoint unstable under shift.",
+            "strategy_variation": ["diverse batch", "uncertainty batch", "stratified batch"],
+            "comparator_setup": ["small-sample correction", "resampling baseline"],
+            "decision_criterion": "Go if the unstable endpoint clears the prespecified floor.",
+            "annotation": "Failure evidence determines the next manipulation and comparator choice.",
+            "required_panel_count": 4,
+        }
+        for spec in [experiment_spec, next_spec]:
+            layout = stage3.resolve_layout(spec)
+            bbox = layout["resolved_primary_object_geometry"]
+            safe = layout["exact_cuhk_content_safe_region"]
+            self.assertEqual(bbox["x"], safe["x"])
+            self.assertGreaterEqual(bbox["w"], 0.87)
+            self.assertGreaterEqual(bbox["h"], 0.55)
+            self.assertGreaterEqual(bbox["w"] * bbox["h"], 0.49)
+            tex = stage3.emit_flow(spec, layout)
+            self.assertNotIn(r"\tiny", tex)
+            self.assertNotIn(r"\scriptsize", tex)
+            self.assertIn(r"\footnotesize", tex)
+            for x1, x2 in re.findall(r"\\StageThreeConnector\{([0-9.]+)\}\{[0-9.]+\}\{([0-9.]+)\}\{[0-9.]+\};", tex):
+                self.assertGreater(float(x2), float(x1))
+        experiment_tex = stage3.emit_flow(experiment_spec, stage3.resolve_layout(experiment_spec))
+        self.assertIn("site count", experiment_tex)
+        self.assertIn("regularized estimator", experiment_tex)
+        self.assertIn("bias check", experiment_tex)
+        next_tex = stage3.emit_flow(next_spec, stage3.resolve_layout(next_spec))
+        self.assertIn("unstable endpoint", next_tex)
+        self.assertIn("stratified batch", next_tex)
+        self.assertIn("resampling baseline", next_tex)
 
     def test_research_presentation_one_call_production_entry(self) -> None:
         generator = SHARED / "scripts/generate_research_presentation_production_entry.py"

@@ -101,6 +101,15 @@ def clamp(value: float, lower: float, upper: float) -> float:
     return max(lower, min(upper, value))
 
 
+def spread_positions(top: float, bottom: float, count: int) -> list[float]:
+    if count <= 0:
+        return []
+    if count == 1:
+        return [round((top + bottom) / 2, 4)]
+    step = (bottom - top) / (count - 1)
+    return [round(top + index * step, 4) for index in range(count)]
+
+
 def fit_bbox(source_bbox: dict[str, float], capacity: dict[str, Any]) -> tuple[dict[str, float], list[str]]:
     """Map a source-normalized bbox into the CUHK safe content region."""
 
@@ -132,8 +141,8 @@ def expand_bbox_for_content(primary: dict[str, float], content_kind: str, transf
         "figure": (0.78, 0.42),
         "result_figure": (0.82, 0.46),
         "image_panel": (0.86, 0.50),
-        "flow": (0.80, 0.42),
-        "next_experiment": (0.80, 0.42),
+        "flow": (0.86, 0.52),
+        "next_experiment": (0.86, 0.52),
     }
     min_w, min_h = floors.get(content_kind, (primary["w"], primary["h"]))
     safe = SAFE_REGION
@@ -174,11 +183,11 @@ def job_primary_geometry(spec: dict[str, Any], primary: dict[str, float], transf
         target = {"w": safe["w"], "h": 0.58, "x": safe["x"], "y": 0.235}
         transforms.append("four-panel medical comparison receives full-width projection-scale image band")
     elif page_job == "EXPERIMENT_DESIGN":
-        target = {"w": 0.86, "h": 0.49, "x": 0.07, "y": 0.270}
-        transforms.append("experiment design uses a scientific-factor diagram region")
+        target = {"w": safe["w"], "h": 0.595, "x": safe["x"], "y": 0.205}
+        transforms.append("experiment design uses full-width projection-scale scientific-factor diagram region")
     elif page_job == "NEXT_EXPERIMENT":
-        target = {"w": 0.82, "h": 0.49, "x": 0.09, "y": 0.270}
-        transforms.append("next-experiment reasoning uses a decision-and-comparator diagram region")
+        target = {"w": safe["w"], "h": 0.595, "x": safe["x"], "y": 0.205}
+        transforms.append("next-experiment reasoning uses full-width projection-scale decision-and-comparator diagram region")
     else:
         return primary
     target.setdefault("x", primary["x"] + primary["w"] / 2 - target["w"] / 2)
@@ -235,9 +244,10 @@ def support_geometry(spec: dict[str, Any], primary: dict[str, float]) -> dict[st
             "caption": {"x": safe["x"], "y": 0.832, "w": safe["w"], "h": 0.024},
         }
     if page_job in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"}:
+        y = min(primary["y"] + primary["h"] + 0.012, safe["y"] + safe["h"] - 0.043)
         return {
-            "annotation": {"x": primary["x"], "y": 0.795, "w": primary["w"], "h": 0.060},
-            "caption": {"x": primary["x"], "y": 0.795, "w": primary["w"], "h": 0.060},
+            "annotation": {"x": safe["x"], "y": round(y, 4), "w": safe["w"], "h": 0.043},
+            "caption": {"x": safe["x"], "y": round(y, 4), "w": safe["w"], "h": 0.043},
         }
     annotation = annotation_bbox(primary)
     caption = {key: round(value, 4) for key, value in support_bbox(primary, "below").items()}
@@ -967,58 +977,56 @@ def emit_experiment_design(spec: dict[str, Any], layout: dict[str, Any]) -> str:
     y = primary["y"]
     w = primary["w"]
     h = primary["h"]
-    factor_x = x + 0.020
-    hierarchy_x = x + w * 0.315
-    proc_x = x + w * 0.575
-    endpoint_x = x + w * 0.785
-    top = y + 0.030
-    center_y = y + h * 0.430
+    factor_x = x + w * 0.018
+    factor_w = w * 0.245
+    hierarchy_x = x + w * 0.318
+    proc_x = x + w * 0.540
+    endpoint_x = x + w * 0.748
+    top = y + 0.020
+    center_y = y + h * 0.470
     parts = [
-        tex_node(factor_x, top, 0.205, r"\footnotesize\textbf{DGP stress grid}", align="left"),
-        tex_node(hierarchy_x - 0.018, top, 0.205, r"\footnotesize\textbf{Center hierarchy}", align="center"),
-        tex_node(proc_x - 0.018, top, 0.195, r"\footnotesize\textbf{Interval procedures}", align="center"),
-        tex_node(endpoint_x - 0.006, top, 0.170, r"\footnotesize\textbf{Endpoints}", align="center"),
+        tex_node(factor_x, top, factor_w, r"\small\textbf{DGP stress grid}", align="left"),
+        tex_node(hierarchy_x - 0.040, top, 0.200, r"\small\textbf{Center hierarchy}", align="center"),
+        tex_node(proc_x - 0.022, top, 0.185, r"\small\textbf{Interval procedures}", align="center"),
+        tex_node(endpoint_x - 0.010, top, 0.175, r"\small\textbf{Endpoints}", align="center"),
     ]
-    for idx, factor in enumerate(spec["design_factors"]):
-        fy = y + 0.112 + idx * 0.078
+    factor_rows = spread_positions(y + h * 0.185, y + h * 0.560, len(spec["design_factors"]))
+    for factor, fy in zip(spec["design_factors"], factor_rows):
         parts.extend(
             [
-                rf"\fill[fill=maincolor!75] ({factor_x:.4f},{fy+0.006:.4f}) circle (2.1pt);",
-                tex_node(factor_x + 0.015, fy - 0.004, 0.205, rf"\scriptsize {factor}", align="left"),
+                rf"\fill[fill=maincolor!75] ({factor_x:.4f},{fy+0.007:.4f}) circle (2.7pt);",
+                tex_node(factor_x + 0.018, fy - 0.007, factor_w - 0.018, rf"\footnotesize {factor}", align="left"),
             ]
         )
     parts.extend(
         [
-            rf"\draw[line width=0.8pt,draw=maincolor!60] ({hierarchy_x+0.042:.4f},{center_y-0.088:.4f}) ellipse (0.056 and 0.076);",
-            rf"\draw[line width=0.8pt,draw=maincolor!60] ({hierarchy_x+0.042:.4f},{center_y+0.086:.4f}) ellipse (0.056 and 0.076);",
-            tex_node(hierarchy_x - 0.026, center_y + 0.170, 0.160, r"\scriptsize Subject records nested inside each center; 400 reps per cell", align="center"),
+            rf"\draw[line width=1.0pt,draw=maincolor!60] ({hierarchy_x+0.048:.4f},{center_y-0.094:.4f}) ellipse (0.068 and 0.090);",
+            rf"\draw[line width=1.0pt,draw=maincolor!60] ({hierarchy_x+0.048:.4f},{center_y+0.094:.4f}) ellipse (0.068 and 0.090);",
+            tex_node(hierarchy_x - 0.038, center_y + 0.205, 0.185, r"\footnotesize Subject records nested inside each center; 400 reps per cell", align="center"),
         ]
     )
-    for base_y in [center_y - 0.088, center_y + 0.086]:
-        for offset in [-0.024, 0.0, 0.024]:
-            parts.append(rf"\fill[fill=teal!70!black] ({hierarchy_x+0.042+offset:.4f},{base_y+0.021:.4f}) circle (1.6pt);")
-            parts.append(rf"\fill[fill=red!70!black] ({hierarchy_x+0.042+offset:.4f},{base_y-0.020:.4f}) circle (1.6pt);")
-    for idx, procedure in enumerate(spec["procedures"]):
-        py = y + 0.145 + idx * 0.140
-        parts.append(rf"\draw[line width=0.9pt,draw=maincolor!75] ({proc_x:.4f},{py:.4f}) -- ({proc_x+0.148:.4f},{py:.4f});")
-        parts.append(rf"\fill[fill=white,draw=maincolor!75,line width=0.8pt] ({proc_x+0.074:.4f},{py:.4f}) circle (8.0pt);")
-        parts.append(tex_node(proc_x + 0.006, py + 0.020, 0.142, rf"\scriptsize {tex_escape(procedure)}", align="center"))
-    for idx, endpoint in enumerate(spec["endpoints"]):
-        ey = y + 0.118 + idx * 0.087
-        parts.append(rf"\draw[line width=1.1pt,draw=orange!80!black] ({endpoint_x:.4f},{ey:.4f}) -- ({endpoint_x+0.030:.4f},{ey:.4f});")
-        parts.append(rf"\draw[line width=0.55pt,draw=black!50] ({endpoint_x:.4f},{ey-0.012:.4f}) -- ({endpoint_x:.4f},{ey+0.012:.4f});")
-        parts.append(tex_node(endpoint_x + 0.036, ey - 0.020, 0.172, rf"\tiny {tex_escape(endpoint)}", align="left"))
+    for base_y in [center_y - 0.094, center_y + 0.094]:
+        for offset in [-0.029, 0.0, 0.029]:
+            parts.append(rf"\fill[fill=teal!70!black] ({hierarchy_x+0.048+offset:.4f},{base_y+0.024:.4f}) circle (2.0pt);")
+            parts.append(rf"\fill[fill=red!70!black] ({hierarchy_x+0.048+offset:.4f},{base_y-0.024:.4f}) circle (2.0pt);")
+    procedure_rows = spread_positions(y + h * 0.245, y + h * 0.510, len(spec["procedures"]))
+    for procedure, py in zip(spec["procedures"], procedure_rows):
+        parts.append(rf"\draw[line width=1.15pt,draw=maincolor!75] ({proc_x:.4f},{py:.4f}) -- ({proc_x+0.160:.4f},{py:.4f});")
+        parts.append(rf"\fill[fill=white,draw=maincolor!75,line width=1.0pt] ({proc_x+0.080:.4f},{py:.4f}) circle (9.6pt);")
+        parts.append(tex_node(proc_x - 0.006, py + 0.026, 0.172, rf"\footnotesize {tex_escape(procedure)}", align="center"))
+    endpoint_rows = spread_positions(y + h * 0.190, y + h * 0.565, len(spec["endpoints"]))
+    for endpoint, ey in zip(spec["endpoints"], endpoint_rows):
+        parts.append(rf"\draw[line width=1.35pt,draw=orange!80!black] ({endpoint_x:.4f},{ey:.4f}) -- ({endpoint_x+0.035:.4f},{ey:.4f});")
+        parts.append(rf"\draw[line width=0.70pt,draw=black!50] ({endpoint_x:.4f},{ey-0.015:.4f}) -- ({endpoint_x:.4f},{ey+0.015:.4f});")
+        parts.append(tex_node(endpoint_x + 0.043, ey - 0.026, 0.170, rf"\footnotesize {tex_escape(endpoint)}", align="left"))
     mid_y = center_y
     parts.extend([
-        rf"\StageThreeConnector{{{factor_x+0.220:.4f}}}{{{mid_y:.4f}}}{{{hierarchy_x-0.004:.4f}}}{{{mid_y:.4f}}};",
-        tex_node(factor_x + 0.224, mid_y + 0.018, 0.078, r"\scriptsize generates", align="center"),
-        rf"\StageThreeConnector{{{hierarchy_x+0.185:.4f}}}{{{mid_y:.4f}}}{{{proc_x-0.018:.4f}}}{{{mid_y:.4f}}};",
-        tex_node(hierarchy_x + 0.150, mid_y + 0.018, 0.082, r"\scriptsize estimates", align="center"),
-        rf"\StageThreeConnector{{{proc_x+0.145:.4f}}}{{{mid_y:.4f}}}{{{endpoint_x-0.010:.4f}}}{{{mid_y:.4f}}};",
-        tex_node(proc_x + 0.148, mid_y + 0.018, 0.082, r"\scriptsize evaluates", align="center"),
+        rf"\StageThreeConnector{{{factor_x+factor_w+0.010:.4f}}}{{{mid_y:.4f}}}{{{hierarchy_x-0.014:.4f}}}{{{mid_y:.4f}}};",
+        rf"\StageThreeConnector{{{hierarchy_x+0.135:.4f}}}{{{mid_y:.4f}}}{{{proc_x-0.020:.4f}}}{{{mid_y:.4f}}};",
+        rf"\StageThreeConnector{{{proc_x+0.162:.4f}}}{{{mid_y:.4f}}}{{{endpoint_x-0.012:.4f}}}{{{mid_y:.4f}}};",
     ])
     annotation = layout["resolved_supporting_object_geometry"]["annotation"]
-    parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}", align="left"))
+    parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\small {tex_escape(spec['annotation'])}", align="left"))
     return "\n".join(parts)
 
 
@@ -1028,47 +1036,47 @@ def emit_next_experiment(spec: dict[str, Any], layout: dict[str, Any]) -> str:
     y = primary["y"]
     w = primary["w"]
     h = primary["h"]
-    evidence_x = x + 0.015
-    strategy_x = x + w * 0.295
-    comparator_x = x + w * 0.630
-    decision_x = x + w * 0.855
-    mid_y = y + h * 0.395
+    evidence_x = x + w * 0.016
+    strategy_x = x + w * 0.300
+    comparator_x = x + w * 0.605
+    decision_x = x + w * 0.792
+    mid_y = y + h * 0.460
     parts = [
-        tex_node(evidence_x, y + 0.020, 0.210, r"\footnotesize\textbf{Failure evidence}", align="left"),
-        tex_node(evidence_x, y + 0.085, 0.218, rf"\scriptsize {tex_escape(spec['current_limit'])}", align="left"),
-        rf"\draw[line width=1.1pt,draw=red!70!black] ({evidence_x:.4f},{mid_y+0.055:.4f}) -- ({evidence_x+0.180:.4f},{mid_y+0.055:.4f});",
-        rf"\draw[line width=1.1pt,draw=orange!80!black] ({evidence_x:.4f},{mid_y+0.018:.4f}) -- ({evidence_x+0.180:.4f},{mid_y+0.018:.4f});",
-        rf"\draw[line width=1.1pt,draw=teal!70!black] ({evidence_x:.4f},{mid_y-0.018:.4f}) -- ({evidence_x+0.180:.4f},{mid_y-0.018:.4f});",
-        tex_node(evidence_x + 0.010, mid_y + 0.073, 0.185, r"\scriptsize coverage shortfall at high ICC", align="left"),
-        tex_node(strategy_x, y + 0.020, 0.210, r"\footnotesize\textbf{Manipulate sampling}", align="center"),
+        tex_node(evidence_x, y + 0.020, 0.230, r"\small\textbf{Failure evidence}", align="left"),
+        tex_node(evidence_x, y + 0.082, 0.238, rf"\footnotesize {tex_escape(spec['current_limit'])}", align="left"),
+        rf"\draw[line width=1.35pt,draw=red!70!black] ({evidence_x:.4f},{mid_y+0.064:.4f}) -- ({evidence_x+0.198:.4f},{mid_y+0.064:.4f});",
+        rf"\draw[line width=1.35pt,draw=orange!80!black] ({evidence_x:.4f},{mid_y+0.021:.4f}) -- ({evidence_x+0.198:.4f},{mid_y+0.021:.4f});",
+        rf"\draw[line width=1.35pt,draw=teal!70!black] ({evidence_x:.4f},{mid_y-0.021:.4f}) -- ({evidence_x+0.198:.4f},{mid_y-0.021:.4f});",
+        tex_node(evidence_x + 0.010, mid_y + 0.088, 0.210, r"\footnotesize coverage shortfall at high ICC", align="left"),
+        tex_node(strategy_x, y + 0.020, 0.230, r"\small\textbf{Manipulate sampling}", align="center"),
     ]
-    for idx, strategy in enumerate(spec["strategy_variation"]):
-        sy = y + 0.110 + idx * 0.076
-        parts.append(rf"\draw[line width=0.9pt,draw=maincolor!70] ({strategy_x:.4f},{mid_y:.4f}) -- ({strategy_x+0.080:.4f},{sy+0.010:.4f});")
-        parts.append(rf"\fill[fill=white,draw=maincolor!70,line width=0.85pt] ({strategy_x+0.102:.4f},{sy+0.010:.4f}) circle (7.0pt);")
-        parts.append(tex_node(strategy_x + 0.122, sy - 0.008, 0.128, rf"\scriptsize {tex_escape(strategy)}", align="left"))
-    parts.append(tex_node(comparator_x, y + 0.020, 0.180, r"\footnotesize\textbf{Comparator arms}", align="center"))
-    for idx, comparator in enumerate(spec["comparator_setup"]):
-        cy = y + 0.148 + idx * 0.112
-        parts.append(rf"\draw[line width=0.9pt,draw=teal!65!black] ({comparator_x:.4f},{mid_y:.4f}) -- ({comparator_x+0.060:.4f},{cy:.4f});")
-        parts.append(rf"\draw[line width=1.1pt,draw=teal!65!black] ({comparator_x+0.060:.4f},{cy:.4f}) -- ({comparator_x+0.182:.4f},{cy:.4f});")
-        parts.append(tex_node(comparator_x + 0.066, cy + 0.010, 0.116, rf"\scriptsize {tex_escape(comparator)}", align="center"))
+    strategy_rows = spread_positions(y + h * 0.205, y + h * 0.575, len(spec["strategy_variation"]))
+    for strategy, sy in zip(spec["strategy_variation"], strategy_rows):
+        parts.append(rf"\draw[line width=1.05pt,draw=maincolor!70] ({strategy_x:.4f},{mid_y:.4f}) -- ({strategy_x+0.082:.4f},{sy+0.012:.4f});")
+        parts.append(rf"\fill[fill=white,draw=maincolor!70,line width=1.0pt] ({strategy_x+0.104:.4f},{sy+0.012:.4f}) circle (8.8pt);")
+        parts.append(tex_node(strategy_x + 0.128, sy - 0.010, 0.142, rf"\footnotesize {tex_escape(strategy)}", align="left"))
+    parts.append(tex_node(comparator_x, y + 0.020, 0.188, r"\small\textbf{Comparator arms}", align="center"))
+    comparator_rows = spread_positions(y + h * 0.300, y + h * 0.535, len(spec["comparator_setup"]))
+    for comparator, cy in zip(spec["comparator_setup"], comparator_rows):
+        parts.append(rf"\draw[line width=1.05pt,draw=teal!65!black] ({comparator_x:.4f},{mid_y:.4f}) -- ({comparator_x+0.060:.4f},{cy:.4f});")
+        parts.append(rf"\draw[line width=1.35pt,draw=teal!65!black] ({comparator_x+0.060:.4f},{cy:.4f}) -- ({comparator_x+0.180:.4f},{cy:.4f});")
+        parts.append(tex_node(comparator_x + 0.056, cy + 0.012, 0.145, rf"\footnotesize {tex_escape(comparator)}", align="center"))
     parts.extend(
         [
-            tex_node(decision_x - 0.005, y + 0.020, 0.150, r"\footnotesize\textbf{Decision rule}", align="center"),
-            rf"\draw[line width=0.9pt,draw=orange!85!black] ({decision_x+0.070:.4f},{mid_y-0.070:.4f}) -- ({decision_x+0.140:.4f},{mid_y:.4f}) -- ({decision_x+0.070:.4f},{mid_y+0.070:.4f}) -- ({decision_x:.4f},{mid_y:.4f}) -- cycle;",
-            tex_node(decision_x + 0.018, mid_y - 0.018, 0.104, r"\scriptsize go/no-go", align="center"),
-            tex_node(decision_x - 0.002, mid_y + 0.090, 0.148, rf"\scriptsize {tex_escape(spec['decision_criterion'])}", align="left"),
+            tex_node(decision_x - 0.005, y + 0.020, 0.170, r"\small\textbf{Decision rule}", align="center"),
+            rf"\draw[line width=1.1pt,draw=orange!85!black] ({decision_x+0.075:.4f},{mid_y-0.080:.4f}) -- ({decision_x+0.150:.4f},{mid_y:.4f}) -- ({decision_x+0.075:.4f},{mid_y+0.080:.4f}) -- ({decision_x:.4f},{mid_y:.4f}) -- cycle;",
+            tex_node(decision_x + 0.020, mid_y - 0.020, 0.110, r"\footnotesize go/no-go", align="center"),
+            tex_node(decision_x - 0.002, mid_y + 0.108, 0.170, rf"\footnotesize {tex_escape(spec['decision_criterion'])}", align="left"),
         ]
     )
     parts.extend([
-        rf"\StageThreeConnector{{{evidence_x+0.198:.4f}}}{{{mid_y:.4f}}}{{{strategy_x-0.020:.4f}}}{{{mid_y:.4f}}};",
-        tex_node(evidence_x + 0.204, mid_y - 0.066, 0.075, r"\scriptsize motivates", align="center"),
-        rf"\StageThreeConnector{{{strategy_x+0.255:.4f}}}{{{mid_y:.4f}}}{{{comparator_x-0.016:.4f}}}{{{mid_y:.4f}}};",
-        rf"\StageThreeConnector{{{comparator_x+0.148:.4f}}}{{{mid_y:.4f}}}{{{decision_x-0.016:.4f}}}{{{mid_y:.4f}}};",
+        rf"\StageThreeConnector{{{evidence_x+0.218:.4f}}}{{{mid_y:.4f}}}{{{strategy_x-0.022:.4f}}}{{{mid_y:.4f}}};",
+        tex_node(evidence_x + 0.220, mid_y - 0.070, 0.075, r"\footnotesize motivates", align="center"),
+        rf"\StageThreeConnector{{{strategy_x+0.165:.4f}}}{{{mid_y:.4f}}}{{{comparator_x-0.018:.4f}}}{{{mid_y:.4f}}};",
+        rf"\StageThreeConnector{{{comparator_x+0.115:.4f}}}{{{mid_y:.4f}}}{{{decision_x-0.018:.4f}}}{{{mid_y:.4f}}};",
     ])
     annotation = layout["resolved_supporting_object_geometry"]["annotation"]
-    parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}", align="left"))
+    parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\small {tex_escape(spec['annotation'])}", align="left"))
     return "\n".join(parts)
 
 
