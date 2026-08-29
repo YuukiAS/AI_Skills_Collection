@@ -17,7 +17,7 @@
   },
   "identity_bindings": {
     "task_key": "038_research_presentation_two_real_paper_holdouts",
-    "implementation_commit": "1e376b51d703f42324f111b06b6bf4e2d062b8e6",
+    "implementation_commit": null,
     "base_commit": "9a38a5f3cfbb499e88d0f68efe080a47f71c6e5b",
     "decks": {
       "statistics": {
@@ -25,40 +25,40 @@
         "source_bundle_sha256": "32d1a9d1241ff8b4c77b6a98fe5b20b5b88ed04f3d60b0b10f9897304f15421b",
         "source_inventory": "results/038_research_presentation_two_real_paper_holdouts/statistics/source_inventory.json",
         "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/BUILD_MANIFEST.json",
-        "build_manifest_sha256": "2c99ff367ab8849ab6fe0d0b2ce0760ffe525e5f9bdb264c5492e6512733e76d",
+        "build_manifest_sha256": "48a0d2b8a124c6361211f6e1effe8230d8a94d4744ddaa494f3212f84b8c8d45",
         "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/source_fidelity_map.json",
         "source_fidelity_map_sha256": "31eca25f320bb07dfc221ecac3b3294041ca4618eb5a4abb1084699de13fc6a2",
         "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_sequence_summary.json",
         "deck_sequence_summary_sha256": "0dc6e15a1e3374712c183cac56f4517cb09d102916fcae7067f71a167450b15d",
         "quality_loop_state": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/quality_loop_state.json",
-        "quality_loop_state_sha256": "83d72bec7408ffa37bbb3dda645152c6f894451fb3818d8e679d3fc40480674c",
+        "quality_loop_state_sha256": "55ecd0130878a61f2c8bf6ade6b1cd182ff24de16ab1783d45270aff010eaeab",
         "deck_contact_sheet": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_contact_sheet.png",
         "deck_contact_sheet_sha256": "722ccd6b2ba90fde592692e18a6478a850eaeb0f8fe9eb9a5d8fb7f5751bbf76",
         "render_input_identity_sha256": "49faee5a773e73807b46b026b62c95cebdb9f5566de18dcc96e03fbfc02dacc7",
         "rendered_pixel_identity_sha256": "43b45471bbdf47f02232bab4be023356b7e325b33b3524c78318c63c302260c8",
-        "pdf_sha256": "7b592c2bd35621880fbec9b5a5a42fa15b622917e5ba00cbc0b74e90918f1d91",
+        "pdf_sha256": "8ff60c23d263fa15977fa96a4db8424707178fbc49597d72b84e5be36dac798a",
         "page_count": 5,
-        "quality_loop_status": "WAITING_FOR_DECK_VISUAL_REVIEW"
+        "quality_loop_status": "QUALITY_LOOP_FAIL_NO_WINNER"
       },
       "medical": {
         "source_bundle": "results/038_research_presentation_two_real_paper_holdouts/medical/source_bundle.json",
         "source_bundle_sha256": "fef82966184d4db938d4bfdd12101d289ebdca80bf246a3ed7c9fb72f42fa33b",
         "source_inventory": "results/038_research_presentation_two_real_paper_holdouts/medical/source_inventory.json",
         "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/BUILD_MANIFEST.json",
-        "build_manifest_sha256": "f60b39706e5709354d97e9b57ee697242534f9df81901791a764069421a231d9",
+        "build_manifest_sha256": "0bf4ae6e909046442db160d0988ace1cbe2762b3e700bb32a0a4f8d36719378e",
         "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/source_fidelity_map.json",
         "source_fidelity_map_sha256": "c780b0197246119320bdc3b9a862aed18633aad592cd2080d30ddb9646c29755",
         "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_sequence_summary.json",
         "deck_sequence_summary_sha256": "bc0ddb68ee1c3dc95dfa1fffca940488fd29bae9eafb18738c5053d2e14816ae",
         "quality_loop_state": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/quality_loop_state.json",
-        "quality_loop_state_sha256": "2e9dbd79174a8420e036080aaa646a15605a958a8add7053fd1c84b26d8166b1",
+        "quality_loop_state_sha256": "af70b1e86618268bbef14993e53378929cd4839c5bcdcfa031d5794250b5c0b2",
         "deck_contact_sheet": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_contact_sheet.png",
         "deck_contact_sheet_sha256": "5332d9f81e87882dc2df810e6eb5319049dc85631e8a1cfc0ef00ce451408ac4",
         "render_input_identity_sha256": "dafce2787c90bb12f542b3124c1556bdbf5bfe959fb1506bab47e2da4a3f9116",
         "rendered_pixel_identity_sha256": "21e4c10f254650e5bbc83b79295d0d219da82a03b7bef6d31637c307dd2e72bf",
-        "pdf_sha256": "45d854a8e1d870902c7ea93ca2cb4031a9fc5625f8d527dd21064be2d13fa36f",
+        "pdf_sha256": "975d8bd725c4228c8881fa89524b762399277c0dd93c941adb6456af0a2b3409",
         "page_count": 5,
-        "quality_loop_status": "WAITING_FOR_DECK_VISUAL_REVIEW"
+        "quality_loop_status": "QUALITY_LOOP_FAIL_NO_WINNER"
       }
     }
   },

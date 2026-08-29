@@ -1,0 +1,79 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "task_key": "038_research_presentation_two_real_paper_holdouts",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "038-statistics-quality-loop-review-adapter",
+  "source_visual_review": "results/038_research_presentation_two_real_paper_holdouts/visual_review/VISUAL_REVIEW_1ce506ed08d5_REVIEW_1_USED.json",
+  "source_evidence_id": "visual-review-038_research_presentation_two_real_paper_holdouts-1ce506ed08d5",
+  "source_review_identity": "1ce506ed08d5e97b8823e3c31afda48953ee4068f77d5d81f696ebdb41017e88",
+  "status": "BLOCKED",
+  "overall_decision": "BLOCKED",
+  "item_reviews": [
+    {
+      "item_id": "deck_contact_sheet",
+      "scope": "deck",
+      "decision": "BLOCKED",
+      "summary": "Statistics deck contact sheet is blocked below the mature doctoral group-meeting paper-talk bar.",
+      "observations": [
+        "Slides 3 and 5 are evidence-light because source figures/tables are tiny.",
+        "Slides 4 and 6 have visibly crowded lower/diagram regions.",
+        "One slide exposes internal fixture language."
+      ],
+      "requirement_ids": [
+        "DECK_RHYTHM_DENSITY_TRANSITION_TEMPLATE_REPEAT",
+        "MATURE_DOCTORAL_GROUP_MEETING_BAR",
+        "AUDIENCE_FACING_NO_WORKFLOW_PROVENANCE"
+      ]
+    }
+  ],
+  "blocking_findings": [
+    {
+      "finding_id": "BF-01",
+      "item_id": "statistics_slide_3_real_data_application",
+      "target_logical_ids": [
+        "slide_3_real_data_application"
+      ],
+      "requirement_id": "AUDIENCE_FACING_NO_WORKFLOW_PROVENANCE",
+      "severity": "blocking",
+      "summary": "Audience-facing slide exposes internal workflow language.",
+      "evidence": "Statistics slide 3 visibly states: \"rather than importing the Stage 4 clustered-calibration fixture.\"",
+      "recommendation": "Remove internal fixture/workflow language and replace it with an audience-facing explanation of the kidney example and its result."
+    },
+    {
+      "finding_id": "BF-02",
+      "item_id": "statistics_slide_4_experiment_design",
+      "target_logical_ids": [
+        "slide_4_experiment_design"
+      ],
+      "requirement_id": "READABLE_SCIENTIFIC_OBJECTS",
+      "severity": "blocking",
+      "summary": "Overlapping and clipped lower-page content makes the workflow evidence unreadable.",
+      "evidence": "Statistics slide 4 has overlapping text along the bottom: the figure/source line and the concluding sentence collide, and the centered figure caption is clipped at \"proc\".",
+      "recommendation": "Rebuild the lower layout with separate caption and takeaway regions; enlarge or recrop the workflow figure so its labels and caption are readable."
+    },
+    {
+      "finding_id": "BF-03",
+      "item_id": "statistics_slide_5_negative_result",
+      "target_logical_ids": [
+        "slide_5_negative_result"
+      ],
+      "requirement_id": "STATISTICS_PACKAGE_COMPARISON_AND_READABILITY",
+      "severity": "blocking",
+      "summary": "Required package-comparison evidence is visually unreadable.",
+      "evidence": "Statistics slide 5 presents the comparison table at a very small scale; its entries are not legible at slide-view size. The source line also runs into the right-hand interpretive text.",
+      "recommendation": "Use a simplified, enlarged comparison table or split the evidence across slides, and reserve non-overlapping space for the citation."
+    },
+    {
+      "finding_id": "BF-04",
+      "item_id": "statistics_slide_6_next_experiment",
+      "target_logical_ids": [
+        "slide_6_next_experiment"
+      ],
+      "requirement_id": "MATURE_DOCTORAL_GROUP_MEETING_BAR",
+      "severity": "blocking",
+      "summary": "The closing limitations/decision slide is materially compromised by text and diagram overlap.",
+      "evidence": "Statistics slide 6 has multiple collisions: \"worked kidney example\" crosses the comparator-arm shape, comparator labels overlap each other, and the decision-rule paragraph crowds the diamond and footer.",
+      "recommendation": "Redesign the final decision diagram with distinct columns, shorter labels, and a separate conclusion area."
+    }
+  ]
+}

@@ -16,16 +16,16 @@
   },
   "identity_bindings": {
     "task_key": "038_research_presentation_two_real_paper_holdouts",
-    "implementation_commit": "1e376b51d703f42324f111b06b6bf4e2d062b8e6",
+    "implementation_commit": null,
     "input_title": "brms Bayesian Multilevel Models Using Stan",
     "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/BUILD_MANIFEST.json",
-    "build_manifest_sha256": "2c99ff367ab8849ab6fe0d0b2ce0760ffe525e5f9bdb264c5492e6512733e76d",
+    "build_manifest_sha256": "48a0d2b8a124c6361211f6e1effe8230d8a94d4744ddaa494f3212f84b8c8d45",
     "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/source_fidelity_map.json",
     "source_fidelity_map_sha256": "31eca25f320bb07dfc221ecac3b3294041ca4618eb5a4abb1084699de13fc6a2",
     "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_sequence_summary.json",
     "deck_sequence_summary_sha256": "0dc6e15a1e3374712c183cac56f4517cb09d102916fcae7067f71a167450b15d",
     "quality_loop_state": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/quality_loop_state.json",
-    "quality_loop_state_sha256": "83d72bec7408ffa37bbb3dda645152c6f894451fb3818d8e679d3fc40480674c",
+    "quality_loop_state_sha256": "55ecd0130878a61f2c8bf6ade6b1cd182ff24de16ab1783d45270aff010eaeab",
     "deck_contact_sheet": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_contact_sheet.png",
     "deck_contact_sheet_sha256": "722ccd6b2ba90fde592692e18a6478a850eaeb0f8fe9eb9a5d8fb7f5751bbf76",
     "deck_identity_sha256": "4934d202273307890785e5564cbe7b45449058219b74186728b302b0570054f1",
@@ -98,7 +98,7 @@
       "sha256": "49faee5a773e73807b46b026b62c95cebdb9f5566de18dcc96e03fbfc02dacc7"
     },
     "rendered_pixel_identity_sha256": "43b45471bbdf47f02232bab4be023356b7e325b33b3524c78318c63c302260c8",
-    "pdf_sha256": "7b592c2bd35621880fbec9b5a5a42fa15b622917e5ba00cbc0b74e90918f1d91",
+    "pdf_sha256": "8ff60c23d263fa15977fa96a4db8424707178fbc49597d72b84e5be36dac798a",
     "page_job_by_logical_id": {
       "slide_2_statistical_model": "STATISTICAL_MODEL",
       "slide_3_real_data_application": "REAL_DATA_APPLICATION",

@@ -16,16 +16,16 @@
   },
   "identity_bindings": {
     "task_key": "038_research_presentation_two_real_paper_holdouts",
-    "implementation_commit": "1e376b51d703f42324f111b06b6bf4e2d062b8e6",
+    "implementation_commit": null,
     "input_title": "MedSAM Segment Anything in Medical Images",
     "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/BUILD_MANIFEST.json",
-    "build_manifest_sha256": "f60b39706e5709354d97e9b57ee697242534f9df81901791a764069421a231d9",
+    "build_manifest_sha256": "0bf4ae6e909046442db160d0988ace1cbe2762b3e700bb32a0a4f8d36719378e",
     "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/source_fidelity_map.json",
     "source_fidelity_map_sha256": "c780b0197246119320bdc3b9a862aed18633aad592cd2080d30ddb9646c29755",
     "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_sequence_summary.json",
     "deck_sequence_summary_sha256": "bc0ddb68ee1c3dc95dfa1fffca940488fd29bae9eafb18738c5053d2e14816ae",
     "quality_loop_state": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/quality_loop_state.json",
-    "quality_loop_state_sha256": "2e9dbd79174a8420e036080aaa646a15605a958a8add7053fd1c84b26d8166b1",
+    "quality_loop_state_sha256": "af70b1e86618268bbef14993e53378929cd4839c5bcdcfa031d5794250b5c0b2",
     "deck_contact_sheet": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_contact_sheet.png",
     "deck_contact_sheet_sha256": "5332d9f81e87882dc2df810e6eb5319049dc85631e8a1cfc0ef00ce451408ac4",
     "deck_identity_sha256": "91ca3a5a2d224ee97f202b7aada32a6f53c79a6337c53fccd88f388f94acc9f5",
@@ -133,7 +133,7 @@
       "sha256": "dafce2787c90bb12f542b3124c1556bdbf5bfe959fb1506bab47e2da4a3f9116"
     },
     "rendered_pixel_identity_sha256": "21e4c10f254650e5bbc83b79295d0d219da82a03b7bef6d31637c307dd2e72bf",
-    "pdf_sha256": "45d854a8e1d870902c7ea93ca2cb4031a9fc5625f8d527dd21064be2d13fa36f",
+    "pdf_sha256": "975d8bd725c4228c8881fa89524b762399277c0dd93c941adb6456af0a2b3409",
     "page_job_by_logical_id": {
       "slide_2_statistical_model": "STATISTICAL_MODEL",
       "slide_3_real_data_application": "REAL_DATA_APPLICATION",

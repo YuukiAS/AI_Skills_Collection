@@ -33,12 +33,40 @@
       "status": "MECHANICAL_PASS",
       "render_status": "ok",
       "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/BUILD_MANIFEST.json"
+    },
+    {
+      "deck": "statistics",
+      "attempt": "bounded_quality_loop_review_consumption",
+      "command": "python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/038_research_presentation_two_real_paper_holdouts/statistics/source_bundle.json --out-dir results/038_research_presentation_two_real_paper_holdouts/statistics/generated --task-key 038_research_presentation_two_real_paper_holdouts --review-evidence results/038_research_presentation_two_real_paper_holdouts/visual_review/statistics_quality_loop_review.json",
+      "exit_code": 0,
+      "status": "QUALITY_LOOP_FAIL_NO_WINNER",
+      "render_status": "ok",
+      "review_evidence": "results/038_research_presentation_two_real_paper_holdouts/visual_review/statistics_quality_loop_review.json",
+      "quality_loop_state": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/quality_loop_state.json",
+      "repair_cycle_count": 0,
+      "fail_closed_reason": "unsupported repair intent: <missing>"
+    },
+    {
+      "deck": "medical",
+      "attempt": "bounded_quality_loop_review_consumption",
+      "command": "python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/038_research_presentation_two_real_paper_holdouts/medical/source_bundle.json --out-dir results/038_research_presentation_two_real_paper_holdouts/medical/generated --task-key 038_research_presentation_two_real_paper_holdouts --review-evidence results/038_research_presentation_two_real_paper_holdouts/visual_review/medical_quality_loop_review.json",
+      "exit_code": 0,
+      "status": "QUALITY_LOOP_FAIL_NO_WINNER",
+      "render_status": "ok",
+      "review_evidence": "results/038_research_presentation_two_real_paper_holdouts/visual_review/medical_quality_loop_review.json",
+      "quality_loop_state": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/quality_loop_state.json",
+      "repair_cycle_count": 0,
+      "fail_closed_reason": "unsupported repair intent: <missing>"
     }
   ],
   "quality_loop_behavior": {
-    "review_evidence_consumed": false,
+    "review_evidence_consumed": true,
     "repair_cycle_count_statistics": 0,
     "repair_cycle_count_medical": 0,
+    "statistics_quality_loop_status": "QUALITY_LOOP_FAIL_NO_WINNER",
+    "medical_quality_loop_status": "QUALITY_LOOP_FAIL_NO_WINNER",
+    "fail_closed_reason_statistics": "unsupported repair intent: <missing>",
+    "fail_closed_reason_medical": "unsupported repair intent: <missing>",
     "manual_tex_patch": false,
     "post_render_source_bundle_rewrite": false
   }

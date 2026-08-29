@@ -1,0 +1,67 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "task_key": "038_research_presentation_two_real_paper_holdouts",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "038-medical-quality-loop-review-adapter",
+  "source_visual_review": "results/038_research_presentation_two_real_paper_holdouts/visual_review/VISUAL_REVIEW_1ce506ed08d5_REVIEW_1_USED.json",
+  "source_evidence_id": "visual-review-038_research_presentation_two_real_paper_holdouts-1ce506ed08d5",
+  "source_review_identity": "1ce506ed08d5e97b8823e3c31afda48953ee4068f77d5d81f696ebdb41017e88",
+  "status": "BLOCKED",
+  "overall_decision": "BLOCKED",
+  "item_reviews": [
+    {
+      "item_id": "deck_contact_sheet",
+      "scope": "deck",
+      "decision": "BLOCKED",
+      "summary": "Medical deck contact sheet is blocked below the mature doctoral group-meeting paper-talk bar.",
+      "observations": [
+        "Slides 4 and 5 contain visible lower-page crowding.",
+        "Slide 6 has an overloaded comparison construction.",
+        "The deck has credible real-paper visual evidence but remains below the mature presentation bar."
+      ],
+      "requirement_ids": [
+        "DECK_RHYTHM_DENSITY_TRANSITION_TEMPLATE_REPEAT",
+        "MEDICAL_REAL_ARTICLE_MEDICAL_IMAGE_SEGMENTATION_EVIDENCE",
+        "MATURE_DOCTORAL_GROUP_MEETING_BAR"
+      ]
+    }
+  ],
+  "blocking_findings": [
+    {
+      "finding_id": "BF-05",
+      "item_id": "medical_slide_4_experiment_design",
+      "target_logical_ids": [
+        "slide_4_experiment_design"
+      ],
+      "requirement_id": "READABLE_SCIENTIFIC_OBJECTS",
+      "severity": "blocking",
+      "summary": "The architecture evidence page contains overlapping, unreadable footer content.",
+      "evidence": "Medical slide 4 has visibly overprinted lower text: the figure/citation line and the explanatory sentence overlap across the bottom margin.",
+      "recommendation": "Separate the figure citation from the explanatory takeaway and provide adequate bottom margin."
+    },
+    {
+      "finding_id": "BF-06",
+      "item_id": "medical_slide_5_next_experiment",
+      "target_logical_ids": [
+        "slide_5_next_experiment"
+      ],
+      "requirement_id": "MATURE_DOCTORAL_GROUP_MEETING_BAR",
+      "severity": "blocking",
+      "summary": "The limitations slide is not presentation-ready.",
+      "evidence": "Medical slide 5 has substantive collisions: the comparator-arm labels overlap, the decision-rule paragraph begins into the diamond region, and the bottom conclusion collides with the final lines of that paragraph.",
+      "recommendation": "Reflow the diagram and conclusion into non-overlapping regions; simplify comparator labels or split the content."
+    },
+    {
+      "finding_id": "BF-07",
+      "item_id": "medical_slide_6_medical_image_comparison",
+      "target_logical_ids": [
+        "slide_6_medical_image_comparison"
+      ],
+      "requirement_id": "MEDICAL_READABLE_SCIENTIFIC_OBJECTS",
+      "severity": "blocking",
+      "summary": "The medical comparison evidence is partially obstructed by its own annotations.",
+      "evidence": "Medical slide 6 places the \"Overlay legend\" directly over the lower MedSAM crop; legend text and colored markers obscure the image, while connector lines cross the crop/legend area.",
+      "recommendation": "Move the legend outside all image panels and reroute/remove connector lines so each same-case crop remains unobscured."
+    }
+  ]
+}
