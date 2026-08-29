@@ -1,0 +1,392 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": "Batch rubric states render availability did not reach 4/4 and requires preservation of the TMB/RETFound pre-render selector failures.",
+      "finding_id": "BF-01",
+      "item_id": "batch",
+      "recommendation": "Keep the batch fail-closed until all four paper render selectors are available and reviewed.",
+      "requirement_id": "batch_render_availability",
+      "severity": "blocking",
+      "summary": "TMB/RETFound pre-render selector failures remain batch blockers."
+    },
+    {
+      "evidence": "Batch rubric states the frozen quality-loop consumer returned UNSAFE_REPAIR_MAPPING / QUALITY_LOOP_FAIL_NO_WINNER for unchanged rendered identities.",
+      "finding_id": "BF-02",
+      "item_id": "batch",
+      "recommendation": "Do not promote this batch to PASS; resolve the fail-closed quality-loop state through a valid repair mapping and winner.",
+      "requirement_id": "quality_loop_fail_closed",
+      "severity": "blocking",
+      "summary": "Consumed quality-loop fail-closed state remains a batch blocker."
+    },
+    {
+      "evidence": "DESeq2 slide 4 shows the bottom explanatory sentence and the source label visibly drawn over one another. DESeq2 slides 6 and 7 also have bottom text running into or beyond the lower content area.",
+      "finding_id": "BF-03",
+      "item_id": "biostatistics_deseq2__slide_4_experiment_design",
+      "recommendation": "Reflow or shorten bottom copy and reserve a separate citation/footer region; re-render affected slides.",
+      "requirement_id": "rendered_pixel_quality",
+      "severity": "blocking",
+      "summary": "Visible text collisions and clipping remain in the DESeq2 rendered sequence."
+    },
+    {
+      "evidence": "Cardiac-ultrasound slide 4 visibly overlays the bottom source label onto the explanatory sentence.",
+      "finding_id": "BF-04",
+      "item_id": "medical_cardiac_ultrasound__slide_4_experiment_design",
+      "recommendation": "Separate the citation from the bottom explanatory text and re-render the slide.",
+      "requirement_id": "rendered_pixel_quality",
+      "severity": "blocking",
+      "summary": "Visible citation/body-text overlap remains in the cardiac-ultrasound rendered sequence."
+    }
+  ],
+  "created_at": "2026-08-29T15:47:23Z",
+  "evidence_id": "visual-review-041_research_presentation_frozen_four_paper_generalization_batch-1b7860bb1d94",
+  "images": [
+    {
+      "logical_id": "biostatistics_deseq2__slide_2_statistical_model",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-2.png",
+      "sha256": "8a1fd45e28e424d8af1df764cd6b45705f754e6c5cf00056b124999329e1b74a"
+    },
+    {
+      "logical_id": "biostatistics_deseq2__slide_3_real_data_application",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-3.png",
+      "sha256": "ba8ecbf6a784169399a685f772f06fb94aceee03f2fb005bce4e3eb8fdc8c759"
+    },
+    {
+      "logical_id": "biostatistics_deseq2__slide_4_experiment_design",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-4.png",
+      "sha256": "287d550aec7ae7ac46a7a2fdb1dd7854bccbfaf682d6c8eb8b6a96fc6d11e133"
+    },
+    {
+      "logical_id": "biostatistics_deseq2__slide_5_negative_result",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-5.png",
+      "sha256": "8178bf1680055d62517317758b979363519a60bef800bd6df5dd47bb8abc558d"
+    },
+    {
+      "logical_id": "biostatistics_deseq2__slide_6_next_experiment",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-6.png",
+      "sha256": "7f5aa7e549a9757e98d39d80468ecf1369cd8bfa8a73df7d4b332ef920d034b7"
+    },
+    {
+      "logical_id": "biostatistics_deseq2__slide_7_medical_image_comparison",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-7.png",
+      "sha256": "b838c8f2e5681db9bb0890c8dcb0fdcaa36eddfac6eb117e86898adfac4840ae"
+    },
+    {
+      "logical_id": "biostatistics_deseq2__deck_contact_sheet",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_contact_sheet.png",
+      "sha256": "13a925ca7d505dd9621be69270a7d0580600acf5ba83dc2a97b7dbc2e97078ab"
+    },
+    {
+      "logical_id": "medical_cardiac_ultrasound__slide_2_statistical_model",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-2.png",
+      "sha256": "90c4cf1797f5889d0dbbb350c3083d07bc4c6f3e8b6ad2787719197e5b8cf591"
+    },
+    {
+      "logical_id": "medical_cardiac_ultrasound__slide_3_real_data_application",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-3.png",
+      "sha256": "858f7786a1dec46e0776aaadb4feeed807804043b85254754dba4acbc81973a5"
+    },
+    {
+      "logical_id": "medical_cardiac_ultrasound__slide_4_experiment_design",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-4.png",
+      "sha256": "8d5acccee844626083d2b427ebfd5ed103c94034f0d0fd6debce17c87c44f7ca"
+    },
+    {
+      "logical_id": "medical_cardiac_ultrasound__slide_5_negative_result",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-5.png",
+      "sha256": "83dbfc345c3e2207e2964cf09428d3985541e17b3c13eabfd28847657d7493f5"
+    },
+    {
+      "logical_id": "medical_cardiac_ultrasound__slide_6_next_experiment",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-6.png",
+      "sha256": "eab2ed9042419037a480dd6998e2bccff3bb57a3acfad5cd6a92110560529992"
+    },
+    {
+      "logical_id": "medical_cardiac_ultrasound__slide_7_medical_image_comparison",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-7.png",
+      "sha256": "4f9f63b2f18e0d951d111d2a30d9342cba9447336fe1ba7f0bf5853d995f32ac"
+    },
+    {
+      "logical_id": "medical_cardiac_ultrasound__deck_contact_sheet",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/deck_contact_sheet.png",
+      "sha256": "1792084d006f5a718c2f96197ec538ebf16cfb531d00edd9ba542b23171cfec7"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "batch_source_bundle_freeze_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/batch_source_bundle_freeze_manifest.json",
+      "batch_source_bundle_freeze_manifest_sha256": "804d1b6ad3f28d60db9e1bac7561f111113e77c71fcadd7d549ea7409726a6bb",
+      "failed_decks": {
+        "medical_retfound": {
+          "doi": "10.1038/s41586-023-06555-x",
+          "failure_log": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/production_attempt_failure.log",
+          "failure_log_sha256": "9bc0d547f61e5b755f3c093eb60abff6b0818f91424ff176e58e20ab0aa46249",
+          "paper": "A foundation model for generalizable disease detection from retinal images",
+          "status": "FAILED_PRE_RENDER_SELECTOR_COMPATIBILITY"
+        },
+        "statistics_tmb": {
+          "doi": "10.18637/jss.v070.i05",
+          "failure_log": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/production_attempt_failure.log",
+          "failure_log_sha256": "9bc0d547f61e5b755f3c093eb60abff6b0818f91424ff176e58e20ab0aa46249",
+          "paper": "TMB: Automatic Differentiation and Laplace Approximation",
+          "status": "FAILED_PRE_RENDER_SELECTOR_COMPATIBILITY"
+        }
+      },
+      "implementation_commit": "9bd69e5b54e7968ec731e00a3c9794c6fad21672",
+      "production_freeze_locator": "d3379b5168bc27b114b362f186f8c239a88a669c",
+      "rendered_decks": {
+        "biostatistics_deseq2": {
+          "build_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/BUILD_MANIFEST.json",
+          "build_manifest_sha256": "c8c8eca1afb3fe4d7b0a55e3c23db00fff864c890fee30412867992dba304c83",
+          "deck_contact_sheet": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_contact_sheet.png",
+          "deck_contact_sheet_sha256": "13a925ca7d505dd9621be69270a7d0580600acf5ba83dc2a97b7dbc2e97078ab",
+          "doi": "10.1186/s13059-014-0550-8",
+          "paper": "Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2",
+          "pdf": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.pdf",
+          "pdf_sha256": "70413e6d480f20bc54e78a7edd3b1eac28a7b292ebaf59afec906ebe92a269c7",
+          "quality_loop_fail_closed_reason": "finding does not uniquely map to a frozen safe repair family",
+          "quality_loop_final_decision": "QUALITY_LOOP_FAIL_NO_WINNER",
+          "quality_loop_repair_cycle_count": 0,
+          "quality_loop_repair_evidence": "results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/biostatistics_deseq2_repair_evidence.json",
+          "quality_loop_repair_evidence_sha256": "e27057fcb83dd9a1cbe19480d7a19801ec5ecef746c754790d4c70d3c323b0c4",
+          "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/quality_loop_state.json",
+          "quality_loop_state_sha256": "6e32da4021e29859cc23c927ab774a3e7f519258590a9b2bbcf2b62718bd23cc",
+          "quality_loop_status": "UNSAFE_REPAIR_MAPPING",
+          "render_input_identity_sha256": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e",
+          "rendered_pixel_identity_sha256": "5b8b8596996f9589e09f64a495b9f0b98fbffb2be5ec8f4bc582a9628ff77bd9",
+          "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source_bundle.json",
+          "source_bundle_sha256": "52f58af783041ca3b4316141818db9bd781b1d63c7d2e16fa99b8493d798a962",
+          "source_fidelity_map": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/source_fidelity_map.json",
+          "source_fidelity_map_sha256": "4b26daf40b020a55710e109bc8f303a4861e8a7c5b09ecf29155202c5161f661"
+        },
+        "medical_cardiac_ultrasound": {
+          "build_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/BUILD_MANIFEST.json",
+          "build_manifest_sha256": "7a6569ff3ff674cfea969cdb3877d87a117a575783e3e67dd5eabed0470c7dc3",
+          "deck_contact_sheet": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/deck_contact_sheet.png",
+          "deck_contact_sheet_sha256": "1792084d006f5a718c2f96197ec538ebf16cfb531d00edd9ba542b23171cfec7",
+          "doi": "10.1038/s41467-025-59451-5",
+          "paper": "Self-supervised learning for label-free segmentation in cardiac ultrasound",
+          "pdf": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/main.pdf",
+          "pdf_sha256": "a7fcd52ac88e2783a85e0610f5935a0f0b27b153bacfa55cf1d93e825026cb18",
+          "quality_loop_fail_closed_reason": "finding does not uniquely map to a frozen safe repair family",
+          "quality_loop_final_decision": "QUALITY_LOOP_FAIL_NO_WINNER",
+          "quality_loop_repair_cycle_count": 0,
+          "quality_loop_repair_evidence": "results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/medical_cardiac_ultrasound_repair_evidence.json",
+          "quality_loop_repair_evidence_sha256": "d2dcb25b193049d81b83d59975e199dc116ea826ab4d1c54aab34de1871a8166",
+          "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/quality_loop_state.json",
+          "quality_loop_state_sha256": "956e9c18f72b5f3794a6b94c3612abdf918627b75b13fcfbecac0d4586b2cc6e",
+          "quality_loop_status": "UNSAFE_REPAIR_MAPPING",
+          "render_input_identity_sha256": "427322503d37fbb586c5d3332b231448f55df502f9734d76ccb3af52dd37794d",
+          "rendered_pixel_identity_sha256": "5d482b290887882819458dfbd09e5d5ba9351625259dbec59f3de61a2b4a4fc6",
+          "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source_bundle.json",
+          "source_bundle_sha256": "4e62035d6aa495832ad7b3b8235e71ed3ffaf29e0338c0e556985112210f2243",
+          "source_fidelity_map": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/source_fidelity_map.json",
+          "source_fidelity_map_sha256": "c415b804ef503b1fce3896f0b601e6aeac36c8463157727d01dee3cd534bd0f9"
+        }
+      },
+      "task_key": "041_research_presentation_frozen_four_paper_generalization_batch"
+    },
+    "manifest_sha256": "1b7860bb1d940b6dd00a3343af4f0ac52f7bc986b9b09c5c9c872ff37af426ea",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "This batch did not reach 4/4 render availability. Review the available rendered DESeq2 and cardiac-ultrasound pixels, but preserve TMB/RETFound pre-render selector failures and the consumed quality-loop fail-closed states as batch-failure blockers. The DESeq2 and cardiac-ultrasound rendered pixel identities did not change after the frozen quality-loop consumer returned UNSAFE_REPAIR_MAPPING / QUALITY_LOOP_FAIL_NO_WINNER. Do not convert a visual PASS on rendered pixels into 041 batch PASS.",
+      "source_contracts": [
+        "Four paper identities are frozen; no replacement is allowed.",
+        "Source bundles were frozen before first render and must not be edited after rendered output existed.",
+        "TMB and RETFound have no rendered pixels because normal selector failed before render.",
+        "DESeq2 and cardiac-ultrasound consumed the existing Terra evidence through the frozen single-cycle quality-loop consumer and failed closed with no selected repair directives."
+      ]
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "PASS",
+      "item_id": "biostatistics_deseq2__slide_2_statistical_model",
+      "observations": [
+        "Clear title, formula, explanatory paragraph, two-column box, and citation are visible without overlap."
+      ],
+      "requirement_ids": [
+        "rendered_pixel_quality"
+      ],
+      "summary": "No visible layout defect observed."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "biostatistics_deseq2__slide_3_real_data_application",
+      "observations": [
+        "Title, central source figure, bottom explanatory text, and citation are visibly separated."
+      ],
+      "requirement_ids": [
+        "rendered_pixel_quality"
+      ],
+      "summary": "No visible collision or clipping observed."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "biostatistics_deseq2__slide_4_experiment_design",
+      "observations": [
+        "Bottom source text overlaps the explanatory sentence at the lower left.",
+        "The bottom sentence extends into the footer boundary region."
+      ],
+      "requirement_ids": [
+        "rendered_pixel_quality"
+      ],
+      "summary": "Bottom text is visibly colliding."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "biostatistics_deseq2__slide_5_negative_result",
+      "observations": [
+        "The source figure, right-side interpretation text, citation, and footer are visibly separated."
+      ],
+      "requirement_ids": [
+        "rendered_pixel_quality"
+      ],
+      "summary": "No visible layout defect observed."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "biostatistics_deseq2__slide_6_next_experiment",
+      "observations": [
+        "The decision-rule paragraph at lower right runs down into the bottom explanatory sentence.",
+        "The bottom explanatory sentence is constrained against the footer line."
+      ],
+      "requirement_ids": [
+        "rendered_pixel_quality"
+      ],
+      "summary": "Lower-right and bottom text regions visibly collide."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "biostatistics_deseq2__slide_7_medical_image_comparison",
+      "observations": [
+        "Bottom explanatory/citation text is overprinted at the lower left.",
+        "The bottom text is visibly cut by the lower edge/footer area."
+      ],
+      "requirement_ids": [
+        "rendered_pixel_quality"
+      ],
+      "summary": "Bottom text is visibly overlapped and clipped."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "biostatistics_deseq2__deck_contact_sheet",
+      "observations": [
+        "Contact sheet preserves the slide sequence.",
+        "Slides 4, 6, and 7 visibly retain their crowded bottom-text regions in the contact sheet."
+      ],
+      "requirement_ids": [
+        "rendered_pixel_quality",
+        "deck_sequence_review"
+      ],
+      "summary": "Sequence is visible, but repeated lower-region defects remain."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "medical_cardiac_ultrasound__slide_2_statistical_model",
+      "observations": [
+        "Title, source image, explanatory text, citation, and footer are visibly separated."
+      ],
+      "requirement_ids": [
+        "rendered_pixel_quality"
+      ],
+      "summary": "No visible collision or clipping observed."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "medical_cardiac_ultrasound__slide_3_real_data_application",
+      "observations": [
+        "Title, central source page, bottom explanatory text, citation, and footer are visibly separated."
+      ],
+      "requirement_ids": [
+        "rendered_pixel_quality"
+      ],
+      "summary": "No visible layout defect observed."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "medical_cardiac_ultrasound__slide_4_experiment_design",
+      "observations": [
+        "The bottom source label visibly overlays the explanatory sentence at lower left.",
+        "The combined bottom text is crowded against the footer."
+      ],
+      "requirement_ids": [
+        "rendered_pixel_quality"
+      ],
+      "summary": "Bottom citation/body text collision is visible."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "medical_cardiac_ultrasound__slide_5_negative_result",
+      "observations": [
+        "Central source image, right-side discussion text, source label, and footer are visibly separated."
+      ],
+      "requirement_ids": [
+        "rendered_pixel_quality"
+      ],
+      "summary": "No visible collision or clipping observed."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "medical_cardiac_ultrasound__slide_6_next_experiment",
+      "observations": [
+        "Flow diagram, decision text, bottom conclusion, and footer remain visibly separated."
+      ],
+      "requirement_ids": [
+        "rendered_pixel_quality"
+      ],
+      "summary": "No visible layout defect observed."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "medical_cardiac_ultrasound__slide_7_medical_image_comparison",
+      "observations": [
+        "Four labeled source panels, legend, bottom sentence, and footer are visibly separated."
+      ],
+      "requirement_ids": [
+        "rendered_pixel_quality"
+      ],
+      "summary": "No visible collision or clipping observed."
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "medical_cardiac_ultrasound__deck_contact_sheet",
+      "observations": [
+        "Contact sheet preserves the slide sequence.",
+        "Slide 4 retains the visibly crowded bottom text/citation region."
+      ],
+      "requirement_ids": [
+        "rendered_pixel_quality",
+        "deck_sequence_review"
+      ],
+      "summary": "Sequence is visible, but the slide 4 layout defect remains."
+    }
+  ],
+  "non_blocking_notes": [
+    "The DESeq2 and cardiac-ultrasound decks use consistent header, title, and footer styling across their visible rendered sequences.",
+    "Rendered-item PASS observations do not override the batch-level selector and quality-loop blockers."
+  ],
+  "overall_decision": "BLOCKED",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "1b7860bb1d940b6dd00a3343af4f0ac52f7bc986b9b09c5c9c872ff37af426ea",
+  "review_kind": "041_research_presentation_frozen_four_paper_generalization_batch-post-quality-loop-fail-closed-review",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "BLOCKED",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "workflow_type": "reviewed_handoff"
+}
