@@ -1,0 +1,401 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": "Statistics slide 3 visibly states: “rather than importing the Stage 4 clustered-calibration fixture.”",
+      "finding_id": "BF-01",
+      "item_id": "statistics_slide_3_real_data_application",
+      "recommendation": "Remove internal fixture/workflow language and replace it with an audience-facing explanation of the kidney example and its result.",
+      "requirement_id": "AUDIENCE_FACING_NO_WORKFLOW_PROVENANCE",
+      "severity": "blocking",
+      "summary": "Audience-facing slide exposes internal workflow language."
+    },
+    {
+      "evidence": "Statistics slide 4 has overlapping text along the bottom: the figure/source line and the concluding sentence collide, and the centered figure caption is clipped at “proc”.",
+      "finding_id": "BF-02",
+      "item_id": "statistics_slide_4_experiment_design",
+      "recommendation": "Rebuild the lower layout with separate caption and takeaway regions; enlarge or recrop the workflow figure so its labels and caption are readable.",
+      "requirement_id": "READABLE_SCIENTIFIC_OBJECTS",
+      "severity": "blocking",
+      "summary": "Overlapping and clipped lower-page content makes the workflow evidence unreadable."
+    },
+    {
+      "evidence": "Statistics slide 5 presents the comparison table at a very small scale; its entries are not legible at slide-view size. The source line also runs into the right-hand interpretive text.",
+      "finding_id": "BF-03",
+      "item_id": "statistics_slide_5_negative_result",
+      "recommendation": "Use a simplified, enlarged comparison table or split the evidence across slides, and reserve non-overlapping space for the citation.",
+      "requirement_id": "STATISTICS_PACKAGE_COMPARISON_AND_READABILITY",
+      "severity": "blocking",
+      "summary": "Required package-comparison evidence is visually unreadable."
+    },
+    {
+      "evidence": "Statistics slide 6 has multiple collisions: “worked kidney example” crosses the comparator-arm shape, comparator labels overlap each other, and the decision-rule paragraph crowds the diamond and footer.",
+      "finding_id": "BF-04",
+      "item_id": "statistics_slide_6_next_experiment",
+      "recommendation": "Redesign the final decision diagram with distinct columns, shorter labels, and a separate conclusion area.",
+      "requirement_id": "MATURE_DOCTORAL_GROUP_MEETING_BAR",
+      "severity": "blocking",
+      "summary": "The closing limitations/decision slide is materially compromised by text and diagram overlap."
+    },
+    {
+      "evidence": "Medical slide 4 has visibly overprinted lower text: the figure/citation line and the explanatory sentence overlap across the bottom margin.",
+      "finding_id": "BF-05",
+      "item_id": "medical_slide_4_experiment_design",
+      "recommendation": "Separate the figure citation from the explanatory takeaway and provide adequate bottom margin.",
+      "requirement_id": "READABLE_SCIENTIFIC_OBJECTS",
+      "severity": "blocking",
+      "summary": "The architecture evidence page contains overlapping, unreadable footer content."
+    },
+    {
+      "evidence": "Medical slide 5 has substantive collisions: the comparator-arm labels overlap, the decision-rule paragraph begins into the diamond region, and the bottom conclusion collides with the final lines of that paragraph.",
+      "finding_id": "BF-06",
+      "item_id": "medical_slide_5_next_experiment",
+      "recommendation": "Reflow the diagram and conclusion into non-overlapping regions; simplify comparator labels or split the content.",
+      "requirement_id": "MATURE_DOCTORAL_GROUP_MEETING_BAR",
+      "severity": "blocking",
+      "summary": "The limitations slide is not presentation-ready."
+    },
+    {
+      "evidence": "Medical slide 6 places the “Overlay legend” directly over the lower MedSAM crop; legend text and colored markers obscure the image, while connector lines cross the crop/legend area.",
+      "finding_id": "BF-07",
+      "item_id": "medical_slide_6_medical_image_comparison",
+      "recommendation": "Move the legend outside all image panels and reroute/remove connector lines so each same-case crop remains unobscured.",
+      "requirement_id": "MEDICAL_READABLE_SCIENTIFIC_OBJECTS",
+      "severity": "blocking",
+      "summary": "The medical comparison evidence is partially obstructed by its own annotations."
+    }
+  ],
+  "created_at": "2026-08-29T08:52:48Z",
+  "evidence_id": "visual-review-038_research_presentation_two_real_paper_holdouts-1ce506ed08d5",
+  "images": [
+    {
+      "logical_id": "statistics_slide_2_statistical_model",
+      "mime_type": "image/png",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-2.png",
+      "sha256": "e709ffda43682c0ccdac54de5eb0649644dde255a04adb1344544ca7e2952515"
+    },
+    {
+      "logical_id": "statistics_slide_3_real_data_application",
+      "mime_type": "image/png",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-3.png",
+      "sha256": "19f47412ecc9dcba3f7e03f303614e72b6ad266984c1ef7d6c24c36b572eb314"
+    },
+    {
+      "logical_id": "statistics_slide_4_experiment_design",
+      "mime_type": "image/png",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-4.png",
+      "sha256": "ee6899c8ce6391b17eb822b0a91157d0b8056418c6e7663e8b0835935569f54f"
+    },
+    {
+      "logical_id": "statistics_slide_5_negative_result",
+      "mime_type": "image/png",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-5.png",
+      "sha256": "a15ac41b8f6cf40355c68a893678149a2bd3d071c62bdd80afdba267660eabed"
+    },
+    {
+      "logical_id": "statistics_slide_6_next_experiment",
+      "mime_type": "image/png",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-6.png",
+      "sha256": "d535f2b136dd0f685b9889a943ae61f61971861264f3260b8c75311cc84baaaa"
+    },
+    {
+      "logical_id": "statistics_deck_contact_sheet",
+      "mime_type": "image/png",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_contact_sheet.png",
+      "sha256": "722ccd6b2ba90fde592692e18a6478a850eaeb0f8fe9eb9a5d8fb7f5751bbf76"
+    },
+    {
+      "logical_id": "medical_slide_2_statistical_model",
+      "mime_type": "image/png",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/rendered/slide-2.png",
+      "sha256": "d62568ef37c927137e8cfe460c36db867c04abeb37df939c8f409e95067152ae"
+    },
+    {
+      "logical_id": "medical_slide_3_real_data_application",
+      "mime_type": "image/png",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/rendered/slide-3.png",
+      "sha256": "bd307866b966ec0af8e657018b4e5900ac7166ec0b142c142fe47f5c16cc00a3"
+    },
+    {
+      "logical_id": "medical_slide_4_experiment_design",
+      "mime_type": "image/png",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/rendered/slide-4.png",
+      "sha256": "dbab517b63b5a4ebfbcf1241cae752ef89644e2c4a27bf82735936008218891d"
+    },
+    {
+      "logical_id": "medical_slide_5_next_experiment",
+      "mime_type": "image/png",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/rendered/slide-5.png",
+      "sha256": "f8044af91d474050eb5375cdd322239f24f22642000e18fa34aaef8df6d3bab8"
+    },
+    {
+      "logical_id": "medical_slide_6_medical_image_comparison",
+      "mime_type": "image/png",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/rendered/slide-6.png",
+      "sha256": "de6331f09b558c9c74025bddc9c4a0cf77de48616759ab2fafdcb4850a5a3349"
+    },
+    {
+      "logical_id": "medical_deck_contact_sheet",
+      "mime_type": "image/png",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_contact_sheet.png",
+      "sha256": "5332d9f81e87882dc2df810e6eb5319049dc85631e8a1cfc0ef00ce451408ac4"
+    }
+  ],
+  "input_manifest": {
+    "identity_bindings": {
+      "base_commit": "9a38a5f3cfbb499e88d0f68efe080a47f71c6e5b",
+      "decks": {
+        "medical": {
+          "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/BUILD_MANIFEST.json",
+          "build_manifest_sha256": "f60b39706e5709354d97e9b57ee697242534f9df81901791a764069421a231d9",
+          "deck_contact_sheet": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_contact_sheet.png",
+          "deck_contact_sheet_sha256": "5332d9f81e87882dc2df810e6eb5319049dc85631e8a1cfc0ef00ce451408ac4",
+          "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_sequence_summary.json",
+          "deck_sequence_summary_sha256": "bc0ddb68ee1c3dc95dfa1fffca940488fd29bae9eafb18738c5053d2e14816ae",
+          "page_count": 5,
+          "pdf_sha256": "45d854a8e1d870902c7ea93ca2cb4031a9fc5625f8d527dd21064be2d13fa36f",
+          "quality_loop_state": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/quality_loop_state.json",
+          "quality_loop_state_sha256": "2e9dbd79174a8420e036080aaa646a15605a958a8add7053fd1c84b26d8166b1",
+          "quality_loop_status": "WAITING_FOR_DECK_VISUAL_REVIEW",
+          "render_input_identity_sha256": "dafce2787c90bb12f542b3124c1556bdbf5bfe959fb1506bab47e2da4a3f9116",
+          "rendered_pixel_identity_sha256": "21e4c10f254650e5bbc83b79295d0d219da82a03b7bef6d31637c307dd2e72bf",
+          "source_bundle": "results/038_research_presentation_two_real_paper_holdouts/medical/source_bundle.json",
+          "source_bundle_sha256": "fef82966184d4db938d4bfdd12101d289ebdca80bf246a3ed7c9fb72f42fa33b",
+          "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/source_fidelity_map.json",
+          "source_fidelity_map_sha256": "c780b0197246119320bdc3b9a862aed18633aad592cd2080d30ddb9646c29755",
+          "source_inventory": "results/038_research_presentation_two_real_paper_holdouts/medical/source_inventory.json"
+        },
+        "statistics": {
+          "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/BUILD_MANIFEST.json",
+          "build_manifest_sha256": "2c99ff367ab8849ab6fe0d0b2ce0760ffe525e5f9bdb264c5492e6512733e76d",
+          "deck_contact_sheet": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_contact_sheet.png",
+          "deck_contact_sheet_sha256": "722ccd6b2ba90fde592692e18a6478a850eaeb0f8fe9eb9a5d8fb7f5751bbf76",
+          "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_sequence_summary.json",
+          "deck_sequence_summary_sha256": "0dc6e15a1e3374712c183cac56f4517cb09d102916fcae7067f71a167450b15d",
+          "page_count": 5,
+          "pdf_sha256": "7b592c2bd35621880fbec9b5a5a42fa15b622917e5ba00cbc0b74e90918f1d91",
+          "quality_loop_state": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/quality_loop_state.json",
+          "quality_loop_state_sha256": "83d72bec7408ffa37bbb3dda645152c6f894451fb3818d8e679d3fc40480674c",
+          "quality_loop_status": "WAITING_FOR_DECK_VISUAL_REVIEW",
+          "render_input_identity_sha256": "49faee5a773e73807b46b026b62c95cebdb9f5566de18dcc96e03fbfc02dacc7",
+          "rendered_pixel_identity_sha256": "43b45471bbdf47f02232bab4be023356b7e325b33b3524c78318c63c302260c8",
+          "source_bundle": "results/038_research_presentation_two_real_paper_holdouts/statistics/source_bundle.json",
+          "source_bundle_sha256": "32d1a9d1241ff8b4c77b6a98fe5b20b5b88ed04f3d60b0b10f9897304f15421b",
+          "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/source_fidelity_map.json",
+          "source_fidelity_map_sha256": "31eca25f320bb07dfc221ecac3b3294041ca4618eb5a4abb1084699de13fc6a2",
+          "source_inventory": "results/038_research_presentation_two_real_paper_holdouts/statistics/source_inventory.json"
+        }
+      },
+      "implementation_commit": "1e376b51d703f42324f111b06b6bf4e2d062b8e6",
+      "task_key": "038_research_presentation_two_real_paper_holdouts"
+    },
+    "manifest_sha256": "1ce506ed08d5e97b8823e3c31afda48953ee4068f77d5d81f696ebdb41017e88",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "Review two independent real-paper holdout decks generated by the normal research-presentations production entrypoint. Inspect every substantive page and each deck contact sheet. For the statistics deck, require brms-specific Bayesian multilevel/Stan notation, worked-example evidence, package comparison, and limitations rather than Stage 4 fixture content. For the medical deck, require real MedSAM article medical-image segmentation evidence, preserved prompt/annotation/prediction semantics, exact CUHK identity, readable scientific objects, and no fabricated pixels. Reject internal workflow/provenance/QA/source-bundle language in audience-facing slides. The top-level package decision is not enough; provide item-level decisions and observations for all pages and both contact sheets, and separately judge whether each deck reaches a mature doctoral group-meeting paper-talk bar.",
+      "source_contracts": [
+        "Both papers are real public holdouts and are not presentation reference/gold tuning sources per holdout_eligibility.json.",
+        "The source bundles were frozen before successful production rendering and are bound by SHA256.",
+        "No manual generated TeX/PDF/PNG edit, production code change, or post-render source-bundle rewrite was applied.",
+        "Local visual QA already observed possible blockers; Terra should judge rendered pixels directly and independently."
+      ]
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "PASS",
+      "item_id": "statistics_slide_2_statistical_model",
+      "observations": [
+        "Clear brms/Stan-focused equation includes covariance decomposition, LKJ correlation prior, and Kronecker covariance notation.",
+        "The model-components and interpretation panels are legible and visually separated.",
+        "No visible internal workflow or provenance language."
+      ],
+      "requirement_ids": [
+        "STATISTICS_BRMS_SPECIFIC_BAYESIAN_MULTILEVEL_STAN_NOTATION",
+        "AUDIENCE_FACING_NO_WORKFLOW_PROVENANCE",
+        "READABLE_SCIENTIFIC_OBJECTS"
+      ],
+      "summary": "Passes as a readable, brms-specific model slide."
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "statistics_slide_3_real_data_application",
+      "observations": [
+        "The centered kidney figure is extremely small relative to the slide canvas; plot details and labels are not readable.",
+        "Visible body text includes the internal phrase “Stage 4 clustered-calibration fixture.”",
+        "The page visibly cites a Buerkner 2017 Figure 3 crop."
+      ],
+      "requirement_ids": [
+        "STATISTICS_WORKED_EXAMPLE_EVIDENCE",
+        "AUDIENCE_FACING_NO_WORKFLOW_PROVENANCE",
+        "READABLE_SCIENTIFIC_OBJECTS"
+      ],
+      "summary": "Uses a kidney-example figure, but internal workflow language and undersized evidence block release."
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "statistics_slide_4_experiment_design",
+      "observations": [
+        "The central formula-to-Stan-to-brmsfit process diagram is visible and conceptually relevant.",
+        "Bottom text layers visibly overlap; the lower caption is clipped and the takeaway sentence runs through the citation area.",
+        "Fine text inside the source diagram is difficult to read."
+      ],
+      "requirement_ids": [
+        "STATISTICS_BRMS_SPECIFIC_BAYESIAN_MULTILEVEL_STAN_NOTATION",
+        "READABLE_SCIENTIFIC_OBJECTS",
+        "MATURE_DOCTORAL_GROUP_MEETING_BAR"
+      ],
+      "summary": "Relevant production-path evidence is present but not readable as laid out."
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "statistics_slide_5_negative_result",
+      "observations": [
+        "A brms/lme4/MCMCglmm comparison table is visibly present.",
+        "The table is too small for table entries to be read at normal slide-view scale.",
+        "The citation overlaps/crowds the right-side interpretation text."
+      ],
+      "requirement_ids": [
+        "STATISTICS_PACKAGE_COMPARISON_AND_LIMITATIONS",
+        "READABLE_SCIENTIFIC_OBJECTS",
+        "MATURE_DOCTORAL_GROUP_MEETING_BAR"
+      ],
+      "summary": "Contains comparison evidence but fails the required readability bar."
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "statistics_slide_6_next_experiment",
+      "observations": [
+        "The slide visibly includes prior choice, chain/posterior inspection, WAIC/LOO comparison, comparator arms, and a go/no-go decision.",
+        "Several labels collide with shapes and neighboring text; the closing paragraph and footer are crowded.",
+        "The visible content provides limitations-oriented guidance but is not cleanly communicable."
+      ],
+      "requirement_ids": [
+        "STATISTICS_PACKAGE_COMPARISON_AND_LIMITATIONS",
+        "READABLE_SCIENTIFIC_OBJECTS",
+        "MATURE_DOCTORAL_GROUP_MEETING_BAR"
+      ],
+      "summary": "Limitations and next-step content exists, but severe layout collisions block approval."
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "statistics_deck_contact_sheet",
+      "observations": [
+        "The contact sheet shows a consistent six-slide CUHK-branded sequence and a real-paper-oriented progression from model to example, workflow, comparison, and conclusion.",
+        "It also makes the recurring defects clear: slides 3 and 5 are evidence-light because source figures/tables are tiny, and slides 4 and 6 have visibly crowded lower/diagram regions.",
+        "Statistics deck maturity judgment: does not reach a mature doctoral group-meeting paper-talk bar because multiple core evidence slides are unreadable or visibly broken, and one slide exposes internal fixture language."
+      ],
+      "requirement_ids": [
+        "DECK_RHYTHM_DENSITY_TRANSITION_TEMPLATE_REPEAT",
+        "MATURE_DOCTORAL_GROUP_MEETING_BAR",
+        "AUDIENCE_FACING_NO_WORKFLOW_PROVENANCE"
+      ],
+      "summary": "Consistent visual identity, but the deck as a whole is blocked and below the doctoral group-meeting bar."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "medical_slide_2_statistical_model",
+      "observations": [
+        "The Dice/DSC equation is large and readable.",
+        "The slide explicitly identifies G as expert annotation and S as predicted segmentation mask.",
+        "The interpretation states that a bounding-box prompt specifies the target region; panels and source line are legible."
+      ],
+      "requirement_ids": [
+        "MEDICAL_PROMPT_ANNOTATION_PREDICTION_SEMANTICS",
+        "READABLE_SCIENTIFIC_OBJECTS",
+        "AUDIENCE_FACING_NO_WORKFLOW_PROVENANCE"
+      ],
+      "summary": "Passes as a clear metric and semantic-definition slide."
+    },
+    {
+      "decision": "PASS",
+      "item_id": "medical_slide_3_real_data_application",
+      "observations": [
+        "The slide shows performance distributions, rank correspondence, and multiple medical-image qualitative cases in one source figure.",
+        "The CT/MR/endoscopic image panels preserve visibly distinct image, contour, and overlay content rather than replacing them with invented-looking diagrams.",
+        "The citation is legible and the figure is large enough for its main objects and modality examples to be recognized."
+      ],
+      "requirement_ids": [
+        "MEDICAL_REAL_ARTICLE_MEDICAL_IMAGE_SEGMENTATION_EVIDENCE",
+        "MEDICAL_NO_FABRICATED_PIXELS",
+        "READABLE_SCIENTIFIC_OBJECTS"
+      ],
+      "summary": "Passes with authentic-looking article figure evidence and readable main scientific objects."
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "medical_slide_4_experiment_design",
+      "observations": [
+        "The page visibly depicts an input CT image, image encoder, prompt encoder, bounding-box prompts, colored segmentation output, and dataset distribution chart.",
+        "The architecture preserves the intended prompt-to-mask relationship.",
+        "The bottom caption/source line and explanatory statement overlap visibly."
+      ],
+      "requirement_ids": [
+        "MEDICAL_PROMPT_ANNOTATION_PREDICTION_SEMANTICS",
+        "MEDICAL_READABLE_SCIENTIFIC_OBJECTS",
+        "MATURE_DOCTORAL_GROUP_MEETING_BAR"
+      ],
+      "summary": "Architecture and prompt semantics are present, but the overlapping footer blocks approval."
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "medical_slide_5_next_experiment",
+      "observations": [
+        "The slide presents a modality-imbalance limitation and names SAM, specialist U-Net, and specialist DeepLabV3+ comparator arms.",
+        "The right-side decision text visibly collides with the decision diamond and the bottom conclusion line overlaps the paragraph.",
+        "The diagram therefore does not meet a clean group-meeting presentation standard."
+      ],
+      "requirement_ids": [
+        "MEDICAL_LIMITATIONS",
+        "READABLE_SCIENTIFIC_OBJECTS",
+        "MATURE_DOCTORAL_GROUP_MEETING_BAR"
+      ],
+      "summary": "Relevant validation-boundary content is present but materially obscured by collisions."
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "medical_slide_6_medical_image_comparison",
+      "observations": [
+        "The slide shows four same-patient CT panels labeled SAM, U-Net, DeepLabV3+, and MedSAM, plus ROI crops.",
+        "Blue prompt boxes, yellow segmentation overlays, and magenta expert contours are visibly represented and explained in the bottom sentence.",
+        "The overlay legend sits over a lower crop and connector lines cross the crop/legend space, obscuring part of the comparison."
+      ],
+      "requirement_ids": [
+        "MEDICAL_REAL_ARTICLE_MEDICAL_IMAGE_SEGMENTATION_EVIDENCE",
+        "MEDICAL_PROMPT_ANNOTATION_PREDICTION_SEMANTICS",
+        "MEDICAL_READABLE_SCIENTIFIC_OBJECTS",
+        "MEDICAL_NO_FABRICATED_PIXELS"
+      ],
+      "summary": "Preserves key medical-image and annotation semantics, but self-obscuring annotations block release."
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "medical_deck_contact_sheet",
+      "observations": [
+        "The contact sheet shows a consistent six-slide CUHK-branded MedSAM paper-talk sequence with real medical-image figures on the validation, architecture, and external-CT pages.",
+        "The sheet visibly reveals repeated lower-page crowding on slides 4 and 5 and an overloaded comparison construction on slide 6.",
+        "Medical deck maturity judgment: does not reach a mature doctoral group-meeting paper-talk bar because three substantive late-deck slides contain visible overlaps or obstruction, despite strong real-image evidence on slides 3 and 6."
+      ],
+      "requirement_ids": [
+        "DECK_RHYTHM_DENSITY_TRANSITION_TEMPLATE_REPEAT",
+        "MEDICAL_REAL_ARTICLE_MEDICAL_IMAGE_SEGMENTATION_EVIDENCE",
+        "MATURE_DOCTORAL_GROUP_MEETING_BAR"
+      ],
+      "summary": "The deck has credible real-paper visual evidence and coherent sequencing, but remains below the mature presentation bar."
+    }
+  ],
+  "non_blocking_notes": [
+    "Both contact sheets visibly show consistent CUHK-branded title-slide treatment and slide numbering.",
+    "The statistics deck contains genuine brms-specific notation and a kidney-example figure; the medical deck contains multiple recognizable medical-image segmentation panels and explicit prompt/annotation/prediction semantics.",
+    "The dominant cross-deck issue is not subject coverage but undersized evidence and unresolved text/diagram collisions on substantive pages."
+  ],
+  "overall_decision": "BLOCKED",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "1ce506ed08d5e97b8823e3c31afda48953ee4068f77d5d81f696ebdb41017e88",
+  "review_kind": "038-two-real-paper-holdout-deck-review",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "BLOCKED",
+  "task_key": "038_research_presentation_two_real_paper_holdouts",
+  "workflow_type": "reviewed_handoff"
+}
