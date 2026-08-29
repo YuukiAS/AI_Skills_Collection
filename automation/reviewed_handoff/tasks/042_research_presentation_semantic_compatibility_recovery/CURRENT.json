@@ -1,10 +1,10 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "042_research_presentation_semantic_compatibility_recovery",
-  "state": "NEEDS_GPT_PLANNER",
+  "state": "PLAN_FROZEN",
   "review_round": 1,
   "max_review_rounds": 2,
-  "plan_revision": 0,
+  "plan_revision": 1,
   "max_plan_revisions": 1,
   "base_commit": "beb6dd62dd0d28dd02ed842fcf9f7ec7ca0675df",
   "base_branch": "main",
@@ -17,5 +17,5 @@
   "visual_review_required": true,
   "visual_review_manifest_path": "results/042_research_presentation_semantic_compatibility_recovery/visual_review/visual_inputs.json",
   "visual_review_evidence_path": "results/042_research_presentation_semantic_compatibility_recovery/visual_review/VISUAL_REVIEW.json",
-  "next_action": "GPT_PLANNER_DECIDE_VISUAL_REVIEW_STAGING_FOR_SINGLE_CYCLE_REPAIR"
+  "next_action": "CODEX_EXECUTOR_PREPARE_SUPPORTED_STRESS_FINDING_AND_STAGE_INITIAL_VISUAL_REVIEW_SNAPSHOT"
 }
