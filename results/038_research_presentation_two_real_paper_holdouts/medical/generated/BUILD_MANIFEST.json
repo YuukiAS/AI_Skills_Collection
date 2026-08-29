@@ -1,7 +1,7 @@
 {
   "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1",
   "task_key": "038_research_presentation_two_real_paper_holdouts",
-  "implementation_commit": null,
+  "implementation_commit": "1bca6df7be706f96fbecb2fc4b2a4584dfbae0b0",
   "input_bundle": "results/038_research_presentation_two_real_paper_holdouts/medical/source_bundle.json",
   "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
   "canonical_files": {

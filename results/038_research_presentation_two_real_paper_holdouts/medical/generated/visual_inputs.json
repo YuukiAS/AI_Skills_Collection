@@ -16,7 +16,7 @@
   },
   "identity_bindings": {
     "task_key": "038_research_presentation_two_real_paper_holdouts",
-    "implementation_commit": null,
+    "implementation_commit": "1bca6df7be706f96fbecb2fc4b2a4584dfbae0b0",
     "input_title": "MedSAM Segment Anything in Medical Images",
     "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/BUILD_MANIFEST.json",
     "build_manifest_sha256": "95be821fa840e3afcc151cc0b3c3cde1e748bd1088e7fa1c75ba4a91b8ffdf77",
