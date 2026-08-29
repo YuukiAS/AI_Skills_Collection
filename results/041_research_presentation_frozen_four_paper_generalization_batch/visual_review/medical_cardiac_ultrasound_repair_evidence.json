@@ -15,10 +15,11 @@
   "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
   "workflow_type": "reviewed_handoff",
   "derived_from": {
-    "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/VISUAL_REVIEW.json",
+    "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/VISUAL_REVIEW_round1_consumed.json",
     "review_identity": "624c2e674e6da6ce5b5bdd5b00aa337aa7757068aeaee19a9dee2e8621c06a43",
     "evidence_id": "visual-review-041_research_presentation_frozen_four_paper_generalization_batch-624c2e674e6d",
-    "derivation": "deck-specific subset for the frozen bounded quality-loop consumer; batch-level blockers excluded from per-deck repair mapping"
+    "derivation": "deck-specific subset for the frozen bounded quality-loop consumer; batch-level blockers excluded from per-deck repair mapping",
+    "canonical_output_after_consumption": "results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/VISUAL_REVIEW.json is intentionally pending for the current implementation commit"
   },
   "input_manifest": {
     "identity_bindings": {

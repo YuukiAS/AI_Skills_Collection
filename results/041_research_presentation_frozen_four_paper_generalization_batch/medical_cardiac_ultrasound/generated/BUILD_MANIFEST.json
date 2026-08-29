@@ -677,7 +677,7 @@
       "times_font_files_present": true
     },
     "pdf": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/main.pdf",
-    "pdf_sha256": "57d09afee3e4612e3ea0fa8a940587040dff13696d9fca8badc6527002b85484",
+    "pdf_sha256": "a7fcd52ac88e2783a85e0610f5935a0f0b27b153bacfa55cf1d93e825026cb18",
     "log": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/compile.log"
   },
   "render_status": {

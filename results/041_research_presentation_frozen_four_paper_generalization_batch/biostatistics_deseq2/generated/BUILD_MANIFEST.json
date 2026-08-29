@@ -620,7 +620,7 @@
       "times_font_files_present": true
     },
     "pdf": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.pdf",
-    "pdf_sha256": "71c690c01111a099d41baabcc32e98bd8ceb31feef22b7063888de8d984afdc1",
+    "pdf_sha256": "70413e6d480f20bc54e78a7edd3b1eac28a7b292ebaf59afec906ebe92a269c7",
     "log": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/compile.log"
   },
   "render_status": {
