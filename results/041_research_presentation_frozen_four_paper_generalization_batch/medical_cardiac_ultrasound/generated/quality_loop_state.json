@@ -98,15 +98,102 @@
     ],
     "sha256": "427322503d37fbb586c5d3332b231448f55df502f9734d76ccb3af52dd37794d"
   },
-  "review_evidence_identity": null,
-  "deck_level_decision": "WAITING_FOR_DECK_VISUAL_REVIEW",
-  "blocking_findings": [],
+  "review_evidence_identity": "2fd120bdd3af9333bfc2a52fb375b72562f136ba7c6f4fe539d5378ef7027249",
+  "deck_level_decision": "UNSAFE_REPAIR_MAPPING",
+  "blocking_findings": [
+    {
+      "decision": "REVISE",
+      "item_id": "slide_2_statistical_model",
+      "observations": [
+        "The source pipeline image is extremely narrow and unreadable at presentation scale.",
+        "The sentence across the middle runs directly through/behind the source image region."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics"
+      ],
+      "summary": "Pipeline source is present but too small and visually conflicts with body text.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_2_statistical_model"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_3_real_data_application",
+      "observations": [
+        "The central source page and its four measurement plots are too small for axes, labels, or values to be read.",
+        "A figure-page citation is visibly present."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics"
+      ],
+      "summary": "Clinical-measurement source is identifiable but not projection-readable.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_3_real_data_application"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_4_experiment_design",
+      "observations": [
+        "The A2C source-page image is too small to inspect the weak-label progression.",
+        "Bottom explanatory text overlaps citation text and is clipped at the lower edge."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics",
+        "contact_sheet_quality"
+      ],
+      "summary": "A2C semantics are signaled, but figure scale and footer collision require revision.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_4_experiment_design"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_5_negative_result",
+      "observations": [
+        "The SAX source image is too small for the image-panel semantics to be inspected.",
+        "The source page and adjacent limitation text are visually separated and citation is visible."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics"
+      ],
+      "summary": "Limitation framing is present, but the cited imaging evidence is not readable.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_5_negative_result"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_6_next_experiment",
+      "observations": [
+        "The decision diagram is generally readable.",
+        "The final conclusion line is crowded against the lower border and runs beneath the decision-rule text."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "contact_sheet_quality"
+      ],
+      "summary": "Readable logic diagram but visible bottom-layout collision.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_6_next_experiment"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_7_medical_image_comparison",
+      "observations": [
+        "A2C, A4C, SAX, and Measures are visibly differentiated with headings and distinct source-page crops.",
+        "All source crops and the same-case ROI zoom are too small for image/overlay inspection at projection distance."
+      ],
+      "requirement_ids": [
+        "source_specificity",
+        "projection_readability",
+        "paper_specific_semantics"
+      ],
+      "summary": "Strong view-specific structure, but source image and overlay evidence need substantial enlargement.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_7_medical_image_comparison"
+    }
+  ],
   "selected_repair_directives": [],
   "repair_allowed": false,
-  "fail_closed_reason": null,
+  "fail_closed_reason": "finding does not uniquely map to a frozen safe repair family",
   "repaired_render_identity": null,
   "repaired_render_input_identity": null,
   "repaired_rendered_pixel_identity": null,
   "repaired_render_input_manifest": null,
-  "final_decision": null
+  "final_decision": "QUALITY_LOOP_FAIL_NO_WINNER"
 }

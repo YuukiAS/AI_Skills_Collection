@@ -620,7 +620,7 @@
       "times_font_files_present": true
     },
     "pdf": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.pdf",
-    "pdf_sha256": "2c6ef28f147e37f2a33988e603c364fea747920b281f8a7cc847234ce4753fdc",
+    "pdf_sha256": "71c690c01111a099d41baabcc32e98bd8ceb31feef22b7063888de8d984afdc1",
     "log": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/compile.log"
   },
   "render_status": {
@@ -672,7 +672,7 @@
   },
   "quality_loop_handoff": {
     "schema": "RESEARCH_PRESENTATION_STAGE4_QUALITY_HANDOFF_V1",
-    "status": "WAITING_FOR_DECK_VISUAL_REVIEW",
+    "status": "QUALITY_LOOP_FAIL_NO_WINNER",
     "visual_review_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/visual_inputs.json",
     "visual_review_evidence": "results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/VISUAL_REVIEW.json",
     "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/quality_loop_state.json",

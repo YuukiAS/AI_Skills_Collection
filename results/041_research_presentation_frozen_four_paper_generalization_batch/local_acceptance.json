@@ -3,7 +3,7 @@
   "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
   "checked_at": "2026-08-29",
   "batch_verdict": "FAIL",
-  "reason": "TMB and RETFound normal production invocations failed before render with no compatible gold composition record; DESeq2 and cardiac ultrasound rendered mechanically but strict 4/4 batch acceptance is not met.",
+  "reason": "TMB and RETFound normal production invocations failed before render; DESeq2 and cardiac ultrasound consumed the available Terra evidence through the frozen single-cycle quality-loop consumer, but both failed closed with no safe repair mapping.",
   "checks": [
     {
       "name": "json_artifacts_parse",
@@ -20,13 +20,15 @@
     },
     {
       "name": "normal_production_invocation_DESeq2",
-      "status": "PASS",
-      "render_status": "ok"
+      "status": "QUALITY_LOOP_FAIL_NO_WINNER",
+      "render_status": "ok",
+      "details": "fresh Terra evidence consumed; existing bounded consumer returned UNSAFE_REPAIR_MAPPING with no selected repair directive"
     },
     {
       "name": "normal_production_invocation_cardiac_ultrasound",
-      "status": "PASS",
-      "render_status": "ok"
+      "status": "QUALITY_LOOP_FAIL_NO_WINNER",
+      "render_status": "ok",
+      "details": "fresh Terra evidence consumed; existing bounded consumer returned UNSAFE_REPAIR_MAPPING with no selected repair directive"
     },
     {
       "name": "normal_production_invocation_TMB",
@@ -41,12 +43,12 @@
     {
       "name": "strict_production_validator_on_successful_holdouts",
       "status": "KNOWN_NON_HOLDOUT_AWARE_MISMATCH",
-      "details": "validator still asserts engineering-fixture phrases such as Coverage by ICC under imbalanced clusters and Same-case ROI zoom"
+      "details": "validator is still bound to the 031 engineering fixture contract: it reports task_key mismatch for this 041 task and asserts fixture phrases such as Coverage by ICC under imbalanced clusters and Same-case ROI zoom"
     },
     {
       "name": "visual_review_evidence",
-      "status": "PENDING_EXTERNAL",
-      "details": "VISUAL_REVIEW.json not fabricated locally; only visual_inputs.json is prepared"
+      "status": "CONSUMED_FAIL_CLOSED",
+      "details": "existing VISUAL_REVIEW.json was filtered into two deck-specific repair evidence files and consumed by the frozen quality-loop consumer; no local Terra PASS claimed"
     }
   ]
 }

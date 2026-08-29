@@ -73,15 +73,88 @@
     ],
     "sha256": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e"
   },
-  "review_evidence_identity": null,
-  "deck_level_decision": "WAITING_FOR_DECK_VISUAL_REVIEW",
-  "blocking_findings": [],
+  "review_evidence_identity": "1042b785a8f6cbbc61e22c0fa8bc01bbe574ea47ec790403995bdc247e45eb56",
+  "deck_level_decision": "UNSAFE_REPAIR_MAPPING",
+  "blocking_findings": [
+    {
+      "decision": "REVISE",
+      "item_id": "slide_3_real_data_application",
+      "observations": [
+        "The central paper-page figure is very small; individual panels and labels are not projection-readable.",
+        "Source figure page and citation are visibly present."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics"
+      ],
+      "summary": "Source-specific figure is present but too small for a doctoral group meeting.",
+      "original_item_id": "biostatistics_deseq2__slide_3_real_data_application"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_4_experiment_design",
+      "observations": [
+        "The paper excerpt is small and its plot details are not readable.",
+        "The bottom explanatory text visibly overlaps the figure citation/left text and is clipped at the bottom edge."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "no_debug_leakage",
+        "contact_sheet_quality"
+      ],
+      "summary": "Unreadable figure and overlapping/clipped footer content.",
+      "original_item_id": "biostatistics_deseq2__slide_4_experiment_design"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_5_negative_result",
+      "observations": [
+        "The source page is small and cannot support reading its benchmark plots.",
+        "The right-side explanatory text and citation visibly collide around “Figure 6 page, Love et al. 2014.”"
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics"
+      ],
+      "summary": "Paper-specific benchmark context is present, but figure scale and text collision need correction.",
+      "original_item_id": "biostatistics_deseq2__slide_5_negative_result"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_6_next_experiment",
+      "observations": [
+        "The right-side decision-rule paragraph runs into the bottom conclusion line.",
+        "The conclusion line is visibly crowded against the lower border."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "contact_sheet_quality"
+      ],
+      "summary": "Diagram is readable, but the lower-right text layout is visibly overlapped.",
+      "original_item_id": "biostatistics_deseq2__slide_6_next_experiment"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_7_medical_image_comparison",
+      "observations": [
+        "The central benchmark page is too small for plot labels or comparison details to be read.",
+        "The bottom explanatory sentence overlaps a citation-like text fragment and is clipped by the lower edge."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics",
+        "contact_sheet_quality"
+      ],
+      "summary": "Comparison source is visible but not legible; footer layout fails.",
+      "original_item_id": "biostatistics_deseq2__slide_7_medical_image_comparison"
+    }
+  ],
   "selected_repair_directives": [],
   "repair_allowed": false,
-  "fail_closed_reason": null,
+  "fail_closed_reason": "finding does not uniquely map to a frozen safe repair family",
   "repaired_render_identity": null,
   "repaired_render_input_identity": null,
   "repaired_rendered_pixel_identity": null,
   "repaired_render_input_manifest": null,
-  "final_decision": null
+  "final_decision": "QUALITY_LOOP_FAIL_NO_WINNER"
 }

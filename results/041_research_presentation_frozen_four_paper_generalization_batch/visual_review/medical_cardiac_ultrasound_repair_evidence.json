@@ -1,0 +1,329 @@
+{
+  "created_at": "2026-08-29T14:36:03Z",
+  "evidence_id": "visual-review-041_research_presentation_frozen_four_paper_generalization_batch-624c2e674e6d",
+  "non_blocking_notes": [
+    "Both rendered decks visibly use a consistent purple CUHK-branded template with crest/header treatment.",
+    "Rendered DESeq2 and cardiac-ultrasound pages show paper-specific source excerpts and citations, but many source figures are presented at unusably small scale."
+  ],
+  "overall_decision": "BLOCKED",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "review_identity": "624c2e674e6da6ce5b5bdd5b00aa337aa7757068aeaee19a9dee2e8621c06a43",
+  "review_kind": "041_research_presentation_frozen_four_paper_generalization_batch-frozen-four-paper-batch-review",
+  "review_model": "gpt-5.6-terra",
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "status": "BLOCKED",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "workflow_type": "reviewed_handoff",
+  "derived_from": {
+    "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/VISUAL_REVIEW.json",
+    "review_identity": "624c2e674e6da6ce5b5bdd5b00aa337aa7757068aeaee19a9dee2e8621c06a43",
+    "evidence_id": "visual-review-041_research_presentation_frozen_four_paper_generalization_batch-624c2e674e6d",
+    "derivation": "deck-specific subset for the frozen bounded quality-loop consumer; batch-level blockers excluded from per-deck repair mapping"
+  },
+  "input_manifest": {
+    "identity_bindings": {
+      "batch_source_bundle_freeze_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/batch_source_bundle_freeze_manifest.json",
+      "batch_source_bundle_freeze_manifest_sha256": "804d1b6ad3f28d60db9e1bac7561f111113e77c71fcadd7d549ea7409726a6bb",
+      "failed_decks": {
+        "medical_retfound": {
+          "doi": "10.1038/s41586-023-06555-x",
+          "failure_log": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/production_attempt_failure.log",
+          "failure_log_sha256": "9bc0d547f61e5b755f3c093eb60abff6b0818f91424ff176e58e20ab0aa46249",
+          "paper": "A foundation model for generalizable disease detection from retinal images",
+          "status": "FAILED_PRE_RENDER_SELECTOR_COMPATIBILITY"
+        },
+        "statistics_tmb": {
+          "doi": "10.18637/jss.v070.i05",
+          "failure_log": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/production_attempt_failure.log",
+          "failure_log_sha256": "9bc0d547f61e5b755f3c093eb60abff6b0818f91424ff176e58e20ab0aa46249",
+          "paper": "TMB: Automatic Differentiation and Laplace Approximation",
+          "status": "FAILED_PRE_RENDER_SELECTOR_COMPATIBILITY"
+        }
+      },
+      "implementation_commit": "a01865e5380f3c23a3d0eea6bbc6e4f3fdf8591d",
+      "production_freeze_locator": "d3379b5168bc27b114b362f186f8c239a88a669c",
+      "rendered_decks": {
+        "biostatistics_deseq2": {
+          "build_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/BUILD_MANIFEST.json",
+          "build_manifest_sha256": "206716991b73e336944d7f8ff351a2e9d5e7c9b78010622bce370a4ff97a2ab1",
+          "deck_contact_sheet": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_contact_sheet.png",
+          "deck_contact_sheet_sha256": "13a925ca7d505dd9621be69270a7d0580600acf5ba83dc2a97b7dbc2e97078ab",
+          "doi": "10.1186/s13059-014-0550-8",
+          "paper": "Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2",
+          "pdf": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.pdf",
+          "pdf_sha256": "2c6ef28f147e37f2a33988e603c364fea747920b281f8a7cc847234ce4753fdc",
+          "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/quality_loop_state.json",
+          "render_input_identity_sha256": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e",
+          "rendered_pixel_identity_sha256": "5b8b8596996f9589e09f64a495b9f0b98fbffb2be5ec8f4bc582a9628ff77bd9",
+          "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source_bundle.json",
+          "source_bundle_sha256": "52f58af783041ca3b4316141818db9bd781b1d63c7d2e16fa99b8493d798a962",
+          "source_fidelity_map": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/source_fidelity_map.json",
+          "source_fidelity_map_sha256": "4b26daf40b020a55710e109bc8f303a4861e8a7c5b09ecf29155202c5161f661"
+        },
+        "medical_cardiac_ultrasound": {
+          "build_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/BUILD_MANIFEST.json",
+          "build_manifest_sha256": "cf7a1f7166847fb1df5dbea953f70423b5d881bbbae98c8a3463e270eeeb6335",
+          "deck_contact_sheet": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/deck_contact_sheet.png",
+          "deck_contact_sheet_sha256": "1792084d006f5a718c2f96197ec538ebf16cfb531d00edd9ba542b23171cfec7",
+          "doi": "10.1038/s41467-025-59451-5",
+          "paper": "Self-supervised learning for label-free segmentation in cardiac ultrasound",
+          "pdf": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/main.pdf",
+          "pdf_sha256": "1cc323f1e667a96bce5431a3754f69706b742e8669d86f7db50ae5bdc1797d86",
+          "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/quality_loop_state.json",
+          "render_input_identity_sha256": "427322503d37fbb586c5d3332b231448f55df502f9734d76ccb3af52dd37794d",
+          "rendered_pixel_identity_sha256": "5d482b290887882819458dfbd09e5d5ba9351625259dbec59f3de61a2b4a4fc6",
+          "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source_bundle.json",
+          "source_bundle_sha256": "4e62035d6aa495832ad7b3b8235e71ed3ffaf29e0338c0e556985112210f2243",
+          "source_fidelity_map": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/source_fidelity_map.json",
+          "source_fidelity_map_sha256": "c415b804ef503b1fce3896f0b601e6aeac36c8463157727d01dee3cd534bd0f9"
+        }
+      },
+      "task_key": "041_research_presentation_frozen_four_paper_generalization_batch"
+    },
+    "manifest_sha256": "624c2e674e6da6ce5b5bdd5b00aa337aa7757068aeaee19a9dee2e8621c06a43",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "This batch did not reach 4/4 render availability. Review available rendered DESeq2 and cardiac-ultrasound pixels only if the workflow requests visual evidence, and preserve the TMB/RETFound pre-render selector failures as batch-failure blockers. For rendered items, check source specificity, exact CUHK identity, projection readability, paper-specific math/plot/image semantics, no internal workflow/debug leakage, and contact-sheet mature doctoral-group-meeting quality. Do not convert top-level visual PASS into batch PASS while any failed deck lacks rendered pixels.",
+      "source_contracts": [
+        "Four paper identities are frozen; no replacement is allowed.",
+        "Source bundles were frozen before first render and must not be edited after rendered output existed.",
+        "TMB and RETFound have no rendered pixels because normal selector failed before render."
+      ]
+    },
+    "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1"
+  },
+  "images": [
+    {
+      "logical_id": "medical_cardiac_ultrasound__slide_2_statistical_model",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-2.png",
+      "sha256": "90c4cf1797f5889d0dbbb350c3083d07bc4c6f3e8b6ad2787719197e5b8cf591"
+    },
+    {
+      "logical_id": "medical_cardiac_ultrasound__slide_3_real_data_application",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-3.png",
+      "sha256": "858f7786a1dec46e0776aaadb4feeed807804043b85254754dba4acbc81973a5"
+    },
+    {
+      "logical_id": "medical_cardiac_ultrasound__slide_4_experiment_design",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-4.png",
+      "sha256": "8d5acccee844626083d2b427ebfd5ed103c94034f0d0fd6debce17c87c44f7ca"
+    },
+    {
+      "logical_id": "medical_cardiac_ultrasound__slide_5_negative_result",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-5.png",
+      "sha256": "83dbfc345c3e2207e2964cf09428d3985541e17b3c13eabfd28847657d7493f5"
+    },
+    {
+      "logical_id": "medical_cardiac_ultrasound__slide_6_next_experiment",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-6.png",
+      "sha256": "eab2ed9042419037a480dd6998e2bccff3bb57a3acfad5cd6a92110560529992"
+    },
+    {
+      "logical_id": "medical_cardiac_ultrasound__slide_7_medical_image_comparison",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-7.png",
+      "sha256": "4f9f63b2f18e0d951d111d2a30d9342cba9447336fe1ba7f0bf5853d995f32ac"
+    },
+    {
+      "logical_id": "medical_cardiac_ultrasound__deck_contact_sheet",
+      "mime_type": "image/png",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/deck_contact_sheet.png",
+      "sha256": "1792084d006f5a718c2f96197ec538ebf16cfb531d00edd9ba542b23171cfec7"
+    }
+  ],
+  "item_reviews": [
+    {
+      "decision": "REVISE",
+      "item_id": "slide_2_statistical_model",
+      "observations": [
+        "The source pipeline image is extremely narrow and unreadable at presentation scale.",
+        "The sentence across the middle runs directly through/behind the source image region."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics"
+      ],
+      "summary": "Pipeline source is present but too small and visually conflicts with body text.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_2_statistical_model"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_3_real_data_application",
+      "observations": [
+        "The central source page and its four measurement plots are too small for axes, labels, or values to be read.",
+        "A figure-page citation is visibly present."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics"
+      ],
+      "summary": "Clinical-measurement source is identifiable but not projection-readable.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_3_real_data_application"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_4_experiment_design",
+      "observations": [
+        "The A2C source-page image is too small to inspect the weak-label progression.",
+        "Bottom explanatory text overlaps citation text and is clipped at the lower edge."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics",
+        "contact_sheet_quality"
+      ],
+      "summary": "A2C semantics are signaled, but figure scale and footer collision require revision.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_4_experiment_design"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_5_negative_result",
+      "observations": [
+        "The SAX source image is too small for the image-panel semantics to be inspected.",
+        "The source page and adjacent limitation text are visually separated and citation is visible."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics"
+      ],
+      "summary": "Limitation framing is present, but the cited imaging evidence is not readable.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_5_negative_result"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_6_next_experiment",
+      "observations": [
+        "The decision diagram is generally readable.",
+        "The final conclusion line is crowded against the lower border and runs beneath the decision-rule text."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "contact_sheet_quality"
+      ],
+      "summary": "Readable logic diagram but visible bottom-layout collision.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_6_next_experiment"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_7_medical_image_comparison",
+      "observations": [
+        "A2C, A4C, SAX, and Measures are visibly differentiated with headings and distinct source-page crops.",
+        "All source crops and the same-case ROI zoom are too small for image/overlay inspection at projection distance."
+      ],
+      "requirement_ids": [
+        "source_specificity",
+        "projection_readability",
+        "paper_specific_semantics"
+      ],
+      "summary": "Strong view-specific structure, but source image and overlay evidence need substantial enlargement.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_7_medical_image_comparison"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "deck_contact_sheet",
+      "observations": [
+        "Slides 4 and 6 visibly show bottom text overlapping or clipping.",
+        "Most evidence pages are consistently undersized, leaving excessive whitespace and reducing readable information density."
+      ],
+      "requirement_ids": [
+        "contact_sheet_quality",
+        "projection_readability"
+      ],
+      "summary": "The visual system is consistent, but repeated undersized paper evidence and overflow defects prevent a polished deck.",
+      "original_item_id": "medical_cardiac_ultrasound__deck_contact_sheet"
+    }
+  ],
+  "blocking_findings": [
+    {
+      "decision": "REVISE",
+      "item_id": "slide_2_statistical_model",
+      "observations": [
+        "The source pipeline image is extremely narrow and unreadable at presentation scale.",
+        "The sentence across the middle runs directly through/behind the source image region."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics"
+      ],
+      "summary": "Pipeline source is present but too small and visually conflicts with body text.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_2_statistical_model"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_3_real_data_application",
+      "observations": [
+        "The central source page and its four measurement plots are too small for axes, labels, or values to be read.",
+        "A figure-page citation is visibly present."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics"
+      ],
+      "summary": "Clinical-measurement source is identifiable but not projection-readable.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_3_real_data_application"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_4_experiment_design",
+      "observations": [
+        "The A2C source-page image is too small to inspect the weak-label progression.",
+        "Bottom explanatory text overlaps citation text and is clipped at the lower edge."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics",
+        "contact_sheet_quality"
+      ],
+      "summary": "A2C semantics are signaled, but figure scale and footer collision require revision.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_4_experiment_design"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_5_negative_result",
+      "observations": [
+        "The SAX source image is too small for the image-panel semantics to be inspected.",
+        "The source page and adjacent limitation text are visually separated and citation is visible."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "paper_specific_semantics"
+      ],
+      "summary": "Limitation framing is present, but the cited imaging evidence is not readable.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_5_negative_result"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_6_next_experiment",
+      "observations": [
+        "The decision diagram is generally readable.",
+        "The final conclusion line is crowded against the lower border and runs beneath the decision-rule text."
+      ],
+      "requirement_ids": [
+        "projection_readability",
+        "contact_sheet_quality"
+      ],
+      "summary": "Readable logic diagram but visible bottom-layout collision.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_6_next_experiment"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "slide_7_medical_image_comparison",
+      "observations": [
+        "A2C, A4C, SAX, and Measures are visibly differentiated with headings and distinct source-page crops.",
+        "All source crops and the same-case ROI zoom are too small for image/overlay inspection at projection distance."
+      ],
+      "requirement_ids": [
+        "source_specificity",
+        "projection_readability",
+        "paper_specific_semantics"
+      ],
+      "summary": "Strong view-specific structure, but source image and overlay evidence need substantial enlargement.",
+      "original_item_id": "medical_cardiac_ultrasound__slide_7_medical_image_comparison"
+    }
+  ]
+}

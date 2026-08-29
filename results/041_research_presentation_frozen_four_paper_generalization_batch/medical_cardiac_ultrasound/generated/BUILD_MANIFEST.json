@@ -677,7 +677,7 @@
       "times_font_files_present": true
     },
     "pdf": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/main.pdf",
-    "pdf_sha256": "1cc323f1e667a96bce5431a3754f69706b742e8669d86f7db50ae5bdc1797d86",
+    "pdf_sha256": "57d09afee3e4612e3ea0fa8a940587040dff13696d9fca8badc6527002b85484",
     "log": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/compile.log"
   },
   "render_status": {
@@ -729,7 +729,7 @@
   },
   "quality_loop_handoff": {
     "schema": "RESEARCH_PRESENTATION_STAGE4_QUALITY_HANDOFF_V1",
-    "status": "WAITING_FOR_DECK_VISUAL_REVIEW",
+    "status": "QUALITY_LOOP_FAIL_NO_WINNER",
     "visual_review_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/visual_inputs.json",
     "visual_review_evidence": "results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/VISUAL_REVIEW.json",
     "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/quality_loop_state.json",
