@@ -200,6 +200,33 @@ def job_primary_geometry(spec: dict[str, Any], primary: dict[str, float], transf
     }
 
 
+def apply_quality_repair_geometry(spec: dict[str, Any], primary: dict[str, float], transforms: list[str]) -> dict[str, float]:
+    safe = SAFE_REGION
+    repaired = dict(primary)
+    if spec.get("primary_object_scale_hint"):
+        bottom_limit = 0.724 if spec["page_job"] in {"REAL_DATA_APPLICATION", "NEGATIVE_RESULT"} else safe["y"] + safe["h"]
+        target_w = min(safe["w"], max(repaired["w"] * 1.10, repaired["w"] + 0.045))
+        target_h = min(bottom_limit - safe["y"], max(repaired["h"] * 1.08, repaired["h"] + 0.035))
+        center_x = repaired["x"] + repaired["w"] / 2
+        center_y = repaired["y"] + repaired["h"] / 2
+        repaired = {
+            "x": clamp(center_x - target_w / 2, safe["x"], safe["x"] + safe["w"] - target_w),
+            "y": clamp(center_y - target_h / 2, safe["y"], bottom_limit - target_h),
+            "w": target_w,
+            "h": target_h,
+        }
+        transforms.append("deck-quality repair enlarged primary scientific object while preserving a support band")
+    if spec.get("compatible_layout_reflow_hint") and spec["page_job"] in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"}:
+        repaired = {
+            "x": safe["x"],
+            "y": 0.195,
+            "w": safe["w"],
+            "h": 0.552,
+        }
+        transforms.append("deck-quality repair used source-faithful compatible reflow geometry for diagram collision")
+    return {key: round(value, 4) for key, value in repaired.items()}
+
+
 def support_bbox(primary: dict[str, float], role: str) -> dict[str, float]:
     safe = SAFE_REGION
     if role == "left":
@@ -224,6 +251,11 @@ def support_geometry(spec: dict[str, Any], primary: dict[str, float]) -> dict[st
     safe = SAFE_REGION
     page_job = spec["page_job"]
     if page_job == "REAL_DATA_APPLICATION":
+        if spec.get("legend_repair_hint") or spec.get("primary_object_scale_hint"):
+            return {
+                "annotation": {"x": 0.080, "y": 0.755, "w": 0.470, "h": 0.047},
+                "caption": {"x": 0.575, "y": 0.755, "w": 0.365, "h": 0.047},
+            }
         return {
             "annotation": {"x": 0.08, "y": 0.735, "w": 0.52, "h": 0.055},
             "caption": {"x": 0.64, "y": 0.735, "w": 0.30, "h": 0.055},
@@ -234,20 +266,35 @@ def support_geometry(spec: dict[str, Any], primary: dict[str, float]) -> dict[st
             "caption": {"x": 0.120, "y": 0.790, "w": 0.760, "h": 0.038},
         }
     if page_job == "NEGATIVE_RESULT":
+        if spec.get("legend_repair_hint") or spec.get("primary_object_scale_hint"):
+            return {
+                "annotation": {"x": 0.755, "y": 0.270, "w": 0.175, "h": 0.170},
+                "caption": {"x": 0.755, "y": 0.482, "w": 0.175, "h": 0.195},
+            }
         return {
             "annotation": {"x": 0.745, "y": 0.300, "w": 0.185, "h": 0.195},
             "caption": {"x": 0.745, "y": 0.535, "w": 0.185, "h": 0.170},
         }
     if page_job == "MEDICAL_IMAGE_COMPARISON":
+        if spec.get("legend_repair_hint"):
+            return {
+                "annotation": {"x": safe["x"], "y": 0.812, "w": safe["w"], "h": 0.035},
+                "caption": {"x": safe["x"], "y": 0.812, "w": safe["w"], "h": 0.035},
+            }
         return {
             "annotation": {"x": safe["x"], "y": 0.832, "w": safe["w"], "h": 0.024},
             "caption": {"x": safe["x"], "y": 0.832, "w": safe["w"], "h": 0.024},
         }
     if page_job in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"}:
-        y = min(primary["y"] + primary["h"] + 0.012, safe["y"] + safe["h"] - 0.043)
+        if spec.get("compatible_layout_reflow_hint"):
+            y = 0.775
+            height = 0.055
+        else:
+            y = min(primary["y"] + primary["h"] + 0.012, safe["y"] + safe["h"] - 0.043)
+            height = 0.043
         return {
-            "annotation": {"x": safe["x"], "y": round(y, 4), "w": safe["w"], "h": 0.043},
-            "caption": {"x": safe["x"], "y": round(y, 4), "w": safe["w"], "h": 0.043},
+            "annotation": {"x": safe["x"], "y": round(y, 4), "w": safe["w"], "h": height},
+            "caption": {"x": safe["x"], "y": round(y, 4), "w": safe["w"], "h": height},
         }
     annotation = annotation_bbox(primary)
     caption = {key: round(value, 4) for key, value in support_bbox(primary, "below").items()}
@@ -558,6 +605,7 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
     primary, transforms = fit_bbox(constraints["primary_bbox"], constraints["content_capacity"])
     primary = expand_bbox_for_content(primary, spec["content_kind"], transforms)
     primary = job_primary_geometry(spec, primary, transforms)
+    primary = apply_quality_repair_geometry(spec, primary, transforms)
     supporting = support_geometry(spec, primary)
     annotation = {key: round(value, 4) for key, value in supporting["annotation"].items()}
     caption = {key: round(value, 4) for key, value in supporting["caption"].items()}
@@ -638,6 +686,9 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
         "annotation_legend_caption_panel_relations",
         "content_capacity",
     ]
+    for hint in ["primary_object_scale_hint", "legend_repair_hint", "compatible_layout_reflow_hint", "split_overdense_page_hint"]:
+        if spec.get(hint):
+            consumed.append(hint)
     resolved = {
         "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
         "task_key": TASK_KEY,
@@ -689,6 +740,11 @@ def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | No
                 if key in spec
             ],
             "same_case_roi_zoom": spec.get("same_case_roi_zoom"),
+            "quality_repair_hints": {
+                key: spec[key]
+                for key in ["primary_object_scale_hint", "legend_repair_hint", "compatible_layout_reflow_hint", "split_overdense_page_hint", "audience_copy_repair_trace"]
+                if key in spec
+            },
         },
         "text_region_packing": {
             "emitted_text_region_count": len(emitted_text_regions),
@@ -1045,10 +1101,20 @@ def emit_next_experiment(spec: dict[str, Any], layout: dict[str, Any]) -> str:
     y = primary["y"]
     w = primary["w"]
     h = primary["h"]
-    evidence_x = x + w * 0.016
-    strategy_x = x + w * 0.300
-    comparator_x = x + w * 0.605
-    decision_x = x + w * 0.792
+    if spec.get("compatible_layout_reflow_hint"):
+        evidence_x = x + w * 0.012
+        strategy_x = x + w * 0.282
+        comparator_x = x + w * 0.560
+        decision_x = x + w * 0.770
+        decision_text_w = 0.185
+        connector_label_y = -0.092
+    else:
+        evidence_x = x + w * 0.016
+        strategy_x = x + w * 0.300
+        comparator_x = x + w * 0.605
+        decision_x = x + w * 0.792
+        decision_text_w = 0.170
+        connector_label_y = -0.070
     mid_y = y + h * 0.460
     parts = [
         tex_node(evidence_x, y + 0.020, 0.230, r"\small\textbf{Failure evidence}", align="left"),
@@ -1072,15 +1138,15 @@ def emit_next_experiment(spec: dict[str, Any], layout: dict[str, Any]) -> str:
         parts.append(tex_node(comparator_x + 0.056, cy + 0.012, 0.145, rf"\footnotesize {tex_escape(comparator)}", align="center"))
     parts.extend(
         [
-            tex_node(decision_x - 0.005, y + 0.020, 0.170, r"\small\textbf{Decision rule}", align="center"),
+            tex_node(decision_x - 0.005, y + 0.020, decision_text_w, r"\small\textbf{Decision rule}", align="center"),
             rf"\draw[line width=1.1pt,draw=orange!85!black] ({decision_x+0.075:.4f},{mid_y-0.080:.4f}) -- ({decision_x+0.150:.4f},{mid_y:.4f}) -- ({decision_x+0.075:.4f},{mid_y+0.080:.4f}) -- ({decision_x:.4f},{mid_y:.4f}) -- cycle;",
             tex_node(decision_x + 0.020, mid_y - 0.020, 0.110, r"\footnotesize go/no-go", align="center"),
-            tex_node(decision_x - 0.002, mid_y + 0.108, 0.170, rf"\footnotesize {tex_escape(spec['decision_criterion'])}", align="left"),
+            tex_node(decision_x - 0.002, mid_y + 0.108, decision_text_w, rf"\footnotesize {tex_escape(spec['decision_criterion'])}", align="left"),
         ]
     )
     parts.extend([
         rf"\StageThreeConnector{{{evidence_x+0.218:.4f}}}{{{mid_y:.4f}}}{{{strategy_x-0.022:.4f}}}{{{mid_y:.4f}}};",
-        tex_node(evidence_x + 0.220, mid_y - 0.070, 0.075, r"\footnotesize motivates", align="center"),
+        tex_node(evidence_x + 0.220, mid_y + connector_label_y, 0.075, r"\footnotesize motivates", align="center"),
         rf"\StageThreeConnector{{{strategy_x+0.165:.4f}}}{{{mid_y:.4f}}}{{{comparator_x-0.018:.4f}}}{{{mid_y:.4f}}};",
         rf"\StageThreeConnector{{{comparator_x+0.115:.4f}}}{{{mid_y:.4f}}}{{{decision_x-0.018:.4f}}}{{{mid_y:.4f}}};",
     ])
@@ -1112,14 +1178,23 @@ def emit_image_panel(spec: dict[str, Any], layout: dict[str, Any], asset_map: di
     roi_w = roi["w"] / source_w * panel_w
     roi_h = roi["h"] / source_h * panel_h
     zoom_y = y + panel_h + 0.030
-    zoom_panel_w = 0.098
+    if spec.get("legend_repair_hint"):
+        zoom_panel_w = 0.086
+        zoom_gap = 0.016
+        zoom_x = primary["x"] + 0.045
+        legend_x = primary["x"] + primary["w"] - 0.214
+        legend_y = zoom_y + 0.002
+    else:
+        zoom_panel_w = 0.098
+        zoom_gap = 0.020
+        zoom_x = primary["x"] + 0.072
+        legend_x = zoom_x + 3 * (zoom_panel_w + zoom_gap) + 0.020
+        legend_y = zoom_y + 0.006
     zoom_panel_h = zoom_panel_w * SLIDE_W / SLIDE_H
-    zoom_gap = 0.020
-    zoom_x = primary["x"] + 0.072
     parts.extend(
         [
             rf"\draw[line width=0.9pt,draw=orange!85!black] ({roi_x:.4f},{roi_y:.4f}) rectangle ({roi_x+roi_w:.4f},{roi_y+roi_h:.4f});",
-            rf"\StageThreeConnector{{{roi_x+roi_w:.4f}}}{{{roi_y+roi_h:.4f}}}{{{zoom_x+zoom_panel_w*2+zoom_gap*2:.4f}}}{{{zoom_y:.4f}}};",
+            rf"\StageThreeConnector{{{roi_x+roi_w:.4f}}}{{{roi_y+roi_h:.4f}}}{{{zoom_x+zoom_panel_w*2+zoom_gap*2:.4f}}}{{{zoom_y - (0.016 if spec.get('legend_repair_hint') else 0.0):.4f}}};",
             tex_node(zoom_x, zoom_y - 0.030, 0.435, r"\footnotesize\textbf{Same-case ROI zoom}", align="left"),
         ]
     )
@@ -1128,16 +1203,15 @@ def emit_image_panel(spec: dict[str, Any], layout: dict[str, Any], asset_map: di
         crop_asset = asset_map[f"{raw}#roi_zoom"]
         parts.append(tex_node(zx, zoom_y, zoom_panel_w, rf"\includegraphics[width={zoom_panel_w:.4f}\paperwidth,height={zoom_panel_h:.4f}\paperheight,keepaspectratio]{{{crop_asset}}}", align="center"))
         parts.append(tex_node(zx, zoom_y + zoom_panel_h + 0.008, zoom_panel_w, rf"\scriptsize {tex_escape(label)}", align="center"))
-    legend_x = zoom_x + 3 * (zoom_panel_w + zoom_gap) + 0.020
     parts.extend(
         [
-            tex_node(legend_x, zoom_y + 0.006, 0.205, r"\footnotesize\textbf{Overlay legend}", align="left"),
-            rf"\fill[fill=teal!70!black] ({legend_x+0.010:.4f},{zoom_y+0.060:.4f}) circle (2.4pt);",
-            tex_node(legend_x + 0.025, zoom_y + 0.047, 0.145, r"\scriptsize TP: overlap", align="left"),
-            rf"\fill[fill=red!70!black] ({legend_x+0.010:.4f},{zoom_y+0.105:.4f}) circle (2.4pt);",
-            tex_node(legend_x + 0.025, zoom_y + 0.092, 0.145, r"\scriptsize FP: prediction only", align="left"),
-            rf"\fill[fill=orange!85!black] ({legend_x+0.010:.4f},{zoom_y+0.150:.4f}) circle (2.4pt);",
-            tex_node(legend_x + 0.025, zoom_y + 0.137, 0.145, r"\scriptsize FN: missed GT", align="left"),
+            tex_node(legend_x, legend_y, 0.205, r"\footnotesize\textbf{Overlay legend}", align="left"),
+            rf"\fill[fill=teal!70!black] ({legend_x+0.010:.4f},{legend_y+0.054:.4f}) circle (2.4pt);",
+            tex_node(legend_x + 0.025, legend_y + 0.041, 0.145, r"\scriptsize TP: overlap", align="left"),
+            rf"\fill[fill=red!70!black] ({legend_x+0.010:.4f},{legend_y+0.095:.4f}) circle (2.4pt);",
+            tex_node(legend_x + 0.025, legend_y + 0.082, 0.145, r"\scriptsize FP: prediction only", align="left"),
+            rf"\fill[fill=orange!85!black] ({legend_x+0.010:.4f},{legend_y+0.136:.4f}) circle (2.4pt);",
+            tex_node(legend_x + 0.025, legend_y + 0.123, 0.145, r"\scriptsize FN: missed GT", align="left"),
         ]
     )
     annotation = layout["resolved_supporting_object_geometry"]["caption"]

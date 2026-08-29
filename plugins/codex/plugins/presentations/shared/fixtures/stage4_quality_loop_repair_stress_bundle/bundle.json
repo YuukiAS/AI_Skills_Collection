@@ -1,0 +1,348 @@
+{
+  "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUNDLE_V1",
+  "stage5_holdout_eligible": false,
+  "holdout_exclusion_reason": "Repository-owned synthetic Stage 4 quality-loop repair stress bundle only; not a final Stage 5 paper or medical-imaging holdout.",
+  "metadata": {
+    "title": "Stage 4 Quality Loop Repair Stress Update",
+    "subtitle": "Uncertainty calibration across clustered data and segmentation stress cases",
+    "author": "Research Presentation Program",
+    "institute": "Department of Statistics & Data Science",
+    "date": "2026-08-27",
+    "audience": "doctoral research group",
+    "language": "en"
+  },
+  "source_material": {
+    "primary_markdown": "skills/tools/documents-media/presentations/shared/fixtures/stage4_quality_loop_repair_stress_bundle/source.md",
+    "evidence_assets": [
+      "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/simulation/simulation_summary.csv",
+      "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/small_g_negative_result.png",
+      "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_input.png",
+      "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_gt.png",
+      "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
+      "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png"
+    ]
+  },
+  "research_state": {
+    "previous_question": "Can the accepted Stage 1-3 components produce a source-faithful research update from one ordinary input bundle?",
+    "prior_belief": "Stage 3 can render mature exact-CUHK pages when driven by engineering integration specs.",
+    "new_evidence": "The bundle contains model text, simulation data, negative evidence, same-case segmentation images, and next-experiment rationale.",
+    "evidence_quality": "Public-safe synthetic engineering regression evidence; suitable for integration testing but excluded from final holdouts.",
+    "belief_update": "The production path should be judged on orchestration fidelity, not on final program maturity.",
+    "successes": "Model, result, experiment design, negative evidence, medical comparison, and next-experiment jobs are all supported by source anchors.",
+    "failures": "Small-G high-ICC imbalance remains anti-conservative, motivating the next experiment.",
+    "largest_uncertainty": "Whether deck rhythm and visual repair loops can make this production output final-quality across unseen real papers.",
+    "frozen_items": "Use exact CUHK Beamer source, normal gold retrieval, and Stage 3 executable layouts.",
+    "stop_items": "Do not use Stage 5 holdouts or benchmark generators as the production entrypoint.",
+    "next_discriminating_experiment": "Run a bounded visual-review and repair task on the production deck.",
+    "decision_needed": "Decide which page-level visual findings should feed the next Stage 4 quality-loop task."
+  },
+  "evidence": [
+    {
+      "id": "EV-MODEL-001",
+      "board": "equations",
+      "type": "source_markdown",
+      "source_path": "skills/tools/documents-media/presentations/shared/fixtures/stage4_engineering_research_bundle/source.md",
+      "source_anchor": "## Model",
+      "supports": "Clustered model separates center and individual variation.",
+      "consumed_as": "native LaTeX statistical model",
+      "status": "available"
+    },
+    {
+      "id": "EV-RESULT-001",
+      "board": "quantitative_plots",
+      "type": "csv",
+      "source_path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/simulation/simulation_summary.csv",
+      "source_anchor": "columns G,rho,imbalance,method,coverage,mc_se",
+      "supports": "Coverage differs by center count, ICC, imbalance, and interval method.",
+      "consumed_as": "presentation-native quantitative result figure",
+      "status": "available"
+    },
+    {
+      "id": "EV-DESIGN-001",
+      "board": "experiment_logs",
+      "type": "source_markdown",
+      "source_path": "skills/tools/documents-media/presentations/shared/fixtures/stage4_engineering_research_bundle/source.md",
+      "source_anchor": "## Experiment Design",
+      "supports": "DGP knobs feed clustered samples, interval procedures, and coverage diagnostics.",
+      "consumed_as": "typed experiment relation diagram",
+      "status": "available"
+    },
+    {
+      "id": "EV-NEGATIVE-001",
+      "board": "failed_experiments",
+      "type": "png",
+      "source_path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/small_g_negative_result.png",
+      "source_anchor": "small-G negative result figure",
+      "supports": "Small-G high-ICC imbalance remains anti-conservative.",
+      "consumed_as": "negative-evidence plot",
+      "status": "available"
+    },
+    {
+      "id": "EV-MEDICAL-001",
+      "board": "medical_images",
+      "type": "png_set",
+      "source_path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/",
+      "source_anchor": "failure_input/failure_gt/failure_pred/failure_error same-case image set",
+      "supports": "Same-case segmentation error pattern with TP/FP/FN colors.",
+      "consumed_as": "same-case medical image panel and ROI crop",
+      "status": "available"
+    },
+    {
+      "id": "EV-NEXT-001",
+      "board": "experiment_logs",
+      "type": "source_markdown",
+      "source_path": "skills/tools/documents-media/presentations/shared/fixtures/stage4_engineering_research_bundle/source.md",
+      "source_anchor": "## Next Experiment",
+      "supports": "DPP, random batch, Mondrian partition, CR2, and wild bootstrap define the next comparison.",
+      "consumed_as": "next-experiment decision diagram",
+      "status": "available"
+    }
+  ],
+  "page_jobs": [
+    {
+      "page_id": "production_model",
+      "page_job": "STATISTICAL_MODEL",
+      "section": "Model",
+      "workstream": {
+        "id": "clustered_interval_calibration",
+        "label": "Clustered interval calibration",
+        "scope": "model, coverage evidence, failure mode, and next experiment"
+      },
+      "title": "Clustered outcomes separate center and individual variation",
+      "key_message": "The source model makes center-level dependence explicit before interval comparison.",
+      "slide_purpose": "explain the method object",
+      "visual_intent": "native equation with source-grounded annotation",
+      "source_anchors": ["source.md:## Model"],
+      "required_evidence": ["EV-MODEL-001"],
+      "source_evidence_ids": ["EV-MODEL-001"],
+      "scientific_objects": ["clustered outcome equation", "center random effect", "individual error"],
+      "evidence_status": "available",
+      "uncertainty_status": "model assumption, not final theorem",
+      "layout_rationale": "equation is the main scientific object",
+      "qa_criteria": ["equation is typeset", "annotation explains center dependence", "no internal ids leak"],
+      "query": {
+        "page_function": "STATISTICAL_MODEL",
+        "scientific_object": "medical imaging objective equation mathematical model variance components",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "equation",
+        "evidence_type": "mathematical model",
+        "density": "low",
+        "panel_count": 0
+      },
+      "content_kind": "equation",
+      "dominant_object": "native_latex_math",
+      "math": "Y_{ij}=\\beta_0+\\beta_1T_{ij}+u_j+\\varepsilon_{ij},\\quad u_j\\sim N(0,\\tau^2),\\quad \\varepsilon_{ij}\\sim N(0,\\sigma^2)",
+      "annotation": "Center effects set \\(\\rho=\\tau^2/(\\tau^2+\\sigma^2)\\), so interval calibration depends on cluster count.",
+      "required_panel_count": 0
+    },
+    {
+      "page_id": "production_quantitative_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "section": "Results",
+      "workstream": {
+        "id": "clustered_interval_calibration",
+        "label": "Clustered interval calibration",
+        "scope": "model, coverage evidence, failure mode, and next experiment"
+      },
+      "title": "Cluster-robust intervals recover coverage as ICC increases",
+      "key_message": "The source simulation shows method-specific coverage under imbalanced clusters.",
+      "slide_purpose": "show quantitative evidence",
+      "visual_intent": "native coverage plot with nominal line and method legend",
+      "source_anchors": ["simulation_summary.csv:G,rho,imbalance,method,coverage,mc_se"],
+      "required_evidence": ["EV-RESULT-001"],
+      "source_evidence_ids": ["EV-RESULT-001"],
+      "scientific_objects": ["coverage curve", "nominal 0.95 target", "method comparison"],
+      "evidence_status": "available",
+      "uncertainty_status": "synthetic Monte Carlo regression evidence",
+      "layout_rationale": "quantitative result figure receives the dominant area",
+      "qa_criteria": ["axis and legend are readable", "nominal line is visible", "method direction is correct"],
+      "query": {
+        "page_function": "REAL_DATA_APPLICATION",
+        "scientific_object": "biostatistics quantitative model comparison result table figure coverage uncertainty",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "plot table",
+        "evidence_type": "quantitative comparison result",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "content_kind": "result_figure",
+      "dominant_object": "presentation_native_coverage_figure",
+      "data_source": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/simulation/simulation_summary.csv",
+      "figure_filter": {"imbalance": "imbalanced"},
+      "methods": [
+        {"id": "naive_iid_ols_z", "label": "naive iid", "color": "red!72!black"},
+        {"id": "cluster_robust_z", "label": "cluster-robust", "color": "teal!70!black"}
+      ],
+      "nominal_coverage": 0.95,
+      "callout": {"G": 8, "rho": 0.5, "label": "small-G stress"},
+      "annotation": "QA workflow/source bundle note: replace this internal production marker with the same-page source-grounded result message.",
+      "caption": "Synthetic clustered-data example; intervals compared on coverage, width, and bias.",
+      "required_panel_count": 1
+    },
+    {
+      "page_id": "production_experiment_design",
+      "page_job": "EXPERIMENT_DESIGN",
+      "section": "Design",
+      "workstream": {
+        "id": "clustered_interval_calibration",
+        "label": "Clustered interval calibration",
+        "scope": "model, coverage evidence, failure mode, and next experiment"
+      },
+      "title": "Simulation varies clustering before interval procedures are compared",
+      "key_message": "The source design routes DGP factors into procedures and endpoints.",
+      "slide_purpose": "explain experiment design",
+      "visual_intent": "typed left-to-right relation diagram",
+      "source_anchors": ["source.md:## Experiment Design"],
+      "required_evidence": ["EV-DESIGN-001"],
+      "source_evidence_ids": ["EV-DESIGN-001"],
+      "scientific_objects": ["DGP knobs", "clustered samples", "interval procedures", "coverage diagnostics"],
+      "evidence_status": "available",
+      "uncertainty_status": "design is regression-scoped",
+      "layout_rationale": "diagram must encode scientific dependencies, not generic arrows",
+      "qa_criteria": ["connector direction is meaningful", "factors and endpoints are visible", "no card dashboard fallback"],
+      "query": {
+        "page_function": "EXPERIMENT_DESIGN",
+        "scientific_object": "medical imaging task map experiment design clustered simulation procedure comparison",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "diagram",
+        "evidence_type": "experiment design",
+        "density": "moderate",
+        "panel_count": 4
+      },
+      "content_kind": "flow",
+      "dominant_object": "scientific_relation_diagram",
+      "nodes": ["DGP knobs", "Clustered samples", "Interval procedures", "Coverage diagnostics"],
+      "design_factors": ["centers \\(G=8,20,50\\)", "ICC \\(\\rho=0,.1,.3,.5\\)", "balanced or imbalanced clusters"],
+      "procedures": ["naive iid OLS z interval", "cluster-robust z interval with center scores"],
+      "endpoints": ["Coverage target 0.95", "mean interval width", "treatment-effect bias"],
+      "annotation": "The connector direction encodes data generation before interval estimation and coverage diagnostics.",
+      "required_panel_count": 4
+    },
+    {
+      "page_id": "production_negative_result",
+      "page_job": "NEGATIVE_RESULT",
+      "section": "Failure",
+      "workstream": {
+        "id": "clustered_interval_calibration",
+        "label": "Clustered interval calibration",
+        "scope": "model, coverage evidence, failure mode, and next experiment"
+      },
+      "title": "Small-G settings remain anti-conservative after robustification",
+      "key_message": "The negative evidence identifies a remaining finite-sample failure mode.",
+      "slide_purpose": "show failure evidence",
+      "visual_intent": "negative-evidence plot with adjacent interpretation",
+      "source_anchors": ["small_g_negative_result.png", "source.md:## Negative Evidence"],
+      "required_evidence": ["EV-NEGATIVE-001"],
+      "source_evidence_ids": ["EV-NEGATIVE-001"],
+      "scientific_objects": ["small-G failure plot", "finite-sample coverage gap"],
+      "evidence_status": "available",
+      "uncertainty_status": "requires CR2 and wild bootstrap comparator",
+      "layout_rationale": "failure plot remains visible with diagnostic explanation adjacent",
+      "qa_criteria": ["failure evidence is visible", "next comparator is not presented as completed", "axis remains readable"],
+      "query": {
+        "page_function": "NEGATIVE_RESULT",
+        "scientific_object": "negative result failure analysis finite sample model check coverage comparison",
+        "domain_family": "statistics",
+        "dominant_object_type": "plot",
+        "evidence_type": "failure evidence",
+        "density": "moderate",
+        "panel_count": 2
+      },
+      "content_kind": "figure",
+      "dominant_object": "negative_evidence_plot",
+      "asset": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/small_g_negative_result.png",
+      "annotation": "The failure region is adjacent to the diagnostic explanation instead of hidden in a note.",
+      "caption": "Negative evidence is completed; CR2 and wild cluster bootstrap remain the next test.",
+      "required_panel_count": 2
+    },
+    {
+      "page_id": "production_medical_comparison",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "section": "Medical Image",
+      "workstream": {
+        "id": "segmentation_robustness",
+        "label": "Segmentation robustness",
+        "scope": "independent visual failure analysis"
+      },
+      "title": "Same-case panels keep the segmentation error interpretable",
+      "key_message": "The image comparison preserves one-case geometry from source pixels to ROI zoom.",
+      "slide_purpose": "show image evidence",
+      "visual_intent": "same-case four-panel image band plus ROI crop",
+      "source_anchors": ["failure_input.png", "failure_gt.png", "failure_pred.png", "failure_error.png"],
+      "required_evidence": ["EV-MEDICAL-001"],
+      "source_evidence_ids": ["EV-MEDICAL-001"],
+      "scientific_objects": ["synthetic slice", "GT lesion", "prediction", "error overlay", "same-case ROI"],
+      "evidence_status": "available",
+      "uncertainty_status": "synthetic case evidence, not patient validation",
+      "layout_rationale": "image evidence gets full-width band and same-case zoom",
+      "qa_criteria": ["all panels share case geometry", "TP/FP/FN colors are adjacent", "ROI is inspectable"],
+      "query": {
+        "page_function": "MEDICAL_IMAGE_COMPARISON",
+        "scientific_object": "medical image lesion samples task applications visual comparison same case overlay error",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "medical_image",
+        "evidence_type": "representative image comparison",
+        "density": "high",
+        "panel_count": 4
+      },
+      "content_kind": "image_panel",
+      "dominant_object": "same_case_medical_panels",
+      "assets": [
+        "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_input.png",
+        "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_gt.png",
+        "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
+        "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png"
+      ],
+      "panel_labels": ["Input", "GT", "Prediction", "Error"],
+      "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+      "roi_crop_assets": [
+        "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_gt.png",
+        "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
+        "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png"
+      ],
+      "roi_crop_labels": ["GT crop", "Prediction crop", "Error crop"],
+      "annotation": "All panels and zoom crops come from one case and one ROI; TP/FP/FN colors remain adjacent to the error crop.",
+      "required_panel_count": 4
+    },
+    {
+      "page_id": "production_next_experiment",
+      "page_job": "NEXT_EXPERIMENT",
+      "section": "Next",
+      "workstream": {
+        "id": "clustered_interval_calibration",
+        "label": "Clustered interval calibration",
+        "scope": "model, coverage evidence, failure mode, and next experiment"
+      },
+      "title": "Next experiment tests whether batch selection reduces fragile coverage",
+      "key_message": "The next experiment links failure evidence to the comparator decision.",
+      "slide_purpose": "propose next discriminating experiment",
+      "visual_intent": "evidence-to-decision reasoning diagram",
+      "source_anchors": ["source.md:## Next Experiment"],
+      "required_evidence": ["EV-NEXT-001"],
+      "source_evidence_ids": ["EV-NEXT-001"],
+      "scientific_objects": ["small-G limit", "DPP batch query", "Mondrian partition", "CR2 / wild bootstrap"],
+      "evidence_status": "available",
+      "uncertainty_status": "planned experiment, not completed validation",
+      "layout_rationale": "next experiment must show evidence, manipulation, comparator, and decision rule",
+      "qa_criteria": ["planned status is clear", "decision criterion is visible", "comparator structure is typed"],
+      "query": {
+        "page_function": "NEXT_EXPERIMENT",
+        "scientific_object": "discussion next experiment batch query bayesian optimization active learning DPP Mondrian diverse selection partition",
+        "domain_family": "statistics",
+        "dominant_object_type": "diagram plot comparison",
+        "evidence_type": "next-query experimental design",
+        "density": "moderate",
+        "panel_count": 4
+      },
+      "content_kind": "next_experiment",
+      "dominant_object": "next_experiment_reasoning",
+      "nodes": ["Small-G limit", "DPP batch query", "Mondrian partition", "CR2 / wild bootstrap"],
+      "current_limit": "G=8, ICC=.5 and imbalanced clusters remain below nominal coverage.",
+      "strategy_variation": ["DPP diverse batch", "random batch", "Mondrian partition"],
+      "comparator_setup": ["CR2 small-sample correction", "wild cluster bootstrap"],
+      "decision_criterion": "Go if coverage >= .94 with controlled width; no-go stratifies by Mondrian cell.",
+      "annotation": "Coverage evidence determines which batch-query strategy to validate next; CR2 and wild bootstrap remain proposed comparators.",
+      "required_panel_count": 4
+    }
+  ]
+}

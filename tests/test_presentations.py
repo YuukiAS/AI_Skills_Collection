@@ -1218,6 +1218,191 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(unsafe["final_decision"], "QUALITY_LOOP_FAIL_NO_WINNER")
             self.assertIn("unsupported repair intent", unsafe["fail_closed_reason"])
 
+    def test_research_presentation_quality_loop_normalizes_terra_style_findings(self) -> None:
+        bundle = production_entry.load_bundle(SHARED / "fixtures/stage4_quality_loop_repair_stress_bundle/bundle.json")
+        deck_jobs, storyline_trace = production_entry.build_storyline(bundle)
+        specs = production_entry.build_specs(deck_jobs)
+        layouts = [stage3.resolve_layout(spec) for spec in specs]
+        rendered = [
+            {},
+            *[
+                {"path": f"synthetic/slide-{idx + 1}.png", "sha256": f"{idx:064x}"}
+                for idx in range(1, len(specs) + 1)
+            ],
+        ]
+        sequence = deck_quality_loop.build_sequence_summary(
+            specs=specs,
+            layouts=layouts,
+            render_status={"status": "ok", "rendered_png": rendered, "png_count": len(rendered)},
+            storyline_trace=storyline_trace,
+            render_input_identity={"sha256": "initial-render-input", "files": []},
+            contact_sheet_path="synthetic/contact_sheet.png",
+            contact_sheet_sha256="f" * 64,
+        )
+        review = {
+            "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+            "overall_decision": "REVISE",
+            "item_reviews": [{"item_id": "deck_contact_sheet", "scope": "deck", "decision": "REVISE"}],
+            "blocking_findings": [
+                {
+                    "finding_id": "synthetic-audience-copy",
+                    "target_logical_id": "slide_3_real_data_application",
+                    "requirement_id": "AUDIENCE_FACING_NO_WORKFLOW_PROVENANCE",
+                    "summary": "Audience body leaks internal workflow/source bundle copy.",
+                    "recommendation": "Remove production meta language using same-page source-grounded copy.",
+                },
+                {
+                    "finding_id": "synthetic-caption-collision",
+                    "target_logical_id": "slide_5_negative_result",
+                    "requirement_id": "FIGURE_CAPTION_SUPPORTING_COPY_COLLISION",
+                    "evidence": "The figure caption and supporting copy overlap near the bottom support band.",
+                    "recommendation": "Reserve a separate caption/support region.",
+                },
+                {
+                    "finding_id": "synthetic-small-primary",
+                    "target_logical_id": "slide_3_real_data_application",
+                    "requirement_id": "READABLE_SCIENTIFIC_OBJECTS",
+                    "evidence": "The primary plot is undersized for projection readability.",
+                    "recommendation": "Scale the primary scientific object while preserving caption space.",
+                },
+                {
+                    "finding_id": "synthetic-process-collision",
+                    "target_logical_id": "slide_6_next_experiment",
+                    "requirement_id": "NEXT_EXPERIMENT_DIAGRAM_READABILITY",
+                    "evidence": "The process diagram labels overlap and crowd the decision node.",
+                    "recommendation": "Use a compatible source-faithful reflow.",
+                },
+                {
+                    "finding_id": "synthetic-medical-legend",
+                    "target_logical_id": "slide_7_medical_image_comparison",
+                    "requirement_id": "MEDICAL_LEGEND_CALLOUT_OBSTRUCTION",
+                    "evidence": "The overlay legend covers the crop/panel region.",
+                    "recommendation": "Reserve a legend area without modifying medical pixels.",
+                },
+            ],
+        }
+        state = deck_quality_loop.consume_review_evidence(
+            review_evidence=review,
+            review_evidence_sha256=deck_quality_loop.stable_sha(review),
+            sequence_summary=sequence,
+            initial_render_identity=sequence["render_input_identity_sha256"],
+            initial_rendered_pixel_identity=sequence["rendered_pixel_identity_sha256"],
+            initial_render_input_manifest=sequence["render_input_manifest"],
+        )
+        self.assertTrue(state["repair_allowed"])
+        self.assertEqual(state["deck_level_decision"], "REPAIR_SELECTED")
+        self.assertEqual(
+            [directive["intent"] for directive in state["selected_repair_directives"]],
+            [
+                "SANITIZE_AUDIENCE_COPY",
+                "REPAIR_ANNOTATION_LEGEND",
+                "RESCALE_PRIMARY_OBJECT",
+                "SWAP_COMPATIBLE_GOLD_LAYOUT",
+                "REPAIR_ANNOTATION_LEGEND",
+            ],
+        )
+        for directive in state["selected_repair_directives"]:
+            self.assertIn("normalized_repair_mapping", directive)
+
+        ambiguous = {
+            "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+            "overall_decision": "REVISE",
+            "item_reviews": [{"item_id": "deck_contact_sheet", "scope": "deck", "decision": "REVISE"}],
+            "blocking_findings": [
+                {
+                    "finding_id": "synthetic-ambiguous",
+                    "target_logical_id": "slide_3_real_data_application",
+                    "requirement_id": "MATURE_DOCTORAL_GROUP_MEETING_BAR",
+                    "summary": "The page needs a better overall visual treatment.",
+                }
+            ],
+        }
+        unsafe = deck_quality_loop.consume_review_evidence(
+            review_evidence=ambiguous,
+            review_evidence_sha256=deck_quality_loop.stable_sha(ambiguous),
+            sequence_summary=sequence,
+            initial_render_identity=sequence["render_input_identity_sha256"],
+            initial_rendered_pixel_identity=sequence["rendered_pixel_identity_sha256"],
+            initial_render_input_manifest=sequence["render_input_manifest"],
+        )
+        self.assertEqual(unsafe["final_decision"], "QUALITY_LOOP_FAIL_NO_WINNER")
+        self.assertIn("does not uniquely map", unsafe["fail_closed_reason"])
+
+    def test_research_presentation_quality_loop_repair_directives_affect_render_inputs(self) -> None:
+        bundle = production_entry.load_bundle(SHARED / "fixtures/stage4_quality_loop_repair_stress_bundle/bundle.json")
+        deck_jobs, _ = production_entry.build_storyline(bundle)
+        specs = production_entry.build_specs(deck_jobs)
+        real_data = next(spec for spec in specs if spec["page_job"] == "REAL_DATA_APPLICATION")
+        negative = next(spec for spec in specs if spec["page_job"] == "NEGATIVE_RESULT")
+        next_experiment = next(spec for spec in specs if spec["page_job"] == "NEXT_EXPERIMENT")
+        medical = next(spec for spec in specs if spec["page_job"] == "MEDICAL_IMAGE_COMPARISON")
+
+        repaired = deck_quality_loop.apply_repair_directives(
+            specs,
+            [
+                {
+                    "directive_id": "repair-audience",
+                    "intent": "SANITIZE_AUDIENCE_COPY",
+                    "target_logical_ids": ["slide_3_real_data_application"],
+                },
+                {
+                    "directive_id": "repair-scale",
+                    "intent": "RESCALE_PRIMARY_OBJECT",
+                    "target_logical_ids": ["slide_3_real_data_application"],
+                },
+                {
+                    "directive_id": "repair-figure-support",
+                    "intent": "REPAIR_ANNOTATION_LEGEND",
+                    "target_logical_ids": ["slide_5_negative_result"],
+                },
+                {
+                    "directive_id": "repair-diagram",
+                    "intent": "SWAP_COMPATIBLE_GOLD_LAYOUT",
+                    "target_logical_ids": ["slide_6_next_experiment"],
+                },
+                {
+                    "directive_id": "repair-medical-legend",
+                    "intent": "REPAIR_ANNOTATION_LEGEND",
+                    "target_logical_ids": ["slide_7_medical_image_comparison"],
+                },
+            ],
+        )
+        repaired_real_data = next(spec for spec in repaired if spec["page_job"] == "REAL_DATA_APPLICATION")
+        self.assertEqual(repaired_real_data["annotation"], real_data["key_message"])
+        self.assertTrue(repaired_real_data["audience_copy_repair_trace"])
+        self.assertNotIn("workflow", repaired_real_data["annotation"].lower())
+
+        initial_real_layout = stage3.resolve_layout(real_data)
+        repaired_real_layout = stage3.resolve_layout(repaired_real_data)
+        self.assertNotEqual(initial_real_layout["resolved_primary_object_geometry"], repaired_real_layout["resolved_primary_object_geometry"])
+        self.assertIn("primary_object_scale_hint", repaired_real_layout["source_recipe_fields_consumed"])
+
+        initial_negative_layout = stage3.resolve_layout(negative)
+        repaired_negative = next(spec for spec in repaired if spec["page_job"] == "NEGATIVE_RESULT")
+        repaired_negative_layout = stage3.resolve_layout(repaired_negative)
+        self.assertNotEqual(
+            initial_negative_layout["resolved_supporting_object_geometry"],
+            repaired_negative_layout["resolved_supporting_object_geometry"],
+        )
+        self.assertIn("legend_repair_hint", repaired_negative_layout["source_recipe_fields_consumed"])
+
+        initial_next_layout = stage3.resolve_layout(next_experiment)
+        repaired_next = next(spec for spec in repaired if spec["page_job"] == "NEXT_EXPERIMENT")
+        repaired_next_layout = stage3.resolve_layout(repaired_next)
+        self.assertNotEqual(initial_next_layout["resolved_primary_object_geometry"], repaired_next_layout["resolved_primary_object_geometry"])
+        self.assertIn("compatible_layout_reflow_hint", repaired_next_layout["source_recipe_fields_consumed"])
+
+        repaired_medical = next(spec for spec in repaired if spec["page_job"] == "MEDICAL_IMAGE_COMPARISON")
+        with tempfile.TemporaryDirectory() as tmp:
+            build_dir = Path(tmp)
+            initial_medical = copy.deepcopy(medical)
+            initial_asset_map = stage3.copy_assets([initial_medical], build_dir / "initial")
+            repaired_asset_map = stage3.copy_assets([repaired_medical], build_dir / "repaired")
+            initial_tex = stage3.emit_image_panel(initial_medical, stage3.resolve_layout(initial_medical), initial_asset_map)
+            repaired_tex = stage3.emit_image_panel(repaired_medical, stage3.resolve_layout(repaired_medical), repaired_asset_map)
+        self.assertNotEqual(initial_tex, repaired_tex)
+        self.assertIn("legend_repair_hint", stage3.resolve_layout(repaired_medical)["source_recipe_fields_consumed"])
+
     def test_research_presentation_storyline_grouping_is_source_derived(self) -> None:
         bundle = json.loads((SHARED / "fixtures/stage4_engineering_research_bundle/bundle.json").read_text(encoding="utf-8"))
         mutated = copy.deepcopy(bundle)

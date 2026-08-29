@@ -302,6 +302,7 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
             "SWAP_COMPATIBLE_GOLD_LAYOUT",
             "RESCALE_PRIMARY_OBJECT",
             "REPAIR_ANNOTATION_LEGEND",
+            "SANITIZE_AUDIENCE_COPY",
         }:
             errors.append(f"quality_loop_state.json: unsupported repair intent {directive.get('intent')}")
         constraints = directive.get("source_fidelity_constraints", {})

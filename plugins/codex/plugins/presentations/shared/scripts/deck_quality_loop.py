@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
@@ -18,6 +19,7 @@ ALLOWED_REPAIR_INTENTS = {
     "SWAP_COMPATIBLE_GOLD_LAYOUT",
     "RESCALE_PRIMARY_OBJECT",
     "REPAIR_ANNOTATION_LEGEND",
+    "SANITIZE_AUDIENCE_COPY",
 }
 FINAL_DECISIONS = {"READY_TO_DELIVER", "QUALITY_LOOP_FAIL_NO_WINNER"}
 WAITING_DECISIONS = {"WAITING_FOR_DECK_VISUAL_REVIEW", "WAITING_FOR_REPAIRED_DECK_REVIEW"}
@@ -94,6 +96,12 @@ def build_sequence_summary(
                 "selected_reference_id": layout.get("selected_reference_id"),
                 "primary_scientific_object_type": spec.get("dominant_object") or spec.get("content_kind"),
                 "scientific_objects": spec.get("scientific_objects", []),
+                "source_grounded_copy_candidates": {
+                    key: spec.get(key)
+                    for key in ["key_message", "annotation", "caption"]
+                    if spec.get(key)
+                },
+                "forbidden_audience_terms": _forbidden_audience_terms(),
                 "visual_density": visual_density(spec, layout),
                 "rendered_page_path": rendered_path,
                 "rendered_page_sha256": rendered_sha,
@@ -189,20 +197,177 @@ def _page_by_logical_id(sequence_summary: dict[str, Any]) -> dict[str, dict[str,
     return {page["logical_id"]: page for page in sequence_summary.get("pages", [])}
 
 
+def _as_list(value: Any) -> list[Any]:
+    if value is None:
+        return []
+    if isinstance(value, list):
+        return value
+    return [value]
+
+
+def _normalized_text(*values: Any) -> str:
+    parts: list[str] = []
+    for value in values:
+        if isinstance(value, dict):
+            parts.extend(str(item) for item in value.values())
+        elif isinstance(value, list):
+            parts.extend(str(item) for item in value)
+        elif value is not None:
+            parts.append(str(value))
+    return " ".join(parts).lower()
+
+
+def _resolve_target_logical_ids(finding: dict[str, Any], sequence_summary: dict[str, Any]) -> tuple[list[str], str | None]:
+    pages = _page_by_logical_id(sequence_summary)
+    by_page_id = {page["page_id"]: page["logical_id"] for page in sequence_summary.get("pages", [])}
+    by_job: dict[str, list[str]] = {}
+    for page in sequence_summary.get("pages", []):
+        by_job.setdefault(str(page["page_job"]).upper(), []).append(page["logical_id"])
+
+    raw_targets: list[Any] = []
+    for key in ["target_logical_ids", "target_items", "target_page_ids", "target_logical_id", "target_page_id", "item_id"]:
+        raw_targets.extend(_as_list(finding.get(key)))
+
+    targets: list[str] = []
+    for raw in raw_targets:
+        target = str(raw)
+        if target in pages:
+            targets.append(target)
+        elif target in by_page_id:
+            targets.append(by_page_id[target])
+
+    for job in _as_list(finding.get("target_page_job") or finding.get("page_job")):
+        matches = by_job.get(str(job).upper(), [])
+        if len(matches) == 1:
+            targets.extend(matches)
+        elif len(matches) > 1:
+            return [], f"finding target page_job is not unique: {job}"
+
+    deduped = list(dict.fromkeys(targets))
+    if not deduped:
+        return [], "finding lacks a structured target deck page"
+    return deduped, None
+
+
+def _requirement_text(finding: dict[str, Any]) -> str:
+    return _normalized_text(
+        finding.get("requirement_id"),
+        finding.get("requirement_ids"),
+        finding.get("category"),
+        finding.get("scope"),
+    )
+
+
+def _finding_evidence_text(finding: dict[str, Any]) -> str:
+    return _normalized_text(
+        finding.get("summary"),
+        finding.get("evidence"),
+        finding.get("observation"),
+        finding.get("observations"),
+        finding.get("recommendation"),
+    )
+
+
+def _contains_any(text: str, terms: tuple[str, ...]) -> bool:
+    return any(term in text for term in terms)
+
+
+def _source_grounded_copy_candidates(page: dict[str, Any]) -> list[dict[str, str]]:
+    candidates = []
+    for field, value in page.get("source_grounded_copy_candidates", {}).items():
+        text = str(value or "").strip()
+        if text:
+            candidates.append({"field": field, "text": text})
+    return candidates
+
+
+def _has_safe_audience_replacement(page: dict[str, Any]) -> bool:
+    forbidden = tuple(str(term).lower() for term in page.get("forbidden_audience_terms", []))
+    for candidate in _source_grounded_copy_candidates(page):
+        lowered = candidate["text"].lower()
+        if not _contains_any(lowered, forbidden):
+            return True
+    return False
+
+
+def _infer_intent_for_page(finding: dict[str, Any], page: dict[str, Any]) -> tuple[str | None, str | None]:
+    requirement = _requirement_text(finding)
+    evidence = _finding_evidence_text(finding)
+    combined = f"{requirement} {evidence}"
+    page_job = str(page.get("page_job") or "").upper()
+    object_kind = str(page.get("primary_scientific_object_type") or "").lower()
+    density = page.get("visual_density", {})
+    capacity_status = density.get("capacity_status")
+
+    audience_terms = ("audience", "internal", "workflow", "provenance", "meta", "source bundle", "repo path", "qa")
+    if _contains_any(requirement, ("audience", "internal", "workflow", "provenance", "meta")) and _contains_any(combined, audience_terms):
+        if _has_safe_audience_replacement(page):
+            return "SANITIZE_AUDIENCE_COPY", None
+        return None, "audience-copy repair requires a same-page source-grounded replacement"
+
+    if page_job == "MEDICAL_IMAGE_COMPARISON" and _contains_any(requirement, ("medical", "legend", "callout", "obstruction", "readable")):
+        if _contains_any(evidence, ("legend", "callout", "obstruct", "cover", "overlay", "crop", "panel")):
+            return "REPAIR_ANNOTATION_LEGEND", None
+
+    if page_job in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"} and _contains_any(requirement, ("diagram", "process", "next", "collision", "layout", "readability")):
+        if _contains_any(evidence, ("collision", "overlap", "crowd", "clipping", "label", "diagram")):
+            return "SWAP_COMPATIBLE_GOLD_LAYOUT", None
+
+    if object_kind in {"figure", "result_figure", "plot table", "presentation_native_coverage_figure", "negative_evidence_plot"}:
+        if _contains_any(requirement, ("caption", "support", "layout", "overlap", "collision")) and _contains_any(evidence, ("caption", "support", "overlap", "collision", "clipping", "crowd")):
+            return "REPAIR_ANNOTATION_LEGEND", None
+        if _contains_any(requirement, ("readable", "readability", "primary", "scientific_object", "projection")) and _contains_any(evidence, ("small", "undersized", "unreadable", "projection", "scale")):
+            if capacity_status == "SPLIT_REQUIRED":
+                return "SPLIT_OVERDENSE_PAGE", None
+            return "RESCALE_PRIMARY_OBJECT", None
+
+    return None, "finding does not uniquely map to a frozen safe repair family"
+
+
+def normalize_finding_for_repair(finding: dict[str, Any], sequence_summary: dict[str, Any]) -> tuple[dict[str, Any], str | None]:
+    explicit_intent = str(finding.get("repair_intent") or finding.get("intent") or "")
+    if explicit_intent:
+        return finding, None
+
+    target_logical_ids, reason = _resolve_target_logical_ids(finding, sequence_summary)
+    if reason:
+        return finding, reason
+
+    pages = _page_by_logical_id(sequence_summary)
+    inferred: list[str] = []
+    for logical_id in target_logical_ids:
+        intent, page_reason = _infer_intent_for_page(finding, pages[logical_id])
+        if intent is None:
+            return finding, page_reason
+        inferred.append(intent)
+
+    unique_intents = set(inferred)
+    if len(unique_intents) != 1:
+        return finding, f"finding maps to multiple repair families: {sorted(unique_intents)}"
+
+    normalized = dict(finding)
+    normalized["repair_intent"] = inferred[0]
+    normalized["target_logical_ids"] = target_logical_ids
+    normalized["normalized_repair_mapping"] = {
+        "source": "structured_visual_finding_without_repair_intent",
+        "requirement_basis": finding.get("requirement_id") or finding.get("requirement_ids"),
+        "target_basis": target_logical_ids,
+    }
+    return normalized, None
+
+
 def map_finding_to_directive(finding: dict[str, Any], sequence_summary: dict[str, Any]) -> tuple[dict[str, Any] | None, str | None]:
+    finding, normalization_reason = normalize_finding_for_repair(finding, sequence_summary)
+    if normalization_reason:
+        return None, normalization_reason
     intent = str(finding.get("repair_intent") or finding.get("intent") or "")
     if intent not in ALLOWED_REPAIR_INTENTS:
         return None, f"unsupported repair intent: {intent or '<missing>'}"
 
     pages = _page_by_logical_id(sequence_summary)
-    targets = list(finding.get("target_logical_ids") or finding.get("target_items") or [])
-    if not targets:
-        target = finding.get("target_logical_id") or finding.get("item_id")
-        if target and target in pages:
-            targets = [target]
-    missing = [target for target in targets if target not in pages]
-    if missing:
-        return None, f"finding targets unknown deck pages: {missing}"
+    targets, target_reason = _resolve_target_logical_ids(finding, sequence_summary)
+    if target_reason:
+        return None, target_reason
 
     if intent == "ADJUST_TRANSITION_CUE" and not any(pages[target].get("transition_cue") for target in targets):
         return None, "ADJUST_TRANSITION_CUE requires an existing source-supported transition cue"
@@ -233,6 +398,14 @@ def map_finding_to_directive(finding: dict[str, Any], sequence_summary: dict[str
             "must_preserve_cuhk_identity": True,
         },
     }
+    if finding.get("normalized_repair_mapping"):
+        directive["normalized_repair_mapping"] = finding["normalized_repair_mapping"]
+    if intent == "SANITIZE_AUDIENCE_COPY":
+        directive["audience_copy_repair"] = {
+            "remove_internal_meta_language": True,
+            "replacement_scope": "same_page_source_grounded_copy_only",
+            "candidate_fields": ["key_message", "annotation", "caption"],
+        }
     return directive, None
 
 
@@ -308,7 +481,7 @@ def consume_review_evidence(
 
 def apply_repair_directives(specs: list[dict[str, Any]], directives: list[dict[str, Any]]) -> list[dict[str, Any]]:
     by_logical_id = {f"slide_{index + 1}_{spec['page_job'].lower()}": spec for index, spec in enumerate(specs, start=1)}
-    repaired = [dict(spec) for spec in specs]
+    repaired = [deepcopy(spec) for spec in specs]
     repaired_by_logical_id = {f"slide_{index + 1}_{spec['page_job'].lower()}": spec for index, spec in enumerate(repaired, start=1)}
     for directive in directives:
         for logical_id in directive.get("target_logical_ids", []):
@@ -324,4 +497,65 @@ def apply_repair_directives(specs: list[dict[str, Any]], directives: list[dict[s
                 spec["primary_object_scale_hint"] = "deck_quality_repair_projection_readability"
             elif directive["intent"] == "REPAIR_ANNOTATION_LEGEND":
                 spec["legend_repair_hint"] = "deck_quality_repair_existing_annotation_only"
+            elif directive["intent"] == "SWAP_COMPATIBLE_GOLD_LAYOUT":
+                spec["compatible_layout_reflow_hint"] = "deck_quality_repair_source_faithful_reflow"
+            elif directive["intent"] == "SPLIT_OVERDENSE_PAGE":
+                spec["split_overdense_page_hint"] = "deck_quality_repair_split_required"
+            elif directive["intent"] == "SANITIZE_AUDIENCE_COPY":
+                replacement = _select_audience_copy_replacement(spec)
+                if replacement:
+                    field, text = replacement
+                    trace = spec.setdefault("audience_copy_repair_trace", [])
+                    changed = False
+                    for target_field in ["annotation", "caption"]:
+                        if target_field in spec and _contains_any(str(spec[target_field]).lower(), tuple(term.lower() for term in _forbidden_audience_terms())):
+                            trace.append(
+                                {
+                                    "field": target_field,
+                                    "original": spec[target_field],
+                                    "replacement_source_field": field,
+                                }
+                            )
+                            spec[target_field] = text
+                            changed = True
+                    if not changed and spec.get("annotation") != text:
+                        trace.append(
+                            {
+                                "field": "annotation",
+                                "original": spec.get("annotation"),
+                                "replacement_source_field": field,
+                                "reason": "reviewer identified internal/meta audience copy without a narrower local field match",
+                            }
+                        )
+                        spec["annotation"] = text
     return repaired
+
+
+def _forbidden_audience_terms() -> list[str]:
+    return [
+        "RRL-",
+        "SRC-",
+        "GSC-",
+        "Reference retrieval",
+        "EVIDENCE_MANIFEST",
+        "Diagram contract",
+        "QA",
+        "repo path",
+        "run ID",
+        "implementation commit",
+        "implementation language",
+        "source bundle",
+        "provenance",
+        "review target",
+        "fixture",
+        "workflow",
+    ]
+
+
+def _select_audience_copy_replacement(spec: dict[str, Any]) -> tuple[str, str] | None:
+    forbidden = tuple(term.lower() for term in _forbidden_audience_terms())
+    for field in ["key_message", "caption", "annotation"]:
+        text = str(spec.get(field) or "").strip()
+        if text and not _contains_any(text.lower(), forbidden):
+            return field, text
+    return None
