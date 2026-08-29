@@ -16,20 +16,20 @@
   },
   "identity_bindings": {
     "task_key": "042_research_presentation_semantic_compatibility_recovery",
-    "implementation_commit": "efc9d40e23dfa00cc9cba709c31f80f86044b5b0",
-    "input_title": "Synthetic Semantic-Alias Research Presentation Stress Deck",
+    "implementation_commit": "efa645a46c4e9a6269b7ef1d0e39f186eb015f7a",
+    "input_title": "Clustered Interval Calibration and Segmentation Robustness",
     "build_manifest": "results/042_research_presentation_semantic_compatibility_recovery/generated/BUILD_MANIFEST.json",
-    "build_manifest_sha256": "41b2dbf7891635ed12191002815165167848bcfed5091339214e5b18f562eaa9",
+    "build_manifest_sha256": "2e9b798ca5da9ceeacc3918ff0acd0766eec78844865780360bbb8d505b08766",
     "source_fidelity_map": "results/042_research_presentation_semantic_compatibility_recovery/generated/source_fidelity_map.json",
     "source_fidelity_map_sha256": "bd47fe5dc03da4af889bb37df76305b6daba263b2de771c12d9118e388a23a57",
     "deck_sequence_summary": "results/042_research_presentation_semantic_compatibility_recovery/generated/deck_sequence_summary.json",
-    "deck_sequence_summary_sha256": "1135126cab23e0f7a6a89888cb0bbc4bf9a899ed0507bda26e7db268e0892b37",
+    "deck_sequence_summary_sha256": "f9377d5f87a02687f68a72ec94367d13593d11427cf24d26b4db037cede983b6",
     "quality_loop_state": "results/042_research_presentation_semantic_compatibility_recovery/generated/quality_loop_state.json",
-    "quality_loop_state_sha256": "4f5907b2cbaf44f739eaf3b7d20d9e1155396096d0584c677181ad969e87cf3a",
+    "quality_loop_state_sha256": "6a0635b21e4727d2bfa2090519849bc68cc5e26469edd1dc0078fe8756536b43",
     "deck_contact_sheet": "results/042_research_presentation_semantic_compatibility_recovery/generated/deck_contact_sheet.png",
-    "deck_contact_sheet_sha256": "78136bd068b0306f17e780064d782d7c32007f9231b7ec8a509568a62b921fc5",
-    "deck_identity_sha256": "7e75de0540a60a099fa59c977d7594d994131d1527c5d287ee785bf04d3842ef",
-    "render_input_identity_sha256": "cf0af54c270a7ee875bb913d9357de4b8960307bc295e04a3a46c4bfdf52b1c2",
+    "deck_contact_sheet_sha256": "5d5cfd3e53010eb0cc9141173ac46e36c75c20940d6670ba52d3439170fa6dda",
+    "deck_identity_sha256": "14fc12f9d231ddcb4c75d141eec0f4b905c08cd9ca66e5ae4b5ddc6f3300c874",
+    "render_input_identity_sha256": "27efc0ee49544570baa87dc7a116fa565c3cd3150890bfc8c057bdf204017302",
     "render_input_identity": {
       "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
       "build_workspace": "results/042_research_presentation_semantic_compatibility_recovery/generated/cuhk_production_build",
@@ -62,7 +62,7 @@
         {
           "path": "results/042_research_presentation_semantic_compatibility_recovery/generated/cuhk_production_build/main.tex",
           "role": "main_tex",
-          "sha256": "252dc201d469b34d5b2bf8979ff8c0ee4983a7ca941b5b29dbf39609141b9e38"
+          "sha256": "51e77f350bab9afb202fcb30dad3878cf056ab3a74f2436629051545b4563935"
         },
         {
           "path": "results/042_research_presentation_semantic_compatibility_recovery/generated/cuhk_production_build/scientific_layouts.tex",
@@ -135,10 +135,10 @@
           "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
         }
       ],
-      "sha256": "cf0af54c270a7ee875bb913d9357de4b8960307bc295e04a3a46c4bfdf52b1c2"
+      "sha256": "27efc0ee49544570baa87dc7a116fa565c3cd3150890bfc8c057bdf204017302"
     },
-    "rendered_pixel_identity_sha256": "f0289d94e034f1a676c5a9c4e82dfc335a7e5a8ba43a577f243f88aa1f2da9fd",
-    "pdf_sha256": "e786548c45aa4ae5c0b87bcf20080b672ea2174be29fc4e6975582947d439795",
+    "rendered_pixel_identity_sha256": "9f9c2625514e5c78c57168463cbd48fbc29c587307a1754dbe957894407bf982",
+    "pdf_sha256": "d0eb60565541f036c3577f6bf3c449b8dd578381272393ab3ed6cc0e91b9e28c",
     "page_job_by_logical_id": {
       "slide_2_statistical_model": "STATISTICAL_MODEL",
       "slide_3_real_data_application": "REAL_DATA_APPLICATION",
@@ -223,7 +223,7 @@
       "logical_id": "deck_contact_sheet",
       "path": "results/042_research_presentation_semantic_compatibility_recovery/generated/deck_contact_sheet.png",
       "mime_type": "image/png",
-      "sha256": "78136bd068b0306f17e780064d782d7c32007f9231b7ec8a509568a62b921fc5",
+      "sha256": "5d5cfd3e53010eb0cc9141173ac46e36c75c20940d6670ba52d3439170fa6dda",
       "description": "Deck-level contact sheet preserving the rendered slide sequence for rhythm, density, transition, and template-repeat review.",
       "review_role": "deck_sequence_context"
     }

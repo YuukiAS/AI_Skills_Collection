@@ -3,9 +3,9 @@
   "max_repair_cycles": 1,
   "repair_cycle_count": 0,
   "render_identity_kind": "render_input_identity_sha256",
-  "initial_render_identity": "cf0af54c270a7ee875bb913d9357de4b8960307bc295e04a3a46c4bfdf52b1c2",
-  "initial_render_input_identity": "cf0af54c270a7ee875bb913d9357de4b8960307bc295e04a3a46c4bfdf52b1c2",
-  "initial_rendered_pixel_identity": "f0289d94e034f1a676c5a9c4e82dfc335a7e5a8ba43a577f243f88aa1f2da9fd",
+  "initial_render_identity": "27efc0ee49544570baa87dc7a116fa565c3cd3150890bfc8c057bdf204017302",
+  "initial_render_input_identity": "27efc0ee49544570baa87dc7a116fa565c3cd3150890bfc8c057bdf204017302",
+  "initial_rendered_pixel_identity": "9f9c2625514e5c78c57168463cbd48fbc29c587307a1754dbe957894407bf982",
   "initial_render_input_manifest": {
     "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
     "build_workspace": "results/042_research_presentation_semantic_compatibility_recovery/generated/cuhk_production_build",
@@ -38,7 +38,7 @@
       {
         "path": "results/042_research_presentation_semantic_compatibility_recovery/generated/cuhk_production_build/main.tex",
         "role": "main_tex",
-        "sha256": "252dc201d469b34d5b2bf8979ff8c0ee4983a7ca941b5b29dbf39609141b9e38"
+        "sha256": "51e77f350bab9afb202fcb30dad3878cf056ab3a74f2436629051545b4563935"
       },
       {
         "path": "results/042_research_presentation_semantic_compatibility_recovery/generated/cuhk_production_build/scientific_layouts.tex",
@@ -111,7 +111,7 @@
         "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
       }
     ],
-    "sha256": "cf0af54c270a7ee875bb913d9357de4b8960307bc295e04a3a46c4bfdf52b1c2"
+    "sha256": "27efc0ee49544570baa87dc7a116fa565c3cd3150890bfc8c057bdf204017302"
   },
   "review_evidence_identity": null,
   "deck_level_decision": "WAITING_FOR_DECK_VISUAL_REVIEW",
