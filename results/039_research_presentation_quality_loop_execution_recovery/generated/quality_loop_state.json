@@ -1,0 +1,405 @@
+{
+  "schema": "RESEARCH_PRESENTATION_DECK_QUALITY_LOOP_STATE_V1",
+  "max_repair_cycles": 1,
+  "repair_cycle_count": 1,
+  "render_identity_kind": "render_input_identity_sha256",
+  "initial_render_identity": "5f6af22586b9ea4bb6a59077fc5bd3664d372188a4b4daa2133d36ba7b7f06ad",
+  "initial_render_input_identity": "5f6af22586b9ea4bb6a59077fc5bd3664d372188a4b4daa2133d36ba7b7f06ad",
+  "initial_rendered_pixel_identity": "99cbf718c5de368bb026ee7f3187768f341f5b53d842fa2ab36ad99595dc0355",
+  "initial_render_input_manifest": {
+    "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+    "build_workspace": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build",
+    "files": [
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/assets/background.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/assets/background_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/assets/logo_RGB.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/bibliography.bib",
+        "role": "canonical_cuhk_support",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/main.tex",
+        "role": "main_tex",
+        "sha256": "ff0d47d24fd7161fc6d4aa4e8947056c0a226e04e97ce90a3f9a7eefe4ed8598"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/scientific_layouts.tex",
+        "role": "scientific_layout_include",
+        "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_error.png",
+        "role": "copied_scientific_asset",
+        "sha256": "9c196b9f214495095402d579b524e77c30144a3831aa065ecb990e964960440f"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_error_semantic_overlay.png",
+        "role": "copied_scientific_asset",
+        "sha256": "0b19ba2824e4cc218ded74852e7a727ada39b0167b0e43afb32d416da008c33b"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_error_semantic_overlay_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "714215004c184be2ed205b0d37c13d28ff8b93afd71536c68aeb0fd90e300870"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_gt.png",
+        "role": "copied_scientific_asset",
+        "sha256": "70fe06d3c80ba25484ceaf0484820fea0ab6378d0852d64deda972d175d7dbaf"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_gt_semantic_overlay.png",
+        "role": "copied_scientific_asset",
+        "sha256": "123680750fecb846a0164b476094e47d123e5a6dbc43a4d9a451b0de3deb59f7"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_gt_semantic_overlay_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "bcedb58f27502ca8978bbbcc4e435a77c4e014ea61a6f923864161ccc11d370a"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_input.png",
+        "role": "copied_scientific_asset",
+        "sha256": "dbb133c18d2b0879cb193be19034ba6cfeeeb2b35876d506ca1af2faaed745e5"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_pred.png",
+        "role": "copied_scientific_asset",
+        "sha256": "41ed6a894559333c82a5bc2e2885528060684a40ffd7de2e4e725eba982c5c7a"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_pred_semantic_overlay.png",
+        "role": "copied_scientific_asset",
+        "sha256": "cd4c4f94bf816155425dbbaabd2efb17c884848d67acf38f6774933107ab40bb"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_pred_semantic_overlay_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "19e88c9a264c8e98f369d7e890f7e44e1122da90fef34c3da9f0146724d1abd2"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/small_g_negative_result.png",
+        "role": "copied_scientific_asset",
+        "sha256": "69b2c66637554bd9fb44c319cbdeab52037906aadd1e49a145dae657c5252e8b"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/styles/sintefcolor.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+      }
+    ],
+    "sha256": "5f6af22586b9ea4bb6a59077fc5bd3664d372188a4b4daa2133d36ba7b7f06ad"
+  },
+  "review_evidence_identity": "bdf213991b0f0adddc2a29fda35b21471ad759a6a64fcce962d5a6d95f5be54b",
+  "deck_level_decision": "WAITING_FOR_REPAIRED_DECK_REVIEW",
+  "blocking_findings": [
+    {
+      "finding_id": "synthetic-audience-copy",
+      "scope": "page",
+      "target_logical_id": "slide_3_real_data_application",
+      "requirement_id": "AUDIENCE_FACING_NO_WORKFLOW_PROVENANCE",
+      "summary": "Audience body leaks internal workflow/source bundle copy.",
+      "evidence": "The page body contains production meta language instead of source-grounded research copy.",
+      "recommendation": "Remove internal/meta language using same-page source-grounded copy."
+    },
+    {
+      "finding_id": "synthetic-caption-collision",
+      "scope": "page",
+      "target_logical_id": "slide_5_negative_result",
+      "requirement_id": "FIGURE_CAPTION_SUPPORTING_COPY_COLLISION",
+      "summary": "Figure support text collides with the caption band.",
+      "evidence": "The primary figure, caption, and supporting copy crowd the right-side explanation area.",
+      "recommendation": "Reserve a distinct annotation/caption region without changing the source claim."
+    },
+    {
+      "finding_id": "synthetic-small-primary",
+      "scope": "page",
+      "target_logical_id": "slide_3_real_data_application",
+      "requirement_id": "READABLE_SCIENTIFIC_OBJECTS",
+      "summary": "The primary quantitative object is undersized for projection.",
+      "evidence": "The main plot needs more visual area while preserving readable support text.",
+      "recommendation": "Scale the primary scientific object and keep a separate support band."
+    },
+    {
+      "finding_id": "synthetic-process-collision",
+      "scope": "page",
+      "target_logical_id": "slide_6_next_experiment",
+      "requirement_id": "NEXT_EXPERIMENT_DIAGRAM_READABILITY",
+      "summary": "The process/decision diagram has label collision.",
+      "evidence": "Comparator labels, decision text, and connector labels are crowded in the right half.",
+      "recommendation": "Use a compatible source-faithful reflow for the decision diagram."
+    },
+    {
+      "finding_id": "synthetic-medical-legend",
+      "scope": "page",
+      "target_logical_id": "slide_7_medical_image_comparison",
+      "requirement_id": "MEDICAL_LEGEND_CALLOUT_OBSTRUCTION",
+      "summary": "The medical overlay legend obstructs the crop/panel region.",
+      "evidence": "The legend and callout share space with medical comparison imagery.",
+      "recommendation": "Reserve a legend area without modifying medical source pixels or masks."
+    }
+  ],
+  "selected_repair_directives": [
+    {
+      "directive_id": "repair_cde977220e0a",
+      "intent": "SANITIZE_AUDIENCE_COPY",
+      "target_logical_ids": [
+        "slide_3_real_data_application"
+      ],
+      "finding_id": "synthetic-audience-copy",
+      "reason": "Audience body leaks internal workflow/source bundle copy.",
+      "source_fidelity_constraints": {
+        "may_rewrite_scientific_claims": false,
+        "may_invent_source_relationships": false,
+        "may_force_gold_id": false,
+        "may_override_scores": false,
+        "must_preserve_cuhk_identity": true
+      },
+      "normalized_repair_mapping": {
+        "source": "structured_visual_finding_without_repair_intent",
+        "requirement_basis": "AUDIENCE_FACING_NO_WORKFLOW_PROVENANCE",
+        "target_basis": [
+          "slide_3_real_data_application"
+        ]
+      },
+      "audience_copy_repair": {
+        "remove_internal_meta_language": true,
+        "replacement_scope": "same_page_source_grounded_copy_only",
+        "candidate_fields": [
+          "key_message",
+          "annotation",
+          "caption"
+        ]
+      }
+    },
+    {
+      "directive_id": "repair_a13b762a9322",
+      "intent": "REPAIR_ANNOTATION_LEGEND",
+      "target_logical_ids": [
+        "slide_5_negative_result"
+      ],
+      "finding_id": "synthetic-caption-collision",
+      "reason": "Figure support text collides with the caption band.",
+      "source_fidelity_constraints": {
+        "may_rewrite_scientific_claims": false,
+        "may_invent_source_relationships": false,
+        "may_force_gold_id": false,
+        "may_override_scores": false,
+        "must_preserve_cuhk_identity": true
+      },
+      "normalized_repair_mapping": {
+        "source": "structured_visual_finding_without_repair_intent",
+        "requirement_basis": "FIGURE_CAPTION_SUPPORTING_COPY_COLLISION",
+        "target_basis": [
+          "slide_5_negative_result"
+        ]
+      }
+    },
+    {
+      "directive_id": "repair_8a3614b980af",
+      "intent": "RESCALE_PRIMARY_OBJECT",
+      "target_logical_ids": [
+        "slide_3_real_data_application"
+      ],
+      "finding_id": "synthetic-small-primary",
+      "reason": "The primary quantitative object is undersized for projection.",
+      "source_fidelity_constraints": {
+        "may_rewrite_scientific_claims": false,
+        "may_invent_source_relationships": false,
+        "may_force_gold_id": false,
+        "may_override_scores": false,
+        "must_preserve_cuhk_identity": true
+      },
+      "normalized_repair_mapping": {
+        "source": "structured_visual_finding_without_repair_intent",
+        "requirement_basis": "READABLE_SCIENTIFIC_OBJECTS",
+        "target_basis": [
+          "slide_3_real_data_application"
+        ]
+      }
+    },
+    {
+      "directive_id": "repair_ab6a69bbb21a",
+      "intent": "SWAP_COMPATIBLE_GOLD_LAYOUT",
+      "target_logical_ids": [
+        "slide_6_next_experiment"
+      ],
+      "finding_id": "synthetic-process-collision",
+      "reason": "The process/decision diagram has label collision.",
+      "source_fidelity_constraints": {
+        "may_rewrite_scientific_claims": false,
+        "may_invent_source_relationships": false,
+        "may_force_gold_id": false,
+        "may_override_scores": false,
+        "must_preserve_cuhk_identity": true
+      },
+      "normalized_repair_mapping": {
+        "source": "structured_visual_finding_without_repair_intent",
+        "requirement_basis": "NEXT_EXPERIMENT_DIAGRAM_READABILITY",
+        "target_basis": [
+          "slide_6_next_experiment"
+        ]
+      }
+    },
+    {
+      "directive_id": "repair_c6432b246d73",
+      "intent": "REPAIR_ANNOTATION_LEGEND",
+      "target_logical_ids": [
+        "slide_7_medical_image_comparison"
+      ],
+      "finding_id": "synthetic-medical-legend",
+      "reason": "The medical overlay legend obstructs the crop/panel region.",
+      "source_fidelity_constraints": {
+        "may_rewrite_scientific_claims": false,
+        "may_invent_source_relationships": false,
+        "may_force_gold_id": false,
+        "may_override_scores": false,
+        "must_preserve_cuhk_identity": true
+      },
+      "normalized_repair_mapping": {
+        "source": "structured_visual_finding_without_repair_intent",
+        "requirement_basis": "MEDICAL_LEGEND_CALLOUT_OBSTRUCTION",
+        "target_basis": [
+          "slide_7_medical_image_comparison"
+        ]
+      }
+    }
+  ],
+  "repair_allowed": true,
+  "fail_closed_reason": null,
+  "repaired_render_identity": "3eddc291bdc972dfd16aff78a5e515375618ee126307cce640a0505d9448950d",
+  "repaired_render_input_identity": "3eddc291bdc972dfd16aff78a5e515375618ee126307cce640a0505d9448950d",
+  "repaired_rendered_pixel_identity": "e28210bb5209e18035db337b855da9c2c3f030635e38e552243107ece6f21418",
+  "repaired_render_input_manifest": {
+    "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+    "build_workspace": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build",
+    "files": [
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/assets/background.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/assets/background_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/assets/logo_RGB.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/bibliography.bib",
+        "role": "canonical_cuhk_support",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/main.tex",
+        "role": "main_tex",
+        "sha256": "d011fe2fe787b7c2cd2034e5beedb4740a7f3d138a7d5050c9bf62a2f22eba38"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/scientific_layouts.tex",
+        "role": "scientific_layout_include",
+        "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_error.png",
+        "role": "copied_scientific_asset",
+        "sha256": "9c196b9f214495095402d579b524e77c30144a3831aa065ecb990e964960440f"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_error_semantic_overlay.png",
+        "role": "copied_scientific_asset",
+        "sha256": "0b19ba2824e4cc218ded74852e7a727ada39b0167b0e43afb32d416da008c33b"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_error_semantic_overlay_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "714215004c184be2ed205b0d37c13d28ff8b93afd71536c68aeb0fd90e300870"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_gt.png",
+        "role": "copied_scientific_asset",
+        "sha256": "70fe06d3c80ba25484ceaf0484820fea0ab6378d0852d64deda972d175d7dbaf"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_gt_semantic_overlay.png",
+        "role": "copied_scientific_asset",
+        "sha256": "123680750fecb846a0164b476094e47d123e5a6dbc43a4d9a451b0de3deb59f7"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_gt_semantic_overlay_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "bcedb58f27502ca8978bbbcc4e435a77c4e014ea61a6f923864161ccc11d370a"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_input.png",
+        "role": "copied_scientific_asset",
+        "sha256": "dbb133c18d2b0879cb193be19034ba6cfeeeb2b35876d506ca1af2faaed745e5"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_pred.png",
+        "role": "copied_scientific_asset",
+        "sha256": "41ed6a894559333c82a5bc2e2885528060684a40ffd7de2e4e725eba982c5c7a"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_pred_semantic_overlay.png",
+        "role": "copied_scientific_asset",
+        "sha256": "cd4c4f94bf816155425dbbaabd2efb17c884848d67acf38f6774933107ab40bb"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/failure_pred_semantic_overlay_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "19e88c9a264c8e98f369d7e890f7e44e1122da90fef34c3da9f0146724d1abd2"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/stage3_assets/small_g_negative_result.png",
+        "role": "copied_scientific_asset",
+        "sha256": "69b2c66637554bd9fb44c319cbdeab52037906aadd1e49a145dae657c5252e8b"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+      },
+      {
+        "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/styles/sintefcolor.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+      }
+    ],
+    "sha256": "3eddc291bdc972dfd16aff78a5e515375618ee126307cce640a0505d9448950d"
+  },
+  "final_decision": null,
+  "rereview_evidence_identity": null
+}

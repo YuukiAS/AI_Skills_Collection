@@ -1,0 +1,70 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
+  "task_key": "039_research_presentation_quality_loop_execution_recovery",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "research-presentation-quality-loop-non-holdout-stress",
+  "status": "REVISE",
+  "overall_decision": "REVISE",
+  "blocking_findings": [
+    {
+      "finding_id": "synthetic-audience-copy",
+      "scope": "page",
+      "target_logical_id": "slide_3_real_data_application",
+      "requirement_id": "AUDIENCE_FACING_NO_WORKFLOW_PROVENANCE",
+      "summary": "Audience body leaks internal workflow/source bundle copy.",
+      "evidence": "The page body contains production meta language instead of source-grounded research copy.",
+      "recommendation": "Remove internal/meta language using same-page source-grounded copy."
+    },
+    {
+      "finding_id": "synthetic-caption-collision",
+      "scope": "page",
+      "target_logical_id": "slide_5_negative_result",
+      "requirement_id": "FIGURE_CAPTION_SUPPORTING_COPY_COLLISION",
+      "summary": "Figure support text collides with the caption band.",
+      "evidence": "The primary figure, caption, and supporting copy crowd the right-side explanation area.",
+      "recommendation": "Reserve a distinct annotation/caption region without changing the source claim."
+    },
+    {
+      "finding_id": "synthetic-small-primary",
+      "scope": "page",
+      "target_logical_id": "slide_3_real_data_application",
+      "requirement_id": "READABLE_SCIENTIFIC_OBJECTS",
+      "summary": "The primary quantitative object is undersized for projection.",
+      "evidence": "The main plot needs more visual area while preserving readable support text.",
+      "recommendation": "Scale the primary scientific object and keep a separate support band."
+    },
+    {
+      "finding_id": "synthetic-process-collision",
+      "scope": "page",
+      "target_logical_id": "slide_6_next_experiment",
+      "requirement_id": "NEXT_EXPERIMENT_DIAGRAM_READABILITY",
+      "summary": "The process/decision diagram has label collision.",
+      "evidence": "Comparator labels, decision text, and connector labels are crowded in the right half.",
+      "recommendation": "Use a compatible source-faithful reflow for the decision diagram."
+    },
+    {
+      "finding_id": "synthetic-medical-legend",
+      "scope": "page",
+      "target_logical_id": "slide_7_medical_image_comparison",
+      "requirement_id": "MEDICAL_LEGEND_CALLOUT_OBSTRUCTION",
+      "summary": "The medical overlay legend obstructs the crop/panel region.",
+      "evidence": "The legend and callout share space with medical comparison imagery.",
+      "recommendation": "Reserve a legend area without modifying medical source pixels or masks."
+    }
+  ],
+  "item_reviews": [
+    {
+      "item_id": "deck_contact_sheet",
+      "scope": "deck",
+      "decision": "REVISE",
+      "summary": "Synthetic non-holdout stress review for the bounded quality-loop consumer.",
+      "requirement_ids": [
+        "AUDIENCE_FACING_NO_WORKFLOW_PROVENANCE",
+        "FIGURE_CAPTION_SUPPORTING_COPY_COLLISION",
+        "READABLE_SCIENTIFIC_OBJECTS",
+        "NEXT_EXPERIMENT_DIAGRAM_READABILITY",
+        "MEDICAL_LEGEND_CALLOUT_OBSTRUCTION"
+      ]
+    }
+  ]
+}
