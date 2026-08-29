@@ -2,7 +2,7 @@
 
 当前仍属于 `REFERENCE_CALIBRATED_ONE_SHOT_QUALITY`，长期 `PROGRAM_MATURE=false`。
 
-**Source of truth：** `RESEARCH_PRESENTATION_CORPUS_PROGRAM_GOAL.md` 的 Five-Stage Closure Roadmap、Quality-Preserving Continuation Policy 与 Final Quality Gates。
+**Source of truth：** `RESEARCH_PRESENTATION_CORPUS_PROGRAM_GOAL.md` 的 Five-Stage Closure Roadmap、Quality-Preserving Continuation Policy 与 Final Quality Gates。本文只记录当前阶段状态与已经冻结的历史结论，不维护第二套 roadmap。
 
 ## Historical decision on 023
 
@@ -10,142 +10,70 @@
 
 ## Completed stages
 
-### Stage 1 — Product Contract Reset
+### Stage 1 — Product Contract Reset — PASS
 
-`024_research_presentation_product_contract_reset` 已独立 PASS。普通科研组会 / paper talk / research update 未指定格式时，默认走 exact CUHK Beamer/source-editable TeX；显式 PowerPoint/PPTX/Slides 仍可覆盖。Exact CUHK identity 绑定 `skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/`，derived PPTX/scaffold 不得冒充 exact production source。
+`024_research_presentation_product_contract_reset` 已独立 PASS。普通科研组会 / paper talk / research update 未指定格式时，默认走 exact CUHK Beamer/source-editable TeX；显式 PowerPoint/PPTX/Slides 仍可覆盖。Exact CUHK identity 绑定 canonical CUHK Beamer source，derived PPTX/scaffold 不得冒充 exact production source。
 
-### Stage 2 — Gold Scientific Composition Library
+### Stage 2 — Gold Scientific Composition Library — PASS
 
-`025_research_presentation_gold_scientific_composition_library` 保留历史 review-limit 终态；其唯一 coverage gap 由 `026_research_presentation_discussion_next_experiment_gold_recovery` 质量保持 recovery 关闭。026 第二轮独立 PASS，真实 CI 通过。
+`025_research_presentation_gold_scientific_composition_library` 保留 review-limit 历史，其唯一 coverage gap 由 `026_research_presentation_discussion_next_experiment_gold_recovery` 关闭。026 第二轮独立 PASS。当前 production gold 已覆盖 roadmap 所需主要 scientific jobs，并建立 `RUNTIME_SELECTED -> ACTUALLY_CONSUMED -> OUTPUT_AFFECTED` 的真实选择/消费证据。
 
-当前 production gold 已覆盖 roadmap 所需主要 scientific jobs。026 新增 `GSC-018`，来自真实 rendered-pixel item-level Terra `PASS` 的 discussion / next-experiment 页面；正常 selector 可选择它，recipe builder 实际消费 source-derived composition fields，移除后得到 no-compatible-result，因此 `RUNTIME_SELECTED -> ACTUALLY_CONSUMED -> OUTPUT_AFFECTED` 已成立。Stage 2 整体关闭。
+### Stage 3 — Executable CUHK Scientific Layout System — PASS
 
-### Stage 3 — Executable CUHK Scientific Layout System
+`027_research_presentation_executable_cuhk_scientific_layout_system` 建立核心工程链并保留 review-limit 历史；028 关闭旧 visual dispatch gap；029 完成 task-local Visual Review consumer adaptation；`030_stage3_visual_recovery` 第二轮独立 PASS。六个主要内容页已证明成熟 scientific composition 可在 exact CUHK content area 中执行为统计模型、定量结果、实验设计、负结果、医学影像比较与下一实验布局，并达到 item/page-level mature research-group-meeting / strong conference-talk bar。
 
-Stage 3 已首次整体 PASS。
+### Stage 4 — One-Call Production + Bounded Quality Loop — PASS
 
-`027_research_presentation_executable_cuhk_scientific_layout_system` 建立核心工程链；027 第二轮达到 review limit 后保留历史终态。028 独立关闭旧 visual dispatch gap；029 完成 task-local Visual Review consumer adaptation；质量保持 recovery `030_stage3_visual_recovery` 在第二轮独立审核中 PASS。六个主要内容页均达到 item/page-level mature research-group-meeting / strong conference-talk bar，证明成熟 gold composition 可以在 exact CUHK content area 中执行为 statistical model、quantitative result、experiment design、negative result、medical comparison 和 next experiment 布局。
+Stage 4 已由 Planner 首次整体判定 PASS。该结论关闭的是普通一次调用的 production 工程闭环，不等于最终 Program PASS，也不替代 Stage 5 的两个真实未见论文。
 
-Stage 3 PASS 不等于普通用户一次调用已经完成全部生产质量循环，也不等于最终真实 paper holdout 通过。
+Stage 4 的历史链保持如下：
 
-## Stage 4 — active
+- `031_research_presentation_one_call_production_entry` 建立 normal file/path input -> source-fidelity map -> storyline/page jobs -> normal gold retrieval -> executable layouts -> canonical CUHK `.tex + PDF` -> real render -> task-local visual handoff；因 multi-workstream storyline coherence 在两轮后保留 review-limit 历史。
+- `032_research_presentation_storyline_coherence_recovery` PASS：把 storyline/grouping 改成通用 source/workstream metadata 驱动，加入 unrelated dual-workstream 与 single-workstream regression。
+- `033_research_presentation_deck_rhythm_quality_loop` 建立完整 deck contact sheet / sequence review、一次 automatic repair 上限、unsafe/unknown fail-closed/no-winner；因 no-render evidence identity 语义缺口保留 review-limit 历史。
+- `034_research_presentation_render_identity_ci_recovery` 建立 render-input identity 与真实 rendered-pixel identity 双层证据，关闭标题页工程元语言和模型页欠填充；因 model supporting copy 的 fixture-specific source-grounding 缺口保留 review-limit 历史。
+- `035_research_presentation_generic_model_support_recovery` 关闭共享模型页的 clustered-calibration hardcode，并用 unrelated Cox regression 证明通用性；因 fresh Terra 暴露 process-page projection dips 保留 review-limit 历史。
+- `036_research_presentation_process_page_projection_recovery` PASS：关闭实验设计页/下一实验页的投影尺度与 source-grounding 问题，unrelated acquisition/measurement-noise regression 通过，fresh Terra 对 slides 2–7 与 deck contact sheet 全部 item-level PASS。
+- `037_research_presentation_audience_transition_copy_recovery` 第一轮独立 PASS：关闭 Stage 4 最后一个 audience-facing gap。最终医学影像页不再显示 `Workstream transition`、`independent workstream`、`no causal bridge asserted` 等内部控制说明，而是显示由当前 workstream metadata 提供的自然科研主题/范围；内部仍保留“不虚构跨方向因果关系”的 storyline constraint。unrelated dual-workstream 与 single-workstream regression 均证明实现不是当前 segmentation fixture special case。
 
-### 031 One-Call Production Entry — review limit history
+037 的真实 GitHub `Codex Marketplace` CI 已通过。fresh task-local Terra 与 implementation `dc1ab6f...`、render-input identity `8ad96cd...`、rendered-pixel identity `e763bd...` 和 contact-sheet SHA `7f3159...` 绑定；六个主要内容页及 `deck_contact_sheet` 全部 item-level `PASS`。医学页明确通过 same-case Input/GT/Prediction/Error、ROI、TP/FP/FN 语义及独立研究方向切换；contact sheet 明确通过完整 sequence、结果→失败→下一实验节奏、页面构图变化与成熟博士组会标准。
 
-`031_research_presentation_one_call_production_entry` 已完成两轮独立审核并合法停在 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE`；不得创建 `REVIEW_3` 或改写成 PASS。
+Planner 同时独立检查 production diff、当前 `main.tex` 与 source bundle，未发现新的 Stage 4 blocker。因此 Stage 4 在 037 PASS 后正式整体关闭。
 
-031 已真实建立 normal file/path entry -> source-fidelity map -> storyline/page jobs -> normal gold retrieval -> Stage 3 executable layouts -> canonical CUHK `.tex + PDF` -> real render -> task-local visual-review handoff。repair 后 canonical CUHK identity 与 same-case medical TP/FP/FN semantics 均通过真实像素审查。031 最终唯一 blocker 是 multi-workstream deck-level storyline coherence。
-
-### 032 Storyline Coherence Recovery — PASS
-
-`032_research_presentation_storyline_coherence_recovery` 已在第二轮独立审核中 PASS，真实 CI 与 fresh task-local Terra 均通过。
-
-032 关闭了 031 的 storyline blocker，并把实现从 fixture-specific domain token profile 修成通用 source/page-job workstream contract：
-
-- shared production generator 不再维护 clustered-calibration / segmentation 两套领域专用分类词表；
-- normal path 优先消费显式 `workstream` metadata，缺失时使用 evidence-board fallback；
-- 当前统计主线连续保持 `STATISTICAL_MODEL -> REAL_DATA_APPLICATION -> EXPERIMENT_DESIGN -> NEGATIVE_RESULT -> NEXT_EXPERIMENT`；
-- medical comparison 作为第二个独立 workstream，并明确不虚构 causal bridge；
-- 新增与当前两个领域无关的双-workstream regression，证明机制不是当前 fixture hardcode；
-- 单-workstream 输入不会被强制插入多余 transition。
-
-fresh Terra 对六个主要内容页全部 item-level `PASS`，并确认 coverage 主线连续、medical transition 可见且 031 已通过的 CUHK identity / medical semantics 无回归。
-
-032 PASS 只表示 production storyline 已关闭；Stage 4 仍需完整 deck-level rhythm review 与 bounded quality-repair loop。
-
-### 033 Deck Rhythm + Bounded Quality Loop — review limit history
-
-`033_research_presentation_deck_rhythm_quality_loop` 已完成两轮独立审核并合法停在 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE`；不得创建 `REVIEW_3` 或改写成 PASS。
-
-033 已真实建立并保留以下共享生产能力：完整 deck contact sheet / sequence summary、deck-level reviewer-evidence consumer、受限 repair intent、automatic repair cycle 上限 1、unknown/unsafe finding fail-closed / no-winner，以及 task-local Visual Review 对 page/contact-sheet/build/quality-loop evidence 的绑定。它没有使用 Stage 5 holdout，也没有引入 033-only production generator。
-
-Review 1 的 clean-run contact-sheet manifest blocker 已局部修复，但第二轮真实 `Codex Marketplace` CI 再次失败并把剩余问题收敛为一个 evidence-identity 语义缺口：
-
-- GitHub runner 无真实 PNG render 时，`rendered_page_sha256` 合法为空，但 clean regression 仍无条件把它当成 64-char pixel SHA；
-- deterministic `ADJUST_TRANSITION_CUE` repair 已真实改变 production `deck_plan` 与 `main.tex`，但当前 `deck_identity_sha256` 主要绑定 page-order / pixel SHA / contact-sheet SHA 等字段；在 no-render runner 中 pixel SHA 都不存在，导致 initial 与 repaired identity 相同，无法证明 actual render input 已改变。
-
-033 没有取得与当前实现绑定的完整 deck/contact-sheet item-level visual quality PASS，因此保留 review-limit 历史，由 034 质量保持 recovery 接续。
-
-### 034 Render Identity CI Recovery — review limit history
-
-`034_research_presentation_render_identity_ci_recovery` 已完成两轮独立审核并合法停在 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE`；不得创建 `REVIEW_3` 或改写成 PASS。
-
-034 已真实关闭 033 的 evidence-identity 根问题：
-
-- 始终存在的 render-input identity 直接绑定实际 `main.tex`、`scientific_layouts.tex`、canonical CUHK support 与必要 scientific assets；
-- no-render CI path 明确允许 pixel evidence unavailable，不伪造 page/contact-sheet SHA；
-- real-render path 继续严格绑定 per-page PNG、contact sheet 与 PDF；
-- deterministic repair 改变真实生产表示时，render-input identity 随之改变；
-- 真实 GitHub `Codex Marketplace` CI 已通过。
-
-034 第一轮 visual review 又发现并修复了两个 presentation blocker：标题页工程元语言泄漏被移除并加入通用 metadata anti-leak gate；统计模型页从公式+单句的明显欠填充状态补足为公式主对象、模型角色与解释层。修复后 fresh Terra 对六个内容页及整套 `deck_contact_sheet` 均给出 item-level `PASS`，确认当前工程样例的 CUHK 身份、跨页节奏、workstream transition 与医学影像语义均成熟可评估。
-
-034 第二轮独立代码审核仍发现唯一 blocker：共享 `STATISTICAL_MODEL` equation renderer 的 supporting copy 里残留当前 clustered-calibration fixture 专用文本，包括 `Calibration link`、固定 ICC/center-variation/interval-comparison caption，以及缺少 scientific objects 时的 `Source-grounded terms...` 制作型 fallback。当前 engineering fixture 恰好语义匹配，所以 Terra 像素 PASS 不能证明这一 normal production path 对未见模型 source-faithful。这个 finding 直接违反 034 Review 1 已冻结的“supporting content 必须由通用 source/page-job fields 驱动、不得按当前 clustered fixture 术语写死”的修复边界。
-
-该 blocker 不需要用户改变产品/科学语义，且存在唯一、范围清楚、质量保持的新机制，因此按 Quality-Preserving Continuation Policy 自动进入 035；034 的 dual identity、title anti-leak 与已通过视觉证据全部保留，不重做。
-
-### 035 Generic Model Support Recovery — review limit history
-
-`035_research_presentation_generic_model_support_recovery` 已完成两轮独立审核并合法停在 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE`；不得创建 `REVIEW_3` 或改写成 PASS。
-
-035 的原始 generic-model source-grounding blocker 已被真实关闭：
-
-- shared `STATISTICAL_MODEL` renderer 不再无条件输出 `Calibration link`、固定 ICC / center-variation / interval-comparison supporting caption 或 `Source-grounded terms` 制作型 fallback；
-- supporting model body 只消费当前 spec/source 的 scientific objects、key message、annotation 等 source-backed fields，允许中性布局标签但不携带当前 fixture 科学结论；
-- unrelated Cox regression 真实经过同一共享 model path，并证明不会泄露 clustered-calibration 专用术语；
-- 当前 engineering model page 继续保持公式主导、信息完整，fresh Terra 对 `slide_2_statistical_model` 给出 item-level `PASS`；
-- shared/plugin parity 与真实 GitHub `Codex Marketplace` CI 已通过。
-
-035 第一轮只允许对模型页做 in-scope 视觉重平衡，并明确冻结 slides 3–7。第二轮 fresh Terra 与 implementation/render/pixel/contact-sheet identity 一致后，模型页继续 PASS，但最新完整审查把两个此前未变化的 process pages 判为 `REVISE`：
-
-- `slide_4_experiment_design` 的中央 DGP → hierarchy → procedures → endpoints pipeline 相对可用画布明显过小，上下留白过多，endpoint 与 connector annotations 投影字号偏小；
-- `slide_6_next_experiment` 的 failure evidence、sampling/manipulation、comparators 与 decision-rule copy 仍偏小；
-- `deck_contact_sheet` 因 slides 4 / 6 的 density / scale dips 未稳定达到 strong projection-ready doctoral group-meeting bar。
-
-slides 4 / 6 的当前 PNG SHA 与 034 当时 item-level PASS 的像素完全一致，因此这不是 035 引入的 regression；但 Program Goal 要求使用当前 fresh evidence，而不能挑选旧 PASS 覆盖新的真实质量发现。由于 035 已用满两轮且 Review 1 禁止越界修改 slides 3–7，本任务保留 terminal history，不在 035 内继续修复。
-
-这个新 blocker 不需要用户改变产品/科学选择，也不需要降低质量门槛；共享 `EXPERIMENT_DESIGN` / `NEXT_EXPERIMENT` geometry/emission 已提供一个新的、范围清楚的 bounded implementation mechanism，因此按 Quality-Preserving Continuation Policy 自动进入 036。
-
-### 036 Process Page Projection Recovery — PASS
-
-`036_research_presentation_process_page_projection_recovery` 已在第二轮独立审核中 PASS，真实 GitHub CI 与 implementation `6045675e...` 对应的 fresh task-local Terra 均闭合。
-
-036 关闭了两个 process-page projection blocker，并在 Review 1 后同时关闭了共享 emitter 的 source-fidelity 缺口：
-
-- `EXPERIMENT_DESIGN` 与 `NEXT_EXPERIMENT` 已使用更充分的 CUHK safe region，节点、endpoint、connector annotation、failure evidence、comparator 与 decision rule 均保持成熟投影尺度；
-- shared process-page supporting copy 由当前 page-job/spec 的 source-backed nodes/evidence 驱动，不再无条件注入 `DGP stress grid`、`Center hierarchy`、`Interval procedures`、`400 reps per cell`、`coverage shortfall at high ICC` 等 clustered fixture 文案；
-- unrelated acquisition / measurement-noise regression 显式证明同一共享路径不会泄漏当前 clustered fixture 的 ICC/center/interval/CR2/wild-bootstrap 等固定文本；
-- shared/plugin parity 与真实 `Codex Marketplace` CI 通过；
-- fresh Terra 与当前 implementation、render-input、rendered-pixel 和 contact-sheet identity 一致，slides 2–7 与 `deck_contact_sheet` 本轮均获得 item-level `PASS`，其中 slides 4 / 6 的投影尺度没有因第二轮 source-grounding repair 回退。
-
-036 单 task PASS 不自动等于 Stage 4 PASS。Planner 独立检查当前真实 `main.tex` 仍确认医学影像页顶部直接显示 `Workstream transition` 与 `independent workstream; no causal bridge asserted.`。该内容在 036 Plan 中被冻结、不是 036 引入的 regression；fresh Terra 本轮虽然对同一像素给 PASS，但 Program Goal 明确禁止 audience-facing workflow / implementation / 制作型元语言，因此不能仅用该 PASS 覆盖仓库长期质量政策。这个剩余缺口范围清楚、无需改变产品/科学语义，按 Quality-Preserving Continuation Policy 自动进入 037。
-
-### Active bounded recovery — 037 Audience Transition Copy Recovery
+## Stage 5 — active: Two Real Paper Holdouts + Human Closure
 
 当前 active task：
 
-`037_research_presentation_audience_transition_copy_recovery`
+`038_research_presentation_two_real_paper_holdouts`
 
-037 只处理 multi-workstream transition 的 audience-facing copy / structural cue：
+038 已完成 Planner 预检并冻结 Plan。它是 evaluation-only，不允许再用 holdout 调 production code/rules/gold/layout/prompt。首次 Stage 5 固定两篇真实公开论文：
 
-- 将 `Workstream transition`、`independent workstream`、`no causal bridge asserted` 等内部制作/控制说明从最终 slide 移除；
-- 第二 workstream 仍必须通过 source/workstream metadata 驱动的科学主题、section cue 或等价结构清楚可见；
-- “不虚构 causal bridge”继续作为内部 storyline constraint 保留，但不作为听众需要阅读的免责声明；
-- 不得为当前 `Segmentation robustness`、医学标题、页号、fixture 或 test ID 写 production special case；
-- unrelated dual-workstream regression 必须证明 transition 由 source/workstream metadata 驱动、无当前 fixture copy、无内部 meta language、无 invented causal connector；single-workstream 仍不插入多余 transition；
-- 医学影像的 same-case Input/GT/Prediction/Error、ROI、TP/FP/FN，以及 036 process pages、035 model、结果/失败页、CUHK identity、gold retrieval、dual identity、一次 repair budget 全部冻结保护；
-- shared/plugin parity、targeted/full tests 与真实 GitHub CI 必须通过；像素改变后必须等待 task-local fresh Terra，至少 `slide_7_medical_image_comparison` 与 `deck_contact_sheet` 均 item-level `PASS`，且其他主要页无新的 blocker。
+1. statistics / methodology：Paul-Christian Bürkner (2017), **brms: An R Package for Bayesian Multilevel Models Using Stan**, DOI `10.18637/jss.v080.i01`，Journal of Statistical Software；JSS 文章采用 CC BY。
+2. medical imaging：Jun Ma et al. (2024), **Segment anything in medical images**, DOI `10.1038/s41467-024-44824-z`，Nature Communications；文章采用 CC BY 4.0，并包含真实多模态医学影像与 segmentation figures。
 
-037 不运行 Stage 5 holdout、不扩 corpus、不重写 storyline grouping 或 deck-quality-loop 状态机。停止条件是：通用 audience-facing transition mechanism 经 bounded regression 成立、真实 CI 闭合、当前医学页与 contact sheet 获得 identity-matched fresh item-level PASS 且冻结能力无回归。
+Planner 在冻结 038 前对仓库 tracked content 做 title/DOI/author/product-name 搜索，未发现两篇论文被使用的记录；Executor 仍必须在首次 acquisition 前检查 reference/gold/corpus/tuning manifests。若任一 paper 在生成前被证明曾参与 exemplar extraction/rule distillation/tuning，则必须停止并交回 Planner，不得私自换成更容易的 paper。
 
-037 独立 PASS 后，Planner 才重新判断 Stage 4 是否首次整体 PASS。只有 Stage 4 整体首次 PASS 后才发送一次 Stage 4 旁路 notifier，并创建 Stage 5 的真实双-paper holdout bounded task；不得跳过最终用户人工门。
+038 的核心冻结规则：
+
+- 完整读取 published paper 与必要 supplement/source data；
+- 每篇先构建真实 paper source bundle，并在第一次 render 前冻结 bundle SHA；看到 slides/Terra 后不得改 bundle 再称 one-shot；
+- 两篇分别调用正常 `generate_research_presentation_production_entry.py --input-bundle ... --out-dir ...`，禁止 benchmark/fixture/task-specific bypass；
+- 只允许已经 shipped 的一次 bounded automatic repair，不允许手工 TeX/slide patch、paper-specific production branch 或第二次 repair；
+- 两套都必须是完整 paper-talk/group-meeting deck，不是少数 benchmark pages；真实 paper notation/data/figures/images/claims 必须主导；
+- medical deck 必须真实使用 MedSAM 文章许可覆盖的医学图像/segmentation evidence，不得 fabricated medical pixels；
+- 最终 task-local Terra 必须逐页审两套 deck，并分别审两个 contact sheet；top-level package PASS 不够；
+- 若真实 holdout暴露 product blocker，保留失败 one-shot evidence，同一 paper 永久失去“未见 holdout”资格；generic repair 必须另开非-holdout bounded task，之后换新的 unseen paper；
+- 即使两套 deck 均被 Terra + Planner 判定 PASS，也只能进入最终用户人工门。只有用户明确接受两套真实 rendered deck 后才允许 `ONE_SHOT_QUALITY_PASS` / `PROGRAM_MATURE=true`。
+
+038 当前为 `PLAN_FROZEN`，等待 Codex Executor 执行。
 
 ## Standing workflow decisions
 
-- 始终保持最高冻结质量标准；review limit 后若存在唯一、范围清楚、质量保持的 bounded recovery，自动创建新 task，不要求用户在“继续保持质量”和“降低质量”之间重复选择。
+- 始终保持最高冻结质量标准；review/plan limit 后若存在唯一、范围清楚、质量保持的 bounded recovery，自动创建新 task，不用用户在“保持质量”与“降低质量”之间重复选择。
 - 每个 bounded task 最多两轮 review；不得增加 REVIEW_3。
 - 视觉型 Reviewed Handoff 优先使用 Bridge Kit task-local Visual Review contract；缺 evidence 属于等待，不消耗 review round。
-- Stage 1–4 某 stage 首次独立 PASS 时发送一次旁路 notifier，但 notifier 不是 approval gate，不暂停后续 stage。
+- 单 task PASS 不等于 Program PASS。
+- Stage 1–4 首次整体 PASS 的旁路 notifier 不是 approval gate，不暂停下一 stage。
 - 只有真正存在互斥产品/科学选择、显著架构改变、新成本/风险/隐私/许可问题、必须降低质量门槛，或 Stage 5 最终双 deck 验收时才打断用户。
 
 ## Non-negotiable final acceptance
