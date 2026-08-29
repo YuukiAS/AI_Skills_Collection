@@ -24,52 +24,50 @@
 
 ### Stage 4 — One-Call Production + Bounded Quality Loop — PASS
 
-Stage 4 已由 Planner 首次整体判定 PASS。该结论关闭的是普通一次调用的 production 工程闭环，不等于最终 Program PASS，也不替代 Stage 5 的两个真实未见论文。
+Stage 4 已由 Planner 整体判定 PASS；该结论证明普通一次调用会真实串起 source fidelity、storyline、gold retrieval、canonical CUHK、compile/render、task-local visual handoff、deck contact sheet、双层 render identity 与单次 bounded quality-loop contract，但不替代真实 unseen paper 泛化验收。
 
-Stage 4 的历史链保持如下：
+Stage 4 历史链保持：031 建立 one-call production；032 关闭 multi-workstream coherence；033 建立 deck-level rhythm/quality loop；034 关闭 render identity 与 CI 证据语义；035 关闭 generic model support hardcode；036 关闭 process-page projection/source-grounding；037 关闭最后一个 audience-facing workstream transition 元语言 gap。此前达到 review limit 的 task 历史均保留，后续 recovery 只关闭未解决 blocker，没有事后改写旧 task 为 PASS。
 
-- `031_research_presentation_one_call_production_entry` 建立 normal file/path input -> source-fidelity map -> storyline/page jobs -> normal gold retrieval -> executable layouts -> canonical CUHK `.tex + PDF` -> real render -> task-local visual handoff；因 multi-workstream storyline coherence 在两轮后保留 review-limit 历史。
-- `032_research_presentation_storyline_coherence_recovery` PASS：把 storyline/grouping 改成通用 source/workstream metadata 驱动，加入 unrelated dual-workstream 与 single-workstream regression。
-- `033_research_presentation_deck_rhythm_quality_loop` 建立完整 deck contact sheet / sequence review、一次 automatic repair 上限、unsafe/unknown fail-closed/no-winner；因 no-render evidence identity 语义缺口保留 review-limit 历史。
-- `034_research_presentation_render_identity_ci_recovery` 建立 render-input identity 与真实 rendered-pixel identity 双层证据，关闭标题页工程元语言和模型页欠填充；因 model supporting copy 的 fixture-specific source-grounding 缺口保留 review-limit 历史。
-- `035_research_presentation_generic_model_support_recovery` 关闭共享模型页的 clustered-calibration hardcode，并用 unrelated Cox regression 证明通用性；因 fresh Terra 暴露 process-page projection dips 保留 review-limit 历史。
-- `036_research_presentation_process_page_projection_recovery` PASS：关闭实验设计页/下一实验页的投影尺度与 source-grounding 问题，unrelated acquisition/measurement-noise regression 通过，fresh Terra 对 slides 2–7 与 deck contact sheet 全部 item-level PASS。
-- `037_research_presentation_audience_transition_copy_recovery` 第一轮独立 PASS：关闭 Stage 4 最后一个 audience-facing gap。最终医学影像页不再显示 `Workstream transition`、`independent workstream`、`no causal bridge asserted` 等内部控制说明，而是显示由当前 workstream metadata 提供的自然科研主题/范围；内部仍保留“不虚构跨方向因果关系”的 storyline constraint。unrelated dual-workstream 与 single-workstream regression 均证明实现不是当前 segmentation fixture special case。
+## Stage 5 — active recovery after first real holdout failure
 
-037 的真实 GitHub `Codex Marketplace` CI 已通过。fresh task-local Terra 与 implementation `dc1ab6f...`、render-input identity `8ad96cd...`、rendered-pixel identity `e763bd...` 和 contact-sheet SHA `7f3159...` 绑定；六个主要内容页及 `deck_contact_sheet` 全部 item-level `PASS`。医学页明确通过 same-case Input/GT/Prediction/Error、ROI、TP/FP/FN 语义及独立研究方向切换；contact sheet 明确通过完整 sequence、结果→失败→下一实验节奏、页面构图变化与成熟博士组会标准。
+### 038 — first two real-paper holdouts — terminal REVIEW_LIMIT / REVISE
 
-Planner 同时独立检查 production diff、当前 `main.tex` 与 source bundle，未发现新的 Stage 4 blocker。因此 Stage 4 在 037 PASS 后正式整体关闭。
+`038_research_presentation_two_real_paper_holdouts` 已完成第一次真正的双论文 unseen evaluation：
 
-## Stage 5 — active: Two Real Paper Holdouts + Human Closure
+1. statistics/methodology：Bürkner (2017), **brms: An R Package for Bayesian Multilevel Models Using Stan**；
+2. medical imaging：Ma et al. (2024), **Segment anything in medical images**。
+
+两篇均在生成前完成 tracked-corpus/tuning exclusion audit 与许可/source audit；source bundle 在首次 render 前冻结；两个 deck 都从正常 production entry 独立生成 exact-CUHK PDF/PNG/contact sheet，并取得真实 task-local item-level Terra。
+
+这次真实 Stage-5 测试没有通过质量门。Round-1 Terra 给出 7 个 blocking findings：statistics deck 包含 audience-facing internal fixture copy、workflow footer overlap、不可读 package table 与 closing diagram collision；medical deck 包含 architecture footer overlap、limitations/decision collision 与遮挡真实 CT crop 的 legend/connector。两个 contact sheet 均明确未达到 mature doctoral group-meeting / strong paper-talk bar。
+
+Round-1 只授权冻结的单次 bounded quality loop。Executor 随后没有改 source bundle、production code 或 generated TeX，而是把 Terra finding 交给现有 consumer。两套 `quality_loop_state.json` 都真实记录：`repair_cycle_count=0`、`selected_repair_directives=[]`、`repair_allowed=false`、`QUALITY_LOOP_FAIL_NO_WINNER`，原因是 `unsupported repair intent: <missing>`。由于没有 repair，最终 pixels 与 Round-1 Terra identity 完全未变；Round-2 Planner 因而仍为 `REVISE`。真实 GitHub CI 已 PASS。
+
+038 已依法用满两轮 review 并保留 `AWAIT_HUMAN_DECISION / REVIEW_LIMIT / REVISE` terminal history；没有第三轮。这里的 review-limit 不是需要用户选择降低质量的真实人工门，因为 Program Goal 的 Quality-Preserving Continuation Policy 已给出唯一 bounded recovery 路线。
+
+**038 的两篇论文从现在起永久失去 Stage-5 unseen holdout 资格。** 后续不得在 brms/MedSAM 上修完再宣称 unseen PASS。
+
+### 039 — active: Quality-loop execution recovery
 
 当前 active task：
 
-`038_research_presentation_two_real_paper_holdouts`
+`039_research_presentation_quality_loop_execution_recovery`
 
-038 已完成 Planner 预检并冻结 Plan。它是 evaluation-only，不允许再用 holdout 调 production code/rules/gold/layout/prompt。首次 Stage 5 固定两篇真实公开论文：
+039 只修 038 暴露的通用 quality-loop consumer/execution gap，不修 brms/MedSAM，不重新执行 Stage 5。当前已冻结的核心范围：
 
-1. statistics / methodology：Paul-Christian Bürkner (2017), **brms: An R Package for Bayesian Multilevel Models Using Stan**, DOI `10.18637/jss.v080.i01`，Journal of Statistical Software；JSS 文章采用 CC BY。
-2. medical imaging：Jun Ma et al. (2024), **Segment anything in medical images**, DOI `10.1038/s41467-024-44824-z`，Nature Communications；文章采用 CC BY 4.0，并包含真实多模态医学影像与 segmentation figures。
+- 继续使用现有 task-local Visual Review contract、现有 `RESEARCH_PRESENTATION_DECK_QUALITY_LOOP_STATE_V1` 与单次 repair budget，不新建状态机；
+- Terra finding 缺 `repair_intent` 时，仅利用结构化 requirement/target/page-job/content fields 对可唯一安全判断的 blocker 做有限 normalization；未知/歧义 finding继续 fail closed；
+- 已有/新增 repair intent 只有在真正被 production layout/render consumer执行、前后 render-input/pixel identity发生预期变化时才算实现；
+- 至少覆盖 audience-facing internal/meta copy、figure/caption/supporting-copy overlap、undersized table/primary object、process/next-step diagram collision、medical legend/callout obstruction；
+- medical repair 只改 layout/legend/callout/crop framing，禁止生成或修改医学像素；source bundle SHA必须保持；
+- regression/visual tuning 只能使用与 038 无关的 non-holdout stress bundle，不得把 brms/MedSAM title/DOI/figure/table/image/具体 wording 变成 fixture/gold/rule；
+- fresh task-local Terra 必须对 repair 后 stress pages 与 contact sheet item-level PASS，并达到既有 mature bar；真实 CI、shared/plugin parity 与 unknown/no-winner regression 也必须 PASS。
 
-Planner 在冻结 038 前对仓库 tracked content 做 title/DOI/author/product-name 搜索，未发现两篇论文被使用的记录；Executor 仍必须在首次 acquisition 前检查 reference/gold/corpus/tuning manifests。若任一 paper 在生成前被证明曾参与 exemplar extraction/rule distillation/tuning，则必须停止并交回 Planner，不得私自换成更容易的 paper。
-
-038 的核心冻结规则：
-
-- 完整读取 published paper 与必要 supplement/source data；
-- 每篇先构建真实 paper source bundle，并在第一次 render 前冻结 bundle SHA；看到 slides/Terra 后不得改 bundle 再称 one-shot；
-- 两篇分别调用正常 `generate_research_presentation_production_entry.py --input-bundle ... --out-dir ...`，禁止 benchmark/fixture/task-specific bypass；
-- 只允许已经 shipped 的一次 bounded automatic repair，不允许手工 TeX/slide patch、paper-specific production branch 或第二次 repair；
-- 两套都必须是完整 paper-talk/group-meeting deck，不是少数 benchmark pages；真实 paper notation/data/figures/images/claims 必须主导；
-- medical deck 必须真实使用 MedSAM 文章许可覆盖的医学图像/segmentation evidence，不得 fabricated medical pixels；
-- 最终 task-local Terra 必须逐页审两套 deck，并分别审两个 contact sheet；top-level package PASS 不够；
-- 若真实 holdout暴露 product blocker，保留失败 one-shot evidence，同一 paper 永久失去“未见 holdout”资格；generic repair 必须另开非-holdout bounded task，之后换新的 unseen paper；
-- 即使两套 deck 均被 Terra + Planner 判定 PASS，也只能进入最终用户人工门。只有用户明确接受两套真实 rendered deck 后才允许 `ONE_SHOT_QUALITY_PASS` / `PROGRAM_MATURE=true`。
-
-038 当前为 `PLAN_FROZEN`，等待 Codex Executor 执行。
+039 已完成 PLAN preflight并冻结给 Codex Executor，review budget 从 0/2 开始。若 039 PASS，Planner 才选择新的 statistics/methodology 与 medical-imaging unseen public papers，另开下一次 Stage-5 evaluation；不会复用 038 两篇。
 
 ## Standing workflow decisions
 
-- 始终保持最高冻结质量标准；review/plan limit 后若存在唯一、范围清楚、质量保持的 bounded recovery，自动创建新 task，不用用户在“保持质量”与“降低质量”之间重复选择。
+- 始终保持最高冻结质量标准；review/plan limit 后若存在唯一、范围清楚、质量保持的 bounded recovery，自动创建新 task，不让用户在“保持质量”与“降低质量”之间重复选择。
 - 每个 bounded task 最多两轮 review；不得增加 REVIEW_3。
 - 视觉型 Reviewed Handoff 优先使用 Bridge Kit task-local Visual Review contract；缺 evidence 属于等待，不消耗 review round。
 - 单 task PASS 不等于 Program PASS。
@@ -78,4 +76,6 @@ Planner 在冻结 038 前对仓库 tracked content 做 title/DOI/author/product-
 
 ## Non-negotiable final acceptance
 
-最终仍必须从正常 `research-presentations` production entrypoint 对两个未参与调优的真实公开 paper one-shot 生成完整 CUHK 组会 deck：statistics/biostatistics/methodology 一套、medical imaging 一套。真实 paper notation/data/figures/images 必须主导内容；不得 generic cards/box-arrow/default plot/AI 元语言；Terra 必须读 item/page-level judgement，Planner 必须独立审真实 source/trace/render；两套 deck 都通过后仍必须进入用户最终人工门。只有用户明确接受两套结果才允许 `ONE_SHOT_QUALITY_PASS`。
+最终仍必须在 039 generic recovery 完成后，重新选择两个未参与 exemplar extraction / rule distillation / tuning 的真实公开 paper，从正常 `research-presentations` production entrypoint one-shot 生成完整 CUHK 组会 deck：statistics/biostatistics/methodology 一套、medical imaging 一套。真实 paper notation/data/figures/images 必须主导内容；不得 generic cards/box-arrow/default plot/AI 元语言；Terra 必须读 item/page-level judgement，Planner 必须独立审真实 source/trace/render。
+
+新的两套 unseen deck 都通过 Terra + Planner 后，Stage 5 仍必须进入最终用户人工门。只有用户明确接受两套真实 rendered deck，才允许 `ONE_SHOT_QUALITY_PASS` 与 `PROGRAM_MATURE=true`。
