@@ -17,5 +17,5 @@
   "visual_review_required": true,
   "visual_review_manifest_path": "results/043_research_presentation_real_visual_repair_challenge_recovery/visual_review/visual_inputs.json",
   "visual_review_evidence_path": "results/043_research_presentation_real_visual_repair_challenge_recovery/visual_review/VISUAL_REVIEW.json",
-  "next_action": "EXECUTOR_RUN_PREFROZEN_REAL_VISUAL_REPAIR_CHALLENGE"
+  "next_action": "EXECUTOR_BUILD_AND_FREEZE_THREE_VARIANT_REAL_VISUAL_REPAIR_CHALLENGE"
 }
