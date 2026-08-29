@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "042_research_presentation_semantic_compatibility_recovery",
-  "state": "NEEDS_GPT_PLANNER",
+  "state": "AWAIT_HUMAN_DECISION",
   "review_round": 1,
   "max_review_rounds": 2,
   "plan_revision": 1,
@@ -10,12 +10,12 @@
   "base_branch": "main",
   "implementation_commit": "efa645a46c4e9a6269b7ef1d0e39f186eb015f7a",
   "ci_required": true,
-  "ci_status": "PENDING",
+  "ci_status": "PASS",
   "last_review_decision": "REVISE",
   "review_limit_reached": false,
-  "human_gate_reason": null,
+  "human_gate_reason": "PLANNER_DECISION",
   "visual_review_required": true,
   "visual_review_manifest_path": "results/042_research_presentation_semantic_compatibility_recovery/visual_review/visual_inputs.json",
   "visual_review_evidence_path": "results/042_research_presentation_semantic_compatibility_recovery/visual_review/VISUAL_REVIEW.json",
-  "next_action": "GPT_PLANNER_DECIDE_AFTER_STAGED_INITIAL_TERRA_PASS_WITH_NO_REPAIRABLE_SUBSTANTIVE_FINDING"
+  "next_action": "PRESERVE_042_TERMINAL_HISTORY_AND_CONTINUE_WITH_BOUNDED_043_RECOVERY"
 }
