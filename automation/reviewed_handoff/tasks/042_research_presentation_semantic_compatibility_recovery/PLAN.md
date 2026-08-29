@@ -25,6 +25,8 @@ decision: PLAN_FROZEN
 - **已有 quality-loop vocabulary 不扩张。** 继续使用已经 shipped 的 `RESCALE_PRIMARY_OBJECT`、`REPAIR_ANNOTATION_LEGEND`、`SWAP_COMPATIBLE_GOLD_LAYOUT` 等有限 repair intent；042 只修“同一结构对象因 label 不同而无法安全识别”的 compatibility gap。unknown / ambiguous finding 继续 fail closed；每个 deck 最多一次 repair。
 - **真实像素仍是最终证据。** 不能因为 selector 返回 match、mapper 产生 directive 或 unit test 通过就宣称恢复完成。至少一个独立 stress deck 必须真实触发一次安全 repair，前后 render-input 与 rendered-pixel identities 都改变，并通过 fresh item/page-level + contact-sheet Terra。
 - Bridge Kit task-local Visual Review contract 继续作为视觉 evidence contract；缺 fresh evidence 时等待，不消耗 Reviewer round，不新造状态机。
+- **Round-1 单次修复验证允许一次最小的 staged-publication bridge。** 本地 Executor 按设计拿不到 GitHub Actions visual-review secret，而 cloud Terra 只能评估已经由 watcher 发布、GitHub 可追踪的当前 manifest/render。为关闭 Review 1 的 live repair gate，Executor 不得直接 `git push`，也不得伪造或手改 `VISUAL_REVIEW.json`；它可以先完成 task-owned stress fixture、初始 render/manifest 与实现快照，然后以 `NEEDS_GPT_PLANNER` 合法交给 watcher 发布。该 staging publication 不是 042 PASS、不是最终 implementation handoff，也不消耗新的 Reviewer round。待这份初始 manifest 已在 GitHub 被追踪后，Planner 在不再修改本 Plan 的前提下机械地重新 `PLAN_FROZEN`；下一次 Executor 可以对已追踪的 042 manifest 使用 `gh workflow run "AI Bridge Visual Review"`，等待并拉取真实 `VISUAL_REVIEW.json`，再由现有 quality-loop consumer决定是否能执行唯一一次冻结 vocabulary 内的 repair。repair 后必须再次发布最终 manifest/pixels并取得 fresh final Terra。除这一 staged-publication bridge 外，不新增状态机或 secret 通路。
+- **staging 前必须先制造“可验证但不改变生产规则”的受支持 stress 问题。** 由于上一版 042 的六张 substantive page 已被 Terra 判定为 PASS，下一 Executor 必须只调整 042 自己的 non-holdout/public-safe stress fixture，让一个已有支持的 substantive page 稳定暴露一个结构清楚、唯一属于现有 repair family 的问题（优先 aliased quantitative primary-object projection-scale；也可用已冻结支持的 caption/support 或 process-layout collision）。不得修改 production quality bar、gold、repair mapping 或科学 claim 来制造 finding。若按此 stress setup 得到的初始 Terra 仍没有任何可安全唯一映射的 substantive finding，则按 stop condition结束为新增 evidence，不允许反复改变 fixture直到碰巧产生 PASS/repair。
 - exact CUHK、source fidelity、数学原生 LaTeX、真实/允许的 scientific assets、medical image semantics、single-cycle quality loop 和 Stage 1–4 已通过行为均为 regression boundary。
 
 ## Implementation scope
@@ -61,10 +63,12 @@ decision: PLAN_FROZEN
 5. **独立 visual stress run，验证 directive 真正改变 pixels**
    - 使用 repository 中已有 non-holdout/public-safe材料或新建中性 synthetic/public-safe task-local stress bundle；不得复制 041 source、figures 或 page-specific rendered content。
    - stress deck 至少包含一个 paper-like aliased quantitative figure page，以及一个容易暴露底部 caption/citation容量或 process-layout问题的页面；若使用 medical stress，则只能用现有 public-safe non-holdout asset。
+   - Review 1 返修必须先把其中一个已有支持的 substantive page 调整成稳定、结构清楚、只对应一个既有 repair family 的视觉 stress case；优先选择 quantitative primary-object projection scale。调整只能发生在 task-owned fixture/content density/layout input，不得改 production selector、gold bar、repair mapper 或 Terra rubric 来“制造”问题。
    - 首次生成必须走 normal `research-presentations` production entry，而不是 benchmark-only renderer。
-   - 通过 task-local Visual Review 获取结构化 finding；若 finding 与现有安全 repair family唯一对应，允许且最多执行一次已有 bounded repair。
-   - repair 前后必须记录 render-input identity、rendered-pixel identity 和 affected page hashes；声称 repair 生效时两层 identity 必须真实变化。
-   - repair 后更新 042 的 task-local visual manifest，并取得 fresh Terra；目标页面与完整 contact sheet 都必须达到 frozen mature research-group-meeting / strong paper-talk bar。若真实 finding 无安全映射，则记录 fail-closed，不得改 finding JSON 手工塞内部 intent。
+   - 初始 render/manifest 完成后若本地没有 visual-review secret，允许按 Frozen decisions 的 staged-publication bridge 返回 `NEEDS_GPT_PLANNER`；watcher 发布该初始快照后，再由下一 Executor 对已追踪 manifest 触发 `gh workflow run "AI Bridge Visual Review"` 并取得真实 initial Terra。
+   - 只有 initial Terra 的 item-level finding 明确指向受支持 substantive page，且 requirement/target/canonical-role 语义唯一落入现有安全 repair family，才允许质量循环选择 directive；不得往 review JSON 手工补内部 intent。
+   - 最多执行一次已有 bounded repair。repair 前后必须记录 render-input identity、rendered-pixel identity 和 affected page hashes；声称 repair 生效时两层 identity 必须真实变化。
+   - repair 后更新 042 的 task-local visual manifest，并通过同一 GitHub Actions secret 通路取得 fresh final Terra；被修改页面与完整 contact sheet 都必须达到 frozen mature research-group-meeting / strong paper-talk bar。若 initial finding 无安全映射、没有受支持 finding、或 repair 后仍不合格，则按 stop condition停止，不得继续改变 stress fixture或执行第二次 repair。
 
 6. **CI / mirror / regression**
    - 同步 presentation skill 与 Codex plugin mirror 中实际需要保持一致的 shared scripts；不得出现一边修复、一边旧逻辑残留。
@@ -80,13 +84,13 @@ decision: PLAN_FROZEN
 3. **No-winner 保留。** unknown role、page-function mismatch、明显 domain mismatch、panel/capacity incompatibility 仍然拒绝；不得新增 unconditional general fallback。
 4. **Gold bar 不变。** `research_gold_composition_index.json` 的 admitted mature set/rights boundary不因本 task扩大；没有新的低质量 card/arrow fallback。
 5. **Repair mapping 复用现有 vocabulary。** 对结构化、唯一、安全的 undersized-primary-object / caption-support collision / process-layout finding，canonical role 能让现有 repair family被选择；对歧义 finding继续 fail closed。不得新增第二次 repair或新的宽泛 intent。
-6. **真实 downstream pixel effect。** 至少一个 non-holdout stress deck真实执行且只执行一次 safe repair，前后 render-input 与 rendered-pixel identities 均不同；不是只写 hint/state。
-7. **Fresh Terra。** 与最终 implementation/render identities绑定的 task-local visual evidence中，所有被修改目标页和完整 contact sheet均无 blocking finding，并达到 mature research-group-meeting / strong paper-talk bar；若使用医学图像，必须确认 modality/panel/annotation语义不被 repair破坏。
+6. **真实 downstream pixel effect。** 至少一个 non-holdout stress deck必须先由 GitHub-tracked initial manifest取得真实 task-local Terra finding，再由现有 consumer真实执行且只执行一次 safe repair；repair 前后 render-input 与 rendered-pixel identities 均不同，并至少有一个 affected-page hash变化。staging publication本身不算满足本 gate。
+7. **Fresh Terra。** initial Terra 必须证明 repair 的触发来自真实 item/page-level视觉 finding；repair 后 final Terra 必须与最终 implementation/render identities重新绑定，所有被修改目标页和完整 contact sheet均无 blocking finding，并达到 mature research-group-meeting / strong paper-talk bar；若使用医学图像，必须确认 modality/panel/annotation语义不被 repair破坏。
 8. **Stage 1–4 regression protection。** exact CUHK identity、source fidelity、已有 model/result/process/medical/next-step layouts、single-cycle quality-loop limit、正常 production entry与 existing tests全部保持通过。
 9. **真实 GitHub CI PASS。** 本地 tests/mechanical validation不替代 GitHub evidence。
 10. **Holdout firewall。** 新增/修改 production code与test fixture不得出现 041 四篇的标题、DOI、作者/产品专用词、page-specific source content或 rendered hashes作为匹配/断言依据；041 artifacts没有被修改以制造 closure。
 
-**Stop condition：** 若共享语义归一后，现有 mature gold 对某一必需结构角色仍确实没有兼容 record，042 不得偷偷 intake 新 gold或降低门槛；以新增的 selection evidence终止本 task，再由 Planner决定是否创建独立 gold-coverage recovery。若安全 repair 已能映射但现有下游 layout无法在一次 cycle内产生合格像素，042 同样不得扩成新 layout architecture；保留真实 Terra blocker，后续另开 bounded layout-capacity recovery。这样避免重复 041/039 的失败动作或形成无界恢复链。
+**Stop condition：** 若共享语义归一后，现有 mature gold 对某一必需结构角色仍确实没有兼容 record，042 不得偷偷 intake 新 gold或降低门槛；以新增的 selection evidence终止本 task，再由 Planner决定是否创建独立 gold-coverage recovery。若安全 repair 已能映射但现有下游 layout无法在一次 cycle内产生合格像素，042 同样不得扩成新 layout architecture；保留真实 Terra blocker，后续另开 bounded layout-capacity recovery。若 Review 1 的受支持 stress setup 经一次已发布 initial Terra仍未产生任何可安全唯一映射的 substantive finding，也在这里停止，不允许继续自适应改变 fixture 追逐一个可修 finding。这样避免重复 041/039 的失败动作或形成无界恢复链。
 
 ## Natural-language usage / routing expectations
 
@@ -101,5 +105,6 @@ decision: PLAN_FROZEN
 - 不新增 gold composition source、外部 reference intake 或无界 corpus scouting。
 - 不重写 canonical CUHK template、整体 storyline、source ingestion、figure extraction 或医学图像 pipeline。
 - 不新增第二套 repair state machine、第二次 repair cycle、LLM自由修图/自由改 scientific claims，或宽泛“任何 finding都自动修”的 mapping。
+- 不让 Codex Executor 直接 `git push` staging/final snapshot，不让本地 shell读取或复制 GitHub Actions secret，也不把 staged initial manifest冒充最终 implementation handoff、CI PASS或 042 PASS。
 - 不把 strict production-entry validator 中与 031 fixture相关的其他历史问题顺手纳入，除非它直接阻止本 plan 的独立 stress production entry；若需要较大 validator redesign，记录为后续任务而不是扩大 042。
 - 不把“减少 no-match 数量”本身当作成功指标；成熟 gold兼容性、真实像素质量和 fail-closed边界必须同时成立。
