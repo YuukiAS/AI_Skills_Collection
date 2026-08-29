@@ -3,7 +3,7 @@
   "stage5_holdout_eligible": false,
   "holdout_exclusion_reason": "Repository-owned synthetic Stage 4 quality-loop repair stress bundle only; not a final Stage 5 paper or medical-imaging holdout.",
   "metadata": {
-    "title": "Stage 4 Quality Loop Repair Stress Update",
+    "title": "Uncertainty Calibration Under Clustered Dependence and Segmentation Stress",
     "subtitle": "Uncertainty calibration across clustered data and segmentation stress cases",
     "author": "Research Presentation Program",
     "institute": "Department of Statistics & Data Science",

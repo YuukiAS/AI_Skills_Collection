@@ -1219,7 +1219,17 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertIn("unsupported repair intent", unsafe["fail_closed_reason"])
 
     def test_research_presentation_quality_loop_normalizes_terra_style_findings(self) -> None:
-        bundle = production_entry.load_bundle(SHARED / "fixtures/stage4_quality_loop_repair_stress_bundle/bundle.json")
+        bundle_path = SHARED / "fixtures/stage4_quality_loop_repair_stress_bundle/bundle.json"
+        bundle = production_entry.load_bundle(bundle_path)
+        plugin_bundle_path = REPO_ROOT / "plugins/codex/plugins/presentations/shared/fixtures/stage4_quality_loop_repair_stress_bundle/bundle.json"
+        self.assertEqual(bundle_path.read_text(encoding="utf-8"), plugin_bundle_path.read_text(encoding="utf-8"))
+        metadata_audience = " ".join(
+            str(bundle["metadata"][field])
+            for field in ["title", "subtitle"]
+        ).lower()
+        for forbidden in ["stage", "quality loop", "qa", "workflow", "fixture", "production regression", "source bundle"]:
+            self.assertNotIn(forbidden, metadata_audience)
+
         deck_jobs, storyline_trace = production_entry.build_storyline(bundle)
         specs = production_entry.build_specs(deck_jobs)
         layouts = [stage3.resolve_layout(spec) for spec in specs]
