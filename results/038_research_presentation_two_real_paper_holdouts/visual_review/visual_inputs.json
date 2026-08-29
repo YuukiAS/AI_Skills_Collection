@@ -17,7 +17,7 @@
   },
   "identity_bindings": {
     "task_key": "038_research_presentation_two_real_paper_holdouts",
-    "implementation_commit": "1bca6df7be706f96fbecb2fc4b2a4584dfbae0b0",
+    "implementation_commit": "1e376b51d703f42324f111b06b6bf4e2d062b8e6",
     "base_commit": "9a38a5f3cfbb499e88d0f68efe080a47f71c6e5b",
     "decks": {
       "statistics": {
@@ -25,7 +25,7 @@
         "source_bundle_sha256": "32d1a9d1241ff8b4c77b6a98fe5b20b5b88ed04f3d60b0b10f9897304f15421b",
         "source_inventory": "results/038_research_presentation_two_real_paper_holdouts/statistics/source_inventory.json",
         "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/BUILD_MANIFEST.json",
-        "build_manifest_sha256": "339fadcba3283891288d8cc56b056bee51b2beefae24b93434d86e4dddb6f3ab",
+        "build_manifest_sha256": "2c99ff367ab8849ab6fe0d0b2ce0760ffe525e5f9bdb264c5492e6512733e76d",
         "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/source_fidelity_map.json",
         "source_fidelity_map_sha256": "31eca25f320bb07dfc221ecac3b3294041ca4618eb5a4abb1084699de13fc6a2",
         "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_sequence_summary.json",
@@ -45,7 +45,7 @@
         "source_bundle_sha256": "fef82966184d4db938d4bfdd12101d289ebdca80bf246a3ed7c9fb72f42fa33b",
         "source_inventory": "results/038_research_presentation_two_real_paper_holdouts/medical/source_inventory.json",
         "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/BUILD_MANIFEST.json",
-        "build_manifest_sha256": "95be821fa840e3afcc151cc0b3c3cde1e748bd1088e7fa1c75ba4a91b8ffdf77",
+        "build_manifest_sha256": "f60b39706e5709354d97e9b57ee697242534f9df81901791a764069421a231d9",
         "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/source_fidelity_map.json",
         "source_fidelity_map_sha256": "c780b0197246119320bdc3b9a862aed18633aad592cd2080d30ddb9646c29755",
         "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_sequence_summary.json",

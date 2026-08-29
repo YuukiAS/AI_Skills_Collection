@@ -2,14 +2,14 @@
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 038_research_presentation_two_real_paper_holdouts
 executor: Codex
-implementation_commit: 1bca6df7be706f96fbecb2fc4b2a4584dfbae0b0
+implementation_commit: 1e376b51d703f42324f111b06b6bf4e2d062b8e6
 status: WAITING_FOR_CI
 ci_status: PENDING
 ---
 
 # Result: 038 Research Presentation Two Real Paper Holdouts
 
-Implementation commit: `1bca6df7be706f96fbecb2fc4b2a4584dfbae0b0`
+Implementation commit: `1e376b51d703f42324f111b06b6bf4e2d062b8e6`
 
 Control-plane commit: pending at time of writing this file.
 
