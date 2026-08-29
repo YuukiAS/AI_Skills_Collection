@@ -16,20 +16,20 @@
   },
   "identity_bindings": {
     "task_key": "039_research_presentation_quality_loop_execution_recovery",
-    "implementation_commit": "7470884044ce51bcb204222df385e1e8dc619d94",
-    "input_title": "Stage 4 Quality Loop Repair Stress Update",
+    "implementation_commit": "a1f58f55d7eff78271d698a4a0aebe9a1a9658ff",
+    "input_title": "Uncertainty Calibration Under Clustered Dependence and Segmentation Stress",
     "build_manifest": "results/039_research_presentation_quality_loop_execution_recovery/generated/BUILD_MANIFEST.json",
-    "build_manifest_sha256": "9e1f3451c8565b491ecaf86e150e0221eae4f09935a7c6d053df4804eb8bf8f7",
+    "build_manifest_sha256": "c25e7221cf194f96de143c957090d181225574c6b10d080be349d99f62cf746f",
     "source_fidelity_map": "results/039_research_presentation_quality_loop_execution_recovery/generated/source_fidelity_map.json",
     "source_fidelity_map_sha256": "221900891fe63b01949acce8e81c99f12cb48f388661240d8042452013b15ce7",
     "deck_sequence_summary": "results/039_research_presentation_quality_loop_execution_recovery/generated/deck_sequence_summary.json",
-    "deck_sequence_summary_sha256": "1dc2b806ed0b4646de4aef445f8d332386f38fb129c2c14133f5c43095f7c374",
+    "deck_sequence_summary_sha256": "429fd4a4557615ade2c9fd3ac5c3edc5c22f6a2179ca2dd87010b05a6922218a",
     "quality_loop_state": "results/039_research_presentation_quality_loop_execution_recovery/generated/quality_loop_state.json",
-    "quality_loop_state_sha256": "da1e0e84140151b0152bc242c1cb8de2c80a73aee442bc8b1a7d357d98ebd958",
+    "quality_loop_state_sha256": "213fd37a0961d5d36ed077c3112e514722e8a3fff43f8d1e11ee6c6073f8b94a",
     "deck_contact_sheet": "results/039_research_presentation_quality_loop_execution_recovery/generated/deck_contact_sheet.png",
-    "deck_contact_sheet_sha256": "9ce84d4872b235943d275accd3928efe7c39d34f3640fe5e8df2d974655efdbf",
-    "deck_identity_sha256": "171ff85d52b585c88c077c9cbe86e88567b510f0cfe9a0a818b8e4593fe459bb",
-    "render_input_identity_sha256": "3eddc291bdc972dfd16aff78a5e515375618ee126307cce640a0505d9448950d",
+    "deck_contact_sheet_sha256": "06764734399a590827965d0cfda0671d4558c99180b9905634e8bba2e2e4321d",
+    "deck_identity_sha256": "b851e16bc1018a1ce17c668de43469c632d1a7c45f53f508d5eed79ead1e2de8",
+    "render_input_identity_sha256": "86b622feb668675368ee7e23ce78ebe2f8e7e591d3b30417a6c5aa3e4a9866aa",
     "render_input_identity": {
       "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
       "build_workspace": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build",
@@ -62,7 +62,7 @@
         {
           "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/main.tex",
           "role": "main_tex",
-          "sha256": "d011fe2fe787b7c2cd2034e5beedb4740a7f3d138a7d5050c9bf62a2f22eba38"
+          "sha256": "b4951855410c6f2267fbfae6b07d56314226cbd4573d9b8cb2d05246b7a63d73"
         },
         {
           "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/scientific_layouts.tex",
@@ -135,10 +135,10 @@
           "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
         }
       ],
-      "sha256": "3eddc291bdc972dfd16aff78a5e515375618ee126307cce640a0505d9448950d"
+      "sha256": "86b622feb668675368ee7e23ce78ebe2f8e7e591d3b30417a6c5aa3e4a9866aa"
     },
-    "rendered_pixel_identity_sha256": "e28210bb5209e18035db337b855da9c2c3f030635e38e552243107ece6f21418",
-    "pdf_sha256": "3eb31f9e1b62918e213f153f5bf7e6290eb170696d403a0e0ee00eb485b18f0b",
+    "rendered_pixel_identity_sha256": "06c5a01891ff27c5dc04fff0445ab80999b4474cde0927567f198a65cf6cef26",
+    "pdf_sha256": "19f5cdcdac5cc6ed10b6158c110f12649819ccf79f6518522bbd52f46cb6b2db",
     "page_job_by_logical_id": {
       "slide_2_statistical_model": "STATISTICAL_MODEL",
       "slide_3_real_data_application": "REAL_DATA_APPLICATION",
@@ -223,7 +223,7 @@
       "logical_id": "deck_contact_sheet",
       "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/deck_contact_sheet.png",
       "mime_type": "image/png",
-      "sha256": "9ce84d4872b235943d275accd3928efe7c39d34f3640fe5e8df2d974655efdbf",
+      "sha256": "06764734399a590827965d0cfda0671d4558c99180b9905634e8bba2e2e4321d",
       "description": "Deck-level contact sheet preserving the rendered slide sequence for rhythm, density, transition, and template-repeat review.",
       "review_role": "deck_sequence_context"
     }

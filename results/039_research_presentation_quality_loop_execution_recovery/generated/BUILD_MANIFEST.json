@@ -1,7 +1,7 @@
 {
   "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1",
   "task_key": "039_research_presentation_quality_loop_execution_recovery",
-  "implementation_commit": "7470884044ce51bcb204222df385e1e8dc619d94",
+  "implementation_commit": "a1f58f55d7eff78271d698a4a0aebe9a1a9658ff",
   "input_bundle": "skills/tools/documents-media/presentations/shared/fixtures/stage4_quality_loop_repair_stress_bundle/bundle.json",
   "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
   "canonical_files": {
@@ -15,7 +15,7 @@
     "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/sintefcolor.sty": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
   },
   "build_workspace": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build",
-  "render_input_identity_sha256": "3eddc291bdc972dfd16aff78a5e515375618ee126307cce640a0505d9448950d",
+  "render_input_identity_sha256": "86b622feb668675368ee7e23ce78ebe2f8e7e591d3b30417a6c5aa3e4a9866aa",
   "render_input_identity": {
     "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
     "build_workspace": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build",
@@ -48,7 +48,7 @@
       {
         "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/main.tex",
         "role": "main_tex",
-        "sha256": "d011fe2fe787b7c2cd2034e5beedb4740a7f3d138a7d5050c9bf62a2f22eba38"
+        "sha256": "b4951855410c6f2267fbfae6b07d56314226cbd4573d9b8cb2d05246b7a63d73"
       },
       {
         "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/scientific_layouts.tex",
@@ -121,7 +121,7 @@
         "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
       }
     ],
-    "sha256": "3eddc291bdc972dfd16aff78a5e515375618ee126307cce640a0505d9448950d"
+    "sha256": "86b622feb668675368ee7e23ce78ebe2f8e7e591d3b30417a6c5aa3e4a9866aa"
   },
   "tex": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/main.tex",
   "scientific_layout_include": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/scientific_layouts.tex",
@@ -133,7 +133,7 @@
   "deck_sequence_summary": {
     "schema": "RESEARCH_PRESENTATION_DECK_SEQUENCE_SUMMARY_V1",
     "page_count": 6,
-    "render_input_identity_sha256": "3eddc291bdc972dfd16aff78a5e515375618ee126307cce640a0505d9448950d",
+    "render_input_identity_sha256": "86b622feb668675368ee7e23ce78ebe2f8e7e591d3b30417a6c5aa3e4a9866aa",
     "render_input_manifest": {
       "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
       "build_workspace": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build",
@@ -166,7 +166,7 @@
         {
           "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/main.tex",
           "role": "main_tex",
-          "sha256": "d011fe2fe787b7c2cd2034e5beedb4740a7f3d138a7d5050c9bf62a2f22eba38"
+          "sha256": "b4951855410c6f2267fbfae6b07d56314226cbd4573d9b8cb2d05246b7a63d73"
         },
         {
           "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/scientific_layouts.tex",
@@ -239,7 +239,7 @@
           "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
         }
       ],
-      "sha256": "3eddc291bdc972dfd16aff78a5e515375618ee126307cce640a0505d9448950d"
+      "sha256": "86b622feb668675368ee7e23ce78ebe2f8e7e591d3b30417a6c5aa3e4a9866aa"
     },
     "pixel_evidence_status": {
       "status": "AVAILABLE",
@@ -248,7 +248,7 @@
       "rendered_page_sha256_nullable": false,
       "contact_sheet_sha256_nullable": false
     },
-    "rendered_pixel_identity_sha256": "e28210bb5209e18035db337b855da9c2c3f030635e38e552243107ece6f21418",
+    "rendered_pixel_identity_sha256": "06c5a01891ff27c5dc04fff0445ab80999b4474cde0927567f198a65cf6cef26",
     "page_order": [
       "slide_2_statistical_model",
       "slide_3_real_data_application",
@@ -667,16 +667,16 @@
     ],
     "deck_contact_sheet": {
       "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/deck_contact_sheet.png",
-      "sha256": "9ce84d4872b235943d275accd3928efe7c39d34f3640fe5e8df2d974655efdbf",
+      "sha256": "06764734399a590827965d0cfda0671d4558c99180b9905634e8bba2e2e4321d",
       "serves_audience": false,
       "review_role": "deck_sequence_context"
     },
-    "deck_identity_sha256": "171ff85d52b585c88c077c9cbe86e88567b510f0cfe9a0a818b8e4593fe459bb"
+    "deck_identity_sha256": "b851e16bc1018a1ce17c668de43469c632d1a7c45f53f508d5eed79ead1e2de8"
   },
   "deck_contact_sheet": {
     "status": "GENERATED",
     "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/deck_contact_sheet.png",
-    "sha256": "9ce84d4872b235943d275accd3928efe7c39d34f3640fe5e8df2d974655efdbf"
+    "sha256": "06764734399a590827965d0cfda0671d4558c99180b9905634e8bba2e2e4321d"
   },
   "quality_loop_state": "results/039_research_presentation_quality_loop_execution_recovery/generated/quality_loop_state.json",
   "dependency_probe": "results/039_research_presentation_quality_loop_execution_recovery/generated/dependency_probe.json",
@@ -695,7 +695,7 @@
       "times_font_files_present": true
     },
     "pdf": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/main.pdf",
-    "pdf_sha256": "3eb31f9e1b62918e213f153f5bf7e6290eb170696d403a0e0ee00eb485b18f0b",
+    "pdf_sha256": "19f5cdcdac5cc6ed10b6158c110f12649819ccf79f6518522bbd52f46cb6b2db",
     "log": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/compile.log"
   },
   "render_status": {
@@ -704,7 +704,7 @@
     "rendered_png": [
       {
         "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/rendered/slide-1.png",
-        "sha256": "5e308213893583239918b690eb1112d3a28f40a87d26feeab37f7f92adbf671e"
+        "sha256": "ad6ab9bd50025f97fa09f7e3f27239846d127dc4c33bb2e34030dab8c3be3aef"
       },
       {
         "path": "results/039_research_presentation_quality_loop_execution_recovery/generated/cuhk_production_build/rendered/slide-2.png",
@@ -752,8 +752,8 @@
     "visual_review_evidence": "results/039_research_presentation_quality_loop_execution_recovery/visual_review/VISUAL_REVIEW.json",
     "quality_loop_state": "results/039_research_presentation_quality_loop_execution_recovery/generated/quality_loop_state.json",
     "deck_contact_sheet": "results/039_research_presentation_quality_loop_execution_recovery/generated/deck_contact_sheet.png",
-    "render_input_identity_sha256": "3eddc291bdc972dfd16aff78a5e515375618ee126307cce640a0505d9448950d",
-    "rendered_pixel_identity_sha256": "e28210bb5209e18035db337b855da9c2c3f030635e38e552243107ece6f21418"
+    "render_input_identity_sha256": "86b622feb668675368ee7e23ce78ebe2f8e7e591d3b30417a6c5aa3e4a9866aa",
+    "rendered_pixel_identity_sha256": "06c5a01891ff27c5dc04fff0445ab80999b4474cde0927567f198a65cf6cef26"
   },
   "stage4_boundary": "This one-call production entry recovery does not claim Stage 4 PASS, PROGRAM_MATURE, or ONE_SHOT_QUALITY_PASS.",
   "cleaned_latex_intermediates": [
