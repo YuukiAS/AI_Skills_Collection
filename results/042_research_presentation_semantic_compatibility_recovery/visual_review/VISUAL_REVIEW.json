@@ -1,17 +1,7 @@
 {
-  "blocking_findings": [
-    {
-      "evidence": "The title thumbnail in the contact sheet visibly reads “Synthetic Semantic-Alias Research Presentation Stress Deck.”",
-      "finding_id": "F-001",
-      "item_id": "deck_contact_sheet",
-      "recommendation": "Replace the audience-facing cover title with the actual research-update title; remove “Semantic-Alias” and “Stress Deck” terminology before production delivery.",
-      "requirement_id": "audience-facing-no-workflow-or-benchmark-leaks",
-      "severity": "blocking",
-      "summary": "The cover exposes test/benchmark-style deck terminology rather than a normal research-presentation identity."
-    }
-  ],
-  "created_at": "2026-08-29T17:42:15Z",
-  "evidence_id": "visual-review-042_research_presentation_semantic_compatibility_recovery-844ed525da2f",
+  "blocking_findings": [],
+  "created_at": "2026-08-29T19:00:27Z",
+  "evidence_id": "visual-review-042_research_presentation_semantic_compatibility_recovery-081ee645f835",
   "images": [
     {
       "logical_id": "slide_2_statistical_model",
@@ -53,20 +43,20 @@
       "logical_id": "deck_contact_sheet",
       "mime_type": "image/png",
       "path": "results/042_research_presentation_semantic_compatibility_recovery/generated/deck_contact_sheet.png",
-      "sha256": "78136bd068b0306f17e780064d782d7c32007f9231b7ec8a509568a62b921fc5"
+      "sha256": "5d5cfd3e53010eb0cc9141173ac46e36c75c20940d6670ba52d3439170fa6dda"
     }
   ],
   "input_manifest": {
     "identity_bindings": {
       "build_manifest": "results/042_research_presentation_semantic_compatibility_recovery/generated/BUILD_MANIFEST.json",
-      "build_manifest_sha256": "41b2dbf7891635ed12191002815165167848bcfed5091339214e5b18f562eaa9",
+      "build_manifest_sha256": "2e9b798ca5da9ceeacc3918ff0acd0766eec78844865780360bbb8d505b08766",
       "deck_contact_sheet": "results/042_research_presentation_semantic_compatibility_recovery/generated/deck_contact_sheet.png",
-      "deck_contact_sheet_sha256": "78136bd068b0306f17e780064d782d7c32007f9231b7ec8a509568a62b921fc5",
-      "deck_identity_sha256": "7e75de0540a60a099fa59c977d7594d994131d1527c5d287ee785bf04d3842ef",
+      "deck_contact_sheet_sha256": "5d5cfd3e53010eb0cc9141173ac46e36c75c20940d6670ba52d3439170fa6dda",
+      "deck_identity_sha256": "14fc12f9d231ddcb4c75d141eec0f4b905c08cd9ca66e5ae4b5ddc6f3300c874",
       "deck_sequence_summary": "results/042_research_presentation_semantic_compatibility_recovery/generated/deck_sequence_summary.json",
-      "deck_sequence_summary_sha256": "1135126cab23e0f7a6a89888cb0bbc4bf9a899ed0507bda26e7db268e0892b37",
-      "implementation_commit": "efc9d40e23dfa00cc9cba709c31f80f86044b5b0",
-      "input_title": "Synthetic Semantic-Alias Research Presentation Stress Deck",
+      "deck_sequence_summary_sha256": "f9377d5f87a02687f68a72ec94367d13593d11427cf24d26b4db037cede983b6",
+      "implementation_commit": "efa645a46c4e9a6269b7ef1d0e39f186eb015f7a",
+      "input_title": "Clustered Interval Calibration and Segmentation Robustness",
       "page_job_by_logical_id": {
         "slide_2_statistical_model": "STATISTICAL_MODEL",
         "slide_3_real_data_application": "REAL_DATA_APPLICATION",
@@ -75,9 +65,9 @@
         "slide_6_next_experiment": "NEXT_EXPERIMENT",
         "slide_7_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON"
       },
-      "pdf_sha256": "e786548c45aa4ae5c0b87bcf20080b672ea2174be29fc4e6975582947d439795",
+      "pdf_sha256": "d0eb60565541f036c3577f6bf3c449b8dd578381272393ab3ed6cc0e91b9e28c",
       "quality_loop_state": "results/042_research_presentation_semantic_compatibility_recovery/generated/quality_loop_state.json",
-      "quality_loop_state_sha256": "4f5907b2cbaf44f739eaf3b7d20d9e1155396096d0584c677181ad969e87cf3a",
+      "quality_loop_state_sha256": "6a0635b21e4727d2bfa2090519849bc68cc5e26469edd1dc0078fe8756536b43",
       "render_input_identity": {
         "build_workspace": "results/042_research_presentation_semantic_compatibility_recovery/generated/cuhk_production_build",
         "files": [
@@ -109,7 +99,7 @@
           {
             "path": "results/042_research_presentation_semantic_compatibility_recovery/generated/cuhk_production_build/main.tex",
             "role": "main_tex",
-            "sha256": "252dc201d469b34d5b2bf8979ff8c0ee4983a7ca941b5b29dbf39609141b9e38"
+            "sha256": "51e77f350bab9afb202fcb30dad3878cf056ab3a74f2436629051545b4563935"
           },
           {
             "path": "results/042_research_presentation_semantic_compatibility_recovery/generated/cuhk_production_build/scientific_layouts.tex",
@@ -183,10 +173,10 @@
           }
         ],
         "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
-        "sha256": "cf0af54c270a7ee875bb913d9357de4b8960307bc295e04a3a46c4bfdf52b1c2"
+        "sha256": "27efc0ee49544570baa87dc7a116fa565c3cd3150890bfc8c057bdf204017302"
       },
-      "render_input_identity_sha256": "cf0af54c270a7ee875bb913d9357de4b8960307bc295e04a3a46c4bfdf52b1c2",
-      "rendered_pixel_identity_sha256": "f0289d94e034f1a676c5a9c4e82dfc335a7e5a8ba43a577f243f88aa1f2da9fd",
+      "render_input_identity_sha256": "27efc0ee49544570baa87dc7a116fa565c3cd3150890bfc8c057bdf204017302",
+      "rendered_pixel_identity_sha256": "9f9c2625514e5c78c57168463cbd48fbc29c587307a1754dbe957894407bf982",
       "selected_gold_by_page_id": {
         "production_experiment_design": "GSC-004",
         "production_medical_comparison": "GSC-008",
@@ -219,7 +209,7 @@
       "source_fidelity_map_sha256": "bd47fe5dc03da4af889bb37df76305b6daba263b2de771c12d9118e388a23a57",
       "task_key": "042_research_presentation_semantic_compatibility_recovery"
     },
-    "manifest_sha256": "844ed525da2fe077e70eaa4fdc1dccc5dcfddd76654f8a01f0a420d02bdb3043",
+    "manifest_sha256": "081ee645f83534aa0f15d17e0d22c46b40699acea59a69764586b0ba5b389947",
     "privacy_policy": "PUBLIC_SAFE_ONLY",
     "rubric": {
       "instructions": "Review the rendered pixels from one normal research-presentations production invocation. Check that each page contains source-specific content from the supplied engineering bundle rather than placeholders; exact CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math, native plots, and medical images are semantically correct where present; no internal RRL/GSC/SRC, QA, provenance, workflow, repo path, run ID, or implementation language leaks into audience-facing slides; repeated generic cards or one-template pages are rejected; and the deck reads as one coherent research update rather than disconnected benchmark pages. For multi-workstream bundles, confirm that each workstream stays internally continuous and that any independent workstream transition is visible without inventing a causal relation. Separately review the deck_contact_sheet item as a deck-level rhythm object: adjacent-page density jumps, repeated composition face, overfull or empty pages, redundant summary filler, result -> failure -> next-experiment rhythm, workstream transition balance, and title/object/formula/image alternation must meet a mature doctoral group-meeting or strong conference-talk bar. The top-level package PASS is not enough; provide item-level judgement and observations for deck_contact_sheet. Do not infer visual quality from filenames or hashes.",
@@ -236,127 +226,137 @@
       "decision": "PASS",
       "item_id": "slide_2_statistical_model",
       "observations": [
-        "A large clustered-outcome mixed-model equation is the dominant scientific object and is projection-readable.",
-        "The visible model components, ICC expression, and center-level interpretation are specific to clustered interval calibration rather than generic filler.",
-        "CUHK-styled purple header and crest are visible; no internal workflow, repository, run-ID, or implementation-language text is visible."
+        "CUHK-branded purple header and crest are visibly present.",
+        "The clustered-outcome model equation is the dominant visual object and is projection-readable.",
+        "The supporting rho expression and component/interpretation box provide specific model content rather than placeholder copy.",
+        "No internal workflow, provenance, repository, or implementation-language text is visible."
       ],
       "requirement_ids": [
         "source-specific-content",
-        "CUHK-identity",
-        "prominent-projection-readable-scientific-object",
+        "cuhk-identity",
+        "prominent-scientific-object",
         "no-internal-leaks"
       ],
-      "summary": "Clear model slide with a prominent, semantically consistent statistical specification."
+      "summary": "Clear, sparse model-introduction slide with a legible central equation and source-specific interpretation."
     },
     {
       "decision": "PASS",
       "item_id": "slide_3_real_data_application",
       "observations": [
-        "The page contains a native multi-panel coverage plot for G=8, G=20, and G=50, with visible ICC values, nominal-coverage reference, method key, and an annotated small-G result.",
-        "The red naïve-IID and teal cluster-robust trajectories visually support the stated coverage conclusion.",
-        "The plot is the dominant object; the source/data note and interpretation remain visible without internal-process text."
+        "The three-panel coverage plot is prominent and legible, with G=8, G=20, and G=50 conditions, ICC values, method key, nominal-coverage reference, and a specific small-G annotation.",
+        "The plot’s red and teal series visibly support the stated coverage comparison.",
+        "Data-source and interpretation statements are audience-facing scientific content; no internal process text is visible.",
+        "CUHK header treatment remains visible and consistent."
       ],
       "requirement_ids": [
         "source-specific-content",
+        "cuhk-identity",
         "native-plot-semantics",
-        "prominent-projection-readable-scientific-object",
+        "prominent-scientific-object",
         "no-internal-leaks"
       ],
-      "summary": "Specific quantitative results are shown in a readable plot with an interpretable method comparison."
+      "summary": "A coherent results slide whose chart, annotation, and takeaway align visibly."
     },
     {
       "decision": "PASS",
       "item_id": "slide_4_experiment_design",
       "observations": [
-        "The page visibly specifies DGP knobs (centers, ICC, balanced/imbalanced clusters), clustered samples, two interval procedures, and coverage diagnostics.",
-        "Directional connectors communicate generation-to-estimation-to-diagnostics flow rather than presenting disconnected cards.",
-        "The scientific schematic is readable and consistent with the clustered-interval workstream."
+        "The slide presents a specific simulation design: center counts, ICC settings, balanced/imbalanced clusters, two interval procedures, and three diagnostics.",
+        "The left-to-right connectors make the design sequence visually explicit without relying on generic card layouts.",
+        "The diagram is readable at page scale and uses distinct visual elements from the adjacent results slide.",
+        "No QA, provenance, workflow, repository, or implementation-language leak is visible."
       ],
       "requirement_ids": [
         "source-specific-content",
-        "coherent-workstream",
-        "prominent-projection-readable-scientific-object",
+        "prominent-scientific-object",
+        "coherent-research-update",
         "no-internal-leaks"
       ],
-      "summary": "A source-specific experiment-design schematic that maintains continuity with the preceding calibration result."
+      "summary": "Source-specific experimental-design diagram that continues the clustered-interval workstream."
     },
     {
       "decision": "PASS",
       "item_id": "slide_5_negative_result",
       "observations": [
-        "A labeled grouped bar chart shows naïve and cluster-robust coverage across four ICC settings, with uncertainty bars and a 0.95 target line.",
-        "The annotation “still below nominal” points directly to the high-ICC cluster-robust result, making the negative result explicit.",
-        "Adjacent text frames the limitation and proposed follow-up; no QA/provenance/workflow strings are visible."
+        "The grouped bar chart is dominant and clearly identifies the failure setting as G=8 with imbalanced clusters across ICC values.",
+        "Visible values, uncertainty bars, the 0.95 target line, and the annotation near the high-ICC robust result substantiate the negative-result claim.",
+        "The adjacent prose frames the failure and names proposed follow-up tests without exposing internal production details.",
+        "CUHK branding is retained; the composition is not a repeated version of the prior plot or design slide."
       ],
       "requirement_ids": [
         "source-specific-content",
-        "negative-result-rhythm",
+        "negative-result",
         "native-plot-semantics",
+        "prominent-scientific-object",
         "no-internal-leaks"
       ],
-      "summary": "The failure case is quantitatively displayed and directly connected to its interpretation."
+      "summary": "Scientifically legible negative-evidence slide with chart-supported diagnosis and a clear bridge to follow-up."
     },
     {
       "decision": "PASS",
       "item_id": "slide_6_next_experiment",
       "observations": [
-        "The visual flow begins with the stated small-G/ICC failure evidence, branches into three sampling approaches, compares CR2 and wild-cluster-bootstrap arms, and ends in a go/no-go decision rule.",
-        "The slide preserves a visible result-to-next-experiment relationship within the clustered-interval workstream.",
-        "The flow diagram differs materially from prior pages and does not expose internal implementation or provenance text."
+        "The flow diagram visibly carries failure evidence through batch-selection options, comparator arms, and a go/no-go decision rule.",
+        "Specific proposed methods—DPP diverse batch, random batch, Mondrian partition, CR2 small-sample correction, and wild cluster bootstrap—make the next experiment concrete.",
+        "The slide maintains continuity with the preceding small-G coverage failure and does not add unsupported causal claims.",
+        "Some labels in the dense central flow are smaller than the main title, but remain visibly organized and are not clipped."
       ],
       "requirement_ids": [
         "source-specific-content",
-        "result-to-next-experiment-rhythm",
-        "coherent-workstream",
+        "next-experiment",
+        "coherent-research-update",
         "no-internal-leaks"
       ],
-      "summary": "A clearly structured next-experiment plan that follows from the preceding failure evidence."
+      "summary": "A concrete, visually connected next-experiment plan following the documented coverage failure."
     },
     {
       "decision": "PASS",
       "item_id": "slide_7_medical_image_comparison",
       "observations": [
-        "Four same-case image panels labeled Input, GT, Prediction, and Error visibly compare the same ring-like medical image region.",
-        "A boxed error ROI is connected to GT/prediction/error crops, and the TP/FP/FN color legend is adjacent to those crops.",
-        "The top research-direction strip explicitly calls segmentation robustness an “independent visual failure analysis,” making the workstream transition visible without asserting causality."
+        "The transition is explicitly labeled as an independent segmentation-robustness visual failure analysis.",
+        "Input, ground truth, prediction, and error panels show the same ring-shaped case, with matching local ROI crops and a TP/FP/FN overlay legend.",
+        "The image/error semantics are visibly coherent: prediction-only red and missed-ground-truth orange regions are localized in the same ROI highlighted on the error panel.",
+        "The medical-image comparison is distinct from the clustered-interval workstream while retaining the CUHK deck identity and avoiding internal leakage."
       ],
       "requirement_ids": [
         "source-specific-content",
         "medical-image-semantics",
-        "visible-independent-workstream-transition",
+        "workstream-transition",
+        "cuhk-identity",
         "no-internal-leaks"
       ],
-      "summary": "Semantically coherent medical-image comparison with a clearly marked independent workstream transition."
+      "summary": "Clear independent-workstream transition with semantically aligned image panels, ROI crops, and error legend."
     },
     {
-      "decision": "BLOCKED",
+      "decision": "PASS",
       "item_id": "deck_contact_sheet",
       "observations": [
-        "Across the rendered sequence, the composition alternates between formula, multi-panel line plot, design schematic, grouped bar chart, decision-flow graphic, and medical-image comparison; it is not a repeated one-template deck.",
-        "The clustered-calibration sequence has an evident model → result → design → failure → next-experiment rhythm.",
-        "The final segmentation page is visually and textually marked as an independent research direction, providing a balanced workstream transition.",
-        "The cover thumbnail visibly uses the audience-facing title “Synthetic Semantic-Alias Research Presentation Stress Deck,” which reads as test/benchmark terminology rather than a normal doctoral-group research-deck title."
+        "The sequence shows intentional alternation: model/formula, coverage plot, experimental diagram, failure plot, next-experiment flow, then medical-image comparison.",
+        "The clustered-interval workstream is internally continuous across the model, results, design, negative result, and proposed experiment; the failure-to-next-test rhythm is explicit.",
+        "The final segmentation slide visibly marks itself as an independent research direction, avoiding an invented causal relationship to the interval-calibration material.",
+        "Adjacent pages vary composition and density rather than repeating generic cards or a single template face.",
+        "The deck uses substantial whitespace on the model slide and denser analytical content later, but no page appears empty or overfilled; slide 6 is the visually densest page.",
+        "CUHK purple header, crest, typography, and footer treatment provide a consistent deck-level identity."
       ],
       "requirement_ids": [
-        "deck-rhythm-and-density",
-        "coherent-workstream",
-        "visible-independent-workstream-transition",
-        "audience-facing-no-workflow-or-benchmark-leaks"
+        "deck-rhythm",
+        "workstream-continuity",
+        "workstream-transition",
+        "template-repeat",
+        "cuhk-identity",
+        "no-internal-leaks"
       ],
-      "summary": "The slide rhythm, object alternation, and workstream continuity are strong, but the visible cover title leaks benchmark/test-style terminology."
+      "summary": "Cohesive research-update sequence with mature result-to-failure-to-next-experiment pacing and a clearly separated imaging workstream."
     }
   ],
-  "non_blocking_notes": [
-    "The final independent segmentation workstream is visually well differentiated while retaining the same CUHK visual system.",
-    "Several explanatory paragraphs and minor annotations are smaller than the main plots/diagrams, but the principal scientific objects remain readable in the rendered full-page views."
-  ],
-  "overall_decision": "BLOCKED",
+  "non_blocking_notes": [],
+  "overall_decision": "PASS",
   "prompt_version": "ai-bridge.visual-review.v1",
-  "review_identity": "844ed525da2fe077e70eaa4fdc1dccc5dcfddd76654f8a01f0a420d02bdb3043",
+  "review_identity": "081ee645f83534aa0f15d17e0d22c46b40699acea59a69764586b0ba5b389947",
   "review_kind": "042_research_presentation_semantic_compatibility_recovery-one-call-production-research-deck-review",
   "review_model": "gpt-5.6-terra",
   "schema": "AI_BRIDGE_VISUAL_REVIEW_V1",
-  "status": "BLOCKED",
+  "status": "PASS",
   "task_key": "042_research_presentation_semantic_compatibility_recovery",
   "workflow_type": "reviewed_handoff"
 }
