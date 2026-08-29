@@ -16,7 +16,7 @@
   },
   "identity_bindings": {
     "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
-    "implementation_commit": null,
+    "implementation_commit": "a01865e5380f3c23a3d0eea6bbc6e4f3fdf8591d",
     "production_freeze_locator": "d3379b5168bc27b114b362f186f8c239a88a669c",
     "batch_source_bundle_freeze_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/batch_source_bundle_freeze_manifest.json",
     "batch_source_bundle_freeze_manifest_sha256": "804d1b6ad3f28d60db9e1bac7561f111113e77c71fcadd7d549ea7409726a6bb",
