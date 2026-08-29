@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "042_research_presentation_semantic_compatibility_recovery",
-  "state": "PLAN_FROZEN",
+  "state": "NEEDS_GPT_PLANNER",
   "review_round": 1,
   "max_review_rounds": 2,
   "plan_revision": 1,
@@ -17,5 +17,5 @@
   "visual_review_required": true,
   "visual_review_manifest_path": "results/042_research_presentation_semantic_compatibility_recovery/visual_review/visual_inputs.json",
   "visual_review_evidence_path": "results/042_research_presentation_semantic_compatibility_recovery/visual_review/VISUAL_REVIEW.json",
-  "next_action": "CODEX_EXECUTOR_PREPARE_SUPPORTED_STRESS_FINDING_AND_STAGE_INITIAL_VISUAL_REVIEW_SNAPSHOT"
+  "next_action": "GPT_PLANNER_DECIDE_AFTER_STAGED_INITIAL_TERRA_PASS_WITH_NO_REPAIRABLE_SUBSTANTIVE_FINDING"
 }

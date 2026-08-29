@@ -12,43 +12,64 @@ ci_status: PENDING
 ## Implemented
 
 - Preserved the existing shared scientific-object semantic normalizer, selector integration, quality-loop mapper, mature gold set, and shared/plugin parity from implementation `efc9d40e23dfa00cc9cba709c31f80f86044b5b0`.
-- Fixed the task-owned non-holdout stress bundle audience-facing title/subtitle so the cover no longer exposes `Synthetic Semantic-Alias Research Presentation Stress Deck` or equivalent benchmark/stress-deck language.
-- Regenerated the 042 production artifacts through the normal `research-presentations` one-call production entry with implementation commit `efa645a46c4e9a6269b7ef1d0e39f186eb015f7a`.
-- Did not modify `REQUEST.md`, `PLAN.md`, `REVIEW_1.md`, `FINAL_REPORT.md`, Reviewed Handoff schema/prompts/templates, 041 artifacts, `research_gold_composition_index.json`, repair vocabulary, or CI/review counters.
+- Kept the task-owned non-holdout stress bundle audience title fix from implementation `efa645a46c4e9a6269b7ef1d0e39f186eb015f7a`: `Clustered Interval Calibration and Segmentation Robustness`.
+- Used the GitHub-tracked 042 visual manifest to dispatch a real `AI Bridge Visual Review` workflow run and fast-forwarded only the Actions-written task-local `VISUAL_REVIEW.json`.
+- Did not modify `REQUEST.md`, `PLAN.md`, `REVIEW_1.md`, `FINAL_REPORT.md`, Reviewed Handoff schema/prompts/templates, 041 artifacts, `research_gold_composition_index.json`, repair vocabulary, review counters, Planner counters, or CI requirement fields.
 
-Generated task-local artifacts bound to implementation commit `efa645a46c4e9a6269b7ef1d0e39f186eb015f7a`:
+## Current Evidence
+
+GitHub Visual Review:
 
 ```text
-results/042_research_presentation_semantic_compatibility_recovery/stress_bundle/bundle.json
-results/042_research_presentation_semantic_compatibility_recovery/generated/
-results/042_research_presentation_semantic_compatibility_recovery/visual_review/visual_inputs.json
+workflow=AI Bridge Visual Review
+run_id=33269713056
+run_url=https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/33269713056
+event=workflow_dispatch
+head_sha=df4cefc4242b81ab5ea72f2f1190d342f8fa30ae
+conclusion=success
+evidence_commit=7713423
 ```
 
-## Key Identities
+Fresh Terra evidence:
 
 ```text
-implementation_commit=efa645a46c4e9a6269b7ef1d0e39f186eb015f7a
-render_status=ok
-rendered_png_count=7
-render_input_identity_sha256=27efc0ee49544570baa87dc7a116fa565c3cd3150890bfc8c057bdf204017302
-rendered_pixel_identity_sha256=9f9c2625514e5c78c57168463cbd48fbc29c587307a1754dbe957894407bf982
+visual_review_status=PASS
+visual_review_overall_decision=PASS
+visual_review_sha256=6cca342efb35e07b8988a3bff30757749c3447a4e54e18c03efbfdd1d00034d7
+review_identity=081ee645f83534aa0f15d17e0d22c46b40699acea59a69764586b0ba5b389947
+input_title=Clustered Interval Calibration and Segmentation Robustness
+input_manifest_sha256=2736f0aa7be9731be1eeb06615e6bbdf21f2bc5bb7fd200ff37f6fa499b37669
 build_manifest_sha256=2e9b798ca5da9ceeacc3918ff0acd0766eec78844865780360bbb8d505b08766
 deck_sequence_summary_sha256=f9377d5f87a02687f68a72ec94367d13593d11427cf24d26b4db037cede983b6
 quality_loop_state_sha256=6a0635b21e4727d2bfa2090519849bc68cc5e26469edd1dc0078fe8756536b43
-visual_inputs_sha256=2736f0aa7be9731be1eeb06615e6bbdf21f2bc5bb7fd200ff37f6fa499b37669
-stress_bundle_sha256=2e28f698fe5f6ac3fd592f3c50b59ae7db40dc3acb6974d118dabd663e89c4dd
-deck_contact_sheet_sha256=5d5cfd3e53010eb0cc9141173ac46e36c75c20940d6670ba52d3439170fa6dda
+render_input_identity_sha256=27efc0ee49544570baa87dc7a116fa565c3cd3150890bfc8c057bdf204017302
+rendered_pixel_identity_sha256=9f9c2625514e5c78c57168463cbd48fbc29c587307a1754dbe957894407bf982
+blocking_findings=0
 ```
 
-Current quality-loop state:
+Terra item-level result:
 
 ```text
-deck_level_decision=WAITING_FOR_DECK_VISUAL_REVIEW
-repair_cycle_count=0
+slide_2_statistical_model=PASS
+slide_3_real_data_application=PASS
+slide_4_experiment_design=PASS
+slide_5_negative_result=PASS
+slide_6_next_experiment=PASS
+slide_7_medical_image_comparison=PASS
+deck_contact_sheet=PASS
+```
+
+Existing quality-loop consumer result on the fresh Terra evidence:
+
+```text
+review_sha256=6cca342efb35e07b8988a3bff30757749c3447a4e54e18c03efbfdd1d00034d7
+deck_level_decision=PASS
+final_decision=READY_TO_DELIVER
 repair_allowed=false
-final_decision=null
-repaired_render_input_identity=null
-repaired_rendered_pixel_identity=null
+repair_cycle_count=0
+blocking_findings_count=0
+selected_repair_directives_count=0
+fail_closed_reason=null
 ```
 
 Canonical roles remain present in the generated sequence summary:
@@ -64,24 +85,28 @@ slide_7_medical_image_comparison=medical_image_panel
 
 ## Local Verification
 
-Passed locally:
+Commands run in this Executor turn:
 
 ```text
-python tests/test_presentations.py PresentationSharedTests.test_scientific_object_semantic_aliases_select_existing_gold_without_literal_overlap PresentationSharedTests.test_scientific_object_semantics_preserve_no_winner_and_holdout_firewall PresentationSharedTests.test_quality_loop_uses_canonical_role_for_aliased_primary_object
-python tests/test_presentations.py PresentationSharedTests.test_research_presentation_deck_quality_loop_consumes_review_and_fails_closed PresentationSharedTests.test_research_presentation_quality_loop_normalizes_terra_style_findings PresentationSharedTests.test_research_presentation_quality_loop_repair_directives_affect_render_inputs
-python tests/test_presentations.py PresentationSharedTests.test_research_presentation_one_call_production_entry
+gh workflow run "AI Bridge Visual Review" --ref main -f manifest=results/042_research_presentation_semantic_compatibility_recovery/visual_review/visual_inputs.json -f output=results/042_research_presentation_semantic_compatibility_recovery/visual_review/VISUAL_REVIEW.json
+gh run watch 33269713056 --exit-status
+git fetch origin main
+git pull --ff-only origin main
+python - <<'PY' ... deck_quality_loop.consume_review_evidence(...) ... PY
+python tests/test_presentations.py PresentationSharedTests.test_scientific_object_semantic_aliases_select_existing_gold_without_literal_overlap PresentationSharedTests.test_scientific_object_semantics_preserve_no_winner_and_holdout_firewall PresentationSharedTests.test_quality_loop_uses_canonical_role_for_aliased_primary_object PresentationSharedTests.test_research_presentation_quality_loop_normalizes_terra_style_findings PresentationSharedTests.test_research_presentation_quality_loop_repair_directives_affect_render_inputs
+python skills/tools/documents-media/presentations/shared/scripts/validate_research_presentation_production_entry.py --out-dir results/042_research_presentation_semantic_compatibility_recovery/generated --task-key 042_research_presentation_semantic_compatibility_recovery
+ai-bridge reviewed-handoff validate --target /home/yuukias/AI_Skills_Collection
 python -m unittest discover -s tests
 python scripts/skills.py validate
 python scripts/build_codex_marketplace.py --validate --check --path-report
 python scripts/icon_audit.py --scope marketplace --check
-python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/042_research_presentation_semantic_compatibility_recovery/stress_bundle/bundle.json --out-dir results/042_research_presentation_semantic_compatibility_recovery/generated --task-key 042_research_presentation_semantic_compatibility_recovery --implementation-commit efa645a46c4e9a6269b7ef1d0e39f186eb015f7a --write-result-visual-inputs
-python skills/tools/documents-media/presentations/shared/scripts/validate_research_presentation_production_entry.py --out-dir results/042_research_presentation_semantic_compatibility_recovery/generated --task-key 042_research_presentation_semantic_compatibility_recovery
-ai-bridge reviewed-handoff validate --target /home/yuukias/AI_Skills_Collection
 ai-bridge visual-review preflight --target /home/yuukias/AI_Skills_Collection
 git diff --check
 ```
 
-Observed local results:
+The workflow completed successfully and wrote back only `results/042_research_presentation_semantic_compatibility_recovery/visual_review/VISUAL_REVIEW.json`. The local consumer confirmed that the fresh evidence has no blocking finding and therefore selects no repair directive.
+
+Local regression results:
 
 ```text
 semantic alias tests: 3 passed
@@ -100,27 +125,12 @@ holdout marker scan across changed presentation scripts/tests and 042 artifacts:
 git diff --check: passed
 ```
 
-One attempted local visual-review run failed before producing output:
+## Stop Condition
 
-```text
-ai-bridge visual-review run --target /home/yuukias/AI_Skills_Collection --manifest results/042_research_presentation_semantic_compatibility_recovery/visual_review/visual_inputs.json --output results/042_research_presentation_semantic_compatibility_recovery/visual_review/PROBE_VISUAL_REVIEW.json --timeout 120
-ERROR: OPENAI_VISUAL_REVIEW_API_KEY is not available
-```
+The remaining Review 1 blocker required a real single-cycle repair / pixel-effect proof from a supported substantive-page finding. The one allowed staged-publication bridge has now produced fresh, GitHub-tracked task-local Terra evidence, but Terra returned full PASS and no substantive-page blocking finding. The existing consumer therefore has no safe finding to map and correctly does not execute a repair.
 
-## Remaining Gates
-
-The Reviewer's first blocker is still not safely closable inside this Executor run. The current fresh Terra evidence from `REVIEW_1.md` was consumed by the existing quality-loop mapper and failed closed:
-
-```text
-deck_level_decision=UNSAFE_REPAIR_MAPPING
-fail_closed_reason=finding lacks a structured target deck page
-repair_allowed=false
-repair_cycle_count=0
-selected_repair_directives=[]
-```
-
-This is expected because the only current Terra blocker is the old cover/contact-sheet title finding, not a structured supported-page finding. The local Executor also cannot run fresh Terra because the visual-review API key is unavailable in this process, and the repository resolver only triggers task-local visual review after a published `READY_FOR_GPT_REVIEW` state. I therefore did not fabricate initial review evidence, did not insert an internal `repair_intent`, and did not claim the required single-cycle repair / repaired-pixel identity gate.
+Per the frozen Plan stop condition, the Executor must not keep changing the 042 stress fixture until a repairable finding appears. I am therefore returning `NEEDS_GPT_PLANNER` rather than claiming Acceptance Gate 6 or fabricating a repaired render identity.
 
 ## Planner Question
 
-Please choose the minimal staging route for the remaining frozen acceptance gate: how should 042 obtain a task-local Terra finding for one supported substantive page, then re-enter Codex with that real evidence so the existing single-cycle quality-loop can select a frozen repair directive and regenerate repaired render-input / rendered-pixel identities? If this must be a two-publication route, the next Executor should publish the initial visual-review target first, wait for GitHub/Terra writeback, then run the bounded repair from that fresh evidence.
+The staged initial Terra review for the supported 042 stress setup produced no repairable substantive finding. Since `plan_revision=1` already equals `max_plan_revisions=1`, please choose the protocol-safe terminal route: either send this stop-condition evidence to the user human gate, or provide an authorized non-redesign state transition consistent with the frozen Plan and review limit rules.
