@@ -55,32 +55,44 @@ Stage 4 历史链保持：031 建立 one-call production；032 关闭 multi-work
 
 ### 040 — superseded before execution
 
-`040_research_presentation_replacement_two_real_paper_holdouts` was frozen under the old two-paper replacement protocol, but it was stopped before Executor acquisition/render and superseded by the user-authorized frozen-batch generalization protocol.
+`040_research_presentation_replacement_two_real_paper_holdouts` 在旧 two-paper replacement protocol 下冻结，但在 Executor acquisition/render 前被停止，并由新的 frozen-batch generalization protocol 取代。
 
-The old 040 two-paper replacement protocol is now rejected as insufficient generalization evidence because it could permit adaptive holdout replacement: fail a real paper, repair the system, choose another paper, and repeat until a pair happens to pass. 040 must not execute and must not close the Program.
+旧 040 protocol 不再作为充分的泛化证据，因为它允许潜在的 adaptive holdout replacement：真实论文失败后修系统、再换论文，循环直到偶然找到两个通过样本。040 不得执行，也不能关闭 Program。
 
-Because 040 did not execute, its proposed TMB and cardiac-ultrasound papers were not consumed by 040. Their exact titles/DOIs only occur in 040 Planner artifacts in the current tracked-repository contamination audit; `implementation_commit=null` and the 040 terminal report records no acquisition, source-bundle freeze, render, Terra or production invocation.
+由于 040 从未执行，其拟议的 TMB 与 cardiac-ultrasound 论文没有被 040 消费；tracked-repository 中只有 Planner 文档提及，`implementation_commit=null`，terminal report 记录无 acquisition、source-bundle freeze、render、Terra 或 production invocation。
 
-### 041 — active frozen four-paper generalization batch — PLAN_FROZEN
+### 041 — frozen four-paper generalization batch — terminal REVIEW_LIMIT / REVISE
 
-Current active task:
+`041_research_presentation_frozen_four_paper_generalization_batch` 已完成第一次完整 4-paper frozen batch，并在 Round 2 独立审核后依法终止为失败批次；没有第三轮，也没有在 batch 内换论文、改 source bundle、扩 gold、改 selector/repair mapping 或降低视觉门槛。
 
-`041_research_presentation_frozen_four_paper_generalization_batch`
+冻结并全部 consumed 的四篇是：
 
-Planner has frozen the complete Stage 5 batch before any 041 source acquisition/render/evaluation:
+1. statistics / computational methodology：Kristensen et al. (2016), **TMB: Automatic Differentiation and Laplace Approximation**；
+2. biostatistics / methodology：Love, Huber & Anders (2014), **Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2**；
+3. medical imaging：Ferreira et al. (2025), **Self-supervised learning for label-free segmentation in cardiac ultrasound**；
+4. medical imaging：Zhou et al. (2023), **A foundation model for generalizable disease detection from retinal images**。
 
-1. statistics / computational methodology: Kristensen et al. (2016), **TMB: Automatic Differentiation and Laplace Approximation**, DOI `10.18637/jss.v070.i05`;
-2. biostatistics / methodology: Love, Huber & Anders (2014), **Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2**, DOI `10.1186/s13059-014-0550-8`;
-3. medical imaging: Ferreira et al. (2025), **Self-supervised learning for label-free segmentation in cardiac ultrasound**, DOI `10.1038/s41467-025-59451-5`;
-4. medical imaging: Zhou et al. (2023), **A foundation model for generalizable disease detection from retinal images**, DOI `10.1038/s41586-023-06555-x`.
+四个 source bundle 均在任何成功 render 前整体冻结，production behavior 保持冻结；真实 GitHub CI 通过。最终结果为：
 
-Fresh tracked-repository audit before freeze found DESeq2/RETFound title/DOI/common identifiers absent; TMB/cardiac-ultrasound only appear in superseded 040 Planner artifacts and were never executed. Public-source license preflight is compatible with rights-safe evaluation: JSS articles are Creative Commons Attribution; DESeq2, cardiac-ultrasound and RETFound are CC BY 4.0, with per-figure third-party credit checks still required during acquisition.
+- TMB 与 RETFound 都在正常 production entry 的成熟 gold composition selector 阶段于 render 前失败，错误为 `no compatible gold composition record`；
+- DESeq2 与 cardiac-ultrasound 均成功生成 exact-CUHK deck，但 Review 1 允许的唯一 shipped quality-loop consumer 在真实 Terra finding 上无法安全、唯一地选择 repair directive；两套均 `UNSAFE_REPAIR_MAPPING / QUALITY_LOOP_FAIL_NO_WINNER`，没有新 render/pixel identity；
+- 最新 task-local Terra 与最终 implementation、manifest、source freeze 和实际 pixels 绑定，仍记录 DESeq2 / cardiac-ultrasound 的底部正文/引用碰撞，两个 contact sheet 均未通过，同时保留两个 pre-render selector failure 与 quality-loop fail-closed 为 batch blocker。
 
-041 freezes presentation production behavior at commit `d3379b5168bc27b114b362f186f8c239a88a669c`; later task-local control/source/evidence artifacts may be added, but normal production code, gold, layouts, prompts/routing, validators, quality-loop mapping and canonical CUHK template may not change during the batch. Executor must mechanically recheck four-paper contamination and production freeze **before acquiring any of the four papers**, then acquire/read all four and freeze all four source bundles/hashes before the first render of any deck.
+因此 041 严格 4/4 FAIL，四篇全部永久失去 unseen holdout 资格。其 Round 1、Round 2、FINAL_REPORT、failure logs、quality-loop state 与 Terra evidence 保持为真实 generalization failure corpus，不允许后续把四篇修漂亮后重新宣称 unseen success。
 
-Four decks must run through the normal production entry under one frozen system. Each deck may use at most the already-shipped single bounded automatic repair. Any one paper failing makes the entire 4-paper batch FAIL and consumes all four; there is no within-batch replacement/chasing. If the batch fails, generic recovery may only use independent non-holdout material, and any next fresh batch requires a user human gate first.
+### 042 — active semantic-compatibility generic recovery — PLAN_FROZEN
 
-041 is now `PLAN_FROZEN` for Codex Executor. Stage 5 remains open and `PROGRAM_MATURE=false`.
+当前唯一活动任务：
+
+`042_research_presentation_semantic_compatibility_recovery`
+
+041 把下一步 generic recovery 收敛到一个新的有限机制，而不是重复 039 的失败动作：成熟 gold selector 和 bounded quality-loop repair mapper 对 scientific-object 语义仍各自依赖较窄的自由文本 vocabulary。真实论文把结构上相同的 figure/equation/panel/diagram 用 paper-specific label 表示时，前者可能错误 no-match，后者也可能在 finding 已清楚时无法识别已有安全 repair family。
+
+042 冻结一个最小共享 scientific-object semantic compatibility layer：selector 与 quality-loop 必须消费同一套有限的 canonical presentation-role 语义；page-function/domain/panel/capacity 等硬约束、mature gold set、existing repair vocabulary、single-cycle limit 与 fail-closed boundary全部保持。042 不 intake 新 gold，不允许 general-card fallback，也不能使用 041 四篇的标题、DOI、正文、图像、page-specific object 或 rendered pixels 作为 tuning fixture。
+
+验证只使用独立 non-holdout / synthetic / public-safe stress material。除了 alias-invariance 与 no-winner regression，还必须让至少一个正常 production stress deck真实执行最多一次 safe repair，并证明 render-input / rendered-pixel identity 发生变化；最终 fresh task-local Terra 必须对目标页和完整 contact sheet 达到成熟组会 bar。若归一后发现现有 mature gold确实缺一个结构角色，042 按 stop condition 失败并交给新的 gold-coverage recovery；若 mapper已能安全识别但现有 layout在一次 cycle内仍无法产生合格 pixels，同样停止并把 layout-capacity 作为新的 bounded recovery，而不是扩大 042。
+
+042 当前为 `PLAN_FROZEN`，等待 Codex Executor。它如果 PASS，只代表 041 后的 generic mechanism recovery 完成；**在冻结或消耗下一组 fresh four-paper holdout 之前，必须进入用户 human gate。** Stage 5 仍未通过，`PROGRAM_MATURE=false`。
 
 ## Standing workflow decisions
 
