@@ -59,22 +59,28 @@ Stage 4 历史链保持：031 建立 one-call production；032 关闭 multi-work
 
 The old 040 two-paper replacement protocol is now rejected as insufficient generalization evidence because it could permit adaptive holdout replacement: fail a real paper, repair the system, choose another paper, and repeat until a pair happens to pass. 040 must not execute and must not close the Program.
 
-Because 040 did not execute, its proposed TMB and cardiac-ultrasound papers have not been consumed by 040. A future Planner may only include either paper in the new batch after a fresh contamination audit and only as part of a complete four-paper batch frozen before any one paper is evaluated.
+Because 040 did not execute, its proposed TMB and cardiac-ultrasound papers were not consumed by 040. Their exact titles/DOIs only occur in 040 Planner artifacts in the current tracked-repository contamination audit; `implementation_commit=null` and the 040 terminal report records no acquisition, source-bundle freeze, render, Terra or production invocation.
 
-### 041 — active Planner task: frozen four-paper generalization batch
+### 041 — active frozen four-paper generalization batch — PLAN_FROZEN
 
 Current active task:
 
 `041_research_presentation_frozen_four_paper_generalization_batch`
 
-041 is Planner-owned and starts at `PLAN_REQUESTED`. Planner must freeze all four real unseen papers before any acquisition/render/evaluation:
+Planner has frozen the complete Stage 5 batch before any 041 source acquisition/render/evaluation:
 
-- two statistics / biostatistics / methodology papers;
-- two medical-imaging papers.
+1. statistics / computational methodology: Kristensen et al. (2016), **TMB: Automatic Differentiation and Laplace Approximation**, DOI `10.18637/jss.v070.i05`;
+2. biostatistics / methodology: Love, Huber & Anders (2014), **Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2**, DOI `10.1186/s13059-014-0550-8`;
+3. medical imaging: Ferreira et al. (2025), **Self-supervised learning for label-free segmentation in cardiac ultrasound**, DOI `10.1038/s41467-025-59451-5`;
+4. medical imaging: Zhou et al. (2023), **A foundation model for generalizable disease detection from retinal images**, DOI `10.1038/s41586-023-06555-x`.
 
-Stage 4 remains PASS and is not reopened. 038 remains real failure evidence; 039 generic recovery remains PASS but does not count as holdout success. Stage 5 final acceptance now requires one complete frozen 4-paper batch. The production system stays frozen throughout the batch; each deck may use at most the already-shipped one bounded automatic repair. Any one paper failing makes the entire batch FAIL, and all four papers become consumed holdouts.
+Fresh tracked-repository audit before freeze found DESeq2/RETFound title/DOI/common identifiers absent; TMB/cardiac-ultrasound only appear in superseded 040 Planner artifacts and were never executed. Public-source license preflight is compatible with rights-safe evaluation: JSS articles are Creative Commons Attribution; DESeq2, cardiac-ultrasound and RETFound are CC BY 4.0, with per-figure third-party credit checks still required during acquisition.
 
-No adaptive holdout replacement is allowed. After a failed batch, generic recovery may use only independent non-holdout / synthetic / public-safe regression material; before any next fresh batch, the workflow must enter a user human gate.
+041 freezes presentation production behavior at commit `d3379b5168bc27b114b362f186f8c239a88a669c`; later task-local control/source/evidence artifacts may be added, but normal production code, gold, layouts, prompts/routing, validators, quality-loop mapping and canonical CUHK template may not change during the batch. Executor must mechanically recheck four-paper contamination and production freeze **before acquiring any of the four papers**, then acquire/read all four and freeze all four source bundles/hashes before the first render of any deck.
+
+Four decks must run through the normal production entry under one frozen system. Each deck may use at most the already-shipped single bounded automatic repair. Any one paper failing makes the entire 4-paper batch FAIL and consumes all four; there is no within-batch replacement/chasing. If the batch fails, generic recovery may only use independent non-holdout material, and any next fresh batch requires a user human gate first.
+
+041 is now `PLAN_FROZEN` for Codex Executor. Stage 5 remains open and `PROGRAM_MATURE=false`.
 
 ## Standing workflow decisions
 
