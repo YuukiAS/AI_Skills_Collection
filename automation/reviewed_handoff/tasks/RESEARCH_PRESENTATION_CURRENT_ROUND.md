@@ -80,19 +80,27 @@ Stage 4 历史链保持：031 建立 one-call production；032 关闭 multi-work
 
 因此 041 严格 4/4 FAIL，四篇全部永久失去 unseen holdout 资格。其 Round 1、Round 2、FINAL_REPORT、failure logs、quality-loop state 与 Terra evidence 保持为真实 generalization failure corpus，不允许后续把四篇修漂亮后重新宣称 unseen success。
 
-### 042 — active semantic-compatibility generic recovery — PLAN_FROZEN
+### 042 — semantic-compatibility generic recovery — terminal PLANNER_DECISION / REVISE
+
+`042_research_presentation_semantic_compatibility_recovery` 已在唯一 Plan revision 边界依法终止，并保留未满足的 live-repair acceptance gate；没有伪造第二轮 PASS，也没有继续改变 fixture 追逐一个方便的 Terra failure。
+
+042 的核心通用机制是真实有效的：mature gold selector 与 bounded quality-loop mapper 现在共享同一套有限 canonical scientific-object semantic normalizer；中性 alias 可归一到数学模型、定量 source object、process diagram、medical image panel、discussion/decision 等结构角色，同时 page-function/domain/panel/capacity、mature gold membership、existing repair vocabulary、single-cycle limit 与 fail-closed boundary 保持。042 没有使用 041 四篇的正文、图像、DOI 或 page-specific content 调参。
+
+最终 task-local Terra 与 implementation、manifest、render-input/rendered-pixel identity 真实绑定；统计模型、定量结果、实验设计、负结果、下一实验、医学影像六张 substantive page 与完整 contact sheet 全部 item-level PASS，且 contact sheet 明确认可成熟的 result→failure→next-experiment 节奏与独立影像 workstream。因此 semantic compatibility 的非回归证据成立。
+
+042 不能 PASS 的唯一剩余原因是 frozen Plan 还要求直接证明一次 **real Terra substantive finding → shared canonical role → existing safe repair → changed render inputs/pixels → fresh final Terra**。唯一 staging bridge 后，真实 initial Terra 返回 `blocking_findings=0`；consumer 因此正确执行 `repair_cycle_count=0`，没有可合法修复的 finding。Plan revision 已用尽，所以 042 保留 terminal `AWAIT_HUMAN_DECISION / PLANNER_DECISION / REVISE` 历史，但依据 Quality-Preserving Continuation Policy，这个机械 evidence gap 不要求用户在“保持门槛/降低门槛”之间做选择，直接由新的 bounded recovery 继续。
+
+### 043 — active real-visual-repair challenge recovery — PLAN_FROZEN
 
 当前唯一活动任务：
 
-`042_research_presentation_semantic_compatibility_recovery`
+`043_research_presentation_real_visual_repair_challenge_recovery`
 
-041 把下一步 generic recovery 收敛到一个新的有限机制，而不是重复 039 的失败动作：成熟 gold selector 和 bounded quality-loop repair mapper 对 scientific-object 语义仍各自依赖较窄的自由文本 vocabulary。真实论文把结构上相同的 figure/equation/panel/diagram 用 paper-specific label 表示时，前者可能错误 no-match，后者也可能在 finding 已清楚时无法识别已有安全 repair family。
+043 不再重复 042 的单 fixture 迭代，而是冻结一个新的有限验证机制：在任何 challenge Terra 结果被读取前，一次性生成并追踪恰好三个与 041 完全无关的 non-holdout/public-safe challenge variant——`Q_SCALE`、`Q_SUPPORT`、`PROCESS_REFLOW`，分别针对已经 shipped 的主科研对象投影缩放、图注/支持区域分离、流程图兼容 reflow 三类 repair family。三个初始 source/input、manifest、render-input、pixel 和 target-page identity 必须先整体冻结，之后禁止根据 Terra 改 challenge 或创建第四个 variant。
 
-042 冻结一个最小共享 scientific-object semantic compatibility layer：selector 与 quality-loop 必须消费同一套有限的 canonical presentation-role 语义；page-function/domain/panel/capacity 等硬约束、mature gold set、existing repair vocabulary、single-cycle limit 与 fail-closed boundary全部保持。042 不 intake 新 gold，不允许 general-card fallback，也不能使用 041 四篇的标题、DOI、正文、图像、page-specific object 或 rendered pixels 作为 tuning fixture。
+真实 task-local Terra 只负责判断是否真的出现 substantive-page blocker；若多于一个 variant 可安全映射，按预先冻结的 `Q_SCALE -> Q_SUPPORT -> PROCESS_REFLOW` 优先级选择，禁止事后挑最好修的。选中后只允许现有 quality-loop 执行一次 repair；必须证明 pre/post render-input、rendered-pixel 与目标页 hash 均真实变化，再由 fresh final Terra 对修复页和完整 contact sheet 达到成熟博士组会 / strong paper-talk bar。若三者都没有真实可修 finding、需要新 repair/gold/semantic rule，或一次 repair 后仍不合格，043 按 stop condition失败，不继续追逐。
 
-验证只使用独立 non-holdout / synthetic / public-safe stress material。除了 alias-invariance 与 no-winner regression，还必须让至少一个正常 production stress deck真实执行最多一次 safe repair，并证明 render-input / rendered-pixel identity 发生变化；最终 fresh task-local Terra 必须对目标页和完整 contact sheet 达到成熟组会 bar。若归一后发现现有 mature gold确实缺一个结构角色，042 按 stop condition 失败并交给新的 gold-coverage recovery；若 mapper已能安全识别但现有 layout在一次 cycle内仍无法产生合格 pixels，同样停止并把 layout-capacity 作为新的 bounded recovery，而不是扩大 042。
-
-042 当前为 `PLAN_FROZEN`，等待 Codex Executor。它如果 PASS，只代表 041 后的 generic mechanism recovery 完成；**在冻结或消耗下一组 fresh four-paper holdout 之前，必须进入用户 human gate。** Stage 5 仍未通过，`PROGRAM_MATURE=false`。
+043 不修改 mature gold、canonical semantic roles、safe-repair vocabulary/mapping、selector hard constraints、视觉门槛或 Stage 5 holdout。它如果 PASS，只代表 041 之后的 generic recovery evidence终于闭环；**随后必须真正停在用户 human gate，报告 041 失败原因、039/042/043 的通用恢复和证据，由用户决定是否值得再消耗下一组 fresh four-paper batch。** Stage 5 仍未通过，`PROGRAM_MATURE=false`。
 
 ## Standing workflow decisions
 
