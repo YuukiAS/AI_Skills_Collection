@@ -2,14 +2,14 @@
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 038_research_presentation_two_real_paper_holdouts
 executor: Codex
-implementation_commit: 1e376b51d703f42324f111b06b6bf4e2d062b8e6
+implementation_commit: be001f2d29a308a4cadeb9b841fcc9cfe239ea3b
 status: WAITING_FOR_CI
 ci_status: PENDING
 ---
 
 # Result: 038 Research Presentation Two Real Paper Holdouts
 
-Implementation commit: `1e376b51d703f42324f111b06b6bf4e2d062b8e6`
+Implementation commit: `be001f2d29a308a4cadeb9b841fcc9cfe239ea3b`
 
 Control-plane commit: pending at time of writing this file.
 
@@ -17,7 +17,9 @@ Control-plane commit: pending at time of writing this file.
 
 The two real-paper holdouts were acquired, audited, staged into frozen source bundles, and generated through the normal `research-presentations` production entrypoint. Both decks rendered to exact-CUHK Beamer PDF/PNG artifacts and have task-local visual-review inputs.
 
-No final quality PASS is claimed. Local visual QA found blocking/risk evidence after the one-shot render, so no post-render bundle rewrite, generated-TeX edit, production code change, or manual repair was applied.
+No final quality PASS is claimed. Round-1 Terra returned `REVISE` with seven blocking findings. The only authorized action was the already shipped bounded quality loop, so I created deck-specific task-local adapters for the Terra findings and passed them to the normal production entrypoint using `--review-evidence`.
+
+The existing quality-loop consumer failed closed for both decks: the Terra findings contain no supported `repair_intent`, so the current mapping cannot safely select a source-faithful automatic repair. Both decks are now recorded as `QUALITY_LOOP_FAIL_NO_WINNER`, with `repair_cycle_count=0`, no selected directives, no source-bundle rewrite, no generated-TeX edit, no production code change, and no manual repair.
 
 Because `ci_required=true`, `CURRENT.ci_status` remains `PENDING` and the task is left in `WAITING_FOR_CI` for watcher/GitHub CI publication.
 
@@ -40,7 +42,7 @@ Frozen bundle and render evidence:
 - Frozen bundle: `results/038_research_presentation_two_real_paper_holdouts/statistics/source_bundle.json`
 - Bundle SHA256: `32d1a9d1241ff8b4c77b6a98fe5b20b5b88ed04f3d60b0b10f9897304f15421b`
 - PDF: `results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/main.pdf`
-- PDF SHA256: `7b592c2bd35621880fbec9b5a5a42fa15b622917e5ba00cbc0b74e90918f1d91`
+- PDF SHA256: `8ff60c23d263fa15977fa96a4db8424707178fbc49597d72b84e5be36dac798a`
 - Rendered pages: `results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/`
 - Contact sheet: `results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_contact_sheet.png`
 - Contact sheet SHA256: `722ccd6b2ba90fde592692e18a6478a850eaeb0f8fe9eb9a5d8fb7f5751bbf76`
@@ -52,12 +54,14 @@ Production behavior:
 
 - Initial statistics invocation failed before render at selector compatibility, with no slide/render/Terra output generated or inspected. Evidence: `results/038_research_presentation_two_real_paper_holdouts/statistics/production_attempt_initial_failure.log`.
 - Final frozen-bundle invocation exited 0 with `MECHANICAL_PASS` and `render_status=ok`.
-- Quality loop consumed no review evidence and applied 0 repairs.
+- Bounded quality-loop review evidence: `results/038_research_presentation_two_real_paper_holdouts/visual_review/statistics_quality_loop_review.json`
+- Quality loop consumed review evidence, selected no repair directives, applied 0 repairs, and failed closed with `unsupported repair intent: <missing>`.
+- Quality-loop status: `QUALITY_LOOP_FAIL_NO_WINNER`
 
-Local visual QA blocker:
+Preserved blocker evidence:
 
 - `statistics/generated/cuhk_production_build/main.tex` contains an audience-facing annotation that says `Stage 4 clustered-calibration fixture`.
-- This was found after rendered output inspection. Per 038 evaluation-only rules, it was not repaired in-place or hidden by bundle/TeX edits.
+- Terra BF-01 through BF-04 remain preserved as holdout failure evidence. Per 038 evaluation-only rules, they were not repaired in-place or hidden by bundle/TeX edits.
 
 ## Medical Holdout
 
@@ -81,7 +85,7 @@ Frozen bundle and render evidence:
 - Bundle SHA256: `fef82966184d4db938d4bfdd12101d289ebdca80bf246a3ed7c9fb72f42fa33b`
 - Real MedSAM figure assets: `results/038_research_presentation_two_real_paper_holdouts/medical/assets/`
 - PDF: `results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/main.pdf`
-- PDF SHA256: `45d854a8e1d870902c7ea93ca2cb4031a9fc5625f8d527dd21064be2d13fa36f`
+- PDF SHA256: `975d8bd725c4228c8881fa89524b762399277c0dd93c941adb6456af0a2b3409`
 - Rendered pages: `results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/rendered/`
 - Contact sheet: `results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_contact_sheet.png`
 - Contact sheet SHA256: `5332d9f81e87882dc2df810e6eb5319049dc85631e8a1cfc0ef00ce451408ac4`
@@ -92,14 +96,15 @@ Frozen bundle and render evidence:
 Production behavior:
 
 - Normal medical invocation exited 0 with `MECHANICAL_PASS` and `render_status=ok`.
-- Quality loop consumed no review evidence and applied 0 repairs.
+- Bounded quality-loop review evidence: `results/038_research_presentation_two_real_paper_holdouts/visual_review/medical_quality_loop_review.json`
+- Quality loop consumed review evidence, selected no repair directives, applied 0 repairs, and failed closed with `unsupported repair intent: <missing>`.
+- Quality-loop status: `QUALITY_LOOP_FAIL_NO_WINNER`
 - The medical deck uses real article Figure 3 and Figure 4c medical-image segmentation pixels. No fabricated CT/MR/ultrasound/endoscopy pixels, masks, ROI, or overlays were introduced by hand.
 
-Local visual QA risks:
+Preserved blocker evidence:
 
-- The limitation/take-home slide appears dense.
-- The CT same-case comparison page has crowded ROI labels.
-- These were not repaired after render; see `results/038_research_presentation_two_real_paper_holdouts/local_visual_qa.json`.
+- Terra BF-05 through BF-07 remain preserved as holdout failure evidence.
+- The allowed quality loop could not safely repair architecture-footer overlap, limitation-slide collisions, or the overlay legend obstruction because no supported repair intent was provided.
 
 ## Combined Visual Review Handoff
 
@@ -109,15 +114,21 @@ Task-local visual manifest:
 results/038_research_presentation_two_real_paper_holdouts/visual_review/visual_inputs.json
 ```
 
-It contains 12 visual inputs: five substantive statistics pages plus statistics contact sheet, and five substantive medical pages plus medical contact sheet. The manifest binds both source-bundle SHA values, build manifests, source-fidelity maps, render-input identities, rendered-pixel identities, PDF SHA values, and contact-sheet SHA values.
+It contains 12 visual inputs: five substantive statistics pages plus statistics contact sheet, and five substantive medical pages plus medical contact sheet. The manifest binds both source-bundle SHA values, build manifests, source-fidelity maps, render-input identities, rendered-pixel identities, PDF SHA values, contact-sheet SHA values, and the post-review quality-loop status for both decks.
 
-Expected Terra evidence path remains:
+Round-1 Terra evidence consumed by the bounded quality loop is preserved at:
+
+```text
+results/038_research_presentation_two_real_paper_holdouts/visual_review/VISUAL_REVIEW_1ce506ed08d5_REVIEW_1_USED.json
+```
+
+The active evidence path remains reserved for any future fresh evidence:
 
 ```text
 results/038_research_presentation_two_real_paper_holdouts/visual_review/VISUAL_REVIEW.json
 ```
 
-No `VISUAL_REVIEW.json` exists yet in this local implementation commit.
+Fresh post-repair Terra is not requested from this Executor run because no repair was selected or applied; the existing shipped quality loop reached `QUALITY_LOOP_FAIL_NO_WINNER`.
 
 ## Local Acceptance and Regression Checks
 
@@ -125,22 +136,27 @@ Passed:
 
 - `python -m json.tool results/038_research_presentation_two_real_paper_holdouts/statistics/source_bundle.json`
 - `python -m json.tool results/038_research_presentation_two_real_paper_holdouts/medical/source_bundle.json`
+- `python -m json.tool results/038_research_presentation_two_real_paper_holdouts/visual_review/statistics_quality_loop_review.json`
+- `python -m json.tool results/038_research_presentation_two_real_paper_holdouts/visual_review/medical_quality_loop_review.json`
+- `python -m json.tool results/038_research_presentation_two_real_paper_holdouts/production_invocations.json`
+- `python -m json.tool results/038_research_presentation_two_real_paper_holdouts/visual_review/visual_inputs.json`
 - selector compatibility check for all statistics and medical `page_jobs`
-- `python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/038_research_presentation_two_real_paper_holdouts/statistics/source_bundle.json --out-dir results/038_research_presentation_two_real_paper_holdouts/statistics/generated --task-key 038_research_presentation_two_real_paper_holdouts`
-- `python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/038_research_presentation_two_real_paper_holdouts/medical/source_bundle.json --out-dir results/038_research_presentation_two_real_paper_holdouts/medical/generated --task-key 038_research_presentation_two_real_paper_holdouts`
+- `python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/038_research_presentation_two_real_paper_holdouts/statistics/source_bundle.json --out-dir results/038_research_presentation_two_real_paper_holdouts/statistics/generated --task-key 038_research_presentation_two_real_paper_holdouts --review-evidence results/038_research_presentation_two_real_paper_holdouts/visual_review/statistics_quality_loop_review.json`
+- `python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/038_research_presentation_two_real_paper_holdouts/medical/source_bundle.json --out-dir results/038_research_presentation_two_real_paper_holdouts/medical/generated --task-key 038_research_presentation_two_real_paper_holdouts --review-evidence results/038_research_presentation_two_real_paper_holdouts/visual_review/medical_quality_loop_review.json`
 - local mechanical/source-freeze assertion for both generated decks
 - combined visual manifest consistency check
 - `python -m unittest discover -s tests -p 'test_presentations.py' -k test_research_presentation_one_call_production_entry`
+- `python -m unittest discover -s tests -p 'test_presentations.py' -k test_research_presentation_deck_quality_loop_consumes_review_and_fails_closed`
 - `git diff --check`
 - `ai-bridge reviewed-handoff validate --target /home/yuukias/AI_Skills_Collection`
 
 Known failures or non-PASS evidence:
 
-- The direct module-form unittest command `python -m unittest tests.test_presentations.PresentationSharedTests.test_research_presentation_one_call_production_entry` failed because `tests` is not importable as a package in this environment; the same test passed through `unittest discover`.
-- Local visual QA found a blocking audience-facing internal text leak in the statistics deck and additional visual density risks. No quality PASS is claimed.
+- The direct production-entry validator is not holdout-aware and still contains 031 engineering-fixture assertions. It failed on the statistics deck for missing `MEDICAL_IMAGE_COMPARISON`, missing `Coverage by ICC under imbalanced clusters`, missing `Same-case ROI zoom`, and the already-known `fixture` / `workflow` leakage. It failed on the medical deck for missing `NEGATIVE_RESULT` and missing `Coverage by ICC under imbalanced clusters`.
+- Round-1 Terra visual review remains `BLOCKED`; no quality PASS is claimed.
+- The bounded quality loop consumed the review evidence and reached `QUALITY_LOOP_FAIL_NO_WINNER` for both decks due to missing supported `repair_intent`.
 - GitHub CI has not run locally and is not claimed as PASS.
-- Terra has not yet produced task-local `VISUAL_REVIEW.json`.
-- Planner has not yet reviewed this one-shot evidence.
+- Planner has not yet reviewed this fail-closed bounded-repair evidence.
 
 ## Out of Scope Preserved
 

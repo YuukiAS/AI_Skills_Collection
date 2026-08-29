@@ -1,21 +1,21 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "038_research_presentation_two_real_paper_holdouts",
-  "state": "REVISE",
+  "state": "WAITING_FOR_CI",
   "review_round": 1,
   "max_review_rounds": 2,
   "plan_revision": 0,
   "max_plan_revisions": 1,
   "base_commit": "9a38a5f3cfbb499e88d0f68efe080a47f71c6e5b",
   "base_branch": "main",
-  "implementation_commit": "1e376b51d703f42324f111b06b6bf4e2d062b8e6",
+  "implementation_commit": "be001f2d29a308a4cadeb9b841fcc9cfe239ea3b",
   "ci_required": true,
-  "ci_status": "PASS",
+  "ci_status": "PENDING",
   "last_review_decision": "REVISE",
   "review_limit_reached": false,
   "human_gate_reason": null,
   "visual_review_required": true,
   "visual_review_manifest_path": "results/038_research_presentation_two_real_paper_holdouts/visual_review/visual_inputs.json",
   "visual_review_evidence_path": "results/038_research_presentation_two_real_paper_holdouts/visual_review/VISUAL_REVIEW.json",
-  "next_action": "RUN_CODEX_EXECUTOR"
+  "next_action": "WAIT_FOR_GITHUB_CI"
 }

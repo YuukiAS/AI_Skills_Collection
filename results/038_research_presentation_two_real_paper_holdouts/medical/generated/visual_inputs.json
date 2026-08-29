@@ -16,10 +16,10 @@
   },
   "identity_bindings": {
     "task_key": "038_research_presentation_two_real_paper_holdouts",
-    "implementation_commit": null,
+    "implementation_commit": "be001f2d29a308a4cadeb9b841fcc9cfe239ea3b",
     "input_title": "MedSAM Segment Anything in Medical Images",
     "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/BUILD_MANIFEST.json",
-    "build_manifest_sha256": "0bf4ae6e909046442db160d0988ace1cbe2762b3e700bb32a0a4f8d36719378e",
+    "build_manifest_sha256": "5b7252bba465883f9c0d5c8bf43b5da90894453d1d95568ccd4e22c2d95661f1",
     "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/source_fidelity_map.json",
     "source_fidelity_map_sha256": "c780b0197246119320bdc3b9a862aed18633aad592cd2080d30ddb9646c29755",
     "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_sequence_summary.json",

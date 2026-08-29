@@ -17,7 +17,7 @@
   },
   "identity_bindings": {
     "task_key": "038_research_presentation_two_real_paper_holdouts",
-    "implementation_commit": null,
+    "implementation_commit": "be001f2d29a308a4cadeb9b841fcc9cfe239ea3b",
     "base_commit": "9a38a5f3cfbb499e88d0f68efe080a47f71c6e5b",
     "decks": {
       "statistics": {
@@ -25,7 +25,7 @@
         "source_bundle_sha256": "32d1a9d1241ff8b4c77b6a98fe5b20b5b88ed04f3d60b0b10f9897304f15421b",
         "source_inventory": "results/038_research_presentation_two_real_paper_holdouts/statistics/source_inventory.json",
         "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/BUILD_MANIFEST.json",
-        "build_manifest_sha256": "48a0d2b8a124c6361211f6e1effe8230d8a94d4744ddaa494f3212f84b8c8d45",
+        "build_manifest_sha256": "18b38336d20dd246549bd74f4f27046f23b03fa9c3c5b655a1321cde2c1213ad",
         "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/source_fidelity_map.json",
         "source_fidelity_map_sha256": "31eca25f320bb07dfc221ecac3b3294041ca4618eb5a4abb1084699de13fc6a2",
         "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_sequence_summary.json",
@@ -45,7 +45,7 @@
         "source_bundle_sha256": "fef82966184d4db938d4bfdd12101d289ebdca80bf246a3ed7c9fb72f42fa33b",
         "source_inventory": "results/038_research_presentation_two_real_paper_holdouts/medical/source_inventory.json",
         "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/BUILD_MANIFEST.json",
-        "build_manifest_sha256": "0bf4ae6e909046442db160d0988ace1cbe2762b3e700bb32a0a4f8d36719378e",
+        "build_manifest_sha256": "5b7252bba465883f9c0d5c8bf43b5da90894453d1d95568ccd4e22c2d95661f1",
         "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/source_fidelity_map.json",
         "source_fidelity_map_sha256": "c780b0197246119320bdc3b9a862aed18633aad592cd2080d30ddb9646c29755",
         "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_sequence_summary.json",

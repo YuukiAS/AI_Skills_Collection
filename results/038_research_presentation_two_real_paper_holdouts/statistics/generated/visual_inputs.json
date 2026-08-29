@@ -16,10 +16,10 @@
   },
   "identity_bindings": {
     "task_key": "038_research_presentation_two_real_paper_holdouts",
-    "implementation_commit": null,
+    "implementation_commit": "be001f2d29a308a4cadeb9b841fcc9cfe239ea3b",
     "input_title": "brms Bayesian Multilevel Models Using Stan",
     "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/BUILD_MANIFEST.json",
-    "build_manifest_sha256": "48a0d2b8a124c6361211f6e1effe8230d8a94d4744ddaa494f3212f84b8c8d45",
+    "build_manifest_sha256": "18b38336d20dd246549bd74f4f27046f23b03fa9c3c5b655a1321cde2c1213ad",
     "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/source_fidelity_map.json",
     "source_fidelity_map_sha256": "31eca25f320bb07dfc221ecac3b3294041ca4618eb5a4abb1084699de13fc6a2",
     "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_sequence_summary.json",
