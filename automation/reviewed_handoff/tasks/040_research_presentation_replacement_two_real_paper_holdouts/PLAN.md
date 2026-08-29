@@ -93,7 +93,7 @@ Do not synthesize replacement ultrasound pixels, masks, pathologies or human ann
    - `RESULT.md` reports the two papers separately: contamination audit, source/license evidence, frozen source-bundle hashes, normal invocation, whether a repair was used, final render identities, source fidelity, actual page/contact-sheet paths, CI and all unresolved failures.
    - Do not summarize top-level Terra PASS as visual-quality PASS; Executor must expose item-level evidence for Planner review.
 
-## Acceptance gates
+## Acceptance and regression gates
 
 040 can be Planner PASS only if **all** conditions hold:
 

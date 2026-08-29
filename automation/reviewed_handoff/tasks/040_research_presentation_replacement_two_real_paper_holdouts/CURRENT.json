@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "040_research_presentation_replacement_two_real_paper_holdouts",
-  "state": "PLAN_FROZEN",
+  "state": "AWAIT_HUMAN_DECISION",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -13,9 +13,9 @@
   "ci_status": "PENDING",
   "last_review_decision": null,
   "review_limit_reached": false,
-  "human_gate_reason": null,
+  "human_gate_reason": "PLANNER_DECISION",
   "visual_review_required": true,
   "visual_review_manifest_path": "results/040_research_presentation_replacement_two_real_paper_holdouts/visual_review/visual_inputs.json",
   "visual_review_evidence_path": "results/040_research_presentation_replacement_two_real_paper_holdouts/visual_review/VISUAL_REVIEW.json",
-  "next_action": "RUN_CODEX_EXECUTOR"
+  "next_action": "SUPERSEDED_BY_041_FROZEN_BATCH_PROTOCOL"
 }

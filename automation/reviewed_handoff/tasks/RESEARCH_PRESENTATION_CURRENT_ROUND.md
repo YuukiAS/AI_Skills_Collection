@@ -28,7 +28,7 @@ Stage 4 已由 Planner 整体判定 PASS；该结论证明普通一次调用会�
 
 Stage 4 历史链保持：031 建立 one-call production；032 关闭 multi-workstream coherence；033 建立 deck-level rhythm/quality loop；034 关闭 render identity 与 CI 证据语义；035 关闭 generic model support hardcode；036 关闭 process-page projection/source-grounding；037 关闭最后一个 audience-facing workstream transition 元语言 gap。此前达到 review limit 的 task 历史均保留，后续 recovery 只关闭未解决 blocker，没有事后改写旧 task 为 PASS。
 
-## Stage 5 — active replacement unseen evaluation
+## Stage 5 — frozen 4-paper batch acceptance
 
 ### 038 — first two real-paper holdouts — terminal REVIEW_LIMIT / REVISE
 
@@ -53,26 +53,28 @@ Stage 4 历史链保持：031 建立 one-call production；032 关闭 multi-work
 
 039 PASS 只证明 generic recovery，**不构成 Stage 5 holdout PASS**。
 
-### 040 — active: replacement two real-paper holdouts
+### 040 — superseded before execution
 
-当前 active task：
+`040_research_presentation_replacement_two_real_paper_holdouts` was frozen under the old two-paper replacement protocol, but it was stopped before Executor acquisition/render and superseded by the user-authorized frozen-batch generalization protocol.
 
-`040_research_presentation_replacement_two_real_paper_holdouts`
+The old 040 two-paper replacement protocol is now rejected as insufficient generalization evidence because it could permit adaptive holdout replacement: fail a real paper, repair the system, choose another paper, and repeat until a pair happens to pass. 040 must not execute and must not close the Program.
 
-Planner 已冻结两篇新的真实公开论文：
+Because 040 did not execute, its proposed TMB and cardiac-ultrasound papers have not been consumed by 040. A future Planner may only include either paper in the new batch after a fresh contamination audit and only as part of a complete four-paper batch frozen before any one paper is evaluated.
 
-1. statistics/methodology：Kristensen et al. (2016), **TMB: Automatic Differentiation and Laplace Approximation**, DOI `10.18637/jss.v070.i05`；
-2. medical imaging：Ferreira et al. (2025), **Self-supervised learning for label-free segmentation in cardiac ultrasound**, DOI `10.1038/s41467-025-59451-5`。
+### 041 — active Planner task: frozen four-paper generalization batch
 
-冻结前 tracked-repo exact title/DOI 搜索无命中。JSS article policy 为 Creative Commons Attribution；Nature Communications 文章明确为 CC BY 4.0，文章图像默认随许可覆盖，除非具体 credit line 另行声明。Executor 仍必须在首次 acquisition/render 前完成完整 reference/gold/corpus/tuning exclusion audit、版本/许可和 figure-level credit audit；发现真实 prior tuning use 时必须先交回 Planner，不能在 task 内换题。
+Current active task:
 
-040 是纯 evaluation：production generator、gold、layout、storyline、validator、quality-loop mapping 与 shared/plugin behavior 全冻结。每篇完整 source bundle 必须在第一次 render 前冻结并哈希；看到输出后不得改 source bundle。两篇分别走 normal production entry 独立生成完整 paper-talk deck；每套最多允许现有的一个 bounded automatic repair，禁止手工 TeX/slide 修复、第二次 repair、paper-specific branch、forced gold/score override 或从 holdout 提炼新规则。
+`041_research_presentation_frozen_four_paper_generalization_batch`
 
-TMB deck 必须由 paper 自身的 Laplace approximation、automatic differentiation、random-effects formulation、R/C++ workflow 与 benchmark/scaling evidence 主导，不得退化成 brms/Stan 或 Stage-4 calibration fixture。Cardiac-ultrasound deck 必须由真实 A2C/A4C/SAX 自监督分割 pipeline、真实 article echocardiography figures、clinical/CMR validation 与 failure/limitation evidence 主导；不得生成或修改不存在的医学像素。
+041 is Planner-owned and starts at `PLAN_REQUESTED`. Planner must freeze all four real unseen papers before any acquisition/render/evaluation:
 
-最终两套 deck 都必须取得 identity-bound task-local item/page-level Terra 和独立 contact-sheet mature-talk judgement；真实 CI 也必须通过。若任一 paper 在 first render + 最多一次既有 repair 后仍失败，该 paper 立即失去 unseen 资格，040 不得中途换题或只保留赢家。
+- two statistics / biostatistics / methodology papers;
+- two medical-imaging papers.
 
-040 当前 `PLAN_FROZEN`，review budget 0/2，等待 Codex Executor。
+Stage 4 remains PASS and is not reopened. 038 remains real failure evidence; 039 generic recovery remains PASS but does not count as holdout success. Stage 5 final acceptance now requires one complete frozen 4-paper batch. The production system stays frozen throughout the batch; each deck may use at most the already-shipped one bounded automatic repair. Any one paper failing makes the entire batch FAIL, and all four papers become consumed holdouts.
+
+No adaptive holdout replacement is allowed. After a failed batch, generic recovery may use only independent non-holdout / synthetic / public-safe regression material; before any next fresh batch, the workflow must enter a user human gate.
 
 ## Standing workflow decisions
 
@@ -81,10 +83,11 @@ TMB deck 必须由 paper 自身的 Laplace approximation、automatic differentia
 - 视觉型 Reviewed Handoff 优先使用 Bridge Kit task-local Visual Review contract；缺 evidence 属于等待，不消耗 review round。
 - 单 task PASS 不等于 Program PASS。
 - Stage 1–4 首次整体 PASS 的旁路 notifier 不是 approval gate，不暂停下一 stage。
-- 只有真正存在互斥产品/科学选择、显著架构改变、新成本/风险/隐私/许可问题、必须降低质量门槛，或 Stage 5 最终双 deck 验收时才打断用户。
+- 对高成本 final holdout acceptance，failed batch + generic recovery 后，消耗下一批 fresh holdout 前必须打断用户。
+- 只有真正存在互斥产品/科学选择、显著架构改变、新成本/风险/隐私/许可问题、必须降低质量门槛，或 Stage 5 最终 4-deck batch 验收时才打断用户。
 
 ## Non-negotiable final acceptance
 
-最终仍必须由新的 statistics/methodology 与 medical-imaging unseen paper 各自产生一套完整真实 CUHK 组会 deck；paper notation/data/figures/images 必须主导内容，不能用 synthetic/fixture/CI/mechanical PASS 替代。Terra 必须读 item/page-level evidence，Planner 必须独立审核真实 source/trace/render。
+最终仍必须由完整 frozen batch 中的四篇 unseen paper 各自产生一套完整真实 CUHK 组会 deck；paper notation/data/figures/images 必须主导内容，不能用 synthetic/fixture/CI/mechanical PASS 替代。Terra 必须读 item/page-level evidence，Planner 必须独立审核真实 source/trace/render。
 
-如果 040 两套新 unseen deck 同时通过 Terra + Planner，Stage 5 仍必须进入最终用户人工门，并把两套真实 rendered deck/artifact 提供给用户检查。只有用户明确接受两套结果，才允许 `ONE_SHOT_QUALITY_PASS`、`PROGRAM_MATURE=true` 与停止 Planner automation。
+只有一个完整 frozen 4-paper batch 的四套 deck 全部通过 Terra + Planner，Stage 5 才能进入最终用户人工门，并把四套真实 rendered deck/artifact 提供给用户检查。只有用户明确接受四套结果，才允许 `ONE_SHOT_QUALITY_PASS`、`PROGRAM_MATURE=true` 与停止 Planner automation。

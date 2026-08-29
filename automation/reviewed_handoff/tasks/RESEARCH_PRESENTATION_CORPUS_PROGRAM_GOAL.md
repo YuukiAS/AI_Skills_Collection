@@ -105,14 +105,58 @@ Stage 3 PASS 后的真实新增能力：真实科研内容可以在 CUHK 模板�
 
 Stage 4 PASS 后的真实新增能力：用户一次正常调用确实会走完整高质量 production path。
 
-### Stage 5 — Two Real Paper Holdouts + Human Closure
+### Stage 5 — Frozen Batch Real-Paper Generalization Acceptance + Human Closure
 
-最终必须用两个**未参与 exemplar extraction / rule distillation / tuning** 的真实公开 paper，从正常 production entrypoint one-shot 生成完整 CUHK 组会 deck：
+最终验收必须使用一个一次性冻结的真实公开 unseen paper batch，而不是失败后自适应替换 paper。batch 必须在任何一篇首次 acquisition/render/evaluation 前全部选定并记录：
 
-1. statistics / biostatistics / methodology paper；
-2. medical-imaging paper，必须使用真实论文 figures / medical images。
+1. 两篇 statistics / biostatistics / methodology papers；
+2. 两篇 medical-imaging papers，必须使用真实论文 figures / medical images。
 
-两个 deck 都必须是完整组会 presentation，而不是少数 benchmark pages。
+四个 deck 都必须是完整组会 presentation，而不是少数 benchmark pages。
+
+#### Final holdout batch
+
+禁止：
+
+- 先跑一篇，根据结果再选下一篇；
+- 一篇失败后立刻换 paper；
+- 从多个 paper 中只保留赢家；
+- 四篇之间修改 production code / gold / layout / rule / prompt / validator / quality-loop mapping；
+- 根据前一篇输出给后一篇调系统。
+
+#### Production freeze
+
+从 batch freeze 开始直到四篇全部完成，被评估的 production system 完全冻结。
+
+允许的唯一自动修复是每个 deck 可以使用产品本来已经 shipped 的最多一次 bounded automatic repair。这是 production behavior，不算 tuning；但该 repair mechanism 本身不得在 batch 中修改。
+
+#### Batch decision
+
+四篇必须全部通过：
+
+- source fidelity；
+- item/page-level Terra；
+- contact-sheet mature doctoral-group-meeting bar；
+- Planner independent review；
+- normal production entry；
+- no holdout-specific hardcode。
+
+任何一篇失败，整个 batch = FAIL。不能用 3/4、2/4 或“统计过了医学没过”宣布 Program Mature。所有四篇从此都算 consumed holdouts。
+
+#### After a failed batch
+
+失败 batch 只能作为 development evidence。之后：
+
+1. 可以在完全独立的 non-holdout / synthetic / public-safe regression 上做 generic recovery；
+2. recovery 不得使用失败 paper 的正文、图像、标题、DOI、page-specific content 作为 tuning fixture；
+3. generic recovery PASS 后，不得自动立即继续消耗下一批 fresh holdout；
+4. 必须进入一次用户 human gate，报告这一批为什么失败、修了什么 generic mechanism、为什么认为值得再开下一批。
+
+只有用户允许后，Planner 才能冻结下一组全新的 4-paper batch。这样禁止 `FAIL -> repair -> new paper -> FAIL -> repair -> new paper` 的自动循环。
+
+#### Final success
+
+只有一个完整 frozen 4-paper batch 达到 4/4 Terra + Planner PASS，才允许进入最终用户 artifact acceptance。最终必须把四套真实 rendered decks 提供给用户。只有用户明确接受，才允许 `ONE_SHOT_QUALITY_PASS`、`PROGRAM_MATURE=true`。
 
 ## Final Quality Gates
 
@@ -129,8 +173,8 @@ Stage 4 PASS 后的真实新增能力：用户一次正常调用确实会走完�
 - production entry：验证正常用户调用而非 helper/fixture；
 - no test-specific hardcode / holdout-specific layout hardcode。
 
-Terra PASS + Planner PASS 后仍不能自行宣告长期完成。必须把两套真实最终 deck 提交到现有合法 `AWAIT_HUMAN_DECISION` 人工门，由用户实际查看。
+Terra PASS + Planner PASS 后仍不能自行宣告长期完成。必须把完整 4-paper batch 的四套真实最终 deck 提交到现有合法 `AWAIT_HUMAN_DECISION` 人工门，由用户实际查看。
 
-**只有用户明确接受统计 paper deck 与医学影像 paper deck 两套结果，才允许写 `ONE_SHOT_QUALITY_PASS`。**
+**只有用户明确接受完整 frozen 4-paper batch 的四套结果，才允许写 `ONE_SHOT_QUALITY_PASS`。**
 
 用户若认为任一 deck 仍像 AI、审美差、内容空洞、符号泛化、没有真正使用参考资源或不像能上组会的博士生汇报，则视为真实 production regression，必须按用户观察做最小修复后重新验收。

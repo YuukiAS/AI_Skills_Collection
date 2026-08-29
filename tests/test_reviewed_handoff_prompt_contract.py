@@ -38,6 +38,29 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
         for heading in template_headings:
             self.assertIn(f"`{heading}`", prompt)
 
+    def test_planner_prompts_prevent_adaptive_holdout_chasing(self) -> None:
+        planner = (ROOT / "automation/reviewed_handoff/prompts/PLANNER.md").read_text(encoding="utf-8")
+        scheduled = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(encoding="utf-8")
+
+        for prompt in (planner, scheduled):
+            self.assertIn("complete holdout batch freeze", prompt)
+            self.assertIn("adaptive replacement/chasing", prompt)
+            self.assertIn("non-holdout / synthetic / public-safe regression", prompt)
+            self.assertIn("human gate", prompt)
+            self.assertIn("完整 frozen batch", prompt)
+
+    def test_program_goal_requires_frozen_four_paper_batch(self) -> None:
+        goal = (ROOT / "automation/reviewed_handoff/tasks/RESEARCH_PRESENTATION_CORPUS_PROGRAM_GOAL.md").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn("Frozen Batch Real-Paper Generalization Acceptance + Human Closure", goal)
+        self.assertIn("一次性冻结", goal)
+        self.assertIn("两篇 statistics / biostatistics / methodology papers", goal)
+        self.assertIn("两篇 medical-imaging papers", goal)
+        self.assertIn("4/4 Terra + Planner PASS", goal)
+        self.assertIn("四套真实 rendered decks", goal)
+
 
 if __name__ == "__main__":
     unittest.main()

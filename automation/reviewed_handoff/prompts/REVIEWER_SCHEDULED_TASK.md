@@ -44,6 +44,18 @@ Scheduled GPT 的真实执行面是 GitHub connector，不是目标机器 shell�
 
 Local CLI 仍用于 Codex watcher、本地调试、deterministic validation 和人工操作，但 Scheduled GPT 不要求、也不得假设可以运行目标机器上的 `ai-bridge` 命令。
 
+## Unseen / holdout generalization policy
+
+当 Program Goal 试图用 unseen / holdout 输入证明“对一般输入的泛化能力”时，Scheduled GPT 在 NEEDS_GPT_PLANNER / program continuation / final-acceptance 路由中必须防止 adaptive holdout chasing：
+
+- 在第一次 evaluation 开始前，一次性冻结完整 holdout batch freeze（complete holdout batch freeze）；不得根据前一个 holdout 结果再挑选后一个 holdout。
+- batch 执行期间，被评估的 production system 必须冻结；不得根据 batch 内任一 holdout 输出修改 production code、rules、gold、layout、prompt、validator、quality-loop mapping 或其他会影响后续 holdout 的行为。
+- 产品本来已经 shipped、并在 batch freeze 前存在的 bounded runtime repair 可以作为 production behavior 使用，但其机制本身不得在 batch 中改变。
+- batch 中任一 holdout 未达到冻结的 acceptance bar，则整个 batch 失败；不得只保留赢家、adaptive replacement/chasing、替换失败 item 或连续换新 holdout 直到出现 PASS 来声明 generalization。
+- failed batch 的问题只能在独立 non-holdout / synthetic / public-safe regression 上做 generic recovery；失败 holdout 的正文、图像、标题、DOI、page-specific content 不得变成 tuning fixture，也不得修漂亮后重新宣称 unseen PASS。
+- generic recovery 完成后，在消耗下一批 fresh holdout 之前，高成本 final-acceptance program 必须进入 human gate，向用户说明上一批为什么失败、修了什么通用机制、为什么值得再开下一批。只有用户允许后，Planner 才能冻结新的完整 fresh batch。
+- 最终 generalization PASS 必须来自一个完整 frozen batch 的整体通过，而不是跨多个自适应 batch 拼接成功案例。
+
 ## NEEDS_GPT_PLANNER
 
 读取 REQUEST、当前 PLAN、RESULT/Reviewer finding 和真实 repository 状态。只允许一次最小 Plan revision，只解决 Executor 无法从原 Plan 安全推导的实质歧义。不要因为想到更好的架构而扩大 scope。修改 `PLAN.md` 后，在最后的 `CURRENT.json` transaction 中设置 `plan_revision += 1`、`state=PLAN_FROZEN` 和正确 `next_action`。若已达到 planner revision limit，或需要用户改变产品/科学语义，先写 `FINAL_REPORT.md` 解释需要用户决定的具体问题与已完成工作，并完成 FINAL_REPORT preflight，再在最后的 `CURRENT.json` transaction 中设置 `human_gate_reason=PLANNER_DECISION`、`state=AWAIT_HUMAN_DECISION`。

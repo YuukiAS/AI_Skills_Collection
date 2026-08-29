@@ -26,12 +26,12 @@ Planner 必须明确：
 
 当某个 Program Goal 试图用 unseen / holdout 输入证明“对一般输入的泛化能力”时，Planner 必须防止 adaptive holdout chasing：
 
-- 在第一次 evaluation 开始前，一次性冻结完整 holdout batch；不得根据前一个 holdout 的结果再挑选后一个 holdout。
+- 在第一次 evaluation 开始前，一次性冻结完整 holdout batch freeze（complete holdout batch freeze）；不得根据前一个 holdout 的结果再挑选后一个 holdout。
 - batch 执行期间，被评估的 production system 必须冻结；不得根据 batch 内任一 holdout 的输出修改 production code、rules、gold、layout、prompt、validator、quality-loop mapping 或其他会影响后续 holdout 的行为。
 - 产品本来已经 shipped、并在 batch freeze 前存在的 bounded runtime repair 可以作为 production behavior 使用，但其机制本身不得在 batch 中改变。
-- batch 中任一 holdout 未达到冻结的 acceptance bar，则整个 batch 失败；不得通过只保留赢家、替换失败 item、连续换新 holdout 直到出现 PASS 来声明 generalization。
-- failed batch 的问题只能在独立 non-holdout / synthetic / public-safe regression 上做 generic recovery；失败 holdout 不得变成新的 tuning fixture，也不得修漂亮后重新宣称 unseen PASS。
-- generic recovery 完成后，在消耗下一批 fresh holdout 之前，高成本 final-acceptance program 必须进入 human gate，向用户说明上一批为什么失败、修了什么通用机制、为什么值得再开下一批。只有用户允许后，Planner 才能冻结新的完整 batch。
+- batch 中任一 holdout 未达到冻结的 acceptance bar，则整个 batch 失败；不得通过只保留赢家、adaptive replacement/chasing、替换失败 item、连续换新 holdout 直到出现 PASS 来声明 generalization。
+- failed batch 的问题只能在独立 non-holdout / synthetic / public-safe regression 上做 generic recovery；失败 holdout 的正文、图像、标题、DOI、page-specific content 不得变成新的 tuning fixture，也不得修漂亮后重新宣称 unseen PASS。
+- generic recovery 完成后，在消耗下一批 fresh holdout 之前，高成本 final-acceptance program 必须进入 human gate，向用户说明上一批为什么失败、修了什么通用机制、为什么值得再开下一批。只有用户允许后，Planner 才能冻结新的完整 fresh batch。
 - 最终 generalization PASS 必须来自一个完整 frozen batch 的整体通过，而不是跨多个自适应 batch 拼接成功案例。
 
 采用外部来源或外部能力时，不要自动照搬上游 repository 结构。应按目标 repository 既有的 user-facing capability boundaries 集成，显式处理 overlap/conflict；只有冻结的产品意图确实要求一个新的长期用户入口时，才创建新的顶级能力。
