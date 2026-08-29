@@ -1,0 +1,136 @@
+{
+  "schema": "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1",
+  "source_derivation": "workstream assignment uses explicit page-job/source workstream metadata when present, otherwise evidence-board fallback; titles, page numbers, domain token profiles, and gold IDs are not classification keys",
+  "cross_workstream_relation_policy": "do not infer causal bridges between distinct workstreams without explicit source support",
+  "workstreams": [
+    {
+      "workstream_id": "deseq2_paper",
+      "label": "DESeq2 paper",
+      "scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+      "first_source_order": 1,
+      "page_jobs": [
+        "deseq2_nb_glm",
+        "deseq2_dispersion_shrinkage",
+        "deseq2_lfc_result",
+        "deseq2_benchmark_limits",
+        "deseq2_evidence_comparison_slot",
+        "deseq2_takeaway"
+      ],
+      "workstream_order": 1,
+      "source_supported_cross_workstream_relation_to_previous": null,
+      "transition_label": "DESeq2 paper"
+    }
+  ],
+  "page_assignments": [
+    {
+      "page_id": "deseq2_nb_glm",
+      "page_job": "STATISTICAL_MODEL",
+      "original_order": 1,
+      "workstream_id": "deseq2_paper",
+      "workstream_label": "DESeq2 paper",
+      "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+      "assignment_basis": [
+        "explicit source workstream metadata"
+      ],
+      "intra_workstream_sort_key": [
+        10,
+        1
+      ],
+      "storyline_order": 1,
+      "workstream_order": 1
+    },
+    {
+      "page_id": "deseq2_lfc_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "original_order": 3,
+      "workstream_id": "deseq2_paper",
+      "workstream_label": "DESeq2 paper",
+      "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+      "assignment_basis": [
+        "explicit source workstream metadata"
+      ],
+      "intra_workstream_sort_key": [
+        20,
+        3
+      ],
+      "storyline_order": 2,
+      "workstream_order": 1
+    },
+    {
+      "page_id": "deseq2_dispersion_shrinkage",
+      "page_job": "EXPERIMENT_DESIGN",
+      "original_order": 2,
+      "workstream_id": "deseq2_paper",
+      "workstream_label": "DESeq2 paper",
+      "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+      "assignment_basis": [
+        "explicit source workstream metadata"
+      ],
+      "intra_workstream_sort_key": [
+        30,
+        2
+      ],
+      "storyline_order": 3,
+      "workstream_order": 1
+    },
+    {
+      "page_id": "deseq2_benchmark_limits",
+      "page_job": "NEGATIVE_RESULT",
+      "original_order": 4,
+      "workstream_id": "deseq2_paper",
+      "workstream_label": "DESeq2 paper",
+      "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+      "assignment_basis": [
+        "explicit source workstream metadata"
+      ],
+      "intra_workstream_sort_key": [
+        40,
+        4
+      ],
+      "storyline_order": 4,
+      "workstream_order": 1
+    },
+    {
+      "page_id": "deseq2_takeaway",
+      "page_job": "NEXT_EXPERIMENT",
+      "original_order": 6,
+      "workstream_id": "deseq2_paper",
+      "workstream_label": "DESeq2 paper",
+      "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+      "assignment_basis": [
+        "explicit source workstream metadata"
+      ],
+      "intra_workstream_sort_key": [
+        50,
+        6
+      ],
+      "storyline_order": 5,
+      "workstream_order": 1
+    },
+    {
+      "page_id": "deseq2_evidence_comparison_slot",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "original_order": 5,
+      "workstream_id": "deseq2_paper",
+      "workstream_label": "DESeq2 paper",
+      "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+      "assignment_basis": [
+        "explicit source workstream metadata"
+      ],
+      "intra_workstream_sort_key": [
+        100,
+        5
+      ],
+      "storyline_order": 6,
+      "workstream_order": 1
+    }
+  ],
+  "storyline_order": [
+    "STATISTICAL_MODEL",
+    "REAL_DATA_APPLICATION",
+    "EXPERIMENT_DESIGN",
+    "NEGATIVE_RESULT",
+    "NEXT_EXPERIMENT",
+    "MEDICAL_IMAGE_COMPARISON"
+  ]
+}

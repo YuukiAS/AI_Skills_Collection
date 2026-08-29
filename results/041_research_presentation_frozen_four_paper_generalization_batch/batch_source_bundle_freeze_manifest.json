@@ -1,0 +1,32 @@
+{
+  "schema": "RESEARCH_PRESENTATION_STAGE5_FOUR_BUNDLE_FREEZE_MANIFEST_V1",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "freeze_date": "2026-08-29",
+  "production_freeze_locator": "d3379b5168bc27b114b362f186f8c239a88a669c",
+  "all_four_bundles_frozen_before_first_render": true,
+  "bundle_hashes": {
+    "statistics_tmb": {
+      "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/source_bundle.json",
+      "sha256": "7da33f5f7cd497a1e7a6d65f5b2701e56c68be6781d34dede3143adae4261c0e",
+      "source_inventory": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/source_inventory.json"
+    },
+    "biostatistics_deseq2": {
+      "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source_bundle.json",
+      "sha256": "52f58af783041ca3b4316141818db9bd781b1d63c7d2e16fa99b8493d798a962",
+      "source_inventory": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source_inventory.json"
+    },
+    "medical_cardiac_ultrasound": {
+      "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source_bundle.json",
+      "sha256": "4e62035d6aa495832ad7b3b8235e71ed3ffaf29e0338c0e556985112210f2243",
+      "source_inventory": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source_inventory.json"
+    },
+    "medical_retfound": {
+      "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/source_bundle.json",
+      "sha256": "6e54dd6f960c8188b20dfcc7ab1988e988d69b85015f2cad049d35c935f55147",
+      "source_inventory": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/source_inventory.json"
+    }
+  },
+  "render_started_before_freeze": false,
+  "post_freeze_source_mutation_allowed": false,
+  "decision": "FROZEN_READY_FOR_NORMAL_PRODUCTION_INVOCATION"
+}

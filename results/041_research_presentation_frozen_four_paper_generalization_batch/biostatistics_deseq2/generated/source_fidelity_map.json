@@ -1,0 +1,217 @@
+{
+  "schema": "RESEARCH_PRESENTATION_SOURCE_FIDELITY_MAP_V1",
+  "stage5_holdout_eligible": false,
+  "holdout_exclusion_reason": "041 real-paper holdout input; production entrypoint requires this legacy exclusion flag while task-local eligibility is recorded in batch_eligibility.json.",
+  "pages": [
+    {
+      "page_id": "deseq2_nb_glm",
+      "page_job": "STATISTICAL_MODEL",
+      "source_evidence_ids": [
+        "DESEQ2-EV-GLM"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "DESEQ2-EV-GLM",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source/source.md",
+          "source_anchor": "## Negative-binomial GLM",
+          "claim_supported": "Counts are modeled with a negative-binomial GLM and gene-specific dispersion.",
+          "consumed_as": "native LaTeX equation"
+        }
+      ],
+      "generated_object_ids": [
+        "deseq2_nb_glm_primary",
+        "deseq2_nb_glm_annotation",
+        "deseq2_nb_glm_caption",
+        "deseq2_nb_glm_model_components",
+        "deseq2_nb_glm_model_interpretation"
+      ],
+      "selected_gold_id": "GSC-016",
+      "selected_reference_id": "RRL-020",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "deseq2_lfc_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "source_evidence_ids": [
+        "DESEQ2-EV-LFC"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "DESEQ2-EV-LFC",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig2_lfc_page.png",
+          "source_anchor": "PDF page 4, Figure 2",
+          "claim_supported": "MAP LFC shrinkage stabilizes weakly informed fold changes relative to MLE estimates.",
+          "consumed_as": "paper figure page"
+        }
+      ],
+      "generated_object_ids": [
+        "deseq2_lfc_result_primary",
+        "deseq2_lfc_result_annotation",
+        "deseq2_lfc_result_caption"
+      ],
+      "selected_gold_id": "GSC-015",
+      "selected_reference_id": "RRL-017",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "deseq2_dispersion_shrinkage",
+      "page_job": "EXPERIMENT_DESIGN",
+      "source_evidence_ids": [
+        "DESEQ2-EV-DISP"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "DESEQ2-EV-DISP",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig1_dispersion_page.png",
+          "source_anchor": "PDF page 3, Figure 1",
+          "claim_supported": "Dispersion estimates are shrunk toward a fitted dispersion-mean trend, with outlier handling.",
+          "consumed_as": "paper figure page"
+        }
+      ],
+      "generated_object_ids": [
+        "deseq2_dispersion_shrinkage_primary",
+        "deseq2_dispersion_shrinkage_annotation",
+        "deseq2_dispersion_shrinkage_caption"
+      ],
+      "selected_gold_id": "GSC-004",
+      "selected_reference_id": "RRL-019",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "deseq2_benchmark_limits",
+      "page_job": "NEGATIVE_RESULT",
+      "source_evidence_ids": [
+        "DESEQ2-EV-BENCH",
+        "DESEQ2-EV-LIMIT"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "DESEQ2-EV-BENCH",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig6_benchmark_page.png",
+          "source_anchor": "PDF page 8, Figure 6",
+          "claim_supported": "Benchmarks compare sensitivity and precision across sample sizes and fold-change levels.",
+          "consumed_as": "paper figure page"
+        },
+        {
+          "evidence_id": "DESEQ2-EV-LIMIT",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source/source.md",
+          "source_anchor": "## Limitations and interpretation",
+          "claim_supported": "The contribution is empirical-Bayes regularization inside the NB-GLM, not a generic omics recipe.",
+          "consumed_as": "limitation note"
+        }
+      ],
+      "generated_object_ids": [
+        "deseq2_benchmark_limits_primary",
+        "deseq2_benchmark_limits_annotation",
+        "deseq2_benchmark_limits_caption"
+      ],
+      "selected_gold_id": "GSC-012",
+      "selected_reference_id": "RRL-011",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "deseq2_takeaway",
+      "page_job": "NEXT_EXPERIMENT",
+      "source_evidence_ids": [
+        "DESEQ2-EV-LIMIT",
+        "DESEQ2-EV-GLM"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "DESEQ2-EV-LIMIT",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source/source.md",
+          "source_anchor": "## Limitations and interpretation",
+          "claim_supported": "The contribution is empirical-Bayes regularization inside the NB-GLM, not a generic omics recipe.",
+          "consumed_as": "limitation note"
+        },
+        {
+          "evidence_id": "DESEQ2-EV-GLM",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source/source.md",
+          "source_anchor": "## Negative-binomial GLM",
+          "claim_supported": "Counts are modeled with a negative-binomial GLM and gene-specific dispersion.",
+          "consumed_as": "native LaTeX equation"
+        }
+      ],
+      "generated_object_ids": [
+        "deseq2_takeaway_primary",
+        "deseq2_takeaway_annotation",
+        "deseq2_takeaway_caption"
+      ],
+      "selected_gold_id": "GSC-018",
+      "selected_reference_id": "RRL-059",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "deseq2_evidence_comparison_slot",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "source_evidence_ids": [
+        "DESEQ2-EV-BENCH"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "DESEQ2-EV-BENCH",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig6_benchmark_page.png",
+          "source_anchor": "PDF page 8, Figure 6",
+          "claim_supported": "Benchmarks compare sensitivity and precision across sample sizes and fold-change levels.",
+          "consumed_as": "paper figure page"
+        }
+      ],
+      "generated_object_ids": [
+        "deseq2_evidence_comparison_slot_primary",
+        "deseq2_evidence_comparison_slot_annotation",
+        "deseq2_evidence_comparison_slot_caption"
+      ],
+      "selected_gold_id": "GSC-004",
+      "selected_reference_id": "RRL-019",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    }
+  ]
+}

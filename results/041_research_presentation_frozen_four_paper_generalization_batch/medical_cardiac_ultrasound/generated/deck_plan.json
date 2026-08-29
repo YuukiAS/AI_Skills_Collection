@@ -1,0 +1,528 @@
+{
+  "schema_version": 1,
+  "metadata": {
+    "title": "Self-supervised cardiac ultrasound segmentation",
+    "audience": "doctoral research group",
+    "mode": "research-group-meeting",
+    "purpose": "group-meeting",
+    "duration_minutes": 16,
+    "language": "en",
+    "template": "exact-cuhk-beamer-source",
+    "output": "tex",
+    "editability": "source-editable",
+    "source_files": [
+      "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source_bundle.json",
+      "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source/source.md"
+    ],
+    "production_entry": "research-presentations one-call production"
+  },
+  "slides": [
+    {
+      "id": "s01",
+      "title": "The model object is a weak-label SSL segmentation pipeline",
+      "key_message": "Traditional vision, clinical constraints, HED, UNet, QC, and self-learning turn unlabeled echo videos into chamber masks.",
+      "slide_purpose": "explain pipeline object",
+      "visual_intent": "pipeline figure page",
+      "source_anchors": [
+        "source.md:## Weak labels and self-learning pipeline",
+        "PDF page 3 Figure 1"
+      ],
+      "page_function": "STATISTICAL_MODEL",
+      "required_evidence": [
+        "CARDIAC-EV-PIPE"
+      ],
+      "source_evidence_ids": [
+        "CARDIAC-EV-PIPE"
+      ],
+      "scientific_objects": [
+        "weak labels",
+        "HED",
+        "UNet",
+        "clinical spatial constraints"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "storyline": {
+        "workstream_id": "cardiac_ultrasound_paper",
+        "workstream_label": "cardiac ultrasound paper",
+        "workstream_scope": "A2C/A4C/SAX weak-label pipeline, chamber anatomy, clinical measurement comparison, and failure limits",
+        "storyline_order": 1,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "content": []
+    },
+    {
+      "id": "s02",
+      "title": "Segmentations become clinical chamber measurements",
+      "key_message": "The paper compares SSL-derived volumes, areas, mass, and LVEF against clinical echocardiogram measurements and CMR where available.",
+      "slide_purpose": "show result evidence",
+      "visual_intent": "measurement comparison page",
+      "source_anchors": [
+        "source.md:## Clinical measurement evidence",
+        "PDF page 8 Figure 6"
+      ],
+      "page_function": "REAL_DATA_APPLICATION",
+      "required_evidence": [
+        "CARDIAC-EV-MEASURE"
+      ],
+      "source_evidence_ids": [
+        "CARDIAC-EV-MEASURE"
+      ],
+      "scientific_objects": [
+        "r2",
+        "Bland-Altman",
+        "LVEF",
+        "CMR comparison"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "storyline": {
+        "workstream_id": "cardiac_ultrasound_paper",
+        "workstream_label": "cardiac ultrasound paper",
+        "workstream_scope": "A2C/A4C/SAX weak-label pipeline, chamber anatomy, clinical measurement comparison, and failure limits",
+        "storyline_order": 2,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "content": []
+    },
+    {
+      "id": "s03",
+      "title": "A2C bootstraps the later chamber pipeline",
+      "key_message": "The A2C branch creates initial weak labels, trains the first segmentation model, and supplies inference used by later A4C processing.",
+      "slide_purpose": "explain view-specific mechanism",
+      "visual_intent": "A2C figure page",
+      "source_anchors": [
+        "source.md:## Real image semantics",
+        "PDF page 5 Figure 2"
+      ],
+      "page_function": "EXPERIMENT_DESIGN",
+      "required_evidence": [
+        "CARDIAC-EV-A2C"
+      ],
+      "source_evidence_ids": [
+        "CARDIAC-EV-A2C"
+      ],
+      "scientific_objects": [
+        "A2C",
+        "LV",
+        "LA",
+        "weak label",
+        "final prediction"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "storyline": {
+        "workstream_id": "cardiac_ultrasound_paper",
+        "workstream_label": "cardiac ultrasound paper",
+        "workstream_scope": "A2C/A4C/SAX weak-label pipeline, chamber anatomy, clinical measurement comparison, and failure limits",
+        "storyline_order": 3,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "content": []
+    },
+    {
+      "id": "s04",
+      "title": "Noisy echo and missing labels define the failure boundary",
+      "key_message": "The authors call out dropout, off-axis views, frame selection, incomplete labels, and the need for further primary-care validation.",
+      "slide_purpose": "state limits",
+      "visual_intent": "failure and limit evidence",
+      "source_anchors": [
+        "source.md:## Limitations and interpretation",
+        "PDF pages 7-9"
+      ],
+      "page_function": "NEGATIVE_RESULT",
+      "required_evidence": [
+        "CARDIAC-EV-SAX",
+        "CARDIAC-EV-LIMIT"
+      ],
+      "source_evidence_ids": [
+        "CARDIAC-EV-SAX",
+        "CARDIAC-EV-LIMIT"
+      ],
+      "scientific_objects": [
+        "dropout",
+        "off-axis SAX",
+        "frame selection",
+        "missing chamber labels"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "storyline": {
+        "workstream_id": "cardiac_ultrasound_paper",
+        "workstream_label": "cardiac ultrasound paper",
+        "workstream_scope": "A2C/A4C/SAX weak-label pipeline, chamber anatomy, clinical measurement comparison, and failure limits",
+        "storyline_order": 4,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "content": []
+    },
+    {
+      "id": "s05",
+      "title": "The claim is scalable measurement, not label magic",
+      "key_message": "Self-supervision reduces manual labeling burden, but clinical validity depends on view-specific anatomy, QC, external testing, and measurement agreement.",
+      "slide_purpose": "synthesize decision",
+      "visual_intent": "evidence-to-decision diagram",
+      "source_anchors": [
+        "source.md:## Limitations and interpretation"
+      ],
+      "page_function": "NEXT_EXPERIMENT",
+      "required_evidence": [
+        "CARDIAC-EV-LIMIT",
+        "CARDIAC-EV-MEASURE"
+      ],
+      "source_evidence_ids": [
+        "CARDIAC-EV-LIMIT",
+        "CARDIAC-EV-MEASURE"
+      ],
+      "scientific_objects": [
+        "manual-label-free training",
+        "clinical measurement",
+        "external validation",
+        "view anatomy"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "storyline": {
+        "workstream_id": "cardiac_ultrasound_paper",
+        "workstream_label": "cardiac ultrasound paper",
+        "workstream_scope": "A2C/A4C/SAX weak-label pipeline, chamber anatomy, clinical measurement comparison, and failure limits",
+        "storyline_order": 5,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "content": []
+    },
+    {
+      "id": "s06",
+      "title": "A2C, A4C, and SAX must not be conflated",
+      "key_message": "The deck inspects real echo view semantics: A2C focuses LV/LA, A4C adds right-heart chambers, and SAX changes the anatomy and weak-label strategy.",
+      "slide_purpose": "compare source images",
+      "visual_intent": "three real article view pages",
+      "source_anchors": [
+        "source.md:## Real image semantics",
+        "PDF pages 5-7 Figures 2-4"
+      ],
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "required_evidence": [
+        "CARDIAC-EV-A2C",
+        "CARDIAC-EV-A4C",
+        "CARDIAC-EV-SAX"
+      ],
+      "source_evidence_ids": [
+        "CARDIAC-EV-A2C",
+        "CARDIAC-EV-A4C",
+        "CARDIAC-EV-SAX"
+      ],
+      "scientific_objects": [
+        "A2C",
+        "A4C",
+        "SAX",
+        "LV",
+        "LA",
+        "RV",
+        "RA"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "storyline": {
+        "workstream_id": "cardiac_ultrasound_paper",
+        "workstream_label": "cardiac ultrasound paper",
+        "workstream_scope": "A2C/A4C/SAX weak-label pipeline, chamber anatomy, clinical measurement comparison, and failure limits",
+        "storyline_order": 6,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "content": []
+    }
+  ],
+  "research_state": {
+    "previous_question": "Can the frozen normal research-presentations route make a complete paper talk for this real unseen paper?",
+    "prior_belief": "Stage 4/039 production behavior is frozen, but this paper was not used to tune it.",
+    "new_evidence": "The bundle records complete paper-derived anchors, selected real article figures or tables, and limits from the published article.",
+    "evidence_quality": "Creative Commons Attribution 4.0 International; article figure credit lines checked in PDF/HTML and no third-party exclusion was found for selected article figures",
+    "belief_update": "The deck must be judged as this paper-specific doctoral group-meeting talk.",
+    "successes": "The article provides native scientific objects, quantitative evidence, and explicit interpretation limits.",
+    "failures": "Any unreadable figure, generic page, or unsupported repair means this deck fails the batch.",
+    "largest_uncertainty": "Whether the frozen generic layouts preserve this paper at mature presentation quality.",
+    "frozen_items": "Use the pre-render frozen source files and normal production entrypoint only.",
+    "stop_items": "Do not change source selection, generated TeX, production code, gold, layout, prompt, or validator after render inspection.",
+    "next_discriminating_experiment": "Generate exact-CUHK pages and submit the final pixel identity to task-local visual review.",
+    "decision_needed": "Reviewer and Planner must decide after CI and external Terra evidence."
+  },
+  "evidence_board": {
+    "available_figures": [],
+    "medical_images": [
+      {
+        "id": "CARDIAC-EV-A2C",
+        "board": "medical_images",
+        "type": "png",
+        "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig2_a2c_page.png",
+        "source_anchor": "PDF page 5, Figure 2",
+        "supports": "A2C examples show weak labels, predictions, and human segmentation visual aids for LV and LA anatomy.",
+        "consumed_as": "real echocardiography page",
+        "status": "available"
+      },
+      {
+        "id": "CARDIAC-EV-A4C",
+        "board": "medical_images",
+        "type": "png",
+        "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig3_a4c_page.png",
+        "source_anchor": "PDF page 6, Figure 3",
+        "supports": "A4C examples include LV, LA, RV, RA segmentation semantics and difficult clinical cases.",
+        "consumed_as": "real echocardiography page",
+        "status": "available"
+      },
+      {
+        "id": "CARDIAC-EV-SAX",
+        "board": "medical_images",
+        "type": "png",
+        "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig4_sax_page.png",
+        "source_anchor": "PDF page 7, Figure 4",
+        "supports": "SAX examples show circle-derived weak labels and recovered LV segmentation through the pipeline.",
+        "consumed_as": "real echocardiography page",
+        "status": "available"
+      }
+    ],
+    "qualitative_examples": [],
+    "quantitative_plots": [
+      {
+        "id": "CARDIAC-EV-MEASURE",
+        "board": "quantitative_plots",
+        "type": "png",
+        "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig6_measurement_page.png",
+        "source_anchor": "PDF page 8, Figure 6",
+        "supports": "Clinical and SSL-derived chamber measurements are compared with r2 and Bland-Altman summaries.",
+        "consumed_as": "paper measurement figure page",
+        "status": "available"
+      }
+    ],
+    "model_diagrams": [
+      {
+        "id": "CARDIAC-EV-PIPE",
+        "board": "model_diagrams",
+        "type": "png",
+        "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig1_pipeline_page.png",
+        "source_anchor": "PDF page 3, Figure 1",
+        "supports": "The SSL pipeline builds weak labels and successive segmentation models across A2C, A4C, and SAX views.",
+        "consumed_as": "paper pipeline page",
+        "status": "available"
+      }
+    ],
+    "equations": [],
+    "experiment_logs": [],
+    "failed_experiments": [
+      {
+        "id": "CARDIAC-EV-LIMIT",
+        "board": "failed_experiments",
+        "type": "source_markdown",
+        "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source/source.md",
+        "source_anchor": "## Limitations and interpretation",
+        "supports": "Noisy ultrasound boundaries, frame selection, missing labels, and further validation remain important limits.",
+        "consumed_as": "limitation note",
+        "status": "available"
+      }
+    ],
+    "literature_figures_to_redraw": [],
+    "missing_evidence": []
+  },
+  "storyline": {
+    "schema": "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1",
+    "source_derivation": "workstream assignment uses explicit page-job/source workstream metadata when present, otherwise evidence-board fallback; titles, page numbers, domain token profiles, and gold IDs are not classification keys",
+    "cross_workstream_relation_policy": "do not infer causal bridges between distinct workstreams without explicit source support",
+    "workstreams": [
+      {
+        "workstream_id": "cardiac_ultrasound_paper",
+        "label": "cardiac ultrasound paper",
+        "scope": "A2C/A4C/SAX weak-label pipeline, chamber anatomy, clinical measurement comparison, and failure limits",
+        "first_source_order": 1,
+        "page_jobs": [
+          "cardiac_pipeline_model",
+          "cardiac_a2c_design",
+          "cardiac_measurement_result",
+          "cardiac_failure_boundaries",
+          "cardiac_same_case_views",
+          "cardiac_takeaway"
+        ],
+        "workstream_order": 1,
+        "source_supported_cross_workstream_relation_to_previous": null,
+        "transition_label": "cardiac ultrasound paper"
+      }
+    ],
+    "page_assignments": [
+      {
+        "page_id": "cardiac_pipeline_model",
+        "page_job": "STATISTICAL_MODEL",
+        "original_order": 1,
+        "workstream_id": "cardiac_ultrasound_paper",
+        "workstream_label": "cardiac ultrasound paper",
+        "workstream_scope": "A2C/A4C/SAX weak-label pipeline, chamber anatomy, clinical measurement comparison, and failure limits",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          10,
+          1
+        ],
+        "storyline_order": 1,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "cardiac_measurement_result",
+        "page_job": "REAL_DATA_APPLICATION",
+        "original_order": 3,
+        "workstream_id": "cardiac_ultrasound_paper",
+        "workstream_label": "cardiac ultrasound paper",
+        "workstream_scope": "A2C/A4C/SAX weak-label pipeline, chamber anatomy, clinical measurement comparison, and failure limits",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          20,
+          3
+        ],
+        "storyline_order": 2,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "cardiac_a2c_design",
+        "page_job": "EXPERIMENT_DESIGN",
+        "original_order": 2,
+        "workstream_id": "cardiac_ultrasound_paper",
+        "workstream_label": "cardiac ultrasound paper",
+        "workstream_scope": "A2C/A4C/SAX weak-label pipeline, chamber anatomy, clinical measurement comparison, and failure limits",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          30,
+          2
+        ],
+        "storyline_order": 3,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "cardiac_failure_boundaries",
+        "page_job": "NEGATIVE_RESULT",
+        "original_order": 4,
+        "workstream_id": "cardiac_ultrasound_paper",
+        "workstream_label": "cardiac ultrasound paper",
+        "workstream_scope": "A2C/A4C/SAX weak-label pipeline, chamber anatomy, clinical measurement comparison, and failure limits",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          40,
+          4
+        ],
+        "storyline_order": 4,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "cardiac_takeaway",
+        "page_job": "NEXT_EXPERIMENT",
+        "original_order": 6,
+        "workstream_id": "cardiac_ultrasound_paper",
+        "workstream_label": "cardiac ultrasound paper",
+        "workstream_scope": "A2C/A4C/SAX weak-label pipeline, chamber anatomy, clinical measurement comparison, and failure limits",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          50,
+          6
+        ],
+        "storyline_order": 5,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "cardiac_same_case_views",
+        "page_job": "MEDICAL_IMAGE_COMPARISON",
+        "original_order": 5,
+        "workstream_id": "cardiac_ultrasound_paper",
+        "workstream_label": "cardiac ultrasound paper",
+        "workstream_scope": "A2C/A4C/SAX weak-label pipeline, chamber anatomy, clinical measurement comparison, and failure limits",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          100,
+          5
+        ],
+        "storyline_order": 6,
+        "workstream_order": 1
+      }
+    ],
+    "storyline_order": [
+      "STATISTICAL_MODEL",
+      "REAL_DATA_APPLICATION",
+      "EXPERIMENT_DESIGN",
+      "NEGATIVE_RESULT",
+      "NEXT_EXPERIMENT",
+      "MEDICAL_IMAGE_COMPARISON"
+    ]
+  }
+}

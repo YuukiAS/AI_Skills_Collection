@@ -1,0 +1,108 @@
+{
+  "schema": "RESEARCH_PRESENTATION_STAGE5_FOUR_PAPER_BATCH_ELIGIBILITY_AUDIT_V1",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "audit_date": "2026-08-29",
+  "repository": "YuukiAS/AI_Skills_Collection",
+  "pre_acquisition_status": "PASS_NO_PRESENTATION_TUNING_SOURCE_GOLD_OR_RENDER_USE_FOUND",
+  "production_freeze_locator": "d3379b5168bc27b114b362f186f8c239a88a669c",
+  "search_scopes": [
+    "git grep exact titles/DOIs/authors/common identifiers across tracked repository before acquisition",
+    "skills/tools/documents-media/presentations shared references, gold composition metadata, fixtures, quality-loop stress inputs, and scripts",
+    "plugins/codex/plugins/presentations mirror",
+    "results/0* task artifacts including existing real-holdout outputs",
+    "automation/reviewed_handoff/tasks/040 and 041 Planner/control documents",
+    "machine-visible production/reference retrieval indexes under skills/tools/documents-media/presentations/shared/references"
+  ],
+  "batch_decision": "PASS_ALL_FOUR_ELIGIBLE_BEFORE_ACQUISITION",
+  "disqualifying_consumption_hits": [],
+  "non_disqualifying_repository_hits": [
+    {
+      "paper": "TMB",
+      "paths": [
+        "automation/reviewed_handoff/tasks/040_research_presentation_replacement_two_real_paper_holdouts/REQUEST.md",
+        "automation/reviewed_handoff/tasks/040_research_presentation_replacement_two_real_paper_holdouts/PLAN.md"
+      ],
+      "reason": "superseded 040 Planner-only mention; 040 implementation_commit=null and final report records no acquisition, source bundle, render, Terra, or production invocation"
+    },
+    {
+      "paper": "cardiac_ultrasound",
+      "paths": [
+        "automation/reviewed_handoff/tasks/040_research_presentation_replacement_two_real_paper_holdouts/REQUEST.md",
+        "automation/reviewed_handoff/tasks/040_research_presentation_replacement_two_real_paper_holdouts/PLAN.md"
+      ],
+      "reason": "superseded 040 Planner-only mention; 040 implementation_commit=null and final report records no acquisition, source bundle, render, Terra, or production invocation"
+    },
+    {
+      "paper": "DESeq2",
+      "paths": [
+        "skills/domains/bioinformatics/omics-analysis/pydeseq2/SKILL.md",
+        "plugins/codex/plugins/bioinformatics/skills/bio/_src/deseq/source.md",
+        "docs/SKILL_CATALOG.md",
+        "registry.json"
+      ],
+      "reason": "ordinary PyDESeq2 skill/domain reference, not research-presentations source/gold/tuning/render consumption and not a presentation reference index"
+    },
+    {
+      "paper": "RETFound",
+      "paths": [
+        "automation/reviewed_handoff/tasks/041_research_presentation_frozen_four_paper_generalization_batch/PLAN.md",
+        "automation/reviewed_handoff/tasks/RESEARCH_PRESENTATION_CURRENT_ROUND.md"
+      ],
+      "reason": "current Planner freeze/control material only, not prior production consumption"
+    }
+  ],
+  "papers": [
+    {
+      "domain": "statistics_computational_methodology",
+      "title": "TMB: Automatic Differentiation and Laplace Approximation",
+      "authors": "Kasper Kristensen, Anders Nielsen, Casper W. Berg, Hans Skaug, Bradley M. Bell",
+      "doi": "10.18637/jss.v070.i05",
+      "published_source": "https://www.jstatsoft.org/article/view/v070i05",
+      "license": "Journal of Statistical Software Creative Commons Attribution license",
+      "decision": "eligible; 040 mention was planner-only",
+      "eligible_before_acquisition": true,
+      "local_pdf_cache_untracked": "/tmp/rh041_sources/tmb_v070i05.pdf",
+      "pdf_sha256": "956c23742c544fa839525e3108cfbbc28936ff711c5f9f1018aef73e79aee85e",
+      "pdf_pages": 21
+    },
+    {
+      "domain": "biostatistics_methodology",
+      "title": "Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2",
+      "authors": "Michael I. Love, Wolfgang Huber, Simon Anders",
+      "doi": "10.1186/s13059-014-0550-8",
+      "published_source": "https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8",
+      "license": "Creative Commons Attribution 4.0 International",
+      "decision": "eligible; only non-presentation PyDESeq2 domain-reference hits found",
+      "eligible_before_acquisition": true,
+      "local_pdf_cache_untracked": "/tmp/rh041_sources/deseq2_s13059-014-0550-8.pdf",
+      "pdf_sha256": "96af759d0ffad2df06af8860e7ea7ae1ce380ce6e22843ad2519b801bc1999bb",
+      "pdf_pages": 21
+    },
+    {
+      "domain": "medical_imaging_cardiac_ultrasound",
+      "title": "Self-supervised learning for label-free segmentation in cardiac ultrasound",
+      "authors": "Danielle L. Ferreira, Connor Lau, Zaynaf Salaymang, Rima Arnaout et al.",
+      "doi": "10.1038/s41467-025-59451-5",
+      "published_source": "https://www.nature.com/articles/s41467-025-59451-5",
+      "license": "Creative Commons Attribution 4.0 International; article figure credit lines checked in PDF/HTML and no third-party exclusion was found for selected article figures",
+      "decision": "eligible; 040 mention was planner-only",
+      "eligible_before_acquisition": true,
+      "local_pdf_cache_untracked": "/tmp/rh041_sources/cardiac_s41467-025-59451-5.pdf",
+      "pdf_sha256": "bbb31b8d206c142d4d659c5ebb9d2fb1a190fd5c175f0a8963e914474cf078e9",
+      "pdf_pages": 13
+    },
+    {
+      "domain": "medical_imaging_retinal_foundation_model",
+      "title": "A foundation model for generalizable disease detection from retinal images",
+      "authors": "Yukun Zhou et al.",
+      "doi": "10.1038/s41586-023-06555-x",
+      "published_source": "https://www.nature.com/articles/s41586-023-06555-x",
+      "license": "Creative Commons Attribution 4.0 International; selected article/extended-data figure pixels used with article license statement and no selected third-party exclusion found",
+      "decision": "eligible; no prior presentation consumption found",
+      "eligible_before_acquisition": true,
+      "local_pdf_cache_untracked": "/tmp/rh041_sources/retfound_s41586-023-06555-x.pdf",
+      "pdf_sha256": "fe4cdfb0aaa4fb539b89bfb0280731f2619820c2dc97440360e1bf74f3bee798",
+      "pdf_pages": 26
+    }
+  ]
+}

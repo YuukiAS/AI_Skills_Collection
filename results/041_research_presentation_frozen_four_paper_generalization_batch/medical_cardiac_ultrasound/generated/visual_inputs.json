@@ -1,0 +1,220 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "041_research_presentation_frozen_four_paper_generalization_batch-one-call-production-research-deck-review",
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "external_upload_authorization": "",
+  "rubric": {
+    "instructions": "Review the rendered pixels from one normal research-presentations production invocation. Check that each page contains source-specific content from the supplied engineering bundle rather than placeholders; exact CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math, native plots, and medical images are semantically correct where present; no internal RRL/GSC/SRC, QA, provenance, workflow, repo path, run ID, or implementation language leaks into audience-facing slides; repeated generic cards or one-template pages are rejected; and the deck reads as one coherent research update rather than disconnected benchmark pages. For multi-workstream bundles, confirm that each workstream stays internally continuous and that any independent workstream transition is visible without inventing a causal relation. Separately review the deck_contact_sheet item as a deck-level rhythm object: adjacent-page density jumps, repeated composition face, overfull or empty pages, redundant summary filler, result -> failure -> next-experiment rhythm, workstream transition balance, and title/object/formula/image alternation must meet a mature doctoral group-meeting or strong conference-talk bar. The top-level package PASS is not enough; provide item-level judgement and observations for deck_contact_sheet. Do not infer visual quality from filenames or hashes.",
+    "source_contracts": [
+      "The engineering regression bundle is public-safe and explicitly excluded from Stage 5 holdouts.",
+      "Stage 2 gold/reference pixels are used only for compatible composition selection.",
+      "The deck-quality loop may repair at most once and must fail closed/no-winner for unsafe findings or unresolved blockers."
+    ]
+  },
+  "identity_bindings": {
+    "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+    "implementation_commit": null,
+    "input_title": "Self-supervised cardiac ultrasound segmentation",
+    "build_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/BUILD_MANIFEST.json",
+    "build_manifest_sha256": "cf7a1f7166847fb1df5dbea953f70423b5d881bbbae98c8a3463e270eeeb6335",
+    "source_fidelity_map": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/source_fidelity_map.json",
+    "source_fidelity_map_sha256": "c415b804ef503b1fce3896f0b601e6aeac36c8463157727d01dee3cd534bd0f9",
+    "deck_sequence_summary": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/deck_sequence_summary.json",
+    "deck_sequence_summary_sha256": "7e059836a9287b7a724b1a45d1d3197cf77ff69e6f7f2404583ac150fcfa955f",
+    "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/quality_loop_state.json",
+    "quality_loop_state_sha256": "93788c6cde511a11065071bbd0445b443508f150e567f6f72aada363361acfec",
+    "deck_contact_sheet": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/deck_contact_sheet.png",
+    "deck_contact_sheet_sha256": "1792084d006f5a718c2f96197ec538ebf16cfb531d00edd9ba542b23171cfec7",
+    "deck_identity_sha256": "d259fd1d6e785355c53dbbcb12c3143722b0d39331752108ae567fc3c066ae20",
+    "render_input_identity_sha256": "427322503d37fbb586c5d3332b231448f55df502f9734d76ccb3af52dd37794d",
+    "render_input_identity": {
+      "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+      "build_workspace": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build",
+      "files": [
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/assets/background.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/assets/background_negative.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/assets/logo_RGB.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/bibliography.bib",
+          "role": "canonical_cuhk_support",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/main.tex",
+          "role": "main_tex",
+          "sha256": "bcac2c28c5b0d309b5cd111da745e0c52611d3d3696bb9193dcc13d86f640c25"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/scientific_layouts.tex",
+          "role": "scientific_layout_include",
+          "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig1_pipeline_page.png",
+          "role": "copied_scientific_asset",
+          "sha256": "1fc49e4f00200602f270d01eae47f403effd390128404e038e1d6cf9f28d4e13"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig2_a2c_page.png",
+          "role": "copied_scientific_asset",
+          "sha256": "d4676c5f749996088fb2149b6d76a6f68549bc9127c7ab8edca43b2871f6aaba"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig2_a2c_page_roi_zoom.png",
+          "role": "copied_scientific_asset",
+          "sha256": "e071cbc8e6fb0d40c1c97f64469243ac35091ebc933222805b2ba437da352e74"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig3_a4c_page.png",
+          "role": "copied_scientific_asset",
+          "sha256": "0d5997220e2417cbdf782fc5ebca9c239cc664a13299286693fa92c1dcb915e6"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig3_a4c_page_roi_zoom.png",
+          "role": "copied_scientific_asset",
+          "sha256": "0471c8971fdd4c4cc04bc9a6b5bf42965bd5ab24641ae731988d7bcf2cf41043"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig4_sax_page.png",
+          "role": "copied_scientific_asset",
+          "sha256": "074651ba864151e7e55b41543ff7ff7089198cd50fbe1cea20c1ce3112114038"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig4_sax_page_roi_zoom.png",
+          "role": "copied_scientific_asset",
+          "sha256": "720e300d21b7efa3b6c76517cf856a5b7d56de292ff42b5a84be1226537e9008"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig6_measurement_page.png",
+          "role": "copied_scientific_asset",
+          "sha256": "584d3b3625b78961ba7381bc006dd89f94f242fbdf8f34ed1b938af469d099a2"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+          "role": "canonical_cuhk_style",
+          "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/styles/sintefcolor.sty",
+          "role": "canonical_cuhk_style",
+          "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+        }
+      ],
+      "sha256": "427322503d37fbb586c5d3332b231448f55df502f9734d76ccb3af52dd37794d"
+    },
+    "rendered_pixel_identity_sha256": "5d482b290887882819458dfbd09e5d5ba9351625259dbec59f3de61a2b4a4fc6",
+    "pdf_sha256": "1cc323f1e667a96bce5431a3754f69706b742e8669d86f7db50ae5bdc1797d86",
+    "page_job_by_logical_id": {
+      "slide_2_statistical_model": "STATISTICAL_MODEL",
+      "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+      "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+      "slide_5_negative_result": "NEGATIVE_RESULT",
+      "slide_6_next_experiment": "NEXT_EXPERIMENT",
+      "slide_7_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON"
+    },
+    "source_evidence_ids_by_logical_id": {
+      "slide_2_statistical_model": [
+        "CARDIAC-EV-PIPE"
+      ],
+      "slide_3_real_data_application": [
+        "CARDIAC-EV-MEASURE"
+      ],
+      "slide_4_experiment_design": [
+        "CARDIAC-EV-A2C"
+      ],
+      "slide_5_negative_result": [
+        "CARDIAC-EV-SAX",
+        "CARDIAC-EV-LIMIT"
+      ],
+      "slide_6_next_experiment": [
+        "CARDIAC-EV-LIMIT",
+        "CARDIAC-EV-MEASURE"
+      ],
+      "slide_7_medical_image_comparison": [
+        "CARDIAC-EV-A2C",
+        "CARDIAC-EV-A4C",
+        "CARDIAC-EV-SAX"
+      ]
+    },
+    "selected_gold_by_page_id": {
+      "cardiac_pipeline_model": "GSC-016",
+      "cardiac_measurement_result": "GSC-015",
+      "cardiac_a2c_design": "GSC-004",
+      "cardiac_failure_boundaries": "GSC-012",
+      "cardiac_takeaway": "GSC-018",
+      "cardiac_same_case_views": "GSC-008"
+    }
+  },
+  "inputs": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-2.png",
+      "mime_type": "image/png",
+      "sha256": "90c4cf1797f5889d0dbbb350c3083d07bc4c6f3e8b6ad2787719197e5b8cf591",
+      "description": "Rendered exact-CUHK production page for STATISTICAL_MODEL using source evidence CARDIAC-EV-PIPE."
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-3.png",
+      "mime_type": "image/png",
+      "sha256": "858f7786a1dec46e0776aaadb4feeed807804043b85254754dba4acbc81973a5",
+      "description": "Rendered exact-CUHK production page for REAL_DATA_APPLICATION using source evidence CARDIAC-EV-MEASURE."
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-4.png",
+      "mime_type": "image/png",
+      "sha256": "8d5acccee844626083d2b427ebfd5ed103c94034f0d0fd6debce17c87c44f7ca",
+      "description": "Rendered exact-CUHK production page for EXPERIMENT_DESIGN using source evidence CARDIAC-EV-A2C."
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-5.png",
+      "mime_type": "image/png",
+      "sha256": "83dbfc345c3e2207e2964cf09428d3985541e17b3c13eabfd28847657d7493f5",
+      "description": "Rendered exact-CUHK production page for NEGATIVE_RESULT using source evidence CARDIAC-EV-SAX, CARDIAC-EV-LIMIT."
+    },
+    {
+      "logical_id": "slide_6_next_experiment",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-6.png",
+      "mime_type": "image/png",
+      "sha256": "eab2ed9042419037a480dd6998e2bccff3bb57a3acfad5cd6a92110560529992",
+      "description": "Rendered exact-CUHK production page for NEXT_EXPERIMENT using source evidence CARDIAC-EV-LIMIT, CARDIAC-EV-MEASURE."
+    },
+    {
+      "logical_id": "slide_7_medical_image_comparison",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-7.png",
+      "mime_type": "image/png",
+      "sha256": "4f9f63b2f18e0d951d111d2a30d9342cba9447336fe1ba7f0bf5853d995f32ac",
+      "description": "Rendered exact-CUHK production page for MEDICAL_IMAGE_COMPARISON using source evidence CARDIAC-EV-A2C, CARDIAC-EV-A4C, CARDIAC-EV-SAX."
+    },
+    {
+      "logical_id": "deck_contact_sheet",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/deck_contact_sheet.png",
+      "mime_type": "image/png",
+      "sha256": "1792084d006f5a718c2f96197ec538ebf16cfb531d00edd9ba542b23171cfec7",
+      "description": "Deck-level contact sheet preserving the rendered slide sequence for rhythm, density, transition, and template-repeat review.",
+      "review_role": "deck_sequence_context"
+    }
+  ]
+}

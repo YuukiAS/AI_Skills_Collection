@@ -1,0 +1,116 @@
+{
+  "schema": "RESEARCH_PRESENTATION_STAGE5_FOUR_PAPER_PRODUCTION_INVOCATIONS_V1",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "production_freeze_locator": "d3379b5168bc27b114b362f186f8c239a88a669c",
+  "source_bundle_freeze": {
+    "schema": "RESEARCH_PRESENTATION_STAGE5_FOUR_BUNDLE_FREEZE_MANIFEST_V1",
+    "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+    "freeze_date": "2026-08-29",
+    "production_freeze_locator": "d3379b5168bc27b114b362f186f8c239a88a669c",
+    "all_four_bundles_frozen_before_first_render": true,
+    "bundle_hashes": {
+      "statistics_tmb": {
+        "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/source_bundle.json",
+        "sha256": "7da33f5f7cd497a1e7a6d65f5b2701e56c68be6781d34dede3143adae4261c0e",
+        "source_inventory": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/source_inventory.json"
+      },
+      "biostatistics_deseq2": {
+        "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source_bundle.json",
+        "sha256": "52f58af783041ca3b4316141818db9bd781b1d63c7d2e16fa99b8493d798a962",
+        "source_inventory": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source_inventory.json"
+      },
+      "medical_cardiac_ultrasound": {
+        "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source_bundle.json",
+        "sha256": "4e62035d6aa495832ad7b3b8235e71ed3ffaf29e0338c0e556985112210f2243",
+        "source_inventory": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source_inventory.json"
+      },
+      "medical_retfound": {
+        "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/source_bundle.json",
+        "sha256": "6e54dd6f960c8188b20dfcc7ab1988e988d69b85015f2cad049d35c935f55147",
+        "source_inventory": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/source_inventory.json"
+      }
+    },
+    "render_started_before_freeze": false,
+    "post_freeze_source_mutation_allowed": false,
+    "decision": "FROZEN_READY_FOR_NORMAL_PRODUCTION_INVOCATION"
+  },
+  "batch_outcome": "FAIL_TWO_DECKS_FAILED_PRE_RENDER_SELECTOR_COMPATIBILITY",
+  "attempts": [
+    {
+      "deck": "statistics_tmb",
+      "paper": "TMB: Automatic Differentiation and Laplace Approximation",
+      "doi": "10.18637/jss.v070.i05",
+      "attempt": "initial_frozen_bundle",
+      "command": "python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/source_bundle.json --out-dir results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/generated --task-key 041_research_presentation_frozen_four_paper_generalization_batch",
+      "status": "FAILED_PRE_RENDER_SELECTOR_COMPATIBILITY",
+      "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/source_bundle.json",
+      "source_bundle_sha256": "7da33f5f7cd497a1e7a6d65f5b2701e56c68be6781d34dede3143adae4261c0e",
+      "exit_code": 1,
+      "render_status": "not_started_pre_render_failure",
+      "failure_log": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/production_attempt_failure.log",
+      "failure_reason": "normal selector raised ValueError: no compatible gold composition record",
+      "slide_or_render_inspected_before_failure": false
+    },
+    {
+      "deck": "biostatistics_deseq2",
+      "paper": "Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2",
+      "doi": "10.1186/s13059-014-0550-8",
+      "attempt": "initial_frozen_bundle",
+      "command": "python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source_bundle.json --out-dir results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated --task-key 041_research_presentation_frozen_four_paper_generalization_batch",
+      "status": "MECHANICAL_PASS",
+      "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source_bundle.json",
+      "source_bundle_sha256": "52f58af783041ca3b4316141818db9bd781b1d63c7d2e16fa99b8493d798a962",
+      "exit_code": 0,
+      "render_status": "ok",
+      "build_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/BUILD_MANIFEST.json",
+      "pdf": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.pdf",
+      "pdf_sha256": "2c6ef28f147e37f2a33988e603c364fea747920b281f8a7cc847234ce4753fdc",
+      "render_input_identity": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e",
+      "rendered_pixel_identity": "5b8b8596996f9589e09f64a495b9f0b98fbffb2be5ec8f4bc582a9628ff77bd9",
+      "deck_contact_sheet": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_contact_sheet.png",
+      "deck_contact_sheet_sha256": "13a925ca7d505dd9621be69270a7d0580600acf5ba83dc2a97b7dbc2e97078ab",
+      "quality_loop_status": "WAITING_FOR_DECK_VISUAL_REVIEW",
+      "repair_cycle_count": 0
+    },
+    {
+      "deck": "medical_cardiac_ultrasound",
+      "paper": "Self-supervised learning for label-free segmentation in cardiac ultrasound",
+      "doi": "10.1038/s41467-025-59451-5",
+      "attempt": "initial_frozen_bundle",
+      "command": "python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source_bundle.json --out-dir results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated --task-key 041_research_presentation_frozen_four_paper_generalization_batch",
+      "status": "MECHANICAL_PASS",
+      "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source_bundle.json",
+      "source_bundle_sha256": "4e62035d6aa495832ad7b3b8235e71ed3ffaf29e0338c0e556985112210f2243",
+      "exit_code": 0,
+      "render_status": "ok",
+      "build_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/BUILD_MANIFEST.json",
+      "pdf": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/main.pdf",
+      "pdf_sha256": "1cc323f1e667a96bce5431a3754f69706b742e8669d86f7db50ae5bdc1797d86",
+      "render_input_identity": "427322503d37fbb586c5d3332b231448f55df502f9734d76ccb3af52dd37794d",
+      "rendered_pixel_identity": "5d482b290887882819458dfbd09e5d5ba9351625259dbec59f3de61a2b4a4fc6",
+      "deck_contact_sheet": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/deck_contact_sheet.png",
+      "deck_contact_sheet_sha256": "1792084d006f5a718c2f96197ec538ebf16cfb531d00edd9ba542b23171cfec7",
+      "quality_loop_status": "WAITING_FOR_DECK_VISUAL_REVIEW",
+      "repair_cycle_count": 0
+    },
+    {
+      "deck": "medical_retfound",
+      "paper": "A foundation model for generalizable disease detection from retinal images",
+      "doi": "10.1038/s41586-023-06555-x",
+      "attempt": "initial_frozen_bundle",
+      "command": "python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/source_bundle.json --out-dir results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/generated --task-key 041_research_presentation_frozen_four_paper_generalization_batch",
+      "status": "FAILED_PRE_RENDER_SELECTOR_COMPATIBILITY",
+      "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/source_bundle.json",
+      "source_bundle_sha256": "6e54dd6f960c8188b20dfcc7ab1988e988d69b85015f2cad049d35c935f55147",
+      "exit_code": 1,
+      "render_status": "not_started_pre_render_failure",
+      "failure_log": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/production_attempt_failure.log",
+      "failure_reason": "normal selector raised ValueError: no compatible gold composition record",
+      "slide_or_render_inspected_before_failure": false
+    }
+  ],
+  "post_render_source_bundle_rewrite": false,
+  "production_code_modified": false,
+  "manual_tex_patch": false,
+  "quality_loop_repair_invoked": false
+}

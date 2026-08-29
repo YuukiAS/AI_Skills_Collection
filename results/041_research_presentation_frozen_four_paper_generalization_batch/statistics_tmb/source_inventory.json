@@ -1,0 +1,36 @@
+{
+  "schema": "RESEARCH_PRESENTATION_SOURCE_INVENTORY_V1",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "paper_key": "statistics_tmb",
+  "inventory_date": "2026-08-29",
+  "published_source": "https://www.jstatsoft.org/article/view/v070i05",
+  "doi": "10.18637/jss.v070.i05",
+  "license": "Journal of Statistical Software Creative Commons Attribution license",
+  "article_pdf": {
+    "local_cache_untracked": "/tmp/rh041_sources/tmb_v070i05.pdf",
+    "sha256": "956c23742c544fa839525e3108cfbbc28936ff711c5f9f1018aef73e79aee85e",
+    "pages": 21
+  },
+  "section_inventory": [
+    "identity",
+    "scientific problem",
+    "model or pipeline",
+    "primary evidence",
+    "limitations and interpretation"
+  ],
+  "figure_table_inventory": [],
+  "selected_assets": [
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/assets/tmb_fig3_package_design_page.png",
+      "sha256": "a1dc787c2a9d4df7b31ea4ecf48770c2a3e712b0479c357474a2180c81ce3bde",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    },
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/assets/tmb_table4_speed_page.png",
+      "sha256": "ff6eca36362529782b1ac987cd4a762153b3cf09215c7f9d04afcb300f444c85",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    }
+  ]
+}

@@ -1,0 +1,540 @@
+{
+  "schema": "RESEARCH_PRESENTATION_DECK_SEQUENCE_SUMMARY_V1",
+  "page_count": 6,
+  "render_input_identity_sha256": "427322503d37fbb586c5d3332b231448f55df502f9734d76ccb3af52dd37794d",
+  "render_input_manifest": {
+    "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+    "build_workspace": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build",
+    "files": [
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/assets/background.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/assets/background_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/assets/logo_RGB.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/bibliography.bib",
+        "role": "canonical_cuhk_support",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/main.tex",
+        "role": "main_tex",
+        "sha256": "bcac2c28c5b0d309b5cd111da745e0c52611d3d3696bb9193dcc13d86f640c25"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/scientific_layouts.tex",
+        "role": "scientific_layout_include",
+        "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig1_pipeline_page.png",
+        "role": "copied_scientific_asset",
+        "sha256": "1fc49e4f00200602f270d01eae47f403effd390128404e038e1d6cf9f28d4e13"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig2_a2c_page.png",
+        "role": "copied_scientific_asset",
+        "sha256": "d4676c5f749996088fb2149b6d76a6f68549bc9127c7ab8edca43b2871f6aaba"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig2_a2c_page_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "e071cbc8e6fb0d40c1c97f64469243ac35091ebc933222805b2ba437da352e74"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig3_a4c_page.png",
+        "role": "copied_scientific_asset",
+        "sha256": "0d5997220e2417cbdf782fc5ebca9c239cc664a13299286693fa92c1dcb915e6"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig3_a4c_page_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "0471c8971fdd4c4cc04bc9a6b5bf42965bd5ab24641ae731988d7bcf2cf41043"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig4_sax_page.png",
+        "role": "copied_scientific_asset",
+        "sha256": "074651ba864151e7e55b41543ff7ff7089198cd50fbe1cea20c1ce3112114038"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig4_sax_page_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "720e300d21b7efa3b6c76517cf856a5b7d56de292ff42b5a84be1226537e9008"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/stage3_assets/cardiac_fig6_measurement_page.png",
+        "role": "copied_scientific_asset",
+        "sha256": "584d3b3625b78961ba7381bc006dd89f94f242fbdf8f34ed1b938af469d099a2"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/styles/sintefcolor.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+      }
+    ],
+    "sha256": "427322503d37fbb586c5d3332b231448f55df502f9734d76ccb3af52dd37794d"
+  },
+  "pixel_evidence_status": {
+    "status": "AVAILABLE",
+    "render_status": "ok",
+    "rendered_png_count": 7,
+    "rendered_page_sha256_nullable": false,
+    "contact_sheet_sha256_nullable": false
+  },
+  "rendered_pixel_identity_sha256": "5d482b290887882819458dfbd09e5d5ba9351625259dbec59f3de61a2b4a4fc6",
+  "page_order": [
+    "slide_2_statistical_model",
+    "slide_3_real_data_application",
+    "slide_4_experiment_design",
+    "slide_5_negative_result",
+    "slide_6_next_experiment",
+    "slide_7_medical_image_comparison"
+  ],
+  "title_sequence": [
+    "The model object is a weak-label SSL segmentation pipeline",
+    "Segmentations become clinical chamber measurements",
+    "A2C bootstraps the later chamber pipeline",
+    "Noisy echo and missing labels define the failure boundary",
+    "The claim is scalable measurement, not label magic",
+    "A2C, A4C, and SAX must not be conflated"
+  ],
+  "section_sequence": [
+    "cardiac ultrasound paper",
+    "cardiac ultrasound paper",
+    "cardiac ultrasound paper",
+    "cardiac ultrasound paper",
+    "cardiac ultrasound paper",
+    "cardiac ultrasound paper"
+  ],
+  "workstream_sequence": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "workstream_id": "cardiac_ultrasound_paper",
+      "workstream_label": "cardiac ultrasound paper",
+      "workstream_order": 1
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "workstream_id": "cardiac_ultrasound_paper",
+      "workstream_label": "cardiac ultrasound paper",
+      "workstream_order": 1
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "workstream_id": "cardiac_ultrasound_paper",
+      "workstream_label": "cardiac ultrasound paper",
+      "workstream_order": 1
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "workstream_id": "cardiac_ultrasound_paper",
+      "workstream_label": "cardiac ultrasound paper",
+      "workstream_order": 1
+    },
+    {
+      "logical_id": "slide_6_next_experiment",
+      "workstream_id": "cardiac_ultrasound_paper",
+      "workstream_label": "cardiac ultrasound paper",
+      "workstream_order": 1
+    },
+    {
+      "logical_id": "slide_7_medical_image_comparison",
+      "workstream_id": "cardiac_ultrasound_paper",
+      "workstream_label": "cardiac ultrasound paper",
+      "workstream_order": 1
+    }
+  ],
+  "storyline_order": [
+    "STATISTICAL_MODEL",
+    "REAL_DATA_APPLICATION",
+    "EXPERIMENT_DESIGN",
+    "NEGATIVE_RESULT",
+    "NEXT_EXPERIMENT",
+    "MEDICAL_IMAGE_COMPARISON"
+  ],
+  "pages": [
+    {
+      "sequence_index": 1,
+      "rendered_slide_number": 2,
+      "logical_id": "slide_2_statistical_model",
+      "page_id": "cardiac_pipeline_model",
+      "page_job": "STATISTICAL_MODEL",
+      "title": "The model object is a weak-label SSL segmentation pipeline",
+      "section": "cardiac ultrasound paper",
+      "workstream_id": "cardiac_ultrasound_paper",
+      "workstream_label": "cardiac ultrasound paper",
+      "workstream_order": 1,
+      "source_evidence_ids": [
+        "CARDIAC-EV-PIPE"
+      ],
+      "selected_gold_id": "GSC-016",
+      "selected_reference_id": "RRL-020",
+      "primary_scientific_object_type": "cardiac_ultrasound_paper_figure",
+      "scientific_objects": [
+        "weak labels",
+        "HED",
+        "UNet",
+        "clinical spatial constraints"
+      ],
+      "source_grounded_copy_candidates": {
+        "key_message": "Traditional vision, clinical constraints, HED, UNet, QC, and self-learning turn unlabeled echo videos into chamber masks.",
+        "annotation": "The source pipeline is manual-label-free for training: human segmentations in later figures are visual aids or evaluation references.",
+        "caption": "Figure 1 page, Ferreira et al. 2025, CC BY."
+      },
+      "forbidden_audience_terms": [
+        "RRL-",
+        "SRC-",
+        "GSC-",
+        "Reference retrieval",
+        "EVIDENCE_MANIFEST",
+        "Diagram contract",
+        "QA",
+        "repo path",
+        "run ID",
+        "implementation commit",
+        "implementation language",
+        "source bundle",
+        "provenance",
+        "review target",
+        "fixture",
+        "workflow"
+      ],
+      "visual_density": {
+        "declared_density": "moderate",
+        "machine_density": "moderate",
+        "primary_area": 0.0,
+        "native_object_count": 5,
+        "capacity_status": "FIT"
+      },
+      "rendered_page_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-2.png",
+      "rendered_page_sha256": "90c4cf1797f5889d0dbbb350c3083d07bc4c6f3e8b6ad2787719197e5b8cf591",
+      "rendered_pixel_status": "AVAILABLE",
+      "transition_cue": null
+    },
+    {
+      "sequence_index": 2,
+      "rendered_slide_number": 3,
+      "logical_id": "slide_3_real_data_application",
+      "page_id": "cardiac_measurement_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "title": "Segmentations become clinical chamber measurements",
+      "section": "cardiac ultrasound paper",
+      "workstream_id": "cardiac_ultrasound_paper",
+      "workstream_label": "cardiac ultrasound paper",
+      "workstream_order": 1,
+      "source_evidence_ids": [
+        "CARDIAC-EV-MEASURE"
+      ],
+      "selected_gold_id": "GSC-015",
+      "selected_reference_id": "RRL-017",
+      "primary_scientific_object_type": "cardiac_ultrasound_paper_figure",
+      "scientific_objects": [
+        "r2",
+        "Bland-Altman",
+        "LVEF",
+        "CMR comparison"
+      ],
+      "source_grounded_copy_candidates": {
+        "key_message": "The paper compares SSL-derived volumes, areas, mass, and LVEF against clinical echocardiogram measurements and CMR where available.",
+        "annotation": "The result is not only mask appearance: the paper evaluates whether derived measurements agree with clinical echo and CMR benchmarks.",
+        "caption": "Figure 6 page, Ferreira et al. 2025."
+      },
+      "forbidden_audience_terms": [
+        "RRL-",
+        "SRC-",
+        "GSC-",
+        "Reference retrieval",
+        "EVIDENCE_MANIFEST",
+        "Diagram contract",
+        "QA",
+        "repo path",
+        "run ID",
+        "implementation commit",
+        "implementation language",
+        "source bundle",
+        "provenance",
+        "review target",
+        "fixture",
+        "workflow"
+      ],
+      "visual_density": {
+        "declared_density": "moderate",
+        "machine_density": "low",
+        "primary_area": 0.0,
+        "native_object_count": 3,
+        "capacity_status": "FIT"
+      },
+      "rendered_page_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-3.png",
+      "rendered_page_sha256": "858f7786a1dec46e0776aaadb4feeed807804043b85254754dba4acbc81973a5",
+      "rendered_pixel_status": "AVAILABLE",
+      "transition_cue": null
+    },
+    {
+      "sequence_index": 3,
+      "rendered_slide_number": 4,
+      "logical_id": "slide_4_experiment_design",
+      "page_id": "cardiac_a2c_design",
+      "page_job": "EXPERIMENT_DESIGN",
+      "title": "A2C bootstraps the later chamber pipeline",
+      "section": "cardiac ultrasound paper",
+      "workstream_id": "cardiac_ultrasound_paper",
+      "workstream_label": "cardiac ultrasound paper",
+      "workstream_order": 1,
+      "source_evidence_ids": [
+        "CARDIAC-EV-A2C"
+      ],
+      "selected_gold_id": "GSC-004",
+      "selected_reference_id": "RRL-019",
+      "primary_scientific_object_type": "cardiac_ultrasound_paper_figure",
+      "scientific_objects": [
+        "A2C",
+        "LV",
+        "LA",
+        "weak label",
+        "final prediction"
+      ],
+      "source_grounded_copy_candidates": {
+        "key_message": "The A2C branch creates initial weak labels, trains the first segmentation model, and supplies inference used by later A4C processing.",
+        "annotation": "The A2C examples preserve chamber labels and the progression from weak labels to final predictions on real ultrasound frames.",
+        "caption": "Figure 2 page, Ferreira et al. 2025."
+      },
+      "forbidden_audience_terms": [
+        "RRL-",
+        "SRC-",
+        "GSC-",
+        "Reference retrieval",
+        "EVIDENCE_MANIFEST",
+        "Diagram contract",
+        "QA",
+        "repo path",
+        "run ID",
+        "implementation commit",
+        "implementation language",
+        "source bundle",
+        "provenance",
+        "review target",
+        "fixture",
+        "workflow"
+      ],
+      "visual_density": {
+        "declared_density": "moderate",
+        "machine_density": "low",
+        "primary_area": 0.0,
+        "native_object_count": 3,
+        "capacity_status": "FIT"
+      },
+      "rendered_page_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-4.png",
+      "rendered_page_sha256": "8d5acccee844626083d2b427ebfd5ed103c94034f0d0fd6debce17c87c44f7ca",
+      "rendered_pixel_status": "AVAILABLE",
+      "transition_cue": null
+    },
+    {
+      "sequence_index": 4,
+      "rendered_slide_number": 5,
+      "logical_id": "slide_5_negative_result",
+      "page_id": "cardiac_failure_boundaries",
+      "page_job": "NEGATIVE_RESULT",
+      "title": "Noisy echo and missing labels define the failure boundary",
+      "section": "cardiac ultrasound paper",
+      "workstream_id": "cardiac_ultrasound_paper",
+      "workstream_label": "cardiac ultrasound paper",
+      "workstream_order": 1,
+      "source_evidence_ids": [
+        "CARDIAC-EV-SAX",
+        "CARDIAC-EV-LIMIT"
+      ],
+      "selected_gold_id": "GSC-012",
+      "selected_reference_id": "RRL-011",
+      "primary_scientific_object_type": "cardiac_ultrasound_paper_figure",
+      "scientific_objects": [
+        "dropout",
+        "off-axis SAX",
+        "frame selection",
+        "missing chamber labels"
+      ],
+      "source_grounded_copy_candidates": {
+        "key_message": "The authors call out dropout, off-axis views, frame selection, incomplete labels, and the need for further primary-care validation.",
+        "annotation": "The SAX page includes a technically difficult image and the discussion keeps frame selection and incomplete external labels as limits.",
+        "caption": "Figure 4 page plus discussion limits."
+      },
+      "forbidden_audience_terms": [
+        "RRL-",
+        "SRC-",
+        "GSC-",
+        "Reference retrieval",
+        "EVIDENCE_MANIFEST",
+        "Diagram contract",
+        "QA",
+        "repo path",
+        "run ID",
+        "implementation commit",
+        "implementation language",
+        "source bundle",
+        "provenance",
+        "review target",
+        "fixture",
+        "workflow"
+      ],
+      "visual_density": {
+        "declared_density": "high",
+        "machine_density": "low",
+        "primary_area": 0.0,
+        "native_object_count": 3,
+        "capacity_status": "FIT"
+      },
+      "rendered_page_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-5.png",
+      "rendered_page_sha256": "83dbfc345c3e2207e2964cf09428d3985541e17b3c13eabfd28847657d7493f5",
+      "rendered_pixel_status": "AVAILABLE",
+      "transition_cue": null
+    },
+    {
+      "sequence_index": 5,
+      "rendered_slide_number": 6,
+      "logical_id": "slide_6_next_experiment",
+      "page_id": "cardiac_takeaway",
+      "page_job": "NEXT_EXPERIMENT",
+      "title": "The claim is scalable measurement, not label magic",
+      "section": "cardiac ultrasound paper",
+      "workstream_id": "cardiac_ultrasound_paper",
+      "workstream_label": "cardiac ultrasound paper",
+      "workstream_order": 1,
+      "source_evidence_ids": [
+        "CARDIAC-EV-LIMIT",
+        "CARDIAC-EV-MEASURE"
+      ],
+      "selected_gold_id": "GSC-018",
+      "selected_reference_id": "RRL-059",
+      "primary_scientific_object_type": "cardiac_ultrasound_paper_next_experiment",
+      "scientific_objects": [
+        "manual-label-free training",
+        "clinical measurement",
+        "external validation",
+        "view anatomy"
+      ],
+      "source_grounded_copy_candidates": {
+        "key_message": "Self-supervision reduces manual labeling burden, but clinical validity depends on view-specific anatomy, QC, external testing, and measurement agreement.",
+        "annotation": "The paper-specific conclusion is that label-free training can scale segmentation, while validation remains clinical and anatomy-specific.",
+        "caption": "Synthesis from discussion and Methods."
+      },
+      "forbidden_audience_terms": [
+        "RRL-",
+        "SRC-",
+        "GSC-",
+        "Reference retrieval",
+        "EVIDENCE_MANIFEST",
+        "Diagram contract",
+        "QA",
+        "repo path",
+        "run ID",
+        "implementation commit",
+        "implementation language",
+        "source bundle",
+        "provenance",
+        "review target",
+        "fixture",
+        "workflow"
+      ],
+      "visual_density": {
+        "declared_density": "moderate",
+        "machine_density": "low",
+        "primary_area": 0.0,
+        "native_object_count": 3,
+        "capacity_status": "FIT"
+      },
+      "rendered_page_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-6.png",
+      "rendered_page_sha256": "eab2ed9042419037a480dd6998e2bccff3bb57a3acfad5cd6a92110560529992",
+      "rendered_pixel_status": "AVAILABLE",
+      "transition_cue": null
+    },
+    {
+      "sequence_index": 6,
+      "rendered_slide_number": 7,
+      "logical_id": "slide_7_medical_image_comparison",
+      "page_id": "cardiac_same_case_views",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "title": "A2C, A4C, and SAX must not be conflated",
+      "section": "cardiac ultrasound paper",
+      "workstream_id": "cardiac_ultrasound_paper",
+      "workstream_label": "cardiac ultrasound paper",
+      "workstream_order": 1,
+      "source_evidence_ids": [
+        "CARDIAC-EV-A2C",
+        "CARDIAC-EV-A4C",
+        "CARDIAC-EV-SAX"
+      ],
+      "selected_gold_id": "GSC-008",
+      "selected_reference_id": "RRL-013",
+      "primary_scientific_object_type": "cardiac_ultrasound_paper_image_panel",
+      "scientific_objects": [
+        "A2C",
+        "A4C",
+        "SAX",
+        "LV",
+        "LA",
+        "RV",
+        "RA"
+      ],
+      "source_grounded_copy_candidates": {
+        "key_message": "The deck inspects real echo view semantics: A2C focuses LV/LA, A4C adds right-heart chambers, and SAX changes the anatomy and weak-label strategy.",
+        "annotation": "All panels are source article pixels; the semantic risk is mixing view labels or treating clinical measurements as single-frame manual labels.",
+        "caption": "Figures 2-4 and 6, Ferreira et al. 2025."
+      },
+      "forbidden_audience_terms": [
+        "RRL-",
+        "SRC-",
+        "GSC-",
+        "Reference retrieval",
+        "EVIDENCE_MANIFEST",
+        "Diagram contract",
+        "QA",
+        "repo path",
+        "run ID",
+        "implementation commit",
+        "implementation language",
+        "source bundle",
+        "provenance",
+        "review target",
+        "fixture",
+        "workflow"
+      ],
+      "visual_density": {
+        "declared_density": "high",
+        "machine_density": "moderate",
+        "primary_area": 0.0,
+        "native_object_count": 4,
+        "capacity_status": "FIT"
+      },
+      "rendered_page_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/rendered/slide-7.png",
+      "rendered_page_sha256": "4f9f63b2f18e0d951d111d2a30d9342cba9447336fe1ba7f0bf5853d995f32ac",
+      "rendered_pixel_status": "AVAILABLE",
+      "transition_cue": null
+    }
+  ],
+  "deck_contact_sheet": {
+    "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/deck_contact_sheet.png",
+    "sha256": "1792084d006f5a718c2f96197ec538ebf16cfb531d00edd9ba542b23171cfec7",
+    "serves_audience": false,
+    "review_role": "deck_sequence_context"
+  },
+  "deck_identity_sha256": "d259fd1d6e785355c53dbbcb12c3143722b0d39331752108ae567fc3c066ae20"
+}

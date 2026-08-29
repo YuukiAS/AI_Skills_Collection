@@ -1,0 +1,429 @@
+{
+  "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUNDLE_V1",
+  "stage5_holdout_eligible": false,
+  "holdout_exclusion_reason": "041 real-paper holdout input; production entrypoint requires this legacy exclusion flag while task-local eligibility is recorded in batch_eligibility.json.",
+  "metadata": {
+    "title": "TMB Automatic Differentiation and Laplace Approximation",
+    "subtitle": "A paper talk on random effects, AD, and Laplace approximation",
+    "author": "Research Presentation Program",
+    "institute": "Department of Statistics & Data Science",
+    "date": "2026-08-29",
+    "audience": "doctoral research group",
+    "language": "en"
+  },
+  "source_material": {
+    "primary_markdown": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/source/source.md",
+    "evidence_assets": [
+      "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/assets/tmb_fig3_package_design_page.png",
+      "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/assets/tmb_table4_speed_page.png"
+    ]
+  },
+  "research_state": {
+    "previous_question": "Can the frozen normal research-presentations route make a complete paper talk for this real unseen paper?",
+    "prior_belief": "Stage 4/039 production behavior is frozen, but this paper was not used to tune it.",
+    "new_evidence": "The bundle records complete paper-derived anchors, selected real article figures or tables, and limits from the published article.",
+    "evidence_quality": "Journal of Statistical Software Creative Commons Attribution license",
+    "belief_update": "The deck must be judged as this paper-specific doctoral group-meeting talk.",
+    "successes": "The article provides native scientific objects, quantitative evidence, and explicit interpretation limits.",
+    "failures": "Any unreadable figure, generic page, or unsupported repair means this deck fails the batch.",
+    "largest_uncertainty": "Whether the frozen generic layouts preserve this paper at mature presentation quality.",
+    "frozen_items": "Use the pre-render frozen source files and normal production entrypoint only.",
+    "stop_items": "Do not change source selection, generated TeX, production code, gold, layout, prompt, or validator after render inspection.",
+    "next_discriminating_experiment": "Generate exact-CUHK pages and submit the final pixel identity to task-local visual review.",
+    "decision_needed": "Reviewer and Planner must decide after CI and external Terra evidence."
+  },
+  "evidence": [
+    {
+      "id": "TMB-EV-LAPLACE",
+      "board": "equations",
+      "type": "source_markdown",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/source/source.md",
+      "source_anchor": "## Laplace approximation",
+      "supports": "The paper defines the random-effects objective and Laplace approximation for the marginal likelihood.",
+      "consumed_as": "native LaTeX equation",
+      "status": "available"
+    },
+    {
+      "id": "TMB-EV-AD",
+      "board": "model_diagrams",
+      "type": "source_markdown",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/source/source.md",
+      "source_anchor": "## Automatic differentiation mechanism",
+      "supports": "CppAD tapes and repeated automatic differentiation drive objective gradients and uncertainty calculations.",
+      "consumed_as": "mechanism diagram",
+      "status": "available"
+    },
+    {
+      "id": "TMB-EV-WORKFLOW",
+      "board": "model_diagrams",
+      "type": "png",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/assets/tmb_fig3_package_design_page.png",
+      "source_anchor": "PDF page 7, Figure 3",
+      "supports": "The package design connects R control, user templates, CppAD tapes, sparse matrices, and optimizers.",
+      "consumed_as": "paper figure page",
+      "status": "available"
+    },
+    {
+      "id": "TMB-EV-PERFORMANCE",
+      "board": "quantitative_plots",
+      "type": "png",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/assets/tmb_table4_speed_page.png",
+      "source_anchor": "PDF page 16, Tables 2-4",
+      "supports": "Case studies compare TMB and ADMB estimates, timings, and speedups.",
+      "consumed_as": "paper table page",
+      "status": "available"
+    },
+    {
+      "id": "TMB-EV-LIMIT",
+      "board": "failed_experiments",
+      "type": "source_markdown",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/source/source.md",
+      "source_anchor": "## Limitations and interpretation",
+      "supports": "The tool is general when the user supplies a defensible joint likelihood and Laplace approximation is appropriate.",
+      "consumed_as": "limitation note",
+      "status": "available"
+    }
+  ],
+  "page_jobs": [
+    {
+      "page_id": "tmb_laplace_objective",
+      "page_job": "STATISTICAL_MODEL",
+      "section": "Laplace objective is the",
+      "workstream": {
+        "id": "tmb_paper",
+        "label": "TMB paper",
+        "scope": "Laplace approximation, automatic differentiation, random effects, R/C++ workflow, and performance comparison"
+      },
+      "title": "Laplace objective is the paper center",
+      "key_message": "TMB integrates random effects by optimizing a Laplace approximation to the marginal likelihood.",
+      "slide_purpose": "explain model object",
+      "visual_intent": "equation plus interpretation",
+      "source_anchors": [
+        "source.md:## Laplace approximation"
+      ],
+      "required_evidence": [
+        "TMB-EV-LAPLACE"
+      ],
+      "source_evidence_ids": [
+        "TMB-EV-LAPLACE"
+      ],
+      "scientific_objects": [
+        "negative joint log-likelihood",
+        "random effects",
+        "Laplace approximation"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "STATISTICAL_MODEL",
+        "scientific_object": "statistics random effects Laplace approximation marginal likelihood equation TMB",
+        "domain_family": "statistics",
+        "dominant_object_type": "equation",
+        "evidence_type": "mathematical model",
+        "density": "moderate",
+        "panel_count": 0
+      },
+      "content_kind": "equation",
+      "dominant_object": "tmb_paper_equation",
+      "required_panel_count": 0,
+      "math": "-\\log L^*(\\theta)=f(\\hat u(\\theta),\\theta)+\\frac12\\log\\det H(\\hat u,\\theta)-\\frac n2\\log(2\\pi)",
+      "annotation": "Random effects are integrated out, then theta is optimized with objective values and derivatives supplied by TMB.",
+      "caption": "Kristensen et al. 2016, Section 2."
+    },
+    {
+      "page_id": "tmb_ad_tapes",
+      "page_job": "EXPERIMENT_DESIGN",
+      "section": "Automatic differentiatio",
+      "workstream": {
+        "id": "tmb_paper",
+        "label": "TMB paper",
+        "scope": "Laplace approximation, automatic differentiation, random effects, R/C++ workflow, and performance comparison"
+      },
+      "title": "Automatic differentiation turns the template into reusable tapes",
+      "key_message": "CppAD records the user likelihood and TMB differentiates the recorded graph for optimization and uncertainty calculations.",
+      "slide_purpose": "explain mechanism",
+      "visual_intent": "typed mechanism map",
+      "source_anchors": [
+        "source.md:## Automatic differentiation mechanism"
+      ],
+      "required_evidence": [
+        "TMB-EV-AD"
+      ],
+      "source_evidence_ids": [
+        "TMB-EV-AD"
+      ],
+      "scientific_objects": [
+        "CppAD tape",
+        "reverse mode AD",
+        "gradient of Laplace objective"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "EXPERIMENT_DESIGN",
+        "scientific_object": "automatic differentiation computational graph CppAD tape gradient Hessian TMB",
+        "domain_family": "statistics",
+        "dominant_object_type": "diagram",
+        "evidence_type": "algorithm mechanism",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "content_kind": "flow",
+      "dominant_object": "tmb_paper_flow",
+      "required_panel_count": 1,
+      "nodes": [
+        "User C++ objective",
+        "CppAD tape",
+        "Laplace objective",
+        "Optimizer gradient"
+      ],
+      "annotation": "The paper emphasizes that differentiating the algorithm avoids hand-coded derivatives while keeping higher-order derivative access.",
+      "caption": "Synthesis from Sections 3-4."
+    },
+    {
+      "page_id": "tmb_package_design",
+      "page_job": "REAL_DATA_APPLICATION",
+      "section": "R control and C++ templa",
+      "workstream": {
+        "id": "tmb_paper",
+        "label": "TMB paper",
+        "scope": "Laplace approximation, automatic differentiation, random effects, R/C++ workflow, and performance comparison"
+      },
+      "title": "R control and C++ templates meet at the objective function",
+      "key_message": "The package design routes R data and parameters into C++ templates, sparse derivatives, and nlminb optimization.",
+      "slide_purpose": "show workflow evidence",
+      "visual_intent": "paper Figure 3 page",
+      "source_anchors": [
+        "source.md:## R and C++ workflow",
+        "PDF page 7 Figure 3"
+      ],
+      "required_evidence": [
+        "TMB-EV-WORKFLOW"
+      ],
+      "source_evidence_ids": [
+        "TMB-EV-WORKFLOW"
+      ],
+      "scientific_objects": [
+        "R module",
+        "user template",
+        "CppAD tapes",
+        "sparse Cholesky"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "REAL_DATA_APPLICATION",
+        "scientific_object": "software workflow figure TMB R C++ template sparse matrix optimizer",
+        "domain_family": "statistics",
+        "dominant_object_type": "diagram",
+        "evidence_type": "paper workflow figure",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "content_kind": "figure",
+      "dominant_object": "tmb_paper_figure",
+      "required_panel_count": 1,
+      "asset": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/assets/tmb_fig3_package_design_page.png",
+      "annotation": "Figure 3 is the source workflow: R controls the fit while the user template defines the likelihood evaluated by TMB.",
+      "caption": "Figure 3 page, Kristensen et al. 2016, CC BY."
+    },
+    {
+      "page_id": "tmb_speed_comparison",
+      "page_job": "NEGATIVE_RESULT",
+      "section": "The speed claim depends ",
+      "workstream": {
+        "id": "tmb_paper",
+        "label": "TMB paper",
+        "scope": "Laplace approximation, automatic differentiation, random effects, R/C++ workflow, and performance comparison"
+      },
+      "title": "The speed claim depends on random-effects structure",
+      "key_message": "The paper reports large speedups for many random-effects cases, but models without random effects are similar across tools.",
+      "slide_purpose": "show bounded evidence",
+      "visual_intent": "paper timing table page",
+      "source_anchors": [
+        "source.md:## Case studies and performance",
+        "PDF page 16 Tables 2-4"
+      ],
+      "required_evidence": [
+        "TMB-EV-PERFORMANCE"
+      ],
+      "source_evidence_ids": [
+        "TMB-EV-PERFORMANCE"
+      ],
+      "scientific_objects": [
+        "ADMB comparison",
+        "random-effects cases",
+        "timing speedup"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "NEGATIVE_RESULT",
+        "scientific_object": "statistics performance comparison timing table TMB ADMB random effects limits",
+        "domain_family": "statistics",
+        "dominant_object_type": "table",
+        "evidence_type": "performance comparison and limits",
+        "density": "high",
+        "panel_count": 1
+      },
+      "content_kind": "figure",
+      "dominant_object": "tmb_paper_figure",
+      "required_panel_count": 1,
+      "asset": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/assets/tmb_table4_speed_page.png",
+      "annotation": "The comparison is strongest for random-effects problems; the paper does not claim universal speedup for every model class.",
+      "caption": "Tables 2-4 page, Kristensen et al. 2016."
+    },
+    {
+      "page_id": "tmb_case_comparison_slot",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "section": "Case-study evidence is a",
+      "workstream": {
+        "id": "tmb_paper",
+        "label": "TMB paper",
+        "scope": "Laplace approximation, automatic differentiation, random effects, R/C++ workflow, and performance comparison"
+      },
+      "title": "Case-study evidence is a model-comparison object",
+      "key_message": "The paper compares estimate agreement and timing across case studies rather than presenting a generic benchmark slogan.",
+      "slide_purpose": "inspect comparison evidence",
+      "visual_intent": "paper table page reused as comparison source",
+      "source_anchors": [
+        "source.md:## Case studies and performance",
+        "PDF page 16 Tables 2-4"
+      ],
+      "required_evidence": [
+        "TMB-EV-PERFORMANCE"
+      ],
+      "source_evidence_ids": [
+        "TMB-EV-PERFORMANCE"
+      ],
+      "scientific_objects": [
+        "case studies",
+        "estimate agreement",
+        "speedup factor"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "MEDICAL_IMAGE_COMPARISON",
+        "scientific_object": "same-paper comparison table statistical model estimates timing speedup TMB ADMB",
+        "domain_family": "statistics",
+        "dominant_object_type": "table",
+        "evidence_type": "same-paper comparison evidence",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "content_kind": "figure",
+      "dominant_object": "tmb_paper_figure",
+      "required_panel_count": 1,
+      "asset": "results/041_research_presentation_frozen_four_paper_generalization_batch/statistics_tmb/assets/tmb_table4_speed_page.png",
+      "annotation": "This comparison slot stays within TMB: estimates, standard deviations, and timings are the source objects under discussion.",
+      "caption": "Case-study comparison page from the TMB article."
+    },
+    {
+      "page_id": "tmb_takeaway",
+      "page_job": "NEXT_EXPERIMENT",
+      "section": "Use TMB when the likelih",
+      "workstream": {
+        "id": "tmb_paper",
+        "label": "TMB paper",
+        "scope": "Laplace approximation, automatic differentiation, random effects, R/C++ workflow, and performance comparison"
+      },
+      "title": "Use TMB when the likelihood and approximation are defensible",
+      "key_message": "The take-home rule is not automatic modelling; it is fast, differentiable fitting after the analyst encodes a valid objective.",
+      "slide_purpose": "synthesize decision",
+      "visual_intent": "evidence-to-decision diagram",
+      "source_anchors": [
+        "source.md:## Limitations and interpretation"
+      ],
+      "required_evidence": [
+        "TMB-EV-LIMIT",
+        "TMB-EV-LAPLACE"
+      ],
+      "source_evidence_ids": [
+        "TMB-EV-LIMIT",
+        "TMB-EV-LAPLACE"
+      ],
+      "scientific_objects": [
+        "joint likelihood",
+        "Laplace appropriateness",
+        "sparse precision",
+        "optimizer diagnostics"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "NEXT_EXPERIMENT",
+        "scientific_object": "method discussion next experiment TMB likelihood approximation diagnostics sparse random effects",
+        "domain_family": "statistics",
+        "dominant_object_type": "diagram",
+        "evidence_type": "paper interpretation",
+        "density": "moderate",
+        "panel_count": 4
+      },
+      "content_kind": "next_experiment",
+      "dominant_object": "tmb_paper_next_experiment",
+      "required_panel_count": 4,
+      "current_limit": "A fast objective is not a guarantee that the encoded random-effects model is scientifically right.",
+      "strategy_variation": [
+        "audit likelihood terms",
+        "check approximation fit",
+        "inspect optimizer diagnostics"
+      ],
+      "comparator_setup": [
+        "random-effects model",
+        "no-random-effects baseline"
+      ],
+      "decision_criterion": "Use TMB for large latent-variable models when the source likelihood and Laplace assumptions are justified.",
+      "annotation": "The paper closes by positioning TMB as a general tool, not a substitute for modelling judgement.",
+      "caption": "Synthesis from discussion and conclusion."
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "RESEARCH_PRESENTATION_SOURCE_INVENTORY_V1",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "paper_key": "biostatistics_deseq2",
+  "inventory_date": "2026-08-29",
+  "published_source": "https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8",
+  "doi": "10.1186/s13059-014-0550-8",
+  "license": "Creative Commons Attribution 4.0 International",
+  "article_pdf": {
+    "local_cache_untracked": "/tmp/rh041_sources/deseq2_s13059-014-0550-8.pdf",
+    "sha256": "96af759d0ffad2df06af8860e7ea7ae1ce380ce6e22843ad2519b801bc1999bb",
+    "pages": 21
+  },
+  "section_inventory": [
+    "identity",
+    "scientific problem",
+    "model or pipeline",
+    "primary evidence",
+    "limitations and interpretation"
+  ],
+  "figure_table_inventory": [],
+  "selected_assets": [
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig1_dispersion_page.png",
+      "sha256": "b05922ce98ba09fb12801cde2e119ec1d424726ba4d840bd90a30f11cf5b1b3e",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    },
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig2_lfc_page.png",
+      "sha256": "444d3f65bef0338e7229d27a158e6d79da8d33fefb6a84bb291f1cd1ef80b48d",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    },
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig6_benchmark_page.png",
+      "sha256": "1ea2acf10758f75331523c5ee4ea4bd8c4dea4e867bc3f81c713c4b815840e29",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    }
+  ]
+}

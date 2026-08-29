@@ -1,0 +1,461 @@
+{
+  "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUNDLE_V1",
+  "stage5_holdout_eligible": false,
+  "holdout_exclusion_reason": "041 real-paper holdout input; production entrypoint requires this legacy exclusion flag while task-local eligibility is recorded in batch_eligibility.json.",
+  "metadata": {
+    "title": "RETFound retinal foundation model",
+    "subtitle": "A paper talk on CFP/OCT foundation-model generalization",
+    "author": "Research Presentation Program",
+    "institute": "Department of Statistics & Data Science",
+    "date": "2026-08-29",
+    "audience": "doctoral research group",
+    "language": "en"
+  },
+  "source_material": {
+    "primary_markdown": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/source/source.md",
+    "evidence_assets": [
+      "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig1_overview_page.png",
+      "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig2_diagnosis_page.png",
+      "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig3_systemic_page.png",
+      "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_extfig6_interpretation_page.png",
+      "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_extfig7_age_page.png"
+    ]
+  },
+  "research_state": {
+    "previous_question": "Can the frozen normal research-presentations route make a complete paper talk for this real unseen paper?",
+    "prior_belief": "Stage 4/039 production behavior is frozen, but this paper was not used to tune it.",
+    "new_evidence": "The bundle records complete paper-derived anchors, selected real article figures or tables, and limits from the published article.",
+    "evidence_quality": "Creative Commons Attribution 4.0 International; selected article/extended-data figure pixels used with article license statement and no selected third-party exclusion found",
+    "belief_update": "The deck must be judged as this paper-specific doctoral group-meeting talk.",
+    "successes": "The article provides native scientific objects, quantitative evidence, and explicit interpretation limits.",
+    "failures": "Any unreadable figure, generic page, or unsupported repair means this deck fails the batch.",
+    "largest_uncertainty": "Whether the frozen generic layouts preserve this paper at mature presentation quality.",
+    "frozen_items": "Use the pre-render frozen source files and normal production entrypoint only.",
+    "stop_items": "Do not change source selection, generated TeX, production code, gold, layout, prompt, or validator after render inspection.",
+    "next_discriminating_experiment": "Generate exact-CUHK pages and submit the final pixel identity to task-local visual review.",
+    "decision_needed": "Reviewer and Planner must decide after CI and external Terra evidence."
+  },
+  "evidence": [
+    {
+      "id": "RETFOUND-EV-OVERVIEW",
+      "board": "model_diagrams",
+      "type": "png",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig1_overview_page.png",
+      "source_anchor": "PDF page 3, Figure 1",
+      "supports": "RETFound pretrains on CFP/OCT and adapts to ocular and systemic disease tasks.",
+      "consumed_as": "paper overview page",
+      "status": "available"
+    },
+    {
+      "id": "RETFOUND-EV-DIAG",
+      "board": "quantitative_plots",
+      "type": "png",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig2_diagnosis_page.png",
+      "source_anchor": "PDF page 4, Figure 2",
+      "supports": "RETFound improves ocular disease diagnosis and prognosis across internal and external evaluations.",
+      "consumed_as": "paper diagnosis figure page",
+      "status": "available"
+    },
+    {
+      "id": "RETFOUND-EV-SYSTEMIC",
+      "board": "quantitative_plots",
+      "type": "png",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig3_systemic_page.png",
+      "source_anchor": "PDF page 10, Figure 3",
+      "supports": "Systemic disease prediction uses CFP/OCT and reports AUROC across internal and external cohorts.",
+      "consumed_as": "paper systemic figure page",
+      "status": "available"
+    },
+    {
+      "id": "RETFOUND-EV-INTERP",
+      "board": "medical_images",
+      "type": "png",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_extfig6_interpretation_page.png",
+      "source_anchor": "PDF page 24, Extended Data Figure 6",
+      "supports": "Reconstruction and RELPROP saliency show retinal anatomy and disease regions in CFP/OCT.",
+      "consumed_as": "real retinal image evidence",
+      "status": "available"
+    },
+    {
+      "id": "RETFOUND-EV-LIMIT",
+      "board": "failed_experiments",
+      "type": "source_markdown",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/source/source.md",
+      "source_anchor": "## Limitations and interpretation",
+      "supports": "External dataset/device shifts, UK-dominant cohorts, separate modalities, and missing covariates remain limits.",
+      "consumed_as": "limitation note",
+      "status": "available"
+    }
+  ],
+  "page_jobs": [
+    {
+      "page_id": "retfound_pretraining_model",
+      "page_job": "STATISTICAL_MODEL",
+      "section": "RETFound is a retinal ma",
+      "workstream": {
+        "id": "retfound_paper",
+        "label": "RETFound paper",
+        "scope": "CFP/OCT SSL pretraining, fine-tuning, diagnosis, systemic prediction, saliency, and generalization limits"
+      },
+      "title": "RETFound is a retinal masked-autoencoder foundation model",
+      "key_message": "Separate CFP and OCT models learn representations from 1.6 million unlabelled retinal images before fine-tuning.",
+      "slide_purpose": "explain model object",
+      "visual_intent": "overview figure page",
+      "source_anchors": [
+        "source.md:## Pretraining and modalities",
+        "PDF page 3 Figure 1"
+      ],
+      "required_evidence": [
+        "RETFOUND-EV-OVERVIEW"
+      ],
+      "source_evidence_ids": [
+        "RETFOUND-EV-OVERVIEW"
+      ],
+      "scientific_objects": [
+        "masked autoencoder",
+        "CFP",
+        "OCT",
+        "SSL pretraining"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "STATISTICAL_MODEL",
+        "scientific_object": "retinal foundation model masked autoencoder CFP OCT self-supervised pretraining RETFound",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "diagram",
+        "evidence_type": "foundation model architecture",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "content_kind": "figure",
+      "dominant_object": "retfound_paper_figure",
+      "required_panel_count": 1,
+      "asset": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig1_overview_page.png",
+      "annotation": "Figure 1 distinguishes SSL pretraining on retinal images from supervised fine-tuning for clinical tasks.",
+      "caption": "Figure 1 page, Zhou et al. 2023, CC BY."
+    },
+    {
+      "page_id": "retfound_finetuning_design",
+      "page_job": "EXPERIMENT_DESIGN",
+      "section": "Fine-tuning tests label-",
+      "workstream": {
+        "id": "retfound_paper",
+        "label": "RETFound paper",
+        "scope": "CFP/OCT SSL pretraining, fine-tuning, diagnosis, systemic prediction, saliency, and generalization limits"
+      },
+      "title": "Fine-tuning tests label-efficient transfer across retinal tasks",
+      "key_message": "The paper adapts RETFound to ocular diagnosis, prognosis, and oculomic systemic-disease prediction rather than one narrow endpoint.",
+      "slide_purpose": "explain evaluation design",
+      "visual_intent": "overview and diagnosis evidence",
+      "source_anchors": [
+        "source.md:## Fine-tuning tasks",
+        "PDF pages 3-4 Figures 1-2"
+      ],
+      "required_evidence": [
+        "RETFOUND-EV-OVERVIEW",
+        "RETFOUND-EV-DIAG"
+      ],
+      "source_evidence_ids": [
+        "RETFOUND-EV-OVERVIEW",
+        "RETFOUND-EV-DIAG"
+      ],
+      "scientific_objects": [
+        "ocular diagnosis",
+        "wet AMD prognosis",
+        "systemic disease prediction",
+        "label efficiency"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "EXPERIMENT_DESIGN",
+        "scientific_object": "RETFound fine-tuning ocular disease prognosis systemic disease label efficiency evaluation",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "diagram",
+        "evidence_type": "evaluation design",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "content_kind": "figure",
+      "dominant_object": "retfound_paper_figure",
+      "required_panel_count": 1,
+      "asset": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig1_overview_page.png",
+      "annotation": "The evaluation design is broad: diagnosis, prognosis, and systemic prediction each test adaptation from the retinal foundation model.",
+      "caption": "Figure 1 and task descriptions."
+    },
+    {
+      "page_id": "retfound_diagnosis_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "section": "Ocular diagnosis shows i",
+      "workstream": {
+        "id": "retfound_paper",
+        "label": "RETFound paper",
+        "scope": "CFP/OCT SSL pretraining, fine-tuning, diagnosis, systemic prediction, saliency, and generalization limits"
+      },
+      "title": "Ocular diagnosis shows internal and external gains",
+      "key_message": "Figure 2 compares RETFound with ImageNet and retinal SSL baselines across diabetic retinopathy, glaucoma, wet AMD, and other datasets.",
+      "slide_purpose": "show result evidence",
+      "visual_intent": "diagnosis figure page",
+      "source_anchors": [
+        "source.md:## Generalization evidence",
+        "PDF page 4 Figure 2"
+      ],
+      "required_evidence": [
+        "RETFOUND-EV-DIAG"
+      ],
+      "source_evidence_ids": [
+        "RETFOUND-EV-DIAG"
+      ],
+      "scientific_objects": [
+        "AUROC",
+        "AUPR",
+        "external evaluation",
+        "ocular diagnosis"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "REAL_DATA_APPLICATION",
+        "scientific_object": "RETFound ocular disease diagnosis AUROC AUPR external datasets CFP OCT performance",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "plot",
+        "evidence_type": "diagnosis result figure",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "content_kind": "figure",
+      "dominant_object": "retfound_paper_figure",
+      "required_panel_count": 1,
+      "asset": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig2_diagnosis_page.png",
+      "annotation": "The result page keeps dataset and task variety visible; it is not a single generic classification result.",
+      "caption": "Figure 2 page, Zhou et al. 2023."
+    },
+    {
+      "page_id": "retfound_external_limits",
+      "page_job": "NEGATIVE_RESULT",
+      "section": "Generalization weakens u",
+      "workstream": {
+        "id": "retfound_paper",
+        "label": "RETFound paper",
+        "scope": "CFP/OCT SSL pretraining, fine-tuning, diagnosis, systemic prediction, saliency, and generalization limits"
+      },
+      "title": "Generalization weakens under external shifts",
+      "key_message": "The discussion notes performance drops across datasets and devices and calls for more diverse cohorts and multimodal fusion.",
+      "slide_purpose": "state limits",
+      "visual_intent": "systemic result plus limits",
+      "source_anchors": [
+        "source.md:## Limitations and interpretation",
+        "PDF pages 10, 17"
+      ],
+      "required_evidence": [
+        "RETFOUND-EV-SYSTEMIC",
+        "RETFOUND-EV-LIMIT"
+      ],
+      "source_evidence_ids": [
+        "RETFOUND-EV-SYSTEMIC",
+        "RETFOUND-EV-LIMIT"
+      ],
+      "scientific_objects": [
+        "device shift",
+        "UK cohorts",
+        "CFP/OCT fusion",
+        "missing covariates"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "NEGATIVE_RESULT",
+        "scientific_object": "RETFound limitations external dataset device shift cohort diversity covariates CFP OCT",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "plot",
+        "evidence_type": "generalization limits",
+        "density": "high",
+        "panel_count": 1
+      },
+      "content_kind": "figure",
+      "dominant_object": "retfound_paper_figure",
+      "required_panel_count": 1,
+      "asset": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig3_systemic_page.png",
+      "annotation": "External performance remains higher than baselines in many tasks, but the paper explicitly treats cohort and device shift as a limitation.",
+      "caption": "Figure 3 page plus discussion limits."
+    },
+    {
+      "page_id": "retfound_retinal_semantics",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "section": "CFP/OCT saliency must st",
+      "workstream": {
+        "id": "retfound_paper",
+        "label": "RETFound paper",
+        "scope": "CFP/OCT SSL pretraining, fine-tuning, diagnosis, systemic prediction, saliency, and generalization limits"
+      },
+      "title": "CFP/OCT saliency must stay retinal, not generic AI heatmaps",
+      "key_message": "Extended Data Figure 6 shows reconstructed CFP/OCT anatomy and salient regions such as optic nerve, vessels, nerve fibre layer, and macula.",
+      "slide_purpose": "inspect real image semantics",
+      "visual_intent": "retinal image and saliency page",
+      "source_anchors": [
+        "source.md:## Real retinal image evidence",
+        "PDF page 24 Extended Data Figure 6"
+      ],
+      "required_evidence": [
+        "RETFOUND-EV-INTERP"
+      ],
+      "source_evidence_ids": [
+        "RETFOUND-EV-INTERP"
+      ],
+      "scientific_objects": [
+        "CFP",
+        "OCT",
+        "optic nerve",
+        "vessels",
+        "retinal nerve fibre layer",
+        "RELPROP saliency"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "MEDICAL_IMAGE_COMPARISON",
+        "scientific_object": "retinal CFP OCT saliency optic nerve vessels nerve fibre layer disease lesions RETFound",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "image_panel",
+        "evidence_type": "retinal modality interpretation",
+        "density": "high",
+        "panel_count": 4
+      },
+      "content_kind": "image_panel",
+      "dominant_object": "retfound_paper_image_panel",
+      "required_panel_count": 4,
+      "assets": [
+        "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig1_overview_page.png",
+        "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig2_diagnosis_page.png",
+        "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig3_systemic_page.png",
+        "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_extfig6_interpretation_page.png"
+      ],
+      "panel_labels": [
+        "Overview",
+        "Diagnosis",
+        "Systemic",
+        "Saliency"
+      ],
+      "roi_source_asset": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_extfig6_interpretation_page.png",
+      "roi_crop_assets": [
+        "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig1_overview_page.png",
+        "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig2_diagnosis_page.png",
+        "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_extfig6_interpretation_page.png"
+      ],
+      "roi_crop_labels": [
+        "CFP/OCT",
+        "Tasks",
+        "Saliency"
+      ],
+      "annotation": "Selected panels are article pixels; the semantic test is preserving CFP versus OCT and saliency/anatomy meaning.",
+      "caption": "Figures 1-3 and Extended Data Figure 6, Zhou et al. 2023."
+    },
+    {
+      "page_id": "retfound_takeaway",
+      "page_job": "NEXT_EXPERIMENT",
+      "section": "Foundation gains need ex",
+      "workstream": {
+        "id": "retfound_paper",
+        "label": "RETFound paper",
+        "scope": "CFP/OCT SSL pretraining, fine-tuning, diagnosis, systemic prediction, saliency, and generalization limits"
+      },
+      "title": "Foundation gains need external and multimodal scrutiny",
+      "key_message": "RETFound is label-efficient, but maturity depends on cohort/device diversity, calibration, covariates, and possible CFP/OCT fusion.",
+      "slide_purpose": "synthesize decision",
+      "visual_intent": "evidence-to-decision diagram",
+      "source_anchors": [
+        "source.md:## Limitations and interpretation"
+      ],
+      "required_evidence": [
+        "RETFOUND-EV-LIMIT",
+        "RETFOUND-EV-INTERP"
+      ],
+      "source_evidence_ids": [
+        "RETFOUND-EV-LIMIT",
+        "RETFOUND-EV-INTERP"
+      ],
+      "scientific_objects": [
+        "label efficiency",
+        "external validation",
+        "saliency",
+        "modality fusion"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "NEXT_EXPERIMENT",
+        "scientific_object": "RETFound discussion label efficiency external validation calibration multimodal CFP OCT limitations",
+        "domain_family": "medical_imaging",
+        "dominant_object_type": "diagram",
+        "evidence_type": "paper interpretation",
+        "density": "moderate",
+        "panel_count": 4
+      },
+      "content_kind": "next_experiment",
+      "dominant_object": "retfound_paper_next_experiment",
+      "required_panel_count": 4,
+      "current_limit": "A strong retinal foundation model can still lose performance when cohorts and imaging devices shift.",
+      "strategy_variation": [
+        "expand cohorts",
+        "audit devices",
+        "test multimodal fusion"
+      ],
+      "comparator_setup": [
+        "CFP model",
+        "OCT model"
+      ],
+      "decision_criterion": "Treat RETFound as promising only when downstream adaptation, external validation, and retinal semantics are all visible.",
+      "annotation": "The paper-specific close keeps the broad foundation-model claim coupled to retinal images, external checks, and stated limitations.",
+      "caption": "Synthesis from discussion and Methods."
+    }
+  ]
+}

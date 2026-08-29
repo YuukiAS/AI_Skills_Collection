@@ -1,0 +1,695 @@
+{
+  "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "implementation_commit": null,
+  "input_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source_bundle.json",
+  "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
+  "canonical_files": {
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/background.png": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/background_negative.png": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/logo_RGB.png": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/logo_RGB_negative.png": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/bibliography.bib": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/main.tex": "a7c6826e94c6f08647200f3472381d882dd8bf405df42a68f5dc903a4010da07",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/beamerthemesintef.sty": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/sintefcolor.sty": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+  },
+  "build_workspace": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build",
+  "render_input_identity_sha256": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e",
+  "render_input_identity": {
+    "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+    "build_workspace": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build",
+    "files": [
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/background.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/background_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/logo_RGB.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/bibliography.bib",
+        "role": "canonical_cuhk_support",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.tex",
+        "role": "main_tex",
+        "sha256": "ccb2b912f2b365d9c5e0c7c1aad70bdb6cf0014092c97a4dbe577aa28ef0d603"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/scientific_layouts.tex",
+        "role": "scientific_layout_include",
+        "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/stage3_assets/deseq2_fig1_dispersion_page.png",
+        "role": "copied_scientific_asset",
+        "sha256": "b05922ce98ba09fb12801cde2e119ec1d424726ba4d840bd90a30f11cf5b1b3e"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/stage3_assets/deseq2_fig2_lfc_page.png",
+        "role": "copied_scientific_asset",
+        "sha256": "444d3f65bef0338e7229d27a158e6d79da8d33fefb6a84bb291f1cd1ef80b48d"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/stage3_assets/deseq2_fig6_benchmark_page.png",
+        "role": "copied_scientific_asset",
+        "sha256": "1ea2acf10758f75331523c5ee4ea4bd8c4dea4e867bc3f81c713c4b815840e29"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/styles/sintefcolor.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+      }
+    ],
+    "sha256": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e"
+  },
+  "tex": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.tex",
+  "scientific_layout_include": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/scientific_layouts.tex",
+  "deck_plan": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_plan.json",
+  "source_fidelity_map": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/source_fidelity_map.json",
+  "runtime_trace": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/runtime_trace.json",
+  "storyline_trace": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/storyline_trace.json",
+  "deck_sequence_summary_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_sequence_summary.json",
+  "deck_sequence_summary": {
+    "schema": "RESEARCH_PRESENTATION_DECK_SEQUENCE_SUMMARY_V1",
+    "page_count": 6,
+    "render_input_identity_sha256": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e",
+    "render_input_manifest": {
+      "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+      "build_workspace": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build",
+      "files": [
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/background.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/background_negative.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/logo_RGB.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/bibliography.bib",
+          "role": "canonical_cuhk_support",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.tex",
+          "role": "main_tex",
+          "sha256": "ccb2b912f2b365d9c5e0c7c1aad70bdb6cf0014092c97a4dbe577aa28ef0d603"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/scientific_layouts.tex",
+          "role": "scientific_layout_include",
+          "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/stage3_assets/deseq2_fig1_dispersion_page.png",
+          "role": "copied_scientific_asset",
+          "sha256": "b05922ce98ba09fb12801cde2e119ec1d424726ba4d840bd90a30f11cf5b1b3e"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/stage3_assets/deseq2_fig2_lfc_page.png",
+          "role": "copied_scientific_asset",
+          "sha256": "444d3f65bef0338e7229d27a158e6d79da8d33fefb6a84bb291f1cd1ef80b48d"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/stage3_assets/deseq2_fig6_benchmark_page.png",
+          "role": "copied_scientific_asset",
+          "sha256": "1ea2acf10758f75331523c5ee4ea4bd8c4dea4e867bc3f81c713c4b815840e29"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+          "role": "canonical_cuhk_style",
+          "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/styles/sintefcolor.sty",
+          "role": "canonical_cuhk_style",
+          "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+        }
+      ],
+      "sha256": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e"
+    },
+    "pixel_evidence_status": {
+      "status": "AVAILABLE",
+      "render_status": "ok",
+      "rendered_png_count": 7,
+      "rendered_page_sha256_nullable": false,
+      "contact_sheet_sha256_nullable": false
+    },
+    "rendered_pixel_identity_sha256": "5b8b8596996f9589e09f64a495b9f0b98fbffb2be5ec8f4bc582a9628ff77bd9",
+    "page_order": [
+      "slide_2_statistical_model",
+      "slide_3_real_data_application",
+      "slide_4_experiment_design",
+      "slide_5_negative_result",
+      "slide_6_next_experiment",
+      "slide_7_medical_image_comparison"
+    ],
+    "title_sequence": [
+      "DESeq2 starts from a negative-binomial GLM",
+      "Fold-change shrinkage stabilizes weakly informed effects",
+      "Dispersion shrinkage borrows strength across genes",
+      "Benchmark gains are empirical, not a license to ignore design",
+      "The durable idea is moderated estimation, not more filters",
+      "The comparison object is sensitivity versus precision"
+    ],
+    "section_sequence": [
+      "DESeq2 paper",
+      "DESeq2 paper",
+      "DESeq2 paper",
+      "DESeq2 paper",
+      "DESeq2 paper",
+      "DESeq2 paper"
+    ],
+    "workstream_sequence": [
+      {
+        "logical_id": "slide_2_statistical_model",
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_order": 1
+      },
+      {
+        "logical_id": "slide_3_real_data_application",
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_order": 1
+      },
+      {
+        "logical_id": "slide_4_experiment_design",
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_order": 1
+      },
+      {
+        "logical_id": "slide_5_negative_result",
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_order": 1
+      },
+      {
+        "logical_id": "slide_6_next_experiment",
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_order": 1
+      },
+      {
+        "logical_id": "slide_7_medical_image_comparison",
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_order": 1
+      }
+    ],
+    "storyline_order": [
+      "STATISTICAL_MODEL",
+      "REAL_DATA_APPLICATION",
+      "EXPERIMENT_DESIGN",
+      "NEGATIVE_RESULT",
+      "NEXT_EXPERIMENT",
+      "MEDICAL_IMAGE_COMPARISON"
+    ],
+    "pages": [
+      {
+        "sequence_index": 1,
+        "rendered_slide_number": 2,
+        "logical_id": "slide_2_statistical_model",
+        "page_id": "deseq2_nb_glm",
+        "page_job": "STATISTICAL_MODEL",
+        "title": "DESeq2 starts from a negative-binomial GLM",
+        "section": "DESeq2 paper",
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "DESEQ2-EV-GLM"
+        ],
+        "selected_gold_id": "GSC-016",
+        "selected_reference_id": "RRL-020",
+        "primary_scientific_object_type": "deseq2_paper_equation",
+        "scientific_objects": [
+          "negative binomial counts",
+          "size factors",
+          "dispersion alpha_i"
+        ],
+        "source_grounded_copy_candidates": {
+          "key_message": "The model separates sequencing-depth normalization, expected expression, and gene-specific dispersion.",
+          "annotation": "The GLM frame lets DESeq2 estimate expression effects while modeling mean-dependent count variance.",
+          "caption": "Love, Huber, and Anders 2014, Methods."
+        },
+        "forbidden_audience_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "implementation language",
+          "source bundle",
+          "provenance",
+          "review target",
+          "fixture",
+          "workflow"
+        ],
+        "visual_density": {
+          "declared_density": "moderate",
+          "machine_density": "moderate",
+          "primary_area": 0.0,
+          "native_object_count": 5,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-2.png",
+        "rendered_page_sha256": "8a1fd45e28e424d8af1df764cd6b45705f754e6c5cf00056b124999329e1b74a",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      },
+      {
+        "sequence_index": 2,
+        "rendered_slide_number": 3,
+        "logical_id": "slide_3_real_data_application",
+        "page_id": "deseq2_lfc_result",
+        "page_job": "REAL_DATA_APPLICATION",
+        "title": "Fold-change shrinkage stabilizes weakly informed effects",
+        "section": "DESeq2 paper",
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "DESEQ2-EV-LFC"
+        ],
+        "selected_gold_id": "GSC-015",
+        "selected_reference_id": "RRL-017",
+        "primary_scientific_object_type": "deseq2_paper_figure",
+        "scientific_objects": [
+          "MLE LFC",
+          "MAP LFC",
+          "low counts",
+          "high dispersion"
+        ],
+        "source_grounded_copy_candidates": {
+          "key_message": "The paper shows that MAP LFCs avoid extreme low-information estimates that appear under maximum likelihood.",
+          "annotation": "Shrinkage depends on information: low counts, high dispersion, or few degrees of freedom pull LFC estimates more strongly toward zero.",
+          "caption": "Figure 2 page, Love et al. 2014."
+        },
+        "forbidden_audience_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "implementation language",
+          "source bundle",
+          "provenance",
+          "review target",
+          "fixture",
+          "workflow"
+        ],
+        "visual_density": {
+          "declared_density": "moderate",
+          "machine_density": "low",
+          "primary_area": 0.0,
+          "native_object_count": 3,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-3.png",
+        "rendered_page_sha256": "ba8ecbf6a784169399a685f772f06fb94aceee03f2fb005bce4e3eb8fdc8c759",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      },
+      {
+        "sequence_index": 3,
+        "rendered_slide_number": 4,
+        "logical_id": "slide_4_experiment_design",
+        "page_id": "deseq2_dispersion_shrinkage",
+        "page_job": "EXPERIMENT_DESIGN",
+        "title": "Dispersion shrinkage borrows strength across genes",
+        "section": "DESeq2 paper",
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "DESEQ2-EV-DISP"
+        ],
+        "selected_gold_id": "GSC-004",
+        "selected_reference_id": "RRL-019",
+        "primary_scientific_object_type": "deseq2_paper_figure",
+        "scientific_objects": [
+          "gene-wise dispersion",
+          "trend prior",
+          "MAP estimate",
+          "dispersion outliers"
+        ],
+        "source_grounded_copy_candidates": {
+          "key_message": "DESeq2 fits a dispersion-mean trend and shrinks noisy gene-wise estimates toward the trend except for outliers.",
+          "annotation": "The blue-arrow shrinkage in Figure 1 is the core mechanism: noisy estimates move toward a fitted consensus unless treated as outliers.",
+          "caption": "Figure 1 page, Love et al. 2014, CC BY."
+        },
+        "forbidden_audience_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "implementation language",
+          "source bundle",
+          "provenance",
+          "review target",
+          "fixture",
+          "workflow"
+        ],
+        "visual_density": {
+          "declared_density": "moderate",
+          "machine_density": "low",
+          "primary_area": 0.0,
+          "native_object_count": 3,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-4.png",
+        "rendered_page_sha256": "287d550aec7ae7ac46a7a2fdb1dd7854bccbfaf682d6c8eb8b6a96fc6d11e133",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      },
+      {
+        "sequence_index": 4,
+        "rendered_slide_number": 5,
+        "logical_id": "slide_5_negative_result",
+        "page_id": "deseq2_benchmark_limits",
+        "page_job": "NEGATIVE_RESULT",
+        "title": "Benchmark gains are empirical, not a license to ignore design",
+        "section": "DESeq2 paper",
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "DESEQ2-EV-BENCH",
+          "DESEQ2-EV-LIMIT"
+        ],
+        "selected_gold_id": "GSC-012",
+        "selected_reference_id": "RRL-011",
+        "primary_scientific_object_type": "deseq2_paper_figure",
+        "scientific_objects": [
+          "sensitivity",
+          "precision",
+          "sample size",
+          "effect size"
+        ],
+        "source_grounded_copy_candidates": {
+          "key_message": "The simulations compare sensitivity and precision, but interpretation still depends on counts, replicates, outliers, and thresholds.",
+          "annotation": "Figure 6 supports comparative performance claims, but the paper still frames testing around design, FDR, and effect-size thresholds.",
+          "caption": "Figure 6 page, Love et al. 2014."
+        },
+        "forbidden_audience_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "implementation language",
+          "source bundle",
+          "provenance",
+          "review target",
+          "fixture",
+          "workflow"
+        ],
+        "visual_density": {
+          "declared_density": "high",
+          "machine_density": "low",
+          "primary_area": 0.0,
+          "native_object_count": 3,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-5.png",
+        "rendered_page_sha256": "8178bf1680055d62517317758b979363519a60bef800bd6df5dd47bb8abc558d",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      },
+      {
+        "sequence_index": 5,
+        "rendered_slide_number": 6,
+        "logical_id": "slide_6_next_experiment",
+        "page_id": "deseq2_takeaway",
+        "page_job": "NEXT_EXPERIMENT",
+        "title": "The durable idea is moderated estimation, not more filters",
+        "section": "DESeq2 paper",
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "DESEQ2-EV-LIMIT",
+          "DESEQ2-EV-GLM"
+        ],
+        "selected_gold_id": "GSC-018",
+        "selected_reference_id": "RRL-059",
+        "primary_scientific_object_type": "deseq2_paper_next_experiment",
+        "scientific_objects": [
+          "empirical Bayes",
+          "dispersion trend",
+          "LFC prior",
+          "Wald tests"
+        ],
+        "source_grounded_copy_candidates": {
+          "key_message": "DESeq2 regularizes dispersion and fold change so small-sample RNA-seq analyses avoid unstable gene-wise estimates.",
+          "annotation": "The paper-specific close is an estimation contract: regularize noisy gene-wise quantities before ranking or testing.",
+          "caption": "Synthesis from results, methods, and conclusion."
+        },
+        "forbidden_audience_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "implementation language",
+          "source bundle",
+          "provenance",
+          "review target",
+          "fixture",
+          "workflow"
+        ],
+        "visual_density": {
+          "declared_density": "moderate",
+          "machine_density": "low",
+          "primary_area": 0.0,
+          "native_object_count": 3,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-6.png",
+        "rendered_page_sha256": "7f5aa7e549a9757e98d39d80468ecf1369cd8bfa8a73df7d4b332ef920d034b7",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      },
+      {
+        "sequence_index": 6,
+        "rendered_slide_number": 7,
+        "logical_id": "slide_7_medical_image_comparison",
+        "page_id": "deseq2_evidence_comparison_slot",
+        "page_job": "MEDICAL_IMAGE_COMPARISON",
+        "title": "The comparison object is sensitivity versus precision",
+        "section": "DESeq2 paper",
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "DESEQ2-EV-BENCH"
+        ],
+        "selected_gold_id": "GSC-004",
+        "selected_reference_id": "RRL-019",
+        "primary_scientific_object_type": "deseq2_paper_figure",
+        "scientific_objects": [
+          "algorithm comparison",
+          "simulation grid",
+          "precision",
+          "sensitivity"
+        ],
+        "source_grounded_copy_candidates": {
+          "key_message": "The paper compares DESeq2, edgeR, baySeq, EBSeq, NOISeq, limma, SAMseq, and Cuffdiff under controlled simulations.",
+          "annotation": "This comparison slot remains a DESeq2 benchmark page: it is about differential-expression algorithms, not a generic omics pipeline.",
+          "caption": "Algorithm-comparison evidence from Figure 6."
+        },
+        "forbidden_audience_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "implementation language",
+          "source bundle",
+          "provenance",
+          "review target",
+          "fixture",
+          "workflow"
+        ],
+        "visual_density": {
+          "declared_density": "moderate",
+          "machine_density": "low",
+          "primary_area": 0.0,
+          "native_object_count": 3,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-7.png",
+        "rendered_page_sha256": "b838c8f2e5681db9bb0890c8dcb0fdcaa36eddfac6eb117e86898adfac4840ae",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      }
+    ],
+    "deck_contact_sheet": {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_contact_sheet.png",
+      "sha256": "13a925ca7d505dd9621be69270a7d0580600acf5ba83dc2a97b7dbc2e97078ab",
+      "serves_audience": false,
+      "review_role": "deck_sequence_context"
+    },
+    "deck_identity_sha256": "9619728c76128fef222b01bcd58640b39862cfede49944f8dac037439318528b"
+  },
+  "deck_contact_sheet": {
+    "status": "GENERATED",
+    "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_contact_sheet.png",
+    "sha256": "13a925ca7d505dd9621be69270a7d0580600acf5ba83dc2a97b7dbc2e97078ab"
+  },
+  "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/quality_loop_state.json",
+  "dependency_probe": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/dependency_probe.json",
+  "render_chinese_math_pdf_probe": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/render_chinese_math_pdf_probe.json",
+  "compile_status": {
+    "status": "COMPILED",
+    "engine": "xelatex",
+    "engine_path": "/home/yuukias/.TinyTeX/bin/x86_64-linux/xelatex",
+    "compile_passes": 2,
+    "fontconfig": {
+      "fontconfig_file": "/home/yuukias/AI_Skills_Collection/results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/fontconfig/fonts.conf",
+      "fontconfig_file_repo_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/fontconfig/fonts.conf",
+      "font_cache_dir": "/tmp/fontconfig-cache-027",
+      "times_font_dir": "/home/yuukias/code/TRACE/presentations/group_meetings/2026-07-16/cat_trace_demo/fonts",
+      "times_font_dir_exists": true,
+      "times_font_files_present": true
+    },
+    "pdf": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.pdf",
+    "pdf_sha256": "2c6ef28f147e37f2a33988e603c364fea747920b281f8a7cc847234ce4753fdc",
+    "log": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/compile.log"
+  },
+  "render_status": {
+    "status": "ok",
+    "png_count": 7,
+    "rendered_png": [
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-1.png",
+        "sha256": "b4be8a23d5fd8df51a73d33fef1757468fa2396ea8ef065ef52b03be6aec0219"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-2.png",
+        "sha256": "8a1fd45e28e424d8af1df764cd6b45705f754e6c5cf00056b124999329e1b74a"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-3.png",
+        "sha256": "ba8ecbf6a784169399a685f772f06fb94aceee03f2fb005bce4e3eb8fdc8c759"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-4.png",
+        "sha256": "287d550aec7ae7ac46a7a2fdb1dd7854bccbfaf682d6c8eb8b6a96fc6d11e133"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-5.png",
+        "sha256": "8178bf1680055d62517317758b979363519a60bef800bd6df5dd47bb8abc558d"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-6.png",
+        "sha256": "7f5aa7e549a9757e98d39d80468ecf1369cd8bfa8a73df7d4b332ef920d034b7"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-7.png",
+        "sha256": "b838c8f2e5681db9bb0890c8dcb0fdcaa36eddfac6eb117e86898adfac4840ae"
+      }
+    ]
+  },
+  "mechanical_qa": {
+    "status": "MECHANICAL_PASS",
+    "checks": {
+      "normal_research_presentations_entry": true,
+      "input_bundle_read_from_path": true,
+      "canonical_source_copied": true,
+      "scientific_layout_include_loaded": true,
+      "content_page_jobs": 6,
+      "rendered_pages_available": true,
+      "deck_contact_sheet_generated": true,
+      "quality_loop_budget_enforced": true
+    }
+  },
+  "quality_loop_handoff": {
+    "schema": "RESEARCH_PRESENTATION_STAGE4_QUALITY_HANDOFF_V1",
+    "status": "WAITING_FOR_DECK_VISUAL_REVIEW",
+    "visual_review_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/visual_inputs.json",
+    "visual_review_evidence": "results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/VISUAL_REVIEW.json",
+    "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/quality_loop_state.json",
+    "deck_contact_sheet": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_contact_sheet.png",
+    "render_input_identity_sha256": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e",
+    "rendered_pixel_identity_sha256": "5b8b8596996f9589e09f64a495b9f0b98fbffb2be5ec8f4bc582a9628ff77bd9"
+  },
+  "stage4_boundary": "This one-call production entry recovery does not claim Stage 4 PASS, PROGRAM_MATURE, or ONE_SHOT_QUALITY_PASS.",
+  "cleaned_latex_intermediates": [
+    "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.aux",
+    "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.nav",
+    "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.out",
+    "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.snm",
+    "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.toc"
+  ],
+  "normalized_generated_logs": [
+    "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/compile.log",
+    "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.log"
+  ]
+}

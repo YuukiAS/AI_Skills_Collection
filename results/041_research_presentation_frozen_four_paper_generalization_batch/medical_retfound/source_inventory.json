@@ -1,0 +1,54 @@
+{
+  "schema": "RESEARCH_PRESENTATION_SOURCE_INVENTORY_V1",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "paper_key": "medical_retfound",
+  "inventory_date": "2026-08-29",
+  "published_source": "https://www.nature.com/articles/s41586-023-06555-x",
+  "doi": "10.1038/s41586-023-06555-x",
+  "license": "Creative Commons Attribution 4.0 International; selected article/extended-data figure pixels used with article license statement and no selected third-party exclusion found",
+  "article_pdf": {
+    "local_cache_untracked": "/tmp/rh041_sources/retfound_s41586-023-06555-x.pdf",
+    "sha256": "fe4cdfb0aaa4fb539b89bfb0280731f2619820c2dc97440360e1bf74f3bee798",
+    "pages": 26
+  },
+  "section_inventory": [
+    "identity",
+    "scientific problem",
+    "model or pipeline",
+    "primary evidence",
+    "limitations and interpretation"
+  ],
+  "figure_table_inventory": [],
+  "selected_assets": [
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig1_overview_page.png",
+      "sha256": "28010c2ccf9785407793d09ca34b6530c0828df511b00ee77782ab7d18aa7422",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    },
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig2_diagnosis_page.png",
+      "sha256": "8fa7a309a9140e4e694fe9abbab86adeb01f044e789c7f91fdb7a40c5cd38639",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    },
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_fig3_systemic_page.png",
+      "sha256": "16a86cd56765745ae784038c86121305fe034a6ae20305c114042b5b2e0d34c1",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    },
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_extfig6_interpretation_page.png",
+      "sha256": "68b71801fc01a96e990b35a846f35e1c42d8a2e375ce10d180c5c334ec231bec",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    },
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_retfound/assets/retfound_extfig7_age_page.png",
+      "sha256": "dceb898e791fa6f967b974f8f102f6c1b07924ba7c0586360f380bd04f13bc08",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    }
+  ]
+}

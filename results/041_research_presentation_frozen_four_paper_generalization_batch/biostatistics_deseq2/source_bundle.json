@@ -1,0 +1,431 @@
+{
+  "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUNDLE_V1",
+  "stage5_holdout_eligible": false,
+  "holdout_exclusion_reason": "041 real-paper holdout input; production entrypoint requires this legacy exclusion flag while task-local eligibility is recorded in batch_eligibility.json.",
+  "metadata": {
+    "title": "DESeq2 moderated dispersion and fold-change estimation",
+    "subtitle": "A paper talk on negative-binomial RNA-seq inference",
+    "author": "Research Presentation Program",
+    "institute": "Department of Statistics & Data Science",
+    "date": "2026-08-29",
+    "audience": "doctoral research group",
+    "language": "en"
+  },
+  "source_material": {
+    "primary_markdown": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source/source.md",
+    "evidence_assets": [
+      "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig1_dispersion_page.png",
+      "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig2_lfc_page.png",
+      "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig6_benchmark_page.png"
+    ]
+  },
+  "research_state": {
+    "previous_question": "Can the frozen normal research-presentations route make a complete paper talk for this real unseen paper?",
+    "prior_belief": "Stage 4/039 production behavior is frozen, but this paper was not used to tune it.",
+    "new_evidence": "The bundle records complete paper-derived anchors, selected real article figures or tables, and limits from the published article.",
+    "evidence_quality": "Creative Commons Attribution 4.0 International",
+    "belief_update": "The deck must be judged as this paper-specific doctoral group-meeting talk.",
+    "successes": "The article provides native scientific objects, quantitative evidence, and explicit interpretation limits.",
+    "failures": "Any unreadable figure, generic page, or unsupported repair means this deck fails the batch.",
+    "largest_uncertainty": "Whether the frozen generic layouts preserve this paper at mature presentation quality.",
+    "frozen_items": "Use the pre-render frozen source files and normal production entrypoint only.",
+    "stop_items": "Do not change source selection, generated TeX, production code, gold, layout, prompt, or validator after render inspection.",
+    "next_discriminating_experiment": "Generate exact-CUHK pages and submit the final pixel identity to task-local visual review.",
+    "decision_needed": "Reviewer and Planner must decide after CI and external Terra evidence."
+  },
+  "evidence": [
+    {
+      "id": "DESEQ2-EV-GLM",
+      "board": "equations",
+      "type": "source_markdown",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source/source.md",
+      "source_anchor": "## Negative-binomial GLM",
+      "supports": "Counts are modeled with a negative-binomial GLM and gene-specific dispersion.",
+      "consumed_as": "native LaTeX equation",
+      "status": "available"
+    },
+    {
+      "id": "DESEQ2-EV-DISP",
+      "board": "quantitative_plots",
+      "type": "png",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig1_dispersion_page.png",
+      "source_anchor": "PDF page 3, Figure 1",
+      "supports": "Dispersion estimates are shrunk toward a fitted dispersion-mean trend, with outlier handling.",
+      "consumed_as": "paper figure page",
+      "status": "available"
+    },
+    {
+      "id": "DESEQ2-EV-LFC",
+      "board": "quantitative_plots",
+      "type": "png",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig2_lfc_page.png",
+      "source_anchor": "PDF page 4, Figure 2",
+      "supports": "MAP LFC shrinkage stabilizes weakly informed fold changes relative to MLE estimates.",
+      "consumed_as": "paper figure page",
+      "status": "available"
+    },
+    {
+      "id": "DESEQ2-EV-BENCH",
+      "board": "quantitative_plots",
+      "type": "png",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig6_benchmark_page.png",
+      "source_anchor": "PDF page 8, Figure 6",
+      "supports": "Benchmarks compare sensitivity and precision across sample sizes and fold-change levels.",
+      "consumed_as": "paper figure page",
+      "status": "available"
+    },
+    {
+      "id": "DESEQ2-EV-LIMIT",
+      "board": "failed_experiments",
+      "type": "source_markdown",
+      "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source/source.md",
+      "source_anchor": "## Limitations and interpretation",
+      "supports": "The contribution is empirical-Bayes regularization inside the NB-GLM, not a generic omics recipe.",
+      "consumed_as": "limitation note",
+      "status": "available"
+    }
+  ],
+  "page_jobs": [
+    {
+      "page_id": "deseq2_nb_glm",
+      "page_job": "STATISTICAL_MODEL",
+      "section": "DESeq2 starts from a neg",
+      "workstream": {
+        "id": "deseq2_paper",
+        "label": "DESeq2 paper",
+        "scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation"
+      },
+      "title": "DESeq2 starts from a negative-binomial GLM",
+      "key_message": "The model separates sequencing-depth normalization, expected expression, and gene-specific dispersion.",
+      "slide_purpose": "explain model",
+      "visual_intent": "equation plus interpretation",
+      "source_anchors": [
+        "source.md:## Negative-binomial GLM"
+      ],
+      "required_evidence": [
+        "DESEQ2-EV-GLM"
+      ],
+      "source_evidence_ids": [
+        "DESEQ2-EV-GLM"
+      ],
+      "scientific_objects": [
+        "negative binomial counts",
+        "size factors",
+        "dispersion alpha_i"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "STATISTICAL_MODEL",
+        "scientific_object": "biostatistics negative binomial GLM RNA-seq DESeq2 dispersion equation",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "equation",
+        "evidence_type": "mathematical model",
+        "density": "moderate",
+        "panel_count": 0
+      },
+      "content_kind": "equation",
+      "dominant_object": "deseq2_paper_equation",
+      "required_panel_count": 0,
+      "math": "K_{ij}\\sim NB(\\mu_{ij},\\alpha_i),\\quad \\mu_{ij}=s_j q_{ij},\\quad \\log_2 q_{ij}=x_{j\\cdot}\\beta_i",
+      "annotation": "The GLM frame lets DESeq2 estimate expression effects while modeling mean-dependent count variance.",
+      "caption": "Love, Huber, and Anders 2014, Methods."
+    },
+    {
+      "page_id": "deseq2_dispersion_shrinkage",
+      "page_job": "EXPERIMENT_DESIGN",
+      "section": "Dispersion shrinkage bor",
+      "workstream": {
+        "id": "deseq2_paper",
+        "label": "DESeq2 paper",
+        "scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation"
+      },
+      "title": "Dispersion shrinkage borrows strength across genes",
+      "key_message": "DESeq2 fits a dispersion-mean trend and shrinks noisy gene-wise estimates toward the trend except for outliers.",
+      "slide_purpose": "explain estimation pipeline",
+      "visual_intent": "paper Figure 1 page",
+      "source_anchors": [
+        "source.md:## Dispersion shrinkage",
+        "PDF page 3 Figure 1"
+      ],
+      "required_evidence": [
+        "DESEQ2-EV-DISP"
+      ],
+      "source_evidence_ids": [
+        "DESEQ2-EV-DISP"
+      ],
+      "scientific_objects": [
+        "gene-wise dispersion",
+        "trend prior",
+        "MAP estimate",
+        "dispersion outliers"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "EXPERIMENT_DESIGN",
+        "scientific_object": "DESeq2 dispersion shrinkage empirical Bayes trend gene-wise MAP outlier",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "plot",
+        "evidence_type": "estimation mechanism",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "content_kind": "figure",
+      "dominant_object": "deseq2_paper_figure",
+      "required_panel_count": 1,
+      "asset": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig1_dispersion_page.png",
+      "annotation": "The blue-arrow shrinkage in Figure 1 is the core mechanism: noisy estimates move toward a fitted consensus unless treated as outliers.",
+      "caption": "Figure 1 page, Love et al. 2014, CC BY."
+    },
+    {
+      "page_id": "deseq2_lfc_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "section": "Fold-change shrinkage st",
+      "workstream": {
+        "id": "deseq2_paper",
+        "label": "DESeq2 paper",
+        "scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation"
+      },
+      "title": "Fold-change shrinkage stabilizes weakly informed effects",
+      "key_message": "The paper shows that MAP LFCs avoid extreme low-information estimates that appear under maximum likelihood.",
+      "slide_purpose": "show result evidence",
+      "visual_intent": "paper Figure 2 page",
+      "source_anchors": [
+        "source.md:## Fold-change shrinkage",
+        "PDF page 4 Figure 2"
+      ],
+      "required_evidence": [
+        "DESEQ2-EV-LFC"
+      ],
+      "source_evidence_ids": [
+        "DESEQ2-EV-LFC"
+      ],
+      "scientific_objects": [
+        "MLE LFC",
+        "MAP LFC",
+        "low counts",
+        "high dispersion"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "REAL_DATA_APPLICATION",
+        "scientific_object": "RNA-seq fold change shrinkage MA plot MLE MAP DESeq2 Bottomly",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "plot",
+        "evidence_type": "fold-change result figure",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "content_kind": "figure",
+      "dominant_object": "deseq2_paper_figure",
+      "required_panel_count": 1,
+      "asset": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig2_lfc_page.png",
+      "annotation": "Shrinkage depends on information: low counts, high dispersion, or few degrees of freedom pull LFC estimates more strongly toward zero.",
+      "caption": "Figure 2 page, Love et al. 2014."
+    },
+    {
+      "page_id": "deseq2_benchmark_limits",
+      "page_job": "NEGATIVE_RESULT",
+      "section": "Benchmark gains are empi",
+      "workstream": {
+        "id": "deseq2_paper",
+        "label": "DESeq2 paper",
+        "scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation"
+      },
+      "title": "Benchmark gains are empirical, not a license to ignore design",
+      "key_message": "The simulations compare sensitivity and precision, but interpretation still depends on counts, replicates, outliers, and thresholds.",
+      "slide_purpose": "state limits",
+      "visual_intent": "paper benchmark figure page",
+      "source_anchors": [
+        "source.md:## Testing and evaluation",
+        "PDF page 8 Figure 6"
+      ],
+      "required_evidence": [
+        "DESEQ2-EV-BENCH",
+        "DESEQ2-EV-LIMIT"
+      ],
+      "source_evidence_ids": [
+        "DESEQ2-EV-BENCH",
+        "DESEQ2-EV-LIMIT"
+      ],
+      "scientific_objects": [
+        "sensitivity",
+        "precision",
+        "sample size",
+        "effect size"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "NEGATIVE_RESULT",
+        "scientific_object": "DESeq2 benchmark sensitivity precision false discovery sample size fold change limits",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "plot",
+        "evidence_type": "benchmark evidence and limits",
+        "density": "high",
+        "panel_count": 1
+      },
+      "content_kind": "figure",
+      "dominant_object": "deseq2_paper_figure",
+      "required_panel_count": 1,
+      "asset": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig6_benchmark_page.png",
+      "annotation": "Figure 6 supports comparative performance claims, but the paper still frames testing around design, FDR, and effect-size thresholds.",
+      "caption": "Figure 6 page, Love et al. 2014."
+    },
+    {
+      "page_id": "deseq2_evidence_comparison_slot",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "section": "The comparison object is",
+      "workstream": {
+        "id": "deseq2_paper",
+        "label": "DESeq2 paper",
+        "scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation"
+      },
+      "title": "The comparison object is sensitivity versus precision",
+      "key_message": "The paper compares DESeq2, edgeR, baySeq, EBSeq, NOISeq, limma, SAMseq, and Cuffdiff under controlled simulations.",
+      "slide_purpose": "inspect comparison evidence",
+      "visual_intent": "benchmark page reused as comparison source",
+      "source_anchors": [
+        "source.md:## Testing and evaluation",
+        "PDF page 8 Figure 6"
+      ],
+      "required_evidence": [
+        "DESEQ2-EV-BENCH"
+      ],
+      "source_evidence_ids": [
+        "DESEQ2-EV-BENCH"
+      ],
+      "scientific_objects": [
+        "algorithm comparison",
+        "simulation grid",
+        "precision",
+        "sensitivity"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "MEDICAL_IMAGE_COMPARISON",
+        "scientific_object": "same-paper algorithm comparison RNA-seq sensitivity precision DESeq2 edgeR EBSeq NOISeq limma",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "plot",
+        "evidence_type": "same-paper comparison evidence",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "content_kind": "figure",
+      "dominant_object": "deseq2_paper_figure",
+      "required_panel_count": 1,
+      "asset": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/assets/deseq2_fig6_benchmark_page.png",
+      "annotation": "This comparison slot remains a DESeq2 benchmark page: it is about differential-expression algorithms, not a generic omics pipeline.",
+      "caption": "Algorithm-comparison evidence from Figure 6."
+    },
+    {
+      "page_id": "deseq2_takeaway",
+      "page_job": "NEXT_EXPERIMENT",
+      "section": "The durable idea is mode",
+      "workstream": {
+        "id": "deseq2_paper",
+        "label": "DESeq2 paper",
+        "scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation"
+      },
+      "title": "The durable idea is moderated estimation, not more filters",
+      "key_message": "DESeq2 regularizes dispersion and fold change so small-sample RNA-seq analyses avoid unstable gene-wise estimates.",
+      "slide_purpose": "synthesize decision",
+      "visual_intent": "evidence-to-decision diagram",
+      "source_anchors": [
+        "source.md:## Limitations and interpretation"
+      ],
+      "required_evidence": [
+        "DESEQ2-EV-LIMIT",
+        "DESEQ2-EV-GLM"
+      ],
+      "source_evidence_ids": [
+        "DESEQ2-EV-LIMIT",
+        "DESEQ2-EV-GLM"
+      ],
+      "scientific_objects": [
+        "empirical Bayes",
+        "dispersion trend",
+        "LFC prior",
+        "Wald tests"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper-source interpretation, not new derivation",
+      "layout_rationale": "use the frozen paper source object as the dominant slide evidence",
+      "allowed_fallback": "speaker note or deletion if source object cannot be rendered",
+      "forbidden_fallback": "generic placeholder or non-paper-specific claim",
+      "qa_criteria": [
+        "source-specific object is visible",
+        "claim remains tied to paper",
+        "no internal task language appears"
+      ],
+      "query": {
+        "page_function": "NEXT_EXPERIMENT",
+        "scientific_object": "biostatistics discussion DESeq2 empirical Bayes shrinkage diagnostics Wald tests RNA-seq",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "diagram",
+        "evidence_type": "paper interpretation",
+        "density": "moderate",
+        "panel_count": 4
+      },
+      "content_kind": "next_experiment",
+      "dominant_object": "deseq2_paper_next_experiment",
+      "required_panel_count": 4,
+      "current_limit": "Ranking genes by raw fold change can overstate weakly supported effects in low-count data.",
+      "strategy_variation": [
+        "fit NB-GLM",
+        "shrink dispersion",
+        "shrink LFC"
+      ],
+      "comparator_setup": [
+        "MLE fold changes",
+        "MAP fold changes"
+      ],
+      "decision_criterion": "Use DESeq2 when the scientific question benefits from moderated dispersion and effect-size estimates with transparent design assumptions.",
+      "annotation": "The paper-specific close is an estimation contract: regularize noisy gene-wise quantities before ranking or testing.",
+      "caption": "Synthesis from results, methods, and conclusion."
+    }
+  ]
+}

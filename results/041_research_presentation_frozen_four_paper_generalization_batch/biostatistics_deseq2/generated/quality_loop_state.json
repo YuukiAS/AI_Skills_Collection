@@ -1,0 +1,87 @@
+{
+  "schema": "RESEARCH_PRESENTATION_DECK_QUALITY_LOOP_STATE_V1",
+  "max_repair_cycles": 1,
+  "repair_cycle_count": 0,
+  "render_identity_kind": "render_input_identity_sha256",
+  "initial_render_identity": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e",
+  "initial_render_input_identity": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e",
+  "initial_rendered_pixel_identity": "5b8b8596996f9589e09f64a495b9f0b98fbffb2be5ec8f4bc582a9628ff77bd9",
+  "initial_render_input_manifest": {
+    "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+    "build_workspace": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build",
+    "files": [
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/background.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/background_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/logo_RGB.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/bibliography.bib",
+        "role": "canonical_cuhk_support",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.tex",
+        "role": "main_tex",
+        "sha256": "ccb2b912f2b365d9c5e0c7c1aad70bdb6cf0014092c97a4dbe577aa28ef0d603"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/scientific_layouts.tex",
+        "role": "scientific_layout_include",
+        "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/stage3_assets/deseq2_fig1_dispersion_page.png",
+        "role": "copied_scientific_asset",
+        "sha256": "b05922ce98ba09fb12801cde2e119ec1d424726ba4d840bd90a30f11cf5b1b3e"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/stage3_assets/deseq2_fig2_lfc_page.png",
+        "role": "copied_scientific_asset",
+        "sha256": "444d3f65bef0338e7229d27a158e6d79da8d33fefb6a84bb291f1cd1ef80b48d"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/stage3_assets/deseq2_fig6_benchmark_page.png",
+        "role": "copied_scientific_asset",
+        "sha256": "1ea2acf10758f75331523c5ee4ea4bd8c4dea4e867bc3f81c713c4b815840e29"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+      },
+      {
+        "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/styles/sintefcolor.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+      }
+    ],
+    "sha256": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e"
+  },
+  "review_evidence_identity": null,
+  "deck_level_decision": "WAITING_FOR_DECK_VISUAL_REVIEW",
+  "blocking_findings": [],
+  "selected_repair_directives": [],
+  "repair_allowed": false,
+  "fail_closed_reason": null,
+  "repaired_render_identity": null,
+  "repaired_render_input_identity": null,
+  "repaired_rendered_pixel_identity": null,
+  "repaired_render_input_manifest": null,
+  "final_decision": null
+}

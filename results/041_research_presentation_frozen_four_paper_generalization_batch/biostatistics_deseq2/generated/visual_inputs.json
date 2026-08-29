@@ -1,0 +1,193 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "041_research_presentation_frozen_four_paper_generalization_batch-one-call-production-research-deck-review",
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "external_upload_authorization": "",
+  "rubric": {
+    "instructions": "Review the rendered pixels from one normal research-presentations production invocation. Check that each page contains source-specific content from the supplied engineering bundle rather than placeholders; exact CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math, native plots, and medical images are semantically correct where present; no internal RRL/GSC/SRC, QA, provenance, workflow, repo path, run ID, or implementation language leaks into audience-facing slides; repeated generic cards or one-template pages are rejected; and the deck reads as one coherent research update rather than disconnected benchmark pages. For multi-workstream bundles, confirm that each workstream stays internally continuous and that any independent workstream transition is visible without inventing a causal relation. Separately review the deck_contact_sheet item as a deck-level rhythm object: adjacent-page density jumps, repeated composition face, overfull or empty pages, redundant summary filler, result -> failure -> next-experiment rhythm, workstream transition balance, and title/object/formula/image alternation must meet a mature doctoral group-meeting or strong conference-talk bar. The top-level package PASS is not enough; provide item-level judgement and observations for deck_contact_sheet. Do not infer visual quality from filenames or hashes.",
+    "source_contracts": [
+      "The engineering regression bundle is public-safe and explicitly excluded from Stage 5 holdouts.",
+      "Stage 2 gold/reference pixels are used only for compatible composition selection.",
+      "The deck-quality loop may repair at most once and must fail closed/no-winner for unsafe findings or unresolved blockers."
+    ]
+  },
+  "identity_bindings": {
+    "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+    "implementation_commit": null,
+    "input_title": "DESeq2 moderated dispersion and fold-change estimation",
+    "build_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/BUILD_MANIFEST.json",
+    "build_manifest_sha256": "206716991b73e336944d7f8ff351a2e9d5e7c9b78010622bce370a4ff97a2ab1",
+    "source_fidelity_map": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/source_fidelity_map.json",
+    "source_fidelity_map_sha256": "4b26daf40b020a55710e109bc8f303a4861e8a7c5b09ecf29155202c5161f661",
+    "deck_sequence_summary": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_sequence_summary.json",
+    "deck_sequence_summary_sha256": "5cc5d1becad6560671b5c2812e465c6353fc2b4ec02610f82e2bad5c408b8201",
+    "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/quality_loop_state.json",
+    "quality_loop_state_sha256": "349825a9d639e0d400f3bb6286af4b0bcf83f793220e33acdefe856bf27bbffc",
+    "deck_contact_sheet": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_contact_sheet.png",
+    "deck_contact_sheet_sha256": "13a925ca7d505dd9621be69270a7d0580600acf5ba83dc2a97b7dbc2e97078ab",
+    "deck_identity_sha256": "9619728c76128fef222b01bcd58640b39862cfede49944f8dac037439318528b",
+    "render_input_identity_sha256": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e",
+    "render_input_identity": {
+      "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+      "build_workspace": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build",
+      "files": [
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/background.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/background_negative.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/logo_RGB.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/bibliography.bib",
+          "role": "canonical_cuhk_support",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.tex",
+          "role": "main_tex",
+          "sha256": "ccb2b912f2b365d9c5e0c7c1aad70bdb6cf0014092c97a4dbe577aa28ef0d603"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/scientific_layouts.tex",
+          "role": "scientific_layout_include",
+          "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/stage3_assets/deseq2_fig1_dispersion_page.png",
+          "role": "copied_scientific_asset",
+          "sha256": "b05922ce98ba09fb12801cde2e119ec1d424726ba4d840bd90a30f11cf5b1b3e"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/stage3_assets/deseq2_fig2_lfc_page.png",
+          "role": "copied_scientific_asset",
+          "sha256": "444d3f65bef0338e7229d27a158e6d79da8d33fefb6a84bb291f1cd1ef80b48d"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/stage3_assets/deseq2_fig6_benchmark_page.png",
+          "role": "copied_scientific_asset",
+          "sha256": "1ea2acf10758f75331523c5ee4ea4bd8c4dea4e867bc3f81c713c4b815840e29"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+          "role": "canonical_cuhk_style",
+          "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+        },
+        {
+          "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/styles/sintefcolor.sty",
+          "role": "canonical_cuhk_style",
+          "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+        }
+      ],
+      "sha256": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e"
+    },
+    "rendered_pixel_identity_sha256": "5b8b8596996f9589e09f64a495b9f0b98fbffb2be5ec8f4bc582a9628ff77bd9",
+    "pdf_sha256": "2c6ef28f147e37f2a33988e603c364fea747920b281f8a7cc847234ce4753fdc",
+    "page_job_by_logical_id": {
+      "slide_2_statistical_model": "STATISTICAL_MODEL",
+      "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+      "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+      "slide_5_negative_result": "NEGATIVE_RESULT",
+      "slide_6_next_experiment": "NEXT_EXPERIMENT",
+      "slide_7_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON"
+    },
+    "source_evidence_ids_by_logical_id": {
+      "slide_2_statistical_model": [
+        "DESEQ2-EV-GLM"
+      ],
+      "slide_3_real_data_application": [
+        "DESEQ2-EV-LFC"
+      ],
+      "slide_4_experiment_design": [
+        "DESEQ2-EV-DISP"
+      ],
+      "slide_5_negative_result": [
+        "DESEQ2-EV-BENCH",
+        "DESEQ2-EV-LIMIT"
+      ],
+      "slide_6_next_experiment": [
+        "DESEQ2-EV-LIMIT",
+        "DESEQ2-EV-GLM"
+      ],
+      "slide_7_medical_image_comparison": [
+        "DESEQ2-EV-BENCH"
+      ]
+    },
+    "selected_gold_by_page_id": {
+      "deseq2_nb_glm": "GSC-016",
+      "deseq2_lfc_result": "GSC-015",
+      "deseq2_dispersion_shrinkage": "GSC-004",
+      "deseq2_benchmark_limits": "GSC-012",
+      "deseq2_takeaway": "GSC-018",
+      "deseq2_evidence_comparison_slot": "GSC-004"
+    }
+  },
+  "inputs": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-2.png",
+      "mime_type": "image/png",
+      "sha256": "8a1fd45e28e424d8af1df764cd6b45705f754e6c5cf00056b124999329e1b74a",
+      "description": "Rendered exact-CUHK production page for STATISTICAL_MODEL using source evidence DESEQ2-EV-GLM."
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-3.png",
+      "mime_type": "image/png",
+      "sha256": "ba8ecbf6a784169399a685f772f06fb94aceee03f2fb005bce4e3eb8fdc8c759",
+      "description": "Rendered exact-CUHK production page for REAL_DATA_APPLICATION using source evidence DESEQ2-EV-LFC."
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-4.png",
+      "mime_type": "image/png",
+      "sha256": "287d550aec7ae7ac46a7a2fdb1dd7854bccbfaf682d6c8eb8b6a96fc6d11e133",
+      "description": "Rendered exact-CUHK production page for EXPERIMENT_DESIGN using source evidence DESEQ2-EV-DISP."
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-5.png",
+      "mime_type": "image/png",
+      "sha256": "8178bf1680055d62517317758b979363519a60bef800bd6df5dd47bb8abc558d",
+      "description": "Rendered exact-CUHK production page for NEGATIVE_RESULT using source evidence DESEQ2-EV-BENCH, DESEQ2-EV-LIMIT."
+    },
+    {
+      "logical_id": "slide_6_next_experiment",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-6.png",
+      "mime_type": "image/png",
+      "sha256": "7f5aa7e549a9757e98d39d80468ecf1369cd8bfa8a73df7d4b332ef920d034b7",
+      "description": "Rendered exact-CUHK production page for NEXT_EXPERIMENT using source evidence DESEQ2-EV-LIMIT, DESEQ2-EV-GLM."
+    },
+    {
+      "logical_id": "slide_7_medical_image_comparison",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/rendered/slide-7.png",
+      "mime_type": "image/png",
+      "sha256": "b838c8f2e5681db9bb0890c8dcb0fdcaa36eddfac6eb117e86898adfac4840ae",
+      "description": "Rendered exact-CUHK production page for MEDICAL_IMAGE_COMPARISON using source evidence DESEQ2-EV-BENCH."
+    },
+    {
+      "logical_id": "deck_contact_sheet",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_contact_sheet.png",
+      "mime_type": "image/png",
+      "sha256": "13a925ca7d505dd9621be69270a7d0580600acf5ba83dc2a97b7dbc2e97078ab",
+      "description": "Deck-level contact sheet preserving the rendered slide sequence for rhythm, density, transition, and template-repeat review.",
+      "review_role": "deck_sequence_context"
+    }
+  ]
+}

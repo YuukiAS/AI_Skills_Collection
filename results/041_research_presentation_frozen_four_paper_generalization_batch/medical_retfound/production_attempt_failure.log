@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "/home/yuukias/AI_Skills_Collection/skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py", line 848, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/home/yuukias/AI_Skills_Collection/skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py", line 823, in main
+    manifest = generate(
+        args.input_bundle,
+    ...<5 lines>...
+        rereview_evidence_path=args.rereview_evidence,
+    )
+  File "/home/yuukias/AI_Skills_Collection/skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py", line 660, in generate
+    initial_render = render_specs(bundle, specs, out_dir, task_key)
+  File "/home/yuukias/AI_Skills_Collection/skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py", line 477, in render_specs
+    layouts = [stage3.resolve_layout(spec) for spec in specs]
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/yuukias/AI_Skills_Collection/skills/tools/documents-media/presentations/shared/scripts/generate_cuhk_scientific_layout_stage3.py", line 603, in resolve_layout
+    recipe = recipe_override or build_gold_composition_recipe.build_recipe(spec["query"])
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/yuukias/AI_Skills_Collection/skills/tools/documents-media/presentations/shared/scripts/build_gold_composition_recipe.py", line 41, in build_recipe
+    raise ValueError("no compatible gold composition record")
+ValueError: no compatible gold composition record

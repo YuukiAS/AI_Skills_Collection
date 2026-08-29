@@ -1,0 +1,640 @@
+{
+  "schema": "RESEARCH_PRESENTATION_PRODUCTION_TRACE_V1",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "entrypoint": "research-presentations one-call production",
+  "input_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source_bundle.json",
+  "normal_skill_route": "research-presentations",
+  "storyline_trace": {
+    "schema": "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1",
+    "source_derivation": "workstream assignment uses explicit page-job/source workstream metadata when present, otherwise evidence-board fallback; titles, page numbers, domain token profiles, and gold IDs are not classification keys",
+    "cross_workstream_relation_policy": "do not infer causal bridges between distinct workstreams without explicit source support",
+    "workstreams": [
+      {
+        "workstream_id": "deseq2_paper",
+        "label": "DESeq2 paper",
+        "scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+        "first_source_order": 1,
+        "page_jobs": [
+          "deseq2_nb_glm",
+          "deseq2_dispersion_shrinkage",
+          "deseq2_lfc_result",
+          "deseq2_benchmark_limits",
+          "deseq2_evidence_comparison_slot",
+          "deseq2_takeaway"
+        ],
+        "workstream_order": 1,
+        "source_supported_cross_workstream_relation_to_previous": null,
+        "transition_label": "DESeq2 paper"
+      }
+    ],
+    "page_assignments": [
+      {
+        "page_id": "deseq2_nb_glm",
+        "page_job": "STATISTICAL_MODEL",
+        "original_order": 1,
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          10,
+          1
+        ],
+        "storyline_order": 1,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "deseq2_lfc_result",
+        "page_job": "REAL_DATA_APPLICATION",
+        "original_order": 3,
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          20,
+          3
+        ],
+        "storyline_order": 2,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "deseq2_dispersion_shrinkage",
+        "page_job": "EXPERIMENT_DESIGN",
+        "original_order": 2,
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          30,
+          2
+        ],
+        "storyline_order": 3,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "deseq2_benchmark_limits",
+        "page_job": "NEGATIVE_RESULT",
+        "original_order": 4,
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          40,
+          4
+        ],
+        "storyline_order": 4,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "deseq2_takeaway",
+        "page_job": "NEXT_EXPERIMENT",
+        "original_order": 6,
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          50,
+          6
+        ],
+        "storyline_order": 5,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "deseq2_evidence_comparison_slot",
+        "page_job": "MEDICAL_IMAGE_COMPARISON",
+        "original_order": 5,
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          100,
+          5
+        ],
+        "storyline_order": 6,
+        "workstream_order": 1
+      }
+    ],
+    "storyline_order": [
+      "STATISTICAL_MODEL",
+      "REAL_DATA_APPLICATION",
+      "EXPERIMENT_DESIGN",
+      "NEGATIVE_RESULT",
+      "NEXT_EXPERIMENT",
+      "MEDICAL_IMAGE_COMPARISON"
+    ]
+  },
+  "benchmark_generators_called_as_entrypoint": [],
+  "stage5_holdout_eligible": false,
+  "slides": [
+    {
+      "page_id": "deseq2_nb_glm",
+      "page_job": "STATISTICAL_MODEL",
+      "scientific_object_query": {
+        "page_function": "STATISTICAL_MODEL",
+        "scientific_object": "biostatistics negative binomial GLM RNA-seq DESeq2 dispersion equation",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "equation",
+        "evidence_type": "mathematical model",
+        "density": "moderate",
+        "panel_count": 0
+      },
+      "source_evidence_ids": [
+        "DESEQ2-EV-GLM"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-016",
+          "reference_id": "RRL-020",
+          "source_id": "SRC-006",
+          "page_function": "STATISTICAL_MODEL",
+          "composition_family": "equation-centered-objective",
+          "primary_bbox": {
+            "x": 0.25,
+            "y": 0.39,
+            "w": 0.52,
+            "h": 0.18
+          },
+          "score": 14,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "panel_count exact match",
+            "scientific object overlap: biostatistics, equation, mathematical, model"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        },
+        {
+          "gold_id": "GSC-011",
+          "reference_id": "RRL-009",
+          "source_id": "SRC-004",
+          "page_function": "ESTIMATOR",
+          "composition_family": "annotated-algorithm-workflow",
+          "primary_bbox": {
+            "x": 0.07,
+            "y": 0.2,
+            "w": 0.86,
+            "h": 0.56
+          },
+          "score": 5,
+          "compatibility_reasons": [
+            "page_function matches scientific job",
+            "general research fallback",
+            "scientific object overlap: model"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-016",
+      "selected_reference_id": "RRL-020",
+      "source_composition_identity": {
+        "recipe_sha256": "d6912ee27a85c0f2a23052b25c519f62036374cdd583ddc9db3b7b8848bd0544",
+        "resolved_layout_sha256": "40a1d20d9fbb26494cd68163507c562763d0b54af7ccd891e39be2ad1fb48b3b"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+        "storyline_order": 1,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "accepted_stage3_foundation",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    },
+    {
+      "page_id": "deseq2_lfc_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "scientific_object_query": {
+        "page_function": "REAL_DATA_APPLICATION",
+        "scientific_object": "RNA-seq fold change shrinkage MA plot MLE MAP DESeq2 Bottomly",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "plot",
+        "evidence_type": "fold-change result figure",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "source_evidence_ids": [
+        "DESEQ2-EV-LFC"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-015",
+          "reference_id": "RRL-017",
+          "source_id": "SRC-005",
+          "page_function": "REAL_DATA_APPLICATION",
+          "composition_family": "dominant-labeled-scatterplot",
+          "primary_bbox": {
+            "x": 0.43,
+            "y": 0.17,
+            "w": 0.5,
+            "h": 0.64
+          },
+          "score": 13,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "density match",
+            "panel_count exact match",
+            "scientific object overlap: plot, result"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        },
+        {
+          "gold_id": "GSC-014",
+          "reference_id": "RRL-016",
+          "source_id": "SRC-005",
+          "page_function": "REAL_DATA_APPLICATION",
+          "composition_family": "claim-centered-result-table",
+          "primary_bbox": {
+            "x": 0.43,
+            "y": 0.35,
+            "w": 0.42,
+            "h": 0.31
+          },
+          "score": 12,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "density match",
+            "panel_count exact match",
+            "scientific object overlap: result"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-015",
+      "selected_reference_id": "RRL-017",
+      "source_composition_identity": {
+        "recipe_sha256": "7b751a2d699721ec28e1acd7217e3faa0e3396337a31b5167a72ec62c9b09805",
+        "resolved_layout_sha256": "7d76f431b315df21b61d7b04359ac5471b218cfe205946f049021a15b2493cc1"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+        "storyline_order": 2,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "presentation_native_quantitative_result",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    },
+    {
+      "page_id": "deseq2_dispersion_shrinkage",
+      "page_job": "EXPERIMENT_DESIGN",
+      "scientific_object_query": {
+        "page_function": "EXPERIMENT_DESIGN",
+        "scientific_object": "DESeq2 dispersion shrinkage empirical Bayes trend gene-wise MAP outlier",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "plot",
+        "evidence_type": "estimation mechanism",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "source_evidence_ids": [
+        "DESEQ2-EV-DISP"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-004",
+          "reference_id": "RRL-019",
+          "source_id": "SRC-006",
+          "page_function": "EXPERIMENT_DESIGN",
+          "composition_family": "application-task-map",
+          "primary_bbox": {
+            "x": 0.06,
+            "y": 0.35,
+            "w": 0.84,
+            "h": 0.47
+          },
+          "score": 8,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "general research fallback",
+            "density match",
+            "scientific object overlap: map"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-004",
+      "selected_reference_id": "RRL-019",
+      "source_composition_identity": {
+        "recipe_sha256": "87c3f284d9efb9ee0e735ea46f66625ca6323d40b4e53544322aa0f621c8d325",
+        "resolved_layout_sha256": "a50f79d402cef032b8b4b24c668af26858f8cd89a492d27c659f9b0a187e2e63"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+        "storyline_order": 3,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "typed_experiment_design_hierarchy",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    },
+    {
+      "page_id": "deseq2_benchmark_limits",
+      "page_job": "NEGATIVE_RESULT",
+      "scientific_object_query": {
+        "page_function": "NEGATIVE_RESULT",
+        "scientific_object": "DESeq2 benchmark sensitivity precision false discovery sample size fold change limits",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "plot",
+        "evidence_type": "benchmark evidence and limits",
+        "density": "high",
+        "panel_count": 1
+      },
+      "source_evidence_ids": [
+        "DESEQ2-EV-BENCH",
+        "DESEQ2-EV-LIMIT"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-012",
+          "reference_id": "RRL-011",
+          "source_id": "SRC-004",
+          "page_function": "NEGATIVE_RESULT",
+          "composition_family": "side-by-side-failure-comparison",
+          "primary_bbox": {
+            "x": 0.05,
+            "y": 0.28,
+            "w": 0.86,
+            "h": 0.5
+          },
+          "score": 8,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "general research fallback",
+            "panel_count near match",
+            "scientific object overlap: sample"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-012",
+      "selected_reference_id": "RRL-011",
+      "source_composition_identity": {
+        "recipe_sha256": "2f81b1d097c264d2d0c0290de3ed2e2355dec7e7e78b14ab4c43198a89783c13",
+        "resolved_layout_sha256": "4d94fe5970f8b8cf9bfc6f9fc3ed090f1841a87d469dcada5ec76c94d369b91d"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+        "storyline_order": 4,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "accepted_stage3_foundation",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    },
+    {
+      "page_id": "deseq2_takeaway",
+      "page_job": "NEXT_EXPERIMENT",
+      "scientific_object_query": {
+        "page_function": "NEXT_EXPERIMENT",
+        "scientific_object": "biostatistics discussion DESeq2 empirical Bayes shrinkage diagnostics Wald tests RNA-seq",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "diagram",
+        "evidence_type": "paper interpretation",
+        "density": "moderate",
+        "panel_count": 4
+      },
+      "source_evidence_ids": [
+        "DESEQ2-EV-LIMIT",
+        "DESEQ2-EV-GLM"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-018",
+          "reference_id": "RRL-059",
+          "source_id": "SRC-077",
+          "page_function": "NEXT_EXPERIMENT",
+          "composition_family": "comparative-next-query-strategy",
+          "primary_bbox": {
+            "x": 0.1,
+            "y": 0.36,
+            "w": 0.78,
+            "h": 0.46
+          },
+          "score": 10,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "general research fallback",
+            "density match",
+            "panel_count exact match",
+            "scientific object overlap: discussion"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-018",
+      "selected_reference_id": "RRL-059",
+      "source_composition_identity": {
+        "recipe_sha256": "61cd942e34e54b11cd89105d5d4d073da734a46ce5fc43ef5ab806269ea6f88e",
+        "resolved_layout_sha256": "ea933ed510ab7db82f60ddb6fd505357c9d62de74cca49b43f8835321a96c634"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+        "storyline_order": 5,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "evidence_to_decision_next_experiment",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    },
+    {
+      "page_id": "deseq2_evidence_comparison_slot",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "scientific_object_query": {
+        "page_function": "MEDICAL_IMAGE_COMPARISON",
+        "scientific_object": "same-paper algorithm comparison RNA-seq sensitivity precision DESeq2 edgeR EBSeq NOISeq limma",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "plot",
+        "evidence_type": "same-paper comparison evidence",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "source_evidence_ids": [
+        "DESEQ2-EV-BENCH"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-004",
+          "reference_id": "RRL-019",
+          "source_id": "SRC-006",
+          "page_function": "EXPERIMENT_DESIGN",
+          "composition_family": "application-task-map",
+          "primary_bbox": {
+            "x": 0.06,
+            "y": 0.35,
+            "w": 0.84,
+            "h": 0.47
+          },
+          "score": 6,
+          "compatibility_reasons": [
+            "page_function matches scientific job",
+            "general research fallback",
+            "density match",
+            "scientific object overlap: comparison"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-004",
+      "selected_reference_id": "RRL-019",
+      "source_composition_identity": {
+        "recipe_sha256": "a142156747b9d32ddf72bbeb8e628f879432f6425faf08cc01addf286191ebff",
+        "resolved_layout_sha256": "8a91ab42f9860d50391da474081bc727c34e6bf52f977e4108e9335d6208e894"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "deseq2_paper",
+        "workstream_label": "DESeq2 paper",
+        "workstream_scope": "negative-binomial GLM, dispersion shrinkage, fold-change shrinkage, tests, benchmarks, and interpretation",
+        "storyline_order": 6,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "same_case_medical_roi_zoom",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    }
+  ],
+  "deck_quality_loop": {
+    "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/quality_loop_state.json",
+    "deck_sequence_summary": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_sequence_summary.json",
+    "deck_contact_sheet": {
+      "status": "GENERATED",
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_contact_sheet.png",
+      "sha256": "13a925ca7d505dd9621be69270a7d0580600acf5ba83dc2a97b7dbc2e97078ab"
+    }
+  }
+}

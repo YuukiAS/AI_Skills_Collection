@@ -1,0 +1,234 @@
+{
+  "schema": "RESEARCH_PRESENTATION_SOURCE_FIDELITY_MAP_V1",
+  "stage5_holdout_eligible": false,
+  "holdout_exclusion_reason": "041 real-paper holdout input; production entrypoint requires this legacy exclusion flag while task-local eligibility is recorded in batch_eligibility.json.",
+  "pages": [
+    {
+      "page_id": "cardiac_pipeline_model",
+      "page_job": "STATISTICAL_MODEL",
+      "source_evidence_ids": [
+        "CARDIAC-EV-PIPE"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "CARDIAC-EV-PIPE",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig1_pipeline_page.png",
+          "source_anchor": "PDF page 3, Figure 1",
+          "claim_supported": "The SSL pipeline builds weak labels and successive segmentation models across A2C, A4C, and SAX views.",
+          "consumed_as": "paper pipeline page"
+        }
+      ],
+      "generated_object_ids": [
+        "cardiac_pipeline_model_primary",
+        "cardiac_pipeline_model_annotation",
+        "cardiac_pipeline_model_caption",
+        "cardiac_pipeline_model_model_components",
+        "cardiac_pipeline_model_model_interpretation"
+      ],
+      "selected_gold_id": "GSC-016",
+      "selected_reference_id": "RRL-020",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "cardiac_measurement_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "source_evidence_ids": [
+        "CARDIAC-EV-MEASURE"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "CARDIAC-EV-MEASURE",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig6_measurement_page.png",
+          "source_anchor": "PDF page 8, Figure 6",
+          "claim_supported": "Clinical and SSL-derived chamber measurements are compared with r2 and Bland-Altman summaries.",
+          "consumed_as": "paper measurement figure page"
+        }
+      ],
+      "generated_object_ids": [
+        "cardiac_measurement_result_primary",
+        "cardiac_measurement_result_annotation",
+        "cardiac_measurement_result_caption"
+      ],
+      "selected_gold_id": "GSC-015",
+      "selected_reference_id": "RRL-017",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "cardiac_a2c_design",
+      "page_job": "EXPERIMENT_DESIGN",
+      "source_evidence_ids": [
+        "CARDIAC-EV-A2C"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "CARDIAC-EV-A2C",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig2_a2c_page.png",
+          "source_anchor": "PDF page 5, Figure 2",
+          "claim_supported": "A2C examples show weak labels, predictions, and human segmentation visual aids for LV and LA anatomy.",
+          "consumed_as": "real echocardiography page"
+        }
+      ],
+      "generated_object_ids": [
+        "cardiac_a2c_design_primary",
+        "cardiac_a2c_design_annotation",
+        "cardiac_a2c_design_caption"
+      ],
+      "selected_gold_id": "GSC-004",
+      "selected_reference_id": "RRL-019",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "cardiac_failure_boundaries",
+      "page_job": "NEGATIVE_RESULT",
+      "source_evidence_ids": [
+        "CARDIAC-EV-SAX",
+        "CARDIAC-EV-LIMIT"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "CARDIAC-EV-SAX",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig4_sax_page.png",
+          "source_anchor": "PDF page 7, Figure 4",
+          "claim_supported": "SAX examples show circle-derived weak labels and recovered LV segmentation through the pipeline.",
+          "consumed_as": "real echocardiography page"
+        },
+        {
+          "evidence_id": "CARDIAC-EV-LIMIT",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source/source.md",
+          "source_anchor": "## Limitations and interpretation",
+          "claim_supported": "Noisy ultrasound boundaries, frame selection, missing labels, and further validation remain important limits.",
+          "consumed_as": "limitation note"
+        }
+      ],
+      "generated_object_ids": [
+        "cardiac_failure_boundaries_primary",
+        "cardiac_failure_boundaries_annotation",
+        "cardiac_failure_boundaries_caption"
+      ],
+      "selected_gold_id": "GSC-012",
+      "selected_reference_id": "RRL-011",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "cardiac_takeaway",
+      "page_job": "NEXT_EXPERIMENT",
+      "source_evidence_ids": [
+        "CARDIAC-EV-LIMIT",
+        "CARDIAC-EV-MEASURE"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "CARDIAC-EV-LIMIT",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source/source.md",
+          "source_anchor": "## Limitations and interpretation",
+          "claim_supported": "Noisy ultrasound boundaries, frame selection, missing labels, and further validation remain important limits.",
+          "consumed_as": "limitation note"
+        },
+        {
+          "evidence_id": "CARDIAC-EV-MEASURE",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig6_measurement_page.png",
+          "source_anchor": "PDF page 8, Figure 6",
+          "claim_supported": "Clinical and SSL-derived chamber measurements are compared with r2 and Bland-Altman summaries.",
+          "consumed_as": "paper measurement figure page"
+        }
+      ],
+      "generated_object_ids": [
+        "cardiac_takeaway_primary",
+        "cardiac_takeaway_annotation",
+        "cardiac_takeaway_caption"
+      ],
+      "selected_gold_id": "GSC-018",
+      "selected_reference_id": "RRL-059",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "cardiac_same_case_views",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "source_evidence_ids": [
+        "CARDIAC-EV-A2C",
+        "CARDIAC-EV-A4C",
+        "CARDIAC-EV-SAX"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "CARDIAC-EV-A2C",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig2_a2c_page.png",
+          "source_anchor": "PDF page 5, Figure 2",
+          "claim_supported": "A2C examples show weak labels, predictions, and human segmentation visual aids for LV and LA anatomy.",
+          "consumed_as": "real echocardiography page"
+        },
+        {
+          "evidence_id": "CARDIAC-EV-A4C",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig3_a4c_page.png",
+          "source_anchor": "PDF page 6, Figure 3",
+          "claim_supported": "A4C examples include LV, LA, RV, RA segmentation semantics and difficult clinical cases.",
+          "consumed_as": "real echocardiography page"
+        },
+        {
+          "evidence_id": "CARDIAC-EV-SAX",
+          "source_path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig4_sax_page.png",
+          "source_anchor": "PDF page 7, Figure 4",
+          "claim_supported": "SAX examples show circle-derived weak labels and recovered LV segmentation through the pipeline.",
+          "consumed_as": "real echocardiography page"
+        }
+      ],
+      "generated_object_ids": [
+        "cardiac_same_case_views_primary",
+        "cardiac_same_case_views_annotation",
+        "cardiac_same_case_views_caption",
+        "cardiac_same_case_views_same_case_roi_zoom"
+      ],
+      "selected_gold_id": "GSC-008",
+      "selected_reference_id": "RRL-013",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "RESEARCH_PRESENTATION_STAGE5_LOCAL_VISUAL_QA_V1",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "checked_at": "2026-08-29",
+  "status": "NON_BLOCKING_LOCAL_OBSERVATION_ONLY",
+  "batch_verdict": "FAIL_FROM_PRE_RENDER_SELECTOR_FAILURES_NOT_FROM_LOCAL_VISUAL_PASS",
+  "observations": [
+    {
+      "deck": "biostatistics_deseq2",
+      "contact_sheet": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_contact_sheet.png",
+      "sha256": "13a925ca7d505dd9621be69270a7d0580600acf5ba83dc2a97b7dbc2e97078ab",
+      "local_observation": "nonblank exact-CUHK Beamer contact sheet; source figure pages are visible but several article-page figures are small and may be projection-readability blockers under Terra"
+    },
+    {
+      "deck": "medical_cardiac_ultrasound",
+      "contact_sheet": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/deck_contact_sheet.png",
+      "sha256": "1792084d006f5a718c2f96197ec538ebf16cfb531d00edd9ba542b23171cfec7",
+      "local_observation": "nonblank exact-CUHK Beamer contact sheet with real echocardiography page pixels and measurement evidence; some source-image pages are small and require external Terra judgement"
+    },
+    {
+      "deck": "statistics_tmb",
+      "local_observation": "no rendered pixels; normal selector failed before render"
+    },
+    {
+      "deck": "medical_retfound",
+      "local_observation": "no rendered pixels; normal selector failed before render"
+    }
+  ],
+  "terra_status": "PENDING_EXTERNAL_NOT_CLAIMED",
+  "manual_output_patch_applied": false
+}

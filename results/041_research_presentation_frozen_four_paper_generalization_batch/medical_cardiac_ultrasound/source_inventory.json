@@ -1,0 +1,54 @@
+{
+  "schema": "RESEARCH_PRESENTATION_SOURCE_INVENTORY_V1",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "paper_key": "medical_cardiac_ultrasound",
+  "inventory_date": "2026-08-29",
+  "published_source": "https://www.nature.com/articles/s41467-025-59451-5",
+  "doi": "10.1038/s41467-025-59451-5",
+  "license": "Creative Commons Attribution 4.0 International; article figure credit lines checked in PDF/HTML and no third-party exclusion was found for selected article figures",
+  "article_pdf": {
+    "local_cache_untracked": "/tmp/rh041_sources/cardiac_s41467-025-59451-5.pdf",
+    "sha256": "bbb31b8d206c142d4d659c5ebb9d2fb1a190fd5c175f0a8963e914474cf078e9",
+    "pages": 13
+  },
+  "section_inventory": [
+    "identity",
+    "scientific problem",
+    "model or pipeline",
+    "primary evidence",
+    "limitations and interpretation"
+  ],
+  "figure_table_inventory": [],
+  "selected_assets": [
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig1_pipeline_page.png",
+      "sha256": "1fc49e4f00200602f270d01eae47f403effd390128404e038e1d6cf9f28d4e13",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    },
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig2_a2c_page.png",
+      "sha256": "d4676c5f749996088fb2149b6d76a6f68549bc9127c7ab8edca43b2871f6aaba",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    },
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig3_a4c_page.png",
+      "sha256": "0d5997220e2417cbdf782fc5ebca9c239cc664a13299286693fa92c1dcb915e6",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    },
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig4_sax_page.png",
+      "sha256": "074651ba864151e7e55b41543ff7ff7089198cd50fbe1cea20c1ce3112114038",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    },
+    {
+      "path": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/assets/cardiac_fig6_measurement_page.png",
+      "sha256": "584d3b3625b78961ba7381bc006dd89f94f242fbdf8f34ed1b938af469d099a2",
+      "source": "rendered page from public article PDF",
+      "rights": "article CC license; selected page has no detected third-party exclusion in article credit line"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "RESEARCH_PRESENTATION_STAGE5_LOCAL_ACCEPTANCE_CHECKS_V1",
+  "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
+  "checked_at": "2026-08-29",
+  "batch_verdict": "FAIL",
+  "reason": "TMB and RETFound normal production invocations failed before render with no compatible gold composition record; DESeq2 and cardiac ultrasound rendered mechanically but strict 4/4 batch acceptance is not met.",
+  "checks": [
+    {
+      "name": "json_artifacts_parse",
+      "status": "PASS"
+    },
+    {
+      "name": "production_freeze_diff",
+      "status": "PASS",
+      "details": "no presentation production/gold/layout/prompt/validator/quality-loop/template diff from freeze locator to pre-acquisition HEAD"
+    },
+    {
+      "name": "source_bundles_frozen_before_first_render",
+      "status": "PASS"
+    },
+    {
+      "name": "normal_production_invocation_DESeq2",
+      "status": "PASS",
+      "render_status": "ok"
+    },
+    {
+      "name": "normal_production_invocation_cardiac_ultrasound",
+      "status": "PASS",
+      "render_status": "ok"
+    },
+    {
+      "name": "normal_production_invocation_TMB",
+      "status": "FAIL",
+      "details": "pre-render selector compatibility failure"
+    },
+    {
+      "name": "normal_production_invocation_RETFound",
+      "status": "FAIL",
+      "details": "pre-render selector compatibility failure"
+    },
+    {
+      "name": "strict_production_validator_on_successful_holdouts",
+      "status": "KNOWN_NON_HOLDOUT_AWARE_MISMATCH",
+      "details": "validator still asserts engineering-fixture phrases such as Coverage by ICC under imbalanced clusters and Same-case ROI zoom"
+    },
+    {
+      "name": "visual_review_evidence",
+      "status": "PENDING_EXTERNAL",
+      "details": "VISUAL_REVIEW.json not fabricated locally; only visual_inputs.json is prepared"
+    }
+  ]
+}
