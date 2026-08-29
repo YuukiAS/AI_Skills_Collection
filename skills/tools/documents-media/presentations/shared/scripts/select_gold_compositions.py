@@ -7,6 +7,8 @@ import argparse
 import json
 from pathlib import Path
 
+import scientific_object_semantics
+
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "references" / "research_gold_composition_index.json"
@@ -19,6 +21,21 @@ def load_records(path: Path = INDEX) -> list[dict]:
 def _tokens(*parts: str) -> set[str]:
     text = " ".join(part or "" for part in parts).replace("_", " ").replace("-", " ").lower()
     return {token for token in "".join(ch if ch.isalnum() else " " for ch in text).split() if token}
+
+
+def _record_semantic_fields(record: dict) -> dict:
+    return {
+        "page_function": record.get("page_function"),
+        "primary_scientific_object_role": record.get("primary_scientific_object_role"),
+        "composition_family": record.get("composition_family"),
+        "scientific_jobs": record.get("scientific_jobs", []),
+        "selection_keywords": record.get("selection_keywords", []),
+        "supporting_region_roles": record.get("supporting_region_roles", []),
+        "visual_hierarchy": record.get("visual_hierarchy", []),
+        "alignment_groups": record.get("alignment_groups", []),
+        "reading_flow": record.get("reading_flow"),
+        "annotation_legend_caption_panel_relations": record.get("annotation_legend_caption_panel_relations", []),
+    }
 
 
 def score_record(record: dict, query: dict) -> tuple[int, list[str], list[str]]:
@@ -65,6 +82,8 @@ def score_record(record: dict, query: dict) -> tuple[int, list[str], list[str]]:
         elif panel_count >= 3 and capacity == 0:
             exclusions.append("panel_count incompatible")
 
+    query_role = scientific_object_semantics.normalize_scientific_object_role(query)
+    record_role = scientific_object_semantics.normalize_scientific_object_role(_record_semantic_fields(record))
     q_tokens = _tokens(query.get("scientific_object", ""), query.get("evidence_type", ""), query.get("dominant_object_type", ""))
     r_tokens = _tokens(
         record["primary_scientific_object_role"],
@@ -78,8 +97,14 @@ def score_record(record: dict, query: dict) -> tuple[int, list[str], list[str]]:
         if overlap:
             score += min(5, len(overlap))
             reasons.append(f"scientific object overlap: {', '.join(sorted(overlap)[:5])}")
+            if scientific_object_semantics.compatible_roles(query_role, record_role):
+                score += 2
+                reasons.append(f"canonical scientific-object role match: {query_role['role']}")
+        elif scientific_object_semantics.compatible_roles(query_role, record_role):
+            score += 4
+            reasons.append(f"canonical scientific-object role match: {query_role['role']}")
         else:
-            exclusions.append("no scientific-object overlap")
+            exclusions.append("no compatible scientific-object semantic role")
 
     query_text = " ".join(str(value).lower() for value in query.values() if value is not None)
     rejected_text = " ".join(record.get("rejected_for_jobs", [])).lower()
@@ -108,6 +133,7 @@ def select_records(query: dict, limit: int = 3, records: list[dict] | None = Non
                 "composition_family": record["composition_family"],
                 "primary_bbox": record["primary_bbox"],
                 "score": score,
+                "canonical_scientific_object_role": scientific_object_semantics.normalize_scientific_object_role(_record_semantic_fields(record))["role"],
                 "compatibility_reasons": reasons,
                 "rights_reuse_boundary": record["rights_reuse_boundary"],
             })
@@ -121,6 +147,7 @@ def select_records(query: dict, limit: int = 3, records: list[dict] | None = Non
     return {
         "schema": "RESEARCH_GOLD_COMPOSITION_SELECTION_V1",
         "query": query,
+        "canonical_query_role": scientific_object_semantics.normalize_scientific_object_role(query),
         "matches": candidates[:limit],
         "excluded": excluded,
     }

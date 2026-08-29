@@ -21,6 +21,8 @@ import validate_deck_plan  # noqa: E402
 import generate_cuhk_scientific_layout_stage3 as stage3  # noqa: E402
 import generate_research_presentation_production_entry as production_entry  # noqa: E402
 import deck_quality_loop  # noqa: E402
+import scientific_object_semantics  # noqa: E402
+import select_gold_compositions  # noqa: E402
 
 
 class PresentationSharedTests(unittest.TestCase):
@@ -484,6 +486,132 @@ class PresentationSharedTests(unittest.TestCase):
         discussion_probe = next(item for item in probes["probes"] if item["probe_id"] == "discussion_next_experiment_batch_query")
         self.assertEqual(discussion_probe["baseline_recipe"]["selected_gold_id"], "GSC-018")
         self.assertEqual(discussion_probe["alternate_error"], "no compatible gold composition record")
+
+    def test_scientific_object_semantic_aliases_select_existing_gold_without_literal_overlap(self) -> None:
+        cases = [
+            (
+                {
+                    "page_function": "STATISTICAL_MODEL",
+                    "scientific_object": "alpha_custom_equation_object",
+                    "domain_family": "medical_imaging",
+                    "dominant_object_type": "equation",
+                    "evidence_type": "symbolic setup",
+                    "density": "low",
+                    "panel_count": 0,
+                },
+                "mathematical_model",
+                "GSC-016",
+            ),
+            (
+                {
+                    "page_function": "REAL_DATA_APPLICATION",
+                    "scientific_object": "omega_measurement_artifact_a",
+                    "domain_family": "biostatistics",
+                    "dominant_object_type": "source_figure",
+                    "evidence_type": "measurement display",
+                    "density": "moderate",
+                    "panel_count": 1,
+                },
+                "quantitative_source_object",
+                "GSC-014",
+            ),
+            (
+                {
+                    "page_function": "EXPERIMENT_DESIGN",
+                    "scientific_object": "neutral_stage_nodes",
+                    "domain_family": "medical_imaging",
+                    "dominant_object_type": "flow",
+                    "evidence_type": "structured transition",
+                    "density": "moderate",
+                    "panel_count": 4,
+                },
+                "process_diagram",
+                "GSC-004",
+            ),
+            (
+                {
+                    "page_function": "MEDICAL_IMAGE_COMPARISON",
+                    "scientific_object": "case_image_panels",
+                    "domain_family": "medical_imaging",
+                    "dominant_object_type": "image_panel",
+                    "evidence_type": "representative comparison",
+                    "density": "high",
+                    "panel_count": 4,
+                },
+                "medical_image_panel",
+                "GSC-008",
+            ),
+        ]
+        for query, role, expected_gold_id in cases:
+            with self.subTest(role=role):
+                role_trace = scientific_object_semantics.normalize_scientific_object_role(query)
+                self.assertEqual(role_trace["role"], role)
+                selected = select_gold_compositions.select_records(query, limit=2)
+                self.assertEqual(selected["canonical_query_role"]["role"], role)
+                self.assertEqual(selected["matches"][0]["gold_id"], expected_gold_id)
+                self.assertIn(
+                    f"canonical scientific-object role match: {role}",
+                    selected["matches"][0]["compatibility_reasons"],
+                )
+
+        baseline = {
+            "page_function": "REAL_DATA_APPLICATION",
+            "scientific_object": "omega_measurement_artifact_a",
+            "domain_family": "biostatistics",
+            "dominant_object_type": "source_figure",
+            "evidence_type": "measurement display",
+            "density": "moderate",
+            "panel_count": 1,
+        }
+        variants = []
+        for alias in ["alpha_prefix_measurement_artifact", "zeta_suffix_measurement_artifact"]:
+            mutated = dict(baseline)
+            mutated["scientific_object"] = alias
+            variants.append(select_gold_compositions.select_records(mutated, limit=2)["matches"][0]["composition_family"])
+        self.assertEqual(variants, ["claim-centered-result-table", "claim-centered-result-table"])
+
+    def test_scientific_object_semantics_preserve_no_winner_and_holdout_firewall(self) -> None:
+        unknown_query = {
+            "page_function": "REAL_DATA_APPLICATION",
+            "scientific_object": "opaque zeta token",
+            "domain_family": "biostatistics",
+            "dominant_object_type": "ambient_text",
+            "evidence_type": "narrative note",
+            "density": "moderate",
+            "panel_count": 1,
+        }
+        selected = select_gold_compositions.select_records(unknown_query, limit=2)
+        self.assertEqual(selected["canonical_query_role"]["role"], "unknown")
+        self.assertFalse(selected["matches"])
+        self.assertTrue(
+            any("no compatible scientific-object semantic role" in " ".join(item["exclusion_reasons"]) for item in selected["excluded"])
+        )
+
+        incompatible_domain = dict(unknown_query)
+        incompatible_domain.update(
+            {
+                "scientific_object": "neutral source figure",
+                "dominant_object_type": "source_figure",
+                "evidence_type": "measurement display",
+                "domain_family": "statistics",
+            }
+        )
+        self.assertFalse(select_gold_compositions.select_records(incompatible_domain, limit=2)["matches"])
+
+        searched_sources = [
+            SHARED / "scripts/scientific_object_semantics.py",
+            SHARED / "scripts/select_gold_compositions.py",
+            SHARED / "scripts/deck_quality_loop.py",
+        ]
+        source_text = "\n".join(path.read_text(encoding="utf-8") for path in searched_sources)
+        forbidden_markers = [
+            "".join(("T", "M", "B")),
+            "DE" + "Seq" + "2",
+            "RET" + "Found",
+            "cardiac" + "-" + "ultrasound",
+        ]
+        for marker in forbidden_markers:
+            self.assertNotIn(marker, source_text)
 
     def test_cuhk_scientific_layout_stage3_contract(self) -> None:
         generator = SHARED / "scripts/generate_cuhk_scientific_layout_stage3.py"
@@ -1338,6 +1466,39 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(unsafe["final_decision"], "QUALITY_LOOP_FAIL_NO_WINNER")
         self.assertIn("does not uniquely map", unsafe["fail_closed_reason"])
 
+    def test_quality_loop_uses_canonical_role_for_aliased_primary_object(self) -> None:
+        bundle = production_entry.load_bundle(SHARED / "fixtures/stage4_quality_loop_repair_stress_bundle/bundle.json")
+        deck_jobs, storyline_trace = production_entry.build_storyline(bundle)
+        specs = production_entry.build_specs(deck_jobs)
+        layouts = [stage3.resolve_layout(spec) for spec in specs]
+        real_data = next(spec for spec in specs if spec["page_job"] == "REAL_DATA_APPLICATION")
+        real_data["dominant_object"] = "neutral_alias_primary_object"
+        sequence = deck_quality_loop.build_sequence_summary(
+            specs=specs,
+            layouts=layouts,
+            render_status={"status": "ok", "rendered_png": [{"sha256": "title", "path": "title.png"}] + [
+                {"sha256": f"page-{idx}", "path": f"page-{idx}.png"}
+                for idx in range(1, len(specs) + 1)
+            ], "png_count": len(specs) + 1},
+            storyline_trace=storyline_trace,
+            render_input_identity={"sha256": "aliased-render-input", "files": []},
+            contact_sheet_path="synthetic/contact_sheet.png",
+            contact_sheet_sha256="f" * 64,
+        )
+        page = next(item for item in sequence["pages"] if item["page_job"] == "REAL_DATA_APPLICATION")
+        self.assertEqual(page["primary_scientific_object_type"], "neutral_alias_primary_object")
+        self.assertEqual(page["canonical_scientific_object_role"], "quantitative_source_object")
+
+        finding = {
+            "finding_id": "aliased-small-primary",
+            "target_logical_id": page["logical_id"],
+            "requirement_id": "READABLE_SCIENTIFIC_OBJECTS",
+            "evidence": "The primary object is undersized for projection readability.",
+        }
+        directive, reason = deck_quality_loop.map_finding_to_directive(finding, sequence)
+        self.assertIsNone(reason)
+        self.assertEqual(directive["intent"], "RESCALE_PRIMARY_OBJECT")
+
     def test_research_presentation_quality_loop_repair_directives_affect_render_inputs(self) -> None:
         bundle = production_entry.load_bundle(SHARED / "fixtures/stage4_quality_loop_repair_stress_bundle/bundle.json")
         deck_jobs, _ = production_entry.build_storyline(bundle)
@@ -1852,6 +2013,10 @@ class PresentationSharedTests(unittest.TestCase):
             (
                 SHARED / "scripts/select_gold_compositions.py",
                 REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/select_gold_compositions.py",
+            ),
+            (
+                SHARED / "scripts/scientific_object_semantics.py",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/scientific_object_semantics.py",
             ),
             (
                 SHARED / "scripts/build_gold_composition_recipe.py",

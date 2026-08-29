@@ -115,6 +115,17 @@
               "density": "moderate",
               "panel_count": 1
             },
+            "canonical_query_role": {
+              "role": "quantitative_source_object",
+              "basis": [
+                "comparison",
+                "figure",
+                "plot",
+                "quantitative",
+                "result",
+                "table"
+              ]
+            },
             "matches": [
               {
                 "gold_id": "GSC-014",
@@ -128,13 +139,15 @@
                   "w": 0.42,
                   "h": 0.31
                 },
-                "score": 16,
+                "score": 18,
+                "canonical_scientific_object_role": "quantitative_source_object",
                 "compatibility_reasons": [
                   "page_function exact match",
                   "domain_family match",
                   "density match",
                   "panel_count exact match",
-                  "scientific object overlap: biostatistics, comparison, quantitative, result, table"
+                  "scientific object overlap: biostatistics, comparison, quantitative, result, table",
+                  "canonical scientific-object role match: quantitative_source_object"
                 ],
                 "rights_reuse_boundary": "COMPOSITION_ONLY"
               },
@@ -150,13 +163,15 @@
                   "w": 0.5,
                   "h": 0.64
                 },
-                "score": 16,
+                "score": 18,
+                "canonical_scientific_object_role": "quantitative_source_object",
                 "compatibility_reasons": [
                   "page_function exact match",
                   "domain_family match",
                   "density match",
                   "panel_count exact match",
-                  "scientific object overlap: biostatistics, comparison, model, plot, quantitative"
+                  "scientific object overlap: biostatistics, comparison, model, plot, quantitative",
+                  "canonical scientific-object role match: quantitative_source_object"
                 ],
                 "rights_reuse_boundary": "COMPOSITION_ONLY"
               }
@@ -217,13 +232,13 @@
                 "reference_id": "RRL-059",
                 "exclusion_reasons": [
                   "page_function mismatch",
-                  "no scientific-object overlap"
+                  "no compatible scientific-object semantic role"
                 ]
               }
             ]
           }
         },
-        "recipe_sha256": "35bb4df61a490a1fcafe781d876ff751a9da9723efa40e0848c7fc777b7b2923"
+        "recipe_sha256": "133c41c8f89587c759a8ab16e2f177a0ece62838fc5e1cdc0f3166700456bb83"
       },
       "alternate_recipe": {
         "schema": "RESEARCH_GOLD_COMPOSITION_RECIPE_V1",
@@ -326,6 +341,17 @@
               "density": "moderate",
               "panel_count": 1
             },
+            "canonical_query_role": {
+              "role": "quantitative_source_object",
+              "basis": [
+                "comparison",
+                "figure",
+                "plot",
+                "quantitative",
+                "result",
+                "table"
+              ]
+            },
             "matches": [
               {
                 "gold_id": "GSC-015",
@@ -339,13 +365,15 @@
                   "w": 0.5,
                   "h": 0.64
                 },
-                "score": 16,
+                "score": 18,
+                "canonical_scientific_object_role": "quantitative_source_object",
                 "compatibility_reasons": [
                   "page_function exact match",
                   "domain_family match",
                   "density match",
                   "panel_count exact match",
-                  "scientific object overlap: biostatistics, comparison, model, plot, quantitative"
+                  "scientific object overlap: biostatistics, comparison, model, plot, quantitative",
+                  "canonical scientific-object role match: quantitative_source_object"
                 ],
                 "rights_reuse_boundary": "COMPOSITION_ONLY"
               }
@@ -406,13 +434,13 @@
                 "reference_id": "RRL-059",
                 "exclusion_reasons": [
                   "page_function mismatch",
-                  "no scientific-object overlap"
+                  "no compatible scientific-object semantic role"
                 ]
               }
             ]
           }
         },
-        "recipe_sha256": "51d3371062e75f9c4df025d42b761b74f479cb5e8e3a1f87ddf8c6223be0a633"
+        "recipe_sha256": "c227223612d5499e1ec1cb692a78368d42ec89dd2082b95715ccbdb76dfc6fd8"
       },
       "alternate_error": null,
       "checks": {
@@ -538,6 +566,16 @@
               "density": "high",
               "panel_count": 4
             },
+            "canonical_query_role": {
+              "role": "medical_image_panel",
+              "basis": [
+                "comparison",
+                "image",
+                "lesion",
+                "medical",
+                "samples"
+              ]
+            },
             "matches": [
               {
                 "gold_id": "GSC-008",
@@ -551,12 +589,14 @@
                   "w": 0.86,
                   "h": 0.31
                 },
-                "score": 14,
+                "score": 16,
+                "canonical_scientific_object_role": "medical_image_panel",
                 "compatibility_reasons": [
                   "page_function exact match",
                   "domain_family match",
                   "density match",
-                  "scientific object overlap: comparison, image, lesion, medical, representative"
+                  "scientific object overlap: comparison, image, lesion, medical, representative",
+                  "canonical scientific-object role match: medical_image_panel"
                 ],
                 "rights_reuse_boundary": "COMPOSITION_ONLY"
               },
@@ -573,6 +613,7 @@
                   "h": 0.47
                 },
                 "score": 12,
+                "canonical_scientific_object_role": "process_diagram",
                 "compatibility_reasons": [
                   "page_function matches scientific job",
                   "domain_family match",
@@ -588,7 +629,7 @@
                 "reference_id": "RRL-009",
                 "exclusion_reasons": [
                   "page_function mismatch",
-                  "no scientific-object overlap",
+                  "no compatible scientific-object semantic role",
                   "semantic incompatibility: query matches rejected job 'medical image samples'"
                 ]
               },
@@ -640,13 +681,13 @@
                 "reference_id": "RRL-059",
                 "exclusion_reasons": [
                   "page_function mismatch",
-                  "no scientific-object overlap"
+                  "no compatible scientific-object semantic role"
                 ]
               }
             ]
           }
         },
-        "recipe_sha256": "e0857ec57c757cb3818126083fe24f4a3002a5e3ff6980ae9daff4a7940c7c85"
+        "recipe_sha256": "6b92c224e782c3210495c8696cabaf3508fbc247cda236f4ea9fc06cab0c4612"
       },
       "alternate_recipe": {
         "schema": "RESEARCH_GOLD_COMPOSITION_RECIPE_V1",
@@ -748,6 +789,16 @@
               "density": "high",
               "panel_count": 4
             },
+            "canonical_query_role": {
+              "role": "medical_image_panel",
+              "basis": [
+                "comparison",
+                "image",
+                "lesion",
+                "medical",
+                "samples"
+              ]
+            },
             "matches": [
               {
                 "gold_id": "GSC-004",
@@ -762,6 +813,7 @@
                   "h": 0.47
                 },
                 "score": 12,
+                "canonical_scientific_object_role": "process_diagram",
                 "compatibility_reasons": [
                   "page_function matches scientific job",
                   "domain_family match",
@@ -777,7 +829,7 @@
                 "reference_id": "RRL-009",
                 "exclusion_reasons": [
                   "page_function mismatch",
-                  "no scientific-object overlap",
+                  "no compatible scientific-object semantic role",
                   "semantic incompatibility: query matches rejected job 'medical image samples'"
                 ]
               },
@@ -829,13 +881,13 @@
                 "reference_id": "RRL-059",
                 "exclusion_reasons": [
                   "page_function mismatch",
-                  "no scientific-object overlap"
+                  "no compatible scientific-object semantic role"
                 ]
               }
             ]
           }
         },
-        "recipe_sha256": "324dc7bbee95e48355b0de0625eef959d10cff79ac5fd8724ccb4641e46d07f2"
+        "recipe_sha256": "522dbdc232557c876a3b246755f81a2c0e08c5e54d8aa439bd4779faedd6d2c3"
       },
       "alternate_error": null,
       "checks": {
@@ -979,6 +1031,15 @@
               "density": "moderate",
               "panel_count": 4
             },
+            "canonical_query_role": {
+              "role": "discussion_decision_object",
+              "basis": [
+                "batch",
+                "discussion",
+                "next",
+                "query"
+              ]
+            },
             "matches": [
               {
                 "gold_id": "GSC-018",
@@ -992,13 +1053,15 @@
                   "w": 0.78,
                   "h": 0.46
                 },
-                "score": 16,
+                "score": 18,
+                "canonical_scientific_object_role": "discussion_decision_object",
                 "compatibility_reasons": [
                   "page_function exact match",
                   "domain_family match",
                   "density match",
                   "panel_count exact match",
-                  "scientific object overlap: active, batch, bayesian, design, discussion"
+                  "scientific object overlap: active, batch, bayesian, design, discussion",
+                  "canonical scientific-object role match: discussion_decision_object"
                 ],
                 "rights_reuse_boundary": "COMPOSITION_ONLY"
               }
@@ -1024,7 +1087,7 @@
                 "reference_id": "RRL-009",
                 "exclusion_reasons": [
                   "page_function mismatch",
-                  "no scientific-object overlap"
+                  "no compatible scientific-object semantic role"
                 ]
               },
               {
@@ -1065,7 +1128,7 @@
                   "page_function mismatch",
                   "domain_family mismatch",
                   "panel_count incompatible",
-                  "no scientific-object overlap"
+                  "no compatible scientific-object semantic role"
                 ]
               },
               {
@@ -1079,7 +1142,7 @@
             ]
           }
         },
-        "recipe_sha256": "5ff51c819553d350ceb0e76c1315bf894fe61845e95ebb13f88c4c350892b464"
+        "recipe_sha256": "ba1d43e286377f0cce652a8839300c770d020bd3b91a27411c4d86c4a6b0d5b0"
       },
       "alternate_recipe": null,
       "alternate_error": "no compatible gold composition record",

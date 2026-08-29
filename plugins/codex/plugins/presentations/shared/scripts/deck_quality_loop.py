@@ -9,6 +9,8 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
+import scientific_object_semantics
+
 
 MAX_REPAIR_CYCLES = 1
 ALLOWED_REPAIR_INTENTS = {
@@ -79,6 +81,16 @@ def build_sequence_summary(
         rendered_path = rendered_page.get("path")
         logical_id = f"slide_{index + 1}_{spec['page_job'].lower()}"
         story = spec.get("storyline", {})
+        role_fields = dict(spec.get("query", {}))
+        role_fields.update(
+            {
+                "page_function": spec.get("page_job"),
+                "content_kind": spec.get("content_kind"),
+                "dominant_object": spec.get("dominant_object"),
+                "scientific_objects": spec.get("scientific_objects", []),
+            }
+        )
+        canonical_role = scientific_object_semantics.normalize_scientific_object_role(role_fields)
         pages.append(
             {
                 "sequence_index": index,
@@ -95,6 +107,8 @@ def build_sequence_summary(
                 "selected_gold_id": layout.get("selected_gold_id"),
                 "selected_reference_id": layout.get("selected_reference_id"),
                 "primary_scientific_object_type": spec.get("dominant_object") or spec.get("content_kind"),
+                "canonical_scientific_object_role": canonical_role["role"],
+                "canonical_scientific_object_role_basis": canonical_role["basis"],
                 "scientific_objects": spec.get("scientific_objects", []),
                 "source_grounded_copy_candidates": {
                     key: spec.get(key)
@@ -296,6 +310,7 @@ def _infer_intent_for_page(finding: dict[str, Any], page: dict[str, Any]) -> tup
     combined = f"{requirement} {evidence}"
     page_job = str(page.get("page_job") or "").upper()
     object_kind = str(page.get("primary_scientific_object_type") or "").lower()
+    object_role = str(page.get("canonical_scientific_object_role") or "").lower()
     density = page.get("visual_density", {})
     capacity_status = density.get("capacity_status")
 
@@ -309,11 +324,11 @@ def _infer_intent_for_page(finding: dict[str, Any], page: dict[str, Any]) -> tup
         if _contains_any(evidence, ("legend", "callout", "obstruct", "cover", "overlay", "crop", "panel")):
             return "REPAIR_ANNOTATION_LEGEND", None
 
-    if page_job in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"} and _contains_any(requirement, ("diagram", "process", "next", "collision", "layout", "readability")):
+    if object_role in {"process_diagram", "discussion_decision_object"} and _contains_any(requirement, ("diagram", "process", "next", "collision", "layout", "readability")):
         if _contains_any(evidence, ("collision", "overlap", "crowd", "clipping", "label", "diagram")):
             return "SWAP_COMPATIBLE_GOLD_LAYOUT", None
 
-    if object_kind in {"figure", "result_figure", "plot table", "presentation_native_coverage_figure", "negative_evidence_plot"}:
+    if object_role == "quantitative_source_object" or object_kind in {"figure", "result_figure", "plot table", "presentation_native_coverage_figure", "negative_evidence_plot"}:
         if _contains_any(requirement, ("caption", "support", "layout", "overlap", "collision")) and _contains_any(evidence, ("caption", "support", "overlap", "collision", "clipping", "crowd")):
             return "REPAIR_ANNOTATION_LEGEND", None
         if _contains_any(requirement, ("readable", "readability", "primary", "scientific_object", "projection")) and _contains_any(evidence, ("small", "undersized", "unreadable", "projection", "scale")):
