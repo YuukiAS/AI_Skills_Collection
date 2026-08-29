@@ -2,22 +2,22 @@
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 041_research_presentation_frozen_four_paper_generalization_batch
 executor: Codex
-implementation_commit: a01865e5380f3c23a3d0eea6bbc6e4f3fdf8591d
+implementation_commit: 9bd69e5b54e7968ec731e00a3c9794c6fad21672
 status: WAITING_FOR_CI
 ci_status: PENDING
 ---
 
 # Result: 041 Frozen Four-Paper Generalization Batch
 
-Implementation commit: `a01865e5380f3c23a3d0eea6bbc6e4f3fdf8591d`
+Implementation commit: `9bd69e5b54e7968ec731e00a3c9794c6fad21672`
 
 ## Batch-level verdict
 
-The strict frozen 4/4 batch failed locally before CI.
+The strict frozen 4/4 batch failed locally before CI and after consuming the only permitted frozen quality-loop evidence for the two rendered decks.
 
 All four paper identities were audited together before acquisition, all four source bundles were frozen before any successful render, and the frozen normal `research-presentations` production entrypoint was used without production-code, gold, layout, prompt, validator, quality-loop, generated-TeX, image, or source-bundle repair.
 
-Two decks generated and rendered mechanically:
+Two decks generated and rendered mechanically, then consumed the current Terra evidence through the shipped single-cycle quality-loop consumer:
 
 - `biostatistics_deseq2`
 - `medical_cardiac_ultrasound`
@@ -33,7 +33,9 @@ Both failures are the same normal-selector failure:
 ValueError: no compatible gold composition record
 ```
 
-Per the frozen batch rules, no paper was replaced, no source bundle was edited after rendered output existed, and no output was hand-patched to chase a pass. Because any one deck failing makes the full batch fail, this 041 batch is recorded as `FAIL_TWO_DECKS_FAILED_PRE_RENDER_SELECTOR_COMPATIBILITY`.
+The frozen consumer selected no repair directive for either rendered deck. Both fail closed as `UNSAFE_REPAIR_MAPPING / QUALITY_LOOP_FAIL_NO_WINNER`, because the current structured findings did not uniquely map to a frozen safe repair family.
+
+Per the frozen batch rules, no paper was replaced, no source bundle was edited after rendered output existed, and no output was hand-patched to chase a pass. Because any one deck failing makes the full batch fail, this 041 batch is recorded as `FAIL_TWO_PRE_RENDER_SELECTOR_FAILURES_AND_TWO_QUALITY_LOOP_FAIL_CLOSED`. All four papers are consumed holdouts.
 
 ## Frozen eligibility and source acquisition
 
@@ -108,11 +110,15 @@ results/041_research_presentation_frozen_four_paper_generalization_batch/biostat
 Key identities:
 
 - PDF: `results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.pdf`
-- PDF SHA256: `2c6ef28f147e37f2a33988e603c364fea747920b281f8a7cc847234ce4753fdc`
+- PDF SHA256: `70413e6d480f20bc54e78a7edd3b1eac28a7b292ebaf59afec906ebe92a269c7`
 - render-input identity: `ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e`
 - rendered-pixel identity: `5b8b8596996f9589e09f64a495b9f0b98fbffb2be5ec8f4bc582a9628ff77bd9`
 - contact sheet SHA256: `13a925ca7d505dd9621be69270a7d0580600acf5ba83dc2a97b7dbc2e97078ab`
-- quality-loop state: `WAITING_FOR_DECK_VISUAL_REVIEW`, `repair_cycle_count=0`
+- quality-loop state: `UNSAFE_REPAIR_MAPPING`, `final_decision=QUALITY_LOOP_FAIL_NO_WINNER`, `repair_cycle_count=0`
+- consumed repair evidence: `results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/biostatistics_deseq2_repair_evidence.json`
+- repair evidence SHA256: `e27057fcb83dd9a1cbe19480d7a19801ec5ecef746c754790d4c70d3c323b0c4`
+- selected repair directives: none
+- rendered-pixel identity changed by quality loop: `false`
 
 ### medical_cardiac_ultrasound
 
@@ -127,11 +133,15 @@ results/041_research_presentation_frozen_four_paper_generalization_batch/medical
 Key identities:
 
 - PDF: `results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/main.pdf`
-- PDF SHA256: `1cc323f1e667a96bce5431a3754f69706b742e8669d86f7db50ae5bdc1797d86`
+- PDF SHA256: `a7fcd52ac88e2783a85e0610f5935a0f0b27b153bacfa55cf1d93e825026cb18`
 - render-input identity: `427322503d37fbb586c5d3332b231448f55df502f9734d76ccb3af52dd37794d`
 - rendered-pixel identity: `5d482b290887882819458dfbd09e5d5ba9351625259dbec59f3de61a2b4a4fc6`
 - contact sheet SHA256: `1792084d006f5a718c2f96197ec538ebf16cfb531d00edd9ba542b23171cfec7`
-- quality-loop state: `WAITING_FOR_DECK_VISUAL_REVIEW`, `repair_cycle_count=0`
+- quality-loop state: `UNSAFE_REPAIR_MAPPING`, `final_decision=QUALITY_LOOP_FAIL_NO_WINNER`, `repair_cycle_count=0`
+- consumed repair evidence: `results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/medical_cardiac_ultrasound_repair_evidence.json`
+- repair evidence SHA256: `d2dcb25b193049d81b83d59975e199dc116ea826ab4d1c54aab34de1871a8166`
+- selected repair directives: none
+- rendered-pixel identity changed by quality loop: `false`
 
 The deck uses real article echocardiography figure page pixels from the cardiac-ultrasound paper. No generated or substitute medical image pixels were introduced.
 
@@ -163,9 +173,9 @@ Task-local manifest:
 results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/visual_inputs.json
 ```
 
-It contains the two rendered decks only: six substantive pages plus contact sheet for DESeq2, and six substantive pages plus contact sheet for cardiac ultrasound. The manifest also records TMB and RETFound as failed decks with failure-log hashes, so a visual-only PASS on the rendered subset cannot be interpreted as 4/4 batch PASS.
+It contains the two rendered decks only: six substantive pages plus contact sheet for DESeq2, and six substantive pages plus contact sheet for cardiac ultrasound. The manifest also records TMB and RETFound as failed decks with failure-log hashes, and it records that the two rendered decks consumed the available quality-loop evidence and failed closed with no repair directive. A visual-only PASS on the rendered subset cannot be interpreted as 4/4 batch PASS.
 
-No `VISUAL_REVIEW.json` was fabricated locally.
+No `VISUAL_REVIEW.json` was fabricated locally. The existing Terra output remains the source evidence consumed by the frozen quality-loop consumer; the unified manifest is updated for the new implementation commit so any subsequent task-local visual review can detect whether fresh evidence is required.
 
 ## Local verification
 
@@ -177,8 +187,12 @@ python -m json.tool results/041_research_presentation_frozen_four_paper_generali
 python -m json.tool results/041_research_presentation_frozen_four_paper_generalization_batch/production_invocations.json
 python -m json.tool results/041_research_presentation_frozen_four_paper_generalization_batch/local_acceptance.json
 python -m json.tool results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/visual_inputs.json
-python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source_bundle.json --out-dir results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated --task-key 041_research_presentation_frozen_four_paper_generalization_batch
-python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source_bundle.json --out-dir results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated --task-key 041_research_presentation_frozen_four_paper_generalization_batch
+python -m json.tool results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/biostatistics_deseq2_repair_evidence.json
+python -m json.tool results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/medical_cardiac_ultrasound_repair_evidence.json
+python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source_bundle.json --out-dir results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated --task-key 041_research_presentation_frozen_four_paper_generalization_batch --review-evidence results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/biostatistics_deseq2_repair_evidence.json
+python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source_bundle.json --out-dir results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated --task-key 041_research_presentation_frozen_four_paper_generalization_batch --review-evidence results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/medical_cardiac_ultrasound_repair_evidence.json
+python scripts/skills.py validate
+python scripts/build_codex_marketplace.py --validate --check --path-report
 python -m unittest discover -s tests -p 'test_presentations.py' -k test_research_presentation_one_call_production_entry
 python -m unittest discover -s tests
 ai-bridge reviewed-handoff validate --target /home/yuukias/AI_Skills_Collection
@@ -192,19 +206,23 @@ Observed results:
 
 - targeted presentation unittest: `Ran 1 test`, `OK`
 - full unittest: `Ran 146 tests`, `OK`
+- `scripts/skills.py validate`: validated 149 active skills and 18 profiles
+- marketplace validate/check/path-report: passed; Windows path budget overage count `0`
 - Reviewed Handoff validation passed
 - visual-review preflight passed and listed task 041
 - DESeq2 PDF: 7 pages, render status `ok`
 - cardiac-ultrasound PDF: 7 pages, render status `ok`
-- artifact consistency check: `PASS`
+- quality-loop fail-closed identity check: `PASS`
 - `git diff --check`: passed
 
 Known non-PASS local evidence:
 
 - TMB normal production invocation failed before render with `ValueError: no compatible gold composition record`.
 - RETFound normal production invocation failed before render with `ValueError: no compatible gold composition record`.
-- The strict production-entry validator remains non-holdout-aware for these real-paper decks; it still asserts engineering-fixture phrases such as `Coverage by ICC under imbalanced clusters` and `Same-case ROI zoom`. It rejected the two rendered holdout decks on that basis, so I did not use it to claim holdout acceptance.
-- Local contact-sheet inspection found nonblank exact-CUHK Beamer output for the two rendered decks, but several source figure pages are visibly small and may fail Terra projection-readability judgement.
+- DESeq2 quality-loop consumer returned `UNSAFE_REPAIR_MAPPING / QUALITY_LOOP_FAIL_NO_WINNER`; no repair directive was selected and the rendered-pixel identity remained `5b8b8596996f9589e09f64a495b9f0b98fbffb2be5ec8f4bc582a9628ff77bd9`.
+- cardiac-ultrasound quality-loop consumer returned `UNSAFE_REPAIR_MAPPING / QUALITY_LOOP_FAIL_NO_WINNER`; no repair directive was selected and the rendered-pixel identity remained `5d482b290887882819458dfbd09e5d5ba9351625259dbec59f3de61a2b4a4fc6`.
+- The strict production-entry validator remains non-holdout-aware for these real-paper decks; it reports 031 task-key mismatch and still asserts engineering-fixture phrases such as `Coverage by ICC under imbalanced clusters` and `Same-case ROI zoom`. It rejected the two rendered holdout decks on that basis, so I did not use it to claim holdout acceptance.
+- Local contact-sheet inspection found nonblank exact-CUHK Beamer output for the two rendered decks, but Terra already recorded repeated scale and overflow blockers.
 
 ## Remaining gates
 

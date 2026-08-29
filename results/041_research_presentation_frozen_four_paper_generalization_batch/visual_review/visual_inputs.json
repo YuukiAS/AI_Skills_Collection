@@ -2,21 +2,22 @@
   "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
   "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
   "workflow_type": "reviewed_handoff",
-  "review_kind": "041_research_presentation_frozen_four_paper_generalization_batch-frozen-four-paper-batch-review",
+  "review_kind": "041_research_presentation_frozen_four_paper_generalization_batch-post-quality-loop-fail-closed-review",
   "privacy_policy": "PUBLIC_SAFE_ONLY",
   "prompt_version": "ai-bridge.visual-review.v1",
   "external_upload_authorization": "",
   "rubric": {
-    "instructions": "This batch did not reach 4/4 render availability. Review available rendered DESeq2 and cardiac-ultrasound pixels only if the workflow requests visual evidence, and preserve the TMB/RETFound pre-render selector failures as batch-failure blockers. For rendered items, check source specificity, exact CUHK identity, projection readability, paper-specific math/plot/image semantics, no internal workflow/debug leakage, and contact-sheet mature doctoral-group-meeting quality. Do not convert top-level visual PASS into batch PASS while any failed deck lacks rendered pixels.",
+    "instructions": "This batch did not reach 4/4 render availability. Review the available rendered DESeq2 and cardiac-ultrasound pixels, but preserve TMB/RETFound pre-render selector failures and the consumed quality-loop fail-closed states as batch-failure blockers. The DESeq2 and cardiac-ultrasound rendered pixel identities did not change after the frozen quality-loop consumer returned UNSAFE_REPAIR_MAPPING / QUALITY_LOOP_FAIL_NO_WINNER. Do not convert a visual PASS on rendered pixels into 041 batch PASS.",
     "source_contracts": [
       "Four paper identities are frozen; no replacement is allowed.",
       "Source bundles were frozen before first render and must not be edited after rendered output existed.",
-      "TMB and RETFound have no rendered pixels because normal selector failed before render."
+      "TMB and RETFound have no rendered pixels because normal selector failed before render.",
+      "DESeq2 and cardiac-ultrasound consumed the existing Terra evidence through the frozen single-cycle quality-loop consumer and failed closed with no selected repair directives."
     ]
   },
   "identity_bindings": {
     "task_key": "041_research_presentation_frozen_four_paper_generalization_batch",
-    "implementation_commit": "a01865e5380f3c23a3d0eea6bbc6e4f3fdf8591d",
+    "implementation_commit": "9bd69e5b54e7968ec731e00a3c9794c6fad21672",
     "production_freeze_locator": "d3379b5168bc27b114b362f186f8c239a88a669c",
     "batch_source_bundle_freeze_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/batch_source_bundle_freeze_manifest.json",
     "batch_source_bundle_freeze_manifest_sha256": "804d1b6ad3f28d60db9e1bac7561f111113e77c71fcadd7d549ea7409726a6bb",
@@ -27,16 +28,23 @@
         "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/source_bundle.json",
         "source_bundle_sha256": "52f58af783041ca3b4316141818db9bd781b1d63c7d2e16fa99b8493d798a962",
         "build_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/BUILD_MANIFEST.json",
-        "build_manifest_sha256": "206716991b73e336944d7f8ff351a2e9d5e7c9b78010622bce370a4ff97a2ab1",
+        "build_manifest_sha256": "c8c8eca1afb3fe4d7b0a55e3c23db00fff864c890fee30412867992dba304c83",
         "source_fidelity_map": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/source_fidelity_map.json",
         "source_fidelity_map_sha256": "4b26daf40b020a55710e109bc8f303a4861e8a7c5b09ecf29155202c5161f661",
         "render_input_identity_sha256": "ac79e2bf664eaca1984a01d8689c1d60ced785a45a9e6c6d2a2fa50b95efd87e",
         "rendered_pixel_identity_sha256": "5b8b8596996f9589e09f64a495b9f0b98fbffb2be5ec8f4bc582a9628ff77bd9",
         "pdf": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/cuhk_production_build/main.pdf",
-        "pdf_sha256": "2c6ef28f147e37f2a33988e603c364fea747920b281f8a7cc847234ce4753fdc",
+        "pdf_sha256": "70413e6d480f20bc54e78a7edd3b1eac28a7b292ebaf59afec906ebe92a269c7",
         "deck_contact_sheet": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/deck_contact_sheet.png",
         "deck_contact_sheet_sha256": "13a925ca7d505dd9621be69270a7d0580600acf5ba83dc2a97b7dbc2e97078ab",
-        "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/quality_loop_state.json"
+        "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/biostatistics_deseq2/generated/quality_loop_state.json",
+        "quality_loop_state_sha256": "6e32da4021e29859cc23c927ab774a3e7f519258590a9b2bbcf2b62718bd23cc",
+        "quality_loop_status": "UNSAFE_REPAIR_MAPPING",
+        "quality_loop_final_decision": "QUALITY_LOOP_FAIL_NO_WINNER",
+        "quality_loop_repair_cycle_count": 0,
+        "quality_loop_fail_closed_reason": "finding does not uniquely map to a frozen safe repair family",
+        "quality_loop_repair_evidence": "results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/biostatistics_deseq2_repair_evidence.json",
+        "quality_loop_repair_evidence_sha256": "e27057fcb83dd9a1cbe19480d7a19801ec5ecef746c754790d4c70d3c323b0c4"
       },
       "medical_cardiac_ultrasound": {
         "paper": "Self-supervised learning for label-free segmentation in cardiac ultrasound",
@@ -44,16 +52,23 @@
         "source_bundle": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/source_bundle.json",
         "source_bundle_sha256": "4e62035d6aa495832ad7b3b8235e71ed3ffaf29e0338c0e556985112210f2243",
         "build_manifest": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/BUILD_MANIFEST.json",
-        "build_manifest_sha256": "cf7a1f7166847fb1df5dbea953f70423b5d881bbbae98c8a3463e270eeeb6335",
+        "build_manifest_sha256": "7a6569ff3ff674cfea969cdb3877d87a117a575783e3e67dd5eabed0470c7dc3",
         "source_fidelity_map": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/source_fidelity_map.json",
         "source_fidelity_map_sha256": "c415b804ef503b1fce3896f0b601e6aeac36c8463157727d01dee3cd534bd0f9",
         "render_input_identity_sha256": "427322503d37fbb586c5d3332b231448f55df502f9734d76ccb3af52dd37794d",
         "rendered_pixel_identity_sha256": "5d482b290887882819458dfbd09e5d5ba9351625259dbec59f3de61a2b4a4fc6",
         "pdf": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/cuhk_production_build/main.pdf",
-        "pdf_sha256": "1cc323f1e667a96bce5431a3754f69706b742e8669d86f7db50ae5bdc1797d86",
+        "pdf_sha256": "a7fcd52ac88e2783a85e0610f5935a0f0b27b153bacfa55cf1d93e825026cb18",
         "deck_contact_sheet": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/deck_contact_sheet.png",
         "deck_contact_sheet_sha256": "1792084d006f5a718c2f96197ec538ebf16cfb531d00edd9ba542b23171cfec7",
-        "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/quality_loop_state.json"
+        "quality_loop_state": "results/041_research_presentation_frozen_four_paper_generalization_batch/medical_cardiac_ultrasound/generated/quality_loop_state.json",
+        "quality_loop_state_sha256": "956e9c18f72b5f3794a6b94c3612abdf918627b75b13fcfbecac0d4586b2cc6e",
+        "quality_loop_status": "UNSAFE_REPAIR_MAPPING",
+        "quality_loop_final_decision": "QUALITY_LOOP_FAIL_NO_WINNER",
+        "quality_loop_repair_cycle_count": 0,
+        "quality_loop_fail_closed_reason": "finding does not uniquely map to a frozen safe repair family",
+        "quality_loop_repair_evidence": "results/041_research_presentation_frozen_four_paper_generalization_batch/visual_review/medical_cardiac_ultrasound_repair_evidence.json",
+        "quality_loop_repair_evidence_sha256": "d2dcb25b193049d81b83d59975e199dc116ea826ab4d1c54aab34de1871a8166"
       }
     },
     "failed_decks": {
