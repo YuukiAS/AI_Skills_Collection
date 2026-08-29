@@ -1,0 +1,47 @@
+{
+  "schema": "RESEARCH_PRESENTATION_STAGE5_LOCAL_VISUAL_QA_V1",
+  "task_key": "038_research_presentation_two_real_paper_holdouts",
+  "qa_date": "2026-08-29",
+  "status": "LOCAL_BLOCKERS_OBSERVED_NO_MANUAL_REPAIR",
+  "reviewed_artifacts": [
+    "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_contact_sheet.png",
+    "results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_contact_sheet.png",
+    "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/main.tex",
+    "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/main.tex"
+  ],
+  "observations": [
+    {
+      "deck": "statistics",
+      "artifact": "statistics generated main.tex",
+      "severity": "blocking",
+      "finding": "Audience-facing annotation includes internal comparison text: Stage 4 clustered-calibration fixture.",
+      "repair_applied": false,
+      "reason_not_repaired": "Detected after first rendered output inspection; 038 evaluation-only rules prohibit source-bundle or generated-TeX edits that would preserve one-shot eligibility."
+    },
+    {
+      "deck": "statistics",
+      "artifact": "statistics contact sheet",
+      "severity": "risk",
+      "finding": "Kidney marginal-effects source figure and package comparison table are visually small on the generated slides.",
+      "repair_applied": false,
+      "reason_not_repaired": "Would require layout/bundle/asset tuning after render."
+    },
+    {
+      "deck": "statistics",
+      "artifact": "statistics contact sheet",
+      "severity": "risk",
+      "finding": "Take-home reasoning slide appears dense with small text in the comparator/decision region.",
+      "repair_applied": false,
+      "reason_not_repaired": "Would require source-bundle or layout adjustment after render."
+    },
+    {
+      "deck": "medical",
+      "artifact": "medical contact sheet",
+      "severity": "risk",
+      "finding": "MedSAM limitation/take-home slide appears dense, and the same-case CT comparison page has crowded ROI labels.",
+      "repair_applied": false,
+      "reason_not_repaired": "Would require post-render bundle/layout adjustment or a built-in visual-review repair cycle not yet authorized by fresh task-local reviewer evidence."
+    }
+  ],
+  "final_local_quality_claim": "No local quality PASS is claimed. The generated decks are preserved as one-shot holdout evidence for CI, Terra, Reviewer, and Planner judgement."
+}

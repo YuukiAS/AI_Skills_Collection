@@ -1,0 +1,170 @@
+{
+  "schema": "RESEARCH_PRESENTATION_SOURCE_FIDELITY_MAP_V1",
+  "stage5_holdout_eligible": false,
+  "holdout_exclusion_reason": "038 real holdout input; current production entrypoint retains the Stage 4 exclusion guard on this legacy field. Actual pre-generation holdout eligibility is recorded in results/038_research_presentation_two_real_paper_holdouts/holdout_eligibility.json.",
+  "pages": [
+    {
+      "page_id": "medsam_metric_object",
+      "page_job": "STATISTICAL_MODEL",
+      "source_evidence_ids": [
+        "MEDSAM-EV-METRIC"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "MEDSAM-EV-METRIC",
+          "source_path": "results/038_research_presentation_two_real_paper_holdouts/medical/source/source.md",
+          "source_anchor": "## Quantitative Evaluation",
+          "claim_supported": "Dice similarity coefficient is the central metric for segmentation overlap.",
+          "consumed_as": "native LaTeX metric equation"
+        }
+      ],
+      "generated_object_ids": [
+        "medsam_metric_object_primary",
+        "medsam_metric_object_annotation",
+        "medsam_metric_object_caption",
+        "medsam_metric_object_model_components",
+        "medsam_metric_object_model_interpretation"
+      ],
+      "selected_gold_id": "GSC-016",
+      "selected_reference_id": "RRL-020",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "medsam_internal_validation",
+      "page_job": "REAL_DATA_APPLICATION",
+      "source_evidence_ids": [
+        "MEDSAM-EV-INTERNAL"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "MEDSAM-EV-INTERNAL",
+          "source_path": "results/038_research_presentation_two_real_paper_holdouts/medical/assets/medsam_figure3_internal_validation.png",
+          "source_anchor": "Article Figure 3",
+          "claim_supported": "Internal validation compares SAM, U-Net specialist, DeepLabV3+ specialist, and MedSAM across 86 tasks and qualitative cases.",
+          "consumed_as": "paper result figure image"
+        }
+      ],
+      "generated_object_ids": [
+        "medsam_internal_validation_primary",
+        "medsam_internal_validation_annotation",
+        "medsam_internal_validation_caption"
+      ],
+      "selected_gold_id": "GSC-015",
+      "selected_reference_id": "RRL-017",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "medsam_architecture_prompt",
+      "page_job": "EXPERIMENT_DESIGN",
+      "source_evidence_ids": [
+        "MEDSAM-EV-ARCH"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "MEDSAM-EV-ARCH",
+          "source_path": "results/038_research_presentation_two_real_paper_holdouts/medical/assets/medsam_figure2_architecture.png",
+          "source_anchor": "Article Figure 2",
+          "claim_supported": "MedSAM uses an image encoder, prompt encoder, and mask decoder with bounding-box prompts.",
+          "consumed_as": "paper architecture figure image"
+        }
+      ],
+      "generated_object_ids": [
+        "medsam_architecture_prompt_primary",
+        "medsam_architecture_prompt_annotation",
+        "medsam_architecture_prompt_caption"
+      ],
+      "selected_gold_id": "GSC-004",
+      "selected_reference_id": "RRL-019",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "medsam_limits_take_home",
+      "page_job": "NEXT_EXPERIMENT",
+      "source_evidence_ids": [
+        "MEDSAM-EV-LIMITS"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "MEDSAM-EV-LIMITS",
+          "source_path": "results/038_research_presentation_two_real_paper_holdouts/medical/source/source.md",
+          "source_anchor": "## Limitations and Interpretation",
+          "claim_supported": "Training-set modality imbalance and validation requirements limit blanket clinical interpretation.",
+          "consumed_as": "limitation and interpretation note"
+        }
+      ],
+      "generated_object_ids": [
+        "medsam_limits_take_home_primary",
+        "medsam_limits_take_home_annotation",
+        "medsam_limits_take_home_caption"
+      ],
+      "selected_gold_id": "GSC-018",
+      "selected_reference_id": "RRL-059",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "medsam_external_ct_case",
+      "page_job": "MEDICAL_IMAGE_COMPARISON",
+      "source_evidence_ids": [
+        "MEDSAM-EV-EXTERNAL-CT"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "MEDSAM-EV-EXTERNAL-CT",
+          "source_path": "results/038_research_presentation_two_real_paper_holdouts/medical/assets/",
+          "source_anchor": "Article Figure 4c, external validation CT lymph node row",
+          "claim_supported": "Same external validation CT case compares SAM, U-Net, DeepLabV3+, and MedSAM with bounding box, prediction, expert annotation, and DSC.",
+          "consumed_as": "same-case medical image comparison panels"
+        }
+      ],
+      "generated_object_ids": [
+        "medsam_external_ct_case_primary",
+        "medsam_external_ct_case_annotation",
+        "medsam_external_ct_case_caption",
+        "medsam_external_ct_case_same_case_roi_zoom"
+      ],
+      "selected_gold_id": "GSC-008",
+      "selected_reference_id": "RRL-013",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    }
+  ]
+}

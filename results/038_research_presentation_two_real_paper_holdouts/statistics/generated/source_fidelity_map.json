@@ -1,0 +1,185 @@
+{
+  "schema": "RESEARCH_PRESENTATION_SOURCE_FIDELITY_MAP_V1",
+  "stage5_holdout_eligible": false,
+  "holdout_exclusion_reason": "038 real holdout input; current production entrypoint retains the Stage 4 exclusion guard on this legacy field. Actual pre-generation holdout eligibility is recorded in results/038_research_presentation_two_real_paper_holdouts/holdout_eligibility.json.",
+  "pages": [
+    {
+      "page_id": "brms_model_object",
+      "page_job": "STATISTICAL_MODEL",
+      "source_evidence_ids": [
+        "BRMS-EV-MODEL"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "BRMS-EV-MODEL",
+          "source_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/source/source.md",
+          "source_anchor": "## Model Description",
+          "claim_supported": "brms parameterizes group-level covariance through standard deviations and an LKJ correlation prior.",
+          "consumed_as": "native LaTeX multilevel model equation"
+        }
+      ],
+      "generated_object_ids": [
+        "brms_model_object_primary",
+        "brms_model_object_annotation",
+        "brms_model_object_caption",
+        "brms_model_object_model_components",
+        "brms_model_object_model_interpretation"
+      ],
+      "selected_gold_id": "GSC-016",
+      "selected_reference_id": "RRL-020",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "brms_kidney_example_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "source_evidence_ids": [
+        "BRMS-EV-KIDNEY"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "BRMS-EV-KIDNEY",
+          "source_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_figure3_kidney_marginal_effects.png",
+          "source_anchor": "PDF page 14, Figure 3",
+          "claim_supported": "Kidney example marginal effects show age, sex, disease, and age-by-sex population-level predictors.",
+          "consumed_as": "paper result figure image"
+        }
+      ],
+      "generated_object_ids": [
+        "brms_kidney_example_result_primary",
+        "brms_kidney_example_result_annotation",
+        "brms_kidney_example_result_caption"
+      ],
+      "selected_gold_id": "GSC-015",
+      "selected_reference_id": "RRL-017",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "brms_fitting_workflow",
+      "page_job": "EXPERIMENT_DESIGN",
+      "source_evidence_ids": [
+        "BRMS-EV-WORKFLOW"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "BRMS-EV-WORKFLOW",
+          "source_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_figure1_fitting_workflow.png",
+          "source_anchor": "PDF page 6, Figure 1",
+          "claim_supported": "brm transforms user model information into Stan code/data, then post-processes fitted results in brms.",
+          "consumed_as": "paper figure image"
+        }
+      ],
+      "generated_object_ids": [
+        "brms_fitting_workflow_primary",
+        "brms_fitting_workflow_annotation",
+        "brms_fitting_workflow_caption"
+      ],
+      "selected_gold_id": "GSC-004",
+      "selected_reference_id": "RRL-019",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "brms_capability_limits",
+      "page_job": "NEGATIVE_RESULT",
+      "source_evidence_ids": [
+        "BRMS-EV-COMPARISON",
+        "BRMS-EV-PRIOR-LIMIT"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "BRMS-EV-COMPARISON",
+          "source_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_table1_package_capabilities.png",
+          "source_anchor": "PDF page 20, Table 1",
+          "claim_supported": "The package comparison table records broad brms model support and remaining feature limits.",
+          "consumed_as": "paper table image"
+        },
+        {
+          "evidence_id": "BRMS-EV-PRIOR-LIMIT",
+          "source_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/source/source.md",
+          "source_anchor": "## Prior Specification",
+          "claim_supported": "brms can pass priors to Stan, but meaningful prior choice remains analyst responsibility.",
+          "consumed_as": "limitation and interpretation note"
+        }
+      ],
+      "generated_object_ids": [
+        "brms_capability_limits_primary",
+        "brms_capability_limits_annotation",
+        "brms_capability_limits_caption"
+      ],
+      "selected_gold_id": "GSC-012",
+      "selected_reference_id": "RRL-011",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    },
+    {
+      "page_id": "brms_take_home",
+      "page_job": "NEXT_EXPERIMENT",
+      "source_evidence_ids": [
+        "BRMS-EV-TAKEAWAY",
+        "BRMS-EV-PRIOR-LIMIT"
+      ],
+      "anchors": [
+        {
+          "evidence_id": "BRMS-EV-TAKEAWAY",
+          "source_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/source/source.md",
+          "source_anchor": "## Limitations and Interpretation",
+          "claim_supported": "The conclusion positions brms as a flexible Stan-backed interface while preserving Bayesian workflow responsibilities.",
+          "consumed_as": "take-home reasoning diagram"
+        },
+        {
+          "evidence_id": "BRMS-EV-PRIOR-LIMIT",
+          "source_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/source/source.md",
+          "source_anchor": "## Prior Specification",
+          "claim_supported": "brms can pass priors to Stan, but meaningful prior choice remains analyst responsibility.",
+          "consumed_as": "limitation and interpretation note"
+        }
+      ],
+      "generated_object_ids": [
+        "brms_take_home_primary",
+        "brms_take_home_annotation",
+        "brms_take_home_caption"
+      ],
+      "selected_gold_id": "GSC-018",
+      "selected_reference_id": "RRL-059",
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ]
+    }
+  ]
+}

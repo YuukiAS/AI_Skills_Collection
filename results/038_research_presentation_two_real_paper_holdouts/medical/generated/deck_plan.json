@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "metadata": {
+    "title": "MedSAM Segment Anything in Medical Images",
+    "audience": "doctoral research group",
+    "mode": "research-group-meeting",
+    "purpose": "group-meeting",
+    "duration_minutes": 20,
+    "language": "en",
+    "template": "exact-cuhk-beamer-source",
+    "output": "tex",
+    "editability": "source-editable",
+    "source_files": [
+      "results/038_research_presentation_two_real_paper_holdouts/medical/source_bundle.json",
+      "results/038_research_presentation_two_real_paper_holdouts/medical/source/source.md"
+    ],
+    "production_entry": "research-presentations one-call production"
+  },
+  "slides": [
+    {
+      "id": "s01",
+      "title": "The evaluation object is overlap under a prompted mask",
+      "key_message": "MedSAM is judged by segmentation overlap after a bounding-box prompt specifies the target region.",
+      "slide_purpose": "define metric and task",
+      "visual_intent": "native DSC equation with medical segmentation context",
+      "source_anchors": [
+        "source.md:## Quantitative Evaluation",
+        "PDF methods metric definition"
+      ],
+      "page_function": "STATISTICAL_MODEL",
+      "required_evidence": [
+        "MEDSAM-EV-METRIC"
+      ],
+      "source_evidence_ids": [
+        "MEDSAM-EV-METRIC"
+      ],
+      "scientific_objects": [
+        "ground-truth mask G",
+        "segmentation mask S",
+        "Dice similarity coefficient",
+        "bounding-box prompt"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "metric definition from paper",
+      "storyline": {
+        "workstream_id": "medsam_paper",
+        "workstream_label": "MedSAM paper",
+        "workstream_scope": "promptable architecture, validation evidence, qualitative medical images, and limits",
+        "storyline_order": 1,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "the equation grounds the quantitative figures before showing images",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "DSC equation is visible",
+        "G and S are defined",
+        "prompted segmentation context is explicit"
+      ],
+      "content": []
+    },
+    {
+      "id": "s02",
+      "title": "Internal validation pairs task distributions with real qualitative cases",
+      "key_message": "Across 86 internal tasks, the paper compares MedSAM with SAM and specialist baselines, then shows CT, MR, ultrasound, and endoscopy examples.",
+      "slide_purpose": "show quantitative and qualitative evidence",
+      "visual_intent": "paper Figure 3 with performance plots and medical image examples",
+      "source_anchors": [
+        "source.md:## Quantitative Evaluation",
+        "source.md:## Qualitative Evidence",
+        "Article Figure 3"
+      ],
+      "page_function": "REAL_DATA_APPLICATION",
+      "required_evidence": [
+        "MEDSAM-EV-INTERNAL"
+      ],
+      "source_evidence_ids": [
+        "MEDSAM-EV-INTERNAL"
+      ],
+      "scientific_objects": [
+        "86 internal validation tasks",
+        "DSC distribution",
+        "podium rank plot",
+        "qualitative segmentation examples"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "article-reported internal validation",
+      "storyline": {
+        "workstream_id": "medsam_paper",
+        "workstream_label": "MedSAM paper",
+        "workstream_scope": "promptable architecture, validation evidence, qualitative medical images, and limits",
+        "storyline_order": 2,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "source Figure 3 carries both performance and image evidence",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "Figure 3 remains inspectable",
+        "methods compared are named",
+        "medical images are real article pixels"
+      ],
+      "content": []
+    },
+    {
+      "id": "s03",
+      "title": "MedSAM keeps SAM's prompt path but trains it on medical masks",
+      "key_message": "The paper's mechanism is a promptable 2D medical segmentation model with image encoder, prompt encoder, and mask decoder.",
+      "slide_purpose": "explain method",
+      "visual_intent": "paper architecture figure with source-faithful annotation",
+      "source_anchors": [
+        "source.md:## Dataset and Model",
+        "Article Figure 2"
+      ],
+      "page_function": "EXPERIMENT_DESIGN",
+      "required_evidence": [
+        "MEDSAM-EV-ARCH"
+      ],
+      "source_evidence_ids": [
+        "MEDSAM-EV-ARCH"
+      ],
+      "scientific_objects": [
+        "image encoder",
+        "prompt encoder",
+        "mask decoder",
+        "bounding box prompt",
+        "modality distribution"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper architecture figure",
+      "storyline": {
+        "workstream_id": "medsam_paper",
+        "workstream_label": "MedSAM paper",
+        "workstream_scope": "promptable architecture, validation evidence, qualitative medical images, and limits",
+        "storyline_order": 3,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "the original architecture/distribution figure is the main object",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "architecture path is visible",
+        "bounding box prompt is visible",
+        "modality context remains visible"
+      ],
+      "content": []
+    },
+    {
+      "id": "s04",
+      "title": "The paper's claim is broad utility, with validation boundaries",
+      "key_message": "MedSAM broadens promptable medical segmentation, but the discussion still flags modality imbalance and clinical validation boundaries.",
+      "slide_purpose": "synthesize interpretation and limits",
+      "visual_intent": "evidence-to-interpretation reasoning diagram",
+      "source_anchors": [
+        "source.md:## Limitations and Interpretation",
+        "Discussion"
+      ],
+      "page_function": "NEXT_EXPERIMENT",
+      "required_evidence": [
+        "MEDSAM-EV-LIMITS"
+      ],
+      "source_evidence_ids": [
+        "MEDSAM-EV-LIMITS"
+      ],
+      "scientific_objects": [
+        "large multimodal training set",
+        "internal validation",
+        "external validation",
+        "modality imbalance",
+        "clinical validation"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "source-discussed limitation",
+      "storyline": {
+        "workstream_id": "medsam_paper",
+        "workstream_label": "MedSAM paper",
+        "workstream_scope": "promptable architecture, validation evidence, qualitative medical images, and limits",
+        "storyline_order": 4,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "reasoning diagram must connect evidence scope to interpretation boundary",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "limitation is visible",
+        "no overclaim beyond the paper",
+        "take-home remains medical-image specific"
+      ],
+      "content": []
+    },
+    {
+      "id": "s05",
+      "title": "The external CT case is a same-patient segmentation comparison",
+      "key_message": "Figure 4c compares SAM, U-Net, DeepLabV3+, and MedSAM on the same lymph-node CT example with real article pixels.",
+      "slide_purpose": "show real medical-image evidence",
+      "visual_intent": "same-case four-panel article crop plus ROI zoom",
+      "source_anchors": [
+        "source.md:## Qualitative Evidence",
+        "Article Figure 4c external validation CT row"
+      ],
+      "page_function": "MEDICAL_IMAGE_COMPARISON",
+      "required_evidence": [
+        "MEDSAM-EV-EXTERNAL-CT"
+      ],
+      "source_evidence_ids": [
+        "MEDSAM-EV-EXTERNAL-CT"
+      ],
+      "scientific_objects": [
+        "CT slice",
+        "bounding box prompt",
+        "SAM segmentation",
+        "U-Net segmentation",
+        "DeepLabV3+ segmentation",
+        "MedSAM segmentation",
+        "expert annotation"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "article-provided qualitative example, not synthetic reconstruction",
+      "storyline": {
+        "workstream_id": "medsam_paper",
+        "workstream_label": "MedSAM paper",
+        "workstream_scope": "promptable architecture, validation evidence, qualitative medical images, and limits",
+        "storyline_order": 5,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "medical-image comparison must use real source pixels and aligned method panels",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "all four panels share case geometry",
+        "DSC labels are visible",
+        "MedSAM panel is real article crop",
+        "ROI zoom does not invent new pixels"
+      ],
+      "content": []
+    }
+  ],
+  "research_state": {
+    "previous_question": "Can the production route make a real medical-imaging paper talk from an unseen paper bundle with genuine medical pixels?",
+    "prior_belief": "Stage 4 passed on engineering evidence, but real MedSAM article figures were not part of tuning.",
+    "new_evidence": "The source bundle is built from the Nature Communications article, supplementary information, source data file, and official figure images.",
+    "evidence_quality": "Open-access CC BY 4.0 article; PDF, supplement, source data, and committed figure crops are hashed.",
+    "belief_update": "The deck should be judged as a medical-image segmentation paper talk, not a generic foundation-model summary.",
+    "successes": "The paper provides real medical image panels, internal and external validation, DSC definition, architecture/prompt contract, and annotation-efficiency evidence.",
+    "failures": "The paper discusses modality imbalance and the need for task-specific clinical validation despite broad performance.",
+    "largest_uncertainty": "Whether existing generic production layouts preserve genuine MedSAM image semantics at presentation scale.",
+    "frozen_items": "Use official article figures and the frozen source bundle only.",
+    "stop_items": "Do not fabricate medical pixels, masks, prompts, or error overlays; do not patch generated TeX.",
+    "next_discriminating_experiment": "Submit final rendered pages and contact sheet to task-local visual review.",
+    "decision_needed": "Reviewer and Planner decide whether this one-shot deck reaches mature paper-talk quality."
+  },
+  "evidence_board": {
+    "available_figures": [],
+    "medical_images": [
+      {
+        "id": "MEDSAM-EV-EXTERNAL-CT",
+        "board": "medical_images",
+        "type": "png_set",
+        "source_path": "results/038_research_presentation_two_real_paper_holdouts/medical/assets/",
+        "source_anchor": "Article Figure 4c, external validation CT lymph node row",
+        "supports": "Same external validation CT case compares SAM, U-Net, DeepLabV3+, and MedSAM with bounding box, prediction, expert annotation, and DSC.",
+        "consumed_as": "same-case medical image comparison panels",
+        "status": "available"
+      }
+    ],
+    "qualitative_examples": [],
+    "quantitative_plots": [
+      {
+        "id": "MEDSAM-EV-INTERNAL",
+        "board": "quantitative_plots",
+        "type": "png",
+        "source_path": "results/038_research_presentation_two_real_paper_holdouts/medical/assets/medsam_figure3_internal_validation.png",
+        "source_anchor": "Article Figure 3",
+        "supports": "Internal validation compares SAM, U-Net specialist, DeepLabV3+ specialist, and MedSAM across 86 tasks and qualitative cases.",
+        "consumed_as": "paper result figure image",
+        "status": "available"
+      }
+    ],
+    "model_diagrams": [
+      {
+        "id": "MEDSAM-EV-ARCH",
+        "board": "model_diagrams",
+        "type": "png",
+        "source_path": "results/038_research_presentation_two_real_paper_holdouts/medical/assets/medsam_figure2_architecture.png",
+        "source_anchor": "Article Figure 2",
+        "supports": "MedSAM uses an image encoder, prompt encoder, and mask decoder with bounding-box prompts.",
+        "consumed_as": "paper architecture figure image",
+        "status": "available"
+      }
+    ],
+    "equations": [
+      {
+        "id": "MEDSAM-EV-METRIC",
+        "board": "equations",
+        "type": "source_markdown",
+        "source_path": "results/038_research_presentation_two_real_paper_holdouts/medical/source/source.md",
+        "source_anchor": "## Quantitative Evaluation",
+        "supports": "Dice similarity coefficient is the central metric for segmentation overlap.",
+        "consumed_as": "native LaTeX metric equation",
+        "status": "available"
+      }
+    ],
+    "experiment_logs": [],
+    "failed_experiments": [
+      {
+        "id": "MEDSAM-EV-LIMITS",
+        "board": "failed_experiments",
+        "type": "source_markdown",
+        "source_path": "results/038_research_presentation_two_real_paper_holdouts/medical/source/source.md",
+        "source_anchor": "## Limitations and Interpretation",
+        "supports": "Training-set modality imbalance and validation requirements limit blanket clinical interpretation.",
+        "consumed_as": "limitation and interpretation note",
+        "status": "available"
+      }
+    ],
+    "literature_figures_to_redraw": [],
+    "missing_evidence": []
+  },
+  "storyline": {
+    "schema": "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1",
+    "source_derivation": "workstream assignment uses explicit page-job/source workstream metadata when present, otherwise evidence-board fallback; titles, page numbers, domain token profiles, and gold IDs are not classification keys",
+    "cross_workstream_relation_policy": "do not infer causal bridges between distinct workstreams without explicit source support",
+    "workstreams": [
+      {
+        "workstream_id": "medsam_paper",
+        "label": "MedSAM paper",
+        "scope": "promptable architecture, validation evidence, qualitative medical images, and limits",
+        "first_source_order": 1,
+        "page_jobs": [
+          "medsam_metric_object",
+          "medsam_architecture_prompt",
+          "medsam_internal_validation",
+          "medsam_external_ct_case",
+          "medsam_limits_take_home"
+        ],
+        "workstream_order": 1,
+        "source_supported_cross_workstream_relation_to_previous": null,
+        "transition_label": "MedSAM paper"
+      }
+    ],
+    "page_assignments": [
+      {
+        "page_id": "medsam_metric_object",
+        "page_job": "STATISTICAL_MODEL",
+        "original_order": 1,
+        "workstream_id": "medsam_paper",
+        "workstream_label": "MedSAM paper",
+        "workstream_scope": "promptable architecture, validation evidence, qualitative medical images, and limits",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          10,
+          1
+        ],
+        "storyline_order": 1,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "medsam_internal_validation",
+        "page_job": "REAL_DATA_APPLICATION",
+        "original_order": 3,
+        "workstream_id": "medsam_paper",
+        "workstream_label": "MedSAM paper",
+        "workstream_scope": "promptable architecture, validation evidence, qualitative medical images, and limits",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          20,
+          3
+        ],
+        "storyline_order": 2,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "medsam_architecture_prompt",
+        "page_job": "EXPERIMENT_DESIGN",
+        "original_order": 2,
+        "workstream_id": "medsam_paper",
+        "workstream_label": "MedSAM paper",
+        "workstream_scope": "promptable architecture, validation evidence, qualitative medical images, and limits",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          30,
+          2
+        ],
+        "storyline_order": 3,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "medsam_limits_take_home",
+        "page_job": "NEXT_EXPERIMENT",
+        "original_order": 5,
+        "workstream_id": "medsam_paper",
+        "workstream_label": "MedSAM paper",
+        "workstream_scope": "promptable architecture, validation evidence, qualitative medical images, and limits",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          50,
+          5
+        ],
+        "storyline_order": 4,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "medsam_external_ct_case",
+        "page_job": "MEDICAL_IMAGE_COMPARISON",
+        "original_order": 4,
+        "workstream_id": "medsam_paper",
+        "workstream_label": "MedSAM paper",
+        "workstream_scope": "promptable architecture, validation evidence, qualitative medical images, and limits",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          100,
+          4
+        ],
+        "storyline_order": 5,
+        "workstream_order": 1
+      }
+    ],
+    "storyline_order": [
+      "STATISTICAL_MODEL",
+      "REAL_DATA_APPLICATION",
+      "EXPERIMENT_DESIGN",
+      "NEXT_EXPERIMENT",
+      "MEDICAL_IMAGE_COMPARISON"
+    ]
+  }
+}

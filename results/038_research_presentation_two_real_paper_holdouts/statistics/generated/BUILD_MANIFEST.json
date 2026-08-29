@@ -1,0 +1,512 @@
+{
+  "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1",
+  "task_key": "038_research_presentation_two_real_paper_holdouts",
+  "implementation_commit": null,
+  "input_bundle": "results/038_research_presentation_two_real_paper_holdouts/statistics/source_bundle.json",
+  "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
+  "canonical_files": {
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/background.png": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/background_negative.png": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/logo_RGB.png": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/logo_RGB_negative.png": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/bibliography.bib": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/main.tex": "a7c6826e94c6f08647200f3472381d882dd8bf405df42a68f5dc903a4010da07",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/beamerthemesintef.sty": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08",
+    "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/styles/sintefcolor.sty": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+  },
+  "build_workspace": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build",
+  "render_input_identity_sha256": "49faee5a773e73807b46b026b62c95cebdb9f5566de18dcc96e03fbfc02dacc7",
+  "render_input_identity": {
+    "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+    "build_workspace": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build",
+    "files": [
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/assets/background.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/assets/background_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/assets/logo_RGB.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/bibliography.bib",
+        "role": "canonical_cuhk_support",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/main.tex",
+        "role": "main_tex",
+        "sha256": "1177324a42d4ccf7dbd914f435449500e2926808befdce9b9cf60cd3dbe072c2"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/scientific_layouts.tex",
+        "role": "scientific_layout_include",
+        "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/stage3_assets/brms_figure1_fitting_workflow.png",
+        "role": "copied_scientific_asset",
+        "sha256": "59eb79ee8d6e31489e2d45802e165b3b218904a8e268ff8c54ffc2eaa24e9f93"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/stage3_assets/brms_figure3_kidney_marginal_effects.png",
+        "role": "copied_scientific_asset",
+        "sha256": "28bd96c3f06b2903ba0f04d35cd6637e763194ab0455cd148c28ecf0b03ef005"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/stage3_assets/brms_table1_package_capabilities.png",
+        "role": "copied_scientific_asset",
+        "sha256": "b41eb0155e108e9bf5b75e382b79006c8aa2f024ccf0060048e64ab40107b62f"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/styles/sintefcolor.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+      }
+    ],
+    "sha256": "49faee5a773e73807b46b026b62c95cebdb9f5566de18dcc96e03fbfc02dacc7"
+  },
+  "tex": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/main.tex",
+  "scientific_layout_include": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/scientific_layouts.tex",
+  "deck_plan": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_plan.json",
+  "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/source_fidelity_map.json",
+  "runtime_trace": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/runtime_trace.json",
+  "storyline_trace": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/storyline_trace.json",
+  "deck_sequence_summary_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_sequence_summary.json",
+  "deck_sequence_summary": {
+    "schema": "RESEARCH_PRESENTATION_DECK_SEQUENCE_SUMMARY_V1",
+    "page_count": 5,
+    "render_input_identity_sha256": "49faee5a773e73807b46b026b62c95cebdb9f5566de18dcc96e03fbfc02dacc7",
+    "render_input_manifest": {
+      "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+      "build_workspace": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build",
+      "files": [
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/assets/background.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/assets/background_negative.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/assets/logo_RGB.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/bibliography.bib",
+          "role": "canonical_cuhk_support",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/main.tex",
+          "role": "main_tex",
+          "sha256": "1177324a42d4ccf7dbd914f435449500e2926808befdce9b9cf60cd3dbe072c2"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/scientific_layouts.tex",
+          "role": "scientific_layout_include",
+          "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/stage3_assets/brms_figure1_fitting_workflow.png",
+          "role": "copied_scientific_asset",
+          "sha256": "59eb79ee8d6e31489e2d45802e165b3b218904a8e268ff8c54ffc2eaa24e9f93"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/stage3_assets/brms_figure3_kidney_marginal_effects.png",
+          "role": "copied_scientific_asset",
+          "sha256": "28bd96c3f06b2903ba0f04d35cd6637e763194ab0455cd148c28ecf0b03ef005"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/stage3_assets/brms_table1_package_capabilities.png",
+          "role": "copied_scientific_asset",
+          "sha256": "b41eb0155e108e9bf5b75e382b79006c8aa2f024ccf0060048e64ab40107b62f"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+          "role": "canonical_cuhk_style",
+          "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/styles/sintefcolor.sty",
+          "role": "canonical_cuhk_style",
+          "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+        }
+      ],
+      "sha256": "49faee5a773e73807b46b026b62c95cebdb9f5566de18dcc96e03fbfc02dacc7"
+    },
+    "pixel_evidence_status": {
+      "status": "AVAILABLE",
+      "render_status": "ok",
+      "rendered_png_count": 6,
+      "rendered_page_sha256_nullable": false,
+      "contact_sheet_sha256_nullable": false
+    },
+    "rendered_pixel_identity_sha256": "43b45471bbdf47f02232bab4be023356b7e325b33b3524c78318c63c302260c8",
+    "page_order": [
+      "slide_2_statistical_model",
+      "slide_3_real_data_application",
+      "slide_4_experiment_design",
+      "slide_5_negative_result",
+      "slide_6_next_experiment"
+    ],
+    "title_sequence": [
+      "brms exposes multilevel covariance as Stan-ready parameters",
+      "The kidney example turns posterior draws into interpretable effects",
+      "The production path in the paper is formula to Stan to brmsfit",
+      "The comparison table is broad, but not a blank check",
+      "The paper's practical rule is interface first, diagnostics always"
+    ],
+    "section_sequence": [
+      "brms paper",
+      "brms paper",
+      "brms paper",
+      "brms paper",
+      "brms paper"
+    ],
+    "workstream_sequence": [
+      {
+        "logical_id": "slide_2_statistical_model",
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_order": 1
+      },
+      {
+        "logical_id": "slide_3_real_data_application",
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_order": 1
+      },
+      {
+        "logical_id": "slide_4_experiment_design",
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_order": 1
+      },
+      {
+        "logical_id": "slide_5_negative_result",
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_order": 1
+      },
+      {
+        "logical_id": "slide_6_next_experiment",
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_order": 1
+      }
+    ],
+    "storyline_order": [
+      "STATISTICAL_MODEL",
+      "REAL_DATA_APPLICATION",
+      "EXPERIMENT_DESIGN",
+      "NEGATIVE_RESULT",
+      "NEXT_EXPERIMENT"
+    ],
+    "pages": [
+      {
+        "sequence_index": 1,
+        "rendered_slide_number": 2,
+        "logical_id": "slide_2_statistical_model",
+        "page_id": "brms_model_object",
+        "page_job": "STATISTICAL_MODEL",
+        "title": "brms exposes multilevel covariance as Stan-ready parameters",
+        "section": "brms paper",
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "BRMS-EV-MODEL"
+        ],
+        "selected_gold_id": "GSC-016",
+        "selected_reference_id": "RRL-020",
+        "primary_scientific_object_type": "native_latex_math",
+        "scientific_objects": [
+          "group-level covariance matrix",
+          "standard-deviation vector",
+          "LKJ correlation prior",
+          "Kronecker covariance structure"
+        ],
+        "visual_density": {
+          "declared_density": "moderate",
+          "machine_density": "moderate",
+          "primary_area": 0.0,
+          "native_object_count": 5,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-2.png",
+        "rendered_page_sha256": "e709ffda43682c0ccdac54de5eb0649644dde255a04adb1344544ca7e2952515",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      },
+      {
+        "sequence_index": 2,
+        "rendered_slide_number": 3,
+        "logical_id": "slide_3_real_data_application",
+        "page_id": "brms_kidney_example_result",
+        "page_job": "REAL_DATA_APPLICATION",
+        "title": "The kidney example turns posterior draws into interpretable effects",
+        "section": "brms paper",
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "BRMS-EV-KIDNEY"
+        ],
+        "selected_gold_id": "GSC-015",
+        "selected_reference_id": "RRL-017",
+        "primary_scientific_object_type": "paper_result_figure",
+        "scientific_objects": [
+          "censored time outcome",
+          "age effect",
+          "sex effect",
+          "disease effect",
+          "posterior uncertainty intervals"
+        ],
+        "visual_density": {
+          "declared_density": "moderate",
+          "machine_density": "low",
+          "primary_area": 0.0,
+          "native_object_count": 3,
+          "capacity_status": "SPLIT_REQUIRED"
+        },
+        "rendered_page_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-3.png",
+        "rendered_page_sha256": "19f47412ecc9dcba3f7e03f303614e72b6ad266984c1ef7d6c24c36b572eb314",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      },
+      {
+        "sequence_index": 3,
+        "rendered_slide_number": 4,
+        "logical_id": "slide_4_experiment_design",
+        "page_id": "brms_fitting_workflow",
+        "page_job": "EXPERIMENT_DESIGN",
+        "title": "The production path in the paper is formula to Stan to brmsfit",
+        "section": "brms paper",
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "BRMS-EV-WORKFLOW"
+        ],
+        "selected_gold_id": "GSC-004",
+        "selected_reference_id": "RRL-019",
+        "primary_scientific_object_type": "paper_workflow_figure",
+        "scientific_objects": [
+          "brm",
+          "make_stancode",
+          "make_standata",
+          "rstan",
+          "Stan",
+          "brmsfit post-processing"
+        ],
+        "visual_density": {
+          "declared_density": "moderate",
+          "machine_density": "low",
+          "primary_area": 0.0,
+          "native_object_count": 3,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-4.png",
+        "rendered_page_sha256": "ee6899c8ce6391b17eb822b0a91157d0b8056418c6e7663e8b0835935569f54f",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      },
+      {
+        "sequence_index": 4,
+        "rendered_slide_number": 5,
+        "logical_id": "slide_5_negative_result",
+        "page_id": "brms_capability_limits",
+        "page_job": "NEGATIVE_RESULT",
+        "title": "The comparison table is broad, but not a blank check",
+        "section": "brms paper",
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "BRMS-EV-COMPARISON",
+          "BRMS-EV-PRIOR-LIMIT"
+        ],
+        "selected_gold_id": "GSC-012",
+        "selected_reference_id": "RRL-011",
+        "primary_scientific_object_type": "paper_capability_table",
+        "scientific_objects": [
+          "supported model type matrix",
+          "missing-value imputation limit",
+          "modularized interface limit",
+          "prior responsibility"
+        ],
+        "visual_density": {
+          "declared_density": "high",
+          "machine_density": "low",
+          "primary_area": 0.0,
+          "native_object_count": 3,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-5.png",
+        "rendered_page_sha256": "a15ac41b8f6cf40355c68a893678149a2bd3d071c62bdd80afdba267660eabed",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      },
+      {
+        "sequence_index": 5,
+        "rendered_slide_number": 6,
+        "logical_id": "slide_6_next_experiment",
+        "page_id": "brms_take_home",
+        "page_job": "NEXT_EXPERIMENT",
+        "title": "The paper's practical rule is interface first, diagnostics always",
+        "section": "brms paper",
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_order": 1,
+        "source_evidence_ids": [
+          "BRMS-EV-TAKEAWAY",
+          "BRMS-EV-PRIOR-LIMIT"
+        ],
+        "selected_gold_id": "GSC-018",
+        "selected_reference_id": "RRL-059",
+        "primary_scientific_object_type": "source_interpretation_reasoning",
+        "scientific_objects": [
+          "formula interface",
+          "Stan/HMC fit",
+          "prior judgement",
+          "WAIC/LOO comparison"
+        ],
+        "visual_density": {
+          "declared_density": "moderate",
+          "machine_density": "low",
+          "primary_area": 0.0,
+          "native_object_count": 3,
+          "capacity_status": "FIT"
+        },
+        "rendered_page_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-6.png",
+        "rendered_page_sha256": "d535f2b136dd0f685b9889a943ae61f61971861264f3260b8c75311cc84baaaa",
+        "rendered_pixel_status": "AVAILABLE",
+        "transition_cue": null
+      }
+    ],
+    "deck_contact_sheet": {
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_contact_sheet.png",
+      "sha256": "722ccd6b2ba90fde592692e18a6478a850eaeb0f8fe9eb9a5d8fb7f5751bbf76",
+      "serves_audience": false,
+      "review_role": "deck_sequence_context"
+    },
+    "deck_identity_sha256": "4934d202273307890785e5564cbe7b45449058219b74186728b302b0570054f1"
+  },
+  "deck_contact_sheet": {
+    "status": "GENERATED",
+    "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_contact_sheet.png",
+    "sha256": "722ccd6b2ba90fde592692e18a6478a850eaeb0f8fe9eb9a5d8fb7f5751bbf76"
+  },
+  "quality_loop_state": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/quality_loop_state.json",
+  "dependency_probe": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/dependency_probe.json",
+  "render_chinese_math_pdf_probe": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/render_chinese_math_pdf_probe.json",
+  "compile_status": {
+    "status": "COMPILED",
+    "engine": "xelatex",
+    "engine_path": "/home/yuukias/.TinyTeX/bin/x86_64-linux/xelatex",
+    "compile_passes": 2,
+    "fontconfig": {
+      "fontconfig_file": "/home/yuukias/AI_Skills_Collection/results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/fontconfig/fonts.conf",
+      "fontconfig_file_repo_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/fontconfig/fonts.conf",
+      "font_cache_dir": "/tmp/fontconfig-cache-027",
+      "times_font_dir": "/home/yuukias/code/TRACE/presentations/group_meetings/2026-07-16/cat_trace_demo/fonts",
+      "times_font_dir_exists": true,
+      "times_font_files_present": true
+    },
+    "pdf": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/main.pdf",
+    "pdf_sha256": "7b592c2bd35621880fbec9b5a5a42fa15b622917e5ba00cbc0b74e90918f1d91",
+    "log": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/compile.log"
+  },
+  "render_status": {
+    "status": "ok",
+    "png_count": 6,
+    "rendered_png": [
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-1.png",
+        "sha256": "7b41dcfb5739095fbc14b7de4ff6023ede1709a0c3d67e784acbd6480e1bbea2"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-2.png",
+        "sha256": "e709ffda43682c0ccdac54de5eb0649644dde255a04adb1344544ca7e2952515"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-3.png",
+        "sha256": "19f47412ecc9dcba3f7e03f303614e72b6ad266984c1ef7d6c24c36b572eb314"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-4.png",
+        "sha256": "ee6899c8ce6391b17eb822b0a91157d0b8056418c6e7663e8b0835935569f54f"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-5.png",
+        "sha256": "a15ac41b8f6cf40355c68a893678149a2bd3d071c62bdd80afdba267660eabed"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-6.png",
+        "sha256": "d535f2b136dd0f685b9889a943ae61f61971861264f3260b8c75311cc84baaaa"
+      }
+    ]
+  },
+  "mechanical_qa": {
+    "status": "MECHANICAL_PASS",
+    "checks": {
+      "normal_research_presentations_entry": true,
+      "input_bundle_read_from_path": true,
+      "canonical_source_copied": true,
+      "scientific_layout_include_loaded": true,
+      "content_page_jobs": 5,
+      "rendered_pages_available": true,
+      "deck_contact_sheet_generated": true,
+      "quality_loop_budget_enforced": true
+    }
+  },
+  "quality_loop_handoff": {
+    "schema": "RESEARCH_PRESENTATION_STAGE4_QUALITY_HANDOFF_V1",
+    "status": "WAITING_FOR_DECK_VISUAL_REVIEW",
+    "visual_review_manifest": "results/038_research_presentation_two_real_paper_holdouts/visual_review/visual_inputs.json",
+    "visual_review_evidence": "results/038_research_presentation_two_real_paper_holdouts/visual_review/VISUAL_REVIEW.json",
+    "quality_loop_state": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/quality_loop_state.json",
+    "deck_contact_sheet": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_contact_sheet.png",
+    "render_input_identity_sha256": "49faee5a773e73807b46b026b62c95cebdb9f5566de18dcc96e03fbfc02dacc7",
+    "rendered_pixel_identity_sha256": "43b45471bbdf47f02232bab4be023356b7e325b33b3524c78318c63c302260c8"
+  },
+  "stage4_boundary": "This one-call production entry recovery does not claim Stage 4 PASS, PROGRAM_MATURE, or ONE_SHOT_QUALITY_PASS.",
+  "cleaned_latex_intermediates": [
+    "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/main.aux",
+    "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/main.nav",
+    "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/main.out",
+    "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/main.snm",
+    "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/main.toc"
+  ],
+  "normalized_generated_logs": [
+    "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/compile.log",
+    "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/main.log"
+  ]
+}

@@ -1,0 +1,548 @@
+{
+  "schema": "RESEARCH_PRESENTATION_PRODUCTION_TRACE_V1",
+  "task_key": "038_research_presentation_two_real_paper_holdouts",
+  "entrypoint": "research-presentations one-call production",
+  "input_bundle": "results/038_research_presentation_two_real_paper_holdouts/statistics/source_bundle.json",
+  "normal_skill_route": "research-presentations",
+  "storyline_trace": {
+    "schema": "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1",
+    "source_derivation": "workstream assignment uses explicit page-job/source workstream metadata when present, otherwise evidence-board fallback; titles, page numbers, domain token profiles, and gold IDs are not classification keys",
+    "cross_workstream_relation_policy": "do not infer causal bridges between distinct workstreams without explicit source support",
+    "workstreams": [
+      {
+        "workstream_id": "brms_paper",
+        "label": "brms paper",
+        "scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "first_source_order": 1,
+        "page_jobs": [
+          "brms_model_object",
+          "brms_fitting_workflow",
+          "brms_kidney_example_result",
+          "brms_capability_limits",
+          "brms_take_home"
+        ],
+        "workstream_order": 1,
+        "source_supported_cross_workstream_relation_to_previous": null,
+        "transition_label": "brms paper"
+      }
+    ],
+    "page_assignments": [
+      {
+        "page_id": "brms_model_object",
+        "page_job": "STATISTICAL_MODEL",
+        "original_order": 1,
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          10,
+          1
+        ],
+        "storyline_order": 1,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "brms_kidney_example_result",
+        "page_job": "REAL_DATA_APPLICATION",
+        "original_order": 3,
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          20,
+          3
+        ],
+        "storyline_order": 2,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "brms_fitting_workflow",
+        "page_job": "EXPERIMENT_DESIGN",
+        "original_order": 2,
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          30,
+          2
+        ],
+        "storyline_order": 3,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "brms_capability_limits",
+        "page_job": "NEGATIVE_RESULT",
+        "original_order": 4,
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          40,
+          4
+        ],
+        "storyline_order": 4,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "brms_take_home",
+        "page_job": "NEXT_EXPERIMENT",
+        "original_order": 5,
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          50,
+          5
+        ],
+        "storyline_order": 5,
+        "workstream_order": 1
+      }
+    ],
+    "storyline_order": [
+      "STATISTICAL_MODEL",
+      "REAL_DATA_APPLICATION",
+      "EXPERIMENT_DESIGN",
+      "NEGATIVE_RESULT",
+      "NEXT_EXPERIMENT"
+    ]
+  },
+  "benchmark_generators_called_as_entrypoint": [],
+  "stage5_holdout_eligible": false,
+  "slides": [
+    {
+      "page_id": "brms_model_object",
+      "page_job": "STATISTICAL_MODEL",
+      "scientific_object_query": {
+        "page_function": "STATISTICAL_MODEL",
+        "scientific_object": "biostatistics model objective equation formula Bayesian multilevel covariance LKJ prior Stan brms",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "equation",
+        "evidence_type": "mathematical model",
+        "density": "moderate",
+        "panel_count": 0
+      },
+      "source_evidence_ids": [
+        "BRMS-EV-MODEL"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-016",
+          "reference_id": "RRL-020",
+          "source_id": "SRC-006",
+          "page_function": "STATISTICAL_MODEL",
+          "composition_family": "equation-centered-objective",
+          "primary_bbox": {
+            "x": 0.25,
+            "y": 0.39,
+            "w": 0.52,
+            "h": 0.18
+          },
+          "score": 15,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "panel_count exact match",
+            "scientific object overlap: biostatistics, equation, formula, mathematical, model"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        },
+        {
+          "gold_id": "GSC-011",
+          "reference_id": "RRL-009",
+          "source_id": "SRC-004",
+          "page_function": "ESTIMATOR",
+          "composition_family": "annotated-algorithm-workflow",
+          "primary_bbox": {
+            "x": 0.07,
+            "y": 0.2,
+            "w": 0.86,
+            "h": 0.56
+          },
+          "score": 5,
+          "compatibility_reasons": [
+            "page_function matches scientific job",
+            "general research fallback",
+            "scientific object overlap: model"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-016",
+      "selected_reference_id": "RRL-020",
+      "source_composition_identity": {
+        "recipe_sha256": "b80859f0dc02e28da3479862eb38d188c30a63a9391a689385338d94a8dc9962",
+        "resolved_layout_sha256": "84f41ed3a4b5ef846ae800fb4dccceb6961c972d1543d8a5e0a81040c7231a25"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "storyline_order": 1,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "accepted_stage3_foundation",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    },
+    {
+      "page_id": "brms_kidney_example_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "scientific_object_query": {
+        "page_function": "REAL_DATA_APPLICATION",
+        "scientific_object": "biostatistics quantitative result model comparison plot kidney recurrent infection marginal effects posterior uncertainty",
+        "domain_family": "biostatistics",
+        "dominant_object_type": "plot",
+        "evidence_type": "worked example result figure",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "source_evidence_ids": [
+        "BRMS-EV-KIDNEY"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-015",
+          "reference_id": "RRL-017",
+          "source_id": "SRC-005",
+          "page_function": "REAL_DATA_APPLICATION",
+          "composition_family": "dominant-labeled-scatterplot",
+          "primary_bbox": {
+            "x": 0.43,
+            "y": 0.17,
+            "w": 0.5,
+            "h": 0.64
+          },
+          "score": 16,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "density match",
+            "panel_count exact match",
+            "scientific object overlap: biostatistics, comparison, model, plot, quantitative"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        },
+        {
+          "gold_id": "GSC-014",
+          "reference_id": "RRL-016",
+          "source_id": "SRC-005",
+          "page_function": "REAL_DATA_APPLICATION",
+          "composition_family": "claim-centered-result-table",
+          "primary_bbox": {
+            "x": 0.43,
+            "y": 0.35,
+            "w": 0.42,
+            "h": 0.31
+          },
+          "score": 15,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "density match",
+            "panel_count exact match",
+            "scientific object overlap: biostatistics, comparison, quantitative, result"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-015",
+      "selected_reference_id": "RRL-017",
+      "source_composition_identity": {
+        "recipe_sha256": "0f87086d5076134ca5a14acc16155c0e7540fa79ae4fc86dbf9da1a119a50117",
+        "resolved_layout_sha256": "056aaa89f25f84c543ae0122411ee8a80fa978fe46474ce993d60bb9601b3d9f"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "storyline_order": 2,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "presentation_native_quantitative_result",
+      "content_capacity_check": {
+        "status": "SPLIT_REQUIRED",
+        "reason": "requested 4 panels exceeds selected layout capacity 1"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    },
+    {
+      "page_id": "brms_fitting_workflow",
+      "page_job": "EXPERIMENT_DESIGN",
+      "scientific_object_query": {
+        "page_function": "EXPERIMENT_DESIGN",
+        "scientific_object": "general research method experiment workflow brms Stan formula make_stancode make_standata rstan",
+        "domain_family": "general_research",
+        "dominant_object_type": "diagram",
+        "evidence_type": "method workflow figure",
+        "density": "moderate",
+        "panel_count": 1
+      },
+      "source_evidence_ids": [
+        "BRMS-EV-WORKFLOW"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-004",
+          "reference_id": "RRL-019",
+          "source_id": "SRC-006",
+          "page_function": "EXPERIMENT_DESIGN",
+          "composition_family": "application-task-map",
+          "primary_bbox": {
+            "x": 0.06,
+            "y": 0.35,
+            "w": 0.84,
+            "h": 0.47
+          },
+          "score": 12,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "density match",
+            "scientific object overlap: experiment, method, research"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-004",
+      "selected_reference_id": "RRL-019",
+      "source_composition_identity": {
+        "recipe_sha256": "107360b1d609ee5d29e047a29c83456326491e8f963d099477c595b6ca1175ee",
+        "resolved_layout_sha256": "b4b0bb40783255b1d31cce32e9ccc2babc7482e8788daf0d515dc11f0ea8cbc5"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "storyline_order": 3,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "typed_experiment_design_hierarchy",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    },
+    {
+      "page_id": "brms_capability_limits",
+      "page_job": "NEGATIVE_RESULT",
+      "scientific_object_query": {
+        "page_function": "NEGATIVE_RESULT",
+        "scientific_object": "negative limitation comparison method brms package comparison missing value imputation modularized prior choice",
+        "domain_family": "statistics",
+        "dominant_object_type": "table",
+        "evidence_type": "capability comparison and limitation",
+        "density": "high",
+        "panel_count": 1
+      },
+      "source_evidence_ids": [
+        "BRMS-EV-COMPARISON",
+        "BRMS-EV-PRIOR-LIMIT"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-012",
+          "reference_id": "RRL-011",
+          "source_id": "SRC-004",
+          "page_function": "NEGATIVE_RESULT",
+          "composition_family": "side-by-side-failure-comparison",
+          "primary_bbox": {
+            "x": 0.05,
+            "y": 0.28,
+            "w": 0.86,
+            "h": 0.5
+          },
+          "score": 13,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "panel_count near match",
+            "scientific object overlap: comparison, limitation, method, negative"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-012",
+      "selected_reference_id": "RRL-011",
+      "source_composition_identity": {
+        "recipe_sha256": "30fd927311f86370253a03c7fd6c5e1ecee9bcc3eeda9cf4a9a0410d3aa31dc0",
+        "resolved_layout_sha256": "73129486577156da98e47d01f5a4a6030dc4803cf5502810a2b517f30a6519f5"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "storyline_order": 4,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "accepted_stage3_foundation",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    },
+    {
+      "page_id": "brms_take_home",
+      "page_job": "NEXT_EXPERIMENT",
+      "scientific_object_query": {
+        "page_function": "NEXT_EXPERIMENT",
+        "scientific_object": "discussion next experiment method statistics Bayesian workflow brms Stan diagnostics priors WAIC LOO model comparison",
+        "domain_family": "statistics",
+        "dominant_object_type": "diagram",
+        "evidence_type": "paper interpretation",
+        "density": "moderate",
+        "panel_count": 4
+      },
+      "source_evidence_ids": [
+        "BRMS-EV-TAKEAWAY",
+        "BRMS-EV-PRIOR-LIMIT"
+      ],
+      "normal_selector_matches": [
+        {
+          "gold_id": "GSC-018",
+          "reference_id": "RRL-059",
+          "source_id": "SRC-077",
+          "page_function": "NEXT_EXPERIMENT",
+          "composition_family": "comparative-next-query-strategy",
+          "primary_bbox": {
+            "x": 0.1,
+            "y": 0.36,
+            "w": 0.78,
+            "h": 0.46
+          },
+          "score": 15,
+          "compatibility_reasons": [
+            "page_function exact match",
+            "domain_family match",
+            "density match",
+            "panel_count exact match",
+            "scientific object overlap: bayesian, discussion, experiment, next"
+          ],
+          "rights_reuse_boundary": "COMPOSITION_ONLY"
+        }
+      ],
+      "selected_gold_id": "GSC-018",
+      "selected_reference_id": "RRL-059",
+      "source_composition_identity": {
+        "recipe_sha256": "04f9fc1f7e5183883eb9e35cdf3d8584439c9d8ecec1cc4cda409d8afaf017f6",
+        "resolved_layout_sha256": "3605a23711334a2435fce7b7322e24708e7f2cabb756cd46fe2ea2ccdb5b01ce"
+      },
+      "source_derived_composition_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "storyline": {
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "storyline_order": 5,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "storyline_transition": null,
+      "resolved_stage3_layout_family": "evidence_to_decision_next_experiment",
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "benchmark_helper_orchestration_surface_used": false,
+      "force_gold_id_used": false,
+      "score_override_used": false
+    }
+  ],
+  "deck_quality_loop": {
+    "quality_loop_state": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/quality_loop_state.json",
+    "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_sequence_summary.json",
+    "deck_contact_sheet": {
+      "status": "GENERATED",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_contact_sheet.png",
+      "sha256": "722ccd6b2ba90fde592692e18a6478a850eaeb0f8fe9eb9a5d8fb7f5751bbf76"
+    }
+  }
+}

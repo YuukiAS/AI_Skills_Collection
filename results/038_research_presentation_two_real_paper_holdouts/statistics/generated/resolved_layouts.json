@@ -1,0 +1,883 @@
+{
+  "schema": "RESEARCH_PRESENTATION_PRODUCTION_RESOLVED_LAYOUTS_V1",
+  "task_key": "038_research_presentation_two_real_paper_holdouts",
+  "layouts": [
+    {
+      "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
+      "task_key": "038_research_presentation_two_real_paper_holdouts",
+      "page_id": "brms_model_object",
+      "page_job": "STATISTICAL_MODEL",
+      "dominant_scientific_object": "native_latex_math",
+      "executable_layout_family": "accepted_stage3_foundation",
+      "selected_gold_id": "GSC-016",
+      "selected_reference_id": "RRL-020",
+      "recipe_sha256": "b80859f0dc02e28da3479862eb38d188c30a63a9391a689385338d94a8dc9962",
+      "compatibility_trace": [
+        "page_function exact match",
+        "domain_family match",
+        "panel_count exact match",
+        "scientific object overlap: biostatistics, equation, formula, mathematical, model"
+      ],
+      "exact_cuhk_content_safe_region": {
+        "x": 0.06,
+        "y": 0.185,
+        "w": 0.88,
+        "h": 0.675
+      },
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "source_to_cuhk_transform": [
+        "source primary_bbox mapped into canonical CUHK content safe region",
+        "equation primary object expanded to projection-readable floor",
+        "statistical-model equation remains primary while source-grounded supporting roles fill the page"
+      ],
+      "resolved_primary_object_geometry": {
+        "x": 0.205,
+        "y": 0.2596,
+        "w": 0.68,
+        "h": 0.245
+      },
+      "resolved_supporting_object_geometry": {
+        "annotation": {
+          "x": 0.12,
+          "y": 0.47,
+          "w": 0.76,
+          "h": 0.07
+        },
+        "caption": {
+          "x": 0.12,
+          "y": 0.79,
+          "w": 0.76,
+          "h": 0.038
+        }
+      },
+      "visual_hierarchy_mapping": [
+        {
+          "rank": 1,
+          "role": "objective title",
+          "reason": "names the model component"
+        },
+        {
+          "rank": 2,
+          "role": "objective equation",
+          "reason": "formula is centered and readable"
+        },
+        {
+          "rank": 3,
+          "role": "short setup text",
+          "reason": "explains optimization context"
+        }
+      ],
+      "alignment_mapping": [
+        {
+          "group_id": "objective-equation",
+          "roles": [
+            "loss terms",
+            "network components",
+            "short explanation"
+          ],
+          "relationship": "text frames the equation without crowding it"
+        }
+      ],
+      "reading_flow_mapping": "title-to-short-setup-to-centered-equation",
+      "annotation_legend_caption_panel_mapping": [
+        "explanatory text is adjacent to the equation but remains secondary"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "job_specific_runtime_contract": {
+        "primitive": "accepted_foundation",
+        "source_fields_consumed": [
+          "key_message",
+          "annotation",
+          "caption",
+          "scientific_objects"
+        ],
+        "same_case_roi_zoom": null
+      },
+      "text_region_packing": {
+        "emitted_text_region_count": 4,
+        "non_overlapping": true
+      },
+      "native_objects": [
+        {
+          "object_id": "brms_model_object_primary",
+          "role": "primary_scientific_object",
+          "native_type": "equation",
+          "bbox": {
+            "x": 0.205,
+            "y": 0.2596,
+            "w": 0.68,
+            "h": 0.245
+          }
+        },
+        {
+          "object_id": "brms_model_object_annotation",
+          "role": "annotation",
+          "native_type": "text_callout",
+          "bbox": {
+            "x": 0.12,
+            "y": 0.47,
+            "w": 0.76,
+            "h": 0.07
+          }
+        },
+        {
+          "object_id": "brms_model_object_caption",
+          "role": "caption",
+          "native_type": "text_caption",
+          "bbox": {
+            "x": 0.12,
+            "y": 0.79,
+            "w": 0.76,
+            "h": 0.038
+          }
+        },
+        {
+          "object_id": "brms_model_object_model_components",
+          "role": "source_field_model_components",
+          "native_type": "text_explanation_block",
+          "source_fields": [
+            "scientific_objects"
+          ],
+          "bbox": {
+            "x": 0.105,
+            "y": 0.6,
+            "w": 0.385,
+            "h": 0.15
+          }
+        },
+        {
+          "object_id": "brms_model_object_model_interpretation",
+          "role": "source_field_model_interpretation",
+          "native_type": "text_explanation_block",
+          "source_fields": [
+            "key_message"
+          ],
+          "bbox": {
+            "x": 0.51,
+            "y": 0.6,
+            "w": 0.385,
+            "h": 0.15
+          }
+        }
+      ],
+      "audience_safe_output_contract": {
+        "internal_ids_exposed": false,
+        "source_pixels_or_branding_reused": false,
+        "forbidden_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "implementation language",
+          "production regression",
+          "source bundle",
+          "provenance",
+          "review target",
+          "fixture",
+          "workflow"
+        ]
+      },
+      "resolved_layout_sha256": "84f41ed3a4b5ef846ae800fb4dccceb6961c972d1543d8a5e0a81040c7231a25"
+    },
+    {
+      "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
+      "task_key": "038_research_presentation_two_real_paper_holdouts",
+      "page_id": "brms_kidney_example_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "dominant_scientific_object": "paper_result_figure",
+      "executable_layout_family": "presentation_native_quantitative_result",
+      "selected_gold_id": "GSC-015",
+      "selected_reference_id": "RRL-017",
+      "recipe_sha256": "0f87086d5076134ca5a14acc16155c0e7540fa79ae4fc86dbf9da1a119a50117",
+      "compatibility_trace": [
+        "page_function exact match",
+        "domain_family match",
+        "density match",
+        "panel_count exact match",
+        "scientific object overlap: biostatistics, comparison, model, plot, quantitative"
+      ],
+      "exact_cuhk_content_safe_region": {
+        "x": 0.06,
+        "y": 0.185,
+        "w": 0.88,
+        "h": 0.675
+      },
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "source_to_cuhk_transform": [
+        "source primary_bbox mapped into canonical CUHK content safe region",
+        "figure primary object expanded to projection-readable floor",
+        "quantitative-result plot receives dominant projection-scale figure region"
+      ],
+      "resolved_primary_object_geometry": {
+        "x": 0.1,
+        "y": 0.23,
+        "w": 0.84,
+        "h": 0.47
+      },
+      "resolved_supporting_object_geometry": {
+        "annotation": {
+          "x": 0.08,
+          "y": 0.735,
+          "w": 0.52,
+          "h": 0.055
+        },
+        "caption": {
+          "x": 0.64,
+          "y": 0.735,
+          "w": 0.3,
+          "h": 0.055
+        }
+      },
+      "visual_hierarchy_mapping": [
+        {
+          "rank": 1,
+          "role": "result title",
+          "reason": "states what is being compared"
+        },
+        {
+          "rank": 2,
+          "role": "model comparison plot",
+          "reason": "positions models by two metrics"
+        },
+        {
+          "rank": 3,
+          "role": "context bullets",
+          "reason": "keep task setup secondary"
+        }
+      ],
+      "alignment_mapping": [
+        {
+          "group_id": "model-comparison-plot",
+          "roles": [
+            "points",
+            "labels",
+            "legend",
+            "axes"
+          ],
+          "relationship": "labels and legend decode the dominant quantitative object"
+        }
+      ],
+      "reading_flow_mapping": "title-to-context-to-dominant-plot",
+      "annotation_legend_caption_panel_mapping": [
+        "legend and point labels stay attached to the plotted comparison"
+      ],
+      "content_capacity_check": {
+        "status": "SPLIT_REQUIRED",
+        "reason": "requested 4 panels exceeds selected layout capacity 1"
+      },
+      "job_specific_runtime_contract": {
+        "primitive": "csv_driven_tikz_result_figure",
+        "source_fields_consumed": [
+          "key_message",
+          "annotation",
+          "caption",
+          "scientific_objects"
+        ],
+        "same_case_roi_zoom": null
+      },
+      "text_region_packing": {
+        "emitted_text_region_count": 2,
+        "non_overlapping": true
+      },
+      "native_objects": [
+        {
+          "object_id": "brms_kidney_example_result_primary",
+          "role": "primary_scientific_object",
+          "native_type": "figure",
+          "bbox": {
+            "x": 0.1,
+            "y": 0.23,
+            "w": 0.84,
+            "h": 0.47
+          }
+        },
+        {
+          "object_id": "brms_kidney_example_result_annotation",
+          "role": "annotation",
+          "native_type": "text_callout",
+          "bbox": {
+            "x": 0.08,
+            "y": 0.735,
+            "w": 0.52,
+            "h": 0.055
+          }
+        },
+        {
+          "object_id": "brms_kidney_example_result_caption",
+          "role": "caption",
+          "native_type": "text_caption",
+          "bbox": {
+            "x": 0.64,
+            "y": 0.735,
+            "w": 0.3,
+            "h": 0.055
+          }
+        }
+      ],
+      "audience_safe_output_contract": {
+        "internal_ids_exposed": false,
+        "source_pixels_or_branding_reused": false,
+        "forbidden_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "implementation language",
+          "production regression",
+          "source bundle",
+          "provenance",
+          "review target",
+          "fixture",
+          "workflow"
+        ]
+      },
+      "resolved_layout_sha256": "056aaa89f25f84c543ae0122411ee8a80fa978fe46474ce993d60bb9601b3d9f"
+    },
+    {
+      "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
+      "task_key": "038_research_presentation_two_real_paper_holdouts",
+      "page_id": "brms_fitting_workflow",
+      "page_job": "EXPERIMENT_DESIGN",
+      "dominant_scientific_object": "paper_workflow_figure",
+      "executable_layout_family": "typed_experiment_design_hierarchy",
+      "selected_gold_id": "GSC-004",
+      "selected_reference_id": "RRL-019",
+      "recipe_sha256": "107360b1d609ee5d29e047a29c83456326491e8f963d099477c595b6ca1175ee",
+      "compatibility_trace": [
+        "page_function exact match",
+        "domain_family match",
+        "density match",
+        "scientific object overlap: experiment, method, research"
+      ],
+      "exact_cuhk_content_safe_region": {
+        "x": 0.06,
+        "y": 0.185,
+        "w": 0.88,
+        "h": 0.675
+      },
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "source_to_cuhk_transform": [
+        "source primary_bbox mapped into canonical CUHK content safe region",
+        "figure primary object expanded to projection-readable floor",
+        "experiment design uses full-width projection-scale scientific-factor diagram region"
+      ],
+      "resolved_primary_object_geometry": {
+        "x": 0.06,
+        "y": 0.205,
+        "w": 0.88,
+        "h": 0.595
+      },
+      "resolved_supporting_object_geometry": {
+        "annotation": {
+          "x": 0.06,
+          "y": 0.812,
+          "w": 0.88,
+          "h": 0.043
+        },
+        "caption": {
+          "x": 0.06,
+          "y": 0.812,
+          "w": 0.88,
+          "h": 0.043
+        }
+      },
+      "visual_hierarchy_mapping": [
+        {
+          "rank": 1,
+          "role": "introduction title",
+          "reason": "sets the application context"
+        },
+        {
+          "rank": 2,
+          "role": "application task map",
+          "reason": "links lesion examples to downstream tasks"
+        },
+        {
+          "rank": 3,
+          "role": "thumbnail examples",
+          "reason": "ground the task map in visual medical evidence"
+        }
+      ],
+      "alignment_mapping": [
+        {
+          "group_id": "task-map",
+          "roles": [
+            "lesion examples",
+            "task hubs",
+            "application connectors"
+          ],
+          "relationship": "examples and task labels are grouped as one application map"
+        }
+      ],
+      "reading_flow_mapping": "title-to-context-to-application-task-map",
+      "annotation_legend_caption_panel_mapping": [
+        "connectors encode scientific task relationships; thumbnails remain supporting evidence"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "job_specific_runtime_contract": {
+        "primitive": "typed_scientific_hierarchy_relation_map",
+        "source_fields_consumed": [
+          "key_message",
+          "annotation",
+          "caption",
+          "scientific_objects"
+        ],
+        "same_case_roi_zoom": null
+      },
+      "text_region_packing": {
+        "emitted_text_region_count": 2,
+        "non_overlapping": false
+      },
+      "native_objects": [
+        {
+          "object_id": "brms_fitting_workflow_primary",
+          "role": "primary_scientific_object",
+          "native_type": "figure",
+          "bbox": {
+            "x": 0.06,
+            "y": 0.205,
+            "w": 0.88,
+            "h": 0.595
+          }
+        },
+        {
+          "object_id": "brms_fitting_workflow_annotation",
+          "role": "annotation",
+          "native_type": "text_callout",
+          "bbox": {
+            "x": 0.06,
+            "y": 0.812,
+            "w": 0.88,
+            "h": 0.043
+          }
+        },
+        {
+          "object_id": "brms_fitting_workflow_caption",
+          "role": "caption",
+          "native_type": "text_caption",
+          "bbox": {
+            "x": 0.06,
+            "y": 0.812,
+            "w": 0.88,
+            "h": 0.043
+          }
+        }
+      ],
+      "audience_safe_output_contract": {
+        "internal_ids_exposed": false,
+        "source_pixels_or_branding_reused": false,
+        "forbidden_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "implementation language",
+          "production regression",
+          "source bundle",
+          "provenance",
+          "review target",
+          "fixture",
+          "workflow"
+        ]
+      },
+      "resolved_layout_sha256": "b4b0bb40783255b1d31cce32e9ccc2babc7482e8788daf0d515dc11f0ea8cbc5"
+    },
+    {
+      "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
+      "task_key": "038_research_presentation_two_real_paper_holdouts",
+      "page_id": "brms_capability_limits",
+      "page_job": "NEGATIVE_RESULT",
+      "dominant_scientific_object": "paper_capability_table",
+      "executable_layout_family": "accepted_stage3_foundation",
+      "selected_gold_id": "GSC-012",
+      "selected_reference_id": "RRL-011",
+      "recipe_sha256": "30fd927311f86370253a03c7fd6c5e1ecee9bcc3eeda9cf4a9a0410d3aa31dc0",
+      "compatibility_trace": [
+        "page_function exact match",
+        "domain_family match",
+        "panel_count near match",
+        "scientific object overlap: comparison, limitation, method, negative"
+      ],
+      "exact_cuhk_content_safe_region": {
+        "x": 0.06,
+        "y": 0.185,
+        "w": 0.88,
+        "h": 0.675
+      },
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "source_to_cuhk_transform": [
+        "source primary_bbox mapped into canonical CUHK content safe region",
+        "figure primary object expanded to projection-readable floor",
+        "negative-result evidence keeps a right diagnostic column without text overlap"
+      ],
+      "resolved_primary_object_geometry": {
+        "x": 0.06,
+        "y": 0.285,
+        "w": 0.66,
+        "h": 0.46
+      },
+      "resolved_supporting_object_geometry": {
+        "annotation": {
+          "x": 0.745,
+          "y": 0.3,
+          "w": 0.185,
+          "h": 0.195
+        },
+        "caption": {
+          "x": 0.745,
+          "y": 0.535,
+          "w": 0.185,
+          "h": 0.17
+        }
+      },
+      "visual_hierarchy_mapping": [
+        {
+          "rank": 1,
+          "role": "limitation title",
+          "reason": "states the failure mode"
+        },
+        {
+          "rank": 2,
+          "role": "side-by-side algorithm diagrams",
+          "reason": "comparison explains why one case fails"
+        },
+        {
+          "rank": 3,
+          "role": "red callouts",
+          "reason": "mark the specific violated assumptions"
+        }
+      ],
+      "alignment_mapping": [
+        {
+          "group_id": "failure-comparison",
+          "roles": [
+            "merge sort diagram",
+            "bubble sort diagram",
+            "red callouts"
+          ],
+          "relationship": "paired diagrams expose the contrast in assumptions"
+        }
+      ],
+      "reading_flow_mapping": "limitation-title-to-paired-diagrams-to-callouts",
+      "annotation_legend_caption_panel_mapping": [
+        "callouts attach to the diagram elements that cause the limitation"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "job_specific_runtime_contract": {
+        "primitive": "accepted_foundation",
+        "source_fields_consumed": [
+          "key_message",
+          "annotation",
+          "caption",
+          "scientific_objects"
+        ],
+        "same_case_roi_zoom": null
+      },
+      "text_region_packing": {
+        "emitted_text_region_count": 2,
+        "non_overlapping": true
+      },
+      "native_objects": [
+        {
+          "object_id": "brms_capability_limits_primary",
+          "role": "primary_scientific_object",
+          "native_type": "figure",
+          "bbox": {
+            "x": 0.06,
+            "y": 0.285,
+            "w": 0.66,
+            "h": 0.46
+          }
+        },
+        {
+          "object_id": "brms_capability_limits_annotation",
+          "role": "annotation",
+          "native_type": "text_callout",
+          "bbox": {
+            "x": 0.745,
+            "y": 0.3,
+            "w": 0.185,
+            "h": 0.195
+          }
+        },
+        {
+          "object_id": "brms_capability_limits_caption",
+          "role": "caption",
+          "native_type": "text_caption",
+          "bbox": {
+            "x": 0.745,
+            "y": 0.535,
+            "w": 0.185,
+            "h": 0.17
+          }
+        }
+      ],
+      "audience_safe_output_contract": {
+        "internal_ids_exposed": false,
+        "source_pixels_or_branding_reused": false,
+        "forbidden_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "implementation language",
+          "production regression",
+          "source bundle",
+          "provenance",
+          "review target",
+          "fixture",
+          "workflow"
+        ]
+      },
+      "resolved_layout_sha256": "73129486577156da98e47d01f5a4a6030dc4803cf5502810a2b517f30a6519f5"
+    },
+    {
+      "schema": "RESEARCH_CUHK_SCIENTIFIC_RESOLVED_LAYOUT_V1",
+      "task_key": "038_research_presentation_two_real_paper_holdouts",
+      "page_id": "brms_take_home",
+      "page_job": "NEXT_EXPERIMENT",
+      "dominant_scientific_object": "source_interpretation_reasoning",
+      "executable_layout_family": "evidence_to_decision_next_experiment",
+      "selected_gold_id": "GSC-018",
+      "selected_reference_id": "RRL-059",
+      "recipe_sha256": "04f9fc1f7e5183883eb9e35cdf3d8584439c9d8ecec1cc4cda409d8afaf017f6",
+      "compatibility_trace": [
+        "page_function exact match",
+        "domain_family match",
+        "density match",
+        "panel_count exact match",
+        "scientific object overlap: bayesian, discussion, experiment, next"
+      ],
+      "exact_cuhk_content_safe_region": {
+        "x": 0.06,
+        "y": 0.185,
+        "w": 0.88,
+        "h": 0.675
+      },
+      "source_recipe_fields_consumed": [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity"
+      ],
+      "source_to_cuhk_transform": [
+        "source primary_bbox mapped into canonical CUHK content safe region",
+        "next_experiment primary object expanded to projection-readable floor",
+        "next-experiment reasoning uses full-width projection-scale decision-and-comparator diagram region"
+      ],
+      "resolved_primary_object_geometry": {
+        "x": 0.06,
+        "y": 0.205,
+        "w": 0.88,
+        "h": 0.595
+      },
+      "resolved_supporting_object_geometry": {
+        "annotation": {
+          "x": 0.06,
+          "y": 0.812,
+          "w": 0.88,
+          "h": 0.043
+        },
+        "caption": {
+          "x": 0.06,
+          "y": 0.812,
+          "w": 0.88,
+          "h": 0.043
+        }
+      },
+      "visual_hierarchy_mapping": [
+        {
+          "rank": 1,
+          "role": "next-query strategy title",
+          "reason": "states the page function"
+        },
+        {
+          "rank": 2,
+          "role": "paired selection diagrams",
+          "reason": "visual objects show concrete next-query behavior"
+        },
+        {
+          "rank": 3,
+          "role": "strategy bullets",
+          "reason": "name the proposed selection mechanisms"
+        },
+        {
+          "rank": 4,
+          "role": "citations/captions",
+          "reason": "secondary provenance for the displayed mechanisms"
+        }
+      ],
+      "alignment_mapping": [
+        {
+          "group_id": "strategy-comparison-row",
+          "roles": [
+            "DPP point set",
+            "Independent point set",
+            "Mondrian partition"
+          ],
+          "relationship": "aligned row compares next-query proposal mechanisms"
+        },
+        {
+          "group_id": "bullet-to-object-bindings",
+          "roles": [
+            "diverse-set bullet",
+            "one-query-per-partition bullet",
+            "lower diagrams"
+          ],
+          "relationship": "text names selection rules and nearby diagrams instantiate them"
+        }
+      ],
+      "reading_flow_mapping": "title-to-two-strategy-bullets-to-paired-selection-diagrams",
+      "annotation_legend_caption_panel_mapping": [
+        "DPP and Independent labels sit directly below the paired point-cloud panels",
+        "Mondrian partition diagram and thumbnails occupy the same visual row as the paired comparison",
+        "citations remain secondary and do not replace the scientific object"
+      ],
+      "content_capacity_check": {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity"
+      },
+      "job_specific_runtime_contract": {
+        "primitive": "evidence_manipulation_comparator_decision_map",
+        "source_fields_consumed": [
+          "key_message",
+          "annotation",
+          "caption",
+          "scientific_objects"
+        ],
+        "same_case_roi_zoom": null
+      },
+      "text_region_packing": {
+        "emitted_text_region_count": 2,
+        "non_overlapping": false
+      },
+      "native_objects": [
+        {
+          "object_id": "brms_take_home_primary",
+          "role": "primary_scientific_object",
+          "native_type": "tikz_reasoning_diagram",
+          "bbox": {
+            "x": 0.06,
+            "y": 0.205,
+            "w": 0.88,
+            "h": 0.595
+          }
+        },
+        {
+          "object_id": "brms_take_home_annotation",
+          "role": "annotation",
+          "native_type": "text_callout",
+          "bbox": {
+            "x": 0.06,
+            "y": 0.812,
+            "w": 0.88,
+            "h": 0.043
+          }
+        },
+        {
+          "object_id": "brms_take_home_caption",
+          "role": "caption",
+          "native_type": "text_caption",
+          "bbox": {
+            "x": 0.06,
+            "y": 0.812,
+            "w": 0.88,
+            "h": 0.043
+          }
+        }
+      ],
+      "audience_safe_output_contract": {
+        "internal_ids_exposed": false,
+        "source_pixels_or_branding_reused": false,
+        "forbidden_terms": [
+          "RRL-",
+          "SRC-",
+          "GSC-",
+          "Reference retrieval",
+          "EVIDENCE_MANIFEST",
+          "Diagram contract",
+          "QA",
+          "repo path",
+          "run ID",
+          "implementation commit",
+          "implementation language",
+          "production regression",
+          "source bundle",
+          "provenance",
+          "review target",
+          "fixture",
+          "workflow"
+        ]
+      },
+      "resolved_layout_sha256": "3605a23711334a2435fce7b7322e24708e7f2cabb756cd46fe2ea2ccdb5b01ce"
+    }
+  ]
+}

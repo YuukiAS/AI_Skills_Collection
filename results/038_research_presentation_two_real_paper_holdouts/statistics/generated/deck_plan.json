@@ -1,0 +1,461 @@
+{
+  "schema_version": 1,
+  "metadata": {
+    "title": "brms Bayesian Multilevel Models Using Stan",
+    "audience": "doctoral research group",
+    "mode": "research-group-meeting",
+    "purpose": "group-meeting",
+    "duration_minutes": 20,
+    "language": "en",
+    "template": "exact-cuhk-beamer-source",
+    "output": "tex",
+    "editability": "source-editable",
+    "source_files": [
+      "results/038_research_presentation_two_real_paper_holdouts/statistics/source_bundle.json",
+      "results/038_research_presentation_two_real_paper_holdouts/statistics/source/source.md"
+    ],
+    "production_entry": "research-presentations one-call production"
+  },
+  "slides": [
+    {
+      "id": "s01",
+      "title": "brms exposes multilevel covariance as Stan-ready parameters",
+      "key_message": "The paper's central object is a multilevel formula interface whose group effects map to covariance parameters and LKJ correlation priors.",
+      "slide_purpose": "explain the model object",
+      "visual_intent": "native equation with adjacent source-grounded interpretation",
+      "source_anchors": [
+        "source.md:## Model Description",
+        "PDF page 4"
+      ],
+      "page_function": "STATISTICAL_MODEL",
+      "required_evidence": [
+        "BRMS-EV-MODEL"
+      ],
+      "source_evidence_ids": [
+        "BRMS-EV-MODEL"
+      ],
+      "scientific_objects": [
+        "group-level covariance matrix",
+        "standard-deviation vector",
+        "LKJ correlation prior",
+        "Kronecker covariance structure"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper model description, not new derivation",
+      "storyline": {
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "storyline_order": 1,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "the equation must be the dominant scientific object",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "V_k and Omega_k are visible",
+        "LKJ prior is explicit",
+        "annotation names brms and Stan"
+      ],
+      "content": []
+    },
+    {
+      "id": "s02",
+      "title": "The kidney example turns posterior draws into interpretable effects",
+      "key_message": "The worked example uses a censored recurrent-infection model and then inspects marginal effects for age, sex, disease, and their interaction.",
+      "slide_purpose": "show source result evidence",
+      "visual_intent": "paper marginal-effects figure with adjacent interpretation",
+      "source_anchors": [
+        "source.md:## Kidney Example",
+        "PDF page 14, Figure 3"
+      ],
+      "page_function": "REAL_DATA_APPLICATION",
+      "required_evidence": [
+        "BRMS-EV-KIDNEY"
+      ],
+      "source_evidence_ids": [
+        "BRMS-EV-KIDNEY"
+      ],
+      "scientific_objects": [
+        "censored time outcome",
+        "age effect",
+        "sex effect",
+        "disease effect",
+        "posterior uncertainty intervals"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper example; figure uncertainty bands are source-provided",
+      "storyline": {
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "storyline_order": 2,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "the source figure should dominate the page",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "marginal-effects figure is visible",
+        "kidney model is named",
+        "not replaced by Stage 4 calibration content"
+      ],
+      "content": []
+    },
+    {
+      "id": "s03",
+      "title": "The production path in the paper is formula to Stan to brmsfit",
+      "key_message": "brm collects formula, data, family, priors, and control arguments, generates Stan inputs, and returns a post-processed fitted object.",
+      "slide_purpose": "explain mechanism",
+      "visual_intent": "paper workflow figure with source-faithful annotation",
+      "source_anchors": [
+        "source.md:## Fitting Workflow",
+        "PDF page 6, Figure 1"
+      ],
+      "page_function": "EXPERIMENT_DESIGN",
+      "required_evidence": [
+        "BRMS-EV-WORKFLOW"
+      ],
+      "source_evidence_ids": [
+        "BRMS-EV-WORKFLOW"
+      ],
+      "scientific_objects": [
+        "brm",
+        "make_stancode",
+        "make_standata",
+        "rstan",
+        "Stan",
+        "brmsfit post-processing"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "paper figure, no inferred implementation branch",
+      "storyline": {
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "storyline_order": 3,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "the original workflow figure is more faithful than a generic recreated flow chart",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "figure labels are readable",
+        "Stan/rstan path is visible",
+        "no internal workflow language leaks"
+      ],
+      "content": []
+    },
+    {
+      "id": "s04",
+      "title": "The comparison table is broad, but not a blank check",
+      "key_message": "Table 1 records brms coverage across many model types while also marking explicit unsupported or limited capabilities.",
+      "slide_purpose": "state limits",
+      "visual_intent": "paper table crop with limit callout",
+      "source_anchors": [
+        "source.md:## Package Comparison",
+        "PDF page 20, Table 1"
+      ],
+      "page_function": "NEGATIVE_RESULT",
+      "required_evidence": [
+        "BRMS-EV-COMPARISON",
+        "BRMS-EV-PRIOR-LIMIT"
+      ],
+      "source_evidence_ids": [
+        "BRMS-EV-COMPARISON",
+        "BRMS-EV-PRIOR-LIMIT"
+      ],
+      "scientific_objects": [
+        "supported model type matrix",
+        "missing-value imputation limit",
+        "modularized interface limit",
+        "prior responsibility"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "2017 comparison table; current package capabilities may differ outside this paper",
+      "storyline": {
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "storyline_order": 4,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "table crop is the source object; callout distinguishes capability from limitation",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "table is readable enough to inspect",
+        "limitations are explicit",
+        "no unsupported current claims are added"
+      ],
+      "content": []
+    },
+    {
+      "id": "s05",
+      "title": "The paper's practical rule is interface first, diagnostics always",
+      "key_message": "brms lowers the cost of fitting Bayesian multilevel models, but the paper still requires prior checking, convergence diagnostics, and model comparison.",
+      "slide_purpose": "synthesize interpretation",
+      "visual_intent": "evidence-to-decision reasoning diagram",
+      "source_anchors": [
+        "source.md:## Limitations and Interpretation",
+        "PDF pages 9, 15, 28"
+      ],
+      "page_function": "NEXT_EXPERIMENT",
+      "required_evidence": [
+        "BRMS-EV-TAKEAWAY",
+        "BRMS-EV-PRIOR-LIMIT"
+      ],
+      "source_evidence_ids": [
+        "BRMS-EV-TAKEAWAY",
+        "BRMS-EV-PRIOR-LIMIT"
+      ],
+      "scientific_objects": [
+        "formula interface",
+        "Stan/HMC fit",
+        "prior judgement",
+        "WAIC/LOO comparison"
+      ],
+      "evidence_status": "available",
+      "uncertainty_status": "take-home interpretation from article conclusion",
+      "storyline": {
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "storyline_order": 5,
+        "workstream_order": 1,
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ]
+      },
+      "layout_rationale": "reasoning diagram connects source capabilities to modelling responsibilities",
+      "allowed_fallback": "missing evidence, next experiment, speaker notes, backup, or deletion",
+      "forbidden_fallback": "rounded-card dashboard, giant empty table, decorative icon, or generic arrows",
+      "qa_criteria": [
+        "take-home is source specific",
+        "Bayesian workflow responsibilities remain visible",
+        "no program closure claim"
+      ],
+      "content": []
+    }
+  ],
+  "research_state": {
+    "previous_question": "Can the production route make a real statistics-methodology paper talk from an unseen paper bundle?",
+    "prior_belief": "Stage 4 passed on engineering evidence, but real paper generalization is unproven.",
+    "new_evidence": "The source bundle is built from the 28-page JSS brms paper, with model equations, fitting workflow, kidney example figures, comparison tables, and stated limitations.",
+    "evidence_quality": "Public JSS article under CC BY; source PDF and committed figure/table crops are hashed.",
+    "belief_update": "The deck should be judged as a brms paper talk, not a synthetic calibration update.",
+    "successes": "The paper provides native multilevel notation, Stan/HMC workflow, worked examples, posterior visualizations, package comparison tables, and explicit limitations.",
+    "failures": "Default priors and syntactically valid Stan prior strings still require analyst judgement; missing-value imputation and modularized interfaces are not supported in the comparison table.",
+    "largest_uncertainty": "Whether existing generic production layouts can make this real methods paper readable without tuning.",
+    "frozen_items": "Use only the frozen source bundle and normal exact-CUHK production entrypoint.",
+    "stop_items": "Do not modify production code, selector, layouts, gold, or generated TeX after inspecting output.",
+    "next_discriminating_experiment": "Submit final rendered pages and contact sheet to task-local visual review.",
+    "decision_needed": "Reviewer and Planner decide whether this one-shot deck reaches mature paper-talk quality."
+  },
+  "evidence_board": {
+    "available_figures": [],
+    "medical_images": [],
+    "qualitative_examples": [],
+    "quantitative_plots": [
+      {
+        "id": "BRMS-EV-KIDNEY",
+        "board": "quantitative_plots",
+        "type": "png",
+        "source_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_figure3_kidney_marginal_effects.png",
+        "source_anchor": "PDF page 14, Figure 3",
+        "supports": "Kidney example marginal effects show age, sex, disease, and age-by-sex population-level predictors.",
+        "consumed_as": "paper result figure image",
+        "status": "available"
+      },
+      {
+        "id": "BRMS-EV-COMPARISON",
+        "board": "quantitative_plots",
+        "type": "png",
+        "source_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_table1_package_capabilities.png",
+        "source_anchor": "PDF page 20, Table 1",
+        "supports": "The package comparison table records broad brms model support and remaining feature limits.",
+        "consumed_as": "paper table image",
+        "status": "available"
+      }
+    ],
+    "model_diagrams": [
+      {
+        "id": "BRMS-EV-WORKFLOW",
+        "board": "model_diagrams",
+        "type": "png",
+        "source_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_figure1_fitting_workflow.png",
+        "source_anchor": "PDF page 6, Figure 1",
+        "supports": "brm transforms user model information into Stan code/data, then post-processes fitted results in brms.",
+        "consumed_as": "paper figure image",
+        "status": "available"
+      }
+    ],
+    "equations": [
+      {
+        "id": "BRMS-EV-MODEL",
+        "board": "equations",
+        "type": "source_markdown",
+        "source_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/source/source.md",
+        "source_anchor": "## Model Description",
+        "supports": "brms parameterizes group-level covariance through standard deviations and an LKJ correlation prior.",
+        "consumed_as": "native LaTeX multilevel model equation",
+        "status": "available"
+      }
+    ],
+    "experiment_logs": [
+      {
+        "id": "BRMS-EV-TAKEAWAY",
+        "board": "experiment_logs",
+        "type": "source_markdown",
+        "source_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/source/source.md",
+        "source_anchor": "## Limitations and Interpretation",
+        "supports": "The conclusion positions brms as a flexible Stan-backed interface while preserving Bayesian workflow responsibilities.",
+        "consumed_as": "take-home reasoning diagram",
+        "status": "available"
+      }
+    ],
+    "failed_experiments": [
+      {
+        "id": "BRMS-EV-PRIOR-LIMIT",
+        "board": "failed_experiments",
+        "type": "source_markdown",
+        "source_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/source/source.md",
+        "source_anchor": "## Prior Specification",
+        "supports": "brms can pass priors to Stan, but meaningful prior choice remains analyst responsibility.",
+        "consumed_as": "limitation and interpretation note",
+        "status": "available"
+      }
+    ],
+    "literature_figures_to_redraw": [],
+    "missing_evidence": []
+  },
+  "storyline": {
+    "schema": "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1",
+    "source_derivation": "workstream assignment uses explicit page-job/source workstream metadata when present, otherwise evidence-board fallback; titles, page numbers, domain token profiles, and gold IDs are not classification keys",
+    "cross_workstream_relation_policy": "do not infer causal bridges between distinct workstreams without explicit source support",
+    "workstreams": [
+      {
+        "workstream_id": "brms_paper",
+        "label": "brms paper",
+        "scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "first_source_order": 1,
+        "page_jobs": [
+          "brms_model_object",
+          "brms_fitting_workflow",
+          "brms_kidney_example_result",
+          "brms_capability_limits",
+          "brms_take_home"
+        ],
+        "workstream_order": 1,
+        "source_supported_cross_workstream_relation_to_previous": null,
+        "transition_label": "brms paper"
+      }
+    ],
+    "page_assignments": [
+      {
+        "page_id": "brms_model_object",
+        "page_job": "STATISTICAL_MODEL",
+        "original_order": 1,
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          10,
+          1
+        ],
+        "storyline_order": 1,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "brms_kidney_example_result",
+        "page_job": "REAL_DATA_APPLICATION",
+        "original_order": 3,
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          20,
+          3
+        ],
+        "storyline_order": 2,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "brms_fitting_workflow",
+        "page_job": "EXPERIMENT_DESIGN",
+        "original_order": 2,
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          30,
+          2
+        ],
+        "storyline_order": 3,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "brms_capability_limits",
+        "page_job": "NEGATIVE_RESULT",
+        "original_order": 4,
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          40,
+          4
+        ],
+        "storyline_order": 4,
+        "workstream_order": 1
+      },
+      {
+        "page_id": "brms_take_home",
+        "page_job": "NEXT_EXPERIMENT",
+        "original_order": 5,
+        "workstream_id": "brms_paper",
+        "workstream_label": "brms paper",
+        "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+        "assignment_basis": [
+          "explicit source workstream metadata"
+        ],
+        "intra_workstream_sort_key": [
+          50,
+          5
+        ],
+        "storyline_order": 5,
+        "workstream_order": 1
+      }
+    ],
+    "storyline_order": [
+      "STATISTICAL_MODEL",
+      "REAL_DATA_APPLICATION",
+      "EXPERIMENT_DESIGN",
+      "NEGATIVE_RESULT",
+      "NEXT_EXPERIMENT"
+    ]
+  }
+}

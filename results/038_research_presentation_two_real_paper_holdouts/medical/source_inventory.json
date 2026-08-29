@@ -1,0 +1,75 @@
+{
+  "schema": "RESEARCH_PRESENTATION_STAGE5_SOURCE_INVENTORY_V1",
+  "task_key": "038_research_presentation_two_real_paper_holdouts",
+  "deck": "medical",
+  "paper": {
+    "title": "Segment anything in medical images",
+    "doi": "10.1038/s41467-024-44824-z",
+    "published_source": "https://www.nature.com/articles/s41467-024-44824-z",
+    "license": "Creative Commons Attribution 4.0 International",
+    "pdf_sha256": "78925a99aaf7f17d728bc1e4e4c262fc234d33f4319d258d9f6b2080b42ded2b",
+    "pdf_pages": 9,
+    "supplementary_information_sha256": "b66b5d825586d4cb5fc6e92635656422733b82b64d7b1dcd3587a20c4090f1c3",
+    "source_data_xlsx_sha256": "93f5e882d37e110bb747209bf18d24bae1874ff45dc5461a25c93820a40885a9"
+  },
+  "section_inventory": [
+    "Abstract",
+    "Introduction",
+    "Results",
+    "MedSAM: a foundation model for promptable medical image segmentation",
+    "Quantitative and qualitative analysis",
+    "The effect of training dataset size",
+    "MedSAM can improve the annotation efficiency",
+    "Discussion",
+    "Methods",
+    "Data availability",
+    "Code availability"
+  ],
+  "figure_table_inventory": [
+    "Figure 1: modality and segmentation-task coverage",
+    "Figure 2: modality distribution and promptable architecture",
+    "Figure 3: internal validation quantitative and qualitative results",
+    "Figure 4: external validation quantitative and qualitative results",
+    "Figure 5: training dataset size and tumor annotation efficiency",
+    "Supplementary Tables 1-17",
+    "Source data XLSX"
+  ],
+  "committed_assets": [
+    {
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/assets/medsam_figure2_architecture.png",
+      "sha256": "ea8e9d6a7f51f7314a1823f3ebb418b8bfe3f0cd76b979d42b44eb0b5831f256",
+      "source_anchor": "Nature Communications article Figure 2",
+      "attribution": "Ma et al. 2024, Nature Communications, CC BY 4.0"
+    },
+    {
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/assets/medsam_figure3_internal_validation.png",
+      "sha256": "a69475311e0fcde20ba50bbc9723c4b050b0a75b515172f31fa2830dd966315f",
+      "source_anchor": "Nature Communications article Figure 3",
+      "attribution": "Ma et al. 2024, Nature Communications, CC BY 4.0"
+    },
+    {
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/assets/medsam_fig4_external_ct_sam.png",
+      "sha256": "1928738cc05521be46face04fe9f081d123bac7e7e6fb7d94c96003b94f85a2e",
+      "source_anchor": "Nature Communications article Figure 4c, external validation CT lymph node example, SAM panel",
+      "attribution": "Ma et al. 2024, Nature Communications, CC BY 4.0"
+    },
+    {
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/assets/medsam_fig4_external_ct_unet.png",
+      "sha256": "ef7bc426367cd0536ad658d0daa8262734ec7ee80456f85c444d42f3e75904e3",
+      "source_anchor": "Nature Communications article Figure 4c, external validation CT lymph node example, U-Net panel",
+      "attribution": "Ma et al. 2024, Nature Communications, CC BY 4.0"
+    },
+    {
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/assets/medsam_fig4_external_ct_deeplabv3p.png",
+      "sha256": "1a616877d1bddba63df127d6eb4798780c773d94c8d65f1e87d988758a80f398",
+      "source_anchor": "Nature Communications article Figure 4c, external validation CT lymph node example, DeepLabV3+ panel",
+      "attribution": "Ma et al. 2024, Nature Communications, CC BY 4.0"
+    },
+    {
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/assets/medsam_fig4_external_ct_medsam.png",
+      "sha256": "0eb660b8809ad05c1f777051176a208538352cdd97eb31e17d5434bdb7903ce7",
+      "source_anchor": "Nature Communications article Figure 4c, external validation CT lymph node example, MedSAM panel",
+      "attribution": "Ma et al. 2024, Nature Communications, CC BY 4.0"
+    }
+  ]
+}

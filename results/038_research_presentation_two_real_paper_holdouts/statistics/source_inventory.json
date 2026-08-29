@@ -1,0 +1,54 @@
+{
+  "schema": "RESEARCH_PRESENTATION_STAGE5_SOURCE_INVENTORY_V1",
+  "task_key": "038_research_presentation_two_real_paper_holdouts",
+  "deck": "statistics",
+  "paper": {
+    "title": "brms: An R Package for Bayesian Multilevel Models Using Stan",
+    "doi": "10.18637/jss.v080.i01",
+    "published_source": "https://www.jstatsoft.org/article/view/v080i01",
+    "license": "CC BY 3.0 under Journal of Statistical Software open-access policy",
+    "pdf_sha256": "35757e85ffb002fcb6c5dc34fec0daa6a84302d552e7555f2551838c4599fffb",
+    "pdf_pages": 28
+  },
+  "section_inventory": [
+    "Abstract",
+    "1. Introduction",
+    "2. Model description",
+    "2.1. Prior distributions",
+    "3. Parameter estimation",
+    "4. Software",
+    "4.1. A worked example",
+    "4.8. Modeling ordinal data",
+    "5. Comparison between packages",
+    "6. Conclusion"
+  ],
+  "figure_table_inventory": [
+    "Figure 1: model fitting procedure used in brms",
+    "Figure 2: trace and density plots for the kidney model",
+    "Figure 3: marginal effects plots for the kidney model",
+    "Figure 4: trace and density plots for the inhaler ordinal model",
+    "Table 1: brms, lme4, and MCMCglmm capability comparison",
+    "Table 2: brms, rstanarm, and rethinking capability comparison",
+    "Table 3: lme4/brms model syntax comparison"
+  ],
+  "committed_assets": [
+    {
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_figure1_fitting_workflow.png",
+      "sha256": "59eb79ee8d6e31489e2d45802e165b3b218904a8e268ff8c54ffc2eaa24e9f93",
+      "source_anchor": "PDF page 6, Figure 1",
+      "attribution": "Buerkner 2017, Journal of Statistical Software, CC BY"
+    },
+    {
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_figure3_kidney_marginal_effects.png",
+      "sha256": "28bd96c3f06b2903ba0f04d35cd6637e763194ab0455cd148c28ecf0b03ef005",
+      "source_anchor": "PDF page 14, Figure 3",
+      "attribution": "Buerkner 2017, Journal of Statistical Software, CC BY"
+    },
+    {
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_table1_package_capabilities.png",
+      "sha256": "b41eb0155e108e9bf5b75e382b79006c8aa2f024ccf0060048e64ab40107b62f",
+      "source_anchor": "PDF page 20, Table 1",
+      "attribution": "Buerkner 2017, Journal of Statistical Software, CC BY"
+    }
+  ]
+}

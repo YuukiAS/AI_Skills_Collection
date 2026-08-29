@@ -1,0 +1,45 @@
+{
+  "schema": "RESEARCH_PRESENTATION_STAGE5_PRODUCTION_INVOCATIONS_V1",
+  "task_key": "038_research_presentation_two_real_paper_holdouts",
+  "source_bundle_freeze": {
+    "statistics_source_bundle_sha256": "32d1a9d1241ff8b4c77b6a98fe5b20b5b88ed04f3d60b0b10f9897304f15421b",
+    "medical_source_bundle_sha256": "fef82966184d4db938d4bfdd12101d289ebdca80bf246a3ed7c9fb72f42fa33b",
+    "freeze_before_successful_render": true
+  },
+  "attempts": [
+    {
+      "deck": "statistics",
+      "attempt": "initial",
+      "command": "python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/038_research_presentation_two_real_paper_holdouts/statistics/source_bundle.json --out-dir results/038_research_presentation_two_real_paper_holdouts/statistics/generated --task-key 038_research_presentation_two_real_paper_holdouts",
+      "exit_code": 1,
+      "status": "FAILED_PRE_RENDER_SELECTOR_COMPATIBILITY",
+      "evidence_path": "results/038_research_presentation_two_real_paper_holdouts/statistics/production_attempt_initial_failure.log",
+      "slide_or_render_inspected_before_correction": false
+    },
+    {
+      "deck": "statistics",
+      "attempt": "final_frozen_bundle",
+      "command": "python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/038_research_presentation_two_real_paper_holdouts/statistics/source_bundle.json --out-dir results/038_research_presentation_two_real_paper_holdouts/statistics/generated --task-key 038_research_presentation_two_real_paper_holdouts",
+      "exit_code": 0,
+      "status": "MECHANICAL_PASS",
+      "render_status": "ok",
+      "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/BUILD_MANIFEST.json"
+    },
+    {
+      "deck": "medical",
+      "attempt": "final_frozen_bundle",
+      "command": "python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/038_research_presentation_two_real_paper_holdouts/medical/source_bundle.json --out-dir results/038_research_presentation_two_real_paper_holdouts/medical/generated --task-key 038_research_presentation_two_real_paper_holdouts",
+      "exit_code": 0,
+      "status": "MECHANICAL_PASS",
+      "render_status": "ok",
+      "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/BUILD_MANIFEST.json"
+    }
+  ],
+  "quality_loop_behavior": {
+    "review_evidence_consumed": false,
+    "repair_cycle_count_statistics": 0,
+    "repair_cycle_count_medical": 0,
+    "manual_tex_patch": false,
+    "post_render_source_bundle_rewrite": false
+  }
+}

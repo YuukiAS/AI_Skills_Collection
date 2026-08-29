@@ -1,0 +1,117 @@
+{
+  "schema": "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1",
+  "source_derivation": "workstream assignment uses explicit page-job/source workstream metadata when present, otherwise evidence-board fallback; titles, page numbers, domain token profiles, and gold IDs are not classification keys",
+  "cross_workstream_relation_policy": "do not infer causal bridges between distinct workstreams without explicit source support",
+  "workstreams": [
+    {
+      "workstream_id": "brms_paper",
+      "label": "brms paper",
+      "scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+      "first_source_order": 1,
+      "page_jobs": [
+        "brms_model_object",
+        "brms_fitting_workflow",
+        "brms_kidney_example_result",
+        "brms_capability_limits",
+        "brms_take_home"
+      ],
+      "workstream_order": 1,
+      "source_supported_cross_workstream_relation_to_previous": null,
+      "transition_label": "brms paper"
+    }
+  ],
+  "page_assignments": [
+    {
+      "page_id": "brms_model_object",
+      "page_job": "STATISTICAL_MODEL",
+      "original_order": 1,
+      "workstream_id": "brms_paper",
+      "workstream_label": "brms paper",
+      "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+      "assignment_basis": [
+        "explicit source workstream metadata"
+      ],
+      "intra_workstream_sort_key": [
+        10,
+        1
+      ],
+      "storyline_order": 1,
+      "workstream_order": 1
+    },
+    {
+      "page_id": "brms_kidney_example_result",
+      "page_job": "REAL_DATA_APPLICATION",
+      "original_order": 3,
+      "workstream_id": "brms_paper",
+      "workstream_label": "brms paper",
+      "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+      "assignment_basis": [
+        "explicit source workstream metadata"
+      ],
+      "intra_workstream_sort_key": [
+        20,
+        3
+      ],
+      "storyline_order": 2,
+      "workstream_order": 1
+    },
+    {
+      "page_id": "brms_fitting_workflow",
+      "page_job": "EXPERIMENT_DESIGN",
+      "original_order": 2,
+      "workstream_id": "brms_paper",
+      "workstream_label": "brms paper",
+      "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+      "assignment_basis": [
+        "explicit source workstream metadata"
+      ],
+      "intra_workstream_sort_key": [
+        30,
+        2
+      ],
+      "storyline_order": 3,
+      "workstream_order": 1
+    },
+    {
+      "page_id": "brms_capability_limits",
+      "page_job": "NEGATIVE_RESULT",
+      "original_order": 4,
+      "workstream_id": "brms_paper",
+      "workstream_label": "brms paper",
+      "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+      "assignment_basis": [
+        "explicit source workstream metadata"
+      ],
+      "intra_workstream_sort_key": [
+        40,
+        4
+      ],
+      "storyline_order": 4,
+      "workstream_order": 1
+    },
+    {
+      "page_id": "brms_take_home",
+      "page_job": "NEXT_EXPERIMENT",
+      "original_order": 5,
+      "workstream_id": "brms_paper",
+      "workstream_label": "brms paper",
+      "workstream_scope": "model notation, Stan workflow, examples, package limits, and interpretation",
+      "assignment_basis": [
+        "explicit source workstream metadata"
+      ],
+      "intra_workstream_sort_key": [
+        50,
+        5
+      ],
+      "storyline_order": 5,
+      "workstream_order": 1
+    }
+  ],
+  "storyline_order": [
+    "STATISTICAL_MODEL",
+    "REAL_DATA_APPLICATION",
+    "EXPERIMENT_DESIGN",
+    "NEGATIVE_RESULT",
+    "NEXT_EXPERIMENT"
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+  "task_key": "038_research_presentation_two_real_paper_holdouts",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "038_research_presentation_two_real_paper_holdouts-one-call-production-research-deck-review",
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "external_upload_authorization": "",
+  "rubric": {
+    "instructions": "Review the rendered pixels from one normal research-presentations production invocation. Check that each page contains source-specific content from the supplied engineering bundle rather than placeholders; exact CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math, native plots, and medical images are semantically correct where present; no internal RRL/GSC/SRC, QA, provenance, workflow, repo path, run ID, or implementation language leaks into audience-facing slides; repeated generic cards or one-template pages are rejected; and the deck reads as one coherent research update rather than disconnected benchmark pages. For multi-workstream bundles, confirm that each workstream stays internally continuous and that any independent workstream transition is visible without inventing a causal relation. Separately review the deck_contact_sheet item as a deck-level rhythm object: adjacent-page density jumps, repeated composition face, overfull or empty pages, redundant summary filler, result -> failure -> next-experiment rhythm, workstream transition balance, and title/object/formula/image alternation must meet a mature doctoral group-meeting or strong conference-talk bar. The top-level package PASS is not enough; provide item-level judgement and observations for deck_contact_sheet. Do not infer visual quality from filenames or hashes.",
+    "source_contracts": [
+      "The engineering regression bundle is public-safe and explicitly excluded from Stage 5 holdouts.",
+      "Stage 2 gold/reference pixels are used only for compatible composition selection.",
+      "The deck-quality loop may repair at most once and must fail closed/no-winner for unsafe findings or unresolved blockers."
+    ]
+  },
+  "identity_bindings": {
+    "task_key": "038_research_presentation_two_real_paper_holdouts",
+    "implementation_commit": null,
+    "input_title": "MedSAM Segment Anything in Medical Images",
+    "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/BUILD_MANIFEST.json",
+    "build_manifest_sha256": "95be821fa840e3afcc151cc0b3c3cde1e748bd1088e7fa1c75ba4a91b8ffdf77",
+    "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/source_fidelity_map.json",
+    "source_fidelity_map_sha256": "c780b0197246119320bdc3b9a862aed18633aad592cd2080d30ddb9646c29755",
+    "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_sequence_summary.json",
+    "deck_sequence_summary_sha256": "bc0ddb68ee1c3dc95dfa1fffca940488fd29bae9eafb18738c5053d2e14816ae",
+    "quality_loop_state": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/quality_loop_state.json",
+    "quality_loop_state_sha256": "2e9dbd79174a8420e036080aaa646a15605a958a8add7053fd1c84b26d8166b1",
+    "deck_contact_sheet": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_contact_sheet.png",
+    "deck_contact_sheet_sha256": "5332d9f81e87882dc2df810e6eb5319049dc85631e8a1cfc0ef00ce451408ac4",
+    "deck_identity_sha256": "91ca3a5a2d224ee97f202b7aada32a6f53c79a6337c53fccd88f388f94acc9f5",
+    "render_input_identity_sha256": "dafce2787c90bb12f542b3124c1556bdbf5bfe959fb1506bab47e2da4a3f9116",
+    "render_input_identity": {
+      "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+      "build_workspace": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build",
+      "files": [
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/assets/background.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/assets/background_negative.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/assets/logo_RGB.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/bibliography.bib",
+          "role": "canonical_cuhk_support",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/main.tex",
+          "role": "main_tex",
+          "sha256": "c481f771c29123304d703cdb6a4c21b572a923c153848fa91b45d6c1d3f9010d"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/scientific_layouts.tex",
+          "role": "scientific_layout_include",
+          "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_deeplabv3p.png",
+          "role": "copied_scientific_asset",
+          "sha256": "1a616877d1bddba63df127d6eb4798780c773d94c8d65f1e87d988758a80f398"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_deeplabv3p_roi_zoom.png",
+          "role": "copied_scientific_asset",
+          "sha256": "36b3e32a149998a8d3e2ed7bf75ed7b3d6e11bbb036e68af68c185d7fb0650b9"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_medsam.png",
+          "role": "copied_scientific_asset",
+          "sha256": "0eb660b8809ad05c1f777051176a208538352cdd97eb31e17d5434bdb7903ce7"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_medsam_roi_zoom.png",
+          "role": "copied_scientific_asset",
+          "sha256": "7e2a88ee966d5a26dc189913b15ff64c4d8e4fccbf05037842d4622f8e4ed85a"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_sam.png",
+          "role": "copied_scientific_asset",
+          "sha256": "1928738cc05521be46face04fe9f081d123bac7e7e6fb7d94c96003b94f85a2e"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_sam_roi_zoom.png",
+          "role": "copied_scientific_asset",
+          "sha256": "06aa377abcd9a19e3d52bf8b39787a951c57fd60473201bf5c3bec68d13a6f73"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_unet.png",
+          "role": "copied_scientific_asset",
+          "sha256": "ef7bc426367cd0536ad658d0daa8262734ec7ee80456f85c444d42f3e75904e3"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_unet_roi_zoom.png",
+          "role": "copied_scientific_asset",
+          "sha256": "673e96ee179de9d66cdb6ea6f948ac109748e2bdaedbd044f6c9b39e1fc844e1"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_figure2_architecture.png",
+          "role": "copied_scientific_asset",
+          "sha256": "ea8e9d6a7f51f7314a1823f3ebb418b8bfe3f0cd76b979d42b44eb0b5831f256"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_figure3_internal_validation.png",
+          "role": "copied_scientific_asset",
+          "sha256": "a69475311e0fcde20ba50bbc9723c4b050b0a75b515172f31fa2830dd966315f"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+          "role": "canonical_cuhk_style",
+          "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/styles/sintefcolor.sty",
+          "role": "canonical_cuhk_style",
+          "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+        }
+      ],
+      "sha256": "dafce2787c90bb12f542b3124c1556bdbf5bfe959fb1506bab47e2da4a3f9116"
+    },
+    "rendered_pixel_identity_sha256": "21e4c10f254650e5bbc83b79295d0d219da82a03b7bef6d31637c307dd2e72bf",
+    "pdf_sha256": "45d854a8e1d870902c7ea93ca2cb4031a9fc5625f8d527dd21064be2d13fa36f",
+    "page_job_by_logical_id": {
+      "slide_2_statistical_model": "STATISTICAL_MODEL",
+      "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+      "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+      "slide_5_next_experiment": "NEXT_EXPERIMENT",
+      "slide_6_medical_image_comparison": "MEDICAL_IMAGE_COMPARISON"
+    },
+    "source_evidence_ids_by_logical_id": {
+      "slide_2_statistical_model": [
+        "MEDSAM-EV-METRIC"
+      ],
+      "slide_3_real_data_application": [
+        "MEDSAM-EV-INTERNAL"
+      ],
+      "slide_4_experiment_design": [
+        "MEDSAM-EV-ARCH"
+      ],
+      "slide_5_next_experiment": [
+        "MEDSAM-EV-LIMITS"
+      ],
+      "slide_6_medical_image_comparison": [
+        "MEDSAM-EV-EXTERNAL-CT"
+      ]
+    },
+    "selected_gold_by_page_id": {
+      "medsam_metric_object": "GSC-016",
+      "medsam_internal_validation": "GSC-015",
+      "medsam_architecture_prompt": "GSC-004",
+      "medsam_limits_take_home": "GSC-018",
+      "medsam_external_ct_case": "GSC-008"
+    }
+  },
+  "inputs": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/rendered/slide-2.png",
+      "mime_type": "image/png",
+      "sha256": "d62568ef37c927137e8cfe460c36db867c04abeb37df939c8f409e95067152ae",
+      "description": "Rendered exact-CUHK production page for STATISTICAL_MODEL using source evidence MEDSAM-EV-METRIC."
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/rendered/slide-3.png",
+      "mime_type": "image/png",
+      "sha256": "bd307866b966ec0af8e657018b4e5900ac7166ec0b142c142fe47f5c16cc00a3",
+      "description": "Rendered exact-CUHK production page for REAL_DATA_APPLICATION using source evidence MEDSAM-EV-INTERNAL."
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/rendered/slide-4.png",
+      "mime_type": "image/png",
+      "sha256": "dbab517b63b5a4ebfbcf1241cae752ef89644e2c4a27bf82735936008218891d",
+      "description": "Rendered exact-CUHK production page for EXPERIMENT_DESIGN using source evidence MEDSAM-EV-ARCH."
+    },
+    {
+      "logical_id": "slide_5_next_experiment",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/rendered/slide-5.png",
+      "mime_type": "image/png",
+      "sha256": "f8044af91d474050eb5375cdd322239f24f22642000e18fa34aaef8df6d3bab8",
+      "description": "Rendered exact-CUHK production page for NEXT_EXPERIMENT using source evidence MEDSAM-EV-LIMITS."
+    },
+    {
+      "logical_id": "slide_6_medical_image_comparison",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/rendered/slide-6.png",
+      "mime_type": "image/png",
+      "sha256": "de6331f09b558c9c74025bddc9c4a0cf77de48616759ab2fafdcb4850a5a3349",
+      "description": "Rendered exact-CUHK production page for MEDICAL_IMAGE_COMPARISON using source evidence MEDSAM-EV-EXTERNAL-CT."
+    },
+    {
+      "logical_id": "deck_contact_sheet",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/deck_contact_sheet.png",
+      "mime_type": "image/png",
+      "sha256": "5332d9f81e87882dc2df810e6eb5319049dc85631e8a1cfc0ef00ce451408ac4",
+      "description": "Deck-level contact sheet preserving the rendered slide sequence for rhythm, density, transition, and template-repeat review.",
+      "review_role": "deck_sequence_context"
+    }
+  ]
+}

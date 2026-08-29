@@ -1,0 +1,6 @@
+command: python skills/tools/documents-media/presentations/shared/scripts/generate_research_presentation_production_entry.py --input-bundle results/038_research_presentation_two_real_paper_holdouts/statistics/source_bundle.json --out-dir results/038_research_presentation_two_real_paper_holdouts/statistics/generated --task-key 038_research_presentation_two_real_paper_holdouts
+exit_code: 1
+stage: pre-render layout selection
+stderr_excerpt:
+ValueError: no compatible gold composition record
+note: No slide, TeX, PDF, rendered PNG, contact sheet, or Terra output was generated or inspected before the query compatibility correction. Source claims, assets, and source anchors were not changed.

@@ -1,0 +1,122 @@
+{
+  "schema": "RESEARCH_PRESENTATION_DECK_QUALITY_LOOP_STATE_V1",
+  "max_repair_cycles": 1,
+  "repair_cycle_count": 0,
+  "render_identity_kind": "render_input_identity_sha256",
+  "initial_render_identity": "dafce2787c90bb12f542b3124c1556bdbf5bfe959fb1506bab47e2da4a3f9116",
+  "initial_render_input_identity": "dafce2787c90bb12f542b3124c1556bdbf5bfe959fb1506bab47e2da4a3f9116",
+  "initial_rendered_pixel_identity": "21e4c10f254650e5bbc83b79295d0d219da82a03b7bef6d31637c307dd2e72bf",
+  "initial_render_input_manifest": {
+    "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+    "build_workspace": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build",
+    "files": [
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/assets/background.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/assets/background_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/assets/logo_RGB.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+        "role": "canonical_cuhk_asset",
+        "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/bibliography.bib",
+        "role": "canonical_cuhk_support",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/main.tex",
+        "role": "main_tex",
+        "sha256": "c481f771c29123304d703cdb6a4c21b572a923c153848fa91b45d6c1d3f9010d"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/scientific_layouts.tex",
+        "role": "scientific_layout_include",
+        "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_deeplabv3p.png",
+        "role": "copied_scientific_asset",
+        "sha256": "1a616877d1bddba63df127d6eb4798780c773d94c8d65f1e87d988758a80f398"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_deeplabv3p_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "36b3e32a149998a8d3e2ed7bf75ed7b3d6e11bbb036e68af68c185d7fb0650b9"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_medsam.png",
+        "role": "copied_scientific_asset",
+        "sha256": "0eb660b8809ad05c1f777051176a208538352cdd97eb31e17d5434bdb7903ce7"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_medsam_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "7e2a88ee966d5a26dc189913b15ff64c4d8e4fccbf05037842d4622f8e4ed85a"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_sam.png",
+        "role": "copied_scientific_asset",
+        "sha256": "1928738cc05521be46face04fe9f081d123bac7e7e6fb7d94c96003b94f85a2e"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_sam_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "06aa377abcd9a19e3d52bf8b39787a951c57fd60473201bf5c3bec68d13a6f73"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_unet.png",
+        "role": "copied_scientific_asset",
+        "sha256": "ef7bc426367cd0536ad658d0daa8262734ec7ee80456f85c444d42f3e75904e3"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_fig4_external_ct_unet_roi_zoom.png",
+        "role": "copied_scientific_asset",
+        "sha256": "673e96ee179de9d66cdb6ea6f948ac109748e2bdaedbd044f6c9b39e1fc844e1"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_figure2_architecture.png",
+        "role": "copied_scientific_asset",
+        "sha256": "ea8e9d6a7f51f7314a1823f3ebb418b8bfe3f0cd76b979d42b44eb0b5831f256"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/stage3_assets/medsam_figure3_internal_validation.png",
+        "role": "copied_scientific_asset",
+        "sha256": "a69475311e0fcde20ba50bbc9723c4b050b0a75b515172f31fa2830dd966315f"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+      },
+      {
+        "path": "results/038_research_presentation_two_real_paper_holdouts/medical/generated/cuhk_production_build/styles/sintefcolor.sty",
+        "role": "canonical_cuhk_style",
+        "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+      }
+    ],
+    "sha256": "dafce2787c90bb12f542b3124c1556bdbf5bfe959fb1506bab47e2da4a3f9116"
+  },
+  "review_evidence_identity": null,
+  "deck_level_decision": "WAITING_FOR_DECK_VISUAL_REVIEW",
+  "blocking_findings": [],
+  "selected_repair_directives": [],
+  "repair_allowed": false,
+  "fail_closed_reason": null,
+  "repaired_render_identity": null,
+  "repaired_render_input_identity": null,
+  "repaired_rendered_pixel_identity": null,
+  "repaired_render_input_manifest": null,
+  "final_decision": null
+}

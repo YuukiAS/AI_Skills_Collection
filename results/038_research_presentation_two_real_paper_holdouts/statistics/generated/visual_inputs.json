@@ -1,0 +1,181 @@
+{
+  "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+  "task_key": "038_research_presentation_two_real_paper_holdouts",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "038_research_presentation_two_real_paper_holdouts-one-call-production-research-deck-review",
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "prompt_version": "ai-bridge.visual-review.v1",
+  "external_upload_authorization": "",
+  "rubric": {
+    "instructions": "Review the rendered pixels from one normal research-presentations production invocation. Check that each page contains source-specific content from the supplied engineering bundle rather than placeholders; exact CUHK Beamer identity is visible; the main scientific object is prominent and projection-readable; math, native plots, and medical images are semantically correct where present; no internal RRL/GSC/SRC, QA, provenance, workflow, repo path, run ID, or implementation language leaks into audience-facing slides; repeated generic cards or one-template pages are rejected; and the deck reads as one coherent research update rather than disconnected benchmark pages. For multi-workstream bundles, confirm that each workstream stays internally continuous and that any independent workstream transition is visible without inventing a causal relation. Separately review the deck_contact_sheet item as a deck-level rhythm object: adjacent-page density jumps, repeated composition face, overfull or empty pages, redundant summary filler, result -> failure -> next-experiment rhythm, workstream transition balance, and title/object/formula/image alternation must meet a mature doctoral group-meeting or strong conference-talk bar. The top-level package PASS is not enough; provide item-level judgement and observations for deck_contact_sheet. Do not infer visual quality from filenames or hashes.",
+    "source_contracts": [
+      "The engineering regression bundle is public-safe and explicitly excluded from Stage 5 holdouts.",
+      "Stage 2 gold/reference pixels are used only for compatible composition selection.",
+      "The deck-quality loop may repair at most once and must fail closed/no-winner for unsafe findings or unresolved blockers."
+    ]
+  },
+  "identity_bindings": {
+    "task_key": "038_research_presentation_two_real_paper_holdouts",
+    "implementation_commit": null,
+    "input_title": "brms Bayesian Multilevel Models Using Stan",
+    "build_manifest": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/BUILD_MANIFEST.json",
+    "build_manifest_sha256": "339fadcba3283891288d8cc56b056bee51b2beefae24b93434d86e4dddb6f3ab",
+    "source_fidelity_map": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/source_fidelity_map.json",
+    "source_fidelity_map_sha256": "31eca25f320bb07dfc221ecac3b3294041ca4618eb5a4abb1084699de13fc6a2",
+    "deck_sequence_summary": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_sequence_summary.json",
+    "deck_sequence_summary_sha256": "0dc6e15a1e3374712c183cac56f4517cb09d102916fcae7067f71a167450b15d",
+    "quality_loop_state": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/quality_loop_state.json",
+    "quality_loop_state_sha256": "83d72bec7408ffa37bbb3dda645152c6f894451fb3818d8e679d3fc40480674c",
+    "deck_contact_sheet": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_contact_sheet.png",
+    "deck_contact_sheet_sha256": "722ccd6b2ba90fde592692e18a6478a850eaeb0f8fe9eb9a5d8fb7f5751bbf76",
+    "deck_identity_sha256": "4934d202273307890785e5564cbe7b45449058219b74186728b302b0570054f1",
+    "render_input_identity_sha256": "49faee5a773e73807b46b026b62c95cebdb9f5566de18dcc96e03fbfc02dacc7",
+    "render_input_identity": {
+      "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+      "build_workspace": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build",
+      "files": [
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/assets/background.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "088792e2b9b51ebb3a0f0b99bf527005d0b8691fb440077b6fa7c429fa05d7aa"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/assets/background_negative.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "cae1d6d7494c9d9600156dd4af60a31715229ddca200598b4435cd2d8a8eb9e8"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/assets/logo_RGB.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "598cac8fcc5f5a1d5c78877651b51192b313049e5277a2862f7fff7f04fc102c"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/assets/logo_RGB_negative.png",
+          "role": "canonical_cuhk_asset",
+          "sha256": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/bibliography.bib",
+          "role": "canonical_cuhk_support",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/main.tex",
+          "role": "main_tex",
+          "sha256": "1177324a42d4ccf7dbd914f435449500e2926808befdce9b9cf60cd3dbe072c2"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/scientific_layouts.tex",
+          "role": "scientific_layout_include",
+          "sha256": "387005cdf1fab4251cb7224507fae31aeb1df5bc969265d9b6b83753418732d8"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/stage3_assets/brms_figure1_fitting_workflow.png",
+          "role": "copied_scientific_asset",
+          "sha256": "59eb79ee8d6e31489e2d45802e165b3b218904a8e268ff8c54ffc2eaa24e9f93"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/stage3_assets/brms_figure3_kidney_marginal_effects.png",
+          "role": "copied_scientific_asset",
+          "sha256": "28bd96c3f06b2903ba0f04d35cd6637e763194ab0455cd148c28ecf0b03ef005"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/stage3_assets/brms_table1_package_capabilities.png",
+          "role": "copied_scientific_asset",
+          "sha256": "b41eb0155e108e9bf5b75e382b79006c8aa2f024ccf0060048e64ab40107b62f"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/styles/beamerthemesintef.sty",
+          "role": "canonical_cuhk_style",
+          "sha256": "345d29995c0d1fd86dc02f0b97e5d5a33cbd363f353e0065b21b96ec9aa42b08"
+        },
+        {
+          "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/styles/sintefcolor.sty",
+          "role": "canonical_cuhk_style",
+          "sha256": "e03f18d0473b69d27da2a06eb07d2083d4bb1cac82b564b23869de8adff99a13"
+        }
+      ],
+      "sha256": "49faee5a773e73807b46b026b62c95cebdb9f5566de18dcc96e03fbfc02dacc7"
+    },
+    "rendered_pixel_identity_sha256": "43b45471bbdf47f02232bab4be023356b7e325b33b3524c78318c63c302260c8",
+    "pdf_sha256": "7b592c2bd35621880fbec9b5a5a42fa15b622917e5ba00cbc0b74e90918f1d91",
+    "page_job_by_logical_id": {
+      "slide_2_statistical_model": "STATISTICAL_MODEL",
+      "slide_3_real_data_application": "REAL_DATA_APPLICATION",
+      "slide_4_experiment_design": "EXPERIMENT_DESIGN",
+      "slide_5_negative_result": "NEGATIVE_RESULT",
+      "slide_6_next_experiment": "NEXT_EXPERIMENT"
+    },
+    "source_evidence_ids_by_logical_id": {
+      "slide_2_statistical_model": [
+        "BRMS-EV-MODEL"
+      ],
+      "slide_3_real_data_application": [
+        "BRMS-EV-KIDNEY"
+      ],
+      "slide_4_experiment_design": [
+        "BRMS-EV-WORKFLOW"
+      ],
+      "slide_5_negative_result": [
+        "BRMS-EV-COMPARISON",
+        "BRMS-EV-PRIOR-LIMIT"
+      ],
+      "slide_6_next_experiment": [
+        "BRMS-EV-TAKEAWAY",
+        "BRMS-EV-PRIOR-LIMIT"
+      ]
+    },
+    "selected_gold_by_page_id": {
+      "brms_model_object": "GSC-016",
+      "brms_kidney_example_result": "GSC-015",
+      "brms_fitting_workflow": "GSC-004",
+      "brms_capability_limits": "GSC-012",
+      "brms_take_home": "GSC-018"
+    }
+  },
+  "inputs": [
+    {
+      "logical_id": "slide_2_statistical_model",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-2.png",
+      "mime_type": "image/png",
+      "sha256": "e709ffda43682c0ccdac54de5eb0649644dde255a04adb1344544ca7e2952515",
+      "description": "Rendered exact-CUHK production page for STATISTICAL_MODEL using source evidence BRMS-EV-MODEL."
+    },
+    {
+      "logical_id": "slide_3_real_data_application",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-3.png",
+      "mime_type": "image/png",
+      "sha256": "19f47412ecc9dcba3f7e03f303614e72b6ad266984c1ef7d6c24c36b572eb314",
+      "description": "Rendered exact-CUHK production page for REAL_DATA_APPLICATION using source evidence BRMS-EV-KIDNEY."
+    },
+    {
+      "logical_id": "slide_4_experiment_design",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-4.png",
+      "mime_type": "image/png",
+      "sha256": "ee6899c8ce6391b17eb822b0a91157d0b8056418c6e7663e8b0835935569f54f",
+      "description": "Rendered exact-CUHK production page for EXPERIMENT_DESIGN using source evidence BRMS-EV-WORKFLOW."
+    },
+    {
+      "logical_id": "slide_5_negative_result",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-5.png",
+      "mime_type": "image/png",
+      "sha256": "a15ac41b8f6cf40355c68a893678149a2bd3d071c62bdd80afdba267660eabed",
+      "description": "Rendered exact-CUHK production page for NEGATIVE_RESULT using source evidence BRMS-EV-COMPARISON, BRMS-EV-PRIOR-LIMIT."
+    },
+    {
+      "logical_id": "slide_6_next_experiment",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/cuhk_production_build/rendered/slide-6.png",
+      "mime_type": "image/png",
+      "sha256": "d535f2b136dd0f685b9889a943ae61f61971861264f3260b8c75311cc84baaaa",
+      "description": "Rendered exact-CUHK production page for NEXT_EXPERIMENT using source evidence BRMS-EV-TAKEAWAY, BRMS-EV-PRIOR-LIMIT."
+    },
+    {
+      "logical_id": "deck_contact_sheet",
+      "path": "results/038_research_presentation_two_real_paper_holdouts/statistics/generated/deck_contact_sheet.png",
+      "mime_type": "image/png",
+      "sha256": "722ccd6b2ba90fde592692e18a6478a850eaeb0f8fe9eb9a5d8fb7f5751bbf76",
+      "description": "Deck-level contact sheet preserving the rendered slide sequence for rhythm, density, transition, and template-repeat review.",
+      "review_role": "deck_sequence_context"
+    }
+  ]
+}

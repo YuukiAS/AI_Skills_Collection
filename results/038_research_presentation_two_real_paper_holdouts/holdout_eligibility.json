@@ -1,0 +1,79 @@
+{
+  "schema": "RESEARCH_PRESENTATION_STAGE5_HOLDOUT_ELIGIBILITY_AUDIT_V1",
+  "task_key": "038_research_presentation_two_real_paper_holdouts",
+  "audit_date": "2026-08-29",
+  "repository": "YuukiAS/AI_Skills_Collection",
+  "pre_generation_status": "PASS_NO_PRESENTATION_TUNING_USE_FOUND",
+  "search_scopes": [
+    "skills/tools/documents-media/presentations",
+    "plugins/codex/plugins/presentations",
+    "tests/fixtures/presentations",
+    "results/0*",
+    "skills/tools/documents-media/presentations/shared/references/reference_sources_manifest.json",
+    "skills/tools/documents-media/presentations/shared/references/reference_source_search_matrix.csv",
+    "git ls-files path/title scan"
+  ],
+  "search_terms": [
+    "brms",
+    "Buerkner",
+    "Bürkner",
+    "Paul-Christian",
+    "10.18637/jss.v080.i01",
+    "v080i01",
+    "Bayesian Multilevel Models Using Stan",
+    "MedSAM",
+    "Segment anything in medical images",
+    "10.1038/s41467-024-44824-z",
+    "s41467-024-44824-z",
+    "Jun Ma",
+    "Yuting He",
+    "Bo Wang"
+  ],
+  "presentation_tuning_hits": [],
+  "non_disqualifying_repository_hits": [
+    {
+      "path": "skills/domains/bayesian/bayesian-ppl-diagnostics/references/reference.md",
+      "reason": "domain bibliography reference, not presentation exemplar extraction, gold selection, rule distillation, or presentation tuning"
+    },
+    {
+      "path": "skills/domains/medical-imaging/medical-imaging-deep-learning/references/reference.md",
+      "reason": "domain bibliography reference, not presentation exemplar extraction, gold selection, rule distillation, or presentation tuning"
+    },
+    {
+      "path": "plugins/codex/plugins/statistical-modeling/skills/bayes/_src/diag/references/reference.md",
+      "reason": "plugin mirror of domain bibliography reference"
+    },
+    {
+      "path": "plugins/codex/plugins/medical-imaging/skills/med/_src/dl/references/reference.md",
+      "reason": "plugin mirror of domain bibliography reference"
+    }
+  ],
+  "papers": [
+    {
+      "domain": "statistics_methodology",
+      "title": "brms: An R Package for Bayesian Multilevel Models Using Stan",
+      "authors": "Paul-Christian Buerkner",
+      "doi": "10.18637/jss.v080.i01",
+      "published_source": "https://www.jstatsoft.org/article/view/v080i01",
+      "license": "Journal of Statistical Software open-access CC BY 3.0 policy",
+      "eligible_before_generation": true,
+      "local_pdf_cache_untracked": "/tmp/rh038_sources/brms_v080i01.pdf",
+      "pdf_sha256": "35757e85ffb002fcb6c5dc34fec0daa6a84302d552e7555f2551838c4599fffb",
+      "pdf_pages": 28
+    },
+    {
+      "domain": "medical_imaging",
+      "title": "Segment anything in medical images",
+      "authors": "Jun Ma, Yuting He, Feifei Li, Lin Han, Chenyu You, Bo Wang",
+      "doi": "10.1038/s41467-024-44824-z",
+      "published_source": "https://www.nature.com/articles/s41467-024-44824-z",
+      "license": "Creative Commons Attribution 4.0 International",
+      "eligible_before_generation": true,
+      "local_pdf_cache_untracked": "/tmp/rh038_sources/medsam_s41467-024-44824-z.pdf",
+      "pdf_sha256": "78925a99aaf7f17d728bc1e4e4c262fc234d33f4319d258d9f6b2080b42ded2b",
+      "pdf_pages": 9,
+      "supplementary_information_sha256": "b66b5d825586d4cb5fc6e92635656422733b82b64d7b1dcd3587a20c4090f1c3",
+      "source_data_xlsx_sha256": "93f5e882d37e110bb747209bf18d24bae1874ff45dc5461a25c93820a40885a9"
+    }
+  ]
+}
