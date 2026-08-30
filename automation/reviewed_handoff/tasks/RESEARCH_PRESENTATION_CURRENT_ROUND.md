@@ -1,6 +1,6 @@
 # Research Presentation Current Round
 
-当前仍属于 `REFERENCE_CALIBRATED_ONE_SHOT_QUALITY`，长期 `PROGRAM_MATURE=false`。
+当前工程状态为 `BASE_V1_READY_FOR_REAL_WORKFLOW_REFINEMENT`，长期 `PROGRAM_MATURE=false`。这不是 Stage 5 PASS，也不是 `ONE_SHOT_QUALITY_PASS`；它表示 Stage 1-4 已形成可用 Base v1，后续改进必须由真实 production feedback 驱动。
 
 **Source of truth：** `RESEARCH_PRESENTATION_CORPUS_PROGRAM_GOAL.md` 的 Five-Stage Closure Roadmap、Quality-Preserving Continuation Policy 与 Final Quality Gates。本文只记录当前阶段状态与已经冻结的历史结论，不维护第二套 roadmap。
 
@@ -88,19 +88,21 @@ Stage 4 历史链保持：031 建立 one-call production；032 关闭 multi-work
 
 最终 task-local Terra 与 implementation、manifest、render-input/rendered-pixel identity 真实绑定；统计模型、定量结果、实验设计、负结果、下一实验、医学影像六张 substantive page 与完整 contact sheet 全部 item-level PASS，且 contact sheet 明确认可成熟的 result→failure→next-experiment 节奏与独立影像 workstream。因此 semantic compatibility 的非回归证据成立。
 
-042 不能 PASS 的唯一剩余原因是 frozen Plan 还要求直接证明一次 **real Terra substantive finding → shared canonical role → existing safe repair → changed render inputs/pixels → fresh final Terra**。唯一 staging bridge 后，真实 initial Terra 返回 `blocking_findings=0`；consumer 因此正确执行 `repair_cycle_count=0`，没有可合法修复的 finding。Plan revision 已用尽，所以 042 保留 terminal `AWAIT_HUMAN_DECISION / PLANNER_DECISION / REVISE` 历史，但依据 Quality-Preserving Continuation Policy，这个机械 evidence gap 不要求用户在“保持门槛/降低门槛”之间做选择，直接由新的 bounded recovery 继续。
+042 不能 PASS 的唯一剩余原因是 frozen Plan 还要求直接证明一次 **real Terra substantive finding -> shared canonical role -> existing safe repair -> changed render inputs/pixels -> fresh final Terra**。唯一 staging bridge 后，真实 initial Terra 返回 `blocking_findings=0`；consumer 因此正确执行 `repair_cycle_count=0`，没有可合法修复的 finding。Plan revision 已用尽，所以 042 保留 terminal `AWAIT_HUMAN_DECISION / PLANNER_DECISION / REVISE` 历史；其已完成的 generic semantic-compatibility improvement 保留为 Base v1 的一部分，但不再自动触发 synthetic/validation challenge 链。
 
-### 043 — active real-visual-repair challenge recovery — PLAN_FROZEN
+### 043 — user-directed pause before execution — PLAN_FROZEN
 
-当前唯一活动任务：
+当前暂停的历史任务：
 
 `043_research_presentation_real_visual_repair_challenge_recovery`
 
-043 不再重复 042 的单 fixture 迭代，而是冻结一个新的有限验证机制：在任何 challenge Terra 结果被读取前，一次性生成并追踪恰好三个与 041 完全无关的 non-holdout/public-safe challenge variant——`Q_SCALE`、`Q_SUPPORT`、`PROCESS_REFLOW`，分别针对已经 shipped 的主科研对象投影缩放、图注/支持区域分离、流程图兼容 reflow 三类 repair family。三个初始 source/input、manifest、render-input、pixel 和 target-page identity 必须先整体冻结，之后禁止根据 Terra 改 challenge 或创建第四个 variant。
+043 保留为已经冻结但未执行的 task history。用户已在 Executor 启动前明确暂停 Stage-5 自动验收；043 不执行、不伪造 PASS、不删除 PLAN，也不消费 challenge Terra、source bundle、render 或 production invocation。
 
-真实 task-local Terra 只负责判断是否真的出现 substantive-page blocker；若多于一个 variant 可安全映射，按预先冻结的 `Q_SCALE -> Q_SUPPORT -> PROCESS_REFLOW` 优先级选择，禁止事后挑最好修的。选中后只允许现有 quality-loop 执行一次 repair；必须证明 pre/post render-input、rendered-pixel 与目标页 hash 均真实变化，再由 fresh final Terra 对修复页和完整 contact sheet 达到成熟博士组会 / strong paper-talk bar。若三者都没有真实可修 finding、需要新 repair/gold/semantic rule，或一次 repair 后仍不合格，043 按 stop condition失败，不继续追逐。
+暂停确认边界：043 `CURRENT.state=PLAN_FROZEN`，`implementation_commit=null`；tracked task 目录只有 `REQUEST.md`、`PLAN.md`、`CURRENT.json`；没有 043 `RESULT.md` / `FINAL_REPORT.md` 或 executor result artifacts。停止 watcher 前未发现 043 Codex Executor 进程。既有 043 Git history 只记录 task open / plan freeze / routing state，不记录 Executor implementation 或 results。
 
-043 不修改 mature gold、canonical semantic roles、safe-repair vocabulary/mapping、selector hard constraints、视觉门槛或 Stage 5 holdout。它如果 PASS，只代表 041 之后的 generic recovery evidence终于闭环；**随后必须真正停在用户 human gate，报告 041 失败原因、039/042/043 的通用恢复和证据，由用户决定是否值得再消耗下一组 fresh four-paper batch。** Stage 5 仍未通过，`PROGRAM_MATURE=false`。
+该暂停不修改 presentation production code、gold、layout、quality-loop、validator、mature gold、canonical semantic roles、safe-repair vocabulary/mapping、selector hard constraints、视觉门槛或 Stage 5 holdout。Stage 5 仍未通过，`PROGRAM_MATURE=false`。
+
+下一阶段不再继续 synthetic/validation challenge 链。Program 等待用户提供 TRACE / real research presentation feedback，再以真实 production failures 作为 bounded refinement 输入；任何后续修复都必须保持 source fidelity、exact CUHK identity、真实 render evidence 与 mature-talk 质量门槛。
 
 ## Standing workflow decisions
 
@@ -110,6 +112,7 @@ Stage 4 历史链保持：031 建立 one-call production；032 关闭 multi-work
 - 单 task PASS 不等于 Program PASS。
 - Stage 1–4 首次整体 PASS 的旁路 notifier 不是 approval gate，不暂停下一 stage。
 - 对高成本 final holdout acceptance，failed batch + generic recovery 后，消耗下一批 fresh holdout 前必须打断用户。
+- 自 043 用户暂停起，不再自动继续 synthetic/validation challenge 链；下一阶段等待用户提供 TRACE / real research presentation feedback，并只用真实 production failures 做 bounded refinement。
 - 只有真正存在互斥产品/科学选择、显著架构改变、新成本/风险/隐私/许可问题、必须降低质量门槛，或 Stage 5 最终 4-deck batch 验收时才打断用户。
 
 ## Non-negotiable final acceptance
