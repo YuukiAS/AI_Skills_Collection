@@ -127,14 +127,17 @@ docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md
 
 核心边界：
 
-- repository / CLI 有自己的 release SemVer；
-- 每个中央 plugin 有自己的独立 SemVer；
-- plugin version 不再跟 repository 锁步；
-- capability status 只是可选说明，不是第二套版本。
+- repository / CLI 使用标准三段 release version；
+- 每个中央 plugin 使用独立两段 release version，例如 `0.1 -> 0.2 -> 0.3 -> 1.0`；
+- plugin version 不跟 repository 锁步；
+- capability status 只是可选说明，不是第二套版本；
+- AI/Planner 不得根据 diff 大小自行发明版本号。
 
-下一次长期维护架构正式发布为 repository `5.0.0`。这是 repository-level versioning/refinement epoch，不表示所有 plugin 都达到 stable。
+长期维护架构正式发布为 repository `5.0.0`。这是 repository-level versioning/refinement epoch，不表示所有 plugin 都达到 stable。
 
-已有同名 plugin 不向下重置版本号；`4.4.2` 作为最后 lockstep baseline，5.0.0 起只 bump 真正改变的 plugin。
+Repository 5.0.0 起，各中央 plugin 建立新的 independent history，从 `0.1` 开始；此前 4.x lockstep 元数据继续保留在 root CHANGELOG / Git history。
+
+Repository patch 是正常兼容 refinement 的默认发版方式；repository minor 只有在整个 collection 获得新的 repository-level user capability 时才允许。
 
 ## 10. 近期真实工作流路线
 
@@ -143,7 +146,7 @@ docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md
 目标：
 
 - repository version single source of truth；
-- independent plugin SemVer；
+- independent two-part plugin versions；
 - per-plugin TODO + per-plugin changelog；
 - root CHANGELOG 作为 release 首页；
 - README 可直接看到 plugin version/status/changelog；
@@ -165,7 +168,8 @@ docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md
 -> bounded promotion
 -> replay 同一 deck failure
 -> unrelated presentation regression
--> plugin changelog/version bump（若 production behavior 真改变）
+-> presentations version bump（若形成正式 improvement release）
+-> repository patch release（若值得正式发布）
 ```
 
 现有 deck 中已经被用户接受的页面/元素必须成为 regression constraint；局部返修不授权全局重做。
@@ -176,18 +180,28 @@ docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md
 
 ### 更长期
 
-只有在多个独立真实任务上，普通调用已经能稳定产出用户愿意交给导师/同事的 artifact，才考虑新的 repository minor/major milestone。未来 website 可以读取现有 version/changelog/status source，但现在不建立额外网站数据层。
+普通真实 refinement 通常形成 repository patch release，例如 `5.0.1`, `5.0.2`。只有整个 collection 获得此前没有的 repository-level user capability，才考虑 `5.1.0`；破坏性 repository contract 才考虑 `6.0.0`。
+
+未来 website 可以读取现有 version/changelog/status source，但现在不建立额外网站数据层。
 
 ## 11. 每次 release 前必须回答
 
-每个 repository minor/major release 和每个 plugin minor/major bump 都必须能清楚回答：
+每次正式 release 必须分别回答：
 
-> 这版让普通用户以前做不好的哪个真实任务，现在做得更好了？
+### Repository
 
-如果答案只是新增 schema、audit、metadata、synthetic benchmark 或更多 TODO 文件，不应形成 major milestone。
+> 这次只是现有 collection 的 compatible improvement，还是整个 collection 获得了新的 repository-level 用户能力？
+
+如果只是 compatible improvement，使用 patch；回答不出“新 minor 能完成什么旧 minor 明显不能完成的用户任务”时，不得升 repository minor。
+
+### Plugin
+
+> 这个 plugin 是否形成了一次完整、可发布、用户可观察的 improvement batch？
+
+如果只是 TODO、provenance、tests、synthetic evidence 或中间 commit，不 bump plugin version。
 
 ## 12. Presentation / Reporting 当前边界
 
 - `research-presentations` 已形成 Base v1 engineering path，但真实泛化和真实长期返修质量仍需通过 CAT-TRACE 等现有 deck 继续迭代；当前 status 不需要为了填表强行命名 beta/stable。
 - `research-reporting` 已吸收 Distributed Imaging Inference 的导师报告复盘规则；继续用下一份真实报告验证，不因单次复盘自动宣布成熟。
-- 详细 capability status 只在 `docs/PLUGIN_MATURITY.md` 维护；plugin SemVer 才是长期版本主线。
+- 详细 capability status 只在 `docs/PLUGIN_MATURITY.md` 维护；plugin version 与 changelog 才是长期版本主线。
