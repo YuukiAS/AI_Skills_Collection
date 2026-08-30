@@ -115,27 +115,39 @@ Planner 必须保护已经通过的行为，优先修真实 blocker；没有真�
 
 最终 generalization 仍应使用完整预冻结 fresh batch，且 production 在 batch 内冻结。
 
-## 9. Release version 与 capability maturity 分开
+## 9. Repository release、plugin version 与 capability maturity 分开
 
-Repository / Marketplace 继续使用 SemVer release，例如 `4.4.x -> 4.5.0`。版本号表示可安装发布，不等于每个 plugin 都达到 stable。
+Repository / CLI release、individual plugin SemVer、capability maturity 是三个不同概念。完整规则见：
 
-Capability maturity 使用独立标签，见 `docs/PLUGIN_MATURITY.md`：
+```text
+docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md
+```
+
+从 `4.4.2` 之后不再要求十个中央 plugin 永久锁步升版：
+
+- repository / CLI 继续使用自己的 SemVer release；
+- 每个 Marketplace plugin 的 canonical current version 是 `scripts/codex_marketplace_config.json -> plugins[].version`；
+- 只有普通用户可观察行为或安装 payload 真正改变的 plugin 才 bump；
+- 每个 plugin 的长期 release history 写入 `docs/plugin-changelogs/<plugin>.md`；
+- capability maturity 继续只在 `docs/PLUGIN_MATURITY.md` 维护。
+
+Capability maturity 标签仍为：
 
 - `experimental`
 - `alpha`
 - `beta`
 - `stable`
 
-一个 release 可以包含 alpha plugin 和 stable plugin。禁止为了表示某个 skill 尚未成熟而把整个仓库版本倒退到 `0.x`。
+一个 repository release 可以同时包含不同版本、不同 maturity 的 plugin。禁止为了表示某个 skill 尚未成熟而把整个仓库版本倒退到 `0.x`，也禁止为了一个 plugin 的改动机械 bump 全部 plugin。
 
 ## 10. Roadmap 只按真实新增能力推进
 
 当前建议方向：
 
 - **4.4.x — Baseline stabilization**：统一长期反馈结构、版本/maturity source of truth、移除 active payload 中的项目 TODO/历史笔记；
-- **4.5.0 — Real workflow refinement**：重点消费 TRACE Presentation 与 Distributed Imaging Inference report 等真实科研反馈；
-- **4.6.0 — Cross-project generalization**：用新的独立真实项目检查已 promoted 规则是否跨项目有效、是否产生副作用；
-- **5.0.0 — Stable research communication candidate**：只有当 Presentation / Reporting 等高频入口在多个真实项目上能一次产出用户愿意交给导师的 artifact，且人工修改主要是科研观点而不是基础布局/模板/日志化问题时才考虑。
+- **4.5.x — Real workflow refinement phase**：重点消费 TRACE Presentation 与 Distributed Imaging Inference report 等真实科研反馈；具体 plugin 版本按各自真实改动独立推进，不要求都达到相同 minor；
+- **Cross-project generalization phase**：用新的独立真实项目检查已 promoted 规则是否跨项目有效、是否产生副作用；
+- **Stable research communication candidate**：只有当 Presentation / Reporting 等高频入口在多个真实项目上能一次产出用户愿意交给导师的 artifact，且人工修改主要是科研观点而不是基础布局/模板/日志化问题时才考虑对应 plugin 提升到 stable maturity 或进行重大版本跃迁。
 
 这些是能力里程碑，不是强制发布日期；若真实证据不支持，不为凑版本推进。
 
