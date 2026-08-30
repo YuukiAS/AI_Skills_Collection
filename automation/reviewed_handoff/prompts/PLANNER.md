@@ -4,7 +4,9 @@
 
 先读取 repository 的当前 source of truth、已有实现、相关文档、历史约束和用户提供的外部来源。先做取舍，再写 Plan；不要把“让 Codex 自己决定”留给 Executor。
 
-在 AI_Skills_Collection 中，任何涉及 AI Resources、Notion candidate inbox、外部 skill repo、provenance intake、profile/marketplace exposure 或 active skill routing 的 Plan，都必须先读取：
+在 AI_Skills_Collection 中，先读取根 `AGENTS.md`。
+
+任何涉及 AI Resources、Notion candidate inbox、外部 skill repo、provenance intake、profile/marketplace exposure 或 active skill routing 的 Plan，都必须再读取：
 
 ```text
 docs/workflows/REVIEWED_HANDOFF_SKILL_INTAKE.md
@@ -12,7 +14,7 @@ docs/workflows/REVIEWED_HANDOFF_SKILL_INTAKE.md
 
 这类任务必须由 Planner 冻结 intake decision、existing-history gate 结果、routing contract 和 out-of-scope Research candidates。Executor 不拥有这些 intake 决策。
 
-在 AI_Skills_Collection 中，任何由真实项目反馈、用户 artifact 返修、重复 production failure 或 plugin TODO 触发的长期能力 refinement，还必须读取：
+任何由真实项目反馈、用户 artifact 返修、重复 production failure 或 plugin TODO 触发的长期能力 refinement，还必须读取：
 
 ```text
 docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md
@@ -22,6 +24,41 @@ docs/plugin-todos/<target-plugin>.md
 ```
 
 这类 Plan 必须先冻结 feedback promotion decision：`PROJECT_LOCAL / CANDIDATE_GENERIC / PROMOTE_NOW / BLOCKED_NEEDS_EVIDENCE / REJECTED / SUPERSEDED` 之一，并明确真实 evidence、target layer、适用边界、user-facing effect 与 regression。不要把 TODO 原文直接复制进 active skill，也不要因为 TODO 数量多就创建新 skill/schema/state。详细项目事实保留在项目 repo 或 provenance；中央 plugin 只吸收经过抽象和验证的通用能力。Reviewed Handoff 以 bounded batch 工作；真实 blocker 关闭后不得自行继续生成 synthetic recovery 链。
+
+## Version / release planning
+
+任何涉及 repository release、CLI version、Marketplace/plugin version、README version table、root/plugin changelog 的 Plan，必须先读取：
+
+```text
+AGENTS.md
+docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md
+VERSION                         # 如果已经存在
+scripts/codex_marketplace_config.json
+CHANGELOG.md
+docs/plugin-changelogs/<affected-plugin>.md
+docs/plugin-todos/<affected-plugin>.md
+```
+
+Planner 必须自己冻结版本决定，不能把“该升哪个版本”留给 Executor。
+
+Plan 中必须显式写：
+
+```text
+Repository bump decision: NONE | PATCH | MINOR | MAJOR
+Reason: ...
+Affected plugins:
+- <plugin>: NO_BUMP | <old> -> <new>
+  Reason: ...
+```
+
+核心规则：
+
+- Repository / CLI 使用三段版本；兼容改进默认 patch。
+- Repository minor 只有在整个 collection 获得新的 repository-level user capability 时才允许。必须回答“新 minor 能完成什么上一 minor 明显不能完成的用户任务？”
+- 单个 plugin 的普通改进、plugin 达到 `1.0`、更多 TODO/schema/tests/benchmark 都不能单独触发 repository minor。
+- Individual plugin 使用独立两段 release version，例如 `0.1 -> 0.2 -> 0.3 -> 1.0`；只在形成正式 user-facing improvement batch 后推进一次。
+- TODO/provenance/纯测试/中间 commit 不 bump plugin。
+- 如果无法按 canonical policy 明确证明 bump，冻结 `NO_BUMP` 或返回用户，不得为了整齐统一升级。
 
 Planner 必须明确：
 
