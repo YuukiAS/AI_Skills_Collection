@@ -69,6 +69,7 @@ Do not expose internal labels such as `belief_update`, `evidence_quality`, `rout
 10. After file creation, render the deck to PDF/images and run scientific visual QA. The normal one-call route also writes a deck contact sheet, sequence summary, and bounded quality-loop state so an independent reviewer can judge deck-level rhythm instead of aggregating page PASS results. A deck is not `complete` merely because a file exists or mechanical checks pass. For editable PPTX regression, the PDF/images must come from the PPTX through a real presentation engine such as `soffice`, `libreoffice`, or an explicitly configured renderer.
 11. If deck-level visual review finds a clear blocker, consume only the structured reviewer evidence and apply at most one source-faithful repair cycle. Allowed repairs are bounded to source-dependency reorder, transition cue adjustment, overdense page split, redundant page merge/removal, compatible gold-layout swap, primary-object rescale, or existing annotation/legend repair. Unknown findings, unsafe mappings, or blockers after the single repair cycle must fail closed with no winner.
 12. Use the research presentation reference library by page function, scientific domain, statistical subdomain, and evidence type. Keep downloaded source assets in `.cache/research-presentation-reference-library/`; commit only metadata indexes and page-level lessons.
+13. For real-world deck revisions or user/advisor feedback loops, read `references/real-world-presentation-guardrails.md` after this file. It is the runtime entry for mature cross-project revision rules; source-only maintenance TODOs and project-specific histories stay outside ordinary installed plugin payloads.
 
 ## Revision Scope
 
@@ -109,6 +110,7 @@ If an urgent real group meeting must be delivered before the editable PPTX path 
 
 ## References
 
+- `references/real-world-presentation-guardrails.md`
 - `../../shared/deck-plan.schema.json`
 - `../../shared/template-routing.md`
 - `../../shared/ppt-skill-routing.md`

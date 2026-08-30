@@ -1,6 +1,6 @@
 {
   "name": "writing-style",
-  "version": "4.4.1",
+  "version": "4.4.2",
   "description": "Writing quality layer with source-fidelity guardrails, Chinese reader-facing say-it-plain final passes, and English scientific prose cleanup without detector evasion or research-structure decisions.",
   "author": {
     "name": "YuukiAS",

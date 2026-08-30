@@ -35,7 +35,7 @@ cd /path/to/project
 ai-skills install --target repo --profile research-main --mode symlink --write-agents-md
 ```
 
-当前正式版本是 `v4.4.1`。`v4.0.0` 起中央插件版本与 CLI package 版本同步；此前 `setup.py` 的 `0.1.0` 只表示早期本地命令包装器版本。
+当前正式版本是 `v4.4.2`。`v4.0.0` 起中央插件版本与 CLI package 版本同步；此前 `setup.py` 的 `0.1.0` 只表示早期本地命令包装器版本。
 
 ## 先决定装什么
 
@@ -93,6 +93,20 @@ codex plugin marketplace add \
 | `medical-imaging` | `medical-imaging-workflows`、`ai-ml-imaging` |
 
 `cardiacnexus` 不再是中央通用插件。CardiacNexus 项目专用技能已经迁移到 CardiacNexus 仓库的 `.agents/skills/`，中央仓库不再保留导出包。
+
+## Long-term refinement / 真实任务反馈
+
+仓库 release version 和 plugin maturity 分开维护：`v4.4.2` 表示可安装发布版本，不表示所有 plugin 都是 stable。能力成熟度只在 `docs/PLUGIN_MATURITY.md` 记录；当前 `presentations` 是 `alpha / Base v1`，其他未统一审计的 plugin 不乱标 stable。
+
+真实项目反馈先进入对应的 `docs/plugin-todos/<plugin>.md`，每个中央 plugin 只有一个 TODO inbox。Planner 只把有真实证据、边界、user-facing effect 和 regression 的 `PROMOTE_NOW` 项冻结成 bounded promotion task；项目页码、科学结论、逐轮返修历史继续留在项目 repo 或 `docs/provenance/`。
+
+Reviewed Handoff 在这里是 batch executor，不是常驻自动优化系统。没有真实 blocker 时结束 batch；plugin TODO 和 provenance 是 source-only 维护材料，不进入普通 Codex Marketplace 安装 payload。
+
+入口文档：
+
+- `docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md`
+- `docs/PLUGIN_MATURITY.md`
+- `docs/plugin-todos/README.md`
 
 ## Profile 安装
 

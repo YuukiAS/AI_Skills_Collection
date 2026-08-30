@@ -51,6 +51,10 @@ class PresentationSharedTests(unittest.TestCase):
 
     def test_research_routing_defaults_to_exact_cuhk_beamer_with_editable_override(self) -> None:
         research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")
+        real_world_guardrails = (
+            REPO_ROOT
+            / "skills/tools/documents-media/presentations/research-presentations/references/real-world-presentation-guardrails.md"
+        ).read_text(encoding="utf-8")
         ppt_routing = (SHARED / "ppt-skill-routing.md").read_text(encoding="utf-8")
         template_routing = (SHARED / "template-routing.md").read_text(encoding="utf-8")
         latex_notes = (SHARED / "compatibility/openai-latex.md").read_text(encoding="utf-8")
@@ -76,6 +80,45 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertIn("derived scaffolds for non-exact workflows only", cuhk_readme)
         self.assertIn("Preserve the first/title slide layout", cuhk_readme)
         self.assertIn("Times New Roman Regular, Bold, Italic, and Bold Italic", cuhk_readme)
+        self.assertIn("references/real-world-presentation-guardrails.md", research_skill)
+        for required in [
+            "Rule Inheritance",
+            "one intellectual job",
+            "first-line centered display formula",
+            "semantic graph",
+            "ports and anchors",
+            "visible text from source and rendered artifact",
+        ]:
+            self.assertIn(required, real_world_guardrails)
+
+    def test_presentation_runtime_excludes_maintenance_history_and_project_science(self) -> None:
+        source_runtime = REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations"
+        generated_runtime = REPO_ROOT / "plugins/codex/plugins/presentations/skills/research"
+        archive = REPO_ROOT / "docs/provenance/research-presentation-maintenance-archive-2026-08-30"
+
+        for root in [source_runtime, generated_runtime]:
+            filenames = {path.name for path in root.rglob("*") if path.is_file()}
+            self.assertNotIn("TODO.md", filenames)
+            self.assertNotIn("CURRENT_RESEARCH_PRESENTATION_REVISION_RULES.md", filenames)
+            self.assertFalse(any(name.startswith("TODO_CAT_TRACE_") for name in filenames))
+
+            runtime_text = "\n".join(
+                path.read_text(encoding="utf-8")
+                for path in root.rglob("*.md")
+                if path.is_file()
+            )
+            self.assertNotIn("CAT-TRACE", runtime_text)
+            self.assertNotIn("Group marks preserve open-tail richness calibration", runtime_text)
+            self.assertNotIn("Delta^K + Delta^U", runtime_text)
+
+        for archived_name in [
+            "TODO.md",
+            "CURRENT_RESEARCH_PRESENTATION_REVISION_RULES.md",
+            "TODO_CAT_TRACE_V2_CANDIDATES_2026_08_27.md",
+            "TODO_CAT_TRACE_V3_MANDATORY_CANDIDATES_2026_08_27.md",
+            "TODO_CAT_TRACE_V3_CONFIRMED_2026_08_27.md",
+        ]:
+            self.assertTrue((archive / archived_name).exists(), archived_name)
 
     def test_business_and_shared_routes_connect_chinese_writing_handoff(self) -> None:
         business_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/business-presentations/SKILL.md").read_text(encoding="utf-8")
@@ -1922,8 +1965,14 @@ class PresentationSharedTests(unittest.TestCase):
                     self.assertNotIn(forbidden, audience)
 
     def test_research_presentation_todo_consolidation_and_promotions(self) -> None:
-        todo = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/TODO.md").read_text(encoding="utf-8")
+        archive = REPO_ROOT / "docs/provenance/research-presentation-maintenance-archive-2026-08-30"
+        todo = (archive / "TODO.md").read_text(encoding="utf-8")
+        plugin_todo = (REPO_ROOT / "docs/plugin-todos/presentations.md").read_text(encoding="utf-8")
         research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")
+        guardrails = (
+            REPO_ROOT
+            / "skills/tools/documents-media/presentations/research-presentations/references/real-world-presentation-guardrails.md"
+        ).read_text(encoding="utf-8")
         visual_qa = (SHARED / "visual-qa.md").read_text(encoding="utf-8")
         archetypes = (SHARED / "references/RESEARCH_SLIDE_ARCHETYPES.md").read_text(encoding="utf-8")
 
@@ -1947,6 +1996,15 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertIn(required, todo)
 
         for required in [
+            "Diagram geometry and canonical edge/node treatment",
+            "Deck-wide style system and terminology hierarchy",
+            "Math and theory slide hierarchy",
+            "Simulation, metric and structured-fact presentation",
+            "Natural scientific slide language",
+        ]:
+            self.assertIn(required, plugin_todo)
+
+        for required in [
             "## Revision Scope",
             "accepted_element_ledger",
             "## Evidence And Concept Grounding",
@@ -1955,6 +2013,16 @@ class PresentationSharedTests(unittest.TestCase):
             "connectors must be structural connectors",
         ]:
             self.assertIn(required, research_skill)
+
+        for required in [
+            "## Rule Inheritance",
+            "accepted slides/components",
+            "one intellectual job per slide",
+            "first-line centered display formula",
+            "ports and anchors",
+            "Compilation success",
+        ]:
+            self.assertIn(required, guardrails)
 
         for required in [
             "## Evidence Versus Concept QA",
@@ -1977,6 +2045,12 @@ class PresentationSharedTests(unittest.TestCase):
             (
                 REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md",
                 REPO_ROOT / "plugins/codex/plugins/presentations/skills/research/SKILL.md",
+            ),
+            (
+                REPO_ROOT
+                / "skills/tools/documents-media/presentations/research-presentations/references/real-world-presentation-guardrails.md",
+                REPO_ROOT
+                / "plugins/codex/plugins/presentations/skills/research/references/real-world-presentation-guardrails.md",
             ),
             (
                 SHARED / "template-routing.md",

@@ -4,6 +4,23 @@
 
 No pending changes.
 
+## 4.4.2 - 2026-08-30
+
+- Established the long-term real-world plugin refinement structure: source-only per-plugin TODO inboxes, promotion gates, six-layer ownership, and bounded Reviewed Handoff batch semantics.
+- Moved Presentation maintenance TODO/history files out of the active `research-presentations` runtime source into `docs/provenance/research-presentation-maintenance-archive-2026-08-30/`.
+- Added a compact runtime Presentation guardrails reference for mature cross-project revision rules without packaging CAT-TRACE project history or maintenance inboxes into ordinary plugin installs.
+- Documented the release-version versus capability-maturity split; `presentations` remains `alpha / Base v1`, and unreviewed plugin maturity stays unclassified rather than being marked stable.
+- Aligned CLI package, registry, marketplace config, generated plugin metadata, and README release version on `4.4.2`.
+- Added regressions for one TODO inbox per central plugin, maintenance payload hygiene, Presentation history separation, version consistency, maturity/SemVer separation, and source-to-generated parity.
+
+## 4.4.1 - 2026-08-18
+
+- Accepted the post-4.4.0 research-presentation hardening release after real PPTX rendering and independent scientific visual-review evidence passed.
+- Added the metadata-only research presentation reference library source manifest, search matrix, page-level reference rows, and workflow documentation while keeping downloaded deck assets in ignored cache.
+- Strengthened deck-plan validation with planning/final phases, structured Evidence Board items, and `source_evidence_ids` referential-integrity checks.
+- Updated the research-group-meeting regression generator so it creates PPTX, evidence manifests, render status, and visual-review inputs without self-assigning final QA PASS.
+- Synchronized central Marketplace plugin metadata and registry release version to `4.4.1`.
+
 ## 4.3.0 - 2026-08-16
 
 - Restored and confirmed the 10-plugin Codex Marketplace baseline: `workflow-core`, `ai-skills-core`, `writing-style`, `research-writing`, `presentations`, `scientific-visualization`, `web-development`, `statistical-modeling`, `bioinformatics`, and `medical-imaging`.

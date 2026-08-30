@@ -6,15 +6,6 @@ Current maturity: `alpha / Base v1`.
 
 ## Open candidates
 
-### Consolidate project-specific TODO files out of active plugin payload
-status: PROMOTE_NOW
-source: CAT-TRACE v2/v3 revision history + current repository layout
-evidence: `skills/tools/documents-media/presentations/research-presentations/TODO*.md`, `CURRENT_RESEARCH_PRESENTATION_REVISION_RULES.md`, matching generated plugin copies
-target layer: distribution
-problem: project-specific TODO/history files currently live inside the active skill source and are mirrored into the generated plugin, mixing maintenance backlog with runtime capability.
-candidate action: migrate project-specific history to `docs/provenance/`; merge mature generic rules into active skill/shared QA/references; move unresolved generic candidates into this file; remove maintenance-only TODO files from generated runtime payload.
-promotion gate: preserve every confirmed rule/history pointer; source/plugin parity and presentation regressions must pass.
-
 ### Remove Stage-4 benchmark assumptions from the normal production validator
 status: PROMOTE_NOW
 source: 038/041 real-paper execution
@@ -24,23 +15,50 @@ problem: a pure statistics paper can fail validation for lacking medical pages, 
 candidate action: validate jobs/storyline declared by the current source/deck contract rather than a frozen Stage-4 fixture shape; retain strict source fidelity, selector, CUHK, render and repair-budget checks.
 promotion gate: unrelated single-statistics, single-medical and unrelated multi-workstream regressions; no weakening of production gates.
 
-### Promote confirmed TRACE revision rules into stable runtime layers
-status: CANDIDATE_GENERIC
-source: repeated CAT-TRACE real presentation revisions
-evidence: `CURRENT_RESEARCH_PRESENTATION_REVISION_RULES.md`, `docs/provenance/RESEARCH_PRESENTATION_CAT_TRACE_*`, confirmed TODO files
-target layer: reasoning/rendering/qa
-problem: several repeatedly confirmed rules still live in cumulative revision notes rather than the smallest active layer that enforces them.
-candidate action: triage rule-by-rule into SKILL narrative guidance, shared layout primitive, rendered QA or backlog; do not dump the entire notes file into SKILL.md.
-promotion gate: repeated/confirmed real evidence plus rendered regression for geometry-sensitive rules.
-
 ### Diagram geometry and canonical edge/node treatment
 status: BLOCKED_NEEDS_EVIDENCE
 source: repeated TRACE visual feedback
-evidence: current presentation TODO sections on edge crossing, anchors, arrow size, peer node consistency, container-vs-process semantics
+evidence: `docs/provenance/research-presentation-maintenance-archive-2026-08-30/`, `docs/provenance/RESEARCH_PRESENTATION_CAT_TRACE_*`
 target layer: rendering/qa
 problem: semantic diagram gate is active, but geometry/style consistency remains partly advisory and repeatedly causes visual defects.
 candidate action: renderer-specific canonical primitives and QA for reading direction, alignment, legal edge paths, anchors, arrowheads and peer-level boxes.
 promotion gate: at least one new real deck or targeted rendered regression proving the primitive fixes actual output without overconstraining other diagrams.
+
+### Deck-wide style system and terminology hierarchy
+status: CANDIDATE_GENERIC
+source: repeated real research deck revisions
+evidence: `docs/provenance/research-presentation-maintenance-archive-2026-08-30/TODO.md`, `TODO_CAT_TRACE_V2_CANDIDATES_2026_08_27.md`, `TODO_CAT_TRACE_V3_MANDATORY_CANDIDATES_2026_08_27.md`
+target layer: reasoning/rendering/qa
+problem: sentence case, first-use terminology, question style, dataset/simulation numbering, mini-headers, metric labels, captions and references can drift across a deck.
+candidate action: define a small deck-style contract and rendered consistency matrix, probably in shared references/QA rather than in the main skill body.
+promotion gate: independent rendered deck showing the contract catches inconsistency without enforcing one visual layout for all scientific objects.
+
+### Math and theory slide hierarchy
+status: CANDIDATE_GENERIC
+source: repeated statistics and theory deck feedback
+evidence: `docs/provenance/research-presentation-maintenance-archive-2026-08-30/`, `docs/provenance/RESEARCH_PRESENTATION_CAT_TRACE_V2_REVIEW_2026_08_27.md`, `docs/provenance/RESEARCH_PRESENTATION_CAT_TRACE_V3_REVIEW_2026_08_27.md`
+target layer: reasoning/rendering/qa
+problem: short definitions, design settings, estimands, theorem statements and derivation steps can all be rendered as centered display math even when they have different scientific roles.
+candidate action: add rendered examples and validator support for formula hierarchy, first-use semantic context, standard limit notation, and theory coverage maps.
+promotion gate: theorem-heavy or statistical-method real deck replay plus unrelated math-heavy deck regression.
+
+### Simulation, metric and structured-fact presentation
+status: CANDIDATE_GENERIC
+source: repeated real statistics deck feedback
+evidence: `docs/provenance/research-presentation-maintenance-archive-2026-08-30/TODO.md`
+target layer: reasoning/rendering/qa
+problem: DGP, estimand, comparison, metric direction, metric purpose, structured dataset facts and seeds/reproducibility metadata can be mixed into prose dumps or weak pseudo-tables.
+candidate action: promote compact table/list patterns and QA fields only after a real rendered regression exercises them.
+promotion gate: at least one simulation-heavy deck and one real-data deck where rendered output proves the pattern improves scanability.
+
+### Natural scientific slide language
+status: CANDIDATE_GENERIC
+source: repeated presentation and writing-style feedback
+evidence: `docs/provenance/research-presentation-maintenance-archive-2026-08-30/TODO.md`, `docs/plugin-todos/writing-style.md`
+target layer: writing/qa
+problem: audience-facing slides can retain meta labels, internal workflow language, and templated contrast sentences even after ordinary polishing.
+candidate action: decide whether presentation-specific language checks belong in `research-presentations`, `scientific-prose`, or a handoff between the two.
+promotion gate: repeated independent English scientific slide evidence and a check that writing-style does not take over scientific structure.
 
 ### Real-workflow refinement from TRACE rather than synthetic challenge chains
 status: PROMOTE_NOW
@@ -53,6 +71,7 @@ promotion gate: each promoted change must identify user-visible before/after and
 
 ## Recently promoted / established
 
+- Presentation maintenance files were moved out of active runtime source to `docs/provenance/research-presentation-maintenance-archive-2026-08-30/`; the runtime rule subset is now `skills/tools/documents-media/presentations/research-presentations/references/real-world-presentation-guardrails.md`.
 - Evidence-first research-group-meeting routing and scientific-object page archetypes.
 - Exact CUHK Beamer/PDF default research route for unspecified desktop research talks.
 - Source fidelity map, gold composition retrieval, executable scientific layouts, real render/contact-sheet review, bounded one-cycle repair contract.

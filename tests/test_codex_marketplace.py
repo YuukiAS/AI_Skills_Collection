@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 import shutil
 import sys
 import tempfile
@@ -14,6 +15,21 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 import build_codex_marketplace as build  # noqa: E402
 import skill_utils  # noqa: E402
+
+
+CENTRAL_PLUGIN_NAMES = [
+    "workflow-core",
+    "ai-skills-core",
+    "writing-style",
+    "research-writing",
+    "presentations",
+    "scientific-visualization",
+    "web-development",
+    "statistical-modeling",
+    "bioinformatics",
+    "medical-imaging",
+]
+SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 
 
 def write_skill(
@@ -121,22 +137,55 @@ def copy_sparse_paths(source: Path, target: Path, *paths: str) -> None:
 class CodexMarketplaceTests(unittest.TestCase):
     def test_repository_config_has_marketplace_plugin_set(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
-        self.assertEqual(
-            [plugin["name"] for plugin in data["plugins"]],
-            [
-                "workflow-core",
-                "ai-skills-core",
-                "writing-style",
-                "research-writing",
-                "presentations",
-                "scientific-visualization",
-                "web-development",
-                "statistical-modeling",
-                "bioinformatics",
-                "medical-imaging",
-            ],
-        )
+        self.assertEqual([plugin["name"] for plugin in data["plugins"]], CENTRAL_PLUGIN_NAMES)
         self.assertEqual(data["marketplacePluginBudget"], 10)
+
+    def test_central_plugins_have_exactly_one_source_only_todo_inbox(self) -> None:
+        data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        plugin_names = {plugin["name"] for plugin in data["plugins"]}
+        todo_names = {path.stem for path in (REPO_ROOT / "docs/plugin-todos").glob("*.md") if path.name != "README.md"}
+        self.assertEqual(plugin_names, set(CENTRAL_PLUGIN_NAMES))
+        self.assertEqual(todo_names, plugin_names)
+
+        payload_root = REPO_ROOT / "plugins/codex/plugins"
+        payload_paths = [path.relative_to(REPO_ROOT).as_posix() for path in payload_root.rglob("*")]
+        self.assertFalse(any("docs/plugin-todos" in path for path in payload_paths))
+        self.assertFalse(any("plugin-todos" in path for path in payload_paths))
+
+    def test_release_version_is_consistent_and_maturity_is_not_semver(self) -> None:
+        setup_text = (REPO_ROOT / "setup.py").read_text(encoding="utf-8")
+        setup_match = re.search(r'version="([^"]+)"', setup_text)
+        self.assertIsNotNone(setup_match)
+        setup_version = setup_match.group(1)
+        self.assertRegex(setup_version, SEMVER_RE)
+
+        registry = json.loads((REPO_ROOT / "registry.json").read_text(encoding="utf-8"))
+        config = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+        readme_match = re.search(r"当前正式版本是 `v([^`]+)`", readme)
+        self.assertIsNotNone(readme_match)
+
+        versions = {setup_version, registry["version"], readme_match.group(1)}
+        versions.update(plugin["version"] for plugin in config["plugins"])
+        for plugin_name in CENTRAL_PLUGIN_NAMES:
+            plugin_json = json.loads(
+                (REPO_ROOT / "plugins/codex/plugins" / plugin_name / ".codex-plugin/plugin.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            versions.add(plugin_json["version"])
+        self.assertEqual(versions, {"4.4.2"})
+
+        maturity_text = (REPO_ROOT / "docs/PLUGIN_MATURITY.md").read_text(encoding="utf-8")
+        maturity_rows = re.findall(r"^\| `([^`]+)` \| `([^`]+)`", maturity_text, flags=re.MULTILINE)
+        self.assertEqual({name for name, _ in maturity_rows}, set(CENTRAL_PLUGIN_NAMES))
+        for _, maturity in maturity_rows:
+            self.assertFalse(SEMVER_RE.match(maturity), maturity)
+
+    def test_generated_layer_matches_source_config(self) -> None:
+        summary, differences = build.check_layer()
+        self.assertEqual(summary["errors"], [])
+        self.assertEqual(differences, [])
 
     def test_codex_marketplace_ci_installs_presentation_test_dependencies(self) -> None:
         workflow = (REPO_ROOT / ".github/workflows/codex-marketplace.yml").read_text(encoding="utf-8")
