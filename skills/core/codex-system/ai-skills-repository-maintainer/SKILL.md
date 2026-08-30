@@ -59,7 +59,7 @@ Then apply these rules:
 - Prefer modifying an existing routing/reasoning/rendering/QA/writing/distribution layer over creating another skill/schema/state.
 - After promotion, replay the original real failure and run an unrelated regression. Synthetic checks alone do not prove maturity.
 - Reviewed Handoff refinement should be bounded and batch-based. Do not keep a watcher alive to invent new work after the real blocker is closed.
-- Release SemVer and capability maturity are separate; do not change package versions merely to express alpha/beta/stable maturity.
+- Repository release version, two-part plugin release version, and capability maturity are separate; do not change package or plugin versions merely to express alpha/beta/stable maturity.
 - Maintenance-only TODO/provenance files must not be copied into generated user-facing plugin payload unless they are intentionally promoted runtime references.
 
 ## Validation

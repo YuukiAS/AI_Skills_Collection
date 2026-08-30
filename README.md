@@ -35,7 +35,9 @@ cd /path/to/project
 ai-skills install --target repo --profile research-main --mode symlink --write-agents-md
 ```
 
-当前正式版本是 `v4.4.2`。`v4.0.0` 起中央插件版本与 CLI package 版本同步；此前 `setup.py` 的 `0.1.0` 只表示早期本地命令包装器版本。
+Repository / CLI release: `5.0.0`.
+
+Repository release 和 plugin version 完全独立：`AI_Skills_Collection 5.0.0` 是长期维护 epoch，不表示所有 plugin 都是 `5.0.0` 或 stable。十个中央 plugin 从本 release 开始统一建立真正独立的 plugin release history，当前版本都是 `0.1`；此前 `4.x` 数字属于 legacy lockstep release metadata，历史保留在 root `CHANGELOG.md` 和 Git history。
 
 ## 先决定装什么
 
@@ -79,24 +81,24 @@ codex plugin marketplace add \
 
 ## 中央服务器插件集
 
-| 插件 | 用户可见入口 |
-|---|---|
-| `workflow-core` | `codex-workflow-protocol` |
-| `ai-skills-core` | `project-skill-installer`、`ai-skills-repository-maintainer` |
-| `writing-style` | `writing-fidelity`、`scientific-prose`、`chinese-prose` |
-| `research-writing` | `research-reporting`、`research-paper-workflow`、`literature-and-citations` |
-| `presentations` | `research-presentations`、`business-presentations` |
-| `scientific-visualization` | `publication-figures`、`publication-figure-palettes`、`scientific-figure-qa`、`scientific-schematics`、`latex-posters` |
-| `web-development` | `frontend-reference-research`、`frontend-visual-systems`、`research-product-frontend` |
-| `statistical-modeling` | `bayesian-modeling`、`data-analysis-python`、`statistical-visualization` |
-| `bioinformatics` | `bioinformatics-workflows` |
-| `medical-imaging` | `medical-imaging-workflows`、`ai-ml-imaging` |
+| Plugin | Version | Status | Main entry / purpose | Changelog |
+|---|---:|---|---|---|
+| `workflow-core` | `0.1` | `unclassified` | `codex-workflow-protocol`：source-of-truth、planning、verification、completion gates | [workflow-core](docs/plugin-changelogs/workflow-core.md) |
+| `ai-skills-core` | `0.1` | `unclassified` | `project-skill-installer`、`ai-skills-repository-maintainer`：profile、registry、catalog、provenance、marketplace publishing | [ai-skills-core](docs/plugin-changelogs/ai-skills-core.md) |
+| `writing-style` | `0.1` | `unclassified` | `writing-fidelity`、`scientific-prose`、`chinese-prose`：source fidelity 与中英文 prose cleanup | [writing-style](docs/plugin-changelogs/writing-style.md) |
+| `research-writing` | `0.1` | `unclassified` | `research-reporting`、`research-paper-workflow`、`literature-and-citations`：报告、论文、文献和证据组织 | [research-writing](docs/plugin-changelogs/research-writing.md) |
+| `presentations` | `0.1` | `baseline` | `research-presentations`、`business-presentations`：科研组会、研究和商务 presentation planning / revision | [presentations](docs/plugin-changelogs/presentations.md) |
+| `scientific-visualization` | `0.1` | `unclassified` | `publication-figures`、palettes、figure QA、schematics、posters | [scientific-visualization](docs/plugin-changelogs/scientific-visualization.md) |
+| `web-development` | `0.1` | `unclassified` | frontend reference research、visual systems、research product frontend constraints | [web-development](docs/plugin-changelogs/web-development.md) |
+| `statistical-modeling` | `0.1` | `unclassified` | Bayesian modeling、Python data analysis、diagnostics、statistical visualization | [statistical-modeling](docs/plugin-changelogs/statistical-modeling.md) |
+| `bioinformatics` | `0.1` | `unclassified` | bioinformatics workflows across databases、GWAS、single-cell、genomics I/O、omics analysis | [bioinformatics](docs/plugin-changelogs/bioinformatics.md) |
+| `medical-imaging` | `0.1` | `unclassified` | medical imaging、CMR、DICOM/NIfTI、segmentation、registration、imaging ML | [medical-imaging](docs/plugin-changelogs/medical-imaging.md) |
 
 `cardiacnexus` 不再是中央通用插件。CardiacNexus 项目专用技能已经迁移到 CardiacNexus 仓库的 `.agents/skills/`，中央仓库不再保留导出包。
 
 ## Long-term refinement / 真实任务反馈
 
-仓库 release version 和 plugin maturity 分开维护：`v4.4.2` 表示可安装发布版本，不表示所有 plugin 都是 stable。能力成熟度只在 `docs/PLUGIN_MATURITY.md` 记录；当前 `presentations` 是 `alpha / Base v1`，其他未统一审计的 plugin 不乱标 stable。
+仓库 release version、plugin release version 和 plugin maturity 分开维护：`5.0.0` 是 repository / CLI release；`0.1` 是每个中央 plugin 的 initial independent plugin release；能力成熟度只在 `docs/PLUGIN_MATURITY.md` 记录。当前 `presentations` 是 `baseline`，`research-writing` 是 `unclassified`，其他未统一审计的 plugin 不乱标 stable。
 
 真实项目反馈先进入对应的 `docs/plugin-todos/<plugin>.md`，每个中央 plugin 只有一个 TODO inbox。Planner 只把有真实证据、边界、user-facing effect 和 regression 的 `PROMOTE_NOW` 项冻结成 bounded promotion task；项目页码、科学结论、逐轮返修历史继续留在项目 repo 或 `docs/provenance/`。
 
@@ -105,7 +107,9 @@ Reviewed Handoff 在这里是 batch executor，不是常驻自动优化系统。
 入口文档：
 
 - `docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md`
+- `docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md`
 - `docs/PLUGIN_MATURITY.md`
+- `docs/plugin-changelogs/README.md`
 - `docs/plugin-todos/README.md`
 
 ## Profile 安装

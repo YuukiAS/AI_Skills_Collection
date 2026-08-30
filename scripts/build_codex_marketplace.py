@@ -51,7 +51,7 @@ IGNORE_NAMES = {
     ".nox",
 }
 IGNORE_SUFFIXES = (".pyc", ".pyo", ".swp", ".swo", "~")
-SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$")
+PLUGIN_VERSION_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 ARTIFACT_ID_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]{0,30}[a-z0-9])?$")
 SECRET_RE = re.compile(r"\b[A-Z][A-Z0-9_]*(?:API_KEY|TOKEN)\b")
 EXPLICIT_SECRET_NAMES = {
@@ -133,8 +133,8 @@ def keywords_for_plugin(plugin_name: str) -> list[str]:
 
 def plugin_version(plugin: dict[str, Any], context: str) -> str:
     version = plugin.get("version")
-    if not isinstance(version, str) or not SEMVER_RE.match(version):
-        raise BuildError(f"{context}: version must be a valid semantic version")
+    if not isinstance(version, str) or not PLUGIN_VERSION_RE.match(version):
+        raise BuildError(f"{context}: version must be a two-part plugin release version")
     return version
 
 
@@ -902,8 +902,8 @@ def validate_plugin_json(plugin_dir: Path, plugin: dict[str, Any], errors: list[
     expected_version = str(plugin.get("version") or "")
     if payload.get("version") != expected_version:
         errors.append(f"{relative(plugin_json_path)}: version must be {expected_version}")
-    elif not SEMVER_RE.match(expected_version):
-        errors.append(f"{relative(plugin_json_path)}: version must be a valid semantic version")
+    elif not PLUGIN_VERSION_RE.match(expected_version):
+        errors.append(f"{relative(plugin_json_path)}: version must be a two-part plugin release version")
     if payload.get("skills") != "./skills/":
         errors.append(f"{relative(plugin_json_path)}: skills must be ./skills/")
     if payload.get("repository") != REPOSITORY_URL:

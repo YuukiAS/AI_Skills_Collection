@@ -19,6 +19,25 @@ source text or generator output.
 If the same failure has already been pointed out in prior rounds, treat a repeat
 as `REVISE` or `BLOCKED`, not as a fresh style preference.
 
+## Revision Entry Routing
+
+Natural requests such as "继续按这些批注返修我现有的组会PPT",
+"这个版本其他页别动，只修我指出的页面", and
+"保留上轮接受的布局，继续改剩下的问题" must enter the existing-deck
+revision path. Do not route them to one-call new-deck regeneration.
+
+Before editing, bind the revision request to:
+
+- the existing deck artifact path and the reviewer-seen render baseline;
+- the accepted pages/components that must be preserved;
+- the targeted revision scope, including page numbers or component IDs when
+  provided;
+- the allowed local changes versus slides/components that are out of scope;
+- the final render comparison proving accepted elements were preserved.
+
+If the user asks for a new deck explicitly, that is a separate request. Otherwise
+feedback on an existing deck means revise the existing artifact.
+
 ## Audience And Evidence
 
 - Introduce new notation, acronyms, datasets, methods, estimands, and domain

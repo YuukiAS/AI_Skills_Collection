@@ -1,122 +1,185 @@
 # Plugin Versioning and Changelogs
 
-本文件定义 `AI_Skills_Collection` 的长期 repository release、plugin SemVer 与 changelog 规则。
+本文件定义 `AI_Skills_Collection` 的长期 repository release、independent plugin release version 与 changelog 规则。
 
-目标不是让所有 plugin 永远锁步，也不是用 alpha/beta 代替真实版本，而是让多年持续迭代后仍能回答：**整个仓库当前是什么 release、每个 plugin 自己到了哪个版本、某次真实项目反馈究竟改变了哪个 plugin。**
+目标是让多年持续迭代后仍能回答：
 
-## 1. Repository release 与 plugin version 是两层版本
+- 整个仓库当前是什么可安装 release；
+- 每个 plugin 自己到了哪个用户可观察 release；
+- 某次真实项目反馈改变了哪个 plugin；
+- capability status 是否只是辅助说明，而不是第二套版本。
 
-### Repository / CLI release
+## 1. 两层版本
 
-仓库与 `ai-skills-collection-cli` 维护一个顶层 release version。它描述一次可安装、可复现的整库发布，包括 distribution、profiles、registry、Marketplace、维护协议以及当次发布包含的 plugin 版本集合。
+### Repository / CLI version
 
-当前 4.x 历史存在过 lockstep plugin version。下一次长期版本模型切换统一作为：
-
-```text
-Repository release: 5.0.0
-```
-
-`5.0.0` 的含义是 **repository release/maintenance contract 的新 epoch**，不是“所有 plugin 都已经成熟”。
-
-5.0.0 起必须有一个 repository-version single source of truth，供 CLI package、registry top-level release、README 当前 release 与 root `CHANGELOG.md` 共同消费。不要继续在多个脚本里手写同一个 repository version。
-
-### Plugin SemVer
-
-十个中央 Marketplace plugin 各自维护独立 SemVer，canonical current version 继续来自：
+Repository 和 `ai-skills-collection-cli` 保留标准三段版本：
 
 ```text
-scripts/codex_marketplace_config.json
-plugins[].version
+5.0.0
+5.0.1
+5.1.0
+6.0.0
 ```
 
-**不要把 plugin version 数字向下重置。** 现有 plugin 已经发布到 `4.4.2`；把同名 plugin 改成 `1.0.0` / `0.x` 会制造版本倒退和升级语义歧义。OpenAI 的 GitHub Marketplace sync 会持续更新同名 plugin，版本也是用户可见元数据，因此版本应保持单调。5.0.0 只重置 repository 的版本语义，不重写 plugin 历史。
+本次长期维护基础 release 是：
 
-因此：
+```text
+Repository / CLI: 5.0.0
+```
 
-- `4.4.2` 是十个中央 plugin 最后的 lockstep baseline；
-- 从 repository `5.0.0` 开始，各 plugin **立即解耦**；
-- 只有实际改变的 plugin 才 bump；未改变的 plugin 保持原版本；
-- plugin changelog 从 `4.4.2` baseline 开始即可，不猜测式回填更早的独立历史。
+`5.0.0` 是新的长期维护 epoch：
 
-## 2. 什么时候改 repository version
+- real-world feedback driven refinement；
+- 每个中央 plugin 有独立 TODO；
+- 每个中央 plugin 有独立 changelog；
+- 每个中央 plugin 有独立 release version；
+- Reviewed Handoff 是 bounded batch，不是常驻自动优化系统；
+- root `CHANGELOG.md` 是 repository release 首页；
+- README 直接显示 repository version、plugin version、status 和 changelog。
 
-Repository version 只在一次正式、可安装 release 时改变；普通 commit、TODO/provenance 更新不自动发版。
+它不表示所有 plugin 已经 stable。
+
+Repository version 的 canonical source 是根目录 `VERSION`。`setup.py`、registry top-level release、README 当前 release 与 root `CHANGELOG.md` 必须与它一致。
+
+### Individual plugin version
+
+十个中央 Marketplace plugin 从 repository `5.0.0` 开始统一建立新的 independent plugin version epoch：
+
+```text
+0.1
+```
+
+Plugin version 只使用两段数字：
+
+```text
+0.1
+0.2
+0.3
+...
+0.9
+1.0
+1.1
+...
+2.0
+```
+
+不要使用 `0.1.0`、`0.1.1`、`0.2.0` 这类三段 plugin version。
+
+Plugin version 的含义是“这个 plugin 第几个正式、用户可观察的 release”，不是严格 SemVer。`scripts/codex_marketplace_config.json` 的 `plugins[].version` 是 plugin version 的 canonical source。
+
+此前 `4.x` 数字属于 legacy lockstep repository/plugin release metadata。它们不是每个 plugin 的真实独立发展历史。Independent plugin history 从 repository `5.0.0` 的 `0.1` 开始；旧历史保留在 root `CHANGELOG.md` 与 Git history。
+
+## 2. 什么时候推进 plugin version
+
+Plugin 不随普通 commit、TODO、provenance、synthetic benchmark 或文档整理自动升版。
+
+只有某个 plugin 形成一次可发布的 user-facing improvement batch，才推进一次版本：
+
+```text
+0.1 -> 0.2 -> 0.3
+```
+
+标准证据链：
+
+```text
+real failure
+-> bounded fix
+-> original replay
+-> unrelated regression
+-> review
+-> plugin changelog/version bump
+```
+
+不区分“这是 bugfix 所以 patch”或“这是 feature 所以 minor”。只要值得成为一个正式 plugin release，就推进一个两段版本。
+
+小修、TODO、provenance、维护记录、尚未形成正式 release 的改动继续放在：
+
+```text
+## Unreleased
+```
+
+shared runtime 变化时，只推进真正受影响并形成 release batch 的 plugin，不机械全体升版。
+
+## 3. Plugin 什么时候到 1.0
+
+数字不等于 maturity。不要机械规定：
+
+```text
+0.1 -> alpha
+0.5 -> beta
+1.0 -> stable
+```
+
+`1.0` 保留明确产品意义：普通用户已经可以把该 plugin 作为长期默认工具使用，并且经过多个独立真实任务验证。
+
+例如 `presentations` 只有当多个真实科研 deck、existing-deck revision、statistics、medical imaging、real render 和用户实际组会使用都表现稳定，且人工返修主要是科研判断而不是基础 AI/layout 问题时，用户或 Planner 才可以决定进入 `1.0`。
+
+不要通过 CI、Terra 或 synthetic benchmark 自动升 `1.0`。
+
+`1.0` 之后，`1.1`、`1.2`、`1.3` 继续表示 compatible improvement releases。只有 plugin 本身出现真正需要用户迁移的破坏性变化时，才从 `1.x` 进入 `2.0`。
+
+## 4. 什么时候改 repository version
+
+Repository `VERSION` 只在整个仓库形成正式可安装 release 时改变。普通 commit、TODO、provenance、project feedback 或 development branch work 不改变 repository `VERSION`。
+
+所有未发布变化先进入 root `CHANGELOG.md` 的：
+
+```text
+## Unreleased
+```
 
 ### Patch：`5.0.x`
 
-用于：
+当现有 repository architecture、plugin topology、安装方式和 profile 体系没有发生重要变化，只是发布一批兼容 refinement：
 
-- 一个或多个 plugin 的 patch-level bug/quality fix；
-- distribution/install/docs/release tooling 的兼容性修复；
-- 不新增 repo-level 用户工作流，也不改变顶层安装/Marketplace contract。
+- 一个或多个 plugin 的正式 improvement release；
+- validator / routing / renderer / quality / install tooling 修复；
+- 若干 plugin 同时做兼容升级；
+- existing collection contract 变得更好，但仍是同一个 contract。
+
+例如 `presentations 0.1 -> 0.2` 通常对应 `repository 5.0.0 -> 5.0.1`，除非同时形成了新的 repository-level capability。
 
 ### Minor：`5.x.0`
 
-用于出现明确新的 repository-level 用户能力，例如：
+只有整个 Collection 获得明显新的 repository-level capability，才推进中间位：
 
-- 新的中央 plugin 或正式 profile；
-- 多 plugin 协同形成新的正常工作流；
-- 安装/发布/maintenance 获得新的长期用户能力；
-- 一个真实科研 workflow milestone 明显扩大整个 collection 的正常可用范围。
+- 新中央 plugin；
+- 新正式 profile / user workflow；
+- 多个 plugin 联动形成此前不存在的完整科研工作流；
+- research communication 从单独 presentation/report 形成新的 integrated workflow；
+- 新 installation / environment capability；
+- 一个大的真实科研能力阶段，使整个 collection 能完成以前明显不能完成的一类任务。
 
-不是因为 TODO 多了、benchmark 多跑了或 schema 多了就升 minor。
+判断问题是：
 
-### Major：`6.0.0` 及以后
+```text
+5.1.0 后，整个 AI_Skills_Collection 能完成什么 5.0.x 明显不能完成的用户任务？
+```
 
-只用于破坏性 repository contract，例如：
+回答不出来就不要升中间位。
 
-- 中央 Marketplace / 安装方式发生不兼容变化；
-- 顶级 plugin 被删除、重命名或发生需要用户迁移的语义改变；
-- version/distribution model 再次发生破坏性重构。
+### Major：`6.0.0`
 
-## 3. 什么时候改 plugin version
+只用于破坏性 repository contract：
 
-每个 plugin 独立判断。
+- Marketplace / install 方式不兼容；
+- 顶级 plugin topology 大改；
+- plugin 被删除或重命名；
+- profile contract 需要迁移；
+- repository 结构或版本制度再次发生破坏性改变。
 
-### Patch
+普通能力增强不得升 major。
 
-现有用户任务边界不变，只修可靠性或质量，例如：
+## 5. Capability status 是可选注释
 
-- routing bug；
-- validator/QA false positive 或 false negative；
-- source fidelity / rendering / writing regression；
-- existing workflow 的窄范围 production fix。
+Plugin 的主要进度线是 independent plugin version + plugin changelog + real-task evidence。
 
-### Minor
-
-普通用户获得以前没有的真实能力，例如：
-
-- 新的正式 user-facing task / artifact mode；
-- 明显扩大正常支持的任务范围；
-- 新的稳定工作流入口；
-- 真实项目驱动的一组改进使该 plugin 从“只能做 X”变成“现在可以稳定做 X+Y”。
-
-### Major
-
-只用于 plugin 自己的破坏性 contract：
-
-- trigger / front-door 被不兼容替换；
-- 正常输出格式/语义需要用户迁移；
-- 关键安装依赖或公开工作流发生不兼容变化。
-
-以下默认 **不 bump plugin version**：
-
-- 只更新 `docs/provenance/`；
-- 只整理 `docs/plugin-todos/`；
-- 只更新未进入 runtime payload 的维护文档；
-- synthetic benchmark / audit metadata 本身没有改变 production behavior。
-
-shared runtime 变化时，只 bump 真正受影响的 plugin，不机械全体升版。
-
-## 4. Capability status 是可选注释，不是第二套版本
-
-Plugin 的主要进度依据是独立 SemVer + changelog + 真实任务 evidence。
-
-`docs/PLUGIN_MATURITY.md` 只保留可选 capability status，用来说明“现在是否适合作为日常默认工具”，不要求每个 plugin 必须按 `alpha -> beta -> stable` 走固定梯子。
+`docs/PLUGIN_MATURITY.md` 只保留可选 capability status，用来说明“现在是否适合作为日常默认工具”。它不要求每个 plugin 必须按 `alpha -> beta -> stable` 走固定梯子。
 
 默认可以保持 `unclassified` / `baseline`。只有真实使用证据足够且对用户有帮助时，才标 `alpha` 或 `stable`。status 不参与版本比较，也不触发 version bump。
 
-## 5. 每个 plugin 一个 changelog
+## 6. 每个 plugin 一个 changelog
 
 长期 changelog 位于：
 
@@ -126,7 +189,14 @@ docs/plugin-changelogs/<plugin>.md
 
 十个中央 plugin 各一个文件，与 `docs/plugin-todos/` 一一对应。
 
-plugin changelog 只记录：
+每个 plugin changelog 必须说明：
+
+```text
+Independent plugin versioning starts at 0.1 with AI_Skills_Collection repository 5.0.0.
+Earlier 4.x values were legacy lockstep release metadata; see root CHANGELOG / Git history.
+```
+
+Plugin changelog 只记录：
 
 - user-visible behavior change；
 - routing / workflow / quality contract change；
@@ -135,25 +205,28 @@ plugin changelog 只记录：
 
 不要把 commit list、测试数量、CI run ID、generated file noise、纯 provenance 整理当作 changelog 主体。
 
-`4.4.2` 以前的 lockstep 历史无需人工猜测式回填。每个 plugin changelog 从 `4.4.2 — legacy lockstep baseline` 开始，并链接 root `CHANGELOG.md` / Git history。
-
-## 6. Root CHANGELOG 是 release 首页
+## 7. Root CHANGELOG 是 release 首页
 
 根 `CHANGELOG.md` 是 repository release 的人类可读首页。
 
 每个 release 至少包含：
 
 - repository release version；
-- affected plugin version delta：`old -> new`；
+- affected plugin version delta；
 - unchanged plugin 列表；
 - repository / CLI / distribution infrastructure 变化；
-- `docs/plugin-changelogs/` 索引链接。
+- `docs/plugin-changelogs/` 索引链接；
+- 具体 affected plugin changelog 链接。
 
-不要把十份 plugin changelog 复制进 root CHANGELOG。
+Root changelog 回答：“整个 repository 哪次正式 release 发生了什么？”
 
-未来如果建立 website，website 应读取 repository version、Marketplace config、plugin changelog/status 等现有 source；现在不为了未来网站新增 database/schema。
+Plugin changelog 回答：“这个 plugin 自己在哪个版本改变了什么？”
 
-## 7. README 应直接显示当前状态
+不要把十份 plugin changelog 正文复制进 root CHANGELOG。
+
+未来如果建立 website，website 应读取 repository version、Marketplace config、plugin changelog/status 等现有 source；现在不为了未来 website 新增 database/schema/API。
+
+## 8. README release dashboard
 
 README 提供紧凑表格：
 
@@ -164,7 +237,7 @@ Plugin | Version | Status | Main entry / purpose | Changelog
 其中：
 
 - Version 来自 Marketplace config；
-- Status 来自 `docs/PLUGIN_MATURITY.md`，允许 `unclassified` / `baseline`；
+- Status 来自 `docs/PLUGIN_MATURITY.md`，允许 `unclassified` / `baseline` / `alpha` / `stable`；
 - Changelog 指向 `docs/plugin-changelogs/<plugin>.md`；
 - README 不是第二套 source of truth，必须有 regression 防漂移。
 
@@ -174,43 +247,25 @@ README 同时显示 repository / CLI release version，并明确：
 repository release != plugin version
 ```
 
-## 8. 5.0.0 release 的冻结规则
+## 9. 5.0.0 release 的冻结规则
 
-下一次 Goal 完成后发布 repository `5.0.0`，因为这是长期维护、独立 plugin release tracking 与真实科研反馈循环正式落地的 repository-level major epoch。
+本 Goal 完成后发布 repository `5.0.0`，因为这是长期维护、independent plugin release tracking 与真实科研反馈循环正式落地的 repository-level major epoch。
 
-但 plugin 不锁步到 5.0.0，也不向下重置。
+本 Goal 内十个中央 plugin 全部为 `0.1`。这不表示它们能力一样，只表示从 repository `5.0.0` 开始第一次拥有真正独立的 plugin release history。
 
-Executor 必须根据本次真实 diff 决定 affected plugins，并按本文件的 patch/minor/major 规则 bump。至少应检查：
-
-- `ai-skills-core`：独立 version/changelog/release maintenance 是否形成新的正式能力；
-- `presentations`：本 Goal 是否真实改变 normal production / validator / existing-deck refinement behavior；
-- `research-writing`：若本 Goal 没有改变 runtime behavior，则不得为了 5.0.0 repo release 顺手 bump。
-
-## 9. Release workflow
-
-每次 bounded release：
-
-1. 从真实 diff / user-facing effect 列 affected plugins；
-2. 每个 affected plugin 独立决定 patch / minor / major；
-3. 更新对应 `docs/plugin-changelogs/<plugin>.md`；
-4. 更新 Marketplace config 中受影响 plugin version；
-5. 更新 repository version source；
-6. 运行 registry/catalog/Marketplace generator；
-7. 更新 root CHANGELOG release manifest 与 README 状态表；
-8. 做 version consistency、payload parity、install smoke、真实 CI；
-9. 只有真实 payload/behavior 与 changelog 一致才发布。
+本 Goal 中 `ai-skills-core` 与 `presentations` 的 release 相关变化写进各自 `0.1 initial release`。从本 Goal 之后的下一批真实 feedback 开始，才使用 `0.1 -> 0.2 -> 0.3`。
 
 ## 10. 必须有的 regression
 
 长期至少保护：
 
-- repository version source == CLI package == registry top-level == README current release；
-- Marketplace config 中每个中央 plugin 都有合法、独立、单调 SemVer；
+- repository `VERSION` == setup package version == registry top-level == README current release；
+- Marketplace config 中每个中央 plugin 都有合法两段 plugin release version；
 - 十个中央 plugin == `docs/plugin-changelogs/*.md` == `docs/plugin-todos/*.md`；
-- 每个 plugin changelog latest version == Marketplace config 对应 version；
+- 每个 plugin changelog latest released version == Marketplace config 对应 version；
 - README plugin table == Marketplace version + capability status + changelog path；
 - generated plugin manifest version == source config；
-- plugin versions允许彼此不同；
+- plugin versions 允许彼此不同，且不要求三段 SemVer；
 - maintenance changelog/TODO/provenance 不进入普通 plugin runtime payload。
 
 ## 11. 与真实科研 refinement 的关系
@@ -220,6 +275,7 @@ Executor 必须根据本次真实 diff 决定 affected plugins，并按本文件
 ```text
 real feedback
 -> docs/plugin-todos/<plugin>.md
+-> Planner triage
 -> bounded promotion
 -> implementation + replay + unrelated regression
 -> affected plugin version bump

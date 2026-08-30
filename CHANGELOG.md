@@ -4,6 +4,42 @@
 
 No pending changes.
 
+## 5.0.0 - 2026-08-30
+
+Repository `5.0.0` starts the long-term real-world refinement maintenance epoch. It establishes repository-level release tracking separately from individual plugin release versions, source-only per-plugin TODO inboxes, per-plugin changelogs, bounded Reviewed Handoff batch semantics, and README release visibility.
+
+This is not a maturity declaration for every plugin. Capability status remains in `docs/PLUGIN_MATURITY.md`.
+
+Plugin version baseline:
+
+| Plugin | Previous legacy metadata | Current plugin version |
+|---|---:|---:|
+| `workflow-core` | `4.4.2` | `0.1` |
+| `ai-skills-core` | `4.4.2` | `0.1` |
+| `writing-style` | `4.4.2` | `0.1` |
+| `research-writing` | `4.4.2` | `0.1` |
+| `presentations` | `4.4.2` | `0.1` |
+| `scientific-visualization` | `4.4.2` | `0.1` |
+| `web-development` | `4.4.2` | `0.1` |
+| `statistical-modeling` | `4.4.2` | `0.1` |
+| `bioinformatics` | `4.4.2` | `0.1` |
+| `medical-imaging` | `4.4.2` | `0.1` |
+
+Changed repository behavior:
+
+- Added root `VERSION` as the repository / CLI release source of truth for `setup.py`, registry generation, README, and this changelog.
+- Added independent plugin changelogs under `docs/plugin-changelogs/`; each plugin starts at `0.1` with repository `5.0.0`, while earlier `4.x` values remain legacy lockstep metadata in this root changelog and Git history.
+- Updated `docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md`, `docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md`, plugin TODO policy, README, and maintainer guidance for two-part plugin release versions.
+- Generalized Presentation normal-production validation to check source/deck contract completeness without Stage-4 fixture storyline assumptions.
+- Hardened the existing-deck revision contract so natural targeted refinement requests route to revision mode with accepted-element, reviewer-seen-baseline, page-scope, and render-comparison protections.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelogs:
+
+- `docs/plugin-changelogs/ai-skills-core.md`
+- `docs/plugin-changelogs/presentations.md`
+
 ## 4.4.2 - 2026-08-30
 
 - Established the long-term real-world plugin refinement structure: source-only per-plugin TODO inboxes, promotion gates, six-layer ownership, and bounded Reviewed Handoff batch semantics.

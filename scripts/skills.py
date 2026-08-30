@@ -90,6 +90,10 @@ class HelpFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescript
     """Show defaults while preserving multi-line examples."""
 
 
+def repository_version() -> str:
+    return (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+
+
 def print_json(data: Any) -> None:
     print(json.dumps(data, ensure_ascii=False, indent=2))
 
@@ -179,7 +183,7 @@ def command_list(args: argparse.Namespace) -> int:
 def registry_data(include_archive: bool = False) -> dict[str, Any]:
     records = active_records_sorted(include_archive=include_archive)
     return {
-        "version": "4.4.2",
+        "version": repository_version(),
         "generated_at": utc_now(),
         "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
         "include_archive": bool(include_archive),

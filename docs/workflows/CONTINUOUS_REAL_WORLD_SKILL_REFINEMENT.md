@@ -127,14 +127,14 @@ docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md
 
 核心边界：
 
-- repository / CLI 有自己的 release SemVer；
-- 每个中央 plugin 有自己的独立 SemVer；
+- repository / CLI 有自己的三段 release version；
+- 每个中央 plugin 有自己的两段 independent release version；
 - plugin version 不再跟 repository 锁步；
 - capability status 只是可选说明，不是第二套版本。
 
-下一次长期维护架构正式发布为 repository `5.0.0`。这是 repository-level versioning/refinement epoch，不表示所有 plugin 都达到 stable。
+长期维护架构正式发布为 repository `5.0.0`。这是 repository-level versioning/refinement epoch，不表示所有 plugin 都达到 stable。
 
-已有同名 plugin 不向下重置版本号；`4.4.2` 作为最后 lockstep baseline，5.0.0 起只 bump 真正改变的 plugin。
+从 repository `5.0.0` 开始，十个中央 plugin 的真正 independent release history 统一从 `0.1` 开始。此前 `4.x` 数字属于 legacy lockstep repository/plugin release metadata，保留在 root `CHANGELOG.md` 与 Git history，不作为每个 plugin 的独立历史继续递增。
 
 ## 10. 近期真实工作流路线
 
@@ -143,7 +143,7 @@ docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md
 目标：
 
 - repository version single source of truth；
-- independent plugin SemVer；
+- independent two-part plugin release version；
 - per-plugin TODO + per-plugin changelog；
 - root CHANGELOG 作为 release 首页；
 - README 可直接看到 plugin version/status/changelog；
@@ -165,7 +165,7 @@ docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md
 -> bounded promotion
 -> replay 同一 deck failure
 -> unrelated presentation regression
--> plugin changelog/version bump（若 production behavior 真改变）
+-> plugin changelog/version bump（若形成正式 user-facing improvement release）
 ```
 
 现有 deck 中已经被用户接受的页面/元素必须成为 regression constraint；局部返修不授权全局重做。
@@ -190,4 +190,4 @@ docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md
 
 - `research-presentations` 已形成 Base v1 engineering path，但真实泛化和真实长期返修质量仍需通过 CAT-TRACE 等现有 deck 继续迭代；当前 status 不需要为了填表强行命名 beta/stable。
 - `research-reporting` 已吸收 Distributed Imaging Inference 的导师报告复盘规则；继续用下一份真实报告验证，不因单次复盘自动宣布成熟。
-- 详细 capability status 只在 `docs/PLUGIN_MATURITY.md` 维护；plugin SemVer 才是长期版本主线。
+- 详细 capability status 只在 `docs/PLUGIN_MATURITY.md` 维护；two-part plugin release version 才是长期版本主线。

@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import re
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -29,7 +30,8 @@ CENTRAL_PLUGIN_NAMES = [
     "bioinformatics",
     "medical-imaging",
 ]
-SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
+REPOSITORY_SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
+PLUGIN_VERSION_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 
 
 def write_skill(
@@ -75,7 +77,7 @@ def write_config(root: Path, plugins: list[dict]) -> None:
     )
 
 
-def plugin(name: str, skills: list[dict], version: str = "1.1.0") -> dict:
+def plugin(name: str, skills: list[dict], version: str = "1.1") -> dict:
     return {
         "name": name,
         "version": version,
@@ -149,38 +151,77 @@ class CodexMarketplaceTests(unittest.TestCase):
 
         payload_root = REPO_ROOT / "plugins/codex/plugins"
         payload_paths = [path.relative_to(REPO_ROOT).as_posix() for path in payload_root.rglob("*")]
-        self.assertFalse(any("docs/plugin-todos" in path for path in payload_paths))
-        self.assertFalse(any("plugin-todos" in path for path in payload_paths))
+        for maintenance_dir in ["docs/plugin-todos", "plugin-todos", "docs/plugin-changelogs", "plugin-changelogs", "docs/provenance", "provenance"]:
+            self.assertFalse(any(maintenance_dir in path for path in payload_paths), maintenance_dir)
 
-    def test_release_version_is_consistent_and_maturity_is_not_semver(self) -> None:
-        setup_text = (REPO_ROOT / "setup.py").read_text(encoding="utf-8")
-        setup_match = re.search(r'version="([^"]+)"', setup_text)
-        self.assertIsNotNone(setup_match)
-        setup_version = setup_match.group(1)
-        self.assertRegex(setup_version, SEMVER_RE)
-
+    def test_release_versions_are_independent_and_maturity_is_not_version(self) -> None:
+        version = (REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        setup_version = subprocess.check_output([sys.executable, "setup.py", "--version"], cwd=REPO_ROOT, text=True).strip()
         registry = json.loads((REPO_ROOT / "registry.json").read_text(encoding="utf-8"))
         config = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
-        readme_match = re.search(r"当前正式版本是 `v([^`]+)`", readme)
+        readme_match = re.search(r"Repository / CLI release: `([^`]+)`", readme)
         self.assertIsNotNone(readme_match)
 
-        versions = {setup_version, registry["version"], readme_match.group(1)}
-        versions.update(plugin["version"] for plugin in config["plugins"])
+        self.assertRegex(version, REPOSITORY_SEMVER_RE)
+        self.assertEqual({version, setup_version, registry["version"], readme_match.group(1)}, {"5.0.0"})
+
+        plugin_versions = {plugin["name"]: plugin["version"] for plugin in config["plugins"]}
+        self.assertEqual(plugin_versions, {name: "0.1" for name in CENTRAL_PLUGIN_NAMES})
+        for plugin_version in plugin_versions.values():
+            self.assertRegex(plugin_version, PLUGIN_VERSION_RE)
+            self.assertNotRegex(plugin_version, REPOSITORY_SEMVER_RE)
+
         for plugin_name in CENTRAL_PLUGIN_NAMES:
             plugin_json = json.loads(
                 (REPO_ROOT / "plugins/codex/plugins" / plugin_name / ".codex-plugin/plugin.json").read_text(
                     encoding="utf-8"
                 )
             )
-            versions.add(plugin_json["version"])
-        self.assertEqual(versions, {"4.4.2"})
+            self.assertEqual(plugin_json["version"], plugin_versions[plugin_name])
 
         maturity_text = (REPO_ROOT / "docs/PLUGIN_MATURITY.md").read_text(encoding="utf-8")
         maturity_rows = re.findall(r"^\| `([^`]+)` \| `([^`]+)`", maturity_text, flags=re.MULTILINE)
         self.assertEqual({name for name, _ in maturity_rows}, set(CENTRAL_PLUGIN_NAMES))
         for _, maturity in maturity_rows:
-            self.assertFalse(SEMVER_RE.match(maturity), maturity)
+            self.assertFalse(REPOSITORY_SEMVER_RE.match(maturity), maturity)
+            self.assertFalse(PLUGIN_VERSION_RE.match(maturity), maturity)
+
+    def test_plugin_changelogs_match_marketplace_set_and_versions(self) -> None:
+        config = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        plugin_versions = {plugin["name"]: plugin["version"] for plugin in config["plugins"]}
+        changelog_root = REPO_ROOT / "docs/plugin-changelogs"
+        changelog_names = {path.stem for path in changelog_root.glob("*.md") if path.name != "README.md"}
+        todo_names = {path.stem for path in (REPO_ROOT / "docs/plugin-todos").glob("*.md") if path.name != "README.md"}
+        self.assertEqual(changelog_names, set(CENTRAL_PLUGIN_NAMES))
+        self.assertEqual(todo_names, set(CENTRAL_PLUGIN_NAMES))
+        self.assertEqual(changelog_names, set(plugin_versions))
+
+        index = (changelog_root / "README.md").read_text(encoding="utf-8")
+        self.assertIn("Independent plugin versioning starts at `0.1`", index)
+        for plugin_name, version in plugin_versions.items():
+            text = (changelog_root / f"{plugin_name}.md").read_text(encoding="utf-8")
+            latest = re.search(r"^## ([0-9]+\.[0-9]+)\b", text, flags=re.MULTILINE)
+            self.assertIsNotNone(latest, plugin_name)
+            self.assertEqual(latest.group(1), version)
+            self.assertIn("Earlier `4.x` values were legacy lockstep release metadata", text)
+
+    def test_readme_release_dashboard_matches_sources(self) -> None:
+        config = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        plugin_versions = {plugin["name"]: plugin["version"] for plugin in config["plugins"]}
+        maturity_text = (REPO_ROOT / "docs/PLUGIN_MATURITY.md").read_text(encoding="utf-8")
+        maturity = dict(re.findall(r"^\| `([^`]+)` \| `([^`]+)`", maturity_text, flags=re.MULTILINE))
+        readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("Repository / CLI release: `5.0.0`", readme)
+        for plugin_name in CENTRAL_PLUGIN_NAMES:
+            row = re.search(
+                rf"^\| `{re.escape(plugin_name)}` \| `([^`]+)` \| `([^`]+)` \| .*docs/plugin-changelogs/{re.escape(plugin_name)}\.md",
+                readme,
+                flags=re.MULTILINE,
+            )
+            self.assertIsNotNone(row, plugin_name)
+            self.assertEqual(row.group(1), plugin_versions[plugin_name])
+            self.assertEqual(row.group(2), maturity[plugin_name])
 
     def test_generated_layer_matches_source_config(self) -> None:
         summary, differences = build.check_layer()
@@ -335,7 +376,7 @@ class CodexMarketplaceTests(unittest.TestCase):
             root = Path(tmp)
             write_skill(root, "skills/a/one", "one")
             write_config(root, [plugin("p", [{"type": "copy", "source": "skills/a/one"}], version="v1")])
-            with patched_build_root(root), self.assertRaisesRegex(build.BuildError, "semantic version"):
+            with patched_build_root(root), self.assertRaisesRegex(build.BuildError, "two-part plugin release version"):
                 build.generate_layer(root / "out")
 
     def test_placeholder_word_is_not_rewritten(self) -> None:

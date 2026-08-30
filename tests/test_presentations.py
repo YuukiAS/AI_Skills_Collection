@@ -20,9 +20,288 @@ import markdown_to_deck_plan  # noqa: E402
 import validate_deck_plan  # noqa: E402
 import generate_cuhk_scientific_layout_stage3 as stage3  # noqa: E402
 import generate_research_presentation_production_entry as production_entry  # noqa: E402
+import validate_research_presentation_production_entry as production_validator  # noqa: E402
 import deck_quality_loop  # noqa: E402
 import scientific_object_semantics  # noqa: E402
 import select_gold_compositions  # noqa: E402
+
+
+HEX64 = "a" * 64
+
+
+def write_synthetic_production_contract(out_dir: Path, workstreams: list[dict]) -> None:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    tex_path = out_dir / "main.tex"
+    tex_path.write_text(
+        "\\documentclass{beamer}\n"
+        "\\usetheme{sintef}\n"
+        "\\titlebackground*{assets/background}\n"
+        "\\input{scientific_layouts.tex}\n"
+        "\\begin{document}\n"
+        "\\end{document}\n",
+        encoding="utf-8",
+    )
+    slides: list[dict] = []
+    fidelity_pages: list[dict] = []
+    trace_slides: list[dict] = []
+    assignments: list[dict] = []
+    sequence_pages: list[dict] = []
+    workstream_records: list[dict] = []
+    storyline_order: list[str] = []
+    order = 0
+    for workstream_order, stream in enumerate(workstreams, start=1):
+        workstream_id = stream["id"]
+        workstream_records.append(
+            {
+                "workstream_id": workstream_id,
+                "label": stream["label"],
+                "scope": stream["scope"],
+                "first_source_order": order + 1,
+                "page_jobs": [page["page_id"] for page in stream["pages"]],
+                "workstream_order": workstream_order,
+                "source_supported_cross_workstream_relation_to_previous": None if workstream_order == 1 else False,
+                "transition_label": stream["label"],
+                "relation_to_previous": None if workstream_order == 1 else "no source-supported causal bridge is asserted",
+            }
+        )
+        for page in stream["pages"]:
+            order += 1
+            page_id = page["page_id"]
+            page_job = page["page_job"]
+            storyline_order.append(page_job)
+            slides.append(
+                {
+                    "id": f"s{order:02d}",
+                    "page_id": page_id,
+                    "page_function": page_job,
+                    "title": page["title"],
+                    "key_message": "Source-grounded synthetic message.",
+                    "source_evidence_ids": [f"EV-{order:03d}"],
+                    "source_anchors": ["synthetic-source.md#anchor"],
+                }
+            )
+            fidelity_pages.append(
+                {
+                    "page_id": page_id,
+                    "page_job": page_job,
+                    "source_evidence_ids": [f"EV-{order:03d}"],
+                    "anchors": [
+                        {
+                            "evidence_id": f"EV-{order:03d}",
+                            "source_path": "synthetic-source.md",
+                            "source_anchor": f"## {page['title']}",
+                            "claim_supported": "Synthetic public-safe claim.",
+                            "consumed_as": "production content",
+                        }
+                    ],
+                    "generated_object_ids": [f"{page_id}_primary"],
+                    "selected_gold_id": f"GSC-{order:03d}",
+                    "source_recipe_fields_consumed": ["primary_bbox", "reading_flow"],
+                }
+            )
+            trace_slides.append(
+                {
+                    "page_id": page_id,
+                    "page_job": page_job,
+                    "normal_selector_matches": [{"gold_id": f"GSC-{order:03d}", "score": 10}],
+                    "selected_gold_id": f"GSC-{order:03d}",
+                    "selected_reference_id": f"RRL-{order:03d}",
+                    "source_derived_composition_fields_consumed": ["primary_bbox", "reading_flow"],
+                    "benchmark_helper_orchestration_surface_used": False,
+                    "force_gold_id_used": False,
+                    "score_override_used": False,
+                }
+            )
+            assignments.append(
+                {
+                    "page_id": page_id,
+                    "page_job": page_job,
+                    "original_order": order,
+                    "workstream_id": workstream_id,
+                    "workstream_label": stream["label"],
+                    "workstream_scope": stream["scope"],
+                    "assignment_basis": ["explicit source workstream metadata"],
+                    "storyline_order": order,
+                    "workstream_order": workstream_order,
+                }
+            )
+            sequence_pages.append(
+                {
+                    "logical_id": page_id,
+                    "page_id": page_id,
+                    "page_job": page_job,
+                    "title": page["title"],
+                    "workstream_id": workstream_id,
+                    "workstream_label": stream["label"],
+                    "workstream_order": workstream_order,
+                    "rendered_page_sha256": None,
+                    "rendered_page_path": None,
+                    "rendered_pixel_status": "UNAVAILABLE_RENDER_NOT_OK",
+                }
+            )
+
+    (out_dir / "BUILD_MANIFEST.json").write_text(
+        json.dumps(
+            {
+                "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1",
+                "task_key": "031_research_presentation_one_call_production_entry",
+                "storyline_trace": str(out_dir / "storyline_trace.json"),
+                "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
+                "render_input_identity_sha256": HEX64,
+                "render_input_identity": {"schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1", "sha256": HEX64},
+                "quality_loop_handoff": {"status": "WAITING_FOR_DECK_VISUAL_REVIEW"},
+                "stage4_boundary": "Stage 4 PASS is not claimed by this synthetic validator fixture.",
+                "render_status": {"status": "failed", "png_count": 0},
+                "tex": str(tex_path),
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (out_dir / "deck_plan.json").write_text(
+        json.dumps(
+            {
+                "metadata": {
+                    "production_entry": "research-presentations one-call production",
+                    "output": "tex",
+                    "title": "Synthetic Research Update",
+                    "subtitle": "Public-safe contract sample",
+                },
+                "slides": slides,
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (out_dir / "source_fidelity_map.json").write_text(
+        json.dumps(
+            {
+                "schema": "RESEARCH_PRESENTATION_SOURCE_FIDELITY_MAP_V1",
+                "stage5_holdout_eligible": False,
+                "pages": fidelity_pages,
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (out_dir / "runtime_trace.json").write_text(
+        json.dumps(
+            {
+                "schema": "RESEARCH_PRESENTATION_PRODUCTION_TRACE_V1",
+                "task_key": "031_research_presentation_one_call_production_entry",
+                "entrypoint": "research-presentations one-call production",
+                "benchmark_generators_called_as_entrypoint": [],
+                "slides": trace_slides,
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (out_dir / "storyline_trace.json").write_text(
+        json.dumps(
+            {
+                "schema": "RESEARCH_PRESENTATION_STORYLINE_TRACE_V1",
+                "storyline_order": storyline_order,
+                "workstreams": workstream_records,
+                "page_assignments": assignments,
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (out_dir / "deck_sequence_summary.json").write_text(
+        json.dumps(
+            {
+                "schema": "RESEARCH_PRESENTATION_DECK_SEQUENCE_SUMMARY_V1",
+                "page_count": len(trace_slides),
+                "page_order": [page["page_id"] for page in trace_slides],
+                "pages": sequence_pages,
+                "title_sequence": [page["title"] for page in slides],
+                "workstream_sequence": [item["workstream_id"] for item in assignments],
+                "storyline_order": storyline_order,
+                "deck_identity_sha256": HEX64,
+                "render_input_identity_sha256": HEX64,
+                "render_input_manifest": {
+                    "schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1",
+                    "sha256": HEX64,
+                    "files": [
+                        {"role": "main_tex", "path": str(tex_path), "sha256": HEX64},
+                        {"role": "scientific_layout_include", "path": str(out_dir / "scientific_layouts.tex"), "sha256": HEX64},
+                        {"role": "copied_scientific_asset", "path": str(out_dir / "asset.png"), "sha256": HEX64},
+                    ],
+                },
+                "pixel_evidence_status": {"status": "UNAVAILABLE_RENDER_NOT_OK"},
+                "rendered_pixel_identity_sha256": None,
+                "deck_contact_sheet": {"path": None, "sha256": None},
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (out_dir / "quality_loop_state.json").write_text(
+        json.dumps(
+            {
+                "schema": "RESEARCH_PRESENTATION_DECK_QUALITY_LOOP_STATE_V1",
+                "max_repair_cycles": 1,
+                "repair_cycle_count": 0,
+                "render_identity_kind": "render_input_identity_sha256",
+                "initial_render_input_identity": HEX64,
+                "initial_render_identity": HEX64,
+                "initial_render_input_manifest": {"sha256": HEX64},
+                "final_decision": "WAITING_FOR_DECK_VISUAL_REVIEW",
+                "selected_repair_directives": [],
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (out_dir / "resolved_layouts.json").write_text(
+        json.dumps(
+            {
+                "schema": "RESEARCH_PRESENTATION_PRODUCTION_RESOLVED_LAYOUTS_V1",
+                "layouts": [
+                    {"page_id": slide["page_id"], "page_job": slide["page_job"], "content_capacity_check": {"status": "FIT"}}
+                    for slide in trace_slides
+                ],
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (out_dir / "dependency_probe.json").write_text(json.dumps({"schema": "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1"}) + "\n", encoding="utf-8")
+    (out_dir / "render_chinese_math_pdf_probe.json").write_text(json.dumps({"schema": "RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1", "status": "ok"}) + "\n", encoding="utf-8")
+    (out_dir / "visual_inputs.json").write_text(
+        json.dumps(
+            {
+                "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+                "task_key": "031_research_presentation_one_call_production_entry",
+                "rubric": {
+                    "instructions": "source-specific content; exact CUHK; internal RRL/GSC/SRC; coherent research update; deck_contact_sheet; top-level package PASS is not enough"
+                },
+                "identity_bindings": {
+                    "deck_sequence_summary": str(out_dir / "deck_sequence_summary.json"),
+                    "deck_sequence_summary_sha256": HEX64,
+                    "quality_loop_state": str(out_dir / "quality_loop_state.json"),
+                    "quality_loop_state_sha256": HEX64,
+                    "deck_identity_sha256": HEX64,
+                    "render_input_identity_sha256": HEX64,
+                    "rendered_pixel_identity_sha256": None,
+                },
+                "inputs": [],
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
 
 
 class PresentationSharedTests(unittest.TestCase):
@@ -874,6 +1153,128 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertNotEqual(strict.returncode, 0)
                 self.assertIn(manifest["render_status"]["status"], strict.stderr + strict.stdout)
                 self.assertNotEqual(manifest["mechanical_qa"]["status"], "MECHANICAL_PASS")
+
+    def test_production_validator_accepts_generic_source_declared_storylines(self) -> None:
+        cases = [
+            [
+                {
+                    "id": "statistical_modeling",
+                    "label": "Synthetic statistical modeling",
+                    "scope": "model and result",
+                    "pages": [
+                        {"page_id": "model", "page_job": "STATISTICAL_MODEL", "title": "Model object"},
+                        {"page_id": "result", "page_job": "RESULT_FIGURE", "title": "Result evidence"},
+                    ],
+                }
+            ],
+            [
+                {
+                    "id": "medical_process",
+                    "label": "Synthetic medical process",
+                    "scope": "medical process and result",
+                    "pages": [
+                        {"page_id": "process", "page_job": "METHOD_DIAGRAM", "title": "Process map"},
+                        {"page_id": "comparison", "page_job": "MEDICAL_IMAGE_COMPARISON", "title": "Image comparison"},
+                        {"page_id": "outcome", "page_job": "RESULT_FIGURE", "title": "Outcome result"},
+                    ],
+                }
+            ],
+            [
+                {
+                    "id": "material_screen",
+                    "label": "Synthetic material screen",
+                    "scope": "assay and ranking",
+                    "pages": [
+                        {"page_id": "assay", "page_job": "METHOD_DIAGRAM", "title": "Assay setup"},
+                        {"page_id": "ranking", "page_job": "RESULT_FIGURE", "title": "Ranking result"},
+                    ],
+                },
+                {
+                    "id": "optimizer_audit",
+                    "label": "Synthetic optimizer audit",
+                    "scope": "search trace and failure analysis",
+                    "pages": [
+                        {"page_id": "search", "page_job": "ALGORITHM_TRACE", "title": "Search trace"},
+                        {"page_id": "failure", "page_job": "NEGATIVE_RESULT", "title": "Failure analysis"},
+                    ],
+                },
+            ],
+        ]
+        for workstreams in cases:
+            with tempfile.TemporaryDirectory() as tmp:
+                out_dir = Path(tmp)
+                write_synthetic_production_contract(out_dir, workstreams)
+                errors = production_validator.validate(out_dir, allow_missing_render=True)
+                self.assertEqual(errors, [])
+
+    def test_production_validator_keeps_strict_generic_gates(self) -> None:
+        base_workstreams = [
+            {
+                "id": "synthetic_statistics",
+                "label": "Synthetic statistics",
+                "scope": "model and result",
+                "pages": [
+                    {"page_id": "model", "page_job": "STATISTICAL_MODEL", "title": "Model object"},
+                    {"page_id": "result", "page_job": "RESULT_FIGURE", "title": "Result evidence"},
+                ],
+            }
+        ]
+
+        def expect_error(mutator, expected: str) -> None:
+            with tempfile.TemporaryDirectory() as tmp:
+                out_dir = Path(tmp)
+                write_synthetic_production_contract(out_dir, copy.deepcopy(base_workstreams))
+                mutator(out_dir)
+                errors = production_validator.validate(out_dir, allow_missing_render=True)
+                self.assertTrue(any(expected in error for error in errors), errors)
+
+        def drop_declared_page(out_dir: Path) -> None:
+            path = out_dir / "source_fidelity_map.json"
+            data = json.loads(path.read_text(encoding="utf-8"))
+            data["pages"] = data["pages"][:-1]
+            path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+        def remove_source_anchor(out_dir: Path) -> None:
+            path = out_dir / "source_fidelity_map.json"
+            data = json.loads(path.read_text(encoding="utf-8"))
+            data["pages"][0]["anchors"] = []
+            path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+        def remove_selector_winner(out_dir: Path) -> None:
+            path = out_dir / "runtime_trace.json"
+            data = json.loads(path.read_text(encoding="utf-8"))
+            data["slides"][0]["normal_selector_matches"] = []
+            path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+        def force_gold(out_dir: Path) -> None:
+            path = out_dir / "runtime_trace.json"
+            data = json.loads(path.read_text(encoding="utf-8"))
+            data["slides"][0]["force_gold_id_used"] = True
+            path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+        def score_override(out_dir: Path) -> None:
+            path = out_dir / "runtime_trace.json"
+            data = json.loads(path.read_text(encoding="utf-8"))
+            data["slides"][0]["score_override_used"] = True
+            path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+        def break_workstream(out_dir: Path) -> None:
+            path = out_dir / "storyline_trace.json"
+            data = json.loads(path.read_text(encoding="utf-8"))
+            data["page_assignments"][0]["workstream_id"] = "missing_stream"
+            path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+        def leak_internal_language(out_dir: Path) -> None:
+            tex = out_dir / "main.tex"
+            tex.write_text(tex.read_text(encoding="utf-8") + "\nworkflow\n", encoding="utf-8")
+
+        expect_error(drop_declared_page, "declared page order mismatch")
+        expect_error(remove_source_anchor, "has no anchors")
+        expect_error(remove_selector_winner, "has no compatible gold selection")
+        expect_error(force_gold, "bypassed normal selector")
+        expect_error(score_override, "bypassed normal selector")
+        expect_error(break_workstream, "references unknown workstream")
+        expect_error(leak_internal_language, "audience-facing TeX leaks workflow")
 
     def test_process_page_projection_scale_is_page_job_generic(self) -> None:
         experiment_spec = {
@@ -2016,7 +2417,14 @@ class PresentationSharedTests(unittest.TestCase):
 
         for required in [
             "## Rule Inheritance",
+            "## Revision Entry Routing",
+            "继续按这些批注返修我现有的组会PPT",
+            "这个版本其他页别动，只修我指出的页面",
+            "保留上轮接受的布局，继续改剩下的问题",
+            "Do not route them to one-call new-deck regeneration",
             "accepted slides/components",
+            "reviewer-seen render baseline",
+            "targeted revision scope",
             "one intellectual job per slide",
             "first-line centered display formula",
             "ports and anchors",

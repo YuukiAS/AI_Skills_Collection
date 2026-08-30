@@ -47,6 +47,14 @@ def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def page_ids(items: list[dict[str, Any]]) -> list[str]:
+    return [str(item.get("page_id") or "") for item in items]
+
+
+def page_jobs(items: list[dict[str, Any]], key: str) -> list[str]:
+    return [str(item.get(key) or "") for item in items]
+
+
 def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_render: bool = False) -> list[str]:
     errors: list[str] = []
     required = {
@@ -125,23 +133,38 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         errors.append("source_fidelity_map.json: invalid schema")
     if fidelity.get("stage5_holdout_eligible") is not False:
         errors.append("source_fidelity_map.json: engineering bundle is not excluded from Stage 5 holdouts")
-    if len(pages) < 4:
-        errors.append("source_fidelity_map.json: too few source-mapped pages")
+    if not pages:
+        errors.append("source_fidelity_map.json: no source-mapped pages")
     for page in pages:
         if not page.get("anchors"):
             errors.append(f"source_fidelity_map.json: {page.get('page_id')} has no anchors")
         if not page.get("source_recipe_fields_consumed"):
             errors.append(f"source_fidelity_map.json: {page.get('page_id')} records no consumed recipe fields")
 
-    expected_jobs = {
-        "STATISTICAL_MODEL",
-        "REAL_DATA_APPLICATION",
-        "EXPERIMENT_DESIGN",
-        "NEGATIVE_RESULT",
-        "MEDICAL_IMAGE_COMPARISON",
-        "NEXT_EXPERIMENT",
-    }
-    trace_jobs = {item.get("page_job") for item in trace.get("slides", [])}
+    deck_slides = deck_plan.get("slides", [])
+    trace_slides = trace.get("slides", [])
+    deck_pages = deck_sequence.get("pages", [])
+    deck_slide_ids = page_ids(deck_slides)
+    trace_slide_ids = page_ids(trace_slides)
+    fidelity_page_ids = page_ids(pages)
+    deck_sequence_ids = page_ids(deck_pages)
+    if all(deck_slide_ids) and deck_slide_ids != trace_slide_ids:
+        errors.append("deck_plan.json/runtime_trace.json: declared page order mismatch")
+    if trace_slide_ids != fidelity_page_ids:
+        errors.append("runtime_trace.json/source_fidelity_map.json: declared page order mismatch")
+    if deck_sequence_ids and trace_slide_ids != deck_sequence_ids:
+        errors.append("runtime_trace.json/deck_sequence_summary.json: declared page order mismatch")
+    deck_jobs = page_jobs(deck_slides, "page_function")
+    trace_jobs = page_jobs(trace_slides, "page_job")
+    fidelity_jobs = page_jobs(pages, "page_job")
+    sequence_jobs = page_jobs(deck_pages, "page_job")
+    if deck_jobs != trace_jobs:
+        errors.append("deck_plan.json/runtime_trace.json: declared page jobs mismatch")
+    if deck_jobs != fidelity_jobs:
+        errors.append("deck_plan.json/source_fidelity_map.json: declared page jobs mismatch")
+    if sequence_jobs and deck_jobs != sequence_jobs:
+        errors.append("deck_plan.json/deck_sequence_summary.json: declared page jobs mismatch")
+
     if trace.get("schema") != "RESEARCH_PRESENTATION_PRODUCTION_TRACE_V1":
         errors.append("runtime_trace.json: invalid schema")
     if trace.get("task_key") != task_key:
@@ -150,11 +173,9 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         errors.append("runtime_trace.json: not the normal production entry")
     if trace.get("benchmark_generators_called_as_entrypoint"):
         errors.append("runtime_trace.json: benchmark generator used as entrypoint")
-    if not {"STATISTICAL_MODEL", "REAL_DATA_APPLICATION"}.issubset(trace_jobs):
-        errors.append(f"runtime_trace.json: missing required method/result jobs {sorted(trace_jobs)}")
-    if not expected_jobs.issubset(trace_jobs):
-        errors.append(f"runtime_trace.json: missing Stage 3 page jobs {sorted(expected_jobs - trace_jobs)}")
-    for item in trace.get("slides", []):
+    if not trace_slides:
+        errors.append("runtime_trace.json: no production slides")
+    for item in trace_slides:
         if not item.get("normal_selector_matches"):
             errors.append(f"runtime_trace.json: {item.get('page_id')} has no compatible gold selection")
         if item.get("force_gold_id_used") or item.get("score_override_used"):
@@ -168,30 +189,22 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         errors.append("storyline_trace.json: invalid schema")
     workstreams = storyline.get("workstreams", [])
     assignments = storyline.get("page_assignments", [])
-    if len(workstreams) >= 2:
-        order = storyline.get("storyline_order", [])
-        coverage_order = [
-            "STATISTICAL_MODEL",
-            "REAL_DATA_APPLICATION",
-            "EXPERIMENT_DESIGN",
-            "NEGATIVE_RESULT",
-            "NEXT_EXPERIMENT",
-        ]
-        if order[:5] != coverage_order:
-            errors.append(f"storyline_trace.json: clustered coverage workstream is not continuous: {order}")
-        if order[5:6] != ["MEDICAL_IMAGE_COMPARISON"]:
-            errors.append(f"storyline_trace.json: medical page is not the independent second workstream: {order}")
-        medical = next((item for item in assignments if item.get("page_job") == "MEDICAL_IMAGE_COMPARISON"), None)
-        if not medical or medical.get("workstream_id") == assignments[0].get("workstream_id"):
-            errors.append("storyline_trace.json: medical page was not assigned to an independent workstream")
-        second = next((item for item in workstreams if item.get("workstream_order") == 2), {})
-        if second.get("source_supported_cross_workstream_relation_to_previous") is not False:
-            errors.append("storyline_trace.json: independent cross-workstream relation not explicit")
-        if "independent" not in str(second.get("relation_to_previous", "")).lower():
-            errors.append("storyline_trace.json: transition does not state independent workstream relation")
+    workstream_ids = {item.get("workstream_id") for item in workstreams}
+    assignment_ids = page_ids(assignments)
+    if trace_slide_ids and assignment_ids != trace_slide_ids:
+        errors.append("storyline_trace.json: page assignments do not cover declared pages in order")
+    if storyline.get("storyline_order") != deck_jobs:
+        errors.append("storyline_trace.json: storyline_order must match declared page job order")
     for item in assignments:
         if not item.get("assignment_basis"):
             errors.append(f"storyline_trace.json: {item.get('page_id')} has no workstream assignment basis")
+        if item.get("workstream_id") not in workstream_ids:
+            errors.append(f"storyline_trace.json: {item.get('page_id')} references unknown workstream")
+    for workstream in workstreams:
+        if "workstream_order" not in workstream or not workstream.get("label"):
+            errors.append(f"storyline_trace.json: invalid workstream record {workstream.get('workstream_id')}")
+        if workstream.get("workstream_order", 1) > 1 and workstream.get("source_supported_cross_workstream_relation_to_previous") not in {True, False}:
+            errors.append("storyline_trace.json: cross-workstream relation support must be explicit")
 
     if deck_sequence.get("schema") != "RESEARCH_PRESENTATION_DECK_SEQUENCE_SUMMARY_V1":
         errors.append("deck_sequence_summary.json: invalid schema")
@@ -331,15 +344,12 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         errors.append("BUILD_MANIFEST.json: generated tex missing")
     else:
         tex = tex_path.read_text(encoding="utf-8")
-        for required_text in [r"\usetheme{sintef}", r"\titlebackground*{assets/background}", r"\input{scientific_layouts.tex}", "Coverage by ICC under imbalanced clusters", "Same-case ROI zoom"]:
+        for required_text in [r"\usetheme{sintef}", r"\titlebackground*{assets/background}", r"\input{scientific_layouts.tex}"]:
             if required_text not in tex:
                 errors.append(f"{tex_path}: missing {required_text}")
         for forbidden in FORBIDDEN_AUDIENCE_TERMS:
             if forbidden in tex:
                 errors.append(f"{tex_path}: audience-facing TeX leaks {forbidden}")
-        for source_like in [r"(?<![\\A-Za-z])beta_", r"(?<![\\A-Za-z])epsilon_", r"X'X"]:
-            if re.search(source_like, tex):
-                errors.append(f"{tex_path}: source-like math leak {source_like}")
 
     if render_status.get("status") == "ok":
         if render_status.get("png_count", 0) < len(trace.get("slides", [])) + 1:

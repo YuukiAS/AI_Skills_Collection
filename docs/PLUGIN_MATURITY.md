@@ -1,6 +1,6 @@
 # Plugin Capability Status
 
-本文件记录 **可选的能力状态说明**，不替代 repository release SemVer，也不替代每个 plugin 自己的 SemVer。
+本文件记录 **可选的能力状态说明**，不替代 repository release version，也不替代每个 plugin 自己的 two-part release version。
 
 长期主线是：
 
@@ -42,4 +42,4 @@ Status 只能由真实任务、真实 artifact/render 和用户验收改变。Sy
 - `alpha -> stable`：多个独立真实任务长期稳定；相同基础问题不再反复出现；用户愿意把它当成默认长期工具。
 - 允许降级：真实 production 暴露系统性 regression 时，应记录 blocker 或降低 status，而不是拿旧 PASS 维持标签。
 
-Status 改变本身不要求 plugin version bump；只有 runtime/user-visible behavior 真的改变时才按 `docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md` bump SemVer。
+Status 改变本身不要求 plugin version bump；只有形成正式 user-facing improvement release 时才按 `docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md` 推进两段 plugin version。
