@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: true
 secrets_needed:
-last_reviewed: 2026-07-13
+last_reviewed: 2026-08-30
 profile_tags:
   - ai-skills-maintainer
 recommended_scope: project
@@ -22,7 +22,7 @@ Use this skill only for maintaining `AI_Skills_Collection`. Do not use it for or
 
 ## Boundary
 
-- Maintain source skills, profiles, README, registry, catalog, provenance, icon metadata, and Codex App marketplace publication.
+- Maintain source skills, profiles, README, registry, catalog, provenance, icon metadata, plugin versions/changelogs, and Codex App marketplace publication.
 - Do not duplicate OpenAI system skills such as `skill-creator`, `skill-installer`, or `plugin-creator`.
 - Do not use this as a domain skill. Frontend taste, PPT planning, bioinformatics retrieval, writing, and statistics live in their own plugins or official capabilities.
 - Treat `.agents/plugins/marketplace.json` and `plugins/codex/plugins/` as generated output.
@@ -46,6 +46,7 @@ When maintenance originates from a real project TODO, user artifact feedback, re
 
 ```text
 docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md
+docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md
 docs/PLUGIN_MATURITY.md
 docs/plugin-todos/README.md
 docs/plugin-todos/<target-plugin>.md
@@ -59,8 +60,11 @@ Then apply these rules:
 - Prefer modifying an existing routing/reasoning/rendering/QA/writing/distribution layer over creating another skill/schema/state.
 - After promotion, replay the original real failure and run an unrelated regression. Synthetic checks alone do not prove maturity.
 - Reviewed Handoff refinement should be bounded and batch-based. Do not keep a watcher alive to invent new work after the real blocker is closed.
-- Release SemVer and capability maturity are separate; do not change package versions merely to express alpha/beta/stable maturity.
-- Maintenance-only TODO/provenance files must not be copied into generated user-facing plugin payload unless they are intentionally promoted runtime references.
+- Repository release SemVer, individual plugin SemVer, and capability maturity are separate. Do not change package/plugin versions merely to express alpha/beta/stable maturity.
+- Only bump plugins whose runtime payload or normal user-visible behavior actually changes. Shared-runtime changes bump all and only the plugins truly affected; do not mechanically bump all ten.
+- Every central plugin must have one source-only `docs/plugin-changelogs/<plugin>.md`; update the affected plugin changelog when a release changes that plugin.
+- Root `CHANGELOG.md` summarizes the repository release and affected plugin old -> new versions; it does not replace per-plugin changelogs.
+- Maintenance-only TODO/changelog/provenance files must not be copied into generated user-facing plugin payload unless they are intentionally promoted runtime references.
 
 ## Validation
 
