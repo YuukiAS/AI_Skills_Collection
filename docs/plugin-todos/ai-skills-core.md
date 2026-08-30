@@ -4,35 +4,36 @@ Canonical maintenance inbox for the `ai-skills-core` plugin and repository-maint
 
 ## Open candidates
 
-### Make release version source of truth consistent
+### Establish independent plugin SemVer and per-plugin changelogs
 status: PROMOTE_NOW
-source: current main audit
-evidence: README / registry / marketplace config report `4.4.1`, while `setup.py` still reports `4.4.0` and CHANGELOG latest formal section is `4.3.0`
+source: long-term real-world maintenance redesign + user requirement on 2026-08-30
+evidence: `docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md`; current `scripts/codex_marketplace_config.json` already carries one version per plugin, but all ten are still lockstep and root CHANGELOG is the only release history
 target layer: distribution
-problem: repository, CLI package, generated registry/marketplace and changelog can disagree about the installed release.
-candidate action: choose one canonical release version source, synchronize package/config/generated layers through existing build scripts, and document the rule.
-promotion gate: version-consistency regression + real install/upgrade smoke.
+problem: repository release, plugin release, and capability maturity are still too easy to conflate; lockstep plugin bumps obscure which capability actually changed and make long-term release history hard to audit.
+candidate action: add one repository/CLI version source of truth, allow independent plugin SemVer from the existing marketplace config, create `docs/plugin-changelogs/<plugin>.md` for all ten central plugins, show plugin version + maturity in README, and add consistency regressions. Treat `4.4.2` as the common baseline and do not invent pre-baseline per-plugin history.
+promotion gate: version/changelog/README/generated-payload consistency tests + real plugin install smoke; maintenance changelogs remain source-only.
 
-### Separate release SemVer from capability maturity
-status: PROMOTE_NOW
+## Recently promoted / established
+
+### Repository release version consistency
+status: PROMOTED
+source: 4.4.2 baseline stabilization
+evidence: `CHANGELOG.md` 4.4.2, `setup.py`, `registry.json`, `scripts/codex_marketplace_config.json`, README and generated plugin metadata are aligned on 4.4.2; regression exists in `tests/test_codex_marketplace.py`.
+
+### Release SemVer is separate from capability maturity
+status: PROMOTED
 source: long-term maintenance redesign
-evidence: `docs/PLUGIN_MATURITY.md`
-target layer: distribution
-problem: a repo version such as `4.4.1` is currently easy to misread as meaning every plugin is mature/stable.
-candidate action: keep SemVer for repository/Marketplace releases; maintain capability maturity separately and only promote it from real-task evidence.
-promotion gate: docs/README/maintainer workflow agree; no new competing version scheme.
+evidence: `docs/PLUGIN_MATURITY.md`, `docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md`, README.
 
-### Per-plugin TODO inboxes become the only central backlog entry
-status: PROMOTE_NOW
-source: current Presentation TODO sprawl
-evidence: `docs/plugin-todos/`
-target layer: distribution
-problem: project TODOs can leak into active skill payload or be duplicated across plugins.
-candidate action: route all long-term backlog to one source-only file per central plugin; detailed project evidence stays in provenance/project repo.
-promotion gate: maintainer and Planner read the target plugin TODO before bounded refinement; generated marketplace payload excludes maintenance-only inboxes.
+### One source-only TODO inbox per central plugin
+status: PROMOTED
+source: 4.4.2 maintenance consolidation
+evidence: `docs/plugin-todos/` contains exactly one inbox for each central Marketplace plugin; regression protects set equality and generated payload exclusion.
 
 ## Do not do
 
 - Do not create new top-level plugins to organize TODOs.
 - Do not hand-edit generated marketplace/plugin layers.
 - Do not turn maturity labels into another package version.
+- Do not bump all ten plugin versions merely because the repository released a new patch.
+- Do not fabricate detailed per-plugin changelog history before the 4.4.2 independent-tracking baseline.
