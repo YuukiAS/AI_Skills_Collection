@@ -40,6 +40,28 @@ Use this skill only for maintaining `AI_Skills_Collection`. Do not use it for or
 8. Commit after validation, then reconcile external trackers only if the user requested it. If the user has already updated Notion `Utilized`, do not call the Notion connector again.
 9. Report generated-layer changes separately from source-layer changes.
 
+## Continuous real-world refinement
+
+When maintenance originates from a real project TODO, user artifact feedback, repeated production failure, or a request to improve an existing plugin over time, first read:
+
+```text
+docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md
+docs/PLUGIN_MATURITY.md
+docs/plugin-todos/README.md
+docs/plugin-todos/<target-plugin>.md
+```
+
+Then apply these rules:
+
+- Treat the plugin TODO as a source-only maintenance inbox, not runtime instructions.
+- Keep detailed project-specific evidence in the project repo or `docs/provenance/`; only the abstract generic candidate belongs in the plugin TODO.
+- Do not promote every TODO into `SKILL.md`. Freeze a promotion decision, target layer, boundary, real evidence, user-facing effect, and regression first.
+- Prefer modifying an existing routing/reasoning/rendering/QA/writing/distribution layer over creating another skill/schema/state.
+- After promotion, replay the original real failure and run an unrelated regression. Synthetic checks alone do not prove maturity.
+- Reviewed Handoff refinement should be bounded and batch-based. Do not keep a watcher alive to invent new work after the real blocker is closed.
+- Release SemVer and capability maturity are separate; do not change package versions merely to express alpha/beta/stable maturity.
+- Maintenance-only TODO/provenance files must not be copied into generated user-facing plugin payload unless they are intentionally promoted runtime references.
+
 ## Validation
 
 Run the narrowest useful checks first, then the full gate before delivery:

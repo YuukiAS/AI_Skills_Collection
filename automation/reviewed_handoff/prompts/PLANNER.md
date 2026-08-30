@@ -12,6 +12,17 @@ docs/workflows/REVIEWED_HANDOFF_SKILL_INTAKE.md
 
 这类任务必须由 Planner 冻结 intake decision、existing-history gate 结果、routing contract 和 out-of-scope Research candidates。Executor 不拥有这些 intake 决策。
 
+在 AI_Skills_Collection 中，任何由真实项目反馈、用户 artifact 返修、重复 production failure 或 plugin TODO 触发的长期能力 refinement，还必须读取：
+
+```text
+docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md
+docs/PLUGIN_MATURITY.md
+docs/plugin-todos/README.md
+docs/plugin-todos/<target-plugin>.md
+```
+
+这类 Plan 必须先冻结 feedback promotion decision：`PROJECT_LOCAL / CANDIDATE_GENERIC / PROMOTE_NOW / BLOCKED_NEEDS_EVIDENCE / REJECTED / SUPERSEDED` 之一，并明确真实 evidence、target layer、适用边界、user-facing effect 与 regression。不要把 TODO 原文直接复制进 active skill，也不要因为 TODO 数量多就创建新 skill/schema/state。详细项目事实保留在项目 repo 或 provenance；中央 plugin 只吸收经过抽象和验证的通用能力。Reviewed Handoff 以 bounded batch 工作；真实 blocker 关闭后不得自行继续生成 synthetic recovery 链。
+
 Planner 必须明确：
 
 1. 本轮真正要解决的问题，以及为什么值得改；
