@@ -2,7 +2,7 @@
 
 本文件定义 `AI_Skills_Collection` 的长期维护方式。仓库不再以“做完一轮审计/benchmark 即结束”为目标，而是持续从真实科研、写作、Presentation、统计、医学影像、HPC 与工程任务中吸收用户反馈，并把真正可泛化的经验沉淀为稳定能力。
 
-核心原则：**真实任务先于 synthetic benchmark；TODO 是证据入口，不是 active rule；promotion 必须有边界、有回归、有真实 user-facing effect。**
+核心原则：**真实任务先于 synthetic benchmark；TODO 是证据入口，不是 active rule；项目 thread 记录事实，AI_Skills Planner 负责提炼；promotion 必须有边界、有回归、有真实 user-facing effect。**
 
 ## 1. Source of truth 优先级
 
@@ -26,14 +26,67 @@ docs/plugin-todos/
 
 每个 plugin 一个文件。这里是 **source-only maintenance inbox**，不进入生成后的 Codex plugin payload，不作为普通用户运行时上下文。
 
-真实项目可以有自己的详细 review / provenance 文档，但跨项目候选最终必须归并到对应 plugin TODO；不要继续在 active skill 目录中新增 `TODO_<PROJECT>_V2/V3/...` 文件。
+真实项目可以有自己的详细 review /记录文档，但跨项目候选最终必须归并到对应 plugin TODO；不要继续在 active skill 目录中新增 `TODO_<PROJECT>_V2/V3/...` 文件。
+
+### 2.1 谁记录，谁提炼
+
+长期流程分成两个明确角色。
+
+#### 真实项目 thread / 项目 Codex：记录事实
+
+项目 thread 的首要任务始终是把真实项目做好，而不是维护中央技能库。
+
+当用户在 CAT-TRACE、CARE、Distributed Imaging、Asteria 或其他项目里指出问题时，项目 thread 应在**该项目已经存在的** TODO、review、RESULT、revision note 或等价记录中保存：
+
+- 用户实际指出了什么；
+- 对应哪个 artifact / 页面 / 组件 / 输出；
+- 用户看到的是哪个真实 render/result；
+- 哪些内容已经接受，不能因局部返修被重新改坏；
+- 哪些决定明显只属于当前项目的科学内容、模板或叙事。
+
+项目 thread 可以附一个很短的 `AI_Skills feedback handoff`，内容只需要：
+
+```text
+candidate plugin: <可能相关的 plugin>
+raw problem: <真实问题，不先抽象成规则>
+evidence: <项目里的 artifact / render / review 位置>
+project-only boundary: <明显只属于当前项目的部分>
+```
+
+这个 handoff 是给中央 Planner 的材料，不是中央 TODO，也不是新 schema。不要为了它给所有项目新建统一目录。
+
+项目 thread **不负责最终判断**“这是不是通用规则”，也不应直接把类似“P9 两栏不齐”改写成“所有科研 PPT 两栏必须等高”后塞进中央 plugin。
+
+#### AI_Skills Planner / maintainer：负责提炼和去重
+
+只有进入 AI_Skills 的明确 triage 步骤后，Planner 才负责更新 canonical plugin TODO。
+
+Planner 必须先读取：
+
+1. 项目 thread 的真实反馈与 artifact；
+2. `docs/plugin-todos/<plugin>.md`；
+3. 当前 active skill / reference / QA / runtime；
+4. 其他真实项目是否已经出现同类问题。
+
+然后只允许以下结果之一：
+
+- **active rule 已存在但真实输出仍失败**：这是 production regression。补充真实失败证据，检查实际 consumer/runtime；不要再写一个同义“新规则”。
+- **已有 TODO**：把新的独立项目证据合并到原 TODO；不要复制一条近义项。
+- **PROJECT_LOCAL**：问题只属于当前项目，留在项目 repo；中央 TODO 不保存项目科学决定。
+- **CANDIDATE_GENERIC**：新的跨项目候选，由 Planner 抽象成最小通用问题，并写清边界。
+- **PROMOTE_NOW**：已经满足 promotion gate，才允许进入 bounded implementation。
+- **SUPERSEDED / REJECTED**：已有更强规则覆盖或方向不成立，不继续堆积。
+
+如果一个问题同时涉及多个 plugin，指定一个 owner plugin；其他 plugin TODO 只做短引用，不维护两份正文。
+
+**Executor 可以提出解释，但不拥有 genericity / promotion 的最终决定。** Planner 不能把“请 Codex 判断是否通用”留给执行阶段。
 
 ## 3. Feedback lifecycle
 
-每条真实反馈只能处于以下一种维护状态：
+每条进入中央维护流程的真实反馈只能处于以下一种维护状态：
 
-- `NEW`：刚记录，尚未判断是否通用；
-- `PROJECT_LOCAL`：只属于当前项目/模板/科学语义，不进入中央 plugin；
+- `NEW`：Planner 已收到材料，但尚未完成判断；
+- `PROJECT_LOCAL`：只属于当前项目/模板/科学语义，不进入中央 active capability；
 - `CANDIDATE_GENERIC`：可能跨项目复用，但还未达到 promotion gate；
 - `PROMOTE_NOW`：证据足够，可进入 bounded Reviewed Handoff；
 - `PROMOTED`：已进入 active skill/shared runtime/QA/profile，并有 regression；
@@ -66,7 +119,7 @@ Promotion 时必须同时冻结：
 
 项目经验不能直接复制进中央插件。
 
-例如某个 TRACE 页面出现“两栏 block 高度不一致”，不能直接写成“所有两栏必须等高”。Planner 需要先判断：
+例如某个 TRACE 页面出现“两栏 block 高度不一致”，项目 thread 只需要记录这个真实失败。中央 Planner 再判断：
 
 - 是否只是该项目的页面选择；
 - 是否是通用 peer-level comparison rule；
@@ -75,7 +128,7 @@ Promotion 时必须同时冻结：
 - 是否仅需要 QA；
 - 是否与现有规则重复。
 
-中央 plugin 只保留抽象后的最小通用能力；项目科学事实、页码、论文名、数据集名、特定 theorem 名称继续留在项目或 provenance。
+中央 plugin 只保留抽象后的最小通用能力；项目科学事实、页码、论文名、数据集名、特定 theorem 名称继续留在项目记录或 `docs/provenance/`。
 
 ## 6. 六个稳定层
 
@@ -95,10 +148,12 @@ Promotion 时必须同时冻结：
 Reviewed Handoff 保留，但采用 **bounded batch**，不常驻寻找任务：
 
 ```text
-真实项目使用
--> 用户反馈
--> 写入 plugin TODO / provenance
--> Planner triage
+真实项目使用 plugin
+-> 用户对真实 artifact 给反馈
+-> 项目 thread 记录原始问题 + AI_Skills feedback handoff
+-> AI_Skills Planner 读取真实材料、active rules 和现有 plugin TODO
+-> Planner 去重并决定 PROJECT_LOCAL / CANDIDATE_GENERIC / PROMOTE_NOW / ...
+-> 只有中央通用候选才写入/合并到 plugin TODO
 -> 只冻结 PROMOTE_NOW 的有限批次
 -> Codex implementation
 -> replay 原失败案例
@@ -163,8 +218,10 @@ Repository patch 是正常兼容 refinement 的默认发版方式；repository m
 现有 CAT-TRACE deck
 -> plugin revision mode
 -> 用户逐页/整套验收
--> 新问题写入 presentations TODO / provenance
--> Planner triage
+-> CAT-TRACE 项目记录原始反馈和候选 plugin handoff
+-> AI_Skills Planner 提炼、去重
+-> 项目专属问题留在 CAT-TRACE
+-> 真正通用的问题写入/合并到 presentations TODO
 -> bounded promotion
 -> replay 同一 deck failure
 -> unrelated presentation regression
@@ -176,7 +233,7 @@ Repository patch 是正常兼容 refinement 的默认发版方式；repository m
 
 ### Reporting
 
-`research-reporting` 已吸收 Distributed Imaging Inference 的导师报告经验。下一步不是 synthetic report，而是等待新的独立真实 advisor/group-meeting report；真实失败再进入 `research-writing` TODO。
+`research-reporting` 已吸收 Distributed Imaging Inference 的导师报告经验。下一步不是 synthetic report，而是等待新的独立真实 advisor/group-meeting report；项目 thread 先记录新反馈，再由 AI_Skills Planner 判断是否需要进入 `research-writing` TODO。
 
 ### 更长期
 
@@ -198,7 +255,7 @@ Repository patch 是正常兼容 refinement 的默认发版方式；repository m
 
 > 这个 plugin 是否形成了一次完整、可发布、用户可观察的 improvement batch？
 
-如果只是 TODO、provenance、tests、synthetic evidence 或中间 commit，不 bump plugin version。
+如果只是 TODO、项目记录、tests、synthetic evidence 或中间 commit，不 bump plugin version。
 
 ## 12. Presentation / Reporting 当前边界
 
