@@ -1,37 +1,45 @@
-# Plugin Capability Maturity
+# Plugin Capability Status
 
-本文件只记录能力成熟度，不替代 repository / Marketplace SemVer。
+本文件记录 **可选的能力状态说明**，不替代 repository release SemVer，也不替代每个 plugin 自己的 SemVer。
 
-## Maturity definitions
+长期主线是：
 
-- `experimental`：能力仍在探索，正常用户不应依赖其稳定行为。
-- `alpha`：核心 production path 已存在，适合真实使用与持续 refinement，但仍存在已知泛化/质量缺口。
-- `beta`：已在多个独立真实任务中稳定工作，主要问题是边缘情况和 polish，而不是核心工作流经常失败。
-- `stable`：普通用户自然调用可稳定获得成熟 artifact；真实任务回归长期稳定；失败会明确 fail closed，不依赖项目特例。
+```text
+plugin version + plugin changelog + real-task evidence
+```
 
-成熟度只能由真实任务、真实 artifact/render 和用户验收提升。Synthetic / mechanical / CI PASS 不能单独提升 maturity。
+status 只在它能帮助用户理解“现在是否适合作为日常默认工具”时使用。不要为了填表强迫每个 plugin 经过固定的 `alpha -> beta -> stable` 梯子。
+
+## Status vocabulary
+
+- `unclassified`：尚未做统一真实任务状态判断；不代表质量差。
+- `baseline`：核心 production path 已存在，可以进入真实项目持续 refinement，但仍明确存在基础质量/泛化缺口。
+- `alpha`：用户已经在真实 production workflow 中把它作为可用工具使用，核心任务能完成，但仍预期持续暴露和修复非边缘问题。
+- `stable`：多个独立真实项目长期正常使用；普通入口可靠；人工修改主要是项目科学判断而不是基础工作流/模板/布局/语言修补。
+
+不使用 `beta` 作为强制中间层。将来如果真实产品需要更多 status，再基于需求增加，不提前设计复杂 maturity taxonomy。
+
+Status 只能由真实任务、真实 artifact/render 和用户验收改变。Synthetic / mechanical / CI PASS 不能单独提升 status。
 
 ## Current status
 
-| Plugin | Maturity | Basis |
+| Plugin | Status | Basis |
 |---|---|---|
-| `presentations` | `alpha` (`Base v1`) | Stage 1–4 production path 已成立；041 四篇真实 frozen batch 未通过；043 已在执行前暂停，后续改由真实 TRACE / research presentation feedback 驱动。 |
-| `research-writing` | `unclassified` | 已有 Distributed Imaging Inference 等真实 advisor-report 反馈进入 active `research-reporting`，但尚未做跨项目 maturity audit。 |
-| `writing-style` | `unclassified` | 待真实跨项目 maturity audit。 |
-| `workflow-core` | `unclassified` | 待真实跨项目 maturity audit。 |
-| `ai-skills-core` | `unclassified` | 待安装/维护任务 maturity audit。 |
-| `scientific-visualization` | `unclassified` | 待真实跨项目 maturity audit。 |
-| `web-development` | `unclassified` | 待真实跨项目 maturity audit。 |
-| `statistical-modeling` | `unclassified` | 待真实跨项目 maturity audit。 |
-| `bioinformatics` | `unclassified` | 待真实跨项目 maturity audit。 |
-| `medical-imaging` | `unclassified` | 待真实跨项目 maturity audit。 |
+| `presentations` | `baseline` | Stage 1–4 production path 已成立，但 041 真实 frozen batch 未通过；043 已暂停。下一步直接用于现有 CAT-TRACE deck refinement，真实使用后再决定是否进入 `alpha`。 |
+| `research-writing` | `unclassified` | Distributed Imaging Inference 的 advisor-report 反馈已进入 active `research-reporting`；等待下一份独立真实报告验证。 |
+| `writing-style` | `unclassified` | 尚未做统一跨项目状态判断。 |
+| `workflow-core` | `unclassified` | 尚未做统一跨项目状态判断。 |
+| `ai-skills-core` | `unclassified` | 等待独立 version/changelog/maintenance workflow 在真实长期维护中验证。 |
+| `scientific-visualization` | `unclassified` | 尚未做统一跨项目状态判断。 |
+| `web-development` | `unclassified` | 尚未做统一跨项目状态判断。 |
+| `statistical-modeling` | `unclassified` | 尚未做统一跨项目状态判断。 |
+| `bioinformatics` | `unclassified` | 尚未做统一跨项目状态判断。 |
+| `medical-imaging` | `unclassified` | 尚未做统一跨项目状态判断。 |
 
-`unclassified` 不表示质量差，只表示当前没有经过同一套真实任务成熟度审计；不要为了填表而猜测 beta/stable。
+## Status change rules
 
-## Promotion rules
+- `baseline -> alpha`：用户在真实正常入口中把 plugin 用于目标工作流并明确认为已经“可用”，即使后续仍会继续完善；不能靠 synthetic acceptance 代替。
+- `alpha -> stable`：多个独立真实任务长期稳定；相同基础问题不再反复出现；用户愿意把它当成默认长期工具。
+- 允许降级：真实 production 暴露系统性 regression 时，应记录 blocker 或降低 status，而不是拿旧 PASS 维持标签。
 
-- `experimental -> alpha`：正常 production entry 已存在，至少一个真实任务成功产生可验收 artifact，且已知严重失败有 fail-closed 路径。
-- `alpha -> beta`：至少多个独立真实项目使用；相同基础问题不再反复出现；人工修改主要集中在项目科学判断，而不是基础模板/布局/流程语言。
-- `beta -> stable`：跨项目 replay/generalization 持续通过，正常用户入口稳定，重大 regression 有真实回归集，用户明确认可作为长期默认工具。
-
-降级是允许的：如果真实用户任务暴露系统性 regression，应降低 maturity 或记录 blocker，而不是拿旧 CI/PASS 维持标签。
+Status 改变本身不要求 plugin version bump；只有 runtime/user-visible behavior 真的改变时才按 `docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md` bump SemVer。
