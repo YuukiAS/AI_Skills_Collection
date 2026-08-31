@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: true
 secrets_needed:
-last_reviewed: 2026-08-31
+last_reviewed: 2026-08-30
 profile_tags:
   - ai-skills-maintainer
 recommended_scope: project
