@@ -4,17 +4,18 @@ Canonical maintenance inbox for the `ai-skills-core` plugin and repository-maint
 
 ## Open candidates
 
-### Make repo-local recording guidance travel with future project installs
-status: PROMOTE_NOW
-source: user requirement on 2026-08-31 after TRACE / Presentation real-workflow setup
-evidence: root `README.md` and `AGENTS.md` now define the rule; TRACE has the same rule in its own `AGENTS.md`; however arbitrary existing/future project repos do not automatically inherit it unless their own repo guidance is updated
-target layer: distribution / repo-local install guidance
-problem: a user can say “记录 repo 并保存到合适的地方” in any project thread, but a repo that has not been taught this convention may not know to keep project-specific work in the project repo and only leave a short AI_Skills feedback note for possible plugin problems.
-candidate action: make future repo-local AI_Skills installation/update with `--write-agents-md` carry a short generic recording rule into the managed AGENTS block: use the project's existing TODO/ROADMAP/result/review/decision files first; do not create a second TODO system; when real plugin behavior is the problem, leave a short AI_Skills feedback handoff in the same project record for later central triage.
-boundary: do not force every repository to use `results/<task_key>/result.md` or any single directory layout; respect each project's existing structure. Do not write raw project science directly into central plugin TODOs.
-promotion gate: installer/AGENTS regression proves a newly installed test repo receives the generic rule without overwriting user-owned AGENTS content; one unrelated repo-local install/update smoke passes.
+No active ai-skills-core implementation candidate is required for the feedback-location policy itself. The current rule is now documented in root `README.md`, root `TODO.md`, `AGENTS.md`, `docs/plugin-todos/README.md`, the continuous-refinement workflow, and the Planner contract.
 
 ## Recently promoted / established
+
+### Direct plugin-use feedback to the central plugin TODO
+status: PROMOTED
+source: user correction on 2026-08-31 after TRACE / Presentation real-workflow setup
+evidence: root `README.md`, root `TODO.md`, `AGENTS.md`, `docs/plugin-todos/README.md`, `docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md`, Planner contract; TRACE `AGENTS.md` follows the same rule
+target layer: distribution / maintenance workflow
+problem: keeping Presentation/plugin problems first in TRACE or another project repo mixes plugin maintenance with the project's own scientific TODOs and creates duplicate records.
+current behavior: project-owned research/product/code issues stay in the project repo; issues caused by an AI_Skills plugin are written directly to the corresponding central `docs/plugin-todos/<plugin>.md` as `status: NEW`. The project thread records the real failure and project-specific context; AI_Skills Planner/maintainer later deduplicates, abstracts, and decides whether the item is project-local, a generic candidate, or ready for implementation.
+boundary: do not move project science, model choices, dataset interpretation, or project code TODOs into AI_Skills_Collection. Do not require project threads to invent a generic rule before recording a plugin failure.
 
 ### Repository 5.0 release epoch with independent plugin versions and changelogs
 status: PROMOTED
@@ -50,3 +51,4 @@ evidence: `docs/plugin-todos/` contains exactly one inbox for each central Marke
 - Do not restore the legacy rule that every plugin must share the repository version.
 - Do not fabricate detailed per-plugin changelog history before repository 5.0.0; preserve earlier history in root CHANGELOG / Git history.
 - Do not use three-part plugin versions such as `0.1.0`.
+- Do not recreate the superseded “project repo first, central TODO later” plugin-feedback workflow.
