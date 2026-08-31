@@ -1,0 +1,19 @@
+{
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "task_key": "045_presentations_real_use_regression_hardening",
+  "state": "PLAN_REQUESTED",
+  "review_round": 0,
+  "max_review_rounds": 2,
+  "plan_revision": 0,
+  "max_plan_revisions": 1,
+  "base_commit": "dd65f2bb4d9297db72e717c199d6306241c474a2",
+  "base_branch": "main",
+  "implementation_commit": null,
+  "ci_required": true,
+  "ci_status": "PENDING",
+  "last_review_decision": null,
+  "review_limit_reached": false,
+  "human_gate_reason": null,
+  "visual_review_required": true,
+  "next_action": "GPT_PLANNER_TRIAGE_CENTRAL_PRESENTATION_FEEDBACK_AND_FREEZE_BOUNDED_REPAIR_PLAN"
+}
