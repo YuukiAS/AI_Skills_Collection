@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-No pending changes.
+- Clarified how real project threads should record work: project-specific TODOs and revision findings stay in the project repo, while only possible reusable plugin problems are handed back to AI_Skills for later triage.
+- Rewrote the README explanation in plain Chinese and added root `TODO.md` as the human-facing entry point for plugin backlogs.
+- Clarified TRACE `AGENTS.md` so “记录 repo 并保存到合适的地方” uses TRACE's existing roadmap/task/result/decision files first and only creates an AI_Skills feedback handoff when the issue may reflect plugin behavior.
+
+No repository or plugin version bump: these are maintenance and documentation clarifications, not a new formal release.
 
 ## 5.0.0 - 2026-08-30
 
