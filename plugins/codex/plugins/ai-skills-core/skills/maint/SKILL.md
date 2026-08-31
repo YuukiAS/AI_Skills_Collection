@@ -30,31 +30,38 @@ Use this skill only for maintaining `AI_Skills_Collection`. Do not use it for or
 
 ## Workflow
 
-1. Read root `AGENTS.md`, `README.md`, `scripts/codex_marketplace_config.json`, `profiles/`, `docs/provenance/INTEGRATION_HISTORY.md`, relevant workflow docs, and relevant tests.
+1. Read root `AGENTS.md`, `README.md`, `TODO.md`, `scripts/codex_marketplace_config.json`, `profiles/`, relevant workflow docs, and relevant tests.
 2. For Notion or GitHub intake, record the evidence boundary first: source page or repo, readable text/images/attachments, public-source verification, processing decision, target skill/reference, integration commit, and whether the external tracker has already been reconciled.
-3. Decide whether each item is `merged`, `partially-merged`, `reference-only`, `reviewed-not-adopted`, `unresolved-asset`, or `rejected`. Do not collapse several weak-evidence items into a single `merge-selected` claim.
+3. Decide whether each external item is `merged`, `partially-merged`, `reference-only`, `reviewed-not-adopted`, `unresolved-asset`, or `rejected`. Do not collapse several weak-evidence items into a single `merge-selected` claim.
 4. Route domain judgment to the right domain plugin or official capability. This skill controls repository maintenance; it does not decide frontend taste, PPT content, bioinformatics workflows, statistics, or medical-imaging methods by itself.
 5. Edit source files first: `skills/`, `profiles/`, `docs/provenance/`, `docs/plugin-todos/`, `docs/plugin-changelogs/`, tests, and public docs.
 6. Regenerate derived registry/catalog/marketplace files only after source-layer changes are complete.
 7. Run repository validation gates with the local runtime Python when `python` is not on `PATH`.
-8. Commit after validation, then reconcile external trackers only if the user requested it. If the user has already updated Notion `Utilized`, do not call the Notion connector again.
+8. Commit after validation, then reconcile external trackers only if the user requested it.
 9. Report generated-layer changes separately from source-layer changes.
 
 ## Continuous real-world refinement
 
-When maintenance originates from a real project TODO, user artifact feedback, repeated production failure, or a request to improve an existing plugin over time, first read:
+When maintenance comes from a real project using an AI_Skills plugin, first read:
 
 ```text
+TODO.md
 docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md
 docs/PLUGIN_MATURITY.md
 docs/plugin-todos/README.md
 docs/plugin-todos/<target-plugin>.md
 ```
 
-Then apply these rules:
+Apply these rules:
 
-- Treat the plugin TODO as a source-only maintenance inbox, not runtime instructions.
-- Keep detailed project-specific evidence in the project repo or `docs/provenance/`; only the abstract generic candidate belongs in the plugin TODO.
+- Project-owned research/product/code work stays in the project repo.
+- A problem caused by an AI_Skills plugin should be recorded directly in the corresponding central plugin TODO, not duplicated into the project repo as a plugin TODO.
+- A real project thread may add a minimal `status: NEW` item directly to `docs/plugin-todos/<plugin>.md` with `source`, `evidence`, `problem`, and `project-specific context`.
+- The project thread records the real failure; it does not decide the final generic rule or promotion status.
+- Before triaging `NEW`, compare against the current plugin TODO and active skill/reference/QA/runtime. Merge duplicate evidence instead of creating near-duplicate rules.
+- If an active rule already exists but real output still fails, treat it as a production regression and inspect the consumer/runtime rather than adding another synonymous rule.
+- If the issue is only project-specific, mark `PROJECT_LOCAL` and do not promote it into active plugin behavior.
+- Only the AI_Skills Planner/maintainer may turn a `NEW` item into `CANDIDATE_GENERIC`, `PROMOTE_NOW`, `SUPERSEDED`, or `REJECTED` after triage.
 - Do not promote every TODO into `SKILL.md`. Freeze a promotion decision, target layer, boundary, real evidence, user-facing effect, and regression first.
 - Prefer modifying an existing routing/reasoning/rendering/QA/writing/distribution layer over creating another skill/schema/state.
 - After promotion, replay the original real failure and run an unrelated regression. Synthetic checks alone do not prove maturity.
