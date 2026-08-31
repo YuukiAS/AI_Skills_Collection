@@ -4,25 +4,27 @@ Canonical maintenance inbox for the `ai-skills-core` plugin and repository-maint
 
 ## Open candidates
 
-### Establish repository 5.0 release epoch with independent plugin versions and changelogs
+### Make repo-local recording guidance travel with future project installs
 status: PROMOTE_NOW
-source: long-term real-world maintenance redesign + user requirement on 2026-08-30
-evidence: `AGENTS.md`, `docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md`; current Marketplace config already has per-plugin version fields, while 4.x history reflects legacy lockstep release semantics and root CHANGELOG remains the historical release record
-target layer: distribution
-problem: repository release、plugin release 和 capability status 容易混淆；长期 lockstep 会掩盖到底哪个 plugin 真正变化，也无法自然支撑真实项目持续 refinement。
-candidate action: publish the next repository-level maintenance epoch as `5.0.0`; add one repository-version source of truth; start the new independent version history of every central plugin at `0.1`; create `docs/plugin-changelogs/<plugin>.md` for all ten central plugins; make root CHANGELOG the repository release homepage and show plugin version/status/changelog links in README.
-promotion gate: version/changelog/README/generated-payload consistency tests + real install/upgrade smoke; maintenance changelogs remain source-only; if external Codex Marketplace actually rejects the two-part `0.1` format, record the real external error and return to the user instead of silently changing the policy.
-
-### Make README a compact release dashboard without becoming source of truth
-status: PROMOTE_NOW
-source: user requirement on 2026-08-30
-evidence: current README shows repository release and plugin entrypoints but not independent plugin version history
-target layer: distribution
-problem: after plugin versions diverge, users need one place to see repository release, each plugin version, capability status and changelog without opening config files.
-candidate action: render/maintain a compact `Plugin | Version | Status | Main entry | Changelog` table whose values are checked against Marketplace config and `docs/PLUGIN_MATURITY.md`; root CHANGELOG links the plugin-changelog index.
-promotion gate: README consistency regression and generated plugin install smoke; no duplicate hand-maintained version source.
+source: user requirement on 2026-08-31 after TRACE / Presentation real-workflow setup
+evidence: root `README.md` and `AGENTS.md` now define the rule; TRACE has the same rule in its own `AGENTS.md`; however arbitrary existing/future project repos do not automatically inherit it unless their own repo guidance is updated
+target layer: distribution / repo-local install guidance
+problem: a user can say “记录 repo 并保存到合适的地方” in any project thread, but a repo that has not been taught this convention may not know to keep project-specific work in the project repo and only leave a short AI_Skills feedback note for possible plugin problems.
+candidate action: make future repo-local AI_Skills installation/update with `--write-agents-md` carry a short generic recording rule into the managed AGENTS block: use the project's existing TODO/ROADMAP/result/review/decision files first; do not create a second TODO system; when real plugin behavior is the problem, leave a short AI_Skills feedback handoff in the same project record for later central triage.
+boundary: do not force every repository to use `results/<task_key>/result.md` or any single directory layout; respect each project's existing structure. Do not write raw project science directly into central plugin TODOs.
+promotion gate: installer/AGENTS regression proves a newly installed test repo receives the generic rule without overwriting user-owned AGENTS content; one unrelated repo-local install/update smoke passes.
 
 ## Recently promoted / established
+
+### Repository 5.0 release epoch with independent plugin versions and changelogs
+status: PROMOTED
+source: long-term real-world maintenance redesign + user requirement on 2026-08-30
+evidence: repository `5.0.0`, root `VERSION`, per-plugin `0.1` versions, root `CHANGELOG.md`, `docs/plugin-changelogs/`, README status table, install smoke and GitHub Actions.
+
+### README release dashboard
+status: PROMOTED
+source: user requirement on 2026-08-30
+evidence: README shows repository release, each central plugin version/status and changelog link; consistency is covered by repository tests.
 
 ### Legacy repository release consistency
 status: PROMOTED
