@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-No pending released changes.
+- Changed the long-term feedback rule so problems caused by an AI_Skills plugin are recorded directly in that plugin's central `docs/plugin-todos/<plugin>.md`, instead of first creating a duplicate plugin-problem record in the project repo.
+- Real project threads may add a minimal `status: NEW` item with the real failure and evidence; AI_Skills Planner/maintainer remains responsible for deduplication, abstraction, and deciding whether the issue should become a generic plugin change.
+- Root `README.md`, `TODO.md`, `AGENTS.md`, the central TODO guide, continuous-refinement workflow, and Planner contract now explain the same rule.
+
+No version bump yet; these changes remain unreleased until they are included in a formal plugin/repository release.
 
 ## 0.1 - 2026-08-30
 
