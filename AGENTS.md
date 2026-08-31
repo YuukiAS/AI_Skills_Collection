@@ -15,6 +15,20 @@
 
 旧聊天、旧计划、旧 benchmark PASS 不能覆盖当前 repo。
 
+## 1.1 README 永远写给人看
+
+根 `README.md` 是给用户和未来维护者看的，不是内部流程日志。
+
+修改 README 时必须：
+
+- 默认用自然中文解释“这是做什么、什么时候用、文件放哪里、下一步怎么办”；
+- 先说人能直接理解的结论，再给命令、路径和内部文档；
+- 不把 `provenance`、`promotion`、`bounded batch`、`source of truth`、状态机名、内部 reviewer 字段等词直接堆给普通读者；确实需要时先用中文解释；
+- 不写 audit/CI/commit/run 的流水账，除非这些本身就是用户要查的内容；
+- 历史实现细节优先放 CHANGELOG 或内部 docs，不让 README 越写越像维护日志。
+
+如果一次 README 修改技术上正确但普通用户读不明白，视为需要继续改。
+
 ## 2. 真实任务驱动长期改进
 
 长期 refinement 必须读取：
@@ -31,7 +45,22 @@ docs/plugin-todos/<target-plugin>.md
 
 不要因为一个 synthetic task PASS 自动继续创造下一轮 synthetic recovery。
 
-### 2.1 谁记录，谁提炼
+### 2.1 用户说“记录 repo 并保存到合适的地方”时是什么意思
+
+这句话默认指向**当前正在做的真实项目 repo**，不是自动写 AI_Skills_Collection。
+
+先看当前项目已经有什么长期记录方式，再选最合适的位置：
+
+- 项目长期下一步、还没做的研究/工程任务：写进项目已有的 `TODO`、`ROADMAP` 或同类长期计划；
+- 某一次具体任务、实验、PPT 返修、报告返修的问题：写进这轮已有的 `result.md`、review、revision note 或同类记录；
+- 已经确定的长期科学/产品决定：写进项目已有的 decision / design 文档；
+- 如果已有合适文件，就更新已有文件，不为了“记一下”再造新的目录、schema 或第二套 TODO。
+
+只有当用户当前就在维护 AI_Skills_Collection，才直接更新中央 `docs/plugin-todos/<plugin>.md`。
+
+如果项目里完全没有合适的记录位置，才创建一个最小、明显的项目本地记录；不要为了 AI_Skills 反馈强制所有 repo 长成同一种目录结构。
+
+### 2.2 谁记录，谁提炼
 
 真实项目 thread / 项目 Codex 与中央 AI_Skills Planner 的职责必须分开。
 
@@ -40,6 +69,7 @@ docs/plugin-todos/<target-plugin>.md
 - 如果项目采用 task/result 结构，默认在 `results/<task_key>/result.md` 中增加 `## AI_Skills feedback handoff`；已有更合适的 review / revision result 文件时可以用已有位置，但必须稳定可引用。
 - 保存用户原始反馈、对应 artifact/page/component、实际 render/result 和已经接受的元素。
 - `AI_Skills feedback handoff` 至少记录：候选 plugin、原始问题、项目中的证据位置、明显只属于当前项目的边界。
+- 这个小节只在问题可能反映中央 plugin 行为时需要。普通项目 TODO 不必每条都写 AI_Skills feedback。
 - 可以标出“这个问题可能和哪个 plugin 有关”，但不要求项目 thread 自己证明问题一定通用，也不得直接把项目里的具体做法写成中央 plugin 的永久规则。
 - 不为此强制所有项目建立统一的新目录或 schema；优先使用项目已经存在的任务/返修记录。
 
