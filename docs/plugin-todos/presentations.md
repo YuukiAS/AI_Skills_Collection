@@ -1,96 +1,97 @@
 # presentations — Long-Term TODO
 
-Canonical maintenance inbox for the `presentations` plugin. Detailed project feedback stays in project repos or `docs/provenance/`; this file only tracks generic candidates and evidence.
+这是 `presentations` plugin 的长期问题清单。
+
+以后在 TRACE、CARE 或其他真实项目里调用 `presentations` 时，如果问题本质上来自 plugin 的生成、返修、布局、检查或路由行为，直接把这次真实问题写到这里，状态先用 `NEW`。不要先在项目 repo 再维护一份 Presentation 插件问题副本。
 
 Current capability status: `baseline`.
 
+## Incoming real-use feedback
+
+目前没有尚未整理的 `NEW` 条目。
+
+真实项目 thread 新增时只需要最小格式：
+
+```text
+### <简短的问题标题>
+status: NEW
+source: <真实项目 / 当前任务>
+evidence: <实际 PDF / render / commit / task 路径>
+problem: <用户实际看到的问题>
+project-specific context: <哪些细节只属于当前项目>
+```
+
+此时先记事实，不要直接发明通用规则。后续由 AI_Skills Planner / maintainer 去重、整理并决定是否变成下面的长期候选。
+
 ## Open candidates
-
-### Remove Stage-4 benchmark assumptions from the normal production validator
-status: PROMOTE_NOW
-source: 038/041 real-paper execution
-evidence: `validate_research_presentation_production_entry.py` currently requires a fixed six-job set and clustered-coverage + medical storyline assumptions; real-paper RESULTs record false rejections
-target layer: qa
-problem: a pure statistics paper can fail validation for lacking medical pages, and a medical paper can fail for lacking benchmark-specific statistical jobs.
-candidate action: validate jobs/storyline declared by the current source/deck contract rather than a frozen Stage-4 fixture shape; retain strict source fidelity, selector, CUHK, render and repair-budget checks.
-promotion gate: unrelated single-statistics, single-medical and unrelated multi-workstream regressions; no weakening of production gates.
-
-### Make existing-deck refinement the next real production path
-status: PROMOTE_NOW
-source: user workflow decision on 2026-08-30 + existing CAT-TRACE revision history
-evidence: `research-presentations/SKILL.md` already supports existing decks and `accepted_element_ledger`; `RESEARCH_PRESENTATION_CURRENT_ROUND.md` pauses synthetic Stage-5 and routes future work to real feedback
-target layer: routing/reasoning/qa
-problem: the next real use is not “generate CAT-TRACE from scratch” but continue improving the current accepted deck. A refinement workflow must preserve accepted pages/components, apply targeted changes, render the actual revised deck, and turn new user feedback into bounded generic candidates without silently redesigning the whole presentation.
-candidate action: ensure normal user requests like “继续完善这个现有组会PPT / 按这些批注返修” route to revision mode; carry accepted-element constraints forward; compare against the exact prior render; after each user review, separate PROJECT_LOCAL feedback from generic TODO candidates. Do not force the one-call new-deck generator when the task is targeted existing-deck editing.
-promotion gate: next CAT-TRACE revision uses the installed plugin in revision mode, preserves already accepted elements unless explicitly reopened, produces real render evidence, and records reusable failures through the plugin TODO workflow; an unrelated existing-deck regression must protect the generic revision contract.
 
 ### Diagram geometry and canonical edge/node treatment
 status: BLOCKED_NEEDS_EVIDENCE
 source: repeated TRACE visual feedback
-evidence: `docs/provenance/research-presentation-maintenance-archive-2026-08-30/`, `docs/provenance/RESEARCH_PRESENTATION_CAT_TRACE_*`
+evidence: presentation maintenance archive + CAT-TRACE real deck revisions
 target layer: rendering/qa
-problem: semantic diagram gate is active, but geometry/style consistency remains partly advisory and repeatedly causes visual defects.
-candidate action: renderer-specific canonical primitives and QA for reading direction, alignment, legal edge paths, anchors, arrowheads and peer-level boxes.
-promotion gate: next real CAT-TRACE or unrelated deck exposes/replays the defect with rendered evidence; do not pre-implement all geometry rules merely because they exist in historical TODOs.
+problem: diagram 的语义规则已经有了，但实际箭头、节点、对齐、连接路径和层级几何仍然可能做坏。
+candidate action: 只有新的真实 deck 再次暴露问题时，才补 renderer-level primitive 和 QA，不为了历史 TODO 预先造一整套几何系统。
+promotion gate: 新的真实 CAT-TRACE 或 unrelated deck 用实际 render 重现问题，并能证明修改真的改善输出且不会过度限制其他 diagram。
 
 ### Deck-wide style system and terminology hierarchy
 status: CANDIDATE_GENERIC
 source: repeated real research deck revisions
-evidence: presentation maintenance provenance archive
-target layer: reasoning/rendering/qa
-problem: sentence case, first-use terminology, question style, dataset/simulation numbering, mini-headers, metric labels, captions and references can drift across a deck.
-candidate action: define the smallest deck-style contract only when real deck revision demonstrates the drift remains production-relevant.
-promotion gate: independent rendered deck showing the contract catches inconsistency without enforcing one visual layout for all scientific objects.
+evidence: presentation maintenance archive
+ target layer: reasoning/rendering/qa
+problem: 一整套 deck 里，标题大小写、术语首次解释、dataset/simulation 编号、小标题、metric label、caption 和 references 容易逐页漂移。
+candidate action: 只有真实返修再次证明这是当前问题时，才增加最小 deck-wide consistency contract，不把所有页面强行做成同一种布局。
+promotion gate: independent rendered deck 证明 consistency check 能抓到真实问题且不会压平不同科研页面。
 
 ### Math and theory slide hierarchy
 status: CANDIDATE_GENERIC
 source: repeated statistics and theory deck feedback
-evidence: presentation maintenance provenance archive + CAT-TRACE review docs
+evidence: presentation maintenance archive + CAT-TRACE review docs
 target layer: reasoning/rendering/qa
-problem: short definitions, design settings, estimands, theorem statements and derivation steps can all be rendered as centered display math even when they have different scientific roles.
-candidate action: promote formula hierarchy / first-use semantic context / theory coverage behavior only when the continuing CAT-TRACE deck or another math-heavy deck shows a live failure.
-promotion gate: theorem-heavy/statistical-method real deck replay plus unrelated math-heavy deck regression.
+problem: definition、design setting、estimand、theorem、derivation 容易都被做成同一种“居中大公式”，科学角色没有层次。
+candidate action: 在新的 math-heavy real deck 再次出现时，才进一步加强公式层级、首次语义解释和 theory-page QA。
+promotion gate: theorem/statistical-method real deck replay + unrelated math-heavy deck regression。
 
 ### Simulation, metric and structured-fact presentation
 status: CANDIDATE_GENERIC
 source: repeated real statistics deck feedback
-evidence: presentation maintenance provenance archive
+evidence: presentation maintenance archive
 target layer: reasoning/rendering/qa
-problem: DGP, estimand, comparison, metric direction, metric purpose, structured dataset facts and seeds/reproducibility metadata can be mixed into prose dumps or weak pseudo-tables.
-candidate action: promote compact table/list patterns and QA fields only after a real rendered regression exercises them.
-promotion gate: at least one simulation-heavy deck and one real-data deck where rendered output proves the pattern improves scanability.
+problem: DGP、estimand、baseline、metric direction、dataset facts、seed/reproducibility 信息容易混成段落或弱表格，读起来很累。
+candidate action: 新的 simulation-heavy / real-data deck 再次出现时，再提炼更稳定的 table/list patterns 和 QA。
+promotion gate: 至少一个 simulation-heavy 和一个 real-data deck 的真实 render 都证明改善了可读性。
 
 ### Natural scientific slide language
 status: CANDIDATE_GENERIC
 source: repeated presentation and writing-style feedback
-evidence: presentation maintenance provenance archive + `docs/plugin-todos/writing-style.md`
+evidence: presentation maintenance archive + `docs/plugin-todos/writing-style.md`
 target layer: writing/qa
-problem: audience-facing slides can retain meta labels, internal workflow language, and templated contrast sentences even after ordinary polishing.
-candidate action: decide whether a live failure belongs in `research-presentations`, `scientific-prose`, or a handoff between the two; do not duplicate writing rules preemptively.
-promotion gate: repeated independent English scientific slide evidence and a check that writing-style does not take over scientific structure.
+problem: slides 仍可能出现内部流程词、模板化对比句、面向作者而不是面向听众的说法。
+candidate action: 真实失败出现后再决定应该改 `research-presentations`、`scientific-prose`，还是两者的交接；不要重复造一套写作规则。
+promotion gate: 多个独立英文科研 slide 的真实证据。
 
-### Real-workflow refinement from TRACE rather than synthetic challenge chains
-status: PROMOTE_NOW
-source: user decision after 041/042/043
-evidence: `RESEARCH_PRESENTATION_CURRENT_ROUND.md` records `BASE_V1_READY_FOR_REAL_WORKFLOW_REFINEMENT` and 043 pause
-target layer: reasoning/rendering/qa
-problem: additional synthetic challenge tasks were producing more validation machinery than user-visible quality improvement.
-candidate action: after repository 5.0.0 foundation work, use the current CAT-TRACE deck as the primary real refinement workload; promote only bounded generic failures, replay the original deck, then run unrelated regressions.
-promotion gate: each promoted change must identify user-visible before/after and an unrelated regression.
+## Current real-use focus
+
+现在不继续做 synthetic challenge chain。
+
+下一步就是用已安装的 `presentations` plugin 继续返修**现有 CAT-TRACE deck**。新的 plugin 问题直接作为 `NEW` 写到本文件，再由中央 Planner 整理。
+
+这不是一个需要单独“完成”的 TODO，也不需要为了证明 workflow PASS 重启 043。
 
 ## Recently promoted / established
 
-- Presentation maintenance files were moved out of active runtime source to `docs/provenance/research-presentation-maintenance-archive-2026-08-30/`; the runtime rule subset is now `skills/tools/documents-media/presentations/research-presentations/references/real-world-presentation-guardrails.md`.
-- Evidence-first research-group-meeting routing and scientific-object page archetypes.
-- Exact CUHK Beamer/PDF default research route for unspecified desktop research talks.
-- Source fidelity map, gold composition retrieval, executable scientific layouts, real render/contact-sheet review, bounded one-cycle repair contract.
-- Existing-deck revision scope includes accepted-element preservation and comparison against the render the reviewer actually saw.
-- Theory framing by scientific guarantee/problem rather than theorem-count taxonomy is confirmed in runtime guardrails.
+- `0.1` 已修掉 normal-production validator 对 Stage-4 固定六类页面和固定 storyline 的硬编码。
+- `0.1` 已加固 existing-deck revision：用户要求继续返修已有 deck 时，不应重新生成一套；已接受页面/元素要作为约束保留，并和用户真正看过的上一版 render 对比。
+- Presentation maintenance 历史已从普通 runtime 中移出；普通安装只保留已经确认有用的规则。
+- Evidence-first research-group-meeting routing 和 scientific-object page archetypes 已建立。
+- Exact CUHK Beamer/PDF 仍是默认 desktop research route。
+- Source fidelity、scientific layout、真实 render/contact-sheet review 和 bounded repair contract 已建立。
+- Theory 页面按“解决了什么问题 / 提供什么保证”组织，而不是按 theorem 数量炫技。
 
 ## Do not do
 
-- Do not restart the paused 043 synthetic challenge merely to obtain a workflow PASS.
-- Do not make consumed holdouts into unseen acceptance again.
-- Do not add project/paper names as selector or layout special cases.
-- Do not create a new skill for every visual failure; prefer existing reasoning/rendering/QA layers.
-- Do not regenerate CAT-TRACE from scratch when the user asks to continue refining the accepted existing deck.
+- 不要为了 workflow PASS 重启已经暂停的 043 synthetic challenge。
+- 不要把已经用来调过系统的 holdout 再说成 unseen。
+- 不要把 CAT-TRACE 页码、论文名、theorem 名称写成 selector/layout 特例。
+- 不要每出现一个视觉问题就新建 skill；优先修已有 reasoning/rendering/QA 层。
+- 用户说“继续完善现有 CAT-TRACE PPT”时，不要从头重新生成。
