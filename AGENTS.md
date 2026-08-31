@@ -9,9 +9,9 @@
 1. 用户当前要求与真实项目/artifact；
 2. 当前 `main`；
 3. 本 `AGENTS.md`；
-4. 对应 workflow / skill / plugin TODO / changelog；
+4. 根 `TODO.md` / `CHANGELOG.md` 作为导航入口，再进入对应 workflow / skill / plugin TODO / changelog；
 5. tests / CI /真实 render；
-6. 历史 provenance / benchmark。
+6. 历史记录 / benchmark。
 
 旧聊天、旧计划、旧 benchmark PASS 不能覆盖当前 repo。
 
@@ -20,9 +20,12 @@
 长期 refinement 必须读取：
 
 ```text
+TODO.md
 docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md
 docs/plugin-todos/<target-plugin>.md
 ```
+
+根 `TODO.md` 只是统一导航页，不能成为第二份详细待办；具体 plugin 问题只维护在 `docs/plugin-todos/<target-plugin>.md`。
 
 真实反馈先进入项目记录，再由 AI_Skills Planner 判断是否值得进入中央 plugin TODO。TODO 不是 active rule。只有满足 promotion gate 的通用问题才进入 bounded Reviewed Handoff implementation。原真实失败要 replay，并增加 unrelated regression。
 
@@ -34,9 +37,10 @@ docs/plugin-todos/<target-plugin>.md
 
 **真实项目 thread / 项目 Codex 负责记录“实际发生了什么”。**
 
-- 在当前项目自己的现有 TODO、review、RESULT、revision note 或等价记录中保存用户原始反馈、对应 artifact/page/component、实际 render/result 和已经接受的元素。
-- 可以标出 `possible reusable plugin feedback`，说明“这个问题可能和哪个 plugin 有关”。
-- 不要求项目 thread 自己证明问题一定通用，也不得直接把项目里的具体做法写成中央 plugin 的永久规则。
+- 如果项目采用 task/result 结构，默认在 `results/<task_key>/result.md` 中增加 `## AI_Skills feedback handoff`；已有更合适的 review / revision result 文件时可以用已有位置，但必须稳定可引用。
+- 保存用户原始反馈、对应 artifact/page/component、实际 render/result 和已经接受的元素。
+- `AI_Skills feedback handoff` 至少记录：候选 plugin、原始问题、项目中的证据位置、明显只属于当前项目的边界。
+- 可以标出“这个问题可能和哪个 plugin 有关”，但不要求项目 thread 自己证明问题一定通用，也不得直接把项目里的具体做法写成中央 plugin 的永久规则。
 - 不为此强制所有项目建立统一的新目录或 schema；优先使用项目已经存在的任务/返修记录。
 
 **AI_Skills Planner 负责提炼“中央 plugin 应该学到什么”。**
@@ -57,9 +61,7 @@ docs/plugin-todos/<target-plugin>.md
 - 已满足 promotion gate：由 Planner 标 `PROMOTE_NOW`，之后才允许进入 bounded implementation。
 - 已解决、重复、错误方向：标 `SUPERSEDED` / `REJECTED` 或不再保留在活跃区。
 
-**Executor 不拥有“是否通用”的最终决定。** 项目 Executor 可以给出候选解释和证据定位，但 canonical TODO 的抽象、去重、状态升级由 AI_Skills Planner/maintainer 在明确的 triage 步骤中完成。
-
-一个真实项目任务结束时，如果使用了中央 plugin 且用户给了新反馈，项目结果至少应留下一个很短的 `AI_Skills feedback handoff`：候选 plugin、原始问题、受影响 artifact、证据位置、哪些内容明显是项目专属。这个 handoff 是给后续 Planner 看的，不是中央规则本身。
+**Executor 不拥有“是否通用”的最终决定。** 项目 Executor 可以给出候选解释和证据定位，但中央 TODO 的抽象、去重、状态升级由 AI_Skills Planner/maintainer 在明确的 triage 步骤中完成。
 
 ## 3. 版本号：禁止 AI 自行发挥
 
@@ -93,7 +95,7 @@ Plugin 使用独立两段 release version：
 
 Repository 5.0.0 起，每个中央 plugin 的 independent history 从 `0.1` 开始。Plugin 不随 repo lockstep 升级。
 
-只有形成正式 user-facing improvement batch，且 replay/regression/review 可证明，才推进一次 plugin version。TODO/provenance/纯测试/中间 commit 不 bump。
+只有形成正式 user-facing improvement batch，且 replay/regression/review 可证明，才推进一次 plugin version。TODO/历史记录/纯测试/中间 commit 不 bump。
 
 `1.0` 不是机械 maturity threshold；只有多个独立真实任务证明可长期默认使用，并由用户/Planner明确决定时才进入。
 
@@ -115,13 +117,14 @@ Affected plugins:
 
 ## 5. TODO / Changelog 边界
 
+- 根 `TODO.md`：仓库 TODO 首页，只负责指向各 plugin TODO 和说明问题怎么从真实项目流入；不复制详细条目。
 - `docs/plugin-todos/<plugin>.md`：未来可能要改什么，由 AI_Skills Planner 负责抽象、去重和状态维护。
 - `docs/plugin-changelogs/<plugin>.md`：这个 plugin 已经在哪个正式版本改变了什么。
-- root `CHANGELOG.md`：整个 repository release 首页。
-- `docs/provenance/`：详细项目/来源/历史证据。
+- 根 `CHANGELOG.md`：整个 repository release 首页。
+- `docs/provenance/`：详细来源/历史记录。
 - 真实项目自己的 TODO/review/result：保存项目专属决定和原始用户反馈。
 
-maintenance TODO / changelog / provenance 不应进入普通 generated plugin runtime payload。
+maintenance TODO / changelog /历史记录不应进入普通 generated plugin runtime payload。
 
 ## 6. Generated layer
 
