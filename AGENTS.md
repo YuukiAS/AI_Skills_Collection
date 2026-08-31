@@ -41,57 +41,77 @@ docs/plugin-todos/<target-plugin>.md
 
 根 `TODO.md` 只是统一导航页，不能成为第二份详细待办；具体 plugin 问题只维护在 `docs/plugin-todos/<target-plugin>.md`。
 
-真实反馈先进入项目记录，再由 AI_Skills Planner 判断是否值得进入中央 plugin TODO。TODO 不是 active rule。只有满足 promotion gate 的通用问题才进入 bounded Reviewed Handoff implementation。原真实失败要 replay，并增加 unrelated regression。
-
 不要因为一个 synthetic task PASS 自动继续创造下一轮 synthetic recovery。
 
-### 2.1 用户说“记录 repo 并保存到合适的地方”时是什么意思
+### 2.1 用户说“记录 repo 并保存到合适的地方”时先判断归属
 
-这句话默认指向**当前正在做的真实项目 repo**，不是自动写 AI_Skills_Collection。
+不要机械地把所有问题都写进当前项目 repo，也不要机械地把所有问题都写进 AI_Skills_Collection。
 
-先看当前项目已经有什么长期记录方式，再选最合适的位置：
+先问：
 
-- 项目长期下一步、还没做的研究/工程任务：写进项目已有的 `TODO`、`ROADMAP` 或同类长期计划；
-- 某一次具体任务、实验、PPT 返修、报告返修的问题：写进这轮已有的 `result.md`、review、revision note 或同类记录；
-- 已经确定的长期科学/产品决定：写进项目已有的 decision / design 文档；
-- 如果已有合适文件，就更新已有文件，不为了“记一下”再造新的目录、schema 或第二套 TODO。
+> 这是项目本身的问题，还是正在使用的 AI_Skills plugin 做得不好？
 
-只有当用户当前就在维护 AI_Skills_Collection，才直接更新中央 `docs/plugin-todos/<plugin>.md`。
+**项目本身的问题**继续写当前项目 repo。例如研究方向、模型、数据、实验、业务逻辑、项目代码 bug、项目自己的长期 TODO。
 
-如果项目里完全没有合适的记录位置，才创建一个最小、明显的项目本地记录；不要为了 AI_Skills 反馈强制所有 repo 长成同一种目录结构。
+**plugin 使用过程中暴露的问题**直接写回 AI_Skills_Collection 对应 plugin TODO。例如：
 
-### 2.2 谁记录，谁提炼
+- `presentations` 生成/返修的 PPT 箭头穿字、图太小、已接受页面被改坏、现有 deck 被错误重做；
+- `research-writing` 把导师报告写成运行日志；
+- `statistical-modeling` 的通用分析流程或检查行为出现错误；
+- `medical-imaging` 的通用影像处理工作流出现可复现问题。
 
-真实项目 thread / 项目 Codex 与中央 AI_Skills Planner 的职责必须分开。
+这类问题不要为了“留证据”再在项目 repo 维护第二份 plugin TODO。项目 repo 只保存项目自己的事情。
 
-**真实项目 thread / 项目 Codex 负责记录“实际发生了什么”。**
+如果分不清，一个实用判断是：
 
-- 如果项目采用 task/result 结构，默认在 `results/<task_key>/result.md` 中增加 `## AI_Skills feedback handoff`；已有更合适的 review / revision result 文件时可以用已有位置，但必须稳定可引用。
-- 保存用户原始反馈、对应 artifact/page/component、实际 render/result 和已经接受的元素。
-- `AI_Skills feedback handoff` 至少记录：候选 plugin、原始问题、项目中的证据位置、明显只属于当前项目的边界。
-- 这个小节只在问题可能反映中央 plugin 行为时需要。普通项目 TODO 不必每条都写 AI_Skills feedback。
-- 可以标出“这个问题可能和哪个 plugin 有关”，但不要求项目 thread 自己证明问题一定通用，也不得直接把项目里的具体做法写成中央 plugin 的永久规则。
-- 不为此强制所有项目建立统一的新目录或 schema；优先使用项目已经存在的任务/返修记录。
+> 换成另一个真实项目，plugin 仍然可能犯同样的错吗？
 
-**AI_Skills Planner 负责提炼“中央 plugin 应该学到什么”。**
+如果大概率会，优先按 plugin 问题处理。
 
-在更新 `docs/plugin-todos/<plugin>.md` 前，Planner 必须先比较：
+### 2.2 真实项目 thread 可以直接写中央 plugin TODO，但只能先写事实
+
+当真实项目 thread 发现 plugin 问题，并且用户要求“记录 repo”“保存到合适的地方”或明确要求沉淀经验时，thread 应：
+
+1. 读取 AI_Skills_Collection 当前 `main`；
+2. 读取根 `TODO.md`；
+3. 读取 `docs/plugin-todos/<target-plugin>.md`；
+4. 先检查是否已有明显相同的问题；
+5. 如果没有可直接合并的条目，就新增一个 `status: NEW` 的真实使用反馈。
+
+项目 thread 写 `NEW` 时只需要：
+
+```text
+### <简短的问题标题>
+status: NEW
+source: <真实项目 / 当前任务>
+evidence: <实际输出的路径、链接、commit 或 render>
+problem: <用户实际看到的问题>
+project-specific context: <哪些细节只属于当前项目，不应变成通用规则>
+```
+
+此时不要要求项目 thread 自己填写 `target layer`、`candidate action`、`promotion gate`，也不要直接把“P10 箭头穿字”改写成“所有科研 PPT 必须怎样”的永久规则。
+
+**AI_Skills Planner / maintainer 负责后续提炼。**
+
+Planner 在处理 `NEW` 条目前必须比较：
 
 1. 当前 plugin TODO 是否已有同一问题；
 2. active skill/reference/QA/runtime 是否已经有对应规则；
 3. 其他真实项目是否出现过同类失败；
-4. 当前反馈是否只是项目科学内容、模板选择或一次性页面决定。
+4. 当前反馈中哪些只是项目内容。
 
 然后只允许以下处理之一：
 
-- 已有 active rule，但真实输出仍失败：视为 production regression，记录新的真实证据并检查 consumer/runtime；不要再造一条同义规则。
-- 已有 plugin TODO：合并新的项目证据；不要新增重复 TODO。
-- 只属于当前项目：保留在项目 repo，标 `PROJECT_LOCAL`，不写中央 TODO。
-- 新的、可能跨项目复用的问题：由 Planner 创建/更新 `CANDIDATE_GENERIC`。
+- 已有 active rule，但真实输出仍失败：视为 production regression，补充真实证据并检查实际 consumer/runtime；不要再造一条同义规则。
+- 已有 plugin TODO：合并新的真实案例；不要新增重复 TODO。
+- 只属于当前项目：标 `PROJECT_LOCAL`，不升级成通用规则；必要时从活跃区清理。
+- 新的、可能跨项目复用的问题：由 Planner 整理成 `CANDIDATE_GENERIC`。
 - 已满足 promotion gate：由 Planner 标 `PROMOTE_NOW`，之后才允许进入 bounded implementation。
-- 已解决、重复、错误方向：标 `SUPERSEDED` / `REJECTED` 或不再保留在活跃区。
+- 已解决、重复、错误方向：标 `SUPERSEDED` / `REJECTED` 或从活跃区清理。
 
-**Executor 不拥有“是否通用”的最终决定。** 项目 Executor 可以给出候选解释和证据定位，但中央 TODO 的抽象、去重、状态升级由 AI_Skills Planner/maintainer 在明确的 triage 步骤中完成。
+**Executor 不拥有“是否通用”的最终决定。** 项目 Executor 只负责记录真实问题；中央 TODO 的抽象、去重、状态升级由 AI_Skills Planner/maintainer 完成。
+
+如果项目 thread 无法访问或写入 AI_Skills_Collection，不要在项目 repo 建一份影子 plugin TODO；明确报告“中央 plugin TODO 尚未记录”，等获得中央 repo 访问后再补。
 
 ## 3. 版本号：禁止 AI 自行发挥
 
@@ -147,12 +167,11 @@ Affected plugins:
 
 ## 5. TODO / Changelog 边界
 
-- 根 `TODO.md`：仓库 TODO 首页，只负责指向各 plugin TODO 和说明问题怎么从真实项目流入；不复制详细条目。
-- `docs/plugin-todos/<plugin>.md`：未来可能要改什么，由 AI_Skills Planner 负责抽象、去重和状态维护。
+- 根 `TODO.md`：仓库 TODO 首页，只负责指向各 plugin TODO 和说明问题怎么进入中央维护流程；不复制详细条目。
+- `docs/plugin-todos/<plugin>.md`：某个 plugin 还存在哪些真实问题、以后可能要改什么。
 - `docs/plugin-changelogs/<plugin>.md`：这个 plugin 已经在哪个正式版本改变了什么。
 - 根 `CHANGELOG.md`：整个 repository release 首页。
-- `docs/provenance/`：详细来源/历史记录。
-- 真实项目自己的 TODO/review/result：保存项目专属决定和原始用户反馈。
+- 真实项目自己的 TODO/ROADMAP/decision：只保存项目本身的研究、产品、代码和实验工作，不再维护 AI_Skills plugin 问题副本。
 
 maintenance TODO / changelog /历史记录不应进入普通 generated plugin runtime payload。
 
