@@ -46,6 +46,8 @@ project-specific context: <哪些细节只属于当前项目>
 
 这一步的目标是保存真实证据，不是发明永久规则。
 
+AI_Skills_Collection 是公开仓库时，`source` / `evidence` / `project-specific context` 只写到足以定位和理解问题的程度。不要把未公开论文正文、私有数据、受限链接内容、个人信息或项目秘密复制进中央 TODO；必要时只保留本机路径、task id、commit 或一句不泄露内容的说明。
+
 不要要求项目 thread 此时填写 `target layer`、`candidate action` 或 `promotion gate`。这些属于后面的中央整理工作。
 
 ## AI_Skills Planner / maintainer 负责整理
