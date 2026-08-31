@@ -39,6 +39,8 @@ ai-skills install --target repo --profile research-main --mode symlink --write-a
 
 当前整个仓库 / CLI 版本是 `5.0.0`。
 
+Repository / CLI release: `5.0.0`.
+
 仓库版本和插件版本是两回事。仓库现在是 `5.0.0`，十个中央插件各自从 `0.1` 开始独立记版本。以后可能出现 `AI_Skills_Collection 5.0.3`、`presentations 0.4`、`research-writing 0.2` 这样的组合，这是正常的。
 
 ## 先决定装什么
