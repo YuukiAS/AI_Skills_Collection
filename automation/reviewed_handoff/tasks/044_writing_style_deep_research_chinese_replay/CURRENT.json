@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "044_writing_style_deep_research_chinese_replay",
-  "state": "PLAN_FROZEN",
+  "state": "BLOCKED",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -15,5 +15,5 @@
   "review_limit_reached": false,
   "human_gate_reason": null,
   "visual_review_required": false,
-  "next_action": "EXECUTOR_RUN_CURRENT_WRITING_STYLE_BASELINE_THEN_MINIMAL_GENERIC_REFINEMENT_IF_NEEDED"
+  "next_action": "HUMAN_AUTHORIZE_PRIVATE_PDF_PRODUCTION_BASELINE_OR_PLANNER_REPLAN"
 }
