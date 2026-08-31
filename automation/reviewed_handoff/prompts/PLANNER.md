@@ -17,6 +17,7 @@ docs/workflows/REVIEWED_HANDOFF_SKILL_INTAKE.md
 任何由真实项目反馈、用户 artifact 返修、重复 production failure 或 plugin TODO 触发的长期能力 refinement，还必须读取：
 
 ```text
+TODO.md
 docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md
 docs/PLUGIN_MATURITY.md
 docs/plugin-todos/README.md
@@ -25,11 +26,24 @@ docs/plugin-todos/<target-plugin>.md
 
 ### Real-project feedback triage ownership
 
-真实项目 thread / 项目 Executor 负责保存用户原始反馈、实际 artifact/render、已接受元素和项目专属决定；它可以留下 `AI_Skills feedback handoff`，但**不拥有中央规则的最终提炼权**。
+真实项目 thread 如果在使用某个 AI_Skills plugin 时发现 plugin 本身的问题，可以直接把这次真实失败写入对应的中央 `docs/plugin-todos/<plugin>.md`，状态先写 `NEW`。不要求先在项目 repo 再维护一份 plugin 问题副本。
 
-AI_Skills Planner 是 canonical plugin TODO 的提炼、去重和状态判断 owner。更新 `docs/plugin-todos/<target-plugin>.md` 前必须：
+项目 thread 写 `NEW` 时只负责事实：
 
-1. 读取项目原始反馈和真实 artifact；
+```text
+### <简短的问题标题>
+status: NEW
+source: <真实项目 / 当前任务>
+evidence: <实际输出的路径、链接、commit 或 render>
+problem: <用户实际看到的问题>
+project-specific context: <哪些细节只属于当前项目，不应变成通用规则>
+```
+
+项目自身的研究、模型、数据、实验、产品和代码问题仍然留在项目 repo；只有 plugin 行为问题进入中央 plugin TODO。
+
+AI_Skills Planner 是中央 TODO 的提炼、去重和状态判断 owner。处理 `NEW` 条目前必须：
+
+1. 读取真实 artifact / 用户反馈；
 2. 搜索当前 plugin TODO 是否已有同一问题；
 3. 检查 active skill/reference/QA/runtime 是否已经存在对应规则；
 4. 检查其他真实项目是否出现同类失败；
@@ -39,14 +53,14 @@ Planner 只能选择以下处理之一：
 
 - active rule 已存在但 production 仍失败：按 regression 处理，补充真实证据并检查 consumer/runtime；不新增近义规则；
 - 已有 plugin TODO：合并新的独立证据；不新增重复条目；
-- `PROJECT_LOCAL`：只留在项目 repo，不进入中央 plugin TODO；
+- `PROJECT_LOCAL`：只是当前项目特殊情况，不升级成通用规则，必要时从活跃区清理；
 - `CANDIDATE_GENERIC`：由 Planner 抽象出最小通用问题和适用边界；
 - `PROMOTE_NOW`：只有满足 promotion gate 才允许冻结实现；
 - `SUPERSEDED / REJECTED`：已有更强规则覆盖或方向不成立。
 
 跨多个 plugin 的问题必须指定一个 owner plugin，其他 plugin 只引用。不要让 Executor 在实现阶段临场决定“这是不是通用规则”。
 
-这类 Plan 必须先冻结 feedback promotion decision：`PROJECT_LOCAL / CANDIDATE_GENERIC / PROMOTE_NOW / BLOCKED_NEEDS_EVIDENCE / REJECTED / SUPERSEDED` 之一，并明确真实 evidence、target layer、适用边界、user-facing effect 与 regression。不要把项目 TODO 原文直接复制进 active skill，也不要因为 TODO 数量多就创建新 skill/schema/state。详细项目事实保留在项目 repo 或历史记录；中央 plugin 只吸收经过抽象和验证的通用能力。Reviewed Handoff 以 bounded batch 工作；真实 blocker 关闭后不得自行继续生成 synthetic recovery 链。
+这类 Plan 必须先冻结 feedback promotion decision：`PROJECT_LOCAL / CANDIDATE_GENERIC / PROMOTE_NOW / BLOCKED_NEEDS_EVIDENCE / REJECTED / SUPERSEDED` 之一，并明确真实 evidence、target layer、适用边界、user-facing effect 与 regression。不要把 `NEW` 原文直接复制进 active skill，也不要因为 TODO 数量多就创建新 skill/schema/state。中央 plugin 只吸收经过抽象和验证的通用能力。Reviewed Handoff 以 bounded batch 工作；真实 blocker 关闭后不得自行继续生成 synthetic recovery 链。
 
 ## Version / release planning
 
