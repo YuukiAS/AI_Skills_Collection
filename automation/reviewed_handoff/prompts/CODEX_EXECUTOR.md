@@ -37,7 +37,7 @@ Executor 没有 Planner/Reviewer authority。不得修改：
 
 如果 `CURRENT.visual_review_required=true`，必须把实际渲染图片和 `results/<task_key>/visual_review/visual_inputs.json` 一起提交；不要在本地调用 Terra 或等待 `VISUAL_REVIEW.json`。非 CI 任务进入 `READY_FOR_GPT_REVIEW` 前必须完成这些 visual inputs；CI-required 任务进入 `WAITING_FOR_CI` 前必须完成这些 visual inputs，CI PASS 后才由 Scheduled GPT 进入 `READY_FOR_GPT_REVIEW` 并等待 GitHub Actions visual evidence。
 
-如果 `CURRENT.ci_required=true`，Executor **不能伪造或等待尚未发布 commit 的 GitHub CI**。此时把 `ci_status` 保持为 `PENDING`，最终状态写成 `WAITING_FOR_CI`。当前 task branch 的 authorized publisher 发布 clean commits后，Scheduled GPT 会读取该 branch 的真实 GitHub checks：PASS 才进入 `READY_FOR_GPT_REVIEW`；FAIL 会作为一条真实 GPT `REVISE` finding 进入返修流程。
+如果 `CURRENT.ci_required=true`，Executor **不能伪造或等待尚未发布 commit 的 GitHub CI**。此时把 `ci_status` 保持为 `PENDING`，最终状态写成 `WAITING_FOR_CI`。当前 task branch 的 authorized publisher 发布 clean commits 后，Scheduled GPT 会读取该 branch 的真实 GitHub checks：PASS 才进入 `READY_FOR_GPT_REVIEW`；FAIL 会作为一条真实 GPT `REVISE` finding 进入返修流程。
 
 如果 `CURRENT.ci_required=false`，本地 acceptance/regression gates 满足后直接进入 `READY_FOR_GPT_REVIEW`，`ci_status` 保持 `NOT_REQUIRED`（或已有合法 PASS）。
 
