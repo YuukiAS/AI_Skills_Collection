@@ -4,6 +4,8 @@
 
 读取 `REQUEST.md`、当前 `PLAN.md`、`CURRENT.json`，以及已有 `REVIEW_<n>.md`。第一次执行必须严格实现冻结 Plan；返修时只修 Reviewer 明确指出的 blocker 和由它直接导致的 regression，不得自行扩大 Plan。
 
+如果 `CURRENT.state=REVISE` 且存在 `CURRENT.human_rejection.decision=REJECT` / `route=REVISE`，这不是新的 Reviewer `REVISE`，也不能重置 `review_round`。只修复用户拒绝中指出、且可由现有冻结 `PLAN.md` 支持的问题；若拒绝理由证明 Plan 本身需要改变，转为 `NEEDS_GPT_PLANNER`，不要自行扩展产品/语义范围。
+
 如果 repository /用户已经为当前 Reviewed Handoff task 指定独立 workflow branch（AI_Skills_Collection 默认使用 `reviewed/<task_key>`），只在该 task branch 上执行和交接；不要因为同一 repository 的其他 task 正在等待 CI、Planner、Reviewer、visual evidence 或用户输入而暂停当前独立任务。分支冲突或 integration 选择属于可恢复的 branch decision，不等于 task 失败。
 
 在 AI_Skills_Collection 中，如果冻结 Plan 涉及 AI Resources、Notion candidate inbox、外部 skill repo、provenance intake、profile/marketplace exposure 或 active skill routing，还必须先读取：
@@ -52,6 +54,8 @@ Executor 没有 Planner/Reviewer authority。不得修改：
 5. leave working tree clean。
 
 如果 `CURRENT.visual_review_required=true`，必须把实际渲染图片和 `results/<task_key>/visual_review/visual_inputs.json` 一起提交；不要在本地调用 Terra 或等待 `VISUAL_REVIEW.json`。非 CI 任务进入 `READY_FOR_GPT_REVIEW` 前必须完成这些 visual inputs；CI-required 任务进入 `WAITING_FOR_CI` 前必须完成这些 visual inputs，CI PASS 后才由 Scheduled GPT 进入 `READY_FOR_GPT_REVIEW` 并等待 GitHub Actions visual evidence。
+
+如果 `CURRENT.text_review_required=true`，并且最终 user-facing text artifact 不能公开提交，Executor 必须使用 `ai-bridge text-review encrypt` 把完整 UTF-8 Markdown/plain-text artifact 加密为 `results/<task_key>/text_review/payload.age`，同时提交 `results/<task_key>/text_review/text_inputs.json`。不要提交 plaintext，不要把 OpenAI key 或 age private identity 写入 repo，不要用摘要、抽样段落或 Executor finding 替代完整文本。非 CI 任务进入 `READY_FOR_GPT_REVIEW` 前必须完成 encrypted payload + manifest；CI-required 任务进入 `WAITING_FOR_CI` 前也必须完成这些 text inputs，CI PASS 后才由 Scheduled GPT 进入 `READY_FOR_GPT_REVIEW` 并等待 GitHub Actions Text Review evidence。
 
 如果 Plan 的 acceptance 依赖真实 artifact 质量，Executor 交接时必须提供 Reviewer 能实际读取或查看的 artifact evidence：
 

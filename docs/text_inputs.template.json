@@ -1,0 +1,24 @@
+{
+  "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1",
+  "task_key": "001_task",
+  "workflow_type": "reviewed_handoff",
+  "review_kind": "user-facing-text",
+  "prompt_version": "ai-bridge.text-review.v1",
+  "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
+  "external_upload_authorization": "User authorized this private text artifact to be decrypted in GitHub Actions and sent to OpenAI Responses API with store=false for this task.",
+  "rubric": {
+    "instructions": "Read the complete UTF-8 Markdown/plain-text artifact and decide whether it satisfies the frozen acceptance requirements."
+  },
+  "identity_bindings": {
+    "implementation_commit": "<implementation_commit>"
+  },
+  "input": {
+    "logical_id": "primary_text",
+    "encrypted_payload_path": "results/001_task/text_review/payload.age",
+    "ciphertext_sha256": "<ciphertext_sha256>",
+    "plaintext_sha256": "<plaintext_sha256>",
+    "plaintext_size_bytes": 0,
+    "mime_type": "text/markdown; charset=utf-8",
+    "source_basename": "final.md"
+  }
+}

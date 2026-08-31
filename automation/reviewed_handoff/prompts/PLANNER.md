@@ -41,6 +41,8 @@ Domain owner: <target plugin>
 - private/text artifact review 的底层 owner 是 `GPT_Codex_AI_Bridge_Kit` 的 Text Review；046 不自行实现另一套 artifact transport/reviewer，Text Review 未落地时只能冻结 `WAITING_FOR_EVIDENCE / NEEDS_REVIEW` 条件；
 - 缺少决定 PASS 所需 artifact 时是 `WAITING_FOR_EVIDENCE / NEEDS_REVIEW` 条件，不能 PASS。
 
+如果 acceptance 明确依赖某个 user-facing text artifact 的定性质量、全文可读性、语言风格或读者体验，Planner 在冻结 Plan 前必须确认 Reviewer 有合法、真实可访问的 review path。`artifact 保持 host-local private` + `GitHub-only Scheduled Reviewer 判断全文质量` 是无效计划：若 artifact 不能公开 commit，必须要求 Text Review transport 已准备好，或把 task 保持在 planning/waiting 状态。
+
 Planner / Reviewer 能依据 frozen requirement 明确判断的问题，不得外包给用户；不得推给 `AWAIT_HUMAN_DECISION`。明显违反用户明确规则、明显机器腔、明显 layout failure、明显 artifact regression 应冻结为 Reviewer 必须自行 `REVISE` 或在不可恢复时 `BLOCKED` 的条件。Human gate 默认只用于真正互斥的产品/科研选择、frozen criteria 无法决定的主观偏好、用户必须亲自授权的外部动作、显著风险/成本/隐私/许可决定，或 frozen Plan 明确要求的最终人工验收。
 
 044 是必须覆盖的真实回归：用户报告完整 private `rewritten_report.md` 仍有 `provenance`、`estimand`、`scientific gap`、`resource contract`、`state of the art` 等 reader-facing 表达，违反 frozen writing requirement；Reviewer 因未读取完整 artifact 仍给 PASS。后续同类 writing/report/artifact 任务必须先证明 Reviewer 实际读取最终 artifact，不能用摘要或 process PASS 推导 product PASS。
@@ -146,7 +148,7 @@ Planner 必须明确：
 
 计划冻结后写入当前 task 的 `PLAN.md`，使用模板规定的 frontmatter 和章节。若当前 Planner 通过 GitHub connector 工作，先写 `PLAN.md`，最后写 `CURRENT.json` 并把 `CURRENT.state` 推进到 `PLAN_FROZEN`。不要假设 Planner 可以运行目标机器上的 local CLI。
 
-执行期间如果 `CURRENT.state=NEEDS_GPT_PLANNER`，Scheduled GPT 可以做一次最小 re-plan：只解决 Codex 已证实无法从冻结 Plan 推导的歧义，不得借机重新设计整个任务。修改 `PLAN.md` 后将 `plan_revision` 加一并在最后写 `CURRENT.json` 恢复 `PLAN_FROZEN`。若已经做过一次 re-plan，或必须由用户改变产品/科学语义，先写 `FINAL_REPORT.md`，最后写 `CURRENT.json` 进入 `AWAIT_HUMAN_DECISION`。
+执行期间如果 `CURRENT.state=NEEDS_GPT_PLANNER`，Scheduled GPT 可以做一次最小 re-plan：只解决 Codex 已证实无法从冻结 Plan 推导的歧义。如果该状态来自 `CURRENT.human_rejection.decision=REJECT` / `route=NEEDS_GPT_PLANNER`，把用户拒绝当作 human decision evidence，而不是 Reviewer decision；保留既有 `review_round`、`last_review_decision=PASS` 和原 `REVIEW_<n>.md` 历史。不得借机重新设计整个任务。修改 `PLAN.md` 后将 `plan_revision` 加一并在最后写 `CURRENT.json` 恢复 `PLAN_FROZEN`。若已经做过一次 re-plan，或必须由用户改变产品/科学语义，先写 `FINAL_REPORT.md`，最后写 `CURRENT.json` 进入 `AWAIT_HUMAN_DECISION`。
 
 ## Integration closure planning
 

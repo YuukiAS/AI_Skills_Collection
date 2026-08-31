@@ -233,18 +233,35 @@ class VisualReviewWorkflowTests(unittest.TestCase):
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("github.event.inputs.manifest", workflow)
         self.assertIn("github.event.inputs.output", workflow)
-        self.assertIn("647f63c49ccea828a0ac76a6e9adce026531c906", workflow)
+        self.assertIn("9e8ab90fb13e92d268b08ad7fc7aa64ed9f9877a", workflow)
 
-    def test_push_path_uses_resolver_not_repository_level_vars(self) -> None:
+    def test_push_path_is_manifest_only_and_writes_back_to_trigger_branch(self) -> None:
         workflow = (REPO_ROOT / ".github/workflows/ai-bridge-visual-review.yml").read_text(encoding="utf-8")
-        self.assertIn("scripts/resolve_reviewed_handoff_visual_target.py", workflow)
-        self.assertIn("--github-output", workflow)
+        self.assertIn("branches:", workflow)
+        self.assertIn("- main", workflow)
+        self.assertIn("- 'reviewed/**'", workflow)
+        self.assertIn("paths:", workflow)
+        self.assertIn("'results/**/visual_review/visual_inputs.json'", workflow)
+        self.assertNotIn("paths-ignore:", workflow)
+        self.assertNotIn("scripts/resolve_reviewed_handoff_visual_target.py", workflow)
         self.assertNotIn("vars.AI_BRIDGE_VISUAL_REVIEW_MANIFEST", workflow)
         self.assertNotIn("vars.AI_BRIDGE_VISUAL_REVIEW_OUTPUT", workflow)
-        self.assertIn("Resolve Visual Review Target", workflow)
-        self.assertIn("AI Bridge Visual Review: SKIPPED / NOT_REQUIRED", workflow)
-        self.assertIn("needs.resolve_visual_review.outputs.skip != '1'", workflow)
-        self.assertIn("expensive visual reviewer was not started", workflow)
+        self.assertIn('git push origin "HEAD:${GITHUB_REF_NAME}"', workflow)
+
+
+class TextReviewWorkflowTests(unittest.TestCase):
+    def test_text_review_workflow_uses_manifest_filter_fallback_key_and_branch_writeback(self) -> None:
+        workflow = (REPO_ROOT / ".github/workflows/ai-bridge-text-review.yml").read_text(encoding="utf-8")
+        self.assertIn("workflow_dispatch:", workflow)
+        self.assertIn("github.event.inputs.manifest", workflow)
+        self.assertIn("github.event.inputs.output", workflow)
+        self.assertIn("9e8ab90fb13e92d268b08ad7fc7aa64ed9f9877a", workflow)
+        self.assertIn("- main", workflow)
+        self.assertIn("- 'reviewed/**'", workflow)
+        self.assertIn("'results/**/text_review/text_inputs.json'", workflow)
+        self.assertIn("secrets.OPENAI_REVIEW_API_KEY || secrets.OPENAI_VISUAL_REVIEW_API_KEY", workflow)
+        self.assertIn("AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY", workflow)
+        self.assertIn('git push origin "HEAD:${GITHUB_REF_NAME}"', workflow)
 
 
 if __name__ == "__main__":

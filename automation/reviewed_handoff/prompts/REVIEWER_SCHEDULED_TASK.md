@@ -95,6 +95,8 @@ Reviewer 必须独立读取：
 - 当前 implementation commit 的真实 CI/check 状态（若项目要求 CI）；
 - 现有测试与必要的 user-facing artifacts；
 - 之前的 REVIEW_<n>.md，仅用于检查 blocker closure。
+- 若 `CURRENT.visual_review_required=true`，当前 `results/<task_key>/visual_review/VISUAL_REVIEW.json`；
+- 若 `CURRENT.text_review_required=true`，当前 `results/<task_key>/text_review/TEXT_REVIEW.json`；
 - 若任务属于 AI Skills intake，还要读取 `docs/workflows/REVIEWED_HANDOFF_SKILL_INTAKE.md`，并审核 existing-history gate、Planner decision taxonomy、routing contract、Notion reconciliation semantics 和 Research out-of-scope 是否满足。
 - 若任务属于中央 plugin production refinement，还要审核 maintenance companion、domain owner、production ai-skills-core invocation、version/changelog、generated parity、original replay 和 unrelated regression 是否真实满足。
 
@@ -108,6 +110,10 @@ PRODUCT / ARTIFACT PASS
 CI、schema、protected-span、Executor summary、本地测试和 control-plane transaction 只能证明对应 process gate。凡 frozen Plan 的 acceptance 依赖真实 artifact 质量，Reviewer 必须实际读取或查看最终 artifact 本身，包括 writing output、PDF/report、presentation render、scientific figure、frontend render 或其他真实交付物。Private/text artifact review 的底层 owner 是 `GPT_Codex_AI_Bridge_Kit` 的 Text Review；046 不自行实现另一套 artifact transport/reviewer。完整 private/text artifact 因隐私不能提交到公开 repo 时，Reviewer 只能在 Bridge Kit Text Review evidence/locator 落地后消费该 evidence。
 
 如果 Reviewer 无法访问决定 PASS 所需的 artifact，当前语义是 `WAITING_FOR_EVIDENCE / NEEDS_REVIEW`：不得写 `PASS`，不得把 Executor 摘要当作 artifact evidence。若 Executor 能补 repo-safe artifact evidence 或 Bridge Kit Text Review evidence，写 `REVISE` 并指出缺少的 artifact；若 Plan 没有定义可复核 artifact path / Text Review evidence，进入最小 `NEEDS_GPT_PLANNER`；只有证据证明 artifact 永久不可访问且恢复路径不可用时，才按 `BLOCKED`。
+
+如果 task 要求 Visual Review，先机械确认 `VISUAL_REVIEW.json` 存在，且绑定当前 `task_key`、`workflow_type=reviewed_handoff`、`implementation_commit` 和 input image hashes。证据缺失时保持等待，不写 `REVIEW_<round>.md`，不消耗 `review_round`。证据 stale 或 malformed 时不得 PASS。Visual Review 的 `overall_decision` 只是当前 Reviewer 消费的 evidence，不创建 Visual Reviewer role。CI-required visual task 的顺序必须保持为：`WAITING_FOR_CI` -> CI PASS -> `READY_FOR_GPT_REVIEW` -> `waiting_visual_review_evidence` -> fresh visual evidence -> GPT Reviewer。
+
+如果 task 要求 Text Review，先机械确认 `TEXT_REVIEW.json` 存在，且绑定当前 `task_key`、`workflow_type=reviewed_handoff`、`implementation_commit`、text manifest identity 和 plaintext SHA-256。证据缺失时保持等待，不写 `REVIEW_<round>.md`，不消耗 `review_round`。证据 stale、malformed、plaintext SHA mismatch 或 manifest identity mismatch 时不得 PASS。Text Review 的 `overall_decision` 只是当前 Reviewer 消费的 evidence，不创建新的 GPT role。若 Text Review 给出 blocking `REVISE`，Scheduled GPT Reviewer 必须把它作为 frozen requirement failure 进入普通 `REVISE` 路径，不得把明显 failure 推给 human gate；只有达到既有 review round limit 时才走 `REVIEW_LIMIT` human gate。
 
 明显违反 frozen requirement 的 artifact 质量问题必须由 Reviewer 自行阻断，不得推给 `AWAIT_HUMAN_DECISION`：明显违反用户明确规则、明显机器腔、明显 layout failure、明显 artifact regression，都是 `REVISE` 或真实不可恢复时 `BLOCKED` 的依据。Human gate 默认只用于真正互斥的产品/科研选择、frozen criteria 无法决定的主观偏好、用户必须亲自授权的外部动作、显著风险/成本/隐私/许可决定，或 frozen Plan 明确要求的最终人工验收。
 
