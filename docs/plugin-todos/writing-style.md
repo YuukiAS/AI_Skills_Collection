@@ -2,6 +2,15 @@
 
 Canonical maintenance inbox for the `writing-style` plugin.
 
+## Incoming real-use feedback
+
+### English scientific slide microcopy remains formulaic without an explicit writing pass
+status: NEW
+source: TRACE / CAT-TRACE group-meeting deck v4 review
+evidence: `YuukiAS/TRACE` commit `e36cb5d93fc882ce158d88ac9201fe494b98b69a`; v4 P2–P19；presentation task读取了 `scientific-prose`，但没有把 dedicated writing-style replay 作为独立完成步骤
+problem: 最终英文 slide 仍出现反复的 `Failure prevented`、机械 `Example.` 标签、`as new samples arrive` 一类不自然微文案，以及把结构化事实压成 noun-stack/table-contract 语言的情况。当前证据说明 presentation production 只“读写作规则”仍不足以保证自然科研英语；需要先用现有 `scientific-prose` 对已经冻结科学结构的可见英文做一次真实 replay，确认问题来自 routing 未执行，还是 skill 本身仍缺 slide-specific microcopy 能力。
+project-specific context: CAT-TRACE、TRACE、CORAL、catalogue/open-tail 等科学术语和具体句子属于项目；不能为这个 deck 建专用禁词表，也不能让 writing-style 改动公式、模型结构、页面布局或科学 claim。
+
 ## Open candidates
 
 ### Keep style cleanup downstream of scientific structure
