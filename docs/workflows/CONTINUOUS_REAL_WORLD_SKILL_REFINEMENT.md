@@ -4,6 +4,26 @@
 
 核心原则：**项目自己的问题留在项目 repo；plugin 自己的问题直接进入 AI_Skills_Collection 对应 plugin TODO；项目 thread 记录真实失败，中央 Planner 负责提炼。**
 
+## 0. Maintenance companion
+
+任何会改变正式中央 plugin production behavior 的 refinement，都必须显式使用：
+
+- `workflow-core`：规划、执行、review、完成这些流程边界；
+- `ai-skills-core`：AI_Skills plugin maintenance contract，包括 source authority、TODO/duplicate triage、domain ownership、generated parity、production replay、unrelated regression、version/changelog 和 release closure；
+- target domain plugin：目标领域专业判断，例如 `presentations`、`writing-style`、`statistical-modeling`、`bioinformatics` 或 `medical-imaging`。
+
+`ai-skills-core` 不替代 domain plugin，也不新增 workflow/state/schema。它只保证中央 plugin refinement 真的完成维护闭环。Planner/Executor 必须显式调用它；不要用全局 implicit trigger 解决。
+
+用户界面里 `ai-skills-core` 显示为 `AI Skills Maintainer`。`ai-skills-core` 作为内部 plugin slug 保持不变；不要为了显示名制造安装、profile、Marketplace、历史引用和兼容性迁移，除非有强证据证明 slug migration 必须发生。
+
+典型维护组合：
+
+- `AI Skills Maintainer` + `Presentations`
+- `AI Skills Maintainer` + `Writing Style`
+- `AI Skills Maintainer` + `Statistical Modeling`
+
+目标 plugin 决定“专业上怎么改”；Maintainer 决定“怎么安全、可验证地维护和收口”。
+
 ## 1. Source of truth 优先级
 
 长期维护时按以下优先级读取：
@@ -186,6 +206,14 @@ Promotion 前必须明确：
 
 如果以后需要做 generalization acceptance，再单独冻结新的真实 batch。不要让 benchmark 取代日常真实项目反馈。
 
+## 10.1 Artifact-aware review 与 044 回归
+
+凡 acceptance 依赖真实 artifact 质量，Reviewed Handoff 必须区分 `PROCESS PASS` 与 `PRODUCT / ARTIFACT PASS`。CI、schema、protected-span、Executor summary 和本地测试只能证明 process gate；writing output、PDF/report、presentation render、scientific figure、frontend render 等真实 artifact 必须由 Reviewer 实际读取或查看。
+
+Private/text artifact review 的底层 owner 是 `GPT_Codex_AI_Bridge_Kit` 的 Text Review。046 不自行实现另一套 artifact transport/reviewer；等 Bridge Kit Text Review 落地后，AI Skills Maintainer / Reviewed Handoff 只负责消费其 evidence、locator 和 artifact identity。Text Review 未落地或 Reviewer 无法访问决定 PASS 所需 artifact 时，语义是 `WAITING_FOR_EVIDENCE / NEEDS_REVIEW`，不能 PASS。
+
+044 是当前真实回归用例：用户报告完整 private `rewritten_report.md` 仍有 `provenance`、`estimand`、`scientific gap`、`resource contract`、`state of the art` 等 reader-facing 表达，违反 frozen writing requirement；Reviewer 没读完整 artifact 却给 PASS。以后这类明显违反用户明确规则、明显机器腔、明显 layout failure 或明显 artifact regression 的问题，Reviewer 必须自行 REVISE/BLOCK，不得推给 human gate。
+
 ## 11. Version 与 capability status 分开
 
 长期版本规则见：
@@ -201,6 +229,8 @@ docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md
 - plugin version 不跟 repository 锁步；
 - capability status 只是可选说明；
 - TODO 增加本身不触发 version bump。
+- 如果 bounded plugin refinement 已经改变 production user-facing behavior / quality / workflow，并且 implementation 完成、原 failure replay PASS、unrelated regression PASS、准备交付/release，则 affected plugin version 必须在同一 refinement task 中 bump exactly once；不得把已完成的 production 改动长期留在 `Unreleased` 等以后再 bump。
+- 如果只是 baseline replay、TODO/provenance/docs-only、tests-only，或没有 runtime behavior change，则 `NO_BUMP` 是正确结果。
 
 普通真实 refinement 通常形成 repository patch release。只有整个 collection 获得此前没有的 repository-level user capability，才考虑 repository minor。
 

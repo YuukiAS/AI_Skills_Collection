@@ -1,6 +1,6 @@
 {
-  "version": "5.0.0",
-  "generated_at": "2026-08-30T10:17:47+00:00",
+  "version": "5.0.1",
+  "generated_at": "2026-08-31T16:43:14+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
   "skill_count": 149,
@@ -67,7 +67,7 @@
       "subcategory": "codex-system",
       "slug": "ai-skills-repository-maintainer",
       "install_selector": "core/codex-system/ai-skills-repository-maintainer",
-      "description": "Maintain AI_Skills_Collection itself: registry, catalog, provenance, marketplace config, generated layer, icons, profiles, and validation gates. Use only when the user is working on this repository or explicitly asks to maintain the central skill collection.",
+      "description": "Maintain AI_Skills_Collection itself, including production plugin refinement contracts, source-first changes, generated parity, replay/regression gates, versions, changelogs, registry, catalog, marketplace, and profiles. Use only when the user is working on this repository or explicitly asks to maintain the central skill collection.",
       "status": "active",
       "provenance": "user-authored",
       "source_repo_url": "",

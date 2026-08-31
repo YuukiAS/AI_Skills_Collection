@@ -14,6 +14,14 @@ automation/reviewed_handoff/tasks/*/CURRENT.json
 docs/workflows/REVIEWED_HANDOFF_SKILL_INTAKE.md
 ```
 
+对于会改变正式中央 plugin production behavior 的 AI_Skills_Collection refinement，Scheduled GPT 还必须审核 maintenance companion contract：
+
+- `PLAN.md` 必须在现有 sections 中写明 `Maintenance companion: ai-skills-core` 和 `Domain owner: <target plugin>`，不得新增 schema field/state/role/ledger。
+- Executor 必须在编辑 plugin source 前检查生产 `ai-skills-core` 是否 installed/enabled，并实际使用生产 `ai-skills-core` 做 maintenance preflight；只读取 source `SKILL.md` 不能算 production plugin invocation。
+- `ai-skills-core` 只拥有 source authority、TODO/duplicate triage、generated parity、production replay、unrelated regression、version/changelog 和 release closure；专业判断仍属于 target domain plugin。
+- 如果 completed refinement 已改变 production user-facing behavior / quality / workflow，且原 failure replay PASS、unrelated regression PASS 并准备交付/release，affected plugin version 必须在同一 task 中 bump exactly once，并同步 plugin changelog、generated manifest、README release dashboard 和 repository release/version contract；不得把 completed production change 先放 `Unreleased` 等以后再 bump。
+- baseline replay、docs-only、tests-only 或 no-production-change case 保持 `NO_BUMP`，不得伪造 plugin release。
+
 只处理机器状态明确需要 GPT 的 task。没有待处理 task 时无副作用退出：不写 commit、不重复 review、不通知用户。Scheduled GPT 不直接调用 Codex，也不需要 OpenAI API。
 
 AI_Skills_Collection 同时维护多个 plugin，独立 plugin repair 并发是正常情况。多个相互独立的 Reviewed Handoff workflow 默认使用 `reviewed/<task_key>` dedicated branch。Scheduled GPT 必须绑定自己的 task + branch；一个 task branch 在等 CI、Planner、Reviewer、visual evidence 或用户输入时，另一个独立 branch 继续推进，不得因为共享 repository 就串行低频等待。若两个 task 修改同一 plugin/shared runtime/schema/generator 或存在直接依赖，再由 Planner/用户决定是否并行。
@@ -88,6 +96,22 @@ Reviewer 必须独立读取：
 - 现有测试与必要的 user-facing artifacts；
 - 之前的 REVIEW_<n>.md，仅用于检查 blocker closure。
 - 若任务属于 AI Skills intake，还要读取 `docs/workflows/REVIEWED_HANDOFF_SKILL_INTAKE.md`，并审核 existing-history gate、Planner decision taxonomy、routing contract、Notion reconciliation semantics 和 Research out-of-scope 是否满足。
+- 若任务属于中央 plugin production refinement，还要审核 maintenance companion、domain owner、production ai-skills-core invocation、version/changelog、generated parity、original replay 和 unrelated regression 是否真实满足。
+
+Reviewer 必须明确区分：
+
+```text
+PROCESS PASS
+PRODUCT / ARTIFACT PASS
+```
+
+CI、schema、protected-span、Executor summary、本地测试和 control-plane transaction 只能证明对应 process gate。凡 frozen Plan 的 acceptance 依赖真实 artifact 质量，Reviewer 必须实际读取或查看最终 artifact 本身，包括 writing output、PDF/report、presentation render、scientific figure、frontend render 或其他真实交付物。Private/text artifact review 的底层 owner 是 `GPT_Codex_AI_Bridge_Kit` 的 Text Review；046 不自行实现另一套 artifact transport/reviewer。完整 private/text artifact 因隐私不能提交到公开 repo 时，Reviewer 只能在 Bridge Kit Text Review evidence/locator 落地后消费该 evidence。
+
+如果 Reviewer 无法访问决定 PASS 所需的 artifact，当前语义是 `WAITING_FOR_EVIDENCE / NEEDS_REVIEW`：不得写 `PASS`，不得把 Executor 摘要当作 artifact evidence。若 Executor 能补 repo-safe artifact evidence 或 Bridge Kit Text Review evidence，写 `REVISE` 并指出缺少的 artifact；若 Plan 没有定义可复核 artifact path / Text Review evidence，进入最小 `NEEDS_GPT_PLANNER`；只有证据证明 artifact 永久不可访问且恢复路径不可用时，才按 `BLOCKED`。
+
+明显违反 frozen requirement 的 artifact 质量问题必须由 Reviewer 自行阻断，不得推给 `AWAIT_HUMAN_DECISION`：明显违反用户明确规则、明显机器腔、明显 layout failure、明显 artifact regression，都是 `REVISE` 或真实不可恢复时 `BLOCKED` 的依据。Human gate 默认只用于真正互斥的产品/科研选择、frozen criteria 无法决定的主观偏好、用户必须亲自授权的外部动作、显著风险/成本/隐私/许可决定，或 frozen Plan 明确要求的最终人工验收。
+
+044 是本 prompt 的真实回归用例：用户报告 private `rewritten_report.md` 仍有 reader-facing `provenance`、`estimand`、`scientific gap`、`resource contract`、`state of the art` 等表达，违反 frozen writing requirement；Reviewer 未读取完整 artifact 却给 PASS。以后同类 writing/report task 只有读取完整 artifact 并确认这类明显问题已关闭，才允许 product/artifact PASS。
 
 `base_commit..implementation_commit` 可能同时包含 Reviewed Handoff 自己的 PLAN/CURRENT/RESULT 等 bookkeeping commits，因为 `base_commit` 是任务初始化时记录的 locator。不要因为这些合法 workflow 文件本身存在于 diff 就把它们当作产品实现或 regression。实现审核应聚焦冻结 Plan 定义的项目代码、配置、文档和 user-facing artifacts。相反，如果真实 diff 显示 Executor 修改了 `REQUEST.md`、`PLAN.md`、既有 `REVIEW_<n>.md`、`FINAL_REPORT.md` 或 review/plan limit 等 Planner/Reviewer authority，则这是协议违规，应阻断当前 review transaction并要求最小 recovery；不要把可恢复 authority error 自动升级成 terminal BLOCKED。
 
@@ -97,7 +121,7 @@ Review 的唯一目标是判断当前实现是否满足冻结 Plan 且没有造�
 
 写 `REVIEW_<round>.md`，decision 只能是 `PASS`、`REVISE` 或 `BLOCKED`。
 
-- `PASS`：先写 `REVIEW_<round>.md` 和 `FINAL_REPORT.md`，并完成 FINAL_REPORT preflight。若保持当前 state graph，需要先把 `CURRENT.state` 设为 `PASS`，再用下一次机械 `CURRENT.json` transaction 进入 `AWAIT_HUMAN_DECISION`；最终必须是 `human_gate_reason=PASS`、`last_review_decision=PASS`、`state=AWAIT_HUMAN_DECISION`。不要为了少一次 commit 改坏状态机。
+- `PASS`：只有 process gates 和所有 required product/artifact gates 都满足时才允许。先写 `REVIEW_<round>.md` 和 `FINAL_REPORT.md`，并完成 FINAL_REPORT preflight。若 frozen Plan 明确要求最终人工验收，保持当前 state graph：先把 `CURRENT.state` 设为 `PASS`，再用下一次机械 `CURRENT.json` transaction 进入 `AWAIT_HUMAN_DECISION`，最终写 `human_gate_reason=PASS`、`last_review_decision=PASS`、`state=AWAIT_HUMAN_DECISION`。若没有真实 human gate，Reviewer PASS 后进入 integration closure：执行或触发 task branch integration preflight，确认 required CI PASS、required Reviewer PASS、`main` 无同 shared runtime/source area 竞争性修改、无 merge conflict、无 branch protection blocker、无 release/migration/breaking/high-risk integration blocker，然后默认合回 `main`、push、删除 task branch；默认不要求 PR。不要为了少一次 commit 改坏状态机；Reviewer PASS 前不得自动 merge。
 - 第一轮 `REVISE`：先写 `REVIEW_1.md`，最后写 `CURRENT.json`：`review_round=1`、`last_review_decision=REVISE`、`state=REVISE`。本地 task-bound Codex 后续自动启动一次最小 repair。
 - 第二轮仍 `REVISE`：先写 `REVIEW_2.md` 和 `FINAL_REPORT.md`，并完成 FINAL_REPORT preflight，最后写 `CURRENT.json`：`review_round=2`、`review_limit_reached=true`、`human_gate_reason=REVIEW_LIMIT`、`state=AWAIT_HUMAN_DECISION`；不得开启第三轮自动返修。
 - `BLOCKED`：仅用于证据充分的不可恢复外部 blocker。先证明 waiting、Planner re-entry、用户输入、授权/credential 恢复和 bounded repair 都不能解决；再写 `FINAL_REPORT.md`，说明真实 blocker、已有成果、已检查的恢复路径和恢复方式，完成 FINAL_REPORT preflight，最后写 `CURRENT.json` 进入 `BLOCKED`。

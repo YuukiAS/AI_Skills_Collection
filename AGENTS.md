@@ -43,6 +43,33 @@ docs/plugin-todos/<target-plugin>.md
 
 不要因为一个 synthetic task PASS 自动继续创造下一轮 synthetic recovery。
 
+### 2.0 Production plugin refinement 必须使用 ai-skills-core
+
+任何会改变正式中央 plugin production behavior 的 AI_Skills_Collection 任务，都必须同时使用：
+
+```text
+workflow-core
+  -> 负责任务怎样规划、执行、review、完成
+
+ai-skills-core
+  -> 负责 AI_Skills plugin maintenance contract
+
+target domain plugin
+  -> 负责目标领域的专业判断
+```
+
+示例：
+
+- 改 `presentations`：使用 `workflow-core` + `ai-skills-core` + `presentations`。
+- 改 `writing-style`：使用 `workflow-core` + `ai-skills-core` + `writing-style`。
+- 改 `statistical-modeling`：使用 `workflow-core` + `ai-skills-core` + `statistical-modeling`。
+
+触发范围包括修改 `skills/`、plugin routing、runtime references、shared runtime、QA、generator、production scripts、Marketplace payload 或 profile exposure。`ai-skills-core` 是 maintenance companion，不是 domain expert，也不是第二套 workflow/state/schema。它负责 source authority、TODO/duplicate triage、domain ownership、generated parity、production replay、unrelated regression、version/changelog 和 release closure 是否真实执行。
+
+`ai-skills-core` 是兼容性 slug，应保持不变；用户界面的 display name 是 `AI Skills Maintainer`。不要为了改名制造安装、profile、Marketplace、历史引用和兼容性迁移，除非有强证据证明 slug migration 必须发生。
+
+不要把 `allow_implicit_invocation: false` 改成 true 来解决这个问题。正确入口是：AI_Skills 的 `AGENTS.md`、Planner 和 Executor 在识别为中央 production plugin refinement 时显式要求使用 `ai-skills-core`，同时继续使用真正的 target domain plugin。
+
 ### 2.1 用户说“记录 repo 并保存到合适的地方”时先判断归属
 
 不要机械地把所有问题都写进当前项目 repo，也不要机械地把所有问题都写进 AI_Skills_Collection。
@@ -147,6 +174,10 @@ Repository 5.0.0 起，每个中央 plugin 的 independent history 从 `0.1` 开
 
 只有形成正式 user-facing improvement batch，且 replay/regression/review 可证明，才推进一次 plugin version。TODO/历史记录/纯测试/中间 commit 不 bump。
 
+如果一个 bounded plugin refinement 已经实际改变 production user-facing behavior / quality / workflow，并且 implementation 完成、原 failure replay PASS、unrelated regression PASS、准备交付/release，则 affected plugin version 必须在同一 refinement task 中 **exactly once** bump。不得以“先放 Unreleased，以后再 bump”跳过版本更新。
+
+如果只是 baseline replay 证明当前 plugin 已经够用、TODO/provenance/docs-only、tests-only，或没有 runtime behavior change，则 `NO_BUMP` 是正确结果。
+
 `1.0` 不是机械 maturity threshold；只有多个独立真实任务证明可长期默认使用，并由用户/Planner明确决定时才进入。
 
 如果无法按版本规范明确决定：**NO BUMP，返回 Planner/用户。**
@@ -242,6 +273,47 @@ reviewed/045_presentations_real_use_regression_hardening
 5. 只有 waiting、Planner re-entry、用户输入、Host Policy 已授权操作和 bounded recovery 都无法解决，并且有真实证据时，才允许 `BLOCKED`。
 
 每个 `BLOCKED` 必须说明：实际失败、观测证据、检查过哪些恢复路径、为什么都不能工作，以及恢复方式（若存在）。approval prompt、missing-but-locatable artifact、可回答的 branch/path 问题、普通 merge conflict 本身都不是 BLOCKED 理由。
+
+### 8.3 Artifact-aware review
+
+Reviewed Handoff 必须区分：
+
+```text
+PROCESS PASS
+PRODUCT / ARTIFACT PASS
+```
+
+CI、schema、protected-span、Executor summary、本地测试或 control-plane transaction PASS，只能证明对应 process gate。凡验收依赖真实 artifact 质量，Reviewer 必须读取或查看最终 artifact 本身：writing output、PDF/report、presentation render、scientific figure、frontend render 或其他真实交付物都适用。
+
+Private/text artifact review 的底层 owner 是 `GPT_Codex_AI_Bridge_Kit` 的 Text Review 能力。046 不自行实现另一套 artifact transport/reviewer。等 Bridge Kit Text Review 落地后，AI Skills Maintainer / Reviewed Handoff 只负责消费其 evidence、locator 和 artifact identity。Text Review 未落地或 Reviewer 无法访问决定 PASS 所需 artifact 时，只能按 `WAITING_FOR_EVIDENCE / NEEDS_REVIEW` 处理；在当前 state graph 中表现为不写 PASS，并要求补 Bridge Kit Text Review evidence 或返回 Planner。不得用 Executor 摘要替代 artifact。
+
+Planner / Reviewer 能依据 frozen requirement 自行判断的明显问题，必须自行 `REVISE` 或按真实不可恢复条件 `BLOCKED`；不得推给 `AWAIT_HUMAN_DECISION`。Human gate 默认只用于真正互斥的产品/科研选择、frozen criteria 无法决定的主观偏好、用户必须亲自授权的外部动作、显著风险/成本/隐私/许可决定，或 frozen Plan 明确要求的最终人工验收。明显违反用户明确规则、明显机器腔、明显 layout failure、明显 artifact regression，不属于 human judgment。
+
+044 是当前回归例：用户报告完整 private `rewritten_report.md` 仍有 `provenance`、`estimand`、`scientific gap`、`resource contract`、`state of the art` 等 reader-facing 表达，违反 frozen writing requirement；Reviewer 未读取完整 artifact 却给 PASS。以后同类任务必须由 artifact-aware review 层自动挡住，不能等用户人工发现。
+
+### 8.4 Visual review skipped 语义
+
+`visual_review_required=true` 时，才运行真实 Visual Review，并且 evidence 必须绑定 artifact identity。`visual_review_required=false` 时，不运行昂贵模型/API review，GitHub UI/状态必须表达 `SKIPPED` / `NOT_REQUIRED`，不能让真正的 visual-review job 显示成容易误读的 PASS。
+
+如果 GitHub Actions 需要先发现 task，可以使用 lightweight resolver job；真正的 visual-review job 必须按 resolver 输出条件执行。无待审视觉 artifact 时，resolver 可以成功退出，但真实 Visual Review job 应该 skipped。
+
+### 8.5 Review PASS 后默认集成收口
+
+独立 task branch 通过 required CI 和 required Reviewer PASS，且没有真实 human gate 时，默认执行：
+
+```text
+task branch
+-> CI PASS
+-> required Reviewer PASS
+-> integration preflight
+-> 合回 `main`
+-> push
+-> 删除 task branch
+```
+
+默认不要求 PR。只有 merge conflict、`main` 在同一 shared runtime/source area 有竞争性修改、branch protection 要求、release/migration/breaking change、真实高风险 integration，或用户明确要求 PR 时，才升级为 PR / Planner / human decision。
+
+如果 task 本身需要最终 human acceptance，用户接受后执行同一套 integration preflight；不要让用户再手工决定普通 Git 操作。Reviewer PASS 前不得自动 merge；task branch 已隔离也不能跳过 integration preflight。
 
 ## 9. 用户反馈优先于内部 PASS
 

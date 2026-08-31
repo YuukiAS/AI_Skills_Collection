@@ -196,6 +196,36 @@ class ReviewedHandoffVisualTargetTests(unittest.TestCase):
             self.assertIn("AI_BRIDGE_VISUAL_REVIEW_MANIFEST=results/task_a/visual_review/visual_inputs.json\n", text)
             self.assertIn("AI_BRIDGE_VISUAL_REVIEW_OUTPUT=results/task_a/visual_review/VISUAL_REVIEW.json\n", text)
 
+    def test_github_output_marks_not_required_without_visual_pass(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            output_file = root / "github_output.txt"
+            resolver.write_github_output(output_file, None)
+
+            text = output_file.read_text(encoding="utf-8")
+            self.assertIn("skip=1\n", text)
+            self.assertIn("status=not_required\n", text)
+            self.assertIn("manifest=\n", text)
+
+    def test_github_output_marks_selected_visual_review(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            output_file = root / "github_output.txt"
+            target = resolver.VisualTarget(
+                task_key="task_a",
+                manifest_path="results/task_a/visual_review/visual_inputs.json",
+                evidence_path="results/task_a/visual_review/VISUAL_REVIEW.json",
+                implementation_commit=IMPLEMENTATION_COMMIT,
+            )
+            resolver.write_github_output(output_file, target)
+
+            text = output_file.read_text(encoding="utf-8")
+            self.assertIn("skip=0\n", text)
+            self.assertIn("status=selected\n", text)
+            self.assertIn("task_key=task_a\n", text)
+            self.assertIn("manifest=results/task_a/visual_review/visual_inputs.json\n", text)
+            self.assertIn("output=results/task_a/visual_review/VISUAL_REVIEW.json\n", text)
+
 
 class VisualReviewWorkflowTests(unittest.TestCase):
     def test_dispatch_inputs_are_preserved_and_pin_is_current(self) -> None:
@@ -208,10 +238,13 @@ class VisualReviewWorkflowTests(unittest.TestCase):
     def test_push_path_uses_resolver_not_repository_level_vars(self) -> None:
         workflow = (REPO_ROOT / ".github/workflows/ai-bridge-visual-review.yml").read_text(encoding="utf-8")
         self.assertIn("scripts/resolve_reviewed_handoff_visual_target.py", workflow)
-        self.assertIn("--github-env", workflow)
+        self.assertIn("--github-output", workflow)
         self.assertNotIn("vars.AI_BRIDGE_VISUAL_REVIEW_MANIFEST", workflow)
         self.assertNotIn("vars.AI_BRIDGE_VISUAL_REVIEW_OUTPUT", workflow)
-        self.assertIn("no task-local visual review pending", workflow)
+        self.assertIn("Resolve Visual Review Target", workflow)
+        self.assertIn("AI Bridge Visual Review: SKIPPED / NOT_REQUIRED", workflow)
+        self.assertIn("needs.resolve_visual_review.outputs.skip != '1'", workflow)
+        self.assertIn("expensive visual reviewer was not started", workflow)
 
 
 if __name__ == "__main__":

@@ -23,7 +23,7 @@ ai-skills install --target repo --skill domain/bayesian/pymc --mode symlink --wr
 - `medical-imaging-project`：通用医学影像项目，不复制 CardiacNexus 专用 skill。
 - `bioinformatics-project`：常用生物信息项目组合。
 - `server-research-baseline`：compute node 基线，包含 CJK/math PDF render 和通用 Slurm workflow。
-- `ai-skills-maintainer`：维护本仓库 registry、catalog、provenance、marketplace、icon 和 profile。
+- `ai-skills-maintainer`：维护本仓库 registry、catalog、marketplace、profile，以及中央 plugin refinement 的来源、待办、生成层、回放、回归、版本和 changelog 闭环。
 
 ## 兼容 Profile
 

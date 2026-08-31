@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Generated at `2026-08-30T10:17:48+00:00` from `registry.json` metadata. Do not edit by hand.
+Generated at `2026-08-31T16:43:14+00:00` from `registry.json` metadata. Do not edit by hand.
 
 Budget warnings in this catalog are guidance for context hygiene; they do not make complete domain installation invalid.
 
@@ -8,7 +8,7 @@ Budget warnings in this catalog are guidance for context hygiene; they do not ma
 
 | Skill | Path | Description | Recommended scope | Network | Executes code | Writes files | Last reviewed | Install |
 |---|---|---|---|---:|---:|---:|---|---|
-| `ai-skills-repository-maintainer` | `skills/core/codex-system/ai-skills-repository-maintainer` | Maintain AI_Skills_Collection itself: registry, catalog, provenance, marketplace config, generated layer, icons, profiles, and validation gates. Use only when the user is working on this repository or explicitly asks to maintain the central skill collection. | `project` | False | True | True | `2026-08-30` | `ai-skills install --target repo --skill core/codex-system/ai-skills-repository-maintainer --mode symlink --write-agents-md` |
+| `ai-skills-repository-maintainer` | `skills/core/codex-system/ai-skills-repository-maintainer` | Maintain AI_Skills_Collection itself, including production plugin refinement contracts, source-first changes, generated parity, replay/regression gates, versions, changelogs, registry, catalog, marketplace, and profiles. Use only when the user is working on this repository or explicitly asks to maintain the central skill collection. | `project` | False | True | True | `2026-08-30` | `ai-skills install --target repo --skill core/codex-system/ai-skills-repository-maintainer --mode symlink --write-agents-md` |
 | `codex-workflow-protocol` | `skills/core/codex-system/codex-workflow-protocol` | Use for complex or risky Codex tasks that require source-of-truth discovery, phased planning, specialist routing, gate-driven verification, live-state supervision, integration ownership, or honest final status reporting. | `global` | False | False | True | `2026-07-13` | `ai-skills install --target repo --skill core/codex-system/codex-workflow-protocol --mode symlink --write-agents-md` |
 | `imagegen` | `skills/core/codex-system/system-skills/imagegen` | Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. | `project` | False | False | True | `2026-05-14` | `ai-skills install --target repo --skill core/codex-system/imagegen --mode symlink --write-agents-md` |
 | `mcp-builder` | `skills/core/codex-system/mcp-builder` | Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK). | `project` | False | False | True | `2026-05-14` | `ai-skills install --target repo --skill core/codex-system/mcp-builder --mode symlink --write-agents-md` |

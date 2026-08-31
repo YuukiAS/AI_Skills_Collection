@@ -24,6 +24,27 @@ docs/plugin-todos/README.md
 docs/plugin-todos/<target-plugin>.md
 ```
 
+如果 frozen implementation scope 会改变正式中央 plugin 的 production behavior（包括 `skills/`、plugin routing、runtime references、shared runtime、QA、generator、production scripts、Marketplace payload 或 profile exposure），Plan 必须在现有 `## Frozen decisions` 或 `## Implementation scope` 中明确写：
+
+```text
+Maintenance companion: ai-skills-core
+Domain owner: <target plugin>
+```
+
+不得新增 schema field、state、role 或 ledger 来表达这两项。`workflow-core` 只负责 Reviewed Handoff 的流程；`ai-skills-core` 负责 AI_Skills maintenance closure；target domain plugin 负责专业判断。例如 Presentation 质量仍由 `presentations` 判断，`ai-skills-core` 不能替代它。
+
+如果 acceptance 依赖真实交付物质量，Plan 必须在现有 `## Acceptance and regression gates` 中冻结 artifact-aware review path。必须明确：
+
+- 哪些 gate 只是 `PROCESS PASS`，例如 CI、schema、protected-span、Executor summary 或本地测试；
+- 哪些 gate 才能构成 `PRODUCT / ARTIFACT PASS`；
+- Reviewer 必须读取或查看的最终 artifact identity、repo path、render、hash 或 Bridge Kit Text Review evidence locator；
+- private/text artifact review 的底层 owner 是 `GPT_Codex_AI_Bridge_Kit` 的 Text Review；046 不自行实现另一套 artifact transport/reviewer，Text Review 未落地时只能冻结 `WAITING_FOR_EVIDENCE / NEEDS_REVIEW` 条件；
+- 缺少决定 PASS 所需 artifact 时是 `WAITING_FOR_EVIDENCE / NEEDS_REVIEW` 条件，不能 PASS。
+
+Planner / Reviewer 能依据 frozen requirement 明确判断的问题，不得外包给用户；不得推给 `AWAIT_HUMAN_DECISION`。明显违反用户明确规则、明显机器腔、明显 layout failure、明显 artifact regression 应冻结为 Reviewer 必须自行 `REVISE` 或在不可恢复时 `BLOCKED` 的条件。Human gate 默认只用于真正互斥的产品/科研选择、frozen criteria 无法决定的主观偏好、用户必须亲自授权的外部动作、显著风险/成本/隐私/许可决定，或 frozen Plan 明确要求的最终人工验收。
+
+044 是必须覆盖的真实回归：用户报告完整 private `rewritten_report.md` 仍有 `provenance`、`estimand`、`scientific gap`、`resource contract`、`state of the art` 等 reader-facing 表达，违反 frozen writing requirement；Reviewer 因未读取完整 artifact 仍给 PASS。后续同类 writing/report/artifact 任务必须先证明 Reviewer 实际读取最终 artifact，不能用摘要或 process PASS 推导 product PASS。
+
 ### Real-project feedback triage ownership
 
 真实项目 thread 如果在使用某个 AI_Skills plugin 时发现 plugin 本身的问题，可以直接把这次真实失败写入对应的中央 `docs/plugin-todos/<plugin>.md`，状态先写 `NEW`。不要求先在项目 repo 再维护一份 plugin 问题副本。
@@ -94,7 +115,9 @@ Affected plugins:
 - Repository minor 只有在整个 collection 获得新的 repository-level user capability 时才允许。必须回答“新 minor 能完成什么上一 minor 明显不能完成的用户任务？”
 - 单个 plugin 的普通改进、plugin 达到 `1.0`、更多 TODO/schema/tests/benchmark 都不能单独触发 repository minor。
 - Individual plugin 使用独立两段 release version，例如 `0.1 -> 0.2 -> 0.3 -> 1.0`；只在形成正式 user-facing improvement batch 后推进一次。
+- 如果 bounded plugin refinement 已经改变 production user-facing behavior / quality / workflow，implementation 完成，原 failure replay PASS，unrelated regression PASS，并准备交付/release，则 affected plugin version 必须在同一 task 中 bump exactly once；不得把 completed production change 留在 `Unreleased` 等以后再 bump。
 - TODO/provenance/纯测试/中间 commit 不 bump plugin。
+- baseline replay、docs-only、tests-only 或 no-production-change 的 case 必须保持 `NO_BUMP`。
 - 如果无法按 canonical policy 明确证明 bump，冻结 `NO_BUMP` 或返回用户，不得为了整齐统一升级。
 
 Planner 必须明确：
@@ -124,3 +147,9 @@ Planner 必须明确：
 计划冻结后写入当前 task 的 `PLAN.md`，使用模板规定的 frontmatter 和章节。若当前 Planner 通过 GitHub connector 工作，先写 `PLAN.md`，最后写 `CURRENT.json` 并把 `CURRENT.state` 推进到 `PLAN_FROZEN`。不要假设 Planner 可以运行目标机器上的 local CLI。
 
 执行期间如果 `CURRENT.state=NEEDS_GPT_PLANNER`，Scheduled GPT 可以做一次最小 re-plan：只解决 Codex 已证实无法从冻结 Plan 推导的歧义，不得借机重新设计整个任务。修改 `PLAN.md` 后将 `plan_revision` 加一并在最后写 `CURRENT.json` 恢复 `PLAN_FROZEN`。若已经做过一次 re-plan，或必须由用户改变产品/科学语义，先写 `FINAL_REPORT.md`，最后写 `CURRENT.json` 进入 `AWAIT_HUMAN_DECISION`。
+
+## Integration closure planning
+
+除非 frozen Plan 明确要求最终人工验收，task branch 在 required CI PASS、required Reviewer PASS 且没有真实 human gate 后，默认走 integration preflight 并合回 `main`、push、删除 task branch；默认不要求 PR。
+
+Plan 必须把下列情况列为升级条件，而不是普通默认路径：merge conflict、`main` 在同一 shared runtime/source area 有竞争性修改、branch protection 要求、release/migration/breaking change、真实高风险 integration，或用户明确要求 PR。Reviewer PASS 前不得自动 merge；task branch 已隔离也不能跳过 integration preflight。

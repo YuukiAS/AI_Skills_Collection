@@ -30,6 +30,7 @@ CENTRAL_PLUGIN_NAMES = [
     "bioinformatics",
     "medical-imaging",
 ]
+EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {"ai-skills-core": "0.2"}
 REPOSITORY_SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 PLUGIN_VERSION_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 
@@ -154,6 +155,26 @@ class CodexMarketplaceTests(unittest.TestCase):
         for maintenance_dir in ["docs/plugin-todos", "plugin-todos", "docs/plugin-changelogs", "plugin-changelogs", "docs/provenance", "provenance"]:
             self.assertFalse(any(maintenance_dir in path for path in payload_paths), maintenance_dir)
 
+    def test_ai_skills_core_marketplace_is_refinement_companion(self) -> None:
+        data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        core = next(plugin for plugin in data["plugins"] if plugin["name"] == "ai-skills-core")
+        skill_sources = [entry["source"] for entry in core["skills"]]
+        skill_artifacts = [entry["artifact_id"] for entry in core["skills"]]
+        serialized = json.dumps(core, ensure_ascii=False)
+
+        self.assertEqual(core["version"], "0.2")
+        self.assertEqual(core["name"], "ai-skills-core")
+        self.assertEqual(core["displayName"], "AI Skills Maintainer")
+        self.assertIn("Maintenance companion", core["description"])
+        self.assertIn("skills/core/codex-system/project-skill-installer", skill_sources)
+        self.assertIn("skills/core/codex-system/ai-skills-repository-maintainer", skill_sources)
+        self.assertIn("skills/core/codex-system/skill-library-analysis", skill_sources)
+        self.assertNotIn("skills/core/codex-system/codex-workflow-protocol", skill_sources)
+        self.assertEqual(skill_artifacts, ["proj", "maint", "analysis"])
+        self.assertIn("Refine an existing AI_Skills plugin from a real failure.", core["defaultPrompt"])
+        self.assertIn("source, generated layer, replay, regression, version, and changelog closure", serialized)
+        self.assertIn("extend an existing skill instead of creating another entry", serialized)
+
     def test_release_versions_are_independent_and_maturity_is_not_version(self) -> None:
         version = (REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip()
         setup_version = subprocess.check_output([sys.executable, "setup.py", "--version"], cwd=REPO_ROOT, text=True).strip()
@@ -164,10 +185,14 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertIsNotNone(readme_match)
 
         self.assertRegex(version, REPOSITORY_SEMVER_RE)
-        self.assertEqual({version, setup_version, registry["version"], readme_match.group(1)}, {"5.0.0"})
+        self.assertEqual({version, setup_version, registry["version"], readme_match.group(1)}, {"5.0.1"})
 
         plugin_versions = {plugin["name"]: plugin["version"] for plugin in config["plugins"]}
-        self.assertEqual(plugin_versions, {name: "0.1" for name in CENTRAL_PLUGIN_NAMES})
+        self.assertEqual(plugin_versions, EXPECTED_PLUGIN_VERSIONS)
+        self.assertEqual(
+            {name: version for name, version in plugin_versions.items() if name != "ai-skills-core"},
+            {name: "0.1" for name in CENTRAL_PLUGIN_NAMES if name != "ai-skills-core"},
+        )
         for plugin_version in plugin_versions.values():
             self.assertRegex(plugin_version, PLUGIN_VERSION_RE)
             self.assertNotRegex(plugin_version, REPOSITORY_SEMVER_RE)
@@ -212,7 +237,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         maturity_text = (REPO_ROOT / "docs/PLUGIN_MATURITY.md").read_text(encoding="utf-8")
         maturity = dict(re.findall(r"^\| `([^`]+)` \| `([^`]+)`", maturity_text, flags=re.MULTILINE))
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("Repository / CLI release: `5.0.0`", readme)
+        self.assertIn("Repository / CLI release: `5.0.1`", readme)
         for plugin_name in CENTRAL_PLUGIN_NAMES:
             row = re.search(
                 rf"^\| `{re.escape(plugin_name)}` \| `([^`]+)` \| `([^`]+)` \| .*docs/plugin-changelogs/{re.escape(plugin_name)}\.md",

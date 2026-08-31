@@ -127,8 +127,11 @@ Plugin version 只回答：**这个 plugin 是否形成了一次值得正式发�
 4. unrelated regression / compatibility gate 通过；
 5. 对应 plugin changelog 能清楚说出 before -> after。
 
+满足以上条件并准备交付/release 时，affected plugin version 必须在同一个 refinement task 中 bump exactly once。换句话说，completed production behavior change 只有在原 failure replay PASS、unrelated regression PASS、version/changelog closure 同步完成后才能 PASS。不得以“先放 `Unreleased`，以后再 bump”为理由跳过版本更新；已完成、已验证、会改变 production 行为的 plugin improvement 不能以 unchanged plugin version 进入 PASS。
+
 以下默认 **不 bump plugin version**：
 
+- Baseline replay 证明当前 plugin 已经够用；
 - 只更新 `docs/provenance/`；
 - 只更新 `docs/plugin-todos/`；
 - 只更新未进入 runtime payload 的维护文档；
