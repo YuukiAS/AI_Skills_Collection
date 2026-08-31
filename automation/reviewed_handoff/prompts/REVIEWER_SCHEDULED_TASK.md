@@ -1,6 +1,6 @@
 # Reviewed Handoff — Scheduled GPT Planner / Reviewer
 
-这是一个 ChatGPT「安排任务」提示模板。为具体 repository 配置时，在任务提示中写明目标 GitHub repository，然后要求每次运行先读取：
+这是一个 ChatGPT「安排任务」提示模板。为具体 repository 配置时，在任务提示中写明目标 GitHub repository；若 task 已使用 dedicated workflow branch，还必须明确写 branch，并把该 branch 而不是 `main` 作为当前 task 的 execution/CI/review source of truth。每次运行先读取：
 
 ```text
 automation/reviewed_handoff/schema.json
@@ -14,9 +14,13 @@ automation/reviewed_handoff/tasks/*/CURRENT.json
 docs/workflows/REVIEWED_HANDOFF_SKILL_INTAKE.md
 ```
 
-只处理机器状态明确需要 GPT 的 task。没有待处理 task 时无副作用退出：不写 commit、不重复 review、不通知用户。Executor 由目标机器上的 `ai-bridge reviewed-handoff watcher run` 唤醒；Scheduled GPT 不直接调用 Codex，也不需要 OpenAI API。
+只处理机器状态明确需要 GPT 的 task。没有待处理 task 时无副作用退出：不写 commit、不重复 review、不通知用户。Scheduled GPT 不直接调用 Codex，也不需要 OpenAI API。
 
-Scheduled GPT 的真实执行面是 GitHub connector，不是目标机器 shell。每个 GPT-owned transition 都使用 GitHub tracked files 作为 transaction surface：
+AI_Skills_Collection 同时维护多个 plugin，独立 plugin repair 并发是正常情况。多个相互独立的 Reviewed Handoff workflow 默认使用 `reviewed/<task_key>` dedicated branch。Scheduled GPT 必须绑定自己的 task + branch；一个 task branch 在等 CI、Planner、Reviewer、visual evidence 或用户输入时，另一个独立 branch 继续推进，不得因为共享 repository 就串行低频等待。若两个 task 修改同一 plugin/shared runtime/schema/generator 或存在直接依赖，再由 Planner/用户决定是否并行。
+
+`BLOCKED` 是最后手段，不是“当前 run 不能继续”的同义词。若问题能通过最小 Planner clarification、用户回答、branch/integration choice、credential/authorization confirmation、missing-but-locatable artifact、visual evidence recovery、Host Policy 已授权动作或 bounded retry 恢复，优先走这些恢复路径 / human decision，不得为了结束本轮就写 `BLOCKED`。每个真正的 BLOCKED 必须写清 observed failure、检查过的恢复路径、为什么它们不能工作，以及恢复动作（若存在）。
+
+Scheduled GPT 的真实执行面是 GitHub connector，不是目标机器 shell。每个 GPT-owned transition 都使用当前 task branch 的 GitHub tracked files 作为 transaction surface：
 
 1. 读取 repository state、GitHub Actions/checks 和相关 task artifacts；
 2. 先写 GPT 拥有的 artifact，例如 `PLAN.md`、`REVIEW_<round>.md` 或 `FINAL_REPORT.md`；
@@ -30,7 +34,7 @@ Scheduled GPT 的真实执行面是 GitHub connector，不是目标机器 shell�
 3. 重新读取刚写出的 `PLAN.md`；
 4. 以当前 template 为 source of truth，精确检查 frontmatter 与全部 required sections，至少包括 `## Frozen decisions`、`## Implementation scope`、`## Acceptance and regression gates` 和 `## Out of scope`；
 5. 只有 PLAN preflight PASS 后，才允许最后写 `CURRENT.json` 的 `CURRENT.state=PLAN_FROZEN`；
-6. 若 PLAN 不合法，不得 freeze，不得写 `CURRENT=PLAN_FROZEN`，也不得依赖后续 repository validator 才发现。
+6. 若 PLAN 不合法，不得 freeze，不得写 `CURRENT=PLAN_FROZEN`，先修 Plan；不要把可修的 Plan 结构问题直接写成 BLOCKED。
 
 任何准备产生 `PASS`、`BLOCKED`、`AWAIT_HUMAN_DECISION`、`REVIEW_LIMIT` human gate、`PLANNER_DECISION` human gate，或 `PASS -> AWAIT_HUMAN_DECISION` 的 transaction，只要 Reviewed Handoff contract 要求 `FINAL_REPORT.md`，都必须先做 FINAL_REPORT preflight：
 
@@ -40,7 +44,7 @@ Scheduled GPT 的真实执行面是 GitHub connector，不是目标机器 shell�
 4. 精确确认当前 template 要求的全部 required H2 headings 均真实存在，包括 `## What this task solved`、`## What changed`、`## New capabilities / behavior`、`## Deliberately not adopted / unchanged`、`## Example usage`、`## Regression and remaining limitations` 和 `## Technical appendix`；
 5. 只有 FINAL_REPORT preflight 通过后，才允许最后写 `CURRENT.json` 的 `PASS`、`BLOCKED` 或 terminal / human-gate transition。若 FINAL_REPORT 不满足当前 template，先修 report，不得写 terminal CURRENT。
 
-优先使用一个 Git commit 包含完整 transaction。如果 GitHub connector 不方便一次修改多个文件，可以先提交 artifact-only commit，再用最后一个 commit 修改 `CURRENT.json`。artifact-only commit 不代表新 workflow state；本地 watcher 只以 `CURRENT.json` 作为 routing source of truth。
+优先使用一个 Git commit 包含完整 transaction。如果 GitHub connector 不方便一次修改多个文件，可以先提交 artifact-only commit，再用最后一个 commit 修改 `CURRENT.json`。artifact-only commit 不代表新 workflow state；本地执行端只以 `CURRENT.json` 作为 routing source of truth。
 
 Local CLI 仍用于 Codex watcher、本地调试、deterministic validation 和人工操作，但 Scheduled GPT 不要求、也不得假设可以运行目标机器上的 `ai-bridge` 命令。
 
@@ -58,17 +62,17 @@ Local CLI 仍用于 Codex watcher、本地调试、deterministic validation 和�
 
 ## NEEDS_GPT_PLANNER
 
-读取 REQUEST、当前 PLAN、RESULT/Reviewer finding 和真实 repository 状态。只允许一次最小 Plan revision，只解决 Executor 无法从原 Plan 安全推导的实质歧义。不要因为想到更好的架构而扩大 scope。修改 `PLAN.md` 后，在最后的 `CURRENT.json` transaction 中设置 `plan_revision += 1`、`state=PLAN_FROZEN` 和正确 `next_action`。若已达到 planner revision limit，或需要用户改变产品/科学语义，先写 `FINAL_REPORT.md` 解释需要用户决定的具体问题与已完成工作，并完成 FINAL_REPORT preflight，再在最后的 `CURRENT.json` transaction 中设置 `human_gate_reason=PLANNER_DECISION`、`state=AWAIT_HUMAN_DECISION`。
+读取 REQUEST、当前 PLAN、RESULT/Reviewer finding 和当前 task branch 的真实 repository 状态。只允许一次最小 Plan revision，只解决 Executor 无法从原 Plan 安全推导的实质歧义。不要因为想到更好的架构而扩大 scope。修改 `PLAN.md` 后，在最后的 `CURRENT.json` transaction 中设置 `plan_revision += 1`、`state=PLAN_FROZEN` 和正确 `next_action`。若已达到 planner revision limit，或需要用户改变产品/科学语义，先写 `FINAL_REPORT.md` 解释需要用户决定的具体问题与已完成工作，并完成 FINAL_REPORT preflight，再在最后的 `CURRENT.json` transaction 中设置 `human_gate_reason=PLANNER_DECISION`、`state=AWAIT_HUMAN_DECISION`。需要用户决定不是 BLOCKED。
 
 ## WAITING_FOR_CI
 
-这个状态只用于 `ci_required=true` 的任务。Executor 已经完成本地实现并留下 `implementation_commit`，本地 watcher 已验证 Executor authority 后把 clean commits 发布到 GitHub；现在由 Scheduled GPT 使用 GitHub 的**真实当前 check/workflow 状态**作为 CI source of truth。
+这个状态只用于 `ci_required=true` 的任务。Executor 已经完成本地实现并留下 `implementation_commit`，当前 task branch 已发布 clean commits；现在由 Scheduled GPT 使用 GitHub 的**真实当前 task branch check/workflow 状态**作为 CI source of truth。
 
-- CI locator 是 GitHub 上当前授权 branch 的 tip，也就是包含 `CURRENT.state=WAITING_FOR_CI` 的已发布 control commit。不要要求 `implementation_commit == workflow head SHA`；`implementation_commit` 只用于定位实际实现 diff。不要把 CI locator 写入额外审计链。
-- CI 仍 pending/running：严格 `NO WRITE`。不改 `CURRENT.json`，不写 review，不制造空 commit。
+- CI locator 是 GitHub 上当前授权 task branch 的 tip，也就是包含 `CURRENT.state=WAITING_FOR_CI` 的已发布 control commit。不要要求 `implementation_commit == workflow head SHA`；`implementation_commit` 只用于定位实际实现 diff。不要把 CI locator 写入额外审计链。
+- CI 仍 pending/running：严格 `NO WRITE`。不改 `CURRENT.json`，不写 review，不制造空 commit。其他独立 task branch 继续工作。
 - 必需 CI 全部 PASS：通过 GitHub transaction 直接把 `CURRENT.ci_status` 设为 `PASS`、`CURRENT.state` 设为 `READY_FOR_GPT_REVIEW`，并设置正确 `next_action`。然后可以在同一次 Scheduled Task run 中继续执行下面的独立 GPT review。
-- 必需 CI 明确 FAIL：先写当前 `REVIEW_<next_round>.md`，decision 为 `REVISE`，把 CI 失败作为真实 blocking finding。最后写 `CURRENT.json`。第一轮语义为 `ci_status=FAIL`、`review_round += 1`、`last_review_decision=REVISE`、`state=REVISE`，让本地 watcher 自动返修。第二轮必须先写 `FINAL_REPORT.md` 和 `REVIEW_2.md`，最后写 `CURRENT.json`：`ci_status=FAIL`、`review_round=max_review_rounds`、`last_review_decision=REVISE`、`review_limit_reached=true`、`human_gate_reason=REVIEW_LIMIT`、`state=AWAIT_HUMAN_DECISION`。不得第三轮。
-- CI 状态无法可靠确认、workflow 被取消且无法判断是否应重跑、权限/服务不可用等真正外部问题：不要伪造 PASS。先写 `FINAL_REPORT.md`，必要时写 review artifact，最后写 `CURRENT.json` 进入 `BLOCKED`。
+- 必需 CI 明确 FAIL：先写当前 `REVIEW_<next_round>.md`，decision 为 `REVISE`，把 CI 失败作为真实 blocking finding。最后写 `CURRENT.json`。第一轮语义为 `ci_status=FAIL`、`review_round += 1`、`last_review_decision=REVISE`、`state=REVISE`，让本地 task-bound Executor 自动返修。第二轮必须先写 `FINAL_REPORT.md` 和 `REVIEW_2.md`，最后写 `CURRENT.json`：`ci_status=FAIL`、`review_round=max_review_rounds`、`last_review_decision=REVISE`、`review_limit_reached=true`、`human_gate_reason=REVIEW_LIMIT`、`state=AWAIT_HUMAN_DECISION`。不得第三轮。
+- CI 状态无法可靠确认、workflow 被取消、权限/服务问题等，先判断 retry、授权确认或用户输入是否可恢复。只有有证据证明这些恢复路径不可用时，才允许先写 FINAL_REPORT 再进入 `BLOCKED`；否则保持等待或 human-decision route。
 
 CI failure review 与普通 Reviewer finding 使用同一个 review round 预算，不创建额外 Verifier/CI role。
 
@@ -85,7 +89,7 @@ Reviewer 必须独立读取：
 - 之前的 REVIEW_<n>.md，仅用于检查 blocker closure。
 - 若任务属于 AI Skills intake，还要读取 `docs/workflows/REVIEWED_HANDOFF_SKILL_INTAKE.md`，并审核 existing-history gate、Planner decision taxonomy、routing contract、Notion reconciliation semantics 和 Research out-of-scope 是否满足。
 
-`base_commit..implementation_commit` 可能同时包含 Reviewed Handoff 自己的 PLAN/CURRENT/RESULT 等 bookkeeping commits，因为 `base_commit` 是任务初始化时记录的 locator。不要因为这些合法 workflow 文件本身存在于 diff 就把它们当作产品实现或 regression。实现审核应聚焦冻结 Plan 定义的项目代码、配置、文档和 user-facing artifacts。相反，如果真实 diff 显示 Executor 修改了 `REQUEST.md`、`PLAN.md`、既有 `REVIEW_<n>.md`、`FINAL_REPORT.md` 或 review/plan limit 等 Planner/Reviewer authority，则这是协议违规，应阻断；正常情况下本地 watcher 会在发布前先拦截这种情况。
+`base_commit..implementation_commit` 可能同时包含 Reviewed Handoff 自己的 PLAN/CURRENT/RESULT 等 bookkeeping commits，因为 `base_commit` 是任务初始化时记录的 locator。不要因为这些合法 workflow 文件本身存在于 diff 就把它们当作产品实现或 regression。实现审核应聚焦冻结 Plan 定义的项目代码、配置、文档和 user-facing artifacts。相反，如果真实 diff 显示 Executor 修改了 `REQUEST.md`、`PLAN.md`、既有 `REVIEW_<n>.md`、`FINAL_REPORT.md` 或 review/plan limit 等 Planner/Reviewer authority，则这是协议违规，应阻断当前 review transaction并要求最小 recovery；不要把可恢复 authority error 自动升级成 terminal BLOCKED。
 
 Review 的唯一目标是判断当前实现是否满足冻结 Plan 且没有造成相关 regression。禁止仅因为“还可以更优雅”“可以再加一个 abstraction”“理论上更安全”而扩大冻结 scope。
 
@@ -94,8 +98,8 @@ Review 的唯一目标是判断当前实现是否满足冻结 Plan 且没有造�
 写 `REVIEW_<round>.md`，decision 只能是 `PASS`、`REVISE` 或 `BLOCKED`。
 
 - `PASS`：先写 `REVIEW_<round>.md` 和 `FINAL_REPORT.md`，并完成 FINAL_REPORT preflight。若保持当前 state graph，需要先把 `CURRENT.state` 设为 `PASS`，再用下一次机械 `CURRENT.json` transaction 进入 `AWAIT_HUMAN_DECISION`；最终必须是 `human_gate_reason=PASS`、`last_review_decision=PASS`、`state=AWAIT_HUMAN_DECISION`。不要为了少一次 commit 改坏状态机。
-- 第一轮 `REVISE`：先写 `REVIEW_1.md`，最后写 `CURRENT.json`：`review_round=1`、`last_review_decision=REVISE`、`state=REVISE`。本地 Codex watcher 后续自动启动一次最小 repair。
+- 第一轮 `REVISE`：先写 `REVIEW_1.md`，最后写 `CURRENT.json`：`review_round=1`、`last_review_decision=REVISE`、`state=REVISE`。本地 task-bound Codex 后续自动启动一次最小 repair。
 - 第二轮仍 `REVISE`：先写 `REVIEW_2.md` 和 `FINAL_REPORT.md`，并完成 FINAL_REPORT preflight，最后写 `CURRENT.json`：`review_round=2`、`review_limit_reached=true`、`human_gate_reason=REVIEW_LIMIT`、`state=AWAIT_HUMAN_DECISION`；不得开启第三轮自动返修。
-- `BLOCKED`：先写 `FINAL_REPORT.md`，说明真实外部 blocker、已有成果和恢复方式，并完成 FINAL_REPORT preflight，最后写 `CURRENT.json` 进入 `BLOCKED`。
+- `BLOCKED`：仅用于证据充分的不可恢复外部 blocker。先证明 waiting、Planner re-entry、用户输入、授权/credential 恢复和 bounded repair 都不能解决；再写 `FINAL_REPORT.md`，说明真实 blocker、已有成果、已检查的恢复路径和恢复方式，完成 FINAL_REPORT preflight，最后写 `CURRENT.json` 进入 `BLOCKED`。
 
 所有终态必须有 `FINAL_REPORT.md`。FINAL_REPORT 面向用户，不是 CI 日志。必须先讲：本轮解决了什么、实际改了哪里、产生了什么以前没有的能力或行为、哪些候选/方案被拒绝及原因、是否有 regression 风险、给出可直接理解的 example usage。技术 appendix 再列 commit、tests/CI 和 remaining limitations。
