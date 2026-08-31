@@ -6,6 +6,12 @@ decision: PLAN_FROZEN
 
 # 044 Writing Style — Deep Research 中文长报告 replay
 
+## Revision 1 note
+
+Human acceptance rejected the Round-1 PASS. The user actually read the private `rewritten_report.md` and found that it still failed the core reader-facing goal: ordinary English abstraction labels and English scientific syntax still carried too much of the Chinese prose structure. This Plan revision tightens acceptance and review ownership before any further production change is made.
+
+The Round-1 output is now a failed baseline under this revised Plan. Its failure is not that protected technical names remained; the failure is that ordinary abstractions such as `provenance`, `estimand`, `scientific gap`, `residual gap`, `state of the art`, `resource contract`, `testbed`, `contract`, `baseline`, `shared initialization`, `local drift`, and `pooled gap` still repeatedly behaved as reader-facing sentence skeletons.
+
 ## Objective and value
 
 验证现有 `writing-style` 是否真的能把一份难读的中文科研长报告改成自然、直接、低认知负担的中文，同时保持研究内容完全可信。该任务首先是一次真实 replay，而不是预设“skill 一定有 bug”。如果当前 plugin 已经能把材料改好，就停止修改；如果真实输出仍难读，再做最小、可泛化的能力修正。
@@ -30,11 +36,13 @@ decision: PLAN_FROZEN
 - “直白、生动”不得通过新增来源没有的类比、例子、因果解释或研究判断实现。允许更具体的动词、主语、条件和解释顺序；不允许编造内容。
 - 完整输入 PDF 和完整重写稿默认保持 repo-untracked，避免把未公开科研内容复制进公开仓库。Executor 从用户提供的本机路径读取，并把完整重写结果写到用户指定的外部输出目录。GitHub 只保存通用实现、测试、Reviewed Handoff 状态和不泄露正文的结果摘要。
 - 同一份 PDF 可用于 baseline 与修复后 replay；它不能在调参后再被称为 holdout。
+- Round-1 Reviewer 没有读取完整 private rewrite，因此它的 PASS 只能说明执行路径、CI 和公开证据摘要通过；不能作为本任务最终产品质量结论。用户实读结果高于该 Round-1 PASS。
 
 ### Baseline-first decision
 
 1. 先用当前 `writing-style` 正常用户入口处理整份报告，不得手写一个只对该 PDF 有效的临时 prompt 冒充 plugin 能力。
 2. 如果 baseline 已同时满足“语义/证据零漂移 + 阅读难度明显下降”，不要修改 production skill，只记录当前 plugin 已足以处理该案例，并交付重写结果。
+   Round-1 baseline 已经由用户实读判定失败，因此后续实现应把它作为 production `writing-style` 在该真实 replay 上的失败证据处理。
 3. 如果 baseline 失败，Executor 只允许在下述既有层中做最小通用修正，并在同一份报告上重跑：
    - `chinese-prose` 的整句/段落中文化与可读性规则；
    - `writing-fidelity` 对 `rewrite` 模式的保真边界，如果其当前结构保护导致模型不敢正常重述；
@@ -91,6 +99,32 @@ decision: PLAN_FROZEN
 - 长句在不丢条件的情况下拆成可追踪的逻辑关系，主语、动作、原因、结果更靠近；
 - 标题和段落直接描述科学内容，不使用代理式元话语制造专业感；
 - 用户能明显感到比原 Deep Research PDF 更容易连续阅读。用户的真实阅读反馈高于机械 style score。
+
+### B2. Artifact-aware review
+
+最终 Reviewer 必须实际读取完整 `rewritten_report.md`。完整用户材料仍不得提交公共 GitHub，但必须通过 task-local private path、host-local review、或其他不公开材料正文的真实 review path 让 Reviewer 读取最终产物。
+
+如果 Reviewer 无法读取完整最终产物，只能返回 `REVISE` 或等待证据；不能因为 CI、摘要、protected-span 计数或 Executor 自述通过就判 `PASS`。
+
+Reviewer 需要明确记录它读取的是哪一个最终稿路径，以及它如何检查 reader-facing 可读性、普通英文抽象标签、用户明确禁用的表达和内容保真之间的平衡。
+
+### B3. Chinese-first reader-facing gate
+
+最终正文必须让中文研究者直接理解。普通英文抽象标签不得承担中文句子的主要语义结构；保留下来的英文必须是算法名、数据集名、模型名、指标名、公式/代码标识、论文题名、引用原文，或确有检索/定位价值的正式术语。
+
+不能靠逐词翻译解决问题。修改应按当前句子的实际意思整句或整段重述，例如把 provenance 类表达改成“这个 checkpoint 当初用过哪些病例，目前能确认到什么程度”，而不是把 `provenance` 机械换成“来源追踪”。
+
+`one-shot` 可以在首次定义后按语境保留；`pooled`、`client`、`checkpoint`、`baseline` 等词不能因为领域里常见就自动保留。若它们在当前句子里只是普通概念，应优先写成自然中文。
+
+### B4. Explicit user-constraint gate
+
+本次实际最终稿的 reader-facing prose 不得继续出现 `provenance`，除非它是必须逐字保留的正式标题、代码标识、路径、引用原文或论文/软件专名。
+
+Production skill 的通用修复不得 hard-code 一个项目专用 `provenance` 禁词表；应解决“普通英文抽象标签没有被语义化重述”的一般问题。
+
+### B5. Reviewer ownership
+
+明显违反 frozen Plan 或用户明确长期要求的问题必须由 Planner/Reviewer 判 `REVISE`。Human gate 只保留真正需要主观取舍的最终偏好，不得把普通英文抽象标签残留、未读完整 artifact、或 reader-facing 中文不达标这类可检查质量问题外包给用户。
 
 ### C. 通用回归
 

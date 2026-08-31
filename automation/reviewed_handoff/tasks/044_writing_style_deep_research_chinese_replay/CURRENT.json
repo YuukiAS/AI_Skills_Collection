@@ -1,19 +1,19 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "044_writing_style_deep_research_chinese_replay",
-  "state": "AWAIT_HUMAN_DECISION",
+  "state": "PLAN_FROZEN",
   "review_round": 1,
   "max_review_rounds": 2,
-  "plan_revision": 0,
+  "plan_revision": 1,
   "max_plan_revisions": 1,
   "base_commit": "6e2ae18bd3a76cd15300c79b072d01d89aaa64fa",
   "base_branch": "main",
-  "implementation_commit": "1b9657a7c9d4afe7f7100b7a5641cc5213123a2e",
+  "implementation_commit": null,
   "ci_required": true,
-  "ci_status": "PASS",
+  "ci_status": "PENDING",
   "last_review_decision": "PASS",
   "review_limit_reached": false,
-  "human_gate_reason": "PASS",
+  "human_gate_reason": null,
   "visual_review_required": false,
-  "next_action": "NONE"
+  "next_action": "EXECUTOR_REVIEW_FULL_ARTIFACT_AND_FIX_WRITING_STYLE_IF_BASELINE_FAILS"
 }
