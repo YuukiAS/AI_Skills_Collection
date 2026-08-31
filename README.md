@@ -101,56 +101,105 @@ codex plugin marketplace add \
 
 这是这个仓库以后最重要的长期用法。
 
-假设你正在 TRACE 里继续改 CAT-TRACE PPT，并且说：
+以后你在 TRACE、CARE、Distributed Imaging 或别的项目里用某个 plugin，发现结果不好，并且说：
 
 > 记录 repo 并保存到合适的地方。
 
-Codex **先记录到 TRACE 自己的仓库**，而不是马上跑来改 AI_Skills_Collection。
+Codex 先判断：**这是项目本身的问题，还是 plugin 自己的问题？**
 
-应该放哪里，按问题本身来选：
+### 项目本身的问题，留在项目 repo
 
-- 这是项目长期还要做的事：放进这个项目已有的 `TODO`、`ROADMAP` 或同类长期计划。
-- 这是某一次具体任务、返修或实验发生的问题：放进这一轮已有的 `result.md`、review、revision note 或同类记录。
-- 这是已经确定的长期科学/产品决定：放进项目已有的 decision / design 文档。
-- 如果仓库已经有合适位置，就用原来的位置；不要为了“记录一下”再发明一套新目录或新格式。
+例如 TRACE 里：
 
-### 如果这个问题可能是插件本身的问题
+- 下一步还要补什么实验；
+- theorem 到底怎么写；
+- 某个数据集怎么解释；
+- 模型要不要增加新部分；
+- TRACE 自己的代码有 bug。
 
-例如你在 TRACE 里发现：
+这些当然继续写 TRACE 的 `ROADMAP.md`、模型/数据文档、任务记录等合适位置。
 
-- PPT 箭头又穿过文字；
-- 已经接受的页面被局部返修时意外改坏；
-- 导师报告又变成了运行日志；
-- 某个统计插件把真实数据问题处理错了。
+### 用 plugin 时暴露的问题，直接写回这个仓库
 
-项目 Codex 仍然先在**当前项目**记录真实情况。最好在同一个 task result / review 里加一个很短的 `AI_Skills feedback` 小节，只写四件事：
+例如你在 TRACE 里用 `presentations` 返修 CAT-TRACE PPT，发现：
+
+- 箭头穿过文字；
+- 图还是太小，投影时看不清；
+- 已经接受的页面被这轮返修顺手改坏；
+- 公式页层次很差；
+- 你明明要求“继续改现有 PPT”，它却重新生成了一套。
+
+这些本质上是 `presentations` 的问题，所以**不要再把它们当成 TRACE 的科研 TODO 保存一份**。直接读：
 
 ```text
-可能相关的 plugin: presentations
-实际问题: 用户真正看到的错误是什么
-evidence: 对应 PDF / render / result / review 在项目里的路径
-项目专属部分: 哪些内容只属于 CAT-TRACE / CARE / 当前数据集
+TODO.md
+docs/plugin-todos/presentations.md
 ```
 
-这里不要急着写“以后所有 PPT 都必须怎样”。项目 Codex 的任务是把事实记清楚，不是替中央插件制定永久规则。
+然后把这次真实问题记到 `presentations.md`。
 
-之后再到 AI_Skills_Collection，由这里的 Planner / maintainer 做第二步：
+报告插件的问题写 `docs/plugin-todos/research-writing.md`；统计插件的问题写 `docs/plugin-todos/statistical-modeling.md`；医学影像插件的问题写 `docs/plugin-todos/medical-imaging.md`。其他 plugin 同理。
 
-1. 看项目里记录的真实问题；
-2. 看这个插件现在是不是已经有同样的规则；
-3. 看 `docs/plugin-todos/<plugin>.md` 里是不是已经有同一个问题；
-4. 看别的真实项目有没有遇到过类似问题；
-5. 决定这是项目自己的问题、已有规则没有真正执行，还是一个值得插件学习的新问题。
+一个很实用的判断是：
 
-只有这一步做完，真正能推广的问题才进入对应的中央插件 TODO。
+> 换成另一个真实项目，这个 plugin 还可能犯同样的错吗？
 
-所以一句话：
+如果答案大概率是“会”，就应该优先记到 plugin TODO，而不是项目 TODO。
 
-> **项目仓库记录“发生了什么”；AI_Skills_Collection 再整理“插件应该学到什么”。**
+### 项目 thread 要写多复杂？不用复杂
+
+真实项目 thread 不负责直接制定“以后所有项目都必须遵守的规则”。它只需要把这次真实失败写清楚。
+
+如果目标 plugin 的 TODO 里没有同一问题，就加一个 `NEW`：
+
+```text
+### <简短的问题标题>
+status: NEW
+source: <真实项目 / 当前任务>
+evidence: <实际输出的路径、链接、commit 或 render>
+problem: <用户实际看到的问题>
+project-specific context: <哪些细节只属于当前项目，不应该变成通用规则>
+```
+
+例如：
+
+```text
+### Existing-deck revision changed an accepted slide
+status: NEW
+source: TRACE / CAT-TRACE group-meeting revision
+evidence: <实际 PDF / render / task 路径>
+problem: 用户只要求修改 P10，但上轮已经接受的 P9 也发生了明显变化。
+project-specific context: P9/P10 的 CAT-TRACE 科学内容本身不应该变成通用规则。
+```
+
+这里先记“发生了什么”，不要急着写“以后所有 PPT 必须怎样”。
+
+### 谁负责把这些问题整理成真正的插件规则？
+
+AI_Skills_Collection 的 Planner / maintainer 负责。
+
+它会再检查：
+
+1. 这个 plugin 现在是不是已经有同样的规则；
+2. 对应 plugin TODO 里是不是已经有同一个问题；
+3. 别的真实项目有没有遇到过类似问题；
+4. 哪些细节只是当前项目自己的内容。
+
+然后再决定：
+
+- 已经有同一个 TODO → 把这次真实案例合进去，不重复新建；
+- 插件本来已经有规则但还是做错 → 重点查为什么实际没有执行；
+- 只是这个项目特殊 → 不把它升级成通用规则；
+- 确实是新的通用问题 → 整理成长期候选；
+- 证据已经足够 → 再单独开一轮真正修改 plugin。
+
+所以整套流程其实只有一句话：
+
+> **项目自己的问题留在项目 repo；plugin 自己的问题直接记回对应 plugin TODO；中央 Planner 再负责去重和提炼。**
 
 ### TODO 到底放在哪里
 
-AI_Skills_Collection 根目录有一个 [TODO.md](TODO.md)，它只是总入口，像根 `CHANGELOG.md` 一样负责导航，不重复维护具体问题。
+AI_Skills_Collection 根目录有一个 [TODO.md](TODO.md)，它只是总入口，像根 `CHANGELOG.md` 一样负责导航，不重复维护十份具体问题。
 
 真正的插件待办在：
 
@@ -158,13 +207,7 @@ AI_Skills_Collection 根目录有一个 [TODO.md](TODO.md)，它只是总入口�
 docs/plugin-todos/<plugin>.md
 ```
 
-例如 Presentation 的长期问题在：
-
-```text
-docs/plugin-todos/presentations.md
-```
-
-已经正式解决并发布的变化则写到：
+已经正式解决并发布的变化写到：
 
 ```text
 docs/plugin-changelogs/<plugin>.md
@@ -172,13 +215,13 @@ docs/plugin-changelogs/<plugin>.md
 
 整个仓库每次正式发布改了什么，看根 [CHANGELOG.md](CHANGELOG.md)。
 
-因此这几个文件的分工很简单：
+简单分工：
 
-- 项目 repo 的 TODO / result / review：这次真实项目发生了什么、接下来项目自己还要做什么。
+- 项目 repo：项目自己的研究、产品、代码和实验事情。
 - `TODO.md`：AI_Skills_Collection 的待办总入口。
-- `docs/plugin-todos/<plugin>.md`：某个插件以后要解决哪些通用问题。
-- `docs/plugin-changelogs/<plugin>.md`：某个插件已经在哪个版本解决了什么。
-- `CHANGELOG.md`：整个 AI_Skills_Collection 每次发布改了什么。
+- `docs/plugin-todos/<plugin>.md`：某个 plugin 真实暴露了哪些问题、以后要改什么。
+- `docs/plugin-changelogs/<plugin>.md`：某个 plugin 已经在哪个版本解决了什么。
+- `CHANGELOG.md`：整个 AI_Skills_Collection 每次正式发布改了什么。
 
 详细维护规则在：
 
@@ -186,7 +229,7 @@ docs/plugin-changelogs/<plugin>.md
 - `docs/plugin-todos/README.md`
 - `docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md`
 
-这些文件给维护者看；普通使用时记住上面那句“项目先记事实，中央再提炼”就够了。
+普通使用时记住上面的那句话就够了。
 
 ## Profile 安装
 
