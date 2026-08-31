@@ -3,7 +3,9 @@ name: Codex Marketplace
 on:
   pull_request:
   push:
-    branches: [main]
+    branches:
+      - main
+      - 'reviewed/**'
   workflow_dispatch:
 
 permissions:
