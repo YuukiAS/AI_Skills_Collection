@@ -2,11 +2,12 @@
 
 ## Unreleased
 
-- Clarified how real project threads should record work: project-specific TODOs and revision findings stay in the project repo, while only possible reusable plugin problems are handed back to AI_Skills for later triage.
-- Rewrote the README explanation in plain Chinese and added root `TODO.md` as the human-facing entry point for plugin backlogs.
-- Clarified TRACE `AGENTS.md` so “记录 repo 并保存到合适的地方” uses TRACE's existing roadmap/task/result/decision files first and only creates an AI_Skills feedback handoff when the issue may reflect plugin behavior.
+- Changed the real-project feedback rule: problems caused by an AI_Skills plugin are now recorded directly in that plugin's central `docs/plugin-todos/<plugin>.md`, instead of first creating a duplicate plugin-problem record in the project repo.
+- Real project threads may add a minimal `status: NEW` item containing the real failure and evidence; AI_Skills Planner/maintainer remains responsible for deduplication, abstraction, and deciding whether the item should become a generic plugin change.
+- Rewrote the root README/TODO explanation in plain Chinese and aligned `AGENTS.md`, the TODO guide, continuous-refinement workflow, maintainer skill, Planner contract, and TRACE repo guidance with the same rule.
+- Cleaned the Presentation TODO so the Stage-4 validator fix and existing-deck revision contract are no longer incorrectly listed as open work after they shipped in `presentations 0.1`; the file is now ready to receive new real-use `NEW` items from CAT-TRACE and other projects.
 
-No repository or plugin version bump: these are maintenance and documentation clarifications, not a new formal release.
+No repository or plugin version bump yet. These changes remain in `Unreleased` until they are included in a formal release.
 
 ## 5.0.0 - 2026-08-30
 
