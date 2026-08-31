@@ -7,7 +7,7 @@
 涉及真实系统或发布时，优先读取：
 
 1. 用户当前要求与真实项目/artifact；
-2. 当前 `main`；
+2. 当前任务明确绑定的 Git branch；若没有独立 workflow branch，才默认当前 `main`；
 3. 本 `AGENTS.md`；
 4. 根 `TODO.md` / `CHANGELOG.md` 作为导航入口，再进入对应 workflow / skill / plugin TODO / changelog；
 5. tests / CI /真实 render；
@@ -200,6 +200,48 @@ plugins/codex/plugins/
 Planner 负责冻结 bounded Plan；Executor 只实现当前 Plan；Reviewer 独立验收。不得让 Executor 自己扩 scope、选下一阶段或宣布 Program PASS。
 
 高成本 final holdout 必须预冻结完整 batch；失败后不能 adaptive replacement chasing。
+
+### 8.1 多插件并行：一个 workflow 一个 branch
+
+AI_Skills_Collection 同时返修多个独立 plugin 是正常情况，不应因为其中一个 task 正在等待 CI/GPT Reviewer 就让整个仓库串行停住。
+
+当存在多个相互独立的 Reviewed Handoff workflow 时，默认使用：
+
+```text
+reviewed/<task_key>
+```
+
+作为该 workflow 的独立 branch。该 branch 在任务被明确集成回 `main` 前，是本 task 的 Executor、CI、Scheduled GPT review source of truth。
+
+规则：
+
+- 不同 plugin /明显独立 source area 的 task 可以并行推进；一个 branch 的 `WAITING_FOR_CI`、`READY_FOR_GPT_REVIEW`、`NEEDS_GPT_PLANNER`、visual-evidence wait 或用户输入等待，不得让另一个独立 branch 低频空等。
+- 同一 plugin、同一 shared runtime/schema/generator 或存在直接依赖的 task 不自动并行；先由 Planner/用户判断是否独立。
+- Scheduled GPT automation 必须显式绑定 task + branch，不得静默回落到 `main` 或改另一个 task branch。
+- 不因为 task branch 已隔离就自动 merge。最终回 `main` 前仍需检查当前 main、branch diff、CI/review 和 integration conflict。
+- merge conflict 是 integration decision，不等于 task 本身失败；优先询问 Planner/用户。
+- 当前 generic watcher 若不能绑定单个 task，就不得在含多个 Executor-owned task 的 checkout 中冒险自动选择；使用 task-bound goal，或等待 Bridge Kit 的 first-class task-scoped watcher/branch helper。不得假装现有 watcher 已经支持自动多 branch 并发。
+
+当前首批明确 branch：
+
+```text
+reviewed/044_writing_style_deep_research_chinese_replay
+reviewed/045_presentations_real_use_regression_hardening
+```
+
+### 8.2 不得为了结束 goal 随意 BLOCK
+
+`BLOCKED` 是不可恢复的异常终态，不是“这次 Codex 暂时不能继续”的快捷出口。
+
+优先级：
+
+1. 普通可逆实现细节 -> Executor 自行处理；
+2. frozen Plan 的实质歧义 -> `NEEDS_GPT_PLANNER`；
+3. 只差一个用户答案的运行问题（路径、artifact identity、credential/authorization、branch/integration choice 等）-> 当前 goal 支持 `request_user_input` 时直接询问并保持合法 workflow state；
+4. 无交互通道但问题可由用户决定 -> 走 human-decision route，不伪造不可恢复失败；
+5. 只有 waiting、Planner re-entry、用户输入、Host Policy 已授权操作和 bounded recovery 都无法解决，并且有真实证据时，才允许 `BLOCKED`。
+
+每个 `BLOCKED` 必须说明：实际失败、观测证据、检查过哪些恢复路径、为什么都不能工作，以及恢复方式（若存在）。approval prompt、missing-but-locatable artifact、可回答的 branch/path 问题、普通 merge conflict 本身都不是 BLOCKED 理由。
 
 ## 9. 用户反馈优先于内部 PASS
 
