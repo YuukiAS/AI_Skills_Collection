@@ -11,7 +11,8 @@
 # - partition: Slurm partition/queue. Required when the site has no safe default.
 # - qos: Slurm QoS or queue class. Required when the scheduler expects one.
 # - scratch_root: private writable scratch/work directory for temporary outputs.
-# - render_resource_dirs: optional comma-separated local CJK render resource directories.
+# - render_resource_dirs: optional comma-separated local CJK render resource directories;
+#   on the YuukiAS workstation use /home/yuukias/render_resources/chinese_math_pdf.
 # - texlive_path: optional private TeX Live root/bin path if modules are insufficient.
 # - python_path: optional preferred Python executable or environment path.
 # - module_init: shell snippet or file path needed before `module load`.

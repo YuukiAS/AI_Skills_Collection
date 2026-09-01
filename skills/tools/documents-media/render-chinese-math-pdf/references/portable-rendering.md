@@ -23,6 +23,14 @@ Do not hardcode a machine-specific resource path in a reusable prompt or skill.
 If a fixed path works on one host, describe it as an optional detected resource,
 not as a requirement.
 
+Current YuukiAS workstation note: the expected local resource bundle is
+`/home/yuukias/render_resources/chinese_math_pdf`. It is a valid detected
+resource location for TRACE-style Chinese/math rendering and should not be
+dropped from handoffs or evidence. If a future machine lacks a resource,
+compiler, TeX package, font, or PDF QA tool, report the missing dependency and
+ask before installing; do not invent or fall back to retired server-only absolute
+paths.
+
 ## Useful Probes
 
 ```bash

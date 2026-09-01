@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -261,6 +262,25 @@ class RenderChineseMathPdfTests(unittest.TestCase):
         extracted = "指标        数值\n左室容积    120 mL\n"
         result = qa.validate_text(extracted, source)
         self.assertNotIn("Markdown table rows did not survive in extracted PDF layout text", result["errors"])
+
+    def test_tracked_guidance_has_no_retired_server_render_paths(self) -> None:
+        forbidden = ["/lus" + "tre", "/lus" + "ture", "/lus" + "ter"]
+        tracked = subprocess.check_output(["git", "ls-files"], cwd=REPO_ROOT, text=True).splitlines()
+        offenders: list[str] = []
+        for rel_path in tracked:
+            path = REPO_ROOT / rel_path
+            if not path.is_file() or path.suffix.lower() in {".png", ".jpg", ".jpeg", ".pdf", ".zip", ".pyc"}:
+                continue
+            try:
+                text = path.read_text(encoding="utf-8")
+            except UnicodeDecodeError:
+                continue
+            for bad in forbidden:
+                if bad in text:
+                    offenders.append(rel_path)
+                    break
+
+        self.assertEqual([], offenders)
 
 
 if __name__ == "__main__":
