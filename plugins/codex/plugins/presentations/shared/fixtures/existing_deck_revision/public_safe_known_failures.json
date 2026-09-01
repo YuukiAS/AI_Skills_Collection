@@ -1,0 +1,114 @@
+{
+  "schema": "RESEARCH_PRESENTATION_EXISTING_DECK_REVISION_PACKET_V1",
+  "case_id": "public_safe_known_failure_packet",
+  "privacy_policy": "PUBLIC_SAFE_ABSTRACTED_REAL_USE_REPLAY",
+  "deck_identity": {
+    "title": "Withheld real-use research deck",
+    "source_path": null,
+    "pdf_path": null,
+    "content_boundary": "Private project text, figures, paths, and page numbers are withheld from the installed plugin payload."
+  },
+  "revision_entry": {
+    "reviewer_seen_baseline": {
+      "status": "PASS",
+      "evidence": "baseline deck was reviewed before targeted revision"
+    },
+    "accepted_element_ledger": [
+      {
+        "id": "accepted_template_and_title_region",
+        "status": "accepted",
+        "regression_status": "PASS"
+      }
+    ],
+    "targeted_feedback": [
+      {
+        "id": "known_visual_and_language_failure_classes",
+        "status": "OPEN"
+      }
+    ],
+    "rerender": {
+      "status": "PASS",
+      "evidence": "revised deck rendered before completion"
+    },
+    "high_resolution_problem_pages": [
+      {
+        "id": "diagram_failure_page",
+        "status": "AVAILABLE"
+      },
+      {
+        "id": "figure_density_failure_page",
+        "status": "AVAILABLE"
+      }
+    ]
+  },
+  "first_use_checks": [
+    {
+      "id": "central_acronym_before_expansion",
+      "term": "withheld central acronym",
+      "term_type": "acronym",
+      "central_object": true,
+      "first_central_use_page": 1,
+      "explanation_page": 2,
+      "status": "REVISE"
+    },
+    {
+      "id": "central_method_before_setup",
+      "term": "withheld method label",
+      "term_type": "method",
+      "central_object": true,
+      "first_central_use_page": 5,
+      "explanation_page": 6,
+      "status": "REVISE"
+    },
+    {
+      "id": "central_estimand_without_explanation",
+      "term": "target estimand",
+      "term_type": "estimand",
+      "central_object": true,
+      "first_central_use_page": 8,
+      "explanation_page": null,
+      "status": "REVISE"
+    }
+  ],
+  "rendered_scientific_object_qa": {
+    "node_width_and_wrap": {
+      "status": "REVISE",
+      "evidence": "narrow diagram nodes create awkward wrapping"
+    },
+    "connector_endpoint_clearance": {
+      "status": "REVISE",
+      "evidence": "connector endpoint lands too close to text/object boundary"
+    },
+    "arrow_readability": {
+      "status": "REVISE",
+      "evidence": "arrows are difficult to parse at projection distance"
+    },
+    "crowding_unused_space": {
+      "status": "REVISE",
+      "evidence": "crowded local regions coexist with unused safe layout space"
+    },
+    "figure_internal_text": {
+      "status": "REVISE",
+      "evidence": "figure axis/tick/legend text is too small"
+    },
+    "caption_panel_pairing": {
+      "status": "REVISE",
+      "evidence": "caption-to-panel pairing is ambiguous"
+    },
+    "source_footer_safe_zone": {
+      "status": "REVISE",
+      "evidence": "source/footer content enters the template safe zone"
+    }
+  },
+  "english_final_pass": {
+    "scientific_structure_frozen": true,
+    "status": "MISSING",
+    "completed_after_structure_frozen": false,
+    "rerender_after_pass": false
+  },
+  "independent_visual_review": {
+    "independent": false,
+    "decision": "MISSING",
+    "evidence": "historical final pass used self-inspection rather than an independent visual reviewer"
+  }
+}

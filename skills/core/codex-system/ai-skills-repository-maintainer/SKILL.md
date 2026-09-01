@@ -1,6 +1,6 @@
 ---
 name: ai-skills-repository-maintainer
-description: Maintain AI_Skills_Collection itself: registry, catalog, provenance, marketplace config, generated layer, icons, profiles, and validation gates. Use only when the user is working on this repository or explicitly asks to maintain the central skill collection.
+description: Maintain AI_Skills_Collection itself, including production plugin refinement contracts, source-first changes, generated parity, replay/regression gates, versions, changelogs, registry, catalog, marketplace, and profiles. Use only when the user is working on this repository or explicitly asks to maintain the central skill collection.
 status: active
 provenance: user-authored
 trusted: false
@@ -27,6 +27,70 @@ Use this skill only for maintaining `AI_Skills_Collection`. Do not use it for or
 - Do not use this as a domain skill. Frontend taste, PPT planning, bioinformatics retrieval, writing, and statistics live in their own plugins or official capabilities.
 - Treat `.agents/plugins/marketplace.json` and `plugins/codex/plugins/` as generated output.
 - Keep external source intake temporary, reviewed, and provenance-recorded.
+
+## Plugin Refinement Companion Mode
+
+Use this mode whenever the current task maintains `AI_Skills_Collection` and will change a formal central plugin's production behavior, including changes to:
+
+- `skills/`;
+- plugin routing;
+- runtime references or shared runtime;
+- QA or regression behavior;
+- generator or production scripts;
+- Marketplace payload;
+- profile exposure.
+
+This mode is mandatory for production plugin refinement. It is a maintenance companion, not a second workflow engine and not a domain expert.
+
+The installed plugin should be presented to users as `AI Skills Maintainer`; keep the internal plugin slug `ai-skills-core` unless a task provides strong compatibility evidence for a slug migration. Normal maintenance combinations are:
+
+- `AI Skills Maintainer` + `Presentations`;
+- `AI Skills Maintainer` + `Writing Style`;
+- `AI Skills Maintainer` + `Statistical Modeling`.
+
+The target plugin decides what is professionally correct. This maintainer decides whether the change is source-authoritative, generated, replayed, regression-tested, versioned, changeloged, and closed.
+
+Fixed flow:
+
+1. Identify the target plugin.
+2. Identify the domain owner plugin or official capability.
+3. Read the target plugin TODO, target plugin changelog, active source skill/reference/runtime/QA, Marketplace config, and version policy.
+4. Check whether the failure is an existing active-rule production regression, duplicate TODO, `PROJECT_LOCAL`, `CANDIDATE_GENERIC`, or already solved.
+5. Freeze the maintenance boundary: what repository contract changes, what stays out of scope, and which existing layer owns the change.
+6. Keep professional judgment with the domain owner.
+7. Modify source authority first.
+8. Regenerate the generated layer.
+9. Install or reload the real production plugin when production behavior changed.
+10. Replay the original real failure or a public-safe equivalent frozen by the task.
+11. Run an unrelated regression for the target plugin or affected shared path.
+12. Close or update the target plugin TODO.
+13. Bump the affected plugin version exactly once when the completed release changes production behavior.
+14. Update the affected plugin changelog with before -> after behavior.
+15. Apply the repository release/version contract.
+16. Validate source/generated/version/release parity before reporting completion.
+
+`ai-skills-core` does not judge:
+
+- PPT scientific quality or slide visual hierarchy;
+- statistical correctness;
+- medical imaging semantics;
+- bioinformatics scientific workflow;
+- prose scientific meaning.
+
+Those decisions must be handled by the target domain plugin or official capability. For example, a `presentations` refinement uses `workflow-core` for process, `ai-skills-core` for maintenance closure, and `presentations` for slide/deck judgment.
+
+Before editing plugin source in this mode, verify whether the current Codex identity has the production plugin installed and enabled. When a task requires production evidence, use `ai-bridge plugin-replay --plugin ai-skills-core@yuukias-ai-skills` or the exact plugin id reported by `codex plugin list`; reading this repository's source `SKILL.md` is useful context but is not proof of production invocation.
+
+When the refinement is responding to a real artifact failure, keep the maintenance owner separate from artifact judgment:
+
+- record whether the failure is a `PROCESS PASS` / process-control failure, `PRODUCT / ARTIFACT PASS` failure, or both;
+- ensure the Reviewed Handoff Plan/Reviewer has a real repo-safe artifact path, render, or Bridge Kit Text Review evidence locator when acceptance depends on artifact quality;
+- do not accept CI, schema, protected-span, or Executor summary success as product/artifact PASS;
+- if the final artifact cannot be read or viewed, the review condition is `WAITING_FOR_EVIDENCE / NEEDS_REVIEW`, not PASS.
+
+Private/text artifact review is owned by `GPT_Codex_AI_Bridge_Kit` Text Review. Do not implement another artifact transport or reviewer in `AI_Skills_Collection`; once Bridge Kit Text Review lands, consume its evidence and artifact identity in the maintainer/review contract.
+
+Real regression case 044: a private `rewritten_report.md` was reported by the user to still contain reader-facing `provenance`, `estimand`, `scientific gap`, `resource contract`, and `state of the art` language that violated the frozen writing requirement, while review passed without reading the full artifact. Future maintenance of the same class must be blocked at the Reviewed Handoff artifact-aware review layer; this maintainer should route it there and should not rewrite the 044 scientific text.
 
 ## Workflow
 
@@ -90,9 +154,10 @@ Mandatory rules:
 - Repository / CLI uses three-part releases. Patch is the default compatible release; minor requires a new repository-level user capability; major requires a breaking repository contract.
 - Individual plugins use independent two-part releases such as `0.1 -> 0.2 -> 0.3 -> 1.0`.
 - Plugin version changes only when that plugin has a completed user-facing improvement batch with replay/regression/review evidence.
+- If a bounded production plugin refinement changes user-facing behavior or workflow, passes its original-failure replay and unrelated regression, and is ready for delivery, bump that plugin exactly once in the same task. Do not leave the completed behavior change as `Unreleased` with a deferred plugin version bump.
 - A single plugin release normally causes a repository patch release, not a repository minor release.
 - A plugin reaching `1.0` does not by itself cause a repository minor release.
-- TODO/provenance/maintenance-only changes do not bump plugin versions.
+- Baseline replay, TODO/provenance/maintenance-only docs, tests-only changes, or no-runtime-behavior changes do not bump plugin versions.
 - If the bump cannot be justified exactly under the canonical policy, choose `NO_BUMP` and return to Planner/user.
 
 Every release plan/result must state:

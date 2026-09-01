@@ -1,6 +1,6 @@
 {
   "name": "ai-skills-maintainer",
-  "description": "Maintainer profile for this repository's registry, catalog, provenance, marketplace, icon, and profile workflows.",
+  "description": "Maintainer profile for AI_Skills_Collection registry, catalog, marketplace, profiles, and central plugin refinement closure.",
   "max_active_skills": 10,
   "skills": [
     "skills/core/codex-system/project-skill-installer",

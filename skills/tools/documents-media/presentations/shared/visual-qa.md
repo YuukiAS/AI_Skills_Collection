@@ -38,6 +38,16 @@ If the slide contract requires real plot, image, table, data, case, metric, or s
 
 For diagram pages, first decide whether a diagram is needed at all. A valid diagram must encode a real scientific relationship, mechanism, computation, experimental path, or dependency. Boxes, bubbles, or cards that only contain prose are not scientific diagrams. Connectors must be real structural connectors with semantic anchors and a consistent lane/sequence direction; typed arrow characters, random diagonals, connector lines that imply the wrong relation, and arrows used for containment are QA failures.
 
+## Rendered Scientific Object QA
+
+For existing research-deck revisions, the final rendered scientific-object QA
+batch must inspect the reviewer-seen baseline and the revised render. Cover node
+width and awkward wrapping, connector endpoint clearance, arrow readability,
+local crowding together with unused space, figure-internal axis/tick/legend/title
+and annotation readability, caption/panel pairing, and the source/footer safe zone
+defined by the active template. These are completion gates for the rendered
+artifact, not prose reminders.
+
 ## Revision Scope QA
 
 For targeted revision, compare the new render with the specific version that received feedback. The cited issue becomes a regression constraint, but accepted slides/components should remain stable unless the fix directly depends on changing them. A repair that deletes accepted content, reintroduces a rejected design, or changes unrelated page structure without evidence should be marked `REVISE` for scope creep.

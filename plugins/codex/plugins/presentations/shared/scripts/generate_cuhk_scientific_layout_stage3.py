@@ -32,7 +32,7 @@ LOCAL_RENDER_RESOURCE_DIR = Path("/home/yuukias/render_resources/chinese_math_pd
 LOCAL_RENDER_TEXMF = LOCAL_RENDER_RESOURCE_DIR / "texmf"
 LOCAL_FANDOL_DIR = LOCAL_RENDER_TEXMF / "fonts" / "opentype" / "public" / "fandol"
 LOCAL_NOTO_CJK_DIR = LOCAL_RENDER_TEXMF / "fonts" / "opentype" / "public" / "noto-cjk"
-TRACE_TIMES_FONT_DIR = Path("/home/yuukias/code/TRACE/presentations/group_meetings/2026-07-16/cat_trace_demo/fonts")
+DEFAULT_TIMES_FONT_DIR = LOCAL_RENDER_RESOURCE_DIR / "fonts" / "times"
 LOCAL_TINYTEX_BIN = Path("/home/yuukias/.TinyTeX/bin/x86_64-linux")
 FORBIDDEN_AUDIENCE_TERMS = [
     "RRL-",
@@ -356,19 +356,27 @@ def render_search_path() -> str:
     return os.pathsep.join(part for part in path_parts if part)
 
 
+def times_font_dir() -> Path:
+    override = os.environ.get("AI_SKILLS_TIMES_FONT_DIR")
+    if override:
+        return Path(override).expanduser()
+    return DEFAULT_TIMES_FONT_DIR
+
+
 def write_fontconfig(build_dir: Path) -> dict[str, Any]:
     fontconfig_dir = build_dir / "fontconfig"
     fontconfig_dir.mkdir(exist_ok=True)
     cache_dir = Path("/tmp/fontconfig-cache-027")
     cache_dir.mkdir(parents=True, exist_ok=True)
     config = fontconfig_dir / "fonts.conf"
+    times_dir = times_font_dir()
     config.write_text(
         "\n".join(
             [
                 '<?xml version="1.0"?>',
                 '<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">',
                 "<fontconfig>",
-                f"  <dir>{TRACE_TIMES_FONT_DIR}</dir>",
+                f"  <dir>{times_dir}</dir>",
                 "  <dir>/usr/share/fonts</dir>",
                 f"  <cachedir>{cache_dir}</cachedir>",
                 "</fontconfig>",
@@ -381,9 +389,10 @@ def write_fontconfig(build_dir: Path) -> dict[str, Any]:
         "fontconfig_file": str(config.resolve()),
         "fontconfig_file_repo_path": rel(config),
         "font_cache_dir": str(cache_dir),
-        "times_font_dir": str(TRACE_TIMES_FONT_DIR),
-        "times_font_dir_exists": TRACE_TIMES_FONT_DIR.exists(),
-        "times_font_files_present": all((TRACE_TIMES_FONT_DIR / name).exists() for name in ["times.ttf", "timesbd.ttf", "timesbi.ttf", "timesi.ttf"]),
+        "times_font_dir": str(times_dir),
+        "times_font_dir_source": "AI_SKILLS_TIMES_FONT_DIR" if os.environ.get("AI_SKILLS_TIMES_FONT_DIR") else "default_render_resources",
+        "times_font_dir_exists": times_dir.exists(),
+        "times_font_files_present": all((times_dir / name).exists() for name in ["times.ttf", "timesbd.ttf", "timesbi.ttf", "timesi.ttf"]),
     }
 
 
@@ -1489,8 +1498,9 @@ def dependency_probe() -> dict[str, Any]:
             "fandol_dir_exists": LOCAL_FANDOL_DIR.exists(),
             "noto_cjk_dir": str(LOCAL_NOTO_CJK_DIR),
             "noto_cjk_dir_exists": LOCAL_NOTO_CJK_DIR.exists(),
-            "times_font_dir": str(TRACE_TIMES_FONT_DIR),
-            "times_font_dir_exists": TRACE_TIMES_FONT_DIR.exists(),
+            "times_font_dir": str(times_font_dir()),
+            "times_font_dir_source": "AI_SKILLS_TIMES_FONT_DIR" if os.environ.get("AI_SKILLS_TIMES_FONT_DIR") else "default_render_resources",
+            "times_font_dir_exists": times_font_dir().exists(),
             "tinytex_bin": str(LOCAL_TINYTEX_BIN),
             "tinytex_bin_exists": LOCAL_TINYTEX_BIN.exists(),
             "tex_cache_env": tex_cache_env(),

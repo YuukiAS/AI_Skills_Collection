@@ -1,0 +1,142 @@
+name: AI Bridge Text Review
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest:
+        description: Repository-relative text input manifest path
+        required: true
+        default: results/001_task/text_review/text_inputs.json
+      output:
+        description: Repository-relative TEXT_REVIEW.json output path
+        required: true
+        default: results/001_task/text_review/TEXT_REVIEW.json
+  push:
+    branches:
+      - main
+      - 'reviewed/**'
+    paths:
+      - 'results/**/text_review/text_inputs.json'
+
+permissions:
+  contents: write
+
+jobs:
+  text-review:
+    runs-on: ubuntu-latest
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_REVIEW_API_KEY || secrets.OPENAI_VISUAL_REVIEW_API_KEY }}
+      OPENAI_TEXT_REVIEW_MODEL: ${{ vars.OPENAI_TEXT_REVIEW_MODEL }}
+      AI_BRIDGE_TEXT_REVIEW_MANIFEST: ${{ github.event.inputs.manifest }}
+      AI_BRIDGE_TEXT_REVIEW_OUTPUT: ${{ github.event.inputs.output }}
+      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[text-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@9e8ab90fb13e92d268b08ad7fc7aa64ed9f9877a
+      AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY: ${{ secrets.AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install age
+        if: env.AI_BRIDGE_TEXT_REVIEW_SKIP != '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y age
+
+      - name: Install Bridge Kit text review extra
+        run: python -m pip install "${AI_BRIDGE_KIT_PIP_SPEC}"
+
+      - name: Resolve text review paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${AI_BRIDGE_TEXT_REVIEW_MANIFEST}" ]; then
+            mapfile -t manifests < <(git diff-tree --no-commit-id --name-only -r "${GITHUB_SHA}" | grep '^results/.*/text_review/text_inputs[.]json$' || true)
+            if [ "${#manifests[@]}" -eq 0 ]; then
+              echo "No text review manifest changed; not required."
+              echo "AI_BRIDGE_TEXT_REVIEW_SKIP=1" >> "$GITHUB_ENV"
+              exit 0
+            fi
+            if [ "${#manifests[@]}" -gt 1 ]; then
+              echo "Multiple text review manifests changed; dispatch manually with one manifest."
+              exit 1
+            fi
+            AI_BRIDGE_TEXT_REVIEW_MANIFEST="${manifests[0]}"
+          fi
+          if [ -z "${AI_BRIDGE_TEXT_REVIEW_OUTPUT}" ]; then
+            AI_BRIDGE_TEXT_REVIEW_OUTPUT="$(dirname "${AI_BRIDGE_TEXT_REVIEW_MANIFEST}")/TEXT_REVIEW.json"
+          fi
+          echo "AI_BRIDGE_TEXT_REVIEW_MANIFEST=${AI_BRIDGE_TEXT_REVIEW_MANIFEST}" >> "$GITHUB_ENV"
+          echo "AI_BRIDGE_TEXT_REVIEW_OUTPUT=${AI_BRIDGE_TEXT_REVIEW_OUTPUT}" >> "$GITHUB_ENV"
+
+      - name: Refuse missing text review secrets
+        if: env.AI_BRIDGE_TEXT_REVIEW_SKIP != '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY}" ]; then
+            echo "AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY is not configured; cannot decrypt private text review payload."
+            exit 1
+          fi
+          if [ -z "${OPENAI_API_KEY}" ]; then
+            echo "OPENAI_REVIEW_API_KEY or OPENAI_VISUAL_REVIEW_API_KEY is not configured; cannot run live text review."
+            exit 1
+          fi
+
+      - name: Decrypt private text payload
+        if: env.AI_BRIDGE_TEXT_REVIEW_SKIP != '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmpdir="$(mktemp -d)"
+          chmod 700 "${tmpdir}"
+          umask 077
+          printf '%s\n' "${AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY}" > "${tmpdir}/identity.txt"
+          ai-bridge text-review decrypt \
+            --target . \
+            --manifest "${AI_BRIDGE_TEXT_REVIEW_MANIFEST}" \
+            --identity-file "${tmpdir}/identity.txt" \
+            --output "${tmpdir}/plaintext.md"
+          echo "AI_BRIDGE_TEXT_REVIEW_PLAINTEXT=${tmpdir}/plaintext.md" >> "$GITHUB_ENV"
+
+      - name: Run text review
+        if: env.AI_BRIDGE_TEXT_REVIEW_SKIP != '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          ai-bridge text-review run \
+            --target . \
+            --manifest "${AI_BRIDGE_TEXT_REVIEW_MANIFEST}" \
+            --plaintext "${AI_BRIDGE_TEXT_REVIEW_PLAINTEXT}" \
+            --output "${AI_BRIDGE_TEXT_REVIEW_OUTPUT}"
+
+      - name: Commit text review evidence
+        if: env.AI_BRIDGE_TEXT_REVIEW_SKIP != '1'
+        shell: bash
+        run: |
+          set +e
+          ai-bridge text-review writeback-needed \
+            --target . \
+            --output "${AI_BRIDGE_TEXT_REVIEW_OUTPUT}"
+          writeback_status="$?"
+          set -e
+          if [ "${writeback_status}" -eq 0 ]; then
+            echo "No text review evidence changes."
+            exit 0
+          fi
+          if [ "${writeback_status}" -ne 1 ]; then
+            exit "${writeback_status}"
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Add AI Bridge text review evidence"
+          if [ "${GITHUB_REF_TYPE}" != "branch" ]; then
+            echo "Text review writeback requires a branch ref."
+            exit 1
+          fi
+          git push origin "HEAD:${GITHUB_REF_NAME}"

@@ -12,6 +12,10 @@ decision: PLAN_FROZEN
 
 长期原则冻结为：**以后不需要每一版 PPT 前都先改 plugin。** 真实项目正常迭代并持续把 plugin 问题写回中央 TODO；只有满足 promotion gate 的重复、严重或用户明确跨项目长期偏好，才插入一个 bounded plugin repair。CAT-TRACE v4 已达到这个门槛，因为多个 active guardrail 在连续多轮真实 render 中仍然失效。
 
+## Frozen decisions
+
+本任务的冻结决策由下面的 Planner triage decisions、items not promoted、implementation scope、replay/regression gates、acceptance gates 和 version decision 共同定义。本节只补齐当前 Reviewed Handoff PLAN 模板要求的结构 anchor，不改变 045 的业务内容或 workflow 状态。
+
 ## Planner triage decisions
 
 ### A. PROMOTE_NOW — existing-deck revision 必须真正进入 production/QA 路径
@@ -111,6 +115,10 @@ Executor 在写代码前必须先回答并记录：
 
 ## Replay and regression gates
 
+## Acceptance and regression gates
+
+本任务的验收和回归门槛由本节、后续 `## Acceptance gates`、`## Repository / CI` 和 `## Version decision` 共同定义；不得用 process PASS 替代 artifact/product PASS。
+
 ### Known replay: CAT-TRACE v4
 
 从本机 TRACE checkout 读取 v4 source/PDF，不把完整内容提交到公开仓库。修复后至少验证现有路径能够对这些已知问题给出 `REVISE/BLOCKED`，而不是错误 PASS：
@@ -201,6 +209,10 @@ Executor/Reviewer 根据真实结果更新 central TODO，不机械把所有 NEW
 - “只帮我润色这三句英文，不涉及 PPT 结构。” → writing-style/scientific-prose
 - “重新设计 CAT-TRACE 的模型和 theorem。” → project scientific reasoning
 - “总结这份 PDF。” → summarization/document task
+
+## Out of scope
+
+本任务的 out-of-scope 由上面的 `## Items not promoted in this batch`、`### PROJECT_LOCAL` 和 `### should-not-trigger` 共同约束；不得把这些内容升级为 045 的实现或验收范围。
 
 ### neighbor skills
 

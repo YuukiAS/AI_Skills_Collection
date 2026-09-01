@@ -15,8 +15,8 @@ on:
     branches:
       - main
       - 'reviewed/**'
-    paths-ignore:
-      - 'results/**/visual_review/**'
+    paths:
+      - 'results/**/visual_review/visual_inputs.json'
 
 permissions:
   contents: write
@@ -24,13 +24,12 @@ permissions:
 jobs:
   visual-review:
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_VISUAL_REVIEW_API_KEY }}
       OPENAI_VISUAL_REVIEW_MODEL: ${{ vars.OPENAI_VISUAL_REVIEW_MODEL }}
       AI_BRIDGE_VISUAL_REVIEW_MANIFEST: ${{ github.event.inputs.manifest }}
       AI_BRIDGE_VISUAL_REVIEW_OUTPUT: ${{ github.event.inputs.output }}
-      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@647f63c49ccea828a0ac76a6e9adce026531c906
+      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@9e8ab90fb13e92d268b08ad7fc7aa64ed9f9877a
     steps:
       - uses: actions/checkout@v4
         with:
@@ -43,26 +42,37 @@ jobs:
       - name: Install Bridge Kit visual review extra
         run: python -m pip install "${AI_BRIDGE_KIT_PIP_SPEC}"
 
-      - name: Resolve visual review target
+      - name: Resolve visual review paths
         shell: bash
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "Using explicit workflow_dispatch visual review target."
-            echo "AI_BRIDGE_VISUAL_REVIEW_SKIP=0" >> "$GITHUB_ENV"
-            exit 0
+          set -euo pipefail
+          if [ -z "${AI_BRIDGE_VISUAL_REVIEW_MANIFEST}" ]; then
+            mapfile -t manifests < <(git diff-tree --no-commit-id --name-only -r "${GITHUB_SHA}" | grep '^results/.*/visual_review/visual_inputs[.]json$' || true)
+            if [ "${#manifests[@]}" -eq 0 ]; then
+              echo "No visual review manifest changed; not required."
+              echo "AI_BRIDGE_VISUAL_REVIEW_SKIP=1" >> "$GITHUB_ENV"
+              exit 0
+            fi
+            if [ "${#manifests[@]}" -gt 1 ]; then
+              echo "Multiple visual review manifests changed; dispatch manually with one manifest."
+              exit 1
+            fi
+            AI_BRIDGE_VISUAL_REVIEW_MANIFEST="${manifests[0]}"
           fi
-          python scripts/resolve_reviewed_handoff_visual_target.py --target . --github-env "$GITHUB_ENV"
-          if grep -q '^AI_BRIDGE_VISUAL_REVIEW_SKIP=1$' "$GITHUB_ENV"; then
-            echo "no task-local visual review pending"
+          if [ -z "${AI_BRIDGE_VISUAL_REVIEW_OUTPUT}" ]; then
+            AI_BRIDGE_VISUAL_REVIEW_OUTPUT="$(dirname "${AI_BRIDGE_VISUAL_REVIEW_MANIFEST}")/VISUAL_REVIEW.json"
           fi
+          echo "AI_BRIDGE_VISUAL_REVIEW_MANIFEST=${AI_BRIDGE_VISUAL_REVIEW_MANIFEST}" >> "$GITHUB_ENV"
+          echo "AI_BRIDGE_VISUAL_REVIEW_OUTPUT=${AI_BRIDGE_VISUAL_REVIEW_OUTPUT}" >> "$GITHUB_ENV"
 
       - name: Refuse missing visual review secret
         if: env.AI_BRIDGE_VISUAL_REVIEW_SKIP != '1'
         shell: bash
         run: |
           if [ -z "${OPENAI_API_KEY}" ]; then
-            echo "OPENAI_VISUAL_REVIEW_API_KEY is not configured; cannot run pending live visual review."
-            exit 1
+            echo "OPENAI_VISUAL_REVIEW_API_KEY is not configured; skipping live visual review."
+            echo "AI_BRIDGE_VISUAL_REVIEW_SKIP=1" >> "$GITHUB_ENV"
+            exit 0
           fi
 
       - name: Run visual review
@@ -99,4 +109,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Add AI Bridge visual review evidence"
-          git push
+          if [ "${GITHUB_REF_TYPE}" != "branch" ]; then
+            echo "Visual review writeback requires a branch ref."
+            exit 1
+          fi
+          git push origin "HEAD:${GITHUB_REF_NAME}"

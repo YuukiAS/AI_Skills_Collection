@@ -37,11 +37,13 @@ cd /path/to/project
 ai-skills install --target repo --profile research-main --mode symlink --write-agents-md
 ```
 
-当前整个仓库 / CLI 版本是 `5.0.0`。
+当前整个仓库 / CLI 版本是 `5.0.2`。
 
-Repository / CLI release: `5.0.0`.
+Repository / CLI release: `5.0.2`.
 
-仓库版本和插件版本是两回事。仓库现在是 `5.0.0`，十个中央插件各自从 `0.1` 开始独立记版本。以后可能出现 `AI_Skills_Collection 5.0.3`、`presentations 0.4`、`research-writing 0.2` 这样的组合，这是正常的。
+仓库版本和插件版本是两回事。仓库现在是 `5.0.2`，中央插件各自独立记版本。以后可能出现 `AI_Skills_Collection 5.0.3`、`presentations 0.4`、`research-writing 0.2` 这样的组合，这是正常的。
+
+`ai-skills-core` 是内部 plugin slug，保持不变。用户界面里它显示为 `AI Skills Maintainer`，意思是维护中央插件时伴随加载的维护同伴，而不是一个替代 `presentations`、`writing-style`、`statistical-modeling` 等专业插件的领域插件。
 
 ## 先决定装什么
 
@@ -51,7 +53,7 @@ Repository / CLI release: `5.0.0`.
 | 医学影像项目 | `medical-imaging-project` | PDF、GitHub、前端构建 |
 | 生物信息项目 | `bioinformatics-project` | GitHub、文献/数据库工具 |
 | Slurm compute node | `server-research-baseline` 或 `ai-skills environment apply` | 站点已有 Slurm、TeX、Python |
-| 维护本仓库 | `ai-skills-core` 或 `ai-skills-maintainer` | GitHub，必要时 Notion |
+| 维护本仓库或改进中央插件 | `workflow-core` + `ai-skills-core`（显示为 `AI Skills Maintainer`）+ 目标 plugin，或 `ai-skills-maintainer` | GitHub，必要时 Notion |
 
 ## Codex App 插件市场
 
@@ -87,10 +89,10 @@ codex plugin marketplace add \
 | Plugin | Version | Status | 主要用途 | Changelog |
 |---|---:|---|---|---|
 | `workflow-core` | `0.1` | `unclassified` | 复杂任务的执行顺序、检查和收尾 | [workflow-core](docs/plugin-changelogs/workflow-core.md) |
-| `ai-skills-core` | `0.1` | `unclassified` | 安装 profile、维护 registry/catalog、发布 Marketplace | [ai-skills-core](docs/plugin-changelogs/ai-skills-core.md) |
+| `ai-skills-core` | `0.2` | `unclassified` | `AI Skills Maintainer`：中央插件改进的维护同伴，检查来源、待办、生成层、回放、回归、版本和 changelog | [ai-skills-core](docs/plugin-changelogs/ai-skills-core.md) |
 | `writing-style` | `0.1` | `unclassified` | 保留原意，改善中文和英文科研表达 | [writing-style](docs/plugin-changelogs/writing-style.md) |
 | `research-writing` | `0.1` | `unclassified` | 报告、论文、文献和引用 | [research-writing](docs/plugin-changelogs/research-writing.md) |
-| `presentations` | `0.1` | `baseline` | 科研组会、研究汇报、商务 Presentation 的规划和返修 | [presentations](docs/plugin-changelogs/presentations.md) |
+| `presentations` | `0.2` | `baseline` | 科研组会、研究汇报、商务 Presentation 的规划和返修 | [presentations](docs/plugin-changelogs/presentations.md) |
 | `scientific-visualization` | `0.1` | `unclassified` | 科研图、配色、示意图、海报和图形检查 | [scientific-visualization](docs/plugin-changelogs/scientific-visualization.md) |
 | `web-development` | `0.1` | `unclassified` | 前端参考、视觉系统和科研产品界面 | [web-development](docs/plugin-changelogs/web-development.md) |
 | `statistical-modeling` | `0.1` | `unclassified` | Bayesian、数据分析、诊断和统计可视化 | [statistical-modeling](docs/plugin-changelogs/statistical-modeling.md) |
@@ -278,7 +280,7 @@ python3 scripts/verify_server_installation.py --profile server-research-baseline
 
 ## Presentation 与 CUHK 模板
 
-`presentations` 当前独立版本是 `0.1`。科研组会、导师讨论和研究进展汇报会先弄清楚“这页要说明什么、证据在哪里”，再决定用图、公式、表、医学图像、实验设计还是讨论页。
+`presentations` 当前独立版本是 `0.2`。科研组会、导师讨论和研究进展汇报会先弄清楚“这页要说明什么、证据在哪里”，再决定用图、公式、表、医学图像、实验设计还是讨论页。
 
 如果用户是在**继续返修已经存在的 PPT/Beamer**，默认应该修改现有版本，而不是从头再生成一套。已经被用户接受的页面和元素要尽量保持，局部返修不能顺手把别的页改坏。最后要看真实 PDF / PNG render，不能因为源码能编译就宣布完成。
 

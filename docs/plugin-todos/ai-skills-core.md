@@ -4,9 +4,27 @@ Canonical maintenance inbox for the `ai-skills-core` plugin and repository-maint
 
 ## Open candidates
 
-No active ai-skills-core implementation candidate is required for the feedback-location policy itself. The current rule is now documented in root `README.md`, root `TODO.md`, `AGENTS.md`, `docs/plugin-todos/README.md`, the continuous-refinement workflow, and the Planner contract.
+No active ai-skills-core implementation candidate is open after `ai-skills-core 0.2`. Future production refinement feedback should enter this inbox as `NEW` evidence before promotion.
 
 ## Recently promoted / established
+
+### AI_Skills production refinement maintenance companion
+status: PROMOTED
+source: user requirement on 2026-09-01 for task 046
+evidence: `ai-skills-core 0.2`, repository `5.0.1`, Marketplace `ai-skills-core` includes `project-skill-installer`, `ai-skills-repository-maintainer`, and `skill-library-analysis`; AGENTS, Reviewed Handoff Planner/Executor/Reviewer prompts, version policy, tests, and generated payload align.
+target layer: distribution / maintenance workflow
+problem: central plugin refinements could previously change production behavior while bypassing `ai-skills-core`, omit explicit maintenance/domain ownership, treat source `SKILL.md` reading as production invocation evidence, or deliver completed production behavior changes without same-task plugin version/changelog closure.
+current behavior: any production central-plugin refinement must use `workflow-core` for process, `ai-skills-core` as maintenance companion, and the target domain plugin for professional judgment. The user-facing display name is `AI Skills Maintainer`, while the compatibility slug remains `ai-skills-core`. `ai-skills-core` enforces source-first edits, TODO/duplicate triage, generated parity, production replay, unrelated regression, version/changelog, and repository release closure, without becoming a domain expert or a second workflow/state/schema.
+boundary: do not set global implicit invocation to true, do not create a new top-level plugin, do not copy `codex-workflow-protocol` into `ai-skills-core`, and do not modify domain plugin behavior from this maintenance layer alone.
+
+### Artifact-aware Reviewed Handoff product pass
+status: PROMOTED
+source: user-reported task 044 regression on 2026-09-01
+evidence: user reported that private `rewritten_report.md` still contained reader-facing `provenance`, `estimand`, `scientific gap`, `resource contract`, and `state of the art` language despite the frozen writing requirement; Reviewer did not read the full artifact before PASS. The same maintenance report also identified non-visual Visual Review PASS UI and missing default branch integration closure.
+target layer: Reviewed Handoff prompts / visual-review consumer workflow / maintenance closure
+problem: process gates and summaries were treated as enough to imply product/artifact quality, obvious frozen writing violations could be pushed to human judgment, non-visual tasks could display Visual Review PASS, and task branches lacked a default integration closure after Reviewer PASS.
+current behavior: artifact-dependent acceptance must distinguish `PROCESS PASS` from `PRODUCT / ARTIFACT PASS`; Reviewer must read/view the final repo-safe artifact, or consume Bridge Kit Text Review evidence after that owner lands private/text artifact review. Missing artifact access is `WAITING_FOR_EVIDENCE / NEEDS_REVIEW`, not PASS. Obvious frozen-criteria violations must be REVISE/BLOCK, not human-gated. Non-visual tasks skip the real Visual Review job as `SKIPPED / NOT_REQUIRED`. Reviewer PASS without a real human gate proceeds to integration preflight, merge to `main`, push, and task-branch deletion unless an escalation condition applies.
+boundary: do not modify the private 044 scientific text in this maintenance task; do not implement another private/text artifact transport or reviewer in AI_Skills_Collection; route domain writing quality to `writing-style` and bottom-layer private/text artifact review to `GPT_Codex_AI_Bridge_Kit` Text Review.
 
 ### Direct plugin-use feedback to the central plugin TODO
 status: PROMOTED

@@ -27,9 +27,9 @@
     },
     {
       "name": "ai-skills-core",
-      "version": "0.1",
-      "displayName": "AI Skills Core",
-      "description": "AI_Skills_Collection infrastructure only: profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing.",
+      "version": "0.2",
+      "displayName": "AI Skills Maintainer",
+      "description": "Maintenance companion for AI_Skills_Collection plugin refinement: repository contracts, source-first changes, generated parity, replay, regression, versions, changelogs, and profile installation.",
       "category": "Developer Tools",
       "installation": "AVAILABLE",
       "brandColor": "#0F766E",
@@ -37,8 +37,10 @@
       "logo": "./assets/codex/plugin-icons/ai-skills-core/composer.svg",
       "defaultPrompt": [
         "Install this repository's project profiles.",
-        "Maintain the AI Skills registry and catalog.",
-        "Regenerate the Codex marketplace layer."
+        "Refine an existing AI_Skills plugin from a real failure.",
+        "Maintain a plugin improvement through source, generated layer, replay, regression, version, and changelog closure.",
+        "Check whether a plugin refinement should extend an existing skill instead of creating another entry.",
+        "Release a completed AI_Skills plugin improvement safely."
       ],
       "skills": [
         {
@@ -50,6 +52,11 @@
           "type": "copy",
           "source": "skills/core/codex-system/ai-skills-repository-maintainer",
           "artifact_id": "maint"
+        },
+        {
+          "type": "copy",
+          "source": "skills/core/codex-system/skill-library-analysis",
+          "artifact_id": "analysis"
         }
       ]
     },
@@ -188,7 +195,7 @@
     },
     {
       "name": "presentations",
-      "version": "0.1",
+      "version": "0.2",
       "displayName": "Presentations",
       "description": "Evidence-first research-group-meeting, research, and business presentation planning with exact CUHK Beamer/PDF as the default research route, explicit editable PPTX/Slides overrides, deck-plan schema, source fidelity, archetypes, and rendered scientific QA.",
       "category": "Research",

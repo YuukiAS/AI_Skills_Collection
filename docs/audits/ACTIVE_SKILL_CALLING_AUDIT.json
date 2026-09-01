@@ -53,7 +53,7 @@
       ]
     },
     "ai-skills-core": {
-      "display_name": "AI Skills Core",
+      "display_name": "AI Skills Maintainer",
       "description": "AI_Skills_Collection infrastructure only: profile installation, repository maintenance, registry, catalog, provenance, and marketplace publishing.",
       "default_prompts": [
         "Install this repository's project profiles.",
@@ -164,7 +164,7 @@
       "description": "Maintain AI_Skills_Collection itself: registry, catalog, provenance, marketplace config, generated layer, icons, profiles, and validation gates. Use only when the user is working on this repository or explicitly asks to maintain the central skill collection.",
       "primary_task": "AI_Skills_Collection 维护与技能引入审计",
       "primary_role": "仓库维护技能",
-      "current_main_entry": "AI Skills Core / ai-skills-maintainer profile",
+      "current_main_entry": "AI Skills Maintainer / ai-skills-maintainer profile",
       "recommended_scope": "project",
       "profile_tags": [
         "ai-skills-maintainer"
@@ -401,7 +401,7 @@
       "description": "Use when the user asks to install, update, or set up AI_Skills_Collection profiles for the current project. Handles project-local installation only; it does not provide domain knowledge.",
       "primary_task": "技能安装与 profile 设置",
       "primary_role": "用户主入口",
-      "current_main_entry": "AI Skills Core / profile / direct",
+      "current_main_entry": "AI Skills Maintainer / profile / direct",
       "recommended_scope": "global",
       "profile_tags": [],
       "allow_implicit_invocation": "",
@@ -485,7 +485,7 @@
       "description": "Install external Codex skills from curated lists or GitHub repo paths. Use for third-party skill downloads; for AI_Skills_Collection installs prefer ai-skills repo/user targets and treat codex-home as explicit legacy compatibility.",
       "primary_task": "技能安装与 profile 设置",
       "primary_role": "兼容或基础设施技能",
-      "current_main_entry": "AI Skills Core / profile / direct",
+      "current_main_entry": "AI Skills Maintainer / profile / direct",
       "recommended_scope": "project",
       "profile_tags": [],
       "allow_implicit_invocation": "",
@@ -520,7 +520,7 @@
       "description": "Analyze, deduplicate, cluster, and select skills from a large skill library or cloned upstream sources. Use when maintaining AI_Skills_Collection, comparing external skill repos, or deciding whether to merge, add, archive, or ignore skills.",
       "primary_task": "AI_Skills_Collection 维护与技能引入审计",
       "primary_role": "仓库维护技能",
-      "current_main_entry": "AI Skills Core / ai-skills-maintainer profile",
+      "current_main_entry": "AI Skills Maintainer / ai-skills-maintainer profile",
       "recommended_scope": "project",
       "profile_tags": [
         "maintenance",

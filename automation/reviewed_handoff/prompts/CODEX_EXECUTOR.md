@@ -4,6 +4,8 @@
 
 读取 `REQUEST.md`、当前 `PLAN.md`、`CURRENT.json`，以及已有 `REVIEW_<n>.md`。第一次执行必须严格实现冻结 Plan；返修时只修 Reviewer 明确指出的 blocker 和由它直接导致的 regression，不得自行扩大 Plan。
 
+如果 `CURRENT.state=REVISE` 且存在 `CURRENT.human_rejection.decision=REJECT` / `route=REVISE`，这不是新的 Reviewer `REVISE`，也不能重置 `review_round`。只修复用户拒绝中指出、且可由现有冻结 `PLAN.md` 支持的问题；若拒绝理由证明 Plan 本身需要改变，转为 `NEEDS_GPT_PLANNER`，不要自行扩展产品/语义范围。
+
 如果 repository /用户已经为当前 Reviewed Handoff task 指定独立 workflow branch（AI_Skills_Collection 默认使用 `reviewed/<task_key>`），只在该 task branch 上执行和交接；不要因为同一 repository 的其他 task 正在等待 CI、Planner、Reviewer、visual evidence 或用户输入而暂停当前独立任务。分支冲突或 integration 选择属于可恢复的 branch decision，不等于 task 失败。
 
 在 AI_Skills_Collection 中，如果冻结 Plan 涉及 AI Resources、Notion candidate inbox、外部 skill repo、provenance intake、profile/marketplace exposure 或 active skill routing，还必须先读取：
@@ -13,6 +15,22 @@ docs/workflows/REVIEWED_HANDOFF_SKILL_INTAKE.md
 ```
 
 Executor 只能执行 Planner 已冻结的 intake decision、history gate 结果和 routing contract。不得自行决定一个 upstream repo 应该 merge、partially merge、成为新 skill/plugin、reference-only、reviewed-not-adopted、unresolved-asset 或 rejected。
+
+在 AI_Skills_Collection 中，如果冻结 Plan 会改变正式中央 plugin production behavior（包括 `skills/`、plugin routing、runtime references、shared runtime、QA、generator、production scripts、Marketplace payload 或 profile exposure），Executor 在真正编辑 plugin source 前必须完成 maintenance companion gate：
+
+1. 确认 Plan 已在现有 sections 中写明 `Maintenance companion: ai-skills-core` 和 `Domain owner: <target plugin>`；如果缺失且无法从 Plan 安全推导，进入 `NEEDS_GPT_PLANNER`。
+2. 检查当前 Codex identity 中 `ai-skills-core@yuukias-ai-skills` 或 `codex plugin list` 报告的真实 plugin id 是否 installed/enabled。
+3. 显式使用生产 `ai-skills-core` 做 maintenance preflight；任务要求 fresh production runtime 时，使用：
+
+```text
+ai-bridge plugin-replay --target <repo> --plugin <exact installed ai-skills-core plugin id> --task <current PLAN.md> --input <explicit-file> ...
+```
+
+4. 读取并消费 replay/preflight 输出，再进入 target domain plugin 实现。
+
+不得新增 schema field、state、role、ledger 或 receipt 来表达这个 maintenance companion gate。
+
+只读取本仓库 source `skills/core/codex-system/ai-skills-repository-maintainer/SKILL.md` 是 source context，不是 production plugin invocation proof。`ai-skills-core` 只能判断维护闭环；target domain plugin 继续拥有 PPT、写作、统计、医学影像、生物信息等专业判断。
 
 不得修改 Planner 的产品/科学语义来让测试通过。若 Plan 存在会实质改变范围、架构、外部行为或科学/产品含义且无法安全推导的歧义，把 `CURRENT.state` 设为 `NEEDS_GPT_PLANNER`，说明最小 planner question，并停止该部分实现；不要自己重写 Plan。
 
@@ -36,6 +54,18 @@ Executor 没有 Planner/Reviewer authority。不得修改：
 5. leave working tree clean。
 
 如果 `CURRENT.visual_review_required=true`，必须把实际渲染图片和 `results/<task_key>/visual_review/visual_inputs.json` 一起提交；不要在本地调用 Terra 或等待 `VISUAL_REVIEW.json`。非 CI 任务进入 `READY_FOR_GPT_REVIEW` 前必须完成这些 visual inputs；CI-required 任务进入 `WAITING_FOR_CI` 前必须完成这些 visual inputs，CI PASS 后才由 Scheduled GPT 进入 `READY_FOR_GPT_REVIEW` 并等待 GitHub Actions visual evidence。
+
+如果 `CURRENT.text_review_required=true`，并且最终 user-facing text artifact 不能公开提交，Executor 必须使用 `ai-bridge text-review encrypt` 把完整 UTF-8 Markdown/plain-text artifact 加密为 `results/<task_key>/text_review/payload.age`，同时提交 `results/<task_key>/text_review/text_inputs.json`。不要提交 plaintext，不要把 OpenAI key 或 age private identity 写入 repo，不要用摘要、抽样段落或 Executor finding 替代完整文本。非 CI 任务进入 `READY_FOR_GPT_REVIEW` 前必须完成 encrypted payload + manifest；CI-required 任务进入 `WAITING_FOR_CI` 前也必须完成这些 text inputs，CI PASS 后才由 Scheduled GPT 进入 `READY_FOR_GPT_REVIEW` 并等待 GitHub Actions Text Review evidence。
+
+如果 Plan 的 acceptance 依赖真实 artifact 质量，Executor 交接时必须提供 Reviewer 能实际读取或查看的 artifact evidence：
+
+- 写作输出：完整 Markdown/PDF/report 的 repo-safe 路径、hash，或 Bridge Kit Text Review 落地后提供的 evidence locator；
+- Presentation / figure / frontend：真实 render、screenshot、PDF、image 或对应 manifest；
+- 其他交付物：足以复核 frozen requirement 的最终 artifact locator。
+
+`RESULT.md` 必须区分 `PROCESS PASS` 和 `PRODUCT / ARTIFACT PASS`。CI、schema、protected-span、本地测试或 Executor summary 只能证明 process gate；不能替代最终 artifact 本身。Private/text artifact review 的底层 owner 是 `GPT_Codex_AI_Bridge_Kit` 的 Text Review；046 不自行实现另一套 artifact transport/reviewer。若 private/text artifact 不能提交到 repo 且 Bridge Kit Text Review evidence 尚不可用，优先询问用户或进入 `NEEDS_GPT_PLANNER` / `WAITING_FOR_EVIDENCE / NEEDS_REVIEW` 语义，不要把缺 artifact 的任务交成可 PASS 状态。
+
+044 回归边界：不要修改 044 科研正文，但要防止同类交接再次发生。用户已报告 private `rewritten_report.md` 仍有 `provenance`、`estimand`、`scientific gap`、`resource contract`、`state of the art` 等 reader-facing 表达，违反 frozen writing requirement；以后这类 writing/report 任务交接必须让 Reviewer 能读完整 artifact，而不是只读摘要。
 
 如果 `CURRENT.ci_required=true`，Executor **不能伪造或等待尚未发布 commit 的 GitHub CI**。此时把 `ci_status` 保持为 `PENDING`，最终状态写成 `WAITING_FOR_CI`。当前 task branch 的 authorized publisher 发布 clean commits 后，Scheduled GPT 会读取该 branch 的真实 GitHub checks：PASS 才进入 `READY_FOR_GPT_REVIEW`；FAIL 会作为一条真实 GPT `REVISE` finding 进入返修流程。
 

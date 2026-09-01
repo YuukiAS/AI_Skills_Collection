@@ -2,12 +2,71 @@
 
 ## Unreleased
 
-- Changed the real-project feedback rule: problems caused by an AI_Skills plugin are now recorded directly in that plugin's central `docs/plugin-todos/<plugin>.md`, instead of first creating a duplicate plugin-problem record in the project repo.
-- Real project threads may add a minimal `status: NEW` item containing the real failure and evidence; AI_Skills Planner/maintainer remains responsible for deduplication, abstraction, and deciding whether the item should become a generic plugin change.
-- Rewrote the root README/TODO explanation in plain Chinese and aligned `AGENTS.md`, the TODO guide, continuous-refinement workflow, maintainer skill, Planner contract, and TRACE repo guidance with the same rule.
-- Cleaned the Presentation TODO so the Stage-4 validator fix and existing-deck revision contract are no longer incorrectly listed as open work after they shipped in `presentations 0.1`; the file is now ready to receive new real-use `NEW` items from CAT-TRACE and other projects.
+No unreleased changes.
 
-No repository or plugin version bump yet. These changes remain in `Unreleased` until they are included in a formal release.
+## 5.0.2 - 2026-09-01
+
+Repository `5.0.2` is a compatible release for the accepted 045 Presentations real-use regression hardening result.
+
+Repository bump decision: PATCH
+Reason: this release improves an existing central plugin's production behavior without adding a new repository-level capability or breaking existing contracts.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `presentations` | `0.1` | `0.2` |
+
+Affected plugins:
+- `presentations`: `0.1` -> `0.2`
+  Reason: existing-deck research-presentation revisions now have a production completion gate with real replay/regression evidence, rendered scientific-object QA, first-use dependency checks, English final-pass enforcement, and independent visual-review closure.
+
+Unchanged plugin versions: `workflow-core 0.1`, `ai-skills-core 0.2`, `writing-style 0.1`, `research-writing 0.1`, `scientific-visualization 0.1`, `web-development 0.1`, `statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Presentations existing-deck revision requests now route to an executable completion gate instead of relying on prose-only guardrails or Codex self-inspection.
+- The gate consumes reviewer-seen baselines, accepted-element ledgers, targeted feedback, rerender evidence, high-resolution problem pages, first-use dependency order, rendered scientific-object QA, English scientific-prose final pass after scientific freeze, and independent visual review.
+- Public-safe known-failure and unrelated reviewed regression fixtures cover the 045 failure classes without packaging private CAT-TRACE rendered pages, TRACE absolute paths, project page numbers, or project-specific scientific content into the installed plugin payload.
+- The CUHK scientific layout renderer no longer hard-codes a TRACE checkout font path.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelog:
+
+- `docs/plugin-changelogs/presentations.md`
+
+## 5.0.1 - 2026-09-01
+
+Repository `5.0.1` is a compatible release that makes `ai-skills-core` the required maintenance companion for future central plugin production refinements.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `ai-skills-core` | `0.1` | `0.2` |
+
+Unchanged plugin versions: `workflow-core 0.1`, `writing-style 0.1`, `research-writing 0.1`, `presentations 0.1`, `scientific-visualization 0.1`, `web-development 0.1`, `statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Production central-plugin refinement must now explicitly use `workflow-core` for process, `ai-skills-core` for the AI_Skills maintenance contract, and the target domain plugin for professional judgment.
+- Reviewed Handoff Plans for production plugin refinements must state `Maintenance companion: ai-skills-core` and `Domain owner: <target plugin>` inside existing Plan sections, without adding new schema fields, states, roles, ledgers, or receipts.
+- Executors must check installed/enabled production `ai-skills-core` and use real production invocation for maintenance preflight when required; reading source `SKILL.md` alone is not proof.
+- Artifact-dependent Reviewed Handoff acceptance now distinguishes `PROCESS PASS` from `PRODUCT / ARTIFACT PASS`; Reviewer must read or view the final artifact, and private/text artifacts are routed to the future Bridge Kit Text Review owner instead of being reimplemented in AI_Skills.
+- Task 044 is recorded as a real regression case: the user reported private `rewritten_report.md` still contained reader-facing `provenance`, `estimand`, `scientific gap`, `resource contract`, and `state of the art` language while review passed without the full artifact.
+- Non-visual Reviewed Handoff tasks now route the real Visual Review job to `SKIPPED / NOT_REQUIRED` instead of presenting skipped model work as a Visual Review PASS.
+- Reviewer PASS without a real human gate now defaults to integration preflight, merge back to `main`, push, and task-branch deletion unless a PR/Planner/human escalation condition applies.
+- Completed production plugin behavior changes now have a hard release gate: after implementation, original-failure replay, unrelated regression, and delivery readiness, the affected plugin version must bump exactly once in the same refinement task.
+- Baseline replay, TODO/provenance/docs-only changes, tests-only changes, and no-production-change cases remain `NO_BUMP`.
+- The real-project feedback rule is included in this release: problems caused by an AI_Skills plugin are recorded directly in that plugin's central `docs/plugin-todos/<plugin>.md`; project threads may add minimal `status: NEW` entries while AI_Skills Planner/maintainer owns deduplication and abstraction.
+- The Presentation TODO cleanup from the previous Unreleased section is included without changing `presentations` production behavior or version.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelog:
+
+- `docs/plugin-changelogs/ai-skills-core.md`
 
 ## 5.0.0 - 2026-08-30
 

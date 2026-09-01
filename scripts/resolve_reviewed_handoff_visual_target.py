@@ -51,6 +51,17 @@ def _repo_relative(value: Any, *, field: str, current_path: Path) -> Path:
     return path
 
 
+def require_repo_relative_output_value(value: str, *, field: str) -> str:
+    if not value.strip():
+        raise ResolutionError(f"missing non-empty {field}")
+    if "\n" in value or "\r" in value:
+        raise ResolutionError(f"{field} must be a single-line repository-relative path")
+    path = Path(value)
+    if path.is_absolute() or ".." in path.parts:
+        raise ResolutionError(f"{field} must be repository-relative without '..': {value}")
+    return path.as_posix()
+
+
 def _require_evidence_path(task_key: str, evidence_path: Path, *, current_path: Path) -> None:
     allowed_root = Path("results") / task_key / "visual_review"
     if evidence_path.suffix != ".json":
@@ -224,10 +235,35 @@ def write_github_env(path: Path, target: VisualTarget | None) -> None:
             handle.write(f"{line}\n")
 
 
+def write_github_output(path: Path, target: VisualTarget | None) -> None:
+    if target is None:
+        values = {
+            "skip": "1",
+            "status": "not_required",
+            "task_key": "",
+            "manifest": "",
+            "output": "",
+            "implementation_commit": "",
+        }
+    else:
+        values = {
+            "skip": "0",
+            "status": "selected",
+            "task_key": target.task_key,
+            "manifest": target.manifest_path,
+            "output": target.evidence_path,
+            "implementation_commit": target.implementation_commit,
+        }
+    with path.open("a", encoding="utf-8") as handle:
+        for key, value in values.items():
+            handle.write(f"{key}={value}\n")
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--target", type=Path, default=Path("."), help="repository checkout root")
     parser.add_argument("--github-env", type=Path, help="append resolved GitHub Actions env vars to this file")
+    parser.add_argument("--github-output", type=Path, help="append resolved GitHub Actions job outputs to this file")
     args = parser.parse_args(argv)
 
     try:
@@ -240,6 +276,8 @@ def main(argv: list[str] | None = None) -> int:
     print(json.dumps(payload, indent=2, sort_keys=True))
     if args.github_env:
         write_github_env(args.github_env, target)
+    if args.github_output:
+        write_github_output(args.github_output, target)
     return 0
 
 
