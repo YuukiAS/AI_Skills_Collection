@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "047_writing_style_scientific_rewrite_architecture",
-  "state": "PLAN_REQUESTED",
+  "state": "PLAN_FROZEN",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -15,5 +15,8 @@
   "review_limit_reached": false,
   "human_gate_reason": null,
   "visual_review_required": false,
-  "next_action": "SCIENTIFIC_REWRITE_HANDOFF_PLANNER_FREEZE_PLAN"
+  "text_review_required": true,
+  "text_review_manifest_path": "results/047_writing_style_scientific_rewrite_architecture/text_review/text_inputs.json",
+  "text_review_evidence_path": "results/047_writing_style_scientific_rewrite_architecture/text_review/TEXT_REVIEW.json",
+  "next_action": "EXECUTOR_IMPLEMENT_FROZEN_SCIENTIFIC_REWRITE_ARCHITECTURE_AND_RUN_BOUNDED_EXPERIMENT"
 }
