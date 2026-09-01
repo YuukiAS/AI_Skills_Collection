@@ -8,6 +8,13 @@ Current capability status: `baseline`.
 
 ## Incoming real-use feedback
 
+### Review coverage can self-certify unresolved reviewer feedback
+status: NEW
+source: TRACE / CAT-TRACE 33-page group-meeting deck v6 review
+evidence: `YuukiAS/TRACE` commit `ef08bc25673fb33b639e523504676c0f333d93f4`; `results/005_cat_trace_group_meeting_v6/v5_review_coverage.md` marked all 21 prior review points `PASS`, and executor-side rendered QA also marked connector geometry, crowding/unused space and Question blocks `PASS`, but the subsequent human/GPT review still found unresolved sample/axis overlap, catalogue-page crowding, weak image-caption treatment, short/awkward diagram arrows plus an orphan formula, unnatural CORAL stage labels, unresolved prior framing, model-summary equation spacing, only-partial oracle-page rebalancing, an incomplete Question visual primitive, and a repeated Malaise sample image that the prior review explicitly asked to remove
+problem: 当前 coverage matrix 容易把“某页发生过改动”或“生成了对应 QA 文件”当成“用户指出的具体问题已经消失”。source-level change、checklist presence 或 executor self-report 不能自动推出 reviewer requirement PASS。后续 Planner 应判断 existing-deck revision gate 是否需要更明确的 requirement-level acceptance evidence、`PARTIAL/UNVERIFIED` 状态，以及把最终 semantic/visual PASS 保留给独立 reviewer，而不是让 executor 对自己实施的 21 条要求全部自证通过。
+project-specific context: CAT-TRACE 的具体页码、Malaise 图片、CORAL 文案和公式属于项目；通用问题是 reviewer feedback 必须按原始语义和最终 render 逐条验收，不能把“做过修改”弱化成“已经解决”。
+
 ### Presentations 0.2 completion evidence can still miss obvious rendered regressions
 status: NEW
 source: TRACE / CAT-TRACE 32-page group-meeting deck v5 review
@@ -46,8 +53,8 @@ project-specific context: CAT-TRACE、TRACE、CORAL、COI、OTU、GBIF 的具体
 ### Diagram QA still passes rigid narrow nodes and inconsistent connector endpoints
 status: PROMOTED_BY_045
 source: TRACE / CAT-TRACE group-meeting deck v4 review
-evidence: v4 P3, P8–P10；多轮真实 render 返修后仍出现短箭头、节点过窄导致多行断字、箭头与 block 间距不一致
-problem: 现有 diagram semantic/geometry guidance 已存在，但 production 仍能输出固定窄 box、过多换行、箭头有的停在 block 前、有的压到 block/文字、主图没有充分占据页面中心等问题。单纯“有 connector / 无 crossing”不足以保证成熟的科研 diagram。
+evidence: v4 P3, P8–P10；多轮真实 render 返修后仍出现短箭头、节点过窄导致多行断字、箭头有的停在 block 前、有的压到 block/文字、主图没有充分占据页面中心等问题。单纯“有 connector / 无 crossing”不足以保证成熟的科研 diagram。
+problem: 现有 diagram semantic/geometry guidance 已存在，但实际 production 仍可能做出边界间距不一致、箭头过短、节点/文字过挤或需要图外补一句关系的 diagram。
 project-specific context: CAT-TRACE matching / catalogue split 的具体节点与拓扑属于项目；通用问题是 node width 应由内容和画布反推，edge endpoint/clearance 与 arrowhead 可读性需要最终 render 证据。
 
 ### Scientific hierarchy QA misses simultaneous crowding and unused space
@@ -80,10 +87,10 @@ project-specific context: finite catalogue、open tail、matching、residual dep
 
 ### Question/background callout lacks a stable research-deck primitive
 status: NEW
-source: TRACE / CAT-TRACE group-meeting deck v4 and v5 reviews
-evidence: v4 P21–P27；v5 introduced a purple-line Question treatment, but on dense simulation/real-data/discussion pages the label, question text and neighboring content are not vertically balanced and can visibly crowd or overlap
-problem: simulation question 与 advisor discussion 都需要一种轻量、成熟、非卡片化的 emphasis primitive；Background 应只恢复回答问题所需的 1–2 条事实，必要时允许公式或受控的前页引用，而不是重复整段项目状态。Question primitive 本身也需要明确 vertical centering、line height、padding 和与邻接 table/text 的 safe area。
-project-specific context: CAT-TRACE 三个 discussion 问题和具体公式属于项目；通用问题是 Question/Background 的信息和视觉合同，以及跨页引用时的返回路径。
+source: TRACE / CAT-TRACE group-meeting deck v4, v5 and v6 reviews
+evidence: v4 P21–P27；v5 introduced a purple-line Question treatment with vertical-balance problems; v6 improved geometry but the label/rule/question text still did not read as one mature visual component, and the user requested the question text itself participate in the restrained purple emphasis rather than remaining plain black italic text
+problem: simulation question 与 advisor discussion 都需要一种轻量、成熟、非卡片化的 emphasis primitive；Background 应只恢复回答问题所需的 1–2 条事实。Question primitive 本身需要明确 vertical centering、line height、padding、与邻接 table/text 的 safe area，以及 label/rule/question text 的受控视觉统一，而不是只给左侧竖线和标签上色。
+project-specific context: CAT-TRACE 三个 discussion 问题和具体颜色选择属于项目；通用问题是 Question/Background 的信息和视觉合同，以及跨页引用时的返回路径。
 
 ### Slide source/figure citation style is inconsistent and underspecified
 status: NEW
@@ -121,7 +128,7 @@ evidence: presentation maintenance archive + CAT-TRACE real deck revisions
 target layer: rendering/qa
 problem: diagram 的语义规则已经有了，但实际箭头、节点、对齐、连接路径和层级几何仍然可能做坏。
 candidate action: 只有新的真实 deck 再次暴露问题时，才补 renderer-level primitive 和 QA，不为了历史 TODO 预先造一整套几何系统。
-promotion gate: 新的真实 CAT-TRACE 或 unrelated deck 用实际 render 重现问题，并能证明修改真的改善输出且不会过度限制其他 diagram。
+promotion_gate: 新的真实 CAT-TRACE 或 unrelated deck 用实际 render 重现问题，并能证明修改真的改善输出且不会过度限制其他 diagram。
 
 ### Deck-wide style system and terminology hierarchy
 status: CANDIDATE_GENERIC
@@ -129,8 +136,8 @@ source: repeated real research deck revisions
 evidence: presentation maintenance archive
 target layer: reasoning/rendering/qa
 problem: 一整套 deck 里，标题大小写、术语首次解释、dataset/simulation 编号、小标题、metric label、caption 和 references 容易逐页漂移。
-candidate action: 只有真实返修再次证明这是当前问题时，才增加最小 deck-wide consistency contract，不把所有页面强行做成同一种布局。
-promotion gate: independent rendered deck 证明 consistency check 能抓到真实问题且不会压平不同科研页面。
+candidate_action: 只有真实返修再次证明这是当前问题时，才增加最小 deck-wide consistency contract，不把所有页面强行做成同一种布局。
+promotion_gate: independent rendered deck 证明 consistency check 能抓到真实问题且不会压平不同科研页面。
 
 ### Math and theory slide hierarchy
 status: CANDIDATE_GENERIC
@@ -138,8 +145,8 @@ source: repeated statistics and theory deck feedback
 evidence: presentation maintenance archive + CAT-TRACE review docs
 target layer: reasoning/rendering/qa
 problem: definition、design setting、estimand、theorem、derivation 容易都被做成同一种“居中大公式”，科学角色没有层次。
-candidate action: 在新的 math-heavy real deck 再次出现时，才进一步加强公式层级、首次语义解释和 theory-page QA。
-promotion gate: theorem/statistical-method real deck replay + unrelated math-heavy deck regression。
+candidate_action: 在新的 math-heavy real deck 再次出现时，才进一步加强公式层级、首次语义解释和 theory-page QA。
+promotion_gate: theorem/statistical-method real deck replay + unrelated math-heavy deck regression。
 
 ### Simulation, metric and structured-fact presentation
 status: CANDIDATE_GENERIC
@@ -147,8 +154,8 @@ source: repeated real statistics deck feedback
 evidence: presentation maintenance archive
 target layer: reasoning/rendering/qa
 problem: DGP、estimand、baseline、metric direction、dataset facts、seed/reproducibility 信息容易混成段落或弱表格，读起来很累。
-candidate action: 新的 simulation-heavy / real-data deck 再次出现时，再提炼更稳定的 table/list patterns 和 QA。
-promotion gate: 至少一个 simulation-heavy 和一个 real-data deck 的真实 render 都证明改善了可读性。
+candidate_action: 新的 simulation-heavy / real-data deck 再次出现时，再提炼更稳定的 table/list patterns 和 QA。
+promotion_gate: 至少一个 simulation-heavy 和一个 real-data deck 的真实 render 都证明改善了可读性。
 
 ### Natural scientific slide language
 status: CANDIDATE_GENERIC
@@ -156,8 +163,8 @@ source: repeated presentation and writing-style feedback
 evidence: presentation maintenance archive + `docs/plugin-todos/writing-style.md`
 target layer: writing/qa
 problem: slides 仍可能出现内部流程词、模板化对比句、面向作者而不是面向听众的说法。
-candidate action: 真实失败出现后再决定应该改 `research-presentations`、`scientific-prose`，还是两者的交接；不要重复造一套写作规则。
-promotion gate: 多个独立英文科研 slide 的真实证据。
+candidate_action: 真实失败出现后再决定应该改 `research-presentations`、`scientific-prose`，还是两者的交接；不要重复造一套写作规则。
+promotion_gate: 多个独立英文科研 slide 的真实证据。
 
 ## Current real-use focus
 
