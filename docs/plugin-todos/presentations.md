@@ -8,6 +8,13 @@ Current capability status: `baseline`.
 
 ## Incoming real-use feedback
 
+### Audience/page-job briefing before prose handoff materially improved a real research deck
+status: NEW
+source: TRACE / CAT-TRACE 34-page group-meeting deck v9 review
+evidence: `YuukiAS/TRACE` commit `c271e0f546ce7f38f35f70165f2c2ee7b6580b36`; v9 preflight confirms the active runtime was still `presentations 0.3` + `writing-style 0.1` and that the AI_Skills pull changed only TODO docs, not runtime files. The large language improvement came from the task/workflow instead: before drafting/revising prose it explicitly fixed the target audience, each slide's scientific job, why unfamiliar terms appear there, what the audience should remember, and then ran a full-deck first-use registry plus page-by-page language audit over P2–P34. The final human review judged v9's language markedly better than v8 even though the prose runtime itself had not changed.
+problem: This is strong positive evidence that `presentations` should own a **pre-writing audience/page-job brief** rather than merely hand already-written slide text to `scientific-prose`. For each content slide, presentation orchestration should establish: audience assumptions, the one scientific point of the page, prerequisite context, why each unfamiliar term is needed now, and the intended plain-language takeaway. That brief should then be handed to `writing-style`/`scientific-prose` to produce or revise the English. `presentations` should not duplicate prose-style rules; its responsibility is to provide the semantic/audience brief, require the writing handoff after scientific freeze, and then reread the final rendered deck for reader effort. The v9 `first_use_registry.md` and `full_deck_language_audit.md` are useful evidence patterns for this boundary.
+project-specific context: CAT-TRACE, VicFlora, COI, OTU, MGP and specific slide wording belong to TRACE. The generic lesson is orchestration: audience -> page job -> prerequisite/context -> term role -> takeaway -> writing-style -> rendered reader-effort review.
+
 ### Full-deck audience-context and responsive-layout review still regresses after repeated real revisions
 status: NEW
 source: TRACE / CAT-TRACE 33-page group-meeting deck v8 review
