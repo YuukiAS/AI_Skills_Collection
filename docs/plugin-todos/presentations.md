@@ -10,10 +10,10 @@ Current capability status: `baseline`.
 
 ### Review coverage can self-certify unresolved reviewer feedback
 status: NEW
-source: TRACE / CAT-TRACE 33-page group-meeting deck v6 review
-evidence: `YuukiAS/TRACE` commit `ef08bc25673fb33b639e523504676c0f333d93f4`; `results/005_cat_trace_group_meeting_v6/v5_review_coverage.md` marked all 21 prior review points `PASS`, and executor-side rendered QA also marked connector geometry, crowding/unused space and Question blocks `PASS`, but the subsequent human/GPT review still found unresolved sample/axis overlap, catalogue-page crowding, weak image-caption treatment, short/awkward diagram arrows plus an orphan formula, unnatural CORAL stage labels, unresolved prior framing, model-summary equation spacing, only-partial oracle-page rebalancing, an incomplete Question visual primitive, and a repeated Malaise sample image that the prior review explicitly asked to remove
-problem: 当前 coverage matrix 容易把“某页发生过改动”或“生成了对应 QA 文件”当成“用户指出的具体问题已经消失”。source-level change、checklist presence 或 executor self-report 不能自动推出 reviewer requirement PASS。后续 Planner 应判断 existing-deck revision gate 是否需要更明确的 requirement-level acceptance evidence、`PARTIAL/UNVERIFIED` 状态，以及把最终 semantic/visual PASS 保留给独立 reviewer，而不是让 executor 对自己实施的 21 条要求全部自证通过。
-project-specific context: CAT-TRACE 的具体页码、Malaise 图片、CORAL 文案和公式属于项目；通用问题是 reviewer feedback 必须按原始语义和最终 render 逐条验收，不能把“做过修改”弱化成“已经解决”。
+source: TRACE / CAT-TRACE 33-page group-meeting deck v6 and v7 reviews
+evidence: `YuukiAS/TRACE` commits `ef08bc25673fb33b639e523504676c0f333d93f4` and `e5bce0c0b8d24b33aa6930a2ea8f9a8a9c86e252`; v6 `v5_review_coverage.md` marked all 21 prior review points `PASS` despite unresolved issues. v7 correctly downgraded executor labels to `READY_FOR_REVIEW`, but the subsequent human/GPT review still found repeated failures in P2 annotation spacing, P10/P13 arrow geometry, P11/P18 vertical-space use, P24 figure readability and the dataset Question/readability treatment even though all corresponding rows were reported ready for review
+problem: 当前 coverage matrix 仍然容易把“做过一次针对性改动 + 生成了 render”当作“已经足够值得 reviewer 接受”。把最终 `PASS` 留给 reviewer 是必要的，但还不够；executor-side readiness 也需要 requirement-level acceptance evidence，而不是 source diff 或 checklist presence。对重复问题应要求可观察、可比较的最终条件，例如同类 annotation gap 是否统一、arrow 是否真正接到 node boundary 且长度足够、主内容是否使用了可用纵向空间、图内文字是否达到最终展示字号下限。后续 Planner 应考虑把 `READY_FOR_REVIEW` 的门槛从“我改了”提升为“我能展示 reviewer 原始问题在 final render 中已被具体处理”。
+project-specific context: CAT-TRACE 的具体页码、Malaise 图片、CORAL 文案和公式属于项目；通用问题是 reviewer feedback 必须按原始语义和最终 render 逐条验收，不能把“做过修改”弱化成“已经解决/已经 ready”。
 
 ### Presentations 0.2 completion evidence can still miss obvious rendered regressions
 status: NEW
@@ -24,17 +24,17 @@ project-specific context: CAT-TRACE 的具体页码、公式和图形属于项�
 
 ### Deck-wide formula, text and emphasis scale still lacks a stable hierarchy
 status: NEW
-source: TRACE / CAT-TRACE group-meeting deck v5 review
-evidence: 32-page v5 shows one model page with an oversized residual formula, another marked-tail transformation with an oversized connective word, a model-closure page with formulas/text too small, and theory formulas at inconsistent scales
-problem: 当前 plugin 有“按科学重要性分配空间”的原则，但缺少足够稳定的 deck-level typography/math scale contract。核心公式、supporting formula、diagram/table 内数学、正文、caption/source、强调粗体之间会逐页漂移；`resizebox` 还可能把普通连接词和数学对象一起放大。需要一种模板相对、角色驱动的尺度层级，而不是每页凭感觉调大调小。
+source: TRACE / CAT-TRACE group-meeting deck v5 and v7 reviews
+evidence: v5 shows an oversized residual formula, an oversized connective word and a too-small model-closure formula; v7 P18 still leaves a key three-step mathematical chain comparatively small in a large empty body area
+problem: 当前 plugin 有“按科学重要性分配空间”的原则，但缺少足够稳定的 deck-level typography/math scale contract。核心公式、supporting formula、diagram/table 内数学、正文、caption/source、强调粗体之间会逐页漂移；`resizebox` 还可能把普通连接词和数学对象一起放大。需要一种模板相对、角色驱动的尺度层级，并把“页面有大量空白但 supporting/core math 仍然偏小”也纳入最终层级检查，而不是只防止公式过大。
 project-specific context: 用户把 CAT-TRACE v5 P14 的核心 borrowing equation 视为当前 deck 可接受的最大公式视觉尺度，这是本 deck 的局部标尺；通用规则不应硬编码该页或某个绝对字号。
 
 ### Diagram planning needs a semantic-purpose gate before geometry
 status: NEW
-source: TRACE / CAT-TRACE group-meeting deck v5 review
-evidence: v5 phylogeny-borrowing slide produced a technically simple tree-like sketch, but the user could not see a clear visual explanation of why related species borrow more strongly; geometry cleanup alone would not fix the conceptual weakness
-problem: 现有 Diagram Gate 已要求 semantic graph，但真实 production 仍可能先画对象、后补意义。对于科研 diagram，应在进入 TikZ/PPT composition 前明确一条 audience-facing purpose statement、必须出现的 scientific objects、必须编码的关系以及 reading direction；如果不能说明“这张图让听众更快看懂什么关系”，就不应开始画。
-project-specific context: A/B/C species tree、具体相关矩阵和 CAT-TRACE phylogeny prior 属于当前项目；通用问题是 diagram 的 pre-layout semantic sketch/plan，而不是固定某种树图模板。
+source: TRACE / CAT-TRACE group-meeting deck v5 and v7 reviews
+evidence: v5 phylogeny-borrowing slide produced a technically simple tree-like sketch without a clear visual explanation; v7 improved the semantics but still produced a chain with short detached-looking arrows and cramped node text such as a line containing only `only`, showing that semantic planning alone does not guarantee mature geometry
+problem: 现有 Diagram Gate 已要求 semantic graph，但真实 production 仍可能先满足“节点和关系都在”，却没有形成自然、成熟的视觉解释。科研 diagram 在进入 TikZ/PPT composition 前应明确 audience-facing purpose、scientific objects、relationships、reading direction；进入 geometry 后还需要最小可见 edge length、node-to-node boundary clipping、peer gap consistency、line-break quality 等约束。不能因为语义图正确就接受难看的短箭头和机械换行。
+project-specific context: A/B/C species tree、具体相关矩阵和 CAT-TRACE phylogeny prior 属于当前项目；通用问题是 diagram 的 semantic preflight 加 geometry invariants，而不是固定某种树图模板。
 
 ### Footer/source safe zone is not enforced
 status: PROMOTED_BY_045
@@ -52,31 +52,31 @@ project-specific context: CAT-TRACE、TRACE、CORAL、COI、OTU、GBIF 的具体
 
 ### Diagram QA still passes rigid narrow nodes and inconsistent connector endpoints
 status: PROMOTED_BY_045
-source: TRACE / CAT-TRACE group-meeting deck v4 review
-evidence: v4 P3, P8–P10；多轮真实 render 返修后仍出现短箭头、节点过窄导致多行断字、箭头有的停在 block 前、有的压到 block/文字、主图没有充分占据页面中心等问题。单纯“有 connector / 无 crossing”不足以保证成熟的科研 diagram。
-problem: 现有 diagram semantic/geometry guidance 已存在，但实际 production 仍可能做出边界间距不一致、箭头过短、节点/文字过挤或需要图外补一句关系的 diagram。
-project-specific context: CAT-TRACE matching / catalogue split 的具体节点与拓扑属于项目；通用问题是 node width 应由内容和画布反推，edge endpoint/clearance 与 arrowhead 可读性需要最终 render 证据。
+source: TRACE / CAT-TRACE group-meeting deck v4 and v7 reviews
+evidence: v4 P3, P8–P10；v7 P10 still uses shortened arrows that visibly stop before node boundaries, while P13 packs successive node rows so tightly that arrows become tiny black segments despite large unused space below
+problem: 现有 diagram semantic/geometry guidance 已存在，但实际 production 仍可能做出边界间距不一致、箭头过短、节点/文字过挤或需要图外补一句关系的 diagram。node-to-node connectors should normally clip naturally at node boundaries; arbitrary `shorten` should not create detached arrows. When arrows are too short, increase node/row spacing rather than compressing the edge. Peer edges should have comparable visible length and endpoint treatment.
+project-specific context: CAT-TRACE matching / catalogue split 的具体节点与拓扑属于项目；通用问题是 node width、row/column gap、edge endpoint/clearance、minimum visible connector length 与 arrowhead 可读性需要最终 render 证据。
 
 ### Scientific hierarchy QA misses simultaneous crowding and unused space
 status: PROMOTED_BY_045
-source: TRACE / CAT-TRACE group-meeting deck v4 review
-evidence: v4 P9, P20–P27；页面一侧拥挤或核心文字/图很小，同时另一部分仍有明显可用空间
-problem: active guardrail 已要求按科学重要性分配空间，但最终 render 仍会出现“右侧挤、左图小”“核心公式/标题相互贴近”“discussion/table 字小而页面仍有空白”。现有 QA 需要判断 usable area 是否真正转化为可读字号、图尺寸和层级间距，而不是只检查 overflow。
-project-specific context: 具体 P9/P20 等页码只用于定位真实证据；不应形成 CAT-TRACE 专属 layout selector。
+source: TRACE / CAT-TRACE group-meeting deck v4 and v7 reviews
+evidence: v4 P9, P20–P27；v7 P3, P11, P13, P18, P24 and P28–P30 again show the same pattern: too many small reading zones or cramped right columns while large parts of the body remain unused, so the primary object stays small even though the slide has available space
+problem: active guardrail 已要求按科学重要性分配空间，但最终 render 仍会出现“局部拥挤 + 整页空”“核心公式/图/Question 很小但 body 仍有大量空白”。除了 overflow 检查，需要更具体的 information-slide composition grammar：一页通常只有一个主阅读路径，尽量限制到 2–3 个视觉区；优先采用“一句定义/问题 + 一个主视觉关系 + 一个必要例子/解释”，而不是同时堆多组卡片、diagram、table 和 prose。信息页若仍有约四分之一以上无意义空白而主对象偏小，应先重排/放大/拆页，而不是称为 clean。
+project-specific context: P3 的 catalogue 解释、P11 CORAL、P24 oracle 和 dataset 右栏是当前证据；通用问题是 composition grammar 与 usable-area 转化为可读性的 QA。
 
 ### Figure readability and caption pairing are not checked at the rendered-content level
 status: PROMOTED_BY_045
-source: TRACE / CAT-TRACE group-meeting deck v4 review
-evidence: v4 P20, P24–P26；prevalence 图、图内 axis/legend/caption 仍偏小，辅助图的 caption/label 不完整或层级不统一
-problem: plugin 已经要求主图可读，但实际检查仍偏向 image object 是否存在/是否够大，没有稳定检查图内文字、轴、legend、panel title 在最终投影尺寸是否可读，也没有强制每个独立 figure/panel 与自己的 caption/label 配对。
-project-specific context: Finland/Madagascar/Victoria 的具体图和数据属于 TRACE；通用问题是 figure-content bbox、内部字体和 caption pairing 的 rendered QA。
+source: TRACE / CAT-TRACE group-meeting deck v4 and v7 reviews
+evidence: v4 P20, P24–P26；v7 P24 enlarged the outer oracle image but the 2x2 plot's internal axes, legend and panel text remain too small; v7 P28–P30 also show prevalence/secondary figures whose internal text is not comfortably readable at projected slide size
+problem: plugin 已经要求主图可读，但实际检查仍偏向 image object 是否存在/是否够大。若原始 manuscript/report figure 的内部字体不适合投影，单纯放大 `includegraphics` 不应算修复；应允许/要求生成 presentation-specific figure，减少内部白边、扩大 axis/tick/legend/panel text、简化 legend/caption。最终 QA 需要有图内文字的最小视觉字号/可读性门槛。
+project-specific context: Finland/Madagascar/Victoria prevalence 图和 grouped-richness oracle 属于 TRACE；通用问题是 figure-content bbox、内部字体、caption pairing 和 presentation-specific regeneration。
 
 ### Table, list and paragraph primitives still drift across one deck
 status: NEW
-source: TRACE / CAT-TRACE group-meeting deck v4 and v5 reviews
-evidence: v4 P11–P13, P21–P26；v5 continues the issue in the metabarcoding definition block, information-before-discovery table, simulation metric tables and dense real-data right columns
-problem: 当前 deck-wide style candidate 没有转化为足够稳定的 production primitive。相同层级的短表头有时全小写，结构化事实有时做表、有时裸排；并列事实和连续解释也会随机在 paragraph/list 之间切换，增加阅读负担。还需要明确：连续论证适合短 paragraph；多个并列、可独立理解的定义/事实更适合 bullets；重复比较相同属性或数值对齐时才优先 table。
-project-specific context: 具体 trait、dataset 字段、COI/metabarcoding 定义属于 CAT-TRACE；通用问题是 table header/row-label typography，以及 paragraph、bullet、table 的选择门槛。
+source: TRACE / CAT-TRACE group-meeting deck v4, v5 and v7 reviews
+evidence: v4 P11–P13, P21–P26；v5 metabarcoding definition block and tables; v7 P3 still reads heavily because one concept is split across a definition paragraph, three boxed statements, a separate sample matrix and a bottom example paragraph
+problem: paragraph/list/table 的选择规则还不足以覆盖整页 composition。连续论证适合短 paragraph；多个并列、可独立理解的定义/事实适合 bullets；重复比较相同属性或数值对齐才适合 table。除此以外，还应限制同一页同时出现的 container/primitive 类型：不要为了“结构化”把一个简单关系拆成多组卡片 + diagram + prose。相同意思的事实应该合并，而不是分别占一个 box。
+project-specific context: P3 的 VicFlora/catalogue 页面是新的真实证据；通用问题是 paragraph/bullet/table 选择与 information-slide composition grammar。
 
 ### Complex multi-slide models can finish without a model-closure page
 status: NEW
@@ -87,10 +87,10 @@ project-specific context: finite catalogue、open tail、matching、residual dep
 
 ### Question/background callout lacks a stable research-deck primitive
 status: NEW
-source: TRACE / CAT-TRACE group-meeting deck v4, v5 and v6 reviews
-evidence: v4 P21–P27；v5 introduced a purple-line Question treatment with vertical-balance problems; v6 improved geometry but the label/rule/question text still did not read as one mature visual component, and the user requested the question text itself participate in the restrained purple emphasis rather than remaining plain black italic text
-problem: simulation question 与 advisor discussion 都需要一种轻量、成熟、非卡片化的 emphasis primitive；Background 应只恢复回答问题所需的 1–2 条事实。Question primitive 本身需要明确 vertical centering、line height、padding、与邻接 table/text 的 safe area，以及 label/rule/question text 的受控视觉统一，而不是只给左侧竖线和标签上色。
-project-specific context: CAT-TRACE 三个 discussion 问题和具体颜色选择属于项目；通用问题是 Question/Background 的信息和视觉合同，以及跨页引用时的返回路径。
+source: TRACE / CAT-TRACE group-meeting deck v4–v7 reviews
+evidence: v5 introduced a purple-line Question treatment; v6 improved geometry and v7 added purple question text, but on v7 P28–P30 the Question is still forced into a narrow right column with small type and heavy wrapping, so the primitive remains visually weak even though its color treatment is more coherent
+problem: simulation question 与 advisor discussion 都需要一种轻量、成熟、非卡片化的 emphasis primitive。Question primitive 需要明确 vertical centering、line height、padding、color hierarchy 和**minimum readable size**；当窄栏不能容纳正常字号时，Question 应改成 full-width block 或页面底部横向区，而不是继续缩字/多行挤压。Background 仍只恢复回答问题所需的 1–2 条事实。
+project-specific context: CAT-TRACE dataset 右栏和具体颜色属于项目；通用问题是 Question/Background 的信息、视觉合同和 responsive layout fallback。
 
 ### Slide source/figure citation style is inconsistent and underspecified
 status: NEW
@@ -127,7 +127,7 @@ source: repeated TRACE visual feedback
 evidence: presentation maintenance archive + CAT-TRACE real deck revisions
 target layer: rendering/qa
 problem: diagram 的语义规则已经有了，但实际箭头、节点、对齐、连接路径和层级几何仍然可能做坏。
-candidate action: 只有新的真实 deck 再次暴露问题时，才补 renderer-level primitive 和 QA，不为了历史 TODO 预先造一整套几何系统。
+candidate_action: 只有新的真实 deck 再次暴露问题时，才补 renderer-level primitive 和 QA，不为了历史 TODO 预先造一整套几何系统。
 promotion_gate: 新的真实 CAT-TRACE 或 unrelated deck 用实际 render 重现问题，并能证明修改真的改善输出且不会过度限制其他 diagram。
 
 ### Deck-wide style system and terminology hierarchy
