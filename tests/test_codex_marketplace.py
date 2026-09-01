@@ -32,7 +32,7 @@ CENTRAL_PLUGIN_NAMES = [
 ]
 EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
     "ai-skills-core": "0.2",
-    "presentations": "0.2",
+    "presentations": "0.3",
 }
 REPOSITORY_SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 PLUGIN_VERSION_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)$")
@@ -188,7 +188,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertIsNotNone(readme_match)
 
         self.assertRegex(version, REPOSITORY_SEMVER_RE)
-        self.assertEqual({version, setup_version, registry["version"], readme_match.group(1)}, {"5.0.2"})
+        self.assertEqual({version, setup_version, registry["version"], readme_match.group(1)}, {version})
 
         plugin_versions = {plugin["name"]: plugin["version"] for plugin in config["plugins"]}
         self.assertEqual(plugin_versions, EXPECTED_PLUGIN_VERSIONS)
@@ -240,7 +240,8 @@ class CodexMarketplaceTests(unittest.TestCase):
         maturity_text = (REPO_ROOT / "docs/PLUGIN_MATURITY.md").read_text(encoding="utf-8")
         maturity = dict(re.findall(r"^\| `([^`]+)` \| `([^`]+)`", maturity_text, flags=re.MULTILINE))
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("Repository / CLI release: `5.0.2`", readme)
+        repo_version = (REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self.assertIn(f"Repository / CLI release: `{repo_version}`", readme)
         for plugin_name in CENTRAL_PLUGIN_NAMES:
             row = re.search(
                 rf"^\| `{re.escape(plugin_name)}` \| `([^`]+)` \| `([^`]+)` \| .*docs/plugin-changelogs/{re.escape(plugin_name)}\.md",
