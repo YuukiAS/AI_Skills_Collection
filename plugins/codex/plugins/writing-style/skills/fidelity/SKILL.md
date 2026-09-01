@@ -44,10 +44,20 @@ When the requested operation is `rewrite`, especially for Chinese reader-facing
 "say it plainly" work, rewrite protects meaning, facts, equations, citations,
 conditions, attribution, and evidence boundaries. It does not protect English
 word order, paragraph surface shape, or ordinary English abstraction labels as
-text that must survive. Do not preserve terms such as `gap`, `contract`,
-`baseline`, `client`, `checkpoint`, or `provenance` merely for fidelity when
-the user asked for natural Chinese and the term is not a protected identifier,
-title, code token, citation text, or necessary formal term.
+text that must survive. Do not preserve informal `A + B`, `A vs B`, `A -> B`,
+noun-stack, or workflow-label English merely for fidelity when the user asked
+for natural Chinese and the expression is not a protected identifier, title,
+code token, citation text, variable, formula, metric, algorithm, dataset, model
+name, or necessary formal term.
+
+For source-faithful Chinese research rewrites, also distinguish evidence
+locators from reader-facing prose. File names, manifests, repository status,
+audit notes, and implementation-state records remain protected when they are
+paths, fields, citations, or appendix evidence, but fidelity does not require
+making them the subject of the main scientific paragraph. Preserve the
+underlying claim, uncertainty, and verification boundary while allowing the
+style layer to say the scientific meaning first and move repo/process details
+into evidence positioning.
 
 ## Workflow
 

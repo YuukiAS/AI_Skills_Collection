@@ -67,6 +67,13 @@ ordinary concepts such as baseline, client, checkpoint, pooled, gap, contract,
 axis, anchor, testbed, drift, estimand, or provenance when they are only
 shorthand for ideas that can be stated directly in Chinese.
 
+Classify English before rewriting. If an English expression is an algorithm,
+dataset, model, metric, variable, formula, standard formal term, paper title,
+code identifier, path, field, or identifier needed for lookup, keep it. If it
+is only `A + B`, `A vs B`, `A -> B`, an informal noun-stack, a workflow label,
+or an internal research-process label, rewrite the relationship in Chinese
+instead of preserving the English skeleton.
+
 The rewrite should answer the meaning directly. For example, a provenance-like
 phrase should become a concrete statement about which data or model state can
 be confirmed and what remains unknown, not a surface translation such as
@@ -86,6 +93,14 @@ Before final acceptance, scan the whole artifact, not only samples. If repeated
 ordinary English abstractions still form the skeleton of reader-facing Chinese
 sentences, classify the artifact as not ready even when protected spans and
 style-score checks look acceptable.
+
+Treat the English-fragment scan as a revision loop, not a note. For every
+remaining English fragment, decide whether it is protected, formal, or prose
+that must be rewritten. Standalone headings, table labels, arrow chains, slash
+chains, and first clauses are high-risk positions: they often define the
+reader's logic. Rewrite informal relationship labels into Chinese statements
+about the model state, training comparison, approximation target, or research
+question. Keep formal names such as FedFisher, LoRA, and Dice.
 
 Also scan for hyphenated English noun chains, slash-stacked labels, and
 sentences whose grammar still says "`X aggregation` and `Y approximation` are
@@ -108,6 +123,13 @@ titles, table labels that must match an external source, quotes, or a necessary
 formal term after first explanation. Otherwise prefer Chinese such as
 "参与方/中心", "本地", "全局/汇总后", "合并数据训练/集中式训练",
 "基线/对照方法", and "模型权重/权重文件".
+
+Also flag repo, manifest, file-status, audit, and implementation-state
+narration when it becomes the main reader-facing scientific prose. The body
+should state the scientific fact, data boundary, experimental interpretation,
+or unresolved condition first. Keep file names, paths, manifest fields, and
+audit records only as evidence locators in parentheses, notes, methods, or
+appendices when they are needed for verification.
 
 ## README Checks
 
