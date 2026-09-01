@@ -56,11 +56,13 @@ These controls are intentionally disjoint from the positive rewrite-needed holdo
 - local public checkout: `/overflow/htzhu/mingcheng_new/.ai-skills-source-scout/047-scientific-rewrite/holdout-sources/AI_Research_Toolkit`
 - commit: `b822dff09794766a1a013b100eb8f78a45514c7b`
 - file: `R_RESEARCH_STACK.md`
-- SHA256: `9aa06d5950715e3eb6b3d5d822b413b6f05620ddfddbf3bd8635d77c54c1a881`
-- character count from checkout: `9738`
-- reason: Chinese technical documentation with many formal R/Bioconductor/package terms, version constraints, analysis workflows, and reproducibility caveats.
+- git blob SHA: `d315fd6bbd5c08e271ecea95b3a05d451bce78c2`
+- file SHA256: `9aa06d5950715e3eb6b3d5d822b413b6f05620ddfddbf3bd8635d77c54c1a881`
+- frozen range: lines `1-13` inclusive at the exact commit above (`title` + scope/version paragraph + complete `使用原则` list; stop before `## 1. 环境与项目管理`)
+- character count from checkout: `9738` for the full file; the frozen control is only the range above.
+- reason: Chinese technical documentation with formal R/Bioconductor/package terms, version constraints, analysis workflows, and reproducibility caveats that is already easy to follow.
 - should-not-fix purpose: preserve correct formal terminology and caveats; do not translate package names, collapse version constraints, or over-naturalize a useful technical list.
-- role restriction: this file is a should-not-fix / low-edit control only in 047. It must not also be counted as positive unseen rewrite-needed evidence.
+- role restriction: this frozen range is a should-not-fix / low-edit control only in 047. It must not also be counted as positive unseen rewrite-needed evidence or used as seed-example material.
 
 ### SNF-CN-SCI-002: Normal Chinese statistical product roadmap prose
 
@@ -68,11 +70,13 @@ These controls are intentionally disjoint from the positive rewrite-needed holdo
 - local public checkout: `/overflow/htzhu/mingcheng_new/.ai-skills-source-scout/047-scientific-rewrite/holdout-sources/Asteria`
 - commit: `80ad881bc88ad1caf017959e320e539028eb5a25`
 - file: `ROADMAP.md`
-- SHA256: `01a6ebf49566fcec41739bc0469400d79654faceaf5b9c5912fa1468ca192535`
-- character count from checkout: `19560`
-- reason: Chinese long-form technical roadmap about statistical model notes, model lineage, evidence graphs, symbols, and view projections.
-- should-not-fix purpose: avoid turning already readable scientific/product reasoning into casual prose; preserve technical relations such as entity/projection separation, semantic edge types, and model-variant distinctions.
-- role restriction: this file is a should-not-fix / low-edit control only in 047. It must not also be counted as positive unseen rewrite-needed evidence.
+- git blob SHA: `1b5862a32e2ddbb6ad8e1805a4e785c158181de5`
+- file SHA256: `01a6ebf49566fcec41739bc0469400d79654faceaf5b9c5912fa1468ca192535`
+- frozen range: lines `5-17` inclusive at the exact commit above (complete `## 1. 重新定义 Asteria` section; stop before the separator / next section)
+- character count from checkout: `19560` for the full file; the frozen control is only the range above.
+- reason: already readable Chinese long-form technical reasoning about product scope, statistical-model lineage, evidence relationships and multiple views.
+- should-not-fix purpose: avoid turning already readable scientific/product reasoning into casual prose; preserve the core entity/projection and research-evidence distinctions and keep Asteria as a proper product name.
+- role restriction: this frozen range is a should-not-fix / low-edit control only in 047. It must not also be counted as positive unseen rewrite-needed evidence or used as seed-example material.
 
 ## 4. Positive rewrite-needed holdouts frozen before implementation
 
@@ -119,7 +123,7 @@ The frozen set now has disjoint roles:
 
 - 044: known regression only;
 - TRACE v8 -> v9: architecture evidence only;
-- Asteria + AI Research Toolkit: should-not-fix / low-edit controls only;
+- Asteria lines 5-17 + AI Research Toolkit lines 1-13: should-not-fix / low-edit controls only;
 - Bobbio lines 1-70: positive cross-domain technical rewrite-needed holdout;
 - Distributed Imaging lines 1-8: positive scientific rewrite-needed holdout, with explicit domain-overlap caveat.
 
