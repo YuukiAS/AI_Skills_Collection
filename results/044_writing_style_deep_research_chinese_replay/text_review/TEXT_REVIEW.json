@@ -1,0 +1,75 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": "输入仅给出 `logical_id` 与 plaintext SHA；未提供当前 implementation commit、manifest identity 或它们与最终 plaintext 的绑定记录。",
+      "finding_id": "F-001",
+      "recommendation": "补充 fresh `TEXT_REVIEW.json` 的 task_key、`workflow_type=reviewed_handoff`、当前 implementation commit、manifest identity 和最终 plaintext SHA 的一致性证据后再判定 PASS。",
+      "requirement_id": "B.identity_matched_fresh_text_review",
+      "severity": "blocking",
+      "summary": "当前材料不足以证明本次审查证据与当前实现、manifest 和最终明文身份匹配。"
+    },
+    {
+      "evidence": "正文以英文短语充当段落主干或逻辑标签，例如“`frozen representation + statistical head`”“`shared pretrained model -> ...`”“`parameters vs curvature/posterior vs function-space`”和“`dependent variable`”。",
+      "finding_id": "F-002",
+      "recommendation": "将这些非正式名称、公式变量和检索定位之外的英文改写为直接中文科学表述；保留 FedFisher、FedLPA、LoRA、Dice、AdamW、M&Ms 等确有正式名称或定位必要的英文。",
+      "requirement_id": "B.chinese_reader_expression",
+      "severity": "blocking",
+      "summary": "存在反复承担标题、段落骨架和论证关系的普通英文标签，普通中文研究者阅读时仍需解析混合式工作笔记语言。"
+    },
+    {
+      "evidence": "“当前 manifest”“当前 `mms_data_contract.md`”“仓库已经正确地把它降级为 transition experiment”等表述把仓库审计过程直接带入面向读者的正文。",
+      "finding_id": "F-003",
+      "recommendation": "改为可独立阅读的事实表述，例如说明“现有训练记录的可追溯边界”与“该实验在本文中的定位”；文件名和仓库状态仅在可复核的方法/附录定位中保留。",
+      "requirement_id": "B.chinese_reader_expression",
+      "severity": "blocking",
+      "summary": "部分段落采用内部仓库和审计元话语作为叙述主体，削弱用户面对科学内容的连续阅读。"
+    }
+  ],
+  "created_at": "2026-09-01T06:25:20Z",
+  "encrypted_payload": {
+    "path": "results/044_writing_style_deep_research_chinese_replay/text_review/payload.age",
+    "sha256": "c6d679f81913b83cbefbab7986788c3ae8ca33f4c9abb4953c5224ed49657a05"
+  },
+  "evidence_id": "text-review-044_writing_style_deep_research_chinese_replay-a8356ab9c2ce",
+  "input_manifest": {
+    "identity_bindings": {
+      "implementation_commit": "60246d3d634bf9840a6bad73ca1eb3f380c71043"
+    },
+    "manifest_sha256": "a8356ab9c2cee73982e1731ccbb7790f9df16b85f4930ee69ad5194b06ff4173",
+    "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
+    "rubric": {
+      "instructions": "### B. PRODUCT / ARTIFACT PASS：完整私有 Text Review\n\n最终 Reviewer PASS 必须建立在 fresh、identity-matched 的 `TEXT_REVIEW.json` 上，而不是 Executor 摘要或局部抽查上。Text Review rubric 必须要求审查完整最终重写稿，并同时覆盖：\n\n**科学与来源保真**\n\n- 不新增或删除科学主张、证据、限制、停止条件、下一步条件；\n- 不把“可能/推断/条件性”改成“证明/确定”，也不反向弱化原有明确结论；\n- 不改变谁做了什么、哪些是项目事实、哪些是文献事实、哪些是研究判断；\n- 数字、公式、变量、算法/数据集/指标名称、引用与精确定位内容保持一致；\n- 不通过删段、压缩信息量或总结替代完整重写。\n\n**中文读者表达**\n\n- 普通中文研究者无需理解内部代理/工作流语言即可连续阅读；\n- 普通英文抽象标签不得继续承担中文句子的主干、标题骨架或反复出现的逻辑标签；\n- `provenance`、`estimand`、`scientific gap`、`resource contract`、`state of the art` 等只是 regression examples：Text Review 应判断它们在具体语境中是否确有不可替代的专业/定位意义，而不是按 blacklist 机械判分；\n- 不允许 `anchor -> 锚点`、`provenance -> 来源追踪` 一类逐词翻译后仍保留原机器句法；应直接说明当前句子真正要表达的证据、对象、差距、约束或比较关系；\n- 长句在不丢条件的前提下有可追踪的主语、动作、原因、结果和限制；\n- 标题与段落直接描述科学内容，不用代理式元话语、法律/取证腔或英文 noun-stack 制造专业感；\n- 保留下来的英文必须属于算法/数据集/公式变量/正式名称/检索定位等确实有理由保留的内容。\n\nText Review 只有 `overall_decision=PASS` 且 evidence 绑定当前 `task_key`、`workflow_type=reviewed_handoff`、当前 implementation commit、manifest identity 与最终 plaintext SHA 时，才能支持 Review 2 的 PRODUCT / ARTIFACT PASS。缺失、malformed、stale、plaintext-SHA mismatch、manifest mismatch 或 non-PASS 都不能支持 Reviewer PASS。\n\n当 encrypted payload 与 manifest 已存在但 fresh `TEXT_REVIEW.json` 仍在等待 GitHub workflow 时，这是 `WAITING_FOR_EVIDENCE / NEEDS_REVIEW`，不得消费 Review 2，也不得写 `BLOCKED`。"
+    },
+    "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "REVISE",
+      "item_id": "primary_text",
+      "requirement_ids": [
+        "B.identity_matched_fresh_text_review",
+        "B.scientific_and_source_fidelity",
+        "B.chinese_reader_expression",
+        "B.complete_rewrite"
+      ],
+      "summary": "全文已审阅。文本保留了大量限定语、停止条件、数值、公式、比较条件和未决事项；但在缺少实现/manifest 绑定证据的情况下，不能确认其为可支持 PASS 的 fresh identity-matched review，且中文正文仍有系统性的英文骨架和内部流程式表述。"
+    }
+  ],
+  "model": "gpt-5.6-terra",
+  "non_blocking_notes": [
+    "表格、正式方法名、数据集名、变量、代码路径和公式中的英文多数具有定位或精确性作用；修改时不应机械汉化这些内容。",
+    "现有表述多次明确区分项目事实、文献事实与研究判断，并对 CARE 权重来源和 M&Ms 元数据保留了不确定性；这些限定应在语言修改中完整保留。",
+    "诸如“截至 2026 年 8 月”“同行评议”“公开代码状态”的时间性和来源性陈述，应在交付前用对应正式出版记录与代码页逐项复核。"
+  ],
+  "overall_decision": "BLOCKED",
+  "plaintext_artifact_sha256": "7571a02d59d098fdcb9d0d6ec18021e14132b05395248cecb7c11e72743e9ebc",
+  "prompt_version": "ai-bridge.text-review.v1",
+  "review_identity": "a8356ab9c2cee73982e1731ccbb7790f9df16b85f4930ee69ad5194b06ff4173",
+  "review_kind": "user-facing-text",
+  "review_model": "gpt-5.6-terra",
+  "reviewed_input_identity": "a8356ab9c2cee73982e1731ccbb7790f9df16b85f4930ee69ad5194b06ff4173",
+  "schema": "AI_BRIDGE_TEXT_REVIEW_V1",
+  "status": "BLOCKED",
+  "task_key": "044_writing_style_deep_research_chinese_replay",
+  "workflow_type": "reviewed_handoff"
+}
