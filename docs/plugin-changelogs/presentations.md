@@ -4,6 +4,13 @@
 
 No pending released changes.
 
+## 0.3 - 2026-09-01
+
+- Tightened Beamer/PDF render routing so YuukiAS/TRACE handoffs preserve the
+  current `/home/yuukias/render_resources/chinese_math_pdf` resource location and
+  report missing local resources explicitly instead of substituting retired
+  server-only paths.
+
 ## 0.2 - 2026-09-01
 
 - Added the existing-deck revision production completion gate for targeted research-deck revisions, requiring reviewer-seen baseline evidence, accepted-element ledger checks, targeted feedback, rerender evidence, high-resolution problem pages, first-use dependency order checks, rendered scientific-object QA, English scientific-prose final pass after scientific freeze, and independent visual review before `PASS_REVIEWED`.

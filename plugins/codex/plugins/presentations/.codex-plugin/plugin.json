@@ -1,6 +1,6 @@
 {
   "name": "presentations",
-  "version": "0.2",
+  "version": "0.3",
   "description": "Evidence-first research-group-meeting, research, and business presentation planning with exact CUHK Beamer/PDF as the default research route, explicit editable PPTX/Slides overrides, deck-plan schema, source fidelity, archetypes, and rendered scientific QA.",
   "author": {
     "name": "YuukiAS",

@@ -38,6 +38,12 @@ workflow.
    render route even when system `kpsewhich` cannot find `xeCJK` or `ctex`.
    The probe is the local layer of this skill: it should find namespace-local
    resources and overrides without baking private paths into the reusable skill.
+   On the YuukiAS workstation, the current local bundle is
+   `/home/yuukias/render_resources/chinese_math_pdf`; keep this detected path in
+   evidence when it appears. If the probe cannot find a needed resource, compiler,
+   TeX package, font, or PDF QA tool, report that exact missing dependency and
+   wait for the user to decide whether to install it. Do not substitute retired
+   server-only absolute paths.
 3. Choose the narrowest viable route:
    - Existing project render command when documented and current.
    - Project-local render resources for fonts, TeX headers, or `texmf`.

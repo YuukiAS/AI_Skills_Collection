@@ -4,6 +4,37 @@
 
 No unreleased changes.
 
+## 5.0.3 - 2026-09-01
+
+Repository `5.0.3` is a compatible release for YuukiAS/TRACE render-resource routing hardening.
+
+Repository bump decision: PATCH
+Reason: this release improves an existing central plugin's production render-routing behavior without adding a new repository-level capability or breaking existing contracts.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `presentations` | `0.2` | `0.3` |
+
+Affected plugins:
+- `presentations`: `0.2` -> `0.3`
+  Reason: Beamer/PDF presentation routing now preserves the current YuukiAS workstation render-resource path and reports missing local resources explicitly instead of substituting retired server-only paths.
+
+Unchanged plugin versions: `workflow-core 0.1`, `ai-skills-core 0.2`, `writing-style 0.1`, `research-writing 0.1`, `scientific-visualization 0.1`, `web-development 0.1`, `statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- YuukiAS/TRACE Beamer/PDF guidance now preserves `/home/yuukias/render_resources/chinese_math_pdf` as the local render-resource location when the probe reports it.
+- Render failures now require reporting exact missing resources, TinyTeX, TeX packages, fonts, or PDF QA tools for user installation approval.
+- A regression test now guards tracked guidance against retired server render paths.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelog:
+
+- `docs/plugin-changelogs/presentations.md`
+
 ## 5.0.2 - 2026-09-01
 
 Repository `5.0.2` is a compatible release for the accepted 045 Presentations real-use regression hardening result.
