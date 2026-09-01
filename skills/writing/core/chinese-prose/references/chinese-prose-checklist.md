@@ -14,6 +14,8 @@ Before accepting the artifact as final, confirm:
 - Paths, commands, branch names, status tokens, audit trails, and machine fields
   are evidence after the conclusion, not the conclusion itself.
 - Mixed English process labels are either protected exact tokens or translated.
+- Ordinary English abstraction labels do not carry the main semantic structure
+  of Chinese sentences; the sentence explains the actual meaning in Chinese.
 - A nontechnical reader from the intended audience can tell what happened, why,
   what comes next, and what should not be done yet.
 
@@ -40,6 +42,11 @@ Allowed:
 - Replace vague verbs with concrete actions.
 - Move the main point earlier when the sentence buries it.
 - Convert slogan-like endings into the actual next step or limitation.
+- Rewrite a whole sentence or the local order of explanations when the user
+  asked to make the text understandable and the facts, conditions, caveats, and
+  evidence boundaries remain unchanged.
+- Replace ordinary English abstractions with their actual contextual meaning in
+  Chinese, not with a mechanical one-word translation.
 
 Not allowed:
 
@@ -47,6 +54,60 @@ Not allowed:
 - Turn uncertainty into a conclusion.
 - Replace a precise metric with a vague summary.
 - Change who did the work or who made the claim.
+- Preserve English sentence order or abstract labels merely because the source
+  used them, when the requested output is reader-facing Chinese.
+
+## Chinese-First Research Rewrite
+
+For Chinese research reports, especially long Deep Research-style drafts, check
+whether remaining English belongs to a protected class. Keep algorithm names,
+dataset names, metric names, formulas, variables, code identifiers, paths,
+paper titles, citations, and formal searchable terms. Do not automatically keep
+ordinary concepts such as baseline, client, checkpoint, pooled, gap, contract,
+axis, anchor, testbed, drift, estimand, or provenance when they are only
+shorthand for ideas that can be stated directly in Chinese.
+
+The rewrite should answer the meaning directly. For example, a provenance-like
+phrase should become a concrete statement about which data or model state can
+be confirmed and what remains unknown, not a surface translation such as
+"来源追踪". A gap-like phrase should name the question the evidence has not
+answered yet. A contract-like phrase should name the actual constraint. An
+estimand-like phrase should name what the experiment is estimating or asking. An
+anchor-like phrase should name the actual reference point, such as a shared
+initial model, a common parameter value, or a jointly agreed comparison point.
+
+If the user explicitly named an ordinary English abstraction as unwanted in
+reader-facing prose, treat it as protected-negative text. It may remain only as
+code, path, quoted source, paper title, table field, or truly necessary formal
+term. Otherwise, rewrite the containing sentence into Chinese facts and
+relationships.
+
+Before final acceptance, scan the whole artifact, not only samples. If repeated
+ordinary English abstractions still form the skeleton of reader-facing Chinese
+sentences, classify the artifact as not ready even when protected spans and
+style-score checks look acceptable.
+
+Also scan for hyphenated English noun chains, slash-stacked labels, and
+sentences whose grammar still says "`X aggregation` and `Y approximation` are
+different". These should usually become Chinese explanations of the reference
+point, information being aggregated, target being approximated, and real
+difference between the two approaches. Keep such English only when it is a
+paper title, algorithm name, code token, table field that must align with
+external labels, or a necessary searchable formal term.
+
+Also flag legalistic or forensic-sounding English labels in reader-facing
+Chinese, such as "forensic-level exact proof", "legal proof", or "data
+contract", when they are not protected titles, files, protocol fields, or exact
+quotes. Rewrite them as the actual evidence boundary, record type, data-access
+condition, or verification requirement in Chinese.
+
+For federated learning and machine-learning reports in Chinese, scan ordinary
+role/process words such as client, local, global, pooled, baseline, and
+checkpoint. Keep them only for paths, code/config fields, formulas, paper
+titles, table labels that must match an external source, quotes, or a necessary
+formal term after first explanation. Otherwise prefer Chinese such as
+"参与方/中心", "本地", "全局/汇总后", "合并数据训练/集中式训练",
+"基线/对照方法", and "模型权重/权重文件".
 
 ## README Checks
 

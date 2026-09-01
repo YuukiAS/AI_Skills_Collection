@@ -40,6 +40,15 @@ protected content unless the user explicitly asked for that exact operation.
 If the user's constraints conflict, report a blocked or partial status. Do not
 silently satisfy one constraint by violating another.
 
+When the requested operation is `rewrite`, especially for Chinese reader-facing
+"say it plainly" work, rewrite protects meaning, facts, equations, citations,
+conditions, attribution, and evidence boundaries. It does not protect English
+word order, paragraph surface shape, or ordinary English abstraction labels as
+text that must survive. Do not preserve terms such as `gap`, `contract`,
+`baseline`, `client`, `checkpoint`, or `provenance` merely for fidelity when
+the user asked for natural Chinese and the term is not a protected identifier,
+title, code token, citation text, or necessary formal term.
+
 ## Workflow
 
 1. Classify the task: `polish`, `edit`, `rewrite`, `summarize`, `translate`,
