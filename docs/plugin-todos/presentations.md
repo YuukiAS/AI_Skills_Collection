@@ -8,6 +8,13 @@ Current capability status: `baseline`.
 
 ## Incoming real-use feedback
 
+### Full-deck audience-context and responsive-layout review still regresses after repeated real revisions
+status: NEW
+source: TRACE / CAT-TRACE 33-page group-meeting deck v8 review
+evidence: `YuukiAS/TRACE` commit `26fd2ad0f042f0a8d7c7dc2154392e3f9460760d`. v8 successfully fixed several long-running issues by adding spacing tokens and regenerating presentation-specific figures, but human/GPT review still found: inconsistent same-role label scale/gutters on P2; a cognitively repetitive catalogue explanation on P3; first-use terms on P4/P19 that were expanded without enough local purpose/context; repeated/non-unified Example treatment across P3/P5/P15; diagram transition text on P10 colliding with arrows or wrapping formulas awkwardly; sequential CORAL content still arranged as three columns despite large unused vertical space; short table row labels wrapping unnecessarily on P16; a newly introduced duplicate `diag(Sigma_W)=1` step on P18; a contextless MGP acronym and defensive source-note-like threshold sentence on P19; cramped oracle-side text on P24; inconsistent Question line spacing/hyphenation across P27-P29; and P29/P30 body compositions whose figure/data regions remain visually unbalanced. The v8 English-final-pass record also states that it only reviewed visible wording touched in v8.
+problem: The production path now has many local rules, but it still lacks a sufficiently strong full-artifact reader-effort gate. A final presentation review should not ask only whether each requested object changed. It must inspect every final page for: (1) unfamiliar term introduced with both expansion and immediate purpose/context; (2) one clear reading path with minimal semantic repetition; (3) columns used only for genuinely peer-level comparison, not sequential stages; (4) same-role typography, gutters, question leading and intra-node text/formula spacing; (5) short labels kept on one line when space permits; (6) no new duplicate math, awkward hyphenation, defensive/meta prose or source-note language introduced by a repair; and (7) responsive fallback when a region becomes cramped. Full-deck language/readability QA must cover the final rendered artifact, not only source lines edited in the current round.
+project-specific context: VicFlora, COI, metabarcoding, MGP, CAT-TRACE equations and specific page numbers belong to TRACE. The generic issue is full-deck audience-context, cognitive-load, responsive layout and no-new-regression review, not a CAT-TRACE-specific template.
+
 ### Review coverage can self-certify unresolved reviewer feedback
 status: NEW
 source: TRACE / CAT-TRACE 33-page group-meeting deck v6 and v7 reviews
