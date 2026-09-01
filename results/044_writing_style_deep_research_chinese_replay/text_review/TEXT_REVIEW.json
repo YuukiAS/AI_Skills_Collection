@@ -1,0 +1,68 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": "多处章节标题保留普通英文名词堆叠，如“Frozen Representation 实验”“Dense CARE Segmentation Benchmark”“Checkpoint Provenance 与 Estimand”。",
+      "finding_id": "F1",
+      "recommendation": "将非正式名称、变量或检索标识的英文标题改为连续中文，例如“冻结表征实验”“稠密 CARE 分割基准”“检查点来源与估计对象”；必要的 CARE、nnU-Net 等正式名称可保留。",
+      "requirement_id": "2",
+      "severity": "blocking",
+      "summary": "正文标题仍大量使用不属于必须保留术语的英文短语，阻碍中文读者连续阅读。"
+    },
+    {
+      "evidence": "正文以英文关系标签作为段落骨架，例如独立代码行“parameters vs curvature/posterior vs function-space vs shared-anchor objective summary”，以及“checkpoint leakage / estimand”“in-domain、same-cohort、很可能 same-subject”。",
+      "finding_id": "F2",
+      "recommendation": "把这些关系改写为完整中文句子，先说明比较的科学对象或数据边界；仅在首次出现时于括号中保留必要英文术语。",
+      "requirement_id": "2",
+      "severity": "blocking",
+      "summary": "普通英文标签、斜杠和 vs 结构被反复用作科学叙述骨架，不符合自然中文读者文本要求。"
+    },
+    {
+      "evidence": "路线与判定段落中反复使用未汉化的工作流式标签，如“baseline-first”“strict one-shot contract”“equal-resource primary run”“deployment-style evidence”“GO 标准”“STOP 标准”。",
+      "finding_id": "F3",
+      "recommendation": "将其改为中文研究设计表述，例如“先建立基线的路线”“严格的一次通信比较约定”“资源对等的主要实验”“部署情境证据”“启动条件”“停止条件”。",
+      "requirement_id": "2",
+      "severity": "blocking",
+      "summary": "面向读者的论述混入大量英文流程/合同标签，使文本呈现内部研究流程语言而非完整中文报告。"
+    }
+  ],
+  "created_at": "2026-09-01T08:31:13Z",
+  "encrypted_payload": {
+    "path": "results/044_writing_style_deep_research_chinese_replay/text_review/payload.age",
+    "sha256": "f809e99618c03ea7b3880abaf669c801857e795b393815da899f09bd041a90bb"
+  },
+  "evidence_id": "text-review-044_writing_style_deep_research_chinese_replay-1da563b79521",
+  "input_manifest": {
+    "identity_bindings": {
+      "implementation_commit": "b91323c5bb96f9fd97b16352875d9182505dc648"
+    },
+    "manifest_sha256": "1da563b79521fa7f0584400c90e1332841c0aceece8223bd54e59ffb1226eaf3",
+    "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
+    "rubric": {
+      "instructions": "Review the complete private rewritten report.\n\nJudge only the user-facing text artifact. Do not decide Git, manifest, transport, implementation commit, or plaintext identity freshness; those are deterministic outer validation responsibilities.\n\nDecision criteria:\n\n1. Scientific and source fidelity\n- The rewrite must not add or remove scientific claims, evidence, limitations, stop conditions, next-step conditions, attribution, uncertainty, or conclusion strength.\n- Numbers, formulas, variables, algorithm names, dataset names, metric names, citations, and precision-critical locators must remain consistent with the source.\n- The rewrite must not turn conditional or inferred statements into certain conclusions, and must not weaken explicit conclusions without source support.\n\n2. Natural Chinese reader-facing prose\n- A Chinese research reader should be able to read continuously without decoding internal agent, workflow, repository, or audit language.\n- Ordinary English labels, noun-stacks, `A + B`, `A vs B`, and `A -> B` relationship shorthand must not remain as headings, standalone lines, paragraph skeletons, or repeated logical labels unless they are formal names, variables, formulas, code/path tokens, paper titles, exact quoted source, table labels that must match an external source, or identifiers required for lookup.\n- Repository, manifest, file-status, audit, and implementation-state narration must not become the main scientific prose. The body should state the scientific fact, data boundary, experimental interpretation, or unresolved condition first; file names, paths, manifest fields, and audit records may remain only as evidence locators where needed.\n- Formal names and precision-critical terms such as FedFisher, LoRA, Dice, CARE, M&Ms, nnU-Net, AdamW, variables, DOI strings, and paper titles should be preserved when accuracy or lookup requires them.\n\n3. Complete rewrite, no deletion\n- The output must be a full rewrite rather than a summary.\n- It must not make the report easier by deleting sections, compressing away caveats, omitting negative results, dropping comparisons, or skipping cited material.\n\nReturn PASS only if all three criteria pass on the complete artifact. Return REVISE with concrete blocking findings if any criterion fails.\n"
+    },
+    "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "REVISE",
+      "item_id": "primary_text",
+      "requirement_ids": [
+        "2"
+      ],
+      "summary": "报告包含充分的中文内容和保留的专业名词，但普通英文标题、关系式标签及工作流式短语仍大量留在用户可见正文中，未达到自然中文完整改写标准。"
+    }
+  ],
+  "model": "gpt-5.6-terra",
+  "non_blocking_notes": [],
+  "overall_decision": "REVISE",
+  "plaintext_artifact_sha256": "f0281dfba1230d51d35071ed27fa2c23e78d2c4e72a81bea96a887f8ad9eb971",
+  "prompt_version": "ai-bridge.text-review.v1",
+  "review_identity": "1da563b79521fa7f0584400c90e1332841c0aceece8223bd54e59ffb1226eaf3",
+  "review_kind": "user-facing-text",
+  "review_model": "gpt-5.6-terra",
+  "reviewed_input_identity": "1da563b79521fa7f0584400c90e1332841c0aceece8223bd54e59ffb1226eaf3",
+  "schema": "AI_BRIDGE_TEXT_REVIEW_V1",
+  "status": "REVISE",
+  "task_key": "044_writing_style_deep_research_chinese_replay",
+  "workflow_type": "reviewed_handoff"
+}
