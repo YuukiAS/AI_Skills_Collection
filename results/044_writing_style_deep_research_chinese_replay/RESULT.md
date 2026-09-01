@@ -2,135 +2,75 @@
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 044_writing_style_deep_research_chinese_replay
 executor: Codex
-implementation_commit: 60246d3d634bf9840a6bad73ca1eb3f380c71043
+implementation_commit: b91323c5bb96f9fd97b16352875d9182505dc648
 status: WAITING_FOR_TEXT_REVIEW_EVIDENCE
 ci_status: PENDING_AFTER_TEXT_REVIEW_PUBLICATION
 ---
 
-# 044 writing-style Deep Research 中文 replay 本地结果
+# 044 writing-style Deep Research 中文 replay 状态
 
 ## 结论
 
-本地返修已经通过。Review-1 后用户指出的真实问题成立：旧 baseline 不能作为通过证据，因为完整私有稿仍保留普通英文抽象标签和英文科研句法骨架。本轮在 revised Plan 允许范围内恢复并继续收窄 701k-token 候选修复，只改既有 `writing-style` 相关 source、checklist、generated mirror 和回归测试，没有新增顶级 skill、plugin、schema 或项目专用禁词表。
+已按 revised Plan 做最终最小修复，并创建 implementation commit `b91323c5bb96f9fd97b16352875d9182505dc648`。本轮只改 `writing-style` 相关 source、checklist、generated mirror 和回归测试；没有新增 plugin，没有修改 `presentations`，也没有做 release version bump。
 
-最终 fresh production replay 使用 installed `writing-style@yuukias-ai-skills` 正常入口完成，完整私有重写稿保存在本机 `.ai-bridge` 输出目录，未提交明文正文。本次 publication closure 已创建 implementation commit，并已生成 encrypted Text Review payload 和 manifest；下一步是推送到 044 reviewed branch，让 GitHub Actions 生成完整私有全文审查证据。
+fresh production replay 已通过 installed `writing-style@yuukias-ai-skills` 正常入口生成完整私有重写稿，并已用内容审查 rubric 生成新的 encrypted Text Review payload 与 manifest。当前任务仍在等待 GitHub Text Review 生成 `TEXT_REVIEW.json`；在 Text Review PASS 前不得进入版本 closure、CI closure 或 Review 2。
 
 ## 实际修改
 
-- `skills/writing/core/chinese-prose/SKILL.md`：强化“语义化重述优先”。普通英文抽象标签不能承担中文句子的主要语义结构；要按当前句子真实含义重写，而不是逐词替换。
-- `skills/writing/core/chinese-prose/references/chinese-prose-checklist.md`：增加全文残留英文、连字符 noun-chain、斜杠堆叠、`X aggregation / Y approximation`、法律/取证腔和普通 FL 角色词检查。
-- `skills/writing/core/writing-fidelity/SKILL.md`：澄清 rewrite 模式保护语义、事实、公式、引用、条件、归因和证据边界，不保护英文语序、段落表面形状或普通英文抽象标签本身。
-- `tests/test_skill_runtime_text_audit.py`：加入通用回归，覆盖普通英文抽象标签、rewrite 保真边界、取证/合同腔和 FL 角色词中文化。
-- `docs/plugin-todos/writing-style.md`：把 044 真实反馈从已关闭 baseline 记录改回 `CANDIDATE_GENERIC`，保留项目专名和通用规则边界。
-- `plugins/codex/plugins/writing-style/...`：通过 `python3 scripts/build_codex_marketplace.py --write --validate --check --path-report` 由 source 重新生成，未手改 generated mirror。
+- `skills/writing/core/chinese-prose/SKILL.md`：增加通用语义化重述边界。普通英文 `A + B`、`A vs B`、`A -> B`、noun-stack 和研究流程标签不能承担中文正文骨架；正式算法名、模型名、数据集名、指标名、变量、公式和必要 identifier 继续保留。
+- `skills/writing/core/chinese-prose/references/chinese-prose-checklist.md`：补充英文关系标签和 repo/manifest/file-status/audit 元话语的全文检查。
+- `skills/writing/core/writing-fidelity/SKILL.md`：澄清 fidelity 保护事实、数值、公式、引用、条件和证据边界，不保护普通英文表面结构。
+- `tests/test_skill_runtime_text_audit.py`：加入通用 regression fixture，覆盖非正式英文关系标签、FedFisher/LoRA/Dice 等正式名称保留，以及 repo/manifest/audit 叙述降级为定位信息。
+- `plugins/codex/plugins/writing-style/...`：由 source 重新生成，保持 generated mirror 同步。
 
-## Production replay
+## Fresh production replay
 
-输入：
-
-- source extracted text: `/users/a/e/aereinh/Distributed_Imaging_Inference/docs/notes/writing_style_044/source_extracted_layout.txt`
-- source SHA-256: `f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213`
-- source size: 979 lines, 5117 words, 75936 bytes
-
-Maintenance preflight:
-
-- `ai-skills-core@yuukias-ai-skills` production replay run: `20260901T052221Z-ac9b1027fec9`
-- result: completed
-- installed evidence: `ai-skills-core@yuukias-ai-skills` enabled, `writing-style@yuukias-ai-skills` enabled
+- valid writing-style replay run: `20260901T075933Z-2e88b3e0ba16`
+- rewritten artifact path: `/overflow/htzhu/mingcheng_new/.ai-bridge/plugin-replay/20260901T075933Z-2e88b3e0ba16/outputs/rewritten_report.md`
+- plaintext SHA-256: `f0281dfba1230d51d35071ed27fa2c23e78d2c4e72a81bea96a887f8ad9eb971`
+- plaintext size: 562 lines, 61480 bytes
 - write-isolation probe: passed
-- read-scope diagnostic: `READABLE`; therefore this run must not be described as strict read isolation.
+- read-scope diagnostic: `READABLE`; this must not be described as strict read isolation.
 
-Fresh `writing-style` replay attempts:
+Earlier run `20260901T074833Z-007561df1d05` is superseded because it used a stale global installed cache. The installed `writing-style` cache was resynced before the valid replay above.
 
-- `20260901T052803Z-77a602d346c0`: completed, but local QA found remaining reader-facing `forensic-level exact proof` / `data contract` style residue, so not accepted.
-- `20260901T053817Z-57d47e29e19d`: completed, explicit forbidden-phrase scan passed, but wider residual English review showed ordinary FL role/process words still too visible.
-- `20260901T054942Z-32aa9616c11c`: completed and accepted locally.
+## Text Review payload
 
-Final local rewrite:
+- manifest path: `results/044_writing_style_deep_research_chinese_replay/text_review/text_inputs.json`
+- encrypted payload path: `results/044_writing_style_deep_research_chinese_replay/text_review/payload.age`
+- manifest implementation commit: `b91323c5bb96f9fd97b16352875d9182505dc648`
+- manifest plaintext SHA-256: `f0281dfba1230d51d35071ed27fa2c23e78d2c4e72a81bea96a887f8ad9eb971`
+- manifest ciphertext SHA-256: `f809e99618c03ea7b3880abaf669c801857e795b393815da899f09bd041a90bb`
 
-- path: `/overflow/htzhu/mingcheng_new/.ai-bridge/plugin-replay/20260901T054942Z-32aa9616c11c/outputs/rewritten_report.md`
-- SHA-256: `7571a02d59d098fdcb9d0d6ec18021e14132b05395248cecb7c11e72743e9ebc`
-- size: 584 lines, 4515 words, 60916 bytes
+The model-facing rubric is content-only: scientific/source fidelity, natural Chinese reader-facing prose, and complete rewrite/no deletion. Git commit, manifest identity, plaintext SHA, task key, and workflow freshness remain deterministic outer validation responsibilities.
 
-Replay summary:
-
-- path: `/overflow/htzhu/mingcheng_new/.ai-bridge/plugin-replay/20260901T054942Z-32aa9616c11c/outputs/replay_summary.md`
-- SHA-256: `72fd4f651321b9f3e43fd47a258550693d7f45b309b034ad95491ef6f376b59b`
-
-## 本地 artifact QA
-
-最终稿显式回归扫描无命中：
-
-```text
-provenance
-estimand
-scientific gap
-method gap
-residual gap
-state of the art
-resource contract
-strict one-shot contract
-testbed
-shared initialization
-local drift
-pooled gap
-anchor
-controlled-drift
-shared-anchor
-pooled-objective
-local-mode posterior aggregation
-objective approximation
-forensic-level exact proof
-legal proof
-data contract
-forensic
-clients
-pooled data
-pooled solution
-global model
-local model
-```
-
-人工抽读覆盖了开头结论、CARE 证据边界、ODAL/FedFisher/FedLPA 方法关系、短中长期路线、M&Ms 数据集决策和结尾未验证事项。最终稿仍保留必要英文专名、论文题名、公式、代码/路径 token 和 DOI；普通英文抽象标签不再作为中文句子骨架。
-
-内容保真辅助检查确认关键数值、方法、数据集和引用仍在，包括 `0.5861`、`0.6624`、`0.5127`、`0.6367`、`0.4937`、`0.6741`、`1.40 GB`、`7.02 GB`、`12.49 GB`、`375`、`345`、`360`、`FedFisher`、`FedLPA`、`FedBEns`、`FedAvg`、`M&Ms`、`ACDC`、`Fed-KiTS`、`Fed-IXI`、`Dataset501`、`checkpoint_best`、`splits_final.json`、176/44 划分，以及 26 条参考文献清单。
-
-未发现通过删段、压缩信息量、改写科学结论或删掉 caveat 来换取可读性的情况。最终稿仍明确保留“不能支持更强主张”“尚未完成 M&Ms 官方下载后 manifest 审计”“GO/STOP 条件”等证据边界。
-
-## 本地验证
+## Local verification before Text Review
 
 - `python3 scripts/build_codex_marketplace.py --write --validate --check --path-report`: PASS
 - `python3 -m unittest tests.test_skill_runtime_text_audit`: PASS
+- `python3 -m unittest tests.test_skill_runtime_text_audit tests.test_reviewed_handoff_prompt_contract`: PASS
 - `python3 scripts/skills.py validate`: PASS
 - `python3 scripts/skills.py audit --all`: PASS
-- `python3 scripts/audit_skill_runtime_text.py --check`: PASS
 - `git diff --check`: PASS
-- production `ai-skills-core` preflight: PASS, run `20260901T052221Z-ac9b1027fec9`
-- production `writing-style` replay: PASS locally, run `20260901T054942Z-32aa9616c11c`
+- production `ai-skills-core` preflight: completed, run `20260901T074459Z-26ecaefe8053`
+- production `writing-style` replay: completed, run `20260901T075933Z-2e88b3e0ba16`
+- `ai-bridge text-review preflight`: PASS for workflow file and recipient presence; `gh secret list` metadata check was unavailable, but no secret value was read or printed.
 
-未执行项：
+Local scan is not the acceptance authority for this stage. The fresh full-text `TEXT_REVIEW.json` must decide whether F002/F003 are closed. If it returns `REVISE`, the task should stop rather than begin another open-ended polish round.
 
-- `python3 scripts/skills.py registry --write` 的 escalated 请求被系统拒绝，原因是该写操作可能超出 044 frozen Plan 范围；未绕行。
-- `codex plugin list` 在 clean checkout 的临时 Codex home 中因 marketplace snapshot 初始化异常失败；production preflight 已在 installed plugin package 内确认 `ai-skills-core` 与 `writing-style` enabled。
-- encrypted Text Review payload 和 manifest 已生成，尚待 push 后由 GitHub Actions 生成 `TEXT_REVIEW.json`；Review 2 尚未触发。
-- GitHub CI 尚未作为最终 release closure gate 触发；本轮先等待 full-text `TEXT_REVIEW.json`，只有 Text Review PASS 后才进入版本闭环和 `WAITING_FOR_CI`。
-- 完整 `python3 -m unittest discover -s tests` 未重跑；此前同类全量测试存在 out-of-scope presentations fixture 依赖/编译失败，本轮以 writing-style 相关 gates 为本地通过标准。
+## Version decision
 
-## Implementation commit
-
-Implementation commit: `60246d3d634bf9840a6bad73ca1eb3f380c71043`
-
-该 commit 只包含 revised Plan 允许的 production source/test/generated/TODO 改动，不包含完整私有 `rewritten_report.md`、临时 replay task 或 installed cache 文件。
-
-## 版本决策
-
-Repository bump decision: DEFER UNTIL TEXT_REVIEW_AND_CI
-Reason: 本轮确实改变了 `writing-style` production behavior；revised Plan 要求在 fresh replay、unrelated regression、CI 和完整 Text Review 全部 PASS 后完成正式版本闭环。当前阶段正在发布 Text Review evidence，尚未进入 release bump commit。
+Repository bump decision: DEFER UNTIL TEXT_REVIEW_AND_CLOSURE
+Reason: release bump is only allowed after fresh Text Review PASS and the subsequent closure gates.
 
 Affected plugins:
 - `writing-style`: DEFER `0.1 -> 0.2`
-  Reason: 只有 fresh Text Review PASS 且后续 release closure gates 通过后，才按 revised Plan bump。
+  Reason: bump only after fresh Text Review PASS and closure gates.
+- `presentations`: NO_BUMP
+  Reason: 044 does not modify or release `presentations`; current main value `0.3` is preserved.
 
-## Git 状态
+Current repository version remains `5.0.3`. Current `writing-style` version remains `0.1`. Current `presentations` version remains `0.3`.
 
-Implementation commit 已创建。当前仍不得提交完整私有明文正文；下一步只提交 encrypted Text Review payload、manifest、RESULT 和合法 `CURRENT` Executor transaction。
+## Next action
+
+Push this fresh Text Review payload to `reviewed/044_writing_style_deep_research_chinese_replay` and wait for GitHub Actions to write `results/044_writing_style_deep_research_chinese_replay/text_review/TEXT_REVIEW.json`.

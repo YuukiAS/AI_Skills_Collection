@@ -1,22 +1,22 @@
 {
   "external_upload_authorization": "User authorized private full-text review for Reviewed Handoff 044 through GitHub Actions and OpenAI Responses API with store=false.",
   "identity_bindings": {
-    "implementation_commit": "60246d3d634bf9840a6bad73ca1eb3f380c71043"
+    "implementation_commit": "b91323c5bb96f9fd97b16352875d9182505dc648"
   },
   "input": {
-    "ciphertext_sha256": "c6d679f81913b83cbefbab7986788c3ae8ca33f4c9abb4953c5224ed49657a05",
+    "ciphertext_sha256": "f809e99618c03ea7b3880abaf669c801857e795b393815da899f09bd041a90bb",
     "encrypted_payload_path": "results/044_writing_style_deep_research_chinese_replay/text_review/payload.age",
     "logical_id": "primary_text",
     "mime_type": "text/markdown; charset=utf-8",
-    "plaintext_sha256": "7571a02d59d098fdcb9d0d6ec18021e14132b05395248cecb7c11e72743e9ebc",
-    "plaintext_size_bytes": 60916,
+    "plaintext_sha256": "f0281dfba1230d51d35071ed27fa2c23e78d2c4e72a81bea96a887f8ad9eb971",
+    "plaintext_size_bytes": 61480,
     "source_basename": "rewritten_report.md"
   },
   "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
   "prompt_version": "ai-bridge.text-review.v1",
   "review_kind": "user-facing-text",
   "rubric": {
-    "instructions": "### B. PRODUCT / ARTIFACT PASS：完整私有 Text Review\n\n最终 Reviewer PASS 必须建立在 fresh、identity-matched 的 `TEXT_REVIEW.json` 上，而不是 Executor 摘要或局部抽查上。Text Review rubric 必须要求审查完整最终重写稿，并同时覆盖：\n\n**科学与来源保真**\n\n- 不新增或删除科学主张、证据、限制、停止条件、下一步条件；\n- 不把“可能/推断/条件性”改成“证明/确定”，也不反向弱化原有明确结论；\n- 不改变谁做了什么、哪些是项目事实、哪些是文献事实、哪些是研究判断；\n- 数字、公式、变量、算法/数据集/指标名称、引用与精确定位内容保持一致；\n- 不通过删段、压缩信息量或总结替代完整重写。\n\n**中文读者表达**\n\n- 普通中文研究者无需理解内部代理/工作流语言即可连续阅读；\n- 普通英文抽象标签不得继续承担中文句子的主干、标题骨架或反复出现的逻辑标签；\n- `provenance`、`estimand`、`scientific gap`、`resource contract`、`state of the art` 等只是 regression examples：Text Review 应判断它们在具体语境中是否确有不可替代的专业/定位意义，而不是按 blacklist 机械判分；\n- 不允许 `anchor -> 锚点`、`provenance -> 来源追踪` 一类逐词翻译后仍保留原机器句法；应直接说明当前句子真正要表达的证据、对象、差距、约束或比较关系；\n- 长句在不丢条件的前提下有可追踪的主语、动作、原因、结果和限制；\n- 标题与段落直接描述科学内容，不用代理式元话语、法律/取证腔或英文 noun-stack 制造专业感；\n- 保留下来的英文必须属于算法/数据集/公式变量/正式名称/检索定位等确实有理由保留的内容。\n\nText Review 只有 `overall_decision=PASS` 且 evidence 绑定当前 `task_key`、`workflow_type=reviewed_handoff`、当前 implementation commit、manifest identity 与最终 plaintext SHA 时，才能支持 Review 2 的 PRODUCT / ARTIFACT PASS。缺失、malformed、stale、plaintext-SHA mismatch、manifest mismatch 或 non-PASS 都不能支持 Reviewer PASS。\n\n当 encrypted payload 与 manifest 已存在但 fresh `TEXT_REVIEW.json` 仍在等待 GitHub workflow 时，这是 `WAITING_FOR_EVIDENCE / NEEDS_REVIEW`，不得消费 Review 2，也不得写 `BLOCKED`。"
+    "instructions": "Review the complete private rewritten report.\n\nJudge only the user-facing text artifact. Do not decide Git, manifest, transport, implementation commit, or plaintext identity freshness; those are deterministic outer validation responsibilities.\n\nDecision criteria:\n\n1. Scientific and source fidelity\n- The rewrite must not add or remove scientific claims, evidence, limitations, stop conditions, next-step conditions, attribution, uncertainty, or conclusion strength.\n- Numbers, formulas, variables, algorithm names, dataset names, metric names, citations, and precision-critical locators must remain consistent with the source.\n- The rewrite must not turn conditional or inferred statements into certain conclusions, and must not weaken explicit conclusions without source support.\n\n2. Natural Chinese reader-facing prose\n- A Chinese research reader should be able to read continuously without decoding internal agent, workflow, repository, or audit language.\n- Ordinary English labels, noun-stacks, `A + B`, `A vs B`, and `A -> B` relationship shorthand must not remain as headings, standalone lines, paragraph skeletons, or repeated logical labels unless they are formal names, variables, formulas, code/path tokens, paper titles, exact quoted source, table labels that must match an external source, or identifiers required for lookup.\n- Repository, manifest, file-status, audit, and implementation-state narration must not become the main scientific prose. The body should state the scientific fact, data boundary, experimental interpretation, or unresolved condition first; file names, paths, manifest fields, and audit records may remain only as evidence locators where needed.\n- Formal names and precision-critical terms such as FedFisher, LoRA, Dice, CARE, M&Ms, nnU-Net, AdamW, variables, DOI strings, and paper titles should be preserved when accuracy or lookup requires them.\n\n3. Complete rewrite, no deletion\n- The output must be a full rewrite rather than a summary.\n- It must not make the report easier by deleting sections, compressing away caveats, omitting negative results, dropping comparisons, or skipping cited material.\n\nReturn PASS only if all three criteria pass on the complete artifact. Return REVISE with concrete blocking findings if any criterion fails.\n"
   },
   "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1",
   "task_key": "044_writing_style_deep_research_chinese_replay",
