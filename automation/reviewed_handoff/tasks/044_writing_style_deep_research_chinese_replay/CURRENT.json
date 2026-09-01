@@ -2,7 +2,7 @@
   "base_branch": "main",
   "base_commit": "6e2ae18bd3a76cd15300c79b072d01d89aaa64fa",
   "ci_required": true,
-  "ci_status": "PASS",
+  "ci_status": "PENDING",
   "human_decision": {
     "body": "User rejects Review-1 PASS after reading the full private rewritten report. The original artifact still used reader-facing English abstract labels such as provenance/estimand and the Reviewer had not read the complete private artifact. The frozen Plan therefore needs its one allowed minimal revision to require fresh full-text Text Review evidence. A later uncommitted local candidate repair exists and must be treated only as candidate evidence until independently reviewed.",
     "decision": "REJECT",
@@ -12,7 +12,7 @@
     "review_round": 1,
     "route": "NEEDS_GPT_PLANNER"
   },
-  "human_gate_reason": "PASS",
+  "human_gate_reason": null,
   "human_rejection": {
     "body": "User rejects Review-1 PASS after reading the full private rewritten report. The original artifact still used reader-facing English abstract labels such as provenance/estimand and the Reviewer had not read the complete private artifact. The frozen Plan therefore needs its one allowed minimal revision to require fresh full-text Text Review evidence. A later uncommitted local candidate repair exists and must be treated only as candidate evidence until independently reviewed.",
     "decision": "REJECT",
@@ -26,12 +26,15 @@
   "last_review_decision": "PASS",
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "RUN_GPT_PLANNER",
-  "plan_revision": 0,
+  "next_action": "EXECUTOR_RUN_REVISED_044_REPAIR_AND_FULL_TEXT_REVIEW",
+  "plan_revision": 1,
   "review_limit_reached": false,
   "review_round": 1,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
-  "state": "NEEDS_GPT_PLANNER",
+  "state": "PLAN_FROZEN",
   "task_key": "044_writing_style_deep_research_chinese_replay",
+  "text_review_evidence_path": "results/044_writing_style_deep_research_chinese_replay/text_review/TEXT_REVIEW.json",
+  "text_review_manifest_path": "results/044_writing_style_deep_research_chinese_replay/text_review/text_inputs.json",
+  "text_review_required": true,
   "visual_review_required": false
 }
