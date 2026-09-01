@@ -30,7 +30,10 @@ CENTRAL_PLUGIN_NAMES = [
     "bioinformatics",
     "medical-imaging",
 ]
-EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {"ai-skills-core": "0.2"}
+EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
+    "ai-skills-core": "0.2",
+    "presentations": "0.2",
+}
 REPOSITORY_SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 PLUGIN_VERSION_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 
@@ -185,13 +188,13 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertIsNotNone(readme_match)
 
         self.assertRegex(version, REPOSITORY_SEMVER_RE)
-        self.assertEqual({version, setup_version, registry["version"], readme_match.group(1)}, {"5.0.1"})
+        self.assertEqual({version, setup_version, registry["version"], readme_match.group(1)}, {"5.0.2"})
 
         plugin_versions = {plugin["name"]: plugin["version"] for plugin in config["plugins"]}
         self.assertEqual(plugin_versions, EXPECTED_PLUGIN_VERSIONS)
         self.assertEqual(
-            {name: version for name, version in plugin_versions.items() if name != "ai-skills-core"},
-            {name: "0.1" for name in CENTRAL_PLUGIN_NAMES if name != "ai-skills-core"},
+            {name: version for name, version in plugin_versions.items() if name not in {"ai-skills-core", "presentations"}},
+            {name: "0.1" for name in CENTRAL_PLUGIN_NAMES if name not in {"ai-skills-core", "presentations"}},
         )
         for plugin_version in plugin_versions.values():
             self.assertRegex(plugin_version, PLUGIN_VERSION_RE)
@@ -237,7 +240,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         maturity_text = (REPO_ROOT / "docs/PLUGIN_MATURITY.md").read_text(encoding="utf-8")
         maturity = dict(re.findall(r"^\| `([^`]+)` \| `([^`]+)`", maturity_text, flags=re.MULTILINE))
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("Repository / CLI release: `5.0.1`", readme)
+        self.assertIn("Repository / CLI release: `5.0.2`", readme)
         for plugin_name in CENTRAL_PLUGIN_NAMES:
             row = re.search(
                 rf"^\| `{re.escape(plugin_name)}` \| `([^`]+)` \| `([^`]+)` \| .*docs/plugin-changelogs/{re.escape(plugin_name)}\.md",

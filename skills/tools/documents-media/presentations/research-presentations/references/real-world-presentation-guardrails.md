@@ -38,10 +38,23 @@ Before editing, bind the revision request to:
 If the user asks for a new deck explicitly, that is a separate request. Otherwise
 feedback on an existing deck means revise the existing artifact.
 
+The research-presentations existing-deck revision production gate for this route is
+`../../shared/scripts/validate_existing_deck_revision_entry.py --revision-packet <packet.json> --out <summary.json>`.
+The packet schema is `RESEARCH_PRESENTATION_EXISTING_DECK_REVISION_PACKET_V1`.
+It must include the reviewer-seen render baseline, accepted-element ledger,
+targeted feedback, rerender evidence, high-resolution problem pages, first-use
+dependency order checks, rendered scientific-object QA, an English final pass
+after scientific structure/formula/claim/citation freeze, and independent visual
+review evidence. The gate must not self-assign final `PASS`; it closes only when
+all required fields pass and the independent reviewer has returned `PASS`.
+
 ## Audience And Evidence
 
 - Introduce new notation, acronyms, datasets, methods, estimands, and domain
   terms before using them as central slide objects.
+- Treat this as a first-use dependency order gate, not a writing preference:
+  each method, acronym, dataset, domain term, and estimand that becomes a
+  central object needs an explanation at or before first central use.
 - When current audited data include a real example for a new concept, prefer one
   short real example over placeholders such as `group 1` or toy categories.
 - State the availability boundary for optional evidence. Do not imply that a
@@ -96,6 +109,12 @@ Before delivery, inspect a real render:
 - full deck or contact sheet for rhythm, density, repetition, and transitions;
 - high-resolution single-page renders for diagram, figure-heavy, theory,
   discussion, references, and known-problem slides;
+- rendered node width and awkward wraps;
+- connector endpoint clearance and arrow readability;
+- crowding together with unused space;
+- figure-internal axis, tick, legend, title, and annotation text;
+- caption-to-panel pairing;
+- source/footer safe zone relative to the active template;
 - visible text from source and rendered artifact for internal-language leakage;
 - accepted-element regression against the reviewed prior version.
 

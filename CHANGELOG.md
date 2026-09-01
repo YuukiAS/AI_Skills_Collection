@@ -4,6 +4,38 @@
 
 No unreleased changes.
 
+## 5.0.2 - 2026-09-01
+
+Repository `5.0.2` is a compatible release for the accepted 045 Presentations real-use regression hardening result.
+
+Repository bump decision: PATCH
+Reason: this release improves an existing central plugin's production behavior without adding a new repository-level capability or breaking existing contracts.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `presentations` | `0.1` | `0.2` |
+
+Affected plugins:
+- `presentations`: `0.1` -> `0.2`
+  Reason: existing-deck research-presentation revisions now have a production completion gate with real replay/regression evidence, rendered scientific-object QA, first-use dependency checks, English final-pass enforcement, and independent visual-review closure.
+
+Unchanged plugin versions: `workflow-core 0.1`, `ai-skills-core 0.2`, `writing-style 0.1`, `research-writing 0.1`, `scientific-visualization 0.1`, `web-development 0.1`, `statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Presentations existing-deck revision requests now route to an executable completion gate instead of relying on prose-only guardrails or Codex self-inspection.
+- The gate consumes reviewer-seen baselines, accepted-element ledgers, targeted feedback, rerender evidence, high-resolution problem pages, first-use dependency order, rendered scientific-object QA, English scientific-prose final pass after scientific freeze, and independent visual review.
+- Public-safe known-failure and unrelated reviewed regression fixtures cover the 045 failure classes without packaging private CAT-TRACE rendered pages, TRACE absolute paths, project page numbers, or project-specific scientific content into the installed plugin payload.
+- The CUHK scientific layout renderer no longer hard-codes a TRACE checkout font path.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelog:
+
+- `docs/plugin-changelogs/presentations.md`
+
 ## 5.0.1 - 2026-09-01
 
 Repository `5.0.1` is a compatible release that makes `ai-skills-core` the required maintenance companion for future central plugin production refinements.

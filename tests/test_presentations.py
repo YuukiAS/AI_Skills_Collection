@@ -21,6 +21,7 @@ import validate_deck_plan  # noqa: E402
 import generate_cuhk_scientific_layout_stage3 as stage3  # noqa: E402
 import generate_research_presentation_production_entry as production_entry  # noqa: E402
 import validate_research_presentation_production_entry as production_validator  # noqa: E402
+import validate_existing_deck_revision_entry as existing_revision_gate  # noqa: E402
 import deck_quality_loop  # noqa: E402
 import scientific_object_semantics  # noqa: E402
 import select_gold_compositions  # noqa: E402
@@ -1790,6 +1791,69 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(unsafe["final_decision"], "QUALITY_LOOP_FAIL_NO_WINNER")
             self.assertIn("unsupported repair intent", unsafe["fail_closed_reason"])
 
+    def test_existing_deck_revision_gate_rejects_public_safe_known_failures(self) -> None:
+        packet_path = SHARED / "fixtures/existing_deck_revision/public_safe_known_failures.json"
+        packet = json.loads(packet_path.read_text(encoding="utf-8"))
+        summary = existing_revision_gate.evaluate(packet)
+        self.assertEqual(summary["final_decision"], "BLOCKED")
+        self.assertEqual(summary["completion_gate"], "NOT_CLOSED")
+        gates = {finding["gate"] for finding in summary["findings"]}
+        self.assertTrue(
+            {
+                "first_use_dependency_order",
+                "rendered_scientific_object_qa",
+                "english_final_pass",
+                "independent_visual_review",
+            }
+            <= gates
+        )
+        rendered_ids = {finding["finding_id"] for finding in summary["findings"] if finding["gate"] == "rendered_scientific_object_qa"}
+        self.assertTrue(
+            {
+                "node_width_and_wrap",
+                "connector_endpoint_clearance",
+                "arrow_readability",
+                "crowding_unused_space",
+                "figure_internal_text",
+                "caption_panel_pairing",
+                "source_footer_safe_zone",
+            }
+            <= rendered_ids
+        )
+
+        packet_text = packet_path.read_text(encoding="utf-8")
+        self.assertNotIn("CAT-TRACE", packet_text)
+        self.assertNotIn("/home/yuukias/code/TRACE", packet_text)
+        self.assertNotIn("catalogue", packet_text)
+        self.assertNotIn("open-tail", packet_text)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "summary.json"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(SHARED / "scripts/validate_existing_deck_revision_entry.py"),
+                    "--revision-packet",
+                    str(packet_path),
+                    "--out",
+                    str(out),
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 2)
+            written = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(written["packet_sha256"], summary["packet_sha256"])
+
+    def test_existing_deck_revision_gate_allows_unrelated_reviewed_regression(self) -> None:
+        packet_path = SHARED / "fixtures/existing_deck_revision/unrelated_pass_revision.json"
+        packet = json.loads(packet_path.read_text(encoding="utf-8"))
+        summary = existing_revision_gate.evaluate(packet)
+        self.assertEqual(summary["final_decision"], "PASS_REVIEWED")
+        self.assertEqual(summary["completion_gate"], "CLOSED")
+        self.assertEqual(summary["findings"], [])
+
     def test_research_presentation_quality_loop_normalizes_terra_style_findings(self) -> None:
         bundle_path = SHARED / "fixtures/stage4_quality_loop_repair_stress_bundle/bundle.json"
         bundle = production_entry.load_bundle(bundle_path)
@@ -2418,6 +2482,8 @@ class PresentationSharedTests(unittest.TestCase):
         for required in [
             "## Rule Inheritance",
             "## Revision Entry Routing",
+            "research-presentations existing-deck revision production gate",
+            "RESEARCH_PRESENTATION_EXISTING_DECK_REVISION_PACKET_V1",
             "继续按这些批注返修我现有的组会PPT",
             "这个版本其他页别动，只修我指出的页面",
             "保留上轮接受的布局，继续改剩下的问题",
@@ -2425,6 +2491,7 @@ class PresentationSharedTests(unittest.TestCase):
             "accepted slides/components",
             "reviewer-seen render baseline",
             "targeted revision scope",
+            "first-use dependency order",
             "one intellectual job per slide",
             "first-line centered display formula",
             "ports and anchors",
@@ -2435,8 +2502,11 @@ class PresentationSharedTests(unittest.TestCase):
         for required in [
             "## Evidence Versus Concept QA",
             "## Diagram Semantic QA",
+            "## Rendered Scientific Object QA",
             "## Revision Scope QA",
             "typed arrow characters",
+            "connector endpoint clearance",
+            "source/footer safe zone",
             "scope creep",
         ]:
             self.assertIn(required, visual_qa)
@@ -2519,6 +2589,10 @@ class PresentationSharedTests(unittest.TestCase):
             (
                 SHARED / "scripts/validate_cuhk_scientific_layout_stage3.py",
                 REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_cuhk_scientific_layout_stage3.py",
+            ),
+            (
+                SHARED / "scripts/validate_existing_deck_revision_entry.py",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_existing_deck_revision_entry.py",
             ),
             (
                 SHARED / "templates/cuhk/beamer/source/styles/beamerthemesintef.sty",

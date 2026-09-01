@@ -1,0 +1,118 @@
+{
+  "schema": "RESEARCH_PRESENTATION_EXISTING_DECK_REVISION_PACKET_V1",
+  "case_id": "unrelated_pass_revision",
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "deck_identity": {
+    "title": "Synthetic Statistical Group Meeting",
+    "source_path": "tests/fixtures/presentations/statistical_method_group_meeting/source.tex",
+    "pdf_path": "tests/fixtures/presentations/statistical_method_group_meeting/render.pdf"
+  },
+  "revision_entry": {
+    "reviewer_seen_baseline": {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/baseline.pdf",
+      "status": "PASS"
+    },
+    "accepted_element_ledger": [
+      {
+        "id": "compact_method_diagram",
+        "status": "accepted",
+        "regression_status": "PASS"
+      },
+      {
+        "id": "formula_and_citation_text",
+        "status": "accepted",
+        "regression_status": "PASS"
+      }
+    ],
+    "targeted_feedback": [
+      {
+        "id": "tighten_caption",
+        "status": "CLOSED"
+      }
+    ],
+    "rerender": {
+      "status": "PASS",
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/render.pdf"
+    },
+    "high_resolution_problem_pages": [
+      {
+        "page": 3,
+        "status": "AVAILABLE"
+      }
+    ]
+  },
+  "first_use_checks": [
+    {
+      "id": "method_before_central_use",
+      "term": "posterior interval",
+      "term_type": "method",
+      "central_object": true,
+      "first_central_use_page": 4,
+      "explanation_page": 2,
+      "status": "PASS"
+    },
+    {
+      "id": "dataset_before_central_use",
+      "term": "simulation cohort",
+      "term_type": "dataset",
+      "central_object": true,
+      "first_central_use_page": 5,
+      "explanation_page": 3,
+      "status": "PASS"
+    },
+    {
+      "id": "domain_term_before_central_use",
+      "term": "coverage",
+      "term_type": "domain_term",
+      "central_object": true,
+      "first_central_use_page": 5,
+      "explanation_page": 2,
+      "status": "PASS"
+    },
+    {
+      "id": "estimand_before_central_use",
+      "term": "calibration estimand",
+      "term_type": "estimand",
+      "central_object": true,
+      "first_central_use_page": 6,
+      "explanation_page": 2,
+      "status": "PASS"
+    }
+  ],
+  "rendered_scientific_object_qa": {
+    "node_width_and_wrap": {
+      "status": "PASS"
+    },
+    "connector_endpoint_clearance": {
+      "status": "NOT_APPLICABLE",
+      "reason": "no connector diagram on revised pages"
+    },
+    "arrow_readability": {
+      "status": "NOT_APPLICABLE",
+      "reason": "no arrows on revised pages"
+    },
+    "crowding_unused_space": {
+      "status": "PASS"
+    },
+    "figure_internal_text": {
+      "status": "PASS"
+    },
+    "caption_panel_pairing": {
+      "status": "PASS"
+    },
+    "source_footer_safe_zone": {
+      "status": "PASS"
+    }
+  },
+  "english_final_pass": {
+    "scientific_structure_frozen": true,
+    "status": "PASS",
+    "completed_after_structure_frozen": true,
+    "rerender_after_pass": true
+  },
+  "independent_visual_review": {
+    "independent": true,
+    "decision": "PASS",
+    "reviewer_role": "independent"
+  }
+}
