@@ -433,6 +433,14 @@ class ScientificRewriteTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "status is invalid"):
             helper.normalize_semantic_audit({"decision": "PASS", "findings": [{"status": "unclear"}]}, unit, propositions)
 
+    def test_response_schema_name_is_bounded_and_stable(self) -> None:
+        helper = load_helper()
+        stage = "u1_route_revision_and_initial_assessment-post-repair-semantic-audit"
+        name = helper.response_schema_name(stage)
+        self.assertLessEqual(len(name), 64)
+        self.assertEqual(name, helper.response_schema_name(stage))
+        self.assertRegex(name, r"^[A-Za-z0-9_-]+$")
+
 
 if __name__ == "__main__":
     unittest.main()

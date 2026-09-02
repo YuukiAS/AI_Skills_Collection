@@ -1206,6 +1206,14 @@ def json_response_schema(name: str, required: list[str]) -> dict[str, Any]:
     }
 
 
+def response_schema_name(stage: str) -> str:
+    safe = re.sub(r"[^A-Za-z0-9_-]+", "_", stage.replace("-", "_")).strip("_") or "stage"
+    if len(safe) <= 64:
+        return safe
+    digest = hashlib.sha256(safe.encode("utf-8")).hexdigest()[:10]
+    return f"{safe[:53]}_{digest}"
+
+
 def call_openai_json(
     stage: str,
     prompt: str,
@@ -1227,7 +1235,7 @@ def call_openai_json(
         canonical_json(payload),
         model=model,
         api_key=api_key,
-        response_schema=json_response_schema(stage.replace("-", "_"), required),
+        response_schema=json_response_schema(response_schema_name(stage), required),
     )
     return parse_json_object(raw, stage)
 
