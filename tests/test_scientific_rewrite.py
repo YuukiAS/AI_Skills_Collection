@@ -741,6 +741,32 @@ class ScientificRewriteTests(unittest.TestCase):
     def test_reader_repair_gets_semantic_targeted_retry(self) -> None:
         helper = load_helper()
         original = helper.call_openai_text
+        original_proposition_inventory = helper.proposition_inventory
+        reader_semantic_reaudits = {"count": 0}
+
+        def fake_proposition_inventory(unit) -> list[dict[str, object]]:
+            if unit.unit_id != "unit-002":
+                return original_proposition_inventory(unit)
+            first = "CARE 在 2026-08-28 的 Dice=0.81 只支持继续验证。"
+            second = "下一轮比较 FedFisher 和 FedLPA。"
+            return [
+                {
+                    "proposition_id": "unit-002-prop-001",
+                    "kind": "claim",
+                    "source_span_ids": unit.source_span_ids,
+                    "source_text_sha256": helper.sha256_text(first),
+                    "source_excerpt": first,
+                    "required": True,
+                },
+                {
+                    "proposition_id": "unit-002-prop-002",
+                    "kind": "comparator",
+                    "source_span_ids": unit.source_span_ids,
+                    "source_text_sha256": helper.sha256_text(second),
+                    "source_excerpt": second,
+                    "required": True,
+                },
+            ]
 
         def coverage_ids(payload: dict[str, object]) -> list[str]:
             card = payload.get("meaning_card", {})
@@ -814,11 +840,28 @@ class ScientificRewriteTests(unittest.TestCase):
                     ensure_ascii=False,
                 )
             if "Re-audit semantic preservation after the reader semantic repair" in prompt:
+                reader_semantic_reaudits["count"] += 1
                 payload = json.loads(source)
                 candidate = payload["candidate"]["reader_core"]
-                if "CARE 在 2026-08-28 的 Dice=0.81 只支持继续验证" in candidate:
+                if "CARE 在 2026-08-28 的 Dice=0.81 只支持继续验证" not in candidate:
+                    prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][0]
+                    return json.dumps(
+                        {"decision": "REVISE", "findings": [{"status": "omitted", "proposition_id": prop_id, "severity": "critical"}]},
+                        ensure_ascii=False,
+                    )
+                if "下一轮比较 FedFisher 和 FedLPA" in candidate:
                     return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
-                prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][0]
+                prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][1]
+                return json.dumps(
+                    {"decision": "REVISE", "findings": [{"status": "omitted", "proposition_id": prop_id, "severity": "critical"}]},
+                    ensure_ascii=False,
+                )
+            if "Re-audit semantic preservation after source-backed restoration" in prompt:
+                payload = json.loads(source)
+                candidate = payload["candidate"]["reader_core"]
+                if "CARE 在 2026-08-28 的 Dice=0.81 只支持继续验证" in candidate and "下一轮比较 FedFisher 和 FedLPA" in candidate:
+                    return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
+                prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][1]
                 return json.dumps(
                     {"decision": "REVISE", "findings": [{"status": "omitted", "proposition_id": prop_id, "severity": "critical"}]},
                     ensure_ascii=False,
@@ -826,20 +869,25 @@ class ScientificRewriteTests(unittest.TestCase):
             return structured_stage_response(prompt, source)
 
         helper.call_openai_text = fake_call
+        helper.proposition_inventory = fake_proposition_inventory
         try:
             result = helper.run_multistage(
-                "# 结论\n\nCARE 在 2026-08-28 的 Dice=0.81 只支持继续验证。\n\n## 下一步\n\n下一轮比较 FedFisher 和 FedLPA。",
+                "# 结论\n\nCARE 在 2026-08-28 的 Dice=0.81 只支持继续验证。下一轮比较 FedFisher 和 FedLPA。",
                 driver="openai-responses",
                 model="test-model",
                 api_key="test-key",
             )
         finally:
             helper.call_openai_text = original
+            helper.proposition_inventory = original_proposition_inventory
 
         stage_ids = [item["stage_id"] for item in result["receipt"]["stage_records"]]
         self.assertTrue(any("reader-semantic-targeted-repair" in stage_id for stage_id in stage_ids))
         self.assertTrue(any("reader-semantic-source-restoration" in stage_id for stage_id in stage_ids))
+        self.assertTrue(any("reader-semantic-post-audit-source-restoration" in stage_id for stage_id in stage_ids))
+        self.assertTrue(any("reader-semantic-post-restore-audit" in stage_id for stage_id in stage_ids))
         self.assertTrue(any("reader-semantic-repair-audit" in stage_id for stage_id in stage_ids))
+        self.assertEqual(reader_semantic_reaudits["count"], 1)
         self.assertTrue(result["receipt"]["dataflow_validation"]["ok"])
 
     def test_noncritical_semantic_revision_does_not_force_hard_repair(self) -> None:
