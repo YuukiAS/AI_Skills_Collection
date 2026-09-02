@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "048_writing_style_product_cutover_and_readable_report",
-  "state": "PASS",
+  "state": "AWAIT_HUMAN_DECISION",
   "review_round": 2,
   "max_review_rounds": 2,
   "plan_revision": 1,
@@ -13,10 +13,10 @@
   "ci_status": "PASS",
   "last_review_decision": "PASS",
   "review_limit_reached": false,
-  "human_gate_reason": null,
+  "human_gate_reason": "PASS",
   "visual_review_required": false,
   "text_review_required": true,
   "text_review_manifest_path": "results/048_writing_style_product_cutover_and_readable_report/text_review/text_inputs.json",
   "text_review_evidence_path": "results/048_writing_style_product_cutover_and_readable_report/text_review/TEXT_REVIEW.json",
-  "next_action": "TRANSITION_TO_FINAL_USER_ACCEPTANCE_GATE"
+  "next_action": "WAIT_FOR_USER_TO_READ_AND_ACCEPT_PRIVATE_REWRITE"
 }
