@@ -14,6 +14,7 @@ import hashlib
 import json
 import os
 import re
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -1292,7 +1293,7 @@ def call_openai_text(
         method="POST",
     )
     urlopen = urllib.request.urlopen if opener is None else opener
-    retry_delays = [20.0, 60.0, 120.0]
+    retry_delays = [30.0, 90.0, 180.0, 360.0, 600.0]
     for attempt in range(len(retry_delays) + 1):
         try:
             with urlopen(request, timeout=timeout) as response:
@@ -1301,7 +1302,18 @@ def call_openai_text(
         except urllib.error.HTTPError as exc:
             code = getattr(exc, "code", "UNKNOWN")
             if code == 429 and attempt < len(retry_delays):
-                time.sleep(retry_delays[attempt])
+                retry_after = exc.headers.get("Retry-After") if exc.headers else None
+                try:
+                    header_delay = float(retry_after) if retry_after else 0.0
+                except ValueError:
+                    header_delay = 0.0
+                delay = max(retry_delays[attempt], header_delay)
+                print(
+                    f"OpenAI staged rewrite hit HTTP 429; retrying in {delay:.0f}s "
+                    f"(attempt {attempt + 1}/{len(retry_delays) + 1})",
+                    file=sys.stderr,
+                )
+                time.sleep(delay)
                 continue
             raise RuntimeError(f"OpenAI staged rewrite failed closed: HTTP {code}") from exc
     status = payload.get("status")
