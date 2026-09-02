@@ -106,11 +106,52 @@ Because the 044 artifact does not exist, the encrypted Text Review payload and
 manifest were not produced. `TEXT_REVIEW.json` is therefore absent by design,
 not stale, and no product PASS is claimed.
 
-The Reviewed Handoff transition planner now points to a human plan decision, but
-the strict transition apply step still rejects terminalization because it
-requires a real Text Review manifest. No placeholder `payload.age` or
-`text_inputs.json` was created, since there is no model-produced 044 candidate
-artifact to bind.
+The Reviewed Handoff transition planner pointed to a human plan decision, while
+the local strict transition helper refused terminalization because it validates
+the missing Text Review manifest even when that missing artifact is itself the
+reason for the human gate. No placeholder `payload.age` or `text_inputs.json`
+was created, since there is no model-produced 044 candidate artifact to bind.
+
+## Planner final disposition
+
+The single allowed Plan revision has already been consumed. That revision
+provided the narrowest safe authenticated isolated-replay path: a task-local
+copy of the existing Codex login, no live Marketplace/plugin mutation, no
+credential disclosure, and no change to the frozen implementation. Executor
+then retried the exact private 044 replay after explicit user authorization.
+The execution approval layer rejected the external model call under tenant
+policy before model execution.
+
+This is now an external execution-policy boundary, not a remaining ambiguity in
+the scientific-rewrite architecture and not a reason to weaken the frozen 044
+artifact gate. Planner therefore makes no second re-plan and does not fabricate
+a Text Review manifest. The task must stop before CI/Reviewer product PASS and
+enter human decision with these facts fixed:
+
+1. Implementation remains frozen at
+   `ade5a1f653f88df07eb0c70edfd016c744b1611a`.
+2. The public frozen batch is useful experimental evidence only. It is still
+   Executor-side evidence and has not been promoted to independent PRODUCT /
+   ARTIFACT PASS.
+3. The 044 known-regression gate remains unproven because no fresh
+   model-produced private candidate exists.
+4. `writing-style` remains `NO_BUMP`; repository bump remains `NONE`.
+5. 047 must not merge to `main` on the current evidence.
+
+A future human decision may choose one of three clean continuations without
+rewriting history:
+
+- supply the missing 044 candidate/Text Review through an execution surface that
+  is actually permitted to send that private artifact to the authorized model,
+  while keeping the frozen implementation unchanged;
+- close 047 as an experimental architecture result with no production cutover;
+- if the desired acceptance criteria themselves should change (for example,
+  waiving the 044 private artifact gate), start a new planning task rather than
+  consuming a nonexistent second 047 Plan revision.
+
+The execution-policy failure does not justify live-global plugin mutation,
+secret extraction, indirect policy bypass, placeholder evidence, or another
+044-specific repair cycle.
 
 ## Technical appendix
 
@@ -122,6 +163,7 @@ a05e4a67  Clarify isolated plugin production replay
 b5d773b937497bedc488b73da81baa1a091a182e  Record 047 isolated replay evidence
 265ee7d  Revise 047 plan for isolated authenticated replay
 75ec01e  Resume 047 after planner auth replay clarification
+b97ffa5557c4b564d702daf2fef6a844827c7eec  Record 047 terminalization evidence
 ```
 
 Important artifacts:
@@ -139,10 +181,12 @@ Local verification commands recorded in `RESULT.md` passed before the
 implementation freeze. GitHub CI was not entered because the required private
 Text Review input artifacts could not be generated.
 
-Current control-plane check:
+Planner disposition:
 
 ```text
-transition plan: next_action=HUMAN_PLAN_DECISION, next_state=AWAIT_HUMAN_DECISION
-transition apply: rejected because text_inputs.json is missing
-current state: NEEDS_GPT_PLANNER
+state: AWAIT_HUMAN_DECISION
+reason: one Plan revision exhausted; required private 044 replay is blocked by execution policy; no evidence may be fabricated
+product pass: NO
+release: NONE / writing-style NO_BUMP
+merge main: NO
 ```
