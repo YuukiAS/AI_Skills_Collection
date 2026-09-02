@@ -1,0 +1,34 @@
+{
+  "schema": "AI_SKILLS_048_PRODUCTION_REPLAY_IDENTITY_V1",
+  "task_key": "048_writing_style_product_cutover_and_readable_report",
+  "review_round": 1,
+  "review_repair_base": "3d60b50ee3e6dce276dddd5f4f4cc15699b9e4e1",
+  "writing_style_implementation_commit": "928de2325d781ca630883d03e0f381092675b269",
+  "current_main_snapshot": "8faafd5a7ee60b394a53de5debfde3ccfe60b8cc",
+  "marketplace": {
+    "name": "yuukias-ai-skills",
+    "manifest_path": ".agents/plugins/marketplace.json",
+    "manifest_sha256": "680595dcf2f96352ff72a38b97d2cb107e5ba33b9818b9f4cc3a07b379c7f2ce"
+  },
+  "plugins": {
+    "ai-skills-core": {
+      "selector": "ai-skills-core",
+      "plugin_json": "plugins/codex/plugins/ai-skills-core/.codex-plugin/plugin.json",
+      "plugin_json_sha256": "1d39a197c9373ad1dbe3b724fd601b96e8e707370181f4a9f1f5f1dbe1bdbd7e",
+      "maintenance_skill": "plugins/codex/plugins/ai-skills-core/skills/maint/SKILL.md",
+      "maintenance_skill_sha256": "a518ae64957d62888682f606ca7818f107598e58e4998961dc847b6585106ff7"
+    },
+    "writing-style": {
+      "selector": "writing-style",
+      "plugin_json": "plugins/codex/plugins/writing-style/.codex-plugin/plugin.json",
+      "plugin_json_sha256": "e675660cc84434014f0a9a2fcccc1bb10b7a6a0c97be70c46fad657fbe4b099e",
+      "scientific_rewrite_skill": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/SKILL.md",
+      "scientific_rewrite_skill_sha256": "d6a5821c7f635a459a40d99c8e5ec0b87f459f52871056a65fc8c2b597b844b2",
+      "chinese_prose_skill": "plugins/codex/plugins/writing-style/skills/zh/SKILL.md",
+      "chinese_prose_skill_sha256": "02c671fc37e3604ffb41e928996f1277b1a46f79215a71023a6264eeed885f0b",
+      "writing_fidelity_skill": "plugins/codex/plugins/writing-style/skills/fidelity/SKILL.md",
+      "writing_fidelity_skill_sha256": "bdfed30b315c23e986bd00b513b57c3dda96ceebc759b50a91c8a117954c11f0"
+    }
+  },
+  "private_plaintext_included": false
+}

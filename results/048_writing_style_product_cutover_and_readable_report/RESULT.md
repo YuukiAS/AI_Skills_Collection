@@ -11,7 +11,7 @@ ci_status: PENDING
 
 ## Executor Action
 
-Revision 1 implementation is ready for CI and external review evidence. The Executor has:
+Review 1 repair is ready for CI and external Review 2. The Executor has:
 
 - implemented and pushed the Bridge Kit companion prerequisite at `YuukiAS/GPT_Codex_AI_Bridge_Kit@65ea9c59afbe2db88bb5d60bf8752f82719f0087`;
 - implemented the AI_Skills production source, generated payload, shallow-safe text-transform workflow detector, and longer transform timeout at `928de2325d781ca630883d03e0f381092675b269`;
@@ -24,8 +24,10 @@ Revision 1 implementation is ready for CI and external review evidence. The Exec
 - received encrypted GitHub Actions text-transform output and locally decrypted it without committing plaintext;
 - repaired stale Text Review blocker rounds by rebuilding the candidate from the stronger-goal model output, removing duplicate/truncated deterministic restore artifacts, deleting the unreadable literal-fragment appendix, removing the remaining repeated/truncated tail, restoring the engineering comparison as a single reader-facing method table, and correcting the final unsupported `dFisher` phrase flagged by Text Review;
 - generated encrypted full-report Text Review input under `results/048_writing_style_product_cutover_and_readable_report/text_review/`;
-- received fresh Text Review PASS evidence at `f0ea58f`.
-- repaired the unrelated presentations CI blocker at `7b9e4fa897ac814088c608175c536b652f0a5869` by distinguishing missing local render dependencies from strict rendered artifact failures while preserving strict-mode failures.
+- received fresh Text Review PASS evidence at `f0ea58f`;
+- removed all task-owned presentations source, generated payload, and presentation-only test changes from the current 048 candidate diff, restoring those paths to `origin/main`;
+- recorded the unrelated latest-main presentation CI failures as baseline evidence rather than treating them as 048 scope;
+- added public-safe production maintenance and normal installed-entrypoint evidence under `results/048_writing_style_product_cutover_and_readable_report/production_entrypoint/`.
 
 ## Current Evidence
 
@@ -48,7 +50,7 @@ plan_revision=1
 max_plan_revisions=1
 implementation_commit=928de2325d781ca630883d03e0f381092675b269
 ci_required=true
-ci_status=PENDING in `CURRENT.json`; previous GitHub `Codex Marketplace` CI failed on presentations render-probe tests, and the current branch tip now carries a targeted CI repair awaiting fresh CI. `CURRENT.implementation_commit` intentionally remains bound to the text-reviewed writing-style implementation commit because the CI locator is the published branch tip.
+ci_status=PENDING in `CURRENT.json`; previous 048 branch CI run `33613131960` was green only while the branch still contained out-of-scope presentations changes. Review 1 required those changes to be removed. Latest-main run `33586884130` at `8faafd5a7ee60b394a53de5debfde3ccfe60b8cc` independently showed presentation render-probe failures and a repository-version baseline failure, so 048 records that as unrelated baseline evidence instead of repairing presentations. `CURRENT.implementation_commit` intentionally remains bound to the text-reviewed writing-style implementation commit because the private Text Review identity must not be rewritten by this metadata/evidence repair.
 ```
 
 Local gates passed so far:
@@ -62,19 +64,24 @@ Local gates passed so far:
 - AI_Skills `python scripts/skills.py validate`: PASS.
 - AI_Skills `python scripts/skills.py audit --all`: PASS.
 - AI_Skills `python -m unittest tests.test_scientific_rewrite tests.test_codex_marketplace -v`: PASS, 42 tests.
-- AI_Skills `/tmp/ai-skills-048-venv/bin/python -m unittest tests.test_presentations -v`: PASS, 44 tests, after installing CI-equivalent presentation regression dependencies in a temporary virtualenv.
-- AI_Skills `/tmp/ai-skills-048-venv/bin/python -m unittest discover -s tests`: PASS, 175 tests.
 - `git diff --check`: PASS.
+- AI_Skills `python -m unittest discover -s tests`: FAIL, 174 tests run, 3 failures, all in `tests/test_presentations.py`: one `real render not ok: COMPILE_FAILED` and two missing `matplotlib` failures in presentation benchmark generators. This is recorded as an unrelated presentations/environment baseline and is not repaired in 048.
 - GitHub Actions `ai-bridge-text-transform` for the full private report: PASS, `store=false`, plaintext not committed.
 - Local decrypt of `output.age`: PASS; plaintext SHA matched `TEXT_TRANSFORM.json`.
 - Sanitized deterministic private fidelity report: raw helper checked 387 spans and leaves 29 citation/path extractor misses after the current tail-removal, engineering-table, and reviewed phrase repair. Missing span text is not committed; semantic acceptability is intentionally delegated to fresh private Text Review rather than claimed from the helper alone.
 - Encrypted full-report Text Review request: regenerated for the current repaired candidate; plaintext bundle remains local/private only.
 - Fresh GitHub Actions Text Review evidence at `f0ea58f`: PASS, `blocking_findings=[]`, reviewed payload SHA `e5ad5f00771301e86d0009fc43354eaed45d5b00a8df1acdd8f420d62af86563`, plaintext bundle SHA `f640a48c879195b89e11335f3b65df3804bc49caf71cb130d5595321ddb61db3`.
-- Observed GitHub Actions `Codex Marketplace` run `33610658349`: FAIL. The three failures were all in `tests/test_presentations.py` and reported `render_chinese_math_pdf_probe.json: render probe failed`; no `writing-style` or text-transform test failed in that run. The current implementation includes a targeted repair for that CI blocker and awaits a fresh GitHub CI result.
+- Observed GitHub Actions `Codex Marketplace` run `33610658349`: FAIL. The three failures were all in `tests/test_presentations.py` and reported `render_chinese_math_pdf_probe.json: render probe failed`; no `writing-style` or text-transform test failed in that run.
+- Observed latest-main GitHub Actions `Codex Marketplace` run `33586884130` at `8faafd5a7ee60b394a53de5debfde3ccfe60b8cc`: FAIL with unrelated presentation render-probe failures and a repository-version baseline failure per Review 1.
+- Review 1 production maintenance replay: `ai-bridge plugin-replay` run `20260902T102228Z-4c3b637c7857`, status `completed`, exit code `0`, write isolation `passed`, strict read isolation `false`, final message `preflight_valid_no_product_pass_claimed`, no private plaintext requested.
+- Review 1 writing-style routing replay: `ai-bridge plugin-replay` run `20260902T102406Z-1c57d652ee1a`, status `completed`, exit code `0`, write isolation `passed`, strict read isolation `false`; observed `heavy_should_trigger -> scientific-rewrite`, `light_polish -> chinese-prose / zh`, and `fidelity_only -> writing-fidelity / fidelity`.
+- Review 1 shadow installed marketplace: `codex plugin list` with `CODEX_HOME=/tmp/ai-skills-048-codex-home` showed `yuukias-ai-skills` loaded from `/tmp/ai-skills-048/.agents/plugins/marketplace.json`, with `writing-style@yuukias-ai-skills` installed/enabled from `/tmp/ai-skills-048/plugins/codex/plugins/writing-style` and `ai-skills-core@yuukias-ai-skills` installed/enabled from `/tmp/ai-skills-048/plugins/codex/plugins/ai-skills-core`.
+- Review 1 fresh installed-entrypoint probe: `results/048_writing_style_product_cutover_and_readable_report/production_entrypoint/installed_writing_style_routing_last_message.txt` reported `plugin_id=writing-style@yuukias-ai-skills`, `heavy_should_trigger=[scientific-rewrite, writing-fidelity, chinese-prose]`, `light_polish=[chinese-prose]`, `fidelity_only=[writing-fidelity]`, `private_plaintext_requested=false`, and `final_product_pass_claimed=false`.
+- Review 1 production evidence summary: `results/048_writing_style_product_cutover_and_readable_report/production_entrypoint/PRODUCTION_ENTRYPOINT_EVIDENCE.md`.
 
 Pending gates:
 
-- Branch CI remains unresolved until GitHub Actions runs against the current branch tip containing `7b9e4fa897ac814088c608175c536b652f0a5869`.
+- Branch CI remains unresolved until GitHub Actions runs against the current branch tip with the out-of-scope presentations changes removed.
 - Scheduled GPT Reviewer has not yet advanced the task from `WAITING_FOR_CI`.
 - User reading and explicit `ACCEPT`.
 

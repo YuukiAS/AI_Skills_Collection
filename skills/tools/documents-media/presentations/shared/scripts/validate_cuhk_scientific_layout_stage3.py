@@ -42,16 +42,6 @@ def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def render_probe_status_allowed(render_probe: dict[str, Any], render_status: dict[str, Any], *, allow_missing_render: bool) -> bool:
-    if render_probe.get("status") == "ok":
-        return True
-    return allow_missing_render and render_status.get("status") in {
-        "BLOCKED_MISSING_TEX_ENGINE",
-        "BLOCKED_MISSING_TEX_PACKAGE",
-        "BLOCKED_MISSING_PDF_RENDERER",
-    }
-
-
 def validate(out_dir: Path, *, allow_missing_render: bool = False, task_key: str = DEFAULT_TASK_KEY) -> list[str]:
     errors: list[str] = []
     manifest_path = out_dir / "BUILD_MANIFEST.json"
@@ -284,8 +274,7 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False, task_key: str
         errors.append(f"{dependency_path}: missing TeX engine did not map to BLOCKED_MISSING_TEX_ENGINE")
     if render_probe.get("schema") != "RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1":
         errors.append(f"{render_probe_path}: invalid schema")
-    render_status = manifest.get("render_status", {})
-    if not render_probe_status_allowed(render_probe, render_status, allow_missing_render=allow_missing_render):
+    if render_probe.get("status") != "ok":
         errors.append(f"{render_probe_path}: render-chinese-math-pdf probe failed")
     expected_render_probe = str(render_probe_path.resolve())
     try:
@@ -295,6 +284,7 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False, task_key: str
     if manifest.get("render_chinese_math_pdf_probe") != expected_render_probe:
         errors.append(f"{manifest_path}: render_chinese_math_pdf_probe path not recorded")
 
+    render_status = manifest.get("render_status", {})
     mechanical = manifest.get("mechanical_qa", {})
     if render_status.get("status") == "ok":
         if render_status.get("png_count", 0) < 7:
@@ -305,11 +295,7 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False, task_key: str
                 errors.append(f"{manifest_path}: rendered PNG missing or too small {path}")
         if mechanical.get("status") != "MECHANICAL_PASS":
             errors.append(f"{manifest_path}: mechanical QA did not pass")
-    elif allow_missing_render and render_status.get("status") in {
-        "BLOCKED_MISSING_TEX_ENGINE",
-        "BLOCKED_MISSING_TEX_PACKAGE",
-        "BLOCKED_MISSING_PDF_RENDERER",
-    }:
+    elif allow_missing_render and render_status.get("status") == "BLOCKED_MISSING_TEX_ENGINE":
         if mechanical.get("status") == "MECHANICAL_PASS":
             errors.append(f"{manifest_path}: missing render cannot be mechanical pass")
     else:

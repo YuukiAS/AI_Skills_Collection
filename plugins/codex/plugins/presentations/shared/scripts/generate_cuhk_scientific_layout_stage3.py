@@ -1552,24 +1552,6 @@ def compile_pdf(build_dir: Path) -> dict[str, Any]:
     )
     final_run = runs[-1][1]
     if final_run.returncode != 0 or not pdf.exists():
-        missing_latex_file = None
-        for line in (final_run.stdout + "\n" + final_run.stderr).splitlines():
-            marker = "! LaTeX Error: File `"
-            if line.startswith(marker) and "' not found." in line:
-                missing_latex_file = line.removeprefix(marker).split("' not found.", 1)[0]
-                break
-        if missing_latex_file:
-            return {
-                "status": "BLOCKED_MISSING_TEX_PACKAGE",
-                "engine": engine["command"],
-                "engine_path": engine["path"],
-                "compile_passes": len(runs),
-                "fontconfig": fontconfig,
-                "missing_file": missing_latex_file,
-                "pdf": rel(pdf) if pdf.exists() else None,
-                "log": rel(log_path),
-                "message": f"LaTeX package/file is missing: {missing_latex_file}",
-            }
         return {
             "status": "COMPILE_FAILED",
             "engine": engine["command"],

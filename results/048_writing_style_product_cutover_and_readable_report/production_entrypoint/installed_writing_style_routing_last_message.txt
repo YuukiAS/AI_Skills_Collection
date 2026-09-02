@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "plugin_id": "writing-style@yuukias-ai-skills",
+  "task_key": "048_writing_style_product_cutover_and_readable_report",
+  "identity_observed": true,
+  "routes": {
+    "heavy_should_trigger": ["scientific-rewrite", "writing-fidelity", "chinese-prose"],
+    "light_polish": ["chinese-prose"],
+    "fidelity_only": ["writing-fidelity"]
+  },
+  "installed_skill_names_observed": [
+    "chinese-prose",
+    "scientific-prose",
+    "scientific-rewrite",
+    "writing-fidelity"
+  ],
+  "private_plaintext_requested": false,
+  "final_product_pass_claimed": false
+}
