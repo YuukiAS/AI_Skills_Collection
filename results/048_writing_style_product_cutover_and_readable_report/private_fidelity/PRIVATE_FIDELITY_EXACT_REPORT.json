@@ -4,8 +4,8 @@
   "privacy": "sanitized_no_private_plaintext_or_missing_span_text",
   "source_plaintext_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213",
   "source_plaintext_size_bytes": 75936,
-  "candidate_plaintext_sha256": "773c0a2c2f31b2909015e1405a4a6b38f973f94b9a15cc37edf42bdd4a089c1f",
-  "candidate_plaintext_size_bytes": 63017,
+  "candidate_plaintext_sha256": "f5d64e5a94f244e8201d9fbe3c2b735bcf7558a20e92c2ef13b219c1fa546025",
+  "candidate_plaintext_size_bytes": 63008,
   "raw_helper_check": {
     "ok": false,
     "checked_count": 387,
@@ -25,8 +25,8 @@
     "missing_text_committed": false
   },
   "postprocess": {
-    "kind": "deterministic_tail_removal_and_engineering_table_restore",
-    "reason": "Fresh Text Review found the V3 candidate still had a repeated/truncated tail and incomplete engineering comparison. Removed the stale tail and inserted a single complete reader-facing engineering comparison table before the ODAL overlap section.",
+    "kind": "deterministic_review_phrase_correction",
+    "reason": "Fresh Text Review accepted the current candidate except for an unsupported FedFisher validation-object phrase. Removed the unsupported dFisher wording while preserving the method table.",
     "raw_helper_missing_count_after": 29,
     "raw_helper_missing_by_kind_after": {
       "citation": 11,

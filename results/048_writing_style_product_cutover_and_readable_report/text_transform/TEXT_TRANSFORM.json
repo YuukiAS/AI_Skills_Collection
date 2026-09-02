@@ -1,13 +1,13 @@
 {
   "bridge_kit_commit": "",
-  "created_at": "2026-09-02T08:39:58Z",
+  "created_at": "2026-09-02T08:46:06Z",
   "encrypted_input": {
     "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/input.age",
     "sha256": "cfd14b8886b4813812d6dfd7153e99bb05d70ddf20e7a136d583bac97318e272"
   },
   "encrypted_output": {
     "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/output.age",
-    "sha256": "c33cf73669370834e4b7ef039b708bb8dc54bb82e0c35182630e5287a341f947"
+    "sha256": "4a8a0081ffd50baa5c37365e397ca8f3d90233db35502e19167c09f0f2a54755"
   },
   "evidence_id": "text-transform-048_writing_style_product_cutover_and_readable_report-e1bebe9eebaf",
   "input_manifest": {
@@ -62,8 +62,8 @@
     "schema": "AI_BRIDGE_TEXT_TRANSFORM_MANIFEST_V1"
   },
   "model": "gpt-5.6-terra",
-  "output_plaintext_sha256": "773c0a2c2f31b2909015e1405a4a6b38f973f94b9a15cc37edf42bdd4a089c1f",
-  "output_plaintext_size_bytes": 63017,
+  "output_plaintext_sha256": "f5d64e5a94f244e8201d9fbe3c2b735bcf7558a20e92c2ef13b219c1fa546025",
+  "output_plaintext_size_bytes": 63008,
   "output_public_recipient": {
     "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/output.age.pub",
     "sha256": "f66be35a6abc37b9dce8275b52666f05c13df611e5bb9475c1d3a6ffef3594f3"
@@ -79,8 +79,8 @@
   "transform_kind": "text-transform",
   "workflow_type": "reviewed_handoff",
   "postprocess": {
-    "kind": "deterministic_tail_removal_and_engineering_table_restore",
-    "reason": "Fresh Text Review found the V3 candidate still had a repeated/truncated tail and incomplete engineering comparison. Removed the stale tail and inserted a single complete reader-facing engineering comparison table before the ODAL overlap section.",
+    "kind": "deterministic_review_phrase_correction",
+    "reason": "Fresh Text Review accepted the current candidate except for an unsupported FedFisher validation-object phrase. Removed the unsupported dFisher wording while preserving the method table.",
     "raw_helper_missing_count_after": 29,
     "raw_helper_missing_by_kind_after": {
       "citation": 11,
