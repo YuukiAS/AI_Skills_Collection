@@ -56,5 +56,44 @@
     "reason": "The isolated CODEX_HOME had no local model credentials and OPENAI_API_KEY, OPENAI_REVIEW_API_KEY, and OPENAI_VISUAL_REVIEW_API_KEY were absent in the executor environment. No live auth token or secret was copied from the real Codex home.",
     "produced_artifact_identity": null
   },
-  "verdict": "ISOLATED_MARKETPLACE_INSTALL_AND_ROUTING_VERIFIED_MODEL_ARTIFACT_PENDING_AUTHED_FRESH_SESSION"
+  "planner_revision_1_auth_replay_attempt": {
+    "recorded_at": "2026-09-01T22:20:05-04:00",
+    "non_secret_login_status": "codex login status reported an existing ChatGPT login",
+    "auth_source_path": "/overflow/htzhu/mingcheng_new/.codex-homes/Longleaf_Connection_Bridge/auth.json",
+    "auth_source_content_read": false,
+    "auth_copy_path": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/isolated-codex-047/codex-home/auth.json",
+    "auth_copy_mode": "0600",
+    "auth_copy_removed_after_attempt": true,
+    "fresh_exec_attempted": false,
+    "result": "REJECTED_BY_EXECUTION_APPROVAL_LAYER_BEFORE_MODEL_CALL",
+    "rejection_summary": "The execution approval layer rejected using a copied Codex login to send the private 044 report to the external OpenAI endpoint.",
+    "live_global_plugin_mutation": false,
+    "source_tree_skill_substitute_used": false,
+    "private_044_sent_by_this_attempt": false,
+    "produced_artifact_identity": null
+  },
+  "user_authorization_receipt": {
+    "recorded_at": "2026-09-01T22:20:05-04:00",
+    "artifact_scope": "044 known-regression report",
+    "provider": "OpenAI/Codex",
+    "purpose": "047 isolated production-entrypoint regression replay and required review preparation",
+    "credential_mode": "task-local temporary auth.json copy",
+    "live_global_plugin_cache_mutation_allowed": false,
+    "commit_or_push_auth_token_or_private_plaintext_allowed": false,
+    "print_secret_allowed": false
+  },
+  "post_authorization_replay_attempt": {
+    "auth_copy_recreated": true,
+    "auth_copy_mode": "0600",
+    "fresh_exec_attempted": false,
+    "result": "REJECTED_BY_EXECUTION_APPROVAL_LAYER_BEFORE_MODEL_CALL",
+    "rejection_summary": "The execution approval layer rejected sending the private 044 report to the external OpenAI endpoint under tenant policy even after explicit user authorization.",
+    "workaround_attempted": false,
+    "indirect_execution_attempted": false,
+    "auth_copy_removed_after_attempt": true,
+    "private_044_sent_by_this_attempt": false,
+    "live_global_plugin_mutation": false,
+    "produced_artifact_identity": null
+  },
+  "verdict": "ISOLATED_MARKETPLACE_INSTALL_AND_ROUTING_VERIFIED_MODEL_ARTIFACT_UNAVAILABLE_UNDER_EXECUTION_POLICY"
 }

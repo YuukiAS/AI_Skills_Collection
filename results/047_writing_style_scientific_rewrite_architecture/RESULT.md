@@ -157,6 +157,56 @@ Detailed evidence:
 results/047_writing_style_scientific_rewrite_architecture/isolated_production_replay/
 ```
 
+## Planner Revision 1 Auth Replay Attempt
+
+Planner revision 1 authorized a narrow task-local copy of the current Codex
+login file into the isolated `CODEX_HOME`, with no symlink and no live global
+plugin/cache mutation.
+
+Executor performed only non-secret checks:
+
+- `codex login status` reported an existing ChatGPT login;
+- the active `CODEX_HOME` was
+  `/overflow/htzhu/mingcheng_new/.codex-homes/Longleaf_Connection_Bridge`;
+- an `auth.json` file was present there, but its contents were not read,
+  printed, committed, uploaded, or hashed.
+
+Executor copied it once into the isolated task-local `CODEX_HOME` with mode
+`0600`. The fresh isolated `codex exec --ephemeral` production replay command
+was then rejected by the execution approval layer before it ran, because it
+would use the copied Codex login to send the private 044 report to the external
+OpenAI endpoint.
+
+Executor did not retry through a workaround, did not run a source-tree skill as
+a substitute, did not mutate live global plugin state, and did not send the 044
+private report through this attempt. The isolated auth copy was removed
+immediately afterwards; the cleanup check reported `auth_copy_removed`.
+
+No model-produced 044 candidate rewrite artifact exists from this attempt.
+
+The user then explicitly authorized one-time replay for:
+
+- artifact scope: 044 known-regression report;
+- provider: OpenAI/Codex;
+- purpose: 047 isolated production-entrypoint regression replay and required
+  review preparation;
+- credential mode: task-local temporary `auth.json` copy.
+
+The same live-global prohibitions remained in force: no live global plugin
+cache mutation, no committed/pushed auth/token/private 044 plaintext, and no
+printed secrets.
+
+Executor re-created the task-local auth copy with mode `0600` and retried the
+same fresh isolated production-entrypoint command. The execution approval layer
+again rejected the command before it ran, stating that sending the private 044
+report to the external OpenAI endpoint is disallowed by tenant policy even
+after explicit user authorization. Executor did not attempt a workaround or
+indirect execution, and removed the task-local auth copy again
+(`auth_copy_removed`).
+
+No model-produced 044 candidate rewrite artifact exists after the authorized
+retry.
+
 ## Remaining Gap
 
 The 044 fresh private candidate artifact was not produced. This is not an
@@ -169,7 +219,12 @@ session:
   while inheriting local proxy variables;
 - after proxy variables were unset, it reached the OpenAI endpoint and failed
   with `401 Unauthorized: Missing bearer or basic authentication in header`;
-- no live auth token or secret was copied from the real Codex home;
+- no live auth token or secret was copied from the real Codex home before
+  Planner revision 1;
+- after Planner revision 1, a task-local auth copy path was attempted but the
+  actual external model replay was rejected by the execution approval layer and
+  the copy was removed; after explicit user authorization, the approval layer
+  rejected the same command again under tenant policy;
 - no current live global Codex Marketplace/plugin cache was modified.
 
 Because the final private 044 artifact does not exist, the required encrypted
@@ -184,8 +239,11 @@ CI-required text-review tasks to publish encrypted payload + manifest before
 `WAITING_FOR_CI`; doing so without the 044 fresh private artifact would
 fabricate product evidence.
 
-Therefore this handoff is `NEEDS_GPT_PLANNER`, with review counters unchanged
-and `ci_status=PENDING`.
+Therefore this handoff cannot enter `WAITING_FOR_CI` or
+`READY_FOR_GPT_REVIEW` truthfully. Since the single allowed plan revision has
+already been used, this run requires final human/Planner disposition of the
+private 044 production replay gate. Review counters remain unchanged and
+`ci_status=PENDING`.
 
 ## Planner Question
 
