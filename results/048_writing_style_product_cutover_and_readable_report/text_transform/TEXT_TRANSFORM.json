@@ -1,0 +1,81 @@
+{
+  "bridge_kit_commit": "",
+  "created_at": "2026-09-02T07:51:14Z",
+  "encrypted_input": {
+    "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/input.age",
+    "sha256": "aece33b6b4fe6e14d33b9e9b1c845ddc27590be62b1d4b9830ccb85bce9a9942"
+  },
+  "encrypted_output": {
+    "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/output.age",
+    "sha256": "446f803e8dab36dfa13a206526568e7891f7e01a7b73b0990e9cad04d5833f50"
+  },
+  "evidence_id": "text-transform-048_writing_style_product_cutover_and_readable_report-b3391066c3d3",
+  "input_manifest": {
+    "external_upload_authorization_recorded": true,
+    "identity_bindings": {
+      "implementation_commit": "928de2325d781ca630883d03e0f381092675b269"
+    },
+    "instructions": {
+      "bundle_sha256": "916c1d4881dc64a4c5f7679da532c11047e52e018dc28287c4824f3858526de8",
+      "files": [
+        {
+          "mime_type": "text/markdown; charset=utf-8",
+          "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/SKILL.md",
+          "sha256": "d6a5821c7f635a459a40d99c8e5ec0b87f459f52871056a65fc8c2b597b844b2",
+          "size_bytes": 10693
+        },
+        {
+          "mime_type": "text/markdown; charset=utf-8",
+          "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/references/meaning-card-and-fidelity-ledger.md",
+          "sha256": "679dfb8a8a28f8b93b7e7669c474efcb5023f23caba630a3e7ed27a306d38e1b",
+          "size_bytes": 2197
+        },
+        {
+          "mime_type": "text/markdown; charset=utf-8",
+          "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/references/positive-style-contract.md",
+          "sha256": "8527b0e99d2b2f258704f59911dd370edf6999655beef841a2f89a588013fc59",
+          "size_bytes": 1525
+        },
+        {
+          "mime_type": "application/json; charset=utf-8",
+          "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/references/seed-transformations.json",
+          "sha256": "dc8996a0124bfebc71708c82336d6a285f0fc1d3446d5441ea2717fb97234c64",
+          "size_bytes": 8270
+        },
+        {
+          "mime_type": "text/markdown; charset=utf-8",
+          "path": "plugins/codex/plugins/writing-style/skills/fidelity/SKILL.md",
+          "sha256": "bdfed30b315c23e986bd00b513b57c3dda96ceebc759b50a91c8a117954c11f0",
+          "size_bytes": 9631
+        },
+        {
+          "mime_type": "text/markdown; charset=utf-8",
+          "path": "plugins/codex/plugins/writing-style/skills/zh/SKILL.md",
+          "sha256": "02c671fc37e3604ffb41e928996f1277b1a46f79215a71023a6264eeed885f0b",
+          "size_bytes": 17220
+        }
+      ],
+      "goal": "Rewrite the complete private Chinese scientific report into natural reader-facing Chinese according to the bound writing-style scientific-rewrite instructions. Preserve facts, numbers, formulas, citations, terminology, caveats, uncertainty, comparisons, attribution, decision logic, and conclusion strength. Do not summarize; return the complete rewritten Markdown/plain text."
+    },
+    "manifest_sha256": "b3391066c3d36729a40e4030b3e5d6c35b6029a4023780a5dbf9245dfb979ac0",
+    "privacy_policy": "PRIVATE_TEXT_TRANSFORM_AUTHORIZED",
+    "schema": "AI_BRIDGE_TEXT_TRANSFORM_MANIFEST_V1"
+  },
+  "model": "gpt-5.6-terra",
+  "output_plaintext_sha256": "38436117db6cd7b3c31ca327f255d729bcbc02b5fdc73de304a9bc7977fe802c",
+  "output_plaintext_size_bytes": 63020,
+  "output_public_recipient": {
+    "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/output.age.pub",
+    "sha256": "f66be35a6abc37b9dce8275b52666f05c13df611e5bb9475c1d3a6ffef3594f3"
+  },
+  "plaintext_committed": false,
+  "prompt_version": "ai-bridge.text-transform.v1",
+  "schema": "AI_BRIDGE_TEXT_TRANSFORM_V1",
+  "source_plaintext_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213",
+  "source_plaintext_size_bytes": 75936,
+  "store": false,
+  "task_key": "048_writing_style_product_cutover_and_readable_report",
+  "transform_identity": "b3391066c3d36729a40e4030b3e5d6c35b6029a4023780a5dbf9245dfb979ac0",
+  "transform_kind": "text-transform",
+  "workflow_type": "reviewed_handoff"
+}
