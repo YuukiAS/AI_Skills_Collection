@@ -1182,6 +1182,42 @@ def call_openai_json(
     return parse_json_object(raw, stage)
 
 
+def call_openai_json_validated(
+    stage: str,
+    prompt: str,
+    payload: Any,
+    *,
+    model: str,
+    api_key: str,
+    required: list[str],
+    validator: Callable[[dict[str, Any]], dict[str, Any]],
+    retries: int = 1,
+) -> dict[str, Any]:
+    last_error = ""
+    for attempt in range(retries + 1):
+        stage_prompt = prompt
+        if attempt:
+            stage_prompt = (
+                f"{prompt}\n\nYour previous JSON for stage `{stage}` failed validation: {last_error}. "
+                "Return a corrected JSON object only. Do not omit required fields, do not use empty strings for required semantic labels, "
+                "and keep all identifiers bound to the supplied source_span_ids/proposition_ids."
+            )
+        try:
+            return validator(
+                call_openai_json(
+                    stage,
+                    stage_prompt,
+                    payload,
+                    model=model,
+                    api_key=api_key,
+                    required=required,
+                )
+            )
+        except RuntimeError as exc:
+            last_error = str(exc)
+    raise RuntimeError(f"{stage} failed structured validation after retry: {last_error}")
+
+
 def deterministic_reader_review(candidate: str, unit_ids: list[str]) -> dict[str, Any]:
     required_context = {
         "provenance": ["来源", "来路", "从哪里来"],
@@ -1251,34 +1287,35 @@ def run_multistage(
     packets: list[dict[str, Any]] = []
     doc_map_input = {"source": source, "source_spans": [asdict(span) for span in spans]}
     if driver == "openai-responses":
-        doc_map = normalize_document_map(
-            call_openai_json(
-                "document-map",
-                (
-                    "Map the document purpose, intended reader, section roles, terminology, "
-                    "major claims, evidence, caveats, negative findings, decisions, reader priorities, "
-                    "and trace-material categories. Do not rewrite prose."
-                ),
-                doc_map_input,
-                model=model,
-                api_key=api_key,
-                required=[
-                    "audience",
-                    "document_purpose",
-                    "core_research_question",
-                    "section_roles",
-                    "major_claims",
-                    "major_evidence",
-                    "major_uncertainties",
-                    "major_negative_findings",
-                    "major_decisions",
-                    "cross_section_dependencies",
-                    "terminology_contract",
-                    "reader_core_priorities",
-                    "trace_material_categories",
-                ],
+        doc_map_required = [
+            "audience",
+            "document_purpose",
+            "core_research_question",
+            "section_roles",
+            "major_claims",
+            "major_evidence",
+            "major_uncertainties",
+            "major_negative_findings",
+            "major_decisions",
+            "cross_section_dependencies",
+            "terminology_contract",
+            "reader_core_priorities",
+            "trace_material_categories",
+        ]
+        doc_map = call_openai_json_validated(
+            "document-map",
+            (
+                "Map the document purpose, intended reader, section roles, terminology, "
+                "major claims, evidence, caveats, negative findings, decisions, reader priorities, "
+                "and trace-material categories. Do not rewrite prose. "
+                "Use non-empty concise strings for audience, document_purpose, and core_research_question. "
+                "For objects that refer to source material, include source_span_ids from the supplied source_spans."
             ),
-            spans,
+            doc_map_input,
+            model=model,
+            api_key=api_key,
+            required=doc_map_required,
+            validator=lambda raw: normalize_document_map(raw, spans),
         )
     else:
         doc_map = normalize_document_map(document_map(source, spans), spans)
@@ -1295,20 +1332,20 @@ def run_multistage(
 
     segmentation_input = {"document_map": doc_map, "source_spans": [asdict(span) for span in spans]}
     if driver == "openai-responses":
-        segmentation = normalize_segmentation(
-            call_openai_json(
-                "argument-segmentation",
-                (
-                    "Segment the source into argument units. Use source_span_ids. "
-                    "A unit is normally one small subsection or 2-5 tightly related paragraphs. "
-                    "Do not collapse long multi-span text into one unit."
-                ),
-                segmentation_input,
-                model=model,
-                api_key=api_key,
-                required=["units"],
+        segmentation = call_openai_json_validated(
+            "argument-segmentation",
+            (
+                "Segment the source into argument units. Use source_span_ids. "
+                "A unit is normally one small subsection or 2-5 tightly related paragraphs. "
+                "Do not collapse long multi-span text into one unit. "
+                "Every units[] item must contain a non-empty unit_id, source_span_ids, argument_role, "
+                "and why_these_spans_belong_together."
             ),
-            spans,
+            segmentation_input,
+            model=model,
+            api_key=api_key,
+            required=["units"],
+            validator=lambda raw: normalize_segmentation(raw, spans),
         )
     else:
         segmentation = normalize_segmentation(deterministic_segmentation(spans), spans)
@@ -1344,42 +1381,43 @@ def run_multistage(
             "next_heading": next_heading,
         }
         if driver == "openai-responses":
-            card = normalize_meaning_card(
-                call_openai_json(
-                    f"{unit.unit_id}-meaning-card",
-                    (
-                        "Create a structured Meaning Card and Fidelity Ledger for this single argument unit. "
-                        "Normalize the meaning into natural Chinese concepts; do not copy source sentence order as the semantic representation. "
-                        "Bind every required source proposition id to a semantic item. Do not rewrite prose."
-                    ),
-                    card_input,
-                    model=model,
-                    api_key=api_key,
-                    required=[
-                        "unit_id",
-                        "reader_job",
-                        "plain_meaning",
-                        "claims",
-                        "evidence",
-                        "conditions",
-                        "comparators",
-                        "uncertainty",
-                        "caveats",
-                        "negative_findings",
-                        "attribution",
-                        "decision_logic",
-                        "terminology",
-                        "literal_items",
-                        "relocatable_trace_items",
-                        "relation_to_previous",
-                        "relation_to_next",
-                        "rewrite_problem",
-                        "discourse_function",
-                        "reader_takeaway",
-                    ],
+            meaning_required = [
+                "unit_id",
+                "reader_job",
+                "plain_meaning",
+                "claims",
+                "evidence",
+                "conditions",
+                "comparators",
+                "uncertainty",
+                "caveats",
+                "negative_findings",
+                "attribution",
+                "decision_logic",
+                "terminology",
+                "literal_items",
+                "relocatable_trace_items",
+                "relation_to_previous",
+                "relation_to_next",
+                "rewrite_problem",
+                "discourse_function",
+                "reader_takeaway",
+            ]
+            card = call_openai_json_validated(
+                f"{unit.unit_id}-meaning-card",
+                (
+                    "Create a structured Meaning Card and Fidelity Ledger for this single argument unit. "
+                    "Normalize the meaning into natural Chinese concepts; do not copy source sentence order as the semantic representation. "
+                    "Bind every required source proposition id to a semantic item. Do not rewrite prose. "
+                    "At least one semantic item across claims/evidence/conditions/comparators/uncertainty/caveats/"
+                    "negative_findings/attribution/decision_logic must cover every supplied source_proposition_id. "
+                    "Each semantic item must include non-empty normalized_meaning, source_span_ids, and source_proposition_ids."
                 ),
-                unit,
-                propositions,
+                card_input,
+                model=model,
+                api_key=api_key,
+                required=meaning_required,
+                validator=lambda raw, unit=unit, propositions=propositions: normalize_meaning_card(raw, unit, propositions),
             )
         else:
             card = normalize_meaning_card(meaning_card(unit, doc_map, previous_heading, next_heading), unit, propositions)
@@ -1424,22 +1462,20 @@ def run_multistage(
         if stage_dir:
             write_json(stage_dir / f"{unit.unit_id}.writer-packet.json", packet)
         if driver == "openai-responses":
-            unit_result = normalize_writer_result(
-                call_openai_json(
-                    f"{unit.unit_id}-writer",
-                    (
-                        "Rewrite only the current argument unit. Return structured JSON with reader_core and technical_trace. "
-                        "Use the validated Document Map and Meaning Card as the organization authority while keeping the original unit as fact authority. "
-                        "Do not follow source sentence order when it makes the reader decode audit/process labels first. "
-                        "Relocate trace-heavy exact paths or implementation identifiers into technical_trace when appropriate."
-                    ),
-                    packet,
-                    model=model,
-                    api_key=api_key,
-                    required=["reader_core", "technical_trace", "source_coverage_ids", "relocated_trace_ids"],
+            unit_result = call_openai_json_validated(
+                f"{unit.unit_id}-writer",
+                (
+                    "Rewrite only the current argument unit. Return structured JSON with reader_core and technical_trace. "
+                    "Use the validated Document Map and Meaning Card as the organization authority while keeping the original unit as fact authority. "
+                    "Do not follow source sentence order when it makes the reader decode audit/process labels first. "
+                    "Relocate trace-heavy exact paths or implementation identifiers into technical_trace when appropriate. "
+                    "source_coverage_ids must include every supplied source proposition id."
                 ),
-                unit,
-                propositions,
+                packet,
+                model=model,
+                api_key=api_key,
+                required=["reader_core", "technical_trace", "source_coverage_ids", "relocated_trace_ids"],
+                validator=lambda raw, unit=unit, propositions=propositions: normalize_writer_result(raw, unit, propositions),
             )
         else:
             unit_result = normalize_writer_result(deterministic_unit_rewrite(unit), unit, propositions)
@@ -1462,20 +1498,18 @@ def run_multistage(
         exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=unit_result["reader_core"])
         semantic_input = {"source_unit": unit.text, "candidate": unit_result, "meaning_card": card, "exact": exact}
         if driver == "openai-responses":
-            semantic = normalize_semantic_audit(
-                call_openai_json(
-                    f"{unit.unit_id}-semantic-audit",
-                    (
-                        "Audit semantic preservation for this unit. Check polarity, scope, conditions, comparators, causality, uncertainty, "
-                        "attribution, negative findings, decision logic and conclusion strength. Return PASS or REVISE with findings."
-                    ),
-                    semantic_input,
-                    model=model,
-                    api_key=api_key,
-                    required=["decision", "findings"],
+            semantic = call_openai_json_validated(
+                f"{unit.unit_id}-semantic-audit",
+                (
+                    "Audit semantic preservation for this unit. Check polarity, scope, conditions, comparators, causality, uncertainty, "
+                    "attribution, negative findings, decision logic and conclusion strength. Return PASS or REVISE with findings. "
+                    "Each finding must use one of these statuses: preserved, narrowed, broadened, reversed, invented, omitted, reattributed."
                 ),
-                unit,
-                propositions,
+                semantic_input,
+                model=model,
+                api_key=api_key,
+                required=["decision", "findings"],
+                validator=lambda raw, unit=unit, propositions=propositions: normalize_semantic_audit(raw, unit, propositions),
             )
         else:
             semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit), unit, propositions)
@@ -1505,20 +1539,17 @@ def run_multistage(
                 "semantic": semantic,
             }
             if driver == "openai-responses":
-                repaired = normalize_writer_result(
-                    call_openai_json(
-                        f"{unit.unit_id}-targeted-repair",
-                        (
-                            "Repair only the current rewritten unit. Preserve all source facts and return the same structured writer JSON fields. "
-                            "Do not rewrite unrelated units."
-                        ),
-                        repair_payload,
-                        model=model,
-                        api_key=api_key,
-                        required=["reader_core", "technical_trace", "source_coverage_ids", "relocated_trace_ids"],
+                repaired = call_openai_json_validated(
+                    f"{unit.unit_id}-targeted-repair",
+                    (
+                        "Repair only the current rewritten unit. Preserve all source facts and return the same structured writer JSON fields. "
+                        "Do not rewrite unrelated units. source_coverage_ids must include every supplied source proposition id."
                     ),
-                    unit,
-                    propositions,
+                    repair_payload,
+                    model=model,
+                    api_key=api_key,
+                    required=["reader_core", "technical_trace", "source_coverage_ids", "relocated_trace_ids"],
+                    validator=lambda raw, unit=unit, propositions=propositions: normalize_writer_result(raw, unit, propositions),
                 )
             else:
                 repaired = normalize_writer_result(apply_textual_repair(unit_result, "保留原文中遗漏的事实和限制。"), unit, propositions)
@@ -1540,17 +1571,14 @@ def run_multistage(
             combined_unit = "\n\n".join(part for part in [unit_result["reader_core"], unit_result["technical_trace"]] if part)
             exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=unit_result["reader_core"])
             if driver == "openai-responses":
-                semantic = normalize_semantic_audit(
-                    call_openai_json(
-                        f"{unit.unit_id}-post-repair-semantic-audit",
-                        "Re-audit semantic preservation after targeted repair. Return PASS or REVISE with findings.",
-                        {"source_unit": unit.text, "candidate": unit_result, "meaning_card": card, "exact": exact},
-                        model=model,
-                        api_key=api_key,
-                        required=["decision", "findings"],
-                    ),
-                    unit,
-                    propositions,
+                semantic = call_openai_json_validated(
+                    f"{unit.unit_id}-post-repair-semantic-audit",
+                    "Re-audit semantic preservation after targeted repair. Return PASS or REVISE with findings.",
+                    {"source_unit": unit.text, "candidate": unit_result, "meaning_card": card, "exact": exact},
+                    model=model,
+                    api_key=api_key,
+                    required=["decision", "findings"],
+                    validator=lambda raw, unit=unit, propositions=propositions: normalize_semantic_audit(raw, unit, propositions),
                 )
             else:
                 semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit), unit, propositions)
@@ -1586,19 +1614,18 @@ def run_multistage(
         write_json(stage_dir / "candidate-only-reader-review.packet.json", reader_packet)
     known_unit_ids = {unit.unit_id for unit in units}
     if driver == "openai-responses":
-        reader_review = normalize_reader_review(
-            call_openai_json(
-                "candidate-only-reader-review",
-                (
-                    "Review only the candidate text for reader comprehension. The source text is intentionally unavailable. "
-                    "Return whether a technically trained reader can answer the required questions without decoding internal workflow labels."
-                ),
-                reader_packet,
-                model=model,
-                api_key=api_key,
-                required=["decision", "questions", "findings"],
+        reader_review = call_openai_json_validated(
+            "candidate-only-reader-review",
+            (
+                "Review only the candidate text for reader comprehension. The source text is intentionally unavailable. "
+                "Return whether a technically trained reader can answer the required questions without decoding internal workflow labels. "
+                "Each questions[] item must include boolean answerable and non-empty inferred_answer."
             ),
-            known_unit_ids,
+            reader_packet,
+            model=model,
+            api_key=api_key,
+            required=["decision", "questions", "findings"],
+            validator=lambda raw: normalize_reader_review(raw, known_unit_ids),
         )
     else:
         reader_review = normalize_reader_review(deterministic_reader_review(candidate, [unit.unit_id for unit in units]), known_unit_ids)
@@ -1634,20 +1661,17 @@ def run_multistage(
                 "reader_review": reader_review,
             }
             if driver == "openai-responses":
-                repaired = normalize_writer_result(
-                    call_openai_json(
-                        f"{unit_id}-reader-targeted-repair",
-                        (
-                            "Repair this unit only for reader effort and clarity while preserving the Meaning Card and all source facts. "
-                            "Return the structured writer JSON fields."
-                        ),
-                        payload,
-                        model=model,
-                        api_key=api_key,
-                        required=["reader_core", "technical_trace", "source_coverage_ids", "relocated_trace_ids"],
+                repaired = call_openai_json_validated(
+                    f"{unit_id}-reader-targeted-repair",
+                    (
+                        "Repair this unit only for reader effort and clarity while preserving the Meaning Card and all source facts. "
+                        "Return the structured writer JSON fields. source_coverage_ids must include every source proposition id from the Meaning Card."
                     ),
-                    unit,
-                    unit_propositions[unit_id],
+                    payload,
+                    model=model,
+                    api_key=api_key,
+                    required=["reader_core", "technical_trace", "source_coverage_ids", "relocated_trace_ids"],
+                    validator=lambda raw, unit=unit, props=unit_propositions[unit_id]: normalize_writer_result(raw, unit, props),
                 )
             else:
                 repaired = normalize_writer_result(apply_textual_repair(rewritten_units[unit_index], "先说明具体研究含义，再保留必要术语。"), unit, unit_propositions[unit_id])
@@ -1669,17 +1693,14 @@ def run_multistage(
             combined_unit = "\n\n".join(part for part in [repaired["reader_core"], repaired["technical_trace"]] if part)
             exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=repaired["reader_core"])
             if driver == "openai-responses":
-                semantic = normalize_semantic_audit(
-                    call_openai_json(
-                        f"{unit_id}-reader-repair-semantic-audit",
-                        "Audit semantic preservation after reader-targeted repair. Return PASS or REVISE with findings.",
-                        {"source_unit": unit.text, "candidate": repaired, "meaning_card": unit_cards[unit_id], "exact": exact},
-                        model=model,
-                        api_key=api_key,
-                        required=["decision", "findings"],
-                    ),
-                    unit,
-                    unit_propositions[unit_id],
+                semantic = call_openai_json_validated(
+                    f"{unit_id}-reader-repair-semantic-audit",
+                    "Audit semantic preservation after reader-targeted repair. Return PASS or REVISE with findings.",
+                    {"source_unit": unit.text, "candidate": repaired, "meaning_card": unit_cards[unit_id], "exact": exact},
+                    model=model,
+                    api_key=api_key,
+                    required=["decision", "findings"],
+                    validator=lambda raw, unit=unit, props=unit_propositions[unit_id]: normalize_semantic_audit(raw, unit, props),
                 )
             else:
                 semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit), unit, unit_propositions[unit_id])
@@ -1703,16 +1724,14 @@ def run_multistage(
         candidate = reader_core if not traces else f"{reader_core}\n\n## Technical / Evidence Appendix\n\n{traces}\n"
         reader_packet = reader_review_packet(candidate, doc_map["audience"])
         if driver == "openai-responses":
-            reader_review = normalize_reader_review(
-                call_openai_json(
-                    "candidate-only-reader-review-rerun",
-                    "Re-review only the repaired candidate text for reader comprehension. Return PASS or REVISE.",
-                    reader_packet,
-                    model=model,
-                    api_key=api_key,
-                    required=["decision", "questions", "findings"],
-                ),
-                known_unit_ids,
+            reader_review = call_openai_json_validated(
+                "candidate-only-reader-review-rerun",
+                "Re-review only the repaired candidate text for reader comprehension. Return PASS or REVISE.",
+                reader_packet,
+                model=model,
+                api_key=api_key,
+                required=["decision", "questions", "findings"],
+                validator=lambda raw: normalize_reader_review(raw, known_unit_ids),
             )
         else:
             reader_review = normalize_reader_review(deterministic_reader_review(candidate, [unit.unit_id for unit in units]), known_unit_ids)
@@ -1740,19 +1759,17 @@ def run_multistage(
         ],
     }
     if driver == "openai-responses":
-        assembly_review = normalize_assembly_review(
-            call_openai_json(
-                "final-assembly-coherence",
-                (
-                    "Check final assembly coherence using the actual candidate text, transitions, terminology, repeated definitions, "
-                    "heading quality, local style outliers and conclusion progression. Do not rewrite the whole document."
-                ),
-                assembly_input,
-                model=model,
-                api_key=api_key,
-                required=["decision", "findings"],
+        assembly_review = call_openai_json_validated(
+            "final-assembly-coherence",
+            (
+                "Check final assembly coherence using the actual candidate text, transitions, terminology, repeated definitions, "
+                "heading quality, local style outliers and conclusion progression. Do not rewrite the whole document."
             ),
-            known_unit_ids,
+            assembly_input,
+            model=model,
+            api_key=api_key,
+            required=["decision", "findings"],
+            validator=lambda raw: normalize_assembly_review(raw, known_unit_ids),
         )
     else:
         assembly_review = normalize_assembly_review(deterministic_assembly_review(candidate), known_unit_ids)
