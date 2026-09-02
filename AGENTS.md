@@ -274,6 +274,45 @@ reviewed/045_presentations_real_use_regression_hardening
 
 每个 `BLOCKED` 必须说明：实际失败、观测证据、检查过哪些恢复路径、为什么都不能工作，以及恢复方式（若存在）。approval prompt、missing-but-locatable artifact、可回答的 branch/path 问题、普通 merge conflict 本身都不是 BLOCKED 理由。
 
+### 8.2.1 私有 artifact、credential 与重复授权边界
+
+生产回放和 artifact review 必须区分“普通可逆执行细节”与“真正需要用户授权的外部动作”。不要为了谨慎把所有 credential 相关步骤都反复问用户，也不要因为已经有某一种授权就擅自扩大到另一种传输路径。
+
+**Executor 默认自行处理，不需要用户重复批准：**
+
+- clone/fetch public repository；
+- 在 task-owned isolated/shadow home、cache、worktree 中写临时文件；
+- user-space 安装任务所需的公开工具；
+- 检查 GitHub repository secret 的名称是否 `PRESENT/MISSING`，但不得读取 secret value；
+- 使用 repository 中公开的 age recipient 做本地加密；
+- 通过已经配置并且已经被本 task 明确授权的 GitHub Actions/Text Review 路径消费 repository secrets；
+- deterministic local checks、生成 encrypted payload/manifest、等待 CI/Planner/Reviewer；
+- 删除 task-local 可恢复临时文件和隔离 cache。
+
+**以下动作必须有用户明确授权，不能从“以前做过类似事情”自动推导：**
+
+- 把尚未公开的用户文档、研究报告、专有数据、临床/患者材料或其他 private artifact 发送到新的外部 endpoint/provider；
+- 将 `auth.json`、token-bearing config、credential file 或等价认证材料复制到新的运行环境，即使目标是 task-local isolated home；
+- 使用新的账户、credential、第三方服务或扩大 credential scope；
+- 修改 live global plugin installation/cache、真实账户状态或其他 session 正在使用的共享外部状态；
+- destructive Git/远端删除、不可逆外部写入，或显著扩大原批准的数据范围/用途。
+
+**同一授权不得重复询问。** 用户一旦明确批准了“具体 artifact / 数据类别 + 具体 provider/endpoint + 具体 purpose + credential 使用方式”，Executor 必须在 task-local non-secret evidence 中记录一个简短 authorization receipt，并在同一 task、同一范围内直接继续；不得在每次 replay、retry、Text Review 或 fresh session 时重新问。只有 artifact/data scope、provider/endpoint、purpose、credential scope 或 live-global mutation 边界发生实质变化时，才允许再次请求授权。
+
+不同传输路径不是自动等价授权。例如，用户批准 `age -> GitHub Actions -> OpenAI Text Review`，并不自动等于批准“复制本地 Codex `auth.json` 到 isolated home 并通过 Codex session 发送同一 private artifact”。后者第一次仍需单独授权；一旦用户为该 bounded task 授权，就应记录并在该 task 内复用，不再重复询问。
+
+任何情况下都不得打印、commit、push、回显或要求用户粘贴 secret value。若正式路径使用 GitHub repository secrets，本地 shell 中对应环境变量 `unset` 不是 blocker。task 完成后应删除 task-local credential 副本和不再需要的 private plaintext 临时副本，但保留不含秘密的授权范围、artifact hash、provider/purpose 和删除结果作为 evidence。
+
+### 8.2.2 已停止 task 的 artifact 只能作为显式冻结的只读回归输入
+
+一个旧 Reviewed Handoff task 被停止、废弃或设为只读，不等于它的真实失败 artifact 必须被遗忘。后续新 task 可以把旧 artifact 当作 `KNOWN_REGRESSION`，但只有在新 task 的 REQUEST/PLAN 明确冻结了该用途时才允许读取或 replay。
+
+- 复用旧 artifact 不得重新开启、修改、merge 或消费旧 task 的 Reviewer budget/state；
+- 旧 artifact 只能证明 regression closure，不能重新冒充 unseen holdout；
+- 若新 Plan 没有明确要求该 regression replay，Executor 不得因为“以前用过”自行发送、重跑或上传旧 private artifact；
+- 若新 Plan 明确要求，而 replay 又涉及新的 private external transmission / credential path，则仍按 8.2.1 的授权边界执行；
+- regression 完成后 evidence 应归属新 task，不回写篡改旧 task 历史。
+
 ### 8.3 Artifact-aware review
 
 Reviewed Handoff 必须区分：
