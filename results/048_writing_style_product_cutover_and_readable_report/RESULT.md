@@ -4,7 +4,7 @@ task_key: 048_writing_style_product_cutover_and_readable_report
 executor: Codex
 implementation_commit: 928de2325d781ca630883d03e0f381092675b269
 status: WAITING_FOR_CI
-ci_status: PENDING
+ci_status: FAIL
 ---
 
 # 048 Writing Style Product Cutover and Readable Report - Result
@@ -23,7 +23,8 @@ Revision 1 implementation is ready for CI and external review evidence. The Exec
 - located the canonical private source and generated encrypted text-transform input under `results/048_writing_style_product_cutover_and_readable_report/text_transform/`;
 - received encrypted GitHub Actions text-transform output and locally decrypted it without committing plaintext;
 - repaired stale Text Review blocker rounds by rebuilding the candidate from the stronger-goal model output, removing duplicate/truncated deterministic restore artifacts, deleting the unreadable literal-fragment appendix, removing the remaining repeated/truncated tail, restoring the engineering comparison as a single reader-facing method table, and correcting the final unsupported `dFisher` phrase flagged by Text Review;
-- generated encrypted full-report Text Review input under `results/048_writing_style_product_cutover_and_readable_report/text_review/`.
+- generated encrypted full-report Text Review input under `results/048_writing_style_product_cutover_and_readable_report/text_review/`;
+- received fresh Text Review PASS evidence at `f0ea58f`.
 
 ## Current Evidence
 
@@ -46,7 +47,7 @@ plan_revision=1
 max_plan_revisions=1
 implementation_commit=928de2325d781ca630883d03e0f381092675b269
 ci_required=true
-ci_status=PENDING
+ci_status=PENDING in `CURRENT.json`; observed GitHub `Codex Marketplace` CI for the current published handoff failed on out-of-scope presentations render-probe tests.
 ```
 
 Local gates passed so far:
@@ -64,12 +65,14 @@ Local gates passed so far:
 - GitHub Actions `ai-bridge-text-transform` for the full private report: PASS, `store=false`, plaintext not committed.
 - Local decrypt of `output.age`: PASS; plaintext SHA matched `TEXT_TRANSFORM.json`.
 - Sanitized deterministic private fidelity report: raw helper checked 387 spans and leaves 29 citation/path extractor misses after the current tail-removal, engineering-table, and reviewed phrase repair. Missing span text is not committed; semantic acceptability is intentionally delegated to fresh private Text Review rather than claimed from the helper alone.
-- Encrypted full-report Text Review request: regenerated for the current repaired candidate; plaintext bundle remains local/private only and the old stale `TEXT_REVIEW.json` has been removed.
+- Encrypted full-report Text Review request: regenerated for the current repaired candidate; plaintext bundle remains local/private only.
+- Fresh GitHub Actions Text Review evidence at `f0ea58f`: PASS, `blocking_findings=[]`, reviewed payload SHA `e5ad5f00771301e86d0009fc43354eaed45d5b00a8df1acdd8f420d62af86563`, plaintext bundle SHA `f640a48c879195b89e11335f3b65df3804bc49caf71cb130d5595321ddb61db3`.
+- Observed GitHub Actions `Codex Marketplace` run `33610658349`: FAIL. The three failures are all in `tests/test_presentations.py` and report `render_chinese_math_pdf_probe.json: render probe failed`; no `writing-style` or text-transform test failed in that run.
 
 Pending gates:
 
-- Fresh `TEXT_REVIEW.json` for the current repaired Text Review bundle.
-- Branch CI and Scheduled GPT Reviewer.
+- Branch CI remains unresolved because the latest observed `Codex Marketplace` run failed on presentations render-probe tests outside this writing-style change.
+- Scheduled GPT Reviewer has not yet advanced the task from `WAITING_FOR_CI`.
 - User reading and explicit `ACCEPT`.
 
 No private report plaintext, rewritten report plaintext, age private identity, OpenAI API key, or token is committed to this repository. The only tracked private-artifact transport files are age ciphertext, public recipients, and metadata.
