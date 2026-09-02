@@ -1,0 +1,62 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": "候选将源文“工程侧再看一次”的逐方法工程比较表替换为少量概括性项目符号。例如源文逐项给出 FedFisher/FedLPA/FedBEns 等的方法通信量级、额外计算、分割/医学直接验证、公开代码状态、当前 CARE 集成难度和研究相关性；候选仅称“FedFisher 是本项目最关键的新增 baseline”等。",
+      "finding_id": "F1",
+      "recommendation": "恢复完整工程比较表及其逐方法事实、限定和未验证状态，不应用概括性结论替代。",
+      "requirement_id": "completeness_source_fidelity",
+      "severity": "blocking",
+      "summary": "候选遗漏了源文一整组具有决策意义的工程合同与验证状态信息，非完整改写。"
+    },
+    {
+      "evidence": "候选末尾新增“附录：字面保真校验补全”，其中包含孤立且截断的条目，如“`DOI: 10.1007/978-3-`”、“`DOI: 10.1007/978-3-319-`”、“`model/block-`”和“`ypes/feature-`”。",
+      "finding_id": "F2",
+      "recommendation": "删除该字面恢复附录；如确需保留引用或路径，应仅在正文参考文献/表格中保留完整、可读且语义连贯的标识符。",
+      "requirement_id": "natural_chinese_readability_whole_document_coherence",
+      "severity": "blocking",
+      "summary": "确定性字面恢复附录向读者暴露无语义碎片和不完整 DOI，破坏报告可读性、连贯性及引用质量，不能作为最终读者版本接受。"
+    }
+  ],
+  "created_at": "2026-09-02T08:13:06Z",
+  "encrypted_payload": {
+    "path": "results/048_writing_style_product_cutover_and_readable_report/text_review/payload.age",
+    "sha256": "60437b282dd9e5b8a16a280f95f6f5a317c9c3170d6f711838da56fa34436b77"
+  },
+  "evidence_id": "text-review-048_writing_style_product_cutover_and_readable_report-429d2849fdc1",
+  "input_manifest": {
+    "identity_bindings": {
+      "implementation_commit": "928de2325d781ca630883d03e0f381092675b269"
+    },
+    "manifest_sha256": "429d2849fdc1d95182c08c4ed172384dca30d0768e0a73e3c791e423794f5382",
+    "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
+    "rubric": {
+      "instructions": "Review the complete private source and complete candidate. PASS only if the candidate is a complete, faithful, natural reader-facing Chinese rewrite of the source, with no unresolved critical drift in facts, numbers, formulas, citations, paths, identifiers, caveats, attribution, comparisons, uncertainty, or conclusion strength. Explicitly assess completeness, source fidelity, natural Chinese readability, whole-document coherence, and whether the deterministic literal identity restore appendix is acceptable or a blocking quality problem."
+    },
+    "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "BLOCKED",
+      "item_id": "primary_text",
+      "requirement_ids": [
+        "completeness_source_fidelity",
+        "natural_chinese_readability_whole_document_coherence",
+        "literal_identity_restore_acceptability"
+      ],
+      "summary": "正文总体改写自然且保留了大量核心事实与公式，但工程比较信息被实质性压缩遗漏，且附录含无意义的截断字面碎片；因此不能作为完整、忠实、读者可直接阅读的最终报告。"
+    }
+  ],
+  "model": "gpt-5.6-terra",
+  "non_blocking_notes": [],
+  "overall_decision": "BLOCKED",
+  "plaintext_artifact_sha256": "ef5cc3632d8d75ca53588df7a19123368ca067bc28f9ee7e73903966305e43e8",
+  "prompt_version": "ai-bridge.text-review.v1",
+  "review_identity": "429d2849fdc1d95182c08c4ed172384dca30d0768e0a73e3c791e423794f5382",
+  "review_kind": "text-review",
+  "review_model": "gpt-5.6-terra",
+  "reviewed_input_identity": "429d2849fdc1d95182c08c4ed172384dca30d0768e0a73e3c791e423794f5382",
+  "schema": "AI_BRIDGE_TEXT_REVIEW_V1",
+  "status": "BLOCKED",
+  "task_key": "048_writing_style_product_cutover_and_readable_report",
+  "workflow_type": "reviewed_handoff"
+}
