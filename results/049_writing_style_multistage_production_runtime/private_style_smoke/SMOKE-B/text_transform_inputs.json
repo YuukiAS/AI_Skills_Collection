@@ -1,0 +1,87 @@
+{
+  "external_upload_authorization": "User authorized the private Deep Research artifact for task 049 writing-style scientific rewrite and review through Bridge Kit secure age/GitHub Actions/OpenAI Responses API store=false transport.",
+  "identity_bindings": {
+    "bridge_kit_commit": "65ea9c59afbe2db88bb5d60bf8752f82719f0087",
+    "implementation_commit": "0ffab04b9140516aff6d94c8e0ca82452dd4a747",
+    "source_full_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213"
+  },
+  "input": {
+    "ciphertext_sha256": "ba8fbc2f41c55fc612e7d23dd86500ed69f9e6d62aa9217cf25f9a7e1ac5e47c",
+    "encrypted_payload_path": "results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-B/input.age",
+    "logical_id": "source_text",
+    "mime_type": "text/markdown; charset=utf-8",
+    "plaintext_sha256": "20161b96ba82a610d3669d49aae01eeff32f98eeb1737438c892a869b5660e88",
+    "plaintext_size_bytes": 7093,
+    "source_basename": "SMOKE-B_source_segment.md"
+  },
+  "instructions": {
+    "bundle_sha256": "61745a9a263fcbab9515c799d7f3d7c4974313be56e3b85b94e831132107fb54",
+    "files": [
+      {
+        "mime_type": "text/markdown; charset=utf-8",
+        "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/SKILL.md",
+        "sha256": "86dc096b98ba6f5a851b7ad3a6f763a69f14c299600a228f659e16d5cf926405",
+        "size_bytes": 12237
+      },
+      {
+        "mime_type": "text/markdown; charset=utf-8",
+        "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/references/meaning-card-and-fidelity-ledger.md",
+        "sha256": "f532f332abeaae9982ff7cc1f517d586a7e98d3d8c56c073211f385040c98603",
+        "size_bytes": 3193
+      },
+      {
+        "mime_type": "text/markdown; charset=utf-8",
+        "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/references/positive-style-contract.md",
+        "sha256": "8527b0e99d2b2f258704f59911dd370edf6999655beef841a2f89a588013fc59",
+        "size_bytes": 1525
+      },
+      {
+        "mime_type": "application/json; charset=utf-8",
+        "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/references/seed-transformations.json",
+        "sha256": "dc8996a0124bfebc71708c82336d6a285f0fc1d3446d5441ea2717fb97234c64",
+        "size_bytes": 8270
+      },
+      {
+        "mime_type": "text/markdown; charset=utf-8",
+        "path": "plugins/codex/plugins/writing-style/skills/fidelity/SKILL.md",
+        "sha256": "083569c1cc0c607a006fd2840bf1e5789732164dbcf596e28c03a3de6321739e",
+        "size_bytes": 9197
+      },
+      {
+        "mime_type": "text/markdown; charset=utf-8",
+        "path": "plugins/codex/plugins/writing-style/skills/zh/SKILL.md",
+        "sha256": "cf7846a38ff9af9650f71853046a2e30b69e194621a6f6f7904d25aeedf19392",
+        "size_bytes": 16554
+      }
+    ],
+    "goal": "Rewrite this fixed private style-smoke segment with the 049 scientific-rewrite multistage runtime. Preserve facts, numbers, formulas, citations, formal names, caveats, comparators, attribution and conclusion strength. Return only the rewritten Markdown/plain text for this segment."
+  },
+  "output": {
+    "public_recipient": "age154hz8fd7sa52fs9nw6wwej9zr6fj802zvarue6nywnqdr50ky9dqlyl0x5",
+    "public_recipient_path": "results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-B/output.age.pub",
+    "public_recipient_sha256": "9485d956ce7456bc80d5947e485c45b7b799c4234362a51fd01266f3e6538a6e"
+  },
+  "privacy_policy": "PRIVATE_TEXT_TRANSFORM_AUTHORIZED",
+  "prompt_version": "ai-skills.scientific-rewrite.multistage.private-smoke.v1",
+  "schema": "AI_BRIDGE_TEXT_TRANSFORM_MANIFEST_V1",
+  "smoke": {
+    "id": "SMOKE-B",
+    "purpose": "ODAL versus FedFisher and FedLPA conceptual distinction",
+    "role": "odal_vs_fedfisher_fedlpa",
+    "source_line_ranges": [
+      [
+        379,
+        472
+      ],
+      [
+        515,
+        526
+      ]
+    ],
+    "source_segment_sha256": "20161b96ba82a610d3669d49aae01eeff32f98eeb1737438c892a869b5660e88",
+    "source_segment_size_bytes": 7093
+  },
+  "task_key": "049_writing_style_multistage_production_runtime",
+  "transform_kind": "scientific-rewrite-staged-smoke",
+  "workflow_type": "reviewed_handoff"
+}
