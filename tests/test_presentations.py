@@ -1079,10 +1079,12 @@ class PresentationSharedTests(unittest.TestCase):
             dependency_probe = json.loads((generated / "dependency_probe.json").read_text(encoding="utf-8"))
             self.assertEqual(dependency_probe["schema"], "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1")
             self.assertIn("pdftoppm", dependency_probe["commands"])
-            self.assertEqual(
-                manifest["compile_status"]["status"] == "COMPILED",
-                dependency_probe["tex_engine_available"],
-            )
+            if dependency_probe["tex_engine_available"]:
+                self.assertIn(manifest["compile_status"]["status"], {"COMPILED", "BLOCKED_MISSING_TEX_PACKAGE"})
+            else:
+                self.assertEqual(manifest["compile_status"]["status"], "BLOCKED_MISSING_TEX_ENGINE")
+            if manifest["compile_status"]["status"] == "BLOCKED_MISSING_TEX_PACKAGE":
+                self.assertTrue(manifest["compile_status"].get("missing_file"))
             visual_inputs = json.loads((generated / "visual_inputs.json").read_text(encoding="utf-8"))
             self.assertEqual(visual_inputs["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
             self.assertEqual(visual_inputs["task_key"], "030_stage3_visual_recovery")
@@ -1155,6 +1157,43 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertIn(manifest["render_status"]["status"], strict.stderr + strict.stdout)
                 self.assertNotEqual(manifest["mechanical_qa"]["status"], "MECHANICAL_PASS")
 
+            manifest["render_status"] = {"status": "BLOCKED_MISSING_TEX_ENGINE", "png_count": 0, "rendered_png": []}
+            manifest["mechanical_qa"]["status"] = "BLOCKED_RENDER_QA"
+            (generated / "BUILD_MANIFEST.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+            render_probe = json.loads((generated / "render_chinese_math_pdf_probe.json").read_text(encoding="utf-8"))
+            render_probe["status"] = "PROBE_FAILED"
+            (generated / "render_chinese_math_pdf_probe.json").write_text(json.dumps(render_probe, indent=2) + "\n", encoding="utf-8")
+            missing_render_validation = subprocess.run(
+                [
+                    sys.executable,
+                    str(validator),
+                    "--out-dir",
+                    str(generated),
+                    "--allow-missing-render",
+                    "--task-key",
+                    "030_stage3_visual_recovery",
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(missing_render_validation.returncode, 0, missing_render_validation.stderr + missing_render_validation.stdout)
+            strict_missing_render = subprocess.run(
+                [
+                    sys.executable,
+                    str(validator),
+                    "--out-dir",
+                    str(generated),
+                    "--task-key",
+                    "030_stage3_visual_recovery",
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(strict_missing_render.returncode, 0)
+            self.assertIn("render-chinese-math-pdf probe failed", strict_missing_render.stderr + strict_missing_render.stdout)
+
     def test_production_validator_accepts_generic_source_declared_storylines(self) -> None:
         cases = [
             [
@@ -1207,6 +1246,33 @@ class PresentationSharedTests(unittest.TestCase):
                 write_synthetic_production_contract(out_dir, workstreams)
                 errors = production_validator.validate(out_dir, allow_missing_render=True)
                 self.assertEqual(errors, [])
+
+    def test_production_validator_allows_failed_probe_only_in_missing_render_mode(self) -> None:
+        workstreams = [
+            {
+                "id": "synthetic_statistics",
+                "label": "Synthetic statistics",
+                "scope": "model and result",
+                "pages": [
+                    {"page_id": "model", "page_job": "STATISTICAL_MODEL", "title": "Model object"},
+                    {"page_id": "result", "page_job": "RESULT_FIGURE", "title": "Result evidence"},
+                ],
+            }
+        ]
+        with tempfile.TemporaryDirectory() as tmp:
+            out_dir = Path(tmp)
+            write_synthetic_production_contract(out_dir, workstreams)
+            manifest_path = out_dir / "BUILD_MANIFEST.json"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            manifest["render_status"] = {"status": "BLOCKED_MISSING_TEX_ENGINE", "png_count": 0, "rendered_png": []}
+            manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+            probe_path = out_dir / "render_chinese_math_pdf_probe.json"
+            probe = json.loads(probe_path.read_text(encoding="utf-8"))
+            probe["status"] = "PROBE_FAILED"
+            probe_path.write_text(json.dumps(probe, indent=2) + "\n", encoding="utf-8")
+            self.assertEqual(production_validator.validate(out_dir, allow_missing_render=True), [])
+            strict_errors = production_validator.validate(out_dir, allow_missing_render=False)
+            self.assertTrue(any("render probe failed" in error for error in strict_errors), strict_errors)
 
     def test_production_validator_keeps_strict_generic_gates(self) -> None:
         base_workstreams = [
