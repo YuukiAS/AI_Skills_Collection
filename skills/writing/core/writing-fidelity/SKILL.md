@@ -48,10 +48,16 @@ silently satisfy one constraint by violating another.
    attention to complaints about deletion, automatic rewriting, language
    changes, title changes, unreadable output, collisions, missing glyphs, OCR
    errors, formula spacing, or prior failed attempts.
-3. Mark protected spans before editing: titles, headings, section order, labels,
-   numbers, dates, units, formulas, variables, notation, code, paths, citations,
-   Chinese/English language spans, user comments, caveats, examples, and quoted
-   source text.
+3. Mark protected spans before editing, but separate literal preservation from
+   semantic preservation. Numbers, dates, units, formulas, notation, citations,
+   DOI, code, paths, identifiers, formal dataset/algorithm names, exact
+   quotations, and user-explicit no-touch spans are literal-protected. Claims,
+   polarity, uncertainty, scope, conditions, comparators, chronology, causality,
+   attribution, caveats, negative results, and conclusion strength are
+   semantic-protected and may be rewritten completely if meaning is preserved.
+   Ordinary reader-facing headings, labels, and section wording are not
+   literal-protected unless they are formal titles, citation titles, exact
+   identifiers, or explicitly protected by the user.
 4. Apply only the requested operation. For polishing, preserve substantive
    content. For layout, do not change wording. For OCR cleanup, fix corruption
    without canonicalizing valid source notation.
@@ -82,6 +88,35 @@ silently satisfy one constraint by violating another.
 - Do not treat "去 AI 味" as detector evasion, source laundering, or permission
   to hide authorship. The allowed goal is clearer prose that preserves facts and
   evidence boundaries.
+
+## Literal vs Semantic Preservation
+
+Use literal preservation only when exact token identity matters:
+
+- numbers, dates, ranges, percentages, units;
+- formulas, notation, variables;
+- citations, DOI, exact quotations;
+- code, commands, paths, config keys, identifiers;
+- formal algorithm, dataset, benchmark, metric, package, product, and method
+  names when exact naming matters;
+- user-explicit no-touch spans.
+
+Use semantic preservation when wording can change but meaning cannot:
+
+- claim and polarity;
+- uncertainty and evidence strength;
+- condition, scope, exception, and comparator;
+- chronology and causality;
+- attribution;
+- caveat and negative result;
+- conclusion strength.
+
+For long scientific Chinese rewrites, hand off generation to
+`scientific-rewrite` and keep this skill as the preservation/audit layer.
+Scientific rewrite candidates must maintain a claim/relation ledger with
+statuses `preserved`, `narrowed`, `broadened`, `reversed`, `invented`,
+`omitted`, and `reattributed`. Any status other than `preserved` needs exact
+source and candidate evidence before the artifact can be accepted.
 
 ## Version and Label Fidelity
 

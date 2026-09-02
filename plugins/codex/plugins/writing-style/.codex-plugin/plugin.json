@@ -28,8 +28,8 @@
     "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
     "defaultPrompt": [
       "Make this text clearer without changing meaning or protected facts.",
-      "Polish this Chinese technical text.",
-      "Rewrite this Chinese report as normal reader-facing prose, not a log."
+      "Rewrite this Chinese scientific or technical report into natural reader-facing Chinese instead of internal log language, with...",
+      "Polish this Chinese technical text."
     ],
     "brandColor": "#7C3AED",
     "composerIcon": "./.codex-plugin/assets/composer.svg",

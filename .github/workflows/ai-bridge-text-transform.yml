@@ -1,0 +1,157 @@
+name: AI Bridge Text Transform
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest:
+        description: Repository-relative text transform manifest path
+        required: true
+        default: results/001_task/text_transform/text_transform_inputs.json
+      output_age:
+        description: Repository-relative encrypted transform output path
+        required: true
+        default: results/001_task/text_transform/output.age
+      result:
+        description: Repository-relative TEXT_TRANSFORM.json output path
+        required: true
+        default: results/001_task/text_transform/TEXT_TRANSFORM.json
+  push:
+    branches:
+      - main
+      - 'reviewed/**'
+    paths:
+      - 'results/**/text_transform/text_transform_inputs.json'
+
+permissions:
+  contents: write
+
+jobs:
+  text-transform:
+    runs-on: ubuntu-latest
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_REVIEW_API_KEY || secrets.OPENAI_VISUAL_REVIEW_API_KEY }}
+      OPENAI_TEXT_TRANSFORM_MODEL: ${{ vars.OPENAI_TEXT_TRANSFORM_MODEL }}
+      AI_BRIDGE_TEXT_TRANSFORM_MANIFEST: ${{ github.event.inputs.manifest }}
+      AI_BRIDGE_TEXT_TRANSFORM_OUTPUT_AGE: ${{ github.event.inputs.output_age }}
+      AI_BRIDGE_TEXT_TRANSFORM_RESULT: ${{ github.event.inputs.result }}
+      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[text-transform] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@29a94528c6a4e3807027a172118cf3b9bea918b0
+      AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY: ${{ secrets.AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install age
+        if: env.AI_BRIDGE_TEXT_TRANSFORM_SKIP != '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y age
+
+      - name: Install Bridge Kit text transform extra
+        run: python -m pip install "${AI_BRIDGE_KIT_PIP_SPEC}"
+
+      - name: Resolve text transform paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${AI_BRIDGE_TEXT_TRANSFORM_MANIFEST}" ]; then
+            mapfile -t manifests < <(git diff-tree --no-commit-id --name-only -r "${GITHUB_SHA}" | grep '^results/.*/text_transform/text_transform_inputs[.]json$' || true)
+            if [ "${#manifests[@]}" -eq 0 ]; then
+              echo "No text transform manifest changed; not required."
+              echo "AI_BRIDGE_TEXT_TRANSFORM_SKIP=1" >> "$GITHUB_ENV"
+              exit 0
+            fi
+            if [ "${#manifests[@]}" -gt 1 ]; then
+              echo "Multiple text transform manifests changed; dispatch manually with one manifest."
+              exit 1
+            fi
+            AI_BRIDGE_TEXT_TRANSFORM_MANIFEST="${manifests[0]}"
+          fi
+          if [ -z "${AI_BRIDGE_TEXT_TRANSFORM_OUTPUT_AGE}" ]; then
+            AI_BRIDGE_TEXT_TRANSFORM_OUTPUT_AGE="$(dirname "${AI_BRIDGE_TEXT_TRANSFORM_MANIFEST}")/output.age"
+          fi
+          if [ -z "${AI_BRIDGE_TEXT_TRANSFORM_RESULT}" ]; then
+            AI_BRIDGE_TEXT_TRANSFORM_RESULT="$(dirname "${AI_BRIDGE_TEXT_TRANSFORM_MANIFEST}")/TEXT_TRANSFORM.json"
+          fi
+          echo "AI_BRIDGE_TEXT_TRANSFORM_MANIFEST=${AI_BRIDGE_TEXT_TRANSFORM_MANIFEST}" >> "$GITHUB_ENV"
+          echo "AI_BRIDGE_TEXT_TRANSFORM_OUTPUT_AGE=${AI_BRIDGE_TEXT_TRANSFORM_OUTPUT_AGE}" >> "$GITHUB_ENV"
+          echo "AI_BRIDGE_TEXT_TRANSFORM_RESULT=${AI_BRIDGE_TEXT_TRANSFORM_RESULT}" >> "$GITHUB_ENV"
+
+      - name: Refuse missing text transform secrets
+        if: env.AI_BRIDGE_TEXT_TRANSFORM_SKIP != '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY}" ]; then
+            echo "AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY is not configured; cannot decrypt private text transform payload."
+            exit 1
+          fi
+          if [ -z "${OPENAI_API_KEY}" ]; then
+            echo "OPENAI_REVIEW_API_KEY or OPENAI_VISUAL_REVIEW_API_KEY is not configured; cannot run live text transform."
+            exit 1
+          fi
+
+      - name: Decrypt private text transform input
+        if: env.AI_BRIDGE_TEXT_TRANSFORM_SKIP != '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmpdir="$(mktemp -d)"
+          chmod 700 "${tmpdir}"
+          umask 077
+          printf '%s\n' "${AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY}" > "${tmpdir}/identity.txt"
+          payload_path="$(python - <<'PY'
+          import json
+          import os
+          with open(os.environ["AI_BRIDGE_TEXT_TRANSFORM_MANIFEST"], encoding="utf-8") as handle:
+              manifest = json.load(handle)
+          print(manifest["input"]["encrypted_payload_path"])
+          PY
+          )"
+          age -d -i "${tmpdir}/identity.txt" -o "${tmpdir}/source.md" "${payload_path}"
+          echo "AI_BRIDGE_TEXT_TRANSFORM_PLAINTEXT=${tmpdir}/source.md" >> "$GITHUB_ENV"
+
+      - name: Run text transform
+        if: env.AI_BRIDGE_TEXT_TRANSFORM_SKIP != '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          ai-bridge text-transform run \
+            --target . \
+            --manifest "${AI_BRIDGE_TEXT_TRANSFORM_MANIFEST}" \
+            --plaintext "${AI_BRIDGE_TEXT_TRANSFORM_PLAINTEXT}" \
+            --output-age "${AI_BRIDGE_TEXT_TRANSFORM_OUTPUT_AGE}" \
+            --result "${AI_BRIDGE_TEXT_TRANSFORM_RESULT}"
+
+      - name: Commit text transform evidence
+        if: env.AI_BRIDGE_TEXT_TRANSFORM_SKIP != '1'
+        shell: bash
+        run: |
+          set +e
+          ai-bridge text-transform writeback-needed \
+            --target . \
+            --output-age "${AI_BRIDGE_TEXT_TRANSFORM_OUTPUT_AGE}" \
+            --result "${AI_BRIDGE_TEXT_TRANSFORM_RESULT}"
+          writeback_status="$?"
+          set -e
+          if [ "${writeback_status}" -eq 0 ]; then
+            echo "No text transform evidence changes."
+            exit 0
+          fi
+          if [ "${writeback_status}" -ne 1 ]; then
+            exit "${writeback_status}"
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Add AI Bridge text transform evidence"
+          if [ "${GITHUB_REF_TYPE}" != "branch" ]; then
+            echo "Text transform writeback requires a branch ref."
+            exit 1
+          fi
+          git push origin "HEAD:${GITHUB_REF_NAME}"

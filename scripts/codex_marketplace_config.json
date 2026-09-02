@@ -71,6 +71,7 @@
       "logo": "./assets/codex/plugin-icons/writing-style/composer.svg",
       "defaultPrompt": [
         "Make this text clearer without changing meaning or protected facts.",
+        "Rewrite this Chinese scientific or technical report into natural reader-facing Chinese instead of internal log language, without changing facts, numbers, formulas, citations, terminology, caveats, uncertainty, or conclusion strength.",
         "Polish this Chinese technical text.",
         "Rewrite this Chinese report as normal reader-facing prose, not a log.",
         "Final-check this Chinese Markdown/PDF/report/README for reader-facing say-it-plain output.",
@@ -90,6 +91,12 @@
           "type": "copy",
           "source": "skills/writing/core/scientific-prose",
           "artifact_id": "sci"
+        },
+        {
+          "type": "copy",
+          "source": "skills/writing/core/scientific-rewrite",
+          "artifact_id": "scientific-rewrite",
+          "description": "Internal heavy route for high-fidelity Chinese scientific and technical long-form rewriting from existing source text, with document maps, meaning cards, literal/semantic fidelity ledgers, positive transformations, deterministic exact checks, and Chinese language review."
         },
         {
           "type": "copy",

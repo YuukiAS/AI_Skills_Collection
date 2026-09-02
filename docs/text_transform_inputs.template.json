@@ -1,0 +1,38 @@
+{
+  "schema": "AI_BRIDGE_TEXT_TRANSFORM_MANIFEST_V1",
+  "task_key": "001_task",
+  "workflow_type": "reviewed_handoff",
+  "transform_kind": "private-text-transform",
+  "prompt_version": "ai-bridge.text-transform.v1",
+  "privacy_policy": "PRIVATE_TEXT_TRANSFORM_AUTHORIZED",
+  "external_upload_authorization": "User authorized this private text artifact to be decrypted in GitHub Actions and sent to OpenAI Responses API with store=false for this transform task.",
+  "instructions": {
+    "goal": "Transform the complete source according to the bound public instruction files.",
+    "files": [
+      {
+        "path": "docs/transform_contract.md",
+        "sha256": "<instruction_file_sha256>",
+        "size_bytes": 0,
+        "mime_type": "text/markdown; charset=utf-8"
+      }
+    ],
+    "bundle_sha256": "<instruction_bundle_sha256>"
+  },
+  "identity_bindings": {
+    "implementation_commit": "<implementation_commit>"
+  },
+  "input": {
+    "logical_id": "source_text",
+    "encrypted_payload_path": "results/001_task/text_transform/input.age",
+    "ciphertext_sha256": "<ciphertext_sha256>",
+    "plaintext_sha256": "<source_plaintext_sha256>",
+    "plaintext_size_bytes": 0,
+    "mime_type": "text/markdown; charset=utf-8",
+    "source_basename": "source.md"
+  },
+  "output": {
+    "public_recipient_path": "results/001_task/text_transform/output.age.pub",
+    "public_recipient": "<age_public_recipient>",
+    "public_recipient_sha256": "<recipient_file_sha256>"
+  }
+}

@@ -21,6 +21,8 @@ license: MIT-compatible synthesis plus public-domain style guidance
 
 这不是事实核查、文件转换、AI 检测规避或伪原创工具。它只处理中文读者看到的表达质量：在 `writing-fidelity` 的保真底线之上，把机器味、翻译腔、模板腔和不必要英文降下来。
 
+对于中文科研或技术长文的深度高保真重写，不要让本 skill 承担主架构。应把已有原文的长文 meaning-preserving rewrite 交给 `scientific-rewrite`；本 skill 只提供正向中文风格合同、场景/问题判断和最终语言质量审阅。
+
 ## 使用场景
 
 - 用户要求中文文字更自然、更少 AI 味、更少翻译腔、更少口号化，或更适合中文读者。
@@ -121,6 +123,8 @@ license: MIT-compatible synthesis plus public-domain style guidance
 7. 套用中文技术文档习惯。
 8. 复读一遍，确认事实没有被削弱、删除或拔高。
 9. 输出一版干净文本。只有在存在过度主张、缺少来源、受保护事实限制修改，或刻意保留英文时，才补充简短说明。
+
+如果审阅的是 `scientific-rewrite` 产物，必须先确认 literal / semantic fidelity gate 已经完成。此时本 skill 只检查具体主体和动作、关系是否直接、中文节奏是否自然、语域是否匹配、读者负担是否下降；不要继续给 044 增加项目专属 phrase rules，也不要把语境中的单个别扭英文词升级成永久 blacklist。
 
 ## 场景规则
 
