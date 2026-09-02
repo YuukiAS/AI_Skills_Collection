@@ -1,10 +1,10 @@
 {
   "external_upload_authorization": "User authorized this specific private Deep Research source artifact to be transformed by OpenAI Responses API with store=false for task 048_writing_style_product_cutover_and_readable_report.",
   "identity_bindings": {
-    "implementation_commit": "989fc054d6cd175d990355cf286d0f02cd31b28d"
+    "implementation_commit": "55cf5722553a9a7bf672314c235714399b63f431"
   },
   "input": {
-    "ciphertext_sha256": "18965a382c95f8d51c3c67b5a819a1f78b79681091f213b163f8754dac96d0e4",
+    "ciphertext_sha256": "dbe809047f69ff586fd156ecb7ba8f88fd91d58d8fca106b1ea53fd68844165a",
     "encrypted_payload_path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/input.age",
     "logical_id": "source_text",
     "mime_type": "text/markdown; charset=utf-8",

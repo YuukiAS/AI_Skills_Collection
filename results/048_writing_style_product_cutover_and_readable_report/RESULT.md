@@ -14,7 +14,7 @@ ci_status: PENDING
 Revision 1 implementation is in progress. The Executor has:
 
 - implemented and pushed the Bridge Kit companion prerequisite at `YuukiAS/GPT_Codex_AI_Bridge_Kit@65ea9c59afbe2db88bb5d60bf8752f82719f0087`;
-- implemented the AI_Skills production source, generated payload, and shallow-safe text-transform workflow pin at `989fc054d6cd175d990355cf286d0f02cd31b28d`;
+- implemented the AI_Skills production source, generated payload, and shallow-safe text-transform workflow detector at `55cf5722553a9a7bf672314c235714399b63f431`;
 - added `writing-style` internal `scientific-rewrite` route without creating a new top-level plugin;
 - updated `writing-fidelity` and `chinese-prose` boundaries for literal-vs-semantic preservation and final Chinese review;
 - regenerated the canonical Codex marketplace payload;
@@ -41,7 +41,7 @@ Current control-plane state:
 state=EXECUTING
 plan_revision=1
 max_plan_revisions=1
-implementation_commit=989fc054d6cd175d990355cf286d0f02cd31b28d
+implementation_commit=55cf5722553a9a7bf672314c235714399b63f431
 ci_required=true
 ci_status=PENDING
 ```
