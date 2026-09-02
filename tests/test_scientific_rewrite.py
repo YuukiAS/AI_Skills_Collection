@@ -462,6 +462,101 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertEqual(assembly_reviews, 2)
         self.assertTrue(receipt["dataflow_validation"]["ok"])
 
+    def test_reader_repair_gets_semantic_targeted_retry(self) -> None:
+        helper = load_helper()
+        original = helper.call_openai_text
+
+        def coverage_ids(payload: dict[str, object]) -> list[str]:
+            card = payload.get("meaning_card", {})
+            if not isinstance(card, dict):
+                return []
+            return sorted(
+                {
+                    str(prop_id)
+                    for field in [
+                        "claims",
+                        "evidence",
+                        "conditions",
+                        "comparators",
+                        "uncertainty",
+                        "caveats",
+                        "negative_findings",
+                        "attribution",
+                        "decision_logic",
+                    ]
+                    for item in card.get(field, [])
+                    for prop_id in item.get("source_proposition_ids", [])
+                }
+            )
+
+        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
+            if "Review only the candidate text" in prompt:
+                return json.dumps(
+                    {
+                        "decision": "REVISE",
+                        "questions": [{"answerable": False, "inferred_answer": "需要补清楚下一步判断。"}],
+                        "findings": [
+                            {
+                                "finding_id": "reader-001",
+                                "unit_id": "unit-001",
+                                "category": "unclear_decision",
+                                "repair_instruction": "make the current conclusion strength explicit",
+                            }
+                        ],
+                    },
+                    ensure_ascii=False,
+                )
+            if "Re-review only the repaired candidate text" in prompt:
+                return json.dumps({"decision": "PASS", "questions": [{"answerable": True, "inferred_answer": "判断已清楚。"}], "findings": []}, ensure_ascii=False)
+            if "Repair this unit only for reader effort" in prompt:
+                payload = json.loads(source)
+                return json.dumps(
+                    {
+                        "reader_core": payload["unit"]["text"],
+                        "technical_trace": "",
+                        "source_coverage_ids": coverage_ids(payload),
+                        "relocated_trace_ids": [],
+                    },
+                    ensure_ascii=False,
+                )
+            if "Audit semantic preservation after reader-targeted repair" in prompt:
+                payload = json.loads(source)
+                prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][0]
+                return json.dumps(
+                    {"decision": "REVISE", "findings": [{"status": "omitted", "proposition_id": prop_id, "severity": "critical"}]},
+                    ensure_ascii=False,
+                )
+            if "Repair this unit only for semantic preservation" in prompt:
+                payload = json.loads(source)
+                return json.dumps(
+                    {
+                        "reader_core": payload["unit"]["text"],
+                        "technical_trace": "",
+                        "source_coverage_ids": coverage_ids(payload),
+                        "relocated_trace_ids": [],
+                    },
+                    ensure_ascii=False,
+                )
+            if "Re-audit semantic preservation after the reader semantic repair" in prompt:
+                return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
+            return structured_stage_response(prompt, source)
+
+        helper.call_openai_text = fake_call
+        try:
+            result = helper.run_multistage(
+                "# 结论\n\nCARE 在 2026-08-28 的 Dice=0.81 只支持继续验证。\n\n## 下一步\n\n下一轮比较 FedFisher 和 FedLPA。",
+                driver="openai-responses",
+                model="test-model",
+                api_key="test-key",
+            )
+        finally:
+            helper.call_openai_text = original
+
+        stage_ids = [item["stage_id"] for item in result["receipt"]["stage_records"]]
+        self.assertTrue(any("reader-semantic-targeted-repair" in stage_id for stage_id in stage_ids))
+        self.assertTrue(any("reader-semantic-repair-audit" in stage_id for stage_id in stage_ids))
+        self.assertTrue(result["receipt"]["dataflow_validation"]["ok"])
+
     def test_noncritical_semantic_revision_does_not_force_hard_repair(self) -> None:
         helper = load_helper()
         original = helper.call_openai_text

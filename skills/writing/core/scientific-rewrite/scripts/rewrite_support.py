@@ -1886,6 +1886,98 @@ def run_multistage(
             )
             reader_repair_audit_stage_id = records[-1].stage_id
             bind_consumer(records, unit_candidate_stage_ids[unit_id], reader_repair_audit_stage_id, "repaired_candidate")
+            if exact["ok"] and semantic_requires_repair(semantic):
+                semantic_repair_payload = {
+                    "unit": asdict(unit),
+                    "candidate_unit": repaired,
+                    "meaning_card": unit_cards[unit_id],
+                    "exact": exact,
+                    "semantic": semantic,
+                }
+                if driver == "openai-responses":
+                    semantic_repaired = call_openai_json_validated(
+                        f"{unit_id}-reader-semantic-targeted-repair",
+                        (
+                            "Repair this unit only for semantic preservation after reader-targeted repair. "
+                            "Address only critical semantic findings while preserving reader clarity, exact literals, and all source facts. "
+                            "Return the structured writer JSON fields. source_coverage_ids must include every source proposition id from the Meaning Card."
+                        ),
+                        semantic_repair_payload,
+                        model=model,
+                        api_key=api_key,
+                        required=["reader_core", "technical_trace", "source_coverage_ids", "relocated_trace_ids"],
+                        validator=lambda raw, unit=unit, props=unit_propositions[unit_id]: normalize_writer_result(raw, unit, props),
+                    )
+                else:
+                    semantic_repaired = normalize_writer_result(
+                        apply_textual_repair(repaired, "修正语义审计指出的关键范围、条件、比较或结论强度问题。"),
+                        unit,
+                        unit_propositions[unit_id],
+                    )
+                records.append(
+                    stage_record(
+                        stage_id=f"{unit_id}-reader-semantic-targeted-repair-{reader_repair_round}",
+                        responsibility="repair a reader-targeted unit only for remaining critical semantic findings",
+                        unit_id=unit_id,
+                        input_payload=semantic_repair_payload,
+                        output_payload=semantic_repaired,
+                        model_call=driver == "openai-responses",
+                    )
+                )
+                semantic_repair_stage_id = records[-1].stage_id
+                bind_consumer(records, reader_repair_audit_stage_id, semantic_repair_stage_id, "semantic_findings")
+                bind_consumer(records, unit_candidate_stage_ids[unit_id], semantic_repair_stage_id, "candidate_unit")
+                rewritten_units[unit_index] = semantic_repaired
+                unit_candidate_stage_ids[unit_id] = semantic_repair_stage_id
+                repaired = semantic_repaired
+                combined_unit = "\n\n".join(part for part in [repaired["reader_core"], repaired["technical_trace"]] if part)
+                exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=repaired["reader_core"])
+                if not exact["ok"]:
+                    restored = restore_exact_literals(repaired, exact)
+                    records.append(
+                        stage_record(
+                            stage_id=f"{unit_id}-reader-semantic-exact-literal-restoration-{reader_repair_round}",
+                            responsibility="restore missing exact literals from source ledger after reader semantic repair",
+                            unit_id=unit_id,
+                            input_payload={"pre_restore_exact": exact, "repair_output_identity": records[-1].output_identity},
+                            output_payload=restored,
+                            model_call=False,
+                        )
+                    )
+                    restore_stage_id = records[-1].stage_id
+                    bind_consumer(records, unit_candidate_stage_ids[unit_id], restore_stage_id, "reader_semantic_repair_candidate")
+                    rewritten_units[unit_index] = restored
+                    unit_candidate_stage_ids[unit_id] = restore_stage_id
+                    repaired = restored
+                    combined_unit = "\n\n".join(part for part in [repaired["reader_core"], repaired["technical_trace"]] if part)
+                    exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=repaired["reader_core"])
+                if driver == "openai-responses":
+                    semantic = call_openai_json_validated(
+                        f"{unit_id}-reader-semantic-repair-audit",
+                        (
+                            "Re-audit semantic preservation after the reader semantic repair. Return PASS or REVISE with findings. "
+                            "Each finding must use one of these statuses: preserved, narrowed, broadened, reversed, invented, omitted, reattributed."
+                        ),
+                        {"source_unit": unit.text, "candidate": repaired, "meaning_card": unit_cards[unit_id], "exact": exact},
+                        model=model,
+                        api_key=api_key,
+                        required=["decision", "findings"],
+                        validator=lambda raw, unit=unit, props=unit_propositions[unit_id]: normalize_semantic_audit(raw, unit, props),
+                    )
+                else:
+                    semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit), unit, unit_propositions[unit_id])
+                records.append(
+                    stage_record(
+                        stage_id=f"{unit_id}-reader-semantic-repair-audit-{reader_repair_round}",
+                        responsibility="re-verify exact literal and semantic preservation after reader semantic repair",
+                        unit_id=unit_id,
+                        input_payload={"source_sha256": sha256_text(unit.text), "candidate": repaired, "meaning_card": unit_cards[unit_id]},
+                        output_payload={"exact": exact, "semantic": semantic},
+                        model_call=driver == "openai-responses",
+                    )
+                )
+                reader_repair_audit_stage_id = records[-1].stage_id
+                bind_consumer(records, unit_candidate_stage_ids[unit_id], reader_repair_audit_stage_id, "reader_semantic_repaired_candidate")
             if not exact["ok"] or semantic_requires_repair(semantic):
                 raise RuntimeError(
                     f"{unit_id} reader-targeted repair failed fidelity gate "
