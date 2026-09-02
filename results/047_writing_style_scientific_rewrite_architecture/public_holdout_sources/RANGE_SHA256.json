@@ -1,0 +1,34 @@
+[
+  {
+    "id": "HOLDOUT-UNSEEN-001",
+    "source_path": "/overflow/htzhu/mingcheng_new/.ai-skills-source-scout/047-scientific-rewrite/holdout-sources/Bobbio/README.md",
+    "range": "1-70",
+    "sha256": "92429e9035fd855b4130080a8003d8128ee3b4d267672ccf3a60b87c6eb22477",
+    "bytes": 2680,
+    "output": "results/047_writing_style_scientific_rewrite_architecture/public_holdout_sources/HOLDOUT-UNSEEN-001.md"
+  },
+  {
+    "id": "HOLDOUT-UNSEEN-002",
+    "source_path": "/overflow/htzhu/mingcheng_new/.ai-skills-source-scout/047-scientific-rewrite/holdout-sources/Distributed_Imaging_Inference/docs/SEGCOMM_CORRECTION_STABILITY_REPORT_2026-08-28.md",
+    "range": "1-8",
+    "sha256": "e4f1369cdc23c767943bff613f776e60b02b4689b5134f5574b94639bbddd52a",
+    "bytes": 913,
+    "output": "results/047_writing_style_scientific_rewrite_architecture/public_holdout_sources/HOLDOUT-UNSEEN-002.md"
+  },
+  {
+    "id": "SNF-CN-TECH-001",
+    "source_path": "/overflow/htzhu/mingcheng_new/.ai-skills-source-scout/047-scientific-rewrite/holdout-sources/AI_Research_Toolkit/R_RESEARCH_STACK.md",
+    "range": "1-13",
+    "sha256": "2f44f24073713cadb7ad6a012ae3e4959448926a35c66c93e568fc2dd651313b",
+    "bytes": 1070,
+    "output": "results/047_writing_style_scientific_rewrite_architecture/public_holdout_sources/SNF-CN-TECH-001.md"
+  },
+  {
+    "id": "SNF-CN-SCI-002",
+    "source_path": "/overflow/htzhu/mingcheng_new/.ai-skills-source-scout/047-scientific-rewrite/holdout-sources/Asteria/ROADMAP.md",
+    "range": "5-17",
+    "sha256": "18400b402f15f290978c974d01c2fc7f1f0479bd718dece264ff3bd79aced4f8",
+    "bytes": 1064,
+    "output": "results/047_writing_style_scientific_rewrite_architecture/public_holdout_sources/SNF-CN-SCI-002.md"
+  }
+]

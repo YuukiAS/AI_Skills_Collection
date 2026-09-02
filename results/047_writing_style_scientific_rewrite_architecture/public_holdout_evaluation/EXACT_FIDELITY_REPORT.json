@@ -1,0 +1,30 @@
+[
+  {
+    "ok": true,
+    "checked_count": 6,
+    "missing": [],
+    "id": "HOLDOUT-UNSEEN-001",
+    "candidate": "ARCHITECTURE_C"
+  },
+  {
+    "ok": true,
+    "checked_count": 17,
+    "missing": [],
+    "id": "HOLDOUT-UNSEEN-002",
+    "candidate": "ARCHITECTURE_C"
+  },
+  {
+    "ok": true,
+    "checked_count": 9,
+    "missing": [],
+    "id": "SNF-CN-TECH-001",
+    "candidate": "OUTPUT"
+  },
+  {
+    "ok": true,
+    "checked_count": 0,
+    "missing": [],
+    "id": "SNF-CN-SCI-002",
+    "candidate": "OUTPUT"
+  }
+]

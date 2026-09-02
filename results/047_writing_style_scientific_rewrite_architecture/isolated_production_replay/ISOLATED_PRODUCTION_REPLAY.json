@@ -1,0 +1,60 @@
+{
+  "schema": "AI_SKILLS_047_ISOLATED_PRODUCTION_REPLAY_V1",
+  "task_key": "047_writing_style_scientific_rewrite_architecture",
+  "recorded_at": "2026-09-01T20:49:41-04:00",
+  "implementation_commit": "ade5a1f653f88df07eb0c70edfd016c744b1611a",
+  "policy_commit": "a05e4a67",
+  "live_global_mutation": false,
+  "isolated_environment": {
+    "base_path": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/isolated-codex-047",
+    "codex_home": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/isolated-codex-047/codex-home",
+    "home": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/isolated-codex-047/home",
+    "xdg_cache_home": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/isolated-codex-047/cache",
+    "xdg_config_home": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/isolated-codex-047/config"
+  },
+  "codex_entrypoint": {
+    "wrapper_used": false,
+    "reason": "The local /overflow/htzhu/mingcheng_new/bin/codex wrapper unsets CODEX_HOME-related variables, so the isolated verification used the underlying Codex JS entrypoint directly.",
+    "entrypoint": "/overflow/htzhu/mingcheng_new/conda/lib/node_modules/@openai/codex/bin/codex.js"
+  },
+  "marketplace_install": {
+    "marketplace_add": {
+      "marketplace_name": "yuukias-ai-skills",
+      "installed_root": "/tmp/AI_Skills_Collection_047",
+      "source_type": "local",
+      "already_added": false
+    },
+    "plugin_add": {
+      "plugin_id": "writing-style@yuukias-ai-skills",
+      "version": "0.1",
+      "enabled": true,
+      "installed_path": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/isolated-codex-047/codex-home/plugins/cache/yuukias-ai-skills/writing-style/0.1",
+      "source": "/tmp/AI_Skills_Collection_047/plugins/codex/plugins/writing-style"
+    }
+  },
+  "generated_payload_identity": {
+    "generated_skill_path": "/tmp/AI_Skills_Collection_047/plugins/codex/plugins/writing-style/skills/scientific-rewrite/SKILL.md",
+    "isolated_cache_skill_path": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/isolated-codex-047/codex-home/plugins/cache/yuukias-ai-skills/writing-style/0.1/skills/scientific-rewrite/SKILL.md",
+    "skill_sha256": "d6a5821c7f635a459a40d99c8e5ec0b87f459f52871056a65fc8c2b597b844b2",
+    "payload_match": true
+  },
+  "normal_invocation_evidence": {
+    "fresh_session_probe": "codex debug prompt-input",
+    "ordinary_user_prompt": "把这份中文科研报告说人话一些，但不要改变事实、数字、公式、引用、专业术语和结论强度。",
+    "prompt_includes_installed_scientific_rewrite": true,
+    "prompt_includes_installed_chinese_prose": true,
+    "prompt_includes_installed_writing_fidelity": true,
+    "scientific_rewrite_path_source": "isolated plugin cache",
+    "scientific_rewrite_cache_path_seen": true
+  },
+  "model_invocation": {
+    "attempted": true,
+    "probe": "codex exec --ephemeral with ordinary minimal prompt",
+    "proxy_retry": "The first attempt inherited proxy variables and failed with connection refused. The second attempt unset http/https/all_proxy variables.",
+    "result": "FAILED_AUTH_ABSENT_IN_ISOLATED_HOME",
+    "observed_error": "401 Unauthorized: Missing bearer or basic authentication in header",
+    "reason": "The isolated CODEX_HOME had no local model credentials and OPENAI_API_KEY, OPENAI_REVIEW_API_KEY, and OPENAI_VISUAL_REVIEW_API_KEY were absent in the executor environment. No live auth token or secret was copied from the real Codex home.",
+    "produced_artifact_identity": null
+  },
+  "verdict": "ISOLATED_MARKETPLACE_INSTALL_AND_ROUTING_VERIFIED_MODEL_ARTIFACT_PENDING_AUTHED_FRESH_SESSION"
+}

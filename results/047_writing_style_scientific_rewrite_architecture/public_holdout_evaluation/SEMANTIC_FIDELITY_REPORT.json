@@ -1,0 +1,103 @@
+{
+  "schema": "AI_SKILLS_047_SEMANTIC_FIDELITY_REPORT_V1",
+  "implementation_freeze_commit": "ade5a1f653f88df07eb0c70edfd016c744b1611a",
+  "executor_assessment_only": true,
+  "requires_independent_text_review": true,
+  "items": [
+    {
+      "id": "HOLDOUT-UNSEEN-001",
+      "candidate": "ARCHITECTURE_C",
+      "critical_fidelity_violations": 0,
+      "claim_statuses": [
+        {
+          "claim": "Bobbio is for researchers and connects the research knowledge workflow.",
+          "status": "preserved",
+          "source_evidence": "面向科研人员; 把科研过程中原本割裂的几段工作连成一条连续、可审核、可追溯的知识链",
+          "candidate_evidence": "面向科研人员; 把论文发现、阅读、整理和后续写作连接起来"
+        },
+        {
+          "claim": "Bobbio is not meant to replace researcher judgment with AI summaries.",
+          "status": "preserved",
+          "source_evidence": "目标不是让 AI 替研究者“读完并总结论文”",
+          "candidate_evidence": "不是替研究者读论文; 最重要的不是把所有论文都自动总结一遍"
+        },
+        {
+          "claim": "The Bobbio Abbey reference is a brand origin, not a product theme commitment.",
+          "status": "preserved",
+          "source_evidence": "历史意象只是品牌来源，不意味着产品会采用宗教或历史主题的功能设计",
+          "candidate_evidence": "只解释品牌来源，不代表产品会采用宗教或历史主题的功能设计"
+        },
+        {
+          "claim": "The hard problem is loss of knowledge between existing tools.",
+          "status": "preserved",
+          "source_evidence": "真正困难的是这些环节之间的知识不断丢失",
+          "candidate_evidence": "问题出在这些环节之间"
+        },
+        {
+          "claim": "AI may explain relevance but does not make the final paper-selection decision.",
+          "status": "preserved",
+          "source_evidence": "AI 可以回答“为什么这篇可能值得读”，但不替用户做最终筛选",
+          "candidate_evidence": "AI 可以解释“为什么这篇论文可能值得读”，但不替用户做最终筛选"
+        }
+      ],
+      "reader_effort_delta_vs_baseline": "clear_improvement",
+      "reader_effort_evidence": "Candidate explains local-first/human-in-the-loop in Chinese before preserving the workflow list, converts scattered English tool labels into prose relations, and keeps proper names such as Zotero, Notion, GPT, Codex, Research Agents, OpenAlex, Semantic Scholar, PubMed, and arXiv."
+    },
+    {
+      "id": "HOLDOUT-UNSEEN-002",
+      "candidate": "ARCHITECTURE_C",
+      "critical_fidelity_violations": 0,
+      "claim_statuses": [
+        {
+          "claim": "Two confounders were corrected: whole-myocardium merge rule and persistent AdamW optimizer state.",
+          "status": "preserved",
+          "source_evidence": "whole-myocardium 现在按 `{1,4,5}` 合并计算; AdamW optimizer state 在通信轮之间持续保留",
+          "candidate_evidence": "whole-myocardium 统一按 `{1,4,5}` 合并计算; AdamW optimizer state 也在通信轮之间持续保留"
+        },
+        {
+          "claim": "Experimental conditions remained CARE fold-0, checkpoint, LGE-only, 7 centers/clients, 20 local updates.",
+          "status": "preserved",
+          "source_evidence": "同一 CARE fold-0、同一 checkpoint、LGE-only 输入、7 个真实 center/client 和每个 client 20 次本地更新",
+          "candidate_evidence": "同一 CARE fold-0、同一 checkpoint、LGE-only 输入、7 个真实 center/client，并且每个 client 做 20 次本地更新"
+        },
+        {
+          "claim": "Decoder pooled improvement is most stable; full-model pooled improves but varies more across seeds.",
+          "status": "preserved",
+          "source_evidence": "decoder pooled 相比原始 checkpoint 的改善最稳定；full-model pooled 也有改善趋势，但 seed 间波动更大",
+          "candidate_evidence": "decoder pooled 的改善最稳定；full-model pooled 也呈现改善趋势，但不同 seed 之间波动更大"
+        },
+        {
+          "claim": "R=5 did not stably beat R=1, so few-round value is not established under the small budget.",
+          "status": "preserved",
+          "source_evidence": "R=5 增加 5 倍通信后，没有稳定优于 R=1，因此当前小预算下看不出 few-round 的性价比优势",
+          "candidate_evidence": "把通信从 R=1 增加到 R=5 后，也没有稳定优于 R=1；因此在当前小预算实验里，few-round 通信还看不出明确的性价比优势"
+        }
+      ],
+      "reader_effort_delta_vs_baseline": "modest_improvement",
+      "reader_effort_evidence": "Candidate keeps all experiment facts and model names, moves the confounder correction into a clearer setup sentence, and separates pooled/FedAvg interpretation from the small-budget caveat."
+    },
+    {
+      "id": "SNF-CN-TECH-001",
+      "candidate": "OUTPUT",
+      "decision": "NO_DEEP_REWRITE",
+      "critical_fidelity_violations": 0,
+      "snf_status": "passed",
+      "evidence": "Output preserves the original range exactly; no package names, version constraints, or reproducibility caveats were rewritten."
+    },
+    {
+      "id": "SNF-CN-SCI-002",
+      "candidate": "OUTPUT",
+      "decision": "NO_DEEP_REWRITE",
+      "critical_fidelity_violations": 0,
+      "snf_status": "passed",
+      "evidence": "Output preserves the original range exactly; Asteria, simulation, dataset, canvas, model-lineage, and evidence-claim distinctions are unchanged."
+    }
+  ],
+  "executor_verdict": {
+    "positive_batch": "provisionally_passed_executor_assessment",
+    "should_not_fix_batch": "passed_executor_assessment",
+    "critical_fidelity_violations": 0,
+    "release_interpretation": "EXPERIMENTAL_ARCHITECTURE_PASS_CANDIDATE",
+    "release_boundary": "NO_BUMP_NO_PRODUCTION_CUTOVER_PENDING_REVIEWER_AND_USER"
+  }
+}
