@@ -303,6 +303,49 @@ reviewed/045_presentations_real_use_regression_hardening
 
 任何情况下都不得打印、commit、push、回显或要求用户粘贴 secret value。若正式路径使用 GitHub repository secrets，本地 shell 中对应环境变量 `unset` 不是 blocker。task 完成后应删除 task-local credential 副本和不再需要的 private plaintext 临时副本，但保留不含秘密的授权范围、artifact hash、provider/purpose 和删除结果作为 evidence。
 
+### 8.2.1.1 Central plugin refinement uses isolated production replay
+
+AI_Skills_Collection 中央 plugin refinement 常常需要验证“当前 task branch 的 canonical plugin payload”，而用户当前真实 Codex 可能仍在使用 `main`、另一个 reviewed branch 或另一个 plugin candidate。因此，证明 normal installed production entrypoint 不等于可以修改用户当前 live global marketplace/plugin cache。
+
+当 AI_Skills_Collection 的任务返修或验证中央 plugin，并需要 production-entrypoint evidence 时，默认验证链是：
+
+```text
+canonical source
+-> canonical marketplace generator
+-> task-local isolated/shadow Codex environment
+-> normal Marketplace/plugin install
+-> fresh Codex runtime/session
+-> ordinary user invocation
+```
+
+不得把修改用户当前 live global marketplace、plugin install 或 plugin cache 作为默认验证方法。若 REQUEST / PLAN / AGENTS 已经明确 `isolated`、`shadow`、`task-local` 或 no live-global mutation，Executor 必须直接执行该路径，不得重新询问“是否临时切换 global marketplace”。这种询问属于错误 recovery path。
+
+以下都属于普通、可逆的执行细节，由 Executor 自行决定合理位置和清理方式：isolated `CODEX_HOME`、shadow marketplace、task-local plugin cache、temporary directory、local virtualenv、install smoke directory、fresh session、retry、timeout、local evidence directory、task-local temporary state cleanup。
+
+只有同时满足以下条件时，才允许询问 live-global mutation：已经真实尝试 task-local isolated/shadow route；有具体证据说明当前 Codex/Marketplace 工具链无法在 isolated state 下完成等价 normal install/invocation；不存在 alternate `CODEX_HOME`、isolated config、shadow cache、task-local marketplace、`ai-bridge plugin-replay` bounded wrapper 或其他等价安全路径；frozen product gate 又确实只能通过 live-global mutation 验证。询问前必须报告 actual attempts、observed limitation、alternatives checked，以及为什么 live-global genuinely required。
+
+如果实际遇到 shell command approval，先区分它和模型主动提出的用户选择题。记录 exact command、existing rule match 和为什么当前 rule 没有放行；检查当前 installed Codex rules 是否与 canonical Bridge Kit rules 一致。若 `ai-bridge plugin-replay` 已经 `decision = "allow"` 却仍被 prompt，先诊断 rule installation / command shape，不得为了省事新增宽泛 `git`、`python` 或 `bash` allow rule。
+
+### 8.2.1.2 Keep production-entrypoint replay and private-artifact transport separate
+
+Central plugin refinement 中，installed production-entrypoint validation 和 private artifact generation/review 是两条不同 evidence path，不得混用。
+
+Installed-entrypoint validation 默认使用当前 branch 的 generated payload，经 isolated/shadow Marketplace install、fresh Codex runtime 和 ordinary user invocation 证明 plugin install、routing、production runtime behavior 与 stage receipt。这里可以使用当前 Codex identity，但只用于验证入口、路由和运行时行为；不得因为要处理 private artifact 就自动转向 Codex identity / plugin-replay transport。
+
+Private artifact generation/review 必须遵守 frozen REQUEST / PLAN 已指定的安全 transport。例如 frozen path 已经是：
+
+```text
+local age encryption
+-> GitHub Actions ephemeral decrypt
+-> OpenAI Responses API store=false
+-> encrypted output
+-> local decrypt
+```
+
+则 Executor 必须直接使用该路径，不得再次询问“要不要改用 Codex 身份”“要不要以后提供 API key”或“要不要换另一条模型调用路径”。如果当前 secure transport 尚不能执行 frozen Plan 要求的 consumer/runtime，这是 implementation gap：Executor 应修当前 task scope 内的 adapter/driver/hook，或在确实属于 frozen architecture ambiguity 时返回 Planner；不得通过多个 credential/model path 选项规避实现。
+
+已配置 GitHub repository secret 时，本地 shell 中 OpenAI key `unset` 不是 blocker。Executor 不得要求用户提供 key、粘贴 token、复制 `auth.json` 或重复确认已有 secret。若同一个 artifact/provider/purpose/transport scope 已经授权，retry、style smoke、fresh run 和 Text Review 都不得再次询问。只有 provider、private artifact scope、purpose、credential scope 发生变化，或 frozen transport 已被真实证明不可实现且需要用户决定另一种不同风险的 external path 时，才允许重新问。
+
 ### 8.2.2 已停止 task 的 artifact 只能作为显式冻结的只读回归输入
 
 一个旧 Reviewed Handoff task 被停止、废弃或设为只读，不等于它的真实失败 artifact 必须被遗忘。后续新 task 可以把旧 artifact 当作 `KNOWN_REGRESSION`，但只有在新 task 的 REQUEST/PLAN 明确冻结了该用途时才允许读取或 replay。
