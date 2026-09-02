@@ -269,6 +269,8 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertIn("OPENAI_REVIEW_API_KEY", workflow)
         self.assertIn("OPENAI_VISUAL_REVIEW_API_KEY", workflow)
         self.assertIn("OPENAI_TEXT_TRANSFORM_MODEL", workflow)
+        self.assertIn("OPENAI_TEXT_TRANSFORM_TIMEOUT_SECONDS", workflow)
+        self.assertIn('--timeout "${OPENAI_TEXT_TRANSFORM_TIMEOUT_SECONDS}"', workflow)
         self.assertIn('git show --name-only --format= "${GITHUB_SHA}"', workflow)
         self.assertNotIn('git diff-tree --no-commit-id --name-only -r "${GITHUB_SHA}"', workflow)
         self.assertNotIn("@main", workflow)

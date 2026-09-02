@@ -31,6 +31,7 @@ jobs:
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_REVIEW_API_KEY || secrets.OPENAI_VISUAL_REVIEW_API_KEY }}
       OPENAI_TEXT_TRANSFORM_MODEL: ${{ vars.OPENAI_TEXT_TRANSFORM_MODEL }}
+      OPENAI_TEXT_TRANSFORM_TIMEOUT_SECONDS: ${{ vars.OPENAI_TEXT_TRANSFORM_TIMEOUT_SECONDS || '600' }}
       AI_BRIDGE_TEXT_TRANSFORM_MANIFEST: ${{ github.event.inputs.manifest }}
       AI_BRIDGE_TEXT_TRANSFORM_OUTPUT_AGE: ${{ github.event.inputs.output_age }}
       AI_BRIDGE_TEXT_TRANSFORM_RESULT: ${{ github.event.inputs.result }}
@@ -127,7 +128,8 @@ jobs:
             --manifest "${AI_BRIDGE_TEXT_TRANSFORM_MANIFEST}" \
             --plaintext "${AI_BRIDGE_TEXT_TRANSFORM_PLAINTEXT}" \
             --output-age "${AI_BRIDGE_TEXT_TRANSFORM_OUTPUT_AGE}" \
-            --result "${AI_BRIDGE_TEXT_TRANSFORM_RESULT}"
+            --result "${AI_BRIDGE_TEXT_TRANSFORM_RESULT}" \
+            --timeout "${OPENAI_TEXT_TRANSFORM_TIMEOUT_SECONDS}"
 
       - name: Commit text transform evidence
         if: env.AI_BRIDGE_TEXT_TRANSFORM_SKIP != '1'
