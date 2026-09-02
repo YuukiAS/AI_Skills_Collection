@@ -4,7 +4,7 @@
     "implementation_commit": "928de2325d781ca630883d03e0f381092675b269"
   },
   "input": {
-    "ciphertext_sha256": "aece33b6b4fe6e14d33b9e9b1c845ddc27590be62b1d4b9830ccb85bce9a9942",
+    "ciphertext_sha256": "cfd14b8886b4813812d6dfd7153e99bb05d70ddf20e7a136d583bac97318e272",
     "encrypted_payload_path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/input.age",
     "logical_id": "source_text",
     "mime_type": "text/markdown; charset=utf-8",
@@ -52,7 +52,7 @@
         "size_bytes": 17220
       }
     ],
-    "goal": "Rewrite the complete private Chinese scientific report into natural reader-facing Chinese according to the bound writing-style scientific-rewrite instructions. Preserve facts, numbers, formulas, citations, terminology, caveats, uncertainty, comparisons, attribution, decision logic, and conclusion strength. Do not summarize; return the complete rewritten Markdown/plain text."
+    "goal": "Rewrite the complete private Chinese scientific report into natural reader-facing Chinese according to the bound writing-style scientific-rewrite instructions. Do not summarize, shorten, omit appendices, drop citations, or collapse reference/path-heavy sections. Preserve all facts, numbers, formulas, citations, URLs, repository names, file paths, code-like tokens, model names, dataset names, dates, caveats, uncertainty, comparisons, attribution, decision logic, and conclusion strength. Keep every citation token, URL/path token, inline code token, and formal identifier exactly unchanged at least once in the returned text. Return the complete rewritten Markdown/plain text only."
   },
   "output": {
     "public_recipient": "age16926vness4qjvkvhegry0742drfuhdzva7q2wjde05dlrwwq3vyq5cqhuw",
