@@ -759,6 +759,18 @@ def _collect_card_proposition_ids(card: dict[str, Any]) -> set[str]:
     return represented
 
 
+def _infer_card_item_proposition_ids(item: dict[str, Any], propositions: list[dict[str, Any]]) -> list[str]:
+    item_spans = {str(span_id) for span_id in item.get("source_span_ids", [])}
+    matched = [
+        str(proposition["proposition_id"])
+        for proposition in propositions
+        if item_spans and item_spans.intersection(str(span_id) for span_id in proposition.get("source_span_ids", []))
+    ]
+    if matched:
+        return sorted(set(matched))
+    return sorted(str(proposition["proposition_id"]) for proposition in propositions)
+
+
 def _meaning_card_field_for_proposition(proposition: dict[str, Any]) -> str:
     kind = str(proposition.get("kind", "claim"))
     if kind == "evidence":
@@ -825,7 +837,9 @@ def normalize_meaning_card(raw: dict[str, Any], unit: RewriteUnit, propositions:
             item["source_span_ids"] = validate_source_span_ids(item.get("source_span_ids", []), known_spans, f"{stage}.{field}[{index}]")
             prop_ids = [str(pid) for pid in item.get("source_proposition_ids", [])]
             if not prop_ids:
-                raise RuntimeError(f"{stage}.{field}[{index}] must bind source_proposition_ids")
+                prop_ids = _infer_card_item_proposition_ids(item, propositions)
+                item["source_proposition_ids"] = prop_ids
+                item["runtime_inferred_source_proposition_ids"] = True
             unknown_props = sorted(set(prop_ids) - known_props)
             if unknown_props:
                 raise RuntimeError(f"{stage}.{field}[{index}] references unknown proposition ids: {', '.join(unknown_props[:8])}")
