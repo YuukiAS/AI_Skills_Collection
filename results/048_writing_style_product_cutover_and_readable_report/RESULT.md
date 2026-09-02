@@ -13,8 +13,8 @@ ci_status: PENDING
 
 Revision 1 implementation is in progress. The Executor has:
 
-- implemented and pushed the Bridge Kit companion prerequisite at `YuukiAS/GPT_Codex_AI_Bridge_Kit@27fff1659e3840438602c1b832d0e09a7b12ff91`;
-- implemented the AI_Skills production source and generated payload at `afa39916ff4355ad5a064c09a2f6382553f6e8a1`;
+- implemented and pushed the Bridge Kit companion prerequisite at `YuukiAS/GPT_Codex_AI_Bridge_Kit@65ea9c59afbe2db88bb5d60bf8752f82719f0087`;
+- implemented the AI_Skills production source, generated payload, and shallow-safe text-transform workflow pin at `989fc054d6cd175d990355cf286d0f02cd31b28d`;
 - added `writing-style` internal `scientific-rewrite` route without creating a new top-level plugin;
 - updated `writing-fidelity` and `chinese-prose` boundaries for literal-vs-semantic preservation and final Chinese review;
 - regenerated the canonical Codex marketplace payload;
@@ -41,7 +41,7 @@ Current control-plane state:
 state=EXECUTING
 plan_revision=1
 max_plan_revisions=1
-implementation_commit=afa39916ff4355ad5a064c09a2f6382553f6e8a1
+implementation_commit=989fc054d6cd175d990355cf286d0f02cd31b28d
 ci_required=true
 ci_status=PENDING
 ```
@@ -51,6 +51,8 @@ Local gates passed so far:
 - Bridge Kit `python -m unittest tests.test_text_transform tests.test_text_review -v`: PASS.
 - Bridge Kit `python -m unittest discover -v`: PASS, 282 tests.
 - Bridge Kit GitHub CI for `29a94528c6a4e3807027a172118cf3b9bea918b0`: PASS.
+- Bridge Kit GitHub CI for `27fff1659e3840438602c1b832d0e09a7b12ff91`: PASS.
+- Bridge Kit GitHub CI for `65ea9c59afbe2db88bb5d60bf8752f82719f0087`: PASS.
 - AI_Skills `python scripts/build_codex_marketplace.py --write --validate --check --path-report`: PASS.
 - AI_Skills `python scripts/skills.py validate`: PASS.
 - AI_Skills `python scripts/skills.py audit --all`: PASS.
@@ -59,8 +61,7 @@ Local gates passed so far:
 
 Pending gates:
 
-- Bridge Kit GitHub CI for `27fff1659e3840438602c1b832d0e09a7b12ff91`.
-- GitHub Actions `ai-bridge-text-transform` writeback for the full private report.
+- GitHub Actions `ai-bridge-text-transform` writeback for the full private report with the shallow-safe Bridge Kit workflow detector.
 - Local decrypt of `output.age` and deterministic private fidelity report.
 - Encrypted full-report Text Review request and fresh `TEXT_REVIEW.json`.
 - Branch CI and Scheduled GPT Reviewer.

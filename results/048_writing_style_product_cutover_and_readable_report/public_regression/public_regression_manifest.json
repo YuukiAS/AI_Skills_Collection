@@ -1,7 +1,7 @@
 {
   "schema": "AI_SKILLS_WRITING_STYLE_PUBLIC_REGRESSION_V1",
   "task_key": "048_writing_style_product_cutover_and_readable_report",
-  "implementation_identity": "afa39916ff4355ad5a064c09a2f6382553f6e8a1",
+  "implementation_identity": "989fc054d6cd175d990355cf286d0f02cd31b28d",
   "role": "regression_only_not_unseen_proof",
   "units": [
     {
