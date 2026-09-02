@@ -1011,7 +1011,15 @@ def normalize_reader_review(raw: dict[str, Any], known_unit_ids: set[str]) -> di
             question["answerable"] = False
         if question["answerable"] is False:
             has_unanswerable_question = True
-        require_string(question, "inferred_answer", f"{stage}.questions[{index}]")
+        inferred_answer = question.get("inferred_answer")
+        if isinstance(inferred_answer, str) and inferred_answer.strip():
+            question["inferred_answer"] = inferred_answer.strip()
+        elif inferred_answer is None or inferred_answer == "":
+            question["inferred_answer"] = "未提供可回答性说明；按不可回答处理。"
+            question["answerable"] = False
+            has_unanswerable_question = True
+        else:
+            question["inferred_answer"] = str(inferred_answer).strip() or "未提供可回答性说明；按不可回答处理。"
     if raw["decision"] == "PASS" and has_unanswerable_question:
         raw["decision"] = "REVISE"
     for index, finding in enumerate(require_list(raw, "findings", stage), start=1):
