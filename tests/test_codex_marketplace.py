@@ -261,7 +261,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         workflow = (REPO_ROOT / ".github/workflows/ai-bridge-text-transform.yml").read_text(encoding="utf-8")
         transform_docs = (REPO_ROOT / "docs/AI_BRIDGE_TEXT_TRANSFORM.md").read_text(encoding="utf-8")
 
-        bridge_kit_commit = "29a94528c6a4e3807027a172118cf3b9bea918b0"
+        bridge_kit_commit = "27fff1659e3840438602c1b832d0e09a7b12ff91"
         self.assertIn(bridge_kit_commit, workflow)
         self.assertIn(bridge_kit_commit, transform_docs)
         self.assertIn("gpt-codex-ai-bridge-kit[text-transform]", workflow)
