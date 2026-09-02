@@ -1,0 +1,68 @@
+{
+  "external_upload_authorization": "User authorized this specific private Deep Research source artifact to be transformed by OpenAI Responses API with store=false for task 048_writing_style_product_cutover_and_readable_report.",
+  "identity_bindings": {
+    "implementation_commit": "afa39916ff4355ad5a064c09a2f6382553f6e8a1"
+  },
+  "input": {
+    "ciphertext_sha256": "386c8a3393be170ea5d228c44a66365a133d9105a1a96f295b57df6eaafa37ae",
+    "encrypted_payload_path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/input.age",
+    "logical_id": "source_text",
+    "mime_type": "text/markdown; charset=utf-8",
+    "plaintext_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213",
+    "plaintext_size_bytes": 75936,
+    "source_basename": "048_writing_style_private_source.md"
+  },
+  "instructions": {
+    "bundle_sha256": "916c1d4881dc64a4c5f7679da532c11047e52e018dc28287c4824f3858526de8",
+    "files": [
+      {
+        "mime_type": "text/markdown; charset=utf-8",
+        "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/SKILL.md",
+        "sha256": "d6a5821c7f635a459a40d99c8e5ec0b87f459f52871056a65fc8c2b597b844b2",
+        "size_bytes": 10693
+      },
+      {
+        "mime_type": "text/markdown; charset=utf-8",
+        "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/references/meaning-card-and-fidelity-ledger.md",
+        "sha256": "679dfb8a8a28f8b93b7e7669c474efcb5023f23caba630a3e7ed27a306d38e1b",
+        "size_bytes": 2197
+      },
+      {
+        "mime_type": "text/markdown; charset=utf-8",
+        "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/references/positive-style-contract.md",
+        "sha256": "8527b0e99d2b2f258704f59911dd370edf6999655beef841a2f89a588013fc59",
+        "size_bytes": 1525
+      },
+      {
+        "mime_type": "application/json; charset=utf-8",
+        "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/references/seed-transformations.json",
+        "sha256": "dc8996a0124bfebc71708c82336d6a285f0fc1d3446d5441ea2717fb97234c64",
+        "size_bytes": 8270
+      },
+      {
+        "mime_type": "text/markdown; charset=utf-8",
+        "path": "plugins/codex/plugins/writing-style/skills/fidelity/SKILL.md",
+        "sha256": "bdfed30b315c23e986bd00b513b57c3dda96ceebc759b50a91c8a117954c11f0",
+        "size_bytes": 9631
+      },
+      {
+        "mime_type": "text/markdown; charset=utf-8",
+        "path": "plugins/codex/plugins/writing-style/skills/zh/SKILL.md",
+        "sha256": "02c671fc37e3604ffb41e928996f1277b1a46f79215a71023a6264eeed885f0b",
+        "size_bytes": 17220
+      }
+    ],
+    "goal": "Rewrite the complete private Chinese scientific report into natural reader-facing Chinese according to the bound writing-style scientific-rewrite instructions. Preserve facts, numbers, formulas, citations, terminology, caveats, uncertainty, comparisons, attribution, decision logic, and conclusion strength. Do not summarize; return the complete rewritten Markdown/plain text."
+  },
+  "output": {
+    "public_recipient": "age16926vness4qjvkvhegry0742drfuhdzva7q2wjde05dlrwwq3vyq5cqhuw",
+    "public_recipient_path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/output.age.pub",
+    "public_recipient_sha256": "f66be35a6abc37b9dce8275b52666f05c13df611e5bb9475c1d3a6ffef3594f3"
+  },
+  "privacy_policy": "PRIVATE_TEXT_TRANSFORM_AUTHORIZED",
+  "prompt_version": "ai-bridge.text-transform.v1",
+  "schema": "AI_BRIDGE_TEXT_TRANSFORM_MANIFEST_V1",
+  "task_key": "048_writing_style_product_cutover_and_readable_report",
+  "transform_kind": "text-transform",
+  "workflow_type": "reviewed_handoff"
+}

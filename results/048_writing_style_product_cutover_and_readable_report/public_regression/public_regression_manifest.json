@@ -1,0 +1,76 @@
+{
+  "schema": "AI_SKILLS_WRITING_STYLE_PUBLIC_REGRESSION_V1",
+  "task_key": "048_writing_style_product_cutover_and_readable_report",
+  "implementation_identity": "afa39916ff4355ad5a064c09a2f6382553f6e8a1",
+  "role": "regression_only_not_unseen_proof",
+  "units": [
+    {
+      "id": "positive_a_bobbio",
+      "expected_behavior": "meaning_preserving_scientific_rewrite",
+      "repo": "YuukiAS/Bobbio",
+      "commit": "2d8a054bd34291dc061b8b64d5d841d458cc6296",
+      "path": "README.md",
+      "lines": "1-70",
+      "source_path": "results/048_writing_style_product_cutover_and_readable_report/public_regression/sources/bobbio_README_lines_1_70.md",
+      "candidate_path": "results/048_writing_style_product_cutover_and_readable_report/public_regression/candidates/bobbio_README_lines_1_70_candidate.md",
+      "source_sha256": "92429e9035fd855b4130080a8003d8128ee3b4d267672ccf3a60b87c6eb22477",
+      "candidate_sha256": "70dd33416bb6267dedbaf225d2409acec7256721960be2d7a44c850b3b3c4287",
+      "exact_check": {
+        "ok": true,
+        "checked_count": 6,
+        "missing": []
+      }
+    },
+    {
+      "id": "positive_b_distributed_segcomm",
+      "expected_behavior": "meaning_preserving_scientific_rewrite",
+      "repo": "YuukiAS/Distributed_Imaging_Inference",
+      "commit": "0e895fdbce37c34967d8375059154df1d76397f4",
+      "path": "docs/SEGCOMM_CORRECTION_STABILITY_REPORT_2026-08-28.md",
+      "lines": "1-8",
+      "source_path": "results/048_writing_style_product_cutover_and_readable_report/public_regression/sources/distributed_SEGCOMM_CORRECTION_STABILITY_REPORT_2026-08-28_lines_1_8.md",
+      "candidate_path": "results/048_writing_style_product_cutover_and_readable_report/public_regression/candidates/distributed_SEGCOMM_CORRECTION_STABILITY_REPORT_2026-08-28_lines_1_8_candidate.md",
+      "source_sha256": "e4f1369cdc23c767943bff613f776e60b02b4689b5134f5574b94639bbddd52a",
+      "candidate_sha256": "fa54250eb8239152127c24f680c2534f38a6ade86d853f0d428624a6450f86fe",
+      "exact_check": {
+        "ok": true,
+        "checked_count": 17,
+        "missing": []
+      }
+    },
+    {
+      "id": "should_not_fix_a_ai_research_toolkit",
+      "expected_behavior": "low_edit_or_no_deep_rewrite",
+      "repo": "YuukiAS/AI_Research_Toolkit",
+      "commit": "b822dff09794766a1a013b100eb8f78a45514c7b",
+      "path": "R_RESEARCH_STACK.md",
+      "lines": "1-13",
+      "source_path": "results/048_writing_style_product_cutover_and_readable_report/public_regression/sources/ai_research_toolkit_R_RESEARCH_STACK_lines_1_13.md",
+      "candidate_path": "results/048_writing_style_product_cutover_and_readable_report/public_regression/candidates/ai_research_toolkit_R_RESEARCH_STACK_lines_1_13_candidate.md",
+      "source_sha256": "2f44f24073713cadb7ad6a012ae3e4959448926a35c66c93e568fc2dd651313b",
+      "candidate_sha256": "2f44f24073713cadb7ad6a012ae3e4959448926a35c66c93e568fc2dd651313b",
+      "exact_check": {
+        "ok": true,
+        "checked_count": 9,
+        "missing": []
+      }
+    },
+    {
+      "id": "should_not_fix_b_asteria",
+      "expected_behavior": "low_edit_or_no_deep_rewrite",
+      "repo": "YuukiAS/Asteria",
+      "commit": "80ad881bc88ad1caf017959e320e539028eb5a25",
+      "path": "ROADMAP.md",
+      "lines": "5-17",
+      "source_path": "results/048_writing_style_product_cutover_and_readable_report/public_regression/sources/asteria_ROADMAP_lines_5_17.md",
+      "candidate_path": "results/048_writing_style_product_cutover_and_readable_report/public_regression/candidates/asteria_ROADMAP_lines_5_17_candidate.md",
+      "source_sha256": "18400b402f15f290978c974d01c2fc7f1f0479bd718dece264ff3bd79aced4f8",
+      "candidate_sha256": "18400b402f15f290978c974d01c2fc7f1f0479bd718dece264ff3bd79aced4f8",
+      "exact_check": {
+        "ok": true,
+        "checked_count": 0,
+        "missing": []
+      }
+    }
+  ]
+}
