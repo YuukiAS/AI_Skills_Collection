@@ -27,6 +27,8 @@ Review 1 repair is ready for CI and external Review 2. The Executor has:
 - received fresh Text Review PASS evidence at `f0ea58f`;
 - removed all task-owned presentations source, generated payload, and presentation-only test changes from the current 048 candidate diff, restoring those paths to `origin/main`;
 - recorded the unrelated latest-main presentation CI failures as baseline evidence rather than treating them as 048 scope;
+- repaired that unrelated `main` CI baseline independently on `main` at `0bae10b5ab5df914d77ca29212845f9e39146452`, where GitHub Actions `Codex Marketplace` run `33621860808` completed successfully;
+- absorbed the independently passed `main` baseline into the current 048 branch content without reintroducing presentations source/generated/test ownership into the 048 tree diff against latest `origin/main`;
 - added public-safe production maintenance and normal installed-entrypoint evidence under `results/048_writing_style_product_cutover_and_readable_report/production_entrypoint/`.
 
 ## Current Evidence
@@ -50,7 +52,7 @@ plan_revision=1
 max_plan_revisions=1
 implementation_commit=928de2325d781ca630883d03e0f381092675b269
 ci_required=true
-ci_status=PENDING in `CURRENT.json`; previous 048 branch CI run `33613131960` was green only while the branch still contained out-of-scope presentations changes. Review 1 required those changes to be removed. Latest-main run `33586884130` at `8faafd5a7ee60b394a53de5debfde3ccfe60b8cc` independently showed presentation render-probe failures and a repository-version baseline failure, so 048 records that as unrelated baseline evidence instead of repairing presentations. `CURRENT.implementation_commit` intentionally remains bound to the text-reviewed writing-style implementation commit because the private Text Review identity must not be rewritten by this metadata/evidence repair.
+ci_status=PENDING in `CURRENT.json`; previous 048 branch CI run `33613131960` was green only while the branch still contained out-of-scope presentations changes. Review 1 required those changes to be removed. Latest-main run `33586884130` at `8faafd5a7ee60b394a53de5debfde3ccfe60b8cc` independently showed presentation render-probe failures and a repository-version baseline failure, so 048 first recorded that as unrelated baseline evidence instead of repairing presentations in 048. The unrelated main baseline was then repaired independently on `main` at `0bae10b5ab5df914d77ca29212845f9e39146452`; GitHub Actions `Codex Marketplace` run `33621860808` completed successfully for that main commit. The current 048 branch content now includes that passed main baseline and awaits a fresh 048 CI run. `CURRENT.implementation_commit` intentionally remains bound to the text-reviewed writing-style implementation commit because the private Text Review identity must not be rewritten by this metadata/evidence repair.
 ```
 
 Local gates passed so far:
@@ -65,7 +67,7 @@ Local gates passed so far:
 - AI_Skills `python scripts/skills.py audit --all`: PASS.
 - AI_Skills `python -m unittest tests.test_scientific_rewrite tests.test_codex_marketplace -v`: PASS, 42 tests.
 - `git diff --check`: PASS.
-- AI_Skills `python -m unittest discover -s tests`: FAIL, 174 tests run, 3 failures, all in `tests/test_presentations.py`: one `real render not ok: COMPILE_FAILED` and two missing `matplotlib` failures in presentation benchmark generators. This is recorded as an unrelated presentations/environment baseline and is not repaired in 048.
+- AI_Skills `MPLCONFIGDIR=/tmp/ai-skills-048-mplconfig /tmp/ai-skills-048-venv/bin/python -m unittest discover -s tests`: PASS, 175 tests, after absorbing the independently passed main baseline repair.
 - GitHub Actions `ai-bridge-text-transform` for the full private report: PASS, `store=false`, plaintext not committed.
 - Local decrypt of `output.age`: PASS; plaintext SHA matched `TEXT_TRANSFORM.json`.
 - Sanitized deterministic private fidelity report: raw helper checked 387 spans and leaves 29 citation/path extractor misses after the current tail-removal, engineering-table, and reviewed phrase repair. Missing span text is not committed; semantic acceptability is intentionally delegated to fresh private Text Review rather than claimed from the helper alone.
@@ -73,6 +75,8 @@ Local gates passed so far:
 - Fresh GitHub Actions Text Review evidence at `f0ea58f`: PASS, `blocking_findings=[]`, reviewed payload SHA `e5ad5f00771301e86d0009fc43354eaed45d5b00a8df1acdd8f420d62af86563`, plaintext bundle SHA `f640a48c879195b89e11335f3b65df3804bc49caf71cb130d5595321ddb61db3`.
 - Observed GitHub Actions `Codex Marketplace` run `33610658349`: FAIL. The three failures were all in `tests/test_presentations.py` and reported `render_chinese_math_pdf_probe.json: render probe failed`; no `writing-style` or text-transform test failed in that run.
 - Observed latest-main GitHub Actions `Codex Marketplace` run `33586884130` at `8faafd5a7ee60b394a53de5debfde3ccfe60b8cc`: FAIL with unrelated presentation render-probe failures and a repository-version baseline failure per Review 1.
+- Observed 048 GitHub Actions `Codex Marketplace` run `33620483080` at `b3b73e6b93440ec5990bfc3aa3affc5bc7b9c003`: FAIL with only three `tests/test_presentations.py` render-probe failures; no `writing-style`, text-transform, or production-entrypoint failure. This was before absorbing the independent main baseline repair.
+- Independent main baseline repair `0bae10b5ab5df914d77ca29212845f9e39146452`: GitHub Actions `Codex Marketplace` run `33621860808` completed successfully; local `MPLCONFIGDIR=/tmp/ai-skills-main-048-baseline-mplconfig /tmp/ai-skills-048-venv/bin/python -m unittest discover -s tests` also passed, 166 tests.
 - Review 1 production maintenance replay: `ai-bridge plugin-replay` run `20260902T102228Z-4c3b637c7857`, status `completed`, exit code `0`, write isolation `passed`, strict read isolation `false`, final message `preflight_valid_no_product_pass_claimed`, no private plaintext requested.
 - Review 1 writing-style routing replay: `ai-bridge plugin-replay` run `20260902T102406Z-1c57d652ee1a`, status `completed`, exit code `0`, write isolation `passed`, strict read isolation `false`; observed `heavy_should_trigger -> scientific-rewrite`, `light_polish -> chinese-prose / zh`, and `fidelity_only -> writing-fidelity / fidelity`.
 - Review 1 shadow installed marketplace: `codex plugin list` with `CODEX_HOME=/tmp/ai-skills-048-codex-home` showed `yuukias-ai-skills` loaded from `/tmp/ai-skills-048/.agents/plugins/marketplace.json`, with `writing-style@yuukias-ai-skills` installed/enabled from `/tmp/ai-skills-048/plugins/codex/plugins/writing-style` and `ai-skills-core@yuukias-ai-skills` installed/enabled from `/tmp/ai-skills-048/plugins/codex/plugins/ai-skills-core`.
@@ -81,7 +85,7 @@ Local gates passed so far:
 
 Pending gates:
 
-- Branch CI remains unresolved until GitHub Actions runs against the current branch tip with the out-of-scope presentations changes removed.
+- Branch CI remains unresolved until GitHub Actions runs against the current 048 branch tip after absorbing the independently passed main baseline.
 - Scheduled GPT Reviewer has not yet advanced the task from `WAITING_FOR_CI`.
 - User reading and explicit `ACCEPT`.
 
