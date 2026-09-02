@@ -1,0 +1,43 @@
+{
+  "blocking_findings": [],
+  "created_at": "2026-09-02T08:49:14Z",
+  "encrypted_payload": {
+    "path": "results/048_writing_style_product_cutover_and_readable_report/text_review/payload.age",
+    "sha256": "e5ad5f00771301e86d0009fc43354eaed45d5b00a8df1acdd8f420d62af86563"
+  },
+  "evidence_id": "text-review-048_writing_style_product_cutover_and_readable_report-f7aba159ac98",
+  "input_manifest": {
+    "identity_bindings": {
+      "implementation_commit": "928de2325d781ca630883d03e0f381092675b269"
+    },
+    "manifest_sha256": "f7aba159ac98b7eeb4f028879d1ea8f67bb7d4ed6e5f35cac22b84c304c61423",
+    "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
+    "rubric": {
+      "instructions": "Review the complete private source and complete candidate. PASS only if the candidate is a complete, faithful, natural reader-facing Chinese rewrite of the source, with no unresolved critical drift in facts, numbers, formulas, citations, paths, identifiers, caveats, attribution, comparisons, uncertainty, or conclusion strength. Explicitly assess completeness, source fidelity, natural Chinese readability, whole-document coherence, and whether the deterministic section/context restore is acceptable. Do not require truncated DOI/path extractor fragments to appear as standalone reader-visible text; judge whether real citation/path identities are preserved in readable context."
+    },
+    "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "PASS",
+      "item_id": "primary_text",
+      "requirement_ids": [
+        "complete_faithful_natural_chinese_rewrite"
+      ],
+      "summary": "候选文本完整覆盖源文的结论、审计边界、实验数值与公式、方法/工程比较表、路线与 Stop/Go 标准、数据集设计、参考文献及未决事项。路径、标识符、引用、数值、不确定性限定和结论强度均得到保留；表格与章节重组自然连贯，中文可读性良好。确定性的章节与上下文恢复可接受。"
+    }
+  ],
+  "model": "gpt-5.6-terra",
+  "non_blocking_notes": [],
+  "overall_decision": "PASS",
+  "plaintext_artifact_sha256": "f640a48c879195b89e11335f3b65df3804bc49caf71cb130d5595321ddb61db3",
+  "prompt_version": "ai-bridge.text-review.v1",
+  "review_identity": "f7aba159ac98b7eeb4f028879d1ea8f67bb7d4ed6e5f35cac22b84c304c61423",
+  "review_kind": "text-review",
+  "review_model": "gpt-5.6-terra",
+  "reviewed_input_identity": "f7aba159ac98b7eeb4f028879d1ea8f67bb7d4ed6e5f35cac22b84c304c61423",
+  "schema": "AI_BRIDGE_TEXT_REVIEW_V1",
+  "status": "PASS",
+  "task_key": "048_writing_style_product_cutover_and_readable_report",
+  "workflow_type": "reviewed_handoff"
+}
