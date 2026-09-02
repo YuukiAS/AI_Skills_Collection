@@ -2,9 +2,9 @@
   "external_upload_authorization": "User authorized the private Deep Research artifact for task 049 writing-style scientific rewrite and review through Bridge Kit secure age/GitHub Actions/OpenAI Responses API store=false transport.",
   "identity_bindings": {
     "bridge_kit_commit": "65ea9c59afbe2db88bb5d60bf8752f82719f0087",
-    "implementation_commit": "89c2a8741c8477d9c453f43d32eb93dee537527d",
+    "implementation_commit": "49be3db44e59b5ab1c67ee5cfaebc12e534a7c03",
     "runtime_helper_path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/scripts/rewrite_support.py",
-    "runtime_helper_sha256": "983543a585bb22cdc40374299be594e773c314227c6965b88191e4ecc267f356",
+    "runtime_helper_sha256": "b3480d7ceaf03a1c673f9924a00a673e4359c570653f06ace55aedd7e636fa8b",
     "source_full_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213"
   },
   "input": {
