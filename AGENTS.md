@@ -70,6 +70,22 @@ target domain plugin
 
 不要把 `allow_implicit_invocation: false` 改成 true 来解决这个问题。正确入口是：AI_Skills 的 `AGENTS.md`、Planner 和 Executor 在识别为中央 production plugin refinement 时显式要求使用 `ai-skills-core`，同时继续使用真正的 target domain plugin。
 
+### 2.0.1 Isolated production replay
+
+中央 plugin refinement 验证正常 production entrypoint 时，默认不得修改用户当前 live global plugin installation、Marketplace state 或 plugin cache。
+
+Production replay 的验收要求是：使用 canonical generated plugin payload，通过正常 install / Marketplace mechanism 安装，并在 fresh session 中用普通用户入口调用。默认应在 isolated / shadow Codex home、Marketplace state、plugin cache 或等价临时环境中完成。
+
+只有真实工具链已经证明不存在任何隔离路径，并且 production-entrypoint validation 确实必须修改 live global state 时，才向用户请求明确授权。
+
+禁止：
+
+- 为方便测试直接覆盖真实 global cache；
+- 把 source-tree skill invocation 当作 production replay；
+- 把 benchmark / test helper PASS 当作普通用户入口 PASS。
+
+实验 task 的 live-global mutation 属于需要用户授权的外部状态改变；isolated task-owned cache/state 属于 Executor 可自行管理的可逆实现细节。
+
 ### 2.1 用户说“记录 repo 并保存到合适的地方”时先判断归属
 
 不要机械地把所有问题都写进当前项目 repo，也不要机械地把所有问题都写进 AI_Skills_Collection。
