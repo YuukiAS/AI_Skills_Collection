@@ -976,7 +976,16 @@ def normalize_reader_review(raw: dict[str, Any], known_unit_ids: set[str]) -> di
     for index, question in enumerate(require_list(raw, "questions", stage), start=1):
         if not isinstance(question, dict):
             raise RuntimeError(f"{stage}.questions[{index}] must be an object")
-        if not isinstance(question.get("answerable"), bool):
+        answerable = question.get("answerable")
+        if isinstance(answerable, str):
+            normalized = answerable.strip().lower()
+            if normalized in {"true", "yes", "y", "1", "可回答"}:
+                question["answerable"] = True
+            elif normalized in {"false", "no", "n", "0", "不可回答"}:
+                question["answerable"] = False
+            else:
+                raise RuntimeError(f"{stage}.questions[{index}].answerable must be boolean")
+        elif not isinstance(answerable, bool):
             raise RuntimeError(f"{stage}.questions[{index}].answerable must be boolean")
         require_string(question, "inferred_answer", f"{stage}.questions[{index}]")
     for index, finding in enumerate(require_list(raw, "findings", stage), start=1):

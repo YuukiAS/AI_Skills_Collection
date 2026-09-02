@@ -282,6 +282,18 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertIn("GO or STOP", serialized)
         self.assertNotIn("current_original_unit", serialized)
 
+    def test_reader_review_normalizes_answerable_string_aliases(self) -> None:
+        helper = load_helper()
+        review = helper.normalize_reader_review(
+            {
+                "decision": "REVISE",
+                "questions": [{"answerable": "no", "inferred_answer": "仍不可回答。"}],
+                "findings": [{"unit_id": "unit-001"}],
+            },
+            {"unit-001"},
+        )
+        self.assertIs(review["questions"][0]["answerable"], False)
+
     def test_long_unheaded_source_does_not_collapse_to_one_unit(self) -> None:
         helper = load_helper()
         source = "\n\n".join(
