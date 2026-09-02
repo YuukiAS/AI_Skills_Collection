@@ -37,6 +37,31 @@ SEMANTIC_STATUSES = {
     "omitted",
     "reattributed",
 }
+SEMANTIC_STATUS_ALIASES = {
+    "accurate": "preserved",
+    "covered": "preserved",
+    "kept": "preserved",
+    "ok": "preserved",
+    "resolved": "preserved",
+    "retained": "preserved",
+    "supported": "preserved",
+    "unchanged": "preserved",
+    "partial": "narrowed",
+    "partially_preserved": "narrowed",
+    "understated": "narrowed",
+    "weakened": "narrowed",
+    "expanded": "broadened",
+    "overstated": "broadened",
+    "contradicted": "reversed",
+    "added": "invented",
+    "hallucinated": "invented",
+    "unsupported": "invented",
+    "dropped": "omitted",
+    "missing": "omitted",
+    "not_present": "omitted",
+    "changed_attribution": "reattributed",
+    "misattributed": "reattributed",
+}
 
 NUMBER_RE = re.compile(r"(?<![\w.])[-+]?\d+(?:\.\d+)?(?:%|‰)?(?![\w.])")
 DATE_RE = re.compile(r"\b(?:20\d{2}|19\d{2})(?:[-/年](?:0?[1-9]|1[0-2]))?(?:[-/月](?:0?[1-9]|[12]\d|3[01]))?日?\b")
@@ -786,6 +811,15 @@ def normalize_writer_result(raw: dict[str, Any], unit: RewriteUnit, propositions
     return raw
 
 
+def canonical_semantic_status(status: Any) -> str:
+    token = str(status or "").strip().lower().replace("-", "_").replace(" ", "_")
+    if token in SEMANTIC_STATUSES:
+        return token
+    if token in SEMANTIC_STATUS_ALIASES:
+        return SEMANTIC_STATUS_ALIASES[token]
+    raise RuntimeError("semantic status is invalid")
+
+
 def normalize_semantic_audit(raw: dict[str, Any], unit: RewriteUnit, propositions: list[dict[str, Any]]) -> dict[str, Any]:
     stage = f"{unit.unit_id}-semantic-audit"
     require_fields(raw, ["decision", "findings"], stage)
@@ -796,9 +830,11 @@ def normalize_semantic_audit(raw: dict[str, Any], unit: RewriteUnit, proposition
     for index, finding in enumerate(require_list(raw, "findings", stage), start=1):
         if not isinstance(finding, dict):
             raise RuntimeError(f"{stage}.findings[{index}] must be an object")
-        status = finding.get("status")
-        if status not in SEMANTIC_STATUSES:
+        try:
+            status = canonical_semantic_status(finding.get("status"))
+        except RuntimeError:
             raise RuntimeError(f"{stage}.findings[{index}].status is invalid")
+        finding["status"] = status
         prop_id = str(finding.get("proposition_id", ""))
         if prop_id and prop_id not in known_props:
             raise RuntimeError(f"{stage}.findings[{index}] references unknown proposition_id")
@@ -1141,7 +1177,21 @@ def json_response_schema(name: str, required: list[str]) -> dict[str, Any]:
         elif field in string_fields:
             properties[field] = {"type": "string", "minLength": 1}
         elif field in list_fields:
-            properties[field] = {"type": "array"}
+            if field == "findings" and "semantic_audit" in name:
+                properties[field] = {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": True,
+                        "properties": {
+                            "status": {"type": "string", "enum": sorted(SEMANTIC_STATUSES)},
+                            "proposition_id": {"type": "string"},
+                            "severity": {"type": "string"},
+                        },
+                    },
+                }
+            else:
+                properties[field] = {"type": "array"}
         else:
             properties[field] = {}
     return {
@@ -1573,7 +1623,10 @@ def run_multistage(
             if driver == "openai-responses":
                 semantic = call_openai_json_validated(
                     f"{unit.unit_id}-post-repair-semantic-audit",
-                    "Re-audit semantic preservation after targeted repair. Return PASS or REVISE with findings.",
+                    (
+                        "Re-audit semantic preservation after targeted repair. Return PASS or REVISE with findings. "
+                        "Each finding must use one of these statuses: preserved, narrowed, broadened, reversed, invented, omitted, reattributed."
+                    ),
                     {"source_unit": unit.text, "candidate": unit_result, "meaning_card": card, "exact": exact},
                     model=model,
                     api_key=api_key,
@@ -1695,7 +1748,10 @@ def run_multistage(
             if driver == "openai-responses":
                 semantic = call_openai_json_validated(
                     f"{unit_id}-reader-repair-semantic-audit",
-                    "Audit semantic preservation after reader-targeted repair. Return PASS or REVISE with findings.",
+                    (
+                        "Audit semantic preservation after reader-targeted repair. Return PASS or REVISE with findings. "
+                        "Each finding must use one of these statuses: preserved, narrowed, broadened, reversed, invented, omitted, reattributed."
+                    ),
                     {"source_unit": unit.text, "candidate": repaired, "meaning_card": unit_cards[unit_id], "exact": exact},
                     model=model,
                     api_key=api_key,

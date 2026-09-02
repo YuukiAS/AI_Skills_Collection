@@ -406,6 +406,33 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertTrue(any("-targeted-repair-" in item["stage_id"] for item in receipt["stage_records"]))
         self.assertTrue(any("-post-repair-audit-" in item["stage_id"] for item in receipt["stage_records"]))
 
+    def test_semantic_audit_status_aliases_are_canonicalized_conservatively(self) -> None:
+        helper = load_helper()
+        unit = helper.RewriteUnit(
+            unit_id="unit-001",
+            heading="# 结果",
+            text="CARE 在 2026-08-28 的 Dice=0.81。",
+            start_line=1,
+            end_line=1,
+            literal_invariants=[],
+            source_span_ids=["span-001"],
+            argument_role="result-interpretation",
+            why_these_spans_belong_together="single result unit",
+        )
+        propositions = helper.proposition_inventory(unit)
+        raw = {
+            "decision": "REVISE",
+            "findings": [
+                {"status": "missing", "proposition_id": propositions[0]["proposition_id"], "severity": "critical"},
+                {"status": "partially-preserved", "proposition_id": propositions[0]["proposition_id"], "severity": "minor"},
+            ],
+        }
+        normalized = helper.normalize_semantic_audit(raw, unit, propositions)
+        self.assertEqual([item["status"] for item in normalized["findings"]], ["omitted", "narrowed"])
+        self.assertEqual(normalized["critical_violation_count"], 1)
+        with self.assertRaisesRegex(RuntimeError, "status is invalid"):
+            helper.normalize_semantic_audit({"decision": "PASS", "findings": [{"status": "unclear"}]}, unit, propositions)
+
 
 if __name__ == "__main__":
     unittest.main()
