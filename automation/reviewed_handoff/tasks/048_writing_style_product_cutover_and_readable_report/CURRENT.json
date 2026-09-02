@@ -1,10 +1,10 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "048_writing_style_product_cutover_and_readable_report",
-  "state": "NEEDS_GPT_PLANNER",
+  "state": "PLAN_FROZEN",
   "review_round": 0,
   "max_review_rounds": 2,
-  "plan_revision": 0,
+  "plan_revision": 1,
   "max_plan_revisions": 1,
   "base_commit": "0b3aa144060f747ef60d8c64abbfaa30f2c29e65",
   "base_branch": "main",
@@ -15,6 +15,8 @@
   "review_limit_reached": false,
   "human_gate_reason": null,
   "visual_review_required": false,
-  "text_review_required": false,
-  "next_action": "GPT_PLANNER_REVISE_048_PRIVATE_TEXT_TRANSFORM_ARCHITECTURE"
+  "text_review_required": true,
+  "text_review_manifest_path": "results/048_writing_style_product_cutover_and_readable_report/text_review/text_inputs.json",
+  "text_review_evidence_path": "results/048_writing_style_product_cutover_and_readable_report/text_review/TEXT_REVIEW.json",
+  "next_action": "CODEX_EXECUTOR_IMPLEMENT_048_WITH_BRIDGE_TEXT_TRANSFORM_COMPANION"
 }
