@@ -8,6 +8,13 @@ Current capability status: `baseline`.
 
 ## Incoming real-use feedback
 
+### Advisor discussion questions need a decision-value and answerability gate
+status: NEW
+source: TRACE / CAT-TRACE 35-page group-meeting deck v11 review
+evidence: `YuukiAS/TRACE` commit `06511e3d5444ae8be847ef42ea362c19f6d787f9`; the deck ends with three advisor-facing questions on stronger infinite-tail theory, identifiability constraints for catalogue borrowing, and computational scope. Independent review found that the questions are useful only because each unlocks a real project decision, but the current presentation workflow checks Question/Background styling more strongly than whether the question is worth asking, whether the intended advisor can reasonably answer it, and whether the presenter is prepared for the obvious follow-up questions. The user explicitly wants this judgment applied to future presentations, with likely advisor counterquestions and prepared responses kept in speaker notes or review evidence rather than cluttering the visible slide.
+problem: Before an advisor/supervisor discussion question is accepted into a research deck, the presentation layer should record: (1) the concrete project decision the answer would change; (2) why that decision matters now; (3) whether this audience has the expertise/context to answer; (4) the presenter's current leaning rather than outsourcing all judgment to the advisor; (5) the most likely counterquestion/pushback; and (6) a concise prepared response. Questions that do not unlock a real decision, are not answerable by the audience, or exist only to make the Discussion section look interactive should be removed or rewritten. The visible slide usually needs only Question + minimal Background/options; counterquestion preparation belongs in speaker notes or an executor/reviewer artifact.
+project-specific context: CAT-TRACE's exact three questions and the user's current preferred answers belong to TRACE. The generic issue is advisor-question quality, answerability and presenter preparation.
+
 ### Page-level language audits can pass while sentence and slide transitions remain mechanical
 status: NEW
 source: TRACE / CAT-TRACE 34-page group-meeting deck v10 review
@@ -123,7 +130,7 @@ project-specific context: finite catalogue、open tail、matching、residual dep
 ### Question/background callout lacks a stable research-deck primitive
 status: NEW
 source: TRACE / CAT-TRACE group-meeting deck v4–v7 reviews
-evidence: v5 introduced a purple-line Question treatment; v6 improved geometry and v7 added purple question text, but on v7 P28–P30 the Question is still forced into a narrow right column with small type and heavy wrapping, so the primitive remains visually weak even though its color treatment is more coherent
+evidence: v5 introduced a purple-line Question treatment; v6 improved geometry and v7 added purple question text, but on v7 P28–P30 the Question is still forced into a narrow right column with small type and heavy wrapping, so the primitive remains visually weak even though its color treatment is more coherent.
 problem: simulation question 与 advisor discussion 都需要一种轻量、成熟、非卡片化的 emphasis primitive。Question primitive 需要明确 vertical centering、line height、padding、color hierarchy 和**minimum readable size**；当窄栏不能容纳正常字号时，Question 应改成 full-width block 或页面底部横向区，而不是继续缩字/多行挤压。Background 仍只恢复回答问题所需的 1–2 条事实。
 project-specific context: CAT-TRACE dataset 右栏和具体颜色属于项目；通用问题是 Question/Background 的信息、视觉合同和 responsive layout fallback。
 
