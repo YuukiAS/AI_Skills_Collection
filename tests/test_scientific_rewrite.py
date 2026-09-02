@@ -449,6 +449,53 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertTrue(any("-targeted-repair-" in item["stage_id"] for item in receipt["stage_records"]))
         self.assertTrue(any("-post-repair-audit-" in item["stage_id"] for item in receipt["stage_records"]))
 
+    def test_openai_driver_allows_three_unit_semantic_repair_rounds(self) -> None:
+        helper = load_helper()
+        original = helper.call_openai_text
+        semantic_audits = 0
+
+        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
+            nonlocal semantic_audits
+            if "Audit semantic preservation" in prompt or "Re-audit semantic preservation" in prompt:
+                semantic_audits += 1
+                if semantic_audits < 4:
+                    return json.dumps(
+                        {
+                            "decision": "REVISE",
+                            "findings": [
+                                {
+                                    "proposition_id": "unit-001-prop-001",
+                                    "status": "omitted",
+                                    "source_span_ids": [],
+                                    "candidate_evidence": "candidate still hides a decision condition",
+                                    "severity": "critical",
+                                    "repair_instruction": "restore the missing decision condition",
+                                }
+                            ],
+                        },
+                        ensure_ascii=False,
+                    )
+                return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
+            return structured_stage_response(prompt, source)
+
+        helper.call_openai_text = fake_call
+        try:
+            result = helper.run_multistage(
+                "# 决策\n\n下一轮必须同时比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA；只有 pooled gap 缩小且 drift 受控才 GO，否则 STOP。",
+                driver="openai-responses",
+                model="test-model",
+                api_key="test-key",
+            )
+        finally:
+            helper.call_openai_text = original
+
+        receipt = result["receipt"]
+        stage_ids = [item["stage_id"] for item in receipt["stage_records"]]
+        self.assertTrue(any(stage_id.endswith("-targeted-repair-3") for stage_id in stage_ids))
+        self.assertTrue(any(stage_id.endswith("-post-repair-audit-3") for stage_id in stage_ids))
+        self.assertGreaterEqual(semantic_audits, 4)
+        self.assertTrue(receipt["dataflow_validation"]["ok"])
+
     def test_openai_driver_repairs_final_assembly_revise_once(self) -> None:
         helper = load_helper()
         original = helper.call_openai_text

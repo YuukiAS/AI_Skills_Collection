@@ -28,6 +28,7 @@ RUNTIME_SCHEMA = "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V2"
 PACKET_SCHEMA = "SCIENTIFIC_REWRITE_STAGE_PACKET_V1"
 OPENAI_API_URL = "https://api.openai.com/v1/responses"
 DEFAULT_MODEL = "gpt-5.6-terra"
+UNIT_REPAIR_ROUNDS = 3
 ASSEMBLY_REPAIR_ROUNDS = 2
 SEMANTIC_STATUSES = {
     "preserved",
@@ -1680,7 +1681,7 @@ def run_multistage(
         bind_consumer(records, current_candidate_stage_id, audit_stage_id, "candidate")
         last_audit_stage_id = audit_stage_id
         repair_attempts = 0
-        while (not exact["ok"] or semantic_requires_repair(semantic)) and repair_attempts < 2:
+        while (not exact["ok"] or semantic_requires_repair(semantic)) and repair_attempts < UNIT_REPAIR_ROUNDS:
             repair_attempts += 1
             pre_repair_exact = exact
             pre_repair_semantic = semantic
@@ -1697,7 +1698,9 @@ def run_multistage(
                     (
                         "Repair only the current rewritten unit. Preserve all source facts and return the same structured writer JSON fields. "
                         "Do not rewrite unrelated units. source_coverage_ids must include every supplied source proposition id. "
-                        "If exact.missing lists literal strings, copy those exact strings into reader_core or technical_trace."
+                        "If exact.missing lists literal strings, copy those exact strings into reader_core or technical_trace. "
+                        "If semantic.findings lists critical omissions, condition changes, comparator changes, uncertainty changes, "
+                        "conclusion-strength changes, attribution changes, or invented claims, repair those exact findings against the source unit."
                     ),
                     repair_payload,
                     model=model,
