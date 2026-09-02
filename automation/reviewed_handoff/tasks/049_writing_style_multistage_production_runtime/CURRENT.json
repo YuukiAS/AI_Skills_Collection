@@ -8,7 +8,7 @@
   "max_plan_revisions": 1,
   "base_commit": "0bae10b5ab5df914d77ca29212845f9e39146452",
   "base_branch": "main",
-  "implementation_commit": "5966f31902d2450d9dc9ff3a18bba6977706a9d0",
+  "implementation_commit": "4f6fdd1ce947164be46dcab44e140d428715bb6c",
   "ci_required": true,
   "ci_status": "PENDING",
   "last_review_decision": null,
