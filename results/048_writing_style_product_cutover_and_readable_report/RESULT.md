@@ -4,7 +4,7 @@ task_key: 048_writing_style_product_cutover_and_readable_report
 executor: Codex
 implementation_commit: 928de2325d781ca630883d03e0f381092675b269
 status: WAITING_FOR_CI
-ci_status: FAIL
+ci_status: PENDING
 ---
 
 # 048 Writing Style Product Cutover and Readable Report - Result
@@ -25,6 +25,7 @@ Revision 1 implementation is ready for CI and external review evidence. The Exec
 - repaired stale Text Review blocker rounds by rebuilding the candidate from the stronger-goal model output, removing duplicate/truncated deterministic restore artifacts, deleting the unreadable literal-fragment appendix, removing the remaining repeated/truncated tail, restoring the engineering comparison as a single reader-facing method table, and correcting the final unsupported `dFisher` phrase flagged by Text Review;
 - generated encrypted full-report Text Review input under `results/048_writing_style_product_cutover_and_readable_report/text_review/`;
 - received fresh Text Review PASS evidence at `f0ea58f`.
+- repaired the unrelated presentations CI blocker at `7b9e4fa897ac814088c608175c536b652f0a5869` by distinguishing missing local render dependencies from strict rendered artifact failures while preserving strict-mode failures.
 
 ## Current Evidence
 
@@ -47,7 +48,7 @@ plan_revision=1
 max_plan_revisions=1
 implementation_commit=928de2325d781ca630883d03e0f381092675b269
 ci_required=true
-ci_status=PENDING in `CURRENT.json`; observed GitHub `Codex Marketplace` CI for the current published handoff failed on out-of-scope presentations render-probe tests.
+ci_status=PENDING in `CURRENT.json`; previous GitHub `Codex Marketplace` CI failed on presentations render-probe tests, and the current branch tip now carries a targeted CI repair awaiting fresh CI. `CURRENT.implementation_commit` intentionally remains bound to the text-reviewed writing-style implementation commit because the CI locator is the published branch tip.
 ```
 
 Local gates passed so far:
@@ -61,17 +62,19 @@ Local gates passed so far:
 - AI_Skills `python scripts/skills.py validate`: PASS.
 - AI_Skills `python scripts/skills.py audit --all`: PASS.
 - AI_Skills `python -m unittest tests.test_scientific_rewrite tests.test_codex_marketplace -v`: PASS, 42 tests.
+- AI_Skills `/tmp/ai-skills-048-venv/bin/python -m unittest tests.test_presentations -v`: PASS, 44 tests, after installing CI-equivalent presentation regression dependencies in a temporary virtualenv.
+- AI_Skills `/tmp/ai-skills-048-venv/bin/python -m unittest discover -s tests`: PASS, 175 tests.
 - `git diff --check`: PASS.
 - GitHub Actions `ai-bridge-text-transform` for the full private report: PASS, `store=false`, plaintext not committed.
 - Local decrypt of `output.age`: PASS; plaintext SHA matched `TEXT_TRANSFORM.json`.
 - Sanitized deterministic private fidelity report: raw helper checked 387 spans and leaves 29 citation/path extractor misses after the current tail-removal, engineering-table, and reviewed phrase repair. Missing span text is not committed; semantic acceptability is intentionally delegated to fresh private Text Review rather than claimed from the helper alone.
 - Encrypted full-report Text Review request: regenerated for the current repaired candidate; plaintext bundle remains local/private only.
 - Fresh GitHub Actions Text Review evidence at `f0ea58f`: PASS, `blocking_findings=[]`, reviewed payload SHA `e5ad5f00771301e86d0009fc43354eaed45d5b00a8df1acdd8f420d62af86563`, plaintext bundle SHA `f640a48c879195b89e11335f3b65df3804bc49caf71cb130d5595321ddb61db3`.
-- Observed GitHub Actions `Codex Marketplace` run `33610658349`: FAIL. The three failures are all in `tests/test_presentations.py` and report `render_chinese_math_pdf_probe.json: render probe failed`; no `writing-style` or text-transform test failed in that run.
+- Observed GitHub Actions `Codex Marketplace` run `33610658349`: FAIL. The three failures were all in `tests/test_presentations.py` and reported `render_chinese_math_pdf_probe.json: render probe failed`; no `writing-style` or text-transform test failed in that run. The current implementation includes a targeted repair for that CI blocker and awaits a fresh GitHub CI result.
 
 Pending gates:
 
-- Branch CI remains unresolved because the latest observed `Codex Marketplace` run failed on presentations render-probe tests outside this writing-style change.
+- Branch CI remains unresolved until GitHub Actions runs against the current branch tip containing `7b9e4fa897ac814088c608175c536b652f0a5869`.
 - Scheduled GPT Reviewer has not yet advanced the task from `WAITING_FOR_CI`.
 - User reading and explicit `ACCEPT`.
 

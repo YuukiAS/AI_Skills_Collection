@@ -18,5 +18,5 @@
   "text_review_required": true,
   "text_review_manifest_path": "results/048_writing_style_product_cutover_and_readable_report/text_review/text_inputs.json",
   "text_review_evidence_path": "results/048_writing_style_product_cutover_and_readable_report/text_review/TEXT_REVIEW.json",
-  "next_action": "GITHUB_ACTIONS_CI_AND_TEXT_REVIEW_PENDING"
+  "next_action": "GITHUB_ACTIONS_CI_PENDING"
 }
