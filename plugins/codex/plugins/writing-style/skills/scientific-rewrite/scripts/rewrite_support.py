@@ -2224,7 +2224,34 @@ def run_multistage(
         bind_consumer(records, assembly_repair_stage_id, assembly_rerun_stage_id, "repaired_assembly")
         assembly_review_stage_id = assembly_rerun_stage_id
     if assembly_review["decision"] == "REVISE":
-        raise RuntimeError("final assembly review returned REVISE after bounded repair budget")
+        final_exact = verify_exact(source, candidate, reader_core=reader_core)
+        if not final_exact["ok"]:
+            raise RuntimeError("final assembly review returned REVISE after bounded repair budget with exact literal drift")
+        adjudication_stage_id = "final-assembly-human-style-gate-adjudication"
+        records.append(
+            stage_record(
+                stage_id=adjudication_stage_id,
+                responsibility=(
+                    "preserve bounded assembly review evidence and hand the repaired candidate to the frozen human style gate "
+                    "after unit fidelity, semantic, reader and exact gates remain satisfied"
+                ),
+                unit_id=None,
+                input_payload={
+                    "final_assembly_review_stage_id": assembly_review_stage_id,
+                    "final_assembly_review": assembly_review,
+                    "candidate_sha256": sha256_text(candidate),
+                    "exact_after_bounded_assembly_repairs": final_exact,
+                    "repair_rounds_used": assembly_repair_round,
+                },
+                output_payload={
+                    "decision": "AWAIT_HUMAN_STYLE_REVIEW",
+                    "reason": "bounded assembly repairs exhausted; remaining assembly findings are retained for the user style gate",
+                    "unresolved_final_assembly_finding_count": len(assembly_review.get("findings", [])),
+                },
+                terminal_output=True,
+            )
+        )
+        bind_consumer(records, assembly_review_stage_id, adjudication_stage_id, "bounded_repair_exhausted_review")
     receipt = {
         "schema": RUNTIME_SCHEMA,
         "runtime": "scientific-rewrite.multistage.v1",
