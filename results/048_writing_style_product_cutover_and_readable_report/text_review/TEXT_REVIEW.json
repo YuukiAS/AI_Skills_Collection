@@ -1,0 +1,56 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": "工程侧逐方法比较中，FedFisher 的代码状态写为“本项目未执行 dFisher 验证”；源文仅为“本项目未执行验证”。",
+      "finding_id": "F1",
+      "recommendation": "删除无来源的“dFisher”，恢复为“本项目未执行验证”。",
+      "requirement_id": "source_fidelity",
+      "severity": "non_blocking",
+      "summary": "引入了源文不存在的验证对象名称，轻微改变项目验证状态的表述。"
+    }
+  ],
+  "created_at": "2026-09-02T08:44:40Z",
+  "encrypted_payload": {
+    "path": "results/048_writing_style_product_cutover_and_readable_report/text_review/payload.age",
+    "sha256": "7a38dcdd20502d3e82cc35d2cc8aa456615d060875038bd548b00f3ff1aa8230"
+  },
+  "evidence_id": "text-review-048_writing_style_product_cutover_and_readable_report-06fe4e19f136",
+  "input_manifest": {
+    "identity_bindings": {
+      "implementation_commit": "928de2325d781ca630883d03e0f381092675b269"
+    },
+    "manifest_sha256": "06fe4e19f13652cd37f8b1d4ba4982acc1120f9dee78cdd4b708c7700a83512b",
+    "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
+    "rubric": {
+      "instructions": "Review the complete private source and complete candidate. PASS only if the candidate is a complete, faithful, natural reader-facing Chinese rewrite of the source, with no unresolved critical drift in facts, numbers, formulas, citations, paths, identifiers, caveats, attribution, comparisons, uncertainty, or conclusion strength. Explicitly assess completeness, source fidelity, natural Chinese readability, whole-document coherence, and whether the deterministic section/context restore is acceptable. Do not require truncated DOI/path extractor fragments to appear as standalone reader-visible text; judge whether real citation/path identities are preserved in readable context."
+    },
+    "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "REVISE",
+      "item_id": "primary_text",
+      "requirement_ids": [
+        "completeness",
+        "source_fidelity",
+        "natural_chinese_readability",
+        "whole_document_coherence",
+        "section_context_restore"
+      ],
+      "summary": "候选文本完整覆盖源文的结论、实验数值、公式、路径、引用、数据集审计、限制条件和行动建议；中文自然、结构连贯，表格与公式的可读性恢复可接受。除 FedFisher 工程表中的无来源“dFisher”表述外，未见其他实质性漂移。"
+    }
+  ],
+  "model": "gpt-5.6-terra",
+  "non_blocking_notes": [],
+  "overall_decision": "REVISE",
+  "plaintext_artifact_sha256": "1a04e44c04ea0c25a879cb3694c72fb0b7d25b2199dfe89a7a0bdcb7bc44deb3",
+  "prompt_version": "ai-bridge.text-review.v1",
+  "review_identity": "06fe4e19f13652cd37f8b1d4ba4982acc1120f9dee78cdd4b708c7700a83512b",
+  "review_kind": "text-review",
+  "review_model": "gpt-5.6-terra",
+  "reviewed_input_identity": "06fe4e19f13652cd37f8b1d4ba4982acc1120f9dee78cdd4b708c7700a83512b",
+  "schema": "AI_BRIDGE_TEXT_REVIEW_V1",
+  "status": "REVISE",
+  "task_key": "048_writing_style_product_cutover_and_readable_report",
+  "workflow_type": "reviewed_handoff"
+}
