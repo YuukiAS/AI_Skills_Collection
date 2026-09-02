@@ -1,0 +1,81 @@
+{
+  "bridge_kit_commit": "",
+  "created_at": "2026-09-02T07:59:35Z",
+  "encrypted_input": {
+    "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/input.age",
+    "sha256": "cfd14b8886b4813812d6dfd7153e99bb05d70ddf20e7a136d583bac97318e272"
+  },
+  "encrypted_output": {
+    "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/output.age",
+    "sha256": "62006a13128d4e9abfa7b9c3b8a9958d9deca77a2f71f7c42c5d83dcbca5ecc4"
+  },
+  "evidence_id": "text-transform-048_writing_style_product_cutover_and_readable_report-e1bebe9eebaf",
+  "input_manifest": {
+    "external_upload_authorization_recorded": true,
+    "identity_bindings": {
+      "implementation_commit": "928de2325d781ca630883d03e0f381092675b269"
+    },
+    "instructions": {
+      "bundle_sha256": "916c1d4881dc64a4c5f7679da532c11047e52e018dc28287c4824f3858526de8",
+      "files": [
+        {
+          "mime_type": "text/markdown; charset=utf-8",
+          "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/SKILL.md",
+          "sha256": "d6a5821c7f635a459a40d99c8e5ec0b87f459f52871056a65fc8c2b597b844b2",
+          "size_bytes": 10693
+        },
+        {
+          "mime_type": "text/markdown; charset=utf-8",
+          "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/references/meaning-card-and-fidelity-ledger.md",
+          "sha256": "679dfb8a8a28f8b93b7e7669c474efcb5023f23caba630a3e7ed27a306d38e1b",
+          "size_bytes": 2197
+        },
+        {
+          "mime_type": "text/markdown; charset=utf-8",
+          "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/references/positive-style-contract.md",
+          "sha256": "8527b0e99d2b2f258704f59911dd370edf6999655beef841a2f89a588013fc59",
+          "size_bytes": 1525
+        },
+        {
+          "mime_type": "application/json; charset=utf-8",
+          "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/references/seed-transformations.json",
+          "sha256": "dc8996a0124bfebc71708c82336d6a285f0fc1d3446d5441ea2717fb97234c64",
+          "size_bytes": 8270
+        },
+        {
+          "mime_type": "text/markdown; charset=utf-8",
+          "path": "plugins/codex/plugins/writing-style/skills/fidelity/SKILL.md",
+          "sha256": "bdfed30b315c23e986bd00b513b57c3dda96ceebc759b50a91c8a117954c11f0",
+          "size_bytes": 9631
+        },
+        {
+          "mime_type": "text/markdown; charset=utf-8",
+          "path": "plugins/codex/plugins/writing-style/skills/zh/SKILL.md",
+          "sha256": "02c671fc37e3604ffb41e928996f1277b1a46f79215a71023a6264eeed885f0b",
+          "size_bytes": 17220
+        }
+      ],
+      "goal": "Rewrite the complete private Chinese scientific report into natural reader-facing Chinese according to the bound writing-style scientific-rewrite instructions. Do not summarize, shorten, omit appendices, drop citations, or collapse reference/path-heavy sections. Preserve all facts, numbers, formulas, citations, URLs, repository names, file paths, code-like tokens, model names, dataset names, dates, caveats, uncertainty, comparisons, attribution, decision logic, and conclusion strength. Keep every citation token, URL/path token, inline code token, and formal identifier exactly unchanged at least once in the returned text. Return the complete rewritten Markdown/plain text only."
+    },
+    "manifest_sha256": "e1bebe9eebaf0ec2c52b3f222eccecfdd5abbe8e4337f348326659440c41dc26",
+    "privacy_policy": "PRIVATE_TEXT_TRANSFORM_AUTHORIZED",
+    "schema": "AI_BRIDGE_TEXT_TRANSFORM_MANIFEST_V1"
+  },
+  "model": "gpt-5.6-terra",
+  "output_plaintext_sha256": "40a2f498f7400f513010982a72083b8a5bfb568681e792fd0b41d0e112cbbd89",
+  "output_plaintext_size_bytes": 59376,
+  "output_public_recipient": {
+    "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/output.age.pub",
+    "sha256": "f66be35a6abc37b9dce8275b52666f05c13df611e5bb9475c1d3a6ffef3594f3"
+  },
+  "plaintext_committed": false,
+  "prompt_version": "ai-bridge.text-transform.v1",
+  "schema": "AI_BRIDGE_TEXT_TRANSFORM_V1",
+  "source_plaintext_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213",
+  "source_plaintext_size_bytes": 75936,
+  "store": false,
+  "task_key": "048_writing_style_product_cutover_and_readable_report",
+  "transform_identity": "e1bebe9eebaf0ec2c52b3f222eccecfdd5abbe8e4337f348326659440c41dc26",
+  "transform_kind": "text-transform",
+  "workflow_type": "reviewed_handoff"
+}
