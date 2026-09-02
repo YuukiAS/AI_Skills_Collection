@@ -352,6 +352,49 @@ class ScientificRewriteTests(unittest.TestCase):
         finally:
             helper.call_openai_text = original
 
+    def test_meaning_card_runtime_completes_missing_proposition_bindings(self) -> None:
+        helper = load_helper()
+        unit = helper.split_markdown_units(
+            "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81。下一步比较 FedFisher 和 FedLPA。"
+        )[0]
+        props = helper.proposition_inventory(unit)
+        self.assertGreaterEqual(len(props), 2)
+        first_prop = props[0]["proposition_id"]
+        card = helper.normalize_meaning_card(
+            {
+                "unit_id": unit.unit_id,
+                "reader_job": "解释当前证据和下一步判断",
+                "plain_meaning": "先说明结论，再保留必要技术边界。",
+                "claims": [
+                    {
+                        "normalized_meaning": "模型只绑定了第一条命题。",
+                        "source_span_ids": unit.source_span_ids,
+                        "source_proposition_ids": [first_prop],
+                    }
+                ],
+                "evidence": [],
+                "conditions": [],
+                "comparators": [],
+                "uncertainty": [],
+                "caveats": [],
+                "negative_findings": [],
+                "attribution": [],
+                "decision_logic": [],
+                "terminology": [],
+                "literal_items": [],
+                "relocatable_trace_items": [],
+                "relation_to_previous": "承接前文",
+                "relation_to_next": "引出后文",
+                "rewrite_problem": "workflow-language",
+                "discourse_function": "result-interpretation",
+                "reader_takeaway": "读者应理解判断含义",
+            },
+            unit,
+            props,
+        )
+        self.assertIn("runtime_completed_missing_proposition_ids", card)
+        self.assertFalse(set(prop["proposition_id"] for prop in props) - helper._collect_card_proposition_ids(card))
+
     def test_openai_driver_makes_observable_stage_calls(self) -> None:
         helper = load_helper()
         calls = []

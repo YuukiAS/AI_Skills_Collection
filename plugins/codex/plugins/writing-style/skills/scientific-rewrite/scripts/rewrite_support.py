@@ -757,6 +757,23 @@ def _collect_card_proposition_ids(card: dict[str, Any]) -> set[str]:
     return represented
 
 
+def _meaning_card_field_for_proposition(proposition: dict[str, Any]) -> str:
+    kind = str(proposition.get("kind", "claim"))
+    if kind == "evidence":
+        return "evidence"
+    if kind == "condition":
+        return "conditions"
+    if kind == "comparator":
+        return "comparators"
+    if kind == "caveat":
+        return "caveats"
+    if kind == "attribution":
+        return "attribution"
+    if kind == "decision":
+        return "decision_logic"
+    return "claims"
+
+
 def normalize_meaning_card(raw: dict[str, Any], unit: RewriteUnit, propositions: list[dict[str, Any]]) -> dict[str, Any]:
     stage = f"{unit.unit_id}-meaning-card"
     fields = [
@@ -810,9 +827,21 @@ def normalize_meaning_card(raw: dict[str, Any], unit: RewriteUnit, propositions:
             unknown_props = sorted(set(prop_ids) - known_props)
             if unknown_props:
                 raise RuntimeError(f"{stage}.{field}[{index}] references unknown proposition ids: {', '.join(unknown_props[:8])}")
+    proposition_by_id = {item["proposition_id"]: item for item in propositions}
     missing_props = sorted(known_props - _collect_card_proposition_ids(raw))
     if missing_props:
-        raise RuntimeError(f"{stage} omitted proposition ids: {', '.join(missing_props[:8])}")
+        for prop_id in missing_props:
+            proposition = proposition_by_id[prop_id]
+            field = _meaning_card_field_for_proposition(proposition)
+            raw[field].append(
+                {
+                    "normalized_meaning": proposition["source_excerpt"],
+                    "source_span_ids": proposition["source_span_ids"],
+                    "source_proposition_ids": [prop_id],
+                    "runtime_completed_from_source_proposition": True,
+                }
+            )
+        raw["runtime_completed_missing_proposition_ids"] = missing_props
     for field in ["terminology", "literal_items", "relocatable_trace_items"]:
         require_list(raw, field, stage)
     return raw
