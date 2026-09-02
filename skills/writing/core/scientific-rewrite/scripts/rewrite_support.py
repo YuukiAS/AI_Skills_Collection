@@ -978,11 +978,32 @@ def normalize_reader_review(raw: dict[str, Any], known_unit_ids: set[str]) -> di
             raise RuntimeError(f"{stage}.questions[{index}] must be an object")
         answerable = question.get("answerable")
         if isinstance(answerable, str):
-            normalized = answerable.strip().lower()
-            if normalized in {"true", "yes", "y", "1", "可回答"}:
-                question["answerable"] = True
-            elif normalized in {"false", "no", "n", "0", "不可回答"}:
+            normalized = answerable.strip().lower().strip(".。!！")
+            false_markers = {
+                "false",
+                "no",
+                "n",
+                "0",
+                "not answerable",
+                "cannot answer",
+                "can't answer",
+                "unable",
+                "unanswerable",
+                "partial",
+                "partially",
+                "unclear",
+                "unknown",
+                "不可回答",
+                "不能回答",
+                "无法回答",
+                "部分可回答",
+                "不清楚",
+                "未知",
+            }
+            if normalized in false_markers:
                 question["answerable"] = False
+            elif normalized in {"true", "yes", "y", "1", "answerable", "可回答", "可以回答"}:
+                question["answerable"] = True
             else:
                 raise RuntimeError(f"{stage}.questions[{index}].answerable must be boolean")
         elif not isinstance(answerable, bool):

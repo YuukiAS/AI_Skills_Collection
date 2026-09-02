@@ -287,7 +287,7 @@ class ScientificRewriteTests(unittest.TestCase):
         review = helper.normalize_reader_review(
             {
                 "decision": "REVISE",
-                "questions": [{"answerable": "no", "inferred_answer": "仍不可回答。"}],
+                "questions": [{"answerable": "partially", "inferred_answer": "仍不可回答。"}],
                 "findings": [{"unit_id": "unit-001"}],
             },
             {"unit-001"},
