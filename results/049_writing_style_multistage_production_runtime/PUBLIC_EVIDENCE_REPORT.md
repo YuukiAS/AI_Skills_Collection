@@ -145,8 +145,91 @@ A separate fresh isolated Codex session validated that non-heavy requests do not
 - heavy runtime invoked: `false`
 - heavy receipt created: `false`
 
-## Current Limitation
+## Private Style Smoke Evidence
 
-This evidence does not yet satisfy the full 049 mid-task human style smoke gate.
+The three fixed samples from `STYLE_SMOKE_MANIFEST.md` were generated through the 049 multistage runtime using the Bridge Kit secure private transport pattern:
 
-The remaining first-phase operation is to run the three fixed private style smoke samples from `STYLE_SMOKE_MANIFEST.md` through the 049 multistage runtime using the frozen Bridge Kit secure private transport. Public Git evidence must record only hashes, counts, runtime identity, and encrypted/private artifact locations; private source and candidate plaintext must remain out of Git.
+```text
+private local segment
+-> age encryption
+-> GitHub Actions ephemeral decrypt
+-> generated scientific-rewrite multistage runtime
+-> OpenAI Responses API store=false
+-> encrypted output
+-> local decrypt
+```
+
+Evidence:
+
+- implementation commit bound by manifests: `0ffab04b9140516aff6d94c8e0ca82452dd4a747`
+- GitHub Actions run: `33647523957`
+- writeback commit: `24adeb8`
+- Bridge Kit transport commit pin: `65ea9c59afbe2db88bb5d60bf8752f82719f0087`
+- private local output root: `/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/049_private_style_smoke`
+- private plaintext committed: `false`
+
+### SMOKE-A
+
+- role: `opening_and_checkpoint_interpretation`
+- manifest: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-A/text_transform_inputs.json`
+- encrypted input: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-A/input.age`
+- encrypted output: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-A/output.age`
+- receipt: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-A/stage_receipt.json`
+- local private candidate: `/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/049_private_style_smoke/SMOKE-A/rewritten_smoke.md`
+- source segment sha256: `3e18bea855cc4afccacc47b7ed60600ef637cbffd7ea412fcb54fe4b0575a5db`
+- output plaintext sha256: `463542bc11bdc033d597991037948ea6cd31eabc1abf6f83d2c041c35f86a88a`
+- runtime: `scientific-rewrite.multistage.v1`
+- unit count: `1`
+- stage count: `7`
+- model call count: `6`
+- whole-document writer call: `false`
+- max examples per unit: `4`
+- full seed library injected: `false`
+- store: `false`
+
+### SMOKE-B
+
+- role: `odal_vs_fedfisher_fedlpa`
+- manifest: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-B/text_transform_inputs.json`
+- encrypted input: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-B/input.age`
+- encrypted output: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-B/output.age`
+- receipt: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-B/stage_receipt.json`
+- local private candidate: `/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/049_private_style_smoke/SMOKE-B/rewritten_smoke.md`
+- source segment sha256: `20161b96ba82a610d3669d49aae01eeff32f98eeb1737438c892a869b5660e88`
+- output plaintext sha256: `088baa21cf24c209750562771a8cd812939ad3a0d5fbe3e74a2bc94bb4f9cbc6`
+- runtime: `scientific-rewrite.multistage.v1`
+- unit count: `1`
+- stage count: `7`
+- model call count: `6`
+- whole-document writer call: `false`
+- max examples per unit: `4`
+- full seed library injected: `false`
+- store: `false`
+
+### SMOKE-C
+
+- role: `next_experiment_go_stop`
+- manifest: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-C/text_transform_inputs.json`
+- encrypted input: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-C/input.age`
+- encrypted output: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-C/output.age`
+- receipt: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-C/stage_receipt.json`
+- local private candidate: `/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/049_private_style_smoke/SMOKE-C/rewritten_smoke.md`
+- source segment sha256: `22eacc455a07341d24f52666e911dea1f0e8edd46d8bbaeed896a5fc2f973a48`
+- output plaintext sha256: `6f12c219e33883bf1fe980274f5465fa22eff5ddf01d2a6ede3273efbbd47723`
+- runtime: `scientific-rewrite.multistage.v1`
+- unit count: `1`
+- stage count: `7`
+- model call count: `6`
+- whole-document writer call: `false`
+- max examples per unit: `4`
+- full seed library injected: `false`
+- store: `false`
+
+## Current Human Gate
+
+The required first-phase implementation and style-smoke evidence is complete. `CURRENT.json` should now move to `AWAIT_HUMAN_DECISION` with `next_action=WAIT_FOR_USER_STYLE_ACCEPTANCE`.
+
+The next required decision is user style acceptance:
+
+- `STYLE_ACCEPT` authorizes the full private report generation in the same 049 task.
+- `STYLE_REJECT` must include concrete style feedback and routes to bounded generic repair.
