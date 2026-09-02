@@ -4,12 +4,12 @@
   "privacy": "sanitized_no_private_plaintext_or_missing_span_text",
   "source_plaintext_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213",
   "source_plaintext_size_bytes": 75936,
-  "candidate_plaintext_sha256": "1a99fc1165ec00135a015f18386c306e40a443b92da4cd192a927e7de5e8717a",
-  "candidate_plaintext_size_bytes": 72822,
+  "candidate_plaintext_sha256": "773c0a2c2f31b2909015e1405a4a6b38f973f94b9a15cc37edf42bdd4a089c1f",
+  "candidate_plaintext_size_bytes": 63017,
   "raw_helper_check": {
     "ok": false,
     "checked_count": 387,
-    "missing_count": 35,
+    "missing_count": 29,
     "checked_by_kind": {
       "citation": 11,
       "date": 11,
@@ -20,17 +20,17 @@
     },
     "missing_by_kind": {
       "citation": 11,
-      "path": 24
+      "path": 18
     },
     "missing_text_committed": false
   },
   "postprocess": {
-    "kind": "deterministic_opening_dedupe_and_method_block_restore",
-    "reason": "Text Review found duplicate/truncated deterministic restore; rebuilt from the stronger-goal model output, removed fragment appendices, deduplicated the opening, and added the complete engineering comparison block as readable context.",
-    "raw_helper_missing_count_after": 35,
+    "kind": "deterministic_tail_removal_and_engineering_table_restore",
+    "reason": "Fresh Text Review found the V3 candidate still had a repeated/truncated tail and incomplete engineering comparison. Removed the stale tail and inserted a single complete reader-facing engineering comparison table before the ODAL overlap section.",
+    "raw_helper_missing_count_after": 29,
     "raw_helper_missing_by_kind_after": {
       "citation": 11,
-      "path": 24
+      "path": 18
     },
     "missing_text_committed": false,
     "private_plaintext_committed": false

@@ -1,13 +1,13 @@
 {
   "bridge_kit_commit": "",
-  "created_at": "2026-09-02T08:27:28Z",
+  "created_at": "2026-09-02T08:39:58Z",
   "encrypted_input": {
     "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/input.age",
     "sha256": "cfd14b8886b4813812d6dfd7153e99bb05d70ddf20e7a136d583bac97318e272"
   },
   "encrypted_output": {
     "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/output.age",
-    "sha256": "abc315135b26dded3e3a2620493f9b4fb9411e1585edebe646927e005cdb78dd"
+    "sha256": "c33cf73669370834e4b7ef039b708bb8dc54bb82e0c35182630e5287a341f947"
   },
   "evidence_id": "text-transform-048_writing_style_product_cutover_and_readable_report-e1bebe9eebaf",
   "input_manifest": {
@@ -62,8 +62,8 @@
     "schema": "AI_BRIDGE_TEXT_TRANSFORM_MANIFEST_V1"
   },
   "model": "gpt-5.6-terra",
-  "output_plaintext_sha256": "1a99fc1165ec00135a015f18386c306e40a443b92da4cd192a927e7de5e8717a",
-  "output_plaintext_size_bytes": 72822,
+  "output_plaintext_sha256": "773c0a2c2f31b2909015e1405a4a6b38f973f94b9a15cc37edf42bdd4a089c1f",
+  "output_plaintext_size_bytes": 63017,
   "output_public_recipient": {
     "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/output.age.pub",
     "sha256": "f66be35a6abc37b9dce8275b52666f05c13df611e5bb9475c1d3a6ffef3594f3"
@@ -79,12 +79,12 @@
   "transform_kind": "text-transform",
   "workflow_type": "reviewed_handoff",
   "postprocess": {
-    "kind": "deterministic_opening_dedupe_and_method_block_restore",
-    "reason": "Text Review found duplicate/truncated deterministic restore; rebuilt from the stronger-goal model output, removed fragment appendices, deduplicated the opening, and added the complete engineering comparison block as readable context.",
-    "raw_helper_missing_count_after": 35,
+    "kind": "deterministic_tail_removal_and_engineering_table_restore",
+    "reason": "Fresh Text Review found the V3 candidate still had a repeated/truncated tail and incomplete engineering comparison. Removed the stale tail and inserted a single complete reader-facing engineering comparison table before the ODAL overlap section.",
+    "raw_helper_missing_count_after": 29,
     "raw_helper_missing_by_kind_after": {
       "citation": 11,
-      "path": 24
+      "path": 18
     },
     "missing_text_committed": false,
     "private_plaintext_committed": false
