@@ -106,6 +106,12 @@ Because the 044 artifact does not exist, the encrypted Text Review payload and
 manifest were not produced. `TEXT_REVIEW.json` is therefore absent by design,
 not stale, and no product PASS is claimed.
 
+The Reviewed Handoff transition planner now points to a human plan decision, but
+the strict transition apply step still rejects terminalization because it
+requires a real Text Review manifest. No placeholder `payload.age` or
+`text_inputs.json` was created, since there is no model-produced 044 candidate
+artifact to bind.
+
 ## Technical appendix
 
 Important commits:
@@ -132,3 +138,11 @@ results/047_writing_style_scientific_rewrite_architecture/public_holdout_evaluat
 Local verification commands recorded in `RESULT.md` passed before the
 implementation freeze. GitHub CI was not entered because the required private
 Text Review input artifacts could not be generated.
+
+Current control-plane check:
+
+```text
+transition plan: next_action=HUMAN_PLAN_DECISION, next_state=AWAIT_HUMAN_DECISION
+transition apply: rejected because text_inputs.json is missing
+current state: NEEDS_GPT_PLANNER
+```

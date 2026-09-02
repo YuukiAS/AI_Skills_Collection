@@ -95,5 +95,18 @@
     "live_global_plugin_mutation": false,
     "produced_artifact_identity": null
   },
+  "terminalization_check": {
+    "recorded_at": "2026-09-01T22:45:59-04:00",
+    "transition_plan": {
+      "state": "NEEDS_GPT_PLANNER",
+      "next_action": "HUMAN_PLAN_DECISION",
+      "next_state": "AWAIT_HUMAN_DECISION",
+      "valid": true
+    },
+    "transition_apply_result": "REJECTED_BY_STRICT_VALIDATION",
+    "transition_apply_error": "text review input manifest missing: results/047_writing_style_scientific_rewrite_architecture/text_review/text_inputs.json",
+    "placeholder_text_review_manifest_created": false,
+    "reason": "No model-produced 044 candidate artifact exists, so creating a Text Review manifest or encrypted payload would fabricate the artifact identity required by the frozen Plan."
+  },
   "verdict": "ISOLATED_MARKETPLACE_INSTALL_AND_ROUTING_VERIFIED_MODEL_ARTIFACT_UNAVAILABLE_UNDER_EXECUTION_POLICY"
 }

@@ -162,3 +162,20 @@ Final status for this path:
 - fresh model-produced 044 artifact: not produced;
 - private 044 sent by this final attempt: false;
 - live global plugin/cache mutation: false.
+
+## Terminalization Check
+
+Recorded at: `2026-09-01T22:45:59-04:00`
+
+After the final replay boundary was recorded and pushed, Executor checked the
+Reviewed Handoff state transition path:
+
+- `transition plan` returned `next_action=HUMAN_PLAN_DECISION` and
+  `next_state=AWAIT_HUMAN_DECISION`;
+- `transition apply` refused that terminal state because
+  `results/047_writing_style_scientific_rewrite_architecture/text_review/text_inputs.json`
+  is missing.
+
+Executor did not create a placeholder manifest or payload because the frozen
+Plan requires the manifest to bind a real model-produced 044 candidate artifact,
+and that artifact does not exist under the current execution policy.

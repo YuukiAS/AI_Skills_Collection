@@ -245,6 +245,20 @@ already been used, this run requires final human/Planner disposition of the
 private 044 production replay gate. Review counters remain unchanged and
 `ci_status=PENDING`.
 
+Executor also checked the Reviewed Handoff terminalization path after recording
+the final replay boundary. `ai-bridge reviewed-handoff transition plan` reported
+that the next conceptual action is `HUMAN_PLAN_DECISION` with next state
+`AWAIT_HUMAN_DECISION`, but `transition apply` refused to enter that terminal
+state because the required real Text Review input manifest is missing:
+
+```text
+text review input manifest missing: results/047_writing_style_scientific_rewrite_architecture/text_review/text_inputs.json
+```
+
+Executor did not create a placeholder manifest or encrypted payload because no
+model-produced 044 candidate artifact exists. Doing so would fabricate the
+artifact identity required by the frozen Plan.
+
 ## Planner Question
 
 Under the user's current rule that 047 must not modify or bind the live global
