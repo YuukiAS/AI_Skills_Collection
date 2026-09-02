@@ -774,7 +774,7 @@ class ScientificRewriteTests(unittest.TestCase):
                         "findings": [
                             {
                                 "finding_id": "reader-001",
-                                "unit_id": "unit-001",
+                                "unit_id": "unit-002",
                                 "category": "unclear_decision",
                                 "repair_instruction": "make the current conclusion strength explicit",
                             }
@@ -806,7 +806,7 @@ class ScientificRewriteTests(unittest.TestCase):
                 payload = json.loads(source)
                 return json.dumps(
                     {
-                        "reader_core": payload["unit"]["text"],
+                        "reader_core": "判断已经改清楚。",
                         "technical_trace": "",
                         "source_coverage_ids": coverage_ids(payload),
                         "relocated_trace_ids": [],
@@ -814,7 +814,15 @@ class ScientificRewriteTests(unittest.TestCase):
                     ensure_ascii=False,
                 )
             if "Re-audit semantic preservation after the reader semantic repair" in prompt:
-                return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
+                payload = json.loads(source)
+                candidate = payload["candidate"]["reader_core"]
+                if "CARE 在 2026-08-28 的 Dice=0.81 只支持继续验证" in candidate:
+                    return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
+                prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][0]
+                return json.dumps(
+                    {"decision": "REVISE", "findings": [{"status": "omitted", "proposition_id": prop_id, "severity": "critical"}]},
+                    ensure_ascii=False,
+                )
             return structured_stage_response(prompt, source)
 
         helper.call_openai_text = fake_call
@@ -830,6 +838,7 @@ class ScientificRewriteTests(unittest.TestCase):
 
         stage_ids = [item["stage_id"] for item in result["receipt"]["stage_records"]]
         self.assertTrue(any("reader-semantic-targeted-repair" in stage_id for stage_id in stage_ids))
+        self.assertTrue(any("reader-semantic-source-restoration" in stage_id for stage_id in stage_ids))
         self.assertTrue(any("reader-semantic-repair-audit" in stage_id for stage_id in stage_ids))
         self.assertTrue(result["receipt"]["dataflow_validation"]["ok"])
 

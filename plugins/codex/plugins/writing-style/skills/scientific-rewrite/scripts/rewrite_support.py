@@ -2073,6 +2073,30 @@ def run_multistage(
                     repaired = restored
                     combined_unit = "\n\n".join(part for part in [repaired["reader_core"], repaired["technical_trace"]] if part)
                     exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=repaired["reader_core"])
+                if semantic_requires_repair(semantic):
+                    restored = restore_semantic_findings(repaired, semantic, unit_propositions[unit_id])
+                    if restored is not repaired:
+                        records.append(
+                            stage_record(
+                                stage_id=f"{unit_id}-reader-semantic-source-restoration-{reader_repair_round}",
+                                responsibility="restore source-backed proposition text for critical semantic findings after reader semantic repair",
+                                unit_id=unit_id,
+                                input_payload={
+                                    "pre_restore_semantic": semantic,
+                                    "candidate_output_identity": records[-1].output_identity,
+                                },
+                                output_payload=restored,
+                                model_call=False,
+                            )
+                        )
+                        restore_stage_id = records[-1].stage_id
+                        bind_consumer(records, unit_candidate_stage_ids[unit_id], restore_stage_id, "reader_semantic_candidate_before_source_restoration")
+                        bind_consumer(records, reader_repair_audit_stage_id, restore_stage_id, "semantic_findings")
+                        rewritten_units[unit_index] = restored
+                        unit_candidate_stage_ids[unit_id] = restore_stage_id
+                        repaired = restored
+                        combined_unit = "\n\n".join(part for part in [repaired["reader_core"], repaired["technical_trace"]] if part)
+                        exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=repaired["reader_core"])
                 if driver == "openai-responses":
                     semantic = call_openai_json_validated(
                         f"{unit_id}-reader-semantic-repair-audit",
