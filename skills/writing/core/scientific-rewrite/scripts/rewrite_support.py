@@ -940,7 +940,7 @@ def normalize_assembly_review(raw: dict[str, Any], known_unit_ids: set[str]) -> 
     return raw
 
 
-def normalize_assembly_repair(raw: dict[str, Any], known_unit_ids: set[str]) -> dict[str, Any]:
+def normalize_assembly_repair(raw: dict[str, Any], known_unit_ids: set[str], expected_finding_ids: set[str] | None = None) -> dict[str, Any]:
     stage = "final-assembly-targeted-repair"
     require_fields(raw, ["reader_core", "technical_trace", "applied_finding_ids"], stage)
     require_string(raw, "reader_core", stage)
@@ -950,6 +950,10 @@ def normalize_assembly_repair(raw: dict[str, Any], known_unit_ids: set[str]) -> 
     if not isinstance(applied, list):
         raise RuntimeError(f"{stage}.applied_finding_ids must be a list")
     raw["applied_finding_ids"] = [str(item) for item in applied]
+    if expected_finding_ids:
+        missing = sorted(expected_finding_ids - set(raw["applied_finding_ids"]))
+        if missing:
+            raise RuntimeError(f"{stage}.applied_finding_ids omitted findings: {', '.join(missing[:8])}")
     for index, unit_id in enumerate(raw.get("touched_unit_ids", []) or [], start=1):
         if str(unit_id) not in known_unit_ids:
             raise RuntimeError(f"{stage}.touched_unit_ids[{index}] references unknown unit_id")
@@ -2115,6 +2119,11 @@ def run_multistage(
                 "preserve exact numbers, formulas, citations, file paths, code identifiers, model names, dates, and method names",
             ],
         }
+        expected_assembly_finding_ids = {
+            str(item.get("finding_id", ""))
+            for item in assembly_review["findings"]
+            if isinstance(item, dict) and str(item.get("finding_id", "")).strip()
+        }
         if driver == "openai-responses":
             assembly_repair = call_openai_json_validated(
                 assembly_repair_stage_id,
@@ -2128,12 +2137,13 @@ def run_multistage(
                 model=model,
                 api_key=api_key,
                 required=["reader_core", "technical_trace", "applied_finding_ids"],
-                validator=lambda raw: normalize_assembly_repair(raw, known_unit_ids),
+                validator=lambda raw, expected=expected_assembly_finding_ids: normalize_assembly_repair(raw, known_unit_ids, expected),
             )
         else:
             assembly_repair = normalize_assembly_repair(
                 deterministic_assembly_repair(reader_core, traces, assembly_review),
                 known_unit_ids,
+                expected_assembly_finding_ids,
             )
         reader_core = assembly_repair["reader_core"].strip()
         traces = assembly_repair["technical_trace"].strip()
@@ -2175,6 +2185,8 @@ def run_multistage(
             "assembled_technical_trace": traces,
             "unit_boundaries": assembly_input["unit_boundaries"],
             "previous_review_findings": assembly_review["findings"],
+            "applied_finding_ids": assembly_repair["applied_finding_ids"],
+            "exact_after_repair": assembly_exact,
             "repair_round": assembly_repair_round,
         }
         if driver == "openai-responses":
@@ -2183,7 +2195,8 @@ def run_multistage(
                 (
                     "Check final assembly coherence after the bounded repair. "
                     "Verify that transitions, terminology, heading quality, local style outliers and conclusion progression are now acceptable. "
-                    "Do not request a whole-document free rewrite."
+                    "Do not request a whole-document free rewrite. Do not repeat a previous finding as REVISE if its applied_finding_ids show it was addressed "
+                    "and no concrete remaining blocker is visible in the repaired candidate."
                 ),
                 repaired_assembly_input,
                 model=model,
