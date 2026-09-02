@@ -15,6 +15,7 @@ SKILL_ROOT = REPO_ROOT / "skills/tools/documents-media/render-chinese-math-pdf"
 PROBE_PATH = SKILL_ROOT / "scripts/probe_pdf_render_env.py"
 QA_PATH = SKILL_ROOT / "scripts/validate_pdf_layout.py"
 HEADER_PATH = SKILL_ROOT / "scripts/build_chinese_math_header.py"
+SKILLS_CLI_PATH = REPO_ROOT / "scripts/skills.py"
 
 
 def load_module(path: Path, name: str):
@@ -245,6 +246,12 @@ class RenderChineseMathPdfTests(unittest.TestCase):
             )
             self.assertEqual(proc.returncode, 0, proc.stderr + proc.stdout)
             self.assertEqual(before, digest(override))
+
+    def test_update_keeps_nas_scan_guard_but_allows_explicit_manifest(self) -> None:
+        source = SKILLS_CLI_PATH.read_text(encoding="utf-8")
+        self.assertIn("refusing to scan /nas path", source)
+        self.assertNotIn("refusing to update /nas manifest", source)
+        self.assertNotIn("refusing to update manifest with /nas skills_root", source)
 
     def test_validate_pdf_defaults_preview_dir(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

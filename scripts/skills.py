@@ -755,8 +755,6 @@ def command_update(args: argparse.Namespace) -> int:
     manifests = []
     for path in manifest_paths:
         resolved = path.resolve()
-        if str(resolved).startswith("/nas/") or resolved == Path("/nas"):
-            raise SystemExit(f"refusing to update /nas manifest: {resolved}")
         if resolved not in seen:
             manifests.append(resolved)
             seen.add(resolved)
@@ -768,8 +766,6 @@ def command_update(args: argparse.Namespace) -> int:
     for path in manifests:
         manifest = load_manifest(path)
         target_key = str(manifest.get("skills_root") or path)
-        if target_key.startswith("/nas/") or target_key == "/nas":
-            raise SystemExit(f"refusing to update manifest with /nas skills_root: {path} -> {target_key}")
         if target_key in seen_targets:
             continue
         unique_manifests.append(path)
