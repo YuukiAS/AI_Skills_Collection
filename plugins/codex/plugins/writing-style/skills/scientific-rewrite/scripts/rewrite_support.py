@@ -973,6 +973,7 @@ def normalize_reader_review(raw: dict[str, Any], known_unit_ids: set[str]) -> di
     require_fields(raw, ["decision", "questions", "findings"], stage)
     if raw["decision"] not in {"PASS", "REVISE"}:
         raise RuntimeError(f"{stage}.decision must be PASS or REVISE")
+    has_unanswerable_question = False
     for index, question in enumerate(require_list(raw, "questions", stage), start=1):
         if not isinstance(question, dict):
             raise RuntimeError(f"{stage}.questions[{index}] must be an object")
@@ -1005,10 +1006,14 @@ def normalize_reader_review(raw: dict[str, Any], known_unit_ids: set[str]) -> di
             elif normalized in {"true", "yes", "y", "1", "answerable", "可回答", "可以回答"}:
                 question["answerable"] = True
             else:
-                raise RuntimeError(f"{stage}.questions[{index}].answerable must be boolean")
+                question["answerable"] = False
         elif not isinstance(answerable, bool):
-            raise RuntimeError(f"{stage}.questions[{index}].answerable must be boolean")
+            question["answerable"] = False
+        if question["answerable"] is False:
+            has_unanswerable_question = True
         require_string(question, "inferred_answer", f"{stage}.questions[{index}]")
+    if raw["decision"] == "PASS" and has_unanswerable_question:
+        raw["decision"] = "REVISE"
     for index, finding in enumerate(require_list(raw, "findings", stage), start=1):
         if not isinstance(finding, dict):
             raise RuntimeError(f"{stage}.findings[{index}] must be an object")

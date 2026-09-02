@@ -286,13 +286,14 @@ class ScientificRewriteTests(unittest.TestCase):
         helper = load_helper()
         review = helper.normalize_reader_review(
             {
-                "decision": "REVISE",
-                "questions": [{"answerable": "partially", "inferred_answer": "仍不可回答。"}],
+                "decision": "PASS",
+                "questions": [{"answerable": "It is partially answerable", "inferred_answer": "仍不可回答。"}],
                 "findings": [{"unit_id": "unit-001"}],
             },
             {"unit-001"},
         )
         self.assertIs(review["questions"][0]["answerable"], False)
+        self.assertEqual(review["decision"], "REVISE")
 
     def test_long_unheaded_source_does_not_collapse_to_one_unit(self) -> None:
         helper = load_helper()
