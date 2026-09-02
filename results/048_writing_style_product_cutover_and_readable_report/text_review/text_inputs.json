@@ -4,13 +4,13 @@
     "implementation_commit": "928de2325d781ca630883d03e0f381092675b269"
   },
   "input": {
-    "ciphertext_sha256": "cfc30c2f6a67c982832829cca05c159e8eb17707b1a226146004765856c0de48",
+    "ciphertext_sha256": "19bbd2d581d2bf9e6610ffa5763fcb91ada842209f8c583bf3d2af222e06edf7",
     "encrypted_payload_path": "results/048_writing_style_product_cutover_and_readable_report/text_review/payload.age",
     "logical_id": "primary_text",
     "mime_type": "text/markdown; charset=utf-8",
-    "plaintext_sha256": "cbfe9ced99afde55ea7bb0025431d562690f54cc6584699428ab666e13b64174",
-    "plaintext_size_bytes": 143716,
-    "source_basename": "text_review_bundle.md"
+    "plaintext_sha256": "e7125fde456dfbd33cbc73d276c52182bde3caf9f628b141406cc682b3a374c7",
+    "plaintext_size_bytes": 149313,
+    "source_basename": "048_text_review_bundle_v3.md"
   },
   "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
   "prompt_version": "ai-bridge.text-review.v1",

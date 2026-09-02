@@ -4,12 +4,12 @@
   "privacy": "sanitized_no_private_plaintext_or_missing_span_text",
   "source_plaintext_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213",
   "source_plaintext_size_bytes": 75936,
-  "candidate_plaintext_sha256": "cb78ac2ea7e3a4f85d66210d25486f3b6c73e51b419cec81de6c162bdb1442ad",
-  "candidate_plaintext_size_bytes": 66149,
+  "candidate_plaintext_sha256": "1a99fc1165ec00135a015f18386c306e40a443b92da4cd192a927e7de5e8717a",
+  "candidate_plaintext_size_bytes": 72822,
   "raw_helper_check": {
     "ok": false,
     "checked_count": 387,
-    "missing_count": 4,
+    "missing_count": 35,
     "checked_by_kind": {
       "citation": 11,
       "date": 11,
@@ -19,30 +19,23 @@
       "unit": 4
     },
     "missing_by_kind": {
-      "citation": 4
+      "citation": 11,
+      "path": 24
     },
     "missing_text_committed": false
   },
-  "critical_fidelity_adjudication": {
-    "ok": true,
-    "unresolved_critical_missing_count": 0,
-    "resolved_as_extractor_fragment_count": 4,
-    "resolved_as_extractor_fragment_by_kind": {
-      "citation": 4
-    }
-  },
   "postprocess": {
-    "kind": "deterministic_section_and_context_restore",
-    "reason": "Text Review found method engineering comparison compressed and token footer unreadable; restored the affected source method block and complete citation/path context lines, then removed the fragment footer.",
-    "raw_helper_missing_count_after": 4,
+    "kind": "deterministic_opening_dedupe_and_method_block_restore",
+    "reason": "Text Review found duplicate/truncated deterministic restore; rebuilt from the stronger-goal model output, removed fragment appendices, deduplicated the opening, and added the complete engineering comparison block as readable context.",
+    "raw_helper_missing_count_after": 35,
     "raw_helper_missing_by_kind_after": {
-      "citation": 4
+      "citation": 11,
+      "path": 24
     },
-    "adjudicated_extractor_fragment_count": 4,
-    "unresolved_critical_missing_count": 0,
     "missing_text_committed": false,
     "private_plaintext_committed": false
   },
+  "text_review_required_for_semantic_adjudication": true,
   "local_candidate_path_recorded": false,
   "note": "Detailed private source and candidate remain only in local AI Bridge state; this tracked report intentionally omits span text."
 }
