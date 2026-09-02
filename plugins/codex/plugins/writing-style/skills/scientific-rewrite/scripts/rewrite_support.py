@@ -413,6 +413,54 @@ def restore_exact_literals(writer_result: dict[str, Any], exact: dict[str, Any])
     return repaired
 
 
+def restore_semantic_findings(
+    writer_result: dict[str, Any],
+    semantic: dict[str, Any],
+    propositions: list[dict[str, Any]],
+) -> dict[str, Any]:
+    if not semantic_requires_repair(semantic):
+        return writer_result
+    proposition_by_id = {str(item["proposition_id"]): item for item in propositions}
+    target_ids: set[str] = set()
+    for finding in semantic.get("findings", []) or []:
+        if not isinstance(finding, dict):
+            continue
+        status = str(finding.get("status", ""))
+        severity = str(finding.get("severity", ""))
+        if severity not in {"critical", "blocker"} and status not in {"reversed", "invented", "omitted", "reattributed"}:
+            continue
+        prop_id = str(finding.get("proposition_id", ""))
+        if prop_id in proposition_by_id:
+            target_ids.add(prop_id)
+            continue
+        finding_spans = {str(span_id) for span_id in finding.get("source_span_ids", []) or []}
+        for proposition in propositions:
+            if finding_spans.intersection(str(span_id) for span_id in proposition.get("source_span_ids", [])):
+                target_ids.add(str(proposition["proposition_id"]))
+    candidate_text = "\n\n".join(part for part in [writer_result["reader_core"], writer_result.get("technical_trace", "")] if part)
+    if not target_ids:
+        target_ids = {
+            str(proposition["proposition_id"])
+            for proposition in propositions
+            if str(proposition.get("source_excerpt", "")).strip()
+            and str(proposition.get("source_excerpt", "")).strip() not in candidate_text
+        }
+    restored_lines = []
+    for prop_id in sorted(target_ids):
+        excerpt = str(proposition_by_id[prop_id].get("source_excerpt", "")).strip()
+        if excerpt and excerpt not in candidate_text:
+            restored_lines.append(f"- {excerpt}")
+    if not restored_lines:
+        return writer_result
+    repaired = dict(writer_result)
+    repaired["reader_core"] = repaired["reader_core"].rstrip() + "\n\n补充保真信息：\n" + "\n".join(restored_lines)
+    covered = {str(item) for item in repaired.get("source_coverage_ids", []) or []}
+    covered.update(target_ids)
+    repaired["source_coverage_ids"] = sorted(covered)
+    repaired["runtime_restored_semantic_proposition_ids"] = sorted(target_ids)
+    return repaired
+
+
 def document_map(text: str, spans: list[SourceSpan]) -> dict[str, Any]:
     headings = [span.heading_context for span in spans]
     literals = extract_literal_invariants(text)
@@ -1763,6 +1811,29 @@ def run_multistage(
                 current_candidate_stage_id = restore_stage_id
                 combined_unit = "\n\n".join(part for part in [unit_result["reader_core"], unit_result["technical_trace"]] if part)
                 exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=unit_result["reader_core"])
+            if semantic_requires_repair(semantic):
+                restored = restore_semantic_findings(unit_result, semantic, propositions)
+                if restored is not unit_result:
+                    records.append(
+                        stage_record(
+                            stage_id=f"{unit.unit_id}-semantic-source-restoration-{repair_attempts}",
+                            responsibility="restore source-backed proposition text for unresolved critical semantic findings before re-audit",
+                            unit_id=unit.unit_id,
+                            input_payload={
+                                "pre_restore_semantic": semantic,
+                                "candidate_output_identity": records[-1].output_identity,
+                            },
+                            output_payload=restored,
+                            model_call=False,
+                        )
+                    )
+                    restore_stage_id = records[-1].stage_id
+                    bind_consumer(records, current_candidate_stage_id, restore_stage_id, "candidate_before_semantic_restoration")
+                    bind_consumer(records, last_audit_stage_id, restore_stage_id, "semantic_findings")
+                    unit_result = restored
+                    current_candidate_stage_id = restore_stage_id
+                    combined_unit = "\n\n".join(part for part in [unit_result["reader_core"], unit_result["technical_trace"]] if part)
+                    exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=unit_result["reader_core"])
             if driver == "openai-responses":
                 semantic = call_openai_json_validated(
                     f"{unit.unit_id}-post-repair-semantic-audit",

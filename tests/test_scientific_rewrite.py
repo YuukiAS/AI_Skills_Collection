@@ -516,6 +516,35 @@ class ScientificRewriteTests(unittest.TestCase):
                         ensure_ascii=False,
                     )
                 return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
+            if "Repair only the current rewritten unit" in prompt:
+                payload = json.loads(source)
+                coverage = sorted(
+                    {
+                        str(prop_id)
+                        for field in [
+                            "claims",
+                            "evidence",
+                            "conditions",
+                            "comparators",
+                            "uncertainty",
+                            "caveats",
+                            "negative_findings",
+                            "attribution",
+                            "decision_logic",
+                        ]
+                        for item in payload.get("meaning_card", {}).get(field, [])
+                        for prop_id in item.get("source_proposition_ids", [])
+                    }
+                )
+                return json.dumps(
+                    {
+                        "reader_core": "候选仍缺少一个关键决策条件。",
+                        "technical_trace": "",
+                        "source_coverage_ids": coverage,
+                        "relocated_trace_ids": [],
+                    },
+                    ensure_ascii=False,
+                )
             return structured_stage_response(prompt, source)
 
         helper.call_openai_text = fake_call
@@ -531,6 +560,7 @@ class ScientificRewriteTests(unittest.TestCase):
 
         receipt = result["receipt"]
         stage_ids = [item["stage_id"] for item in receipt["stage_records"]]
+        self.assertTrue(any(stage_id.endswith("-semantic-source-restoration-1") for stage_id in stage_ids))
         self.assertTrue(any(stage_id.endswith("-targeted-repair-3") for stage_id in stage_ids))
         self.assertTrue(any(stage_id.endswith("-post-repair-audit-3") for stage_id in stage_ids))
         self.assertGreaterEqual(semantic_audits, 4)
