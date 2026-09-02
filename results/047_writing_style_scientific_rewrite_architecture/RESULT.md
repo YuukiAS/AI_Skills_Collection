@@ -3,7 +3,7 @@ schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 047_writing_style_scientific_rewrite_architecture
 executor: Codex
 implementation_commit: ade5a1f653f88df07eb0c70edfd016c744b1611a
-status: NEEDS_GPT_PLANNER
+status: AWAIT_HUMAN_DECISION
 ci_status: PENDING
 ---
 
@@ -241,15 +241,17 @@ fabricate product evidence.
 
 Therefore this handoff cannot enter `WAITING_FOR_CI` or
 `READY_FOR_GPT_REVIEW` truthfully. Since the single allowed plan revision has
-already been used, this run requires final human/Planner disposition of the
-private 044 production replay gate. Review counters remain unchanged and
+already been used, the external Planner routed this run to
+`AWAIT_HUMAN_DECISION / PLANNER_DECISION` for human disposition of the private
+044 production replay gate. Review counters remain unchanged and
 `ci_status=PENDING`.
 
 Executor also checked the Reviewed Handoff terminalization path after recording
-the final replay boundary. `ai-bridge reviewed-handoff transition plan` reported
-that the next conceptual action is `HUMAN_PLAN_DECISION` with next state
-`AWAIT_HUMAN_DECISION`, but `transition apply` refused to enter that terminal
-state because the required real Text Review input manifest is missing:
+the final replay boundary. Before the final control-plane repair,
+`ai-bridge reviewed-handoff transition plan` reported that the next conceptual
+action was `HUMAN_PLAN_DECISION` with next state `AWAIT_HUMAN_DECISION`, but
+`transition apply` refused to enter that terminal state because the required
+real Text Review input manifest was missing:
 
 ```text
 text review input manifest missing: results/047_writing_style_scientific_rewrite_architecture/text_review/text_inputs.json
@@ -259,11 +261,19 @@ Executor did not create a placeholder manifest or encrypted payload because no
 model-produced 044 candidate artifact exists. Doing so would fabricate the
 artifact identity required by the frozen Plan.
 
-## Planner Question
+The final control-plane repair preserves that fact by setting
+`CURRENT.state=AWAIT_HUMAN_DECISION`, `human_gate_reason=PLANNER_DECISION`, and
+`text_review_required=false` for this terminal Planner decision. This does not
+claim Text Review PASS; it records that Text Review cannot be kept as a pending
+evidence producer when the missing private 044 artifact is itself the reason
+for the human gate.
+
+## Planner Final Disposition
 
 Under the user's current rule that 047 must not modify or bind the live global
-Codex Marketplace/plugin cache, what is the authorized way to complete the 044
-fresh model-produced production replay artifact?
+Codex Marketplace/plugin cache, and after the explicitly authorized isolated
+OpenAI/Codex replay path was rejected by execution policy, the final disposition
+is human decision rather than another automatic re-plan.
 
 The observed options are:
 
@@ -272,11 +282,9 @@ The observed options are:
 - define a GitHub/Bridge Kit path that can run the same isolated production-like
   installed `writing-style` entrypoint using existing repository secrets and
   return only encrypted/repo-safe evidence;
-- revise the 047 gate so isolated install + ordinary-prompt routing evidence is
-  sufficient for production-entrypoint verification, while keeping 044 Text
-  Review pending and not claiming product PASS;
-- ask the user for a new explicit live-global authorization, only if no
-  equivalent isolated path exists.
+- close 047 as an experimental architecture result with no production cutover;
+- start a new planning task if the acceptance criteria themselves should
+  change.
 
 No `PASS`, release, version bump, production cutover, or merge-to-main decision
 is claimed here.

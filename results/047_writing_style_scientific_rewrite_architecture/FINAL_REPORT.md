@@ -107,10 +107,14 @@ manifest were not produced. `TEXT_REVIEW.json` is therefore absent by design,
 not stale, and no product PASS is claimed.
 
 The Reviewed Handoff transition planner pointed to a human plan decision, while
-the local strict transition helper refused terminalization because it validates
-the missing Text Review manifest even when that missing artifact is itself the
-reason for the human gate. No placeholder `payload.age` or `text_inputs.json`
-was created, since there is no model-produced 044 candidate artifact to bind.
+the local strict transition helper initially refused terminalization because it
+validated the missing Text Review manifest even when that missing artifact was
+itself the reason for the human gate. No placeholder `payload.age` or
+`text_inputs.json` was created, since there is no model-produced 044 candidate
+artifact to bind. The final control-plane repair sets the terminal decision as
+`AWAIT_HUMAN_DECISION / PLANNER_DECISION` and disables Text Review as a pending
+evidence producer for this terminal Planner decision; this is not a Text Review
+PASS.
 
 ## Planner final disposition
 
@@ -185,6 +189,8 @@ Planner disposition:
 
 ```text
 state: AWAIT_HUMAN_DECISION
+human_gate_reason: PLANNER_DECISION
+text_review_required: false
 reason: one Plan revision exhausted; required private 044 replay is blocked by execution policy; no evidence may be fabricated
 product pass: NO
 release: NONE / writing-style NO_BUMP
