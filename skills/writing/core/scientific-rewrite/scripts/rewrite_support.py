@@ -845,6 +845,10 @@ def normalize_semantic_audit(raw: dict[str, Any], unit: RewriteUnit, proposition
     return raw
 
 
+def semantic_requires_repair(semantic: dict[str, Any]) -> bool:
+    return int(semantic.get("critical_violation_count", 0)) > 0
+
+
 def normalize_reader_review(raw: dict[str, Any], known_unit_ids: set[str]) -> dict[str, Any]:
     stage = "candidate-only-reader-review"
     require_fields(raw, ["decision", "questions", "findings"], stage)
@@ -1585,7 +1589,7 @@ def run_multistage(
         bind_consumer(records, current_candidate_stage_id, audit_stage_id, "candidate")
         last_audit_stage_id = audit_stage_id
         repair_attempts = 0
-        while (not exact["ok"] or semantic["decision"] == "REVISE" or semantic["critical_violation_count"]) and repair_attempts < 2:
+        while (not exact["ok"] or semantic_requires_repair(semantic)) and repair_attempts < 2:
             repair_attempts += 1
             pre_repair_exact = exact
             pre_repair_semantic = semantic
@@ -1601,7 +1605,8 @@ def run_multistage(
                     f"{unit.unit_id}-targeted-repair",
                     (
                         "Repair only the current rewritten unit. Preserve all source facts and return the same structured writer JSON fields. "
-                        "Do not rewrite unrelated units. source_coverage_ids must include every supplied source proposition id."
+                        "Do not rewrite unrelated units. source_coverage_ids must include every supplied source proposition id. "
+                        "If exact.missing lists literal strings, copy those exact strings into reader_core or technical_trace."
                     ),
                     repair_payload,
                     model=model,
@@ -1659,7 +1664,7 @@ def run_multistage(
             )
             last_audit_stage_id = records[-1].stage_id
             bind_consumer(records, repair_stage_id, last_audit_stage_id, "repaired_candidate")
-        if not exact["ok"] or semantic["decision"] == "REVISE" or semantic["critical_violation_count"]:
+        if not exact["ok"] or semantic_requires_repair(semantic):
             raise RuntimeError(f"{unit.unit_id} failed closed after bounded targeted repair")
         unit_gate_stage_ids[unit.unit_id] = last_audit_stage_id
         unit_candidate_stage_ids[unit.unit_id] = current_candidate_stage_id
@@ -1780,7 +1785,7 @@ def run_multistage(
             )
             reader_repair_audit_stage_id = records[-1].stage_id
             bind_consumer(records, reader_repair_stage_id, reader_repair_audit_stage_id, "repaired_candidate")
-            if not exact["ok"] or semantic["decision"] == "REVISE" or semantic["critical_violation_count"]:
+            if not exact["ok"] or semantic_requires_repair(semantic):
                 raise RuntimeError(f"{unit_id} reader-targeted repair failed fidelity gate")
             unit_gate_stage_ids[unit_id] = reader_repair_audit_stage_id
         reader_core = "\n\n".join(item["reader_core"] for item in rewritten_units if item["reader_core"]).strip()

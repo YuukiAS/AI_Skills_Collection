@@ -406,6 +406,35 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertTrue(any("-targeted-repair-" in item["stage_id"] for item in receipt["stage_records"]))
         self.assertTrue(any("-post-repair-audit-" in item["stage_id"] for item in receipt["stage_records"]))
 
+    def test_noncritical_semantic_revision_does_not_force_hard_repair(self) -> None:
+        helper = load_helper()
+        original = helper.call_openai_text
+
+        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
+            if "Audit semantic preservation" in prompt:
+                payload = json.loads(source)
+                prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][0]
+                return json.dumps(
+                    {"decision": "REVISE", "findings": [{"status": "narrowed", "proposition_id": prop_id, "severity": "minor"}]},
+                    ensure_ascii=False,
+                )
+            return structured_stage_response(prompt, source)
+
+        helper.call_openai_text = fake_call
+        try:
+            result = helper.run_multistage(
+                "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81；下一步比较 FedFisher 和 FedLPA。",
+                driver="openai-responses",
+                model="test-model",
+                api_key="test-key",
+            )
+        finally:
+            helper.call_openai_text = original
+
+        stage_ids = [item["stage_id"] for item in result["receipt"]["stage_records"]]
+        self.assertFalse(any("-targeted-repair-" in stage_id for stage_id in stage_ids))
+        self.assertTrue(result["receipt"]["dataflow_validation"]["ok"])
+
     def test_semantic_audit_status_aliases_are_canonicalized_conservatively(self) -> None:
         helper = load_helper()
         unit = helper.RewriteUnit(
