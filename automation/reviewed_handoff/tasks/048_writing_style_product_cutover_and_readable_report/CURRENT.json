@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "048_writing_style_product_cutover_and_readable_report",
-  "state": "PLAN_FROZEN",
+  "state": "NEEDS_GPT_PLANNER",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -16,5 +16,5 @@
   "human_gate_reason": null,
   "visual_review_required": false,
   "text_review_required": false,
-  "next_action": "CODEX_EXECUTOR_IMPLEMENT_048_WRITING_STYLE_PRODUCT_CANDIDATE"
+  "next_action": "GPT_PLANNER_REVISE_048_PRIVATE_TEXT_TRANSFORM_ARCHITECTURE"
 }
