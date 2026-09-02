@@ -2,8 +2,8 @@
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 048_writing_style_product_cutover_and_readable_report
 executor: Codex
-implementation_commit: null
-status: EXECUTING
+implementation_commit: 928de2325d781ca630883d03e0f381092675b269
+status: WAITING_FOR_CI
 ci_status: PENDING
 ---
 
@@ -11,7 +11,7 @@ ci_status: PENDING
 
 ## Executor Action
 
-Revision 1 implementation is in progress. The Executor has:
+Revision 1 implementation is ready for CI and external review evidence. The Executor has:
 
 - implemented and pushed the Bridge Kit companion prerequisite at `YuukiAS/GPT_Codex_AI_Bridge_Kit@65ea9c59afbe2db88bb5d60bf8752f82719f0087`;
 - implemented the AI_Skills production source, generated payload, shallow-safe text-transform workflow detector, and longer transform timeout at `928de2325d781ca630883d03e0f381092675b269`;
@@ -20,7 +20,10 @@ Revision 1 implementation is in progress. The Executor has:
 - regenerated the canonical Codex marketplace payload;
 - installed `.github/workflows/ai-bridge-text-transform.yml` pinned to the exact Bridge Kit commit;
 - generated public regression artifacts under `results/048_writing_style_product_cutover_and_readable_report/public_regression/`;
-- located the canonical private source and generated encrypted text-transform input under `results/048_writing_style_product_cutover_and_readable_report/text_transform/`.
+- located the canonical private source and generated encrypted text-transform input under `results/048_writing_style_product_cutover_and_readable_report/text_transform/`;
+- received encrypted GitHub Actions text-transform output and locally decrypted it without committing plaintext;
+- applied a deterministic literal-identity restore for citation/path exact spans after model transform, recorded only sanitized counts, and re-encrypted the final candidate;
+- generated encrypted full-report Text Review input under `results/048_writing_style_product_cutover_and_readable_report/text_review/`.
 
 ## Current Evidence
 
@@ -38,7 +41,7 @@ automation/reviewed_handoff/tasks/048_writing_style_product_cutover_and_readable
 Current control-plane state:
 
 ```text
-state=EXECUTING
+state=WAITING_FOR_CI
 plan_revision=1
 max_plan_revisions=1
 implementation_commit=928de2325d781ca630883d03e0f381092675b269
@@ -58,12 +61,14 @@ Local gates passed so far:
 - AI_Skills `python scripts/skills.py audit --all`: PASS.
 - AI_Skills `python -m unittest tests.test_scientific_rewrite tests.test_codex_marketplace -v`: PASS, 42 tests.
 - `git diff --check`: PASS.
+- GitHub Actions `ai-bridge-text-transform` for the full private report: PASS, `store=false`, plaintext not committed.
+- Local decrypt of `output.age`: PASS; plaintext SHA matched `TEXT_TRANSFORM.json`.
+- Sanitized deterministic private exact fidelity report: PASS, 387 checked, 0 missing.
+- Encrypted full-report Text Review request: generated; plaintext bundle remains local/private only.
 
 Pending gates:
 
-- GitHub Actions `ai-bridge-text-transform` writeback for the full private report with the shallow-safe Bridge Kit workflow detector.
-- Local decrypt of `output.age` and deterministic private fidelity report.
-- Encrypted full-report Text Review request and fresh `TEXT_REVIEW.json`.
+- Fresh `TEXT_REVIEW.json`.
 - Branch CI and Scheduled GPT Reviewer.
 - User reading and explicit `ACCEPT`.
 

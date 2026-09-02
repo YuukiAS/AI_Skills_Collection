@@ -1,0 +1,39 @@
+{
+  "schema": "AI_SKILLS_PRIVATE_FIDELITY_EXACT_REPORT_V1",
+  "task_key": "048_writing_style_product_cutover_and_readable_report",
+  "privacy": "sanitized_no_private_plaintext_or_missing_span_text",
+  "source_plaintext_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213",
+  "source_plaintext_size_bytes": 75936,
+  "candidate_plaintext_sha256": "1e2caca4dae2782956f955bf71814e0a09646fb7f15ed4b48a5a3f1dfd421090",
+  "candidate_plaintext_size_bytes": 60593,
+  "exact_invariant_check": {
+    "ok": true,
+    "checked_count": 387,
+    "missing_count": 0,
+    "checked_by_kind": {
+      "citation": 11,
+      "date": 11,
+      "formal_name": 128,
+      "number": 114,
+      "path": 119,
+      "unit": 4
+    },
+    "missing_by_kind": {},
+    "missing_text_committed": false
+  },
+  "postprocess": {
+    "kind": "deterministic_literal_identity_restore",
+    "reason": "local exact verifier found citation/path literal tokens missing after model transform",
+    "missing_count_before": 35,
+    "missing_count_after": 0,
+    "missing_by_kind_before": {
+      "citation": 11,
+      "path": 24
+    },
+    "missing_by_kind_after": {},
+    "missing_text_committed": false,
+    "private_plaintext_committed": false
+  },
+  "local_candidate_path_recorded": false,
+  "note": "Detailed private source and candidate remain only in local AI Bridge state; this tracked report intentionally omits span text."
+}
