@@ -1292,11 +1292,18 @@ def call_openai_text(
         method="POST",
     )
     urlopen = urllib.request.urlopen if opener is None else opener
-    try:
-        with urlopen(request, timeout=timeout) as response:
-            payload = json.loads(response.read().decode("utf-8"))
-    except urllib.error.HTTPError as exc:
-        raise RuntimeError(f"OpenAI staged rewrite failed closed: HTTP {getattr(exc, 'code', 'UNKNOWN')}") from exc
+    retry_delays = [20.0, 60.0, 120.0]
+    for attempt in range(len(retry_delays) + 1):
+        try:
+            with urlopen(request, timeout=timeout) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+            break
+        except urllib.error.HTTPError as exc:
+            code = getattr(exc, "code", "UNKNOWN")
+            if code == 429 and attempt < len(retry_delays):
+                time.sleep(retry_delays[attempt])
+                continue
+            raise RuntimeError(f"OpenAI staged rewrite failed closed: HTTP {code}") from exc
     status = payload.get("status")
     if status and status != "completed":
         raise RuntimeError(f"OpenAI staged rewrite did not complete: {status}")

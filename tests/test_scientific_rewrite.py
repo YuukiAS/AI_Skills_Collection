@@ -5,6 +5,7 @@ import json
 import sys
 import tempfile
 import unittest
+import urllib.error
 from pathlib import Path
 
 
@@ -295,6 +296,36 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertIs(review["questions"][0]["answerable"], False)
         self.assertTrue(review["questions"][0]["inferred_answer"])
         self.assertEqual(review["decision"], "REVISE")
+
+    def test_openai_text_retries_http_429(self) -> None:
+        helper = load_helper()
+        original_sleep = helper.time.sleep
+        attempts = {"count": 0}
+
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb):
+                return False
+
+            def read(self) -> bytes:
+                return json.dumps({"status": "completed", "output_text": "{\"ok\": true}"}).encode("utf-8")
+
+        def fake_opener(request, timeout):
+            attempts["count"] += 1
+            if attempts["count"] < 3:
+                raise urllib.error.HTTPError("https://api.openai.com/v1/responses", 429, "rate limit", {}, None)
+            return FakeResponse()
+
+        helper.time.sleep = lambda delay: None
+        try:
+            text = helper.call_openai_text("prompt", "source", model="test-model", api_key="test-key", opener=fake_opener)
+        finally:
+            helper.time.sleep = original_sleep
+
+        self.assertEqual(text, "{\"ok\": true}")
+        self.assertEqual(attempts["count"], 3)
 
     def test_long_unheaded_source_does_not_collapse_to_one_unit(self) -> None:
         helper = load_helper()
