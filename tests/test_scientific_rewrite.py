@@ -505,6 +505,65 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertEqual(assembly_reviews, 2)
         self.assertTrue(receipt["dataflow_validation"]["ok"])
 
+    def test_openai_driver_repairs_final_assembly_twice(self) -> None:
+        helper = load_helper()
+        original = helper.call_openai_text
+        assembly_reviews = 0
+        assembly_repairs = 0
+
+        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
+            nonlocal assembly_reviews, assembly_repairs
+            if "Check final assembly coherence" in prompt:
+                assembly_reviews += 1
+                if assembly_reviews < 3:
+                    return json.dumps(
+                        {
+                            "decision": "REVISE",
+                            "findings": [
+                                {
+                                    "finding_id": f"assembly-{assembly_reviews:03d}",
+                                    "unit_id": "",
+                                    "category": "transition",
+                                    "repair_instruction": "tighten the transition without changing facts",
+                                }
+                            ],
+                        },
+                        ensure_ascii=False,
+                    )
+                return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
+            if "Repair the assembled candidate only" in prompt:
+                assembly_repairs += 1
+                payload = json.loads(source)
+                return json.dumps(
+                    {
+                        "reader_core": payload["assembled_reader_core"] + f"\n\n组装修复第 {assembly_repairs} 轮保持原有事实，只改衔接。",
+                        "technical_trace": payload["assembled_technical_trace"],
+                        "applied_finding_ids": [f"assembly-{assembly_repairs:03d}"],
+                        "touched_unit_ids": [],
+                    },
+                    ensure_ascii=False,
+                )
+            return structured_stage_response(prompt, source)
+
+        helper.call_openai_text = fake_call
+        try:
+            result = helper.run_multistage(
+                "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81。\n\n## 下一步\n\n下一轮比较 FedFisher 和 FedLPA。",
+                driver="openai-responses",
+                model="test-model",
+                api_key="test-key",
+            )
+        finally:
+            helper.call_openai_text = original
+
+        receipt = result["receipt"]
+        stage_ids = [item["stage_id"] for item in receipt["stage_records"]]
+        self.assertIn("final-assembly-targeted-repair-2", stage_ids)
+        self.assertIn("final-assembly-coherence-rerun-2", stage_ids)
+        self.assertEqual(assembly_reviews, 3)
+        self.assertEqual(assembly_repairs, 2)
+        self.assertTrue(receipt["dataflow_validation"]["ok"])
+
     def test_reader_repair_gets_semantic_targeted_retry(self) -> None:
         helper = load_helper()
         original = helper.call_openai_text

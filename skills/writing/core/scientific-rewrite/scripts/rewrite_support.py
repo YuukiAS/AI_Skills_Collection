@@ -28,6 +28,7 @@ RUNTIME_SCHEMA = "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V2"
 PACKET_SCHEMA = "SCIENTIFIC_REWRITE_STAGE_PACKET_V1"
 OPENAI_API_URL = "https://api.openai.com/v1/responses"
 DEFAULT_MODEL = "gpt-5.6-terra"
+ASSEMBLY_REPAIR_ROUNDS = 2
 SEMANTIC_STATUSES = {
     "preserved",
     "narrowed",
@@ -2083,12 +2084,27 @@ def run_multistage(
         )
     )
     bind_consumer(records, reader_review_stage_id, "final-assembly-coherence", "reader_review_gate")
-    if assembly_review["decision"] == "REVISE":
+    assembly_review_stage_id = "final-assembly-coherence"
+    assembly_repair_round = 0
+    while assembly_review["decision"] == "REVISE" and assembly_repair_round < ASSEMBLY_REPAIR_ROUNDS:
+        assembly_repair_round += 1
+        previous_assembly_review_stage_id = assembly_review_stage_id
+        assembly_repair_stage_id = (
+            "final-assembly-targeted-repair"
+            if assembly_repair_round == 1
+            else f"final-assembly-targeted-repair-{assembly_repair_round}"
+        )
+        assembly_rerun_stage_id = (
+            "final-assembly-coherence-rerun"
+            if assembly_repair_round == 1
+            else f"final-assembly-coherence-rerun-{assembly_repair_round}"
+        )
         assembly_repair_input = {
             "assembled_reader_core": reader_core,
             "assembled_technical_trace": traces,
             "assembly_findings": assembly_review["findings"],
             "unit_boundaries": assembly_input["unit_boundaries"],
+            "repair_round": assembly_repair_round,
             "literal_ledger": [span for unit in units for span in unit.literal_invariants],
             "constraints": [
                 "repair only transitions, repeated definitions, headings, local style outliers, and conclusion progression",
@@ -2098,7 +2114,7 @@ def run_multistage(
         }
         if driver == "openai-responses":
             assembly_repair = call_openai_json_validated(
-                "final-assembly-targeted-repair",
+                assembly_repair_stage_id,
                 (
                     "Repair the assembled candidate only for the listed final assembly findings. "
                     "Keep the unit-level scientific content and exact source-bound literals intact. "
@@ -2132,7 +2148,7 @@ def run_multistage(
             assembly_repair["deterministic_exact_literal_restoration"] = False
         records.append(
             stage_record(
-                stage_id="final-assembly-targeted-repair",
+                stage_id=assembly_repair_stage_id,
                 responsibility="bounded final assembly repair for transitions, terminology and coherence without whole-document free rewrite",
                 unit_id=None,
                 input_payload=assembly_repair_input,
@@ -2147,18 +2163,19 @@ def run_multistage(
                 model_call=driver == "openai-responses",
             )
         )
-        bind_consumer(records, "final-assembly-coherence", "final-assembly-targeted-repair", "assembly_findings")
+        bind_consumer(records, previous_assembly_review_stage_id, assembly_repair_stage_id, "assembly_findings")
         for unit in units:
-            bind_consumer(records, unit_gate_stage_ids[unit.unit_id], "final-assembly-targeted-repair", "audited_candidate_unit")
+            bind_consumer(records, unit_gate_stage_ids[unit.unit_id], assembly_repair_stage_id, "audited_candidate_unit")
         repaired_assembly_input = {
             "assembled_reader_core": reader_core,
             "assembled_technical_trace": traces,
             "unit_boundaries": assembly_input["unit_boundaries"],
             "previous_review_findings": assembly_review["findings"],
+            "repair_round": assembly_repair_round,
         }
         if driver == "openai-responses":
             assembly_review = call_openai_json_validated(
-                "final-assembly-coherence-rerun",
+                assembly_rerun_stage_id,
                 (
                     "Check final assembly coherence after the bounded repair. "
                     "Verify that transitions, terminology, heading quality, local style outliers and conclusion progression are now acceptable. "
@@ -2174,7 +2191,7 @@ def run_multistage(
             assembly_review = normalize_assembly_review(deterministic_assembly_review(candidate), known_unit_ids)
         records.append(
             stage_record(
-                stage_id="final-assembly-coherence-rerun",
+                stage_id=assembly_rerun_stage_id,
                 responsibility="re-check final assembly coherence after bounded assembly repair",
                 unit_id=None,
                 input_payload=repaired_assembly_input,
@@ -2184,12 +2201,13 @@ def run_multistage(
                     "review": assembly_review,
                 },
                 model_call=driver == "openai-responses",
-                terminal_output=True,
+                terminal_output=assembly_review["decision"] != "REVISE",
             )
         )
-        bind_consumer(records, "final-assembly-targeted-repair", "final-assembly-coherence-rerun", "repaired_assembly")
-        if assembly_review["decision"] == "REVISE":
-            raise RuntimeError("final assembly review returned REVISE after bounded repair")
+        bind_consumer(records, assembly_repair_stage_id, assembly_rerun_stage_id, "repaired_assembly")
+        assembly_review_stage_id = assembly_rerun_stage_id
+    if assembly_review["decision"] == "REVISE":
+        raise RuntimeError("final assembly review returned REVISE after bounded repair budget")
     receipt = {
         "schema": RUNTIME_SCHEMA,
         "runtime": "scientific-rewrite.multistage.v1",
