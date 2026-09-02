@@ -909,6 +909,22 @@ def normalize_assembly_review(raw: dict[str, Any], known_unit_ids: set[str]) -> 
     return raw
 
 
+def normalize_assembly_repair(raw: dict[str, Any], known_unit_ids: set[str]) -> dict[str, Any]:
+    stage = "final-assembly-targeted-repair"
+    require_fields(raw, ["reader_core", "technical_trace", "applied_finding_ids"], stage)
+    require_string(raw, "reader_core", stage)
+    if not isinstance(raw.get("technical_trace"), str):
+        raise RuntimeError(f"{stage}.technical_trace must be a string")
+    applied = raw.get("applied_finding_ids")
+    if not isinstance(applied, list):
+        raise RuntimeError(f"{stage}.applied_finding_ids must be a list")
+    raw["applied_finding_ids"] = [str(item) for item in applied]
+    for index, unit_id in enumerate(raw.get("touched_unit_ids", []) or [], start=1):
+        if str(unit_id) not in known_unit_ids:
+            raise RuntimeError(f"{stage}.touched_unit_ids[{index}] references unknown unit_id")
+    return raw
+
+
 def writer_packet(
     unit: RewriteUnit,
     doc_map: dict[str, Any],
@@ -1342,6 +1358,25 @@ def deterministic_reader_review(candidate: str, unit_ids: list[str]) -> dict[str
 
 def deterministic_assembly_review(candidate: str) -> dict[str, Any]:
     return {"decision": "PASS", "findings": [] if candidate.strip() else [{"finding_id": "assembly-001", "unit_id": "", "category": "empty", "repair_instruction": "candidate is empty"}]}
+
+
+def deterministic_assembly_repair(reader_core: str, technical_trace: str, review: dict[str, Any]) -> dict[str, Any]:
+    finding_ids = [str(item.get("finding_id", "")) for item in review.get("findings", []) if isinstance(item, dict)]
+    repaired_core = reader_core.strip()
+    if not repaired_core:
+        repaired_core = "候选文本为空，无法完成最终组装。"
+    return {
+        "reader_core": repaired_core,
+        "technical_trace": technical_trace.strip(),
+        "applied_finding_ids": [item for item in finding_ids if item],
+        "touched_unit_ids": sorted(
+            {
+                str(item.get("unit_id", ""))
+                for item in review.get("findings", [])
+                if isinstance(item, dict) and str(item.get("unit_id", "")).strip()
+            }
+        ),
+    }
 
 
 def apply_textual_repair(unit_result: dict[str, Any], instruction: str) -> dict[str, Any]:
@@ -1923,12 +1958,117 @@ def run_multistage(
                 "review": assembly_review,
             },
             model_call=driver == "openai-responses",
-            terminal_output=True,
+            terminal_output=assembly_review["decision"] != "REVISE",
         )
     )
     bind_consumer(records, reader_review_stage_id, "final-assembly-coherence", "reader_review_gate")
     if assembly_review["decision"] == "REVISE":
-        raise RuntimeError("final assembly review returned REVISE")
+        assembly_repair_input = {
+            "assembled_reader_core": reader_core,
+            "assembled_technical_trace": traces,
+            "assembly_findings": assembly_review["findings"],
+            "unit_boundaries": assembly_input["unit_boundaries"],
+            "literal_ledger": [span for unit in units for span in unit.literal_invariants],
+            "constraints": [
+                "repair only transitions, repeated definitions, headings, local style outliers, and conclusion progression",
+                "do not introduce new facts, remove source-bound facts, or perform a whole-document free rewrite",
+                "preserve exact numbers, formulas, citations, file paths, code identifiers, model names, dates, and method names",
+            ],
+        }
+        if driver == "openai-responses":
+            assembly_repair = call_openai_json_validated(
+                "final-assembly-targeted-repair",
+                (
+                    "Repair the assembled candidate only for the listed final assembly findings. "
+                    "Keep the unit-level scientific content and exact source-bound literals intact. "
+                    "Return bounded JSON with reader_core, technical_trace, applied_finding_ids, and optional touched_unit_ids."
+                ),
+                assembly_repair_input,
+                model=model,
+                api_key=api_key,
+                required=["reader_core", "technical_trace", "applied_finding_ids"],
+                validator=lambda raw: normalize_assembly_repair(raw, known_unit_ids),
+            )
+        else:
+            assembly_repair = normalize_assembly_repair(
+                deterministic_assembly_repair(reader_core, traces, assembly_review),
+                known_unit_ids,
+            )
+        reader_core = assembly_repair["reader_core"].strip()
+        traces = assembly_repair["technical_trace"].strip()
+        candidate = reader_core if not traces else f"{reader_core}\n\n## Technical / Evidence Appendix\n\n{traces}\n"
+        assembly_exact = verify_exact(source, candidate, reader_core=reader_core)
+        if not assembly_exact["ok"]:
+            restored = restore_exact_literals({"reader_core": reader_core, "technical_trace": traces}, assembly_exact)
+            reader_core = restored["reader_core"].strip()
+            traces = restored["technical_trace"].strip()
+            candidate = reader_core if not traces else f"{reader_core}\n\n## Technical / Evidence Appendix\n\n{traces}\n"
+            assembly_exact = verify_exact(source, candidate, reader_core=reader_core)
+            assembly_repair["reader_core"] = reader_core
+            assembly_repair["technical_trace"] = traces
+            assembly_repair["deterministic_exact_literal_restoration"] = True
+        else:
+            assembly_repair["deterministic_exact_literal_restoration"] = False
+        records.append(
+            stage_record(
+                stage_id="final-assembly-targeted-repair",
+                responsibility="bounded final assembly repair for transitions, terminology and coherence without whole-document free rewrite",
+                unit_id=None,
+                input_payload=assembly_repair_input,
+                output_payload={
+                    "reader_core_sha256": sha256_text(reader_core),
+                    "technical_trace_sha256": sha256_text(traces),
+                    "applied_finding_ids": assembly_repair["applied_finding_ids"],
+                    "touched_unit_ids": assembly_repair.get("touched_unit_ids", []),
+                    "deterministic_exact_literal_restoration": assembly_repair["deterministic_exact_literal_restoration"],
+                    "exact": assembly_exact,
+                },
+                model_call=driver == "openai-responses",
+            )
+        )
+        bind_consumer(records, "final-assembly-coherence", "final-assembly-targeted-repair", "assembly_findings")
+        for unit in units:
+            bind_consumer(records, unit_gate_stage_ids[unit.unit_id], "final-assembly-targeted-repair", "audited_candidate_unit")
+        repaired_assembly_input = {
+            "assembled_reader_core": reader_core,
+            "assembled_technical_trace": traces,
+            "unit_boundaries": assembly_input["unit_boundaries"],
+            "previous_review_findings": assembly_review["findings"],
+        }
+        if driver == "openai-responses":
+            assembly_review = call_openai_json_validated(
+                "final-assembly-coherence-rerun",
+                (
+                    "Check final assembly coherence after the bounded repair. "
+                    "Verify that transitions, terminology, heading quality, local style outliers and conclusion progression are now acceptable. "
+                    "Do not request a whole-document free rewrite."
+                ),
+                repaired_assembly_input,
+                model=model,
+                api_key=api_key,
+                required=["decision", "findings"],
+                validator=lambda raw: normalize_assembly_review(raw, known_unit_ids),
+            )
+        else:
+            assembly_review = normalize_assembly_review(deterministic_assembly_review(candidate), known_unit_ids)
+        records.append(
+            stage_record(
+                stage_id="final-assembly-coherence-rerun",
+                responsibility="re-check final assembly coherence after bounded assembly repair",
+                unit_id=None,
+                input_payload=repaired_assembly_input,
+                output_payload={
+                    "reader_core_sha256": sha256_text(reader_core),
+                    "technical_trace_sha256": sha256_text(traces),
+                    "review": assembly_review,
+                },
+                model_call=driver == "openai-responses",
+                terminal_output=True,
+            )
+        )
+        bind_consumer(records, "final-assembly-targeted-repair", "final-assembly-coherence-rerun", "repaired_assembly")
+        if assembly_review["decision"] == "REVISE":
+            raise RuntimeError("final assembly review returned REVISE after bounded repair")
     receipt = {
         "schema": RUNTIME_SCHEMA,
         "runtime": "scientific-rewrite.multistage.v1",
