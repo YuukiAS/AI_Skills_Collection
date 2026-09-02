@@ -1090,6 +1090,60 @@ def call_openai_text(
 
 
 def json_response_schema(name: str, required: list[str]) -> dict[str, Any]:
+    string_fields = {
+        "audience",
+        "document_purpose",
+        "core_research_question",
+        "unit_id",
+        "reader_job",
+        "plain_meaning",
+        "relation_to_previous",
+        "relation_to_next",
+        "rewrite_problem",
+        "discourse_function",
+        "reader_takeaway",
+        "reader_core",
+        "technical_trace",
+    }
+    list_fields = {
+        "section_roles",
+        "major_claims",
+        "major_evidence",
+        "major_uncertainties",
+        "major_negative_findings",
+        "major_decisions",
+        "cross_section_dependencies",
+        "terminology_contract",
+        "reader_core_priorities",
+        "trace_material_categories",
+        "units",
+        "claims",
+        "evidence",
+        "conditions",
+        "comparators",
+        "uncertainty",
+        "caveats",
+        "negative_findings",
+        "attribution",
+        "decision_logic",
+        "terminology",
+        "literal_items",
+        "relocatable_trace_items",
+        "source_coverage_ids",
+        "relocated_trace_ids",
+        "findings",
+        "questions",
+    }
+    properties: dict[str, Any] = {}
+    for field in required:
+        if field == "decision":
+            properties[field] = {"type": "string", "enum": ["PASS", "REVISE"]}
+        elif field in string_fields:
+            properties[field] = {"type": "string", "minLength": 1}
+        elif field in list_fields:
+            properties[field] = {"type": "array"}
+        else:
+            properties[field] = {}
     return {
         "name": name,
         "description": f"Structured {name} stage output.",
@@ -1097,7 +1151,7 @@ def json_response_schema(name: str, required: list[str]) -> dict[str, Any]:
             "type": "object",
             "additionalProperties": True,
             "required": required,
-            "properties": {field: {} for field in required},
+            "properties": properties,
         },
     }
 
@@ -1113,7 +1167,10 @@ def call_openai_json(
 ) -> dict[str, Any]:
     strict_prompt = (
         f"{prompt}\n\nReturn one valid JSON object only. Do not wrap it in Markdown. "
-        f"The JSON object must contain these top-level fields: {', '.join(required)}."
+        f"The JSON object must contain these top-level fields: {', '.join(required)}. "
+        "Every required string field must be a non-empty concrete value. "
+        "If a value is implicit in the source, infer a concise value from the source instead of returning an empty string. "
+        "Every required list field must be a JSON array, empty only when the source truly has no such item."
     )
     raw = call_openai_text(
         strict_prompt,
