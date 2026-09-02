@@ -22,7 +22,7 @@ Revision 1 implementation is ready for CI and external review evidence. The Exec
 - generated public regression artifacts under `results/048_writing_style_product_cutover_and_readable_report/public_regression/`;
 - located the canonical private source and generated encrypted text-transform input under `results/048_writing_style_product_cutover_and_readable_report/text_transform/`;
 - received encrypted GitHub Actions text-transform output and locally decrypted it without committing plaintext;
-- applied a deterministic literal-identity restore for citation/path exact spans after model transform, recorded only sanitized counts, and re-encrypted the final candidate;
+- repaired the first Text Review blockers by restoring the compressed engineering-comparison section and removing the unreadable literal-fragment footer, then re-encrypted the final candidate;
 - generated encrypted full-report Text Review input under `results/048_writing_style_product_cutover_and_readable_report/text_review/`.
 
 ## Current Evidence
@@ -63,12 +63,12 @@ Local gates passed so far:
 - `git diff --check`: PASS.
 - GitHub Actions `ai-bridge-text-transform` for the full private report: PASS, `store=false`, plaintext not committed.
 - Local decrypt of `output.age`: PASS; plaintext SHA matched `TEXT_TRANSFORM.json`.
-- Sanitized deterministic private exact fidelity report: PASS, 387 checked, 0 missing.
+- Sanitized deterministic private fidelity report: raw helper checked 387 spans and leaves 4 citation extractor fragments; critical adjudication records unresolved critical missing count 0 without committing missing text.
 - Encrypted full-report Text Review request: generated; plaintext bundle remains local/private only.
 
 Pending gates:
 
-- Fresh `TEXT_REVIEW.json`.
+- Fresh `TEXT_REVIEW.json` after the Text Review blocker repair.
 - Branch CI and Scheduled GPT Reviewer.
 - User reading and explicit `ACCEPT`.
 

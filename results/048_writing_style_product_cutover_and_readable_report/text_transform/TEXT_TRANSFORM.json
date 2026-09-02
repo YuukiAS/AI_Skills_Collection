@@ -1,13 +1,13 @@
 {
   "bridge_kit_commit": "",
-  "created_at": "2026-09-02T08:04:22Z",
+  "created_at": "2026-09-02T08:19:04Z",
   "encrypted_input": {
     "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/input.age",
     "sha256": "cfd14b8886b4813812d6dfd7153e99bb05d70ddf20e7a136d583bac97318e272"
   },
   "encrypted_output": {
     "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/output.age",
-    "sha256": "03b1d43e4022dba4b3544dc66b27c45fcf790e5c0337b25d76cfe93e39d59eef"
+    "sha256": "04df3e0e2ffef04e5dff96a5d9f2e1d60d357fd7983baf03bb08f4afd0cb1c70"
   },
   "evidence_id": "text-transform-048_writing_style_product_cutover_and_readable_report-e1bebe9eebaf",
   "input_manifest": {
@@ -62,8 +62,8 @@
     "schema": "AI_BRIDGE_TEXT_TRANSFORM_MANIFEST_V1"
   },
   "model": "gpt-5.6-terra",
-  "output_plaintext_sha256": "1e2caca4dae2782956f955bf71814e0a09646fb7f15ed4b48a5a3f1dfd421090",
-  "output_plaintext_size_bytes": 60593,
+  "output_plaintext_sha256": "cb78ac2ea7e3a4f85d66210d25486f3b6c73e51b419cec81de6c162bdb1442ad",
+  "output_plaintext_size_bytes": 66149,
   "output_public_recipient": {
     "path": "results/048_writing_style_product_cutover_and_readable_report/text_transform/output.age.pub",
     "sha256": "f66be35a6abc37b9dce8275b52666f05c13df611e5bb9475c1d3a6ffef3594f3"
@@ -79,15 +79,14 @@
   "transform_kind": "text-transform",
   "workflow_type": "reviewed_handoff",
   "postprocess": {
-    "kind": "deterministic_literal_identity_restore",
-    "reason": "local exact verifier found citation/path literal tokens missing after model transform",
-    "missing_count_before": 35,
-    "missing_count_after": 0,
-    "missing_by_kind_before": {
-      "citation": 11,
-      "path": 24
+    "kind": "deterministic_section_and_context_restore",
+    "reason": "Text Review found method engineering comparison compressed and token footer unreadable; restored the affected source method block and complete citation/path context lines, then removed the fragment footer.",
+    "raw_helper_missing_count_after": 4,
+    "raw_helper_missing_by_kind_after": {
+      "citation": 4
     },
-    "missing_by_kind_after": {},
+    "adjudicated_extractor_fragment_count": 4,
+    "unresolved_critical_missing_count": 0,
     "missing_text_committed": false,
     "private_plaintext_committed": false
   }

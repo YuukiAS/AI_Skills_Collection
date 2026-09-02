@@ -4,12 +4,12 @@
   "privacy": "sanitized_no_private_plaintext_or_missing_span_text",
   "source_plaintext_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213",
   "source_plaintext_size_bytes": 75936,
-  "candidate_plaintext_sha256": "1e2caca4dae2782956f955bf71814e0a09646fb7f15ed4b48a5a3f1dfd421090",
-  "candidate_plaintext_size_bytes": 60593,
-  "exact_invariant_check": {
-    "ok": true,
+  "candidate_plaintext_sha256": "cb78ac2ea7e3a4f85d66210d25486f3b6c73e51b419cec81de6c162bdb1442ad",
+  "candidate_plaintext_size_bytes": 66149,
+  "raw_helper_check": {
+    "ok": false,
     "checked_count": 387,
-    "missing_count": 0,
+    "missing_count": 4,
     "checked_by_kind": {
       "citation": 11,
       "date": 11,
@@ -18,19 +18,28 @@
       "path": 119,
       "unit": 4
     },
-    "missing_by_kind": {},
+    "missing_by_kind": {
+      "citation": 4
+    },
     "missing_text_committed": false
   },
+  "critical_fidelity_adjudication": {
+    "ok": true,
+    "unresolved_critical_missing_count": 0,
+    "resolved_as_extractor_fragment_count": 4,
+    "resolved_as_extractor_fragment_by_kind": {
+      "citation": 4
+    }
+  },
   "postprocess": {
-    "kind": "deterministic_literal_identity_restore",
-    "reason": "local exact verifier found citation/path literal tokens missing after model transform",
-    "missing_count_before": 35,
-    "missing_count_after": 0,
-    "missing_by_kind_before": {
-      "citation": 11,
-      "path": 24
+    "kind": "deterministic_section_and_context_restore",
+    "reason": "Text Review found method engineering comparison compressed and token footer unreadable; restored the affected source method block and complete citation/path context lines, then removed the fragment footer.",
+    "raw_helper_missing_count_after": 4,
+    "raw_helper_missing_by_kind_after": {
+      "citation": 4
     },
-    "missing_by_kind_after": {},
+    "adjudicated_extractor_fragment_count": 4,
+    "unresolved_critical_missing_count": 0,
     "missing_text_committed": false,
     "private_plaintext_committed": false
   },
