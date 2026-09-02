@@ -7,9 +7,8 @@
   Pandoc defaults file, TeX header, font directory, or
   `render_resources/chinese_math_pdf`.
 - Run `scripts/probe_pdf_render_env.py --root <project-root> --pretty` or
-  equivalent local checks for `pandoc`, `xelatex`/`lualatex`, `kpsewhich`, PDF QA
-  tools, Chromium browser commands, fontconfig CJK matches, and usable
-  `render_resources/chinese_math_pdf` bundles.
+  equivalent local checks for `pandoc`, `xelatex`, `kpsewhich`, PDF QA tools,
+  and a usable selected `render_resources/chinese_math_pdf` bundle.
 - Confirm the output/cache directory is writable.
 
 ## Source Integrity
@@ -35,8 +34,9 @@
   normal layout, no truncation, and no mojibake; this is required even when
   `pdftotext` extracts Chinese.
 - Any equation/table-heavy pages are visually checked when layout risk exists.
-- If LaTeX produces invisible Chinese, missing glyphs, unstable wrapping, or
-  repeated header/cache failures, switch to the Chromium HTML route promptly.
+- If LaTeX fails or produces invisible Chinese, missing glyphs, unstable
+  wrapping, or repeated header/cache failures, report the exact dependency or
+  compile failure. Do not silently switch to a browser renderer.
 
 ## Reader-Facing Chinese QA
 
