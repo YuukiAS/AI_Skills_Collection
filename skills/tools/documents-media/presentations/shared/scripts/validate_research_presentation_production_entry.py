@@ -55,6 +55,16 @@ def page_jobs(items: list[dict[str, Any]], key: str) -> list[str]:
     return [str(item.get(key) or "") for item in items]
 
 
+def render_probe_status_allowed(render_probe: dict[str, Any], render_status: dict[str, Any], *, allow_missing_render: bool) -> bool:
+    if render_probe.get("status") == "ok":
+        return True
+    return allow_missing_render and render_status.get("status") in {
+        "BLOCKED_MISSING_TEX_ENGINE",
+        "BLOCKED_MISSING_TEX_PACKAGE",
+        "BLOCKED_MISSING_PDF_RENDERER",
+    }
+
+
 def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_render: bool = False) -> list[str]:
     errors: list[str] = []
     required = {
@@ -336,7 +346,7 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         errors.append("dependency_probe.json: invalid schema")
     if render_probe.get("schema") != "RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1":
         errors.append("render_chinese_math_pdf_probe.json: invalid schema")
-    if render_probe.get("status") != "ok":
+    if not render_probe_status_allowed(render_probe, render_status, allow_missing_render=allow_missing_render):
         errors.append("render_chinese_math_pdf_probe.json: render probe failed")
 
     tex_path = resolve(manifest.get("tex", ""))
