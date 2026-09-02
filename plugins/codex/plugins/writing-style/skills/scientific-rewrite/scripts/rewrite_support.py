@@ -385,6 +385,32 @@ def verify_exact(
     }
 
 
+def restore_exact_literals(writer_result: dict[str, Any], exact: dict[str, Any]) -> dict[str, Any]:
+    repaired = dict(writer_result)
+    reader_core = str(repaired.get("reader_core", "")).strip()
+    technical_trace = str(repaired.get("technical_trace", "")).strip()
+    inline_missing: list[str] = []
+    trace_missing: list[str] = []
+    for item in list(exact.get("missing", [])) + list(exact.get("misplaced_inline", [])):
+        if not isinstance(item, dict):
+            continue
+        text = str(item.get("text", "")).strip()
+        if not text:
+            continue
+        target = inline_missing if item.get("role") == "inline-critical" else trace_missing
+        if text not in target:
+            target.append(text)
+    if inline_missing:
+        restored = "保留原文精确项：" + "；".join(inline_missing)
+        reader_core = "\n\n".join(part for part in [reader_core, restored] if part)
+    if trace_missing:
+        restored = "保留原文精确项：" + "；".join(trace_missing)
+        technical_trace = "\n\n".join(part for part in [technical_trace, restored] if part)
+    repaired["reader_core"] = reader_core
+    repaired["technical_trace"] = technical_trace
+    return repaired
+
+
 def document_map(text: str, spans: list[SourceSpan]) -> dict[str, Any]:
     headings = [span.heading_context for span in spans]
     literals = extract_literal_invariants(text)
@@ -1633,6 +1659,24 @@ def run_multistage(
             current_candidate_stage_id = repair_stage_id
             combined_unit = "\n\n".join(part for part in [unit_result["reader_core"], unit_result["technical_trace"]] if part)
             exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=unit_result["reader_core"])
+            if not exact["ok"]:
+                restored = restore_exact_literals(unit_result, exact)
+                records.append(
+                    stage_record(
+                        stage_id=f"{unit.unit_id}-exact-literal-restoration-{repair_attempts}",
+                        responsibility="restore missing exact literals from source ledger after model repair",
+                        unit_id=unit.unit_id,
+                        input_payload={"pre_restore_exact": exact, "repair_output_identity": records[-1].output_identity},
+                        output_payload=restored,
+                        model_call=False,
+                    )
+                )
+                restore_stage_id = records[-1].stage_id
+                bind_consumer(records, current_candidate_stage_id, restore_stage_id, "model_repair_candidate")
+                unit_result = restored
+                current_candidate_stage_id = restore_stage_id
+                combined_unit = "\n\n".join(part for part in [unit_result["reader_core"], unit_result["technical_trace"]] if part)
+                exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=unit_result["reader_core"])
             if driver == "openai-responses":
                 semantic = call_openai_json_validated(
                     f"{unit.unit_id}-post-repair-semantic-audit",
@@ -1663,9 +1707,12 @@ def run_multistage(
                 )
             )
             last_audit_stage_id = records[-1].stage_id
-            bind_consumer(records, repair_stage_id, last_audit_stage_id, "repaired_candidate")
+            bind_consumer(records, current_candidate_stage_id, last_audit_stage_id, "repaired_candidate")
         if not exact["ok"] or semantic_requires_repair(semantic):
-            raise RuntimeError(f"{unit.unit_id} failed closed after bounded targeted repair")
+            raise RuntimeError(
+                f"{unit.unit_id} failed closed after bounded targeted repair "
+                f"(exact_ok={bool(exact['ok'])}, critical_semantic={int(semantic.get('critical_violation_count', 0))})"
+            )
         unit_gate_stage_ids[unit.unit_id] = last_audit_stage_id
         unit_candidate_stage_ids[unit.unit_id] = current_candidate_stage_id
         rewritten_units.append(unit_result)
@@ -1758,6 +1805,25 @@ def run_multistage(
             unit_candidate_stage_ids[unit_id] = reader_repair_stage_id
             combined_unit = "\n\n".join(part for part in [repaired["reader_core"], repaired["technical_trace"]] if part)
             exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=repaired["reader_core"])
+            if not exact["ok"]:
+                restored = restore_exact_literals(repaired, exact)
+                records.append(
+                    stage_record(
+                        stage_id=f"{unit_id}-reader-exact-literal-restoration-{reader_repair_round}",
+                        responsibility="restore missing exact literals from source ledger after reader-targeted repair",
+                        unit_id=unit_id,
+                        input_payload={"pre_restore_exact": exact, "repair_output_identity": records[-1].output_identity},
+                        output_payload=restored,
+                        model_call=False,
+                    )
+                )
+                restore_stage_id = records[-1].stage_id
+                bind_consumer(records, unit_candidate_stage_ids[unit_id], restore_stage_id, "reader_repair_candidate")
+                rewritten_units[unit_index] = restored
+                unit_candidate_stage_ids[unit_id] = restore_stage_id
+                repaired = restored
+                combined_unit = "\n\n".join(part for part in [repaired["reader_core"], repaired["technical_trace"]] if part)
+                exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=repaired["reader_core"])
             if driver == "openai-responses":
                 semantic = call_openai_json_validated(
                     f"{unit_id}-reader-repair-semantic-audit",
@@ -1784,9 +1850,12 @@ def run_multistage(
                 )
             )
             reader_repair_audit_stage_id = records[-1].stage_id
-            bind_consumer(records, reader_repair_stage_id, reader_repair_audit_stage_id, "repaired_candidate")
+            bind_consumer(records, unit_candidate_stage_ids[unit_id], reader_repair_audit_stage_id, "repaired_candidate")
             if not exact["ok"] or semantic_requires_repair(semantic):
-                raise RuntimeError(f"{unit_id} reader-targeted repair failed fidelity gate")
+                raise RuntimeError(
+                    f"{unit_id} reader-targeted repair failed fidelity gate "
+                    f"(exact_ok={bool(exact['ok'])}, critical_semantic={int(semantic.get('critical_violation_count', 0))})"
+                )
             unit_gate_stage_ids[unit_id] = reader_repair_audit_stage_id
         reader_core = "\n\n".join(item["reader_core"] for item in rewritten_units if item["reader_core"]).strip()
         traces = "\n\n".join(item["technical_trace"] for item in rewritten_units if item["technical_trace"]).strip()

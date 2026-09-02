@@ -435,6 +435,55 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertFalse(any("-targeted-repair-" in stage_id for stage_id in stage_ids))
         self.assertTrue(result["receipt"]["dataflow_validation"]["ok"])
 
+    def test_exact_literal_restoration_runs_after_model_repair_omits_literal(self) -> None:
+        helper = load_helper()
+        original = helper.call_openai_text
+
+        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
+            if "Rewrite only the current argument unit" in prompt or "Repair only the current rewritten unit" in prompt:
+                payload = json.loads(source)
+                coverage = [item["proposition_id"] for item in payload.get("source_propositions", [])]
+                if not coverage:
+                    coverage = sorted(
+                        {
+                            str(prop_id)
+                            for field in [
+                                "claims",
+                                "evidence",
+                                "conditions",
+                                "comparators",
+                                "uncertainty",
+                                "caveats",
+                                "negative_findings",
+                                "attribution",
+                                "decision_logic",
+                            ]
+                            for item in payload.get("meaning_card", {}).get(field, [])
+                            for prop_id in item.get("source_proposition_ids", [])
+                        }
+                    )
+                return json.dumps(
+                    {"reader_core": "CARE 的结果需要解释。", "technical_trace": "", "source_coverage_ids": coverage, "relocated_trace_ids": []},
+                    ensure_ascii=False,
+                )
+            return structured_stage_response(prompt, source)
+
+        helper.call_openai_text = fake_call
+        try:
+            result = helper.run_multistage(
+                "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81；下一步比较 FedFisher 和 FedLPA。",
+                driver="openai-responses",
+                model="test-model",
+                api_key="test-key",
+            )
+        finally:
+            helper.call_openai_text = original
+
+        self.assertIn("2026-08-28", result["candidate"])
+        self.assertIn("0.81", result["candidate"])
+        self.assertTrue(any("-exact-literal-restoration-" in item["stage_id"] for item in result["receipt"]["stage_records"]))
+        self.assertTrue(result["receipt"]["dataflow_validation"]["ok"], result["receipt"]["dataflow_validation"])
+
     def test_semantic_audit_status_aliases_are_canonicalized_conservatively(self) -> None:
         helper = load_helper()
         unit = helper.RewriteUnit(
