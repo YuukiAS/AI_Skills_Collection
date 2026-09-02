@@ -8,6 +8,27 @@ Current capability status: `baseline`.
 
 ## Incoming real-use feedback
 
+### Page-level language audits can pass while sentence and slide transitions remain mechanical
+status: NEW
+source: TRACE / CAT-TRACE 34-page group-meeting deck v10 review
+evidence: `YuukiAS/TRACE` commit `3d7bc06dd0f9a80bb87a863e8a74398bc0f866bf`. The v10 `full_deck_language_audit.md` marked every page P2–P34 `READY_FOR_REVIEW`, yet independent review still found that P2 and P3 read as individually correct sentences placed next to one another rather than one explanation, and that several slide boundaries still lacked a natural scientific handoff: metabarcoding -> OTU, the two discovery questions -> TRACE, TRACE -> HMSC, marked tails -> residual dependence, and priors -> full-model closure. The page-level audit described each page's intended meaning but did not actually test why sentence k leads to sentence k+1 or why slide k creates the need for slide k+1.
+problem: Research-presentation language QA needs a **coherence/transition layer in addition to plain-language cleanup**. Within a slide, consecutive sentences should form an explicit causal, temporal, inferential or explanatory chain rather than a list of independently acceptable statements. Across slides, the reviewer should inspect the end of slide k together with the beginning of slide k+1 and ask what unresolved question, limitation or next object creates the transition. This must preserve the existing audience/page-job/first-use/plain-language rules rather than replace them. A useful evidence artifact is a short `transition_map` recording the scientific state at the end of each page and why the next page follows.
+project-specific context: The exact CAT-TRACE sequence (survey -> catalogue -> metabarcoding -> OTU -> unseen discovery -> TRACE -> HMSC/CORAL -> CAT-TRACE) belongs to this deck. The generic problem is that sentence-level and page-level correctness do not guarantee narrative continuity.
+
+### Accent colour and emphasis can drift without a semantic-role contract
+status: NEW
+source: TRACE / CAT-TRACE 34-page group-meeting deck v10 review
+evidence: `YuukiAS/TRACE` commit `3d7bc06dd0f9a80bb87a863e8a74398bc0f866bf`, especially P12 where a full ordinary sentence (`Both components can be coupled...`) is rendered in accent purple without a stable semantic reason, while `Example:`, `Question`, `Takeaway:` and `Limitation for our setting:` are also using accent treatments elsewhere.
+problem: Presentation colour should encode stable semantic roles, not act as a generic importance marker. Ordinary explanatory prose should remain neutral by default. Accent colour may be reserved for a small set of reusable roles such as section/subheading labels, `Example:`, `Takeaway:`, `Question`, `Limitation`, and controlled semantic colouring inside equations/diagrams. The final deck-wide consistency pass should flag an entire prose sentence in accent colour when it does not belong to an approved role.
+project-specific context: CUHK purple and the exact CAT-TRACE labels are project/template details. The generic issue is semantic emphasis consistency across a deck.
+
+### Citation style, bibliography fidelity, and PDF text-layer integrity need one delivery contract
+status: NEW
+source: TRACE / CAT-TRACE 34-page group-meeting deck v10 review
+evidence: `YuukiAS/TRACE` commit `3d7bc06dd0f9a80bb87a863e8a74398bc0f866bf`. v10 uses role labels such as `Source:`, `Figure:` and `Data:`, but short-credit formatting still varies, the References slide contains several paraphrased/shorthand article titles rather than verified full bibliographic titles, and the compiled PDF text layer maps ordinary digits such as years/page numbers to incorrect Unicode characters when extracted/copied even though the rendered glyphs look correct.
+problem: A research-deck delivery should distinguish three layers: (1) concise on-slide role-labelled citations; (2) a verified References bibliography generated from real metadata rather than author-written shorthand titles; and (3) PDF text-layer integrity. The plugin should encourage one house citation style per deck, prohibit invented/paraphrased bibliography titles, and require source metadata verification from BibTeX/Zotero/journal metadata or another authoritative source. Final PDF QA should run text extraction/copyability checks for ordinary ASCII digits, years, page numbers and citation text, so a visually correct PDF with broken ToUnicode/font mapping cannot pass delivery.
+project-specific context: The specific TRACE papers, VicFlora and current XeLaTeX/theme font issue belong to this deck. The generic issue is citation-system consistency plus searchable/copyable PDF text integrity.
+
 ### Audience/page-job briefing before prose handoff materially improved a real research deck
 status: NEW
 source: TRACE / CAT-TRACE 34-page group-meeting deck v9 review
@@ -25,7 +46,7 @@ project-specific context: VicFlora, COI, metabarcoding, MGP, CAT-TRACE equations
 ### Review coverage can self-certify unresolved reviewer feedback
 status: NEW
 source: TRACE / CAT-TRACE 33-page group-meeting deck v6 and v7 reviews
-evidence: `YuukiAS/TRACE` commits `ef08bc25673fb33b639e523504676c0f333d93f4` and `e5bce0c0b8d24b33aa6930a2ea8f9a8a9c86e252`; v6 `v5_review_coverage.md` marked all 21 prior review points `PASS` despite unresolved issues. v7 correctly downgraded executor labels to `READY_FOR_REVIEW`, but the subsequent human/GPT review still found repeated failures in P2 annotation spacing, P10/P13 arrow geometry, P11/P18 vertical-space use, P24 figure readability and the dataset Question/readability treatment even though all corresponding rows were reported ready for review
+evidence: `YuukiAS/TRACE` commits `ef08bc25673fb33b639e523504676c0f333d93f4` and `e5bce0c0b8d24b33aa6930a2ea8f9a8c86e252`; v6 `v5_review_coverage.md` marked all 21 prior review points `PASS` despite unresolved issues. v7 correctly downgraded executor labels to `READY_FOR_REVIEW`, but the subsequent human/GPT review still found repeated failures in P2 annotation spacing, P10/P13 arrow geometry, P11/P18 vertical-space use, P24 figure readability and the dataset Question/readability treatment even though all corresponding rows were reported ready for review
 problem: 当前 coverage matrix 仍然容易把“做过一次针对性改动 + 生成了 render”当作“已经足够值得 reviewer 接受”。把最终 `PASS` 留给 reviewer 是必要的，但还不够；executor-side readiness 也需要 requirement-level acceptance evidence，而不是 source diff 或 checklist presence。对重复问题应要求可观察、可比较的最终条件，例如同类 annotation gap 是否统一、arrow 是否真正接到 node boundary 且长度足够、主内容是否使用了可用纵向空间、图内文字是否达到最终展示字号下限。后续 Planner 应考虑把 `READY_FOR_REVIEW` 的门槛从“我改了”提升为“我能展示 reviewer 原始问题在 final render 中已被具体处理”。
 project-specific context: CAT-TRACE 的具体页码、Malaise 图片、CORAL 文案和公式属于项目；通用问题是 reviewer feedback 必须按原始语义和最终 render 逐条验收，不能把“做过修改”弱化成“已经解决/已经 ready”。
 
