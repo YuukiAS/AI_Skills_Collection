@@ -7,7 +7,7 @@ source text to an OpenAI Responses API call with `store=false` and returns only
 encrypted output.
 
 This repository's installed workflow is pinned to Bridge Kit commit
-`27fff1659e3840438602c1b832d0e09a7b12ff91`.
+`65ea9c59afbe2db88bb5d60bf8752f82719f0087`.
 
 The production path is:
 

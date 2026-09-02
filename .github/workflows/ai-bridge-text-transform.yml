@@ -34,7 +34,7 @@ jobs:
       AI_BRIDGE_TEXT_TRANSFORM_MANIFEST: ${{ github.event.inputs.manifest }}
       AI_BRIDGE_TEXT_TRANSFORM_OUTPUT_AGE: ${{ github.event.inputs.output_age }}
       AI_BRIDGE_TEXT_TRANSFORM_RESULT: ${{ github.event.inputs.result }}
-      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[text-transform] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@27fff1659e3840438602c1b832d0e09a7b12ff91
+      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[text-transform] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@65ea9c59afbe2db88bb5d60bf8752f82719f0087
       AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY: ${{ secrets.AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY }}
     steps:
       - uses: actions/checkout@v4
