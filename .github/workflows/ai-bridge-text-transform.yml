@@ -61,7 +61,7 @@ jobs:
         run: |
           set -euo pipefail
           if [ -z "${AI_BRIDGE_TEXT_TRANSFORM_MANIFEST}" ]; then
-            mapfile -t manifests < <(git diff-tree --no-commit-id --name-only -r "${GITHUB_SHA}" | grep '^results/.*/text_transform/text_transform_inputs[.]json$' || true)
+            mapfile -t manifests < <(git show --name-only --format= "${GITHUB_SHA}" | grep '^results/.*/text_transform/text_transform_inputs[.]json$' || true)
             if [ "${#manifests[@]}" -eq 0 ]; then
               echo "No text transform manifest changed; not required."
               echo "AI_BRIDGE_TEXT_TRANSFORM_SKIP=1" >> "$GITHUB_ENV"
