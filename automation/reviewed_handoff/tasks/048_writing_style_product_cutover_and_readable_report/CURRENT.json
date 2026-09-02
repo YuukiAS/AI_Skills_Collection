@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "048_writing_style_product_cutover_and_readable_report",
-  "state": "PLAN_REQUESTED",
+  "state": "PLAN_FROZEN",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -15,5 +15,6 @@
   "review_limit_reached": false,
   "human_gate_reason": null,
   "visual_review_required": false,
-  "next_action": "WRITING_STYLE_PRODUCT_PLANNER_FREEZE_PLAN"
+  "text_review_required": false,
+  "next_action": "CODEX_EXECUTOR_IMPLEMENT_048_WRITING_STYLE_PRODUCT_CANDIDATE"
 }
