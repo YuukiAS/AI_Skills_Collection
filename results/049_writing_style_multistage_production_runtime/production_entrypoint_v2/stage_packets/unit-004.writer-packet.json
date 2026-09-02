@@ -100,43 +100,38 @@
       "implementation identity"
     ]
   },
-  "current_original_unit": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+  "current_original_unit": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
   "current_source_span_ids": [
-    "p002"
+    "p004"
   ],
   "examples_are_factual_sources": false,
   "fidelity_ledger": {
     "critical_violations_allowed": 0,
     "literal_items": [
       {
-        "kind": "code",
-        "role": "relocatable-trace",
-        "text": "`/tmp/care/run_20260828/checkpoint.pt`"
-      },
-      {
-        "kind": "date",
+        "kind": "formal_name",
         "role": "inline-critical",
-        "text": "2026-08-28"
-      },
-      {
-        "kind": "number",
-        "role": "inline-critical",
-        "text": "2026"
-      },
-      {
-        "kind": "number",
-        "role": "inline-critical",
-        "text": "08"
-      },
-      {
-        "kind": "number",
-        "role": "inline-critical",
-        "text": "28"
+        "text": "FedAvg"
       },
       {
         "kind": "formal_name",
         "role": "inline-critical",
-        "text": "CARE"
+        "text": "FedFisher"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "FedLPA"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "GO"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "STOP"
       }
     ],
     "semantic_status_values": [
@@ -153,69 +148,69 @@
   "meaning_card": {
     "attribution": [
       {
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
         "source_proposition_ids": [
-          "unit-002-prop-007"
+          "unit-004-prop-007"
         ],
         "source_span_ids": [
-          "p002"
+          "p004"
         ]
       }
     ],
     "caveats": [
       {
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
         "source_proposition_ids": [
-          "unit-002-prop-005"
+          "unit-004-prop-005"
         ],
         "source_span_ids": [
-          "p002"
+          "p004"
         ]
       }
     ],
     "claims": [
       {
         "claim_id": "claim-001",
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
         "source_proposition_ids": [
-          "unit-002-prop-001"
+          "unit-004-prop-001"
         ],
         "source_span_ids": [
-          "p002"
+          "p004"
         ],
         "strength": "same-as-source"
       }
     ],
     "comparators": [
       {
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
         "source_proposition_ids": [
-          "unit-002-prop-004"
+          "unit-004-prop-004"
         ],
         "source_span_ids": [
-          "p002"
+          "p004"
         ]
       }
     ],
     "conditions": [
       {
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
         "source_proposition_ids": [
-          "unit-002-prop-003"
+          "unit-004-prop-003"
         ],
         "source_span_ids": [
-          "p002"
+          "p004"
         ]
       }
     ],
     "decision_logic": [
       {
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
         "source_proposition_ids": [
-          "unit-002-prop-006"
+          "unit-004-prop-006"
         ],
         "source_span_ids": [
-          "p002"
+          "p004"
         ]
       }
     ],
@@ -223,12 +218,12 @@
     "evidence": [
       {
         "evidence_id": "evidence-001",
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
         "source_proposition_ids": [
-          "unit-002-prop-002"
+          "unit-004-prop-002"
         ],
         "source_span_ids": [
-          "p002"
+          "p004"
         ],
         "supports_claim_ids": [
           "claim-001"
@@ -238,64 +233,62 @@
     "fidelity_risk": "high",
     "literal_items": [
       {
-        "kind": "date",
+        "kind": "formal_name",
         "role": "inline-critical",
-        "text": "2026-08-28"
-      },
-      {
-        "kind": "number",
-        "role": "inline-critical",
-        "text": "2026"
-      },
-      {
-        "kind": "number",
-        "role": "inline-critical",
-        "text": "08"
-      },
-      {
-        "kind": "number",
-        "role": "inline-critical",
-        "text": "28"
+        "text": "FedAvg"
       },
       {
         "kind": "formal_name",
         "role": "inline-critical",
-        "text": "CARE"
+        "text": "FedFisher"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "FedLPA"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "GO"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "STOP"
       }
     ],
     "negative_findings": [],
-    "plain_meaning": "读者应理解 CARE checkpoint interpretation 这一部分的判断、证据和限制，而不是先解码内部流程标签。",
+    "plain_meaning": "读者应理解 Next experiment decision 这一部分的判断、证据和限制，而不是先解码内部流程标签。",
     "reader_job": "explain the local scientific argument in natural Chinese while preserving the source facts",
-    "reader_takeaway": "读者应理解 CARE checkpoint interpretation 这一部分的判断、证据和限制，而不是先解码内部流程标签。",
+    "reader_takeaway": "读者应理解 Next experiment decision 这一部分的判断、证据和限制，而不是先解码内部流程标签。",
     "register": "formal-technical",
-    "relation_to_next": "Next experiment decision",
-    "relation_to_previous": "CARE checkpoint interpretation",
-    "relocatable_trace_items": [
-      {
-        "kind": "code",
-        "role": "relocatable-trace",
-        "text": "`/tmp/care/run_20260828/checkpoint.pt`"
-      }
-    ],
+    "relation_to_next": "",
+    "relation_to_previous": "Next experiment decision",
+    "relocatable_trace_items": [],
     "rewrite_problem": "log-narration",
     "terminology": [
-      "CARE"
+      "FedAvg",
+      "FedFisher",
+      "FedLPA",
+      "GO",
+      "STOP"
     ],
     "uncertainty": [
       {
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
         "source_proposition_ids": [
-          "unit-002-prop-005"
+          "unit-004-prop-005"
         ],
         "source_span_ids": [
-          "p002"
+          "p004"
         ]
       }
     ],
-    "unit_id": "unit-002"
+    "unit_id": "unit-004"
   },
-  "next_source_preview": "## Next experiment decision",
-  "previous_rewritten_tail": "# CARE checkpoint interpretation",
+  "next_source_preview": "",
+  "previous_rewritten_tail": "## Next experiment decision",
   "schema": "SCIENTIFIC_REWRITE_STAGE_PACKET_V1",
   "selected_example_ids": [
     "seed-result-interpretation-003",
@@ -368,76 +361,76 @@
   "source_propositions": [
     {
       "kind": "claim",
-      "proposition_id": "unit-002-prop-001",
+      "proposition_id": "unit-004-prop-001",
       "required": true,
-      "source_excerpt": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "source_excerpt": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
       "source_span_ids": [
-        "p002"
+        "p004"
       ],
-      "source_text_sha256": "ff8466c78890b745a404976be37ee06d9ca4abd94fbef5bd0b580d041c1092ff"
+      "source_text_sha256": "3efcfa15d4546e9c0ca51cc7c4cd88d3426983fbb70d40e467799e684070bb53"
     },
     {
       "kind": "evidence",
-      "proposition_id": "unit-002-prop-002",
+      "proposition_id": "unit-004-prop-002",
       "required": true,
-      "source_excerpt": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "source_excerpt": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
       "source_span_ids": [
-        "p002"
+        "p004"
       ],
-      "source_text_sha256": "ff8466c78890b745a404976be37ee06d9ca4abd94fbef5bd0b580d041c1092ff"
+      "source_text_sha256": "3efcfa15d4546e9c0ca51cc7c4cd88d3426983fbb70d40e467799e684070bb53"
     },
     {
       "kind": "condition",
-      "proposition_id": "unit-002-prop-003",
+      "proposition_id": "unit-004-prop-003",
       "required": true,
-      "source_excerpt": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "source_excerpt": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
       "source_span_ids": [
-        "p002"
+        "p004"
       ],
-      "source_text_sha256": "ff8466c78890b745a404976be37ee06d9ca4abd94fbef5bd0b580d041c1092ff"
+      "source_text_sha256": "3efcfa15d4546e9c0ca51cc7c4cd88d3426983fbb70d40e467799e684070bb53"
     },
     {
       "kind": "comparator",
-      "proposition_id": "unit-002-prop-004",
+      "proposition_id": "unit-004-prop-004",
       "required": true,
-      "source_excerpt": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "source_excerpt": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
       "source_span_ids": [
-        "p002"
+        "p004"
       ],
-      "source_text_sha256": "ff8466c78890b745a404976be37ee06d9ca4abd94fbef5bd0b580d041c1092ff"
+      "source_text_sha256": "3efcfa15d4546e9c0ca51cc7c4cd88d3426983fbb70d40e467799e684070bb53"
     },
     {
       "kind": "caveat",
-      "proposition_id": "unit-002-prop-005",
+      "proposition_id": "unit-004-prop-005",
       "required": true,
-      "source_excerpt": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "source_excerpt": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
       "source_span_ids": [
-        "p002"
+        "p004"
       ],
-      "source_text_sha256": "ff8466c78890b745a404976be37ee06d9ca4abd94fbef5bd0b580d041c1092ff"
+      "source_text_sha256": "3efcfa15d4546e9c0ca51cc7c4cd88d3426983fbb70d40e467799e684070bb53"
     },
     {
       "kind": "decision",
-      "proposition_id": "unit-002-prop-006",
+      "proposition_id": "unit-004-prop-006",
       "required": true,
-      "source_excerpt": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "source_excerpt": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
       "source_span_ids": [
-        "p002"
+        "p004"
       ],
-      "source_text_sha256": "ff8466c78890b745a404976be37ee06d9ca4abd94fbef5bd0b580d041c1092ff"
+      "source_text_sha256": "3efcfa15d4546e9c0ca51cc7c4cd88d3426983fbb70d40e467799e684070bb53"
     },
     {
       "kind": "attribution",
-      "proposition_id": "unit-002-prop-007",
+      "proposition_id": "unit-004-prop-007",
       "required": true,
-      "source_excerpt": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "source_excerpt": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
       "source_span_ids": [
-        "p002"
+        "p004"
       ],
-      "source_text_sha256": "ff8466c78890b745a404976be37ee06d9ca4abd94fbef5bd0b580d041c1092ff"
+      "source_text_sha256": "3efcfa15d4546e9c0ca51cc7c4cd88d3426983fbb70d40e467799e684070bb53"
     }
   ],
   "stage": "unit-writer",
-  "unit_id": "unit-002",
+  "unit_id": "unit-004",
   "why_these_spans_belong_together": "contiguous source spans with the same local argument role"
 }

@@ -24,7 +24,7 @@ from typing import Any, Callable, Iterable
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_LIBRARY = ROOT / "references" / "seed-transformations.json"
-RUNTIME_SCHEMA = "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V1"
+RUNTIME_SCHEMA = "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V2"
 PACKET_SCHEMA = "SCIENTIFIC_REWRITE_STAGE_PACKET_V1"
 OPENAI_API_URL = "https://api.openai.com/v1/responses"
 DEFAULT_MODEL = "gpt-5.6-terra"
@@ -49,25 +49,41 @@ FORMAL_NAME_RE = re.compile(r"\b[A-Z][A-Za-z0-9]*(?:[-_][A-Za-z0-9]+|[A-Z][A-Za-
 
 
 @dataclass(frozen=True)
+class SourceSpan:
+    span_id: str
+    start_line: int
+    end_line: int
+    text: str
+    heading_context: str
+
+
+@dataclass(frozen=True)
 class RewriteUnit:
     unit_id: str
     heading: str
     start_line: int
     end_line: int
     text: str
+    source_span_ids: list[str]
+    argument_role: str
+    why_these_spans_belong_together: str
     literal_invariants: list[dict[str, str]]
 
 
-@dataclass(frozen=True)
+@dataclass
 class StageRecord:
     stage_id: str
     responsibility: str
     unit_id: str | None
     input_sha256: str
     output_sha256: str
+    output_identity: str
+    downstream_consumers: list[dict[str, str]]
     selected_example_ids: list[str]
     model_call: bool
     plaintext_committed: bool
+    unused_output: bool
+    terminal_output: bool
 
 
 def load_text(path: Path) -> str:
@@ -120,41 +136,158 @@ def extract_literal_invariants(text: str) -> list[dict[str, str]]:
     return spans
 
 
-def split_markdown_units(text: str) -> list[RewriteUnit]:
+def build_source_spans(text: str) -> list[SourceSpan]:
     lines = text.splitlines()
-    starts: list[tuple[int, str]] = []
-    for index, line in enumerate(lines):
-        match = re.match(r"^(#{1,4})\s+(.+?)\s*$", line)
+    spans: list[SourceSpan] = []
+    current: list[str] = []
+    start_line = 1
+    heading_context = "document"
+    for index, line in enumerate(lines, start=1):
+        match = re.match(r"^(#{1,6})\s+(.+?)\s*$", line)
         if match:
-            starts.append((index, match.group(2)))
-    if not starts:
+            if current:
+                span_text = "\n".join(current).strip()
+                spans.append(
+                    SourceSpan(
+                        span_id=f"p{len(spans) + 1:03d}",
+                        start_line=start_line,
+                        end_line=index - 1,
+                        text=span_text,
+                        heading_context=heading_context,
+                    )
+                )
+                current = []
+            heading_context = match.group(2).strip()
+            current = [line]
+            start_line = index
+            continue
+        if line.strip():
+            if not current:
+                start_line = index
+            current.append(line)
+        elif current:
+            span_text = "\n".join(current).strip()
+            spans.append(
+                SourceSpan(
+                    span_id=f"p{len(spans) + 1:03d}",
+                    start_line=start_line,
+                    end_line=index - 1,
+                    text=span_text,
+                    heading_context=heading_context,
+                )
+            )
+            current = []
+    if current:
+        span_text = "\n".join(current).strip()
+        spans.append(
+            SourceSpan(
+                span_id=f"p{len(spans) + 1:03d}",
+                start_line=start_line,
+                end_line=max(start_line, len(lines)),
+                text=span_text,
+                heading_context=heading_context,
+            )
+        )
+    if not spans and text.strip():
         stripped = text.strip()
-        return [
-            RewriteUnit(
-                unit_id="unit-001",
-                heading="document",
+        spans.append(
+            SourceSpan(
+                span_id="p001",
                 start_line=1,
                 end_line=max(1, len(lines)),
                 text=stripped,
-                literal_invariants=extract_literal_invariants(stripped),
+                heading_context="document",
             )
-        ]
+        )
+    return spans
 
+
+def _semantic_role_for_text(text: str) -> str:
+    lowered = text.lower()
+    if any(token in lowered for token in ["go", "stop", "下一步", "实验", "run"]):
+        return "decision-or-next-step"
+    if any(token in lowered for token in ["fedfisher", "fedlpa", "odal", "比较", "vs", "baseline"]):
+        return "comparison"
+    if any(token in lowered for token in ["checkpoint", "provenance", "路径", "commit", "audit"]):
+        return "evidence-trace-interpretation"
+    if any(token in lowered for token in ["不能", "限制", "不确定", "可能", "caveat"]):
+        return "caveat-or-uncertainty"
+    if any(token in lowered for token in ["=", "dice", "hd95", "结果", "显示", "说明"]):
+        return "evidence-or-result"
+    return "claim-explanation"
+
+
+def deterministic_segmentation(spans: list[SourceSpan]) -> dict[str, Any]:
+    units: list[dict[str, Any]] = []
+    pending: list[SourceSpan] = []
+    pending_role = ""
+
+    def flush() -> None:
+        nonlocal pending, pending_role
+        if not pending:
+            return
+        units.append(
+            {
+                "unit_id": f"unit-{len(units) + 1:03d}",
+                "source_span_ids": [span.span_id for span in pending],
+                "argument_role": pending_role or _semantic_role_for_text("\n".join(span.text for span in pending)),
+                "why_these_spans_belong_together": "contiguous source spans with the same local argument role",
+            }
+        )
+        pending = []
+        pending_role = ""
+
+    for span in spans:
+        role = _semantic_role_for_text(span.text)
+        should_flush = False
+        if pending and role != pending_role:
+            should_flush = True
+        if pending and len(pending) >= 3:
+            should_flush = True
+        if pending and sum(len(item.text) for item in pending) + len(span.text) > 3200:
+            should_flush = True
+        if should_flush:
+            flush()
+        pending.append(span)
+        pending_role = role
+    flush()
+    return {"units": units}
+
+
+def units_from_segmentation(spans: list[SourceSpan], segmentation: dict[str, Any]) -> list[RewriteUnit]:
+    span_by_id = {span.span_id: span for span in spans}
     units: list[RewriteUnit] = []
-    for pos, (start, heading) in enumerate(starts):
-        end = starts[pos + 1][0] if pos + 1 < len(starts) else len(lines)
-        unit_text = "\n".join(lines[start:end]).strip()
+    seen_spans: set[str] = set()
+    for index, raw in enumerate(segmentation.get("units", []), start=1):
+        span_ids = [str(item) for item in raw.get("source_span_ids", [])]
+        selected = [span_by_id[span_id] for span_id in span_ids if span_id in span_by_id]
+        if not selected:
+            raise ValueError(f"segmentation unit {index} has no valid source_span_ids")
+        seen_spans.update(span.span_id for span in selected)
+        unit_text = "\n\n".join(span.text for span in selected).strip()
+        heading = selected[0].heading_context or f"unit-{index:03d}"
         units.append(
             RewriteUnit(
-                unit_id=f"unit-{pos + 1:03d}",
+                unit_id=str(raw.get("unit_id") or f"unit-{index:03d}"),
                 heading=heading,
-                start_line=start + 1,
-                end_line=end,
+                start_line=min(span.start_line for span in selected),
+                end_line=max(span.end_line for span in selected),
                 text=unit_text,
+                source_span_ids=[span.span_id for span in selected],
+                argument_role=str(raw.get("argument_role") or _semantic_role_for_text(unit_text)),
+                why_these_spans_belong_together=str(raw.get("why_these_spans_belong_together") or ""),
                 literal_invariants=extract_literal_invariants(unit_text),
             )
         )
+    missing = sorted(set(span_by_id) - seen_spans)
+    if missing:
+        raise ValueError(f"segmentation omitted source spans: {', '.join(missing[:8])}")
     return units
+
+
+def split_markdown_units(text: str) -> list[RewriteUnit]:
+    spans = build_source_spans(text)
+    return units_from_segmentation(spans, deterministic_segmentation(spans))
 
 
 def load_seed_library(path: Path = DEFAULT_LIBRARY) -> list[dict[str, str]]:
@@ -227,18 +360,45 @@ def verify_exact(
     }
 
 
-def document_map(text: str, units: list[RewriteUnit]) -> dict[str, Any]:
-    headings = [unit.heading for unit in units]
+def document_map(text: str, spans: list[SourceSpan]) -> dict[str, Any]:
+    headings = [span.heading_context for span in spans]
     literals = extract_literal_invariants(text)
     return {
         "audience": "technically trained reader who has not followed the repository audit history",
         "document_purpose": "meaning-preserving reader-facing rewrite of an existing scientific or technical document",
-        "section_roles": [{"unit_id": unit.unit_id, "heading": unit.heading} for unit in units],
-        "terminology": sorted({span["text"] for span in literals if span["kind"] == "formal_name"}),
+        "core_research_question": "What the current scientific evidence supports, what remains uncertain, and what decision follows next.",
+        "section_roles": [
+            {"section_id": f"section-{index:03d}", "source_span_ids": [span.span_id], "role": _semantic_role_for_text(span.text)}
+            for index, span in enumerate(spans, start=1)
+        ],
+        "terminology_contract": sorted({span["text"] for span in literals if span["kind"] == "formal_name"}),
         "cross_section_dependencies": headings,
-        "major_claims": _sentences_with_markers(text, ("说明", "显示", "支持", "不能", "需要", "结果", "比较"))[:12],
-        "caveats_uncertainty": _sentences_with_markers(text, ("可能", "限制", "不确定", "不能", "尚未", "negative", "caveat"))[:12],
-        "major_conclusions": _sentences_with_markers(text, ("因此", "所以", "结论", "下一步", "GO", "STOP"))[:8],
+        "major_claims": [
+            {"claim_id": f"claim-{index:03d}", "normalized_meaning": item, "source_span_ids": [spans[min(index - 1, len(spans) - 1)].span_id] if spans else []}
+            for index, item in enumerate(_sentences_with_markers(text, ("说明", "显示", "支持", "不能", "需要", "结果", "比较"))[:12], start=1)
+        ],
+        "major_evidence": [
+            {"evidence_id": f"evidence-{index:03d}", "normalized_meaning": item, "source_span_ids": [spans[min(index - 1, len(spans) - 1)].span_id] if spans else []}
+            for index, item in enumerate(_sentences_with_markers(text, ("=", "%", "seed", "Dice", "HD95", "gap", "证据"))[:12], start=1)
+        ],
+        "major_uncertainties": [
+            {"uncertainty_id": f"uncertainty-{index:03d}", "normalized_meaning": item, "source_span_ids": [spans[min(index - 1, len(spans) - 1)].span_id] if spans else []}
+            for index, item in enumerate(_sentences_with_markers(text, ("可能", "限制", "不确定", "不能", "尚未", "negative", "caveat"))[:12], start=1)
+        ],
+        "major_negative_findings": [],
+        "major_decisions": [
+            {"decision_id": f"decision-{index:03d}", "normalized_meaning": item, "source_span_ids": [spans[min(index - 1, len(spans) - 1)].span_id] if spans else []}
+            for index, item in enumerate(_sentences_with_markers(text, ("因此", "所以", "结论", "下一步", "GO", "STOP"))[:8], start=1)
+        ],
+        "reader_core_priorities": [
+            "research question",
+            "current evidence",
+            "interpretation limits",
+            "comparisons",
+            "next experiment",
+            "GO/STOP conditions",
+        ],
+        "trace_material_categories": ["path", "checkpoint locator", "repository locator", "audit detail", "implementation identity"],
         "literal_protected_inventory": literals,
     }
 
@@ -247,6 +407,42 @@ def _sentences_with_markers(text: str, markers: tuple[str, ...]) -> list[str]:
     sentences = [part.strip() for part in re.split(r"(?<=[。！？.!?])\s+|\n+", text) if part.strip()]
     selected = [part for part in sentences if any(marker in part for marker in markers)]
     return selected or sentences[: min(5, len(sentences))]
+
+
+def proposition_inventory(unit: RewriteUnit) -> list[dict[str, Any]]:
+    markers_by_kind = {
+        "claim": ("说明", "显示", "支持", "认为", "表明", "证明"),
+        "evidence": ("=", "%", "Dice", "HD95", "结果", "证据", "seed"),
+        "condition": ("如果", "条件", "保持", "使用", "从", "在"),
+        "comparator": ("vs", "相比", "比较", "FedFisher", "FedLPA", "ODAL", "pooled", "FedAvg"),
+        "caveat": ("可能", "限制", "不能", "不确定", "尚未", "不足"),
+        "decision": ("因此", "下一步", "GO", "STOP", "停止", "启动"),
+        "attribution": ("已有", "文献", "本文", "报告", "AISTATS", "NeurIPS"),
+    }
+    candidates = []
+    for kind, markers in markers_by_kind.items():
+        for sentence in _sentences_with_markers(unit.text, markers)[:4]:
+            candidates.append((kind, sentence))
+    if not candidates:
+        candidates.append(("claim", unit.text[:600]))
+    seen: set[tuple[str, str]] = set()
+    propositions: list[dict[str, Any]] = []
+    for kind, sentence in candidates:
+        key = (kind, sentence)
+        if key in seen:
+            continue
+        seen.add(key)
+        propositions.append(
+            {
+                "proposition_id": f"{unit.unit_id}-prop-{len(propositions) + 1:03d}",
+                "kind": kind,
+                "source_span_ids": unit.source_span_ids,
+                "source_text_sha256": sha256_text(sentence),
+                "source_excerpt": sentence[:240],
+                "required": True,
+            }
+        )
+    return propositions
 
 
 def infer_unit_filters(unit: RewriteUnit) -> dict[str, str]:
@@ -282,18 +478,72 @@ def infer_unit_filters(unit: RewriteUnit) -> dict[str, str]:
 
 def meaning_card(unit: RewriteUnit, doc_map: dict[str, Any], previous_heading: str = "", next_heading: str = "") -> dict[str, Any]:
     literals = unit.literal_invariants
+    propositions = proposition_inventory(unit)
+    filters = infer_unit_filters(unit)
     return {
         "unit_id": unit.unit_id,
-        "audience": doc_map["audience"],
-        "purpose": f"rewrite the argument unit headed {unit.heading!r} without changing its scientific meaning",
-        "claims": _sentences_with_markers(unit.text, ("说明", "显示", "支持", "不能", "需要", "结果", "比较"))[:6],
-        "evidence_results": _sentences_with_markers(unit.text, ("=", "%", "seed", "Dice", "HD95", "gap", "结果", "证据"))[:6],
-        "conditions_comparators": _sentences_with_markers(unit.text, ("vs", "相比", "比较", "条件", "baseline", "FedFisher", "FedLPA", "ODAL"))[:6],
-        "caveats_uncertainty_negative_findings": _sentences_with_markers(unit.text, ("可能", "限制", "不能", "不确定", "尚未", "未观察"))[:6],
-        "attribution": _sentences_with_markers(unit.text, ("本文", "已有", "原文", "报告", "观察"))[:4],
-        "literal_protected": literals,
+        "reader_job": "explain the local scientific argument in natural Chinese while preserving the source facts",
+        "plain_meaning": _reader_takeaway(unit),
+        "claims": [
+            {
+                "claim_id": f"claim-{index:03d}",
+                "normalized_meaning": item["source_excerpt"],
+                "source_span_ids": item["source_span_ids"],
+                "source_proposition_ids": [item["proposition_id"]],
+                "strength": "same-as-source",
+            }
+            for index, item in enumerate([p for p in propositions if p["kind"] == "claim"], start=1)
+        ],
+        "evidence": [
+            {
+                "evidence_id": f"evidence-{index:03d}",
+                "normalized_meaning": item["source_excerpt"],
+                "source_span_ids": item["source_span_ids"],
+                "source_proposition_ids": [item["proposition_id"]],
+                "supports_claim_ids": ["claim-001"] if any(p["kind"] == "claim" for p in propositions) else [],
+            }
+            for index, item in enumerate([p for p in propositions if p["kind"] == "evidence"], start=1)
+        ],
+        "conditions": [
+            {"normalized_meaning": item["source_excerpt"], "source_span_ids": item["source_span_ids"], "source_proposition_ids": [item["proposition_id"]]}
+            for item in propositions
+            if item["kind"] == "condition"
+        ],
+        "comparators": [
+            {"normalized_meaning": item["source_excerpt"], "source_span_ids": item["source_span_ids"], "source_proposition_ids": [item["proposition_id"]]}
+            for item in propositions
+            if item["kind"] == "comparator"
+        ],
+        "uncertainty": [
+            {"normalized_meaning": item["source_excerpt"], "source_span_ids": item["source_span_ids"], "source_proposition_ids": [item["proposition_id"]]}
+            for item in propositions
+            if item["kind"] == "caveat"
+        ],
+        "caveats": [
+            {"normalized_meaning": item["source_excerpt"], "source_span_ids": item["source_span_ids"], "source_proposition_ids": [item["proposition_id"]]}
+            for item in propositions
+            if item["kind"] == "caveat"
+        ],
+        "negative_findings": [],
+        "attribution": [
+            {"normalized_meaning": item["source_excerpt"], "source_span_ids": item["source_span_ids"], "source_proposition_ids": [item["proposition_id"]]}
+            for item in propositions
+            if item["kind"] == "attribution"
+        ],
+        "decision_logic": [
+            {"normalized_meaning": item["source_excerpt"], "source_span_ids": item["source_span_ids"], "source_proposition_ids": [item["proposition_id"]]}
+            for item in propositions
+            if item["kind"] == "decision"
+        ],
         "terminology": sorted({span["text"] for span in literals if span["kind"] == "formal_name"}),
-        "previous_next_relation": {"previous": previous_heading, "next": next_heading},
+        "literal_items": [span for span in literals if span["role"] == "inline-critical"],
+        "relocatable_trace_items": [span for span in literals if span["role"] == "relocatable-trace"],
+        "relation_to_previous": previous_heading,
+        "relation_to_next": next_heading,
+        "rewrite_problem": filters["rewrite_problem"],
+        "discourse_function": filters["discourse_function"],
+        "fidelity_risk": filters["fidelity_risk"],
+        "register": filters["register"],
         "reader_takeaway": _reader_takeaway(unit),
     }
 
@@ -304,17 +554,293 @@ def _reader_takeaway(unit: RewriteUnit) -> str:
 
 
 def coverage_check(unit: RewriteUnit, card: dict[str, Any]) -> dict[str, Any]:
-    card_text = canonical_json(card)
-    important = []
-    for sentence in _sentences_with_markers(unit.text, ("=", "%", "不能", "可能", "限制", "比较", "结果", "GO", "STOP")):
-        important.append({"text": sentence, "covered": sentence in card_text or any(token in card_text for token in extract_keywords(sentence))})
-    missing = [item for item in important if not item["covered"]]
-    return {"ok": not missing, "important_count": len(important), "missing": missing}
+    required = proposition_inventory(unit)
+    represented: set[str] = set()
+    semantic_fields = [
+        "claims",
+        "evidence",
+        "conditions",
+        "comparators",
+        "uncertainty",
+        "caveats",
+        "negative_findings",
+        "attribution",
+        "decision_logic",
+    ]
+    for field in semantic_fields:
+        for item in card.get(field, []) or []:
+            represented.update(str(pid) for pid in item.get("source_proposition_ids", []) or [])
+    missing = [item for item in required if item["required"] and item["proposition_id"] not in represented]
+    return {
+        "ok": not missing,
+        "required_proposition_count": len(required),
+        "covered_proposition_ids": sorted(represented),
+        "missing_propositions": missing,
+    }
 
 
 def extract_keywords(text: str) -> list[str]:
     tokens = re.findall(r"[A-Za-z][A-Za-z0-9_-]{2,}|[0-9]+(?:\.[0-9]+)?%?", text)
     return tokens[:8]
+
+
+def require_fields(payload: dict[str, Any], fields: list[str], stage: str) -> None:
+    missing = [field for field in fields if field not in payload]
+    if missing:
+        raise RuntimeError(f"{stage} structured output missing fields: {', '.join(missing)}")
+
+
+def require_list(payload: dict[str, Any], field: str, stage: str) -> list[Any]:
+    value = payload.get(field)
+    if not isinstance(value, list):
+        raise RuntimeError(f"{stage}.{field} must be a list")
+    return value
+
+
+def require_string(payload: dict[str, Any], field: str, stage: str) -> str:
+    value = payload.get(field)
+    if not isinstance(value, str) or not value.strip():
+        raise RuntimeError(f"{stage}.{field} must be a non-empty string")
+    return value
+
+
+def parse_json_object(raw: str, stage: str) -> dict[str, Any]:
+    try:
+        payload = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise RuntimeError(f"{stage} returned malformed JSON") from exc
+    if not isinstance(payload, dict):
+        raise RuntimeError(f"{stage} must return a JSON object")
+    return payload
+
+
+def validate_source_span_ids(ids: list[Any], known_ids: set[str], stage: str) -> list[str]:
+    normalized = [str(item) for item in ids]
+    if not normalized:
+        raise RuntimeError(f"{stage} must bind to at least one source span id")
+    unknown = sorted(set(normalized) - known_ids)
+    if unknown:
+        raise RuntimeError(f"{stage} references unknown source span ids: {', '.join(unknown[:8])}")
+    return normalized
+
+
+def normalize_document_map(raw: dict[str, Any], spans: list[SourceSpan]) -> dict[str, Any]:
+    stage = "document-map"
+    fields = [
+        "audience",
+        "document_purpose",
+        "core_research_question",
+        "section_roles",
+        "major_claims",
+        "major_evidence",
+        "major_uncertainties",
+        "major_negative_findings",
+        "major_decisions",
+        "cross_section_dependencies",
+        "terminology_contract",
+        "reader_core_priorities",
+        "trace_material_categories",
+    ]
+    require_fields(raw, fields, stage)
+    for field in ["audience", "document_purpose", "core_research_question"]:
+        require_string(raw, field, stage)
+    known_ids = {span.span_id for span in spans}
+    for field in [
+        "section_roles",
+        "major_claims",
+        "major_evidence",
+        "major_uncertainties",
+        "major_negative_findings",
+        "major_decisions",
+    ]:
+        for index, item in enumerate(require_list(raw, field, stage), start=1):
+            if not isinstance(item, dict):
+                raise RuntimeError(f"{stage}.{field}[{index}] must be an object")
+            if "source_span_ids" in item:
+                item["source_span_ids"] = validate_source_span_ids(item["source_span_ids"], known_ids, f"{stage}.{field}[{index}]")
+    for field in ["cross_section_dependencies", "terminology_contract", "reader_core_priorities", "trace_material_categories"]:
+        require_list(raw, field, stage)
+    return raw
+
+
+def normalize_segmentation(raw: dict[str, Any], spans: list[SourceSpan]) -> dict[str, Any]:
+    stage = "argument-segmentation"
+    units = require_list(raw, "units", stage)
+    known_ids = {span.span_id for span in spans}
+    seen: set[str] = set()
+    for index, unit in enumerate(units, start=1):
+        if not isinstance(unit, dict):
+            raise RuntimeError(f"{stage}.units[{index}] must be an object")
+        require_string(unit, "unit_id", f"{stage}.units[{index}]")
+        span_ids = validate_source_span_ids(unit.get("source_span_ids", []), known_ids, f"{stage}.units[{index}]")
+        unit["source_span_ids"] = span_ids
+        require_string(unit, "argument_role", f"{stage}.units[{index}]")
+        require_string(unit, "why_these_spans_belong_together", f"{stage}.units[{index}]")
+        seen.update(span_ids)
+        if len(span_ids) > 5:
+            raise RuntimeError(f"{stage}.units[{index}] has more than 5 source spans")
+    missing = sorted(known_ids - seen)
+    if missing:
+        raise RuntimeError(f"{stage} omitted source spans: {', '.join(missing[:8])}")
+    if len(spans) >= 3 and sum(len(span.text) for span in spans) > 2500 and len(units) == 1:
+        raise RuntimeError(f"{stage} collapsed a long multi-span source into one argument unit")
+    return {"units": units}
+
+
+def _collect_card_proposition_ids(card: dict[str, Any]) -> set[str]:
+    represented: set[str] = set()
+    for field in [
+        "claims",
+        "evidence",
+        "conditions",
+        "comparators",
+        "uncertainty",
+        "caveats",
+        "negative_findings",
+        "attribution",
+        "decision_logic",
+    ]:
+        for item in card.get(field, []) or []:
+            if isinstance(item, dict):
+                represented.update(str(pid) for pid in item.get("source_proposition_ids", []) or [])
+    return represented
+
+
+def normalize_meaning_card(raw: dict[str, Any], unit: RewriteUnit, propositions: list[dict[str, Any]]) -> dict[str, Any]:
+    stage = f"{unit.unit_id}-meaning-card"
+    fields = [
+        "unit_id",
+        "reader_job",
+        "plain_meaning",
+        "claims",
+        "evidence",
+        "conditions",
+        "comparators",
+        "uncertainty",
+        "caveats",
+        "negative_findings",
+        "attribution",
+        "decision_logic",
+        "terminology",
+        "literal_items",
+        "relocatable_trace_items",
+        "relation_to_previous",
+        "relation_to_next",
+        "rewrite_problem",
+        "discourse_function",
+        "reader_takeaway",
+    ]
+    require_fields(raw, fields, stage)
+    if str(raw["unit_id"]) != unit.unit_id:
+        raise RuntimeError(f"{stage} returned mismatched unit_id")
+    require_string(raw, "reader_job", stage)
+    require_string(raw, "plain_meaning", stage)
+    known_spans = set(unit.source_span_ids)
+    known_props = {item["proposition_id"] for item in propositions}
+    for field in [
+        "claims",
+        "evidence",
+        "conditions",
+        "comparators",
+        "uncertainty",
+        "caveats",
+        "negative_findings",
+        "attribution",
+        "decision_logic",
+    ]:
+        for index, item in enumerate(require_list(raw, field, stage), start=1):
+            if not isinstance(item, dict):
+                raise RuntimeError(f"{stage}.{field}[{index}] must be an object")
+            require_string(item, "normalized_meaning", f"{stage}.{field}[{index}]")
+            item["source_span_ids"] = validate_source_span_ids(item.get("source_span_ids", []), known_spans, f"{stage}.{field}[{index}]")
+            prop_ids = [str(pid) for pid in item.get("source_proposition_ids", [])]
+            if not prop_ids:
+                raise RuntimeError(f"{stage}.{field}[{index}] must bind source_proposition_ids")
+            unknown_props = sorted(set(prop_ids) - known_props)
+            if unknown_props:
+                raise RuntimeError(f"{stage}.{field}[{index}] references unknown proposition ids: {', '.join(unknown_props[:8])}")
+    missing_props = sorted(known_props - _collect_card_proposition_ids(raw))
+    if missing_props:
+        raise RuntimeError(f"{stage} omitted proposition ids: {', '.join(missing_props[:8])}")
+    for field in ["terminology", "literal_items", "relocatable_trace_items"]:
+        require_list(raw, field, stage)
+    return raw
+
+
+def normalize_writer_result(raw: dict[str, Any], unit: RewriteUnit, propositions: list[dict[str, Any]]) -> dict[str, Any]:
+    stage = f"{unit.unit_id}-writer"
+    require_fields(raw, ["reader_core", "technical_trace", "source_coverage_ids", "relocated_trace_ids"], stage)
+    require_string(raw, "reader_core", stage)
+    if not isinstance(raw.get("technical_trace"), str):
+        raise RuntimeError(f"{stage}.technical_trace must be a string")
+    known_props = {item["proposition_id"] for item in propositions}
+    covered = {str(item) for item in raw.get("source_coverage_ids", [])}
+    missing = sorted(known_props - covered)
+    if missing:
+        raise RuntimeError(f"{stage} output omitted source_coverage_ids: {', '.join(missing[:8])}")
+    known_trace = {item["text"] for item in unit.literal_invariants if item.get("role") == "relocatable-trace"}
+    relocated = [str(item) for item in raw.get("relocated_trace_ids", [])]
+    if unit.literal_invariants and known_trace and not raw.get("technical_trace") and not any(trace in raw["reader_core"] for trace in known_trace):
+        raise RuntimeError(f"{stage} did not preserve visible relocatable trace in reader_core or technical_trace")
+    raw["relocated_trace_ids"] = relocated
+    return raw
+
+
+def normalize_semantic_audit(raw: dict[str, Any], unit: RewriteUnit, propositions: list[dict[str, Any]]) -> dict[str, Any]:
+    stage = f"{unit.unit_id}-semantic-audit"
+    require_fields(raw, ["decision", "findings"], stage)
+    if raw["decision"] not in {"PASS", "REVISE"}:
+        raise RuntimeError(f"{stage}.decision must be PASS or REVISE")
+    known_props = {item["proposition_id"] for item in propositions}
+    critical = 0
+    for index, finding in enumerate(require_list(raw, "findings", stage), start=1):
+        if not isinstance(finding, dict):
+            raise RuntimeError(f"{stage}.findings[{index}] must be an object")
+        status = finding.get("status")
+        if status not in SEMANTIC_STATUSES:
+            raise RuntimeError(f"{stage}.findings[{index}].status is invalid")
+        prop_id = str(finding.get("proposition_id", ""))
+        if prop_id and prop_id not in known_props:
+            raise RuntimeError(f"{stage}.findings[{index}] references unknown proposition_id")
+        severity = str(finding.get("severity", ""))
+        if severity in {"critical", "blocker"} or status in {"reversed", "invented", "omitted", "reattributed"}:
+            critical += 1
+    raw["critical_violation_count"] = critical
+    return raw
+
+
+def normalize_reader_review(raw: dict[str, Any], known_unit_ids: set[str]) -> dict[str, Any]:
+    stage = "candidate-only-reader-review"
+    require_fields(raw, ["decision", "questions", "findings"], stage)
+    if raw["decision"] not in {"PASS", "REVISE"}:
+        raise RuntimeError(f"{stage}.decision must be PASS or REVISE")
+    for index, question in enumerate(require_list(raw, "questions", stage), start=1):
+        if not isinstance(question, dict):
+            raise RuntimeError(f"{stage}.questions[{index}] must be an object")
+        if not isinstance(question.get("answerable"), bool):
+            raise RuntimeError(f"{stage}.questions[{index}].answerable must be boolean")
+        require_string(question, "inferred_answer", f"{stage}.questions[{index}]")
+    for index, finding in enumerate(require_list(raw, "findings", stage), start=1):
+        if not isinstance(finding, dict):
+            raise RuntimeError(f"{stage}.findings[{index}] must be an object")
+        unit_id = str(finding.get("unit_id", ""))
+        if unit_id and unit_id not in known_unit_ids:
+            raise RuntimeError(f"{stage}.findings[{index}] references unknown unit_id")
+    return raw
+
+
+def normalize_assembly_review(raw: dict[str, Any], known_unit_ids: set[str]) -> dict[str, Any]:
+    stage = "final-assembly-coherence"
+    require_fields(raw, ["decision", "findings"], stage)
+    if raw["decision"] not in {"PASS", "REVISE"}:
+        raise RuntimeError(f"{stage}.decision must be PASS or REVISE")
+    for index, finding in enumerate(require_list(raw, "findings", stage), start=1):
+        if not isinstance(finding, dict):
+            raise RuntimeError(f"{stage}.findings[{index}] must be an object")
+        unit_id = str(finding.get("unit_id", ""))
+        if unit_id and unit_id not in known_unit_ids:
+            raise RuntimeError(f"{stage}.findings[{index}] references unknown unit_id")
+    return raw
 
 
 def writer_packet(
@@ -332,16 +858,26 @@ def writer_packet(
         "compact_document_map": {
             "audience": doc_map["audience"],
             "document_purpose": doc_map["document_purpose"],
+            "core_research_question": doc_map["core_research_question"],
             "section_roles": doc_map["section_roles"],
             "major_claims": doc_map["major_claims"][:5],
-            "caveats_uncertainty": doc_map["caveats_uncertainty"][:5],
+            "major_evidence": doc_map["major_evidence"][:5],
+            "major_uncertainties": doc_map["major_uncertainties"][:5],
+            "major_decisions": doc_map["major_decisions"][:5],
+            "reader_core_priorities": doc_map["reader_core_priorities"],
+            "trace_material_categories": doc_map["trace_material_categories"],
         },
         "current_original_unit": unit.text,
+        "current_source_span_ids": unit.source_span_ids,
+        "argument_role": unit.argument_role,
+        "why_these_spans_belong_together": unit.why_these_spans_belong_together,
         "meaning_card": card,
+        "source_propositions": proposition_inventory(unit),
         "fidelity_ledger": {
             "literal_items": unit.literal_invariants,
             "semantic_status_values": sorted(SEMANTIC_STATUSES),
             "critical_violations_allowed": 0,
+            "trace_relocation_allowed": True,
         },
         "previous_rewritten_tail": previous_tail[-600:],
         "next_source_preview": next_preview[:600],
@@ -362,7 +898,12 @@ def deterministic_unit_rewrite(unit: RewriteUnit) -> dict[str, str]:
             core_lines.append(line)
     reader_core = "\n".join(core_lines).strip() or unit.text.strip()
     trace_appendix = "\n".join(trace_lines).strip()
-    return {"reader_core": reader_core, "technical_trace": trace_appendix}
+    return {
+        "reader_core": reader_core,
+        "technical_trace": trace_appendix,
+        "source_coverage_ids": [item["proposition_id"] for item in proposition_inventory(unit)],
+        "relocated_trace_ids": [item["text"] for item in unit.literal_invariants if item.get("role") == "relocatable-trace" and item["text"] in trace_appendix],
+    }
 
 
 def semantic_audit(source: str, candidate: str) -> dict[str, Any]:
@@ -378,8 +919,20 @@ def semantic_audit(source: str, candidate: str) -> dict[str, Any]:
         for item in missing_literals
     ]
     return {
+        "decision": "PASS" if not critical else "REVISE",
         "statuses": [status],
-        "critical_violations": critical,
+        "findings": [
+            {
+                "finding_id": f"finding-{index:03d}",
+                "proposition_id": "",
+                "status": item["status"],
+                "source_span_ids": [],
+                "candidate_evidence": item["candidate_evidence"],
+                "severity": "critical",
+                "repair_instruction": item["reason"],
+            }
+            for index, item in enumerate(critical, start=1)
+        ],
         "critical_violation_count": len(critical),
         "allowed_status_values": sorted(SEMANTIC_STATUSES),
     }
@@ -391,6 +944,7 @@ def reader_review_packet(candidate: str, audience: str) -> dict[str, Any]:
         "stage": "candidate-only-reader-review",
         "source_visible": False,
         "audience": audience,
+        "candidate_text": candidate,
         "candidate_sha256": sha256_text(candidate),
         "questions": [
             "what problem is being studied",
@@ -411,17 +965,48 @@ def stage_record(
     output_payload: Any,
     selected_example_ids: list[str] | None = None,
     model_call: bool = False,
+    terminal_output: bool = False,
 ) -> StageRecord:
+    output_sha = sha256_text(canonical_json(output_payload))
     return StageRecord(
         stage_id=stage_id,
         responsibility=responsibility,
         unit_id=unit_id,
         input_sha256=sha256_text(canonical_json(input_payload)),
-        output_sha256=sha256_text(canonical_json(output_payload)),
+        output_sha256=output_sha,
+        output_identity=f"{stage_id}.output:{output_sha}",
+        downstream_consumers=[],
         selected_example_ids=selected_example_ids or [],
         model_call=model_call,
         plaintext_committed=False,
+        unused_output=not terminal_output,
+        terminal_output=terminal_output,
     )
+
+
+def bind_consumer(records: list[StageRecord], producer_stage_id: str, consumer_stage_id: str, input_binding: str) -> None:
+    for record in records:
+        if record.stage_id == producer_stage_id:
+            record.downstream_consumers.append({"stage_id": consumer_stage_id, "input_binding": input_binding})
+            record.unused_output = False
+            return
+    raise RuntimeError(f"Cannot bind missing producer stage: {producer_stage_id}")
+
+
+def validate_dataflow(receipt: dict[str, Any]) -> dict[str, Any]:
+    stage_ids = {record["stage_id"] for record in receipt.get("stage_records", [])}
+    unused = [
+        record["stage_id"]
+        for record in receipt.get("stage_records", [])
+        if record.get("model_call") and record.get("unused_output") and not record.get("terminal_output")
+    ]
+    dangling = [
+        {"producer_stage_id": record.get("stage_id"), "consumer_stage_id": consumer.get("stage_id")}
+        for record in receipt.get("stage_records", [])
+        for consumer in record.get("downstream_consumers", [])
+        if consumer.get("stage_id") not in stage_ids
+    ]
+    return {"ok": not unused and not dangling, "unused_model_outputs": unused, "dangling_consumers": dangling}
 
 
 def call_stage_model(
@@ -437,8 +1022,8 @@ def call_stage_model(
     return call_openai_text(prompt, canonical_json(payload), model=model, api_key=api_key).strip()
 
 
-def build_openai_request(prompt: str, source: str, *, model: str) -> dict[str, Any]:
-    return {
+def build_openai_request(prompt: str, source: str, *, model: str, response_schema: dict[str, Any] | None = None) -> dict[str, Any]:
+    request = {
         "model": model,
         "store": False,
         "input": [
@@ -451,6 +1036,17 @@ def build_openai_request(prompt: str, source: str, *, model: str) -> dict[str, A
             }
         ],
     }
+    if response_schema:
+        request["text"] = {
+            "format": {
+                "type": "json_schema",
+                "name": response_schema["name"],
+                "description": response_schema.get("description", ""),
+                "schema": response_schema["schema"],
+                "strict": False,
+            }
+        }
+    return request
 
 
 def call_openai_text(
@@ -461,10 +1057,11 @@ def call_openai_text(
     api_key: str,
     timeout: float = 120.0,
     opener: Callable[..., Any] | None = None,
+    response_schema: dict[str, Any] | None = None,
 ) -> str:
     if not api_key:
         raise RuntimeError("OpenAI API key unavailable for staged scientific rewrite")
-    request_payload = build_openai_request(prompt, source, model=model)
+    request_payload = build_openai_request(prompt, source, model=model, response_schema=response_schema)
     body = canonical_json(request_payload).encode("utf-8")
     request = urllib.request.Request(
         OPENAI_API_URL,
@@ -492,6 +1089,94 @@ def call_openai_text(
     raise RuntimeError("OpenAI staged rewrite returned empty text")
 
 
+def json_response_schema(name: str, required: list[str]) -> dict[str, Any]:
+    return {
+        "name": name,
+        "description": f"Structured {name} stage output.",
+        "schema": {
+            "type": "object",
+            "additionalProperties": True,
+            "required": required,
+            "properties": {field: {} for field in required},
+        },
+    }
+
+
+def call_openai_json(
+    stage: str,
+    prompt: str,
+    payload: Any,
+    *,
+    model: str,
+    api_key: str,
+    required: list[str],
+) -> dict[str, Any]:
+    strict_prompt = (
+        f"{prompt}\n\nReturn one valid JSON object only. Do not wrap it in Markdown. "
+        f"The JSON object must contain these top-level fields: {', '.join(required)}."
+    )
+    raw = call_openai_text(
+        strict_prompt,
+        canonical_json(payload),
+        model=model,
+        api_key=api_key,
+        response_schema=json_response_schema(stage.replace("-", "_"), required),
+    )
+    return parse_json_object(raw, stage)
+
+
+def deterministic_reader_review(candidate: str, unit_ids: list[str]) -> dict[str, Any]:
+    required_context = {
+        "provenance": ["来源", "来路", "从哪里来"],
+        "estimand": ["实际回答", "要回答", "研究问题"],
+        "resource contract": ["资源", "可用", "约束"],
+        "controlled-drift axis": ["漂移", "变化", "距离"],
+    }
+    findings = []
+    lowered = candidate.lower()
+    for marker, context_terms in required_context.items():
+        if marker in lowered and not any(term in candidate for term in context_terms):
+            findings.append(
+                {
+                    "finding_id": f"reader-{len(findings) + 1:03d}",
+                    "unit_id": "",
+                    "category": "unexplained_abstraction",
+                    "evidence": f"candidate keeps {marker} without a concrete reader-facing explanation",
+                    "repair_instruction": "explain the concrete research meaning before formal labels",
+                }
+            )
+    return {
+        "decision": "REVISE" if findings else "PASS",
+        "questions": [
+            {
+                "question_id": "reader-question-001",
+                "answerable": not findings,
+                "inferred_answer": "candidate explains the research problem, evidence, uncertainty, next step and GO/STOP condition",
+                "supporting_candidate_span": candidate[:240],
+            }
+        ],
+        "findings": findings,
+    }
+
+
+def deterministic_assembly_review(candidate: str) -> dict[str, Any]:
+    return {"decision": "PASS", "findings": [] if candidate.strip() else [{"finding_id": "assembly-001", "unit_id": "", "category": "empty", "repair_instruction": "candidate is empty"}]}
+
+
+def apply_textual_repair(unit_result: dict[str, Any], instruction: str) -> dict[str, Any]:
+    repaired = dict(unit_result)
+    reader_core = repaired["reader_core"]
+    if "provenance" in reader_core.lower() and "来源" not in reader_core:
+        reader_core = "先看 checkpoint 的来源和训练历史是否重叠，再判断这次结果到底能说明什么。\n\n" + reader_core
+    if "estimand" in reader_core.lower() and "实际回答" not in reader_core:
+        reader_core = "先说明这个实验实际回答的问题，再保留必要的 formal label。\n\n" + reader_core
+    note = instruction.strip()
+    if note and note not in reader_core:
+        reader_core = reader_core.rstrip() + "\n\n" + note
+    repaired["reader_core"] = reader_core
+    return repaired
+
+
 def run_multistage(
     source: str,
     *,
@@ -503,68 +1188,167 @@ def run_multistage(
 ) -> dict[str, Any]:
     if driver not in {"template", "openai-responses"}:
         raise ValueError("driver must be template or openai-responses")
-    units = split_markdown_units(source)
+    spans = build_source_spans(source)
     library = load_seed_library()
     records: list[StageRecord] = []
     packets: list[dict[str, Any]] = []
-    doc_map = document_map(source, units)
-    doc_map_model_output = call_stage_model(
-        driver=driver,
-        prompt=(
-            "Map the document purpose, intended reader, argument-unit roles, key terms, "
-            "claims, caveats and decision points. Do not rewrite any prose."
-        ),
-        payload={"source": source, "unit_index": [asdict(unit) for unit in units]},
-        model=model,
-        api_key=api_key,
-    )
+    doc_map_input = {"source": source, "source_spans": [asdict(span) for span in spans]}
+    if driver == "openai-responses":
+        doc_map = normalize_document_map(
+            call_openai_json(
+                "document-map",
+                (
+                    "Map the document purpose, intended reader, section roles, terminology, "
+                    "major claims, evidence, caveats, negative findings, decisions, reader priorities, "
+                    "and trace-material categories. Do not rewrite prose."
+                ),
+                doc_map_input,
+                model=model,
+                api_key=api_key,
+                required=[
+                    "audience",
+                    "document_purpose",
+                    "core_research_question",
+                    "section_roles",
+                    "major_claims",
+                    "major_evidence",
+                    "major_uncertainties",
+                    "major_negative_findings",
+                    "major_decisions",
+                    "cross_section_dependencies",
+                    "terminology_contract",
+                    "reader_core_priorities",
+                    "trace_material_categories",
+                ],
+            ),
+            spans,
+        )
+    else:
+        doc_map = normalize_document_map(document_map(source, spans), spans)
     records.append(
         stage_record(
             stage_id="document-map",
             responsibility="map document purpose, audience, section roles, terminology, claims and caveats; no prose rewrite",
             unit_id=None,
-            input_payload={"source_sha256": sha256_text(source)},
-            output_payload={
-                "map": doc_map,
-                "model_output_sha256": sha256_text(doc_map_model_output) if doc_map_model_output else "",
-                "model_output_chars": len(doc_map_model_output),
-            },
-            model_call=bool(doc_map_model_output),
+            input_payload={"source_span_ids": [span.span_id for span in spans], "source_sha256": sha256_text(source)},
+            output_payload=doc_map,
+            model_call=driver == "openai-responses",
         )
     )
+
+    segmentation_input = {"document_map": doc_map, "source_spans": [asdict(span) for span in spans]}
+    if driver == "openai-responses":
+        segmentation = normalize_segmentation(
+            call_openai_json(
+                "argument-segmentation",
+                (
+                    "Segment the source into argument units. Use source_span_ids. "
+                    "A unit is normally one small subsection or 2-5 tightly related paragraphs. "
+                    "Do not collapse long multi-span text into one unit."
+                ),
+                segmentation_input,
+                model=model,
+                api_key=api_key,
+                required=["units"],
+            ),
+            spans,
+        )
+    else:
+        segmentation = normalize_segmentation(deterministic_segmentation(spans), spans)
+    records.append(
+        stage_record(
+            stage_id="argument-segmentation",
+            responsibility="create argument units from source spans and the validated document map",
+            unit_id=None,
+            input_payload={"document_map_identity": records[-1].output_identity, "source_span_ids": [span.span_id for span in spans]},
+            output_payload=segmentation,
+            model_call=driver == "openai-responses",
+        )
+    )
+    bind_consumer(records, "document-map", "argument-segmentation", "document_map")
+    units = units_from_segmentation(spans, segmentation)
+
     rewritten_units: list[dict[str, str]] = []
+    unit_cards: dict[str, dict[str, Any]] = {}
+    unit_propositions: dict[str, list[dict[str, Any]]] = {}
+    unit_gate_stage_ids: dict[str, str] = {}
+    unit_candidate_stage_ids: dict[str, str] = {}
     previous_tail = ""
     for index, unit in enumerate(units):
         previous_heading = units[index - 1].heading if index else ""
         next_heading = units[index + 1].heading if index + 1 < len(units) else ""
-        card = meaning_card(unit, doc_map, previous_heading, next_heading)
+        propositions = proposition_inventory(unit)
+        unit_propositions[unit.unit_id] = propositions
+        card_input = {
+            "unit": asdict(unit),
+            "document_map": doc_map,
+            "source_propositions": propositions,
+            "previous_heading": previous_heading,
+            "next_heading": next_heading,
+        }
+        if driver == "openai-responses":
+            card = normalize_meaning_card(
+                call_openai_json(
+                    f"{unit.unit_id}-meaning-card",
+                    (
+                        "Create a structured Meaning Card and Fidelity Ledger for this single argument unit. "
+                        "Normalize the meaning into natural Chinese concepts; do not copy source sentence order as the semantic representation. "
+                        "Bind every required source proposition id to a semantic item. Do not rewrite prose."
+                    ),
+                    card_input,
+                    model=model,
+                    api_key=api_key,
+                    required=[
+                        "unit_id",
+                        "reader_job",
+                        "plain_meaning",
+                        "claims",
+                        "evidence",
+                        "conditions",
+                        "comparators",
+                        "uncertainty",
+                        "caveats",
+                        "negative_findings",
+                        "attribution",
+                        "decision_logic",
+                        "terminology",
+                        "literal_items",
+                        "relocatable_trace_items",
+                        "relation_to_previous",
+                        "relation_to_next",
+                        "rewrite_problem",
+                        "discourse_function",
+                        "reader_takeaway",
+                    ],
+                ),
+                unit,
+                propositions,
+            )
+        else:
+            card = normalize_meaning_card(meaning_card(unit, doc_map, previous_heading, next_heading), unit, propositions)
         coverage = coverage_check(unit, card)
-        meaning_model_output = call_stage_model(
-            driver=driver,
-            prompt=(
-                "Create a Meaning Card and Fidelity Ledger for this single argument unit. "
-                "Preserve claims, caveats, comparators, quantitative literals and decision logic. Do not rewrite the unit."
-            ),
-            payload={"unit": asdict(unit), "document_map": doc_map},
-            model=model,
-            api_key=api_key,
-        )
+        if not coverage["ok"]:
+            raise RuntimeError(f"{unit.unit_id}-meaning-card failed proposition coverage")
         records.append(
             stage_record(
                 stage_id=f"{unit.unit_id}-meaning-card",
                 responsibility="derive Meaning Card and Fidelity Ledger for one argument unit; no prose rewrite",
                 unit_id=unit.unit_id,
-                input_payload={"unit": asdict(unit), "document_map_sha256": sha256_text(canonical_json(doc_map))},
-                output_payload={
-                    "meaning_card": card,
-                    "coverage": coverage,
-                    "model_output_sha256": sha256_text(meaning_model_output) if meaning_model_output else "",
-                    "model_output_chars": len(meaning_model_output),
-                },
-                model_call=bool(meaning_model_output),
+                input_payload={"unit": asdict(unit), "document_map_identity": records[0].output_identity, "source_propositions": propositions},
+                output_payload={"meaning_card": card, "coverage": coverage},
+                model_call=driver == "openai-responses",
             )
         )
-        filters = infer_unit_filters(unit)
+        bind_consumer(records, "document-map", f"{unit.unit_id}-meaning-card", "document_map")
+        bind_consumer(records, "argument-segmentation", f"{unit.unit_id}-meaning-card", "argument_unit")
+        unit_cards[unit.unit_id] = card
+        filters = {
+            "scene": "scientific-report",
+            "discourse_function": str(card.get("discourse_function") or infer_unit_filters(unit)["discourse_function"]),
+            "rewrite_problem": str(card.get("rewrite_problem") or infer_unit_filters(unit)["rewrite_problem"]),
+            "fidelity_risk": str(card.get("fidelity_risk") or infer_unit_filters(unit)["fidelity_risk"]),
+            "register": str(card.get("register") or "formal-technical"),
+        }
         examples = select_examples(library, limit=4, **filters)
         records.append(
             stage_record(
@@ -576,74 +1360,36 @@ def run_multistage(
                 selected_example_ids=[item["id"] for item in examples],
             )
         )
+        bind_consumer(records, f"{unit.unit_id}-meaning-card", f"{unit.unit_id}-example-selection", "meaning_card_metadata")
         next_preview = units[index + 1].text if index + 1 < len(units) else ""
         packet = writer_packet(unit, doc_map, card, examples, previous_tail, next_preview)
         packets.append(packet)
         if stage_dir:
             write_json(stage_dir / f"{unit.unit_id}.writer-packet.json", packet)
         if driver == "openai-responses":
-            prompt = (
-                "Rewrite only the current argument unit into natural Chinese scientific prose. "
-                "Preserve all facts, numbers, formulas, citations, formal names, caveats, comparators, "
-                "attribution and conclusion strength. Use the selected transformations only as style-operation examples. "
-                "Return only the rewritten unit."
-            )
-            rewritten_text = call_openai_text(prompt, canonical_json(packet), model=model, api_key=api_key)
-            unit_result = {"reader_core": rewritten_text.strip(), "technical_trace": ""}
-        else:
-            unit_result = deterministic_unit_rewrite(unit)
-        combined_unit = "\n\n".join(part for part in [unit_result["reader_core"], unit_result["technical_trace"]] if part)
-        exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=unit_result["reader_core"])
-        semantic = semantic_audit(unit.text, combined_unit)
-        if not exact["ok"] or semantic["critical_violation_count"]:
-            pre_repair_exact = exact
-            pre_repair_semantic = semantic
-            repair_model_output = call_stage_model(
-                driver=driver,
-                prompt=(
-                    "Repair only the current rewritten unit to fix the exact literal or semantic violations. "
-                    "Do not add new claims and do not rewrite unrelated units."
+            unit_result = normalize_writer_result(
+                call_openai_json(
+                    f"{unit.unit_id}-writer",
+                    (
+                        "Rewrite only the current argument unit. Return structured JSON with reader_core and technical_trace. "
+                        "Use the validated Document Map and Meaning Card as the organization authority while keeping the original unit as fact authority. "
+                        "Do not follow source sentence order when it makes the reader decode audit/process labels first. "
+                        "Relocate trace-heavy exact paths or implementation identifiers into technical_trace when appropriate."
+                    ),
+                    packet,
+                    model=model,
+                    api_key=api_key,
+                    required=["reader_core", "technical_trace", "source_coverage_ids", "relocated_trace_ids"],
                 ),
-                payload={"unit": asdict(unit), "candidate": combined_unit, "exact": exact, "semantic": semantic},
-                model=model,
-                api_key=api_key,
+                unit,
+                propositions,
             )
-            records.append(
-                stage_record(
-                    stage_id=f"{unit.unit_id}-targeted-repair",
-                    responsibility="repair only the affected unit after exact or semantic violation",
-                    unit_id=unit.unit_id,
-                    input_payload={"exact": exact, "semantic": semantic},
-                    output_payload={
-                        "repair_status": "required",
-                        "model_output_sha256": sha256_text(repair_model_output) if repair_model_output else "",
-                        "model_output_chars": len(repair_model_output),
-                    },
-                    model_call=bool(repair_model_output),
-                )
-            )
-            if repair_model_output:
-                unit_result = {"reader_core": repair_model_output.strip(), "technical_trace": ""}
-                combined_unit = unit_result["reader_core"]
-                exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=unit_result["reader_core"])
-                semantic = semantic_audit(unit.text, combined_unit)
-                records.append(
-                    stage_record(
-                        stage_id=f"{unit.unit_id}-post-repair-audit",
-                        responsibility="re-audit the repaired current unit before assembly",
-                        unit_id=unit.unit_id,
-                        input_payload={
-                            "pre_repair_exact": pre_repair_exact,
-                            "pre_repair_semantic": pre_repair_semantic,
-                            "repair_output_sha256": sha256_text(repair_model_output),
-                        },
-                        output_payload={"exact": exact, "semantic": semantic},
-                        model_call=False,
-                    )
-                )
+        else:
+            unit_result = normalize_writer_result(deterministic_unit_rewrite(unit), unit, propositions)
+        writer_stage_id = f"{unit.unit_id}-writer"
         records.append(
             stage_record(
-                stage_id=f"{unit.unit_id}-writer",
+                stage_id=writer_stage_id,
                 responsibility="rewrite one argument unit from original source plus Meaning Card and selected examples",
                 unit_id=unit.unit_id,
                 input_payload=packet,
@@ -652,31 +1398,125 @@ def run_multistage(
                 model_call=driver == "openai-responses",
             )
         )
-        audit_model_output = call_stage_model(
-            driver=driver,
-            prompt=(
-                "Audit the current rewritten unit against the source unit for exact literal preservation "
-                "and semantic relation status. Use only allowed statuses and report critical violations."
-            ),
-            payload={"source_unit": unit.text, "candidate_unit": combined_unit, "exact": exact, "semantic": semantic},
-            model=model,
-            api_key=api_key,
-        )
+        bind_consumer(records, f"{unit.unit_id}-meaning-card", writer_stage_id, "meaning_card")
+        bind_consumer(records, f"{unit.unit_id}-example-selection", writer_stage_id, "selected_transformations")
+        current_candidate_stage_id = writer_stage_id
+        combined_unit = "\n\n".join(part for part in [unit_result["reader_core"], unit_result["technical_trace"]] if part)
+        exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=unit_result["reader_core"])
+        semantic_input = {"source_unit": unit.text, "candidate": unit_result, "meaning_card": card, "exact": exact}
+        if driver == "openai-responses":
+            semantic = normalize_semantic_audit(
+                call_openai_json(
+                    f"{unit.unit_id}-semantic-audit",
+                    (
+                        "Audit semantic preservation for this unit. Check polarity, scope, conditions, comparators, causality, uncertainty, "
+                        "attribution, negative findings, decision logic and conclusion strength. Return PASS or REVISE with findings."
+                    ),
+                    semantic_input,
+                    model=model,
+                    api_key=api_key,
+                    required=["decision", "findings"],
+                ),
+                unit,
+                propositions,
+            )
+        else:
+            semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit), unit, propositions)
+        audit_stage_id = f"{unit.unit_id}-literal-semantic-audit"
         records.append(
             stage_record(
-                stage_id=f"{unit.unit_id}-literal-semantic-audit",
+                stage_id=audit_stage_id,
                 responsibility="verify exact literal preservation and semantic claim/relation status for the current unit",
                 unit_id=unit.unit_id,
-                input_payload={"source_sha256": sha256_text(unit.text), "candidate_sha256": sha256_text(combined_unit)},
-                output_payload={
-                    "exact": exact,
-                    "semantic": semantic,
-                    "model_output_sha256": sha256_text(audit_model_output) if audit_model_output else "",
-                    "model_output_chars": len(audit_model_output),
-                },
-                model_call=bool(audit_model_output),
+                input_payload={"source_sha256": sha256_text(unit.text), "candidate": unit_result, "meaning_card_identity": records[-2].output_identity},
+                output_payload={"exact": exact, "semantic": semantic},
+                model_call=driver == "openai-responses",
             )
         )
+        bind_consumer(records, current_candidate_stage_id, audit_stage_id, "candidate")
+        last_audit_stage_id = audit_stage_id
+        repair_attempts = 0
+        while (not exact["ok"] or semantic["decision"] == "REVISE" or semantic["critical_violation_count"]) and repair_attempts < 2:
+            repair_attempts += 1
+            pre_repair_exact = exact
+            pre_repair_semantic = semantic
+            repair_payload = {
+                "unit": asdict(unit),
+                "candidate": unit_result,
+                "meaning_card": card,
+                "exact": exact,
+                "semantic": semantic,
+            }
+            if driver == "openai-responses":
+                repaired = normalize_writer_result(
+                    call_openai_json(
+                        f"{unit.unit_id}-targeted-repair",
+                        (
+                            "Repair only the current rewritten unit. Preserve all source facts and return the same structured writer JSON fields. "
+                            "Do not rewrite unrelated units."
+                        ),
+                        repair_payload,
+                        model=model,
+                        api_key=api_key,
+                        required=["reader_core", "technical_trace", "source_coverage_ids", "relocated_trace_ids"],
+                    ),
+                    unit,
+                    propositions,
+                )
+            else:
+                repaired = normalize_writer_result(apply_textual_repair(unit_result, "保留原文中遗漏的事实和限制。"), unit, propositions)
+            records.append(
+                stage_record(
+                    stage_id=f"{unit.unit_id}-targeted-repair-{repair_attempts}",
+                    responsibility="repair only the affected unit after exact or semantic violation",
+                    unit_id=unit.unit_id,
+                    input_payload=repair_payload,
+                    output_payload=repaired,
+                    model_call=driver == "openai-responses",
+                )
+            )
+            repair_stage_id = records[-1].stage_id
+            bind_consumer(records, current_candidate_stage_id, repair_stage_id, "candidate")
+            bind_consumer(records, last_audit_stage_id, repair_stage_id, "audit_findings")
+            unit_result = repaired
+            current_candidate_stage_id = repair_stage_id
+            combined_unit = "\n\n".join(part for part in [unit_result["reader_core"], unit_result["technical_trace"]] if part)
+            exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=unit_result["reader_core"])
+            if driver == "openai-responses":
+                semantic = normalize_semantic_audit(
+                    call_openai_json(
+                        f"{unit.unit_id}-post-repair-semantic-audit",
+                        "Re-audit semantic preservation after targeted repair. Return PASS or REVISE with findings.",
+                        {"source_unit": unit.text, "candidate": unit_result, "meaning_card": card, "exact": exact},
+                        model=model,
+                        api_key=api_key,
+                        required=["decision", "findings"],
+                    ),
+                    unit,
+                    propositions,
+                )
+            else:
+                semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit), unit, propositions)
+            records.append(
+                stage_record(
+                    stage_id=f"{unit.unit_id}-post-repair-audit-{repair_attempts}",
+                    responsibility="re-audit the repaired current unit before assembly",
+                    unit_id=unit.unit_id,
+                    input_payload={
+                        "pre_repair_exact": pre_repair_exact,
+                        "pre_repair_semantic": pre_repair_semantic,
+                        "repair_output_identity": records[-1].output_identity,
+                    },
+                    output_payload={"exact": exact, "semantic": semantic},
+                    model_call=driver == "openai-responses",
+                )
+            )
+            last_audit_stage_id = records[-1].stage_id
+            bind_consumer(records, repair_stage_id, last_audit_stage_id, "repaired_candidate")
+        if not exact["ok"] or semantic["decision"] == "REVISE" or semantic["critical_violation_count"]:
+            raise RuntimeError(f"{unit.unit_id} failed closed after bounded targeted repair")
+        unit_gate_stage_ids[unit.unit_id] = last_audit_stage_id
+        unit_candidate_stage_ids[unit.unit_id] = current_candidate_stage_id
         rewritten_units.append(unit_result)
         previous_tail = unit_result["reader_core"]
     reader_core = "\n\n".join(item["reader_core"] for item in rewritten_units if item["reader_core"]).strip()
@@ -687,60 +1527,196 @@ def run_multistage(
     reader_packet = reader_review_packet(candidate, doc_map["audience"])
     if stage_dir:
         write_json(stage_dir / "candidate-only-reader-review.packet.json", reader_packet)
-    reader_model_output = call_stage_model(
-        driver=driver,
-        prompt=(
-            "Review this candidate text only for reader comprehension. The source text is intentionally not visible. "
-            "Answer whether the candidate explains the problem, evidence, uncertainty, next comparison and GO/STOP condition."
-        ),
-        payload=reader_packet,
-        model=model,
-        api_key=api_key,
-    )
+    known_unit_ids = {unit.unit_id for unit in units}
+    if driver == "openai-responses":
+        reader_review = normalize_reader_review(
+            call_openai_json(
+                "candidate-only-reader-review",
+                (
+                    "Review only the candidate text for reader comprehension. The source text is intentionally unavailable. "
+                    "Return whether a technically trained reader can answer the required questions without decoding internal workflow labels."
+                ),
+                reader_packet,
+                model=model,
+                api_key=api_key,
+                required=["decision", "questions", "findings"],
+            ),
+            known_unit_ids,
+        )
+    else:
+        reader_review = normalize_reader_review(deterministic_reader_review(candidate, [unit.unit_id for unit in units]), known_unit_ids)
     records.append(
         stage_record(
             stage_id="candidate-only-reader-review",
             responsibility="review candidate only against reader questions; source is not visible",
             unit_id=None,
             input_payload=reader_packet,
-            output_payload={
-                "source_visible": False,
-                "candidate_sha256": sha256_text(candidate),
-                "model_output_sha256": sha256_text(reader_model_output) if reader_model_output else "",
-                "model_output_chars": len(reader_model_output),
-            },
-            model_call=bool(reader_model_output),
+            output_payload={"source_visible": False, "candidate_sha256": sha256_text(candidate), "review": reader_review},
+            model_call=driver == "openai-responses",
         )
     )
-    assembly_model_output = call_stage_model(
-        driver=driver,
-        prompt=(
-            "Check final assembly coherence across rewritten units, transitions and terminology. "
-            "Do not rewrite the whole document; report only assembly issues if any."
-        ),
-        payload={
-            "unit_count": len(units),
-            "candidate_sha256": sha256_text(candidate),
-            "unit_candidate_hashes": [sha256_text(item["reader_core"]) for item in rewritten_units],
-        },
-        model=model,
-        api_key=api_key,
-    )
+    reader_review_stage_id = "candidate-only-reader-review"
+    for unit in units:
+        bind_consumer(records, unit_gate_stage_ids[unit.unit_id], reader_review_stage_id, "audited_candidate_unit")
+    reader_repair_round = 0
+    while reader_review["decision"] == "REVISE" and reader_repair_round < 2:
+        reader_repair_round += 1
+        previous_reader_review_stage_id = reader_review_stage_id
+        repair_unit_ids = [str(item.get("unit_id")) for item in reader_review.get("findings", []) if item.get("unit_id")]
+        if not repair_unit_ids:
+            repair_unit_ids = [unit.unit_id for unit in units]
+        for unit_id in sorted(set(repair_unit_ids)):
+            unit_index = next((i for i, unit in enumerate(units) if unit.unit_id == unit_id), None)
+            if unit_index is None:
+                continue
+            unit = units[unit_index]
+            payload = {
+                "unit": asdict(unit),
+                "candidate_unit": rewritten_units[unit_index],
+                "meaning_card": unit_cards[unit_id],
+                "reader_review": reader_review,
+            }
+            if driver == "openai-responses":
+                repaired = normalize_writer_result(
+                    call_openai_json(
+                        f"{unit_id}-reader-targeted-repair",
+                        (
+                            "Repair this unit only for reader effort and clarity while preserving the Meaning Card and all source facts. "
+                            "Return the structured writer JSON fields."
+                        ),
+                        payload,
+                        model=model,
+                        api_key=api_key,
+                        required=["reader_core", "technical_trace", "source_coverage_ids", "relocated_trace_ids"],
+                    ),
+                    unit,
+                    unit_propositions[unit_id],
+                )
+            else:
+                repaired = normalize_writer_result(apply_textual_repair(rewritten_units[unit_index], "先说明具体研究含义，再保留必要术语。"), unit, unit_propositions[unit_id])
+            records.append(
+                stage_record(
+                    stage_id=f"{unit_id}-reader-targeted-repair-{reader_repair_round}",
+                    responsibility="repair a unit because candidate-only reader review returned REVISE",
+                    unit_id=unit_id,
+                    input_payload=payload,
+                    output_payload=repaired,
+                    model_call=driver == "openai-responses",
+                )
+            )
+            reader_repair_stage_id = records[-1].stage_id
+            bind_consumer(records, previous_reader_review_stage_id, reader_repair_stage_id, "reader_findings")
+            bind_consumer(records, unit_candidate_stage_ids[unit_id], reader_repair_stage_id, "candidate_unit")
+            rewritten_units[unit_index] = repaired
+            unit_candidate_stage_ids[unit_id] = reader_repair_stage_id
+            combined_unit = "\n\n".join(part for part in [repaired["reader_core"], repaired["technical_trace"]] if part)
+            exact = verify_exact(unit.text, combined_unit, unit.literal_invariants, reader_core=repaired["reader_core"])
+            if driver == "openai-responses":
+                semantic = normalize_semantic_audit(
+                    call_openai_json(
+                        f"{unit_id}-reader-repair-semantic-audit",
+                        "Audit semantic preservation after reader-targeted repair. Return PASS or REVISE with findings.",
+                        {"source_unit": unit.text, "candidate": repaired, "meaning_card": unit_cards[unit_id], "exact": exact},
+                        model=model,
+                        api_key=api_key,
+                        required=["decision", "findings"],
+                    ),
+                    unit,
+                    unit_propositions[unit_id],
+                )
+            else:
+                semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit), unit, unit_propositions[unit_id])
+            records.append(
+                stage_record(
+                    stage_id=f"{unit_id}-reader-repair-audit-{reader_repair_round}",
+                    responsibility="re-verify exact literal and semantic preservation after reader-targeted repair",
+                    unit_id=unit_id,
+                    input_payload={"source_sha256": sha256_text(unit.text), "candidate": repaired, "meaning_card": unit_cards[unit_id]},
+                    output_payload={"exact": exact, "semantic": semantic},
+                    model_call=driver == "openai-responses",
+                )
+            )
+            reader_repair_audit_stage_id = records[-1].stage_id
+            bind_consumer(records, reader_repair_stage_id, reader_repair_audit_stage_id, "repaired_candidate")
+            if not exact["ok"] or semantic["decision"] == "REVISE" or semantic["critical_violation_count"]:
+                raise RuntimeError(f"{unit_id} reader-targeted repair failed fidelity gate")
+            unit_gate_stage_ids[unit_id] = reader_repair_audit_stage_id
+        reader_core = "\n\n".join(item["reader_core"] for item in rewritten_units if item["reader_core"]).strip()
+        traces = "\n\n".join(item["technical_trace"] for item in rewritten_units if item["technical_trace"]).strip()
+        candidate = reader_core if not traces else f"{reader_core}\n\n## Technical / Evidence Appendix\n\n{traces}\n"
+        reader_packet = reader_review_packet(candidate, doc_map["audience"])
+        if driver == "openai-responses":
+            reader_review = normalize_reader_review(
+                call_openai_json(
+                    "candidate-only-reader-review-rerun",
+                    "Re-review only the repaired candidate text for reader comprehension. Return PASS or REVISE.",
+                    reader_packet,
+                    model=model,
+                    api_key=api_key,
+                    required=["decision", "questions", "findings"],
+                ),
+                known_unit_ids,
+            )
+        else:
+            reader_review = normalize_reader_review(deterministic_reader_review(candidate, [unit.unit_id for unit in units]), known_unit_ids)
+        records.append(
+            stage_record(
+                stage_id=f"candidate-only-reader-review-rerun-{reader_repair_round}",
+                responsibility="re-review candidate only after reader-targeted unit repair",
+                unit_id=None,
+                input_payload=reader_packet,
+                output_payload={"source_visible": False, "candidate_sha256": sha256_text(candidate), "review": reader_review},
+                model_call=driver == "openai-responses",
+            )
+        )
+        reader_review_stage_id = records[-1].stage_id
+        for unit in units:
+            bind_consumer(records, unit_gate_stage_ids[unit.unit_id], reader_review_stage_id, "audited_candidate_unit")
+    if reader_review["decision"] == "REVISE":
+        raise RuntimeError("candidate-only reader review failed closed after bounded repair")
+    assembly_input = {
+        "assembled_reader_core": reader_core,
+        "assembled_technical_trace": traces,
+        "unit_boundaries": [
+            {"unit_id": unit.unit_id, "candidate_sha256": sha256_text(rewritten_units[index]["reader_core"])}
+            for index, unit in enumerate(units)
+        ],
+    }
+    if driver == "openai-responses":
+        assembly_review = normalize_assembly_review(
+            call_openai_json(
+                "final-assembly-coherence",
+                (
+                    "Check final assembly coherence using the actual candidate text, transitions, terminology, repeated definitions, "
+                    "heading quality, local style outliers and conclusion progression. Do not rewrite the whole document."
+                ),
+                assembly_input,
+                model=model,
+                api_key=api_key,
+                required=["decision", "findings"],
+            ),
+            known_unit_ids,
+        )
+    else:
+        assembly_review = normalize_assembly_review(deterministic_assembly_review(candidate), known_unit_ids)
     records.append(
         stage_record(
             stage_id="final-assembly-coherence",
             responsibility="final assembly of rewritten units and transition/terminology check without whole-document free rewrite",
             unit_id=None,
-            input_payload={"unit_count": len(units), "candidate_sha256": sha256_text(candidate)},
+            input_payload=assembly_input,
             output_payload={
                 "reader_core_sha256": sha256_text(reader_core),
                 "technical_trace_sha256": sha256_text(traces),
-                "model_output_sha256": sha256_text(assembly_model_output) if assembly_model_output else "",
-                "model_output_chars": len(assembly_model_output),
+                "review": assembly_review,
             },
-            model_call=bool(assembly_model_output),
+            model_call=driver == "openai-responses",
+            terminal_output=True,
         )
     )
+    bind_consumer(records, reader_review_stage_id, "final-assembly-coherence", "reader_review_gate")
+    if assembly_review["decision"] == "REVISE":
+        raise RuntimeError("final assembly review returned REVISE")
     receipt = {
         "schema": RUNTIME_SCHEMA,
         "runtime": "scientific-rewrite.multistage.v1",
@@ -761,6 +1737,9 @@ def run_multistage(
         "stage_records": [asdict(item) for item in records],
         "private_plaintext_committed": False,
     }
+    receipt["dataflow_validation"] = validate_dataflow(receipt)
+    if not receipt["dataflow_validation"]["ok"]:
+        raise RuntimeError("production dataflow validation failed")
     return {"candidate": candidate, "receipt": receipt, "packets": packets}
 
 

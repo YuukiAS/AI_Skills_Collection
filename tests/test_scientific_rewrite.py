@@ -23,6 +23,110 @@ def load_helper():
     return module
 
 
+def structured_stage_response(prompt: str, source: str, *, omit_writer_literals: bool = False) -> str:
+    payload = json.loads(source)
+    if "Map the document purpose" in prompt:
+        span_ids = [span["span_id"] for span in payload["source_spans"]]
+        return json.dumps(
+            {
+                "audience": "统计、ML 和医学影像研究者",
+                "document_purpose": "把科研证据解释成可阅读的中文报告",
+                "core_research_question": "自定义核心问题：当前证据能支持什么下一步判断",
+                "section_roles": [{"role_id": "section-001", "source_span_ids": span_ids, "normalized_meaning": "证据解释"}],
+                "major_claims": [{"claim_id": "claim-001", "source_span_ids": span_ids, "normalized_meaning": "需要保留事实边界"}],
+                "major_evidence": [{"evidence_id": "evidence-001", "source_span_ids": span_ids, "normalized_meaning": "公开测试证据"}],
+                "major_uncertainties": [],
+                "major_negative_findings": [],
+                "major_decisions": [],
+                "cross_section_dependencies": [],
+                "terminology_contract": [],
+                "reader_core_priorities": ["先解释研究含义"],
+                "trace_material_categories": ["路径和审计细节进入技术附录"],
+            },
+            ensure_ascii=False,
+        )
+    if "Segment the source into argument units" in prompt:
+        return json.dumps(
+            {
+                "units": [
+                    {
+                        "unit_id": f"unit-{index:03d}",
+                        "source_span_ids": [span["span_id"]],
+                        "argument_role": "evidence-or-result",
+                        "why_these_spans_belong_together": "single source span argument unit",
+                    }
+                    for index, span in enumerate(payload["source_spans"], start=1)
+                ]
+            },
+            ensure_ascii=False,
+        )
+    if "Create a structured Meaning Card" in prompt:
+        unit = payload["unit"]
+        prop_ids = [item["proposition_id"] for item in payload["source_propositions"]]
+        span_ids = unit["source_span_ids"]
+        card_item = {"normalized_meaning": "自定义普通含义：先说结论，再保留技术细节", "source_span_ids": span_ids, "source_proposition_ids": prop_ids}
+        return json.dumps(
+            {
+                "unit_id": unit["unit_id"],
+                "reader_job": "理解当前证据和下一步判断",
+                "plain_meaning": "自定义普通含义：先说结论，再保留技术细节",
+                "claims": [card_item],
+                "evidence": [],
+                "conditions": [],
+                "comparators": [],
+                "uncertainty": [],
+                "caveats": [],
+                "negative_findings": [],
+                "attribution": [],
+                "decision_logic": [],
+                "terminology": [],
+                "literal_items": [],
+                "relocatable_trace_items": [],
+                "relation_to_previous": "承接前文",
+                "relation_to_next": "引出后文",
+                "rewrite_problem": "workflow-language",
+                "discourse_function": "result-interpretation",
+                "reader_takeaway": "读者应先理解判断含义",
+            },
+            ensure_ascii=False,
+        )
+    if "Rewrite only the current argument unit" in prompt:
+        coverage = [item["proposition_id"] for item in payload["source_propositions"]]
+        reader_core = "CARE 的结果需要解释。" if omit_writer_literals else payload["current_original_unit"]
+        return json.dumps(
+            {"reader_core": reader_core, "technical_trace": "", "source_coverage_ids": coverage, "relocated_trace_ids": []},
+            ensure_ascii=False,
+        )
+    if "Repair only the current rewritten unit" in prompt or "Repair this unit only for reader effort" in prompt:
+        unit = payload["unit"]
+        coverage = sorted(
+            {
+                str(prop_id)
+                for field in ["claims", "evidence", "conditions", "comparators", "uncertainty", "caveats", "negative_findings", "attribution", "decision_logic"]
+                for item in payload.get("meaning_card", {}).get(field, [])
+                for prop_id in item.get("source_proposition_ids", [])
+            }
+        )
+        return json.dumps(
+            {"reader_core": unit["text"], "technical_trace": "", "source_coverage_ids": coverage, "relocated_trace_ids": []},
+            ensure_ascii=False,
+        )
+    if "Audit semantic preservation" in prompt or "Re-audit semantic preservation" in prompt:
+        return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
+    if "Review only the candidate text" in prompt or "Re-review only the repaired candidate text" in prompt:
+        return json.dumps(
+            {
+                "decision": "PASS",
+                "questions": [{"answerable": True, "inferred_answer": "候选文本可回答核心读者问题。"}],
+                "findings": [],
+            },
+            ensure_ascii=False,
+        )
+    if "Check final assembly coherence" in prompt:
+        return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
+    raise AssertionError(f"unexpected prompt: {prompt[:160]}")
+
+
 class ScientificRewriteTests(unittest.TestCase):
     def test_skill_contract_routes_heavy_chinese_scientific_rewrite(self) -> None:
         text = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
@@ -92,7 +196,9 @@ class ScientificRewriteTests(unittest.TestCase):
         helper = load_helper()
         text = "# 报告\n\n## 方法\n\n使用 `renv` 和 5 个 seed。\n\n## 结果\n\nDice=0.81，见 [3]。"
         units = helper.split_markdown_units(text)
-        self.assertEqual([unit.heading for unit in units], ["报告", "方法", "结果"])
+        self.assertGreaterEqual(len(units), 2)
+        self.assertTrue(all(unit.source_span_ids for unit in units))
+        self.assertIn("方法", "\n".join(unit.text for unit in units))
         all_invariants = [span["text"] for unit in units for span in unit.literal_invariants]
         self.assertIn("`renv`", all_invariants)
         self.assertIn("5", all_invariants)
@@ -171,8 +277,80 @@ class ScientificRewriteTests(unittest.TestCase):
         packet = helper.reader_review_packet("候选文本", "统计/ML/医学影像研究者")
         self.assertFalse(packet["source_visible"])
         serialized = json.dumps(packet, ensure_ascii=False)
+        self.assertIn("candidate_text", packet)
+        self.assertEqual(packet["candidate_text"], "候选文本")
         self.assertIn("GO or STOP", serialized)
         self.assertNotIn("current_original_unit", serialized)
+
+    def test_long_unheaded_source_does_not_collapse_to_one_unit(self) -> None:
+        helper = load_helper()
+        source = "\n\n".join(
+            f"第{index}段说明同一份长篇科研报告中的证据、限制、比较和下一步实验条件。" * 30
+            for index in range(1, 7)
+        )
+        result = helper.run_multistage(source)
+        self.assertGreater(result["receipt"]["unit_count"], 1)
+
+    def test_dataflow_validation_rejects_unused_or_dangling_model_output(self) -> None:
+        helper = load_helper()
+        unused = {
+            "stage_records": [
+                {"stage_id": "document-map", "model_call": True, "unused_output": True, "terminal_output": False, "downstream_consumers": []}
+            ]
+        }
+        dangling = {
+            "stage_records": [
+                {
+                    "stage_id": "document-map",
+                    "model_call": True,
+                    "unused_output": False,
+                    "terminal_output": False,
+                    "downstream_consumers": [{"stage_id": "missing-stage", "input_binding": "document_map"}],
+                }
+            ]
+        }
+        self.assertFalse(helper.validate_dataflow(unused)["ok"])
+        self.assertFalse(helper.validate_dataflow(dangling)["ok"])
+
+    def test_malformed_meaning_card_fails_closed(self) -> None:
+        helper = load_helper()
+        original = helper.call_openai_text
+
+        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
+            if "Create a structured Meaning Card" in prompt:
+                return json.dumps({"unit_id": "unit-001"}, ensure_ascii=False)
+            return structured_stage_response(prompt, source)
+
+        helper.call_openai_text = fake_call
+        try:
+            with self.assertRaisesRegex(RuntimeError, "meaning-card"):
+                helper.run_multistage("CARE 在 2026-08-28 的 Dice=0.81。", driver="openai-responses", model="test-model", api_key="test-key")
+        finally:
+            helper.call_openai_text = original
+
+    def test_document_map_and_meaning_card_are_consumed_by_writer_packet(self) -> None:
+        helper = load_helper()
+        original = helper.call_openai_text
+
+        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
+            return structured_stage_response(prompt, source)
+
+        helper.call_openai_text = fake_call
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                result = helper.run_multistage(
+                    "CARE 在 2026-08-28 的 Dice=0.81；下一步比较 FedFisher 和 FedLPA。",
+                    driver="openai-responses",
+                    model="test-model",
+                    api_key="test-key",
+                    stage_dir=Path(tmp),
+                )
+                packet = result["packets"][0]
+                self.assertIn("自定义核心问题", packet["compact_document_map"]["core_research_question"])
+                self.assertIn("自定义普通含义", packet["meaning_card"]["plain_meaning"])
+                self.assertIn("source_propositions", packet)
+        finally:
+            helper.call_openai_text = original
 
     def test_openai_driver_makes_observable_stage_calls(self) -> None:
         helper = load_helper()
@@ -181,10 +359,7 @@ class ScientificRewriteTests(unittest.TestCase):
 
         def fake_call(prompt: str, source: str, **kwargs: object) -> str:
             calls.append({"prompt": prompt, "source": source, "kwargs": kwargs})
-            if "Rewrite only the current argument unit" in prompt:
-                payload = json.loads(source)
-                return payload["current_original_unit"]
-            return "stage ok"
+            return structured_stage_response(prompt, source)
 
         helper.call_openai_text = fake_call
         try:
@@ -212,12 +387,7 @@ class ScientificRewriteTests(unittest.TestCase):
         original = helper.call_openai_text
 
         def fake_call(prompt: str, source: str, **kwargs: object) -> str:
-            if "Rewrite only the current argument unit" in prompt:
-                return "CARE 的结果需要解释。"
-            if "Repair only the current rewritten unit" in prompt:
-                payload = json.loads(source)
-                return payload["unit"]["text"]
-            return "stage ok"
+            return structured_stage_response(prompt, source, omit_writer_literals=True)
 
         helper.call_openai_text = fake_call
         try:
@@ -233,8 +403,8 @@ class ScientificRewriteTests(unittest.TestCase):
         receipt = result["receipt"]
         self.assertIn("2026-08-28", result["candidate"])
         self.assertIn("Dice=0.81", result["candidate"])
-        self.assertTrue(any(item["stage_id"].endswith("-targeted-repair") for item in receipt["stage_records"]))
-        self.assertTrue(any(item["stage_id"].endswith("-post-repair-audit") for item in receipt["stage_records"]))
+        self.assertTrue(any("-targeted-repair-" in item["stage_id"] for item in receipt["stage_records"]))
+        self.assertTrue(any("-post-repair-audit-" in item["stage_id"] for item in receipt["stage_records"]))
 
 
 if __name__ == "__main__":

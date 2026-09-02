@@ -1,6 +1,11 @@
 {
   "candidate_sha256": "45184542db3d00f60aae6597798717adfaabe51920ed43f3f850daf92d1ced8d",
-  "created_at": "2026-09-02T14:03:07Z",
+  "created_at": "2026-09-02T16:16:04Z",
+  "dataflow_validation": {
+    "dangling_consumers": [],
+    "ok": true,
+    "unused_model_outputs": []
+  },
   "driver": "template",
   "full_seed_library_injected": false,
   "max_examples_per_unit": 4,
@@ -8,35 +13,185 @@
   "model_call_count": 0,
   "private_plaintext_committed": false,
   "runtime": "scientific-rewrite.multistage.v1",
-  "schema": "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V1",
+  "schema": "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V2",
   "seed_library_size": 12,
-  "smoke_role": "",
+  "smoke_role": "should_not_fix_fidelity",
   "source_sha256": "ea377cd0c2ef4add1674e85a96eac9819f9000f5e20e3e30174715f1a79a70ee",
-  "stage_count": 7,
+  "stage_count": 12,
   "stage_records": [
     {
-      "input_sha256": "8103e5cb4200d63a5cfe5a8351774bcbf8ab56d0a3869a0675f667a0d7cd30a7",
+      "downstream_consumers": [
+        {
+          "input_binding": "document_map",
+          "stage_id": "argument-segmentation"
+        },
+        {
+          "input_binding": "document_map",
+          "stage_id": "unit-001-meaning-card"
+        },
+        {
+          "input_binding": "document_map",
+          "stage_id": "unit-002-meaning-card"
+        }
+      ],
+      "input_sha256": "6195167342b27cea36e8dd11afc5dccca1f418dbe1a7fb8d45553a9bdc232758",
       "model_call": false,
-      "output_sha256": "cc28906cfeeac38785ce20d0d4ef5da2f523c62a0ddb8fa44e50018f6e309602",
+      "output_identity": "document-map.output:15f0758800d3933d2c8d73850e641ceb4654c8d5fc173224868b27f2604199d1",
+      "output_sha256": "15f0758800d3933d2c8d73850e641ceb4654c8d5fc173224868b27f2604199d1",
       "plaintext_committed": false,
       "responsibility": "map document purpose, audience, section roles, terminology, claims and caveats; no prose rewrite",
       "selected_example_ids": [],
       "stage_id": "document-map",
-      "unit_id": null
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
     },
     {
-      "input_sha256": "54d419a22281d343b19cabec77683bc8c732f191939c0b5bfaad38582086d520",
+      "downstream_consumers": [
+        {
+          "input_binding": "argument_unit",
+          "stage_id": "unit-001-meaning-card"
+        },
+        {
+          "input_binding": "argument_unit",
+          "stage_id": "unit-002-meaning-card"
+        }
+      ],
+      "input_sha256": "3fa6d2eca052a5a134647bfb6afaee10b5dd995337e3c3629cae0de77a98783e",
       "model_call": false,
-      "output_sha256": "91e323f67d6e6a515d0f37f46bdd11fcc0eb88ba86a341d4288c9f81b5facb03",
+      "output_identity": "argument-segmentation.output:a6ad302c9a8c919740ac30afb2aaa6ba55b16bdb4c19b420c948ad8358093850",
+      "output_sha256": "a6ad302c9a8c919740ac30afb2aaa6ba55b16bdb4c19b420c948ad8358093850",
+      "plaintext_committed": false,
+      "responsibility": "create argument units from source spans and the validated document map",
+      "selected_example_ids": [],
+      "stage_id": "argument-segmentation",
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "meaning_card_metadata",
+          "stage_id": "unit-001-example-selection"
+        },
+        {
+          "input_binding": "meaning_card",
+          "stage_id": "unit-001-writer"
+        }
+      ],
+      "input_sha256": "387b27aa45016c1bc4ccc3d2652bec8b92776dd8bcb4185c9ead73258b7c0e2c",
+      "model_call": false,
+      "output_identity": "unit-001-meaning-card.output:33e65784635a1af8b2f0e442aa1fc4c38b6483e875edb8b656ee6b51b8fa27ef",
+      "output_sha256": "33e65784635a1af8b2f0e442aa1fc4c38b6483e875edb8b656ee6b51b8fa27ef",
       "plaintext_committed": false,
       "responsibility": "derive Meaning Card and Fidelity Ledger for one argument unit; no prose rewrite",
       "selected_example_ids": [],
       "stage_id": "unit-001-meaning-card",
-      "unit_id": "unit-001"
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
     },
     {
+      "downstream_consumers": [
+        {
+          "input_binding": "selected_transformations",
+          "stage_id": "unit-001-writer"
+        }
+      ],
+      "input_sha256": "9397741abaceb994fddd8f6918fb11022696714502d839faa24677eac5fa5f78",
+      "model_call": false,
+      "output_identity": "unit-001-example-selection.output:2eb8ab745435e210cdfcbf5a1a158596d9b1ce4a0cf3ffc0a3ff7f3c8c825e22",
+      "output_sha256": "2eb8ab745435e210cdfcbf5a1a158596d9b1ce4a0cf3ffc0a3ff7f3c8c825e22",
+      "plaintext_committed": false,
+      "responsibility": "select 2-4 positive transformations by metadata; never inject the full seed library",
+      "selected_example_ids": [
+        "seed-reader-takeaway-010",
+        "seed-definition-first-use-001",
+        "seed-heading-reader-facing-012",
+        "seed-method-role-008"
+      ],
+      "stage_id": "unit-001-example-selection",
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "candidate",
+          "stage_id": "unit-001-literal-semantic-audit"
+        }
+      ],
+      "input_sha256": "b79163d3c3a45b6ad0a5c235526fe36d276cc6c3e4a065fdd633530135234a7f",
+      "model_call": false,
+      "output_identity": "unit-001-writer.output:ff05577dc949c60d3f72127ce3633c45d7502d1497d5fbabaea06d5dafe103bb",
+      "output_sha256": "ff05577dc949c60d3f72127ce3633c45d7502d1497d5fbabaea06d5dafe103bb",
+      "plaintext_committed": false,
+      "responsibility": "rewrite one argument unit from original source plus Meaning Card and selected examples",
+      "selected_example_ids": [
+        "seed-reader-takeaway-010",
+        "seed-definition-first-use-001",
+        "seed-heading-reader-facing-012",
+        "seed-method-role-008"
+      ],
+      "stage_id": "unit-001-writer",
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "audited_candidate_unit",
+          "stage_id": "candidate-only-reader-review"
+        }
+      ],
+      "input_sha256": "4cba2efbd963aa5191b3b21afb3c44501f257d27483ea502b8bb1e6ce03798dd",
+      "model_call": false,
+      "output_identity": "unit-001-literal-semantic-audit.output:0cd5742e3ed13658b22bc0cb50bc4d183ce9703d33d56283e7bd51c54002e698",
+      "output_sha256": "0cd5742e3ed13658b22bc0cb50bc4d183ce9703d33d56283e7bd51c54002e698",
+      "plaintext_committed": false,
+      "responsibility": "verify exact literal preservation and semantic claim/relation status for the current unit",
+      "selected_example_ids": [],
+      "stage_id": "unit-001-literal-semantic-audit",
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "meaning_card_metadata",
+          "stage_id": "unit-002-example-selection"
+        },
+        {
+          "input_binding": "meaning_card",
+          "stage_id": "unit-002-writer"
+        }
+      ],
+      "input_sha256": "fb2c91b81803cfee47729eb05ed8a9bd7c5d6dabbcdbb3d3f5ed2fd4581278f0",
+      "model_call": false,
+      "output_identity": "unit-002-meaning-card.output:b395b2f1fbb7dfe8b96f73879c817b3d604d54d25da0a9eee119935080562b73",
+      "output_sha256": "b395b2f1fbb7dfe8b96f73879c817b3d604d54d25da0a9eee119935080562b73",
+      "plaintext_committed": false,
+      "responsibility": "derive Meaning Card and Fidelity Ledger for one argument unit; no prose rewrite",
+      "selected_example_ids": [],
+      "stage_id": "unit-002-meaning-card",
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "selected_transformations",
+          "stage_id": "unit-002-writer"
+        }
+      ],
       "input_sha256": "aa3d4239b219718fb4f6dba9d3b836343be62fdfaf774578b209e21919ef0618",
       "model_call": false,
+      "output_identity": "unit-002-example-selection.output:e9cc45c595a462c75cc90c781ffb44e4f4f24f5fb0e3b697d141fdae9a8e1511",
       "output_sha256": "e9cc45c595a462c75cc90c781ffb44e4f4f24f5fb0e3b697d141fdae9a8e1511",
       "plaintext_committed": false,
       "responsibility": "select 2-4 positive transformations by metadata; never inject the full seed library",
@@ -46,13 +201,22 @@
         "seed-caveat-near-claim-004",
         "seed-comparison-direction-005"
       ],
-      "stage_id": "unit-001-example-selection",
-      "unit_id": "unit-001"
+      "stage_id": "unit-002-example-selection",
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
     },
     {
-      "input_sha256": "7f1bf47104447fe84018be48ac4f9c79193c5001c6e5187cf7a6ece7c8d6d24e",
+      "downstream_consumers": [
+        {
+          "input_binding": "candidate",
+          "stage_id": "unit-002-literal-semantic-audit"
+        }
+      ],
+      "input_sha256": "98e3aa60374444d0312f401a1cd22b619950b1777ce32143e08089ae63e06eac",
       "model_call": false,
-      "output_sha256": "d9cec167f382f0619544c7e5a51603d2e3c3949783300f46ce593d1fbbadd384",
+      "output_identity": "unit-002-writer.output:498a53732e151ef9a0da97c1eacb23e61d968e6836c18c4523a935b17bda63cc",
+      "output_sha256": "498a53732e151ef9a0da97c1eacb23e61d968e6836c18c4523a935b17bda63cc",
       "plaintext_committed": false,
       "responsibility": "rewrite one argument unit from original source plus Meaning Card and selected examples",
       "selected_example_ids": [
@@ -61,41 +225,65 @@
         "seed-caveat-near-claim-004",
         "seed-comparison-direction-005"
       ],
-      "stage_id": "unit-001-writer",
-      "unit_id": "unit-001"
+      "stage_id": "unit-002-writer",
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
     },
     {
-      "input_sha256": "e4e453ae360ffdd4ee0156db8e6f51c15f8594935681390f85cf3d69744de7a0",
+      "downstream_consumers": [
+        {
+          "input_binding": "audited_candidate_unit",
+          "stage_id": "candidate-only-reader-review"
+        }
+      ],
+      "input_sha256": "e82c370d691121d616df07a947a241fc6417dcdf73fd377593650672b4fec9c1",
       "model_call": false,
-      "output_sha256": "0f8d414592dbdbaf40d88bce881926dc31469d319a415e4616fa4e4a24e797ab",
+      "output_identity": "unit-002-literal-semantic-audit.output:ecca17cf43c657daef63736df49b96b60773c98fdf017f042423d398812df992",
+      "output_sha256": "ecca17cf43c657daef63736df49b96b60773c98fdf017f042423d398812df992",
       "plaintext_committed": false,
       "responsibility": "verify exact literal preservation and semantic claim/relation status for the current unit",
       "selected_example_ids": [],
-      "stage_id": "unit-001-literal-semantic-audit",
-      "unit_id": "unit-001"
+      "stage_id": "unit-002-literal-semantic-audit",
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
     },
     {
-      "input_sha256": "aca3c5a021a062334a3929c37ddbea1cabc9bc80925eaf0605031df218a626c5",
+      "downstream_consumers": [
+        {
+          "input_binding": "reader_review_gate",
+          "stage_id": "final-assembly-coherence"
+        }
+      ],
+      "input_sha256": "74bb5920599c76eb2e3d8adf714dad9b86cebf0ee5dbd6679b213b91bb23eec3",
       "model_call": false,
-      "output_sha256": "1fa04c0a52163f7b9644ab70662c07957e8fdfe805bb94e65710a8976fe01c4b",
+      "output_identity": "candidate-only-reader-review.output:8868389190f2afa49ea37af8ee632b29696e33e5680f92641a9f92349b0980a1",
+      "output_sha256": "8868389190f2afa49ea37af8ee632b29696e33e5680f92641a9f92349b0980a1",
       "plaintext_committed": false,
       "responsibility": "review candidate only against reader questions; source is not visible",
       "selected_example_ids": [],
       "stage_id": "candidate-only-reader-review",
-      "unit_id": null
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
     },
     {
-      "input_sha256": "01ef2bfc311e98ef3c0586a2afe830a491b356ec5853790ce96129049b14d74c",
+      "downstream_consumers": [],
+      "input_sha256": "6ee273e464be237da8cbaf0840a459d309d9d2d7f151f1f9d368074d89df51cf",
       "model_call": false,
-      "output_sha256": "7eaa7787bf1444ee8a143c964b198e38e1590e4f70af5915c95f2e394e60836f",
+      "output_identity": "final-assembly-coherence.output:8676af4eba3457e0338f0fa0f80ec96b1d293b20df234aaf5a2d544274ab0a7b",
+      "output_sha256": "8676af4eba3457e0338f0fa0f80ec96b1d293b20df234aaf5a2d544274ab0a7b",
       "plaintext_committed": false,
       "responsibility": "final assembly of rewritten units and transition/terminology check without whole-document free rewrite",
       "selected_example_ids": [],
       "stage_id": "final-assembly-coherence",
-      "unit_id": null
+      "terminal_output": true,
+      "unit_id": null,
+      "unused_output": false
     }
   ],
   "store": false,
-  "unit_count": 1,
+  "unit_count": 2,
   "whole_document_writer_call": false
 }

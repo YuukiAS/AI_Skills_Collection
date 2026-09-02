@@ -1,6 +1,11 @@
 {
-  "candidate_sha256": "952d4a249d5dcf904170cfb64f5594cd7ad0f7df4330e9c7b8ca356fd785e4fa",
-  "created_at": "2026-09-02T14:03:07Z",
+  "candidate_sha256": "5ac26004e9889a41a356f2a760e6bc23c326603b3cda6cd00f597afdaf0519ba",
+  "created_at": "2026-09-02T16:16:29Z",
+  "dataflow_validation": {
+    "dangling_consumers": [],
+    "ok": true,
+    "unused_model_outputs": []
+  },
   "driver": "template",
   "full_seed_library_injected": false,
   "max_examples_per_unit": 4,
@@ -8,85 +13,205 @@
   "model_call_count": 0,
   "private_plaintext_committed": false,
   "runtime": "scientific-rewrite.multistage.v1",
-  "schema": "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V1",
+  "schema": "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V2",
   "seed_library_size": 12,
-  "smoke_role": "",
+  "smoke_role": "generated_payload_runtime_v2",
   "source_sha256": "5693f6f152765be631a4623ad55fb9dff622723e63c2f49549eb675b529afca6",
-  "stage_count": 11,
+  "stage_count": 29,
   "stage_records": [
     {
-      "input_sha256": "efec426286f0982c21eb3e7e5e51c9d20e1a6fdeb4840405ff163cef95b30141",
+      "downstream_consumers": [
+        {
+          "input_binding": "document_map",
+          "stage_id": "argument-segmentation"
+        },
+        {
+          "input_binding": "document_map",
+          "stage_id": "unit-001-meaning-card"
+        },
+        {
+          "input_binding": "document_map",
+          "stage_id": "unit-002-meaning-card"
+        },
+        {
+          "input_binding": "document_map",
+          "stage_id": "unit-003-meaning-card"
+        },
+        {
+          "input_binding": "document_map",
+          "stage_id": "unit-004-meaning-card"
+        }
+      ],
+      "input_sha256": "9604a841781239ea04b3d2e30981783c75fecaf571881be703a326fe1067c575",
       "model_call": false,
-      "output_sha256": "30cbee04e49d521f42d0ee5683c5ba77ecfe680dad2bf39a653a77890dbd49ec",
+      "output_identity": "document-map.output:f515bfc326ad4cc378e9b1e199ca912e43c2629830827bac2f9ca0e2898f0b0c",
+      "output_sha256": "f515bfc326ad4cc378e9b1e199ca912e43c2629830827bac2f9ca0e2898f0b0c",
       "plaintext_committed": false,
       "responsibility": "map document purpose, audience, section roles, terminology, claims and caveats; no prose rewrite",
       "selected_example_ids": [],
       "stage_id": "document-map",
-      "unit_id": null
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
     },
     {
-      "input_sha256": "cd3601cf114af1a3ce9de29754975e67746c55c4583d61d09ecb7c268f855cf3",
+      "downstream_consumers": [
+        {
+          "input_binding": "argument_unit",
+          "stage_id": "unit-001-meaning-card"
+        },
+        {
+          "input_binding": "argument_unit",
+          "stage_id": "unit-002-meaning-card"
+        },
+        {
+          "input_binding": "argument_unit",
+          "stage_id": "unit-003-meaning-card"
+        },
+        {
+          "input_binding": "argument_unit",
+          "stage_id": "unit-004-meaning-card"
+        }
+      ],
+      "input_sha256": "b6b05797e561b2ae3d0afbfc7b26886784e82f002894d465bfc49e885662a312",
       "model_call": false,
-      "output_sha256": "80f3194c6557b43c7d090d8c840b0fffc6a8b4a05a4da689792f37945458cdc8",
+      "output_identity": "argument-segmentation.output:cea96ac6489b54d5d7da45bb8713ce62cf2af45465df95527b4996320b2c2d4a",
+      "output_sha256": "cea96ac6489b54d5d7da45bb8713ce62cf2af45465df95527b4996320b2c2d4a",
+      "plaintext_committed": false,
+      "responsibility": "create argument units from source spans and the validated document map",
+      "selected_example_ids": [],
+      "stage_id": "argument-segmentation",
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "meaning_card_metadata",
+          "stage_id": "unit-001-example-selection"
+        },
+        {
+          "input_binding": "meaning_card",
+          "stage_id": "unit-001-writer"
+        }
+      ],
+      "input_sha256": "472ff3c5315132fff3482eb137039e5208a0e96976b60a5b49435cc92c1bd447",
+      "model_call": false,
+      "output_identity": "unit-001-meaning-card.output:bc4691afc3788f12d04cbb765fbf1cbcc766a723fe2e96e9e6c67ff75cb0a6a7",
+      "output_sha256": "bc4691afc3788f12d04cbb765fbf1cbcc766a723fe2e96e9e6c67ff75cb0a6a7",
       "plaintext_committed": false,
       "responsibility": "derive Meaning Card and Fidelity Ledger for one argument unit; no prose rewrite",
       "selected_example_ids": [],
       "stage_id": "unit-001-meaning-card",
-      "unit_id": "unit-001"
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
     },
     {
-      "input_sha256": "aa3d4239b219718fb4f6dba9d3b836343be62fdfaf774578b209e21919ef0618",
+      "downstream_consumers": [
+        {
+          "input_binding": "selected_transformations",
+          "stage_id": "unit-001-writer"
+        }
+      ],
+      "input_sha256": "58eedf8b3ddd9ac5512f72f46b573c8f675830905a47709ac8f5a4262755a1a0",
       "model_call": false,
-      "output_sha256": "e9cc45c595a462c75cc90c781ffb44e4f4f24f5fb0e3b697d141fdae9a8e1511",
+      "output_identity": "unit-001-example-selection.output:cde85e3bcbd6fd7bc011a311fd2efacc7efd9e8df082407c8c34917f23d00862",
+      "output_sha256": "cde85e3bcbd6fd7bc011a311fd2efacc7efd9e8df082407c8c34917f23d00862",
       "plaintext_committed": false,
       "responsibility": "select 2-4 positive transformations by metadata; never inject the full seed library",
       "selected_example_ids": [
-        "seed-result-interpretation-003",
-        "seed-attribution-011",
-        "seed-caveat-near-claim-004",
-        "seed-comparison-direction-005"
+        "seed-workflow-label-actor-action-002",
+        "seed-definition-first-use-001",
+        "seed-reader-takeaway-010",
+        "seed-heading-reader-facing-012"
       ],
       "stage_id": "unit-001-example-selection",
-      "unit_id": "unit-001"
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
     },
     {
-      "input_sha256": "7c2abc8625161543e5de26ddd8f2b093078116522c90b6c4eed034c0b47b1c0d",
+      "downstream_consumers": [
+        {
+          "input_binding": "candidate",
+          "stage_id": "unit-001-literal-semantic-audit"
+        },
+        {
+          "input_binding": "candidate_unit",
+          "stage_id": "unit-001-reader-targeted-repair-1"
+        }
+      ],
+      "input_sha256": "15a7fe2374ba59c74e5f52e571c02a47c9d83211e99875ee5511a70c1c660db7",
       "model_call": false,
-      "output_sha256": "265ad5b467735b04bf74ce93f10cb19991fc0f95a88c524d37821c46d389b851",
+      "output_identity": "unit-001-writer.output:33c6a1df4108a6adcc344ae6bca08af2347ba836cd276c501185e334b61ea6c4",
+      "output_sha256": "33c6a1df4108a6adcc344ae6bca08af2347ba836cd276c501185e334b61ea6c4",
       "plaintext_committed": false,
       "responsibility": "rewrite one argument unit from original source plus Meaning Card and selected examples",
       "selected_example_ids": [
-        "seed-result-interpretation-003",
-        "seed-attribution-011",
-        "seed-caveat-near-claim-004",
-        "seed-comparison-direction-005"
+        "seed-workflow-label-actor-action-002",
+        "seed-definition-first-use-001",
+        "seed-reader-takeaway-010",
+        "seed-heading-reader-facing-012"
       ],
       "stage_id": "unit-001-writer",
-      "unit_id": "unit-001"
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
     },
     {
-      "input_sha256": "fb73e21ec95286ebf2a2be726d9dff1f95441986f3ed4171ac75d0f8a89c821b",
+      "downstream_consumers": [
+        {
+          "input_binding": "audited_candidate_unit",
+          "stage_id": "candidate-only-reader-review"
+        }
+      ],
+      "input_sha256": "8eea433ceff0cb3fe83b73cca351bd2c4065996b0680bcbe02a8c245ff42250c",
       "model_call": false,
-      "output_sha256": "2295ce40cd85cd9c5e89ef3aaa97f060b9b9e1df58bfc7abac4d6230bfac5d33",
+      "output_identity": "unit-001-literal-semantic-audit.output:98b76b3eff944c04c05055392e53aca38fdc9b9843d62e1041a1870ebb705f8f",
+      "output_sha256": "98b76b3eff944c04c05055392e53aca38fdc9b9843d62e1041a1870ebb705f8f",
       "plaintext_committed": false,
       "responsibility": "verify exact literal preservation and semantic claim/relation status for the current unit",
       "selected_example_ids": [],
       "stage_id": "unit-001-literal-semantic-audit",
-      "unit_id": "unit-001"
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
     },
     {
-      "input_sha256": "b54016b50a58710d16383ff2de730b93884193d0eb05597413469fdce5859dd8",
+      "downstream_consumers": [
+        {
+          "input_binding": "meaning_card_metadata",
+          "stage_id": "unit-002-example-selection"
+        },
+        {
+          "input_binding": "meaning_card",
+          "stage_id": "unit-002-writer"
+        }
+      ],
+      "input_sha256": "0a837ba6d5b6a9e477a10c0ea439f154d140b3c7f59ce37c92eed9f2d2c7265e",
       "model_call": false,
-      "output_sha256": "27f407348cfa8a0f982a38d9bf422e5bc51b0bd7145e83a46b6c3d8798f66181",
+      "output_identity": "unit-002-meaning-card.output:56114d99bee56ba203306827dcfb90bd7ba93c318d8b00b06667fafa9a311d9f",
+      "output_sha256": "56114d99bee56ba203306827dcfb90bd7ba93c318d8b00b06667fafa9a311d9f",
       "plaintext_committed": false,
       "responsibility": "derive Meaning Card and Fidelity Ledger for one argument unit; no prose rewrite",
       "selected_example_ids": [],
       "stage_id": "unit-002-meaning-card",
-      "unit_id": "unit-002"
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
     },
     {
+      "downstream_consumers": [
+        {
+          "input_binding": "selected_transformations",
+          "stage_id": "unit-002-writer"
+        }
+      ],
       "input_sha256": "aa3d4239b219718fb4f6dba9d3b836343be62fdfaf774578b209e21919ef0618",
       "model_call": false,
+      "output_identity": "unit-002-example-selection.output:e9cc45c595a462c75cc90c781ffb44e4f4f24f5fb0e3b697d141fdae9a8e1511",
       "output_sha256": "e9cc45c595a462c75cc90c781ffb44e4f4f24f5fb0e3b697d141fdae9a8e1511",
       "plaintext_committed": false,
       "responsibility": "select 2-4 positive transformations by metadata; never inject the full seed library",
@@ -97,12 +222,25 @@
         "seed-comparison-direction-005"
       ],
       "stage_id": "unit-002-example-selection",
-      "unit_id": "unit-002"
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
     },
     {
-      "input_sha256": "7b3980ad9337b41ac64f3edeecd384051088770610f8209a54ef8b39d58dc390",
+      "downstream_consumers": [
+        {
+          "input_binding": "candidate",
+          "stage_id": "unit-002-literal-semantic-audit"
+        },
+        {
+          "input_binding": "candidate_unit",
+          "stage_id": "unit-002-reader-targeted-repair-1"
+        }
+      ],
+      "input_sha256": "9d51ccd047f45652ff480fc550aa7c7f819082b1dcb52bf00cca5edab86a839a",
       "model_call": false,
-      "output_sha256": "ca7f7400f96086683e01e54a38034ccfecdc47e334a89d9645c2c0f66a24d8c8",
+      "output_identity": "unit-002-writer.output:949ff8dbb9cf44050e51aedbcbbd77315e38d88d61159257746d31bcf4d9cdff",
+      "output_sha256": "949ff8dbb9cf44050e51aedbcbbd77315e38d88d61159257746d31bcf4d9cdff",
       "plaintext_committed": false,
       "responsibility": "rewrite one argument unit from original source plus Meaning Card and selected examples",
       "selected_example_ids": [
@@ -112,40 +250,435 @@
         "seed-comparison-direction-005"
       ],
       "stage_id": "unit-002-writer",
-      "unit_id": "unit-002"
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
     },
     {
-      "input_sha256": "f9a3ee6b09f94ae18e0cd62da48a4dfc97b9629726d951327d7a56b72f75bf7b",
+      "downstream_consumers": [
+        {
+          "input_binding": "audited_candidate_unit",
+          "stage_id": "candidate-only-reader-review"
+        }
+      ],
+      "input_sha256": "29e9e25ab76a153e9b3e881f07d7b6dd1f33d03fe283505874f0607dc127a4f4",
       "model_call": false,
-      "output_sha256": "6e7ce25dbe4cb2697c1cf31182d6534741a29c3fb37d195c2402a3a456530028",
+      "output_identity": "unit-002-literal-semantic-audit.output:91d481332797ab575800abbf18b945406a74be415e389fc5414af1bf3bc907f9",
+      "output_sha256": "91d481332797ab575800abbf18b945406a74be415e389fc5414af1bf3bc907f9",
       "plaintext_committed": false,
       "responsibility": "verify exact literal preservation and semantic claim/relation status for the current unit",
       "selected_example_ids": [],
       "stage_id": "unit-002-literal-semantic-audit",
-      "unit_id": "unit-002"
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
     },
     {
-      "input_sha256": "8bd6536d17ffb2554d236792f101b17444c5734382ffe651e594d7fb3de87497",
+      "downstream_consumers": [
+        {
+          "input_binding": "meaning_card_metadata",
+          "stage_id": "unit-003-example-selection"
+        },
+        {
+          "input_binding": "meaning_card",
+          "stage_id": "unit-003-writer"
+        }
+      ],
+      "input_sha256": "dbb17225280fd33f80088978032d289b5f625fc4f23c5196e719659ecb24e70e",
       "model_call": false,
-      "output_sha256": "b7b7407e4a49ef9b5e1e854ce686a42a53a136238ada9c6e71213a81476b3cdc",
+      "output_identity": "unit-003-meaning-card.output:f907a941975b7b7e70c1908d74296634002ef95282711a153d52feeec6ac560a",
+      "output_sha256": "f907a941975b7b7e70c1908d74296634002ef95282711a153d52feeec6ac560a",
+      "plaintext_committed": false,
+      "responsibility": "derive Meaning Card and Fidelity Ledger for one argument unit; no prose rewrite",
+      "selected_example_ids": [],
+      "stage_id": "unit-003-meaning-card",
+      "terminal_output": false,
+      "unit_id": "unit-003",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "selected_transformations",
+          "stage_id": "unit-003-writer"
+        }
+      ],
+      "input_sha256": "9397741abaceb994fddd8f6918fb11022696714502d839faa24677eac5fa5f78",
+      "model_call": false,
+      "output_identity": "unit-003-example-selection.output:2eb8ab745435e210cdfcbf5a1a158596d9b1ce4a0cf3ffc0a3ff7f3c8c825e22",
+      "output_sha256": "2eb8ab745435e210cdfcbf5a1a158596d9b1ce4a0cf3ffc0a3ff7f3c8c825e22",
+      "plaintext_committed": false,
+      "responsibility": "select 2-4 positive transformations by metadata; never inject the full seed library",
+      "selected_example_ids": [
+        "seed-reader-takeaway-010",
+        "seed-definition-first-use-001",
+        "seed-heading-reader-facing-012",
+        "seed-method-role-008"
+      ],
+      "stage_id": "unit-003-example-selection",
+      "terminal_output": false,
+      "unit_id": "unit-003",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "candidate",
+          "stage_id": "unit-003-literal-semantic-audit"
+        },
+        {
+          "input_binding": "candidate_unit",
+          "stage_id": "unit-003-reader-targeted-repair-1"
+        }
+      ],
+      "input_sha256": "5dfca79b682ceac2176dafead184e72c9bc4d1244b2303da5b03917f64c93c32",
+      "model_call": false,
+      "output_identity": "unit-003-writer.output:e47d01edf9d5f138578018493abffdff49d94f8b3c0e1a5bb252cb953a29d8ef",
+      "output_sha256": "e47d01edf9d5f138578018493abffdff49d94f8b3c0e1a5bb252cb953a29d8ef",
+      "plaintext_committed": false,
+      "responsibility": "rewrite one argument unit from original source plus Meaning Card and selected examples",
+      "selected_example_ids": [
+        "seed-reader-takeaway-010",
+        "seed-definition-first-use-001",
+        "seed-heading-reader-facing-012",
+        "seed-method-role-008"
+      ],
+      "stage_id": "unit-003-writer",
+      "terminal_output": false,
+      "unit_id": "unit-003",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "audited_candidate_unit",
+          "stage_id": "candidate-only-reader-review"
+        }
+      ],
+      "input_sha256": "973dabffd8a881f4e7d252f89895d45a2760cc5691a3f628107261949b964a99",
+      "model_call": false,
+      "output_identity": "unit-003-literal-semantic-audit.output:0cd5742e3ed13658b22bc0cb50bc4d183ce9703d33d56283e7bd51c54002e698",
+      "output_sha256": "0cd5742e3ed13658b22bc0cb50bc4d183ce9703d33d56283e7bd51c54002e698",
+      "plaintext_committed": false,
+      "responsibility": "verify exact literal preservation and semantic claim/relation status for the current unit",
+      "selected_example_ids": [],
+      "stage_id": "unit-003-literal-semantic-audit",
+      "terminal_output": false,
+      "unit_id": "unit-003",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "meaning_card_metadata",
+          "stage_id": "unit-004-example-selection"
+        },
+        {
+          "input_binding": "meaning_card",
+          "stage_id": "unit-004-writer"
+        }
+      ],
+      "input_sha256": "67b8df1af39b2e412214dad2a471de58f3f98d61b56a8e9a8c546099d75752b1",
+      "model_call": false,
+      "output_identity": "unit-004-meaning-card.output:02c905b57db27c9744e96d39c33c411608a8b6c0306076ac8e3c1b2c8ef22465",
+      "output_sha256": "02c905b57db27c9744e96d39c33c411608a8b6c0306076ac8e3c1b2c8ef22465",
+      "plaintext_committed": false,
+      "responsibility": "derive Meaning Card and Fidelity Ledger for one argument unit; no prose rewrite",
+      "selected_example_ids": [],
+      "stage_id": "unit-004-meaning-card",
+      "terminal_output": false,
+      "unit_id": "unit-004",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "selected_transformations",
+          "stage_id": "unit-004-writer"
+        }
+      ],
+      "input_sha256": "aa3d4239b219718fb4f6dba9d3b836343be62fdfaf774578b209e21919ef0618",
+      "model_call": false,
+      "output_identity": "unit-004-example-selection.output:e9cc45c595a462c75cc90c781ffb44e4f4f24f5fb0e3b697d141fdae9a8e1511",
+      "output_sha256": "e9cc45c595a462c75cc90c781ffb44e4f4f24f5fb0e3b697d141fdae9a8e1511",
+      "plaintext_committed": false,
+      "responsibility": "select 2-4 positive transformations by metadata; never inject the full seed library",
+      "selected_example_ids": [
+        "seed-result-interpretation-003",
+        "seed-attribution-011",
+        "seed-caveat-near-claim-004",
+        "seed-comparison-direction-005"
+      ],
+      "stage_id": "unit-004-example-selection",
+      "terminal_output": false,
+      "unit_id": "unit-004",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "candidate",
+          "stage_id": "unit-004-literal-semantic-audit"
+        },
+        {
+          "input_binding": "candidate_unit",
+          "stage_id": "unit-004-reader-targeted-repair-1"
+        }
+      ],
+      "input_sha256": "bb10d11c2e1a6f66007d5c8e6d19ce0e46bbb29e9577723b7cf01c51ce79554f",
+      "model_call": false,
+      "output_identity": "unit-004-writer.output:3595364fa8f2a5e3a4829d61a04e5a2edab2db54082da25223acaf3649850933",
+      "output_sha256": "3595364fa8f2a5e3a4829d61a04e5a2edab2db54082da25223acaf3649850933",
+      "plaintext_committed": false,
+      "responsibility": "rewrite one argument unit from original source plus Meaning Card and selected examples",
+      "selected_example_ids": [
+        "seed-result-interpretation-003",
+        "seed-attribution-011",
+        "seed-caveat-near-claim-004",
+        "seed-comparison-direction-005"
+      ],
+      "stage_id": "unit-004-writer",
+      "terminal_output": false,
+      "unit_id": "unit-004",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "audited_candidate_unit",
+          "stage_id": "candidate-only-reader-review"
+        }
+      ],
+      "input_sha256": "fa8fd02f7c45ee5851018ad0673d2e81dd0817b53fc81f1ba5eb6b0645eb7bcf",
+      "model_call": false,
+      "output_identity": "unit-004-literal-semantic-audit.output:cb16c1412b66fba660d083f4b4397e01d8a921ffbdf052acd93652b100c453f4",
+      "output_sha256": "cb16c1412b66fba660d083f4b4397e01d8a921ffbdf052acd93652b100c453f4",
+      "plaintext_committed": false,
+      "responsibility": "verify exact literal preservation and semantic claim/relation status for the current unit",
+      "selected_example_ids": [],
+      "stage_id": "unit-004-literal-semantic-audit",
+      "terminal_output": false,
+      "unit_id": "unit-004",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "reader_findings",
+          "stage_id": "unit-001-reader-targeted-repair-1"
+        },
+        {
+          "input_binding": "reader_findings",
+          "stage_id": "unit-002-reader-targeted-repair-1"
+        },
+        {
+          "input_binding": "reader_findings",
+          "stage_id": "unit-003-reader-targeted-repair-1"
+        },
+        {
+          "input_binding": "reader_findings",
+          "stage_id": "unit-004-reader-targeted-repair-1"
+        }
+      ],
+      "input_sha256": "907778e9551e84b7f9dd04b8d5136a91c1b5d3af8ea61f3ef65aa315ddbc2470",
+      "model_call": false,
+      "output_identity": "candidate-only-reader-review.output:d68466079c9c30af23da86738ba79f25bb22d5e784f469906310123a44ecf5b1",
+      "output_sha256": "d68466079c9c30af23da86738ba79f25bb22d5e784f469906310123a44ecf5b1",
       "plaintext_committed": false,
       "responsibility": "review candidate only against reader questions; source is not visible",
       "selected_example_ids": [],
       "stage_id": "candidate-only-reader-review",
-      "unit_id": null
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
     },
     {
-      "input_sha256": "cdeccdc7003a2375f40c1c99b0ee0ac619a163828dc10ca04a405954cf6ac245",
+      "downstream_consumers": [
+        {
+          "input_binding": "repaired_candidate",
+          "stage_id": "unit-001-reader-repair-audit-1"
+        }
+      ],
+      "input_sha256": "7f094e56688a1835ede1e2853bd97c6b73459e51968ade1d7b5b7dbbb0d8a956",
       "model_call": false,
-      "output_sha256": "1af047077f1df54589d904fc1918d32fac2256928823d96b49f1a1314d9fb3a0",
+      "output_identity": "unit-001-reader-targeted-repair-1.output:1a1b633798efaad956e446bceb70440438ffa8ceb4dd0db305199bb6f1e291d1",
+      "output_sha256": "1a1b633798efaad956e446bceb70440438ffa8ceb4dd0db305199bb6f1e291d1",
+      "plaintext_committed": false,
+      "responsibility": "repair a unit because candidate-only reader review returned REVISE",
+      "selected_example_ids": [],
+      "stage_id": "unit-001-reader-targeted-repair-1",
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "audited_candidate_unit",
+          "stage_id": "candidate-only-reader-review-rerun-1"
+        }
+      ],
+      "input_sha256": "c3de3fcfaf4449f72d668b8cd12425c41f702f12bcea1953ee882304446c2a66",
+      "model_call": false,
+      "output_identity": "unit-001-reader-repair-audit-1.output:98b76b3eff944c04c05055392e53aca38fdc9b9843d62e1041a1870ebb705f8f",
+      "output_sha256": "98b76b3eff944c04c05055392e53aca38fdc9b9843d62e1041a1870ebb705f8f",
+      "plaintext_committed": false,
+      "responsibility": "re-verify exact literal and semantic preservation after reader-targeted repair",
+      "selected_example_ids": [],
+      "stage_id": "unit-001-reader-repair-audit-1",
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "repaired_candidate",
+          "stage_id": "unit-002-reader-repair-audit-1"
+        }
+      ],
+      "input_sha256": "81ef1d512b5ba064ac30173583943377c4c36e54d3c935d681d5fb2b6798e7c7",
+      "model_call": false,
+      "output_identity": "unit-002-reader-targeted-repair-1.output:2fbd7a8bcc03099fdfdb62badad3f612df927387618e250403ec6c211d0694de",
+      "output_sha256": "2fbd7a8bcc03099fdfdb62badad3f612df927387618e250403ec6c211d0694de",
+      "plaintext_committed": false,
+      "responsibility": "repair a unit because candidate-only reader review returned REVISE",
+      "selected_example_ids": [],
+      "stage_id": "unit-002-reader-targeted-repair-1",
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "audited_candidate_unit",
+          "stage_id": "candidate-only-reader-review-rerun-1"
+        }
+      ],
+      "input_sha256": "7088d4b90789c4e7de9f6a6ce7c102e7cd206ff39e4719edd3cc46767fbea7f4",
+      "model_call": false,
+      "output_identity": "unit-002-reader-repair-audit-1.output:91d481332797ab575800abbf18b945406a74be415e389fc5414af1bf3bc907f9",
+      "output_sha256": "91d481332797ab575800abbf18b945406a74be415e389fc5414af1bf3bc907f9",
+      "plaintext_committed": false,
+      "responsibility": "re-verify exact literal and semantic preservation after reader-targeted repair",
+      "selected_example_ids": [],
+      "stage_id": "unit-002-reader-repair-audit-1",
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "repaired_candidate",
+          "stage_id": "unit-003-reader-repair-audit-1"
+        }
+      ],
+      "input_sha256": "0a60ce74c73669ea445f89e29643b3df1cf33bdb19f3d680d3cc0799ac505e82",
+      "model_call": false,
+      "output_identity": "unit-003-reader-targeted-repair-1.output:83ce1dde1df6fd90927d70145028aff17ff568d4743e7c4d06f88ce6a88391e4",
+      "output_sha256": "83ce1dde1df6fd90927d70145028aff17ff568d4743e7c4d06f88ce6a88391e4",
+      "plaintext_committed": false,
+      "responsibility": "repair a unit because candidate-only reader review returned REVISE",
+      "selected_example_ids": [],
+      "stage_id": "unit-003-reader-targeted-repair-1",
+      "terminal_output": false,
+      "unit_id": "unit-003",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "audited_candidate_unit",
+          "stage_id": "candidate-only-reader-review-rerun-1"
+        }
+      ],
+      "input_sha256": "2fa10ebd672cd211f6b532195e32ac591b26463fa7feb8abc4aa11095b4b8cbf",
+      "model_call": false,
+      "output_identity": "unit-003-reader-repair-audit-1.output:0cd5742e3ed13658b22bc0cb50bc4d183ce9703d33d56283e7bd51c54002e698",
+      "output_sha256": "0cd5742e3ed13658b22bc0cb50bc4d183ce9703d33d56283e7bd51c54002e698",
+      "plaintext_committed": false,
+      "responsibility": "re-verify exact literal and semantic preservation after reader-targeted repair",
+      "selected_example_ids": [],
+      "stage_id": "unit-003-reader-repair-audit-1",
+      "terminal_output": false,
+      "unit_id": "unit-003",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "repaired_candidate",
+          "stage_id": "unit-004-reader-repair-audit-1"
+        }
+      ],
+      "input_sha256": "9da98d165f379a027d2b3598f4581cf7403b262b9656f20a488ce41d17fcfe8c",
+      "model_call": false,
+      "output_identity": "unit-004-reader-targeted-repair-1.output:069eee41aa0b74752290bf8fb6c58abdd1add9274c9c265c48fdd8ba7573bff6",
+      "output_sha256": "069eee41aa0b74752290bf8fb6c58abdd1add9274c9c265c48fdd8ba7573bff6",
+      "plaintext_committed": false,
+      "responsibility": "repair a unit because candidate-only reader review returned REVISE",
+      "selected_example_ids": [],
+      "stage_id": "unit-004-reader-targeted-repair-1",
+      "terminal_output": false,
+      "unit_id": "unit-004",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "audited_candidate_unit",
+          "stage_id": "candidate-only-reader-review-rerun-1"
+        }
+      ],
+      "input_sha256": "80370bba4acfc52e4695a922b6990ca8736761ed33593cce67af0767688f41fa",
+      "model_call": false,
+      "output_identity": "unit-004-reader-repair-audit-1.output:cb16c1412b66fba660d083f4b4397e01d8a921ffbdf052acd93652b100c453f4",
+      "output_sha256": "cb16c1412b66fba660d083f4b4397e01d8a921ffbdf052acd93652b100c453f4",
+      "plaintext_committed": false,
+      "responsibility": "re-verify exact literal and semantic preservation after reader-targeted repair",
+      "selected_example_ids": [],
+      "stage_id": "unit-004-reader-repair-audit-1",
+      "terminal_output": false,
+      "unit_id": "unit-004",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "reader_review_gate",
+          "stage_id": "final-assembly-coherence"
+        }
+      ],
+      "input_sha256": "60f124eb7b18ccfc73949efd65860aea1e8c38b7283e14661a76f89a1e1d58ee",
+      "model_call": false,
+      "output_identity": "candidate-only-reader-review-rerun-1.output:f6c2434e38ab0616879f9dfdbdd2dc257cf1d65e32e47f4b57da73a86dfe9dba",
+      "output_sha256": "f6c2434e38ab0616879f9dfdbdd2dc257cf1d65e32e47f4b57da73a86dfe9dba",
+      "plaintext_committed": false,
+      "responsibility": "re-review candidate only after reader-targeted unit repair",
+      "selected_example_ids": [],
+      "stage_id": "candidate-only-reader-review-rerun-1",
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [],
+      "input_sha256": "248e71f1e315a6e795b5f91106d4f96ff2f2b2a7bdc1a9eb1caa164de2247e3b",
+      "model_call": false,
+      "output_identity": "final-assembly-coherence.output:4a4536e54ff83f2e5e278415959c09a15296e0a0b24012e57f5d7ee2e4f82e15",
+      "output_sha256": "4a4536e54ff83f2e5e278415959c09a15296e0a0b24012e57f5d7ee2e4f82e15",
       "plaintext_committed": false,
       "responsibility": "final assembly of rewritten units and transition/terminology check without whole-document free rewrite",
       "selected_example_ids": [],
       "stage_id": "final-assembly-coherence",
-      "unit_id": null
+      "terminal_output": true,
+      "unit_id": null,
+      "unused_output": false
     }
   ],
   "store": false,
-  "unit_count": 2,
+  "unit_count": 4,
   "whole_document_writer_call": false
 }

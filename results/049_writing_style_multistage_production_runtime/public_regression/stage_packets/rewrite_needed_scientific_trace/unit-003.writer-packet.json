@@ -1,5 +1,5 @@
 {
-  "argument_role": "evidence-trace-interpretation",
+  "argument_role": "claim-explanation",
   "compact_document_map": {
     "audience": "technically trained reader who has not followed the repository audit history",
     "core_research_question": "What the current scientific evidence supports, what remains uncertain, and what decision follows next.",
@@ -100,20 +100,14 @@
       "implementation identity"
     ]
   },
-  "current_original_unit": "# CARE checkpoint interpretation",
+  "current_original_unit": "## Next experiment decision",
   "current_source_span_ids": [
-    "p001"
+    "p003"
   ],
   "examples_are_factual_sources": false,
   "fidelity_ledger": {
     "critical_violations_allowed": 0,
-    "literal_items": [
-      {
-        "kind": "formal_name",
-        "role": "inline-critical",
-        "text": "CARE"
-      }
-    ],
+    "literal_items": [],
     "semantic_status_values": [
       "broadened",
       "invented",
@@ -128,82 +122,82 @@
   "meaning_card": {
     "attribution": [
       {
-        "normalized_meaning": "# CARE checkpoint interpretation",
+        "normalized_meaning": "## Next experiment decision",
         "source_proposition_ids": [
-          "unit-001-prop-007"
+          "unit-003-prop-007"
         ],
         "source_span_ids": [
-          "p001"
+          "p003"
         ]
       }
     ],
     "caveats": [
       {
-        "normalized_meaning": "# CARE checkpoint interpretation",
+        "normalized_meaning": "## Next experiment decision",
         "source_proposition_ids": [
-          "unit-001-prop-005"
+          "unit-003-prop-005"
         ],
         "source_span_ids": [
-          "p001"
+          "p003"
         ]
       }
     ],
     "claims": [
       {
         "claim_id": "claim-001",
-        "normalized_meaning": "# CARE checkpoint interpretation",
+        "normalized_meaning": "## Next experiment decision",
         "source_proposition_ids": [
-          "unit-001-prop-001"
+          "unit-003-prop-001"
         ],
         "source_span_ids": [
-          "p001"
+          "p003"
         ],
         "strength": "same-as-source"
       }
     ],
     "comparators": [
       {
-        "normalized_meaning": "# CARE checkpoint interpretation",
+        "normalized_meaning": "## Next experiment decision",
         "source_proposition_ids": [
-          "unit-001-prop-004"
+          "unit-003-prop-004"
         ],
         "source_span_ids": [
-          "p001"
+          "p003"
         ]
       }
     ],
     "conditions": [
       {
-        "normalized_meaning": "# CARE checkpoint interpretation",
+        "normalized_meaning": "## Next experiment decision",
         "source_proposition_ids": [
-          "unit-001-prop-003"
+          "unit-003-prop-003"
         ],
         "source_span_ids": [
-          "p001"
+          "p003"
         ]
       }
     ],
     "decision_logic": [
       {
-        "normalized_meaning": "# CARE checkpoint interpretation",
+        "normalized_meaning": "## Next experiment decision",
         "source_proposition_ids": [
-          "unit-001-prop-006"
+          "unit-003-prop-006"
         ],
         "source_span_ids": [
-          "p001"
+          "p003"
         ]
       }
     ],
-    "discourse_function": "method-explanation",
+    "discourse_function": "transition",
     "evidence": [
       {
         "evidence_id": "evidence-001",
-        "normalized_meaning": "# CARE checkpoint interpretation",
+        "normalized_meaning": "## Next experiment decision",
         "source_proposition_ids": [
-          "unit-001-prop-002"
+          "unit-003-prop-002"
         ],
         "source_span_ids": [
-          "p001"
+          "p003"
         ],
         "supports_claim_ids": [
           "claim-001"
@@ -211,78 +205,40 @@
       }
     ],
     "fidelity_risk": "medium",
-    "literal_items": [
-      {
-        "kind": "formal_name",
-        "role": "inline-critical",
-        "text": "CARE"
-      }
-    ],
+    "literal_items": [],
     "negative_findings": [],
-    "plain_meaning": "读者应理解 CARE checkpoint interpretation 这一部分的判断、证据和限制，而不是先解码内部流程标签。",
+    "plain_meaning": "读者应理解 Next experiment decision 这一部分的判断、证据和限制，而不是先解码内部流程标签。",
     "reader_job": "explain the local scientific argument in natural Chinese while preserving the source facts",
-    "reader_takeaway": "读者应理解 CARE checkpoint interpretation 这一部分的判断、证据和限制，而不是先解码内部流程标签。",
+    "reader_takeaway": "读者应理解 Next experiment decision 这一部分的判断、证据和限制，而不是先解码内部流程标签。",
     "register": "formal-technical",
-    "relation_to_next": "CARE checkpoint interpretation",
-    "relation_to_previous": "",
+    "relation_to_next": "Next experiment decision",
+    "relation_to_previous": "CARE checkpoint interpretation",
     "relocatable_trace_items": [],
-    "rewrite_problem": "workflow-language",
-    "terminology": [
-      "CARE"
-    ],
+    "rewrite_problem": "reader-effort",
+    "terminology": [],
     "uncertainty": [
       {
-        "normalized_meaning": "# CARE checkpoint interpretation",
+        "normalized_meaning": "## Next experiment decision",
         "source_proposition_ids": [
-          "unit-001-prop-005"
+          "unit-003-prop-005"
         ],
         "source_span_ids": [
-          "p001"
+          "p003"
         ]
       }
     ],
-    "unit_id": "unit-001"
+    "unit_id": "unit-003"
   },
-  "next_source_preview": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
-  "previous_rewritten_tail": "",
+  "next_source_preview": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
+  "previous_rewritten_tail": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
   "schema": "SCIENTIFIC_REWRITE_STAGE_PACKET_V1",
   "selected_example_ids": [
-    "seed-workflow-label-actor-action-002",
-    "seed-definition-first-use-001",
     "seed-reader-takeaway-010",
-    "seed-heading-reader-facing-012"
+    "seed-definition-first-use-001",
+    "seed-heading-reader-facing-012",
+    "seed-method-role-008"
   ],
   "selected_transformations": [
-    {
-      "approval_status": "SEED",
-      "discourse_function": "method-explanation",
-      "fidelity_risk": "medium",
-      "id": "seed-workflow-label-actor-action-002",
-      "license": "MIT-compatible distilled pattern",
-      "original_template": "本阶段完成 [流程标签A] 并进入 [状态B]。",
-      "register": "formal-technical",
-      "rewrite_depth": "structural",
-      "rewrite_problem": "workflow-language",
-      "rewrite_template": "[主体/方法A] 先完成 [具体动作]，因此 [读者关心的对象] 现在满足 [状态B 对应的实际含义]。",
-      "scene": "technical-report",
-      "source": "distilled-shuorenhua-positive-style",
-      "source_revision": "6de1fcfeca5fff6fd15b28c619c11b6d41d1f657"
-    },
-    {
-      "approval_status": "SEED",
-      "discourse_function": "definition",
-      "fidelity_risk": "medium",
-      "id": "seed-definition-first-use-001",
-      "license": "MIT-compatible distilled pattern",
-      "original_template": "[术语A] 是后续分析的核心对象。",
-      "register": "formal-technical",
-      "rewrite_depth": "standard",
-      "rewrite_problem": "contextless-term",
-      "rewrite_template": "后续分析围绕 [术语A] 展开；它在这里指 [定义或角色]，决定了 [后续比较/判断] 应该怎样理解。",
-      "scene": "scientific-report",
-      "source": "distilled-shuorenhua-positive-style",
-      "source_revision": "6de1fcfeca5fff6fd15b28c619c11b6d41d1f657"
-    },
     {
       "approval_status": "REFERENCE",
       "discourse_function": "transition",
@@ -300,6 +256,21 @@
     },
     {
       "approval_status": "SEED",
+      "discourse_function": "definition",
+      "fidelity_risk": "medium",
+      "id": "seed-definition-first-use-001",
+      "license": "MIT-compatible distilled pattern",
+      "original_template": "[术语A] 是后续分析的核心对象。",
+      "register": "formal-technical",
+      "rewrite_depth": "standard",
+      "rewrite_problem": "contextless-term",
+      "rewrite_template": "后续分析围绕 [术语A] 展开；它在这里指 [定义或角色]，决定了 [后续比较/判断] 应该怎样理解。",
+      "scene": "scientific-report",
+      "source": "distilled-shuorenhua-positive-style",
+      "source_revision": "6de1fcfeca5fff6fd15b28c619c11b6d41d1f657"
+    },
+    {
+      "approval_status": "SEED",
       "discourse_function": "heading",
       "fidelity_risk": "medium",
       "id": "seed-heading-reader-facing-012",
@@ -312,81 +283,96 @@
       "scene": "technical-report",
       "source": "distilled-shuorenhua-positive-style",
       "source_revision": "6de1fcfeca5fff6fd15b28c619c11b6d41d1f657"
+    },
+    {
+      "approval_status": "SEED",
+      "discourse_function": "method-explanation",
+      "fidelity_risk": "medium",
+      "id": "seed-method-role-008",
+      "license": "MIT-compatible distilled pattern",
+      "original_template": "[模块A] 提供 [对象B] 的 [能力C] 支撑。",
+      "register": "formal-technical",
+      "rewrite_depth": "standard",
+      "rewrite_problem": "noun-stack",
+      "rewrite_template": "[模块A] 负责 [具体动作C]，让 [对象B] 能够在 [条件/场景] 下被 [使用或比较]。",
+      "scene": "technical-report",
+      "source": "distilled-shuorenhua-positive-style",
+      "source_revision": "6de1fcfeca5fff6fd15b28c619c11b6d41d1f657"
     }
   ],
   "source_propositions": [
     {
       "kind": "claim",
-      "proposition_id": "unit-001-prop-001",
+      "proposition_id": "unit-003-prop-001",
       "required": true,
-      "source_excerpt": "# CARE checkpoint interpretation",
+      "source_excerpt": "## Next experiment decision",
       "source_span_ids": [
-        "p001"
+        "p003"
       ],
-      "source_text_sha256": "52f6d5e75fc2de6231e36f04aad8b326671a146cbd0dddb51cdc014522bd7f72"
+      "source_text_sha256": "5ccd5c35b54734083505f002bf0ba2b278051967fe12b23103ee4c275b53512a"
     },
     {
       "kind": "evidence",
-      "proposition_id": "unit-001-prop-002",
+      "proposition_id": "unit-003-prop-002",
       "required": true,
-      "source_excerpt": "# CARE checkpoint interpretation",
+      "source_excerpt": "## Next experiment decision",
       "source_span_ids": [
-        "p001"
+        "p003"
       ],
-      "source_text_sha256": "52f6d5e75fc2de6231e36f04aad8b326671a146cbd0dddb51cdc014522bd7f72"
+      "source_text_sha256": "5ccd5c35b54734083505f002bf0ba2b278051967fe12b23103ee4c275b53512a"
     },
     {
       "kind": "condition",
-      "proposition_id": "unit-001-prop-003",
+      "proposition_id": "unit-003-prop-003",
       "required": true,
-      "source_excerpt": "# CARE checkpoint interpretation",
+      "source_excerpt": "## Next experiment decision",
       "source_span_ids": [
-        "p001"
+        "p003"
       ],
-      "source_text_sha256": "52f6d5e75fc2de6231e36f04aad8b326671a146cbd0dddb51cdc014522bd7f72"
+      "source_text_sha256": "5ccd5c35b54734083505f002bf0ba2b278051967fe12b23103ee4c275b53512a"
     },
     {
       "kind": "comparator",
-      "proposition_id": "unit-001-prop-004",
+      "proposition_id": "unit-003-prop-004",
       "required": true,
-      "source_excerpt": "# CARE checkpoint interpretation",
+      "source_excerpt": "## Next experiment decision",
       "source_span_ids": [
-        "p001"
+        "p003"
       ],
-      "source_text_sha256": "52f6d5e75fc2de6231e36f04aad8b326671a146cbd0dddb51cdc014522bd7f72"
+      "source_text_sha256": "5ccd5c35b54734083505f002bf0ba2b278051967fe12b23103ee4c275b53512a"
     },
     {
       "kind": "caveat",
-      "proposition_id": "unit-001-prop-005",
+      "proposition_id": "unit-003-prop-005",
       "required": true,
-      "source_excerpt": "# CARE checkpoint interpretation",
+      "source_excerpt": "## Next experiment decision",
       "source_span_ids": [
-        "p001"
+        "p003"
       ],
-      "source_text_sha256": "52f6d5e75fc2de6231e36f04aad8b326671a146cbd0dddb51cdc014522bd7f72"
+      "source_text_sha256": "5ccd5c35b54734083505f002bf0ba2b278051967fe12b23103ee4c275b53512a"
     },
     {
       "kind": "decision",
-      "proposition_id": "unit-001-prop-006",
+      "proposition_id": "unit-003-prop-006",
       "required": true,
-      "source_excerpt": "# CARE checkpoint interpretation",
+      "source_excerpt": "## Next experiment decision",
       "source_span_ids": [
-        "p001"
+        "p003"
       ],
-      "source_text_sha256": "52f6d5e75fc2de6231e36f04aad8b326671a146cbd0dddb51cdc014522bd7f72"
+      "source_text_sha256": "5ccd5c35b54734083505f002bf0ba2b278051967fe12b23103ee4c275b53512a"
     },
     {
       "kind": "attribution",
-      "proposition_id": "unit-001-prop-007",
+      "proposition_id": "unit-003-prop-007",
       "required": true,
-      "source_excerpt": "# CARE checkpoint interpretation",
+      "source_excerpt": "## Next experiment decision",
       "source_span_ids": [
-        "p001"
+        "p003"
       ],
-      "source_text_sha256": "52f6d5e75fc2de6231e36f04aad8b326671a146cbd0dddb51cdc014522bd7f72"
+      "source_text_sha256": "5ccd5c35b54734083505f002bf0ba2b278051967fe12b23103ee4c275b53512a"
     }
   ],
   "stage": "unit-writer",
-  "unit_id": "unit-001",
+  "unit_id": "unit-003",
   "why_these_spans_belong_together": "contiguous source spans with the same local argument role"
 }

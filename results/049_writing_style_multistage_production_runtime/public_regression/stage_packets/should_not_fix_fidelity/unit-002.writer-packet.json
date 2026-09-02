@@ -1,5 +1,5 @@
 {
-  "argument_role": "decision-or-next-step",
+  "argument_role": "comparison",
   "compact_document_map": {
     "audience": "technically trained reader who has not followed the repository audit history",
     "core_research_question": "What the current scientific evidence supports, what remains uncertain, and what decision follows next.",
@@ -7,51 +7,51 @@
     "major_claims": [
       {
         "claim_id": "claim-001",
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
         "source_span_ids": [
           "p001"
-        ]
-      },
-      {
-        "claim_id": "claim-002",
-        "normalized_meaning": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
-        "source_span_ids": [
-          "p002"
         ]
       }
     ],
     "major_decisions": [
       {
         "decision_id": "decision-001",
-        "normalized_meaning": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
+        "normalized_meaning": "# Exact scientific note",
         "source_span_ids": [
           "p001"
+        ]
+      },
+      {
+        "decision_id": "decision-002",
+        "normalized_meaning": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
+        "source_span_ids": [
+          "p002"
         ]
       }
     ],
     "major_evidence": [
       {
         "evidence_id": "evidence-001",
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
         "source_span_ids": [
           "p001"
-        ]
-      },
-      {
-        "evidence_id": "evidence-002",
-        "normalized_meaning": "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
-        "source_span_ids": [
-          "p002"
         ]
       }
     ],
     "major_uncertainties": [
       {
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "# Exact scientific note",
         "source_span_ids": [
           "p001"
         ],
         "uncertainty_id": "uncertainty-001"
+      },
+      {
+        "normalized_meaning": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
+        "source_span_ids": [
+          "p002"
+        ],
+        "uncertainty_id": "uncertainty-002"
       }
     ],
     "reader_core_priorities": [
@@ -64,31 +64,17 @@
     ],
     "section_roles": [
       {
-        "role": "evidence-trace-interpretation",
+        "role": "claim-explanation",
         "section_id": "section-001",
         "source_span_ids": [
           "p001"
         ]
       },
       {
-        "role": "decision-or-next-step",
+        "role": "comparison",
         "section_id": "section-002",
         "source_span_ids": [
           "p002"
-        ]
-      },
-      {
-        "role": "claim-explanation",
-        "section_id": "section-003",
-        "source_span_ids": [
-          "p003"
-        ]
-      },
-      {
-        "role": "decision-or-next-step",
-        "section_id": "section-004",
-        "source_span_ids": [
-          "p004"
         ]
       }
     ],
@@ -100,7 +86,7 @@
       "implementation identity"
     ]
   },
-  "current_original_unit": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+  "current_original_unit": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
   "current_source_span_ids": [
     "p002"
   ],
@@ -109,14 +95,24 @@
     "critical_violations_allowed": 0,
     "literal_items": [
       {
-        "kind": "code",
-        "role": "relocatable-trace",
-        "text": "`/tmp/care/run_20260828/checkpoint.pt`"
+        "kind": "formula",
+        "role": "inline-critical",
+        "text": "$\\theta_0$"
+      },
+      {
+        "kind": "citation",
+        "role": "inline-critical",
+        "text": "[12]"
       },
       {
         "kind": "date",
         "role": "inline-critical",
         "text": "2026-08-28"
+      },
+      {
+        "kind": "unit",
+        "role": "inline-critical",
+        "text": "6.2 mm"
       },
       {
         "kind": "number",
@@ -134,9 +130,54 @@
         "text": "28"
       },
       {
+        "kind": "number",
+        "role": "inline-critical",
+        "text": "3"
+      },
+      {
+        "kind": "number",
+        "role": "inline-critical",
+        "text": "0.81"
+      },
+      {
+        "kind": "number",
+        "role": "inline-critical",
+        "text": "6.2"
+      },
+      {
+        "kind": "number",
+        "role": "inline-critical",
+        "text": "12"
+      },
+      {
         "kind": "formal_name",
         "role": "inline-critical",
-        "text": "CARE"
+        "text": "UNet"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "HD95"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "FedAvg"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "FedFisher"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "FedLPA"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "ODAL"
       }
     ],
     "semantic_status_values": [
@@ -153,7 +194,7 @@
   "meaning_card": {
     "attribution": [
       {
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
         "source_proposition_ids": [
           "unit-002-prop-007"
         ],
@@ -164,7 +205,7 @@
     ],
     "caveats": [
       {
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
         "source_proposition_ids": [
           "unit-002-prop-005"
         ],
@@ -176,7 +217,7 @@
     "claims": [
       {
         "claim_id": "claim-001",
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
         "source_proposition_ids": [
           "unit-002-prop-001"
         ],
@@ -188,7 +229,7 @@
     ],
     "comparators": [
       {
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
         "source_proposition_ids": [
           "unit-002-prop-004"
         ],
@@ -199,7 +240,7 @@
     ],
     "conditions": [
       {
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
         "source_proposition_ids": [
           "unit-002-prop-003"
         ],
@@ -210,7 +251,7 @@
     ],
     "decision_logic": [
       {
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
         "source_proposition_ids": [
           "unit-002-prop-006"
         ],
@@ -223,7 +264,7 @@
     "evidence": [
       {
         "evidence_id": "evidence-001",
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
         "source_proposition_ids": [
           "unit-002-prop-002"
         ],
@@ -238,9 +279,24 @@
     "fidelity_risk": "high",
     "literal_items": [
       {
+        "kind": "formula",
+        "role": "inline-critical",
+        "text": "$\\theta_0$"
+      },
+      {
+        "kind": "citation",
+        "role": "inline-critical",
+        "text": "[12]"
+      },
+      {
         "kind": "date",
         "role": "inline-critical",
         "text": "2026-08-28"
+      },
+      {
+        "kind": "unit",
+        "role": "inline-critical",
+        "text": "6.2 mm"
       },
       {
         "kind": "number",
@@ -258,32 +314,76 @@
         "text": "28"
       },
       {
+        "kind": "number",
+        "role": "inline-critical",
+        "text": "3"
+      },
+      {
+        "kind": "number",
+        "role": "inline-critical",
+        "text": "0.81"
+      },
+      {
+        "kind": "number",
+        "role": "inline-critical",
+        "text": "6.2"
+      },
+      {
+        "kind": "number",
+        "role": "inline-critical",
+        "text": "12"
+      },
+      {
         "kind": "formal_name",
         "role": "inline-critical",
-        "text": "CARE"
+        "text": "UNet"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "HD95"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "FedAvg"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "FedFisher"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "FedLPA"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "ODAL"
       }
     ],
     "negative_findings": [],
-    "plain_meaning": "读者应理解 CARE checkpoint interpretation 这一部分的判断、证据和限制，而不是先解码内部流程标签。",
+    "plain_meaning": "读者应理解 Exact scientific note 这一部分的判断、证据和限制，而不是先解码内部流程标签。",
     "reader_job": "explain the local scientific argument in natural Chinese while preserving the source facts",
-    "reader_takeaway": "读者应理解 CARE checkpoint interpretation 这一部分的判断、证据和限制，而不是先解码内部流程标签。",
+    "reader_takeaway": "读者应理解 Exact scientific note 这一部分的判断、证据和限制，而不是先解码内部流程标签。",
     "register": "formal-technical",
-    "relation_to_next": "Next experiment decision",
-    "relation_to_previous": "CARE checkpoint interpretation",
-    "relocatable_trace_items": [
-      {
-        "kind": "code",
-        "role": "relocatable-trace",
-        "text": "`/tmp/care/run_20260828/checkpoint.pt`"
-      }
-    ],
+    "relation_to_next": "",
+    "relation_to_previous": "Exact scientific note",
+    "relocatable_trace_items": [],
     "rewrite_problem": "log-narration",
     "terminology": [
-      "CARE"
+      "FedAvg",
+      "FedFisher",
+      "FedLPA",
+      "HD95",
+      "ODAL",
+      "UNet"
     ],
     "uncertainty": [
       {
-        "normalized_meaning": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+        "normalized_meaning": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
         "source_proposition_ids": [
           "unit-002-prop-005"
         ],
@@ -294,8 +394,8 @@
     ],
     "unit_id": "unit-002"
   },
-  "next_source_preview": "## Next experiment decision",
-  "previous_rewritten_tail": "# CARE checkpoint interpretation",
+  "next_source_preview": "",
+  "previous_rewritten_tail": "# Exact scientific note",
   "schema": "SCIENTIFIC_REWRITE_STAGE_PACKET_V1",
   "selected_example_ids": [
     "seed-result-interpretation-003",
@@ -370,71 +470,71 @@
       "kind": "claim",
       "proposition_id": "unit-002-prop-001",
       "required": true,
-      "source_excerpt": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "source_excerpt": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
       "source_span_ids": [
         "p002"
       ],
-      "source_text_sha256": "ff8466c78890b745a404976be37ee06d9ca4abd94fbef5bd0b580d041c1092ff"
+      "source_text_sha256": "a80452b83cecc0a34897f731a98dd1cb8f1d94f06a3f8e4297fa1834954e02f2"
     },
     {
       "kind": "evidence",
       "proposition_id": "unit-002-prop-002",
       "required": true,
-      "source_excerpt": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "source_excerpt": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
       "source_span_ids": [
         "p002"
       ],
-      "source_text_sha256": "ff8466c78890b745a404976be37ee06d9ca4abd94fbef5bd0b580d041c1092ff"
+      "source_text_sha256": "a80452b83cecc0a34897f731a98dd1cb8f1d94f06a3f8e4297fa1834954e02f2"
     },
     {
       "kind": "condition",
       "proposition_id": "unit-002-prop-003",
       "required": true,
-      "source_excerpt": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "source_excerpt": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
       "source_span_ids": [
         "p002"
       ],
-      "source_text_sha256": "ff8466c78890b745a404976be37ee06d9ca4abd94fbef5bd0b580d041c1092ff"
+      "source_text_sha256": "a80452b83cecc0a34897f731a98dd1cb8f1d94f06a3f8e4297fa1834954e02f2"
     },
     {
       "kind": "comparator",
       "proposition_id": "unit-002-prop-004",
       "required": true,
-      "source_excerpt": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "source_excerpt": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
       "source_span_ids": [
         "p002"
       ],
-      "source_text_sha256": "ff8466c78890b745a404976be37ee06d9ca4abd94fbef5bd0b580d041c1092ff"
+      "source_text_sha256": "a80452b83cecc0a34897f731a98dd1cb8f1d94f06a3f8e4297fa1834954e02f2"
     },
     {
       "kind": "caveat",
       "proposition_id": "unit-002-prop-005",
       "required": true,
-      "source_excerpt": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "source_excerpt": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
       "source_span_ids": [
         "p002"
       ],
-      "source_text_sha256": "ff8466c78890b745a404976be37ee06d9ca4abd94fbef5bd0b580d041c1092ff"
+      "source_text_sha256": "a80452b83cecc0a34897f731a98dd1cb8f1d94f06a3f8e4297fa1834954e02f2"
     },
     {
       "kind": "decision",
       "proposition_id": "unit-002-prop-006",
       "required": true,
-      "source_excerpt": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "source_excerpt": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
       "source_span_ids": [
         "p002"
       ],
-      "source_text_sha256": "ff8466c78890b745a404976be37ee06d9ca4abd94fbef5bd0b580d041c1092ff"
+      "source_text_sha256": "a80452b83cecc0a34897f731a98dd1cb8f1d94f06a3f8e4297fa1834954e02f2"
     },
     {
       "kind": "attribution",
       "proposition_id": "unit-002-prop-007",
       "required": true,
-      "source_excerpt": "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "source_excerpt": "在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
       "source_span_ids": [
         "p002"
       ],
-      "source_text_sha256": "ff8466c78890b745a404976be37ee06d9ca4abd94fbef5bd0b580d041c1092ff"
+      "source_text_sha256": "a80452b83cecc0a34897f731a98dd1cb8f1d94f06a3f8e4297fa1834954e02f2"
     }
   ],
   "stage": "unit-writer",

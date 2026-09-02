@@ -1,0 +1,15 @@
+{
+  "audience": "technically trained reader who has not followed the repository audit history",
+  "candidate_sha256": "45184542db3d00f60aae6597798717adfaabe51920ed43f3f850daf92d1ced8d",
+  "candidate_text": "# Exact scientific note\n\n在 2026-08-28 的 3 个 seed 中，UNet 的 Dice=0.81，HD95=6.2 mm。比较对象是 pooled、local-only、FedAvg、FedFisher 和 FedLPA；公式 $\\theta_0$、Fisher、Laplace、ODAL 和引用 [12] 必须保持原样。",
+  "questions": [
+    "what problem is being studied",
+    "what current evidence means",
+    "what remains uncertain",
+    "why the next comparison or experiment is needed",
+    "what result would support GO or STOP"
+  ],
+  "schema": "SCIENTIFIC_REWRITE_STAGE_PACKET_V1",
+  "source_visible": false,
+  "stage": "candidate-only-reader-review"
+}

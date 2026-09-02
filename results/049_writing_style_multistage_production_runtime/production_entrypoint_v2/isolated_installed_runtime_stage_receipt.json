@@ -1,6 +1,6 @@
 {
   "candidate_sha256": "5ac26004e9889a41a356f2a760e6bc23c326603b3cda6cd00f597afdaf0519ba",
-  "created_at": "2026-09-02T16:16:04Z",
+  "created_at": "2026-09-02T16:19:12Z",
   "dataflow_validation": {
     "dangling_consumers": [],
     "ok": true,
@@ -15,7 +15,7 @@
   "runtime": "scientific-rewrite.multistage.v1",
   "schema": "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V2",
   "seed_library_size": 12,
-  "smoke_role": "rewrite_needed_scientific_trace",
+  "smoke_role": "isolated_installed_runtime_v2",
   "source_sha256": "5693f6f152765be631a4623ad55fb9dff622723e63c2f49549eb675b529afca6",
   "stage_count": 29,
   "stage_records": [
