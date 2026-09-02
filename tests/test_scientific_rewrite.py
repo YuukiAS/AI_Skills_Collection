@@ -552,7 +552,7 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertEqual(assembly_reviews, 2)
         self.assertTrue(receipt["dataflow_validation"]["ok"])
 
-    def test_openai_driver_repairs_final_assembly_twice(self) -> None:
+    def test_openai_driver_repairs_final_assembly_three_times(self) -> None:
         helper = load_helper()
         original = helper.call_openai_text
         assembly_reviews = 0
@@ -562,7 +562,7 @@ class ScientificRewriteTests(unittest.TestCase):
             nonlocal assembly_reviews, assembly_repairs
             if "Check final assembly coherence" in prompt:
                 assembly_reviews += 1
-                if assembly_reviews < 3:
+                if assembly_reviews < 4:
                     return json.dumps(
                         {
                             "decision": "REVISE",
@@ -605,10 +605,10 @@ class ScientificRewriteTests(unittest.TestCase):
 
         receipt = result["receipt"]
         stage_ids = [item["stage_id"] for item in receipt["stage_records"]]
-        self.assertIn("final-assembly-targeted-repair-2", stage_ids)
-        self.assertIn("final-assembly-coherence-rerun-2", stage_ids)
-        self.assertEqual(assembly_reviews, 3)
-        self.assertEqual(assembly_repairs, 2)
+        self.assertIn("final-assembly-targeted-repair-3", stage_ids)
+        self.assertIn("final-assembly-coherence-rerun-3", stage_ids)
+        self.assertEqual(assembly_reviews, 4)
+        self.assertEqual(assembly_repairs, 3)
         self.assertTrue(receipt["dataflow_validation"]["ok"])
 
     def test_reader_repair_gets_semantic_targeted_retry(self) -> None:

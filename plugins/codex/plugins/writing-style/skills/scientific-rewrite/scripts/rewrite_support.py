@@ -29,7 +29,7 @@ PACKET_SCHEMA = "SCIENTIFIC_REWRITE_STAGE_PACKET_V1"
 OPENAI_API_URL = "https://api.openai.com/v1/responses"
 DEFAULT_MODEL = "gpt-5.6-terra"
 UNIT_REPAIR_ROUNDS = 3
-ASSEMBLY_REPAIR_ROUNDS = 2
+ASSEMBLY_REPAIR_ROUNDS = 3
 SEMANTIC_STATUSES = {
     "preserved",
     "narrowed",
@@ -2121,6 +2121,7 @@ def run_multistage(
                 (
                     "Repair the assembled candidate only for the listed final assembly findings. "
                     "Keep the unit-level scientific content and exact source-bound literals intact. "
+                    "Address every supplied assembly finding explicitly through local transitions, headings, terminology alignment, or conclusion progression only. "
                     "Return bounded JSON with reader_core, technical_trace, applied_finding_ids, and optional touched_unit_ids."
                 ),
                 assembly_repair_input,
