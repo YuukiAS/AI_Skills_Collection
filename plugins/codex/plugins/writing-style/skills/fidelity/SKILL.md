@@ -107,6 +107,28 @@ than normalizing names into a cleaner but false story.
   phrase as protected-negative text: avoid reintroducing it in headings, PDF
   titles, captions, status summaries, or final answers.
 
+## Literal vs Semantic Preservation
+
+For long-form scientific rewrites, literal fidelity must preserve exact tokens
+without forcing every trace token to stay in the main reading path.
+
+Classify exact items as:
+
+- `inline-critical`: exact material that belongs in the reader-facing scientific
+  argument, such as numbers, formulas, metrics, datasets, method names,
+  comparison-defining identifiers, and citations that support nearby claims.
+- `relocatable-trace`: exact material that must remain somewhere in the final
+  deliverable but can move to a technical/evidence appendix, such as repository
+  paths, checkpoint paths, exhaustive file identities, implementation locators,
+  and detailed audit trails.
+
+Relocation cannot hide or delete limitations, negative results, uncertainty,
+contradicting evidence, decision conditions, attribution, or comparison
+boundaries. Ordinary reader-facing headings and internal workflow labels are not
+literal-protected by default.
+
+Semantic audit statuses remain `preserved`, `narrowed`, `broadened`, `reversed`, `invented`, `omitted`, and `reattributed`; location roles only change where exact trace material may appear.
+
 ## Red Flags
 
 - The user asked for polishing, but content was removed.

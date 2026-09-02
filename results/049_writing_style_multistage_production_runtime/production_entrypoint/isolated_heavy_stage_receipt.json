@@ -1,0 +1,166 @@
+{
+  "candidate_only_reader_review": {
+    "source_visible": false
+  },
+  "candidate_sha256": "120a4201abf36a59e493a9840dc50b9cec4423b26412e0102e174b590daa6cd5",
+  "created_at": "2026-09-02T15:01:51Z",
+  "driver": "installed-local-writer",
+  "full_seed_library_injected": false,
+  "max_examples_per_unit": 4,
+  "model": "",
+  "model_call_count": 0,
+  "plugin_source_path": "/tmp/codex-049-isolated/plugins/cache/yuukias-ai-skills/writing-style/0.1",
+  "private_plaintext_committed": false,
+  "runtime": "scientific-rewrite.multistage.v1",
+  "runtime_source_path": "/tmp/codex-049-isolated/plugins/cache/yuukias-ai-skills/writing-style/0.1/skills/scientific-rewrite/scripts/rewrite_support.py",
+  "schema": "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V1",
+  "seed_library_size": 12,
+  "smoke_role": "isolated ordinary user heavy public regression rewrite",
+  "source_sha256": "5693f6f152765be631a4623ad55fb9dff622723e63c2f49549eb675b529afca6",
+  "stage_count": 12,
+  "stage_records": [
+    {
+      "input_sha256": "efec426286f0982c21eb3e7e5e51c9d20e1a6fdeb4840405ff163cef95b30141",
+      "model_call": false,
+      "output_sha256": "30cbee04e49d521f42d0ee5683c5ba77ecfe680dad2bf39a653a77890dbd49ec",
+      "plaintext_committed": false,
+      "responsibility": "map document purpose, audience, section roles, terminology, claims, caveats and GO/STOP boundaries; no prose rewrite",
+      "selected_example_ids": [],
+      "stage_id": "document-map",
+      "unit_id": null
+    },
+    {
+      "input_sha256": "cd3601cf114af1a3ce9de29754975e67746c55c4583d61d09ecb7c268f855cf3",
+      "model_call": false,
+      "output_sha256": "80f3194c6557b43c7d090d8c840b0fffc6a8b4a05a4da689792f37945458cdc8",
+      "plaintext_committed": false,
+      "responsibility": "derive Meaning Card and Fidelity Ledger for one argument unit; no prose rewrite",
+      "selected_example_ids": [],
+      "stage_id": "unit-001-meaning-card",
+      "unit_id": "unit-001"
+    },
+    {
+      "input_sha256": "aa3d4239b219718fb4f6dba9d3b836343be62fdfaf774578b209e21919ef0618",
+      "model_call": false,
+      "output_sha256": "e9cc45c595a462c75cc90c781ffb44e4f4f24f5fb0e3b697d141fdae9a8e1511",
+      "plaintext_committed": false,
+      "responsibility": "select 2-4 positive transformations by metadata; never inject the full seed library",
+      "selected_example_ids": [
+        "seed-result-interpretation-003",
+        "seed-attribution-011",
+        "seed-caveat-near-claim-004",
+        "seed-comparison-direction-005"
+      ],
+      "stage_id": "unit-001-example-selection",
+      "unit_id": "unit-001"
+    },
+    {
+      "input_sha256": "7c2abc8625161543e5de26ddd8f2b093078116522c90b6c4eed034c0b47b1c0d",
+      "model_call": false,
+      "output_sha256": "8c900f6e2128c2dec7dc0c067bc727fcce6b7811310eb1d2b9ef80b3cbb42752",
+      "plaintext_committed": false,
+      "responsibility": "rewrite one argument unit from original source plus Meaning Card and selected examples",
+      "selected_example_ids": [
+        "seed-result-interpretation-003",
+        "seed-attribution-011",
+        "seed-caveat-near-claim-004",
+        "seed-comparison-direction-005"
+      ],
+      "stage_id": "unit-001-writer",
+      "unit_id": "unit-001"
+    },
+    {
+      "input_sha256": "96e8819989c5d0229671051ac1d2ef4e7dee7aa3258268b2eb867bc475f0f224",
+      "model_call": false,
+      "output_sha256": "9ebad9fbee34e304c88f6641718f6ca7d5c9f174a3aab9df13da49953b419b28",
+      "plaintext_committed": false,
+      "responsibility": "verify exact literal preservation and semantic claim/relation status for the current unit",
+      "selected_example_ids": [],
+      "stage_id": "unit-001-literal-semantic-audit",
+      "unit_id": "unit-001"
+    },
+    {
+      "input_sha256": "b54016b50a58710d16383ff2de730b93884193d0eb05597413469fdce5859dd8",
+      "model_call": false,
+      "output_sha256": "27f407348cfa8a0f982a38d9bf422e5bc51b0bd7145e83a46b6c3d8798f66181",
+      "plaintext_committed": false,
+      "responsibility": "derive Meaning Card and Fidelity Ledger for one argument unit; no prose rewrite",
+      "selected_example_ids": [],
+      "stage_id": "unit-002-meaning-card",
+      "unit_id": "unit-002"
+    },
+    {
+      "input_sha256": "aa3d4239b219718fb4f6dba9d3b836343be62fdfaf774578b209e21919ef0618",
+      "model_call": false,
+      "output_sha256": "e9cc45c595a462c75cc90c781ffb44e4f4f24f5fb0e3b697d141fdae9a8e1511",
+      "plaintext_committed": false,
+      "responsibility": "select 2-4 positive transformations by metadata; never inject the full seed library",
+      "selected_example_ids": [
+        "seed-result-interpretation-003",
+        "seed-attribution-011",
+        "seed-caveat-near-claim-004",
+        "seed-comparison-direction-005"
+      ],
+      "stage_id": "unit-002-example-selection",
+      "unit_id": "unit-002"
+    },
+    {
+      "input_sha256": "fc040c7fb9bc59abe321654e64c6874853ab29d39c7e2fd379f198f844b70570",
+      "model_call": false,
+      "output_sha256": "c91dbd40023f872967aa43aa4a6b9bb811e1cd67cbecfde0b9672f2317dd3718",
+      "plaintext_committed": false,
+      "responsibility": "rewrite one argument unit from original source plus Meaning Card and selected examples",
+      "selected_example_ids": [
+        "seed-result-interpretation-003",
+        "seed-attribution-011",
+        "seed-caveat-near-claim-004",
+        "seed-comparison-direction-005"
+      ],
+      "stage_id": "unit-002-writer",
+      "unit_id": "unit-002"
+    },
+    {
+      "input_sha256": "2de818af6fd33ca3a02a52d1c3457dad93eff644ba0972299dab09bf5ceed34e",
+      "model_call": false,
+      "output_sha256": "18c8e00c52f98776b98a57aa54d8e0e8d7de52eff008f478d030c04f1fceb7fb",
+      "plaintext_committed": false,
+      "responsibility": "verify exact literal preservation and semantic claim/relation status for the current unit",
+      "selected_example_ids": [],
+      "stage_id": "unit-002-literal-semantic-audit",
+      "unit_id": "unit-002"
+    },
+    {
+      "input_sha256": "10a6b039f3426752e54e920bfdc9a2bd1fc6e5560fe99d624b3ade470738b95c",
+      "model_call": false,
+      "output_sha256": "caa2387a7c06357e55995f4348426973d5b43f1dccdb83323ae833defc3dc117",
+      "plaintext_committed": false,
+      "responsibility": "review candidate only against reader questions; source is not visible",
+      "selected_example_ids": [],
+      "stage_id": "candidate-only-reader-review",
+      "unit_id": null
+    },
+    {
+      "input_sha256": "2fdd04ad72e906295f3533259eb933cc88feadcc9e370ab0c4e1ad0194afe66b",
+      "model_call": false,
+      "output_sha256": "a56cef5f73a7f3b2cba70bbf6872ef46bb1b310583e4ae51544f2005a656d70b",
+      "plaintext_committed": false,
+      "responsibility": "check natural Chinese scientific prose after fidelity gates",
+      "selected_example_ids": [],
+      "stage_id": "chinese-language-review",
+      "unit_id": null
+    },
+    {
+      "input_sha256": "e10d5c4bf665a165128b8d78be412960c4f300e898e4e913417b39f7160cdaf6",
+      "model_call": false,
+      "output_sha256": "90a592874aad261154a0c66f7665c1868766d9d89638d2521d43f0110a8f8eec",
+      "plaintext_committed": false,
+      "responsibility": "final assembly of rewritten units and transition/terminology check without whole-document free rewrite",
+      "selected_example_ids": [],
+      "stage_id": "final-assembly-coherence",
+      "unit_id": null
+    }
+  ],
+  "store": false,
+  "unit_count": 2,
+  "whole_document_writer_call": false
+}

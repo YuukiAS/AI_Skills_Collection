@@ -1,0 +1,197 @@
+{
+  "compact_document_map": {
+    "audience": "technically trained reader who has not followed the repository audit history",
+    "caveats_uncertainty": [
+      "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。"
+    ],
+    "document_purpose": "meaning-preserving reader-facing rewrite of an existing scientific or technical document",
+    "major_claims": [
+      "checkpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+      "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。"
+    ],
+    "section_roles": [
+      {
+        "heading": "CARE checkpoint interpretation",
+        "unit_id": "unit-001"
+      },
+      {
+        "heading": "Next experiment decision",
+        "unit_id": "unit-002"
+      }
+    ]
+  },
+  "current_original_unit": "## Next experiment decision\n\n下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。",
+  "examples_are_factual_sources": false,
+  "fidelity_ledger": {
+    "critical_violations_allowed": 0,
+    "literal_items": [
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "FedAvg"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "FedFisher"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "FedLPA"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "GO"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "STOP"
+      }
+    ],
+    "semantic_status_values": [
+      "broadened",
+      "invented",
+      "narrowed",
+      "omitted",
+      "preserved",
+      "reattributed",
+      "reversed"
+    ]
+  },
+  "meaning_card": {
+    "attribution": [
+      "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。"
+    ],
+    "audience": "technically trained reader who has not followed the repository audit history",
+    "caveats_uncertainty_negative_findings": [
+      "## Next experiment decision",
+      "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。"
+    ],
+    "claims": [
+      "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。"
+    ],
+    "conditions_comparators": [
+      "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。"
+    ],
+    "evidence_results": [
+      "下一步需要比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA。主要变化应放在 local adaptation distance；主要观察 pooled gap 和 drift。若 pooled gap 下降且 drift 可控，进入 GO；若 FedFisher / FedLPA 已经解释主要收益，停止开发新方法，进入 STOP。"
+    ],
+    "literal_protected": [
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "FedAvg"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "FedFisher"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "FedLPA"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "GO"
+      },
+      {
+        "kind": "formal_name",
+        "role": "inline-critical",
+        "text": "STOP"
+      }
+    ],
+    "previous_next_relation": {
+      "next": "",
+      "previous": "CARE checkpoint interpretation"
+    },
+    "purpose": "rewrite the argument unit headed 'Next experiment decision' without changing its scientific meaning",
+    "reader_takeaway": "读者应理解 Next experiment decision 这一部分的判断、证据和限制，而不是先解码内部流程标签。",
+    "terminology": [
+      "FedAvg",
+      "FedFisher",
+      "FedLPA",
+      "GO",
+      "STOP"
+    ],
+    "unit_id": "unit-002"
+  },
+  "next_source_preview": "",
+  "previous_rewritten_tail": "# CARE checkpoint interpretation\n\ncheckpoint provenance audit 显示 `/tmp/care/run_20260828/checkpoint.pt` 与训练历史存在重叠。这个结果不能直接证明 CARE 新方法已经优于 pooled baseline；它只能说明在 2026-08-28 这个实验条件下，当前证据仍受 checkpoint history 约束。",
+  "schema": "SCIENTIFIC_REWRITE_STAGE_PACKET_V1",
+  "selected_example_ids": [
+    "seed-result-interpretation-003",
+    "seed-attribution-011",
+    "seed-caveat-near-claim-004",
+    "seed-comparison-direction-005"
+  ],
+  "selected_transformations": [
+    {
+      "approval_status": "REFERENCE",
+      "discourse_function": "result-interpretation",
+      "fidelity_risk": "high",
+      "id": "seed-result-interpretation-003",
+      "license": "repository-local evidence",
+      "original_template": "audit 显示 [指标A] 通过。",
+      "register": "formal-technical",
+      "rewrite_depth": "standard",
+      "rewrite_problem": "log-narration",
+      "rewrite_template": "按 [预先定义的检查条件] 看，[指标A] 没有触发失败条件；这个结果支持 [有边界的判断]，但不等于 [更强结论]。",
+      "scene": "scientific-report",
+      "source": "trace-v8-v9-public-architecture-evidence",
+      "source_revision": "8909eb1389dcc419d3168c13e1cddbcf252134cf"
+    },
+    {
+      "approval_status": "SEED",
+      "discourse_function": "attribution",
+      "fidelity_risk": "high",
+      "id": "seed-attribution-011",
+      "license": "MIT-compatible distilled pattern",
+      "original_template": "已有工作认为 [结论A]，本文观察到 [结果B]。",
+      "register": "formal-technical",
+      "rewrite_depth": "standard",
+      "rewrite_problem": "unclear-attribution",
+      "rewrite_template": "原文把 [结论A] 归给已有工作；本文自己的证据只支持 [结果B]，两者不能合并成同一个来源。",
+      "scene": "scientific-report",
+      "source": "distilled-human-writing-skills-fidelity",
+      "source_revision": "2b02ae77bd1ea009ea2d7a1cc6d2dcdce1437a00"
+    },
+    {
+      "approval_status": "SEED",
+      "discourse_function": "caveat",
+      "fidelity_risk": "high",
+      "id": "seed-caveat-near-claim-004",
+      "license": "MIT-compatible distilled pattern",
+      "original_template": "[方法A] 改善了 [指标B]。限制是 [条件C]。",
+      "register": "formal-technical",
+      "rewrite_depth": "standard",
+      "rewrite_problem": "caveat-separated",
+      "rewrite_template": "在 [条件C] 这一范围内，[方法A] 对 [指标B] 有改善；离开这个范围，原文没有提供足够证据支持同样结论。",
+      "scene": "scientific-report",
+      "source": "distilled-human-writing-skills-fidelity",
+      "source_revision": "2b02ae77bd1ea009ea2d7a1cc6d2dcdce1437a00"
+    },
+    {
+      "approval_status": "SEED",
+      "discourse_function": "comparison",
+      "fidelity_risk": "high",
+      "id": "seed-comparison-direction-005",
+      "license": "MIT-compatible distilled pattern",
+      "original_template": "[方法A] 的表现更稳定。",
+      "register": "formal-technical",
+      "rewrite_depth": "standard",
+      "rewrite_problem": "unclear-comparator",
+      "rewrite_template": "与 [比较对象B] 相比，[方法A] 在 [条件C] 下的 [稳定性指标] 波动更小；这个比较只适用于原文列出的 [范围D]。",
+      "scene": "scientific-report",
+      "source": "distilled-human-writing-skills-fidelity",
+      "source_revision": "2b02ae77bd1ea009ea2d7a1cc6d2dcdce1437a00"
+    }
+  ],
+  "stage": "unit-writer",
+  "unit_id": "unit-002"
+}

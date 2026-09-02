@@ -1,0 +1,23 @@
+Done. I used the installed `writing-style/scientific-rewrite` runtime from:
+
+`/tmp/codex-049-isolated/plugins/cache/yuukias-ai-skills/writing-style/0.1`
+
+Wrote:
+
+- `results/049_writing_style_multistage_production_runtime/production_entrypoint/isolated_heavy_candidate.md`
+- `results/049_writing_style_multistage_production_runtime/production_entrypoint/isolated_heavy_stage_receipt.json`
+- `results/049_writing_style_multistage_production_runtime/production_entrypoint/isolated_heavy_summary.json`
+
+Verification passed:
+
+- exact verifier: `ok: true`, `checked_count: 11`
+- receipt runtime: `scientific-rewrite.multistage.v1`
+- `unit_count: 2`
+- `stage_count: 12`
+- `whole_document_writer_call: false`
+- `max_examples_per_unit: 4`
+- `full_seed_library_injected: false`
+- candidate-only reader review has `source_visible: false`
+- candidate hash matches receipt hash
+
+I did not print or include secrets.

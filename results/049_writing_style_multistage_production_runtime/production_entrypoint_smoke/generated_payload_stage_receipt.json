@@ -1,0 +1,151 @@
+{
+  "candidate_sha256": "952d4a249d5dcf904170cfb64f5594cd7ad0f7df4330e9c7b8ca356fd785e4fa",
+  "created_at": "2026-09-02T14:03:07Z",
+  "driver": "template",
+  "full_seed_library_injected": false,
+  "max_examples_per_unit": 4,
+  "model": "",
+  "model_call_count": 0,
+  "private_plaintext_committed": false,
+  "runtime": "scientific-rewrite.multistage.v1",
+  "schema": "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V1",
+  "seed_library_size": 12,
+  "smoke_role": "",
+  "source_sha256": "5693f6f152765be631a4623ad55fb9dff622723e63c2f49549eb675b529afca6",
+  "stage_count": 11,
+  "stage_records": [
+    {
+      "input_sha256": "efec426286f0982c21eb3e7e5e51c9d20e1a6fdeb4840405ff163cef95b30141",
+      "model_call": false,
+      "output_sha256": "30cbee04e49d521f42d0ee5683c5ba77ecfe680dad2bf39a653a77890dbd49ec",
+      "plaintext_committed": false,
+      "responsibility": "map document purpose, audience, section roles, terminology, claims and caveats; no prose rewrite",
+      "selected_example_ids": [],
+      "stage_id": "document-map",
+      "unit_id": null
+    },
+    {
+      "input_sha256": "cd3601cf114af1a3ce9de29754975e67746c55c4583d61d09ecb7c268f855cf3",
+      "model_call": false,
+      "output_sha256": "80f3194c6557b43c7d090d8c840b0fffc6a8b4a05a4da689792f37945458cdc8",
+      "plaintext_committed": false,
+      "responsibility": "derive Meaning Card and Fidelity Ledger for one argument unit; no prose rewrite",
+      "selected_example_ids": [],
+      "stage_id": "unit-001-meaning-card",
+      "unit_id": "unit-001"
+    },
+    {
+      "input_sha256": "aa3d4239b219718fb4f6dba9d3b836343be62fdfaf774578b209e21919ef0618",
+      "model_call": false,
+      "output_sha256": "e9cc45c595a462c75cc90c781ffb44e4f4f24f5fb0e3b697d141fdae9a8e1511",
+      "plaintext_committed": false,
+      "responsibility": "select 2-4 positive transformations by metadata; never inject the full seed library",
+      "selected_example_ids": [
+        "seed-result-interpretation-003",
+        "seed-attribution-011",
+        "seed-caveat-near-claim-004",
+        "seed-comparison-direction-005"
+      ],
+      "stage_id": "unit-001-example-selection",
+      "unit_id": "unit-001"
+    },
+    {
+      "input_sha256": "7c2abc8625161543e5de26ddd8f2b093078116522c90b6c4eed034c0b47b1c0d",
+      "model_call": false,
+      "output_sha256": "265ad5b467735b04bf74ce93f10cb19991fc0f95a88c524d37821c46d389b851",
+      "plaintext_committed": false,
+      "responsibility": "rewrite one argument unit from original source plus Meaning Card and selected examples",
+      "selected_example_ids": [
+        "seed-result-interpretation-003",
+        "seed-attribution-011",
+        "seed-caveat-near-claim-004",
+        "seed-comparison-direction-005"
+      ],
+      "stage_id": "unit-001-writer",
+      "unit_id": "unit-001"
+    },
+    {
+      "input_sha256": "fb73e21ec95286ebf2a2be726d9dff1f95441986f3ed4171ac75d0f8a89c821b",
+      "model_call": false,
+      "output_sha256": "2295ce40cd85cd9c5e89ef3aaa97f060b9b9e1df58bfc7abac4d6230bfac5d33",
+      "plaintext_committed": false,
+      "responsibility": "verify exact literal preservation and semantic claim/relation status for the current unit",
+      "selected_example_ids": [],
+      "stage_id": "unit-001-literal-semantic-audit",
+      "unit_id": "unit-001"
+    },
+    {
+      "input_sha256": "b54016b50a58710d16383ff2de730b93884193d0eb05597413469fdce5859dd8",
+      "model_call": false,
+      "output_sha256": "27f407348cfa8a0f982a38d9bf422e5bc51b0bd7145e83a46b6c3d8798f66181",
+      "plaintext_committed": false,
+      "responsibility": "derive Meaning Card and Fidelity Ledger for one argument unit; no prose rewrite",
+      "selected_example_ids": [],
+      "stage_id": "unit-002-meaning-card",
+      "unit_id": "unit-002"
+    },
+    {
+      "input_sha256": "aa3d4239b219718fb4f6dba9d3b836343be62fdfaf774578b209e21919ef0618",
+      "model_call": false,
+      "output_sha256": "e9cc45c595a462c75cc90c781ffb44e4f4f24f5fb0e3b697d141fdae9a8e1511",
+      "plaintext_committed": false,
+      "responsibility": "select 2-4 positive transformations by metadata; never inject the full seed library",
+      "selected_example_ids": [
+        "seed-result-interpretation-003",
+        "seed-attribution-011",
+        "seed-caveat-near-claim-004",
+        "seed-comparison-direction-005"
+      ],
+      "stage_id": "unit-002-example-selection",
+      "unit_id": "unit-002"
+    },
+    {
+      "input_sha256": "7b3980ad9337b41ac64f3edeecd384051088770610f8209a54ef8b39d58dc390",
+      "model_call": false,
+      "output_sha256": "ca7f7400f96086683e01e54a38034ccfecdc47e334a89d9645c2c0f66a24d8c8",
+      "plaintext_committed": false,
+      "responsibility": "rewrite one argument unit from original source plus Meaning Card and selected examples",
+      "selected_example_ids": [
+        "seed-result-interpretation-003",
+        "seed-attribution-011",
+        "seed-caveat-near-claim-004",
+        "seed-comparison-direction-005"
+      ],
+      "stage_id": "unit-002-writer",
+      "unit_id": "unit-002"
+    },
+    {
+      "input_sha256": "f9a3ee6b09f94ae18e0cd62da48a4dfc97b9629726d951327d7a56b72f75bf7b",
+      "model_call": false,
+      "output_sha256": "6e7ce25dbe4cb2697c1cf31182d6534741a29c3fb37d195c2402a3a456530028",
+      "plaintext_committed": false,
+      "responsibility": "verify exact literal preservation and semantic claim/relation status for the current unit",
+      "selected_example_ids": [],
+      "stage_id": "unit-002-literal-semantic-audit",
+      "unit_id": "unit-002"
+    },
+    {
+      "input_sha256": "8bd6536d17ffb2554d236792f101b17444c5734382ffe651e594d7fb3de87497",
+      "model_call": false,
+      "output_sha256": "b7b7407e4a49ef9b5e1e854ce686a42a53a136238ada9c6e71213a81476b3cdc",
+      "plaintext_committed": false,
+      "responsibility": "review candidate only against reader questions; source is not visible",
+      "selected_example_ids": [],
+      "stage_id": "candidate-only-reader-review",
+      "unit_id": null
+    },
+    {
+      "input_sha256": "cdeccdc7003a2375f40c1c99b0ee0ac619a163828dc10ca04a405954cf6ac245",
+      "model_call": false,
+      "output_sha256": "1af047077f1df54589d904fc1918d32fac2256928823d96b49f1a1314d9fb3a0",
+      "plaintext_committed": false,
+      "responsibility": "final assembly of rewritten units and transition/terminology check without whole-document free rewrite",
+      "selected_example_ids": [],
+      "stage_id": "final-assembly-coherence",
+      "unit_id": null
+    }
+  ],
+  "store": false,
+  "unit_count": 2,
+  "whole_document_writer_call": false
+}

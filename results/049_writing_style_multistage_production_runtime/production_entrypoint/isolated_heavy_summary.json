@@ -1,0 +1,11 @@
+{
+  "full_seed_library_injected": false,
+  "max_examples_per_unit": 4,
+  "plugin_source_path": "/tmp/codex-049-isolated/plugins/cache/yuukias-ai-skills/writing-style/0.1",
+  "receipt_path": "results/049_writing_style_multistage_production_runtime/production_entrypoint/isolated_heavy_stage_receipt.json",
+  "runtime_name": "scientific-rewrite.multistage.v1",
+  "source_visible": false,
+  "stage_count": 12,
+  "unit_count": 2,
+  "whole_document_writer_call": false
+}

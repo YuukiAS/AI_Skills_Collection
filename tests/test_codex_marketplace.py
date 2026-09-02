@@ -257,6 +257,27 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertEqual(summary["errors"], [])
         self.assertEqual(differences, [])
 
+    def test_text_transform_workflow_is_pinned_to_bridge_kit_commit(self) -> None:
+        workflow = (REPO_ROOT / ".github/workflows/ai-bridge-text-transform.yml").read_text(encoding="utf-8")
+        transform_docs = (REPO_ROOT / "docs/AI_BRIDGE_TEXT_TRANSFORM.md").read_text(encoding="utf-8")
+        runner = (REPO_ROOT / "scripts/run_scientific_rewrite_private_smoke.py").read_text(encoding="utf-8")
+
+        bridge_kit_commit = "65ea9c59afbe2db88bb5d60bf8752f82719f0087"
+        self.assertIn(bridge_kit_commit, workflow)
+        self.assertIn(bridge_kit_commit, transform_docs)
+        self.assertIn("gpt-codex-ai-bridge-kit[text-transform]", workflow)
+        self.assertIn("AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY", workflow)
+        self.assertIn("OPENAI_REVIEW_API_KEY", workflow)
+        self.assertIn("OPENAI_VISUAL_REVIEW_API_KEY", workflow)
+        self.assertIn("OPENAI_TEXT_TRANSFORM_MODEL", workflow)
+        self.assertIn("OPENAI_TEXT_TRANSFORM_TIMEOUT_SECONDS", workflow)
+        self.assertIn('git show --name-only --format= "${GITHUB_SHA}"', workflow)
+        self.assertIn("scripts/run_scientific_rewrite_private_smoke.py", workflow)
+        self.assertIn("scientific-rewrite-staged-smoke", runner)
+        self.assertIn("store", runner)
+        self.assertNotIn('git diff-tree --no-commit-id --name-only -r "${GITHUB_SHA}"', workflow)
+        self.assertNotIn("@main", workflow)
+
     def test_codex_marketplace_ci_installs_presentation_test_dependencies(self) -> None:
         workflow = (REPO_ROOT / ".github/workflows/codex-marketplace.yml").read_text(encoding="utf-8")
         install_step = workflow.index("Install presentation regression test dependencies")

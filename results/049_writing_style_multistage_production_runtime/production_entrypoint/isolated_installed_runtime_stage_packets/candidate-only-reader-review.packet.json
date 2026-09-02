@@ -1,0 +1,14 @@
+{
+  "audience": "technically trained reader who has not followed the repository audit history",
+  "candidate_sha256": "952d4a249d5dcf904170cfb64f5594cd7ad0f7df4330e9c7b8ca356fd785e4fa",
+  "questions": [
+    "what problem is being studied",
+    "what current evidence means",
+    "what remains uncertain",
+    "why the next comparison or experiment is needed",
+    "what result would support GO or STOP"
+  ],
+  "schema": "SCIENTIFIC_REWRITE_STAGE_PACKET_V1",
+  "source_visible": false,
+  "stage": "candidate-only-reader-review"
+}

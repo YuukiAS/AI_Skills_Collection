@@ -93,6 +93,11 @@
         },
         {
           "type": "copy",
+          "source": "skills/writing/core/scientific-rewrite",
+          "artifact_id": "scientific-rewrite"
+        },
+        {
+          "type": "copy",
           "source": "skills/writing/core/chinese-prose",
           "artifact_id": "zh",
           "description": "Automatic Chinese Markdown/PDF/report/README final pass for reader-facing, Chinese-first, say-it-plain technical and scientific prose without document rendering responsibilities."
