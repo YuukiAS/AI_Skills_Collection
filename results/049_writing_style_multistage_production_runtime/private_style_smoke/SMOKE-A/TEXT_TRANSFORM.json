@@ -1,0 +1,70 @@
+{
+  "bridge_kit_commit": "65ea9c59afbe2db88bb5d60bf8752f82719f0087",
+  "created_at": "2026-09-02T15:19:24Z",
+  "encrypted_input": {
+    "path": "results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-A/input.age",
+    "sha256": "9c85a8b6fe9043f77a2613c39fc137c9da1976ac93d2ca8584dfe233f38497b8"
+  },
+  "encrypted_output": {
+    "path": "results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-A/output.age",
+    "sha256": "92652dcfbae6e1846fba9e3e6e27cbba666dce6f53808e63b1be1a6e107030e0"
+  },
+  "input_manifest": {
+    "external_upload_authorization_recorded": true,
+    "identity_bindings": {
+      "bridge_kit_commit": "65ea9c59afbe2db88bb5d60bf8752f82719f0087",
+      "implementation_commit": "0ffab04b9140516aff6d94c8e0ca82452dd4a747",
+      "source_full_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213"
+    },
+    "path": "results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-A/text_transform_inputs.json",
+    "privacy_policy": "PRIVATE_TEXT_TRANSFORM_AUTHORIZED",
+    "sha256": "22a70d85a8544e214a5fb1d1155ec3abf84dca8bbdb06f0e023ce3464f2b12c1"
+  },
+  "model": "gpt-5.6-terra",
+  "output_plaintext_sha256": "463542bc11bdc033d597991037948ea6cd31eabc1abf6f83d2c041c35f86a88a",
+  "output_plaintext_size_bytes": 8146,
+  "output_public_recipient": {
+    "path": "results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-A/output.age.pub",
+    "sha256": "a800e25d0da5675fabe0ee475df9b6321f62b292acfbfaeec6e86126fc285f0f"
+  },
+  "plaintext_committed": false,
+  "private_plaintext_committed": false,
+  "prompt_version": "ai-skills.scientific-rewrite.multistage.private-smoke.v1",
+  "runtime": {
+    "driver": "openai-responses",
+    "full_seed_library_injected": false,
+    "max_examples_per_unit": 4,
+    "model_call_count": 6,
+    "name": "scientific-rewrite.multistage.v1",
+    "receipt_path": "results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-A/stage_receipt.json",
+    "receipt_sha256": "83a7d99a5fefa9939d4a35ae7c8b12d89b1a4cea6375db872b4524ffe9c76712",
+    "schema": "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V1",
+    "stage_count": 7,
+    "unit_count": 1,
+    "whole_document_writer_call": false
+  },
+  "schema": "AI_SKILLS_049_PRIVATE_STYLE_SMOKE_TRANSFORM_V1",
+  "smoke": {
+    "id": "SMOKE-A",
+    "purpose": "opening plus checkpoint interpretation",
+    "role": "opening_and_checkpoint_interpretation",
+    "source_line_ranges": [
+      [
+        1,
+        60
+      ],
+      [
+        111,
+        145
+      ]
+    ],
+    "source_segment_sha256": "3e18bea855cc4afccacc47b7ed60600ef637cbffd7ea412fcb54fe4b0575a5db",
+    "source_segment_size_bytes": 7952
+  },
+  "source_plaintext_sha256": "3e18bea855cc4afccacc47b7ed60600ef637cbffd7ea412fcb54fe4b0575a5db",
+  "source_plaintext_size_bytes": 7952,
+  "store": false,
+  "task_key": "049_writing_style_multistage_production_runtime",
+  "transform_kind": "scientific-rewrite-staged-smoke",
+  "workflow_type": "reviewed_handoff"
+}

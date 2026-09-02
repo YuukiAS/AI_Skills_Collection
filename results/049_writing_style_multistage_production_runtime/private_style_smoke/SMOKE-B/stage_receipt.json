@@ -1,0 +1,101 @@
+{
+  "candidate_sha256": "088baa21cf24c209750562771a8cd812939ad3a0d5fbe3e74a2bc94bb4f9cbc6",
+  "created_at": "2026-09-02T15:21:18Z",
+  "driver": "openai-responses",
+  "full_seed_library_injected": false,
+  "max_examples_per_unit": 4,
+  "model": "gpt-5.6-terra",
+  "model_call_count": 6,
+  "private_plaintext_committed": false,
+  "runtime": "scientific-rewrite.multistage.v1",
+  "schema": "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V1",
+  "seed_library_size": 12,
+  "smoke_role": "SMOKE-B",
+  "source_sha256": "20161b96ba82a610d3669d49aae01eeff32f98eeb1737438c892a869b5660e88",
+  "stage_count": 7,
+  "stage_records": [
+    {
+      "input_sha256": "99f5c3a83c7ed14e758ba272729673c179bf0e173c03cf3f63708390fdf69c0f",
+      "model_call": true,
+      "output_sha256": "50597f8e2cccc640433ec57b2cc90f735e77e819d2a527597ffafc85e95fd57b",
+      "plaintext_committed": false,
+      "responsibility": "map document purpose, audience, section roles, terminology, claims and caveats; no prose rewrite",
+      "selected_example_ids": [],
+      "stage_id": "document-map",
+      "unit_id": null
+    },
+    {
+      "input_sha256": "ca3dbb155ea09beca8c78e584c7e7ab557ba08070da1dd4ee9c03c4c8ca4fbde",
+      "model_call": true,
+      "output_sha256": "896534bef881aa0913e470d034d0e819d54eaae6195b4dc32384d12bf1df5874",
+      "plaintext_committed": false,
+      "responsibility": "derive Meaning Card and Fidelity Ledger for one argument unit; no prose rewrite",
+      "selected_example_ids": [],
+      "stage_id": "unit-001-meaning-card",
+      "unit_id": "unit-001"
+    },
+    {
+      "input_sha256": "aa3d4239b219718fb4f6dba9d3b836343be62fdfaf774578b209e21919ef0618",
+      "model_call": false,
+      "output_sha256": "e9cc45c595a462c75cc90c781ffb44e4f4f24f5fb0e3b697d141fdae9a8e1511",
+      "plaintext_committed": false,
+      "responsibility": "select 2-4 positive transformations by metadata; never inject the full seed library",
+      "selected_example_ids": [
+        "seed-result-interpretation-003",
+        "seed-attribution-011",
+        "seed-caveat-near-claim-004",
+        "seed-comparison-direction-005"
+      ],
+      "stage_id": "unit-001-example-selection",
+      "unit_id": "unit-001"
+    },
+    {
+      "input_sha256": "932f3d17976ae4ab9b72bba718828738218c7f4937b0a1e25fd8cd30c4aa1dc8",
+      "model_call": true,
+      "output_sha256": "485504293920bd745b0dbddae061e69ab94831ba54afbb33d1d30c4798f5ffe5",
+      "plaintext_committed": false,
+      "responsibility": "rewrite one argument unit from original source plus Meaning Card and selected examples",
+      "selected_example_ids": [
+        "seed-result-interpretation-003",
+        "seed-attribution-011",
+        "seed-caveat-near-claim-004",
+        "seed-comparison-direction-005"
+      ],
+      "stage_id": "unit-001-writer",
+      "unit_id": "unit-001"
+    },
+    {
+      "input_sha256": "1743b14edd887b3f6e5702ef9cc4e1da3698348d8e3b0489da90c1447ee67692",
+      "model_call": true,
+      "output_sha256": "5b91a7a78c0964ecb30f6d5710a976638638169d0d641d5dcad27b37e40b580d",
+      "plaintext_committed": false,
+      "responsibility": "verify exact literal preservation and semantic claim/relation status for the current unit",
+      "selected_example_ids": [],
+      "stage_id": "unit-001-literal-semantic-audit",
+      "unit_id": "unit-001"
+    },
+    {
+      "input_sha256": "e513abb7ae4ec6b03ad7f21b6fc5b478c6261899a656c368634bf5c96c19a222",
+      "model_call": true,
+      "output_sha256": "7679ce2db2f35da5a730fb0ac976255b3ee2b85935a5148daa3a33aed2bca74c",
+      "plaintext_committed": false,
+      "responsibility": "review candidate only against reader questions; source is not visible",
+      "selected_example_ids": [],
+      "stage_id": "candidate-only-reader-review",
+      "unit_id": null
+    },
+    {
+      "input_sha256": "99ac7c13f8caec0af67b1dab1dbbb23e9adfd20ebc7cc5959ef7d2681dd4bab4",
+      "model_call": true,
+      "output_sha256": "ca7a0a639be39e07ad87e4c73fd9eee8656da635fabb3c201353e7dbd44f6a23",
+      "plaintext_committed": false,
+      "responsibility": "final assembly of rewritten units and transition/terminology check without whole-document free rewrite",
+      "selected_example_ids": [],
+      "stage_id": "final-assembly-coherence",
+      "unit_id": null
+    }
+  ],
+  "store": false,
+  "unit_count": 1,
+  "whole_document_writer_call": false
+}

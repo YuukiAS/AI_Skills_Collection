@@ -1,0 +1,70 @@
+{
+  "bridge_kit_commit": "65ea9c59afbe2db88bb5d60bf8752f82719f0087",
+  "created_at": "2026-09-02T15:23:37Z",
+  "encrypted_input": {
+    "path": "results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-C/input.age",
+    "sha256": "841fcb1658ba29d7e42df54ee76e32fdb752f9bf1326fe0003bca4284de0bea8"
+  },
+  "encrypted_output": {
+    "path": "results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-C/output.age",
+    "sha256": "8d1912290fa5e9867577cbb8badac098f792ccad19189350f955f3d3d92993c4"
+  },
+  "input_manifest": {
+    "external_upload_authorization_recorded": true,
+    "identity_bindings": {
+      "bridge_kit_commit": "65ea9c59afbe2db88bb5d60bf8752f82719f0087",
+      "implementation_commit": "0ffab04b9140516aff6d94c8e0ca82452dd4a747",
+      "source_full_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213"
+    },
+    "path": "results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-C/text_transform_inputs.json",
+    "privacy_policy": "PRIVATE_TEXT_TRANSFORM_AUTHORIZED",
+    "sha256": "72d07f13266da739f879b2259e80cfd14e61783cd289a23656a4d30331531dc3"
+  },
+  "model": "gpt-5.6-terra",
+  "output_plaintext_sha256": "6f12c219e33883bf1fe980274f5465fa22eff5ddf01d2a6ede3273efbbd47723",
+  "output_plaintext_size_bytes": 13873,
+  "output_public_recipient": {
+    "path": "results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-C/output.age.pub",
+    "sha256": "ac39e612a00a09f104d2c3f2842d509bb4b2b90fe60db313aa812e1144f364de"
+  },
+  "plaintext_committed": false,
+  "private_plaintext_committed": false,
+  "prompt_version": "ai-skills.scientific-rewrite.multistage.private-smoke.v1",
+  "runtime": {
+    "driver": "openai-responses",
+    "full_seed_library_injected": false,
+    "max_examples_per_unit": 4,
+    "model_call_count": 6,
+    "name": "scientific-rewrite.multistage.v1",
+    "receipt_path": "results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-C/stage_receipt.json",
+    "receipt_sha256": "e8b76b51da0c0f9353128963a7f6204e8891ce62a2aa1516dd8f000997d8d6ac",
+    "schema": "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V1",
+    "stage_count": 7,
+    "unit_count": 1,
+    "whole_document_writer_call": false
+  },
+  "schema": "AI_SKILLS_049_PRIVATE_STYLE_SMOKE_TRANSFORM_V1",
+  "smoke": {
+    "id": "SMOKE-C",
+    "purpose": "next experiment design plus GO STOP decision criteria",
+    "role": "next_experiment_go_stop",
+    "source_line_ranges": [
+      [
+        553,
+        761
+      ],
+      [
+        830,
+        853
+      ]
+    ],
+    "source_segment_sha256": "22eacc455a07341d24f52666e911dea1f0e8edd46d8bbaeed896a5fc2f973a48",
+    "source_segment_size_bytes": 14753
+  },
+  "source_plaintext_sha256": "22eacc455a07341d24f52666e911dea1f0e8edd46d8bbaeed896a5fc2f973a48",
+  "source_plaintext_size_bytes": 14753,
+  "store": false,
+  "task_key": "049_writing_style_multistage_production_runtime",
+  "transform_kind": "scientific-rewrite-staged-smoke",
+  "workflow_type": "reviewed_handoff"
+}
