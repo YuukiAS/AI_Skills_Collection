@@ -20,7 +20,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: ai-bridge-paid-review-${{ github.repository }}-${{ github.ref }}
+  group: ai-bridge-paid-review-${{ github.repository }}
   cancel-in-progress: false
 
 jobs:

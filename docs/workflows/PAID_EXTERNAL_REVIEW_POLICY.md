@@ -113,6 +113,8 @@ campaign_actual_model_cost_usd
 
 实际成本只用于 task accounting / 用户报告，不反向释放 reservation。不得为了“算得更准”把 Organization Admin API key、Costs API 或 day bucket 引入 CI。
 
+Live migration smoke 之前必须先用 repository secret 在 GitHub Actions 内验证 `POST /v1/responses/input_tokens` 可用，且该检查只能调用 input-token endpoint，不得继续调用 `POST /v1/responses`。Implementation rule: only call input-token endpoint during this permission smoke. 如果新 project-scoped key 因缺少 `Responses=Write` 或其他 authorization / permission 问题失败，必须 fail closed 并报告非 secret 的 HTTP status、OpenAI error code/type/message/param；不得自动扩大 model capability 或改用旧 key。
+
 ## 6. Text Review
 
 Text Review 默认只看需要独立判断的最终 candidate，加上 audience 与 frozen review questions/rubric。除非 fidelity review 明确需要 source-aware comparison，否则 reader-style QA 不上传 source 原文、intermediate drafts、Meaning Cards、internal self-audit 或 repo workflow log。

@@ -36,7 +36,7 @@ class PaidReviewWorkflowPolicyTests(unittest.TestCase):
                 self.assertNotIn("\n  push:", text)
                 self.assertIn(BRIDGE_KIT_COMMIT, text)
                 self.assertIn('AI_BRIDGE_PAID_REVIEW_GIT_RESERVE: "1"', text)
-                self.assertIn("group: ai-bridge-paid-review-${{ github.repository }}-${{ github.ref }}", text)
+                self.assertIn("group: ai-bridge-paid-review-${{ github.repository }}", text)
                 self.assertNotIn("secrets.OPENAI_REVIEW_API_KEY || secrets.OPENAI_VISUAL_REVIEW_API_KEY", text)
                 self.assertNotIn("secrets.OPENAI_VISUAL_REVIEW_API_KEY || secrets.OPENAI_REVIEW_API_KEY", text)
                 self.assertNotIn("vars.OPENAI_TEXT_REVIEW_MODEL", text)
@@ -98,6 +98,7 @@ class PaidReviewWorkflowPolicyTests(unittest.TestCase):
             "per-call worst-case ceiling: USD 0.25",
             "automatic paid retries: 0",
             "persistent pre-request reservation",
+            "actual_model_cost_usd",
             "only call input-token endpoint",
             "billing/quota zero-retry",
             "Visual Review sends image\ninputs",
