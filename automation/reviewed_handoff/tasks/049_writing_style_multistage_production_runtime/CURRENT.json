@@ -8,7 +8,7 @@
   "max_plan_revisions": 1,
   "base_commit": "0bae10b5ab5df914d77ca29212845f9e39146452",
   "base_branch": "main",
-  "implementation_commit": "89c2a8741c8477d9c453f43d32eb93dee537527d",
+  "implementation_commit": "e44a4b201dc7de3a21add210a2b9bc3b4e90ef7f",
   "ci_required": true,
   "ci_status": "PENDING",
   "last_review_decision": null,
@@ -18,5 +18,5 @@
   "text_review_required": true,
   "text_review_manifest_path": "results/049_writing_style_multistage_production_runtime/text_review/text_inputs.json",
   "text_review_evidence_path": "results/049_writing_style_multistage_production_runtime/text_review/TEXT_REVIEW.json",
-  "next_action": "CODEX_EXECUTOR_RERUN_FIXED_PRIVATE_STYLE_SMOKES_AFTER_STRUCTURED_RUNTIME_REPAIR"
+  "next_action": "WAIT_FOR_OPENAI_CREDIT_BALANCE_THEN_RERUN_FIXED_PRIVATE_STYLE_SMOKES"
 }

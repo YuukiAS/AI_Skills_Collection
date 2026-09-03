@@ -145,9 +145,19 @@ A separate fresh isolated Codex session validated that non-heavy requests do not
 - heavy runtime invoked: `false`
 - heavy receipt created: `false`
 
-## Private Style Smoke Evidence
+## Private Style Smoke Status
 
-The three fixed samples from `STYLE_SMOKE_MANIFEST.md` were generated through the 049 multistage runtime using the Bridge Kit secure private transport pattern:
+The three fixed samples from `STYLE_SMOKE_MANIFEST.md` still need fresh V2 generation through the 049 structured multistage runtime. The committed `SMOKE-A` / `SMOKE-B` / `SMOKE-C` files from commit `24adeb8` are historical V1 evidence only:
+
+- schema: `SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V1`
+- unit count: `1`
+- stage count: `7`
+- no V2 `dataflow_validation`
+- no explicit V2 stage list covering document map, argument segmentation, Meaning Cards, source-to-card coverage, example selection, unit writer, literal/semantic audit, candidate-only reader review, and final assembly/coherence
+
+Those V1 outputs must not be used for the current 049 style gate.
+
+The required V2 secure transport path remains:
 
 ```text
 private local segment
@@ -159,77 +169,31 @@ private local segment
 -> local decrypt
 ```
 
-Evidence:
+The secure transport was retried on the current V2 runtime without changing the frozen private path, global marketplace, prefix rules, or Bridge Kit:
 
-- implementation commit bound by manifests: `0ffab04b9140516aff6d94c8e0ca82452dd4a747`
-- GitHub Actions run: `33647523957`
-- writeback commit: `24adeb8`
-- Bridge Kit transport commit pin: `65ea9c59afbe2db88bb5d60bf8752f82719f0087`
-- private local output root: `/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/049_private_style_smoke`
-- private plaintext committed: `false`
+- run `33696731870`: failed during private transform with `HTTP 429`
+- run `33699978179`: failed on `SMOKE-A` document map with `HTTP 429`
+- run `33703155683`: failed on `SMOKE-A` document map with `type=insufficient_quota`, `code=credit_balance_exhausted`
 
-### SMOKE-A
+The last run proves:
 
-- role: `opening_and_checkpoint_interpretation`
-- manifest: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-A/text_transform_inputs.json`
-- encrypted input: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-A/input.age`
-- encrypted output: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-A/output.age`
-- receipt: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-A/stage_receipt.json`
-- local private candidate: `/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/049_private_style_smoke/SMOKE-A/rewritten_smoke.md`
-- source segment sha256: `3e18bea855cc4afccacc47b7ed60600ef637cbffd7ea412fcb54fe4b0575a5db`
-- output plaintext sha256: `463542bc11bdc033d597991037948ea6cd31eabc1abf6f83d2c041c35f86a88a`
-- runtime: `scientific-rewrite.multistage.v1`
-- unit count: `1`
-- stage count: `7`
-- model call count: `6`
-- whole-document writer call: `false`
-- max examples per unit: `4`
-- full seed library injected: `false`
-- store: `false`
+- GitHub Actions received the configured OpenAI secret.
+- The age-encrypted private artifact transport reached the OpenAI Responses API path.
+- The current failure is an external OpenAI credit/billing resource failure for that configured API credential, not a missing local shell key, not a request to use Codex identity, and not a reason to mutate the live global marketplace/plugin cache.
 
-### SMOKE-B
+## Current Status
 
-- role: `odal_vs_fedfisher_fedlpa`
-- manifest: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-B/text_transform_inputs.json`
-- encrypted input: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-B/input.age`
-- encrypted output: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-B/output.age`
-- receipt: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-B/stage_receipt.json`
-- local private candidate: `/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/049_private_style_smoke/SMOKE-B/rewritten_smoke.md`
-- source segment sha256: `20161b96ba82a610d3669d49aae01eeff32f98eeb1737438c892a869b5660e88`
-- output plaintext sha256: `088baa21cf24c209750562771a8cd812939ad3a0d5fbe3e74a2bc94bb4f9cbc6`
-- runtime: `scientific-rewrite.multistage.v1`
-- unit count: `1`
-- stage count: `7`
-- model call count: `6`
-- whole-document writer call: `false`
-- max examples per unit: `4`
-- full seed library injected: `false`
-- store: `false`
+Implemented and verified so far:
 
-### SMOKE-C
+- AI_Skills `AGENTS.md` isolated central plugin replay policy: commit `8ad7974`
+- V2 structured runtime and generated payload: current implementation commit `e44a4b201dc7de3a21add210a2b9bc3b4e90ef7f`
+- isolated installed-entrypoint evidence: `production_entrypoint_v2/isolated_installed_runtime_stage_receipt.json`
+- public regression receipts: `public_regression/receipts/*.stage_receipt.json`
+- local tests: `python3 -m pytest tests/test_scientific_rewrite.py tests/test_codex_marketplace.py -q` passed with `66 passed`
+- generator/parity: `python3 scripts/build_codex_marketplace.py --write --validate --check --path-report` passed
 
-- role: `next_experiment_go_stop`
-- manifest: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-C/text_transform_inputs.json`
-- encrypted input: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-C/input.age`
-- encrypted output: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-C/output.age`
-- receipt: `results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-C/stage_receipt.json`
-- local private candidate: `/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/049_private_style_smoke/SMOKE-C/rewritten_smoke.md`
-- source segment sha256: `22eacc455a07341d24f52666e911dea1f0e8edd46d8bbaeed896a5fc2f973a48`
-- output plaintext sha256: `6f12c219e33883bf1fe980274f5465fa22eff5ddf01d2a6ede3273efbbd47723`
-- runtime: `scientific-rewrite.multistage.v1`
-- unit count: `1`
-- stage count: `7`
-- model call count: `6`
-- whole-document writer call: `false`
-- max examples per unit: `4`
-- full seed library injected: `false`
-- store: `false`
+Still required before the human style gate:
 
-## Current Human Gate
-
-The required first-phase implementation and style-smoke evidence is complete. `CURRENT.json` should now move to `AWAIT_HUMAN_DECISION` with `next_action=WAIT_FOR_USER_STYLE_ACCEPTANCE`.
-
-The next required decision is user style acceptance:
-
-- `STYLE_ACCEPT` authorizes the full private report generation in the same 049 task.
-- `STYLE_REJECT` must include concrete style feedback and routes to bounded generic repair.
+- rerun fixed `SMOKE-A`, `SMOKE-B`, and `SMOKE-C` after the configured OpenAI API credential has available credits;
+- confirm each private smoke receipt is V2, uses `openai-responses`, records `store=false`, has `dataflow_validation.ok=true`, has multiple model calls, and records the required stage responsibilities;
+- only then move `CURRENT.json` to `AWAIT_HUMAN_DECISION` with `next_action=WAIT_FOR_USER_STYLE_ACCEPTANCE`.
