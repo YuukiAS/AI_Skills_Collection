@@ -358,6 +358,30 @@ retry、rerun、Codex restart、workflow restart、换机器或 checkout 不得�
 
 Text Review 与 Visual Review 都应继续可用，但 reviewer Project / secret 不等于 production generation dependency。Visual Review 只允许 final image input review，不允许 image generation 或额外付费 tools。用户明确拒绝真实 artifact 时，Terra/CI PASS 不能覆盖用户反馈。
 
+### 8.3.2 Full CI 是阶段门，不是每个 commit 的仪式
+
+heavyweight full/release/integration CI 只在正确生命周期 gate 运行：
+
+```text
+implementation candidate frozen
+-> explicit full CI dispatch on the task branch
+-> PASS
+-> Reviewer / integration
+```
+
+普通开发循环默认先跑本地 deterministic tests 和 path-scoped cheap checks。GPT Planner 不得机械要求“每次 push 后等待完整 GitHub Actions”作为普通实现节奏；Plan 必须区分 development-local tests 与 final GitHub integration/release CI。
+
+只有同时满足以下条件的 workflow 才允许 ordinary push 自动运行：
+
+- zero paid API；
+- cheap；
+- strongly path-scoped；
+- failure 与当前 changed area 直接相关；
+- 不修改 repository；
+- 不运行全库 heavyweight matrix。
+
+不满足这些条件的 workflow 必须是 explicit gate，例如 `workflow_dispatch` 或 PR/release gate。Codex Marketplace full matrix 是 integration/release gate；CI 只验证 generated parity/freshness，不自动 commit/push generated payload。
+
 ### 8.4 Visual review skipped 语义
 
 `visual_review_required=true` 时，才运行真实 Visual Review，并且 evidence 必须绑定 artifact identity。`visual_review_required=false` 时，不运行昂贵模型/API review，GitHub UI/状态必须表达 `SKIPPED` / `NOT_REQUIRED`，不能让真正的 visual-review job 显示成容易误读的 PASS。

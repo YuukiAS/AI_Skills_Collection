@@ -1,15 +1,6 @@
 name: Research Presentation Visual Packet
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/research-presentation-visual-packet.yml"
-      - "tests/fixtures/presentations/research_group_meeting/**"
-      - "skills/tools/documents-media/presentations/shared/references/**"
-      - "plugins/codex/plugins/presentations/shared/references/**"
-      - "automation/reviewed_handoff/tasks/011_round_handoff/**"
-      - "results/011_round_handoff/**"
   workflow_dispatch:
 
 permissions:

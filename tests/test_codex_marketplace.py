@@ -267,6 +267,22 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertIn('python3 -m pip install "Pillow>=10" "python-pptx>=1.0" "matplotlib>=3.8"', workflow)
         self.assertIn('from PIL import Image, ImageDraw, ImageFont; import matplotlib; from pptx import Presentation', workflow)
 
+    def test_codex_marketplace_full_ci_is_explicit_read_only_gate(self) -> None:
+        workflow = (REPO_ROOT / ".github/workflows/codex-marketplace.yml").read_text(encoding="utf-8")
+        self.assertIn("pull_request:", workflow)
+        self.assertIn("workflow_dispatch:", workflow)
+        self.assertNotIn("\n  push:", workflow)
+        self.assertIn("permissions:\n  contents: read", workflow)
+        self.assertNotIn("Publish generated marketplace", workflow)
+        self.assertNotIn("git push", workflow)
+        self.assertNotIn("[skip codex-marketplace]", workflow)
+
+    def test_historical_visual_packet_is_manual_only(self) -> None:
+        workflow = (REPO_ROOT / ".github/workflows/research-presentation-visual-packet.yml").read_text(encoding="utf-8")
+        self.assertIn("workflow_dispatch:", workflow)
+        self.assertNotIn("\n  push:", workflow)
+        self.assertIn("pages: write", workflow)
+
     def test_repository_config_keeps_cardiacnexus_out_of_marketplace(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         plugin_names = [plugin["name"] for plugin in data["plugins"]]

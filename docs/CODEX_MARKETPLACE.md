@@ -101,22 +101,28 @@ If a PR check fails after marketplace generation, the usual cause is that
 `.agents/plugins/marketplace.json` or `plugins/codex/plugins/` was not
 regenerated and committed.
 
-## Release Workflow
+## Integration / Release Gate
 
-The `.github/workflows/codex-marketplace.yml` workflow runs on pull requests,
-pushes to `main`, and manual `workflow_dispatch`.
+The `.github/workflows/codex-marketplace.yml` workflow is a heavyweight
+integration/release gate. It runs on pull requests and explicit
+`workflow_dispatch`. Ordinary pushes to `main` or `reviewed/**` do not launch
+the full matrix.
 
-Pull requests only check the generated layer and fail if the root manifest or
-plugin payload is out of date. Pushes to `main` and manual runs regenerate and
-validate the layer; if `.agents/plugins/marketplace.json` or
-`plugins/codex/plugins/` changes, the workflow commits the generated files back with:
+The workflow is read-only. It regenerates and validates the generated layer in
+the runner, then fails if `.agents/plugins/marketplace.json` or
+`plugins/codex/plugins/` would change. Canonical generated files must be
+produced by the Executor before commit:
 
-```text
-chore: publish codex marketplace [skip codex-marketplace]
+```bash
+python3 scripts/build_codex_marketplace.py --write
+git diff
+git add .agents/plugins/marketplace.json plugins/codex/plugins
+git commit
 ```
 
-The skip marker prevents the follow-up workflow run from creating another
-publish commit.
+CI must not push a generated commit back to the repository. This prevents a
+push -> generated commit -> second CI loop and keeps generated parity as a
+verification gate, not an automation side effect.
 
 ## Metadata Rules
 

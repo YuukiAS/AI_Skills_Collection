@@ -82,6 +82,23 @@ automatic paid retries: 0
 
 如果当前 Text Review / Visual Review runtime 尚不能证明 persistent pre-request reservation、worst-case budget fuse、billing/quota zero-retry 和 candidate-only/visual-input-only 边界，则先修 review infrastructure，不得让高成本业务 task 一边依赖已知不安全的 paid review path 一边继续执行。
 
+### GitHub CI lifecycle planning
+
+Full CI is a phase gate, not a per-commit ritual. Planner must separate:
+
+```text
+development-local tests
+final GitHub integration/release CI
+```
+
+Do not write a normal implementation loop that waits for full GitHub Actions
+after every push. Heavyweight full/release/integration workflows, including the
+Codex Marketplace full matrix, should run only after an implementation
+candidate is frozen or through pull-request/release gates. `ci_required=true`
+means: candidate frozen -> explicit full CI dispatch on the task branch -> PASS
+-> Reviewer/integration. Cheap automatic push CI is allowed only when it is
+zero-paid, path-scoped, read-only, and directly relevant to the changed area.
+
 Planner / Reviewer 能依据 frozen requirement 明确判断的问题，不得外包给用户；不得推给 `AWAIT_HUMAN_DECISION`。明显违反用户明确规则、明显机器腔、明显 layout failure、明显 artifact regression 应冻结为 Reviewer 必须自行 `REVISE` 或在不可恢复时 `BLOCKED` 的条件。Human gate 默认只用于真正互斥的产品/科研选择、frozen criteria 无法决定的主观偏好、用户必须亲自授权的外部动作、显著风险/成本/隐私/许可决定，或 frozen Plan 明确要求的最终人工验收。
 
 044 是必须覆盖的真实回归：用户报告完整 private `rewritten_report.md` 仍有 `provenance`、`estimand`、`scientific gap`、`resource contract`、`state of the art` 等 reader-facing 表达，违反 frozen writing requirement；Reviewer 因未读取完整 artifact 仍给 PASS。后续同类 writing/report/artifact 任务必须先证明 Reviewer 实际读取最终 artifact，不能用摘要或 process PASS 推导 product PASS。

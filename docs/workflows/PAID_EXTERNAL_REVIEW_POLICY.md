@@ -188,3 +188,18 @@ External Terra PASS 只是独立 review evidence，不拥有产品最终裁决�
 - 普通 Codex/plugin generation 不产生额外 API 账单。
 
 如果旧 workflow 与本政策冲突，先迁移 workflow，再启动依赖它的新高成本 task。不得一边知道成本保护尚未完成，一边继续 live paid replay。
+
+## 11. CI 生命周期
+
+Paid review policy 与 CI 生命周期是同一个安全边界的一部分：普通 push 不应启动昂贵、全库、会写回 repository 或可能产生账单的工作。
+
+允许 ordinary push 自动运行的 workflow 必须同时满足：
+
+- zero paid API；
+- cheap；
+- strongly path-scoped；
+- failure 与当前 changed area 直接相关；
+- read-only，不 commit/push repository；
+- 不运行全库 heavyweight matrix。
+
+Codex Marketplace full matrix、release smoke、Windows sparse checkout、Linux/Windows editable install smoke、以及任何 Terra/OpenAI paid review 都是 explicit gate，不是每个 commit 的默认仪式。`ci_required=true` 的 Reviewed Handoff 语义是 implementation candidate frozen 后显式 dispatch task branch 的 full CI，PASS 后再进入 Reviewer / integration。

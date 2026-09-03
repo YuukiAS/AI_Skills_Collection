@@ -65,9 +65,13 @@ Executor 没有 Planner/Reviewer authority。不得修改：
 
 `RESULT.md` 必须区分 `PROCESS PASS` 和 `PRODUCT / ARTIFACT PASS`。CI、schema、protected-span、本地测试或 Executor summary 只能证明 process gate；不能替代最终 artifact 本身。Private/text artifact review 的底层 owner 是 `GPT_Codex_AI_Bridge_Kit` 的 Text Review；046 不自行实现另一套 artifact transport/reviewer。若 private/text artifact 不能提交到 repo 且 Bridge Kit Text Review evidence 尚不可用，优先询问用户或进入 `NEEDS_GPT_PLANNER` / `WAITING_FOR_EVIDENCE / NEEDS_REVIEW` 语义，不要把缺 artifact 的任务交成可 PASS 状态。
 
+任何 external paid review invocation 都必须先满足冻结付费上下文：Plan 已证明 external independence 的必要性，且明确写出 model、max paid calls、per-call worst-case ceiling、campaign hard budget、manual trigger、retry policy、candidate/source/intermediate boundary。缺少这些上下文，或 runtime 不能证明 persistent pre-request reservation、worst-case budget fuse、billing/quota zero-retry、no secret fallback 和 visual-input-only/no-tools 边界时，Executor 必须拒绝调用付费 review，并返回 Planner/用户处理。不得用旧 archived-project key、另一个 review secret、普通 `OPENAI_API_KEY` 或 workflow rerun 绕过本 task campaign budget。
+
 044 回归边界：不要修改 044 科研正文，但要防止同类交接再次发生。用户已报告 private `rewritten_report.md` 仍有 `provenance`、`estimand`、`scientific gap`、`resource contract`、`state of the art` 等 reader-facing 表达，违反 frozen writing requirement；以后这类 writing/report 任务交接必须让 Reviewer 能读完整 artifact，而不是只读摘要。
 
 如果 `CURRENT.ci_required=true`，Executor **不能伪造或等待尚未发布 commit 的 GitHub CI**。此时把 `ci_status` 保持为 `PENDING`，最终状态写成 `WAITING_FOR_CI`。当前 task branch 的 authorized publisher 发布 clean commits 后，Scheduled GPT 会读取该 branch 的真实 GitHub checks：PASS 才进入 `READY_FOR_GPT_REVIEW`；FAIL 会作为一条真实 GPT `REVISE` finding 进入返修流程。
+
+`ci_required=true` 不表示每个 implementation commit 都要自动等待 full GitHub Actions。正确节奏是：本地 deterministic tests 先通过，candidate frozen 后显式 dispatch task branch 的 heavyweight full/integration CI，再由外部 Reviewer/集成流程消费真实 CI 结果。普通 push 只能触发 zero-paid、cheap、path-scoped、read-only 且与 changed area 直接相关的检查；不得依赖 full matrix 的 per-commit 自动运行作为普通开发循环。
 
 如果 `CURRENT.ci_required=false`，本地 acceptance/regression gates 满足后直接进入 `READY_FOR_GPT_REVIEW`，`ci_status` 保持 `NOT_REQUIRED`（或已有合法 PASS）。
 

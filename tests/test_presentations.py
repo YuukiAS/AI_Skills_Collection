@@ -2702,7 +2702,7 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(manifest["review_kind"], "research-presentation-four-page-smoke")
             self.assertEqual(manifest["privacy_policy"], "PUBLIC_SAFE_ONLY")
             bindings = manifest["identity_bindings"]
-            self.assertEqual(bindings["bridge_kit_commit"], "f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e")
+            self.assertEqual(bindings["bridge_kit_commit"], "3d73572a6476f925745cfb873e48057c21be3502")
             self.assertEqual(bindings["legacy_task_key"], "011_round_handoff")
             self.assertEqual(bindings["source_render_status"], "ok")
             self.assertEqual(bindings["source_mechanical_status"], "MECHANICAL_PASS")

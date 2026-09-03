@@ -11,25 +11,24 @@ on:
         description: Repository-relative VISUAL_REVIEW.json output path
         required: true
         default: results/001_task/visual_review/VISUAL_REVIEW.json
-  push:
-    branches:
-      - main
-      - 'reviewed/**'
-    paths:
-      - 'results/**/visual_review/visual_inputs.json'
 
 permissions:
   contents: write
+
+concurrency:
+  group: ai-bridge-paid-review-${{ github.repository }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   visual-review:
     runs-on: ubuntu-latest
     env:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_VISUAL_REVIEW_API_KEY }}
-      OPENAI_VISUAL_REVIEW_MODEL: ${{ vars.OPENAI_VISUAL_REVIEW_MODEL }}
+      OPENAI_VISUAL_REVIEW_API_KEY: ${{ secrets.OPENAI_VISUAL_REVIEW_API_KEY }}
+      OPENAI_VISUAL_REVIEW_MODEL: gpt-5.6-terra
       AI_BRIDGE_VISUAL_REVIEW_MANIFEST: ${{ github.event.inputs.manifest }}
       AI_BRIDGE_VISUAL_REVIEW_OUTPUT: ${{ github.event.inputs.output }}
-      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@9e8ab90fb13e92d268b08ad7fc7aa64ed9f9877a
+      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@3d73572a6476f925745cfb873e48057c21be3502
+      AI_BRIDGE_PAID_REVIEW_GIT_RESERVE: "1"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -47,17 +46,8 @@ jobs:
         run: |
           set -euo pipefail
           if [ -z "${AI_BRIDGE_VISUAL_REVIEW_MANIFEST}" ]; then
-            mapfile -t manifests < <(git diff-tree --no-commit-id --name-only -r "${GITHUB_SHA}" | grep '^results/.*/visual_review/visual_inputs[.]json$' || true)
-            if [ "${#manifests[@]}" -eq 0 ]; then
-              echo "No visual review manifest changed; not required."
-              echo "AI_BRIDGE_VISUAL_REVIEW_SKIP=1" >> "$GITHUB_ENV"
-              exit 0
-            fi
-            if [ "${#manifests[@]}" -gt 1 ]; then
-              echo "Multiple visual review manifests changed; dispatch manually with one manifest."
-              exit 1
-            fi
-            AI_BRIDGE_VISUAL_REVIEW_MANIFEST="${manifests[0]}"
+            echo "AI_BRIDGE_VISUAL_REVIEW_MANIFEST is required for explicit paid visual review."
+            exit 1
           fi
           if [ -z "${AI_BRIDGE_VISUAL_REVIEW_OUTPUT}" ]; then
             AI_BRIDGE_VISUAL_REVIEW_OUTPUT="$(dirname "${AI_BRIDGE_VISUAL_REVIEW_MANIFEST}")/VISUAL_REVIEW.json"
@@ -69,10 +59,9 @@ jobs:
         if: env.AI_BRIDGE_VISUAL_REVIEW_SKIP != '1'
         shell: bash
         run: |
-          if [ -z "${OPENAI_API_KEY}" ]; then
-            echo "OPENAI_VISUAL_REVIEW_API_KEY is not configured; skipping live visual review."
-            echo "AI_BRIDGE_VISUAL_REVIEW_SKIP=1" >> "$GITHUB_ENV"
-            exit 0
+          if [ -z "${OPENAI_VISUAL_REVIEW_API_KEY}" ]; then
+            echo "OPENAI_VISUAL_REVIEW_API_KEY is not configured; cannot run live visual review."
+            exit 1
           fi
 
       - name: Run visual review
@@ -80,9 +69,8 @@ jobs:
         shell: bash
         run: |
           if [ -z "${AI_BRIDGE_VISUAL_REVIEW_MANIFEST}" ] || [ -z "${AI_BRIDGE_VISUAL_REVIEW_OUTPUT}" ]; then
-            echo "Visual review manifest/output path is not configured; skipping live visual review."
-            echo "AI_BRIDGE_VISUAL_REVIEW_SKIP=1" >> "$GITHUB_ENV"
-            exit 0
+            echo "Visual review manifest/output path is not configured; cannot run live visual review."
+            exit 1
           fi
           ai-bridge visual-review run \
             --target . \

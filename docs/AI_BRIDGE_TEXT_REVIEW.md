@@ -39,16 +39,19 @@ does not print the secret value.
 If `gh` permissions are unavailable, configure exactly this GitHub Secret
 manually. Do not paste the secret into chat or commit it to the repository.
 
-OpenAI key precedence in CI is:
+OpenAI key contract in AI_Skills CI is:
 
 ```text
 OPENAI_REVIEW_API_KEY
-OPENAI_VISUAL_REVIEW_API_KEY
 ```
 
-The second name preserves compatibility with repositories that already
-configured Visual Review. The model default is `gpt-5.6-terra`; override only
-with `OPENAI_TEXT_REVIEW_MODEL` or CLI `--model`.
+Text Review must not fall back to `OPENAI_VISUAL_REVIEW_API_KEY`. The production
+model is `gpt-5.6-terra`; AI_Skills workflows pin this explicitly so a stale
+repository variable cannot redirect paid review to another model.
+
+Live Text Review is manual-only. It may be run only through an explicit
+`workflow_dispatch` target with a task-local campaign budget. Ordinary push,
+manifest commits and evidence commits must not call OpenAI.
 
 Encrypt a private artifact from the user machine:
 
@@ -65,4 +68,7 @@ ai-bridge text-review encrypt \
 ```
 
 The `TEXT_REVIEW.json` evidence contains SHA-256 bindings and structured
-findings, not the private plaintext.
+findings, not the private plaintext. The adjacent
+`results/<task_key>/paid_review_budget.json` records the persistent worst-case
+reservation receipt: max 2 paid calls, USD 0.50 campaign ceiling, USD 0.25
+per-request ceiling, and zero automatic paid retry.
