@@ -12,7 +12,7 @@ This is not a PASS, release, or integration closure. It is a credential/account 
 - The dirty 044 local working tree was preserved in snapshot commit `5f808d6bce51da7f97a5ddf6bded7935da6390f5`.
 - AI_Skills paid review workflows were migrated to explicit manual invocation only.
 - Cross-secret fallback was removed.
-- Paid review workflows now pin Bridge Kit `dfb453e77829b8e868de9bf48c9cedc22e6365ea`.
+- Paid review workflows now pin Bridge Kit `b185c1f3bd96f26c3e8af80a741e96775eca8e78`.
 - Text/Visual review model resolution is pinned to `gpt-5.6-terra`.
 - Presentation-specific paid visual workflows now use the shared persistent paid-review reservation guard.
 - Codex Marketplace full CI is an explicit PR/manual integration gate and no longer writes commits.
@@ -51,12 +51,12 @@ Local evidence:
 - Marketplace generation/validation/path budget check passed.
 - `scripts/skills.py validate` passed.
 - `scripts/skills.py audit --all` passed.
-- Bridge Kit pinned-commit companion tests passed: 37 tests.
+- Bridge Kit pinned-commit companion tests passed: 42 tests.
 
 Required recovery path:
 
-1. Fix `AI_Research_Review` project credit/billing for the new restricted keys.
-2. Resume the frozen smoke from shared campaign `infra_paid_review_safety_migration_20260903_live_smoke` without deleting existing reservation evidence or broadening model capability.
+1. Rerun the same Text Review request from shared campaign `infra_paid_review_safety_migration_20260903_live_smoke`; it must reuse the existing zero-billing reservation rather than create call 2.
+2. If Text PASS writes actual usage, run the Visual Review image-input smoke as call 2 in the same campaign.
 3. Complete one Text Review and one Visual Review image-input smoke within max calls 2, campaign budget <= $0.50, and per-request worst case <= $0.25.
 4. Dispatch the full Codex Marketplace integration gate explicitly.
 5. Integrate the migration to latest `main` only after live smoke and full gate PASS.
@@ -69,5 +69,5 @@ Required recovery path:
 - implementation_evidence_tip: `119dc40e50beb1c50c1bc9c4a896975902f5c405`
 - latest_main_used: `7b08b6a24c7a371cc137a99297a8f40ca573c5fd`
 - first_published_handoff_tip: `5972a302721759354859bafc99dd7459143b17b2`
-- bridge_kit_paid_review_commit: `dfb453e77829b8e868de9bf48c9cedc22e6365ea`
+- bridge_kit_paid_review_commit: `b185c1f3bd96f26c3e8af80a741e96775eca8e78`
 - result artifact: `results/infra_paid_review_safety_migration_20260903/RESULT.md`

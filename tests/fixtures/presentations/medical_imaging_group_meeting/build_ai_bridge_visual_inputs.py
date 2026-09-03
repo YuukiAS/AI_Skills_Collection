@@ -15,7 +15,7 @@ REPO_ROOT = Path(__file__).resolve().parents[4]
 FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures" / "presentations" / "medical_imaging_group_meeting"
 PACKET_SOURCE = FIXTURE_ROOT / "visual_review_packet_source"
 DEFAULT_TASK_KEY = "017_medical_imaging_group_meeting_benchmark"
-BRIDGE_KIT_COMMIT = "dfb453e77829b8e868de9bf48c9cedc22e6365ea"
+BRIDGE_KIT_COMMIT = "b185c1f3bd96f26c3e8af80a741e96775eca8e78"
 
 
 def sha256(path: Path) -> str:
