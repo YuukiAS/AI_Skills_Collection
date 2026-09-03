@@ -1,0 +1,20 @@
+{
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "task_key": "050_writing_style_host_codex_runtime",
+  "state": "PLAN_FROZEN",
+  "review_round": 0,
+  "max_review_rounds": 2,
+  "plan_revision": 0,
+  "max_plan_revisions": 1,
+  "base_commit": "19d7ba6f1a2a8752adfa4e7c11d3ebe9ed318070",
+  "base_branch": "reviewed/049_writing_style_multistage_production_runtime",
+  "implementation_commit": null,
+  "ci_required": true,
+  "ci_status": "PENDING",
+  "last_review_decision": null,
+  "review_limit_reached": false,
+  "human_gate_reason": null,
+  "visual_review_required": false,
+  "text_review_required": false,
+  "next_action": "CODEX_EXECUTOR_IMPLEMENT_050_HOST_CODEX_RUNTIME_AND_STOP_AT_STYLE_SMOKE_GATE"
+}
