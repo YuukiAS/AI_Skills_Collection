@@ -12,7 +12,7 @@ Current status: AWAIT_HUMAN_DECISION.
 
 Implementation commit: `a8d249c01a32004b1de198801a36e3791a40b239`.
 Latest main used: `7b08b6a24c7a371cc137a99297a8f40ca573c5fd`.
-Bridge Kit paid-review commit: `3d73572a6476f925745cfb873e48057c21be3502`.
+Bridge Kit paid-review commit: `dfb453e77829b8e868de9bf48c9cedc22e6365ea`.
 
 ### Branch hygiene
 
@@ -58,7 +58,7 @@ Remote heads after cleanup:
 - The `OPENAI_REVIEW_API_KEY || OPENAI_VISUAL_REVIEW_API_KEY` fallback was removed.
 - Text Review keeps `OPENAI_REVIEW_API_KEY`; Visual Review keeps `OPENAI_VISUAL_REVIEW_API_KEY`.
 - Text and Visual Review production model resolution is pinned to `gpt-5.6-terra` in workflow env, not stale repository variables.
-- All paid review workflows pin Bridge Kit commit `3d73572a6476f925745cfb873e48057c21be3502` and set `AI_BRIDGE_PAID_REVIEW_GIT_RESERVE=1`.
+- All paid review workflows pin Bridge Kit commit `dfb453e77829b8e868de9bf48c9cedc22e6365ea` and set `AI_BRIDGE_PAID_REVIEW_GIT_RESERVE=1`.
 - Presentation-specific paid visual workflows were migrated to manual-only, no generic `OPENAI_API_KEY` mapping, and the same paid campaign reservation guard.
 - Codex Marketplace full workflow is now a PR/manual integration gate, not an ordinary push workflow.
 - Codex Marketplace CI is read-only and no longer commits/pushes generated marketplace payload.
@@ -81,8 +81,8 @@ AI_Skills tests and validation:
 
 Bridge Kit pinned-commit companion evidence:
 
-- Detached worktree at `3d73572a6476f925745cfb873e48057c21be3502`
-- `python3 -m unittest tests.test_paid_review tests.test_text_review tests.test_visual_review` -> PASS, 33 tests
+- Detached worktree at `dfb453e77829b8e868de9bf48c9cedc22e6365ea`
+- `python3 -m unittest tests.test_paid_review tests.test_text_review tests.test_visual_review` -> PASS, 37 tests
 
 No live OpenAI call was made during this implementation phase.
 

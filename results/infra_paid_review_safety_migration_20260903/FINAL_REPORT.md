@@ -12,7 +12,7 @@ This is not a PASS, release, or integration closure. It is a credential handoff 
 - The dirty 044 local working tree was preserved in snapshot commit `5f808d6bce51da7f97a5ddf6bded7935da6390f5`.
 - AI_Skills paid review workflows were migrated to explicit manual invocation only.
 - Cross-secret fallback was removed.
-- Paid review workflows now pin Bridge Kit `3d73572a6476f925745cfb873e48057c21be3502`.
+- Paid review workflows now pin Bridge Kit `dfb453e77829b8e868de9bf48c9cedc22e6365ea`.
 - Text/Visual review model resolution is pinned to `gpt-5.6-terra`.
 - Presentation-specific paid visual workflows now use the shared persistent paid-review reservation guard.
 - Codex Marketplace full CI is an explicit PR/manual integration gate and no longer writes commits.
@@ -46,7 +46,7 @@ Local evidence:
 - Marketplace generation/validation/path budget check passed.
 - `scripts/skills.py validate` passed.
 - `scripts/skills.py audit --all` passed.
-- Bridge Kit pinned-commit companion tests passed: 33 tests.
+- Bridge Kit pinned-commit companion tests passed: 37 tests.
 
 Required recovery path:
 
@@ -64,5 +64,5 @@ Required recovery path:
 - implementation_commit: `a8d249c01a32004b1de198801a36e3791a40b239`
 - latest_main_used: `7b08b6a24c7a371cc137a99297a8f40ca573c5fd`
 - first_published_handoff_tip: `5972a302721759354859bafc99dd7459143b17b2`
-- bridge_kit_paid_review_commit: `3d73572a6476f925745cfb873e48057c21be3502`
+- bridge_kit_paid_review_commit: `dfb453e77829b8e868de9bf48c9cedc22e6365ea`
 - result artifact: `results/infra_paid_review_safety_migration_20260903/RESULT.md`

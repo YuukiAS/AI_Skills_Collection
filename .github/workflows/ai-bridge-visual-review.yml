@@ -32,7 +32,7 @@ jobs:
       AI_BRIDGE_VISUAL_REVIEW_MANIFEST: ${{ github.event.inputs.manifest }}
       AI_BRIDGE_VISUAL_REVIEW_OUTPUT: ${{ github.event.inputs.output }}
       AI_BRIDGE_INPUT_TOKENS_PREFLIGHT_ONLY: ${{ github.event.inputs.input_tokens_preflight_only }}
-      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@3d73572a6476f925745cfb873e48057c21be3502
+      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@dfb453e77829b8e868de9bf48c9cedc22e6365ea
       AI_BRIDGE_PAID_REVIEW_GIT_RESERVE: "1"
     steps:
       - uses: actions/checkout@v4
