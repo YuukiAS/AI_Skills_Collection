@@ -1,20 +1,20 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "infra_paid_review_safety_migration_20260903",
-  "state": "PLAN_FROZEN",
+  "state": "AWAIT_HUMAN_DECISION",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
   "max_plan_revisions": 1,
   "base_commit": "b80bde2479b41aea334e5156a8f5069c6d343adb",
   "base_branch": "main",
-  "implementation_commit": null,
+  "implementation_commit": "a8d249c01a32004b1de198801a36e3791a40b239",
   "ci_required": true,
   "ci_status": "PENDING",
   "last_review_decision": null,
   "review_limit_reached": false,
-  "human_gate_reason": null,
+  "human_gate_reason": "PLANNER_DECISION",
   "visual_review_required": false,
   "text_review_required": false,
-  "next_action": "CODEX_EXECUTOR_AUDIT_AND_MIGRATE_PAID_TEXT_VISUAL_REVIEW_SAFETY_BEFORE_050"
+  "next_action": "USER_CONFIRM_OPENAI_REVIEW_API_KEY_AND_OPENAI_VISUAL_REVIEW_API_KEY_ARE_NEW_AI_RESEARCH_REVIEW_PROJECT_KEYS_THEN_EXPLICIT_LIVE_TEXT_AND_VISUAL_SMOKE_WITH_SHARED_MAX_2_CALL_050_BUDGET"
 }

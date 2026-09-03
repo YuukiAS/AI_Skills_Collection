@@ -6,6 +6,30 @@ decision: PLAN_FROZEN
 
 # Paid external review safety migration
 
+## Objective and value
+
+Make paid Text Review and Visual Review explicit, bounded infrastructure gates rather than hidden automatic production dependencies. The migration must also reduce GitHub Actions noise by turning heavyweight full CI into a lifecycle gate instead of a per-commit ritual.
+
+## Frozen decisions
+
+The migration is bounded by the pass-by-pass contract below. It must preserve separate `OPENAI_REVIEW_API_KEY` and `OPENAI_VISUAL_REVIEW_API_KEY` names, remove cross-secret fallback, pin paid review to `gpt-5.6-terra`, use the exact Bridge Kit paid-review safety implementation, and keep 050 blocked until this repo-wide migration is integrated.
+
+## Implementation scope
+
+Scope is limited to AI_Skills paid-review workflow consumers, paid-review documentation, Reviewed Handoff Planner/Executor policy, CI lifecycle policy, deterministic regression tests, Bridge Kit pinning, and canonical Presentation TODO consolidation required to restore the full Marketplace gate.
+
+## Acceptance and regression gates
+
+The acceptance gates are the failure list, red-team checks, deterministic tests, live-smoke conditions, CI lifecycle requirements, and integration/050 gate specified below. Ordinary push must make zero paid OpenAI calls, full Marketplace CI must be explicit PR/manual gate, and CI must not write repository commits.
+
+## Natural-language usage / routing expectations
+
+An Executor may use local deterministic tests during development. A paid external review is only requested when a frozen Plan includes a bounded campaign budget and an explicit manual review invocation. Full GitHub Marketplace CI is dispatched after an implementation candidate is frozen, not after every ordinary commit.
+
+## Out of scope
+
+Do not execute 050 writing rewrite, do not run private 050 smoke, do not bring back 049 Terra-per-stage behavior, do not use old archived-project API keys, do not add a new Reviewed Handoff state machine, and do not version bump unless canonical version policy and Planner require it.
+
 ## Pass 1 — Product
 
 ### Final behavior
