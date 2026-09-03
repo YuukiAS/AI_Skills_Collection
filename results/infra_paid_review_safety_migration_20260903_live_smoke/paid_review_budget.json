@@ -1,0 +1,53 @@
+{
+  "campaign_identity": "infra_paid_review_safety_migration_20260903_live_smoke",
+  "contract": {
+    "automatic_paid_retries": 0,
+    "campaign_reserved_cost_hard_ceiling_usd": "0.500000",
+    "max_paid_calls": 2,
+    "model": "gpt-5.6-terra",
+    "per_call_worst_case_ceiling_usd": "0.250000",
+    "pricing": {
+      "cache_write_input_usd_per_1m_tokens": "2.500000",
+      "cached_input_usd_per_1m_tokens": "0.200000",
+      "input_usd_per_1m_tokens": "2.000000",
+      "model": "gpt-5.6-terra",
+      "output_usd_per_1m_tokens": "12.000000",
+      "reviewed_on": "2026-09-03",
+      "runtime_uses_worst_case_input_price": true,
+      "worst_case_input_usd_per_1m_tokens": "2.500000"
+    }
+  },
+  "reservations": [
+    {
+      "automatic_paid_retries": 0,
+      "call_number": 1,
+      "cumulative_reserved_cost_usd": "0.049760",
+      "input_token_preflight": {
+        "endpoint": "/responses/input_tokens",
+        "input_tokens": 243,
+        "raw_response": {
+          "input_tokens": 243,
+          "object": "response.input_tokens"
+        }
+      },
+      "max_output_tokens": 4096,
+      "model": "gpt-5.6-terra",
+      "pricing": {
+        "cache_write_input_usd_per_1m_tokens": "2.500000",
+        "cached_input_usd_per_1m_tokens": "0.200000",
+        "input_usd_per_1m_tokens": "2.000000",
+        "model": "gpt-5.6-terra",
+        "output_usd_per_1m_tokens": "12.000000",
+        "reviewed_on": "2026-09-03",
+        "runtime_uses_worst_case_input_price": true,
+        "worst_case_input_usd_per_1m_tokens": "2.500000"
+      },
+      "request_sha256": "0b81f840d310cfc6c01243304ba80517c6758b1702e9fa2a1e5319a36637d2b3",
+      "reservation_id": "infra_paid_review_safety_migration_20260903_live_smoke-1-0b81f840d310",
+      "reserved_at": "2026-09-03T10:56:47Z",
+      "review_type": "text_review",
+      "worst_case_reserved_cost_usd": "0.049760"
+    }
+  ],
+  "schema": "AI_BRIDGE_PAID_REVIEW_BUDGET_V1"
+}
