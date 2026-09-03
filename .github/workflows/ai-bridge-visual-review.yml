@@ -65,7 +65,6 @@ jobs:
           payload = {
               "model": os.environ["OPENAI_VISUAL_REVIEW_MODEL"],
               "input": "Return exactly: ok",
-              "max_output_tokens": 16,
           }
           request = urllib.request.Request(
               "https://api.openai.com/v1/responses/input_tokens",
