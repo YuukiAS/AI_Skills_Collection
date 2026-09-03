@@ -1,0 +1,195 @@
+{
+  "blocking_findings": [],
+  "created_at": "2026-09-03T11:13:30Z",
+  "encrypted_payload": {
+    "path": "results/infra_paid_review_safety_migration_20260903/text_review/payload.age",
+    "sha256": "8f329882d516d58449bf4239718e69f1428c86773d60f3f1f552ff26216e25a4"
+  },
+  "evidence_id": "text-review-infra_paid_review_safety_migration_20260903-df8064698e4d",
+  "input_manifest": {
+    "identity_bindings": {
+      "implementation_commit": "875f861ff95e937faa80b0e83d151c98b9b5974d"
+    },
+    "manifest_sha256": "df8064698e4d2bbd2901c57a226eb562afeaa3f0e8b344a00f0a7e848808099d",
+    "privacy_policy": "PUBLIC_SAFE_ONLY",
+    "rubric": {
+      "instructions": "Return PASS only if the supplied public-safe text explicitly states this is a paid review migration smoke and that ordinary push must make zero OpenAI calls. Return REVISE for any contradiction."
+    },
+    "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "PASS",
+      "item_id": "primary_text",
+      "requirement_ids": [
+        "paid-review-migration-live-smoke"
+      ],
+      "summary": "Explicitly identifies a “paid review migration smoke” and states that “ordinary push must make zero OpenAI calls.”"
+    }
+  ],
+  "model": "gpt-5.6-terra",
+  "non_blocking_notes": [],
+  "overall_decision": "PASS",
+  "paid_review": {
+    "actual_cost_status": "ACCOUNTING_VERIFIED",
+    "actual_cost_tokens": {
+      "cache_write_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 437,
+      "output_tokens": 124,
+      "uncached_input_tokens": 437
+    },
+    "actual_model_cost_usd": "0.002362",
+    "actual_response_usage": {
+      "input_tokens": 437,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 0
+      },
+      "output_tokens": 124,
+      "output_tokens_details": {
+        "reasoning_tokens": 42
+      },
+      "total_tokens": 561
+    },
+    "call_reservation": {
+      "actual_cost_status": "ZERO_BILLING_FAILURE",
+      "actual_cost_tokens": {
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "uncached_input_tokens": 0
+      },
+      "actual_model_cost_usd": "0.000000",
+      "automatic_paid_retries": 0,
+      "call_number": 1,
+      "cumulative_reserved_cost_usd": "0.049760",
+      "failure": {
+        "automatic_paid_retry": false,
+        "failure_class": "ZERO_BILLING_FAILURE",
+        "github_run_id": "33746976670",
+        "http_status": "429",
+        "openai_error_code": "credit_balance_exhausted",
+        "reservation_preserved": true,
+        "retry_requires_explicit_human_resume": true
+      },
+      "input_token_preflight": {
+        "endpoint": "/responses/input_tokens",
+        "input_tokens": 243,
+        "raw_response": {
+          "input_tokens": 243,
+          "object": "response.input_tokens"
+        }
+      },
+      "max_output_tokens": 4096,
+      "model": "gpt-5.6-terra",
+      "pricing": {
+        "cache_write_input_usd_per_1m_tokens": "2.500000",
+        "cached_input_usd_per_1m_tokens": "0.200000",
+        "input_usd_per_1m_tokens": "2.000000",
+        "model": "gpt-5.6-terra",
+        "output_usd_per_1m_tokens": "12.000000",
+        "reviewed_on": "2026-09-03",
+        "runtime_uses_worst_case_input_price": true,
+        "worst_case_input_usd_per_1m_tokens": "2.500000"
+      },
+      "request_sha256": "0b81f840d310cfc6c01243304ba80517c6758b1702e9fa2a1e5319a36637d2b3",
+      "reservation_id": "infra_paid_review_safety_migration_20260903_live_smoke-1-0b81f840d310",
+      "reserved_at": "2026-09-03T10:56:47Z",
+      "review_type": "text_review",
+      "worst_case_reserved_cost_usd": "0.049760"
+    },
+    "call_reservations": [
+      {
+        "actual_cost_status": "ZERO_BILLING_FAILURE",
+        "actual_cost_tokens": {
+          "cache_write_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "uncached_input_tokens": 0
+        },
+        "actual_model_cost_usd": "0.000000",
+        "automatic_paid_retries": 0,
+        "call_number": 1,
+        "cumulative_reserved_cost_usd": "0.049760",
+        "failure": {
+          "automatic_paid_retry": false,
+          "failure_class": "ZERO_BILLING_FAILURE",
+          "github_run_id": "33746976670",
+          "http_status": "429",
+          "openai_error_code": "credit_balance_exhausted",
+          "reservation_preserved": true,
+          "retry_requires_explicit_human_resume": true
+        },
+        "input_token_preflight": {
+          "endpoint": "/responses/input_tokens",
+          "input_tokens": 243,
+          "raw_response": {
+            "input_tokens": 243,
+            "object": "response.input_tokens"
+          }
+        },
+        "max_output_tokens": 4096,
+        "model": "gpt-5.6-terra",
+        "pricing": {
+          "cache_write_input_usd_per_1m_tokens": "2.500000",
+          "cached_input_usd_per_1m_tokens": "0.200000",
+          "input_usd_per_1m_tokens": "2.000000",
+          "model": "gpt-5.6-terra",
+          "output_usd_per_1m_tokens": "12.000000",
+          "reviewed_on": "2026-09-03",
+          "runtime_uses_worst_case_input_price": true,
+          "worst_case_input_usd_per_1m_tokens": "2.500000"
+        },
+        "request_sha256": "0b81f840d310cfc6c01243304ba80517c6758b1702e9fa2a1e5319a36637d2b3",
+        "reservation_id": "infra_paid_review_safety_migration_20260903_live_smoke-1-0b81f840d310",
+        "reserved_at": "2026-09-03T10:56:47Z",
+        "review_type": "text_review",
+        "worst_case_reserved_cost_usd": "0.049760"
+      }
+    ],
+    "campaign_identity": "infra_paid_review_safety_migration_20260903_live_smoke",
+    "contract": {
+      "automatic_paid_retries": 0,
+      "campaign_reserved_cost_hard_ceiling_usd": "0.500000",
+      "max_paid_calls": 2,
+      "model": "gpt-5.6-terra",
+      "per_call_worst_case_ceiling_usd": "0.250000",
+      "pricing": {
+        "cache_write_input_usd_per_1m_tokens": "2.500000",
+        "cached_input_usd_per_1m_tokens": "0.200000",
+        "input_usd_per_1m_tokens": "2.000000",
+        "model": "gpt-5.6-terra",
+        "output_usd_per_1m_tokens": "12.000000",
+        "reviewed_on": "2026-09-03",
+        "runtime_uses_worst_case_input_price": true,
+        "worst_case_input_usd_per_1m_tokens": "2.500000"
+      }
+    },
+    "cumulative_reserved_cost_usd": "0.049760",
+    "exact_input_token_preflight": {
+      "endpoint": "/responses/input_tokens",
+      "input_tokens": 243,
+      "raw_response": {
+        "input_tokens": 243,
+        "object": "response.input_tokens"
+      }
+    },
+    "model_identity": "gpt-5.6-terra",
+    "review_type": "text_review",
+    "schema": "AI_BRIDGE_PAID_REVIEW_RECEIPT_V1",
+    "worst_case_reserved_cost_usd": "0.049760"
+  },
+  "plaintext_artifact_sha256": "da1915db8b6baa93b9ce857cf737102d39915fe7a65cd5984c723e88adf72435",
+  "prompt_version": "ai-bridge.text-review.v1",
+  "review_identity": "df8064698e4d2bbd2901c57a226eb562afeaa3f0e8b344a00f0a7e848808099d",
+  "review_kind": "paid-review-migration-live-smoke",
+  "review_model": "gpt-5.6-terra",
+  "reviewed_input_identity": "df8064698e4d2bbd2901c57a226eb562afeaa3f0e8b344a00f0a7e848808099d",
+  "schema": "AI_BRIDGE_TEXT_REVIEW_V1",
+  "status": "PASS",
+  "task_key": "infra_paid_review_safety_migration_20260903",
+  "workflow_type": "reviewed_handoff"
+}
