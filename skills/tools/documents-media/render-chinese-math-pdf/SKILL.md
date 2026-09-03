@@ -1,6 +1,6 @@
 ---
 name: render-chinese-math-pdf
-description: Render and validate Chinese or mixed Chinese/English mathematical Markdown/LaTeX as PDF. Use for CJK text, Unicode math, equations, tables, Pandoc/XeLaTeX/LuaLaTeX, TeX font/cache failures, citation cleanup, or readable PDF QA.
+description: Render and validate Chinese or mixed Chinese/English mathematical Markdown/LaTeX as PDF. Use for CJK text, Unicode math, equations, tables, Pandoc/XeLaTeX, TeX font/cache failures, citation cleanup, or readable PDF QA.
 status: active
 provenance: user-authored
 trusted: false
@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: true
 secrets_needed:
-last_reviewed: 2026-07-02
+last_reviewed: 2026-09-01
 profile_tags:
 recommended_scope: global
 icon_small: assets/app-facing.svg
@@ -20,113 +20,96 @@ icon_large: assets/app-facing.svg
 
 Use this skill when the requested deliverable is a readable PDF from Chinese,
 mixed Chinese/English, or math-heavy Markdown/LaTeX, especially when the likely
-failure mode is CJK font setup, Unicode math, Pandoc/XeLaTeX/LuaLaTeX behavior,
-tables, citations, or PDF text readability.
+failure mode is CJK font setup, Unicode math, Pandoc/XeLaTeX behavior, tables,
+citations, or PDF text readability.
 
 Do not use this skill for general PDF text extraction, image-only OCR, or
-non-CJK documents unless the user specifically asks for the rendering QA
+non-CJK documents unless the user specifically asks for this rendering QA
 workflow.
+
+## Default Architecture
+
+The default renderer is strictly:
+
+```text
+Markdown -> Pandoc -> XeLaTeX -> PDF
+```
+
+The production entrypoint is the current host's
+`render_resources/chinese_math_pdf/scripts/render_markdown_pdf.sh`.
+
+The resource root is resolved in this order:
+
+1. `CHINESE_MATH_PDF_RESOURCE_DIRS`, split on `:`.
+2. A root explicitly given by the user or project command.
+3. `./render_resources/chinese_math_pdf` under the current project.
+4. `$HOME/render_resources/chinese_math_pdf`.
+5. Known host-local resource roots, preferring the one whose parent prefix
+   matches the current working directory:
+   `/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf`,
+   `/users/a/e/aereinh/render_resources/chinese_math_pdf`,
+   `/home/yuukias/render_resources/chinese_math_pdf`.
+
+Do not hardcode one host's resource root into reusable commands. Once the root
+is found, run its local scripts from that root.
+
+## Font Policy
+
+The default PDF fonts must come from bundle-local font files, not fontconfig or
+Windows mounts:
+
+- Latin main: TeX Gyre Termes regular, bold, italic, and bold italic from
+  `fonts/texgyre-termes/`.
+- Math: TeX Gyre Termes Math from `fonts/texgyre-termes-math/`.
+- CJK serif: Noto Serif SC regular and bold from
+  `texmf/fonts/opentype/public/noto-cjk/`.
+- CJK sans: Noto Sans SC regular and bold from
+  `texmf/fonts/opentype/public/noto-cjk/`.
+
+Do not use Times New Roman, `/mnt/c/Windows/Fonts`, `fc-match "Times New Roman"`,
+DejaVu, Liberation, or Fandol as default font sources. Fandol may remain in the
+bundle only as a legacy or emergency manual fallback.
 
 ## Workflow
 
-1. Locate the source document and project-local rendering assets before
-   compiling. Prefer repo-provided scripts, templates, Makefiles, fonts, or
-   `render_resources/chinese_math_pdf` directories when they exist.
-2. Probe the environment instead of assuming a host-specific TeX path:
-   `python scripts/probe_pdf_render_env.py --root <project-root> --pretty`.
-   Treat a usable `render_resources/chinese_math_pdf` bundle as a valid CJK
-   render route even when system `kpsewhich` cannot find `xeCJK` or `ctex`.
-   The probe is the local layer of this skill: it should find namespace-local
-   resources and overrides without baking private paths into the reusable skill.
-3. Choose the narrowest viable route:
-   - Existing project render command when documented and current.
-   - Project-local render resources for fonts, TeX headers, or `texmf`.
-   - Namespace-local render resources discovered by `CHINESE_MATH_PDF_RESOURCE_DIRS`
-     or `.config/ai-skills/local-overrides.toml`. Treat machine paths as local
-     facts from the probe, not as reusable skill requirements.
-   - For final reports, group-meeting PDFs, manuscripts, or anything where
-     font provenance matters, prefer Pandoc plus XeLaTeX with named fonts
-     (`TeX Gyre Termes` or another Times-compatible TeX font for Latin, and a
-     viewer-compatible CJK font such as Noto/Source Han/Droid fallback when
-     available). Do not require Times New Roman; it is not a portable Linux
-     dependency. Treat Fandol as a compact TeX fallback, not as automatically
-     final-standard on every viewer.
-   - Pandoc plus XeLaTeX for Markdown with CJK and conventional math when the
-     CJK font chain is known to render visibly.
-   - Pandoc HTML plus headless Chromium for Chinese Markdown when TeX CJK fonts
-     are missing, invisible, unstable, or taking repeated header tweaks. Use
-     `python scripts/render_markdown_pdf_chromium.py input.md output.pdf --root <project-root>`.
-     Treat this as an internal-report fallback unless visual QA confirms that
-     wide tables, equations, and font embedding are acceptable. Chrome/Skia may
-     embed local fonts as unnamed Type 3 fonts, so it is not the best route when
-     the deliverable must expose clean font names in `pdffonts`.
-   - Direct XeLaTeX/LuaLaTeX for already-authored `.tex`.
-   - Block with exact missing dependencies if no available route can render CJK
-     safely.
-4. Build in a disposable or project-appropriate output directory. Set writable
-   TeX cache variables when needed, for example `TEXMFVAR`, `TEXMFCONFIG`, and
-   `TEXMFCACHE`, so rendering does not fail on read-only home/cache paths.
-5. If a Pandoc header is needed, generate a portable starting point:
-   `python scripts/build_chinese_math_header.py --root <project-root> --output /tmp/chinese-math-header.tex`.
-   The helper should pick the same local resource bundle reported by the probe.
-   It should prefer viewer-compatible resource fonts such as Noto, Source Han,
-   or Droid over bundled Fandol when those files exist. Override fonts or
-   resource paths only after confirming they exist.
-6. Preserve source meaning. Do not delete equations, tables, references, or
-   Chinese prose to make compilation easier. If AI citation handles or private
-   placeholder characters are present, clean them using the citation cleanup
-   reference rather than inventing bibliography entries.
+1. Locate the source document and the active resource root before compiling.
+2. Probe the environment:
+   `python scripts/probe_pdf_render_env.py --root <project-root> --pretty`
+   when the script is available, plus `pandoc --version`, `xelatex --version`,
+   and `kpsewhich` checks when needed.
+3. Compile Markdown through the resource script:
+
+```bash
+<resource-root>/scripts/render_markdown_pdf.sh input.md output.pdf
+```
+
+4. For `.tex` sources, use XeLaTeX directly with the same `TEXMFHOME`,
+   `TEXMFVAR`, `TEXMFCONFIG`, `TEXMFCACHE`, and `OSFONTDIR` strategy used by
+   `render_markdown_pdf.sh`.
+5. If XeLaTeX or a required package/font is missing, report
+   `blocked_missing_dependency` with the exact missing dependency. Do not
+   silently switch to Chromium.
+6. If Pandoc + XeLaTeX fails, inspect the generated header/source or `.log` and
+   report the real LaTeX failure. Do not present a Chromium PDF as a successful
+   LaTeX build.
 7. Validate the produced PDF, not only the command exit code:
-   - `pdfinfo` for page count and metadata when available.
-   - `pdftotext -layout` for extractable Chinese, English, formula context,
-     abnormal CJK line fragmentation, and table row survival.
-   - `pdffonts` for embedded/subset fonts when available. For a final-standard
-     PDF, named TrueType/OpenType/CID fonts are preferred, and every obvious
-     CJK font used for Chinese text must report `uni yes`. If a CJK font such
-     as Fandol reports `uni no`, treat the PDF as viewer-risky even when
-     Poppler PNG previews or `pdftotext` look acceptable.
-   - `python scripts/validate_pdf_layout.py <pdf> --source <source.md>` when the
-     source is Markdown or table-heavy; by default this emits a first-page PNG
-     preview beside the PDF.
-   - Always inspect at least the first-page PNG, and inspect any equation/table
-     heavy pages when risk exists. Text extraction and Poppler previews are not
-     proof that Chinese glyphs are visible in the user's PDF viewer.
-8. For Chinese documents meant for an author, collaborator, or non-technical
-   reader, do a reader-facing pass before delivery: remove raw TeX/log blocks
-   unless they are the subject, avoid unnecessary English process words, keep
-   only questions that the recipient actually needs to answer, and check that
-   long paths or duplicated titles do not dominate the page.
-9. Report the exact source, output PDF path, command(s), page count, font/text
-   checks, preview PNG path, and any unresolved warnings. A smoke test or dry
-   run is not a final result unless the user explicitly asked only for
-   environment probing.
-
-## Escalation Rules
-
-- If Pandoc/XeLaTeX fails on CJK/font setup, try a generated header and writable
-  TeX caches once, then switch to the Chromium HTML route when it is available
-  instead of repeatedly tweaking TeX headers.
-- If generated header compilation fails because a package or font is missing,
-  inspect project-local resources and TeX package availability with
-  `kpsewhich`; then either switch to available fonts/packages or report the
-  exact missing dependency.
-- If direct compilation fails after a Markdown conversion, inspect the generated
-  `.tex` around the first real error and fix source/header issues rather than
-  repeatedly rerunning the same command.
-- If PDF exists but text extraction, table survival, line-fragmentation, font
-  checks, or PNG visual inspection fail, treat the task as incomplete or
-  partially complete and state what stronger validation or render route is
-  required.
+   - `pdfinfo` for page count when available.
+   - `pdffonts` for embedded/subset TeX Gyre Termes, TeX Gyre Termes Math,
+     Noto Serif SC, and Noto Sans SC usage.
+   - `pdftotext -layout` for extractable Chinese, English, formulas, and table
+     row survival.
+   - `pdftoppm` or `scripts/validate_pdf.sh` for a first-page PNG preview.
+8. Treat the task as incomplete if Chinese glyphs, formulas, table layout, or
+   text extraction fail.
 
 ## Completion States
 
-- `complete`: PDF rendered and passed command, page-count, text-extraction,
-  table/line-layout checks, first-page PNG visual inspection, and visual/font
-  sanity checks appropriate to the document.
+- `complete`: PDF rendered through Pandoc + XeLaTeX and passed command,
+  page-count, font, text-extraction, and first-page visual checks.
 - `partial_complete`: PDF rendered, but non-critical warnings or limited QA
   remain and are reported with next steps.
-- `blocked_missing_dependency`: no safe render route exists in the current
-  environment; report the missing command/package/font and the attempted routes.
+- `blocked_missing_dependency`: no safe Pandoc + XeLaTeX route exists; report
+  the missing command/package/font and attempted route.
 - `qa_failed`: a PDF was produced but readability, glyphs, pagination, or text
   extraction failed.
 

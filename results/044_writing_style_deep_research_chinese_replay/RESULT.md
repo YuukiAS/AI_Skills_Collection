@@ -2,65 +2,102 @@
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 044_writing_style_deep_research_chinese_replay
 executor: Codex
-implementation_commit: 1b9657a7c9d4afe7f7100b7a5641cc5213123a2e
-status: WAITING_FOR_CI
-ci_status: PENDING
+implementation_commit: UNCOMMITTED_LOCAL_WORK
+status: LOCAL_ACCEPTANCE_PASSED_NOT_COMMITTED
+ci_status: LOCAL_ONLY
 ---
 
-# 044 writing-style Deep Research 中文 replay 结果
+# 044 writing-style Deep Research 中文 replay 本地返修结果
 
 ## 结论
 
-当前 production `writing-style@yuukias-ai-skills` 已经能处理这份 Deep Research 中文长报告。本轮按 baseline-first 规则停止在 baseline 阶段，没有修改 `chinese-prose`、`writing-fidelity`、`writing-style` routing、generated plugin 或版本号。
+Round-1 human acceptance 已确认失败：旧 `rewritten_report.md` 仍让
+`provenance`、`estimand`、`scientific gap`、`residual gap`、
+`resource contract`、`baseline` 等普通英文抽象标签承担中文句子骨架。
+因此旧结论“baseline 已经足够、无需 runtime 修改”被撤回。
 
-这次问题更准确地说是：原 Deep Research PDF 没有经过 `writing-style`，不是现有 production plugin 已知失败。
+本地已完成通用返修，但按用户最新指令暂不 commit、不 push。修改集中在
+`chinese-prose`、`writing-fidelity`、中文 checklist、writing-style TODO、
+相关 runtime text tests，以及 generator 产生的 `writing-style` plugin payload。
 
-## 输入与输出
+## 实际通用修改
 
-- 输入：本机私有抽取稿 `/users/a/e/aereinh/Distributed_Imaging_Inference/docs/notes/writing_style_044/source_extracted_layout.txt`
-- production replay run: `20260831T124239Z-b8734d927221`
-- 本地完整改写稿：`/overflow/htzhu/mingcheng_new/.ai-bridge/plugin-replay/20260831T124239Z-b8734d927221/outputs/044_writing_style_deep_research_chinese_replay/rewritten_report.md`
-- 本地 replay 摘要：`/overflow/htzhu/mingcheng_new/.ai-bridge/plugin-replay/20260831T124239Z-b8734d927221/outputs/044_writing_style_deep_research_chinese_replay/replay_summary.md`
+- `chinese-prose` 增加“语义化重述优先”：中文读者正文不能靠普通英文抽象
+  标签支撑语义结构；要按当前句子说明它实际指什么。
+- 明确 `provenance` 一类表达不能靠词表替换解决，应按语境写成“这个
+  checkpoint 当初用过哪些病例，目前能确认到什么程度”等具体事实关系。
+- 增加 `anchor`、`estimand`、`axis`、连字符英文复合名词、斜杠堆叠和
+  `X aggregation / Y approximation` 句法的通用处理规则。
+- `writing-fidelity` 澄清 rewrite 模式保护的是语义、事实、公式、引用、
+  条件、归因和证据边界，不保护英文语序、段落表面结构或普通英文抽象标签。
+- `docs/plugin-todos/writing-style.md` 改为记录真实 replay 失败及当前通用候选修复，
+  不再保留旧的 `SUPERSEDED` 结论。
 
-完整输入和完整改写稿没有提交到 Git。
+## Production replay
 
-## Baseline 表现
+本地已把 generated `writing-style` payload 同步到当前 Codex plugin cache，
+确认 cache 与本仓库 generated payload 无差异，然后通过正常
+`ai-bridge plugin-replay` 入口运行：
 
-Baseline 使用已安装的 production `writing-style@yuukias-ai-skills`，通过 `ai-bridge plugin-replay` 正常入口运行。输出不是摘要或删减版：源抽取稿为 979 行、5117 词；改写稿为 646 行、5415 词。
+```text
+plugin: writing-style@yuukias-ai-skills
+target: /users/a/e/aereinh/Distributed_Imaging_Inference
+input: /users/a/e/aereinh/Distributed_Imaging_Inference/docs/notes/writing_style_044/source_extracted_layout.txt
+```
 
-阅读抽查覆盖开头结论、CARE 证据边界、ODAL/FedFisher/FedLPA 数学比较、短中长期路线和参考文献/未决事项。改写后仍保留必要英文专名和公式，但普通叙述已经改成中文研究者可连续阅读的段落；没有发现通过删段、压缩结论或改写科学判断来降低阅读难度的情况。
+最终通过的本地 replay：
 
-## 内容保真检查
+```text
+run_id: 20260831T175300Z-fe99d3c6b2bd
+rewritten_report: /overflow/htzhu/mingcheng_new/.ai-bridge/plugin-replay/20260831T175300Z-fe99d3c6b2bd/outputs/rewritten_report.md
+qa_summary: /overflow/htzhu/mingcheng_new/.ai-bridge/plugin-replay/20260831T175300Z-fe99d3c6b2bd/outputs/replay_summary.md
+size: 615 lines, 5347 words, 60732 bytes
+```
 
-已核对的 protected spans 包括 FedFisher、FedLPA、FedBEns、CARE、M&Ms、Dice、FedAvg、FedProx、SCAFFOLD、FedAdam、FedDyn、FedBN、ODAL、AISTATS、NeurIPS、ICML、MICCAI、AAAI、CVPR、UAI、TMI、ACDC、FLamby、YOCO、SAM、LoRA、nnU-Net、Dataset501、`fold_0`、`checkpoint_best.pth`。
+完整私有正文未提交到 Git。
 
-数字跨度检查显示源稿中 113 个 distinct numeric spans 均出现在输出中；输出额外出现 `1/2`，来自公式中 `1/2` 系数的可读化表达，不改变研究内容。
+## 本地 acceptance 证据
 
-人工抽查没有发现以下问题：新增或删除科学主张、把条件性判断写成确定结论、删除 caveat/STOP 条件、改变方法/数据集/引用身份、改变谁做了什么。
+- `provenance`: final `rewritten_report.md` 零命中。
+- Revised Plan 中列出的失败短语零命中：
+  `estimand`、`scientific gap`、`method gap`、`residual gap`、
+  `state of the art`、`resource contract`、`testbed`、
+  `shared initialization`、`local drift`、`pooled gap`、`anchor`、
+  `controlled-drift`、`shared-anchor`、`pooled-objective`、
+  `local-mode posterior aggregation`、`objective approximation`。
+- Replay 子进程在 `replay_summary.md` 中记录：已读取完整最终稿一次，
+  并检查 forbidden audit word、raw English scaffolding phrases、protected
+  scientific names、numbers、formulas、paths、citations、caveats 和 claim strength。
+- Executor 抽样复读了开头结论、CARE 证据边界、中段方法比较和末尾未验证事项；
+  未发现旧版那种 `provenance` / `estimand` / `gap` / `contract` 英文骨架继续支撑中文句子。
 
-## 是否修改 plugin
+## 本地测试
 
-未修改。原因是冻结 Plan 明确要求：若当前 production plugin 已经满足语义/证据零漂移和阅读难度明显下降，就停止修改，不为制造 diff 硬改。
+通过：
 
-因此本轮也不 bump repository version 或 `writing-style` plugin version。
+- `python3 scripts/build_codex_marketplace.py --write --validate --check --path-report`
+- `python3 -m unittest tests.test_skill_runtime_text_audit`
+- `python3 scripts/audit_skill_runtime_text.py --check`
+- `git diff --check`
+- `python3 scripts/skills.py validate`
+- `python3 scripts/skills.py audit --all`
+
+全量 `python3 -m unittest discover -s tests` 未作为本轮 blocking gate：
+失败均来自 out-of-scope presentation fixtures，分别是两个 `matplotlib`
+缺失和一个 CUHK Beamer real render `COMPILE_FAILED`，不在 044
+`writing-style` 修改范围内。
+
+## 版本决策
 
 Repository bump decision: NONE
-Reason: baseline replay 通过，没有形成新的 repository release。
+Reason: 本轮是 044 本地 replay/refinement，不发布 repository release。
+
 Affected plugins:
 - `writing-style`: NO_BUMP
-  Reason: 未修改 production behavior；本轮只补齐真实 replay 证据。
+  Reason: 已形成本地通用修复和 replay 证据，但暂未 commit/push，也未走正式 release。
 
-## 本地验证
+## 当前状态
 
-- `python3 -m unittest tests.test_reviewed_handoff_prompt_contract`: PASS
-- `git diff --check`: PASS
-- `ai-bridge host validate`: PASS，验证 `ai-bridge plugin-replay` allow、raw nested `codex exec -C /tmp -` prompt、危险 git 操作 prompt
-- `ai-bridge plugin-replay --dry-run`: PASS，run `20260831T124225Z-a09cca7247c2`
-- `ai-bridge plugin-replay`: PASS，run `20260831T124239Z-b8734d927221`
-- `ai-bridge reviewed-handoff validate --target /overflow/htzhu/mingcheng_new/AI_Skills_Collection`: FAIL，原因只来自 out-of-scope task 045 的 `PLAN.md` 缺少 schema-required sections；044 本轮不得修改 045。
-
-## Commit
-
-Implementation commit: `1b9657a7c9d4afe7f7100b7a5641cc5213123a2e`
-
-Skipped old main-local infrastructure sync commit: `2dac7d1`. Current `origin/main` already contains equivalent and broader branch-aware / recovery-first / plugin-replay / external-wait behavior, and it was merged into this 044 branch before the 044 control-plane commit.
+按用户最新指令：本地返修到 acceptance gate 通过即可标记 achieved；暂不
+commit，暂不 push。正式 Reviewed Handoff 的 `WAITING_FOR_CI` / GitHub
+Reviewer 流程需要后续用户允许 commit/push 后再继续。

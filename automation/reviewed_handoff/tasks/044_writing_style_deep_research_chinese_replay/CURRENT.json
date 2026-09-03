@@ -15,5 +15,5 @@
   "review_limit_reached": false,
   "human_gate_reason": null,
   "visual_review_required": false,
-  "next_action": "EXECUTOR_REVIEW_FULL_ARTIFACT_AND_FIX_WRITING_STYLE_IF_BASELINE_FAILS"
+  "next_action": "LOCAL_ACCEPTANCE_PASSED_AWAITING_USER_COMMIT_PUSH_AUTHORIZATION"
 }

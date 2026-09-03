@@ -1,273 +1,98 @@
 #!/usr/bin/env python3
-"""Generate a portable XeLaTeX header for Chinese/math Pandoc rendering."""
+"""Generate the deterministic XeLaTeX header used by chinese_math_pdf."""
 
 from __future__ import annotations
 
 import argparse
-import subprocess
-import sys
 from pathlib import Path
 
-SCRIPT_DIR = Path(__file__).resolve().parent
-if str(SCRIPT_DIR) not in sys.path:
-    sys.path.insert(0, str(SCRIPT_DIR))
 
-from probe_pdf_render_env import find_project_resource_bundles
+HEADER_TEMPLATE = r"""\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{unicode-math}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
 
+\defaultfontfeatures{Ligatures=TeX}
 
-FANDOL_FILES = {
-    "song": "FandolSong-Regular.otf",
-    "hei": "FandolHei-Regular.otf",
-    "kai": "FandolKai-Regular.otf",
-}
+\setmainfont[
+  Path=__RESOURCE_DIR__/fonts/texgyre-termes/,
+  Extension=.otf,
+  UprightFont=texgyretermes-regular,
+  BoldFont=texgyretermes-bold,
+  ItalicFont=texgyretermes-italic,
+  BoldItalicFont=texgyretermes-bolditalic
+]{texgyretermes-regular}
 
-RESOURCE_CJK_FONT_CANDIDATES = [
-    {
-        "name": "Noto Serif CJK SC",
-        "regular": ["NotoSerifCJKsc-Regular.otf", "NotoSerifSC-Regular.otf"],
-        "bold": ["NotoSerifCJKsc-Bold.otf", "NotoSerifSC-Bold.otf"],
-    },
-    {
-        "name": "Source Han Serif SC",
-        "regular": ["SourceHanSerifSC-Regular.otf"],
-        "bold": ["SourceHanSerifSC-Bold.otf", "SourceHanSerifSC-Heavy.otf"],
-    },
-    {
-        "name": "Noto Sans CJK SC",
-        "regular": ["NotoSansCJKsc-Regular.otf", "NotoSansSC-Regular.otf"],
-        "bold": ["NotoSansCJKsc-Bold.otf", "NotoSansSC-Bold.otf"],
-    },
-    {
-        "name": "Source Han Sans SC",
-        "regular": ["SourceHanSansSC-Regular.otf"],
-        "bold": ["SourceHanSansSC-Bold.otf", "SourceHanSansSC-Heavy.otf"],
-    },
-    {
-        "name": "Droid Sans Fallback",
-        "regular": ["DroidSansFallbackFull.ttf", "DroidSansFallback.ttf"],
-        "bold": [],
-    },
-]
+\setmathfont[
+  Path=__RESOURCE_DIR__/fonts/texgyre-termes-math/,
+  Extension=.otf
+]{texgyretermes-math}
 
-CJK_SYSTEM_FONT_CANDIDATES = [
-    "Noto Serif CJK SC",
-    "Source Han Serif SC",
-    "Droid Sans Fallback",
-    "AR PL UMing CN",
-    "WenQuanYi Micro Hei",
-]
+\setCJKmainfont[
+  Path=__RESOURCE_DIR__/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSerifSC-Regular,
+  BoldFont=NotoSerifSC-Bold,
+  AutoFakeSlant=0.18
+]{NotoSerifSC-Regular}
 
-TEX_GYRE_TERMES_FILES = {
-    "regular": "texgyretermes-regular.otf",
-    "bold": "texgyretermes-bold.otf",
-    "italic": "texgyretermes-italic.otf",
-    "bold_italic": "texgyretermes-bolditalic.otf",
-}
+\setCJKsansfont[
+  Path=__RESOURCE_DIR__/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSansSC-Regular,
+  BoldFont=NotoSansSC-Bold,
+  AutoFakeSlant=0.18
+]{NotoSansSC-Regular}
 
-TEX_GYRE_CURSOR_FILES = {
-    "regular": "texgyrecursor-regular.otf",
-    "bold": "texgyrecursor-bold.otf",
-    "italic": "texgyrecursor-italic.otf",
-    "bold_italic": "texgyrecursor-bolditalic.otf",
-}
+\setCJKmonofont[
+  Path=__RESOURCE_DIR__/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSansSC-Regular,
+  BoldFont=NotoSansSC-Bold
+]{NotoSansSC-Regular}
 
-
-def find_file(root: Path, filename: str) -> Path | None:
-    matches = list(root.rglob(filename))
-    return matches[0] if matches else None
-
-
-def find_first_file(root: Path, filenames: list[str]) -> Path | None:
-    for filename in filenames:
-        found = find_file(root, filename)
-        if found:
-            return found
-    return None
-
-
-def kpsewhich_file(filename: str) -> Path | None:
-    try:
-        proc = subprocess.run(
-            ["kpsewhich", filename],
-            check=False,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.DEVNULL,
-            text=True,
-            timeout=5,
-        )
-    except (OSError, subprocess.TimeoutExpired):
-        return None
-    path = Path(proc.stdout.strip()) if proc.returncode == 0 and proc.stdout.strip() else None
-    return path if path and path.exists() else None
-
-
-def fontspec_file_block(command: str, files: dict[str, str]) -> str | None:
-    regular = kpsewhich_file(files["regular"])
-    if not regular:
-        return None
-    font_dir = regular.parent
-    options = [f"Path={{{font_dir.as_posix()}/}}"]
-    for key, option in [
-        ("bold", "BoldFont"),
-        ("italic", "ItalicFont"),
-        ("bold_italic", "BoldItalicFont"),
-    ]:
-        filename = files.get(key)
-        if filename and kpsewhich_file(filename):
-            options.append(f"{option}={{{filename}}}")
-    return "\\" + command + "[\n  " + ",\n  ".join(options) + f"\n]{{{files['regular']}}}"
-
-
-def fc_match_font(font_name: str) -> Path | None:
-    try:
-        proc = subprocess.run(
-            ["fc-match", "-f", "%{file}\t%{family}\n", font_name],
-            check=False,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.DEVNULL,
-            text=True,
-            timeout=5,
-        )
-    except (OSError, subprocess.TimeoutExpired):
-        return None
-    output = proc.stdout.strip()
-    if proc.returncode != 0 or not output:
-        return None
-    path_text, _, family_text = output.partition("\t")
-    families = [item.strip().lower() for item in family_text.split(",") if item.strip()]
-    if font_name.lower() not in families:
-        return None
-    path = Path(path_text)
-    return path if path.exists() else None
-
-
-def system_cjk_font_block(cjk_font: str) -> str | None:
-    candidates = [cjk_font, *CJK_SYSTEM_FONT_CANDIDATES]
-    seen: set[str] = set()
-    for candidate in candidates:
-        if candidate in seen:
-            continue
-        seen.add(candidate)
-        path = fc_match_font(candidate)
-        if not path:
-            continue
-        return "\\setCJKmainfont[\n  " + f"Path={{{path.parent.as_posix()}/}}\n]{{{path.name}}}"
-    return None
-
-
-def resource_font_block(resource_dir: Path | None) -> str | None:
-    if not resource_dir:
-        return None
-    for candidate in RESOURCE_CJK_FONT_CANDIDATES:
-        regular = find_first_file(resource_dir, candidate["regular"])
-        if not regular:
-            continue
-        font_dir = regular.parent
-        options = [f"Path={{{font_dir.as_posix()}/}}"]
-        bold = find_first_file(resource_dir, candidate["bold"])
-        if bold and bold.parent == font_dir:
-            options.append(f"BoldFont={{{bold.name}}}")
-        return "\\setCJKmainfont[\n  " + ",\n  ".join(options) + f"\n]{{{regular.name}}}"
-
-    files = {key: find_file(resource_dir, name) for key, name in FANDOL_FILES.items()}
-    if not files["song"]:
-        return None
-    font_dir = files["song"].parent
-    options = [f"Path={{{font_dir.as_posix()}/}}"]
-    if files["hei"] and files["hei"].parent == font_dir:
-        options.append(f"BoldFont={{{FANDOL_FILES['hei']}}}")
-    if files["kai"] and files["kai"].parent == font_dir:
-        options.append(f"ItalicFont={{{FANDOL_FILES['kai']}}}")
-    return "\\setCJKmainfont[\n  " + ",\n  ".join(options) + f"\n]{{{FANDOL_FILES['song']}}}"
-
-
-def named_font_block(cjk_font: str) -> str:
-    fallback_fonts = []
-    for font in [
-        cjk_font,
-        "Noto Serif CJK SC",
-        "Source Han Serif SC",
-        "FandolSong",
-        "AR PL UMing CN",
-    ]:
-        if font not in fallback_fonts:
-            fallback_fonts.append(font)
-    block = ""
-    for font in reversed(fallback_fonts):
-        if not block:
-            block = f"\\setCJKmainfont{{{font}}}"
-        else:
-            block = f"\\IfFontExistsTF{{{font}}}{{\\setCJKmainfont{{{font}}}}}{{{block}}}"
-    return block
-
-
-def choose_resource_dir(root: Path, explicit: Path | None) -> Path | None:
-    if explicit:
-        return explicit.resolve()
-    bundles = find_project_resource_bundles(root)
-    usable = [Path(item["path"]) for item in bundles if item["usable_chinese_math_bundle"]]
-    return usable[0] if usable else None
-
-
-def latin_font_blocks(args: argparse.Namespace) -> str:
-    main_block = fontspec_file_block("setmainfont", TEX_GYRE_TERMES_FILES)
-    mono_block = fontspec_file_block("setmonofont", TEX_GYRE_CURSOR_FILES)
-    if not main_block:
-        main_block = f"\\IfFontExistsTF{{{args.main_font}}}{{\\setmainfont{{{args.main_font}}}}}{{}}"
-    if not mono_block:
-        mono_block = f"\\IfFontExistsTF{{{args.mono_font}}}{{\\setmonofont{{{args.mono_font}}}}}{{}}"
-    return f"{main_block}\n{mono_block}"
-
-
-def build_header(args: argparse.Namespace) -> str:
-    root = args.root.resolve() if args.root else Path.cwd()
-    resource_dir = choose_resource_dir(root, args.resource_dir)
-    cjk_block = None
-    if not args.prefer_resource_cjk:
-        cjk_block = system_cjk_font_block(args.cjk_font)
-    cjk_block = cjk_block or resource_font_block(resource_dir) or named_font_block(args.cjk_font)
-    latin_block = latin_font_blocks(args)
-    return f"""% Generated by build_chinese_math_header.py.
-% Use with Pandoc --pdf-engine=xelatex for CJK/math documents.
-\\usepackage{{fontspec}}
-\\usepackage{{xeCJK}}
-\\usepackage{{amsmath,amssymb}}
-\\usepackage{{booktabs,longtable,array}}
-\\usepackage{{graphicx}}
-\\usepackage{{hyperref}}
-\\hypersetup{{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}}
-\\XeTeXlinebreaklocale "zh"
-\\XeTeXlinebreakskip = 0pt plus 1pt
-{latin_block}
-{cjk_block}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}
+\emergencystretch=3em
 """
 
 
+def resolve_resource_dir(root: Path | None) -> Path:
+    candidates: list[Path] = []
+    if root is not None:
+        root = root.expanduser().resolve()
+        candidates.extend([root, root / "render_resources" / "chinese_math_pdf"])
+    candidates.extend(
+        [
+            Path.cwd() / "render_resources" / "chinese_math_pdf",
+            Path.home() / "render_resources" / "chinese_math_pdf",
+            Path("/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf"),
+            Path("/users/a/e/aereinh/render_resources/chinese_math_pdf"),
+            Path("/home/yuukias/render_resources/chinese_math_pdf"),
+        ]
+    )
+    for candidate in candidates:
+        if (candidate / "templates" / "chinese_math_pandoc_header.tex.in").exists():
+            return candidate
+    raise SystemExit("blocked_missing_dependency: chinese_math_pdf resource root not found")
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, help="Header path. Defaults to stdout.")
-    parser.add_argument(
-        "--resource-dir",
-        type=Path,
-        help="Optional project-local resource directory containing TeX/fonts.",
-    )
-    parser.add_argument("--root", type=Path, help="Project root used to locate render resources.")
-    parser.add_argument("--main-font", default="TeX Gyre Termes")
-    parser.add_argument("--mono-font", default="TeX Gyre Cursor")
-    parser.add_argument("--cjk-font", default="Noto Serif CJK SC")
-    parser.add_argument(
-        "--prefer-resource-cjk",
-        action="store_true",
-        help="Prefer bundled resource CJK fonts over system viewer-compatible CJK fonts.",
-    )
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", type=Path, default=None)
+    parser.add_argument("--resource-dir", type=Path, default=None)
+    parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
-    header = build_header(args)
-    if args.output:
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(header, encoding="utf-8")
-    else:
-        print(header, end="")
+    resource_dir = args.resource_dir.expanduser().resolve() if args.resource_dir else resolve_resource_dir(args.root)
+    text = HEADER_TEMPLATE.replace("__RESOURCE_DIR__", resource_dir.as_posix())
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(text, encoding="utf-8")
     return 0
 
 
