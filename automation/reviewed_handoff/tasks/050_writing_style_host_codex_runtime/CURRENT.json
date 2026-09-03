@@ -16,5 +16,5 @@
   "human_gate_reason": null,
   "visual_review_required": false,
   "text_review_required": false,
-  "next_action": "CODEX_EXECUTOR_IMPLEMENT_050_HOST_CODEX_RUNTIME_AND_STOP_AT_STYLE_SMOKE_GATE"
+  "next_action": "WAIT_FOR_REPO_WIDE_PAID_REVIEW_SAFETY_MIGRATION_BEFORE_EXECUTING_050"
 }
