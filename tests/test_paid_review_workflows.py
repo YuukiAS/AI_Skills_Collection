@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-BRIDGE_KIT_COMMIT = "b185c1f3bd96f26c3e8af80a741e96775eca8e78"
+BRIDGE_KIT_COMMIT = "6968a84b689d6e5589d068aee7dd101b12fd7700"
 
 
 class PaidReviewWorkflowPolicyTests(unittest.TestCase):
