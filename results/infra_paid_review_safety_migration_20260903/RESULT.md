@@ -49,7 +49,7 @@ Remote heads after cleanup:
 
 - main -> 7b08b6a24c7a371cc137a99297a8f40ca573c5fd
 - reviewed/050_writing_style_host_codex_runtime -> 65ff3a9bfd4e6e925038855088785a5168ddbb99
-- reviewed/infra_paid_review_safety_migration_20260903 -> 4a7e21569efcbcdc448e6116826989a19e8228d5 before this implementation commit is pushed
+- reviewed/infra_paid_review_safety_migration_20260903 -> 5972a302721759354859bafc99dd7459143b17b2 after the first implementation/handoff publication
 
 ## Migration implemented
 
@@ -86,6 +86,11 @@ Bridge Kit pinned-commit companion evidence:
 
 No live OpenAI call was made during this implementation phase.
 
+GitHub secret metadata gate before live smoke:
+
+- OPENAI_REVIEW_API_KEY: MISSING
+- OPENAI_VISUAL_REVIEW_API_KEY: PRESENT
+
 ## Verification
 
 The deterministic verification evidence is listed above. It includes full AI_Skills unittest coverage, marketplace generation validation, skill validation/audit, and Bridge Kit pinned-commit companion tests.
@@ -96,9 +101,8 @@ The implementation is ready for publication to the migration branch and explicit
 
 Required next actions:
 
-1. Push this implementation and handoff state to `reviewed/infra_paid_review_safety_migration_20260903`.
-2. Check GitHub secret metadata only as PRESENT/MISSING for `OPENAI_REVIEW_API_KEY` and `OPENAI_VISUAL_REVIEW_API_KEY`.
-3. If either is missing, or if the user cannot confirm they are new `AI_Research_Review` project keys, stop at credential handoff.
-4. After confirmation, run exactly two tiny public-safe live smoke requests in one shared migration campaign: one Text Review and one Visual Review image-input request, max paid calls 2, campaign budget <= $0.50, per-request worst case <= $0.25.
-5. Only after live smoke PASS and explicit full Marketplace gate PASS may this migration be integrated to latest `main`.
-6. Only after this migration is integrated may `reviewed/050_writing_style_host_codex_runtime` be moved out of its paid-review migration wait state.
+1. Configure `OPENAI_REVIEW_API_KEY` as a new `AI_Research_Review` project key.
+2. Confirm `OPENAI_VISUAL_REVIEW_API_KEY` is also a new `AI_Research_Review` project key.
+3. After confirmation, run exactly two tiny public-safe live smoke requests in one shared migration campaign: one Text Review and one Visual Review image-input request, max paid calls 2, campaign budget <= $0.50, per-request worst case <= $0.25.
+4. Only after live smoke PASS and explicit full Marketplace gate PASS may this migration be integrated to latest `main`.
+5. Only after this migration is integrated may `reviewed/050_writing_style_host_codex_runtime` be moved out of its paid-review migration wait state.

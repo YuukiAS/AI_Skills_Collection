@@ -35,6 +35,11 @@ For this migration, the next valid usage is an explicit GitHub workflow dispatch
 
 No live OpenAI request has been made for this migration.
 
+GitHub secret metadata gate before live smoke:
+
+- OPENAI_REVIEW_API_KEY: MISSING
+- OPENAI_VISUAL_REVIEW_API_KEY: PRESENT
+
 Local evidence:
 
 - AI_Skills full unittest suite passed: 171 tests.
@@ -45,11 +50,12 @@ Local evidence:
 
 Required recovery path:
 
-1. Confirm `OPENAI_REVIEW_API_KEY` and `OPENAI_VISUAL_REVIEW_API_KEY` are present and are new `AI_Research_Review` project keys.
-2. Dispatch one tiny public-safe Text Review and one tiny public-safe Visual Review in the same migration campaign: max calls 2, campaign budget <= $0.50, per-request worst case <= $0.25.
-3. Dispatch the full Codex Marketplace integration gate explicitly.
-4. Integrate the migration to latest `main` only after live smoke and full gate PASS.
-5. Only then unblock `reviewed/050_writing_style_host_codex_runtime`.
+1. Configure `OPENAI_REVIEW_API_KEY` as a new `AI_Research_Review` project key.
+2. Confirm `OPENAI_VISUAL_REVIEW_API_KEY` is also a new `AI_Research_Review` project key.
+3. Dispatch one tiny public-safe Text Review and one tiny public-safe Visual Review in the same migration campaign: max calls 2, campaign budget <= $0.50, per-request worst case <= $0.25.
+4. Dispatch the full Codex Marketplace integration gate explicitly.
+5. Integrate the migration to latest `main` only after live smoke and full gate PASS.
+6. Only then unblock `reviewed/050_writing_style_host_codex_runtime`.
 
 ## Technical appendix
 
@@ -57,5 +63,6 @@ Required recovery path:
 - reason: CONFIRM_NEW_AI_RESEARCH_REVIEW_PROJECT_SECRETS_BEFORE_LIVE_PAID_SMOKE
 - implementation_commit: `a8d249c01a32004b1de198801a36e3791a40b239`
 - latest_main_used: `7b08b6a24c7a371cc137a99297a8f40ca573c5fd`
+- first_published_handoff_tip: `5972a302721759354859bafc99dd7459143b17b2`
 - bridge_kit_paid_review_commit: `3d73572a6476f925745cfb873e48057c21be3502`
 - result artifact: `results/infra_paid_review_safety_migration_20260903/RESULT.md`
