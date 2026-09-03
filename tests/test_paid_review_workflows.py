@@ -61,6 +61,31 @@ class PaidReviewWorkflowPolicyTests(unittest.TestCase):
                     self.assertIn("OPENAI_VISUAL_REVIEW_MODEL: gpt-5.6-terra", text)
                 self.assertNotRegex(text, re.compile(r"OPENAI_(TEXT|VISUAL)_REVIEW_MODEL: \\$\\{\\{ vars\\."))
 
+    def test_input_tokens_permission_preflight_skips_paid_responses(self) -> None:
+        for path in [
+            REPO_ROOT / ".github/workflows/ai-bridge-text-review.yml",
+            REPO_ROOT / ".github/workflows/ai-bridge-visual-review.yml",
+        ]:
+            text = path.read_text(encoding="utf-8")
+            with self.subTest(workflow=path.name):
+                self.assertIn("input_tokens_preflight_only:", text)
+                self.assertIn("https://api.openai.com/v1/responses/input_tokens", text)
+                self.assertIn("input_tokens_permission: FAIL_CLOSED HTTP", text)
+                self.assertIn("openai_error_message:", text)
+                self.assertIn("Verify input-token endpoint permission only", text)
+                self.assertIn("do not call /v1/responses", text)
+                self.assertIn("AI_BRIDGE_INPUT_TOKENS_PREFLIGHT_ONLY", text)
+        text_workflow = (REPO_ROOT / ".github/workflows/ai-bridge-text-review.yml").read_text(encoding="utf-8")
+        visual_workflow = (REPO_ROOT / ".github/workflows/ai-bridge-visual-review.yml").read_text(encoding="utf-8")
+        self.assertIn(
+            "if: env.AI_BRIDGE_TEXT_REVIEW_SKIP != '1' && env.AI_BRIDGE_INPUT_TOKENS_PREFLIGHT_ONLY != 'true'",
+            text_workflow,
+        )
+        self.assertIn(
+            "if: env.AI_BRIDGE_VISUAL_REVIEW_SKIP != '1' && env.AI_BRIDGE_INPUT_TOKENS_PREFLIGHT_ONLY != 'true'",
+            visual_workflow,
+        )
+
     def test_paid_review_contracts_document_budget_and_no_tools(self) -> None:
         policy = (REPO_ROOT / "docs/workflows/PAID_EXTERNAL_REVIEW_POLICY.md").read_text(encoding="utf-8")
         executor = (REPO_ROOT / "automation/reviewed_handoff/prompts/CODEX_EXECUTOR.md").read_text(encoding="utf-8")
@@ -73,6 +98,7 @@ class PaidReviewWorkflowPolicyTests(unittest.TestCase):
             "per-call worst-case ceiling: USD 0.25",
             "automatic paid retries: 0",
             "persistent pre-request reservation",
+            "only call input-token endpoint",
             "billing/quota zero-retry",
             "Visual Review sends image\ninputs",
             "must not enable image generation",

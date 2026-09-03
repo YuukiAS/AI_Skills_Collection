@@ -11,6 +11,10 @@ on:
         description: Repository-relative TEXT_REVIEW.json output path
         required: true
         default: results/001_task/text_review/TEXT_REVIEW.json
+      input_tokens_preflight_only:
+        description: Verify /v1/responses/input_tokens permission only; do not call /v1/responses
+        required: false
+        default: "false"
 
 permissions:
   contents: write
@@ -27,6 +31,7 @@ jobs:
       OPENAI_TEXT_REVIEW_MODEL: gpt-5.6-terra
       AI_BRIDGE_TEXT_REVIEW_MANIFEST: ${{ github.event.inputs.manifest }}
       AI_BRIDGE_TEXT_REVIEW_OUTPUT: ${{ github.event.inputs.output }}
+      AI_BRIDGE_INPUT_TOKENS_PREFLIGHT_ONLY: ${{ github.event.inputs.input_tokens_preflight_only }}
       AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[text-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@3d73572a6476f925745cfb873e48057c21be3502
       AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY: ${{ secrets.AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY }}
       AI_BRIDGE_PAID_REVIEW_GIT_RESERVE: "1"
@@ -50,7 +55,59 @@ jobs:
       - name: Install Bridge Kit text review extra
         run: python -m pip install "${AI_BRIDGE_KIT_PIP_SPEC}"
 
+      - name: Verify input-token endpoint permission only
+        if: env.AI_BRIDGE_INPUT_TOKENS_PREFLIGHT_ONLY == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${OPENAI_REVIEW_API_KEY}" ]; then
+            echo "OPENAI_REVIEW_API_KEY is not configured; cannot verify /v1/responses/input_tokens."
+            exit 1
+          fi
+          python - <<'PY'
+          import json
+          import os
+          import sys
+          import urllib.error
+          import urllib.request
+
+          payload = {
+              "model": os.environ["OPENAI_TEXT_REVIEW_MODEL"],
+              "input": "Return exactly: ok",
+              "max_output_tokens": 16,
+          }
+          request = urllib.request.Request(
+              "https://api.openai.com/v1/responses/input_tokens",
+              data=json.dumps(payload, separators=(",", ":")).encode("utf-8"),
+              headers={
+                  "Authorization": f"Bearer {os.environ['OPENAI_REVIEW_API_KEY']}",
+                  "Content-Type": "application/json",
+              },
+              method="POST",
+          )
+          try:
+              with urllib.request.urlopen(request, timeout=60) as response:
+                  result = json.loads(response.read().decode("utf-8"))
+          except urllib.error.HTTPError as exc:
+              raw = exc.read().decode("utf-8", errors="replace")
+              try:
+                  error = json.loads(raw).get("error", {})
+              except Exception:
+                  error = {"message": raw}
+              print(f"input_tokens_permission: FAIL_CLOSED HTTP {exc.code}")
+              print(f"openai_error_code: {error.get('code')}")
+              print(f"openai_error_type: {error.get('type')}")
+              print(f"openai_error_param: {error.get('param')}")
+              print(f"openai_error_message: {error.get('message')}")
+              sys.exit(1)
+          tokens = result.get("input_tokens") or result.get("tokens") or result.get("total_tokens")
+          print("input_tokens_permission: PASS")
+          print("endpoint: /v1/responses/input_tokens")
+          print(f"input_tokens: {tokens}")
+          PY
+
       - name: Resolve text review paths
+        if: env.AI_BRIDGE_INPUT_TOKENS_PREFLIGHT_ONLY != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -65,7 +122,7 @@ jobs:
           echo "AI_BRIDGE_TEXT_REVIEW_OUTPUT=${AI_BRIDGE_TEXT_REVIEW_OUTPUT}" >> "$GITHUB_ENV"
 
       - name: Refuse missing text review secrets
-        if: env.AI_BRIDGE_TEXT_REVIEW_SKIP != '1'
+        if: env.AI_BRIDGE_TEXT_REVIEW_SKIP != '1' && env.AI_BRIDGE_INPUT_TOKENS_PREFLIGHT_ONLY != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -79,7 +136,7 @@ jobs:
           fi
 
       - name: Decrypt private text payload
-        if: env.AI_BRIDGE_TEXT_REVIEW_SKIP != '1'
+        if: env.AI_BRIDGE_TEXT_REVIEW_SKIP != '1' && env.AI_BRIDGE_INPUT_TOKENS_PREFLIGHT_ONLY != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -95,7 +152,7 @@ jobs:
           echo "AI_BRIDGE_TEXT_REVIEW_PLAINTEXT=${tmpdir}/plaintext.md" >> "$GITHUB_ENV"
 
       - name: Run text review
-        if: env.AI_BRIDGE_TEXT_REVIEW_SKIP != '1'
+        if: env.AI_BRIDGE_TEXT_REVIEW_SKIP != '1' && env.AI_BRIDGE_INPUT_TOKENS_PREFLIGHT_ONLY != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -106,7 +163,7 @@ jobs:
             --output "${AI_BRIDGE_TEXT_REVIEW_OUTPUT}"
 
       - name: Commit text review evidence
-        if: env.AI_BRIDGE_TEXT_REVIEW_SKIP != '1'
+        if: env.AI_BRIDGE_TEXT_REVIEW_SKIP != '1' && env.AI_BRIDGE_INPUT_TOKENS_PREFLIGHT_ONLY != 'true'
         shell: bash
         run: |
           set +e

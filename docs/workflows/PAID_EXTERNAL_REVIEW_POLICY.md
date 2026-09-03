@@ -93,6 +93,8 @@ preflight 必须按 uncached input 计算，不提前假设 cache discount。若
 
 官方 Responses API 提供 `POST /responses/input_tokens` 用于对完整 request 做 input-token count；review implementation 应优先使用这一真实 request preflight，而不是凭字符数猜测。若当前 SDK/transport 无法可靠计算包含图片的真实输入成本，visual paid review 必须停在 preflight，不得以猜测值继续。
 
+Live migration smoke 之前必须先用 repository secret 在 GitHub Actions 内验证 `POST /v1/responses/input_tokens` 可用，且该检查只能调用 input-token endpoint，不得继续调用 `POST /v1/responses`。Implementation rule: only call input-token endpoint during this permission smoke. 如果新 project-scoped key 因缺少 `Responses=Write` 或其他 authorization / permission 问题失败，必须 fail closed 并报告非 secret 的 HTTP status、OpenAI error code/type/message/param；不得自动扩大 model capability 或改用旧 key。
+
 ## 5. Text Review
 
 Text Review 默认只看需要独立判断的最终 candidate，加上 audience 与 frozen review questions / rubric。
