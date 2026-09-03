@@ -8,7 +8,7 @@
   "max_plan_revisions": 1,
   "base_commit": "b80bde2479b41aea334e5156a8f5069c6d343adb",
   "base_branch": "main",
-  "implementation_commit": "a8d249c01a32004b1de198801a36e3791a40b239",
+  "implementation_commit": "119dc40e50beb1c50c1bc9c4a896975902f5c405",
   "ci_required": true,
   "ci_status": "PENDING",
   "last_review_decision": null,
@@ -16,5 +16,5 @@
   "human_gate_reason": "PLANNER_DECISION",
   "visual_review_required": false,
   "text_review_required": false,
-  "next_action": "USER_CONFIRM_OPENAI_REVIEW_API_KEY_AND_OPENAI_VISUAL_REVIEW_API_KEY_ARE_NEW_AI_RESEARCH_REVIEW_PROJECT_KEYS_THEN_EXPLICIT_LIVE_TEXT_AND_VISUAL_SMOKE_WITH_SHARED_MAX_2_CALL_050_BUDGET"
+  "next_action": "USER_FIX_AI_RESEARCH_REVIEW_PROJECT_CREDIT_BALANCE_OR_BILLING_THEN_RESUME_FROZEN_LIVE_SMOKE_FROM_SHARED_CAMPAIGN_INFRA_PAID_REVIEW_SAFETY_MIGRATION_20260903_LIVE_SMOKE_WITH_NO_PAID_RETRY"
 }

@@ -2,9 +2,9 @@
 
 ## What this task solved
 
-This task completed the deterministic infrastructure migration for paid review and CI lifecycle safety. It stops at a user credential decision before any live paid smoke.
+This task completed the deterministic infrastructure migration for paid review and CI lifecycle safety. It now stops at a project billing/credit handoff after the first live Text Review call failed closed.
 
-This is not a PASS, release, or integration closure. It is a credential handoff required by the frozen paid-review safety plan.
+This is not a PASS, release, or integration closure. It is a credential/account handoff required by the frozen paid-review safety plan.
 
 ## What changed
 
@@ -33,12 +33,17 @@ For this migration, the next valid usage is an explicit GitHub workflow dispatch
 
 ## Regression and remaining limitations
 
-No live OpenAI request has been made for this migration.
+Live OpenAI status:
 
-GitHub secret metadata gate before live smoke:
-
-- OPENAI_REVIEW_API_KEY: MISSING
+- Secret metadata was checked as PRESENT/MISSING only; values were not read or printed.
+- OPENAI_REVIEW_API_KEY: PRESENT
 - OPENAI_VISUAL_REVIEW_API_KEY: PRESENT
+- Text input-token-only preflight run 33746261805: PASS, `/v1/responses/input_tokens` returned input_tokens 10; `/v1/responses` skipped.
+- Visual input-token-only preflight run 33746397708: PASS, `/v1/responses/input_tokens` returned input_tokens 10; `/v1/responses` skipped.
+- Text live smoke run 33746976670 reserved one campaign slot and then failed closed on `/v1/responses`: `HTTP 429 (credit_balance_exhausted; zero paid retry)`.
+- Existing shared campaign reservation: `results/infra_paid_review_safety_migration_20260903_live_smoke/paid_review_budget.json`, call 1, worst-case reserved cost `0.049760`.
+- Visual live smoke was not dispatched after the Text credit failure.
+
 
 Local evidence:
 
@@ -50,9 +55,9 @@ Local evidence:
 
 Required recovery path:
 
-1. Configure `OPENAI_REVIEW_API_KEY` as a new `AI_Research_Review` project key.
-2. Confirm `OPENAI_VISUAL_REVIEW_API_KEY` is also a new `AI_Research_Review` project key.
-3. Dispatch one tiny public-safe Text Review and one tiny public-safe Visual Review in the same migration campaign: max calls 2, campaign budget <= $0.50, per-request worst case <= $0.25.
+1. Fix `AI_Research_Review` project credit/billing for the new restricted keys.
+2. Resume the frozen smoke from shared campaign `infra_paid_review_safety_migration_20260903_live_smoke` without deleting existing reservation evidence or broadening model capability.
+3. Complete one Text Review and one Visual Review image-input smoke within max calls 2, campaign budget <= $0.50, and per-request worst case <= $0.25.
 4. Dispatch the full Codex Marketplace integration gate explicitly.
 5. Integrate the migration to latest `main` only after live smoke and full gate PASS.
 6. Only then unblock `reviewed/050_writing_style_host_codex_runtime`.
@@ -60,8 +65,8 @@ Required recovery path:
 ## Technical appendix
 
 - status: AWAIT_HUMAN_DECISION
-- reason: CONFIRM_NEW_AI_RESEARCH_REVIEW_PROJECT_SECRETS_BEFORE_LIVE_PAID_SMOKE
-- implementation_commit: `a8d249c01a32004b1de198801a36e3791a40b239`
+- reason: AI_RESEARCH_REVIEW_PROJECT_CREDIT_BALANCE_EXHAUSTED_DURING_TEXT_LIVE_SMOKE
+- implementation_evidence_tip: `119dc40e50beb1c50c1bc9c4a896975902f5c405`
 - latest_main_used: `7b08b6a24c7a371cc137a99297a8f40ca573c5fd`
 - first_published_handoff_tip: `5972a302721759354859bafc99dd7459143b17b2`
 - bridge_kit_paid_review_commit: `dfb453e77829b8e868de9bf48c9cedc22e6365ea`
