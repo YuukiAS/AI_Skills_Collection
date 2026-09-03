@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import io
 import json
 import sys
 import tempfile
@@ -326,6 +327,33 @@ class ScientificRewriteTests(unittest.TestCase):
 
         self.assertEqual(text, "{\"ok\": true}")
         self.assertEqual(attempts["count"], 3)
+
+    def test_openai_text_reports_http_error_body(self) -> None:
+        helper = load_helper()
+        original_sleep = helper.time.sleep
+        body = {
+            "error": {
+                "type": "rate_limit_exceeded",
+                "code": "rate_limit_exceeded",
+                "message": "Requests are temporarily rate limited.",
+            }
+        }
+
+        def fake_opener(request, timeout):
+            raise urllib.error.HTTPError(
+                "https://api.openai.com/v1/responses",
+                429,
+                "rate limit",
+                {},
+                io.BytesIO(json.dumps(body).encode("utf-8")),
+            )
+
+        helper.time.sleep = lambda delay: None
+        try:
+            with self.assertRaisesRegex(RuntimeError, "rate_limit_exceeded"):
+                helper.call_openai_text("prompt", "source", model="test-model", api_key="test-key", opener=fake_opener)
+        finally:
+            helper.time.sleep = original_sleep
 
     def test_long_unheaded_source_does_not_collapse_to_one_unit(self) -> None:
         helper = load_helper()

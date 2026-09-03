@@ -1272,6 +1272,36 @@ def build_openai_request(prompt: str, source: str, *, model: str, response_schem
     return request
 
 
+def summarize_http_error(exc: urllib.error.HTTPError) -> str:
+    code = getattr(exc, "code", "UNKNOWN")
+    detail = ""
+    try:
+        raw = exc.read()
+    except Exception:
+        raw = b""
+    if raw:
+        try:
+            payload = json.loads(raw.decode("utf-8", errors="replace"))
+        except json.JSONDecodeError:
+            detail = raw.decode("utf-8", errors="replace").strip()
+        else:
+            error = payload.get("error") if isinstance(payload, dict) else None
+            if isinstance(error, dict):
+                parts = []
+                for field in ("type", "code", "message"):
+                    value = error.get(field)
+                    if isinstance(value, str) and value.strip():
+                        parts.append(f"{field}={value.strip()}")
+                detail = "; ".join(parts)
+            elif isinstance(payload, dict):
+                message = payload.get("message")
+                if isinstance(message, str) and message.strip():
+                    detail = message.strip()
+    if len(detail) > 300:
+        detail = f"{detail[:297]}..."
+    return f"HTTP {code}" + (f" ({detail})" if detail else "")
+
+
 def call_openai_text(
     prompt: str,
     source: str,
@@ -1315,7 +1345,7 @@ def call_openai_text(
                 )
                 time.sleep(delay)
                 continue
-            raise RuntimeError(f"OpenAI staged rewrite failed closed: HTTP {code}") from exc
+            raise RuntimeError(f"OpenAI staged rewrite failed closed: {summarize_http_error(exc)}") from exc
     status = payload.get("status")
     if status and status != "completed":
         raise RuntimeError(f"OpenAI staged rewrite did not complete: {status}")
