@@ -1,16 +1,16 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: infra_paid_review_safety_migration_20260903
-implementation_commit: b8fdf078fb943e37e15bf826749ed4c0f69e5e15
+implementation_commit: 44dbe927e4dda98c6a2f6183559b693ebb4c92a1
 ---
 
 # Codex Result
 
 ## Implemented
 
-Current status: AWAIT_HUMAN_DECISION.
+Current status: AWAIT_HUMAN_DECISION / PLANNER_DECISION after live-smoke and CI gates passed.
 
-Implementation/evidence tip: `b8fdf078fb943e37e15bf826749ed4c0f69e5e15`.
+Implementation/evidence tip: `44dbe927e4dda98c6a2f6183559b693ebb4c92a1`.
 Latest main used: `7b08b6a24c7a371cc137a99297a8f40ca573c5fd`.
 Bridge Kit paid-review commit: `b185c1f3bd96f26c3e8af80a741e96775eca8e78`.
 
@@ -74,10 +74,11 @@ AI_Skills tests and validation:
 - `python3 -m unittest tests.test_reviewed_handoff_visual_target` -> PASS
 - `python3 -m unittest tests.test_codex_marketplace.CodexMarketplaceTests.test_central_plugins_have_exactly_one_source_only_todo_inbox tests.test_codex_marketplace.CodexMarketplaceTests.test_codex_marketplace_full_ci_is_explicit_read_only_gate tests.test_codex_marketplace.CodexMarketplaceTests.test_historical_visual_packet_is_manual_only` -> PASS
 - `python3 -m unittest tests.test_presentations.PresentationSharedTests.test_research_presentation_todo_consolidation_and_promotions` -> PASS
-- `python3 -m unittest discover -s tests` -> PASS, 171 tests
+- `python3 -m unittest discover -s tests` -> PASS, 172 tests
 - `python3 scripts/build_codex_marketplace.py --write --validate --check --path-report` -> PASS
 - `python3 scripts/skills.py validate` -> PASS
 - `python3 scripts/skills.py audit --all` -> PASS
+- Explicit GitHub `Codex Marketplace` integration gate run 33749066096 -> PASS on branch `reviewed/infra_paid_review_safety_migration_20260903`, head `44dbe927e4dda98c6a2f6183559b693ebb4c92a1`, event `workflow_dispatch`.
 
 Bridge Kit pinned-commit companion evidence:
 
@@ -96,24 +97,26 @@ Credential recovery and live-smoke evidence after user confirmed new project key
 - Text live smoke run 33746976670 passed local decrypt/path checks, reserved one shared campaign slot, counted 243 input tokens, then failed closed on `/v1/responses` with `HTTP 429 (credit_balance_exhausted; zero paid retry)`.
 - Reservation evidence commit `119dc40e50beb1c50c1bc9c4a896975902f5c405` created `results/infra_paid_review_safety_migration_20260903_live_smoke/paid_review_budget.json`.
 - Campaign state after the failed Text live smoke: 1 reservation, cumulative worst-case reserved cost `0.049760`, max paid calls 2, campaign ceiling `0.500000`, per-call ceiling `0.250000`.
-- Visual live smoke was not dispatched after the Text `/v1/responses` credit failure.
-- Full Marketplace CI, integration to `main`, and 050 branch unblocking were not performed.
+- Visual live smoke was not dispatched after the Text `/v1/responses` credit failure until the user confirmed the project was funded.
+- Full Marketplace CI was later dispatched explicitly and passed; integration to `main` and 050 branch unblocking remain the only pending steps at this point in the task history.
 - After user confirmed the project was funded, Bridge Kit was updated to mark known billing errors as `ZERO_BILLING_FAILURE`, preserve the original reservation, and allow only the same request identity to reuse that reservation on explicit human resume.
 - The existing Text reservation was annotated with `actual_cost_status: ZERO_BILLING_FAILURE`, `actual_model_cost_usd: 0.000000`, `openai_error_code: credit_balance_exhausted`, and `github_run_id: 33746976670`.
 - Shared-campaign Text/Visual evidence writeback was also fixed so successful review commits include `results/<paid_review_campaign_id>/paid_review_budget.json` when the campaign differs from `task_key`.
+- After funding, Text live smoke run 33748456926 -> PASS, wrote `results/infra_paid_review_safety_migration_20260903/text_review/TEXT_REVIEW.json`, reused call 1, actual model cost `0.002362`.
+- Visual live smoke run 33748612726 -> PASS, wrote `results/infra_paid_review_safety_migration_20260903/visual_review/VISUAL_REVIEW.json`, used call 2, actual model cost `0.002730`.
+- Shared live-smoke campaign `infra_paid_review_safety_migration_20260903_live_smoke` remained within contract: 2 reservations, max calls 2, cumulative worst-case reserved cost `0.099337`, campaign ceiling `0.500000`, per-call ceiling `0.250000`, total verified actual model cost `0.005092`, automatic paid retries 0.
+- Text and Visual live evidence both used `gpt-5.6-terra`; Visual input was the committed public-safe synthetic image fixture and did not request image generation, tools, web search, file search, or computer use.
 
 ## Verification
 
-The deterministic verification evidence is listed above. It includes full AI_Skills unittest coverage, marketplace generation validation, skill validation/audit, and Bridge Kit pinned-commit companion tests.
+The deterministic and live verification evidence is listed above. It includes full AI_Skills unittest coverage, marketplace generation validation, skill validation/audit, Bridge Kit pinned-commit companion tests, input-token permission preflights, both bounded live smokes, and explicit full Marketplace GitHub integration gate PASS.
 
 ## Deviations / blockers
 
-The input-token permission gate passed for both new repository secrets. The first real Text Review `/v1/responses` call failed closed with `HTTP 429 (credit_balance_exhausted; zero paid retry)`, and the user has now confirmed the `AI_Research_Review` project is funded. The frozen resume path is to rerun the same Text request so it reuses call 1, then run Visual as call 2 in the same campaign.
+The input-token permission gate passed for both new repository secrets. The first real Text Review `/v1/responses` call failed closed with `HTTP 429 (credit_balance_exhausted; zero paid retry)` before funding was confirmed; after user-confirmed funding, the frozen resume path completed successfully without creating a third paid call.
 
 Required next actions:
 
-1. Rerun the same Text Review request from shared campaign `infra_paid_review_safety_migration_20260903_live_smoke`; it must reuse the existing zero-billing reservation rather than create call 2.
-2. If Text PASS writes actual usage, run the Visual Review image-input smoke as call 2 in the same campaign.
-3. Do not run automatic paid retries. Continue only within max 2 calls, campaign budget <= $0.50, and per-request worst case <= $0.25.
-4. Only after Text and Visual live smoke PASS and explicit full Marketplace gate PASS may this migration be integrated to latest `main`.
-5. Only after this migration is integrated may `reviewed/050_writing_style_host_codex_runtime` be moved out of its paid-review migration wait state.
+1. Integrate this migration to latest `main`.
+2. Only after this migration is integrated, update `reviewed/050_writing_style_host_codex_runtime` so its `CURRENT.next_action` leaves the repository-wide paid-review safety migration wait.
+3. Stop there. Do not execute the 050 writing rewrite, do not run private 050 smoke, and do not version bump.

@@ -2,9 +2,9 @@
 
 ## What this task solved
 
-This task completed the deterministic infrastructure migration for paid review and CI lifecycle safety. It now stops at a project billing/credit handoff after the first live Text Review call failed closed.
+This task completed the infrastructure migration for paid review and CI lifecycle safety, including deterministic validation, bounded live Text/Visual smoke, and explicit full Marketplace CI.
 
-This is not a PASS, release, or integration closure. It is a credential/account handoff required by the frozen paid-review safety plan.
+This report records the migration branch evidence immediately before integration to latest `main` and the follow-on 050 unblocking step.
 
 ## What changed
 
@@ -41,32 +41,31 @@ Live OpenAI status:
 - Text input-token-only preflight run 33746261805: PASS, `/v1/responses/input_tokens` returned input_tokens 10; `/v1/responses` skipped.
 - Visual input-token-only preflight run 33746397708: PASS, `/v1/responses/input_tokens` returned input_tokens 10; `/v1/responses` skipped.
 - Text live smoke run 33746976670 reserved one campaign slot and then failed closed on `/v1/responses`: `HTTP 429 (credit_balance_exhausted; zero paid retry)`.
-- Existing shared campaign reservation: `results/infra_paid_review_safety_migration_20260903_live_smoke/paid_review_budget.json`, call 1, worst-case reserved cost `0.049760`.
-- Visual live smoke was not dispatched after the Text credit failure.
+- After user-confirmed funding, Text live smoke run 33748456926: PASS, reused call 1, actual model cost `0.002362`.
+- Visual live smoke run 33748612726: PASS, used call 2, actual model cost `0.002730`.
+- Shared campaign reservation: `results/infra_paid_review_safety_migration_20260903_live_smoke/paid_review_budget.json`, 2 reservations, cumulative worst-case reserved cost `0.099337`, total verified actual model cost `0.005092`, campaign ceiling `0.500000`, per-call ceiling `0.250000`, automatic paid retries 0.
 
 
 Local evidence:
 
-- AI_Skills full unittest suite passed: 171 tests.
+- AI_Skills full unittest suite passed: 172 tests.
 - Marketplace generation/validation/path budget check passed.
 - `scripts/skills.py validate` passed.
 - `scripts/skills.py audit --all` passed.
 - Bridge Kit pinned-commit companion tests passed: 42 tests.
+- Explicit GitHub `Codex Marketplace` integration gate run 33749066096 passed on branch `reviewed/infra_paid_review_safety_migration_20260903`, head `44dbe927e4dda98c6a2f6183559b693ebb4c92a1`, event `workflow_dispatch`.
 
 Required recovery path:
 
-1. Rerun the same Text Review request from shared campaign `infra_paid_review_safety_migration_20260903_live_smoke`; it must reuse the existing zero-billing reservation rather than create call 2.
-2. If Text PASS writes actual usage, run the Visual Review image-input smoke as call 2 in the same campaign.
-3. Complete one Text Review and one Visual Review image-input smoke within max calls 2, campaign budget <= $0.50, and per-request worst case <= $0.25.
-4. Dispatch the full Codex Marketplace integration gate explicitly.
-5. Integrate the migration to latest `main` only after live smoke and full gate PASS.
-6. Only then unblock `reviewed/050_writing_style_host_codex_runtime`.
+1. Integrate the migration to latest `main`.
+2. Only then unblock `reviewed/050_writing_style_host_codex_runtime`.
+3. Stop there; do not execute 050 writing rewrite or private smoke.
 
 ## Technical appendix
 
-- status: AWAIT_HUMAN_DECISION
-- reason: AI_RESEARCH_REVIEW_PROJECT_CREDIT_BALANCE_EXHAUSTED_DURING_TEXT_LIVE_SMOKE
-- implementation_evidence_tip: `b8fdf078fb943e37e15bf826749ed4c0f69e5e15`
+- status: AWAIT_HUMAN_DECISION / PLANNER_DECISION after live-smoke and CI gates passed
+- reason: LIVE_TEXT_VISUAL_SMOKE_AND_FULL_CI_GATE_PASS
+- implementation_evidence_tip: `44dbe927e4dda98c6a2f6183559b693ebb4c92a1`
 - latest_main_used: `7b08b6a24c7a371cc137a99297a8f40ca573c5fd`
 - first_published_handoff_tip: `5972a302721759354859bafc99dd7459143b17b2`
 - bridge_kit_paid_review_commit: `b185c1f3bd96f26c3e8af80a741e96775eca8e78`
