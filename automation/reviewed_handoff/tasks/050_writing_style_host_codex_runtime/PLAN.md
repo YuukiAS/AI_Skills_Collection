@@ -187,18 +187,20 @@ Released normal plugin use keeps Terra OFF by default.
 
 ### 7. Cost safety contract
 
+Plan revision 1 (2026-09-03) only aligns 050 with the repository-wide paid-review safety contract and the final reviewed Bridge Kit hardening at `6968a84b689d6e5589d068aee7dd101b12fd7700`; it does not change the selected host-Codex product architecture.
+
 For all paid QA in 050:
 
 - campaign call limit: 2 total Terra calls;
 - campaign hard cost ceiling: USD 0.50;
-- per-call worst-case preflight ceiling: USD 0.30;
-- every call must use a bounded output-token limit and low/no unnecessary reasoning;
+- per-call worst-case preflight ceiling: USD 0.25;
+- every call must use the current repository-wide paid-review runtime contract: `gpt-5.6-terra`, `service_tier=default`, low reasoning, bounded output, no paid tools, persistent pre-request reservation and actual-cost accounting;
 - campaign budget persists across reruns/processes;
 - a retry counts as another paid call and against the same campaign cost;
 - default automatic paid retry count: 0;
 - `credit_balance_exhausted`, `insufficient_quota`, project/org spend-limit errors: immediate zero-retry failure;
 - if the next call's conservative worst-case cost would exceed the remaining budget, do not send it;
-- unknown model pricing or missing usage accounting = do not send paid QA.
+- unknown model pricing or missing/unverified usage accounting = do not send further paid QA.
 
 Do not lower model quality silently to fit the budget.
 
