@@ -79,6 +79,27 @@
       "worst_case_reserved_cost_usd": "0.049760"
     },
     {
+      "actual_cost_status": "ACCOUNTING_VERIFIED",
+      "actual_cost_tokens": {
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 387,
+        "output_tokens": 163,
+        "uncached_input_tokens": 387
+      },
+      "actual_model_cost_usd": "0.002730",
+      "actual_response_usage": {
+        "input_tokens": 387,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 163,
+        "output_tokens_details": {
+          "reasoning_tokens": 59
+        },
+        "total_tokens": 550
+      },
       "automatic_paid_retries": 0,
       "call_number": 2,
       "cumulative_reserved_cost_usd": "0.099337",
