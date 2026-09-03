@@ -77,6 +77,36 @@
       "reserved_at": "2026-09-03T10:56:47Z",
       "review_type": "text_review",
       "worst_case_reserved_cost_usd": "0.049760"
+    },
+    {
+      "automatic_paid_retries": 0,
+      "call_number": 2,
+      "cumulative_reserved_cost_usd": "0.099337",
+      "input_token_preflight": {
+        "endpoint": "/responses/input_tokens",
+        "input_tokens": 170,
+        "raw_response": {
+          "input_tokens": 170,
+          "object": "response.input_tokens"
+        }
+      },
+      "max_output_tokens": 4096,
+      "model": "gpt-5.6-terra",
+      "pricing": {
+        "cache_write_input_usd_per_1m_tokens": "2.500000",
+        "cached_input_usd_per_1m_tokens": "0.200000",
+        "input_usd_per_1m_tokens": "2.000000",
+        "model": "gpt-5.6-terra",
+        "output_usd_per_1m_tokens": "12.000000",
+        "reviewed_on": "2026-09-03",
+        "runtime_uses_worst_case_input_price": true,
+        "worst_case_input_usd_per_1m_tokens": "2.500000"
+      },
+      "request_sha256": "1c5a094873e93a36a16d004cc4462c8116b689440b4c93cbdca95e4ebe229968",
+      "reservation_id": "infra_paid_review_safety_migration_20260903_live_smoke-2-1c5a094873e9",
+      "reserved_at": "2026-09-03T11:14:53Z",
+      "review_type": "visual_review",
+      "worst_case_reserved_cost_usd": "0.049577"
     }
   ],
   "schema": "AI_BRIDGE_PAID_REVIEW_BUDGET_V1"
