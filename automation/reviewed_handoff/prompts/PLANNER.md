@@ -43,6 +43,62 @@ Domain owner: <target plugin>
 
 如果 acceptance 明确依赖某个 user-facing text artifact 的定性质量、全文可读性、语言风格或读者体验，Planner 在冻结 Plan 前必须确认 Reviewer 有合法、真实可访问的 review path。`artifact 保持 host-local private` + `GitHub-only Scheduled Reviewer 判断全文质量` 是无效计划：若 artifact 不能公开 commit，必须要求 Text Review transport 已准备好，或把 task 保持在 planning/waiting 状态。
 
+### Paid external review planning
+
+任何 Plan 只要包含会产生真实 API 费用的 external model call，必须先读取：
+
+```text
+docs/workflows/PAID_EXTERNAL_REVIEW_POLICY.md
+```
+
+默认设计不是“每个 stage 都找一个更独立的模型复核”。当前 host model 应完成 ordinary generation、planning、intermediate reasoning、self-audit 和 repair；deterministic tooling 负责 mechanical verification。只有当 reviewer independence 本身产生不可替代的新增证据时，才允许 final candidate / final render external review。
+
+Planner 不得因为“更稳”“再审一遍”“不同角色更独立”就把 Document Map、segmentation、Meaning Card、writer、ordinary semantic audit、targeted repair、assembly 等阶段改成付费 API pipeline。也不得通过换成更便宜的外部模型来维持错误的 per-stage architecture。
+
+如果仍需要 paid review，Plan 必须显式冻结：
+
+```text
+why host model + deterministic checks are insufficient
+model
+max paid calls
+per-call worst-case ceiling
+campaign hard budget
+manual trigger
+retry policy
+candidate/source/intermediate boundary
+```
+
+AI_Skills 默认值是：
+
+```text
+model: gpt-5.6-terra
+max paid calls per task campaign: 2
+campaign reserved-cost hard ceiling: USD 0.50
+per-call worst-case ceiling: USD 0.25
+automatic paid retries: 0
+```
+
+超出默认值必须由用户明确批准。retry、workflow rerun、Codex restart、换机器/checkout 都不能产生新预算。Planner 必须把 paid workflow 冻结为 explicit/manual invocation；普通 push/CI 不得调用付费模型。
+
+如果当前 Text Review / Visual Review runtime 尚不能证明 persistent pre-request reservation、worst-case budget fuse、billing/quota zero-retry 和 candidate-only/visual-input-only 边界，则先修 review infrastructure，不得让高成本业务 task 一边依赖已知不安全的 paid review path 一边继续执行。
+
+### GitHub CI lifecycle planning
+
+Full CI is a phase gate, not a per-commit ritual. Planner must separate:
+
+```text
+development-local tests
+final GitHub integration/release CI
+```
+
+Do not write a normal implementation loop that waits for full GitHub Actions
+after every push. Heavyweight full/release/integration workflows, including the
+Codex Marketplace full matrix, should run only after an implementation
+candidate is frozen or through pull-request/release gates. `ci_required=true`
+means: candidate frozen -> explicit full CI dispatch on the task branch -> PASS
+-> Reviewer/integration. Cheap automatic push CI is allowed only when it is
+zero-paid, path-scoped, read-only, and directly relevant to the changed area.
+
 Planner / Reviewer 能依据 frozen requirement 明确判断的问题，不得外包给用户；不得推给 `AWAIT_HUMAN_DECISION`。明显违反用户明确规则、明显机器腔、明显 layout failure、明显 artifact regression 应冻结为 Reviewer 必须自行 `REVISE` 或在不可恢复时 `BLOCKED` 的条件。Human gate 默认只用于真正互斥的产品/科研选择、frozen criteria 无法决定的主观偏好、用户必须亲自授权的外部动作、显著风险/成本/隐私/许可决定，或 frozen Plan 明确要求的最终人工验收。
 
 044 是必须覆盖的真实回归：用户报告完整 private `rewritten_report.md` 仍有 `provenance`、`estimand`、`scientific gap`、`resource contract`、`state of the art` 等 reader-facing 表达，违反 frozen writing requirement；Reviewer 因未读取完整 artifact 仍给 PASS。后续同类 writing/report/artifact 任务必须先证明 Reviewer 实际读取最终 artifact，不能用摘要或 process PASS 推导 product PASS。

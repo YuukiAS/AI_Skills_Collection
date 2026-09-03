@@ -8,6 +8,29 @@ Current capability status: `baseline`.
 
 ## Incoming real-use feedback
 
+### CAT-TRACE v13/v14 follow-up feedback is consolidated into the canonical inbox
+status: NEW
+source: TRACE / CAT-TRACE v13 and v14 human reviews on 2026-09-03
+evidence: former packets `docs/plugin-todos/presentations-v13-regression-followup.md` and `docs/plugin-todos/presentations-v14-content-language-second-gate.md`; TRACE v13 commit `33b616866a47231b9e74bbc3486aba3b73a5d020`; v14 human review after the major v13 narrative/diagram repair.
+problem: These reviews add one consolidated real-use feedback packet to the canonical `presentations` inbox. The unique failures to preserve are:
+
+- First-use must be an ordering invariant, not only a definition checklist. v13 used `CAT-TRACE` in audience-facing P2, P8 and P12 before the method was formally introduced on P14. Future QA needs a method/concept registry with a first allowed anchor or prerequisite set, and the final deck scan must include rewritten bridge text that can reintroduce early terms.
+- A scoped visual review must not certify the whole deck. v13 independent review focused on P21/P36/P42, then returned a global PASS while later human review found major unreviewed regressions on P2, P6, P12, P21, P25, P35 and elsewhere. Review artifacts need `review_scope`, `reviewed_requirements` and `unreviewed_requirements`; global PASS is impossible while mandatory global requirements remain unreviewed.
+- New or substantially rewritten slides need the v9-style pre-writing semantic brief again. Accepted old-slide quality does not transfer to new slides drafted from planning notes; each new or heavily rewritten content slide needs audience assumption, one page job, prerequisites, one concrete object/example when useful, and one sentence the audience should remember before visible prose is written.
+- Planner language and internal version labels need an audience-copy firewall. v13/v14 exposed labels such as `V1`, `V2`, `current construction`, `Theory result 1` and `Theory target` as if the audience needed project-management bookkeeping. Visible slides should explain the current method, future extension or theory status in scientific language, without implying unproved targets are established.
+- Diagram QA needs a utility/quality floor in addition to semantic correctness and collision checks. A diagram should survive only if it helps the audience understand the relationship faster than a short explanation or equation; final render QA must still check whitespace, hierarchy, connector length, node text readability, and whether prose has been stuffed into tiny boxes.
+- Examples and takeaways need an explanatory bridge when the conclusion is not self-evident. v13 P6 jumped from Malagasy OTU counts to the named-species conclusion without explaining why the example supports that inference.
+- Natural slide language requires spoken scientific prose, not only grammatical cleanup. v13/v14 retained formulaic titles, repeated `What...` / `Where...` / `How...` stems, narrator labels such as `What it says`, and memo-like sentences. A second content-language gate should reread the final slide as spoken explanation after structural repair.
+- Simplifying a slide must not delete why the scientific object is in the talk. v14 dataset pages became cleaner but over-compressed the narrative explaining each dataset's distinct role.
+- First-use/context QA must include every visible text layer: figure legends, axis labels, tick labels, panel titles, table cells, diagram nodes, annotations, captions and baseline display names. v14 exposed `bigMVP`, `bigMVP-h`, `TRACE-h` and `TRACE no covariates` inside a figure before the audience had useful explanations.
+- A result figure should be redrawn around the claim the audience needs to see. v14 kept analysis-style log-MSE boxplots even though the main communication need was over/underprediction and model-specification sensitivity.
+- Diagram geometry rules are cumulative. A new semantic/utility rule does not replace older accepted arrow/node constraints such as boundary clipping, visible shaft length, peer-edge consistency, spacing and label clearance.
+- Mathematical symbols need cross-slide first-use and conditioning-level checks. v14 used `D_W` and `lambda_{g,m|n}` without sufficient introduction or level distinction.
+- Oracle/generative checks and fitted simulations need visibly different jobs. Simulation 1A is an oracle DGP/theory check and must not be presented as estimator quality; Simulation 1B is fitted recovery.
+- A second-gate review should compare final deck language against the best accepted readability baseline, not only the immediate bad predecessor. CAT-TRACE v9 remains important evidence for the readability floor even when v14 improves over v13.
+
+project-specific context: CAT-TRACE, TRACE, HMSC, CORAL, exact page numbers, exact method labels, dataset roles, simulation numbering, and mathematical notation belong to TRACE. The generic issues are ordering, scope integrity, pre-writing orchestration, audience-copy firewall, diagram utility/geometry, spoken scientific language, all-visible-text first-use, claim-first figures, symbol registry, and quality-reference baselines.
+
 ### Advisor discussion questions need a decision-value and answerability gate
 status: NEW
 source: TRACE / CAT-TRACE 35-page group-meeting deck v11 review

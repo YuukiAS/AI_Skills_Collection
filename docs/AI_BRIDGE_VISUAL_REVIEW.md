@@ -2,10 +2,10 @@
 
 Visual Review is a shared optional evidence producer for Reviewed Handoff and Agent-Flow. It is not a new GPT role and it does not give Planner, Critic, Controller, Verifier, Executor, Scheduled GPT, local Codex, or local watchers access to an OpenAI API key.
 
-Default live execution belongs in GitHub Actions:
+Default live execution belongs in an explicit GitHub Actions dispatch:
 
 ```text
-trusted branch push / workflow_dispatch
+workflow_dispatch with a task-local manifest
 → render or collect public-safe visual inputs
 → ai-bridge visual-review run
 → results/<task_key>/visual_review/VISUAL_REVIEW.json
@@ -29,22 +29,24 @@ repository-relative `visual_review_manifest_path` and
 no-op. Exactly one eligible task runs live review. Multiple eligible tasks or
 manifest identity conflicts fail closed.
 
-`workflow_dispatch` remains the manual recovery/debug route and its explicit
-`manifest` and `output` inputs take priority over automatic push resolution.
+`workflow_dispatch` is the only live paid Visual Review route in AI_Skills.
+Ordinary push may publish manifests, renders or evidence, but must not call
+OpenAI.
 
 Use the repository secret name `OPENAI_VISUAL_REVIEW_API_KEY`. In the workflow, map it only inside the visual review job:
 
 ```yaml
 env:
-  OPENAI_API_KEY: ${{ secrets.OPENAI_VISUAL_REVIEW_API_KEY }}
+  OPENAI_VISUAL_REVIEW_API_KEY: ${{ secrets.OPENAI_VISUAL_REVIEW_API_KEY }}
 ```
 
-The production default Visual Review model is `gpt-5.6-terra`. Ordinary consumer repositories do not need to set a model variable. Set `OPENAI_VISUAL_REVIEW_MODEL` as a GitHub Actions variable or plain environment variable only when a project has an explicit quality, cost, permission, or model-freeze reason to override the shared default. An explicit CLI `--model` value takes priority over `OPENAI_VISUAL_REVIEW_MODEL`, which takes priority over the Bridge Kit shared default.
+The production Visual Review model is `gpt-5.6-terra`. AI_Skills workflows pin
+this explicitly; unknown pricing or model mismatch must fail closed.
 
 Recommended OpenAI setup:
 
 ```text
-OpenAI Project: AI Bridge Visual Review
+OpenAI Project: AI_Research_Review
 one restricted project-scoped key per repository
 ```
 
@@ -59,6 +61,9 @@ ai-bridge visual-review preflight --target <repo>
 This checks whether visual review is configured, whether a GitHub workflow references the standard secret name, and, when `gh` is available and logged in, whether `gh secret list` shows `OPENAI_VISUAL_REVIEW_API_KEY`. It never reads the secret value.
 
 Generated evidence must stay under the repository-relative path
-`results/<task_key>/visual_review/**`. The workflow ignores
-`results/**/visual_review/**` push changes so an evidence-only commit does not
-retrigger the visual review job.
+`results/<task_key>/visual_review/**`. The adjacent
+`results/<task_key>/paid_review_budget.json` records the persistent worst-case
+reservation receipt: max 2 paid calls, USD 0.50 campaign ceiling, USD 0.25
+per-request ceiling, and zero automatic paid retry. Visual Review sends image
+inputs for review evidence only; it must not enable image generation, web
+search, file search, computer use or other paid tools.

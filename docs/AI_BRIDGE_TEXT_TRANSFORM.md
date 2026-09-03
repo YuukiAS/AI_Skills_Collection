@@ -7,10 +7,15 @@ private source text in encrypted input, decrypts only inside a temporary GitHub
 Actions runner directory, calls OpenAI Responses with `store=false`, and writes
 back encrypted output plus public metadata.
 
-This repository's installed workflow is pinned to Bridge Kit commit
+This is a 049-only historical transport. The GitHub Actions workflow that used
+it has been retired from the 050 branch and must not be restored as a GitHub
+Actions production path. Task 050 uses host Codex for generation and only allows
+bounded candidate-only paid QA under the paid-review budget contract.
+
+The retired 049 workflow was pinned to Bridge Kit commit
 `65ea9c59afbe2db88bb5d60bf8752f82719f0087`.
 
-For 049 private style smoke, the production path is:
+For 049 private style smoke, the historical path was:
 
 ```text
 private local segment
@@ -28,8 +33,7 @@ manifest, output public recipient, encrypted output, public stage receipt, and
 `TEXT_TRANSFORM.json`. Tracked files must never include source plaintext,
 transformed plaintext, age private identities, or OpenAI API keys.
 
-The installed-entrypoint replay and private-artifact generation paths are
-separate. Installed-entrypoint evidence validates plugin install, routing, and
-runtime receipts in an isolated Codex home. Private style-smoke generation uses
-the frozen secure transport and does not require mutating the user's live global
-marketplace or copying Codex auth material.
+The installed-entrypoint replay and private-artifact generation paths were
+separate in 049. For 050 and later production work, this document is historical
+context only; ordinary push must not launch paid model transforms, and external
+paid calls require frozen campaign budget context.

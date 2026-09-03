@@ -1,0 +1,20 @@
+{
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "task_key": "infra_paid_review_safety_migration_20260903",
+  "state": "AWAIT_HUMAN_DECISION",
+  "review_round": 0,
+  "max_review_rounds": 2,
+  "plan_revision": 0,
+  "max_plan_revisions": 1,
+  "base_commit": "b80bde2479b41aea334e5156a8f5069c6d343adb",
+  "base_branch": "main",
+  "implementation_commit": "44dbe927e4dda98c6a2f6183559b693ebb4c92a1",
+  "ci_required": true,
+  "ci_status": "PASS",
+  "last_review_decision": null,
+  "review_limit_reached": false,
+  "human_gate_reason": "PLANNER_DECISION",
+  "visual_review_required": false,
+  "text_review_required": false,
+  "next_action": "INTEGRATE_MIGRATION_TO_LATEST_MAIN_THEN_UNBLOCK_050_WITHOUT_RUNNING_050_REWRITE_OR_PRIVATE_SMOKE"
+}

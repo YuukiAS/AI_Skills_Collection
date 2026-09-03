@@ -373,6 +373,58 @@ Planner / Reviewer 能依据 frozen requirement 自行判断的明显问题，�
 
 044 是当前回归例：用户报告完整 private `rewritten_report.md` 仍有 `provenance`、`estimand`、`scientific gap`、`resource contract`、`state of the art` 等 reader-facing 表达，违反 frozen writing requirement；Reviewer 未读取完整 artifact 却给 PASS。以后同类任务必须由 artifact-aware review 层自动挡住，不能等用户人工发现。
 
+### 8.3.1 Paid external review 是例外，不是默认 stage
+
+任何会产生真实 API 费用的 external model review，都必须先读取：
+
+```text
+docs/workflows/PAID_EXTERNAL_REVIEW_POLICY.md
+```
+
+这条规则同时约束 GPT Planner、Codex Executor、Reviewer 和 GitHub Actions。
+
+默认架构是：当前 host model 完成 generation / intermediate reasoning / self-audit，本地 deterministic tooling 完成机械验证；外部 Terra 只在“独立性本身提供新增证据”时做 final candidate / final render QA。不得因为“多一个 reviewer 更稳”就把 Document Map、segmentation、Meaning Card、writer、ordinary semantic audit、repair、assembly 等中间阶段逐个改成付费 API 调用。
+
+任何 frozen Plan 只要包含付费 external model call，都必须显式写明：为什么 host model/deterministic checks 不足、最多 paid calls、单次 worst-case ceiling、task campaign hard budget、manual trigger、retry policy、candidate/source boundary。回答不完整则不得执行付费 review。
+
+默认 Reviewed Handoff paid-review budget 是：
+
+```text
+model: gpt-5.6-terra
+max paid calls per task campaign: 2
+campaign reserved-cost hard ceiling: USD 0.50
+per-call worst-case ceiling: USD 0.25
+automatic paid retries: 0
+```
+
+retry、rerun、Codex restart、workflow restart、换机器或 checkout 不得重置 budget。每次 paid request 必须先对真实 request 做 input-token preflight，按 uncached input + bounded max output 的最坏价格计算并持久化 reservation；reservation 成功后才能发送。普通 `push` / CI 不得调用付费模型。
+
+Text Review 与 Visual Review 都应继续可用，但 reviewer Project / secret 不等于 production generation dependency。Visual Review 只允许 final image input review，不允许 image generation 或额外付费 tools。用户明确拒绝真实 artifact 时，Terra/CI PASS 不能覆盖用户反馈。
+
+### 8.3.2 Full CI 是阶段门，不是每个 commit 的仪式
+
+heavyweight full/release/integration CI 只在正确生命周期 gate 运行：
+
+```text
+implementation candidate frozen
+-> explicit full CI dispatch on the task branch
+-> PASS
+-> Reviewer / integration
+```
+
+普通开发循环默认先跑本地 deterministic tests 和 path-scoped cheap checks。GPT Planner 不得机械要求“每次 push 后等待完整 GitHub Actions”作为普通实现节奏；Plan 必须区分 development-local tests 与 final GitHub integration/release CI。
+
+只有同时满足以下条件的 workflow 才允许 ordinary push 自动运行：
+
+- zero paid API；
+- cheap；
+- strongly path-scoped；
+- failure 与当前 changed area 直接相关；
+- 不修改 repository；
+- 不运行全库 heavyweight matrix。
+
+不满足这些条件的 workflow 必须是 explicit gate，例如 `workflow_dispatch` 或 PR/release gate。Codex Marketplace full matrix 是 integration/release gate；CI 只验证 generated parity/freshness，不自动 commit/push generated payload。
+
 ### 8.4 Visual review skipped 语义
 
 `visual_review_required=true` 时，才运行真实 Visual Review，并且 evidence 必须绑定 artifact identity。`visual_review_required=false` 时，不运行昂贵模型/API review，GitHub UI/状态必须表达 `SKIPPED` / `NOT_REQUIRED`，不能让真正的 visual-review job 显示成容易误读的 PASS。

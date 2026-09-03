@@ -6,13 +6,18 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: ai-bridge-paid-review-${{ github.repository }}
+  cancel-in-progress: false
+
 jobs:
   comparative-visual-review:
     runs-on: ubuntu-latest
     env:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_VISUAL_REVIEW_API_KEY }}
-      OPENAI_VISUAL_REVIEW_MODEL: ${{ vars.OPENAI_VISUAL_REVIEW_MODEL }}
-      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@f7c2f97cf44b1a4a52ff188c4a45a7eec57b808e
+      OPENAI_VISUAL_REVIEW_API_KEY: ${{ secrets.OPENAI_VISUAL_REVIEW_API_KEY }}
+      OPENAI_VISUAL_REVIEW_MODEL: gpt-5.6-terra
+      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@b185c1f3bd96f26c3e8af80a741e96775eca8e78
+      AI_BRIDGE_PAID_REVIEW_GIT_RESERVE: "1"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,7 +37,7 @@ jobs:
       - name: Refuse missing visual review secret
         shell: bash
         run: |
-          if [ -z "${OPENAI_API_KEY}" ]; then
+          if [ -z "${OPENAI_VISUAL_REVIEW_API_KEY}" ]; then
             echo "OPENAI_VISUAL_REVIEW_API_KEY is not configured."
             exit 1
           fi

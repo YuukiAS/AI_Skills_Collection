@@ -1,0 +1,25 @@
+{
+  "external_upload_authorization": "User authorized this tiny public-safe migration smoke through OpenAI Responses API with store=false; no private content is included.",
+  "identity_bindings": {
+    "implementation_commit": "875f861ff95e937faa80b0e83d151c98b9b5974d"
+  },
+  "input": {
+    "ciphertext_sha256": "8f329882d516d58449bf4239718e69f1428c86773d60f3f1f552ff26216e25a4",
+    "encrypted_payload_path": "results/infra_paid_review_safety_migration_20260903/text_review/payload.age",
+    "logical_id": "primary_text",
+    "mime_type": "text/markdown; charset=utf-8",
+    "plaintext_sha256": "da1915db8b6baa93b9ce857cf737102d39915fe7a65cd5984c723e88adf72435",
+    "plaintext_size_bytes": 189,
+    "source_basename": "text-smoke.md"
+  },
+  "paid_review_campaign_id": "infra_paid_review_safety_migration_20260903_live_smoke",
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "prompt_version": "ai-bridge.text-review.v1",
+  "review_kind": "paid-review-migration-live-smoke",
+  "rubric": {
+    "instructions": "Return PASS only if the supplied public-safe text explicitly states this is a paid review migration smoke and that ordinary push must make zero OpenAI calls. Return REVISE for any contradiction."
+  },
+  "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1",
+  "task_key": "infra_paid_review_safety_migration_20260903",
+  "workflow_type": "reviewed_handoff"
+}

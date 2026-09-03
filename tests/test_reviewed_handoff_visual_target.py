@@ -228,39 +228,46 @@ class ReviewedHandoffVisualTargetTests(unittest.TestCase):
 
 
 class VisualReviewWorkflowTests(unittest.TestCase):
-    def test_dispatch_inputs_are_preserved_and_pin_is_current(self) -> None:
+    def test_visual_review_workflow_is_manual_only_and_pin_is_current(self) -> None:
         workflow = (REPO_ROOT / ".github/workflows/ai-bridge-visual-review.yml").read_text(encoding="utf-8")
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("github.event.inputs.manifest", workflow)
         self.assertIn("github.event.inputs.output", workflow)
-        self.assertIn("9e8ab90fb13e92d268b08ad7fc7aa64ed9f9877a", workflow)
-
-    def test_push_path_is_manifest_only_and_writes_back_to_trigger_branch(self) -> None:
-        workflow = (REPO_ROOT / ".github/workflows/ai-bridge-visual-review.yml").read_text(encoding="utf-8")
-        self.assertIn("branches:", workflow)
-        self.assertIn("- main", workflow)
-        self.assertIn("- 'reviewed/**'", workflow)
-        self.assertIn("paths:", workflow)
-        self.assertIn("'results/**/visual_review/visual_inputs.json'", workflow)
+        self.assertIn("b185c1f3bd96f26c3e8af80a741e96775eca8e78", workflow)
+        self.assertNotIn("\n  push:", workflow)
+        self.assertNotIn("vars.OPENAI_VISUAL_REVIEW_MODEL", workflow)
+        self.assertIn("OPENAI_VISUAL_REVIEW_MODEL: gpt-5.6-terra", workflow)
+        self.assertIn('AI_BRIDGE_PAID_REVIEW_GIT_RESERVE: "1"', workflow)
+        self.assertIn("group: ai-bridge-paid-review-${{ github.repository }}", workflow)
         self.assertNotIn("paths-ignore:", workflow)
         self.assertNotIn("scripts/resolve_reviewed_handoff_visual_target.py", workflow)
         self.assertNotIn("vars.AI_BRIDGE_VISUAL_REVIEW_MANIFEST", workflow)
         self.assertNotIn("vars.AI_BRIDGE_VISUAL_REVIEW_OUTPUT", workflow)
+        self.assertIn("OPENAI_VISUAL_REVIEW_API_KEY: ${{ secrets.OPENAI_VISUAL_REVIEW_API_KEY }}", workflow)
+        self.assertNotIn("OPENAI_API_KEY: ${{ secrets.OPENAI_VISUAL_REVIEW_API_KEY }}", workflow)
+        self.assertIn("cannot run live visual review", workflow)
+        self.assertNotIn("skipping live visual review", workflow)
         self.assertIn('git push origin "HEAD:${GITHUB_REF_NAME}"', workflow)
 
 
 class TextReviewWorkflowTests(unittest.TestCase):
-    def test_text_review_workflow_uses_manifest_filter_fallback_key_and_branch_writeback(self) -> None:
+    def test_text_review_workflow_is_manual_only_without_secret_fallback(self) -> None:
         workflow = (REPO_ROOT / ".github/workflows/ai-bridge-text-review.yml").read_text(encoding="utf-8")
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("github.event.inputs.manifest", workflow)
         self.assertIn("github.event.inputs.output", workflow)
-        self.assertIn("9e8ab90fb13e92d268b08ad7fc7aa64ed9f9877a", workflow)
-        self.assertIn("- main", workflow)
-        self.assertIn("- 'reviewed/**'", workflow)
-        self.assertIn("'results/**/text_review/text_inputs.json'", workflow)
-        self.assertIn("secrets.OPENAI_REVIEW_API_KEY || secrets.OPENAI_VISUAL_REVIEW_API_KEY", workflow)
+        self.assertIn("b185c1f3bd96f26c3e8af80a741e96775eca8e78", workflow)
+        self.assertNotIn("\n  push:", workflow)
+        self.assertNotIn("||", workflow)
+        self.assertIn("OPENAI_REVIEW_API_KEY: ${{ secrets.OPENAI_REVIEW_API_KEY }}", workflow)
+        self.assertNotIn("OPENAI_API_KEY: ${{ secrets.OPENAI_REVIEW_API_KEY", workflow)
+        self.assertNotIn("OPENAI_VISUAL_REVIEW_API_KEY", workflow)
+        self.assertNotIn("vars.OPENAI_TEXT_REVIEW_MODEL", workflow)
+        self.assertIn("OPENAI_TEXT_REVIEW_MODEL: gpt-5.6-terra", workflow)
+        self.assertIn('AI_BRIDGE_PAID_REVIEW_GIT_RESERVE: "1"', workflow)
+        self.assertIn("group: ai-bridge-paid-review-${{ github.repository }}", workflow)
         self.assertIn("AI_BRIDGE_PRIVATE_REVIEW_AGE_KEY", workflow)
+        self.assertIn("OPENAI_REVIEW_API_KEY is not configured; cannot run live text review.", workflow)
         self.assertIn('git push origin "HEAD:${GITHUB_REF_NAME}"', workflow)
 
 
