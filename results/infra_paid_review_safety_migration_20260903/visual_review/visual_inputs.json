@@ -19,6 +19,6 @@
     "instructions": "Return PASS only if the supplied image is a nonblank public-safe synthetic color-block fixture and no image generation, tools, web search, file search, or computer use is requested. Return REVISE for any contradiction."
   },
   "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
-  "task_key": "infra_paid_review_safety_migration_20260903_visual_smoke",
+  "task_key": "infra_paid_review_safety_migration_20260903",
   "workflow_type": "reviewed_handoff"
 }

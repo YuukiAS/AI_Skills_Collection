@@ -20,6 +20,6 @@
     "instructions": "Return PASS only if the supplied public-safe text explicitly states this is a paid review migration smoke and that ordinary push must make zero OpenAI calls. Return REVISE for any contradiction."
   },
   "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1",
-  "task_key": "infra_paid_review_safety_migration_20260903_text_smoke",
+  "task_key": "infra_paid_review_safety_migration_20260903",
   "workflow_type": "reviewed_handoff"
 }
