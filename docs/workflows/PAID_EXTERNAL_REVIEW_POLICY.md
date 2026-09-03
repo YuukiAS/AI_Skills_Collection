@@ -70,12 +70,14 @@ reservation 一旦发生，不因为请求失败、实际输出较短、retry、
 input: USD 2 / 1M tokens
 cached input: USD 0.20 / 1M tokens
 output: USD 12 / 1M tokens
-cache write: 1.25x uncached input price
+cache write: 1.25x uncached input price = USD 2.50 / 1M tokens
 ```
 
-GPT-5.6 还存在长上下文分档价格；任何 request 如果进入已验证价格表之外的区间，必须 fail closed。当前 reviewer request 应通过预算/TPM 边界远低于该阈值，不得依赖“应该不会超过”而忽略检查。
+preflight 为了保证真正的 hard ceiling，输入侧按当前已验证的最贵可出现单价计算，即默认把全部 preflight input tokens 按 `USD 2.50 / 1M` 预留；输出侧按 `max_output_tokens * USD 12 / 1M` 预留。这样即使 provider 意外产生 cache write，reservation 仍不会低估该请求的最坏成本。
 
-为了让 preflight 与实际账单口径稳定，review request 默认使用 `prompt_cache_options.mode=explicit` 且不设置 cache breakpoint，避免 implicit cache-write 产生额外计费。如果成功 response 仍报告非零 `cache_write_tokens`，则标记 `ACCOUNTING_UNVERIFIED`，同一 campaign 不得再发下一次 paid request，直到计费逻辑被重新核实。
+GPT-5.6 还存在长上下文分档价格；任何 request 如果进入已验证价格表之外的区间，必须 fail closed。当前 `$0.25` per-call ceiling + 4096 output-token cap 本身会把允许的 input 规模压到远低于长上下文价格阈值，但实现仍必须显式检查，不能靠推断跳过。
+
+review request 同时使用 `prompt_cache_options.mode=explicit` 且不设置 cache breakpoint，避免不必要的 implicit cache-write。这个设置是降低实际成本，不是 preflight 安全性的前提；preflight 仍按 `USD 2.50 / 1M input` 的保守上界预留。
 
 ## 5. 每轮实际花销：只用 response usage 计算 task-local actual cost
 
@@ -92,21 +94,29 @@ usage.output_tokens_details.reasoning_tokens
 
 `usage.output_tokens` 已包含 reasoning tokens，因此 reasoning tokens 只作为诊断字段，不能再次加价。
 
-在默认禁用 cache-write 的合同下，若 `cache_write_tokens=0`，actual model cost 按官方 usage 计算：
+actual model cost 使用 response 自己返回的 usage 计算。令：
 
 ```text
-uncached_input_tokens = input_tokens - cached_tokens
-actual_model_cost_usd =
-  uncached_input_tokens * 2 / 1_000_000
-  + cached_tokens * 0.20 / 1_000_000
-  + output_tokens * 12 / 1_000_000
+regular_input_tokens = input_tokens - cached_tokens - cache_write_tokens
 ```
 
-receipt 必须同时保留两套数字：
+必须先验证三者非负且分解一致，然后计算：
+
+```text
+actual_model_cost_usd =
+  regular_input_tokens * 2.00 / 1_000_000
+  + cached_tokens * 0.20 / 1_000_000
+  + cache_write_tokens * 2.50 / 1_000_000
+  + output_tokens * 12.00 / 1_000_000
+```
+
+如果 usage 出现当前已验证价格表无法解释的字段、负分解、不同 service tier、不同模型、长上下文高价区间或其他未知计费模式，则标记 `ACCOUNTING_UNVERIFIED`，同一 campaign 不得再发下一次 paid request，直到计费逻辑重新核实。不得猜价。
+
+receipt 必须同时保留：
 
 ```text
 reserved_worst_case_cost_usd   # safety gate，不返还
-actual_model_cost_usd           # 本次真实 model usage 的成本核算
+actual_model_cost_usd           # 本次真实 model usage 成本
 campaign_reserved_cost_usd
 campaign_actual_model_cost_usd
 ```
@@ -160,6 +170,8 @@ results/<task_key>/paid_review_budget.json
 4. Text/Visual paid workflows 共同使用 repository-wide concurrency group，例如 `ai-bridge-paid-review-${{ github.repository }}`、`cancel-in-progress: false`，仅作为 race mutex；
 5. 不把 GitHub concurrency 的 pending run 当 FIFO queue，也不允许主动积压一串 pending paid workflows；GitHub concurrency 不保证 FIFO，不能承担业务队列语义；
 6. 极小概率 race 导致一个 pending run 被取消/替换时，若其 paid request 尚未开始、未 reserve，则视为 scheduling deferral，不是 task failure，也不消耗 review/repair/cost budget；后续正常 Executor/scheduler check 再尝试。
+
+应优先复用/扩展现有 CLI 或一个轻量 dispatcher helper 来执行“检查 slot + dispatch”，而不是只靠文档提醒 Agent。这个 helper 可以调用 GitHub/`gh` 的 workflow-run metadata，但不得持有 OpenAI key、不得创建长期服务、不得自己维护第二份 queue ledger。
 
 不要为此新增数据库、长期 worker、daemon、独立 queue service 或新的 Reviewed Handoff state。当前迁移只保证 **AI_Skills_Collection repo 内** 的 paid review 串行；不同 repository 共享同一 OpenAI Project 时仍由 Project 10 RPM / 100k TPM / monthly hard limit 做外层保护。除非以后真实出现跨 repo contention，不提前构建全局 queue。
 

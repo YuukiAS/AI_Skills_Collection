@@ -14,6 +14,14 @@ Make paid Text Review and Visual Review explicit, bounded infrastructure gates r
 
 The migration is bounded by the pass-by-pass contract below. It must preserve separate `OPENAI_REVIEW_API_KEY` and `OPENAI_VISUAL_REVIEW_API_KEY` names, remove cross-secret fallback, pin paid review to `gpt-5.6-terra`, use the exact Bridge Kit paid-review safety implementation, and keep 050 blocked until this repo-wide migration is integrated.
 
+Paid-review accounting and parallelism are now also frozen:
+
+- every successful paid call must record both worst-case reservation and actual model cost derived from Responses usage;
+- reviewer requests use deterministic pricing semantics: Terra, `service_tier=default`, low reasoning, no tools, bounded output, and explicit prompt-cache mode with no implicit cache breakpoint;
+- plugin development may remain parallel, but AI_Skills paid Terra review uses one repo-wide execution slot;
+- GitHub Actions concurrency is only the final race mutex, not a FIFO queue;
+- do not add a database, worker, daemon, queue service, or new Reviewed Handoff state for this.
+
 ## Implementation scope
 
 Scope is limited to AI_Skills paid-review workflow consumers, paid-review documentation, Reviewed Handoff Planner/Executor policy, CI lifecycle policy, deterministic regression tests, Bridge Kit pinning, and canonical Presentation TODO consolidation required to restore the full Marketplace gate.
@@ -26,9 +34,11 @@ The acceptance gates are the failure list, red-team checks, deterministic tests,
 
 An Executor may use local deterministic tests during development. A paid external review is only requested when a frozen Plan includes a bounded campaign budget and an explicit manual review invocation. Full GitHub Marketplace CI is dispatched after an implementation candidate is frozen, not after every ordinary commit.
 
+If another AI_Skills paid Text/Visual review is already queued/running, a task does not dispatch another paid workflow and does not reserve budget; it waits for the repo-wide paid-review slot and continues on the next normal Executor/scheduler check.
+
 ## Out of scope
 
-Do not execute 050 writing rewrite, do not run private 050 smoke, do not bring back 049 Terra-per-stage behavior, do not use old archived-project API keys, do not add a new Reviewed Handoff state machine, and do not version bump unless canonical version policy and Planner require it.
+Do not execute 050 writing rewrite, do not run private 050 smoke, do not bring back 049 Terra-per-stage behavior, do not use old archived-project API keys, do not add a new Reviewed Handoff state machine, do not build a FIFO queue service, and do not version bump unless canonical version policy and Planner require it.
 
 ## Pass 1 — Product
 
@@ -36,7 +46,7 @@ Do not execute 050 writing rewrite, do not run private 050 smoke, do not bring b
 
 Normal AI_Skills generation and intermediate reasoning use the host model and local deterministic checks. Paid OpenAI review is an explicit final-QA capability, not a hidden production dependency.
 
-Text Review and Visual Review remain available, but every paid call is bounded before it is sent.
+Text Review and Visual Review remain available, but every paid call is bounded before it is sent and leaves a task-local accounting receipt afterward.
 
 ### Failure even if tests pass
 
@@ -47,9 +57,12 @@ FAIL if any of the following remains true:
 - a paid review can run without a task/campaign budget context;
 - retry/rerun can reset paid budget;
 - a request can be sent before worst-case reservation is persisted;
+- successful review usage is not attributable back to the task as actual model cost;
 - a billing/quota error enters a sleep/backoff loop;
 - Visual Review can silently invoke image generation or another paid tool;
 - Planner contracts still encourage per-stage external review for routine reasoning;
+- multiple plugin paid reviews are allowed to race against the shared 100k TPM without a repo-wide slot/mutex contract;
+- GitHub concurrency pending behavior is treated as a reliable FIFO queue;
 - Text Review or Visual Review is broken after migration;
 - task 050 starts before this migration is integrated.
 
@@ -59,7 +72,7 @@ Executor must read the latest main of both repositories before implementation.
 
 ### AI_Skills_Collection verified starting points
 
-Current main policy:
+Current policy:
 
 ```text
 AGENTS.md §8.3.1
@@ -80,50 +93,58 @@ docs/AI_BRIDGE_VISUAL_REVIEW.md
 relevant tests
 ```
 
-At Plan freeze, the generic text and visual workflows still contain paid `push` triggers. Text Review still permits `OPENAI_REVIEW_API_KEY || OPENAI_VISUAL_REVIEW_API_KEY`. These are migration targets, not acceptable final behavior.
+At initial Plan freeze, the generic text and visual workflows still contained paid `push` triggers and Text Review permitted `OPENAI_REVIEW_API_KEY || OPENAI_VISUAL_REVIEW_API_KEY`. Migration implementation has already begun to remove those paths; Executor must re-read current branch, not assume initial state.
 
 ### Bridge Kit
 
-Read current `main`, AGENTS, Text Review / Visual Review implementation, Responses API request construction, retry behavior, and any usage/result schemas before editing. Bridge Kit owns generic transport/model-call mechanics; AI_Skills owns consumer policy and task planning.
+Read current migration branch/main, AGENTS, paid-review guard, Text Review / Visual Review implementation, Responses request construction, retry behavior, usage/result schemas and tests. Bridge Kit owns generic transport/model-call/accounting mechanics; AI_Skills owns consumer policy and dispatch lifecycle.
 
 ## Pass 3 — Alternatives
 
 ### A. Rely only on OpenAI Project hard limit / RPM
 
-Rejected. Platform limits are the final circuit breaker, not a per-task budget. Multiple concurrent tasks can still consume the project budget.
+Rejected. Platform limits are final circuit breakers, not per-task accounting or scheduling.
 
 ### B. Query organization Costs API before each call
 
-Rejected as runtime gating. It is asynchronous/aggregated and would require stronger organization credentials than review workflows should possess.
+Rejected. It is asynchronous/aggregated and requires stronger credentials than review workflows should possess.
 
-### C. Persistent per-task worst-case reservation + platform limits
+### C. Build a dedicated FIFO review service
+
+Rejected. Current paid review frequency is too low to justify a queue database, worker, lease/heartbeat system or daemon. It adds more failure modes than user value.
+
+### D. Persistent per-task reservation + actual-cost receipt + repo-wide execution slot
 
 Selected.
 
-Each paid request is preflighted using the exact request input token count and bounded maximum output. Worst-case cost is reserved persistently before sending. Reservations are never automatically refunded. Platform Terra-only allowlist, 10 RPM / 100k TPM, and USD 10 monthly hard limit remain external safety layers.
+Each request is preflighted from the exact request, worst-case cost is reserved persistently before send, successful usage is converted into task-local actual model cost, and multiple plugin tasks keep independent ledgers. AI_Skills serializes only the paid Terra execution slot; normal Codex/plugin development stays parallel. Platform Terra-only allowlist, 10 RPM / 100k TPM and USD 10 monthly hard limit remain external safety layers.
 
 ## Pass 4 — Red team
 
 Actively test:
 
 - two concurrent/restarted workflows targeting the same campaign;
-- a workflow rerun after a failed request;
-- transient 429 versus `credit_balance_exhausted` / spend-limit errors;
+- two different plugin campaigns with independent budgets;
+- two different plugin tasks trying to enter paid review simultaneously;
+- workflow rerun after a failed request;
+- transient 429 versus billing/spend-limit errors;
 - malformed/missing pricing config;
-- model ID mismatch from the Terra-only contract;
+- model/service-tier/reasoning/tool mismatch;
+- unexpected cache-write accounting;
 - text and image-input token preflight;
 - paid call count exhausted with money remaining;
 - budget exhausted with call slots remaining;
 - evidence writeback triggering another paid run;
 - missing secret on explicit manual review;
 - Visual Review trying to use any generation/tool capability;
-- old specialized presentation workflows bypassing the central budget guard.
+- old specialized presentation workflows bypassing the central guard;
+- GitHub concurrency pending cancellation/replacement being misread as FIFO delivery.
 
 ## Pass 5 — Execution contract
 
 ### 1. Planner / GPT contract
 
-Update the Reviewed Handoff Planner contract so any Plan containing paid external review must explicitly freeze:
+Update the Reviewed Handoff Planner contract so any Plan containing paid external review explicitly freezes:
 
 ```text
 necessity of independent external review
@@ -136,19 +157,19 @@ retry policy
 candidate/source boundary
 ```
 
-The Planner must reject routine per-stage paid review when host-model reasoning + deterministic checks suffice.
-
-Do not create a new workflow state merely for cost control.
+Planner must reject routine per-stage paid review when host-model reasoning + deterministic checks suffice. Planner must also distinguish parallel development from serialized paid final QA and must not invent a queue service merely to coordinate a few final reviews.
 
 ### 2. Executor contract
 
 Update Executor guidance to refuse any paid invocation that lacks the frozen budget context or violates `docs/workflows/PAID_EXTERNAL_REVIEW_POLICY.md`.
 
-### 3. Shared Bridge Kit budget guard
+Before dispatching a paid Text/Visual workflow, Executor must inspect current AI_Skills paid review runs. If another paid review is queued/in-progress, it must not dispatch and must not reserve budget. Keep the current task state legal and report `waiting_paid_review_slot` operationally; do not create a new workflow state solely for this.
 
-Prefer one generic implementation used by both Text Review and Visual Review rather than separate ad-hoc consumer calculators.
+### 3. Shared Bridge Kit budget/accounting guard
 
-The generic guard must support at least:
+Use one generic implementation for Text Review and Visual Review.
+
+The guard must support at least:
 
 ```text
 task_key / campaign_id
@@ -156,40 +177,54 @@ model_id
 campaign_budget_usd = 0.50 default
 max_paid_calls = 2 default
 per_call_worst_case_usd = 0.25 default
-max_output_tokens
-pricing identity / verified price table
+max_output_tokens = 4096 default
+pricing identity / reviewed price table
 persistent reservation ledger
+actual response usage
+actual per-call/campaign model cost
 ```
 
-Before sending a paid Responses request:
+Before sending `/v1/responses`:
 
 1. build the exact request;
-2. count exact input tokens using the provider-supported Responses input-token count path, including image inputs when present;
-3. calculate worst-case cost using uncached input plus bounded max output;
-4. validate model/pricing identity;
-5. atomically/serially reserve the worst-case amount and one call slot in the task campaign;
-6. only then send the request.
+2. count exact input tokens via `/v1/responses/input_tokens`, including image input;
+3. validate request pricing semantics;
+4. calculate worst-case cost;
+5. atomically reserve cost + call slot in the task campaign;
+6. persist reservation before send;
+7. only then send the paid request.
 
-Reservation is not automatically refunded on failure, shorter output, retry, rerun or restart.
+Reservation is never automatically refunded.
 
-Use a per-campaign concurrency/locking mechanism appropriate to the actual GitHub/Bridge Kit execution path so two concurrent runs cannot both spend the same remaining budget.
+After success, record response id, input/cached/cache-write/output/reasoning usage, actual model cost and cumulative actual model cost. `output_tokens` already includes reasoning tokens; do not double-count reasoning.
 
-Do not use Organization Admin API credentials.
+### 4. Deterministic Terra request / pricing boundary
 
-### 4. Current Terra price/config boundary
-
-Current reviewed baseline is:
+Current reviewed model price baseline (official OpenAI docs, reviewed 2026-09-03):
 
 ```text
 model: gpt-5.6-terra
 input: USD 2 / 1M tokens
 cached input: USD 0.20 / 1M tokens
 output: USD 12 / 1M tokens
+cache write: 1.25x uncached input price
 ```
 
-Source must be recorded as official OpenAI model documentation with a reviewed date. Runtime preflight uses uncached input. Unknown/stale/mismatched model pricing must fail closed rather than guess.
+The paid review request must explicitly use:
 
-Do not silently switch to Luna/Sol/another model to make a request fit the budget.
+```text
+model = gpt-5.6-terra
+service_tier = default
+reasoning.effort = low
+tools = []
+max_output_tokens = bounded
+prompt_cache_options.mode = explicit
+no explicit cache breakpoint
+```
+
+This intentionally disables implicit cache-write behavior for low-frequency review calls and makes preflight/accounting deterministic. If successful response still reports nonzero cache-write usage or another unrecognized pricing mode, mark accounting unverified and block subsequent paid calls in that campaign.
+
+Any request entering a different/unknown model price tier must fail closed. Do not silently switch to Luna/Sol.
 
 ### 5. Retry classification
 
@@ -204,17 +239,23 @@ organization_spend_limit_exceeded
 organization_usage_limit_exceeded
 ```
 
-must fail immediately.
+must fail immediately. A future transient retry still consumes the same campaign budget/call slot.
 
-If a future bounded transient retry is implemented, it consumes the same campaign call slot/reservation and cannot reset budget.
+### 6. Workflow triggers and repo-wide paid-review slot
 
-### 6. Workflow triggers
+Generic Text Review and Visual Review paid jobs are `workflow_dispatch` / equivalent explicit bounded invocation only. Remove paid `push` triggers.
 
-Generic Text Review and Visual Review paid jobs must be `workflow_dispatch` / equivalent explicit bounded invocation only.
+All AI_Skills paid Text/Visual workflows share one repository-wide concurrency group:
 
-Remove paid `push` triggers. Ordinary CI may validate manifests/budgets without calling Terra.
+```text
+ai-bridge-paid-review-${{ github.repository }}
+```
 
-Specialized presentation visual-review workflows are already manual at Plan freeze, but must still be audited so they cannot bypass the same budget guard.
+with `cancel-in-progress: false`.
+
+This concurrency group is only a final race mutex. It is not the queue. Executors must avoid dispatching while another paid run is active, so the repository should not accumulate multiple pending paid workflows. Do not claim FIFO ordering from GitHub concurrency.
+
+Different task campaigns retain independent `results/<task_key>/paid_review_budget.json` ledgers. Waiting for the repo-wide slot consumes no reservation and no paid-call count.
 
 ### 7. Secret migration
 
@@ -225,59 +266,60 @@ OPENAI_REVIEW_API_KEY
 OPENAI_VISUAL_REVIEW_API_KEY
 ```
 
-They may point to the same new `AI_Research_Review` project-scoped API key.
-
-Remove cross-secret fallback. Missing secret during an explicit paid review must fail closed with a clear non-secret message; it must not silently PASS/SKIP as if review occurred.
-
-Never print secret values.
-
-The Executor may verify only `PRESENT/MISSING`. If the new project-scoped key is not yet configured, stop at one explicit credential handoff and give the user the exact GitHub secret names to update; do not request the value in chat and do not use an old archived-project key as fallback.
+Both belong to the new `AI_Research_Review` project; they may be distinct keys with the same minimal `Responses=Write` scope. Remove cross-secret fallback. Missing secret during explicit review fails closed. Never print secret values.
 
 ### 8. Model variables
 
-Audit `OPENAI_TEXT_REVIEW_MODEL` and `OPENAI_VISUAL_REVIEW_MODEL`. Final production review must resolve to `gpt-5.6-terra` under the new project allowlist. Do not leave a stale model variable that makes the new key fail unexpectedly.
+Audit `OPENAI_TEXT_REVIEW_MODEL` and `OPENAI_VISUAL_REVIEW_MODEL`. Production review resolves exactly to `gpt-5.6-terra`; stale variables must not override it.
 
 ### 9. Visual boundary
 
-Visual Review uses Terra image input only. No image generation, web search, file search, computer use or other paid tool is part of review.
-
-`images/min` platform capacity is not the repository budget. Image inputs must be included in the exact request token preflight.
+Visual Review uses Terra image input only. No image generation, web search, file search, computer use or other paid tool. Image inputs must be included in the exact request preflight.
 
 ### 10. Tests before live spend
 
-Before any live OpenAI call, pass deterministic tests proving at minimum:
+Before any live OpenAI call, deterministic tests must prove at minimum:
 
-- paid push triggers are absent;
-- text/visual secret fallback is absent;
-- Planner and Executor policy references are active;
+- paid push triggers absent;
+- text/visual secret fallback absent;
+- Planner/Executor policy references active;
 - max calls / per-call / campaign budget validation;
-- persistent reservation survives rerun/restart;
-- concurrent same-campaign reservation cannot double-spend;
-- request is blocked before send when next worst-case cost exceeds remaining budget;
-- quota/billing error has zero automatic retry;
-- model mismatch / unknown pricing fail closed;
-- Text Review request path still constructs successfully;
-- Visual Review image-input path still constructs successfully and has no image-generation/tool capability.
+- reservation survives rerun/restart;
+- same-campaign concurrency cannot double-spend;
+- different campaigns keep independent budgets;
+- actual cost from usage is correct and reasoning tokens are not double-counted;
+- request forces default service tier / low reasoning / no tools / explicit no-breakpoint cache mode;
+- unexpected cache-write/pricing mode blocks subsequent paid call;
+- quota/billing errors have zero automatic retry;
+- model/pricing mismatch fail closed;
+- Text Review request constructs correctly;
+- Visual Review image-input request constructs correctly;
+- repo-wide concurrency is shared across Text/Visual workflows;
+- policy/dispatcher does not treat GitHub pending runs as FIFO queue.
 
 ### 11. Live migration smoke
 
-Only after deterministic tests pass and the user has configured the new project-scoped GitHub review secret(s), run a tiny public-safe live smoke for:
+Only after deterministic tests pass and both new project-scoped GitHub secrets are PRESENT, run a tiny public-safe live smoke for:
 
 1. Text Review;
 2. Visual Review with one small public-safe image.
 
-Use one migration campaign with the same canonical max 2 calls / USD 0.50 reserved budget. Each request must remain under USD 0.25 worst-case.
+Use one migration campaign with max 2 calls / USD 0.50 reserved budget; each request <= USD 0.25 worst-case. Record actual model cost for each call and campaign total.
 
-Do not use private 050 artifacts for infrastructure smoke.
+Do not use private 050 artifacts.
 
-### 12. Integration / 050 gate
+### 12. CI lifecycle migration
 
-After Bridge Kit companion and AI_Skills consumer migration both pass, pin the exact Bridge Kit commit in AI_Skills, run CI, then integrate the migration to `main`.
+Codex Marketplace full matrix / release/integration CI is explicit PR/manual gate, not every push. CI must be read-only and must not generate/push its own marketplace commit. Ordinary push may only run cheap, path-scoped, zero-paid, read-only checks.
 
-Only after that integration may task `050_writing_style_host_codex_runtime` advance from `PLAN_FROZEN` into execution. Rebase/merge current main policy and migration changes into the 050 branch before executing it.
+### 13. Integration / 050 gate
+
+After Bridge Kit companion and AI_Skills consumer migration pass, pin the exact Bridge Kit commit, run explicit full CI, then integrate the migration to main.
+
+Only after that may `reviewed/050_writing_style_host_codex_runtime` advance from `PLAN_FROZEN`. Reconcile the latest main migration changes into 050 first.
 
 ## Release decision
 
 Repository bump decision: `NONE` during migration implementation.
 
-This is infrastructure safety/compatibility work. Re-evaluate release/version only if existing public install/runtime behavior requires a formal release under the repository's canonical version policy.
+This is infrastructure safety/compatibility work. Re-evaluate release/version only if canonical version policy requires it.
