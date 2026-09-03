@@ -29,7 +29,7 @@ RUNTIME_SCHEMA = "SCIENTIFIC_REWRITE_MULTISTAGE_RECEIPT_V2"
 PACKET_SCHEMA = "SCIENTIFIC_REWRITE_STAGE_PACKET_V1"
 OPENAI_API_URL = "https://api.openai.com/v1/responses"
 DEFAULT_MODEL = "gpt-5.6-terra"
-UNIT_REPAIR_ROUNDS = 3
+UNIT_REPAIR_ROUNDS = 2
 ASSEMBLY_REPAIR_ROUNDS = 3
 SEMANTIC_STATUSES = {
     "preserved",
@@ -426,10 +426,6 @@ def restore_semantic_findings(
     for finding in semantic.get("findings", []) or []:
         if not isinstance(finding, dict):
             continue
-        status = str(finding.get("status", ""))
-        severity = str(finding.get("severity", ""))
-        if severity not in {"critical", "blocker"} and status not in {"reversed", "invented", "omitted", "reattributed"}:
-            continue
         prop_id = str(finding.get("proposition_id", ""))
         if prop_id in proposition_by_id:
             target_ids.add(prop_id)
@@ -808,18 +804,6 @@ def _collect_card_proposition_ids(card: dict[str, Any]) -> set[str]:
     return represented
 
 
-def _infer_card_item_proposition_ids(item: dict[str, Any], propositions: list[dict[str, Any]]) -> list[str]:
-    item_spans = {str(span_id) for span_id in item.get("source_span_ids", [])}
-    matched = [
-        str(proposition["proposition_id"])
-        for proposition in propositions
-        if item_spans and item_spans.intersection(str(span_id) for span_id in proposition.get("source_span_ids", []))
-    ]
-    if matched:
-        return sorted(set(matched))
-    return sorted(str(proposition["proposition_id"]) for proposition in propositions)
-
-
 def _meaning_card_field_for_proposition(proposition: dict[str, Any]) -> str:
     kind = str(proposition.get("kind", "claim"))
     if kind == "evidence":
@@ -886,27 +870,14 @@ def normalize_meaning_card(raw: dict[str, Any], unit: RewriteUnit, propositions:
             item["source_span_ids"] = validate_source_span_ids(item.get("source_span_ids", []), known_spans, f"{stage}.{field}[{index}]")
             prop_ids = [str(pid) for pid in item.get("source_proposition_ids", [])]
             if not prop_ids:
-                prop_ids = _infer_card_item_proposition_ids(item, propositions)
-                item["source_proposition_ids"] = prop_ids
-                item["runtime_inferred_source_proposition_ids"] = True
+                raise RuntimeError(f"{stage}.{field}[{index}] must bind source_proposition_ids")
             unknown_props = sorted(set(prop_ids) - known_props)
             if unknown_props:
                 raise RuntimeError(f"{stage}.{field}[{index}] references unknown proposition ids: {', '.join(unknown_props[:8])}")
     proposition_by_id = {item["proposition_id"]: item for item in propositions}
     missing_props = sorted(known_props - _collect_card_proposition_ids(raw))
     if missing_props:
-        for prop_id in missing_props:
-            proposition = proposition_by_id[prop_id]
-            field = _meaning_card_field_for_proposition(proposition)
-            raw[field].append(
-                {
-                    "normalized_meaning": proposition["source_excerpt"],
-                    "source_span_ids": proposition["source_span_ids"],
-                    "source_proposition_ids": [prop_id],
-                    "runtime_completed_from_source_proposition": True,
-                }
-            )
-        raw["runtime_completed_missing_proposition_ids"] = missing_props
+        raise RuntimeError(f"{stage} omitted source propositions: {', '.join(missing_props[:8])}")
     for field in ["terminology", "literal_items", "relocatable_trace_items"]:
         require_list(raw, field, stage)
     return raw
@@ -950,14 +921,23 @@ def normalize_semantic_audit(raw: dict[str, Any], unit: RewriteUnit, proposition
     for index, finding in enumerate(require_list(raw, "findings", stage), start=1):
         if not isinstance(finding, dict):
             raise RuntimeError(f"{stage}.findings[{index}] must be an object")
+        for field in ["finding_id", "candidate_evidence", "severity", "repair_instruction"]:
+            require_string(finding, field, f"{stage}.findings[{index}]")
         try:
             status = canonical_semantic_status(finding.get("status"))
         except RuntimeError:
             raise RuntimeError(f"{stage}.findings[{index}].status is invalid")
         finding["status"] = status
         prop_id = str(finding.get("proposition_id", ""))
-        if prop_id and prop_id not in known_props:
+        if not prop_id:
+            raise RuntimeError(f"{stage}.findings[{index}].proposition_id must be non-empty")
+        if prop_id not in known_props:
             raise RuntimeError(f"{stage}.findings[{index}] references unknown proposition_id")
+        finding["source_span_ids"] = validate_source_span_ids(
+            finding.get("source_span_ids", []),
+            set(unit.source_span_ids),
+            f"{stage}.findings[{index}]",
+        )
         severity = str(finding.get("severity", ""))
         if severity in {"critical", "blocker"} or status in {"reversed", "invented", "omitted", "reattributed"}:
             critical += 1
@@ -966,7 +946,7 @@ def normalize_semantic_audit(raw: dict[str, Any], unit: RewriteUnit, proposition
 
 
 def semantic_requires_repair(semantic: dict[str, Any]) -> bool:
-    return int(semantic.get("critical_violation_count", 0)) > 0
+    return semantic.get("decision") == "REVISE" or int(semantic.get("critical_violation_count", 0)) > 0
 
 
 def normalize_reader_review(raw: dict[str, Any], known_unit_ids: set[str]) -> dict[str, Any]:
@@ -1026,9 +1006,23 @@ def normalize_reader_review(raw: dict[str, Any], known_unit_ids: set[str]) -> di
     for index, finding in enumerate(require_list(raw, "findings", stage), start=1):
         if not isinstance(finding, dict):
             raise RuntimeError(f"{stage}.findings[{index}] must be an object")
+        for field in ["finding_id", "category", "evidence", "repair_instruction"]:
+            require_string(finding, field, f"{stage}.findings[{index}]")
         unit_id = str(finding.get("unit_id", ""))
         if unit_id and unit_id not in known_unit_ids:
             raise RuntimeError(f"{stage}.findings[{index}] references unknown unit_id")
+        allowed_categories = {
+            "unexplained_abstraction",
+            "translationese",
+            "workflow_scaffolding",
+            "noun_stack",
+            "unclear_relation",
+            "weak_transition",
+            "buried_conclusion",
+            "reader_effort",
+        }
+        if str(finding.get("category")) not in allowed_categories:
+            raise RuntimeError(f"{stage}.findings[{index}].category is invalid")
     return raw
 
 
@@ -1129,32 +1123,38 @@ def deterministic_unit_rewrite(unit: RewriteUnit) -> dict[str, str]:
     }
 
 
-def semantic_audit(source: str, candidate: str) -> dict[str, Any]:
+def semantic_audit(source: str, candidate: str, unit: RewriteUnit | None = None, propositions: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     missing_literals = verify_exact(source, candidate)["missing"]
     status = "preserved" if not missing_literals else "omitted"
+    fallback_proposition = propositions[0] if propositions else None
     critical = [
         {
+            "finding_id": f"finding-{index:03d}",
+            "proposition_id": str(fallback_proposition.get("proposition_id", "")) if fallback_proposition else "",
             "status": "omitted",
+            "source_span_ids": list(fallback_proposition.get("source_span_ids", [])) if fallback_proposition else list(unit.source_span_ids) if unit else [],
             "source_evidence": item["text"],
             "candidate_evidence": "",
+            "severity": "critical",
             "reason": "literal invariant missing from candidate",
+            "repair_instruction": "literal invariant missing from candidate",
         }
-        for item in missing_literals
+        for index, item in enumerate(missing_literals, start=1)
     ]
     return {
         "decision": "PASS" if not critical else "REVISE",
         "statuses": [status],
         "findings": [
             {
-                "finding_id": f"finding-{index:03d}",
-                "proposition_id": "",
+                "finding_id": item["finding_id"],
+                "proposition_id": item["proposition_id"],
                 "status": item["status"],
-                "source_span_ids": [],
+                "source_span_ids": item["source_span_ids"],
                 "candidate_evidence": item["candidate_evidence"],
                 "severity": "critical",
-                "repair_instruction": item["reason"],
+                "repair_instruction": item["repair_instruction"],
             }
-            for index, item in enumerate(critical, start=1)
+            for item in critical
         ],
         "critical_violation_count": len(critical),
         "allowed_status_values": sorted(SEMANTIC_STATUSES),
@@ -1824,7 +1824,7 @@ def run_multistage(
                 validator=lambda raw, unit=unit, propositions=propositions: normalize_semantic_audit(raw, unit, propositions),
             )
         else:
-            semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit), unit, propositions)
+            semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit, unit, propositions), unit, propositions)
         audit_stage_id = f"{unit.unit_id}-literal-semantic-audit"
         records.append(
             stage_record(
@@ -1857,7 +1857,7 @@ def run_multistage(
                         "Repair only the current rewritten unit. Preserve all source facts and return the same structured writer JSON fields. "
                         "Do not rewrite unrelated units. source_coverage_ids must include every supplied source proposition id. "
                         "If exact.missing lists literal strings, copy those exact strings into reader_core or technical_trace. "
-                        "If semantic.findings lists critical omissions, condition changes, comparator changes, uncertainty changes, "
+                        "If semantic.findings lists omissions, narrowing, broadening, condition changes, comparator changes, uncertainty changes, "
                         "conclusion-strength changes, attribution changes, or invented claims, repair those exact findings against the source unit."
                     ),
                     repair_payload,
@@ -1909,7 +1909,7 @@ def run_multistage(
                     records.append(
                         stage_record(
                             stage_id=f"{unit.unit_id}-semantic-source-restoration-{repair_attempts}",
-                            responsibility="restore source-backed proposition text for unresolved critical semantic findings before re-audit",
+                            responsibility="restore source-backed proposition text for unresolved semantic findings before re-audit",
                             unit_id=unit.unit_id,
                             input_payload={
                                 "pre_restore_semantic": semantic,
@@ -1940,7 +1940,7 @@ def run_multistage(
                     validator=lambda raw, unit=unit, propositions=propositions: normalize_semantic_audit(raw, unit, propositions),
                 )
             else:
-                semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit), unit, propositions)
+                semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit, unit, propositions), unit, propositions)
             records.append(
                 stage_record(
                     stage_id=f"{unit.unit_id}-post-repair-audit-{repair_attempts}",
@@ -2087,7 +2087,7 @@ def run_multistage(
                     validator=lambda raw, unit=unit, props=unit_propositions[unit_id]: normalize_semantic_audit(raw, unit, props),
                 )
             else:
-                semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit), unit, unit_propositions[unit_id])
+                semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit, unit, unit_propositions[unit_id]), unit, unit_propositions[unit_id])
             records.append(
                 stage_record(
                     stage_id=f"{unit_id}-reader-repair-audit-{reader_repair_round}",
@@ -2113,7 +2113,7 @@ def run_multistage(
                         f"{unit_id}-reader-semantic-targeted-repair",
                         (
                             "Repair this unit only for semantic preservation after reader-targeted repair. "
-                            "Address only critical semantic findings while preserving reader clarity, exact literals, and all source facts. "
+                            "Address only the supplied semantic findings while preserving reader clarity, exact literals, and all source facts. "
                             "Return the structured writer JSON fields. source_coverage_ids must include every source proposition id from the Meaning Card."
                         ),
                         semantic_repair_payload,
@@ -2131,7 +2131,7 @@ def run_multistage(
                 records.append(
                     stage_record(
                         stage_id=f"{unit_id}-reader-semantic-targeted-repair-{reader_repair_round}",
-                        responsibility="repair a reader-targeted unit only for remaining critical semantic findings",
+                        responsibility="repair a reader-targeted unit only for remaining semantic findings",
                         unit_id=unit_id,
                         input_payload=semantic_repair_payload,
                         output_payload=semantic_repaired,
@@ -2171,7 +2171,7 @@ def run_multistage(
                         records.append(
                             stage_record(
                                 stage_id=f"{unit_id}-reader-semantic-source-restoration-{reader_repair_round}",
-                                responsibility="restore source-backed proposition text for critical semantic findings after reader semantic repair",
+                                responsibility="restore source-backed proposition text for semantic findings after reader semantic repair",
                                 unit_id=unit_id,
                                 input_payload={
                                     "pre_restore_semantic": semantic,
@@ -2203,7 +2203,7 @@ def run_multistage(
                         validator=lambda raw, unit=unit, props=unit_propositions[unit_id]: normalize_semantic_audit(raw, unit, props),
                     )
                 else:
-                    semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit), unit, unit_propositions[unit_id])
+                    semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit, unit, unit_propositions[unit_id]), unit, unit_propositions[unit_id])
                 records.append(
                     stage_record(
                         stage_id=f"{unit_id}-reader-semantic-repair-audit-{reader_repair_round}",
@@ -2222,7 +2222,7 @@ def run_multistage(
                         records.append(
                             stage_record(
                                 stage_id=f"{unit_id}-reader-semantic-post-audit-source-restoration-{reader_repair_round}",
-                                responsibility="restore source-backed proposition text for critical findings from the reader semantic repair audit",
+                                responsibility="restore source-backed proposition text for findings from the reader semantic repair audit",
                                 unit_id=unit_id,
                                 input_payload={
                                     "pre_restore_semantic": semantic,
@@ -2255,7 +2255,7 @@ def run_multistage(
                                 validator=lambda raw, unit=unit, props=unit_propositions[unit_id]: normalize_semantic_audit(raw, unit, props),
                             )
                         else:
-                            semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit), unit, unit_propositions[unit_id])
+                            semantic = normalize_semantic_audit(semantic_audit(unit.text, combined_unit, unit, unit_propositions[unit_id]), unit, unit_propositions[unit_id])
                         records.append(
                             stage_record(
                                 stage_id=f"{unit_id}-reader-semantic-post-restore-audit-{reader_repair_round}",
@@ -2271,7 +2271,8 @@ def run_multistage(
             if not exact["ok"] or semantic_requires_repair(semantic):
                 raise RuntimeError(
                     f"{unit_id} reader-targeted repair failed fidelity gate "
-                    f"(exact_ok={bool(exact['ok'])}, critical_semantic={int(semantic.get('critical_violation_count', 0))})"
+                    f"(exact_ok={bool(exact['ok'])}, semantic_decision={semantic.get('decision')}, "
+                    f"critical_semantic={int(semantic.get('critical_violation_count', 0))})"
                 )
             unit_gate_stage_ids[unit_id] = reader_repair_audit_stage_id
         reader_core = "\n\n".join(item["reader_core"] for item in rewritten_units if item["reader_core"]).strip()

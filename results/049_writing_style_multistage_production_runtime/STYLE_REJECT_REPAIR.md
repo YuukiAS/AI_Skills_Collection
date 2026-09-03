@@ -1,12 +1,14 @@
 # 049 STYLE_REJECT Repair Receipt
 
-Date: 2026-09-02
+Date: 2026-09-03
 
 User decision: `STYLE_REJECT`.
 
 Reason: the first 049 implementation produced SMOKE-A, SMOKE-B, and SMOKE-C without a material improvement over 048. The multistage receipt existed, but the production output still reflected the failed source-surface prose regime.
 
 This is an Executor implementation failure, not a Planner failure and not a Reviewer round. `review_round` and `plan_revision` remain unchanged.
+
+Current recovery route: `AWAIT_HUMAN_DECISION -> REVISE -> EXECUTING` is treated as the logical user-style-gate recovery route, and the branch remains in `EXECUTING` while Codex performs the bounded generic repair. No new task is created.
 
 ## Verified Implementation Failures
 

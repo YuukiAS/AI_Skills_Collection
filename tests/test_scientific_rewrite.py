@@ -129,6 +129,27 @@ def structured_stage_response(prompt: str, source: str, *, omit_writer_literals:
     raise AssertionError(f"unexpected prompt: {prompt[:160]}")
 
 
+def semantic_finding(
+    prop_id: str,
+    span_ids: list[str],
+    *,
+    status: str = "omitted",
+    severity: str = "critical",
+    finding_id: str = "semantic-001",
+    candidate_evidence: str = "candidate omits or weakens the source proposition",
+    repair_instruction: str = "restore this proposition without changing its scope",
+) -> dict[str, object]:
+    return {
+        "finding_id": finding_id,
+        "status": status,
+        "proposition_id": prop_id,
+        "source_span_ids": span_ids,
+        "candidate_evidence": candidate_evidence,
+        "severity": severity,
+        "repair_instruction": repair_instruction,
+    }
+
+
 class ScientificRewriteTests(unittest.TestCase):
     def test_skill_contract_routes_heavy_chinese_scientific_rewrite(self) -> None:
         text = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
@@ -290,7 +311,15 @@ class ScientificRewriteTests(unittest.TestCase):
             {
                 "decision": "PASS",
                 "questions": [{"answerable": "It is partially answerable", "inferred_answer": None}],
-                "findings": [{"unit_id": "unit-001"}],
+                "findings": [
+                    {
+                        "finding_id": "reader-001",
+                        "unit_id": "unit-001",
+                        "category": "reader_effort",
+                        "evidence": "question is only partially answerable",
+                        "repair_instruction": "make the answer explicit",
+                    }
+                ],
             },
             {"unit-001"},
         )
@@ -425,7 +454,7 @@ class ScientificRewriteTests(unittest.TestCase):
         finally:
             helper.call_openai_text = original
 
-    def test_meaning_card_runtime_completes_missing_proposition_bindings(self) -> None:
+    def test_meaning_card_omitted_proposition_bindings_fail_closed(self) -> None:
         helper = load_helper()
         unit = helper.split_markdown_units(
             "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81。下一步比较 FedFisher 和 FedLPA。"
@@ -433,80 +462,78 @@ class ScientificRewriteTests(unittest.TestCase):
         props = helper.proposition_inventory(unit)
         self.assertGreaterEqual(len(props), 2)
         first_prop = props[0]["proposition_id"]
-        card = helper.normalize_meaning_card(
-            {
-                "unit_id": unit.unit_id,
-                "reader_job": "解释当前证据和下一步判断",
-                "plain_meaning": "先说明结论，再保留必要技术边界。",
-                "claims": [
-                    {
-                        "normalized_meaning": "模型只绑定了第一条命题。",
-                        "source_span_ids": unit.source_span_ids,
-                        "source_proposition_ids": [first_prop],
-                    }
-                ],
-                "evidence": [],
-                "conditions": [],
-                "comparators": [],
-                "uncertainty": [],
-                "caveats": [],
-                "negative_findings": [],
-                "attribution": [],
-                "decision_logic": [],
-                "terminology": [],
-                "literal_items": [],
-                "relocatable_trace_items": [],
-                "relation_to_previous": "承接前文",
-                "relation_to_next": "引出后文",
-                "rewrite_problem": "workflow-language",
-                "discourse_function": "result-interpretation",
-                "reader_takeaway": "读者应理解判断含义",
-            },
-            unit,
-            props,
-        )
-        self.assertIn("runtime_completed_missing_proposition_ids", card)
-        self.assertFalse(set(prop["proposition_id"] for prop in props) - helper._collect_card_proposition_ids(card))
+        with self.assertRaisesRegex(RuntimeError, "omitted source propositions"):
+            helper.normalize_meaning_card(
+                {
+                    "unit_id": unit.unit_id,
+                    "reader_job": "解释当前证据和下一步判断",
+                    "plain_meaning": "先说明结论，再保留必要技术边界。",
+                    "claims": [
+                        {
+                            "normalized_meaning": "模型只绑定了第一条命题。",
+                            "source_span_ids": unit.source_span_ids,
+                            "source_proposition_ids": [first_prop],
+                        }
+                    ],
+                    "evidence": [],
+                    "conditions": [],
+                    "comparators": [],
+                    "uncertainty": [],
+                    "caveats": [],
+                    "negative_findings": [],
+                    "attribution": [],
+                    "decision_logic": [],
+                    "terminology": [],
+                    "literal_items": [],
+                    "relocatable_trace_items": [],
+                    "relation_to_previous": "承接前文",
+                    "relation_to_next": "引出后文",
+                    "rewrite_problem": "workflow-language",
+                    "discourse_function": "result-interpretation",
+                    "reader_takeaway": "读者应理解判断含义",
+                },
+                unit,
+                props,
+            )
 
-    def test_meaning_card_runtime_infers_missing_item_proposition_bindings(self) -> None:
+    def test_meaning_card_missing_item_proposition_ids_fail_closed(self) -> None:
         helper = load_helper()
         unit = helper.split_markdown_units(
             "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81。下一步比较 FedFisher 和 FedLPA。"
         )[0]
         props = helper.proposition_inventory(unit)
-        card = helper.normalize_meaning_card(
-            {
-                "unit_id": unit.unit_id,
-                "reader_job": "解释当前证据和下一步判断",
-                "plain_meaning": "先说明结论，再保留必要技术边界。",
-                "claims": [
-                    {
-                        "normalized_meaning": "模型给出了 claim，但漏写 proposition binding。",
-                        "source_span_ids": unit.source_span_ids,
-                    }
-                ],
-                "evidence": [],
-                "conditions": [],
-                "comparators": [],
-                "uncertainty": [],
-                "caveats": [],
-                "negative_findings": [],
-                "attribution": [],
-                "decision_logic": [],
-                "terminology": [],
-                "literal_items": [],
-                "relocatable_trace_items": [],
-                "relation_to_previous": "承接前文",
-                "relation_to_next": "引出后文",
-                "rewrite_problem": "workflow-language",
-                "discourse_function": "result-interpretation",
-                "reader_takeaway": "读者应理解判断含义",
-            },
-            unit,
-            props,
-        )
-        self.assertTrue(card["claims"][0]["runtime_inferred_source_proposition_ids"])
-        self.assertTrue(card["claims"][0]["source_proposition_ids"])
+        with self.assertRaisesRegex(RuntimeError, "source_proposition_ids"):
+            helper.normalize_meaning_card(
+                {
+                    "unit_id": unit.unit_id,
+                    "reader_job": "解释当前证据和下一步判断",
+                    "plain_meaning": "先说明结论，再保留必要技术边界。",
+                    "claims": [
+                        {
+                            "normalized_meaning": "模型给出了 claim，但漏写 proposition binding。",
+                            "source_span_ids": unit.source_span_ids,
+                        }
+                    ],
+                    "evidence": [],
+                    "conditions": [],
+                    "comparators": [],
+                    "uncertainty": [],
+                    "caveats": [],
+                    "negative_findings": [],
+                    "attribution": [],
+                    "decision_logic": [],
+                    "terminology": [],
+                    "literal_items": [],
+                    "relocatable_trace_items": [],
+                    "relation_to_previous": "承接前文",
+                    "relation_to_next": "引出后文",
+                    "rewrite_problem": "workflow-language",
+                    "discourse_function": "result-interpretation",
+                    "reader_takeaway": "读者应理解判断含义",
+                },
+                unit,
+                props,
+            )
 
     def test_openai_driver_makes_observable_stage_calls(self) -> None:
         helper = load_helper()
@@ -562,7 +589,7 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertTrue(any("-targeted-repair-" in item["stage_id"] for item in receipt["stage_records"]))
         self.assertTrue(any("-post-repair-audit-" in item["stage_id"] for item in receipt["stage_records"]))
 
-    def test_openai_driver_allows_three_unit_semantic_repair_rounds(self) -> None:
+    def test_openai_driver_allows_two_unit_semantic_repair_rounds(self) -> None:
         helper = load_helper()
         original = helper.call_openai_text
         semantic_audits = 0
@@ -571,19 +598,19 @@ class ScientificRewriteTests(unittest.TestCase):
             nonlocal semantic_audits
             if "Audit semantic preservation" in prompt or "Re-audit semantic preservation" in prompt:
                 semantic_audits += 1
-                if semantic_audits < 4:
+                if semantic_audits < 3:
+                    payload = json.loads(source)
+                    first_claim = payload["meaning_card"]["claims"][0]
                     return json.dumps(
                         {
                             "decision": "REVISE",
                             "findings": [
-                                {
-                                    "proposition_id": "unit-001-prop-001",
-                                    "status": "omitted",
-                                    "source_span_ids": [],
-                                    "candidate_evidence": "candidate still hides a decision condition",
-                                    "severity": "critical",
-                                    "repair_instruction": "restore the missing decision condition",
-                                }
+                                semantic_finding(
+                                    first_claim["source_proposition_ids"][0],
+                                    first_claim["source_span_ids"],
+                                    candidate_evidence="candidate still hides a decision condition",
+                                    repair_instruction="restore the missing decision condition",
+                                )
                             ],
                         },
                         ensure_ascii=False,
@@ -634,9 +661,9 @@ class ScientificRewriteTests(unittest.TestCase):
         receipt = result["receipt"]
         stage_ids = [item["stage_id"] for item in receipt["stage_records"]]
         self.assertTrue(any(stage_id.endswith("-semantic-source-restoration-1") for stage_id in stage_ids))
-        self.assertTrue(any(stage_id.endswith("-targeted-repair-3") for stage_id in stage_ids))
-        self.assertTrue(any(stage_id.endswith("-post-repair-audit-3") for stage_id in stage_ids))
-        self.assertGreaterEqual(semantic_audits, 4)
+        self.assertTrue(any(stage_id.endswith("-targeted-repair-2") for stage_id in stage_ids))
+        self.assertTrue(any(stage_id.endswith("-post-repair-audit-2") for stage_id in stage_ids))
+        self.assertGreaterEqual(semantic_audits, 3)
         self.assertTrue(receipt["dataflow_validation"]["ok"])
 
     def test_openai_driver_repairs_final_assembly_revise_once(self) -> None:
@@ -874,7 +901,8 @@ class ScientificRewriteTests(unittest.TestCase):
                             {
                                 "finding_id": "reader-001",
                                 "unit_id": "unit-002",
-                                "category": "unclear_decision",
+                                "category": "buried_conclusion",
+                                "evidence": "candidate leaves the next-step decision implicit",
                                 "repair_instruction": "make the current conclusion strength explicit",
                             }
                         ],
@@ -897,8 +925,20 @@ class ScientificRewriteTests(unittest.TestCase):
             if "Audit semantic preservation after reader-targeted repair" in prompt:
                 payload = json.loads(source)
                 prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][0]
+                span_ids = payload["meaning_card"]["claims"][0]["source_span_ids"]
                 return json.dumps(
-                    {"decision": "REVISE", "findings": [{"status": "omitted", "proposition_id": prop_id, "severity": "critical"}]},
+                    {
+                        "decision": "REVISE",
+                        "findings": [
+                            semantic_finding(
+                                prop_id,
+                                span_ids,
+                                finding_id="reader-semantic-001",
+                                candidate_evidence="candidate no longer preserves the first proposition",
+                                repair_instruction="restore the first source proposition",
+                            )
+                        ],
+                    },
                     ensure_ascii=False,
                 )
             if "Repair this unit only for semantic preservation" in prompt:
@@ -918,15 +958,39 @@ class ScientificRewriteTests(unittest.TestCase):
                 candidate = payload["candidate"]["reader_core"]
                 if "CARE 在 2026-08-28 的 Dice=0.81 只支持继续验证" not in candidate:
                     prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][0]
+                    span_ids = payload["meaning_card"]["claims"][0]["source_span_ids"]
                     return json.dumps(
-                        {"decision": "REVISE", "findings": [{"status": "omitted", "proposition_id": prop_id, "severity": "critical"}]},
+                        {
+                            "decision": "REVISE",
+                            "findings": [
+                                semantic_finding(
+                                    prop_id,
+                                    span_ids,
+                                    finding_id="reader-semantic-002",
+                                    candidate_evidence="candidate still omits the first proposition",
+                                    repair_instruction="restore the first source proposition",
+                                )
+                            ],
+                        },
                         ensure_ascii=False,
                     )
                 if "下一轮比较 FedFisher 和 FedLPA" in candidate:
                     return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
                 prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][1]
+                span_ids = payload["meaning_card"]["claims"][0]["source_span_ids"]
                 return json.dumps(
-                    {"decision": "REVISE", "findings": [{"status": "omitted", "proposition_id": prop_id, "severity": "critical"}]},
+                    {
+                        "decision": "REVISE",
+                        "findings": [
+                            semantic_finding(
+                                prop_id,
+                                span_ids,
+                                finding_id="reader-semantic-003",
+                                candidate_evidence="candidate still omits the comparator proposition",
+                                repair_instruction="restore the comparator proposition",
+                            )
+                        ],
+                    },
                     ensure_ascii=False,
                 )
             if "Re-audit semantic preservation after source-backed restoration" in prompt:
@@ -935,8 +999,20 @@ class ScientificRewriteTests(unittest.TestCase):
                 if "CARE 在 2026-08-28 的 Dice=0.81 只支持继续验证" in candidate and "下一轮比较 FedFisher 和 FedLPA" in candidate:
                     return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
                 prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][1]
+                span_ids = payload["meaning_card"]["claims"][0]["source_span_ids"]
                 return json.dumps(
-                    {"decision": "REVISE", "findings": [{"status": "omitted", "proposition_id": prop_id, "severity": "critical"}]},
+                    {
+                        "decision": "REVISE",
+                        "findings": [
+                            semantic_finding(
+                                prop_id,
+                                span_ids,
+                                finding_id="reader-semantic-004",
+                                candidate_evidence="candidate still omits the comparator proposition",
+                                repair_instruction="restore the comparator proposition",
+                            )
+                        ],
+                    },
                     ensure_ascii=False,
                 )
             return structured_stage_response(prompt, source)
@@ -963,16 +1039,34 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertEqual(reader_semantic_reaudits["count"], 1)
         self.assertTrue(result["receipt"]["dataflow_validation"]["ok"])
 
-    def test_noncritical_semantic_revision_does_not_force_hard_repair(self) -> None:
+    def test_semantic_revise_triggers_targeted_repair_even_when_minor(self) -> None:
         helper = load_helper()
         original = helper.call_openai_text
+        semantic_audits = 0
 
         def fake_call(prompt: str, source: str, **kwargs: object) -> str:
-            if "Audit semantic preservation" in prompt:
+            nonlocal semantic_audits
+            if "Audit semantic preservation" in prompt or "Re-audit semantic preservation" in prompt:
+                semantic_audits += 1
+                if semantic_audits > 1:
+                    return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
                 payload = json.loads(source)
                 prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][0]
+                span_ids = payload["meaning_card"]["claims"][0]["source_span_ids"]
                 return json.dumps(
-                    {"decision": "REVISE", "findings": [{"status": "narrowed", "proposition_id": prop_id, "severity": "minor"}]},
+                    {
+                        "decision": "REVISE",
+                        "findings": [
+                            semantic_finding(
+                                prop_id,
+                                span_ids,
+                                status="narrowed",
+                                severity="minor",
+                                candidate_evidence="candidate narrows a non-critical relation",
+                                repair_instruction="restore the relation without changing the conclusion",
+                            )
+                        ],
+                    },
                     ensure_ascii=False,
                 )
             return structured_stage_response(prompt, source)
@@ -989,7 +1083,8 @@ class ScientificRewriteTests(unittest.TestCase):
             helper.call_openai_text = original
 
         stage_ids = [item["stage_id"] for item in result["receipt"]["stage_records"]]
-        self.assertFalse(any("-targeted-repair-" in stage_id for stage_id in stage_ids))
+        self.assertTrue(any("-targeted-repair-" in stage_id for stage_id in stage_ids))
+        self.assertGreaterEqual(semantic_audits, 2)
         self.assertTrue(result["receipt"]["dataflow_validation"]["ok"])
 
     def test_exact_literal_restoration_runs_after_model_repair_omits_literal(self) -> None:
@@ -1058,15 +1153,40 @@ class ScientificRewriteTests(unittest.TestCase):
         raw = {
             "decision": "REVISE",
             "findings": [
-                {"status": "missing", "proposition_id": propositions[0]["proposition_id"], "severity": "critical"},
-                {"status": "partially-preserved", "proposition_id": propositions[0]["proposition_id"], "severity": "minor"},
+                semantic_finding(
+                    propositions[0]["proposition_id"],
+                    unit.source_span_ids,
+                    status="missing",
+                    severity="critical",
+                    finding_id="semantic-alias-001",
+                ),
+                semantic_finding(
+                    propositions[0]["proposition_id"],
+                    unit.source_span_ids,
+                    status="partially-preserved",
+                    severity="minor",
+                    finding_id="semantic-alias-002",
+                ),
             ],
         }
         normalized = helper.normalize_semantic_audit(raw, unit, propositions)
         self.assertEqual([item["status"] for item in normalized["findings"]], ["omitted", "narrowed"])
         self.assertEqual(normalized["critical_violation_count"], 1)
         with self.assertRaisesRegex(RuntimeError, "status is invalid"):
-            helper.normalize_semantic_audit({"decision": "PASS", "findings": [{"status": "unclear"}]}, unit, propositions)
+            helper.normalize_semantic_audit(
+                {
+                    "decision": "PASS",
+                    "findings": [
+                        semantic_finding(
+                            propositions[0]["proposition_id"],
+                            unit.source_span_ids,
+                            status="unclear",
+                        )
+                    ],
+                },
+                unit,
+                propositions,
+            )
 
     def test_response_schema_name_is_bounded_and_stable(self) -> None:
         helper = load_helper()

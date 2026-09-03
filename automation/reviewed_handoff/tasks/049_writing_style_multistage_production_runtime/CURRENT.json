@@ -18,5 +18,12 @@
   "text_review_required": true,
   "text_review_manifest_path": "results/049_writing_style_multistage_production_runtime/text_review/text_inputs.json",
   "text_review_evidence_path": "results/049_writing_style_multistage_production_runtime/text_review/TEXT_REVIEW.json",
-  "next_action": "WAIT_FOR_OPENAI_CREDIT_BALANCE_THEN_RERUN_FIXED_PRIVATE_STYLE_SMOKES"
+  "human_style_decision": {
+    "decision": "STYLE_REJECT",
+    "recorded_at": "2026-09-03",
+    "reason": "current multistage production runtime does not materially reduce reader effort and still preserves the failed 048 prose regime",
+    "review_round_consumed": false,
+    "plan_revision_consumed": false
+  },
+  "next_action": "CODEX_EXECUTOR_IMPLEMENT_BOUNDED_GENERIC_STYLE_REJECT_REPAIR"
 }
