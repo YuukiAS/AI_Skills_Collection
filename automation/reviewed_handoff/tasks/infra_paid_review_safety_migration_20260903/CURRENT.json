@@ -8,7 +8,7 @@
   "max_plan_revisions": 1,
   "base_commit": "b80bde2479b41aea334e5156a8f5069c6d343adb",
   "base_branch": "main",
-  "implementation_commit": "119dc40e50beb1c50c1bc9c4a896975902f5c405",
+  "implementation_commit": "b8fdf078fb943e37e15bf826749ed4c0f69e5e15",
   "ci_required": true,
   "ci_status": "PENDING",
   "last_review_decision": null,
@@ -16,5 +16,5 @@
   "human_gate_reason": "PLANNER_DECISION",
   "visual_review_required": false,
   "text_review_required": false,
-  "next_action": "USER_FIX_AI_RESEARCH_REVIEW_PROJECT_CREDIT_BALANCE_OR_BILLING_THEN_RESUME_FROZEN_LIVE_SMOKE_FROM_SHARED_CAMPAIGN_INFRA_PAID_REVIEW_SAFETY_MIGRATION_20260903_LIVE_SMOKE_WITH_NO_PAID_RETRY"
+  "next_action": "RERUN_SAME_TEXT_LIVE_SMOKE_REUSING_ZERO_BILLING_RESERVATION_THEN_RUN_VISUAL_LIVE_SMOKE_AS_CALL_2_IF_TEXT_PASS"
 }

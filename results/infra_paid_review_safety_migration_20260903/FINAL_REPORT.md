@@ -66,7 +66,7 @@ Required recovery path:
 
 - status: AWAIT_HUMAN_DECISION
 - reason: AI_RESEARCH_REVIEW_PROJECT_CREDIT_BALANCE_EXHAUSTED_DURING_TEXT_LIVE_SMOKE
-- implementation_evidence_tip: `119dc40e50beb1c50c1bc9c4a896975902f5c405`
+- implementation_evidence_tip: `b8fdf078fb943e37e15bf826749ed4c0f69e5e15`
 - latest_main_used: `7b08b6a24c7a371cc137a99297a8f40ca573c5fd`
 - first_published_handoff_tip: `5972a302721759354859bafc99dd7459143b17b2`
 - bridge_kit_paid_review_commit: `b185c1f3bd96f26c3e8af80a741e96775eca8e78`
