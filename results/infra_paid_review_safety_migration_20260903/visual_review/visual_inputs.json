@@ -1,0 +1,24 @@
+{
+  "external_upload_authorization": "User authorized this tiny public-safe migration smoke through OpenAI Responses API with store=false; no private content is included.",
+  "identity_bindings": {
+    "implementation_commit": "875f861ff95e937faa80b0e83d151c98b9b5974d"
+  },
+  "inputs": [
+    {
+      "description": "Public-safe synthetic 64x64 color-block smoke fixture.",
+      "logical_id": "public_safe_smoke_image",
+      "mime_type": "image/png",
+      "path": "results/infra_paid_review_safety_migration_20260903/visual_review/public_safe_smoke.png",
+      "sha256": "a87226967078499bed9cacf111d272ee1819701dbb09763a75b7ccd2f767a517"
+    }
+  ],
+  "paid_review_campaign_id": "infra_paid_review_safety_migration_20260903_live_smoke",
+  "privacy_policy": "PUBLIC_SAFE_ONLY",
+  "review_kind": "paid-review-migration-live-smoke",
+  "rubric": {
+    "instructions": "Return PASS only if the supplied image is a nonblank public-safe synthetic color-block fixture and no image generation, tools, web search, file search, or computer use is requested. Return REVISE for any contradiction."
+  },
+  "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+  "task_key": "infra_paid_review_safety_migration_20260903_visual_smoke",
+  "workflow_type": "reviewed_handoff"
+}
