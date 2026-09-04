@@ -267,8 +267,11 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertIn(bridge_kit_commit, transform_docs)
         self.assertIn("must not be restored as a GitHub", transform_docs)
         self.assertIn("Actions production path", transform_docs)
-        self.assertIn("scientific-rewrite-staged-smoke", runner)
-        self.assertIn("store", runner)
+        self.assertIn("AI_SKILLS_050_STYLE_SMOKE_INPUT_V1", runner)
+        self.assertIn("validate_host_stage_package", runner)
+        self.assertNotIn("OPENAI_API_KEY", runner)
+        self.assertNotIn("OPENAI_REVIEW_API_KEY", runner)
+        self.assertNotIn("text-transform run", runner)
 
     def test_codex_marketplace_ci_installs_presentation_test_dependencies(self) -> None:
         workflow = (REPO_ROOT / ".github/workflows/codex-marketplace.yml").read_text(encoding="utf-8")

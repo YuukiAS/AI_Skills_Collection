@@ -8,9 +8,6 @@ requires_network: false
 writes_files: true
 executes_code: true
 secrets_needed:
-  - OPENAI_TEXT_TRANSFORM_API_KEY
-  - OPENAI_REVIEW_API_KEY
-  - OPENAI_API_KEY
 last_reviewed: 2026-09-01
 profile_tags:
   - writing
@@ -144,28 +141,33 @@ Run a source-to-Meaning-Card coverage check before rewriting. If an important
 proposition appears in the source but cannot be found in the Meaning Card, stop
 and repair the Meaning Card before writing.
 
-### 4. Execute The Multistage Runtime
+### 4. Execute The Host-Codex Stage Workflow
 
-For long-form production rewrites, create a real stage receipt with the helper
-runtime before treating the route as complete:
+For long-form production rewrites, the current host Codex session performs the
+semantic and writing work. Create observable stage artifacts as the work
+proceeds, then validate them with the deterministic helper before treating the
+route as complete:
 
 ```bash
-python3 skills/writing/core/scientific-rewrite/scripts/rewrite_support.py run-staged \
+python3 skills/writing/core/scientific-rewrite/scripts/rewrite_support.py validate-host-stage \
   --source SOURCE.md \
-  --output rewritten_report.md \
-  --receipt stage_receipt.json \
-  --stage-dir stage_packets
+  --stage-dir stage_packets \
+  --candidate stage_packets/final_candidate.md \
+  --receipt stage_packets/stage_receipt.json
 ```
 
-The receipt must show separate document-map, per-unit Meaning Card, per-unit
-example selection, unit writer, literal/semantic audit, candidate-only reader
-review, and final assembly stages. A single whole-document writer call is not a
-valid production execution for this route.
+The private stage package should include `document_map.json`,
+`argument_units.json`, `meaning_cards/<unit>.json`, `fidelity_ledger.json`,
+`selected_transformations.json`, `candidate_units/<unit>.md`,
+`self_audit.json`, and `final_candidate.md`. The receipt must show that
+document mapping, argument units, Meaning Cards, selected transformations,
+unit candidates, self-audit, and final assembly form a real dataflow. A single
+whole-document writer call is not valid production execution for this route.
 
-Use `--driver openai-responses` only when the current task has explicit
-authorization for the private artifact/provider path. That driver sends each
-bounded stage through OpenAI Responses with `store=false`. Do not print API keys
-or private intermediate plaintext.
+Do not call OpenAI/Terra or `text-transform` for document mapping, Meaning
+Cards, writing, semantic audit, repair, or assembly. Optional external review,
+when a frozen task explicitly authorizes it, is candidate-only QA after local
+generation and is not a production generation dependency.
 
 ### 5. Prepare The Local Writer Packet
 
@@ -282,15 +284,15 @@ The review should judge context, not blacklist hits. It must not introduce
 The optional helper at `scripts/rewrite_support.py` only performs deterministic
 outer-layer work:
 
-- `prepare`: split Markdown/text into section-aware rewrite units and extract
-  literal invariants.
+- `split_markdown_units` / `proposition_inventory`: mechanically prepare
+  bounded argument-unit and proposition identifiers for the host Codex workflow.
 - `select-examples`: choose seed transformations by metadata.
 - `verify-exact`: compare literal invariants between source and candidate.
-- `run-staged`: execute the observable multistage production helper and write a
-  stage receipt.
+- `validate-host-stage`: validate host-authored private stage artifacts and
+  write a privacy-safe receipt.
 
 It does not judge naturalness, semantic equivalence, causality, uncertainty,
-or claim quality.
+or claim quality, and it never writes reader-facing Chinese prose.
 
 Example:
 

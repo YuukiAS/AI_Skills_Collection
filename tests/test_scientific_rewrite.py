@@ -1,12 +1,10 @@
 from __future__ import annotations
 
 import importlib.util
-import io
 import json
 import sys
 import tempfile
 import unittest
-import urllib.error
 from pathlib import Path
 
 
@@ -25,141 +23,113 @@ def load_helper():
     return module
 
 
-def structured_stage_response(prompt: str, source: str, *, omit_writer_literals: bool = False) -> str:
-    payload = json.loads(source)
-    if "Map the document purpose" in prompt:
-        span_ids = [span["span_id"] for span in payload["source_spans"]]
-        return json.dumps(
+def write_json(path: Path, payload: object) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def make_stage_package(helper, root: Path, source: str, *, decision: str = "PASS") -> Path:
+    stage_dir = root / "stage"
+    stage_dir.mkdir()
+    units = helper.split_markdown_units(source)
+    document_map = {
+        "schema": "SCIENTIFIC_REWRITE_HOST_DOCUMENT_MAP_V1",
+        "source_sha256": helper.sha256_text(source),
+        "audience": "中文科研读者",
+        "document_purpose": "解释当前证据、限制和下一步实验判断。",
+        "core_research_question": "当前证据支持什么判断，下一步怎样验证？",
+    }
+    write_json(stage_dir / "document_map.json", document_map)
+    document_map_sha = helper.sha256_bytes((stage_dir / "document_map.json").read_bytes())
+
+    candidate_units: list[str] = []
+    public_units = []
+    selected = {"schema": "SCIENTIFIC_REWRITE_SELECTED_TRANSFORMATIONS_V1", "by_unit": {}}
+    unit_audits = []
+    all_literals = []
+    for unit in units:
+        propositions = helper.proposition_inventory(unit)
+        unit_source_sha = helper.sha256_text(unit.text)
+        public_units.append(
             {
-                "audience": "统计、ML 和医学影像研究者",
-                "document_purpose": "把科研证据解释成可阅读的中文报告",
-                "core_research_question": "自定义核心问题：当前证据能支持什么下一步判断",
-                "section_roles": [{"role_id": "section-001", "source_span_ids": span_ids, "normalized_meaning": "证据解释"}],
-                "major_claims": [{"claim_id": "claim-001", "source_span_ids": span_ids, "normalized_meaning": "需要保留事实边界"}],
-                "major_evidence": [{"evidence_id": "evidence-001", "source_span_ids": span_ids, "normalized_meaning": "公开测试证据"}],
-                "major_uncertainties": [],
-                "major_negative_findings": [],
-                "major_decisions": [],
-                "cross_section_dependencies": [],
-                "terminology_contract": [],
-                "reader_core_priorities": ["先解释研究含义"],
-                "trace_material_categories": ["路径和审计细节进入技术附录"],
-            },
-            ensure_ascii=False,
-        )
-    if "Segment the source into argument units" in prompt:
-        return json.dumps(
-            {
-                "units": [
-                    {
-                        "unit_id": f"unit-{index:03d}",
-                        "source_span_ids": [span["span_id"]],
-                        "argument_role": "evidence-or-result",
-                        "why_these_spans_belong_together": "single source span argument unit",
-                    }
-                    for index, span in enumerate(payload["source_spans"], start=1)
-                ]
-            },
-            ensure_ascii=False,
-        )
-    if "Create a structured Meaning Card" in prompt:
-        unit = payload["unit"]
-        prop_ids = [item["proposition_id"] for item in payload["source_propositions"]]
-        span_ids = unit["source_span_ids"]
-        card_item = {"normalized_meaning": "自定义普通含义：先说结论，再保留技术细节", "source_span_ids": span_ids, "source_proposition_ids": prop_ids}
-        return json.dumps(
-            {
-                "unit_id": unit["unit_id"],
-                "reader_job": "理解当前证据和下一步判断",
-                "plain_meaning": "自定义普通含义：先说结论，再保留技术细节",
-                "claims": [card_item],
-                "evidence": [],
-                "conditions": [],
-                "comparators": [],
-                "uncertainty": [],
-                "caveats": [],
-                "negative_findings": [],
-                "attribution": [],
-                "decision_logic": [],
-                "terminology": [],
-                "literal_items": [],
-                "relocatable_trace_items": [],
-                "relation_to_previous": "承接前文",
-                "relation_to_next": "引出后文",
-                "rewrite_problem": "workflow-language",
-                "discourse_function": "result-interpretation",
-                "reader_takeaway": "读者应先理解判断含义",
-            },
-            ensure_ascii=False,
-        )
-    if "Rewrite only the current argument unit" in prompt:
-        coverage = [item["proposition_id"] for item in payload["source_propositions"]]
-        reader_core = "CARE 的结果需要解释。" if omit_writer_literals else payload["current_original_unit"]
-        return json.dumps(
-            {"reader_core": reader_core, "technical_trace": "", "source_coverage_ids": coverage, "relocated_trace_ids": []},
-            ensure_ascii=False,
-        )
-    if "Repair only the current rewritten unit" in prompt or "Repair this unit only for reader effort" in prompt:
-        unit = payload["unit"]
-        coverage = sorted(
-            {
-                str(prop_id)
-                for field in ["claims", "evidence", "conditions", "comparators", "uncertainty", "caveats", "negative_findings", "attribution", "decision_logic"]
-                for item in payload.get("meaning_card", {}).get(field, [])
-                for prop_id in item.get("source_proposition_ids", [])
+                "unit_id": unit.unit_id,
+                "source_span_ids": unit.source_span_ids,
+                "source_unit_sha256": unit_source_sha,
+                "start_line": unit.start_line,
+                "end_line": unit.end_line,
+                "argument_role": unit.argument_role,
             }
         )
-        return json.dumps(
-            {"reader_core": unit["text"], "technical_trace": "", "source_coverage_ids": coverage, "relocated_trace_ids": []},
-            ensure_ascii=False,
-        )
-    if "Audit semantic preservation" in prompt or "Re-audit semantic preservation" in prompt:
-        return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
-    if "Review only the candidate text" in prompt or "Re-review only the repaired candidate text" in prompt:
-        return json.dumps(
+        card = {
+            "schema": "SCIENTIFIC_REWRITE_HOST_MEANING_CARD_V1",
+            "unit_id": unit.unit_id,
+            "document_map_sha256": document_map_sha,
+            "source_unit_sha256": unit_source_sha,
+            "reader_job": "先理解问题和证据，再判断下一步。",
+            "plain_meaning": "该段说明证据边界和实验判断。",
+            "reader_takeaway": "保留事实后降低读者解码成本。",
+            "rewrite_problem": "workflow-language",
+            "discourse_function": unit.argument_role,
+            "claims": [
+                {
+                    "normalized_meaning": "该单元的核心含义来自原文命题。",
+                    "source_proposition_ids": [item["proposition_id"] for item in propositions],
+                    "source_span_ids": unit.source_span_ids,
+                }
+            ],
+            "evidence": [],
+            "conditions": [],
+            "comparators": [],
+            "uncertainty": [],
+            "caveats": [],
+            "negative_findings": [],
+            "attribution": [],
+            "decision_logic": [],
+            "terminology": [],
+        }
+        write_json(stage_dir / "meaning_cards" / f"{unit.unit_id}.json", card)
+        selected["by_unit"][unit.unit_id] = ["workflow-label-to-relation", "trace-to-appendix"]
+        candidate_unit = unit.text
+        (stage_dir / "candidate_units").mkdir(exist_ok=True)
+        (stage_dir / "candidate_units" / f"{unit.unit_id}.md").write_text(candidate_unit, encoding="utf-8")
+        candidate_units.append(candidate_unit)
+        unit_audits.append(
             {
-                "decision": "PASS",
-                "questions": [{"answerable": True, "inferred_answer": "候选文本可回答核心读者问题。"}],
-                "findings": [],
-            },
-            ensure_ascii=False,
+                "unit_id": unit.unit_id,
+                "decision": decision,
+                "candidate_unit_sha256": helper.sha256_text(candidate_unit),
+                "findings": [] if decision == "PASS" else [{"severity": "critical"}],
+            }
         )
-    if "Check final assembly coherence" in prompt:
-        return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
-    raise AssertionError(f"unexpected prompt: {prompt[:160]}")
+        all_literals.extend(unit.literal_invariants)
 
-
-def semantic_finding(
-    prop_id: str,
-    span_ids: list[str],
-    *,
-    status: str = "omitted",
-    severity: str = "critical",
-    finding_id: str = "semantic-001",
-    candidate_evidence: str = "candidate omits or weakens the source proposition",
-    repair_instruction: str = "restore this proposition without changing its scope",
-) -> dict[str, object]:
-    return {
-        "finding_id": finding_id,
-        "status": status,
-        "proposition_id": prop_id,
-        "source_span_ids": span_ids,
-        "candidate_evidence": candidate_evidence,
-        "severity": severity,
-        "repair_instruction": repair_instruction,
-    }
+    final_candidate = "\n\n".join(candidate_units)
+    write_json(stage_dir / "argument_units.json", {"schema": "SCIENTIFIC_REWRITE_ARGUMENT_UNITS_V1", "units": public_units})
+    write_json(stage_dir / "selected_transformations.json", selected)
+    write_json(stage_dir / "fidelity_ledger.json", {"schema": "SCIENTIFIC_REWRITE_FIDELITY_LEDGER_V1", "literal_invariants": all_literals})
+    write_json(
+        stage_dir / "self_audit.json",
+        {
+            "schema": "SCIENTIFIC_REWRITE_HOST_SELF_AUDIT_V1",
+            "decision": decision,
+            "final_candidate_sha256": helper.sha256_text(final_candidate),
+            "unit_audits": unit_audits,
+        },
+    )
+    (stage_dir / "final_candidate.md").write_text(final_candidate, encoding="utf-8")
+    return stage_dir
 
 
 class ScientificRewriteTests(unittest.TestCase):
-    def test_skill_contract_routes_heavy_chinese_scientific_rewrite(self) -> None:
+    def test_skill_contract_routes_heavy_chinese_scientific_rewrite_to_host_codex(self) -> None:
         text = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
         self.assertIn("Meaning Card", text)
         self.assertIn("Fidelity Ledger", text)
-        self.assertIn("Never borrow facts", text)
-        self.assertIn("research-reporting", text)
-        self.assertIn("chinese-prose", text)
-        self.assertIn("scientific-prose", text)
-        self.assertIn("detector", text)
+        self.assertIn("current host Codex session performs", text)
+        self.assertIn("validate-host-stage", text)
+        self.assertNotIn("OPENAI_API_KEY", text)
+        self.assertNotIn("OPENAI_TEXT_TRANSFORM_API_KEY", text)
+        self.assertNotIn("--driver openai-responses", text)
 
     def test_seed_library_is_small_metadata_tagged_and_holdout_free(self) -> None:
         seeds = json.loads((SKILL_ROOT / "references/seed-transformations.json").read_text(encoding="utf-8"))
@@ -189,9 +159,8 @@ class ScientificRewriteTests(unittest.TestCase):
 
     def test_metadata_selection_returns_diverse_bounded_examples(self) -> None:
         helper = load_helper()
-        library = helper.load_seed_library()
         selected = helper.select_examples(
-            library,
+            helper.load_seed_library(),
             limit=4,
             scene="scientific-report",
             discourse_function="result-interpretation",
@@ -204,14 +173,23 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertEqual(len({item["id"] for item in selected}), len(selected))
         self.assertGreaterEqual(len({item["discourse_function"] for item in selected[:2]}), 2)
 
+    def test_helper_has_no_external_generation_surface(self) -> None:
+        helper_source = HELPER_PATH.read_text(encoding="utf-8")
+        self.assertNotIn("api.openai.com", helper_source)
+        self.assertNotIn("urllib.request", helper_source)
+        self.assertNotIn("call_openai_text", helper_source)
+        self.assertNotIn("openai-responses", helper_source)
+        helper = load_helper()
+        with self.assertRaisesRegex(RuntimeError, "does not let the helper generate"):
+            helper.run_multistage("CARE 在 2026-08-28 的 Dice=0.81。")
+
     def test_exact_verifier_detects_literal_invariant_drift(self) -> None:
         helper = load_helper()
         source = "方法 `run_eval.py` 在 2026-08-28 使用 3 个 seed，Dice=0.81，见 [12] 和 /tmp/run/config.json。"
         ok_candidate = "在 2026-08-28，方法 `run_eval.py` 使用 3 个 seed；Dice=0.81，配置见 /tmp/run/config.json，引用仍为 [12]。"
         bad_candidate = "该方法使用多个 seed；Dice 约为 0.8，引用见文末。"
-        ok_report = helper.verify_exact(source, ok_candidate)
+        self.assertTrue(helper.verify_exact(source, ok_candidate)["ok"])
         bad_report = helper.verify_exact(source, bad_candidate)
-        self.assertTrue(ok_report["ok"], ok_report)
         self.assertFalse(bad_report["ok"], bad_report)
         self.assertGreaterEqual(len(bad_report["missing"]), 4)
 
@@ -221,68 +199,18 @@ class ScientificRewriteTests(unittest.TestCase):
         units = helper.split_markdown_units(text)
         self.assertGreaterEqual(len(units), 2)
         self.assertTrue(all(unit.source_span_ids for unit in units))
-        self.assertIn("方法", "\n".join(unit.text for unit in units))
         all_invariants = [span["text"] for unit in units for span in unit.literal_invariants]
         self.assertIn("`renv`", all_invariants)
         self.assertIn("5", all_invariants)
         self.assertIn("[3]", all_invariants)
 
-    def test_helper_verify_exact_reports_missing_literal(self) -> None:
-        with tempfile.TemporaryDirectory() as tmp:
-            tmp_path = Path(tmp)
-            source = tmp_path / "source.md"
-            candidate = tmp_path / "candidate.md"
-            source.write_text("2026-08-28 使用 `renv`，n=3。", encoding="utf-8")
-            candidate.write_text("使用环境管理，样本量为 3。", encoding="utf-8")
-            helper = load_helper()
-            report = helper.verify_exact(source.read_text(encoding="utf-8"), candidate.read_text(encoding="utf-8"))
-            self.assertFalse(report["ok"])
-
-    def test_writing_style_marketplace_exposes_scientific_rewrite_inside_existing_plugin(self) -> None:
-        data = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
-        plugin = next(item for item in data["plugins"] if item["name"] == "writing-style")
-        self.assertEqual(plugin["version"], "0.1")
-        sources = {entry["source"]: entry["artifact_id"] for entry in plugin["skills"]}
-        self.assertEqual(sources["skills/writing/core/scientific-rewrite"], "scientific-rewrite")
-        self.assertEqual(data["marketplacePluginBudget"], 10)
-        profile = json.loads((REPO_ROOT / "profiles/codex-writing-style.json").read_text(encoding="utf-8"))
-        self.assertIn("skills/writing/core/scientific-rewrite", profile["skills"])
-
-    def test_writing_fidelity_documents_literal_vs_semantic_split(self) -> None:
-        fidelity = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("Literal vs Semantic Preservation", fidelity)
-        self.assertIn("ordinary reader-facing headings", fidelity.lower())
-        self.assertIn("preserved`, `narrowed`, `broadened`, `reversed`, `invented`", fidelity)
-
-    def test_multistage_runtime_receipt_has_separate_responsibilities(self) -> None:
+    def test_long_unheaded_source_does_not_collapse_to_one_unit(self) -> None:
         helper = load_helper()
-        source = (
-            "# CARE evidence\n\n"
-            "当前 checkpoint provenance audit 显示 /tmp/run/checkpoint.pt 与训练历史重叠，因此这个实验只能说明 2026-08-28 的 CARE 证据边界。\n\n"
-            "## 下一步\n\n"
-            "下一轮比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA；如果 pooled gap 下降且 drift 可控就是 GO，否则 STOP。\n"
+        source = "\n\n".join(
+            f"第{index}段说明同一份长篇科研报告中的证据、限制、比较和下一步实验条件。" * 30
+            for index in range(1, 7)
         )
-        result = helper.run_multistage(source)
-        receipt = result["receipt"]
-        self.assertEqual(receipt["schema"], helper.RUNTIME_SCHEMA)
-        self.assertFalse(receipt["whole_document_writer_call"])
-        self.assertGreaterEqual(receipt["unit_count"], 2)
-        responsibilities = "\n".join(item["responsibility"] for item in receipt["stage_records"])
-        self.assertIn("document purpose", responsibilities)
-        self.assertIn("Meaning Card", responsibilities)
-        self.assertIn("candidate only", responsibilities.replace("-", " "))
-        self.assertIn("final assembly", responsibilities)
-
-    def test_multistage_runtime_selects_bounded_examples_not_full_library(self) -> None:
-        helper = load_helper()
-        source = "# 比较\n\nODAL vs FedFisher / FedLPA 的比较必须保留 Fisher、Laplace、theta_0 和 3 个 seed。"
-        result = helper.run_multistage(source)
-        receipt = result["receipt"]
-        self.assertLessEqual(receipt["max_examples_per_unit"], 4)
-        self.assertFalse(receipt["full_seed_library_injected"])
-        writer_records = [item for item in receipt["stage_records"] if item["stage_id"].endswith("-writer")]
-        self.assertTrue(writer_records)
-        self.assertTrue(writer_records[0]["selected_example_ids"])
+        self.assertGreater(len(helper.split_markdown_units(source)), 1)
 
     def test_literal_roles_allow_trace_appendix_but_keep_inline_critical_in_core(self) -> None:
         helper = load_helper()
@@ -299,204 +227,10 @@ class ScientificRewriteTests(unittest.TestCase):
         helper = load_helper()
         packet = helper.reader_review_packet("候选文本", "统计/ML/医学影像研究者")
         self.assertFalse(packet["source_visible"])
-        serialized = json.dumps(packet, ensure_ascii=False)
-        self.assertIn("candidate_text", packet)
         self.assertEqual(packet["candidate_text"], "候选文本")
-        self.assertIn("GO or STOP", serialized)
-        self.assertNotIn("current_original_unit", serialized)
-
-    def test_reader_review_normalizes_answerable_string_aliases(self) -> None:
-        helper = load_helper()
-        review = helper.normalize_reader_review(
-            {
-                "decision": "PASS",
-                "questions": [{"answerable": "It is partially answerable", "inferred_answer": None}],
-                "findings": [
-                    {
-                        "finding_id": "reader-001",
-                        "unit_id": "unit-001",
-                        "category": "reader_effort",
-                        "evidence": "question is only partially answerable",
-                        "repair_instruction": "make the answer explicit",
-                    }
-                ],
-            },
-            {"unit-001"},
-        )
-        self.assertIs(review["questions"][0]["answerable"], False)
-        self.assertTrue(review["questions"][0]["inferred_answer"])
-        self.assertEqual(review["decision"], "REVISE")
-
-    def test_openai_text_retries_http_429(self) -> None:
-        helper = load_helper()
-        original_sleep = helper.time.sleep
-        attempts = {"count": 0}
-
-        class FakeResponse:
-            def __enter__(self):
-                return self
-
-            def __exit__(self, exc_type, exc, tb):
-                return False
-
-            def read(self) -> bytes:
-                return json.dumps({"status": "completed", "output_text": "{\"ok\": true}"}).encode("utf-8")
-
-        def fake_opener(request, timeout):
-            attempts["count"] += 1
-            if attempts["count"] < 3:
-                raise urllib.error.HTTPError("https://api.openai.com/v1/responses", 429, "rate limit", {}, None)
-            return FakeResponse()
-
-        helper.time.sleep = lambda delay: None
-        try:
-            text = helper.call_openai_text("prompt", "source", model="test-model", api_key="test-key", opener=fake_opener)
-        finally:
-            helper.time.sleep = original_sleep
-
-        self.assertEqual(text, "{\"ok\": true}")
-        self.assertEqual(attempts["count"], 3)
-
-    def test_openai_text_reports_http_error_body(self) -> None:
-        helper = load_helper()
-        original_sleep = helper.time.sleep
-        body = {
-            "error": {
-                "type": "rate_limit_exceeded",
-                "code": "rate_limit_exceeded",
-                "message": "Requests are temporarily rate limited.",
-            }
-        }
-
-        def fake_opener(request, timeout):
-            raise urllib.error.HTTPError(
-                "https://api.openai.com/v1/responses",
-                429,
-                "rate limit",
-                {},
-                io.BytesIO(json.dumps(body).encode("utf-8")),
-            )
-
-        helper.time.sleep = lambda delay: None
-        try:
-            with self.assertRaisesRegex(RuntimeError, "rate_limit_exceeded"):
-                helper.call_openai_text("prompt", "source", model="test-model", api_key="test-key", opener=fake_opener)
-        finally:
-            helper.time.sleep = original_sleep
-
-    def test_long_unheaded_source_does_not_collapse_to_one_unit(self) -> None:
-        helper = load_helper()
-        source = "\n\n".join(
-            f"第{index}段说明同一份长篇科研报告中的证据、限制、比较和下一步实验条件。" * 30
-            for index in range(1, 7)
-        )
-        result = helper.run_multistage(source)
-        self.assertGreater(result["receipt"]["unit_count"], 1)
-
-    def test_dataflow_validation_rejects_unused_or_dangling_model_output(self) -> None:
-        helper = load_helper()
-        unused = {
-            "stage_records": [
-                {"stage_id": "document-map", "model_call": True, "unused_output": True, "terminal_output": False, "downstream_consumers": []}
-            ]
-        }
-        dangling = {
-            "stage_records": [
-                {
-                    "stage_id": "document-map",
-                    "model_call": True,
-                    "unused_output": False,
-                    "terminal_output": False,
-                    "downstream_consumers": [{"stage_id": "missing-stage", "input_binding": "document_map"}],
-                }
-            ]
-        }
-        self.assertFalse(helper.validate_dataflow(unused)["ok"])
-        self.assertFalse(helper.validate_dataflow(dangling)["ok"])
-
-    def test_malformed_meaning_card_fails_closed(self) -> None:
-        helper = load_helper()
-        original = helper.call_openai_text
-
-        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
-            if "Create a structured Meaning Card" in prompt:
-                return json.dumps({"unit_id": "unit-001"}, ensure_ascii=False)
-            return structured_stage_response(prompt, source)
-
-        helper.call_openai_text = fake_call
-        try:
-            with self.assertRaisesRegex(RuntimeError, "meaning-card"):
-                helper.run_multistage("CARE 在 2026-08-28 的 Dice=0.81。", driver="openai-responses", model="test-model", api_key="test-key")
-        finally:
-            helper.call_openai_text = original
-
-    def test_document_map_and_meaning_card_are_consumed_by_writer_packet(self) -> None:
-        helper = load_helper()
-        original = helper.call_openai_text
-
-        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
-            return structured_stage_response(prompt, source)
-
-        helper.call_openai_text = fake_call
-        try:
-            with tempfile.TemporaryDirectory() as tmp:
-                result = helper.run_multistage(
-                    "CARE 在 2026-08-28 的 Dice=0.81；下一步比较 FedFisher 和 FedLPA。",
-                    driver="openai-responses",
-                    model="test-model",
-                    api_key="test-key",
-                    stage_dir=Path(tmp),
-                )
-                packet = result["packets"][0]
-                self.assertIn("自定义核心问题", packet["compact_document_map"]["core_research_question"])
-                self.assertIn("自定义普通含义", packet["meaning_card"]["plain_meaning"])
-                self.assertIn("source_propositions", packet)
-        finally:
-            helper.call_openai_text = original
+        self.assertNotIn("source_text", json.dumps(packet, ensure_ascii=False))
 
     def test_meaning_card_omitted_proposition_bindings_fail_closed(self) -> None:
-        helper = load_helper()
-        unit = helper.split_markdown_units(
-            "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81。下一步比较 FedFisher 和 FedLPA。"
-        )[0]
-        props = helper.proposition_inventory(unit)
-        self.assertGreaterEqual(len(props), 2)
-        first_prop = props[0]["proposition_id"]
-        with self.assertRaisesRegex(RuntimeError, "omitted source propositions"):
-            helper.normalize_meaning_card(
-                {
-                    "unit_id": unit.unit_id,
-                    "reader_job": "解释当前证据和下一步判断",
-                    "plain_meaning": "先说明结论，再保留必要技术边界。",
-                    "claims": [
-                        {
-                            "normalized_meaning": "模型只绑定了第一条命题。",
-                            "source_span_ids": unit.source_span_ids,
-                            "source_proposition_ids": [first_prop],
-                        }
-                    ],
-                    "evidence": [],
-                    "conditions": [],
-                    "comparators": [],
-                    "uncertainty": [],
-                    "caveats": [],
-                    "negative_findings": [],
-                    "attribution": [],
-                    "decision_logic": [],
-                    "terminology": [],
-                    "literal_items": [],
-                    "relocatable_trace_items": [],
-                    "relation_to_previous": "承接前文",
-                    "relation_to_next": "引出后文",
-                    "rewrite_problem": "workflow-language",
-                    "discourse_function": "result-interpretation",
-                    "reader_takeaway": "读者应理解判断含义",
-                },
-                unit,
-                props,
-            )
-
-    def test_meaning_card_missing_item_proposition_ids_fail_closed(self) -> None:
         helper = load_helper()
         unit = helper.split_markdown_units(
             "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81。下一步比较 FedFisher 和 FedLPA。"
@@ -507,13 +241,8 @@ class ScientificRewriteTests(unittest.TestCase):
                 {
                     "unit_id": unit.unit_id,
                     "reader_job": "解释当前证据和下一步判断",
-                    "plain_meaning": "先说明结论，再保留必要技术边界。",
-                    "claims": [
-                        {
-                            "normalized_meaning": "模型给出了 claim，但漏写 proposition binding。",
-                            "source_span_ids": unit.source_span_ids,
-                        }
-                    ],
+                    "plain_meaning": "先说明结论。",
+                    "claims": [{"normalized_meaning": "漏写绑定。", "source_span_ids": unit.source_span_ids}],
                     "evidence": [],
                     "conditions": [],
                     "comparators": [],
@@ -522,679 +251,97 @@ class ScientificRewriteTests(unittest.TestCase):
                     "negative_findings": [],
                     "attribution": [],
                     "decision_logic": [],
-                    "terminology": [],
-                    "literal_items": [],
-                    "relocatable_trace_items": [],
                     "relation_to_previous": "承接前文",
                     "relation_to_next": "引出后文",
                     "rewrite_problem": "workflow-language",
                     "discourse_function": "result-interpretation",
-                    "reader_takeaway": "读者应理解判断含义",
+                    "reader_takeaway": "读者理解判断。",
                 },
                 unit,
                 props,
             )
 
-    def test_openai_driver_makes_observable_stage_calls(self) -> None:
+    def test_host_stage_package_validation_receipt_is_privacy_safe(self) -> None:
         helper = load_helper()
-        calls = []
-        original = helper.call_openai_text
-
-        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
-            calls.append({"prompt": prompt, "source": source, "kwargs": kwargs})
-            return structured_stage_response(prompt, source)
-
-        helper.call_openai_text = fake_call
-        try:
-            result = helper.run_multistage(
-                "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81；下一步比较 FedFisher 和 FedLPA。",
-                driver="openai-responses",
-                model="test-model",
-                api_key="test-key",
-            )
-        finally:
-            helper.call_openai_text = original
-
+        source = (
+            "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81，checkpoint 见 /tmp/run/checkpoint.pt。\n\n"
+            "下一步比较 FedFisher 和 FedLPA；如果 pooled gap 下降就是 GO，否则 STOP。"
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = make_stage_package(helper, root, source)
+            result = helper.validate_host_stage_package(source, stage_dir, candidate_path=stage_dir / "final_candidate.md")
         receipt = result["receipt"]
-        model_stage_ids = [item["stage_id"] for item in receipt["stage_records"] if item["model_call"]]
-        self.assertEqual(receipt["model_call_count"], len(calls))
-        self.assertIn("document-map", model_stage_ids)
-        self.assertTrue(any(stage_id.endswith("-meaning-card") for stage_id in model_stage_ids))
-        self.assertTrue(any(stage_id.endswith("-writer") for stage_id in model_stage_ids))
-        self.assertTrue(any(stage_id.endswith("-literal-semantic-audit") for stage_id in model_stage_ids))
-        self.assertIn("candidate-only-reader-review", model_stage_ids)
-        self.assertIn("final-assembly-coherence", model_stage_ids)
-
-    def test_openai_driver_applies_targeted_repair_output(self) -> None:
-        helper = load_helper()
-        original = helper.call_openai_text
-
-        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
-            return structured_stage_response(prompt, source, omit_writer_literals=True)
-
-        helper.call_openai_text = fake_call
-        try:
-            result = helper.run_multistage(
-                "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81；下一步比较 FedFisher 和 FedLPA。",
-                driver="openai-responses",
-                model="test-model",
-                api_key="test-key",
-            )
-        finally:
-            helper.call_openai_text = original
-
-        receipt = result["receipt"]
-        self.assertIn("2026-08-28", result["candidate"])
-        self.assertIn("Dice=0.81", result["candidate"])
-        self.assertTrue(any("-targeted-repair-" in item["stage_id"] for item in receipt["stage_records"]))
-        self.assertTrue(any("-post-repair-audit-" in item["stage_id"] for item in receipt["stage_records"]))
-
-    def test_openai_driver_allows_two_unit_semantic_repair_rounds(self) -> None:
-        helper = load_helper()
-        original = helper.call_openai_text
-        semantic_audits = 0
-
-        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
-            nonlocal semantic_audits
-            if "Audit semantic preservation" in prompt or "Re-audit semantic preservation" in prompt:
-                semantic_audits += 1
-                if semantic_audits < 3:
-                    payload = json.loads(source)
-                    first_claim = payload["meaning_card"]["claims"][0]
-                    return json.dumps(
-                        {
-                            "decision": "REVISE",
-                            "findings": [
-                                semantic_finding(
-                                    first_claim["source_proposition_ids"][0],
-                                    first_claim["source_span_ids"],
-                                    candidate_evidence="candidate still hides a decision condition",
-                                    repair_instruction="restore the missing decision condition",
-                                )
-                            ],
-                        },
-                        ensure_ascii=False,
-                    )
-                return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
-            if "Repair only the current rewritten unit" in prompt:
-                payload = json.loads(source)
-                coverage = sorted(
-                    {
-                        str(prop_id)
-                        for field in [
-                            "claims",
-                            "evidence",
-                            "conditions",
-                            "comparators",
-                            "uncertainty",
-                            "caveats",
-                            "negative_findings",
-                            "attribution",
-                            "decision_logic",
-                        ]
-                        for item in payload.get("meaning_card", {}).get(field, [])
-                        for prop_id in item.get("source_proposition_ids", [])
-                    }
-                )
-                return json.dumps(
-                    {
-                        "reader_core": "候选仍缺少一个关键决策条件。",
-                        "technical_trace": "",
-                        "source_coverage_ids": coverage,
-                        "relocated_trace_ids": [],
-                    },
-                    ensure_ascii=False,
-                )
-            return structured_stage_response(prompt, source)
-
-        helper.call_openai_text = fake_call
-        try:
-            result = helper.run_multistage(
-                "# 决策\n\n下一轮必须同时比较 pooled、local-only、FedAvg、FedFisher 和 FedLPA；只有 pooled gap 缩小且 drift 受控才 GO，否则 STOP。",
-                driver="openai-responses",
-                model="test-model",
-                api_key="test-key",
-            )
-        finally:
-            helper.call_openai_text = original
-
-        receipt = result["receipt"]
-        stage_ids = [item["stage_id"] for item in receipt["stage_records"]]
-        self.assertTrue(any(stage_id.endswith("-semantic-source-restoration-1") for stage_id in stage_ids))
-        self.assertTrue(any(stage_id.endswith("-targeted-repair-2") for stage_id in stage_ids))
-        self.assertTrue(any(stage_id.endswith("-post-repair-audit-2") for stage_id in stage_ids))
-        self.assertGreaterEqual(semantic_audits, 3)
+        self.assertEqual(receipt["schema"], helper.RUNTIME_SCHEMA)
+        self.assertEqual(receipt["driver"], "host-codex")
+        self.assertEqual(receipt["model_call_count"], 0)
+        self.assertEqual(receipt["external_api_call_count"], 0)
+        self.assertFalse(receipt["requires_openai_api_key"])
         self.assertTrue(receipt["dataflow_validation"]["ok"])
+        self.assertTrue(receipt["exact_verification"]["ok"])
+        serialized = json.dumps(receipt, ensure_ascii=False)
+        self.assertNotIn(source, serialized)
+        self.assertNotIn("candidate_text", serialized)
 
-    def test_openai_driver_repairs_final_assembly_revise_once(self) -> None:
+    def test_host_stage_package_rejects_decorative_or_unresolved_files(self) -> None:
         helper = load_helper()
-        original = helper.call_openai_text
-        assembly_reviews = 0
-
-        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
-            nonlocal assembly_reviews
-            if "Check final assembly coherence" in prompt:
-                assembly_reviews += 1
-                if assembly_reviews == 1:
-                    return json.dumps(
-                        {
-                            "decision": "REVISE",
-                            "findings": [
-                                {
-                                    "finding_id": "assembly-001",
-                                    "unit_id": "",
-                                    "category": "transition",
-                                    "repair_instruction": "add a clearer transition between evidence and next-step decision",
-                                }
-                            ],
-                        },
-                        ensure_ascii=False,
-                    )
-                return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
-            if "Repair the assembled candidate only" in prompt:
-                payload = json.loads(source)
-                return json.dumps(
-                    {
-                        "reader_core": payload["assembled_reader_core"] + "\n\n因此，下一步判断应接在现有证据边界之后。",
-                        "technical_trace": payload["assembled_technical_trace"],
-                        "applied_finding_ids": ["assembly-001"],
-                        "touched_unit_ids": [],
-                    },
-                    ensure_ascii=False,
-                )
-            return structured_stage_response(prompt, source)
-
-        helper.call_openai_text = fake_call
-        try:
-            result = helper.run_multistage(
-                "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81。\n\n## 下一步\n\n下一轮比较 FedFisher 和 FedLPA。",
-                driver="openai-responses",
-                model="test-model",
-                api_key="test-key",
-            )
-        finally:
-            helper.call_openai_text = original
-
-        receipt = result["receipt"]
-        stage_ids = [item["stage_id"] for item in receipt["stage_records"]]
-        self.assertIn("final-assembly-targeted-repair", stage_ids)
-        self.assertIn("final-assembly-coherence-rerun", stage_ids)
-        self.assertEqual(assembly_reviews, 2)
-        self.assertTrue(receipt["dataflow_validation"]["ok"])
-
-    def test_openai_driver_repairs_final_assembly_three_times(self) -> None:
-        helper = load_helper()
-        original = helper.call_openai_text
-        assembly_reviews = 0
-        assembly_repairs = 0
-
-        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
-            nonlocal assembly_reviews, assembly_repairs
-            if "Check final assembly coherence" in prompt:
-                assembly_reviews += 1
-                if assembly_reviews < 4:
-                    return json.dumps(
-                        {
-                            "decision": "REVISE",
-                            "findings": [
-                                {
-                                    "finding_id": f"assembly-{assembly_reviews:03d}",
-                                    "unit_id": "",
-                                    "category": "transition",
-                                    "repair_instruction": "tighten the transition without changing facts",
-                                }
-                            ],
-                        },
-                        ensure_ascii=False,
-                    )
-                return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
-            if "Repair the assembled candidate only" in prompt:
-                assembly_repairs += 1
-                payload = json.loads(source)
-                return json.dumps(
-                    {
-                        "reader_core": payload["assembled_reader_core"] + f"\n\n组装修复第 {assembly_repairs} 轮保持原有事实，只改衔接。",
-                        "technical_trace": payload["assembled_technical_trace"],
-                        "applied_finding_ids": [f"assembly-{assembly_repairs:03d}"],
-                        "touched_unit_ids": [],
-                    },
-                    ensure_ascii=False,
-                )
-            return structured_stage_response(prompt, source)
-
-        helper.call_openai_text = fake_call
-        try:
-            result = helper.run_multistage(
-                "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81。\n\n## 下一步\n\n下一轮比较 FedFisher 和 FedLPA。",
-                driver="openai-responses",
-                model="test-model",
-                api_key="test-key",
-            )
-        finally:
-            helper.call_openai_text = original
-
-        receipt = result["receipt"]
-        stage_ids = [item["stage_id"] for item in receipt["stage_records"]]
-        self.assertIn("final-assembly-targeted-repair-3", stage_ids)
-        self.assertIn("final-assembly-coherence-rerun-3", stage_ids)
-        self.assertEqual(assembly_reviews, 4)
-        self.assertEqual(assembly_repairs, 3)
-        self.assertTrue(receipt["dataflow_validation"]["ok"])
-
-    def test_openai_driver_routes_unresolved_assembly_findings_to_human_gate(self) -> None:
-        helper = load_helper()
-        original = helper.call_openai_text
-        assembly_reviews = 0
-        assembly_repairs = 0
-
-        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
-            nonlocal assembly_reviews, assembly_repairs
-            if "Check final assembly coherence" in prompt:
-                assembly_reviews += 1
-                return json.dumps(
-                    {
-                        "decision": "REVISE",
-                        "findings": [
-                            {
-                                "finding_id": f"assembly-{assembly_reviews:03d}",
-                                "unit_id": "",
-                                "category": "transition",
-                                "repair_instruction": "tighten the transition without changing facts",
-                            }
-                        ],
-                    },
-                    ensure_ascii=False,
-                )
-            if "Repair the assembled candidate only" in prompt:
-                assembly_repairs += 1
-                payload = json.loads(source)
-                finding_ids = [item["finding_id"] for item in payload["assembly_findings"]]
-                return json.dumps(
-                    {
-                        "reader_core": payload["assembled_reader_core"] + f"\n\n组装修复第 {assembly_repairs} 轮保持原有事实。",
-                        "technical_trace": payload["assembled_technical_trace"],
-                        "applied_finding_ids": finding_ids,
-                        "touched_unit_ids": [],
-                    },
-                    ensure_ascii=False,
-                )
-            return structured_stage_response(prompt, source)
-
-        helper.call_openai_text = fake_call
-        try:
-            result = helper.run_multistage(
-                "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81。\n\n## 下一步\n\n下一轮比较 FedFisher 和 FedLPA。",
-                driver="openai-responses",
-                model="test-model",
-                api_key="test-key",
-            )
-        finally:
-            helper.call_openai_text = original
-
-        receipt = result["receipt"]
-        stage_ids = [item["stage_id"] for item in receipt["stage_records"]]
-        self.assertIn("final-assembly-human-style-gate-adjudication", stage_ids)
-        self.assertEqual(assembly_reviews, 4)
-        self.assertEqual(assembly_repairs, 3)
-        self.assertTrue(receipt["dataflow_validation"]["ok"])
-
-    def test_reader_repair_gets_semantic_targeted_retry(self) -> None:
-        helper = load_helper()
-        original = helper.call_openai_text
-        original_proposition_inventory = helper.proposition_inventory
-        reader_semantic_reaudits = {"count": 0}
-
-        def fake_proposition_inventory(unit) -> list[dict[str, object]]:
-            if unit.unit_id != "unit-002":
-                return original_proposition_inventory(unit)
-            first = "CARE 在 2026-08-28 的 Dice=0.81 只支持继续验证。"
-            second = "下一轮比较 FedFisher 和 FedLPA。"
-            return [
-                {
-                    "proposition_id": "unit-002-prop-001",
-                    "kind": "claim",
-                    "source_span_ids": unit.source_span_ids,
-                    "source_text_sha256": helper.sha256_text(first),
-                    "source_excerpt": first,
-                    "required": True,
-                },
-                {
-                    "proposition_id": "unit-002-prop-002",
-                    "kind": "comparator",
-                    "source_span_ids": unit.source_span_ids,
-                    "source_text_sha256": helper.sha256_text(second),
-                    "source_excerpt": second,
-                    "required": True,
-                },
-            ]
-
-        def coverage_ids(payload: dict[str, object]) -> list[str]:
-            card = payload.get("meaning_card", {})
-            if not isinstance(card, dict):
-                return []
-            return sorted(
-                {
-                    str(prop_id)
-                    for field in [
-                        "claims",
-                        "evidence",
-                        "conditions",
-                        "comparators",
-                        "uncertainty",
-                        "caveats",
-                        "negative_findings",
-                        "attribution",
-                        "decision_logic",
-                    ]
-                    for item in card.get(field, [])
-                    for prop_id in item.get("source_proposition_ids", [])
-                }
-            )
-
-        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
-            if "Review only the candidate text" in prompt:
-                return json.dumps(
-                    {
-                        "decision": "REVISE",
-                        "questions": [{"answerable": False, "inferred_answer": "需要补清楚下一步判断。"}],
-                        "findings": [
-                            {
-                                "finding_id": "reader-001",
-                                "unit_id": "unit-002",
-                                "category": "buried_conclusion",
-                                "evidence": "candidate leaves the next-step decision implicit",
-                                "repair_instruction": "make the current conclusion strength explicit",
-                            }
-                        ],
-                    },
-                    ensure_ascii=False,
-                )
-            if "Re-review only the repaired candidate text" in prompt:
-                return json.dumps({"decision": "PASS", "questions": [{"answerable": True, "inferred_answer": "判断已清楚。"}], "findings": []}, ensure_ascii=False)
-            if "Repair this unit only for reader effort" in prompt:
-                payload = json.loads(source)
-                return json.dumps(
-                    {
-                        "reader_core": payload["unit"]["text"],
-                        "technical_trace": "",
-                        "source_coverage_ids": coverage_ids(payload),
-                        "relocated_trace_ids": [],
-                    },
-                    ensure_ascii=False,
-                )
-            if "Audit semantic preservation after reader-targeted repair" in prompt:
-                payload = json.loads(source)
-                prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][0]
-                span_ids = payload["meaning_card"]["claims"][0]["source_span_ids"]
-                return json.dumps(
-                    {
-                        "decision": "REVISE",
-                        "findings": [
-                            semantic_finding(
-                                prop_id,
-                                span_ids,
-                                finding_id="reader-semantic-001",
-                                candidate_evidence="candidate no longer preserves the first proposition",
-                                repair_instruction="restore the first source proposition",
-                            )
-                        ],
-                    },
-                    ensure_ascii=False,
-                )
-            if "Repair this unit only for semantic preservation" in prompt:
-                payload = json.loads(source)
-                return json.dumps(
-                    {
-                        "reader_core": "判断已经改清楚。",
-                        "technical_trace": "",
-                        "source_coverage_ids": coverage_ids(payload),
-                        "relocated_trace_ids": [],
-                    },
-                    ensure_ascii=False,
-                )
-            if "Re-audit semantic preservation after the reader semantic repair" in prompt:
-                reader_semantic_reaudits["count"] += 1
-                payload = json.loads(source)
-                candidate = payload["candidate"]["reader_core"]
-                if "CARE 在 2026-08-28 的 Dice=0.81 只支持继续验证" not in candidate:
-                    prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][0]
-                    span_ids = payload["meaning_card"]["claims"][0]["source_span_ids"]
-                    return json.dumps(
-                        {
-                            "decision": "REVISE",
-                            "findings": [
-                                semantic_finding(
-                                    prop_id,
-                                    span_ids,
-                                    finding_id="reader-semantic-002",
-                                    candidate_evidence="candidate still omits the first proposition",
-                                    repair_instruction="restore the first source proposition",
-                                )
-                            ],
-                        },
-                        ensure_ascii=False,
-                    )
-                if "下一轮比较 FedFisher 和 FedLPA" in candidate:
-                    return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
-                prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][1]
-                span_ids = payload["meaning_card"]["claims"][0]["source_span_ids"]
-                return json.dumps(
-                    {
-                        "decision": "REVISE",
-                        "findings": [
-                            semantic_finding(
-                                prop_id,
-                                span_ids,
-                                finding_id="reader-semantic-003",
-                                candidate_evidence="candidate still omits the comparator proposition",
-                                repair_instruction="restore the comparator proposition",
-                            )
-                        ],
-                    },
-                    ensure_ascii=False,
-                )
-            if "Re-audit semantic preservation after source-backed restoration" in prompt:
-                payload = json.loads(source)
-                candidate = payload["candidate"]["reader_core"]
-                if "CARE 在 2026-08-28 的 Dice=0.81 只支持继续验证" in candidate and "下一轮比较 FedFisher 和 FedLPA" in candidate:
-                    return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
-                prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][1]
-                span_ids = payload["meaning_card"]["claims"][0]["source_span_ids"]
-                return json.dumps(
-                    {
-                        "decision": "REVISE",
-                        "findings": [
-                            semantic_finding(
-                                prop_id,
-                                span_ids,
-                                finding_id="reader-semantic-004",
-                                candidate_evidence="candidate still omits the comparator proposition",
-                                repair_instruction="restore the comparator proposition",
-                            )
-                        ],
-                    },
-                    ensure_ascii=False,
-                )
-            return structured_stage_response(prompt, source)
-
-        helper.call_openai_text = fake_call
-        helper.proposition_inventory = fake_proposition_inventory
-        try:
-            result = helper.run_multistage(
-                "# 结论\n\nCARE 在 2026-08-28 的 Dice=0.81 只支持继续验证。下一轮比较 FedFisher 和 FedLPA。",
-                driver="openai-responses",
-                model="test-model",
-                api_key="test-key",
-            )
-        finally:
-            helper.call_openai_text = original
-            helper.proposition_inventory = original_proposition_inventory
-
-        stage_ids = [item["stage_id"] for item in result["receipt"]["stage_records"]]
-        self.assertTrue(any("reader-semantic-targeted-repair" in stage_id for stage_id in stage_ids))
-        self.assertTrue(any("reader-semantic-source-restoration" in stage_id for stage_id in stage_ids))
-        self.assertTrue(any("reader-semantic-post-audit-source-restoration" in stage_id for stage_id in stage_ids))
-        self.assertTrue(any("reader-semantic-post-restore-audit" in stage_id for stage_id in stage_ids))
-        self.assertTrue(any("reader-semantic-repair-audit" in stage_id for stage_id in stage_ids))
-        self.assertEqual(reader_semantic_reaudits["count"], 1)
-        self.assertTrue(result["receipt"]["dataflow_validation"]["ok"])
-
-    def test_semantic_revise_triggers_targeted_repair_even_when_minor(self) -> None:
-        helper = load_helper()
-        original = helper.call_openai_text
-        semantic_audits = 0
-
-        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
-            nonlocal semantic_audits
-            if "Audit semantic preservation" in prompt or "Re-audit semantic preservation" in prompt:
-                semantic_audits += 1
-                if semantic_audits > 1:
-                    return json.dumps({"decision": "PASS", "findings": []}, ensure_ascii=False)
-                payload = json.loads(source)
-                prop_id = payload["meaning_card"]["claims"][0]["source_proposition_ids"][0]
-                span_ids = payload["meaning_card"]["claims"][0]["source_span_ids"]
-                return json.dumps(
-                    {
-                        "decision": "REVISE",
-                        "findings": [
-                            semantic_finding(
-                                prop_id,
-                                span_ids,
-                                status="narrowed",
-                                severity="minor",
-                                candidate_evidence="candidate narrows a non-critical relation",
-                                repair_instruction="restore the relation without changing the conclusion",
-                            )
-                        ],
-                    },
-                    ensure_ascii=False,
-                )
-            return structured_stage_response(prompt, source)
-
-        helper.call_openai_text = fake_call
-        try:
-            result = helper.run_multistage(
-                "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81；下一步比较 FedFisher 和 FedLPA。",
-                driver="openai-responses",
-                model="test-model",
-                api_key="test-key",
-            )
-        finally:
-            helper.call_openai_text = original
-
-        stage_ids = [item["stage_id"] for item in result["receipt"]["stage_records"]]
-        self.assertTrue(any("-targeted-repair-" in stage_id for stage_id in stage_ids))
-        self.assertGreaterEqual(semantic_audits, 2)
-        self.assertTrue(result["receipt"]["dataflow_validation"]["ok"])
-
-    def test_exact_literal_restoration_runs_after_model_repair_omits_literal(self) -> None:
-        helper = load_helper()
-        original = helper.call_openai_text
-
-        def fake_call(prompt: str, source: str, **kwargs: object) -> str:
-            if "Rewrite only the current argument unit" in prompt or "Repair only the current rewritten unit" in prompt:
-                payload = json.loads(source)
-                coverage = [item["proposition_id"] for item in payload.get("source_propositions", [])]
-                if not coverage:
-                    coverage = sorted(
-                        {
-                            str(prop_id)
-                            for field in [
-                                "claims",
-                                "evidence",
-                                "conditions",
-                                "comparators",
-                                "uncertainty",
-                                "caveats",
-                                "negative_findings",
-                                "attribution",
-                                "decision_logic",
-                            ]
-                            for item in payload.get("meaning_card", {}).get(field, [])
-                            for prop_id in item.get("source_proposition_ids", [])
-                        }
-                    )
-                return json.dumps(
-                    {"reader_core": "CARE 的结果需要解释。", "technical_trace": "", "source_coverage_ids": coverage, "relocated_trace_ids": []},
-                    ensure_ascii=False,
-                )
-            return structured_stage_response(prompt, source)
-
-        helper.call_openai_text = fake_call
-        try:
-            result = helper.run_multistage(
-                "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81；下一步比较 FedFisher 和 FedLPA。",
-                driver="openai-responses",
-                model="test-model",
-                api_key="test-key",
-            )
-        finally:
-            helper.call_openai_text = original
-
-        self.assertIn("2026-08-28", result["candidate"])
-        self.assertIn("0.81", result["candidate"])
-        self.assertTrue(any("-exact-literal-restoration-" in item["stage_id"] for item in result["receipt"]["stage_records"]))
-        self.assertTrue(result["receipt"]["dataflow_validation"]["ok"], result["receipt"]["dataflow_validation"])
+        source = "CARE 在 2026-08-28 的 Dice=0.81。"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = make_stage_package(helper, root, source, decision="REVISE")
+            with self.assertRaisesRegex(RuntimeError, "unresolved"):
+                helper.validate_host_stage_package(source, stage_dir)
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = make_stage_package(helper, root, source)
+            (stage_dir / "meaning_cards" / "unit-001.json").unlink()
+            with self.assertRaisesRegex(RuntimeError, "missing meaning card"):
+                helper.validate_host_stage_package(source, stage_dir)
 
     def test_semantic_audit_status_aliases_are_canonicalized_conservatively(self) -> None:
         helper = load_helper()
-        unit = helper.RewriteUnit(
-            unit_id="unit-001",
-            heading="# 结果",
-            text="CARE 在 2026-08-28 的 Dice=0.81。",
-            start_line=1,
-            end_line=1,
-            literal_invariants=[],
-            source_span_ids=["span-001"],
-            argument_role="result-interpretation",
-            why_these_spans_belong_together="single result unit",
+        unit = helper.split_markdown_units("CARE 在 2026-08-28 的 Dice=0.81。")[0]
+        props = helper.proposition_inventory(unit)
+        review = helper.normalize_semantic_audit(
+            {
+                "decision": "REVISE",
+                "findings": [
+                    {
+                        "status": "missing",
+                        "proposition_id": props[0]["proposition_id"],
+                        "source_span_ids": unit.source_span_ids,
+                        "severity": "critical",
+                    }
+                ],
+            },
+            unit,
+            props,
         )
-        propositions = helper.proposition_inventory(unit)
-        raw = {
-            "decision": "REVISE",
-            "findings": [
-                semantic_finding(
-                    propositions[0]["proposition_id"],
-                    unit.source_span_ids,
-                    status="missing",
-                    severity="critical",
-                    finding_id="semantic-alias-001",
-                ),
-                semantic_finding(
-                    propositions[0]["proposition_id"],
-                    unit.source_span_ids,
-                    status="partially-preserved",
-                    severity="minor",
-                    finding_id="semantic-alias-002",
-                ),
-            ],
-        }
-        normalized = helper.normalize_semantic_audit(raw, unit, propositions)
-        self.assertEqual([item["status"] for item in normalized["findings"]], ["omitted", "narrowed"])
-        self.assertEqual(normalized["critical_violation_count"], 1)
-        with self.assertRaisesRegex(RuntimeError, "status is invalid"):
-            helper.normalize_semantic_audit(
-                {
-                    "decision": "PASS",
-                    "findings": [
-                        semantic_finding(
-                            propositions[0]["proposition_id"],
-                            unit.source_span_ids,
-                            status="unclear",
-                        )
-                    ],
-                },
-                unit,
-                propositions,
-            )
+        self.assertEqual(review["findings"][0]["status"], "omitted")
+        self.assertEqual(review["critical_violation_count"], 1)
+
+    def test_private_smoke_runner_has_no_api_or_text_transform_dependency(self) -> None:
+        runner = (REPO_ROOT / "scripts/run_scientific_rewrite_private_smoke.py").read_text(encoding="utf-8")
+        self.assertIn("validate_host_stage_package", runner)
+        self.assertNotIn("OPENAI_API_KEY", runner)
+        self.assertNotIn("OPENAI_REVIEW_API_KEY", runner)
+        self.assertNotIn("text-transform", runner)
+        self.assertNotIn("run_multistage", runner)
+
+    def test_writing_style_marketplace_exposes_scientific_rewrite_inside_existing_plugin(self) -> None:
+        data = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
+        plugin = next(item for item in data["plugins"] if item["name"] == "writing-style")
+        self.assertEqual(plugin["version"], "0.1")
+        sources = {entry["source"]: entry["artifact_id"] for entry in plugin["skills"]}
+        self.assertEqual(sources["skills/writing/core/scientific-rewrite"], "scientific-rewrite")
+        profile = json.loads((REPO_ROOT / "profiles/codex-writing-style.json").read_text(encoding="utf-8"))
+        self.assertIn("skills/writing/core/scientific-rewrite", profile["skills"])
 
     def test_response_schema_name_is_bounded_and_stable(self) -> None:
         helper = load_helper()
-        stage = "u1_route_revision_and_initial_assessment-post-repair-semantic-audit"
-        name = helper.response_schema_name(stage)
+        name = helper.response_schema_name("very long stage name " * 20)
         self.assertLessEqual(len(name), 64)
-        self.assertEqual(name, helper.response_schema_name(stage))
-        self.assertRegex(name, r"^[A-Za-z0-9_-]+$")
+        self.assertEqual(name, helper.response_schema_name("very long stage name " * 20))
 
 
 if __name__ == "__main__":

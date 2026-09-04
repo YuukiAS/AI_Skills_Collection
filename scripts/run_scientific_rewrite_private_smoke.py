@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Run one private 049 style-smoke sample through the staged rewrite runtime.
+"""Validate one private 050 host-Codex style-smoke package.
 
-The caller supplies plaintext from a temporary decrypted file. This script keeps
-the candidate plaintext in the caller-provided work directory, writes only the
-public stage receipt and metadata to the repository, and encrypts the candidate
-to the manifest's output age recipient.
+The host Codex session writes the private stage artifacts and final candidate
+outside tracked Git. This script verifies that package through the generated
+writing-style helper and writes only privacy-safe metadata to the repository.
+It does not generate prose, encrypt output, read API keys, or call OpenAI.
 """
 
 from __future__ import annotations
@@ -13,9 +13,6 @@ import argparse
 import hashlib
 import importlib.util
 import json
-import os
-import shutil
-import subprocess
 import sys
 import time
 from pathlib import Path
@@ -27,7 +24,6 @@ RUNTIME_HELPER = (
     REPO_ROOT
     / "plugins/codex/plugins/writing-style/skills/scientific-rewrite/scripts/rewrite_support.py"
 )
-DEFAULT_MODEL = "gpt-5.6-terra"
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -68,128 +64,71 @@ def repo_path(raw: str) -> Path:
     return REPO_ROOT / path
 
 
-def encrypt_with_age(candidate_path: Path, recipient: str, output_age: Path, workdir: Path) -> None:
-    tmp_output = workdir / "candidate-output.age"
-    if tmp_output.exists():
-        tmp_output.unlink()
-    subprocess.run(
-        ["age", "-r", recipient, "-o", str(tmp_output), str(candidate_path)],
-        check=True,
-        cwd=str(REPO_ROOT),
-    )
-    output_age.parent.mkdir(parents=True, exist_ok=True)
-    shutil.move(str(tmp_output), str(output_age))
-
-
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--manifest", required=True)
-    parser.add_argument("--plaintext", required=True)
-    parser.add_argument("--output-age", required=True)
-    parser.add_argument("--result", required=True)
-    parser.add_argument("--receipt", required=True)
-    parser.add_argument("--workdir", required=True)
-    parser.add_argument("--model", default=os.environ.get("OPENAI_TEXT_TRANSFORM_MODEL") or DEFAULT_MODEL)
+    parser.add_argument("--manifest", required=True, help="Repository-relative 050 smoke manifest/evidence input.")
+    parser.add_argument("--plaintext", required=True, help="Private plaintext source segment path.")
+    parser.add_argument("--stage-dir", required=True, help="Private host-authored stage directory.")
+    parser.add_argument("--candidate", required=True, help="Private final candidate path.")
+    parser.add_argument("--result", required=True, help="Repository-relative privacy-safe result JSON.")
+    parser.add_argument("--receipt", required=True, help="Repository-relative privacy-safe stage receipt JSON.")
     args = parser.parse_args()
 
     manifest_path = repo_path(args.manifest)
-    output_age_path = repo_path(args.output_age)
     result_path = repo_path(args.result)
     receipt_path = repo_path(args.receipt)
     plaintext_path = Path(args.plaintext)
-    workdir = Path(args.workdir)
-    workdir.mkdir(parents=True, exist_ok=True)
-    os.chmod(workdir, 0o700)
+    stage_dir = Path(args.stage_dir)
+    candidate_path = Path(args.candidate)
 
     manifest = load_json(manifest_path)
-    if manifest.get("schema") != "AI_BRIDGE_TEXT_TRANSFORM_MANIFEST_V1":
-        raise RuntimeError("Unexpected text transform manifest schema")
-    if manifest.get("transform_kind") != "scientific-rewrite-staged-smoke":
-        raise RuntimeError("Manifest is not a 049 staged style-smoke transform")
-    if not manifest.get("external_upload_authorization"):
-        raise RuntimeError("Missing private artifact upload authorization record")
+    if manifest.get("schema") != "AI_SKILLS_050_STYLE_SMOKE_INPUT_V1":
+        raise RuntimeError("Unexpected 050 style-smoke manifest schema")
+    if manifest.get("task_key") != "050_writing_style_host_codex_runtime":
+        raise RuntimeError("Manifest is not for task 050")
 
     source = plaintext_path.read_text(encoding="utf-8")
-    expected_source_sha = manifest["input"]["plaintext_sha256"]
+    expected_source_sha = manifest["source"]["segment_sha256"]
     actual_source_sha = sha256_text(source)
     if actual_source_sha != expected_source_sha:
-        raise RuntimeError("Decrypted source plaintext SHA-256 does not match manifest")
-
-    api_key = (
-        os.environ.get("OPENAI_TEXT_TRANSFORM_API_KEY", "")
-        or os.environ.get("OPENAI_REVIEW_API_KEY", "")
-        or os.environ.get("OPENAI_API_KEY", "")
-    )
-    if not api_key:
-        raise RuntimeError("OpenAI API key unavailable in GitHub Actions environment")
+        raise RuntimeError("Source segment SHA-256 does not match manifest")
 
     runtime = load_runtime()
-    runtime_result = runtime.run_multistage(
-        source,
-        driver="openai-responses",
-        model=args.model,
-        api_key=api_key,
-        stage_dir=None,
-        smoke_role=manifest.get("smoke", {}).get("id", ""),
-    )
-    candidate = runtime_result["candidate"]
-    candidate_path = workdir / "candidate.md"
-    candidate_path.write_text(candidate, encoding="utf-8")
+    runtime_result = runtime.validate_host_stage_package(source, stage_dir, candidate_path=candidate_path)
     write_json(receipt_path, runtime_result["receipt"])
 
-    recipient = manifest["output"]["public_recipient"]
-    encrypt_with_age(candidate_path, recipient, output_age_path, workdir)
-
-    encrypted_input_path = repo_path(manifest["input"]["encrypted_payload_path"])
-    recipient_path = repo_path(manifest["output"]["public_recipient_path"])
+    candidate = runtime_result["candidate"]
     result = {
-        "schema": "AI_SKILLS_049_PRIVATE_STYLE_SMOKE_TRANSFORM_V1",
+        "schema": "AI_SKILLS_050_PRIVATE_STYLE_SMOKE_PUBLIC_RESULT_V1",
         "created_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "task_key": manifest["task_key"],
-        "workflow_type": manifest.get("workflow_type", "reviewed_handoff"),
-        "transform_kind": manifest["transform_kind"],
-        "prompt_version": manifest.get("prompt_version", ""),
-        "bridge_kit_commit": os.environ.get("AI_BRIDGE_KIT_COMMIT", ""),
-        "model": args.model,
-        "store": False,
-        "plaintext_committed": False,
-        "private_plaintext_committed": False,
-        "input_manifest": {
-            "path": args.manifest,
-            "sha256": sha256_file(manifest_path),
-            "external_upload_authorization_recorded": True,
-            "identity_bindings": manifest.get("identity_bindings", {}),
-            "privacy_policy": manifest.get("privacy_policy", ""),
-        },
-        "smoke": manifest.get("smoke", {}),
-        "encrypted_input": {
-            "path": manifest["input"]["encrypted_payload_path"],
-            "sha256": sha256_file(encrypted_input_path),
-        },
-        "source_plaintext_sha256": actual_source_sha,
+        "smoke_id": manifest["smoke_id"],
+        "role": manifest["role"],
+        "line_ranges": manifest["source"]["line_ranges"],
+        "full_private_source_sha256": manifest["source"]["full_private_source_sha256"],
+        "source_segment_sha256": actual_source_sha,
         "source_plaintext_size_bytes": len(source.encode("utf-8")),
-        "runtime": {
-            "name": runtime_result["receipt"]["runtime"],
+        "implementation_commit": manifest["implementation_commit"],
+        "production_entrypoint": manifest["production_entrypoint"],
+        "host_codex_generation": True,
+        "openai_generation_call_count": 0,
+        "paid_review_call_count": 0,
+        "requires_openai_api_key": False,
+        "private_plaintext_committed": False,
+        "private_stage_dir": str(stage_dir),
+        "private_candidate_path": str(candidate_path),
+        "candidate_sha256": sha256_text(candidate),
+        "candidate_size_bytes": len(candidate.encode("utf-8")),
+        "stage_receipt": {
+            "path": args.receipt,
+            "sha256": sha256_file(receipt_path),
             "schema": runtime_result["receipt"]["schema"],
-            "driver": runtime_result["receipt"]["driver"],
-            "receipt_path": args.receipt,
-            "receipt_sha256": sha256_file(receipt_path),
+            "runtime": runtime_result["receipt"]["runtime"],
             "unit_count": runtime_result["receipt"]["unit_count"],
             "stage_count": runtime_result["receipt"]["stage_count"],
-            "model_call_count": runtime_result["receipt"]["model_call_count"],
-            "whole_document_writer_call": runtime_result["receipt"]["whole_document_writer_call"],
-            "max_examples_per_unit": runtime_result["receipt"]["max_examples_per_unit"],
-            "full_seed_library_injected": runtime_result["receipt"]["full_seed_library_injected"],
-        },
-        "output_plaintext_sha256": sha256_text(candidate),
-        "output_plaintext_size_bytes": len(candidate.encode("utf-8")),
-        "encrypted_output": {
-            "path": args.output_age,
-            "sha256": sha256_file(output_age_path),
-        },
-        "output_public_recipient": {
-            "path": manifest["output"]["public_recipient_path"],
-            "sha256": sha256_file(recipient_path),
+            "dataflow_ok": runtime_result["receipt"]["dataflow_validation"]["ok"],
+            "exact_ok": runtime_result["receipt"]["exact_verification"]["ok"],
+            "literal_count": runtime_result["receipt"]["exact_verification"]["literal_count"],
         },
     }
     write_json(result_path, result)
