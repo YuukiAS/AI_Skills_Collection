@@ -1,0 +1,71 @@
+{
+  "schema": "AI_SKILLS_050_STYLE_REJECT_ROUND3_RENDER_QA_V1",
+  "task_key": "050_writing_style_host_codex_runtime",
+  "created_at": "2026-09-04T08:02:33Z",
+  "source_markdown_path": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_round3_20260904/STYLE_SMOKE_A_B_C_ROUND3.md",
+  "requested_output": "combined A/B/C reader PDF",
+  "skills_used": [
+    "pdf",
+    "render-chinese-math-pdf"
+  ],
+  "strict_skill_route": {
+    "renderer": "Markdown -> Pandoc -> XeLaTeX -> PDF",
+    "status": "blocked_missing_dependency",
+    "reason": "Current host TeX installation does not provide xeCJK.sty, luatexja.sty, ctex.sty, or CJKutf8.sty. The first XeLaTeX attempt also required task-local TEXMFHOME/TEXMFVAR/TEXMFCONFIG because the default TeX cache path under HOME was not writable.",
+    "missing_dependency_checks": [
+      "kpsewhich xeCJK.sty -> not found",
+      "kpsewhich luatexja.sty -> not found",
+      "kpsewhich ctex.sty -> not found",
+      "kpsewhich CJKutf8.sty -> not found"
+    ]
+  },
+  "qa_failed_attempts": [
+    {
+      "path": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_round3_20260904/STYLE_SMOKE_A_B_C_ROUND3.reportlab_math_checked.pdf",
+      "status": "qa_failed",
+      "reason": "Text was scattered visually."
+    },
+    {
+      "path": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_round3_20260904/STYLE_SMOKE_A_B_C_ROUND3.cid_math_checked.pdf",
+      "status": "qa_failed",
+      "reason": "Chinese glyphs rendered as boxes in visual preview."
+    },
+    {
+      "path": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_round3_20260904/STYLE_SMOKE_A_B_C_ROUND3.droid_cjk_math_checked.pdf",
+      "status": "qa_failed",
+      "reason": "Chinese glyph coverage was not robust in visual preview."
+    },
+    {
+      "path": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_round3_20260904/STYLE_SMOKE_A_B_C_ROUND3.noto_visual_checked_v3.pdf",
+      "status": "qa_failed",
+      "reason": "Display formulas rendered, but inline math still exposed raw hat/theta fragments."
+    },
+    {
+      "path": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_round3_20260904/STYLE_SMOKE_A_B_C_ROUND3.noto_visual_checked_v4.pdf",
+      "status": "qa_failed",
+      "reason": "Unicode combining-hat/subscript inline math produced missing-glyph boxes in page 6 preview."
+    }
+  ],
+  "reader_preview_pdf": {
+    "path": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_round3_20260904/STYLE_SMOKE_A_B_C_ROUND3.noto_visual_checked_v5.pdf",
+    "status": "partial_complete",
+    "implementation": "PIL page renderer with NotoSerifCJKsc fonts and matplotlib mathtext formula images",
+    "page_count": 14,
+    "file_size_bytes": 4037502,
+    "image_only": true,
+    "text_extraction_status": "not_applicable_image_only",
+    "page_6_preview_png": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_round3_20260904/noto_visual_pages_v5/page_06.png",
+    "visual_check": "Page 6 was inspected after regeneration; Chinese text and display formulas are visible and not mojibake. Inline math in prose is rendered as stable ASCII identifiers rather than raw LaTeX fragments or missing-glyph boxes. The PDF is suitable as a local visual preview, not as the strict searchable XeLaTeX artifact."
+  },
+  "root_cause_assessment": {
+    "skill_issue": "The skill correctly required Pandoc/XeLaTeX and told the executor to report blocked_missing_dependency instead of silently claiming success.",
+    "execution_issue": "The first combined PDF was an execution issue: formula-heavy text was placed through a weak fallback path and page-level formula QA was not done before presenting it.",
+    "why_problem_remained_after_skill_use": "The skill was read only after the first weak PDF existed; when applied, it exposed missing XeLaTeX CJK dependencies and forced a fallback to be reported as partial, not complete."
+  },
+  "no_live_spend": {
+    "openai_api_calls": 0,
+    "terra_calls": 0,
+    "github_actions_dispatches": 0,
+    "paid_review_calls": 0
+  }
+}

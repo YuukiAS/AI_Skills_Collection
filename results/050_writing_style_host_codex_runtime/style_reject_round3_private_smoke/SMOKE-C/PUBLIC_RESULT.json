@@ -1,0 +1,42 @@
+{
+  "candidate_sha256": "f33a3a9be56de01bea2e647524fbd966661d4939a9dcd94cd4e123bb559c6002",
+  "candidate_size_bytes": 10036,
+  "created_at": "2026-09-04T07:40:59Z",
+  "full_private_source_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213",
+  "host_codex_generation": true,
+  "implementation_commit": "bac6bf37ee22b52a2894c90a385dd6ab0e8f0292",
+  "line_ranges": [
+    "553-761",
+    "830-853"
+  ],
+  "openai_generation_call_count": 0,
+  "paid_review_call_count": 0,
+  "private_candidate_path": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_round3_20260904/SMOKE-C/final_candidate.md",
+  "private_plaintext_committed": false,
+  "private_stage_dir": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_round3_20260904/SMOKE-C/stage",
+  "production_entrypoint": {
+    "ai_skills_core_plugin_id": "ai-skills-core@yuukias-ai-skills",
+    "plugin_replay_actual": "not run for round-3 smoke; no private transport or external model change authorized",
+    "plugin_replay_dry_run": null,
+    "route": "current-host-codex + generated writing-style/scientific-rewrite Reader Plan + validate-host-stage",
+    "writing_style_plugin_id": "writing-style@yuukias-ai-skills"
+  },
+  "requires_openai_api_key": false,
+  "role": "next-experiment-design-and-go-stop-boundary",
+  "schema": "AI_SKILLS_050_PRIVATE_STYLE_SMOKE_PUBLIC_RESULT_V1",
+  "smoke_id": "SMOKE-C",
+  "source_plaintext_size_bytes": 14753,
+  "source_segment_sha256": "22eacc455a07341d24f52666e911dea1f0e8edd46d8bbaeed896a5fc2f973a48",
+  "stage_receipt": {
+    "dataflow_ok": true,
+    "exact_ok": true,
+    "literal_count": 33,
+    "path": "results/050_writing_style_host_codex_runtime/style_reject_round3_private_smoke/SMOKE-C/stage_receipt.json",
+    "runtime": "scientific-rewrite.host-codex.v1",
+    "schema": "SCIENTIFIC_REWRITE_HOST_CODEX_STAGE_RECEIPT_V1",
+    "sha256": "ca80726f2655df865e7e500121cf073ba11ac7467827e736887ce587f15b9f24",
+    "stage_count": 38,
+    "unit_count": 8
+  },
+  "task_key": "050_writing_style_host_codex_runtime"
+}
