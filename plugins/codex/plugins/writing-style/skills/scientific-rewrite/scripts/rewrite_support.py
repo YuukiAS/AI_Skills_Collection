@@ -35,6 +35,19 @@ SEMANTIC_FIELDS = [
     "attribution",
     "decision_logic",
 ]
+EVIDENCE_CLASSES = {
+    "project_fact",
+    "literature_fact",
+    "research_interpretation",
+    "candidate_method",
+    "still_unverified",
+}
+RAW_LITERAL_DUMP_PATTERNS = [
+    r"保留.{0,6}精确.{0,4}项",
+    r"缺失.{0,4}精确.{0,4}项",
+    r"literal\s+dump",
+    r"raw\s+literal",
+]
 
 
 @dataclasses.dataclass(frozen=True)
@@ -129,35 +142,50 @@ def _literal_role(text: str) -> str:
 
 
 def extract_literal_invariants(text: str) -> list[dict[str, str]]:
-    patterns = [
+    atomic_specs = [
         r"`[^`\n]+`",
+        r"(\$\$[\s\S]*?\$\$|\$[^$\n]+\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\))",
         r"(?:^|\s)(/[^\s，。；；,]+)",
         r"(?:^|\s)([A-Za-z0-9_.-]+/[A-Za-z0-9_./-]+)",
-        r"(\$\$.*?\$\$|\$[^$\n]+\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\))",
-        r"([𝑅𝑈𝑀𝜃𝑘𝑗𝑧𝑤𝐹𝐻𝐿ℓ𝑔𝑝𝑦𝑥𝐷𝛥𝑖∇⊤∣∑∫∥][^\n。；]*[=≈≤≥≪∑∫∥][^\n。；]*)",
         r"\[[0-9,\-\s]+\]",
+        r"\b[A-Za-z][A-Za-z0-9_]*=[0-9.]+\b",
+        r"([𝑅𝑈𝑀𝜃𝑘𝑗𝑧𝑤𝐹𝐻𝐿ℓ𝑔𝑝𝑦𝑥𝐷𝛥𝑖∇⊤∣∑∫∥][^\n。；]*[=≈≤≥≪∑∫∥][^\n。；]*)",
+    ]
+    nested_specs = [
         r"\b\d{4}-\d{2}-\d{2}\b",
         r"\b\d+(?:\.\d+)?%?\b",
-        r"\b(?:CARE|ODAL|FedFisher|FedLPA|FedBEns|FedAvg|FedProx|SCAFFOLD|FedDyn|FedAdam|FedBN|FedFMS|FLAP-SAM|YOCO|TMI-2025 KD|FuseFL|FAFI|FedLMG|FALCON|FedRFE|Fisher|Laplace|GO|STOP|Dice|ACDC|M&Ms|nnU-Net|AdamW|theta_0|pooled|local-only)\b",
-        r"\b[A-Za-z][A-Za-z0-9_]*=[0-9.]+\b",
+        r"\b[A-Z](?:&[A-Z][a-z]?)+\b",
+        r"\b(?:[A-Z]{2,}[A-Za-z0-9-]*|[A-Za-z]+[A-Z][A-Za-z0-9-]*|[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+)\b",
     ]
     seen: set[str] = set()
     literals: list[dict[str, str]] = []
-    for pattern in patterns:
+    protected_spans: list[tuple[int, int]] = []
+
+    def add_match(match: re.Match[str], *, protect: bool) -> None:
+        group_index = 1 if match.lastindex else 0
+        value = match.group(group_index).strip()
+        start, end = match.span(group_index)
+        if not value or value in seen:
+            return
+        if _span_overlaps((start, end), protected_spans):
+            return
+        seen.add(value)
+        literals.append({"text": value, "sha256": sha256_text(value), "role": _literal_role(value)})
+        if protect:
+            protected_spans.append((start, end))
+
+    for pattern in atomic_specs:
         for match in re.finditer(pattern, text):
-            value = match.group(1) if match.lastindex else match.group(0)
-            value = value.strip()
-            if not value or value in seen:
-                continue
-            seen.add(value)
-            literals.append(
-                {
-                    "text": value,
-                    "sha256": sha256_text(value),
-                    "role": _literal_role(value),
-                }
-            )
+            add_match(match, protect=True)
+    for pattern in nested_specs:
+        for match in re.finditer(pattern, text):
+            add_match(match, protect=False)
     return literals
+
+
+def _span_overlaps(span: tuple[int, int], protected_spans: list[tuple[int, int]]) -> bool:
+    start, end = span
+    return any(start < protected_end and end > protected_start for protected_start, protected_end in protected_spans)
 
 
 def split_markdown_units(text: str, *, max_paragraphs_per_unit: int = 4) -> list[RewriteUnit]:
@@ -220,9 +248,9 @@ def _guess_argument_role(text: str) -> str:
     lowered = text.lower()
     if any(token in text for token in ["下一步", "GO", "STOP", "决策", "实验"]):
         return "decision-or-next-experiment"
-    if any(token in text for token in ["比较", "vs", "FedFisher", "FedLPA", "ODAL"]):
+    if any(token in text for token in ["比较", "vs", "基线", "方法", "机制"]):
         return "comparison"
-    if any(token in text for token in ["结果", "证据", "checkpoint", "Dice"]):
+    if any(token in text for token in ["结果", "证据", "指标", "观察到"]):
         return "evidence-or-result"
     if "uncertain" in lowered or "不确定" in text:
         return "uncertainty"
@@ -241,7 +269,6 @@ def proposition_inventory(unit: RewriteUnit) -> list[dict[str, Any]]:
                 "kind": _guess_argument_role(chunk),
                 "source_span_ids": unit.source_span_ids,
                 "source_text_sha256": sha256_text(chunk),
-                "source_excerpt": chunk,
                 "required": True,
             }
         )
@@ -256,6 +283,15 @@ def verify_exact(
     reader_core: str | None = None,
 ) -> dict[str, Any]:
     invariants = ledger if ledger is not None else extract_literal_invariants(source)
+    if _contains_raw_literal_dump(candidate):
+        return {
+            "schema": "SCIENTIFIC_REWRITE_EXACT_VERIFICATION_V1",
+            "ok": False,
+            "literal_count": len(invariants),
+            "missing": [],
+            "missing_inline_core": [],
+            "raw_literal_dump": True,
+        }
     missing: list[dict[str, str]] = []
     missing_inline_core: list[dict[str, str]] = []
     core = candidate if reader_core is None else reader_core
@@ -271,7 +307,29 @@ def verify_exact(
         "literal_count": len(invariants),
         "missing": missing,
         "missing_inline_core": missing_inline_core,
+        "raw_literal_dump": False,
     }
+
+
+def _contains_raw_literal_dump(text: str) -> bool:
+    return any(re.search(pattern, text, re.I) for pattern in RAW_LITERAL_DUMP_PATTERNS)
+
+
+def reader_facing_core(candidate: str) -> str:
+    lines = candidate.splitlines()
+    kept: list[str] = []
+    in_appendix = False
+    appendix_heading = re.compile(r"^\s{0,3}#{1,6}\s+.*(?:technical|trace|appendix|evidence appendix|附录|技术细节|证据附录|复现|路径|文件身份)", re.I)
+    any_heading = re.compile(r"^\s{0,3}#{1,6}\s+")
+    for line in lines:
+        if appendix_heading.search(line):
+            in_appendix = True
+            continue
+        if in_appendix and any_heading.search(line) and not appendix_heading.search(line):
+            in_appendix = False
+        if not in_appendix:
+            kept.append(line)
+    return "\n".join(kept)
 
 
 def reader_review_packet(candidate: str, audience: str) -> dict[str, Any]:
@@ -315,13 +373,25 @@ def normalize_reader_review(raw: dict[str, Any], unit_ids: set[str] | None = Non
 def normalize_meaning_card(raw: dict[str, Any], unit: RewriteUnit, propositions: list[dict[str, Any]]) -> dict[str, Any]:
     if raw.get("unit_id") != unit.unit_id:
         raise RuntimeError("meaning-card unit_id mismatch")
+    if _contains_forbidden_source_copy_key(raw):
+        raise RuntimeError("meaning-card contains forbidden source-copy field")
     for key in ["reader_job", "plain_meaning", "reader_takeaway", "rewrite_problem", "discourse_function"]:
         if not str(raw.get(key, "")).strip():
             raise RuntimeError(f"meaning-card missing required field: {key}")
+        if _looks_like_source_copy(str(raw.get(key, "")), unit.text):
+            raise RuntimeError(f"meaning-card {key} looks like copied source prose")
     valid_props = {item["proposition_id"] for item in propositions}
     covered: set[str] = set()
     for field in SEMANTIC_FIELDS:
         for item in raw.get(field, []):
+            meaning = str(item.get("normalized_meaning", "")).strip()
+            if not meaning:
+                raise RuntimeError("meaning-card semantic item missing normalized_meaning")
+            if _looks_like_source_copy(meaning, unit.text):
+                raise RuntimeError("meaning-card semantic item looks like copied source prose")
+            evidence_class = str(item.get("evidence_class", "")).strip()
+            if evidence_class not in EVIDENCE_CLASSES:
+                raise RuntimeError(f"meaning-card semantic item has invalid evidence_class: {evidence_class}")
             prop_ids = item.get("source_proposition_ids")
             if not prop_ids:
                 raise RuntimeError("meaning-card semantic item missing source_proposition_ids")
@@ -333,6 +403,24 @@ def normalize_meaning_card(raw: dict[str, Any], unit: RewriteUnit, propositions:
     if missing:
         raise RuntimeError("meaning-card omitted source propositions: " + ", ".join(missing))
     return raw
+
+
+def _contains_forbidden_source_copy_key(value: Any) -> bool:
+    if isinstance(value, dict):
+        for key, item in value.items():
+            if str(key) in {"source_excerpt", "source_text", "original_excerpt", "copied_source_excerpt"}:
+                return True
+            if _contains_forbidden_source_copy_key(item):
+                return True
+    if isinstance(value, list):
+        return any(_contains_forbidden_source_copy_key(item) for item in value)
+    return False
+
+
+def _looks_like_source_copy(value: str, source: str) -> bool:
+    normalized_value = re.sub(r"\s+", "", value)
+    normalized_source = re.sub(r"\s+", "", source)
+    return len(normalized_value) >= 24 and normalized_value in normalized_source
 
 
 def normalize_semantic_audit(raw: dict[str, Any], unit: RewriteUnit, propositions: list[dict[str, Any]]) -> dict[str, Any]:
@@ -367,6 +455,46 @@ def validate_dataflow(receipt: dict[str, Any]) -> dict[str, Any]:
             if consumer.get("stage_id") not in stage_ids:
                 dangling.append({"from": item.get("stage_id", ""), "to": consumer.get("stage_id", "")})
     return {"ok": not unused and not dangling, "unused_outputs": unused, "dangling_consumers": dangling}
+
+
+def validate_argument_coverage(source: str, units: list[dict[str, Any]]) -> dict[str, Any]:
+    expected_spans = [span for unit in split_markdown_units(source) for span in unit.source_span_ids]
+    owners: dict[str, list[str]] = {}
+    for unit in units:
+        unit_id = str(unit.get("unit_id"))
+        source_span_ids = unit.get("source_span_ids") or []
+        if not source_span_ids:
+            raise RuntimeError(f"argument unit missing source_span_ids: {unit_id}")
+        for span_id in source_span_ids:
+            owners.setdefault(str(span_id), []).append(unit_id)
+    missing = sorted(set(expected_spans) - set(owners))
+    unknown = sorted(set(owners) - set(expected_spans))
+    duplicates = {span_id: unit_ids for span_id, unit_ids in owners.items() if len(unit_ids) > 1}
+    if missing:
+        raise RuntimeError("argument plan omitted source spans: " + ", ".join(missing))
+    if unknown:
+        raise RuntimeError("argument plan references unknown source spans: " + ", ".join(unknown))
+    if duplicates:
+        raise RuntimeError("argument plan duplicates source spans: " + ", ".join(sorted(duplicates)))
+    return {"ok": True, "source_span_count": len(expected_spans), "unit_count": len(units)}
+
+
+def validate_global_assembly(self_audit: dict[str, Any], unit_ids: set[str]) -> dict[str, Any]:
+    assembly = self_audit.get("global_assembly")
+    if not isinstance(assembly, dict):
+        raise RuntimeError("self_audit missing global_assembly evidence")
+    reader_order = [str(item) for item in assembly.get("reader_order_unit_ids", [])]
+    if set(reader_order) != unit_ids or len(reader_order) != len(unit_ids):
+        raise RuntimeError("global_assembly reader_order_unit_ids must cover every unit exactly once")
+    strategy = str(assembly.get("strategy", "")).strip()
+    if not strategy:
+        raise RuntimeError("global_assembly missing strategy")
+    return {
+        "ok": True,
+        "reader_order_unit_ids": reader_order,
+        "reordered_from_source_order": reader_order != sorted(unit_ids),
+        "strategy": strategy,
+    }
 
 
 def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path: Path | None = None) -> dict[str, Any]:
@@ -404,10 +532,12 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
     if not units:
         raise RuntimeError("argument_units.json must contain at least one unit")
     unit_ids = {str(unit.get("unit_id")) for unit in units}
+    argument_coverage = validate_argument_coverage(source, units)
     selected_by_unit = selected_transformations.get("by_unit", {})
     audit_units = {str(item.get("unit_id")): item for item in self_audit.get("unit_audits", [])}
     document_map_sha = sha256_bytes(document_map_path.read_bytes())
     candidate_unit_shas: dict[str, str] = {}
+    mechanical_units = {unit.unit_id: unit for unit in split_markdown_units(source)}
     for unit in units:
         unit_id = str(unit.get("unit_id"))
         if not unit_id or unit_id == "None":
@@ -428,6 +558,8 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
             raise RuntimeError(f"meaning card source hash mismatch for {unit_id}")
         if card.get("document_map_sha256") != document_map_sha:
             raise RuntimeError(f"meaning card does not bind current document map for {unit_id}")
+        if unit_id in mechanical_units:
+            normalize_meaning_card(card, mechanical_units[unit_id], proposition_inventory(mechanical_units[unit_id]))
         if unit_id not in selected_by_unit:
             raise RuntimeError(f"selected transformations missing unit: {unit_id}")
         candidate_unit_shas[unit_id] = sha256_bytes(candidate_unit_path.read_bytes())
@@ -444,8 +576,9 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
         raise RuntimeError("host semantic self-audit has unresolved findings")
     if self_audit.get("final_candidate_sha256") != sha256_text(final_candidate):
         raise RuntimeError("self_audit final_candidate_sha256 mismatch")
+    global_assembly = validate_global_assembly(self_audit, unit_ids)
 
-    exact = verify_exact(source, final_candidate, fidelity_ledger.get("literal_invariants"))
+    exact = verify_exact(source, final_candidate, fidelity_ledger.get("literal_invariants"), reader_core=reader_facing_core(final_candidate))
     stage_records = _stage_records(stage_dir, document_map, units, selected_transformations, self_audit, final_candidate)
     receipt = {
         "schema": RUNTIME_SCHEMA,
@@ -460,6 +593,8 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
         "candidate_sha256": sha256_text(final_candidate),
         "unit_count": len(units),
         "stage_count": len(stage_records),
+        "argument_coverage": argument_coverage,
+        "global_assembly": global_assembly,
         "stage_records": stage_records,
         "exact_verification": exact,
         "private_plaintext_committed": False,

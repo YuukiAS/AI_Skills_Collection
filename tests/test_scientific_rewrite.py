@@ -73,6 +73,7 @@ def make_stage_package(helper, root: Path, source: str, *, decision: str = "PASS
             "claims": [
                 {
                     "normalized_meaning": "该单元的核心含义来自原文命题。",
+                    "evidence_class": "research_interpretation",
                     "source_proposition_ids": [item["proposition_id"] for item in propositions],
                     "source_span_ids": unit.source_span_ids,
                 }
@@ -113,6 +114,10 @@ def make_stage_package(helper, root: Path, source: str, *, decision: str = "PASS
             "schema": "SCIENTIFIC_REWRITE_HOST_SELF_AUDIT_V1",
             "decision": decision,
             "final_candidate_sha256": helper.sha256_text(final_candidate),
+            "global_assembly": {
+                "reader_order_unit_ids": [unit.unit_id for unit in units],
+                "strategy": "按读者问题组织；本 fixture 不需要改变源顺序。",
+            },
             "unit_audits": unit_audits,
         },
     )
@@ -179,9 +184,23 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertNotIn("urllib.request", helper_source)
         self.assertNotIn("call_openai_text", helper_source)
         self.assertNotIn("openai-responses", helper_source)
+        self.assertNotIn("restore_exact_literals", helper_source)
         helper = load_helper()
         with self.assertRaisesRegex(RuntimeError, "does not let the helper generate"):
             helper.run_multistage("CARE 在 2026-08-28 的 Dice=0.81。")
+
+    def test_generic_runtime_has_no_task_specific_phrase_repair(self) -> None:
+        helper_source = HELPER_PATH.read_text(encoding="utf-8")
+        for token in ["provenance", "estimand", "resource contract", "controlled-drift", "CARE", "ODAL", "FedFisher"]:
+            self.assertNotIn(token, helper_source)
+
+    def test_structural_rewrite_authorization_is_shared_with_writing_fidelity(self) -> None:
+        scientific = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
+        fidelity = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("STRUCTURAL_REWRITE_AUTHORIZED_BY_TASK", scientific)
+        self.assertIn("STRUCTURAL_REWRITE_AUTHORIZED_BY_TASK", fidelity)
+        self.assertIn("content/evidence graph", scientific)
+        self.assertIn("content/evidence graph", fidelity)
 
     def test_exact_verifier_detects_literal_invariant_drift(self) -> None:
         helper = load_helper()
@@ -200,6 +219,18 @@ class ScientificRewriteTests(unittest.TestCase):
         bad_report = helper.verify_exact(source, bad_candidate)
         self.assertFalse(bad_report["ok"], bad_report)
         self.assertGreaterEqual(len(bad_report["missing"]), 7)
+
+    def test_complete_formulas_are_atomic_and_nested_numbers_are_not_literals(self) -> None:
+        helper = load_helper()
+        source = "目标函数为 $$L = 1/2 \\sum_i (y_i - f(x_i))^2$$，随后比较 3 个 seed。"
+        literals = helper.extract_literal_invariants(source)
+        texts = [item["text"] for item in literals]
+        self.assertIn("$$L = 1/2 \\sum_i (y_i - f(x_i))^2$$", texts)
+        self.assertNotIn("1", texts)
+        self.assertNotIn("2", texts)
+        self.assertIn("3", texts)
+        report = helper.verify_exact(source, "目标函数为 $$L = \\sum_i (y_i - f(x_i))^2$$，随后比较 3 个 seed。")
+        self.assertFalse(report["ok"])
 
     def test_prepare_splits_markdown_by_sections_and_keeps_invariants(self) -> None:
         helper = load_helper()
@@ -225,11 +256,32 @@ class ScientificRewriteTests(unittest.TestCase):
         source = "Dice=0.81，checkpoint 路径是 /tmp/run/checkpoint.pt。"
         ledger = helper.extract_literal_invariants(source)
         roles = {item["text"]: item["role"] for item in ledger}
-        self.assertEqual(roles["0.81"], "inline-critical")
+        self.assertEqual(roles["Dice=0.81"], "inline-critical")
         self.assertEqual(roles["/tmp/run/checkpoint.pt"], "relocatable-trace")
         candidate = "Dice=0.81。\n\n## Technical / Evidence Appendix\n\n/tmp/run/checkpoint.pt"
         report = helper.verify_exact(source, candidate, ledger, reader_core="Dice=0.81。")
         self.assertTrue(report["ok"], report)
+
+    def test_inline_critical_in_appendix_only_fails(self) -> None:
+        helper = load_helper()
+        source = "主实验 Dice=0.81，checkpoint 路径是 /tmp/run/checkpoint.pt。"
+        ledger = helper.extract_literal_invariants(source)
+        candidate = (
+            "主实验结果支持一个有边界的判断。\n\n"
+            "## Technical / Evidence Appendix\n\n"
+            "Dice=0.81\n\n/tmp/run/checkpoint.pt"
+        )
+        report = helper.verify_exact(source, candidate, ledger, reader_core=helper.reader_facing_core(candidate))
+        self.assertFalse(report["ok"])
+        self.assertEqual([item["text"] for item in report["missing_inline_core"]], ["Dice=0.81"])
+
+    def test_raw_literal_dump_is_never_a_valid_exact_repair(self) -> None:
+        helper = load_helper()
+        source = "主实验 Dice=0.81。"
+        candidate = "主实验有结果。\n\n保留原文精确项：Dice=0.81"
+        report = helper.verify_exact(source, candidate)
+        self.assertFalse(report["ok"])
+        self.assertTrue(report["raw_literal_dump"])
 
     def test_reader_review_packet_is_candidate_only(self) -> None:
         helper = load_helper()
@@ -250,7 +302,7 @@ class ScientificRewriteTests(unittest.TestCase):
                     "unit_id": unit.unit_id,
                     "reader_job": "解释当前证据和下一步判断",
                     "plain_meaning": "先说明结论。",
-                    "claims": [{"normalized_meaning": "漏写绑定。", "source_span_ids": unit.source_span_ids}],
+                    "claims": [{"normalized_meaning": "漏写绑定。", "evidence_class": "research_interpretation", "source_span_ids": unit.source_span_ids}],
                     "evidence": [],
                     "conditions": [],
                     "comparators": [],
@@ -269,6 +321,49 @@ class ScientificRewriteTests(unittest.TestCase):
                 props,
             )
 
+    def test_meaning_card_source_copy_fallback_fails_closed(self) -> None:
+        helper = load_helper()
+        unit = helper.split_markdown_units("这个段落直接说明实验条件、比较对象和结论边界，不能被复制成语义理解。")[0]
+        props = helper.proposition_inventory(unit)
+        with self.assertRaisesRegex(RuntimeError, "copied source prose"):
+            helper.normalize_meaning_card(
+                {
+                    "unit_id": unit.unit_id,
+                    "reader_job": "解释证据边界",
+                    "plain_meaning": unit.text,
+                    "reader_takeaway": "读者理解结论边界。",
+                    "rewrite_problem": "workflow-language",
+                    "discourse_function": "result-interpretation",
+                    "claims": [
+                        {
+                            "normalized_meaning": unit.text,
+                            "evidence_class": "research_interpretation",
+                            "source_proposition_ids": [item["proposition_id"] for item in props],
+                            "source_span_ids": unit.source_span_ids,
+                        }
+                    ],
+                    "evidence": [],
+                    "conditions": [],
+                    "comparators": [],
+                    "uncertainty": [],
+                    "caveats": [],
+                    "negative_findings": [],
+                    "attribution": [],
+                    "decision_logic": [],
+                },
+                unit,
+                props,
+            )
+
+    def test_proposition_inventory_contains_hashes_not_source_excerpts(self) -> None:
+        helper = load_helper()
+        unit = helper.split_markdown_units("这一段有一个需要保留的科学判断。")[0]
+        props = helper.proposition_inventory(unit)
+        serialized = json.dumps(props, ensure_ascii=False)
+        self.assertIn("source_text_sha256", serialized)
+        self.assertNotIn("source_excerpt", serialized)
+        self.assertNotIn("这一段有一个需要保留的科学判断", serialized)
+
     def test_host_stage_package_validation_receipt_is_privacy_safe(self) -> None:
         helper = load_helper()
         source = (
@@ -286,6 +381,8 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertEqual(receipt["external_api_call_count"], 0)
         self.assertFalse(receipt["requires_openai_api_key"])
         self.assertTrue(receipt["dataflow_validation"]["ok"])
+        self.assertTrue(receipt["argument_coverage"]["ok"])
+        self.assertTrue(receipt["global_assembly"]["ok"])
         self.assertTrue(receipt["exact_verification"]["ok"])
         serialized = json.dumps(receipt, ensure_ascii=False)
         self.assertNotIn(source, serialized)
@@ -304,6 +401,37 @@ class ScientificRewriteTests(unittest.TestCase):
             stage_dir = make_stage_package(helper, root, source)
             (stage_dir / "meaning_cards" / "unit-001.json").unlink()
             with self.assertRaisesRegex(RuntimeError, "missing meaning card"):
+                helper.validate_host_stage_package(source, stage_dir)
+
+    def test_argument_plan_can_bind_non_contiguous_spans_and_reorder_reader_logic(self) -> None:
+        helper = load_helper()
+        source = "## 问题\n\n第一段定义问题。\n\n## 限制\n\n第二段给出限制。\n\n## 结论\n\n第三段给出结论。"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = make_stage_package(helper, root, source)
+            argument_units = json.loads((stage_dir / "argument_units.json").read_text(encoding="utf-8"))
+            argument_units["units"][0]["source_span_ids"] = ["span-001", "span-003"]
+            argument_units["units"][1]["source_span_ids"] = ["span-002"]
+            argument_units["units"] = argument_units["units"][:2]
+            write_json(stage_dir / "argument_units.json", argument_units)
+            self_audit = json.loads((stage_dir / "self_audit.json").read_text(encoding="utf-8"))
+            self_audit["global_assembly"]["reader_order_unit_ids"] = ["unit-002", "unit-001"]
+            write_json(stage_dir / "self_audit.json", self_audit)
+            result = helper.validate_host_stage_package(source, stage_dir)
+        self.assertTrue(result["receipt"]["argument_coverage"]["ok"])
+        self.assertTrue(result["receipt"]["global_assembly"]["reordered_from_source_order"])
+
+    def test_argument_plan_omitted_or_duplicate_source_spans_fail(self) -> None:
+        helper = load_helper()
+        source = "## 问题\n\n第一段定义问题。\n\n## 限制\n\n第二段给出限制。"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = make_stage_package(helper, root, source)
+            argument_units = json.loads((stage_dir / "argument_units.json").read_text(encoding="utf-8"))
+            argument_units["units"][0]["source_span_ids"] = ["span-001", "span-002"]
+            argument_units["units"][1]["source_span_ids"] = ["span-001"]
+            write_json(stage_dir / "argument_units.json", argument_units)
+            with self.assertRaisesRegex(RuntimeError, "duplicates source spans"):
                 helper.validate_host_stage_package(source, stage_dir)
 
     def test_semantic_audit_status_aliases_are_canonicalized_conservatively(self) -> None:

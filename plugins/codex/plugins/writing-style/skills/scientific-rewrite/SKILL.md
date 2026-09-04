@@ -31,6 +31,13 @@ light Chinese polishing. Use `scientific-prose` for English scientific prose.
 Use `writing-fidelity` alone when the task is only to audit numbers, formulas,
 versions, citations, or protected spans.
 
+For an explicit heavy scientific rewrite or "说人话重写", this route carries
+`STRUCTURAL_REWRITE_AUTHORIZED_BY_TASK` to `writing-fidelity`. That handoff
+means content fidelity is not source-order fidelity: preserve the
+content/evidence graph, not the original reader-facing headings, paragraph
+grouping, paragraph order, section order, or table order unless the user
+explicitly protected that structure.
+
 ## When To Use
 
 Use this route when all of these are true:
@@ -91,10 +98,13 @@ Before local rewriting, build a compact map for the whole document:
 
 - Audience.
 - Document purpose.
+- Reader questions the document must answer.
 - Section map.
 - Terminology glossary.
 - Cross-section definitions and dependencies.
 - Claim dependencies.
+- Evidence classes: project facts, literature facts, research interpretation,
+  candidate methods, and still-unverified items.
 - Important caveats, uncertainty, negative findings, and scope limits.
 - Major conclusions.
 - Literal-protected inventory.
@@ -110,9 +120,15 @@ Default unit choices:
 
 - One complete subsection.
 - Or 2-5 logically connected paragraphs.
+- Or non-contiguous bounded spans when they answer the same scientific reader
+  question and the argument plan records exact source-span ownership.
 
 Do not split a definition, experimental condition, result, comparison, caveat,
 or conclusion in the middle merely to equalize length.
+
+The output order of argument units may differ from source order. Every source
+span must still be accounted for exactly once, unless a duplicate is explicitly
+marked as a cross-reference rather than new ownership.
 
 ### 3. Create Meaning Card And Fidelity Ledger
 
@@ -124,6 +140,8 @@ For each unit, create a Meaning Card with at least:
 - Evidence/results.
 - Conditions/comparators.
 - Caveats/uncertainty/negative findings.
+- Evidence class for each semantic item: project fact, literature fact,
+  research interpretation, candidate method, or still-unverified item.
 - Literal-protected items.
 - Terminology.
 - Relation to previous/next argument.
@@ -140,6 +158,11 @@ Then create a Fidelity Ledger:
 Run a source-to-Meaning-Card coverage check before rewriting. If an important
 proposition appears in the source but cannot be found in the Meaning Card, stop
 and repair the Meaning Card before writing.
+
+Do not create a production Meaning Card by copying source excerpts into
+`normalized_meaning`, `plain_meaning`, claims, evidence, or reader takeaway.
+If host-produced semantic artifacts are absent, malformed, or source-copy
+fallbacks, fail and repair them in the current host-Codex workflow.
 
 ### 4. Execute The Host-Codex Stage Workflow
 
@@ -163,6 +186,13 @@ The private stage package should include `document_map.json`,
 document mapping, argument units, Meaning Cards, selected transformations,
 unit candidates, self-audit, and final assembly form a real dataflow. A single
 whole-document writer call is not valid production execution for this route.
+
+The host-authored self-audit must include global assembly evidence showing how
+the final reader order was chosen from the document map, reader priorities,
+argument plan, unit cards, unit candidates, and cross-section dependencies. The
+final assembly may merge or move units, introduce reader-facing headings, place
+formulas near their explanation, convert repeated method prose into a table, and
+move only relocatable trace into a meaningful appendix.
 
 Do not call OpenAI/Terra or `text-transform` for document mapping, Meaning
 Cards, writing, semantic audit, repair, or assembly. Optional external review,
@@ -217,6 +247,18 @@ should read as normal Chinese scientific prose:
 - Preserve caveats, uncertainty, negative findings, comparators, attribution,
   and conclusion strength.
 - Prefer ordinary sentences over slogans, posture, or decorative structure.
+- State the bounded research judgment before the caveat when the source permits
+  it, then keep the caveat nearby so the claim is not strengthened.
+- For ordinary reasoning and organization language, use natural precise Chinese
+  when English adds no external identification value. Keep exact formal names
+  when they identify a method, dataset, metric, package, API, citation, command,
+  path, or statistical term.
+- For reader-facing formulas, normally write: what question or intuition the
+  formula captures -> the exact protected formula -> what the important symbols
+  mean -> what comparison or conclusion the formula supports.
+- For large method comparisons, first identify the decision question, then group
+  methods by the relevant mechanism, communicated information, statistical
+  object, or resource assumption. Keep complete facts in prose or a table.
 
 ### 8. Verify Exact Items
 
@@ -229,6 +271,12 @@ Run deterministic exact checks for literal invariants:
   exact naming matters.
 
 The helper can report exact drift, but it cannot prove semantic equivalence.
+
+An `inline-critical` item must appear in the reader-facing scientific context.
+Presence only in technical trace, token inventory, receipt, or appendix is still
+a failure. Only `relocatable-trace` items may live in a technical/evidence
+appendix, and that appendix must contain host-written contextual meaning rather
+than a raw literal list.
 
 ### 9. Audit Semantic Fidelity
 
@@ -254,6 +302,11 @@ If exact or semantic audit finds a problem, repair the affected unit only. Do
 not freely rewrite the whole document again. Whole-document review may identify
 terminology drift, repeated definitions, weak transitions, unclear references,
 or local style outliers; fixes must return to the relevant local unit.
+
+Deterministic helper code must not append missing literals into reader-facing
+text, create a "保留原文精确项" list, or write semantic repair prose. Missing
+inline-critical or relocatable-trace findings go back to host Codex for
+contextual repair, then exact verification runs again.
 
 ### 11. Candidate-Only Reader Review
 
@@ -292,7 +345,8 @@ outer-layer work:
   write a privacy-safe receipt.
 
 It does not judge naturalness, semantic equivalence, causality, uncertainty,
-or claim quality, and it never writes reader-facing Chinese prose.
+claim quality, or reader effort, and it never writes reader-facing Chinese prose
+or source-copy semantic fallback content.
 
 Example:
 

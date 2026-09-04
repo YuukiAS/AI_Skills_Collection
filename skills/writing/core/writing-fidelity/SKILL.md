@@ -48,10 +48,13 @@ silently satisfy one constraint by violating another.
    attention to complaints about deletion, automatic rewriting, language
    changes, title changes, unreadable output, collisions, missing glyphs, OCR
    errors, formula spacing, or prior failed attempts.
-3. Mark protected spans before editing: titles, headings, section order, labels,
-   numbers, dates, units, formulas, variables, notation, code, paths, citations,
-   Chinese/English language spans, user comments, caveats, examples, and quoted
-   source text.
+3. Mark protected spans before editing. For `polish`, `layout`, and
+   `source-faithful reconstruction`, this includes titles, headings, section
+   order, labels, numbers, dates, units, formulas, variables, notation, code,
+   paths, citations, Chinese/English language spans, user comments, caveats,
+   examples, and quoted source text. For explicit structural rewrite routes,
+   apply the structural rewrite handoff below instead of treating headings and
+   source order as protected by default.
 4. Apply only the requested operation. For polishing, preserve substantive
    content. For layout, do not change wording. For OCR cleanup, fix corruption
    without canonicalizing valid source notation.
@@ -112,6 +115,40 @@ than normalizing names into a cleaner but false story.
 For long-form scientific rewrites, literal fidelity must preserve exact tokens
 without forcing every trace token to stay in the main reading path.
 
+### Structural Rewrite Handoff
+
+When a route such as `scientific-rewrite` explicitly declares
+`STRUCTURAL_REWRITE_AUTHORIZED_BY_TASK`, fidelity protects the
+content/evidence graph rather than the source's reader-facing structure.
+
+This handoff is valid only for explicit rewrite / structural rewrite / heavy
+scientific-rewrite tasks. It does not apply to ordinary polishing, layout,
+OCR cleanup, source-faithful reconstruction, or user-protected outlines.
+
+Under this handoff, these may change unless the user explicitly protected them:
+
+- reader-facing headings;
+- paragraph grouping;
+- paragraph order;
+- section order;
+- table organization;
+- where a local explanation is introduced.
+
+These must still be preserved:
+
+- claims and polarity;
+- evidence, attribution, and citations;
+- conditions, comparators, caveats, uncertainty, and negative findings;
+- formulas, numbers, variables, datasets, methods, metrics, paths, and code
+  according to their literal location roles;
+- decision boundaries and conclusion strength.
+
+The acceptance criterion is complete proposition/evidence coverage, not source
+order. A structural rewrite may pass fidelity even when headings or paragraph
+order change, but it fails if any proposition is omitted, duplicated as new
+ownership, reattributed, strengthened, weakened without authorization, or moved
+away from the caveat that limits it.
+
 Classify exact items as:
 
 - `inline-critical`: exact material that belongs in the reader-facing scientific
@@ -125,7 +162,9 @@ Classify exact items as:
 Relocation cannot hide or delete limitations, negative results, uncertainty,
 contradicting evidence, decision conditions, attribution, or comparison
 boundaries. Ordinary reader-facing headings and internal workflow labels are not
-literal-protected by default.
+literal-protected by default. An `inline-critical` item is not preserved if it
+appears only in a technical appendix, token inventory, receipt, or trace list;
+it must remain in the reader-facing scientific context.
 
 Semantic audit statuses remain `preserved`, `narrowed`, `broadened`, `reversed`, `invented`, `omitted`, and `reattributed`; location roles only change where exact trace material may appear.
 

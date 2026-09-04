@@ -24,6 +24,17 @@ The rewritten text should let a first-time scientific or technical reader know:
 - Preserve uncertainty instead of smoothing it into a stronger conclusion.
 - Use headings to name the scientific role of a section, not the maintenance
   process that produced it.
+- Regroup scattered evidence under one reader question when the same scientific
+  decision depends on facts from several source locations.
+- Introduce formulas with the question or intuition they answer, then preserve
+  the exact formula, explain important symbols, and state the implication.
+- Turn flat method catalogs into decision-centered groups while retaining every
+  method, condition, caveat, and comparison field.
+- State the bounded conclusion before nearby qualifications when the source
+  supports that order.
+- Preserve evidence class distinctions in natural prose so project facts,
+  literature facts, interpretation, candidate methods, and unverified items do
+  not collapse into one authority level.
 
 ## Anti-Patterns
 
@@ -35,3 +46,7 @@ The rewritten text should let a first-time scientific or technical reader know:
   the same machine sentence structure.
 - Summarizing away conditions or caveats to make prose shorter.
 - Rewriting already readable technical prose just because a heavy route exists.
+- Appending exact items as a raw token list instead of repairing them in their
+  scientific context.
+- Treating source order as more important than the reader's scientific decision
+  path in an explicit structural rewrite.

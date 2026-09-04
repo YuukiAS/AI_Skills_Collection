@@ -8,10 +8,12 @@ The Document Map is compact context for the whole document. It may contain:
 
 - audience
 - document purpose
+- reader questions
 - section map
 - terminology glossary
 - cross-section definitions
 - claim dependencies
+- evidence classes
 - important caveats
 - major conclusions
 - literal-protected inventory
@@ -25,9 +27,15 @@ Choose a complete argument or discourse unit:
 - one subsection; or
 - 2-5 paragraphs that share a definition, condition, result, limitation, or
   conclusion.
+- non-contiguous bounded spans when they answer the same scientific question
+  and the argument plan records source-span ownership.
 
 Do not cut through formulas, tables, result interpretations, caveats, or
 comparisons simply to fit a fixed token budget.
+
+For structural scientific rewrite, unit order may follow reader logic rather
+than source order. The invariant is complete source-span coverage without
+unmarked duplication, not adjacency.
 
 ## Meaning Card Template
 
@@ -39,6 +47,7 @@ Claims:
 Evidence/results:
 Conditions/comparators:
 Caveats/uncertainty/negative findings:
+Evidence class:
 Literal-protected:
 Terminology:
 Relation to previous/next argument:
@@ -48,6 +57,11 @@ Coverage check:
 
 `Reader takeaway` helps expression only. It cannot add a fact, value judgment,
 or conclusion not supported by the source.
+
+Meaning Cards are host-Codex semantic artifacts. They must not be produced by
+copying source excerpts into `normalized_meaning`, claims, evidence, or reader
+takeaway. If a card is missing or malformed, fail and repair the card rather
+than synthesizing a source-copy fallback.
 
 ## Literal Preservation
 
@@ -81,6 +95,11 @@ Every literal item must also receive a location role:
 Relocation is not deletion. Limitations, negative findings, uncertainty,
 contradicting evidence and decision conditions remain part of the reader-facing
 argument even when implementation trace moves to an appendix.
+
+An `inline-critical` item found only in a technical appendix, token inventory,
+receipt, or trace list is still missing. A `relocatable-trace` item may move to
+an appendix only when the appendix gives meaningful context, not a raw literal
+bag.
 
 ## Semantic Preservation
 
