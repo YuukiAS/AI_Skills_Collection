@@ -42,6 +42,18 @@ EVIDENCE_CLASSES = {
     "candidate_method",
     "still_unverified",
 }
+INFORMATION_SHAPES = {
+    "prose",
+    "short_list",
+    "table",
+    "formula_walkthrough",
+    "technical_trace",
+}
+ENGLISH_SPAN_CLASSES = {
+    "exact_identity",
+    "useful_recognition",
+    "ordinary_reasoning",
+}
 RAW_LITERAL_DUMP_PATTERNS = [
     r"保留.{0,6}精确.{0,4}项",
     r"缺失.{0,4}精确.{0,4}项",
@@ -479,6 +491,99 @@ def validate_argument_coverage(source: str, units: list[dict[str, Any]]) -> dict
     return {"ok": True, "source_span_count": len(expected_spans), "unit_count": len(units)}
 
 
+def validate_reader_plan(reader_plan: dict[str, Any], document_map_sha256: str, units: list[dict[str, Any]]) -> dict[str, Any]:
+    if reader_plan.get("document_map_sha256") != document_map_sha256:
+        raise RuntimeError("reader_plan document_map_sha256 does not match current document map")
+    reader_questions = reader_plan.get("reader_questions")
+    if not isinstance(reader_questions, list) or not reader_questions:
+        raise RuntimeError("reader_plan must contain reader_questions")
+    bundles = reader_plan.get("bundles")
+    if not isinstance(bundles, list) or not bundles:
+        raise RuntimeError("reader_plan must contain bundles")
+    bundle_order = [str(item) for item in reader_plan.get("bundle_order", [])]
+    bundle_ids = [str(bundle.get("bundle_id")) for bundle in bundles]
+    if set(bundle_order) != set(bundle_ids) or len(bundle_order) != len(bundle_ids):
+        raise RuntimeError("reader_plan bundle_order must cover every bundle exactly once")
+    if len(set(bundle_ids)) != len(bundle_ids):
+        raise RuntimeError("reader_plan duplicates bundle ids")
+
+    expected_units = {str(unit.get("unit_id")) for unit in units}
+    expected_spans = {str(span_id) for unit in units for span_id in unit.get("source_span_ids", [])}
+    unit_owners: dict[str, list[str]] = {}
+    span_owners: dict[str, list[str]] = {}
+    shape_counts = {shape: 0 for shape in INFORMATION_SHAPES}
+    reshaped_count = 0
+    non_contiguous_bundle_count = 0
+    for bundle in bundles:
+        bundle_id = str(bundle.get("bundle_id"))
+        if not bundle_id or bundle_id == "None":
+            raise RuntimeError("reader_plan bundle missing bundle_id")
+        if not str(bundle.get("reader_question", "")).strip():
+            raise RuntimeError(f"reader_plan bundle missing reader_question: {bundle_id}")
+        if not str(bundle.get("reader_effort_action", "")).strip():
+            raise RuntimeError(f"reader_plan bundle missing reader_effort_action: {bundle_id}")
+        shape = str(bundle.get("information_shape", "")).strip()
+        if shape not in INFORMATION_SHAPES:
+            raise RuntimeError(f"reader_plan bundle has invalid information_shape: {shape}")
+        shape_counts[shape] += 1
+        if str(bundle.get("expansion_policy", "")).strip() in {"expand", "split", "table", "list"}:
+            reshaped_count += 1
+        for unit_id in bundle.get("unit_ids") or []:
+            unit_owners.setdefault(str(unit_id), []).append(bundle_id)
+        spans = [str(span_id) for span_id in (bundle.get("source_span_ids") or [])]
+        if len(spans) > 1:
+            numeric = []
+            for span_id in spans:
+                match = re.fullmatch(r"span-(\d+)", span_id)
+                if match:
+                    numeric.append(int(match.group(1)))
+            if len(numeric) > 1 and sorted(numeric) != list(range(min(numeric), max(numeric) + 1)):
+                non_contiguous_bundle_count += 1
+        for span_id in spans:
+            span_owners.setdefault(span_id, []).append(bundle_id)
+
+    missing_units = sorted(expected_units - set(unit_owners))
+    unknown_units = sorted(set(unit_owners) - expected_units)
+    duplicate_units = {unit_id: owners for unit_id, owners in unit_owners.items() if len(owners) > 1}
+    if missing_units:
+        raise RuntimeError("reader_plan omitted argument units: " + ", ".join(missing_units))
+    if unknown_units:
+        raise RuntimeError("reader_plan references unknown argument units: " + ", ".join(unknown_units))
+    if duplicate_units:
+        raise RuntimeError("reader_plan duplicates argument units: " + ", ".join(sorted(duplicate_units)))
+
+    missing_spans = sorted(expected_spans - set(span_owners))
+    unknown_spans = sorted(set(span_owners) - expected_spans)
+    duplicate_spans = {span_id: owners for span_id, owners in span_owners.items() if len(owners) > 1}
+    if missing_spans:
+        raise RuntimeError("reader_plan omitted source spans: " + ", ".join(missing_spans))
+    if unknown_spans:
+        raise RuntimeError("reader_plan references unknown source spans: " + ", ".join(unknown_spans))
+    if duplicate_spans:
+        raise RuntimeError("reader_plan duplicates source spans: " + ", ".join(sorted(duplicate_spans)))
+
+    english_policy = reader_plan.get("english_span_policy")
+    if not isinstance(english_policy, dict):
+        raise RuntimeError("reader_plan missing english_span_policy")
+    missing_classes = sorted(ENGLISH_SPAN_CLASSES - set(english_policy))
+    if missing_classes:
+        raise RuntimeError("reader_plan english_span_policy missing classes: " + ", ".join(missing_classes))
+    for key in ENGLISH_SPAN_CLASSES:
+        if not isinstance(english_policy.get(key), list):
+            raise RuntimeError(f"reader_plan english_span_policy must use lists: {key}")
+
+    return {
+        "ok": True,
+        "question_count": len(reader_questions),
+        "bundle_count": len(bundles),
+        "bundle_order": bundle_order,
+        "information_shape_counts": shape_counts,
+        "expanded_or_reshaped_bundle_count": reshaped_count,
+        "non_contiguous_bundle_count": non_contiguous_bundle_count,
+        "english_span_policy_classes": sorted(ENGLISH_SPAN_CLASSES),
+    }
+
+
 def validate_global_assembly(self_audit: dict[str, Any], unit_ids: set[str]) -> dict[str, Any]:
     assembly = self_audit.get("global_assembly")
     if not isinstance(assembly, dict):
@@ -497,13 +602,55 @@ def validate_global_assembly(self_audit: dict[str, Any], unit_ids: set[str]) -> 
     }
 
 
+def validate_chinese_reader_pass(chinese_pass: dict[str, Any], final_candidate: str) -> dict[str, Any]:
+    if chinese_pass.get("candidate_sha256") != sha256_text(final_candidate):
+        raise RuntimeError("chinese_reader_pass candidate_sha256 mismatch")
+    if chinese_pass.get("source_visible") is not False:
+        raise RuntimeError("chinese_reader_pass must be candidate-only")
+    if str(chinese_pass.get("decision", "")).upper() != "PASS":
+        raise RuntimeError("chinese_reader_pass decision must be PASS")
+    for key in [
+        "answerability",
+        "reader_effort",
+        "english_span_classification",
+        "information_shape_check",
+        "formula_context_check",
+        "epistemic_boundary_check",
+    ]:
+        if not isinstance(chinese_pass.get(key), dict):
+            raise RuntimeError(f"chinese_reader_pass missing object: {key}")
+    reader_effort = chinese_pass["reader_effort"]
+    if str(reader_effort.get("decision", "")).upper() != "PASS":
+        raise RuntimeError("chinese_reader_pass reader_effort decision must be PASS")
+    if reader_effort.get("minimum_reader_inference_burden") is not True:
+        raise RuntimeError("chinese_reader_pass must check minimum reader inference burden")
+    if reader_effort.get("not_compression_metric") is not True:
+        raise RuntimeError("chinese_reader_pass must reject compression as the readability metric")
+    english = chinese_pass["english_span_classification"]
+    missing_classes = sorted(ENGLISH_SPAN_CLASSES - set(english))
+    if missing_classes:
+        raise RuntimeError("chinese_reader_pass english classification missing classes: " + ", ".join(missing_classes))
+    for key in ENGLISH_SPAN_CLASSES:
+        if not isinstance(english.get(key), list):
+            raise RuntimeError(f"chinese_reader_pass english classification must use lists: {key}")
+    return {
+        "ok": True,
+        "candidate_only": True,
+        "decision": "PASS",
+        "reader_effort_decision": "PASS",
+        "english_span_policy_classes": sorted(ENGLISH_SPAN_CLASSES),
+    }
+
+
 def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path: Path | None = None) -> dict[str, Any]:
     required_files = [
         "document_map.json",
+        "reader_plan.json",
         "argument_units.json",
         "fidelity_ledger.json",
         "selected_transformations.json",
         "self_audit.json",
+        "chinese_reader_pass.json",
         "final_candidate.md",
     ]
     missing_files = [name for name in required_files if not (stage_dir / name).is_file()]
@@ -511,16 +658,20 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
         raise RuntimeError("missing host stage files: " + ", ".join(missing_files))
 
     document_map_path = stage_dir / "document_map.json"
+    reader_plan_path = stage_dir / "reader_plan.json"
     argument_units_path = stage_dir / "argument_units.json"
     selected_transformations_path = stage_dir / "selected_transformations.json"
     self_audit_path = stage_dir / "self_audit.json"
+    chinese_reader_pass_path = stage_dir / "chinese_reader_pass.json"
     final_candidate_path = stage_dir / "final_candidate.md"
 
     document_map = load_json(document_map_path)
+    reader_plan = load_json(reader_plan_path)
     argument_units = load_json(stage_dir / "argument_units.json")
     fidelity_ledger = load_json(stage_dir / "fidelity_ledger.json")
     selected_transformations = load_json(stage_dir / "selected_transformations.json")
     self_audit = load_json(stage_dir / "self_audit.json")
+    chinese_reader_pass = load_json(chinese_reader_pass_path)
     final_candidate = final_candidate_path.read_text(encoding="utf-8")
     if candidate_path is not None and final_candidate != candidate_path.read_text(encoding="utf-8"):
         raise RuntimeError("candidate path does not match stage final_candidate.md")
@@ -536,6 +687,7 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
     selected_by_unit = selected_transformations.get("by_unit", {})
     audit_units = {str(item.get("unit_id")): item for item in self_audit.get("unit_audits", [])}
     document_map_sha = sha256_bytes(document_map_path.read_bytes())
+    reader_plan_validation = validate_reader_plan(reader_plan, document_map_sha, units)
     candidate_unit_shas: dict[str, str] = {}
     mechanical_units = {unit.unit_id: unit for unit in split_markdown_units(source)}
     for unit in units:
@@ -577,9 +729,19 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
     if self_audit.get("final_candidate_sha256") != sha256_text(final_candidate):
         raise RuntimeError("self_audit final_candidate_sha256 mismatch")
     global_assembly = validate_global_assembly(self_audit, unit_ids)
+    plan_order = [
+        str(unit_id)
+        for bundle_id in reader_plan_validation["bundle_order"]
+        for bundle in reader_plan.get("bundles", [])
+        if str(bundle.get("bundle_id")) == bundle_id
+        for unit_id in bundle.get("unit_ids", [])
+    ]
+    if global_assembly["reader_order_unit_ids"] != plan_order:
+        raise RuntimeError("global_assembly reader order must follow reader_plan bundle order")
+    chinese_reader = validate_chinese_reader_pass(chinese_reader_pass, final_candidate)
 
     exact = verify_exact(source, final_candidate, fidelity_ledger.get("literal_invariants"), reader_core=reader_facing_core(final_candidate))
-    stage_records = _stage_records(stage_dir, document_map, units, selected_transformations, self_audit, final_candidate)
+    stage_records = _stage_records(stage_dir, document_map, reader_plan, units, selected_transformations, self_audit, chinese_reader_pass, final_candidate)
     receipt = {
         "schema": RUNTIME_SCHEMA,
         "runtime": RUNTIME_NAME,
@@ -594,7 +756,9 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
         "unit_count": len(units),
         "stage_count": len(stage_records),
         "argument_coverage": argument_coverage,
+        "reader_plan": reader_plan_validation,
         "global_assembly": global_assembly,
+        "chinese_reader_pass": chinese_reader,
         "stage_records": stage_records,
         "exact_verification": exact,
         "private_plaintext_committed": False,
@@ -610,13 +774,16 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
 def _stage_records(
     stage_dir: Path,
     document_map: dict[str, Any],
+    reader_plan: dict[str, Any],
     units: list[dict[str, Any]],
     selected_transformations: dict[str, Any],
     self_audit: dict[str, Any],
+    chinese_reader_pass: dict[str, Any],
     final_candidate: str,
 ) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
-    records.append(_record("document-map", stage_dir / "document_map.json", ["argument-segmentation"]))
+    records.append(_record("document-map", stage_dir / "document_map.json", ["reader-plan"]))
+    records.append(_record("reader-plan", stage_dir / "reader_plan.json", ["argument-segmentation", "final-assembly", "chinese-reader-pass"]))
     records.append(_record("argument-segmentation", stage_dir / "argument_units.json", [f"{unit['unit_id']}-meaning-card" for unit in units]))
     for unit in units:
         unit_id = str(unit["unit_id"])
@@ -624,7 +791,9 @@ def _stage_records(
         records.append(_record(f"{unit_id}-example-selection", stage_dir / "selected_transformations.json", [f"{unit_id}-writer"], unit_id=unit_id))
         records.append(_record(f"{unit_id}-writer", stage_dir / "candidate_units" / f"{unit_id}.md", [f"{unit_id}-semantic-self-audit"], unit_id=unit_id))
         records.append(_record(f"{unit_id}-semantic-self-audit", stage_dir / "self_audit.json", ["final-assembly"], unit_id=unit_id))
-    records.append(_record("final-assembly", stage_dir / "final_candidate.md", [], terminal=True))
+    records.append(_record("final-assembly", stage_dir / "self_audit.json", ["chinese-reader-pass"]))
+    records.append(_record("chinese-reader-pass", stage_dir / "chinese_reader_pass.json", ["final-candidate"]))
+    records.append(_record("final-candidate", stage_dir / "final_candidate.md", [], terminal=True))
     return records
 
 

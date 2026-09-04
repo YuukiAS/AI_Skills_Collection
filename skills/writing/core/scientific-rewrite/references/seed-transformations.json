@@ -253,5 +253,50 @@
     "approval_status": "SEED",
     "original_template": "在若干来源、流程和限制之后，才出现 [有边界结论C]。",
     "rewrite_template": "[有边界结论C] 是这一段最先需要读者知道的判断；它只在 [限制/证据范围L] 内成立，原文没有支持更强说法。"
+  },
+  {
+    "id": "seed-parallel-conditions-to-list-018",
+    "scene": "scientific-report",
+    "discourse_function": "information-shape",
+    "rewrite_problem": "dense-parallel-conditions",
+    "rewrite_depth": "structural",
+    "fidelity_risk": "high",
+    "register": "reader-facing-scientific",
+    "source": "distilled-manual-rewrite-lessons",
+    "source_revision": "050-style-reject-round2-20260904",
+    "license": "repository-local distilled pattern",
+    "approval_status": "SEED",
+    "original_template": "[条件A]、[条件B]、[条件C]、[条件D] 和 [条件E] 挤在同一个长句中。",
+    "rewrite_template": "当读者需要逐项判断时，把 [条件A-E] 改成短列表或小表；每一项保留原文的条件、范围和否定边界。"
+  },
+  {
+    "id": "seed-ordinary-english-to-chinese-relation-019",
+    "scene": "scientific-report",
+    "discourse_function": "language-choice",
+    "rewrite_problem": "ordinary-english-scaffold",
+    "rewrite_depth": "standard",
+    "fidelity_risk": "medium",
+    "register": "reader-facing-scientific",
+    "source": "distilled-manual-rewrite-lessons",
+    "source_revision": "050-style-reject-round2-20260904",
+    "license": "repository-local distilled pattern",
+    "approval_status": "SEED",
+    "original_template": "[ExactName] 在 [ordinary English relation] 下产生 [判断C]。",
+    "rewrite_template": "保留 [ExactName] 这个正式名称；把 [ordinary English relation] 改成中文里的因果、比较、限制或递进关系，让句子的骨架由中文承担。"
+  },
+  {
+    "id": "seed-explanation-expands-reader-effort-020",
+    "scene": "scientific-report",
+    "discourse_function": "reader-effort",
+    "rewrite_problem": "over-compression",
+    "rewrite_depth": "standard",
+    "fidelity_risk": "high",
+    "register": "reader-facing-scientific",
+    "source": "distilled-manual-rewrite-lessons",
+    "source_revision": "050-style-reject-round2-20260904",
+    "license": "repository-local distilled pattern",
+    "approval_status": "SEED",
+    "original_template": "[结论C]。 [限制L]。 [下一步D]。",
+    "rewrite_template": "如果 [结论C]、[限制L] 和 [下一步D] 之间的关系需要读者自己补全，就加一句说明三者如何连接；这不是扩写事实，而是降低读者推理负担。"
   }
 ]

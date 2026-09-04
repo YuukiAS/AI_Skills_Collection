@@ -38,6 +38,7 @@ def make_stage_package(helper, root: Path, source: str, *, decision: str = "PASS
         "audience": "中文科研读者",
         "document_purpose": "解释当前证据、限制和下一步实验判断。",
         "core_research_question": "当前证据支持什么判断，下一步怎样验证？",
+        "reader_questions": ["当前证据支持什么判断，下一步怎样验证？"],
     }
     write_json(stage_dir / "document_map.json", document_map)
     document_map_sha = helper.sha256_bytes((stage_dir / "document_map.json").read_bytes())
@@ -105,6 +106,36 @@ def make_stage_package(helper, root: Path, source: str, *, decision: str = "PASS
         all_literals.extend(unit.literal_invariants)
 
     final_candidate = "\n\n".join(candidate_units)
+    reader_plan = {
+        "schema": "SCIENTIFIC_REWRITE_HOST_READER_PLAN_V1",
+        "document_map_sha256": document_map_sha,
+        "reader_questions": [
+            {
+                "id": "rq-001",
+                "question": "当前证据支持什么判断，下一步怎样验证？",
+                "purpose": "让读者先理解问题、证据和边界。",
+            }
+        ],
+        "bundle_order": [f"bundle-{index:03d}" for index, _unit in enumerate(units, start=1)],
+        "bundles": [
+            {
+                "bundle_id": f"bundle-{index:03d}",
+                "reader_question": "这个单元回答当前证据、限制或下一步判断中的哪一部分？",
+                "unit_ids": [unit.unit_id],
+                "source_span_ids": unit.source_span_ids,
+                "information_shape": "prose",
+                "reader_effort_action": "保持为连贯解释；本 fixture 不需要改变信息形态。",
+                "expansion_policy": "same",
+            }
+            for index, unit in enumerate(units, start=1)
+        ],
+        "english_span_policy": {
+            "exact_identity": ["FedFisher", "FedLPA"],
+            "useful_recognition": [],
+            "ordinary_reasoning": ["reader effort"],
+        },
+    }
+    write_json(stage_dir / "reader_plan.json", reader_plan)
     write_json(stage_dir / "argument_units.json", {"schema": "SCIENTIFIC_REWRITE_ARGUMENT_UNITS_V1", "units": public_units})
     write_json(stage_dir / "selected_transformations.json", selected)
     write_json(stage_dir / "fidelity_ledger.json", {"schema": "SCIENTIFIC_REWRITE_FIDELITY_LEDGER_V1", "literal_invariants": all_literals})
@@ -119,6 +150,32 @@ def make_stage_package(helper, root: Path, source: str, *, decision: str = "PASS
                 "strategy": "按读者问题组织；本 fixture 不需要改变源顺序。",
             },
             "unit_audits": unit_audits,
+        },
+    )
+    write_json(
+        stage_dir / "chinese_reader_pass.json",
+        {
+            "schema": "SCIENTIFIC_REWRITE_CHINESE_READER_PASS_V1",
+            "source_visible": False,
+            "candidate_sha256": helper.sha256_text(final_candidate),
+            "decision": decision,
+            "answerability": {
+                "decision": decision,
+                "reader_questions_answered": True,
+            },
+            "reader_effort": {
+                "decision": decision,
+                "minimum_reader_inference_burden": True,
+                "not_compression_metric": True,
+            },
+            "english_span_classification": {
+                "exact_identity": ["FedFisher", "FedLPA"],
+                "useful_recognition": [],
+                "ordinary_reasoning": ["reader effort"],
+            },
+            "information_shape_check": {"decision": decision},
+            "formula_context_check": {"decision": decision},
+            "epistemic_boundary_check": {"decision": decision},
         },
     )
     (stage_dir / "final_candidate.md").write_text(final_candidate, encoding="utf-8")
@@ -382,11 +439,51 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertFalse(receipt["requires_openai_api_key"])
         self.assertTrue(receipt["dataflow_validation"]["ok"])
         self.assertTrue(receipt["argument_coverage"]["ok"])
+        self.assertTrue(receipt["reader_plan"]["ok"])
         self.assertTrue(receipt["global_assembly"]["ok"])
+        self.assertTrue(receipt["chinese_reader_pass"]["ok"])
         self.assertTrue(receipt["exact_verification"]["ok"])
         serialized = json.dumps(receipt, ensure_ascii=False)
         self.assertNotIn(source, serialized)
         self.assertNotIn("candidate_text", serialized)
+
+    def test_reader_plan_is_required_and_consumed_by_global_assembly(self) -> None:
+        helper = load_helper()
+        source = "## 问题\n\n第一段定义问题。\n\n## 结论\n\n第二段给出结论。"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = make_stage_package(helper, root, source)
+            (stage_dir / "reader_plan.json").unlink()
+            with self.assertRaisesRegex(RuntimeError, "reader_plan.json"):
+                helper.validate_host_stage_package(source, stage_dir)
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = make_stage_package(helper, root, source)
+            self_audit = json.loads((stage_dir / "self_audit.json").read_text(encoding="utf-8"))
+            self_audit["global_assembly"]["reader_order_unit_ids"] = list(reversed(self_audit["global_assembly"]["reader_order_unit_ids"]))
+            write_json(stage_dir / "self_audit.json", self_audit)
+            with self.assertRaisesRegex(RuntimeError, "reader_plan bundle order"):
+                helper.validate_host_stage_package(source, stage_dir)
+
+    def test_chinese_reader_pass_is_candidate_only_and_checks_reader_effort(self) -> None:
+        helper = load_helper()
+        source = "这段说明一个科学判断。"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = make_stage_package(helper, root, source)
+            chinese_pass = json.loads((stage_dir / "chinese_reader_pass.json").read_text(encoding="utf-8"))
+            chinese_pass["source_visible"] = True
+            write_json(stage_dir / "chinese_reader_pass.json", chinese_pass)
+            with self.assertRaisesRegex(RuntimeError, "candidate-only"):
+                helper.validate_host_stage_package(source, stage_dir)
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = make_stage_package(helper, root, source)
+            chinese_pass = json.loads((stage_dir / "chinese_reader_pass.json").read_text(encoding="utf-8"))
+            chinese_pass["reader_effort"]["not_compression_metric"] = False
+            write_json(stage_dir / "chinese_reader_pass.json", chinese_pass)
+            with self.assertRaisesRegex(RuntimeError, "compression"):
+                helper.validate_host_stage_package(source, stage_dir)
 
     def test_host_stage_package_rejects_decorative_or_unresolved_files(self) -> None:
         helper = load_helper()
@@ -414,11 +511,36 @@ class ScientificRewriteTests(unittest.TestCase):
             argument_units["units"][1]["source_span_ids"] = ["span-002"]
             argument_units["units"] = argument_units["units"][:2]
             write_json(stage_dir / "argument_units.json", argument_units)
+            reader_plan = json.loads((stage_dir / "reader_plan.json").read_text(encoding="utf-8"))
+            reader_plan["bundle_order"] = ["bundle-002", "bundle-001"]
+            reader_plan["bundles"] = [
+                {
+                    "bundle_id": "bundle-001",
+                    "reader_question": "问题和结论共同说明什么？",
+                    "unit_ids": ["unit-001"],
+                    "source_span_ids": ["span-001", "span-003"],
+                    "information_shape": "short_list",
+                    "reader_effort_action": "把非连续的问题和结论合在同一个读者问题下。",
+                    "expansion_policy": "list",
+                },
+                {
+                    "bundle_id": "bundle-002",
+                    "reader_question": "限制条件是什么？",
+                    "unit_ids": ["unit-002"],
+                    "source_span_ids": ["span-002"],
+                    "information_shape": "prose",
+                    "reader_effort_action": "保留为短段说明。",
+                    "expansion_policy": "same",
+                },
+            ]
+            write_json(stage_dir / "reader_plan.json", reader_plan)
             self_audit = json.loads((stage_dir / "self_audit.json").read_text(encoding="utf-8"))
             self_audit["global_assembly"]["reader_order_unit_ids"] = ["unit-002", "unit-001"]
             write_json(stage_dir / "self_audit.json", self_audit)
             result = helper.validate_host_stage_package(source, stage_dir)
         self.assertTrue(result["receipt"]["argument_coverage"]["ok"])
+        self.assertEqual(result["receipt"]["reader_plan"]["non_contiguous_bundle_count"], 1)
+        self.assertEqual(result["receipt"]["reader_plan"]["information_shape_counts"]["short_list"], 1)
         self.assertTrue(result["receipt"]["global_assembly"]["reordered_from_source_order"])
 
     def test_argument_plan_omitted_or_duplicate_source_spans_fail(self) -> None:
@@ -468,10 +590,28 @@ class ScientificRewriteTests(unittest.TestCase):
         data = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
         plugin = next(item for item in data["plugins"] if item["name"] == "writing-style")
         self.assertEqual(plugin["version"], "0.1")
+        self.assertIn("host-Codex heavy Chinese scientific rewrites", plugin["description"])
+        self.assertIn("without changing scientific claims", plugin["description"])
+        self.assertNotIn("research-structure decisions", plugin["description"])
+        self.assertIn(
+            "Rewrite this Chinese scientific report with reader-facing structure while preserving the same evidence graph.",
+            plugin["defaultPrompt"],
+        )
         sources = {entry["source"]: entry["artifact_id"] for entry in plugin["skills"]}
         self.assertEqual(sources["skills/writing/core/scientific-rewrite"], "scientific-rewrite")
         profile = json.loads((REPO_ROOT / "profiles/codex-writing-style.json").read_text(encoding="utf-8"))
+        self.assertIn("host-Codex heavy Chinese scientific rewrites", profile["description"])
         self.assertIn("skills/writing/core/scientific-rewrite", profile["skills"])
+
+    def test_companion_style_skills_define_heavy_rewrite_boundaries(self) -> None:
+        chinese = (REPO_ROOT / "skills/writing/core/chinese-prose/SKILL.md").read_text(encoding="utf-8")
+        fidelity = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("Reader Plan", chinese)
+        self.assertIn("公式拆解", chinese)
+        self.assertIn("不是候选稿更短", chinese)
+        self.assertIn("reader-question bundles", fidelity)
+        self.assertIn("non-contiguous source spans", fidelity)
+        self.assertIn("not source order or compression", fidelity)
 
     def test_response_schema_name_is_bounded_and_stable(self) -> None:
         helper = load_helper()

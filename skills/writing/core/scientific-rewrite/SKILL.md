@@ -112,7 +112,33 @@ Before local rewriting, build a compact map for the whole document:
 The Document Map is not a new fact source. It only helps the local writer keep
 terminology, dependencies, and reader orientation stable.
 
-### 2. Split Into Argument Units
+### 2. Build A Host Reader Plan
+
+For heavy structural rewrite, the host Codex session must turn the Document Map
+into a Reader Plan before drafting. The plan is not a new research plan and does
+not change claims; it decides how a reader should encounter the existing
+evidence graph.
+
+The Reader Plan should record:
+
+- the reader questions the final document must answer;
+- the order in which those questions should be answered;
+- the source spans or propositions that answer each question, including
+  non-contiguous spans when needed;
+- whether each bundle should become prose, a short list, a table, a formula
+  walkthrough, or technical trace;
+- where explanation should expand, split, or move because reader effort would
+  otherwise be high;
+- which English spans are exact identities, useful first-use recognition, or
+  ordinary reasoning language that should become Chinese;
+- epistemic roles when they matter: project fact, literature fact, research
+  interpretation, candidate method, or still-unverified item.
+
+Deterministic code may validate that this host-authored plan exists, binds the
+current Document Map, covers source spans exactly once, and is consumed by final
+assembly. It must not synthesize the plan.
+
+### 3. Split Into Reader-Oriented Argument Bundles
 
 Rewrite by complete argument or discourse units, not by fixed token chunks.
 
@@ -130,7 +156,7 @@ The output order of argument units may differ from source order. Every source
 span must still be accounted for exactly once, unless a duplicate is explicitly
 marked as a cross-reference rather than new ownership.
 
-### 3. Create Meaning Card And Fidelity Ledger
+### 4. Create Meaning Card And Fidelity Ledger
 
 For each unit, create a Meaning Card with at least:
 
@@ -164,7 +190,7 @@ Do not create a production Meaning Card by copying source excerpts into
 If host-produced semantic artifacts are absent, malformed, or source-copy
 fallbacks, fail and repair them in the current host-Codex workflow.
 
-### 4. Execute The Host-Codex Stage Workflow
+### 5. Execute The Host-Codex Stage Workflow
 
 For long-form production rewrites, the current host Codex session performs the
 semantic and writing work. Create observable stage artifacts as the work
@@ -180,12 +206,14 @@ python3 skills/writing/core/scientific-rewrite/scripts/rewrite_support.py valida
 ```
 
 The private stage package should include `document_map.json`,
-`argument_units.json`, `meaning_cards/<unit>.json`, `fidelity_ledger.json`,
-`selected_transformations.json`, `candidate_units/<unit>.md`,
-`self_audit.json`, and `final_candidate.md`. The receipt must show that
-document mapping, argument units, Meaning Cards, selected transformations,
-unit candidates, self-audit, and final assembly form a real dataflow. A single
-whole-document writer call is not valid production execution for this route.
+`reader_plan.json`, `argument_units.json`, `meaning_cards/<unit>.json`,
+`fidelity_ledger.json`, `selected_transformations.json`,
+`candidate_units/<unit>.md`, `self_audit.json`,
+`chinese_reader_pass.json`, and `final_candidate.md`. The receipt must show
+that document mapping, Reader Plan, argument bundles, Meaning Cards, selected
+transformations, unit candidates, self-audit, final assembly, and the Chinese
+reader pass form a real dataflow. A single whole-document writer call is not
+valid production execution for this route.
 
 The host-authored self-audit must include global assembly evidence showing how
 the final reader order was chosen from the document map, reader priorities,
@@ -194,12 +222,13 @@ final assembly may merge or move units, introduce reader-facing headings, place
 formulas near their explanation, convert repeated method prose into a table, and
 move only relocatable trace into a meaningful appendix.
 
-Do not call OpenAI/Terra or `text-transform` for document mapping, Meaning
-Cards, writing, semantic audit, repair, or assembly. Optional external review,
-when a frozen task explicitly authorizes it, is candidate-only QA after local
-generation and is not a production generation dependency.
+Do not call OpenAI/Terra or `text-transform` for document mapping, Reader Plan,
+Meaning Cards, writing, semantic audit, repair, assembly, or Chinese reader
+pass. Optional external review, when a frozen task explicitly authorizes it, is
+candidate-only QA after local generation and is not a production generation
+dependency.
 
-### 5. Prepare The Local Writer Packet
+### 6. Prepare The Local Writer Packet
 
 Each local rewrite packet should contain only bounded context:
 
@@ -210,12 +239,14 @@ Each local rewrite packet should contain only bounded context:
 - Current original unit.
 - Small next-source preview.
 - Current Meaning Card and Fidelity Ledger.
+- The Reader Plan bundle that owns this unit, including reader question,
+  information shape, expansion policy, and English-span classification.
 - 2-4 selected positive transformations.
 
 Do not put the full document, all rules, and every example into each local
 writer packet.
 
-### 6. Select Positive Transformations
+### 7. Select Positive Transformations
 
 Select examples by transformation metadata, not topic similarity:
 
@@ -233,7 +264,7 @@ Use `references/seed-transformations.json` as the P0 seed library. Do not add
 047 frozen holdout outputs, private 044 text, or project-specific 044 phrases to
 this library.
 
-### 7. Rewrite From Meaning Plus Original
+### 8. Rewrite From Meaning Plus Original
 
 Rewrite the unit from the Meaning Card and original unit together. The output
 should read as normal Chinese scientific prose:
@@ -259,8 +290,12 @@ should read as normal Chinese scientific prose:
 - For large method comparisons, first identify the decision question, then group
   methods by the relevant mechanism, communicated information, statistical
   object, or resource assumption. Keep complete facts in prose or a table.
+- Optimize for minimum reader inference burden, not minimum characters. A local
+  section may become longer when it adds necessary explanation, splits parallel
+  conditions, introduces a formula, or turns dense comparisons into a table or
+  list.
 
-### 8. Verify Exact Items
+### 9. Verify Exact Items
 
 Run deterministic exact checks for literal invariants:
 
@@ -278,7 +313,7 @@ a failure. Only `relocatable-trace` items may live in a technical/evidence
 appendix, and that appendix must contain host-written contextual meaning rather
 than a raw literal list.
 
-### 9. Audit Semantic Fidelity
+### 10. Audit Semantic Fidelity
 
 Independently audit claims and relations. Report exact source and candidate
 evidence for every issue. The audit must distinguish:
@@ -296,7 +331,7 @@ wrong number, formula or citation corruption, claim polarity reversal, omitted
 caveat, changed comparator, erased uncertainty, conclusion-strength upgrade,
 wrong attribution, or invented scientific fact.
 
-### 10. Targeted Repair Only
+### 11. Targeted Repair Only
 
 If exact or semantic audit finds a problem, repair the affected unit only. Do
 not freely rewrite the whole document again. Whole-document review may identify
@@ -308,7 +343,7 @@ text, create a "保留原文精确项" list, or write semantic repair prose. Mis
 inline-critical or relocatable-trace findings go back to host Codex for
 contextual repair, then exact verification runs again.
 
-### 11. Candidate-Only Reader Review
+### 12. Candidate-Only Reader Review
 
 Run a reader review that sees only the candidate and audience description, not
 the original source. It must answer whether a technically trained reader can
@@ -316,9 +351,15 @@ state the research problem, current evidence, remaining uncertainty, next
 comparison or experiment, and GO/STOP consequence without decoding internal
 audit vocabulary.
 
+The review has two dimensions:
+
+- `answerability`: can the reader recover the intended scientific answer?
+- `reader_effort`: does a normal first read present that answer directly, with
+  enough local explanation and the right information shape?
+
 Do not let source-aware fidelity review substitute for this reader review.
 
-### 12. Chinese Language Review
+### 13. Chinese Language Review
 
 Use `chinese-prose` as the language-quality review layer after fidelity gates:
 
@@ -331,6 +372,13 @@ Use `chinese-prose` as the language-quality review layer after fidelity gates:
 
 The review should judge context, not blacklist hits. It must not introduce
 044-specific phrase rules.
+
+For heavy structural rewrite this is an observable terminal pass. The host
+Codex session writes a candidate-only Chinese reader pass that classifies
+remaining English spans as exact identity, useful first-use recognition, or
+ordinary reasoning; checks that reader effort was not optimized as compression;
+checks formula context and evidence-role boundaries; then repairs affected
+reader-facing blocks before exact and semantic verification run again.
 
 ## Helper
 

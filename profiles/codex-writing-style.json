@@ -1,6 +1,6 @@
 {
   "name": "codex-writing-style",
-  "description": "Lightweight global/local profile for writing fidelity, English scientific prose, and Chinese report/README/document polishing.",
+  "description": "Writing profile for fidelity guards, host-Codex heavy Chinese scientific rewrites, English scientific prose, and Chinese report/README/document polishing.",
   "max_active_skills": 8,
   "skills": [
     "skills/writing/core/writing-fidelity",

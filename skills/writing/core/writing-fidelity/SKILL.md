@@ -134,6 +134,13 @@ Under this handoff, these may change unless the user explicitly protected them:
 - table organization;
 - where a local explanation is introduced.
 
+When the structural route provides a Reader Plan, fidelity ownership follows
+reader-question bundles, not the original paragraph positions. A bundle may
+legitimately combine non-contiguous source spans, split one dense source span
+into a list/table/formula walkthrough, or move an inline-critical item into a
+nearby reader-facing explanation, provided the evidence and caveat that bound
+the claim move with it.
+
 These must still be preserved:
 
 - claims and polarity;
@@ -143,11 +150,12 @@ These must still be preserved:
   according to their literal location roles;
 - decision boundaries and conclusion strength.
 
-The acceptance criterion is complete proposition/evidence coverage, not source
-order. A structural rewrite may pass fidelity even when headings or paragraph
-order change, but it fails if any proposition is omitted, duplicated as new
-ownership, reattributed, strengthened, weakened without authorization, or moved
-away from the caveat that limits it.
+The acceptance criterion is complete proposition/evidence coverage with lower
+reader inference burden, not source order or compression. A structural rewrite
+may pass fidelity even when headings or paragraph order change, but it fails if
+any proposition is omitted, duplicated as new ownership, reattributed,
+strengthened, weakened without authorization, or moved away from the caveat
+that limits it.
 
 Classify exact items as:
 

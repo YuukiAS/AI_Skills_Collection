@@ -35,6 +35,12 @@ The rewritten text should let a first-time scientific or technical reader know:
 - Preserve evidence class distinctions in natural prose so project facts,
   literature facts, interpretation, candidate methods, and unverified items do
   not collapse into one authority level.
+- Lower reader inference burden rather than character count. Add a short bridge,
+  split a dense paragraph, or use a compact list/table when that lets the
+  reader see the comparison without reconstructing it mentally.
+- Classify English spans by function: preserve exact names, optionally keep an
+  English identifier at first use when it helps recognition, and translate
+  ordinary reasoning or organization language into natural Chinese.
 
 ## Anti-Patterns
 
@@ -50,3 +56,6 @@ The rewritten text should let a first-time scientific or technical reader know:
   scientific context.
 - Treating source order as more important than the reader's scientific decision
   path in an explicit structural rewrite.
+- Treating a shorter candidate as better when it has removed the explanation,
+  transition, symbol meaning, or information shape that made the result easy to
+  read.

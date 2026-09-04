@@ -1,7 +1,7 @@
 {
   "name": "writing-style",
   "version": "0.1",
-  "description": "Writing quality layer with source-fidelity guardrails, Chinese reader-facing say-it-plain final passes, and English scientific prose cleanup without detector evasion or research-structure decisions.",
+  "description": "Writing quality layer with source-fidelity guardrails, host-Codex heavy Chinese scientific rewrites that may reorganize reader-facing structure without changing scientific claims, Chinese say-it-plain final passes, and English scientific prose cleanup without detector evasion.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Writing Style",
-    "shortDescription": "Writing quality layer with source-fidelity guardrails, Chinese reader-facing say-it-plain final passes, and English scientific prose cleanup without detector evasion or research-structure decisions.",
-    "longDescription": "Writing quality layer with source-fidelity guardrails, Chinese reader-facing say-it-plain final passes, and English scientific prose cleanup without detector evasion or research-structure decisions. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Writing quality layer with source-fidelity guardrails, host-Codex heavy Chinese scientific rewrites that may reorganize reader-facing structure without changing scientific claims, Chinese say-it-plain final passes, and English scientific prose cleanup without detector evasion.",
+    "longDescription": "Writing quality layer with source-fidelity guardrails, host-Codex heavy Chinese scientific rewrites that may reorganize reader-facing structure without changing scientific claims, Chinese say-it-plain final passes, and English scientific prose cleanup without detector evasion. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [

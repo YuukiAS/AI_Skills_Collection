@@ -20,6 +20,29 @@ The Document Map is compact context for the whole document. It may contain:
 
 It is not a new fact source. The original document remains authoritative.
 
+## Reader Plan
+
+For heavy structural rewrite, the host Codex session should write a compact
+Reader Plan after the Document Map and before bundle drafting. The Reader Plan
+answers how the same evidence graph should be read; it does not choose a new
+research question, add evidence, or change conclusion strength.
+
+A useful Reader Plan contains:
+
+- reader questions in final reading order
+- reader-question bundles with exact source span / proposition ownership
+- non-contiguous span bindings when scattered evidence answers one question
+- planned information shape: prose, short list, table, formula walkthrough, or
+  technical trace
+- expansion / split / compression decision based on reader effort
+- English span policy: exact identity, useful first-use recognition, ordinary
+  reasoning language
+- epistemic role where relevant
+
+Every owned source span or proposition must be accounted for exactly once unless
+an explicit cross-reference is marked. Final assembly should follow the Reader
+Plan's bundle order or explain why the plan was repaired before assembly.
+
 ## Rewrite Unit
 
 Choose a complete argument or discourse unit:
