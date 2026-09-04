@@ -1,95 +1,142 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 050_writing_style_host_codex_runtime
-implementation_commit: 508639ae9f4007d311b6f2646fa201ae4dd20bbe
+implementation_commit: ca9d6651def3672ae7cd09c257e7294c845fce2c
 ---
 
-# 050 Writing Style Host-Codex Runtime — style-smoke handoff
+# 050 Writing Style Host-Codex Runtime — STYLE_REJECT repair handoff
 
-## Process / Mechanical Status
+## Status
 
-Status: `PROCESS_MECHANICAL_PASS_AWAITING_HUMAN_STYLE_DECISION`.
+First A/B/C smoke: `STYLE_REJECT`.
 
-The production `writing-style` heavy scientific rewrite route has been changed
-to the frozen 050 architecture: host Codex owns document understanding, Meaning
-Cards, unit writing, semantic self-audit, repair and assembly; deterministic
-code only validates exact literals, stage/dataflow identity and privacy-safe
-receipts.
+Repair implementation: `PROCESS_MECHANICAL_PASS`.
 
-Implementation commit: `508639ae9f4007d311b6f2646fa201ae4dd20bbe`.
+Second A/B/C smoke: `AWAITING HUMAN STYLE DECISION`.
 
-The private SMOKE-A/B/C samples were generated from the exact frozen 049 source
-segment identities and validated through the generated `writing-style`
-`scientific-rewrite` helper. Public Git evidence contains only hashes, ranges,
-unit/stage counts, verification status and local private locators.
+This is not Product PASS. The user remains the style authority and must return
+`STYLE_ACCEPT` or `STYLE_REJECT` before any full private report generation.
 
-Maintenance companion preflight:
+## Reconciled Starting State
 
-- configured installed plugin id: `ai-skills-core@yuukias-ai-skills`;
-- `codex plugin list --json` could not load the stale configured marketplace
-  source `/tmp/ai-skills-048`;
-- `ai-bridge plugin-replay --dry-run` succeeded for run
-  `20260904T010735Z-a882b2215b99`;
-- actual `ai-bridge plugin-replay` stopped before semantic execution with
-  `WRITE_ISOLATION_NOT_ENFORCEABLE` because the child Codex preflight used
-  `network_access=false` and could not reach the Codex backend. The write
-  canary was unchanged.
+The local task branch preserved the first 050 smoke implementation/evidence and
+merged the remote STYLE_REJECT analysis commit `3cae59ccdf4cb3a7904d26e884268aa399bbc6be`.
+No reset or candidate reuse was performed.
 
-The 050 smoke therefore used the current production-equivalent controlled
-host-Codex route with the generated `writing-style` payload from this branch.
-No OpenAI `/v1/responses`, `/v1/responses/input_tokens`, Terra call, or paid
-GitHub workflow was run.
+Starting local-only commits before the repair:
 
-## Product / Style Status
+- `dc959899992dcb8a7d9c500ffb266c8b348c0ee2`
+- `508639ae9f4007d311b6f2646fa201ae4dd20bbe`
+- `b2467347198cca5f8bb65ec27a04dfe152f55ce0`
 
-Status: `AWAITING HUMAN STYLE DECISION`.
+Remote rejection evidence:
 
-Mechanical fidelity and dataflow checks are not style acceptance. The next
-authority is the user: return `STYLE_ACCEPT` if all three samples are good
-enough to authorize full private generation, or `STYLE_REJECT` with concrete
-feedback for bounded generic repair.
+- `results/050_writing_style_host_codex_runtime/STYLE_REJECT_ANALYSIS_2026-09-04.md`
 
-## Private Human-Readable Package
+## Repair Implementation
 
-Private package root:
-`/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke`
+Implementation commit:
+`ca9d6651def3672ae7cd09c257e7294c845fce2c`.
 
-Combined reader file:
-`/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke/STYLE_SMOKE_FOR_USER.md`
+Promoted generic manual-rewrite capabilities into production:
 
-Individual candidates:
+- structural rewrite may reorder headings, paragraphs, sections and tables while preserving the content/evidence graph;
+- non-contiguous source spans may be grouped when they answer the same scientific reader question;
+- evidence classes remain distinct: project fact, literature fact, research interpretation, candidate method, and still-unverified item;
+- ordinary reasoning language should become natural Chinese while exact formal names remain recognizable;
+- formulas require local intuition, exact formula, symbol meaning and implication;
+- method comparisons should answer a decision question before listing full detail;
+- bounded conclusion may come before nearby qualification when the source supports it.
+
+Updated production contracts:
+
+- `skills/writing/core/scientific-rewrite/SKILL.md`
+- `skills/writing/core/scientific-rewrite/references/meaning-card-and-fidelity-ledger.md`
+- `skills/writing/core/scientific-rewrite/references/positive-style-contract.md`
+- `skills/writing/core/scientific-rewrite/references/seed-transformations.json`
+- `skills/writing/core/writing-fidelity/SKILL.md`
+- generated `plugins/codex/plugins/writing-style/...`
+
+Updated runtime/tests:
+
+- `skills/writing/core/scientific-rewrite/scripts/rewrite_support.py`
+- generated `plugins/codex/plugins/writing-style/skills/scientific-rewrite/scripts/rewrite_support.py`
+- `tests/test_scientific_rewrite.py`
+
+## Runtime Boundary
+
+The normal heavy route remains host-Codex owned. The deterministic helper can
+prepare source spans, inventory exact items, validate IDs/schema/coverage,
+select generic positive transformations, verify exact literals, validate
+host-produced stage dataflow and emit privacy-safe receipts.
+
+It cannot generate reader-facing Chinese prose, manufacture Meaning Cards from
+source-copy fallback, call `/v1/responses`, call Terra, use `text-transform`
+generation, append missing exact literals to the candidate, or satisfy
+`inline-critical` items through an appendix.
+
+`writing-fidelity` now recognizes
+`STRUCTURAL_REWRITE_AUTHORIZED_BY_TASK`: for explicit heavy scientific rewrite,
+headings and source order are not protected by default; the protected invariant
+is the content/evidence graph.
+
+## Second Smoke Evidence
+
+Private reader package root:
+`/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_repair_20260904`
+
+Combined private reader file:
+`/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_repair_20260904/STYLE_SMOKE_FOR_USER.md`
+
+Individual private candidates:
 
 - SMOKE-A:
-  `/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke/SMOKE-A/final_candidate.md`
+  `/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_repair_20260904/SMOKE-A/final_candidate.md`
 - SMOKE-B:
-  `/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke/SMOKE-B/final_candidate.md`
+  `/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_repair_20260904/SMOKE-B/final_candidate.md`
 - SMOKE-C:
-  `/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke/SMOKE-C/final_candidate.md`
+  `/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_repair_20260904/SMOKE-C/final_candidate.md`
 
-## Smoke Evidence
+| Smoke | Source segment SHA-256 | Candidate SHA-256 | Units | Stages | Exact literals | Exact | Dataflow | Argument coverage | Global reorder |
+|---|---|---|---:|---:|---:|---|---|---|---|
+| SMOKE-A | `3e18bea855cc4afccacc47b7ed60600ef637cbffd7ea412fcb54fe4b0575a5db` | `ced7677668531c114fe700329cddfde178381bc03c53f4332f4abb42a8b91f6d` | 2 | 11 | 59 | PASS | PASS | PASS | PASS |
+| SMOKE-B | `20161b96ba82a610d3669d49aae01eeff32f98eeb1737438c892a869b5660e88` | `a2cfe9f8ff9b131cdb38e067669b59419d2da937742508164c1bcb7d43996854` | 4 | 19 | 49 | PASS | PASS | PASS | PASS |
+| SMOKE-C | `22eacc455a07341d24f52666e911dea1f0e8edd46d8bbaeed896a5fc2f973a48` | `5acbcf43c030b06814c5a0b01fa5c398f606623669e1e1279d3323d2028f13d5` | 8 | 35 | 109 | PASS | PASS | PASS | PASS |
 
-| Smoke | Source segment SHA-256 | Units | Exact literals | Candidate SHA-256 | Exact | Dataflow |
-|---|---:|---:|---:|---|---|---|
-| SMOKE-A | `3e18bea855cc4afccacc47b7ed60600ef637cbffd7ea412fcb54fe4b0575a5db` | 2 | 55 | `2acfd6f6e245af7fd39b1f3322f79eb1edaf32f736223743ccd4c36fea7e1ec0` | PASS | PASS |
-| SMOKE-B | `20161b96ba82a610d3669d49aae01eeff32f98eeb1737438c892a869b5660e88` | 4 | 53 | `3d460cdd01959424ac6b96298c2299d0f7c1458a6af1bae74726f045a8c260b3` | PASS | PASS |
-| SMOKE-C | `22eacc455a07341d24f52666e911dea1f0e8edd46d8bbaeed896a5fc2f973a48` | 8 | 113 | `d67a927b704bedbeb06f8b6dcc8e10b60902b6f8c9b9191eb1aa24a3470e0d96` | PASS | PASS |
+Public evidence paths:
 
-Full private source SHA-256 for all three:
-`f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213`.
+- `results/050_writing_style_host_codex_runtime/style_reject_repair_smoke_inputs/`
+- `results/050_writing_style_host_codex_runtime/style_reject_repair_private_smoke/`
+- `results/050_writing_style_host_codex_runtime/style_reject_repair_reader_check.json`
 
-Public receipts:
+## Candidate-Only Reader Check
 
-- `results/050_writing_style_host_codex_runtime/private_style_smoke/SMOKE-A/stage_receipt.json`
-- `results/050_writing_style_host_codex_runtime/private_style_smoke/SMOKE-B/stage_receipt.json`
-- `results/050_writing_style_host_codex_runtime/private_style_smoke/SMOKE-C/stage_receipt.json`
+Host-Codex candidate-only check status:
+`HOST_CODEX_CANDIDATE_ONLY_CHECK_PASS_AWAITING_USER_STYLE_DECISION`.
+
+Checked generic properties:
+
+- first paragraph states the bounded scientific point;
+- ordinary reasoning language is natural Chinese;
+- proper names remain recognizable;
+- formulas have local intuitive explanation;
+- evidence, interpretation, candidate proposal and unverified items remain distinguishable;
+- important caveats remain near the claims they limit;
+- comparison structure answers a scientific decision question;
+- document/unit order differs from source where that reduces reader effort;
+- no token-dump appendix;
+- no `inline-critical` item is satisfied only by appendix;
+- no internal workflow/audit language carries the scientific narrative.
+
+This check is not final style authority.
 
 ## Local Validation
 
-- `python3 -m unittest tests.test_scientific_rewrite` — PASS, 16 tests.
-- `python3 -m unittest tests.test_codex_marketplace` — PASS, 36 tests.
+- `python3 -m unittest tests.test_scientific_rewrite` — PASS, 25 tests.
+- `python3 -m unittest tests.test_scientific_rewrite tests.test_codex_marketplace` — PASS, 61 tests.
 - `python3 -m unittest tests.test_skill_runtime_text_audit tests.test_paid_review_workflows` — PASS, 10 tests.
-- `python3 -m unittest tests.test_scientific_rewrite tests.test_codex_marketplace tests.test_skill_runtime_text_audit tests.test_paid_review_workflows` — PASS, 62 tests.
-- `python3 -m unittest discover -s tests` — PASS, 189 tests.
+- `python3 -m unittest tests.test_scientific_rewrite tests.test_codex_marketplace tests.test_skill_runtime_text_audit tests.test_paid_review_workflows` — PASS, 71 tests.
+- `python3 -m unittest discover -s tests` — PASS, 198 tests.
 - `python3 scripts/build_codex_marketplace.py --write` — PASS.
 - `python3 scripts/build_codex_marketplace.py --validate` — PASS.
 - `python3 scripts/build_codex_marketplace.py --check` — PASS.
@@ -97,8 +144,17 @@ Public receipts:
 - `python3 scripts/skills.py validate` — PASS.
 - `python3 scripts/skills.py audit --all` — PASS.
 
-Reviewed-handoff validator remains red only for the previously known 049/050
-old-template section mismatch. Frozen `PLAN.md` was not edited for that.
+Reviewed-handoff validator still reports only the known 049/050 frozen-Plan
+old-template section mismatch. `PLAN.md` was not edited.
+
+## No Live Spend / Privacy
+
+No OpenAI `/v1/responses`, `/v1/responses/input_tokens`, Terra call, paid
+workflow, GitHub Actions dispatch, or full private report generation occurred.
+
+No private plaintext source, candidate, Meaning Card, or stage artifact was
+committed. Public Git evidence contains only hashes, counts, statuses and
+machine-local private locators.
 
 ## Version Decision
 
@@ -107,6 +163,5 @@ Repository bump decision: `NONE`.
 Affected plugins:
 
 - `writing-style`: `NO_BUMP`
-  Reason: 050 is stopped at the first human style gate. Plugin release is not
-  complete until user `STYLE_ACCEPT` and the later final private-report
-  acceptance path.
+  Reason: 050 is still stopped at the human style gate; final release
+  acceptance has not occurred.

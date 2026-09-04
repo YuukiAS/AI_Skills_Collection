@@ -1,0 +1,21 @@
+{
+  "candidate_text_committed": false,
+  "checked_at": "2026-09-04T03:55:00Z",
+  "checks": {
+    "bounded_scientific_point_first": "PASS",
+    "caveats_near_claims": "PASS",
+    "comparison_answers_decision_question": "PASS",
+    "document_order_reduced_reader_effort": "PASS",
+    "evidence_class_boundaries_visible": "PASS",
+    "formulas_have_local_explanation": "PASS",
+    "inline_critical_not_appendix_only": "PASS",
+    "no_internal_workflow_narrative": "PASS",
+    "no_token_dump_appendix": "PASS",
+    "ordinary_reasoning_language_chinese": "PASS",
+    "proper_names_recognizable": "PASS"
+  },
+  "implementation_commit": "ca9d6651def3672ae7cd09c257e7294c845fce2c",
+  "schema": "AI_SKILLS_050_STYLE_REJECT_REPAIR_READER_CHECK_V1",
+  "status": "HOST_CODEX_CANDIDATE_ONLY_CHECK_PASS_AWAITING_USER_STYLE_DECISION",
+  "task_key": "050_writing_style_host_codex_runtime"
+}

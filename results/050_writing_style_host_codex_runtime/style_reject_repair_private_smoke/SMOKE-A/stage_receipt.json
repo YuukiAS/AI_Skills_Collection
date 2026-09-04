@@ -1,0 +1,238 @@
+{
+  "argument_coverage": {
+    "ok": true,
+    "source_span_count": 2,
+    "unit_count": 2
+  },
+  "candidate_sha256": "ced7677668531c114fe700329cddfde178381bc03c53f4332f4abb42a8b91f6d",
+  "created_at": "2026-09-04T03:51:08Z",
+  "dataflow_validation": {
+    "dangling_consumers": [],
+    "ok": true,
+    "unused_outputs": []
+  },
+  "driver": "host-codex",
+  "exact_verification": {
+    "literal_count": 59,
+    "missing": [],
+    "missing_inline_core": [],
+    "ok": true,
+    "raw_literal_dump": false,
+    "schema": "SCIENTIFIC_REWRITE_EXACT_VERIFICATION_V1"
+  },
+  "external_api_call_count": 0,
+  "global_assembly": {
+    "ok": true,
+    "reader_order_unit_ids": [
+      "unit-002",
+      "unit-001"
+    ],
+    "reordered_from_source_order": true,
+    "strategy": "按读者问题重组：先给有边界判断，再放证据、公式解释、方法比较和 caveat。"
+  },
+  "model_call_count": 0,
+  "private_plaintext_committed": false,
+  "requires_openai_api_key": false,
+  "runtime": "scientific-rewrite.host-codex.v1",
+  "schema": "SCIENTIFIC_REWRITE_HOST_CODEX_STAGE_RECEIPT_V1",
+  "source_sha256": "3e18bea855cc4afccacc47b7ed60600ef637cbffd7ea412fcb54fe4b0575a5db",
+  "stage_count": 11,
+  "stage_records": [
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "document-map",
+          "stage_id": "argument-segmentation"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "document-map:ad048468ff324295eeb7d664159ee838f742489e5904f1bd25f19473f14cba30",
+      "output_sha256": "ad048468ff324295eeb7d664159ee838f742489e5904f1bd25f19473f14cba30",
+      "plaintext_committed": false,
+      "stage_id": "document-map",
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "argument-segmentation",
+          "stage_id": "unit-001-meaning-card"
+        },
+        {
+          "input_binding": "argument-segmentation",
+          "stage_id": "unit-002-meaning-card"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "argument-segmentation:3f5eca02749ac37b34d378ae8fd757acce5dae89714878e357e1c07ea7989829",
+      "output_sha256": "3f5eca02749ac37b34d378ae8fd757acce5dae89714878e357e1c07ea7989829",
+      "plaintext_committed": false,
+      "stage_id": "argument-segmentation",
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-001-meaning-card",
+          "stage_id": "unit-001-example-selection"
+        },
+        {
+          "input_binding": "unit-001-meaning-card",
+          "stage_id": "unit-001-writer"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-001-meaning-card:2a075af39f9e4a1d160562f84ddb63b9fd3aae7874fdb1ada4e92017ac2d9499",
+      "output_sha256": "2a075af39f9e4a1d160562f84ddb63b9fd3aae7874fdb1ada4e92017ac2d9499",
+      "plaintext_committed": false,
+      "stage_id": "unit-001-meaning-card",
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-001-example-selection",
+          "stage_id": "unit-001-writer"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-001-example-selection:955be1d98e54cc25e2a92fac8a00d7b83aae7013e610bc25e07e4d054a4ccb5d",
+      "output_sha256": "955be1d98e54cc25e2a92fac8a00d7b83aae7013e610bc25e07e4d054a4ccb5d",
+      "plaintext_committed": false,
+      "stage_id": "unit-001-example-selection",
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-001-writer",
+          "stage_id": "unit-001-semantic-self-audit"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-001-writer:a0d51bd3496fdeced85e3552d1a3d94301fc54d36fb6c3fcc7d5f61d05bc6c79",
+      "output_sha256": "a0d51bd3496fdeced85e3552d1a3d94301fc54d36fb6c3fcc7d5f61d05bc6c79",
+      "plaintext_committed": false,
+      "stage_id": "unit-001-writer",
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-001-semantic-self-audit",
+          "stage_id": "final-assembly"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-001-semantic-self-audit:bbefcb09ff4015c2e1209efced6d62851a304901aa1f8b3dffeaf684fea8596b",
+      "output_sha256": "bbefcb09ff4015c2e1209efced6d62851a304901aa1f8b3dffeaf684fea8596b",
+      "plaintext_committed": false,
+      "stage_id": "unit-001-semantic-self-audit",
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-002-meaning-card",
+          "stage_id": "unit-002-example-selection"
+        },
+        {
+          "input_binding": "unit-002-meaning-card",
+          "stage_id": "unit-002-writer"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-002-meaning-card:8b5db826ee65f7569ec0576e26cfacb4db20144124cde85da87f786b599a7e71",
+      "output_sha256": "8b5db826ee65f7569ec0576e26cfacb4db20144124cde85da87f786b599a7e71",
+      "plaintext_committed": false,
+      "stage_id": "unit-002-meaning-card",
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-002-example-selection",
+          "stage_id": "unit-002-writer"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-002-example-selection:955be1d98e54cc25e2a92fac8a00d7b83aae7013e610bc25e07e4d054a4ccb5d",
+      "output_sha256": "955be1d98e54cc25e2a92fac8a00d7b83aae7013e610bc25e07e4d054a4ccb5d",
+      "plaintext_committed": false,
+      "stage_id": "unit-002-example-selection",
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-002-writer",
+          "stage_id": "unit-002-semantic-self-audit"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-002-writer:36799e1b52a10d9fd2fd2c72d7c99fb5637877dc5f97c0c579b21fb0e9b9f0a2",
+      "output_sha256": "36799e1b52a10d9fd2fd2c72d7c99fb5637877dc5f97c0c579b21fb0e9b9f0a2",
+      "plaintext_committed": false,
+      "stage_id": "unit-002-writer",
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-002-semantic-self-audit",
+          "stage_id": "final-assembly"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-002-semantic-self-audit:bbefcb09ff4015c2e1209efced6d62851a304901aa1f8b3dffeaf684fea8596b",
+      "output_sha256": "bbefcb09ff4015c2e1209efced6d62851a304901aa1f8b3dffeaf684fea8596b",
+      "plaintext_committed": false,
+      "stage_id": "unit-002-semantic-self-audit",
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "final-assembly:ced7677668531c114fe700329cddfde178381bc03c53f4332f4abb42a8b91f6d",
+      "output_sha256": "ced7677668531c114fe700329cddfde178381bc03c53f4332f4abb42a8b91f6d",
+      "plaintext_committed": false,
+      "stage_id": "final-assembly",
+      "terminal_output": true,
+      "unit_id": null,
+      "unused_output": false
+    }
+  ],
+  "unit_count": 2,
+  "whole_document_writer_call": false
+}

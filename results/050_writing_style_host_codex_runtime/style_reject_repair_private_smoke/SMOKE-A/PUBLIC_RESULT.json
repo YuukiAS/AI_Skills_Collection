@@ -1,0 +1,42 @@
+{
+  "candidate_sha256": "ced7677668531c114fe700329cddfde178381bc03c53f4332f4abb42a8b91f6d",
+  "candidate_size_bytes": 6348,
+  "created_at": "2026-09-04T03:51:08Z",
+  "full_private_source_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213",
+  "host_codex_generation": true,
+  "implementation_commit": "ca9d6651def3672ae7cd09c257e7294c845fce2c",
+  "line_ranges": [
+    "1-60",
+    "111-145"
+  ],
+  "openai_generation_call_count": 0,
+  "paid_review_call_count": 0,
+  "private_candidate_path": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_repair_20260904/SMOKE-A/final_candidate.md",
+  "private_plaintext_committed": false,
+  "private_stage_dir": "/overflow/htzhu/mingcheng_new/.tmp/codex-Longleaf_Connection_Bridge/050_private_style_smoke_repair_20260904/SMOKE-A/stage",
+  "production_entrypoint": {
+    "ai_skills_core_plugin_id": "ai-skills-core@yuukias-ai-skills",
+    "plugin_replay_actual": "not run for repair smoke; no external model or private transport change authorized",
+    "plugin_replay_dry_run": "20260904T032825Z-9fbf862c67db",
+    "route": "current-host-codex + generated writing-style/scientific-rewrite validate-host-stage",
+    "writing_style_plugin_id": "writing-style@yuukias-ai-skills"
+  },
+  "requires_openai_api_key": false,
+  "role": "checkpoint-estimand-and-next-decision",
+  "schema": "AI_SKILLS_050_PRIVATE_STYLE_SMOKE_PUBLIC_RESULT_V1",
+  "smoke_id": "SMOKE-A",
+  "source_plaintext_size_bytes": 7952,
+  "source_segment_sha256": "3e18bea855cc4afccacc47b7ed60600ef637cbffd7ea412fcb54fe4b0575a5db",
+  "stage_receipt": {
+    "dataflow_ok": true,
+    "exact_ok": true,
+    "literal_count": 59,
+    "path": "results/050_writing_style_host_codex_runtime/style_reject_repair_private_smoke/SMOKE-A/stage_receipt.json",
+    "runtime": "scientific-rewrite.host-codex.v1",
+    "schema": "SCIENTIFIC_REWRITE_HOST_CODEX_STAGE_RECEIPT_V1",
+    "sha256": "af7ba8040d6e65095ef1e1a065f9792d801cbd173a4f4399e9fab9a03069542c",
+    "stage_count": 11,
+    "unit_count": 2
+  },
+  "task_key": "050_writing_style_host_codex_runtime"
+}

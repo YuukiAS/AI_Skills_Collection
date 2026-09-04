@@ -1,0 +1,25 @@
+{
+  "implementation_commit": "ca9d6651def3672ae7cd09c257e7294c845fce2c",
+  "previous_smoke_status": "STYLE_REJECT",
+  "production_entrypoint": {
+    "ai_skills_core_plugin_id": "ai-skills-core@yuukias-ai-skills",
+    "plugin_replay_actual": "not run for repair smoke; no external model or private transport change authorized",
+    "plugin_replay_dry_run": "20260904T032825Z-9fbf862c67db",
+    "route": "current-host-codex + generated writing-style/scientific-rewrite validate-host-stage",
+    "writing_style_plugin_id": "writing-style@yuukias-ai-skills"
+  },
+  "repair_round": 1,
+  "role": "checkpoint-estimand-and-next-decision",
+  "schema": "AI_SKILLS_050_STYLE_SMOKE_INPUT_V1",
+  "smoke_id": "SMOKE-A",
+  "source": {
+    "full_private_source_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213",
+    "historical_encrypted_source": "results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-A/input.age",
+    "line_ranges": [
+      "1-60",
+      "111-145"
+    ],
+    "segment_sha256": "3e18bea855cc4afccacc47b7ed60600ef637cbffd7ea412fcb54fe4b0575a5db"
+  },
+  "task_key": "050_writing_style_host_codex_runtime"
+}

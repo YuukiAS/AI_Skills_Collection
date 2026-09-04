@@ -8,7 +8,7 @@
   "max_plan_revisions": 1,
   "base_commit": "19d7ba6f1a2a8752adfa4e7c11d3ebe9ed318070",
   "base_branch": "reviewed/049_writing_style_multistage_production_runtime",
-  "implementation_commit": "508639ae9f4007d311b6f2646fa201ae4dd20bbe",
+  "implementation_commit": "ca9d6651def3672ae7cd09c257e7294c845fce2c",
   "ci_required": true,
   "ci_status": "PENDING",
   "last_review_decision": null,
