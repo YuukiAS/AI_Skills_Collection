@@ -36,4 +36,4 @@ user                                  -> required style/final acceptance
 
 ## Cost contract
 
-Task 050 permits at most two Terra QA calls total, USD 0.50 hard cumulative campaign budget, USD 0.30 worst-case preflight per call, zero automatic paid retries, and no paid invocation on ordinary Git push.
+Task 050 Plan revision 1 permits at most two Terra QA calls total, USD 0.50 hard cumulative campaign budget, USD 0.25 worst-case preflight per call, zero automatic paid retries, and no paid invocation on ordinary Git push.

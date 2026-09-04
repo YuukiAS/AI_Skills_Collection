@@ -1,0 +1,29 @@
+{
+  "created_at": "2026-09-04T01:18:15Z",
+  "implementation_commit": "508639ae9f4007d311b6f2646fa201ae4dd20bbe",
+  "privacy": {
+    "candidate_plaintext_in_git": false,
+    "meaning_cards_in_git": false,
+    "plaintext_in_git": false
+  },
+  "production_entrypoint": {
+    "ai_skills_core_plugin_id": "ai-skills-core@yuukias-ai-skills",
+    "plugin_replay_actual": "20260904T010744Z-12b4cc106af0 failed before semantic run: WRITE_ISOLATION_NOT_ENFORCEABLE from child Codex network_access=false",
+    "plugin_replay_dry_run": "20260904T010735Z-a882b2215b99",
+    "route": "current-host-codex + generated writing-style/scientific-rewrite validate-host-stage",
+    "writing_style_plugin_id": "writing-style@yuukias-ai-skills"
+  },
+  "role": "odal_vs_fedfisher_fedlpa",
+  "schema": "AI_SKILLS_050_STYLE_SMOKE_INPUT_V1",
+  "smoke_id": "SMOKE-B",
+  "source": {
+    "full_private_source_sha256": "f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213",
+    "historical_encrypted_source": "results/049_writing_style_multistage_production_runtime/private_style_smoke/SMOKE-B/input.age",
+    "line_ranges": [
+      "379-472",
+      "515-526"
+    ],
+    "segment_sha256": "20161b96ba82a610d3669d49aae01eeff32f98eeb1737438c892a869b5660e88"
+  },
+  "task_key": "050_writing_style_host_codex_runtime"
+}

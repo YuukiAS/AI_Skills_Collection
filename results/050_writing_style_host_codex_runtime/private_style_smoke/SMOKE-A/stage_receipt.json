@@ -1,0 +1,223 @@
+{
+  "candidate_sha256": "2acfd6f6e245af7fd39b1f3322f79eb1edaf32f736223743ccd4c36fea7e1ec0",
+  "created_at": "2026-09-04T01:18:34Z",
+  "dataflow_validation": {
+    "dangling_consumers": [],
+    "ok": true,
+    "unused_outputs": []
+  },
+  "driver": "host-codex",
+  "exact_verification": {
+    "literal_count": 55,
+    "missing": [],
+    "missing_inline_core": [],
+    "ok": true,
+    "schema": "SCIENTIFIC_REWRITE_EXACT_VERIFICATION_V1"
+  },
+  "external_api_call_count": 0,
+  "model_call_count": 0,
+  "private_plaintext_committed": false,
+  "requires_openai_api_key": false,
+  "runtime": "scientific-rewrite.host-codex.v1",
+  "schema": "SCIENTIFIC_REWRITE_HOST_CODEX_STAGE_RECEIPT_V1",
+  "source_sha256": "3e18bea855cc4afccacc47b7ed60600ef637cbffd7ea412fcb54fe4b0575a5db",
+  "stage_count": 11,
+  "stage_records": [
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "document-map",
+          "stage_id": "argument-segmentation"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "document-map:440de715917dcfcf64652342bb8b080689f0fd992be06db0c867f9c392c3da4a",
+      "output_sha256": "440de715917dcfcf64652342bb8b080689f0fd992be06db0c867f9c392c3da4a",
+      "plaintext_committed": false,
+      "stage_id": "document-map",
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "argument-segmentation",
+          "stage_id": "unit-001-meaning-card"
+        },
+        {
+          "input_binding": "argument-segmentation",
+          "stage_id": "unit-002-meaning-card"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "argument-segmentation:51554149553ad41b08f55008f76e8e22810d983c8a8a79a5cc5864f06a5e7cad",
+      "output_sha256": "51554149553ad41b08f55008f76e8e22810d983c8a8a79a5cc5864f06a5e7cad",
+      "plaintext_committed": false,
+      "stage_id": "argument-segmentation",
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-001-meaning-card",
+          "stage_id": "unit-001-example-selection"
+        },
+        {
+          "input_binding": "unit-001-meaning-card",
+          "stage_id": "unit-001-writer"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-001-meaning-card:3fb8ef916e9fd42e7fdeeabb5155da05c2ea4f66ed156ce0bc9cc15f2da2abff",
+      "output_sha256": "3fb8ef916e9fd42e7fdeeabb5155da05c2ea4f66ed156ce0bc9cc15f2da2abff",
+      "plaintext_committed": false,
+      "stage_id": "unit-001-meaning-card",
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-001-example-selection",
+          "stage_id": "unit-001-writer"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-001-example-selection:d3b471fccbb4a919b1032dd1d4215002431080ce3cf4b2a484851459cfed05e2",
+      "output_sha256": "d3b471fccbb4a919b1032dd1d4215002431080ce3cf4b2a484851459cfed05e2",
+      "plaintext_committed": false,
+      "stage_id": "unit-001-example-selection",
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-001-writer",
+          "stage_id": "unit-001-semantic-self-audit"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-001-writer:50f2fb599e9e0a00629449a6c0aa3f4509a124667dfe968fdf216ebe6633505d",
+      "output_sha256": "50f2fb599e9e0a00629449a6c0aa3f4509a124667dfe968fdf216ebe6633505d",
+      "plaintext_committed": false,
+      "stage_id": "unit-001-writer",
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-001-semantic-self-audit",
+          "stage_id": "final-assembly"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-001-semantic-self-audit:0090893d1e8eea551f55bfd40e14097a2a726f547f1303dfe22e5667264a0ab3",
+      "output_sha256": "0090893d1e8eea551f55bfd40e14097a2a726f547f1303dfe22e5667264a0ab3",
+      "plaintext_committed": false,
+      "stage_id": "unit-001-semantic-self-audit",
+      "terminal_output": false,
+      "unit_id": "unit-001",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-002-meaning-card",
+          "stage_id": "unit-002-example-selection"
+        },
+        {
+          "input_binding": "unit-002-meaning-card",
+          "stage_id": "unit-002-writer"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-002-meaning-card:671fb72548cf40737ffe1c9f7fb38e7ac5970669c6f3d552ffac0c1bf7aa8275",
+      "output_sha256": "671fb72548cf40737ffe1c9f7fb38e7ac5970669c6f3d552ffac0c1bf7aa8275",
+      "plaintext_committed": false,
+      "stage_id": "unit-002-meaning-card",
+      "terminal_output": false,
+      "unit_id": null,
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-002-example-selection",
+          "stage_id": "unit-002-writer"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-002-example-selection:d3b471fccbb4a919b1032dd1d4215002431080ce3cf4b2a484851459cfed05e2",
+      "output_sha256": "d3b471fccbb4a919b1032dd1d4215002431080ce3cf4b2a484851459cfed05e2",
+      "plaintext_committed": false,
+      "stage_id": "unit-002-example-selection",
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-002-writer",
+          "stage_id": "unit-002-semantic-self-audit"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-002-writer:d2826a122ddc8a8b9ed5ec7350bc78903bc529f29f0212ae79e75e4b2215a19f",
+      "output_sha256": "d2826a122ddc8a8b9ed5ec7350bc78903bc529f29f0212ae79e75e4b2215a19f",
+      "plaintext_committed": false,
+      "stage_id": "unit-002-writer",
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [
+        {
+          "input_binding": "unit-002-semantic-self-audit",
+          "stage_id": "final-assembly"
+        }
+      ],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "unit-002-semantic-self-audit:0090893d1e8eea551f55bfd40e14097a2a726f547f1303dfe22e5667264a0ab3",
+      "output_sha256": "0090893d1e8eea551f55bfd40e14097a2a726f547f1303dfe22e5667264a0ab3",
+      "plaintext_committed": false,
+      "stage_id": "unit-002-semantic-self-audit",
+      "terminal_output": false,
+      "unit_id": "unit-002",
+      "unused_output": false
+    },
+    {
+      "downstream_consumers": [],
+      "host_codex_authored": true,
+      "model_call": false,
+      "output_identity": "final-assembly:2acfd6f6e245af7fd39b1f3322f79eb1edaf32f736223743ccd4c36fea7e1ec0",
+      "output_sha256": "2acfd6f6e245af7fd39b1f3322f79eb1edaf32f736223743ccd4c36fea7e1ec0",
+      "plaintext_committed": false,
+      "stage_id": "final-assembly",
+      "terminal_output": true,
+      "unit_id": null,
+      "unused_output": false
+    }
+  ],
+  "unit_count": 2,
+  "whole_document_writer_call": false
+}
