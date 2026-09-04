@@ -1,0 +1,22 @@
+{
+  "schema": "AI_SKILLS_050_ROUND4_RENDER_QA_V1",
+  "task_key": "050_writing_style_host_codex_runtime",
+  "pdf_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round4-final-combined/STYLE_SMOKE_A_B_C_ROUND4.pdf",
+  "combined_markdown_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round4-final-combined/STYLE_SMOKE_A_B_C_ROUND4.md",
+  "renderable_markdown_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round4-final-combined/STYLE_SMOKE_A_B_C_ROUND4.renderable.md",
+  "render_log_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round4-final-combined/render.log",
+  "renderer": "Pandoc -> XeLaTeX via render-chinese-math-pdf resource script",
+  "pdf_sha256": "e70e4fed595fce41cfcf5fbcad87e8b281862e909afe5723800fa9c2d2975c0d",
+  "combined_markdown_sha256": "abb5713589ef4affa528a1d4465b282ffc57365e836d605ec28e03e3722d02ef",
+  "renderable_markdown_sha256": "087cf7e6410688c4072c483dfd17029070dae3b07794f8775002e9678fd541da",
+  "pages": 8,
+  "missing_character_warnings": false,
+  "latex_error": false,
+  "fonts_embedded": true,
+  "text_layer_extractable": true,
+  "page_1_preview": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round4-final-combined/page-preview-1.png",
+  "page_6_preview": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round4-final-combined/page6-preview-6.png",
+  "page_6_visual_checked": true,
+  "private_plaintext_committed": false,
+  "render_note": "Original replay Markdown is preserved. Renderable Markdown normalizes math-like code/fence spans for PDF readability only."
+}

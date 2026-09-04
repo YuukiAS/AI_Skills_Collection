@@ -1,7 +1,7 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 050_writing_style_host_codex_runtime
-implementation_commit: bac6bf37ee22b52a2894c90a385dd6ab0e8f0292
+implementation_commit: f1be8e4151d439d0e34a4c9d3c5fc9f3cb6950c2
 ---
 
 # 050 Writing Style Host-Codex Runtime — STYLE_REJECT repair handoff
@@ -15,6 +15,8 @@ Repair implementation: `PROCESS_MECHANICAL_PASS`.
 Second A/B/C smoke: `STYLE_REJECT`.
 
 Third A/B/C smoke: `AWAITING HUMAN STYLE DECISION`.
+
+Fourth clean A/B/C replay: `AWAITING HUMAN STYLE DECISION`.
 
 This is not Product PASS. The user remains the style authority and must return
 `STYLE_ACCEPT` or `STYLE_REJECT` before any full private report generation.
@@ -301,6 +303,102 @@ Prevention:
 - `python3 scripts/skills.py validate` — PASS, 150 active skills and 18 profiles.
 - `python3 scripts/skills.py audit --all` — PASS.
 - `python3 -m unittest discover -s tests` — PASS, 201 tests.
+
+## Round-4 Clean Replay Implementation
+
+Production-code hardening commit:
+`69344eed22f3dad652e35a6fa73e6af5d3c985dd`.
+
+Replay-task constraint commit:
+`f1be8e4151d439d0e34a4c9d3c5fc9f3cb6950c2`.
+
+Round 4 keeps the selected host-Codex rewrite architecture. It adds bounded
+observability and terminal-gate hardening:
+
+- visible Latin-script spans are mechanically enumerated outside protected
+  formula/code/path/citation material;
+- every Latin occurrence must be classified as `exact_identity`,
+  `useful_recognition`, or `ordinary_reasoning`;
+- `ordinary_reasoning` occurrences are rejected if they remain in the final
+  candidate;
+- `exact_identity` needs literal-ledger or explicit identity authority;
+- `useful_recognition` needs reader-facing Chinese context;
+- final assembly evidence is separated from aggregate self-audit evidence;
+- per-unit semantic audits, Reader Plan consumption, pre/post Chinese pass
+  artifacts, and final-candidate identity are separate private artifacts.
+
+The clean replay task was also tightened after an invalid C attempt showed that
+a fresh child can otherwise produce a freeform rewrite without loading the
+installed skill. The task now explicitly requires the installed
+`writing-style:scientific-rewrite` skill and the Round-4 stage package.
+
+## Round-4 Clean Replay Evidence
+
+Private replay artifacts are under repo-local ignored paths:
+
+- `/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round4-final-A-state/plugin-replay/20260904T150703Z-dd937f6d0603/outputs`
+- `/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round4-final-B-state/plugin-replay/20260904T151611Z-d542638fa403/outputs`
+- `/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round4-final-C-state/plugin-replay/20260904T152255Z-2e37c3c4cb42/outputs`
+
+Public replay evidence:
+
+- `results/050_writing_style_host_codex_runtime/round4_clean_replay_evidence.json`
+
+| Smoke | Source segment SHA-256 | Candidate SHA-256 | Units | Stages | Reader Plan | Assembly | Latin spans classified | Chinese pass | Exact |
+|---|---|---|---:|---:|---|---|---:|---|---|
+| SMOKE-A | `3e18bea855cc4afccacc47b7ed60600ef637cbffd7ea412fcb54fe4b0575a5db` | `051189787a26610e9a75f85260a26409467639330eef64ae143a9e7c69b7f040` | 2 | 18 | PASS | PASS | 175/175 | PASS | PASS |
+| SMOKE-B | `20161b96ba82a610d3669d49aae01eeff32f98eeb1737438c892a869b5660e88` | `3e6be5f209b9a9fcb869da8332d1856a2d83170de99b116094c507598712f3fc` | 4 | 26 | PASS | PASS | 142/142 | PASS | PASS |
+| SMOKE-C | `22eacc455a07341d24f52666e911dea1f0e8edd46d8bbaeed896a5fc2f973a48` | `0b9a4b84bfeb6ea6c0e6c91d5dc4e4087d3acfa20827ea198f27daf9297b385a` | 8 | 42 | PASS | PASS | 402/402 | PASS | PASS |
+
+This clean replay is stopped at the required human style gate. It is not
+Product PASS.
+
+## Round-4 PDF Render QA
+
+The requested combined A/B/C reader PDF is repo-local and ignored by Git:
+
+`/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round4-final-combined/STYLE_SMOKE_A_B_C_ROUND4.pdf`
+
+Public render QA:
+
+- `results/050_writing_style_host_codex_runtime/round4_render_qa.json`
+
+Render route: `Markdown -> Pandoc -> XeLaTeX -> PDF` through the
+`render-chinese-math-pdf` resource script.
+
+QA result:
+
+- `pdfinfo`: 8 pages, A4, unencrypted;
+- `pdffonts`: TeX Gyre Termes, TeX Gyre Termes Math, Noto Serif SC, Noto Sans
+  SC all embedded/subset;
+- render log: no `Missing character`, no `Undefined control sequence`, no
+  `Error producing PDF`;
+- `pdftotext -layout`: text layer extractable;
+- page 1 and page 6 PNG previews generated; page 6 was visually inspected.
+
+The original replay Markdown is preserved. The renderable Markdown normalizes
+math-like code/fenced spans for PDF readability only; this fixes the PDF
+rendering problem without changing the production replay candidates.
+
+Root cause assessment for the PDF issue:
+
+- The PDF skill was correct to require Pandoc/XeLaTeX, font checks, text
+  extraction, and page preview QA.
+- My earlier execution was wrong because I placed the viewer artifact outside
+  the repo and accepted a PDF before page-level formula QA.
+- Round 4 exposed an additional replay-instruction problem: one clean C replay
+  produced only a freeform `rewritten_report.md` because the task did not
+  explicitly require the installed skill and stage package. The clean task now
+  prevents that failure mode.
+
+Prevention:
+
+- user-viewable artifacts for this repo must live under repo-local output
+  paths such as `exports/private/<task_key>/`, with Git ignore when private;
+- clean replay tasks must explicitly name the installed production skill and
+  required evidence files;
+- PDF delivery must include render log, embedded-font check, text extraction,
+  and at least one formula-heavy page preview before being reported complete.
 
 ## Version Decision
 
