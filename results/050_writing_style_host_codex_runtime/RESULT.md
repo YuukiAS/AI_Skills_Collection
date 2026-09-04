@@ -400,6 +400,27 @@ Prevention:
 - PDF delivery must include render log, embedded-font check, text extraction,
   and at least one formula-heavy page preview before being reported complete.
 
+## Round-4 Local Validation
+
+- `python3 -m unittest tests.test_paid_review_workflows` — PASS, 5 tests.
+- `python3 -m unittest tests.test_codex_marketplace` — PASS, 36 tests.
+- `python3 -m unittest tests.test_scientific_rewrite` — PASS, 33 tests.
+- `python3 -m unittest tests.test_scientific_rewrite tests.test_codex_marketplace tests.test_paid_review_workflows` — PASS, 74 tests.
+- `python3 -m unittest discover -s tests` — PASS, 206 tests.
+- `python3 scripts/build_codex_marketplace.py --validate` — PASS.
+- `python3 scripts/build_codex_marketplace.py --check` — PASS.
+- `python3 scripts/build_codex_marketplace.py --path-report` — PASS.
+- `python3 scripts/skills.py validate` — PASS, 150 active skills and 18 profiles.
+- `python3 scripts/skills.py audit --all` — PASS; profile/domain size advice only.
+
+Reviewed-handoff validator is not clean. It still reports the known 049/050
+old-template `PLAN.md` section mismatches, and also reports that the current
+050 mid-task style gate does not fit the generic terminal
+`AWAIT_HUMAN_DECISION` validator rule because there is no GPT review artifact
+or `FINAL_REPORT.md`. This is recorded as a validator/state-model limitation
+for the frozen 050 mid-task human style gate. No `FINAL_REPORT.md` or fake GPT
+review artifact was written merely to satisfy the generic terminal-state rule.
+
 ## Version Decision
 
 Repository bump decision: `NONE`.
