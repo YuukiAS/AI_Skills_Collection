@@ -332,6 +332,13 @@ a fresh child can otherwise produce a freeform rewrite without loading the
 installed skill. The task now explicitly requires the installed
 `writing-style:scientific-rewrite` skill and the Round-4 stage package.
 
+A regression test now covers the clean-replay input contract without changing
+the production helper after A/B/C: a valid replay stages exactly
+`CLEAN_PRODUCTION_REPLAY_TASK.md` plus one private source, runs ephemeral,
+disables memories and network, and rejects previous candidates, rejection
+analysis, semantic-role manifests, expected-vocabulary files, and related
+diagnostic metadata.
+
 ## Round-4 Clean Replay Evidence
 
 Private replay artifacts are under repo-local ignored paths:
@@ -343,6 +350,19 @@ Private replay artifacts are under repo-local ignored paths:
 Public replay evidence:
 
 - `results/050_writing_style_host_codex_runtime/round4_clean_replay_evidence.json`
+
+Baseline-A diagnosis:
+
+- classification: `CONTEXT_CONTAMINATION_CONFIRMED`;
+- the clean baseline replay from `bac6bf37ee22b52a2894c90a385dd6ab0e8f0292`
+  staged only task + source and produced a materially different SMOKE-A
+  candidate from Round 3;
+- the diagnostic baseline candidate did not reproduce the counted Round-3
+  rejected English abstraction patterns `estimand` / `scientific gap` /
+  `provenance` / `resource contract` / `state of the art`;
+- the baseline run remains diagnostic only because its old task did not require
+  Round-4 stage packets. The final user-facing candidates are the Round-4
+  A/B/C runs below.
 
 | Smoke | Source segment SHA-256 | Candidate SHA-256 | Units | Stages | Reader Plan | Assembly | Latin spans classified | Chinese pass | Exact |
 |---|---|---|---:|---:|---|---|---:|---|---|
@@ -404,9 +424,9 @@ Prevention:
 
 - `python3 -m unittest tests.test_paid_review_workflows` — PASS, 5 tests.
 - `python3 -m unittest tests.test_codex_marketplace` — PASS, 36 tests.
-- `python3 -m unittest tests.test_scientific_rewrite` — PASS, 33 tests.
-- `python3 -m unittest tests.test_scientific_rewrite tests.test_codex_marketplace tests.test_paid_review_workflows` — PASS, 74 tests.
-- `python3 -m unittest discover -s tests` — PASS, 206 tests.
+- `python3 -m unittest tests.test_scientific_rewrite` — PASS, 37 tests.
+- `python3 -m unittest tests.test_scientific_rewrite tests.test_codex_marketplace tests.test_paid_review_workflows` — PASS, 78 tests.
+- `python3 -m unittest discover -s tests` — PASS, 210 tests.
 - `python3 scripts/build_codex_marketplace.py --validate` — PASS.
 - `python3 scripts/build_codex_marketplace.py --check` — PASS.
 - `python3 scripts/build_codex_marketplace.py --path-report` — PASS.

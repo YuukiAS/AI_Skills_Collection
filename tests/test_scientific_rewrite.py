@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -11,6 +12,23 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SKILL_ROOT = REPO_ROOT / "skills/writing/core/scientific-rewrite"
 HELPER_PATH = SKILL_ROOT / "scripts/rewrite_support.py"
+CLEAN_REPLAY_DISALLOWED_INPUT_PATTERNS = [
+    r"PLAN\.md",
+    r"REQUEST\.md",
+    r"CURRENT\.json",
+    r"RESULT\.md",
+    r"STYLE_REJECT",
+    r"ROUND3_PROCESS_DIAGNOSIS",
+    r"ROUND4_CLEAN_REPLAY_AND_OBSERVABILITY_CONTRACT",
+    r"previous",
+    r"candidate",
+    r"manifest",
+    r"checkpoint-",
+    r"method-comparison-",
+    r"next-experiment",
+    r"expected",
+    r"vocabulary",
+]
 
 
 def load_helper():
@@ -233,6 +251,180 @@ def make_stage_package(helper, root: Path, source: str, *, decision: str = "PASS
 
 
 class ScientificRewriteTests(unittest.TestCase):
+    def validate_clean_plugin_replay_run(
+        self,
+        run: dict,
+        *,
+        expected_plugin: str,
+        expected_task_sha256: str,
+        expected_source_sha256: str,
+    ) -> dict:
+        if run.get("plugin") != expected_plugin:
+            raise RuntimeError("clean replay plugin id mismatch")
+        if run.get("status") != "completed" or run.get("exit_code") != 0:
+            raise RuntimeError("clean replay did not complete successfully")
+        if not run.get("plugin_check", {}).get("installed"):
+            raise RuntimeError("clean replay plugin was not installed")
+        child_argv = [str(item) for item in run.get("child_argv", [])]
+        if "--ephemeral" not in child_argv:
+            raise RuntimeError("clean replay child must be ephemeral")
+        if "--disable" not in child_argv or "memories" not in child_argv:
+            raise RuntimeError("clean replay child must disable memories")
+        joined_argv = "\n".join(child_argv)
+        if "sandbox_workspace_write.network_access=false" not in joined_argv:
+            raise RuntimeError("clean replay child must disable network access")
+        write_isolation = run.get("write_isolation", {})
+        if write_isolation.get("status") != "passed" or write_isolation.get("canary_changed") is not False:
+            raise RuntimeError("clean replay write isolation did not pass")
+
+        inputs = run.get("inputs")
+        if not isinstance(inputs, list) or len(inputs) != 2:
+            raise RuntimeError("clean replay must stage exactly TASK + SOURCE")
+        roles = [str(item.get("role")) for item in inputs]
+        if roles != ["task", "input"]:
+            raise RuntimeError("clean replay staged roles must be task,input")
+        shas = [str(item.get("sha256")) for item in inputs]
+        if shas != [expected_task_sha256, expected_source_sha256]:
+            raise RuntimeError("clean replay staged SHA256 values mismatch")
+
+        staged_names = [Path(str(item.get("staged_path", item.get("basename", "")))).name for item in inputs]
+        staged_names.extend(str(item.get("basename", "")) for item in inputs)
+        for name in staged_names:
+            for pattern in CLEAN_REPLAY_DISALLOWED_INPUT_PATTERNS:
+                if re.search(pattern, name, flags=re.IGNORECASE):
+                    raise RuntimeError(f"clean replay staged disallowed input metadata: {name}")
+        return {
+            "ok": True,
+            "plugin": expected_plugin,
+            "run_id": run.get("run_id"),
+            "staged_file_count": len(inputs),
+            "staged_roles": roles,
+            "staged_basenames": [str(item.get("basename")) for item in inputs],
+            "task_sha256": expected_task_sha256,
+            "source_sha256": expected_source_sha256,
+            "ephemeral": True,
+            "memories_disabled": True,
+            "network_disabled": True,
+            "write_isolation_status": write_isolation.get("status"),
+            "strict_read_isolation": run.get("filesystem_read_scope", {}).get("strict_read_isolation"),
+        }
+
+    def clean_replay_run(self, helper, **overrides):
+        task_sha = helper.sha256_text("clean task")
+        source_sha = helper.sha256_text("private source")
+        run = {
+            "plugin": "writing-style@yuukias-ai-skills",
+            "run_id": "20260904T000000Z-test",
+            "status": "completed",
+            "exit_code": 0,
+            "plugin_check": {"checked": True, "installed": True},
+            "child_argv": [
+                "codex",
+                "exec",
+                "-c",
+                "sandbox_workspace_write.network_access=false",
+                "--disable",
+                "memories",
+                "--ephemeral",
+            ],
+            "write_isolation": {"status": "passed", "canary_changed": False},
+            "filesystem_read_scope": {"strict_read_isolation": False},
+            "inputs": [
+                {
+                    "role": "task",
+                    "basename": "CLEAN_PRODUCTION_REPLAY_TASK.md",
+                    "sha256": task_sha,
+                    "staged_path": "/run/inputs/01_task_CLEAN_PRODUCTION_REPLAY_TASK.md",
+                },
+                {
+                    "role": "input",
+                    "basename": "050-clean-A-source.md",
+                    "sha256": source_sha,
+                    "staged_path": "/run/inputs/02_input_050-clean-A-source.md",
+                },
+            ],
+        }
+        run.update(overrides)
+        return run, task_sha, source_sha
+
+    def test_clean_plugin_replay_contract_accepts_only_task_and_source(self) -> None:
+        helper = load_helper()
+        run, task_sha, source_sha = self.clean_replay_run(helper)
+        result = self.validate_clean_plugin_replay_run(
+            run,
+            expected_plugin="writing-style@yuukias-ai-skills",
+            expected_task_sha256=task_sha,
+            expected_source_sha256=source_sha,
+        )
+        self.assertTrue(result["ok"])
+        self.assertEqual(result["staged_file_count"], 2)
+        self.assertEqual(result["staged_roles"], ["task", "input"])
+        self.assertTrue(result["ephemeral"])
+        self.assertTrue(result["memories_disabled"])
+        self.assertTrue(result["network_disabled"])
+
+    def test_clean_plugin_replay_contract_rejects_extra_or_role_metadata_inputs(self) -> None:
+        helper = load_helper()
+        run, task_sha, source_sha = self.clean_replay_run(helper)
+        run["inputs"].append(
+            {
+                "role": "metadata",
+                "basename": "checkpoint-method-comparison-manifest.json",
+                "sha256": helper.sha256_text("role metadata"),
+                "staged_path": "/run/inputs/03_checkpoint-method-comparison-manifest.json",
+            }
+        )
+        with self.assertRaisesRegex(RuntimeError, "exactly TASK \\+ SOURCE"):
+            self.validate_clean_plugin_replay_run(
+                run,
+                expected_plugin="writing-style@yuukias-ai-skills",
+                expected_task_sha256=task_sha,
+                expected_source_sha256=source_sha,
+            )
+        run, task_sha, source_sha = self.clean_replay_run(helper)
+        run["inputs"][1]["basename"] = "050-clean-A-source-next-experiment.md"
+        with self.assertRaisesRegex(RuntimeError, "disallowed input metadata"):
+            self.validate_clean_plugin_replay_run(
+                run,
+                expected_plugin="writing-style@yuukias-ai-skills",
+                expected_task_sha256=task_sha,
+                expected_source_sha256=source_sha,
+            )
+
+    def test_clean_plugin_replay_contract_rejects_previous_candidate_and_rejection_analysis(self) -> None:
+        helper = load_helper()
+        for basename in ["previous_candidate.md", "STYLE_REJECT_ANALYSIS_2026-09-04.md"]:
+            run, task_sha, source_sha = self.clean_replay_run(helper)
+            run["inputs"][1]["basename"] = basename
+            with self.assertRaisesRegex(RuntimeError, "disallowed input metadata"):
+                self.validate_clean_plugin_replay_run(
+                    run,
+                    expected_plugin="writing-style@yuukias-ai-skills",
+                    expected_task_sha256=task_sha,
+                    expected_source_sha256=source_sha,
+                )
+
+    def test_clean_plugin_replay_contract_requires_ephemeral_memoryless_networkless_child(self) -> None:
+        helper = load_helper()
+        run, task_sha, source_sha = self.clean_replay_run(helper)
+        run["child_argv"] = ["codex", "exec", "--ephemeral"]
+        with self.assertRaisesRegex(RuntimeError, "disable memories"):
+            self.validate_clean_plugin_replay_run(
+                run,
+                expected_plugin="writing-style@yuukias-ai-skills",
+                expected_task_sha256=task_sha,
+                expected_source_sha256=source_sha,
+            )
+        run, task_sha, source_sha = self.clean_replay_run(helper)
+        run["child_argv"] = ["codex", "exec", "--disable", "memories", "--ephemeral"]
+        with self.assertRaisesRegex(RuntimeError, "disable network"):
+            self.validate_clean_plugin_replay_run(
+                run,
+                expected_plugin="writing-style@yuukias-ai-skills",
+                expected_task_sha256=task_sha,
+                expected_source_sha256=source_sha,
+            )
+
     def test_skill_contract_routes_heavy_chinese_scientific_rewrite_to_host_codex(self) -> None:
         text = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
         self.assertIn("Meaning Card", text)
