@@ -1,0 +1,19 @@
+# 050 clean production replay task
+
+Use the installed production `writing-style` plugin on the explicit input file supplied to this replay.
+
+Rewrite the input as clear, natural Chinese scientific prose for a technically trained reader.
+
+Requirements:
+
+- Preserve all facts, numbers, formulas, citations, formal method/dataset/package names, comparison conditions, uncertainty, limitations, attribution, and conclusion strength.
+- Do not summarize away scientific content.
+- You may reorganize reader-facing headings, paragraphs, lists, tables, and explanation order when that makes the same scientific evidence easier to understand.
+- Explain technical ideas before relying on compressed notation or terminology.
+- Keep English only when it is genuinely needed for exact identity or useful technical recognition; otherwise use natural Chinese reasoning and transitions.
+- Important formulas should appear in their scientific context with enough explanation for the reader to understand what they express and why they matter.
+- Use lists or tables when parallel conditions or comparisons are substantially easier to understand that way; otherwise prefer normal connected prose.
+- Make clear what is established evidence, what is interpretation, what remains uncertain, and what is only a possible next method or experiment.
+- Optimize for minimum reader inference burden, not minimum character count.
+
+Write the final rewritten artifact under the replay output directory. Do not access repository diagnosis files, prior smoke outputs, prior rejection notes, or any other unstaged source. Do not print the private input in the final console response.
