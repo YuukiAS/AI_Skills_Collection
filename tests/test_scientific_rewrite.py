@@ -139,19 +139,59 @@ def make_stage_package(helper, root: Path, source: str, *, decision: str = "PASS
     write_json(stage_dir / "argument_units.json", {"schema": "SCIENTIFIC_REWRITE_ARGUMENT_UNITS_V1", "units": public_units})
     write_json(stage_dir / "selected_transformations.json", selected)
     write_json(stage_dir / "fidelity_ledger.json", {"schema": "SCIENTIFIC_REWRITE_FIDELITY_LEDGER_V1", "literal_invariants": all_literals})
+    (stage_dir / "semantic_audits").mkdir(exist_ok=True)
+    for audit in unit_audits:
+        write_json(
+            stage_dir / "semantic_audits" / f"{audit['unit_id']}.json",
+            {
+                "schema": "SCIENTIFIC_REWRITE_UNIT_SEMANTIC_AUDIT_V1",
+                "unit_id": audit["unit_id"],
+                "decision": audit["decision"],
+                "candidate_unit_sha256": audit["candidate_unit_sha256"],
+                "findings": audit["findings"],
+            },
+        )
     write_json(
         stage_dir / "self_audit.json",
         {
             "schema": "SCIENTIFIC_REWRITE_HOST_SELF_AUDIT_V1",
             "decision": decision,
             "final_candidate_sha256": helper.sha256_text(final_candidate),
-            "global_assembly": {
-                "reader_order_unit_ids": [unit.unit_id for unit in units],
-                "strategy": "按读者问题组织；本 fixture 不需要改变源顺序。",
-            },
             "unit_audits": unit_audits,
         },
     )
+    write_json(
+        stage_dir / "final_assembly.json",
+        {
+            "schema": "SCIENTIFIC_REWRITE_FINAL_ASSEMBLY_V1",
+            "assembled_candidate_sha256": helper.sha256_text(final_candidate),
+            "final_candidate_sha256": helper.sha256_text(final_candidate),
+            "source_unit_order": [unit.unit_id for unit in units],
+            "planned_reader_order": [unit.unit_id for unit in units],
+            "reader_order_unit_ids": [unit.unit_id for unit in units],
+            "reader_plan_consumed": True,
+            "strategy": "按读者问题组织；本 fixture 不需要改变源顺序。",
+            "information_shape_decisions": [
+                {
+                    "unit_id": unit.unit_id,
+                    "shape": "prose",
+                    "effect_on_final": "保持为连贯解释。",
+                }
+                for unit in units
+            ],
+        },
+    )
+    (stage_dir / "assembled_candidate_before_chinese_pass.md").write_text(final_candidate, encoding="utf-8")
+    latin_inventory = helper.enumerate_latin_spans(final_candidate)
+    write_json(stage_dir / "latin_span_inventory.json", latin_inventory)
+    exact_classifications = [
+        {
+            "occurrence_id": span["occurrence_id"],
+            "reason": "测试 fixture 将所有剩余英文作为具名技术身份处理。",
+            "identity_authority": "unit test fixture identity ledger",
+        }
+        for span in latin_inventory["spans"]
+    ]
     write_json(
         stage_dir / "chinese_reader_pass.json",
         {
@@ -169,13 +209,23 @@ def make_stage_package(helper, root: Path, source: str, *, decision: str = "PASS
                 "not_compression_metric": True,
             },
             "english_span_classification": {
-                "exact_identity": ["FedFisher", "FedLPA"],
+                "exact_identity": exact_classifications,
                 "useful_recognition": [],
-                "ordinary_reasoning": ["reader effort"],
+                "ordinary_reasoning": [],
             },
             "information_shape_check": {"decision": decision},
             "formula_context_check": {"decision": decision},
             "epistemic_boundary_check": {"decision": decision},
+        },
+    )
+    write_json(
+        stage_dir / "post_chinese_self_audit.json",
+        {
+            "schema": "SCIENTIFIC_REWRITE_POST_CHINESE_SELF_AUDIT_V1",
+            "final_candidate_sha256": helper.sha256_text(final_candidate),
+            "exact_verification_decision": decision,
+            "semantic_verification_decision": decision,
+            "reader_effort_decision": decision,
         },
     )
     (stage_dir / "final_candidate.md").write_text(final_candidate, encoding="utf-8")
@@ -459,9 +509,9 @@ class ScientificRewriteTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             stage_dir = make_stage_package(helper, root, source)
-            self_audit = json.loads((stage_dir / "self_audit.json").read_text(encoding="utf-8"))
-            self_audit["global_assembly"]["reader_order_unit_ids"] = list(reversed(self_audit["global_assembly"]["reader_order_unit_ids"]))
-            write_json(stage_dir / "self_audit.json", self_audit)
+            final_assembly = json.loads((stage_dir / "final_assembly.json").read_text(encoding="utf-8"))
+            final_assembly["reader_order_unit_ids"] = list(reversed(final_assembly["reader_order_unit_ids"]))
+            write_json(stage_dir / "final_assembly.json", final_assembly)
             with self.assertRaisesRegex(RuntimeError, "reader_plan bundle order"):
                 helper.validate_host_stage_package(source, stage_dir)
 
@@ -483,6 +533,82 @@ class ScientificRewriteTests(unittest.TestCase):
             chinese_pass["reader_effort"]["not_compression_metric"] = False
             write_json(stage_dir / "chinese_reader_pass.json", chinese_pass)
             with self.assertRaisesRegex(RuntimeError, "compression"):
+                helper.validate_host_stage_package(source, stage_dir)
+
+    def test_latin_span_inventory_ignores_protected_formula_code_paths_and_citations(self) -> None:
+        helper = load_helper()
+        text = (
+            "正文保留 FedFisher 和 reader effort。`code_token` 不算，"
+            "$L = pooled gap$ 不算，/tmp/run/output.txt 不算，[12] 不算。"
+        )
+        inventory = helper.enumerate_latin_spans(text)
+        spans = [item["text"] for item in inventory["spans"]]
+        self.assertIn("FedFisher", spans)
+        self.assertIn("reader effort", spans)
+        self.assertNotIn("code_token", spans)
+        self.assertNotIn("pooled gap", spans)
+        self.assertNotIn("tmp", spans)
+
+    def test_chinese_reader_pass_requires_complete_latin_occurrence_coverage(self) -> None:
+        helper = load_helper()
+        source = "FedFisher 和 FedLPA 是正式方法名。"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = make_stage_package(helper, root, source)
+            chinese_pass = json.loads((stage_dir / "chinese_reader_pass.json").read_text(encoding="utf-8"))
+            chinese_pass["english_span_classification"]["exact_identity"].pop()
+            write_json(stage_dir / "chinese_reader_pass.json", chinese_pass)
+            with self.assertRaisesRegex(RuntimeError, "omitted Latin occurrences"):
+                helper.validate_host_stage_package(source, stage_dir)
+
+    def test_chinese_reader_pass_rejects_unresolved_ordinary_reasoning(self) -> None:
+        helper = load_helper()
+        source = "reader effort 是普通解释语言，不应残留。"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = make_stage_package(helper, root, source)
+            chinese_pass = json.loads((stage_dir / "chinese_reader_pass.json").read_text(encoding="utf-8"))
+            first = chinese_pass["english_span_classification"]["exact_identity"].pop(0)
+            chinese_pass["english_span_classification"]["ordinary_reasoning"].append(
+                {"occurrence_id": first["occurrence_id"], "reason": "普通组织语言仍未中文化。"}
+            )
+            write_json(stage_dir / "chinese_reader_pass.json", chinese_pass)
+            with self.assertRaisesRegex(RuntimeError, "ordinary_reasoning"):
+                helper.validate_host_stage_package(source, stage_dir)
+
+    def test_exact_identity_requires_identity_authority_when_not_literal_protected(self) -> None:
+        helper = load_helper()
+        source = "reader effort 是普通解释语言。"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = make_stage_package(helper, root, source)
+            chinese_pass = json.loads((stage_dir / "chinese_reader_pass.json").read_text(encoding="utf-8"))
+            chinese_pass["english_span_classification"]["exact_identity"][0].pop("identity_authority", None)
+            write_json(stage_dir / "chinese_reader_pass.json", chinese_pass)
+            with self.assertRaisesRegex(RuntimeError, "identity authority"):
+                helper.validate_host_stage_package(source, stage_dir)
+
+    def test_final_candidate_cannot_add_unclassified_latin_after_chinese_pass(self) -> None:
+        helper = load_helper()
+        source = "FedFisher 是正式方法名。"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = make_stage_package(helper, root, source)
+            final_candidate = (stage_dir / "final_candidate.md").read_text(encoding="utf-8") + "\n\nextra workflow language"
+            (stage_dir / "final_candidate.md").write_text(final_candidate, encoding="utf-8")
+            self_audit = json.loads((stage_dir / "self_audit.json").read_text(encoding="utf-8"))
+            self_audit["final_candidate_sha256"] = helper.sha256_text(final_candidate)
+            write_json(stage_dir / "self_audit.json", self_audit)
+            final_assembly = json.loads((stage_dir / "final_assembly.json").read_text(encoding="utf-8"))
+            final_assembly["final_candidate_sha256"] = helper.sha256_text(final_candidate)
+            write_json(stage_dir / "final_assembly.json", final_assembly)
+            post = json.loads((stage_dir / "post_chinese_self_audit.json").read_text(encoding="utf-8"))
+            post["final_candidate_sha256"] = helper.sha256_text(final_candidate)
+            write_json(stage_dir / "post_chinese_self_audit.json", post)
+            chinese_pass = json.loads((stage_dir / "chinese_reader_pass.json").read_text(encoding="utf-8"))
+            chinese_pass["candidate_sha256"] = helper.sha256_text(final_candidate)
+            write_json(stage_dir / "chinese_reader_pass.json", chinese_pass)
+            with self.assertRaisesRegex(RuntimeError, "unclassified Latin spans"):
                 helper.validate_host_stage_package(source, stage_dir)
 
     def test_host_stage_package_rejects_decorative_or_unresolved_files(self) -> None:
@@ -534,9 +660,11 @@ class ScientificRewriteTests(unittest.TestCase):
                 },
             ]
             write_json(stage_dir / "reader_plan.json", reader_plan)
-            self_audit = json.loads((stage_dir / "self_audit.json").read_text(encoding="utf-8"))
-            self_audit["global_assembly"]["reader_order_unit_ids"] = ["unit-002", "unit-001"]
-            write_json(stage_dir / "self_audit.json", self_audit)
+            final_assembly = json.loads((stage_dir / "final_assembly.json").read_text(encoding="utf-8"))
+            final_assembly["source_unit_order"] = ["unit-001", "unit-002"]
+            final_assembly["planned_reader_order"] = ["unit-002", "unit-001"]
+            final_assembly["reader_order_unit_ids"] = ["unit-002", "unit-001"]
+            write_json(stage_dir / "final_assembly.json", final_assembly)
             result = helper.validate_host_stage_package(source, stage_dir)
         self.assertTrue(result["receipt"]["argument_coverage"]["ok"])
         self.assertEqual(result["receipt"]["reader_plan"]["non_contiguous_bundle_count"], 1)

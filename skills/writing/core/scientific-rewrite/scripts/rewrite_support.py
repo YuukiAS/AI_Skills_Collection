@@ -54,6 +54,7 @@ ENGLISH_SPAN_CLASSES = {
     "useful_recognition",
     "ordinary_reasoning",
 }
+LATIN_SPAN_INVENTORY_SCHEMA = "SCIENTIFIC_REWRITE_LATIN_SPAN_INVENTORY_V1"
 RAW_LITERAL_DUMP_PATTERNS = [
     r"保留.{0,6}精确.{0,4}项",
     r"缺失.{0,4}精确.{0,4}项",
@@ -344,6 +345,108 @@ def reader_facing_core(candidate: str) -> str:
     return "\n".join(kept)
 
 
+def _protected_text_mask(text: str) -> list[bool]:
+    mask = [False] * len(text)
+    patterns = [
+        r"```[\s\S]*?```",
+        r"`[^`\n]+`",
+        r"\$\$[\s\S]*?\$\$",
+        r"\$[^$\n]+\$",
+        r"\\\[[\s\S]*?\\\]",
+        r"\\\([\s\S]*?\\\)",
+        r"\[[0-9,\-\s]+\]",
+        r"https?://[^\s，。；,]+",
+        r"(?<!\w)/(?:[^\s，。；,]+)",
+    ]
+    for pattern in patterns:
+        for match in re.finditer(pattern, text):
+            for index in range(match.start(), min(match.end(), len(mask))):
+                mask[index] = True
+    return mask
+
+
+def _is_machine_latin_span(value: str) -> bool:
+    compact = value.replace(" ", "")
+    if len(compact) >= 16 and re.fullmatch(r"[0-9a-fA-F]+", compact):
+        return True
+    if re.fullmatch(r"[A-Z0-9_]+", compact) and len(compact) >= 12:
+        return True
+    return False
+
+
+def enumerate_latin_spans(candidate: str) -> dict[str, Any]:
+    """Enumerate visible Latin-script spans outside code, math, paths, and citations."""
+    mask = _protected_text_mask(candidate)
+    spans: list[dict[str, Any]] = []
+    pattern = re.compile(r"[A-Za-z][A-Za-z0-9_.-]*(?:[ \t]+[A-Za-z][A-Za-z0-9_.-]*)*")
+    for match in pattern.finditer(candidate):
+        start, end = match.span()
+        if any(mask[start:end]):
+            continue
+        text = match.group(0).strip()
+        if not text or _is_machine_latin_span(text):
+            continue
+        span_sha = sha256_text(text)
+        occurrence_seed = f"{start}:{end}:{text}"
+        spans.append(
+            {
+                "occurrence_id": f"latin-{len(spans) + 1:04d}-{sha256_text(occurrence_seed)[:12]}",
+                "start": start,
+                "end": end,
+                "text": text,
+                "text_sha256": span_sha,
+            }
+        )
+    return {
+        "schema": LATIN_SPAN_INVENTORY_SCHEMA,
+        "candidate_sha256": sha256_text(candidate),
+        "span_count": len(spans),
+        "spans": spans,
+    }
+
+
+def validate_latin_span_inventory(inventory: dict[str, Any], candidate: str) -> dict[str, Any]:
+    expected = enumerate_latin_spans(candidate)
+    if inventory.get("schema") != LATIN_SPAN_INVENTORY_SCHEMA:
+        raise RuntimeError("latin_span_inventory schema mismatch")
+    if inventory.get("candidate_sha256") != expected["candidate_sha256"]:
+        raise RuntimeError("latin_span_inventory candidate_sha256 mismatch")
+    spans = inventory.get("spans")
+    if not isinstance(spans, list):
+        raise RuntimeError("latin_span_inventory spans must be a list")
+    projected = [
+        {
+            "occurrence_id": item.get("occurrence_id"),
+            "start": item.get("start"),
+            "end": item.get("end"),
+            "text": item.get("text"),
+            "text_sha256": item.get("text_sha256"),
+        }
+        for item in spans
+    ]
+    expected_projected = [
+        {
+            "occurrence_id": item["occurrence_id"],
+            "start": item["start"],
+            "end": item["end"],
+            "text": item["text"],
+            "text_sha256": item["text_sha256"],
+        }
+        for item in expected["spans"]
+    ]
+    if projected != expected_projected:
+        raise RuntimeError("latin_span_inventory does not match mechanically enumerated spans")
+    if inventory.get("span_count") != len(spans):
+        raise RuntimeError("latin_span_inventory span_count mismatch")
+    if len({item["occurrence_id"] for item in spans}) != len(spans):
+        raise RuntimeError("latin_span_inventory occurrence ids must be unique")
+    return {
+        "ok": True,
+        "span_count": len(spans),
+        "text_sha256s": sorted({item["text_sha256"] for item in spans}),
+    }
+
+
 def reader_review_packet(candidate: str, audience: str) -> dict[str, Any]:
     return {
         "schema": "SCIENTIFIC_REWRITE_CANDIDATE_ONLY_READER_PACKET_V1",
@@ -584,25 +687,44 @@ def validate_reader_plan(reader_plan: dict[str, Any], document_map_sha256: str, 
     }
 
 
-def validate_global_assembly(self_audit: dict[str, Any], unit_ids: set[str]) -> dict[str, Any]:
-    assembly = self_audit.get("global_assembly")
+def validate_global_assembly(assembly: dict[str, Any], unit_ids: set[str]) -> dict[str, Any]:
     if not isinstance(assembly, dict):
-        raise RuntimeError("self_audit missing global_assembly evidence")
+        raise RuntimeError("missing final_assembly evidence")
     reader_order = [str(item) for item in assembly.get("reader_order_unit_ids", [])]
     if set(reader_order) != unit_ids or len(reader_order) != len(unit_ids):
         raise RuntimeError("global_assembly reader_order_unit_ids must cover every unit exactly once")
     strategy = str(assembly.get("strategy", "")).strip()
     if not strategy:
         raise RuntimeError("global_assembly missing strategy")
+    if assembly.get("reader_plan_consumed") is not True:
+        raise RuntimeError("global_assembly must consume the Reader Plan")
+    source_order = [str(item) for item in assembly.get("source_unit_order", [])]
+    planned_order = [str(item) for item in assembly.get("planned_reader_order", [])]
+    if set(source_order) != unit_ids or len(source_order) != len(unit_ids):
+        raise RuntimeError("global_assembly source_unit_order must cover every unit exactly once")
+    if set(planned_order) != unit_ids or len(planned_order) != len(unit_ids):
+        raise RuntimeError("global_assembly planned_reader_order must cover every unit exactly once")
+    if not isinstance(assembly.get("information_shape_decisions"), list) or not assembly["information_shape_decisions"]:
+        raise RuntimeError("global_assembly missing information_shape_decisions")
     return {
         "ok": True,
         "reader_order_unit_ids": reader_order,
-        "reordered_from_source_order": reader_order != sorted(unit_ids),
+        "source_unit_order": source_order,
+        "planned_reader_order": planned_order,
+        "reordered_from_source_order": reader_order != source_order,
         "strategy": strategy,
+        "reader_plan_consumed": True,
+        "information_shape_decision_count": len(assembly["information_shape_decisions"]),
     }
 
 
-def validate_chinese_reader_pass(chinese_pass: dict[str, Any], final_candidate: str) -> dict[str, Any]:
+def validate_chinese_reader_pass(
+    chinese_pass: dict[str, Any],
+    final_candidate: str,
+    *,
+    latin_inventory: dict[str, Any],
+    literal_invariants: list[dict[str, Any]],
+) -> dict[str, Any]:
     if chinese_pass.get("candidate_sha256") != sha256_text(final_candidate):
         raise RuntimeError("chinese_reader_pass candidate_sha256 mismatch")
     if chinese_pass.get("source_visible") is not False:
@@ -630,15 +752,58 @@ def validate_chinese_reader_pass(chinese_pass: dict[str, Any], final_candidate: 
     missing_classes = sorted(ENGLISH_SPAN_CLASSES - set(english))
     if missing_classes:
         raise RuntimeError("chinese_reader_pass english classification missing classes: " + ", ".join(missing_classes))
+    spans = latin_inventory.get("spans", [])
+    inventory_by_id = {str(item.get("occurrence_id")): item for item in spans}
+    covered: dict[str, str] = {}
+    exact_literal_shas = {str(item.get("sha256")) for item in literal_invariants}
+    accepted_text_shas: set[str] = set()
     for key in ENGLISH_SPAN_CLASSES:
         if not isinstance(english.get(key), list):
             raise RuntimeError(f"chinese_reader_pass english classification must use lists: {key}")
+        for entry in english[key]:
+            if not isinstance(entry, dict):
+                raise RuntimeError("chinese_reader_pass english classifications must use occurrence objects")
+            occurrence_id = str(entry.get("occurrence_id", "")).strip()
+            if occurrence_id not in inventory_by_id:
+                raise RuntimeError(f"chinese_reader_pass references unknown Latin occurrence: {occurrence_id}")
+            if occurrence_id in covered:
+                raise RuntimeError(f"chinese_reader_pass duplicates Latin occurrence: {occurrence_id}")
+            reason = str(entry.get("reason", "")).strip()
+            if not reason:
+                raise RuntimeError(f"chinese_reader_pass missing reason for Latin occurrence: {occurrence_id}")
+            span = inventory_by_id[occurrence_id]
+            if key == "exact_identity":
+                identity_authority = str(entry.get("identity_authority", "")).strip()
+                if not identity_authority and span.get("text_sha256") not in exact_literal_shas:
+                    raise RuntimeError(f"exact_identity lacks identity authority: {occurrence_id}")
+                accepted_text_shas.add(str(span.get("text_sha256")))
+            elif key == "useful_recognition":
+                chinese_context = str(entry.get("chinese_context", "")).strip()
+                if not chinese_context:
+                    raise RuntimeError(f"useful_recognition lacks Chinese context: {occurrence_id}")
+                accepted_text_shas.add(str(span.get("text_sha256")))
+            else:
+                raise RuntimeError(f"ordinary_reasoning Latin occurrence remains unresolved: {occurrence_id}")
+            covered[occurrence_id] = key
+    missing_coverage = sorted(set(inventory_by_id) - set(covered))
+    if missing_coverage:
+        raise RuntimeError("chinese_reader_pass omitted Latin occurrences: " + ", ".join(missing_coverage))
+    final_inventory = enumerate_latin_spans(final_candidate)
+    unknown_final = [
+        item["occurrence_id"]
+        for item in final_inventory["spans"]
+        if item["text_sha256"] not in accepted_text_shas
+    ]
+    if unknown_final:
+        raise RuntimeError("final candidate has unclassified Latin spans after Chinese reader pass: " + ", ".join(unknown_final))
     return {
         "ok": True,
         "candidate_only": True,
         "decision": "PASS",
         "reader_effort_decision": "PASS",
         "english_span_policy_classes": sorted(ENGLISH_SPAN_CLASSES),
+        "classified_latin_occurrence_count": len(covered),
+        "final_latin_span_count": final_inventory["span_count"],
     }
 
 
@@ -650,8 +815,12 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
         "fidelity_ledger.json",
         "selected_transformations.json",
         "self_audit.json",
+        "final_assembly.json",
+        "assembled_candidate_before_chinese_pass.md",
+        "latin_span_inventory.json",
         "chinese_reader_pass.json",
         "final_candidate.md",
+        "post_chinese_self_audit.json",
     ]
     missing_files = [name for name in required_files if not (stage_dir / name).is_file()]
     if missing_files:
@@ -662,7 +831,11 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
     argument_units_path = stage_dir / "argument_units.json"
     selected_transformations_path = stage_dir / "selected_transformations.json"
     self_audit_path = stage_dir / "self_audit.json"
+    final_assembly_path = stage_dir / "final_assembly.json"
+    assembled_before_path = stage_dir / "assembled_candidate_before_chinese_pass.md"
+    latin_inventory_path = stage_dir / "latin_span_inventory.json"
     chinese_reader_pass_path = stage_dir / "chinese_reader_pass.json"
+    post_chinese_self_audit_path = stage_dir / "post_chinese_self_audit.json"
     final_candidate_path = stage_dir / "final_candidate.md"
 
     document_map = load_json(document_map_path)
@@ -671,7 +844,11 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
     fidelity_ledger = load_json(stage_dir / "fidelity_ledger.json")
     selected_transformations = load_json(stage_dir / "selected_transformations.json")
     self_audit = load_json(stage_dir / "self_audit.json")
+    final_assembly = load_json(final_assembly_path)
+    latin_span_inventory = load_json(latin_inventory_path)
     chinese_reader_pass = load_json(chinese_reader_pass_path)
+    post_chinese_self_audit = load_json(post_chinese_self_audit_path)
+    assembled_before_chinese = assembled_before_path.read_text(encoding="utf-8")
     final_candidate = final_candidate_path.read_text(encoding="utf-8")
     if candidate_path is not None and final_candidate != candidate_path.read_text(encoding="utf-8"):
         raise RuntimeError("candidate path does not match stage final_candidate.md")
@@ -688,6 +865,7 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
     audit_units = {str(item.get("unit_id")): item for item in self_audit.get("unit_audits", [])}
     document_map_sha = sha256_bytes(document_map_path.read_bytes())
     reader_plan_validation = validate_reader_plan(reader_plan, document_map_sha, units)
+    latin_inventory_validation = validate_latin_span_inventory(latin_span_inventory, assembled_before_chinese)
     candidate_unit_shas: dict[str, str] = {}
     mechanical_units = {unit.unit_id: unit for unit in split_markdown_units(source)}
     for unit in units:
@@ -703,6 +881,9 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
             raise RuntimeError(f"missing meaning card for {unit_id}")
         if not candidate_unit_path.is_file():
             raise RuntimeError(f"missing candidate unit for {unit_id}")
+        semantic_audit_path = stage_dir / "semantic_audits" / f"{unit_id}.json"
+        if not semantic_audit_path.is_file():
+            raise RuntimeError(f"missing semantic audit for {unit_id}")
         card = load_json(card_path)
         if card.get("unit_id") != unit_id:
             raise RuntimeError(f"meaning card unit_id mismatch for {unit_id}")
@@ -715,11 +896,18 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
         if unit_id not in selected_by_unit:
             raise RuntimeError(f"selected transformations missing unit: {unit_id}")
         candidate_unit_shas[unit_id] = sha256_bytes(candidate_unit_path.read_bytes())
+        semantic_audit = load_json(semantic_audit_path)
         audit = audit_units.get(unit_id)
         if not audit:
             raise RuntimeError(f"self_audit missing unit audit: {unit_id}")
         if audit.get("candidate_unit_sha256") != candidate_unit_shas[unit_id]:
             raise RuntimeError(f"self_audit candidate hash mismatch for {unit_id}")
+        if semantic_audit.get("candidate_unit_sha256") != candidate_unit_shas[unit_id]:
+            raise RuntimeError(f"semantic audit candidate hash mismatch for {unit_id}")
+        if semantic_audit.get("unit_id") != unit_id:
+            raise RuntimeError(f"semantic audit unit_id mismatch for {unit_id}")
+        if str(semantic_audit.get("decision", "")).upper() != "PASS":
+            raise RuntimeError(f"host semantic audit file unresolved for {unit_id}")
         if str(audit.get("decision", "")).upper() != "PASS":
             raise RuntimeError(f"host semantic self-audit unresolved for {unit_id}")
     if str(self_audit.get("decision", "")).upper() not in {"PASS", "REVISE"}:
@@ -728,7 +916,11 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
         raise RuntimeError("host semantic self-audit has unresolved findings")
     if self_audit.get("final_candidate_sha256") != sha256_text(final_candidate):
         raise RuntimeError("self_audit final_candidate_sha256 mismatch")
-    global_assembly = validate_global_assembly(self_audit, unit_ids)
+    if final_assembly.get("assembled_candidate_sha256") != sha256_text(assembled_before_chinese):
+        raise RuntimeError("final_assembly assembled_candidate_sha256 mismatch")
+    if final_assembly.get("final_candidate_sha256") != sha256_text(final_candidate):
+        raise RuntimeError("final_assembly final_candidate_sha256 mismatch")
+    global_assembly = validate_global_assembly(final_assembly, unit_ids)
     plan_order = [
         str(unit_id)
         for bundle_id in reader_plan_validation["bundle_order"]
@@ -738,10 +930,33 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
     ]
     if global_assembly["reader_order_unit_ids"] != plan_order:
         raise RuntimeError("global_assembly reader order must follow reader_plan bundle order")
-    chinese_reader = validate_chinese_reader_pass(chinese_reader_pass, final_candidate)
+    chinese_reader = validate_chinese_reader_pass(
+        chinese_reader_pass,
+        final_candidate,
+        latin_inventory=latin_span_inventory,
+        literal_invariants=fidelity_ledger.get("literal_invariants") or [],
+    )
+
+    if post_chinese_self_audit.get("final_candidate_sha256") != sha256_text(final_candidate):
+        raise RuntimeError("post_chinese_self_audit final_candidate_sha256 mismatch")
+    for key in ["exact_verification_decision", "semantic_verification_decision", "reader_effort_decision"]:
+        if str(post_chinese_self_audit.get(key, "")).upper() != "PASS":
+            raise RuntimeError(f"post_chinese_self_audit unresolved: {key}")
 
     exact = verify_exact(source, final_candidate, fidelity_ledger.get("literal_invariants"), reader_core=reader_facing_core(final_candidate))
-    stage_records = _stage_records(stage_dir, document_map, reader_plan, units, selected_transformations, self_audit, chinese_reader_pass, final_candidate)
+    stage_records = _stage_records(
+        stage_dir,
+        document_map,
+        reader_plan,
+        units,
+        selected_transformations,
+        self_audit,
+        final_assembly,
+        latin_span_inventory,
+        chinese_reader_pass,
+        post_chinese_self_audit,
+        final_candidate,
+    )
     receipt = {
         "schema": RUNTIME_SCHEMA,
         "runtime": RUNTIME_NAME,
@@ -758,6 +973,11 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
         "argument_coverage": argument_coverage,
         "reader_plan": reader_plan_validation,
         "global_assembly": global_assembly,
+        "latin_span_inventory": {
+            "ok": latin_inventory_validation["ok"],
+            "span_count": latin_inventory_validation["span_count"],
+            "inventory_sha256": sha256_bytes(latin_inventory_path.read_bytes()),
+        },
         "chinese_reader_pass": chinese_reader,
         "stage_records": stage_records,
         "exact_verification": exact,
@@ -778,7 +998,10 @@ def _stage_records(
     units: list[dict[str, Any]],
     selected_transformations: dict[str, Any],
     self_audit: dict[str, Any],
+    final_assembly: dict[str, Any],
+    latin_span_inventory: dict[str, Any],
     chinese_reader_pass: dict[str, Any],
+    post_chinese_self_audit: dict[str, Any],
     final_candidate: str,
 ) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
@@ -790,9 +1013,13 @@ def _stage_records(
         records.append(_record(f"{unit_id}-meaning-card", stage_dir / "meaning_cards" / f"{unit_id}.json", [f"{unit_id}-example-selection", f"{unit_id}-writer"]))
         records.append(_record(f"{unit_id}-example-selection", stage_dir / "selected_transformations.json", [f"{unit_id}-writer"], unit_id=unit_id))
         records.append(_record(f"{unit_id}-writer", stage_dir / "candidate_units" / f"{unit_id}.md", [f"{unit_id}-semantic-self-audit"], unit_id=unit_id))
-        records.append(_record(f"{unit_id}-semantic-self-audit", stage_dir / "self_audit.json", ["final-assembly"], unit_id=unit_id))
-    records.append(_record("final-assembly", stage_dir / "self_audit.json", ["chinese-reader-pass"]))
-    records.append(_record("chinese-reader-pass", stage_dir / "chinese_reader_pass.json", ["final-candidate"]))
+        records.append(_record(f"{unit_id}-semantic-self-audit", stage_dir / "semantic_audits" / f"{unit_id}.json", ["self-audit"], unit_id=unit_id))
+    records.append(_record("self-audit", stage_dir / "self_audit.json", ["final-assembly"]))
+    records.append(_record("final-assembly", stage_dir / "final_assembly.json", ["assembled-before-chinese-pass", "chinese-reader-pass"]))
+    records.append(_record("assembled-before-chinese-pass", stage_dir / "assembled_candidate_before_chinese_pass.md", ["latin-span-inventory", "chinese-reader-pass"]))
+    records.append(_record("latin-span-inventory", stage_dir / "latin_span_inventory.json", ["chinese-reader-pass"]))
+    records.append(_record("chinese-reader-pass", stage_dir / "chinese_reader_pass.json", ["final-candidate", "post-chinese-self-audit"]))
+    records.append(_record("post-chinese-self-audit", stage_dir / "post_chinese_self_audit.json", ["final-candidate"]))
     records.append(_record("final-candidate", stage_dir / "final_candidate.md", [], terminal=True))
     return records
 
