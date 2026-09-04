@@ -185,13 +185,21 @@ class ScientificRewriteTests(unittest.TestCase):
 
     def test_exact_verifier_detects_literal_invariant_drift(self) -> None:
         helper = load_helper()
-        source = "方法 `run_eval.py` 在 2026-08-28 使用 3 个 seed，Dice=0.81，见 [12] 和 /tmp/run/config.json。"
-        ok_candidate = "在 2026-08-28，方法 `run_eval.py` 使用 3 个 seed；Dice=0.81，配置见 /tmp/run/config.json，引用仍为 [12]。"
+        source = (
+            "方法 `run_eval.py` 在 2026-08-28 使用 3 个 seed，Dice=0.81，见 [12]、"
+            "/tmp/run/config.json 和 Dataset501_CAREMyoPS/splits_final.json；"
+            "FedFisher 保留 𝜃̂ 𝐹𝐹 ≈ arg min ∑。"
+        )
+        ok_candidate = (
+            "在 2026-08-28，方法 `run_eval.py` 使用 3 个 seed；Dice=0.81，配置见 "
+            "/tmp/run/config.json，划分见 Dataset501_CAREMyoPS/splits_final.json，引用仍为 [12]。"
+            "FedFisher 的公式标识仍是 𝜃̂ 𝐹𝐹 ≈ arg min ∑。"
+        )
         bad_candidate = "该方法使用多个 seed；Dice 约为 0.8，引用见文末。"
         self.assertTrue(helper.verify_exact(source, ok_candidate)["ok"])
         bad_report = helper.verify_exact(source, bad_candidate)
         self.assertFalse(bad_report["ok"], bad_report)
-        self.assertGreaterEqual(len(bad_report["missing"]), 4)
+        self.assertGreaterEqual(len(bad_report["missing"]), 7)
 
     def test_prepare_splits_markdown_by_sections_and_keeps_invariants(self) -> None:
         helper = load_helper()

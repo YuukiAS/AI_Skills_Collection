@@ -132,10 +132,13 @@ def extract_literal_invariants(text: str) -> list[dict[str, str]]:
     patterns = [
         r"`[^`\n]+`",
         r"(?:^|\s)(/[^\s，。；；,]+)",
+        r"(?:^|\s)([A-Za-z0-9_.-]+/[A-Za-z0-9_./-]+)",
+        r"(\$\$.*?\$\$|\$[^$\n]+\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\))",
+        r"([𝑅𝑈𝑀𝜃𝑘𝑗𝑧𝑤𝐹𝐻𝐿ℓ𝑔𝑝𝑦𝑥𝐷𝛥𝑖∇⊤∣∑∫∥][^\n。；]*[=≈≤≥≪∑∫∥][^\n。；]*)",
         r"\[[0-9,\-\s]+\]",
         r"\b\d{4}-\d{2}-\d{2}\b",
         r"\b\d+(?:\.\d+)?%?\b",
-        r"\b(?:CARE|ODAL|FedFisher|FedLPA|FedAvg|Fisher|Laplace|GO|STOP|Dice|theta_0|pooled|local-only)\b",
+        r"\b(?:CARE|ODAL|FedFisher|FedLPA|FedBEns|FedAvg|FedProx|SCAFFOLD|FedDyn|FedAdam|FedBN|FedFMS|FLAP-SAM|YOCO|TMI-2025 KD|FuseFL|FAFI|FedLMG|FALCON|FedRFE|Fisher|Laplace|GO|STOP|Dice|ACDC|M&Ms|nnU-Net|AdamW|theta_0|pooled|local-only)\b",
         r"\b[A-Za-z][A-Za-z0-9_]*=[0-9.]+\b",
     ]
     seen: set[str] = set()
