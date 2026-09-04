@@ -15,7 +15,22 @@
 
 旧聊天、旧计划、旧 benchmark PASS 不能覆盖当前 repo。
 
-## 1.1 README 永远写给人看
+## 1.1 用户可查看产物必须放在 repo 内
+
+凡是本仓库任务生成、合并、渲染或交给用户查看的 artifact，例如
+PDF、Markdown、图片预览、HTML 报告、deck render、审阅包或 smoke 输出，
+默认必须放在本 repository 目录树内。
+
+规则：
+
+- `/tmp`、`.tmp`、外部 cache、plugin-replay state 和同级 scratch 目录只用于中间计算、隔离执行和临时缓存；不得把它们作为用户查看最终产物的唯一位置。
+- 如果 artifact 含 private / unpublished / 用户材料，不要提交进 Git；放在 repo 内已 ignore 的私有出口，例如 `exports/private/<task_key>/`，或任务文档明确指定的 repo 内 gitignored 私有目录。
+- 如果 artifact 是公开证据且适合版本化，放在对应 `results/<task_key>/`、`docs/`、`exports/` 或任务指定目录，并按正常 Git 规则决定是否提交。
+- 最终回复、`RESULT.md` 和 public receipt 里优先给 repo 内路径；外部 scratch 路径只能作为 provenance / debug locator，不作为主交付入口。
+- 交付前必须确认文件存在、大小非零，并在 PDF/图片/HTML 等可视产物上做至少一个真实 render/preview 检查；不能只报告生成命令成功。
+- 如果因权限、体积、隐私或工具限制确实不能放进 repo 内，必须明确说明原因，并给出下一步可恢复方式；不能静默把文件留在 agent 私有临时目录。
+
+## 1.2 README 永远写给人看
 
 根 `README.md` 是给用户和未来维护者看的，不是内部流程日志。
 
