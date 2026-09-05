@@ -55,6 +55,7 @@ ENGLISH_SPAN_CLASSES = {
     "ordinary_reasoning",
 }
 LATIN_SPAN_INVENTORY_SCHEMA = "SCIENTIFIC_REWRITE_LATIN_SPAN_INVENTORY_V1"
+USEFUL_RECOGNITION_CONTEXT_WINDOW = 160
 RAW_LITERAL_DUMP_PATTERNS = [
     r"保留.{0,6}精确.{0,4}项",
     r"缺失.{0,4}精确.{0,4}项",
@@ -447,6 +448,36 @@ def validate_latin_span_inventory(inventory: dict[str, Any], candidate: str) -> 
     }
 
 
+def _normalize_latin_surface(text: str) -> str:
+    return re.sub(r"\s+", " ", text.strip().lower())
+
+
+def _has_cjk(text: str) -> bool:
+    return any("\u4e00" <= char <= "\u9fff" for char in text)
+
+
+def _count_visible_surface(candidate: str, surface: str) -> int:
+    return len(re.findall(re.escape(surface), candidate))
+
+
+def _context_is_locally_attached(candidate: str, surface: str, chinese_context: str) -> bool:
+    if not chinese_context or chinese_context not in candidate or not _has_cjk(chinese_context):
+        return False
+    context_ranges = [(match.start(), match.end()) for match in re.finditer(re.escape(chinese_context), candidate)]
+    surface_ranges = [(match.start(), match.end()) for match in re.finditer(re.escape(surface), candidate)]
+    for context_start, context_end in context_ranges:
+        for surface_start, surface_end in surface_ranges:
+            if surface_end < context_start:
+                distance = context_start - surface_end
+            elif context_end < surface_start:
+                distance = surface_start - context_end
+            else:
+                distance = 0
+            if distance <= USEFUL_RECOGNITION_CONTEXT_WINDOW:
+                return True
+    return False
+
+
 def reader_review_packet(candidate: str, audience: str) -> dict[str, Any]:
     return {
         "schema": "SCIENTIFIC_REWRITE_CANDIDATE_ONLY_READER_PACKET_V1",
@@ -725,8 +756,14 @@ def validate_chinese_reader_pass(
     latin_inventory: dict[str, Any],
     literal_invariants: list[dict[str, Any]],
 ) -> dict[str, Any]:
-    if chinese_pass.get("candidate_sha256") != sha256_text(final_candidate):
-        raise RuntimeError("chinese_reader_pass candidate_sha256 mismatch")
+    pre_candidate_sha = str(latin_inventory.get("candidate_sha256", ""))
+    final_candidate_sha = sha256_text(final_candidate)
+    declared_pre_sha = str(chinese_pass.get("pre_candidate_sha256") or chinese_pass.get("candidate_sha256") or "")
+    if declared_pre_sha != pre_candidate_sha:
+        raise RuntimeError("chinese_reader_pass pre_candidate_sha256 mismatch")
+    declared_final_sha = str(chinese_pass.get("final_candidate_sha256") or final_candidate_sha)
+    if declared_final_sha != final_candidate_sha:
+        raise RuntimeError("chinese_reader_pass final_candidate_sha256 mismatch")
     if chinese_pass.get("source_visible") is not False:
         raise RuntimeError("chinese_reader_pass must be candidate-only")
     if str(chinese_pass.get("decision", "")).upper() != "PASS":
@@ -757,6 +794,12 @@ def validate_chinese_reader_pass(
     covered: dict[str, str] = {}
     exact_literal_shas = {str(item.get("sha256")) for item in literal_invariants}
     accepted_text_shas: set[str] = set()
+    useful_surfaces_seen: set[str] = set()
+    exact_identity_count = 0
+    useful_recognition_first_use_count = 0
+    ordinary_reasoning_repaired_count = 0
+    unresolved_ordinary_reasoning_count = 0
+    repeated_non_identity_english_violation_count = 0
     for key in ENGLISH_SPAN_CLASSES:
         if not isinstance(english.get(key), list):
             raise RuntimeError(f"chinese_reader_pass english classification must use lists: {key}")
@@ -772,18 +815,32 @@ def validate_chinese_reader_pass(
             if not reason:
                 raise RuntimeError(f"chinese_reader_pass missing reason for Latin occurrence: {occurrence_id}")
             span = inventory_by_id[occurrence_id]
+            span_text = str(span.get("text", ""))
+            span_text_sha = str(span.get("text_sha256"))
             if key == "exact_identity":
-                identity_authority = str(entry.get("identity_authority", "")).strip()
-                if not identity_authority and span.get("text_sha256") not in exact_literal_shas:
-                    raise RuntimeError(f"exact_identity lacks identity authority: {occurrence_id}")
-                accepted_text_shas.add(str(span.get("text_sha256")))
+                if span_text_sha not in exact_literal_shas:
+                    raise RuntimeError(f"exact_identity lacks deterministic identity support: {occurrence_id}")
+                exact_identity_count += 1
+                accepted_text_shas.add(span_text_sha)
             elif key == "useful_recognition":
                 chinese_context = str(entry.get("chinese_context", "")).strip()
-                if not chinese_context:
-                    raise RuntimeError(f"useful_recognition lacks Chinese context: {occurrence_id}")
-                accepted_text_shas.add(str(span.get("text_sha256")))
+                if not _context_is_locally_attached(final_candidate, span_text, chinese_context):
+                    raise RuntimeError(f"useful_recognition lacks local Chinese context: {occurrence_id}")
+                normalized_surface = _normalize_latin_surface(span_text)
+                if normalized_surface in useful_surfaces_seen:
+                    repeated_non_identity_english_violation_count += 1
+                    raise RuntimeError(f"useful_recognition repeated non-identity English surface: {occurrence_id}")
+                useful_surfaces_seen.add(normalized_surface)
+                if _count_visible_surface(final_candidate, span_text) > 1:
+                    repeated_non_identity_english_violation_count += 1
+                    raise RuntimeError(f"useful_recognition final candidate repeats non-identity English surface: {occurrence_id}")
+                useful_recognition_first_use_count += 1
+                accepted_text_shas.add(span_text_sha)
             else:
-                raise RuntimeError(f"ordinary_reasoning Latin occurrence remains unresolved: {occurrence_id}")
+                if span_text in final_candidate:
+                    unresolved_ordinary_reasoning_count += 1
+                    raise RuntimeError(f"ordinary_reasoning Latin occurrence remains unresolved: {occurrence_id}")
+                ordinary_reasoning_repaired_count += 1
             covered[occurrence_id] = key
     missing_coverage = sorted(set(inventory_by_id) - set(covered))
     if missing_coverage:
@@ -803,7 +860,16 @@ def validate_chinese_reader_pass(
         "reader_effort_decision": "PASS",
         "english_span_policy_classes": sorted(ENGLISH_SPAN_CLASSES),
         "classified_latin_occurrence_count": len(covered),
+        "pre_latin_span_count": len(spans),
         "final_latin_span_count": final_inventory["span_count"],
+        "exact_identity_count": exact_identity_count,
+        "useful_recognition_first_use_count": useful_recognition_first_use_count,
+        "ordinary_reasoning_repaired_count": ordinary_reasoning_repaired_count,
+        "unresolved_ordinary_reasoning_count": unresolved_ordinary_reasoning_count,
+        "repeated_non_identity_english_violation_count": repeated_non_identity_english_violation_count,
+        "pre_candidate_sha256": pre_candidate_sha,
+        "final_candidate_sha256": final_candidate_sha,
+        "candidate_changed_by_chinese_pass": pre_candidate_sha != final_candidate_sha,
     }
 
 

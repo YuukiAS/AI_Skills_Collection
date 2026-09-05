@@ -46,6 +46,41 @@ def write_json(path: Path, payload: object) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
+def local_chinese_context(candidate: str, span: dict) -> str:
+    before = candidate[max(0, int(span["start"]) - 36) : int(span["start"])]
+    after = candidate[int(span["end"]) : min(len(candidate), int(span["end"]) + 36)]
+    for local in (after, before):
+        match = re.search(r"[\u4e00-\u9fff]{2,}", local)
+        if match:
+            return match.group(0)
+    return "局部中文解释"
+
+
+def reader_pass_shell(helper, candidate: str, classifications: dict[str, list[dict]], *, pre_candidate: str | None = None) -> dict:
+    pre = pre_candidate if pre_candidate is not None else candidate
+    return {
+        "schema": "SCIENTIFIC_REWRITE_CHINESE_READER_PASS_V1",
+        "source_visible": False,
+        "pre_candidate_sha256": helper.sha256_text(pre),
+        "final_candidate_sha256": helper.sha256_text(candidate),
+        "candidate_sha256": helper.sha256_text(pre),
+        "decision": "PASS",
+        "answerability": {
+            "decision": "PASS",
+            "reader_questions_answered": True,
+        },
+        "reader_effort": {
+            "decision": "PASS",
+            "minimum_reader_inference_burden": True,
+            "not_compression_metric": True,
+        },
+        "english_span_classification": classifications,
+        "information_shape_check": {"decision": "PASS"},
+        "formula_context_check": {"decision": "PASS"},
+        "epistemic_boundary_check": {"decision": "PASS"},
+    }
+
+
 def make_stage_package(helper, root: Path, source: str, *, decision: str = "PASS") -> Path:
     stage_dir = root / "stage"
     stage_dir.mkdir()
@@ -202,39 +237,38 @@ def make_stage_package(helper, root: Path, source: str, *, decision: str = "PASS
     (stage_dir / "assembled_candidate_before_chinese_pass.md").write_text(final_candidate, encoding="utf-8")
     latin_inventory = helper.enumerate_latin_spans(final_candidate)
     write_json(stage_dir / "latin_span_inventory.json", latin_inventory)
-    exact_classifications = [
-        {
-            "occurrence_id": span["occurrence_id"],
-            "reason": "测试 fixture 将所有剩余英文作为具名技术身份处理。",
-            "identity_authority": "unit test fixture identity ledger",
-        }
-        for span in latin_inventory["spans"]
-    ]
+    exact_literal_shas = {item["sha256"] for item in all_literals}
+    exact_classifications = []
+    useful_classifications = []
+    for span in latin_inventory["spans"]:
+        if span["text_sha256"] in exact_literal_shas:
+            exact_classifications.append(
+                {
+                    "occurrence_id": span["occurrence_id"],
+                    "reason": "测试 fixture 中该英文是源文精确身份。",
+                    "identity_category": "formal_name",
+                }
+            )
+        else:
+            useful_classifications.append(
+                {
+                    "occurrence_id": span["occurrence_id"],
+                    "reason": "测试 fixture 中该英文仅作为首用识别桥。",
+                    "chinese_context": local_chinese_context(final_candidate, span),
+                }
+            )
     write_json(
         stage_dir / "chinese_reader_pass.json",
-        {
-            "schema": "SCIENTIFIC_REWRITE_CHINESE_READER_PASS_V1",
-            "source_visible": False,
-            "candidate_sha256": helper.sha256_text(final_candidate),
-            "decision": decision,
-            "answerability": {
-                "decision": decision,
-                "reader_questions_answered": True,
-            },
-            "reader_effort": {
-                "decision": decision,
-                "minimum_reader_inference_burden": True,
-                "not_compression_metric": True,
-            },
-            "english_span_classification": {
+        reader_pass_shell(
+            helper,
+            final_candidate,
+            {
                 "exact_identity": exact_classifications,
-                "useful_recognition": [],
+                "useful_recognition": useful_classifications,
                 "ordinary_reasoning": [],
             },
-            "information_shape_check": {"decision": decision},
-            "formula_context_check": {"decision": decision},
-            "epistemic_boundary_check": {"decision": decision},
-        },
+        )
+        | {"decision": decision},
     )
     write_json(
         stage_dir / "post_chinese_self_audit.json",
@@ -666,7 +700,7 @@ class ScientificRewriteTests(unittest.TestCase):
     def test_host_stage_package_validation_receipt_is_privacy_safe(self) -> None:
         helper = load_helper()
         source = (
-            "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81，checkpoint 见 /tmp/run/checkpoint.pt。\n\n"
+            "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81，检查点路径见 /tmp/run/checkpoint.pt。\n\n"
             "下一步比较 FedFisher 和 FedLPA；如果 pooled gap 下降就是 GO，否则 STOP。"
         )
         with tempfile.TemporaryDirectory() as tmp:
@@ -760,7 +794,7 @@ class ScientificRewriteTests(unittest.TestCase):
             root = Path(tmp)
             stage_dir = make_stage_package(helper, root, source)
             chinese_pass = json.loads((stage_dir / "chinese_reader_pass.json").read_text(encoding="utf-8"))
-            first = chinese_pass["english_span_classification"]["exact_identity"].pop(0)
+            first = chinese_pass["english_span_classification"]["useful_recognition"].pop(0)
             chinese_pass["english_span_classification"]["ordinary_reasoning"].append(
                 {"occurrence_id": first["occurrence_id"], "reason": "普通组织语言仍未中文化。"}
             )
@@ -768,17 +802,202 @@ class ScientificRewriteTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "ordinary_reasoning"):
                 helper.validate_host_stage_package(source, stage_dir)
 
-    def test_exact_identity_requires_identity_authority_when_not_literal_protected(self) -> None:
+    def test_exact_identity_rejects_arbitrary_authority_but_accepts_protected_name(self) -> None:
         helper = load_helper()
-        source = "reader effort 是普通解释语言。"
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            stage_dir = make_stage_package(helper, root, source)
-            chinese_pass = json.loads((stage_dir / "chinese_reader_pass.json").read_text(encoding="utf-8"))
-            chinese_pass["english_span_classification"]["exact_identity"][0].pop("identity_authority", None)
-            write_json(stage_dir / "chinese_reader_pass.json", chinese_pass)
-            with self.assertRaisesRegex(RuntimeError, "identity authority"):
-                helper.validate_host_stage_package(source, stage_dir)
+        candidate = "这个段落仍然把 reader effort 当作英文身份。"
+        inventory = helper.enumerate_latin_spans(candidate)
+        classifications = {
+            "exact_identity": [
+                {
+                    "occurrence_id": inventory["spans"][0]["occurrence_id"],
+                    "reason": "不能因为主机声称这是技术术语就保留。",
+                    "identity_authority": "host says this is a technical term",
+                }
+            ],
+            "useful_recognition": [],
+            "ordinary_reasoning": [],
+        }
+        with self.assertRaisesRegex(RuntimeError, "deterministic identity support"):
+            helper.validate_chinese_reader_pass(
+                reader_pass_shell(helper, candidate, classifications),
+                candidate,
+                latin_inventory=inventory,
+                literal_invariants=[],
+            )
+
+        candidate = "正式方法 FedFisher 保持英文名。"
+        inventory = helper.enumerate_latin_spans(candidate)
+        literals = helper.extract_literal_invariants("正式方法 FedFisher 保持英文名。")
+        classifications = {
+            "exact_identity": [
+                {
+                    "occurrence_id": inventory["spans"][0]["occurrence_id"],
+                    "reason": "FedFisher 是源文保护的正式方法名。",
+                    "identity_category": "algorithm/model name",
+                }
+            ],
+            "useful_recognition": [],
+            "ordinary_reasoning": [],
+        }
+        result = helper.validate_chinese_reader_pass(
+            reader_pass_shell(helper, candidate, classifications),
+            candidate,
+            latin_inventory=inventory,
+            literal_invariants=literals,
+        )
+        self.assertEqual(result["exact_identity_count"], 1)
+
+    def test_useful_recognition_requires_present_local_chinese_context(self) -> None:
+        helper = load_helper()
+        candidate = "第一次说明局部漂移（local drift）表示客户端更新方向偏离共享模型。"
+        inventory = helper.enumerate_latin_spans(candidate)
+        classifications = {
+            "exact_identity": [],
+            "useful_recognition": [
+                {
+                    "occurrence_id": inventory["spans"][0]["occurrence_id"],
+                    "reason": "首用英文帮助识别论文常用术语。",
+                    "chinese_context": "并不存在的中文解释",
+                }
+            ],
+            "ordinary_reasoning": [],
+        }
+        with self.assertRaisesRegex(RuntimeError, "local Chinese context"):
+            helper.validate_chinese_reader_pass(
+                reader_pass_shell(helper, candidate, classifications),
+                candidate,
+                latin_inventory=inventory,
+                literal_invariants=[],
+            )
+
+        classifications["useful_recognition"][0]["chinese_context"] = "局部漂移"
+        result = helper.validate_chinese_reader_pass(
+            reader_pass_shell(helper, candidate, classifications),
+            candidate,
+            latin_inventory=inventory,
+            literal_invariants=[],
+        )
+        self.assertEqual(result["useful_recognition_first_use_count"], 1)
+
+    def test_useful_recognition_first_use_boundary_rejects_repeated_non_identity_english(self) -> None:
+        helper = load_helper()
+        candidate = "第一次说明局部漂移（local drift）表示偏离共享模型；后文又直接写 local drift 增大。"
+        inventory = helper.enumerate_latin_spans(candidate)
+        classifications = {
+            "exact_identity": [],
+            "useful_recognition": [
+                {
+                    "occurrence_id": span["occurrence_id"],
+                    "reason": "错误地把同一非身份英文反复当作有用识别。",
+                    "chinese_context": "局部漂移",
+                }
+                for span in inventory["spans"]
+            ],
+            "ordinary_reasoning": [],
+        }
+        with self.assertRaisesRegex(RuntimeError, "repeats non-identity English"):
+            helper.validate_chinese_reader_pass(
+                reader_pass_shell(helper, candidate, classifications),
+                candidate,
+                latin_inventory=inventory,
+                literal_invariants=[],
+            )
+
+        fixed_candidate = "第一次说明局部漂移（local drift）表示偏离共享模型；后文改用局部漂移增大。"
+        fixed_inventory = helper.enumerate_latin_spans(fixed_candidate)
+        fixed_classifications = {
+            "exact_identity": [],
+            "useful_recognition": [
+                {
+                    "occurrence_id": fixed_inventory["spans"][0]["occurrence_id"],
+                    "reason": "首用保留英文用于识别，后文使用中文。",
+                    "chinese_context": "局部漂移",
+                }
+            ],
+            "ordinary_reasoning": [],
+        }
+        result = helper.validate_chinese_reader_pass(
+            reader_pass_shell(helper, fixed_candidate, fixed_classifications),
+            fixed_candidate,
+            latin_inventory=fixed_inventory,
+            literal_invariants=[],
+        )
+        self.assertEqual(result["repeated_non_identity_english_violation_count"], 0)
+
+    def test_ordinary_reasoning_repair_requires_post_pass_removal(self) -> None:
+        helper = load_helper()
+        pre_candidate = "这个段落仍用 reader effort 支撑中文句子。"
+        final_candidate = "这个段落改成中文说明读者阅读负担。"
+        inventory = helper.enumerate_latin_spans(pre_candidate)
+        classifications = {
+            "exact_identity": [],
+            "useful_recognition": [],
+            "ordinary_reasoning": [
+                {
+                    "occurrence_id": inventory["spans"][0]["occurrence_id"],
+                    "reason": "普通推理语言必须中文化。",
+                }
+            ],
+        }
+        result = helper.validate_chinese_reader_pass(
+            reader_pass_shell(helper, final_candidate, classifications, pre_candidate=pre_candidate),
+            final_candidate,
+            latin_inventory=inventory,
+            literal_invariants=[],
+        )
+        self.assertEqual(result["ordinary_reasoning_repaired_count"], 1)
+        self.assertTrue(result["candidate_changed_by_chinese_pass"])
+
+        with self.assertRaisesRegex(RuntimeError, "ordinary_reasoning Latin occurrence remains unresolved"):
+            helper.validate_chinese_reader_pass(
+                reader_pass_shell(helper, pre_candidate, classifications),
+                pre_candidate,
+                latin_inventory=inventory,
+                literal_invariants=[],
+            )
+
+    def test_noop_chinese_pass_requires_legitimate_surviving_latin(self) -> None:
+        helper = load_helper()
+        candidate = "正式方法 FedFisher 仍保留英文名。"
+        inventory = helper.enumerate_latin_spans(candidate)
+        classifications = {
+            "exact_identity": [
+                {
+                    "occurrence_id": inventory["spans"][0]["occurrence_id"],
+                    "reason": "FedFisher 是源文保护的正式方法名。",
+                    "identity_category": "algorithm/model name",
+                }
+            ],
+            "useful_recognition": [],
+            "ordinary_reasoning": [],
+        }
+        result = helper.validate_chinese_reader_pass(
+            reader_pass_shell(helper, candidate, classifications),
+            candidate,
+            latin_inventory=inventory,
+            literal_invariants=helper.extract_literal_invariants(candidate),
+        )
+        self.assertFalse(result["candidate_changed_by_chinese_pass"])
+
+        bad_candidate = "这个段落仍然保留 reader effort。"
+        bad_inventory = helper.enumerate_latin_spans(bad_candidate)
+        bad_classifications = {
+            "exact_identity": [],
+            "useful_recognition": [],
+            "ordinary_reasoning": [
+                {
+                    "occurrence_id": bad_inventory["spans"][0]["occurrence_id"],
+                    "reason": "普通推理语言未修。",
+                }
+            ],
+        }
+        with self.assertRaisesRegex(RuntimeError, "ordinary_reasoning Latin occurrence remains unresolved"):
+            helper.validate_chinese_reader_pass(
+                reader_pass_shell(helper, bad_candidate, bad_classifications),
+                bad_candidate,
+                latin_inventory=bad_inventory,
+                literal_invariants=[],
+            )
 
     def test_final_candidate_cannot_add_unclassified_latin_after_chinese_pass(self) -> None:
         helper = load_helper()
@@ -799,6 +1018,7 @@ class ScientificRewriteTests(unittest.TestCase):
             write_json(stage_dir / "post_chinese_self_audit.json", post)
             chinese_pass = json.loads((stage_dir / "chinese_reader_pass.json").read_text(encoding="utf-8"))
             chinese_pass["candidate_sha256"] = helper.sha256_text(final_candidate)
+            chinese_pass["final_candidate_sha256"] = helper.sha256_text(final_candidate)
             write_json(stage_dir / "chinese_reader_pass.json", chinese_pass)
             with self.assertRaisesRegex(RuntimeError, "unclassified Latin spans"):
                 helper.validate_host_stage_package(source, stage_dir)

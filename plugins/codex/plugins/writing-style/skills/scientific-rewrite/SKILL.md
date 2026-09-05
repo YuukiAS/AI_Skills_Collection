@@ -284,6 +284,21 @@ should read as normal Chinese scientific prose:
   when English adds no external identification value. Keep exact formal names
   when they identify a method, dataset, metric, package, API, citation, command,
   path, or statistical term.
+- When an unfamiliar English technical identifier is retained for recognition,
+  explain what it does in this argument and why the reader needs it before the
+  term becomes shorthand. Expansion or translation alone is not enough.
+- Treat useful English recognition as a first-use bridge, not a permanent
+  license to keep lower-case noun stacks. Later mentions should normally use
+  the established Chinese wording unless the English surface is a protected
+  exact identity.
+- State the reader-facing relation directly: what is compared, what changed,
+  what limits the conclusion, and why the next step follows. Do not let a
+  compressed English label carry that relation.
+- When the source permits it, prefer this explanation order: bounded
+  plain-language scientific point -> intuition or concrete explanation -> exact
+  technical detail, formula, or formal name -> evidence boundary or caveat.
+- Prefer positive scientific statements over meta, audit, defensive, or
+  rhetorical framing when those frames add no scientific meaning.
 - For reader-facing formulas, normally write: what question or intuition the
   formula captures -> the exact protected formula -> what the important symbols
   mean -> what comparison or conclusion the formula supports.
@@ -379,6 +394,13 @@ remaining English spans as exact identity, useful first-use recognition, or
 ordinary reasoning; checks that reader effort was not optimized as compression;
 checks formula context and evidence-role boundaries; then repairs affected
 reader-facing blocks before exact and semantic verification run again.
+
+The Chinese reader pass must classify the pre-pass candidate, not merely sign
+off on the final text. A no-op pass is valid only when every surviving Latin
+occurrence is independently supported as either a protected exact identity or a
+bounded first-use recognition bridge with local Chinese explanation.
+`ordinary_reasoning` spans must be rewritten into Chinese before
+`final_candidate.md`; reclassifying them as useful recognition is not a repair.
 
 ## Helper
 

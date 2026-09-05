@@ -17,7 +17,11 @@ The rewritten text should let a first-time scientific or technical reader know:
 
 - Replace internal workflow labels with the real subject, action, and relation.
 - Explain first-use terms with local context, not only acronym expansion.
+- Explain a retained English technical identifier by its role and purpose in
+  this argument before relying on it as shorthand.
 - Convert log narration into reader-facing scientific facts.
+- State the reader-facing relation directly: what is compared, what changed,
+  what limits the conclusion, and why the next step follows.
 - Move caveats close to the claim they limit.
 - Keep formal names unchanged when they are actual names.
 - Use ordinary Chinese sentences when no technical compression is needed.
@@ -41,6 +45,14 @@ The rewritten text should let a first-time scientific or technical reader know:
 - Classify English spans by function: preserve exact names, optionally keep an
   English identifier at first use when it helps recognition, and translate
   ordinary reasoning or organization language into natural Chinese.
+- Treat `useful_recognition` as a first-use bridge. Later occurrences of the
+  same non-identity English surface should normally use the Chinese wording
+  introduced there.
+- Prefer bounded plain-language conclusion -> intuition / concrete explanation
+  -> exact technical detail / formula / formal name -> evidence boundary when
+  the source supports that order.
+- Prefer the positive scientific observation and limitation over meta,
+  defensive, audit, or rhetorical framing.
 
 ## Anti-Patterns
 
@@ -59,3 +71,7 @@ The rewritten text should let a first-time scientific or technical reader know:
 - Treating a shorter candidate as better when it has removed the explanation,
   transition, symbol meaning, or information shape that made the result easy to
   read.
+- Treating `exact_identity` or `useful_recognition` as an escape hatch for
+  ordinary English reasoning that should have been rewritten in Chinese.
+- Repeating the same non-identity English noun phrase after its first-use
+  Chinese explanation has already established the meaning.
