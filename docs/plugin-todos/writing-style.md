@@ -4,6 +4,23 @@ Canonical maintenance inbox for the `writing-style` plugin.
 
 ## Incoming real-use feedback
 
+### Promote `writing-style` into the generic content-preserving language layer
+status: READY_FOR_PROMOTION_AFTER_050
+source: 050 Deep Research rewrite failures + Distributed Imaging report v2 + CAT-TRACE presentation reviews + cross-plugin boundary audit, 2026-09-05
+evidence: `docs/design/READER_FACING_COMMUNICATION_PLUGIN_BOUNDARIES.md`; task 050 smoke/replay evidence; `docs/plugin-todos/research-writing.md`; `docs/plugin-todos/presentations.md`
+target layer: routing/language/fidelity
+problem: the current `writing-style` name undersells the actual product and is easy to confuse with `research-writing`. The intended capability is broader and more reusable: a content-preserving reader-facing language layer that can be called by research reports, presentations, statistical analysis, scientific visualization, medical imaging, bioinformatics and other domain plugins for captions, conclusions, table/figure wording, slide copy, technical explanations and long source-faithful rewrites. It must improve clarity without taking ownership of domain semantics.
+candidate action:
+- Treat the plugin as the canonical source for generic reader-facing language behavior: Chinese-first wording, exact-name vs ordinary-reasoning English decisions, sentence/paragraph connective logic, first-use explanation, formula/caption/conclusion wording, local readability review and source-fidelity-preserving repair.
+- Support multiple task sizes from the same canonical source: microcopy/caption/label/conclusion; paragraph/subsection; long existing-document rewrite; slide copy from a presentation-owned page brief; result explanation from a domain-owned claim/evidence brief.
+- Keep domain semantics outside this plugin. `statistical-modeling` owns models, assumptions, inferential targets and conclusions; `scientific-visualization` owns visual encoding; `research-writing` owns document plan/evidence selection/tables/citations; `presentations` owns slide sequence/page jobs/rendered QA. The language layer may clarify their already-frozen content but must not change it.
+- Do not maintain a separate “说人话” rule set inside every domain plugin. Reuse the canonical `skills/writing/core/...` source through the production-compatible packaging/companion route rather than forking behavior.
+- Keep the fidelity contract strong: facts, numbers, formulas, citations, uncertainty, attribution, comparators, evidence authority and conclusion strength cannot drift for readability.
+- For long existing-text structural rewrite, allow reader-facing regrouping/order changes while preserving every source proposition/evidence boundary; for short captions/microcopy do not force the heavy rewrite runtime.
+- Preferred post-050 naming direction: rename plugin slug `writing-style` to `clear-language`, display name `Clear Language`. Keep `research-writing` unchanged. Do **not** perform the slug rename during 050 because the current production evidence and installed replay identity use `writing-style@yuukias-ai-skills`, and the repo has no established alias migration contract.
+- Any later rename must be a separate bounded migration: source config -> generated plugin -> profiles/docs/tests -> real installed replay -> retire old slug only after compatibility is proven.
+promotion gate: first close 050 with human STYLE_ACCEPT under the existing `writing-style` identity; then run a separate naming/consumer integration task and verify at least one long rewrite, one advisor report, one presentation handoff, one statistical result/caption, and one scientific-visualization caption/annotation without domain-semantic drift.
+
 ### English scientific slide microcopy and full-deck prose remain cognitively heavy after a nominal final pass
 status: NEW
 source: TRACE / CAT-TRACE group-meeting deck v4–v8 reviews
