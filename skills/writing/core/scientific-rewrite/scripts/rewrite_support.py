@@ -348,9 +348,12 @@ def reader_facing_core(candidate: str) -> str:
 
 def _protected_text_mask(text: str) -> list[bool]:
     mask = [False] * len(text)
+    for match in re.finditer(r"`([^`\n]+)`", text):
+        if _inline_code_is_protected(match.group(1)):
+            for index in range(match.start(), min(match.end(), len(mask))):
+                mask[index] = True
     patterns = [
         r"```[\s\S]*?```",
-        r"`[^`\n]+`",
         r"\$\$[\s\S]*?\$\$",
         r"\$[^$\n]+\$",
         r"\\\[[\s\S]*?\\\]",
@@ -364,6 +367,23 @@ def _protected_text_mask(text: str) -> list[bool]:
             for index in range(match.start(), min(match.end(), len(mask))):
                 mask[index] = True
     return mask
+
+
+def _inline_code_is_protected(value: str) -> bool:
+    stripped = value.strip()
+    if not stripped:
+        return True
+    if re.search(r"\s", stripped):
+        return False
+    if "/" in stripped or "\\" in stripped:
+        return True
+    if re.search(r"[=(){}[\];]", stripped):
+        return True
+    if re.fullmatch(r"[A-Za-z0-9_.-]+\.(json|md|py|pt|ckpt|txt|csv|tsv|yaml|yml|toml)", stripped):
+        return True
+    if re.fullmatch(r"[A-Z0-9_]{3,}", stripped):
+        return True
+    return bool(re.fullmatch(r"[A-Za-z_][A-Za-z0-9_.:-]*", stripped))
 
 
 def _is_machine_latin_span(value: str) -> bool:

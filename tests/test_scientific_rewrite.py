@@ -999,6 +999,29 @@ class ScientificRewriteTests(unittest.TestCase):
                 literal_invariants=[],
             )
 
+    def test_natural_english_inline_code_cannot_escape_reader_pass(self) -> None:
+        helper = load_helper()
+        candidate = "这一设置改变了 `global-vs-personalized estimand`，因此需要中文说明。"
+        inventory = helper.enumerate_latin_spans(candidate)
+        self.assertEqual([span["text"] for span in inventory["spans"]], ["global-vs-personalized estimand"])
+        classifications = {
+            "exact_identity": [],
+            "useful_recognition": [],
+            "ordinary_reasoning": [
+                {
+                    "occurrence_id": inventory["spans"][0]["occurrence_id"],
+                    "reason": "反引号中的自然英文短语仍是读者可见推理语言。",
+                }
+            ],
+        }
+        with self.assertRaisesRegex(RuntimeError, "ordinary_reasoning Latin occurrence remains unresolved"):
+            helper.validate_chinese_reader_pass(
+                reader_pass_shell(helper, candidate, classifications),
+                candidate,
+                latin_inventory=inventory,
+                literal_invariants=[],
+            )
+
     def test_final_candidate_cannot_add_unclassified_latin_after_chinese_pass(self) -> None:
         helper = load_helper()
         source = "FedFisher 是正式方法名。"
