@@ -572,7 +572,7 @@ class ScientificRewriteTests(unittest.TestCase):
         self.assertGreaterEqual(len(units), 2)
         self.assertTrue(all(unit.source_span_ids for unit in units))
         all_invariants = [span["text"] for unit in units for span in unit.literal_invariants]
-        self.assertIn("`renv`", all_invariants)
+        self.assertIn("renv", all_invariants)
         self.assertIn("5", all_invariants)
         self.assertIn("[3]", all_invariants)
 
@@ -1004,6 +1004,10 @@ class ScientificRewriteTests(unittest.TestCase):
         candidate = "这一设置改变了 `global-vs-personalized estimand`，因此需要中文说明。"
         inventory = helper.enumerate_latin_spans(candidate)
         self.assertEqual([span["text"] for span in inventory["spans"]], ["global-vs-personalized estimand"])
+        self.assertNotIn(
+            "global-vs-personalized estimand",
+            [item["text"] for item in helper.extract_literal_invariants(candidate)],
+        )
         classifications = {
             "exact_identity": [],
             "useful_recognition": [],
@@ -1021,6 +1025,24 @@ class ScientificRewriteTests(unittest.TestCase):
                 latin_inventory=inventory,
                 literal_invariants=[],
             )
+
+    def test_host_stage_rejects_non_deterministic_literal_ledger_entries(self) -> None:
+        helper = load_helper()
+        source = "正式方法 FedFisher 保持英文名。"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = make_stage_package(helper, root, source)
+            ledger = json.loads((stage_dir / "fidelity_ledger.json").read_text(encoding="utf-8"))
+            ledger["literal_invariants"].append(
+                {
+                    "text": "reader effort",
+                    "sha256": helper.sha256_text("reader effort"),
+                    "role": "inline-critical",
+                }
+            )
+            write_json(stage_dir / "fidelity_ledger.json", ledger)
+            with self.assertRaisesRegex(RuntimeError, "non-deterministic source identities"):
+                helper.validate_host_stage_package(source, stage_dir)
 
     def test_final_candidate_cannot_add_unclassified_latin_after_chinese_pass(self) -> None:
         helper = load_helper()

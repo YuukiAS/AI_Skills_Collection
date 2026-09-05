@@ -157,7 +157,6 @@ def _literal_role(text: str) -> str:
 
 def extract_literal_invariants(text: str) -> list[dict[str, str]]:
     atomic_specs = [
-        r"`[^`\n]+`",
         r"(\$\$[\s\S]*?\$\$|\$[^$\n]+\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\))",
         r"(?:^|\s)(/[^\s，。；；,]+)",
         r"(?:^|\s)([A-Za-z0-9_.-]+/[A-Za-z0-9_./-]+)",
@@ -188,6 +187,10 @@ def extract_literal_invariants(text: str) -> list[dict[str, str]]:
         if protect:
             protected_spans.append((start, end))
 
+    for match in re.finditer(r"`([^`\n]+)`", text):
+        inline_value = match.group(1)
+        if not re.search(r"\s", inline_value.strip()):
+            add_match(match, protect=_inline_code_is_protected(inline_value))
     for pattern in atomic_specs:
         for match in re.finditer(pattern, text):
             add_match(match, protect=True)
@@ -377,13 +380,15 @@ def _inline_code_is_protected(value: str) -> bool:
         return False
     if "/" in stripped or "\\" in stripped:
         return True
+    if "_" in stripped or "." in stripped or ":" in stripped:
+        return True
     if re.search(r"[=(){}[\];]", stripped):
         return True
     if re.fullmatch(r"[A-Za-z0-9_.-]+\.(json|md|py|pt|ckpt|txt|csv|tsv|yaml|yml|toml)", stripped):
         return True
     if re.fullmatch(r"[A-Z0-9_]{3,}", stripped):
         return True
-    return bool(re.fullmatch(r"[A-Za-z_][A-Za-z0-9_.:-]*", stripped))
+    return False
 
 
 def _is_machine_latin_span(value: str) -> bool:
@@ -769,6 +774,34 @@ def validate_global_assembly(assembly: dict[str, Any], unit_ids: set[str]) -> di
     }
 
 
+def validate_fidelity_literal_invariants(
+    fidelity_ledger: dict[str, Any],
+    deterministic_literals: list[dict[str, str]],
+) -> dict[str, Any]:
+    ledger_literals = fidelity_ledger.get("literal_invariants")
+    if not isinstance(ledger_literals, list):
+        raise RuntimeError("fidelity_ledger literal_invariants must be a list")
+    expected = {(item["text"], item["sha256"]) for item in deterministic_literals}
+    actual = {
+        (str(item.get("text", "")), str(item.get("sha256", "")))
+        for item in ledger_literals
+        if isinstance(item, dict)
+    }
+    if len(actual) != len(ledger_literals):
+        raise RuntimeError("fidelity_ledger literal_invariants must use objects with text and sha256")
+    extra = sorted(text for text, sha in actual - expected)
+    missing = sorted(text for text, sha in expected - actual)
+    if extra:
+        raise RuntimeError("fidelity_ledger literal_invariants contain non-deterministic source identities: " + ", ".join(extra[:10]))
+    if missing:
+        raise RuntimeError("fidelity_ledger literal_invariants omitted deterministic source identities: " + ", ".join(missing[:10]))
+    return {
+        "ok": True,
+        "literal_count": len(deterministic_literals),
+        "ledger_sha256s": sorted(sha for _text, sha in actual),
+    }
+
+
 def validate_chinese_reader_pass(
     chinese_pass: dict[str, Any],
     final_candidate: str,
@@ -940,6 +973,8 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
         raise RuntimeError("candidate path does not match stage final_candidate.md")
 
     source_sha = sha256_text(source)
+    deterministic_literals = extract_literal_invariants(source)
+    literal_ledger_validation = validate_fidelity_literal_invariants(fidelity_ledger, deterministic_literals)
     if document_map.get("source_sha256") and document_map["source_sha256"] != source_sha:
         raise RuntimeError("document_map source_sha256 does not match source")
     units = argument_units.get("units", [])
@@ -1020,7 +1055,7 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
         chinese_reader_pass,
         final_candidate,
         latin_inventory=latin_span_inventory,
-        literal_invariants=fidelity_ledger.get("literal_invariants") or [],
+        literal_invariants=deterministic_literals,
     )
 
     if post_chinese_self_audit.get("final_candidate_sha256") != sha256_text(final_candidate):
@@ -1029,7 +1064,7 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
         if str(post_chinese_self_audit.get(key, "")).upper() != "PASS":
             raise RuntimeError(f"post_chinese_self_audit unresolved: {key}")
 
-    exact = verify_exact(source, final_candidate, fidelity_ledger.get("literal_invariants"), reader_core=reader_facing_core(final_candidate))
+    exact = verify_exact(source, final_candidate, deterministic_literals, reader_core=reader_facing_core(final_candidate))
     stage_records = _stage_records(
         stage_dir,
         document_map,
@@ -1058,6 +1093,7 @@ def validate_host_stage_package(source: str, stage_dir: Path, *, candidate_path:
         "stage_count": len(stage_records),
         "argument_coverage": argument_coverage,
         "reader_plan": reader_plan_validation,
+        "literal_ledger": literal_ledger_validation,
         "global_assembly": global_assembly,
         "latin_span_inventory": {
             "ok": latin_inventory_validation["ok"],
