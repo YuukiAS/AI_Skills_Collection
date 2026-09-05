@@ -537,6 +537,25 @@ Prevention:
 - the render skill should gain a reusable Unicode-math/code-span guard so future
   agents do not have to discover this manually.
 
+## Round-5 Local Validation
+
+- `python3 -m unittest tests.test_scientific_rewrite` — PASS, 43 tests.
+- `python3 -m unittest tests.test_scientific_rewrite tests.test_codex_marketplace tests.test_paid_review_workflows` — PASS, 84 tests.
+- `python3 -m unittest discover -s tests` — PASS, 216 tests.
+- `python3 scripts/build_codex_marketplace.py --write` — PASS.
+- `python3 scripts/build_codex_marketplace.py --validate` — PASS.
+- `python3 scripts/build_codex_marketplace.py --check` — PASS.
+- `python3 scripts/build_codex_marketplace.py --path-report` — PASS, `over_budget=0`.
+- `python3 scripts/skills.py validate` — PASS, 150 active skills and 18 profiles.
+- `python3 scripts/skills.py audit --all` — PASS; profile/domain size advice only.
+- `git diff --check` — PASS.
+
+Reviewed-handoff validator remains not clean for the same known reasons:
+049/050 old-template `PLAN.md` section mismatches and the 050 mid-task human
+style gate not matching the generic terminal `AWAIT_HUMAN_DECISION` rule.
+No frozen `PLAN.md`, `FINAL_REPORT.md`, fake GPT review artifact, or protected
+Planner field was edited to make that generic validator green.
+
 ## Version Decision
 
 Repository bump decision: `NONE`.
