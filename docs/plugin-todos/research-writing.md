@@ -4,6 +4,21 @@ Canonical maintenance inbox for the `research-writing` plugin.
 
 ## Open candidates
 
+### Keep research authoring separate from the generic language layer
+status: READY_FOR_PROMOTION
+source: cross-plugin boundary audit after 050 + Distributed Imaging advisor-report revision, 2026-09-05
+evidence: `docs/design/READER_FACING_COMMUNICATION_PLUGIN_BOUNDARIES.md`; Distributed Imaging report v2; existing `research-reporting` and paper/literature aggregates
+target layer: routing/planning/qa
+problem: `research-writing` and the current `writing-style` name can look like overlapping writing plugins even though their production jobs are different. Research Writing owns scholarly/research artifact authoring: what claims/evidence belong in a report or manuscript, how sections/tables/figures/citations are organized, and what the advisor/reviewer needs to see. The generic language layer should own content-preserving reader-facing wording after those decisions are stable.
+candidate action:
+- Keep the `research-writing` plugin name. It already describes the real domain: research reports, manuscripts, paper workflows, literature/citations, review/rebuttal/supplement coordination and claim-evidence organization.
+- Treat reader-facing document planning as a first-class `research-writing` responsibility: audience, document purpose, decisive evidence, section jobs, main-text vs appendix split, table/figure roles and citation/evidence authority.
+- Make table semantics an explicit research-writing responsibility: scientific comparison rows/columns, units, metric direction, precision/rounding, missing-value notation, comparability, captions/notes and prose/table division of labor.
+- Delegate generic wording, de-translation, local formula explanation and say-it-plain final prose to the canonical generic language layer instead of duplicating a second Chinese/English style rule set.
+- Do not let the language layer choose which experiment is decisive, silently delete a secondary experiment from a newly authored report, alter manuscript contribution scope or change literature/citation authority.
+- Use the logical handoff `audience + document purpose + section job + claim/evidence boundary + table/figure role + allowed structural freedom -> generic language layer -> document-level QA`; do not invent a new schema unless a real production failure later requires one.
+promotion gate: promote after the generic language layer naming/050 identity is settled and replay on one advisor report plus one manuscript/paper workflow; verify that research-writing still owns document semantics while the language layer only changes expression.
+
 ### Reader-first advisor report rewriting must change the document plan, not just the wording
 status: READY_FOR_PROMOTION
 source: Distributed_Imaging_Inference group-meeting report v1 failure; earlier Deep Research Chinese rewrite; TRACE v8→v9 reviewer feedback
@@ -29,13 +44,13 @@ source: successful manual Deep Research rewrite + TRACE v8→v9 language review
 evidence: `共享预训练医学分割模型_极低通信联邦适应_说人话重写版.md`; TRACE v9 revision evidence
  target layer: planning/prose
 problem: phrase-level cleanup is insufficient when the source prose is built from compressed noun stacks, slash-separated abstractions, audit labels or source-note language.
-candidate action:
+candidate_action:
 - Build a claim/terminology map first, then rewrite complete argument units from meaning rather than editing sentence-by-sentence.
 - Preserve literal content only for objects that truly require literal fidelity: numbers, formulas, code identifiers, formal method names, citations. Reader-facing headings, labels and explanatory sentences usually require semantic preservation, not literal preservation.
 - Use the pattern repeatedly validated in the manual rewrite: **plain-language conclusion -> intuition / concrete example -> exact technical detail / formula -> evidence boundary**.
 - When a process is sequential, write it as a sequence. When several alternatives are parallel, use a short list/table. Do not compress everything into one long sentence merely to save space.
 - Remove repeated restatements once the role is clear. TRACE v9 repeatedly improved readability by replacing source-note repetition with one direct explanation and a short takeaway.
-promotion gate: replay on one additional long-form scientific report and one advisor-facing report.
+promotion_gate: replay on one additional long-form scientific report and one advisor-facing report.
 
 ### Cross-project replay of advisor-facing report rules
 status: CANDIDATE_GENERIC
@@ -43,8 +58,8 @@ source: Distributed_Imaging_Inference group-meeting report revision
 evidence: `docs/provenance/RESEARCH_GROUP_MEETING_WRITING_REVIEW_2026_08_29.md`, `skills/writing/research/research-reporting/SKILL.md`, `references/group-meeting-advisor-reports.md`
 target layer: writing/qa
 problem: process-log language, invented time-boxed scripts, repeated result narration and implementation chronology were real user-facing failures; the active skill now contains fixes, but evidence is primarily one real report family.
-candidate action: replay these rules on the next independent advisor/group-meeting report and only add further rules when a new failure appears.
-promotion gate: at least one additional independent real report; protect current source-fidelity and claim-evidence behavior.
+candidate_action: replay these rules on the next independent advisor/group-meeting report and only add further rules when a new failure appears.
+promotion_gate: at least one additional independent real report; protect current source-fidelity and claim-evidence behavior.
 
 ### Distinguish report content quality from PDF/DOCX rendering quality
 status: BLOCKED_NEEDS_EVIDENCE
@@ -52,8 +67,8 @@ source: ongoing real research-report use
 evidence: `research-reporting` correctly delegates low-level artifact mechanics
 target layer: routing/qa
 problem: future user feedback may mix narrative/report failures with PDF/DOCX layout failures owned by official document capabilities.
-candidate action: keep ownership explicit and only promote cross-layer handoff rules if a real artifact demonstrates the gap.
-promotion gate: real rendered report evidence.
+candidate_action: keep ownership explicit and only promote cross-layer handoff rules if a real artifact demonstrates the gap.
+promotion_gate: real rendered report evidence.
 
 ## Recently promoted / established
 
