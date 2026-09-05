@@ -1,7 +1,7 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 050_writing_style_host_codex_runtime
-implementation_commit: f1be8e4151d439d0e34a4c9d3c5fc9f3cb6950c2
+implementation_commit: 590502f5a78b2032f2238380aa68ea8287d50b9c
 ---
 
 # 050 Writing Style Host-Codex Runtime — STYLE_REJECT repair handoff
@@ -17,6 +17,8 @@ Second A/B/C smoke: `STYLE_REJECT`.
 Third A/B/C smoke: `AWAITING HUMAN STYLE DECISION`.
 
 Fourth clean A/B/C replay: `AWAITING HUMAN STYLE DECISION`.
+
+Fifth final3 A/B/C replay: `AWAITING HUMAN STYLE DECISION`.
 
 This is not Product PASS. The user remains the style authority and must return
 `STYLE_ACCEPT` or `STYLE_REJECT` before any full private report generation.
@@ -440,6 +442,100 @@ old-template `PLAN.md` section mismatches, and also reports that the current
 or `FINAL_REPORT.md`. This is recorded as a validator/state-model limitation
 for the frozen 050 mid-task human style gate. No `FINAL_REPORT.md` or fake GPT
 review artifact was written merely to satisfy the generic terminal-state rule.
+
+## Round-5 Final Language-Layer Repair
+
+Round 4 was rejected by the user at the style gate. The bounded Round-5 repair
+keeps the frozen 050 host-Codex architecture and promotes only generic language
+layer lessons from `DISTRIBUTED_REPORT_LESSON_SCOPE_2026-09-05.md`.
+
+Final implementation commit:
+`590502f5a78b2032f2238380aa68ea8287d50b9c`.
+
+The implementation landed in four local commits because clean A/B/C replay
+exposed four generic escape hatches after the initial repair:
+
+- arbitrary `useful_recognition` / `exact_identity` authority could preserve
+  ordinary English reasoning;
+- natural English inside inline code was skipped by the Latin inventory;
+- child-authored literal ledgers could over-protect non-identity English;
+- useful-recognition context could be arbitrary nearby Chinese rather than an
+  attached explanation.
+
+Round-5 fixes require deterministic source-derived identity evidence, local
+explanatory Chinese context for useful first-use English, repeated
+non-identity-English rejection, and auditable pre/final Latin counts.
+
+## Round-5 Final3 Clean Replay Evidence
+
+Public evidence:
+
+- `results/050_writing_style_host_codex_runtime/round5_final3_replay_evidence.json`
+
+Private replay artifacts and the combined user-viewable files are repo-local and
+ignored by Git:
+
+- `/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round5-final3-A-state/plugin-replay/20260905T171239Z-937a7a704631/outputs`
+- `/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round5-final3-B-state/plugin-replay/20260905T171237Z-a957b6a7947c/outputs`
+- `/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round5-final3-C-state/plugin-replay/20260905T171235Z-a5c0882bacbc/outputs`
+- `/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round5-final3-combined/STYLE_SMOKE_A_B_C_ROUND5_FINAL3.md`
+- `/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round5-final3-combined/STYLE_SMOKE_A_B_C_ROUND5_FINAL3.pdf`
+
+| Smoke | Source segment SHA-256 | Candidate SHA-256 | Units | Stages | Exact literals | Pre Latin | Final Latin | Exact identities | Useful first-use | Ordinary unresolved | Repeated non-identity violations |
+|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| SMOKE-A | `3e18bea855cc4afccacc47b7ed60600ef637cbffd7ea412fcb54fe4b0575a5db` | `c383ce1889f94224c98484e009600724eec2ff07aa596ae0baa3d956d304f124` | 2 | 18 | 52 | 36 | 36 | 34 | 2 | 0 | 0 |
+| SMOKE-B | `20161b96ba82a610d3669d49aae01eeff32f98eeb1737438c892a869b5660e88` | `36b9357cb704a5c40524f75d18d514753518ca44d88a5cc2b7befcf015b9aa5b` | 4 | 26 | 38 | 45 | 45 | 44 | 1 | 0 | 0 |
+| SMOKE-C | `22eacc455a07341d24f52666e911dea1f0e8edd46d8bbaeed896a5fc2f973a48` | `d500668812bbe3051b22283b4581ddff6eb88ac5c4bc2b9ab9f2d586e942b916` | 8 | 42 | 77 | 104 | 104 | 103 | 1 | 0 | 0 |
+
+All three final3 runs report `model_call_count = 0`,
+`external_api_call_count = 0`, `requires_openai_api_key = false`, write
+isolation passed, and no write-isolation canary changed.
+
+This replay is stopped at the required human style gate. It is not Product PASS.
+
+## Round-5 PDF Render QA
+
+The combined Round-5 Final3 PDF is:
+
+`/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round5-final3-combined/STYLE_SMOKE_A_B_C_ROUND5_FINAL3.pdf`
+
+QA result:
+
+- `pdfinfo`: 9 pages, A4, unencrypted, 296142 bytes;
+- `pdffonts`: TeX Gyre Termes, TeX Gyre Termes Math, Noto Serif SC, Noto Sans
+  SC and LMMono are embedded/subset;
+- final render log: no `Missing character` warnings;
+- `pdftotext -layout`: text layer extractable;
+- page 1 preview generated and inspected;
+- page 6 and page 7 formula-heavy previews generated and inspected.
+
+Preview paths:
+
+- `/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round5-final3-combined/page-preview.png`
+- `/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round5-final3-combined/page6-preview.png`
+- `/overflow/htzhu/mingcheng_new/AI_Skills_Collection/exports/private/050_writing_style_host_codex_runtime/round5-final3-combined/page7-preview.png`
+
+The original production replay Markdown is preserved. The `.pdfsafe.md` file is
+render-layer only: it converts math-heavy blocks to LaTeX display equations so
+XeLaTeX does not lose Unicode mathematical alphanumeric glyphs in code/prose
+spans.
+
+Root cause:
+
+- execution error: I first treated an external `.tmp` artifact and insufficient
+  page-level formula QA as acceptable, violating `AGENTS.md` section 1.1;
+- skill/tooling gap: the current PDF/render skill route does not automatically
+  normalize Unicode mathematical alphanumeric symbols inside code/prose spans
+  before XeLaTeX font coverage is checked.
+
+Prevention:
+
+- user-viewable repo artifacts must be delivered under repo-local paths such as
+  `exports/private/<task_key>/` when private;
+- PDF handoff requires page count, font embedding, text extraction, render log,
+  and formula-heavy page previews before it is reported complete;
+- the render skill should gain a reusable Unicode-math/code-span guard so future
+  agents do not have to discover this manually.
 
 ## Version Decision
 

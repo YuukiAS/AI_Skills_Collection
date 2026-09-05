@@ -28,6 +28,7 @@ PDF、Markdown、图片预览、HTML 报告、deck render、审阅包或 smoke �
 - 如果 artifact 是公开证据且适合版本化，放在对应 `results/<task_key>/`、`docs/`、`exports/` 或任务指定目录，并按正常 Git 规则决定是否提交。
 - 最终回复、`RESULT.md` 和 public receipt 里优先给 repo 内路径；外部 scratch 路径只能作为 provenance / debug locator，不作为主交付入口。
 - 交付前必须确认文件存在、大小非零，并在 PDF/图片/HTML 等可视产物上做至少一个真实 render/preview 检查；不能只报告生成命令成功。
+- 含公式、表格或复杂排版的 PDF 还必须抽查对应高风险页面，例如公式密集页、表格页或用户指出的问题页；只看封面/第一页不算完成。
 - 如果因权限、体积、隐私或工具限制确实不能放进 repo 内，必须明确说明原因，并给出下一步可恢复方式；不能静默把文件留在 agent 私有临时目录。
 
 ## 1.2 README 永远写给人看
