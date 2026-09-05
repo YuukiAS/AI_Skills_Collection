@@ -498,9 +498,25 @@ def _context_is_locally_attached(candidate: str, surface: str, chinese_context: 
                 distance = surface_start - context_end
             else:
                 distance = 0
-            if distance <= USEFUL_RECOGNITION_CONTEXT_WINDOW:
+            window = candidate[
+                max(0, min(context_start, surface_start) - USEFUL_RECOGNITION_CONTEXT_WINDOW) :
+                min(len(candidate), max(context_end, surface_end) + USEFUL_RECOGNITION_CONTEXT_WINDOW)
+            ]
+            if distance <= USEFUL_RECOGNITION_CONTEXT_WINDOW and _useful_context_explains(window, chinese_context):
                 return True
     return False
+
+
+def _useful_context_explains(window: str, chinese_context: str) -> bool:
+    cjk_chars = [char for char in chinese_context if "\u4e00" <= char <= "\u9fff"]
+    if len(cjk_chars) < 4:
+        return False
+    explanatory_patterns = [
+        r"（[^）]{0,80}[A-Za-z][^）]{0,80}）[^。；\n]{0,40}(?:表示|指|对应|说明|用于)",
+        r"(?:也就是|也即|即|是指|表示|指的是|对应|说明|用于|作用是|目标是|含义是|对象是|指标是|变量是|模型是)",
+        r"(?:中文|中文意思|这里的|此处的|本文中)[^。；\n]{0,40}(?:表示|指|对应|说明|含义|对象|目标|作用)",
+    ]
+    return any(re.search(pattern, window) for pattern in explanatory_patterns)
 
 
 def reader_review_packet(candidate: str, audience: str) -> dict[str, Any]:

@@ -701,7 +701,7 @@ class ScientificRewriteTests(unittest.TestCase):
         helper = load_helper()
         source = (
             "# 结果\n\nCARE 在 2026-08-28 的 Dice=0.81，检查点路径见 /tmp/run/checkpoint.pt。\n\n"
-            "下一步比较 FedFisher 和 FedLPA；如果 pooled gap 下降就是 GO，否则 STOP。"
+            "下一步比较 FedFisher 和 FedLPA；如果汇总差距（pooled gap）表示的整体差距下降就是 GO，否则 STOP。"
         )
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -878,6 +878,27 @@ class ScientificRewriteTests(unittest.TestCase):
             literal_invariants=[],
         )
         self.assertEqual(result["useful_recognition_first_use_count"], 1)
+
+        weak_candidate = "在严格一次通信条件下，global-vs-personalized estimand 会改变。"
+        weak_inventory = helper.enumerate_latin_spans(weak_candidate)
+        weak_classifications = {
+            "exact_identity": [],
+            "useful_recognition": [
+                {
+                    "occurrence_id": weak_inventory["spans"][0]["occurrence_id"],
+                    "reason": "附近有中文但没有解释这个英文项。",
+                    "chinese_context": "严格一次通信",
+                }
+            ],
+            "ordinary_reasoning": [],
+        }
+        with self.assertRaisesRegex(RuntimeError, "local Chinese context"):
+            helper.validate_chinese_reader_pass(
+                reader_pass_shell(helper, weak_candidate, weak_classifications),
+                weak_candidate,
+                latin_inventory=weak_inventory,
+                literal_invariants=[],
+            )
 
     def test_useful_recognition_first_use_boundary_rejects_repeated_non_identity_english(self) -> None:
         helper = load_helper()
