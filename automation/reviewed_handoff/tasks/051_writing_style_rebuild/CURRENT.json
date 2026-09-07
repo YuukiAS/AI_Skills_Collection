@@ -1,0 +1,16 @@
+{
+  "base_branch": "reviewed/051_writing_style_rebuild",
+  "base_commit": "6fa8f5c54351ee8c7097745ed5baa3d502313af0",
+  "ci_required": true,
+  "ci_status": "PENDING",
+  "implementation_commit": null,
+  "last_review_decision": null,
+  "max_plan_revisions": 1,
+  "max_review_rounds": 2,
+  "next_action": "RUN_GPT_PLANNER",
+  "plan_revision": 0,
+  "review_round": 0,
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "state": "PLAN_REQUESTED",
+  "task_key": "051_writing_style_rebuild"
+}
