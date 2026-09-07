@@ -4,6 +4,10 @@
 
 先读取 repository 的当前 source of truth、已有实现、相关文档、历史约束和用户提供的外部来源。先做取舍，再写 Plan；不要把“让 Codex 自己决定”留给 Executor。
 
+Planner 必须先冻结 `## Positive completion`、claim scope、`## Non-substitutable semantics` 和 evidence requirements。Positive completion 必须是真实用户、产品、科研或仓库可观察结果，不能只是 tests、CI、schema、validator、文件存在、没有命中 blacklist 或 helper 成功。claim scope 不能超过 evidence scope：smoke 不能证明 formal/production，synthetic 不能证明真实数据，helper 不能证明 production entry，local artifact 不能证明 hosted/user-facing 体验，机械检查不能证明定性质量。
+
+Non-substitutable semantics 必须明确哪些 data、method、model/source、scale、execution entry、artifact、renderer、budget 和 quality bar 不可偷偷降级。未经 Plan 明确授权 equivalence 并规定等价证据，proxy、toy/synthetic、helper-only、handmade artifact、reduced scale、lower quality bar 或 blacklist-only check 只能作为 diagnostic / partial / degraded evidence，不能作为原目标 PASS。
+
 在 AI_Skills_Collection 中，先读取根 `AGENTS.md`。
 
 任何涉及 AI Resources、Notion candidate inbox、外部 skill repo、provenance intake、profile/marketplace exposure 或 active skill routing 的 Plan，都必须再读取：
@@ -202,7 +206,7 @@ Planner 必须明确：
 
 采用外部来源或外部能力时，不要自动照搬上游 repository 结构。应按目标 repository 既有的 user-facing capability boundaries 集成，显式处理 overlap/conflict；只有冻结的产品意图确实要求一个新的长期用户入口时，才创建新的顶级能力。
 
-计划冻结后写入当前 task 的 `PLAN.md`，使用模板规定的 frontmatter 和章节。若当前 Planner 通过 GitHub connector 工作，先写 `PLAN.md`，最后写 `CURRENT.json` 并把 `CURRENT.state` 推进到 `PLAN_FROZEN`。不要假设 Planner 可以运行目标机器上的 local CLI。
+计划冻结后写入当前 task 的 `PLAN.md`，使用模板规定的 frontmatter 和章节。当前新建或重新冻结的 Plan 必须使用 `schema: AI_BRIDGE_REVIEWED_PLAN_V2`；`AI_BRIDGE_REVIEWED_PLAN_V1` 只用于兼容历史 frozen Plan，不能在当前 Bridge Kit 下作为新的 `PLAN_FROZEN` 输入。若当前 Planner 通过 GitHub connector 工作，先写 `PLAN.md`，自检 frontmatter 和 required sections 后，最后写 `CURRENT.json` 并把 `CURRENT.state` 推进到 `PLAN_FROZEN`。不要假设 Planner 可以运行目标机器上的 local CLI。
 
 执行期间如果 `CURRENT.state=NEEDS_GPT_PLANNER`，Scheduled GPT 可以做一次最小 re-plan：只解决 Codex 已证实无法从冻结 Plan 推导的歧义。如果该状态来自 `CURRENT.human_rejection.decision=REJECT` / `route=NEEDS_GPT_PLANNER`，把用户拒绝当作 human decision evidence，而不是 Reviewer decision；保留既有 `review_round`、`last_review_decision=PASS` 和原 `REVIEW_<n>.md` 历史。不得借机重新设计整个任务。修改 `PLAN.md` 后将 `plan_revision` 加一并在最后写 `CURRENT.json` 恢复 `PLAN_FROZEN`。若已经做过一次 re-plan，或必须由用户改变产品/科学语义，先写 `FINAL_REPORT.md`，最后写 `CURRENT.json` 进入 `AWAIT_HUMAN_DECISION`。
 

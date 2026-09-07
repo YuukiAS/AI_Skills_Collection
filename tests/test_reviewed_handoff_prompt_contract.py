@@ -9,19 +9,66 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class ReviewedHandoffPromptContractTests(unittest.TestCase):
+    def test_future_plan_template_uses_goal_fidelity_v2(self) -> None:
+        template = (ROOT / "automation/reviewed_handoff/templates/PLAN.md").read_text(encoding="utf-8")
+
+        self.assertIn("schema: AI_BRIDGE_REVIEWED_PLAN_V2", template)
+        for heading in [
+            "## Frozen decisions",
+            "## Positive completion",
+            "## Non-substitutable semantics",
+            "## Implementation scope",
+            "## Acceptance and regression gates",
+            "## Natural-language usage / routing expectations",
+            "## Out of scope",
+        ]:
+            self.assertIn(heading, template)
+        self.assertIn("Tests, CI, file existence, package validation", template)
+        self.assertIn("maximum claim scope", template)
+        self.assertIn("method, scale, execution entry", template)
+        self.assertIn("model/source, budget, or quality bar", template)
+
     def test_scheduled_reviewer_requires_plan_frozen_preflight(self) -> None:
         prompt = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(encoding="utf-8")
 
         self.assertIn("automation/reviewed_handoff/templates/PLAN.md", prompt)
         self.assertIn("重新读取刚写出的 `PLAN.md`", prompt)
         self.assertIn("frontmatter 与全部 required sections", prompt)
+        self.assertIn("schema: AI_BRIDGE_REVIEWED_PLAN_V2", prompt)
+        self.assertIn("AI_BRIDGE_REVIEWED_PLAN_V1", prompt)
         self.assertIn("`## Frozen decisions`", prompt)
+        self.assertIn("`## Positive completion`", prompt)
+        self.assertIn("`## Non-substitutable semantics`", prompt)
         self.assertIn("`## Implementation scope`", prompt)
         self.assertIn("`## Acceptance and regression gates`", prompt)
+        self.assertIn("`## Natural-language usage / routing expectations`", prompt)
         self.assertIn("`## Out of scope`", prompt)
+        self.assertIn("不能用于当前新冻结", prompt)
         self.assertIn("只有 PLAN preflight PASS 后，才允许最后写 `CURRENT.json`", prompt)
         self.assertIn("CURRENT.state=PLAN_FROZEN", prompt)
         self.assertIn("不得 freeze", prompt)
+
+    def test_goal_fidelity_prompts_preserve_ai_skills_custom_contracts(self) -> None:
+        planner = (ROOT / "automation/reviewed_handoff/prompts/PLANNER.md").read_text(encoding="utf-8")
+        executor = (ROOT / "automation/reviewed_handoff/prompts/CODEX_EXECUTOR.md").read_text(encoding="utf-8")
+        scheduled = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(
+            encoding="utf-8"
+        )
+
+        for text in (planner, executor, scheduled):
+            self.assertIn("Positive completion", text)
+            self.assertIn("Non-substitutable", text)
+            self.assertIn("AI_BRIDGE_REVIEWED_PLAN_V1", text)
+            self.assertIn("AI_BRIDGE_REVIEWED_PLAN_V2", text)
+            self.assertIn("claim scope", text)
+
+        self.assertIn("真实用户、产品、科研或仓库可观察结果", planner)
+        self.assertIn("proxy、toy/synthetic、helper-only", planner)
+        self.assertIn("历史 `AI_BRIDGE_REVIEWED_PLAN_V1` frozen Plan", executor)
+        self.assertIn("blacklist-only check", executor)
+        self.assertIn("真实 positive completion 是否被观察到", scheduled)
+        self.assertIn("non-substitutable semantics 是否没有被弱化", scheduled)
+        self.assertIn("process evidence", scheduled)
 
     def test_scheduled_reviewer_requires_final_report_preflight(self) -> None:
         prompt = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(encoding="utf-8")

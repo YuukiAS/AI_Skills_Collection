@@ -8,6 +8,10 @@
 
 如果 repository /用户已经为当前 Reviewed Handoff task 指定独立 workflow branch（AI_Skills_Collection 默认使用 `reviewed/<task_key>`），只在该 task branch 上执行和交接；不要因为同一 repository 的其他 task 正在等待 CI、Planner、Reviewer、visual evidence 或用户输入而暂停当前独立任务。分支冲突或 integration 选择属于可恢复的 branch decision，不等于 task 失败。
 
+如果当前 task 使用历史 `AI_BRIDGE_REVIEWED_PLAN_V1` frozen Plan，它仍是合法 legacy contract。不要为了补齐 `## Positive completion` 或 `## Non-substitutable semantics` 而修改历史 `PLAN.md`，也不要把当前 Goal Fidelity prompt 当成扩大原 scope 的授权。只能从原 `REQUEST.md`、`## Frozen decisions`、`## Implementation scope`、`## Acceptance and regression gates` 和 `## Out of scope` 中保守解释任务；若继续执行时出现无法从这些内容安全推导的产品/科学语义，转为 `NEEDS_GPT_PLANNER` 或既有 human route。
+
+当前新建或重新冻结的 Plan 必须使用 `AI_BRIDGE_REVIEWED_PLAN_V2`，但 Executor 没有 Planner authority，不得为了把旧 V1 改成 V2 而自行修改 `PLAN.md`。
+
 在 AI_Skills_Collection 中，如果冻结 Plan 涉及 AI Resources、Notion candidate inbox、外部 skill repo、provenance intake、profile/marketplace exposure 或 active skill routing，还必须先读取：
 
 ```text
@@ -33,6 +37,8 @@ ai-bridge plugin-replay --target <repo> --plugin <exact installed ai-skills-core
 只读取本仓库 source `skills/core/codex-system/ai-skills-repository-maintainer/SKILL.md` 是 source context，不是 production plugin invocation proof。`ai-skills-core` 只能判断维护闭环；target domain plugin 继续拥有 PPT、写作、统计、医学影像、生物信息等专业判断。
 
 不得修改 Planner 的产品/科学语义来让测试通过。若 Plan 存在会实质改变范围、架构、外部行为或科学/产品含义且无法安全推导的歧义，把 `CURRENT.state` 设为 `NEEDS_GPT_PLANNER`，说明最小 planner question，并停止该部分实现；不要自己重写 Plan。
+
+冻结 Plan 标记为 non-substitutable 的内容不可用时，Executor 不能用更弱 proxy、fallback、toy/synthetic data、helper-only path、handmade artifact、random/untrained source、reduced scale、较低 quality bar 或 blacklist-only check 继续寻求原始 PASS。只有 Plan 明确授权某个 fallback 等价、并说明等价证据时，才可把它作为原始完成路径。其他 degraded/diagnostic/partial 路径必须写入 `RESULT.md` 的 `## Deviations / blockers`，同时限制最终 claim scope。若缺口会改变产品或科学含义，转为 `NEEDS_GPT_PLANNER`。
 
 对**不改变 Plan 语义、但需要一个用户回答才能继续的运行时问题**，优先询问而不是终止 goal。例如：真实 artifact 的具体路径、两个已知文件中应使用哪一个、credential/authorization 确认、dedicated branch/worktree 选择、可恢复的 merge/integration choice。若当前 Codex goal 支持 `request_user_input`，直接提出最小问题并保持 workflow state；不要为了结束本轮运行把这种问题写成 `BLOCKED`。若没有交互通道，保留当前合法 state 并报告需要的最小用户输入，不伪造 terminal failure。
 

@@ -40,7 +40,7 @@ Scheduled GPT 的真实执行面是 GitHub connector，不是目标机器 shell�
 1. 重新读取当前 `automation/reviewed_handoff/templates/PLAN.md`，以运行时当前 template 为 source of truth，不允许凭记忆猜 headings；
 2. 写或更新当前 task 的 `PLAN.md`；
 3. 重新读取刚写出的 `PLAN.md`；
-4. 以当前 template 为 source of truth，精确检查 frontmatter 与全部 required sections，至少包括 `## Frozen decisions`、`## Implementation scope`、`## Acceptance and regression gates` 和 `## Out of scope`；
+4. 以当前 template 为 source of truth，精确检查 frontmatter 与全部 required sections。当前新 freeze / re-freeze 必须写 `schema: AI_BRIDGE_REVIEWED_PLAN_V2`，至少包括 `## Frozen decisions`、`## Positive completion`、`## Non-substitutable semantics`、`## Implementation scope`、`## Acceptance and regression gates`、`## Natural-language usage / routing expectations` 和 `## Out of scope`；`AI_BRIDGE_REVIEWED_PLAN_V1` 只作为历史 frozen Plan 兼容格式，不能用于当前新冻结；
 5. 只有 PLAN preflight PASS 后，才允许最后写 `CURRENT.json` 的 `CURRENT.state=PLAN_FROZEN`；
 6. 若 PLAN 不合法，不得 freeze，不得写 `CURRENT=PLAN_FROZEN`，先修 Plan；不要把可修的 Plan 结构问题直接写成 BLOCKED。
 
@@ -70,7 +70,7 @@ Local CLI 仍用于 Codex watcher、本地调试、deterministic validation 和�
 
 ## NEEDS_GPT_PLANNER
 
-读取 REQUEST、当前 PLAN、RESULT/Reviewer finding 和当前 task branch 的真实 repository 状态。只允许一次最小 Plan revision，只解决 Executor 无法从原 Plan 安全推导的实质歧义。不要因为想到更好的架构而扩大 scope。修改 `PLAN.md` 后，在最后的 `CURRENT.json` transaction 中设置 `plan_revision += 1`、`state=PLAN_FROZEN` 和正确 `next_action`。若已达到 planner revision limit，或需要用户改变产品/科学语义，先写 `FINAL_REPORT.md` 解释需要用户决定的具体问题与已完成工作，并完成 FINAL_REPORT preflight，再在最后的 `CURRENT.json` transaction 中设置 `human_gate_reason=PLANNER_DECISION`、`state=AWAIT_HUMAN_DECISION`。需要用户决定不是 BLOCKED。
+读取 REQUEST、当前 PLAN、RESULT/Reviewer finding 和当前 task branch 的真实 repository 状态。只允许一次最小 Plan revision，只解决 Executor 无法从原 Plan 安全推导的实质歧义。不要因为想到更好的架构而扩大 scope。修改 `PLAN.md` 后，先按当前 PLAN 模板自检 frontmatter 和 required sections；自检通过后，才在最后的 `CURRENT.json` transaction 中设置 `plan_revision += 1`、`state=PLAN_FROZEN` 和正确 `next_action`。Plan revision 也必须重新做 semantic red-team：当前文字是否允许一个更弱、更便宜、但没有完成用户真实目标的实现 PASS？如果会，先修 `## Positive completion`、`## Non-substitutable semantics` 或 evidence/claim scope，再用 `AI_BRIDGE_REVIEWED_PLAN_V2` 冻结。若已达到 planner revision limit，或需要用户改变产品/科学语义，先写 `FINAL_REPORT.md` 解释需要用户决定的具体问题与已完成工作，并完成 FINAL_REPORT preflight，再在最后的 `CURRENT.json` transaction 中设置 `human_gate_reason=PLANNER_DECISION`、`state=AWAIT_HUMAN_DECISION`。需要用户决定不是 BLOCKED。
 
 ## WAITING_FOR_CI
 
@@ -89,7 +89,7 @@ CI failure review 与普通 Reviewer finding 使用同一个 review round 预算
 Reviewer 必须独立读取：
 
 - REQUEST.md；
-- 冻结的 PLAN.md；
+- 冻结的 PLAN.md，尤其是真实目标、`## Positive completion`、`## Non-substitutable semantics` 和 claim scope；
 - RESULT.md；
 - `base_commit..implementation_commit` 的真实 Git diff；
 - 当前 implementation commit 的真实 CI/check 状态（若项目要求 CI）；
@@ -121,11 +121,15 @@ CI、schema、protected-span、Executor summary、本地测试和 control-plane 
 
 `base_commit..implementation_commit` 可能同时包含 Reviewed Handoff 自己的 PLAN/CURRENT/RESULT 等 bookkeeping commits，因为 `base_commit` 是任务初始化时记录的 locator。不要因为这些合法 workflow 文件本身存在于 diff 就把它们当作产品实现或 regression。实现审核应聚焦冻结 Plan 定义的项目代码、配置、文档和 user-facing artifacts。相反，如果真实 diff 显示 Executor 修改了 `REQUEST.md`、`PLAN.md`、既有 `REVIEW_<n>.md`、`FINAL_REPORT.md` 或 review/plan limit 等 Planner/Reviewer authority，则这是协议违规，应阻断当前 review transaction并要求最小 recovery；不要把可恢复 authority error 自动升级成 terminal BLOCKED。
 
-Review 的唯一目标是判断当前实现是否满足冻结 Plan 且没有造成相关 regression。禁止仅因为“还可以更优雅”“可以再加一个 abstraction”“理论上更安全”而扩大冻结 scope。
+Review 的唯一目标是判断当前实现是否满足冻结 Plan 且没有造成相关 regression。先问四件事：真实 positive completion 是否被观察到；冻结的 non-substitutable semantics 是否没有被弱化；证据 scope 是否覆盖 FINAL_REPORT / RESULT 中准备声明的 claim scope；当前 evidence 是否同样能由 Plan 不允许的更弱实现解释。禁止仅因为“还可以更优雅”“可以再加一个 abstraction”“理论上更安全”而扩大冻结 scope。
+
+如果冻结 Plan 是合法历史 `AI_BRIDGE_REVIEWED_PLAN_V1`，不要因为缺少 V2 的两个新 H2 就要求重写历史 `PLAN.md`，也不要 retroactively 发明 Plan 没有写下的 requirement。Reviewer 仍应用 Goal Fidelity 的通用审查习惯，但只能从原 `REQUEST.md`、V1 的 `## Frozen decisions`、`## Implementation scope`、`## Acceptance and regression gates` 和 `## Out of scope` 中保守解释 positive completion、不可替代语义和证据范围；如果这些内容无法支持继续判断，使用现有 `REVISE` / `NEEDS_GPT_PLANNER` / human route，而不是 silent PASS。
+
+如果现有 evidence 也可以由 Plan 不允许的更弱实现解释，例如 smoke 代替 formal/production、synthetic 代替真实数据、mechanical validator 代替定性质量、helper 代替 production entry、local artifact 代替 user-facing/hosted output，不能 PASS。测试、CI、schema、validator、package PASS、文件存在和没有命中 blacklist 都只是 process evidence，不是 Product PASS 或语义 authority。
 
 每个 blocking finding 必须说明：Plan/回归依据、真实 observed evidence、最小修复、修复后要看到的 evidence。没有冻结 Plan 或已有行为依据的问题只能作为 non-blocking note/backlog。
 
-写 `REVIEW_<round>.md`，decision 只能是 `PASS`、`REVISE` 或 `BLOCKED`。
+写 `REVIEW_<round>.md`，decision 只能是 `PASS`、`REVISE` 或 `BLOCKED`。`PASS` 必须明确回答：Positive completion 已被观察到；冻结语义没有弱化；artifact-aware evidence 已满足；当前证据足以支撑最终 claim。
 
 - `PASS`：只有 process gates 和所有 required product/artifact gates 都满足时才允许。先写 `REVIEW_<round>.md` 和 `FINAL_REPORT.md`，并完成 FINAL_REPORT preflight。若 frozen Plan 明确要求最终人工验收，保持当前 state graph：先把 `CURRENT.state` 设为 `PASS`，再用下一次机械 `CURRENT.json` transaction 进入 `AWAIT_HUMAN_DECISION`，最终写 `human_gate_reason=PASS`、`last_review_decision=PASS`、`state=AWAIT_HUMAN_DECISION`。若没有真实 human gate，Reviewer PASS 后进入 integration closure：执行或触发 task branch integration preflight，确认 required CI PASS、required Reviewer PASS、`main` 无同 shared runtime/source area 竞争性修改、无 merge conflict、无 branch protection blocker、无 release/migration/breaking/high-risk integration blocker，然后默认合回 `main`、push、删除 task branch；默认不要求 PR。不要为了少一次 commit 改坏状态机；Reviewer PASS 前不得自动 merge。
 - 第一轮 `REVISE`：先写 `REVIEW_1.md`，最后写 `CURRENT.json`：`review_round=1`、`last_review_decision=REVISE`、`state=REVISE`。本地 task-bound Codex 后续自动启动一次最小 repair。
