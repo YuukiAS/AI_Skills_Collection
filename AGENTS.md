@@ -29,6 +29,78 @@
 
 如果一次 README 修改技术上正确但普通用户读不明白，视为需要继续改。
 
+## 1.2 任务规模必须和读取规模匹配
+
+`Source of truth` 是读取优先级，不是“每个任务都把所有 source 全读一遍”。Planner、Executor、Reviewer 和普通 Codex 必须先判断当前任务规模，再决定读取范围。上下文过大不仅浪费 token，也会把旧设计、历史失败和无关规则重新带进当前判断。
+
+先把任务粗分为：
+
+- `CONTROL / BOOTSTRAP`：建 branch/worktree、初始化 Reviewed Handoff task、检查状态、更新少量 control metadata；不改变 production behavior。
+- `BOUNDED IMPLEMENTATION`：实现一个已经冻结的具体能力。
+- `ARCHITECTURE / RESEARCH`：重新设计方案、比较替代路线、做跨模块研究。
+
+### CONTROL / BOOTSTRAP 默认使用最小上下文
+
+如果目标预计只会修改不超过约 5 个 tracked control/docs 文件，且明确禁止修改 production source，则默认只读取：
+
+1. 用户当前目标；
+2. 本 `AGENTS.md` 中与任务直接相关的章节；
+3. 当前 task 的 `REQUEST/CURRENT`、必要 template / CLI contract；
+4. 完成该操作所需的直接前置状态，例如 branch、Bridge Kit version、validation 结果。
+
+**不要为了“更稳”自动完整读取：**
+
+- target domain plugin 的全部 source；
+- 整份 plugin TODO / changelog；
+- 多轮历史 `PLAN/RESULT/FINAL_REPORT`；
+- 已经通过 review 的整份 design plan；
+- 与本次 control-plane 变化无关的 tests / fixture / benchmark。
+
+只有出现一个具体、可命名的未知项，且它会改变当前 control action 是否安全时，才扩大读取范围；扩大前先说明“缺哪个事实、为什么必须读这个 source”。
+
+### 已有 canonical design 时使用 locator，不复制全文
+
+如果用户/Planner 已经给出通过 review 的设计文档、commit 或历史 artifact：
+
+- bootstrap `REQUEST` / objective 记录其 **path + commit + 一两句 authority summary**；
+- 不把整套 architecture checklist 复制进 CLI argument、`REQUEST.md` 或 Goal prompt；
+- 真正需要冻结实现合同时，由后续 Planner 读取 canonical design 并写 `PLAN.md`；
+- Executor 不因为 bootstrap objective 很长就重复重建一次 architecture audit。
+
+对 bootstrap task，objective 默认应是短的：说明最终 product target、当前阶段只做什么、不能做什么、后续 authority 在哪里。能用 repo locator 表达的内容不要再粘贴一遍。
+
+### 优先 targeted read，不默认 full-file dump
+
+- 大文件先用目录、frontmatter、`git diff --name-only`、`git show --stat`、搜索或目标行段定位；只有问题确实需要全文时再读全文。
+- 不重复读取未发生变化的同一大文件。写过的 control file 可以在提交前重读一次；没有变化的历史材料不需要每个阶段重复确认。
+- 不为了证明“没有修改某 plugin”而完整读取该 plugin；用 Git diff / changed-file scope 证明未修改。
+- 一个已知网络/代理/路径错误允许做最小诊断和 bounded retry；不要因为一次环境错误升级成全仓 audit。
+
+### Bootstrap 的软执行预算
+
+对于单纯 branch/task bootstrap，正常情况下应控制在：
+
+- 不超过约 8 个 substantive file reads；
+- 不超过 2 份完整历史/设计文档；
+- 一次 preflight validation + 一次写入后的 final validation；
+- 达到请求的合法 workflow state 后立即停止。
+
+这不是为了在必要时拒绝真实验证。若确有 blocker 需要突破上述范围，必须先记录具体 blocker 和新增读取为何能解决它；不得无理由继续扩大上下文。
+
+运行环境未暴露实时 token 计数时，不要伪造精确 token gate；使用上述可观察的 read-count / validation-count / task-scope guardrail。
+
+### Goal / Planner 也要承担上下文成本责任
+
+不要把“Codex 自己会裁剪”作为超长 Goal 的借口。GPT/Planner 写 Goal 时必须：
+
+- 小任务给小 Prompt；
+- 已存在 canonical repo 文档时优先引用，不重复粘贴；
+- 不把未来 Executor 才需要的完整 architecture 细节塞进 bootstrap；
+- 不要求 Executor读取一批材料，却同时规定本轮绝不修改那些材料对应的 production area；
+- 把“需要证明的前置条件”和“以后 Planner/Executor 要实现的 contract”分开。
+
+如果最终只新增两个 control files，却为了完成任务读取了大量 plugin source、历史设计和回放证据，应视为 **context-budget regression**，即使 Git diff 本身正确。
+
 ## 2. 真实任务驱动长期改进
 
 长期 refinement 必须读取：
