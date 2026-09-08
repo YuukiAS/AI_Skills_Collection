@@ -31,6 +31,81 @@ Gate 2 was not rerun after the parser repair merely to manufacture a clean
 behavior evidence plus a subsequent offline parser regression against the same
 failed-run JSONL.
 
+Gate 3 known A/B/C regression generation is complete and waiting for user
+artifact acceptance:
+
+- `Gate3=AWAITING_USER_ACCEPTANCE`
+- exact candidate:
+  `ee8dd6edda2a2e4dd8f3210504225a56432b11a0`
+- bounded private replay authorization: the user explicitly authorized this
+  Gate 3 run to send the three frozen A/B/C private source segments through the
+  repo-local `codex-cli 0.153.4` candidate replay child using the current Codex
+  credential scope, only to generate the A/B/C review artifact.
+- A/B/C source inputs were recovered from existing repo-local ignored 050
+  private replay inputs and matched the frozen segment SHA256 values. No
+  plaintext source or candidate text is committed.
+- Shared ordinary user prompt:
+  `exports/private/051_writing_style_rebuild/gate3-known-regression/replay-tasks/KNOWN_REGRESSION_REWRITE_TASK.md`
+- Candidate replay runs:
+  - A:
+    `.local-runtime/candidate-plugin-replay/runs/20260908T090008Z-1878421`
+  - B:
+    `.local-runtime/candidate-plugin-replay/runs/20260908T090612Z-1895475`
+  - C:
+    `.local-runtime/candidate-plugin-replay/runs/20260908T091217Z-1913435`
+- Source SHA256:
+  - A:
+    `3e18bea855cc4afccacc47b7ed60600ef637cbffd7ea412fcb54fe4b0575a5db`
+  - B:
+    `20161b96ba82a610d3669d49aae01eeff32f98eeb1737438c892a869b5660e88`
+  - C:
+    `22eacc455a07341d24f52666e911dea1f0e8edd46d8bbaeed896a5fc2f973a48`
+- Candidate output SHA256:
+  - A:
+    `16406f1fc06bdb41048f84383868eef86c530a87348b63953c2a2f35ddee7633`
+  - B:
+    `1a46aa0b35165069328df3b367f97f2185de16c8747dea81f2fd622c8abbbc56`
+  - C:
+    `693f0bb02bc1b3250c2b679eb4fccdbe0770f8dd233b9bd6f1d7b9dac8dd0e70`
+- Heavy-route receipt SHA256:
+  - A:
+    `e1125ffb9bd570efc5ac82e15cd732c357b80863dde0e153f819a1792495ce9e`
+  - B:
+    `5955e5096d76b70466bac9e574e9936dfa202d7c970491a5fbf035fe81489d81`
+  - C:
+    `06e7c36cee217139a3ed6207a9eb8bc0904c33115963e465ef447eed844efaf2`
+- Each A/B/C run proved actual candidate consumption from parsed JSON events
+  and read the candidate cache
+  `plugins/cache/ai-skills-candidate/writing-style/0.1/skills/scientific-rewrite/SKILL.md`.
+- Each A/B/C run recorded:
+  `selected_route=scientific-rewrite`, `forced_route=false`,
+  `ordinary_user_prompt=true`,
+  `schema=SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2`,
+  `paid_generation_used=false`, and `external_api_call_count=0`.
+- Mechanical/fidelity gate metadata passed for all three:
+  `meaning_map.ok=true`, `reader_plan.ok=true`, `assembly.ok=true`,
+  `exact_verification.ok=true`, and `semantic_audit.ok=true`.
+- Candidate cleanup passed after each run, and production
+  `writing-style@yuukias-ai-skills` identity remained unchanged.
+- Combined review Markdown:
+  `exports/private/051_writing_style_rebuild/gate3-known-regression/combined_known_regression_review.md`
+  - SHA256:
+    `56c25c32d99cdd509166302db047a36fe3506d2e800fc50a059367e6ed6f5c83`
+- Combined review PDF:
+  `exports/private/051_writing_style_rebuild/gate3-known-regression/combined_known_regression_review.pdf`
+  - SHA256:
+    `8252c0db5b38089b7a25839884598b12c7837e90d69c032afc19aa55b230c5c6`
+- PDF was rendered through the existing production
+  `render-chinese-math-pdf` Pandoc + XeLaTeX path using
+  `/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/scripts/render_markdown_pdf.sh`.
+  QA: 11 pages; fonts embedded/subset; text layer extractable; first page and
+  formula-heavy page rendered to PNG and visually checked for readable Chinese,
+  formulas/math tokens, margins, and no obvious clipping/overflow. The review
+  Markdown uses render-safe escaping and math-symbol normalization for PDF
+  compatibility; the original private candidate Markdown files remain
+  unchanged and hash-bound above.
+- `paid_external_calls=0`
+
 Earlier Gate 2 attempts exposed infrastructure and harness failures. They are
 retained below as diagnostic history and are not product failures.
 
