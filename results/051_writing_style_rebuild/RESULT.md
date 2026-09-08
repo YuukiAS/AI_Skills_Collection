@@ -171,9 +171,10 @@ the artifact is staged for the single combined Gate 4/5 human qualitative gate:
   human `ACCEPT`; the artifact is staged for the single combined Gate 4/5
   qualitative gate after Gate 5.
 
-Gate 5 fresh holdout is frozen before evaluation:
+Gate 5 fresh holdout generation/render/mechanism evidence is PASS and the
+artifact is staged for the single combined Gate 4/5 human qualitative gate:
 
-- `Gate5=FROZEN_NOT_YET_RUN`
+- `Gate5=ARTIFACT_READY_PENDING_COMBINED_HUMAN_ACCEPTANCE`
 - holdout manifest:
   `results/051_writing_style_rebuild/gate5_holdout_manifest.json`
 - holdout id:
@@ -189,8 +190,60 @@ Gate 5 fresh holdout is frozen before evaluation:
   technical report, not from 044/049/050/051 writing-style regression material,
   not writing-style source/reference text, not a test fixture or synthetic toy
   text, and not used for 051 tuning/repair.
-- production changes, holdout replacement, and holdout-specific tuning are
-  forbidden during this holdout batch.
+- Gate 5 candidate replay run:
+  `.local-runtime/candidate-plugin-replay/runs/20260908T172348Z-2681296`
+- Replay runtime: `codex-cli 0.153.4`
+- Candidate actual consumption:
+  `proven=true`, `event_type=item.started`, `line_index=4`
+- Candidate installed identity:
+  `writing-style@ai-skills-candidate`
+- Candidate installed path:
+  `/overflow/htzhu/mingcheng_new/.codex-homes/Longleaf_Connection_Bridge/plugins/cache/ai-skills-candidate/writing-style/0.1`
+- Route selection:
+  `selected_route=scientific-rewrite`, `forced_route=false`,
+  `ordinary_user_prompt=true`
+- Heavy-route receipt:
+  `schema=SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2`,
+  `runtime=scientific-rewrite.meaning-realization.v2`,
+  `paid_generation_used=false`, `external_api_call_count=0`
+- Mechanical/fidelity metadata:
+  `meaning_map.ok=true`, `reader_plan.ok=true`, `assembly.ok=true`,
+  `exact_verification.ok=true`, `semantic_audit.ok=true`,
+  `semantic_audit.finding_count=0`, `repair_packet_count=0`
+- Candidate output Markdown:
+  `exports/private/051_writing_style_rebuild/gate5-holdout/holdout_candidate.md`
+  - SHA256:
+    `33323b4ddd6e865e6874e2b41f7de8021b33250489155854734fb384244fce3a`
+  - size bytes: `7620`
+- Gate 5 PDF:
+  `exports/private/051_writing_style_rebuild/gate5-holdout/holdout_review.pdf`
+  - SHA256:
+    `017f786d445d8d31538c98f6a09b053c4396838ef0e65151458796c88d16a5d2`
+- PDF was rendered through the existing production
+  `render-chinese-math-pdf` Pandoc + XeLaTeX path. QA: 2 pages; fonts
+  embedded/subset; text layer extractable; render log has zero
+  missing-character warnings, zero LaTeX errors, and zero `Error producing PDF`
+  entries. Extracted text has zero literal `$$`, zero raw `\theta`, zero raw
+  `\widetilde{`, zero raw `\frac`, zero raw `\begin{`, and zero raw Markdown
+  table separators. Both pages were rendered to PNG and visually checked for
+  readable Chinese, true table/code formatting, margins, and no obvious
+  clipping/overflow.
+- Production changes, holdout replacement, and holdout-specific tuning did not
+  occur during this holdout batch.
+
+Final combined user review packet is staged in the repo-local ignored private
+directory:
+
+```text
+exports/private/051_writing_style_rebuild/final-user-review/
+```
+
+It contains the corrected Gate 3 known-regression review artifact as context,
+the Gate 4 full-report Markdown/PDF, the Gate 5 holdout Markdown/PDF, and
+`FINAL_USER_REVIEW.md` as a short index/instruction file. Per Plan revision 1,
+the next required action is one human `ACCEPT` or `REJECT` decision covering
+the qualitative Gate 4/5 artifact acceptance. Gate 6 Text Review must not start
+until that combined human decision is `ACCEPT`.
 
 Earlier Gate 2 attempts exposed infrastructure and harness failures. They are
 retained below as diagnostic history and are not product failures.
@@ -445,6 +498,6 @@ current runtime is `codex-cli 0.142.0`.
   repaired offline.
 - The final parser repair was not followed by another Gate 2 replay, by explicit
   user instruction.
-- Gates for known A/B/C regression, full private report, fresh holdout, Text
-  Review, final CI, version/changelog, Reviewer PASS, and integration are not
-  started.
+- Text Review, final CI, version/changelog, production install smoke, Reviewer
+  PASS, and integration are not started. Per Plan revision 1, they wait on the
+  single combined Gate 4/5 human `ACCEPT`.
