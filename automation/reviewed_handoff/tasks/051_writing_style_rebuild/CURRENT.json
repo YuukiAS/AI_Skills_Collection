@@ -7,7 +7,7 @@
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "EXECUTOR_CONTINUE_GATE4_THEN_FREEZE_AND_RUN_ONE_PUBLIC_SAFE_GATE5_HOLDOUT_THEN_REQUEST_ONE_COMBINED_GATE4_GATE5_HUMAN_ACCEPT_REJECT",
+  "next_action": "GATE5_RUN_FROZEN_PUBLIC_SAFE_HOLDOUT",
   "plan_revision": 1,
   "review_round": 0,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",

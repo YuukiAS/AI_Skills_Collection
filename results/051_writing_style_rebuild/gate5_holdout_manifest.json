@@ -1,0 +1,39 @@
+{
+  "schema": "AI_SKILLS_051_GATE5_HOLDOUT_MANIFEST_V1",
+  "task_key": "051_writing_style_rebuild",
+  "frozen_at": "2026-09-08T17:20:54Z",
+  "implementation_commit": "ee8dd6edda2a2e4dd8f3210504225a56432b11a0",
+  "holdout_id": "GATE5-017-medical-imaging-group-meeting-final-report",
+  "source": {
+    "locator": "results/017_medical_imaging_group_meeting_benchmark/FINAL_REPORT.md",
+    "sha256": "db6d3bdfc502ab791ff8775d05466e3966c725e7f4109a0dd978c7ced69a0919",
+    "size_bytes": 6159,
+    "scope": "whole artifact"
+  },
+  "selection_rationale": {
+    "public_safe": true,
+    "repo_local": true,
+    "real_scientific_or_technical_text": true,
+    "language": "Chinese-dominant mixed Chinese/English technical report",
+    "document_family": "medical-imaging benchmark result report",
+    "not_from_044_049_050_051_writing_style_regression_material": true,
+    "not_writing_style_source_or_reference": true,
+    "not_test_fixture_or_synthetic_toy_text": true,
+    "not_used_for_051_tuning_or_repair": true
+  },
+  "production_freeze": {
+    "production_changes_allowed_during_holdout_batch": false,
+    "holdout_replacement_allowed_after_failure": false,
+    "holdout_specific_tuning_allowed": false
+  },
+  "acceptance_questions": [
+    "Does the candidate reorganize the report into natural reader-facing Chinese without reducing it to a summary?",
+    "Does it preserve medical-imaging task facts, dataset/model/metric names, numbers, caveats, and conclusion strength?",
+    "Does it avoid workflow jargon, source-order dumping, unsupported claims, and reader-facing internal labels?",
+    "Does the rendered Markdown/PDF remain readable with no raw Markdown or raw TeX leakage?"
+  ],
+  "planned_outputs": {
+    "candidate_markdown": "exports/private/051_writing_style_rebuild/gate5-holdout/holdout_candidate.md",
+    "review_pdf": "exports/private/051_writing_style_rebuild/gate5-holdout/holdout_review.pdf"
+  }
+}

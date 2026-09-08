@@ -114,6 +114,84 @@ Gate 3 known A/B/C regression PRODUCT / ARTIFACT gate is PASS:
   clipping/overflow.
 - `paid_external_calls=0`
 
+Gate 4 complete private report generation/render/mechanism evidence is PASS and
+the artifact is staged for the single combined Gate 4/5 human qualitative gate:
+
+- `Gate4=ARTIFACT_READY_PENDING_COMBINED_HUMAN_ACCEPTANCE`
+- exact candidate:
+  `ee8dd6edda2a2e4dd8f3210504225a56432b11a0`
+- Source locator:
+  `exports/private/051_writing_style_rebuild/gate4-full-report/source_extracted_layout.txt`
+- Source SHA256:
+  `f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213`
+- Source size bytes: `75936`
+- Gate 4 candidate replay run:
+  `.local-runtime/candidate-plugin-replay/runs/20260908T165748Z-2615572`
+- Replay runtime: `codex-cli 0.153.4`
+- Candidate actual consumption:
+  `proven=true`, `event_type=item.started`, `line_index=4`
+- Candidate installed identity:
+  `writing-style@ai-skills-candidate`
+- Candidate installed path:
+  `/overflow/htzhu/mingcheng_new/.codex-homes/Longleaf_Connection_Bridge/plugins/cache/ai-skills-candidate/writing-style/0.1`
+- Route selection:
+  `selected_route=scientific-rewrite`, `forced_route=false`,
+  `ordinary_user_prompt=true`
+- Heavy-route receipt:
+  `schema=SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2`,
+  `runtime=scientific-rewrite.meaning-realization.v2`,
+  `paid_generation_used=false`, `external_api_call_count=0`
+- Mechanical/fidelity metadata:
+  `meaning_map.ok=true`, `reader_plan.ok=true`, `assembly.ok=true`,
+  `exact_verification.ok=true`, `semantic_audit.ok=true`,
+  `semantic_audit.finding_count=0`, `repair_packet_count=0`
+- Candidate output Markdown:
+  `exports/private/051_writing_style_rebuild/gate4-full-report/final_report.md`
+  - SHA256:
+    `de87fc7572403bdb589eb69463b9f8bd1803735f7299a18916e9b478ae21b424`
+  - size bytes: `57321`
+- Gate 4 PDF:
+  `exports/private/051_writing_style_rebuild/gate4-full-report/final_report.pdf`
+  - SHA256:
+    `b2e169e208c057e6bc32589b13fa20bc30961fc6026d7fd08a2ef6f099b337ba`
+- PDF was rendered through the existing production
+  `render-chinese-math-pdf` Pandoc + XeLaTeX path. QA: 14 pages; fonts
+  embedded/subset; text layer extractable; render log has zero
+  missing-character warnings, zero LaTeX errors, and zero `Error producing PDF`
+  entries. Extracted text has zero literal `$$`, zero raw `\theta`, zero raw
+  `\widetilde{`, zero raw `\frac`, zero raw `\begin{`, and zero raw Markdown
+  table separators. First page, long-table page, and formula/reference-heavy
+  page were rendered to PNG and visually checked for readable Chinese,
+  true tables/formulas, margins, and no obvious clipping/overflow.
+- Reader-facing old failure vocabulary / internal route check:
+  `provenance=0`, `estimand=0`, `scientific gap=0`,
+  `resource contract=0`, `state of the art=0`, `Meaning Map=0`,
+  `Reader Plan=0`, `REALIZE_MEANING=0`.
+- As required by Plan revision 1, Gate 4 did not pause for a separate routine
+  human `ACCEPT`; the artifact is staged for the single combined Gate 4/5
+  qualitative gate after Gate 5.
+
+Gate 5 fresh holdout is frozen before evaluation:
+
+- `Gate5=FROZEN_NOT_YET_RUN`
+- holdout manifest:
+  `results/051_writing_style_rebuild/gate5_holdout_manifest.json`
+- holdout id:
+  `GATE5-017-medical-imaging-group-meeting-final-report`
+- source locator:
+  `results/017_medical_imaging_group_meeting_benchmark/FINAL_REPORT.md`
+- source SHA256:
+  `db6d3bdfc502ab791ff8775d05466e3966c725e7f4109a0dd978c7ced69a0919`
+- source size bytes: `6159`
+- scope: `whole artifact`
+- freeze time: `2026-09-08T17:20:54Z`
+- selection boundary: repo-local, public-safe, Chinese-dominant medical-imaging
+  technical report, not from 044/049/050/051 writing-style regression material,
+  not writing-style source/reference text, not a test fixture or synthetic toy
+  text, and not used for 051 tuning/repair.
+- production changes, holdout replacement, and holdout-specific tuning are
+  forbidden during this holdout batch.
+
 Earlier Gate 2 attempts exposed infrastructure and harness failures. They are
 retained below as diagnostic history and are not product failures.
 
