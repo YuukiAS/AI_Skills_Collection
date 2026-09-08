@@ -221,10 +221,120 @@ class ReplayMechanismTests(unittest.TestCase):
         installed = "/tmp/candidate/plugin"
         raw_only = f"plain text {installed}\n"
         self.assertIsNone(replay.parse_consumption(raw_only, installed))
-        structured = json.dumps({"type": "event", "message": {"path": f"{installed}/skills/zh/SKILL.md"}})
+        structured = json.dumps(
+            {
+                "type": "item.completed",
+                "item": {
+                    "type": "command_execution",
+                    "command": f"cat {installed}/skills/zh/SKILL.md",
+                },
+            }
+        )
         evidence = replay.parse_consumption(raw_only + structured + "\n", installed)
         self.assertIsNotNone(evidence)
         self.assertEqual(evidence.line_index, 2)
+
+    def test_consumption_accepts_stable_candidate_cache_suffix(self) -> None:
+        installed = "/canonical/root/plugins/cache/ai-skills-candidate/writing-style/0.1"
+        event = json.dumps(
+            {
+                "type": "item.completed",
+                "item": {
+                    "type": "command_execution",
+                    "command": (
+                        "cat /logical/root/plugins/cache/ai-skills-candidate/"
+                        "writing-style/0.1/skills/scientific-rewrite/SKILL.md"
+                    ),
+                },
+            }
+        )
+
+        evidence = replay.parse_consumption(event + "\n", installed)
+
+        self.assertIsNotNone(evidence)
+        self.assertEqual(evidence.line_index, 1)
+
+    def test_consumption_rejects_other_marketplace_same_plugin(self) -> None:
+        installed = "/canonical/root/plugins/cache/ai-skills-candidate/writing-style/0.1"
+        event = json.dumps(
+            {
+                "type": "item.completed",
+                "item": {
+                    "type": "command_execution",
+                    "command": "cat /logical/root/plugins/cache/other-market/writing-style/0.1/skills/zh/SKILL.md",
+                },
+            }
+        )
+
+        self.assertIsNone(replay.parse_consumption(event + "\n", installed))
+
+    def test_consumption_rejects_raw_non_json_candidate_path(self) -> None:
+        installed = "/canonical/root/plugins/cache/ai-skills-candidate/writing-style/0.1"
+        raw = "/logical/root/plugins/cache/ai-skills-candidate/writing-style/0.1/skills/zh/SKILL.md\n"
+
+        self.assertIsNone(replay.parse_consumption(raw, installed))
+
+    def test_consumption_rejects_assistant_text_candidate_path(self) -> None:
+        installed = "/canonical/root/plugins/cache/ai-skills-candidate/writing-style/0.1"
+        event = json.dumps(
+            {
+                "type": "item.completed",
+                "item": {
+                    "type": "message",
+                    "role": "assistant",
+                    "content": [
+                        {
+                            "type": "output_text",
+                            "text": (
+                                "I used /logical/root/plugins/cache/ai-skills-candidate/"
+                                "writing-style/0.1/skills/zh/SKILL.md"
+                            ),
+                        }
+                    ],
+                },
+            }
+        )
+
+        self.assertIsNone(replay.parse_consumption(event + "\n", installed))
+
+    def test_consumption_still_accepts_full_absolute_installed_path(self) -> None:
+        installed = "/canonical/root/plugins/cache/ai-skills-candidate/writing-style/0.1"
+        event = json.dumps(
+            {
+                "type": "item.completed",
+                "item": {
+                    "type": "command_execution",
+                    "command": f"cat {installed}/skills/fidelity/SKILL.md",
+                },
+            }
+        )
+
+        self.assertIsNotNone(replay.parse_consumption(event + "\n", installed))
+
+    def test_plugin_add_uses_top_level_installed_path_only(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            wrong = root / "wrong" / "staged" / "source"
+            correct = root / "correct" / "codex" / "cache" / "writing-style" / "0.1"
+            wrong.mkdir(parents=True)
+            correct.mkdir(parents=True)
+            payload = {
+                "pluginId": "writing-style@ai-skills-candidate",
+                "source": {"path": str(wrong)},
+                "installedPath": str(correct),
+            }
+
+            with mock.patch.object(replay, "run_codex_json", return_value=payload):
+                plugin_id, installed_path, returned_payload = replay.add_candidate_plugin(
+                    Path("/repo/.local-runtime/codex/0.153.4/bin/codex"),
+                    Path("/repo/.local-runtime/candidate-marketplace"),
+                    "writing-style",
+                )
+
+        self.assertEqual(plugin_id, "writing-style@ai-skills-candidate")
+        self.assertEqual(installed_path, str(correct))
+        self.assertNotEqual(installed_path, str(wrong))
+        self.assertIs(returned_payload, payload)
 
     def test_candidate_absent_after_normal_completion(self) -> None:
         replay.assert_candidate_absent({"plugins": [{"pluginId": "writing-style@yuukias-ai-skills"}]})
@@ -343,10 +453,13 @@ class ReplayMechanismTests(unittest.TestCase):
 
         stdout_files = list((root / ".local-runtime" / "candidate-plugin-replay" / "runs").glob("*/child.stdout.jsonl"))
         stderr_files = list((root / ".local-runtime" / "candidate-plugin-replay" / "runs").glob("*/child.stderr"))
+        add_payload_files = list((root / ".local-runtime" / "candidate-plugin-replay" / "runs").glob("*/plugin-add.json"))
         self.assertEqual(len(stdout_files), 1)
         self.assertEqual(len(stderr_files), 1)
+        self.assertEqual(len(add_payload_files), 1)
         self.assertEqual(stdout_files[0].read_text(encoding="utf-8"), child_stdout)
         self.assertEqual(stderr_files[0].read_text(encoding="utf-8"), child_stderr)
+        self.assertEqual(json.loads(add_payload_files[0].read_text(encoding="utf-8")), {})
 
     def test_child_exec_enable_config_uses_unquoted_plugin_id(self) -> None:
         captured: dict[str, list[str]] = {}

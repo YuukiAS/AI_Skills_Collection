@@ -516,17 +516,49 @@ def prepare_workspace(root: Path, run_dir: Path, task: Path, inputs: list[Path])
 
 
 def parse_consumption(stdout: str, installed_path: str) -> ConsumptionEvidence | None:
-    skills_path = str(Path(installed_path) / "skills")
+    installed_skills_path = str(Path(installed_path) / "skills")
+    stable_suffix = stable_cache_suffix(installed_path)
+    stable_skills_suffix = f"{stable_suffix}/skills/" if stable_suffix else None
     for line_index, line in enumerate(stdout.splitlines(), start=1):
         try:
             event = json.loads(line)
         except json.JSONDecodeError:
             continue
-        strings = list(iter_strings(event))
-        if any(installed_path in value or skills_path in value for value in strings):
+        strings = list(command_execution_evidence_strings(event))
+        if any(points_to_skill(value, installed_skills_path) for value in strings):
+            event_type = first_event_type(event)
+            return ConsumptionEvidence(line_index=line_index, event_type=event_type)
+        if stable_skills_suffix and any(points_to_skill(value, stable_skills_suffix) for value in strings):
             event_type = first_event_type(event)
             return ConsumptionEvidence(line_index=line_index, event_type=event_type)
     return None
+
+
+def stable_cache_suffix(installed_path: str) -> str | None:
+    parts = Path(installed_path).parts
+    for index in range(len(parts) - 4):
+        if parts[index] == "plugins" and parts[index + 1] == "cache":
+            marketplace, plugin, version = parts[index + 2 : index + 5]
+            if marketplace and plugin and version:
+                return "/".join(("", "plugins", "cache", marketplace, plugin, version))
+    return None
+
+
+def command_execution_evidence_strings(value: Any) -> Iterable[str]:
+    if isinstance(value, dict):
+        if value.get("type") == "command_execution":
+            command = value.get("command")
+            if isinstance(command, str):
+                yield command
+        for child in value.values():
+            yield from command_execution_evidence_strings(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from command_execution_evidence_strings(child)
+
+
+def points_to_skill(value: str, skills_prefix: str) -> bool:
+    return skills_prefix in value and "SKILL.md" in value
 
 
 def iter_strings(value: Any) -> Iterable[str]:
@@ -555,11 +587,17 @@ def add_candidate_plugin(codex: Path, marketplace_root: Path, plugin_name: str) 
         codex,
         [*codex_config_args(marketplace_root), "plugin", "add", "--json", plugin_id],
     )
-    returned_id = first_string_value(payload, {"pluginId", "plugin_id", "id"})
-    installed_path = first_string_value(payload, {"installedPath", "installed_path", "path"})
+    if not isinstance(payload, dict):
+        raise ReplayError("candidate plugin add returned non-object JSON payload")
+    returned_id = payload.get("pluginId")
+    installed_path = payload.get("installedPath")
+    if not isinstance(returned_id, str) or not returned_id:
+        raise ReplayError("candidate plugin add did not return top-level pluginId")
+    if not isinstance(installed_path, str) or not installed_path:
+        raise ReplayError("candidate plugin add did not return top-level installedPath")
     if returned_id != plugin_id:
         raise ReplayError(f"candidate plugin add returned unexpected pluginId: {returned_id}")
-    if not installed_path or not Path(installed_path).exists():
+    if not Path(installed_path).exists():
         raise ReplayError("candidate plugin add did not return an existing installedPath")
     return plugin_id, installed_path, payload
 
@@ -620,6 +658,10 @@ def run_replay(root: Path, plugin: str, candidate_commit: str, task_arg: str, in
             marketplace_root = safe_stage_candidate(root, candidate, run_dir)
             try:
                 plugin_id, installed_path, add_payload = add_candidate_plugin(paths.codex, marketplace_root, plugin)
+                (run_dir / "plugin-add.json").write_text(
+                    json.dumps(add_payload, indent=2, sort_keys=True) + "\n",
+                    encoding="utf-8",
+                )
                 workspace, output_dir, prompt = prepare_workspace(root, run_dir, task, inputs)
                 child = run_child_exec(paths.codex, marketplace_root, plugin_id, workspace, output_dir, prompt)
                 stdout_path = run_dir / "child.stdout.jsonl"
