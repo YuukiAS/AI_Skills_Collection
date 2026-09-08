@@ -1,6 +1,6 @@
 ---
 name: scientific-rewrite
-description: Internal Writing Style heavy route for source-faithful structural Chinese rewrites of long scientific or technical documents, using Meaning Map, Reader Plan, REALIZE_MEANING, semantic fidelity audit, and mechanical receipts without paid generation.
+description: Source-faithful structural rewrite route for existing Chinese or Chinese-dominant scientific/technical material when users ask to reorganize it into clearer Chinese while preserving facts, numbers, formulas, citations, comparisons, conditions, limitations, paths, and exact details.
 status: active
 provenance: local
 trusted: false
@@ -20,9 +20,23 @@ license: MIT-compatible local synthesis; architecture baseline from reviewed tas
 # Scientific Rewrite
 
 This is the heavy Chinese rewrite route inside `writing-style`. Use it when an
-existing Chinese or Chinese-dominant scientific/technical document needs a
-meaning-preserving structural rewrite, not a summary, new report, or local
-polish.
+ordinary user provides existing Chinese or Chinese-dominant scientific/technical
+material and asks to reorganize, restructure, or rewrite it into clearer Chinese
+while preserving exact scientific details. The user does not need to name this
+skill or any internal route.
+
+The routing signal is the combination of all three conditions:
+
+- existing Chinese or Chinese-dominant scientific/technical source material;
+- a request for reorganization, structural rewrite, or document-level rewrite,
+  not only local polishing;
+- explicit preservation pressure on facts, numbers, formulas, citations,
+  comparisons, conditions, limitations, paths, configuration keys, commands, or
+  other exact details.
+
+Do not wait for the user to say `scientific-rewrite`, `Meaning Map`,
+`Reader Plan`, `REALIZE_MEANING`, or another internal term. Those are
+implementation details, not user-facing activation words.
 
 The ordinary user should not need to name this skill. A natural request such as
 "把这份较长科研报告重新组织成自然中文，数字、公式、引用、比较条件和限制都不能丢" should be routed here by the installed

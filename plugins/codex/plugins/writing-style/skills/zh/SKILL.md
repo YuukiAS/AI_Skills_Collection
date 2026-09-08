@@ -1,6 +1,6 @@
 ---
 name: chinese-prose
-description: 中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和“说人话”终审。任何中文 Markdown/PDF/报告/README/面向用户或读者的中文内容都应自动触发本 skill，用于中文为主、降低 AI 味/翻译腔/模板腔/宣传腔、移除非必要英文、修正版本/阶段名误用和机器字段先行，同时保护事实、数字、术语、命令、引用、实验结果、证据边界和中文读者习惯。
+description: 中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和“说人话”终审。任何中文 Markdown/PDF/报告/README/面向用户或读者的中文内容都应自动触发本 skill，用于普通中文润色、中文为主、降低 AI 味/翻译腔/模板腔/宣传腔，并保护事实、数字、术语、命令、引用、实验结果和证据边界。
 status: active
 provenance: local
 trusted: true
@@ -17,9 +17,11 @@ license: MIT-compatible synthesis plus public-domain style guidance
 ---
 # 中文自然表达终审
 
-本 skill 用作中文报告、README、技术文档、科研进展记录、Markdown/PDF 成稿和面向读者的中文说明的最后审校。目标不是把文字改得随意，而是让它清楚、真实、符合中文读者习惯，并且不像模型套话。
+本 skill 用作中文报告、README、技术文档、科研进展记录、Markdown/PDF 成稿和面向读者的中文说明的普通润色、说人话处理和最后审校。目标不是把文字改得随意，而是让它清楚、真实、符合中文读者习惯，并且不像模型套话。
 
 这不是事实核查、文件转换、AI 检测规避或伪原创工具。它只处理中文读者看到的表达质量：在 `writing-fidelity` 的保真底线之上，把机器味、翻译腔、模板腔和不必要英文降下来。
+
+如果用户给的是已有中文或中文为主的科研/技术材料，并要求重新组织、结构性重写或文档级重写，同时要求保留事实、数字、公式、引用、比较条件、限制、路径、配置或命令等精确信息，不要把本 skill 当主路线；应交给 `scientific-rewrite`。本 skill 只在该重路线内部承担 `REALIZE_MEANING` 中文实现角色，或在最终候选稿生成后做自然表达终审。
 
 ## 使用场景
 
@@ -31,6 +33,8 @@ license: MIT-compatible synthesis plus public-domain style guidance
 - 检查中文草稿是否在保留事实的同时去掉套话。
 - 将中英混杂的技术文字改成稳定的中文文档风格。
 - 中文技术文档、报告、README 或提示词里出现大量非必要英文，需要改成中文为主、只保留必要英文。
+
+明确排除：已有科研/技术材料的 source-faithful structural rewrite。只要任务同时具备“已有中文或中文为主的科研/技术材料”“要求重新组织或结构性重写”“要求保留事实、数字、公式、引用、比较条件、限制、路径、配置或命令”等精确信息，应 hand off 给 `scientific-rewrite`，不要停留在本 skill 的普通润色路线。
 
 不要用本 skill 做事实核查、逐字翻译、模仿品牌文案，或改写代码、日志、命令。单纯渲染中文 PDF、检查字体或转换格式时，本 skill 作为成稿可读性验收配合使用，不替代 PDF/文档工具。
 

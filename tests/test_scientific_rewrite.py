@@ -381,6 +381,23 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
         self.assertIn("skills/writing/core/scientific-prose", profile["skills"])
         self.assertIn("skills/writing/core/scientific-rewrite", profile["skills"])
 
+    def test_routing_text_sends_structural_scientific_rewrite_to_heavy_route(self) -> None:
+        scientific = (REPO_ROOT / "skills/writing/core/scientific-rewrite/SKILL.md").read_text(encoding="utf-8")
+        chinese = (REPO_ROOT / "skills/writing/core/chinese-prose/SKILL.md").read_text(encoding="utf-8")
+        fidelity = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")
+
+        self.assertIn("existing Chinese or Chinese-dominant scientific/technical material", scientific)
+        self.assertIn("asks to reorganize", scientific)
+        self.assertIn("facts, numbers, formulas, citations, comparisons, conditions, limitations, paths", scientific)
+        self.assertIn("does not need to name this\nskill or any internal route", scientific)
+        self.assertIn("不要把本 skill 当主路线；应交给 `scientific-rewrite`", chinese)
+        self.assertIn("hand off 给 `scientific-rewrite`", chinese)
+        self.assertIn(
+            "source-faithful structural scientific/technical rewrites to scientific-rewrite",
+            fidelity,
+        )
+        self.assertIn("instead of making `chinese-prose` the main route", fidelity)
+
     def test_generated_plugin_payload_contains_heavy_route_helper(self) -> None:
         plugin_json = json.loads(
             (REPO_ROOT / "plugins/codex/plugins/writing-style/.codex-plugin/plugin.json").read_text(encoding="utf-8")

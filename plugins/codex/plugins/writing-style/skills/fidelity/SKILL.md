@@ -1,6 +1,6 @@
 ---
 name: writing-fidelity
-description: Preserve facts, corrections, labels, structure, equations, citations, version authority, and final artifact identity during writing edits. Use for source-faithful Markdown, LaTeX, PDF, slides, reports, notes, and evidence-bound writing. Route Chinese natural-prose passes to chinese-prose and English scientific style passes to scientific-prose.
+description: Preserve facts, corrections, labels, structure, equations, citations, version authority, and final artifact identity during writing edits. Route Chinese natural-prose passes to chinese-prose, source-faithful structural scientific/technical rewrites to scientific-rewrite, and English scientific style passes to scientific-prose.
 status: active
 provenance: user-authored
 trusted: false
@@ -25,10 +25,17 @@ artifact.
 
 This is the preservation layer, not the style layer. Use it before or alongside
 style work when facts, protected spans, version labels, page/rendered artifact
-identity, or user corrections could be lost. Hand off natural Chinese prose,
-reader-facing "say it plainly" rewrites, and ordinary Chinese de-AI/template
-cleanup to `chinese-prose`. Hand off English scientific prose, evidence-strength
-calibration, and defensive/self-undermining wording to `scientific-prose`.
+identity, or user corrections could be lost. Route Chinese natural-prose passes
+to chinese-prose. Hand off natural Chinese prose, reader-facing "say it
+plainly" rewrites, and ordinary Chinese de-AI/template cleanup to
+`chinese-prose`. When the source is existing Chinese or
+Chinese-dominant scientific/technical material and the user asks for
+reorganization, structural rewrite, or document-level rewrite while preserving
+facts, numbers, formulas, citations, comparisons, conditions, limitations,
+paths, commands, or configuration details, hand off to `scientific-rewrite`
+instead of making `chinese-prose` the main route. Hand off English scientific prose,
+evidence-strength calibration, and defensive/self-undermining wording to
+`scientific-prose`.
 
 ## Non-Negotiable Rule
 
@@ -76,6 +83,11 @@ silently satisfy one constraint by violating another.
 
 - Use `chinese-prose` when the main request is "中文说人话", "改自然一点",
   "不要 AI 味", "别像日志", "普通英文能翻就翻", or "别每句话一个 bullet".
+- Use `scientific-rewrite` when the user provides existing Chinese or
+  Chinese-dominant scientific/technical material and asks to reorganize,
+  structurally rewrite, or rewrite the document into clearer Chinese while
+  preserving facts, numbers, formulas, citations, comparisons, conditions,
+  limitations, paths, commands, configuration keys, or other exact details.
 - Use `scientific-prose` when the main request is polishing English Results,
   captions, rebuttals, slide text, or scientific reports without overclaiming or
   sounding defensive.
