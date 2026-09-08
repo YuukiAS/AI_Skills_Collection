@@ -25,9 +25,9 @@ from typing import Any, Iterable
 CODEX_VERSION = "0.153.4"
 EXPECTED_CODEX_VERSION = f"codex-cli {CODEX_VERSION}"
 RELEASE_TAG = f"rust-v{CODEX_VERSION}"
-ASSET_NAME = "codex-x86_64-unknown-linux-musl.tar.gz"
+ASSET_NAME = "codex-package-x86_64-unknown-linux-musl.tar.gz"
 ASSET_URL = f"https://github.com/openai/codex/releases/download/{RELEASE_TAG}/{ASSET_NAME}"
-ASSET_SHA256 = "f479424eca092484dc40d87ae28c44f4cc40234a60045d6131e493800d814a30"
+ASSET_SHA256 = "a822187e1a2420c61c5926721bfbd878701ed95547c9bb0d4de4498a16ba1821"
 
 MARKETPLACE_NAME = "ai-skills-candidate"
 CANDIDATE_NAMESPACE_SUFFIX = f"@{MARKETPLACE_NAME}"
@@ -44,6 +44,7 @@ class RuntimePaths:
     archive: Path
     bin_dir: Path
     codex: Path
+    code_mode_host: Path
     manifest: Path
     state_root: Path
 
@@ -80,6 +81,7 @@ def runtime_paths(root: Path) -> RuntimePaths:
         archive=runtime_root / "downloads" / ASSET_NAME,
         bin_dir=runtime_root / "bin",
         codex=runtime_root / "bin" / "codex",
+        code_mode_host=runtime_root / "bin" / "codex-code-mode-host",
         manifest=runtime_root / "runtime.json",
         state_root=root / ".local-runtime" / "candidate-plugin-replay",
     )
@@ -146,6 +148,12 @@ def read_runtime_manifest(path: Path) -> dict[str, Any]:
 def validate_runtime(paths: RuntimePaths) -> dict[str, Any]:
     if not paths.codex.exists():
         raise ReplayError("runtime missing; run: python scripts/candidate_plugin_replay.py ensure-runtime")
+    if not os.access(paths.codex, os.X_OK):
+        raise ReplayError("runtime bin/codex is not executable")
+    if not paths.code_mode_host.exists():
+        raise ReplayError("runtime bin/codex-code-mode-host is missing")
+    if not os.access(paths.code_mode_host, os.X_OK):
+        raise ReplayError("runtime bin/codex-code-mode-host is not executable")
     if not paths.archive.exists():
         raise ReplayError("runtime archive missing; run: python scripts/candidate_plugin_replay.py ensure-runtime")
     manifest = read_runtime_manifest(paths.manifest)
@@ -190,14 +198,29 @@ def install_codex_from_archive(paths: RuntimePaths) -> None:
     with tempfile.TemporaryDirectory(prefix="codex-runtime-", dir=str(paths.root)) as tmp_name:
         tmp = Path(tmp_name)
         safe_extract_tar(paths.archive, tmp)
-        candidates = [p for p in tmp.rglob("*") if p.is_file() and p.name.startswith("codex")]
-        if not candidates:
-            raise ReplayError("downloaded archive did not contain a codex executable")
-        source = candidates[0]
-        paths.bin_dir.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, paths.codex)
-        mode = paths.codex.stat().st_mode
-        paths.codex.chmod(mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+        package_root = find_package_root(tmp)
+        for child in package_root.iterdir():
+            dest = paths.root / child.name
+            if child.resolve() == dest.resolve():
+                continue
+            if dest.exists():
+                if dest.is_dir() and not dest.is_symlink():
+                    shutil.rmtree(dest)
+                else:
+                    dest.unlink()
+            if child.is_dir():
+                shutil.copytree(child, dest, symlinks=True)
+            else:
+                shutil.copy2(child, dest)
+
+
+def find_package_root(extracted: Path) -> Path:
+    if (extracted / "bin" / "codex").is_file():
+        return extracted
+    candidates = [path for path in extracted.iterdir() if path.is_dir() and (path / "bin" / "codex").is_file()]
+    if len(candidates) == 1:
+        return candidates[0]
+    raise ReplayError("downloaded archive did not contain the expected Codex package layout")
 
 
 def ensure_runtime(root: Path) -> dict[str, Any]:
@@ -561,7 +584,7 @@ def run_child_exec(
             "--json",
             *codex_config_args(marketplace_root),
             "-c",
-            f'plugins."{plugin_id}".enabled=true',
+            f"plugins.{plugin_id}.enabled=true",
             "-s",
             "workspace-write",
             "-C",
@@ -599,6 +622,10 @@ def run_replay(root: Path, plugin: str, candidate_commit: str, task_arg: str, in
                 plugin_id, installed_path, add_payload = add_candidate_plugin(paths.codex, marketplace_root, plugin)
                 workspace, output_dir, prompt = prepare_workspace(root, run_dir, task, inputs)
                 child = run_child_exec(paths.codex, marketplace_root, plugin_id, workspace, output_dir, prompt)
+                stdout_path = run_dir / "child.stdout.jsonl"
+                stderr_path = run_dir / "child.stderr"
+                stdout_path.write_text(child.stdout, encoding="utf-8")
+                stderr_path.write_text(child.stderr, encoding="utf-8")
                 evidence = parse_consumption(child.stdout, installed_path)
                 if child.returncode != 0:
                     raise ReplayError(f"candidate child exec failed ({child.returncode}): {child.stderr.strip()}")
@@ -615,11 +642,9 @@ def run_replay(root: Path, plugin: str, candidate_commit: str, task_arg: str, in
                         "line_index": evidence.line_index,
                     },
                     "add_payload": add_payload,
-                    "stdout_path": str(run_dir / "child.stdout.jsonl"),
-                    "stderr_path": str(run_dir / "child.stderr"),
+                    "stdout_path": str(stdout_path),
+                    "stderr_path": str(stderr_path),
                 }
-                (run_dir / "child.stdout.jsonl").write_text(child.stdout, encoding="utf-8")
-                (run_dir / "child.stderr").write_text(child.stderr, encoding="utf-8")
                 (run_dir / "run.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
                 return result
             finally:

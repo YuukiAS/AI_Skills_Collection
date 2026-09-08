@@ -124,6 +124,8 @@ class RuntimeTests(unittest.TestCase):
             paths.archive.write_bytes(b"wrong archive")
             paths.codex.write_text("#!/bin/sh\nprintf 'codex-cli 0.153.4\\n'\n", encoding="utf-8")
             paths.codex.chmod(paths.codex.stat().st_mode | stat.S_IXUSR)
+            paths.code_mode_host.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+            paths.code_mode_host.chmod(paths.code_mode_host.stat().st_mode | stat.S_IXUSR)
             paths.manifest.write_text(
                 json.dumps(
                     {
@@ -165,6 +167,30 @@ class RuntimeTests(unittest.TestCase):
                     encoding="utf-8",
                 )
                 with self.assertRaisesRegex(replay.ReplayError, "version mismatch"):
+                    replay.validate_runtime(paths)
+
+    def test_missing_code_mode_host_fails_runtime_validation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            paths = replay.runtime_paths(root)
+            paths.bin_dir.mkdir(parents=True)
+            paths.archive.parent.mkdir(parents=True)
+            paths.archive.write_bytes(b"archive")
+            paths.codex.write_text("#!/bin/sh\nprintf 'codex-cli 0.153.4\\n'\n", encoding="utf-8")
+            paths.codex.chmod(paths.codex.stat().st_mode | stat.S_IXUSR)
+            with mock.patch.object(replay, "ASSET_SHA256", replay.sha256_file(paths.archive)):
+                paths.manifest.write_text(
+                    json.dumps(
+                        {
+                            "asset_url": replay.ASSET_URL,
+                            "asset_sha256": replay.sha256_file(paths.archive),
+                            "binary_sha256": replay.sha256_file(paths.codex),
+                            "version": replay.EXPECTED_CODEX_VERSION,
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+                with self.assertRaisesRegex(replay.ReplayError, "codex-code-mode-host is missing"):
                     replay.validate_runtime(paths)
 
     def test_safe_archive_extraction_rejects_escape(self) -> None:
@@ -280,6 +306,67 @@ class ReplayMechanismTests(unittest.TestCase):
                                 with self.assertRaisesRegex(replay.ReplayError, "child exec failed"):
                                     replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
         self.assertEqual(remove_calls, ["writing-style@ai-skills-candidate"])
+
+    def test_consumption_proof_failure_still_persists_child_streams(self) -> None:
+        tmp, root, commit = make_repo()
+        self.addCleanup(tmp.cleanup)
+        (root / "task.md").write_text("Do the task.\n", encoding="utf-8")
+        (root / "input.md").write_text("Input.\n", encoding="utf-8")
+        installed = root / ".local-runtime" / "installed-candidate"
+        installed.mkdir(parents=True)
+
+        def fake_stage(_root: Path, _candidate: replay.CandidatePlugin, run_dir: Path) -> Path:
+            marketplace = run_dir / "marketplace"
+            marketplace.mkdir(parents=True)
+            return marketplace
+
+        def fake_run_codex_json(_codex: Path, args: list[str], **_kwargs):
+            if args[:3] == ["plugin", "list", "--json"]:
+                return {"plugins": [{"pluginId": "writing-style@yuukias-ai-skills", "name": "writing-style", "enabled": True}]}
+            return None
+
+        child_stdout = json.dumps({"type": "event", "message": "no candidate installed path here"}) + "\n"
+        child_stderr = "diagnostic stderr\n"
+        child = replay.CommandResult(("codex", "exec"), 0, child_stdout, child_stderr)
+        with mock.patch.object(replay, "ensure_runtime_available", return_value={"version": replay.EXPECTED_CODEX_VERSION}):
+            with mock.patch.object(replay, "safe_stage_candidate", side_effect=fake_stage):
+                with mock.patch.object(replay, "run_codex_json", side_effect=fake_run_codex_json):
+                    with mock.patch.object(
+                        replay,
+                        "add_candidate_plugin",
+                        return_value=("writing-style@ai-skills-candidate", str(installed), {}),
+                    ):
+                        with mock.patch.object(replay, "run_child_exec", return_value=child):
+                            with mock.patch.object(replay, "remove_candidate_plugin"):
+                                with self.assertRaisesRegex(replay.ReplayError, "actual consumption"):
+                                    replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
+
+        stdout_files = list((root / ".local-runtime" / "candidate-plugin-replay" / "runs").glob("*/child.stdout.jsonl"))
+        stderr_files = list((root / ".local-runtime" / "candidate-plugin-replay" / "runs").glob("*/child.stderr"))
+        self.assertEqual(len(stdout_files), 1)
+        self.assertEqual(len(stderr_files), 1)
+        self.assertEqual(stdout_files[0].read_text(encoding="utf-8"), child_stdout)
+        self.assertEqual(stderr_files[0].read_text(encoding="utf-8"), child_stderr)
+
+    def test_child_exec_enable_config_uses_unquoted_plugin_id(self) -> None:
+        captured: dict[str, list[str]] = {}
+
+        def fake_run_command(args: list[str], **_kwargs):
+            captured["args"] = args
+            return replay.CommandResult(tuple(args), 0, "", "")
+
+        with mock.patch.object(replay, "run_command", side_effect=fake_run_command):
+            replay.run_child_exec(
+                Path("/repo/.local-runtime/codex/0.153.4/bin/codex"),
+                Path("/repo/.local-runtime/candidate-marketplace"),
+                "writing-style@ai-skills-candidate",
+                Path("/repo/workspace"),
+                Path("/repo/workspace/outputs"),
+                "Rewrite this.",
+            )
+
+        self.assertIn("plugins.writing-style@ai-skills-candidate.enabled=true", captured["args"])
+        self.assertNotIn('plugins."writing-style@ai-skills-candidate".enabled=true', captured["args"])
 
 
 if __name__ == "__main__":
