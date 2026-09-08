@@ -22,6 +22,20 @@ from the task-local accepted Bridge Kit copy at
 the current Codex runtime because process-local marketplace overrides are not
 recognized by `codex-cli 0.142.0`.
 
+Refresh check on 2026-09-08 confirmed the same runtime gap:
+
+- Current `codex` wrappers resolve to the existing
+  `/overflow/htzhu/mingcheng_new/conda/lib/node_modules/@openai/codex/bin/codex.js`
+  install, whose package version is `0.142.0`.
+- Current installed `/overflow/htzhu/mingcheng_new/.local/bin/ai-bridge`
+  still does not expose `candidate-plugin-replay`.
+- Accepted Bridge implementation
+  `87893855332c665063e71f907c2c534b86cc3b39` does expose
+  `candidate-plugin-replay` when invoked from the task-local Bridge copy.
+- The validated B0 reference runtime remains the Bridge evidence runtime
+  `codex-cli 0.153.4`; no alternate Codex CLI version is accepted here as a
+  substitute for that runtime refresh.
+
 Per user instruction, no persistent marketplace add/remove, no B1 fallback, no
 051 architecture change, and no A/B/C artifact replay occurred after this
 runtime mismatch was confirmed.
