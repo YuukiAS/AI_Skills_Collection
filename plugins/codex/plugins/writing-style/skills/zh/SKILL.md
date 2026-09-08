@@ -42,6 +42,38 @@ license: MIT-compatible synthesis plus public-domain style guidance
 
 正文优先用连贯段落。列表只在步骤、并列比较、验收清单、证据清单、组会提纲或确实需要快速扫描时使用。不要为了显得结构化把每句话拆成 bullet，也不要把一两句话拆成一个小标题。不要强行凑三点式、对称排比、重复总结或固定“首先/其次/此外/综上”。
 
+对于明确授权的 heavy scientific rewrite，列表、表格和公式拆解可以是正文结构的一部分，不按“少用列表”机械压回长段。判断标准不是候选稿更短，而是读者能不能少做跨段推理、少猜英文普通词的中文关系、少在公式和结论之间来回跳。
+
+## REALIZE_MEANING
+
+`REALIZE_MEANING` 是 `scientific-rewrite` heavy Chinese rewrite 路线调用的中文实现模式。它不直接读原文段落来改写，而是把已经固定的 Meaning Map / Reader Plan / exact item 变成读者能顺着读的中文。
+
+正式 drafting input surface 只能包含：
+
+- audience / register；
+- bundle purpose / reader question；
+- relevant meaning records；
+- relevant relation records；
+- required exact item identities/formulas；
+- neighboring bundle purposes/dependencies；
+- information shape；
+- optional structured repair instruction。
+
+不得把以下内容作为写作输入交给本模式：raw source paragraph/sentence、source excerpt、source quotation、source tail/preview、Latin-span inventory、QA ledger、`exact_identity/useful_recognition/ordinary_reasoning` 分类、literal seed rewrite template、previous rejected candidate、manual GPT reference output。
+
+本模式可以做的中文实现操作包括：
+
+- `DIRECT_RELATION`：把比较、因果、限制、下一步关系直接说清；
+- `QUESTION_FIRST`：先回答读者正在追的问题；
+- `METHOD_MENTAL_MODEL`：先给方法直觉，再保留正式方法名；
+- `FORMULA_WALKTHROUGH`：先说公式回答什么，再给公式和符号含义；
+- `CLAIM_WITH_BOUNDARY`：先给有边界的判断，再把 caveat 放近；
+- `DECOMPRESS_NOUN_STACK`：把英文名词链拆成中文关系；
+- `PARALLEL_TO_STRUCTURE`：把并列条件、方法或结果改成清楚列表/表格；
+- `REMOVE_INTERNAL_FRAME`：去掉 reader-facing 正文里不该出现的审计、流程和任务标签。
+
+当 `scientific-rewrite` 已经生成 Reader Plan 时，本 skill 的终审只读取最终候选稿和 Reader Plan，不回看源文档改写正文。终审必须确认：候选稿是否回答 Reader Plan 里的读者问题；英文残留是否分别属于精确身份、必要识别名或应该中文化的普通推理词；公式是否有中文语义说明；证据边界和不确定性是否仍在读者主线里。发现问题时返回需要返修的原因，不能用“整体更流畅”覆盖缺项。
+
 除非用户明确要求，否则不要改动以下内容：
 
 - 数字、日期、版本、范围、单位、百分比。
