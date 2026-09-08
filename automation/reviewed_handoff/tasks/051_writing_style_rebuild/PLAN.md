@@ -128,6 +128,16 @@ input boundary: final combined candidate text + audience + frozen review questio
 
 Every call must use the repository persistent pre-request reservation/accounting policy. If the real combined request cannot fit the frozen per-call ceiling or the review infrastructure/billing accounting is not verified, do not send it; return to Planner/human review strategy instead of expanding budget. External review evidence cannot override explicit user rejection.
 
+### Consolidated human acceptance and fresh-holdout freeze
+
+The user's latest decision changes only the acceptance choreography, not the production architecture or quality bar.
+
+- Gate 3 A/B/C candidate **text is already accepted**. The hash-bound A/B/C candidate Markdown must not be regenerated or edited merely to repair the review artifact. The first combined review PDF had a render-only defect: Markdown pipe-table syntax and some LaTeX/display-math source leaked into the reader-facing PDF. If the accepted candidate hashes stay identical and objective render QA proves true tables/formulas, readable CJK, an extractable text layer, and no clipping/overflow/raw markup leakage, Gate 3 may close without asking the user to approve the unchanged text a second time. Any semantic/text change reopens the human decision.
+- Gate 4 and Gate 5 must not create two routine human interruptions. Generate and render the complete private-report candidate, then freeze and evaluate the fresh holdout. After both artifacts exist, present them together in **one final combined qualitative human gate**. One user `ACCEPT` jointly closes the qualitative acceptance requirement for Gates 4 and 5; one user `REJECT` overrides tests, receipts, render QA, Text Review, and Reviewer summaries for the rejected artifact scope.
+- Before the first Gate 5 generation, freeze a complete one-item holdout batch in a repo-safe manifest. Prefer a public/repo-safe Chinese or Chinese-dominant scientific/technical source from a different document family so no new private-artifact authorization is needed. It must not come from 044/049/050/051 writing-style regression material, a manual reference output, a writing-style production source/reference, a test fixture, or any text already used to tune/repair 051. Record exact source locator, content hash, selected range or whole-artifact scope, acceptance questions, and exact frozen implementation commit **before** evaluation. After the freeze, no replacement/chasing or holdout-specific tuning is allowed.
+- If bounded repo/public-source search cannot produce a legitimate fresh holdout, enter a human-input decision rather than inventing a synthetic substitute. If the frozen holdout fails, the whole batch fails; do not silently choose another item. Opening any later fresh batch requires a new explicit human decision.
+- Routine reversible details, already-authorized credential use within the same bounded scope, deterministic validation, rendering repairs, candidate cleanup, CI waiting, and reviewer waiting must not repeatedly interrupt the user. A new provider/endpoint, broader private-data scope, credential copy/scope expansion, destructive irreversible action, genuine integration/version semantic conflict, or a failed holdout batch that would require another batch remains a real escalation condition.
+
 ### Version/release decision
 
 Current sources show repository `5.0.3` and `writing-style 0.1`.
@@ -151,13 +161,14 @@ Positive completion requires all of the following real outcomes:
 
 1. Ordinary installed-plugin black-box routing selects the heavy route for a realistic long Chinese source-faithful rewrite without the prompt naming `scientific-rewrite`, Meaning Map, Reader Plan, `REALIZE_MEANING`, stage packets, or validators.
 2. Short/local Chinese polish remains light; fidelity-only work remains fidelity-only; English scientific prose remains on `scientific-prose`.
-3. Known 050 A/B/C regression inputs are replayed only as `KNOWN_REGRESSION`, through the same production route, with no old candidate/reference/diagnosis leakage. The user accepts the resulting real artifact quality.
-4. The complete private report is produced through the same production architecture and accepted by the user; no alternate full-report writer is allowed.
-5. A small, different, real scientific/technical holdout from another document family is frozen before evaluation, run only after the implementation is frozen, and passes without holdout-specific tuning or adaptive replacement. The user remains the final qualitative authority.
+3. Known 050 A/B/C regression inputs are replayed only as `KNOWN_REGRESSION`, through the same production route, with no old candidate/reference/diagnosis leakage. The user has accepted the hash-bound A/B/C text; the corrected review PDF must pass objective render QA without changing those candidate hashes.
+4. The complete private report is produced through the same production architecture; no alternate full-report writer is allowed. Its final Markdown/PDF is staged for the single combined human qualitative gate shared with Gate 5.
+5. One small, different, real scientific/technical holdout from another document family is frozen before evaluation, run only after the implementation is frozen, and passes without holdout-specific tuning or adaptive replacement. Its rendered artifact and the Gate 4 artifact receive one shared final human `ACCEPT/REJECT`; that one decision is the final qualitative authority for both Gates 4 and 5.
 6. Final private text is available to the independent Scheduled Reviewer through a hash-bound Bridge Kit Text Review evidence path; process summaries alone cannot stand in for the artifact.
 7. Final source/generated parity, relevant local regressions, explicit final GitHub integration/release CI, install/upgrade smoke, version/changelog closure, and integration back to the then-current `main` succeed.
+8. The repo-local committed-candidate replay path proven in 051 remains documented and tested as narrow reusable AI_Skills development infrastructure so later plugin refinements do not need to rediscover the runtime/marketplace/consumption-proof procedure.
 
-Maximum claim scope: a successful 051 proves that the accepted heavy Chinese rewrite path works on the frozen known regression family, the complete real report, and one frozen fresh real holdout through the ordinary installed route. It does **not** prove universal writing quality, every language, every document domain, future cross-plugin consumer integration, or the proposed `clear-language` rename.
+Maximum claim scope: a successful 051 proves that the accepted heavy Chinese rewrite path works on the frozen known regression family, the complete real report, and one frozen fresh real holdout through the ordinary installed route. It does **not** prove universal writing quality, every language, every document domain, future cross-plugin consumer integration, or the proposed `clear-language` rename. The reusable candidate replay helper proves only candidate identity/loading/consumption/cleanup and production-identity preservation; it does not prove domain quality.
 
 ## Non-substitutable semantics
 
@@ -180,7 +191,9 @@ The following substitutions are forbidden even if tests or CI pass:
 - dropping the existing English `scientific-prose` route;
 - renaming the `writing-style` slug during 051;
 - allowing the language layer to invent domain scientific semantics or decide research-document/deck structure owned by other plugins;
-- treating schema/tests/CI/render success as a substitute for user artifact acceptance.
+- treating schema/tests/CI/render success as a substitute for user artifact acceptance;
+- splitting the remaining Gate 4 and Gate 5 qualitative checks into separate routine user approval interruptions when the frozen combined gate can present both artifacts clearly;
+- turning the candidate replay helper into a Bridge runtime manager, generic runtime/version registry, Host Policy expansion, alternate CODEX_HOME selector, or another Reviewed Handoff state machine.
 
 No equivalent fallback is pre-authorized for these semantics. If one becomes necessary, return to Planner/human decision with evidence.
 
@@ -200,12 +213,13 @@ Expected production surfaces:
 - regenerate `plugins/codex/plugins/writing-style/**` and other generated marketplace outputs through the canonical generator; never hand-edit generated payloads;
 - add/update focused tests for routing, semantic/mechanical boundaries, structural fidelity, source/generated parity, privacy, and unrelated light/English regressions;
 - create a 051-local production replay/evidence contract; do not reuse or rewrite 050's historical replay contract;
+- retain `scripts/candidate_plugin_replay.py` and `docs/workflows/CANDIDATE_PLUGIN_REPLAY.md` as the narrow generic repo-local candidate replay workflow proven by 051, with focused regression coverage for pinned runtime validation, exact committed candidate staging, natural fresh-child execution, parsed candidate `SKILL.md` consumption proof, cleanup, and unchanged same-name production identity. Do not broaden it into runtime management or domain-quality scoring;
 - use installed production `workflow-core`, `ai-skills-core`, and `writing-style` for the required maintenance/domain preflight and final replay, not source-file reading as a substitute for production invocation;
 - update `docs/plugin-todos/writing-style.md` only to record the bounded 051 closure without marking the separate slug rename/broad consumer-integration proposal complete;
 - at final accepted release only, update `scripts/codex_marketplace_config.json`, `docs/plugin-changelogs/writing-style.md`, root `CHANGELOG.md`, `VERSION`, README release dashboard and generated release surfaces required by the canonical version policy;
 - keep task-local private plaintext, user review Markdown/PDF, holdout source, and intermediate semantic artifacts out of public Git; commit only permitted encrypted/repo-safe evidence, hashes, manifests, receipts, and public-safe regressions.
 
-Human-review rendering is a task acceptance companion, not a new `writing-style` runtime dependency. Whenever 051 produces Markdown/scientific-report text for human acceptance, invoke the installed `render-chinese-math-pdf` skill and its environment probe/production renderer. For multi-candidate review, build a task-local combined Markdown and render a single combined PDF. Do not invent a parallel PDF renderer or hard-code machine paths into reusable source.
+Human-review rendering is a task acceptance companion, not a new `writing-style` runtime dependency. Whenever 051 produces Markdown/scientific-report text for human acceptance, invoke the installed `render-chinese-math-pdf` skill and its environment probe/production renderer. For multi-candidate review, build a task-local combined Markdown and render a single combined PDF or a clearly indexed final review packet whose artifacts are unambiguous. Do not invent a parallel PDF renderer or hard-code machine paths into reusable source.
 
 ## Acceptance and regression gates
 
@@ -239,27 +253,27 @@ A forced `writing-style:scientific-rewrite` replay is diagnostic only and cannot
 
 A/B/C may be read/replayed only because this Plan freezes them as `KNOWN_REGRESSION` from 050. They cannot consume 050 state/review budget and cannot be called unseen/generalization evidence.
 
-Generate through the real ordinary installed route. Do not expose v0.3, failure diagnosis, old candidates, manual reference output, expected bad vocabulary, or task-specific phrase rules to the writer.
+The user has already accepted the current hash-bound A/B/C candidate **text**. Do not regenerate or edit those candidates merely because the first combined review PDF rendered Markdown pipe tables and some LaTeX/display-math source as reader-visible text.
 
-After mechanical/fidelity checks, produce a task-local `combined_known_regression_review.md` (or equivalently clear combined Markdown) and render `combined_known_regression_review.pdf` through the installed `render-chinese-math-pdf` skill. Render QA must check CJK glyphs, formulas, tables/page overflow and basic PDF text-layer readability. User `ACCEPT` is required before full-report evaluation. User rejection overrides all process/reviewer PASS and routes to bounded repair or Planner according to the failure class.
+Repair only the review rendering layer through the installed `render-chinese-math-pdf` path. Gate 3 closes without a second human approval only if all recorded A/B/C candidate hashes remain unchanged and objective PDF QA proves readable CJK, true rendered tables and inline/display formulas, an extractable text layer, no raw Markdown table delimiters or raw LaTeX/display delimiters, and no obvious clipping/overflow. If the candidate text/hash changes or a semantic repair becomes necessary, return to the appropriate human/Planner route rather than claiming the prior acceptance still applies. User rejection always overrides process evidence.
 
 ### Gate 4 — complete real private report PRODUCT / ARTIFACT gate
 
-Only after Gate 3 user acceptance, produce the complete private report through the identical installed heavy architecture. No alternate writer/helper architecture is allowed.
+After Gate 3 closes, produce the complete private report through the identical installed heavy architecture. No alternate writer/helper architecture is allowed.
 
-Preserve a task-local final Markdown and render a review PDF with `render-chinese-math-pdf`; if comparison is useful, use one combined Markdown/PDF rather than scattered outputs. User `ACCEPT` is required. Keep plaintext host-local; record artifact hashes and the human decision without committing private text.
+Preserve task-local final Markdown and render a review PDF with `render-chinese-math-pdf`. Keep plaintext host-local and record only permitted hashes/evidence. Run the frozen source-aware fidelity/mechanical checks, but **do not pause for a separate routine Gate 4 human ACCEPT**. Stage this artifact for the single combined qualitative human gate after Gate 5.
 
-### Gate 5 — frozen fresh real holdout generalization gate
+### Gate 5 — frozen fresh real holdout generalization gate + single combined human acceptance
 
-Before the first holdout evaluation, freeze one complete holdout batch containing one small but non-trivial real scientific/technical source from a different document family, with source identity/hash/range, acceptance questions and the exact frozen implementation commit. If no legitimate fresh source is already authorized, request the user's artifact/authorization; this is a human-input gate, not `BLOCKED`.
+Before the first holdout evaluation, freeze one complete one-item holdout batch in a repo-safe manifest. Prefer a legitimate public/repo-safe Chinese or Chinese-dominant scientific/technical source from a different document family. Exclude 044/049/050/051 writing-style regression material, manual reference output, writing-style source/reference text, test fixtures, synthetic/toy content, and any text used to tune/repair 051. The freeze must record exact source locator, content hash, selected range or whole-artifact scope, acceptance questions, and exact implementation commit before any holdout generation begins.
 
-The holdout must use a normal black-box `writing-style` prompt. During the batch, production code/rules/prompts/validators are frozen. A failed holdout is a failed batch: no holdout-specific repair, no replacement/chasing, no turning the failed text into a tuning fixture and re-claiming unseen PASS. Generic recovery may occur only on non-holdout/public-safe/known-regression material; consuming a later fresh batch requires a new explicit decision.
+The holdout must use a normal black-box `writing-style` prompt. During the batch, production code/rules/prompts/validators are frozen. A failed holdout is a failed batch: no holdout-specific repair, no replacement/chasing, no turning the failed text into a tuning fixture and re-claiming unseen PASS. Generic recovery may occur only on non-holdout/public-safe/known-regression material; consuming a later fresh batch requires a new explicit human decision. If bounded search finds no legitimate fresh public/repo-safe source, request a user artifact/authorization as a human-input gate rather than substituting synthetic material.
 
-Render the holdout review Markdown/PDF through `render-chinese-math-pdf` and require user qualitative acceptance. The claim remains limited to this frozen batch.
+Render the holdout review Markdown/PDF through `render-chinese-math-pdf`. Once the Gate 4 and Gate 5 artifacts are both ready, build one clear final review packet that presents the complete private-report candidate and the frozen-holdout candidate together; include the corrected Gate 3 artifact only as useful context, not as a request to reapprove unchanged A/B/C text. Ask the user **once** for a combined `ACCEPT` or `REJECT`. That one decision jointly satisfies the qualitative human acceptance requirement for Gates 4 and 5. A `REJECT` overrides process/Reviewer/Text Review PASS and routes according to the failure class; do not create separate routine ACCEPT prompts for Gate 4 and Gate 5.
 
 ### Gate 6 — final independent text evidence
 
-After Gates 3–5 are user-accepted and the implementation candidate is frozen, create one final combined candidate-only UTF-8 Markdown packet containing the final reader-facing candidate texts needed to assess reader burden across the accepted known-regression/full-report/holdout outputs, without raw source/intermediate data. Hash-bind it to the accepted artifacts.
+Only after Gate 3 is closed and the single combined Gate 4/5 human decision is `ACCEPT`, create one final combined candidate-only UTF-8 Markdown packet containing the final reader-facing candidate texts needed to assess reader burden across the accepted known-regression/full-report/holdout outputs, without raw source/intermediate data. Hash-bind it to the accepted artifacts.
 
 Because these texts may be private, set/use Bridge Kit Text Review evidence under:
 
@@ -277,6 +291,7 @@ Only after implementation candidate freeze and required artifact gates:
 
 - run focused local tests and unrelated light/English regressions;
 - verify source/generated parity and private-data boundaries;
+- verify the narrow generic `candidate_plugin_replay.py` workflow and `docs/workflows/CANDIDATE_PLUGIN_REPLAY.md` remain consistent with the real 051 replay evidence, without expanding into runtime management;
 - perform version/changelog/release preflight;
 - explicitly dispatch the repository's required heavyweight integration/release CI on the task branch; do not require full CI after every development push;
 - perform real install/upgrade smoke for released `writing-style` and ordinary black-box heavy routing.
@@ -285,7 +300,7 @@ CI failure caused by 051 is `REVISE`; transient/infrastructure issues use bounde
 
 ### Gate 8 — GPT Reviewer and integration
 
-Reviewer must distinguish PROCESS PASS from PRODUCT / ARTIFACT PASS. It must read the actual implementation diff, CI, source/generated/version closure, human-acceptance hashes/receipts, and current Bridge Kit `TEXT_REVIEW.json`; it must not infer text quality from Executor summary or receipt alone.
+Reviewer must distinguish PROCESS PASS from PRODUCT / ARTIFACT PASS. It must read the actual implementation diff, CI, source/generated/version closure, the single combined human-acceptance evidence for Gates 4/5, the Gate 3 accepted-text/render-QA evidence, and current Bridge Kit `TEXT_REVIEW.json`; it must not infer text quality from Executor summary or receipt alone.
 
 After required Reviewer PASS and frozen human gates, perform integration preflight against then-current `main`. Preserve concurrent main changes. If `main` has competing edits in the same writing-style/version/release surfaces, return to Planner/integration decision instead of overwriting them. With no real conflict, merge/integrate per repository policy and verify the released install path.
 
@@ -321,3 +336,4 @@ A user must never need to know or name `scientific-rewrite`, `REALIZE_MEANING`, 
 - No claim that one fresh holdout proves universal generalization.
 - No automatic maturity promotion to `alpha`/`stable`.
 - No publication of private source/rewrite plaintext, credentials, or manual reference text to the public repository.
+- No Bridge-managed candidate replay revival, generic runtime manager/version registry, arbitrary executable/version/CODEX_HOME selection, or Host Policy expansion as part of the reusable 051 replay closure.
