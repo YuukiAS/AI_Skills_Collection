@@ -61,6 +61,9 @@ Windows mounts:
 - Latin main: TeX Gyre Termes regular, bold, italic, and bold italic from
   `fonts/texgyre-termes/`.
 - Math: TeX Gyre Termes Math from `fonts/texgyre-termes-math/`.
+- Math calligraphic alphabets: New Computer Modern Math from
+  `fonts/newcomputermodern/`, loaded only for `unicode-math` ranges
+  `cal,bfcal`.
 - CJK serif: Noto Serif SC regular and bold from
   `texmf/fonts/opentype/public/noto-cjk/`.
 - CJK sans: Noto Sans SC regular and bold from

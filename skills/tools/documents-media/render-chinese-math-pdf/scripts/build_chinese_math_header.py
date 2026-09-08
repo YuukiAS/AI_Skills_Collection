@@ -35,6 +35,12 @@ HEADER_TEMPLATE = r"""\usepackage{fontspec}
   Extension=.otf
 ]{texgyretermes-math}
 
+\setmathfont[
+  Path=__RESOURCE_DIR__/fonts/newcomputermodern/,
+  Extension=.otf,
+  range={cal,bfcal}
+]{NewCMMath-Regular}
+
 \setCJKmainfont[
   Path=__RESOURCE_DIR__/texmf/fonts/opentype/public/noto-cjk/,
   Extension=.otf,

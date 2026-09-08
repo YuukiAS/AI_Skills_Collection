@@ -50,6 +50,7 @@ class RenderChineseMathPdfTests(unittest.TestCase):
         (resource / "scripts/render_markdown_pdf.sh").write_text("#!/usr/bin/env bash\n", encoding="utf-8")
         (resource / "templates/chinese_math_pandoc_header.tex.in").write_text("% header\n", encoding="utf-8")
         for rel in probe.FONT_FILES.values():
+            (resource / rel).parent.mkdir(parents=True, exist_ok=True)
             (resource / rel).write_text("font", encoding="utf-8")
         return resource
 
@@ -152,9 +153,18 @@ class RenderChineseMathPdfTests(unittest.TestCase):
 
         self.assertIn(resource.as_posix() + "/fonts/texgyre-termes/", header)
         self.assertIn("texgyretermes-math", header)
+        self.assertIn(resource.as_posix() + "/fonts/newcomputermodern/", header)
+        self.assertIn("range={cal,bfcal}", header)
+        self.assertIn("NewCMMath-Regular", header)
         self.assertIn("NotoSerifSC-Regular", header)
         self.assertIn("NotoSansSC-Bold", header)
         self.assertNotIn("Fandol", header)
+
+    def test_probe_requires_bundle_local_newcm_math_calligraphic_font(self) -> None:
+        self.assertEqual(
+            Path("fonts/newcomputermodern/NewCMMath-Regular.otf"),
+            probe.FONT_FILES["newcm_math_calligraphic"],
+        )
 
     def test_probe_policy_is_xelatex_without_chromium_fallback(self) -> None:
         flags = probe.policy_flags()

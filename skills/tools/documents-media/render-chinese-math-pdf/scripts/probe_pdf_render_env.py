@@ -23,6 +23,7 @@ FONT_FILES = {
     "texgyretermes_italic": Path("fonts/texgyre-termes/texgyretermes-italic.otf"),
     "texgyretermes_bolditalic": Path("fonts/texgyre-termes/texgyretermes-bolditalic.otf"),
     "texgyretermes_math": Path("fonts/texgyre-termes-math/texgyretermes-math.otf"),
+    "newcm_math_calligraphic": Path("fonts/newcomputermodern/NewCMMath-Regular.otf"),
     "noto_serif_sc_regular": Path("texmf/fonts/opentype/public/noto-cjk/NotoSerifSC-Regular.otf"),
     "noto_serif_sc_bold": Path("texmf/fonts/opentype/public/noto-cjk/NotoSerifSC-Bold.otf"),
     "noto_sans_sc_regular": Path("texmf/fonts/opentype/public/noto-cjk/NotoSansSC-Regular.otf"),

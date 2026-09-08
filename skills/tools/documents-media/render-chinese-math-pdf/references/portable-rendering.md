@@ -84,10 +84,12 @@ python scripts/probe_pdf_render_env.py --root <project-root> --pretty
 Use this route when the PDF needs clean font provenance, stable Chinese glyphs,
 and reviewable tables. It avoids requiring Times New Roman; TeX Gyre Termes is
 the portable Times-compatible default on TeX Live systems. The helper loads
-TeX Gyre Termes, TeX Gyre Termes Math, Noto Serif SC, and Noto Sans SC by file
-from the selected local resource bundle. It does not use Times New Roman,
-fontconfig fallback, Windows font mounts, DejaVu, Liberation, or Fandol as the
-default route.
+TeX Gyre Termes, TeX Gyre Termes Math, New Computer Modern Math for only
+`cal,bfcal`, Noto Serif SC, and Noto Sans SC by file from the selected local
+resource bundle. It does not use Times New Roman, fontconfig fallback, Windows
+font mounts, DejaVu, Liberation, or Fandol as the default route. Keep
+`\mathscr` on the main math font so it remains visually distinct from
+`\mathcal`.
 
 ```bash
 python scripts/build_chinese_math_header.py --root <project-root> --output /tmp/chinese-math-header.tex
