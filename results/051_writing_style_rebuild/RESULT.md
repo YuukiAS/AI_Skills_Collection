@@ -31,10 +31,10 @@ Gate 2 was not rerun after the parser repair merely to manufacture a clean
 behavior evidence plus a subsequent offline parser regression against the same
 failed-run JSONL.
 
-Gate 3 known A/B/C regression generation is complete and waiting for user
-artifact acceptance:
+Gate 3 known A/B/C regression PRODUCT / ARTIFACT gate is PASS:
 
-- `Gate3=AWAITING_USER_ACCEPTANCE`
+- `Gate3=PASS`
+- `USER_TEXT_DECISION=ACCEPT`
 - exact candidate:
   `ee8dd6edda2a2e4dd8f3210504225a56432b11a0`
 - bounded private replay authorization: the user explicitly authorized this
@@ -87,23 +87,31 @@ artifact acceptance:
   `exact_verification.ok=true`, and `semantic_audit.ok=true`.
 - Candidate cleanup passed after each run, and production
   `writing-style@yuukias-ai-skills` identity remained unchanged.
+- Earlier Gate 3 review PDF QA was a false positive: the first combined PDF
+  rendered pipe-table and LaTeX/math source in the reader-facing review
+  artifact. The accepted A/B/C candidate Markdown files were not modified.
+- Render-only repair rebuilt the combined review artifact as a candidate-output
+  review with source identity/hash only, then normalized math delimiters for
+  Pandoc + XeLaTeX compatibility.
 - Combined review Markdown:
   `exports/private/051_writing_style_rebuild/gate3-known-regression/combined_known_regression_review.md`
   - SHA256:
-    `56c25c32d99cdd509166302db047a36fe3506d2e800fc50a059367e6ed6f5c83`
+    `bfebee1ea9eda10ae8fc5495c332006a12cab65a5f02f3dc5644f635ef6fdad9`
 - Combined review PDF:
   `exports/private/051_writing_style_rebuild/gate3-known-regression/combined_known_regression_review.pdf`
   - SHA256:
-    `8252c0db5b38089b7a25839884598b12c7837e90d69c032afc19aa55b230c5c6`
+    `fab69c5546bc932a0f2ad5467161d9cacba3ba15999c0d2f5860beaf126c6d26`
 - PDF was rendered through the existing production
   `render-chinese-math-pdf` Pandoc + XeLaTeX path using
   `/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/scripts/render_markdown_pdf.sh`.
-  QA: 11 pages; fonts embedded/subset; text layer extractable; first page and
-  formula-heavy page rendered to PNG and visually checked for readable Chinese,
-  formulas/math tokens, margins, and no obvious clipping/overflow. The review
-  Markdown uses render-safe escaping and math-symbol normalization for PDF
-  compatibility; the original private candidate Markdown files remain
-  unchanged and hash-bound above.
+  QA: 9 pages; fonts embedded/subset; text layer extractable; render log has
+  zero missing-character warnings, zero LaTeX errors, and zero
+  `Error producing PDF` entries. Extracted text has zero literal `$$`, zero
+  raw `\theta`, zero raw `\widetilde{`, zero raw `\frac`, zero raw `\begin{`,
+  and zero raw Markdown table separators. A table page, a B equation-heavy
+  page, and a C equation-heavy page were rendered to PNG and visually checked
+  for readable Chinese, true tables/formulas, margins, and no obvious
+  clipping/overflow.
 - `paid_external_calls=0`
 
 Earlier Gate 2 attempts exposed infrastructure and harness failures. They are

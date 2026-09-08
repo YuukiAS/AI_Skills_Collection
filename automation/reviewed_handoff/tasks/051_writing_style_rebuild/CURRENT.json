@@ -7,7 +7,7 @@
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "GATE3_AWAITING_USER_ACCEPTANCE",
+  "next_action": "GATE4_FULL_REPORT",
   "plan_revision": 0,
   "review_round": 0,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
