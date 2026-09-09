@@ -1,0 +1,25 @@
+{
+  "external_upload_authorization": "User authorized exactly one 051 candidate-only private Text Review through GitHub Actions and OpenAI Responses API store=false, max calls=1, max reserved cost USD 0.25, no automatic retry; packet excludes raw source, intermediate artifacts, audit logs, and secrets.",
+  "identity_bindings": {
+    "implementation_commit": "ee8dd6edda2a2e4dd8f3210504225a56432b11a0"
+  },
+  "input": {
+    "ciphertext_sha256": "63158f651a5970285de4dc386981e188443e7f49d210af63d930ea28b5a2a416",
+    "encrypted_payload_path": "results/051_writing_style_rebuild/text_review/payload.age",
+    "logical_id": "primary_text",
+    "mime_type": "text/markdown; charset=utf-8",
+    "plaintext_sha256": "418177980426cf1e515847fe047fdcc354ae2c2034adf4b96bb8adfe4eb7d587",
+    "plaintext_size_bytes": 95362,
+    "source_basename": "candidate_only_text_review_packet.md"
+  },
+  "paid_review_campaign_id": "051_writing_style_rebuild",
+  "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
+  "prompt_version": "ai-bridge.text-review.v1",
+  "review_kind": "051-writing-style-final-candidate-text",
+  "rubric": {
+    "instructions": "Read the complete candidate-only packet. Return PASS only if the final reader-facing Chinese texts are natural, coherent, low-burden, free of obvious internal-process leakage, and acceptable for the frozen 051 writing-style objective. Return REVISE for substantive readability, coherence, artifact-quality, or internal-process leakage problems. Do not require raw source; source fidelity is covered by separate host/mechanical evidence."
+  },
+  "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1",
+  "task_key": "051_writing_style_rebuild",
+  "workflow_type": "reviewed_handoff"
+}
