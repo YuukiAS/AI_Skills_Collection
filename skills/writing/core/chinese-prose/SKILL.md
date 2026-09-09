@@ -101,6 +101,11 @@ license: MIT-compatible synthesis plus public-domain style guidance
 - 中文 PDF/Markdown 的可见标题和开头没有回答“现在完成了什么或卡在哪里、为什么、下一步做什么”。
 - 导师/组会材料在用户没有要求时，自动加入“30 秒版本”“3 分钟版本”“如果只有 X 分钟”“可以这样讲”等时间脚本或讲稿模板。
 - 导师面对的科研报告把 `audit: PASS`、commit、job id、preflight、correction round 等内部执行状态提升为主叙事。
+- 科研/技术重写候选稿把 Reviewed Handoff、Gate、Planner/Reviewer/Executor、
+  Text Review、CI、commit、branch、GitHub Actions、`results/`、
+  `exports/private/`、`automation/reviewed_handoff/`、`.local-runtime/` 或
+  `CURRENT.json` / `RESULT.md` / `FINAL_REPORT.md` 当作读者正文，而不是只在
+  明确要求的审计/交接附录中出现。
 
 如果触发的是中文成稿验收，第一段必须先给人能读懂的判断；证据路径、命令、字段、日志和机器状态放在后面的证据区或括号说明。
 

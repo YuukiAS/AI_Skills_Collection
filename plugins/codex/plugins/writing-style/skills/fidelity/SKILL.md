@@ -171,6 +171,13 @@ Classify exact items as:
   deliverable but can move to a technical/evidence appendix, such as repository
   paths, checkpoint paths, exhaustive file identities, implementation locators,
   and detailed audit trails.
+- `internal-workflow-trace`: exact material that describes the current
+  automation/review workflow rather than the scientific or technical subject,
+  such as Reviewed Handoff state, Gate numbers, Planner/Reviewer/Executor
+  status, CI/test summaries, Git commit hashes, branch/worktree status,
+  GitHub Actions run ids, task-local `results/`, `exports/private/`,
+  `automation/reviewed_handoff/`, `.local-runtime/`, plugin-cache paths, or
+  `CURRENT.json` / `RESULT.md` / `FINAL_REPORT.md`.
 
 Relocation cannot hide or delete limitations, negative results, uncertainty,
 contradicting evidence, decision conditions, attribution, or comparison
@@ -178,6 +185,14 @@ boundaries. Ordinary reader-facing headings and internal workflow labels are not
 literal-protected by default. An `inline-critical` item is not preserved if it
 appears only in a technical appendix, token inventory, receipt, or trace list;
 it must remain in the reader-facing scientific context.
+
+For a clean reader-facing scientific/technical rewrite, `internal-workflow-trace`
+is not preserved by dumping it into prose. Use it only to understand artifact
+authority and to avoid false claims. Omit it from the final candidate unless the
+user explicitly requests an audit log, release handoff, or repository status
+report. A final candidate fails fidelity/readability if it mixes scientific
+conclusions with workflow state, CI results, commit ids, task paths, or review
+status as if those were part of the scientific argument.
 
 ## Red Flags
 

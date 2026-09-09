@@ -104,6 +104,29 @@ INTERNAL_ROUTE_TERMS = {
     "validate-host-stage",
     "validate-stage",
 }
+WORKFLOW_TRACE_LITERAL_PATTERNS = [
+    r"\b[0-9a-f]{40}\b",
+    r"(?:^|/)automation/reviewed_handoff(?:/|$)",
+    r"(?:^|/)results/\d{3}[_/][^\s，。；,]*",
+    r"(?:^|/)exports/private(?:/|$)",
+    r"(?:^|/)\.local-runtime(?:/|$)",
+    r"(?:^|/)\.github/workflows(?:/|$)",
+    r"(?:^|/)plugins/cache/[^/\s]+/writing-style/[^\s，。；,]*",
+    r"\b(?:CURRENT|RESULT|FINAL_REPORT|TEXT_REVIEW)\.json\b",
+    r"\b(?:RESULT|FINAL_REPORT)\.md\b",
+]
+READER_FACING_INTERNAL_LEAK_PATTERNS = [
+    ("commit_sha", r"\b[0-9a-f]{40}\b"),
+    ("reviewed_handoff_path", r"(?:^|/)automation/reviewed_handoff(?:/|$)"),
+    ("task_result_path", r"(?:^|/)results/\d{3}[_/][^\s，。；,]*"),
+    ("private_export_path", r"(?:^|/)exports/private(?:/|$)"),
+    ("local_runtime_path", r"(?:^|/)\.local-runtime(?:/|$)"),
+    ("github_actions", r"\bGitHub Actions\b|actions/runs|\.github/workflows"),
+    ("workflow_state", r"\b(?:AWAIT_HUMAN_DECISION|NEEDS_GPT_PLANNER|PLAN_FROZEN|TEXT_REVIEW|READY_FOR_GPT_REVIEW)\b"),
+    ("gate_label", r"\bGate\s*\d+\b|\bGate\d+\b"),
+    ("dev_command", r"\b(?:git (?:commit|push|diff|status|rev-parse)|python3 -m unittest|pytest)\b"),
+    ("process_review_label", r"\b(?:Planner|Reviewer|Executor)\b|规划者审核|外部规划者|本轮满足收口条件|收口条件"),
+]
 
 
 class ValidationError(RuntimeError):
@@ -171,6 +194,27 @@ def _latin_fraction(text: str) -> float:
     latin = len(re.findall(r"[A-Za-z]", text))
     non_space = len(re.findall(r"\S", text))
     return latin / non_space if non_space else 0.0
+
+
+def is_internal_workflow_trace_literal(text: str) -> bool:
+    return any(re.search(pattern, text) for pattern in WORKFLOW_TRACE_LITERAL_PATTERNS)
+
+
+def find_reader_facing_internal_leakage(text: str) -> list[dict[str, str]]:
+    findings = []
+    for name, pattern in READER_FACING_INTERNAL_LEAK_PATTERNS:
+        match = re.search(pattern, text)
+        if match:
+            findings.append({"kind": name, "literal": match.group(0)})
+    return findings
+
+
+def validate_reader_facing_internal_frame(candidate: str) -> dict[str, Any]:
+    findings = find_reader_facing_internal_leakage(candidate)
+    if findings:
+        kinds = ", ".join(finding["kind"] for finding in findings)
+        raise ValidationError("reader-facing internal workflow leakage: " + kinds)
+    return {"ok": True, "internal_workflow_leak_count": 0}
 
 
 def classify_writing_style_route(prompt: str, source: str) -> dict[str, Any]:
@@ -292,6 +336,8 @@ def extract_exact_items(source: str) -> list[dict[str, str]]:
         for match in re.finditer(pattern, source):
             text = match.group(0).strip("`")
             if not text or text in seen:
+                continue
+            if is_internal_workflow_trace_literal(text):
                 continue
             seen.add(text)
             role = "relocatable-trace" if category in {"path", "config"} else "inline-critical"
@@ -525,6 +571,7 @@ def validate_stage_package(
     assembly_result = validate_assembly_packet(assembly_packet)
     semantic_result = validate_semantic_audit(semantic_audit)
     exact_result = verify_exact_items(final_candidate, meaning_map.get("exact_items") or [])
+    reader_frame_result = validate_reader_facing_internal_frame(final_candidate)
     receipt = {
         "schema": RUNTIME_SCHEMA,
         "runtime": RUNTIME_NAME,
@@ -547,6 +594,7 @@ def validate_stage_package(
         "assembly": assembly_result,
         "semantic_audit": semantic_result,
         "exact_verification": exact_result,
+        "reader_facing_internal_frame": reader_frame_result,
     }
     if receipt_path is not None:
         write_json(receipt_path, receipt)

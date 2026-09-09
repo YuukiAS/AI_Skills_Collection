@@ -189,6 +189,38 @@ names, datasets, metrics, packages, APIs, and user-explicit protected spans.
 Ordinary reasoning, comparison, qualification, and transition language remains
 eligible for natural Chinese realization.
 
+## Reader-Facing Relevance Filter
+
+Do not treat repository workflow metadata as reader-facing scientific meaning
+merely because it is exact. The heavy route must distinguish scientific
+reproduction details from internal execution traces.
+
+Keep exact script, configuration, command, data, model, metric, citation, or
+formula identities when they support the scientific/technical argument or
+reproducibility contract. For example, a source statement that an experiment
+uses `scripts/run_fedfisher.sh` and `configs/mm_fedfisher.yaml` may remain in a
+short reproducibility paragraph.
+
+Do not put these in the main reader-facing candidate unless the user explicitly
+asks for an audit log or repository handoff:
+
+- Reviewed Handoff state, Gate numbers, Planner/Reviewer/Executor status, CI
+  status, test command summaries, or Text Review workflow state;
+- Git commit hashes, branch names, GitHub Actions run ids, worktree state, or
+  release checklist status;
+- task-local paths such as `results/051_*`, `exports/private/*`,
+  `automation/reviewed_handoff/*`, `.local-runtime/*`, plugin cache paths, or
+  `CURRENT.json` / `RESULT.md` / `FINAL_REPORT.md`;
+- statements such as "this round is ready to close", "waiting for external
+  planner review", or "the result has passed independent planner review" when
+  they are process state rather than scientific content.
+
+If the source mixes a scientific report with workflow/audit metadata, use the
+metadata only to avoid false claims and to understand artifact authority. The
+final candidate should present the scientific content first and move necessary
+technical reproduction details to a short appendix. Irrelevant workflow traces
+should be omitted, not "preserved" as prose.
+
 ## Completion Standard
 
 This route can claim process completion only when the stage package validates:
@@ -198,6 +230,8 @@ This route can claim process completion only when the stage package validates:
 - complete source-anchor/meaning ownership;
 - valid Reader Plan bundle ownership;
 - exact items preserved;
+- reader-facing candidate has no internal workflow / CI / commit / task-path
+  leakage;
 - semantic audit has no unresolved critical findings;
 - no paid generation dependency;
 - no private plaintext committed;

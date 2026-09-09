@@ -325,6 +325,44 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
                 }
             )
 
+    def test_internal_workflow_trace_is_not_reader_facing_exact_identity(self) -> None:
+        text = (
+            "复现实验脚本位于 `scripts/run_fedfisher.sh`，配置文件是 `configs/mm_fedfisher.yaml`。\n"
+            "内部验收记录位于 results/051_writing_style_rebuild/RESULT.md，"
+            "implementation commit 为 ee8dd6edda2a2e4dd8f3210504225a56432b11a0，"
+            "状态写在 automation/reviewed_handoff/tasks/051_writing_style_rebuild/CURRENT.json。"
+        )
+        literals = {item["literal"] for item in helper.extract_exact_items(text)}
+
+        self.assertIn("scripts/run_fedfisher.sh", literals)
+        self.assertIn("configs/mm_fedfisher.yaml", literals)
+        self.assertNotIn("results/051_writing_style_rebuild/RESULT.md", literals)
+        self.assertNotIn("automation/reviewed_handoff/tasks/051_writing_style_rebuild/CURRENT.json", literals)
+        self.assertNotIn("ee8dd6edda2a2e4dd8f3210504225a56432b11a0", literals)
+
+    def test_reader_facing_internal_workflow_leakage_fails_stage_validation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            source, stage_dir, _ = build_valid_stage(Path(tmp))
+            candidate = (
+                (stage_dir / "final_candidate.md").read_text(encoding="utf-8")
+                + "\n本轮满足收口条件，GitHub Actions run 通过，commit "
+                "ee8dd6edda2a2e4dd8f3210504225a56432b11a0 已记录在 "
+                "results/051_writing_style_rebuild/RESULT.md。"
+            )
+            (stage_dir / "final_candidate.md").write_text(candidate + "\n", encoding="utf-8")
+            prompt = (Path(tmp) / "prompt.md").read_text(encoding="utf-8").strip()
+
+            with self.assertRaisesRegex(helper.ValidationError, "reader-facing internal workflow leakage"):
+                helper.validate_stage_package(source, stage_dir, prompt=prompt)
+
+    def test_reader_facing_internal_frame_allows_scientific_reproduction_paths(self) -> None:
+        candidate = (
+            "FedFisher 在 MMs 数据集、一次通信设置下达到 Dice=0.81 [12]。"
+            "复现实验脚本是 `scripts/run_fedfisher.sh`，配置文件是 `configs/mm_fedfisher.yaml`。"
+        )
+        result = helper.validate_reader_facing_internal_frame(candidate)
+        self.assertTrue(result["ok"])
+
     def test_structural_rewrite_allows_reordering_but_rejects_semantic_drift(self) -> None:
         protected = [
             "claim",
