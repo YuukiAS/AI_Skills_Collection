@@ -51,6 +51,14 @@ prompt cache: explicit mode with no cache breakpoints
 
 运行时安全判断只使用 task-local persistent reservation，不使用“今天花了多少”、Dashboard day bucket、Organization Costs API 或其他异步账单统计作为放行条件。
 
+paid-review campaign contract 是安全合同，必须在该 campaign 的 first
+reservation / first paid request 之前冻结。冻结内容至少包括 model、service
+tier、reasoning/tools/cache 策略、max paid call count、campaign ceiling、
+per-call ceiling、automatic retry 和 candidate/source boundary。已有
+reservation 后，不得原地扩大 `max_paid_calls`、campaign ceiling 或 per-call
+ceiling，也不得把旧 ledger 改写成一个更大的 campaign 来容纳后续调用。历史
+reservation / actual-cost evidence 必须保留。
+
 每次 paid request 前必须：
 
 1. 构造即将真实发送的完整 request；
@@ -63,6 +71,23 @@ prompt cache: explicit mode with no cache breakpoints
 8. 只有 reservation 成功后才允许 `POST /v1/responses`。
 
 reservation 一旦发生，不因为请求失败、实际输出较短、retry、workflow rerun 或进程重启而自动返还。reservation 是安全保险丝，不是事后报表。
+
+必须区分 pre-request deterministic/accounting failure 与已经发送的 model
+request。若可靠日志或 receipt 证明 `/v1/responses` 尚未发送、没有产生新的
+model response、没有写入新的 review evidence，也没有消费该次 authorized
+paid call，则该失败不自动算作 consumed paid model call。同一 artifact/data
+scope、provider/endpoint、purpose、credential scope 和 cost ceiling 下，为修复
+local deterministic bug、manifest/accounting reconciliation、workflow plumbing
+或等价 preflight infrastructure 而继续同一个未消费调用，不需要重新获得同一
+model-call authorization，也不得计为 automatic paid retry。
+
+如果需要超出 frozen campaign 的额外 paid model call，必须先获得 explicit
+human authorization，并使用仓库明确支持的 recovery accounting path 来记录新的
+授权范围、cost ceiling 和历史 ledger 关系。禁止删除旧 ledger、伪造 reservation、
+重置 campaign 历史，或在已有 reservation 后直接手改旧 contract。若当前 runtime
+尚不支持这种 recovery contract，必须 fail closed，并把问题分类为
+`PAID_REVIEW_ACCOUNTING_INFRASTRUCTURE`，不能写成 product failure、holdout
+failure 或 reviewer failure。
 
 当前 Terra 价格基线（reviewed 2026-09-03，官方 model docs）：
 
