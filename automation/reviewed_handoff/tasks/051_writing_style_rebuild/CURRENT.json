@@ -5,7 +5,7 @@
   "ci_status": "PENDING",
   "human_gate_reason": "USER_AUTHORIZED_BOUNDED_RECOVERY",
   "human_recovery_authorization": "AUTHORIZED_GATE3_AB_PRODUCTION_REGEN_GENERIC_LEAKAGE_REPAIR_NEW_HOLDOUT_ONE_ADDITIONAL_TEXT_REVIEW",
-  "implementation_commit": "ee8dd6edda2a2e4dd8f3210504225a56432b11a0",
+  "implementation_commit": "2690de2cbc3d4ffb0741ecb80297a569647051f2",
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,

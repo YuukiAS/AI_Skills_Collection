@@ -332,6 +332,37 @@ Post-Text-Review human decision:
 - If recovery succeeds, the Executor may continue Gate 7, Gate 8, release, and
   integration without asking for routine intermediate confirmations.
 
+Authorized generic repair candidate:
+
+- `candidate_commit=2690de2cbc3d4ffb0741ecb80297a569647051f2`
+- The repair is generic, not holdout-specific. It adds a reader-facing
+  relevance filter to the heavy `scientific-rewrite` route and its generated
+  `writing-style` plugin payload.
+- Scientific reproduction details such as script/config paths remain allowed
+  when they support the scientific argument or reproducibility contract.
+- Internal workflow traces such as Reviewed Handoff state, Gate numbers,
+  Planner/Reviewer/Executor status, Text Review state, CI/test summaries,
+  commit hashes, branch/worktree status, GitHub Actions ids, task-local
+  `results/`, `exports/private/`, `automation/reviewed_handoff/`,
+  `.local-runtime/`, plugin-cache paths, and `CURRENT.json` / `RESULT.md` /
+  `FINAL_REPORT.md` are not reader-facing scientific meaning by default.
+- `rewrite_support.py` now validates that final candidates do not contain
+  reader-facing internal workflow leakage, while preserving normal scientific
+  reproduction paths such as `scripts/run_fedfisher.sh` and
+  `configs/mm_fedfisher.yaml`.
+- Focused validation completed before this record:
+  - `python3 -m unittest tests.test_scientific_rewrite -q`: PASS, 15 tests.
+  - `python3 scripts/build_codex_marketplace.py --write --validate --check --path-report`:
+    PASS, 10 plugins, 27 active plugin skills, 65 source snapshots,
+    `over_budget=0`.
+  - `python3 -m unittest tests.test_scientific_rewrite tests.test_skill_runtime_text_audit tests.test_codex_marketplace -q`:
+    PASS, 55 tests.
+  - `python3 -m unittest tests.test_candidate_plugin_replay -q`: PASS, 23
+    tests.
+  - `python3 scripts/skills.py validate`: PASS, 150 active skills and 18
+    profiles.
+  - `git diff --check`: PASS.
+
 Earlier Gate 2 attempts exposed infrastructure and harness failures. They are
 retained below as diagnostic history and are not product failures.
 
