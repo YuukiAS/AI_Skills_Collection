@@ -303,6 +303,14 @@ reviewed/045_presentations_real_use_regression_hardening
 
 任何情况下都不得打印、commit、push、回显或要求用户粘贴 secret value。若正式路径使用 GitHub repository secrets，本地 shell 中对应环境变量 `unset` 不是 blocker。task 完成后应删除 task-local credential 副本和不再需要的 private plaintext 临时副本，但保留不含秘密的授权范围、artifact hash、provider/purpose 和删除结果作为 evidence。
 
+AI_Skills central-plugin candidate replay 必须先遵守
+`docs/workflows/CANDIDATE_PLUGIN_REPLAY.md`。canonical path 复用现有
+Codex account identity；不要默认发明一个需要复制 credential 的 isolated
+`CODEX_HOME` 作为 workaround。只要 bounded task 已授权 candidate replay，
+其 reserved temporary candidate-cache mutation 和 finally cleanup 就是普通
+replay 机制，不应反复触发用户选择题。如果 `CURRENT` 已不再是
+Executor-owned 状态，必须先同步 task state，再启动任何 replay。
+
 ### 8.2.2 已停止 task 的 artifact 只能作为显式冻结的只读回归输入
 
 一个旧 Reviewed Handoff task 被停止、废弃或设为只读，不等于它的真实失败 artifact 必须被遗忘。后续新 task 可以把旧 artifact 当作 `KNOWN_REGRESSION`，但只有在新 task 的 REQUEST/PLAN 明确冻结了该用途时才允许读取或 replay。

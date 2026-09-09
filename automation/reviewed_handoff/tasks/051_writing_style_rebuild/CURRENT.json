@@ -14,7 +14,7 @@
   "review_limit_reached": false,
   "review_round": 0,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
-  "state": "PLAN_FROZEN",
+  "state": "REVISE",
   "task_key": "051_writing_style_rebuild",
   "text_review_required": true,
   "text_review_manifest_path": "results/051_writing_style_rebuild/text_review/text_inputs.json",
