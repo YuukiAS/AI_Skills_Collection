@@ -1028,3 +1028,93 @@ leakage/fidelity/semantic checks. The remaining missing capability belongs to
 Bridge/Text Review accounting infrastructure: a supported authorized
 unsent-call recovery path that preserves immutable prior ledger history while
 enforcing the separately authorized one-call cap.
+
+## Authorized extension recovery completed and final Text Review failed
+
+Bridge Kit was extended upstream with an append-safe authorized one-call
+extension campaign:
+
+- `BRIDGE_EXTENSION_COMMIT=5c894d98d3053c39cbda79cdbd0b8dfb4fbec4c0`
+- `bridge_version=0.7.4`
+- Bridge full tests: `python3 -m unittest discover -s tests -q` passed
+  (`335` tests).
+
+AI_Skills main first received the reusable governance policy and then consumed
+the new Bridge pin:
+
+- `AI_SKILLS_GOVERNANCE_MAIN_SHA=34b9d2dd2529755a2efa9330df5241d96556fa78`
+- `AI_SKILLS_BRIDGE_CONSUMER_MAIN_SHA=cafe33f49467d28fe48ef90b571ca490529033d4`
+
+The consumer pin was cherry-picked back to the 051 task branch, and the final
+Text Review manifest was updated only with extension accounting metadata:
+
+```json
+"paid_review_extension": {
+  "authorization_receipt": "AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_RECOVERY",
+  "parent_campaign_id": "051_writing_style_rebuild"
+}
+```
+
+The frozen review packet and holdout were not regenerated:
+
+- parent ledger before/after SHA256:
+  `db8cd88a964cfc89b2582f3fbe4fd56f0061ec2b954527945765896c76ccd928`
+- encrypted packet SHA256:
+  `a3e078b4f809ed9932e3caa35a1c7f6d874a0c6cb0fcf0b69824abe8a212def0`
+- final Text Review manifest SHA256:
+  `f163782ca9eea2470f16eb9ed5aa9247e8246de76bcae348a337a8bde8e22129`
+- final holdout manifest SHA256:
+  `34588a912c741a6407718ad1fdb363d41e108816946185d4285488e8a58e71c1`
+
+Exactly one final Text Review was dispatched:
+
+- workflow run:
+  `https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/34418740861`
+- result:
+  `SUCCESS` workflow execution, real `/v1/responses` request sent
+- evidence:
+  `results/051_writing_style_rebuild/text_review/TEXT_REVIEW.json`
+- evidence SHA256:
+  `10517b493ef5d0d983eb381e361a31c6483b0c2e779a87b549735cc74a230df7`
+- extension ledger:
+  `results/051_writing_style_rebuild__authorized_extension_1/paid_review_budget.json`
+- extension ledger SHA256:
+  `9c704ad046bf675cd36664e1b16136720d7ea9cc97033b4ed93857a0142dc45e`
+- extension paid calls:
+  `1`
+- parent campaign:
+  `051_writing_style_rebuild`
+- child campaign:
+  `051_writing_style_rebuild__authorized_extension_1`
+- worst-case reserved:
+  `0.118512`
+- aggregate reserved:
+  `0.354516`
+- actual model cost:
+  `0.067236`
+- accounting:
+  `ACCOUNTING_VERIFIED`
+
+Final Text Review decision:
+
+```text
+REVISE
+blocking_findings=2
+```
+
+The blocking findings were:
+
+- `F-001`: internal workflow terminology leakage in packet/deliverable framing;
+- `F-002`: Bloom-filter text contains source-process leakage and is not fully
+  self-contained reader-facing prose.
+
+Per the user-authorized recovery boundary, this is a terminal 051 product review
+failure:
+
+```text
+051_FINAL_TEXT_REVIEW_FAIL
+```
+
+No fourth holdout, fourth paid review, Gate 7, final CI, version/changelog
+closure, production install smoke, GPT Reviewer PASS, or main integration was
+started.

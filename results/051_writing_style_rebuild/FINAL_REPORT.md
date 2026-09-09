@@ -4,9 +4,9 @@
 
 Task 051 has produced a real successor candidate for the existing `writing-style` plugin's heavy Chinese scientific/technical rewrite path and has already proved that an ordinary installed-plugin request can route into the new heavy path without forcing the user to name internal implementation stages. The task also established repo-local candidate replay, known-regression replay, complete-report replay, frozen fresh-holdout evaluation, and independent Text Review evidence.
 
-The task is not eligible for final PASS or integration. After the second Text Review failed on an incomplete frozen Kalman holdout, the user explicitly authorized exactly one final bounded recovery: use one semantically complete fresh holdout, do no holdout-specific production tuning, and allow one final candidate-only Text Review with worst-case reservation at most USD 0.25 and no paid retry. That final holdout replay was prepared successfully, but the Text Review workflow stopped in pre-request accounting validation with `ERROR: paid review budget contract mismatch`. No paid model request was proven sent and no new Text Review evidence was written.
+The task is not eligible for final PASS or integration. After the second Text Review failed on an incomplete frozen Kalman holdout, the user explicitly authorized exactly one final bounded recovery: use one semantically complete fresh holdout, do no holdout-specific production tuning, and allow one final candidate-only Text Review with worst-case reservation at most USD 0.25 and no paid retry. That final holdout replay was prepared successfully.
 
-The user then authorized accounting-only recovery for the exact same candidate, Bloom holdout, encrypted packet, provider, privacy boundary, one unsent model call, USD 0.25 worst-case reservation, and no automatic retry. The current installed/canonical Text Review accounting runtime has no supported way to express that recovery without mutating or bypassing prior ledger history. 051 therefore stops as `051_STOP_ACCOUNTING_INFRA`, not as a writing-style production failure and not as final PASS.
+The final Text Review accounting blocker was then fixed in Bridge Kit through a generic authorized one-call extension campaign. The authorized final Text Review was sent exactly once, using the same candidate, Bloom holdout, encrypted packet, provider and privacy boundary. The final Text Review returned `REVISE` with two blocking findings. Per the user's recovery boundary, 051 therefore stops as `051_FINAL_TEXT_REVIEW_FAIL`, not as final PASS.
 
 ## What changed
 
@@ -14,7 +14,7 @@ The current production/recovery implementation candidate remains frozen at `2690
 
 The final bounded recovery completed the requested governance hardening, froze a semantically complete Bloom-filter holdout before generation, and replayed it through the existing candidate. The replay proved ordinary `scientific-rewrite` routing, heavy-route receipt V2, no paid generation, and passing mechanical reader-facing leakage/fidelity/semantic checks. The resulting private candidate packet was encrypted and staged for the final independent Text Review.
 
-The repository paid-review ledger records the two completed earlier reviews and the user's authorization for a third and final paid call. However, the Bridge Kit workflow rejected the current campaign contract before sending a model request. The failed workflow is GitHub Actions run `34379122780`; its `Run text review` step failed with `paid review budget contract mismatch`, and the evidence-commit step was skipped.
+The repository paid-review parent ledger records the two completed earlier reviews and remains unchanged. The separately authorized extension ledger records exactly one final paid call under `051_writing_style_rebuild__authorized_extension_1`; the parent ledger contract and reservations were not modified.
 
 Required final CI, release/version closure, install/upgrade smoke, GPT Reviewer PASS, and integration remain intentionally unstarted.
 
@@ -46,11 +46,11 @@ Short local polishing, fidelity-only checking, and English scientific prose rema
 
 The first independent Text Review returned `REVISE` for Gate 3 A/B and the first Gate 5 holdout. The bounded recovery then regenerated A/B from complete context and applied a generic reader-facing internal-workflow leakage guard. The second independent Text Review passed recovered Gate 3 A/B, unchanged Gate 3 C, and Gate 4, but returned `REVISE` for the new Kalman holdout because its frozen source itself ended before the promised equation and produced an incomplete-feeling reader artifact.
 
-The user then authorized one final bounded recovery. That recovery froze a semantically complete Bloom-filter source and produced a final candidate packet, but the independent review itself has not occurred: workflow run `34379122780` failed during pre-request accounting validation. Logs show the payload decrypted successfully, then `ai-bridge text-review run` stopped with `ERROR: paid review budget contract mismatch`. The workflow wrote no new `TEXT_REVIEW.json`, and repository control state records that no paid model request was proven sent.
+The user then authorized one final bounded recovery. That recovery froze a semantically complete Bloom-filter source and produced a final candidate packet. The first workflow run `34379122780` failed before `/v1/responses` because Bridge Kit did not yet support append-safe recovery accounting for an already exhausted immutable parent campaign.
 
-This failure remains recoverable only after Bridge/Text Review accounting grows a supported authorized unsent-call recovery path. Such a path must preserve the immutable prior two-call ledger and task-wide cumulative cost record while enforcing the separately authorized final one-call cap. The current 051 branch does not hack the ledger, delete history, fake a reservation, or create an unsupported campaign identity to bypass that missing contract.
+Bridge Kit commit `5c894d98d3053c39cbda79cdbd0b8dfb4fbec4c0` added that supported one-call extension campaign and passed the full Bridge test suite. AI_Skills then pinned active paid-review workflows to that exact Bridge commit. The final recovery workflow run `34418740861` completed successfully and wrote fresh `TEXT_REVIEW.json`, but the review decision was `REVISE`.
 
-Required final CI remains pending by design and was not started. Because safe accounting still cannot be established, 051 stops without final PASS, final CI, version/changelog/release closure, production install smoke, GPT Reviewer PASS, or integration.
+The two blocking findings were internal workflow terminology leakage in the packet/deliverable framing and Bloom-filter prose that still exposed source-process/rewrite framing rather than fully self-contained reader-facing technical exposition. Because the user authorized no fourth holdout and no fourth paid review, 051 stops without final PASS, final CI, version/changelog/release closure, production install smoke, GPT Reviewer PASS, or integration.
 
 ## Generic governance result
 
@@ -77,25 +77,30 @@ pre-request unsent-call recovery semantics.
 
 - Task branch: `reviewed/051_writing_style_rebuild`
 - Current implementation candidate: `2690de2cbc3d4ffb0741ecb80297a569647051f2`
-- Final outcome: `051_STOP_ACCOUNTING_INFRA`
+- Final outcome: `051_FINAL_TEXT_REVIEW_FAIL`
 - Frozen Plan revision: `1` of maximum `1`
 - Current CI status: `PENDING`; final release/integration CI has not started
 - Latest completed Text Review evidence: `results/051_writing_style_rebuild/text_review/TEXT_REVIEW.json`
 - Latest completed Text Review decision: `REVISE`
-- Latest completed paid review call number: `2`
+- Latest completed paid review campaign: `051_writing_style_rebuild__authorized_extension_1`
+- Latest completed paid review call number: `1`
 - Final recovery Text Review manifest: `results/051_writing_style_rebuild/text_review/text_inputs.json`
 - Final recovery encrypted payload SHA256: `a3e078b4f809ed9932e3caa35a1c7f6d874a0c6cb0fcf0b69824abe8a212def0`
 - Final recovery plaintext packet SHA256: `07b985887d6e35c24835fe156b631469498ee34cee84f8b13f2b6cf6b91e9dc1`
 - Final recovery holdout manifest: `results/051_writing_style_rebuild/recovery/final_holdout_manifest.json`
-- Failed final Text Review workflow: `34379122780`
-- Workflow conclusion: `failure`
-- Failed step: `Run text review`
-- Observed error: `ERROR: paid review budget contract mismatch`
-- Paid model request proven sent: `false`
-- New Text Review evidence written: `false`
+- Initial accounting-failure workflow: `34379122780`
+- Final Text Review workflow: `34418740861`
+- Workflow conclusion: `success`
+- Paid model request proven sent: `true`
+- New Text Review evidence written: `true`
+- Text Review evidence SHA256: `10517b493ef5d0d983eb381e361a31c6483b0c2e779a87b549735cc74a230df7`
+- Parent ledger unchanged SHA256: `db8cd88a964cfc89b2582f3fbe4fd56f0061ec2b954527945765896c76ccd928`
+- Extension ledger SHA256: `9c704ad046bf675cd36664e1b16136720d7ea9cc97033b4ed93857a0142dc45e`
+- Extension paid calls: `1`
+- Extension actual model cost USD: `0.067236`
 - Accounting-only recovery authorized: `true`
-- Accounting-only recovery completed: `false`
-- Accounting infrastructure missing capability: supported one-call authorized
-  unsent-call recovery that preserves immutable prior ledger history
+- Accounting-only recovery completed: `true`
+- Bridge extension commit: `5c894d98d3053c39cbda79cdbd0b8dfb4fbec4c0`
+- Bridge version: `0.7.4`
 - Existing implementation-commit combined status checks: none reported; final required CI remains not started
 - No production implementation file is modified by this Planner transaction.
