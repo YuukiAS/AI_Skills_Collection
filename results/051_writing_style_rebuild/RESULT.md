@@ -311,6 +311,27 @@ Gate 3 decision, while repairing or replacing the Gate 5 frozen holdout would
 conflict with the Plan rule that a failed holdout is a failed batch unless a new
 explicit human/Planner decision opens another path.
 
+Post-Text-Review human decision:
+
+- `USER_DECISION=AUTHORIZE_BOUNDED_RECOVERY`
+- The user authorized a bounded 051 recovery after Planner routed the Text
+  Review `REVISE` to human decision.
+- The current Gate 5 frozen holdout batch is permanently recorded as failed. It
+  must not be repaired, reused, rerun, or replaced merely to bypass finding
+  `F-003`.
+- Recovery must first perform a generic repair on non-holdout,
+  known-regression, or public-safe material to address reader-facing internal
+  workflow / CI / commit / path leakage.
+- Gate 3 A/B must be regenerated through the normal `writing-style` production
+  route. Manual candidate editing is not allowed.
+- Only after the generic repair is implemented and validated may 051 freeze one
+  new fresh holdout batch.
+- The user authorized exactly one additional candidate-only Text Review under
+  the same provider/privacy boundary, with an additional worst-case ceiling of
+  `USD 0.25`, `automatic_retry=0`, and no retry beyond that call.
+- If recovery succeeds, the Executor may continue Gate 7, Gate 8, release, and
+  integration without asking for routine intermediate confirmations.
+
 Earlier Gate 2 attempts exposed infrastructure and harness failures. They are
 retained below as diagnostic history and are not product failures.
 
