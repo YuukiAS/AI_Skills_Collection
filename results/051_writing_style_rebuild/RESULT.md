@@ -245,6 +245,72 @@ the next required action is one human `ACCEPT` or `REJECT` decision covering
 the qualitative Gate 4/5 artifact acceptance. Gate 6 Text Review must not start
 until that combined human decision is `ACCEPT`.
 
+The combined Gate 4/5 human qualitative gate was later closed by Reviewer/user
+acceptance at commit `f93d81079b0f5c3d417ce546e419978de1c58692`, allowing
+Gate 6 to run.
+
+Gate 6 independent Text Review evidence is complete and returned `REVISE`:
+
+- `Gate6=TEXT_REVIEW_REVISE`
+- GitHub Actions run:
+  `https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/34360618786`
+- Text Review evidence:
+  `results/051_writing_style_rebuild/text_review/TEXT_REVIEW.json`
+- Text Review encrypted payload:
+  `results/051_writing_style_rebuild/text_review/payload.age`
+  - SHA256:
+    `63158f651a5970285de4dc386981e188443e7f49d210af63d930ea28b5a2a416`
+- Text Review input manifest:
+  `results/051_writing_style_rebuild/text_review/text_inputs.json`
+  - manifest SHA256:
+    `5b7926100f74d30aae357e37d6e440491cf31df6564ee36a6f3ee056961948c0`
+- Private plaintext packet was candidate-only, not committed, and had SHA256:
+  `418177980426cf1e515847fe047fdcc354ae2c2034adf4b96bb8adfe4eb7d587`
+  with size `95362` bytes.
+- Reviewed implementation commit:
+  `ee8dd6edda2a2e4dd8f3210504225a56432b11a0`
+- Text Review model:
+  `gpt-5.6-terra`
+- Overall decision:
+  `REVISE`
+- Blocking findings:
+  `3`
+- Non-blocking notes:
+  `1`
+- Item decisions:
+  - Gate 3 known regression A candidate: `REVISE`
+  - Gate 3 known regression B candidate: `REVISE`
+  - Gate 3 known regression C candidate: `PASS`
+  - Gate 4 complete private report candidate: `PASS`
+  - Gate 5 fresh holdout candidate: `REVISE`
+- Paid review accounting:
+  `ACCOUNTING_VERIFIED`
+  - call number: `1`
+  - worst-case reserved cost: `USD 0.116207`
+  - actual model cost: `USD 0.066460`
+
+Text Review blocking summaries:
+
+- Gate 3 A: visible unfinished text and internal editing notes remain in the
+  reader-facing candidate.
+- Gate 3 B: multiple truncation notes, missing numbering, and source-condition
+  explanations break continuity and expose internal handling.
+- Gate 5: the candidate mixes reader-facing research summary with review
+  workflow state, CI/test metadata, commit identifiers, model labels, and file
+  paths, so it is not a clean reader artifact.
+
+This is not recorded as a Gate 2/product-routing failure: Gate 2 production
+behavior remained PASS, Gate 4 reader-facing quality passed Text Review, and
+the Text Review evidence itself is valid. It is also not a malformed or missing
+Text Review case.
+
+Gate 7 final CI, version/changelog, production install smoke, Reviewer PASS,
+and integration were not started. The workflow is returned to Planner because
+repairing Gate 3 A/B would reopen text already accepted and hash-bound by the
+Gate 3 decision, while repairing or replacing the Gate 5 frozen holdout would
+conflict with the Plan rule that a failed holdout is a failed batch unless a new
+explicit human/Planner decision opens another path.
+
 Earlier Gate 2 attempts exposed infrastructure and harness failures. They are
 retained below as diagnostic history and are not product failures.
 
@@ -498,6 +564,7 @@ current runtime is `codex-cli 0.142.0`.
   repaired offline.
 - The final parser repair was not followed by another Gate 2 replay, by explicit
   user instruction.
-- Text Review, final CI, version/changelog, production install smoke, Reviewer
-  PASS, and integration are not started. Per Plan revision 1, they wait on the
-  single combined Gate 4/5 human `ACCEPT`.
+- Gate 6 Text Review is valid and returned `REVISE`; it is not converted into
+  product PASS or a harness failure.
+- Final CI, version/changelog, production install smoke, Reviewer PASS, and
+  integration are not started. The current state is `NEEDS_GPT_PLANNER`.
