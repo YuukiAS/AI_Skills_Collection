@@ -30,11 +30,25 @@
       "worst_case_standard_input_usd_per_1m": "2.500000"
     }
   },
-  "cumulative_actual_model_cost_usd": "0.000000",
+  "cumulative_actual_model_cost_usd": "0.067236",
   "cumulative_reserved_worst_case_cost_usd": "0.118512",
   "parent_campaign_identity": "051_writing_style_rebuild",
   "reservations": [
     {
+      "accounting_status": "ACCOUNTING_VERIFIED",
+      "actual_cost_status": "ACCOUNTING_VERIFIED",
+      "actual_model_cost_usd": "0.067236",
+      "actual_response_usage": {
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 27744,
+        "output_tokens": 979,
+        "reasoning_tokens": 454,
+        "regular_input_tokens": 27744,
+        "response_id": "resp_05fa39ccd7fb7cf7016aa1f113ce0087d18077b3481f776522",
+        "response_model": "gpt-5.6-terra",
+        "response_service_tier": "default"
+      },
       "aggregate_parent_reserved_worst_case_cost_usd": "0.236004",
       "aggregate_reserved_worst_case_cost_usd": "0.354516",
       "authorization_receipt": "AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_RECOVERY",
@@ -73,6 +87,9 @@
       "request_sha256": "531f6933134a2cca3714090a5f3724e296d5c6c01f90ae92f7198d85ac8f7961",
       "reservation_id": "051_writing_style_rebuild__authorized_extension_1-1-531f6933134a",
       "reserved_at": "2026-09-09T23:51:46Z",
+      "response_id": "resp_05fa39ccd7fb7cf7016aa1f113ce0087d18077b3481f776522",
+      "response_model": "gpt-5.6-terra",
+      "response_service_tier": "default",
       "review_type": "text_review",
       "service_tier": "default",
       "worst_case_reserved_cost_usd": "0.118512"

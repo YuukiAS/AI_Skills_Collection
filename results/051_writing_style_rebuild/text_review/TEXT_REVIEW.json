@@ -1,36 +1,36 @@
 {
   "blocking_findings": [
     {
-      "evidence": "Gate 5 在正文末尾插入“*节选说明：原文在‘符合下式：’处结束，未提供后续公式……不补写缺失内容。*”",
+      "evidence": "Packet section labels include “Gate 3 known regression A recovered candidate” and “Gate 4 full report candidate”.",
       "finding_id": "F-001",
-      "recommendation": "删除面向恢复过程的说明；如需保留内容边界，应改写为自然的读者提示，或补全数学模型段落后再发布。",
-      "requirement_id": "051-writing-style-recovery-final-candidate-text",
+      "recommendation": "Remove workflow/gate/recovery-status labels from any reader-facing deliverable; retain only the document titles.",
+      "requirement_id": "051-writing-style-final-recovery-candidate-text",
       "severity": "blocking",
-      "summary": "出现明显的内部恢复/源文本缺失过程泄漏，不是正常读者文章内容。"
+      "summary": "The packet exposes internal workflow terminology rather than presenting clean reader-facing documents."
     },
     {
-      "evidence": "Gate 5 在“模型假设：k 时刻的真实状态由（k − 1）时刻的状态演化而来。”后直接结束，未给出前文预告的状态方程及 Fk、Hk、Qk、Rk 定义。",
+      "evidence": "Gate 5 repeatedly refers to “原文”，例如“原文同时指出”与“原文在基本原理中…”。",
       "finding_id": "F-002",
-      "recommendation": "补齐状态空间方程和各矩阵定义，或删去未完成的“数学模型与条件边界”收束段，避免以未完成片段作为成文结尾。",
-      "requirement_id": "051-writing-style-recovery-final-candidate-text",
+      "recommendation": "Rewrite these passages as self-contained technical exposition. State the chosen notation and claims directly, without referring to an underlying source or rewriting process.",
+      "requirement_id": "051-writing-style-final-recovery-candidate-text",
       "severity": "blocking",
-      "summary": "最终读者文本在技术说明的关键处中断，造成明显不完整感和阅读负担。"
+      "summary": "The Bloom filter text contains obvious source-process leakage and is not fully self-contained reader-facing prose."
     }
   ],
-  "created_at": "2026-09-09T16:01:54Z",
+  "created_at": "2026-09-09T23:52:00Z",
   "encrypted_payload": {
     "path": "results/051_writing_style_rebuild/text_review/payload.age",
-    "sha256": "1d86b68d1ffbd09d164be851b9405627f2879f4918e411183665fdd62b232e76"
+    "sha256": "a3e078b4f809ed9932e3caa35a1c7f6d874a0c6cb0fcf0b69824abe8a212def0"
   },
-  "evidence_id": "text-review-051_writing_style_rebuild-e4ad9a5d1bf4",
+  "evidence_id": "text-review-051_writing_style_rebuild-a63b4bd7aadb",
   "input_manifest": {
     "identity_bindings": {
       "implementation_commit": "2690de2cbc3d4ffb0741ecb80297a569647051f2"
     },
-    "manifest_sha256": "e4ad9a5d1bf49a1936c6063967f2d222cdb45793c801228b88cac66b6c9b87b5",
+    "manifest_sha256": "a63b4bd7aadb948debc7d8fe225096282b38df4819205091222599b5a64842cc",
     "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
     "rubric": {
-      "instructions": "Read the complete recovery candidate-only packet. Return PASS only if the final reader-facing Chinese scientific/technical texts are natural, coherent, low-burden, free of obvious internal-process leakage, and acceptable for the frozen 051 writing-style objective. Return REVISE for substantive readability, coherence, artifact-quality, or internal-process leakage problems. Do not require raw source; source fidelity is covered by separate host/mechanical evidence."
+      "instructions": "Read the complete final recovery candidate-only packet. Return PASS only if the final reader-facing Chinese scientific/technical texts are natural, coherent, complete, low-burden, free of obvious internal-process leakage, and acceptable for the frozen 051 writing-style objective. Return REVISE for substantive readability, coherence, artifact-quality, incompleteness, or internal-process leakage problems. Do not require raw source; source fidelity is covered by separate host/mechanical evidence."
     },
     "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1"
   },
@@ -39,90 +39,100 @@
       "decision": "PASS",
       "item_id": "Gate 3 known regression A recovered candidate",
       "requirement_ids": [
-        "051-writing-style-recovery-final-candidate-text"
+        "051-writing-style-final-recovery-candidate-text"
       ],
-      "summary": "结构清楚，论证限定充分，技术表述自然，未见明显工作流泄漏。"
+      "summary": "Chinese technical prose is coherent, qualified appropriately, and readable."
     },
     {
       "decision": "PASS",
       "item_id": "Gate 3 known regression B recovered candidate",
       "requirement_ids": [
-        "051-writing-style-recovery-final-candidate-text"
+        "051-writing-style-final-recovery-candidate-text"
       ],
-      "summary": "方法比较和条件边界表达连贯，公式与叙述衔接自然。"
+      "summary": "Chinese technical prose is natural, structured, and self-contained within the candidate text."
     },
     {
       "decision": "PASS",
       "item_id": "Gate 3 known regression C accepted candidate",
       "requirement_ids": [
-        "051-writing-style-recovery-final-candidate-text"
+        "051-writing-style-final-recovery-candidate-text"
       ],
-      "summary": "实验设计、评价指标和启动条件组织清晰，面向读者的技术表达可接受。"
+      "summary": "The experimental-design discussion is coherent and readable, with clear conditions and definitions."
     },
     {
       "decision": "PASS",
       "item_id": "Gate 4 full report candidate",
       "requirement_ids": [
-        "051-writing-style-recovery-final-candidate-text"
+        "051-writing-style-final-recovery-candidate-text"
       ],
-      "summary": "长篇报告层级清晰、限定明确，整体可读且无明显内部过程泄漏。"
+      "summary": "The full report is generally natural, complete, and professionally structured for a technical audience."
     },
     {
       "decision": "REVISE",
-      "item_id": "Gate 5 new fresh holdout candidate",
+      "item_id": "Gate 5 final fresh holdout candidate",
       "requirement_ids": [
-        "051-writing-style-recovery-final-candidate-text"
+        "051-writing-style-final-recovery-candidate-text"
       ],
-      "summary": "末段含恢复过程说明，并在数学模型的关键内容前中断，不能作为完成的读者文本。"
+      "summary": "Readable overall, but repeated references to “原文” and source-specific notation reconciliation expose the rewriting/source process."
     }
   ],
   "model": "gpt-5.6-terra",
-  "non_blocking_notes": [],
+  "non_blocking_notes": [
+    "Gate 5 contains some overly broad phrasing, such as “空间效率和查询时间效率都远超一般算法”; a more conditional comparison would reduce technical overstatement."
+  ],
   "overall_decision": "REVISE",
   "paid_review": {
     "accounting_status": "ACCOUNTING_VERIFIED",
-    "actual_model_cost_usd": "0.064988",
+    "actual_model_cost_usd": "0.067236",
     "actual_response_usage": {
       "cache_write_tokens": 0,
       "cached_input_tokens": 0,
-      "input_tokens": 28258,
-      "output_tokens": 706,
-      "reasoning_tokens": 92,
-      "regular_input_tokens": 28258,
-      "response_id": "resp_06eaa3fff0a01f6f016aa182e14f5487d2b79b017d8743caa0",
+      "input_tokens": 27744,
+      "output_tokens": 979,
+      "reasoning_tokens": 454,
+      "regular_input_tokens": 27744,
+      "response_id": "resp_05fa39ccd7fb7cf7016aa1f113ce0087d18077b3481f776522",
       "response_model": "gpt-5.6-terra",
       "response_service_tier": "default"
     },
-    "call_number": 2,
+    "aggregate_parent_reserved_worst_case_cost_usd": "0.236004",
+    "aggregate_reserved_worst_case_cost_usd": "0.354516",
+    "authorization_receipt": "AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_RECOVERY",
+    "call_number": 1,
     "call_reservation": {
       "accounting_status": "ACCOUNTING_VERIFIED",
       "actual_cost_status": "ACCOUNTING_VERIFIED",
-      "actual_model_cost_usd": "0.064988",
+      "actual_model_cost_usd": "0.067236",
       "actual_response_usage": {
         "cache_write_tokens": 0,
         "cached_input_tokens": 0,
-        "input_tokens": 28258,
-        "output_tokens": 706,
-        "reasoning_tokens": 92,
-        "regular_input_tokens": 28258,
-        "response_id": "resp_06eaa3fff0a01f6f016aa182e14f5487d2b79b017d8743caa0",
+        "input_tokens": 27744,
+        "output_tokens": 979,
+        "reasoning_tokens": 454,
+        "regular_input_tokens": 27744,
+        "response_id": "resp_05fa39ccd7fb7cf7016aa1f113ce0087d18077b3481f776522",
         "response_model": "gpt-5.6-terra",
         "response_service_tier": "default"
       },
+      "aggregate_parent_reserved_worst_case_cost_usd": "0.236004",
+      "aggregate_reserved_worst_case_cost_usd": "0.354516",
+      "authorization_receipt": "AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_RECOVERY",
       "automatic_paid_retries": 0,
-      "call_number": 2,
-      "cumulative_reserved_cost_usd": "0.236004",
-      "cumulative_reserved_worst_case_cost_usd": "0.236004",
+      "call_number": 1,
+      "cumulative_reserved_cost_usd": "0.118512",
+      "cumulative_reserved_worst_case_cost_usd": "0.118512",
+      "extension_campaign_identity": "051_writing_style_rebuild__authorized_extension_1",
       "input_token_preflight": {
         "endpoint": "/v1/responses/input_tokens",
-        "input_tokens": 28258,
+        "input_tokens": 27744,
         "raw_response": {
-          "input_tokens": 28258,
+          "input_tokens": 27744,
           "object": "response.input_tokens"
         }
       },
       "max_output_tokens": 4096,
       "model": "gpt-5.6-terra",
+      "parent_campaign_identity": "051_writing_style_rebuild",
       "pricing": {
         "cache_write_input_usd_per_1m_tokens": "2.500000",
         "cache_write_usd_per_1m": "2.500000",
@@ -139,46 +149,51 @@
         "worst_case_input_usd_per_1m_tokens": "2.500000",
         "worst_case_standard_input_usd_per_1m": "2.500000"
       },
-      "request_sha256": "f38c9857e0a67a6856646dd2d02502732c62dfc49f3a59fd31e759003939ad2f",
-      "reservation_id": "051_writing_style_rebuild-2-f38c9857e0a6",
-      "reserved_at": "2026-09-09T16:01:35Z",
-      "response_id": "resp_06eaa3fff0a01f6f016aa182e14f5487d2b79b017d8743caa0",
+      "request_sha256": "531f6933134a2cca3714090a5f3724e296d5c6c01f90ae92f7198d85ac8f7961",
+      "reservation_id": "051_writing_style_rebuild__authorized_extension_1-1-531f6933134a",
+      "reserved_at": "2026-09-09T23:51:46Z",
+      "response_id": "resp_05fa39ccd7fb7cf7016aa1f113ce0087d18077b3481f776522",
       "response_model": "gpt-5.6-terra",
       "response_service_tier": "default",
       "review_type": "text_review",
       "service_tier": "default",
-      "worst_case_reserved_cost_usd": "0.119797"
+      "worst_case_reserved_cost_usd": "0.118512"
     },
     "call_reservations": [
       {
         "accounting_status": "ACCOUNTING_VERIFIED",
         "actual_cost_status": "ACCOUNTING_VERIFIED",
-        "actual_model_cost_usd": "0.066460",
+        "actual_model_cost_usd": "0.067236",
         "actual_response_usage": {
           "cache_write_tokens": 0,
           "cached_input_tokens": 0,
-          "input_tokens": 26822,
-          "output_tokens": 1068,
-          "reasoning_tokens": 288,
-          "regular_input_tokens": 26822,
-          "response_id": "resp_092a9996b6040632016aa1664bf31087d1ad922c2c73403666",
+          "input_tokens": 27744,
+          "output_tokens": 979,
+          "reasoning_tokens": 454,
+          "regular_input_tokens": 27744,
+          "response_id": "resp_05fa39ccd7fb7cf7016aa1f113ce0087d18077b3481f776522",
           "response_model": "gpt-5.6-terra",
           "response_service_tier": "default"
         },
+        "aggregate_parent_reserved_worst_case_cost_usd": "0.236004",
+        "aggregate_reserved_worst_case_cost_usd": "0.354516",
+        "authorization_receipt": "AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_RECOVERY",
         "automatic_paid_retries": 0,
         "call_number": 1,
-        "cumulative_reserved_cost_usd": "0.116207",
-        "cumulative_reserved_worst_case_cost_usd": "0.116207",
+        "cumulative_reserved_cost_usd": "0.118512",
+        "cumulative_reserved_worst_case_cost_usd": "0.118512",
+        "extension_campaign_identity": "051_writing_style_rebuild__authorized_extension_1",
         "input_token_preflight": {
           "endpoint": "/v1/responses/input_tokens",
-          "input_tokens": 26822,
+          "input_tokens": 27744,
           "raw_response": {
-            "input_tokens": 26822,
+            "input_tokens": 27744,
             "object": "response.input_tokens"
           }
         },
         "max_output_tokens": 4096,
         "model": "gpt-5.6-terra",
+        "parent_campaign_identity": "051_writing_style_rebuild",
         "pricing": {
           "cache_write_input_usd_per_1m_tokens": "2.500000",
           "cache_write_usd_per_1m": "2.500000",
@@ -195,78 +210,27 @@
           "worst_case_input_usd_per_1m_tokens": "2.500000",
           "worst_case_standard_input_usd_per_1m": "2.500000"
         },
-        "request_sha256": "d3cae60cc2d86582c82fad6faf434965505ecc3c6218a675c6a4c075bc014344",
-        "reservation_id": "051_writing_style_rebuild-1-d3cae60cc2d8",
-        "reserved_at": "2026-09-09T13:59:38Z",
-        "response_id": "resp_092a9996b6040632016aa1664bf31087d1ad922c2c73403666",
+        "request_sha256": "531f6933134a2cca3714090a5f3724e296d5c6c01f90ae92f7198d85ac8f7961",
+        "reservation_id": "051_writing_style_rebuild__authorized_extension_1-1-531f6933134a",
+        "reserved_at": "2026-09-09T23:51:46Z",
+        "response_id": "resp_05fa39ccd7fb7cf7016aa1f113ce0087d18077b3481f776522",
         "response_model": "gpt-5.6-terra",
         "response_service_tier": "default",
         "review_type": "text_review",
         "service_tier": "default",
-        "worst_case_reserved_cost_usd": "0.116207"
-      },
-      {
-        "accounting_status": "ACCOUNTING_VERIFIED",
-        "actual_cost_status": "ACCOUNTING_VERIFIED",
-        "actual_model_cost_usd": "0.064988",
-        "actual_response_usage": {
-          "cache_write_tokens": 0,
-          "cached_input_tokens": 0,
-          "input_tokens": 28258,
-          "output_tokens": 706,
-          "reasoning_tokens": 92,
-          "regular_input_tokens": 28258,
-          "response_id": "resp_06eaa3fff0a01f6f016aa182e14f5487d2b79b017d8743caa0",
-          "response_model": "gpt-5.6-terra",
-          "response_service_tier": "default"
-        },
-        "automatic_paid_retries": 0,
-        "call_number": 2,
-        "cumulative_reserved_cost_usd": "0.236004",
-        "cumulative_reserved_worst_case_cost_usd": "0.236004",
-        "input_token_preflight": {
-          "endpoint": "/v1/responses/input_tokens",
-          "input_tokens": 28258,
-          "raw_response": {
-            "input_tokens": 28258,
-            "object": "response.input_tokens"
-          }
-        },
-        "max_output_tokens": 4096,
-        "model": "gpt-5.6-terra",
-        "pricing": {
-          "cache_write_input_usd_per_1m_tokens": "2.500000",
-          "cache_write_usd_per_1m": "2.500000",
-          "cached_input_usd_per_1m": "0.200000",
-          "cached_input_usd_per_1m_tokens": "0.200000",
-          "input_usd_per_1m_tokens": "2.000000",
-          "long_context_threshold": 272000,
-          "model": "gpt-5.6-terra",
-          "normal_input_usd_per_1m": "2.000000",
-          "output_usd_per_1m": "12.000000",
-          "output_usd_per_1m_tokens": "12.000000",
-          "reviewed_on": "2026-09-03",
-          "runtime_uses_worst_case_input_price": true,
-          "worst_case_input_usd_per_1m_tokens": "2.500000",
-          "worst_case_standard_input_usd_per_1m": "2.500000"
-        },
-        "request_sha256": "f38c9857e0a67a6856646dd2d02502732c62dfc49f3a59fd31e759003939ad2f",
-        "reservation_id": "051_writing_style_rebuild-2-f38c9857e0a6",
-        "reserved_at": "2026-09-09T16:01:35Z",
-        "response_id": "resp_06eaa3fff0a01f6f016aa182e14f5487d2b79b017d8743caa0",
-        "response_model": "gpt-5.6-terra",
-        "response_service_tier": "default",
-        "review_type": "text_review",
-        "service_tier": "default",
-        "worst_case_reserved_cost_usd": "0.119797"
+        "worst_case_reserved_cost_usd": "0.118512"
       }
     ],
-    "campaign_identity": "051_writing_style_rebuild",
+    "campaign_identity": "051_writing_style_rebuild__authorized_extension_1",
     "contract": {
+      "aggregate_reserved_cost_hard_ceiling_usd": "0.500000",
+      "authorization_receipt": "AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_RECOVERY",
       "automatic_paid_retries": 0,
-      "campaign_reserved_cost_hard_ceiling_usd": "0.500000",
-      "max_paid_calls": 2,
+      "campaign_reserved_cost_hard_ceiling_usd": "0.250000",
+      "campaign_type": "AUTHORIZED_ONE_CALL_EXTENSION",
+      "max_paid_calls": 1,
       "model": "gpt-5.6-terra",
+      "parent_campaign_id": "051_writing_style_rebuild",
       "per_call_worst_case_ceiling_usd": "0.250000",
       "pricing": {
         "cache_write_input_usd_per_1m_tokens": "2.500000",
@@ -285,28 +249,30 @@
         "worst_case_standard_input_usd_per_1m": "2.500000"
       }
     },
-    "cumulative_actual_model_cost_usd": "0.131448",
-    "cumulative_reserved_cost_usd": "0.236004",
-    "cumulative_reserved_worst_case_cost_usd": "0.236004",
+    "cumulative_actual_model_cost_usd": "0.067236",
+    "cumulative_reserved_cost_usd": "0.118512",
+    "cumulative_reserved_worst_case_cost_usd": "0.118512",
     "exact_input_token_preflight": {
       "endpoint": "/v1/responses/input_tokens",
-      "input_tokens": 28258,
+      "input_tokens": 27744,
       "raw_response": {
-        "input_tokens": 28258,
+        "input_tokens": 27744,
         "object": "response.input_tokens"
       }
     },
+    "extension_campaign_identity": "051_writing_style_rebuild__authorized_extension_1",
     "input_token_preflight": {
       "endpoint": "/v1/responses/input_tokens",
-      "input_tokens": 28258,
+      "input_tokens": 27744,
       "raw_response": {
-        "input_tokens": 28258,
+        "input_tokens": 27744,
         "object": "response.input_tokens"
       }
     },
     "max_output_tokens": 4096,
     "model": "gpt-5.6-terra",
     "model_identity": "gpt-5.6-terra",
+    "parent_campaign_identity": "051_writing_style_rebuild",
     "pricing_identity": {
       "cache_write_usd_per_1m": "2.500000",
       "cached_input_usd_per_1m": "0.200000",
@@ -316,19 +282,19 @@
       "output_usd_per_1m": "12.000000",
       "reviewed_on": "2026-09-03"
     },
-    "reservation_id": "051_writing_style_rebuild-2-f38c9857e0a6",
-    "response_id": "resp_06eaa3fff0a01f6f016aa182e14f5487d2b79b017d8743caa0",
+    "reservation_id": "051_writing_style_rebuild__authorized_extension_1-1-531f6933134a",
+    "response_id": "resp_05fa39ccd7fb7cf7016aa1f113ce0087d18077b3481f776522",
     "review_type": "text_review",
     "schema": "AI_BRIDGE_PAID_REVIEW_RECEIPT_V1",
     "service_tier": "default",
-    "worst_case_reserved_cost_usd": "0.119797"
+    "worst_case_reserved_cost_usd": "0.118512"
   },
-  "plaintext_artifact_sha256": "caf3d1fe2ea130f55b77225e8611e9b9a4e5c09f1858837e300337d1aa4d3e87",
+  "plaintext_artifact_sha256": "07b985887d6e35c24835fe156b631469498ee34cee84f8b13f2b6cf6b91e9dc1",
   "prompt_version": "ai-bridge.text-review.v1",
-  "review_identity": "e4ad9a5d1bf49a1936c6063967f2d222cdb45793c801228b88cac66b6c9b87b5",
-  "review_kind": "051-writing-style-recovery-final-candidate-text",
+  "review_identity": "a63b4bd7aadb948debc7d8fe225096282b38df4819205091222599b5a64842cc",
+  "review_kind": "051-writing-style-final-recovery-candidate-text",
   "review_model": "gpt-5.6-terra",
-  "reviewed_input_identity": "e4ad9a5d1bf49a1936c6063967f2d222cdb45793c801228b88cac66b6c9b87b5",
+  "reviewed_input_identity": "a63b4bd7aadb948debc7d8fe225096282b38df4819205091222599b5a64842cc",
   "schema": "AI_BRIDGE_TEXT_REVIEW_V1",
   "status": "REVISE",
   "task_key": "051_writing_style_rebuild",
