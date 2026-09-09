@@ -297,7 +297,7 @@ reviewed/045_presentations_real_use_regression_hardening
 - 修改 live global plugin installation/cache、真实账户状态或其他 session 正在使用的共享外部状态；
 - destructive Git/远端删除、不可逆外部写入，或显著扩大原批准的数据范围/用途。
 
-**同一授权不得重复询问。** 用户一旦明确批准了“具体 artifact / 数据类别 + 具体 provider/endpoint + 具体 purpose + credential 使用方式”，Executor 必须在 task-local non-secret evidence 中记录一个简短 authorization receipt，并在同一 task、同一范围内直接继续；不得在每次 replay、retry、Text Review 或 fresh session 时重新问。只有 artifact/data scope、provider/endpoint、purpose、credential scope 或 live-global mutation 边界发生实质变化时，才允许再次请求授权。
+**同一授权不得重复询问。** 用户一旦明确批准了“具体 artifact / 数据类别 + 具体 provider/endpoint + 具体 purpose + credential 使用方式”，Executor 必须在 task-local non-secret evidence 中记录一个简短 authorization receipt，并在同一 task、同一范围内直接继续；不得在每次 replay、retry、Text Review 或 fresh session 时重新问。判断授权 identity 时必须至少比较 artifact/data scope、provider/endpoint、purpose、credential scope，以及涉及付费动作时的 paid-cost ceiling；这些没有实质变化时，不得重新询问。只有 artifact/data scope、provider/endpoint、purpose、credential scope、paid-call count/cost ceiling 或 live-global mutation 边界发生实质变化时，才允许再次请求授权。
 
 不同传输路径不是自动等价授权。例如，用户批准 `age -> GitHub Actions -> OpenAI Text Review`，并不自动等于批准“复制本地 Codex `auth.json` 到 isolated home 并通过 Codex session 发送同一 private artifact”。后者第一次仍需单独授权；一旦用户为该 bounded task 授权，就应记录并在该 task 内复用，不再重复询问。
 
@@ -305,24 +305,54 @@ reviewed/045_presentations_real_use_regression_hardening
 
 #### Central-plugin replay / evaluation interaction policy
 
-1. **Candidate replay.** Central-plugin refinement 必须优先遵守
+1. **Resume / state refresh.** 任何 wait/resume、Scheduled GPT transition、
+   human decision、CI/review 完成后，在启动新的 candidate replay、
+   production replay、paid review、install smoke 或 implementation-choice
+   prompt 之前，Executor 必须先 `git fetch origin` 并重新读取当前 task
+   branch 的 `CURRENT.json`。如果 `CURRENT` 已经不是 Executor-owned 状态，
+   不得启动 stale operation，也不得拿旧问题询问用户。
+2. **Candidate replay.** Central-plugin refinement 必须优先遵守
    `docs/workflows/CANDIDATE_PLUGIN_REPLAY.md`。当 canonical existing-account
    replay path 可用时，不得默认发明 isolated `CODEX_HOME`、复制 credential
-   或第三套 runtime/credential path。
-2. **Repeated authorization.** bounded task 一旦记录了具体
-   artifact/data scope、provider、purpose 和 credential scope 的授权，同一
-   scope 内的 ordinary replay/runtime/cache/temp/cleanup 动作不得再次触发用户
-   选择题。
-3. **State refresh before prompting.** 任何 external/costly replay 前，以及
-   每次 wait/resume 后，必须先 fetch task branch 并重新读取 `CURRENT.json`。
-   如果 `CURRENT` 不是 Executor-owned 状态，不得启动 stale replay，也不得向
-   用户提出 implementation-choice 问题。
-4. **Holdout preflight.** 冻结 fresh holdout 前，必须独立于 model output
+   或第二套 runtime/credential path。bounded task 已授权 canonical replay 后，
+   repo-local pinned runtime、reserved temporary candidate identity/cache、
+   process-local install/remove 和 finally cleanup 都是普通 replay mechanics，
+   不得反复触发用户选择题。
+3. **Repeated authorization.** bounded task 一旦记录了同一
+   artifact/data scope、provider/endpoint、purpose、credential scope，以及
+   涉及付费时相同 paid-cost ceiling 的授权，同一 scope 内的 ordinary
+   replay/runtime/cache/temp/cleanup、deterministic manifest/accounting preflight
+   和同一未消费外部调用恢复不得再次触发用户选择题。
+4. **Pre-request failure semantics.** External model workflow 必须明确区分
+   `PRE_REQUEST_FAILURE` 和 `MODEL_REQUEST_SENT`。如果可靠 evidence 证明
+   `/v1/responses` 尚未发送、没有产生新的 model response、没有消费该次已授权
+   paid call，并且恢复只涉及 local deterministic bug、manifest/accounting
+   reconciliation、workflow plumbing 或等价 preflight infrastructure，且
+   provider、artifact、purpose、credential scope 和 cost ceiling 全部不变，
+   则这是 `UNCONSUMED_AUTHORIZED_CALL_RECOVERY`。Executor 应自行做 bounded
+   infrastructure repair 后继续原来尚未消费的调用；不得把它当成新的 paid
+   retry、新的 model-call authorization 或新的 product decision。只有恢复会扩大
+   provider、data scope、credential、paid-call count 或 cost ceiling 时才再次询问用户。
+5. **Paid campaign contract freeze.** 任何 paid-review campaign 必须在第一
+   次 paid request 前冻结完整 contract。已有 reservation 后，不得为了增加
+   call count、campaign ceiling 或 per-call ceiling 原地修改旧 campaign
+   ledger/contract，例如把既有 `2 calls / USD 0.50` campaign 改成
+   `3 calls / USD 0.75`。若 frozen budget 已耗尽而确实需要额外 model call，
+   必须先有 explicit human authorization，再使用仓库明确支持的 authorized
+   recovery accounting path；不得手改历史 ledger 或伪造 reservation。
+6. **Long-running Goal budget planning.** 对用户明确要求“尽量一次 Goal 跑完”
+   的 long-running plugin refinement，Planner 在第一次 paid review 前必须预计
+   最大 independent-review calls。默认仍遵守 repository paid-review policy；若任务
+   设计明显可能需要第 3 次 call，必须在第一次 call 前一次性向用户申请完整预算，
+   或重新设计为最多 2 次 independent paid review。不得先按 2 次开跑、耗尽后再通过
+   mid-campaign contract mutation 制造新的 human gate。
+7. **Holdout preflight.** 冻结 fresh holdout 前，必须独立于 model output
    验证：source 是 reader-facing scientific/technical material；selected
-   range 语义完整；不会停在半句、半个列表、被引用但尚未出现的公式之前，
-   或截断的小节内部；除非目标文档类型明确如此，source 不能是
-   CI/`FINAL_REPORT`/workflow metadata。必须先冻结 complete batch，再进入
-   evaluation。真实失败的 holdout 不得被静默替换。
+   range 语义完整；不会停在半句、半个列表、“如下式/如下图/如下定义”后缺正文、
+   被引用但尚未出现的公式之前、equation 前，或截断的小节内部；除非目标文档类型
+   明确如此，source 不能是 CI/`FINAL_REPORT`/workflow metadata、task result 或
+   plugin source。必须先冻结 complete batch，再进入 evaluation。真实失败的 holdout
+   不得被静默替换或 adaptive chasing。
 
 ### 8.2.2 已停止 task 的 artifact 只能作为显式冻结的只读回归输入
 
