@@ -1,0 +1,82 @@
+{
+  "aggregate_parent_reserved_worst_case_cost_usd": "0.236004",
+  "aggregate_reserved_worst_case_cost_usd": "0.354516",
+  "authorization_receipt": "AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_RECOVERY",
+  "campaign_identity": "051_writing_style_rebuild__authorized_extension_1",
+  "contract": {
+    "aggregate_reserved_cost_hard_ceiling_usd": "0.500000",
+    "authorization_receipt": "AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_RECOVERY",
+    "automatic_paid_retries": 0,
+    "campaign_reserved_cost_hard_ceiling_usd": "0.250000",
+    "campaign_type": "AUTHORIZED_ONE_CALL_EXTENSION",
+    "max_paid_calls": 1,
+    "model": "gpt-5.6-terra",
+    "parent_campaign_id": "051_writing_style_rebuild",
+    "per_call_worst_case_ceiling_usd": "0.250000",
+    "pricing": {
+      "cache_write_input_usd_per_1m_tokens": "2.500000",
+      "cache_write_usd_per_1m": "2.500000",
+      "cached_input_usd_per_1m": "0.200000",
+      "cached_input_usd_per_1m_tokens": "0.200000",
+      "input_usd_per_1m_tokens": "2.000000",
+      "long_context_threshold": 272000,
+      "model": "gpt-5.6-terra",
+      "normal_input_usd_per_1m": "2.000000",
+      "output_usd_per_1m": "12.000000",
+      "output_usd_per_1m_tokens": "12.000000",
+      "reviewed_on": "2026-09-03",
+      "runtime_uses_worst_case_input_price": true,
+      "worst_case_input_usd_per_1m_tokens": "2.500000",
+      "worst_case_standard_input_usd_per_1m": "2.500000"
+    }
+  },
+  "cumulative_actual_model_cost_usd": "0.000000",
+  "cumulative_reserved_worst_case_cost_usd": "0.118512",
+  "parent_campaign_identity": "051_writing_style_rebuild",
+  "reservations": [
+    {
+      "aggregate_parent_reserved_worst_case_cost_usd": "0.236004",
+      "aggregate_reserved_worst_case_cost_usd": "0.354516",
+      "authorization_receipt": "AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_RECOVERY",
+      "automatic_paid_retries": 0,
+      "call_number": 1,
+      "cumulative_reserved_cost_usd": "0.118512",
+      "cumulative_reserved_worst_case_cost_usd": "0.118512",
+      "extension_campaign_identity": "051_writing_style_rebuild__authorized_extension_1",
+      "input_token_preflight": {
+        "endpoint": "/v1/responses/input_tokens",
+        "input_tokens": 27744,
+        "raw_response": {
+          "input_tokens": 27744,
+          "object": "response.input_tokens"
+        }
+      },
+      "max_output_tokens": 4096,
+      "model": "gpt-5.6-terra",
+      "parent_campaign_identity": "051_writing_style_rebuild",
+      "pricing": {
+        "cache_write_input_usd_per_1m_tokens": "2.500000",
+        "cache_write_usd_per_1m": "2.500000",
+        "cached_input_usd_per_1m": "0.200000",
+        "cached_input_usd_per_1m_tokens": "0.200000",
+        "input_usd_per_1m_tokens": "2.000000",
+        "long_context_threshold": 272000,
+        "model": "gpt-5.6-terra",
+        "normal_input_usd_per_1m": "2.000000",
+        "output_usd_per_1m": "12.000000",
+        "output_usd_per_1m_tokens": "12.000000",
+        "reviewed_on": "2026-09-03",
+        "runtime_uses_worst_case_input_price": true,
+        "worst_case_input_usd_per_1m_tokens": "2.500000",
+        "worst_case_standard_input_usd_per_1m": "2.500000"
+      },
+      "request_sha256": "531f6933134a2cca3714090a5f3724e296d5c6c01f90ae92f7198d85ac8f7961",
+      "reservation_id": "051_writing_style_rebuild__authorized_extension_1-1-531f6933134a",
+      "reserved_at": "2026-09-09T23:51:46Z",
+      "review_type": "text_review",
+      "service_tier": "default",
+      "worst_case_reserved_cost_usd": "0.118512"
+    }
+  ],
+  "schema": "AI_BRIDGE_PAID_REVIEW_BUDGET_V1"
+}
