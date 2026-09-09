@@ -303,13 +303,26 @@ reviewed/045_presentations_real_use_regression_hardening
 
 任何情况下都不得打印、commit、push、回显或要求用户粘贴 secret value。若正式路径使用 GitHub repository secrets，本地 shell 中对应环境变量 `unset` 不是 blocker。task 完成后应删除 task-local credential 副本和不再需要的 private plaintext 临时副本，但保留不含秘密的授权范围、artifact hash、provider/purpose 和删除结果作为 evidence。
 
-AI_Skills central-plugin candidate replay 必须先遵守
-`docs/workflows/CANDIDATE_PLUGIN_REPLAY.md`。canonical path 复用现有
-Codex account identity；不要默认发明一个需要复制 credential 的 isolated
-`CODEX_HOME` 作为 workaround。只要 bounded task 已授权 candidate replay，
-其 reserved temporary candidate-cache mutation 和 finally cleanup 就是普通
-replay 机制，不应反复触发用户选择题。如果 `CURRENT` 已不再是
-Executor-owned 状态，必须先同步 task state，再启动任何 replay。
+#### Central-plugin replay / evaluation interaction policy
+
+1. **Candidate replay.** Central-plugin refinement 必须优先遵守
+   `docs/workflows/CANDIDATE_PLUGIN_REPLAY.md`。当 canonical existing-account
+   replay path 可用时，不得默认发明 isolated `CODEX_HOME`、复制 credential
+   或第三套 runtime/credential path。
+2. **Repeated authorization.** bounded task 一旦记录了具体
+   artifact/data scope、provider、purpose 和 credential scope 的授权，同一
+   scope 内的 ordinary replay/runtime/cache/temp/cleanup 动作不得再次触发用户
+   选择题。
+3. **State refresh before prompting.** 任何 external/costly replay 前，以及
+   每次 wait/resume 后，必须先 fetch task branch 并重新读取 `CURRENT.json`。
+   如果 `CURRENT` 不是 Executor-owned 状态，不得启动 stale replay，也不得向
+   用户提出 implementation-choice 问题。
+4. **Holdout preflight.** 冻结 fresh holdout 前，必须独立于 model output
+   验证：source 是 reader-facing scientific/technical material；selected
+   range 语义完整；不会停在半句、半个列表、被引用但尚未出现的公式之前，
+   或截断的小节内部；除非目标文档类型明确如此，source 不能是
+   CI/`FINAL_REPORT`/workflow metadata。必须先冻结 complete batch，再进入
+   evaluation。真实失败的 holdout 不得被静默替换。
 
 ### 8.2.2 已停止 task 的 artifact 只能作为显式冻结的只读回归输入
 

@@ -824,3 +824,30 @@ decision on how to treat the failed recovery holdout. This is not a Gate 2
 routing failure: the recovery candidate still proves `scientific-rewrite`
 routing and heavy-route execution. It is also not a missing Text Review case:
 the additional Text Review evidence is present, valid, and `REVISE`.
+
+## Final Bounded Recovery Authorization
+
+After the Planner returned 051 to `AWAIT_HUMAN_DECISION`, the user authorized
+exactly one final bounded recovery:
+
+- the current failed Kalman holdout is treated as invalid/incomplete because
+  the frozen source itself ends before the promised equation;
+- freeze exactly one new semantically complete fresh holdout before generation;
+- do not tune production from the failed holdout;
+- run exactly one additional candidate-only Text Review, with max worst-case
+  reservation `USD 0.25` and no retry;
+- if that holdout or review fails, stop 051 with no further holdout replacement
+  or paid review;
+- complete AGENTS/workflow hardening before 051 integration.
+
+AGENTS hardening now records central-plugin replay/evaluation interaction
+policy for 052/053 reuse:
+
+- central-plugin candidate replay must use
+  `docs/workflows/CANDIDATE_PLUGIN_REPLAY.md` first;
+- repeated prompts are forbidden after a bounded task records the same
+  artifact/data scope, provider, purpose and credential scope authorization;
+- task branch and `CURRENT.json` must be refreshed before external/costly replay
+  or any implementation-choice prompt after wait/resume;
+- fresh holdout preflight must independently verify reader-facing technical
+  identity and semantic completeness before freezing.
