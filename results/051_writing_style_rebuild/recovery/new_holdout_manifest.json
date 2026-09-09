@@ -1,0 +1,69 @@
+{
+  "schema": "AI_SKILLS_051_NEW_HOLDOUT_FREEZE_V1",
+  "task": "051_writing_style_rebuild",
+  "status": "REPLAY_PASS_MECHANICAL_PENDING_TEXT_REVIEW",
+  "failed_prior_holdout_batch": {
+    "manifest": "results/051_writing_style_rebuild/gate5_holdout_manifest.json",
+    "status": "FAILED_PERMANENT_DO_NOT_REPAIR_REUSE_OR_RERUN"
+  },
+  "implementation_commit": "2690de2cbc3d4ffb0741ecb80297a569647051f2",
+  "source": {
+    "locator": "exports/private/051_writing_style_rebuild/gate5-new-holdout/source/kalman_filter_wikipedia_excerpt.md",
+    "plaintext_committed": false,
+    "sha256": "f5de0202aa1e6cd3d8bcc9068fb6e5b1129383030ad066da3c57aa6a52fe1733",
+    "bytes": 7809,
+    "chars": 3054,
+    "lines": 42,
+    "selection": "whole local excerpt artifact",
+    "exact_range": "whole artifact",
+    "public_source_title": "卡尔曼滤波 - 维基百科，自由的百科全书",
+    "public_source_url": "https://zh.wikipedia.org/wiki/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2",
+    "license_note": "Wikipedia text is available under CC BY-SA; local plaintext remains in ignored repo-private artifact storage.",
+    "document_family": "public technical encyclopedia article about Kalman filtering",
+    "reader_facing_source": true,
+    "different_from_care_051_family": true,
+    "not_workflow_or_task_artifact": true,
+    "not_synthetic_fixture": true
+  },
+  "replay_contract": {
+    "prompt": "ordinary Chinese technical rewrite request; no plugin/router/internal gate terms",
+    "candidate_replay_contract": "docs/workflows/CANDIDATE_PLUGIN_REPLAY.md",
+    "no_production_implementation_changes_after_freeze": true,
+    "no_gate2_reopen": true,
+    "no_gate4_rerun": true
+  },
+  "acceptance_questions": [
+    "Does the candidate read as a coherent Chinese technical explanation for a normal reader rather than as workflow or audit prose?",
+    "Does it preserve the Kalman filter concept, recursive two-step algorithm, uncertainty/covariance framing, applications, limitations, and model assumptions without adding unsupported facts?",
+    "Does it avoid CI, branch, commit, Gate, Planner, Reviewer, Text Review, task-result, path, or harness metadata in reader-facing prose?",
+    "Does it preserve named technical entities and symbols present in the source where they matter, including Kalman filter, Rudolph Kalman, F, H, Q, R, x_k, z_k, w_k, and v_k if present?"
+  ],
+  "replay": {
+    "run_dir": ".local-runtime/candidate-plugin-replay/runs/20260909T155032Z-3745228",
+    "runtime_version": "codex-cli 0.153.4",
+    "candidate_commit": "2690de2cbc3d4ffb0741ecb80297a569647051f2",
+    "actual_consumption_proven": true,
+    "selected_route": "scientific-rewrite",
+    "forced_route": false,
+    "ordinary_user_prompt": true,
+    "receipt_schema": "SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2",
+    "receipt_sha256": "93859be7ad83696843e34a795f77251981b4ad535466d92b0ae3c10f2b74d5e0",
+    "route_sha256": "4b5423ca053f378ada6e2b319469a044f928fb258d75356d71a22ea46d2f4b97",
+    "semantic_audit_sha256": "d5fa9a8c561eb392b79a30e8a000cc3e3f309abfc421baf56f6eeb25720dd3d9",
+    "candidate_locator": "exports/private/051_writing_style_rebuild/gate5-new-holdout/candidates/kalman_filter_candidate.md",
+    "candidate_sha256": "0b98032e6f22d73b8c2a83c3c52ee14c27e22d9ed7f186ca70780dd6e92e6f63",
+    "candidate_bytes": 7128,
+    "reader_facing_internal_frame": {
+      "internal_workflow_leak_count": 0,
+      "ok": true
+    },
+    "semantic_audit": {
+      "finding_count": 0,
+      "ok": true
+    },
+    "exact_verification": {
+      "exact_item_count": 27,
+      "ok": true
+    }
+  }
+}

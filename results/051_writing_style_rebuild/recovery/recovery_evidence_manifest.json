@@ -1,0 +1,190 @@
+{
+  "candidate_commit": "2690de2cbc3d4ffb0741ecb80297a569647051f2",
+  "current_failed_gate5_batch": "results/051_writing_style_rebuild/gate5_holdout_manifest.json",
+  "current_gate5_batch_status": "FAILED_PERMANENT_DO_NOT_REPAIR_REUSE_OR_RERUN",
+  "gate3_recovery": {
+    "A": {
+      "candidate_path": "exports/private/051_writing_style_rebuild/gate3-recovery/candidates/SMOKE-A-candidate.md",
+      "candidate_sha256": "ec37107497e71edffbc620c481c24d93c52481a857ddf63f2c0c94ffe4189a0f",
+      "source_line_range": "1-145 from full private source",
+      "source_path": "exports/private/051_writing_style_rebuild/gate3-recovery/plaintext/SMOKE-A-full-context.md",
+      "source_sha256": "8ad7ad1b253abc74700ed7501195ca5f264865e5f7fa55b9954a719a666d7a5c"
+    },
+    "B": {
+      "candidate_path": "exports/private/051_writing_style_rebuild/gate3-recovery/candidates/SMOKE-B-candidate.md",
+      "candidate_sha256": "d2c4c6ba07b1cc1d9268c0023c91b0163eee4579b4eef2022b48ef8ca8145b14",
+      "source_line_range": "379-526 from full private source",
+      "source_path": "exports/private/051_writing_style_rebuild/gate3-recovery/plaintext/SMOKE-B-full-context.md",
+      "source_sha256": "aac92ce4b00fc412186ea2ba6964eb82a43a18df13a41ad8a9449165e8db7e80"
+    },
+    "prompt_path": "exports/private/051_writing_style_rebuild/gate3-recovery/replay-tasks/GATE3_AB_RECOVERY_REWRITE_TASK.md",
+    "prompt_sha256": "a0b009301df92d9db5fa0431df2cebf149b578ae3b3ef1b780b105510131ee72"
+  },
+  "generic_leakage_probe": {
+    "source": "results/051_writing_style_rebuild/recovery/generic_leakage_repair_source.md",
+    "source_sha256": "413bae477bf2388647a3c0378c45b605206b3f4b85d1b4c88920d3fa4695ca7f",
+    "task": "results/051_writing_style_rebuild/recovery/GENERIC_LEAKAGE_REPAIR_TASK.md"
+  },
+  "recovery_authorization": "USER_AUTHORIZED_BOUNDED_RECOVERY",
+  "runs": [
+    {
+      "actual_consumption_proven": true,
+      "candidate_sha256": "0296f98d9338a9eaf513049591bdd18774a552c239afae1293b1d7b37a177329",
+      "candidate_size_bytes": 844,
+      "exact_verification": {
+        "exact_item_count": 8,
+        "ok": true
+      },
+      "forced_route": false,
+      "id": "generic",
+      "ordinary_user_prompt": true,
+      "reader_facing_internal_frame": {
+        "internal_workflow_leak_count": 0,
+        "ok": true
+      },
+      "receipt_schema": "SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2",
+      "receipt_sha256": "58c6160587beb8e669bd49d59cae1ff9207b30cc06222a2b531246489d9eb9c7",
+      "receipt_size_bytes": 1364,
+      "run_dir": ".local-runtime/candidate-plugin-replay/runs/20260909T152847Z-3632674",
+      "selected_route": "scientific-rewrite",
+      "semantic_audit": {
+        "finding_count": 0,
+        "ok": true
+      }
+    },
+    {
+      "actual_consumption_proven": true,
+      "candidate_sha256": "ec37107497e71edffbc620c481c24d93c52481a857ddf63f2c0c94ffe4189a0f",
+      "candidate_size_bytes": 11687,
+      "exact_verification": {
+        "exact_item_count": 70,
+        "ok": true
+      },
+      "forced_route": false,
+      "id": "A",
+      "ordinary_user_prompt": true,
+      "reader_facing_internal_frame": {
+        "internal_workflow_leak_count": 0,
+        "ok": true
+      },
+      "receipt_schema": "SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2",
+      "receipt_sha256": "5c0cdb4a517a111f680b2b32884e46b9d6dee42d7f96bf68813c8cd744b39d2c",
+      "receipt_size_bytes": 1369,
+      "run_dir": ".local-runtime/candidate-plugin-replay/runs/20260909T153423Z-3646419",
+      "selected_route": "scientific-rewrite",
+      "semantic_audit": {
+        "finding_count": 0,
+        "ok": true
+      }
+    },
+    {
+      "actual_consumption_proven": true,
+      "candidate_sha256": "d2c4c6ba07b1cc1d9268c0023c91b0163eee4579b4eef2022b48ef8ca8145b14",
+      "candidate_size_bytes": 8697,
+      "exact_verification": {
+        "exact_item_count": 36,
+        "ok": true
+      },
+      "forced_route": false,
+      "id": "B",
+      "ordinary_user_prompt": true,
+      "reader_facing_internal_frame": {
+        "internal_workflow_leak_count": 0,
+        "ok": true
+      },
+      "receipt_schema": "SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2",
+      "receipt_sha256": "480f76fdd7fc9bf4f615bb549b50d3a7e745ac46552cc349f94bc044d94ac71a",
+      "receipt_size_bytes": 1369,
+      "run_dir": ".local-runtime/candidate-plugin-replay/runs/20260909T154039Z-3723774",
+      "selected_route": "scientific-rewrite",
+      "semantic_audit": {
+        "finding_count": 0,
+        "ok": true
+      }
+    }
+  ],
+  "schema": "AI_SKILLS_051_RECOVERY_EVIDENCE_V1",
+  "new_holdout": {
+    "schema": "AI_SKILLS_051_NEW_HOLDOUT_FREEZE_V1",
+    "task": "051_writing_style_rebuild",
+    "status": "REPLAY_PASS_MECHANICAL_PENDING_TEXT_REVIEW",
+    "failed_prior_holdout_batch": {
+      "manifest": "results/051_writing_style_rebuild/gate5_holdout_manifest.json",
+      "status": "FAILED_PERMANENT_DO_NOT_REPAIR_REUSE_OR_RERUN"
+    },
+    "implementation_commit": "2690de2cbc3d4ffb0741ecb80297a569647051f2",
+    "source": {
+      "locator": "exports/private/051_writing_style_rebuild/gate5-new-holdout/source/kalman_filter_wikipedia_excerpt.md",
+      "plaintext_committed": false,
+      "sha256": "f5de0202aa1e6cd3d8bcc9068fb6e5b1129383030ad066da3c57aa6a52fe1733",
+      "bytes": 7809,
+      "chars": 3054,
+      "lines": 42,
+      "selection": "whole local excerpt artifact",
+      "exact_range": "whole artifact",
+      "public_source_title": "卡尔曼滤波 - 维基百科，自由的百科全书",
+      "public_source_url": "https://zh.wikipedia.org/wiki/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2",
+      "license_note": "Wikipedia text is available under CC BY-SA; local plaintext remains in ignored repo-private artifact storage.",
+      "document_family": "public technical encyclopedia article about Kalman filtering",
+      "reader_facing_source": true,
+      "different_from_care_051_family": true,
+      "not_workflow_or_task_artifact": true,
+      "not_synthetic_fixture": true
+    },
+    "replay_contract": {
+      "prompt": "ordinary Chinese technical rewrite request; no plugin/router/internal gate terms",
+      "candidate_replay_contract": "docs/workflows/CANDIDATE_PLUGIN_REPLAY.md",
+      "no_production_implementation_changes_after_freeze": true,
+      "no_gate2_reopen": true,
+      "no_gate4_rerun": true
+    },
+    "acceptance_questions": [
+      "Does the candidate read as a coherent Chinese technical explanation for a normal reader rather than as workflow or audit prose?",
+      "Does it preserve the Kalman filter concept, recursive two-step algorithm, uncertainty/covariance framing, applications, limitations, and model assumptions without adding unsupported facts?",
+      "Does it avoid CI, branch, commit, Gate, Planner, Reviewer, Text Review, task-result, path, or harness metadata in reader-facing prose?",
+      "Does it preserve named technical entities and symbols present in the source where they matter, including Kalman filter, Rudolph Kalman, F, H, Q, R, x_k, z_k, w_k, and v_k if present?"
+    ],
+    "replay": {
+      "run_dir": ".local-runtime/candidate-plugin-replay/runs/20260909T155032Z-3745228",
+      "runtime_version": "codex-cli 0.153.4",
+      "candidate_commit": "2690de2cbc3d4ffb0741ecb80297a569647051f2",
+      "actual_consumption_proven": true,
+      "selected_route": "scientific-rewrite",
+      "forced_route": false,
+      "ordinary_user_prompt": true,
+      "receipt_schema": "SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2",
+      "receipt_sha256": "93859be7ad83696843e34a795f77251981b4ad535466d92b0ae3c10f2b74d5e0",
+      "route_sha256": "4b5423ca053f378ada6e2b319469a044f928fb258d75356d71a22ea46d2f4b97",
+      "semantic_audit_sha256": "d5fa9a8c561eb392b79a30e8a000cc3e3f309abfc421baf56f6eeb25720dd3d9",
+      "candidate_locator": "exports/private/051_writing_style_rebuild/gate5-new-holdout/candidates/kalman_filter_candidate.md",
+      "candidate_sha256": "0b98032e6f22d73b8c2a83c3c52ee14c27e22d9ed7f186ca70780dd6e92e6f63",
+      "candidate_bytes": 7128,
+      "reader_facing_internal_frame": {
+        "internal_workflow_leak_count": 0,
+        "ok": true
+      },
+      "semantic_audit": {
+        "finding_count": 0,
+        "ok": true
+      },
+      "exact_verification": {
+        "exact_item_count": 27,
+        "ok": true
+      }
+    }
+  },
+  "additional_text_review_input": {
+    "status": "ENCRYPTED_INPUT_PREPARED_PENDING_WORKFLOW_DISPATCH",
+    "plaintext_packet_locator": "exports/private/051_writing_style_rebuild/text-review/recovery_candidate_only_text_review_packet.md",
+    "plaintext_committed": false,
+    "plaintext_sha256": "caf3d1fe2ea130f55b77225e8611e9b9a4e5c09f1858837e300337d1aa4d3e87",
+    "plaintext_bytes": 100501,
+    "encrypted_payload_path": "results/051_writing_style_rebuild/text_review/payload.age",
+    "encrypted_payload_sha256": "1d86b68d1ffbd09d164be851b9405627f2879f4918e411183665fdd62b232e76",
+    "manifest_path": "results/051_writing_style_rebuild/text_review/text_inputs.json",
+    "manifest_sha256": "0af9eab06e2a25a0f7bfe3584a4443a45b42974d103795d414da77a34b091d7b",
+    "archived_initial_text_review_revise": "results/051_writing_style_rebuild/text_review/TEXT_REVIEW.initial_revise.json",
+    "archived_initial_text_review_revise_sha256": "dd5b6c7a737317d1bae05d45e7a4aba922f9d27b7d5b06cb074896c2d8e3f0a5",
+    "authorization": "exactly one additional candidate-only gpt-5.6-terra Text Review, additional worst-case ceiling USD 0.25, automatic_retry=0, same provider/privacy boundary as first Gate 6"
+  }
+}

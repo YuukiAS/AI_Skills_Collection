@@ -1,15 +1,22 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: 051_writing_style_rebuild
-implementation_commit: ee8dd6edda2a2e4dd8f3210504225a56432b11a0
+implementation_commit: 2690de2cbc3d4ffb0741ecb80297a569647051f2
 ---
 
 # Codex Result
 
 ## Status
 
-Production behavior candidate is frozen at
-`ee8dd6edda2a2e4dd8f3210504225a56432b11a0`.
+Current recovery candidate is frozen at
+`2690de2cbc3d4ffb0741ecb80297a569647051f2`.
+
+The earlier accepted production behavior candidate
+`ee8dd6edda2a2e4dd8f3210504225a56432b11a0` passed Gate 2, Gate 3 local
+acceptance, Gate 4 local acceptance, and the original Gate 5 mechanical gate,
+but Gate 6 Text Review returned `REVISE`. The current recovery candidate only
+addresses the resulting generic reader-facing workflow/CI/commit/path leakage
+guardrail; it does not reopen Gate 2 or redesign the heavy route.
 
 Gate 1 local implementation/mechanism PROCESS evidence is passing.
 
@@ -618,5 +625,150 @@ current runtime is `codex-cli 0.142.0`.
   user instruction.
 - Gate 6 Text Review is valid and returned `REVISE`; it is not converted into
   product PASS or a harness failure.
-- Final CI, version/changelog, production install smoke, Reviewer PASS, and
-  integration are not started. The current state is `NEEDS_GPT_PLANNER`.
+
+## Bounded Recovery Update
+
+User authorization on 2026-09-09 opened the single bounded recovery described
+in the post-Text-Review human decision:
+
+- Gate 3 A/B may be regenerated through normal production `writing-style`
+  replay from complete source context.
+- Gate 3 C is not rerun.
+- The original Gate 5 holdout batch is permanently failed and must not be
+  repaired, reused, rerun, or relabeled as unseen.
+- One new fresh holdout batch may be frozen.
+- Exactly one additional candidate-only `gpt-5.6-terra` Text Review is
+  authorized, with additional worst-case reservation ceiling `USD 0.25`,
+  `automatic_retry=0`, and the same provider/privacy boundary as the first Gate
+  6 review.
+
+The generic repair candidate is:
+
+```text
+2690de2cbc3d4ffb0741ecb80297a569647051f2
+```
+
+Generic repair validation used a public-safe synthetic-for-diagnosis source
+only to prove that reader-facing workflow/CI/path leakage is rejected while
+normal scientific reproducibility paths remain allowed:
+
+- run:
+  `.local-runtime/candidate-plugin-replay/runs/20260909T152847Z-3632674`
+- route:
+  `selected_route=scientific-rewrite`, `forced_route=false`,
+  `ordinary_user_prompt=true`
+- heavy receipt:
+  `SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2`
+- output scan:
+  zero hits for GitHub Actions, action run URLs, task `results/051` paths,
+  `automation/reviewed_handoff`, `CURRENT.json`, `RESULT.md`,
+  `FINAL_REPORT.md`, earlier commit ids, Planner/Reviewer prose, and similar
+  internal workflow artifacts.
+
+Gate 3 A/B recovery source-context decision:
+
+- A and B failures were traced to the frozen regression slices being too
+  narrow, which caused the old candidates to expose truncation and
+  source-condition notes in reader-facing prose.
+- Complete source context was recoverable from the original private source
+  `exports/private/051_writing_style_rebuild/gate4-full-report/source_extracted_layout.txt`,
+  whose SHA256 is
+  `f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213`.
+- A recovered source span:
+  `exports/private/051_writing_style_rebuild/gate3-recovery/plaintext/SMOKE-A-full-context.md`,
+  SHA256
+  `8ad7ad1b253abc74700ed7501195ca5f264865e5f7fa55b9954a719a666d7a5c`.
+- B recovered source span:
+  `exports/private/051_writing_style_rebuild/gate3-recovery/plaintext/SMOKE-B-full-context.md`,
+  SHA256
+  `aac92ce4b00fc412186ea2ba6964eb82a43a18df13a41ad8a9449165e8db7e80`.
+
+Gate 3 A/B recovery replay results:
+
+- A run:
+  `.local-runtime/candidate-plugin-replay/runs/20260909T153423Z-3646419`
+  - output:
+    `exports/private/051_writing_style_rebuild/gate3-recovery/candidates/SMOKE-A-candidate.md`
+  - output SHA256:
+    `ec37107497e71edffbc620c481c24d93c52481a857ddf63f2c0c94ffe4189a0f`
+- B run:
+  `.local-runtime/candidate-plugin-replay/runs/20260909T154039Z-3723774`
+  - output:
+    `exports/private/051_writing_style_rebuild/gate3-recovery/candidates/SMOKE-B-candidate.md`
+  - output SHA256:
+    `d2c4c6ba07b1cc1d9268c0023c91b0163eee4579b4eef2022b48ef8ca8145b14`
+- Both runs proved candidate consumption, selected `scientific-rewrite`, were
+  ordinary prompts, generated heavy-route receipt V2, and reported
+  `reader_facing_internal_frame.ok=true`, `semantic_audit.ok=true`, and
+  `exact_verification.ok=true`.
+- Both recovered outputs scan to zero for the old truncation/source-condition
+  markers and for workflow/CI/Git/task metadata.
+
+New Gate 5 holdout freeze:
+
+- manifest:
+  `results/051_writing_style_rebuild/recovery/new_holdout_manifest.json`
+- source:
+  `exports/private/051_writing_style_rebuild/gate5-new-holdout/source/kalman_filter_wikipedia_excerpt.md`
+- source SHA256:
+  `f5de0202aa1e6cd3d8bcc9068fb6e5b1129383030ad066da3c57aa6a52fe1733`
+- source URL:
+  `https://zh.wikipedia.org/wiki/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2`
+- source family:
+  public Chinese technical encyclopedia article about Kalman filtering,
+  different from CARE/051, not a workflow log, task result, plugin source, or
+  synthetic fixture.
+- freeze status:
+  frozen before replay at candidate
+  `2690de2cbc3d4ffb0741ecb80297a569647051f2`.
+
+New Gate 5 holdout replay:
+
+- run:
+  `.local-runtime/candidate-plugin-replay/runs/20260909T155032Z-3745228`
+- route:
+  `selected_route=scientific-rewrite`, `forced_route=false`,
+  `ordinary_user_prompt=true`
+- heavy receipt SHA256:
+  `93859be7ad83696843e34a795f77251981b4ad535466d92b0ae3c10f2b74d5e0`
+- output:
+  `exports/private/051_writing_style_rebuild/gate5-new-holdout/candidates/kalman_filter_candidate.md`
+- output SHA256:
+  `0b98032e6f22d73b8c2a83c3c52ee14c27e22d9ed7f186ca70780dd6e92e6f63`
+- metadata:
+  `reader_facing_internal_frame.ok=true`,
+  `semantic_audit.ok=true`,
+  `exact_verification.ok=true`,
+  `paid_generation_used=false`, and `external_api_call_count=0`.
+- output scan:
+  zero hits for GitHub Actions, action run URLs, `reviewed_handoff`,
+  task `results/051` paths, `CURRENT.json`, `RESULT.md`, `FINAL_REPORT.md`,
+  Text Review, Gate labels, Planner/Reviewer/Executor labels, and commit
+  metadata.
+
+Additional Text Review input is prepared but not yet reviewed:
+
+- plaintext packet:
+  `exports/private/051_writing_style_rebuild/text-review/recovery_candidate_only_text_review_packet.md`
+  - SHA256:
+    `caf3d1fe2ea130f55b77225e8611e9b9a4e5c09f1858837e300337d1aa4d3e87`
+  - size:
+    `100501` bytes
+  - committed:
+    `false`
+- encrypted payload:
+  `results/051_writing_style_rebuild/text_review/payload.age`
+  - SHA256:
+    `1d86b68d1ffbd09d164be851b9405627f2879f4918e411183665fdd62b232e76`
+- manifest:
+  `results/051_writing_style_rebuild/text_review/text_inputs.json`
+  - SHA256:
+    `0af9eab06e2a25a0f7bfe3584a4443a45b42974d103795d414da77a34b091d7b`
+- archived first Gate 6 REVISE evidence:
+  `results/051_writing_style_rebuild/text_review/TEXT_REVIEW.initial_revise.json`
+  - SHA256:
+    `dd5b6c7a737317d1bae05d45e7a4aba922f9d27b7d5b06cb074896c2d8e3f0a5`
+
+Current workflow state is Executor-owned `EXECUTING` with the next action:
+dispatch the single authorized additional Text Review, wait for evidence, and
+continue to final CI only if that review passes.

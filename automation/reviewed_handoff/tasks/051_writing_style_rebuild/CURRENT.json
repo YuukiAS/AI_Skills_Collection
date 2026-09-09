@@ -9,14 +9,15 @@
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "EXECUTE_AUTHORIZED_BOUNDED_RECOVERY_GENERIC_REPAIR_THEN_GATE3_AB_NEW_HOLDOUT_AND_ONE_ADDITIONAL_TEXT_REVIEW",
+  "next_action": "DISPATCH_ADDITIONAL_TEXT_REVIEW_WORKFLOW_AND_WAIT_FOR_EVIDENCE_THEN_FINAL_CI_IF_PASS",
   "plan_revision": 1,
   "review_limit_reached": false,
   "review_round": 0,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
-  "state": "REVISE",
+  "state": "EXECUTING",
   "task_key": "051_writing_style_rebuild",
   "text_review_required": true,
   "text_review_manifest_path": "results/051_writing_style_rebuild/text_review/text_inputs.json",
-  "text_review_evidence_path": "results/051_writing_style_rebuild/text_review/TEXT_REVIEW.json"
+  "text_review_evidence_path": "results/051_writing_style_rebuild/text_review/TEXT_REVIEW.json",
+  "recovery_status": "GATE3_AB_RECOVERED_NEW_HOLDOUT_REPLAY_PASS_TEXT_REVIEW_INPUT_PREPARED"
 }
