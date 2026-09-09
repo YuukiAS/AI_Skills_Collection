@@ -4,12 +4,12 @@
   "ci_required": true,
   "ci_status": "PENDING",
   "human_gate_reason": "PLANNER_DECISION",
-  "human_recovery_authorization": "AUTHORIZED_GATE3_AB_PRODUCTION_REGEN_GENERIC_LEAKAGE_REPAIR_NEW_HOLDOUT_ONE_ADDITIONAL_TEXT_REVIEW",
+  "human_recovery_authorization": "AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_RECOVERY",
   "implementation_commit": "2690de2cbc3d4ffb0741ecb80297a569647051f2",
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "USER_DECIDE_AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_PREFLIGHT_RECOVERY_OR_STOP_051",
+  "next_action": "STOP_051_ACCOUNTING_INFRA_NO_FINAL_TEXT_REVIEW_NO_FINAL_CI_NO_RELEASE_NO_INTEGRATION_UNTIL_BRIDGE_SUPPORTS_AUTHORIZED_UNSENT_CALL_RECOVERY",
   "plan_revision": 1,
   "review_limit_reached": false,
   "review_round": 0,
@@ -19,7 +19,7 @@
   "text_review_required": true,
   "text_review_manifest_path": "results/051_writing_style_rebuild/text_review/text_inputs.json",
   "text_review_evidence_path": "results/051_writing_style_rebuild/text_review/TEXT_REVIEW.json",
-  "recovery_status": "FINAL_TEXT_REVIEW_PREFLIGHT_FAILED_BUDGET_CONTRACT_MISMATCH_NO_PAID_REQUEST_HUMAN_DECISION_REQUIRED",
+  "recovery_status": "051_STOP_ACCOUNTING_INFRA",
   "latest_text_review": {
     "workflow_run": "https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/34374037235",
     "decision": "REVISE",
@@ -60,6 +60,50 @@
     "automatic_retry": 0,
     "rerun_allowed": false
   },
+  "accounting_only_recovery_authorization": {
+    "decision": "AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_RECOVERY",
+    "scope": [
+      "implementation candidate 2690de2cbc3d4ffb0741ecb80297a569647051f2",
+      "current frozen Bloom-filter holdout",
+      "current encrypted final candidate-only review packet",
+      "same OpenAI provider",
+      "same Text Review privacy boundary",
+      "exactly one previously unsent final Text Review",
+      "worst-case reservation <= USD 0.25",
+      "automatic paid retry = 0"
+    ],
+    "production_candidate_changed": false,
+    "holdout_changed": false,
+    "packet_regenerated": false,
+    "paid_model_request_sent": false,
+    "new_text_review_evidence_written": false
+  },
+  "accounting_infra_stop": {
+    "outcome": "051_STOP_ACCOUNTING_INFRA",
+    "reason": "Current ai-bridge Text Review accounting has no supported one-call authorized unsent-call recovery path that preserves the immutable prior ledger and enforces the final call cap without contract mutation.",
+    "observed_existing_runtime_behavior": [
+      "ai-bridge text-review run exposes no recovery or contract override argument",
+      "workflow ai-bridge-text-review.yml calls the normal text-review run path",
+      "paid_review.py validates existing ledger contract against default_contract()",
+      "current ledger contract mismatch fails before /v1/responses"
+    ],
+    "rejected_recovery_paths": [
+      "do not edit or reset the prior ledger",
+      "do not fake a reservation",
+      "do not create an unsupported campaign identity to bypass the one-call recovery contract",
+      "do not dispatch another workflow without safe accounting preflight"
+    ]
+  },
+  "generic_governance": {
+    "commit": "431cf8113b7fd269c1a8cb05982e8cffad33b849",
+    "safe_to_integrate_independently": true,
+    "candidate_replay_canonicalized": true,
+    "state_refresh_rule_added": true,
+    "authorization_dedup_rule_added": true,
+    "holdout_preflight_rule_added": true,
+    "paid_campaign_freeze_rule_added": true,
+    "pre_request_unsent_recovery_rule_added": true
+  },
   "planner_decision_context": {
     "observed_failure": "Final bounded recovery Text Review stopped in pre-request accounting validation because the paid-review campaign contract no longer matched the immutable prior campaign reservations.",
     "production_candidate_changed": false,
@@ -68,7 +112,8 @@
     "new_text_review_evidence_written": false,
     "final_required_ci_started": false,
     "plan_revision_limit_reached": true,
-    "authorized_recovery_if_user_accepts": "Accounting-only preflight recovery: preserve the frozen candidate, Bloom-filter holdout, encrypted packet, provider/privacy boundary, all prior cost reservations, and task-wide cost record; reconcile the final call through a safe one-call accounting contract/campaign without increasing the USD 0.25 per-call ceiling; then permit exactly one paid model request, no automatic paid retry, and stop 051 on review REVISE/failure or another accounting failure.",
+    "user_authorized_recovery": "Accounting-only preflight recovery was authorized under the same candidate, Bloom-filter holdout, encrypted packet, provider/privacy boundary, one unsent paid call, USD 0.25 worst-case reservation, and automatic retry 0 constraints.",
+    "recovery_runtime_result": "The current installed/canonical Text Review accounting runtime cannot safely express that one-call unsent-call recovery without unsupported ledger mutation or bypass; no new paid request was sent.",
     "stop_option": "Stop 051 without final PASS, final CI, release closure, Reviewer PASS, or integration."
   }
 }

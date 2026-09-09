@@ -953,8 +953,78 @@ recovery authorization allowed no retry. No further holdout replacement, paid
 review, final CI, version/changelog, production install smoke, Reviewer PASS or
 integration is started from this state.
 
-Current workflow state is `NEEDS_GPT_PLANNER` for a fresh Planner/human
-decision. This is not a new writing-style production-routing failure: the final
-holdout replay itself proved candidate consumption, selected
-`scientific-rewrite`, generated heavy-route receipt V2, and passed mechanical
-reader-facing leakage/fidelity/semantic checks.
+The workflow then waited for an explicit human decision because the failed final
+Text Review stopped before any model request was proven sent.
+
+## Accounting-only recovery authorization and final stop
+
+The user authorized
+`AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_RECOVERY` for this exact scope:
+
+- frozen implementation candidate:
+  `2690de2cbc3d4ffb0741ecb80297a569647051f2`;
+- current frozen Bloom-filter holdout;
+- current already generated and encrypted final candidate-only review packet;
+- same OpenAI provider and Text Review privacy boundary;
+- exactly one previously unsent final Text Review;
+- worst-case reservation `<= USD 0.25`;
+- automatic paid retry `0`.
+
+No production candidate, Bloom holdout, encrypted packet, provider, privacy
+boundary, or prior accounting evidence was modified for this decision.
+
+Before dispatching any new Text Review, the current accounting implementation
+was inspected. The safe recovery path is not available in the current runtime:
+
+- `ai-bridge text-review run --help` exposes no recovery or contract override
+  argument;
+- `.github/workflows/ai-bridge-text-review.yml` invokes the normal Text Review
+  path only;
+- Bridge Kit `paid_review.py` validates an existing ledger with
+  `payload["contract"] == default_contract()`;
+- the current ledger already fails this validation before `/v1/responses`;
+- creating a new ad hoc campaign identity would not preserve the task-wide
+  one-call recovery contract and exact accounting boundary as a supported
+  repository mechanism.
+
+Therefore the authorized recovery could not be completed without unsupported
+ledger mutation or bypass. No new workflow was dispatched, no fourth holdout was
+created, no fourth paid review was requested, and no final CI/release/reviewer
+or integration step was started.
+
+Local control-plane validation after recording the stop still reports the
+existing final Text Review evidence as stale against the current final recovery
+manifest:
+
+- `TEXT_REVIEW.json reviewed_input_identity is stale against current manifest`
+- `TEXT_REVIEW.json plaintext_artifact_sha256 mismatch`
+
+This is expected for the current repository schema because the final recovery
+manifest was prepared, but the `/v1/responses` request was never sent and no new
+`TEXT_REVIEW.json` exists. The mismatch is therefore recorded as
+`PAID_REVIEW_ACCOUNTING_INFRASTRUCTURE`, not repaired by fabricating evidence,
+resetting the manifest, or overwriting the previous review history.
+
+Final outcome:
+
+```text
+051_STOP_ACCOUNTING_INFRA
+paid_model_request_proven_sent=false
+new_text_review_evidence_written=false
+generic_governance_commit=431cf8113b7fd269c1a8cb05982e8cffad33b849
+generic_governance_safe_to_integrate_independently=YES
+candidate_replay_canonicalized=YES
+state_refresh_rule_added=YES
+authorization_dedup_rule_added=YES
+holdout_preflight_rule_added=YES
+paid_campaign_freeze_rule_added=YES
+pre_request_unsent_recovery_rule_added=YES
+```
+
+This is not a new writing-style production-routing failure: the final holdout
+replay itself proved candidate consumption, selected `scientific-rewrite`,
+generated heavy-route receipt V2, and passed mechanical reader-facing
+leakage/fidelity/semantic checks. The remaining missing capability belongs to
+Bridge/Text Review accounting infrastructure: a supported authorized
+unsent-call recovery path that preserves immutable prior ledger history while
+enforcing the separately authorized one-call cap.
