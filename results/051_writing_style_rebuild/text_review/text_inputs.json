@@ -13,6 +13,10 @@
     "source_basename": "final_recovery_candidate_only_text_review_packet.md"
   },
   "paid_review_campaign_id": "051_writing_style_rebuild",
+  "paid_review_extension": {
+    "authorization_receipt": "AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_RECOVERY",
+    "parent_campaign_id": "051_writing_style_rebuild"
+  },
   "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
   "prompt_version": "ai-bridge.text-review.v1",
   "review_kind": "051-writing-style-final-recovery-candidate-text",

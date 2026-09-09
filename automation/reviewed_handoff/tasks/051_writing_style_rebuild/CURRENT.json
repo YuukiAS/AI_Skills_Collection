@@ -9,7 +9,7 @@
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "STOP_051_ACCOUNTING_INFRA_NO_FINAL_TEXT_REVIEW_NO_FINAL_CI_NO_RELEASE_NO_INTEGRATION_UNTIL_BRIDGE_SUPPORTS_AUTHORIZED_UNSENT_CALL_RECOVERY",
+  "next_action": "EXECUTOR_ACCOUNTING_EXTENSION_RECOVERY_DISPATCH_EXACTLY_ONE_FINAL_TEXT_REVIEW",
   "plan_revision": 1,
   "review_limit_reached": false,
   "review_round": 0,
@@ -19,7 +19,7 @@
   "text_review_required": true,
   "text_review_manifest_path": "results/051_writing_style_rebuild/text_review/text_inputs.json",
   "text_review_evidence_path": "results/051_writing_style_rebuild/text_review/TEXT_REVIEW.json",
-  "recovery_status": "051_STOP_ACCOUNTING_INFRA",
+  "recovery_status": "ACCOUNTING_EXTENSION_RECOVERY_READY_FOR_FINAL_TEXT_REVIEW",
   "latest_text_review": {
     "workflow_run": "https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/34374037235",
     "decision": "REVISE",
@@ -45,8 +45,11 @@
   "final_recovery_text_review_input": {
     "plaintext_sha256": "07b985887d6e35c24835fe156b631469498ee34cee84f8b13f2b6cf6b91e9dc1",
     "encrypted_payload_sha256": "a3e078b4f809ed9932e3caa35a1c7f6d874a0c6cb0fcf0b69824abe8a212def0",
-    "manifest_sha256": "3f5455206a05b52f79bbd5ca17b1105684749fa6d2a2e8a763ee3dac7d6f1fb0",
+    "manifest_sha256": "f163782ca9eea2470f16eb9ed5aa9247e8246de76bcae348a337a8bde8e22129",
+    "previous_manifest_sha256_before_extension_metadata": "3f5455206a05b52f79bbd5ca17b1105684749fa6d2a2e8a763ee3dac7d6f1fb0",
     "planned_paid_call_number": 3,
+    "extension_parent_campaign_id": "051_writing_style_rebuild",
+    "extension_campaign_id": "051_writing_style_rebuild__authorized_extension_1",
     "automatic_retry": 0,
     "stop_if_revise": true
   },
@@ -93,6 +96,28 @@
       "do not create an unsupported campaign identity to bypass the one-call recovery contract",
       "do not dispatch another workflow without safe accounting preflight"
     ]
+  },
+  "accounting_extension_recovery": {
+    "bridge_extension_commit": "5c894d98d3053c39cbda79cdbd0b8dfb4fbec4c0",
+    "bridge_version": "0.7.4",
+    "consumer_main_commit": "cafe33f49467d28fe48ef90b571ca490529033d4",
+    "consumer_branch_commit": "78e33dd5bd0d1a0151220df831b54cc9d4712cce",
+    "transition_attempt": {
+      "command": "ai-bridge reviewed-handoff transition apply --target /tmp/ai-skills-051-bootstrap-20260907 --task-key 051_writing_style_rebuild --expected-state AWAIT_HUMAN_DECISION --next-state REVISE --next-action EXECUTOR_ACCOUNTING_EXTENSION_RECOVERY_DISPATCH_EXACTLY_ONE_FINAL_TEXT_REVIEW",
+      "result": "FAILED_EXPECTED_STALE_TEXT_REVIEW_VALIDATION",
+      "fallback": "MINIMAL_CONTROL_PLANE_TRANSACTION_WITH_AWAIT_HUMAN_DECISION_STATE_BECAUSE_CURRENT_SCHEMA_REQUIRES_REVIEW_ARTIFACT_FOR_REVISE"
+    },
+    "parent_campaign_id": "051_writing_style_rebuild",
+    "extension_campaign_id": "051_writing_style_rebuild__authorized_extension_1",
+    "authorization_receipt": "AUTHORIZE_ACCOUNTING_ONLY_FINAL_TEXT_REVIEW_RECOVERY",
+    "parent_ledger_sha256_before": "db8cd88a964cfc89b2582f3fbe4fd56f0061ec2b954527945765896c76ccd928",
+    "encrypted_payload_sha256": "a3e078b4f809ed9932e3caa35a1c7f6d874a0c6cb0fcf0b69824abe8a212def0",
+    "final_holdout_manifest_sha256": "34588a912c741a6407718ad1fdb363d41e108816946185d4285488e8a58e71c1",
+    "same_frozen_candidate": true,
+    "same_frozen_bloom_holdout": true,
+    "same_encrypted_packet": true,
+    "paid_model_request_sent": false,
+    "new_text_review_evidence_written": false
   },
   "generic_governance": {
     "commit": "431cf8113b7fd269c1a8cb05982e8cffad33b849",
