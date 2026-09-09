@@ -2,72 +2,70 @@
 
 ## What this task solved
 
-Task 051 has produced and frozen a real successor candidate for the existing `writing-style` plugin's heavy Chinese scientific/technical rewrite path. The candidate is exercised through the ordinary installed-plugin route rather than a forced internal subskill call, and the production architecture keeps host Codex as the generation owner while preserving the frozen meaning-realization, structural-fidelity, repair-boundary, and no-paid-generation constraints.
+Task 051 has produced a real successor candidate for the existing `writing-style` plugin's heavy Chinese scientific/technical rewrite path and proved that a normal installed-plugin request can route into the new heavy path without forcing the user to name internal implementation stages. The task also established repo-local candidate replay evidence, known-regression replay, complete-report replay, fresh-holdout evaluation, and independent Text Review evidence.
 
-The work is not yet eligible for final PASS or integration. Gate 6 independent Text Review returned `REVISE`, so this report records the exact human decision now required before any further repair or evaluation can occur.
+The task is not eligible for final PASS or integration. The user-authorized bounded recovery was executed, but its newly frozen fresh holdout failed the second independent Text Review. The recovery budget and authorization for this cycle are now exhausted, so the Scheduled Planner must return to a real human decision rather than silently opening a third holdout or another paid review.
 
 ## What changed
 
-The implementation candidate is frozen at `ee8dd6edda2a2e4dd8f3210504225a56432b11a0`. It adds the heavy Chinese `scientific-rewrite` production path, updates Chinese realization and structural fidelity behavior, adds deterministic rewrite support, keeps generated plugin payloads in parity, and retains the repo-local candidate replay helper/documentation used to prove real candidate consumption.
+The current recovery implementation candidate is frozen at `2690de2cbc3d4ffb0741ecb80297a569647051f2`. The earlier production behavior candidate `ee8dd6edda2a2e4dd8f3210504225a56432b11a0` had already established ordinary heavy-route behavior. The recovery candidate adds a generic reader-facing guard against workflow/CI/commit/path leakage and replays Gate 3 A/B from complete source context without changing Gate 3 C.
 
-Gate 2 ordinary installed-plugin routing passed. Gate 3 A/B/C known-regression candidate text was previously accepted by the user and its render-only defects were repaired without changing the hash-bound candidate text. Gate 4 complete private-report generation/render evidence passed and the independent Text Review also marked Gate 4 `PASS`. Gate 5 used a pre-frozen public-safe holdout and completed without holdout replacement or holdout-specific tuning, but the independent Text Review marked its reader-facing artifact `REVISE`.
+The authorized recovery regenerated Gate 3 A/B through the normal production route, retained Gate 4, froze one new fresh Gate 5 holdout, and consumed exactly one additional independent Text Review call. The second Text Review passed recovered Gate 3 A/B, existing Gate 3 C, and Gate 4, but returned `REVISE` for the new Gate 5 holdout.
 
-The combined Gate 4/5 human qualitative gate was accepted before Gate 6, which authorized the single independent Text Review call already performed. No Gate 7 final CI, release/version closure, install/upgrade smoke, GPT Reviewer PASS, or integration has been performed yet.
+No final CI, release/version closure, install/upgrade smoke, GPT Reviewer PASS, or integration has been started after this failure.
 
 ## New capabilities / behavior
 
-The frozen candidate can route a normal long Chinese source-faithful rewrite request into the new heavy path without the user naming `scientific-rewrite`, Meaning Map, Reader Plan, `REALIZE_MEANING`, stage packets, or validators. The route preserves the existing light Chinese polish, fidelity-only, and English `scientific-prose` paths rather than collapsing them into the heavy rewrite path.
+The candidate continues to demonstrate the intended heavy Chinese rewrite architecture: ordinary long Chinese source-faithful rewrite requests route to `scientific-rewrite`; short/local Chinese polish, fidelity-only work, and English `scientific-prose` remain separate; host Codex remains the generation owner; formal realization is meaning-driven rather than raw-source paragraph paraphrase; structured semantic audit/repair remains separated from drafting; and production generation does not use paid external generation calls.
 
-The candidate also proves the intended process separation: raw-source understanding and semantic audit remain source-aware, formal realization does not re-present raw source prose as its drafting surface, targeted repair packets are structured rather than source-quotation based, assembly is not given global raw-source rewrite authority, and production generation records no paid external model calls.
+The recovery also shows that the previously identified Gate 3 A/B truncation/internal-note defects can be corrected when complete source context is available. The second Text Review explicitly passed the recovered Gate 3 A/B artifacts, Gate 3 C, and Gate 4.
 
 ## Deliberately not adopted / unchanged
 
-051 does not rename the `writing-style` plugin, does not introduce a second generation runtime, does not restore per-stage paid generation, does not use fixed-size heavy chunking as the semantic planner, does not treat arbitrary Latin spans as exact identities, and does not turn the candidate replay helper into a generic runtime manager or another workflow state machine.
+051 still does not rename the `writing-style` plugin, introduce a second generation runtime, restore per-stage paid generation, use fixed-size heavy chunking as the semantic planner, treat arbitrary Latin spans as exact identities, or turn candidate replay into another workflow/runtime manager.
 
-The failed frozen holdout is not being replaced or chased automatically. The accepted Gate 3 A/B text is not being silently edited after the fact. No second independent paid Text Review call is being made automatically. These are intentional stops required by the frozen Plan and Reviewed Handoff contract.
+The failed recovery holdout is not being repaired, reused, replaced, or chased automatically. No third holdout is being selected. No third paid Text Review call is being sent. No final CI or integration is being started from a failed product/artifact gate. These stops are deliberate consequences of the frozen holdout policy and the bounded human authorization already consumed.
 
 ## Example usage
 
-A normal user-facing request that the candidate is intended to support is:
+A normal user-facing request the candidate is intended to support is:
 
 > 把这份较长科研报告重新组织成自然中文，数字、公式、引用、比较条件和限制都不能丢；不要逐句翻译，也不要总结掉内容。
 
-Another valid heavy-route request is:
+Another valid request is:
 
 > 内容都对，但现在像项目备忘录。按原意重新讲清楚，让第一次看的研究者能顺着读下去，正式算法名和数据集名保留。
 
-Short local polishing, fidelity-only checking, and English scientific prose remain on their existing routes rather than entering this heavy path.
+Short local polishing, fidelity-only checking, and English scientific prose remain on their existing routes.
 
 ## Regression and remaining limitations
 
-Gate 6 independent Text Review is valid and returned `REVISE` with three blocking findings:
+The latest independent Text Review is valid and returned `REVISE`. It passed the recovered Gate 3 A/B artifacts, Gate 3 C, and Gate 4. It found two blocking problems only in the newly frozen Gate 5 recovery holdout:
 
-1. Gate 3 A contains unfinished/truncated reader-facing text and internal editing notes such as material-missing explanations.
-2. Gate 3 B contains multiple truncation notices, missing numbering, and source-condition explanations that break continuity and expose internal handling.
-3. Gate 5 mixes the reader-facing research summary with review-workflow state, CI/test metadata, commit identifiers, model labels, and file paths, so it is not a clean reader artifact.
+1. The reader-facing candidate contains an explicit source-missing/recovery note rather than only normal article prose.
+2. The candidate ends immediately after introducing the state-space model, before the promised equations and matrix definitions, leaving the final artifact materially incomplete.
 
-Gate 3 C and Gate 4 passed the same independent review. The findings therefore do not invalidate the already-proven ordinary routing mechanism, but they do block the frozen Plan's final product/artifact acceptance claim.
+The failed recovery holdout source is the frozen Kalman-filter excerpt recorded in `results/051_writing_style_rebuild/recovery/new_holdout_manifest.json`. The batch is therefore failed under the frozen unseen/holdout policy. Its failure cannot be erased by editing that holdout, replacing it inside the same batch, or drawing another item automatically.
 
-Automatic recovery is not authorized. Repairing Gate 3 A/B would change text that was previously accepted and hash-bound, which the Plan explicitly says reopens human/Planner decision. Gate 5 is a frozen holdout batch; the Plan explicitly says a failed holdout is a failed batch and that consuming a later fresh batch requires a new explicit human decision. The one allowed Planner revision has already been used (`plan_revision=1`, `max_plan_revisions=1`).
+The user had explicitly authorized one bounded recovery after the first Text Review failure: generic non-holdout repair, one new frozen fresh holdout, and exactly one additional candidate-only Text Review under the same privacy/provider boundary. That authorization has now been fully consumed. The current Plan is already at `plan_revision=1` with `max_plan_revisions=1`, so Scheduled GPT cannot silently revise the acceptance contract again.
 
-The Text Review manifest records authorization for exactly one candidate-only private review call, maximum one call and USD 0.25 reserved cost. That authorized call has been consumed. The resulting evidence embeds a broader campaign contract (`max_paid_calls=2`, USD 0.50 campaign ceiling), but that metadata does not supersede the narrower user authorization or frozen Plan. No second paid review may be sent unless the user explicitly authorizes the recovery path and its additional review call.
+A further attempt is possible only through a fresh human decision. The defensible recovery would first prove a generic incomplete-source/reader-facing-boundary repair on non-holdout material, then freeze one new complete-source holdout batch before evaluation, and then run exactly one additional independent Text Review. That would be a new authorization; it is not pre-authorized by the current recovery cycle. The alternative is to stop 051 and record that it did not reach the frozen final generalization/product PASS bar.
 
-The required human decision is therefore whether to authorize a bounded recovery cycle that (a) permits repair/regeneration of Gate 3 A/B despite the earlier text acceptance, (b) treats the current Gate 5 batch as failed and permits one newly frozen fresh holdout batch without holdout-specific tuning or adaptive chasing, and (c) permits exactly one additional candidate-only independent Text Review call under the same provider/privacy boundary with no automatic retry and an additional worst-case reservation ceiling of USD 0.25. If this recovery is not authorized, 051 cannot truthfully reach final PASS under the current acceptance contract.
-
-Gate 7 final CI remains pending by design because the artifact gate has not closed. Required final checks still include focused and unrelated regressions, source/generated parity, candidate replay workflow consistency, version/changelog/release preflight, explicit heavyweight integration/release CI on the task branch, and real install/upgrade plus ordinary black-box heavy-routing smoke. These must run only after an authorized artifact recovery succeeds.
+Required final CI remains pending by design. If a later human-authorized recovery succeeds, final closure still requires focused and unrelated regressions, source/generated parity, candidate replay workflow consistency, version/changelog/release preflight, explicit heavyweight integration/release CI on the task branch, real install/upgrade smoke, ordinary black-box heavy-routing smoke, GPT Reviewer PASS, and integration to the then-current `main`.
 
 ## Technical appendix
 
 - Task branch: `reviewed/051_writing_style_rebuild`
-- Frozen implementation commit: `ee8dd6edda2a2e4dd8f3210504225a56432b11a0`
+- Current recovery implementation commit: `2690de2cbc3d4ffb0741ecb80297a569647051f2`
+- Earlier production behavior candidate: `ee8dd6edda2a2e4dd8f3210504225a56432b11a0`
 - Frozen Plan revision: `1` of maximum `1`
-- Current required CI status before this human gate: `PENDING`; Gate 7 final CI not started
-- Gate 6 Text Review decision: `REVISE`
-- Text Review evidence: `results/051_writing_style_rebuild/text_review/TEXT_REVIEW.json`
-- Text Review manifest: `results/051_writing_style_rebuild/text_review/text_inputs.json`
-- Text Review workflow run: `34360618786`
-- Text Review actual model cost: USD 0.066460; reserved worst-case cost for the consumed call: USD 0.116207
-- Gate 3 accepted-text evidence and render QA: `results/051_writing_style_rebuild/RESULT.md`
-- Gate 5 frozen holdout manifest: `results/051_writing_style_rebuild/gate5_holdout_manifest.json`
-- Gate 4/5 combined human acceptance is recorded in `results/051_writing_style_rebuild/RESULT.md`
+- Current CI status: `PENDING`; final release/integration CI has not started
+- Latest Text Review evidence: `results/051_writing_style_rebuild/text_review/TEXT_REVIEW.json`
+- Latest Text Review decision: `REVISE`
+- Latest Text Review workflow run: `34374037235`
+- Latest Text Review paid call number: `2`
+- Latest Text Review actual model cost: USD 0.064988
+- Latest Text Review blocking findings: `2`
+- Recovery fresh-holdout manifest: `results/051_writing_style_rebuild/recovery/new_holdout_manifest.json`
+- Recovery status before this Planner transaction: `ADDITIONAL_TEXT_REVIEW_REVISE_NEW_HOLDOUT_FAILED_STOP_NO_THIRD_HOLDOUT`
 - No production implementation file is modified by this Planner transaction.
