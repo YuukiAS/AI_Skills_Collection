@@ -1,7 +1,7 @@
 {
   "schema": "AI_SKILLS_051_FINAL_HOLDOUT_FREEZE_V1",
   "task": "051_writing_style_rebuild",
-  "status": "FROZEN_BEFORE_REPLAY",
+  "status": "REPLAY_PASS_MECHANICAL_PENDING_TEXT_REVIEW",
   "implementation_commit": "2690de2cbc3d4ffb0741ecb80297a569647051f2",
   "prior_failed_holdouts": [
     {
@@ -62,5 +62,34 @@
     "Does it preserve Bloom filter purpose, probabilistic set-membership semantics, false positive / no false negative boundary, bit array and hash-function mechanism, insertion/query/removal limitations, and pros/cons without adding unsupported facts?",
     "Does it avoid CI, branch, commit, Gate, Planner, Reviewer, Text Review, task-result, path, or harness metadata in reader-facing prose?",
     "Does it end as a complete artifact rather than stopping before a promised equation, list, or section?"
-  ]
+  ],
+  "replay": {
+    "run_dir": ".local-runtime/candidate-plugin-replay/runs/20260909T164206Z-3843516",
+    "runtime_version": "codex-cli 0.153.4",
+    "candidate_commit": "2690de2cbc3d4ffb0741ecb80297a569647051f2",
+    "actual_consumption_proven": true,
+    "selected_route": "scientific-rewrite",
+    "forced_route": false,
+    "ordinary_user_prompt": true,
+    "receipt_schema": "SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2",
+    "receipt_sha256": "ea3aaf3c078145d7b36fc4a3873c2b034b832e48d4a9433ff417d202fbc3106e",
+    "route_sha256": "49569d9131e9708d15d973226b1dbabf87f6c2d8a7e18b5dbc9f3ef02437646d",
+    "semantic_audit_sha256": "c43efdf5024da9f92f8d014a2b2efb1d6550e0f2573ac81795b7b3acd1cdf13f",
+    "candidate_locator": "exports/private/051_writing_style_rebuild/gate5-final-holdout/candidates/bloom_filter_candidate.md",
+    "candidate_sha256": "eeb292b112830c5a9bdd5c6695bd95e698cf73f0391541f6377b2c009c01bea9",
+    "candidate_bytes": 5078,
+    "reader_facing_internal_frame": {
+      "internal_workflow_leak_count": 0,
+      "ok": true
+    },
+    "semantic_audit": {
+      "finding_count": 0,
+      "ok": true
+    },
+    "exact_verification": {
+      "exact_item_count": 24,
+      "ok": true
+    },
+    "global_codex_version_after_replay": "codex-cli 0.142.0"
+  }
 }

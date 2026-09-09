@@ -9,7 +9,7 @@
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "EXECUTE_FINAL_BOUNDED_RECOVERY_NEW_SEMANTICALLY_COMPLETE_HOLDOUT_THEN_ONE_ADDITIONAL_TEXT_REVIEW",
+  "next_action": "DISPATCH_FINAL_ADDITIONAL_TEXT_REVIEW_WORKFLOW_AND_WAIT_FOR_EVIDENCE",
   "plan_revision": 1,
   "review_limit_reached": false,
   "review_round": 0,
@@ -19,7 +19,7 @@
   "text_review_required": true,
   "text_review_manifest_path": "results/051_writing_style_rebuild/text_review/text_inputs.json",
   "text_review_evidence_path": "results/051_writing_style_rebuild/text_review/TEXT_REVIEW.json",
-  "recovery_status": "FINAL_RECOVERY_AUTHORIZED_NOT_STARTED",
+  "recovery_status": "FINAL_HOLDOUT_REPLAY_PASS_TEXT_REVIEW_INPUT_PREPARED",
   "latest_text_review": {
     "workflow_run": "https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/34374037235",
     "decision": "REVISE",
@@ -41,5 +41,13 @@
       "if that holdout or review fails, STOP 051; no further holdout replacement or paid review",
       "complete AGENTS/workflow hardening before 051 integration"
     ]
+  },
+  "final_recovery_text_review_input": {
+    "plaintext_sha256": "07b985887d6e35c24835fe156b631469498ee34cee84f8b13f2b6cf6b91e9dc1",
+    "encrypted_payload_sha256": "a3e078b4f809ed9932e3caa35a1c7f6d874a0c6cb0fcf0b69824abe8a212def0",
+    "manifest_sha256": "3f5455206a05b52f79bbd5ca17b1105684749fa6d2a2e8a763ee3dac7d6f1fb0",
+    "planned_paid_call_number": 3,
+    "automatic_retry": 0,
+    "stop_if_revise": true
   }
 }

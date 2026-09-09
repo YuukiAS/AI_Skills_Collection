@@ -3,7 +3,7 @@
   "contract": {
     "automatic_paid_retries": 0,
     "campaign_reserved_cost_hard_ceiling_usd": "0.500000",
-    "max_paid_calls": 2,
+    "max_paid_calls": 3,
     "model": "gpt-5.6-terra",
     "per_call_worst_case_ceiling_usd": "0.250000",
     "pricing": {
@@ -137,5 +137,7 @@
       "worst_case_reserved_cost_usd": "0.119797"
     }
   ],
-  "schema": "AI_BRIDGE_PAID_REVIEW_BUDGET_V1"
+  "schema": "AI_BRIDGE_PAID_REVIEW_BUDGET_V1",
+  "final_recovery_authorization": "USER_AUTHORIZED_EXACTLY_ONE_FINAL_ADDITIONAL_TEXT_REVIEW_MAX_WORST_CASE_USD_0_25_NO_RETRY",
+  "final_recovery_call_number": 3
 }

@@ -236,5 +236,115 @@
     "accounting_status": "ACCOUNTING_VERIFIED",
     "actual_model_cost_usd": "0.064988"
   },
-  "current_status": "NEEDS_GPT_PLANNER_AFTER_ADDITIONAL_TEXT_REVIEW_REVISE_NEW_HOLDOUT_FAIL"
+  "current_status": "FINAL_HOLDOUT_REPLAY_PASS_TEXT_REVIEW_INPUT_PREPARED",
+  "final_bounded_recovery_authorization": "AUTHORIZED_ONE_FINAL_BOUNDED_GENERIC_RECOVERY_NEW_COMPLETE_HOLDOUT_ONE_ADDITIONAL_TEXT_REVIEW_STOP_IF_FAIL",
+  "final_holdout": {
+    "schema": "AI_SKILLS_051_FINAL_HOLDOUT_FREEZE_V1",
+    "task": "051_writing_style_rebuild",
+    "status": "REPLAY_PASS_MECHANICAL_PENDING_TEXT_REVIEW",
+    "implementation_commit": "2690de2cbc3d4ffb0741ecb80297a569647051f2",
+    "prior_failed_holdouts": [
+      {
+        "manifest": "results/051_writing_style_rebuild/gate5_holdout_manifest.json",
+        "status": "FAILED_PERMANENT_DO_NOT_REPAIR_REUSE_OR_RERUN"
+      },
+      {
+        "manifest": "results/051_writing_style_rebuild/recovery/new_holdout_manifest.json",
+        "status": "TEXT_REVIEW_REVISE_INVALID_INCOMPLETE_SOURCE_DO_NOT_TUNE_OR_REUSE"
+      }
+    ],
+    "source": {
+      "locator": "exports/private/051_writing_style_rebuild/gate5-final-holdout/source/bloom_filter_intro_basic_algorithm_analysis.md",
+      "plaintext_committed": false,
+      "sha256": "f519ad102d4d1552c22c5af3419abf99041412740319eaef184a95d11d622194",
+      "bytes": 5369,
+      "chars": 1972,
+      "lines": 31,
+      "selection": "lead paragraph plus complete Basic Concept, Algorithm Description, and Pros/Cons sections",
+      "exact_range": "whole local excerpt artifact",
+      "public_source_title": "布隆过滤器 - 维基百科，自由的百科全书",
+      "public_source_url": "https://zh.wikipedia.org/wiki/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8",
+      "license_note": "Wikipedia text is available under CC BY-SA; local plaintext remains in ignored repo-private artifact storage.",
+      "document_family": "public technical encyclopedia article about Bloom filters",
+      "reader_facing_source": true,
+      "different_from_care_051_family": true,
+      "not_workflow_or_task_artifact": true,
+      "not_synthetic_fixture": true,
+      "not_failed_kalman_holdout_family": true
+    },
+    "semantic_completeness_preflight": {
+      "performed_before_generation": true,
+      "independent_of_model_output": true,
+      "selected_sections": [
+        "lead",
+        "基本概念",
+        "算法描述",
+        "优劣分析"
+      ],
+      "stops_before_next_section": "时间与空间优势",
+      "last_line": "假阳性率是布隆过滤器的不足之一。随着存入的元素数量增加，假阳性率随之增加。但是如果元素数量太少，则使用散列表足矣。在降低假阳性率方面，有不少工作，使得出现了很多布隆过滤器的变种。",
+      "last_line_has_sentence_terminator": true,
+      "does_not_end_mid_sentence": true,
+      "does_not_end_mid_list": true,
+      "does_not_end_before_referenced_equation": true,
+      "does_not_end_inside_truncated_section": true,
+      "internal_workflow_marker_hits": 0
+    },
+    "replay_contract": {
+      "prompt": "ordinary Chinese technical rewrite request; no plugin/router/internal gate terms",
+      "candidate_replay_contract": "docs/workflows/CANDIDATE_PLUGIN_REPLAY.md",
+      "no_production_tuning_from_failed_holdout": true,
+      "no_production_implementation_changes_after_freeze": true,
+      "if_holdout_or_review_fails_stop_051": true
+    },
+    "acceptance_questions": [
+      "Does the candidate read as a complete reader-facing Chinese technical explanation rather than a process note?",
+      "Does it preserve Bloom filter purpose, probabilistic set-membership semantics, false positive / no false negative boundary, bit array and hash-function mechanism, insertion/query/removal limitations, and pros/cons without adding unsupported facts?",
+      "Does it avoid CI, branch, commit, Gate, Planner, Reviewer, Text Review, task-result, path, or harness metadata in reader-facing prose?",
+      "Does it end as a complete artifact rather than stopping before a promised equation, list, or section?"
+    ],
+    "replay": {
+      "run_dir": ".local-runtime/candidate-plugin-replay/runs/20260909T164206Z-3843516",
+      "runtime_version": "codex-cli 0.153.4",
+      "candidate_commit": "2690de2cbc3d4ffb0741ecb80297a569647051f2",
+      "actual_consumption_proven": true,
+      "selected_route": "scientific-rewrite",
+      "forced_route": false,
+      "ordinary_user_prompt": true,
+      "receipt_schema": "SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2",
+      "receipt_sha256": "ea3aaf3c078145d7b36fc4a3873c2b034b832e48d4a9433ff417d202fbc3106e",
+      "route_sha256": "49569d9131e9708d15d973226b1dbabf87f6c2d8a7e18b5dbc9f3ef02437646d",
+      "semantic_audit_sha256": "c43efdf5024da9f92f8d014a2b2efb1d6550e0f2573ac81795b7b3acd1cdf13f",
+      "candidate_locator": "exports/private/051_writing_style_rebuild/gate5-final-holdout/candidates/bloom_filter_candidate.md",
+      "candidate_sha256": "eeb292b112830c5a9bdd5c6695bd95e698cf73f0391541f6377b2c009c01bea9",
+      "candidate_bytes": 5078,
+      "reader_facing_internal_frame": {
+        "internal_workflow_leak_count": 0,
+        "ok": true
+      },
+      "semantic_audit": {
+        "finding_count": 0,
+        "ok": true
+      },
+      "exact_verification": {
+        "exact_item_count": 24,
+        "ok": true
+      },
+      "global_codex_version_after_replay": "codex-cli 0.142.0"
+    }
+  },
+  "final_additional_text_review_input": {
+    "status": "ENCRYPTED_INPUT_PREPARED_PENDING_WORKFLOW_DISPATCH",
+    "plaintext_packet_locator": "exports/private/051_writing_style_rebuild/text-review/final_recovery_candidate_only_text_review_packet.md",
+    "plaintext_committed": false,
+    "plaintext_sha256": "07b985887d6e35c24835fe156b631469498ee34cee84f8b13f2b6cf6b91e9dc1",
+    "plaintext_bytes": 98502,
+    "encrypted_payload_path": "results/051_writing_style_rebuild/text_review/payload.age",
+    "encrypted_payload_sha256": "a3e078b4f809ed9932e3caa35a1c7f6d874a0c6cb0fcf0b69824abe8a212def0",
+    "manifest_path": "results/051_writing_style_rebuild/text_review/text_inputs.json",
+    "manifest_sha256": "3f5455206a05b52f79bbd5ca17b1105684749fa6d2a2e8a763ee3dac7d6f1fb0",
+    "archived_second_text_review_revise": "results/051_writing_style_rebuild/text_review/TEXT_REVIEW.second_recovery_revise.json",
+    "archived_second_text_review_revise_sha256": "b91f2551439801c0cd12e31e674ed9bc3f189ae59d7612328571ab94f9b59be2",
+    "authorization": "exactly one final additional candidate-only gpt-5.6-terra Text Review, additional worst-case ceiling USD 0.25, automatic_retry=0, stop 051 if fail"
+  }
 }

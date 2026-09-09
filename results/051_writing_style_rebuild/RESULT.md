@@ -851,3 +851,81 @@ policy for 052/053 reuse:
   or any implementation-choice prompt after wait/resume;
 - fresh holdout preflight must independently verify reader-facing technical
   identity and semantic completeness before freezing.
+
+Final bounded recovery holdout:
+
+- source:
+  `exports/private/051_writing_style_rebuild/gate5-final-holdout/source/bloom_filter_intro_basic_algorithm_analysis.md`
+- source committed:
+  `false`
+- source SHA256:
+  `f519ad102d4d1552c22c5af3419abf99041412740319eaef184a95d11d622194`
+- public source URL:
+  `https://zh.wikipedia.org/wiki/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8`
+- selected range:
+  lead paragraph plus complete `基本概念`, `算法描述`, and `优劣分析`
+  sections; stops before `时间与空间优势`.
+- semantic completeness preflight:
+  performed before generation, independent of model output; the range ends with
+  a complete sentence, not mid-list, not before a referenced equation, and not
+  inside a truncated section.
+- freeze manifest:
+  `results/051_writing_style_rebuild/recovery/final_holdout_manifest.json`
+
+Final bounded recovery holdout replay:
+
+- run:
+  `.local-runtime/candidate-plugin-replay/runs/20260909T164206Z-3843516`
+- candidate:
+  `2690de2cbc3d4ffb0741ecb80297a569647051f2`
+- route:
+  `selected_route=scientific-rewrite`, `forced_route=false`,
+  `ordinary_user_prompt=true`
+- heavy receipt:
+  `SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2`
+- heavy receipt SHA256:
+  `ea3aaf3c078145d7b36fc4a3873c2b034b832e48d4a9433ff417d202fbc3106e`
+- output:
+  `exports/private/051_writing_style_rebuild/gate5-final-holdout/candidates/bloom_filter_candidate.md`
+- output SHA256:
+  `eeb292b112830c5a9bdd5c6695bd95e698cf73f0391541f6377b2c009c01bea9`
+- metadata:
+  `reader_facing_internal_frame.ok=true`,
+  `semantic_audit.ok=true`,
+  `exact_verification.ok=true`,
+  `paid_generation_used=false`, and `external_api_call_count=0`.
+- output scan:
+  zero hits for GitHub Actions, action run URLs, `reviewed_handoff`,
+  task `results/051` paths, `CURRENT.json`, `RESULT.md`, `FINAL_REPORT.md`,
+  Text Review, Gate labels, Planner/Reviewer/Executor labels, and commit
+  metadata.
+- global Codex after replay:
+  `codex-cli 0.142.0`.
+
+Final additional Text Review input is prepared:
+
+- plaintext packet:
+  `exports/private/051_writing_style_rebuild/text-review/final_recovery_candidate_only_text_review_packet.md`
+  - committed:
+    `false`
+  - SHA256:
+    `07b985887d6e35c24835fe156b631469498ee34cee84f8b13f2b6cf6b91e9dc1`
+  - size:
+    `98502` bytes
+- encrypted payload:
+  `results/051_writing_style_rebuild/text_review/payload.age`
+  - SHA256:
+    `a3e078b4f809ed9932e3caa35a1c7f6d874a0c6cb0fcf0b69824abe8a212def0`
+- manifest:
+  `results/051_writing_style_rebuild/text_review/text_inputs.json`
+  - SHA256:
+    `3f5455206a05b52f79bbd5ca17b1105684749fa6d2a2e8a763ee3dac7d6f1fb0`
+- archived second Text Review REVISE evidence:
+  `results/051_writing_style_rebuild/text_review/TEXT_REVIEW.second_recovery_revise.json`
+  - SHA256:
+    `b91f2551439801c0cd12e31e674ed9bc3f189ae59d7612328571ab94f9b59be2`
+- paid review budget ledger:
+  `results/051_writing_style_rebuild/paid_review_budget.json` now records the
+  user-authorized final call as `max_paid_calls=3`; the campaign reserved-cost
+  ceiling remains `USD 0.50`, and the final call remains bounded by the
+  `USD 0.25` per-call worst-case ceiling with `automatic_retry=0`.
