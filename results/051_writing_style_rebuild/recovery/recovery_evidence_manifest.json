@@ -186,5 +186,55 @@
     "archived_initial_text_review_revise": "results/051_writing_style_rebuild/text_review/TEXT_REVIEW.initial_revise.json",
     "archived_initial_text_review_revise_sha256": "dd5b6c7a737317d1bae05d45e7a4aba922f9d27b7d5b06cb074896c2d8e3f0a5",
     "authorization": "exactly one additional candidate-only gpt-5.6-terra Text Review, additional worst-case ceiling USD 0.25, automatic_retry=0, same provider/privacy boundary as first Gate 6"
-  }
+  },
+  "additional_text_review_result": {
+    "workflow_run": "https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/34374037235",
+    "status": "REVISE",
+    "overall_decision": "REVISE",
+    "evidence_sha256": "b91f2551439801c0cd12e31e674ed9bc3f189ae59d7612328571ab94f9b59be2",
+    "plaintext_artifact_sha256": "caf3d1fe2ea130f55b77225e8611e9b9a4e5c09f1858837e300337d1aa4d3e87",
+    "blocking_findings": [
+      {
+        "id": "F-001",
+        "severity": "blocking",
+        "summary": "出现明显的内部恢复/源文本缺失过程泄漏，不是正常读者文章内容。"
+      },
+      {
+        "id": "F-002",
+        "severity": "blocking",
+        "summary": "最终读者文本在技术说明的关键处中断，造成明显不完整感和阅读负担。"
+      }
+    ],
+    "item_decisions": [
+      {
+        "label": null,
+        "decision": "PASS",
+        "summary": "结构清楚，论证限定充分，技术表述自然，未见明显工作流泄漏。"
+      },
+      {
+        "label": null,
+        "decision": "PASS",
+        "summary": "方法比较和条件边界表达连贯，公式与叙述衔接自然。"
+      },
+      {
+        "label": null,
+        "decision": "PASS",
+        "summary": "实验设计、评价指标和启动条件组织清晰，面向读者的技术表达可接受。"
+      },
+      {
+        "label": null,
+        "decision": "PASS",
+        "summary": "长篇报告层级清晰、限定明确，整体可读且无明显内部过程泄漏。"
+      },
+      {
+        "label": null,
+        "decision": "REVISE",
+        "summary": "末段含恢复过程说明，并在数学模型的关键内容前中断，不能作为完成的读者文本。"
+      }
+    ],
+    "paid_call_number": 2,
+    "accounting_status": "ACCOUNTING_VERIFIED",
+    "actual_model_cost_usd": "0.064988"
+  },
+  "current_status": "NEEDS_GPT_PLANNER_AFTER_ADDITIONAL_TEXT_REVIEW_REVISE_NEW_HOLDOUT_FAIL"
 }

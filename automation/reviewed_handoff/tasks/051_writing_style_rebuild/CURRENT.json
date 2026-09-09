@@ -9,15 +9,25 @@
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "DISPATCH_ADDITIONAL_TEXT_REVIEW_WORKFLOW_AND_WAIT_FOR_EVIDENCE_THEN_FINAL_CI_IF_PASS",
+  "next_action": "PLANNER_DECISION_REQUIRED_AFTER_AUTHORIZED_RECOVERY_TEXT_REVIEW_REVISE_NEW_HOLDOUT_FAIL",
   "plan_revision": 1,
   "review_limit_reached": false,
   "review_round": 0,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
-  "state": "EXECUTING",
+  "state": "NEEDS_GPT_PLANNER",
   "task_key": "051_writing_style_rebuild",
   "text_review_required": true,
   "text_review_manifest_path": "results/051_writing_style_rebuild/text_review/text_inputs.json",
   "text_review_evidence_path": "results/051_writing_style_rebuild/text_review/TEXT_REVIEW.json",
-  "recovery_status": "GATE3_AB_RECOVERED_NEW_HOLDOUT_REPLAY_PASS_TEXT_REVIEW_INPUT_PREPARED"
+  "recovery_status": "ADDITIONAL_TEXT_REVIEW_REVISE_NEW_HOLDOUT_FAILED_STOP_NO_THIRD_HOLDOUT",
+  "latest_text_review": {
+    "workflow_run": "https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/34374037235",
+    "decision": "REVISE",
+    "status": "REVISE",
+    "evidence_sha256": "b91f2551439801c0cd12e31e674ed9bc3f189ae59d7612328571ab94f9b59be2",
+    "plaintext_artifact_sha256": "caf3d1fe2ea130f55b77225e8611e9b9a4e5c09f1858837e300337d1aa4d3e87",
+    "blocking_findings": 2,
+    "paid_call_number": 2,
+    "actual_model_cost_usd": "0.064988"
+  }
 }

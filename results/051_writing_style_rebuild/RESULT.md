@@ -772,3 +772,55 @@ Additional Text Review input is prepared but not yet reviewed:
 Current workflow state is Executor-owned `EXECUTING` with the next action:
 dispatch the single authorized additional Text Review, wait for evidence, and
 continue to final CI only if that review passes.
+
+## Additional Text Review Result
+
+The single authorized additional Text Review completed on 2026-09-09 and
+returned `REVISE`.
+
+- workflow run:
+  `https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/34374037235`
+- evidence:
+  `results/051_writing_style_rebuild/text_review/TEXT_REVIEW.json`
+- evidence SHA256:
+  `b91f2551439801c0cd12e31e674ed9bc3f189ae59d7612328571ab94f9b59be2`
+- reviewed plaintext SHA256:
+  `caf3d1fe2ea130f55b77225e8611e9b9a4e5c09f1858837e300337d1aa4d3e87`
+- model:
+  `gpt-5.6-terra`
+- paid call:
+  `2`
+- accounting:
+  `ACCOUNTING_VERIFIED`
+- cumulative reserved worst-case cost:
+  `USD 0.236004`
+- cumulative actual model cost:
+  `USD 0.131448`
+
+Item-level result:
+
+- Gate 3 A recovered candidate: `PASS`
+- Gate 3 B recovered candidate: `PASS`
+- Gate 3 C unchanged candidate: `PASS`
+- Gate 4 complete private report candidate: `PASS`
+- Gate 5 new fresh holdout candidate: `REVISE`
+
+Blocking findings:
+
+- `F-001`: the new holdout candidate contains visible internal
+  recovery/source-missing process leakage instead of only normal reader-facing
+  article content.
+- `F-002`: the new holdout candidate appears to stop at a key technical model
+  point, leaving an incomplete-feeling final reader artifact.
+
+This exhausts the explicitly authorized recovery path. The second Text Review
+was the final allowed paid review call for this campaign, and the new holdout
+failed. Per the user-authorized recovery boundary, no third holdout is selected
+and no additional paid review, final CI, version/changelog, production install
+smoke, Reviewer PASS, or integration step is started.
+
+Current workflow state is `NEEDS_GPT_PLANNER` for a fresh Planner/human
+decision on how to treat the failed recovery holdout. This is not a Gate 2
+routing failure: the recovery candidate still proves `scientific-rewrite`
+routing and heavy-route execution. It is also not a missing Text Review case:
+the additional Text Review evidence is present, valid, and `REVISE`.
