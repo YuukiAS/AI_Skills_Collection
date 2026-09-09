@@ -236,7 +236,7 @@
     "accounting_status": "ACCOUNTING_VERIFIED",
     "actual_model_cost_usd": "0.064988"
   },
-  "current_status": "FINAL_HOLDOUT_REPLAY_PASS_TEXT_REVIEW_INPUT_PREPARED",
+  "current_status": "NEEDS_GPT_PLANNER_AFTER_FINAL_TEXT_REVIEW_WORKFLOW_BUDGET_CONTRACT_MISMATCH",
   "final_bounded_recovery_authorization": "AUTHORIZED_ONE_FINAL_BOUNDED_GENERIC_RECOVERY_NEW_COMPLETE_HOLDOUT_ONE_ADDITIONAL_TEXT_REVIEW_STOP_IF_FAIL",
   "final_holdout": {
     "schema": "AI_SKILLS_051_FINAL_HOLDOUT_FREEZE_V1",
@@ -346,5 +346,14 @@
     "archived_second_text_review_revise": "results/051_writing_style_rebuild/text_review/TEXT_REVIEW.second_recovery_revise.json",
     "archived_second_text_review_revise_sha256": "b91f2551439801c0cd12e31e674ed9bc3f189ae59d7612328571ab94f9b59be2",
     "authorization": "exactly one final additional candidate-only gpt-5.6-terra Text Review, additional worst-case ceiling USD 0.25, automatic_retry=0, stop 051 if fail"
+  },
+  "final_text_review_workflow_result": {
+    "workflow_run": "https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/34379122780",
+    "workflow_status": "FAILURE",
+    "failed_step": "Run text review",
+    "error": "ERROR: paid review budget contract mismatch",
+    "paid_model_request_proven_sent": false,
+    "text_review_evidence_written": false,
+    "stop_reason": "pre-request budget/accounting contract could not prove safe; no retry under final recovery authorization"
   }
 }

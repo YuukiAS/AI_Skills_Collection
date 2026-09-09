@@ -929,3 +929,32 @@ Final additional Text Review input is prepared:
   user-authorized final call as `max_paid_calls=3`; the campaign reserved-cost
   ceiling remains `USD 0.50`, and the final call remains bounded by the
   `USD 0.25` per-call worst-case ceiling with `automatic_retry=0`.
+
+Final additional Text Review workflow result:
+
+- workflow run:
+  `https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/34379122780`
+- status:
+  `FAILURE`
+- failed step:
+  `Run text review`
+- observed error:
+  `ERROR: paid review budget contract mismatch`
+- Text Review evidence written:
+  `false`
+- paid model request proven sent:
+  `false`
+- automatic retry:
+  `0`
+
+The final recovery therefore stops before model review. The pre-request
+budget/accounting contract could not prove the final call safe, and the final
+recovery authorization allowed no retry. No further holdout replacement, paid
+review, final CI, version/changelog, production install smoke, Reviewer PASS or
+integration is started from this state.
+
+Current workflow state is `NEEDS_GPT_PLANNER` for a fresh Planner/human
+decision. This is not a new writing-style production-routing failure: the final
+holdout replay itself proved candidate consumption, selected
+`scientific-rewrite`, generated heavy-route receipt V2, and passed mechanical
+reader-facing leakage/fidelity/semantic checks.
