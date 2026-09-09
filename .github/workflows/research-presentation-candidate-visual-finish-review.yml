@@ -16,7 +16,7 @@ jobs:
     env:
       OPENAI_VISUAL_REVIEW_API_KEY: ${{ secrets.OPENAI_VISUAL_REVIEW_API_KEY }}
       OPENAI_VISUAL_REVIEW_MODEL: gpt-5.6-terra
-      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@3b061167794d593b113ca8f4a8a43c4c8000fc01
+      AI_BRIDGE_KIT_PIP_SPEC: gpt-codex-ai-bridge-kit[visual-review] @ git+https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git@5c894d98d3053c39cbda79cdbd0b8dfb4fbec4c0
       AI_BRIDGE_PAID_REVIEW_GIT_RESERVE: "1"
       TASK_KEY: 022_research_presentation_candidate_visual_finish_repair
       VISIBLE_TASK_KEY: 022_visual_finish_comparison
