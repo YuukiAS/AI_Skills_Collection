@@ -1,0 +1,22 @@
+{
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "task_key": "052_writing_style_reader_facing_generalization_closure",
+  "state": "EXECUTING",
+  "review_round": 0,
+  "max_review_rounds": 2,
+  "plan_revision": 0,
+  "max_plan_revisions": 1,
+  "base_commit": "cafe33f49467d28fe48ef90b571ca490529033d4",
+  "base_branch": "main",
+  "implementation_commit": null,
+  "ci_required": true,
+  "ci_status": "PENDING",
+  "last_review_decision": null,
+  "review_limit_reached": false,
+  "human_gate_reason": null,
+  "visual_review_required": false,
+  "text_review_required": true,
+  "text_review_manifest_path": "results/052_writing_style_reader_facing_generalization_closure/text_review/text_inputs.json",
+  "text_review_evidence_path": "results/052_writing_style_reader_facing_generalization_closure/text_review/TEXT_REVIEW.json",
+  "next_action": "EXECUTOR_RUN_052_READER_FACING_GENERALIZATION_CLOSURE"
+}

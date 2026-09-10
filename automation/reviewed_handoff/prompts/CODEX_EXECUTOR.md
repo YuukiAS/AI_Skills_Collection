@@ -63,6 +63,17 @@ Executor 没有 Planner/Reviewer authority。不得修改：
 
 如果 `CURRENT.text_review_required=true`，并且最终 user-facing text artifact 不能公开提交，Executor 必须使用 `ai-bridge text-review encrypt` 把完整 UTF-8 Markdown/plain-text artifact 加密为 `results/<task_key>/text_review/payload.age`，同时提交 `results/<task_key>/text_review/text_inputs.json`。不要提交 plaintext，不要把 OpenAI key 或 age private identity 写入 repo，不要用摘要、抽样段落或 Executor finding 替代完整文本。非 CI 任务进入 `READY_FOR_GPT_REVIEW` 前必须完成 encrypted payload + manifest；CI-required 任务进入 `WAITING_FOR_CI` 前也必须完成这些 text inputs，CI PASS 后才由 Scheduled GPT 进入 `READY_FOR_GPT_REVIEW` 并等待 GitHub Actions Text Review evidence。
 
+Text Review plaintext 必须只包含真实 candidate text，即 user-facing text。不要把
+`Gate`、`known regression`、`holdout`、`recovery`、`candidate`、`Planner`、
+`Reviewer`、`Executor`、task id、commit/hash/run id 或类似 transport/review
+wrapper label 放进被审正文；这些 identity 只能放在
+`text_inputs.json`、RESULT、manifest 或其他 metadata 中。多文档 packet 只能用
+自然文档标题区分，例如论文/报告标题或“Bloom filter 技术说明”，不得用 workflow
+身份命名文档。如果 Text Review finding 只命中 wrapper label，而真实 candidate
+bytes 没有该问题，必须分类为
+`REVIEW_PACKET_CONSTRUCTION_FAILURE`，先修 packet 构造，不能写成
+writing-style product failure。
+
 如果 Plan 的 acceptance 依赖真实 artifact 质量，Executor 交接时必须提供 Reviewer 能实际读取或查看的 artifact evidence：
 
 - 写作输出：完整 Markdown/PDF/report 的 repo-safe 路径、hash，或 Bridge Kit Text Review 落地后提供的 evidence locator；

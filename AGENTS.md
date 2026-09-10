@@ -318,6 +318,16 @@ reviewed/<task_key>
 
 规则：
 
+- 启动新的 AI_Skills_Collection Reviewed Handoff task 时，如果计划使用
+  `reviewed/<task_key>` 和 task-owned temporary worktree，kickoff / Goal 用户消息
+  应在开头明确写出并授权 exact branch 与 exact worktree。这样 branch/worktree
+  authorization 在执行开始时就是 current-user-visible authorization，而不是到
+  `git worktree add -b` 时才临时补问。
+- 本条只是 bootstrap ergonomics 规则，不是永久分支授权。`AGENTS.md` 不能冒充
+  current-user authorization；每个新 task 仍必须在 kickoff 中绑定 exact
+  `task_key`、`reviewed/<task_key>` branch 和 exact task-owned worktree。不得把它
+  扩大成任意 `reviewed/*`、任意 Git branch creation、Host Policy/execpolicy 修改、
+  Bridge Kit 修改、helper、CLI、schema 或 state machine。
 - 不同 plugin /明显独立 source area 的 task 可以并行推进；一个 branch 的 `WAITING_FOR_CI`、`READY_FOR_GPT_REVIEW`、`NEEDS_GPT_PLANNER`、visual-evidence wait 或用户输入等待，不得让另一个独立 branch 低频空等。
 - 同一 plugin、同一 shared runtime/schema/generator 或存在直接依赖的 task 不自动并行；先由 Planner/用户判断是否独立。
 - Scheduled GPT automation 必须显式绑定 task + branch，不得静默回落到 `main` 或改另一个 task branch。

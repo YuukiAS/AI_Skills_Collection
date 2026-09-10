@@ -115,6 +115,14 @@ CI、schema、protected-span、Executor summary、本地测试和 control-plane 
 
 如果 task 要求 Text Review，先机械确认 `TEXT_REVIEW.json` 存在，且绑定当前 `task_key`、`workflow_type=reviewed_handoff`、`implementation_commit`、text manifest identity 和 plaintext SHA-256。证据缺失时保持等待，不写 `REVIEW_<round>.md`，不消耗 `review_round`。证据 stale、malformed、plaintext SHA mismatch 或 manifest identity mismatch 时不得 PASS。Text Review 的 `overall_decision` 只是当前 Reviewer 消费的 evidence，不创建新的 GPT role。若 Text Review 给出 blocking `REVISE`，Scheduled GPT Reviewer 必须把它作为 frozen requirement failure 进入普通 `REVISE` 路径，不得把明显 failure 推给 human gate；只有达到既有 review round limit 时才走 `REVIEW_LIMIT` human gate。
 
+若 Text Review 的 blocking finding 只命中 plaintext packet 的 transport/review
+wrapper label，例如 `Gate`、`known regression`、`holdout`、`recovery`、
+`candidate`、`Planner`、`Reviewer`、`Executor`、task id、commit/hash/run id，
+而可定位的真实 candidate bytes 本身没有该问题，应分类为
+`REVIEW_PACKET_CONSTRUCTION_FAILURE`。这时 Reviewer 要求 Executor 重建只含真实 candidate text、
+用自然文档标题区分多文档的 packet；不得把 wrapper label failure
+当成 writing-style product failure，也不得把它改写成 PASS。
+
 明显违反 frozen requirement 的 artifact 质量问题必须由 Reviewer 自行阻断，不得推给 `AWAIT_HUMAN_DECISION`：明显违反用户明确规则、明显机器腔、明显 layout failure、明显 artifact regression，都是 `REVISE` 或真实不可恢复时 `BLOCKED` 的依据。Human gate 默认只用于真正互斥的产品/科研选择、frozen criteria 无法决定的主观偏好、用户必须亲自授权的外部动作、显著风险/成本/隐私/许可决定，或 frozen Plan 明确要求的最终人工验收。
 
 044 是本 prompt 的真实回归用例：用户报告 private `rewritten_report.md` 仍有 reader-facing `provenance`、`estimand`、`scientific gap`、`resource contract`、`state of the art` 等表达，违反 frozen writing requirement；Reviewer 未读取完整 artifact 却给 PASS。以后同类 writing/report task 只有读取完整 artifact 并确认这类明显问题已关闭，才允许 product/artifact PASS。

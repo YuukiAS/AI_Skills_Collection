@@ -1,6 +1,6 @@
 ---
 name: writing-fidelity
-description: Preserve facts, corrections, labels, structure, equations, citations, version authority, and final artifact identity during writing edits. Use for source-faithful Markdown, LaTeX, PDF, slides, reports, notes, and evidence-bound writing. Route Chinese natural-prose passes to chinese-prose and English scientific style passes to scientific-prose.
+description: Preserve facts, corrections, labels, structure, equations, citations, version authority, and final artifact identity during writing edits. Route Chinese natural-prose passes to chinese-prose, source-faithful structural scientific/technical rewrites to scientific-rewrite, and English scientific style passes to scientific-prose.
 status: active
 provenance: user-authored
 trusted: false
@@ -25,10 +25,17 @@ artifact.
 
 This is the preservation layer, not the style layer. Use it before or alongside
 style work when facts, protected spans, version labels, page/rendered artifact
-identity, or user corrections could be lost. Hand off natural Chinese prose,
-reader-facing "say it plainly" rewrites, and ordinary Chinese de-AI/template
-cleanup to `chinese-prose`. Hand off English scientific prose, evidence-strength
-calibration, and defensive/self-undermining wording to `scientific-prose`.
+identity, or user corrections could be lost. Route Chinese natural-prose passes
+to chinese-prose. Hand off natural Chinese prose, reader-facing "say it
+plainly" rewrites, and ordinary Chinese de-AI/template cleanup to
+`chinese-prose`. When the source is existing Chinese or
+Chinese-dominant scientific/technical material and the user asks for
+reorganization, structural rewrite, or document-level rewrite while preserving
+facts, numbers, formulas, citations, comparisons, conditions, limitations,
+paths, commands, or configuration details, hand off to `scientific-rewrite`
+instead of making `chinese-prose` the main route. Hand off English scientific prose,
+evidence-strength calibration, and defensive/self-undermining wording to
+`scientific-prose`.
 
 ## Non-Negotiable Rule
 
@@ -48,10 +55,13 @@ silently satisfy one constraint by violating another.
    attention to complaints about deletion, automatic rewriting, language
    changes, title changes, unreadable output, collisions, missing glyphs, OCR
    errors, formula spacing, or prior failed attempts.
-3. Mark protected spans before editing: titles, headings, section order, labels,
-   numbers, dates, units, formulas, variables, notation, code, paths, citations,
-   Chinese/English language spans, user comments, caveats, examples, and quoted
-   source text.
+3. Mark protected spans before editing. For `polish`, `layout`, and
+   `source-faithful reconstruction`, this includes titles, headings, section
+   order, labels, numbers, dates, units, formulas, variables, notation, code,
+   paths, citations, Chinese/English language spans, user comments, caveats,
+   examples, and quoted source text. For explicit structural rewrite routes,
+   apply the structural rewrite handoff below instead of treating headings and
+   source order as protected by default.
 4. Apply only the requested operation. For polishing, preserve substantive
    content. For layout, do not change wording. For OCR cleanup, fix corruption
    without canonicalizing valid source notation.
@@ -73,6 +83,11 @@ silently satisfy one constraint by violating another.
 
 - Use `chinese-prose` when the main request is "中文说人话", "改自然一点",
   "不要 AI 味", "别像日志", "普通英文能翻就翻", or "别每句话一个 bullet".
+- Use `scientific-rewrite` when the user provides existing Chinese or
+  Chinese-dominant scientific/technical material and asks to reorganize,
+  structurally rewrite, or rewrite the document into clearer Chinese while
+  preserving facts, numbers, formulas, citations, comparisons, conditions,
+  limitations, paths, commands, configuration keys, or other exact details.
 - Use `scientific-prose` when the main request is polishing English Results,
   captions, rebuttals, slide text, or scientific reports without overclaiming or
   sounding defensive.
@@ -106,6 +121,78 @@ than normalizing names into a cleaner but false story.
 - If the user's correction names a phrase as wrong or unnatural, treat that
   phrase as protected-negative text: avoid reintroducing it in headings, PDF
   titles, captions, status summaries, or final answers.
+
+## Structural Rewrite Handoff
+
+When a route such as `scientific-rewrite` explicitly declares
+`STRUCTURAL_REWRITE_AUTHORIZED_BY_TASK`, fidelity protects the content/evidence
+graph rather than the source's reader-facing structure.
+
+This handoff is valid only for explicit rewrite / structural rewrite / heavy
+scientific-rewrite tasks. It does not apply to ordinary polishing, layout, OCR
+cleanup, source-faithful reconstruction, or user-protected outlines.
+
+Under this handoff, these may change unless the user explicitly protected them:
+
+- reader-facing headings;
+- paragraph grouping;
+- paragraph order;
+- section order;
+- table organization;
+- where a local explanation is introduced.
+
+When the structural route provides a Reader Plan, fidelity ownership follows
+reader-question bundles, not the original paragraph positions. A bundle may
+combine non-contiguous source spans, split one dense source span into a list,
+table, or formula walkthrough, or move a local explanation near the claim it
+supports, provided the evidence and caveat that bind the claim move with it.
+
+These must still be preserved:
+
+- claims and polarity;
+- evidence, attribution, and citations;
+- conditions, comparators, caveats, uncertainty, and negative findings;
+- formulas, numbers, variables, datasets, methods, metrics, paths, and code
+  according to their literal location roles;
+- decision boundaries and conclusion strength.
+
+The acceptance criterion is complete proposition/evidence coverage with lower
+reader inference burden, not source order or compression. A structural rewrite
+may pass fidelity when headings or paragraph order change, but it fails if any
+proposition is omitted, duplicated as new ownership, reattributed, strengthened,
+weakened without authorization, or moved away from the caveat that limits it.
+
+Classify exact items as:
+
+- `inline-critical`: exact material that belongs in the reader-facing scientific
+  argument, such as numbers, formulas, metrics, datasets, method names,
+  comparison-defining identifiers, and citations that support nearby claims.
+- `relocatable-trace`: exact material that must remain somewhere in the final
+  deliverable but can move to a technical/evidence appendix, such as repository
+  paths, checkpoint paths, exhaustive file identities, implementation locators,
+  and detailed audit trails.
+- `internal-workflow-trace`: exact material that describes the current
+  automation/review workflow rather than the scientific or technical subject,
+  such as Reviewed Handoff state, Gate numbers, Planner/Reviewer/Executor
+  status, CI/test summaries, Git commit hashes, branch/worktree status,
+  GitHub Actions run ids, task-local `results/`, `exports/private/`,
+  `automation/reviewed_handoff/`, `.local-runtime/`, plugin-cache paths, or
+  `CURRENT.json` / `RESULT.md` / `FINAL_REPORT.md`.
+
+Relocation cannot hide or delete limitations, negative results, uncertainty,
+contradicting evidence, decision conditions, attribution, or comparison
+boundaries. Ordinary reader-facing headings and internal workflow labels are not
+literal-protected by default. An `inline-critical` item is not preserved if it
+appears only in a technical appendix, token inventory, receipt, or trace list;
+it must remain in the reader-facing scientific context.
+
+For a clean reader-facing scientific/technical rewrite, `internal-workflow-trace`
+is not preserved by dumping it into prose. Use it only to understand artifact
+authority and to avoid false claims. Omit it from the final candidate unless the
+user explicitly requests an audit log, release handoff, or repository status
+report. A final candidate fails fidelity/readability if it mixes scientific
+conclusions with workflow state, CI results, commit ids, task paths, or review
+status as if those were part of the scientific argument.
 
 ## Red Flags
 

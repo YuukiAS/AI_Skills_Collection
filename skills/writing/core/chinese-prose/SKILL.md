@@ -1,6 +1,6 @@
 ---
 name: chinese-prose
-description: 中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和“说人话”终审。任何中文 Markdown/PDF/报告/README/面向用户或读者的中文内容都应自动触发本 skill，用于中文为主、降低 AI 味/翻译腔/模板腔/宣传腔、移除非必要英文、修正版本/阶段名误用和机器字段先行，同时保护事实、数字、术语、命令、引用、实验结果、证据边界和中文读者习惯。
+description: 中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和“说人话”终审。任何中文 Markdown/PDF/报告/README/面向用户或读者的中文内容都应自动触发本 skill，用于普通中文润色、中文为主、降低 AI 味/翻译腔/模板腔/宣传腔，并保护事实、数字、术语、命令、引用、实验结果和证据边界。
 status: active
 provenance: local
 trusted: true
@@ -17,9 +17,11 @@ license: MIT-compatible synthesis plus public-domain style guidance
 ---
 # 中文自然表达终审
 
-本 skill 用作中文报告、README、技术文档、科研进展记录、Markdown/PDF 成稿和面向读者的中文说明的最后审校。目标不是把文字改得随意，而是让它清楚、真实、符合中文读者习惯，并且不像模型套话。
+本 skill 用作中文报告、README、技术文档、科研进展记录、Markdown/PDF 成稿和面向读者的中文说明的普通润色、说人话处理和最后审校。目标不是把文字改得随意，而是让它清楚、真实、符合中文读者习惯，并且不像模型套话。
 
 这不是事实核查、文件转换、AI 检测规避或伪原创工具。它只处理中文读者看到的表达质量：在 `writing-fidelity` 的保真底线之上，把机器味、翻译腔、模板腔和不必要英文降下来。
+
+如果用户给的是已有中文或中文为主的科研/技术材料，并要求重新组织、结构性重写或文档级重写，同时要求保留事实、数字、公式、引用、比较条件、限制、路径、配置或命令等精确信息，不要把本 skill 当主路线；应交给 `scientific-rewrite`。本 skill 只在该重路线内部承担 `REALIZE_MEANING` 中文实现角色，或在最终候选稿生成后做自然表达终审。
 
 ## 使用场景
 
@@ -32,6 +34,8 @@ license: MIT-compatible synthesis plus public-domain style guidance
 - 将中英混杂的技术文字改成稳定的中文文档风格。
 - 中文技术文档、报告、README 或提示词里出现大量非必要英文，需要改成中文为主、只保留必要英文。
 
+明确排除：已有科研/技术材料的 source-faithful structural rewrite。只要任务同时具备“已有中文或中文为主的科研/技术材料”“要求重新组织或结构性重写”“要求保留事实、数字、公式、引用、比较条件、限制、路径、配置或命令”等精确信息，应 hand off 给 `scientific-rewrite`，不要停留在本 skill 的普通润色路线。
+
 不要用本 skill 做事实核查、逐字翻译、模仿品牌文案，或改写代码、日志、命令。单纯渲染中文 PDF、检查字体或转换格式时，本 skill 作为成稿可读性验收配合使用，不替代 PDF/文档工具。
 
 也不要把本 skill 用成 humanizer、AI detector evasion 或隐藏 AI 来源的工具。可以减少套话和模板腔，但不能伪装来源，不能删除真实 limitation，不能为了自然而改掉证据边界。
@@ -41,6 +45,38 @@ license: MIT-compatible synthesis plus public-domain style guidance
 先保真，再自然。中文为主，必要英文才保留。
 
 正文优先用连贯段落。列表只在步骤、并列比较、验收清单、证据清单、组会提纲或确实需要快速扫描时使用。不要为了显得结构化把每句话拆成 bullet，也不要把一两句话拆成一个小标题。不要强行凑三点式、对称排比、重复总结或固定“首先/其次/此外/综上”。
+
+对于明确授权的 heavy scientific rewrite，列表、表格和公式拆解可以是正文结构的一部分，不按“少用列表”机械压回长段。判断标准不是候选稿更短，而是读者能不能少做跨段推理、少猜英文普通词的中文关系、少在公式和结论之间来回跳。
+
+## REALIZE_MEANING
+
+`REALIZE_MEANING` 是 `scientific-rewrite` heavy Chinese rewrite 路线调用的中文实现模式。它不直接读原文段落来改写，而是把已经固定的 Meaning Map / Reader Plan / exact item 变成读者能顺着读的中文。
+
+正式 drafting input surface 只能包含：
+
+- audience / register；
+- bundle purpose / reader question；
+- relevant meaning records；
+- relevant relation records；
+- required exact item identities/formulas；
+- neighboring bundle purposes/dependencies；
+- information shape；
+- optional structured repair instruction。
+
+不得把以下内容作为写作输入交给本模式：raw source paragraph/sentence、source excerpt、source quotation、source tail/preview、Latin-span inventory、QA ledger、`exact_identity/useful_recognition/ordinary_reasoning` 分类、literal seed rewrite template、previous rejected candidate、manual GPT reference output。
+
+本模式可以做的中文实现操作包括：
+
+- `DIRECT_RELATION`：把比较、因果、限制、下一步关系直接说清；
+- `QUESTION_FIRST`：先回答读者正在追的问题；
+- `METHOD_MENTAL_MODEL`：先给方法直觉，再保留正式方法名；
+- `FORMULA_WALKTHROUGH`：先说公式回答什么，再给公式和符号含义；
+- `CLAIM_WITH_BOUNDARY`：先给有边界的判断，再把 caveat 放近；
+- `DECOMPRESS_NOUN_STACK`：把英文名词链拆成中文关系；
+- `PARALLEL_TO_STRUCTURE`：把并列条件、方法或结果改成清楚列表/表格；
+- `REMOVE_INTERNAL_FRAME`：去掉 reader-facing 正文里不该出现的审计、流程和任务标签。
+
+当 `scientific-rewrite` 已经生成 Reader Plan 时，本 skill 的终审只读取最终候选稿和 Reader Plan，不回看源文档改写正文。终审必须确认：候选稿是否回答 Reader Plan 里的读者问题；英文残留是否分别属于精确身份、必要识别名或应该中文化的普通推理词；公式是否有中文语义说明；证据边界和不确定性是否仍在读者主线里。发现问题时返回需要返修的原因，不能用“整体更流畅”覆盖缺项。
 
 除非用户明确要求，否则不要改动以下内容：
 
@@ -65,6 +101,11 @@ license: MIT-compatible synthesis plus public-domain style guidance
 - 中文 PDF/Markdown 的可见标题和开头没有回答“现在完成了什么或卡在哪里、为什么、下一步做什么”。
 - 导师/组会材料在用户没有要求时，自动加入“30 秒版本”“3 分钟版本”“如果只有 X 分钟”“可以这样讲”等时间脚本或讲稿模板。
 - 导师面对的科研报告把 `audit: PASS`、commit、job id、preflight、correction round 等内部执行状态提升为主叙事。
+- 科研/技术重写候选稿把 Reviewed Handoff、Gate、Planner/Reviewer/Executor、
+  Text Review、CI、commit、branch、GitHub Actions、`results/`、
+  `exports/private/`、`automation/reviewed_handoff/`、`.local-runtime/` 或
+  `CURRENT.json` / `RESULT.md` / `FINAL_REPORT.md` 当作读者正文，而不是只在
+  明确要求的审计/交接附录中出现。
 
 如果触发的是中文成稿验收，第一段必须先给人能读懂的判断；证据路径、命令、字段、日志和机器状态放在后面的证据区或括号说明。
 

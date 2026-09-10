@@ -177,6 +177,24 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
         self.assertIn("Private/text artifact review 的底层 owner 是 `GPT_Codex_AI_Bridge_Kit`", agents)
         self.assertIn("Private/text artifact review is owned by `GPT_Codex_AI_Bridge_Kit` Text Review", maintainer)
 
+    def test_text_review_packet_plaintext_excludes_workflow_wrappers(self) -> None:
+        executor = (ROOT / "automation/reviewed_handoff/prompts/CODEX_EXECUTOR.md").read_text(encoding="utf-8")
+        scheduled = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(
+            encoding="utf-8"
+        )
+
+        for text in (executor, scheduled):
+            self.assertIn("Text Review", text)
+            self.assertIn("真实 candidate text", text)
+            self.assertIn("Gate", text)
+            self.assertIn("known regression", text)
+            self.assertIn("holdout", text)
+            self.assertIn("commit/hash/run id", text)
+            self.assertIn("自然文档标题", text)
+            self.assertIn("REVIEW_PACKET_CONSTRUCTION_FAILURE", text)
+
+        self.assertIn("不得把 wrapper label failure\n当成 writing-style product failure", scheduled)
+
     def test_review_pass_defaults_to_integration_closure_without_human_gate(self) -> None:
         agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
         planner = (ROOT / "automation/reviewed_handoff/prompts/PLANNER.md").read_text(encoding="utf-8")
