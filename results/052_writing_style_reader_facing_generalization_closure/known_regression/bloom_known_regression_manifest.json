@@ -1,0 +1,97 @@
+{
+  "schema": "AI_SKILLS_052_KNOWN_REGRESSION_MANIFEST_V1",
+  "task_key": "052_writing_style_reader_facing_generalization_closure",
+  "regression_id": "KNOWN_REGRESSION_BLOOM_SOURCE_PROCESS_FRAME",
+  "status": "PASS",
+  "not_fresh_holdout": true,
+  "historical_source": {
+    "task_key": "051_writing_style_rebuild",
+    "final_state": "STOPPED / NOT_RELEASED / FINAL_TEXT_REVIEW_REVISE",
+    "evidence_path": "results/051_writing_style_rebuild/text_review/TEXT_REVIEW.json",
+    "historical_finding": "Bloom candidate was rejected for source-process framing such as source/original-text references.",
+    "budget_reuse_allowed": false
+  },
+  "source": {
+    "locator": "results/052_writing_style_reader_facing_generalization_closure/known_regression/bloom_filter_wikipedia_excerpt.md",
+    "sha256": "7208e615cf53f1f12e4e6ce91408815b1e0e267f0803a8931fcdc37c697099ad",
+    "bytes": 6631,
+    "lines": 38,
+    "public_source_title": "布隆过滤器 - 维基百科，自由的百科全书",
+    "public_source_url": "https://zh.wikipedia.org/wiki/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8",
+    "raw_fetch_sha256": "d30d36e93e0c366d32de91261ba6fe49d1e51a06cd33736b1b5e2b48fb8fd54f",
+    "license_note": "Wikipedia text is available under CC BY-SA; this is a public-safe known-regression source, not a fresh holdout.",
+    "document_family": "public technical encyclopedia article about Bloom filters",
+    "selection": "lead paragraph plus complete Basic Concept, Algorithm Description, and Pros/Cons sections",
+    "exact_range": "raw wikitext lines 1-31 plus local attribution header"
+  },
+  "semantic_completeness_preflight": {
+    "performed_before_generation": true,
+    "selected_sections": [
+      "lead",
+      "基本概念",
+      "算法描述",
+      "优劣分析"
+    ],
+    "stops_before_next_section": "时间与空间优势",
+    "last_line_has_sentence_terminator": true,
+    "does_not_end_mid_sentence": true,
+    "does_not_end_mid_list": true,
+    "does_not_end_before_referenced_equation": true,
+    "does_not_end_inside_truncated_section": true,
+    "contains_next_section": false
+  },
+  "task": {
+    "locator": "results/052_writing_style_reader_facing_generalization_closure/known_regression/BLOOM_REWRITE_TASK.md",
+    "sha256": "47028175f0418cf06bafdc4533b7d877539f25f45a58d8691acb38f9602cd45b",
+    "ordinary_user_prompt": true,
+    "forced_route": false
+  },
+  "acceptance_questions": [
+    "Does the candidate read as a complete reader-facing Chinese technical explanation rather than process commentary?",
+    "Does it preserve Bloom filter purpose, bit-array/hash-function mechanism, false-positive and no-false-negative boundary, deletion limitation, and pros/cons?",
+    "Does it avoid source-process framing such as 原文指出, 原文同时提到, 根据给定材料, 源文, or 这里保留原文?",
+    "Does it avoid workflow wrapper labels such as Gate, known regression, holdout, recovery, candidate, Planner, Reviewer, Executor, task id, commit, hash, or workflow run in reader-facing prose?"
+  ],
+  "production_freeze": {
+    "production_changes_allowed_during_replay": false,
+    "holdout_status": "NOT_A_FRESH_HOLDOUT"
+  },
+  "replay": {
+    "run_dir": ".local-runtime/candidate-plugin-replay/runs/20260910T141231Z-2710705",
+    "candidate_commit": "e3ba60f245f1d9fae987af4957a4199e22001aa4",
+    "candidate_identity": "writing-style@ai-skills-candidate",
+    "runtime_version": "codex-cli 0.153.4",
+    "actual_consumption_proven": true,
+    "actual_consumption_event_type": "item.started",
+    "candidate_locator": "results/052_writing_style_reader_facing_generalization_closure/known_regression/replay/bloom_candidate.md",
+    "candidate_sha256": "24896e21ebc75b33497e5df96ab3be81560243d90223a8cdb7f09cc0115002b0",
+    "candidate_bytes": 5455,
+    "route_selection_sha256": "cd99196bb288f8c254a85fc1f47a87185b595aa9f0737a0691e477bc5c1e57bd",
+    "semantic_audit_sha256": "302d2de131362a03f99d27b4c48188166a72b1f2bb4c7a054165cc266a81c307",
+    "stage_receipt_sha256": "ec007d770ed07b74ca736f376cb1876cea983c09b07d39691f4cd2564520cb46",
+    "reader_facing_internal_frame": {
+      "ok": true,
+      "internal_workflow_leak_count": 0
+    },
+    "standalone_reader_frame": {
+      "ok": true,
+      "source_process_frame_count": 0
+    },
+    "semantic_audit": {
+      "ok": true,
+      "finding_count": 0
+    },
+    "exact_verification": {
+      "ok": true,
+      "exact_item_count": 18
+    },
+    "wrapper_scan": {
+      "ok": true,
+      "hits": 0
+    },
+    "cleanup": {
+      "candidate_marketplace_removed_by_helper": true,
+      "production_same_name_identity_unchanged_by_helper": true
+    }
+  }
+}
