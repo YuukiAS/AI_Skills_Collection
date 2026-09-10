@@ -214,6 +214,13 @@ Safer alternatives were checked first:
 - process-local marketplace config with `plugins.writing-style@yuukias-ai-skills.enabled=true`
   produced a natural rewrite, but the JSONL showed it consumed the existing
   live `writing-style/0.1` cache rather than the 052 `0.2` payload.
+- `codex plugin` CLI help exposes `-c` configuration overrides, but no
+  `--ignore-user-config` or isolated plugin-store option for `plugin add/list`;
+- both subcommand-level and top-level `-c marketplaces.yuukias-ai-skills.source=...`
+  checks still reported the live marketplace root
+  `/overflow/htzhu/mingcheng_new/AI_Skills_Collection`;
+- a fresh `/tmp` `CODEX_HOME` read-only check also still reported the same live
+  installed `writing-style@yuukias-ai-skills` 0.1 identity.
 
 The only currently observed path that would verify the exact production
 identity is a bounded live smoke: temporarily point the live
