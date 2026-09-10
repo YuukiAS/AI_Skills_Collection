@@ -32,6 +32,7 @@ CENTRAL_PLUGIN_NAMES = [
 ]
 EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
     "ai-skills-core": "0.2",
+    "writing-style": "0.2",
     "presentations": "0.3",
 }
 REPOSITORY_SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
@@ -193,8 +194,16 @@ class CodexMarketplaceTests(unittest.TestCase):
         plugin_versions = {plugin["name"]: plugin["version"] for plugin in config["plugins"]}
         self.assertEqual(plugin_versions, EXPECTED_PLUGIN_VERSIONS)
         self.assertEqual(
-            {name: version for name, version in plugin_versions.items() if name not in {"ai-skills-core", "presentations"}},
-            {name: "0.1" for name in CENTRAL_PLUGIN_NAMES if name not in {"ai-skills-core", "presentations"}},
+            {
+                name: version
+                for name, version in plugin_versions.items()
+                if name not in {"ai-skills-core", "writing-style", "presentations"}
+            },
+            {
+                name: "0.1"
+                for name in CENTRAL_PLUGIN_NAMES
+                if name not in {"ai-skills-core", "writing-style", "presentations"}
+            },
         )
         for plugin_version in plugin_versions.values():
             self.assertRegex(plugin_version, PLUGIN_VERSION_RE)

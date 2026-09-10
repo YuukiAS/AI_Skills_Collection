@@ -4,6 +4,37 @@
 
 No unreleased changes.
 
+## 5.0.4 - 2026-09-10
+
+Repository `5.0.4` is a compatible release for writing-style reader-facing scientific/technical rewrite hardening.
+
+Repository bump decision: PATCH
+Reason: this release improves an existing central plugin's production writing behavior without adding a new repository-level capability or breaking existing contracts.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `writing-style` | `0.1` | `0.2` |
+
+Affected plugins:
+- `writing-style`: `0.1` -> `0.2`
+  Reason: standalone Chinese scientific/technical rewrites now reject source-process framing in reader-facing prose, preserve legitimate attribution, and keep Text Review packets free of workflow wrapper labels.
+
+Unchanged plugin versions: `workflow-core 0.1`, `ai-skills-core 0.2`, `research-writing 0.1`, `presentations 0.3`, `scientific-visualization 0.1`, `web-development 0.1`, `statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- `writing-style` scientific-rewrite semantics now require standalone reader-facing technical prose to state content directly instead of saying things like "原文指出" or "根据给定材料" unless the task explicitly asks for source comparison, editing commentary, peer review, provenance, or audit.
+- Text Review packet construction for Reviewed Handoff now keeps workflow/run/review labels in metadata rather than in the reviewed prose body.
+- 052 regression evidence covers the Bloom known regression, unrelated writing-style compatibility replays, two frozen public-safe fresh holdouts, one Terra Text Review, and the full Codex Marketplace release workflow.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelog:
+
+- `docs/plugin-changelogs/writing-style.md`
+
 ## 5.0.3 - 2026-09-01
 
 Repository `5.0.3` is a compatible release for YuukiAS/TRACE render-resource routing hardening.

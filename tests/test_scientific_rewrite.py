@@ -477,7 +477,7 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
         generated_skill = REPO_ROOT / "plugins/codex/plugins/writing-style/skills/scientific-rewrite/SKILL.md"
         generated_helper = load_helper_from(GENERATED_HELPER_PATH, "generated_scientific_rewrite_support")
 
-        self.assertEqual(plugin_json["version"], "0.1")
+        self.assertEqual(plugin_json["version"], "0.2")
         self.assertTrue(generated_skill.exists())
         self.assertTrue(GENERATED_HELPER_PATH.exists())
         self.assertEqual(generated_helper.RUNTIME_SCHEMA, helper.RUNTIME_SCHEMA)

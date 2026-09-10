@@ -37,11 +37,11 @@ cd /path/to/project
 ai-skills install --target repo --profile research-main --mode symlink --write-agents-md
 ```
 
-当前整个仓库 / CLI 版本是 `5.0.3`。
+当前整个仓库 / CLI 版本是 `5.0.4`。
 
-Repository / CLI release: `5.0.3`.
+Repository / CLI release: `5.0.4`.
 
-仓库版本和插件版本是两回事。仓库现在是 `5.0.3`，中央插件各自独立记版本。以后可能出现 `AI_Skills_Collection 5.0.4`、`presentations 0.4`、`research-writing 0.2` 这样的组合，这是正常的。
+仓库版本和插件版本是两回事。仓库现在是 `5.0.4`，中央插件各自独立记版本。以后可能出现 `AI_Skills_Collection 5.0.5`、`presentations 0.4`、`research-writing 0.2` 这样的组合，这是正常的。
 
 `ai-skills-core` 是内部 plugin slug，保持不变。用户界面里它显示为 `AI Skills Maintainer`，意思是维护中央插件时伴随加载的维护同伴，而不是一个替代 `presentations`、`writing-style`、`statistical-modeling` 等专业插件的领域插件。
 
@@ -90,7 +90,7 @@ codex plugin marketplace add \
 |---|---:|---|---|---|
 | `workflow-core` | `0.1` | `unclassified` | 复杂任务的执行顺序、检查和收尾 | [workflow-core](docs/plugin-changelogs/workflow-core.md) |
 | `ai-skills-core` | `0.2` | `unclassified` | `AI Skills Maintainer`：中央插件改进的维护同伴，检查来源、待办、生成层、回放、回归、版本和 changelog | [ai-skills-core](docs/plugin-changelogs/ai-skills-core.md) |
-| `writing-style` | `0.1` | `unclassified` | 保留原意，改善中文和英文科研表达 | [writing-style](docs/plugin-changelogs/writing-style.md) |
+| `writing-style` | `0.2` | `unclassified` | 保留原意，改善中文和英文科研表达 | [writing-style](docs/plugin-changelogs/writing-style.md) |
 | `research-writing` | `0.1` | `unclassified` | 报告、论文、文献和引用 | [research-writing](docs/plugin-changelogs/research-writing.md) |
 | `presentations` | `0.3` | `baseline` | 科研组会、研究汇报、商务 Presentation 的规划和返修 | [presentations](docs/plugin-changelogs/presentations.md) |
 | `scientific-visualization` | `0.1` | `unclassified` | 科研图、配色、示意图、海报和图形检查 | [scientific-visualization](docs/plugin-changelogs/scientific-visualization.md) |
