@@ -1,0 +1,63 @@
+{
+  "schema": "AI_SKILLS_052_FRESH_HOLDOUT_BATCH_MANIFEST_V1",
+  "task_key": "052_writing_style_reader_facing_generalization_closure",
+  "status": "FROZEN_PENDING_REPLAY",
+  "frozen_before_candidate_generation": true,
+  "candidate_generation_started": false,
+  "batch_size": 2,
+  "replacement_allowed": false,
+  "holdouts": [
+    {
+      "id": "holdout_1_python_re_docs",
+      "document_family": "official software technical documentation",
+      "language": "Chinese",
+      "public_safe": true,
+      "source_url": "https://docs.python.org/zh-cn/3/library/re.html",
+      "fetched_html_sha256": "08c9753951fbbeaf5c7512ac8c72c1e5ca9f22e63bc5998113e6e80fc5dda47d",
+      "fetched_html_bytes": 248163,
+      "source_path": "results/052_writing_style_reader_facing_generalization_closure/fresh_holdouts/holdout_1_python_re_docs/source.md",
+      "task_path": "results/052_writing_style_reader_facing_generalization_closure/fresh_holdouts/holdout_1_python_re_docs/TASK.md",
+      "source_sha256": "95ca7143c0a151dd79d0a690a5234834209b6411b7d399babb3cce7f28ab773e",
+      "task_sha256": "69cf8e0c60e263416d8591ae047001c86207bfaa8c44556a2bbe1872c0137499",
+      "semantic_completeness_preflight": "PASS",
+      "completeness_evidence": "Uses the complete introductory prose of the Python re module page before the first h2 section; no paragraph is cut mid-sentence, list, formula, definition, or section.",
+      "not_used_in_051_or_052_tuning": true,
+      "not_workflow_ci_final_report_task_result_or_plugin_source": true
+    },
+    {
+      "id": "holdout_2_fft_wikipedia",
+      "document_family": "technical encyclopedia article",
+      "language": "Chinese-dominant",
+      "public_safe": true,
+      "source_url": "https://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2",
+      "fetched_wikitext_sha256": "97502f2f6f2f4ab2d983991f177018e25f0ea0cdfd60efb8213d0f89eedfb20f",
+      "fetched_wikitext_bytes": 43462,
+      "source_wikitext_lines": "13-42",
+      "source_path": "results/052_writing_style_reader_facing_generalization_closure/fresh_holdouts/holdout_2_fft_wikipedia/source.md",
+      "task_path": "results/052_writing_style_reader_facing_generalization_closure/fresh_holdouts/holdout_2_fft_wikipedia/TASK.md",
+      "source_sha256": "0812403bda762f02f2dc8ef9908ad9187af1345f59e914104115bed79e8f0c9d",
+      "task_sha256": "d6c60dbff8b5a03b7097f0aa8ac4b11671bcfbe68da8c87c4a51549e9c817568",
+      "semantic_completeness_preflight": "PASS",
+      "completeness_evidence": "Uses the article lead plus complete 定义和速度 section, ending immediately before the next section heading; no sentence, formula, list, definition, or section is cut.",
+      "not_used_in_051_or_052_tuning": true,
+      "not_workflow_ci_final_report_task_result_or_plugin_source": true
+    }
+  ],
+  "batch_constraints": {
+    "exactly_two_holdouts": true,
+    "different_document_families": true,
+    "chinese_or_chinese_dominant": true,
+    "real_reader_facing_scientific_or_technical_prose": true,
+    "no_third_replacement_if_failure": true,
+    "production_candidate_may_not_change_after_freeze": true
+  },
+  "local_gate_order": [
+    "focused_tests",
+    "bloom_known_regression",
+    "unrelated_light_chinese_polish",
+    "fidelity_only_regression",
+    "english_scientific_prose_regression",
+    "fresh_holdout_1",
+    "fresh_holdout_2"
+  ]
+}
