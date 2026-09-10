@@ -1,6 +1,6 @@
 # Result - 052_writing_style_reader_facing_generalization_closure
 
-status: EXECUTING_PARTIAL
+status: EXECUTING_TEXT_REVIEW_PENDING
 
 ## Summary
 
@@ -8,14 +8,13 @@ status: EXECUTING_PARTIAL
 `reviewed/052_writing_style_reader_facing_generalization_closure`:
 
 ```text
-7db1a09b0b8a5e90255888d6e9a4a9d84791d3b5
+92ad279a11653486e726ed8cadb57bed5523af65
 ```
 
 This is not a PASS, not `READY_FOR_GPT_REVIEW`, and not `WAITING_FOR_CI`.
-The frozen Plan requires Bloom known-regression replay, two fresh public-safe
-holdouts, one Terra Text Review, full/release CI, production install/upgrade
-smoke, GPT Reviewer, final user ACCEPT, and integration to latest `main`.
-Those gates have not completed.
+The frozen Plan still requires one Terra Text Review, full/release CI,
+production install/upgrade smoke, GPT Reviewer, final user ACCEPT, and
+integration to latest `main`. Those gates have not completed.
 
 ## Implemented
 
@@ -58,6 +57,22 @@ Focused evidence added by tests:
 - stage-package validation includes the standalone reader frame gate;
 - Text Review packet rules forbid wrapper labels from reviewed plaintext.
 
+Candidate replay gates now passed:
+
+- Bloom known regression:
+  `results/052_writing_style_reader_facing_generalization_closure/known_regression/bloom_known_regression_manifest.json`;
+- unrelated light Chinese polish, fidelity-only, and English scientific-prose
+  regressions:
+  `results/052_writing_style_reader_facing_generalization_closure/unrelated_regressions/unrelated_regressions_manifest.json`;
+- exactly two frozen fresh public-safe holdouts:
+  `results/052_writing_style_reader_facing_generalization_closure/fresh_holdouts/fresh_holdout_batch_manifest.json`.
+
+The fresh holdout batch was frozen before generation, contains exactly two
+different public-safe document families, and used no replacement item. Both
+fresh candidates were generated through the canonical candidate replay helper
+with `writing-style@ai-skills-candidate` and passed local source-process /
+internal-wrapper audits.
+
 ## 051 Historical Evidence
 
 051 remains:
@@ -97,15 +112,30 @@ or source tree, and could not execute the production refinement. This is useful
 negative evidence about replay input scope, not proof that the 052 writing-style
 candidate passed or failed.
 
+## Text Review Input
+
+Encrypted input for the single final Terra Text Review has been prepared:
+
+```text
+results/052_writing_style_reader_facing_generalization_closure/text_review/payload.age
+results/052_writing_style_reader_facing_generalization_closure/text_review/text_inputs.json
+```
+
+The temporary plaintext packet is not committed. Its SHA-256 is recorded in the
+manifest as:
+
+```text
+1ef1c0e09653bd1b16208ef8b4a6888c50e60068ba796ab8cc373f46dd910913
+```
+
+The plaintext packet contains only natural document titles plus the Bloom,
+Python `re`, and FFT final candidate text. It excludes workflow labels,
+review/run identity, hashes, and non-reader-facing HTML comments.
+
 ## Not Completed
 
 The following frozen gates remain pending:
 
-- Bloom known regression using 052 production candidate;
-- two fresh public-safe holdouts frozen as a complete batch before generation;
-- unrelated light Chinese polish regression;
-- fidelity-only regression;
-- English scientific-prose regression;
 - one final Terra Text Review on candidate-only plaintext for Bloom plus the
   two fresh holdouts;
 - full/release CI;

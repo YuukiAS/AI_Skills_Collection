@@ -1,0 +1,25 @@
+{
+  "external_upload_authorization": "Frozen 052 goal authorizes exactly one final candidate-only Text Review through GitHub Actions using OpenAI Responses API with store=false, model gpt-5.6-terra, max one paid call, worst-case <= USD 0.25, automatic retry 0; plaintext contains only public-safe final candidate text and natural document titles.",
+  "identity_bindings": {
+    "implementation_commit": "92ad279a11653486e726ed8cadb57bed5523af65"
+  },
+  "input": {
+    "ciphertext_sha256": "36ec588fdc12a05968dc36d98f1b2d8a5c8f551f6b22d2a5d4e7731f68bf30e3",
+    "encrypted_payload_path": "results/052_writing_style_reader_facing_generalization_closure/text_review/payload.age",
+    "logical_id": "primary_text",
+    "mime_type": "text/markdown; charset=utf-8",
+    "plaintext_sha256": "1ef1c0e09653bd1b16208ef8b4a6888c50e60068ba796ab8cc373f46dd910913",
+    "plaintext_size_bytes": 9185,
+    "source_basename": "ai-skills-052-text-review-plaintext.md"
+  },
+  "paid_review_campaign_id": "052_writing_style_reader_facing_generalization_closure",
+  "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
+  "prompt_version": "ai-bridge.text-review.v1",
+  "review_kind": "final_candidate_reader_facing_text",
+  "rubric": {
+    "instructions": "Read the complete three-document candidate packet. Decide whether the reader-facing Chinese technical prose satisfies 052: no source-process framing such as 原文指出 / 根据给定材料 / 源文说明, no workflow or review wrapper labels in the reviewed body, no obvious semantic drift of key formulas, technical objects, limits, or stated uncertainty. Return PASS only if all three documents satisfy the frozen reader-facing requirements; otherwise return REVISE with blocking findings."
+  },
+  "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1",
+  "task_key": "052_writing_style_reader_facing_generalization_closure",
+  "workflow_type": "reviewed_handoff"
+}
