@@ -63,6 +63,7 @@ pnpm-debug.log*
 # Project-local generated state
 # -----------------------------------------------------------------------------
 .cache/
+.local-runtime/
 todo/
 .tmp/skill-intake/
 .tmp/archive/
