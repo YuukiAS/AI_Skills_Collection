@@ -1,0 +1,19 @@
+{
+  "task_key": "052_writing_style_reader_facing_generalization_closure",
+  "authorized_by": "current user message",
+  "scope": {
+    "marketplace": "yuukias-ai-skills",
+    "plugin": "writing-style@yuukias-ai-skills",
+    "candidate_worktree": "/tmp/ai-skills-052-20260910",
+    "candidate_version": "0.2",
+    "purpose": "052 bounded live production install/upgrade smoke and exactly one ordinary natural production routing smoke",
+    "restore": "restore original marketplace source and original writing-style plugin installation/state immediately after smoke"
+  },
+  "forbidden": [
+    "other plugins",
+    "global Codex upgrade",
+    "Host Policy / Bridge Kit / execpolicy changes",
+    "other live global state",
+    "force/destructive Git"
+  ]
+}

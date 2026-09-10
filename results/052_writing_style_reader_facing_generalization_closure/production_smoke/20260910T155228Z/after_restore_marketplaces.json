@@ -1,0 +1,24 @@
+{
+  "marketplaces": [
+    {
+      "name": "openai-bundled",
+      "root": "/overflow/htzhu/mingcheng_new/.codex-homes/aereinh/.tmp/bundled-marketplaces/openai-bundled",
+      "marketplaceSource": {
+        "sourceType": "local",
+        "source": "/overflow/htzhu/mingcheng_new/.codex-homes/aereinh/.tmp/bundled-marketplaces/openai-bundled"
+      }
+    },
+    {
+      "name": "openai-curated",
+      "root": "/overflow/htzhu/mingcheng_new/.codex-homes/mingcheng_new/.tmp/plugins"
+    },
+    {
+      "name": "yuukias-ai-skills",
+      "root": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection",
+      "marketplaceSource": {
+        "sourceType": "local",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection"
+      }
+    }
+  ]
+}

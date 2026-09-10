@@ -1,0 +1,22 @@
+{
+  "before_marketplace_source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection",
+  "before_plugin_version": "0.1",
+  "candidate_marketplace_source": "/tmp/ai-skills-052-20260910",
+  "candidate_plugin_version": "0.2",
+  "candidate_plugin_path": "/tmp/ai-skills-052-20260910/plugins/codex/plugins/writing-style",
+  "candidate_marketplace_points_to_052_worktree": true,
+  "candidate_plugin_is_0_2": true,
+  "candidate_plugin_path_points_to_052_worktree": true,
+  "jsonl_mentions_writing_style_0_2": true,
+  "last_message_nonempty": true,
+  "last_message_avoids_source_process_frame": true,
+  "production_install_upgrade_smoke": true,
+  "ordinary_production_routing": true,
+  "after_restore_marketplace_source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection",
+  "after_restore_plugin_version": "0.1",
+  "after_restore_plugin_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/plugins/codex/plugins/writing-style",
+  "marketplace_restored_to_original_source": true,
+  "writing_style_restored_to_original_version": true,
+  "writing_style_restored_to_original_path": true,
+  "overall_production_smoke_pass": true
+}

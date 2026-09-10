@@ -1,0 +1,7 @@
+candidate-install:start
+candidate-install:end
+ordinary-routing-smoke:start
+ordinary-routing-smoke:end
+restore:start
+restore:end
+complete:/tmp/ai-skills-052-20260910/results/052_writing_style_reader_facing_generalization_closure/production_smoke/20260910T155228Z

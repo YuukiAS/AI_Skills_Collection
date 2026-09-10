@@ -1,0 +1,223 @@
+{
+  "installed": [
+    {
+      "pluginId": "sites@openai-bundled",
+      "name": "sites",
+      "marketplaceName": "openai-bundled",
+      "version": "0.1.31",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "/overflow/htzhu/mingcheng_new/.codex-homes/aereinh/.tmp/bundled-marketplaces/openai-bundled/plugins/sites"
+      },
+      "marketplaceSource": {
+        "sourceType": "local",
+        "source": "/overflow/htzhu/mingcheng_new/.codex-homes/aereinh/.tmp/bundled-marketplaces/openai-bundled"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_INSTALL"
+    },
+    {
+      "pluginId": "visualize@openai-bundled",
+      "name": "visualize",
+      "marketplaceName": "openai-bundled",
+      "version": "1.0.15",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "/overflow/htzhu/mingcheng_new/.codex-homes/aereinh/.tmp/bundled-marketplaces/openai-bundled/plugins/visualize"
+      },
+      "marketplaceSource": {
+        "sourceType": "local",
+        "source": "/overflow/htzhu/mingcheng_new/.codex-homes/aereinh/.tmp/bundled-marketplaces/openai-bundled"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_INSTALL"
+    },
+    {
+      "pluginId": "figma@openai-curated",
+      "name": "figma",
+      "marketplaceName": "openai-curated",
+      "version": "1e285826",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "/overflow/htzhu/mingcheng_new/.codex-homes/mingcheng_new/.tmp/plugins/plugins/figma"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_INSTALL"
+    },
+    {
+      "pluginId": "github@openai-curated",
+      "name": "github",
+      "marketplaceName": "openai-curated",
+      "version": "1e285826",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "/overflow/htzhu/mingcheng_new/.codex-homes/mingcheng_new/.tmp/plugins/plugins/github"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_INSTALL"
+    },
+    {
+      "pluginId": "notion@openai-curated",
+      "name": "notion",
+      "marketplaceName": "openai-curated",
+      "version": "1e285826",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "/overflow/htzhu/mingcheng_new/.codex-homes/mingcheng_new/.tmp/plugins/plugins/notion"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_INSTALL"
+    },
+    {
+      "pluginId": "build-web-apps@openai-curated",
+      "name": "build-web-apps",
+      "marketplaceName": "openai-curated",
+      "version": "1e285826",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "/overflow/htzhu/mingcheng_new/.codex-homes/mingcheng_new/.tmp/plugins/plugins/build-web-apps"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_USE"
+    },
+    {
+      "pluginId": "workflow-core@yuukias-ai-skills",
+      "name": "workflow-core",
+      "marketplaceName": "yuukias-ai-skills",
+      "version": "0.1",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/plugins/codex/plugins/workflow-core"
+      },
+      "marketplaceSource": {
+        "sourceType": "local",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_INSTALL"
+    },
+    {
+      "pluginId": "ai-skills-core@yuukias-ai-skills",
+      "name": "ai-skills-core",
+      "marketplaceName": "yuukias-ai-skills",
+      "version": "0.2",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/plugins/codex/plugins/ai-skills-core"
+      },
+      "marketplaceSource": {
+        "sourceType": "local",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_INSTALL"
+    },
+    {
+      "pluginId": "writing-style@yuukias-ai-skills",
+      "name": "writing-style",
+      "marketplaceName": "yuukias-ai-skills",
+      "version": "0.1",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/plugins/codex/plugins/writing-style"
+      },
+      "marketplaceSource": {
+        "sourceType": "local",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_INSTALL"
+    },
+    {
+      "pluginId": "research-writing@yuukias-ai-skills",
+      "name": "research-writing",
+      "marketplaceName": "yuukias-ai-skills",
+      "version": "0.1",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/plugins/codex/plugins/research-writing"
+      },
+      "marketplaceSource": {
+        "sourceType": "local",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_INSTALL"
+    },
+    {
+      "pluginId": "presentations@yuukias-ai-skills",
+      "name": "presentations",
+      "marketplaceName": "yuukias-ai-skills",
+      "version": "0.3",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/plugins/codex/plugins/presentations"
+      },
+      "marketplaceSource": {
+        "sourceType": "local",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_INSTALL"
+    },
+    {
+      "pluginId": "bioinformatics@yuukias-ai-skills",
+      "name": "bioinformatics",
+      "marketplaceName": "yuukias-ai-skills",
+      "version": "0.1",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/plugins/codex/plugins/bioinformatics"
+      },
+      "marketplaceSource": {
+        "sourceType": "local",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_INSTALL"
+    },
+    {
+      "pluginId": "medical-imaging@yuukias-ai-skills",
+      "name": "medical-imaging",
+      "marketplaceName": "yuukias-ai-skills",
+      "version": "0.1",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/plugins/codex/plugins/medical-imaging"
+      },
+      "marketplaceSource": {
+        "sourceType": "local",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_INSTALL"
+    }
+  ],
+  "available": []
+}
