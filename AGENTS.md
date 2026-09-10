@@ -328,6 +328,21 @@ reviewed/<task_key>
   `task_key`、`reviewed/<task_key>` branch 和 exact task-owned worktree。不得把它
   扩大成任意 `reviewed/*`、任意 Git branch creation、Host Policy/execpolicy 修改、
   Bridge Kit 修改、helper、CLI、schema 或 state machine。
+- 用户当前明确给出的顶层 Goal / canonical goal file 是 overall completion
+  contract。读取 objective、bootstrap、某个 phase、implementation、本地 tests、
+  `RESULT.md`、`CURRENT.json` 更新或交给 Reviewer/Planner，都只是子目标；只要
+  required product/artifact/review/CI/release/smoke/human/integration gate
+  仍有任一未完成，用户可见 Goal 不得标记为 achieved。
+- 需要后续 Executor、CI、Scheduled GPT、human gate 或 integration 消费的
+  Reviewed Handoff tracked changes，在当前 run yield 前必须 commit、push exact
+  task branch、验证 remote tip 等于 intended local HEAD，并写出真实
+  `CURRENT.next_action`。local-only branch/worktree 不是有效 handoff；push
+  失败是 push blocker，不能因此声称完成。本条只适用于当前 task 明确授权的
+  exact branch 的普通 non-force push，不扩大为任意 branch 授权。
+- 用户或真实运行暴露 execution / workflow / control-plane 问题时，先判断换到另一个
+  AI_Skills task 是否仍可能重现。若已有真实 failure、可命名 future failure 和最小
+  可执行防线，优先补现有 `AGENTS.md` 或 workflow 规则；不要只把事故埋在
+  `RESULT.md`，也不要为记录事故新增 state、schema、ledger 或 framework。
 - 不同 plugin /明显独立 source area 的 task 可以并行推进；一个 branch 的 `WAITING_FOR_CI`、`READY_FOR_GPT_REVIEW`、`NEEDS_GPT_PLANNER`、visual-evidence wait 或用户输入等待，不得让另一个独立 branch 低频空等。
 - 同一 plugin、同一 shared runtime/schema/generator 或存在直接依赖的 task 不自动并行；先由 Planner/用户判断是否独立。
 - Scheduled GPT automation 必须显式绑定 task + branch，不得静默回落到 `main` 或改另一个 task branch。
