@@ -1,0 +1,64 @@
+{
+  "schema": "AI_SKILLS_052_UNRELATED_REGRESSIONS_MANIFEST_V1",
+  "task_key": "052_writing_style_reader_facing_generalization_closure",
+  "status": "PASS",
+  "candidate_commit": "c53771773853e744c9ea9ef6ef2a09b129c5676a",
+  "runtime_version": "codex-cli 0.153.4",
+  "candidate_identity": "writing-style@ai-skills-candidate",
+  "regressions": [
+    {
+      "id": "light_chinese_polish",
+      "status": "PASS",
+      "task_path": "results/052_writing_style_reader_facing_generalization_closure/unrelated_regressions/light_chinese_polish/TASK.md",
+      "task_sha256": "c3b687b36c3531504ea960c5e4100b7ae86e8e50739f0ee4c3af62709a4f4fb7",
+      "input_path": "results/052_writing_style_reader_facing_generalization_closure/unrelated_regressions/light_chinese_polish/input.md",
+      "input_sha256": "9ef9507f3df6854780e920bedb5bf0cc5812ae7b76fb476a4385bbd9f65fa12a",
+      "run_dir": ".local-runtime/candidate-plugin-replay/runs/20260910T141944Z-2815196",
+      "actual_consumption_proven": true,
+      "skill_consumption": [
+        "zh"
+      ],
+      "output_path": "results/052_writing_style_reader_facing_generalization_closure/unrelated_regressions/light_chinese_polish/replay/output.md",
+      "output_sha256": "6312ec7369164ff82581c5061c39f6b8e1ae3443571426947c8d498999044101",
+      "stderr_bytes": 0
+    },
+    {
+      "id": "fidelity_only",
+      "status": "PASS",
+      "task_path": "results/052_writing_style_reader_facing_generalization_closure/unrelated_regressions/fidelity_only/TASK.md",
+      "task_sha256": "92d1f05ef53cd7de84104a7fd694d9927bf9621750af31a08597d7df34374916",
+      "input_path": "results/052_writing_style_reader_facing_generalization_closure/unrelated_regressions/fidelity_only/input.md",
+      "input_sha256": "70c213800096dc475dec4f69b594029633b362876b743461adfef7a91cf2be5c",
+      "run_dir": ".local-runtime/candidate-plugin-replay/runs/20260910T142040Z-2816280",
+      "actual_consumption_proven": true,
+      "skill_consumption": [
+        "fidelity",
+        "zh"
+      ],
+      "output_path": "results/052_writing_style_reader_facing_generalization_closure/unrelated_regressions/fidelity_only/replay/output.md",
+      "output_sha256": "13272a3a93ad53cd00b87f17e0e2e8989930e9039ee4ca60df7fdaae7a2af72c",
+      "stderr_bytes": 0
+    },
+    {
+      "id": "english_scientific_prose",
+      "status": "PASS",
+      "task_path": "results/052_writing_style_reader_facing_generalization_closure/unrelated_regressions/english_scientific_prose/TASK.md",
+      "task_sha256": "e105ef35e39497299cc9a6bf5336a1b3df71a73e064d7db502409be0247fd2b7",
+      "input_path": "results/052_writing_style_reader_facing_generalization_closure/unrelated_regressions/english_scientific_prose/input.md",
+      "input_sha256": "1766f3e320dbe880229453de6e766d3b36472bcddd04f8240247bf5e1f9efcd9",
+      "run_dir": ".local-runtime/candidate-plugin-replay/runs/20260910T142139Z-2817200",
+      "actual_consumption_proven": true,
+      "skill_consumption": [
+        "fidelity",
+        "sci"
+      ],
+      "output_path": "results/052_writing_style_reader_facing_generalization_closure/unrelated_regressions/english_scientific_prose/replay/output.md",
+      "output_sha256": "3869ce8bebb5e06af2bd7f90ae26704933098fe2838bbe78135c4d6ca03f51d4",
+      "stderr_bytes": 0
+    }
+  ],
+  "notes": [
+    "The fidelity-only path also read zh/SKILL.md for Chinese output formatting, while the primary preservation skill was fidelity.",
+    "These are unrelated route regressions, not fresh holdouts."
+  ]
+}

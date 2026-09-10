@@ -1,0 +1,21 @@
+{
+  "actual_consumption": {
+    "event_type": "item.started",
+    "line_index": 4,
+    "proven": true
+  },
+  "add_payload": {
+    "authPolicy": "ON_INSTALL",
+    "installedPath": "/overflow/htzhu/mingcheng_new/.codex-homes/Longleaf_Connection_Bridge/plugins/cache/ai-skills-candidate/writing-style/0.1",
+    "marketplaceName": "ai-skills-candidate",
+    "name": "writing-style",
+    "pluginId": "writing-style@ai-skills-candidate",
+    "version": "0.1"
+  },
+  "candidate_commit": "c53771773853e744c9ea9ef6ef2a09b129c5676a",
+  "installed_path": "/overflow/htzhu/mingcheng_new/.codex-homes/Longleaf_Connection_Bridge/plugins/cache/ai-skills-candidate/writing-style/0.1",
+  "plugin_id": "writing-style@ai-skills-candidate",
+  "runtime_version": "codex-cli 0.153.4",
+  "stderr_path": "/tmp/ai-skills-052-20260910/.local-runtime/candidate-plugin-replay/runs/20260910T142040Z-2816280/child.stderr",
+  "stdout_path": "/tmp/ai-skills-052-20260910/.local-runtime/candidate-plugin-replay/runs/20260910T142040Z-2816280/child.stdout.jsonl"
+}
