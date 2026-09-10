@@ -10,7 +10,7 @@
   "base_branch": "main",
   "implementation_commit": "117860f16d3363e90119ed53bd01fa06494f726c",
   "ci_required": true,
-  "ci_status": "PENDING",
+  "ci_status": "PASS",
   "last_review_decision": null,
   "review_limit_reached": false,
   "human_gate_reason": null,
@@ -18,5 +18,5 @@
   "text_review_required": true,
   "text_review_manifest_path": "results/052_writing_style_reader_facing_generalization_closure/text_review/text_inputs.json",
   "text_review_evidence_path": "results/052_writing_style_reader_facing_generalization_closure/text_review/TEXT_REVIEW.json",
-  "next_action": "WAITING_FULL_RELEASE_CI_THEN_PRODUCTION_SMOKE"
+  "next_action": "NEEDS_EXPLICIT_USER_AUTHORIZATION_FOR_LIVE_PRODUCTION_INSTALL_UPGRADE_SMOKE"
 }
