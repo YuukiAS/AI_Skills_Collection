@@ -9,7 +9,7 @@
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "STOP_051_FINAL_TEXT_REVIEW_REVISE_NO_FOURTH_HOLDOUT_NO_FOURTH_PAID_REVIEW_NO_GATE7",
+  "next_action": "NONE_USER_STOPPED_051_NO_FURTHER_AUTOMATION",
   "plan_revision": 1,
   "review_limit_reached": false,
   "review_round": 0,
@@ -19,7 +19,17 @@
   "text_review_required": true,
   "text_review_manifest_path": "results/051_writing_style_rebuild/text_review/text_inputs.json",
   "text_review_evidence_path": "results/051_writing_style_rebuild/text_review/TEXT_REVIEW.json",
-  "recovery_status": "051_FINAL_TEXT_REVIEW_FAIL_STOP",
+  "recovery_status": "051_STOPPED_BY_USER_AFTER_FINAL_TEXT_REVIEW_FAIL",
+  "stop_confirmation": {
+    "decision": "STOP_051",
+    "final_outcome": "051_FINAL_TEXT_REVIEW_FAIL",
+    "no_further_holdout_replacement": true,
+    "no_further_paid_text_review": true,
+    "no_final_ci": true,
+    "no_release_closure": true,
+    "no_gpt_reviewer_pass": true,
+    "no_integration": true
+  },
   "latest_text_review": {
     "workflow_run": "https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/34418740861",
     "decision": "REVISE",
@@ -34,14 +44,13 @@
   },
   "final_recovery_authorization": "AUTHORIZED_ONE_FINAL_BOUNDED_GENERIC_RECOVERY_NEW_COMPLETE_HOLDOUT_ONE_ADDITIONAL_TEXT_REVIEW_STOP_IF_FAIL",
   "latest_human_decision": {
-    "decision": "AUTHORIZE_EXACTLY_ONE_FINAL_BOUNDED_RECOVERY",
+    "decision": "STOP_051",
     "constraints": [
-      "current failed holdout is invalid/incomplete because frozen source itself ends before promised equation",
-      "freeze exactly one new semantically complete fresh holdout before generation",
-      "no production tuning from failed holdout",
-      "exactly one additional Text Review, max worst-case USD 0.25, no retry",
-      "if that holdout or review fails, STOP 051; no further holdout replacement or paid review",
-      "complete AGENTS/workflow hardening before 051 integration"
+      "stop task 051 after the authorized final Text Review returned REVISE",
+      "no fourth holdout or replacement holdout",
+      "no fourth paid Text Review or paid retry",
+      "do not run final CI or release closure for 051",
+      "do not claim GPT Reviewer PASS or integration"
     ]
   },
   "final_recovery_text_review_input": {
@@ -153,6 +162,6 @@
     "plan_revision_limit_reached": true,
     "user_authorized_recovery": "Accounting-only preflight recovery was authorized under the same candidate, Bloom-filter holdout, encrypted packet, provider/privacy boundary, one unsent paid call, USD 0.25 worst-case reservation, and automatic retry 0 constraints.",
     "recovery_runtime_result": "Bridge Kit 0.7.4 extension accounting completed exactly one authorized final Text Review request without mutating the parent ledger.",
-    "stop_option": "Final Text Review returned REVISE, so stop 051 without final PASS, final CI, release closure, Reviewer PASS, or integration."
+    "stop_option": "User explicitly confirmed STOP_051 after final Text Review returned REVISE. No further 051 execution, CI, release closure, Reviewer PASS, or integration is authorized."
   }
 }
