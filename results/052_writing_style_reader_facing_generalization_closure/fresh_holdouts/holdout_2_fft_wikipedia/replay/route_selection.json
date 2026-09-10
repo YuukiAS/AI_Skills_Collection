@@ -1,0 +1,19 @@
+{
+  "forced_route": false,
+  "ordinary_user_prompt": true,
+  "prompt_internal_terms": [],
+  "prompt_sha256": "9ef5fcad27497fc0cb2db94793e8dbfdf7fe7d2bda8bc2ea4e13c514263109bf",
+  "reason_codes": {
+    "check_only": false,
+    "chinese_dominant": true,
+    "english_dominant": false,
+    "has_fidelity_constraints": true,
+    "long_enough": true,
+    "scientific_or_technical": true,
+    "wants_rewrite": true
+  },
+  "schema": "SCIENTIFIC_REWRITE_ROUTE_SELECTION_V1",
+  "selected_route": "scientific-rewrite",
+  "selector_owner": "writing-style",
+  "source_sha256": "0812403bda762f02f2dc8ef9908ad9187af1345f59e914104115bed79e8f0c9d"
+}

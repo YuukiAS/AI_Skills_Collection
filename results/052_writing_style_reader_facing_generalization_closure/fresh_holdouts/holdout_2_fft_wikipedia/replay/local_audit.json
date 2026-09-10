@@ -1,0 +1,11 @@
+{
+  "schema": "AI_SKILLS_052_FRESH_HOLDOUT_LOCAL_AUDIT_V1",
+  "holdout_id": "holdout_2_fft_wikipedia",
+  "run_id": "20260910T143401Z-2940379",
+  "candidate_path": "results/052_writing_style_reader_facing_generalization_closure/fresh_holdouts/holdout_2_fft_wikipedia/replay/fft_wikipedia.md",
+  "candidate_sha256": "9451b40cfd27d9aae63a24d5312bcd32eefbc0607b7ec77e556999b8eeeebb71",
+  "source_process_framing_findings": [],
+  "reader_facing_internal_leakage_findings": [],
+  "review_wrapper_label_matches": [],
+  "status": "PASS"
+}

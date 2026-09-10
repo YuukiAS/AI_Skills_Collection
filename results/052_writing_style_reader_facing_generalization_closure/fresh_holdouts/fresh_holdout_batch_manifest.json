@@ -1,9 +1,9 @@
 {
   "schema": "AI_SKILLS_052_FRESH_HOLDOUT_BATCH_MANIFEST_V1",
   "task_key": "052_writing_style_reader_facing_generalization_closure",
-  "status": "FROZEN_PENDING_REPLAY",
+  "status": "PASS",
   "frozen_before_candidate_generation": true,
-  "candidate_generation_started": false,
+  "candidate_generation_started": true,
   "batch_size": 2,
   "replacement_allowed": false,
   "holdouts": [
@@ -22,7 +22,28 @@
       "semantic_completeness_preflight": "PASS",
       "completeness_evidence": "Uses the complete introductory prose of the Python re module page before the first h2 section; no paragraph is cut mid-sentence, list, formula, definition, or section.",
       "not_used_in_051_or_052_tuning": true,
-      "not_workflow_ci_final_report_task_result_or_plugin_source": true
+      "not_workflow_ci_final_report_task_result_or_plugin_source": true,
+      "replay": {
+        "status": "PASS",
+        "run_id": "20260910T143238Z-2939424",
+        "candidate_commit": "e138e2b796b3670d1ad20ff6fafc7ec95f37f5c9",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "runtime_version": "codex-cli 0.153.4",
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "candidate_path": "results/052_writing_style_reader_facing_generalization_closure/fresh_holdouts/holdout_1_python_re_docs/replay/python_re_docs.md",
+        "candidate_sha256": "c807c8a75409b365b80566942e03f0b20e0dc05547005fbb36dfb29804de3840",
+        "candidate_bytes": 1939,
+        "local_audit_path": "results/052_writing_style_reader_facing_generalization_closure/fresh_holdouts/holdout_1_python_re_docs/replay/local_audit.json",
+        "local_audit_sha256": "5f13658b0689375ea36be3bfb893d4d047e5427480ccaca6b7ffa31a3aae4cd4",
+        "candidate_replay_run_path": "results/052_writing_style_reader_facing_generalization_closure/fresh_holdouts/holdout_1_python_re_docs/replay/candidate_replay_run.json",
+        "candidate_replay_run_sha256": "bc1650e4443fadaa4301d5f4ba39b3a0016c9d7d53bf2d5328b722053b6fb9b4",
+        "stage_receipt_path": null,
+        "stage_receipt_status": "not_emitted_by_this_replay; final artifact audited with candidate runtime helpers and skill-consumption evidence retained"
+      }
     },
     {
       "id": "holdout_2_fft_wikipedia",
@@ -40,7 +61,37 @@
       "semantic_completeness_preflight": "PASS",
       "completeness_evidence": "Uses the article lead plus complete 定义和速度 section, ending immediately before the next section heading; no sentence, formula, list, definition, or section is cut.",
       "not_used_in_051_or_052_tuning": true,
-      "not_workflow_ci_final_report_task_result_or_plugin_source": true
+      "not_workflow_ci_final_report_task_result_or_plugin_source": true,
+      "replay": {
+        "status": "PASS",
+        "run_id": "20260910T143401Z-2940379",
+        "candidate_commit": "e138e2b796b3670d1ad20ff6fafc7ec95f37f5c9",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "runtime_version": "codex-cli 0.153.4",
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "candidate_path": "results/052_writing_style_reader_facing_generalization_closure/fresh_holdouts/holdout_2_fft_wikipedia/replay/fft_wikipedia.md",
+        "candidate_sha256": "9451b40cfd27d9aae63a24d5312bcd32eefbc0607b7ec77e556999b8eeeebb71",
+        "candidate_bytes": 2203,
+        "local_audit_path": "results/052_writing_style_reader_facing_generalization_closure/fresh_holdouts/holdout_2_fft_wikipedia/replay/local_audit.json",
+        "local_audit_sha256": "445b59455285a747fd875da2c42ac7f2fbd75f2151dfe92ec341fe1f2258f2c9",
+        "candidate_replay_run_path": "results/052_writing_style_reader_facing_generalization_closure/fresh_holdouts/holdout_2_fft_wikipedia/replay/candidate_replay_run.json",
+        "candidate_replay_run_sha256": "22af7510b538b0e9d3adabba291c446ab1361f196ea31e883566e4fc9d98a76b",
+        "stage_receipt_path": "results/052_writing_style_reader_facing_generalization_closure/fresh_holdouts/holdout_2_fft_wikipedia/replay/stage_receipt.json",
+        "stage_receipt_sha256": "f0acffd49b9fba20cbe4fb1be13ca26c2a979ae389d52bea0a895f58936517b7",
+        "stage_receipt_status": {
+          "schema": "SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2",
+          "route": "scientific-rewrite",
+          "semantic_audit_ok": true,
+          "source_process_frame_count": 0,
+          "internal_workflow_leak_count": 0,
+          "paid_generation_used": false,
+          "external_api_call_count": 0
+        }
+      }
     }
   ],
   "batch_constraints": {
@@ -59,5 +110,9 @@
     "english_scientific_prose_regression",
     "fresh_holdout_1",
     "fresh_holdout_2"
-  ]
+  ],
+  "fresh_holdout_1": "PASS",
+  "fresh_holdout_2": "PASS",
+  "whole_batch_decision": "PASS",
+  "no_replacement_used": true
 }

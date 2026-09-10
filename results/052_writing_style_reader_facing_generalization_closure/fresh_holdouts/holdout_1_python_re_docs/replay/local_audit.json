@@ -1,0 +1,11 @@
+{
+  "schema": "AI_SKILLS_052_FRESH_HOLDOUT_LOCAL_AUDIT_V1",
+  "holdout_id": "holdout_1_python_re_docs",
+  "run_id": "20260910T143238Z-2939424",
+  "candidate_path": "results/052_writing_style_reader_facing_generalization_closure/fresh_holdouts/holdout_1_python_re_docs/replay/python_re_docs.md",
+  "candidate_sha256": "c807c8a75409b365b80566942e03f0b20e0dc05547005fbb36dfb29804de3840",
+  "source_process_framing_findings": [],
+  "reader_facing_internal_leakage_findings": [],
+  "review_wrapper_label_matches": [],
+  "status": "PASS"
+}
