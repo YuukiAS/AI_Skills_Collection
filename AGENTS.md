@@ -396,6 +396,8 @@ reviewed/045_presentations_real_use_regression_hardening
 
 **同一授权不得重复询问。** 用户一旦明确批准了“具体 artifact / 数据类别 + 具体 provider/endpoint + 具体 purpose + credential 使用方式”，Executor 必须在 task-local non-secret evidence 中记录一个简短 authorization receipt，并在同一 task、同一范围内直接继续；不得在每次 replay、retry、Text Review 或 fresh session 时重新问。判断授权 identity 时必须至少比较 artifact/data scope、provider/endpoint、purpose、credential scope，以及涉及付费动作时的 paid-cost ceiling；这些没有实质变化时，不得重新询问。只有 artifact/data scope、provider/endpoint、purpose、credential scope、paid-call count/cost ceiling 或 live-global mutation 边界发生实质变化时，才允许再次请求授权。
 
+预计会触发 live/global side effect 的长期 Goal（例如 production install/upgrade smoke）可以在 repo 中保存完整 contract，但 kickoff / Goal 用户消息必须同时直接写出简短 authorization envelope：exact task、target、purpose、side-effect/restoration boundary，以及涉及时的 credential/provider/cost boundary。repo 文件中的间接授权不能单独冒充 current-user authorization。用户消息已经明确授权 exact task、target、purpose 和 side-effect/restoration boundary 后，同一范围不得再次询问；后续只是解析出更具体的 path、version 或 identity，且仍属于原先明确授权的同一 target，不构成新的授权边界。只有实际 target、side-effect scope、credential/provider、destructive risk 或 cost boundary 实质扩大时，才重新询问。
+
 不同传输路径不是自动等价授权。例如，用户批准 `age -> GitHub Actions -> OpenAI Text Review`，并不自动等于批准“复制本地 Codex `auth.json` 到 isolated home 并通过 Codex session 发送同一 private artifact”。后者第一次仍需单独授权；一旦用户为该 bounded task 授权，就应记录并在该 task 内复用，不再重复询问。
 
 任何情况下都不得打印、commit、push、回显或要求用户粘贴 secret value。若正式路径使用 GitHub repository secrets，本地 shell 中对应环境变量 `unset` 不是 blocker。task 完成后应删除 task-local credential 副本和不再需要的 private plaintext 临时副本，但保留不含秘密的授权范围、artifact hash、provider/purpose 和删除结果作为 evidence。
