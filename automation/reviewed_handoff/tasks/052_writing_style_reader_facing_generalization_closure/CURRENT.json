@@ -8,7 +8,7 @@
   "max_plan_revisions": 1,
   "base_commit": "cafe33f49467d28fe48ef90b571ca490529033d4",
   "base_branch": "main",
-  "implementation_commit": "92ad279a11653486e726ed8cadb57bed5523af65",
+  "implementation_commit": "117860f16d3363e90119ed53bd01fa06494f726c",
   "ci_required": true,
   "ci_status": "PENDING",
   "last_review_decision": null,
@@ -18,5 +18,5 @@
   "text_review_required": true,
   "text_review_manifest_path": "results/052_writing_style_reader_facing_generalization_closure/text_review/text_inputs.json",
   "text_review_evidence_path": "results/052_writing_style_reader_facing_generalization_closure/text_review/TEXT_REVIEW.json",
-  "next_action": "WAITING_TEXT_REVIEW_EVIDENCE_THEN_FULL_RELEASE_CI"
+  "next_action": "WAITING_FULL_RELEASE_CI_THEN_PRODUCTION_SMOKE"
 }

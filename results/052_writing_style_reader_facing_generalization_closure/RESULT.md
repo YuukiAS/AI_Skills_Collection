@@ -1,6 +1,6 @@
 # Result - 052_writing_style_reader_facing_generalization_closure
 
-status: EXECUTING_TEXT_REVIEW_PENDING
+status: EXECUTING_FULL_RELEASE_CI_PENDING
 
 ## Summary
 
@@ -8,11 +8,11 @@ status: EXECUTING_TEXT_REVIEW_PENDING
 `reviewed/052_writing_style_reader_facing_generalization_closure`:
 
 ```text
-92ad279a11653486e726ed8cadb57bed5523af65
+117860f16d3363e90119ed53bd01fa06494f726c
 ```
 
 This is not a PASS, not `READY_FOR_GPT_REVIEW`, and not `WAITING_FOR_CI`.
-The frozen Plan still requires one Terra Text Review, full/release CI,
+The frozen Plan still requires full/release CI on this release candidate,
 production install/upgrade smoke, GPT Reviewer, final user ACCEPT, and
 integration to latest `main`. Those gates have not completed.
 
@@ -132,12 +132,68 @@ The plaintext packet contains only natural document titles plus the Bloom,
 Python `re`, and FFT final candidate text. It excludes workflow labels,
 review/run identity, hashes, and non-reader-facing HTML comments.
 
+Terra Text Review evidence has landed:
+
+```text
+results/052_writing_style_reader_facing_generalization_closure/text_review/TEXT_REVIEW.json
+results/052_writing_style_reader_facing_generalization_closure/paid_review_budget.json
+```
+
+Result:
+
+```text
+overall_decision=PASS
+model=gpt-5.6-terra
+plaintext_sha256=1ef1c0e09653bd1b16208ef8b4a6888c50e60068ba796ab8cc373f46dd910913
+blocking_findings=0
+reserved_worst_case_cost_usd=0.056690
+actual_model_cost_usd=0.010434
+```
+
+## Version Closure
+
+Repository bump decision: PATCH
+
+Reason: 052 improves an existing central plugin's production writing behavior
+without adding a new repository-level capability or breaking existing
+contracts.
+
+Affected plugins:
+
+- `writing-style`: `0.1` -> `0.2`
+  Reason: standalone Chinese scientific/technical rewrites now reject
+  source-process framing in reader-facing prose, preserve legitimate
+  attribution, and keep Text Review packets free of workflow wrapper labels.
+
+Updated:
+
+```text
+VERSION
+registry.json
+scripts/codex_marketplace_config.json
+plugins/codex/plugins/writing-style/.codex-plugin/plugin.json
+CHANGELOG.md
+docs/plugin-changelogs/writing-style.md
+README.md
+tests/test_codex_marketplace.py
+tests/test_scientific_rewrite.py
+```
+
+Local release checks after the version closure:
+
+```text
+python3 scripts/build_codex_marketplace.py --write --validate --check --path-report
+python3 -m unittest tests.test_codex_marketplace -v
+python3 -m unittest tests.test_scientific_rewrite -v
+python3 -m unittest discover -s tests
+python3 scripts/skills.py validate
+python3 scripts/skills.py audit --all
+```
+
 ## Not Completed
 
 The following frozen gates remain pending:
 
-- one final Terra Text Review on candidate-only plaintext for Bloom plus the
-  two fresh holdouts;
 - full/release CI;
 - production install/upgrade smoke;
 - GPT Reviewer;
@@ -146,13 +202,14 @@ The following frozen gates remain pending:
 
 ## Version Decision
 
-Repository bump decision: NONE
+Repository bump decision: PATCH
 
-Reason: 052 has not completed release gates.
+Reason: 052 changes existing `writing-style` production behavior inside the
+current repository contract.
 
 Affected plugins:
 
-- `writing-style`: NO_BUMP
-  Reason: production behavior changed in the local candidate, but the required
-  regression, holdout, Text Review, CI, smoke, Reviewer, and integration gates
-  have not passed.
+- `writing-style`: `0.1` -> `0.2`
+  Reason: production behavior changed and the original failure replay,
+  unrelated regressions, fresh holdouts, Text Review, and local release checks
+  have passed. Full/release CI and production smoke are still pending.
