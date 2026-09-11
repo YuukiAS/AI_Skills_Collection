@@ -38,6 +38,14 @@ candidate action:
 - Final QA should explicitly ask: **Could a reader who did not watch the experiments run understand the report without knowing our internal tokens? Could the first 2–3 pages stand alone? Does each paragraph earn its place in the decision story?**
 promotion gate: incorporate into `research-reporting` and replay on the next advisor-facing report; preserve exact source fidelity while allowing large-scale structural rewriting.
 
+#### 2026-09-11：同一研究材料拆成会议纪要与下一次会议报告
+feedback_status: NEW
+source: Distributed_Imaging_Inference / 用户要求将带批注的上次组会PDF、会后转述及近期研究记录，分别整理为两份面向老师的Markdown。
+evidence: 内部记录 `YuukiAS/Distributed_Imaging_Inference/docs/research/DII_FEW_SHOT_ADAPTATION_LITERATURE_POSITIONING_2026-09-11.md`，提交 `59e45ed0d2abbccf4e5090ad960e24c0e1388db4`；用户附件 `Meeting_2026_09_05.pdf`；本次草稿 `deliverables/group_meeting_2026-09-05/meeting_minutes_2026-09-05.md` 与 `deliverables/group_meeting_2026-09-12/group_meeting_report_v1.md`，在DII提交 `6d295317cdcbc0d02958d5f0bf6ca9b90c77defd` 可定位。
+problem: 用户明确指出，内部记录中的“如果DGST后gap仍存在”“最终论文需要怎样的benchmark结构”“明日组会的完整叙事”不能直接变成给老师看的报告。同一资料还包含不同时间的数据划分、已完成实验、老师口头反馈和未完成的新实验。只换标题或翻译英文，会保留错误的文体，也可能把会后结果写进上次会议、把研究者建议写成老师决定。
+observed handling: 本次将上次纪要与未来报告分开；纪要以所供PDF为历史事实来源，老师转述与会后拟定安排另列，不补造参会者、共识或投稿期限。未来报告按科学问题、设计、有限结论、相关方法和待验证问题组织，保留必要数字及比较对象，不搬运执行日志。新结果即使在写作期间入库，也不自动纳入未经复核的科学叙述；预留结果更新位置而不生成假结果或空白图表。原PDF个别图表数字不一致时，在来源说明中保留差异，不替用户暗自统一。
+project-specific context: CARE/M&Ms、91/59与91/30/29、DGST、FedFisher、pFLFE及MICCAI安排是DII内容，不能成为通用写作模板。原文件原本就是内部记录，并非错误地交付的导师报告；本例记录的是文体转换需求和误用风险，未证实调用过当前正式插件，不标记为生产回归。两份草稿尚待用户审阅；本条补充已有候选的真实证据，不改变其推广状态，也不修改插件版本或运行规则。中文措辞层的配套记录见 `writing-style.md` 的“Keep style cleanup downstream of scientific structure”。
+
 ### Meaning-first rewriting should be a reusable transformation pattern
 status: READY_FOR_PROMOTION
 source: successful manual Deep Research rewrite + TRACE v8→v9 language review
