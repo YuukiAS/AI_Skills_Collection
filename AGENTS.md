@@ -346,6 +346,18 @@ reviewed/<task_key>
 - 不同 plugin /明显独立 source area 的 task 可以并行推进；一个 branch 的 `WAITING_FOR_CI`、`READY_FOR_GPT_REVIEW`、`NEEDS_GPT_PLANNER`、visual-evidence wait 或用户输入等待，不得让另一个独立 branch 低频空等。
 - 同一 plugin、同一 shared runtime/schema/generator 或存在直接依赖的 task 不自动并行；先由 Planner/用户判断是否独立。
 - Scheduled GPT automation 必须显式绑定 task + branch，不得静默回落到 `main` 或改另一个 task branch。
+- Task-bound GPT Planner/Reviewer automation 优先于 generic watcher。如果当前 task 已有明确绑定
+  exact task + exact branch 的 Planner/Reviewer automation，Executor 不得再把 generic watcher
+  当作 Reviewer handoff prerequisite。
+- generic watcher dry-run 选中其他 task，只证明该 generic watcher 不适用于当前 task；不是当前
+  task blocker。`READY_FOR_GPT_REVIEW` + active task-bound Reviewer transport 是正常
+  `WAITING_FOR_EXTERNAL_GPT`，不得标 `BLOCKED`。
+- 到达 GPT-owned state 后，Codex Goal 应先 push + verify exact remote task branch，然后低频轮询
+  exact `CURRENT.json`；Reviewer 完成后继续同一个 Goal。
+- 只有 task-bound Reviewer transport 本身缺失、失效，且经过 bounded recovery 仍不可恢复，才允许把
+  reviewer handoff 升级成真实 blocker。
+- 新建需要 Scheduled GPT 的 Reviewed Handoff Goal 时，kickoff 阶段就应确认 exact task-bound
+  Planner/Reviewer transport 已存在；不要做到 `READY_FOR_GPT_REVIEW` 才发现只有 generic watcher。
 - 不因为 task branch 已隔离就自动 merge。最终回 `main` 前仍需检查当前 main、branch diff、CI/review 和 integration conflict。
 - merge conflict 是 integration decision，不等于 task 本身失败；优先询问 Planner/用户。
 - 当前 generic watcher 若不能绑定单个 task，就不得在含多个 Executor-owned task 的 checkout 中冒险自动选择；使用 task-bound goal，或等待 Bridge Kit 的 first-class task-scoped watcher/branch helper。不得假装现有 watcher 已经支持自动多 branch 并发。
