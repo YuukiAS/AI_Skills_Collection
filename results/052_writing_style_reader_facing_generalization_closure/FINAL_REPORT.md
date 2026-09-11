@@ -4,7 +4,8 @@
 
 052 closes the two reader-facing defects left after 051 was stopped. Standalone Chinese or Chinese-dominant scientific/technical rewrites now state the technical content directly instead of narrating that they are rewriting a source, while legitimate scholarly attribution remains allowed. Independent Text Review packets now keep task/gate/recovery/candidate/reviewer wrapper information out of the reviewed prose body and place that identity in metadata instead.
 
-The bounded product and review evidence now passes. This is not yet integrated to `main`: the frozen Plan requires one final human artifact decision after GPT Reviewer PASS.
+The bounded product and review evidence now passes. The user gave final
+artifact ACCEPT on 2026-09-11, and 052 has been integrated to `main`.
 
 ## What changed
 
@@ -42,7 +43,9 @@ The Bloom known regression passes as a historical failure replay, and the two fr
 
 The single final `gpt-5.6-terra` Text Review returned PASS with zero blocking findings. Exactly one paid 052 call was actually consumed, automatic retry was 0, the worst-case reservation was USD 0.056690, and actual model cost was USD 0.010434. Full Codex Marketplace release CI completed successfully, and production smoke installed the 052 `writing-style` 0.2 identity, exercised ordinary routing, then restored the previous live 0.1 install.
 
-The remaining limitation is intentional: this evidence supports only the bounded 052 reader-facing closure. It does not establish universal rewrite quality across arbitrary genres or languages. Final human ACCEPT and integration to the then-current `main` remain pending.
+The remaining limitation is intentional: this evidence supports only the
+bounded 052 reader-facing closure. It does not establish universal rewrite
+quality across arbitrary genres or languages.
 
 ## Technical appendix
 
@@ -60,4 +63,7 @@ The remaining limitation is intentional: this evidence supports only the bounded
 - Prepared plugin version: `writing-style` 0.2
 - Production smoke: `results/052_writing_style_reader_facing_generalization_closure/production_smoke/20260910T155228Z/smoke_verification.json`
 - Production smoke result: install/upgrade PASS, ordinary routing PASS, previous production marketplace/plugin restored
-- Required remaining gates: final human ACCEPT, integration to latest `main`
+- Final human decision: ACCEPT, recorded 2026-09-11
+- Integrated main verification: `origin/main` verified at `8ffde518f2e1090ef1b5deed91bbfad53e3670ef` before final release-identity evidence commit
+- Release identity verification: `results/052_writing_style_reader_facing_generalization_closure/release_identity_verification/20260911T004351Z/RELEASE_IDENTITY_ADJUDICATION.md`
+- Required remaining gates: none

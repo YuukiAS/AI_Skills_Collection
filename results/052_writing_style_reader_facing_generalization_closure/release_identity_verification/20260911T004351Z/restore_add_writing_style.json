@@ -1,0 +1,12 @@
+{
+  "args": [
+    "codex",
+    "plugin",
+    "add",
+    "writing-style@yuukias-ai-skills",
+    "--json"
+  ],
+  "returncode": 0,
+  "stdout": "{\n  \"pluginId\": \"writing-style@yuukias-ai-skills\",\n  \"name\": \"writing-style\",\n  \"marketplaceName\": \"yuukias-ai-skills\",\n  \"version\": \"0.1\",\n  \"installedPath\": \"/overflow/htzhu/mingcheng_new/.codex-homes/mingcheng_new/plugins/cache/yuukias-ai-skills/writing-style/0.1\",\n  \"authPolicy\": \"ON_INSTALL\"\n}\n",
+  "stderr": ""
+}

@@ -1,0 +1,13 @@
+{
+  "args": [
+    "codex",
+    "plugin",
+    "marketplace",
+    "add",
+    "/tmp/ai-skills-052-20260910",
+    "--json"
+  ],
+  "returncode": 0,
+  "stdout": "{\n  \"marketplaceName\": \"yuukias-ai-skills\",\n  \"installedRoot\": \"/tmp/ai-skills-052-20260910\",\n  \"alreadyAdded\": false\n}\n",
+  "stderr": ""
+}

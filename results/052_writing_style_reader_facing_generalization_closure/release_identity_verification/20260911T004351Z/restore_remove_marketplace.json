@@ -1,0 +1,13 @@
+{
+  "args": [
+    "codex",
+    "plugin",
+    "marketplace",
+    "remove",
+    "yuukias-ai-skills",
+    "--json"
+  ],
+  "returncode": 0,
+  "stdout": "{\n  \"marketplaceName\": \"yuukias-ai-skills\",\n  \"installedRoot\": null\n}\n",
+  "stderr": ""
+}

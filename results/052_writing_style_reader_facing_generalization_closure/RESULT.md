@@ -6,21 +6,22 @@ implementation_commit: 92ad279a11653486e726ed8cadb57bed5523af65
 
 # Result - 052_writing_style_reader_facing_generalization_closure
 
-status: ACCEPTED_AWAITING_LATEST_MAIN_INTEGRATION
+status: ACHIEVED_INTEGRATED_TO_MAIN
 
 ## Summary
 
-052 has a text-reviewed implementation candidate on branch
-`reviewed/052_writing_style_reader_facing_generalization_closure`:
+052 has been accepted by the user and integrated to latest `main`.
+
+The text-reviewed implementation candidate on branch
+`reviewed/052_writing_style_reader_facing_generalization_closure` was:
 
 ```text
 92ad279a11653486e726ed8cadb57bed5523af65
 ```
 
-This is not yet `ACHIEVED`. GPT Reviewer PASS and final user ACCEPT are now
-recorded; the frozen Goal still requires integration to latest `main`, remote
-main verification, released `writing-style` identity verification, and the
-generic governance hardening to be present on `main`.
+GPT Reviewer PASS, final user ACCEPT, latest-main integration, remote `main`
+verification, released `writing-style` identity verification, and generic
+governance hardening on `main` are complete.
 
 The task branch also contains later release/governance/evidence commits:
 
@@ -32,6 +33,11 @@ cac2175e8351a2f37551869240c1753a9d969cc4a  Harden reviewed handoff authorization
 Final human artifact acceptance was recorded on 2026-09-11. The current user
 accepted the 052 final artifacts and authorized automatic latest-main
 integration with the verified generic governance changes.
+
+Latest-main integration was completed after fetching `origin/main`, proving
+`origin/main` was an ancestor of the task branch, running integration
+validation, pushing `HEAD:main`, and verifying remote `origin/main` at
+`8ffde518f2e1090ef1b5deed91bbfad53e3670ef`.
 
 ## Implemented
 
@@ -272,15 +278,47 @@ writing_style_restored_to_original_version=true
 overall_production_smoke_pass=true
 ```
 
-## Not Completed
+## Release Identity Verification
 
-The following frozen gates remain pending:
+After integration, release identity was verified against `origin/main`:
 
-- latest-main integration and task branch cleanup;
-- remote `origin/main` verification;
-- released `writing-style` 0.2 production identity / ordinary routing
-  verification;
-- generic governance hardening present on `main`.
+```text
+results/052_writing_style_reader_facing_generalization_closure/release_identity_verification/20260911T004351Z/RELEASE_IDENTITY_ADJUDICATION.md
+results/052_writing_style_reader_facing_generalization_closure/release_identity_verification/20260911T004351Z/release_identity_verification.json
+```
+
+The release check temporarily pointed the live `yuukias-ai-skills` marketplace
+at the integrated 052 worktree, installed `writing-style@yuukias-ai-skills`
+0.2 from that source, ran the ordinary natural smoke once, and restored the
+previous marketplace source and `writing-style` 0.1 installation.
+
+The raw release verification script kept one strict telemetry field false
+because this `codex exec --json` event stream did not expose a skill-path
+substring. The gate is adjudicated PASS because the installed identity was
+`writing-style` 0.2 from the integrated worktree, the earlier bounded production
+smoke already showed `jsonl_mentions_writing_style_0_2=true` and
+`ordinary_production_routing=true`, and no `writing-style` source/generated
+payload/version/registry/changelog file changed between that production smoke
+commit and the integrated main commit.
+
+## Completed Frozen Gates
+
+```text
+bloom_known_regression=PASS
+unrelated_regressions=PASS
+fresh_holdout_1=PASS
+fresh_holdout_2=PASS
+terra_review=PASS
+full_release_ci=PASS
+production_install_upgrade_smoke=PASS
+ordinary_production_routing=PASS
+gpt_reviewer=PASS
+human_acceptance=ACCEPT
+integrated_latest_main=YES
+remote_main_verified=YES
+released_writing_style_identity_verified=YES
+generic_governance_in_main=YES
+```
 
 ## Version Decision
 
@@ -294,5 +332,6 @@ Affected plugins:
 - `writing-style`: `0.1` -> `0.2`
   Reason: production behavior changed and the original failure replay,
   unrelated regressions, fresh holdouts, Text Review, and local release checks
-  have passed. Full/release CI, production smoke, GPT Reviewer, and final user
-  ACCEPT have also passed. Latest-main integration remains pending.
+  have passed. Full/release CI, production smoke, GPT Reviewer, final user
+  ACCEPT, latest-main integration, remote main verification, and released
+  identity verification have also passed.

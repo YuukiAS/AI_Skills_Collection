@@ -1,0 +1,6 @@
+candidate-install:start
+candidate-install:end
+ordinary-routing-smoke:start
+ordinary-routing-smoke:end
+restore:start
+restore:end

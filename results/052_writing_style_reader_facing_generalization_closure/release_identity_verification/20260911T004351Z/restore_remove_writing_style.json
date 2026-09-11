@@ -1,0 +1,12 @@
+{
+  "args": [
+    "codex",
+    "plugin",
+    "remove",
+    "writing-style@yuukias-ai-skills",
+    "--json"
+  ],
+  "returncode": 0,
+  "stdout": "{\n  \"pluginId\": \"writing-style@yuukias-ai-skills\",\n  \"name\": \"writing-style\",\n  \"marketplaceName\": \"yuukias-ai-skills\"\n}\n",
+  "stderr": ""
+}
