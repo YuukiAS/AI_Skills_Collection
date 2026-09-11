@@ -26,13 +26,13 @@ remain at `.agents/plugins/marketplace.json` relative to the real checkout root.
 
 The generated marketplace currently publishes ten curated plugins. This is the repository's current app-facing publication budget, not a general Codex plugin limit:
 
-- `workflow-core`
+- `workflow-core` (`Verified Workflow`)
 - `ai-skills-core`
-- `writing-style`
-- `research-writing`
+- `writing-style` (`Clear Writing`)
+- `research-writing` (`Research Authoring`)
 - `presentations`
 - `scientific-visualization`
-- `web-development`
+- `web-development` (`Frontend Design`)
 - `statistical-modeling`
 - `bioinformatics`
 - `medical-imaging`

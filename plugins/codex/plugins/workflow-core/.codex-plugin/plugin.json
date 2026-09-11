@@ -17,7 +17,7 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Workflow Core",
+    "displayName": "Verified Workflow",
     "shortDescription": "General Codex execution, source-of-truth discovery, planning, verification, and completion gates.",
     "longDescription": "General Codex execution, source-of-truth discovery, planning, verification, and completion gates. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",

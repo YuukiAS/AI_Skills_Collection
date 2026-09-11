@@ -17,7 +17,7 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Research Writing",
+    "displayName": "Research Authoring",
     "shortDescription": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization.",
     "longDescription": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",

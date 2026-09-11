@@ -88,13 +88,13 @@ codex plugin marketplace add \
 
 | Plugin | Version | Status | 主要用途 | Changelog |
 |---|---:|---|---|---|
-| `workflow-core` | `0.1` | `unclassified` | 复杂任务的执行顺序、检查和收尾 | [workflow-core](docs/plugin-changelogs/workflow-core.md) |
+| `workflow-core` | `0.1` | `unclassified` | `Verified Workflow`：复杂任务的执行顺序、检查和收尾 | [workflow-core](docs/plugin-changelogs/workflow-core.md) |
 | `ai-skills-core` | `0.2` | `unclassified` | `AI Skills Maintainer`：中央插件改进的维护同伴，检查来源、待办、生成层、回放、回归、版本和 changelog | [ai-skills-core](docs/plugin-changelogs/ai-skills-core.md) |
-| `writing-style` | `0.2` | `unclassified` | 保留原意，改善中文和英文科研表达 | [writing-style](docs/plugin-changelogs/writing-style.md) |
-| `research-writing` | `0.1` | `unclassified` | 报告、论文、文献和引用 | [research-writing](docs/plugin-changelogs/research-writing.md) |
+| `writing-style` | `0.2` | `unclassified` | `Clear Writing`：保留原意，改善中文和英文科研表达 | [writing-style](docs/plugin-changelogs/writing-style.md) |
+| `research-writing` | `0.1` | `unclassified` | `Research Authoring`：报告、论文、文献和引用 | [research-writing](docs/plugin-changelogs/research-writing.md) |
 | `presentations` | `0.3` | `baseline` | 科研组会、研究汇报、商务 Presentation 的规划和返修 | [presentations](docs/plugin-changelogs/presentations.md) |
 | `scientific-visualization` | `0.1` | `unclassified` | 科研图、配色、示意图、海报和图形检查 | [scientific-visualization](docs/plugin-changelogs/scientific-visualization.md) |
-| `web-development` | `0.1` | `unclassified` | 前端参考、视觉系统和科研产品界面 | [web-development](docs/plugin-changelogs/web-development.md) |
+| `web-development` | `0.1` | `unclassified` | `Frontend Design`：前端参考、视觉系统和科研产品界面 | [web-development](docs/plugin-changelogs/web-development.md) |
 | `statistical-modeling` | `0.1` | `unclassified` | Bayesian、数据分析、诊断和统计可视化 | [statistical-modeling](docs/plugin-changelogs/statistical-modeling.md) |
 | `bioinformatics` | `0.1` | `unclassified` | 生物信息数据库、GWAS、单细胞、组学等工作流 | [bioinformatics](docs/plugin-changelogs/bioinformatics.md) |
 | `medical-imaging` | `0.1` | `unclassified` | 医学影像、CMR、DICOM/NIfTI、分割、配准和影像 AI | [medical-imaging](docs/plugin-changelogs/medical-imaging.md) |
