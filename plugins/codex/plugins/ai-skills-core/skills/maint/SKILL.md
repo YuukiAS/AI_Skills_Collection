@@ -45,7 +45,7 @@ This mode is mandatory for production plugin refinement. It is a maintenance com
 The installed plugin should be presented to users as `AI Skills Maintainer`; keep the internal plugin slug `ai-skills-core` unless a task provides strong compatibility evidence for a slug migration. Normal maintenance combinations are:
 
 - `AI Skills Maintainer` + `Presentations`;
-- `AI Skills Maintainer` + `Writing Style`;
+- `AI Skills Maintainer` + `Clear Writing`;
 - `AI Skills Maintainer` + `Statistical Modeling`.
 
 The target plugin decides what is professionally correct. This maintainer decides whether the change is source-authoritative, generated, replayed, regression-tested, versioned, changeloged, and closed.

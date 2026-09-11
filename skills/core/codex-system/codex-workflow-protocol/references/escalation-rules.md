@@ -12,4 +12,4 @@ Use these rules when a baseline, smoke test, or simple method fails or produces 
 
 ## Specialist Boundary
 
-Escalation methods must come from the relevant specialist workflow, project contract, or user-approved plan. Workflow Core decides when escalation is required; it does not define domain-specific commands or policies.
+Escalation methods must come from the relevant specialist workflow, project contract, or user-approved plan. Verified Workflow decides when escalation is required; it does not define domain-specific commands or policies.

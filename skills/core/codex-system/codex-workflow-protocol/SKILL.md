@@ -14,7 +14,7 @@ profile_tags:
   - workflow
   - codex
 recommended_scope: global
-display_name: Workflow Core
+display_name: Verified Workflow
 short_description: Process layer for complex Codex work.
 icon_small: assets/workflow-core.svg
 icon_large: assets/workflow-core.svg
@@ -54,7 +54,7 @@ This skill owns process only:
 6. integrate results and verify the final state;
 7. report precise completion, partial completion, failure, or blocking state.
 
-Specialist skills own technical rules for their domain. They may add stricter checks, commands, schemas, or quality gates. They must not weaken the global completion boundary. Workflow Core must not override a specialist's technical instructions.
+Specialist skills own technical rules for their domain. They may add stricter checks, commands, schemas, or quality gates. They must not weaken the global completion boundary. Verified Workflow must not override a specialist's technical instructions.
 
 ## Workflow
 

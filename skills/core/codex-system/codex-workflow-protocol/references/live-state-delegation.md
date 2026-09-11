@@ -16,7 +16,7 @@ Starting a process, launching a child agent, creating an output path, or finding
 
 ## Specialist Boundary
 
-Use the specialist skill for domain-specific live-state checks. Workflow Core only requires that current state is verified and integrated before completion.
+Use the specialist skill for domain-specific live-state checks. Verified Workflow only requires that current state is verified and integrated before completion.
 
 Examples:
 

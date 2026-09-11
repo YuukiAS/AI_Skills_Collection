@@ -19,7 +19,7 @@
 典型维护组合：
 
 - `AI Skills Maintainer` + `Presentations`
-- `AI Skills Maintainer` + `Writing Style`
+- `AI Skills Maintainer` + `Clear Writing`
 - `AI Skills Maintainer` + `Statistical Modeling`
 
 目标 plugin 决定“专业上怎么改”；Maintainer 决定“怎么安全、可验证地维护和收口”。
