@@ -1,0 +1,35 @@
+{
+  "actual_consumption": {
+    "event_type": "item.started",
+    "line_index": 4,
+    "proven": true
+  },
+  "add_payload": {
+    "authPolicy": "ON_INSTALL",
+    "installedPath": "/overflow/htzhu/mingcheng_new/.codex-homes/Longleaf_Connection_Bridge/plugins/cache/ai-skills-candidate-053/writing-style/0.2+codex.local-20260912T165409Z-2884781",
+    "marketplaceName": "ai-skills-candidate-053",
+    "name": "writing-style",
+    "pluginId": "writing-style@ai-skills-candidate-053",
+    "version": "0.2+codex.local-20260912T165409Z-2884781"
+  },
+  "cachebuster": {
+    "cachebuster": "local-20260912T165409Z-2884781",
+    "original_version": "0.2",
+    "updated_version": "0.2+codex.local-20260912T165409Z-2884781"
+  },
+  "candidate_commit": "d4570c764326cd10b63eae5e605cc8ff885bd7f2",
+  "candidate_marketplace": "ai-skills-candidate-053",
+  "candidate_source_path": "plugins/codex/plugins/writing-style",
+  "committed_plugin_tree": "639f47bfce344061b9c6bbc90056b00900e8859e",
+  "installed_path": "/overflow/htzhu/mingcheng_new/.codex-homes/Longleaf_Connection_Bridge/plugins/cache/ai-skills-candidate-053/writing-style/0.2+codex.local-20260912T165409Z-2884781",
+  "plugin_id": "writing-style@ai-skills-candidate-053",
+  "runtime_version": "codex-cli 0.153.4",
+  "staged_skill_hashes": {
+    "skills/fidelity/SKILL.md": "d153d2a63a1b781333859738ff8206c01aa52023778d565de08b995f5353343b",
+    "skills/sci/SKILL.md": "2e5417d2ca461d15005de2c3e238820d6d05d58f834bab4b51fa78990f5dce04",
+    "skills/scientific-rewrite/SKILL.md": "9b00dff7417567768255c6709a40feb342336816b7b49730f42168406efd844c",
+    "skills/zh/SKILL.md": "c6124b6880c47ca9151e6ba482cb8c93d60d31783d936a7ebb33376a82547632"
+  },
+  "stderr_path": "/tmp/ai-skills-053-clear-writing-release-quality/.local-runtime/candidate-plugin-replay/runs/20260912T165409Z-2884781/child.stderr",
+  "stdout_path": "/tmp/ai-skills-053-clear-writing-release-quality/.local-runtime/candidate-plugin-replay/runs/20260912T165409Z-2884781/child.stdout.jsonl"
+}

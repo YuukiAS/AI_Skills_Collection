@@ -1,0 +1,43 @@
+{
+  "schema": "053_FRESH_HOLDOUT_LOCAL_AUDIT_V1",
+  "holdout_id": "H1",
+  "candidate_commit": "d4570c764326cd10b63eae5e605cc8ff885bd7f2",
+  "candidate_sha256": "4167fd80cfce0024aa6395c5bbb43e6eb3276ce02352b86f7b63fa8f8262855b",
+  "candidate_bytes": 5080,
+  "candidate_representation": {
+    "ok": true,
+    "reader_visible_markup_count": 0,
+    "formula_text_fence_count": 0,
+    "unrendered_math_count": 0,
+    "malformed_table_count": 0,
+    "overwide_table_count": 0,
+    "target_chinese_variant_mismatch_count": 0,
+    "ordinary_english_frame_count": 0
+  },
+  "source_process_framing_count": 0,
+  "workflow_trace": false,
+  "required_literals_present": true,
+  "missing_required_literals": [],
+  "forbidden_markup_hits": {
+    "{{": 0,
+    "}}": 0,
+    "<ref": 0,
+    "</ref>": 0,
+    "[[": 0,
+    "]]": 0,
+    "<math": 0,
+    "</math>": 0,
+    "```": 0
+  },
+  "manual_pdf_qa": {
+    "decision": "FAIL",
+    "checked_pages": [
+      "page-1.png"
+    ],
+    "failure_class": "reader_visible_missing_glyph",
+    "evidence": "H1 PDF page 1 renders the Russian title after \"俄文名称为\" as blank space because the current PDF font path lacks Cyrillic glyph coverage.",
+    "pdf_path": "results/053_clear_writing_release_quality_hardening/fresh_holdouts/h1_karatsuba_wikitext/h1_karatsuba.pdf",
+    "png_path": "results/053_clear_writing_release_quality_hardening/fresh_holdouts/h1_karatsuba_wikitext/page-1.png",
+    "text_path": "results/053_clear_writing_release_quality_hardening/fresh_holdouts/h1_karatsuba_wikitext/h1_karatsuba.txt"
+  }
+}

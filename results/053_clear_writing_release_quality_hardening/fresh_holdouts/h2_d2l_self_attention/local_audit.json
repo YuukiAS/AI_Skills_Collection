@@ -1,0 +1,75 @@
+{
+  "schema": "FRESH_HOLDOUT_LOCAL_AUDIT_V1",
+  "holdout": "H2_D2L_SELF_ATTENTION",
+  "candidate_path": "results/053_clear_writing_release_quality_hardening/fresh_holdouts/h2_d2l_self_attention/h2_d2l_self_attention.md",
+  "candidate_sha256": "18cbbbccc0fe246ed7fc3a01fca0faa171b9c8cf498217b8c75280d2f545cb1e",
+  "candidate_bytes": 8339,
+  "candidate_lines": 106,
+  "candidate_representation": {
+    "ok": true,
+    "reader_visible_markup_count": 0,
+    "formula_text_fence_count": 0,
+    "unrendered_math_count": 0,
+    "malformed_table_count": 0,
+    "overwide_table_count": 0,
+    "target_chinese_variant_mismatch_count": 0,
+    "ordinary_english_frame_count": 0
+  },
+  "standalone_reader_frame": {
+    "ok": true,
+    "source_process_frame_count": 0
+  },
+  "required_literals_present": {
+    "自注意力": true,
+    "位置编码": true,
+    "CNN": true,
+    "RNN": true,
+    "self-attention": true,
+    "positional encoding": true,
+    "\\mathcal{O}(n^2d)": true,
+    "\\mathcal{O}(1)": true,
+    "最大路径长度": true,
+    "p_{i, 2j}": true,
+    "p_{i, 2j+1}": true,
+    "10000": true,
+    "\\delta": true,
+    "Vaswani": true,
+    "练习": true
+  },
+  "forbidden_literals_count": {
+    "{{": 0,
+    "}}": 2,
+    "<ref": 0,
+    "</ref>": 0,
+    ":cite:": 0,
+    ":label:": 0,
+    ":numref:": 0,
+    ":eqref:": 0,
+    ":begin_tab:": 0,
+    ":end_tab:": 0,
+    "#@tab": 0,
+    "../img": 0,
+    "<!--": 0
+  },
+  "code_fence_count": 0,
+  "formula_text_fence_count": 0,
+  "unrendered_math_count": 0,
+  "reader_visible_markup_count": 0,
+  "overwide_table_count": 0,
+  "source_process_framing_count": 0,
+  "workflow_trace": false,
+  "manual_pdf_qa": {
+    "decision": "PASS",
+    "checked_pages": [
+      "page-1.png",
+      "page-2.png"
+    ],
+    "pdf_path": "results/053_clear_writing_release_quality_hardening/fresh_holdouts/h2_d2l_self_attention/h2_d2l_self_attention.pdf",
+    "text_path": "results/053_clear_writing_release_quality_hardening/fresh_holdouts/h2_d2l_self_attention/h2_d2l_self_attention.txt",
+    "page_count": 2,
+    "page_size": "A4",
+    "encrypted": false,
+    "visual_findings": []
+  },
+  "literal_count_note": "The two occurrences of }} are ordinary LaTeX closing braces inside 10000^{2j/d}}\\right), not source template markup; validator reader_visible_markup_count is 0."
+}

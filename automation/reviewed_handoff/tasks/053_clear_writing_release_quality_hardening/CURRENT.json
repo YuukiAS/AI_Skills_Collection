@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "053_clear_writing_release_quality_hardening",
-  "state": "REVISE",
+  "state": "NEEDS_GPT_PLANNER",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 1,
@@ -17,7 +17,18 @@
   "text_review_required": true,
   "text_review_manifest_path": "results/053_clear_writing_release_quality_hardening/text_review/text_inputs.json",
   "text_review_evidence_path": "results/053_clear_writing_release_quality_hardening/text_review/TEXT_REVIEW.json",
-  "next_action": "EXECUTOR_RUN_EXACTLY_TWO_FROZEN_PUBLIC_SAFE_FRESH_HOLDOUTS",
+  "next_action": "PLANNER_DECIDE_AFTER_FRESH_HOLDOUT_RENDER_QA_FAILURE_NO_REPLACEMENT_OR_TUNING_STARTED",
+  "fresh_holdout_status": {
+    "candidate_commit": "d4570c764326cd10b63eae5e605cc8ff885bd7f2",
+    "batch_manifest_path": "results/053_clear_writing_release_quality_hardening/fresh_holdouts/fresh_holdout_batch_manifest.json",
+    "status_path": "results/053_clear_writing_release_quality_hardening/fresh_holdouts/fresh_holdout_status.md",
+    "h1_status": "FAIL_RENDER_QA_READER_VISIBLE_MISSING_GLYPH",
+    "h2_status": "PASS",
+    "replacement_or_tuning_after_batch_start": false,
+    "terra_review_started": false,
+    "ci_started_after_fresh_gate": false,
+    "production_smoke_started_after_fresh_gate": false
+  },
   "human_recovery_authorization": "AUTHORIZE_ONE_EXTRA_K3_REPLAY",
   "latest_human_decision": {
     "decision": "AUTHORIZE_ONE_EXTRA_K3_REPLAY",

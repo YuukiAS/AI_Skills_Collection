@@ -6,13 +6,15 @@ implementation_commit: fcb20edbe2a738db39e3a9d9ed8c6b451ec66526
 
 # Result - 053_clear_writing_release_quality_hardening
 
-status: NEEDS_GPT_PLANNER_K3_RENDER_QA_FAIL_REPLAY_BUDGET_EXHAUSTED
+status: NEEDS_GPT_PLANNER_FRESH_HOLDOUT_RENDER_QA_FAIL
 
 ## Summary
 
 Focused implementation for the first 053 quality hardening gate is complete and committed on the task branch, but the required canonical candidate replay has not run. The current environment prevents the existing candidate replay helper from temporarily writing the configured `CODEX_HOME` plugin cache, and Auto-review rejected the required escalated execution even after current-user approval.
 
-This is not a Clear Writing product PASS. It is a truthful handoff after implementation plus local focused validation.
+This is not a Clear Writing product PASS. It is a truthful handoff after
+implementation, known-regression recovery, and the failed fresh-holdout render
+QA gate.
 
 ## Implemented
 
@@ -505,3 +507,94 @@ targeted repository search excluding current fresh_holdouts directory found no p
 
 The next legal gate is to run H1 and H2 exactly once through the frozen
 candidate and retain Markdown, audit, and rendered PDF evidence for both.
+
+## 2026-09-12 Fresh holdout batch result
+
+Executor ran both frozen public-safe fresh holdouts exactly once against the
+frozen production candidate:
+
+```text
+candidate_commit = d4570c764326cd10b63eae5e605cc8ff885bd7f2
+```
+
+Detailed status:
+
+```text
+results/053_clear_writing_release_quality_hardening/fresh_holdouts/fresh_holdout_status.md
+```
+
+H1 Karatsuba raw wikitext:
+
+```text
+run = .local-runtime/candidate-plugin-replay/runs/20260912T164653Z-2816518/
+actual candidate SKILL consumption = PASS
+candidate_representation = PASS
+raw source markup leakage = 0
+render QA = FAIL
+failure = reader-visible missing Cyrillic glyphs in the PDF sentence containing the Russian title after "俄文名称为"
+```
+
+Evidence:
+
+```text
+results/053_clear_writing_release_quality_hardening/fresh_holdouts/h1_karatsuba_wikitext/h1_karatsuba.md
+results/053_clear_writing_release_quality_hardening/fresh_holdouts/h1_karatsuba_wikitext/h1_karatsuba.pdf
+results/053_clear_writing_release_quality_hardening/fresh_holdouts/h1_karatsuba_wikitext/page-1.png
+results/053_clear_writing_release_quality_hardening/fresh_holdouts/h1_karatsuba_wikitext/local_audit.json
+```
+
+H2 D2L self-attention and positional encoding:
+
+```text
+run = .local-runtime/candidate-plugin-replay/runs/20260912T165409Z-2884781/
+actual candidate SKILL consumption = PASS
+stage_receipt = PASS
+semantic_audit = PASS
+candidate_representation = PASS
+render QA = PASS
+visual inspection = PASS for pages 1-2
+```
+
+Evidence:
+
+```text
+results/053_clear_writing_release_quality_hardening/fresh_holdouts/h2_d2l_self_attention/h2_d2l_self_attention.md
+results/053_clear_writing_release_quality_hardening/fresh_holdouts/h2_d2l_self_attention/h2_d2l_self_attention.pdf
+results/053_clear_writing_release_quality_hardening/fresh_holdouts/h2_d2l_self_attention/page-1.png
+results/053_clear_writing_release_quality_hardening/fresh_holdouts/h2_d2l_self_attention/page-2.png
+results/053_clear_writing_release_quality_hardening/fresh_holdouts/h2_d2l_self_attention/local_audit.json
+results/053_clear_writing_release_quality_hardening/fresh_holdouts/h2_d2l_self_attention/stage_receipt.json
+results/053_clear_writing_release_quality_hardening/fresh_holdouts/h2_d2l_self_attention/semantic_audit.json
+```
+
+Batch consequence:
+
+```text
+fresh_holdout_1 = FAIL_RENDER_QA_READER_VISIBLE_MISSING_GLYPH
+fresh_holdout_2 = PASS
+fresh_gate = FAIL
+replacement = NOT_PERFORMED
+production_tuning_after_batch_start = NOT_PERFORMED
+terra_review = NOT_STARTED
+release_ci = NOT_STARTED_AFTER_FRESH_GATE
+production_smoke = NOT_STARTED_AFTER_FRESH_GATE
+```
+
+Under the frozen Plan, any true fresh holdout failure fails the whole fresh gate.
+Executor therefore did not proceed to Terra, release CI, production smoke,
+Scheduled GPT Reviewer, final user acceptance, or latest-main integration. The
+legal next state is `NEEDS_GPT_PLANNER` for Planner decision on the fresh
+render-QA failure without adaptive holdout replacement or silent tuning.
+
+Validation for this handoff:
+
+```text
+python3 -m json.tool automation/reviewed_handoff/tasks/053_clear_writing_release_quality_hardening/CURRENT.json = PASS
+python3 -m json.tool results/053_clear_writing_release_quality_hardening/fresh_holdouts/fresh_holdout_batch_manifest.json = PASS
+python3 -m json.tool results/053_clear_writing_release_quality_hardening/fresh_holdouts/h1_karatsuba_wikitext/local_audit.json = PASS
+python3 -m json.tool results/053_clear_writing_release_quality_hardening/fresh_holdouts/h2_d2l_self_attention/local_audit.json = PASS
+git diff --cached --check = PASS
+ai-bridge reviewed-handoff validate --target . = PASS
+production source diff = NONE in this evidence commit
+private/exports tracked files = NONE
+```

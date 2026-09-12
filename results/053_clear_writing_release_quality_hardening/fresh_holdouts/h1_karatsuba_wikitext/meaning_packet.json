@@ -1,0 +1,81 @@
+{
+  "audience": "希望理解整数乘法的普通技术读者",
+  "register": "自然简体中文",
+  "meanings": [
+    {
+      "meaning_id": "history",
+      "normalized_meaning": "名称 Karatsuba/卡拉楚巴乘法，俄文 Алгоритм Карацубы；Anatoly Karatsuba 1960 提出，1962 发表；首个渐进优于小学二次乘法的算法。",
+      "exact_items": [
+        "1960",
+        "1962"
+      ]
+    },
+    {
+      "meaning_id": "cost",
+      "normalized_meaning": "n 位数相乘，一位乘法至多 3 n^{log_2 3}≈3 n^{1.585}；n 为 2 的幂时恰 n^{log_2 3}。普通长乘法 n²；n=1024=2^10 时分别 59049 和 1048576。",
+      "exact_items": [
+        "3^{10}=59049",
+        "(2^{10})^2=1048576"
+      ]
+    },
+    {
+      "meaning_id": "comparison",
+      "normalized_meaning": "Toom–Cook 为更快的推广；充分大的 n≫1 时 Schönhage-Strassen 更快，O(n log n log log n)。",
+      "exact_items": []
+    },
+    {
+      "meaning_id": "method",
+      "normalized_meaning": "大整数各分高低两部，每部约原位数一半。三个较小乘法加加减移位，递归重复。十进制代码递归至任一因子小于10，负号单独处理。可用符号概括分解与重组关系；不保留两套代码。",
+      "exact_items": []
+    },
+    {
+      "meaning_id": "example",
+      "normalized_meaning": "B=10,m=3，12345=12×1000+345，6789=6×1000+789；z2=72,z0=272205；和乘积357×795=283815，减两积得z1=11538；按1000²、1000、1重组得83810205。",
+      "exact_items": []
+    },
+    {
+      "meaning_id": "carry",
+      "normalized_meaning": "第三次乘法输入范围小于前两次的2倍，输出范围小于4倍；减法考虑前两次乘法产生的基数1000进位。",
+      "exact_items": []
+    },
+    {
+      "meaning_id": "citations",
+      "normalized_meaning": "历史引用 Karatsuba and Ofman 1962，145:293–294；Karatsuba 1995，211:169–183；Knuth 1969 vol.2 724pp Addison-Wesley。延伸资源 Polynomial Multiplication 动画、MathWorld、Bernstein Multidigit multiplication for mathematicians；重复链接合并。",
+      "exact_items": []
+    }
+  ],
+  "reader_plan": [
+    {
+      "purpose": "算法是什么与历史归属",
+      "meanings": [
+        "history"
+      ]
+    },
+    {
+      "purpose": "三次乘法如何递归重组",
+      "meanings": [
+        "method"
+      ]
+    },
+    {
+      "purpose": "完整数字例子和运算注意事项",
+      "meanings": [
+        "example",
+        "carry"
+      ]
+    },
+    {
+      "purpose": "运算规模与其他方法比较",
+      "meanings": [
+        "cost",
+        "comparison"
+      ]
+    },
+    {
+      "purpose": "文献身份和延伸阅读",
+      "meanings": [
+        "citations"
+      ]
+    }
+  ]
+}
