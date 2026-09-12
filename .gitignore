@@ -17,6 +17,7 @@ Thumbs.db
 !exports/cardiacnexus-repo-local/.agents/
 !exports/cardiacnexus-repo-local/.agents/**
 exports/private/
+private/exports/
 .codex/
 !plugins/
 !plugins/codex/

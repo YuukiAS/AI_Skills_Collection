@@ -1,0 +1,10 @@
+{
+  "schema": "SCIENTIFIC_REWRITE_ROUTE_SELECTION_V1",
+  "selector_owner": "writing-style",
+  "selected_route": "scientific-rewrite",
+  "forced_route": false,
+  "ordinary_user_prompt": true,
+  "source_sha256": "0812403bda762f02f2dc8ef9908ad9187af1345f59e914104115bed79e8f0c9d",
+  "prompt_internal_terms": [],
+  "prompt_sha256": "9ef5fcad27497fc0cb2db94793e8dbfdf7fe7d2bda8bc2ea4e13c514263109bf"
+}

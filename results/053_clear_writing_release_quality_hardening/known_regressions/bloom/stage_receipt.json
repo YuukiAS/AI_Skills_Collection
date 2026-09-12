@@ -1,0 +1,63 @@
+{
+  "assembly": {
+    "bundle_count": 5,
+    "ok": true
+  },
+  "candidate_representation": {
+    "formula_text_fence_count": 0,
+    "malformed_table_count": 0,
+    "ok": true,
+    "ordinary_english_frame_count": 0,
+    "reader_visible_markup_count": 0,
+    "target_chinese_variant_mismatch_count": 0,
+    "unrendered_math_count": 0
+  },
+  "candidate_sha256": "c8b38402012157ef9516aee79cf2e303051e139a81e764f97be31af0c8e3fd98",
+  "created_at": "2026-09-12T13:51:12Z",
+  "exact_verification": {
+    "exact_item_count": 19,
+    "ok": true
+  },
+  "external_api_call_count": 0,
+  "fixed_size_splitter_used": false,
+  "host_codex_owned_generation": true,
+  "meaning_map": {
+    "exact_item_count": 19,
+    "meaning_count": 17,
+    "ok": true,
+    "source_anchor_count": 17
+  },
+  "paid_generation_used": false,
+  "private_plaintext_committed": false,
+  "reader_facing_internal_frame": {
+    "internal_workflow_leak_count": 0,
+    "ok": true
+  },
+  "reader_plan": {
+    "bundle_count": 5,
+    "ok": true,
+    "owned_meaning_count": 17
+  },
+  "realization_packet_count": 5,
+  "repair_packet_count": 0,
+  "requires_openai_api_key": false,
+  "route_selection": {
+    "ok": true,
+    "ordinary_user_prompt": true,
+    "selected_route": "scientific-rewrite",
+    "selector_owner": "writing-style"
+  },
+  "runtime": "scientific-rewrite.meaning-realization.v2",
+  "schema": "SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2",
+  "seed_templates_used_for_realization": false,
+  "semantic_audit": {
+    "finding_count": 0,
+    "ok": true
+  },
+  "source_copy_fallback_used": false,
+  "source_sha256": "7208e615cf53f1f12e4e6ce91408815b1e0e267f0803a8931fcdc37c697099ad",
+  "standalone_reader_frame": {
+    "ok": true,
+    "source_process_frame_count": 0
+  }
+}

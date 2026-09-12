@@ -6,7 +6,7 @@ implementation_commit: fcb20edbe2a738db39e3a9d9ed8c6b451ec66526
 
 # Result - 053_clear_writing_release_quality_hardening
 
-status: IN_PROGRESS_NEEDS_GPT_PLANNER
+status: PARTIAL_PROGRESS_AWAITING_USER_PROVIDER_TRUST_APPROVAL
 
 ## Summary
 
@@ -166,3 +166,107 @@ success cleanup = PASS
 forced-failure cleanup = PASS via focused unit tests
 SAFE_TO_INTEGRATE_INDEPENDENTLY = YES
 ```
+
+## 2026-09-12 K1/K2/K4 public replay progress
+
+After Gate 0 recovery, Executor resumed the frozen product gate sequence using
+the official candidate replay helper and candidate commit
+`fcb20edbe2a738db39e3a9d9ed8c6b451ec66526`.
+
+K1 Bloom known regression status:
+
+```text
+Markdown candidate = PASS
+stage receipt = PASS
+semantic audit = PASS
+actual candidate SKILL consumption = PASS
+render QA = PASS for public Bloom PDF
+```
+
+Evidence:
+
+```text
+results/053_clear_writing_release_quality_hardening/known_regressions/bloom/bloom_filter_rewritten.md
+results/053_clear_writing_release_quality_hardening/known_regressions/bloom/run.json
+results/053_clear_writing_release_quality_hardening/known_regressions/bloom/stage_receipt.json
+results/053_clear_writing_release_quality_hardening/render_qa/bloom/bloom_filter_rewritten.pdf
+results/053_clear_writing_release_quality_hardening/render_qa/bloom/page-1.png
+```
+
+K2 FFT known regression status:
+
+```text
+Markdown candidate = PASS
+stage receipt = PASS
+semantic audit = PASS
+actual candidate SKILL consumption = PASS
+render QA = PASS for public FFT PDF
+```
+
+Evidence:
+
+```text
+results/053_clear_writing_release_quality_hardening/known_regressions/fft/fft_wikipedia.md
+results/053_clear_writing_release_quality_hardening/known_regressions/fft/run.json
+results/053_clear_writing_release_quality_hardening/known_regressions/fft/stage_receipt.json
+results/053_clear_writing_release_quality_hardening/render_qa/fft/fft_wikipedia.pdf
+results/053_clear_writing_release_quality_hardening/render_qa/fft/page-1.png
+```
+
+K4 public compatibility status:
+
+```text
+Python re = PASS
+light Chinese polish = PASS
+fidelity-only = PASS
+English scientific prose = PASS
+052 source-process deterministic test = PASS
+052 review-packet wrapper isolation deterministic test = PASS
+```
+
+Evidence:
+
+```text
+results/053_clear_writing_release_quality_hardening/compatibility/k4_compatibility_status.md
+```
+
+Public reader-facing Markdown scans found no raw wiki/HTML/template syntax,
+source-process framing, or workflow-wrapper labels. Post-run checks found no
+`ai-skills-candidate-053` cache residue under the live Codex plugin cache roots.
+
+## 2026-09-12 K3 private replay approval gate
+
+K3 remains mandatory and pending. Executor located the authorized private source,
+the 051 historical baseline, and the 0.2 diagnostic baseline by repo-local path,
+byte size, and SHA-256 only. Private plaintext was not printed, committed, or
+pushed. The task-owned worktree now ignores `private/exports/` explicitly so the
+053 private input/output area cannot be accidentally staged.
+
+The first K3 private replay attempt did not execute. Auto-review rejected the
+escalation before process creation with this risk classification:
+
+```text
+The replay would send the private Deep Research document to the current
+Codex/model provider; although the user authorized the same artifact scope, the
+transcript did not prove that this external provider is a tenant pre-trusted
+destination. Explicit user approval after the risk is stated is required.
+```
+
+Executor did not retry the same command, did not route around the policy, did
+not copy credentials, did not change providers, and did not mutate Bridge Kit or
+Host Policy. A post-denial residue check found no candidate marketplace/plugin
+or `ai-skills-candidate-053` cache directory.
+
+Current required next action:
+
+```text
+User must explicitly approve sending the same private Deep Research source to
+the current Codex/model provider for this 053 K3 candidate replay, with the
+previously frozen limits still applying: same artifact, same purpose, existing
+Codex/OpenAI path, no credential copy, no new provider, maximum two total K3
+replays, and no additional paid Terra review.
+```
+
+Until that approval is present, 053 cannot legally proceed past K3 to fresh
+holdouts, Terra review, release CI, production smoke, Reviewer, final user
+artifact acceptance, or latest-main integration.
