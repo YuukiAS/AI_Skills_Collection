@@ -249,6 +249,37 @@ scientific attribution. For example, "Smith et al. [12] reported ..." or
 authors or that paper. It also does not apply when the user explicitly asks for
 source comparison, editing commentary, peer review, provenance, or audit output.
 
+## Reader Candidate Representation
+
+Candidate Markdown must be reader-clean before any PDF/rendering step. The
+renderer is allowed to verify presentation; it must not be used to hide a dirty
+candidate.
+
+Fail and repair the candidate when normal reader prose contains:
+
+- raw source-platform markup such as wiki templates, wiki links, `<ref>` tags,
+  HTML comments, or HTML scaffolding, unless the user explicitly asks to discuss
+  markup/code;
+- formula-like fenced `text` / `plain` blocks instead of renderable Markdown or
+  LaTeX math;
+- LaTeX commands or formula fragments such as `\frac` outside math delimiters;
+- table-shaped lines that do not form a valid Markdown table with a separator
+  row;
+- obvious Simplified/Traditional drift from the requested target Chinese
+  variant in ordinary prose;
+- ordinary English process or abstraction frames such as `provenance`,
+  `audit`, `candidate`, `pipeline`, `reader effort`, `scientific gap`, or
+  `state of the art` when they are not protected technical identities.
+
+This is a representation/fidelity gate, not a prose generator. Preserve the
+underlying citation meaning, attribution, formula relation, and table content;
+remove or re-express only the source scaffolding and process framing.
+
+Mathematical relations are exact content. Relations such as `k − 1`, `k-1`,
+subscripts, exponents, signs, variables, `O(N^2)`, and `O(N log N)` may be
+normalized for spacing or dash glyphs, but their operators and operands must not
+be dropped.
+
 ## Completion Standard
 
 This route can claim process completion only when the stage package validates:
@@ -258,6 +289,9 @@ This route can claim process completion only when the stage package validates:
 - complete source-anchor/meaning ownership;
 - valid Reader Plan bundle ownership;
 - exact items preserved;
+- candidate Markdown has no reader-visible raw markup, formula-like text
+  fences, unrendered math fragments, malformed table text, requested Chinese
+  variant drift, or unnecessary ordinary-English process framing;
 - reader-facing candidate has no internal workflow / CI / commit / task-path
   leakage;
 - standalone reader-facing candidate has no source-process framing such as

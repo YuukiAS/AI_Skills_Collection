@@ -59,6 +59,7 @@ FORBIDDEN_SOURCE_VALUE_KEYS = {
 }
 EXACT_ITEM_CATEGORIES = {
     "formula",
+    "math_relation",
     "citation",
     "path",
     "command",
@@ -104,6 +105,12 @@ INTERNAL_ROUTE_TERMS = {
     "validate-host-stage",
     "validate-stage",
 }
+MATH_RELATION_PATTERN = (
+    r"\bO\([^)\n]+\)"
+    r"|\b[A-Za-z]\s*(?:[+\-−–—=<>≤≥×*/])\s*\d+(?:\.\d+)?\b"
+    r"|\b\d+(?:\.\d+)?\s*(?:[+\-−–—=<>≤≥×*/])\s*[A-Za-z]\b"
+    r"|\b[A-Za-z]\s*(?:\^|_)\s*\{?[A-Za-z0-9+\-]+\}?"
+)
 WORKFLOW_TRACE_LITERAL_PATTERNS = [
     r"\b[0-9a-f]{40}\b",
     r"(?:^|/)automation/reviewed_handoff(?:/|$)",
@@ -147,6 +154,39 @@ SOURCE_PROCESS_ALLOWED_CONTEXT_PATTERNS = [
     r"溯源",
     r"审计",
 ]
+CANDIDATE_MARKUP_ALLOWED_CONTEXT_PATTERNS = [
+    r"markup",
+    r"HTML",
+    r"wiki",
+    r"source comparison",
+    r"editing commentary",
+    r"peer review",
+    r"代码",
+    r"标记",
+    r"模板",
+]
+READER_VISIBLE_MARKUP_PATTERNS = [
+    ("wiki_template", r"\{\{[^{}\n]{1,240}\}\}"),
+    ("wiki_link", r"\[\[[^\]\n]{1,240}\]\]"),
+    ("html_comment", r"<!--[\s\S]*?-->"),
+    ("html_ref", r"</?ref\b[^>]*>"),
+    ("html_tag", r"</?(?:span|div|sup|sub|math|table|tr|td|th|br|p|cite|a)\b[^>]*>"),
+]
+ORDINARY_ENGLISH_FRAME_PATTERNS = [
+    r"\bprovenance\b",
+    r"\baudit\b",
+    r"\bcandidate\b",
+    r"\bpipeline\b",
+    r"\breader effort\b",
+    r"\bscientific gap\b",
+    r"\bresource contract\b",
+    r"\bstate of the art\b",
+    r"\binternal audit\b",
+]
+SIMPLIFIED_REQUEST_PATTERNS = [r"简体", r"简化字", r"Simplified Chinese", r"\bsimplified\b"]
+TRADITIONAL_REQUEST_PATTERNS = [r"繁体", r"繁體", r"Traditional Chinese", r"\btraditional\b"]
+TRADITIONAL_ONLY_CHARS = set("這個結顯實驗數據條關係變義為與無後時發現證據應該內審計畫體學")
+SIMPLIFIED_ONLY_CHARS = set("这个结果显示实验数据条件关系变义为与无后时发现证据应该内部审计计划体学")
 
 
 class ValidationError(RuntimeError):
@@ -240,6 +280,164 @@ def validate_reader_facing_internal_frame(candidate: str) -> dict[str, Any]:
 def _strip_code_spans(text: str) -> str:
     text = re.sub(r"```[\s\S]*?```", "", text)
     return re.sub(r"`[^`\n]*`", "", text)
+
+
+def _strip_code_and_math_spans(text: str) -> str:
+    text = re.sub(r"```[\s\S]*?```", "", text)
+    text = re.sub(r"`[^`\n]*`", "", text)
+    text = re.sub(r"\$\$[\s\S]*?\$\$", "", text)
+    text = re.sub(r"\$[^$\n]+\$", "", text)
+    text = re.sub(r"\\\[[\s\S]*?\\\]", "", text)
+    text = re.sub(r"\\\([\s\S]*?\\\)", "", text)
+    return text
+
+
+def _context_matches(patterns: list[str], text: str) -> bool:
+    return any(re.search(pattern, text, flags=re.IGNORECASE) for pattern in patterns)
+
+
+def _is_formula_like(text: str) -> bool:
+    compact = text.strip()
+    if not compact:
+        return False
+    return bool(
+        re.search(r"\\(?:frac|sum|prod|log|exp|sqrt|alpha|beta|gamma|theta|lambda|infty|cdot|times|leq|geq)", compact)
+        or re.search(r"\bO\([^)\n]+\)", compact)
+        or re.search(r"[A-Za-z0-9]\s*(?:=|≤|≥|<|>)\s*[^,\n]+", compact)
+        or re.search(r"[A-Za-z]\s*(?:\^|_)\s*\{?[\w+\-]+\}?", compact)
+    )
+
+
+def _normalize_math_relation(text: str) -> str:
+    normalized = text.strip()
+    normalized = normalized.replace("−", "-").replace("–", "-").replace("—", "-")
+    normalized = normalized.replace("×", "*").replace("·", "*")
+    return re.sub(r"\s+", "", normalized)
+
+
+def _candidate_contains_exact_item(candidate: str, item: dict[str, Any]) -> bool:
+    literal = str(item.get("literal", ""))
+    if str(item.get("category", "")) == "math_relation":
+        wanted = _normalize_math_relation(literal)
+        candidate_relations = re.findall(MATH_RELATION_PATTERN, candidate)
+        return any(_normalize_math_relation(match) == wanted for match in candidate_relations)
+    return literal in candidate
+
+
+def find_reader_visible_source_markup(text: str, *, task_context: str = "") -> list[dict[str, str]]:
+    if _context_matches(CANDIDATE_MARKUP_ALLOWED_CONTEXT_PATTERNS, task_context):
+        return []
+    findings = []
+    body = _strip_code_spans(text)
+    for name, pattern in READER_VISIBLE_MARKUP_PATTERNS:
+        match = re.search(pattern, body, flags=re.IGNORECASE)
+        if match:
+            findings.append({"kind": name, "literal": match.group(0)})
+    return findings
+
+
+def find_formula_like_text_fences(text: str) -> list[dict[str, str]]:
+    findings = []
+    for match in re.finditer(r"```([^\n`]*)\n([\s\S]*?)```", text):
+        language = match.group(1).strip().lower()
+        body = match.group(2)
+        if language in {"", "text", "plain", "plaintext", "txt"} and _is_formula_like(body):
+            findings.append({"kind": "formula_text_fence", "literal": body.strip()[:120]})
+    return findings
+
+
+def find_unrendered_math(text: str) -> list[dict[str, str]]:
+    body = _strip_code_and_math_spans(text)
+    patterns = [
+        r"\\(?:frac|sum|prod|log|exp|sqrt|alpha|beta|gamma|theta|lambda|infty|cdot|times|leq|geq)\b",
+        r"(?<!\w)[A-Za-z]\s*_\{?[A-Za-z0-9]+\}?",
+        r"(?<!\w)[A-Za-z]\s*\^\{?[A-Za-z0-9+\-]+\}?",
+    ]
+    findings = []
+    for pattern in patterns:
+        match = re.search(pattern, body)
+        if match:
+            findings.append({"kind": "unrendered_math", "literal": match.group(0)})
+    return findings
+
+
+def find_malformed_markdown_tables(text: str) -> list[dict[str, str]]:
+    findings = []
+    lines = text.splitlines()
+    index = 0
+    while index < len(lines):
+        if lines[index].count("|") < 2:
+            index += 1
+            continue
+        block = []
+        while index < len(lines) and lines[index].count("|") >= 2:
+            block.append(lines[index])
+            index += 1
+        if len(block) >= 2:
+            has_separator = any(
+                re.fullmatch(r"\s*\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?\s*", line)
+                for line in block[1:3]
+            )
+            if not has_separator:
+                findings.append({"kind": "malformed_table", "literal": "\n".join(block[:3])})
+    return findings
+
+
+def find_target_chinese_variant_mismatch(candidate: str, *, task_context: str = "") -> list[dict[str, str]]:
+    if _context_matches(SIMPLIFIED_REQUEST_PATTERNS, task_context):
+        mismatches = sorted(TRADITIONAL_ONLY_CHARS & set(candidate))
+        if mismatches:
+            return [{"kind": "traditional_in_simplified", "literal": "".join(mismatches[:12])}]
+    if _context_matches(TRADITIONAL_REQUEST_PATTERNS, task_context):
+        mismatches = sorted(SIMPLIFIED_ONLY_CHARS & set(candidate))
+        if mismatches:
+            return [{"kind": "simplified_in_traditional", "literal": "".join(mismatches[:12])}]
+    return []
+
+
+def find_ordinary_english_framing(text: str, *, task_context: str = "") -> list[dict[str, str]]:
+    if not _contains_chinese(text):
+        return []
+    if _context_matches(SOURCE_PROCESS_ALLOWED_CONTEXT_PATTERNS, task_context):
+        return []
+    body = _strip_code_and_math_spans(text)
+    findings = []
+    for pattern in ORDINARY_ENGLISH_FRAME_PATTERNS:
+        match = re.search(pattern, body, flags=re.IGNORECASE)
+        if match:
+            findings.append({"kind": "ordinary_english_frame", "literal": match.group(0)})
+    return findings
+
+
+def validate_candidate_representation(candidate: str, *, task_context: str = "") -> dict[str, Any]:
+    markup = find_reader_visible_source_markup(candidate, task_context=task_context)
+    if markup:
+        kinds = ", ".join(finding["kind"] for finding in markup)
+        raise ValidationError("reader-visible source markup: " + kinds)
+    fenced_math = find_formula_like_text_fences(candidate)
+    if fenced_math:
+        raise ValidationError("formula-like fenced text in reader candidate")
+    unrendered_math = find_unrendered_math(candidate)
+    if unrendered_math:
+        raise ValidationError("unrendered math in reader candidate")
+    malformed_tables = find_malformed_markdown_tables(candidate)
+    if malformed_tables:
+        raise ValidationError("raw or malformed Markdown table in reader candidate")
+    variant = find_target_chinese_variant_mismatch(candidate, task_context=task_context)
+    if variant:
+        raise ValidationError("target Chinese variant mismatch: " + variant[0]["kind"])
+    english_frame = find_ordinary_english_framing(candidate, task_context=task_context)
+    if english_frame:
+        raise ValidationError("ordinary English framing in Chinese reader candidate")
+    return {
+        "ok": True,
+        "reader_visible_markup_count": 0,
+        "formula_text_fence_count": 0,
+        "unrendered_math_count": 0,
+        "malformed_table_count": 0,
+        "target_chinese_variant_mismatch_count": 0,
+        "ordinary_english_frame_count": 0,
+    }
 
 
 def find_source_process_framing(text: str, *, task_context: str = "") -> list[dict[str, str]]:
@@ -367,6 +565,7 @@ def split_source_anchors(source: str) -> list[dict[str, Any]]:
 def extract_exact_items(source: str) -> list[dict[str, str]]:
     patterns = [
         ("formula", r"\$\$[\s\S]*?\$\$|\$[^$\n]+\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)"),
+        ("math_relation", MATH_RELATION_PATTERN),
         ("citation", r"\[[0-9,\-\s]+\]"),
         ("path", r"(?<!\w)/(?:[^\s，。；,]+)|[A-Za-z0-9_.-]+/[A-Za-z0-9_./-]+"),
         ("config", r"`[^`\n]*[_.:/=][^`\n]*`"),
@@ -581,7 +780,7 @@ def validate_structural_fidelity(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def verify_exact_items(candidate: str, exact_items: list[dict[str, Any]]) -> dict[str, Any]:
-    missing = [item for item in exact_items if str(item.get("literal", "")) not in candidate]
+    missing = [item for item in exact_items if not _candidate_contains_exact_item(candidate, item)]
     if missing:
         raise ValidationError("final candidate missing exact items: " + ", ".join(str(item.get("exact_item_id")) for item in missing))
     return {"ok": True, "exact_item_count": len(exact_items)}
@@ -616,6 +815,7 @@ def validate_stage_package(
     assembly_result = validate_assembly_packet(assembly_packet)
     semantic_result = validate_semantic_audit(semantic_audit)
     exact_result = verify_exact_items(final_candidate, meaning_map.get("exact_items") or [])
+    candidate_representation_result = validate_candidate_representation(final_candidate, task_context=prompt or "")
     reader_frame_result = validate_reader_facing_internal_frame(final_candidate)
     standalone_frame_result = validate_standalone_reader_frame(final_candidate, task_context=prompt or "")
     receipt = {
@@ -640,6 +840,7 @@ def validate_stage_package(
         "assembly": assembly_result,
         "semantic_audit": semantic_result,
         "exact_verification": exact_result,
+        "candidate_representation": candidate_representation_result,
         "reader_facing_internal_frame": reader_frame_result,
         "standalone_reader_frame": standalone_frame_result,
     }

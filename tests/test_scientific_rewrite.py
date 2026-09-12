@@ -181,6 +181,7 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
             self.assertFalse(receipt["fixed_size_splitter_used"])
             self.assertFalse(receipt["seed_templates_used_for_realization"])
             self.assertFalse(receipt["private_plaintext_committed"])
+            self.assertTrue(receipt["candidate_representation"]["ok"])
 
     def test_validate_host_stage_cli_writes_route_bound_receipt(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -396,6 +397,67 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
 
             with self.assertRaisesRegex(helper.ValidationError, "source-process framing"):
                 helper.validate_stage_package(source, stage_dir, prompt=prompt)
+
+    def test_candidate_representation_rejects_raw_markup_and_formula_text_fences(self) -> None:
+        raw_markup = (
+            "Bloom filter 用 $m$ 位数组和 $k$ 个哈希函数表示集合。"
+            "{{cite web|title=Bloom filter}}<ref>Burton Bloom</ref><!-- todo -->"
+        )
+        with self.assertRaisesRegex(helper.ValidationError, "reader-visible source markup"):
+            helper.validate_candidate_representation(raw_markup)
+
+        fenced_formula = (
+            "离散傅里叶变换定义如下：\n\n"
+            "```text\n"
+            "X_k = sum_{n=0}^{N-1} x_n e^{-2 pi i k n / N}\n"
+            "O(N log N)\n"
+            "```\n"
+        )
+        with self.assertRaisesRegex(helper.ValidationError, "formula-like fenced text"):
+            helper.validate_candidate_representation(fenced_formula)
+
+    def test_candidate_representation_rejects_unrendered_latex_and_malformed_tables(self) -> None:
+        unrendered = "复杂度从 O(N^2) 降到 \\frac{N}{2}\\log_2 N，但这里没有数学分隔符。"
+        with self.assertRaisesRegex(helper.ValidationError, "unrendered math"):
+            helper.validate_candidate_representation(unrendered)
+
+        malformed_table = "实验结果如下：\n\n| 方法 | Dice |\n| FedFisher | 0.81 |\n"
+        with self.assertRaisesRegex(helper.ValidationError, "raw or malformed Markdown table"):
+            helper.validate_candidate_representation(malformed_table)
+
+        valid_table = "实验结果如下：\n\n| 方法 | Dice |\n| --- | --- |\n| FedFisher | 0.81 |\n"
+        self.assertTrue(helper.validate_candidate_representation(valid_table)["ok"])
+
+    def test_math_relation_exact_items_allow_dash_spacing_variants_but_not_operator_loss(self) -> None:
+        source = "Bloom filter 的误判率随 $m$、$n$ 和 k − 1 个哈希关系变化，FFT 复杂度是 O(N log N)。"
+        exact_items = helper.extract_exact_items(source)
+        literals = {item["literal"]: item["category"] for item in exact_items}
+
+        self.assertEqual(literals["k − 1"], "math_relation")
+        self.assertEqual(literals["O(N log N)"], "math_relation")
+
+        ok_candidate = "Bloom filter 保留 $m$、$n$ 与 k-1 个哈希之间的关系，FFT 复杂度为 O(N log N)。"
+        self.assertTrue(helper.verify_exact_items(ok_candidate, exact_items)["ok"])
+
+        broken_candidate = "Bloom filter 保留 $m$、$n$ 与 k 1 个哈希之间的关系，FFT 复杂度为 O(N log N)。"
+        with self.assertRaisesRegex(helper.ValidationError, "final candidate missing exact items"):
+            helper.verify_exact_items(broken_candidate, exact_items)
+
+    def test_target_chinese_variant_and_ordinary_english_frame_are_candidate_checks(self) -> None:
+        simplified_prompt = "请整理成简体中文成稿，保留 Bloom filter 和 Dice。"
+        traditional_candidate = "這個結果顯示 Bloom filter 在實驗中保留 Dice。"
+        with self.assertRaisesRegex(helper.ValidationError, "target Chinese variant"):
+            helper.validate_candidate_representation(traditional_candidate, task_context=simplified_prompt)
+
+        natural_candidate = "这个结果说明 Bloom filter 在实验中保留 Dice。"
+        self.assertTrue(helper.validate_candidate_representation(natural_candidate, task_context=simplified_prompt)["ok"])
+
+        internal_english = "这一段主要交代 provenance audit 和 scientific gap，不直接说明科学内容。"
+        with self.assertRaisesRegex(helper.ValidationError, "ordinary English framing"):
+            helper.validate_candidate_representation(internal_english)
+
+        allowed_english = "Bloom filter 在查询时可能产生 false positive，但不会产生 false negative。"
+        self.assertTrue(helper.validate_candidate_representation(allowed_english)["ok"])
 
     def test_structural_rewrite_allows_reordering_but_rejects_semantic_drift(self) -> None:
         protected = [

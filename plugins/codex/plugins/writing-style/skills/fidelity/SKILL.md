@@ -156,6 +156,18 @@ These must still be preserved:
   according to their literal location roles;
 - decision boundaries and conclusion strength.
 
+Representation cleanup cannot weaken preservation. Raw wiki templates, HTML
+tags, citation scaffolding, formula-like `text` code fences, malformed table
+syntax, and ordinary English process labels may be removed or re-expressed for
+the reader, but their underlying scientific content must stay bound to the same
+meaning record: citation meaning and attribution remain near the claim they
+support; formulas stay renderable; table rows remain either a valid table or an
+explicit semantic summary; and symbol/operator relations such as `k − 1`,
+`k-1`, subscripts, exponents, signs, variables, `O(N^2)`, and `O(N log N)` keep
+their operands and operators. A candidate that turns `k − 1` into `k 1`, drops a
+subscript/exponent, or moves a caveat away from the claim it limits fails
+fidelity even if the prose reads smoothly.
+
 The acceptance criterion is complete proposition/evidence coverage with lower
 reader inference burden, not source order or compression. A structural rewrite
 may pass fidelity when headings or paragraph order change, but it fails if any
