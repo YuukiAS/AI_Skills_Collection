@@ -50,6 +50,16 @@ Before editing production plugin source, Executor must confirm production `ai-sk
 
 If a real execution-process failure occurs during 053 that is independent of writing-style semantics, explicitly test whether it can recur in future AI_Skills tasks. Only when there is a concrete observed failure plus a minimal reusable prevention rule should Executor add concise generic AGENTS/workflow hardening, preferably as a separate governance commit safe to integrate independently. Do not invent new control-plane infrastructure merely to document an incident.
 
+### Planner revision 1 — legal canonical replay environment
+
+The observed read-only `CODEX_HOME` / Auto-review failure is a generic candidate-replay infrastructure failure, not a Clear Writing semantic failure, and it can recur in future AI_Skills central-plugin tasks. Do not weaken K1–K4 or substitute local unit tests for canonical candidate replay.
+
+The legal recovery is bounded to the existing repository-owned candidate replay path. Executor may make the smallest generic hardening to `scripts/candidate_plugin_replay.py`, its focused tests, `docs/workflows/CANDIDATE_PLUGIN_REPLAY.md`, and—only if a concrete reusable rule is needed—`AGENTS.md`, preferably in a separate governance commit safe to integrate independently. The repaired path must keep temporary candidate install/cache/config state in a writable repo-local ignored area under `.local-runtime/candidate-plugin-replay/**` (or an equivalent existing repo-local replay state root) while continuing to use the pinned repo-local Codex runtime and the already-authorized existing Codex account identity. It must not copy or print `auth.json` or other credentials, create a second credential-bearing home, change provider/account/credential scope, mutate the live production plugin identity/cache, modify Bridge Kit/Host Policy/execpolicy, require force/destructive Git, or rely on `require_escalated` as the product solution.
+
+The helper repair is acceptable only if focused evidence proves all of the following: the candidate is staged from the exact committed tree; temporary candidate add/list/remove and child execution can complete in the writable task-local state without changing the pre-existing same-name production plugin snapshot; actual candidate skill consumption is still proven from parsed child events; cleanup runs on success and failure; the normal existing-account model path remains the same; and no credential bytes are copied into the repo/worktree/runtime state. If the pinned Codex CLI cannot support those properties without a genuinely new credential path or other expanded authorization scope, do not invent a workaround—return to Planner/human authorization with the concrete CLI limitation.
+
+This generic replay hardening does not count as another Clear Writing product redesign, does not consume a Deep Research replay by itself, and does not alter the frozen holdout/Terra budgets. Once the canonical helper works, resume K1–K4 on the existing 053 candidate and continue the original gate order.
+
 ## Positive completion
 
 053 is complete only when the final frozen Clear Writing candidate produces genuinely reader-ready Markdown/PDF rather than merely passing mechanical checks. The observable product result must simultaneously satisfy all of the following:
@@ -83,6 +93,7 @@ A partial implementation, local test pass, candidate replay, CI pass, Reviewer h
 - **Fresh evaluation is a frozen two-item batch.** After known regressions pass, freeze the production candidate and a manifest containing exactly two public-safe, semantically complete sources: H1 math/markup-rich technical material and H2 long-form Chinese scientific/technical material, from different document families and unused for 050–053 tuning. Freeze source identity/range/hash/completeness evidence before candidate generation. No adaptive third holdout, no replacement after seeing output, and no production tuning during the batch. Any true holdout failure fails the 053 fresh gate under this Plan.
 - **Paid review is single-shot and last among artifact-quality gates.** Exactly one final `gpt-5.6-terra` Text Review is authorized, `store=false`, automatic paid retry `0`, worst-case per-call cost `<= USD 0.25`, only after known regressions, both fresh holdouts, and rendered QA pass. No second paid Terra review under 053.
 - **Private scope is fixed.** Only the already-authorized same Deep Research private artifact may be used candidate-only through existing canonical Codex/OpenAI and final Text Review paths. No new private artifact, provider, credential transfer, or broader cost scope.
+- **Canonical replay evidence remains canonical.** A sandbox permission failure does not permit replacing candidate replay with receipts, direct source invocation, unit tests, or a second credential/runtime route. The bounded generic helper repair above must preserve the existing-account replay semantics and candidate-consumption evidence.
 
 ## Implementation scope
 
@@ -99,6 +110,8 @@ Production changes must stay inside the existing Clear Writing architecture and 
 - `results/053_clear_writing_release_quality_hardening/**` for public-safe manifests, regression artifacts, audits, render QA evidence, Text Review evidence, release evidence, and Reviewer artifacts;
 - repo-local `private/exports/053_clear_writing_release_quality_hardening/**` for private Deep Research replay, rendered PDF, comparison evidence, and final human acceptance dossier. Private plaintext must not be committed or pushed.
 
+The single generic process-repair exception added by Planner revision 1 is limited to `scripts/candidate_plugin_replay.py`, `tests/test_candidate_plugin_replay.py`, `docs/workflows/CANDIDATE_PLUGIN_REPLAY.md`, and a concise existing `AGENTS.md` rule if the observed reusable failure requires one. Keep that change independent of writing-style semantics and, where practical, in a separate governance commit. Do not turn it into a runtime registry, new credential manager, Bridge feature, Host Policy exception, or new workflow/state layer.
+
 Do not modify the PDF renderer merely to make a failing candidate look clean. Reuse the mature `render-chinese-math-pdf` route for actual render QA. Do not create a new top-level skill/plugin, alternate heavy runtime, schema/state/ledger, or review transport.
 
 The minimal likely mechanical extension is to make exact/representation validation understand the observed raw-markup math/operator structures and reader-visible artifact defects without mechanically authoring prose. Executor must first write focused failing tests from the observed cases, then choose the smallest owner-layer changes that close them.
@@ -106,6 +119,14 @@ The minimal likely mechanical extension is to make exact/representation validati
 ## Acceptance and regression gates
 
 Execute in this order. Later gates cannot compensate for an earlier failure.
+
+0. **Canonical replay infrastructure recovery — only because the observed generic failure is real**
+   - first refresh `origin/main` and re-read current 053 `CURRENT.json`; continue only while Executor owns the state;
+   - reproduce the read-only candidate-cache failure with a focused non-secret diagnostic; do not request the already-granted same-scope authorization again;
+   - implement only the minimum generic helper/doc/test change needed to keep temporary candidate state writable and repo-local while preserving existing-account authentication semantics and production identity;
+   - prove no credential copy, no live production plugin/cache mutation, actual candidate consumption, and cleanup on both success and failure;
+   - rerun `tests.test_candidate_plugin_replay`; if the pinned CLI fundamentally requires a new credential-bearing home or other scope expansion, stop this recovery and re-enter Planner/human decision instead of widening scope;
+   - after this gate passes, use the repaired canonical helper for K1–K4. This gate neither consumes a fresh holdout nor a Terra review nor a Deep Research generation by itself.
 
 1. **Maintenance preflight / source authority**
    - production `ai-skills-core` is installed/enabled and actually invoked;
@@ -197,6 +218,7 @@ Reader-facing output should state the scientific/technical subject directly. Int
 - Re-proving 052 or treating its PASS as universal quality evidence.
 - New top-level writing skill/plugin, slug migration, plugin identity migration, or broad cross-plugin language redesign.
 - New heavy rewrite architecture, nested model runtime, second generation engine, Bridge Kit/Host Policy/execpolicy redesign, or new workflow/schema/state/ledger infrastructure.
+- A second credential-bearing `CODEX_HOME`, copied/symlinked credentials into task-local state, or live production plugin/cache mutation merely to bypass the sandbox. The only permitted replay-infrastructure change is the bounded repository-owned helper hardening defined above.
 - Renderer-only fixes that leave the Markdown candidate bad, or a new PDF renderer instead of the existing mature Chinese-math render route.
 - Broad regex/postprocessor systems that mechanically rewrite source markup into prose.
 - Project-specific banned-word lists, global English bans, or blanket Simplified/Traditional conversion of protected identifiers.
