@@ -4,6 +4,21 @@ Canonical maintenance inbox for the `writing-style` plugin.
 
 ## Incoming real-use feedback
 
+### Clear Writing 0.2 real-artifact release quality still fails on markup, math, language consistency, and long-document fidelity
+status: ACTIVE_053
+source: user acceptance review of Clear Writing 0.2 artifacts, 2026-09-12
+evidence: `docs/goals/053_CLEAR_WRITING_RELEASE_QUALITY_HARDENING_GOAL.md`; repo-private `private/exports/clear-writing-0.2-deep-research-diagnostic/`; historical 051 style/render baseline at `private/exports/051_writing_style_rebuild/gate4-full-report/`; task 052 frozen Bloom/Python-re/FFT evidence
+ target layer: `scientific-rewrite` + `chinese-prose` + `writing-fidelity` + bounded mechanical validation
+problem: Clear Writing 0.2 closes the 051/052 routing and source-process residuals but still produces reader-visible release-quality failures on realistic technical material: raw Wikipedia/HTML/template syntax can survive into prose; mathematical expressions can be emitted as fenced `text` instead of renderable Markdown/LaTeX; raw-markup normalization can lose operators or symbol relations such as `k − 1 -> k 1`; simplified/traditional Chinese can drift from the requested target; ordinary English and internal audit/repository framing can dominate Chinese explanation; and a long complete Deep Research rewrite can become more verbose while weakening proposition-level fidelity, formula/table rendering, or evidence boundaries. These are candidate-quality failures, not renderer-only failures and not a reason to redesign the heavy-rewrite architecture.
+candidate_action:
+- Preserve the 051/052 heavy route and host-Codex generation ownership. Strengthen the semantic/output contract in the existing `scientific-rewrite`, `chinese-prose`, `writing-fidelity`, and mechanical validator layers only where each observed failure belongs.
+- Treat wiki/HTML/template syntax as source representation, not reader prose; preserve citation meaning and mathematical relations while realizing clean reader-facing Markdown. Mechanical helpers may detect/reject bad output but must not become broad source-to-prose postprocessors.
+- Require formulas to remain real math, tables to remain renderable structures, and operators/subscripts/exponents/variable relations to be protected as semantic/exact relationships. Do not hide bad Markdown behind a PDF renderer.
+- Make requested simplified/traditional Chinese an explicit output constraint while preserving formal names, code, paths, citations, formulas, datasets, metrics and necessary acronyms.
+- Keep ordinary reasoning language in natural Chinese and remove unnecessary provenance/audit/repository framing without deleting legitimate attribution or evidence limits.
+- For long rewrites, audit proposition/evidence coverage across the complete source, not only exact-token identity or early pages. The final 053 candidate must directly replay the complete Deep Research source and be compared with both the 051 historical style/render floor and the current 0.2 diagnostic.
+promotion_gate: close through task `053_clear_writing_release_quality_hardening` only after Bloom raw-wikitext, FFT math, complete Deep Research, Python `re`, light-Chinese, fidelity-only, English scientific-prose, and 052 wrapper/source-process regressions pass; exactly two pre-frozen fresh public-safe holdouts from different families pass in Markdown and rendered PDF; the single authorized final Terra review passes; release CI/version/production-routing smoke pass; GPT Reviewer passes; and the user accepts the final dossier/PDF. No adaptive third holdout or second paid Terra review.
+
 ### Promote `writing-style` into the generic content-preserving language layer
 status: READY_FOR_PROMOTION_AFTER_050
 source: 050 Deep Research rewrite failures + Distributed Imaging report v2 + CAT-TRACE presentation reviews + cross-plugin boundary audit, 2026-09-05
