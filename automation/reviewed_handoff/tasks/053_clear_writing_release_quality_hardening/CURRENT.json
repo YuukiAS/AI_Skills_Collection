@@ -1,0 +1,22 @@
+{
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "task_key": "053_clear_writing_release_quality_hardening",
+  "state": "PLAN_REQUESTED",
+  "review_round": 0,
+  "max_review_rounds": 2,
+  "plan_revision": 0,
+  "max_plan_revisions": 1,
+  "base_commit": "2c731faf9571398f09b2554bd37d3c8836dd6154",
+  "base_branch": "main",
+  "implementation_commit": null,
+  "ci_required": true,
+  "ci_status": "PENDING",
+  "last_review_decision": null,
+  "review_limit_reached": false,
+  "human_gate_reason": null,
+  "visual_review_required": false,
+  "text_review_required": true,
+  "text_review_manifest_path": "results/053_clear_writing_release_quality_hardening/text_review/text_inputs.json",
+  "text_review_evidence_path": "results/053_clear_writing_release_quality_hardening/text_review/TEXT_REVIEW.json",
+  "next_action": "GPT_PLANNER_FREEZE_053_CLEAR_WRITING_RELEASE_QUALITY_HARDENING_PLAN"
+}
