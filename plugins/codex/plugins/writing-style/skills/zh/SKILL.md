@@ -48,6 +48,8 @@ license: MIT-compatible synthesis plus public-domain style guidance
 
 对于明确授权的 heavy scientific rewrite，列表、表格和公式拆解可以是正文结构的一部分，不按“少用列表”机械压回长段。判断标准不是候选稿更短，而是读者能不能少做跨段推理、少猜英文普通词的中文关系、少在公式和结论之间来回跳。
 
+长文如果要渲染成 PDF，表格还必须能在页面内读完。多列方法比较或长单元格不要硬塞成一张宽 Markdown 表；优先按读者问题拆成 3-5 列以内的窄表，或改成分组列表/语义摘要，并保留每一行的方法名、数字、条件、限制和归因。
+
 ## REALIZE_MEANING
 
 `REALIZE_MEANING` 是 `scientific-rewrite` heavy Chinese rewrite 路线调用的中文实现模式。它不直接读原文段落来改写，而是把已经固定的 Meaning Map / Reader Plan / exact item 变成读者能顺着读的中文。

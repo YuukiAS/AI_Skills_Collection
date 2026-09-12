@@ -265,6 +265,10 @@ Fail and repair the candidate when normal reader prose contains:
 - LaTeX commands or formula fragments such as `\frac` outside math delimiters;
 - table-shaped lines that do not form a valid Markdown table with a separator
   row;
+- Markdown tables that are too wide for a normal reader PDF, especially tables
+  with many columns or long sentence-like cells. Split them into narrower
+  tables, grouped bullet lists, or an explicit semantic summary while preserving
+  every row's scientific meaning, numbers, caveats, and attribution;
 - obvious Simplified/Traditional drift from the requested target Chinese
   variant in ordinary prose;
 - ordinary English process or abstraction frames such as `provenance`,
@@ -292,6 +296,8 @@ This route can claim process completion only when the stage package validates:
 - candidate Markdown has no reader-visible raw markup, formula-like text
   fences, unrendered math fragments, malformed table text, requested Chinese
   variant drift, or unnecessary ordinary-English process framing;
+- reader-facing candidate has no overwide Markdown table likely to clip in a
+  normal A4 PDF; wide comparisons are split or re-expressed before rendering;
 - reader-facing candidate has no internal workflow / CI / commit / task-path
   leakage;
 - standalone reader-facing candidate has no source-process framing such as

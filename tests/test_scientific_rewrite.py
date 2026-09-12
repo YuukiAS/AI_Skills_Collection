@@ -428,6 +428,24 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
         valid_table = "实验结果如下：\n\n| 方法 | Dice |\n| --- | --- |\n| FedFisher | 0.81 |\n"
         self.assertTrue(helper.validate_candidate_representation(valid_table)["ok"])
 
+    def test_candidate_representation_rejects_overwide_tables_for_reader_pdf(self) -> None:
+        overwide_table = (
+            "这些方法的区别如下：\n\n"
+            "| 方向 | 主要信息 | 参考点或空间 | 目标 | 服务端数据 | 与拟研究问题的区别 |\n"
+            "| --- | --- | --- | --- | --- | --- |\n"
+            "| ODAL | 似然得分与 Hessian | 共同参考点 | 集中似然替代函数 | 无 | 低维 GLM；全 Hessian 难扩展 |\n"
+        )
+        with self.assertRaisesRegex(helper.ValidationError, "overwide Markdown table"):
+            helper.validate_candidate_representation(overwide_table)
+
+        narrow_table = (
+            "这些方法的区别如下：\n\n"
+            "| 方法 | 信息 | 作用 |\n"
+            "| --- | --- | --- |\n"
+            "| ODAL | 似然得分与 Hessian | 近似集中似然 |\n"
+        )
+        self.assertTrue(helper.validate_candidate_representation(narrow_table)["ok"])
+
     def test_math_relation_exact_items_allow_dash_spacing_variants_but_not_operator_loss(self) -> None:
         source = "Bloom filter 的误判率随 $m$、$n$ 和 k − 1 个哈希关系变化，FFT 复杂度是 O(N log N)。"
         exact_items = helper.extract_exact_items(source)

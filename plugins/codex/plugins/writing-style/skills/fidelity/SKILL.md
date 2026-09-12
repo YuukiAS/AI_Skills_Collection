@@ -161,10 +161,13 @@ tags, citation scaffolding, formula-like `text` code fences, malformed table
 syntax, and ordinary English process labels may be removed or re-expressed for
 the reader, but their underlying scientific content must stay bound to the same
 meaning record: citation meaning and attribution remain near the claim they
-support; formulas stay renderable; table rows remain either a valid table or an
-explicit semantic summary; and symbol/operator relations such as `k − 1`,
-`k-1`, subscripts, exponents, signs, variables, `O(N^2)`, and `O(N log N)` keep
-their operands and operators. A candidate that turns `k − 1` into `k 1`, drops a
+support; formulas stay renderable; table rows remain either a valid, readable
+table or an explicit semantic summary. For reader PDFs, a table that is too wide
+to fit the page must be split into narrower tables, grouped lists, or a
+structured summary without dropping row-level meaning; and symbol/operator
+relations such as `k − 1`, `k-1`, subscripts, exponents, signs, variables,
+`O(N^2)`, and `O(N log N)` keep their operands and operators. A candidate that
+turns `k − 1` into `k 1`, drops a
 subscript/exponent, or moves a caveat away from the claim it limits fails
 fidelity even if the prose reads smoothly.
 

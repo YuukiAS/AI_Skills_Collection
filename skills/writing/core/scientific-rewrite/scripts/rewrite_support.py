@@ -187,6 +187,8 @@ SIMPLIFIED_REQUEST_PATTERNS = [r"简体", r"简化字", r"Simplified Chinese", r
 TRADITIONAL_REQUEST_PATTERNS = [r"繁体", r"繁體", r"Traditional Chinese", r"\btraditional\b"]
 TRADITIONAL_ONLY_CHARS = set("這個結顯實驗數據條關係變義為與無後時發現證據應該內審計畫體學")
 SIMPLIFIED_ONLY_CHARS = set("这个结果显示实验数据条件关系变义为与无后时发现证据应该内部审计计划体学")
+MAX_READER_TABLE_COLUMNS = 5
+MAX_READER_TABLE_LINE_CHARS = 140
 
 
 class ValidationError(RuntimeError):
@@ -383,6 +385,49 @@ def find_malformed_markdown_tables(text: str) -> list[dict[str, str]]:
     return findings
 
 
+def _split_markdown_table_row(line: str) -> list[str]:
+    stripped = line.strip()
+    if stripped.startswith("|"):
+        stripped = stripped[1:]
+    if stripped.endswith("|"):
+        stripped = stripped[:-1]
+    return [cell.strip() for cell in stripped.split("|")]
+
+
+def find_overwide_markdown_tables(text: str) -> list[dict[str, str]]:
+    findings = []
+    lines = text.splitlines()
+    index = 0
+    while index < len(lines):
+        if lines[index].count("|") < 2:
+            index += 1
+            continue
+        block = []
+        while index < len(lines) and lines[index].count("|") >= 2:
+            block.append(lines[index])
+            index += 1
+        if len(block) < 2:
+            continue
+        has_separator = any(
+            re.fullmatch(r"\s*\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?\s*", line)
+            for line in block[1:3]
+        )
+        if not has_separator:
+            continue
+        header = _split_markdown_table_row(block[0])
+        max_line_chars = max(len(line) for line in block)
+        if len(header) > MAX_READER_TABLE_COLUMNS or max_line_chars > MAX_READER_TABLE_LINE_CHARS:
+            findings.append(
+                {
+                    "kind": "overwide_table",
+                    "columns": str(len(header)),
+                    "max_line_chars": str(max_line_chars),
+                    "literal": "\n".join(block[:3]),
+                }
+            )
+    return findings
+
+
 def find_target_chinese_variant_mismatch(candidate: str, *, task_context: str = "") -> list[dict[str, str]]:
     if _context_matches(SIMPLIFIED_REQUEST_PATTERNS, task_context):
         mismatches = sorted(TRADITIONAL_ONLY_CHARS & set(candidate))
@@ -423,6 +468,9 @@ def validate_candidate_representation(candidate: str, *, task_context: str = "")
     malformed_tables = find_malformed_markdown_tables(candidate)
     if malformed_tables:
         raise ValidationError("raw or malformed Markdown table in reader candidate")
+    overwide_tables = find_overwide_markdown_tables(candidate)
+    if overwide_tables:
+        raise ValidationError("overwide Markdown table in reader candidate")
     variant = find_target_chinese_variant_mismatch(candidate, task_context=task_context)
     if variant:
         raise ValidationError("target Chinese variant mismatch: " + variant[0]["kind"])
@@ -435,6 +483,7 @@ def validate_candidate_representation(candidate: str, *, task_context: str = "")
         "formula_text_fence_count": 0,
         "unrendered_math_count": 0,
         "malformed_table_count": 0,
+        "overwide_table_count": 0,
         "target_chinese_variant_mismatch_count": 0,
         "ordinary_english_frame_count": 0,
     }
