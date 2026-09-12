@@ -349,6 +349,7 @@ reviewed/<task_key>
 - Task-bound GPT Planner/Reviewer automation 优先于 generic watcher。如果当前 task 已有明确绑定
   exact task + exact branch 的 Planner/Reviewer automation，Executor 不得再把 generic watcher
   当作 Reviewer handoff prerequisite。
+- AI_Skills workflow 中 routine Git command 必须优先使用当前 Host Policy 已定义的 canonical command shape。获取或刷新最新 `origin/main` 时写 `git fetch origin main`；完整 configured-remote 同步需要时才使用 `git fetch --all --prune`。不要仅因为省略 `main` 的近似写法通常效果相近，就让 active workflow 要求一个未被 Host Policy canonical preauthorize 的等价 command shape；若未来确实需要新的 command shape，先证明真实 production requirement，再修改 Host Policy，不要在单个 task 中临时绕过 Auto-review。
 - generic watcher dry-run 选中其他 task，只证明该 generic watcher 不适用于当前 task；不是当前
   task blocker。`READY_FOR_GPT_REVIEW` + active task-bound Reviewer transport 是正常
   `WAITING_FOR_EXTERNAL_GPT`，不得标 `BLOCKED`。
@@ -419,7 +420,7 @@ reviewed/045_presentations_real_use_regression_hardening
 1. **Resume / state refresh.** 任何 wait/resume、Scheduled GPT transition、
    human decision、CI/review 完成后，在启动新的 candidate replay、
    production replay、paid review、install smoke 或 implementation-choice
-   prompt 之前，Executor 必须先 `git fetch origin` 并重新读取当前 task
+   prompt 之前，Executor 必须先 `git fetch origin main` 并重新读取当前 task
    branch 的 `CURRENT.json`。如果 `CURRENT` 已经不是 Executor-owned 状态，
    不得启动 stale operation，也不得拿旧问题询问用户。
 2. **Candidate replay.** Central-plugin refinement 必须优先遵守

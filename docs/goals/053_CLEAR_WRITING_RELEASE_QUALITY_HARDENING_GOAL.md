@@ -25,7 +25,7 @@ Clear Writing 0.2 已证明 heavy Chinese rewrite 的 routing、Meaning Map / Re
 
 ## 2. 当前真实基线与证据
 
-启动时必须 `git fetch origin`，以当时最新 `main` 为 repo source of truth。创建本文件时的参考 main 是 `2881bbf992f2dc50ccb68be1b34d155e5db31d7f`，但不得把该 SHA 当成未来固定基线。
+启动时必须 `git fetch origin main`，以当时最新 `main` 为 repo source of truth。创建本文件时的参考 main 是 `2881bbf992f2dc50ccb68be1b34d155e5db31d7f`，但不得把该 SHA 当成未来固定基线。
 
 当前正式 plugin identity：
 
