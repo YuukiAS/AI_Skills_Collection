@@ -1,6 +1,6 @@
 # 053 Known Regression Status
 
-Status: PARTIAL_PASS_K1_K2_K3_PENDING
+Status: K1_K2_PASS_K3_FAIL
 
 Candidate commit: `fcb20edbe2a738db39e3a9d9ed8c6b451ec66526`
 
@@ -64,12 +64,24 @@ Checks:
 
 ## K3 complete private Deep Research
 
-Status: PENDING_USER_APPROVAL_FOR_PROVIDER_TRUST_SCOPE
+Status: FAIL_RENDER_QA_REPLAY_BUDGET_EXHAUSTED
 
 K3 source and comparison baselines were located by path, byte size, and SHA-256 only. Private plaintext was not printed, committed, or pushed.
 
-The first K3 candidate replay attempt was not executed because Auto-review rejected the escalation before process creation. The reviewer reason was that sending the private Deep Research document to the current Codex/model provider requires explicit user approval after the risk is stated, because the transcript did not prove that provider as a tenant pre-trusted destination.
+Provider-trust approval was recorded after Auto-review raised the private-provider boundary:
 
-No candidate marketplace/plugin/cache residue was observed after the rejected attempt.
+```text
+results/053_clear_writing_release_quality_hardening/k3_provider_trust_approval.md
+```
 
-K3 remains mandatory before fresh holdouts, Terra review, release CI, production smoke, Reviewer, final user acceptance, and latest-main integration.
+Two K3 private candidate replays have now been consumed, which exhausts the canonical 053 K3 replay budget.
+
+Detailed non-secret evidence:
+
+```text
+results/053_clear_writing_release_quality_hardening/k3_deep_research_status.md
+```
+
+The second replay proved actual candidate `SKILL.md` consumption and produced a full private Markdown/PDF, but private render QA found a visibly clipped wide table on representative page 7. Therefore K3 is not closed.
+
+K3 remains mandatory before fresh holdouts, Terra review, release CI, production smoke, Reviewer, final user acceptance, and latest-main integration. Executor must not run a third private Deep Research replay under the current frozen 053 scope.

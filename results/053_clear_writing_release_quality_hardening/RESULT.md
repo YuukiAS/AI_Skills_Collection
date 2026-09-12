@@ -6,7 +6,7 @@ implementation_commit: fcb20edbe2a738db39e3a9d9ed8c6b451ec66526
 
 # Result - 053_clear_writing_release_quality_hardening
 
-status: PARTIAL_PROGRESS_AWAITING_USER_PROVIDER_TRUST_APPROVAL
+status: NEEDS_GPT_PLANNER_K3_RENDER_QA_FAIL_REPLAY_BUDGET_EXHAUSTED
 
 ## Summary
 
@@ -234,7 +234,7 @@ Public reader-facing Markdown scans found no raw wiki/HTML/template syntax,
 source-process framing, or workflow-wrapper labels. Post-run checks found no
 `ai-skills-candidate-053` cache residue under the live Codex plugin cache roots.
 
-## 2026-09-12 K3 private replay approval gate
+## 2026-09-12 K3 private replay approval gate and final allowed replay
 
 K3 remains mandatory and pending. Executor located the authorized private source,
 the 051 historical baseline, and the 0.2 diagnostic baseline by repo-local path,
@@ -242,8 +242,9 @@ byte size, and SHA-256 only. Private plaintext was not printed, committed, or
 pushed. The task-owned worktree now ignores `private/exports/` explicitly so the
 053 private input/output area cannot be accidentally staged.
 
-The first K3 private replay attempt did not execute. Auto-review rejected the
-escalation before process creation with this risk classification:
+The initial K3 command attempt before provider-trust approval did not execute.
+Auto-review rejected the escalation before process creation with this risk
+classification:
 
 ```text
 The replay would send the private Deep Research document to the current
@@ -260,13 +261,49 @@ or `ai-skills-candidate-053` cache directory.
 Current required next action:
 
 ```text
-User must explicitly approve sending the same private Deep Research source to
+DONE: user explicitly approved sending the same private Deep Research source to
 the current Codex/model provider for this 053 K3 candidate replay, with the
 previously frozen limits still applying: same artifact, same purpose, existing
 Codex/OpenAI path, no credential copy, no new provider, maximum two total K3
 replays, and no additional paid Terra review.
 ```
 
-Until that approval is present, 053 cannot legally proceed past K3 to fresh
-holdouts, Terra review, release CI, production smoke, Reviewer, final user
-artifact acceptance, or latest-main integration.
+Approval evidence:
+
+```text
+results/053_clear_writing_release_quality_hardening/k3_provider_trust_approval.md
+```
+
+K3 replay attempts under the canonical two-replay limit:
+
+```text
+attempt 1 = 20260912T142748Z-1585738
+result = FAIL_CANONICAL_CONSUMPTION_PROOF
+reason = old 0.2 diagnostic task prompt hard-coded stale plugin source paths
+cleanup = PASS
+
+attempt 2 = 20260912T144144Z-1651902
+result = PASS canonical candidate consumption; FAIL private render QA
+reason = representative private PDF page 7 contains a visibly clipped wide table
+cleanup = PASS
+```
+
+Detailed K3 evidence:
+
+```text
+results/053_clear_writing_release_quality_hardening/k3_deep_research_status.md
+```
+
+K3 improved the 0.2 diagnostic on the measured format regressions
+(`code_fences=0`, `formula_text_fences=0`, Markdown math markers restored,
+workflow/internal English terms absent), and the private PDF rendered through
+Pandoc -> XeLaTeX with 13 pages and embedded CJK/math fonts. However, the page 7
+wide-table clipping is a real reader-visible render-quality failure. K3 is
+therefore not closed.
+
+Because the canonical Goal authorizes at most two private Deep Research
+candidate replays and both have now been consumed, Executor must not run a third
+private K3 replay under the current frozen 053 scope. Fresh holdouts, final
+Terra review, release CI, production smoke, Reviewer handoff, final user
+artifact acceptance, and latest-main integration remain legally unavailable
+until Planner/user provides a new scope decision.
