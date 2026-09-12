@@ -328,6 +328,15 @@ reviewed/<task_key>
   `task_key`、`reviewed/<task_key>` branch 和 exact task-owned worktree。不得把它
   扩大成任意 `reviewed/*`、任意 Git branch creation、Host Policy/execpolicy 修改、
   Bridge Kit 修改、helper、CLI、schema 或 state machine。
+- 用户在当前对话中明确启动或继续一个 exact frozen Goal，且该 Goal 已经写明
+  bounded authorization envelope 时，视为用户已经激活该 exact Goal 内明确列出的
+  具体授权。对这些授权范围内的 ordinary replay、runtime、cache、temporary
+  workspace、install、remove、cleanup、CI、smoke、push 或 integration 执行步骤，
+  不要反复要求用户确认。`AGENTS.md`、旧 Goal 文件或 repo 中存在授权文字本身不等于
+  current-user authorization；只有当前用户消息明确绑定并启动/继续同一个 exact Goal
+  时才激活其中已冻结的授权。新的 artifact/data scope、provider/endpoint、
+  credential path、费用上限、live-global target、destructive risk 或其他实质扩大的
+  side effect 仍必须重新询问。
 - 用户当前明确给出的顶层 Goal / canonical goal file 是 overall completion
   contract。读取 objective、bootstrap、某个 phase、implementation、本地 tests、
   `RESULT.md`、`CURRENT.json` 更新或交给 Reviewer/Planner，都只是子目标；只要
