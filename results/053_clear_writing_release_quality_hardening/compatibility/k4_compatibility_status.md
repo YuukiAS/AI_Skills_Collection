@@ -1,10 +1,11 @@
 # 053 K4 Compatibility Status
 
-Status: PASS_PUBLIC_COMPATIBILITY_CASES
+Status: PASS_PUBLIC_COMPATIBILITY_CASES_REFRESHED_ON_LATEST_CANDIDATE
 
-Candidate commit: `fcb20edbe2a738db39e3a9d9ed8c6b451ec66526`
+Candidate commit: `d4570c764326cd10b63eae5e605cc8ff885bd7f2`
 
-All four public-safe compatibility replays used the official candidate replay helper:
+All four public-safe compatibility replays used the official candidate replay
+helper:
 
 ```text
 local staged marketplace
@@ -27,8 +28,8 @@ local staged marketplace
 ## Checks
 
 - Every `run.json` records `plugin_id = writing-style@ai-skills-candidate-053`.
+- Every `run.json` records `candidate_commit = d4570c764326cd10b63eae5e605cc8ff885bd7f2`.
 - Every `run.json` records `actual_consumption.proven = true`.
-- Every replay used candidate commit `fcb20edbe2a738db39e3a9d9ed8c6b451ec66526`.
 - Reader-facing Markdown outputs have no hits for raw wiki/HTML/template syntax, source-process framing, or workflow-wrapper labels.
 - Post-run filesystem check found no `ai-skills-candidate-053` cache directory under the live Codex plugin cache roots.
 

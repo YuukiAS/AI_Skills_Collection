@@ -1,7 +1,8 @@
 {
   "forced_route": false,
   "ordinary_user_prompt": true,
-  "prompt_sha256": "7e19e2072c7187027fa89ea084e21806f178248fa7b4bdb73ccba4f4d84884a8",
+  "prompt_internal_terms": [],
+  "prompt_sha256": "7dd8bd761bdd2c685caef3126625ceeeb99839a39b745ed160e2ff43dad8fa1b",
   "reason_codes": {
     "check_only": false,
     "chinese_dominant": true,

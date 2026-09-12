@@ -1,13 +1,80 @@
 {
-  "checked": [
-    "全量技术命题与四处作者年份归因均保留",
-    "无漏报适用基础结构，删除及辅助移除例外明确",
-    "k−1运算关系与示例参数保留",
-    "复杂度保留给定说明的口径，未自行纠正或补入公式",
-    "平台模板转为正文和作者年份引用；无新增文献详情",
-    "无摘要、过程框架及外部生成调用"
+  "coverage": [
+    {
+      "disposition": "title_or_attribution_or_markup_cleanup",
+      "meaning_id": "m1"
+    },
+    {
+      "disposition": "title_or_attribution_or_markup_cleanup",
+      "meaning_id": "m2"
+    },
+    {
+      "disposition": "title_or_attribution_or_markup_cleanup",
+      "meaning_id": "m3"
+    },
+    {
+      "disposition": "title_or_attribution_or_markup_cleanup",
+      "meaning_id": "m4"
+    },
+    {
+      "disposition": "preserved",
+      "meaning_id": "m5"
+    },
+    {
+      "disposition": "preserved",
+      "meaning_id": "m6"
+    },
+    {
+      "disposition": "preserved",
+      "meaning_id": "m7"
+    },
+    {
+      "disposition": "preserved",
+      "meaning_id": "m8"
+    },
+    {
+      "disposition": "preserved",
+      "meaning_id": "m9"
+    },
+    {
+      "disposition": "preserved",
+      "meaning_id": "m10"
+    },
+    {
+      "disposition": "preserved",
+      "meaning_id": "m11"
+    },
+    {
+      "disposition": "preserved",
+      "meaning_id": "m12"
+    },
+    {
+      "disposition": "preserved",
+      "meaning_id": "m13"
+    },
+    {
+      "disposition": "preserved",
+      "meaning_id": "m14"
+    },
+    {
+      "disposition": "preserved",
+      "meaning_id": "m15"
+    },
+    {
+      "disposition": "preserved",
+      "meaning_id": "m16"
+    },
+    {
+      "disposition": "preserved",
+      "meaning_id": "m17"
+    }
   ],
   "decision": "PASS",
   "findings": [],
+  "review_notes": [
+    "定义、历史归因、传统结构比较、初始化参数、插入查询逻辑、图注示例、散列构造及引用、删除与重加限制、重建条件、性能及误报增长均已逐项核对。",
+    "引用模板转换为作者年份标记，集合与复杂度改为数学格式；正文无平台模板。",
+    "保留输入关于存储空间与O(k)的表述，不引入外部纠正或新的性能公式。"
+  ],
   "schema": "SCIENTIFIC_REWRITE_SEMANTIC_AUDIT_V1"
 }

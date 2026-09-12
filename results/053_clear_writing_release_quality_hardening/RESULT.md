@@ -307,3 +307,152 @@ private K3 replay under the current frozen 053 scope. Fresh holdouts, final
 Terra review, release CI, production smoke, Reviewer handoff, final user
 artifact acceptance, and latest-main integration remain legally unavailable
 until Planner/user provides a new scope decision.
+
+## 2026-09-12 K3 additional authorized replay result
+
+Planner/user recorded one additional bounded K3 replay authorization in current
+workflow state:
+
+```text
+automation/reviewed_handoff/tasks/053_clear_writing_release_quality_hardening/CURRENT.json
+latest_human_decision.decision = AUTHORIZE_ONE_EXTRA_K3_REPLAY
+additional_k3_replays_authorized = 1
+```
+
+Executor first committed the candidate-layer wide-table hardening:
+
+```text
+d4570c764326cd10b63eae5e605cc8ff885bd7f2
+Prevent overwide reader PDF tables
+```
+
+One pre-run command using `final_report.md` as the private replay input was
+rejected by Auto-review before process creation because it did not match the
+exact previously authorized K3 source. Executor did not retry that command or
+route around the policy. The executed K3 attempt used the same authorized source
+file as attempt 2:
+
+```text
+private/exports/053_clear_writing_release_quality_hardening/inputs/source_extracted_layout.txt
+sha256 = f447de7acaae76486e42e6281f9280b482c770303a67c0861256ddba67316213
+```
+
+Attempt 3:
+
+```text
+run = .local-runtime/candidate-plugin-replay/runs/20260912T160539Z-2627334/
+candidate_commit = d4570c764326cd10b63eae5e605cc8ff885bd7f2
+actual candidate SKILL consumption = PASS
+runtime = codex-cli 0.153.4
+cleanup = PASS
+credential copy/symlink = NO
+post-run candidate cache residue = none observed
+```
+
+Private K3 Markdown/PDF evidence:
+
+```text
+private/exports/053_clear_writing_release_quality_hardening/k3_deep_research/Clear_Writing_Deep_Research_Final.md
+private/exports/053_clear_writing_release_quality_hardening/k3_deep_research/Clear_Writing_Deep_Research_Final.pdf
+private/exports/053_clear_writing_release_quality_hardening/k3_deep_research/Clear_Writing_Deep_Research_Final.txt
+```
+
+K3 candidate-level QA:
+
+```text
+candidate_sha256 = 08d8a2bc80f3bc64634e352d39ae583280980a6ca87e38a68c253964c46e98ce
+code_fences = 0
+formula_text_fences = 0
+raw_wiki_open = 0
+raw_ref_html = 0
+unrendered_math = 0
+source_process_framing = 0
+workflow/internal English terms = 0
+markdown_table_rows = 35
+overwide_tables = 0
+malformed_tables = 0
+```
+
+K3 PDF QA:
+
+```text
+renderer = Pandoc -> XeLaTeX
+pdf_sha256 = dc8a2673f1574f71bd79c82b6d81c931ecef9c1e45b377cc17e0eaed9835deb6
+pages = 12
+page_size = A4
+encrypted = no
+embedded fonts = Noto Serif SC, TeX Gyre Termes, TeX Gyre Termes Math, LM Mono, NewCMMath
+```
+
+Visual inspection covered the opening page, numeric table pages, formula-heavy
+pages, the previously failing page-7 region, the replacement method-comparison
+table on page 8, and citation-dense pages 11-12. The previous wide-table
+clipping failure is closed. Detailed non-secret evidence is recorded in:
+
+```text
+results/053_clear_writing_release_quality_hardening/k3_deep_research_status.md
+```
+
+K3 status is now PASS. Because the production candidate changed after the
+previous K1/K2/K4 public evidence, Executor must refresh those public
+known-regression and compatibility gates on commit
+`d4570c764326cd10b63eae5e605cc8ff885bd7f2` before freezing the final candidate
+for fresh holdouts.
+
+## 2026-09-12 K1/K2/K4 latest-candidate refresh
+
+Executor refreshed the public known-regression and compatibility evidence after
+the K3 table-width hardening commit.
+
+Latest production candidate source commit:
+
+```text
+d4570c764326cd10b63eae5e605cc8ff885bd7f2
+```
+
+K1 Bloom refresh:
+
+```text
+run = .local-runtime/candidate-plugin-replay/runs/20260912T162618Z-2700368/
+actual candidate SKILL consumption = PASS
+candidate_commit = d4570c764326cd10b63eae5e605cc8ff885bd7f2
+candidate_representation = PASS
+render QA = PASS, 1-page A4 PDF, embedded CJK/Latin/math fonts
+visual inspection = PASS
+```
+
+K2 FFT refresh:
+
+```text
+run = .local-runtime/candidate-plugin-replay/runs/20260912T163046Z-2729283/
+actual candidate SKILL consumption = PASS
+candidate_commit = d4570c764326cd10b63eae5e605cc8ff885bd7f2
+local required-literal audit = PASS
+candidate_representation = PASS
+render QA = PASS, 1-page A4 PDF, embedded CJK/Latin/mono/math fonts
+visual inspection = PASS
+```
+
+K4 compatibility refresh:
+
+```text
+Python re = PASS
+light Chinese polish = PASS
+fidelity-only = PASS
+English scientific prose = PASS
+all four run.json files record actual_consumption.proven = true
+all four run.json files record candidate_commit = d4570c764326cd10b63eae5e605cc8ff885bd7f2
+post-run candidate cache residue = none observed
+deterministic compatibility tests = PASS
+```
+
+Detailed evidence:
+
+```text
+results/053_clear_writing_release_quality_hardening/known_regressions/known_regression_status.md
+results/053_clear_writing_release_quality_hardening/compatibility/k4_compatibility_status.md
+```
+
+K1-K4 are now refreshed on the latest production candidate. The next legal gate
+is to freeze that candidate and write the exactly-two public-safe fresh holdout
+manifest before running the fresh batch.

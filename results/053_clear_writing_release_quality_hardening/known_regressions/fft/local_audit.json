@@ -1,0 +1,20 @@
+{
+  "schema": "053_K2_FFT_LOCAL_AUDIT_V1",
+  "candidate_commit": "d4570c764326cd10b63eae5e605cc8ff885bd7f2",
+  "candidate_sha256": "6e24835a8c8e0a1d73aee9e211e92636902da8bace80659ef73cc9c5e5af1fac",
+  "candidate_representation": {
+    "ok": true,
+    "reader_visible_markup_count": 0,
+    "formula_text_fence_count": 0,
+    "unrendered_math_count": 0,
+    "malformed_table_count": 0,
+    "overwide_table_count": 0,
+    "target_chinese_variant_mismatch_count": 0,
+    "ordinary_english_frame_count": 0
+  },
+  "source_process_framing_count": 0,
+  "workflow_trace": false,
+  "required_literals_present": true,
+  "missing_required_literals": [],
+  "forbidden_phrases_present": []
+}
