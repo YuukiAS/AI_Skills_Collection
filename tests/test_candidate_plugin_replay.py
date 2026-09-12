@@ -46,6 +46,19 @@ def make_repo(marketplace_plugin: dict | None = None) -> tuple[tempfile.Temporar
     return tmp, root, commit
 
 
+def make_staged_marketplace(run_dir: Path, plugin_name: str = "writing-style") -> Path:
+    marketplace = run_dir / "marketplace"
+    plugin_root = marketplace / "plugins" / plugin_name
+    (plugin_root / ".codex-plugin").mkdir(parents=True)
+    (plugin_root / ".codex-plugin" / "plugin.json").write_text(
+        json.dumps({"name": plugin_name, "version": "0.2"}) + "\n",
+        encoding="utf-8",
+    )
+    (plugin_root / "skills" / "zh").mkdir(parents=True)
+    (plugin_root / "skills" / "zh" / "SKILL.md").write_text("# Candidate\n", encoding="utf-8")
+    return marketplace
+
+
 class CandidateSourceTests(unittest.TestCase):
     def test_unknown_candidate_commit_fails(self) -> None:
         tmp, root, _commit = make_repo()
@@ -319,7 +332,7 @@ class ReplayMechanismTests(unittest.TestCase):
             wrong.mkdir(parents=True)
             correct.mkdir(parents=True)
             payload = {
-                "pluginId": "writing-style@ai-skills-candidate",
+                "pluginId": "writing-style@ai-skills-candidate-053",
                 "source": {"path": str(wrong)},
                 "installedPath": str(correct),
             }
@@ -331,10 +344,54 @@ class ReplayMechanismTests(unittest.TestCase):
                     "writing-style",
                 )
 
-        self.assertEqual(plugin_id, "writing-style@ai-skills-candidate")
+        self.assertEqual(plugin_id, "writing-style@ai-skills-candidate-053")
         self.assertEqual(installed_path, str(correct))
         self.assertNotEqual(installed_path, str(wrong))
         self.assertIs(returned_payload, payload)
+
+    def test_cachebuster_preserves_version_prefix(self) -> None:
+        self.assertEqual(replay.cachebuster_version("0.2", "local-1"), "0.2+codex.local-1")
+        self.assertEqual(replay.cachebuster_version("0.2+codex.old", "local-2"), "0.2+codex.local-2")
+        self.assertEqual(replay.cachebuster_version("1.2.3-beta.1+other", "local-3"), "1.2.3-beta.1+codex.local-3")
+
+    def test_add_and_remove_marketplace_use_supported_cli_commands(self) -> None:
+        captured: list[list[str]] = []
+
+        def fake_run_codex_json(_codex: Path, args: list[str], **_kwargs):
+            captured.append(args)
+            return {"name": "ai-skills-candidate-053"}
+
+        def fake_run_command(args: list[str], **_kwargs):
+            captured.append(args[1:])
+            return replay.CommandResult(tuple(args), 0, "{}", "")
+
+        with mock.patch.object(replay, "run_codex_json", side_effect=fake_run_codex_json):
+            replay.add_candidate_marketplace(Path("/repo/codex"), Path("/repo/marketplace"))
+        with mock.patch.object(replay, "run_command", side_effect=fake_run_command):
+            replay.remove_candidate_marketplace(Path("/repo/codex"))
+
+        self.assertEqual(captured[0], ["plugin", "marketplace", "add", "--json", "/repo/marketplace"])
+        self.assertEqual(captured[1], ["plugin", "marketplace", "remove", "--json", "ai-skills-candidate-053"])
+
+    def test_candidate_cache_cleanup_is_limited_to_candidate_namespace(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            candidate = root / "home" / "plugins" / "cache" / "ai-skills-candidate-053" / "writing-style" / "0.2"
+            production = root / "home" / "plugins" / "cache" / "yuukias-ai-skills" / "writing-style" / "0.2"
+            candidate.mkdir(parents=True)
+            production.mkdir(parents=True)
+
+            removed = replay.cleanup_candidate_cache_dirs(
+                [
+                    str(candidate),
+                    f"cat {candidate}/skills/zh/SKILL.md",
+                    str(production),
+                ]
+            )
+
+            self.assertEqual(removed, [str(root / "home" / "plugins" / "cache" / "ai-skills-candidate-053")])
+            self.assertFalse((root / "home" / "plugins" / "cache" / "ai-skills-candidate-053").exists())
+            self.assertTrue(production.exists())
 
     def test_candidate_absent_after_normal_completion(self) -> None:
         replay.assert_candidate_absent({"plugins": [{"pluginId": "writing-style@yuukias-ai-skills"}]})
@@ -355,24 +412,28 @@ class ReplayMechanismTests(unittest.TestCase):
         remove_calls: list[str] = []
 
         def fake_stage(_root: Path, _candidate: replay.CandidatePlugin, run_dir: Path) -> Path:
-            marketplace = run_dir / "marketplace"
-            marketplace.mkdir(parents=True)
-            return marketplace
+            return make_staged_marketplace(run_dir)
 
         def fake_run_codex_json(_codex: Path, args: list[str], **_kwargs):
             if args[:3] == ["plugin", "list", "--json"]:
                 return {"plugins": [{"pluginId": "writing-style@yuukias-ai-skills", "name": "writing-style", "enabled": True}]}
-            if args[-4:] == ["plugin", "add", "--json", "writing-style@ai-skills-candidate"]:
-                return {"pluginId": "wrong@ai-skills-candidate", "installedPath": "/tmp/nope"}
+            if args[:4] == ["plugin", "marketplace", "list", "--json"]:
+                return {"marketplaces": []}
+            if args[:4] == ["plugin", "marketplace", "add", "--json"]:
+                return {"name": "ai-skills-candidate-053"}
+            if args == ["plugin", "add", "--json", "writing-style@ai-skills-candidate-053"]:
+                return {"pluginId": "wrong@ai-skills-candidate-053", "installedPath": "/tmp/nope"}
             return None
 
         with mock.patch.object(replay, "ensure_runtime_available", return_value={"version": replay.EXPECTED_CODEX_VERSION}):
             with mock.patch.object(replay, "safe_stage_candidate", side_effect=fake_stage):
                 with mock.patch.object(replay, "run_codex_json", side_effect=fake_run_codex_json):
                     with mock.patch.object(replay, "remove_candidate_plugin", side_effect=lambda _c, plugin_id: remove_calls.append(plugin_id)):
-                        with self.assertRaisesRegex(replay.ReplayError, "unexpected pluginId"):
-                            replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
-        self.assertEqual(remove_calls, ["writing-style@ai-skills-candidate"])
+                        with mock.patch.object(replay, "remove_candidate_marketplace") as remove_marketplace:
+                            with self.assertRaisesRegex(replay.ReplayError, "unexpected pluginId"):
+                                replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
+        self.assertEqual(remove_calls, ["writing-style@ai-skills-candidate-053"])
+        remove_marketplace.assert_called_once()
 
     def test_child_failure_triggers_cleanup(self) -> None:
         tmp, root, commit = make_repo()
@@ -384,13 +445,15 @@ class ReplayMechanismTests(unittest.TestCase):
         remove_calls: list[str] = []
 
         def fake_stage(_root: Path, _candidate: replay.CandidatePlugin, run_dir: Path) -> Path:
-            marketplace = run_dir / "marketplace"
-            marketplace.mkdir(parents=True)
-            return marketplace
+            return make_staged_marketplace(run_dir)
 
         def fake_run_codex_json(_codex: Path, args: list[str], **_kwargs):
             if args[:3] == ["plugin", "list", "--json"]:
                 return {"plugins": [{"pluginId": "writing-style@yuukias-ai-skills", "name": "writing-style", "enabled": True}]}
+            if args[:4] == ["plugin", "marketplace", "list", "--json"]:
+                return {"marketplaces": []}
+            if args[:4] == ["plugin", "marketplace", "add", "--json"]:
+                return {"name": "ai-skills-candidate-053"}
             return None
 
         child = replay.CommandResult(
@@ -405,17 +468,20 @@ class ReplayMechanismTests(unittest.TestCase):
                     with mock.patch.object(
                         replay,
                         "add_candidate_plugin",
-                        return_value=("writing-style@ai-skills-candidate", str(installed), {}),
+                        return_value=("writing-style@ai-skills-candidate-053", str(installed), {}),
                     ):
-                        with mock.patch.object(replay, "run_child_exec", return_value=child):
-                            with mock.patch.object(
-                                replay,
-                                "remove_candidate_plugin",
-                                side_effect=lambda _c, plugin_id: remove_calls.append(plugin_id),
-                            ):
-                                with self.assertRaisesRegex(replay.ReplayError, "child exec failed"):
-                                    replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
-        self.assertEqual(remove_calls, ["writing-style@ai-skills-candidate"])
+                        with mock.patch.object(replay, "skill_hashes", return_value={"skills/zh/SKILL.md": "abc"}):
+                            with mock.patch.object(replay, "run_child_exec", return_value=child):
+                                with mock.patch.object(
+                                    replay,
+                                    "remove_candidate_plugin",
+                                    side_effect=lambda _c, plugin_id: remove_calls.append(plugin_id),
+                                ):
+                                    with mock.patch.object(replay, "remove_candidate_marketplace") as remove_marketplace:
+                                        with self.assertRaisesRegex(replay.ReplayError, "child exec failed"):
+                                            replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
+        self.assertEqual(remove_calls, ["writing-style@ai-skills-candidate-053"])
+        remove_marketplace.assert_called_once()
 
     def test_consumption_proof_failure_still_persists_child_streams(self) -> None:
         tmp, root, commit = make_repo()
@@ -426,13 +492,15 @@ class ReplayMechanismTests(unittest.TestCase):
         installed.mkdir(parents=True)
 
         def fake_stage(_root: Path, _candidate: replay.CandidatePlugin, run_dir: Path) -> Path:
-            marketplace = run_dir / "marketplace"
-            marketplace.mkdir(parents=True)
-            return marketplace
+            return make_staged_marketplace(run_dir)
 
         def fake_run_codex_json(_codex: Path, args: list[str], **_kwargs):
             if args[:3] == ["plugin", "list", "--json"]:
                 return {"plugins": [{"pluginId": "writing-style@yuukias-ai-skills", "name": "writing-style", "enabled": True}]}
+            if args[:4] == ["plugin", "marketplace", "list", "--json"]:
+                return {"marketplaces": []}
+            if args[:4] == ["plugin", "marketplace", "add", "--json"]:
+                return {"name": "ai-skills-candidate-053"}
             return None
 
         child_stdout = json.dumps({"type": "event", "message": "no candidate installed path here"}) + "\n"
@@ -444,12 +512,14 @@ class ReplayMechanismTests(unittest.TestCase):
                     with mock.patch.object(
                         replay,
                         "add_candidate_plugin",
-                        return_value=("writing-style@ai-skills-candidate", str(installed), {}),
+                        return_value=("writing-style@ai-skills-candidate-053", str(installed), {}),
                     ):
-                        with mock.patch.object(replay, "run_child_exec", return_value=child):
-                            with mock.patch.object(replay, "remove_candidate_plugin"):
-                                with self.assertRaisesRegex(replay.ReplayError, "actual consumption"):
-                                    replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
+                        with mock.patch.object(replay, "skill_hashes", return_value={"skills/zh/SKILL.md": "abc"}):
+                            with mock.patch.object(replay, "run_child_exec", return_value=child):
+                                with mock.patch.object(replay, "remove_candidate_plugin"):
+                                    with mock.patch.object(replay, "remove_candidate_marketplace"):
+                                        with self.assertRaisesRegex(replay.ReplayError, "actual consumption"):
+                                            replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
 
         stdout_files = list((root / ".local-runtime" / "candidate-plugin-replay" / "runs").glob("*/child.stdout.jsonl"))
         stderr_files = list((root / ".local-runtime" / "candidate-plugin-replay" / "runs").glob("*/child.stderr"))
@@ -471,15 +541,14 @@ class ReplayMechanismTests(unittest.TestCase):
         with mock.patch.object(replay, "run_command", side_effect=fake_run_command):
             replay.run_child_exec(
                 Path("/repo/.local-runtime/codex/0.153.4/bin/codex"),
-                Path("/repo/.local-runtime/candidate-marketplace"),
-                "writing-style@ai-skills-candidate",
+                "writing-style@ai-skills-candidate-053",
                 Path("/repo/workspace"),
                 Path("/repo/workspace/outputs"),
                 "Rewrite this.",
             )
 
-        self.assertIn("plugins.writing-style@ai-skills-candidate.enabled=true", captured["args"])
-        self.assertNotIn('plugins."writing-style@ai-skills-candidate".enabled=true', captured["args"])
+        self.assertIn("plugins.writing-style@ai-skills-candidate-053.enabled=true", captured["args"])
+        self.assertNotIn('plugins."writing-style@ai-skills-candidate-053".enabled=true', captured["args"])
 
 
 if __name__ == "__main__":

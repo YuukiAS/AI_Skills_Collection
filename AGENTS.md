@@ -439,6 +439,13 @@ reviewed/045_presentations_real_use_regression_hardening
    repo-local pinned runtime、reserved temporary candidate identity/cache、
    process-local install/remove 和 finally cleanup 都是普通 replay mechanics，
    不得反复触发用户选择题。
+   对 Codex plugin candidate iteration，优先采用当前 OpenAI `plugin-creator`
+   指定的 local marketplace + single Codex cachebuster + `codex plugin add`
+   reinstall + fresh session flow；不得把未经文档支持的 no-install/process-local
+   hot-loader 当成前置要求反复探测。必须保留 distinct candidate identity、
+   exact committed source verification、before/after production snapshot equality、
+   `finally` cleanup 和 no credential copy；只有 supported flow 本身被具体证明
+   不可行时，才返回 Planner/用户比较新的 replay entrypoint。
 3. **Repeated authorization.** bounded task 一旦记录了同一
    artifact/data scope、provider/endpoint、purpose、credential scope，以及
    涉及付费时相同 paid-cost ceiling 的授权，同一 scope 内的 ordinary

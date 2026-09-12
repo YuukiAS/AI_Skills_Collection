@@ -131,3 +131,38 @@ No persistent candidate install/remove was executed, no credential copy/symlink 
 A. an official Codex CLI 0.153.4 process-local loading/state override, if one exists;
 B. a cross-central-plugin narrow controlled replay entrypoint, if direct no-install loading is not supported.
 ```
+
+## 2026-09-12 official local-marketplace replay recovery
+
+Planner selected the official OpenAI `plugin-creator` local development loop:
+
+```text
+local staged marketplace
+-> single Codex cachebuster
+-> codex plugin marketplace add
+-> codex plugin add
+-> fresh codex exec session
+-> finally cleanup
+```
+
+Executor implemented the generic helper recovery in a separate governance patch, with no Clear Writing production behavior changes.
+
+Evidence:
+
+```text
+results/053_clear_writing_release_quality_hardening/candidate_replay_recovery.md
+```
+
+Gate 0 generic replay recovery status:
+
+```text
+tests.test_candidate_plugin_replay = PASS (26 tests)
+normal-entry real candidate replay smoke = PASS
+actual candidate SKILL consumption = PASS
+live production plugin/cache/config before == after = PASS
+credential copy/symlink = NO
+Auto-review denial = NO
+success cleanup = PASS
+forced-failure cleanup = PASS via focused unit tests
+SAFE_TO_INTEGRATE_INDEPENDENTLY = YES
+```

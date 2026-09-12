@@ -9,6 +9,7 @@ import io
 import json
 import os
 import platform
+import re
 import shutil
 import stat
 import subprocess
@@ -29,7 +30,8 @@ ASSET_NAME = "codex-package-x86_64-unknown-linux-musl.tar.gz"
 ASSET_URL = f"https://github.com/openai/codex/releases/download/{RELEASE_TAG}/{ASSET_NAME}"
 ASSET_SHA256 = "a822187e1a2420c61c5926721bfbd878701ed95547c9bb0d4de4498a16ba1821"
 
-MARKETPLACE_NAME = "ai-skills-candidate"
+MARKETPLACE_NAME = "ai-skills-candidate-053"
+CANDIDATE_MARKETPLACE_PREFIX = "ai-skills-candidate"
 CANDIDATE_NAMESPACE_SUFFIX = f"@{MARKETPLACE_NAME}"
 MARKETPLACE_JSON = ".agents/plugins/marketplace.json"
 
@@ -70,6 +72,13 @@ class ConsumptionEvidence:
     event_type: str
 
 
+@dataclass(frozen=True)
+class CachebusterEvidence:
+    original_version: str
+    updated_version: str
+    cachebuster: str
+
+
 def repo_root() -> Path:
     return Path(__file__).resolve().parents[1]
 
@@ -93,6 +102,18 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: fh.read(1024 * 1024), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def skill_hashes(plugin_root: Path) -> dict[str, str]:
+    skills_root = plugin_root / "skills"
+    if not skills_root.is_dir():
+        raise ReplayError("candidate plugin has no skills directory")
+    hashes = {}
+    for path in sorted(skills_root.glob("**/SKILL.md")):
+        hashes[path.relative_to(plugin_root).as_posix()] = sha256_file(path)
+    if not hashes:
+        raise ReplayError("candidate plugin has no SKILL.md files")
+    return hashes
 
 
 def run_command(
@@ -401,9 +422,20 @@ def candidate_plugin_ids(payload: Any) -> list[str]:
     ids = []
     for record in plugin_records(payload):
         plugin_id = record_plugin_id(record)
-        if plugin_id and plugin_id.endswith(CANDIDATE_NAMESPACE_SUFFIX):
+        if plugin_id and is_candidate_plugin_id(plugin_id):
             ids.append(plugin_id)
     return sorted(set(ids))
+
+
+def is_candidate_plugin_id(plugin_id: str) -> bool:
+    if "@" not in plugin_id:
+        return False
+    marketplace = plugin_id.rsplit("@", 1)[1]
+    return marketplace == CANDIDATE_MARKETPLACE_PREFIX or marketplace.startswith(f"{CANDIDATE_MARKETPLACE_PREFIX}-")
+
+
+def candidate_plugin_id(plugin_name: str) -> str:
+    return f"{plugin_name}@{MARKETPLACE_NAME}"
 
 
 def same_name_installed_snapshot(payload: Any, plugin_name: str) -> list[dict[str, Any]]:
@@ -411,7 +443,7 @@ def same_name_installed_snapshot(payload: Any, plugin_name: str) -> list[dict[st
     for record in plugin_records(payload):
         plugin_id = record_plugin_id(record)
         name = record_plugin_name(record)
-        if not plugin_id or plugin_id.endswith(CANDIDATE_NAMESPACE_SUFFIX):
+        if not plugin_id or is_candidate_plugin_id(plugin_id):
             continue
         if name == plugin_name or plugin_id.split("@", 1)[0] == plugin_name:
             snapshot.append(
@@ -444,6 +476,45 @@ def cleanup_stale_candidates(codex: Path) -> list[str]:
     return stale_ids
 
 
+def marketplace_records(payload: Any) -> list[dict[str, Any]]:
+    records = []
+    for item in iter_dicts(payload):
+        if any(key in item for key in {"name", "marketplaceName", "source", "path", "root"}):
+            records.append(item)
+    return records
+
+
+def record_marketplace_name(record: dict[str, Any]) -> str | None:
+    for key in ("name", "marketplaceName", "id"):
+        value = record.get(key)
+        if isinstance(value, str) and value:
+            return value
+    return None
+
+
+def candidate_marketplace_names(payload: Any) -> list[str]:
+    names = []
+    for record in marketplace_records(payload):
+        name = record_marketplace_name(record)
+        if name == MARKETPLACE_NAME:
+            names.append(name)
+    return sorted(set(names))
+
+
+def cleanup_stale_candidate_marketplace(codex: Path) -> list[str]:
+    listed = run_codex_json(codex, ["plugin", "marketplace", "list", "--json"], check=False)
+    stale_names = candidate_marketplace_names(listed)
+    for name in stale_names:
+        run_command([str(codex), "plugin", "marketplace", "remove", "--json", name], check=True)
+    return stale_names
+
+
+def assert_candidate_marketplace_absent(payload: Any) -> None:
+    remaining = candidate_marketplace_names(payload)
+    if remaining:
+        raise ReplayError(f"candidate marketplace still configured: {', '.join(remaining)}")
+
+
 def safe_stage_candidate(root: Path, candidate: CandidatePlugin, run_dir: Path) -> Path:
     # git archive stdout is binary; keep the public wrapper above easy to test by
     # using subprocess directly for this one command.
@@ -469,19 +540,52 @@ def safe_stage_candidate(root: Path, candidate: CandidatePlugin, run_dir: Path) 
     shutil.copytree(source, plugin_dest)
     manifest_dir = marketplace_root / ".agents" / "plugins"
     manifest_dir.mkdir(parents=True, exist_ok=True)
+    plugin_manifest = json.loads((plugin_dest / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
+    category = plugin_manifest.get("interface", {}).get("category")
+    if not isinstance(category, str) or not category:
+        category = "Productivity"
     manifest = {
         "name": MARKETPLACE_NAME,
-        "displayName": "AI Skills Candidate",
+        "interface": {"displayName": "AI Skills Candidate 053"},
         "plugins": [
             {
                 "name": candidate.name,
                 "source": {"source": "local", "path": f"./plugins/{candidate.name}"},
                 "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+                "category": category,
             }
         ],
     }
     (manifest_dir / "marketplace.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     return marketplace_root
+
+
+def cachebuster_version(version: str, cachebuster: str) -> str:
+    base_version = version.split("+", 1)[0]
+    return f"{base_version}+codex.{cachebuster}"
+
+
+def apply_cachebuster(plugin_root: Path, cachebuster: str) -> CachebusterEvidence:
+    manifest_path = plugin_root / ".codex-plugin" / "plugin.json"
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ReplayError(f"staged plugin manifest is invalid JSON: {exc}") from exc
+    version = manifest.get("version")
+    if not isinstance(version, str) or not version:
+        raise ReplayError("staged plugin manifest is missing version")
+    updated = cachebuster_version(version, cachebuster)
+    manifest["version"] = updated
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    return CachebusterEvidence(original_version=version, updated_version=updated, cachebuster=cachebuster)
+
+
+def add_candidate_marketplace(codex: Path, marketplace_root: Path) -> Any:
+    return run_codex_json(codex, ["plugin", "marketplace", "add", "--json", str(marketplace_root)])
+
+
+def remove_candidate_marketplace(codex: Path) -> None:
+    run_command([str(codex), "plugin", "marketplace", "remove", "--json", MARKETPLACE_NAME], check=True)
 
 
 def repo_relative_existing_file(root: Path, path: str) -> Path:
@@ -581,11 +685,53 @@ def first_event_type(value: Any) -> str:
     return "unknown"
 
 
+def candidate_cache_dir_from_path(value: str) -> Path | None:
+    try:
+        path = Path(value)
+    except ValueError:
+        return None
+    if not path.is_absolute():
+        return None
+    parts = path.parts
+    for index in range(len(parts) - 2):
+        if parts[index] == "plugins" and parts[index + 1] == "cache" and parts[index + 2] == MARKETPLACE_NAME:
+            return Path(*parts[: index + 3])
+    return None
+
+
+def candidate_cache_dirs_from_text(text: str) -> list[Path]:
+    pattern = re.compile(r"(/[^\s'\"\n]*/plugins/cache/" + re.escape(MARKETPLACE_NAME) + r"(?:/[^\s'\"\n]*)?)")
+    dirs = []
+    for match in pattern.finditer(text):
+        candidate = candidate_cache_dir_from_path(match.group(1))
+        if candidate is not None:
+            dirs.append(candidate)
+    return sorted(set(dirs))
+
+
+def cleanup_candidate_cache_dirs(values: Iterable[str | None]) -> list[str]:
+    dirs: set[Path] = set()
+    for value in values:
+        if not value:
+            continue
+        direct = candidate_cache_dir_from_path(value)
+        if direct is not None:
+            dirs.add(direct)
+        for found in candidate_cache_dirs_from_text(value):
+            dirs.add(found)
+    removed = []
+    for path in sorted(dirs):
+        if path.exists():
+            shutil.rmtree(path)
+            removed.append(str(path))
+    return removed
+
+
 def add_candidate_plugin(codex: Path, marketplace_root: Path, plugin_name: str) -> tuple[str, str, Any]:
-    plugin_id = f"{plugin_name}{CANDIDATE_NAMESPACE_SUFFIX}"
+    plugin_id = candidate_plugin_id(plugin_name)
     payload = run_codex_json(
         codex,
-        [*codex_config_args(marketplace_root), "plugin", "add", "--json", plugin_id],
+        ["plugin", "add", "--json", plugin_id],
     )
     if not isinstance(payload, dict):
         raise ReplayError("candidate plugin add returned non-object JSON payload")
@@ -608,7 +754,6 @@ def remove_candidate_plugin(codex: Path, plugin_id: str) -> None:
 
 def run_child_exec(
     codex: Path,
-    marketplace_root: Path,
     plugin_id: str,
     workspace: Path,
     output_dir: Path,
@@ -620,7 +765,6 @@ def run_child_exec(
             "exec",
             "--ignore-user-config",
             "--json",
-            *codex_config_args(marketplace_root),
             "-c",
             f"plugins.{plugin_id}.enabled=true",
             "-s",
@@ -647,23 +791,39 @@ def run_replay(root: Path, plugin: str, candidate_commit: str, task_arg: str, in
     run_id = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime()) + f"-{os.getpid()}"
     run_dir = paths.state_root / "runs" / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
-    plugin_id = f"{plugin}{CANDIDATE_NAMESPACE_SUFFIX}"
+    plugin_id = candidate_plugin_id(plugin)
     installed_path: str | None = None
+    marketplace_added = False
+    child_stdout = ""
     before_snapshot: list[dict[str, Any]] = []
     try:
         with replay_lock(root):
             cleanup_stale_candidates(paths.codex)
+            cleanup_stale_candidate_marketplace(paths.codex)
             before_list = run_codex_json(paths.codex, ["plugin", "list", "--json"])
             before_snapshot = same_name_installed_snapshot(before_list, plugin)
             marketplace_root = safe_stage_candidate(root, candidate, run_dir)
+            staged_plugin_root = marketplace_root / "plugins" / plugin
+            staged_skill_hashes = skill_hashes(staged_plugin_root)
+            cachebuster = apply_cachebuster(staged_plugin_root, f"local-{run_id}")
             try:
+                marketplace_payload = add_candidate_marketplace(paths.codex, marketplace_root)
+                marketplace_added = True
                 plugin_id, installed_path, add_payload = add_candidate_plugin(paths.codex, marketplace_root, plugin)
+                installed_skill_hashes = skill_hashes(Path(installed_path))
+                if installed_skill_hashes != staged_skill_hashes:
+                    raise ReplayError("installed candidate skill hashes do not match committed staged source")
                 (run_dir / "plugin-add.json").write_text(
                     json.dumps(add_payload, indent=2, sort_keys=True) + "\n",
                     encoding="utf-8",
                 )
+                (run_dir / "marketplace-add.json").write_text(
+                    json.dumps(marketplace_payload, indent=2, sort_keys=True) + "\n",
+                    encoding="utf-8",
+                )
                 workspace, output_dir, prompt = prepare_workspace(root, run_dir, task, inputs)
-                child = run_child_exec(paths.codex, marketplace_root, plugin_id, workspace, output_dir, prompt)
+                child = run_child_exec(paths.codex, plugin_id, workspace, output_dir, prompt)
+                child_stdout = child.stdout
                 stdout_path = run_dir / "child.stdout.jsonl"
                 stderr_path = run_dir / "child.stderr"
                 stdout_path.write_text(child.stdout, encoding="utf-8")
@@ -678,6 +838,15 @@ def run_replay(root: Path, plugin: str, candidate_commit: str, task_arg: str, in
                     "plugin_id": plugin_id,
                     "installed_path": installed_path,
                     "runtime_version": runtime["version"],
+                    "candidate_marketplace": MARKETPLACE_NAME,
+                    "candidate_source_path": candidate.source_path,
+                    "committed_plugin_tree": git(root, ["rev-parse", f"{candidate.commit}:{candidate.source_path}"]).stdout.strip(),
+                    "cachebuster": {
+                        "original_version": cachebuster.original_version,
+                        "updated_version": cachebuster.updated_version,
+                        "cachebuster": cachebuster.cachebuster,
+                    },
+                    "staged_skill_hashes": staged_skill_hashes,
                     "actual_consumption": {
                         "proven": True,
                         "event_type": evidence.event_type,
@@ -692,14 +861,28 @@ def run_replay(root: Path, plugin: str, candidate_commit: str, task_arg: str, in
             finally:
                 with contextlib.suppress(Exception):
                     remove_candidate_plugin(paths.codex, plugin_id)
+                if marketplace_added:
+                    with contextlib.suppress(Exception):
+                        remove_candidate_marketplace(paths.codex)
+                cache_cleanup_paths = cleanup_candidate_cache_dirs([installed_path, child_stdout])
+                (run_dir / "cleanup.json").write_text(
+                    json.dumps({"candidate_cache_dirs_removed": cache_cleanup_paths}, indent=2, sort_keys=True) + "\n",
+                    encoding="utf-8",
+                )
                 with contextlib.suppress(Exception):
                     shutil.rmtree(run_dir / "marketplace")
+                with contextlib.suppress(Exception):
+                    shutil.rmtree(run_dir / "extract")
                 after_list = run_codex_json(paths.codex, ["plugin", "list", "--json"])
                 assert_candidate_absent(after_list)
+                after_marketplaces = run_codex_json(paths.codex, ["plugin", "marketplace", "list", "--json"], check=False)
+                assert_candidate_marketplace_absent(after_marketplaces)
                 assert_production_unchanged(before_snapshot, same_name_installed_snapshot(after_list, plugin))
     except Exception:
         with contextlib.suppress(Exception):
             shutil.rmtree(run_dir / "marketplace")
+        with contextlib.suppress(Exception):
+            shutil.rmtree(run_dir / "extract")
         raise
 
 

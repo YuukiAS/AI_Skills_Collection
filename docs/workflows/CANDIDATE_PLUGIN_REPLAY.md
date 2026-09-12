@@ -29,8 +29,8 @@ Current compatibility pin:
 ```text
 Codex CLI: 0.153.4
 runtime root: .local-runtime/codex/0.153.4/
-candidate marketplace: ai-skills-candidate
-candidate identity: <plugin>@ai-skills-candidate
+candidate marketplace: ai-skills-candidate-053
+candidate identity: <plugin>@ai-skills-candidate-053
 ```
 
 The runtime pin is deliberate. Do not turn this helper into a generic runtime registry or expose arbitrary executable/version selection. Changing the pin requires a separate bounded compatibility update with real replay evidence.
@@ -44,10 +44,11 @@ The helper:
 - leaves the machine/global Codex install and `PATH` unchanged;
 - reuses the existing Codex account identity rather than copying credentials into a second home;
 - uses the reserved temporary `@ai-skills-candidate` namespace;
-- launches a fresh ephemeral `codex exec --ignore-user-config` child with the candidate enabled process-locally;
-- records `plugin-add.json`, child JSONL/stdout and stderr in the ignored run directory;
+- follows the official local-plugin development loop: stage a local marketplace, apply one Codex cachebuster to the staged plugin manifest, configure that non-default local marketplace with `codex plugin marketplace add`, reinstall with `codex plugin add <plugin>@<candidate-marketplace>`, and launch a fresh ephemeral `codex exec --ignore-user-config` child;
+- records `marketplace-add.json`, `plugin-add.json`, child JSONL/stdout and stderr in the ignored run directory;
 - proves actual candidate consumption only from parsed `command_execution` JSON events that read `SKILL.md` under the candidate plugin cache path;
-- removes the temporary candidate in `finally` cleanup;
+- removes the temporary candidate plugin, temporary marketplace config, and staged candidate files in `finally` cleanup;
+- records staged-vs-installed `SKILL.md` hashes so the cachebuster-only packaging delta does not hide source drift;
 - verifies the pre-existing same-name production plugin identity/enabled state is unchanged.
 
 A replay does **not** prove domain quality by itself. The generic helper proves candidate identity, fresh-runtime loading, actual skill consumption, cleanup and production-identity preservation. The target plugin/task still owns domain-specific route receipts, fidelity checks, rendered artifacts, scientific correctness, qualitative acceptance and unrelated regression.
@@ -59,6 +60,7 @@ Do not use this workflow to:
 - upgrade or replace the server/global Codex installation;
 - change global `PATH`, npm/conda installs, system symlinks or live global plugin configuration;
 - add a permanent candidate marketplace;
+- require an undocumented no-install/process-local plugin hot-loader when the official local marketplace/cachebuster/reinstall/fresh-session loop fits;
 - clone another AI_Skills checkout merely to replay a candidate;
 - modify Bridge Kit or Host Policy just to make a candidate replay work;
 - overwrite `writing-style@yuukias-ai-skills` or another production identity with a candidate;
@@ -87,4 +89,4 @@ Do not keep expanding the helper after a real replay works. New state machines, 
 
 ## Release boundary
 
-Candidate replay is pre-release evidence. Final closure still requires the task's frozen release gates, including unrelated regression, source/generated parity, required CI/review, version/changelog closure when applicable, and a real released/production-identity install or upgrade smoke. `@ai-skills-candidate` must never be reported as the final released plugin identity.
+Candidate replay is pre-release evidence. Final closure still requires the task's frozen release gates, including unrelated regression, source/generated parity, required CI/review, version/changelog closure when applicable, and a real released/production-identity install or upgrade smoke. `@ai-skills-candidate*` must never be reported as the final released plugin identity.
