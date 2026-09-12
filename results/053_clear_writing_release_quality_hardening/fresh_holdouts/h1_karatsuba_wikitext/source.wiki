@@ -1,0 +1,104 @@
+[[File:Karatsuba_multiplication.svg|thumb|456px|洋紅色箭頭表示乘法，琥珀色表示加法，銀色表示減法，淺青色表示左移。A、B、C顯示了用於獲得中間值的遞歸。]]
+
+'''Karatsuba算法/乘法'''、'''卡拉楚巴乘法/算法'''（{{langx|ru|Алгоритм Карацубы}}），是一种快速[[乘法算法]]，由1960年{{link-en|阿納托利·阿列克謝耶維奇·卡拉楚巴|Anatoly_Karatsuba}}提出并于1962年发表。<ref name="kara1962">
+  {{cite journal
+  | author = A. Karatsuba and Yu. Ofman
+  | title = Multiplication of Many-Digital Numbers by Automatic Computers
+  | journal = Proceedings of the USSR Academy of Sciences
+  | volume = 145
+  | year = 1962
+  | pages = 293–294}}
+</ref><ref name="kara1995">{{cite journal
+  | author = A. A. Karatsuba
+  | title = The Complexity of Computations
+  | journal = Proceedings of the Steklov Institute of Mathematics
+  | volume = 211
+  | pages = 169–183
+  | year = 1995
+  | url = http://www.ccas.ru/personal/karatsuba/divcen.pdf
+  | access-date = 2013-07-25
+  | archive-date = 2020-03-26
+  | archive-url = https://web.archive.org/web/20200326194847/http://www.ccas.ru/personal/karatsuba/divcen.pdf
+  | dead-url = no
+  }}</ref><ref name="knuthV2">Knuth D.E.（1969）''The art of computer programming. v.2.'' Addison-Wesley Publ.Co., 724 pp.</ref>它将两个<math>n</math>位数字相乘所需的一位数乘法次数减少到了至多<math>3 n^{\log_23}\approx 3 n^{1.585}</math>（如果<math>n</math>是2的乘方，则正好为<math>n^{\log_23}</math>）。因此它比要<math>n^2</math>次个位数乘法的[[乘法算法#長乘法|经典]]算法要快。例如，对于两个1024位的数相乘（<math>n = 1024 = 2^{10}</math>），卡拉楚巴算法需要<math>3^{10} = 59049</math>次个位数乘法，而经典算法需要<math>(2^{10})^2 = 1048576</math>次。[[圖姆-庫克算法|Toom–Cook算法]]是此算法更快速的泛型。对于充分大的<math>n (n \gg 1)</math>，[[Schönhage-Strassen演算法]]甚至更快，算法的时间复杂度为<math>O(n\log n\log \log n)</math>。
+
+值得一提的是，卡拉楚巴算法是第一个比小学二次乘法算法渐进快速的算法。
+
+== 算法 ==
+卡拉楚巴算法主要是用于两个大数的乘法，极大提高了运算效率，相较于普通乘法降低了复杂度，并在其中运用了递归的思想。基本的原理和做法是将位数很多的两个大数<math>x</math>和<math>y</math>分成位数较少的数，每个数都是原来<math>x</math>和<math>y</math>位数的一半。这样处理之后，简化为做三次乘法，并附带少量的加法操作和移位操作。
+
+=== 示例 ===
+要計算12345和6789的乘積：<!--其中 ''B'' = 10，請選擇 ''m'' = 3。我們使用''m''右移來分解輸入操作數，使用結果基數 (''B' '<sup>''m''</sup> = ''1000'')，如To compute the product of 12345 and 6789, where ''B'' = 10, choose ''m'' = 3. We use ''m'' right shifts for decomposing the input operands using the resulting base (''B''<sup>''m''</sup> = ''1000''), as:-->
+: 12345 = 12 · ''1000'' + 345
+:  6789 =  6 · ''1000'' + 789
+
+對只有三個數進行運算的乘法結果：
+: ''z''<sub>2</sub> = 12 × 6 = 72
+: ''z''<sub>0</sub> = 345 × 789 = 272205
+: ''z''<sub>1</sub> = (12 + 345) × (6 + 789) − ''z''<sub>2</sub> − ''z''<sub>0</sub> = 357 × 795 − 72 − 272205 = 283815 − 72 − 272205 = 11538
+
+將三部分結果相加並相應地移位：<!--We get the result by just adding these three partial results, shifted accordingly (and then taking carries into account by decomposing these three inputs in base ''1000'' like for the input operands):-->
+: 結果 = ''z''<sub>2</sub> · (''B''<sup>''m''</sup>)<sup>''2''</sup> + ''z''<sub>1</sub> · (''B''<sup>''m''</sup>)<sup>''1''</sup> + ''z''<sub>0</sub> · (''B''<sup>''m''</sup>)<sup>''0''</sup>, i.e.
+: 結果 = 72 · ''1000''<sup>2</sup> + 11538 · ''1000'' + 272205 = 83810205.
+
+注意：中間第三次乘法運算的輸入域小於前兩次乘法的兩倍，其輸出域小於前兩次乘法的四倍，並且基數為1000的進位是根據前兩次乘法計算的，在計算這兩個減法時必須考慮。<!--Note that the intermediate third multiplication operates on an input domain which is less than two times larger than for the two first multiplications, its output domain is less than four times larger, and base-''1000'' carries computed from the first two multiplications must be taken into account when computing these two subtractions.-->
+
+=== C代碼實現 ===
+使用十六進制實現。
+<syntaxhighlight lang="c">
+#include <math.h>
+int karatsuba(int x, int y) {
+    if (x < 16) or (y < 16) return x*y;
+    /* calculates the size of the numbers */
+    int m = (int)(log2(x+y) / 2),
+        /* split the digit sequences about the middle */
+        h1 = x >> m, l1 = x & m-1,
+        h2 = y >> m, l2 = y & m-1;
+    /* 3 calls made to numbers approximately half the size */
+    int z0 = karatsuba(l1,l2),
+        z1 = karatsuba((l1+h1),(l2+h2)),
+        z2 = karatsuba(h1,h2);
+    return (z2 << m*8)+(z1-z2-z0 << m*4)+(z0)
+}
+</syntaxhighlight>
+
+=== Python代码实现 ===
+使用十進制實現。
+<syntaxhighlight lang="python">
+# Python 2 and 3
+def karatsuba(num1, num2):
+    num1Str, num2Str = str(num1), str(num2)
+
+    if num1Str[0] == '-': return -karatsuba(-num1, num2)
+    if num2Str[0] == '-': return -karatsuba(num1, -num2)
+
+    if num1 < 10 or num2 < 10: return num1 * num2
+
+    maxLength = max(len(num1Str), len(num2Str))
+    num1Str = ''.join(list('0' * maxLength)[:-len(num1Str)] + list(num1Str))
+    num2Str = ''.join(list('0' * maxLength)[:-len(num2Str)] + list(num2Str))
+
+    splitPosition = maxLength // 2
+    high1, low1 = int(num1Str[:-splitPosition]), int(num1Str[-splitPosition:])
+    high2, low2 = int(num2Str[:-splitPosition]), int(num2Str[-splitPosition:])
+    z0, z2 = karatsuba(low1, low2), karatsuba(high1, high2)
+    z1 = karatsuba((low1 + high1), (low2 + high2))
+    return z2 * 10 ** (2 * splitPosition) + (z1 - z2 - z0) * 10 ** (splitPosition) + z0
+</syntaxhighlight>
+
+== 参考文献 ==
+{{Reflist}}
+* [http://www.cs.pitt.edu/~kirk/cs1501/animations/Karatsuba.html Karatsuba's Algorithm for Polynomial Multiplication]{{Wayback|url=http://www.cs.pitt.edu/~kirk/cs1501/animations/Karatsuba.html |date=20120911081709 }}
+*{{MathWorld|urlname=KaratsubaMultiplication|title=Karatsuba Multiplication}}
+* Bernstein, D. J., "[http://cr.yp.to/papers/m3.pdf Multidigit multiplication for mathematicians]{{Wayback|url=http://cr.yp.to/papers/m3.pdf |date=20060721035521 }}". Covers Karatsuba and many other multiplication algorithms.
+
+== 外部鏈接 ==
+* [http://www.cs.pitt.edu/~kirk/cs1501/animations/Karatsuba.html 卡拉楚巴多項式乘法算法] {{Wayback|url=http://www.cs.pitt.edu/~kirk/cs1501/animations/Karatsuba.html |date=20120911081709 }}
+*{{MathWorld|urlname=KaratsubaMultiplication|title=Karatsuba Multiplication（卡拉楚巴乘法）}}
+* Bernstein, D. J., "[http://cr.yp.to/papers/m3.pdf Multidigit multiplication for mathematicians] {{Wayback|url=http://cr.yp.to/papers/m3.pdf |date=20060721035521 }}". Covers Karatsuba and many other multiplication algorithms.
+
+{{数论算法}}
+
+[[Category:计算机算术算法]]
+[[Category:乘法]]
+[[Category:带有伪代码示例的条目]]

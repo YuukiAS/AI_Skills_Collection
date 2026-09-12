@@ -1,0 +1,53 @@
+{
+  "schema": "053_FRESH_HOLDOUT_BATCH_MANIFEST_V1",
+  "task_key": "053_clear_writing_release_quality_hardening",
+  "candidate_commit": "d4570c764326cd10b63eae5e605cc8ff885bd7f2",
+  "batch_size": 2,
+  "replacement_allowed": false,
+  "production_tuning_after_start_allowed": false,
+  "frozen_at": "2026-09-12T16:50:00Z",
+  "holdouts": [
+    {
+      "id": "H1",
+      "slug": "karatsuba_wikitext",
+      "document_family": "raw_wikitext_technical_reference",
+      "public_safe": true,
+      "source_url": "https://zh.wikipedia.org/w/index.php?title=%E5%8D%A1%E6%8B%89%E6%A5%9A%E5%B7%B4%E7%AE%97%E6%B3%95&action=raw",
+      "source_locator": "results/053_clear_writing_release_quality_hardening/fresh_holdouts/h1_karatsuba_wikitext/source.wiki",
+      "source_range": "full raw page source, lines 1-103",
+      "source_sha256": "991da7d4a5ab62ef5e030f01920d10f2271e417f8e9db13ab8e3815d78ef64c9",
+      "source_bytes": 7323,
+      "source_lines": 103,
+      "semantic_completeness_evidence": "Full raw page source includes title/definition, algorithm mechanism, complexity, examples/code, references, and external links.",
+      "required_stressors": [
+        "raw MediaWiki links/templates",
+        "HTML ref tags",
+        "math tags and asymptotic formulas",
+        "mixed Simplified/Traditional Chinese",
+        "technical code-like content"
+      ],
+      "not_used_in_050_053_tuning_evidence": "Targeted repository search excluding this manifest directory found no prior hits for Karatsuba/卡拉楚巴."
+    },
+    {
+      "id": "H2",
+      "slug": "d2l_self_attention",
+      "document_family": "open_textbook_markdown_tutorial",
+      "public_safe": true,
+      "source_url": "https://raw.githubusercontent.com/d2l-ai/d2l-zh/master/chapter_attention-mechanisms/self-attention-and-positional-encoding.md",
+      "source_locator": "results/053_clear_writing_release_quality_hardening/fresh_holdouts/h2_d2l_self_attention/source.md",
+      "source_range": "full Markdown chapter source, lines 1-381",
+      "source_sha256": "7eebe58c947f7f35f5c8869848f9cd3b46cb1bbd4747157d15a9e71b96a47277",
+      "source_bytes": 15644,
+      "source_lines": 381,
+      "semantic_completeness_evidence": "Full textbook section includes self-attention definition, CNN/RNN/self-attention comparison, positional encoding equations, examples, summary, and exercises.",
+      "required_stressors": [
+        "long-form Chinese technical prose",
+        "Markdown/Sphinx labels and citation tokens",
+        "display and inline LaTeX math",
+        "multiple code fences",
+        "formula-heavy explanatory derivation"
+      ],
+      "not_used_in_050_053_tuning_evidence": "Targeted repository search excluding this manifest directory found no prior hits for self-attention-and-positional-encoding, 自注意力和位置编码, d2l-ai, Dive into Deep Learning, or 动手学深度学习."
+    }
+  ]
+}

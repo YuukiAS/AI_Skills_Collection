@@ -17,7 +17,7 @@
   "text_review_required": true,
   "text_review_manifest_path": "results/053_clear_writing_release_quality_hardening/text_review/text_inputs.json",
   "text_review_evidence_path": "results/053_clear_writing_release_quality_hardening/text_review/TEXT_REVIEW.json",
-  "next_action": "EXECUTOR_FREEZE_LATEST_CANDIDATE_AND_EXACTLY_TWO_PUBLIC_SAFE_FRESH_HOLDOUTS",
+  "next_action": "EXECUTOR_RUN_EXACTLY_TWO_FROZEN_PUBLIC_SAFE_FRESH_HOLDOUTS",
   "human_recovery_authorization": "AUTHORIZE_ONE_EXTRA_K3_REPLAY",
   "latest_human_decision": {
     "decision": "AUTHORIZE_ONE_EXTRA_K3_REPLAY",

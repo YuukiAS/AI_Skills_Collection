@@ -456,3 +456,52 @@ results/053_clear_writing_release_quality_hardening/compatibility/k4_compatibili
 K1-K4 are now refreshed on the latest production candidate. The next legal gate
 is to freeze that candidate and write the exactly-two public-safe fresh holdout
 manifest before running the fresh batch.
+
+## 2026-09-12 Fresh holdout freeze
+
+Executor froze the production candidate and the exactly-two public-safe fresh
+holdout batch before running any fresh candidate generation.
+
+Frozen production candidate source commit:
+
+```text
+d4570c764326cd10b63eae5e605cc8ff885bd7f2
+```
+
+Frozen manifest:
+
+```text
+results/053_clear_writing_release_quality_hardening/fresh_holdouts/fresh_holdout_batch_manifest.json
+```
+
+Batch:
+
+```text
+H1 = karatsuba_wikitext
+source = zh.wikipedia.org raw MediaWiki page source for Karatsuba算法
+document_family = raw_wikitext_technical_reference
+sha256 = 991da7d4a5ab62ef5e030f01920d10f2271e417f8e9db13ab8e3815d78ef64c9
+stressors = raw MediaWiki links/templates, HTML ref tags, math tags, asymptotic formulas, mixed Simplified/Traditional Chinese
+
+H2 = d2l_self_attention
+source = d2l-ai/d2l-zh Markdown chapter "自注意力和位置编码"
+document_family = open_textbook_markdown_tutorial
+sha256 = 7eebe58c947f7f35f5c8869848f9cd3b46cb1bbd4747157d15a9e71b96a47277
+stressors = long-form Chinese technical prose, Sphinx labels/citation tokens, display/inline math, code fences, formula-heavy derivation
+```
+
+Preflight:
+
+```text
+manifest JSON validation = PASS
+batch size exactly two = PASS
+replacement_allowed = false
+production_tuning_after_start_allowed = false
+source hash check = PASS
+document families distinct = PASS
+public_safe = true for both
+targeted repository search excluding current fresh_holdouts directory found no prior 050-053 tuning hits for these source identities
+```
+
+The next legal gate is to run H1 and H2 exactly once through the frozen
+candidate and retain Markdown, audit, and rendered PDF evidence for both.
