@@ -1,10 +1,10 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "053_clear_writing_release_quality_hardening",
-  "state": "NEEDS_GPT_PLANNER",
+  "state": "PLAN_FROZEN",
   "review_round": 0,
   "max_review_rounds": 2,
-  "plan_revision": 0,
+  "plan_revision": 1,
   "max_plan_revisions": 1,
   "base_commit": "2c731faf9571398f09b2554bd37d3c8836dd6154",
   "base_branch": "main",
@@ -18,5 +18,5 @@
   "text_review_required": true,
   "text_review_manifest_path": "results/053_clear_writing_release_quality_hardening/text_review/text_inputs.json",
   "text_review_evidence_path": "results/053_clear_writing_release_quality_hardening/text_review/TEXT_REVIEW.json",
-  "next_action": "GPT_PLANNER_DECIDE_LEGAL_CANDIDATE_REPLAY_ENV_AFTER_AUTOREVIEW_REJECTION"
+  "next_action": "EXECUTOR_HARDEN_CANONICAL_CANDIDATE_REPLAY_WRITABLE_REPO_LOCAL_STATE_THEN_RESUME_K1_K4"
 }
