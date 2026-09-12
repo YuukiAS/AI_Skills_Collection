@@ -96,3 +96,38 @@ NEEDS_GPT_PLANNER
 ```
 
 Planner should decide a legal replay environment for the existing canonical candidate replay contract under the current Auto-review/sandbox limits, or explicitly revise the Plan if a different evidence path is required. Until then, 053 remains in progress and must not be reported achieved.
+
+## 2026-09-12 pinned CLI 0.153.4 capability preflight
+
+After Planner revision 1, Executor tested the preferred direct/process-local path required by the updated user instruction:
+
+- keep current `CODEX_HOME` and account identity unchanged;
+- do not copy, symlink, print, or migrate `auth.json`;
+- do not create a second credential-bearing home;
+- do not run persistent `codex plugin add/remove`;
+- stage the committed candidate only under ignored `.local-runtime/candidate-plugin-replay/**`;
+- enable `writing-style@ai-skills-candidate` only through process-local marketplace/config overrides;
+- accept the replay only if child JSONL proves actual candidate `SKILL.md` consumption.
+
+Result: `NEEDS_GPT_PLANNER`.
+
+Pinned `codex-cli 0.153.4` did not reach plugin loading or model execution. Every no-install/process-local attempt failed before JSONL output with:
+
+```text
+Error: failed to initialize in-process app-server client: Read-only file system (os error 30)
+```
+
+`CODEX_SQLITE_HOME` did successfully redirect reported SQLite state to repo-local ignored state while preserving the current `CODEX_HOME`, but it did not redirect the app-server control/daemon state needed by `codex exec`. Tested process-local overrides included `--disable tui_app_server`, `features.tui_app_server=false`, `sqlite_home`, `app_server_mode`, `history.persistence`, and `log_dir`; all failed at the same app-server initialization point.
+
+Non-secret evidence:
+
+```text
+results/053_clear_writing_release_quality_hardening/candidate_replay_capability_preflight.md
+```
+
+No persistent candidate install/remove was executed, no credential copy/symlink was created, no Bridge Kit or Host Policy change was made, and post-attempt plugin listing showed no `@ai-skills-candidate` identity installed. Executor is returning to Planner to compare:
+
+```text
+A. an official Codex CLI 0.153.4 process-local loading/state override, if one exists;
+B. a cross-central-plugin narrow controlled replay entrypoint, if direct no-install loading is not supported.
+```
