@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "053_clear_writing_release_quality_hardening",
-  "state": "NEEDS_GPT_PLANNER",
+  "state": "AWAIT_HUMAN_DECISION",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 1,
@@ -13,11 +13,12 @@
   "ci_status": "PENDING",
   "last_review_decision": null,
   "review_limit_reached": false,
+  "human_gate_reason": "PLANNER_DECISION",
   "visual_review_required": false,
   "text_review_required": true,
   "text_review_manifest_path": "results/053_clear_writing_release_quality_hardening/text_review/text_inputs.json",
   "text_review_evidence_path": "results/053_clear_writing_release_quality_hardening/text_review/TEXT_REVIEW.json",
-  "next_action": "PLANNER_DECIDE_AFTER_FRESH_HOLDOUT_RENDER_QA_FAILURE_NO_REPLACEMENT_OR_TUNING_STARTED",
+  "next_action": "USER_CHOOSE_STOP_053_OR_START_SUCCESSOR_AFTER_GENERIC_RENDER_FONT_RECOVERY",
   "fresh_holdout_status": {
     "candidate_commit": "d4570c764326cd10b63eae5e605cc8ff885bd7f2",
     "batch_manifest_path": "results/053_clear_writing_release_quality_hardening/fresh_holdouts/fresh_holdout_batch_manifest.json",
@@ -43,5 +44,19 @@
     ],
     "additional_k3_replays_authorized": 1,
     "authorization_consumed": true
+  },
+  "planner_decision_context": {
+    "observed_failure": "The frozen H1 Karatsuba candidate passed Markdown/semantic checks, but its rendered PDF showed a reader-visible missing glyph in the legitimate Cyrillic title after '俄文名称为'.",
+    "failure_class": "READER_VISIBLE_RENDER_FONT_COVERAGE",
+    "h1_candidate_semantics_passed": true,
+    "h1_render_passed": false,
+    "h2_passed": true,
+    "production_tuning_after_batch_start": false,
+    "replacement_holdout_selected": false,
+    "adaptive_third_holdout_selected": false,
+    "terra_review_started": false,
+    "plan_revision_limit_reached": true,
+    "current_053_can_claim_pass": false,
+    "legal_recovery": "Preserve 053 as NOT_RELEASED. If the user wants to continue, fix generic renderer Unicode/font fallback on unrelated public-safe or synthetic regression evidence and start a successor Reviewed Handoff task with a newly frozen complete two-item fresh batch; do not rescore or replace the failed 053 holdout as unseen evidence."
   }
 }
