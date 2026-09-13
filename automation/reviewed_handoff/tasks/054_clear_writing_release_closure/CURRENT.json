@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "054_clear_writing_release_closure",
-  "state": "PLAN_REQUESTED",
+  "state": "PLAN_FROZEN",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -18,12 +18,22 @@
   "text_review_required": true,
   "text_review_manifest_path": "results/054_clear_writing_release_closure/text_review/text_inputs.json",
   "text_review_evidence_path": "results/054_clear_writing_release_closure/text_review/TEXT_REVIEW.json",
-  "next_action": "GPT_PLANNER_FREEZE_BOUNDED_054_RELEASE_CLOSURE_PLAN_FROM_CANONICAL_GOAL",
+  "next_action": "EXECUTOR_IMPLEMENT_BOUNDED_054_READER_RELEVANCE_THEN_RUN_COMPLETE_KNOWN_STRESS_AND_DEEP_RESEARCH_GATES_BEFORE_ANY_FRESH_HOLDOUT",
   "goal_contract_path": "docs/goals/054_CLEAR_WRITING_RELEASE_CLOSURE_GOAL.md",
+  "plan_path": "automation/reviewed_handoff/tasks/054_clear_writing_release_closure/PLAN.md",
   "exact_branch": "reviewed/054_clear_writing_release_closure",
   "exact_worktree": "/tmp/ai-skills-054-clear-writing-release-closure",
   "startup_origin_main": "8da77f419c3166f81ea97469a6f73ae77d89334e",
   "inherited_053_candidate_commit": "d4570c764326cd10b63eae5e605cc8ff885bd7f2",
+  "planned_release": {
+    "repository_bump": "PATCH",
+    "planning_snapshot_repository_version": "5.0.4",
+    "planning_snapshot_repository_target": "5.0.5",
+    "writing_style_version_from": "0.2",
+    "writing_style_version_to": "0.3",
+    "other_plugins": "NO_BUMP",
+    "refresh_latest_main_before_release": true
+  },
   "predecessor_status": {
     "053_status": "NOT_RELEASED_EVIDENCE_BEARING_FRESH_BATCH_FAIL",
     "do_not_rewrite_053_as_pass": true,
