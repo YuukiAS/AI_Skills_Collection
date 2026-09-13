@@ -54,6 +54,22 @@ candidate_action:
 - Treat brand/app icons as one canonical asset source across executable shell and in-app brand mark.
 promotion_gate: verify these thresholds and motion patterns on real desktop/web apps; avoid freezing exact numeric budgets universally when hardware/product constraints differ.
 
+### Component craftsmanship must be part of the definition of done
+status: NEW
+source: Bobbio native desktop review after performance repair, 2026-09-13
+target layer: frontend design-system execution / visual QA
+problem: Individual controls were technically functional and even had hover transitions, yet the native app still looked under-designed because button hierarchy, padding, icon alignment, grouping, repeated CTAs, empty-state composition, and cross-component spacing were not reviewed as one system. “No overflow + clickable + hover exists” is too low a production bar.
+candidate_action:
+- Define component completion as all applicable states: default, hover, pressed, focus-visible, disabled, loading/busy, selected/current, destructive.
+- Review button anatomy explicitly: semantic role, height, horizontal padding, icon optical size/baseline, icon-to-label gap, radius, border/background, hit target, and relationship to adjacent controls.
+- Review control clusters for hierarchy: primary action vs secondary/recovery/maintenance actions must not all have equal visual weight.
+- Treat spacing as information architecture, not just collision avoidance: group related controls, separate unrelated actions, avoid both cramped utility bars and large unexplained dead zones.
+- Add overlay/clipping/layout-shift checks while hovering, focusing, pressing and animating controls; motion must not change container geometry or collide with adjacent components.
+- Require native recordings/frame sequences for interactive-state craft; static default-state screenshots cannot prove hover/press/focus quality.
+- During final visual review, allow a repeated “functional but visibly placeholder/basic” component pattern to be P2 when it materially lowers product confidence, even if each control works.
+- Add an explicit whole-screen composition pass: repeated labels, duplicated CTAs, over-promoted maintenance buttons, unbalanced empty states, panel hierarchy and scrollbar behavior must be reviewed together.
+promotion_gate: validate on Bobbio plus at least one additional desktop/web product before turning the exact checklist into a mandatory generic production gate; the principle that all control states/hierarchy are part of done can be promoted earlier if independent evidence repeats.
+
 ## Watch boundaries
 
 - One product's visual taste is project-local unless repeated or explicitly adopted as a long-term cross-project preference.
