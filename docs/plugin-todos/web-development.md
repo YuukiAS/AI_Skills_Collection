@@ -70,6 +70,21 @@ candidate_action:
 - Add an explicit whole-screen composition pass: repeated labels, duplicated CTAs, over-promoted maintenance buttons, unbalanced empty states, panel hierarchy and scrollbar behavior must be reviewed together.
 promotion_gate: validate on Bobbio plus at least one additional desktop/web product before turning the exact checklist into a mandatory generic production gate; the principle that all control states/hierarchy are part of done can be promoted earlier if independent evidence repeats.
 
+### External review should confirm quality, not discover obvious local P2 defects
+status: NEW
+source: Bobbio repeated native GPT Work repair cycles, 2026-09-14
+target layer: frontend implementation workflow / pre-review QA
+problem: External review was repeatedly asked to identify defects that the implementation agent could have found itself by inspecting the same native evidence: nearly indistinguishable pressed/focus states, destructive controls that still looked neutral, contradictory healthy-flow screenshots containing PDF errors, and missing shell/state proof. This wastes review cycles and trains the development loop to outsource first-line quality control.
+candidate_action:
+- Add an explicit adversarial producer self-review before external review. The implementation agent should use the same P1/P2 rubric as the reviewer and try to reject its own build.
+- External review should only be requested after the producer records `P1=0`, `P2=0`, required evidence complete, and no contradictory main-path states.
+- Treat evidence integrity as part of implementation quality: a healthy-flow screenshot that contains an unrelated error banner should fail capture/validation before it reaches a reviewer.
+- Require side-by-side state discrimination checks for default/hover/pressed/focus/disabled/busy/active/destructive, judging native rendered results rather than CSS rule existence.
+- Require a claim-to-evidence matrix so each review claim has the correct evidence class; missing native proof should be detected locally.
+- Prefer deterministic assertions and fail-closed capture helpers for known state prerequisites; do not generate nominally “healthy” evidence when the required native state was not reached.
+- Use external reviewers for independent product judgment and blind spots after local QA, not for routine defect discovery that can be settled by local screenshots, recordings, performance traces, or state assertions.
+promotion_gate: replay this workflow on Bobbio 0.3 and at least one additional UI-heavy project; if it reduces external review loops without lowering quality, promote it into the Frontend Design production review workflow.
+
 ## Watch boundaries
 
 - One product's visual taste is project-local unless repeated or explicitly adopted as a long-term cross-project preference.
