@@ -6,13 +6,13 @@
   "exact_branch": "reviewed/054_clear_writing_release_closure",
   "exact_worktree": "/tmp/ai-skills-054-clear-writing-release-closure",
   "goal_contract_path": "docs/goals/054_CLEAR_WRITING_RELEASE_CLOSURE_GOAL.md",
-  "human_gate_reason": null,
+  "human_gate_reason": "PLANNER_DECISION",
   "implementation_commit": "245127e1bb46f860ea1976b1669c467c7a9f763d",
   "inherited_053_candidate_commit": "d4570c764326cd10b63eae5e605cc8ff885bd7f2",
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "PLANNER_DECIDE_AFTER_FINAL_TERRA_TEXT_REVIEW_REVISE_NO_SECOND_PAID_REVIEW_ALLOWED",
+  "next_action": "USER_AUTHORIZE_SUCCESSOR_055_CLEAR_WRITING_FINAL_RECOVERY_OR_STOP_054",
   "plan_path": "automation/reviewed_handoff/tasks/054_clear_writing_release_closure/PLAN.md",
   "plan_revision": 0,
   "planned_release": {
@@ -38,7 +38,7 @@
   "review_round": 0,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "startup_origin_main": "8da77f419c3166f81ea97469a6f73ae77d89334e",
-  "state": "NEEDS_GPT_PLANNER",
+  "state": "AWAIT_HUMAN_DECISION",
   "task_key": "054_clear_writing_release_closure",
   "text_review_evidence_path": "results/054_clear_writing_release_closure/text_review/TEXT_REVIEW.json",
   "text_review_result": {
@@ -68,5 +68,22 @@
     "use_051_052_053_evidence": true,
     "zero_paid_ci": true
   },
-  "visual_review_required": false
+  "visual_review_required": false,
+  "planner_decision_context": {
+    "decision": "054_CANNOT_REACH_RELEASE_PASS_UNDER_CURRENT_FROZEN_CONTRACT",
+    "reason": "The single authorized final Terra Text Review returned REVISE with four blocking findings, including a true fresh H3 factual-attribution failure. The frozen fresh-batch policy forbids repairing the failed fresh output and reusing it as unseen PASS, and the 054 authorization forbids a second Terra review or adaptive H4/replacement.",
+    "release_status": "NOT_RELEASED",
+    "release_ci_started": false,
+    "production_smoke_started": false,
+    "scheduled_gpt_final_reviewer_started": false,
+    "final_user_acceptance_started": false,
+    "integration_started": false,
+    "recommended_recovery": "Use a successor task to repair the generic failure classes on independent non-holdout regression material, then freeze a new complete fresh batch and authorize a new single final Terra review. Do not reuse failed 054 H1/H3 as fresh evidence.",
+    "new_authorization_required": [
+      "successor task scope",
+      "new fresh holdout batch",
+      "new final paid Terra review",
+      "any successor private Deep Research replay budget"
+    ]
+  }
 }
