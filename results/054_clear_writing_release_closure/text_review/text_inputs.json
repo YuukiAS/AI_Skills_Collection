@@ -1,0 +1,25 @@
+{
+  "external_upload_authorization": "User authorized exactly one final 054 gpt-5.6-terra Text Review through GitHub Actions using OpenAI Responses API with store=false, same existing OpenAI provider/account/purpose, automatic retry 0, and worst-case <= USD 0.25; plaintext contains only the complete Deep Research final candidate and the three fresh holdout final candidates with natural document titles.",
+  "identity_bindings": {
+    "implementation_commit": "245127e1bb46f860ea1976b1669c467c7a9f763d"
+  },
+  "input": {
+    "ciphertext_sha256": "a8a3e25ebc35170784b3644992b4e5bd00d660c4130eed30750f67767cd1f415",
+    "encrypted_payload_path": "results/054_clear_writing_release_closure/text_review/payload.age",
+    "logical_id": "primary_text",
+    "mime_type": "text/markdown; charset=utf-8",
+    "plaintext_sha256": "ebc0ef7f8e8555bc337196c728bb91cdbbb589734b2ad72d5a299d68d4f8a0c5",
+    "plaintext_size_bytes": 80292,
+    "source_basename": "ai-skills-054-terra-text-review-plaintext.md"
+  },
+  "paid_review_campaign_id": "054_clear_writing_release_closure",
+  "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
+  "prompt_version": "ai-bridge.text-review.v1",
+  "review_kind": "final_candidate_reader_facing_text",
+  "rubric": {
+    "instructions": "Read the complete four-document candidate packet: the complete 054 Deep Research final candidate and the three fresh holdout final candidates. Decide whether the reader-facing Chinese technical/scientific prose satisfies the frozen 054 release bar: natural Chinese, coherent structure and transitions, correct reader relevance without unnecessary source metadata or incidental foreign aliases, no raw source/platform markup, no formula text fences or unrendered math, readable table/formula presentation, no workflow/source-process framing, and no obvious critical omission, invention, unsupported strengthening, reattribution, or damage to mathematical, tabular, citation, condition, limitation, or uncertainty content. Return PASS only if all four documents satisfy the frozen reader-facing requirements; otherwise return REVISE with blocking findings."
+  },
+  "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1",
+  "task_key": "054_clear_writing_release_closure",
+  "workflow_type": "reviewed_handoff"
+}
