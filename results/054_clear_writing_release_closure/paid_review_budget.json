@@ -23,10 +23,24 @@
       "worst_case_standard_input_usd_per_1m": "2.500000"
     }
   },
-  "cumulative_actual_model_cost_usd": "0.000000",
+  "cumulative_actual_model_cost_usd": "0.065364",
   "cumulative_reserved_worst_case_cost_usd": "0.111492",
   "reservations": [
     {
+      "accounting_status": "ACCOUNTING_VERIFIED",
+      "actual_cost_status": "ACCOUNTING_VERIFIED",
+      "actual_model_cost_usd": "0.065364",
+      "actual_response_usage": {
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 24936,
+        "output_tokens": 1291,
+        "reasoning_tokens": 489,
+        "regular_input_tokens": 24936,
+        "response_id": "resp_07db38d5e9cf8c2e016aa6303f4bf487d0a821b7e169283831",
+        "response_model": "gpt-5.6-terra",
+        "response_service_tier": "default"
+      },
       "automatic_paid_retries": 0,
       "call_number": 1,
       "cumulative_reserved_cost_usd": "0.111492",
@@ -60,6 +74,9 @@
       "request_sha256": "1a8220534ac06086e535eb056eb5020688b12e42e7c142aad34f11c0a490bb82",
       "reservation_id": "054_clear_writing_release_closure-1-1a8220534ac0",
       "reserved_at": "2026-09-13T05:10:21Z",
+      "response_id": "resp_07db38d5e9cf8c2e016aa6303f4bf487d0a821b7e169283831",
+      "response_model": "gpt-5.6-terra",
+      "response_service_tier": "default",
       "review_type": "text_review",
       "service_tier": "default",
       "worst_case_reserved_cost_usd": "0.111492"

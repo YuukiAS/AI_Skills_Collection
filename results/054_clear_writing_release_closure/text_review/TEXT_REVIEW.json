@@ -1,0 +1,288 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": "主文多处以项目执行和后续工作组织内容，例如“下一轮最小实验”“本项目未验证”“下载后应先建立”。",
+      "finding_id": "F1",
+      "recommendation": "改写为面向读者的研究结论、方法与限制说明；删除项目状态、待办、执行环境和下一轮实验排期等过程性表述。",
+      "requirement_id": "R6_无工作流或来源过程框架",
+      "severity": "blocking",
+      "summary": "《共享预训练医学分割模型的一次通信联邦适应》保留大量工作流/研究计划框架，不是完成态的读者文本。"
+    },
+    {
+      "evidence": "“使用 `Dataset501_CAREMyoPS/.../fold_0/checkpoint_best.pth`”“技术定义见 `mms_data_contract.md`”。",
+      "finding_id": "F2",
+      "recommendation": "删除本地路径、文件名和项目内部契约引用，改为必要的读者可理解的数据来源与方法描述。",
+      "requirement_id": "R3_无不必要来源元数据或原始平台标记",
+      "severity": "blocking",
+      "summary": "主文含项目内部路径和文件引用，属于读者无关的来源/过程元数据。"
+    },
+    {
+      "evidence": "《特征哈希》含两个 Python 三反引号代码块，如“```python”“def token_features(...)”。",
+      "finding_id": "F3",
+      "recommendation": "移除原始代码块，改用自然语言、排版后的伪代码，或仅保留必要的概念性示例。",
+      "requirement_id": "R4_无原始源代码或平台标记",
+      "severity": "blocking",
+      "summary": "《特征哈希》含未经转换的源代码围栏，未满足纯读者文本要求。"
+    },
+    {
+      "evidence": "《神经网络》称“2015 年，LeCun、Bengio 和 Hinton 三位被称为‘深度学习之父’的学者正式提出深度学习的概念”。",
+      "finding_id": "F4",
+      "recommendation": "删除或更正该历史归因；如需提及 2015 年，应准确说明其为三人合著的综述性文章，而非深度学习概念的正式提出。",
+      "requirement_id": "R7_无明显事实错误或不当归因",
+      "severity": "blocking",
+      "summary": "《神经网络》存在明显且误导性的深度学习历史归因。"
+    }
+  ],
+  "created_at": "2026-09-13T05:10:37Z",
+  "encrypted_payload": {
+    "path": "results/054_clear_writing_release_closure/text_review/payload.age",
+    "sha256": "a8a3e25ebc35170784b3644992b4e5bd00d660c4130eed30750f67767cd1f415"
+  },
+  "evidence_id": "text-review-054_clear_writing_release_closure-5e1e212ffc2b",
+  "input_manifest": {
+    "identity_bindings": {
+      "implementation_commit": "245127e1bb46f860ea1976b1669c467c7a9f763d"
+    },
+    "manifest_sha256": "5e1e212ffc2bfa21d0d14eea42248d3fffbed3365c2616e536ff447c3961d1a2",
+    "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
+    "rubric": {
+      "instructions": "Read the complete four-document candidate packet: the complete 054 Deep Research final candidate and the three fresh holdout final candidates. Decide whether the reader-facing Chinese technical/scientific prose satisfies the frozen 054 release bar: natural Chinese, coherent structure and transitions, correct reader relevance without unnecessary source metadata or incidental foreign aliases, no raw source/platform markup, no formula text fences or unrendered math, readable table/formula presentation, no workflow/source-process framing, and no obvious critical omission, invention, unsupported strengthening, reattribution, or damage to mathematical, tabular, citation, condition, limitation, or uncertainty content. Return PASS only if all four documents satisfy the frozen reader-facing requirements; otherwise return REVISE with blocking findings."
+    },
+    "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "REVISE",
+      "item_id": "primary_text",
+      "requirement_ids": [
+        "R3_无不必要来源元数据或原始平台标记",
+        "R6_无工作流或来源过程框架"
+      ],
+      "summary": "主文数学排版和表格总体可读，但仍是带项目状态、执行计划和内部文件引用的研究备忘录式文本。"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "特征哈希",
+      "requirement_ids": [
+        "R4_无原始源代码或平台标记"
+      ],
+      "summary": "正文中文自然、结构清楚，但包含原始 Python 代码围栏。"
+    },
+    {
+      "decision": "PASS",
+      "item_id": "混淆矩阵",
+      "requirement_ids": [],
+      "summary": "中文表述自然，结构、表格和公式可读；未见原始标记、过程框架或明显关键内容损坏。"
+    },
+    {
+      "decision": "REVISE",
+      "item_id": "神经网络",
+      "requirement_ids": [
+        "R7_无明显事实错误或不当归因"
+      ],
+      "summary": "公式排版和整体叙述可读，但深度学习概念的历史归因错误。"
+    }
+  ],
+  "model": "gpt-5.6-terra",
+  "non_blocking_notes": [],
+  "overall_decision": "REVISE",
+  "paid_review": {
+    "accounting_status": "ACCOUNTING_VERIFIED",
+    "actual_model_cost_usd": "0.065364",
+    "actual_response_usage": {
+      "cache_write_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 24936,
+      "output_tokens": 1291,
+      "reasoning_tokens": 489,
+      "regular_input_tokens": 24936,
+      "response_id": "resp_07db38d5e9cf8c2e016aa6303f4bf487d0a821b7e169283831",
+      "response_model": "gpt-5.6-terra",
+      "response_service_tier": "default"
+    },
+    "call_number": 1,
+    "call_reservation": {
+      "accounting_status": "ACCOUNTING_VERIFIED",
+      "actual_cost_status": "ACCOUNTING_VERIFIED",
+      "actual_model_cost_usd": "0.065364",
+      "actual_response_usage": {
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 24936,
+        "output_tokens": 1291,
+        "reasoning_tokens": 489,
+        "regular_input_tokens": 24936,
+        "response_id": "resp_07db38d5e9cf8c2e016aa6303f4bf487d0a821b7e169283831",
+        "response_model": "gpt-5.6-terra",
+        "response_service_tier": "default"
+      },
+      "automatic_paid_retries": 0,
+      "call_number": 1,
+      "cumulative_reserved_cost_usd": "0.111492",
+      "cumulative_reserved_worst_case_cost_usd": "0.111492",
+      "input_token_preflight": {
+        "endpoint": "/v1/responses/input_tokens",
+        "input_tokens": 24936,
+        "raw_response": {
+          "input_tokens": 24936,
+          "object": "response.input_tokens"
+        }
+      },
+      "max_output_tokens": 4096,
+      "model": "gpt-5.6-terra",
+      "pricing": {
+        "cache_write_input_usd_per_1m_tokens": "2.500000",
+        "cache_write_usd_per_1m": "2.500000",
+        "cached_input_usd_per_1m": "0.200000",
+        "cached_input_usd_per_1m_tokens": "0.200000",
+        "input_usd_per_1m_tokens": "2.000000",
+        "long_context_threshold": 272000,
+        "model": "gpt-5.6-terra",
+        "normal_input_usd_per_1m": "2.000000",
+        "output_usd_per_1m": "12.000000",
+        "output_usd_per_1m_tokens": "12.000000",
+        "reviewed_on": "2026-09-03",
+        "runtime_uses_worst_case_input_price": true,
+        "worst_case_input_usd_per_1m_tokens": "2.500000",
+        "worst_case_standard_input_usd_per_1m": "2.500000"
+      },
+      "request_sha256": "1a8220534ac06086e535eb056eb5020688b12e42e7c142aad34f11c0a490bb82",
+      "reservation_id": "054_clear_writing_release_closure-1-1a8220534ac0",
+      "reserved_at": "2026-09-13T05:10:21Z",
+      "response_id": "resp_07db38d5e9cf8c2e016aa6303f4bf487d0a821b7e169283831",
+      "response_model": "gpt-5.6-terra",
+      "response_service_tier": "default",
+      "review_type": "text_review",
+      "service_tier": "default",
+      "worst_case_reserved_cost_usd": "0.111492"
+    },
+    "call_reservations": [
+      {
+        "accounting_status": "ACCOUNTING_VERIFIED",
+        "actual_cost_status": "ACCOUNTING_VERIFIED",
+        "actual_model_cost_usd": "0.065364",
+        "actual_response_usage": {
+          "cache_write_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 24936,
+          "output_tokens": 1291,
+          "reasoning_tokens": 489,
+          "regular_input_tokens": 24936,
+          "response_id": "resp_07db38d5e9cf8c2e016aa6303f4bf487d0a821b7e169283831",
+          "response_model": "gpt-5.6-terra",
+          "response_service_tier": "default"
+        },
+        "automatic_paid_retries": 0,
+        "call_number": 1,
+        "cumulative_reserved_cost_usd": "0.111492",
+        "cumulative_reserved_worst_case_cost_usd": "0.111492",
+        "input_token_preflight": {
+          "endpoint": "/v1/responses/input_tokens",
+          "input_tokens": 24936,
+          "raw_response": {
+            "input_tokens": 24936,
+            "object": "response.input_tokens"
+          }
+        },
+        "max_output_tokens": 4096,
+        "model": "gpt-5.6-terra",
+        "pricing": {
+          "cache_write_input_usd_per_1m_tokens": "2.500000",
+          "cache_write_usd_per_1m": "2.500000",
+          "cached_input_usd_per_1m": "0.200000",
+          "cached_input_usd_per_1m_tokens": "0.200000",
+          "input_usd_per_1m_tokens": "2.000000",
+          "long_context_threshold": 272000,
+          "model": "gpt-5.6-terra",
+          "normal_input_usd_per_1m": "2.000000",
+          "output_usd_per_1m": "12.000000",
+          "output_usd_per_1m_tokens": "12.000000",
+          "reviewed_on": "2026-09-03",
+          "runtime_uses_worst_case_input_price": true,
+          "worst_case_input_usd_per_1m_tokens": "2.500000",
+          "worst_case_standard_input_usd_per_1m": "2.500000"
+        },
+        "request_sha256": "1a8220534ac06086e535eb056eb5020688b12e42e7c142aad34f11c0a490bb82",
+        "reservation_id": "054_clear_writing_release_closure-1-1a8220534ac0",
+        "reserved_at": "2026-09-13T05:10:21Z",
+        "response_id": "resp_07db38d5e9cf8c2e016aa6303f4bf487d0a821b7e169283831",
+        "response_model": "gpt-5.6-terra",
+        "response_service_tier": "default",
+        "review_type": "text_review",
+        "service_tier": "default",
+        "worst_case_reserved_cost_usd": "0.111492"
+      }
+    ],
+    "campaign_identity": "054_clear_writing_release_closure",
+    "contract": {
+      "automatic_paid_retries": 0,
+      "campaign_reserved_cost_hard_ceiling_usd": "0.500000",
+      "max_paid_calls": 2,
+      "model": "gpt-5.6-terra",
+      "per_call_worst_case_ceiling_usd": "0.250000",
+      "pricing": {
+        "cache_write_input_usd_per_1m_tokens": "2.500000",
+        "cache_write_usd_per_1m": "2.500000",
+        "cached_input_usd_per_1m": "0.200000",
+        "cached_input_usd_per_1m_tokens": "0.200000",
+        "input_usd_per_1m_tokens": "2.000000",
+        "long_context_threshold": 272000,
+        "model": "gpt-5.6-terra",
+        "normal_input_usd_per_1m": "2.000000",
+        "output_usd_per_1m": "12.000000",
+        "output_usd_per_1m_tokens": "12.000000",
+        "reviewed_on": "2026-09-03",
+        "runtime_uses_worst_case_input_price": true,
+        "worst_case_input_usd_per_1m_tokens": "2.500000",
+        "worst_case_standard_input_usd_per_1m": "2.500000"
+      }
+    },
+    "cumulative_actual_model_cost_usd": "0.065364",
+    "cumulative_reserved_cost_usd": "0.111492",
+    "cumulative_reserved_worst_case_cost_usd": "0.111492",
+    "exact_input_token_preflight": {
+      "endpoint": "/v1/responses/input_tokens",
+      "input_tokens": 24936,
+      "raw_response": {
+        "input_tokens": 24936,
+        "object": "response.input_tokens"
+      }
+    },
+    "input_token_preflight": {
+      "endpoint": "/v1/responses/input_tokens",
+      "input_tokens": 24936,
+      "raw_response": {
+        "input_tokens": 24936,
+        "object": "response.input_tokens"
+      }
+    },
+    "max_output_tokens": 4096,
+    "model": "gpt-5.6-terra",
+    "model_identity": "gpt-5.6-terra",
+    "pricing_identity": {
+      "cache_write_usd_per_1m": "2.500000",
+      "cached_input_usd_per_1m": "0.200000",
+      "long_context_threshold": 272000,
+      "model": "gpt-5.6-terra",
+      "normal_input_usd_per_1m": "2.000000",
+      "output_usd_per_1m": "12.000000",
+      "reviewed_on": "2026-09-03"
+    },
+    "reservation_id": "054_clear_writing_release_closure-1-1a8220534ac0",
+    "response_id": "resp_07db38d5e9cf8c2e016aa6303f4bf487d0a821b7e169283831",
+    "review_type": "text_review",
+    "schema": "AI_BRIDGE_PAID_REVIEW_RECEIPT_V1",
+    "service_tier": "default",
+    "worst_case_reserved_cost_usd": "0.111492"
+  },
+  "plaintext_artifact_sha256": "ebc0ef7f8e8555bc337196c728bb91cdbbb589734b2ad72d5a299d68d4f8a0c5",
+  "prompt_version": "ai-bridge.text-review.v1",
+  "review_identity": "5e1e212ffc2bfa21d0d14eea42248d3fffbed3365c2616e536ff447c3961d1a2",
+  "review_kind": "final_candidate_reader_facing_text",
+  "review_model": "gpt-5.6-terra",
+  "reviewed_input_identity": "5e1e212ffc2bfa21d0d14eea42248d3fffbed3365c2616e536ff447c3961d1a2",
+  "schema": "AI_BRIDGE_TEXT_REVIEW_V1",
+  "status": "REVISE",
+  "task_key": "054_clear_writing_release_closure",
+  "workflow_type": "reviewed_handoff"
+}
