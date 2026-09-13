@@ -1,0 +1,249 @@
+{
+  "schema": "SCIENTIFIC_REWRITE_MEANING_MAP_V1",
+  "source_sha256": "acff69248f5273cdd475c8affa6f9fbedd819ea449e1f27eb6056ee17464b36b",
+  "source_anchors": [
+    {
+      "source_anchor_id": "src-001",
+      "text_sha256": "be1ad7f7a9aeba275f3dd83f539313d57640267c8589f8a44339994dd6ea4e01",
+      "start": 0,
+      "end": 238
+    },
+    {
+      "source_anchor_id": "src-002",
+      "text_sha256": "5dfa10bb79b98eda76a50e71ddc11a69e806d00ac1569fedf9f8aa77d8280263",
+      "start": 240,
+      "end": 622
+    },
+    {
+      "source_anchor_id": "src-003",
+      "text_sha256": "8d0684d1b902d450c8008a6a68773cd5fb2b03d58cbff63775e4b531c85fe37f",
+      "start": 624,
+      "end": 1164
+    },
+    {
+      "source_anchor_id": "src-004",
+      "text_sha256": "ab720afc21dedb05bba7e1c3cb2ea342def0fd775f6a8d138cc2276355754ba7",
+      "start": 1166,
+      "end": 1794
+    },
+    {
+      "source_anchor_id": "src-005",
+      "text_sha256": "9877bf77c652c234572611d4c05219879f2d0d85ec73849fca6172a351ff8c98",
+      "start": 1796,
+      "end": 1863
+    },
+    {
+      "source_anchor_id": "src-006",
+      "text_sha256": "ce2f7a791d142cd8b1d6dea28fa3eb338d4510f84026350f32852dd68df5cb13",
+      "start": 1865,
+      "end": 1900
+    },
+    {
+      "source_anchor_id": "src-007",
+      "text_sha256": "d787e02ad1d75d5f0730d4145192f0db03dd8b8d9251ca290c6afb6e04e1cfe3",
+      "start": 1902,
+      "end": 1924
+    },
+    {
+      "source_anchor_id": "src-008",
+      "text_sha256": "173a2b1a299316fed60aa6a8bd03df09eea41b34804840949dd1971c6e3e493e",
+      "start": 1926,
+      "end": 1961
+    }
+  ],
+  "meanings": [
+    {
+      "meaning_id": "definition",
+      "kind": "technical_explanation",
+      "normalized_meaning": "用途：分类结果可视化，尤其监督学习；无监督学习对应名称为匹配矩阵。结构：实际与预测两个维度，类别集合相同，属于列联表。命名反映类别误认。误差矩阵为同义名称，术语出处为国家教育研究院。",
+      "source_anchor_ids": [
+        "src-001",
+        "src-002"
+      ],
+      "exact_item_ids": []
+    },
+    {
+      "meaning_id": "example",
+      "kind": "technical_explanation",
+      "normalized_meaning": "测试条件：已训练的猫狗分类系统。样本总数13，猫8、狗5；行实际、列预测；猫行5和3，狗行2和3。主对角线正确，其他位置错误。",
+      "source_anchor_ids": [
+        "src-003"
+      ],
+      "exact_item_ids": [
+        "e0",
+        "e1",
+        "e2",
+        "e3",
+        "e4"
+      ]
+    },
+    {
+      "meaning_id": "binary",
+      "kind": "technical_explanation",
+      "normalized_meaning": "二分类用两行两列报告真阳性、假阴性、假阳性、真阴性；除总体正确率外还可分解错误。以猫为阳性解释各格。",
+      "source_anchor_ids": [
+        "src-004"
+      ],
+      "exact_item_ids": []
+    },
+    {
+      "meaning_id": "imbalance",
+      "kind": "technical_explanation",
+      "normalized_meaning": "不平衡条件：猫95、狗5，全部预测猫。总体准确度95%；猫敏感性100%，狗识别率0%。以猫为阳性时F1超过97.4%，仍掩盖狗的完全漏识别。不是所有F1汇总方式均取该数值。",
+      "source_anchor_ids": [
+        "src-004"
+      ],
+      "exact_item_ids": [
+        "e5",
+        "e6",
+        "e7",
+        "e8",
+        "e9",
+        "e10"
+      ]
+    },
+    {
+      "meaning_id": "youden",
+      "kind": "technical_explanation",
+      "normalized_meaning": "约登指数抵消此例类别比例导致的高分假象。敏感性加特异性减一；此例95/(95+0)+0/(0+5)-1=0，恒猜猫没有有效类别区分信息。零值表示在此判别意义上无用，不把指数误写成概率。文献身份：Youden’s J statistic，Wikipedia。",
+      "source_anchor_ids": [
+        "src-004",
+        "src-005"
+      ],
+      "exact_item_ids": [
+        "e11",
+        "e12",
+        "e13"
+      ]
+    },
+    {
+      "meaning_id": "other",
+      "kind": "technical_explanation",
+      "normalized_meaning": "可依据分析目的从混淆矩阵计算其他指标，不同指标用途不同。",
+      "source_anchor_ids": [
+        "src-006"
+      ],
+      "exact_item_ids": []
+    }
+  ],
+  "exact_items": [
+    {
+      "exact_item_id": "e0",
+      "literal": "13",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e1",
+      "literal": "8",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e2",
+      "literal": "5",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e3",
+      "literal": "3",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e4",
+      "literal": "2",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e5",
+      "literal": "95",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e6",
+      "literal": "95%",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e7",
+      "literal": "100%",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e8",
+      "literal": "0%",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e9",
+      "literal": "97.4%",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e10",
+      "literal": "F1 score",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e11",
+      "literal": "J=0",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e12",
+      "literal": "\\frac{95}{95+0}",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e13",
+      "literal": "\\frac{0}{0+5}",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    }
+  ],
+  "source_context_items": [
+    {
+      "source_context_item_id": "wrappers",
+      "source_anchor_ids": [
+        "src-001",
+        "src-002",
+        "src-003",
+        "src-004",
+        "src-005",
+        "src-006",
+        "src-007",
+        "src-008"
+      ],
+      "reader_relevance_decision": "exclude_from_reader_facing_candidate",
+      "rationale": "仅排除语言、页面分类、引用与表格的标记、日期和归档包装；技术内容由意义记录承担，术语及指数参考条目保留简洁文献身份。"
+    }
+  ],
+  "relations": [
+    {
+      "from_meaning_id": "example",
+      "to_meaning_id": "definition",
+      "relation": "illustrates"
+    },
+    {
+      "from_meaning_id": "imbalance",
+      "to_meaning_id": "binary",
+      "relation": "limits_accuracy_interpretation"
+    },
+    {
+      "from_meaning_id": "youden",
+      "to_meaning_id": "imbalance",
+      "relation": "same_example_comparison"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "markdown": "results/054_clear_writing_release_closure/fresh_holdouts/h2_confusion_matrix_zhwiki/replay/混淆矩阵.md",
+  "pdf": "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h2_confusion_matrix_zhwiki/混淆矩阵.pdf",
+  "renderer_script": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/scripts/render_markdown_pdf.sh",
+  "commands": [],
+  "render_source": "candidate_replay_pdf_and_render_copied",
+  "png_pages": [
+    "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h2_confusion_matrix_zhwiki/page-1.png",
+    "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h2_confusion_matrix_zhwiki/page-2.png"
+  ]
+}

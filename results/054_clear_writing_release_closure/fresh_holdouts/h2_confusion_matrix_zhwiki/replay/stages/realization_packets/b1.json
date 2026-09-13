@@ -1,0 +1,67 @@
+{
+  "schema": "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1",
+  "bundle_id": "b1",
+  "audience": "了解基本分类概念的中文技术读者",
+  "register": "自然简体中文技术说明",
+  "purpose": "矩阵如何阅读，猫狗计数如何对应？",
+  "information_shape": "定义段落和三列表格",
+  "meaning_records": [
+    {
+      "meaning_id": "definition",
+      "kind": "technical_explanation",
+      "normalized_meaning": "用途：分类结果可视化，尤其监督学习；无监督学习对应名称为匹配矩阵。结构：实际与预测两个维度，类别集合相同，属于列联表。命名反映类别误认。误差矩阵为同义名称，术语出处为国家教育研究院。",
+      "source_anchor_ids": [
+        "src-001",
+        "src-002"
+      ],
+      "exact_item_ids": []
+    },
+    {
+      "meaning_id": "example",
+      "kind": "technical_explanation",
+      "normalized_meaning": "测试条件：已训练的猫狗分类系统。样本总数13，猫8、狗5；行实际、列预测；猫行5和3，狗行2和3。主对角线正确，其他位置错误。",
+      "source_anchor_ids": [
+        "src-003"
+      ],
+      "exact_item_ids": [
+        "e0",
+        "e1",
+        "e2",
+        "e3",
+        "e4"
+      ]
+    }
+  ],
+  "exact_items": [
+    {
+      "exact_item_id": "e0",
+      "literal": "13",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e1",
+      "literal": "8",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e2",
+      "literal": "5",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e3",
+      "literal": "3",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e4",
+      "literal": "2",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    }
+  ]
+}

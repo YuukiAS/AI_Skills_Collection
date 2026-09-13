@@ -1,0 +1,50 @@
+{
+  "audience": "中文技术读者",
+  "bundle_id": "b7",
+  "exact_items": [],
+  "information_shape": "连贯解释与逐步公式推导",
+  "meaning_records": [
+    {
+      "exact_item_ids": [],
+      "kind": "technical_explanation",
+      "meaning_id": "m7",
+      "normalized_meaning": "5.6宏观解释而不展开经典网络，系统学习需其他书籍。深层网络属机器学习子集。1989卷积网络[2]，1986BP[3]；早期算力下支持向量机等非神经网络表现更好，神经网络瓶颈；2012Hinton及学生AlexNet在ImageNet明显领先第二名夺冠，学术工业关注；2015 LeCun Bengio Hinton与深度学习概念归因。人工根蒂色泽特征转向量再分类、效果依赖特征工程；图片转向量和输出分类约束使网络学习特征，二分类通常用对数几率回归输出。保留人工工程到对数几率回归、卷积特征学习到对数几率回归的比较。",
+      "source_anchor_ids": [
+        "src-095",
+        "src-096",
+        "src-097",
+        "src-098",
+        "src-099",
+        "src-100",
+        "src-101",
+        "src-102",
+        "src-103"
+      ]
+    }
+  ],
+  "purpose": "深度学习与特征",
+  "register": "自然简体中文技术长文",
+  "relation_records": [
+    {
+      "from_meaning_id": "m2",
+      "kind": "extends",
+      "to_meaning_id": "m3"
+    },
+    {
+      "from_meaning_id": "m3",
+      "kind": "requires_learning",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m5",
+      "kind": "limits_optimization_claim",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m6",
+      "kind": "context",
+      "to_meaning_id": "m7"
+    }
+  ],
+  "schema": "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1"
+}

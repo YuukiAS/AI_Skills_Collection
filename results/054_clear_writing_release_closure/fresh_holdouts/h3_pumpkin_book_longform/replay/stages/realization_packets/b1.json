@@ -1,0 +1,47 @@
+{
+  "audience": "中文技术读者",
+  "bundle_id": "b1",
+  "exact_items": [],
+  "information_shape": "连贯解释与逐步公式推导",
+  "meaning_records": [
+    {
+      "exact_item_ids": [],
+      "kind": "technical_explanation",
+      "meaning_id": "m1",
+      "normalized_meaning": "神经网络与线性回归、对数几率回归、决策树同属机器学习，处理分类回归；算力支持其表现，深层网络构成深度学习。深度与效果的理论判断须与训练问题相连。5.1不另做模型展开；阈读yù而非阀fá；图5.1的M-P归于McCulloch和Pitts。",
+      "source_anchor_ids": [
+        "src-002",
+        "src-003",
+        "src-004",
+        "src-005",
+        "src-006",
+        "src-007"
+      ]
+    }
+  ],
+  "purpose": "定位与神经元",
+  "register": "自然简体中文技术长文",
+  "relation_records": [
+    {
+      "from_meaning_id": "m2",
+      "kind": "extends",
+      "to_meaning_id": "m3"
+    },
+    {
+      "from_meaning_id": "m3",
+      "kind": "requires_learning",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m5",
+      "kind": "limits_optimization_claim",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m6",
+      "kind": "context",
+      "to_meaning_id": "m7"
+    }
+  ],
+  "schema": "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1"
+}

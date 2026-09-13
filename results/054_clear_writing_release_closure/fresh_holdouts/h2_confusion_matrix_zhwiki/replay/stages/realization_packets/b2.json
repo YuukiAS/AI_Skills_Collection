@@ -1,0 +1,20 @@
+{
+  "schema": "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1",
+  "bundle_id": "b2",
+  "audience": "了解基本分类概念的中文技术读者",
+  "register": "自然简体中文技术说明",
+  "purpose": "二分类的四种结果分别是什么？",
+  "information_shape": "阳性约定和三列表格",
+  "meaning_records": [
+    {
+      "meaning_id": "binary",
+      "kind": "technical_explanation",
+      "normalized_meaning": "二分类用两行两列报告真阳性、假阴性、假阳性、真阴性；除总体正确率外还可分解错误。以猫为阳性解释各格。",
+      "source_anchor_ids": [
+        "src-004"
+      ],
+      "exact_item_ids": []
+    }
+  ],
+  "exact_items": []
+}

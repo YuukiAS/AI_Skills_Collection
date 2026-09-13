@@ -1,0 +1,22 @@
+{
+  "schema": "054_FRESH_LOCAL_AUDIT_V2",
+  "holdout": "h2_confusion_matrix_zhwiki",
+  "markdown_path": "results/054_clear_writing_release_closure/fresh_holdouts/h2_confusion_matrix_zhwiki/replay/混淆矩阵.md",
+  "pdf_path": "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h2_confusion_matrix_zhwiki/混淆矩阵.pdf",
+  "pdf_text_path": "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h2_confusion_matrix_zhwiki/混淆矩阵.txt",
+  "markdown_sha256": "6c66cfa5fb910a7a28507d57c2728da463c34bf6e824da462bc54bdb6d42b46d",
+  "markdown_bytes": 3975,
+  "pdf_sha256": "02952630b8bb90f8f1b14c6bd99bdf66fe38bb2627d655c0827717f85215b91f",
+  "pdf_bytes": 91474,
+  "pdf_text_sha256": "e6928a12f98e05f46e983122115acbe3f2bd2ba0d220b78a932eff5d0c0afdba",
+  "pdf_text_bytes": 4363,
+  "missing_required_literals": [],
+  "forbidden_literals_markdown": [],
+  "forbidden_literals_pdf_text": [],
+  "formula_text_fence_count": 0,
+  "code_fence_count": 0,
+  "allowed_code_fence_rationale": "No code fence present.",
+  "markdown_table_rows": 12,
+  "ok": true,
+  "notes": []
+}

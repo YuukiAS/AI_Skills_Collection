@@ -1,0 +1,15 @@
+{
+  "schema": "SCIENTIFIC_REWRITE_ASSEMBLY_PACKET_V1",
+  "reader_plan_sha256": "1a1a8256d618c92fe88d5190b26170ddbd4c32faee00998eda6778edc627ebe9",
+  "realized_bundle_sha256s": {
+    "b1": "db0d3703bfcf5acda06a75b146d73360ec61d10ea9492a4d7b03724a6a2b4826",
+    "b2": "f67b0f757bc04118212771cdebef9a882611b4f75ac0a16ddf6942626770bafc",
+    "b3": "96d422f3f38fd4b7de5afb88c155670f7fe903863bedbb0c1d0a4607b1fa10c8"
+  },
+  "bundle_order": [
+    "b1",
+    "b2",
+    "b3"
+  ],
+  "operation": "concatenate_realized_bundles"
+}

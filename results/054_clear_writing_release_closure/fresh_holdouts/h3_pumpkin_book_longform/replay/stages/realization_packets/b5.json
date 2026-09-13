@@ -1,0 +1,43 @@
+{
+  "audience": "中文技术读者",
+  "bundle_id": "b5",
+  "exact_items": [],
+  "information_shape": "连贯解释与逐步公式推导",
+  "meaning_records": [
+    {
+      "exact_item_ids": [],
+      "kind": "technical_explanation",
+      "meaning_id": "m5",
+      "normalized_meaning": "图5.10展示局部极小与全局最小；局部改善不能等同于全局保证，模拟退火、遗传算法、启发式需要另查专业资料系统学习。",
+      "source_anchor_ids": [
+        "src-076",
+        "src-077"
+      ]
+    }
+  ],
+  "purpose": "优化的限制",
+  "register": "自然简体中文技术长文",
+  "relation_records": [
+    {
+      "from_meaning_id": "m2",
+      "kind": "extends",
+      "to_meaning_id": "m3"
+    },
+    {
+      "from_meaning_id": "m3",
+      "kind": "requires_learning",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m5",
+      "kind": "limits_optimization_claim",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m6",
+      "kind": "context",
+      "to_meaning_id": "m7"
+    }
+  ],
+  "schema": "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1"
+}

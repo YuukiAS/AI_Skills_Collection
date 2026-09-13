@@ -1,0 +1,155 @@
+{
+  "bundle_order": [
+    "b1",
+    "b2",
+    "b3",
+    "b4",
+    "b5",
+    "b6",
+    "b7",
+    "b8"
+  ],
+  "bundles": [
+    {
+      "bundle_id": "b1",
+      "dependencies": [],
+      "information_shape": "连贯解释与逐步公式推导",
+      "owned_meaning_ids": [
+        "m1"
+      ],
+      "purpose": "定位与神经元",
+      "reader_question": "定位与神经元如何理解？",
+      "required_exact_item_ids": []
+    },
+    {
+      "bundle_id": "b2",
+      "dependencies": [
+        "b1"
+      ],
+      "information_shape": "连贯解释与逐步公式推导",
+      "owned_meaning_ids": [
+        "m2"
+      ],
+      "purpose": "感知机边界与学习",
+      "reader_question": "感知机边界与学习如何理解？",
+      "required_exact_item_ids": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6",
+        "f7",
+        "f8",
+        "f9",
+        "f10",
+        "f11",
+        "f12",
+        "f13",
+        "f14",
+        "f15",
+        "f16"
+      ]
+    },
+    {
+      "bundle_id": "b3",
+      "dependencies": [
+        "b2"
+      ],
+      "information_shape": "连贯解释与逐步公式推导",
+      "owned_meaning_ids": [
+        "m3"
+      ],
+      "purpose": "隐层与异或",
+      "reader_question": "隐层与异或如何理解？",
+      "required_exact_item_ids": [
+        "f17"
+      ]
+    },
+    {
+      "bundle_id": "b4",
+      "dependencies": [
+        "b3"
+      ],
+      "information_shape": "连贯解释与逐步公式推导",
+      "owned_meaning_ids": [
+        "m4"
+      ],
+      "purpose": "误差逆传播",
+      "reader_question": "误差逆传播如何理解？",
+      "required_exact_item_ids": [
+        "f18",
+        "f19",
+        "f20",
+        "f21",
+        "f22",
+        "f23",
+        "f24",
+        "f25",
+        "f26"
+      ]
+    },
+    {
+      "bundle_id": "b5",
+      "dependencies": [
+        "b4"
+      ],
+      "information_shape": "连贯解释与逐步公式推导",
+      "owned_meaning_ids": [
+        "m5"
+      ],
+      "purpose": "优化的限制",
+      "reader_question": "优化的限制如何理解？",
+      "required_exact_item_ids": []
+    },
+    {
+      "bundle_id": "b6",
+      "dependencies": [
+        "b5"
+      ],
+      "information_shape": "连贯解释与逐步公式推导",
+      "owned_meaning_ids": [
+        "m6"
+      ],
+      "purpose": "其他网络",
+      "reader_question": "其他网络如何理解？",
+      "required_exact_item_ids": [
+        "f27",
+        "f28",
+        "f29",
+        "f30"
+      ]
+    },
+    {
+      "bundle_id": "b7",
+      "dependencies": [
+        "b6"
+      ],
+      "information_shape": "连贯解释与逐步公式推导",
+      "owned_meaning_ids": [
+        "m7"
+      ],
+      "purpose": "深度学习与特征",
+      "reader_question": "深度学习与特征如何理解？",
+      "required_exact_item_ids": []
+    },
+    {
+      "bundle_id": "b8",
+      "dependencies": [
+        "b7"
+      ],
+      "information_shape": "连贯解释与逐步公式推导",
+      "owned_meaning_ids": [
+        "m8"
+      ],
+      "purpose": "文献",
+      "reader_question": "文献如何理解？",
+      "required_exact_item_ids": []
+    }
+  ],
+  "excluded_source_context_item_ids": [
+    "c1"
+  ],
+  "schema": "SCIENTIFIC_REWRITE_READER_PLAN_V1",
+  "splitter": "semantic_dependencies"
+}

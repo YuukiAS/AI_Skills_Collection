@@ -1,0 +1,58 @@
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{unicode-math}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/texgyre-termes/,
+  Extension=.otf,
+  UprightFont=texgyretermes-regular,
+  BoldFont=texgyretermes-bold,
+  ItalicFont=texgyretermes-italic,
+  BoldItalicFont=texgyretermes-bolditalic
+]{texgyretermes-regular}
+
+\setmathfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/texgyre-termes-math/,
+  Extension=.otf
+]{texgyretermes-math}
+
+\setmathfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/newcomputermodern/,
+  Extension=.otf,
+  range={cal,bfcal}
+]{NewCMMath-Regular}
+
+\setCJKmainfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSerifSC-Regular,
+  BoldFont=NotoSerifSC-Bold,
+  AutoFakeSlant=0.18
+]{NotoSerifSC-Regular}
+
+\setCJKsansfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSansSC-Regular,
+  BoldFont=NotoSansSC-Bold,
+  AutoFakeSlant=0.18
+]{NotoSansSC-Regular}
+
+\setCJKmonofont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSansSC-Regular,
+  BoldFont=NotoSansSC-Bold
+]{NotoSansSC-Regular}
+
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}
+\emergencystretch=3em

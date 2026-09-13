@@ -1,0 +1,24 @@
+{
+  "bundle_order": [
+    "b1",
+    "b2",
+    "b3",
+    "b4",
+    "b5",
+    "b6",
+    "b7",
+    "b8"
+  ],
+  "reader_plan_sha256": "136c3f7e6ffa3c22f88a4e4bd3f1687ace482b2aad4d060f9df332bdc135a690",
+  "realized_bundle_sha256s": {
+    "b1": "c53b6fd346f4dc504ba681c986c028c91ca3e9820234bb6cebeb35d6ace0f844",
+    "b2": "6b7db9970fdc44580ca4182228700fd2b832c0833ad63c764d69dc7a8df6d019",
+    "b3": "0c27c8e95c8065657133ea4400f61da6535eaa899d9def86ecacb5efa77d0ce8",
+    "b4": "5bb3997bd44538ba48a6ac3fb9de8a66971a3256b07e9962191ea7b5d11478f0",
+    "b5": "a4e169a981ad5eded39cdf88a46e0da3c70a3be619cd55ba7b51e6b3b25c16ec",
+    "b6": "14ba98746d8f5ac6c791fa77750282bed7b6d1cf2378017677a6a645f1a92328",
+    "b7": "2da3d700f7d963f1e59334b4f31668ad7a551162ca813c8bc571f031be4159b6",
+    "b8": "be0caffc24b590071166aa1d5af34d7757128e0f8f759e5d8d2a04ea401bdd74"
+  },
+  "schema": "SCIENTIFIC_REWRITE_ASSEMBLY_PACKET_V1"
+}

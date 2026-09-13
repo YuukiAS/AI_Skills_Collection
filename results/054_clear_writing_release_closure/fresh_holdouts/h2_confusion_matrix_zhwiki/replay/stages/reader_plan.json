@@ -1,0 +1,63 @@
+{
+  "schema": "SCIENTIFIC_REWRITE_READER_PLAN_V1",
+  "bundle_order": [
+    "b1",
+    "b2",
+    "b3"
+  ],
+  "bundles": [
+    {
+      "bundle_id": "b1",
+      "owned_meaning_ids": [
+        "definition",
+        "example"
+      ],
+      "reader_question": "矩阵如何阅读，猫狗计数如何对应？",
+      "purpose": "矩阵如何阅读，猫狗计数如何对应？",
+      "information_shape": "定义段落和三列表格",
+      "required_exact_item_ids": [
+        "e0",
+        "e1",
+        "e2",
+        "e3",
+        "e4"
+      ]
+    },
+    {
+      "bundle_id": "b2",
+      "owned_meaning_ids": [
+        "binary"
+      ],
+      "reader_question": "二分类的四种结果分别是什么？",
+      "purpose": "二分类的四种结果分别是什么？",
+      "information_shape": "阳性约定和三列表格",
+      "required_exact_item_ids": []
+    },
+    {
+      "bundle_id": "b3",
+      "owned_meaning_ids": [
+        "imbalance",
+        "youden",
+        "other"
+      ],
+      "reader_question": "类别不平衡时为何高分仍会误导？",
+      "purpose": "类别不平衡时为何高分仍会误导？",
+      "information_shape": "条件说明、指标比较、公式与解释",
+      "required_exact_item_ids": [
+        "e5",
+        "e6",
+        "e7",
+        "e8",
+        "e9",
+        "e10",
+        "e11",
+        "e12",
+        "e13"
+      ]
+    }
+  ],
+  "excluded_source_context_item_ids": [
+    "wrappers"
+  ],
+  "splitter": "reader_question_dependencies"
+}

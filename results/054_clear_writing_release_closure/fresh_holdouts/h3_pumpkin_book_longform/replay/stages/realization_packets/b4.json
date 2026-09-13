@@ -1,0 +1,141 @@
+{
+  "audience": "中文技术读者",
+  "bundle_id": "b4",
+  "exact_items": [
+    {
+      "category": "formula",
+      "exact_item_id": "f18",
+      "literal": "$$\n\\Delta \\theta_j = -\\eta \\cfrac{\\partial E_k}{\\partial \\theta_j}\n$$",
+      "location_role": "inline-critical",
+      "sha256": "f49f774267038b41d7eb7bd5f2ad0a5ef7cd3e87ecf86d466bff8dc5c1a077a9"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f19",
+      "literal": "$$\n\\begin{aligned}\n\\cfrac{\\partial E_k}{\\partial \\theta_j} &= \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot\\cfrac{\\partial \\hat{y}_j^k}{\\partial \\theta_j} \\\\\n&= \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot\\cfrac{\\partial [f(\\beta_j-\\theta_j)]}{\\partial \\theta_j} \\\\\n&=\\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot f^{\\prime}(\\beta_j-\\theta_j) \\times (-1) \\\\\n&=\\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot f\\left(\\beta_{j}-\\theta_{j}\\right)\\times\\left[1-f\\left(\\beta_{j}-\\theta_{j}\\right)\\right]  \\times (-1) \\\\\n&=\\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\hat{y}_j^k\\left(1-\\hat{y}_j^k\\right)  \\times (-1) \\\\\n&=\\cfrac{\\partial\\left[ \\cfrac{1}{2} \\sum\\limits_{j=1}^{l}\\left(\\hat{y}_{j}^{k}-y_{j}^{k}\\right)^{2}\\right]}{\\partial \\hat{y}_{j}^{k}} \\cdot \\hat{y}_j^k\\left(1-\\hat{y}_j^k\\right) \\times (-1)  \\\\\n&=\\cfrac{1}{2}\\times 2(\\hat{y}_j^k-y_j^k)\\times 1 \\cdot\\hat{y}_j^k\\left(1-\\hat{y}_j^k\\right)  \\times (-1) \\\\\n&=(y_j^k-\\hat{y}_j^k)\\hat{y}_j^k\\left(1-\\hat{y}_j^k\\right)  \\\\\n&= g_j\n\\end{aligned}\n$$",
+      "location_role": "inline-critical",
+      "sha256": "8413f464d9d9acb552b5ff82cfd3be870b93a426c704bd4b8f2467c87852a5ab"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f20",
+      "literal": "$$\n\\Delta \\theta_j = -\\eta \\cfrac{\\partial E_k}{\\partial \\theta_j}=-\\eta g_j\n$$",
+      "location_role": "inline-critical",
+      "sha256": "a9a7a1cf8d92e4e96f49ac7d35b99cbeb0944365635732ce8e528ba65735c796"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f21",
+      "literal": "$$\n\\Delta v_{ih} = -\\eta \\cfrac{\\partial E_k}{\\partial v_{ih}}\n$$",
+      "location_role": "inline-critical",
+      "sha256": "bf6a25a873f7706690bfe8baedde29b6f391d2854605eda11ca37afb659587d9"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f22",
+      "literal": "$$\n\\begin{aligned}\n\\cfrac{\\partial E_k}{\\partial v_{ih}} &= \\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot \\cfrac{\\partial \\beta_j}{\\partial b_h} \\cdot \\cfrac{\\partial b_h}{\\partial \\alpha_h} \\cdot \\cfrac{\\partial \\alpha_h}{\\partial v_{ih}} \\\\\n&= \\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot \\cfrac{\\partial \\beta_j}{\\partial b_h} \\cdot \\cfrac{\\partial b_h}{\\partial \\alpha_h} \\cdot x_i \\\\\n&= \\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot \\cfrac{\\partial \\beta_j}{\\partial b_h} \\cdot f^{\\prime}(\\alpha_h-\\gamma_h) \\cdot x_i \\\\\n&= \\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot w_{hj} \\cdot f^{\\prime}(\\alpha_h-\\gamma_h) \\cdot x_i \\\\\n&= \\sum_{j=1}^{l} (-g_j) \\cdot w_{hj} \\cdot f^{\\prime}(\\alpha_h-\\gamma_h) \\cdot x_i \\\\\n&= -f^{\\prime}(\\alpha_h-\\gamma_h) \\cdot \\sum_{j=1}^{l} g_j \\cdot w_{hj}  \\cdot x_i\\\\\n&= -b_h(1-b_h) \\cdot \\sum_{j=1}^{l} g_j \\cdot w_{hj}  \\cdot x_i \\\\\n&= -e_h \\cdot x_i\n\\end{aligned}\n$$",
+      "location_role": "inline-critical",
+      "sha256": "4e597d4a39a62247645a7a5994f995f13e51ffe8312283d1231e048726edf3c4"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f23",
+      "literal": "$$\n\\Delta v_{ih} =-\\eta \\cfrac{\\partial E_k}{\\partial v_{ih}} =\\eta e_h x_i\n$$",
+      "location_role": "inline-critical",
+      "sha256": "b20c0a793deab0df57b9b030a6afb065f7859961b17c86fdea62346f732bb9a2"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f24",
+      "literal": "$$\n\\Delta \\gamma_h = -\\eta \\cfrac{\\partial E_k}{\\partial \\gamma_h}\n$$",
+      "location_role": "inline-critical",
+      "sha256": "cb15ef18a9462edee8d91e0366291a0543a43faebbbeced6394ed81d3b5fcad5"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f25",
+      "literal": "$$\n\\begin{aligned}\n\\cfrac{\\partial E_k}{\\partial \\gamma_h} &= \\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot \\cfrac{\\partial \\beta_j}{\\partial b_h} \\cdot \\cfrac{\\partial b_h}{\\partial \\gamma_h} \\\\\n&= \\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot \\cfrac{\\partial \\beta_j}{\\partial b_h} \\cdot f^{\\prime}(\\alpha_h-\\gamma_h) \\cdot (-1) \\\\\n&= -\\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot w_{hj} \\cdot f^{\\prime}(\\alpha_h-\\gamma_h)\\\\\n&= -\\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot w_{hj} \\cdot b_h(1-b_h)\\\\\n&= \\sum_{j=1}^{l}g_j\\cdot w_{hj} \\cdot b_h(1-b_h)\\\\\n&=e_h\n\\end{aligned}\n$$",
+      "location_role": "inline-critical",
+      "sha256": "87e950499fced5f5e4b59a68870e813a9185533b8c0cb49dcd435fe63b3d74db"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f26",
+      "literal": "$$\n\\Delta \\gamma_h=-\\eta\\cfrac{\\partial E_k}{\\partial \\gamma_h} = -\\eta e_h\n$$",
+      "location_role": "inline-critical",
+      "sha256": "cd47dcf379be059b66ae893cfa6245eff78d416bcc536e7b334c84af6161a2ef"
+    }
+  ],
+  "information_shape": "连贯解释与逐步公式推导",
+  "meaning_records": [
+    {
+      "exact_item_ids": [
+        "f18",
+        "f19",
+        "f20",
+        "f21",
+        "f22",
+        "f23",
+        "f24",
+        "f25",
+        "f26"
+      ],
+      "kind": "technical_explanation",
+      "meaning_id": "m4",
+      "normalized_meaning": "式(5.10)依式(5.12)链式推导；输出阈值梯度等于g，更新为负eta g。平方误差、sigmoid导数和负阈值链式因子逐步展开。式(5.13)从所有输出回传经beta、b、alpha到v，导数负e x，更新正eta e x；式(5.15)的e定义从同一推导取得。式(5.14)阈值gamma有负号，导数为e、更新负eta e。所有链式中间步保留，定义输入/隐层/输出变量及样本k、l输出个数。",
+      "source_anchor_ids": [
+        "src-050",
+        "src-051",
+        "src-052",
+        "src-053",
+        "src-054",
+        "src-055",
+        "src-056",
+        "src-057",
+        "src-058",
+        "src-059",
+        "src-060",
+        "src-061",
+        "src-062",
+        "src-063",
+        "src-064",
+        "src-065",
+        "src-066",
+        "src-067",
+        "src-068",
+        "src-069",
+        "src-070",
+        "src-071",
+        "src-072",
+        "src-073",
+        "src-074",
+        "src-075"
+      ]
+    }
+  ],
+  "purpose": "误差逆传播",
+  "register": "自然简体中文技术长文",
+  "relation_records": [
+    {
+      "from_meaning_id": "m2",
+      "kind": "extends",
+      "to_meaning_id": "m3"
+    },
+    {
+      "from_meaning_id": "m3",
+      "kind": "requires_learning",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m5",
+      "kind": "limits_optimization_claim",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m6",
+      "kind": "context",
+      "to_meaning_id": "m7"
+    }
+  ],
+  "schema": "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1"
+}

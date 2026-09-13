@@ -1,0 +1,1121 @@
+{
+  "exact_items": [
+    {
+      "category": "formula",
+      "exact_item_id": "f1",
+      "literal": "$$\ny=f\\left(\\sum\\limits_{i=1}^{n}w_ix_i-\\theta\\right)=f(\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x}-\\theta)\n$$",
+      "location_role": "inline-critical",
+      "pos": 825,
+      "sha256": "749869a47b902479f68cdb72f8164cffd2454c4d339b8e5a86e1e675cf5bc34a"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f2",
+      "literal": "$$\ny=\\varepsilon(\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x}-\\theta)=\\left\\{\\begin{array}{rcl}\n1,& {\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x} -\\theta\\geqslant 0};\\\\\n0,& {\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x} -\\theta < 0}.\\\\\n\\end{array} \\right.\n$$",
+      "location_role": "inline-critical",
+      "pos": 1136,
+      "sha256": "677f7825989a38ed96332107e7fae5aa22b22711077b33b2b182e135e78895cf"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f3",
+      "literal": "$$\nw_1x_1+w_2x_2+\\cdots+w_nx_n+b  =\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x} +b=0\n$$",
+      "location_role": "inline-critical",
+      "pos": 1406,
+      "sha256": "93d4735054554b1ea42cc021eb5d687d80471dfbbd9ff8c614f6c87faa8daa7f"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f4",
+      "literal": "$$\nT=\\{(\\boldsymbol{x}_1,y_1),(\\boldsymbol{x}_2,y_2),\\cdots,(\\boldsymbol{x}_N,y_N)\\}\n$$",
+      "location_role": "inline-critical",
+      "pos": 1784,
+      "sha256": "1d06065019278a7b8b0560a84316c4d4a23f2b5abf9ed4fa426cc062fcf00c11"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f5",
+      "literal": "$$\n\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x}+b=0\n$$",
+      "location_role": "inline-critical",
+      "pos": 1951,
+      "sha256": "4497c6c5c9a04681f571e5915beaa55d5eaaeee507a16cb8e006b79ca24dab45"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f6",
+      "literal": "$$\n\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x}-\\theta=0\n$$",
+      "location_role": "inline-critical",
+      "pos": 2296,
+      "sha256": "fabafe78fdff318048556cfa41a31ec2cfe5e6983f35c55d2503af4c814ad567"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f7",
+      "literal": "$$\n(\\hat{y}-y)\\left(\\boldsymbol{w}^\\mathrm{T}\\boldsymbol{x}-\\theta\\right)\\geqslant0\n$$",
+      "location_role": "inline-critical",
+      "pos": 2619,
+      "sha256": "6c18028dfd729fc2722f5991d08054e9adb7ab6625684c6ff446fcd111fdc41b"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f8",
+      "literal": "$$\nL(\\boldsymbol{w},\\theta)=\\sum_{\\boldsymbol{x}\\in M}(\\hat{y}-y)\n\\left(\\boldsymbol{w}^\\mathrm{T}\\boldsymbol{x}-\\theta\\right)\n$$",
+      "location_role": "inline-critical",
+      "pos": 2733,
+      "sha256": "0e88385b958b2c9e32fc9fb66edf28676afc1b9324cfb7507448af91ba4bd45d"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f9",
+      "literal": "$$\nT=\\{(\\boldsymbol{x}_1,y_1),(\\boldsymbol{x}_2,y_2),\\cdots,(\\boldsymbol{x}_N,y_N)\\}\n$$",
+      "location_role": "inline-critical",
+      "pos": 3074,
+      "sha256": "1d06065019278a7b8b0560a84316c4d4a23f2b5abf9ed4fa426cc062fcf00c11"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f10",
+      "literal": "$$\n\\min\\limits_{\\boldsymbol{w},\\theta}L(\\boldsymbol{w},\\theta)=\\min\\limits_{\\boldsymbol{w},\\theta}\\sum_{\\boldsymbol{x_i}\\in M}(\\hat{y}_i-y_i)(\\boldsymbol{w}^\\mathrm{T}\\boldsymbol{x}_i-\\theta)\n$$",
+      "location_role": "inline-critical",
+      "pos": 3260,
+      "sha256": "9b096455fa5753df6ae111342afbc4f5bf3cbc59546cfa3cd9d6f8dd5ca8d0e5"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f11",
+      "literal": "$$\n-\\theta=-1\\cdot w_{n+1}=x_{n+1}\\cdot w_{n+1}\n$$",
+      "location_role": "inline-critical",
+      "pos": 3518,
+      "sha256": "ff132e0e7a873a8f834221f1debc01d3b23f7a93e7810303bd206f8e548855c1"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f12",
+      "literal": "$$\n\\begin{aligned}\n\\boldsymbol{w}^\\mathrm{T}\\boldsymbol{x_i}-\\theta&=\\sum\n\\limits_{j=1}^n w_jx_j+x_{n+1}\\cdot w_{n+1}\\\\\n&=\\sum\\limits_{j=1}^{n+1}w_jx_j\\\\\n&=\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x_i}\n\\end{aligned}\n$$",
+      "location_role": "inline-critical",
+      "pos": 3630,
+      "sha256": "be1438901e491b4368362dcc1f181a1c8c863bf9c5b52ec497bab23f30c55de8"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f13",
+      "literal": "$$\n\\min\\limits_{\\boldsymbol{w}}L(\\boldsymbol{w})=\\min\\limits_{\\boldsymbol{w}}\\sum_{\\boldsymbol{x_i}\\in M}(\\hat{y}_i-y_i)\\boldsymbol{w}^\\mathrm{T}\\boldsymbol{x_i}\n$$",
+      "location_role": "inline-critical",
+      "pos": 3953,
+      "sha256": "52d1fd9829f149fd229352e9c45d7051d51cdf7715152dae53fcf9e2ed2aadd0"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f14",
+      "literal": "$$\n\\nabla_{\\boldsymbol{w}}L(\\boldsymbol{w})=\\sum_{\\boldsymbol{x_i}\\in M}(\\hat{y}_i-y_i)\\boldsymbol{x_i}\n$$",
+      "location_role": "inline-critical",
+      "pos": 4170,
+      "sha256": "af4327ad6c61640d98d48b60a02721cc071a6a0f5510268190c03f68f6cc32ac"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f15",
+      "literal": "$$\n\\boldsymbol w \\leftarrow \\boldsymbol w+\\Delta \\boldsymbol w\n$$",
+      "location_role": "inline-critical",
+      "pos": 4383,
+      "sha256": "bc4800dfa00b500895a9e670198d9ef2c10f8923c6b17dc6cd46faadffb25f35"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f16",
+      "literal": "$$\n\\Delta \\boldsymbol w=-\\eta(\\hat{y}_i-y_i)\\boldsymbol x_i=\\eta(y_i-\\hat{y}_i)\\boldsymbol x_i\n$$",
+      "location_role": "inline-critical",
+      "pos": 4453,
+      "sha256": "228b48a3773f6565cc9bb888946f6d60e47571491ce8b17a585320b6954800e7"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f17",
+      "literal": "$$\n(x_1,x_2)\\rightarrow h_1=\\varepsilon(x_1-x_2-0.5),h_2=\\varepsilon(x_2-x_1-0.5)\\rightarrow y=\\varepsilon(h_1+h_2-0.5)\n$$",
+      "location_role": "inline-critical",
+      "pos": 4992,
+      "sha256": "294aa3f063ab743ede2edb5d6fb02a4af9fdb9e67d9ae5444288b8aa512e4ef9"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f18",
+      "literal": "$$\n\\Delta \\theta_j = -\\eta \\cfrac{\\partial E_k}{\\partial \\theta_j}\n$$",
+      "location_role": "inline-critical",
+      "pos": 5299,
+      "sha256": "f49f774267038b41d7eb7bd5f2ad0a5ef7cd3e87ecf86d466bff8dc5c1a077a9"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f19",
+      "literal": "$$\n\\begin{aligned}\n\\cfrac{\\partial E_k}{\\partial \\theta_j} &= \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot\\cfrac{\\partial \\hat{y}_j^k}{\\partial \\theta_j} \\\\\n&= \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot\\cfrac{\\partial [f(\\beta_j-\\theta_j)]}{\\partial \\theta_j} \\\\\n&=\\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot f^{\\prime}(\\beta_j-\\theta_j) \\times (-1) \\\\\n&=\\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot f\\left(\\beta_{j}-\\theta_{j}\\right)\\times\\left[1-f\\left(\\beta_{j}-\\theta_{j}\\right)\\right]  \\times (-1) \\\\\n&=\\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\hat{y}_j^k\\left(1-\\hat{y}_j^k\\right)  \\times (-1) \\\\\n&=\\cfrac{\\partial\\left[ \\cfrac{1}{2} \\sum\\limits_{j=1}^{l}\\left(\\hat{y}_{j}^{k}-y_{j}^{k}\\right)^{2}\\right]}{\\partial \\hat{y}_{j}^{k}} \\cdot \\hat{y}_j^k\\left(1-\\hat{y}_j^k\\right) \\times (-1)  \\\\\n&=\\cfrac{1}{2}\\times 2(\\hat{y}_j^k-y_j^k)\\times 1 \\cdot\\hat{y}_j^k\\left(1-\\hat{y}_j^k\\right)  \\times (-1) \\\\\n&=(y_j^k-\\hat{y}_j^k)\\hat{y}_j^k\\left(1-\\hat{y}_j^k\\right)  \\\\\n&= g_j\n\\end{aligned}\n$$",
+      "location_role": "inline-critical",
+      "pos": 5374,
+      "sha256": "8413f464d9d9acb552b5ff82cfd3be870b93a426c704bd4b8f2467c87852a5ab"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f20",
+      "literal": "$$\n\\Delta \\theta_j = -\\eta \\cfrac{\\partial E_k}{\\partial \\theta_j}=-\\eta g_j\n$$",
+      "location_role": "inline-critical",
+      "pos": 6402,
+      "sha256": "a9a7a1cf8d92e4e96f49ac7d35b99cbeb0944365635732ce8e528ba65735c796"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f21",
+      "literal": "$$\n\\Delta v_{ih} = -\\eta \\cfrac{\\partial E_k}{\\partial v_{ih}}\n$$",
+      "location_role": "inline-critical",
+      "pos": 6511,
+      "sha256": "bf6a25a873f7706690bfe8baedde29b6f391d2854605eda11ca37afb659587d9"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f22",
+      "literal": "$$\n\\begin{aligned}\n\\cfrac{\\partial E_k}{\\partial v_{ih}} &= \\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot \\cfrac{\\partial \\beta_j}{\\partial b_h} \\cdot \\cfrac{\\partial b_h}{\\partial \\alpha_h} \\cdot \\cfrac{\\partial \\alpha_h}{\\partial v_{ih}} \\\\\n&= \\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot \\cfrac{\\partial \\beta_j}{\\partial b_h} \\cdot \\cfrac{\\partial b_h}{\\partial \\alpha_h} \\cdot x_i \\\\\n&= \\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot \\cfrac{\\partial \\beta_j}{\\partial b_h} \\cdot f^{\\prime}(\\alpha_h-\\gamma_h) \\cdot x_i \\\\\n&= \\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot w_{hj} \\cdot f^{\\prime}(\\alpha_h-\\gamma_h) \\cdot x_i \\\\\n&= \\sum_{j=1}^{l} (-g_j) \\cdot w_{hj} \\cdot f^{\\prime}(\\alpha_h-\\gamma_h) \\cdot x_i \\\\\n&= -f^{\\prime}(\\alpha_h-\\gamma_h) \\cdot \\sum_{j=1}^{l} g_j \\cdot w_{hj}  \\cdot x_i\\\\\n&= -b_h(1-b_h) \\cdot \\sum_{j=1}^{l} g_j \\cdot w_{hj}  \\cdot x_i \\\\\n&= -e_h \\cdot x_i\n\\end{aligned}\n$$",
+      "location_role": "inline-critical",
+      "pos": 6583,
+      "sha256": "4e597d4a39a62247645a7a5994f995f13e51ffe8312283d1231e048726edf3c4"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f23",
+      "literal": "$$\n\\Delta v_{ih} =-\\eta \\cfrac{\\partial E_k}{\\partial v_{ih}} =\\eta e_h x_i\n$$",
+      "location_role": "inline-critical",
+      "pos": 7780,
+      "sha256": "b20c0a793deab0df57b9b030a6afb065f7859961b17c86fdea62346f732bb9a2"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f24",
+      "literal": "$$\n\\Delta \\gamma_h = -\\eta \\cfrac{\\partial E_k}{\\partial \\gamma_h}\n$$",
+      "location_role": "inline-critical",
+      "pos": 7888,
+      "sha256": "cb15ef18a9462edee8d91e0366291a0543a43faebbbeced6394ed81d3b5fcad5"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f25",
+      "literal": "$$\n\\begin{aligned}\n\\cfrac{\\partial E_k}{\\partial \\gamma_h} &= \\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot \\cfrac{\\partial \\beta_j}{\\partial b_h} \\cdot \\cfrac{\\partial b_h}{\\partial \\gamma_h} \\\\\n&= \\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot \\cfrac{\\partial \\beta_j}{\\partial b_h} \\cdot f^{\\prime}(\\alpha_h-\\gamma_h) \\cdot (-1) \\\\\n&= -\\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot w_{hj} \\cdot f^{\\prime}(\\alpha_h-\\gamma_h)\\\\\n&= -\\sum_{j=1}^{l} \\cfrac{\\partial E_k}{\\partial \\hat{y}_j^k} \\cdot \\cfrac{\\partial \\hat{y}_j^k}{\\partial \\beta_j} \\cdot w_{hj} \\cdot b_h(1-b_h)\\\\\n&= \\sum_{j=1}^{l}g_j\\cdot w_{hj} \\cdot b_h(1-b_h)\\\\\n&=e_h\n\\end{aligned}\n$$",
+      "location_role": "inline-critical",
+      "pos": 7963,
+      "sha256": "87e950499fced5f5e4b59a68870e813a9185533b8c0cb49dcd435fe63b3d74db"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f26",
+      "literal": "$$\n\\Delta \\gamma_h=-\\eta\\cfrac{\\partial E_k}{\\partial \\gamma_h} = -\\eta e_h\n$$",
+      "location_role": "inline-critical",
+      "pos": 8834,
+      "sha256": "cd47dcf379be059b66ae893cfa6245eff78d416bcc536e7b334c84af6161a2ef"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f27",
+      "literal": "$$\nE_{\\rm graph}=E_{\\rm edges}+E_{\\rm nodes}\n$$",
+      "location_role": "inline-critical",
+      "pos": 9804,
+      "sha256": "335b0cc0981ff09aac5d788277fd10345d412010a0bdbfb46364dd90da99bf16"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f28",
+      "literal": "$$\nE_{\\rm edges}=\\sum_{i=1}^{n-1}\\sum_{j=i+1}^{n}E_{{\\rm edge}_{ij}}=-\\sum_{i=1}^{n-1}\\sum_{j=i+1}^{n}w_{ij}s_is_j\n$$",
+      "location_role": "inline-critical",
+      "pos": 10056,
+      "sha256": "06040dd9b9048a8cc9e2fa24e033328d8a121b2cc09013a0ac294dea7802c0ce"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f29",
+      "literal": "$$\nE_{\\rm nodes}=\\sum_{i=1}^nE_{{\\rm node}_i}=-\\sum_{i=1}^n\\theta_is_i\n$$",
+      "location_role": "inline-critical",
+      "pos": 10195,
+      "sha256": "b08b1f797bdc43c410a4ba952df279af2331c5b8f6f2055eb756e086bc53319f"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f30",
+      "literal": "$$\nE_{\\rm graph}=E_{\\rm edges}+E_{\\rm nodes}=-\\sum_{i=1}^{n-1}\\sum_{j=i+1}^{n}w_{ij}s_is_j-\\sum_{i=1}^n\\theta_is_i\n$$",
+      "location_role": "inline-critical",
+      "pos": 10311,
+      "sha256": "3d4fda37256d68517e5c934c56daa9e515cc3da6d8756d2f69c04db11ae38337"
+    }
+  ],
+  "meanings": [
+    {
+      "exact_item_ids": [],
+      "kind": "technical_explanation",
+      "meaning_id": "m1",
+      "normalized_meaning": "神经网络与线性回归、对数几率回归、决策树同属机器学习，处理分类回归；算力支持其表现，深层网络构成深度学习。深度与效果的理论判断须与训练问题相连。5.1不另做模型展开；阈读yù而非阀fá；图5.1的M-P归于McCulloch和Pitts。",
+      "source_anchor_ids": [
+        "src-002",
+        "src-003",
+        "src-004",
+        "src-005",
+        "src-006",
+        "src-007"
+      ]
+    },
+    {
+      "exact_item_ids": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6",
+        "f7",
+        "f8",
+        "f9",
+        "f10",
+        "f11",
+        "f12",
+        "f13",
+        "f14",
+        "f15",
+        "f16"
+      ],
+      "kind": "technical_explanation",
+      "meaning_id": "m2",
+      "normalized_meaning": "依[1]按模型、策略、算法连接式(5.1)(5.2)。n维特征和权重、阈值、阶跃0/1输出；超平面偏置b=-theta。T有N样本，正类非负、负类严格负定义线性可分，否则不可分。在线性可分前提下寻找完全正确分隔。M为误分类样本集合，分两类错误得到非负乘积和损失。无错误则零；误差数量和距平面距离影响损失，距离参见6.1.2。固定M求导，扩充-1哑节点合并阈值，逐点随机梯度下降、学习率eta、初始化和重算M直到为空；初始化及抽样使解不唯一。",
+      "source_anchor_ids": [
+        "src-008",
+        "src-009",
+        "src-010",
+        "src-011",
+        "src-012",
+        "src-013",
+        "src-014",
+        "src-015",
+        "src-016",
+        "src-017",
+        "src-018",
+        "src-019",
+        "src-020",
+        "src-021",
+        "src-022",
+        "src-023",
+        "src-024",
+        "src-025",
+        "src-026",
+        "src-027",
+        "src-028",
+        "src-029",
+        "src-030",
+        "src-031",
+        "src-032",
+        "src-033",
+        "src-034",
+        "src-035",
+        "src-036",
+        "src-037",
+        "src-038",
+        "src-039",
+        "src-040",
+        "src-041",
+        "src-042",
+        "src-043",
+        "src-044",
+        "src-045"
+      ]
+    },
+    {
+      "exact_item_ids": [
+        "f17"
+      ],
+      "kind": "technical_explanation",
+      "meaning_id": "m3",
+      "normalized_meaning": "图5.5四个二元输入通过两个隐节点的方向差与0.5阈值，再合并输出；保留(0,1)逐步代入和结果。",
+      "source_anchor_ids": [
+        "src-046",
+        "src-047",
+        "src-048",
+        "src-049"
+      ]
+    },
+    {
+      "exact_item_ids": [
+        "f18",
+        "f19",
+        "f20",
+        "f21",
+        "f22",
+        "f23",
+        "f24",
+        "f25",
+        "f26"
+      ],
+      "kind": "technical_explanation",
+      "meaning_id": "m4",
+      "normalized_meaning": "式(5.10)依式(5.12)链式推导；输出阈值梯度等于g，更新为负eta g。平方误差、sigmoid导数和负阈值链式因子逐步展开。式(5.13)从所有输出回传经beta、b、alpha到v，导数负e x，更新正eta e x；式(5.15)的e定义从同一推导取得。式(5.14)阈值gamma有负号，导数为e、更新负eta e。所有链式中间步保留，定义输入/隐层/输出变量及样本k、l输出个数。",
+      "source_anchor_ids": [
+        "src-050",
+        "src-051",
+        "src-052",
+        "src-053",
+        "src-054",
+        "src-055",
+        "src-056",
+        "src-057",
+        "src-058",
+        "src-059",
+        "src-060",
+        "src-061",
+        "src-062",
+        "src-063",
+        "src-064",
+        "src-065",
+        "src-066",
+        "src-067",
+        "src-068",
+        "src-069",
+        "src-070",
+        "src-071",
+        "src-072",
+        "src-073",
+        "src-074",
+        "src-075"
+      ]
+    },
+    {
+      "exact_item_ids": [],
+      "kind": "technical_explanation",
+      "meaning_id": "m5",
+      "normalized_meaning": "图5.10展示局部极小与全局最小；局部改善不能等同于全局保证，模拟退火、遗传算法、启发式需要另查专业资料系统学习。",
+      "source_anchor_ids": [
+        "src-076",
+        "src-077"
+      ]
+    },
+    {
+      "exact_item_ids": [
+        "f27",
+        "f28",
+        "f29",
+        "f30"
+      ],
+      "kind": "technical_explanation",
+      "meaning_id": "m6",
+      "normalized_meaning": "5.5网络已较不常见，5.6卷积与循环网络更常见。RBF式(5.18)为q项rho线性组合；经5.19从d维到q维，中心固定后等同3.2线性回归，可加偏置b。Boltzmann为带隐变量无向图；式(5.20)边与节点能量相加，负权重状态乘积及负阈值状态乘积，边求和i<j，保留全式。受限Boltzmann Machine即RBM只保留跨层边；5.22给定h显层各变量条件独立；5.23给定v隐层各变量条件独立。",
+      "source_anchor_ids": [
+        "src-078",
+        "src-079",
+        "src-080",
+        "src-081",
+        "src-082",
+        "src-083",
+        "src-084",
+        "src-085",
+        "src-086",
+        "src-087",
+        "src-088",
+        "src-089",
+        "src-090",
+        "src-091",
+        "src-092",
+        "src-093",
+        "src-094"
+      ]
+    },
+    {
+      "exact_item_ids": [],
+      "kind": "technical_explanation",
+      "meaning_id": "m7",
+      "normalized_meaning": "5.6宏观解释而不展开经典网络，系统学习需其他书籍。深层网络属机器学习子集。1989卷积网络[2]，1986BP[3]；早期算力下支持向量机等非神经网络表现更好，神经网络瓶颈；2012Hinton及学生AlexNet在ImageNet明显领先第二名夺冠，学术工业关注；2015 LeCun Bengio Hinton与深度学习概念归因。人工根蒂色泽特征转向量再分类、效果依赖特征工程；图片转向量和输出分类约束使网络学习特征，二分类通常用对数几率回归输出。保留人工工程到对数几率回归、卷积特征学习到对数几率回归的比较。",
+      "source_anchor_ids": [
+        "src-095",
+        "src-096",
+        "src-097",
+        "src-098",
+        "src-099",
+        "src-100",
+        "src-101",
+        "src-102",
+        "src-103"
+      ]
+    },
+    {
+      "exact_item_ids": [],
+      "kind": "technical_explanation",
+      "meaning_id": "m8",
+      "normalized_meaning": "保留[1]李航2012清华大学出版社；[2]全部七位作者、论文名、Neural computation卷期页及1989；[3]三位作者、论文名、nature卷期页及1986。",
+      "source_anchor_ids": [
+        "src-104",
+        "src-105",
+        "src-106"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "from_meaning_id": "m2",
+      "kind": "extends",
+      "to_meaning_id": "m3"
+    },
+    {
+      "from_meaning_id": "m3",
+      "kind": "requires_learning",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m5",
+      "kind": "limits_optimization_claim",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m6",
+      "kind": "context",
+      "to_meaning_id": "m7"
+    }
+  ],
+  "schema": "SCIENTIFIC_REWRITE_MEANING_MAP_V1",
+  "source_anchors": [
+    {
+      "end": 318,
+      "source_anchor_id": "src-001",
+      "start": 0,
+      "text_sha256": "9158fe1f1459c6399339a53ef5c19b5ef94b341c6c27ac73077dd7c5e4f31efa"
+    },
+    {
+      "end": 330,
+      "source_anchor_id": "src-002",
+      "start": 320,
+      "text_sha256": "bb81b3358922ae5dae48244e18b3eb25c20f295ae3a642bfde11705c5c7327e9"
+    },
+    {
+      "end": 511,
+      "source_anchor_id": "src-003",
+      "start": 332,
+      "text_sha256": "354ca8acba4d2af79320715b356fec919163df8a522ba669cbac6a5f366ff845"
+    },
+    {
+      "end": 525,
+      "source_anchor_id": "src-004",
+      "start": 513,
+      "text_sha256": "1a4595301ab8991f6243e684e2ff37be52bf279e843d14c156ed1ef40bdbfee3"
+    },
+    {
+      "end": 633,
+      "source_anchor_id": "src-005",
+      "start": 527,
+      "text_sha256": "9cfe0ab9ed139938b350030163f9df7a6c4b09d514c962f4d6b9ccfeb77828a8"
+    },
+    {
+      "end": 687,
+      "source_anchor_id": "src-006",
+      "start": 635,
+      "text_sha256": "b93f5afa61068901be3e1c25e1fdd67b6d57c4615acaef2320733cea23c91e7b"
+    },
+    {
+      "end": 704,
+      "source_anchor_id": "src-007",
+      "start": 689,
+      "text_sha256": "80a1729335a19f18a65ec21c1ffe574659508698a68d19f1429397a2c3400401"
+    },
+    {
+      "end": 732,
+      "source_anchor_id": "src-008",
+      "start": 706,
+      "text_sha256": "36e927ef734e236ce03b1cfa1094a1e0991f884b437b08e1bfd3b16551c99b52"
+    },
+    {
+      "end": 783,
+      "source_anchor_id": "src-009",
+      "start": 734,
+      "text_sha256": "37c490c59590aa822aba559647cf6a5ceaf4c252b262d26be62409df4eed78ef"
+    },
+    {
+      "end": 822,
+      "source_anchor_id": "src-010",
+      "start": 785,
+      "text_sha256": "6aa524538509407062a9a679a9a49c7d129ebe0fc066fd0e47b51acf1c452077"
+    },
+    {
+      "end": 933,
+      "source_anchor_id": "src-011",
+      "start": 825,
+      "text_sha256": "749869a47b902479f68cdb72f8164cffd2454c4d339b8e5a86e1e675cf5bc34a"
+    },
+    {
+      "end": 1133,
+      "source_anchor_id": "src-012",
+      "start": 936,
+      "text_sha256": "12a55718508bd6e523471cf7039bda9788367b2191596f1e7e4af679803486b1"
+    },
+    {
+      "end": 1384,
+      "source_anchor_id": "src-013",
+      "start": 1136,
+      "text_sha256": "677f7825989a38ed96332107e7fae5aa22b22711077b33b2b182e135e78895cf"
+    },
+    {
+      "end": 1403,
+      "source_anchor_id": "src-014",
+      "start": 1387,
+      "text_sha256": "450b3a53cac1a4de3179b0f88baa9dea0c96055f0840266c8402deafdaf02a53"
+    },
+    {
+      "end": 1490,
+      "source_anchor_id": "src-015",
+      "start": 1406,
+      "text_sha256": "93d4735054554b1ea42cc021eb5d687d80471dfbbd9ff8c614f6c87faa8daa7f"
+    },
+    {
+      "end": 1760,
+      "source_anchor_id": "src-016",
+      "start": 1493,
+      "text_sha256": "691aafc01a42bcddc816d5f853d2451238b8744ee293fc1001e6e54fd8b01339"
+    },
+    {
+      "end": 1781,
+      "source_anchor_id": "src-017",
+      "start": 1762,
+      "text_sha256": "3a9fad828fcf4c7fdefb227c0ea6eb5fba0344c6bd9b679a472b405e22f9909c"
+    },
+    {
+      "end": 1871,
+      "source_anchor_id": "src-018",
+      "start": 1784,
+      "text_sha256": "1d06065019278a7b8b0560a84316c4d4a23f2b5abf9ed4fa426cc062fcf00c11"
+    },
+    {
+      "end": 1948,
+      "source_anchor_id": "src-019",
+      "start": 1874,
+      "text_sha256": "bef491152bde23c229f9e72a2fcd6b295145d1b6d17f9810940cf14d06ff1518"
+    },
+    {
+      "end": 2002,
+      "source_anchor_id": "src-020",
+      "start": 1951,
+      "text_sha256": "4497c6c5c9a04681f571e5915beaa55d5eaaeee507a16cb8e006b79ca24dab45"
+    },
+    {
+      "end": 2237,
+      "source_anchor_id": "src-021",
+      "start": 2005,
+      "text_sha256": "a6fad426674029fe01744c3af35bf6d325fcf5e8514091c047e74805499aac3a"
+    },
+    {
+      "end": 2293,
+      "source_anchor_id": "src-022",
+      "start": 2239,
+      "text_sha256": "d50da2cd32b7584b436378af02c588949a8e92c64db287ac2a85e20039b37bdf"
+    },
+    {
+      "end": 2352,
+      "source_anchor_id": "src-023",
+      "start": 2296,
+      "text_sha256": "fabafe78fdff318048556cfa41a31ec2cfe5e6983f35c55d2503af4c814ad567"
+    },
+    {
+      "end": 2616,
+      "source_anchor_id": "src-024",
+      "start": 2355,
+      "text_sha256": "38dc513cc9503b2ecf280889eb942fee4edc14a73f4247c006548d95bf08fb31"
+    },
+    {
+      "end": 2705,
+      "source_anchor_id": "src-025",
+      "start": 2619,
+      "text_sha256": "6c18028dfd729fc2722f5991d08054e9adb7ab6625684c6ff446fcd111fdc41b"
+    },
+    {
+      "end": 2730,
+      "source_anchor_id": "src-026",
+      "start": 2708,
+      "text_sha256": "d5ddd192667834c20cacbd5e2cd3af2b15eae4eb0599f80fc903603469a6b0b9"
+    },
+    {
+      "end": 2861,
+      "source_anchor_id": "src-027",
+      "start": 2733,
+      "text_sha256": "0e88385b958b2c9e32fc9fb66edf28676afc1b9324cfb7507448af91ba4bd45d"
+    },
+    {
+      "end": 3020,
+      "source_anchor_id": "src-028",
+      "start": 2864,
+      "text_sha256": "241a013545ac3724535b773cd70678d2683f8d085834c55ec937595bd4f64bd4"
+    },
+    {
+      "end": 3071,
+      "source_anchor_id": "src-029",
+      "start": 3022,
+      "text_sha256": "9b7bf159283ef8f1b1809bf77011b9371638c5ca7e80a5c15ae8ca6dcab2b80a"
+    },
+    {
+      "end": 3161,
+      "source_anchor_id": "src-030",
+      "start": 3074,
+      "text_sha256": "1d06065019278a7b8b0560a84316c4d4a23f2b5abf9ed4fa426cc062fcf00c11"
+    },
+    {
+      "end": 3257,
+      "source_anchor_id": "src-031",
+      "start": 3164,
+      "text_sha256": "54e778d20866e292db21db30f78beee3c465b81452ff22a4940848728acafcb9"
+    },
+    {
+      "end": 3454,
+      "source_anchor_id": "src-032",
+      "start": 3260,
+      "text_sha256": "9b096455fa5753df6ae111342afbc4f5bf3cbc59546cfa3cd9d6f8dd5ca8d0e5"
+    },
+    {
+      "end": 3515,
+      "source_anchor_id": "src-033",
+      "start": 3457,
+      "text_sha256": "828a4e612cbb89e3943adfdc7fed87307c6c9205b62b2198a310d34ebfc357d2"
+    },
+    {
+      "end": 3568,
+      "source_anchor_id": "src-034",
+      "start": 3518,
+      "text_sha256": "ff132e0e7a873a8f834221f1debc01d3b23f7a93e7810303bd206f8e548855c1"
+    },
+    {
+      "end": 3627,
+      "source_anchor_id": "src-035",
+      "start": 3571,
+      "text_sha256": "ff4cb1531debdb5cb185701d492b2a1978bc616a1a4cc54ce04bdb88c722e5c9"
+    },
+    {
+      "end": 3846,
+      "source_anchor_id": "src-036",
+      "start": 3630,
+      "text_sha256": "be1438901e491b4368362dcc1f181a1c8c863bf9c5b52ec497bab23f30c55de8"
+    },
+    {
+      "end": 3950,
+      "source_anchor_id": "src-037",
+      "start": 3849,
+      "text_sha256": "63972ab4b80cb077b092d6a46977c27653770ed974f80568e33e09bb364fb353"
+    },
+    {
+      "end": 4117,
+      "source_anchor_id": "src-038",
+      "start": 3953,
+      "text_sha256": "52d1fd9829f149fd229352e9c45d7051d51cdf7715152dae53fcf9e2ed2aadd0"
+    },
+    {
+      "end": 4167,
+      "source_anchor_id": "src-039",
+      "start": 4120,
+      "text_sha256": "054670d1a9f05f9af383f4ffd570141c6935ac9bd9fd5c7b525125911b19dc8b"
+    },
+    {
+      "end": 4276,
+      "source_anchor_id": "src-040",
+      "start": 4170,
+      "text_sha256": "af4327ad6c61640d98d48b60a02721cc071a6a0f5510268190c03f68f6cc32ac"
+    },
+    {
+      "end": 4380,
+      "source_anchor_id": "src-041",
+      "start": 4279,
+      "text_sha256": "2b5a542d5fabc7af873a1e9dc8fb83c0b3cee6d044346a5cd4e72fb94a6cf35a"
+    },
+    {
+      "end": 4448,
+      "source_anchor_id": "src-042",
+      "start": 4383,
+      "text_sha256": "bc4800dfa00b500895a9e670198d9ef2c10f8923c6b17dc6cd46faadffb25f35"
+    },
+    {
+      "end": 4550,
+      "source_anchor_id": "src-043",
+      "start": 4453,
+      "text_sha256": "228b48a3773f6565cc9bb888946f6d60e47571491ce8b17a585320b6954800e7"
+    },
+    {
+      "end": 4597,
+      "source_anchor_id": "src-044",
+      "start": 4553,
+      "text_sha256": "4c41a3e8fcfebdb35499126265f1269c50a7bcb4ffbcf7d2e07bb0bd13541367"
+    },
+    {
+      "end": 4918,
+      "source_anchor_id": "src-045",
+      "start": 4599,
+      "text_sha256": "df4b67c00c27a59a629e9ede8fe230a13dda97a4e0cbee8ddf9fd21f32551b3c"
+    },
+    {
+      "end": 4937,
+      "source_anchor_id": "src-046",
+      "start": 4920,
+      "text_sha256": "4c5ee452c62ab7ea7d074bca2cd0572bbedbcefdd417856ce302ab8c7e2791f4"
+    },
+    {
+      "end": 4989,
+      "source_anchor_id": "src-047",
+      "start": 4939,
+      "text_sha256": "736d3009cc43a96378c638b61bdf8810c25e476c20fa694aa0ebd844c735b2a1"
+    },
+    {
+      "end": 5114,
+      "source_anchor_id": "src-048",
+      "start": 4992,
+      "text_sha256": "294aa3f063ab743ede2edb5d6fb02a4af9fdb9e67d9ae5444288b8aa512e4ef9"
+    },
+    {
+      "end": 5219,
+      "source_anchor_id": "src-049",
+      "start": 5117,
+      "text_sha256": "a0844e9d6045e78c56b04a5a8f2c9d7ee336767459cddac6a7edc68298d2c6a4"
+    },
+    {
+      "end": 5235,
+      "source_anchor_id": "src-050",
+      "start": 5221,
+      "text_sha256": "148dbbf4f163066fcd2b11e76272cc46c15e5e88867dfebb051495f87e0c438f"
+    },
+    {
+      "end": 5257,
+      "source_anchor_id": "src-051",
+      "start": 5237,
+      "text_sha256": "753966e8e95e1d998faffef93b16605fd9576d1ff636390e8d4ec5ddfbf502b4"
+    },
+    {
+      "end": 5271,
+      "source_anchor_id": "src-052",
+      "start": 5259,
+      "text_sha256": "ffdfe22d46131ed22b5cdf790c1f5ff7defa1692414804fe41d9e00abb3a15e0"
+    },
+    {
+      "end": 5293,
+      "source_anchor_id": "src-053",
+      "start": 5273,
+      "text_sha256": "9e24caab69d084fb429466c940cc92ee3f82183e870e83a1ddae28fa05f9391e"
+    },
+    {
+      "end": 5297,
+      "source_anchor_id": "src-054",
+      "start": 5295,
+      "text_sha256": "795cfc96d4b55db76a8d88a24f93ef7a4b37e85ee05eea05f9ddf40819f21bc1"
+    },
+    {
+      "end": 5368,
+      "source_anchor_id": "src-055",
+      "start": 5299,
+      "text_sha256": "f49f774267038b41d7eb7bd5f2ad0a5ef7cd3e87ecf86d466bff8dc5c1a077a9"
+    },
+    {
+      "end": 5372,
+      "source_anchor_id": "src-056",
+      "start": 5371,
+      "text_sha256": "e71ce5deab513c6df1c480a4e33392173122f09081b6fb4b17a0ccff87cd99e5"
+    },
+    {
+      "end": 6394,
+      "source_anchor_id": "src-057",
+      "start": 5374,
+      "text_sha256": "8413f464d9d9acb552b5ff82cfd3be870b93a426c704bd4b8f2467c87852a5ab"
+    },
+    {
+      "end": 6399,
+      "source_anchor_id": "src-058",
+      "start": 6397,
+      "text_sha256": "a2f7e42081a8eb137efdc1303baf41d6d8defe9db6b1351a82738c2fbece9add"
+    },
+    {
+      "end": 6481,
+      "source_anchor_id": "src-059",
+      "start": 6402,
+      "text_sha256": "a9a7a1cf8d92e4e96f49ac7d35b99cbeb0944365635732ce8e528ba65735c796"
+    },
+    {
+      "end": 6505,
+      "source_anchor_id": "src-060",
+      "start": 6485,
+      "text_sha256": "a91da20081c4fe82569eb8db3a43c518cdaa7bcecbcbd19c5f152347549d5f07"
+    },
+    {
+      "end": 6509,
+      "source_anchor_id": "src-061",
+      "start": 6507,
+      "text_sha256": "795cfc96d4b55db76a8d88a24f93ef7a4b37e85ee05eea05f9ddf40819f21bc1"
+    },
+    {
+      "end": 6576,
+      "source_anchor_id": "src-062",
+      "start": 6511,
+      "text_sha256": "bf6a25a873f7706690bfe8baedde29b6f391d2854605eda11ca37afb659587d9"
+    },
+    {
+      "end": 6580,
+      "source_anchor_id": "src-063",
+      "start": 6579,
+      "text_sha256": "e71ce5deab513c6df1c480a4e33392173122f09081b6fb4b17a0ccff87cd99e5"
+    },
+    {
+      "end": 7772,
+      "source_anchor_id": "src-064",
+      "start": 6583,
+      "text_sha256": "4e597d4a39a62247645a7a5994f995f13e51ffe8312283d1231e048726edf3c4"
+    },
+    {
+      "end": 7777,
+      "source_anchor_id": "src-065",
+      "start": 7775,
+      "text_sha256": "a2f7e42081a8eb137efdc1303baf41d6d8defe9db6b1351a82738c2fbece9add"
+    },
+    {
+      "end": 7858,
+      "source_anchor_id": "src-066",
+      "start": 7780,
+      "text_sha256": "b20c0a793deab0df57b9b030a6afb065f7859961b17c86fdea62346f732bb9a2"
+    },
+    {
+      "end": 7882,
+      "source_anchor_id": "src-067",
+      "start": 7862,
+      "text_sha256": "f32e4485c6f8b9e7ef1a7c5adf61cd6faee12cd632a8e5c0a0107512c699620d"
+    },
+    {
+      "end": 7886,
+      "source_anchor_id": "src-068",
+      "start": 7884,
+      "text_sha256": "795cfc96d4b55db76a8d88a24f93ef7a4b37e85ee05eea05f9ddf40819f21bc1"
+    },
+    {
+      "end": 7957,
+      "source_anchor_id": "src-069",
+      "start": 7888,
+      "text_sha256": "cb15ef18a9462edee8d91e0366291a0543a43faebbbeced6394ed81d3b5fcad5"
+    },
+    {
+      "end": 7961,
+      "source_anchor_id": "src-070",
+      "start": 7960,
+      "text_sha256": "e71ce5deab513c6df1c480a4e33392173122f09081b6fb4b17a0ccff87cd99e5"
+    },
+    {
+      "end": 8826,
+      "source_anchor_id": "src-071",
+      "start": 7963,
+      "text_sha256": "87e950499fced5f5e4b59a68870e813a9185533b8c0cb49dcd435fe63b3d74db"
+    },
+    {
+      "end": 8831,
+      "source_anchor_id": "src-072",
+      "start": 8829,
+      "text_sha256": "a2f7e42081a8eb137efdc1303baf41d6d8defe9db6b1351a82738c2fbece9add"
+    },
+    {
+      "end": 8912,
+      "source_anchor_id": "src-073",
+      "start": 8834,
+      "text_sha256": "cd47dcf379be059b66ae893cfa6245eff78d416bcc536e7b334c84af6161a2ef"
+    },
+    {
+      "end": 8936,
+      "source_anchor_id": "src-074",
+      "start": 8916,
+      "text_sha256": "026bbeb6e1ab1a2eb4b2fc08cd3564d24f55807527fe37acc8ce2288ab2d7fc9"
+    },
+    {
+      "end": 8950,
+      "source_anchor_id": "src-075",
+      "start": 8938,
+      "text_sha256": "ca4aa5c4943f330dbfeb5e221d53c6b5d1ee6278b260c9c7a319b3ff4c2d775e"
+    },
+    {
+      "end": 8968,
+      "source_anchor_id": "src-076",
+      "start": 8952,
+      "text_sha256": "f8a414a3db47dd46c7828c0246290e9c4a0744048debc6a0284a6303709edacd"
+    },
+    {
+      "end": 9030,
+      "source_anchor_id": "src-077",
+      "start": 8970,
+      "text_sha256": "5f4a5aa45ab426ad22ec102d906f17c7c6ba6c6c87f0fef1005a92db4acfd73e"
+    },
+    {
+      "end": 9047,
+      "source_anchor_id": "src-078",
+      "start": 9032,
+      "text_sha256": "e78ad1df2c8113c4a4948a32405307670dd350018b29817a6e2aa67997d0ff32"
+    },
+    {
+      "end": 9105,
+      "source_anchor_id": "src-079",
+      "start": 9049,
+      "text_sha256": "7968f1971a402155072d14032828261a9a10f5d6b00095c721c10d1f32de4b3b"
+    },
+    {
+      "end": 9127,
+      "source_anchor_id": "src-080",
+      "start": 9107,
+      "text_sha256": "377a75cde70cc7f97c45402e76aaa9da0f94893f612ad7a00883cb2a4a2d7eb8"
+    },
+    {
+      "end": 9705,
+      "source_anchor_id": "src-081",
+      "start": 9129,
+      "text_sha256": "0f3c0a24a5aec9c1778c3d5483fae2fa98ec4da1681aa6952ebac131aa525cda"
+    },
+    {
+      "end": 9727,
+      "source_anchor_id": "src-082",
+      "start": 9707,
+      "text_sha256": "b5831bf33fc76c283ebc5293b286a9e2bf399e8ae8cd1b6ccc3f9d669893a12f"
+    },
+    {
+      "end": 9801,
+      "source_anchor_id": "src-083",
+      "start": 9729,
+      "text_sha256": "38adf70a4a960336b529a93b670f66dd977cb3cfe36d5590cc1d4ff06796b5d1"
+    },
+    {
+      "end": 9851,
+      "source_anchor_id": "src-084",
+      "start": 9804,
+      "text_sha256": "335b0cc0981ff09aac5d788277fd10345d412010a0bdbfb46364dd90da99bf16"
+    },
+    {
+      "end": 10053,
+      "source_anchor_id": "src-085",
+      "start": 9854,
+      "text_sha256": "f57b89ea00248983098da4d4f0b0e100ebcca1e52688187a43de8ea4bc3b0a81"
+    },
+    {
+      "end": 10173,
+      "source_anchor_id": "src-086",
+      "start": 10056,
+      "text_sha256": "06040dd9b9048a8cc9e2fa24e033328d8a121b2cc09013a0ac294dea7802c0ce"
+    },
+    {
+      "end": 10192,
+      "source_anchor_id": "src-087",
+      "start": 10176,
+      "text_sha256": "58d81c677cd5e945663746968ce06e66620fc91a6ff3bcefcea4972dded56c21"
+    },
+    {
+      "end": 10268,
+      "source_anchor_id": "src-088",
+      "start": 10195,
+      "text_sha256": "b08b1f797bdc43c410a4ba952df279af2331c5b8f6f2055eb756e086bc53319f"
+    },
+    {
+      "end": 10308,
+      "source_anchor_id": "src-089",
+      "start": 10271,
+      "text_sha256": "be3aca1a9e789054a0609450ff2f05e8cec8c4edb497b304eb7ea0caf8420c0e"
+    },
+    {
+      "end": 10428,
+      "source_anchor_id": "src-090",
+      "start": 10311,
+      "text_sha256": "3d4fda37256d68517e5c934c56daa9e515cc3da6d8756d2f69c04db11ae38337"
+    },
+    {
+      "end": 10452,
+      "source_anchor_id": "src-091",
+      "start": 10432,
+      "text_sha256": "a2ddf5f074e7e8fa953b97a22ba6914b872e1ac9948bbea03db51a6912e66f3c"
+    },
+    {
+      "end": 10670,
+      "source_anchor_id": "src-092",
+      "start": 10454,
+      "text_sha256": "dd5b08a3b3d16a44a97f1f2dafaf2d70440709977a99d1741bd5852a1794cca5"
+    },
+    {
+      "end": 10692,
+      "source_anchor_id": "src-093",
+      "start": 10672,
+      "text_sha256": "8e38f4e7bf40bc4b1ea5fb5a27567ad15d0925220c3e83ef729ccc04ff09c106"
+    },
+    {
+      "end": 10758,
+      "source_anchor_id": "src-094",
+      "start": 10694,
+      "text_sha256": "74e17e7a2f37cdf86967968a6209ee08aacd7ce0b82bb229d6825910c4e83eba"
+    },
+    {
+      "end": 10771,
+      "source_anchor_id": "src-095",
+      "start": 10760,
+      "text_sha256": "afc0b85dd4f95d15338203378b03a5bc5969a23ddbec9eaf5af1a4164822aba1"
+    },
+    {
+      "end": 10899,
+      "source_anchor_id": "src-096",
+      "start": 10773,
+      "text_sha256": "00df9e2cbfb5fdbd31c007477dd0cde0fffcda04145b482e932424d7d0a8d573"
+    },
+    {
+      "end": 10918,
+      "source_anchor_id": "src-097",
+      "start": 10901,
+      "text_sha256": "ed54d05edf622f682ed39aad7010934be8150c4f03dd5f1b817ee7e63920bf7a"
+    },
+    {
+      "end": 10967,
+      "source_anchor_id": "src-098",
+      "start": 10920,
+      "text_sha256": "75e01fb1259cb9cc9e9299289a61088bee59a2d0458d5526ee98821a850b426a"
+    },
+    {
+      "end": 10986,
+      "source_anchor_id": "src-099",
+      "start": 10969,
+      "text_sha256": "eb4b4c799a46647e786e6de50ad69c92430381eee69dc74df5cbf67113f98be0"
+    },
+    {
+      "end": 11290,
+      "source_anchor_id": "src-100",
+      "start": 10988,
+      "text_sha256": "35b380ebd894812c3424fee67e4682a04c4f89988a40be3df11001484ea15436"
+    },
+    {
+      "end": 11310,
+      "source_anchor_id": "src-101",
+      "start": 11292,
+      "text_sha256": "6830e69ae17dcc75be80cbb908c95e236c3a2e214d612ff877dd36b598b3345d"
+    },
+    {
+      "end": 11563,
+      "source_anchor_id": "src-102",
+      "start": 11312,
+      "text_sha256": "f2f9d6a0db0b1205450a38fd6beb040b35849da1c99adf274ca01b2c972d7ab0"
+    },
+    {
+      "end": 11667,
+      "source_anchor_id": "src-103",
+      "start": 11565,
+      "text_sha256": "cba6665e47ddcd994473516d73ca87bda05b607ad4956e10cb69a5c3990b1821"
+    },
+    {
+      "end": 11707,
+      "source_anchor_id": "src-104",
+      "start": 11669,
+      "text_sha256": "47db70dac62d2f64094cb2fa55d37cf13fbd115cc56cfbbee16836e7c71cb64d"
+    },
+    {
+      "end": 11932,
+      "source_anchor_id": "src-105",
+      "start": 11709,
+      "text_sha256": "3d4576ebd164f72b56f7ea75a06232821fbaf61d975e8dcf4e1c28e779a4506c"
+    },
+    {
+      "end": 12085,
+      "source_anchor_id": "src-106",
+      "start": 11934,
+      "text_sha256": "4d18c75f1413aa611daf2260d7a00c1bcbad00f68a70dbec662c20e6a924a760"
+    }
+  ],
+  "source_context_items": [
+    {
+      "rationale": "组队学习时间和配套课程导航不参与技术论证；独立长文不保留课程通知。",
+      "reader_relevance_decision": "exclude_from_reader_facing_candidate",
+      "source_anchor_ids": [
+        "src-001"
+      ],
+      "source_context_item_id": "c1"
+    }
+  ],
+  "source_sha256": "b034889c8e2eb02282b201060d9df0a73b54329e2a1f948c9d8bb86412447ede"
+}

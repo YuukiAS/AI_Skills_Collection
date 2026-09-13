@@ -1,0 +1,66 @@
+{
+  "assembly": {
+    "bundle_count": 3,
+    "ok": true
+  },
+  "candidate_representation": {
+    "formula_text_fence_count": 0,
+    "malformed_table_count": 0,
+    "ok": true,
+    "ordinary_english_frame_count": 0,
+    "overwide_table_count": 0,
+    "reader_visible_markup_count": 0,
+    "target_chinese_variant_mismatch_count": 0,
+    "unrendered_math_count": 0
+  },
+  "candidate_sha256": "6c66cfa5fb910a7a28507d57c2728da463c34bf6e824da462bc54bdb6d42b46d",
+  "created_at": "2026-09-13T04:44:20Z",
+  "exact_verification": {
+    "exact_item_count": 14,
+    "ok": true
+  },
+  "external_api_call_count": 0,
+  "fixed_size_splitter_used": false,
+  "host_codex_owned_generation": true,
+  "meaning_map": {
+    "exact_item_count": 14,
+    "meaning_count": 6,
+    "ok": true,
+    "source_anchor_count": 8,
+    "source_context_item_count": 1
+  },
+  "paid_generation_used": false,
+  "private_plaintext_committed": false,
+  "reader_facing_internal_frame": {
+    "internal_workflow_leak_count": 0,
+    "ok": true
+  },
+  "reader_plan": {
+    "bundle_count": 3,
+    "excluded_source_context_item_count": 1,
+    "ok": true,
+    "owned_meaning_count": 6
+  },
+  "realization_packet_count": 3,
+  "repair_packet_count": 0,
+  "requires_openai_api_key": false,
+  "route_selection": {
+    "ok": true,
+    "ordinary_user_prompt": true,
+    "selected_route": "scientific-rewrite",
+    "selector_owner": "writing-style"
+  },
+  "runtime": "scientific-rewrite.meaning-realization.v2",
+  "schema": "SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2",
+  "seed_templates_used_for_realization": false,
+  "semantic_audit": {
+    "finding_count": 0,
+    "ok": true
+  },
+  "source_copy_fallback_used": false,
+  "source_sha256": "acff69248f5273cdd475c8affa6f9fbedd819ea449e1f27eb6056ee17464b36b",
+  "standalone_reader_frame": {
+    "ok": true,
+    "source_process_frame_count": 0
+  }
+}

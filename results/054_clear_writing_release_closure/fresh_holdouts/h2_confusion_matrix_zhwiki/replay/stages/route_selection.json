@@ -1,0 +1,11 @@
+{
+  "schema": "SCIENTIFIC_REWRITE_ROUTE_SELECTION_V1",
+  "selector_owner": "writing-style",
+  "selected_route": "scientific-rewrite",
+  "forced_route": false,
+  "ordinary_user_prompt": true,
+  "prompt_sha256": "932c93b3dd333c97d1dcad36ab48d3e36137f9b998cce19766cc6c1651f11c9c",
+  "source_sha256": "acff69248f5273cdd475c8affa6f9fbedd819ea449e1f27eb6056ee17464b36b",
+  "prompt_internal_terms": [],
+  "selection_basis": "Host semantic selection: source-bound technical restructuring with explicit numerical and formula preservation."
+}

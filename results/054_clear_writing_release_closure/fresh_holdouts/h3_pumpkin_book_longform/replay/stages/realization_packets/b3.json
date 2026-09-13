@@ -1,0 +1,55 @@
+{
+  "audience": "中文技术读者",
+  "bundle_id": "b3",
+  "exact_items": [
+    {
+      "category": "formula",
+      "exact_item_id": "f17",
+      "literal": "$$\n(x_1,x_2)\\rightarrow h_1=\\varepsilon(x_1-x_2-0.5),h_2=\\varepsilon(x_2-x_1-0.5)\\rightarrow y=\\varepsilon(h_1+h_2-0.5)\n$$",
+      "location_role": "inline-critical",
+      "sha256": "294aa3f063ab743ede2edb5d6fb02a4af9fdb9e67d9ae5444288b8aa512e4ef9"
+    }
+  ],
+  "information_shape": "连贯解释与逐步公式推导",
+  "meaning_records": [
+    {
+      "exact_item_ids": [
+        "f17"
+      ],
+      "kind": "technical_explanation",
+      "meaning_id": "m3",
+      "normalized_meaning": "图5.5四个二元输入通过两个隐节点的方向差与0.5阈值，再合并输出；保留(0,1)逐步代入和结果。",
+      "source_anchor_ids": [
+        "src-046",
+        "src-047",
+        "src-048",
+        "src-049"
+      ]
+    }
+  ],
+  "purpose": "隐层与异或",
+  "register": "自然简体中文技术长文",
+  "relation_records": [
+    {
+      "from_meaning_id": "m2",
+      "kind": "extends",
+      "to_meaning_id": "m3"
+    },
+    {
+      "from_meaning_id": "m3",
+      "kind": "requires_learning",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m5",
+      "kind": "limits_optimization_claim",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m6",
+      "kind": "context",
+      "to_meaning_id": "m7"
+    }
+  ],
+  "schema": "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1"
+}

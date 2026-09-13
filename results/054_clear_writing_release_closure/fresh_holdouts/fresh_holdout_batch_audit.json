@@ -1,0 +1,75 @@
+{
+  "schema": "054_FRESH_BATCH_AUDIT_V2",
+  "items": {
+    "h1_noisy_sklearn_docs": {
+      "schema": "054_FRESH_LOCAL_AUDIT_V2",
+      "holdout": "h1_noisy_sklearn_docs",
+      "markdown_path": "results/054_clear_writing_release_closure/fresh_holdouts/h1_noisy_sklearn_docs/replay/feature-hashing-zh.md",
+      "pdf_path": "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h1_noisy_sklearn_docs/feature-hashing-zh.pdf",
+      "pdf_text_path": "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h1_noisy_sklearn_docs/feature-hashing-zh.txt",
+      "markdown_sha256": "0093c6ba21762961f7673999bbca473f245fc52a108ba382a499b5ea457ddd12",
+      "markdown_bytes": 4322,
+      "pdf_sha256": "f20b88fce0226e8ea9999ef6de7bfe15f3764bca348d5d1eb5b31be1c6db8364",
+      "pdf_bytes": 97828,
+      "pdf_text_sha256": "6086307d2ab37c2ddf8c83c9e0cf23ed0ebdcd145a01e9aabb6c5868e4257a17",
+      "pdf_text_bytes": 4402,
+      "missing_required_literals": [],
+      "forbidden_literals_markdown": [],
+      "forbidden_literals_pdf_text": [],
+      "formula_text_fence_count": 0,
+      "code_fence_count": 4,
+      "allowed_code_fence_rationale": "Python API/code examples are required technical content; no formula-like text/plain fence is present.",
+      "markdown_table_rows": 0,
+      "ok": true,
+      "notes": [
+        "Four fenced blocks are Python code examples required by the source task, not formula text fences."
+      ]
+    },
+    "h2_confusion_matrix_zhwiki": {
+      "schema": "054_FRESH_LOCAL_AUDIT_V2",
+      "holdout": "h2_confusion_matrix_zhwiki",
+      "markdown_path": "results/054_clear_writing_release_closure/fresh_holdouts/h2_confusion_matrix_zhwiki/replay/混淆矩阵.md",
+      "pdf_path": "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h2_confusion_matrix_zhwiki/混淆矩阵.pdf",
+      "pdf_text_path": "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h2_confusion_matrix_zhwiki/混淆矩阵.txt",
+      "markdown_sha256": "6c66cfa5fb910a7a28507d57c2728da463c34bf6e824da462bc54bdb6d42b46d",
+      "markdown_bytes": 3975,
+      "pdf_sha256": "02952630b8bb90f8f1b14c6bd99bdf66fe38bb2627d655c0827717f85215b91f",
+      "pdf_bytes": 91474,
+      "pdf_text_sha256": "e6928a12f98e05f46e983122115acbe3f2bd2ba0d220b78a932eff5d0c0afdba",
+      "pdf_text_bytes": 4363,
+      "missing_required_literals": [],
+      "forbidden_literals_markdown": [],
+      "forbidden_literals_pdf_text": [],
+      "formula_text_fence_count": 0,
+      "code_fence_count": 0,
+      "allowed_code_fence_rationale": "No code fence present.",
+      "markdown_table_rows": 12,
+      "ok": true,
+      "notes": []
+    },
+    "h3_pumpkin_book_longform": {
+      "schema": "054_FRESH_LOCAL_AUDIT_V2",
+      "holdout": "h3_pumpkin_book_longform",
+      "markdown_path": "results/054_clear_writing_release_closure/fresh_holdouts/h3_pumpkin_book_longform/replay/神经网络：从感知机到深度学习.md",
+      "pdf_path": "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/神经网络：从感知机到深度学习.pdf",
+      "pdf_text_path": "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/神经网络：从感知机到深度学习.txt",
+      "markdown_sha256": "f44e7205d8aefd320ed841a9b198af5a55e7675a93324fd36131cc24cad6e748",
+      "markdown_bytes": 24023,
+      "pdf_sha256": "84424dff968a2f21ab7d20f171b72c7a986a7c3107bd76d4a59174cd5861f230",
+      "pdf_bytes": 202116,
+      "pdf_text_sha256": "e7fb47e424fe33ed745c7006776595b520ecdb2f69e73e5731d0077d9c7189f6",
+      "pdf_text_bytes": 29163,
+      "missing_required_literals": [],
+      "forbidden_literals_markdown": [],
+      "forbidden_literals_pdf_text": [],
+      "formula_text_fence_count": 0,
+      "code_fence_count": 0,
+      "allowed_code_fence_rationale": "No code fence present; LaTeX braces are math syntax, not wiki template leakage.",
+      "markdown_table_rows": 0,
+      "ok": true,
+      "notes": [
+        "Earlier brace-based raw-markup scan was overbroad; V2 checks wiki/template/ref tokens instead of LaTeX math braces."
+      ]
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "markdown": "results/054_clear_writing_release_closure/fresh_holdouts/h3_pumpkin_book_longform/replay/神经网络：从感知机到深度学习.md",
+  "pdf": "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/神经网络：从感知机到深度学习.pdf",
+  "renderer_script": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/scripts/render_markdown_pdf.sh",
+  "commands": [
+    {
+      "cmd": [
+        "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/scripts/render_markdown_pdf.sh",
+        "results/054_clear_writing_release_closure/fresh_holdouts/h3_pumpkin_book_longform/replay/神经网络：从感知机到深度学习.md",
+        "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/神经网络：从感知机到深度学习.pdf"
+      ],
+      "returncode": 0,
+      "stdout": "PDF written: /tmp/ai-skills-054-clear-writing-release-closure/results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/神经网络：从感知机到深度学习.pdf\nRenderer: pandoc_xelatex\nPandoc: /usr/bin/pandoc\nXeLaTeX: /usr/bin/xelatex\n",
+      "stderr": "riting formats under /tmp/ai-skills-054-clear-writing-release-closure/results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/work/texmf-var/web2c\nmktexfmt [INFO]: --- remaking xelatex with xetex\nmktexfmt: running `xetex -ini   -jobname=xelatex -progname=xelatex -etex xelatex.ini' ...\nThis is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (INITEX)\n restricted \\write18 enabled.\nentering extended mode\n(/usr/share/texlive/texmf-dist/tex/generic/tex-ini-files/xelatex.ini\n(/usr/share/texlive/texmf-dist/tex/latex/base/latex.ltx\n(/usr/share/texlive/texmf-dist/tex/latex/base/texsys.cfg)\n./texsys.aux found\n\n\n\\@currdir set to: ./.\n\n\nAssuming \\openin and \\input \nhave the same search path.\n\n\nDefining UNIX/DOS style filename parser.\n\ncatcodes, registers, parameters,\nLaTeX2e <2020-10-01> patch level 4\n(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.ltx\n(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3-code.tex\n(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3deprecation.def)))\n(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.ltx\n(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse-generic.tex))\n hacks, control, par, spacing, files, font encodings, lengths,\n====================================\n\nLocal config file fonttext.cfg used\n\n====================================\n(/usr/share/texlive/texmf-dist/tex/latex/base/fonttext.cfg\n(/usr/share/texlive/texmf-dist/tex/latex/base/fonttext.ltx\n=== Don't modify this file, use a .cfg file instead ===\n\n(/usr/share/texlive/texmf-dist/tex/latex/base/omlenc.def)\n(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.def)\n(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.def)\n(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def)\n(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def)\n(/usr/share/texlive/texmf-dist/tex/latex/base/tuenc.def)\n(/usr/share/texlive/texmf-dist/tex/latex/base/tulmr.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/base/tulmss.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/base/tulmtt.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/lm/ts1lmr.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmr.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/base/ot1cmr.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/base/ot1cmss.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/base/ot1cmtt.fd)))\n====================================\n\nLocal config file fontmath.cfg used\n\n====================================\n(/usr/share/texlive/texmf-dist/tex/latex/base/fontmath.cfg\n(/usr/share/texlive/texmf-dist/tex/latex/base/fontmath.ltx\n=== Don't modify this file, use a .cfg file instead ===\n\n(/usr/share/texlive/texmf-dist/tex/latex/base/omlcmm.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/base/omscmsy.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/base/omxcmex.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/base/ucmr.fd)))\n====================================\n\nLocal config file preload.cfg used\n\n=====================================\n(/usr/share/texlive/texmf-dist/tex/latex/base/preload.cfg\n(/usr/share/texlive/texmf-dist/tex/latex/base/preload.ltx)) page nos., x-ref,\nenvironments, center, verbatim, math definitions, boxes, title, sectioning,\ncontents, floats, footnotes, index, bibliography, output,\n Unicode character data,\n(/usr/share/texlive/texmf-dist/tex/generic/unicode-data/load-unicode-data.tex\n\nload-unicode-data.tex v1.14 (2020-10-24)\nReading Unicode data\n# UnicodeData-13.0.0.txt\n# Modified 2020-03-12 11:00:00 GMT [JAW]\n)\n===========================================\nLocal configuration file hyphen.cfg used\n===========================================\n(/usr/share/texlive/texmf-dist/tex/generic/babel/hyphen.cfg\n(/usr/share/texlive/texmf-dist/tex/generic/babel/xebabel.def)\n(/usr/share/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex)\n(/usr/share/texlive/texmf-dist/tex/generic/hyphen/dumyhyph.tex)\n(/usr/share/texlive/texmf-dist/tex/generic/hyphen/zerohyph.tex))\nNo file latex2e-first-aid-for-external-files.ltx.\n\n ) )\nBeginning to dump on file xelatex.fmt\n (preloaded format=xelatex 2026.9.13)\n86568 strings of total length 381379\n287506 memory locations dumped; current usage is 299&284500\n19931 multiletter control sequences\n\\font\\nullfont=nullfont\n\\font\\c__fp_exp_intarray=cmr10 at 0.00002pt\n\\font\\c__fp_trig_intarray=cmr10 at 0.00003pt\n\\font\\c_initex_cctab=cmr10 at 0.00005pt\n\\font\\c_other_cctab=cmr10 at 0.00006pt\n\\font\\c_str_cctab=cmr10 at 0.00008pt\n\\font\\g__regex_state_active_intarray=cmr10 at 0.00009pt\n\\font\\g__regex_thread_info_intarray=cmr10 at 0.0001pt\n\\font\\g__regex_submatch_prev_intarray=cmr10 at 0.00012pt\n\\font\\g__regex_submatch_begin_intarray=cmr10 at 0.00014pt\n\\font\\g__regex_submatch_end_intarray=cmr10 at 0.00015pt\n\\font\\g__regex_balance_intarray=cmr10 at 0.00017pt\n\\font\\OMX/cmex/m/n/10=cmex10\n\\font\\tenln=line10\n\\font\\tenlnw=linew10\n\\font\\tencirc=lcircle10\n\\font\\tencircw=lcirclew10\n\\font\\OT1/cmr/m/n/5=cmr5\n\\font\\OT1/cmr/m/n/7=cmr7\n\\font\\OT1/cmr/m/n/10=cmr10\n\\font\\OML/cmm/m/it/5=cmmi5\n\\font\\OML/cmm/m/it/7=cmmi7\n\\font\\OML/cmm/m/it/10=cmmi10\n\\font\\OMS/cmsy/m/n/5=cmsy5\n\\font\\OMS/cmsy/m/n/7=cmsy7\n\\font\\OMS/cmsy/m/n/10=cmsy10\n\\font\\c_code_cctab=cmr10 at 0.00018pt\n\\font\\c_document_cctab=cmr10 at 0.0002pt\n403423 words of font info for 27 preloaded fonts\n14 hyphenation exceptions\nHyphenation trie of length 6082 has 183 ops out of 35111\n  2 for language 1\n  181 for language 0\nNo pages of output.\nTranscript written on xelatex.log.\nmktexfmt [INFO]: log file copied to: /tmp/ai-skills-054-clear-writing-release-closure/results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/work/texmf-var/web2c/xetex/xelatex.log\nmktexfmt [INFO]: /tmp/ai-skills-054-clear-writing-release-closure/results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/work/texmf-var/web2c/xetex/xelatex.fmt installed.\nmktexfmt [INFO]: successfully rebuilt formats: 1\nmktexfmt [INFO]: not selected formats: 19\nmktexfmt [INFO]: total formats: 20\nmktexfmt [INFO]: exiting with status 0\n"
+    },
+    {
+      "cmd": [
+        "pdftotext",
+        "-layout",
+        "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/神经网络：从感知机到深度学习.pdf",
+        "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/神经网络：从感知机到深度学习.txt"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "cmd": [
+        "pdfinfo",
+        "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/神经网络：从感知机到深度学习.pdf"
+      ],
+      "returncode": 0,
+      "stdout": "Creator:        LaTeX via pandoc\nProducer:       xdvipdfmx (20200315)\nCreationDate:   Sun Sep 13 00:00:59 2026 EDT\nTagged:         no\nUserProperties: no\nSuspects:       no\nForm:           none\nJavaScript:     no\nPages:          7\nEncrypted:      no\nPage size:      595.28 x 841.89 pts (A4)\nPage rot:       0\nFile size:      202116 bytes\nOptimized:      no\nPDF version:    1.5\n",
+      "stderr": ""
+    },
+    {
+      "cmd": [
+        "pdffonts",
+        "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/神经网络：从感知机到深度学习.pdf"
+      ],
+      "returncode": 0,
+      "stdout": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nPTWYXB+NotoSerifSC-Bold-Identity-H   CID Type 0C       Identity-H       yes yes yes      5  0\nIJLRDR+NotoSerifSC-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      7  0\nKVVNUS+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      9  0\nAGUFFZ+TeXGyreTermesMath-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes     11  0\nHKRLHE+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes     20  0\n",
+      "stderr": ""
+    },
+    {
+      "cmd": [
+        "pdftoppm",
+        "-scale-to",
+        "900",
+        "-png",
+        "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/神经网络：从感知机到深度学习.pdf",
+        "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/page"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "render_source": "render_markdown_pdf_script",
+  "png_pages": [
+    "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/page-1.png",
+    "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/page-2.png",
+    "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/page-3.png",
+    "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/page-4.png",
+    "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/page-5.png",
+    "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/page-6.png",
+    "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/page-7.png"
+  ]
+}

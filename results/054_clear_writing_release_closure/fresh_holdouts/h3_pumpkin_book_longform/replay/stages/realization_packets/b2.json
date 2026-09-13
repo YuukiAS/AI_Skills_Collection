@@ -1,0 +1,209 @@
+{
+  "audience": "中文技术读者",
+  "bundle_id": "b2",
+  "exact_items": [
+    {
+      "category": "formula",
+      "exact_item_id": "f1",
+      "literal": "$$\ny=f\\left(\\sum\\limits_{i=1}^{n}w_ix_i-\\theta\\right)=f(\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x}-\\theta)\n$$",
+      "location_role": "inline-critical",
+      "sha256": "749869a47b902479f68cdb72f8164cffd2454c4d339b8e5a86e1e675cf5bc34a"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f2",
+      "literal": "$$\ny=\\varepsilon(\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x}-\\theta)=\\left\\{\\begin{array}{rcl}\n1,& {\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x} -\\theta\\geqslant 0};\\\\\n0,& {\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x} -\\theta < 0}.\\\\\n\\end{array} \\right.\n$$",
+      "location_role": "inline-critical",
+      "sha256": "677f7825989a38ed96332107e7fae5aa22b22711077b33b2b182e135e78895cf"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f3",
+      "literal": "$$\nw_1x_1+w_2x_2+\\cdots+w_nx_n+b  =\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x} +b=0\n$$",
+      "location_role": "inline-critical",
+      "sha256": "93d4735054554b1ea42cc021eb5d687d80471dfbbd9ff8c614f6c87faa8daa7f"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f4",
+      "literal": "$$\nT=\\{(\\boldsymbol{x}_1,y_1),(\\boldsymbol{x}_2,y_2),\\cdots,(\\boldsymbol{x}_N,y_N)\\}\n$$",
+      "location_role": "inline-critical",
+      "sha256": "1d06065019278a7b8b0560a84316c4d4a23f2b5abf9ed4fa426cc062fcf00c11"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f5",
+      "literal": "$$\n\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x}+b=0\n$$",
+      "location_role": "inline-critical",
+      "sha256": "4497c6c5c9a04681f571e5915beaa55d5eaaeee507a16cb8e006b79ca24dab45"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f6",
+      "literal": "$$\n\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x}-\\theta=0\n$$",
+      "location_role": "inline-critical",
+      "sha256": "fabafe78fdff318048556cfa41a31ec2cfe5e6983f35c55d2503af4c814ad567"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f7",
+      "literal": "$$\n(\\hat{y}-y)\\left(\\boldsymbol{w}^\\mathrm{T}\\boldsymbol{x}-\\theta\\right)\\geqslant0\n$$",
+      "location_role": "inline-critical",
+      "sha256": "6c18028dfd729fc2722f5991d08054e9adb7ab6625684c6ff446fcd111fdc41b"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f8",
+      "literal": "$$\nL(\\boldsymbol{w},\\theta)=\\sum_{\\boldsymbol{x}\\in M}(\\hat{y}-y)\n\\left(\\boldsymbol{w}^\\mathrm{T}\\boldsymbol{x}-\\theta\\right)\n$$",
+      "location_role": "inline-critical",
+      "sha256": "0e88385b958b2c9e32fc9fb66edf28676afc1b9324cfb7507448af91ba4bd45d"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f9",
+      "literal": "$$\nT=\\{(\\boldsymbol{x}_1,y_1),(\\boldsymbol{x}_2,y_2),\\cdots,(\\boldsymbol{x}_N,y_N)\\}\n$$",
+      "location_role": "inline-critical",
+      "sha256": "1d06065019278a7b8b0560a84316c4d4a23f2b5abf9ed4fa426cc062fcf00c11"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f10",
+      "literal": "$$\n\\min\\limits_{\\boldsymbol{w},\\theta}L(\\boldsymbol{w},\\theta)=\\min\\limits_{\\boldsymbol{w},\\theta}\\sum_{\\boldsymbol{x_i}\\in M}(\\hat{y}_i-y_i)(\\boldsymbol{w}^\\mathrm{T}\\boldsymbol{x}_i-\\theta)\n$$",
+      "location_role": "inline-critical",
+      "sha256": "9b096455fa5753df6ae111342afbc4f5bf3cbc59546cfa3cd9d6f8dd5ca8d0e5"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f11",
+      "literal": "$$\n-\\theta=-1\\cdot w_{n+1}=x_{n+1}\\cdot w_{n+1}\n$$",
+      "location_role": "inline-critical",
+      "sha256": "ff132e0e7a873a8f834221f1debc01d3b23f7a93e7810303bd206f8e548855c1"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f12",
+      "literal": "$$\n\\begin{aligned}\n\\boldsymbol{w}^\\mathrm{T}\\boldsymbol{x_i}-\\theta&=\\sum\n\\limits_{j=1}^n w_jx_j+x_{n+1}\\cdot w_{n+1}\\\\\n&=\\sum\\limits_{j=1}^{n+1}w_jx_j\\\\\n&=\\boldsymbol{w}^{\\mathrm{T}}\\boldsymbol{x_i}\n\\end{aligned}\n$$",
+      "location_role": "inline-critical",
+      "sha256": "be1438901e491b4368362dcc1f181a1c8c863bf9c5b52ec497bab23f30c55de8"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f13",
+      "literal": "$$\n\\min\\limits_{\\boldsymbol{w}}L(\\boldsymbol{w})=\\min\\limits_{\\boldsymbol{w}}\\sum_{\\boldsymbol{x_i}\\in M}(\\hat{y}_i-y_i)\\boldsymbol{w}^\\mathrm{T}\\boldsymbol{x_i}\n$$",
+      "location_role": "inline-critical",
+      "sha256": "52d1fd9829f149fd229352e9c45d7051d51cdf7715152dae53fcf9e2ed2aadd0"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f14",
+      "literal": "$$\n\\nabla_{\\boldsymbol{w}}L(\\boldsymbol{w})=\\sum_{\\boldsymbol{x_i}\\in M}(\\hat{y}_i-y_i)\\boldsymbol{x_i}\n$$",
+      "location_role": "inline-critical",
+      "sha256": "af4327ad6c61640d98d48b60a02721cc071a6a0f5510268190c03f68f6cc32ac"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f15",
+      "literal": "$$\n\\boldsymbol w \\leftarrow \\boldsymbol w+\\Delta \\boldsymbol w\n$$",
+      "location_role": "inline-critical",
+      "sha256": "bc4800dfa00b500895a9e670198d9ef2c10f8923c6b17dc6cd46faadffb25f35"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f16",
+      "literal": "$$\n\\Delta \\boldsymbol w=-\\eta(\\hat{y}_i-y_i)\\boldsymbol x_i=\\eta(y_i-\\hat{y}_i)\\boldsymbol x_i\n$$",
+      "location_role": "inline-critical",
+      "sha256": "228b48a3773f6565cc9bb888946f6d60e47571491ce8b17a585320b6954800e7"
+    }
+  ],
+  "information_shape": "连贯解释与逐步公式推导",
+  "meaning_records": [
+    {
+      "exact_item_ids": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6",
+        "f7",
+        "f8",
+        "f9",
+        "f10",
+        "f11",
+        "f12",
+        "f13",
+        "f14",
+        "f15",
+        "f16"
+      ],
+      "kind": "technical_explanation",
+      "meaning_id": "m2",
+      "normalized_meaning": "依[1]按模型、策略、算法连接式(5.1)(5.2)。n维特征和权重、阈值、阶跃0/1输出；超平面偏置b=-theta。T有N样本，正类非负、负类严格负定义线性可分，否则不可分。在线性可分前提下寻找完全正确分隔。M为误分类样本集合，分两类错误得到非负乘积和损失。无错误则零；误差数量和距平面距离影响损失，距离参见6.1.2。固定M求导，扩充-1哑节点合并阈值，逐点随机梯度下降、学习率eta、初始化和重算M直到为空；初始化及抽样使解不唯一。",
+      "source_anchor_ids": [
+        "src-008",
+        "src-009",
+        "src-010",
+        "src-011",
+        "src-012",
+        "src-013",
+        "src-014",
+        "src-015",
+        "src-016",
+        "src-017",
+        "src-018",
+        "src-019",
+        "src-020",
+        "src-021",
+        "src-022",
+        "src-023",
+        "src-024",
+        "src-025",
+        "src-026",
+        "src-027",
+        "src-028",
+        "src-029",
+        "src-030",
+        "src-031",
+        "src-032",
+        "src-033",
+        "src-034",
+        "src-035",
+        "src-036",
+        "src-037",
+        "src-038",
+        "src-039",
+        "src-040",
+        "src-041",
+        "src-042",
+        "src-043",
+        "src-044",
+        "src-045"
+      ]
+    }
+  ],
+  "purpose": "感知机边界与学习",
+  "register": "自然简体中文技术长文",
+  "relation_records": [
+    {
+      "from_meaning_id": "m2",
+      "kind": "extends",
+      "to_meaning_id": "m3"
+    },
+    {
+      "from_meaning_id": "m3",
+      "kind": "requires_learning",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m5",
+      "kind": "limits_optimization_claim",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m6",
+      "kind": "context",
+      "to_meaning_id": "m7"
+    }
+  ],
+  "schema": "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1"
+}

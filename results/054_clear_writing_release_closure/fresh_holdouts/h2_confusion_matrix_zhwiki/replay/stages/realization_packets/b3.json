@@ -1,0 +1,105 @@
+{
+  "schema": "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1",
+  "bundle_id": "b3",
+  "audience": "了解基本分类概念的中文技术读者",
+  "register": "自然简体中文技术说明",
+  "purpose": "类别不平衡时为何高分仍会误导？",
+  "information_shape": "条件说明、指标比较、公式与解释",
+  "meaning_records": [
+    {
+      "meaning_id": "imbalance",
+      "kind": "technical_explanation",
+      "normalized_meaning": "不平衡条件：猫95、狗5，全部预测猫。总体准确度95%；猫敏感性100%，狗识别率0%。以猫为阳性时F1超过97.4%，仍掩盖狗的完全漏识别。不是所有F1汇总方式均取该数值。",
+      "source_anchor_ids": [
+        "src-004"
+      ],
+      "exact_item_ids": [
+        "e5",
+        "e6",
+        "e7",
+        "e8",
+        "e9",
+        "e10"
+      ]
+    },
+    {
+      "meaning_id": "youden",
+      "kind": "technical_explanation",
+      "normalized_meaning": "约登指数抵消此例类别比例导致的高分假象。敏感性加特异性减一；此例95/(95+0)+0/(0+5)-1=0，恒猜猫没有有效类别区分信息。零值表示在此判别意义上无用，不把指数误写成概率。文献身份：Youden’s J statistic，Wikipedia。",
+      "source_anchor_ids": [
+        "src-004",
+        "src-005"
+      ],
+      "exact_item_ids": [
+        "e11",
+        "e12",
+        "e13"
+      ]
+    },
+    {
+      "meaning_id": "other",
+      "kind": "technical_explanation",
+      "normalized_meaning": "可依据分析目的从混淆矩阵计算其他指标，不同指标用途不同。",
+      "source_anchor_ids": [
+        "src-006"
+      ],
+      "exact_item_ids": []
+    }
+  ],
+  "exact_items": [
+    {
+      "exact_item_id": "e5",
+      "literal": "95",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e6",
+      "literal": "95%",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e7",
+      "literal": "100%",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e8",
+      "literal": "0%",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e9",
+      "literal": "97.4%",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e10",
+      "literal": "F1 score",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e11",
+      "literal": "J=0",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e12",
+      "literal": "\\frac{95}{95+0}",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    },
+    {
+      "exact_item_id": "e13",
+      "literal": "\\frac{0}{0+5}",
+      "category": "user_protected",
+      "location_role": "inline-critical"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schema": "054_FRESH_LOCAL_AUDIT_V2",
+  "holdout": "h3_pumpkin_book_longform",
+  "markdown_path": "results/054_clear_writing_release_closure/fresh_holdouts/h3_pumpkin_book_longform/replay/神经网络：从感知机到深度学习.md",
+  "pdf_path": "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/神经网络：从感知机到深度学习.pdf",
+  "pdf_text_path": "results/054_clear_writing_release_closure/render_qa/fresh_holdouts/h3_pumpkin_book_longform/神经网络：从感知机到深度学习.txt",
+  "markdown_sha256": "f44e7205d8aefd320ed841a9b198af5a55e7675a93324fd36131cc24cad6e748",
+  "markdown_bytes": 24023,
+  "pdf_sha256": "84424dff968a2f21ab7d20f171b72c7a986a7c3107bd76d4a59174cd5861f230",
+  "pdf_bytes": 202116,
+  "pdf_text_sha256": "e7fb47e424fe33ed745c7006776595b520ecdb2f69e73e5731d0077d9c7189f6",
+  "pdf_text_bytes": 29163,
+  "missing_required_literals": [],
+  "forbidden_literals_markdown": [],
+  "forbidden_literals_pdf_text": [],
+  "formula_text_fence_count": 0,
+  "code_fence_count": 0,
+  "allowed_code_fence_rationale": "No code fence present; LaTeX braces are math syntax, not wiki template leakage.",
+  "markdown_table_rows": 0,
+  "ok": true,
+  "notes": [
+    "Earlier brace-based raw-markup scan was overbroad; V2 checks wiki/template/ref tokens instead of LaTeX math braces."
+  ]
+}

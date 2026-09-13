@@ -1,0 +1,7 @@
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+HYKYIS+NotoSerifSC-Bold-Identity-H   CID Type 0C       Identity-H       yes yes yes      5  0
+FCEURP+NotoSerifSC-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      7  0
+GLTVQV+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      9  0
+PINBHX+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes     11  0
+PMUOGS+TeXGyreTermesMath-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes     17  0

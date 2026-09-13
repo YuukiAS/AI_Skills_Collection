@@ -1,0 +1,92 @@
+{
+  "audience": "中文技术读者",
+  "bundle_id": "b6",
+  "exact_items": [
+    {
+      "category": "formula",
+      "exact_item_id": "f27",
+      "literal": "$$\nE_{\\rm graph}=E_{\\rm edges}+E_{\\rm nodes}\n$$",
+      "location_role": "inline-critical",
+      "sha256": "335b0cc0981ff09aac5d788277fd10345d412010a0bdbfb46364dd90da99bf16"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f28",
+      "literal": "$$\nE_{\\rm edges}=\\sum_{i=1}^{n-1}\\sum_{j=i+1}^{n}E_{{\\rm edge}_{ij}}=-\\sum_{i=1}^{n-1}\\sum_{j=i+1}^{n}w_{ij}s_is_j\n$$",
+      "location_role": "inline-critical",
+      "sha256": "06040dd9b9048a8cc9e2fa24e033328d8a121b2cc09013a0ac294dea7802c0ce"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f29",
+      "literal": "$$\nE_{\\rm nodes}=\\sum_{i=1}^nE_{{\\rm node}_i}=-\\sum_{i=1}^n\\theta_is_i\n$$",
+      "location_role": "inline-critical",
+      "sha256": "b08b1f797bdc43c410a4ba952df279af2331c5b8f6f2055eb756e086bc53319f"
+    },
+    {
+      "category": "formula",
+      "exact_item_id": "f30",
+      "literal": "$$\nE_{\\rm graph}=E_{\\rm edges}+E_{\\rm nodes}=-\\sum_{i=1}^{n-1}\\sum_{j=i+1}^{n}w_{ij}s_is_j-\\sum_{i=1}^n\\theta_is_i\n$$",
+      "location_role": "inline-critical",
+      "sha256": "3d4fda37256d68517e5c934c56daa9e515cc3da6d8756d2f69c04db11ae38337"
+    }
+  ],
+  "information_shape": "连贯解释与逐步公式推导",
+  "meaning_records": [
+    {
+      "exact_item_ids": [
+        "f27",
+        "f28",
+        "f29",
+        "f30"
+      ],
+      "kind": "technical_explanation",
+      "meaning_id": "m6",
+      "normalized_meaning": "5.5网络已较不常见，5.6卷积与循环网络更常见。RBF式(5.18)为q项rho线性组合；经5.19从d维到q维，中心固定后等同3.2线性回归，可加偏置b。Boltzmann为带隐变量无向图；式(5.20)边与节点能量相加，负权重状态乘积及负阈值状态乘积，边求和i<j，保留全式。受限Boltzmann Machine即RBM只保留跨层边；5.22给定h显层各变量条件独立；5.23给定v隐层各变量条件独立。",
+      "source_anchor_ids": [
+        "src-078",
+        "src-079",
+        "src-080",
+        "src-081",
+        "src-082",
+        "src-083",
+        "src-084",
+        "src-085",
+        "src-086",
+        "src-087",
+        "src-088",
+        "src-089",
+        "src-090",
+        "src-091",
+        "src-092",
+        "src-093",
+        "src-094"
+      ]
+    }
+  ],
+  "purpose": "其他网络",
+  "register": "自然简体中文技术长文",
+  "relation_records": [
+    {
+      "from_meaning_id": "m2",
+      "kind": "extends",
+      "to_meaning_id": "m3"
+    },
+    {
+      "from_meaning_id": "m3",
+      "kind": "requires_learning",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m5",
+      "kind": "limits_optimization_claim",
+      "to_meaning_id": "m4"
+    },
+    {
+      "from_meaning_id": "m6",
+      "kind": "context",
+      "to_meaning_id": "m7"
+    }
+  ],
+  "schema": "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1"
+}
