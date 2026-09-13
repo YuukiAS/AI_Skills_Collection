@@ -1,0 +1,362 @@
+{
+  "exact_items": [
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E1",
+      "literal": "Bloom Filter",
+      "location_role": "inline-critical",
+      "sha256": "95c4fc0c878caa9022bbbd5a9923ba54fe6d963298f34c23e133896893ec2f9e"
+    },
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E2",
+      "literal": "Burton Howard Bloom",
+      "location_role": "inline-critical",
+      "sha256": "ff124198b105380c0bdcf30ee61ece201225ea87492f48584f834fb78f19ed74"
+    },
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E3",
+      "literal": "1970",
+      "location_role": "inline-critical",
+      "sha256": "ad1f3889d0032e7c2791053060e4c044837353325fbd42cdeeef65638ed31c2a"
+    },
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E4",
+      "literal": "O(n)",
+      "location_role": "inline-critical",
+      "sha256": "387008096a415eb2a5c95f1d7d9d7d5ec8c6a3b2f1f2fe7a2f7cc0f27c6f38fb"
+    },
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E5",
+      "literal": "O(log n)",
+      "location_role": "inline-critical",
+      "sha256": "82da2851d2e34fc1fcd95cbe0819e292a094ac31f627bb549738ca76b4afc411"
+    },
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E6",
+      "literal": "O(1)",
+      "location_role": "inline-critical",
+      "sha256": "4a137b861e8d266f3c1bfeb6608fbf87f862ed7863127d6802f545b38d4ec25f"
+    },
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E7",
+      "literal": "O(k)",
+      "location_role": "inline-critical",
+      "sha256": "e9540ae1ed1bf27fec33357b89b53d066a85a3f1633c46bb1113ed2446405f51"
+    },
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E8",
+      "literal": "m",
+      "location_role": "inline-critical",
+      "sha256": "62c66a7a5dd70c3146618063c344e531e6d4b59e379808443ce962b3abd63c5a"
+    },
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E9",
+      "literal": "k",
+      "location_role": "inline-critical",
+      "sha256": "8254c329a92850f6d539dd376f4816ee2764517da5e0235514af433164480d7a"
+    },
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E10",
+      "literal": "ε",
+      "location_role": "inline-critical",
+      "sha256": "0f072b4daf81e8b8db6784d78f54e655058b19522c47b945b59d02f41d4cbaab"
+    },
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E11",
+      "literal": "m = 18",
+      "location_role": "inline-critical",
+      "sha256": "cdae1a1ae29373df8cdbb521c0058ea17c068fc51b1ca51e2695fa2036751c4c"
+    },
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E12",
+      "literal": "k = 3",
+      "location_role": "inline-critical",
+      "sha256": "a66c78da58f7b62224a2b7dd293796e9681793e98919ad4e3f7af982c7ba389a"
+    },
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E13",
+      "literal": "k − 1",
+      "location_role": "inline-critical",
+      "sha256": "0a6d777ba70be6a598dbcb5efd78d4094df795abfaf508fe9aa78ec313c363cb"
+    },
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E14",
+      "literal": "\\{x, y, z\\}",
+      "location_role": "inline-critical",
+      "sha256": "77acbb1b50f4a649d5b9a71dc245f7e797a091db797dc0a5bc3bc83e4985f9d6"
+    },
+    {
+      "category": "formal_identity",
+      "exact_item_id": "E15",
+      "literal": "w",
+      "location_role": "inline-critical",
+      "sha256": "50e721e49c013f00c62cf59f2163542a9d8df02464efeb615d31051b0fddc326"
+    },
+    {
+      "category": "citation",
+      "exact_item_id": "E16",
+      "literal": "[Bloom, 1970]",
+      "location_role": "inline-critical",
+      "sha256": "e2689d36eb501f9a392e15d6d4e2b2f033171844771f109e9ce7aef3626bf093"
+    },
+    {
+      "category": "citation",
+      "exact_item_id": "E17",
+      "literal": "[Dillinger 与 Manolios, 2004a；Kirsch 与 Mitzenmacher, 2006]",
+      "location_role": "inline-critical",
+      "sha256": "d1496ce99bddbf674552217cd72b2947d17250bce4dc6268510e5a543d303b06"
+    },
+    {
+      "category": "citation",
+      "exact_item_id": "E18",
+      "literal": "[Dillinger 与 Manolios, 2004b]",
+      "location_role": "inline-critical",
+      "sha256": "3d09b9d90d3d8bbf79e0d8250925f3a617432334540a74529adac11bebbe4574"
+    }
+  ],
+  "meanings": [
+    {
+      "exact_item_ids": [
+        "E1",
+        "E2",
+        "E3",
+        "E16"
+      ],
+      "kind": "definition",
+      "meaning_id": "M1",
+      "normalized_meaning": "对象=集合成员检验的概率数据结构；提出者=Burton Howard Bloom；年份=1970；出处=Bloom 1970；表示=经散列映射的二进制位数组；空间、查询时间效率优于一般算法；误报可能、漏报不会、删除困难。",
+      "source_anchor_ids": [
+        "src-005"
+      ]
+    },
+    {
+      "exact_item_ids": [
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "kind": "comparison",
+      "meaning_id": "M2",
+      "normalized_meaning": "常规方法保存全部元素再比较；链表、树、散列表（哈希表）的检索复杂度依次为O(n)、O(log n)、O(1)；集合增长带来存储增长及检索负担。",
+      "source_anchor_ids": [
+        "src-006"
+      ]
+    },
+    {
+      "exact_item_ids": [
+        "E8",
+        "E9",
+        "E10"
+      ],
+      "kind": "mechanism",
+      "meaning_id": "M3",
+      "normalized_meaning": "参数m=数组位数；空数组全0；k个散列函数各映射到一个位置；理想散列均匀且独立；k通常为小常数，由目标误报率ε决定；m与k及待加元素数成正比。插入置1；查询任一0即排除，全1只表示可能存在，因为其他元素可能占据相同位置；简单结构无法区分，先进技术可解决。",
+      "source_anchor_ids": [
+        "src-007",
+        "src-009",
+        "src-010",
+        "src-011"
+      ]
+    },
+    {
+      "exact_item_ids": [
+        "E11",
+        "E12",
+        "E14",
+        "E15"
+      ],
+      "kind": "example",
+      "meaning_id": "M4",
+      "normalized_meaning": "例子集合{x, y, z}；m = 18；k = 3；w映射位置出现0故不在集合；图中彩色箭头为映射，箭头数量表达散列函数数目。",
+      "source_anchor_ids": [
+        "src-008"
+      ]
+    },
+    {
+      "exact_item_ids": [
+        "E13",
+        "E17",
+        "E18"
+      ],
+      "kind": "implementation",
+      "meaning_id": "M5",
+      "normalized_meaning": "k大时难构造多个独立函数；宽输出良好散列的位域相关性低，可切分输出获得多个函数；也可取0, 1, ..., k − 1作为初始值或加入/追加到键；m和/或k较大可放宽独立性，误报增幅可忽略，归于Dillinger、Manolios 2004a及Kirsch、Mitzenmacher 2006；Dillinger、Manolios 2004b展示增强双重散列、三重散列导出k索引的有效性，它们是双散列变体，以2或3个散列值播种简单随机数生成器。",
+      "source_anchor_ids": [
+        "src-012"
+      ]
+    },
+    {
+      "kind": "deletion",
+      "meaning_id": "M6",
+      "normalized_meaning": "简单结构无法安全删除：清任一对应位可排除目标，也可误排其他共享该位的元素；无占用归属判别机制，清位可能漏报。",
+      "source_anchor_ids": [
+        "src-013"
+      ]
+    },
+    {
+      "kind": "auxiliary",
+      "meaning_id": "M7",
+      "normalized_meaning": "辅助移除过滤器记录已删除元素，可模拟一次性删除；辅助结构误报转为组合结构漏报；已删除元素不可重新添加，因为需要从辅助结构删除，复遇同一困难。",
+      "source_anchor_ids": [
+        "src-014"
+      ]
+    },
+    {
+      "exact_item_ids": [
+        "E7"
+      ],
+      "kind": "tradeoffs",
+      "meaning_id": "M8",
+      "normalized_meaning": "空间和时间优势；固定过滤器存储空间固定，插入/查询O(k)，小常数k使时间为常数；散列计算互不依赖，适合硬件并行；不存元素本身有利于严格保密场景。插入数增则误报率增，元素很少用散列表已足够，降低误报的研究产生许多变种。所有键常可取得但枚举昂贵（多次磁盘读）；误报过高可重建，重建应较少发生。",
+      "source_anchor_ids": [
+        "src-015",
+        "src-016",
+        "src-017"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "from_meaning": "M3",
+      "relation": "共享位解释删除限制",
+      "to_meaning": "M6"
+    },
+    {
+      "from_meaning": "M6",
+      "relation": "辅助结构不能消除删除困难",
+      "to_meaning": "M7"
+    }
+  ],
+  "schema": "SCIENTIFIC_REWRITE_MEANING_MAP_V1",
+  "source_anchors": [
+    {
+      "end": 15,
+      "source_anchor_id": "src-001",
+      "start": 0,
+      "text_sha256": "00272b380143dcdd33cb3d9e12c76eaef20cd1dbb9e663258d25e3835d861ad9"
+    },
+    {
+      "end": 286,
+      "source_anchor_id": "src-002",
+      "start": 17,
+      "text_sha256": "8af9abf76e3252d34e89732f8477a77c993796fb7ba34a966465a5fbecc55131"
+    },
+    {
+      "end": 291,
+      "source_anchor_id": "src-003",
+      "start": 288,
+      "text_sha256": "cb3f91d54eee30e53e35b2b99905f70f169ed549fd78909d3dac2defc9ed8d3b"
+    },
+    {
+      "end": 309,
+      "source_anchor_id": "src-004",
+      "start": 293,
+      "text_sha256": "e15f5ae11f02f6a82e3b11453af6e77cc0d8331e987556544bbe6870b557253d"
+    },
+    {
+      "end": 557,
+      "source_anchor_id": "src-005",
+      "start": 311,
+      "text_sha256": "12ba1ee58e4f1104e3c6abbba69a1b95f6599a5e207f367d6a6f66d5e9601001"
+    },
+    {
+      "end": 766,
+      "source_anchor_id": "src-006",
+      "start": 559,
+      "text_sha256": "712de9aee3d82bdd46086e5f2ae57981b4b4db80c50bb5f758283072fbf645c0"
+    },
+    {
+      "end": 940,
+      "source_anchor_id": "src-007",
+      "start": 768,
+      "text_sha256": "8c38cdb70ae7d11b19b79a120f867c5372850876164a4d4eee198307e3d94f3f"
+    },
+    {
+      "end": 1223,
+      "source_anchor_id": "src-008",
+      "start": 942,
+      "text_sha256": "5bd9f70c970098a47c74bc46513700756d23f50212a2be28948fa8ec566520b2"
+    },
+    {
+      "end": 1490,
+      "source_anchor_id": "src-009",
+      "start": 1225,
+      "text_sha256": "b7586f79b5ae60ac42906a4c3801f59caa9d7c54b4f596ee8af0b5104cd23998"
+    },
+    {
+      "end": 1560,
+      "source_anchor_id": "src-010",
+      "start": 1492,
+      "text_sha256": "191407a35a8a68a45bf5a1d923bbfcfa9cd292a8b458e8b9fce9a4d78d564600"
+    },
+    {
+      "end": 1775,
+      "source_anchor_id": "src-011",
+      "start": 1562,
+      "text_sha256": "0be00a6b766372b3840b7ddab6bc423d9d29223c77c038b30b58e1ca86f78218"
+    },
+    {
+      "end": 2274,
+      "source_anchor_id": "src-012",
+      "start": 1777,
+      "text_sha256": "b8057dc741b58406e122b55f0ff398e0a5a58f8d353b96a5e52841ad4f75ec9c"
+    },
+    {
+      "end": 2448,
+      "source_anchor_id": "src-013",
+      "start": 2276,
+      "text_sha256": "f0d1df7fba7ebe2a95a569577f435d69d164d261e0afb844016a11a257b87a59"
+    },
+    {
+      "end": 2621,
+      "source_anchor_id": "src-014",
+      "start": 2450,
+      "text_sha256": "764206d0c763cb3b8342c15746e97178b827f2c37ab3bb1d718da6cfe09f0979"
+    },
+    {
+      "end": 2718,
+      "source_anchor_id": "src-015",
+      "start": 2623,
+      "text_sha256": "08aef765e816089f581ad0ed9a10db176e4cf51c01baca6cd8182d2c518d570b"
+    },
+    {
+      "end": 2864,
+      "source_anchor_id": "src-016",
+      "start": 2720,
+      "text_sha256": "f840b8e8afca6e8a00dbbede14dce198f16e06ce3e8f9d682c72c2cea7ed4005"
+    },
+    {
+      "end": 2955,
+      "source_anchor_id": "src-017",
+      "start": 2866,
+      "text_sha256": "7b24f640ebd9b1e84802718d4a2049030c3bbbc0360ecac92ded2ed8c93fd301"
+    }
+  ],
+  "source_context_items": [
+    {
+      "rationale": "摘录标题、来源采集说明、分隔线与语言模板属于文件包装；来源与许可另记，不作为技术命题。",
+      "reader_relevance_decision": "exclude_from_reader_facing_candidate",
+      "source_anchor_ids": [
+        "src-001",
+        "src-002",
+        "src-003",
+        "src-004"
+      ],
+      "source_context_item_id": "C1"
+    }
+  ],
+  "source_sha256": "7208e615cf53f1f12e4e6ce91408815b1e0e267f0803a8931fcdc37c697099ad"
+}

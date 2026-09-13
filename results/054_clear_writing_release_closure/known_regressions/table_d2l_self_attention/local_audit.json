@@ -1,0 +1,59 @@
+{
+  "schema": "054_TABLE_D2L_LOCAL_AUDIT_V1",
+  "candidate_commit": "245127e1bb46f860ea1976b1669c467c7a9f763d",
+  "candidate_sha256": "153f49301bf5669b2938ec99b3d9f8314c9ba899b353b7a00c1d4cb2c777bf29",
+  "candidate_bytes": 8367,
+  "candidate_lines": 110,
+  "candidate_representation": {
+    "ok": true,
+    "reader_visible_markup_count": 0,
+    "formula_text_fence_count": 0,
+    "unrendered_math_count": 0,
+    "malformed_table_count": 0,
+    "overwide_table_count": 0,
+    "target_chinese_variant_mismatch_count": 0,
+    "ordinary_english_frame_count": 0
+  },
+  "math_span_count": 88,
+  "table_row_count": 5,
+  "standalone_reader_frame": {
+    "ok": true,
+    "source_process_frame_count": 0
+  },
+  "required_literals_present": {
+    "自注意力": true,
+    "位置编码": true,
+    "CNN": true,
+    "RNN": true,
+    "self-attention": true,
+    "positional encoding": true,
+    "\\mathcal{O}(n^2d)": true,
+    "\\mathcal{O}(1)": true,
+    "最大路径长度": true,
+    "p_{i,2j}": true,
+    "p_{i,2j+1}": true,
+    "10000": true,
+    "\\delta": true,
+    "Vaswani": true,
+    "练习": true
+  },
+  "missing_required_literals": [],
+  "forbidden_literals_count": {
+    "\\{\\{": 0,
+    "\\[\\[": 0,
+    "<ref\\b": 0,
+    "</ref>": 0,
+    ":cite:": 0,
+    ":label:": 0,
+    ":numref:": 0,
+    ":eqref:": 0,
+    ":begin_tab:": 0,
+    ":end_tab:": 0,
+    "#@tab": 0,
+    "\\.\\./img": 0,
+    "<!--": 0
+  },
+  "plain_double_close_brace_count": 3,
+  "workflow_trace": false,
+  "forbidden_phrases_present": []
+}

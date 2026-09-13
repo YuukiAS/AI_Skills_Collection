@@ -1,0 +1,77 @@
+{
+  "bundle_order": [
+    "B1",
+    "B2",
+    "B3",
+    "B4"
+  ],
+  "bundles": [
+    {
+      "bundle_id": "B1",
+      "information_shape": "连贯中文段落",
+      "owned_meaning_ids": [
+        "M1",
+        "M2"
+      ],
+      "reader_question": "用途与常规方法的比较",
+      "required_exact_item_ids": [
+        "E1",
+        "E2",
+        "E3",
+        "E16",
+        "E4",
+        "E5",
+        "E6"
+      ]
+    },
+    {
+      "bundle_id": "B2",
+      "information_shape": "连贯中文段落",
+      "owned_meaning_ids": [
+        "M3",
+        "M4"
+      ],
+      "reader_question": "添加查询为何得到两类结果",
+      "required_exact_item_ids": [
+        "E8",
+        "E9",
+        "E10",
+        "E11",
+        "E12",
+        "E14",
+        "E15"
+      ]
+    },
+    {
+      "bundle_id": "B3",
+      "information_shape": "连贯中文段落",
+      "owned_meaning_ids": [
+        "M5"
+      ],
+      "reader_question": "如何构造多个散列函数",
+      "required_exact_item_ids": [
+        "E13",
+        "E17",
+        "E18"
+      ]
+    },
+    {
+      "bundle_id": "B4",
+      "information_shape": "连贯中文段落",
+      "owned_meaning_ids": [
+        "M6",
+        "M7",
+        "M8"
+      ],
+      "reader_question": "删除边界、性能与误报取舍",
+      "required_exact_item_ids": [
+        "E7"
+      ]
+    }
+  ],
+  "excluded_source_context_item_ids": [
+    "C1"
+  ],
+  "schema": "SCIENTIFIC_REWRITE_READER_PLAN_V1",
+  "splitter": "semantic_dependencies"
+}

@@ -1,0 +1,30 @@
+{
+  "candidate_representation": {
+    "formula_text_fence_count": 0,
+    "malformed_table_count": 0,
+    "ok": true,
+    "ordinary_english_frame_count": 0,
+    "overwide_table_count": 0,
+    "reader_visible_markup_count": 0,
+    "target_chinese_variant_mismatch_count": 0,
+    "unrendered_math_count": 0
+  },
+  "candidate_sha256": "dba35194474a17a3bd987e72fe6f7beae5f5a4a35a5456070ee50abeb7ec15bb",
+  "formula_text_fences": [],
+  "malformed_tables": [],
+  "ordinary_english_framing": [],
+  "overwide_tables": [],
+  "raw_markup_findings": [],
+  "reader_facing_internal_frame": {
+    "internal_workflow_leak_count": 0,
+    "ok": true
+  },
+  "required_literals_present": true,
+  "source_process_framing": [],
+  "standalone_reader_frame": {
+    "ok": true,
+    "source_process_frame_count": 0
+  },
+  "unrendered_math": [],
+  "workflow_leakage": []
+}
