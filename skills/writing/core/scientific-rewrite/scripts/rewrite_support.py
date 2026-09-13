@@ -27,6 +27,10 @@ REALIZATION_PACKET_SCHEMA = "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1"
 REPAIR_PACKET_SCHEMA = "SCIENTIFIC_REWRITE_REPAIR_PACKET_V1"
 ASSEMBLY_PACKET_SCHEMA = "SCIENTIFIC_REWRITE_ASSEMBLY_PACKET_V1"
 SEMANTIC_AUDIT_SCHEMA = "SCIENTIFIC_REWRITE_SEMANTIC_AUDIT_V1"
+SOURCE_CONTEXT_EXCLUSION_DECISIONS = {
+    "exclude_from_reader_facing_candidate",
+    "retain_only_if_user_requests_audit",
+}
 
 RAW_SOURCE_KEYS = {
     "raw_source",
@@ -677,6 +681,39 @@ def validate_meaning_map(payload: dict[str, Any], source: str) -> dict[str, Any]
     exact_by_id = {str(item.get("exact_item_id")): item for item in exact_items}
     for item in exact_items:
         validate_exact_item(item)
+    source_context_items = payload.get("source_context_items") or []
+    source_context_covered: set[str] = set()
+    source_context_ids: set[str] = set()
+    for context_item in source_context_items:
+        assert_no_raw_source_fields(context_item, context="source context item")
+        context_id = str(context_item.get("source_context_item_id", ""))
+        if not context_id:
+            raise ValidationError("source context item missing source_context_item_id")
+        if context_id in source_context_ids:
+            raise ValidationError("source context item ids must be unique")
+        source_context_ids.add(context_id)
+        decision = str(context_item.get("reader_relevance_decision", ""))
+        if decision not in SOURCE_CONTEXT_EXCLUSION_DECISIONS:
+            raise ValidationError("source context item requires reader relevance exclusion decision")
+        if not str(context_item.get("rationale", "")).strip():
+            raise ValidationError("source context item requires rationale")
+        source_anchor_ids = [str(item) for item in context_item.get("source_anchor_ids") or []]
+        if not source_anchor_ids:
+            raise ValidationError(f"source context item lacks source authority: {context_id}")
+        for anchor_id in source_anchor_ids:
+            if anchor_id not in anchor_by_id:
+                raise ValidationError(f"source context item references unknown source anchor: {anchor_id}")
+            source_context_covered.add(anchor_id)
+        hidden_inline = []
+        for exact_id in context_item.get("exact_item_ids") or []:
+            exact_id = str(exact_id)
+            if exact_id not in exact_by_id:
+                raise ValidationError(f"source context item references unknown exact item: {exact_id}")
+            exact_item = exact_by_id[exact_id]
+            if str(exact_item.get("location_role", "inline-critical")) == "inline-critical":
+                hidden_inline.append(exact_id)
+        if hidden_inline:
+            raise ValidationError("reader relevance cannot exclude inline-critical exact items: " + ", ".join(hidden_inline))
     covered_anchors: set[str] = set()
     for meaning in meanings:
         meaning_id = str(meaning.get("meaning_id", ""))
@@ -698,7 +735,7 @@ def validate_meaning_map(payload: dict[str, Any], source: str) -> dict[str, Any]
         for exact_id in meaning.get("exact_item_ids") or []:
             if str(exact_id) not in exact_by_id:
                 raise ValidationError(f"meaning references unknown exact item: {exact_id}")
-    missing = sorted(set(anchor_by_id) - covered_anchors)
+    missing = sorted(set(anchor_by_id) - covered_anchors - source_context_covered)
     if missing:
         raise ValidationError("source anchors lack meaning ownership: " + ", ".join(missing))
     return {
@@ -706,6 +743,7 @@ def validate_meaning_map(payload: dict[str, Any], source: str) -> dict[str, Any]
         "source_anchor_count": len(anchors),
         "meaning_count": len(meanings),
         "exact_item_count": len(exact_items),
+        "source_context_item_count": len(source_context_items),
     }
 
 
@@ -715,6 +753,20 @@ def validate_reader_plan(payload: dict[str, Any], meaning_map: dict[str, Any]) -
     assert_no_raw_source_fields(payload, context="Reader Plan")
     meaning_ids = {str(item.get("meaning_id")) for item in meaning_map.get("meanings", [])}
     exact_ids = {str(item.get("exact_item_id")) for item in meaning_map.get("exact_items", [])}
+    source_context_items = meaning_map.get("source_context_items") or []
+    source_context_ids = {str(item.get("source_context_item_id")) for item in source_context_items}
+    excluded_source_context_ids = [str(item) for item in payload.get("excluded_source_context_item_ids") or []]
+    for context_id in excluded_source_context_ids:
+        if context_id not in source_context_ids:
+            raise ValidationError(f"Reader Plan excludes unknown source context item: {context_id}")
+    required_exclusions = {
+        str(item.get("source_context_item_id"))
+        for item in source_context_items
+        if str(item.get("reader_relevance_decision")) == "exclude_from_reader_facing_candidate"
+    }
+    missing_exclusions = sorted(required_exclusions - set(excluded_source_context_ids))
+    if missing_exclusions:
+        raise ValidationError("Reader Plan omits source context exclusions: " + ", ".join(missing_exclusions))
     bundles = payload.get("bundles")
     if not isinstance(bundles, list) or not bundles:
         raise ValidationError("Reader Plan requires bundles")
@@ -743,7 +795,12 @@ def validate_reader_plan(payload: dict[str, Any], meaning_map: dict[str, Any]) -
     missing = sorted(meaning_ids - owned)
     if missing:
         raise ValidationError("Reader Plan omits meanings: " + ", ".join(missing))
-    return {"ok": True, "bundle_count": len(bundles), "owned_meaning_count": len(owned)}
+    return {
+        "ok": True,
+        "bundle_count": len(bundles),
+        "owned_meaning_count": len(owned),
+        "excluded_source_context_item_count": len(excluded_source_context_ids),
+    }
 
 
 def validate_realization_packet(payload: dict[str, Any]) -> dict[str, Any]:
@@ -835,6 +892,16 @@ def verify_exact_items(candidate: str, exact_items: list[dict[str, Any]]) -> dic
     return {"ok": True, "exact_item_count": len(exact_items)}
 
 
+def reader_facing_exact_items(meaning_map: dict[str, Any], reader_plan: dict[str, Any]) -> list[dict[str, Any]]:
+    exact_by_id = {str(item.get("exact_item_id")): item for item in meaning_map.get("exact_items") or []}
+    required_ids: set[str] = set()
+    for meaning in meaning_map.get("meanings") or []:
+        required_ids.update(str(item) for item in meaning.get("exact_item_ids") or [])
+    for bundle in reader_plan.get("bundles") or []:
+        required_ids.update(str(item) for item in bundle.get("required_exact_item_ids") or [])
+    return [exact_by_id[exact_id] for exact_id in sorted(required_ids) if exact_id in exact_by_id]
+
+
 def validate_stage_package(
     source: str,
     stage_dir: Path,
@@ -863,7 +930,7 @@ def validate_stage_package(
             repair_results.append(validate_repair_packet(load_json(packet_path)))
     assembly_result = validate_assembly_packet(assembly_packet)
     semantic_result = validate_semantic_audit(semantic_audit)
-    exact_result = verify_exact_items(final_candidate, meaning_map.get("exact_items") or [])
+    exact_result = verify_exact_items(final_candidate, reader_facing_exact_items(meaning_map, reader_plan))
     candidate_representation_result = validate_candidate_representation(final_candidate, task_context=prompt or "")
     reader_frame_result = validate_reader_facing_internal_frame(final_candidate)
     standalone_frame_result = validate_standalone_reader_frame(final_candidate, task_context=prompt or "")

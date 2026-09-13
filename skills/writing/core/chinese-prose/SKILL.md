@@ -77,8 +77,18 @@ license: MIT-compatible synthesis plus public-domain style guidance
 - `DECOMPRESS_NOUN_STACK`：把英文名词链拆成中文关系；
 - `PARALLEL_TO_STRUCTURE`：把并列条件、方法或结果改成清楚列表/表格；
 - `REMOVE_INTERNAL_FRAME`：去掉 reader-facing 正文里不该出现的审计、流程和任务标签。
+- `SOURCE_CONTEXT_OMIT`：对 Meaning Map 已经审阅并标为无读者价值的
+  来源包装、语言导航、附带外语别名、页面维护/归档元数据、重复链接等，
+  不为了“保真”改写进正文；必要时只保留它们支撑的技术身份、归因或复现事实。
 
 当 `scientific-rewrite` 已经生成 Reader Plan 时，本 skill 的终审只读取最终候选稿和 Reader Plan，不回看源文档改写正文。终审必须确认：候选稿是否回答 Reader Plan 里的读者问题；英文残留是否分别属于精确身份、必要识别名或应该中文化的普通推理词；公式是否有中文语义说明；证据边界和不确定性是否仍在读者主线里。发现问题时返回需要返修的原因，不能用“整体更流畅”覆盖缺项。
+
+如果 Reader Plan 明确排除了 source-context items，中文实现层不得把这些
+排除项重新包装成“材料还包含……”“页面还列出……”“另有外文别名……”之类
+正文。相反，应检查最终稿是否仍保留必要正式身份：算法/模型/数据集/API、
+作者/文献、标准缩写、公式、指标、代码、路径、配置、命令和用户显式要求保留
+的名称。判断依据是读者是否需要它来理解、检索、消歧、归因或复现，而不是字符
+脚本或语言。
 
 在 heavy scientific rewrite 的中文实现里，候选稿还必须先像一份正常
 Markdown 文档，而不是像来源网页、模板、控制台或审计包。普通读者正文不得残留

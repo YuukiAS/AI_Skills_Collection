@@ -116,11 +116,17 @@ The Meaning Map is meaning-centric and source-auditable. It must include:
 - stable source anchors with hashes;
 - meanings with `meaning_id`, `kind`, `normalized_meaning`, source anchors, and
   exact items where needed;
+- source context items for source anchors that were read and accounted for but
+  should not become reader-facing propositions because they are only platform
+  wrapping, alternate-language labels, archive/page maintenance metadata,
+  duplicate navigation, or other packaging with no value for understanding,
+  attribution, retrieval, disambiguation, or reproduction;
 - relations when one meaning depends on, qualifies, compares with, or limits
   another;
 - exact items whose literal identity matters;
 - bidirectional coverage: every substantive source anchor has meaning
-  ownership, and every meaning has source authority.
+  ownership; every omitted source-context anchor has an exclusion decision and
+  rationale; and every meaning has source authority.
 
 Missing or malformed semantic extraction is a failure/repair condition. The
 helper must never fill `normalized_meaning` from source excerpts or continue
@@ -132,6 +138,13 @@ The Reader Plan owns reader-question order, semantic dependencies, bundle
 ownership, and information shape. It must not contain raw source prose, source
 excerpts, target rewrite sentences, Latin-span QA classifications, seed
 templates, or validator language.
+
+The Reader Plan must keep source accounting separate from final inclusion. If
+the Meaning Map marks page wrappers, alternate-language labels, archive ids,
+maintenance notes, repeated navigation, or other reader-irrelevant metadata as
+source context, the Reader Plan records that those source-context items are
+excluded from the reader-facing candidate. Do not convert them into polite
+prose merely to prove the source was read.
 
 Mechanical size limits may only request `NEEDS_SEMANTIC_SPLIT`; they must not
 become the production heavy planner. Fixed `4 paragraphs / ~2800 chars`
@@ -189,11 +202,38 @@ names, datasets, metrics, packages, APIs, and user-explicit protected spans.
 Ordinary reasoning, comparison, qualification, and transition language remains
 eligible for natural Chinese realization.
 
+Exact preservation is reader-facing only when the item is task-relevant
+substantive content. Standard method/model/dataset/API/package names, author or
+literature identities, formal abbreviations, formulas, metrics, and
+reproduction tokens must remain when removing them would hurt technical
+identity, attribution, retrieval/disambiguation, or reproducibility. Incidental
+source-wrapper numbers, language-link counts, archive ids, maintenance labels,
+and attached alternate-language aliases are not made inline-critical merely
+because they appeared in the source. Do not hide a true method, dataset, API,
+author, citation, formula, condition, limitation, negative finding, or
+reproduction token by classifying it as source context.
+
 ## Reader-Facing Relevance Filter
 
 Do not treat repository workflow metadata as reader-facing scientific meaning
 merely because it is exact. The heavy route must distinguish scientific
 reproduction details from internal execution traces.
+
+The same distinction applies to non-repository source packaging. For a
+standalone Chinese scientific or technical rewrite, source facts are not all
+reader-facing facts. Preserve what a reader needs for understanding, formal
+identity, attribution, retrieval or disambiguation, reproducibility, formulas,
+conditions, caveats, uncertainty, negative findings, and conclusion strength.
+Omit or compress source-platform wrappers, alternate-language labels, attached
+foreign aliases, archive and page-maintenance metadata, repeated navigation,
+and duplicate links when they add no value to the final reader.
+
+This is semantic reader relevance, not a language or script blacklist. Keep
+necessary English or original-language names when they identify an algorithm,
+model, dataset, API/package, author/literature item, standard abbreviation,
+command/path/config, or user-protected name. Drop an incidental alias only
+because it is reader-irrelevant in the current task, never because its script is
+non-Chinese.
 
 Keep exact script, configuration, command, data, model, metric, citation, or
 formula identities when they support the scientific/technical argument or
@@ -291,6 +331,8 @@ This route can claim process completion only when the stage package validates:
 - ordinary `writing-style` route selection chose `scientific-rewrite`;
 - no raw-source drafting leakage into realization, repair, or assembly;
 - complete source-anchor/meaning ownership;
+- source-context anchors, when omitted, have explicit reader-relevance
+  exclusion decisions and cannot hide inline-critical exact identities;
 - valid Reader Plan bundle ownership;
 - exact items preserved;
 - candidate Markdown has no reader-visible raw markup, formula-like text

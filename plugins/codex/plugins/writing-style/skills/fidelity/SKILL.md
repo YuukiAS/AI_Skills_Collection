@@ -171,6 +171,20 @@ turns `k − 1` into `k 1`, drops a
 subscript/exponent, or moves a caveat away from the claim it limits fails
 fidelity even if the prose reads smoothly.
 
+Reader relevance is part of fidelity, not an exception to it. A structural
+rewrite may account for source anchors as non-reader source context when they
+are only platform wrapping, alternate-language labels, incidental attached
+aliases, archive/page maintenance metadata, repeated navigation, duplicate
+links, or workflow/source packaging with no value for the requested standalone
+reader. Those items do not need to be preserved as prose merely because they
+appeared in the source. However, this route must not use "metadata" as a trash
+bin for task-relevant substantive content. Formal method/model/dataset/API or
+package names, author/literature identity, citations, formulas, variables,
+numbers, metrics, conditions, limitations, caveats, negative findings,
+uncertainty, comparison boundaries, and reproduction tokens remain protected
+when they support understanding, attribution, retrieval/disambiguation, or
+reproducibility.
+
 The acceptance criterion is complete proposition/evidence coverage with lower
 reader inference burden, not source order or compression. A structural rewrite
 may pass fidelity when headings or paragraph order change, but it fails if any

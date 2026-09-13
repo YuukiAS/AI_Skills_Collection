@@ -284,6 +284,149 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
             with self.assertRaisesRegex(helper.ValidationError, "omits meanings"):
                 helper.validate_reader_plan(reader_plan, meaning_map)
 
+    def test_reader_relevance_accounts_irrelevant_source_metadata_without_reader_leakage(self) -> None:
+        source = (
+            "页面包装：English title = Neural message passing；附带别名 = Pas de message neuronal；"
+            "language links = 12；archive oldid = 4321。\n\n"
+            "GraphSAGE 通过邻域采样学习节点表示；在 PyTorch Geometric 中可用 "
+            "`torch_geometric.nn.SAGEConv` 复现，并常用 ogbn-products 数据集评测。"
+        )
+        prompt = "把这份中文技术资料重写成独立中文说明，保留算法名、数据集和 API，但网页元数据不要写进正文。"
+        anchors = helper.split_source_anchors(source)
+        exact_items = helper.extract_exact_items(source)
+        exact_items.append(
+            {
+                "exact_item_id": f"exact-{len(exact_items) + 1:03d}",
+                "literal": "ogbn-products",
+                "sha256": helper.sha256_text("ogbn-products"),
+                "category": "dataset",
+                "location_role": "inline-critical",
+            }
+        )
+        required_exact_ids = [item["exact_item_id"] for item in exact_items if item["literal"] in {"GraphSAGE", "PyTorch", "torch_geometric.nn.SAGEConv", "ogbn-products"}]
+        meaning_map = {
+            "schema": helper.MEANING_MAP_SCHEMA,
+            "source_sha256": helper.sha256_text(source),
+            "source_anchors": anchors,
+            "exact_items": exact_items,
+            "source_context_items": [
+                {
+                    "source_context_item_id": "ctx-001",
+                    "source_anchor_ids": ["src-001"],
+                    "context_kind": "source_wrapper_metadata",
+                    "reader_relevance_decision": "exclude_from_reader_facing_candidate",
+                    "rationale": "language links, archive ids, and incidental alternate labels do not help a standalone Chinese technical reader understand or reproduce the method.",
+                }
+            ],
+            "meanings": [
+                {
+                    "meaning_id": "m-001",
+                    "kind": "technical_identity_and_reproduction",
+                    "normalized_meaning": "GraphSAGE is the method identity; PyTorch Geometric SAGEConv and ogbn-products are reproduction and evaluation identities that must remain reader-facing.",
+                    "source_anchor_ids": ["src-002"],
+                    "exact_item_ids": required_exact_ids,
+                }
+            ],
+        }
+        reader_plan = {
+            "schema": helper.READER_PLAN_SCHEMA,
+            "bundle_order": ["bundle-001"],
+            "excluded_source_context_item_ids": ["ctx-001"],
+            "bundles": [
+                {
+                    "bundle_id": "bundle-001",
+                    "reader_question_id": "rq-001",
+                    "owned_meaning_ids": ["m-001"],
+                    "required_exact_item_ids": required_exact_ids,
+                    "information_shape": "cohesive_prose",
+                }
+            ],
+        }
+        final_candidate = (
+            "GraphSAGE 通过邻域采样学习节点表示；在 PyTorch Geometric 中可用 "
+            "`torch_geometric.nn.SAGEConv` 复现，常见评测数据集是 ogbn-products。"
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            stage_dir = root / "stage"
+            write_json(stage_dir / "route_selection.json", {
+                "schema": helper.ROUTE_SELECTION_SCHEMA,
+                "selector_owner": "writing-style",
+                "selected_route": "scientific-rewrite",
+                "forced_route": False,
+                "ordinary_user_prompt": True,
+                "prompt_sha256": helper.sha256_text(prompt),
+                "source_sha256": helper.sha256_text(source),
+                "prompt_internal_terms": [],
+            })
+            write_json(stage_dir / "meaning_map.json", meaning_map)
+            write_json(stage_dir / "reader_plan.json", reader_plan)
+            write_json(stage_dir / "realization_packets/bundle-001.json", {
+                "schema": helper.REALIZATION_PACKET_SCHEMA,
+                "bundle_id": "bundle-001",
+                "meaning_records": [
+                    {
+                        "meaning_id": "m-001",
+                        "meaning": "保留 GraphSAGE、PyTorch Geometric、SAGEConv 和 ogbn-products 作为方法、API 与数据集身份。",
+                    }
+                ],
+                "required_exact_items": [item for item in exact_items if item["exact_item_id"] in required_exact_ids],
+                "information_shape": "cohesive_prose",
+            })
+            write_json(stage_dir / "assembly_packet.json", {
+                "schema": helper.ASSEMBLY_PACKET_SCHEMA,
+                "reader_plan_sha256": helper.sha256_text(helper.canonical_json(reader_plan)),
+                "realized_bundle_sha256s": {"bundle-001": helper.sha256_text(final_candidate)},
+            })
+            write_json(stage_dir / "semantic_audit.json", {
+                "schema": helper.SEMANTIC_AUDIT_SCHEMA,
+                "decision": "PASS",
+                "findings": [],
+            })
+            (stage_dir / "final_candidate.md").write_text(final_candidate + "\n", encoding="utf-8")
+
+            receipt = helper.validate_stage_package(source, stage_dir, prompt=prompt)
+
+        self.assertEqual(receipt["meaning_map"]["source_context_item_count"], 1)
+        self.assertEqual(receipt["reader_plan"]["excluded_source_context_item_count"], 1)
+        self.assertNotIn("Pas de message", final_candidate)
+        self.assertIn("GraphSAGE", final_candidate)
+        self.assertIn("ogbn-products", final_candidate)
+
+    def test_reader_relevance_cannot_hide_inline_critical_identity_as_metadata(self) -> None:
+        source = "GraphSAGE 是 Hamilton et al. 提出的图表示学习方法，不是网页语言标签。"
+        anchors = helper.split_source_anchors(source)
+        exact_items = helper.extract_exact_items(source)
+        graph_sage = next(item for item in exact_items if item["literal"] == "GraphSAGE")
+        meaning_map = {
+            "schema": helper.MEANING_MAP_SCHEMA,
+            "source_sha256": helper.sha256_text(source),
+            "source_anchors": anchors,
+            "exact_items": exact_items,
+            "source_context_items": [
+                {
+                    "source_context_item_id": "ctx-001",
+                    "source_anchor_ids": ["src-001"],
+                    "context_kind": "source_wrapper_metadata",
+                    "reader_relevance_decision": "exclude_from_reader_facing_candidate",
+                    "rationale": "incorrectly tries to hide a method identity as metadata",
+                    "exact_item_ids": [graph_sage["exact_item_id"]],
+                }
+            ],
+            "meanings": [
+                {
+                    "meaning_id": "m-001",
+                    "kind": "method_identity",
+                    "normalized_meaning": "GraphSAGE is the method identity and must remain reader-facing.",
+                    "source_anchor_ids": ["src-001"],
+                    "exact_item_ids": [graph_sage["exact_item_id"]],
+                }
+            ],
+        }
+
+        with self.assertRaisesRegex(helper.ValidationError, "reader relevance cannot exclude inline-critical exact items"):
+            helper.validate_meaning_map(meaning_map, source)
+
     def test_route_selection_requires_ordinary_unforced_heavy_route(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             source, stage_dir, _ = build_valid_stage(Path(tmp))
