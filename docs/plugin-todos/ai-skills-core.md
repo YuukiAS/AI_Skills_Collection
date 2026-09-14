@@ -39,7 +39,7 @@ status: PROMOTED
 source: user-reported task 044 regression on 2026-09-01
 evidence: user reported that private `rewritten_report.md` still contained reader-facing `provenance`, `estimand`, `scientific gap`, `resource contract`, and `state of the art` language despite the frozen writing requirement; Reviewer did not read the full artifact before PASS. The same maintenance report also identified non-visual Visual Review PASS UI and missing default branch integration closure.
 target layer: Reviewed Handoff prompts / visual-review consumer workflow / maintenance closure
-problem: process gates and summaries were treated as enough to imply product/artifact quality, obvious frozen writing violations could be pushed to human judgment, non-visual tasks could display Visual Review PASS, and task branches lacked a default integration closure after Reviewer PASS.
+problem: process gates and summaries were treated as enough to imply product/artifact quality, obvious frozen writing violations could be pushed to human judgment, non-visual tasks could display Visual Review PASS, and task branches lacked a default integration closure.
 current behavior: artifact-dependent acceptance must distinguish `PROCESS PASS` from `PRODUCT / ARTIFACT PASS`; Reviewer must read/view the final repo-safe artifact, or consume Bridge Kit Text Review evidence after that owner lands private/text artifact review. Missing artifact access is `WAITING_FOR_EVIDENCE / NEEDS_REVIEW`, not PASS. Obvious frozen-criteria violations must be REVISE/BLOCK, not human-gated. Non-visual tasks skip the real Visual Review job as `SKIPPED / NOT_REQUIRED`. Reviewer PASS without a real human gate proceeds to integration preflight, merge to `main`, push, and task-branch deletion unless an escalation condition applies.
 boundary: do not modify the private 044 scientific text in this maintenance task; do not implement another private/text artifact transport or reviewer in AI_Skills_Collection; route domain writing quality to `writing-style` and bottom-layer private/text artifact review to `GPT_Codex_AI_Bridge_Kit` Text Review.
 
@@ -55,7 +55,7 @@ boundary: do not move project science, model choices, dataset interpretation, or
 ### Repository 5.0 release epoch with independent plugin versions and changelogs
 status: PROMOTED
 source: long-term real-world maintenance redesign + user requirement on 2026-08-30
-evidence: repository `5.0.0`, root `VERSION`, per-plugin `0.1` versions, root/plugin `CHANGELOG.md`, `docs/plugin-changelogs/`, README and generated plugin metadata were aligned under the old lockstep model.
+evidence: repository `5.0.0`, root `VERSION`, per-plugin `0.1` versions, root `CHANGELOG.md`, `docs/plugin-changelogs/`, README status table, install smoke and GitHub Actions.
 
 ### README release dashboard
 status: PROMOTED
