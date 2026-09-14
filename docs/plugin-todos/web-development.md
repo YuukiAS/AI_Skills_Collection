@@ -136,6 +136,57 @@ candidate_action:
 - When a user has explicitly rejected iterative visual QA, treat further user-facing screenshots as blocked until the producer completes the full design → implementation → native comparison loop.
 promotion_gate: high-priority candidate for Frontend Design. Validate whether this reduces repeated UI repair loops on Bobbio and at least one other design-heavy product, then promote into the generic final visual-review contract.
 
+### Design corrections must round-trip through the canonical Figma before code changes
+status: NEW
+source: Bobbio 0.3 canonical-Figma drift and repeated code-only visual repair, 2026-09-14
+target layer: Frontend Design repair workflow / Figma governance / implementation discipline
+problem: Having a canonical Figma file is not enough if later visual feedback is repaired directly in React/CSS. That creates two sources of truth: Figma remains nominally approved while production becomes a sequence of undocumented visual patches. Bobbio repeatedly hit exactly this failure mode: a screen was rejected, the code was patched locally, but the canonical design was not updated first, so the next state inherited fresh inconsistencies. A mature workflow needs a mandatory round-trip rule whenever a visual defect is found after implementation begins.
+candidate_action:
+- Classify every UI defect before editing code: **design defect**, **implementation drift**, **product/interaction semantics defect**, or **runtime-only defect**.
+- For a **design defect** (hierarchy, composition, spacing system, component family, typography, visual weight, responsive layout, motion grammar), update and re-review the canonical Figma first. Production code may change only after the corrected design is frozen.
+- For **implementation drift** (production differs from an already-correct frozen Figma), keep Figma unchanged and change code only to converge to the canonical design.
+- For a **product/interaction semantics defect**, update the product contract and Figma state/flow first, then implement. Do not let code silently redefine the interaction model.
+- For a **runtime-only defect** (race, stale state, integration failure, performance bug) that does not change intended visual semantics, fix code directly but re-run native visual regression afterward.
+- After any visually material repair, the workflow must loop back through **Figma design state → production implementation → native full-screen comparison**. A code-only patch that materially changes appearance without a corresponding design decision is not review-ready.
+- Record intentional deviations in the Figma/native comparison artifact. If a deviation cannot be explained as a platform constraint, accessibility requirement, or explicit product decision, treat it as drift.
+- Do not mark a design milestone “done” while production still implements an older visual revision, and do not mark production “done” while Figma still describes a rejected screen. Design and implementation must converge in the same goal.
+- Require the final handoff to identify the exact canonical Figma frames/states used to implement each primary production screen so later repair work knows which design artifact must be updated first.
+- Prefer Code Connect/component mapping or an equivalent explicit component-to-design mapping where it materially reduces drift; the point is not tool ceremony but preserving one component grammar across design and code.
+promotion_gate: treat as immediately mandatory for Bobbio. Validate on another Figma-driven product before promoting the exact defect-classification taxonomy as universal, but preserve the core rule now: material visual repairs must round-trip through the canonical design source rather than bypass it in CSS.
+
+### “Figma complete” needs an explicit definition of done
+status: NEW
+source: Bobbio 0.3 redesign/implementation mismatch, 2026-09-14
+target layer: Frontend Design planning / Figma completion / handoff quality
+problem: Teams can say “the Figma is done” when only hero/default screens are polished, while production still needs empty, error, loading, history, transition, compact viewport, focus/pressed, or recovery states that were never designed. The implementation then invents those states ad hoc, and the canonical design becomes incomplete the moment coding starts. The definition of Figma completion must therefore be state- and interaction-complete, not screenshot-complete.
+candidate_action:
+- Define Figma completion as **coverage + grammar + interaction intent + responsiveness + self-review**, not the existence of a few attractive frames.
+- Require a primary-state matrix before implementation: default, empty, loaded, current selection, output/result, history/persistence, loading/busy, error/recovery, important transitions, destructive actions, and any active-tool modes that will ship.
+- Require at least the canonical desktop viewport and one compact/laptop viewport for each layout that materially changes with size. Responsive notes alone are insufficient when the compact state changes hierarchy or control density.
+- Include component interaction states where they affect perceived behavior: hover, pressed, focus-visible, disabled, busy/loading, selected/active, destructive. They may live in component variants rather than separate whole-screen frames, but they must be frozen before implementation.
+- Include motion intent in the design handoff: which transitions animate, approximate duration/easing class, what remains stationary, and reduced-motion behavior. Motion must not be invented after implementation is otherwise complete.
+- Include content density/long-content examples for panels, lists, inspectors, history, and error text; a design that only works with short placeholder copy is not complete.
+- Include platform-shell constraints for desktop products when titlebar/taskbar/shortcut/native chrome materially affect the final composition.
+- Require an internal Figma self-review at normal scale before coding. The producer should attempt to reject the design for repeated CTAs, arbitrary decoration, mismatched sibling controls, dead space, over-carded layout, typography drift, and weak hierarchy.
+- Figma completion must produce a durable handoff record: canonical frames, component families, tokens, responsive states, interaction states, intentional omissions, and any states explicitly deferred from the current milestone.
+- Implementation may start only when the Figma self-review is P1=0/P2=0 for the current milestone. If a missing state is discovered later, implementation pauses and the design source is extended first.
+promotion_gate: high-priority generic candidate. The exact list of mandatory states can vary by product, but the rule that “Figma done” means all shipped primary states and interaction grammar are covered should be promoted broadly.
+
+### Design-to-code goals must not stop at either Figma or implementation
+status: NEW
+source: Bobbio 0.3 weekend redesign failure and repeated review loops, 2026-09-14
+target layer: Frontend Design goal construction / delivery workflow / visual QA
+problem: Splitting UI work into “design first, implementation later, QA later” allows each phase to declare success while the product remains visibly inconsistent. Conversely, jumping directly to implementation produces design drift. For design-heavy milestones, the useful unit of completion is the entire closed loop, not one artifact.
+candidate_action:
+- Construct UI goals as one closed loop: **Figma update → Figma self-review → production implementation → release/native capture → Figma/native full-screen comparison → adversarial producer review → external confirmation**.
+- Do not allow the goal to return success after only Figma is polished, after only code compiles, or after only browser screenshots look correct.
+- If native comparison reveals a **design problem**, return to Figma, update the canonical design, re-freeze it, then re-implement. If it reveals **implementation drift**, keep Figma fixed and repair code. Do not patch both arbitrarily until screenshots “look better.”
+- Require whole-screen comparison for every primary state, not only representative component crops. Components can pass individually while the screen still fails composition, hierarchy, density, or spacing.
+- Require functional/performance regression in the same goal: visual redesign cannot be accepted if it reintroduces jank, flicker, overflow, stale state, or broken integration flows.
+- The producer should not ask the user to review until this closed loop is locally green. User review is a final product judgment, not a phase transition between Figma and implementation.
+- External reviewers should confirm the converged result, not discover that the design and code describe different products.
+promotion_gate: immediately mandatory for Bobbio; strong candidate for generic Frontend Design workflows where a canonical design artifact exists.
+
 ## Watch boundaries
 
 - One product's visual taste is project-local unless repeated or explicitly adopted as a long-term cross-project preference.
