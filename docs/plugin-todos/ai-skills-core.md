@@ -4,7 +4,24 @@ Canonical maintenance inbox for the `ai-skills-core` plugin and repository-maint
 
 ## Open candidates
 
-No active ai-skills-core implementation candidate is open after `ai-skills-core 0.2`. Future production refinement feedback should enter this inbox as `NEW` evidence before promotion.
+### 已有规则仍失效时，先核实实际调用并去重沉淀
+status: NEW
+source: 2026-09-14 Bobbio / Lucerna / Mica / SeminarArc 跨项目开发反馈；用户要求以后开发不再反复依赖人工提醒，并询问是否自动沉淀 repo-specific TODO
+evidence: [完整修订提案](../design/PRODUCT_DELIVERY_DISCIPLINE_V2_2026-09-14.md)；本仓库现有 `AGENTS.md` 2.1–2.2、`docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md` 及下方已推广的 direct-feedback / production-refinement 条目。Lucerna、Mica 已有真实交互/回归/有限测试规则，Frontend Design 的 Figma 闭环反馈也已存在。
+problem: 规则可能已写入源文件或 TODO，却未被实际安装版本、任务入口或执行者消费；继续添加同义规则容易造成文档膨胀而没有用户可见改善。另一方面，把每次产品故障都自动变成通用插件规则，或把中央插件问题再记进项目 TODO，会制造重复维护。
+project-specific context: 具体关闭语义、数据源、平台限制、当前 Figma 文件和具体产品 bug 属于各项目。本条不声称每次事故都已确认加载过该插件，不将用户不满意直接归因为中央 production runtime 缺陷。
+
+这是既有 maintenance / direct-feedback 规则的执行验证补充，不是新建第二套流程：
+
+- 处理“已有规则但仍失败”时，先定位任务实际使用的插件/规则入口、版本、安装/生成产物、触发路径和对应证据；按规则缺失、未调用、旧安装、执行不遵守、规则冲突或能力缺失分别归因。不得把阅读源 `SKILL.md` 当作实际 production invocation。
+- workflow-core 拥有跨项目交付流程；Frontend Design 拥有 Figma/设计往返与视觉质量；Bridge Kit 拥有底层运行/交互与模板。维护者负责路由、去重和真正的生产回放，不替代领域判断。关联流程候选见 [workflow-core TODO](workflow-core.md)。
+- 遇到用户纠正、实际新故障、反复失败或规则冲突时，在已授权文档范围内做小型复盘；没有新教训不强制新建文件。项目 bug/不变量留项目，通用插件反馈直接进入唯一中央 owner TODO，不维护影子清单。
+- 已有条目则合并新证据；已存在 active rule 则补执行失败证据，不自动再写同义规则。项目 Executor 记录事实和可能原因，中央 Planner/maintainer 决定抽象、范围和推广。
+- 自主记录事实不等于自主修改政策：不自动扩授权、验收、成本、状态机、版本或设计方向；项目 AGENTS 修改也受既有/当前任务授权约束。
+- 验收未来修复时，从真实安装与调用入口回放旧失败并做相邻任务回归；不能以新增 TODO、静态字符串检查或生成层 parity 单独声称行为已改善。也不因“验收”自动引入付费 API、用户账户操作或全项目重跑。
+- 对外区分“记录了问题”“合并了规则”“升级了本地安装”“真实路径通过”。所有需要用户取得的 AI_Skills 产物留 repo 内，不能公开的放 `private/exports/`，不把 repo 外临时目录作为交付位置。
+
+推广前须证明：一个已有规则失效的真实案例被正确定位并回放；同一问题的新案例合并而非复制；纯项目 bug 未误写中央插件；无新教训的正常任务没有额外长篇复盘；中央不可写时诚实报告未记录而非创建影子 TODO。本轮仅记录，不修改 production、不 bump 版本。
 
 ## Recently promoted / established
 
@@ -38,7 +55,7 @@ boundary: do not move project science, model choices, dataset interpretation, or
 ### Repository 5.0 release epoch with independent plugin versions and changelogs
 status: PROMOTED
 source: long-term real-world maintenance redesign + user requirement on 2026-08-30
-evidence: repository `5.0.0`, root `VERSION`, per-plugin `0.1` versions, root `CHANGELOG.md`, `docs/plugin-changelogs/`, README status table, install smoke and GitHub Actions.
+evidence: repository `5.0.0`, root `VERSION`, per-plugin `0.1` versions, root/plugin `CHANGELOG.md`, `docs/plugin-changelogs/`, README and generated plugin metadata were aligned under the old lockstep model.
 
 ### README release dashboard
 status: PROMOTED
