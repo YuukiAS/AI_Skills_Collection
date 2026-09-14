@@ -85,6 +85,24 @@ candidate_action:
 - Use external reviewers for independent product judgment and blind spots after local QA, not for routine defect discovery that can be settled by local screenshots, recordings, performance traces, or state assertions.
 promotion_gate: replay this workflow on Bobbio 0.3 and at least one additional UI-heavy project; if it reduces external review loops without lowering quality, promote it into the Frontend Design production review workflow.
 
+### Freeze whole-screen visual direction before implementation polish
+status: NEW
+source: Bobbio 0.3 repeated native UI rejection after locally green functional/performance gates, 2026-09-14
+target layer: Frontend Design planning / full-screen composition / implementation handoff
+problem: Repeated local repairs optimized individual defects without first freezing the whole-screen composition and component grammar. This produced obviously arbitrary visual decisions in an otherwise functional app: a large decorative `Choose a paper` circle with no semantic role, sibling controls such as `Change paper` and `Retry PDF` rendered in visibly unrelated styles despite adjacent placement, duplicated `Choose a paper` messaging, mismatched control weights, and locally polished components that still did not form a coherent product. The user was repeatedly forced into the role of art director, pointing out visual incoherence one screenshot at a time. The failure is not one bad button; it is the absence of a mandatory design-before-code gate for the entire screen.
+candidate_action:
+- Before implementation polish, freeze a **screen-level visual brief** for every primary state: shell, empty Reader/paper picker, loaded Reader, current selection, Explanation, Candidate/history, annotation mode, loading/error/recovery. The brief must define visual hierarchy, dominant task, control grouping, spacing rhythm, density, and what is intentionally absent.
+- Require one canonical component grammar before coding: button families, size scale, icon family, border/radius system, surfaces, pills, tabs, inputs, destructive treatment, and motion. Adjacent controls of the same semantic level must use the same family unless a documented hierarchy difference justifies otherwise.
+- Ban arbitrary decorative geometry in production UI. A circle/blob/card/accent shape must have a clear semantic, navigational, status, branding, or interaction role. “It fills empty space” is not a valid reason. Decorative shapes that call attention without meaning are a production defect.
+- Add a **sibling-control consistency** check: controls that are spatially grouped must be compared side-by-side for height, padding, icon treatment, radius, border, typography, and interaction states. `Change paper` beside `Retry PDF` cannot accidentally look like two unrelated design systems.
+- Treat repeated labels/CTAs as a whole-screen defect. One action should not appear as header copy, pill, title, and button unless each occurrence serves a distinct user need.
+- Require a full-window native screenshot review at normal scale before accepting component-level evidence. The reviewer must answer: does this look intentionally designed as one product, or like individually repaired widgets accumulated over time?
+- Use the canonical design artifact (Figma/reference frame/design board) as the implementation target when one exists. Implementation should compare native screenshots against the approved reference, not improvise during coding.
+- Introduce a **visual freeze → implementation → native comparison** loop. Do not ask the user to review until the producer has compared every primary native screen to the frozen visual direction and found zero obvious composition/component inconsistencies.
+- External review should happen only after the producer can defend every visible shape/control: why it exists, why it has that visual weight, and why neighboring controls differ. If the answer is “because that was the easiest CSS/markup,” the screen is not review-ready.
+- Add an explicit ban on using the user as iterative visual QA. The product team/agent must perform the full-screen design pass first; user review is for final taste/product judgment, not discovering arbitrary circles, inconsistent siblings, repeated CTAs, or basic spacing mistakes.
+promotion_gate: treat this as immediately applicable to Bobbio; validate on at least one additional UI-heavy project before promoting the exact checklist into the generic Frontend Design production contract. The underlying principle—freeze whole-screen visual direction before code polish and never use the user as first-line art direction—should be considered high-priority for promotion.
+
 ## Watch boundaries
 
 - One product's visual taste is project-local unless repeated or explicitly adopted as a long-term cross-project preference.
