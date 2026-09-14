@@ -103,6 +103,39 @@ candidate_action:
 - Add an explicit ban on using the user as iterative visual QA. The product team/agent must perform the full-screen design pass first; user review is for final taste/product judgment, not discovering arbitrary circles, inconsistent siblings, repeated CTAs, or basic spacing mistakes.
 promotion_gate: treat this as immediately applicable to Bobbio; validate on at least one additional UI-heavy project before promoting the exact checklist into the generic Frontend Design production contract. The underlying principle—freeze whole-screen visual direction before code polish and never use the user as first-line art direction—should be considered high-priority for promotion.
 
+### Canonical design artifacts must gate production implementation
+status: NEW
+source: Bobbio 0.3 Figma rebase after whole-screen UI rejection, 2026-09-14
+target layer: Frontend Design source-of-truth governance / Figma-to-code / visual regression
+problem: A project can already have an approved Figma/component system and still drift badly if implementation treats it as inspirational rather than normative. Bobbio had a canonical Figma Reading Focus direction, yet production code invented missing states directly in React/CSS. The result was local functional success but system-level visual drift: arbitrary decorative geometry, inconsistent sibling controls, random spacing values, repeated CTAs, and different component grammars across states. The missing workflow rule is that canonical design artifacts must block implementation until the required states and components actually exist in the design source of truth.
+candidate_action:
+- When a canonical Figma/design file exists, classify it explicitly as **production visual source of truth**, not a moodboard. Production UI changes that materially alter hierarchy, component grammar, spacing, or primary states must be represented there first.
+- Before coding a UI milestone, build a **primary-state coverage matrix**. Every user-visible state that will be shipped (empty, loaded, selection, explanation, candidate/history, active tools, loading, error/recovery, responsive variants, important transitions) must have a design target. Missing states are a design gap, not permission for implementation improvisation.
+- Require a **Figma/design freeze gate** before production implementation: whole-screen hierarchy, component families, spacing scale, typography, surfaces, colors, motion intent, and responsive behavior must be internally coherent and self-reviewed at normal window scale.
+- Freeze shared design tokens before coding. Avoid selector-by-selector arbitrary values for spacing, radius, control height, borders, typography, and motion. New values outside the token system require an explicit reason rather than convenience.
+- Require full-screen Figma-to-native comparison after implementation. Compare complete screens, not only component crops, and record layout, typography, spacing, hierarchy, component family, responsive behavior, and intentional deviations.
+- Treat unrecorded visual deviation from canonical design as a defect. “Roughly similar” is not sufficient when the project has a deliberate source-of-truth artifact.
+- Add a **design debt fail-fast** rule: if the implementation needs a production state absent from Figma, stop and extend the canonical design first. Do not encode the missing state directly in CSS and promise to reconcile it later.
+- Require final design convergence to cover at least one compact/laptop viewport and the canonical desktop viewport before external review; a design that only works at one screenshot size is incomplete.
+- Preserve functional and accessibility contracts during Figma rebase, but do not let legacy DOM/CSS structure dictate the visual solution. Existing implementation is a behavior substrate, not a design constraint.
+- The goal should be end-to-end: **design update → internal design self-review → production implementation → native full-screen comparison → adversarial self-review → external confirmation**. Do not terminate a UI goal after only Figma or only code is complete.
+promotion_gate: immediately use this workflow for Bobbio 0.3. Validate the exact gate on at least one other project with a canonical design artifact before making every clause mandatory across Frontend Design.
+
+### Visual acceptance must include a whole-product taste gate, not only defect checklists
+status: NEW
+source: Bobbio 0.3 weekend UI convergence failure, 2026-09-14
+target layer: Frontend Design final visual QA / product taste / user handoff
+problem: Even increasingly strict defect checklists can still produce an interface that technically passes local gates while obviously looking incoherent or unfinished at first glance. The missing layer is a deliberate whole-product taste review: does the screen feel intentional, calm, balanced, and like one product? Users should not be forced to identify elementary visual problems one screenshot at a time after the producer has already declared readiness.
+candidate_action:
+- Add a final **whole-product taste gate** after functional, component-state, and evidence-integrity checks. Review complete native screens at normal scale and ask whether the interface looks intentionally designed without reading implementation rationale.
+- Require the producer to explicitly search for arbitrary visual gestures: circles/blobs used only to fill space, over-large empty regions, repeated CTA language, mismatched sibling controls, over-promoted maintenance actions, excessive pills/cards/borders, accidental typography mixing, and inconsistent density.
+- A whole-screen UI with zero overflow and correct hover states can still fail P2 if its composition visibly looks ad hoc, placeholder-like, or AI-generated.
+- Require a **visual hierarchy explanation** for each primary screen: dominant task, primary action, secondary actions, quiet content, historical content, and intentionally absent controls. If hierarchy cannot be explained simply, the screen is not frozen.
+- Add an explicit “first-glance rejection” pass: inspect each screen for 2–5 seconds at normal scale. If an experienced reviewer immediately notices something obviously arbitrary or inconsistent, do not proceed to user review even if detailed checklists are green.
+- User review should be reserved for final product/taste judgment and preference decisions, not elementary design-system cleanup. The producer must reach zero obvious P2 visual defects before asking the user to look again.
+- When a user has explicitly rejected iterative visual QA, treat further user-facing screenshots as blocked until the producer completes the full design → implementation → native comparison loop.
+promotion_gate: high-priority candidate for Frontend Design. Validate whether this reduces repeated UI repair loops on Bobbio and at least one other design-heavy product, then promote into the generic final visual-review contract.
+
 ## Watch boundaries
 
 - One product's visual taste is project-local unless repeated or explicitly adopted as a long-term cross-project preference.
