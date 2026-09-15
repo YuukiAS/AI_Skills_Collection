@@ -37,19 +37,32 @@ Observed attempts:
    task = private/exports/055_clear_writing_release_convergence/deep_research_replay/DEEP_RESEARCH_NORMAL_ENTRY_TASK_V2.md
    task_sha256 = 67cca23f6077ed6561c72f2b7016ad10fae4d32ab960c441adcdc68a1bf8b5d6
    private_output_sha256 = d41a68db51ee7fe570ade46557812dc3889c651c11502d9ecfe0fc225ae18883
+   durable_private_locator = /overflow/htzhu/mingcheng_new/AI_Skills_Collection/private/exports/055_clear_writing_release_convergence/deep_research_replay/blocker_c6/attempt1_v2_output.md
    missing = run.json, child.stdout.jsonl, child.stderr
 
 2. run_dir = .local-runtime/candidate-plugin-replay/runs/20260915T091921Z-1798238
    task = private/exports/055_clear_writing_release_convergence/deep_research_replay/DEEP_RESEARCH_NORMAL_ENTRY_TASK_V2.md
    task_sha256 = 67cca23f6077ed6561c72f2b7016ad10fae4d32ab960c441adcdc68a1bf8b5d6
    private_output_sha256 = aae594673dfbb8735ef98fd7683b0b2c656c5d3977f809ae159028642c4db0c9
+   durable_private_locator = /overflow/htzhu/mingcheng_new/AI_Skills_Collection/private/exports/055_clear_writing_release_convergence/deep_research_replay/blocker_c6/attempt2_v2_output.md
    missing = run.json, child.stdout.jsonl, child.stderr
 
 3. run_dir = .local-runtime/candidate-plugin-replay/runs/20260915T092827Z-1811169
    task = private/exports/055_clear_writing_release_convergence/deep_research_replay/DEEP_RESEARCH_NORMAL_ENTRY_TASK_V3.md
    task_sha256 = 79e1d357e60343997b5150a7ee0452a0d3f3706b74eedb4ed6632051112a8969
    private_output_sha256 = 0afd84be4bb53d84482cf4c786a8a8ddac1097be9b6413f705376260d53ad2d0
+   durable_private_locator = /overflow/htzhu/mingcheng_new/AI_Skills_Collection/private/exports/055_clear_writing_release_convergence/deep_research_replay/blocker_c6/attempt3_v3_output.md
    missing = run.json, child.stdout.jsonl, child.stderr
+```
+
+Durable private task prompts:
+
+```text
+/overflow/htzhu/mingcheng_new/AI_Skills_Collection/private/exports/055_clear_writing_release_convergence/deep_research_replay/tasks/DEEP_RESEARCH_NORMAL_ENTRY_TASK_V2.md
+sha256 = 67cca23f6077ed6561c72f2b7016ad10fae4d32ab960c441adcdc68a1bf8b5d6
+
+/overflow/htzhu/mingcheng_new/AI_Skills_Collection/private/exports/055_clear_writing_release_convergence/deep_research_replay/tasks/DEEP_RESEARCH_NORMAL_ENTRY_TASK_V3.md
+sha256 = 79e1d357e60343997b5150a7ee0452a0d3f3706b74eedb4ed6632051112a8969
 ```
 
 Why this is not a product PASS:
@@ -69,4 +82,3 @@ Planner decision on the minimal safe replay-control recovery, for example a
 bounded child timeout/termination policy in `candidate_plugin_replay` that can
 capture stdout/stderr and exit status without treating a partially written
 private output as PASS.
-
