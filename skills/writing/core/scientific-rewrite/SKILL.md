@@ -190,6 +190,11 @@ source formula is reader-facing, realize it as renderable Markdown/LaTeX math
 inside fenced code blocks, `text` fences, quote blocks, screenshots, or token
 inventories merely to preserve characters. A formula-like fenced block is a
 candidate-representation failure even when the literal symbols are present.
+Use normal LaTeX math notation for operators and spacing, such as `\log`,
+`\sin`, `\cos`, `\exp`, `\min`, `\max`, `\arg\min`, `\arg\max`, `\Pr`, and
+`\mathbb{E}`. Big-O expressions such as `O(n log n)` should become
+`$O(n \log n)$`, not `$O(n log n)$`, because the latter renders `log` as
+ordinary adjacent variables.
 
 The packet must explicitly preserve modality. It must tell the writer to keep
 completion status, subject/voice, temporal status, and epistemic status from the

@@ -67,7 +67,9 @@ license: MIT-compatible synthesis plus public-domain style guidance
 plain text、wiki block 或 `text` fence 写公式，`REALIZE_MEANING` 要把它转成
 行内或展示 LaTeX 数学，并在附近说明符号含义。不要为了“逐字保留”把公式放进
 fenced code block、`text` block、quote block 或 token 清单；这种输出不是合格的
-读者正文。代码 fence 只用于真实代码、命令或配置。
+读者正文。代码 fence 只用于真实代码、命令或配置。数学函数和复杂度表达要用
+正常 LaTeX 记法，例如 `$O(n \log n)$`，不要写成会把 `log` 渲染成相邻变量的
+`$O(n log n)$`。
 
 不得把以下内容作为写作输入交给本模式：raw source paragraph/sentence、source excerpt、source quotation、source tail/preview、Latin-span inventory、QA ledger、`exact_identity/useful_recognition/ordinary_reasoning` 分类、literal seed rewrite template、previous rejected candidate、manual GPT reference output。
 
