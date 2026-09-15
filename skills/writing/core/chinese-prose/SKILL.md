@@ -64,12 +64,13 @@ license: MIT-compatible synthesis plus public-domain style guidance
 - optional structured repair instruction。
 
 公式和数学关系必须写成读者能渲染、能理解的数学表达。源材料里如果用
-plain text、wiki block 或 `text` fence 写公式，`REALIZE_MEANING` 要把它转成
-行内或展示 LaTeX 数学，并在附近说明符号含义。不要为了“逐字保留”把公式放进
-fenced code block、`text` block、quote block 或 token 清单；这种输出不是合格的
-读者正文。代码 fence 只用于真实代码、命令或配置。数学函数和复杂度表达要用
-正常 LaTeX 记法，例如 `$O(n \log n)$`，不要写成会把 `log` 渲染成相邻变量的
-`$O(n log n)$`。
+plain text、wiki block、inline code 或 `text` fence 写公式，`REALIZE_MEANING`
+要把它转成行内或展示 LaTeX 数学，并在附近说明符号含义。不要为了“逐字保留”
+把公式放进 fenced code block、inline code span、`text` block、quote block 或
+token 清单；这种输出不是合格的读者正文。代码 fence 和反引号只用于真实代码、
+命令、API、配置或机器 token。数学函数和复杂度表达要用正常 LaTeX 记法，例如
+`$O(n \log n)$`、`$O(N \log N)$`、`$(N/2) \log_2 N$`，不要写成反引号里的
+`O(n log n)`，也不要写成会把 `log` 渲染成相邻变量的 `$O(n log n)$`。
 
 不得把以下内容作为写作输入交给本模式：raw source paragraph/sentence、source excerpt、source quotation、source tail/preview、Latin-span inventory、QA ledger、`exact_identity/useful_recognition/ordinary_reasoning` 分类、literal seed rewrite template、previous rejected candidate、manual GPT reference output。
 
@@ -123,6 +124,8 @@ fenced code block、`text` block、quote block 或 token 清单；这种输出�
 - 科研/技术重写候选稿把 `{{...}}` wiki 模板、`<ref>...</ref>`、
   `<references/>`、HTML 标签或导出引用标记当作正文引用，而不是转成正常
   中文引用、出处说明或参考项。
+- 科研/技术重写候选稿把复杂度、求和式、矩阵式、概率式等数学关系放在反引号、
+  code fence、`text` block 或普通文本里，导致 PDF/HTML 不能按数学表达渲染。
 
 如果触发的是中文成稿验收，第一段必须先给人能读懂的判断；证据路径、命令、字段、日志和机器状态放在后面的证据区或括号说明。
 

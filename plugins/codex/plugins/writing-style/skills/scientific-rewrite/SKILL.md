@@ -197,14 +197,16 @@ inventories, seed rewrite templates, or self-audit ledgers as drafting input.
 Formula rendering is a production obligation, not a cosmetic choice. When a
 source formula is reader-facing, realize it as renderable Markdown/LaTeX math
 (`$...$` or `$$...$$`) with nearby Chinese explanation. Do not place formulas
-inside fenced code blocks, `text` fences, quote blocks, screenshots, or token
-inventories merely to preserve characters. A formula-like fenced block is a
-candidate-representation failure even when the literal symbols are present.
-Use normal LaTeX math notation for operators and spacing, such as `\log`,
-`\sin`, `\cos`, `\exp`, `\min`, `\max`, `\arg\min`, `\arg\max`, `\Pr`, and
-`\mathbb{E}`. Big-O expressions such as `O(n log n)` should become
-`$O(n \log n)$`, not `$O(n log n)$`, because the latter renders `log` as
-ordinary adjacent variables.
+inside fenced code blocks, inline code spans, `text` fences, quote blocks,
+screenshots, or token inventories merely to preserve characters. A
+formula-like code block or inline-code span is a candidate-representation
+failure even when the literal symbols are present. Use normal LaTeX math
+notation for operators and spacing, such as `\log`, `\sin`, `\cos`, `\exp`,
+`\min`, `\max`, `\arg\min`, `\arg\max`, `\Pr`, and `\mathbb{E}`. Big-O and
+complexity expressions such as `O(n log n)`, `O(N log N)`, and `(N/2) log_2 N`
+should become `$O(n \log n)$`, `$O(N \log N)$`, and
+`$(N/2) \log_2 N$`, not inline code and not `$O(n log n)$`, because the latter
+renders `log` as ordinary adjacent variables.
 
 The packet must explicitly preserve modality. It must tell the writer to keep
 completion status, subject/voice, temporal status, and epistemic status from the
@@ -283,9 +285,11 @@ short reproducibility paragraph.
 
 Formula identity means preserving the mathematical relationship in reader-facing
 math, not preserving the source's plain-text container. If the source expresses
-DFT, loss functions, matrix equations, or complexity formulas in a plain-text or
-wiki-style block, convert the relationship to display math and explain the
-symbols. Use code fences only for real code, commands, or configuration.
+DFT, loss functions, matrix equations, Big-O/complexity statements, or other
+formula-like content in plain text, inline code, or a wiki-style block, convert
+the relationship to renderable math and explain the symbols. Use code fences and
+inline code only for real code, commands, APIs, configuration, or machine-facing
+tokens, not mathematical notation.
 
 Reader-facing exact verification checks exact items required by meanings or
 Reader Plan bundles. Exact items that appear only inside excluded
@@ -358,7 +362,8 @@ This route can claim process completion only when the stage package validates:
 - explicit source-context exclusion for non-reader packaging metadata;
 - valid Reader Plan bundle ownership;
 - reader-facing exact items preserved;
-- formulas are renderable math, not fenced `text` or code blocks;
+- formulas and complexity expressions are renderable math, not fenced `text`,
+  code blocks, or inline code spans;
 - citations are reader-facing citation text, bibliography/source notes, or
   intentional omissions according to the Reader Plan; raw wiki/HTML citation
   markup such as `{{...}}`, `<ref>...</ref>`, and `<references/>` is absent from
