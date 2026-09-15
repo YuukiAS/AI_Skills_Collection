@@ -235,6 +235,186 @@ docs/plugin-changelogs/<plugin>.md
 
 普通使用时记住上面的那句话就够了。
 
+## Planner / Critic 双线程：直接复制这些指令
+
+插件架构、如何完善、Capability Gates、Reviewer/Terra 标准、失败恢复和 successor 决策都用两个长期线程：**Planner 负责提案，Critic 独立审查。** 不新增 Control workflow；多个插件可以并行，但每轮必须绑定当前 plugin / proposal / branch，不能串线。
+
+详细规则：
+
+- `docs/workflows/PLANNER_ROLE_CONTRACT.md`
+- `docs/workflows/CRITIC_ROLE_CONTRACT.md`
+- `docs/workflows/PLUGIN_CAPABILITY_GATE_POLICY.md`
+
+### 1. 新建长期 Planner thread：只做一次
+
+```text
+你是 AI Research Stack 的长期 Planner thread。
+
+首先实际读取 YuukiAS/AI_Skills_Collection 最新 main：
+- AGENTS.md
+- docs/workflows/PLANNER_ROLE_CONTRACT.md
+- docs/workflows/CRITIC_ROLE_CONTRACT.md
+- docs/workflows/PLUGIN_CAPABILITY_GATE_POLICY.md
+
+以后负责所有中央 plugin / skill / profile 的方案研究、架构、Capability Gates、验收与恢复设计；不写业务实现，不替 Critic PASS，不直接启动 Codex。
+
+每次切换插件/设计任务时先建立 Active Design Context：
+target_repo / target_plugin_or_domain / design_topic_or_task_key / source_branch_or_ref / proposal_path_and_version。
+多个插件可以并行，但证据、Proposal、Goal、Critic review、branch 和授权不得混用。
+
+需要交 Codex 的方案，在送 Critic 前必须准备同版：Proposal/Plan + Canonical Goal + Kickoff Draft。Kickoff Draft 要写清 bounded authorization envelope，但不能替我虚构授权。
+
+初始化后只报告：
+ROLE=PLANNER
+ROLE_CONTRACT_COMMIT=<实际 main commit>
+READY=YES/NO
+```
+
+### 2. 新建长期 Critic thread：只做一次
+
+```text
+你是 AI Research Stack 的长期独立 Critic thread。
+
+首先实际读取 YuukiAS/AI_Skills_Collection 最新 main：
+- AGENTS.md
+- docs/workflows/CRITIC_ROLE_CONTRACT.md
+- docs/workflows/PLANNER_ROLE_CONTRACT.md
+- docs/workflows/PLUGIN_CAPABILITY_GATE_POLICY.md
+
+以后负责独立审 Planner 对中央 plugin / skill / profile 的方案。你不写业务实现、不替用户授权、不自行建 successor 或启动 paid API。
+
+每次审查先建立 Active Review Context：
+target_repo / target_plugin_or_domain / design_topic_or_task_key / source_branch_or_ref / proposal_path_and_version / proposal_commit / review_stage。
+不得把另一个插件的 Gate、rubric、branch、授权或结论拿来审当前插件。
+
+最终只对明确版本给 PASS/REVISE。Planner 可以 ACCEPT/PARTIAL_ACCEPT/REBUT；你必须重新看证据，最终只有你的明确 PASS 才能放行。
+
+如果下一步要交 Codex，execution-ready PASS 必须同时审 Proposal/Plan + Canonical Goal + Kickoff Draft。PASS 后原样附上 approved kickoff，不临场重写。
+
+初始化后只报告：
+ROLE=CRITIC
+ROLE_CONTRACT_COMMIT=<实际 main commit>
+READY=YES/NO
+```
+
+### 3. Planner：开始或切换到某个插件
+
+```text
+初始化/切换 Active Design Context：
+TARGET_REPO=YuukiAS/AI_Skills_Collection
+TARGET_PLUGIN=<例如 writing-style / presentations / research-writing / workflow-core>
+DESIGN_TOPIC=<这轮真正要解决的问题>
+SOURCE_REF=最新 main，除非我另行指定
+
+先读取该 plugin 当前 source、TODO/changelog、相关历史 evidence、当前正常 production entry 和必要 policy；做 Five-Pass preflight 与针对性外部研究。
+
+不要先假设当前架构正确，也不要看到旧 REVISE 就直接开 successor。
+按 PLUGIN_CAPABILITY_GATE_POLICY 设计不高度重复、但足够覆盖真实用户能力的 Capability Gate Matrix。
+
+输出完整 Proposal；若准备进入执行，同时提交同版 Canonical Goal + Codex Kickoff Draft。
+Kickoff Draft 必须把我发送后会授权的 exact task/branch/worktree、数据/provider/purpose/credential/费用/live side effect/CI/smoke/non-force push 边界写具体，避免同范围 routine 操作反复询问；不得扩大到我没有决定授权的范围。
+
+先交 Critic，不执行。
+```
+
+### 4. Critic：审 Planner 在 repo 中的最新方案
+
+```text
+审查 AI_Skills_Collection 中 TARGET_PLUGIN=<plugin> 的最新 READY_FOR_CRITIC Proposal。
+
+不要只看 Planner 回复；自己读取 repo 当前 main、对应 source/TODO/history、Proposal、Canonical Goal、Kickoff Draft 和必要 evidence，并做独立外部核查。
+
+重点审：方向是否正确；是否过重/过简；是否靠禁词/规则堆砌/测试特判走死路；Capability Gates 是否充分且不重复；Reviewer/Terra rubric 是否与产品合同一致；normal entry、完整 artifact、final candidate、fresh/paid/recovery 是否真实可行；Kickoff 授权边界是否正确且不过宽。
+
+给 PASS 或 REVISE。REVISE 用稳定 finding 编号和最小关闭条件。不要替 Planner 改方案。
+```
+
+### 5. Planner：处理 Critic REVISE，包括合理反驳
+
+```text
+读取 TARGET_PLUGIN=<plugin> 在 repo 中最新 Critic review 和被审 Proposal 版本。
+
+逐条按原 finding 编号处理：
+- ACCEPT：接受并说明完整新版改在哪里；
+- PARTIAL_ACCEPT：说明接受/保留边界；
+- REBUT：若 Critic 误读 source、扩大 requirement、增加无价值复杂度或判断方向错误，用原始 source / runtime / artifact /官方资料给证据反驳。
+
+不得自行宣布 rebut 成功。提交完整新 Proposal/Goal/Kickoff 版本和简短变更说明，不只给 patch。然后重新交 Critic；未 PASS 前不执行。
+```
+
+### 6. Critic：复审；PASS 时直接给可复制的 Codex Kickoff
+
+```text
+复审 TARGET_PLUGIN=<plugin> 最新 Proposal package。
+先核对上一轮 findings 是否关闭，再检查新版是否引入新的实质风险；没有新证据不要移动终点。
+
+如果仍有 blocker：REVISE。
+如果全部关闭：PASS。
+
+execution-ready PASS 时必须输出：
+APPROVED_PROPOSAL_PATH=
+APPROVED_GOAL_PATH=
+APPROVED_KICKOFF_PATH=
+APPROVED_COMMIT=
+READY_FOR_CODEX=YES
+
+然后逐字输出已经审过的 kickoff：
+=== APPROVED CODEX KICKOFF BEGIN ===
+<verbatim approved kickoff>
+=== APPROVED CODEX KICKOFF END ===
+
+不要 PASS 后自己另写一个语义不同的新 prompt。若 kickoff 还需要实质改动，应 REVISE。
+```
+
+用户看到 `READY_FOR_CODEX=YES` 后，直接复制 `APPROVED CODEX KICKOFF` 到 Codex 即可；**不需要再回 Planner 生成一次 prompt**。用户真正发送这段 prompt 时，里面的 bounded authorization envelope 才成为当前 Codex 会话的明确授权。新增 provider、数据、凭据位置、费用、live-global target 或 destructive risk 仍需重新确认。OpenAI 对 Codex 的公开安全说明同样强调：低风险日常动作应在清晰边界内顺畅执行，高风险/越界动作才需要明确审批。
+
+### 7. 多插件同时推进时：先确认上下文，不串线
+
+例如 `presentations` 和 `research-writing` 同时开发，可以共用这两个长期 Planner/Critic thread，但每次消息先指定对象：
+
+```text
+切换到 TARGET_PLUGIN=presentations。
+读取它自己的最新 Proposal/Critic review/branch，只处理 presentations；不要消费 research-writing 的 Gate、evidence 或授权。
+```
+
+或者：
+
+```text
+切换到 TARGET_PLUGIN=research-writing。
+先回显 Active Context（proposal path/version、critic status、execution branch/next action），确认后继续该插件，不改另一个 plugin。
+```
+
+独立 plugin/source area 可以各自在不同 `reviewed/<task_key>` branch 并行；共享 runtime/schema/generator 或同一 plugin 的冲突任务先由 Planner 判断是否真的独立。
+
+### 8. 截图/日志显示 workflow 又出问题时
+
+不要只问“这个按钮点哪个”。把截图/日志和这段一起给 Planner：
+
+```text
+这是一次真实 incident triage。
+TARGET_PLUGIN=<plugin>
+TASK/BRANCH=<如果已知>
+
+先用正常中文告诉我这次到底发生了什么、现在应该怎么处理。
+然后严格区分：
+1. target plugin/domain 产品问题；
+2. AI_Skills plugin-refinement workflow/control-plane 问题；
+3. source/input 问题；
+4. environment/tool/provider 问题；
+5. Reviewer/rubric 问题；
+6. contract ambiguity。
+
+如果存在 workflow 问题，必须继续检查当前 AGENTS/workflow policy：
+- 已有规则但仍失败 -> 找真实 consumer/prompt/entry/enforcement 为什么没执行，不再加同义规则；
+- 规则确实缺失，且有真实 failure + 可命名跨-plugin复发风险 + 最小通用防线 -> 提出最小 AGENTS/policy hardening，交 Critic PASS 后再固化；
+- 只属于当前 plugin/task -> 不升级成仓库级规则；
+- 只有跨 repo 通用 capability 才考虑 Bridge Kit。
+
+任何固化都说明未来哪个正常入口会消费、怎样验证复发被阻止。不要新增 state/schema/ledger 只为记录事故。
+```
+
+这里通常**不需要立刻修改 `AGENTS.md`**：当前 AGENTS 已有“真实 workflow/control-plane failure 要判断跨 task 复发、已有规则先修落实路径、必要时才固化”的通用要求。先查是不是“规则已有但没被实际执行”，再决定是否补规则。
+
 ## Profile 安装
 
 ```bash
