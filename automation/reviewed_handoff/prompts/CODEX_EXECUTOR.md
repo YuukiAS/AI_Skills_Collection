@@ -51,6 +51,23 @@ Executor 没有 Planner/Reviewer authority。不得修改：
 
 允许的 workflow 写入只包括本 task 的 Executor-owned 状态，例如 `CURRENT.state`、`implementation_commit`、`ci_status`、`next_action` 与 `results/<task_key>/RESULT.md`，以及冻结 Plan 明确要求的项目实现文件。
 
+在执行 worktree remove/prune、task cleanup、终止旧 worktree，或进入“不再需要
+当前 worktree”的最终 handoff 前，必须先识别后续仍需要的 private artifact：
+Critic / Reviewer 需要读取的 source/candidate/render，successor / known
+regression 需要复用的输入输出，后续 phase/gate 依赖的 evidence，以及 final
+report / handoff 明确引用的私有交付物。Task-owned `/tmp` worktree 内的
+`private/exports/` 和 `.local-runtime/` 都是可清理工作副本，不得作为这些
+future-required artifact 的唯一副本。
+
+若存在 future-required private artifact，必须先确认 durable copy 已在长期
+AI_Skills_Collection checkout 的 `private/exports/<task_key>/...`，或用户明确
+指定的其他 durable repo-local path 中；对关键文件记录 hash 和 durable locator。
+`.local-runtime/` 中会被后续 gate/review/handoff 引用的 artifact/evidence 必须
+先提升或复制到 durable `private/exports/<task_key>/...`。如果 durable copy 缺失，
+不得删除唯一副本，也不得把 cleanup 伪装成完成交接。Scratch-only cache、
+临时安装目录和确认不再需要的 intermediate 不要求无差别永久复制，cleanup 只删除
+已确认不再需要的临时副本。
+
 完成实现后：
 
 1. 运行与 Plan acceptance/regression gates 对应的本地真实测试；
