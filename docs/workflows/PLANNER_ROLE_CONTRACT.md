@@ -1,6 +1,6 @@
 # Planner 线程工作约定
 
-版本：1.1  
+版本：1.2  
 日期：2026-09-15  
 配套文件：`docs/workflows/CRITIC_ROLE_CONTRACT.md`
 
@@ -118,6 +118,37 @@ Planner 负责理解目标、研究替代方案、起草完整提案、逐项回
 Critic 复核前不执行争议部分。两轮往返仍没有新证据或可收敛方案时，停止文字争论，列出决定所需的最小证据；必要探针仍先审范围。只有产品偏好、授权或无法推导的关键选择才交用户，不让用户反复裁决技术常识。
 
 PASS 绑定提案版本、路径、所在 commit 和审查阶段。重大改动需复审；无关 main 提交、纯排版或同范围的正常执行不使批准机械失效。冻结 Plan 与通过稿必须实质相符。
+
+### 10.1 Planner 回复必须自动附上下一步 Critic prompt
+
+除了线程首次 initialize、或用户明确开启一个新的 major round / 新任务（例如 056、057）这两类入口外，Planner 只要本轮产出或修改了需要 Critic 继续审查的 Proposal、Plan、Goal、Kickoff、rebut、pre-final package 或 recovery proposal，就必须在正常中文结论后，**自动附上一段用户可以直接复制给 Critic 的完整 prompt**。用户不应再打开 GitHub、README 或手工拼接 blocker/path/commit。
+
+该 prompt 以 README 中 Planner/Critic 模板为骨架，但必须结合本轮真实 Active Design Context 填充，至少在已有时包含：
+
+```text
+target_repo / target_plugin_or_domain / design_topic_or_task_key
+review_stage
+proposal / plan / goal / kickoff paths + version
+package commit
+上一轮 critic review path / commit
+需要复核的 finding IDs 或本轮变更范围
+source branch/ref 与 execution branch/worktree（如已知）
+```
+
+已知值不得留 `<plugin>`、`<commit>` 等占位符让用户补；未知但可从 repo 唯一定位的值，应让 Critic 自行读取 repo，不把定位工作甩给用户。handoff prompt 应要求 Critic 读取最新 main/目标 branch 和对应 review/package，而不是把整份 GitHub 内容重新粘贴进 prompt。
+
+回复结尾使用统一形态：
+
+```text
+NEXT_HANDOFF=CRITIC
+=== COPY TO CRITIC BEGIN ===
+<结合本轮上下文生成的完整 Critic prompt>
+=== COPY TO CRITIC END ===
+```
+
+如果 Planner 本轮只是处理 Critic `REVISE`，prompt 必须明确要求 Critic 优先复核原 blocker 及本轮改动影响；如果 Planner 使用 `REBUT`，必须带上 finding IDs，并要求 Critic 独立检查 rebut evidence。Planner 不能以“README 第 6 条自己复制一下”作为交接。
+
+若当前存在真正只能由用户决定的产品偏好、授权或私有文件上传动作，先把所需用户动作说清楚；完成可交 Critic 的 package 后仍必须自动生成上述 Critic prompt。不得用“还差用户操作”掩盖本可自动完成的 repo 定位和 prompt 组装。
 
 ## 11. Execution Package 与交接
 
