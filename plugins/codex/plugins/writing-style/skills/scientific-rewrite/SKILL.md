@@ -116,11 +116,15 @@ The Meaning Map is meaning-centric and source-auditable. It must include:
 - stable source anchors with hashes;
 - meanings with `meaning_id`, `kind`, `normalized_meaning`, source anchors, and
   exact items where needed;
+- `source_context_items` for source packaging, workflow debris, navigation
+  wrappers, alternate-language labels, or other source authority that is useful
+  for judging relevance but should not become reader-facing content;
 - relations when one meaning depends on, qualifies, compares with, or limits
   another;
 - exact items whose literal identity matters;
 - bidirectional coverage: every substantive source anchor has meaning
-  ownership, and every meaning has source authority.
+  ownership or explicit source-context exclusion, and every meaning has source
+  authority.
 
 Missing or malformed semantic extraction is a failure/repair condition. The
 helper must never fill `normalized_meaning` from source excerpts or continue
@@ -133,9 +137,36 @@ ownership, and information shape. It must not contain raw source prose, source
 excerpts, target rewrite sentences, Latin-span QA classifications, seed
 templates, or validator language.
 
+If the Meaning Map contains source-context exclusions, the Reader Plan must
+list their IDs in `excluded_source_context_item_ids`. This makes reader-facing
+omission explicit and auditable instead of silently dropping source spans.
+
 Mechanical size limits may only request `NEEDS_SEMANTIC_SPLIT`; they must not
 become the production heavy planner. Fixed `4 paragraphs / ~2800 chars`
 chunking is not a valid final heavy-route boundary.
+
+The Reader Plan is also the reader-disposition contract. Every retained,
+relocated, structured, or omitted obligation needs a source role and a reader
+reason. Use the existing plan/bundle structure; do not create a parallel
+persistent ledger. Valid disposition families are:
+
+- `CORE_INLINE` for central claims, definitions, mechanisms, and evidence;
+- `SUPPORT_INLINE` for needed conditions, caveats, comparisons, and context;
+- `STRUCTURED` for formulas, tables, citations, legitimate code, commands,
+  APIs, config, or identifiers that must appear as structured objects;
+- `RELOCATE` for needed reproducibility details that belong in a technical note
+  or appendix rather than the main argument;
+- `SOURCE_FUTURE_WORK` for source-author future work, limitations, or proposals
+  whose subject, tense, completion state, and uncertainty must be preserved;
+- `DROP_WRAPPER` for navigation, export UI, license debris, duplicated links, or
+  source packaging that is not part of the reader-facing content;
+- `DROP_IRRELEVANT_TRACE` for task, review, branch, commit, CI, cache, or
+  workflow traces that only describe how a prior artifact was produced.
+
+`SOURCE_FUTURE_WORK` must carry modality information: who owns the future work,
+whether it is done or proposed, its temporal status, and its epistemic status.
+Do not turn source-author plans or limitations into current Executor actions or
+completed findings.
 
 ## Realization Packet
 
@@ -153,6 +184,12 @@ It must not contain raw source paragraphs, source quotes, source excerpts,
 source tails/previews, old candidates, manual reference text, Latin-span
 inventories, seed rewrite templates, or self-audit ledgers as drafting input.
 
+The packet must explicitly preserve modality. It must tell the writer to keep
+completion status, subject/voice, temporal status, and epistemic status from the
+Meaning Map and Reader Plan. This is especially important for future work,
+limitations, negative results, author proposals, conditional statements, and
+unverified observations.
+
 ## Assembly
 
 Assembly may consume Reader Plan, realized bundles, meaning ownership, bundle
@@ -163,6 +200,12 @@ tables, or lists near their explanation.
 
 Assembly must not receive the raw source as drafting material and must not
 become a second whole-document source-conditioned writer.
+
+Assembly owns whole-document finish. Before accepting a final candidate, it must
+state the document purpose, reader entry, section-order rationale, transition
+plan, voice constraints, and technical-detail placement. The candidate should
+read as a standalone scientific or technical document, not a memo about a source
+file, task branch, review process, or next execution step.
 
 ## Repair
 
@@ -179,6 +222,14 @@ The semantic auditor may read raw source. A repair packet sent back to
 It must not contain source prose, source quotations, source sentences, or a
 target rewrite sentence. If the Meaning Map is wrong, repair the Meaning Map
 first and update the Reader Plan before re-realization.
+
+The semantic audit must check disposition as well as proposition fidelity. It
+must verify that each source obligation is preserved, summarized, relocated, or
+omitted according to the Reader Plan, and that no critical disposition finding
+remains unresolved. This prevents two opposite failures: preserving every
+internal trace for "fidelity", or deleting legitimate code, formulas,
+reproducibility details, citations, limitations, or future work for
+"cleanliness".
 
 ## Exact Items
 
@@ -201,6 +252,13 @@ reproducibility contract. For example, a source statement that an experiment
 uses `scripts/run_fedfisher.sh` and `configs/mm_fedfisher.yaml` may remain in a
 short reproducibility paragraph.
 
+Reader-facing exact verification checks exact items required by meanings or
+Reader Plan bundles. Exact items that appear only inside excluded
+`source_context_items` are not required in the final candidate, but an
+inline-critical exact item must not be hidden this way. If a method name, model,
+dataset, API, citation, metric, path, command, or formula is needed to
+understand or reproduce the technical point, keep it reader-facing.
+
 Do not put these in the main reader-facing candidate unless the user explicitly
 asks for an audit log or repository handoff:
 
@@ -214,6 +272,9 @@ asks for an audit log or repository handoff:
 - statements such as "this round is ready to close", "waiting for external
   planner review", or "the result has passed independent planner review" when
   they are process state rather than scientific content.
+- webpage/export wrappers such as language-link counts, archive ids,
+  alternate-language labels, navigation labels, or scraped UI noise when they do
+  not help a standalone reader understand the technical content.
 
 If the source mixes a scientific report with workflow/audit metadata, use the
 metadata only to avoid false claims and to understand artifact authority. The
@@ -256,8 +317,9 @@ This route can claim process completion only when the stage package validates:
 - ordinary `writing-style` route selection chose `scientific-rewrite`;
 - no raw-source drafting leakage into realization, repair, or assembly;
 - complete source-anchor/meaning ownership;
+- explicit source-context exclusion for non-reader packaging metadata;
 - valid Reader Plan bundle ownership;
-- exact items preserved;
+- reader-facing exact items preserved;
 - reader-facing candidate has no internal workflow / CI / commit / task-path
   leakage;
 - standalone reader-facing candidate has no source-process framing such as

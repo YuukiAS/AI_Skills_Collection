@@ -4,6 +4,38 @@
 
 No unreleased changes.
 
+## 5.0.5 - 2026-09-15
+
+Repository `5.0.5` is a compatible release candidate for Clear Writing long-form scientific/technical rewrite convergence.
+
+Repository bump decision: PATCH
+Reason: this release improves an existing central plugin's production writing behavior without adding a new repository-level capability or breaking existing contracts.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `writing-style` | `0.2` | `0.3` |
+
+Affected plugins:
+- `writing-style`: `0.2` -> `0.3`
+  Reason: scientific-rewrite now records reader dispositions for every meaning, protects future-work modality, requires whole-document finish planning, and separates non-reader source-context metadata from reader-facing exact technical content.
+
+Unchanged plugin versions: `workflow-core 0.1`, `ai-skills-core 0.2`, `research-writing 0.1`, `presentations 0.3`, `scientific-visualization 0.1`, `web-development 0.1`, `statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Clear Writing's scientific-rewrite helper now validates a Reader Plan disposition for every meaning, including explicit handling for core content, supporting content, structured technical material, relocated reproduction details, source-author future work, wrappers, and irrelevant workflow traces.
+- Future-work and limitation content now carries completion, subject/voice, temporal, and epistemic modality through realization so source-author plans are not rewritten as current Executor actions.
+- Assembly packets now require whole-document finish metadata for purpose, reader entry, section order, transitions, voice constraints, and technical-detail placement before a candidate can validate.
+- Source-context exclusions now allow webpage/export wrappers, language-link counts, archive ids, and other non-reader packaging metadata to be omitted explicitly while preventing inline-critical technical identities from being hidden as metadata.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelog:
+
+- `docs/plugin-changelogs/writing-style.md`
+
 ## 5.0.4 - 2026-09-10
 
 Repository `5.0.4` is a compatible release for writing-style reader-facing scientific/technical rewrite hardening.

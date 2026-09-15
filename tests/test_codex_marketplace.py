@@ -32,7 +32,7 @@ CENTRAL_PLUGIN_NAMES = [
 ]
 EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
     "ai-skills-core": "0.2",
-    "writing-style": "0.2",
+    "writing-style": "0.3",
     "presentations": "0.3",
 }
 REPOSITORY_SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
