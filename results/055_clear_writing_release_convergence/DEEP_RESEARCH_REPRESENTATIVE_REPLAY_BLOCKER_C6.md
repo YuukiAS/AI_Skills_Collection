@@ -3,7 +3,7 @@
 Status:
 
 ```text
-NEEDS_GPT_PLANNER
+CLOSED_BY_REPLAY_CONTROL_REPAIR
 ```
 
 Failure attribution:
@@ -82,3 +82,16 @@ Planner decision on the minimal safe replay-control recovery, for example a
 bounded child timeout/termination policy in `candidate_plugin_replay` that can
 capture stdout/stderr and exit status without treating a partially written
 private output as PASS.
+
+Closure:
+
+```text
+helper repair commit = 028ff02f802e07c842548a08e2a63a1c7c8a51cd
+successful replay run = .local-runtime/candidate-plugin-replay/runs/20260915T110816Z-2214476
+successful replay evidence = DEEP_RESEARCH_REPRESENTATIVE_REPLAY_C6_SUCCESS.md
+```
+
+The repair was limited to candidate replay child lifecycle control. C6
+production source, generated payload, release identity and frozen rubric were
+not changed. The next phase is the frozen pre-final Critic bundle preparation;
+this closure does not authorize G7 fresh or Terra.

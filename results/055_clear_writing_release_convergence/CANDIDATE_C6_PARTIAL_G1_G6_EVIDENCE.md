@@ -3,7 +3,7 @@
 Status:
 
 ```text
-PARTIAL_PASS_BLOCKED_BEFORE_REPRESENTATIVE_DEEP_RESEARCH_RECEIPT
+PARTIAL_PASS_REPRESENTATIVE_DEEP_RESEARCH_REPLAY_NOW_CLOSED
 ```
 
 Candidate:
@@ -85,12 +85,21 @@ e3b12f3e229bb8c29cdb532daec7b816343add89052d7226c440c17bd7c24648  compatibility_
 fb73a905cf57a689de94d62403fe58ebc7cc41a8121975846b802682e959a5cc  compatibility_replay_c6/python_re_docs/artifacts/output.md
 ```
 
-Important limitation:
+Representative Deep Research update:
 
 ```text
-This is not final G1-G6 PASS. The required representative 054 Deep Research
-replay could not be closed because candidate_plugin_replay repeatedly hung
-after writing private output but before returning stdout/run receipt. See
-DEEP_RESEARCH_REPRESENTATIVE_REPLAY_BLOCKER_C6.md.
+The replay-control blocker was repaired in helper commit
+028ff02f802e07c842548a08e2a63a1c7c8a51cd without changing C6 production
+source, generated payload, release identity, or frozen rubric. The exact C6
+representative Deep Research replay then completed with actual_consumption
+proven and a real 14-page render. See
+DEEP_RESEARCH_REPRESENTATIVE_REPLAY_C6_SUCCESS.md.
 ```
 
+Remaining limitation:
+
+```text
+This is still not FINAL_CANDIDATE_COMMIT designation and does not authorize G7
+fresh or Terra. C6 must first go through the frozen pre-final Critic handoff,
+where the Critic actually reads source + candidate + render.
+```
