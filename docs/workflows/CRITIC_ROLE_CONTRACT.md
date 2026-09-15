@@ -1,6 +1,6 @@
 # Critic 线程工作约定
 
-版本：1.1  
+版本：1.2  
 日期：2026-09-15  
 配套文件：`docs/workflows/PLANNER_ROLE_CONTRACT.md`
 
@@ -138,6 +138,41 @@ READY_FOR_CODEX=YES
 ```
 
 不得把“我根据 PASS 再写一个更完整的 prompt”当作同一被审对象。若只是路径/commit locator 等非语义字段在提交后需要机械更新，可以原样替换 locator 并明确说明；任何范围、授权、Gate、恢复或产品语义变化都必须重新 REVISE/复审。
+
+### 6.2 Critic 回复必须自动生成下一角色 prompt
+
+除了线程首次 initialize、或用户明确开启一个新的 major round / 新任务（例如 056、057）这两类入口外，Critic 的正式审查回复不能只给“PASS/REVISE + 一串 finding”然后让用户自己去 README/GitHub 拼下一条消息。
+
+**任何 `REVISE` 都必须在正常结论和 blocker 列表之后，自动附上一段可以直接复制给长期 Planner thread 的完整 prompt。** 该 prompt 以 README 中“Planner：处理 Critic REVISE，包括合理反驳”的模板为骨架，并结合当前 Active Review Context 填好实际信息，至少在已有时写清：
+
+```text
+target_repo / target_plugin_or_domain / design_topic_or_task_key
+review_stage
+reviewed proposal/package paths + exact commit
+critic review path + commit
+stable blocker IDs
+source branch/ref 与 execution branch/worktree（如已知）
+本轮只需复核的改动边界
+```
+
+已知信息不得留占位符让用户补；不要求用户先打开 GitHub 查看 review。Planner prompt 应直接要求 Planner fetch/读取最新 repo 与本次 Critic review，逐条 `ACCEPT / PARTIAL_ACCEPT / REBUT`，提交完整新版，并按 Planner contract 在回答末尾自动生成下一条 Critic prompt。
+
+统一输出形态：
+
+```text
+NEXT_HANDOFF=PLANNER
+=== COPY TO PLANNER BEGIN ===
+<结合本轮真实 review 自动生成的完整 Planner prompt>
+=== COPY TO PLANNER END ===
+```
+
+如果本轮是**设计阶段 PASS，但仍需要 Planner 把已通过设计整理成 execution package**，同样必须输出 `NEXT_HANDOFF=PLANNER` 和具体 Planner prompt；不要只说“现在可以写 Plan”。
+
+如果本轮是 **execution-ready PASS**，则不再回 Planner，按 6.1 逐字输出 approved Codex kickoff，此时 `NEXT_HANDOFF=CODEX`。
+
+如果是 implementation 中的 pre-final Critic PASS，且 frozen Goal 已明确下一步可以由 Executor/Codex继续且不改变 scope，则可输出一个只引用 approved Goal/current evidence 的 bounded resume prompt；若下一步需要改变架构、acceptance、预算、授权或 recovery semantics，则仍必须回 Planner，不得由 Critic自行设计。
+
+若某个 blocker 最终需要用户亲自做私有文件上传、授权或产品选择，Critic 仍先生成 Planner prompt，由 Planner 按角色合同把真正的 user-only action 缩成最小请求；不得因此把其余 repo 定位、finding 解释和 prompt 组装工作甩给用户。
 
 ## 7. Planner 可以反驳，但不能自我放行
 
