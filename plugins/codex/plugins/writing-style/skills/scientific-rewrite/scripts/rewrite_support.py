@@ -166,6 +166,14 @@ SOURCE_PROCESS_ALLOWED_CONTEXT_PATTERNS = [
     r"溯源",
     r"审计",
 ]
+RAW_CITATION_MARKUP_PATTERNS = [
+    ("wiki_citation_template", r"\{\{\s*(?:sfn|sfnp|harvtxt|cite(?:[_\s|]|$)|citation(?:[_\s|]|$))[^{}\n]*(?:\{\{[^{}\n]*\}\}[^{}\n]*)*\}\}"),
+    ("html_reference_tag", r"<ref\b[\s\S]*?</ref\s*>|<references\s*/?>"),
+]
+FORMULA_RENDERING_PATTERNS = [
+    ("inline_code_big_o", r"`[^`\n]*\bO\s*\([^`\n]*`"),
+    ("plain_text_big_o_log", r"\bO\s*\([^)\n]*\blog\b[^)\n]*\)"),
+]
 
 
 class ValidationError(RuntimeError):
@@ -261,6 +269,13 @@ def _strip_code_spans(text: str) -> str:
     return re.sub(r"`[^`\n]*`", "", text)
 
 
+def _strip_markdown_math(text: str) -> str:
+    text = re.sub(r"\$\$[\s\S]*?\$\$", "", text)
+    text = re.sub(r"\$[^$\n]+\$", "", text)
+    text = re.sub(r"\\\[[\s\S]*?\\\]", "", text)
+    return re.sub(r"\\\([\s\S]*?\\\)", "", text)
+
+
 def find_source_process_framing(text: str, *, task_context: str = "") -> list[dict[str, str]]:
     if any(re.search(pattern, task_context, flags=re.IGNORECASE) for pattern in SOURCE_PROCESS_ALLOWED_CONTEXT_PATTERNS):
         return []
@@ -279,6 +294,46 @@ def validate_standalone_reader_frame(candidate: str, *, task_context: str = "") 
         kinds = ", ".join(finding["kind"] for finding in findings)
         raise ValidationError("reader-facing source-process framing: " + kinds)
     return {"ok": True, "source_process_frame_count": 0}
+
+
+def find_raw_citation_markup(text: str, *, task_context: str = "") -> list[dict[str, str]]:
+    if any(re.search(pattern, task_context, flags=re.IGNORECASE) for pattern in SOURCE_PROCESS_ALLOWED_CONTEXT_PATTERNS):
+        return []
+    body = _strip_code_spans(text)
+    findings = []
+    for name, pattern in RAW_CITATION_MARKUP_PATTERNS:
+        match = re.search(pattern, body, flags=re.IGNORECASE)
+        if match:
+            findings.append({"kind": name, "literal": match.group(0)})
+    return findings
+
+
+def validate_reader_facing_citation_markup(candidate: str, *, task_context: str = "") -> dict[str, Any]:
+    findings = find_raw_citation_markup(candidate, task_context=task_context)
+    if findings:
+        kinds = ", ".join(finding["kind"] for finding in findings)
+        raise ValidationError("reader-facing raw citation markup: " + kinds)
+    return {"ok": True, "raw_citation_markup_count": 0}
+
+
+def find_formula_rendering_issues(text: str) -> list[dict[str, str]]:
+    findings = []
+    inline_code = re.search(FORMULA_RENDERING_PATTERNS[0][1], text)
+    if inline_code:
+        findings.append({"kind": FORMULA_RENDERING_PATTERNS[0][0], "literal": inline_code.group(0)})
+    body = _strip_code_spans(_strip_markdown_math(text))
+    plain_big_o = re.search(FORMULA_RENDERING_PATTERNS[1][1], body)
+    if plain_big_o:
+        findings.append({"kind": FORMULA_RENDERING_PATTERNS[1][0], "literal": plain_big_o.group(0)})
+    return findings
+
+
+def validate_reader_facing_formula_rendering(candidate: str) -> dict[str, Any]:
+    findings = find_formula_rendering_issues(candidate)
+    if findings:
+        kinds = ", ".join(finding["kind"] for finding in findings)
+        raise ValidationError("reader-facing formula rendering issue: " + kinds)
+    return {"ok": True, "formula_rendering_issue_count": 0}
 
 
 def classify_writing_style_route(prompt: str, source: str) -> dict[str, Any]:
@@ -786,6 +841,8 @@ def validate_stage_package(
     exact_result = verify_exact_items(final_candidate, reader_facing_exact_items(meaning_map, reader_plan))
     reader_frame_result = validate_reader_facing_internal_frame(final_candidate)
     standalone_frame_result = validate_standalone_reader_frame(final_candidate, task_context=prompt or "")
+    citation_markup_result = validate_reader_facing_citation_markup(final_candidate, task_context=prompt or "")
+    formula_rendering_result = validate_reader_facing_formula_rendering(final_candidate)
     receipt = {
         "schema": RUNTIME_SCHEMA,
         "runtime": RUNTIME_NAME,
@@ -810,6 +867,8 @@ def validate_stage_package(
         "exact_verification": exact_result,
         "reader_facing_internal_frame": reader_frame_result,
         "standalone_reader_frame": standalone_frame_result,
+        "reader_facing_citation_markup": citation_markup_result,
+        "reader_facing_formula_rendering": formula_rendering_result,
     }
     if receipt_path is not None:
         write_json(receipt_path, receipt)

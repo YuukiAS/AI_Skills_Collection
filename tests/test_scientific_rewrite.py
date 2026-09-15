@@ -706,6 +706,48 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
             with self.assertRaisesRegex(helper.ValidationError, "source-process framing"):
                 helper.validate_stage_package(source, stage_dir, prompt=prompt)
 
+    def test_raw_citation_markup_fails_reader_candidate(self) -> None:
+        candidate = (
+            "布隆过滤器由 Burton Howard Bloom 于 1970 年提出。{{sfnp|Bloom|1970}}"
+            "独立性可放宽。<ref>{{harvtxt|Dillinger|Manolios|2004a}}</ref>"
+        )
+
+        with self.assertRaisesRegex(helper.ValidationError, "raw citation markup"):
+            helper.validate_reader_facing_citation_markup(candidate)
+
+    def test_formula_like_big_o_must_not_be_inline_code_or_plain_log(self) -> None:
+        inline_code = "FFT 把复杂度从 `O(N^2)` 降到 `O(N log N)`。"
+        plain_text = "FFT 把复杂度从 O(N^2) 降到 O(N log N)。"
+        latex = "FFT 把复杂度从 $O(N^2)$ 降到 $O(N \\log N)$。"
+
+        with self.assertRaisesRegex(helper.ValidationError, "formula rendering issue"):
+            helper.validate_reader_facing_formula_rendering(inline_code)
+        with self.assertRaisesRegex(helper.ValidationError, "formula rendering issue"):
+            helper.validate_reader_facing_formula_rendering(plain_text)
+        self.assertTrue(helper.validate_reader_facing_formula_rendering(latex)["ok"])
+
+    def test_stage_validation_rejects_raw_citation_markup_and_inline_big_o(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            source, stage_dir, _ = build_valid_stage(Path(tmp))
+            prompt = (Path(tmp) / "prompt.md").read_text(encoding="utf-8").strip()
+
+            citation_candidate = (
+                (stage_dir / "final_candidate.md").read_text(encoding="utf-8")
+                + "\n布隆过滤器由 Bloom 提出。{{sfnp|Bloom|1970}}"
+            )
+            (stage_dir / "final_candidate.md").write_text(citation_candidate + "\n", encoding="utf-8")
+            with self.assertRaisesRegex(helper.ValidationError, "raw citation markup"):
+                helper.validate_stage_package(source, stage_dir, prompt=prompt)
+
+            math_candidate = (
+                (stage_dir / "final_candidate.md").read_text(encoding="utf-8")
+                .replace("{{sfnp|Bloom|1970}}", "[Bloom, 1970]")
+                + "\nFFT 把复杂度降到 `O(N log N)`。"
+            )
+            (stage_dir / "final_candidate.md").write_text(math_candidate + "\n", encoding="utf-8")
+            with self.assertRaisesRegex(helper.ValidationError, "formula rendering issue"):
+                helper.validate_stage_package(source, stage_dir, prompt=prompt)
+
     def test_structural_rewrite_allows_reordering_but_rejects_semantic_drift(self) -> None:
         protected = [
             "claim",
