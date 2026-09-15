@@ -163,6 +163,16 @@ persistent ledger. Valid disposition families are:
 - `DROP_IRRELEVANT_TRACE` for task, review, branch, commit, CI, cache, or
   workflow traces that only describe how a prior artifact was produced.
 
+Citation identity is not the same as raw citation markup. If the source comes
+from a wiki, scraped web page, exported Markdown, or HTML document, templates
+such as `{{sfnp|...}}`, `{{harvtxt|...}}`, `{{cite ...}}`, `<ref>...</ref>`,
+`<references/>`, and similar source-site citation syntax must be classified as
+wrapper syntax unless the user explicitly asks for source markup preservation.
+Keep the cited authors, years, titles, or source note when they support a
+reader-facing claim, but realize them as normal prose, a bracketed citation, or
+a short references/source-note section. Do not emit the raw template or tag in a
+standalone candidate.
+
 `SOURCE_FUTURE_WORK` must carry modality information: who owns the future work,
 whether it is done or proposed, its temporal status, and its epistemic status.
 Do not turn source-author plans or limitations into current Executor actions or
@@ -252,6 +262,13 @@ names, datasets, metrics, packages, APIs, and user-explicit protected spans.
 Ordinary reasoning, comparison, qualification, and transition language remains
 eligible for natural Chinese realization.
 
+For citations, exact preservation protects citation identity and attribution,
+not source-platform syntax. Wiki templates, HTML reference tags, scraped
+footnote wrappers, and citation parser artifacts are not reader-facing exact
+items. Convert them to readable citation wording or a compact reference/source
+note, or omit them when the Reader Plan classifies them only as wrapper
+metadata.
+
 ## Reader-Facing Relevance Filter
 
 Do not treat repository workflow metadata as reader-facing scientific meaning
@@ -293,6 +310,9 @@ asks for an audit log or repository handoff:
 - webpage/export wrappers such as language-link counts, archive ids,
   alternate-language labels, navigation labels, or scraped UI noise when they do
   not help a standalone reader understand the technical content.
+- raw citation wrappers from source platforms, including wiki templates and HTML
+  reference tags, unless the user explicitly requested markup/source comparison.
+  Preserve the citation's useful identity, not the platform syntax.
 
 If the source mixes a scientific report with workflow/audit metadata, use the
 metadata only to avoid false claims and to understand artifact authority. The
@@ -339,6 +359,10 @@ This route can claim process completion only when the stage package validates:
 - valid Reader Plan bundle ownership;
 - reader-facing exact items preserved;
 - formulas are renderable math, not fenced `text` or code blocks;
+- citations are reader-facing citation text, bibliography/source notes, or
+  intentional omissions according to the Reader Plan; raw wiki/HTML citation
+  markup such as `{{...}}`, `<ref>...</ref>`, and `<references/>` is absent from
+  standalone candidates unless explicitly requested by the user;
 - reader-facing candidate has no internal workflow / CI / commit / task-path
   leakage;
 - standalone reader-facing candidate has no source-process framing such as

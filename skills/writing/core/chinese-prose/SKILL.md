@@ -84,6 +84,12 @@ fenced code block、`text` block、quote block 或 token 清单；这种输出�
 - `PARALLEL_TO_STRUCTURE`：把并列条件、方法或结果改成清楚列表/表格；
 - `REMOVE_INTERNAL_FRAME`：去掉 reader-facing 正文里不该出现的审计、流程和任务标签。
 
+如果 Meaning Map / Reader Plan 保留了引用或来源身份，`REALIZE_MEANING`
+必须把它写成读者能理解的引用、出处说明或简短参考项；不得把 wiki / HTML /
+导出 Markdown 的源站语法原样写进最终正文。`{{sfnp|...}}`、`{{harvtxt|...}}`、
+`{{cite ...}}`、`<ref>...</ref>`、`<references/>` 这类模板和标签属于来源包装，
+不是中文成稿的引用表达。除非用户明确要求保留源代码式标记，否则候选稿里不能出现。
+
 当 `scientific-rewrite` 已经生成 Reader Plan 时，本 skill 的终审只读取最终候选稿和 Reader Plan，不回看源文档改写正文。终审必须确认：候选稿是否回答 Reader Plan 里的读者问题；英文残留是否分别属于精确身份、必要识别名或应该中文化的普通推理词；公式是否有中文语义说明；证据边界和不确定性是否仍在读者主线里。发现问题时返回需要返修的原因，不能用“整体更流畅”覆盖缺项。
 
 除非用户明确要求，否则不要改动以下内容：
@@ -114,6 +120,9 @@ fenced code block、`text` block、quote block 或 token 清单；这种输出�
   `exports/private/`、`automation/reviewed_handoff/`、`.local-runtime/` 或
   `CURRENT.json` / `RESULT.md` / `FINAL_REPORT.md` 当作读者正文，而不是只在
   明确要求的审计/交接附录中出现。
+- 科研/技术重写候选稿把 `{{...}}` wiki 模板、`<ref>...</ref>`、
+  `<references/>`、HTML 标签或导出引用标记当作正文引用，而不是转成正常
+  中文引用、出处说明或参考项。
 
 如果触发的是中文成稿验收，第一段必须先给人能读懂的判断；证据路径、命令、字段、日志和机器状态放在后面的证据区或括号说明。
 
