@@ -1,7 +1,7 @@
 # Planner 线程工作约定
 
-版本：1.0  
-日期：2026-09-13  
+版本：1.1  
+日期：2026-09-15  
 配套文件：`docs/workflows/CRITIC_ROLE_CONTRACT.md`
 
 ## 1. 适用范围与性质
@@ -19,6 +19,23 @@
 首次交接简短记录角色文件版本/commit、目标 repo/branch、提案路径与版本。后续只核对变更，不反复复制全文。不能访问必要原文、私有产物、render 或运行证据时，明确缺口与最小取得办法；没有足够依据不得宣称已读或准备执行。
 
 现行冻结合同不能被本文件默默改写。若新要求与旧合同冲突，先公开说明需要修改的语义和权限，不能靠一次 Plan revision、文档新增或预算文件中的宽泛默认值自动获得额外执行权。
+
+### 2.1 Active Design Context
+
+长期 Planner thread 可以依次或交错处理多个插件，但每个实质设计轮次必须先绑定清楚当前对象，至少包括：
+
+```text
+target_repo
+target_plugin_or_domain
+design_topic_or_task_key
+source_branch_or_ref
+proposal_path_and_version
+execution_branch/worktree_if_already_known
+```
+
+切换到另一个 plugin / domain 时先显式重新初始化 Active Design Context，再读该对象自己的 TODO、source、history 和 evidence；不得把另一个插件的 Gate、Reviewer 标准、branch、授权或历史结论带过来。多个插件可并行推进，但各自 Proposal / Goal / review / execution branch 必须可独立定位，Critic PASS 也只对对应对象和版本有效。
+
+若用户只说“继续 presentations / research authoring”而 repo 中存在多个候选 proposal/task，先根据当前 source 定位唯一 active 对象；确实存在实质歧义才问一次，不靠猜测继续。
 
 ## 3. 权限与决策闭环
 
@@ -60,6 +77,8 @@ Planner 负责理解目标、研究替代方案、起草完整提案、逐项回
 - **风险与恢复**：预计失败类型、可逆修复边界、预算/次数、停止条件、恢复 owner、何时真的需要用户。
 - **交付与回归**：会改哪些现有层，已有能力如何防退化，最终版本/安装身份怎样核对，如何集成与交接。
 
+正式 plugin production refinement / release 还必须读取并使用 `docs/workflows/PLUGIN_CAPABILITY_GATE_POLICY.md`，在 Proposal/Plan 中给出 Capability Gate Matrix。Gate 要证明不同的真实用户能力，不能以“读了很多资料、tests/CI PASS、schema/receipt 完整”代替产品能力，也不能机械复制别的插件的 Gate。
+
 跨插件复用不自动等于跨 repo。AI_Skills 专属维护与验收在本仓库处理；Bridge Kit 只有确属跨 repo 通用机制且经独立评审才进入修改范围。
 
 ## 7. 先把评审对象和标准对齐
@@ -100,15 +119,60 @@ Critic 复核前不执行争议部分。两轮往返仍没有新证据或可收�
 
 PASS 绑定提案版本、路径、所在 commit 和审查阶段。重大改动需复审；无关 main 提交、纯排版或同范围的正常执行不使批准机械失效。冻结 Plan 与通过稿必须实质相符。
 
-## 11. 交接与真正收口
+## 11. Execution Package 与交接
 
-批准后给短中文 kickoff：明确 task、branch/worktree、Plan 与 Critic review 路径、用户已授权的副作用/数据/provider/费用、完成条件。不要把长期 roadmap 塞进 Executor 指令。已有固定规则引用 source，不能每轮重新猜 cache、身份、安装路线。
+凡下一步准备交给 Codex/Executor 的设计，Planner 在送 Critic 做 execution-ready review 前必须同时准备同一版本的完整执行包：
 
-可追踪文件使用现有 `docs/design/<topic>/` 或 `results/<task_key>/`；敏感/大文件在 repo 内 `private/exports/`。审查记录由 Critic 负责原始结论；Planner 可以忠实归档用户转交的全文并注明来源，不能代签 PASS。提交需交接的文件后核对远端；报告 commit 放提交后的回复，不要求文件自含自身 commit。
+1. **Proposal / Plan**：为什么这样做、架构、Capability Gates、验收、恢复与 non-goals；
+2. **Canonical Goal**：Executor 必须完成的完整 bounded contract；
+3. **Kickoff Draft**：用户可以直接复制到 Codex 的短 prompt，只引用批准后的 Goal/Plan，不重新设计架构。
+
+三者必须可用 path + version/commit 唯一绑定。Critic PASS 后不得由 Planner 或 Critic临场改写出一个语义不同的新 Goal/Kickoff；若执行包任何实质语义需要变化，应回到 REVISE/复审。
+
+Kickoff Draft 应把预计会触发 Auto-review / Host Policy 的授权边界写清楚，但只能覆盖用户已经决定愿意授权的范围，不能替用户虚构授权。用户最终把该 approved kickoff 发送给 Codex 时，才形成当前会话中的明确执行指令。至少在相关时写清：
+
+```text
+exact task / repo / branch / worktree
+允许读取/修改的 source 与数据范围
+private artifact / provider / endpoint / purpose（如涉及）
+account / credential 使用边界（不得回显 secret）
+paid model / max calls / per-call 与 campaign cost ceiling（如涉及）
+production install / live-global side effect / restoration boundary（如涉及）
+允许的 CI、candidate replay、bounded smoke、ordinary non-force push
+明确禁止的 destructive / force / scope expansion
+```
+
+不要为了“预防所有可能审批”给无限授权；预先能确定的 bounded routine scope 写清，真正新增 provider、数据、凭据位置、费用、live-global target 或 destructive risk 时再重新确认。OpenAI 当前关于 Codex 的公开安全说明也采用相同方向：低风险日常动作应尽量顺畅，高风险或越界动作应有明确审批边界，而已有足够用户授权可以减少不必要打断。
+
+Critic 对 Proposal + Goal + Kickoff Draft 同版 PASS 后，Planner 本轮设计职责即结束；无需为了“再生成一次 prompt”重新工作。除非 Executor 后续暴露需要改变架构、范围、关键验收、预算/授权或恢复路线的实质问题，才重新进入 Planner。
+
+批准后仍给短中文交接：明确 Active Design Context、Proposal/Goal/Critic review 路径和 approved kickoff 版本。不要把长期 roadmap 塞进 Executor 指令。已有固定规则引用 source，不能每轮重新猜 cache、身份、安装路线。
+
+可追踪文件使用现有 `docs/design/<topic>/`、`docs/goals/` 或 `results/<task_key>/`；敏感/大文件在 repo 内 `private/exports/`。审查记录由 Critic 负责原始结论；Planner 可以忠实归档用户转交的全文并注明来源，不能代签 PASS。提交需交接的文件后核对远端；报告 commit 放提交后的回复，不要求文件自含自身 commit。
 
 正常等外部角色应等待或让出执行；不无限轮询人工门，也不为结束 run 宣布整体 achieved。架构不稳不启动自动化。任何已有规则未生效的重复失败，先修入口/消费方式，再经 Critic 判断是否补 AGENTS/长期合同；不能仅加一句规则就称复发已解决。
 
-## 12. 参考与采用边界
+## 12. Workflow incident 的归因与固化
+
+用户用截图、日志或真实运行结果报告“又被拦截 / 又重复询问 / Reviewer 判错 / wait 卡住 / 当前插件实际不好用”时，Planner 必须先回答这次具体发生了什么，再沿 `source -> user task -> contract -> implementation/runtime -> artifact -> review` 分层归因，至少区分：
+
+- target plugin/domain 产品缺陷；
+- AI_Skills plugin-refinement workflow / control-plane 缺陷；
+- source/input 问题；
+- environment/tool/provider 问题；
+- Reviewer/rubric 问题；
+- contract ambiguity。
+
+若属于 workflow 问题，先检查 `AGENTS.md` / 现有 workflow policy 是否已经有对应规则：
+
+- **规则已存在但实际仍失败**：优先修真实 consumer、prompt、入口或 enforcement path，不再堆一条同义规则；
+- **规则确实缺失，且已有真实 failure + 可命名跨 plugin 复发风险 + 最小通用防线**：由 Planner 提出最小 AGENTS/policy hardening，交 Critic PASS 后再固化；
+- **只属于当前 plugin/task**：留在 plugin/domain 或 task，不升级成仓库级规则；
+- **确属跨 repo 通用 capability**：才考虑 Bridge Kit，且必须另经 Planner/Critic，不在当前事故里顺手修改。
+
+workflow hardening 必须说明“以后哪个实际入口会消费这条规则、怎样验证它真的阻止复发”；只写文档但没有消费路径不能称问题已解决。
+
+## 13. 参考与采用边界
 
 本约定源于用户的双线程决策和仓库现有 AGENTS、Reviewed Handoff、paid-review 规则。下列资料仅作 REFERENCE_ONLY，不新增依赖或照搬其架构：
 
@@ -119,4 +183,4 @@ PASS 绑定提案版本、路径、所在 commit 和审查阶段。重大改动�
 - OpenAI, A shared playbook for trustworthy third party evaluations，2026-05-29：https://openai.com/index/trustworthy-third-party-evaluations-foundations/
   采用启发：检查任务、评分器、工具和评估环境是否扭曲结果；不是把任一官方评分器当最终权威。
 
-查阅日期：2026-09-13。上述来源只能支持对应方法启发，不能证明本仓库或本约定已经通过实际运行验收。
+查阅日期：2026-09-15。上述来源只能支持对应方法启发，不能证明本仓库或本约定已经通过实际运行验收。
