@@ -10,6 +10,7 @@ import json
 import os
 import platform
 import shutil
+import signal
 import stat
 import subprocess
 import sys
@@ -32,6 +33,8 @@ ASSET_SHA256 = "a822187e1a2420c61c5926721bfbd878701ed95547c9bb0d4de4498a16ba1821
 MARKETPLACE_NAME = "ai-skills-candidate"
 CANDIDATE_NAMESPACE_SUFFIX = f"@{MARKETPLACE_NAME}"
 MARKETPLACE_JSON = ".agents/plugins/marketplace.json"
+DEFAULT_CHILD_TIMEOUT_SECONDS = 30 * 60
+DEFAULT_CHILD_TERMINATE_GRACE_SECONDS = 10
 
 
 class ReplayError(RuntimeError):
@@ -613,29 +616,78 @@ def run_child_exec(
     workspace: Path,
     output_dir: Path,
     prompt: str,
+    *,
+    stdout_path: Path,
+    stderr_path: Path,
+    timeout_seconds: float = DEFAULT_CHILD_TIMEOUT_SECONDS,
+    terminate_grace_seconds: float = DEFAULT_CHILD_TERMINATE_GRACE_SECONDS,
 ) -> CommandResult:
-    return run_command(
-        [
-            str(codex),
-            "exec",
-            "--ignore-user-config",
-            "--json",
-            *codex_config_args(marketplace_root),
-            "-c",
-            f"plugins.{plugin_id}.enabled=true",
-            "-s",
-            "workspace-write",
-            "-C",
-            str(workspace),
-            "--add-dir",
-            str(output_dir),
-            "--skip-git-repo-check",
-            "--ephemeral",
-            "-",
-        ],
-        input_text=prompt,
-        check=False,
-    )
+    args = [
+        str(codex),
+        "exec",
+        "--ignore-user-config",
+        "--json",
+        *codex_config_args(marketplace_root),
+        "-c",
+        f"plugins.{plugin_id}.enabled=true",
+        "-s",
+        "workspace-write",
+        "-C",
+        str(workspace),
+        "--add-dir",
+        str(output_dir),
+        "--skip-git-repo-check",
+        "--ephemeral",
+        "-",
+    ]
+    stdout_path.parent.mkdir(parents=True, exist_ok=True)
+    stderr_path.parent.mkdir(parents=True, exist_ok=True)
+    start_new_session = os.name == "posix"
+    with stdout_path.open("w", encoding="utf-8") as stdout_fh:
+        with stderr_path.open("w", encoding="utf-8") as stderr_fh:
+            proc = subprocess.Popen(
+                args,
+                cwd=None,
+                stdin=subprocess.PIPE,
+                stdout=stdout_fh,
+                stderr=stderr_fh,
+                text=True,
+                start_new_session=start_new_session,
+            )
+            try:
+                proc.communicate(input=prompt, timeout=timeout_seconds)
+            except subprocess.TimeoutExpired as exc:
+                terminate_child_tree(proc, start_new_session, terminate_grace_seconds)
+                raise ReplayError(
+                    f"candidate child exec timed out after {timeout_seconds:g}s; "
+                    f"stdout/stderr were preserved under {stdout_path.parent}"
+                ) from exc
+    stdout = stdout_path.read_text(encoding="utf-8")
+    stderr = stderr_path.read_text(encoding="utf-8")
+    return CommandResult(tuple(args), proc.returncode, stdout, stderr)
+
+
+def terminate_child_tree(proc: subprocess.Popen[str], use_process_group: bool, grace_seconds: float) -> None:
+    if proc.poll() is not None:
+        return
+    if use_process_group:
+        with contextlib.suppress(ProcessLookupError):
+            os.killpg(proc.pid, signal.SIGTERM)
+    else:
+        with contextlib.suppress(ProcessLookupError):
+            proc.terminate()
+    try:
+        proc.wait(timeout=grace_seconds)
+        return
+    except subprocess.TimeoutExpired:
+        pass
+    if use_process_group:
+        with contextlib.suppress(ProcessLookupError):
+            os.killpg(proc.pid, signal.SIGKILL)
+    else:
+        with contextlib.suppress(ProcessLookupError):
+            proc.kill()
+    proc.wait()
 
 
 def run_replay(root: Path, plugin: str, candidate_commit: str, task_arg: str, input_args: list[str]) -> dict[str, Any]:
@@ -663,11 +715,22 @@ def run_replay(root: Path, plugin: str, candidate_commit: str, task_arg: str, in
                     encoding="utf-8",
                 )
                 workspace, output_dir, prompt = prepare_workspace(root, run_dir, task, inputs)
-                child = run_child_exec(paths.codex, marketplace_root, plugin_id, workspace, output_dir, prompt)
                 stdout_path = run_dir / "child.stdout.jsonl"
                 stderr_path = run_dir / "child.stderr"
-                stdout_path.write_text(child.stdout, encoding="utf-8")
-                stderr_path.write_text(child.stderr, encoding="utf-8")
+                child = run_child_exec(
+                    paths.codex,
+                    marketplace_root,
+                    plugin_id,
+                    workspace,
+                    output_dir,
+                    prompt,
+                    stdout_path=stdout_path,
+                    stderr_path=stderr_path,
+                )
+                if not stdout_path.exists():
+                    stdout_path.write_text(child.stdout, encoding="utf-8")
+                if not stderr_path.exists():
+                    stderr_path.write_text(child.stderr, encoding="utf-8")
                 evidence = parse_consumption(child.stdout, installed_path)
                 if child.returncode != 0:
                     raise ReplayError(f"candidate child exec failed ({child.returncode}): {child.stderr.strip()}")

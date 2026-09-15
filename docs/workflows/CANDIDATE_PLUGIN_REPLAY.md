@@ -46,6 +46,7 @@ The helper:
 - uses the reserved temporary `@ai-skills-candidate` namespace;
 - launches a fresh ephemeral `codex exec --ignore-user-config` child with the candidate enabled process-locally;
 - records `plugin-add.json`, child JSONL/stdout and stderr in the ignored run directory;
+- streams the long-running child stdout/stderr to those run-directory files while the child is still alive;
 - proves actual candidate consumption only from parsed `command_execution` JSON events that read `SKILL.md` under the candidate plugin cache path;
 - removes the temporary candidate in `finally` cleanup;
 - verifies the pre-existing same-name production plugin identity/enabled state is unchanged.
@@ -82,6 +83,15 @@ Classify before changing anything:
 - correct route is selected but domain receipt/mechanical validation fails -> target plugin implementation failure;
 - process/receipt passes but user artifact is poor -> PRODUCT / ARTIFACT failure, not harness success;
 - cleanup or production identity changes -> safety failure; stop immediately.
+
+The `codex exec` child has a conservative wall-clock timeout and, on POSIX,
+runs in its own process group so replay cleanup can terminate that child tree.
+This timeout is an infrastructure safety bound, not a product gate. If it fires,
+the helper preserves the current `child.stdout.jsonl` and `child.stderr`,
+cleans up the temporary candidate, and exits non-successfully. A partially
+written output file or a pre-timeout consumption event is still a replay
+failure; only normal child completion plus the existing consumption parser may
+produce a successful `run.json`.
 
 Do not keep expanding the helper after a real replay works. New state machines, runtime registries, generic health frameworks and Bridge-managed runtime selection are out of scope unless a later independent production failure proves they are necessary.
 
