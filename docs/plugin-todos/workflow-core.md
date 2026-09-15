@@ -24,24 +24,24 @@ promotion gate: apply to the next AI_Skills maintenance batch without creating a
 
 ### 普通产品开发的人工交互、真实交付与重复失败止损
 status: NEW
-source: 2026-09-14 用户对 Bobbio、Lucerna、Mica、SeminarArc 的跨项目反馈，以及附件 Lite Handoff Completion Discipline 初稿
-evidence: [完整修订提案与证据边界](../design/PRODUCT_DELIVERY_DISCIPLINE_V2_2026-09-14.md)；Lucerna `AGENTS.md` 的 Windows release interaction / matching regression 规则（读取 blob `3ecb67774716355856a7a62c1eea25f164a079ef`）；Mica `AGENTS.md` 的 focused-test / manual acceptance 规则（读取 blob `730bb886aa55639663a2f5b2ce735e549d42d593`）；[Frontend Design 既有真实反馈](web-development.md)。对话检索仅得到部分片段，不声称取得完整 thread 或完成现场产品复验。
-problem: 需要用户动作时不显式询问，明显可自检的问题却反复叫用户验收；以构建、模拟测试、局部截图和自审替代真实使用路径；每轮修复缺少准确回归，重复运行没有新增证据。部分仓库已有正确规则，仍需确认实际调用、候选构建和执行入口，不能先断言均由已加载的 workflow-core 导致。
-project-specific context: Lucerna 的关闭隐藏到托盘与真实额度、Bobbio 的 Windows/Zotero 边界、Mica 的真实 Edge 禁止动作、SeminarArc 的模拟器与设备限制都留在项目内；不把具体 UI 或账户权限变成通用规则。
+source: 2026-09-13 to 2026-09-15 official ChatGPT Data Export audit covering Mica, Bobbio, Lucerna, Asteria plus secondary projects; supersedes the earlier partial-thread evidence basis without claiming the automatic incident classifier is itself ground truth
+evidence: [Planner v3 evidence review and ownership proposal](../design/PRODUCT_DELIVERY_DISCIPLINE_V3_PROPOSAL_2026-09-15.md)；private local export audit parsed all 27 `conversations-*.json` shards with 0 parse failures and produced curated high-signal project threads. Planner manual review found that the automatic 173-incident labels overcounted/misclassified normal status output, so raw frequency is not used as promotion evidence. High-confidence failures instead come from full-context Mica repeated live retries after green synthetic/E2E gates, Bobbio whole-screen/Figma drift, Lucerna close/refresh regressions despite existing acceptance rules, and Asteria obvious connector/render defects reaching late review.
+problem: 需要用户动作时不显式询问，明显可自检的问题却反复叫用户验收；以构建、模拟测试、局部截图或自审字段替代真实使用路径；每轮修复缺少 faithful exact regression；同类失败无新信息仍继续重跑；已有规则存在时也可能因为没有实际加载/消费而继续失败。
+project-specific context: Lucerna 的 close/hide-to-tray 与 provider semantics、Bobbio 的 Zotero/Windows/Figma 文件、Mica 的 authenticated ChatGPT DOM 与 Atlas、Asteria 的具体箭头/卡片视觉语法都留在项目或领域 owner；不把具体 UI 造型和账户/设备限制写成通用 workflow rule。
 
-维护者处理要求（尚未实施）：
+维护者处理要求（尚未实施，须经独立 Critic 审核）：
 
-- 先检查 active `codex-workflow-protocol`、verification / live-state references、Lite 模板及项目已有规则；已有非完成/证据规则按执行回归处理，不再增加同义口号。通用工作流负责何时要求专业证据，不接管专业设计判断。
-- 只缺用户动作时，通过实际可用的交互通道发出最小明确请求，保存恢复点；无专用输入工具就可见消息暂停依赖步骤。不得静默轮询用户，也不得复问同范围已获授权。不能把 repo 计划当作新的操作授权。
-- 当前 active skill 的 `blocked` 允许表示缺外部条件/用户决定，与初稿“绝不能 BLOCKED”存在语义差别。先统一行为并映射现有状态，禁止自行增加状态/schema 或使现有 validator 失配。
-- 为新增功能、行为变化和 bug 修复要求同批针对性测试；旧失败回放需忠实，间歇故障采用适当证据，不危险回退真实系统。自动化测试与原生/真实服务证据互补，不能相互冒充。
-- 诊断请求与最终验收分开；再次请用户试之前必须出现新增故障证据、修复依据和针对性回归。用户已要求止损时，不再启动真人测试循环。
-- 同类失败复现或无信息重跑时先核对候选版本、故障假设、fixture 忠实性和规则是否实际加载；复用现有有限尝试预算，停止失败路线而非无理由冻结所有独立工作。
-- 交付要核对原目标、对应环境/版本、完整使用路径、关联既有行为、真实数据、设计质量和剩余条件；不能增加原任务未要求的付费审阅、真人验收或全仓检查。
-- Lite/AGENTS 保留不依赖插件加载的短底线；完整流程由 Verified Workflow 按需提供。工具真的无法提供交互/恢复或模板分发有缺陷时归 Bridge Kit；不在此复制运行时、审批或 watcher。
-- 设计完整性、Figma 往返和整屏质量继续由 Frontend Design 既有 TODO 拥有，见 `web-development.md` 的 canonical design / design-to-code 条目；不在两处维护第二份设计规范。
+- 先检查 active `codex-workflow-protocol`、verification/live-state references、Lite 模板及项目已有规则；已有规则但真实输出仍失败时，按 execution/consumer regression 处理，不再增加同义口号。通用工作流负责何时要求专业证据，不接管专业设计判断。
+- 只缺用户动作时，通过实际可用的交互通道发出最小明确请求并保存恢复点；agent 能自行观察/测试的先自己完成。不得静默轮询用户，也不得复问同范围已获授权。Bridge Kit/host 已有 user-input 能力时先验证实际调用，而不是假定缺功能。
+- 为新增功能、行为变化和 bug 修复要求与风险匹配的 targeted validation；deterministic bug 尽量证明 old-bad/new-good，同一 live-only failure 则保留一次真实 failure capture 并构造 faithful replay。broad suite PASS 不能替代原投诉。
+- 区分 proxy/synthetic/browser/native/live evidence，claim scope 不得超过 evidence scope；candidate identity 变化后关键 gate 必须由当前 candidate 直接通过。
+- 诊断请求与最终验收分开。用户/外部 reviewer 再次看同一路径前，必须出现新的 root-cause hypothesis、repair 或 replay evidence；否则停止真人/full-suite循环。
+- 加入 repeated-failure circuit breaker：相同症状再次出现、同一检查无新信息重复失败、或用户再次拒绝同类结果时，先核对 candidate identity、fixture fidelity、规则是否实际加载与 failure attribution，不自动开下一轮 heavy test / Atlas / external review。
+- 每次修复保护 adjacent accepted behavior；真正互斥的新产品/科研选择才升级给用户，普通可逆实现细节由 Executor 自行处理。
+- 交付核对原始正向目标、对应环境/版本、完整使用路径、关联既有行为、真实数据与剩余条件；不能因为 tests/logs/process gate PASS 就写产品完成。
+- Lite/AGENTS 只保留不依赖 plugin 触发的短 baseline；完整流程由 Verified Workflow 按需提供。设计完整性、Figma 往返、整屏质量由 Frontend Design；科学图示语义由 Scientific Visualization；底层 prompt/wait/runtime 机制归 Bridge Kit。
 
-进入实施前的回放要求：从实际安装与触发入口证明缺用户动作会明确请求、同授权不复问、模拟通过不被写成原生通过、新功能和修复有匹配测试、无信息重复会止损。还须证明纯文档、只读诊断、正常 Lite 任务不会被升级成多角色/付费/全套真机验收。静态检查规则文本存在不是行为 PASS。项目原生/账户验证仍须单独获授权。
+进入实施前的 capability replay 要求见 v3 Proposal：必须从实际安装/触发入口证明 user-input ownership、faithful replay、repeat-failure stop、evidence-surface fidelity 和 should-not-change；同时证明纯 docs、只读诊断和非视觉 server task 不会被升级成 Figma/付费 review/全套 human QA。静态检查规则文本存在不是行为 PASS。
 
 ## Do not do
 
