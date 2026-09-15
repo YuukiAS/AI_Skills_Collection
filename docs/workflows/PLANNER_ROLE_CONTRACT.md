@@ -1,6 +1,6 @@
 # Planner 线程工作约定
 
-版本：1.2  
+版本：1.3  
 日期：2026-09-15  
 配套文件：`docs/workflows/CRITIC_ROLE_CONTRACT.md`
 
@@ -202,6 +202,34 @@ Critic 对 Proposal + Goal + Kickoff Draft 同版 PASS 后，Planner 本轮设�
 - **确属跨 repo 通用 capability**：才考虑 Bridge Kit，且必须另经 Planner/Critic，不在当前事故里顺手修改。
 
 workflow hardening 必须说明“以后哪个实际入口会消费这条规则、怎样验证它真的阻止复发”；只写文档但没有消费路径不能称问题已解决。
+
+### 12.1 Codex / Executor 运行中出问题时的默认路由
+
+用户把 Codex 的截图、错误、拦截、停止原因或提问交给长期线程时，**默认先给 Planner，而不是直接给 Critic**。Planner 先读取当前 frozen Goal/Plan、task/branch/CURRENT 与真实日志，判断这是已批准方案内的普通执行问题，还是已经触及需要重新设计/裁定的合同问题。
+
+按以下规则路由：
+
+1. **Executor 本可自行处理的普通实现失败**：例如已冻结范围内的测试失败、代码 bug、可逆文件/路径问题、同一已授权入口的 bounded retry。若 Codex 只是过早停下来问用户，Planner 直接给一个最小 `Codex resume/repair prompt`，要求按原 Goal 继续；不交 Critic，不扩大 scope。
+2. **环境/工具故障但合同不变**：例如暂时 CI、render、network、已授权 provider 的基础设施故障。Planner 先判断现有恢复路径；若属于 frozen recovery contract，直接给 Codex recovery/resume prompt；若恢复机制本身需要新设计，再转 Critic。
+3. **需要改变架构、scope、Capability Gate、acceptance/rubric、预算、provider/data/credential、授权边界、不可逆 side effect 或 recovery semantics**：Planner 必须形成明确 amendment/recovery proposal，交 Critic `PASS/REVISE`；Critic PASS 后按其 contract 输出 approved Codex prompt。
+4. **Reviewer/Terra finding、评分标准越权、source-vs-product 归因、contract ambiguity 等争议**：先由 Planner 做 failure attribution 和建议，不由 Codex自行决定；再交 Critic独立裁定。裁定如果不改变 frozen execution contract，可由 Critic/Planner按现有批准范围给 Codex resume prompt；若改变合同则走第 3 项。
+5. **真正需要用户本人动作**：例如新 private upload、新 provider/credential、费用扩大、产品偏好或高影响授权。Planner 只向用户提出最小必要动作；完成后自动附可直接给 Codex 的下一 prompt，不能让用户自己重新拼接上下文。
+
+Planner 每次处理 Codex incident 的回复结尾必须明确下一去向，不能只解释原因：
+
+- 若可直接继续 Codex：
+
+```text
+NEXT_HANDOFF=CODEX
+=== COPY TO CODEX BEGIN ===
+<结合当前 exact task/branch/Goal/error 自动生成的 bounded resume/repair prompt>
+=== COPY TO CODEX END ===
+```
+
+- 若需要 Critic：按 10.1 自动输出 `NEXT_HANDOFF=CRITIC` 与完整 Critic prompt。
+- 若需要用户动作：先写 `USER_ACTION_REQUIRED=<最小动作>`；完成该动作后仍应由 Planner生成下一角色 prompt，不让用户查 README/GitHub 自己组装。
+
+Critic 不是日常 Executor support desk。只有方案/合同/评审标准/关键恢复路径需要独立审查，或当前本来就在 Critic-owned pre-final/final gate 时才直接交 Critic。已批准范围内的普通修复不因增加 Critic 而变成逐条审批。
 
 ## 13. 参考与采用边界
 
