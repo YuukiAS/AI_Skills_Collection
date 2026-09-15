@@ -63,6 +63,12 @@ license: MIT-compatible synthesis plus public-domain style guidance
 - information shape；
 - optional structured repair instruction。
 
+公式和数学关系必须写成读者能渲染、能理解的数学表达。源材料里如果用
+plain text、wiki block 或 `text` fence 写公式，`REALIZE_MEANING` 要把它转成
+行内或展示 LaTeX 数学，并在附近说明符号含义。不要为了“逐字保留”把公式放进
+fenced code block、`text` block、quote block 或 token 清单；这种输出不是合格的
+读者正文。代码 fence 只用于真实代码、命令或配置。
+
 不得把以下内容作为写作输入交给本模式：raw source paragraph/sentence、source excerpt、source quotation、source tail/preview、Latin-span inventory、QA ledger、`exact_identity/useful_recognition/ordinary_reasoning` 分类、literal seed rewrite template、previous rejected candidate、manual GPT reference output。
 
 本模式可以做的中文实现操作包括：

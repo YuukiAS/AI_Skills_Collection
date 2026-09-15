@@ -184,6 +184,13 @@ It must not contain raw source paragraphs, source quotes, source excerpts,
 source tails/previews, old candidates, manual reference text, Latin-span
 inventories, seed rewrite templates, or self-audit ledgers as drafting input.
 
+Formula rendering is a production obligation, not a cosmetic choice. When a
+source formula is reader-facing, realize it as renderable Markdown/LaTeX math
+(`$...$` or `$$...$$`) with nearby Chinese explanation. Do not place formulas
+inside fenced code blocks, `text` fences, quote blocks, screenshots, or token
+inventories merely to preserve characters. A formula-like fenced block is a
+candidate-representation failure even when the literal symbols are present.
+
 The packet must explicitly preserve modality. It must tell the writer to keep
 completion status, subject/voice, temporal status, and epistemic status from the
 Meaning Map and Reader Plan. This is especially important for future work,
@@ -251,6 +258,12 @@ formula identities when they support the scientific/technical argument or
 reproducibility contract. For example, a source statement that an experiment
 uses `scripts/run_fedfisher.sh` and `configs/mm_fedfisher.yaml` may remain in a
 short reproducibility paragraph.
+
+Formula identity means preserving the mathematical relationship in reader-facing
+math, not preserving the source's plain-text container. If the source expresses
+DFT, loss functions, matrix equations, or complexity formulas in a plain-text or
+wiki-style block, convert the relationship to display math and explain the
+symbols. Use code fences only for real code, commands, or configuration.
 
 Reader-facing exact verification checks exact items required by meanings or
 Reader Plan bundles. Exact items that appear only inside excluded
@@ -320,6 +333,7 @@ This route can claim process completion only when the stage package validates:
 - explicit source-context exclusion for non-reader packaging metadata;
 - valid Reader Plan bundle ownership;
 - reader-facing exact items preserved;
+- formulas are renderable math, not fenced `text` or code blocks;
 - reader-facing candidate has no internal workflow / CI / commit / task-path
   leakage;
 - standalone reader-facing candidate has no source-process framing such as
