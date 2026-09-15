@@ -22,26 +22,36 @@ problem: an automation can become an endless synthetic recovery chain even after
 candidate action: require explicit real blocker / plugin TODO source for long-running refinement batches and stop the watcher when the batch is closed or user redirects to real workflow refinement.
 promotion gate: apply to the next AI_Skills maintenance batch without creating a second state machine.
 
-### 普通产品开发的人工交互、真实交付与重复失败止损
+### Review admission、持续用户提示与真实交付止损
 status: NEW
-source: 2026-09-13 to 2026-09-15 official ChatGPT Data Export audit covering Mica, Bobbio, Lucerna, Asteria plus secondary projects; supersedes the earlier partial-thread evidence basis without claiming the automatic incident classifier is itself ground truth
-evidence: [Planner v3 evidence review and ownership proposal](../design/PRODUCT_DELIVERY_DISCIPLINE_V3_PROPOSAL_2026-09-15.md)；private local export audit parsed all 27 `conversations-*.json` shards with 0 parse failures and produced curated high-signal project threads. Planner manual review found that the automatic 173-incident labels overcounted/misclassified normal status output, so raw frequency is not used as promotion evidence. High-confidence failures instead come from full-context Mica repeated live retries after green synthetic/E2E gates, Bobbio whole-screen/Figma drift, Lucerna close/refresh regressions despite existing acceptance rules, and Asteria obvious connector/render defects reaching late review.
-problem: 需要用户动作时不显式询问，明显可自检的问题却反复叫用户验收；以构建、模拟测试、局部截图或自审字段替代真实使用路径；每轮修复缺少 faithful exact regression；同类失败无新信息仍继续重跑；已有规则存在时也可能因为没有实际加载/消费而继续失败。
-project-specific context: Lucerna 的 close/hide-to-tray 与 provider semantics、Bobbio 的 Zotero/Windows/Figma 文件、Mica 的 authenticated ChatGPT DOM 与 Atlas、Asteria 的具体箭头/卡片视觉语法都留在项目或领域 owner；不把具体 UI 造型和账户/设备限制写成通用 workflow rule。
+source: 2026-09-13 to 2026-09-15 official ChatGPT Data Export audit covering Mica, Bobbio, Lucerna, Asteria plus secondary projects; strengthened by the 2026-09-15 Lucerna OpenAI Usage Monitor incident and the user's explicit correction separating pre-review completeness from persistent user prompts
+evidence: [Planner v5 proposal](../design/PRODUCT_DELIVERY_DISCIPLINE_V5_PROPOSAL_2026-09-15.md)；private local export audit parsed all 27 `conversations-*.json` shards with 0 parse failures and produced curated high-signal project threads. High-confidence evidence includes Mica repeated real-site failures after green synthetic/E2E gates, Bobbio whole-screen/Figma drift, Lucerna repeated UI/provider integration repairs after code/tests were presented as ready for the next user step, and Asteria obvious visual defects reaching late review. The automatic 173-incident classifier is not treated as ground truth.
+problem: 两类问题必须分开处理。第一，producer 没有先把自己能完成、测试、观察和修复的实现/设计/actual-surface问题彻底收口，就过早把 candidate 交给 GPT Work 或用户，形成 `做一点 -> 验收 -> 暴露明显问题 -> 返修 -> 再验收` 的高成本循环。第二，Goal 明知后续需要用户做一个不可替代动作时，prompt 可能只是普通消息/短暂提示，或等待被外层 runner 当成 timeout/BLOCKED；用户要求的是 pending 到明确回应的 persistent blocking prompt。
+project-specific context: Lucerna provider onboarding、Bobbio Zotero/Figma、Mica authenticated ChatGPT DOM、Asteria graph grammar 等只作为证据；通用 workflow 不编码具体 UI、provider、设备或视觉风格。
 
 维护者处理要求（尚未实施，须经独立 Critic 审核）：
 
-- 先检查 active `codex-workflow-protocol`、verification/live-state references、Lite 模板及项目已有规则；已有规则但真实输出仍失败时，按 execution/consumer regression 处理，不再增加同义口号。通用工作流负责何时要求专业证据，不接管专业设计判断。
-- 只缺用户动作时，通过实际可用的交互通道发出最小明确请求并保存恢复点；agent 能自行观察/测试的先自己完成。不得静默轮询用户，也不得复问同范围已获授权。Bridge Kit/host 已有 user-input 能力时先验证实际调用，而不是假定缺功能。
-- 为新增功能、行为变化和 bug 修复要求与风险匹配的 targeted validation；deterministic bug 尽量证明 old-bad/new-good，同一 live-only failure 则保留一次真实 failure capture 并构造 faithful replay。broad suite PASS 不能替代原投诉。
-- 区分 proxy/synthetic/browser/native/live evidence，claim scope 不得超过 evidence scope；candidate identity 变化后关键 gate 必须由当前 candidate 直接通过。
-- 诊断请求与最终验收分开。用户/外部 reviewer 再次看同一路径前，必须出现新的 root-cause hypothesis、repair 或 replay evidence；否则停止真人/full-suite循环。
-- 加入 repeated-failure circuit breaker：相同症状再次出现、同一检查无新信息重复失败、或用户再次拒绝同类结果时，先核对 candidate identity、fixture fidelity、规则是否实际加载与 failure attribution，不自动开下一轮 heavy test / Atlas / external review。
-- 每次修复保护 adjacent accepted behavior；真正互斥的新产品/科研选择才升级给用户，普通可逆实现细节由 Executor 自行处理。
-- 交付核对原始正向目标、对应环境/版本、完整使用路径、关联既有行为、真实数据与剩余条件；不能因为 tests/logs/process gate PASS 就写产品完成。
-- Lite/AGENTS 只保留不依赖 plugin 触发的短 baseline；完整流程由 Verified Workflow 按需提供。设计完整性、Figma 往返、整屏质量由 Frontend Design；科学图示语义由 Scientific Visualization；底层 prompt/wait/runtime 机制归 Bridge Kit。
+- **Pre-Human Readiness / Review Admission Gate**：在 GPT Work、外部 reviewer 或最终用户验收前，先完成 frozen scope 内所有 agent 自己能够完成的 implementation、targeted regression、known regression、actual-surface smoke、design/visual convergence、diagnostics 和 producer self-QA。禁止把半成品 checkpoint 当 review candidate，也禁止一 patch 一次 human/external acceptance。
+- **Human action 与 final acceptance 分离**：secret 输入、OAuth/OS 授权、网页登录、设备确认等可能在任务中途必须由用户执行，但只是 execution checkpoint，不代表进入产品验收。所有不依赖该动作的代码、错误处理、UI、状态机、测试和 diagnostics 应先完成；用户动作后 Executor 自动继续同一 Goal 的 integration closure。
+- **Foreseeable human gate 必须由 Goal 预声明**：写明 prompt trigger、最小 user action、reply、safety limit、resume point 和 post-action agent work。不要等运行到一半才临时决定要不要问用户。
+- **Persistent blocking prompt**：到达 human gate 后实际调用 host 的 request-user-input/prompt capability；pending until explicit response/cancel，依赖链暂停，不静默轮询，不用 ephemeral notification/普通进度消息冒充，不因等待时间自动转 terminal `BLOCKED`，用户回答后从保存位置继续。同范围已答复/已授权不重复问。
+- Bridge Kit/host 已启用 `default_mode_request_user_input`，但必须额外做真实 capability probe 证明 prompt persistence、no-expiry 和 runner wait semantics；规则文本存在不是行为证据。若 host 不支持，不在项目里临时造 polling/watchdog/state machine，回 Planner/Critic 判断最小 fallback。
+- **Exact failure + faithful targeted validation**：新功能、行为变化、bug fix 都有风险匹配验证；deterministic bug 尽量 old-bad/new-good，live/native 难自动化时保留真实 failure capture + faithful replay。broad suite PASS 不替代原用户路径。
+- **Evidence-surface fidelity**：unit/synthetic/browser/native/live/user evidence 各自只证明对应 surface；pre-human build 不能证明 post-human integration；旧 candidate PASS 不能拼给新 candidate。
+- **Producer self-QA before external/human review**：用户和 reviewer 用于最终判断/盲区，不作为第一轮 debugger、设计师或测试员。producer 能自己看到的 obvious defect 必须先清零。
+- **Repeat-failure circuit breaker / human-time budget**：相同症状再次出现、测试一直绿但真实路径再次失败、同一 reviewer/user 再次指出同类问题、或 active rule 再次被违反时，先核对 candidate identity、rule/plugin loading、failure hypothesis、fixture fidelity、evidence surface 和 root cause；没有新信息不得再次跑 full suite/Atlas/GPT Work/真人验收。
+- **Protect accepted behavior + adjacent consistency**：修共享 UI/state/runtime 时保护既有 accepted behavior；若改 shared component/icon/layout/motion family，检查同族主要实例，不能只修当前截图造成产品内部风格漂移。具体视觉标准归 Frontend Design。
+- 设计完整性、Figma 往返、图标来源、motion grammar、whole-screen quality 由 Frontend Design；科学图示语义由 Scientific Visualization；workflow-core 负责 gate、routing 和 completion semantics，不决定具体 icon/style。
+- final report 以“用户现在真正能做什么、是否达到原目标”为中心，不以 tests/logs/process state 数量为中心。
 
-进入实施前的 capability replay 要求见 v3 Proposal：必须从实际安装/触发入口证明 user-input ownership、faithful replay、repeat-failure stop、evidence-surface fidelity 和 should-not-change；同时证明纯 docs、只读诊断和非视觉 server task 不会被升级成 Figma/付费 review/全套 human QA。静态检查规则文本存在不是行为 PASS。
+进入实施前必须由同一 final candidate 通过至少以下能力 replay：
+
+1. 普通 feature task 在 agent-local implementation/test/actual-surface QA 未绿时不会进入 external/human review；
+2. 一个可预见 human-only action 在 Goal 中声明并触发 persistent blocking prompt，用户不回答时 workflow 保持 waiting 而非 timeout/BLOCKED；
+3. 用户回答后同一 Goal 自动继续，不把 human action 当 completion；
+4. 原失败由 faithful targeted validation 捕获，修复后通过；
+5. 相同真实失败第二次出现时无新信息不会再次调用 user/external reviewer；
+6. 一个 docs-only / server-only / simple task 不会被强制 Figma/GPT Work/全套 human QA。
 
 ## Do not do
 

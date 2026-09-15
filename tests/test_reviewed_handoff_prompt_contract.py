@@ -195,6 +195,41 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
 
         self.assertIn("不得把 wrapper label failure\n当成 writing-style product failure", scheduled)
 
+    def test_private_artifact_durability_before_worktree_cleanup(self) -> None:
+        agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        executor = (ROOT / "automation/reviewed_handoff/prompts/CODEX_EXECUTOR.md").read_text(encoding="utf-8")
+
+        for text in (agents, executor):
+            self.assertIn("Task-owned `/tmp` worktree", text)
+            self.assertIn("`private/exports/`", text)
+            self.assertIn("`.local-runtime/`", text)
+            self.assertIn("可清理工作副本", text)
+            self.assertIn("future-required artifact", text)
+            self.assertIn("durable copy", text)
+            self.assertIn("private/exports/<task_key>/...", text)
+            self.assertIn("durable locator", text)
+            self.assertIn("hash", text)
+            self.assertIn("唯一副本", text)
+            self.assertIn("scratch", text.lower())
+            self.assertIn("不要求", text)
+
+        self.assertIn("路径里含有\n`private/exports` 不自动代表", agents)
+        self.assertIn("后续 Critic / Reviewer 仍需读取", agents)
+        self.assertIn("successor 或\nknown regression 仍需复用", agents)
+        self.assertIn("后续 phase/gate 仍依赖", agents)
+        self.assertIn("final report / handoff 明确引用", agents)
+        self.assertIn("提升或复制到 durable", agents)
+
+        self.assertIn("worktree remove/prune", executor)
+        self.assertIn("task cleanup", executor)
+        self.assertIn("终止旧 worktree", executor)
+        self.assertIn("进入“不再需要\n当前 worktree”的最终 handoff 前", executor)
+        self.assertIn("先识别后续仍需要的 private artifact", executor)
+        self.assertIn("对关键文件记录 hash 和 durable locator", executor)
+        self.assertIn("不得删除唯一副本", executor)
+        self.assertIn("Scratch-only cache", executor)
+        self.assertIn("cleanup 只删除\n已确认不再需要的临时副本", executor)
+
     def test_review_pass_defaults_to_integration_closure_without_human_gate(self) -> None:
         agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
         planner = (ROOT / "automation/reviewed_handoff/prompts/PLANNER.md").read_text(encoding="utf-8")

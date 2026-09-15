@@ -415,6 +415,34 @@ reviewed/045_presentations_real_use_regression_hardening
 
 任何情况下都不得打印、commit、push、回显或要求用户粘贴 secret value。若正式路径使用 GitHub repository secrets，本地 shell 中对应环境变量 `unset` 不是 blocker。task 完成后应删除 task-local credential 副本和不再需要的 private plaintext 临时副本，但保留不含秘密的授权范围、artifact hash、provider/purpose 和删除结果作为 evidence。
 
+#### Durable private artifact storage
+
+Task-owned `/tmp` worktree、该 worktree 内部的 `private/exports/`，以及该
+worktree 的 `.local-runtime/` 默认都属于可清理工作副本。路径里含有
+`private/exports` 不自动代表它是可跨 worktree / task 持久保存的 artifact
+store。
+
+任何 private artifact 只要后续 Critic / Reviewer 仍需读取、successor 或
+known regression 仍需复用、后续 phase/gate 仍依赖、用户之后需要取得，或
+final report / handoff 明确引用，就必须在当前 worktree 被 remove、prune、
+cleanup 或停止维护前，保留一份 durable copy 到当前机器长期存在的
+AI_Skills_Collection checkout 下：
+
+```text
+private/exports/<task_key>/...
+```
+
+或用户明确指定的其他 durable repo-local path。`/tmp/.../private/exports/...`
+只能作为运行中 task working copy，不得成为上述 future-required artifact 的唯一副本。
+
+`.local-runtime/` 始终视为运行期临时目录；其中任何会被后续 gate、review 或
+handoff 引用的 artifact / evidence，必须在 cleanup 前提升或复制到 durable
+`private/exports/<task_key>/...`，并记录 durable locator 和关键文件 hash。
+
+本规则不要求永久保存所有 scratch、cache 或 intermediate。只持久化后续真实
+需要的 source、artifact、render、review bundle、evidence 或用户交付物；确认
+不再需要的临时副本仍可按原 cleanup 边界删除。
+
 #### Central-plugin replay / evaluation interaction policy
 
 1. **Resume / state refresh.** 任何 wait/resume、Scheduled GPT transition、
