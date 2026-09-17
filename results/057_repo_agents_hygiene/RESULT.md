@@ -6,7 +6,7 @@ This result supersedes the earlier failed candidate tuple while preserving it as
 immutable historical evidence:
 
 - AI_Skills E: `519c7da37979c8aa23aa98069c146b5cea1dd81c`
-- AI_Skills M: `0a719822f2535673443325f0799f3036228293f7`
+- AI_Skills M: `0a7198277dd9575010904f05b642deefffd00009`
 - Bridge: `a5c4fe61dc9ab0e228822e854ace5c7e50a4d967`
 - Bobbio: `dd977705a2cdfecaa2d4e09127ab4464ae898b32`
 - Lucerna: `41cd1297af6901531d3135593bc9806bffc38829`
