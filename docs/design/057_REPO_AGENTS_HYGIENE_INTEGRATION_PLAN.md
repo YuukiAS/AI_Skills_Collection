@@ -1,13 +1,37 @@
 # 057 Repo AGENTS Hygiene — Integration Plan
 
 - Task key: `057_repo_agents_hygiene`
-- Integration package version: `v0.1`
-- Stage: `AWAITING_INTEGRATION_CRITIC_REVIEW`
+- Integration package version: `v0.2`
+- Stage: `AWAITING_INTEGRATION_CRITIC_R2`
 - Reviewed evidence commit: `E3 = 745281b70322b8508e43e59a5bdef70529749ea5`
 - Reviewed manifest commit: `M3 = 24051588d13f07e7f71e0edf5a723aca36754ed5`
+- Prior integration package: `v0.1` at `0d84bf541800c1b0bc39d8f15c0a17f72905b1fd`, Critic `REVISE`
+- Stable integration blocker addressed here: `C057-G1-CLEAN-CANONICAL-WORKTREE-GATE`
 - Design / implementation authority remains the approved 057 v2 Plan/Goal and H1–H9. This plan only integrates the already-reviewed tuple.
 
-This plan does not authorize merge, release, tag, deployment, branch deletion, paid API, or Task 056 execution. Integration may begin only after independent Critic reviews this exact Plan + Goal + Kickoff and returns `READY_FOR_INTEGRATION_CODEX=YES`, and the user then sends the approved Kickoff.
+This plan does not authorize merge, release, tag, deployment, branch deletion, paid API, or Task 056 execution. Integration may begin only after independent Critic reviews this exact v0.2 Plan + Goal + Kickoff and returns `READY_FOR_INTEGRATION_CODEX=YES`, and the user then sends the approved Kickoff.
+
+## 0. Critic blocker disposition
+
+### C057-G1-CLEAN-CANONICAL-WORKTREE-GATE — ACCEPT
+
+The v0.1 merge strategy was directionally correct but did not make a clean canonical checkout/index an explicit precondition. v0.2 adds that gate without changing the integration architecture.
+
+Before any integration merge is attempted, every canonical checkout selected for integration must prove:
+
+- current branch/HEAD is the intended canonical branch;
+- no merge, rebase, cherry-pick, revert, bisect, or equivalent incomplete Git operation is active;
+- index has no pre-existing staged changes;
+- tracked working tree has no pre-existing unstaged changes;
+- untracked files do not collide with candidate paths, merge outputs, or checkout/merge targets.
+
+Use `git status --porcelain` or an equivalent observable status check and preserve the exact evidence in the Executor handoff.
+
+If unrelated dirty/staged user work is present, do not stash, reset, clean, commit, move, overwrite, or absorb it into the merge. Stop that repo and report the exact dirty state to Planner/Critic. This rule applies to both fast-forward and non-fast-forward integration cases and must be checked for all mutable repos before the first canonical push.
+
+For AI_Skills and Lucerna specifically, `git merge --no-ff --no-commit` is allowed only after this clean worktree/index gate passes. That gives `git merge --abort` a credible clean recovery base and prevents pre-existing staged changes from entering the mechanical merge commit.
+
+No new integration strategy, branch, state, gate number, or recovery subsystem is introduced.
 
 ## 1. Positive target
 
@@ -37,47 +61,73 @@ After integration:
 
 Historical E/M and previously revised tuples remain immutable history.
 
-## 3. Current canonical-branch reality at planning time
+## 3. Current canonical-branch reality frozen for this package
 
-Planner rechecked current canonical branches on 2026-09-17.
+Independent review of v0.1 already accepted the following facts; v0.2 does not reopen them:
 
-| Repo | Canonical head | Relation to reviewed candidate | Current integration form |
-| --- | --- | --- | --- |
-| AI_Skills_Collection | `c82f9a3c064d216b46738b4079347f3dde180f69` | diverged from M3; merge base `e8ba7515...`; current-main changes are outside `results/057_repo_agents_hygiene/` | clean history merge expected |
-| GPT_Codex_AI_Bridge_Kit | `cb77b1cc5a1fce097a38066d2db452291e359852` | candidate ahead by 2, behind by 0 | `--ff-only` |
-| Bobbio `develop` | `0811116ac7197590f0af773f3c6296d4ca41db80` | candidate ahead by 2, behind by 0 | `--ff-only` |
-| Lucerna | `852a4a8c8c67ba68ddd533b682eeb1460464140e` | diverged; merge base `760931ae...`; reviewed side changes only `AGENTS.md`, current-main post-base changes do not touch `AGENTS.md` | clean history merge expected |
-| Mica-for-ChatGPT | `aa4ce52581fff2e207d1f93600becbb3018b0efc` | candidate ahead by 2, behind by 0 | `--ff-only` |
-| Asteria | `166791c27752c70255043f026dcbda4deb693c04` | candidate ahead by 2, behind by 0 | `--ff-only` |
-| SeminarArc | `71c59d39f4d7e9cd3a3d813ad55d5cf6a38a4b11` | candidate ahead by 2, behind by 0 | `--ff-only` |
+| Repo | Canonical state at integration review | Integration form |
+| --- | --- | --- |
+| AI_Skills_Collection | canonical `main` has independent later history; M3 remains mechanically mergeable | `CLEAN_MERGE` |
+| GPT_Codex_AI_Bridge_Kit | exact reviewed candidate remains fast-forwardable | `FF_ONLY` |
+| Bobbio `develop` | exact reviewed candidate remains fast-forwardable | `FF_ONLY` |
+| Lucerna | canonical `main = 852a4a8c8c67ba68ddd533b682eeb1460464140e`; post-base changes do not modify candidate `AGENTS.md` | `CLEAN_MERGE` |
+| Mica-for-ChatGPT | exact reviewed candidate remains fast-forwardable | `FF_ONLY` |
+| Asteria | exact reviewed candidate remains fast-forwardable | `FF_ONLY` |
+| SeminarArc | exact reviewed candidate remains fast-forwardable | `FF_ONLY` |
 
-Thus current evidence supports a pure integration. AI_Skills and Lucerna require merge commits only because canonical history advanced independently; no manual content reconciliation is currently justified.
+All `reviewed/057_repo_agents_hygiene` branch heads were also independently confirmed to equal the frozen exact candidate SHAs. Execution must nevertheless fetch and re-check immediately before integration.
 
-Execution must re-fetch immediately before integration. These heads are evidence locators, not permission to ignore later drift.
+## 4. Unified preflight before the first canonical push
 
-## 4. Integration strategy
+Every mutable repo must pass the entire preflight before **any** canonical push occurs.
 
-### 4.1 Preflight all repositories before the first canonical push
+### 4.1 Source and reviewed identity
 
-For every mutable repo:
+For each repo:
 
-1. use existing canonical local checkout/worktree; do not create new task branches/worktrees;
-2. `git fetch origin` for canonical and `reviewed/057_repo_agents_hygiene` refs;
-3. verify `origin/reviewed/057_repo_agents_hygiene` resolves to the exact reviewed candidate SHA for that repo; AI_Skills reviewed branch must resolve to M3;
-4. verify canonical remote head and inspect any advancement since this package;
-5. compare merge base and changed paths.
+1. use the existing canonical local checkout/worktree; do not create new task branches/worktrees;
+2. fetch canonical and `reviewed/057_repo_agents_hygiene` refs;
+3. verify `origin/reviewed/057_repo_agents_hygiene` resolves to the exact reviewed candidate SHA; AI_Skills reviewed branch must resolve to M3;
+4. verify current canonical remote head, merge base, and changed paths;
+5. confirm execution-time relation is still the approved `FF_ONLY` or `CLEAN_MERGE` case.
 
-If canonical advancement touches a reviewed candidate file, changes relevant instruction/version/release authority, produces an actual merge conflict, or otherwise makes the reviewed semantics uncertain: stop before merging that repo and return to Planner/Critic. Do not edit the candidate, cherry-pick an improvised fix, force merge, or create another integration branch.
+Relevant canonical advancement that touches candidate files, changes instruction/version/release authority, creates semantic uncertainty, or creates a merge conflict is a stop condition. Do not edit the candidate, cherry-pick a repair, force merge, or create another integration branch.
 
-Unrelated, clearly disjoint canonical advancement may proceed under this already-reviewed integration contract after the Executor records the new head and confirms no candidate-path/authority overlap.
+### 4.2 Clean canonical checkout/index gate
 
-### 4.2 Fast-forward integrations
+For the exact canonical checkout that would perform the integration, record observable Git status evidence and verify:
 
-When current canonical is an ancestor of the exact reviewed candidate, integrate by fast-forward only:
+- checked-out branch and HEAD are the intended canonical branch/head;
+- no unfinished merge/rebase/cherry-pick/revert/bisect or equivalent operation exists;
+- no pre-existing staged changes exist in the index;
+- no pre-existing unstaged tracked changes exist in the working tree;
+- untracked paths do not collide with candidate paths, merge outputs, or files that checkout/merge would need to create/update.
+
+`git status --porcelain` plus the relevant branch/operation-state inspection is an acceptable evidence surface; equivalent direct Git evidence is allowed.
+
+If unrelated dirty/staged user work exists:
+
+- do not `git stash`;
+- do not `git reset`;
+- do not `git clean`;
+- do not commit it;
+- do not move/overwrite it to make the merge proceed;
+- do not include it in the integration commit;
+- stop that repo and report the exact state to Planner/Critic.
+
+Untracked files may remain only when they are proven non-conflicting with the integration. Any ambiguity is a stop condition; do not delete or overwrite them.
+
+This clean-state gate applies equally to fast-forward repos. If the canonical checkout is unsafe, stop the repo rather than switching merge strategy.
+
+## 5. Integration strategy
+
+### 5.1 Fast-forward integrations
+
+When current canonical is still an ancestor of the exact reviewed candidate and the clean-state gate passes, integrate only by:
 
 `git merge --ff-only <EXACT_REVIEWED_SHA>`
 
-Expected planning-time repos:
+Frozen cases:
 
 - Bridge `main`
 - Bobbio `develop`
@@ -85,97 +135,100 @@ Expected planning-time repos:
 - Asteria `main`
 - SeminarArc `main`
 
-No squash/rebase/cherry-pick is allowed because those would create rewritten candidate identities. Fast-forward keeps the exact reviewed commits as canonical history.
+No squash/rebase/cherry-pick is allowed. If fast-forward is no longer possible, stop and return to Planner/Critic rather than selecting a different strategy.
 
-### 4.3 Diverged but non-overlapping integrations
+### 5.2 Diverged but non-overlapping integrations
 
-For AI_Skills and Lucerna, current planning-time history has advanced independently. Preserve both histories with a merge commit that has the exact reviewed candidate as a parent.
+AI_Skills and Lucerna may use a merge commit only if the unified preflight still confirms the already-reviewed non-overlapping state **and** the canonical checkout/index is clean.
 
-Before committing:
+Then:
 
-- use a merge-base/path-overlap check;
-- perform `git merge --no-ff --no-commit <EXACT_REVIEWED_SHA>`;
-- if any conflict or unexpected semantic/content change appears, `git merge --abort` and stop;
-- inspect staged merge result and run `git diff --cached --check`;
-- verify reviewed candidate-owned files are semantically identical to the reviewed candidate and no manual edits were introduced;
-- then commit the mechanical merge and push canonical branch.
+1. run `git merge --no-ff --no-commit <EXACT_REVIEWED_SHA>`;
+2. if any conflict or unexpected semantic/content change appears, run `git merge --abort` and stop;
+3. inspect the staged merge result and run `git diff --cached --check`;
+4. verify candidate-owned files remain semantically identical to the reviewed candidate and no unrelated/pre-existing content entered the index;
+5. commit only the mechanical merge and push the canonical branch.
 
-No manual conflict resolution is authorized by this package.
+No manual conflict resolution is authorized. Because integration starts from a verified clean checkout/index, `merge --abort` has a defined recovery baseline rather than being used on top of unknown local modifications.
 
-### 4.4 Push order and partial-integration safety
+### 5.3 Push order and partial-integration safety
 
-Complete all read-only/pre-commit preflight checks before the first push.
+Complete **all** source/identity/drift/clean-worktree preflight checks for **all** mutable repos before the first canonical push.
 
-Recommended push order:
+Keep the already-reviewed push order:
 
-1. Bobbio / Mica / Asteria / SeminarArc fast-forwards;
-2. Lucerna clean merge;
-3. Bridge fast-forward;
-4. AI_Skills merge last, so canonical evidence history closes the cross-repo integration after other repo pushes succeed.
+1. Bobbio
+2. Mica
+3. Asteria
+4. SeminarArc
+5. Lucerna
+6. Bridge
+7. AI_Skills
 
-If a remote branch advances after local preflight and a push is rejected, fetch and stop that repo. Do not force push. Already-successful canonical integrations remain truthful partial integration; report exact heads and return to Planner/Critic rather than rewriting published history.
+If a remote branch advances after preflight and a push is rejected, fetch and stop that repo. Do not force push. Already-successful integrations remain truthful partial integration; report exact integrated/not-integrated state and return to Planner/Critic rather than rewriting published history.
 
-## 5. Bridge 0.8.3 boundary
+## 6. Bridge 0.8.3 boundary
 
-Integrating Bridge candidate `e1d6b781...` into `main` makes the reviewed `0.8.3` source/version metadata canonical.
+Integrating Bridge candidate `e1d6b781ad7e56d567bed419001069baf439d0a5` into `main` makes the reviewed `0.8.3` source/version metadata canonical.
 
-This integration package does **not** authorize:
+This package does **not** authorize:
 
 - Git tag creation;
 - GitHub Release creation;
 - package publication;
 - deployment;
 - Host Policy installation/update;
-- deletion of the reviewed task branch.
+- deletion of the reviewed task branch;
+- `0.8.4` bump.
 
-No `0.8.4` bump is allowed. Task 056 will later revalidate then-current Bridge main and choose its next valid version slot.
+Task 056 later revalidates then-current Bridge main and selects its own next valid version slot.
 
-## 6. Validation after integration
+## 7. Validation after integration
 
-Because final implementation candidates and H1–H9 already received independent review, integration must not rerun product development or broad test suites merely for ceremony.
+Implementation candidates and H1–H9 already passed independent implementation review. Integration therefore does not rerun product development, Bridge 363 tests, H1–H9, GPT Work, or paid/Terra checks merely for ceremony.
 
-For each repo:
+For each repo verify:
 
-- verify canonical remote head after push;
-- verify the exact reviewed candidate is reachable from canonical history;
-- for fast-forward repos, canonical head must equal the exact reviewed candidate;
-- for merge repos, merge commit must have the exact reviewed candidate in ancestry and no manual content changes beyond the mechanical combination;
-- run `git diff --check` on the integration delta / staged merge where applicable;
-- verify no unreviewed target files were introduced.
+- canonical remote head after push;
+- exact reviewed candidate reachability;
+- for `FF_ONLY`, canonical head equals exact reviewed candidate;
+- for `CLEAN_MERGE`, merge commit preserves exact reviewed candidate in ancestry and contains no manual/unrelated content;
+- integration delta/staged merge passes `git diff --check` as applicable;
+- no unreviewed target files are introduced.
 
-For Bridge, additionally verify canonical source version surfaces still read `0.8.3`; do not publish/reinstall.
+For Bridge also verify canonical source/version surfaces still read `0.8.3`; do not publish/reinstall.
 
-No paid API, Terra, GPT Work, product smoke, 363-test rerun, or H1–H9 rerun is required unless the canonical branch changed in a way that invalidates the reviewed candidate—such a case is a stop condition, not an excuse to silently expand integration.
+If execution-time drift invalidates reviewed evidence, stop instead of restarting development inside integration.
 
-## 7. Should-not-change
+## 8. Should-not-change
 
 Integration must not:
 
 - modify candidate content;
 - alter CUHK Date;
-- edit 056 artifacts or execute 056;
+- edit or execute 056;
 - add H10/new state/schema/ledger/controller/watcher;
 - delete task branches;
 - create PRs;
+- create new branch/worktree names;
 - rebase/squash/cherry-pick reviewed commits;
 - force push or rewrite history;
+- stash/reset/clean/commit unrelated local work to make integration proceed;
 - create releases/tags/deployments;
-- change application/runtime code beyond what is already contained in the exact reviewed commits (057 reviewed commits themselves are instruction/docs/Bridge scaffold changes).
+- change application/runtime code beyond what is already contained in exact reviewed commits.
 
-## 8. Recovery
+## 9. Recovery
 
-- Fast-forward precondition false -> stop and re-evaluate; do not switch to cherry-pick.
-- Diverged merge conflict or relevant semantic drift -> `git merge --abort`, preserve canonical branch, return to Planner/Critic.
-- Push rejected because remote advanced -> fetch, do not force; return to Planner/Critic if the new state is relevant or overlapping.
+- Dirty/staged canonical checkout or unfinished Git operation -> stop that repo before integration; preserve user work untouched and report exact status.
+- Conflicting untracked path -> stop; do not delete, clean, overwrite, or relocate it automatically.
+- Fast-forward precondition false -> stop; do not switch to another merge strategy.
+- Diverged merge conflict or relevant semantic drift -> `git merge --abort` from the verified clean baseline and stop.
+- Push rejected because remote advanced -> fetch, do not force; re-evaluate and return to Planner/Critic when state is no longer exactly approved.
 - Partial cross-repo integration -> do not roll back successful published merges by rewriting history; report exact integrated/not-integrated repos and obtain a bounded follow-up decision.
-
-## 9. External reality check
-
-Planner rechecked current official Git documentation. `git merge --ff-only` refuses non-fast-forward integration, while a true merge commit preserves both parent histories; `--no-commit` permits inspection before creating a non-fast-forward merge commit. This supports the chosen split: fast-forward exact candidates when possible, and use a no-manual-edit merge only for already-diverged but non-overlapping canonical history.
 
 ## 10. Completion and next handoff
 
-Integration execution is complete only when all mutable canonical branches contain the exact reviewed candidate histories and remote heads are verified, with CUHK Date unchanged and Bridge unreleased beyond source integration.
+Integration is complete only when all mutable canonical branches contain the exact reviewed candidate histories, remote heads are verified, CUHK Date remains unchanged, and Bridge has not been released beyond source integration.
 
 After separately approved integration completes:
 
