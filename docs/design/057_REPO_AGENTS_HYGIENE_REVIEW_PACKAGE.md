@@ -1,6 +1,6 @@
 # 057 Repo AGENTS Hygiene — Review Package
 
-Status: `AWAITING_INTEGRATION_RECOVERY_CRITIC_REVIEW`
+Status: `AWAITING_INTEGRATION_RECOVERY_CRITIC_R2`
 
 ## Task identity
 
@@ -11,9 +11,9 @@ Status: `AWAITING_INTEGRATION_RECOVERY_CRITIC_REVIEW`
 - Final reviewed implementation evidence: `E3 = 745281b70322b8508e43e59a5bdef70529749ea5`
 - Final reviewed implementation manifest: `M3 = 24051588d13f07e7f71e0edf5a723aca36754ed5`
 - Prior Integration Plan/Goal/Kickoff: v0.2, execution attempted then blocked by local canonical-checkout preflight
-- Current recovery proposal: `docs/design/057_REPO_AGENTS_HYGIENE_INTEGRATION_RECOVERY_V1_PROPOSAL_2026-09-17.md`
-- Current recovery Critic prompt: `docs/design/057_REPO_AGENTS_HYGIENE_INTEGRATION_RECOVERY_V1_CRITIC_PROMPT_2026-09-17.md`
-- Stage: lighter per-repo integration recovery review
+- Current recovery proposal: `docs/design/057_REPO_AGENTS_HYGIENE_INTEGRATION_RECOVERY_V1_PROPOSAL_2026-09-17.md` v1.1
+- Current narrow R2 Critic prompt: `docs/design/057_REPO_AGENTS_HYGIENE_INTEGRATION_RECOVERY_V1_R2_CRITIC_PROMPT_2026-09-17.md`
+- Stage: lighter per-repo integration recovery R2
 
 ## Implementation review closure
 
@@ -42,75 +42,99 @@ The reviewed implementation tuple remains frozen and is not being reopened.
 - SeminarArc: `74caaa4ecec16f1bc90987979458d1a4e93f52be`
 - CUHK Date inspected only: `711fab75f044b7ad31e5ff8610c076f902ccc949`
 
-## Integration package history
+## Integration recovery history
 
-Integration v0.1 was REVISE on `C057-G1-CLEAN-CANONICAL-WORKTREE-GATE`.
+The globally coupled clean-canonical-checkout integration path was abandoned after repeated real execution blocks on unrelated local state:
 
-Integration v0.2 closed that design blocker by requiring every canonical local checkout to be clean before any cross-repo push. Critic later approved that package and the user sent the approved integration Kickoff.
+- AI_Skills ordinary local `main` contains stale/diverged old 044 work and must not be reset/rebased/cleaned for 057;
+- Bridge ordinary local `main` has a pre-existing `.gitignore` change and must not be stashed/reset/cleaned/committed for 057.
 
-During real execution, the globally coupled clean-canonical-checkout rule blocked repeatedly on **unrelated local state**, not candidate drift:
+No canonical integration push was performed by the blocked run.
 
-- AI_Skills ordinary local `main` is stale/diverged with unrelated old 044 commits and must not be reset/rebased/cleaned for 057;
-- Bridge ordinary local `main` has a pre-existing `.gitignore` modification and must not be stashed/reset/cleaned/committed for 057.
+Recovery v1 proposed repo-by-repo execution:
 
-No canonical integration push was performed by that blocked run.
+- Bridge/Bobbio/Mica/Asteria/SeminarArc: explicit exact-SHA non-force push after ancestry verification;
+- Lucerna/AI_Skills: existing reviewed worktree, detached current `origin/main`, no-manual-edit mechanical merge, non-force push, switch back;
+- one repo failure does not block unrelated repo prompts;
+- successful partial integration remains truthful and is not rewritten.
 
-## Recovery direction now under review
+Independent Critic accepted that recovery direction but returned `REVISE` on exactly two stable blockers:
 
-Planner proposes replacing only the local integration execution surface:
+- `C057-R1-CANONICAL-PUSH-DESTINATION-IDENTITY`
+- `C057-R2-PARTIAL-INTEGRATION-056-HANDOFF`
 
-1. **Five current fast-forward repos** — Bridge, Bobbio, Mica, Asteria, SeminarArc:
-   - do not use/clean canonical local checkout;
-   - verify exact reviewed remote ref and remote canonical ancestry;
-   - push the exact immutable reviewed SHA directly to the canonical remote branch without force;
-   - remote non-fast-forward rejection remains the concurrent-advancement guard.
+## v1.1 response
 
-2. **Two diverged repos** — Lucerna, AI_Skills:
-   - do not repair/use problematic canonical local checkout;
-   - use the existing reviewed 057 worktree only if that worktree itself is clean;
-   - detach at current `origin/main`, make the already-approved no-manual-edit mechanical merge, push `HEAD:main`, then switch back to the reviewed branch;
-   - no new branch/worktree.
+### R1 — ACCEPT
 
-3. Execute **repo by repo**, not as a globally coupled all-repo preflight. Partial integration remains truthful and already accepted as a possible cross-repo outcome.
+All seven exact repo prompts now perform a **read-only remote identity gate before any fetch/push/merge**:
 
-The proposal includes seven exact repo-specific prompts so one Critic review can approve the whole recovery set; it should not require seven separate architecture/recovery reviews.
+- verify local repo identity;
+- inspect effective `origin` fetch URL;
+- inspect all effective `origin` push URLs, including pushurl;
+- normalize equivalent GitHub SSH/HTTPS forms to exact `github.com/YuukiAS/<repo>` identity;
+- require every effective push destination to resolve only to the declared canonical repo;
+- extra destination, mismatch or ambiguity stops only that repo;
+- no `git remote set-url`, pushurl/config rewrite, remote remap or equivalent mutation is allowed.
 
-## Current remote facts rechecked for recovery drafting
+This proves destination identity separately from exact source commit identity.
 
-- AI_Skills remote `main = d73684fe59f2866d551fcbfae750cada4b3fd4ae`; reviewed branch = `M3` exactly; histories diverged, with M3-side changes limited to `results/057_repo_agents_hygiene/*`.
-- Bridge remote `main = cb77b1cc5a1fce097a38066d2db452291e359852`; reviewed branch = `e1d6b781...`; exact fast-forward remains valid.
-- Bobbio `develop` -> exact candidate: fast-forward.
-- Mica `main` -> exact candidate: fast-forward.
-- Asteria `main` -> exact candidate: fast-forward.
-- SeminarArc `main` -> exact candidate: fast-forward.
-- Lucerna current remote `main` has advanced beyond the 057 base, but main-side post-base changes still do not modify the reviewed candidate path `AGENTS.md`; reviewed branch remains exact `41cd1297...`.
+### R2 — ACCEPT
 
-Execution must still fetch current refs in each repo prompt. A repo whose preconditions no longer hold stops independently.
+Repo-by-repo execution may still produce truthful partial integration, but partial integration is explicitly **not** 057 integration completion.
 
-## Frozen boundaries
+The recovery proposal now requires successful integration evidence for all seven mutable canonical targets before any handoff to 056:
 
-Unchanged:
+- Bridge
+- Bobbio
+- Mica-for-ChatGPT
+- Asteria
+- SeminarArc
+- Lucerna
+- AI_Skills_Collection
 
-- no candidate content mutation;
-- no I1-I6/H1-H9 rerun;
-- no Bridge 363-test rerun merely for integration;
-- Bridge stays `0.8.3` source-only: no tag/release/package publish/deploy/Host install/`0.8.4`;
-- no CUHK Date mutation;
-- no branch deletion/PR/force/rebase/squash/cherry-pick/history rewrite;
-- no cleanup/stash/reset of unrelated user work;
+Prompt G no longer advances unconditionally after AI_Skills succeeds. If any target is `BLOCKED`, `FAILED`, or `NOT_RUN`, it must report the exact partial state, preserve successful published integrations, keep 056 untouched, and hand back to Planner for 057 integration status/recovery.
+
+## Accepted recovery direction remains frozen
+
+No other recovery semantics changed:
+
+- exact reviewed tuple/M3 unchanged;
+- canonical target branches unchanged;
+- five fast-forward repos remain exact-SHA non-force pushes;
+- AI_Skills/Lucerna remain detached reviewed-worktree clean mechanical merges;
+- current path-overlap/conflict stop conditions remain;
+- no manual reconciliation;
+- no new branch/worktree;
+- no force/rebase/squash/cherry-pick/history rewrite;
+- no user-work stash/reset/clean;
+- CUHK Date remains inspect-only;
+- Bridge remains `0.8.3` source-only, no tag/release/package publish/deploy/Host install/`0.8.4`;
+- no Bridge 363-test/H1–H9 rerun merely for integration;
 - no paid API;
-- no 056 mutation/execution during 057 integration;
-- after 057 integration: bounded 056 source-drift revalidation.
+- no 056 work until all seven 057 canonical integrations are complete.
+
+## External Git basis for R1
+
+Official Git documentation confirms:
+
+- `git remote get-url [--push] [--all]` exposes effective remote URLs and expands URL rewrite configuration;
+- push URLs can differ from fetch URLs;
+- a configured remote can have multiple push URLs and pushes go to all configured push destinations.
+
+Therefore exact source SHA alone is not enough; the v1.1 remote-identity gate is a necessary narrow correction.
 
 ## Hard boundary
 
-The per-repo recovery prompts are not authorized until an independent Critic reviews the exact recovery proposal and returns:
+The seven per-repo recovery prompts remain **unapproved** until independent Critic returns:
 
 ```text
 RESULT = PASS
 READY_FOR_PER_REPO_INTEGRATION = YES
 ```
 
-If PASS, the user may send the approved repo prompts independently. No repo prompt should be rewritten after PASS unless its remote preconditions have materially changed.
+for recovery proposal v1.1.
+
+If PASS, the user may send the seven approved repo prompts independently. No additional integration package should be created unless a repo's actual remote preconditions materially change.
 
 `NEXT_HANDOFF = CRITIC`
