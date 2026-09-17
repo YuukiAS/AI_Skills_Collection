@@ -40,7 +40,7 @@ v0.2 将这一语义同步到 Lite L3/L6、Bridge Host user-input contract、wor
 
 当前 Critic contract 已要求先用自然中文给判断，再给 machine fields；但 execution-ready PASS 小节会直接进入 approved paths/fields/verbatim Kickoff，没有明确要求“同一 major round 曾 REVISE 后，最终 PASS 必须解释到底改了什么”。这正是用户指出的可读性缺口。
 
-本轮将 `docs/workflows/CRITIC_ROLE_CONTRACT.md` 升为新的文档版本并加入通用规则：同一 Active Review Context / major round 曾有正式 `REVISE`，后续 `PASS` 必须在 machine-readable fields / approved next-role prompt 之前给 plain-language closure explanation。该说明按适用项解释 blockers 如何关闭、哪些层改/没改、Gate 证明什么、repo-specific rule/locator disposition、normal workflow 的实际变化，以及 PASS 证明与不证明什么。此规则不是 056 专用，也不新增 review gate/state。README 的 Planner/Critic 模板只做一行级摘要同步，避免模板继续诱导“只有 fields + kickoff”。
+本轮将 `docs/workflows/CRITIC_ROLE_CONTRACT.md` 升为新的文档版本并加入通用规则：同一 Active Review Context / major round 曾有正式 `REVISE`，后续 `PASS` 必须在 machine-readable fields / approved next-role prompt 之前给 plain-language closure explanation。该说明按适用项解释 blockers 如何关闭、哪些层改/没改、Gate 证明什么、repo-specific rule/locator disposition、normal workflow 的实际变化，以及 PASS 证明与不证明什么。此规则不是 056 专用，也不新增 review gate/state。当前 README 的 Critic 初始化/复审模板已经要求读取 canonical `CRITIC_ROLE_CONTRACT.md`，因此本轮不复制整条规则形成第二 source；只有 Critic R2 证明仍存在真实 discoverability gap 时，才做最小 locator/summary 同步。
 
 ## 1. 本轮通过后新增的真实能力
 
@@ -321,7 +321,7 @@ Bridge Kit: 0.8.2 -> 0.8.3
 Bobbio runtime: unchanged
 ```
 
-056 只是兼容 refinement，不新增 repository-level user workflow/plugin，所以不是 AI_Skills minor。Critic reporting contract/README 本轮 planning-doc修改本身也不触发 plugin/repo release bump。
+056 只是兼容 refinement，不新增 repository-level user workflow/plugin，所以不是 AI_Skills minor。Critic reporting contract 本轮 planning-doc修改本身也不触发 plugin/repo release bump。
 
 ## 8. Phase 3 — Bobbio 最小 locator
 
@@ -487,7 +487,7 @@ implementation audit必须对 exact tuple PASS。只有后续批准的 integrati
 
 ## 16. Planning/review contract change（本轮已做，不是 Executor production scope）
 
-本 v0.2 package 同时按用户直接要求修订 `docs/workflows/CRITIC_ROLE_CONTRACT.md`：若同一 major round/Active Review Context 曾正式 `REVISE`，后续 `PASS` 必须先给用户可读的 closure explanation，再给 machine fields/approved kickoff。README Critic复审模板只做最小摘要同步。
+本 v0.2 package 同时按用户直接要求修订 `docs/workflows/CRITIC_ROLE_CONTRACT.md`：若同一 major round/Active Review Context 曾正式 `REVISE`，后续 `PASS` 必须先给用户可读的 closure explanation，再给 machine fields/approved kickoff。README 当前 Planner/Critic section 已把 canonical Critic contract列为强制 source，因此本轮不复制完整新规则形成第二 source；若 Critic R2 指出 locator仍不足，再做最小 summary 修订。
 
 这只是 Planner/Critic reporting contract，不是新 capability gate，不触发 plugin/repository版本发布，也不要求 Executor重复修改。
 
