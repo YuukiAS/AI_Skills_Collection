@@ -1,4 +1,4 @@
-# 057 Repo AGENTS Hygiene — Integration Package Critic Review
+# 057 Repo AGENTS Hygiene — Integration Package Critic R2
 
 你是 AI Research Stack 的长期独立 Critic thread。
 
@@ -6,16 +6,24 @@
 
 TASK_KEY = `057_repo_agents_hygiene`
 
-当前阶段：implementation review PASS -> separately approved integration package review。
+当前阶段：integration package v0.1 -> narrow R2 review。
 
-本轮只审 integration Plan/Goal/Kickoff 是否允许把 exact reviewed 057 tuple 机械集成到 canonical branches。不要重新设计 057，不修改 repo，不执行 merge/push，不创建 branch/worktree，不 release Bridge，不开始 056，不运行 paid API。
+本轮只复核一个 stable blocker：
+
+`C057-G1-CLEAN-CANONICAL-WORKTREE-GATE`
+
+不要重新设计 057，不重开 I1-I6/H1-H9，不修改 repo，不执行 merge/push，不创建 branch/worktree，不 release Bridge，不开始 056，不运行 paid API。
 
 ## Review objects
 
-- `docs/design/057_REPO_AGENTS_HYGIENE_INTEGRATION_PLAN.md` v0.1
-- `docs/goals/057_REPO_AGENTS_HYGIENE_INTEGRATION_GOAL.md` v0.1
-- `docs/operations/prompts/057_REPO_AGENTS_HYGIENE_INTEGRATION_KICKOFF.md` v0.1
+- `docs/design/057_REPO_AGENTS_HYGIENE_INTEGRATION_PLAN.md` v0.2
+- `docs/goals/057_REPO_AGENTS_HYGIENE_INTEGRATION_GOAL.md` v0.2
+- `docs/operations/prompts/057_REPO_AGENTS_HYGIENE_INTEGRATION_KICKOFF.md` v0.2
 - `docs/design/057_REPO_AGENTS_HYGIENE_REVIEW_PACKAGE.md`
+
+Prior v0.1 package commit:
+
+`0d84bf541800c1b0bc39d8f15c0a17f72905b1fd`
 
 ## Frozen reviewed tuple
 
@@ -27,11 +35,27 @@ TASK_KEY = `057_repo_agents_hygiene`
 - Mica: `e49416f874f633aedc7521734ee5b0f441aae970`
 - Asteria: `0ce1d4daca1e410ce551570578dd563d4ef67e90`
 - SeminarArc: `74caaa4ecec16f1bc90987979458d1a4e93f52be`
-- CUHK Date inspected-only ref: `711fab75f044b7ad31e5ff8610c076f902ccc949`
+- CUHK Date inspected only: `711fab75f044b7ad31e5ff8610c076f902ccc949`
 
-Do not reopen I1-I6, Bobbio consolidation or H1-H9 unless this integration package itself contradicts the already-reviewed tuple.
+## Already accepted — do not reopen
 
-## Mandatory reads
+Independent v0.1 integration review already accepted:
+
+- Bridge/Bobbio/Mica/Asteria/SeminarArc are exact fast-forward integration cases;
+- AI_Skills/Lucerna use clean mechanical merge commits when current non-overlap remains true;
+- exact SHA + `--ff-only` candidate preservation;
+- no squash/rebase/cherry-pick/force/history rewrite;
+- current AI_Skills/Lucerna divergence remains mechanically mergeable;
+- all reviewed task-branch heads equal the frozen candidate SHAs;
+- push order and truthful partial-integration recovery;
+- Bridge `0.8.3` source-only boundary, with no tag/release/publish/deploy/Host install/`0.8.4`;
+- no repeated Bridge 363 tests/H1-H9/product tests;
+- CUHK Date inspect-only;
+- no 056 mutation.
+
+Do not repeat those reviews unless the v0.2 text itself materially contradicts them.
+
+## Mandatory current reads
 
 Read latest AI_Skills main:
 
@@ -39,130 +63,99 @@ Read latest AI_Skills main:
 - `docs/workflows/PLANNER_ROLE_CONTRACT.md`
 - `docs/workflows/CRITIC_ROLE_CONTRACT.md`
 - `docs/workflows/PLUGIN_CAPABILITY_GATE_POLICY.md`
-- approved 057 v0.2 Plan/Goal and Lite versioning amendment
-- current integration Plan/Goal/Kickoff/Review Package
+- current integration v0.2 Plan/Goal/Kickoff/Review Package
 
-Read current canonical branch heads and exact reviewed commits in:
+This is a narrow contract correction. No new external product research is required unless you find a factual Git-semantics conflict in the revised wording.
 
-- AI_Skills_Collection main
-- GPT_Codex_AI_Bridge_Kit main
-- Bobbio develop
-- Lucerna main
-- Mica-for-ChatGPT main
-- Asteria main
-- SeminarArc main
+## R2 questions
 
-Independently recheck current Git merge behavior from official Git/GitHub documentation where needed. This is a merge/integration review, not a new product architecture round.
+### 1. Does C057-G1 close the clean canonical worktree/index gap?
 
-## Key questions
+The exact canonical checkout used for integration must now verify before merge:
 
-### 1. Exact-candidate preservation
+- intended canonical branch/HEAD;
+- no unfinished merge/rebase/cherry-pick/revert/bisect or equivalent Git operation;
+- no pre-existing staged changes;
+- no pre-existing unstaged tracked changes;
+- no untracked path that conflicts with candidate paths, merge outputs, or checkout/merge targets.
 
-Confirm package never rewrites reviewed candidates:
+The package should require observable evidence such as `git status --porcelain` or an equivalent direct Git check.
 
-- fast-forward cases use exact reviewed SHA with `--ff-only`;
-- no squash/rebase/cherry-pick;
-- divergent cases preserve exact candidate as parent/ancestor of a mechanical merge commit;
-- no manual content reconciliation is authorized.
+### 2. Is dirty user work protected without hidden mutation?
 
-### 2. Current canonical reality
+Verify v0.2 explicitly forbids using these merely to make integration proceed:
 
-Planner observed:
+- `git stash`
+- `git reset`
+- `git clean`
+- committing unrelated work
+- moving/overwriting user files
+- absorbing unrelated staged/worktree content into a merge commit
 
-- Bridge/Bobbio/Mica/Asteria/SeminarArc are currently fast-forwardable;
-- AI_Skills and Lucerna have diverged only because canonical history advanced independently;
-- current AI_Skills canonical changes are outside `results/057_repo_agents_hygiene/`;
-- current Lucerna post-base changes do not touch candidate `AGENTS.md`.
+Dirty/staged unrelated work must stop that repo and be reported. Conflicting or ambiguous untracked files must also stop rather than being automatically deleted or overwritten.
 
-Independently verify these facts. If current source has changed again, judge the current state rather than Planner's snapshot.
+### 3. Does the gate cover both merge modes and run before the first push?
 
-### 3. Drift stop condition
+Check that:
 
-Check that execution-time preflight is strong enough:
+- the same clean-state gate applies to fast-forward repos;
+- AI_Skills/Lucerna must pass it before `git merge --no-ff --no-commit`;
+- therefore `git merge --abort` begins from a known-clean baseline;
+- every mutable repo completes source/drift/identity/clean-state preflight before the first canonical push.
 
-- reviewed task-branch head must equal exact reviewed SHA;
-- canonical advancement touching candidate paths or relevant instruction/version/release authority stops integration;
-- merge conflict stops integration;
-- no candidate repair or new integration branch is allowed;
-- disjoint unrelated advancement may remain a mechanical integration only when semantics are still clear.
+### 4. Did anything else drift?
 
-### 4. Merge method
+Compare v0.2 against the frozen v0.1 integration decisions. There must be no substantive change to:
 
-Judge whether the split is minimal and safe:
+- exact reviewed tuple;
+- target canonical branches;
+- `FF_ONLY` repos;
+- AI_Skills/Lucerna `CLEAN_MERGE` strategy;
+- push order;
+- partial integration recovery;
+- Bridge `0.8.3` source-only boundary;
+- no tag/release/publish/deploy/Host install/`0.8.4`;
+- no squash/rebase/cherry-pick/force/history rewrite;
+- no CUHK Date mutation;
+- no 056 changes;
+- no repeated tests/H1-H9;
+- no H10/state/schema/ledger/controller/watcher;
+- no paid API.
 
-- fast-forward exact SHA for non-diverged repos;
-- AI_Skills/Lucerna: `--no-ff --no-commit`, inspect staged result / `git diff --cached --check`, commit only if fully mechanical;
-- conflict => `git merge --abort` and stop.
-
-Reject if cherry-pick/squash/rebase would be safer under the user's exact-candidate requirement; otherwise confirm the chosen method preserves reviewed history as intended.
-
-### 5. Cross-repo partial integration
-
-Check that package does not pretend multi-repo integration is atomic. It preflights all before first push, then uses normal pushes, never rewrites successful history if a later push fails, and reports partial state honestly.
-
-### 6. Bridge release boundary
-
-Confirm integrating Bridge exact `0.8.3` candidate to main does not silently authorize:
-
-- tag;
-- GitHub Release;
-- package publish;
-- deployment;
-- Host Policy install/update;
-- `0.8.4` bump.
-
-### 7. No unnecessary re-validation
-
-Implementation/H1-H9 already passed. Confirm integration package appropriately avoids rerunning Bridge 363 tests/product suites merely for ceremony, while still verifying canonical head, exact-candidate reachability, merge tree and diff cleanliness.
-
-If relevant source drift invalidates reviewed evidence, package must stop rather than silently restart development.
-
-### 8. 056 boundary
-
-Confirm integration does not modify or execute 056. Its only next handoff after successful integration is bounded 056 source-drift revalidation/package amendment.
-
-### 9. No scope expansion
-
-Reject any hidden authorization for:
-
-- CUHK Date mutation;
-- branch deletion;
-- PR creation;
-- force push/history rewrite;
-- release/deployment;
-- new workflow/state/schema/ledger/controller/watcher;
-- paid APIs;
-- product/runtime edits beyond the exact reviewed commits.
+If a wording cleanup changes none of those semantics, it is not a blocker.
 
 ## Output
 
-If integration package has a blocker:
+If C057-G1 remains open or v0.2 introduces new integration-scope drift:
 
 ```text
 RESULT = REVISE
 TASK_KEY = 057_repo_agents_hygiene
-REVIEW_STAGE = INTEGRATION_PACKAGE
+REVIEW_STAGE = INTEGRATION_PACKAGE_R2
+C057-G1-CLEAN-CANONICAL-WORKTREE-GATE = OPEN
 READY_FOR_INTEGRATION_CODEX = NO
 NEXT_HANDOFF = PLANNER
 ```
 
-Give stable blocker IDs and a complete Planner revision prompt per Critic contract.
+Give only blockers directly caused by this narrow revision and, per Critic contract, a complete Planner revision prompt.
 
-If integration package is ready, first explain in normal Chinese:
+If closed:
 
-- which repos can fast-forward;
-- why AI_Skills/Lucerna need clean merge commits rather than rewritten candidates;
-- what drift/conflict causes a stop;
-- what Bridge 0.8.3 integration does and does not authorize;
-- why implementation tests/H1-H9 are not rerun by default;
-- PASS proves only integration package readiness, not that integration has happened.
+First explain briefly in normal Chinese:
+
+- how the clean worktree/index gate now works;
+- why dirty user work cannot be silently moved or absorbed;
+- why AI_Skills/Lucerna now have a credible `merge --abort` baseline;
+- that the rest of the integration strategy is unchanged;
+- that PASS authorizes only the user to send the integration Kickoff, not the integration itself.
 
 Then give:
 
 ```text
 RESULT = PASS
 TASK_KEY = 057_repo_agents_hygiene
-REVIEW_STAGE = INTEGRATION_PACKAGE
+REVIEW_STAGE = INTEGRATION_PACKAGE_R2
+C057-G1-CLEAN-CANONICAL-WORKTREE-GATE = CLOSED
 PLAN = docs/design/057_REPO_AGENTS_HYGIENE_INTEGRATION_PLAN.md
 GOAL = docs/goals/057_REPO_AGENTS_HYGIENE_INTEGRATION_GOAL.md
 KICKOFF = docs/operations/prompts/057_REPO_AGENTS_HYGIENE_INTEGRATION_KICKOFF.md
@@ -174,7 +167,7 @@ Finally return the exact reviewed `## Kickoff` body verbatim:
 
 ```text
 === APPROVED 057 INTEGRATION KICKOFF BEGIN ===
-<verbatim current kickoff body>
+<verbatim current v0.2 kickoff body>
 === APPROVED 057 INTEGRATION KICKOFF END ===
 ```
 
