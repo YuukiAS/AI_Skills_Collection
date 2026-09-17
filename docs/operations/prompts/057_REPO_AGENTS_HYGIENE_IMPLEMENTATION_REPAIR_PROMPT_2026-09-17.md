@@ -26,26 +26,42 @@ Historical failed tuple must remain immutable evidence:
 
 Continue only on the existing `reviewed/057_repo_agents_hygiene` branches/worktrees. Do not create a new task/successor/branch name. Before edits, verify each existing worktree/branch still points to the expected 057 task lineage and preserve unrelated dirty work.
 
-## 1. Bridge — close H8 byte preservation
+## 1. Bridge — close H8 raw-byte preservation
 
 Repair the existing `install_agents_snippet()` path; do not add a migration engine or alternate init path.
 
-Current defect: existing-root append/replace uses `rstrip()` / `lstrip()`, so bytes outside the managed marker span are not preserved exactly.
+Current defect: the failed candidate uses default text-mode `Path.read_text(encoding="utf-8")` / `Path.write_text(...)` plus `rstrip()` / `lstrip()` when editing existing root `AGENTS.md`. Removing the strip calls alone is insufficient: on Bridge-supported Python >=3.9, default text I/O uses universal-newline translation, so an existing CRLF/CR file can be normalized to LF even when decoded text appears equivalent.
+
+For H8, **exact preservation means raw-byte-equivalent preservation outside the managed Bridge marker span**. Existing project-owned bytes must remain byte-for-byte identical, including line-ending representation and deliberately irregular whitespace.
 
 Required behavior:
 
 1. Existing `AGENTS.md` without managed block:
-   - preserve the original project-owned text exactly as the prefix;
+   - preserve the complete original file bytes exactly as the prefix;
    - append only the minimum deterministic separator plus canonical managed block;
-   - do not strip/normalize project-owned whitespace.
+   - do not strip, normalize, decode/re-encode, or otherwise rewrite project-owned bytes/newlines.
 2. Existing `AGENTS.md` with managed block + `--force`:
-   - replace only the bytes/text from `<!-- ai-bridge-kit:start -->` through `<!-- ai-bridge-kit:end -->` and the managed block's own canonical newline handling;
-   - project-owned content before and after the marker span must remain exactly unchanged.
-3. Normal second init remains idempotent and must not duplicate the block.
+   - replace only the canonical managed marker span from `<!-- ai-bridge-kit:start -->` through `<!-- ai-bridge-kit:end -->` and any newline bytes that are explicitly part of the managed replacement span;
+   - bytes before the managed span and bytes after the managed span must remain exactly unchanged;
+   - do not allow default text-mode newline normalization to transform CRLF/CR/LF in project-owned content.
+3. Normal second/repeated init remains idempotent and must not duplicate or gradually normalize the file.
+4. Implementation mechanism is not prescribed. A bytes-level splice is acceptable, as is any other implementation compatible with Bridge Python >=3.9 that directly proves raw-byte preservation. Do not add a migration engine, alternate init path, new state, or separate file format.
 
-Add focused regression fixtures with project prose **before and after** the managed block plus deliberately irregular blank lines/trailing whitespace. Compare pre/post project-owned segments exactly, not `startswith(existing.rstrip())`.
+Focused regression fixtures must include the previously required project prose before/after the managed block plus irregular blank lines/trailing whitespace, and additionally at minimum:
 
-Re-run H8 through the real normal and `--force` CLI path.
+- an existing root using CRLF with no managed block;
+- an existing root using CRLF with project-owned prose on both sides of an existing managed block;
+- preferably one mixed-newline existing root when the chosen implementation claims to preserve arbitrary existing files.
+
+For these fixtures, exercise the real CLI path as applicable:
+
+- normal init;
+- `--force` init;
+- repeated/second init.
+
+Verification must compare **raw bytes**, not only decoded strings, `startswith(...)`, stripped content, normalized newline text, or keywords. For every existing-root fixture, the project-owned byte segments outside the managed span must be exactly equal before and after the operation.
+
+Re-run H8 through the real normal and `--force` CLI path. This remains H8; do not add H10 or any new state/schema/ledger/controller.
 
 ## 2. Bridge — version closure and Lite versioning amendment
 
