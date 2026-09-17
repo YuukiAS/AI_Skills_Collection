@@ -22,38 +22,46 @@ problem: an automation can become an endless synthetic recovery chain even after
 candidate action: require explicit real blocker / plugin TODO source for long-running refinement batches and stop the watcher when the batch is closed or user redirects to real workflow refinement.
 promotion gate: apply to the next AI_Skills maintenance batch without creating a second state machine.
 
-### Review admission、持续用户提示与真实交付止损
+### Review admission、Human Gate 与真实交付止损
 status: NEW
-source: 2026-09-13 to 2026-09-15 official ChatGPT Data Export audit covering Mica, Bobbio, Lucerna, Asteria plus secondary projects; strengthened by the 2026-09-15 Lucerna OpenAI Usage Monitor incident and the user's explicit correction separating pre-review completeness from persistent user prompts
-evidence: [Planner v5 proposal](../design/PRODUCT_DELIVERY_DISCIPLINE_V5_PROPOSAL_2026-09-15.md)；private local export audit parsed all 27 `conversations-*.json` shards with 0 parse failures and produced curated high-signal project threads. High-confidence evidence includes Mica repeated real-site failures after green synthetic/E2E gates, Bobbio whole-screen/Figma drift, Lucerna repeated UI/provider integration repairs after code/tests were presented as ready for the next user step, and Asteria obvious visual defects reaching late review. The automatic 173-incident classifier is not treated as ground truth.
-problem: 两类问题必须分开处理。第一，producer 没有先把自己能完成、测试、观察和修复的实现/设计/actual-surface问题彻底收口，就过早把 candidate 交给 GPT Work 或用户，形成 `做一点 -> 验收 -> 暴露明显问题 -> 返修 -> 再验收` 的高成本循环。第二，Goal 明知后续需要用户做一个不可替代动作时，prompt 可能只是普通消息/短暂提示，或等待被外层 runner 当成 timeout/BLOCKED；用户要求的是 pending 到明确回应的 persistent blocking prompt。
-project-specific context: Lucerna provider onboarding、Bobbio Zotero/Figma、Mica authenticated ChatGPT DOM、Asteria graph grammar 等只作为证据；通用 workflow 不编码具体 UI、provider、设备或视觉风格。
+source: 2026-09-13 to 2026-09-15 official ChatGPT Data Export audit covering Mica, Bobbio, Lucerna, Asteria plus secondary projects; strengthened by Lucerna 01033/01034/01035, the 056 persistent-user-input host probe, Bridge Kit local-repo source-resolution feedback, and CUHK Date Questionnaire V4 real-project failures
+evidence: [Planner v6 proposal](../design/PRODUCT_DELIVERY_DISCIPLINE_V6_PROPOSAL_2026-09-16.md), [post-probe addendum](../design/PRODUCT_DELIVERY_DISCIPLINE_V6_POST_PROBE_ADDENDUM_2026-09-17.md), [probe result](../design/056_PERSISTENT_PROMPT_CAPABILITY_PROBE_RESULT_2026-09-17.md), [CUHK Date feedback](../design/PRODUCT_DELIVERY_DISCIPLINE_V6_CUHK_DATE_REAL_FEEDBACK_2026-09-17.md). The private historical export audit parsed all 27 `conversations-*.json` shards with 0 parse failures and produced curated high-signal project threads; its automatic incident classifier is not treated as ground truth.
+problem: 真实项目反复暴露的是执行机制没有把“producer 自己做完、真实入口证明、只有真正 human-only 才问人、失败后不盲重跑”变成正常入口，而不是缺更多口号。典型表现包括：半成品过早交 GPT Work/用户；mock/browser/helper PASS 冒充真实 surface；用户被当 integration/UI debugger；agent 可解决的 repo/source/environment friction 被包装成 Human Gate；Default-mode prompt 自动过期；broad tests 绿但 catalog/locale/provider/interaction/material branch/hosted lifecycle 未闭环；rewrite 又破坏已接受 interaction。
+project-specific context: Lucerna provider/Longleaf、Bobbio Zotero/Figma、Mica authenticated ChatGPT DOM、Asteria graph grammar、CUHK Programme/GeoNames/YuNet/provider names 等只作为 evidence；通用 workflow 不编码项目产品细节。
 
-维护者处理要求（尚未实施，须经独立 Critic 审核）：
+维护者处理要求（当前是已过 v6 architecture review 后的 implementation candidate；仍须按 056 post-probe Critic/implementation package 冻结后才可改 production）：
 
-- **Pre-Human Readiness / Review Admission Gate**：在 GPT Work、外部 reviewer 或最终用户验收前，先完成 frozen scope 内所有 agent 自己能够完成的 implementation、targeted regression、known regression、actual-surface smoke、design/visual convergence、diagnostics 和 producer self-QA。禁止把半成品 checkpoint 当 review candidate，也禁止一 patch 一次 human/external acceptance。
-- **Human action 与 final acceptance 分离**：secret 输入、OAuth/OS 授权、网页登录、设备确认等可能在任务中途必须由用户执行，但只是 execution checkpoint，不代表进入产品验收。所有不依赖该动作的代码、错误处理、UI、状态机、测试和 diagnostics 应先完成；用户动作后 Executor 自动继续同一 Goal 的 integration closure。
-- **Foreseeable human gate 必须由 Goal 预声明**：写明 prompt trigger、最小 user action、reply、safety limit、resume point 和 post-action agent work。不要等运行到一半才临时决定要不要问用户。
-- **Persistent blocking prompt**：到达 human gate 后实际调用 host 的 request-user-input/prompt capability；pending until explicit response/cancel，依赖链暂停，不静默轮询，不用 ephemeral notification/普通进度消息冒充，不因等待时间自动转 terminal `BLOCKED`，用户回答后从保存位置继续。同范围已答复/已授权不重复问。
-- Bridge Kit/host 已启用 `default_mode_request_user_input`，但必须额外做真实 capability probe 证明 prompt persistence、no-expiry 和 runner wait semantics；规则文本存在不是行为证据。若 host 不支持，不在项目里临时造 polling/watchdog/state machine，回 Planner/Critic 判断最小 fallback。
-- **Exact failure + faithful targeted validation**：新功能、行为变化、bug fix 都有风险匹配验证；deterministic bug 尽量 old-bad/new-good，live/native 难自动化时保留真实 failure capture + faithful replay。broad suite PASS 不替代原用户路径。
-- **Evidence-surface fidelity**：unit/synthetic/browser/native/live/user evidence 各自只证明对应 surface；pre-human build 不能证明 post-human integration；旧 candidate PASS 不能拼给新 candidate。
-- **Producer self-QA before external/human review**：用户和 reviewer 用于最终判断/盲区，不作为第一轮 debugger、设计师或测试员。producer 能自己看到的 obvious defect 必须先清零。
-- **Repeat-failure circuit breaker / human-time budget**：相同症状再次出现、测试一直绿但真实路径再次失败、同一 reviewer/user 再次指出同类问题、或 active rule 再次被违反时，先核对 candidate identity、rule/plugin loading、failure hypothesis、fixture fidelity、evidence surface 和 root cause；没有新信息不得再次跑 full suite/Atlas/GPT Work/真人验收。
-- **Protect accepted behavior + adjacent consistency**：修共享 UI/state/runtime 时保护既有 accepted behavior；若改 shared component/icon/layout/motion family，检查同族主要实例，不能只修当前截图造成产品内部风格漂移。具体视觉标准归 Frontend Design。
-- 设计完整性、Figma 往返、图标来源、motion grammar、whole-screen quality 由 Frontend Design；科学图示语义由 Scientific Visualization；workflow-core 负责 gate、routing 和 completion semantics，不决定具体 icon/style。
-- final report 以“用户现在真正能做什么、是否达到原目标”为中心，不以 tests/logs/process state 数量为中心。
+- **Acceptance Review Admission / Vertical Closure**：只对 acceptance/release/user-ready review 设硬 gate；advisory/diagnostic/design/architecture review 可在 candidate 未完成时发生，但不得输出 readiness/completion。进入 acceptance review 前，按当前 frozen feature/milestone 的适用链直接证明 source/contract -> runtime/backend -> state/persistence（若适用）-> normal entry -> real target behavior -> failure/recovery -> targeted regression -> risk-matched actual surface。UI shell、handler、placeholder、setup card、`IMPLEMENTED_WHEN_*`、schema 字段或 broad suite 不能单独算 capability complete。
+- **Human-Gate Eligibility / dependency triage**：任何 user-input request 前先区分 `HUMAN_ONLY`、`AGENT_RESOLVABLE`、`UNSUPPORTED_WITH_EVIDENCE`、`OPTIONAL_NOT_REQUIRED_FOR_CURRENT_CLOSURE`、`SAFETY_OR_AUTHORITY_BLOCKER`。只有不可代理的 secret/login/OS/physical/user-decision 等 `HUMAN_ONLY` 才进入普通 Human Gate；repo/remote source/clone/sync/environment/tests/config generation/diagnostics 等可解决事项由 Executor 自己处理；unsupported interface truthful close；optional enhancement 不冒充 blocker。
+- **Default-mode durable wait/resume，不能再声称 native persistent prompt**：056 probe 在 `codex-cli 0.142.0`、Default mode、feature enabled/tool available 下 114 秒返回空答案并 auto-resolve，`NATIVE_DEFAULT_PERSISTENT_PROMPT=FAIL`；同-thread `DURABLE_TRANSCRIPT_WAIT_RESUME=PASS`。当前 upstream handler 仍按 `mode == Plan` 决定 blocking，当前没有受支持的 Default-mode config timeout/always-wait setting。因此 HUMAN_ONLY gate 的主路线候选是 visible plain-text question + recorded resume point + end dependent turn + explicit same-thread reply 后 exact-once resume；不 polling、不 timeout->BLOCKED。Bridge Kit implementation 阶段应由 Critic 决定是否把 managed `features.default_mode_request_user_input` 设为 false 以 fail-closed，避免 Default tool 被误用于 required gate；不得把 transcript fallback 重命名成 native prompt。
+- **Human action 与 acceptance 分离 / post-action closure**：secret 输入、OAuth/OS 授权、网页登录、设备确认等只是 execution checkpoint。用户动作后 Executor 自动继续同一 Goal，完成 validation、persistence/runtime consumption、normal state、failure safety、targeted regression 等适用 closure；只有新的 final candidate 重新达到 Review Admission 才进入 acceptance。
+- **Exact failure + faithful evidence**：feature/behavior/bug fix 使用风险匹配验证；deterministic bug 尽量 old-bad/new-good。unit/synthetic/browser/native/live/user evidence 只证明对应 surface，pre-human 不证明 post-human，旧 candidate 不能拼给新 candidate。
+- **Representative coverage when the claim contains breadth**：只有 frozen objective 明确包含 catalog breadth、多 locale、material product branches、多 provider/variant 等时，W1 使用小型 representative coverage。schema/handler/sample list/source count 不能证明 breadth；单 happy path 不能证明所有 material branches。普通小任务不得因此继承全矩阵。
+- **Fallback != primary capability**：fallback/recovery 只能证明 recoverability；除非 Goal 明确接受为等价产品结果，否则自由文本、`Needs setup`、manual review queue 等不能证明 primary search/catalog/automatic moderation/provider capability complete。
+- **Hosted/external provider claim -> real configured evidence**：mock adapter tests 仍有价值，但 hosted capability claim 需要安全、bounded、实际 configured target evidence 和 normal entry confirmation；不因这条自动引入不必要 paid calls。
+- **Interaction sequence fidelity**：controlled number input、typeahead、rank/drag、多步 selection、autosave 等在 intermediate state 会被转换时，验证真实 user sequence，而不只 final-value schema。例如 `1 -> 17 -> 178`、paste、backspace/replace、blur/commit。
+- **State lifecycle closure**：对 upload/save/setup/configured 等持久 user state，风险需要时验证 action -> visible result -> navigation -> refresh/re-entry -> same authoritative state，而不是只看 mutation immediate success。
+- **Repeat-failure circuit breaker / human-time budget**：相同症状再次出现、测试一直绿但真实路径再次失败、同一 reviewer/user 再次指出同类问题、或 active rule 再次被违反时，先核 candidate identity、rule/plugin loading、fixture fidelity、evidence surface、root cause；没有新信息不得重复 full suite/Atlas/GPT Work/真人验收。
+- **Protect accepted / adjacent behavior**：修共享 UI/state/runtime 或 rewrite 组件时保护已接受行为；不能未经明确产品决策把成熟 structured interaction 降级为 generic/free-text fallback。具体视觉一致性由 Frontend Design。
+- **Source discovery 必须优先复用正确本地 source**：task 指向已知 repo 时先定位 existing canonical checkout/worktree/clone，核 branch/ref/origin/dirty state。unrelated dirty work 要保护，但不能仅因 dirty 就默认另起 `/tmp` clone；需要 isolation 时优先 canonical local repo 的 clean worktree或机器上已有正确 clone；确实没有可用 local source 才 network clone。不要通过 local clone -> remote remap 制造额外 provenance/授权风险；修改 Git remote 仍需独立授权。这是 existing source-discovery refinement，不新增 workflow capability。
+- 设计完整性、Figma 往返、图标/motion/design-system/localization surface quality 由 Frontend Design；科学图示语义由 Scientific Visualization；workflow-core 负责 gate、routing、evidence 与 completion semantics，不决定具体 style。
+- final report 以“用户当前真正获得什么能力、哪些边界未验证”为中心，不以 tests/logs/process state 数量为中心。
 
-进入实施前必须由同一 final candidate 通过至少以下能力 replay：
+进入实施前/实施后的 normal-entry capability replay 至少应覆盖：
 
-1. 普通 feature task 在 agent-local implementation/test/actual-surface QA 未绿时不会进入 external/human review；
-2. 一个可预见 human-only action 在 Goal 中声明并触发 persistent blocking prompt，用户不回答时 workflow 保持 waiting 而非 timeout/BLOCKED；
-3. 用户回答后同一 Goal 自动继续，不把 human action 当 completion；
-4. 原失败由 faithful targeted validation 捕获，修复后通过；
-5. 相同真实失败第二次出现时无新信息不会再次调用 user/external reviewer；
-6. 一个 docs-only / server-only / simple task 不会被强制 Figma/GPT Work/全套 human QA。
+1. producer-local implementation/test/actual-surface evidence 不足时，acceptance handoff 被拒绝；advisory review 不被错误阻止；
+2. `HUMAN_ONLY` 在 Default mode 走 durable transcript wait/resume，用户未回答时 dependent execution 不继续、不 terminal BLOCKED；用户明确回复后 same-goal exact-once resume；
+3. `AGENT_RESOLVABLE` local repo/source/environment issue 不 prompt 用户；`UNSUPPORTED_WITH_EVIDENCE` truthful close；
+4. user action 后由 Executor 完成 integration closure，human action 本身不算 feature completion；
+5. 原真实失败由 faithful targeted validation 捕获，修复后 final candidate 通过对应 surface；
+6. CUHK-Date-like candidate 即使 broad tests 绿，只要存在 demo catalog 冒充 breadth、mock-only hosted provider、material branch 缺失、raw locale token、interaction sequence bug、fallback-only primary feature或hosted config 未消费 backend capability，`READY_FOR_USER_REVIEW` 必须失败；
+7. rewrite 场景保护已有 accepted structured interaction；
+8. existing canonical local repo + unrelated dirty state 时复用 local source/clean worktree，不重复 clone/remap remote；
+9. docs-only/server-only/small nonvisual fix 不被强制进入 locale/catalog/provider/Figma/GPT Work/full E2E。
 
 ## Do not do
 
 - Do not duplicate Bridge Kit core Reviewed Handoff implementation in this repo.
 - Do not use workflow-core to make domain judgments for writing, Presentation, statistics or imaging.
+- Do not add watcher/polling daemon/Persistent Run/tmux/Control/ledger/new state machine to simulate a persistent user prompt.
+- Do not maintain a custom Codex fork as the default solution when the supported transcript wait/resume path suffices.
