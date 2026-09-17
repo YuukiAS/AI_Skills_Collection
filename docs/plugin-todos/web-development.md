@@ -187,6 +187,55 @@ candidate_action:
 - External reviewers should confirm the converged result, not discover that the design and code describe different products.
 promotion_gate: immediately mandatory for Bobbio; strong candidate for generic Frontend Design workflows where a canonical design artifact exists.
 
+### Normal UI must have a human-readable presentation boundary
+status: NEW
+source: Lucerna production acceptance review, 2026-09-17
+evidence: `YuukiAS/Lucerna@461dcea4015434f90d50922d9b7ae054286c98bc` plus user-provided release screenshots showing raw Longleaf/Slurm/recovery text such as `status=online`, `controller=available; partition=mixed`, `canonical-longleaf-bridge`, raw exit-code details, and internal recovery IDs in the normal UI
+problem: The frontend rendered backend/runtime diagnostic strings directly into production copy. Technically truthful provider fields became unreadable user-facing prose, forcing the user to understand implementation contracts instead of product state.
+project-specific context: Longleaf, Slurm, Bridge A/B and their exact contract fields are Lucerna-specific. The reusable frontend issue is the missing presentation layer between structured runtime state and normal product copy.
+
+### Primary surfaces should optimize for actionability, not implementation completeness
+status: NEW
+source: Lucerna production acceptance review, 2026-09-17
+evidence: user-provided release screenshots where healthy/usable Longleaf status was followed by expanded recovery, scheduler, Bridge internals and other low-actionability operational detail in the main information flow
+problem: The interface promoted diagnostic and maintenance information merely because it existed. Routine status, actionable exceptions, recovery tools, scheduler diagnostics and extensions were not separated by user need, so the compact utility became an operations dashboard that increased cognitive load during normal use.
+project-specific context: Lucerna specifically wants recovery, diagnostics and optional extensions under a collapsed bottom area. Other products may choose different placement, but the generic issue is that low-frequency maintenance tooling should not compete with the primary task unless it is currently actionable.
+
+### Metric labels and rankings must be backed by the data semantics they imply
+status: NEW
+source: Lucerna GitHub Actions resource review, 2026-09-17
+evidence: `YuukiAS/Lucerna` GitHub Actions implementation used a deduplicated alphabetically sorted repository list and displayed the first item as `Top`, while the user expected actual usage ranking and separate overall/private views
+problem: The frontend presented a strong analytical label (`Top`) without a matching aggregation/ranking contract. A visually plausible label hid a semantic data error. Frontend/product work needs to treat ranking, filtering, scope and denominator as part of the visible UI contract, not as incidental backend details.
+project-specific context: Lucerna's public-vs-private GitHub Actions quota semantics are product-specific. The generic issue is that labels such as `top`, `highest`, `remaining`, `share`, or `risk` must correspond to explicit computed semantics and must not be inferred from array order or convenience fields.
+
+### Comparable resource cards need one coherent progress and reset grammar
+status: NEW
+source: Lucerna resource-card polish, 2026-09-17
+evidence: user-provided release screenshots showing Codex, GitHub Actions, VPS bandwidth and Longleaf lease information using inconsistent combinations of bucket labels, percentages, reset text, remaining values and progress bars
+problem: Comparable quota/lease resources were each rendered with different copy and visual conventions. Some exposed provider bucket names, some duplicated usage text, and reset/expiry meaning was not visually standardized. The user had to relearn the same concept for every card.
+project-specific context: Lucerna prefers a compact used-versus-remaining status bar plus a consistent reset/expiry line. The exact colors and card density are project-local; the generic issue is that semantically comparable resources should share a stable visual/copy grammar.
+
+### Opaque identifiers and formatting artifacts must not leak into glanceable UI
+status: NEW
+source: Lucerna OpenAI/resource acceptance review, 2026-09-17
+evidence: user-provided release screenshots showing raw `proj_...` project identifiers, mixed time formats/timezones, and negative-zero currency such as `-$0.00` in glanceable production UI
+problem: Machine-oriented identifiers and low-level formatting artifacts were technically valid but visually noisy and confusing. The normal UI did not distinguish human labels from diagnostic identifiers, and formatting normalization was treated as optional polish rather than part of production quality.
+project-specific context: OpenAI project IDs and Lucerna's exact time/currency fields are project-specific. The reusable issue is that primary UI should prefer human-readable aliases/names, normalized zero values, and one deliberate date/time convention, while raw IDs remain available only in details/diagnostics when needed.
+
+### Severity colors must encode one stable semantic meaning
+status: NEW
+source: Lucerna Usage card visual acceptance review, 2026-09-17
+evidence: user-provided release screenshots where an OpenAI Usage card labeled `NORMAL` used an amber/yellow warning treatment while other healthy states used green
+problem: Status text and status color communicated different meanings. Reusing an attention/warning palette for a normal state weakens the entire severity system because users can no longer infer whether color reflects health, category branding, or decoration.
+project-specific context: Lucerna specifically prefers green for normal, amber for attention and red for critical. Exact hues are project-local; the generic issue is that semantic status colors must be globally consistent and should not be repurposed decoratively on the same surface.
+
+### Native interaction acceptance must prove the intended control path, not only the final window state
+status: NEW
+source: Lucerna titlebar-close false-positive acceptance, 2026-09-17
+evidence: `YuukiAS/Lucerna@461dcea4015434f90d50922d9b7ae054286c98bc` reported physical close PASS from a coordinate-based smoke because the window became hidden, while the user still could not close the release by clicking the visible X; the app also had focus-loss/outside-click hide routes that could satisfy the same final-state assertion
+problem: The black-box test verified an outcome (`window hidden`) but not its cause (`the visible X received real pointer input and triggered the canonical close path`). Multiple valid hide routes allowed a false positive to pass and prematurely moved the product to user acceptance.
+project-specific context: Lucerna's hide-to-tray titlebar control and exact coordinates are project-specific. The reusable frontend QA issue is that interaction acceptance should identify the actual rendered hit target and, when competing routes can produce the same final state, prove the intended control/event path rather than infer causality from the outcome alone.
+
 ## Watch boundaries
 
 - One product's visual taste is project-local unless repeated or explicitly adopted as a long-term cross-project preference.
