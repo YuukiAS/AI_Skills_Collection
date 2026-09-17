@@ -1,19 +1,20 @@
 # 057 Repo AGENTS Hygiene — Review Package
 
-Status: `AWAITING_INTEGRATION_PACKAGE_CRITIC_REVIEW`
+Status: `AWAITING_INTEGRATION_PACKAGE_CRITIC_R2`
 
 ## Task identity
 
 - Task key: `057_repo_agents_hygiene`
 - Approved design proposal: `docs/design/057_REPO_AGENTS_HYGIENE_V2_PROPOSAL_2026-09-17.md`
 - Approved bounded versioning amendment: `docs/design/057_LITE_VERSIONING_DEFAULT_AMENDMENT_2026-09-17.md`
-- Implementation Plan/Goal v0.2: already executed and independently reviewed
+- Implementation Plan/Goal v0.2: executed and independently reviewed
 - Final reviewed implementation evidence: `E3 = 745281b70322b8508e43e59a5bdef70529749ea5`
 - Final reviewed implementation manifest: `M3 = 24051588d13f07e7f71e0edf5a723aca36754ed5`
-- Integration Plan: `docs/design/057_REPO_AGENTS_HYGIENE_INTEGRATION_PLAN.md` v0.1
-- Integration Goal: `docs/goals/057_REPO_AGENTS_HYGIENE_INTEGRATION_GOAL.md` v0.1
-- Integration Kickoff Draft: `docs/operations/prompts/057_REPO_AGENTS_HYGIENE_INTEGRATION_KICKOFF.md` v0.1
-- Stage: separately approved integration preparation
+- Integration Plan: `docs/design/057_REPO_AGENTS_HYGIENE_INTEGRATION_PLAN.md` v0.2
+- Integration Goal: `docs/goals/057_REPO_AGENTS_HYGIENE_INTEGRATION_GOAL.md` v0.2
+- Integration Kickoff Draft: `docs/operations/prompts/057_REPO_AGENTS_HYGIENE_INTEGRATION_KICKOFF.md` v0.2
+- Integration Critic prompt: `docs/design/057_REPO_AGENTS_HYGIENE_INTEGRATION_CRITIC_PROMPT_2026-09-17.md`
+- Stage: separately approved integration package R2
 
 ## Implementation review closure
 
@@ -42,52 +43,78 @@ Critic returned `READY_FOR_INTEGRATION = YES`. This authorizes Planner to prepar
 - SeminarArc: `74caaa4ecec16f1bc90987979458d1a4e93f52be`
 - CUHK Date inspected only: `711fab75f044b7ad31e5ff8610c076f902ccc949`
 
-## Current integration reality at Planner drafting
+## Integration package review history
 
-Current canonical branches were rechecked before drafting integration v0.1:
+### v0.1
 
-- Bridge main `cb77b1cc...` -> exact reviewed candidate is a pure fast-forward.
-- Bobbio develop `0811116a...` -> pure fast-forward.
-- Mica main `aa4ce525...` -> pure fast-forward.
-- Asteria main `166791c2...` -> pure fast-forward.
-- SeminarArc main `71c59d39...` -> pure fast-forward.
-- Lucerna main `852a4a8c...` has advanced since the 057 base; exact reviewed candidate changes only `AGENTS.md`, while current post-base changes do not touch `AGENTS.md`; current evidence supports a clean merge commit with no manual reconciliation.
-- AI_Skills main `c82f9a3c...` has advanced since the 057 base; exact M3 branch adds only `results/057_repo_agents_hygiene/*`, while current-main post-base changes are in planning/TODO docs; current evidence supports a clean merge commit with no manual reconciliation.
+Package commit:
 
-Execution must re-fetch all canonical refs. Relevant drift/conflict is a stop condition, not authorization to modify reviewed content.
+`0d84bf541800c1b0bc39d8f15c0a17f72905b1fd`
 
-## Integration strategy
+Critic decision:
 
-- Use exact reviewed SHAs, not rewritten equivalents.
-- Fast-forward cases use `git merge --ff-only <EXACT_SHA>`.
-- AI_Skills/Lucerna use `git merge --no-ff --no-commit <EXACT_SHA>` only if execution-time preflight still proves a clean, non-overlapping mechanical merge; inspect before committing. Any conflict or relevant semantic drift => abort/stop.
-- No squash/rebase/cherry-pick/force push/history rewrite.
-- No task-branch deletion.
-- CUHK Date remains unchanged.
+```text
+RESULT = REVISE
+READY_FOR_INTEGRATION_CODEX = NO
+```
 
-## Bridge boundary
+Only stable blocker:
 
-Bridge `0.8.3` may become canonical source metadata on `main` only through approved integration. Integration does not authorize tag, GitHub Release, package publication, deployment, Host Policy installation/update, or a `0.8.4` bump.
+`C057-G1-CLEAN-CANONICAL-WORKTREE-GATE`
 
-## Relationship to 056
+The already-reviewed integration architecture was otherwise accepted:
 
-After approved 057 integration:
+- Bridge/Bobbio/Mica/Asteria/SeminarArc = exact `FF_ONLY` cases;
+- AI_Skills/Lucerna = exact clean mechanical merge cases;
+- no squash/rebase/cherry-pick/force/history rewrite;
+- truthful partial-integration recovery;
+- Bridge `0.8.3` source-only boundary;
+- no repeated 363 tests/H1–H9;
+- no 056 mutation.
 
-`Planner bounded 056 source-drift revalidation -> remove 057-completed duplicate work -> refresh exact refs/Bridge version slot -> narrow Critic review -> only then execute amended 056 package`.
+### v0.2 response — C057-G1 ACCEPT
 
-Integration must not edit or execute 056.
+v0.2 changes only preflight/recovery semantics.
+
+Before any canonical merge/push, every mutable repo's selected canonical checkout must prove:
+
+- correct canonical branch/HEAD;
+- no unfinished merge/rebase/cherry-pick/revert/bisect or equivalent Git operation;
+- no pre-existing staged index changes;
+- no pre-existing unstaged tracked changes;
+- no untracked path conflicting with candidate paths, merge outputs, or checkout/merge targets.
+
+Observable status such as `git status --porcelain` must be recorded.
+
+Dirty/staged user work is a stop condition. Integration may not stash, reset, clean, commit, relocate, overwrite, or absorb that work. Conflicting/ambiguous untracked files are also a stop condition.
+
+The gate applies to fast-forward cases as well as AI_Skills/Lucerna clean merges, and all repos must pass it before the first canonical push. Therefore `git merge --abort` for the diverged cases starts from a known-clean recovery baseline rather than unknown local modifications.
+
+No exact tuple, target branch, merge strategy, push order, Bridge boundary, validation scope, or 056 boundary changed.
+
+## Current integration strategy frozen for R2
+
+- exact reviewed SHAs only;
+- `FF_ONLY`: Bridge/Bobbio/Mica/Asteria/SeminarArc;
+- `CLEAN_MERGE`: AI_Skills/Lucerna, only after non-overlap + clean canonical checkout/index preflight;
+- all repo preflight before first canonical push;
+- no automatic dirty-work manipulation;
+- no task-branch deletion or PR;
+- CUHK Date unchanged;
+- Bridge `0.8.3` source integration only, no tag/release/package publish/deploy/Host install/`0.8.4`;
+- successful integration leads only to bounded 056 source-drift revalidation.
 
 ## Hard boundary
 
-This package is still a review object. No canonical merge/push has been authorized by this file.
+This package remains a review object. No canonical merge/push is authorized by this file.
 
-Only if independent Critic returns both:
+Only if independent Critic returns:
 
 ```text
 RESULT = PASS
 READY_FOR_INTEGRATION_CODEX = YES
 ```
 
-for the exact integration v0.1 Plan + Goal + Kickoff may the user send the approved Integration Kickoff and authorize the merges.
+for the exact integration v0.2 Plan + Goal + Kickoff may the user send the approved Integration Kickoff and authorize canonical integration.
 
 `NEXT_HANDOFF = CRITIC`
