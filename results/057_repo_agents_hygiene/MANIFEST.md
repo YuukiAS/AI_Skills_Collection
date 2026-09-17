@@ -2,16 +2,16 @@
 
 Status: `EXECUTED_UNAUDITED`
 
-AI_SKILLS_RESULT_COMMIT=`519c7da37979c8aa23aa98069c146b5cea1dd81c`
+AI_SKILLS_RESULT_COMMIT=`626147445166b2afc1648837830b283015bdc4cb`
 
-BRIDGE_CANDIDATE_COMMIT=`a5c4fe61dc9ab0e228822e854ace5c7e50a4d967`
+BRIDGE_CANDIDATE_COMMIT=`e1d6b781ad7e56d567bed419001069baf439d0a5`
 BRIDGE_VERSION=`0.8.3`
 
-BOBBIO_CANDIDATE_COMMIT=`dd977705a2cdfecaa2d4e09127ab4464ae898b32`
+BOBBIO_CANDIDATE_COMMIT=`ab5dccb6b8b87c49671aa097233ce1bcc38be004`
 LUCERNA_CANDIDATE_COMMIT=`41cd1297af6901531d3135593bc9806bffc38829`
-MICA_CANDIDATE_COMMIT=`7afb2277cd1001204e77e4987d9fcaa447e7c675`
-ASTERIA_CANDIDATE_COMMIT=`b34f6c5d27dd9ac7b1193826ac878fca4a953fb5`
-SEMINARARC_CANDIDATE_COMMIT=`c3fc5a64a3abaec7860808fbcb4082b95d2a0302`
+MICA_CANDIDATE_COMMIT=`e49416f874f633aedc7521734ee5b0f441aae970`
+ASTERIA_CANDIDATE_COMMIT=`0ce1d4daca1e410ce551570578dd563d4ef67e90`
+SEMINARARC_CANDIDATE_COMMIT=`74caaa4ecec16f1bc90987979458d1a4e93f52be`
 CUHK_DATE_INSPECTED_REF=`711fab75f044b7ad31e5ff8610c076f902ccc949`
 
 ## Evidence Locators
@@ -30,9 +30,8 @@ CUHK_DATE_INSPECTED_REF=`711fab75f044b7ad31e5ff8610c076f902ccc949`
 
 - Bridge targeted tests: `python -m unittest tests.test_bridge_cli_router`
 - Bridge full tests: `python -m unittest discover -s tests`
-- Bridge real fresh init/validate fixture:
-  `/tmp/057_repo_agents_hygiene/h7_fresh_cli`
-- Bridge real existing-root normal/force fixture:
-  `/tmp/057_repo_agents_hygiene/h8_existing_project`
+- Bridge real CLI normal/force byte-preservation smoke on a CRLF/trailing-space
+  existing-root fixture.
+- Product-repository `git diff --check` and cached-diff inspection before commit.
 
 This manifest intentionally does not record its own containing commit SHA.
