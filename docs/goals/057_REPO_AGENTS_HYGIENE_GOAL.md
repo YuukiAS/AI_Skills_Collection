@@ -1,100 +1,103 @@
 # 057 Repo AGENTS Hygiene — Canonical Goal
 
-- Execution package version: `v0.1`
+- Execution package version: `v0.2`
 - Task key: `057_repo_agents_hygiene`
 - Status: `READY_FOR_EXECUTION_CRITIC_REVIEW`
-- Plan: `docs/design/057_REPO_AGENTS_HYGIENE_IMPLEMENTATION_PLAN.md` v0.1
-- Kickoff: `docs/operations/prompts/057_REPO_AGENTS_HYGIENE_KICKOFF.md` v0.1
+- Plan: `docs/design/057_REPO_AGENTS_HYGIENE_IMPLEMENTATION_PLAN.md` v0.2
+- Kickoff: `docs/operations/prompts/057_REPO_AGENTS_HYGIENE_KICKOFF.md` v0.2
 - Approved design authority: `docs/design/057_REPO_AGENTS_HYGIENE_V2_PROPOSAL_2026-09-17.md`
+- Bounded amendment pending this review: `docs/design/057_LITE_VERSIONING_DEFAULT_AMENDMENT_2026-09-17.md`
 
-This Goal is not executable until an independent Critic reviews the exact v0.1 Plan + Goal + Kickoff and returns `READY_FOR_CODEX=YES`, and the user then sends the approved Kickoff.
+This Goal is not executable until independent Critic reviews this exact v0.2 Plan + Goal + Kickoff, including the bounded Lite versioning amendment, returns `READY_FOR_CODEX=YES`, and the user then sends the approved Kickoff.
 
 ## 0. Positive target
 
-Clean the target repositories' instruction surfaces without losing important project-specific rules, and add a reusable Bridge Kit root-AGENTS scaffold for future fresh repositories.
+Clean the target repositories' own instruction surfaces without losing important project-specific rules, add a reusable Bridge Kit root-AGENTS scaffold for future fresh repositories, and—if the bounded amendment is approved—put a stable fallback version-number policy in Lite Handoff so new repos do not invent arbitrary version schemes.
 
-Completion requires real instruction-surface quality and real Bridge init behavior:
+Completion requires behavior/evidence, not shorter Markdown:
 
-- duplicates/stale authority inside each target repo are resolved or explicitly preserved as `EVIDENCE_NEEDED`;
-- every moved/deleted hard rule has a surviving canonical owner;
-- root AGENTS become maps + hard project invariants rather than chronological incident manuals where the approved design calls for that change;
-- Bridge `ai-bridge init` actually consumes the new scaffold for a fresh repo;
-- existing custom AGENTS remain untouched outside the managed Bridge block, including under force init;
-- no Lite execution policy is duplicated into root;
-- H1–H9 pass on the same final candidate set.
+- duplicate/stale/conflicting authority inside each target repo is resolved or explicitly retained as evidence-needed;
+- every moved/deleted hard rule has a surviving owner;
+- Bobbio and SeminarArc authority ownership is internally consistent;
+- Bridge real `ai-bridge init` consumes the scaffold for fresh repos while existing project-owned root prose remains preserved;
+- root does not duplicate Lite execution/versioning authority;
+- H1–H9 pass on the same final candidate tuple;
+- final candidate identity uses the non-self-referential `E -> M` closure.
 
-A Markdown cleanup or line-count reduction alone is not completion.
-
-## 1. Authorized implementation scope after approved Kickoff
+## 1. Authorized scope after approved Kickoff
 
 ### AI_Skills_Collection
 
-Only 057 task evidence/result/control artifacts on branch:
+Only 057 task evidence/result/manifest/control artifacts on exact branch:
 
 `reviewed/057_repo_agents_hygiene`
 
-No central plugin production change.
+No central plugin production change and no 056 implementation.
 
 ### GPT_Codex_AI_Bridge_Kit
 
-Implement:
-
-- `templates/repo/AGENTS_TEMPLATE.md`;
-- fresh-repo scaffold consumption in the existing `ai-bridge init` path;
-- existing-repo/force preservation behavior;
-- focused/full tests;
-- Bridge `0.8.3` candidate metadata/docs only after H7–H9 pass.
-
-Branch after approved Kickoff:
+Exact branch:
 
 `reviewed/057_repo_agents_hygiene`
+
+Implement only:
+
+- `templates/repo/AGENTS_TEMPLATE.md`;
+- real fresh/existing root-AGENTS init behavior in current `ai-bridge init` path;
+- tests/docs/changelog/version candidate;
+- if Critic approves the bounded amendment, concise fallback versioning rules in canonical `templates/prompts/AGENT_RULES.md`.
+
+Do not modify Bridge Host Policy, 056 Default prompt transport, Review/Control state machines, or build a migration engine.
+
+Bridge `0.8.3` remains only a candidate until H7–H9/full regression pass.
 
 ### Bobbio
 
-Branch from current `develop`:
+Exact branch from kickoff-time `origin/develop`:
 
 `reviewed/057_repo_agents_hygiene`
 
-Allowed instruction/doc files only:
+Allowed files:
 
 - `AGENTS.md`
-- `docs/DEVELOPMENT_WORKFLOW.md` if required for moved unique detail
-- `docs/quality/NATIVE_DESKTOP_ACCEPTANCE.md` if required for moved unique detail
+- `docs/PRODUCT_DESIGN_BRIEF.md` only for visual/source-of-truth wording
+- `docs/DEVELOPMENT_WORKFLOW.md` only for a unique moved detail
+- `docs/quality/NATIVE_DESKTOP_ACCEPTANCE.md` only for a unique moved acceptance detail
 
-No product/Figma/runtime change.
+No Figma/product/runtime/schema/version change.
 
 ### Lucerna
 
-Branch from current `main`:
+Exact branch from kickoff-time `origin/main`:
 
 `reviewed/057_repo_agents_hygiene`
 
-Allowed: `AGENTS.md` only.
+Allowed: project-owned `AGENTS.md` only; managed Bridge block remains canonical.
 
 ### Mica-for-ChatGPT
 
-Branch from current `main`:
+Exact branch from kickoff-time `origin/main`:
 
 `reviewed/057_repo_agents_hygiene`
 
-Allowed: `AGENTS.md` only.
+Allowed: `AGENTS.md` only. No runtime/version change.
 
 ### Asteria
 
-Branch from current `main`:
+Exact branch from kickoff-time `origin/main`:
 
 `reviewed/057_repo_agents_hygiene`
 
 Allowed:
 
 - `AGENTS.md`
-- `docs/operations/development/RUNTIME_OPERATIONS.md`
+- new `docs/operations/development/RUNTIME_OPERATIONS.md`
 
-No product/runtime or `prompts/AGENT_RULES.md` mutation under this Goal.
+No product/runtime or `prompts/AGENT_RULES.md` change under this Goal.
 
 ### SeminarArc
 
-Branch from current `main`:
+Exact branch from kickoff-time `origin/main`:
 
 `reviewed/057_repo_agents_hygiene`
 
@@ -103,7 +106,7 @@ Allowed:
 - `AGENTS.md`
 - `docs/DEVICE_TESTING.md`
 
-No Android/runtime/product change.
+No Android/runtime/product change and no third device/environment manual.
 
 ### CUHK Date
 
@@ -111,119 +114,138 @@ Inspect only. Do not create root `AGENTS.md` and do not modify the repo.
 
 ## 2. Source/dirty preflight
 
-For every repo:
+For every mutable repo:
 
-- locate existing canonical local source first;
-- verify repo identity/origin/base ref/freshness/dirty ownership;
-- preserve unrelated dirty work;
-- create only the exact task branch/worktree authorized by the Kickoff;
-- do not network clone when usable canonical local source exists;
-- do not remap remotes, force push, rewrite history or delete branches/tags.
+- discover existing canonical local source first;
+- verify repo identity/origin/base/freshness/dirty ownership;
+- protect unrelated dirty work;
+- create only the exact task branch/worktree authorized by Kickoff;
+- network clone only when no usable local source exists;
+- no remote remap, force push, history rewrite, branch/tag deletion, PR or main/develop merge.
 
-Source or instruction-file conflicts that cannot be isolated safely stop that repo and return evidence rather than overwriting user work.
+If an exact task branch already exists with ambiguous ownership, stop that repo and report it rather than inventing a different branch.
 
 ## 3. Semantic-preservation contract
 
-Before editing a repo, record its current hard rules in:
+Before editing a repo, record its changed/moved hard rules in:
 
-`AI_Skills_Collection/results/057_repo_agents_hygiene/SEMANTIC_PRESERVATION.md`
+`results/057_repo_agents_hygiene/SEMANTIC_PRESERVATION.md`
 
-For every rule changed/moved/merged record:
-
-- old owner/location;
-- keep/move/merge decision;
-- new canonical owner/location;
-- evidence for supersession or duplication.
-
-A rule can disappear from root only because it is a real duplicate, moved behind a clear canonical locator, superseded by evidenced current authority, or historical narrative reduced to a durable invariant with evidence preserved.
-
-Never remove safety/data/authority rules merely to reduce size.
+For every rule record old owner, keep/move/merge decision, new canonical owner, and evidence for duplication/supersession. Safety/data/authority rules cannot disappear for size/style reasons.
 
 ## 4. Bridge Kit contract
 
 ### Fresh repo
 
-Normal `ai-bridge init` with no root `AGENTS.md` must create:
+Normal `ai-bridge init` with no root AGENTS must create:
 
-- concise project-owned scaffold from `templates/repo/AGENTS_TEMPLATE.md`;
-- exactly one managed Bridge block generated from `codex/AGENTS_SNIPPET.md`;
+- concise root from `templates/repo/AGENTS_TEMPLATE.md`;
+- exactly one managed Bridge block from canonical source;
 - locator to `prompts/AGENT_RULES.md`;
-- no fabricated project-specific facts;
-- no copied Lite rule set.
+- no fabricated project facts;
+- no copied Lite policy in root.
+
+If versioning amendment is approved, generated `prompts/AGENT_RULES.md` must contain the generic fallback versioning contract while root only points to it.
 
 ### Existing repo
 
-Normal and force init preserve project-owned root prose and only install/update managed/generated Bridge content according to existing semantics. No automatic scaffold migration/reformatting.
+Normal and force init preserve project-owned root prose and only install/update canonical managed/generated Bridge content under existing semantics. No automatic scaffold migration/reformatting.
 
-### Release candidate
+### Lite versioning fallback, if approved
 
-If and only if focused/full tests plus H7–H9 pass, Bridge candidate becomes `0.8.3`. Otherwise remain on current baseline and report the failed behavior.
+Precedence:
+
+1. current user/frozen task;
+2. explicit current repo-local versioning policy;
+3. Lite fallback.
+
+Fallback:
+
+- formal version `MAJOR.MINOR.PATCH`;
+- PATCH = compatible repair;
+- MINOR = compatible user-visible capability;
+- MAJOR = incompatible contract/migration and requires explicit Planner/user approval;
+- `0.y.z` allowed for initial development; `1.0.0` is an explicit stability/default-use decision;
+- `alpha`/`beta`/`rc`/preview/date/arbitrary prerelease labels are not invented unless an approved repo lifecycle or explicit task/user authorization exists;
+- one formal version cannot identify two different user-consumable runtime candidates;
+- commit/build labels supplement but do not replace formal version;
+- release-ready version/source/changelog parity must be truthful.
 
 ## 5. Per-repo outcome contract
 
 ### Bobbio
 
-- `docs/design/FIGMA_HANDOFF.md` becomes explicit frontend/Product Design required read;
-- Figma = current visual authority;
+Final authority must be consistent in `AGENTS.md`, `FIGMA_HANDOFF.md`, and `PRODUCT_DESIGN_BRIEF.md`:
+
+- Figma = current canonical visual design/components/screen composition;
 - Product Design Brief = durable product/interaction constraints;
-- four old design PNGs = supporting/historical references only;
-- consolidate repeated general GUI/human-gate/pre-user QA wording;
-- preserve Zotero isolation/authority, Windows-native acceptance, knowledge/provenance, roadmap/versioning and iPad/Pencil constraints.
+- old `Bobbio_Design_*.png` = historical/supporting references.
+
+Add Figma handoff to frontend/Product Design required reads, consolidate repeated general GUI/human/pre-user wording, and preserve Zotero/native/knowledge/roadmap/iPad/Pencil constraints.
 
 ### Lucerna
 
-Light normalization only. Preserve Windows release/tray, real-provider truth, matching regression, screenshot helper/evidence budget and Longleaf boundaries as distinct project rules. Managed Bridge block remains unchanged.
+Light normalization only. Preserve Windows release/tray, real-provider truth, matching regression, screenshot helper/evidence budget and Longleaf boundaries as distinct project-specific rules.
 
 ### Mica
 
-Consolidate testing prose into one ladder while preserving real-failure reproduction, built-in diagnostics, authenticated-account safety, typing hot path, stable build path and final manual real-site long-conversation acceptance. Do not turn real-site acceptance into an automated authenticated loop.
+Consolidate repeated testing prose into one ladder. Preserve real-failure reproduction, diagnostics/privacy, authenticated-account safety, fail-open behavior, typing hot path, stable build path/runtime identity and final manual authenticated long-conversation acceptance. Automated authenticated ChatGPT regression remains forbidden.
 
 ### Asteria
 
-Root becomes a concise map + hard invariants. Move volatile runtime/tunnel/dev-server mechanics into `docs/operations/development/RUNTIME_OPERATIONS.md`. Root retains fixed public-entry invariant, browser-contract locator + `可以自动操作页面；不能绕过页面`, GPT Work-before-human gate, visual/scientific-rule locator and stable Git/release boundaries.
+Root becomes map + hard invariants. Volatile runtime/tunnel/dev-server mechanics move to the single `RUNTIME_OPERATIONS.md` owner. Root keeps fixed public URL, browser-contract locator + `可以自动操作页面；不能绕过页面`, GPT Work-before-human gate, visual/scientific locator and stable Git/release boundaries.
 
 ### SeminarArc
 
-Root retains prominent physical-device safety summary and project invariants. Long environment snapshots, command bans and historical incident detail move to `docs/DEVICE_TESTING.md` only after semantic preservation is proven. Emulator-first and protected-device safety must remain impossible to miss from root.
+Final ownership:
+
+- root = prominent physical-device safety summary + locator;
+- `docs/DEVICE_TESTING.md` = detailed device/environment/testing mechanics, command restrictions, volatile inventory and incident evidence.
+
+Root must visibly retain Emulator-first, protected device not generic connected-test target, no automatic transport recovery/reset, explicit verified serial + pre/postflight for authorized physical writes, device-channel failure not blocking independent WSL/headless/Emulator work, and PIN/secret non-disclosure.
 
 ### CUHK Date
 
-Inspect and record `NO_CHANGE` unless a new direct contradiction exists. No root file is created for symmetry.
+Inspect-only `NO_CHANGE` unless a new direct contradiction is found; no root AGENTS creation for symmetry.
 
 ## 6. H1–H9 gates
 
-H1 Semantic preservation — every changed/moved hard rule has a surviving owner.
+- H1 semantic preservation
+- H2 no internal contradiction, including direct Bobbio three-way and SeminarArc owner comparison
+- H3 discoverability from root to current canonical owners
+- H4 managed-block integrity
+- H5 context quality without numeric gaming
+- H6 repo-specific regression protections
+- H7 real fresh `ai-bridge init -> validate`, including Lite versioning fallback if amendment passes
+- H8 real existing-root normal/force init preservation
+- H9 no Lite/versioning duplication in root
 
-H2 No internal contradiction — final root/delegated authorities do not compete on current design/test/user-action authority.
+Do not add H10.
 
-H3 Discoverability — starting from root, a new agent can reach current design/safety/testing/runtime authority through explicit locators.
+## 7. Final candidate — two-stage identity
 
-H4 Managed-block integrity — existing product-repo Bridge blocks are unchanged; fresh block comes from canonical Bridge source.
+### Stage A: result/evidence commit `E`
 
-H5 Context quality — report before/after root bytes/lines; improvement is qualitative and may not trade away H1/H6.
+Finalize:
 
-H6 Repo-specific regression — all unique protections listed in Plan §14 remain directly discoverable.
+- `RESULT.md`
+- `SEMANTIC_PRESERVATION.md`
+- `SIZE_REPORT.md`
+- H1–H9 evidence/locators
 
-H7 Fresh Bridge scaffold — real `ai-bridge init` + `validate` on a fresh temporary repo produces the approved scaffold behavior.
+Do not write `E`'s own SHA into tracked content in `E`.
 
-H8 Existing-repo should-not-change — normal and force init preserve custom project-owned AGENTS outside the managed block.
+### Stage B: manifest closure commit `M`
 
-H9 No Lite duplication — root points to `prompts/AGENT_RULES.md` without copying its execution-policy authority.
+Update only `MANIFEST.md` with:
 
-Do not add H10 or another workflow gate merely because implementation is inconvenient.
+- `AI_SKILLS_RESULT_COMMIT=E`
+- Bridge candidate commit/version
+- Bobbio/Lucerna/Mica/Asteria/SeminarArc candidate commits
+- CUHK Date inspected ref
+- H1–H9 status/evidence locators
 
-## 7. Result artifacts and final candidate
-
-AI_Skills task branch must contain:
-
-- `results/057_repo_agents_hygiene/RESULT.md`
-- `results/057_repo_agents_hygiene/SEMANTIC_PRESERVATION.md`
-- `results/057_repo_agents_hygiene/SIZE_REPORT.md`
-- `results/057_repo_agents_hygiene/MANIFEST.md`
-
-Freeze exact candidate commits for Bridge, Bobbio, Lucerna, Mica, Asteria and SeminarArc, plus CUHK Date inspected ref and H1–H9 evidence.
-
-Any semantic post-freeze edit invalidates affected instruction-quality evidence.
+Commit as `M`. Do not write `M`'s own SHA into the tracked manifest. Executor handoff reports `AI_SKILLS_MANIFEST_COMMIT=M` externally. Independent implementation review targets the exact tuple bound by `M`.
 
 ## 8. Explicit non-goals
 
@@ -231,37 +253,31 @@ Do not:
 
 - change application/runtime code;
 - redesign products/science;
-- change Bridge Host Policy or 056 prompt transport;
-- implement 056;
-- copy 056 Lite rules into root template;
+- change Bridge Host Policy or 056 transport;
+- implement/edit 056;
+- duplicate Lite rules into root scaffold;
 - auto-migrate existing repos;
-- modify `prompts/AGENT_RULES.md` in product repos under 057;
-- bulk-translate repos for cosmetic uniformity;
-- create new workflow states/controllers/watchers/ledgers;
+- modify target product repos' delegated `prompts/AGENT_RULES.md`;
+- normalize existing repos' release histories/prerelease labels under 057;
+- bulk-translate for cosmetic uniformity;
+- create new states/controllers/watchers/ledgers;
 - call paid APIs/Terra;
-- mutate CUHK Date root policy;
-- mutate CARE/Server/EAT.
+- mutate CUHK Date/CARE/Server/EAT.
 
-## 9. Stop/recovery conditions
+## 9. Stop/recovery
 
-Stop the affected repo and return evidence when:
+Stop affected repo and preserve content when authority is unresolved, unrelated dirty work cannot be safely isolated, semantic-preservation mapping cannot prove a surviving owner, managed block is unexpectedly drifted, or cleanup would require product/runtime mutation.
 
-- authority conflict cannot be resolved from current source;
-- instruction file contains unrelated user-owned dirty edits that cannot be safely isolated;
-- preservation mapping cannot prove where a removed hard rule survives;
-- Bridge scaffold would require a migration engine/new state system;
-- existing-repo init cannot preserve custom prose;
-- managed Bridge block has unexplained drift;
-- requested cleanup would require product/runtime changes.
+Bridge H7/H8/H9 failure means no Bridge version bump/release claim.
 
-Do not lower the preservation bar to make a shorter AGENTS file.
+## 10. Future all-repo adaptation
 
-## 10. Commit/push and handoff
+After both 057 and 056 are integrated, Planner will open a separate reviewed major round for complete adaptation of all active repos: Bridge/Lite identity, root/delegated AGENTS, versioning authority/parity, intentional local overrides/prerelease history, and final 056 consumption. This Goal does not mutate those additional repos now.
 
-Approved Kickoff may authorize ordinary commits/push only to the exact task branches above. No merge into `main`/`develop` under this Goal.
+## 11. Handoff
 
-After implementation/self-validation/H1–H9 evidence, stop at implementation handoff (`EXECUTED_UNAUDITED` or legal equivalent). An independent implementation review must inspect actual final diffs and preservation evidence before integration.
+Approved Kickoff may authorize ordinary commit/push only to exact temporary task branches. No integration/main/develop merge/release under this Goal.
 
-After 057 integration, Planner performs a separate bounded 056 source-drift revalidation. Executor must not amend or execute 056 itself.
+After `M` is pushed, stop at implementation handoff (`EXECUTED_UNAUDITED` or legal equivalent) for independent review. Executor must not amend or execute 056.
 
 `NEXT_HANDOFF = INDEPENDENT_IMPLEMENTATION_REVIEW`
