@@ -2,73 +2,69 @@
 
 Task key: `057_repo_agents_hygiene`
 
-This file records hard-rule preservation before product-repository edits. The
-approved kickoff authorizes the Bridge scaffold plus Lite versioning amendment;
-Bridge implementation preserves existing-root project prose and moves no
-project-specific target-repo rule.
+This file records the repaired E2 candidate. The earlier E/M tuple remains
+historical failed evidence and is not reinterpreted as PASS.
 
-## Source Refs
+## Current Candidate Refs
 
-| Repo | Base ref | Branch | Status |
+| Repo | Current ref | Branch | Status |
 | --- | --- | --- | --- |
-| AI_Skills_Collection | `e8ba751561c9e61a5b0bbd094d2c280ff0b00b59` | `reviewed/057_repo_agents_hygiene` | evidence only |
-| GPT_Codex_AI_Bridge_Kit | `cb77b1cc5a1fce097a38066d2db452291e359852` | `reviewed/057_repo_agents_hygiene` | mutable |
-| Bobbio | `0811116ac7197590f0af773f3c6296d4ca41db80` | `reviewed/057_repo_agents_hygiene` | mutable |
-| Lucerna | `760931ae8a1f0edffefe41c83c1667c7190c3014` | `reviewed/057_repo_agents_hygiene` | mutable |
-| Mica-for-ChatGPT | `aa4ce52581fff2e207d1f93600becbb3018b0efc` | `reviewed/057_repo_agents_hygiene` | mutable |
-| Asteria | `166791c27752c70255043f026dcbda4deb693c04` | `reviewed/057_repo_agents_hygiene` | mutable |
-| SeminarArc | `71c59d39f4d7e9cd3a3d813ad55d5cf6a38a4b11` | `reviewed/057_repo_agents_hygiene` | mutable |
+| GPT_Codex_AI_Bridge_Kit | `e1d6b781ad7e56d567bed419001069baf439d0a5` | `reviewed/057_repo_agents_hygiene` | repaired |
+| Bobbio | `ab5dccb6b8b87c49671aa097233ce1bcc38be004` | `reviewed/057_repo_agents_hygiene` | repaired |
+| Lucerna | `41cd1297af6901531d3135593bc9806bffc38829` | `reviewed/057_repo_agents_hygiene` | unchanged from prior 057 candidate |
+| Mica-for-ChatGPT | `e49416f874f633aedc7521734ee5b0f441aae970` | `reviewed/057_repo_agents_hygiene` | repaired |
+| Asteria | `0ce1d4daca1e410ce551570578dd563d4ef67e90` | `reviewed/057_repo_agents_hygiene` | repaired |
+| SeminarArc | `74caaa4ecec16f1bc90987979458d1a4e93f52be` | `reviewed/057_repo_agents_hygiene` | repaired |
 | CUHK_Date | `711fab75f044b7ad31e5ff8610c076f902ccc949` | `main` | inspect only |
 
-## GPT_Codex_AI_Bridge_Kit
+## Bridge Kit
 
-| Rule / authority | Old owner | Decision | New owner | Evidence |
-| --- | --- | --- | --- | --- |
-| Fresh Lite repos need root guidance plus managed Bridge protocol | `ai_bridge_kit/cli.py` created only managed block when root missing | Add scaffold without inventing project facts | `templates/repo/AGENTS_TEMPLATE.md` + canonical managed block from `codex/AGENTS_SNIPPET.md` | H7 real init validates one block and Lite locator |
-| Existing root project-owned prose must be preserved, including `--force` | Existing `install_agents_snippet` append/update block behavior | Preserve behavior; add regression test | `ai_bridge_kit/cli.py` existing-root path | H8 normal/force fixture checks byte-order preservation outside managed block |
-| Lite default versioning belongs in delegated Lite execution authority | No generic fallback in `templates/prompts/AGENT_RULES.md` | Add approved fallback there only | `templates/prompts/AGENT_RULES.md` | H7 checks generated Lite rules; H9 checks root does not copy policy |
+| Rule / authority | Repair | Preserved semantics |
+| --- | --- | --- |
+| Fresh Lite repos need root guidance plus managed Bridge protocol | `install_agents_snippet` writes scaffold bytes plus the canonical managed block when root `AGENTS.md` is absent. | Fresh repositories get root guidance and one managed block without inventing project-specific facts. |
+| Existing root prose is project-owned | Existing `AGENTS.md` handling now reads/writes bytes and appends/replaces only the managed block span. | CRLF/CR/mixed newlines, trailing spaces and prose outside the managed block are preserved under normal init and `--force`. |
+| Lite fallback versioning belongs in Lite rules | `templates/prompts/AGENT_RULES.md` adds docs/TODO/tests/helper-only and unreleased intermediate commit guidance. | Root README labels `0.8.3` as candidate state; formal versioning remains truthful and delegated. |
 
 ## Bobbio
 
-| Rule / authority | Old owner | Decision | New owner | Evidence |
-| --- | --- | --- | --- | --- |
-| Current canonical visual design/components/screen composition | `docs/design/FIGMA_HANDOFF.md`; `AGENTS.md` still points frontend work at product brief + old PNGs | Keep Figma as visual authority and add root locator | `docs/design/FIGMA_HANDOFF.md` + `AGENTS.md` read-first | H2 compares root, Figma handoff, design brief |
-| Product/interaction constraints and historical concept images | `docs/PRODUCT_DESIGN_BRIEF.md` says brief + old PNGs are primary visual basis | Reword only authority paragraph; preserve design content | `docs/PRODUCT_DESIGN_BRIEF.md` | H2 three-way authority comparison |
-| Zotero/native/knowledge/iPad/Pencil safety invariants | `AGENTS.md` sections 4-13, 20-21 | Keep in root; no relocation | `AGENTS.md` | H6 keyword and section inspection |
+| Rule / authority | Repair | Preserved semantics |
+| --- | --- | --- |
+| Current production visual design authority | Prior Figma authority closure remains in root and product brief. | Figma is canonical for visual design/components/screen composition; old PNGs are historical/supporting references. |
+| GUI / Computer Use execution mechanics | Root now keeps hard boundaries and points to `docs/DEVELOPMENT_WORKFLOW.md`; missing self-inspection and single-action prompt details were moved into that owner. | Codex must self-inspect before asking the user, must not bypass GUI gates by mutating real Zotero data, and must avoid Software Update actions. |
+| Native desktop acceptance/performance/copy | Root now summarizes hard rules and points to `docs/quality/NATIVE_DESKTOP_ACCEPTANCE.md`. | Native release evidence, performance measurement, copy pass, and Work `INSUFFICIENT_NATIVE_EVIDENCE` semantics remain intact. |
+| Zotero/native/knowledge/iPad/Pencil safety | Not relocated. | Core safety and product invariants remain in root. |
 
 ## Lucerna
 
-| Rule / authority | Old owner | Decision | New owner | Evidence |
-| --- | --- | --- | --- | --- |
-| Windows release/tray lifecycle, real provider truth, matching regression, screenshot helper/evidence budget, Longleaf boundaries | `AGENTS.md` project-owned sections | Light normalize only; keep as distinct invariants | `AGENTS.md` | H6 direct inspection |
-| Managed Bridge block | canonical Bridge managed block in root | Do not hand-edit | unchanged | H4 marker comparison |
+No new edit was made in the repaired E2 candidate. The prior 057 branch commit
+still contains the light meta-summary and preserves Windows release/tray
+lifecycle, real provider truth, matching regression, screenshot helper/evidence
+budget and Longleaf boundaries.
 
 ## Mica-for-ChatGPT
 
-| Rule / authority | Old owner | Decision | New owner | Evidence |
-| --- | --- | --- | --- | --- |
-| Focused testing budget and tiered checks | repeated testing subsections in `AGENTS.md` | Consolidate wording, not acceptance semantics | `AGENTS.md` testing ladder | H6 direct inspection |
-| Final authenticated long-conversation acceptance is manual | `AGENTS.md` P0/browser-test boundary | Preserve; forbid automated authenticated ChatGPT loop | `AGENTS.md` browser-test boundary | H6 direct inspection |
-| Privacy diagnostics, fail-open behavior, typing hot path, stable `dist/mica-dev` | `AGENTS.md` | Preserve | `AGENTS.md` | H6 direct inspection |
+| Rule / authority | Repair | Preserved semantics |
+| --- | --- | --- |
+| Testing ladder | Replaced repeated testing subsections with one ladder. | Impact audit and focused checks still precede `npm test`; Tier 2 full E2E is still required for DOM/lifecycle candidates; stress remains risk-triggered; reports must distinguish evidence. |
+| Authenticated real-site acceptance | Left outside the edited section and named in the ladder endpoint. | Automated authenticated ChatGPT regression remains forbidden; final long-conversation acceptance remains manual. |
+| Privacy, fail-open, typing hot path and stable `dist/mica-dev` | Not edited. | Existing repo-specific runtime protections remain present. |
 
 ## Asteria
 
-| Rule / authority | Old owner | Decision | New owner | Evidence |
-| --- | --- | --- | --- | --- |
-| Fixed public entry point and Cloudflare/local runtime mechanics | `AGENTS.md` | Keep fixed URL in root; move volatile commands/mechanics to one runtime owner | `AGENTS.md` summary + `docs/operations/development/RUNTIME_OPERATIONS.md` | H3/H6 root locator and runtime owner inspection |
-| Browser contract and `可以自动操作页面；不能绕过页面` | `AGENTS.md` | Keep in root | `AGENTS.md` | H6 direct inspection |
-| GPT Work-before-human, visual/scientific delegated rule locators | `AGENTS.md` and `prompts/AGENT_RULES.md` | Keep root locators; do not edit delegated prompt | `AGENTS.md` | H6 direct inspection |
+| Rule / authority | Repair | Preserved semantics |
+| --- | --- | --- |
+| Browser black-box contract | Root now names only the canonical contract, inline requirement and core invariant. | `可以自动操作页面；不能绕过页面` remains root-visible; fallback/timeout/contamination/result mechanics live in the canonical contract instead of duplicated root prose. |
+| Development server/runtime mechanics | Root points to `docs/operations/development/RUNTIME_OPERATIONS.md`; detailed Vite/server rules moved there. | No duplicate servers, no dependency reinstall merely to start, fixed URL/public-entry constraints and Windows fallback mechanics remain discoverable. |
+| GPT Work before human and scientific/visual delegated locators | Not weakened. | Root still points to GPT Work gate and `prompts/AGENT_RULES.md` delegated rules. |
 
 ## SeminarArc
 
-| Rule / authority | Old owner | Decision | New owner | Evidence |
-| --- | --- | --- | --- | --- |
-| Prominent physical-device safety summary | `AGENTS.md` detailed sections | Keep prominent root summary | `AGENTS.md` | H2/H3/H6 root inspection |
-| Detailed device/environment/test mechanics, command restrictions, volatile inventory, incident evidence | split between `AGENTS.md` and `docs/DEVICE_TESTING.md`; doc says root owns complete physical constraints | Make DEVICE_TESTING detail owner; root links to it | `docs/DEVICE_TESTING.md` | H2 owner wording comparison |
-| Emulator-first, protected device not generic target, no auto recovery/reset, explicit serial pre/postflight, physical failure does not block WSL/headless/Emulator, no PIN/secrets | `AGENTS.md` + `docs/DEVICE_TESTING.md` | Preserve in root summary and detail doc | both | H6 direct inspection |
+| Rule / authority | Repair | Preserved semantics |
+| --- | --- | --- |
+| Root physical-device safety summary | Root now keeps a compact safety summary. | Emulator-first, protected physical device not generic target, no transport reset/recovery, explicit serial/pre-postflight, `DEVICE_CHANNEL_BLOCKED` scope and no secrets remain root-visible. |
+| Detailed device/environment/test mechanics | Moved/centralized into `docs/DEVICE_TESTING.md`. | WSL/JDK/SDK/cache paths, Windows Emulator specifics, mixed-inventory fallback, command bans, harness commands, incident evidence and transport rules remain available in the detail owner. |
 
 ## CUHK_Date
 
-| Rule / authority | Old owner | Decision | New owner | Evidence |
-| --- | --- | --- | --- | --- |
-| Prototype instruction surface | current `main` | Inspect only; no root `AGENTS.md` creation | unchanged | H6 inspect-only note |
+CUHK_Date was inspect-only. No root `AGENTS.md` was created and no branch change
+was made.

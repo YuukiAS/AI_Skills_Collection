@@ -1,54 +1,44 @@
 # 057 Size Report
 
-Initial line/byte counts before product-repository edits:
+Size is context evidence only. H1/H6 semantic preservation and real owner
+discoverability decide acceptance; line-count reduction alone is not a PASS
+criterion.
+
+## Current Final Counts
 
 | Repo | File | Lines | Bytes |
 | --- | --- | ---: | ---: |
-| Bobbio | `AGENTS.md` | 515 | 22510 |
-| Bobbio | `docs/design/FIGMA_HANDOFF.md` | 135 | 6704 |
-| Bobbio | `docs/PRODUCT_DESIGN_BRIEF.md` | 452 | 16525 |
-| Bobbio | `docs/DEVELOPMENT_WORKFLOW.md` | 200 | 10489 |
-| Bobbio | `docs/quality/NATIVE_DESKTOP_ACCEPTANCE.md` | 136 | 7370 |
-| Lucerna | `AGENTS.md` | 198 | 10559 |
-| Mica-for-ChatGPT | `AGENTS.md` | 191 | 15503 |
-| Asteria | `AGENTS.md` | 134 | 16336 |
-| Asteria | `prompts/AGENT_RULES.md` | 181 | 7052 |
-| SeminarArc | `AGENTS.md` | 166 | 21498 |
-| SeminarArc | `docs/DEVICE_TESTING.md` | 112 | 6880 |
-| Bridge Kit | `AGENTS.md` | 506 | 34505 |
-| Bridge Kit | `templates/prompts/AGENT_RULES.md` | 177 | 6277 |
-| Bridge Kit | `ai_bridge_kit/cli.py` | 738 | 28545 |
-
-Final counts will be appended after candidate edits. Size reduction alone is
-not an acceptance criterion; H1/H6 semantic preservation wins over count deltas.
-
-## Final Counts
-
-| Repo | File | Lines | Bytes |
-| --- | --- | ---: | ---: |
-| Bridge Kit | `ai_bridge_kit/cli.py` | 740 | 28718 |
-| Bridge Kit | `templates/prompts/AGENT_RULES.md` | 209 | 7763 |
-| Bridge Kit | `templates/repo/AGENTS_TEMPLATE.md` | 45 | 1724 |
-| Bridge Kit | `tests/test_bridge_cli_router.py` | 70 | 3637 |
-| Bridge Kit | `CHANGELOG.md` | 426 | 25219 |
-| Bridge Kit | `pyproject.toml` | 22 | 482 |
-| Bridge Kit | `ai_bridge_kit/__init__.py` | 3 | 72 |
-| Bobbio | `AGENTS.md` | 520 | 22894 |
+| Bridge Kit | `ai_bridge_kit/cli.py` | 763 | 29345 |
+| Bridge Kit | `templates/prompts/AGENT_RULES.md` | 215 | 8083 |
+| Bridge Kit | `tests/test_bridge_cli_router.py` | 118 | 6248 |
+| Bridge Kit | `README.md` | 872 | 35485 |
+| Bridge Kit | `CHANGELOG.md` | 428 | 25376 |
+| Mica-for-ChatGPT | `AGENTS.md` | 177 | 14064 |
+| Asteria | `AGENTS.md` | 116 | 10953 |
+| Asteria | `docs/operations/development/RUNTIME_OPERATIONS.md` | 144 | 5166 |
+| SeminarArc | `AGENTS.md` | 129 | 7971 |
+| SeminarArc | `docs/DEVICE_TESTING.md` | 208 | 14512 |
+| Bobbio | `AGENTS.md` | 464 | 19631 |
+| Bobbio | `docs/DEVELOPMENT_WORKFLOW.md` | 224 | 11912 |
 | Bobbio | `docs/PRODUCT_DESIGN_BRIEF.md` | 452 | 16665 |
-| Lucerna | `AGENTS.md` | 205 | 10854 |
-| Mica-for-ChatGPT | `AGENTS.md` | 197 | 15845 |
-| Asteria | `AGENTS.md` | 128 | 14591 |
-| Asteria | `docs/operations/development/RUNTIME_OPERATIONS.md` | 111 | 3048 |
-| SeminarArc | `AGENTS.md` | 172 | 21920 |
-| SeminarArc | `docs/DEVICE_TESTING.md` | 114 | 7076 |
+| Bobbio | `docs/quality/NATIVE_DESKTOP_ACCEPTANCE.md` | 136 | 7370 |
 
-## Diff Stats
+## Current Commit Stats
 
-| Repo | Summary |
-| --- | --- |
-| Bridge Kit | 7 files changed, 121 insertions, 5 deletions |
-| Bobbio | 2 files changed, 13 insertions, 8 deletions |
-| Lucerna | 1 file changed, 7 insertions |
-| Mica-for-ChatGPT | 1 file changed, 9 insertions, 3 deletions |
-| Asteria | 2 files changed, 113 insertions, 8 deletions |
-| SeminarArc | 2 files changed, 9 insertions, 1 deletion |
+| Repo | Commit | Summary |
+| --- | --- | --- |
+| Bridge Kit | `e1d6b781ad7e56d567bed419001069baf439d0a5` | 5 files changed, 105 insertions, 23 deletions |
+| Mica-for-ChatGPT | `e49416f874f633aedc7521734ee5b0f441aae970` | 1 file changed, 50 insertions, 70 deletions |
+| Asteria | `0ce1d4daca1e410ce551570578dd563d4ef67e90` | 2 files changed, 44 insertions, 23 deletions |
+| SeminarArc | `74caaa4ecec16f1bc90987979458d1a4e93f52be` | 2 files changed, 115 insertions, 64 deletions |
+| Bobbio | `ab5dccb6b8b87c49671aa097233ce1bcc38be004` | 2 files changed, 57 insertions, 89 deletions |
+| Lucerna | `41cd1297af6901531d3135593bc9806bffc38829` | unchanged in E2 |
+| CUHK_Date | `711fab75f044b7ad31e5ff8610c076f902ccc949` | inspect only |
+
+## Interpretation
+
+- Bridge grew because it now contains byte-preservation helpers, regressions and
+  candidate-version documentation.
+- Mica, Asteria, SeminarArc and Bobbio reduce root duplication by moving detailed
+  mechanics into existing owner documents or consolidating repeated guidance.
+- Lucerna and CUHK_Date did not receive new E2 edits.
