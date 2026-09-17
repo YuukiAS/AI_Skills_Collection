@@ -69,14 +69,22 @@ problem: process-log language, invented time-boxed scripts, repeated result narr
 candidate_action: replay these rules on the next independent advisor/group-meeting report and only add further rules when a new failure appears.
 promotion_gate: at least one additional independent real report; protect current source-fidelity and claim-evidence behavior.
 
-### Distinguish report content quality from PDF/DOCX rendering quality
-status: BLOCKED_NEEDS_EVIDENCE
-source: ongoing real research-report use
-evidence: `research-reporting` correctly delegates low-level artifact mechanics
-target layer: routing/qa
-problem: future user feedback may mix narrative/report failures with PDF/DOCX layout failures owned by official document capabilities.
-candidate_action: keep ownership explicit and only promote cross-layer handoff rules if a real artifact demonstrates the gap.
-promotion_gate: real rendered report evidence.
+### Distinguish research-document semantics from comparison/render packaging
+status: CANDIDATE_GENERIC
+source: ongoing real research-report use; Clear Writing 055 final user-acceptance comparison failure, 2026-09-17
+evidence: `research-reporting` already delegates low-level artifact mechanics; Clear Writing 055 then produced multiple unusable Original-vs-C6 acceptance artifacts because long-form scientific content was mechanically chunked into misaligned pages and citation/report/gate material was not separated by domain semantics. The generic packaging follow-up is recorded separately in `docs/plugin-todos/workflow-core.md`.
+target layer: research-document planning/qa boundary with workflow-core and artifact/presentation rendering
+problem: A research-document comparison is not only a rendering problem. When a rewrite legitimately reorganizes sections, condenses repeated evidence, converts prose into tables, or moves details between main text and appendix, a generic packager cannot infer correspondence by sentence count or page length. The domain owner must decide which source unit corresponds to which rewritten scientific unit, what evidence/citation material is in scope, and which formulas/tables/code/limitations/future-work blocks must stay coherent. Conversely, Research Authoring should not own slide typography, pagination, clipping, Office/PDF rendering, repo delivery paths, or retry/acceptance-state mechanics.
+candidate_action:
+- For an Original-vs-revised research report/manuscript acceptance surface, define a lightweight **semantic alignment plan** before layout: source section/paragraph group/claim-evidence unit/table/formula/code block/limitation/future-work item -> corresponding candidate unit. This is a planning responsibility, not a new persistent schema by default.
+- Align by scientific meaning rather than character count, sentence count or equal page length. One source unit may map to several candidate units, and several source units may legitimately collapse into one candidate unit when the rewrite removes repetition or reorganizes the argument.
+- Treat scientific tables, formulas, code/path snippets, limitation statements and future-work statements as coherent units. Do not split a table mid-row, a formula across unrelated comparison pages, or detach a limitation/future-work qualifier from the claim it constrains merely to make pages even.
+- Citation/reference handling belongs to research-document semantics. If the user excludes bibliography/reference bulk from the acceptance comparison, omit that bulk from the main review surface, but do not silently strip attribution or citation-bearing context when it changes claim authority, provenance or scientific meaning. Main-text vs appendix/reference handling must follow the frozen user scope.
+- The research comparison surface should contain the research content being judged, not workflow Gate history, paid-review receipts, render-proof pages or internal review packets. Those are workflow evidence unless the user explicitly asks to inspect them.
+- Research Authoring QA should ask whether the revised document's structural transformation is scientifically legitimate: claims/evidence still correspond, decisive experiments are not lost, modality/limitations/future work remain correct, and tables/figures/formulas still play the intended document role. Visual legibility/render correctness remains the artifact/presentation capability's job.
+- Handoff to the artifact layer should be `comparison scope + semantic alignment plan + inclusion/exclusion rules + atomic technical units + allowed structural freedom`; the artifact layer then decides slide/page composition without redefining scientific correspondence.
+- Keep the generic workflow concerns in workflow-core: freezing the acceptance contract, canonical repo delivery, truthful artifact identity, real-open/render evidence, repeat-failure circuit breaker, cost discipline and user handoff.
+promotion_gate: **do not modify the already-reviewed 056 architecture or implementation package for this item. Finish 056 first.** After 056 completes, map what its generic Acceptance Review / Evidence Fidelity / Actual-Surface rules already cover, then replay this domain boundary on one real advisor/report comparison and one manuscript/paper-like comparison. Promote only the residual research-specific semantics; do not duplicate workflow-core or presentation rendering rules.
 
 ## Recently promoted / established
 
