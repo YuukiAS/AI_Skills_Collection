@@ -1,0 +1,32 @@
+{
+  "external_upload_authorization": "User authorized the original 055 frozen Final Terra Text Review through OpenAI Responses API via GitHub Actions OPENAI_REVIEW_API_KEY, store=false, exactly one paid call, USD 0.25 campaign ceiling, candidate/rubric packet only, no private source/intermediates/logs/credentials.",
+  "identity_bindings": {
+    "implementation_commit": "79d620a0c60cdd086dd5828c8686bac843291cda"
+  },
+  "input": {
+    "ciphertext_sha256": "cd9b6cad75e2db5ee41df1de6ce189cfa0041bce048dab3c706d25d55ad45d96",
+    "encrypted_payload_path": "results/055_clear_writing_release_convergence/text_review/final_terra_payload.age",
+    "logical_id": "primary_text",
+    "mime_type": "text/markdown; charset=utf-8",
+    "plaintext_sha256": "86937aa8aeec281c0a4321f7f0f23139c43ce690e5edfb9ab1def9cfa9476866",
+    "plaintext_size_bytes": 71663,
+    "source_basename": "FINAL_TERRA_PACKET.md"
+  },
+  "paid_review_campaign_id": "055_clear_writing_release_convergence",
+  "paid_review_extension": null,
+  "paid_review_initial_contract": {
+    "automatic_paid_retries": 0,
+    "campaign_reserved_cost_hard_ceiling_usd": "0.250000",
+    "max_paid_calls": 1,
+    "per_call_worst_case_ceiling_usd": "0.250000"
+  },
+  "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
+  "prompt_version": "ai-bridge.text-review.v1",
+  "review_kind": "final-terra-clear-writing-c6",
+  "rubric": {
+    "instructions": "Final independent Terra Text Review for 055 Clear Writing C6. Read the complete plaintext packet. Apply the frozen 055 A/B/C rubric included in the packet. Primary purpose is independent B reader-facing quality review of the final Deep Research candidate and G7 public-safe fresh candidates. Do not use external factual truth as a blocker unless the candidate itself introduces, strengthens, or misattributes a claim relative to the visible packet. Report PASS only if no unresolved frozen-rubric blocker remains."
+  },
+  "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1",
+  "task_key": "055_clear_writing_release_convergence",
+  "workflow_type": "reviewed_handoff"
+}
