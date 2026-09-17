@@ -59,6 +59,13 @@ project-specific context: Lucerna provider/Longleaf、Bobbio Zotero/Figma、Mica
 8. existing canonical local repo + unrelated dirty state 时复用 local source/clean worktree，不重复 clone/remap remote；
 9. docs-only/server-only/small nonvisual fix 不被强制进入 locale/catalog/provider/Figma/GPT Work/full E2E。
 
+### Task-local prohibitions must expire with their task instead of becoming accidental global policy
+status: NEW
+source: Lucerna 01037 product-polish continuation, 2026-09-17
+evidence: the current objective explicitly required creating `01037_product_polish_closure` task/result artifacts, but execution was repeatedly blocked because a prior task's local instruction said not to create a successor Goal; the user had to explicitly authorize that the current objective superseded the stale old boundary
+problem: Historical task-local prohibitions are being treated as indefinitely persistent safety constraints even after the task that introduced them has ended and a newer user-approved objective explicitly requires the opposite action. This turns stale context into a false Human Gate, forces the user to resolve non-substantive instruction history, and can cause repeated approval loops even when the current task scope is clear.
+project-specific context: The exact `01037` filenames and Lucerna successor-Goal wording are project-specific. The reusable workflow issue is instruction lifetime and scope: task-local restrictions need an explicit expiry/scope model, while true repository-level, persistent safety, security, destructive-action, or user-preference constraints must remain durable until explicitly changed.
+
 ## Do not do
 
 - Do not duplicate Bridge Kit core Reviewed Handoff implementation in this repo.
