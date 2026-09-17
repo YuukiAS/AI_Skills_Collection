@@ -6,7 +6,8 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-BRIDGE_KIT_COMMIT = "5c894d98d3053c39cbda79cdbd0b8dfb4fbec4c0"
+BRIDGE_KIT_TEXT_REVIEW_COMMIT = "cb77b1cc5a1fce097a38066d2db452291e359852"
+BRIDGE_KIT_VISUAL_REVIEW_COMMIT = "5c894d98d3053c39cbda79cdbd0b8dfb4fbec4c0"
 
 
 class PaidReviewWorkflowPolicyTests(unittest.TestCase):
@@ -31,10 +32,11 @@ class PaidReviewWorkflowPolicyTests(unittest.TestCase):
         )
         for path in workflows:
             text = path.read_text(encoding="utf-8")
+            expected_pin = BRIDGE_KIT_TEXT_REVIEW_COMMIT if path.name == "ai-bridge-text-review.yml" else BRIDGE_KIT_VISUAL_REVIEW_COMMIT
             with self.subTest(workflow=path.name):
                 self.assertIn("workflow_dispatch:", text)
                 self.assertNotIn("\n  push:", text)
-                self.assertIn(BRIDGE_KIT_COMMIT, text)
+                self.assertIn(expected_pin, text)
                 self.assertIn('AI_BRIDGE_PAID_REVIEW_GIT_RESERVE: "1"', text)
                 self.assertIn("group: ai-bridge-paid-review-${{ github.repository }}", text)
                 self.assertNotIn("secrets.OPENAI_REVIEW_API_KEY || secrets.OPENAI_VISUAL_REVIEW_API_KEY", text)
