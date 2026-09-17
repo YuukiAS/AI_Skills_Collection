@@ -6,17 +6,18 @@ Status: `AWAITING_EXECUTION_PACKAGE_CRITIC_REVIEW`
 
 - Task key: `057_repo_agents_hygiene`
 - Approved design proposal: `docs/design/057_REPO_AGENTS_HYGIENE_V2_PROPOSAL_2026-09-17.md`
-- Superseded proposal: `docs/design/057_REPO_AGENTS_HYGIENE_PROPOSAL_2026-09-17.md`
-- Design Critic prompt: `docs/design/057_REPO_AGENTS_HYGIENE_V2_CRITIC_PROMPT_2026-09-17.md`
-- Implementation Plan: `docs/design/057_REPO_AGENTS_HYGIENE_IMPLEMENTATION_PLAN.md` v0.1
-- Canonical Goal: `docs/goals/057_REPO_AGENTS_HYGIENE_GOAL.md` v0.1
-- Kickoff Draft: `docs/operations/prompts/057_REPO_AGENTS_HYGIENE_KICKOFF.md` v0.1
-- Execution-package Critic prompt: `docs/design/057_REPO_AGENTS_HYGIENE_EXECUTION_CRITIC_PROMPT_2026-09-17.md`
-- Stage: execution-ready package review
+- Bounded user amendment for current review: `docs/design/057_LITE_VERSIONING_DEFAULT_AMENDMENT_2026-09-17.md`
+- Implementation Plan: `docs/design/057_REPO_AGENTS_HYGIENE_IMPLEMENTATION_PLAN.md` v0.2
+- Canonical Goal: `docs/goals/057_REPO_AGENTS_HYGIENE_GOAL.md` v0.2
+- Kickoff Draft: `docs/operations/prompts/057_REPO_AGENTS_HYGIENE_KICKOFF.md` v0.2
+- Current execution Critic prompt: `docs/design/057_REPO_AGENTS_HYGIENE_V0_2_EXECUTION_CRITIC_PROMPT_2026-09-17.md`
+- Stage: execution-ready package R2 review
 
-## Design review decision
+## Review history
 
-The user relayed the independent Critic decision for v2:
+### Design review
+
+Independent Critic approved v2 design direction:
 
 ```text
 RESULT = PASS
@@ -26,91 +27,136 @@ READY_FOR_EXECUTION_PLAN = YES
 NEXT_HANDOFF = PLANNER
 ```
 
-This PASS approves the v2 design direction only. It does not authorize execution.
+### Execution package v0.1
 
-## Purpose
+Reviewed commit:
 
-057 has two approved design goals before Task 056 implementation:
+`57f58821deecf56ee69a6504f85145ce3bdfb11e`
 
-1. semantics-preserving cleanup of each target repository's **own** instruction surface — within-repo duplication, contradiction, stale authority, discoverability and structure;
-2. add a reusable **project-owned root `AGENTS.md` scaffold** to Bridge Kit so future fresh repositories do not begin with only a handoff block and then accumulate rules incident-by-incident.
+Decision:
 
-The scaffold standardizes structure/ownership, not project content. `prompts/AGENT_RULES.md` remains the Lite/execution-rule owner; the root template must not duplicate it.
+```text
+RESULT = REVISE
+READY_FOR_CODEX = NO
+```
 
-## Execution package v0.1
+Stable blockers:
 
-The exact execution-review bundle is:
+- `C057-E1-BOBBIO-AUTHORITY-OWNER-SCOPE`
+- `C057-E2-SEMINARARC-AUTHORITY-INVERSION`
+- `C057-E3-SELF-REFERENTIAL-FINAL-CANDIDATE`
 
-1. `docs/design/057_REPO_AGENTS_HYGIENE_IMPLEMENTATION_PLAN.md` v0.1
-2. `docs/goals/057_REPO_AGENTS_HYGIENE_GOAL.md` v0.1
-3. `docs/operations/prompts/057_REPO_AGENTS_HYGIENE_KICKOFF.md` v0.1
+## v0.2 response
 
-The package proposes task isolation branches `reviewed/057_repo_agents_hygiene` for AI_Skills evidence, Bridge Kit, Bobbio, Lucerna, Mica, Asteria and SeminarArc. CUHK Date remains inspect-only.
+### E1 — ACCEPT
 
-Bridge Kit candidate behavior:
+Bobbio scope now includes `docs/PRODUCT_DESIGN_BRIEF.md` only for source-of-truth / visual-authority wording. H2 must directly compare final:
 
-- new `templates/repo/AGENTS_TEMPLATE.md`;
-- fresh `ai-bridge init` consumes scaffold + exactly one managed Bridge block;
-- existing repo and `--force` preserve project-owned root text;
-- no automatic migration of existing repos;
-- no Lite duplication;
-- conditional patch candidate `0.8.2 -> 0.8.3` only after H7–H9 and regression gates pass.
+- `AGENTS.md`
+- `docs/design/FIGMA_HANDOFF.md`
+- `docs/PRODUCT_DESIGN_BRIEF.md`
 
-Existing-repo implementation is bounded:
+Final authority:
 
-- Bobbio: substantial reorganization + Figma canonical locator/authority clarification, no product/Figma/runtime change;
-- Lucerna: light root normalization only;
-- Mica: testing-section consolidation only;
-- Asteria: root map conversion + `docs/operations/development/RUNTIME_OPERATIONS.md` for moved volatile operations;
-- SeminarArc: root map conversion + `docs/DEVICE_TESTING.md` as detailed device/environment owner;
-- CUHK Date: inspect only, no root creation.
+- Figma = current canonical visual design/components/screen composition;
+- Product Design Brief = durable product/interaction constraints;
+- old `Bobbio_Design_*.png` = historical/supporting references.
+
+### E2 — ACCEPT
+
+SeminarArc final ownership is explicit:
+
+- root AGENTS = prominent non-negotiable physical-device safety summary + locator;
+- `docs/DEVICE_TESTING.md` = detailed device/environment/test mechanics, command restrictions, volatile inventory and historical incident evidence.
+
+The stale `DEVICE_TESTING -> AGENTS owns complete physical rules` wording must be repaired. Root retains Emulator-first, protected-device not generic connected-test target, no automatic transport reset/recovery, explicit verified serial + pre/postflight for authorized physical writes, independent WSL/headless/Emulator continuation, and PIN/secret non-disclosure.
+
+### E3 — ACCEPT
+
+Final candidate identity is now two-stage:
+
+- Stage A evidence/result commit `E`: finalized RESULT/preservation/size/H1-H9 evidence; no self-SHA field.
+- Stage B manifest commit `M`: MANIFEST records `E`, all candidate commits/Bridge version/CUHK inspected ref/H1-H9 locators; no self-SHA field for `M`.
+- Executor handoff reports `AI_SKILLS_MANIFEST_COMMIT=M` externally.
+- Independent implementation review targets the tuple bound by `M`.
+
+## New bounded user amendment requiring this Critic's approval
+
+The user additionally requires a generic version-number standard to be part of Lite Handoff so future repositories do not invent arbitrary conventions.
+
+Authority:
+
+`docs/design/057_LITE_VERSIONING_DEFAULT_AMENDMENT_2026-09-17.md`
+
+If approved, 057 additionally updates Bridge canonical `templates/prompts/AGENT_RULES.md` with a concise fallback policy:
+
+- explicit current repo-local version policy wins;
+- otherwise default `MAJOR.MINOR.PATCH`;
+- PATCH compatible repair; MINOR compatible user-visible capability; MAJOR incompatible contract/migration and explicit Planner/user approval;
+- `0.y.z` allowed for initial development; `1.0.0` requires explicit stability/default-use decision;
+- `alpha` / `beta` / `rc` / preview/date/arbitrary prerelease suffixes are opt-in only under approved repo lifecycle or explicit current task/user authorization;
+- same formal version cannot identify different user-consumable runtime candidates;
+- build/commit labels do not replace the formal version;
+- release-ready version/source/changelog parity must be truthful.
+
+No H10 is added. H7 proves fresh Lite normal-entry consumption; H9 proves root does not duplicate the rule.
+
+This amendment does not normalize existing repository version histories during 057. After 057 and 056 are integrated, the user wants a separate reviewed all-active-repo adaptation round.
+
+## Current source refs refreshed for drafting
+
+- Bridge main `cb77b1cc5a1fce097a38066d2db452291e359852`, `0.8.2`
+- Bobbio develop `0811116ac7197590f0af773f3c6296d4ca41db80`
+- Lucerna main `760931ae8a1f0edffefe41c83c1667c7190c3014`
+- Mica main `aa4ce52581fff2e207d1f93600becbb3018b0efc`
+- Asteria main `166791c27752c70255043f026dcbda4deb693c04`
+- SeminarArc main `71c59d39f4d7e9cd3a3d813ad55d5cf6a38a4b11`
+- CUHK Date main `711fab75f044b7ad31e5ff8610c076f902ccc949`
+
+Lucerna/CUHK Date ref advancement is not an architecture redesign. Kickoff-time source authority is still rechecked.
 
 ## H1–H9
 
-The execution package freezes these gates:
+The same nine gates remain frozen:
 
 - H1 semantic preservation
-- H2 no internal contradiction
+- H2 no internal contradiction, explicitly including Bobbio three-way + SeminarArc owner closure
 - H3 discoverability
 - H4 managed-block integrity
 - H5 context quality
 - H6 repo-specific regression
-- H7 fresh Bridge scaffold normal entry
+- H7 fresh Bridge scaffold/Lite normal entry
 - H8 existing-repo should-not-change
-- H9 no Lite duplication
+- H9 no Lite/versioning duplication in root
 
-Success is not measured by line-count reduction alone.
+No H10.
 
 ## Relationship to 056
 
-The already execution-ready-PASS 056 package is not redesigned by 057 and must remain unexecuted while the user wants 057 completed first.
-
-Required sequence:
+057 remains first. After independent implementation review and separately approved integration:
 
 ```text
-057 execution-package Critic review
--> user sends exact approved 057 Kickoff
--> 057 implementation on isolated task branches
--> independent implementation review
--> separately approved integration
--> return to 056
--> bounded source-drift revalidation/package amendment
--> no v6 redesign unless 057 actually invalidates a frozen 056 assumption
+057 integrated
+-> Planner bounded 056 source-drift revalidation
+-> remove work already completed by 057
+-> refresh Bridge/current refs/version slot
+-> narrow Critic amendment review
+-> execute 056 only after amended package approval
 ```
 
-The later 056 revalidation must remove duplicate work already completed by 057, refresh exact refs, and choose the then-valid Bridge patch version if 057 consumed `0.8.3`.
+Do not redesign v6 unless 057 actually invalidates a frozen 056 architecture assumption.
 
 ## Hard boundary
 
-No product repo file has been modified by the Planner. No Bridge Kit production source has been modified. No branch/worktree has been created. No Executor is authorized. No 056 implementation has started.
+This package is still a review object. No target product repo/AGENTS or Bridge production source has been modified by Planner; no 057 Executor is authorized; no 056 execution is authorized.
 
-Only if independent Critic returns both:
+Only if independent Critic returns:
 
 ```text
 RESULT = PASS
 READY_FOR_CODEX = YES
 ```
 
-for this exact v0.1 Plan + Goal + Kickoff may the user send the approved Kickoff and thereby authorize execution.
+for this exact v0.2 Plan + Goal + Kickoff + versioning amendment may the user send the approved Kickoff.
 
 `NEXT_HANDOFF = CRITIC`
