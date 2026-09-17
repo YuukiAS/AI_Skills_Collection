@@ -11,6 +11,7 @@ Status: `AWAITING_EXECUTION_PACKAGE_CRITIC_REVIEW`
 - Implementation Plan: `docs/design/057_REPO_AGENTS_HYGIENE_IMPLEMENTATION_PLAN.md` v0.1
 - Canonical Goal: `docs/goals/057_REPO_AGENTS_HYGIENE_GOAL.md` v0.1
 - Kickoff Draft: `docs/operations/prompts/057_REPO_AGENTS_HYGIENE_KICKOFF.md` v0.1
+- Execution-package Critic prompt: `docs/design/057_REPO_AGENTS_HYGIENE_EXECUTION_CRITIC_PROMPT_2026-09-17.md`
 - Stage: execution-ready package review
 
 ## Design review decision
