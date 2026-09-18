@@ -6,142 +6,87 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-FIXTURE_PATH = REPO_ROOT / "tests/fixtures/056_product_delivery_discipline_gates.json"
+RESULT_ROOT = REPO_ROOT / "results/056_product_delivery_discipline"
+REPLAY_ROOT = RESULT_ROOT / "replay_evidence"
+PRODUCTION_CANDIDATE_COMMIT = "891b73cb3824990fa54abd6fa55973e33852b271"
 
 
-class ProductDeliveryDisciplineGateTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.fixture = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
-        cls.gates = {entry["gate"]: entry for entry in cls.fixture["gates"]}
-        cls.workflow = (REPO_ROOT / "skills/core/codex-system/codex-workflow-protocol/SKILL.md").read_text(
-            encoding="utf-8"
-        )
-        cls.frontend = (REPO_ROOT / "skills/tools/frontend/frontend-visual-systems/SKILL.md").read_text(
-            encoding="utf-8"
-        )
-        cls.maintainer = (
-            REPO_ROOT / "skills/core/codex-system/ai-skills-repository-maintainer/SKILL.md"
-        ).read_text(encoding="utf-8")
-        cls.marketplace_config = json.loads(
-            (REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8")
-        )
+def read_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
 
-    def test_g2_incomplete_or_human_blocked_candidate_is_not_acceptance_ready(self) -> None:
-        gate = self.gates["G2"]
 
-        acceptance_ready = gate["producer_evidence_complete"] and not gate["human_blocked"]
-        advisory_allowed = gate["advisory_review_requested"]
+class ProductDeliveryDisciplineReplayEvidenceTests(unittest.TestCase):
+    def assert_candidate_replay_consumed(self, plugin: str, version: str) -> dict:
+        run = read_json(REPLAY_ROOT / plugin.replace("-", "_") / "candidate_replay_run.json")
+        add = read_json(REPLAY_ROOT / plugin.replace("-", "_") / "plugin-add.json")
 
-        self.assertFalse(acceptance_ready)
-        self.assertEqual(acceptance_ready, gate["expected_acceptance_ready"])
-        self.assertEqual(advisory_allowed, gate["expected_advisory_allowed"])
-        self.assertIn("Advisory", self.workflow)
-        self.assertIn("readiness or completion", self.workflow)
-        self.assertIn("Human action", self.workflow)
+        self.assertEqual(run["candidate_commit"], PRODUCTION_CANDIDATE_COMMIT)
+        self.assertEqual(run["plugin_id"], f"{plugin}@ai-skills-candidate")
+        self.assertEqual(run["runtime_version"], "codex-cli 0.153.4")
+        self.assertTrue(run["actual_consumption"]["proven"])
+        self.assertGreaterEqual(run["actual_consumption"]["line_index"], 1)
+        self.assertIn("item.", run["actual_consumption"]["event_type"])
+        self.assertEqual(add["pluginId"], f"{plugin}@ai-skills-candidate")
+        self.assertEqual(add["marketplaceName"], "ai-skills-candidate")
+        self.assertEqual(add["version"], version)
+        self.assertEqual(add["installedPath"], run["installed_path"])
+        self.assertIn(f"/plugins/cache/ai-skills-candidate/{plugin}/{version}", run["installed_path"])
+        return run
 
-    def test_g3_resume_requires_same_goal_exact_once_and_post_action_closure(self) -> None:
-        gate = self.gates["G3"]
+    def test_workflow_core_replay_proves_g2_g3_g4_g5_g7_and_source_discovery_behavior(self) -> None:
+        self.assert_candidate_replay_consumed("workflow-core", "0.2")
+        output = read_json(REPLAY_ROOT / "workflow_core/workflow_core_gate_replay.json")
 
-        resume_valid = gate["same_goal"] and gate["answer_consumed_count"] == 1
-        complete_after_action_only = gate["human_action_only"] and not gate["post_action_closure_complete"]
+        self.assertEqual(output["plugin"], "workflow-core")
+        self.assertEqual(output["normal_entry"], "Verified Workflow candidate")
+        self.assertEqual(output["fixture_candidate_commit"], PRODUCTION_CANDIDATE_COMMIT)
+        for gate in ["G2", "G3", "G4", "G5", "G7", "Source Discovery"]:
+            self.assertTrue(output["gates"][gate]["pass"], gate)
+            self.assertTrue(output["gates"][gate]["observed_behavior"])
+            self.assertTrue(output["gates"][gate]["reason"])
 
-        self.assertEqual(resume_valid, gate["expected_resume_valid"])
-        self.assertEqual(complete_after_action_only, gate["expected_complete_after_action_only"])
-        self.assertIn("exactly once", self.workflow)
-        self.assertIn("post-action closure", self.workflow)
+        self.assertIn("不代表真实主机", output["evidence_scope"])
+        self.assertIn("不声称 overall 056 achieved", "\n".join(output["should_not_change"]))
+        self.assertIn("不重复网络 clone", output["gates"]["Source Discovery"]["observed_behavior"])
+        self.assertIn("不重映射 remote", output["gates"]["Source Discovery"]["observed_behavior"])
+        self.assertIn("禁止跨 implementation candidate 拼接 PASS", output["gates"]["G5"]["reason"])
 
-    def test_g4_faithful_regression_covers_old_bad_new_good_sequence(self) -> None:
-        gate = self.gates["G4"]
+    def test_web_development_replay_proves_g6_payload_consumption_and_non_host_limitations(self) -> None:
+        self.assert_candidate_replay_consumed("web-development", "0.2")
+        output = read_json(REPLAY_ROOT / "web_development/web_development_gate_replay.json")
 
-        gate_passes = (
-            gate["old_bad_caught"]
-            and gate["new_candidate_passes_same_surface"]
-            and gate["interaction_sequence_included"]
-            and not gate["mock_only_claims_hosted"]
-        )
+        self.assertEqual(output["plugin"], "web-development")
+        self.assertEqual(output["normal_entry"], "Frontend Design candidate")
+        self.assertTrue(output["G6"]["pass"])
+        behavior = output["G6"]["observed_behavior"]
+        self.assertIn("只读设计权威", behavior["canonical_design_authority"])
+        self.assertIn("Figma", behavior["figma_handoff_consumed"])
+        self.assertIn("motion-interaction", behavior["motion_production_wiring_consumed"])
+        self.assertIn("不得静默在代码中发明状态", behavior["missing_material_state_disposition"])
+        self.assertFalse(output["limitations"]["product_repository_modified"])
+        self.assertFalse(output["limitations"]["real_host_G1_final_pass_claimed"])
+        self.assertFalse(output["limitations"]["release_ready_claimed"])
 
-        self.assertEqual(gate_passes, gate["expected_pass"])
-        self.assertIn("old-bad/new-good", self.workflow)
-        self.assertIn("Interaction controls", self.workflow)
-        self.assertIn("Hosted/external-provider claims", self.workflow)
+    def test_ai_skills_core_replay_proves_g8_consumption_diagnosis_behavior(self) -> None:
+        self.assert_candidate_replay_consumed("ai-skills-core", "0.3")
+        output = read_json(REPLAY_ROOT / "ai_skills_core/ai_skills_core_gate_replay.json")
 
-    def test_g5_claim_scope_stays_with_same_final_candidate_and_surface(self) -> None:
-        gate = self.gates["G5"]
+        self.assertEqual(output["plugin"], "ai-skills-core")
+        self.assertEqual(output["normal_entry"], "AI Skills Maintainer candidate")
+        self.assertTrue(output["G8"]["pass"])
+        self.assertEqual(output["classification"], "stale_install")
+        self.assertTrue(output["consumer_path_checked"])
+        self.assertFalse(output["adds_duplicate_policy"])
+        self.assertIn("不能单独证明", output["G8"]["reason"])
 
-        claim_allowed = (
-            gate["same_candidate"]
-            and not gate["cross_candidate_stitching"]
-            and gate["evidence_surface"] == gate["claim_surface"]
-        )
+    def test_fixture_files_are_inputs_not_gate_pass_authority(self) -> None:
+        fixture = read_json(REPO_ROOT / "tests/fixtures/056_product_delivery_discipline_gates.json")
 
-        self.assertEqual(claim_allowed, gate["expected_claim_allowed"])
-        self.assertIn("prove only their own surface", self.workflow)
-        self.assertIn("Do not stitch PASS evidence", self.workflow)
-
-    def test_g6_frontend_design_consumes_canonical_design_and_existing_capabilities(self) -> None:
-        gate = self.gates["G6"]
-        web = next(plugin for plugin in self.marketplace_config["plugins"] if plugin["name"] == "web-development")
-        visual = next(skill for skill in web["skills"] if skill["artifact_id"] == "visual")
-        sources = {entry["source"] for entry in visual["source_skills"]}
-
-        self.assertTrue(gate["canonical_design_source_read_only"])
-        self.assertFalse(gate["invent_missing_material_state_in_code"])
-        self.assertIn("skills/tools/frontend/figma-design-to-code", sources)
-        self.assertIn("skills/tools/frontend/motion-interaction", sources)
-        self.assertIn("F-A Design Authority And State Coverage", self.frontend)
-        self.assertIn("missing, close the design-source gap", self.frontend)
-
-    def test_g7_non_overreach_negative_routes_do_not_trigger_heavy_gates(self) -> None:
-        gate = self.gates["G7"]
-        heavy_keys = [
-            "requires_figma",
-            "requires_locale_catalog",
-            "requires_provider_probe",
-            "requires_gpt_work",
-            "requires_full_e2e",
-            "requires_native_smoke",
-        ]
-
-        for route in gate["routes"]:
-            self.assertFalse(any(route[key] for key in heavy_keys), route["task_type"])
-
-        self.assertTrue(gate["expected_pass"])
-        self.assertIn("risk-matched actual surface", self.workflow)
-        self.assertIn("Do not force every project into Figma", self.frontend)
-
-    def test_g8_consumption_regression_diagnoses_consumer_path_before_new_policy(self) -> None:
-        gate = self.gates["G8"]
-
-        gate_passes = (
-            gate["active_rule_exists"]
-            and gate["diagnoses_consumer_path"]
-            and gate["failure_class"] == "stale_install"
-            and not gate["adds_duplicate_policy"]
-        )
-
-        self.assertEqual(gate_passes, gate["expected_pass"])
-        self.assertIn("Production Consumption Diagnosis", self.maintainer)
-        self.assertIn("stale_install", self.maintainer)
-        self.assertIn("before adding another synonymous rule", self.maintainer)
-
-    def test_source_discovery_preserves_dirty_canonical_source_without_network_clone(self) -> None:
-        fixture = self.fixture["source_discovery"]
-
-        gate_passes = (
-            fixture["local_canonical_repo_exists"]
-            and fixture["unrelated_dirty_work_exists"]
-            and fixture["identity_verified"]
-            and fixture["freshness_checked"]
-            and fixture["dirty_work_preserved"]
-            and fixture["authorized_isolated_worktree"]
-            and not fixture["network_clone_used"]
-            and not fixture["remote_remapped"]
-        )
-
-        self.assertEqual(gate_passes, fixture["expected_pass"])
-        self.assertIn("Protect unrelated dirty work", self.workflow)
-        self.assertIn("Network clone only", self.workflow)
+        self.assertEqual(fixture["task_key"], "056_product_delivery_discipline")
+        self.assertNotIn("G1", {entry["gate"] for entry in fixture["gates"]})
+        self.assertTrue((RESULT_ROOT / "replay_inputs/workflow_core_fixture.json").is_file())
+        self.assertTrue((RESULT_ROOT / "replay_inputs/web_development_fixture.json").is_file())
+        self.assertTrue((RESULT_ROOT / "replay_inputs/ai_skills_core_fixture.json").is_file())
 
 
 if __name__ == "__main__":

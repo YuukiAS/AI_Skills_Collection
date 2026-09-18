@@ -1,0 +1,8 @@
+{
+  "authPolicy": "ON_INSTALL",
+  "installedPath": "/overflow/htzhu/mingcheng_new/.codex-homes/Longleaf_Connection_Bridge/plugins/cache/ai-skills-candidate/ai-skills-core/0.3",
+  "marketplaceName": "ai-skills-candidate",
+  "name": "ai-skills-core",
+  "pluginId": "ai-skills-core@ai-skills-candidate",
+  "version": "0.3"
+}

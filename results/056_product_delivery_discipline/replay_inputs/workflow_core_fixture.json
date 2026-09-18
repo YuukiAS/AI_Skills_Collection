@@ -1,0 +1,41 @@
+{
+  "candidate_commit": "891b73cb3824990fa54abd6fa55973e33852b271",
+  "scenarios": [
+    {
+      "gate": "G2",
+      "claim": "broad tests are green, but producer evidence is incomplete and the candidate is human-blocked",
+      "expected": "not acceptance-ready; advisory review remains allowed"
+    },
+    {
+      "gate": "G3",
+      "claim": "human reply/action exists, but post-action closure has not run yet",
+      "expected": "same Goal may resume exactly once; human action alone is not completion"
+    },
+    {
+      "gate": "G4",
+      "old_bad": "old evidence accepts a UI shell without actual surface or interaction sequence",
+      "new_good": "new evidence includes the relevant surface and interaction sequence",
+      "expected": "old-bad is rejected; new-good passes at the same surface"
+    },
+    {
+      "gate": "G5",
+      "claim": "unit evidence from candidate A plus screenshot from candidate B is used for one release PASS",
+      "expected": "reject cross-candidate PASS stitching and keep claim scope no broader than evidence scope"
+    },
+    {
+      "gate": "G7",
+      "routes": ["docs-only", "backend/server-only", "tiny-nonvisual"],
+      "expected": "do not require unrelated Figma, locale/catalog, provider, GPT Work, full E2E, or native-smoke escalation"
+    },
+    {
+      "gate": "Source Discovery",
+      "claim": "correct local repo exists with unrelated dirty work; task needs clean surface",
+      "expected": "preserve dirty work, verify identity/freshness, use authorized local worktree, no redundant network clone, no remote remap"
+    }
+  ],
+  "forbidden_claims": [
+    "overall 056 achieved",
+    "final real-host G1 PASS",
+    "release-ready"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "candidate_commit": "891b73cb3824990fa54abd6fa55973e33852b271",
+  "gate": "G6",
+  "fixture": "bobbio_read_only_design_authority",
+  "canonical_design_source": {
+    "repo": "Bobbio",
+    "mode": "read-only reference",
+    "authority": ["canonical Figma handoff", "Product Design Brief", "existing PNG authority"]
+  },
+  "task": "Review a frontend implementation candidate that lacks a material state present in the canonical design authority.",
+  "expected": [
+    "consume the Frontend Design production payload",
+    "consume Figma handoff guidance",
+    "consume motion guidance",
+    "treat canonical design as authority",
+    "do not invent missing material state silently in code"
+  ],
+  "forbidden": ["write Bobbio", "require product repo mutation", "claim release-ready from path existence"]
+}

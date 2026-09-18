@@ -1,0 +1,21 @@
+{
+  "actual_consumption": {
+    "event_type": "item.started",
+    "line_index": 6,
+    "proven": true
+  },
+  "add_payload": {
+    "authPolicy": "ON_INSTALL",
+    "installedPath": "/overflow/htzhu/mingcheng_new/.codex-homes/Longleaf_Connection_Bridge/plugins/cache/ai-skills-candidate/web-development/0.2",
+    "marketplaceName": "ai-skills-candidate",
+    "name": "web-development",
+    "pluginId": "web-development@ai-skills-candidate",
+    "version": "0.2"
+  },
+  "candidate_commit": "891b73cb3824990fa54abd6fa55973e33852b271",
+  "installed_path": "/overflow/htzhu/mingcheng_new/.codex-homes/Longleaf_Connection_Bridge/plugins/cache/ai-skills-candidate/web-development/0.2",
+  "plugin_id": "web-development@ai-skills-candidate",
+  "runtime_version": "codex-cli 0.153.4",
+  "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/.local-runtime/candidate-plugin-replay/runs/20260918T082536Z-3835900/child.stderr",
+  "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/.local-runtime/candidate-plugin-replay/runs/20260918T082536Z-3835900/child.stdout.jsonl"
+}
