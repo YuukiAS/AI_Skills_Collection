@@ -86,6 +86,50 @@ candidate_action:
 - Keep the generic workflow concerns in workflow-core: freezing the acceptance contract, canonical repo delivery, truthful artifact identity, real-open/render evidence, repeat-failure circuit breaker, cost discipline and user handoff.
 promotion_gate: **do not modify the already-reviewed 056 architecture or implementation package for this item. Finish 056 first.** After 056 completes, map what its generic Acceptance Review / Evidence Fidelity / Actual-Surface rules already cover, then replay this domain boundary on one real advisor/report comparison and one manuscript/paper-like comparison. Promote only the residual research-specific semantics; do not duplicate workflow-core or presentation rendering rules.
 
+
+### Advisor/group-meeting reports need method and dataset orientation before project-specific results
+status: NEW
+source: Distributed_Imaging_Inference / Supervisor Bridge MOSAiC group-meeting report revision, 2026-09-19
+evidence: DII \`docs/results/SUPERVISOR_BRIDGE_GROUP_MEETING_PRELIMINARY_2026-09-19.md\`; user feedback that an advisor-facing report was not self-contained because it moved too quickly into project execution and omitted a clear explanation of MOSAiC and the two datasets.
+target layer: research-reporting planning / audience model
+problem: A group-meeting report can be scientifically correct yet still assume too much project context. The advisor should not have to infer what a newly introduced paper contributes, why its algorithmic machinery is used, what the datasets contain, or how the current experiment maps those objects into the research question. Starting from internal progress, current pipeline status or a project-specific adaptation before introducing the source method/data makes the report hard to follow and wastes meeting time.
+candidate_action:
+- For a report centered on a newly introduced method/paper, first give the minimum conceptual background required to understand the experiment: original problem, central idea, decisive properties/assumptions, why the main computational device is used, and the boundary of the original claim.
+- For every primary dataset, include a compact reader-facing data card before presenting results: scientific task, modality, patient/case count, real site/centre structure, labels/endpoints, relevant heterogeneity, and the exact subset/client definition used in the current study.
+- Clearly separate **official dataset background** from **the local artifact/current experiment subset** when counts or site coverage differ. Do not collapse “375 cases in the published dataset” and “345 subjects in the locally available artifact” into one number.
+- Explain the translation from source method to the current domain explicitly (e.g. original local likelihood/risk -> frozen segmentation logits -> low-dimensional local imaging risk -> TT message). Do not require the advisor to reconstruct this mapping from implementation details.
+- Keep the orientation section short enough to support the decision story; this is not a literature-review dump. Include only the paper properties and dataset facts needed to understand the experiment and its interpretation.
+promotion_gate: replay on one additional advisor/group-meeting report involving a new method plus at least one unfamiliar dataset; verify that a reader outside the project can understand the experiment before seeing any result.
+
+### Advisor-facing research reports should suppress execution/runtime details unless they change the scientific interpretation
+status: NEW
+source: Distributed_Imaging_Inference / Supervisor Bridge preliminary group-meeting report revision, 2026-09-19
+evidence: user rejected a report section explaining why a Longleaf run took longer than estimated; the runtime explanation was useful for internal planning but irrelevant to the advisor-facing scientific discussion.
+target layer: research-reporting inclusion/exclusion planning
+problem: Internal engineering facts are easy to retrieve and often feel concrete, so report writers over-include them. Runtime estimates, queue/allocation state, cache/I/O bottlenecks, job IDs, implementation chronology, why an executor is slower than expected, and similar details do not belong in an advisor-facing group-meeting report unless they create a scientific feasibility result, invalidate evidence, or require an advisor decision.
+candidate_action:
+- Before including an execution detail, ask: **Does this change the scientific claim, feasibility boundary, evidence quality, or decision requested from the advisor?** If not, omit it from the main report.
+- Keep operational diagnostics in internal notes / execution reports. Do not create a “why the run is slow” section merely because the run is ongoing.
+- It is acceptable to state the scientific evidence boundary concisely (“formal comparison is still running”) without narrating compute progress.
+- If computational scalability itself is the scientific question, report the measured complexity/runtime as a result; distinguish that from incidental engineering overhead.
+- Group-meeting main text should prioritize method, data, estimand, comparison, evidence and next scientific decision over implementation status.
+promotion_gate: replay on the next long-running computational research project and confirm that internal execution evidence remains available without contaminating the advisor-facing narrative.
+
+### Bilingual advisor reports should be two audience-calibrated versions, not interleaved translation
+status: NEW
+source: Distributed_Imaging_Inference / recurring user preference for group-meeting reports, reinforced 2026-09-19
+evidence: DII \`docs/results/SUPERVISOR_BRIDGE_GROUP_MEETING_PRELIMINARY_2026-09-19.md\`; user explicitly requested English in the first half for the advisor and Chinese in the second half for personal preparation.
+target layer: research-reporting document architecture
+problem: When one artifact must serve an English-speaking research audience and the user's own Chinese preparation, line-by-line bilingual text or interleaved translation creates visual clutter and weakens both versions. The English section needs to stand alone as the advisor-facing report; the Chinese section can be more explanatory and can clarify the user's own speaking logic without changing scientific claims.
+candidate_action:
+- When the user explicitly requests this audience split, default to **complete English version first, complete Chinese version second**.
+- The two halves must share the same evidence boundary, numbers, formulas and claim strength, but they do not need sentence-level literal correspondence.
+- English should be concise and presentation-ready for the advisor. Chinese may include additional intuition, speaking cues and “how to understand this result” explanations for the user, while avoiding unsupported new claims.
+- Do not duplicate internal execution details in either half merely because the Chinese half is “for self”; personal preparation still benefits from a scientific decision narrative.
+- Make the audience role explicit in headings so downstream presentation/rendering tools can safely use only the English half when appropriate.
+promotion_gate: replay on two independent bilingual research reports and confirm semantic parity without literal translation artifacts.
+
+
 ## Recently promoted / established
 
 - Advisor-facing reports organize around scientific question and decision, not run/debug chronology.
