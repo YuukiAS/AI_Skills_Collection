@@ -1,0 +1,114 @@
+{
+  "task_key": "056_product_delivery_discipline",
+  "candidate_surface": "non_host_source_unit_fixture",
+  "gates": [
+    {
+      "gate": "G2",
+      "name": "Acceptance Admission",
+      "fixture": "cuhk_date_broad_green_negative",
+      "producer_evidence_complete": false,
+      "human_blocked": true,
+      "advisory_review_requested": true,
+      "expected_acceptance_ready": false,
+      "expected_advisory_allowed": true
+    },
+    {
+      "gate": "G3",
+      "name": "Resume / post-action closure",
+      "fixture": "same_goal_post_action_closure",
+      "same_goal": true,
+      "answer_consumed_count": 1,
+      "human_action_only": true,
+      "post_action_closure_complete": true,
+      "expected_complete_after_action_only": false,
+      "expected_resume_valid": true
+    },
+    {
+      "gate": "G4",
+      "name": "Faithful regression",
+      "fixture": "old_bad_new_good_sequence",
+      "old_bad_caught": true,
+      "new_candidate_passes_same_surface": true,
+      "interaction_sequence_included": true,
+      "mock_only_claims_hosted": false,
+      "expected_pass": true
+    },
+    {
+      "gate": "G5",
+      "name": "Evidence / final-candidate identity",
+      "fixture": "claim_scope_and_candidate_identity",
+      "same_candidate": true,
+      "cross_candidate_stitching": false,
+      "evidence_surface": "fixture",
+      "claim_surface": "fixture",
+      "expected_claim_allowed": true
+    },
+    {
+      "gate": "G6",
+      "name": "Frontend design consumption",
+      "fixture": "bobbio_read_only_design_authority",
+      "canonical_design_source_read_only": true,
+      "production_payload_requires_figma": true,
+      "production_payload_requires_motion": true,
+      "invent_missing_material_state_in_code": false,
+      "expected_pass": true
+    },
+    {
+      "gate": "G7",
+      "name": "Non-overreach",
+      "fixture": "negative_routes",
+      "routes": [
+        {
+          "task_type": "docs-only",
+          "requires_figma": false,
+          "requires_locale_catalog": false,
+          "requires_provider_probe": false,
+          "requires_gpt_work": false,
+          "requires_full_e2e": false,
+          "requires_native_smoke": false
+        },
+        {
+          "task_type": "backend-server-only",
+          "requires_figma": false,
+          "requires_locale_catalog": false,
+          "requires_provider_probe": false,
+          "requires_gpt_work": false,
+          "requires_full_e2e": false,
+          "requires_native_smoke": false
+        },
+        {
+          "task_type": "tiny-nonvisual",
+          "requires_figma": false,
+          "requires_locale_catalog": false,
+          "requires_provider_probe": false,
+          "requires_gpt_work": false,
+          "requires_full_e2e": false,
+          "requires_native_smoke": false
+        }
+      ],
+      "expected_pass": true
+    },
+    {
+      "gate": "G8",
+      "name": "Consumption-regression diagnosis",
+      "fixture": "stale_install_with_active_rule",
+      "active_rule_exists": true,
+      "failure_class": "stale_install",
+      "diagnoses_consumer_path": true,
+      "adds_duplicate_policy": false,
+      "expected_pass": true
+    }
+  ],
+  "source_discovery": {
+    "fixture": "correct_local_repo_with_unrelated_dirty_work",
+    "local_canonical_repo_exists": true,
+    "unrelated_dirty_work_exists": true,
+    "identity_verified": true,
+    "freshness_checked": true,
+    "dirty_work_preserved": true,
+    "authorized_isolated_worktree": true,
+    "network_clone_used": false,
+    "remote_remapped": false,
+    "expected_pass": true
+  }
+}
