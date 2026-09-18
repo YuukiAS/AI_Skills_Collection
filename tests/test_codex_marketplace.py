@@ -31,9 +31,11 @@ CENTRAL_PLUGIN_NAMES = [
     "medical-imaging",
 ]
 EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
-    "ai-skills-core": "0.2",
+    "workflow-core": "0.2",
+    "ai-skills-core": "0.3",
     "writing-style": "0.2",
     "presentations": "0.3",
+    "web-development": "0.2",
 }
 REPOSITORY_SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 PLUGIN_VERSION_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)$")
@@ -166,7 +168,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         skill_artifacts = [entry["artifact_id"] for entry in core["skills"]]
         serialized = json.dumps(core, ensure_ascii=False)
 
-        self.assertEqual(core["version"], "0.2")
+        self.assertEqual(core["version"], "0.3")
         self.assertEqual(core["name"], "ai-skills-core")
         self.assertEqual(core["displayName"], "AI Skills Maintainer")
         self.assertIn("Maintenance companion", core["description"])
@@ -178,6 +180,33 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertIn("Refine an existing AI_Skills plugin from a real failure.", core["defaultPrompt"])
         self.assertIn("source, generated layer, replay, regression, version, and changelog closure", serialized)
         self.assertIn("extend an existing skill instead of creating another entry", serialized)
+
+    def test_056_product_delivery_discipline_sources_are_wired(self) -> None:
+        config = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        web = next(plugin for plugin in config["plugins"] if plugin["name"] == "web-development")
+        visual = next(skill for skill in web["skills"] if skill.get("artifact_id") == "visual")
+        visual_sources = {entry["source"] for entry in visual["source_skills"]}
+
+        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "workflow-core")["version"], "0.2")
+        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "web-development")["version"], "0.2")
+        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "ai-skills-core")["version"], "0.3")
+        self.assertIn("skills/tools/frontend/figma-design-to-code", visual_sources)
+        self.assertIn("skills/tools/frontend/motion-interaction", visual_sources)
+
+        workflow = (REPO_ROOT / "skills/core/codex-system/codex-workflow-protocol/SKILL.md").read_text(encoding="utf-8")
+        frontend = (REPO_ROOT / "skills/tools/frontend/frontend-visual-systems/SKILL.md").read_text(encoding="utf-8")
+        maintainer = (
+            REPO_ROOT / "skills/core/codex-system/ai-skills-repository-maintainer/SKILL.md"
+        ).read_text(encoding="utf-8")
+
+        for marker in ["W1 Acceptance Review Admission", "W2 Human Decision Gate", "W3 Evidence Fidelity", "Source Discovery Enforcement"]:
+            self.assertIn(marker, workflow)
+        self.assertIn("HUMAN_ONLY / AGENT_RESOLVABLE / UNSUPPORTED_WITH_EVIDENCE", workflow)
+        self.assertIn("F-A Design Authority And State Coverage", frontend)
+        self.assertIn("F-B Design-System Coherence", frontend)
+        self.assertIn("F-C Actual-Surface Convergence", frontend)
+        self.assertIn("Production Consumption Diagnosis", maintainer)
+        self.assertIn("consumer_not_routed", maintainer)
 
     def test_release_versions_are_independent_and_maturity_is_not_version(self) -> None:
         version = (REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip()
@@ -197,12 +226,12 @@ class CodexMarketplaceTests(unittest.TestCase):
             {
                 name: version
                 for name, version in plugin_versions.items()
-                if name not in {"ai-skills-core", "writing-style", "presentations"}
+                if name not in {"workflow-core", "ai-skills-core", "writing-style", "presentations", "web-development"}
             },
             {
                 name: "0.1"
                 for name in CENTRAL_PLUGIN_NAMES
-                if name not in {"ai-skills-core", "writing-style", "presentations"}
+                if name not in {"workflow-core", "ai-skills-core", "writing-style", "presentations", "web-development"}
             },
         )
         for plugin_version in plugin_versions.values():

@@ -1,6 +1,6 @@
 {
   "name": "ai-skills-core",
-  "version": "0.2",
+  "version": "0.3",
   "description": "Maintenance companion for AI_Skills_Collection plugin refinement: repository contracts, source-first changes, generated parity, replay, regression, versions, changelogs, and profile installation.",
   "author": {
     "name": "YuukiAS",

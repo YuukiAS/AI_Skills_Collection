@@ -5,7 +5,7 @@
   "plugins": [
     {
       "name": "workflow-core",
-      "version": "0.1",
+      "version": "0.2",
       "displayName": "Verified Workflow",
       "description": "General Codex execution, source-of-truth discovery, planning, verification, and completion gates.",
       "category": "Developer Tools",
@@ -27,7 +27,7 @@
     },
     {
       "name": "ai-skills-core",
-      "version": "0.2",
+      "version": "0.3",
       "displayName": "AI Skills Maintainer",
       "description": "Maintenance companion for AI_Skills_Collection plugin refinement: repository contracts, source-first changes, generated parity, replay, regression, versions, changelogs, and profile installation.",
       "category": "Developer Tools",
@@ -321,7 +321,7 @@
     },
     {
       "name": "web-development",
-      "version": "0.1",
+      "version": "0.2",
       "displayName": "Frontend Design",
       "description": "Frontend reference research, visual taste systems, motion/icon resource routing, and research product frontend constraints that complement official build-web-apps and Figma.",
       "category": "Web Development",
@@ -359,6 +359,14 @@
             {
               "source": "skills/tools/frontend/design-system-tokens",
               "artifact_id": "tokens"
+            },
+            {
+              "source": "skills/tools/frontend/figma-design-to-code",
+              "artifact_id": "figma"
+            },
+            {
+              "source": "skills/tools/frontend/motion-interaction",
+              "artifact_id": "motion"
             }
           ]
         },

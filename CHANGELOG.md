@@ -4,6 +4,68 @@
 
 No unreleased changes.
 
+## 5.0.5 - 2026-09-18
+
+Repository `5.0.5` is a compatible release candidate for 056 Product Delivery
+Discipline implementation on the central production plugin path.
+
+Repository bump decision: PATCH
+Reason: this release improves existing workflow, frontend-design, and
+maintenance behavior without adding a new top-level repository capability or
+breaking existing contracts.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `workflow-core` | `0.1` | `0.2` |
+| `web-development` | `0.1` | `0.2` |
+| `ai-skills-core` | `0.2` | `0.3` |
+
+Affected plugins:
+- `workflow-core`: `0.1` -> `0.2`
+  Reason: Verified Workflow now carries the 056 W1-W5 delivery discipline,
+  including acceptance admission, HUMAN_ONLY dependency triage, evidence-surface
+  fidelity, repeat-failure stop rules, change-impact protection, and local
+  source discovery enforcement.
+- `web-development`: `0.1` -> `0.2`
+  Reason: Frontend Design now carries F-A/F-B/F-C production gates and its
+  Marketplace payload consumes the existing Figma handoff and motion skills.
+- `ai-skills-core`: `0.2` -> `0.3`
+  Reason: AI Skills Maintainer now diagnoses production consumption paths when
+  an active rule exists but the real installed/generated/invocation/session path
+  still fails.
+
+Unchanged plugin versions: `writing-style 0.2`, `research-writing 0.1`,
+`presentations 0.3`, `scientific-visualization 0.1`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Complex delivery work should finish agent-resolvable implementation, faithful
+  target-surface evidence and post-action closure before asking for acceptance.
+- Only genuine `HUMAN_ONLY` dependencies ask the user; unsupported interfaces
+  close truthfully and agent-resolvable source/environment/test issues stay with
+  Codex.
+- Frontend Design now treats current canonical design sources as production
+  authority when they exist, while avoiding automatic Figma escalation for
+  docs-only, backend/server-only, or tiny nonvisual tasks.
+- Maintainer review now checks installed identity, source/generated parity,
+  plugin invocation, trigger, task entry, session loading and normal-entry
+  replay before adding duplicate policy.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelogs:
+
+- `docs/plugin-changelogs/workflow-core.md`
+- `docs/plugin-changelogs/web-development.md`
+- `docs/plugin-changelogs/ai-skills-core.md`
+
+Real-host integration note: this 056 implementation stage does not authorize
+mutating the user's real `$CODEX_HOME` or final live Host Policy smoke. That
+boundary remains pending for a separately authorized Bridge integration step.
+
 ## 5.0.4 - 2026-09-10
 
 Repository `5.0.4` is a compatible release for writing-style reader-facing scientific/technical rewrite hardening.
