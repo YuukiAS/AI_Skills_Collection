@@ -4,6 +4,20 @@ Canonical maintenance inbox for the `research-writing` plugin.
 
 ## Open candidates
 
+
+### Formal research reports can be scientifically correct yet still lack a coherent academic document identity
+status: NEW
+source: real supervisor / group-meeting research-report rendering, 2026-09-19
+evidence: private user-provided pair of rendered PDFs from the same report (not copied into this public repository); first render 17 pages/A4, second render 24 pages/US Letter; user feedback after the math was repaired: the report was readable and not obviously “wrong”, but still did not feel like a formal research document. Cross-reference: `docs/skill-todos/render-chinese-math-pdf.md` records the lower-level renderer/math/font failures from the same real use.
+problem:
+- Fixing equation rendering did not close the user-facing artifact-quality problem. The second PDF still looked like a generic/default document export rather than a deliberately designed supervisor-facing technical note.
+- The visible issue was not one isolated CSS value. Several choices interacted: loose page density, large/uneven whitespace, a switch from A4 to US Letter without an explicit user request, mixed font texture, generic table/title treatment, and long-document rhythm that expanded the same material from 17 to 24 pages.
+- Section hierarchy also exposed an authoring/render handoff problem. The source already contained human section numbers while the export added automatic numbering, producing forms such as `2.1 1. ...` and `8 9. ...`. The document title/TOC/title flow also repeated hierarchy instead of reading like a finished note.
+- This is distinct from prose quality. The scientific content could be understandable and the formulas could be corrected, while the final artifact still failed the user’s expectation of “formal research report” presentation.
+- Current `research-reporting` correctly says it should not implement low-level PDF/DOCX/LaTeX mechanics, and the existing TODO already keeps typography/pagination/render mechanics outside Research Authoring. This real case shows a remaining boundary gap: the document purpose still has to result in a coherent artifact-level identity (for example a formal advisor/group-meeting note rather than a generic article export) before/while the low-level renderer executes it. This NEW record intentionally does not decide whether that contract belongs in Research Authoring, the rendering layer, or a shared artifact layer.
+project-specific context: the report’s scientific topic, methods, datasets, results and exact wording are project-local/private and must not become generic Research Authoring rules. The reusable evidence is only the document-purpose/style mismatch, duplicated hierarchy, page-geometry drift and final “readable but not formal” user experience.
+
+
 ### Keep research authoring separate from the generic language layer
 status: READY_FOR_PROMOTION
 source: cross-plugin boundary audit after 050 + Distributed Imaging advisor-report revision, 2026-09-05
