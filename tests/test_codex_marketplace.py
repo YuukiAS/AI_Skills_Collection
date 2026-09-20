@@ -243,23 +243,22 @@ class CodexMarketplaceTests(unittest.TestCase):
             self.assertEqual(latest.group(1), version)
             self.assertIn("Earlier `4.x` values were legacy lockstep release metadata", text)
 
-    def test_readme_release_dashboard_matches_sources(self) -> None:
+    def test_readme_human_facing_plugin_gallery_matches_sources(self) -> None:
         config = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
-        plugin_versions = {plugin["name"]: plugin["version"] for plugin in config["plugins"]}
-        maturity_text = (REPO_ROOT / "docs/PLUGIN_MATURITY.md").read_text(encoding="utf-8")
-        maturity = dict(re.findall(r"^\| `([^`]+)` \| `([^`]+)`", maturity_text, flags=re.MULTILINE))
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
         repo_version = (REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip()
+
         self.assertIn(f"Repository / CLI release: `{repo_version}`", readme)
-        for plugin_name in CENTRAL_PLUGIN_NAMES:
-            row = re.search(
-                rf"^\| `{re.escape(plugin_name)}` \| `([^`]+)` \| `([^`]+)` \| .*docs/plugin-changelogs/{re.escape(plugin_name)}\.md",
-                readme,
-                flags=re.MULTILINE,
-            )
-            self.assertIsNotNone(row, plugin_name)
-            self.assertEqual(row.group(1), plugin_versions[plugin_name])
-            self.assertEqual(row.group(2), maturity[plugin_name])
+
+        plugins = config["plugins"]
+        self.assertEqual([plugin["name"] for plugin in plugins], CENTRAL_PLUGIN_NAMES)
+        for plugin in plugins:
+            icon_path = plugin["logo"].removeprefix("./")
+            self.assertTrue((REPO_ROOT / icon_path).is_file(), icon_path)
+            self.assertIn(f'src="{plugin["logo"]}"', readme)
+            self.assertIn(plugin["displayName"], readme)
+            self.assertIn(f"<code>{plugin['name']}</code>", readme)
+            self.assertIn(f"v`{plugin['version']}`", readme)
 
     def test_generated_layer_matches_source_config(self) -> None:
         summary, differences = build.check_layer()
