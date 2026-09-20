@@ -8,6 +8,8 @@
 - Approved design commit: `ba2fc85f9c58b9b332eb07f821d1756b417fe1d1`
 - Design Critic PASS: `docs/design/workflow-governance/WORKFLOW_IDENTITY_AND_GATE_LIFECYCLE_V2_1_CRITIC_REVIEW_2026-09-20.md`
 - Design Critic PASS commit: `1427c7060776719e2e1ae191b681ab2e1a608705`
+- Execution-package Critic REVISE: `docs/design/workflow-governance/WORKFLOW_IDENTITY_AND_GATE_LIFECYCLE_V2_1_EXECUTION_CRITIC_REVIEW_2026-09-20.md` @ `9cc8731be314546ae6901e28dd35e17f73670a0c`
+- Revision scope: `C-WIGL-E1-REMOTE-IDENTITY-PREFLIGHT` + `C-WIGL-E2-REPLAY-COUNT-SEMANTICS` only
 - AI_Skills planning baseline: `YuukiAS/AI_Skills_Collection main@1427c7060776719e2e1ae191b681ab2e1a608705`
 - Bridge planning baseline: `YuukiAS/GPT_Codex_AI_Bridge_Kit main@afb2414b6fbe4b2b03292d3b1437d4dd22277fd0`
 - Execution branch/worktree: **not created; Critic PASS + user-sent approved Kickoff required**
@@ -106,6 +108,32 @@ Execution preflight rule:
 - do not silently rebase semantic decisions, merge two packages, or auto-increment version numbers.
 
 If this package executes first, 056 must later revalidate against the new canonical main; this package does not modify 056 files.
+
+### 3.4 Mandatory read-only remote identity preflight
+
+Before **any** branch/worktree creation and before any fetch/push action in either repository, run a read-only remote-identity gate from the actual local Git repository that would be used for execution.
+
+For each repository:
+
+1. confirm the current directory resolves to a real Git top level (for example with `git rev-parse --show-toplevel`) and that this is the local repository selected for the prompt-declared canonical project;
+2. read the effective `origin` fetch URL (for example `git remote get-url origin`);
+3. read **all** effective `origin` push URLs (for example `git remote get-url --push --all origin`) and inspect configured `remote.origin.pushurl` values when present;
+4. normalize equivalent GitHub SSH / scp-style SSH / HTTPS forms to the canonical `owner/repo` identity by removing transport syntax and a trailing `.git`;
+5. require the normalized fetch identity and the normalized set of effective push identities to resolve uniquely to exactly:
+   - AI_Skills: `YuukiAS/AI_Skills_Collection`
+   - Bridge: `YuukiAS/GPT_Codex_AI_Bridge_Kit`;
+6. if there is any additional destination identity, repository mismatch, non-GitHub/unsupported form that cannot be resolved safely, missing `origin`, or ambiguity, set:
+
+```text
+STOP_BEFORE_MUTATION=YES
+NEXT_OWNER=GPT_PLANNER
+```
+
+and do not create a branch/worktree, fetch, or push.
+
+Equivalent raw URLs that normalize to the same single declared GitHub repository are not a second repository identity. Any distinct normalized push destination is an extra destination and fails the gate.
+
+This preflight is read-only. It is explicitly forbidden to use `git remote set-url`, change `remote.origin.url` / `remote.origin.pushurl`, add/remove push URLs, change Git URL rewrite config, or otherwise remap a remote merely to make the check pass. No remote registry, state file, schema, controller or new Git abstraction is introduced.
 
 ## 4. Exact future execution identity and authorization target
 
@@ -343,7 +371,16 @@ Then run the existing canonical generator/validation and full AI_Skills unit sui
 
 Because AI_Skills production plugin behavior changes, source-text assertions alone are insufficient.
 
-After source + generated layers are stable, allow at most **two public-safe candidate plugin replays** through the existing candidate/production replay path using the current Codex identity. These are not OpenAI Responses/Terra paid-review calls and must not use private user data or external credentials.
+After source + generated layers are stable, use exactly **two fixed public-safe replay scenarios/cases** through the existing candidate/production replay path using the current Codex identity:
+
+1. Verified Workflow;
+2. AI Skills Maintainer.
+
+This is a bound on the **scenario set**, not a total invocation count of two. The input/intent of each scenario must be frozen before its first run. If a scenario first FAILs and the concrete root cause can be repaired within the already-frozen architecture, complete that bounded repair and rerun the **same scenario**. Such a rerun is not a paid-call budget and does not authorize a new input/scenario.
+
+Do not add a third replay scenario, append a new input variant to find a winner, or run-until-PASS. Repeated failure without a new, concrete in-scope causal repair must trigger attribution/stop rather than blind rerun. If repeated failure shows that Gate taxonomy, ownership, parser responsibility, state/recovery semantics, or another approved architecture boundary must change, stop and return to Planner/Critic.
+
+These scenarios are not OpenAI Responses/Terra paid-review calls and must not use private user data or external credentials.
 
 ### Replay A — Verified Workflow
 
@@ -368,7 +405,7 @@ Give the candidate representative maintenance cases:
 
 It must produce the approved scope semantics, keep the domain owner separate, use a short human-readable label in ordinary prose, keep the technical key as locator, and not implement a second parser/registry/state system.
 
-If either replay reveals a real policy/consumer defect, repair only within the frozen architecture and rerun the affected replay. Do not add more replay cases adaptively to chase a PASS. If fixing it would change architecture/Gates/ownership/recovery semantics, stop and return to Planner/Critic.
+If either fixed scenario reveals a real policy/consumer defect, first attribute the concrete root cause. When the repair stays inside the frozen architecture, repair it and rerun that same frozen scenario. Do not add new scenarios or new inputs, and do not run-until-PASS. If repeated failure shows that architecture/Gates/ownership/parser responsibility/state/recovery semantics must change, stop and return to Planner/Critic.
 
 ## 8. Capability Gate Matrix — execution mapping
 
@@ -409,7 +446,7 @@ Before freezing the candidate tuple:
 5. `scripts/skills.py audit --all`;
 6. affected plugin/repository version/changelog consistency;
 7. full `python -m unittest discover -s tests`;
-8. the two bounded candidate plugin replays.
+8. both fixed candidate plugin replay scenarios have direct evidence; any rerun is the same frozen scenario after a concrete bounded in-scope repair, never an added scenario/input.
 
 No paid external review is required by the approved design. No fixed fresh/manual sample count is introduced.
 
@@ -515,7 +552,7 @@ If old numbered tasks stop validating, treat it as G4 product regression. Repair
 
 ### 13.5 Candidate replay failure
 
-First attribute to:
+The approved scenario set stays fixed at Verified Workflow + AI Skills Maintainer. A FAIL does not authorize a new case. First attribute to:
 
 - policy/source omission;
 - generated payload parity/loading;
@@ -523,7 +560,7 @@ First attribute to:
 - prompt/consumer behavior;
 - incorrect fixture expectation.
 
-Repair within approved design. If the only proposed fix changes Gate taxonomy, ownership, parser responsibility, state machine or recovery semantics, stop and return to Planner/Critic.
+If a concrete root cause is repairable inside the approved design, make the bounded repair and rerun the same frozen scenario. Do not introduce a third scenario/new input and do not run-until-PASS. Replay reruns are not a paid-call budget. If repeated failure shows the only proposed fix changes Gate taxonomy, ownership, parser responsibility, state machine or recovery semantics, stop and return to Planner/Critic.
 
 ### 13.6 Unrelated full-suite failure
 
