@@ -8,6 +8,8 @@
 - Goal: `docs/goals/WORKFLOW_IDENTITY_AND_GATE_LIFECYCLE_V2_1_GOAL.md`
 - Approved design: `docs/design/workflow-governance/WORKFLOW_IDENTITY_AND_GATE_LIFECYCLE_V2_PROPOSAL_2026-09-20.md` v2.1
 - Design PASS: `docs/design/workflow-governance/WORKFLOW_IDENTITY_AND_GATE_LIFECYCLE_V2_1_CRITIC_REVIEW_2026-09-20.md`
+- Execution-package Critic REVISE: `docs/design/workflow-governance/WORKFLOW_IDENTITY_AND_GATE_LIFECYCLE_V2_1_EXECUTION_CRITIC_REVIEW_2026-09-20.md` @ `9cc8731be314546ae6901e28dd35e17f73670a0c`
+- This revision closes only `C-WIGL-E1-REMOTE-IDENTITY-PREFLIGHT` and `C-WIGL-E2-REPLAY-COUNT-SEMANTICS`.
 - This draft becomes execution authorization only if an independent Critic passes this exact Plan + Goal + Kickoff package and the user then sends the approved text below.
 
 ## Kickoff
@@ -29,7 +31,7 @@
 
 ### 1. 当前用户授权边界
 
-如果我发送这段获批 Kickoff，我明确授权本轮在以下**精确范围**执行。
+如果我发送这段获批 Kickoff，我明确授权本轮在以下**精确范围**执行。下面列出的 branch/worktree/fetch/push 权限只有在 §3 的 read-only remote identity gate PASS 后才可使用。
 
 #### AI_Skills_Collection
 
@@ -51,7 +53,7 @@
   - affected TODO/changelog/version/release metadata
   - task-owned repo evidence/results
 - 运行 Goal 指定的 focused/full tests、generator/validation/audit
-- 运行最多 **2 次** public-safe candidate plugin replay：一次 Verified Workflow、一次 AI Skills Maintainer；可在合法 bounded repair 后只重跑对应失败 replay，不得追加新样本追赢家
+- 运行两个固定 public-safe candidate plugin replay **scenarios/cases**：Verified Workflow 与 AI Skills Maintainer。这里限制的是 scenario set，不是总 invocation 次数；若某个固定 scenario 第一次 FAIL 且 root cause 可在 frozen architecture 内 bounded repair，可修复后重跑同一个 frozen scenario。不得新增第三种 scenario/新输入，不得 run-until-PASS；replay rerun 不是 paid-call budget
 - ordinary non-force push 到这个 exact reviewed branch
 - 读取 GitHub CI/check 状态
 
@@ -103,9 +105,37 @@
 
 GitHub 正常 fetch/push、现有 Codex identity 的 bounded candidate plugin replay，以及本地 isolated test repo 不属于新增 provider 授权；不得借此扩大到其他外部服务。
 
-### 3. Preflight：先核 source/version，再创建 branch
+### 3. Preflight：先核 remote identity，再核 source/version，再创建 branch
 
-在任何 production mutation 前核对：
+#### 3.1 Read-only remote identity gate
+
+在两个 repo 的任何 branch/worktree creation，以及任何 fetch/push action 之前，先从实际准备执行的 local Git repository 做只读 identity gate。
+
+对 AI_Skills 和 Bridge 各自：
+
+1. 用 `git rev-parse --show-toplevel` 或等价方式确认当前目录属于实际 local Git repo，并确认这是 prompt 声明的 canonical repository；
+2. 读取 `origin` effective fetch URL；
+3. 读取 **全部 effective push URLs**，包括 configured `pushurl`；可使用 `git remote get-url --push --all origin` 并检查 `remote.origin.pushurl`；
+4. 把 GitHub HTTPS、scp-style SSH、`ssh://git@github.com/...` 等价形式规范到 `owner/repo` identity，去除 transport syntax 与 trailing `.git`；
+5. AI_Skills 的 fetch identity 和 effective push identity set 必须唯一解析为：
+   `YuukiAS/AI_Skills_Collection`
+6. Bridge 的 fetch identity 和 effective push identity set 必须唯一解析为：
+   `YuukiAS/GPT_Codex_AI_Bridge_Kit`
+
+多个 raw URL 若只是等价 transport 且规范后仍是同一个声明 repo，不算第二个 repository identity。任何 distinct extra push destination、repo mismatch、missing `origin`、unsupported/ambiguous identity 都必须：
+
+```text
+STOP_BEFORE_MUTATION=YES
+NEXT_OWNER=GPT_PLANNER
+```
+
+然后停止：不创建 branch/worktree，不 fetch，不 push。
+
+这个 gate 只读。禁止使用 `git remote set-url`、修改 `remote.origin.url` / `remote.origin.pushurl`、增删 push URL、修改 Git URL rewrite config、其他 Git config 或 remote remap 来让 gate 通过。不要新增 remote registry/state/schema/controller。
+
+#### 3.2 Source/version gate
+
+Remote identity gate PASS 后，在任何 production mutation 前核对：
 
 ```text
 AI_Skills expected:
@@ -203,7 +233,7 @@ AI_Skills 至少证明：
 - no governance bloat；
 - generator/source parity；
 - full unit suite PASS；
-- 最多两次 approved candidate plugin replay。
+- 两个固定 approved replay scenarios/cases：Verified Workflow + AI Skills Maintainer。每个 scenario 允许在具体 bounded in-scope repair 后重跑同一 frozen scenario；不得新增第三种 scenario/新输入，也不得 run-until-PASS。
 
 Mechanical PASS 不能替代 replay/独立 review。
 
