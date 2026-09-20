@@ -9,6 +9,8 @@
 - Approved design commit: `ba2fc85f9c58b9b332eb07f821d1756b417fe1d1`
 - Design Critic PASS: `docs/design/workflow-governance/WORKFLOW_IDENTITY_AND_GATE_LIFECYCLE_V2_1_CRITIC_REVIEW_2026-09-20.md`
 - Design Critic PASS commit: `1427c7060776719e2e1ae191b681ab2e1a608705`
+- Execution-package Critic REVISE: `docs/design/workflow-governance/WORKFLOW_IDENTITY_AND_GATE_LIFECYCLE_V2_1_EXECUTION_CRITIC_REVIEW_2026-09-20.md` @ `9cc8731be314546ae6901e28dd35e17f73670a0c`
+- This revision closes only `C-WIGL-E1-REMOTE-IDENTITY-PREFLIGHT` and `C-WIGL-E2-REPLAY-COUNT-SEMANTICS`.
 - Execution is not authorized until an independent Critic passes this exact Plan + Goal + Kickoff package and the user sends the approved Kickoff.
 
 ## 1. 最终目标
@@ -48,9 +50,36 @@
 - 不做 docs directory reorganization；
 - 不控制 ChatGPT/Codex 客户端自动 conversation/sidebar title。
 
-## 3. 执行前 source/version preflight
+## 3. 执行前 preflight
 
-用户发送获批 Kickoff 后，在任何 production mutation 之前重新核对：
+用户发送获批 Kickoff 后，必须先完成下面两层 preflight。**Remote identity gate 发生在两个 repo 的任何 branch/worktree creation 以及任何 fetch/push action 之前。**
+
+### 3.1 Read-only remote identity gate
+
+对 AI_Skills 与 Bridge 各自从实际准备执行的 local Git repository 做只读检查：
+
+1. 用 `git rev-parse --show-toplevel` 或等价方式确认当前目录属于一个真实 Git top level，并且这是 prompt 声明要操作的 canonical repository；
+2. 读取 `origin` effective fetch URL；
+3. 读取 `origin` 的**全部 effective push URLs**，并检查存在的 `remote.origin.pushurl` 配置；
+4. 把 GitHub HTTPS、`git@github.com:owner/repo.git`、`ssh://git@github.com/owner/repo.git` 等等价形式规范为 `owner/repo` identity；
+5. AI_Skills 的 fetch identity 与 effective push identity set 必须唯一解析为 `YuukiAS/AI_Skills_Collection`；
+6. Bridge 的 fetch identity 与 effective push identity set 必须唯一解析为 `YuukiAS/GPT_Codex_AI_Bridge_Kit`；
+7. distinct extra push destination、repo mismatch、missing origin、unsupported/ambiguous identity 任何一项出现时：
+
+```text
+STOP_BEFORE_MUTATION=YES
+NEXT_OWNER=GPT_PLANNER
+```
+
+并停止；不得创建 branch/worktree，不得 fetch/push。
+
+多个 raw URL 若只是 SSH/HTTPS 等价表示且规范后都指向同一个声明 repo，不算第二个 repo identity；只要出现第二个 distinct normalized push destination 就失败。
+
+这个 gate 只读。禁止用 `git remote set-url`、修改 `remote.origin.url` / `remote.origin.pushurl`、增删 push URL、修改 Git URL rewrite config、Git config 或任何 remote remap 来让 gate 通过。不新增 remote registry/state/schema/controller。
+
+### 3.2 Source/version gate
+
+Remote identity gate PASS 后，在任何 production mutation 之前重新核对：
 
 ### AI_Skills
 
@@ -290,14 +319,18 @@ Bridge 不判断 semantic ownership。
 
 ## 9. AI_Skills production replay
 
-在 candidate source/generated layer 稳定后，最多两次 public-safe candidate plugin replay：
+在 candidate source/generated layer 稳定后，replay 的**scenario set 固定为两种**：
 
 1. **Verified Workflow**：验证 narrow vs broad/full、same-final-candidate、不固定 paid/fresh count；
 2. **AI Skills Maintainer**：验证 scope precedence、Gate regression triage、human label vs technical locator、domain ownership。
 
-不使用 private data，不调用 Terra/OpenAI Responses，不增加 paid-review budget。
+这里的“两种”限制的是 approved replay scenarios/cases，不是总 invocation 次数。每个 scenario 的输入/意图在第一次运行前冻结。
 
-若 replay 失败，只能按 frozen architecture 修复并重跑受影响 replay；不得扩样本追赢家。
+若某个固定 scenario 第一次 FAIL，且 concrete root cause 可以在 frozen architecture 内做 bounded repair，则完成该修复后可以重跑**同一个 frozen scenario**。replay rerun 不是 paid-call budget，也不授权新输入或第三种 scenario。
+
+不得新增第三种 replay scenario，不得为了找赢家追加新输入，不得 run-until-PASS。重复失败且没有新的具体 in-scope causal repair 时应停止并归因；如果 repeated failure 表明必须改变 Gate taxonomy、ownership、parser responsibility、state/recovery semantics，则停止并返回 Planner/Critic。
+
+不使用 private data，不调用 Terra/OpenAI Responses，不增加 paid-review budget。
 
 ## 10. 测试与生成层
 
@@ -322,7 +355,7 @@ Bridge 不判断 semantic ownership。
 - `scripts/skills.py audit --all`；
 - affected version/changelog consistency；
 - full unit suite；
-- 两次 bounded candidate plugin replay。
+- 两个固定 candidate plugin replay scenarios 均有直接 evidence；若发生合法 rerun，只能是 bounded repair 后对同一 frozen scenario 的重跑，不得新增 scenario/input。
 
 机械 tests 只能证明对应机械性质，不能代替 replay 与独立 review。
 
@@ -382,7 +415,7 @@ technical key 可以在一次 locator block、branch/path、evidence appendix �
 - frozen scope 内普通 bug/test failure -> Executor 修；
 - semantic propagation failure -> G2 implementation repair；
 - legacy validation regression -> G4 repair，不迁历史；
-- candidate replay failure -> 先查 source/generated/install/consumer/fixture，再做 bounded repair；
+- candidate replay failure -> 先查 source/generated/install/consumer/fixture；可在 frozen architecture 内做 concrete bounded repair 后重跑同一 frozen scenario；不得新增 scenario/input 或 run-until-PASS；
 - 需要改变 Gate taxonomy/ownership/parser responsibility/state/recovery semantics -> stop, Planner/Critic；
 - unrelated suite failure -> 归因，不顺手扩大产品范围；
 - 不 blind retry，不 adaptive sample chasing。
@@ -396,7 +429,7 @@ Executor 只有在以下完成后才可停止并报告：
 - 两 repo exact task branches/worktrees已按批准范围使用；
 - source/generated/version candidate完整；
 - G1–G7 evidence完整；
-- full tests与两次 bounded replay完成；
+- full tests完成，两个固定 replay scenarios 都有最终 direct evidence；允许的 rerun仅限具体 bounded repair 后重跑同一 frozen scenario；
 - final candidate tuple冻结；
 - task-owned evidence已进入 repo；
 - exact task branches已普通 non-force push；
