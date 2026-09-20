@@ -4,6 +4,21 @@
 
 No unreleased changes.
 
+## 0.3 - 2026-09-20
+
+Before:
+
+- Central plugin maintenance checked source authority, generated parity, replay, regression, versions, and changelogs, but did not explicitly own gate lifecycle decisions.
+- New real failures could still be tempting to encode as duplicate gates or same-meaning TODO rules.
+- Task identity guidance did not explicitly separate semantic machine keys from human-readable labels and UI titles.
+
+After:
+
+- `ai-skills-core` now requires production regressions to map to existing capability gates unless a distinct capability, evidence type, failure semantics, normal entry, or owner boundary justifies a split/new gate.
+- Gate split, merge, and retirement require historical regression and should-not-change coverage to be preserved in the Plan, RESULT, TODO, changelog, or tests.
+- Release checks run cheap deterministic regression banks first, require isolation arguments for narrow gates, and escalate shared runtime/schema/generator, routing/default prompt, Marketplace/profile, artifact review, credential/paid transport, or cross-plugin user-visible changes to broad/full gates.
+- Maintainer guidance now treats Bridge / Reviewed Handoff task keys as semantic technical locators and keeps human labels, thread titles, sidebar titles, and plugin display names separate.
+
 ## 0.2 - 2026-09-01
 
 Before:

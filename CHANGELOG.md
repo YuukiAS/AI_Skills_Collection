@@ -4,6 +4,41 @@
 
 No unreleased changes.
 
+## 5.0.6 - 2026-09-20
+
+Repository `5.0.6` is a compatible release for workflow identity and plugin gate lifecycle hardening.
+
+Repository bump decision: PATCH
+Reason: this release improves existing workflow and central-plugin maintenance behavior without adding a new repository-level capability or breaking existing contracts.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `workflow-core` | `0.1` | `0.2` |
+| `ai-skills-core` | `0.2` | `0.3` |
+
+Affected plugins:
+- `workflow-core`: `0.1` -> `0.2`
+  Reason: Verified Workflow now treats task keys as technical locators, keeps human labels separate, and selects release gates through frozen gate lifecycle and final-candidate evidence semantics.
+- `ai-skills-core`: `0.2` -> `0.3`
+  Reason: AI Skills Maintainer now owns central-plugin regression-bank triage, gate split/merge/retirement discipline, narrow-vs-broad release gate selection, and semantic task identity maintenance boundaries.
+
+Unchanged plugin versions: `writing-style 0.3`, `research-writing 0.1`, `presentations 0.3`, `scientific-visualization 0.1`, `web-development 0.1`, `statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Reviewed Handoff guidance now separates semantic machine task keys from human-readable labels and rejects title/display-name driven task identity.
+- Capability Gate policy now requires new regressions to map to existing gates first, with explicit split/merge/retirement handling only when capability, evidence, failure semantics, normal entry, or owner boundary differs.
+- Plugin release planning now defaults to cheap deterministic regression banks before expensive/fresh review and requires broad/full fallback gates for shared runtime, routing, Marketplace/profile, artifact-review, credential/paid, or cross-plugin behavior changes.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelogs:
+
+- `docs/plugin-changelogs/workflow-core.md`
+- `docs/plugin-changelogs/ai-skills-core.md`
+
 ## 5.0.5 - 2026-09-15
 
 Repository `5.0.5` is a compatible release candidate for Clear Writing long-form scientific/technical rewrite convergence.

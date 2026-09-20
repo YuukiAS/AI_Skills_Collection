@@ -1,7 +1,7 @@
 # Planner 线程工作约定
 
-版本：1.3  
-日期：2026-09-15  
+版本：1.4  
+日期：2026-09-20  
 配套文件：`docs/workflows/CRITIC_ROLE_CONTRACT.md`
 
 ## 1. 适用范围与性质
@@ -32,6 +32,8 @@ source_branch_or_ref
 proposal_path_and_version
 execution_branch/worktree_if_already_known
 ```
+
+`design_topic_or_task_key` 中的 task key 是机器 locator，不是标题。新的 Bridge / Reviewed Handoff task key 必须使用 semantic `<scope-token>--<goal-token>`；历史数字式 key 只作既有任务兼容。跨 repo 或跨 plugin 工作先确定真实 scope owner，再生成 key；human label 可以保留中文短标题，但不得让 client title、thread title、display name、sidebar section 或另一个服务反向控制 task key、branch、results path、scheduled-review binding。
 
 切换到另一个 plugin / domain 时先显式重新初始化 Active Design Context，再读该对象自己的 TODO、source、history 和 evidence；不得把另一个插件的 Gate、Reviewer 标准、branch、授权或历史结论带过来。多个插件可并行推进，但各自 Proposal / Goal / review / execution branch 必须可独立定位，Critic PASS 也只对对应对象和版本有效。
 
@@ -78,6 +80,8 @@ Planner 负责理解目标、研究替代方案、起草完整提案、逐项回
 - **交付与回归**：会改哪些现有层，已有能力如何防退化，最终版本/安装身份怎样核对，如何集成与交接。
 
 正式 plugin production refinement / release 还必须读取并使用 `docs/workflows/PLUGIN_CAPABILITY_GATE_POLICY.md`，在 Proposal/Plan 中给出 Capability Gate Matrix。Gate 要证明不同的真实用户能力，不能以“读了很多资料、tests/CI PASS、schema/receipt 完整”代替产品能力，也不能机械复制别的插件的 Gate。
+
+Capability Gate Matrix 还必须说明 regression bank 和 release-selection 语义：新失败优先归入既有 gate；只有 capability/evidence/failure semantics/normal entry 不同时才 split/new gate；merge、split、retirement 要带历史回归迁移说明；cheap deterministic regression bank 与 should-not-change 反例先跑；narrow gate 需要隔离理由；shared runtime/schema/generator、routing、Marketplace/profile、artifact review 或 cross-plugin user-visible change 必须升级 broad/full gate；最终 release claim 只能绑定同一 final candidate。不得新增独立 impact registry、数据库或 ledger 来替代 Plan/RESULT/TODO/test 中的可审证据。
 
 跨插件复用不自动等于跨 repo。AI_Skills 专属维护与验收在本仓库处理；Bridge Kit 只有确属跨 repo 通用机制且经独立评审才进入修改范围。
 

@@ -1,7 +1,7 @@
 # Plugin Capability Gate Policy
 
-版本：1.0  
-日期：2026-09-15  
+版本：1.1  
+日期：2026-09-20  
 适用范围：AI_Skills_Collection 所有中央 plugin / skill / profile 的正式能力 refinement、release 与 maturity 判断。
 
 ## 1. 核心原则
@@ -9,6 +9,20 @@
 正式插件不能因为“读了很多资料、接入很多资源、tests/CI 通过、生成了很多 evidence”就算完成。Planner 必须先把插件声称提供的用户能力拆成一组可观察、可失败、可独立验收的 capability gates；Critic 必须审查这些 gates 是否足够、是否重复、是否可以被 proxy PASS 钻空子。
 
 Gate 不是固定模板，也不要求所有插件有相同数量。不同插件应按真实用户任务和最可能失败方式设计自己的 gate。Gate 数量以覆盖必要能力为准，不以“越多越稳”为目标。
+
+## 1.1 Gate lifecycle 与回归归属
+
+Gate taxonomy 应保持稳定增长，不因每个新失败而机械新增 gate。新的真实失败、项目反馈或 Reviewer miss 先进入对应插件的 regression bank / TODO / test fixture，由 Planner 判断它属于哪个既有用户能力 gate。若既有 gate 已经声称覆盖该能力，则这是该 gate 的 production regression：补充真实证据、修 consumer/runtime/skill/QA，并把回放纳入该 gate 的回归集合；不要再造一个同义 gate 来绕开原本的验收责任。
+
+只有当失败证明的是不同用户能力、不同 evidence type、不同 failure semantics、不同 normal entry，或不同 owner/风险边界时，Planner 才能提出 split/new gate。split 必须说明旧 gate 继续证明什么、新 gate 证明什么、旧回归样本分别迁到哪里、哪些 release / maturity 结论需要重审。merge / retirement 也必须写明被合并或退休 gate 的历史回归、should-not-change 要求和未来覆盖 gate；不能因为当前 batch 没跑某个旧样本就让能力 silently disappear。
+
+Regression bank 的执行顺序默认是 cheap deterministic checks first：先跑可本地复现、无付费、路径明确的既有回归和 should-not-change 反例；只有这些通过且最终候选稳定后，才运行更贵、更慢、需要人工/外部审查或 fresh evidence 的 gate。Planner 不得规定固定样本数来冒充质量；数量、任务族和重复次数必须来自风险、历史失败模式和本轮 blast radius。
+
+Narrow gate eligibility 需要解释为什么本轮改动被隔离在某个插件、skill、runtime 或 artifact family 内。只允许 narrow 时，仍要写清楚同一 final candidate 的 should-not-change 证据。出现 shared runtime/schema/generator、routing/default prompt、安装/Marketplace/profile、artifact review、credential/paid path、或用户可见 cross-plugin 行为变化时，必须升级到 broad/full regression gate，而不是靠局部 PASS 发布。
+
+所有 release gate 最终必须绑定同一个 final candidate。开发期已知回归可以反复使用；最终 candidate 的 gate evidence 不得由多个不同 commit 拼接。涉及 grader/eval/reviewer 时，必须说明评分标准和输入 identity 怎样与冻结 Plan 对齐；若 grader 本身被调过，必须区分 grader repair 与 product repair。
+
+本政策不要求新增 impact registry、database、ledger 或另一套 state machine。Gate lifecycle 记录可以留在 Plan / RESULT / plugin TODO / changelog / tests 中，重点是可追踪、可审查、可被 normal production entry 消费。
 
 ## 2. Planner 必须给出 Capability Gate Matrix
 

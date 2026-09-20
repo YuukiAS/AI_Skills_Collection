@@ -9,6 +9,8 @@ Use this checklist for complex code, data, document, release, generated artifact
 - Inspect staged diffs before any commit. Stage only task-owned changes.
 - Run relevant tests or validators. Prefer targeted checks first, then broader checks when blast radius warrants it.
 - Validate final artifacts directly through the specialist-defined gate: schema, render, metric, build, live state, or client-visible behavior.
+- For release or plugin-refinement work, map known regressions to existing gates first, run cheap deterministic regression-bank checks before expensive/fresh review, and explain any narrow-gate choice. Shared runtime/schema/generator, routing, marketplace/profile, artifact-review, credential/paid, or cross-plugin user-visible changes require broad/full fallback gates.
+- Bind all release gate evidence to the same final candidate; do not stitch old candidate PASS results together with later source changes.
 - Scan touched or staged content for forbidden project-specific strings when producing generic repository assets.
 - Do not push, publish, delete user work, or perform expensive/destructive actions unless the user allowed it.
 
