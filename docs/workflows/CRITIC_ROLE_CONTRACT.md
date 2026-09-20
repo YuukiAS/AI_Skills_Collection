@@ -1,7 +1,7 @@
 # Critic 线程工作约定
 
-版本：1.2  
-日期：2026-09-15  
+版本：1.3  
+日期：2026-09-17  
 配套文件：`docs/workflows/PLANNER_ROLE_CONTRACT.md`
 
 ## 1. 职责与独立性
@@ -173,6 +173,26 @@ NEXT_HANDOFF=PLANNER
 如果是 implementation 中的 pre-final Critic PASS，且 frozen Goal 已明确下一步可以由 Executor/Codex继续且不改变 scope，则可输出一个只引用 approved Goal/current evidence 的 bounded resume prompt；若下一步需要改变架构、acceptance、预算、授权或 recovery semantics，则仍必须回 Planner，不得由 Critic自行设计。
 
 若某个 blocker 最终需要用户亲自做私有文件上传、授权或产品选择，Critic 仍先生成 Planner prompt，由 Planner 按角色合同把真正的 user-only action 缩成最小请求；不得因此把其余 repo 定位、finding 解释和 prompt 组装工作甩给用户。
+
+### 6.3 曾经 REVISE 后的最终 PASS 必须先给用户可读闭环说明
+
+如果同一 Active Review Context、major round 或明确 review object 在此前任何正式轮次出现过 `REVISE`，后续 Critic 最终给 `PASS` 时，不能只返回 `PASS`、machine-readable fields、状态名或 approved prompt。
+
+在 machine-readable final fields、`READY_FOR_CODEX=YES`、approved Kickoff 或下一角色 prompt **之前**，必须先用正常中文给一段面向用户的 closure explanation。按当前对象适用项至少说明：
+
+- 原 blocking findings 分别怎样被关闭，关键依据是什么；
+- 哪些 owner/layer 新增或修改了什么机制；
+- 哪些相关 layer/repo 明确没有修改，以及为什么不需要改；
+- Capability Gates 分别证明什么真实用户行为，而不是只列 gate 名或 tests；
+- repo-specific AGENTS / locator 哪些增加、哪些保持不变及原因；
+- normal user workflow 相比 REVISE 前会发生什么实际变化，尤其用户会少承担哪些调试/验收工作；
+- 本次 PASS 证明什么、不证明什么，哪些权限、最终产品验收、发布或付费动作仍未被批准。
+
+这是一条**通用报告规则**，不是要求所有 review 固定列相同十个章节。只解释当前 review object 真正涉及的层，避免把 closure explanation 写成内部状态/日志堆砌。对于 056 这类跨 workflow/Bridge/domain/repo 的大 round，Critic prompt 可以进一步要求按实际涉及层逐项说明；普通小 review 保持比例化。
+
+若本轮是 execution-ready PASS，该说明必须出现在 6.1 的 approved paths/fields 和 verbatim Kickoff 之前。若本轮是设计/恢复阶段 PASS，该说明必须出现在 6.2 的下一角色 prompt 之前。
+
+如果同一 major round 从未出现正式 `REVISE`，继续按本节 §6 的普通自然中文判断即可，不机械制造额外 closure ceremony。
 
 ## 7. Planner 可以反驳，但不能自我放行
 
