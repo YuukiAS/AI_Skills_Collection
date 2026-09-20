@@ -1,29 +1,36 @@
-# Workflow Identity & Capability Gate Lifecycle — Planner Proposal v2
+# Workflow Identity & Capability Gate Lifecycle — Planner Proposal v2.1
 
 - Date: 2026-09-20
-- Status: DRAFT_FOR_CRITIC_REVIEW
+- Status: DRAFT_FOR_CRITIC_REVIEW_R3
 - Design topic: `workflow-identity-and-gate-lifecycle`
 - Supersedes: `docs/design/workflow-governance/WORKFLOW_IDENTITY_AND_GATE_LIFECYCLE_V1_PROPOSAL_2026-09-20.md`
 - v1 Critic review: `docs/design/workflow-governance/WORKFLOW_IDENTITY_AND_GATE_LIFECYCLE_V1_CRITIC_REVIEW_2026-09-20.md`
+- v2 Critic review: `docs/design/workflow-governance/WORKFLOW_IDENTITY_AND_GATE_LIFECYCLE_V2_CRITIC_REVIEW_2026-09-20.md`
+- v2 reviewed proposal commit: `7a01c84c1c7f5a6419f62623cf8edc42199d33a4`
+- v2 Critic review commit: `c8c349432b2f1343f87c73d6c39553abc874ae93`
 - v1 review commit: `4ba429ebb510d6088f947468e624a1b043d19022`
-- AI_Skills source inspected: `main@4ba429ebb510d6088f947468e624a1b043d19022`
+- AI_Skills source inspected for v2.1: `main@c8c349432b2f1343f87c73d6c39553abc874ae93`
 - Bridge source inspected: `YuukiAS/GPT_Codex_AI_Bridge_Kit main@afb2414b6fbe4b2b03292d3b1437d4dd22277fd0`
 - Execution branch/worktree: NONE — design review only
 - This document does not create a successor task, Reviewed Handoff task, branch, worktree, Goal, Kickoff, production change, paid review, or release authorization.
 
 ## 1. 结论
 
-v1 的主架构不重做。三个 Critic blocker 经重新核对 source 后均合理，本版全部 `ACCEPT`，不提出 `REBUT`。
+v2 的主架构不重做。上一轮 Critic 已明确关闭：
 
-v2 只收紧三件事：
+- `C-WIGL-01-SCOPE-PRECEDENCE`
+- `C-WIGL-02-IMPACT-FALLBACK-BOUNDARY`
+- `C-WIGL-03-IDENTITY-CUTOVER-COVERAGE`
 
-1. semantic task scope 改为**互斥且可机械解释的优先级**：先看需要写入的 canonical repo 数量，再看 AI_Skills 内 plugin 数量。当前 056 因同时需要修改 AI_Skills 与 Bridge，示例改为 `cross-repo--product-delivery-discipline`。
-2. risk-based release selection 保留，但 narrow selection 不再依赖“Planner 觉得影响可控”这种主观判断；新增明确 broad/full fallback 触发条件。任何不确定或跨 Gate 的 shared change 都回退到 broad/full release matrix。
-3. 不新增 G8；把 task-key cutover 的 normal-entry 覆盖直接补进现有 G1/G2/G4，包括 task/result/branch、全部 Reviewed Handoff artifact、text/visual review identity、canonical creation、generic workspace validation，以及 legacy + semantic 共存。
+本轮不重新打开这三项。
 
-其余 v1 已被 Critic 接受的方向全部保留：稳定 Gate taxonomy、持续增长的 regression bank、same-final-candidate、历史 obligation 不因 Gate 重构丢失、001–057 不迁移、同一 major objective 在 repair/review/integration 中保持同一个 task key、collision fail-closed、Bridge 只管 lexical syntax/compatibility/propagation、AI Skills Maintainer 管 AI_Skills scope semantics 与 release maintenance、workflow-core 不成为第二个 parser、domain plugin 保留专业判断。
+v2 Critic 新增的唯一 blocker 是 `C-WIGL-04-HUMAN-READABLE-WORKFLOW-LABEL`。重新核对用户要求与当前设计后，该 finding 合理，本版 `ACCEPT`，不提出 `REBUT`。
 
-v1 提出的新文档目录布局 `docs/design/<task_key>/...` 等从本轮 production implementation scope 删除，明确 defer；本轮不同时改文件组织。
+v2.1 只增加一个小澄清：**稳定的 technical task_key 与面向人的短名称是两个不同层次。** technical task_key 继续负责 branch/path/evidence 的稳定机器定位；Planner/Critic/Codex 在我们能够控制的 prompt、Goal、review/report heading 和普通交流中，默认使用简短、自然、低认知负担的人类名称，而不是反复展示 `cross-repo`、owner、状态名或长 contract。
+
+其余 v2 已经被 Critic接受的架构全部保持：互斥 scope precedence、stable Gate taxonomy + growing regression bank、same-final-candidate、narrow vs broad/full fallback、G1–G7、legacy + semantic cutover、001–057 不迁移、同一 major objective 在 repair/review/integration 中保持同一个 task key、collision fail-closed、Bridge 只管 lexical syntax/compatibility/propagation、AI Skills Maintainer 管 AI_Skills scope semantics/regression maintenance/release closure、workflow-core 不成为第二个 parser、domain plugin 保留专业判断。
+
+新文档目录布局 `docs/design/<task_key>/...` 等继续 `DEFERRED_NOT_IN_PRODUCTION_SCOPE`；本轮不改变文件组织。
 
 ## 2. 对 Critic blocker 的逐项处理
 
@@ -63,6 +70,19 @@ Critic 指出 v1 G2 对 task-key propagation 写得过泛，可能出现主 crea
 - `scripts/validate_handoff_workspace.py`
 
 因此 v2 直接强化 G1/G2/G4，不新建 gate。
+
+### C-WIGL-04-HUMAN-READABLE-WORKFLOW-LABEL — ACCEPT
+
+Critic 指出：v2 已经把 machine identity 从 0xx 改成更有语义的 task key，但如果 Planner/Critic/Codex 又把 `cross-repo--product-delivery-discipline` 当成普通 thread 名、报告标题和交流称呼反复展示，用户仍需要持续解析内部 scope token，等于把旧的数字负担换成另一种机器负担。
+
+这个 finding 成立。v2.1 采用最小分层：
+
+- **technical task_key**：稳定机器 locator；
+- **human-readable short label**：普通用户交流和我们能控制的标题/heading 中的默认名称。
+
+不新增 `display_name` 字段、schema、registry、title service 或状态。Bridge 完全不需要知道 human label。
+
+详细规则见 §5.8。
 
 ## 3. 已验证的当前事实
 
@@ -365,6 +385,139 @@ docs/operations/prompts/<task_key>/...
 
 首轮 semantic-key implementation 保持现有 docs locations；旧文件完全不迁移。
 
+### 5.8 Technical task_key 与面向人的短名称
+
+#### 5.8.1 两层身份
+
+**technical task_key** 只承担稳定机器定位，不承担“给用户起一个最好读的名字”。
+
+它用于：
+
+```text
+reviewed/<task_key>
+automation/reviewed_handoff/tasks/<task_key>/
+results/<task_key>/
+CURRENT / PLAN / RESULT / REVIEW / FINAL_REPORT 中必要的 technical locator
+text-review / visual-review manifest 与 evidence identity
+其他必须精确绑定 task identity 的技术位置
+```
+
+例如：
+
+```text
+cross-repo--product-delivery-discipline
+```
+
+这个字符串适合 branch/path/evidence 定位，但**不是普通 thread title，也不应在用户可见正文里反复充当工作名称**。
+
+**面向人的短名称**只是可控文字表面的命名约定，不是新的机器身份。
+
+它用于我们能够控制的：
+
+- Planner / Critic prompt 标题与开头；
+- Canonical Goal 的人类可读标题；
+- review / report heading；
+- Codex kickoff/repair/resume prompt 中给用户看的工作名；
+- 普通聊天、交接说明和状态解释。
+
+不新增：
+
+- `display_name` schema field；
+- task registry；
+- title registry/service；
+- database/ledger；
+- 第二个 identity mapping 系统。
+
+技术 locator 需要时可以在正文首次或附录中给一次；之后默认使用人类短名称。
+
+#### 5.8.2 人类短名称的选择原则
+
+优先顺序是：**用户一眼能知道“在改什么/交付什么” > 内部 scope 精确度 > 历史编号。**
+
+单插件正式 release 且 target version 已冻结时，优先直接使用 display name + version：
+
+```text
+Clear Writing 0.4
+Presentations 0.3
+```
+
+版本尚未冻结，或当前阶段不是正式 release target 时，用简单目标：
+
+```text
+Clear Writing 发布收口
+Presentations 视觉质量完善
+```
+
+跨 plugin / cross-repo 工作使用简单结果导向名称，必要时加一个短 scope hint：
+
+```text
+开发交付流程完善（AI_Skills + Bridge）
+仓库 AGENTS 整理
+```
+
+不要把：
+
+```text
+cross-repo--product-delivery-discipline
+cross-plugin--shared-routing-hardening
+```
+
+当作普通用户 thread 名或整篇报告里反复出现的主称呼。
+
+#### 5.8.3 历史 0xx 的过渡称呼
+
+001–057 仍完全不 rename/migrate。
+
+过渡期为了让用户把新称呼与旧上下文对上，可以写：
+
+```text
+开发交付流程完善（原 056）
+仓库 AGENTS 整理（原 057）
+```
+
+“原 056”只是临时定位提示，不是长期 primary label。普通交流稳定后应优先使用短名称。
+
+#### 5.8.4 version 与 technical task_key
+
+版本号**不是**所有 technical task_key 的强制组成部分。
+
+默认仍可以使用：
+
+```text
+plugin-writing-style--release-convergence
+```
+
+只有当：
+
+1. release target 已经冻结；并且
+2. version 是区分两个真实、独立 workflow 最自然的语义；并且
+3. 不会把候选版本/未冻结版本误写成稳定 identity；
+
+才允许把版本用于 goal token 的 semantic disambiguation，例如：
+
+```text
+plugin-writing-style--release-0-4
+```
+
+这不是 collision 自动后缀机制。仍禁止为了唯一性自动追加 UUID、date、sequence 或流水号。
+
+若 collision 实际代表同一个 objective 的 repair/review/integration，继续复用原 task key；若确属不同 objective，优先用真实 capability/component/release target 做语义化区分。
+
+#### 5.8.5 可控表面边界
+
+本规则只约束 repository/workflow **实际能够控制的文字表面**：
+
+- prompts；
+- Goal；
+- review/report headings；
+- Codex/Planner/Critic 交接文字；
+- 普通用户交流。
+
+它**不声称** repository、AGENTS 或 workflow 可以控制 ChatGPT/Codex 客户端自动生成的 conversation title、sidebar title 或其他平台 UI 自动命名。
+
+如果客户端自动标题与建议短名称不同，不算本 workflow implementation failure；但我们自己生成的 prompt/report 不应主动把 raw task_key 变成人类主标题。
+
+
 ## 6. Release regression selection：明确 narrow 与 broad/full fallback
 
 ### 6.1 不变的硬约束
@@ -472,7 +625,8 @@ AI Skills Maintainer **消费和执行**该 policy，而不是拥有一个平行
 - source/generated parity；
 - plugin/version/changelog/release closure；
 - 判断新 failure 应进入 existing Gate regression 还是需要 Planner 重新审 Gate taxonomy；
-- 应用 narrow/broad release decision 的 maintenance closure。
+- 应用 narrow/broad release decision 的 maintenance closure；
+- 在 AI_Skills 可控文字表面执行 human-readable short-label 命名约定，但不创建新的 display-name 数据模型。
 
 不负责专业领域正确性。
 
@@ -510,7 +664,8 @@ Bridge 不：
 - 读取 AI_Skills registry 来验证 plugin slug；
 - 判断任务应该叫 cross-plugin 还是 cross-repo；
 - 管 AI_Skills Gate lifecycle；
-- 新增 Reviewed Handoff state/controller/watcher。
+- 新增 Reviewed Handoff state/controller/watcher；
+- 存储、解析或生成 human-readable workflow label。
 
 ## 8. Capability Gate Matrix v2
 
@@ -524,7 +679,7 @@ Bridge 不：
 | **G4 Legacy coexistence & cutover** | 001–057 等 legacy task 不迁移且继续合法；semantic task 可同时存在；cutover 后只禁止新的 numeric canonical creation | 同一 workspace/fixture 中至少一个 legacy numbered task + 一个 semantic task；generic workspace validation 双格式；canonical creation semantic-only；历史 branch/result/review identity 仍可读 | validator 迫使历史迁移；legacy 与 semantic 冲突；新 numeric canonical creation 成功；历史 evidence 失效 | existing numeric history should-not-change；无 migration |
 | **G5 Gate lifecycle** | 新真实 failure 默认进入正确 existing Gate 的 regression bank；真正新 capability 才新增 Gate；merge/split/retirement 不丢 obligation | 用 056 post-probe “不新增 G9/G10”作为 existing-gate case，再用真正新增 capability 的 contrasting case；检查 obligation mapping | 每个 failure 都长 Gate；或为省 release 删除 Gate/历史 obligation；Gate 变 miscellaneous bucket | AI_Skills policy final candidate |
 | **G6 Release regression safety** | mature plugin 可风险分层验证，但 narrow 只有在 isolation 可解释时合法；cross-cutting/uncertain/maturity promotion 强制 broad/full fallback | 至少验证：合法 isolated narrow；shared prompt/runtime/router 等 fallback；unresolved failure fallback；grader semantics change；maturity promotion；same-final-candidate direct evidence | affected 判断靠主观感觉；shared change 仍只跑 weak canary；old-candidate evidence 拼接；cheap bank 未过仍 narrow | workflow-core + Maintainer final candidate；不固定 fresh/manual/paid 样本数 |
-| **G7 No governance bloat** | 本重构不创造第二套 workflow/control/eval infrastructure | source diff + small-task normal workflow replay | 新 registry/ledger/database/controller/watcher/state machine；workflow-core 第二 parser；AI Skills parser fork；小 patch 被迫跑无关 expensive matrix | Bridge + AI_Skills should-not-change |
+| **G7 No governance bloat** | 本重构不创造第二套 workflow/control/eval infrastructure | source diff + small-task normal workflow replay | 新 registry/ledger/database/controller/watcher/state machine/display_name schema/title service；workflow-core 第二 parser；AI Skills parser fork；小 patch 被迫跑无关 expensive matrix | Bridge + AI_Skills should-not-change |
 
 ### 8.1 G1/G2/G4 的 mandatory acceptance surface
 
@@ -565,6 +720,7 @@ new numeric canonical creation rejection
 - repair/review/integration 沿用同 key；
 - numeric order 不表示 priority/dependency/completion order；
 - semantic key cutover 只影响未来 canonical new-task creation。
+- human-readable short label 不改变任何历史 task_key；过渡期可用“<短名称>（原 056）”这类自然定位。
 
 ## 10. 文件组织决定
 
@@ -574,7 +730,7 @@ new numeric canonical creation rejection
 DISPOSITION = DEFERRED_NOT_IN_PRODUCTION_SCOPE
 ```
 
-本轮不改 docs layout，不迁历史文件，不把它加入未来 execution Goal/Kickoff。
+本轮不改 docs layout，不迁历史文件，也不把新的文档目录约定加入未来 execution Goal/Kickoff。v2.1 的 human-readable short label 只是现有可控文字表面的命名约定，不要求新的文件层级。
 
 若 semantic keys 真正投入使用后仍有明确的文档发现困难，再基于真实失败单独评估，不预先加复杂度。
 
@@ -623,6 +779,7 @@ https://learn.microsoft.com/en-us/azure/devops/pipelines/test/test-impact-analys
 关键 red-team 防线：
 
 - scope 由 precedence 决定，不由“primary objective”措辞决定；
+- technical task_key 不等于 human-facing title；普通用户不需要反复解析 scope token；
 - collision fail-closed；
 - impact 不清 -> broad/full；
 - same-final-candidate 永远保留；
@@ -633,7 +790,7 @@ https://learn.microsoft.com/en-us/azure/devops/pipelines/test/test-impact-analys
 
 ## 13. 未来执行顺序（仅供 Critic 审设计，不是授权）
 
-只有 v2 获得明确 Critic PASS 后，Planner 才进入 execution-package planning。
+只有 v2.1 获得明确 Critic PASS 后，Planner 才进入 execution-package planning。
 
 未来 execution package 才可分别设计：
 
@@ -653,6 +810,7 @@ https://learn.microsoft.com/en-us/azure/devops/pipelines/test/test-impact-analys
 - AI_Skills scope precedence；
 - Gate lifecycle/release-selection examples/tests；
 - no second parser；
+- controlled human-readable naming convention for prompts/Goal/review/report headings, with no display_name schema/registry；
 - no docs-layout migration。
 
 ### Phase C — normal-entry verification
@@ -663,14 +821,36 @@ https://learn.microsoft.com/en-us/azure/devops/pipelines/test/test-impact-analys
 - narrow-selection example + mandatory broad/full fallback examples；
 - no paid review unless a later frozen execution package separately justifies and receives authorization.
 
-本 v2 不准备 executable Goal/Kickoff，也不授权上述实施。
+本 v2.1 不准备 executable Goal/Kickoff，也不授权上述实施。
 
-## 14. Critic v2 复核重点
+## 14. Critic v2.1 复核重点
 
-Critic 应优先复核三个原 blocker 是否关闭，不重新移动终点：
+上一轮三个 blocker 已正式关闭，本轮不得重新打开：
 
-1. **C-WIGL-01**：scope precedence 是否已经互斥；056 -> `cross-repo--product-delivery-discipline` 是否与其两个 mutable repos 一致。
-2. **C-WIGL-02**：broad/full fallback triggers 是否足够具体，同时没有变成 dependency registry 或固定 expensive matrix。
-3. **C-WIGL-03**：G1/G2/G4 是否完整覆盖 canonical creation、generic validation、task/result/branch、全部 Reviewed Handoff artifacts、text/visual review identity、legacy coexistence 与 post-cutover numeric creation rejection。
+```text
+C-WIGL-01-SCOPE-PRECEDENCE = CLOSED
+C-WIGL-02-IMPACT-FALLBACK-BOUNDARY = CLOSED
+C-WIGL-03-IDENTITY-CUTOVER-COVERAGE = CLOSED
+```
 
-若这三项关闭，应判断 v2 design PASS 是否足以让 Planner进入 execution-package planning。PASS 仍不授权 Codex、branch/worktree、production 修改、paid API、merge/release。
+Critic 只需要复核：
+
+### C-WIGL-04-HUMAN-READABLE-WORKFLOW-LABEL
+
+检查 §5.8 是否完成最小闭环：
+
+1. technical task_key 只用于稳定机器 locator；
+2. human-readable short label 是普通 thread/prompt/Goal/review/report heading 与交流的默认名称；
+3. 没有新增 `display_name` schema、registry、title service 或第二 identity mapping system；
+4. 单插件 frozen release 可以优先显示 `Clear Writing 0.4` / `Presentations 0.3`；
+5. version 未冻结时使用简单目标，如 `Clear Writing 发布收口`；
+6. 当前 056 的技术 key 示例仍为 `cross-repo--product-delivery-discipline`，而普通人类名称使用 `开发交付流程完善（AI_Skills + Bridge）`；
+7. 历史 056 不 rename，过渡交流可写 `开发交付流程完善（原 056）`；
+8. version 不是所有 task_key 的强制组成部分，只可在 frozen release target 确实是最自然语义 disambiguator 时进入 goal token；
+9. collision 仍不自动追加 UUID/date/sequence；
+10. 规则只覆盖 workflow 能控制的文字表面，不承诺控制 ChatGPT/Codex 客户端自动 conversation title。
+
+同时检查这个小修改是否意外破坏已接受的 semantic key、legacy compatibility、scope precedence、Gate lifecycle、release fallback 或 ownership 边界。
+
+若 C-WIGL-04 关闭且没有由 v2.1 新增的具体回归，应对 v2.1 design 收敛为 PASS，并允许 Planner 下一轮进入 execution-package planning。PASS 仍不授权 Codex、branch/worktree、production 修改、paid API、merge/release，也不代表客户端 UI title 已可控。
+
