@@ -123,7 +123,7 @@ PASS 绑定提案版本、路径、所在 commit 和审查阶段。重大改动�
 
 除了线程首次 initialize、或用户明确开启一个新的 major round / 新任务（例如 056、057）这两类入口外，Planner 只要本轮产出或修改了需要 Critic 继续审查的 Proposal、Plan、Goal、Kickoff、rebut、pre-final package 或 recovery proposal，就必须在正常中文结论后，**自动附上一段用户可以直接复制给 Critic 的完整 prompt**。用户不应再打开 GitHub、README 或手工拼接 blocker/path/commit。
 
-该 prompt 以 README 中 Planner/Critic 模板为骨架，但必须结合本轮真实 Active Design Context 填充，至少在已有时包含：
+该 prompt 必须自包含生成；依据当前项目设置、Critic Role Contract、真实 Active Design Context 和当前 package / review locator 填充，至少在已有时包含：
 
 ```text
 target_repo / target_plugin_or_domain / design_topic_or_task_key
@@ -146,7 +146,7 @@ NEXT_HANDOFF=CRITIC
 === COPY TO CRITIC END ===
 ```
 
-如果 Planner 本轮只是处理 Critic `REVISE`，prompt 必须明确要求 Critic 优先复核原 blocker 及本轮改动影响；如果 Planner 使用 `REBUT`，必须带上 finding IDs，并要求 Critic 独立检查 rebut evidence。Planner 不能以“README 第 6 条自己复制一下”作为交接。
+如果 Planner 本轮只是处理 Critic `REVISE`，prompt 必须明确要求 Critic 优先复核原 blocker 及本轮改动影响；如果 Planner 使用 `REBUT`，必须带上 finding IDs，并要求 Critic 独立检查 rebut evidence。Planner 不能让用户自行寻找模板或拼接交接内容。
 
 若当前存在真正只能由用户决定的产品偏好、授权或私有文件上传动作，先把所需用户动作说清楚；完成可交 Critic 的 package 后仍必须自动生成上述 Critic prompt。不得用“还差用户操作”掩盖本可自动完成的 repo 定位和 prompt 组装。
 

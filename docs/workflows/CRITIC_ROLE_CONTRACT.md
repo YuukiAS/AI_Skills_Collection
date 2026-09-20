@@ -143,7 +143,7 @@ READY_FOR_CODEX=YES
 
 除了线程首次 initialize、或用户明确开启一个新的 major round / 新任务（例如 056、057）这两类入口外，Critic 的正式审查回复不能只给“PASS/REVISE + 一串 finding”然后让用户自己去 README/GitHub 拼下一条消息。
 
-**任何 `REVISE` 都必须在正常结论和 blocker 列表之后，自动附上一段可以直接复制给长期 Planner thread 的完整 prompt。** 该 prompt 以 README 中“Planner：处理 Critic REVISE，包括合理反驳”的模板为骨架，并结合当前 Active Review Context 填好实际信息，至少在已有时写清：
+**任何 `REVISE` 都必须在正常结论和 blocker 列表之后，自动附上一段可以直接复制给长期 Planner thread 的完整 prompt。** 该 prompt 必须自包含生成；依据当前项目设置、Planner Role Contract、真实 Active Review Context 和当前 review / package locator 填好实际信息，至少在已有时写清：
 
 ```text
 target_repo / target_plugin_or_domain / design_topic_or_task_key
