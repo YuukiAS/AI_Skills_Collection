@@ -50,6 +50,13 @@ Reviewer and recovery evidence:
 - `MINIMAL_SOURCE_DEFECT_RELEASE_CLOSURE_CRITIC_REVIEW.md` passed that proposal.
 - `REVIEW_1.md` records final zero-paid GPT Reviewer PASS for the release closure bundle.
 
+Integration evidence:
+
+- Latest `origin/main` was merged into the 055 branch after release CI, smoke/restore, and final GPT Reviewer PASS.
+- Main-side post-divergence release-critical overlap was limited to docs/TODO and workflow-critic documentation; no post-divergence main production payload change required altering C6.
+- Post-integration hashes for `plugins/codex/plugins/writing-style`, `skills/writing/core`, `.agents/plugins/marketplace.json`, and `scripts/codex_marketplace_config.json` match exact C6.
+- Post-integration release CI passed: marketplace validation, skills validation/audit, and full `python3 -m unittest discover -s tests -v` with 231 tests passing.
+
 ## Deviations / blockers
 
 No release-critical product blocker was found.
