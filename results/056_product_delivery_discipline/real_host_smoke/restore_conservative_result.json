@@ -1,0 +1,58 @@
+{
+  "backup_dir": "/overflow/htzhu/mingcheng_new/.codex/ai-bridge-kit/backups/20260921T222437Z",
+  "strategy": "conservative managed-key restore after marketplace config drift prevented exact full-file restore",
+  "before": {
+    "config.toml": {
+      "exists": true,
+      "sha256": "9dcae675b47bf2ec2d11d2f55a2e4c6f380fb4cefe90384792ba1e8402dbe099",
+      "size": 3297
+    },
+    "AGENTS.md": {
+      "exists": true,
+      "sha256": "963e0bfbfa0f3f281487a8a28c92d5758250bbcd7f959a62fd1990d6371ba209",
+      "size": 17764
+    },
+    "rules/ai-bridge-global.rules": {
+      "exists": true,
+      "sha256": "e6bed33fa391cd029642b7650748294961085a2d342e9147ed407d7de46d952c",
+      "size": 9066
+    }
+  },
+  "after": {
+    "config.toml": {
+      "exists": true,
+      "sha256": "cc57639df01dde3510fa7499a193a7d1d7877db1c8d77419c0246351f01b0501",
+      "size": 3296
+    },
+    "AGENTS.md": {
+      "exists": false,
+      "sha256": null,
+      "size": null
+    },
+    "rules/ai-bridge-global.rules": {
+      "exists": true,
+      "sha256": "dd50e1748055570a3264ba6418062a9cdbb7692b6a4d14ba521408d3f8052e64",
+      "size": 9065
+    }
+  },
+  "post_restore_host_overall": "drifted",
+  "exact_prestate_mismatches=[]": null,
+  "exact_prestate_mismatches": [
+    {
+      "path": "config.toml",
+      "pre": {
+        "path": "/overflow/htzhu/mingcheng_new/.codex/config.toml",
+        "exists": true,
+        "sha256": "b45441b617f9201ae0b99c7aebb2a1474439f239eb393272d68e86b07b704d52",
+        "size": 3296
+      },
+      "post": {
+        "exists": true,
+        "sha256": "cc57639df01dde3510fa7499a193a7d1d7877db1c8d77419c0246351f01b0501",
+        "size": 3296
+      }
+    }
+  ],
+  "host_prestate_restored": "NO",
+  "unexpected_host_mutation": "YES"
+}

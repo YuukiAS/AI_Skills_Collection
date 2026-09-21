@@ -1,0 +1,25 @@
+{
+  "HOST_SMOKE_RESULT": "FAIL",
+  "SOURCE_DEFECT_DISCOVERED": "NO",
+  "BRIDGE_CANDIDATE": "96a8ea1b58ebe6f9b7c5c46c43995666251911fe",
+  "TARGET_HOST": "c0824.ll.unc.edu",
+  "TARGET_CODEX_HOME": "/overflow/htzhu/mingcheng_new/.codex",
+  "BACKUP_DIR": "/overflow/htzhu/mingcheng_new/.codex/ai-bridge-kit/backups/20260921T222437Z",
+  "CANDIDATE_HOST_VALIDATE": "PASS",
+  "DEFAULT_HUMAN_ONLY_PLAIN_TEXT": "PASS",
+  "DEFAULT_WAIT_NO_CONTINUATION": "PASS",
+  "SAME_GOAL_EXACT_ONCE_RESUME": "PASS",
+  "POST_ACTION_CLOSURE": "PASS",
+  "AGENT_RESOLVABLE_NO_FALSE_PROMPT": "PASS",
+  "PLAN_MODE_NATIVE_INPUT_NONREGRESSION": "FAIL",
+  "HOST_PRESTATE_RESTORED": "NO",
+  "UNEXPECTED_HOST_MUTATION": "YES",
+  "NEXT_HANDOFF": "CRITIC",
+  "notes": [
+    "Candidate host install/status/validate passed and was then removed from Host policy.",
+    "Default HUMAN_ONLY plain-text/wait/resume/post-action closure passed in path-bound fresh session 01a0c617-73f9-7f63-a473-299f7f94542b.",
+    "First unqualified prompt wrote repo-root sentinel because the frozen sentinel path was not in the fresh session prompt; evidence preserved and artifact cleaned.",
+    "Plan-mode fresh session could not be launched from available CLI/app tools, so native Plan-mode blocking card nonregression is not verified and counted FAIL.",
+    "Exact prestate restore was prevented by config.toml marketplace metadata drift caused during smoke; conservative restore removed candidate-managed changes while preserving that drift."
+  ]
+}
