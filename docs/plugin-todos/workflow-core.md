@@ -105,6 +105,32 @@ promotion gate:
 4. repeated same-class blocker after the rule is active triggers the existing repeat-failure circuit breaker and consumer-path diagnosis rather than another identical user request.
 
 
+
+
+### Subagent browser capability checks must use rendered-page semantics, not foreground-window assumptions
+status: NEW
+source: CUHK Date one-parent Work orchestration probe and first targeted parent-run incident, 2026-09-21
+evidence: a native Work subagent A could use the in-app browser and establish visible SauceDemo login/cart state. A second subagent initially reported browser inability because the prompt's "visible browser/UI" wording was interpreted as requiring a foreground / `visible:true` mode. A diagnostic rerun with corrected wording used the same native in-app browser, saw the login form, and proved no inherited A session/cart state. The first real CUHK Date parent run then repeated the same failure pattern: original P01 child and one replacement both stopped pre-auth after trying foreground/visibility modes, while primary handoff remained unconsumed. This is a workflow/runtime-prompt defect, not product failure or absence of browser capability.
+target layer: workflow-core / agent orchestration / actual-surface browser runtime discipline.
+problem: browser-capable subagents can falsely classify themselves as blocked when a prompt conflates "user-visible rendered webpage state" with a literal foreground desktop window or a special `visible:true` flag. That can terminate an otherwise valid serial campaign before authentication and waste human time even though the same native browser can navigate, click, read accessibility state and capture rendered evidence.
+candidate action:
+- define "visible UI" for agent/browser QA as **real rendered webpage state observable through the runtime's supported browser surface**, including rendered text, accessibility tree, screenshot and normal click/fill/navigation results;
+- explicitly state that no foreground desktop window or special `visible:true`/foreground parameter is required unless the target task specifically requires one;
+- if a foreground/visibility option is unsupported, retry the same first-party browser once in its ordinary supported mode before declaring browser unavailable;
+- capability preflight must include an actual anonymous-page open rather than inference from tool names or flags;
+- for one-time authenticated flows, complete this tool selection before consuming handoff/token;
+- if a known prompt-contract defect caused a pre-auth stop and no credential/token/state was consumed, allow one bounded contract-correction replay in a fresh subagent without regenerating product state;
+- do not leak failed-child product findings into a replacement; runtime-only failure facts may be used for retry routing;
+- after auth begins, fall back to the task's existing authenticated recovery/session contract rather than restarting a persona.
+promotion gate:
+1. fixture subagent with no foreground/`visible:true` support but working rendered in-app browser proceeds through anonymous-page preflight;
+2. tool naming/foreground flag failure alone cannot produce HUMAN_ONLY/BLOCKED;
+3. real browser absence still fails closed after one bounded ordinary-mode retry;
+4. pre-auth contract-correction replay preserves the same unconsumed one-time credential/persona;
+5. post-auth failures cannot use this rule to bypass recovery/session isolation;
+6. parent/subagent orchestration keeps persona context and browser state isolated while the parent remains orchestration-only.
+
+
 ### Task-local prohibitions must expire with their task instead of becoming accidental global policy
 status: DEFER_AFTER_056_WORKFLOW_CORE
 source: Lucerna 01037 product-polish continuation, 2026-09-17
