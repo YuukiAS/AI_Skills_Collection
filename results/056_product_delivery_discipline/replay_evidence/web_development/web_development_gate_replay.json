@@ -2,7 +2,7 @@
   "plugin": "web-development",
   "normal_entry": "Frontend Design candidate",
   "input_fixture": "inputs/01-web_development_fixture.json",
-  "candidate_commit_from_fixture": "891b73cb3824990fa54abd6fa55973e33852b271",
+  "candidate_commit_from_fixture": "33c30bbe0dd528031a23d379905cd00d6b65bc1f",
   "entry_evidence": {
     "installed_manifest_name": "web-development",
     "installed_display_name": "Frontend Design",
@@ -10,23 +10,23 @@
     "route": "manifest skills -> skills/visual/SKILL.md -> system, figma, motion source workflows",
     "consumed_payloads": [
       {
-        "path": "/overflow/htzhu/mingcheng_new/.codex-global/plugins/cache/ai-skills-candidate/web-development/0.2/.codex-plugin/plugin.json",
+        "path": "plugins/codex/plugins/web-development/.codex-plugin/plugin.json",
         "sha256": "3f49553b6641314821378feae520dc7799ca053d4878b6ec09c55653abdfdb63"
       },
       {
-        "path": "/overflow/htzhu/mingcheng_new/.codex-global/plugins/cache/ai-skills-candidate/web-development/0.2/skills/visual/SKILL.md",
+        "path": "plugins/codex/plugins/web-development/skills/visual/SKILL.md",
         "sha256": "3aeabf33be250e0a7e78097bb272119db85939c6f46ce81069b8ee7655d6750c"
       },
       {
-        "path": "/overflow/htzhu/mingcheng_new/.codex-global/plugins/cache/ai-skills-candidate/web-development/0.2/skills/visual/_src/system/source.md",
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/system/source.md",
         "sha256": "1846f46f7236ccef2238a973fbcf0746f0232ae695e26060cbd0b55b4f25a584"
       },
       {
-        "path": "/overflow/htzhu/mingcheng_new/.codex-global/plugins/cache/ai-skills-candidate/web-development/0.2/skills/visual/_src/figma/source.md",
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/figma/source.md",
         "sha256": "eebe302ee158b61415bd774e7e8757ec0dacd536b4467d919f65143c00bc4577"
       },
       {
-        "path": "/overflow/htzhu/mingcheng_new/.codex-global/plugins/cache/ai-skills-candidate/web-development/0.2/skills/visual/_src/motion/source.md",
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/motion/source.md",
         "sha256": "e73eeb63ffc6ea8d67b02e1bb5d4d2f66eaac6d61ff2c18139630c18b4e149d9"
       }
     ]
@@ -47,6 +47,6 @@
     "product_repository_modified": false,
     "real_host_G1_final_pass_claimed": false,
     "release_ready_claimed": false,
-    "commit_identity": "candidate_commit 仅来自输入 fixture；未独立证明安装 payload 对应该 Git commit。"
+    "commit_identity": "normal-entry candidate_replay_run.json 证明已安装 candidate plugin 实际消费，并绑定同一 candidate commit；本文件同时记录 generated payload hashes。"
   }
 }

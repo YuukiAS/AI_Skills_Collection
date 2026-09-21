@@ -8,7 +8,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RESULT_ROOT = REPO_ROOT / "results/056_product_delivery_discipline"
 REPLAY_ROOT = RESULT_ROOT / "replay_evidence"
-PRODUCTION_CANDIDATE_COMMIT = "891b73cb3824990fa54abd6fa55973e33852b271"
+PRODUCTION_CANDIDATE_COMMIT = "33c30bbe0dd528031a23d379905cd00d6b65bc1f"
 
 
 def read_json(path: Path) -> dict:
@@ -34,7 +34,7 @@ class ProductDeliveryDisciplineReplayEvidenceTests(unittest.TestCase):
         return run
 
     def test_workflow_core_replay_proves_g2_g3_g4_g5_g7_and_source_discovery_behavior(self) -> None:
-        self.assert_candidate_replay_consumed("workflow-core", "0.2")
+        self.assert_candidate_replay_consumed("workflow-core", "0.3")
         output = read_json(REPLAY_ROOT / "workflow_core/workflow_core_gate_replay.json")
 
         self.assertEqual(output["plugin"], "workflow-core")
@@ -68,7 +68,7 @@ class ProductDeliveryDisciplineReplayEvidenceTests(unittest.TestCase):
         self.assertFalse(output["limitations"]["release_ready_claimed"])
 
     def test_ai_skills_core_replay_proves_g8_consumption_diagnosis_behavior(self) -> None:
-        self.assert_candidate_replay_consumed("ai-skills-core", "0.3")
+        self.assert_candidate_replay_consumed("ai-skills-core", "0.4")
         output = read_json(REPLAY_ROOT / "ai_skills_core/ai_skills_core_gate_replay.json")
 
         self.assertEqual(output["plugin"], "ai-skills-core")

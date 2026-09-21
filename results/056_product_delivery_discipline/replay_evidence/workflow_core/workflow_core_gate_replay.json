@@ -2,7 +2,7 @@
   "plugin": "workflow-core",
   "normal_entry": "Verified Workflow candidate",
   "evidence_scope": "仅对输入 fixture 应用已安装 candidate 的正常 skill 入口规则；pass 表示场景判定符合规则，不代表真实主机、实际交互、发布或整体任务验收通过。",
-  "fixture_candidate_commit": "891b73cb3824990fa54abd6fa55973e33852b271",
+  "fixture_candidate_commit": "33c30bbe0dd528031a23d379905cd00d6b65bc1f",
   "gates": {
     "G2": {
       "observed_behavior": "拒绝 acceptance-ready 判定；保留 advisory、diagnostic 或 design review。当前 human-blocked 状态保持可恢复，achieved/complete/user-ready 均为 NO。",
