@@ -316,6 +316,10 @@ reviewed/<task_key>
 
 作为该 workflow 的独立 branch。该 branch 在任务被明确集成回 `main` 前，是本 task 的 Executor、CI、Scheduled GPT review source of truth。
 
+`task_key` 是跨 repo / branch / results path / automation locator 使用的技术 identity，不是给侧边栏或聊天标题看的 display label。新的 task key 采用 Bridge Kit semantic 形式 `<scope-token>--<goal-token>`；历史数字式 key 只能作为既有任务兼容读取。Scope token 由上层真实 owner 决定，跨 repo 任务优先使用能说明边界的 scope，而不是让某个 client title、thread name、display_name 或用户界面短标题反推技术 key。
+
+人类可读短标题另行记录为 human label，例如“工作流命名与插件回归机制完善（AI_Skills + Bridge）”。不要新增 `display_name` / `title service` / sidebar-title 控制面来派生或覆盖 `task_key`；UI title、Codex task title、Git branch、results dir、scheduled review binding 必须各自按其 owner 的规则明确绑定，不能互相猜。
+
 规则：
 
 - 启动新的 AI_Skills_Collection Reviewed Handoff task 时，如果计划使用

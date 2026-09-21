@@ -25,6 +25,19 @@ docs/plugin-todos/<plugin>.md
 
 详细规则见 [docs/plugin-todos/README.md](docs/plugin-todos/README.md)。
 
+
+## Standalone skill TODO 入口
+
+中央 Marketplace plugin 继续使用 `docs/plugin-todos/<plugin>.md`。少数本身不是中央 plugin、但会被独立安装和跨项目复用的 support skill，如果真实问题无法合理归到某个 plugin，不应为了记 TODO 硬塞进无关 plugin，也不应把 maintenance 文档放进 skill runtime 目录。
+
+当前单独维护：
+
+| Skill | TODO |
+|---|---|
+| `render-chinese-math-pdf` | [docs/skill-todos/render-chinese-math-pdf.md](docs/skill-todos/render-chinese-math-pdf.md) |
+
+这里仍然沿用真实项目反馈的原则：项目 thread 先记录 `status: NEW` 的事实和证据；是否抽象成通用规则、如何修改实现、验收标准和 release 决策，留给后续 AI_Skills Planner / maintainer。
+
 ## 以后在真实项目里发现问题，记到哪里？
 
 先问一个最简单的问题：

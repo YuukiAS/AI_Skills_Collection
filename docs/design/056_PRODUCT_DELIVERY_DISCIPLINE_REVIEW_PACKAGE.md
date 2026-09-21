@@ -1,232 +1,154 @@
-# 056 Product Delivery Discipline — Review Package
+# 056 交付工作流可靠性基线 — Execution Package Review v0.5
 
-Status: `AWAITING_POST_057_EXECUTION_PACKAGE_CRITIC_REVIEW`
+- Review object：`v0.5 exact-worktree authorization amendment`
+- Historical task key：`056_product_delivery_discipline`
+- Human-readable name：交付工作流可靠性基线
+- Review stage：`EXECUTION_READY_PACKAGE_REVIEW_AFTER_C056_E3`
+- Prior reviewed package：`v0.4 @ 2df53f24964673fbf79cb3bcdab63b6dfd5ee4c4`
+- Prior Critic result：`REVISE`，chat-only；无 Critic repo commit
+- Stable blocker：`C056-E3-EXACT-WORKTREE-AUTHORIZATION`
+- AI_Skills production/evidence baseline：`main@72f163330ea5a21637df95f08289e2c4739d2bd9`
+- Bridge source locator：`main@9d2da9f485f26ca51842a1909a276cb44f73351a`
+- Amendment：`docs/design/056_DELIVERY_WORKFLOW_RELIABILITY_BASELINE_V6_AMENDMENT_2026-09-21.md`（unchanged）
+- Plan：`docs/design/056_PRODUCT_DELIVERY_DISCIPLINE_IMPLEMENTATION_PLAN.md` v0.5
+- Goal：`docs/goals/056_PRODUCT_DELIVERY_DISCIPLINE_GOAL.md` v0.5
+- Kickoff：`docs/operations/prompts/056_PRODUCT_DELIVERY_DISCIPLINE_KICKOFF.md` v0.5
+- Status：`AWAITING_INDEPENDENT_CRITIC_RECHECK`
 
-## Task identity
+## 1. 本轮 review scope
 
-- Task key: `056_product_delivery_discipline`
-- Review stage: post-057 bounded source-drift revalidation / execution-package v0.3
-- Architecture authority: `docs/design/PRODUCT_DELIVERY_DISCIPLINE_V6_PROPOSAL_2026-09-16.md`
-- Post-probe authority: `docs/design/PRODUCT_DELIVERY_DISCIPLINE_V6_POST_PROBE_ADDENDUM_2026-09-17.md`
-- Probe result: `docs/design/056_PERSISTENT_PROMPT_CAPABILITY_PROBE_RESULT_2026-09-17.md`
-- CUHK Date evidence: `docs/design/PRODUCT_DELIVERY_DISCIPLINE_V6_CUHK_DATE_REAL_FEEDBACK_2026-09-17.md`
-- Post-057 revalidation: `docs/design/056_PRODUCT_DELIVERY_DISCIPLINE_POST_057_SOURCE_DRIFT_REVALIDATION_2026-09-18.md`
-- Implementation Plan: `docs/design/056_PRODUCT_DELIVERY_DISCIPLINE_IMPLEMENTATION_PLAN.md` v0.3
-- Canonical Goal: `docs/goals/056_PRODUCT_DELIVERY_DISCIPLINE_GOAL.md` v0.3
-- Kickoff Draft: `docs/operations/prompts/056_PRODUCT_DELIVERY_DISCIPLINE_KICKOFF.md` v0.3
-- Critic reporting contract: `docs/workflows/CRITIC_ROLE_CONTRACT.md` v1.3
+v0.4 独立 Critic 已接受并关闭/放行以下内容，除非 latest source 出现新的直接语义证据，本轮不得重开：
 
-This package is a review object only. No 056 production implementation, execution branch/worktree, real Host install, main/develop merge, release, deployment or paid API is authorized by these files.
+- human-readable name“交付工作流可靠性基线”；
+- historical key `056_product_delivery_discipline` 保留；
+- 056 是 bounded baseline task，不是 evergreen program；
+- `V6_BOUNDED_AMENDMENT`；
+- least-privilege equivalent recovery 吸收到 W2/G1，不新增 W6/G9；
+- Persistent Run durability / ordinary bounded kickoff renderer / task-local prohibition expiry / acceptance packaging 的 defer owner；
+- G1-G8、Source Discovery not G9、BROAD_FULL_FALLBACK、cheap deterministic first、same-final-candidate；
+- Repository 5.0.6 -> 5.0.7 PATCH；
+- workflow-core 0.2 -> 0.3；
+- web-development 0.1 -> 0.2；
+- ai-skills-core 0.3 -> 0.4 仅限 residual diagnosis，或 kickoff-time direct evidence 支持 NO_BUMP；
+- Bridge 0.8.4 -> 0.8.5；
+- `C056-E1` closed；
+- `C056-E2` closed by Critic Role Contract v1.4 generic reporting rule。
 
-## 1. Review history kept open only where required
+本轮只复核 `C056-E3` 是否关闭，以及 v0.5 locator amendment 是否直接引入新的 scope/authorization/recovery regression。
 
-### v6 architecture / post-probe
+## 2. Prior blocker C056-E3
 
-Independent Critic already accepted the v6 architecture and post-probe direction:
+### Requirement
 
-```text
-V6_ARCHITECTURE_STILL_VALID = YES
-W2_TRANSPORT = DURABLE_TRANSCRIPT_WAIT_RESUME
-DEFAULT_MODE_REQUEST_USER_INPUT_FLAG = DISABLE
-SOURCE_DISCOVERY_REFINEMENT = PASS
-CUHK_DATE_REFINEMENTS = PASS
-READY_FOR_IMPLEMENTATION_PLAN_DRAFT = YES
-```
+AI_Skills 当前 AGENTS 要求：使用 `reviewed/<task_key>` + task-owned worktree 时，Goal/Kickoff 必须把 exact branch 和 exact worktree 绑定为 current-user-visible authorization。
 
-Do not reopen those decisions without a current-source contradiction.
+### v0.4 defect
 
-### Execution package v0.1
+v0.4 Kickoff 已冻结 exact branch，但只写“创建对应 task-owned worktree”；Plan 中 worktree basename 只是“建议继续使用”。因此到 worktree creation 时仍可能再次索权，或留下 Executor临场选择路径的解释空间。
 
-Reviewed commit:
+## 3. v0.5 closure
 
-`01766a47325a5e7efb84dc2b75b90d67a010c157`
+v0.5 在 Plan、Goal、Kickoff 三者一致冻结：
 
-Critic:
+### AI_Skills_Collection
 
-```text
-RESULT = REVISE
-READY_FOR_CODEX = NO
-```
+Exact branch：
 
-Stable findings:
+`reviewed/056_product_delivery_discipline`
 
-- `C056-E1-HUMAN-GATE-BLOCKED-NOT-ACHIEVED`
-- `C056-E2-POST-REVISE-PASS-HUMAN-EXPLANATION`
+Exact worktree locator：
 
-### Execution package v0.2
+`../AI_Skills_Collection-056-product-delivery-discipline`
 
-Planner responded `ACCEPT` to both findings but they remain **pending independent Critic closure**.
+解析基准：verified canonical AI_Skills checkout root。
 
-v0.3 preserves those responses; it does not claim the findings are already PASS.
+### GPT_Codex_AI_Bridge_Kit
 
-## 2. 057 completion inherited, not reopened
+Exact branch：
 
-057 Repo AGENTS Hygiene has been implemented, independently reviewed, and integrated.
+`reviewed/056_product_delivery_discipline`
 
-Current canonical refs reverified for this 056 round:
+Exact worktree locator：
 
-- AI_Skills main `f68e800fb604850c20a29cb3c7572e4f1a119236`; M3 `24051588d13f07e7f71e0edf5a723aca36754ed5` is in ancestry.
-- Bridge main `e1d6b781ad7e56d567bed419001069baf439d0a5`.
-- Bobbio develop `ab5dccb6b8b87c49671aa097233ce1bcc38be004`.
-- Lucerna main `687752861b4859f7f24799b9e17d985afc992ad2`; reviewed 057 candidate `41cd1297af6901531d3135593bc9806bffc38829` is in ancestry.
-- Mica main `e49416f874f633aedc7521734ee5b0f441aae970`.
-- Asteria main `0ce1d4daca1e410ce551570578dd563d4ef67e90`.
-- SeminarArc main `74caaa4ecec16f1bc90987979458d1a4e93f52be`.
-- CUHK Date main `e4fdba4d6e38f300d5aeb9861f7c944f07c61e3d`; 057 itself was inspect-only there.
+`../GPT_Codex_AI_Bridge_Kit-056-product-delivery-discipline`
 
-Do not reopen 057 architecture, I1-I6, H1-H9 or integration recovery in this review.
+解析基准：verified canonical Bridge checkout root。
 
-## 3. Post-057 source-drift summary
+两个 locator 都明确规定：
 
-| Area | v0.2 | Current source | v0.3 disposition |
-| --- | --- | --- | --- |
-| AI_Skills | central production work pending | production source/versions still pre-056; 057 + review/TODO docs advanced | KEEP work, refresh refs; keep unrelated later TODOs outside 056 |
-| Bridge | main `cb77b1...`; planned `0.8.2 -> 0.8.3` | main `e1d6b781...`; current formal source `0.8.3`; Host desired flag/docs still true | KEEP mechanism, change next candidate slot to `0.8.4` |
-| Bobbio | one Figma locator write | locator + visual authority already integrated | **REMOVE write entirely** |
-| Lucerna | NO_WRITE | 057 hygiene + unrelated later product development | ZERO WRITE |
-| Mica | NO_WRITE | 057 hygiene canonical | ZERO WRITE |
-| Asteria | NO_WRITE | 057 hygiene canonical | ZERO WRITE |
-| SeminarArc | NO_WRITE | 057 hygiene canonical | ZERO WRITE |
-| CUHK Date | no root AGENTS | root AGENTS now exists with Handoff + project-specific rules; product advanced | ZERO WRITE; `NO_GENERIC_056_AGENTS_COPY` remains |
+- relative path 不是相对任意 shell cwd，而是相对 verified canonical checkout root；
+- 只能解析为 canonical root 的父目录下 exact basename sibling；
+- 不允许临场换路径、第二个 worktree 或 `/tmp` clone；
+- locator 已存在时只在 repo identity + exact branch 都匹配时复用；
+- locator 被占用或 identity 不匹配时停止，不自动换位置。
 
-`V6_ARCHITECTURE_CONTRADICTION = NO`
+Kickoff 开头将这两个 exact branch/worktree pair 写成用户若发送即明确授权的 frozen effect，并明确后续到达同一 worktree/branch creation effect 时不得重复询问。
 
-## 4. AI_Skills current production reality
+## 4. Unchanged authorization boundary
 
-Current source remains:
+v0.5 不新增任何其他授权。
 
-```text
-Repository VERSION     5.0.4
-workflow-core          0.1
-web-development        0.1
-ai-skills-core         0.2
-```
+仍禁止：
 
-The current web-development visual aggregate still omits standalone `figma-design-to-code` and `motion-interaction`; the 056 Frontend production-wiring work remains required.
+- remote remap / pushurl rewrite；
+- force push；
+- main merge / release / tag / publish / deploy；
+- product repo write；
+- real `CODEX_HOME` / Host install；
+- paid API/Terra；
+- Persistent Run refinement；
+- new provider/account/credential purpose；
+- out-of-scope side effects。
 
-workflow-core and AI Skills Maintainer production sources also remain pre-056.
+same frozen effect no-repeat 与 genuinely new scope fresh gate 保持不变。
 
-Two later workflow TODO observations are explicitly **not** architecture drift:
+## 5. Version / architecture impact
 
-- task-local prohibition expiry is a later NEW issue;
-- post-056 acceptance-artifact packaging is explicitly `DEFER_UNTIL_056_COMPLETE`.
+`ARCHITECTURE_CHANGE=NO`
 
-One older 056 TODO sentence conflicts with E1 wording and should be reconciled during 056 implementation, not by creating a new capability.
+`GATE_CHANGE=NO`
 
-## 5. Bridge current reality and version decision
+`LEAST_PRIV_SEMANTICS_CHANGE=NO`
 
-Current Bridge main `e1d6b781...` / version `0.8.3` includes 057:
+`VERSION_ROUTE_CHANGE=NO`
 
-- fresh-root AGENTS scaffold;
-- existing-root raw-byte preservation;
-- Lite fallback versioning;
-- H7-H9 regressions.
+`DEFER_DISPOSITION_CHANGE=NO`
 
-It still has the 056 gaps:
+`AMENDMENT_DOC_CHANGE=NO`
 
-- Host config source still desires `default_mode_request_user_input=true`;
-- config profile still documents true;
-- tests still assert true;
-- global Host guidance still says the Host Policy enables the Default native tool for user input and retains the broad recoverable-question wording.
+Package version 从 v0.4 -> v0.5 只是因为 Critic 要求“不要静默修改旧 review object”，需要形成新的完整 execution package identity。
 
-Thus the 056 Bridge mechanism remains required.
+## 6. Source drift
 
-Under the integrated Lite version contract, a different user-consumable candidate must not reuse one formal version. The correct next compatible candidate slot is:
+AI_Skills latest main 在本轮开始时仍是 v0.4 package commit `2df53f24964673fbf79cb3bcdab63b6dfd5ee4c4`；Bridge latest main 仍是 `9d2da9f485f26ca51842a1909a276cb44f73351a`。没有新的 production/version semantic drift。
 
-`Bridge 0.8.3 -> 0.8.4`.
+后续如果仅 docs/evidence SHA advance，不重开 architecture；只有 production/version/release/frozen semantics overlap 才返回 Planner/Critic。
 
-This review does not authorize release/tag/publish/deploy.
+## 7. Critic expected output
 
-## 6. Bobbio / product-repo disposition
+优先复核旧 blocker：
 
-Bobbio `develop@ab5dcc...` already contains the old 056 locator and authority closure. v0.3 removes the Bobbio write phase, Bobbio commit from the final tuple, and Bobbio version impact.
+`C056-E3-EXACT-WORKTREE-AUTHORIZATION`
 
-Bobbio is read-only G6 evidence only.
+检查：
 
-Lucerna, Mica, Asteria, SeminarArc and CUHK Date are ZERO WRITE. Their current project-specific rules remain project-owned; generic Product Delivery Discipline stays central.
+1. Plan / Goal / Kickoff 的两个 exact branch + exact worktree locator 是否逐项一致；
+2. relative locator 是否被 canonical-root resolution 唯一化；
+3. Kickoff 是否已经形成足够 current-user-visible bounded authorization；
+4. occupied/mismatched locator 是否 fail closed；
+5. 是否仍有“对应 worktree”“建议继续使用”等开放措辞；
+6. 本次 amendment 是否意外扩大 Git/provider/Host/paid/product scope。
 
-CUHK Date's newly added root AGENTS does not justify a generic copy. Its historical Questionnaire V4 failures remain generic regression evidence only.
+如果仍 REVISE，只能提出由本次 locator amendment 或 latest direct semantic evidence 引起的真实 blocker，并按 Critic Role Contract 自动附完整 Planner prompt。
 
-## 7. C056-E1 response preserved
+如果 PASS：
 
-Planner disposition remains `ACCEPT`, pending Critic closure.
+- 因 056 major round历史上已有 REVISE，先给用户可读 closure explanation；
+- 明确 `C056-E3=CLOSED`；
+- 不重开已接受的 architecture/Gate/version/defer/C056-E1/E2；
+- 输出 approved package paths + commit；
+- `READY_FOR_CODEX=YES`；
+- `NEXT_HANDOFF=CODEX`；
+- 逐字输出 v0.5 approved Kickoff。
 
-Current upstream Codex was rechecked at `openai/codex@7498521d288b9b3b96ffba4eedf089d8d6e06a84`:
-
-- required tool request remains blocking only in Plan mode;
-- Default still says required explicit user input should use one concise plain-text question.
-
-v0.3 retains:
-
-- transcript transport;
-- run/deadline no-reply -> Goal blocked/achieved=no/complete=no/user-ready=no;
-- existing legal human-required/recovery machine state, no new BLOCKED enum;
-- later same-Goal exact-once recovery;
-- External GPT normal waiting unchanged;
-- G1 reply and no-reply branches.
-
-## 8. C056-E2 response preserved
-
-Planner disposition remains `ACCEPT`, pending Critic closure.
-
-`CRITIC_ROLE_CONTRACT.md` v1.3 remains canonical and contains the generic post-REVISE final-PASS plain-language closure explanation requirement. No extra reporting mechanism is added.
-
-## 9. Frozen architecture/gates
-
-No v7.
-
-Keep:
-
-- Lite L1-L6;
-- W1-W5;
-- F-A/F-B/F-C;
-- one Maintainer consumption-diagnosis capability;
-- G1-G8;
-- Source Discovery regression not G9;
-- no W6/W7/G9/G10/second state machine/review engine.
-
-## 10. Current authorization tightening
-
-The user's current instruction explicitly keeps these outside v0.3 execution:
-
-- main/develop merge;
-- release/tag/package publish/deploy;
-- **real user Host Policy install/update**;
-- paid API/Terra;
-- unrelated product work.
-
-Therefore v0.3 may implement/test Host behavior in source/unit/isolated temporary fixtures, but cannot mutate the user's real `$CODEX_HOME` or perform the final live Host G1 smoke.
-
-The package must be judged as an implementation-stage execution contract. It cannot claim overall 056 achieved or final release-critical real-host G1 PASS while that separately authorized integration boundary remains open.
-
-## 11. Current Critic review scope
-
-The next Critic should default to these questions only:
-
-1. Is the post-057 source-drift attribution correct?
-2. Is all work already completed by 057 removed from 056, especially Bobbio write scope and Bridge `0.8.3` creation?
-3. Is Bridge `0.8.4` the correct next candidate slot under current version rules?
-4. Are current exact refs correct and used only as appropriate source/reference locators?
-5. Do C056-E1 and C056-E2 responses remain complete and internally consistent?
-6. Did v0.3 accidentally change the v6 architecture, gate count or owner boundaries?
-7. Are v0.3 Plan/Goal/Kickoff aligned and executable within the current narrower authorization?
-8. Does the no-real-Host-install boundary remain truthful rather than allowing isolated evidence to masquerade as final G1 Host PASS?
-
-Do not reopen 057, v6 architecture or unrelated later workflow TODO items unless v0.3 itself creates a direct contradiction.
-
-## 12. Expected outcomes
-
-If REVISE:
-
-- keep blockers limited to this amended package;
-- return a complete Planner revision prompt.
-
-If PASS:
-
-- because this 056 major round previously had REVISE, first provide the v1.3 plain-language closure explanation;
-- then return machine fields;
-- then return the exact reviewed v0.3 Kickoff verbatim.
-
-A PASS authorizes only the user to send the approved Kickoff. It does not execute 056.
-
-`NEXT_HANDOFF = CRITIC`
+PASS 仍不执行 056，也不授权 main merge/release/paid/real Host。

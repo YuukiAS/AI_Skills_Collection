@@ -31,9 +31,9 @@ CENTRAL_PLUGIN_NAMES = [
     "medical-imaging",
 ]
 EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
-    "workflow-core": "0.2",
-    "ai-skills-core": "0.3",
-    "writing-style": "0.2",
+    "workflow-core": "0.3",
+    "ai-skills-core": "0.4",
+    "writing-style": "0.3",
     "presentations": "0.3",
     "web-development": "0.2",
 }
@@ -168,7 +168,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         skill_artifacts = [entry["artifact_id"] for entry in core["skills"]]
         serialized = json.dumps(core, ensure_ascii=False)
 
-        self.assertEqual(core["version"], "0.3")
+        self.assertEqual(core["version"], "0.4")
         self.assertEqual(core["name"], "ai-skills-core")
         self.assertEqual(core["displayName"], "AI Skills Maintainer")
         self.assertIn("Maintenance companion", core["description"])
@@ -187,9 +187,9 @@ class CodexMarketplaceTests(unittest.TestCase):
         visual = next(skill for skill in web["skills"] if skill.get("artifact_id") == "visual")
         visual_sources = {entry["source"] for entry in visual["source_skills"]}
 
-        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "workflow-core")["version"], "0.2")
+        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "workflow-core")["version"], "0.3")
         self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "web-development")["version"], "0.2")
-        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "ai-skills-core")["version"], "0.3")
+        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "ai-skills-core")["version"], "0.4")
         self.assertIn("skills/tools/frontend/figma-design-to-code", visual_sources)
         self.assertIn("skills/tools/frontend/motion-interaction", visual_sources)
 
@@ -272,23 +272,58 @@ class CodexMarketplaceTests(unittest.TestCase):
             self.assertEqual(latest.group(1), version)
             self.assertIn("Earlier `4.x` values were legacy lockstep release metadata", text)
 
-    def test_readme_release_dashboard_matches_sources(self) -> None:
+    def test_readme_human_facing_plugin_gallery_matches_sources(self) -> None:
         config = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
-        plugin_versions = {plugin["name"]: plugin["version"] for plugin in config["plugins"]}
-        maturity_text = (REPO_ROOT / "docs/PLUGIN_MATURITY.md").read_text(encoding="utf-8")
-        maturity = dict(re.findall(r"^\| `([^`]+)` \| `([^`]+)`", maturity_text, flags=re.MULTILINE))
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
         repo_version = (REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip()
+
         self.assertIn(f"Repository / CLI release: `{repo_version}`", readme)
-        for plugin_name in CENTRAL_PLUGIN_NAMES:
-            row = re.search(
-                rf"^\| `{re.escape(plugin_name)}` \| `([^`]+)` \| `([^`]+)` \| .*docs/plugin-changelogs/{re.escape(plugin_name)}\.md",
-                readme,
-                flags=re.MULTILINE,
-            )
-            self.assertIsNotNone(row, plugin_name)
-            self.assertEqual(row.group(1), plugin_versions[plugin_name])
-            self.assertEqual(row.group(2), maturity[plugin_name])
+
+        plugins = config["plugins"]
+        self.assertEqual([plugin["name"] for plugin in plugins], CENTRAL_PLUGIN_NAMES)
+        for plugin in plugins:
+            icon_path = plugin["logo"].removeprefix("./")
+            self.assertTrue((REPO_ROOT / icon_path).is_file(), icon_path)
+            self.assertIn(f'src="{plugin["logo"]}"', readme)
+            self.assertIn(plugin["displayName"], readme)
+            self.assertIn(f"<code>{plugin['name']}</code>", readme)
+            self.assertIn(f"v`{plugin['version']}`", readme)
+
+    def test_workflow_identity_and_gate_lifecycle_contracts_are_source_authoritative(self) -> None:
+        policy = (REPO_ROOT / "docs/workflows/PLUGIN_CAPABILITY_GATE_POLICY.md").read_text(encoding="utf-8")
+        planner = (REPO_ROOT / "docs/workflows/PLANNER_ROLE_CONTRACT.md").read_text(encoding="utf-8")
+        critic = (REPO_ROOT / "docs/workflows/CRITIC_ROLE_CONTRACT.md").read_text(encoding="utf-8")
+        agents = (REPO_ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        workflow_skill = (REPO_ROOT / "skills/core/codex-system/codex-workflow-protocol/SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        maintainer_skill = (
+            REPO_ROOT / "skills/core/codex-system/ai-skills-repository-maintainer/SKILL.md"
+        ).read_text(encoding="utf-8")
+        task_template = (
+            REPO_ROOT / "skills/core/codex-system/codex-workflow-protocol/references/task-template.md"
+        ).read_text(encoding="utf-8")
+
+        for text in [agents, planner, critic, workflow_skill, maintainer_skill, task_template]:
+            self.assertIn("<scope-token>--<goal-token>", text)
+        self.assertIn("task keys as machine locators", workflow_skill)
+        self.assertIn("human short label separate", maintainer_skill)
+        self.assertIn("title service", agents)
+        self.assertNotIn("task_key: <id>_<short_slug>", task_template)
+
+        for text in [policy, planner, critic]:
+            self.assertIn("regression bank", text)
+            self.assertIn("既有 gate", text)
+            self.assertIn("broad/full", text)
+            self.assertIn("final candidate", text)
+        for text in [workflow_skill, maintainer_skill]:
+            self.assertIn("regression bank", text)
+            self.assertIn("existing gates", text)
+            self.assertIn("broad/full", text)
+            self.assertIn("final candidate", text)
+        self.assertIn("impact registry", policy)
+        self.assertIn("database", policy)
+        self.assertIn("ledger", policy)
 
     def test_generated_layer_matches_source_config(self) -> None:
         summary, differences = build.check_layer()

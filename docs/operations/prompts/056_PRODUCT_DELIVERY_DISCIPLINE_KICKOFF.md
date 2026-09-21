@@ -1,274 +1,255 @@
-# 056 Product Delivery Discipline — Codex Kickoff Draft
+# 056 交付工作流可靠性基线 — Codex Kickoff Draft v0.5
 
-- Execution package version: `v0.3`
-- Task: `056_product_delivery_discipline`
-- Plan: `docs/design/056_PRODUCT_DELIVERY_DISCIPLINE_IMPLEMENTATION_PLAN.md` v0.3
-- Goal: `docs/goals/056_PRODUCT_DELIVERY_DISCIPLINE_GOAL.md` v0.3
-- Post-057 revalidation: `docs/design/056_PRODUCT_DELIVERY_DISCIPLINE_POST_057_SOURCE_DRIFT_REVALIDATION_2026-09-18.md`
-- Status: `DRAFT_NOT_AUTHORIZED`
+- Historical task key：`056_product_delivery_discipline`
+- Human-readable name：交付工作流可靠性基线
+- Plan：`docs/design/056_PRODUCT_DELIVERY_DISCIPLINE_IMPLEMENTATION_PLAN.md` v0.5
+- Goal：`docs/goals/056_PRODUCT_DELIVERY_DISCIPLINE_GOAL.md` v0.5
+- Amendment：`docs/design/056_DELIVERY_WORKFLOW_RELIABILITY_BASELINE_V6_AMENDMENT_2026-09-21.md`
+- Prior reviewed package：`v0.4 @ 2df53f24964673fbf79cb3bcdab63b6dfd5ee4c4`
+- Status：`DRAFT_NOT_AUTHORIZED`
 
-Only after an independent Critic reviews this exact v0.3 Plan + Goal + Kickoff, closes or revises C056-E1/E2, and returns `READY_FOR_CODEX=YES` does the user sending the approved `## Kickoff` text authorize execution.
+只有独立 Critic 审完同一 v0.5 Plan + Goal + Kickoff，并返回 `READY_FOR_CODEX=YES` 后，用户实际发送下面的 Kickoff 正文，才构成 current-user authorization。
 
 ## Kickoff
 
-执行 `056_product_delivery_discipline` 的 **v0.3 post-057 implementation stage**。严格按 v0.3 frozen Plan/Goal；不要重新设计已经通过的 v6 architecture。
+执行 historical task `056_product_delivery_discipline` 的 v0.5 implementation stage；人类可读名称为“交付工作流可靠性基线”。
 
-### 1. Current authority and source preflight
+严格按 v0.5 Plan / Canonical Goal；不要重新设计已通过的 v6 architecture，不创建 successor，不把本任务扩成长期 program。
 
-056 architecture authority remains:
+### 1. Exact branch / worktree authorization
 
-- `docs/design/PRODUCT_DELIVERY_DISCIPLINE_V6_PROPOSAL_2026-09-16.md`
-- `docs/design/PRODUCT_DELIVERY_DISCIPLINE_V6_POST_PROBE_ADDENDUM_2026-09-17.md`
-- `docs/design/056_PERSISTENT_PROMPT_CAPABILITY_PROBE_RESULT_2026-09-17.md`
-- `docs/design/PRODUCT_DELIVERY_DISCIPLINE_V6_CUHK_DATE_REAL_FEEDBACK_2026-09-17.md`
-- `docs/design/056_PRODUCT_DELIVERY_DISCIPLINE_POST_057_SOURCE_DRIFT_REVALIDATION_2026-09-18.md`
-
-At Planner revalidation:
-
-- AI_Skills main = `f68e800fb604850c20a29cb3c7572e4f1a119236`;
-- Bridge main = `e1d6b781ad7e56d567bed419001069baf439d0a5`, current source version `0.8.3`.
-
-Before editing, fetch/re-read current source and verify repo identity, remote identity, branch/ref freshness and dirty ownership. Do not use old chat/ref snapshots as current source.
-
-If AI_Skills main has advanced only by this approved v0.3 package, use kickoff-time latest compatible main. If relevant production source has changed, stop and report rather than silently adapting architecture.
-
-For Bridge, expected implementation base is `e1d6b781ad7e56d567bed419001069baf439d0a5`. If Bridge main has advanced with relevant Host/Lite semantics, stop for bounded revalidation.
-
-### 2. Authorized writable repositories
+我在这条当前用户消息中明确授权以下两个、且仅以下两个 execution branch / worktree pair。
 
 #### AI_Skills_Collection
 
-Create exactly:
+Exact branch：
 
-- branch: `reviewed/056_product_delivery_discipline`
-- task-owned worktree: `AI_Skills_Collection-056-product-delivery-discipline`
+`reviewed/056_product_delivery_discipline`
 
-Prefer the verified existing local canonical source; do not network-clone merely because another checkout is dirty.
+Exact task-owned worktree locator：
 
-Allowed task-owned changes only:
+`../AI_Skills_Collection-056-product-delivery-discipline`
 
-- workflow-core W1-W5 + existing Source Discovery enforcement;
-- web-development / Frontend Design F-A/F-B/F-C;
-- canonical marketplace wiring/generation for existing Figma-handoff + motion skills;
-- ai-skills-core production-consumption diagnosis;
-- focused/full tests and G1-G8/source-discovery fixtures;
-- affected TODO/changelog/version-candidate/generated/release metadata;
-- 056 evidence/results.
+该 locator 必须相对 verified canonical AI_Skills_Collection checkout root 解析。先用当前 canonical repo 的 `git rev-parse --show-toplevel` 确认 root；目标是其父目录下 basename 精确为 `AI_Skills_Collection-056-product-delivery-discipline` 的唯一 sibling worktree。
 
-Current next candidate slots, only when the candidate is actually formed under the repo version contract:
-
-```text
-AI_Skills repository 5.0.4 -> 5.0.5 PATCH
-workflow-core         0.1 -> 0.2
-web-development       0.1 -> 0.2
-ai-skills-core        0.2 -> 0.3
-```
-
-Do not bump unrelated plugins.
+不得选择其他 path、其他 basename、第二个 worktree 或 `/tmp` clone。若该 exact locator 已存在，只能在它属于同一 canonical repo 且绑定 exact branch 时复用；若被无关目录/worktree占用、repo identity不匹配或 branch不匹配，停止并报告，不得临场改用另一位置。
 
 #### GPT_Codex_AI_Bridge_Kit
 
-Create exactly:
+Exact branch：
 
-- branch: `reviewed/056_product_delivery_discipline`
-- task-owned worktree: `GPT_Codex_AI_Bridge_Kit-056-product-delivery-discipline`
+`reviewed/056_product_delivery_discipline`
 
-Allowed task-owned changes only:
+Exact task-owned worktree locator：
 
-- Lite L1-L6;
-- managed desired `features.default_mode_request_user_input=false`;
-- supported-key vs desired-state validation;
-- HUMAN_ONLY transcript blocked/recovery guidance;
-- current Host/Lite source, tests and docs;
-- version/changelog/README candidate metadata required by this frozen change.
+`../GPT_Codex_AI_Bridge_Kit-056-product-delivery-discipline`
 
-Preserve the integrated 057 behavior:
+该 locator 必须相对 verified canonical GPT_Codex_AI_Bridge_Kit checkout root 解析。先用当前 canonical repo 的 `git rev-parse --show-toplevel` 确认 root；目标是其父目录下 basename 精确为 `GPT_Codex_AI_Bridge_Kit-056-product-delivery-discipline` 的唯一 sibling worktree。
 
-- fresh-repo root AGENTS scaffold;
-- existing-root raw-byte/newline preservation;
-- one managed Bridge block;
-- Lite fallback versioning;
-- no existing-repo automatic scaffold migration;
-- no Lite duplication in root.
+不得选择其他 path、其他 basename、第二个 worktree 或 `/tmp` clone。若该 exact locator 已存在，只能在它属于同一 canonical repo 且绑定 exact branch 时复用；若被无关目录/worktree占用、repo identity不匹配或 branch不匹配，停止并报告，不得临场改用另一位置。
 
-Bridge `0.8.3` is already the canonical 057 identity. The next distinct compatible 056 candidate slot is `0.8.4`. Do not reuse `0.8.3` for a different user-consumable candidate and do not jump to a minor/major version without new authority.
+这两个 exact branch/worktree pair 属于同一个 frozen effect。后续到达 `git worktree add`、branch creation、task-owned commit/push 等同一已授权执行步骤时，不要仅因为阶段较晚再次询问授权。
 
-### 3. Product repositories are ZERO WRITE
+### 2. Source / identity preflight
 
-Do not modify, branch, commit or push:
+当前 planning locators：
 
-- Bobbio;
-- Lucerna;
-- Mica-for-ChatGPT;
-- Asteria;
-- SeminarArc;
-- CUHK Date;
-- CARE/EAT;
-- Server/VPS;
-- Longleaf_Bridge;
-- Scientific Visualization production.
+~~~text
+AI_Skills production/evidence baseline = 72f163330ea5a21637df95f08289e2c4739d2bd9
+Prior v0.4 package commit              = 2df53f24964673fbf79cb3bcdab63b6dfd5ee4c4
+Bridge planning baseline               = 9d2da9f485f26ca51842a1909a276cb44f73351a
+~~~
 
-Bobbio's old 056 locator task is already completed by 057. Bobbio may be read only as G6 canonical-design evidence.
+开始前 fetch/re-read current main，核对 canonical repository identity、origin fetch destination、所有 effective push destinations、branch/version sources 和 dirty ownership。
 
-CUHK Date now has a root AGENTS, but `NO_GENERIC_056_AGENTS_COPY` still applies. Current Questionnaire V4 product work is evidence/reference only, not 056 scope.
+如果 main 只新增无关 docs/evidence commit，刷新 locator后继续，不因 SHA 前进停止。只有 production/version/release/frozen semantics 与本 v0.5 scope 实质 overlap 才停止并返回 Planner/Critic。
 
-### 4. Frozen architecture
+不得 remap remote、改 pushurl 或通过修改 Git config 让 identity check 通过。
 
-Keep exactly:
+### 3. 我在这条消息中授权的 bounded implementation effects
 
-```text
-Lite: L1-L6
-workflow-core: W1-W5
-Frontend Design: F-A / F-B / F-C
-AI Skills Maintainer: one production-consumption diagnosis capability
-Capability Gates: G1-G8
-Source Discovery regression: existing capability, not G9
-```
+仅对本 frozen Goal 和上面两个 exact branch/worktree pair：
 
-Do not add W6/W7, G9/G10, Control, watcher, daemon, ledger, second state machine/review engine, new top-level plugin or Codex fork.
+- 创建或复用上面唯一冻结的 task-owned worktree；
+- 创建或使用上面唯一冻结的 reviewed branch；
+- 对这两个 task branch 做普通 task-owned edit / test / stage / commit / non-force push；
+- 运行本 Goal 已声明的本地/fixture/normal-entry验证；
+- 生成 task-owned results/evidence。
 
-### 5. HUMAN_ONLY hard contract
+这是一次性 bounded authorization。后续到达同一个 frozen effect 时不要仅因为进入较晚阶段再次询问。
 
-Before asking the user, classify the dependency:
+任何新的 provider/account/credential purpose、真实 Host mutation、paid call、deployment、main merge/release、产品 repo write 或本 Goal 外副作用不在授权内。
 
-`HUMAN_ONLY / AGENT_RESOLVABLE / UNSUPPORTED_WITH_EVIDENCE / OPTIONAL_NOT_REQUIRED_FOR_CURRENT_CLOSURE / SAFETY_OR_AUTHORITY_BLOCKER`.
+### 4. AI_Skills write scope
 
-Only genuine `HUMAN_ONLY` enters this contract.
+只改：
 
-Default required HUMAN_ONLY must not use native `request_user_input`. Use:
+- workflow-core：W1-W5、W2 least-privilege equivalent recovery、Source Discovery residual enforcement；
+- web-development：F-A/F-B/F-C 与已有 Figma-handoff/motion production wiring；
+- ai-skills-core：0.3 尚未覆盖的 production-consumption diagnosis；
+- 对应 tests / regression fixtures；
+- canonical source -> generated Marketplace parity；
+- candidate version/changelog/release metadata；
+- 056 task-owned evidence。
 
-```text
-preserve current Goal/resume point/prompt identity
--> one concise plain-text user question
--> stop all dependent execution immediately
-```
+保护当前 5.0.6 已完成的 semantic task identity、Gate lifecycle、regression bank、broad/full fallback、same-final-candidate behavior。不要重新实现 task-key parser，也不要改 domain plugin专业语义。
 
-Waiting authority:
+当前 version baseline：
 
-1. use an explicit human-response deadline/hard deadline/run-lifetime already frozen by the task/workflow;
-2. otherwise, if the question ends the current interactive run/turn, run-end is the handoff boundary;
-3. native request-user-input auto-resolution is not transcript timeout authority;
-4. External GPT Planner/Reviewer normal waiting is a different contract and remains unchanged.
+~~~text
+Repository 5.0.6
+workflow-core 0.2
+web-development 0.1
+ai-skills-core 0.3
+~~~
 
-No answer at the boundary must report:
+如果形成正式 candidate，预期：
 
-```text
+~~~text
+Repository 5.0.7 PATCH
+workflow-core 0.3
+web-development 0.2
+ai-skills-core 0.4
+~~~
+
+必须按当前 version policy从 source重新判断；若某项行为已经被 compatible main完整实现并由 normal-entry evidence证明，则该 plugin `NO_BUMP`，不机械升级。
+
+### 5. Bridge write scope
+
+当前 version baseline `0.8.4`。只改原 v6 residual：
+
+- managed desired `default_mode_request_user_input=false` candidate；
+- supported-key / desired-state validation；
+- HUMAN_ONLY durable transcript wait/resume Host/Lite guidance与 tests；
+- 必要的 README/changelog/version candidate parity。
+
+若形成 compatible candidate，预期 `0.8.5`。
+
+必须保护：
+
+- 0.8.4 semantic task-key兼容；
+- 0.8.3 fresh-root/raw-byte/Lite behavior；
+- 0.8.1 upfront authorization；
+- 0.8.0 Persistent Run；
+- Plan-mode合法 user-input behavior。
+
+不要修改 Persistent Run production source或其 progress/ETA TODO。
+
+### 6. W2 Human Gate / least-privilege hard contract
+
+任何 user-input request 前先按 v6 分类：
+
+`HUMAN_ONLY / AGENT_RESOLVABLE / UNSUPPORTED_WITH_EVIDENCE / OPTIONAL_NOT_REQUIRED_FOR_CURRENT_CLOSURE / SAFETY_OR_AUTHORITY_BLOCKER`。
+
+只有 genuine `HUMAN_ONLY` 可以进入普通 Human Gate。
+
+如果 blocker 表面上是 credential scope / provider permission / paid resource / environment mutation，不要立即找用户。先做 bounded check：
+
+1. 这是 frozen Goal 的必要权限，还是当前实现路线才需要？
+2. 当前 source/environment 是否已经存在被授权的 lower-privilege候选路线？
+3. 该路线是否保持 security/privacy、product behavior、evidence quality、quality bar、provider/data/purpose boundary完全等价？
+
+如果全部满足，自动使用等价低权限路线继续；不要要求用户扩大权限。
+
+如果 route 会改变 provider/account/data/security/product semantics，或只是 degraded/manual/fallback，就不能冒充 equivalent，按现有 Human Gate/Planner处理。
+
+不要为了避免询问而无限搜索新 provider、安装新基础设施或扩大 scope。
+
+blocker report 必须区分 missing / expired / revoked credential 与“credential 只对某条可选路线权限不足”。
+
+### 7. Durable HUMAN_ONLY wait/resume
+
+Default required human input 不使用 native `request_user_input` permission card。按：
+
+~~~text
+preserve Goal/resume point/prompt identity
+-> one concise plain-text question
+-> stop dependent execution
+~~~
+
+没有回答时不得 default infer、polling、auto retry、timeout-continuation。
+
+在当前 task合法 handoff boundary仍未回答时，如实报告：
+
+~~~text
 GOAL_BLOCKED=YES
 GOAL_ACHIEVED=NO
 COMPLETE=NO
 READY_FOR_USER_REVIEW=NO
 DEPENDENT_EXECUTION_BLOCKED=YES
-```
+~~~
 
-Use an existing legal human-required/recovery machine state. Do not invent a BLOCKED enum.
+使用现有合法 recovery representation，不新增 state enum。
 
-A later explicit in-scope answer:
+后续 explicit in-scope reply：重读当前 Goal/resume identity -> consume once -> same-Goal exact-once resume -> post-action closure。
 
-```text
-reread current Goal/resume point/prompt identity
--> confirm still current
--> consume answer once
--> exact-once resume same Goal
--> complete post-action closure
--> only then reconsider acceptance/completion
-```
+### 8. G1-G8
 
-No successor, duplicate prompt, polling, default inference, auto retry or timeout-continuation.
+不新增 Gate。
 
-### 6. Acceptance / evidence contract
+G1 额外加入 least-privilege regression：
 
-Do not present an acceptance/release/user-ready candidate before applicable producer-local implementation, focused regression, source/generated parity, target-surface evidence and candidate identity are closed.
+- optional high-priv route lacks permission + equivalent authorized lower-priv route -> no Human Gate，继续；
+- lower-priv route降低 security/quality/product semantics -> 不自动替代；
+- only valid route credential expired/revoked -> Human Gate；
+- same-class false permission blocker重复出现 -> W4/G8 diagnosis，不重复索权。
 
-Advisory/diagnostic/design/architecture review may occur earlier but cannot claim ready/complete.
+G2-G8 和 Source Discovery regression 按 v0.5 Plan执行。
 
-Preserve:
+本轮是 shared workflow/default prompt/Marketplace/cross-plugin change，release selection保持 `BROAD_FULL_FALLBACK`，所有 release-critical evidence绑定同一 final candidate。
 
-- mock/provider evidence only proves its actual surface;
-- hosted/external claims require bounded configured-target evidence;
-- interaction sequences must be tested when intermediate states matter;
-- breadth/locale/material-branch claims need representative coverage when those claims are frozen;
-- fallback/recovery does not automatically prove primary capability;
-- accepted/adjacent behavior must not silently regress.
+### 9. Product repositories ZERO WRITE
 
-### 7. G1-G8
+不得修改、branch、commit、push：
 
-Implement and collect authorized evidence for the frozen G1-G8.
+- Bobbio
+- Lucerna
+- Mica-for-ChatGPT
+- Asteria
+- SeminarArc
+- CUHK Date
+- CARE/EAT
+- Server/VPS
+- Longleaf_Bridge
+- Scientific Visualization production
 
-G1 must include:
+只在 Gate 已冻结且必要时读 evidence。
 
-- reply path: question -> no dependent work -> explicit answer -> same Goal exact-once resume;
-- no-reply path: faithful bounded fixture -> deadline/run-end -> Goal blocked/achieved=no -> later explicit recovery -> same Goal exact-once resume;
-- AGENT_RESOLVABLE does not prompt;
-- UNSUPPORTED closes truthfully;
-- candidate desired Default flag is false;
-- Plan-mode native blocking semantics remain valid.
+### 10. 明确不做
 
-Do not use grep-only evidence for G1-B.
+不要：
 
-G2-G8 remain exactly as frozen in v0.3 Plan/Goal.
+- 实现 ordinary complex task generic bounded-kickoff renderer；
+- 修改 Persistent Run / tmux discovery / progress ETA；
+- 实现 task-local prohibition expiry；
+- 实现 acceptance comparison artifact packaging；
+- 新增 W6/W7/G9/G10；
+- 新增 authorization database/state/schema/ledger/controller/watcher；
+- fork Codex；
+- call paid API/Terra；
+- merge main、tag、release、publish、deploy；
+- 修改真实 CODEX_HOME / Host Policy；
+- 做 final live W2/G1 user smoke；
+- remote remap / force push；
+- 使用上面两个 exact worktree locator 之外的路径；
+- 引入新的 provider/account/credential purpose。
 
-### 8. Current Host boundary — no real Host install
+### 11. Validation / handoff
 
-This Kickoff does **not** authorize:
+先 cheap focused regression，再 broad/full。完成 source/generated parity、candidate plugin replay / normal-entry evidence、full relevant test、should-not-change和同一 final candidate freeze。
 
-- mutation of the user's real `$CODEX_HOME`;
-- real Host Policy install/update;
-- real-user `ai-bridge host install`;
-- the final live `W2_RESUME_056_FINAL` user smoke.
+两个 exact task branches ordinary non-force push后，写清：
 
-Bridge source/unit/fixture tests may exercise Host logic in isolated temporary test fixtures as part of the test suite, but must not write the real user Codex identity.
+- AI_Skills exact candidate commit + generated hashes；
+- Bridge exact candidate commit；
+- candidate versions；
+- G1-G8 / Source Discovery在本授权 surface 的 evidence；
+- exact branch/worktree identity；
+- product repos zero-write；
+- real Host integration仍 pending（如果仍需要）。
 
-The final real-host application/fresh-session smoke, if still required after independent implementation review, is a later separately authorized integration step.
-
-Therefore do not claim final release-critical G1 PASS or overall 056 achieved from isolated fixture evidence alone.
-
-### 9. Validation and candidate identity
-
-Run the smallest focused tests first, then the appropriate full repository validation once the candidate is stable.
-
-AI_Skills must prove source/generated/Marketplace/version/changelog parity and that Frontend Design production payload actually consumes the existing Figma-handoff + motion capability.
-
-Bridge must run focused Host/Lite tests plus its full unit suite once on the stable implementation candidate, while preserving the 057 scaffold/raw-byte/versioning regressions.
-
-Before handoff, freeze and report:
-
-- exact AI_Skills implementation candidate commit;
-- generated workflow/web/maintainer hashes;
-- exact Bridge implementation candidate commit;
-- Bridge next candidate version identity (`0.8.4` when formed);
-- exact read-only reference refs used;
-- which G1-G8 evidence passed at the authorized non-host surface;
-- real-host integration evidence still pending because this Kickoff does not authorize it.
-
-### 10. Git / side-effect boundary
-
-Allowed:
-
-- ordinary fetch/read-only inspection;
-- creation/use of the two exact authorized task branches/worktrees;
-- task-owned stage/commit/non-force push to those exact task branches.
-
-Forbidden:
-
-- merge to AI_Skills or Bridge main;
-- any product-repo write/commit/push;
-- remote remap;
-- force push/history rewrite;
-- PR creation;
-- branch deletion;
-- tag/GitHub Release/package publish/deployment;
-- real Host install/update;
-- paid/external model API/Terra;
-- unrelated product work.
-
-Protect unrelated dirty user work; do not stash/reset/clean/overwrite it merely to continue 056.
-
-### 11. End state
-
-Complete implementation/self-QA/authorized tests and non-host gate evidence, commit/push both exact task branches, freeze the implementation tuple, and stop at:
+然后停止：
 
 `NEXT_HANDOFF = INDEPENDENT_IMPLEMENTATION_REVIEW`
 
-Report any still-unverified real-host/release boundary explicitly.
-
-Do not announce overall 056 achieved.
+不得宣布 overall 056 achieved。

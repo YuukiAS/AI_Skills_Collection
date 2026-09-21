@@ -256,7 +256,7 @@ class TextReviewWorkflowTests(unittest.TestCase):
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("github.event.inputs.manifest", workflow)
         self.assertIn("github.event.inputs.output", workflow)
-        self.assertIn("5c894d98d3053c39cbda79cdbd0b8dfb4fbec4c0", workflow)
+        self.assertIn("cb77b1cc5a1fce097a38066d2db452291e359852", workflow)
         self.assertNotIn("\n  push:", workflow)
         self.assertNotIn("||", workflow)
         self.assertIn("OPENAI_REVIEW_API_KEY: ${{ secrets.OPENAI_REVIEW_API_KEY }}", workflow)

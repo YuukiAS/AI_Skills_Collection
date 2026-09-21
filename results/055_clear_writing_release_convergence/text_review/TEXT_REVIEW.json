@@ -1,0 +1,268 @@
+{
+  "blocking_findings": [
+    {
+      "evidence": "F2 的规则文字称“如果连续 $m$ 个 epoch 中验证损失的相对改善都低于阈值”，但给出的唯一判据只比较 $t-m$ 与 $t$ 两个时点的累计相对下降。",
+      "finding_id": "B-001",
+      "recommendation": "将文字改为“若从 $t-m$ 到 $t$ 的累计相对改善低于阈值，则停止”，或提供逐 epoch 检验“连续 $m$ 次改善均低于阈值”的对应公式与实现说明。",
+      "requirement_id": "B — Reader-Facing Quality: formula, structured technical detail, and finished-artifact clarity",
+      "severity": "blocking",
+      "summary": "F2 的早停规则文字与公式表达的条件不一致，读者无法确定实际执行的是连续逐轮判定还是窗口端点累计判定。初始归因：PLUGIN_DEFECT。最小关闭条件：使规则文字、公式和后续解释采用同一种明确的早停定义。"
+    }
+  ],
+  "created_at": "2026-09-17T02:15:22Z",
+  "encrypted_payload": {
+    "path": "results/055_clear_writing_release_convergence/text_review/final_terra_payload.age",
+    "sha256": "cd9b6cad75e2db5ee41df1de6ce189cfa0041bce048dab3c706d25d55ad45d96"
+  },
+  "evidence_id": "text-review-055_clear_writing_release_convergence-2b347e94c83d",
+  "input_manifest": {
+    "identity_bindings": {
+      "implementation_commit": "79d620a0c60cdd086dd5828c8686bac843291cda"
+    },
+    "manifest_sha256": "2b347e94c83d899ffa129f427406c2d69e25b12fbdff87b3fb320c0701fa12b3",
+    "privacy_policy": "PRIVATE_TEXT_REVIEW_AUTHORIZED",
+    "rubric": {
+      "instructions": "Final independent Terra Text Review for 055 Clear Writing C6. Read the complete plaintext packet. Apply the frozen 055 A/B/C rubric included in the packet. Primary purpose is independent B reader-facing quality review of the final Deep Research candidate and G7 public-safe fresh candidates. Do not use external factual truth as a blocker unless the candidate itself introduces, strengthens, or misattributes a claim relative to the visible packet. Report PASS only if no unresolved frozen-rubric blocker remains."
+    },
+    "schema": "AI_BRIDGE_TEXT_INPUT_MANIFEST_V1"
+  },
+  "item_reviews": [
+    {
+      "decision": "PASS",
+      "item_id": "C6",
+      "requirement_ids": [
+        "B — Reader-Facing Quality"
+      ],
+      "summary": "全文为连贯、中文主导的研究报告；章节顺序、表格、公式、限制条件与未来工作状态均清楚。技术细节置于相应论证位置，未见会妨碍普通目标读者理解的内部工作流或候选处理痕迹。"
+    },
+    {
+      "decision": "PASS",
+      "item_id": "F1",
+      "requirement_ids": [
+        "B — Reader-Facing Quality"
+      ],
+      "summary": "短文目的、观察范围、复现命令、脚本行为和未完成事项均明确。命令、路径与参数作为复现信息置于合适位置，未主导正文。"
+    },
+    {
+      "decision": "BLOCKED",
+      "item_id": "F2",
+      "requirement_ids": [
+        "B — Reader-Facing Quality: formula, structured technical detail, and finished-artifact clarity"
+      ],
+      "summary": "早停规则的自然语言条件与所列公式不一致，构成未解决的读者可执行性问题。"
+    },
+    {
+      "decision": "PASS",
+      "item_id": "F3",
+      "requirement_ids": [
+        "B — Reader-Facing Quality"
+      ],
+      "summary": "全文结构完整，结果、适用边界、错误类型、限制和未来验证工作区分清楚。未将内部结果夸大为临床部署证据，未来工作保持未完成状态。"
+    }
+  ],
+  "model": "gpt-5.6-terra",
+  "non_blocking_notes": [
+    "C6 对 CARE 初始化来源、M&Ms 元数据状态及方法新颖性均使用条件性表述；这些限制在文中得到保留。",
+    "F2 明确说明当前阈值选择依赖测试 RMSE，并要求外部测试确认；这是可见的方法选择信息，而非被隐去的结论。"
+  ],
+  "overall_decision": "BLOCKED",
+  "paid_review": {
+    "accounting_status": "ACCOUNTING_VERIFIED",
+    "actual_model_cost_usd": "0.054542",
+    "actual_response_usage": {
+      "cache_write_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 20443,
+      "output_tokens": 1138,
+      "reasoning_tokens": 516,
+      "regular_input_tokens": 20443,
+      "response_id": "resp_01ec031b09f25c46016aab4d2af75487d1b0eca410eddeccda",
+      "response_model": "gpt-5.6-terra",
+      "response_service_tier": "default"
+    },
+    "call_number": 1,
+    "call_reservation": {
+      "accounting_status": "ACCOUNTING_VERIFIED",
+      "actual_cost_status": "ACCOUNTING_VERIFIED",
+      "actual_model_cost_usd": "0.054542",
+      "actual_response_usage": {
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 20443,
+        "output_tokens": 1138,
+        "reasoning_tokens": 516,
+        "regular_input_tokens": 20443,
+        "response_id": "resp_01ec031b09f25c46016aab4d2af75487d1b0eca410eddeccda",
+        "response_model": "gpt-5.6-terra",
+        "response_service_tier": "default"
+      },
+      "automatic_paid_retries": 0,
+      "call_number": 1,
+      "cumulative_reserved_cost_usd": "0.100260",
+      "cumulative_reserved_worst_case_cost_usd": "0.100260",
+      "input_token_preflight": {
+        "endpoint": "/v1/responses/input_tokens",
+        "input_tokens": 20443,
+        "raw_response": {
+          "input_tokens": 20443,
+          "object": "response.input_tokens"
+        }
+      },
+      "max_output_tokens": 4096,
+      "model": "gpt-5.6-terra",
+      "pricing": {
+        "cache_write_input_usd_per_1m_tokens": "2.500000",
+        "cache_write_usd_per_1m": "2.500000",
+        "cached_input_usd_per_1m": "0.200000",
+        "cached_input_usd_per_1m_tokens": "0.200000",
+        "input_usd_per_1m_tokens": "2.000000",
+        "long_context_threshold": 272000,
+        "model": "gpt-5.6-terra",
+        "normal_input_usd_per_1m": "2.000000",
+        "output_usd_per_1m": "12.000000",
+        "output_usd_per_1m_tokens": "12.000000",
+        "reviewed_on": "2026-09-03",
+        "runtime_uses_worst_case_input_price": true,
+        "worst_case_input_usd_per_1m_tokens": "2.500000",
+        "worst_case_standard_input_usd_per_1m": "2.500000"
+      },
+      "request_sha256": "fbd01c30c9e778be1505ded7414ae5d8439d2785598b1ca7787e4c81eebe2f59",
+      "reservation_id": "055_clear_writing_release_convergence-1-fbd01c30c9e7",
+      "reserved_at": "2026-09-17T02:15:04Z",
+      "response_id": "resp_01ec031b09f25c46016aab4d2af75487d1b0eca410eddeccda",
+      "response_model": "gpt-5.6-terra",
+      "response_service_tier": "default",
+      "review_type": "text_review",
+      "service_tier": "default",
+      "worst_case_reserved_cost_usd": "0.100260"
+    },
+    "call_reservations": [
+      {
+        "accounting_status": "ACCOUNTING_VERIFIED",
+        "actual_cost_status": "ACCOUNTING_VERIFIED",
+        "actual_model_cost_usd": "0.054542",
+        "actual_response_usage": {
+          "cache_write_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 20443,
+          "output_tokens": 1138,
+          "reasoning_tokens": 516,
+          "regular_input_tokens": 20443,
+          "response_id": "resp_01ec031b09f25c46016aab4d2af75487d1b0eca410eddeccda",
+          "response_model": "gpt-5.6-terra",
+          "response_service_tier": "default"
+        },
+        "automatic_paid_retries": 0,
+        "call_number": 1,
+        "cumulative_reserved_cost_usd": "0.100260",
+        "cumulative_reserved_worst_case_cost_usd": "0.100260",
+        "input_token_preflight": {
+          "endpoint": "/v1/responses/input_tokens",
+          "input_tokens": 20443,
+          "raw_response": {
+            "input_tokens": 20443,
+            "object": "response.input_tokens"
+          }
+        },
+        "max_output_tokens": 4096,
+        "model": "gpt-5.6-terra",
+        "pricing": {
+          "cache_write_input_usd_per_1m_tokens": "2.500000",
+          "cache_write_usd_per_1m": "2.500000",
+          "cached_input_usd_per_1m": "0.200000",
+          "cached_input_usd_per_1m_tokens": "0.200000",
+          "input_usd_per_1m_tokens": "2.000000",
+          "long_context_threshold": 272000,
+          "model": "gpt-5.6-terra",
+          "normal_input_usd_per_1m": "2.000000",
+          "output_usd_per_1m": "12.000000",
+          "output_usd_per_1m_tokens": "12.000000",
+          "reviewed_on": "2026-09-03",
+          "runtime_uses_worst_case_input_price": true,
+          "worst_case_input_usd_per_1m_tokens": "2.500000",
+          "worst_case_standard_input_usd_per_1m": "2.500000"
+        },
+        "request_sha256": "fbd01c30c9e778be1505ded7414ae5d8439d2785598b1ca7787e4c81eebe2f59",
+        "reservation_id": "055_clear_writing_release_convergence-1-fbd01c30c9e7",
+        "reserved_at": "2026-09-17T02:15:04Z",
+        "response_id": "resp_01ec031b09f25c46016aab4d2af75487d1b0eca410eddeccda",
+        "response_model": "gpt-5.6-terra",
+        "response_service_tier": "default",
+        "review_type": "text_review",
+        "service_tier": "default",
+        "worst_case_reserved_cost_usd": "0.100260"
+      }
+    ],
+    "campaign_identity": "055_clear_writing_release_convergence",
+    "contract": {
+      "automatic_paid_retries": 0,
+      "campaign_reserved_cost_hard_ceiling_usd": "0.250000",
+      "max_paid_calls": 1,
+      "model": "gpt-5.6-terra",
+      "per_call_worst_case_ceiling_usd": "0.250000",
+      "pricing": {
+        "cache_write_input_usd_per_1m_tokens": "2.500000",
+        "cache_write_usd_per_1m": "2.500000",
+        "cached_input_usd_per_1m": "0.200000",
+        "cached_input_usd_per_1m_tokens": "0.200000",
+        "input_usd_per_1m_tokens": "2.000000",
+        "long_context_threshold": 272000,
+        "model": "gpt-5.6-terra",
+        "normal_input_usd_per_1m": "2.000000",
+        "output_usd_per_1m": "12.000000",
+        "output_usd_per_1m_tokens": "12.000000",
+        "reviewed_on": "2026-09-03",
+        "runtime_uses_worst_case_input_price": true,
+        "worst_case_input_usd_per_1m_tokens": "2.500000",
+        "worst_case_standard_input_usd_per_1m": "2.500000"
+      }
+    },
+    "cumulative_actual_model_cost_usd": "0.054542",
+    "cumulative_reserved_cost_usd": "0.100260",
+    "cumulative_reserved_worst_case_cost_usd": "0.100260",
+    "exact_input_token_preflight": {
+      "endpoint": "/v1/responses/input_tokens",
+      "input_tokens": 20443,
+      "raw_response": {
+        "input_tokens": 20443,
+        "object": "response.input_tokens"
+      }
+    },
+    "input_token_preflight": {
+      "endpoint": "/v1/responses/input_tokens",
+      "input_tokens": 20443,
+      "raw_response": {
+        "input_tokens": 20443,
+        "object": "response.input_tokens"
+      }
+    },
+    "max_output_tokens": 4096,
+    "model": "gpt-5.6-terra",
+    "model_identity": "gpt-5.6-terra",
+    "pricing_identity": {
+      "cache_write_usd_per_1m": "2.500000",
+      "cached_input_usd_per_1m": "0.200000",
+      "long_context_threshold": 272000,
+      "model": "gpt-5.6-terra",
+      "normal_input_usd_per_1m": "2.000000",
+      "output_usd_per_1m": "12.000000",
+      "reviewed_on": "2026-09-03"
+    },
+    "reservation_id": "055_clear_writing_release_convergence-1-fbd01c30c9e7",
+    "response_id": "resp_01ec031b09f25c46016aab4d2af75487d1b0eca410eddeccda",
+    "review_type": "text_review",
+    "schema": "AI_BRIDGE_PAID_REVIEW_RECEIPT_V1",
+    "service_tier": "default",
+    "worst_case_reserved_cost_usd": "0.100260"
+  },
+  "plaintext_artifact_sha256": "86937aa8aeec281c0a4321f7f0f23139c43ce690e5edfb9ab1def9cfa9476866",
+  "prompt_version": "ai-bridge.text-review.v1",
+  "review_identity": "2b347e94c83d899ffa129f427406c2d69e25b12fbdff87b3fb320c0701fa12b3",
+  "review_kind": "final-terra-clear-writing-c6",
+  "review_model": "gpt-5.6-terra",
+  "reviewed_input_identity": "2b347e94c83d899ffa129f427406c2d69e25b12fbdff87b3fb320c0701fa12b3",
+  "schema": "AI_BRIDGE_TEXT_REVIEW_V1",
+  "status": "BLOCKED",
+  "task_key": "055_clear_writing_release_convergence",
+  "workflow_type": "reviewed_handoff"
+}

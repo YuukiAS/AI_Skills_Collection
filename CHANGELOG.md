@@ -4,9 +4,9 @@
 
 No unreleased changes.
 
-## 5.0.5 - 2026-09-18
+## 5.0.7 - 2026-09-21
 
-Repository `5.0.5` is a compatible release candidate for 056 Product Delivery
+Repository `5.0.7` is a compatible release candidate for 056 Product Delivery
 Discipline implementation on the central production plugin path.
 
 Repository bump decision: PATCH
@@ -18,25 +18,25 @@ Affected plugin versions:
 
 | Plugin | Previous | Current |
 |---|---:|---:|
-| `workflow-core` | `0.1` | `0.2` |
+| `workflow-core` | `0.2` | `0.3` |
 | `web-development` | `0.1` | `0.2` |
-| `ai-skills-core` | `0.2` | `0.3` |
+| `ai-skills-core` | `0.3` | `0.4` |
 
 Affected plugins:
-- `workflow-core`: `0.1` -> `0.2`
+- `workflow-core`: `0.2` -> `0.3`
   Reason: Verified Workflow now carries the 056 W1-W5 delivery discipline,
-  including acceptance admission, HUMAN_ONLY dependency triage, evidence-surface
-  fidelity, repeat-failure stop rules, change-impact protection, and local
-  source discovery enforcement.
+  including acceptance admission, HUMAN_ONLY dependency triage, least-privilege
+  equivalent recovery, evidence-surface fidelity, repeat-failure stop rules,
+  change-impact protection, and local source discovery enforcement.
 - `web-development`: `0.1` -> `0.2`
   Reason: Frontend Design now carries F-A/F-B/F-C production gates and its
   Marketplace payload consumes the existing Figma handoff and motion skills.
-- `ai-skills-core`: `0.2` -> `0.3`
+- `ai-skills-core`: `0.3` -> `0.4`
   Reason: AI Skills Maintainer now diagnoses production consumption paths when
   an active rule exists but the real installed/generated/invocation/session path
   still fails.
 
-Unchanged plugin versions: `writing-style 0.2`, `research-writing 0.1`,
+Unchanged plugin versions: `writing-style 0.3`, `research-writing 0.1`,
 `presentations 0.3`, `scientific-visualization 0.1`,
 `statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
 
@@ -47,6 +47,9 @@ Changed repository behavior:
 - Only genuine `HUMAN_ONLY` dependencies ask the user; unsupported interfaces
   close truthfully and agent-resolvable source/environment/test issues stay with
   Codex.
+- A permission gap on an optional high-privilege route now triggers a bounded
+  least-privilege equivalence check before asking the user for broader
+  credential/provider/resource authority.
 - Frontend Design now treats current canonical design sources as production
   authority when they exist, while avoiding automatic Figma escalation for
   docs-only, backend/server-only, or tiny nonvisual tasks.
@@ -65,6 +68,73 @@ Affected plugin changelogs:
 Real-host integration note: this 056 implementation stage does not authorize
 mutating the user's real `$CODEX_HOME` or final live Host Policy smoke. That
 boundary remains pending for a separately authorized Bridge integration step.
+
+## 5.0.6 - 2026-09-20
+
+Repository `5.0.6` is a compatible release for workflow identity and plugin gate lifecycle hardening.
+
+Repository bump decision: PATCH
+Reason: this release improves existing workflow and central-plugin maintenance behavior without adding a new repository-level capability or breaking existing contracts.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `workflow-core` | `0.1` | `0.2` |
+| `ai-skills-core` | `0.2` | `0.3` |
+
+Affected plugins:
+- `workflow-core`: `0.1` -> `0.2`
+  Reason: Verified Workflow now treats task keys as technical locators, keeps human labels separate, and selects release gates through frozen gate lifecycle and final-candidate evidence semantics.
+- `ai-skills-core`: `0.2` -> `0.3`
+  Reason: AI Skills Maintainer now owns central-plugin regression-bank triage, gate split/merge/retirement discipline, narrow-vs-broad release gate selection, and semantic task identity maintenance boundaries.
+
+Unchanged plugin versions: `writing-style 0.3`, `research-writing 0.1`, `presentations 0.3`, `scientific-visualization 0.1`, `web-development 0.1`, `statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Reviewed Handoff guidance now separates semantic machine task keys from human-readable labels and rejects title/display-name driven task identity.
+- Capability Gate policy now requires new regressions to map to existing gates first, with explicit split/merge/retirement handling only when capability, evidence, failure semantics, normal entry, or owner boundary differs.
+- Plugin release planning now defaults to cheap deterministic regression banks before expensive/fresh review and requires broad/full fallback gates for shared runtime, routing, Marketplace/profile, artifact-review, credential/paid, or cross-plugin behavior changes.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelogs:
+
+- `docs/plugin-changelogs/workflow-core.md`
+- `docs/plugin-changelogs/ai-skills-core.md`
+
+## 5.0.5 - 2026-09-15
+
+Repository `5.0.5` is a compatible release candidate for Clear Writing long-form scientific/technical rewrite convergence.
+
+Repository bump decision: PATCH
+Reason: this release improves an existing central plugin's production writing behavior without adding a new repository-level capability or breaking existing contracts.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `writing-style` | `0.2` | `0.3` |
+
+Affected plugins:
+- `writing-style`: `0.2` -> `0.3`
+  Reason: scientific-rewrite now records reader dispositions for every meaning, protects future-work modality, requires whole-document finish planning, and separates non-reader source-context metadata from reader-facing exact technical content.
+
+Unchanged plugin versions: `workflow-core 0.1`, `ai-skills-core 0.2`, `research-writing 0.1`, `presentations 0.3`, `scientific-visualization 0.1`, `web-development 0.1`, `statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Clear Writing's scientific-rewrite helper now validates a Reader Plan disposition for every meaning, including explicit handling for core content, supporting content, structured technical material, relocated reproduction details, source-author future work, wrappers, and irrelevant workflow traces.
+- Future-work and limitation content now carries completion, subject/voice, temporal, and epistemic modality through realization so source-author plans are not rewritten as current Executor actions.
+- Assembly packets now require whole-document finish metadata for purpose, reader entry, section order, transitions, voice constraints, and technical-detail placement before a candidate can validate.
+- Source-context exclusions now allow webpage/export wrappers, language-link counts, archive ids, and other non-reader packaging metadata to be omitted explicitly while preventing inline-critical technical identities from being hidden as metadata.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelog:
+
+- `docs/plugin-changelogs/writing-style.md`
 
 ## 5.0.4 - 2026-09-10
 

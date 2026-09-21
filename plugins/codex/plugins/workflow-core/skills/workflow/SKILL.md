@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-07-13
+last_reviewed: 2026-09-20
 profile_tags:
   - global
   - workflow
@@ -55,6 +55,18 @@ This skill owns process only:
 7. report precise completion, partial completion, failure, or blocking state.
 
 Specialist skills own technical rules for their domain. They may add stricter checks, commands, schemas, or quality gates. They must not weaken the global completion boundary. Verified Workflow must not override a specialist's technical instructions.
+
+## Task Identity And Labels
+
+Treat task keys as machine locators for branches, results paths, scheduled review bindings, and replay evidence. When Bridge Kit or Reviewed Handoff owns task creation, use its canonical task-key contract; new tasks use semantic `<scope-token>--<goal-token>` keys, while legacy numbered keys remain read/validate-only compatibility. Do not implement a local parser in this skill.
+
+Pick scope from the real owner of the work before choosing a key. Cross-repo or cross-plugin work should use a scope that names the boundary being coordinated, not a client title. Human-readable labels, sidebar titles, thread names, and plugin `display_name` values are presentation metadata; they must not generate, rewrite, or override the technical task key.
+
+## Release Gate Selection
+
+For plugin or workflow releases, identify gates from the frozen Plan and the repository policy rather than inventing a fixed count. Known regressions first map to existing gates and the cheap deterministic regression bank. Split or create a gate only when capability, evidence type, failure semantics, normal entry, or owner boundary genuinely differs.
+
+Run narrow gates only when the changed source area is explainably isolated and should-not-change evidence covers adjacent behavior. Escalate to broad/full gates when shared runtime/schema/generator, routing, marketplace/profile exposure, artifact review, credential/paid paths, or cross-plugin user-visible behavior changed. All release claims must be backed by the same final candidate, with grader/eval changes separated from product behavior changes.
 
 ## Workflow
 

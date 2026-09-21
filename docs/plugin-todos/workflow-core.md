@@ -59,8 +59,54 @@ project-specific context: Lucerna provider/Longleaf、Bobbio Zotero/Figma、Mica
 8. existing canonical local repo + unrelated dirty state 时复用 local source/clean worktree，不重复 clone/remap remote；
 9. docs-only/server-only/small nonvisual fix 不被强制进入 locale/catalog/provider/Figma/GPT Work/full E2E。
 
+
+### Approval-sensitive handoff should emit one bounded kickoff before execution
+status: DEFER_AFTER_056_WORKFLOW_CORE
+source: CUHK Date release-candidate staging incidents, 2026-09-21
+evidence: a frozen CUHK Date Goal and repo-level AGENTS explicitly authorized a staging-only workstation catalog service and Cloudflare tunnel work, but Codex/auto-review still stopped because repository text was treated as scope evidence rather than current-user-visible authorization. The user had to repeat the same approval in chat. Bridge Kit already has the correct runtime principle in its upfront-authorization guidance: the current user message may authorize a bounded frozen effect and the same effect should not be requested again later. Persistent Run additionally has a specialized kickoff generator, but ordinary approval-sensitive execution has no equally convenient handoff surface.
+target layer: workflow-core task authoring / execution handoff; consume Bridge runtime semantics rather than creating a second authorization engine.
+problem: complex deployment/provider/resource tasks can be perfectly planned yet still block late because the workflow hands Codex a Goal but does not hand the user a short, copy-ready current-session authorization for the foreseeable gated effects. Repo policy cannot safely impersonate current-user approval, but forcing the user to discover and rewrite the required authorization after Codex blocks wastes founder time.
+candidate action:
+- when a frozen workflow task contains concrete foreseeable approval-sensitive effects such as staging deploy, bounded external provider mutation, resource allocation, migration, private transfer or paid call, emit a **bounded execution kickoff draft** together with the handoff;
+- the kickoff names the frozen Goal/task, exact effects, target environment/provider/resource and explicit non-authorized boundaries; the user sends it once in the active Codex thread;
+- after that, the same frozen effect must not be requested again merely because a later stage reaches it;
+- do not require Planner/Critic just to create this kickoff for an already-frozen task; this is ordinary workflow handoff behavior;
+- do not turn repository AGENTS/Goal text itself into fake user authorization;
+- do not create a new authorization database/state machine/ledger.
+relationship to Persistent Run: do **not** rename Persistent Run. Persistent Run is an execution-lifetime capability: canonical tmux backend, stable run/session key, disconnect survival, heartbeat/stage/checkpoint/resume semantics and persistent recovery. Its kickoff is one specialized use of the same general authorization pattern. Ordinary tasks need only the bounded authorization handoff; they do not need tmux/persistence machinery.
+promotion gate:
+1. a fixture frozen deployment task causes workflow-core to produce a copy-ready bounded kickoff before execution;
+2. sending that kickoff allows the same declared effect to proceed without a second approval request later in the task;
+3. a genuinely new provider/resource/purpose still triggers a new Human Gate;
+4. no Persistent Run/tmux contract is introduced for an ordinary live task;
+5. no Planner/Critic round is required solely to render the kickoff.
+
+### Least-privilege equivalent recovery before Human Gate
+status: ABSORB_IN_056_NOW / V6_BOUNDED_AMENDMENT_V0_4
+source: CUHK Date catalog staging incidents, 2026-09-21
+evidence: after a staging workstation catalog architecture was approved, Codex selected a named Cloudflare Tunnel + cuhkdate.com DNS route. The existing durable Cloudflare credential correctly continued to deploy the established staging Workers but lacked the extra Tunnel Write / DNS Edit permissions needed only by that chosen route. Codex repeatedly reported a credential blocker and asked the founder to broaden the token. The same frozen staging goal could instead be met by an already-authorized Cloudflare Quick Tunnel with the existing application Bearer-secret boundary, avoiding new founder credential maintenance. This was an implementation-route problem, not a missing product decision.
+target layer: workflow-core Human-Gate eligibility / recovery routing.
+problem: current Human-Gate triage distinguishes HUMAN_ONLY from AGENT_RESOLVABLE, but it does not explicitly require the executor/controller to ask whether the blocker is caused by an unnecessarily privileged implementation choice. That permits “preferred route lacks permission -> ask user for more privilege” even when an equivalent lower-privilege route already satisfies the frozen completion contract.
+candidate action:
+- before requesting a new credential scope, provider permission, paid resource or environment mutation, classify the blocker precisely as:
+  - credential genuinely missing/expired/revoked for the already-required route;
+  - credential valid but under-scoped only for the executor's chosen implementation;
+  - optional/preferred implementation unavailable;
+  - no equivalent route exists under the frozen Goal;
+- if an **already-authorized, lower-privilege route is genuinely equivalent under the frozen completion definition**, use it automatically and continue;
+- equivalence must preserve the Goal's security/privacy boundary, product behavior, evidence quality and stated quality bar; a degraded/manual/fallback path is not equivalent merely because it avoids asking the user;
+- prefer the route with the least new privilege/provider/account mutation when multiple equivalent routes exist;
+- only surface a Human Gate when no equivalent authorized route exists, or when switching routes changes provider/data/security/product semantics;
+- final blocker reports must say whether the credential is missing, expired, revoked, or merely lacks permission required by one optional route; never collapse these into “credential missing”.
+promotion gate:
+1. named-tunnel-like fixture lacks one optional permission while an equivalent lower-privilege staging route exists -> no Human Gate, workflow continues;
+2. equivalent route would lower the frozen security/quality requirement -> workflow refuses substitution and asks for the bounded decision;
+3. truly expired/revoked credential for the only valid route -> Human Gate remains;
+4. repeated same-class blocker after the rule is active triggers the existing repeat-failure circuit breaker and consumer-path diagnosis rather than another identical user request.
+
+
 ### Task-local prohibitions must expire with their task instead of becoming accidental global policy
-status: NEW
+status: DEFER_AFTER_056_WORKFLOW_CORE
 source: Lucerna 01037 product-polish continuation, 2026-09-17
 evidence: the current objective explicitly required creating `01037_product_polish_closure` task/result artifacts, but execution was repeatedly blocked because a prior task's local instruction said not to create a successor Goal; the user had to explicitly authorize that the current objective superseded the stale old boundary
 problem: Historical task-local prohibitions are being treated as indefinitely persistent safety constraints even after the task that introduced them has ended and a newer user-approved objective explicitly requires the opposite action. This turns stale context into a false Human Gate, forces the user to resolve non-substantive instruction history, and can cause repeated approval loops even when the current task scope is clear.

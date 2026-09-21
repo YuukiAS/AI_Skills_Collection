@@ -2,12 +2,15 @@ from __future__ import annotations
 
 import io
 import json
+import contextlib
 import os
+import signal
 import stat
 import subprocess
 import sys
 import tarfile
 import tempfile
+import time
 import unittest
 from contextlib import redirect_stderr
 from pathlib import Path
@@ -44,6 +47,21 @@ def make_repo(marketplace_plugin: dict | None = None) -> tuple[tempfile.Temporar
     run(["git", "-c", "user.name=Test", "-c", "user.email=test@example.com", "commit", "-m", "fixture"], root)
     commit = run(["git", "rev-parse", "HEAD"], root).stdout.strip()
     return tmp, root, commit
+
+
+def process_is_running(pid: int) -> bool:
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    proc_stat = Path(f"/proc/{pid}/stat")
+    if proc_stat.exists():
+        try:
+            if proc_stat.read_text(encoding="utf-8").split()[2] == "Z":
+                return False
+        except (OSError, IndexError):
+            pass
+    return True
 
 
 class CandidateSourceTests(unittest.TestCase):
@@ -207,6 +225,12 @@ class RuntimeTests(unittest.TestCase):
 
 
 class ReplayMechanismTests(unittest.TestCase):
+    def make_executable(self, root: Path, script: str) -> Path:
+        path = root / "codex"
+        path.write_text(script, encoding="utf-8")
+        path.chmod(path.stat().st_mode | stat.S_IXUSR)
+        return path
+
     def test_stale_cleanup_only_selects_fixed_candidate_namespace(self) -> None:
         payload = {
             "plugins": [
@@ -461,25 +485,180 @@ class ReplayMechanismTests(unittest.TestCase):
         self.assertEqual(stderr_files[0].read_text(encoding="utf-8"), child_stderr)
         self.assertEqual(json.loads(add_payload_files[0].read_text(encoding="utf-8")), {})
 
-    def test_child_exec_enable_config_uses_unquoted_plugin_id(self) -> None:
-        captured: dict[str, list[str]] = {}
-
-        def fake_run_command(args: list[str], **_kwargs):
-            captured["args"] = args
-            return replay.CommandResult(tuple(args), 0, "", "")
-
-        with mock.patch.object(replay, "run_command", side_effect=fake_run_command):
-            replay.run_child_exec(
-                Path("/repo/.local-runtime/codex/0.153.4/bin/codex"),
-                Path("/repo/.local-runtime/candidate-marketplace"),
-                "writing-style@ai-skills-candidate",
-                Path("/repo/workspace"),
-                Path("/repo/workspace/outputs"),
-                "Rewrite this.",
+    def test_child_exec_normal_completion_persists_streams(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workspace = root / "workspace"
+            output_dir = workspace / "outputs"
+            workspace.mkdir()
+            output_dir.mkdir()
+            stdout_path = root / "run" / "child.stdout.jsonl"
+            stderr_path = root / "run" / "child.stderr"
+            codex = self.make_executable(
+                root,
+                "#!/usr/bin/env python3\n"
+                "import sys\n"
+                "sys.stdin.read()\n"
+                "print('stdout line', flush=True)\n"
+                "print('stderr line', file=sys.stderr, flush=True)\n",
             )
 
-        self.assertIn("plugins.writing-style@ai-skills-candidate.enabled=true", captured["args"])
-        self.assertNotIn('plugins."writing-style@ai-skills-candidate".enabled=true', captured["args"])
+            result = replay.run_child_exec(
+                codex,
+                root / "marketplace",
+                "writing-style@ai-skills-candidate",
+                workspace,
+                output_dir,
+                "prompt text",
+                stdout_path=stdout_path,
+                stderr_path=stderr_path,
+                timeout_seconds=5,
+                terminate_grace_seconds=0.1,
+            )
+
+            self.assertEqual(result.returncode, 0)
+            self.assertEqual(result.stdout, "stdout line\n")
+            self.assertEqual(result.stderr, "stderr line\n")
+            self.assertEqual(stdout_path.read_text(encoding="utf-8"), "stdout line\n")
+            self.assertEqual(stderr_path.read_text(encoding="utf-8"), "stderr line\n")
+
+    def test_child_exec_timeout_preserves_streams_and_kills_process_group(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workspace = root / "workspace"
+            output_dir = workspace / "outputs"
+            workspace.mkdir()
+            output_dir.mkdir()
+            stdout_path = root / "run" / "child.stdout.jsonl"
+            stderr_path = root / "run" / "child.stderr"
+            run_json = root / "run" / "run.json"
+            pid_path = root / "descendant.pid"
+            installed = root / "plugins" / "cache" / "ai-skills-candidate" / "writing-style" / "0.1"
+            installed.mkdir(parents=True)
+            codex = self.make_executable(
+                root,
+                "#!/usr/bin/env python3\n"
+                "import json, pathlib, subprocess, sys, time\n"
+                f"pid_path = pathlib.Path({str(pid_path)!r})\n"
+                "sys.stdin.read()\n"
+                "args = sys.argv[1:]\n"
+                "output_dir = pathlib.Path(args[args.index('--add-dir') + 1])\n"
+                "output_dir.mkdir(parents=True, exist_ok=True)\n"
+                "(output_dir / 'candidate.md').write_text('partial output\\n', encoding='utf-8')\n"
+                "child = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(60)'])\n"
+                "pid_path.write_text(str(child.pid), encoding='utf-8')\n"
+                f"command = 'cat {installed}/skills/zh/SKILL.md'\n"
+                "event = {'type': 'item.completed', 'item': {'type': 'command_execution', 'command': command}}\n"
+                "print(json.dumps(event), flush=True)\n"
+                "print('diagnostic stderr', file=sys.stderr, flush=True)\n"
+                "while True:\n"
+                "    time.sleep(1)\n",
+            )
+            try:
+                with self.assertRaisesRegex(replay.ReplayError, "timed out"):
+                    replay.run_child_exec(
+                        codex,
+                        root / "marketplace",
+                        "writing-style@ai-skills-candidate",
+                        workspace,
+                        output_dir,
+                        "prompt text",
+                        stdout_path=stdout_path,
+                        stderr_path=stderr_path,
+                        timeout_seconds=0.5,
+                        terminate_grace_seconds=0.2,
+                    )
+
+                stdout = stdout_path.read_text(encoding="utf-8")
+                self.assertIn(f"{installed}/skills/zh/SKILL.md", stdout)
+                self.assertEqual(stderr_path.read_text(encoding="utf-8"), "diagnostic stderr\n")
+                self.assertEqual((output_dir / "candidate.md").read_text(encoding="utf-8"), "partial output\n")
+                self.assertFalse(run_json.exists())
+                descendant_pid = int(pid_path.read_text(encoding="utf-8"))
+                deadline = time.time() + 3
+                while time.time() < deadline and process_is_running(descendant_pid):
+                    time.sleep(0.05)
+                self.assertFalse(process_is_running(descendant_pid))
+            finally:
+                if pid_path.exists():
+                    with contextlib.suppress(ProcessLookupError):
+                        os.kill(int(pid_path.read_text(encoding="utf-8")), signal.SIGKILL)
+
+    def test_child_exec_timeout_from_run_replay_triggers_cleanup(self) -> None:
+        tmp, root, commit = make_repo()
+        self.addCleanup(tmp.cleanup)
+        (root / "task.md").write_text("Do the task.\n", encoding="utf-8")
+        (root / "input.md").write_text("Input.\n", encoding="utf-8")
+        installed = root / ".local-runtime" / "installed-candidate"
+        installed.mkdir(parents=True)
+        remove_calls: list[str] = []
+
+        def fake_stage(_root: Path, _candidate: replay.CandidatePlugin, run_dir: Path) -> Path:
+            marketplace = run_dir / "marketplace"
+            marketplace.mkdir(parents=True)
+            return marketplace
+
+        def fake_run_codex_json(_codex: Path, args: list[str], **_kwargs):
+            if args[:3] == ["plugin", "list", "--json"]:
+                return {"plugins": [{"pluginId": "writing-style@yuukias-ai-skills", "name": "writing-style", "enabled": True}]}
+            return None
+
+        with mock.patch.object(replay, "ensure_runtime_available", return_value={"version": replay.EXPECTED_CODEX_VERSION}):
+            with mock.patch.object(replay, "safe_stage_candidate", side_effect=fake_stage):
+                with mock.patch.object(replay, "run_codex_json", side_effect=fake_run_codex_json):
+                    with mock.patch.object(
+                        replay,
+                        "add_candidate_plugin",
+                        return_value=("writing-style@ai-skills-candidate", str(installed), {}),
+                    ):
+                        with mock.patch.object(
+                            replay,
+                            "run_child_exec",
+                            side_effect=replay.ReplayError("candidate child exec timed out after 0.5s"),
+                        ):
+                            with mock.patch.object(
+                                replay,
+                                "remove_candidate_plugin",
+                                side_effect=lambda _c, plugin_id: remove_calls.append(plugin_id),
+                            ):
+                                with self.assertRaisesRegex(replay.ReplayError, "timed out"):
+                                    replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
+        self.assertEqual(remove_calls, ["writing-style@ai-skills-candidate"])
+        run_json_files = list((root / ".local-runtime" / "candidate-plugin-replay" / "runs").glob("*/run.json"))
+        self.assertEqual(run_json_files, [])
+
+    def test_child_exec_enable_config_uses_unquoted_plugin_id(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workspace = root / "workspace"
+            output_dir = workspace / "outputs"
+            workspace.mkdir()
+            output_dir.mkdir()
+            args_file = root / "args.json"
+            codex = self.make_executable(
+                root,
+                "#!/usr/bin/env python3\n"
+                "import json, pathlib, sys\n"
+                f"pathlib.Path({str(args_file)!r}).write_text(json.dumps(sys.argv[1:]), encoding='utf-8')\n"
+                "sys.stdin.read()\n",
+            )
+            replay.run_child_exec(
+                codex,
+                root / "candidate-marketplace",
+                "writing-style@ai-skills-candidate",
+                workspace,
+                output_dir,
+                "Rewrite this.",
+                stdout_path=root / "run" / "child.stdout.jsonl",
+                stderr_path=root / "run" / "child.stderr",
+                timeout_seconds=5,
+                terminate_grace_seconds=0.1,
+            )
+
+            captured = json.loads(args_file.read_text(encoding="utf-8"))
+
+        self.assertIn("plugins.writing-style@ai-skills-candidate.enabled=true", captured)
+        self.assertNotIn('plugins."writing-style@ai-skills-candidate".enabled=true', captured)
 
 
 if __name__ == "__main__":

@@ -116,11 +116,15 @@ The Meaning Map is meaning-centric and source-auditable. It must include:
 - stable source anchors with hashes;
 - meanings with `meaning_id`, `kind`, `normalized_meaning`, source anchors, and
   exact items where needed;
+- `source_context_items` for source packaging, workflow debris, navigation
+  wrappers, alternate-language labels, or other source authority that is useful
+  for judging relevance but should not become reader-facing content;
 - relations when one meaning depends on, qualifies, compares with, or limits
   another;
 - exact items whose literal identity matters;
 - bidirectional coverage: every substantive source anchor has meaning
-  ownership, and every meaning has source authority.
+  ownership or explicit source-context exclusion, and every meaning has source
+  authority.
 
 Missing or malformed semantic extraction is a failure/repair condition. The
 helper must never fill `normalized_meaning` from source excerpts or continue
@@ -133,9 +137,46 @@ ownership, and information shape. It must not contain raw source prose, source
 excerpts, target rewrite sentences, Latin-span QA classifications, seed
 templates, or validator language.
 
+If the Meaning Map contains source-context exclusions, the Reader Plan must
+list their IDs in `excluded_source_context_item_ids`. This makes reader-facing
+omission explicit and auditable instead of silently dropping source spans.
+
 Mechanical size limits may only request `NEEDS_SEMANTIC_SPLIT`; they must not
 become the production heavy planner. Fixed `4 paragraphs / ~2800 chars`
 chunking is not a valid final heavy-route boundary.
+
+The Reader Plan is also the reader-disposition contract. Every retained,
+relocated, structured, or omitted obligation needs a source role and a reader
+reason. Use the existing plan/bundle structure; do not create a parallel
+persistent ledger. Valid disposition families are:
+
+- `CORE_INLINE` for central claims, definitions, mechanisms, and evidence;
+- `SUPPORT_INLINE` for needed conditions, caveats, comparisons, and context;
+- `STRUCTURED` for formulas, tables, citations, legitimate code, commands,
+  APIs, config, or identifiers that must appear as structured objects;
+- `RELOCATE` for needed reproducibility details that belong in a technical note
+  or appendix rather than the main argument;
+- `SOURCE_FUTURE_WORK` for source-author future work, limitations, or proposals
+  whose subject, tense, completion state, and uncertainty must be preserved;
+- `DROP_WRAPPER` for navigation, export UI, license debris, duplicated links, or
+  source packaging that is not part of the reader-facing content;
+- `DROP_IRRELEVANT_TRACE` for task, review, branch, commit, CI, cache, or
+  workflow traces that only describe how a prior artifact was produced.
+
+Citation identity is not the same as raw citation markup. If the source comes
+from a wiki, scraped web page, exported Markdown, or HTML document, templates
+such as `{{sfnp|...}}`, `{{harvtxt|...}}`, `{{cite ...}}`, `<ref>...</ref>`,
+`<references/>`, and similar source-site citation syntax must be classified as
+wrapper syntax unless the user explicitly asks for source markup preservation.
+Keep the cited authors, years, titles, or source note when they support a
+reader-facing claim, but realize them as normal prose, a bracketed citation, or
+a short references/source-note section. Do not emit the raw template or tag in a
+standalone candidate.
+
+`SOURCE_FUTURE_WORK` must carry modality information: who owns the future work,
+whether it is done or proposed, its temporal status, and its epistemic status.
+Do not turn source-author plans or limitations into current Executor actions or
+completed findings.
 
 ## Realization Packet
 
@@ -153,6 +194,26 @@ It must not contain raw source paragraphs, source quotes, source excerpts,
 source tails/previews, old candidates, manual reference text, Latin-span
 inventories, seed rewrite templates, or self-audit ledgers as drafting input.
 
+Formula rendering is a production obligation, not a cosmetic choice. When a
+source formula is reader-facing, realize it as renderable Markdown/LaTeX math
+(`$...$` or `$$...$$`) with nearby Chinese explanation. Do not place formulas
+inside fenced code blocks, inline code spans, `text` fences, quote blocks,
+screenshots, or token inventories merely to preserve characters. A
+formula-like code block or inline-code span is a candidate-representation
+failure even when the literal symbols are present. Use normal LaTeX math
+notation for operators and spacing, such as `\log`, `\sin`, `\cos`, `\exp`,
+`\min`, `\max`, `\arg\min`, `\arg\max`, `\Pr`, and `\mathbb{E}`. Big-O and
+complexity expressions such as `O(n log n)`, `O(N log N)`, and `(N/2) log_2 N`
+should become `$O(n \log n)$`, `$O(N \log N)$`, and
+`$(N/2) \log_2 N$`, not inline code and not `$O(n log n)$`, because the latter
+renders `log` as ordinary adjacent variables.
+
+The packet must explicitly preserve modality. It must tell the writer to keep
+completion status, subject/voice, temporal status, and epistemic status from the
+Meaning Map and Reader Plan. This is especially important for future work,
+limitations, negative results, author proposals, conditional statements, and
+unverified observations.
+
 ## Assembly
 
 Assembly may consume Reader Plan, realized bundles, meaning ownership, bundle
@@ -163,6 +224,12 @@ tables, or lists near their explanation.
 
 Assembly must not receive the raw source as drafting material and must not
 become a second whole-document source-conditioned writer.
+
+Assembly owns whole-document finish. Before accepting a final candidate, it must
+state the document purpose, reader entry, section-order rationale, transition
+plan, voice constraints, and technical-detail placement. The candidate should
+read as a standalone scientific or technical document, not a memo about a source
+file, task branch, review process, or next execution step.
 
 ## Repair
 
@@ -180,6 +247,14 @@ It must not contain source prose, source quotations, source sentences, or a
 target rewrite sentence. If the Meaning Map is wrong, repair the Meaning Map
 first and update the Reader Plan before re-realization.
 
+The semantic audit must check disposition as well as proposition fidelity. It
+must verify that each source obligation is preserved, summarized, relocated, or
+omitted according to the Reader Plan, and that no critical disposition finding
+remains unresolved. This prevents two opposite failures: preserving every
+internal trace for "fidelity", or deleting legitimate code, formulas,
+reproducibility details, citations, limitations, or future work for
+"cleanliness".
+
 ## Exact Items
 
 An ordinary Latin technical word is not exact-protected merely because it is
@@ -188,6 +263,13 @@ tokens, paths, commands, config keys, code identifiers, formal algorithm/model
 names, datasets, metrics, packages, APIs, and user-explicit protected spans.
 Ordinary reasoning, comparison, qualification, and transition language remains
 eligible for natural Chinese realization.
+
+For citations, exact preservation protects citation identity and attribution,
+not source-platform syntax. Wiki templates, HTML reference tags, scraped
+footnote wrappers, and citation parser artifacts are not reader-facing exact
+items. Convert them to readable citation wording or a compact reference/source
+note, or omit them when the Reader Plan classifies them only as wrapper
+metadata.
 
 ## Reader-Facing Relevance Filter
 
@@ -200,6 +282,21 @@ formula identities when they support the scientific/technical argument or
 reproducibility contract. For example, a source statement that an experiment
 uses `scripts/run_fedfisher.sh` and `configs/mm_fedfisher.yaml` may remain in a
 short reproducibility paragraph.
+
+Formula identity means preserving the mathematical relationship in reader-facing
+math, not preserving the source's plain-text container. If the source expresses
+DFT, loss functions, matrix equations, Big-O/complexity statements, or other
+formula-like content in plain text, inline code, or a wiki-style block, convert
+the relationship to renderable math and explain the symbols. Use code fences and
+inline code only for real code, commands, APIs, configuration, or machine-facing
+tokens, not mathematical notation.
+
+Reader-facing exact verification checks exact items required by meanings or
+Reader Plan bundles. Exact items that appear only inside excluded
+`source_context_items` are not required in the final candidate, but an
+inline-critical exact item must not be hidden this way. If a method name, model,
+dataset, API, citation, metric, path, command, or formula is needed to
+understand or reproduce the technical point, keep it reader-facing.
 
 Do not put these in the main reader-facing candidate unless the user explicitly
 asks for an audit log or repository handoff:
@@ -214,6 +311,12 @@ asks for an audit log or repository handoff:
 - statements such as "this round is ready to close", "waiting for external
   planner review", or "the result has passed independent planner review" when
   they are process state rather than scientific content.
+- webpage/export wrappers such as language-link counts, archive ids,
+  alternate-language labels, navigation labels, or scraped UI noise when they do
+  not help a standalone reader understand the technical content.
+- raw citation wrappers from source platforms, including wiki templates and HTML
+  reference tags, unless the user explicitly requested markup/source comparison.
+  Preserve the citation's useful identity, not the platform syntax.
 
 If the source mixes a scientific report with workflow/audit metadata, use the
 metadata only to avoid false claims and to understand artifact authority. The
@@ -256,8 +359,15 @@ This route can claim process completion only when the stage package validates:
 - ordinary `writing-style` route selection chose `scientific-rewrite`;
 - no raw-source drafting leakage into realization, repair, or assembly;
 - complete source-anchor/meaning ownership;
+- explicit source-context exclusion for non-reader packaging metadata;
 - valid Reader Plan bundle ownership;
-- exact items preserved;
+- reader-facing exact items preserved;
+- formulas and complexity expressions are renderable math, not fenced `text`,
+  code blocks, or inline code spans;
+- citations are reader-facing citation text, bibliography/source notes, or
+  intentional omissions according to the Reader Plan; raw wiki/HTML citation
+  markup such as `{{...}}`, `<ref>...</ref>`, and `<references/>` is absent from
+  standalone candidates unless explicitly requested by the user;
 - reader-facing candidate has no internal workflow / CI / commit / task-path
   leakage;
 - standalone reader-facing candidate has no source-process framing such as

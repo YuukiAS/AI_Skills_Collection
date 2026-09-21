@@ -27,6 +27,25 @@ REALIZATION_PACKET_SCHEMA = "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1"
 REPAIR_PACKET_SCHEMA = "SCIENTIFIC_REWRITE_REPAIR_PACKET_V1"
 ASSEMBLY_PACKET_SCHEMA = "SCIENTIFIC_REWRITE_ASSEMBLY_PACKET_V1"
 SEMANTIC_AUDIT_SCHEMA = "SCIENTIFIC_REWRITE_SEMANTIC_AUDIT_V1"
+SOURCE_CONTEXT_EXCLUSION_DECISIONS = {
+    "exclude_from_reader_facing_candidate",
+    "retain_only_if_user_requests_audit",
+}
+READER_DISPOSITIONS = {
+    "CORE_INLINE",
+    "SUPPORT_INLINE",
+    "STRUCTURED",
+    "RELOCATE",
+    "SOURCE_FUTURE_WORK",
+    "DROP_WRAPPER",
+    "DROP_IRRELEVANT_TRACE",
+}
+MODALITY_FIELDS = {
+    "completion_status",
+    "subject_voice",
+    "temporal_status",
+    "epistemic_status",
+}
 
 RAW_SOURCE_KEYS = {
     "raw_source",
@@ -147,6 +166,14 @@ SOURCE_PROCESS_ALLOWED_CONTEXT_PATTERNS = [
     r"溯源",
     r"审计",
 ]
+RAW_CITATION_MARKUP_PATTERNS = [
+    ("wiki_citation_template", r"\{\{\s*(?:sfn|sfnp|harvtxt|cite(?:[_\s|]|$)|citation(?:[_\s|]|$))[^{}\n]*(?:\{\{[^{}\n]*\}\}[^{}\n]*)*\}\}"),
+    ("html_reference_tag", r"<ref\b[\s\S]*?</ref\s*>|<references\s*/?>"),
+]
+FORMULA_RENDERING_PATTERNS = [
+    ("inline_code_big_o", r"`[^`\n]*\bO\s*\([^`\n]*`"),
+    ("plain_text_big_o_log", r"\bO\s*\([^)\n]*\blog\b[^)\n]*\)"),
+]
 
 
 class ValidationError(RuntimeError):
@@ -242,6 +269,13 @@ def _strip_code_spans(text: str) -> str:
     return re.sub(r"`[^`\n]*`", "", text)
 
 
+def _strip_markdown_math(text: str) -> str:
+    text = re.sub(r"\$\$[\s\S]*?\$\$", "", text)
+    text = re.sub(r"\$[^$\n]+\$", "", text)
+    text = re.sub(r"\\\[[\s\S]*?\\\]", "", text)
+    return re.sub(r"\\\([\s\S]*?\\\)", "", text)
+
+
 def find_source_process_framing(text: str, *, task_context: str = "") -> list[dict[str, str]]:
     if any(re.search(pattern, task_context, flags=re.IGNORECASE) for pattern in SOURCE_PROCESS_ALLOWED_CONTEXT_PATTERNS):
         return []
@@ -260,6 +294,46 @@ def validate_standalone_reader_frame(candidate: str, *, task_context: str = "") 
         kinds = ", ".join(finding["kind"] for finding in findings)
         raise ValidationError("reader-facing source-process framing: " + kinds)
     return {"ok": True, "source_process_frame_count": 0}
+
+
+def find_raw_citation_markup(text: str, *, task_context: str = "") -> list[dict[str, str]]:
+    if any(re.search(pattern, task_context, flags=re.IGNORECASE) for pattern in SOURCE_PROCESS_ALLOWED_CONTEXT_PATTERNS):
+        return []
+    body = _strip_code_spans(text)
+    findings = []
+    for name, pattern in RAW_CITATION_MARKUP_PATTERNS:
+        match = re.search(pattern, body, flags=re.IGNORECASE)
+        if match:
+            findings.append({"kind": name, "literal": match.group(0)})
+    return findings
+
+
+def validate_reader_facing_citation_markup(candidate: str, *, task_context: str = "") -> dict[str, Any]:
+    findings = find_raw_citation_markup(candidate, task_context=task_context)
+    if findings:
+        kinds = ", ".join(finding["kind"] for finding in findings)
+        raise ValidationError("reader-facing raw citation markup: " + kinds)
+    return {"ok": True, "raw_citation_markup_count": 0}
+
+
+def find_formula_rendering_issues(text: str) -> list[dict[str, str]]:
+    findings = []
+    inline_code = re.search(FORMULA_RENDERING_PATTERNS[0][1], text)
+    if inline_code:
+        findings.append({"kind": FORMULA_RENDERING_PATTERNS[0][0], "literal": inline_code.group(0)})
+    body = _strip_code_spans(_strip_markdown_math(text))
+    plain_big_o = re.search(FORMULA_RENDERING_PATTERNS[1][1], body)
+    if plain_big_o:
+        findings.append({"kind": FORMULA_RENDERING_PATTERNS[1][0], "literal": plain_big_o.group(0)})
+    return findings
+
+
+def validate_reader_facing_formula_rendering(candidate: str) -> dict[str, Any]:
+    findings = find_formula_rendering_issues(candidate)
+    if findings:
+        kinds = ", ".join(finding["kind"] for finding in findings)
+        raise ValidationError("reader-facing formula rendering issue: " + kinds)
+    return {"ok": True, "formula_rendering_issue_count": 0}
 
 
 def classify_writing_style_route(prompt: str, source: str) -> dict[str, Any]:
@@ -429,6 +503,39 @@ def validate_meaning_map(payload: dict[str, Any], source: str) -> dict[str, Any]
     exact_by_id = {str(item.get("exact_item_id")): item for item in exact_items}
     for item in exact_items:
         validate_exact_item(item)
+    source_context_items = payload.get("source_context_items") or []
+    source_context_covered: set[str] = set()
+    source_context_ids: set[str] = set()
+    for context_item in source_context_items:
+        assert_no_raw_source_fields(context_item, context="source context item")
+        context_id = str(context_item.get("source_context_item_id", ""))
+        if not context_id:
+            raise ValidationError("source context item missing source_context_item_id")
+        if context_id in source_context_ids:
+            raise ValidationError("source context item ids must be unique")
+        source_context_ids.add(context_id)
+        decision = str(context_item.get("reader_relevance_decision", ""))
+        if decision not in SOURCE_CONTEXT_EXCLUSION_DECISIONS:
+            raise ValidationError("source context item requires reader relevance exclusion decision")
+        if not str(context_item.get("rationale", "")).strip():
+            raise ValidationError("source context item requires rationale")
+        source_anchor_ids = [str(item) for item in context_item.get("source_anchor_ids") or []]
+        if not source_anchor_ids:
+            raise ValidationError(f"source context item lacks source authority: {context_id}")
+        for anchor_id in source_anchor_ids:
+            if anchor_id not in anchor_by_id:
+                raise ValidationError(f"source context item references unknown source anchor: {anchor_id}")
+            source_context_covered.add(anchor_id)
+        hidden_inline = []
+        for exact_id in context_item.get("exact_item_ids") or []:
+            exact_id = str(exact_id)
+            if exact_id not in exact_by_id:
+                raise ValidationError(f"source context item references unknown exact item: {exact_id}")
+            exact_item = exact_by_id[exact_id]
+            if str(exact_item.get("location_role", "inline-critical")) == "inline-critical":
+                hidden_inline.append(exact_id)
+        if hidden_inline:
+            raise ValidationError("reader relevance cannot exclude inline-critical exact items: " + ", ".join(hidden_inline))
     covered_anchors: set[str] = set()
     for meaning in meanings:
         meaning_id = str(meaning.get("meaning_id", ""))
@@ -450,7 +557,7 @@ def validate_meaning_map(payload: dict[str, Any], source: str) -> dict[str, Any]
         for exact_id in meaning.get("exact_item_ids") or []:
             if str(exact_id) not in exact_by_id:
                 raise ValidationError(f"meaning references unknown exact item: {exact_id}")
-    missing = sorted(set(anchor_by_id) - covered_anchors)
+    missing = sorted(set(anchor_by_id) - covered_anchors - source_context_covered)
     if missing:
         raise ValidationError("source anchors lack meaning ownership: " + ", ".join(missing))
     return {
@@ -458,6 +565,7 @@ def validate_meaning_map(payload: dict[str, Any], source: str) -> dict[str, Any]
         "source_anchor_count": len(anchors),
         "meaning_count": len(meanings),
         "exact_item_count": len(exact_items),
+        "source_context_item_count": len(source_context_items),
     }
 
 
@@ -467,6 +575,20 @@ def validate_reader_plan(payload: dict[str, Any], meaning_map: dict[str, Any]) -
     assert_no_raw_source_fields(payload, context="Reader Plan")
     meaning_ids = {str(item.get("meaning_id")) for item in meaning_map.get("meanings", [])}
     exact_ids = {str(item.get("exact_item_id")) for item in meaning_map.get("exact_items", [])}
+    source_context_items = meaning_map.get("source_context_items") or []
+    source_context_ids = {str(item.get("source_context_item_id")) for item in source_context_items}
+    excluded_source_context_ids = [str(item) for item in payload.get("excluded_source_context_item_ids") or []]
+    for context_id in excluded_source_context_ids:
+        if context_id not in source_context_ids:
+            raise ValidationError(f"Reader Plan excludes unknown source context item: {context_id}")
+    required_exclusions = {
+        str(item.get("source_context_item_id"))
+        for item in source_context_items
+        if str(item.get("reader_relevance_decision")) == "exclude_from_reader_facing_candidate"
+    }
+    missing_exclusions = sorted(required_exclusions - set(excluded_source_context_ids))
+    if missing_exclusions:
+        raise ValidationError("Reader Plan omits source context exclusions: " + ", ".join(missing_exclusions))
     bundles = payload.get("bundles")
     if not isinstance(bundles, list) or not bundles:
         raise ValidationError("Reader Plan requires bundles")
@@ -481,10 +603,40 @@ def validate_reader_plan(payload: dict[str, Any], meaning_map: dict[str, Any]) -
     if "max_chars" in payload or "max_paragraphs" in payload:
         raise ValidationError("mechanical size limits may only request NEEDS_SEMANTIC_SPLIT")
     owned: set[str] = set()
+    disposition_by_meaning: dict[str, dict[str, Any]] = {}
     for bundle in bundles:
         owned_meaning_ids = [str(item) for item in bundle.get("owned_meaning_ids") or []]
         if not owned_meaning_ids:
             raise ValidationError(f"Reader Plan bundle lacks owned meanings: {bundle.get('bundle_id')}")
+        dispositions = bundle.get("reader_dispositions")
+        if not isinstance(dispositions, list) or not dispositions:
+            raise ValidationError(f"Reader Plan bundle lacks reader dispositions: {bundle.get('bundle_id')}")
+        for disposition in dispositions:
+            meaning_id = str(disposition.get("meaning_id", ""))
+            if meaning_id in disposition_by_meaning:
+                raise ValidationError(f"Reader Plan duplicates reader disposition: {meaning_id}")
+            if meaning_id not in owned_meaning_ids:
+                raise ValidationError(f"Reader Plan disposition is not owned by bundle: {meaning_id}")
+            disposition_kind = str(disposition.get("disposition", ""))
+            if disposition_kind not in READER_DISPOSITIONS:
+                raise ValidationError(f"unsupported reader disposition: {disposition_kind}")
+            if not str(disposition.get("source_role", "")).strip():
+                raise ValidationError(f"Reader Plan disposition lacks source role: {meaning_id}")
+            if not str(disposition.get("reader_reason", "")).strip():
+                raise ValidationError(f"Reader Plan disposition lacks reader reason: {meaning_id}")
+            if disposition_kind == "SOURCE_FUTURE_WORK":
+                modality = disposition.get("modality")
+                if not isinstance(modality, dict):
+                    raise ValidationError(f"SOURCE_FUTURE_WORK requires modality record: {meaning_id}")
+                missing_modality = sorted(field for field in MODALITY_FIELDS if not str(modality.get(field, "")).strip())
+                if missing_modality:
+                    raise ValidationError(
+                        f"SOURCE_FUTURE_WORK missing modality fields for {meaning_id}: "
+                        + ", ".join(missing_modality)
+                    )
+            if disposition_kind.startswith("DROP_") and disposition.get("required_in_candidate") is True:
+                raise ValidationError(f"drop disposition cannot require candidate inclusion: {meaning_id}")
+            disposition_by_meaning[meaning_id] = disposition
         for meaning_id in owned_meaning_ids:
             if meaning_id not in meaning_ids:
                 raise ValidationError(f"Reader Plan references unknown meaning: {meaning_id}")
@@ -495,7 +647,16 @@ def validate_reader_plan(payload: dict[str, Any], meaning_map: dict[str, Any]) -
     missing = sorted(meaning_ids - owned)
     if missing:
         raise ValidationError("Reader Plan omits meanings: " + ", ".join(missing))
-    return {"ok": True, "bundle_count": len(bundles), "owned_meaning_count": len(owned)}
+    missing_dispositions = sorted(meaning_ids - set(disposition_by_meaning))
+    if missing_dispositions:
+        raise ValidationError("Reader Plan omits reader dispositions: " + ", ".join(missing_dispositions))
+    return {
+        "ok": True,
+        "bundle_count": len(bundles),
+        "owned_meaning_count": len(owned),
+        "reader_disposition_count": len(disposition_by_meaning),
+        "excluded_source_context_item_count": len(excluded_source_context_ids),
+    }
 
 
 def validate_realization_packet(payload: dict[str, Any]) -> dict[str, Any]:
@@ -504,6 +665,18 @@ def validate_realization_packet(payload: dict[str, Any]) -> dict[str, Any]:
     assert_no_raw_source_fields(payload, context="REALIZE_MEANING packet")
     if not payload.get("bundle_id") or not payload.get("meaning_records"):
         raise ValidationError("realization packet requires bundle_id and meaning_records")
+    modality = payload.get("modality_preservation")
+    if not isinstance(modality, dict):
+        raise ValidationError("REALIZE_MEANING packet requires modality_preservation")
+    required_flags = {
+        "preserve_completion_status",
+        "preserve_subject_voice",
+        "preserve_temporal_status",
+        "preserve_epistemic_status",
+    }
+    missing_flags = sorted(flag for flag in required_flags if modality.get(flag) is not True)
+    if missing_flags:
+        raise ValidationError("REALIZE_MEANING modality preservation missing: " + ", ".join(missing_flags))
     return {"ok": True, "bundle_id": payload["bundle_id"]}
 
 
@@ -522,10 +695,24 @@ def validate_assembly_packet(payload: dict[str, Any]) -> dict[str, Any]:
     assert_no_raw_source_fields(payload, context="assembly packet")
     if not payload.get("reader_plan_sha256") or not payload.get("realized_bundle_sha256s"):
         raise ValidationError("assembly packet requires reader plan and realized bundle bindings")
+    finish = payload.get("whole_document_finish")
+    if not isinstance(finish, dict):
+        raise ValidationError("assembly packet requires whole_document_finish")
+    required_finish = {
+        "document_purpose",
+        "reader_entry",
+        "section_order_rationale",
+        "transition_plan",
+        "voice_constraints",
+        "technical_detail_placement",
+    }
+    missing = sorted(field for field in required_finish if not str(finish.get(field, "")).strip())
+    if missing:
+        raise ValidationError("whole_document_finish missing: " + ", ".join(missing))
     return {"ok": True, "bundle_count": len(payload.get("realized_bundle_sha256s") or [])}
 
 
-def validate_semantic_audit(payload: dict[str, Any]) -> dict[str, Any]:
+def validate_semantic_audit(payload: dict[str, Any], reader_plan: dict[str, Any] | None = None) -> dict[str, Any]:
     if payload.get("schema") != SEMANTIC_AUDIT_SCHEMA:
         raise ValidationError("semantic audit schema mismatch")
     critical = []
@@ -538,7 +725,33 @@ def validate_semantic_audit(payload: dict[str, Any]) -> dict[str, Any]:
     decision = str(payload.get("decision", "")).upper()
     if critical or decision not in {"PASS", "OK"}:
         raise ValidationError("semantic audit has unresolved critical findings")
-    return {"ok": True, "finding_count": len(payload.get("findings") or [])}
+    disposition_decision = str(payload.get("reader_disposition_decision", "")).upper()
+    if disposition_decision not in {"PASS", "OK"}:
+        raise ValidationError("semantic audit lacks passing reader disposition decision")
+    disposition_findings = payload.get("reader_disposition_findings") or []
+    critical_disposition = [
+        finding
+        for finding in disposition_findings
+        if str(finding.get("severity", "")).lower() == "critical"
+        or str(finding.get("status", "")).lower() not in {"resolved", "pass", "ok", "advisory"}
+    ]
+    if critical_disposition:
+        raise ValidationError("reader disposition audit has unresolved findings")
+    if reader_plan is not None:
+        expected = {
+            str(disposition.get("meaning_id"))
+            for bundle in reader_plan.get("bundles") or []
+            for disposition in bundle.get("reader_dispositions") or []
+        }
+        covered = {str(item) for item in payload.get("reader_disposition_covered_meaning_ids") or []}
+        missing = sorted(expected - covered)
+        if missing:
+            raise ValidationError("reader disposition audit omits meanings: " + ", ".join(missing))
+    return {
+        "ok": True,
+        "finding_count": len(payload.get("findings") or []),
+        "reader_disposition_finding_count": len(disposition_findings),
+    }
 
 
 def validate_structural_fidelity(payload: dict[str, Any]) -> dict[str, Any]:
@@ -587,6 +800,16 @@ def verify_exact_items(candidate: str, exact_items: list[dict[str, Any]]) -> dic
     return {"ok": True, "exact_item_count": len(exact_items)}
 
 
+def reader_facing_exact_items(meaning_map: dict[str, Any], reader_plan: dict[str, Any]) -> list[dict[str, Any]]:
+    exact_by_id = {str(item.get("exact_item_id")): item for item in meaning_map.get("exact_items") or []}
+    required_ids: set[str] = set()
+    for meaning in meaning_map.get("meanings") or []:
+        required_ids.update(str(item) for item in meaning.get("exact_item_ids") or [])
+    for bundle in reader_plan.get("bundles") or []:
+        required_ids.update(str(item) for item in bundle.get("required_exact_item_ids") or [])
+    return [exact_by_id[exact_id] for exact_id in sorted(required_ids) if exact_id in exact_by_id]
+
+
 def validate_stage_package(
     source: str,
     stage_dir: Path,
@@ -614,10 +837,12 @@ def validate_stage_package(
         for packet_path in sorted(repair_dir.glob("*.json")):
             repair_results.append(validate_repair_packet(load_json(packet_path)))
     assembly_result = validate_assembly_packet(assembly_packet)
-    semantic_result = validate_semantic_audit(semantic_audit)
-    exact_result = verify_exact_items(final_candidate, meaning_map.get("exact_items") or [])
+    semantic_result = validate_semantic_audit(semantic_audit, reader_plan=reader_plan)
+    exact_result = verify_exact_items(final_candidate, reader_facing_exact_items(meaning_map, reader_plan))
     reader_frame_result = validate_reader_facing_internal_frame(final_candidate)
     standalone_frame_result = validate_standalone_reader_frame(final_candidate, task_context=prompt or "")
+    citation_markup_result = validate_reader_facing_citation_markup(final_candidate, task_context=prompt or "")
+    formula_rendering_result = validate_reader_facing_formula_rendering(final_candidate)
     receipt = {
         "schema": RUNTIME_SCHEMA,
         "runtime": RUNTIME_NAME,
@@ -642,6 +867,8 @@ def validate_stage_package(
         "exact_verification": exact_result,
         "reader_facing_internal_frame": reader_frame_result,
         "standalone_reader_frame": standalone_frame_result,
+        "reader_facing_citation_markup": citation_markup_result,
+        "reader_facing_formula_rendering": formula_rendering_result,
     }
     if receipt_path is not None:
         write_json(receipt_path, receipt)

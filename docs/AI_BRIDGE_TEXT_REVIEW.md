@@ -72,3 +72,28 @@ findings, not the private plaintext. The adjacent
 `results/<task_key>/paid_review_budget.json` records the persistent worst-case
 reservation receipt: max 2 paid calls, USD 0.50 campaign ceiling, USD 0.25
 per-request ceiling, and zero automatic paid retry.
+
+For a task whose frozen Plan authorizes a stricter initial campaign, the
+manifest may add `paid_review_initial_contract` with only these fields:
+
+```json
+{
+  "max_paid_calls": 1,
+  "campaign_reserved_cost_hard_ceiling_usd": "0.25",
+  "per_call_worst_case_ceiling_usd": "0.25",
+  "automatic_paid_retries": 0
+}
+```
+
+The values may only equal or narrow the default. Model, pricing, service tier,
+reasoning, tools, cache policy and request safety remain Bridge Kit defaults.
+Before a paid dispatch, run the zero-paid capability check:
+
+```bash
+ai-bridge text-review contract-preflight \
+  --target . \
+  --manifest results/<task_key>/text_review/text_inputs.json
+```
+
+The preflight sends no OpenAI request and creates no
+`paid_review_budget.json` reservation.
