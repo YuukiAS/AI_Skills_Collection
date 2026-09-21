@@ -58,7 +58,6 @@ project-specific context: Lucerna provider/Longleaf、Bobbio Zotero/Figma、Mica
 7. rewrite 场景保护已有 accepted structured interaction；
 8. existing canonical local repo + unrelated dirty state 时复用 local source/clean worktree，不重复 clone/remap remote；
 9. docs-only/server-only/small nonvisual fix 不被强制进入 locale/catalog/provider/Figma/GPT Work/full E2E。
-10. **Prior-authorization consumption / duplicate approval regression**：source=`工作流命名与插件回归机制完善（AI_Skills + Bridge）` corrected `ai-skills-core` candidate replay，2026-09-21。Approved Kickoff 已明确授权 current Codex identity 下两个固定 public-safe candidate replay scenarios，且 data/provider/purpose/credential/cost/live-global 边界未变化；但 `ai-skills-core` corrected replay 仍被 Auto-review 要求再次取得同一具体 replay 的用户批准，用户重复批准后才继续。未来 workflow regression 应验证：同一 task、同一 artifact/data scope、provider/endpoint、purpose、credential scope、cost ceiling 与 live-global boundary 未变化时，workflow/consumer 能消费已有 current-user authorization，不把它重新分类成新的 `HUMAN_ONLY`；若平台自身仍强制 approval UI，则如实归因为 platform enforcement，而不是继续堆同义 AGENTS/policy 文案、伪造授权或绕过平台 gate。
 
 ### Task-local prohibitions must expire with their task instead of becoming accidental global policy
 status: NEW
