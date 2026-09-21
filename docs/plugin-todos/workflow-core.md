@@ -23,7 +23,7 @@ candidate action: require explicit real blocker / plugin TODO source for long-ru
 promotion gate: apply to the next AI_Skills maintenance batch without creating a second state machine.
 
 ### Review admission、Human Gate 与真实交付止损
-status: NEW
+status: PROMOTE_NOW / 056_V0_4_EXECUTION_PACKAGE
 source: 2026-09-13 to 2026-09-15 official ChatGPT Data Export audit covering Mica, Bobbio, Lucerna, Asteria plus secondary projects; strengthened by Lucerna 01033/01034/01035, the 056 persistent-user-input host probe, Bridge Kit local-repo source-resolution feedback, and CUHK Date Questionnaire V4 real-project failures
 evidence: [Planner v6 proposal](../design/PRODUCT_DELIVERY_DISCIPLINE_V6_PROPOSAL_2026-09-16.md), [post-probe addendum](../design/PRODUCT_DELIVERY_DISCIPLINE_V6_POST_PROBE_ADDENDUM_2026-09-17.md), [probe result](../design/056_PERSISTENT_PROMPT_CAPABILITY_PROBE_RESULT_2026-09-17.md), [CUHK Date feedback](../design/PRODUCT_DELIVERY_DISCIPLINE_V6_CUHK_DATE_REAL_FEEDBACK_2026-09-17.md). The private historical export audit parsed all 27 `conversations-*.json` shards with 0 parse failures and produced curated high-signal project threads; its automatic incident classifier is not treated as ground truth.
 problem: 真实项目反复暴露的是执行机制没有把“producer 自己做完、真实入口证明、只有真正 human-only 才问人、失败后不盲重跑”变成正常入口，而不是缺更多口号。典型表现包括：半成品过早交 GPT Work/用户；mock/browser/helper PASS 冒充真实 surface；用户被当 integration/UI debugger；agent 可解决的 repo/source/environment friction 被包装成 Human Gate；Default-mode prompt 自动过期；broad tests 绿但 catalog/locale/provider/interaction/material branch/hosted lifecycle 未闭环；rewrite 又破坏已接受 interaction。
@@ -61,7 +61,7 @@ project-specific context: Lucerna provider/Longleaf、Bobbio Zotero/Figma、Mica
 
 
 ### Approval-sensitive handoff should emit one bounded kickoff before execution
-status: NEW / DEFER_UNTIL_056_COMPLETE
+status: DEFER_AFTER_056_WORKFLOW_CORE
 source: CUHK Date release-candidate staging incidents, 2026-09-21
 evidence: a frozen CUHK Date Goal and repo-level AGENTS explicitly authorized a staging-only workstation catalog service and Cloudflare tunnel work, but Codex/auto-review still stopped because repository text was treated as scope evidence rather than current-user-visible authorization. The user had to repeat the same approval in chat. Bridge Kit already has the correct runtime principle in its upfront-authorization guidance: the current user message may authorize a bounded frozen effect and the same effect should not be requested again later. Persistent Run additionally has a specialized kickoff generator, but ordinary approval-sensitive execution has no equally convenient handoff surface.
 target layer: workflow-core task authoring / execution handoff; consume Bridge runtime semantics rather than creating a second authorization engine.
@@ -82,7 +82,7 @@ promotion gate:
 5. no Planner/Critic round is required solely to render the kickoff.
 
 ### Least-privilege equivalent recovery before Human Gate
-status: NEW / DEFER_UNTIL_056_COMPLETE
+status: ABSORB_IN_056_NOW / V6_BOUNDED_AMENDMENT_V0_4
 source: CUHK Date catalog staging incidents, 2026-09-21
 evidence: after a staging workstation catalog architecture was approved, Codex selected a named Cloudflare Tunnel + cuhkdate.com DNS route. The existing durable Cloudflare credential correctly continued to deploy the established staging Workers but lacked the extra Tunnel Write / DNS Edit permissions needed only by that chosen route. Codex repeatedly reported a credential blocker and asked the founder to broaden the token. The same frozen staging goal could instead be met by an already-authorized Cloudflare Quick Tunnel with the existing application Bearer-secret boundary, avoiding new founder credential maintenance. This was an implementation-route problem, not a missing product decision.
 target layer: workflow-core Human-Gate eligibility / recovery routing.
@@ -106,7 +106,7 @@ promotion gate:
 
 
 ### Task-local prohibitions must expire with their task instead of becoming accidental global policy
-status: NEW
+status: DEFER_AFTER_056_WORKFLOW_CORE
 source: Lucerna 01037 product-polish continuation, 2026-09-17
 evidence: the current objective explicitly required creating `01037_product_polish_closure` task/result artifacts, but execution was repeatedly blocked because a prior task's local instruction said not to create a successor Goal; the user had to explicitly authorize that the current objective superseded the stale old boundary
 problem: Historical task-local prohibitions are being treated as indefinitely persistent safety constraints even after the task that introduced them has ended and a newer user-approved objective explicitly requires the opposite action. This turns stale context into a false Human Gate, forces the user to resolve non-substantive instruction history, and can cause repeated approval loops even when the current task scope is clear.
