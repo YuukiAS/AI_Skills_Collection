@@ -1,161 +1,154 @@
-# 056 交付工作流可靠性基线 — Execution Package Review v0.4
+# 056 交付工作流可靠性基线 — Execution Package Review v0.5
 
-- Review object：v0.4 bounded amendment
-- Historical task key：056_product_delivery_discipline
+- Review object：`v0.5 exact-worktree authorization amendment`
+- Historical task key：`056_product_delivery_discipline`
 - Human-readable name：交付工作流可靠性基线
-- Review stage：EXECUTION_READY_PACKAGE_REVIEW
-- AI_Skills source locator：main@72f163330ea5a21637df95f08289e2c4739d2bd9
-- Bridge source locator：main@9d2da9f485f26ca51842a1909a276cb44f73351a
-- Amendment：docs/design/056_DELIVERY_WORKFLOW_RELIABILITY_BASELINE_V6_AMENDMENT_2026-09-21.md
-- Plan：docs/design/056_PRODUCT_DELIVERY_DISCIPLINE_IMPLEMENTATION_PLAN.md v0.4
-- Goal：docs/goals/056_PRODUCT_DELIVERY_DISCIPLINE_GOAL.md v0.4
-- Kickoff：docs/operations/prompts/056_PRODUCT_DELIVERY_DISCIPLINE_KICKOFF.md v0.4
-- Status：AWAITING_INDEPENDENT_CRITIC
+- Review stage：`EXECUTION_READY_PACKAGE_REVIEW_AFTER_C056_E3`
+- Prior reviewed package：`v0.4 @ 2df53f24964673fbf79cb3bcdab63b6dfd5ee4c4`
+- Prior Critic result：`REVISE`，chat-only；无 Critic repo commit
+- Stable blocker：`C056-E3-EXACT-WORKTREE-AUTHORIZATION`
+- AI_Skills production/evidence baseline：`main@72f163330ea5a21637df95f08289e2c4739d2bd9`
+- Bridge source locator：`main@9d2da9f485f26ca51842a1909a276cb44f73351a`
+- Amendment：`docs/design/056_DELIVERY_WORKFLOW_RELIABILITY_BASELINE_V6_AMENDMENT_2026-09-21.md`（unchanged）
+- Plan：`docs/design/056_PRODUCT_DELIVERY_DISCIPLINE_IMPLEMENTATION_PLAN.md` v0.5
+- Goal：`docs/goals/056_PRODUCT_DELIVERY_DISCIPLINE_GOAL.md` v0.5
+- Kickoff：`docs/operations/prompts/056_PRODUCT_DELIVERY_DISCIPLINE_KICKOFF.md` v0.5
+- Status：`AWAITING_INDEPENDENT_CRITIC_RECHECK`
 
-## 1. 为什么 v0.3 不可直接执行
+## 1. 本轮 review scope
 
-v0.3 的 architecture direction 没有被推翻，但其 execution baseline 已经实质过期：
+v0.4 独立 Critic 已接受并关闭/放行以下内容，除非 latest source 出现新的直接语义证据，本轮不得重开：
 
-- AI_Skills 已从 5.0.4 前进到 5.0.6；
-- workflow-core 已从 0.1 前进到 0.2；
-- ai-skills-core 已从 0.2 前进到 0.3；
-- Bridge 已从 0.8.3 前进到 0.8.4；
-- 最新 main 已把 semantic task identity / Gate lifecycle / regression-bank / broad-full fallback 接入 production；
-- CUHK Date 又提供了一个直接击穿 W2 Human-Gate eligibility 的 least-privilege failure。
+- human-readable name“交付工作流可靠性基线”；
+- historical key `056_product_delivery_discipline` 保留；
+- 056 是 bounded baseline task，不是 evergreen program；
+- `V6_BOUNDED_AMENDMENT`；
+- least-privilege equivalent recovery 吸收到 W2/G1，不新增 W6/G9；
+- Persistent Run durability / ordinary bounded kickoff renderer / task-local prohibition expiry / acceptance packaging 的 defer owner；
+- G1-G8、Source Discovery not G9、BROAD_FULL_FALLBACK、cheap deterministic first、same-final-candidate；
+- Repository 5.0.6 -> 5.0.7 PATCH；
+- workflow-core 0.2 -> 0.3；
+- web-development 0.1 -> 0.2；
+- ai-skills-core 0.3 -> 0.4 仅限 residual diagnosis，或 kickoff-time direct evidence 支持 NO_BUMP；
+- Bridge 0.8.4 -> 0.8.5；
+- `C056-E1` closed；
+- `C056-E2` closed by Critic Role Contract v1.4 generic reporting rule。
 
-因此 v0.4 不是 locator refresh，而是 bounded execution-package amendment。
+本轮只复核 `C056-E3` 是否关闭，以及 v0.5 locator amendment 是否直接引入新的 scope/authorization/recovery regression。
 
-## 2. 不重开 v6
+## 2. Prior blocker C056-E3
 
-Critic 已经审过 v6 architecture 与 post-probe方向。本轮没有证据要求 v7。
+### Requirement
 
-保持：
+AI_Skills 当前 AGENTS 要求：使用 `reviewed/<task_key>` + task-owned worktree 时，Goal/Kickoff 必须把 exact branch 和 exact worktree 绑定为 current-user-visible authorization。
 
-- Lite L1-L6；
-- W1-W5；
-- F-A/F-B/F-C；
-- Maintainer consumption diagnosis；
-- Bridge transport/recovery boundary；
-- G1-G8；
-- Source Discovery regression不是 G9。
+### v0.4 defect
 
-本轮新 case 只进入 W2/G1 regression coverage。
+v0.4 Kickoff 已冻结 exact branch，但只写“创建对应 task-owned worktree”；Plan 中 worktree basename 只是“建议继续使用”。因此到 worktree creation 时仍可能再次索权，或留下 Executor临场选择路径的解释空间。
 
-## 3. 名称 / identity decision 待审
+## 3. v0.5 closure
 
-Planner选择：
+v0.5 在 Plan、Goal、Kickoff 三者一致冻结：
 
-- Human-readable name：交付工作流可靠性基线；
-- historical technical key：056_product_delivery_discipline 保留；
-- 旧文件/path/history不迁移；
-- 056仍是一次 bounded baseline implementation，完成后关闭；
-- 长期演进由 workflow-core / Frontend Design / AI Skills Maintainer / Bridge + Gate lifecycle拥有，而不是让 056变永久 program。
+### AI_Skills_Collection
 
-Critic应攻击这一判断是否过简或过重，但不要仅因为新 semantic-key规则存在就要求迁移历史 056。
+Exact branch：
 
-## 4. v0.4 新实质 amendment
+`reviewed/056_product_delivery_discipline`
 
-唯一新纳入 production scope 的 failure 是：
+Exact worktree locator：
 
-least-privilege equivalent recovery before Human Gate。
+`../AI_Skills_Collection-056-product-delivery-discipline`
 
-它不创建新 capability/Gate，而补全 W2 的 eligibility：
+解析基准：verified canonical AI_Skills checkout root。
 
-permission gap -> 先判断 Goal-required vs chosen-route-required -> 若已有授权 lower-priv route且 frozen completion等价，agent自行恢复 -> 否则才 Human Gate。
+### GPT_Codex_AI_Bridge_Kit
 
-等价必须保留 security/privacy/product behavior/evidence quality/quality bar/provider-data-purpose boundary；degraded fallback不算。
+Exact branch：
 
-对应只增加 G1 regression，不增加 G9。
+`reviewed/056_product_delivery_discipline`
 
-## 5. 明确 defer
+Exact worktree locator：
 
-- Persistent Run durability：Bridge-only followup；
-- ordinary complex task bounded kickoff renderer：post-056 workflow-core；
-- task-local prohibition expiry：post-056 workflow-core；
-- acceptance comparison packaging：post-056 workflow-core + domain/artifact owners。
+`../GPT_Codex_AI_Bridge_Kit-056-product-delivery-discipline`
 
-Critic应检查这些 defer 是否会让当前 056 claim失真；如果不会，不应以“更保险”为由扩大本轮。
+解析基准：verified canonical Bridge checkout root。
 
-## 6. Latest-main overlap / version review
+两个 locator 都明确规定：
 
-Planner当前 candidate disposition：
+- relative path 不是相对任意 shell cwd，而是相对 verified canonical checkout root；
+- 只能解析为 canonical root 的父目录下 exact basename sibling；
+- 不允许临场换路径、第二个 worktree 或 `/tmp` clone；
+- locator 已存在时只在 repo identity + exact branch 都匹配时复用；
+- locator 被占用或 identity 不匹配时停止，不自动换位置。
 
-~~~text
-AI_Skills repository 5.0.6 -> 5.0.7 PATCH
-workflow-core         0.2 -> 0.3
-web-development       0.1 -> 0.2
-ai-skills-core        0.3 -> 0.4
-Bridge                0.8.4 -> 0.8.5
-~~~
+Kickoff 开头将这两个 exact branch/worktree pair 写成用户若发送即明确授权的 frozen effect，并明确后续到达同一 worktree/branch creation effect 时不得重复询问。
 
-重点审：
+## 4. Unchanged authorization boundary
 
-- workflow-core 0.2 已有 Gate lifecycle，但没有 W1-W5，因此 0.3是否合理；
-- web-development 0.1仍未完成 v6 wiring；
-- ai-skills-core 0.3 已覆盖部分 gate/consumer principles，v0.4只允许 residual consumption-diagnosis，禁止重复 0.3 work；是否仍足以形成 0.4 user-visible batch；
-- Bridge 0.8.5 是 existing Host/Human-Gate compatible hardening，不应升新 minor；
-- repository patch而非 minor。
+v0.5 不新增任何其他授权。
 
-版本只是 future candidate identity，当前 docs-only planning commit不改 version source。
+仍禁止：
 
-## 7. Pending historical Critic findings
+- remote remap / pushurl rewrite；
+- force push；
+- main merge / release / tag / publish / deploy；
+- product repo write；
+- real `CODEX_HOME` / Host install；
+- paid API/Terra；
+- Persistent Run refinement；
+- new provider/account/credential purpose；
+- out-of-scope side effects。
 
-v0.3 中 C056-E1 / C056-E2 尚需 Critic正式关闭：
+same frozen effect no-repeat 与 genuinely new scope fresh gate 保持不变。
 
-### C056-E1
+## 5. Version / architecture impact
 
-当前 upstream仍支持 Planner response：Default-mode request_user_input is_blocking 只在 Plan；Default instruction明确 required explicit user input使用 plain-text question，permission escalation不能依赖 request_user_input。Bridge production仍是 true，因此 056 residual work仍存在。
+`ARCHITECTURE_CHANGE=NO`
 
-Planner维持 ACCEPT；Critic需决定是否关闭。
+`GATE_CHANGE=NO`
 
-### C056-E2
+`LEAST_PRIV_SEMANTICS_CHANGE=NO`
 
-最新 CRITIC_ROLE_CONTRACT v1.4 已把“同一 major round曾 REVISE后，最终 PASS先给用户可读 closure explanation”写成通用正式规则。Planner认为原 requirement已经由 current main覆盖，不需要 056再造 reporting mechanism。
+`VERSION_ROUTE_CHANGE=NO`
 
-Critic需正式关闭，不应再要求 duplicate 056-specific reporting layer。
+`DEFER_DISPOSITION_CHANGE=NO`
 
-## 8. Gate lifecycle review
+`AMENDMENT_DOC_CHANGE=NO`
 
-v0.4 本身必须服从 latest policy：
+Package version 从 v0.4 -> v0.5 只是因为 Critic 要求“不要静默修改旧 review object”，需要形成新的完整 execution package identity。
 
-- least-priv -> G1 existing regression；
-- no new Gate；
-- broad/full fallback；
-- same-final-candidate；
-- cheap deterministic first；
-- active rule exists but consumer fails -> repair consumer/runtime, not duplicate text。
+## 6. Source drift
 
-## 9. Authorization review
+AI_Skills latest main 在本轮开始时仍是 v0.4 package commit `2df53f24964673fbf79cb3bcdab63b6dfd5ee4c4`；Bridge latest main 仍是 `9d2da9f485f26ca51842a1909a276cb44f73351a`。没有新的 production/version semantic drift。
 
-Kickoff必须被视为 DRAFT_NOT_AUTHORIZED。
+后续如果仅 docs/evidence SHA advance，不重开 architecture；只有 production/version/release/frozen semantics overlap 才返回 Planner/Critic。
 
-Critic需要检查其 future user authorization envelope是否：
+## 7. Critic expected output
 
-- 只授权两个历史 task branch/worktree与 task-owned ordinary push；
-- 不把 repo Goal当 current-user auth；
-- 不授权 product repos、main merge、release/deploy、real Host、paid API；
-- same frozen effect以后不重复询问；
-- 新 provider/resource/purpose仍需 fresh gate；
-- least-priv recovery不会被用来静默改 provider/data/security/product semantics。
+优先复核旧 blocker：
 
-## 10. Source-drift rule
+`C056-E3-EXACT-WORKTREE-AUTHORIZATION`
 
-本 package 不要求 future docs/evidence-only SHA advance触发全面 re-review。只有 production/version/release/frozen semantics overlap 才返回 Planner/Critic。
+检查：
 
-## 11. Critic expected output
+1. Plan / Goal / Kickoff 的两个 exact branch + exact worktree locator 是否逐项一致；
+2. relative locator 是否被 canonical-root resolution 唯一化；
+3. Kickoff 是否已经形成足够 current-user-visible bounded authorization；
+4. occupied/mismatched locator 是否 fail closed；
+5. 是否仍有“对应 worktree”“建议继续使用”等开放措辞；
+6. 本次 amendment 是否意外扩大 Git/provider/Host/paid/product scope。
 
-如果 REVISE：
-
-- 只提出来自 v0.4真实新增/遗漏风险的 blocker；
-- 每条给 requirement、direct evidence、causal risk、minimum closure；
-- 自动生成完整 Planner prompt。
+如果仍 REVISE，只能提出由本次 locator amendment 或 latest direct semantic evidence 引起的真实 blocker，并按 Critic Role Contract 自动附完整 Planner prompt。
 
 如果 PASS：
 
-- 由于 056 major round历史上已有 REVISE，先按 Critic Contract v1.4用自然中文解释旧 blocker如何关闭、v0.4各 owner改什么/不改什么、G1-G8真正证明什么、用户以后少承担什么、本 PASS不授权什么；
-- 然后给 approved paths / package identity；
-- READY_FOR_CODEX=YES；
-- 原样输出被审过的 v0.4 Kickoff正文；
-- NEXT_HANDOFF=CODEX。
+- 因 056 major round历史上已有 REVISE，先给用户可读 closure explanation；
+- 明确 `C056-E3=CLOSED`；
+- 不重开已接受的 architecture/Gate/version/defer/C056-E1/E2；
+- 输出 approved package paths + commit；
+- `READY_FOR_CODEX=YES`；
+- `NEXT_HANDOFF=CODEX`；
+- 逐字输出 v0.5 approved Kickoff。
 
-PASS只批准 execution package，不执行 056，不授权 merge/release/paid/real Host。
+PASS 仍不执行 056，也不授权 main merge/release/paid/real Host。

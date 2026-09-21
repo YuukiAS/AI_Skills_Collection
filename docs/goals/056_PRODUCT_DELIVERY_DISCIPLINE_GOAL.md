@@ -1,14 +1,16 @@
-# 056 交付工作流可靠性基线 — Canonical Goal v0.4
+# 056 交付工作流可靠性基线 — Canonical Goal v0.5
 
-- Historical task key：056_product_delivery_discipline
+- Historical task key：`056_product_delivery_discipline`
 - Human-readable name：交付工作流可靠性基线
-- Package version：v0.4
-- Status：AWAITING_INDEPENDENT_EXECUTION_PACKAGE_CRITIC
-- Plan：docs/design/056_PRODUCT_DELIVERY_DISCIPLINE_IMPLEMENTATION_PLAN.md v0.4
-- Amendment：docs/design/056_DELIVERY_WORKFLOW_RELIABILITY_BASELINE_V6_AMENDMENT_2026-09-21.md
-- Kickoff：docs/operations/prompts/056_PRODUCT_DELIVERY_DISCIPLINE_KICKOFF.md v0.4
+- Package version：`v0.5`
+- Status：`AWAITING_INDEPENDENT_EXECUTION_PACKAGE_CRITIC`
+- Prior reviewed package：`v0.4 @ 2df53f24964673fbf79cb3bcdab63b6dfd5ee4c4`
+- Revision scope：关闭 `C056-E3-EXACT-WORKTREE-AUTHORIZATION`
+- Plan：`docs/design/056_PRODUCT_DELIVERY_DISCIPLINE_IMPLEMENTATION_PLAN.md` v0.5
+- Amendment：`docs/design/056_DELIVERY_WORKFLOW_RELIABILITY_BASELINE_V6_AMENDMENT_2026-09-21.md`
+- Kickoff：`docs/operations/prompts/056_PRODUCT_DELIVERY_DISCIPLINE_KICKOFF.md` v0.5
 
-本 Goal 在 Critic 对同一 v0.4 Plan + Goal + Kickoff 给 READY_FOR_CODEX=YES 且用户实际发送 approved Kickoff 前不可执行。
+本 Goal 在 Critic 对同一 v0.5 Plan + Goal + Kickoff 给 `READY_FOR_CODEX=YES` 且用户实际发送 approved Kickoff 前不可执行。
 
 ## 1. Positive outcome
 
@@ -46,7 +48,8 @@ existing Source Discovery regression
 AI_Skills：
 
 ~~~text
-main locator: 72f163330ea5a21637df95f08289e2c4739d2bd9
+production/evidence baseline locator: 72f163330ea5a21637df95f08289e2c4739d2bd9
+prior package commit: 2df53f24964673fbf79cb3bcdab63b6dfd5ee4c4
 Repository / CLI: 5.0.6
 workflow-core: 0.2
 web-development: 0.1
@@ -56,11 +59,39 @@ ai-skills-core: 0.3
 Bridge：
 
 ~~~text
-main locator: 9d2da9f485f26ca51842a1909a276cb44f73351a
+planning baseline locator: 9d2da9f485f26ca51842a1909a276cb44f73351a
 source version: 0.8.4
 ~~~
 
 后续纯 docs/evidence SHA advance 不自动使本 Goal失效；相关 production overlap 才重审。
+
+## 3.1 Exact execution branch / worktree locators
+
+这些值属于本 Goal 的 frozen execution identity。用户发送 approved v0.5 Kickoff 后，才形成 current-user-visible authorization。
+
+### AI_Skills_Collection
+
+Exact branch：
+
+`reviewed/056_product_delivery_discipline`
+
+Exact worktree locator：
+
+`../AI_Skills_Collection-056-product-delivery-discipline`
+
+该 locator 以 verified canonical AI_Skills checkout root 为基准，解析为其父目录下同名唯一 sibling worktree。不得选择其他路径、第二个 worktree 或 `/tmp` clone。已有 exact locator 仅在 repo identity 与 exact branch 都匹配时复用；占用或不匹配则停止。
+
+### GPT_Codex_AI_Bridge_Kit
+
+Exact branch：
+
+`reviewed/056_product_delivery_discipline`
+
+Exact worktree locator：
+
+`../GPT_Codex_AI_Bridge_Kit-056-product-delivery-discipline`
+
+该 locator 以 verified canonical Bridge checkout root 为基准，解析为其父目录下同名唯一 sibling worktree。不得选择其他路径、第二个 worktree 或 `/tmp` clone。已有 exact locator 仅在 repo identity 与 exact branch 都匹配时复用；占用或不匹配则停止。
 
 ## 4. Required current implementation
 
@@ -87,7 +118,7 @@ source version: 0.8.4
 完成原 v6 Host/HUMAN_ONLY residual：
 
 - fail-closed Default required-input behavior；
-- managed desired default_mode_request_user_input=false candidate；
+- managed desired `default_mode_request_user_input=false` candidate；
 - supported-key/current-version validation；
 - durable transcript wait/resume docs/tests；
 - preserve Plan mode、0.8.4 semantic identity、Persistent Run。
@@ -124,14 +155,14 @@ Bobbio、Lucerna、Mica、Asteria、SeminarArc、CUHK Date、CARE/EAT、Server/V
 
 ## 8. Gates
 
-G1-G8 保持数量与职责不变。v0.4 新 failure 只进入 G1 regression：
+G1-G8 保持数量与职责不变。least-privilege failure 只进入 G1 regression：
 
 - optional higher-priv route权限不足 + equivalent authorized lower-priv route -> no Human Gate；
 - lower-priv route会降低 security/quality/product semantics -> 不允许偷换，Human Gate保持；
 - only valid route credential expired/revoked -> Human Gate保持；
 - repeated same-class false permission blocker -> W4/G8 diagnosis，不重复找用户。
 
-其余 G2-G8 与 Source Discovery regression 按 v0.4 Plan 执行。
+其余 G2-G8 与 Source Discovery regression 按 v0.5 Plan 执行。
 
 ## 9. Current execution authorization boundary
 
@@ -144,12 +175,14 @@ G1-G8 保持数量与职责不变。v0.4 新 failure 只进入 G1 regression：
 - real user Host Policy / CODEX_HOME mutation；
 - paid API/Terra；
 - final live user Host smoke；
-- Persistent Run refinement。
+- Persistent Run refinement；
+- remote remap / force push；
+- 新 provider/account/credential purpose。
 
 ## 10. Completion meaning
 
-当前 implementation stage完成只表示：两个 task branch实现、自测、non-host gate evidence、candidate freeze和 push完成，可以进入独立 implementation review。
+当前 implementation stage完成只表示：两个 exact branches / exact worktrees 下的实现、自测、non-host gate evidence、candidate freeze和 push完成，可以进入独立 implementation review。
 
 056 overall complete 还需要原 Goal 后续有效的真实 integration/release boundary closure；不得因为 branch tests PASS就提前宣布。
 
-NEXT_HANDOFF = CRITIC。
+`NEXT_HANDOFF = CRITIC`。
