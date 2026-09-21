@@ -31,7 +31,8 @@ CENTRAL_PLUGIN_NAMES = [
     "medical-imaging",
 ]
 EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
-    "ai-skills-core": "0.2",
+    "workflow-core": "0.2",
+    "ai-skills-core": "0.3",
     "writing-style": "0.3",
     "presentations": "0.3",
 }
@@ -166,7 +167,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         skill_artifacts = [entry["artifact_id"] for entry in core["skills"]]
         serialized = json.dumps(core, ensure_ascii=False)
 
-        self.assertEqual(core["version"], "0.2")
+        self.assertEqual(core["version"], "0.3")
         self.assertEqual(core["name"], "ai-skills-core")
         self.assertEqual(core["displayName"], "AI Skills Maintainer")
         self.assertIn("Maintenance companion", core["description"])
@@ -197,12 +198,12 @@ class CodexMarketplaceTests(unittest.TestCase):
             {
                 name: version
                 for name, version in plugin_versions.items()
-                if name not in {"ai-skills-core", "writing-style", "presentations"}
+                if name not in {"workflow-core", "ai-skills-core", "writing-style", "presentations"}
             },
             {
                 name: "0.1"
                 for name in CENTRAL_PLUGIN_NAMES
-                if name not in {"ai-skills-core", "writing-style", "presentations"}
+                if name not in {"workflow-core", "ai-skills-core", "writing-style", "presentations"}
             },
         )
         for plugin_version in plugin_versions.values():
@@ -259,6 +260,42 @@ class CodexMarketplaceTests(unittest.TestCase):
             self.assertIn(plugin["displayName"], readme)
             self.assertIn(f"<code>{plugin['name']}</code>", readme)
             self.assertIn(f"v`{plugin['version']}`", readme)
+
+    def test_workflow_identity_and_gate_lifecycle_contracts_are_source_authoritative(self) -> None:
+        policy = (REPO_ROOT / "docs/workflows/PLUGIN_CAPABILITY_GATE_POLICY.md").read_text(encoding="utf-8")
+        planner = (REPO_ROOT / "docs/workflows/PLANNER_ROLE_CONTRACT.md").read_text(encoding="utf-8")
+        critic = (REPO_ROOT / "docs/workflows/CRITIC_ROLE_CONTRACT.md").read_text(encoding="utf-8")
+        agents = (REPO_ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        workflow_skill = (REPO_ROOT / "skills/core/codex-system/codex-workflow-protocol/SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        maintainer_skill = (
+            REPO_ROOT / "skills/core/codex-system/ai-skills-repository-maintainer/SKILL.md"
+        ).read_text(encoding="utf-8")
+        task_template = (
+            REPO_ROOT / "skills/core/codex-system/codex-workflow-protocol/references/task-template.md"
+        ).read_text(encoding="utf-8")
+
+        for text in [agents, planner, critic, workflow_skill, maintainer_skill, task_template]:
+            self.assertIn("<scope-token>--<goal-token>", text)
+        self.assertIn("task keys as machine locators", workflow_skill)
+        self.assertIn("human short label separate", maintainer_skill)
+        self.assertIn("title service", agents)
+        self.assertNotIn("task_key: <id>_<short_slug>", task_template)
+
+        for text in [policy, planner, critic]:
+            self.assertIn("regression bank", text)
+            self.assertIn("既有 gate", text)
+            self.assertIn("broad/full", text)
+            self.assertIn("final candidate", text)
+        for text in [workflow_skill, maintainer_skill]:
+            self.assertIn("regression bank", text)
+            self.assertIn("existing gates", text)
+            self.assertIn("broad/full", text)
+            self.assertIn("final candidate", text)
+        self.assertIn("impact registry", policy)
+        self.assertIn("database", policy)
+        self.assertIn("ledger", policy)
 
     def test_generated_layer_matches_source_config(self) -> None:
         summary, differences = build.check_layer()

@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: true
 secrets_needed:
-last_reviewed: 2026-08-30
+last_reviewed: 2026-09-20
 profile_tags:
   - ai-skills-maintainer
 recommended_scope: project
@@ -50,6 +50,8 @@ The installed plugin should be presented to users as `AI Skills Maintainer`; kee
 
 The target plugin decides what is professionally correct. This maintainer decides whether the change is source-authoritative, generated, replayed, regression-tested, versioned, changeloged, and closed.
 
+Task identity is a maintenance boundary. Use the workflow owner's canonical task-key contract; new Bridge / Reviewed Handoff tasks use semantic `<scope-token>--<goal-token>` keys, and legacy numbered keys are read/validate-only compatibility. Scope comes from the real repo/plugin/workflow boundary. Keep the human short label separate from the machine key, and do not add a display-title service or let a client/thread/sidebar title control branch names, results paths, or scheduled-review bindings.
+
 Fixed flow:
 
 1. Identify the target plugin.
@@ -62,7 +64,7 @@ Fixed flow:
 8. Regenerate the generated layer.
 9. Install or reload the real production plugin when production behavior changed.
 10. Replay the original real failure or a public-safe equivalent frozen by the task.
-11. Run an unrelated regression for the target plugin or affected shared path.
+11. Run the cheap deterministic regression bank first, then an unrelated regression for the target plugin or affected shared path, escalating to broad/full gates when shared runtime/schema/generator, routing, Marketplace/profile, artifact review, credential/paid path, or cross-plugin user-visible behavior changed.
 12. Close or update the target plugin TODO.
 13. Bump the affected plugin version exactly once when the completed release changes production behavior.
 14. Update the affected plugin changelog with before -> after behavior.
@@ -124,6 +126,10 @@ Apply these rules:
 - The project thread records the real failure; it does not decide the final generic rule or promotion status.
 - Before triaging `NEW`, compare against the current plugin TODO and active skill/reference/QA/runtime. Merge duplicate evidence instead of creating near-duplicate rules.
 - If an active rule already exists but real output still fails, treat it as a production regression and inspect the consumer/runtime rather than adding another synonymous rule.
+- Map each production regression to existing gates unless it proves a distinct capability, evidence type, failure semantics, normal entry, or owner boundary. Gate split/new gate decisions must explain old/new coverage and where historical regression samples move.
+- Gate merge or retirement requires preserving historical regression coverage, should-not-change examples, and release/maturity implications in the Plan, RESULT, TODO, changelog, or tests. Do not let a capability disappear because its old gate was not convenient in the current batch.
+- Narrow release checks require a written isolation argument and should-not-change evidence. If the change touches shared runtime/schema/generator, routing/default prompts, marketplace/profile exposure, artifact review, credential/paid transport, or cross-plugin user-visible behavior, use broad/full fallback gates.
+- Regression and review evidence for a release must come from the same final candidate; grader/eval/rubric repairs must be reported separately from product repairs.
 - If the issue is only project-specific, mark `PROJECT_LOCAL` and do not promote it into active plugin behavior.
 - Only the AI_Skills Planner/maintainer may turn a `NEW` item into `CANDIDATE_GENERIC`, `PROMOTE_NOW`, `SUPERSEDED`, or `REJECTED` after triage.
 - Do not promote every TODO into `SKILL.md`. Freeze a promotion decision, target layer, boundary, real evidence, user-facing effect, and regression first.

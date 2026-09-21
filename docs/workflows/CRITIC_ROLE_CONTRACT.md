@@ -1,7 +1,7 @@
 # Critic 线程工作约定
 
-版本：1.3  
-日期：2026-09-17  
+版本：1.4  
+日期：2026-09-20  
 配套文件：`docs/workflows/PLANNER_ROLE_CONTRACT.md`
 
 ## 1. 职责与独立性
@@ -34,6 +34,8 @@ proposal_commit
 review_stage
 ```
 
+`design_topic_or_task_key` 中的 task key 是技术 locator，不是人类标题。新的 Bridge / Reviewed Handoff task key 必须是 semantic `<scope-token>--<goal-token>`；历史数字式 key 只能作为既有任务兼容。审查跨 repo / 跨 plugin 方案时，先确认 scope owner、branch、results path、scheduled-review binding 和 human label 是否分别明确；不得接受由 client title、thread title、display name、sidebar section 或另一套 title service 反向派生机器 key 的方案。
+
 多个 plugin 可以并行，但每个 review 都必须只使用该对象自己的 Proposal / Goal / evidence / branch。切换 plugin 时重新初始化 Active Review Context；不得把 `presentations` 的 Gate、`research-writing` 的 rubric、Clear Writing 的 source boundary 或另一个 task 的授权拿来判当前对象。Critic PASS 只对明确对象、版本和阶段有效。
 
 如果 repo 中同一 plugin 同时存在多个 proposal / task，而用户没有唯一指定，先定位当前 active source；确有实质歧义才要求澄清一次，不凭文件名相似自行选择。
@@ -51,6 +53,8 @@ review_stage
 前两个检查证明的对象不同，不是重复盖章。第二次必须真正看产物，不能再次只审 Plan。不得因第一步方案 PASS 就假定成稿也合格，也不能因某次成稿漂亮就忽略生产机制没接通。
 
 正式 plugin production refinement / release 还必须读取 `docs/workflows/PLUGIN_CAPABILITY_GATE_POLICY.md` 并独立审 Capability Gate Matrix：覆盖是否足够、Gate 是否高度重复、normal entry / complete artifact / should-not-change / final-candidate identity 是否真正得到验证，不能用 tests、资源摄入量、schema 或 receipt 冒充产品能力。
+
+Critic 还必须审 gate lifecycle：新 regression 是否被归入正确既有 gate / regression bank，而不是靠同义新增 gate 逃避；split/new gate 是否确有不同 capability、evidence type、failure semantics 或 normal entry；merge/retirement 是否迁移历史回归与 should-not-change；release gate 是否先跑 cheap deterministic bank，再按风险升级人工/外部/fresh evidence；narrow gate 是否有真实隔离理由；shared runtime/schema/generator、routing、Marketplace/profile、artifact review 或跨插件用户可见变化是否触发 broad/full fallback；所有必须发布的 gate 是否来自同一 final candidate。
 
 ## 4. 六个核心判断
 

@@ -4,7 +4,7 @@ Use this template for complex work that needs phased execution and evidence-driv
 
 ```markdown
 ---
-task_key: <id>_<short_slug>
+task_key: <scope-token>--<goal-token>
 mode: discover_plan_execute_verify_report
 scope:
   repo_or_workspace: <absolute path>
@@ -35,6 +35,11 @@ escalation_policy:
 ---
 
 # Task
+
+Use the canonical task-key contract of the workflow owner. For Bridge Kit /
+Reviewed Handoff, new tasks use semantic `<scope-token>--<goal-token>` keys;
+legacy numbered keys are for existing-task compatibility only. Keep any human
+short title or display label separate from the machine key.
 
 <Describe the objective and final deliverable.>
 

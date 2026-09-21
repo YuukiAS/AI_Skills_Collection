@@ -1,6 +1,6 @@
 # writing
 
-Active skills: 16
+Active skills: 17
 
 ## Install
 
@@ -27,7 +27,7 @@ Complete domain installs are supported. If an audit reports high description len
 ## Skills
 
 - `academic-paper-writer-pro` (`skills/writing/research/academic-paper-writer-pro`): 学术论文排版、OCR恢复、DOCX/Markdown整理和模板化交付工作流。用于扫描 PDF、DOC/DOCX、Markdown 到 Word/PDF 的结构修复、断点恢复、参考文献整理和最终文件验收；内容写作、审稿和事实保真应路由到 research-writing 与 writing-fidelity。
-- `chinese-prose` (`skills/writing/core/chinese-prose`): 中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和“说人话”终审。任何中文 Markdown/PDF/报告/README/面向用户或读者的中文内容都应自动触发本 skill，用于中文为主、降低 AI 味/翻译腔/模板腔/宣传腔、移除非必要英文、修正版本/阶段名误用和机器字段先行，同时保护事实、数字、术语、命令、引用、实验结果、证据边界和中文读者习惯。
+- `chinese-prose` (`skills/writing/core/chinese-prose`): 中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和“说人话”终审。任何中文 Markdown/PDF/报告/README/面向用户或读者的中文内容都应自动触发本 skill，用于普通中文润色、中文为主、降低 AI 味/翻译腔/模板腔/宣传腔，并保护事实、数字、术语、命令、引用、实验结果和证据边界。
 - `citation-verification` (`skills/writing/research/citation-verification`): Verify academic citations, references, BibTeX entries, DOI/PMID metadata, citation claims, and figure/table evidence before manuscript submission, review response, or report delivery. Use when citation existence or claim support matters more than citation formatting alone.
 - `latex-paper-authoring` (`skills/writing/research/latex-paper-authoring`): Author, organize, repair, and prepare LaTeX research papers for arXiv, Overleaf, conference templates, or journal submission. Use when manuscript structure, LaTeX source hygiene, compilation, figures, bibliography, or template cleanup is central.
 - `literature-review` (`skills/writing/research/literature-review`): Synthesize scholarly literature and create single-paper evidence cards. Use for systematic/scoping/narrative reviews, related work, paper精读, paper cards, claim-evidence extraction, method maps, thematic synthesis, and research-gap analysis. Route quick lookup, DOI/claim checks, BibTeX, and Zotero to citation skills.
@@ -39,9 +39,10 @@ Complete domain installs are supported. If an audit reports high description len
 - `research-reporting` (`skills/writing/research/research-reporting`): Create repo-grounded research reports, milestone summaries, experiment reviews, technical notes, advisor/group-meeting reports, and result retrospectives from project evidence. Use for Markdown reports and internal scientific documentation, not for full journal manuscript workflows.
 - `scholar-evaluation` (`skills/writing/research/scholar-evaluation`): Quantitatively evaluate scholarly work with a fixed rubric or ScholarEval-style dimensions. Use for rubric assessment, benchmarked quality scoring, numbered ratings, and dimension-by-dimension evaluation. Route ordinary reviewer-style critique to peer-review and prose revision to scientific-writing.
 - `scientific-prose` (`skills/writing/core/scientific-prose`): English scientific report writing and revision pass. Use for research reports, progress reports, figure-heavy PDFs, manuscripts, rebuttals, technical summaries, and slide text that must keep evidence, uncertainty, captions, and conclusions scientifically defensible without AI-sounding or defensive/self-undermining prose.
+- `scientific-rewrite` (`skills/writing/core/scientific-rewrite`): Source-faithful structural rewrite route for existing Chinese or Chinese-dominant scientific/technical material when users ask to reorganize it into clearer Chinese while preserving facts, numbers, formulas, citations, comparisons, conditions, limitations, paths, and exact details.
 - `scientific-writing` (`skills/writing/research/scientific-writing`): Draft and revise scientific manuscript prose: abstracts, IMRaD sections, reviewer-response wording, claim-supported paragraphs, and reporting-guideline text. Route whole-paper planning, reviewer-risk critique, literature discovery, citation verification, BibTeX, figures, venue formatting, and LaTeX issues to neighboring skills.
 - `venue-templates` (`skills/writing/research/venue-templates`): This skill should be used when preparing manuscripts for journal submission, conference papers, research posters, or grant proposals and need venue-specific formatting requirements and templates.
-- `writing-fidelity` (`skills/writing/core/writing-fidelity`): Preserve facts, corrections, labels, structure, equations, citations, version authority, and final artifact identity during writing edits. Use for source-faithful Markdown, LaTeX, PDF, slides, reports, notes, and evidence-bound writing. Route Chinese natural-prose passes to chinese-prose and English scientific style passes to scientific-prose.
+- `writing-fidelity` (`skills/writing/core/writing-fidelity`): Preserve facts, corrections, labels, structure, equations, citations, version authority, and final artifact identity during writing edits. Route Chinese natural-prose passes to chinese-prose, source-faithful structural scientific/technical rewrites to scientific-rewrite, and English scientific style passes to scientific-prose.
 
 ## Main References
 
