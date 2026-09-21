@@ -60,21 +60,6 @@ project-specific context: Lucerna provider/Longleaf、Bobbio Zotero/Figma、Mica
 9. docs-only/server-only/small nonvisual fix 不被强制进入 locale/catalog/provider/Figma/GPT Work/full E2E。
 10. **Prior-authorization consumption / duplicate approval regression**：source=`工作流命名与插件回归机制完善（AI_Skills + Bridge）` corrected `ai-skills-core` candidate replay，2026-09-21。Approved Kickoff 已明确授权 current Codex identity 下两个固定 public-safe candidate replay scenarios，且 data/provider/purpose/credential/cost/live-global 边界未变化；但 `ai-skills-core` corrected replay 仍被 Auto-review 要求再次取得同一具体 replay 的用户批准，用户重复批准后才继续。未来 workflow regression 应验证：同一 task、同一 artifact/data scope、provider/endpoint、purpose、credential scope、cost ceiling 与 live-global boundary 未变化时，workflow/consumer 能消费已有 current-user authorization，不把它重新分类成新的 `HUMAN_ONLY`；若平台自身仍强制 approval UI，则如实归因为 platform enforcement，而不是继续堆同义 AGENTS/policy 文案、伪造授权或绕过平台 gate。
 
-### Critic review must block product risk, not bookkeeping anxiety
-status: NEW
-source: 2026-09-21 工作流命名与插件回归机制完善 integration review；用户直接纠正 Critic 反复围绕 SHA/main drift/授权时序制造 REVISE，而真实功能与既有恢复路径已经明确
-evidence: implementation candidate 已通过独立 review；Integration Plan R2 已明确 four-file overlap resolution、pre-push tests、non-destructive merge、post-main smoke 和 failure recovery。Critic 仍因 review commit 推进 main SHA、以及 smoke 授权可否提前获取等可由既有执行路径吸收的问题再次 REVISE，导致无新增产品能力风险的 planning loop。
-problem: Critic 把“可记录、可在执行时解析、已有恢复路径的 bookkeeping/coordination 细节”升级为 blocker，会造成 review 自己推进 main -> 再因 main 变化要求重审、以及授权时序/commit locator 反复打回等自激式流程。用户真正关心的是功能是否实现、真实入口是否通过、是否存在不可逆安全风险，而不是为 control metadata 的完美确定性无限增加 review 轮次。
-project-specific context: 具体 SHA、README merge 和本次 task 名称属于当前任务。可复用问题是 Critic blocker admission：只有当新证据表明用户可见功能可能错误/缺失、证据不能支持当前 claim、会破坏已接受能力、存在数据/权限/不可逆副作用风险，或执行合同缺口会实际阻止完成时才应 REVISE。纯 docs/review commit drift、可在执行 preflight 解析的 locator、已有 bounded recovery 覆盖的假设风险、偏好的授权时序，不应单独成为 blocker。
-
-Future regression / hardening target:
-- Critic 在新增 blocker 前先回答：**如果不改这一点，用户功能会错/缺失吗，现有 PASS 证据会失效吗，或会产生真实不可逆/越权风险吗？** 若三者都否，默认降级为 non-blocking note。
-- 同一 round 已有 blocker 关闭后，不得仅凭同一已知事实换一种表述继续移动终点；需要新 blocker 必须有新的直接证据或 amendment 引入的真实回归。
-- review/docs/TODO/evidence-only main drift 不自动撤销 production candidate 或 integration plan；执行时读取 latest main 并保留即可，只有 production/version/release/已冻结 overlap 语义发生实质变化才重审。
-- 已有 bounded failure recovery 的 sequencing preference（例如“先授权 A 再授权 B”还是“一次列出 A/B”）除非改变权限边界或产生真实不可恢复窗口，否则不是 blocker。
-- 验收输出先报告真实 capability / normal-entry / artifact / runtime 结果，再报告 commit/version/locator；SHA 是证据定位器，不是产品质量本身。
-- 把本案例加入 workflow-core / 056 后续 Critic-behavior regression，避免“review 自己制造 drift -> 再因 drift REVISE”的自激循环，但不要新增 state/schema/ledger/controller。
-
 ### Task-local prohibitions must expire with their task instead of becoming accidental global policy
 status: NEW
 source: Lucerna 01037 product-polish continuation, 2026-09-17
