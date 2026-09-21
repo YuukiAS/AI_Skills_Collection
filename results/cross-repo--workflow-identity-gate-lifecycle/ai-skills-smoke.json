@@ -1,0 +1,119 @@
+{
+  "schema": "AI_SKILLS_PHASE3_PRODUCTION_IDENTITY_SMOKE_V1",
+  "created_at": "2026-09-21T01:30:39.055933+00:00",
+  "source": "YuukiAS/AI_Skills_Collection main",
+  "head": "c9bdc76419f06160025a4c8e23c2853bde733f53",
+  "expected": {
+    "commit": "c9bdc76419f06160025a4c8e23c2853bde733f53",
+    "repo_version": "5.0.6",
+    "workflow_core": "0.2",
+    "ai_skills_core": "0.3"
+  },
+  "repository_version": "5.0.6",
+  "registry_version": "5.0.6",
+  "marketplace_name": "yuukias-ai-skills",
+  "marketplace_plugin_count": 10,
+  "loaded_plugins": {
+    "workflow-core": {
+      "marketplace_policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "manifest": {
+        "name": "workflow-core",
+        "version": "0.2",
+        "description": "General Codex execution, source-of-truth discovery, planning, verification, and completion gates.",
+        "author": {
+          "name": "YuukiAS",
+          "email": "humc2013@gmail.com",
+          "url": "https://github.com/YuukiAS"
+        },
+        "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+        "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+        "keywords": [
+          "codex",
+          "core",
+          "skills",
+          "workflow"
+        ],
+        "skills": "./skills/",
+        "interface": {
+          "displayName": "Verified Workflow",
+          "shortDescription": "General Codex execution, source-of-truth discovery, planning, verification, and completion gates.",
+          "longDescription": "General Codex execution, source-of-truth discovery, planning, verification, and completion gates. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+          "developerName": "YuukiAS",
+          "category": "Developer Tools",
+          "capabilities": [
+            "Skills"
+          ],
+          "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
+          "defaultPrompt": [
+            "Run a verified implementation workflow.",
+            "Find the source of truth before editing.",
+            "Check completion gates for this task."
+          ],
+          "brandColor": "#334155",
+          "composerIcon": "./.codex-plugin/assets/composer.svg",
+          "logo": "./.codex-plugin/assets/logo.svg"
+        }
+      },
+      "skill_files": [
+        "skills/workflow/SKILL.md"
+      ],
+      "isolated_cache_path": "/tmp/phase3-production-identity-smoke-2026-09-21/ai/results/phase3-production-identity-smoke-2026-09-21/isolated-codex-home/plugins/cache/yuukias-ai-skills/workflow-core/0.2"
+    },
+    "ai-skills-core": {
+      "marketplace_policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "manifest": {
+        "name": "ai-skills-core",
+        "version": "0.3",
+        "description": "Maintenance companion for AI_Skills_Collection plugin refinement: repository contracts, source-first changes, generated parity, replay, regression, versions, changelogs, and profile installation.",
+        "author": {
+          "name": "YuukiAS",
+          "email": "humc2013@gmail.com",
+          "url": "https://github.com/YuukiAS"
+        },
+        "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+        "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+        "keywords": [
+          "ai",
+          "codex",
+          "core",
+          "skills"
+        ],
+        "skills": "./skills/",
+        "interface": {
+          "displayName": "AI Skills Maintainer",
+          "shortDescription": "Maintenance companion for AI_Skills_Collection plugin refinement: repository contracts, source-first changes, generated parity, replay, regression, versions, changelogs, and profile installation.",
+          "longDescription": "Maintenance companion for AI_Skills_Collection plugin refinement: repository contracts, source-first changes, generated parity, replay, regression, versions, changelogs, and profile installation. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+          "developerName": "YuukiAS",
+          "category": "Developer Tools",
+          "capabilities": [
+            "Skills"
+          ],
+          "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
+          "defaultPrompt": [
+            "Install this repository's project profiles.",
+            "Refine an existing AI_Skills plugin from a real failure.",
+            "Maintain a plugin improvement through source, generated layer, replay, regression, version, and changelog closure."
+          ],
+          "brandColor": "#0F766E",
+          "composerIcon": "./.codex-plugin/assets/composer.svg",
+          "logo": "./.codex-plugin/assets/logo.svg"
+        }
+      },
+      "skill_files": [
+        "skills/analysis/SKILL.md",
+        "skills/maint/SKILL.md",
+        "skills/proj/SKILL.md"
+      ],
+      "isolated_cache_path": "/tmp/phase3-production-identity-smoke-2026-09-21/ai/results/phase3-production-identity-smoke-2026-09-21/isolated-codex-home/plugins/cache/yuukias-ai-skills/ai-skills-core/0.3"
+    }
+  },
+  "codex_plugin_cli_isolation_note": "codex plugin marketplace list ignored temporary CODEX_HOME in this environment, so this smoke used task-local marketplace clone/cache and did not mutate live-global plugin state.",
+  "errors": [],
+  "status": "PASS"
+}
