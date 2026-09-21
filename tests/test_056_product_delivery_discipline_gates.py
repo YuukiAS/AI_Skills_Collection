@@ -1,92 +1,192 @@
 from __future__ import annotations
 
+import hashlib
 import json
+import re
 import unittest
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RESULT_ROOT = REPO_ROOT / "results/056_product_delivery_discipline"
-REPLAY_ROOT = RESULT_ROOT / "replay_evidence"
+R1_REPLAY_ROOT = RESULT_ROOT / "replay_evidence"
+R2_INPUT_ROOT = RESULT_ROOT / "replay_inputs_unbiased"
+R2_REPLAY_ROOT = RESULT_ROOT / "replay_evidence_unbiased"
+ADJUDICATION_ROOT = RESULT_ROOT / "replay_adjudication"
 PRODUCTION_CANDIDATE_COMMIT = "33c30bbe0dd528031a23d379905cd00d6b65bc1f"
+BRIDGE_CANDIDATE_COMMIT = "96a8ea1b58ebe6f9b7c5c46c43995666251911fe"
+FROZEN_RUBRIC_SHA256 = "516ed142f55200840e54cda01a08793b51d2e666bc4bc4f8e62e5feb03170269"
+
+
+FORBIDDEN_NEUTRAL_INPUT_PATTERNS = re.compile(
+    r"\bG[1-8]\b|Source Discovery|expected|The correct behavior is|"
+    r"stale_install|should-not-change|\bPASS\b|\bFAIL\b|rubric|FROZEN|"
+    r"diagnosis_first|adds_duplicate_policy",
+    re.IGNORECASE,
+)
+
+
+PLUGIN_CASES = {
+    "workflow_core": {
+        "plugin": "workflow-core",
+        "version": "0.3",
+        "inputs": ["workflow_core_task.md", "workflow_core_scenarios.json"],
+        "adjudication": "workflow_core_adjudication.md",
+        "gates": ["G2", "G3", "G4", "G5", "G7", "Source Discovery"],
+    },
+    "web_development": {
+        "plugin": "web-development",
+        "version": "0.2",
+        "inputs": ["web_development_task.md", "web_development_scenario.json"],
+        "adjudication": "web_development_adjudication.md",
+        "gates": ["G6"],
+    },
+    "ai_skills_core": {
+        "plugin": "ai-skills-core",
+        "version": "0.4",
+        "inputs": ["ai_skills_core_task.md", "ai_skills_core_scenario.json"],
+        "adjudication": "ai_skills_core_adjudication.md",
+        "gates": ["G8"],
+    },
+}
 
 
 def read_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-class ProductDeliveryDisciplineReplayEvidenceTests(unittest.TestCase):
-    def assert_candidate_replay_consumed(self, plugin: str, version: str) -> dict:
-        run = read_json(REPLAY_ROOT / plugin.replace("-", "_") / "candidate_replay_run.json")
-        add = read_json(REPLAY_ROOT / plugin.replace("-", "_") / "plugin-add.json")
+def sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
 
-        self.assertEqual(run["candidate_commit"], PRODUCTION_CANDIDATE_COMMIT)
-        self.assertEqual(run["plugin_id"], f"{plugin}@ai-skills-candidate")
-        self.assertEqual(run["runtime_version"], "codex-cli 0.153.4")
-        self.assertTrue(run["actual_consumption"]["proven"])
-        self.assertGreaterEqual(run["actual_consumption"]["line_index"], 1)
-        self.assertIn("item.", run["actual_consumption"]["event_type"])
-        self.assertEqual(add["pluginId"], f"{plugin}@ai-skills-candidate")
-        self.assertEqual(add["marketplaceName"], "ai-skills-candidate")
-        self.assertEqual(add["version"], version)
-        self.assertEqual(add["installedPath"], run["installed_path"])
-        self.assertIn(f"/plugins/cache/ai-skills-candidate/{plugin}/{version}", run["installed_path"])
-        return run
 
-    def test_workflow_core_replay_proves_g2_g3_g4_g5_g7_and_source_discovery_behavior(self) -> None:
-        self.assert_candidate_replay_consumed("workflow-core", "0.3")
-        output = read_json(REPLAY_ROOT / "workflow_core/workflow_core_gate_replay.json")
+def parse_sha256s(path: Path) -> dict[str, str]:
+    entries: dict[str, str] = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        digest, name = line.split("  ", 1)
+        entries[name] = digest
+    return entries
 
-        self.assertEqual(output["plugin"], "workflow-core")
-        self.assertEqual(output["normal_entry"], "Verified Workflow candidate")
-        self.assertEqual(output["fixture_candidate_commit"], PRODUCTION_CANDIDATE_COMMIT)
-        for gate in ["G2", "G3", "G4", "G5", "G7", "Source Discovery"]:
-            self.assertTrue(output["gates"][gate]["pass"], gate)
-            self.assertTrue(output["gates"][gate]["observed_behavior"])
-            self.assertTrue(output["gates"][gate]["reason"])
 
-        self.assertIn("不代表真实主机", output["evidence_scope"])
-        self.assertIn("不声称 overall 056 achieved", "\n".join(output["should_not_change"]))
-        self.assertIn("不重复网络 clone", output["gates"]["Source Discovery"]["observed_behavior"])
-        self.assertIn("不重映射 remote", output["gates"]["Source Discovery"]["observed_behavior"])
-        self.assertIn("禁止跨 implementation candidate 拼接 PASS", output["gates"]["G5"]["reason"])
+class ProductDeliveryDisciplineEvidenceRepairTests(unittest.TestCase):
+    def test_production_candidate_identity_and_versions_remain_fixed(self) -> None:
+        manifest = read_json(RESULT_ROOT / "evidence_manifest.json")
 
-    def test_web_development_replay_proves_g6_payload_consumption_and_non_host_limitations(self) -> None:
-        self.assert_candidate_replay_consumed("web-development", "0.2")
-        output = read_json(REPLAY_ROOT / "web_development/web_development_gate_replay.json")
+        self.assertEqual(
+            manifest["production_candidate_identity"]["ai_skills_candidate_commit"],
+            PRODUCTION_CANDIDATE_COMMIT,
+        )
+        self.assertEqual(
+            manifest["production_candidate_identity"]["bridge_candidate_commit"],
+            BRIDGE_CANDIDATE_COMMIT,
+        )
+        self.assertFalse(manifest["production_candidate_identity"]["production_source_changed_after_candidate"])
+        self.assertFalse(manifest["production_candidate_identity"]["version_changed_in_evidence_repair"])
 
-        self.assertEqual(output["plugin"], "web-development")
-        self.assertEqual(output["normal_entry"], "Frontend Design candidate")
-        self.assertTrue(output["G6"]["pass"])
-        behavior = output["G6"]["observed_behavior"]
-        self.assertIn("只读设计权威", behavior["canonical_design_authority"])
-        self.assertIn("Figma", behavior["figma_handoff_consumed"])
-        self.assertIn("motion-interaction", behavior["motion_production_wiring_consumed"])
-        self.assertIn("不得静默在代码中发明状态", behavior["missing_material_state_disposition"])
-        self.assertFalse(output["limitations"]["product_repository_modified"])
-        self.assertFalse(output["limitations"]["real_host_G1_final_pass_claimed"])
-        self.assertFalse(output["limitations"]["release_ready_claimed"])
+    def test_r1_manifest_is_retained_as_provenance_not_unbiased_semantic_pass(self) -> None:
+        r1 = read_json(R1_REPLAY_ROOT / "manifest.json")
 
-    def test_ai_skills_core_replay_proves_g8_consumption_diagnosis_behavior(self) -> None:
-        self.assert_candidate_replay_consumed("ai-skills-core", "0.4")
-        output = read_json(REPLAY_ROOT / "ai_skills_core/ai_skills_core_gate_replay.json")
+        self.assertEqual(r1["production_candidate_commit"], PRODUCTION_CANDIDATE_COMMIT)
+        self.assertEqual(r1["evidence_layer"], "R1 leading-oracle provenance")
+        self.assertEqual(r1["semantic_pass_status"], "superseded_for_unbiased_G2_G8_semantic_PASS")
+        self.assertIn("actual consumption", r1["note"])
+        self.assertIn("R2 unbiased", r1["note"])
 
-        self.assertEqual(output["plugin"], "ai-skills-core")
-        self.assertEqual(output["normal_entry"], "AI Skills Maintainer candidate")
-        self.assertTrue(output["G8"]["pass"])
-        self.assertEqual(output["classification"], "stale_install")
-        self.assertTrue(output["consumer_path_checked"])
-        self.assertFalse(output["adds_duplicate_policy"])
-        self.assertIn("不能单独证明", output["G8"]["reason"])
+    def test_neutral_candidate_visible_inputs_do_not_leak_gate_oracle_terms(self) -> None:
+        for meta in PLUGIN_CASES.values():
+            for name in meta["inputs"]:
+                text = (R2_INPUT_ROOT / name).read_text(encoding="utf-8")
+                self.assertIsNone(FORBIDDEN_NEUTRAL_INPUT_PATTERNS.search(text), name)
+                self.assertNotIn("FROZEN_G2_G8_RUBRIC", text)
+                self.assertNotIn("replay_adjudication", text)
 
-    def test_fixture_files_are_inputs_not_gate_pass_authority(self) -> None:
-        fixture = read_json(REPO_ROOT / "tests/fixtures/056_product_delivery_discipline_gates.json")
+    def test_unbiased_replay_receipts_prove_installed_candidate_consumption(self) -> None:
+        for key, meta in PLUGIN_CASES.items():
+            with self.subTest(plugin=key):
+                run = read_json(R2_REPLAY_ROOT / key / "candidate_replay_run.json")
+                add = read_json(R2_REPLAY_ROOT / key / "plugin-add.json")
 
-        self.assertEqual(fixture["task_key"], "056_product_delivery_discipline")
-        self.assertNotIn("G1", {entry["gate"] for entry in fixture["gates"]})
-        self.assertTrue((RESULT_ROOT / "replay_inputs/workflow_core_fixture.json").is_file())
-        self.assertTrue((RESULT_ROOT / "replay_inputs/web_development_fixture.json").is_file())
-        self.assertTrue((RESULT_ROOT / "replay_inputs/ai_skills_core_fixture.json").is_file())
+                self.assertEqual(run["candidate_commit"], PRODUCTION_CANDIDATE_COMMIT)
+                self.assertEqual(run["plugin_id"], f"{meta['plugin']}@ai-skills-candidate")
+                self.assertEqual(run["runtime_version"], "codex-cli 0.153.4")
+                self.assertTrue(run["actual_consumption"]["proven"])
+                self.assertGreaterEqual(run["actual_consumption"]["line_index"], 1)
+                self.assertIn("item.", run["actual_consumption"]["event_type"])
+                self.assertEqual(add["pluginId"], f"{meta['plugin']}@ai-skills-candidate")
+                self.assertEqual(add["marketplaceName"], "ai-skills-candidate")
+                self.assertEqual(add["version"], meta["version"])
+                self.assertEqual(add["installedPath"], run["installed_path"])
+
+    def test_frozen_rubric_hash_is_stable_before_and_after_replay(self) -> None:
+        rubric = ADJUDICATION_ROOT / "FROZEN_G2_G8_RUBRIC.md"
+        self.assertEqual(sha256(rubric), FROZEN_RUBRIC_SHA256)
+        self.assertIn(FROZEN_RUBRIC_SHA256, (ADJUDICATION_ROOT / "FROZEN_G2_G8_RUBRIC.sha256").read_text())
+        self.assertIn(FROZEN_RUBRIC_SHA256, (ADJUDICATION_ROOT / "FROZEN_G2_G8_RUBRIC.post_replay.sha256").read_text())
+
+    def test_raw_stdout_stderr_response_exist_and_hashes_match(self) -> None:
+        for key in PLUGIN_CASES:
+            with self.subTest(plugin=key):
+                directory = R2_REPLAY_ROOT / key
+                expected = [
+                    "candidate_replay_run.json",
+                    "plugin-add.json",
+                    "child.stdout.jsonl",
+                    "child.stderr",
+                    "response.md",
+                    "raw_evidence_manifest.json",
+                ]
+                hashes = parse_sha256s(directory / "SHA256SUMS")
+                for name in expected:
+                    artifact = directory / name
+                    self.assertTrue(artifact.is_file(), artifact)
+                    if name != "child.stderr":
+                        self.assertGreater(artifact.stat().st_size, 0, artifact)
+                    self.assertEqual(hashes[name], sha256(artifact), artifact)
+
+    def test_adjudication_binds_rubric_raw_output_and_exact_candidate(self) -> None:
+        for key, meta in PLUGIN_CASES.items():
+            with self.subTest(plugin=key):
+                response_hash = sha256(R2_REPLAY_ROOT / key / "response.md")
+                text = (ADJUDICATION_ROOT / meta["adjudication"]).read_text(encoding="utf-8")
+
+                self.assertIn(PRODUCTION_CANDIDATE_COMMIT, text)
+                self.assertIn(FROZEN_RUBRIC_SHA256, text)
+                self.assertIn(response_hash, text)
+                self.assertIn("SOURCE_DEFECT_DISCOVERED=NO", text)
+                self.assertIn("PASS", text)
+                for gate in meta["gates"]:
+                    self.assertIn(gate, text)
+
+    def test_evidence_manifest_distinguishes_raw_candidate_output_from_adjudication(self) -> None:
+        manifest = read_json(RESULT_ROOT / "evidence_manifest.json")
+        unbiased = read_json(R2_REPLAY_ROOT / "manifest.json")
+
+        self.assertFalse(manifest["source_defect_discovered"])
+        self.assertEqual(
+            manifest["r1_oracle_led_evidence"]["status"],
+            "provenance_actual_consumption_only_superseded_for_unbiased_semantic_PASS",
+        )
+        self.assertEqual(unbiased["old_r1_evidence_status"], manifest["r1_oracle_led_evidence"]["status"])
+        for run in unbiased["runs"]:
+            self.assertTrue(run["raw_output_dir"].startswith("replay_evidence_unbiased/"))
+            self.assertTrue(run["adjudication"].startswith("replay_adjudication/"))
+            self.assertNotEqual(run["raw_output_dir"], run["adjudication"])
+            self.assertTrue(run["pass"])
+            self.assertFalse(run["source_defect_discovered"])
+
+    def test_result_records_locator_typo_correction_and_pending_host_boundary(self) -> None:
+        text = (RESULT_ROOT / "RESULT.md").read_text(encoding="utf-8")
+
+        self.assertIn("RESULT_LOCATOR_CORRECTED=YES", text)
+        self.assertIn("9f1c0d32abf49e674bcc7cab0e7287ed714a1199", text)
+        self.assertIn("SOURCE_DEFECT_DISCOVERED=NO", text)
+        self.assertIn("real Host", text)
+        self.assertNotIn("9f1c0d33d716d484743c2880fe4e32d2a4941ef8, containing", text)
 
 
 if __name__ == "__main__":

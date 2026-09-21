@@ -1,46 +1,60 @@
 {
-  "task_key": "056_product_delivery_discipline",
+  "evidence_layer": "R1 leading-oracle provenance",
   "evidence_type": "candidate_plugin_replay_normal_entry",
-  "production_candidate_commit": "33c30bbe0dd528031a23d379905cd00d6b65bc1f",
-  "runtime_version": "codex-cli 0.153.4",
   "marketplace": "ai-skills-candidate",
-  "scope": "authorized non-host public-safe replay; not final real-host G1 smoke and not overall 056 completion",
-  "runs": [
-    {
-      "plugin": "workflow-core",
-      "plugin_id": "workflow-core@ai-skills-candidate",
-      "version": "0.3",
-      "run_id": "20260921T070149Z-3675136",
-      "gates": ["G2", "G3", "G4", "G5", "G7", "Source Discovery"],
-      "receipt": "replay_evidence/workflow_core/candidate_replay_run.json",
-      "behavior_output": "replay_evidence/workflow_core/workflow_core_gate_replay.json",
-      "actual_consumption_proven": true
-    },
-    {
-      "plugin": "web-development",
-      "plugin_id": "web-development@ai-skills-candidate",
-      "version": "0.2",
-      "run_id": "20260921T070322Z-3680967",
-      "gates": ["G6"],
-      "receipt": "replay_evidence/web_development/candidate_replay_run.json",
-      "behavior_output": "replay_evidence/web_development/web_development_gate_replay.json",
-      "actual_consumption_proven": true
-    },
-    {
-      "plugin": "ai-skills-core",
-      "plugin_id": "ai-skills-core@ai-skills-candidate",
-      "version": "0.4",
-      "run_id": "20260921T070520Z-3687979",
-      "gates": ["G8"],
-      "receipt": "replay_evidence/ai_skills_core/candidate_replay_run.json",
-      "behavior_output": "replay_evidence/ai_skills_core/ai_skills_core_gate_replay.json",
-      "actual_consumption_proven": true
-    }
-  ],
+  "note": "R1 proves installed candidate identity, fresh Codex runtime actual consumption, and generated plugin wiring. Its candidate-visible fixtures included answer-shaped gate fields, so R2 unbiased replay/adjudication is authoritative for G2-G8 semantic PASS.",
   "pending": [
     "final real-host G1 smoke",
     "real Host install/update",
     "real user CODEX_HOME mutation",
     "release/main integration"
-  ]
+  ],
+  "production_candidate_commit": "33c30bbe0dd528031a23d379905cd00d6b65bc1f",
+  "runs": [
+    {
+      "actual_consumption_proven": true,
+      "behavior_output": "replay_evidence/workflow_core/workflow_core_gate_replay.json",
+      "gates": [
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G7",
+        "Source Discovery"
+      ],
+      "plugin": "workflow-core",
+      "plugin_id": "workflow-core@ai-skills-candidate",
+      "receipt": "replay_evidence/workflow_core/candidate_replay_run.json",
+      "run_id": "20260921T070149Z-3675136",
+      "version": "0.3"
+    },
+    {
+      "actual_consumption_proven": true,
+      "behavior_output": "replay_evidence/web_development/web_development_gate_replay.json",
+      "gates": [
+        "G6"
+      ],
+      "plugin": "web-development",
+      "plugin_id": "web-development@ai-skills-candidate",
+      "receipt": "replay_evidence/web_development/candidate_replay_run.json",
+      "run_id": "20260921T070322Z-3680967",
+      "version": "0.2"
+    },
+    {
+      "actual_consumption_proven": true,
+      "behavior_output": "replay_evidence/ai_skills_core/ai_skills_core_gate_replay.json",
+      "gates": [
+        "G8"
+      ],
+      "plugin": "ai-skills-core",
+      "plugin_id": "ai-skills-core@ai-skills-candidate",
+      "receipt": "replay_evidence/ai_skills_core/candidate_replay_run.json",
+      "run_id": "20260921T070520Z-3687979",
+      "version": "0.4"
+    }
+  ],
+  "runtime_version": "codex-cli 0.153.4",
+  "scope": "authorized non-host public-safe replay; not final real-host G1 smoke and not overall 056 completion",
+  "semantic_pass_status": "superseded_for_unbiased_G2_G8_semantic_PASS",
+  "task_key": "056_product_delivery_discipline"
 }

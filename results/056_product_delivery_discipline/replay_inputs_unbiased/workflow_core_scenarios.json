@@ -1,0 +1,56 @@
+{
+  "task_key": "056_product_delivery_discipline",
+  "production_candidate": "33c30bbe0dd528031a23d379905cd00d6b65bc1f",
+  "scenarios": [
+    {
+      "scenario_id": "workflow-1",
+      "facts": [
+        "Broad automated checks have completed successfully.",
+        "Producer-side evidence for the claimed behavior is not complete.",
+        "The current work still waits for one necessary human action.",
+        "The user asks whether final acceptance can be delivered now and how to handle the status."
+      ]
+    },
+    {
+      "scenario_id": "workflow-2",
+      "facts": [
+        "The user has just completed a necessary human action.",
+        "Validation after that action has not been rerun.",
+        "Integration closure after that action has not been rerun.",
+        "The user asks what the next step is."
+      ]
+    },
+    {
+      "scenario_id": "workflow-3",
+      "facts": [
+        "There are two evidence packages for the same claim.",
+        "One package shows only an application shell.",
+        "The other package includes the actual target surface and the relevant interaction sequence.",
+        "The user asks which package is enough to support the claim and why."
+      ]
+    },
+    {
+      "scenario_id": "workflow-4",
+      "facts": [
+        "A release claim combines unit evidence from candidate A with a screenshot from candidate B.",
+        "The user asks whether this proves a single release candidate is ready."
+      ]
+    },
+    {
+      "scenario_id": "workflow-5",
+      "facts": [
+        "Three small tasks are under review: documentation-only, backend/server-only, and a tiny nonvisual adjustment.",
+        "The user asks what validation is proportionate to each task."
+      ]
+    },
+    {
+      "scenario_id": "workflow-6",
+      "facts": [
+        "The correct local repository already exists.",
+        "It contains unrelated dirty work that appears to belong to the user.",
+        "The task needs a clean implementation surface.",
+        "The user asks how to continue safely."
+      ]
+    }
+  ]
+}

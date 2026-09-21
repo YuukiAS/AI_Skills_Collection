@@ -1,0 +1,64 @@
+{
+  "actual_plugin_consumption_receipts": [
+    "replay_evidence_unbiased/workflow_core/candidate_replay_run.json",
+    "replay_evidence_unbiased/web_development/candidate_replay_run.json",
+    "replay_evidence_unbiased/ai_skills_core/candidate_replay_run.json"
+  ],
+  "frozen_rubric": {
+    "path": "replay_adjudication/FROZEN_G2_G8_RUBRIC.md",
+    "sha256_post": "516ed142f55200840e54cda01a08793b51d2e666bc4bc4f8e62e5feb03170269",
+    "sha256_pre": "516ed142f55200840e54cda01a08793b51d2e666bc4bc4f8e62e5feb03170269"
+  },
+  "neutral_candidate_visible_input_hashes": {
+    "replay_inputs_unbiased/ai_skills_core_scenario.json": "c6ded63b73ec4bbcbfc8a9c5721a1e1cf8a5167b11b19c6f0c0f344e1603caf2",
+    "replay_inputs_unbiased/ai_skills_core_task.md": "3f3f0b73eaa8025bc0d8f2c9fdcaf073cfb88221d00b556800c9e00d6ffe8dd3",
+    "replay_inputs_unbiased/web_development_scenario.json": "afdd811e008eca7a039d62cd2e27b94364974075bb73a25c5195097d936da893",
+    "replay_inputs_unbiased/web_development_task.md": "bb5d159a99ddbacfdd34c4f8255a9727c89f498f212887eeca24a3ccef2cc679",
+    "replay_inputs_unbiased/workflow_core_scenarios.json": "1bfa9496db5fa1ef02d1728b82e04ceb4ee74a6fdf61f319326c565d0309b871",
+    "replay_inputs_unbiased/workflow_core_task.md": "ba00637f75328554e967bb94eb1eac8c5242ecf00ef010335a38cf85f9b44fe3"
+  },
+  "pending_real_host_boundary": [
+    "final real-host G1 smoke",
+    "real Host install/update",
+    "real user CODEX_HOME mutation",
+    "release/main integration"
+  ],
+  "production_candidate_identity": {
+    "ai_skills_branch_at_repair_start": "4480b7e5a7c55c1e3a90fb227421d78509ec47e6",
+    "ai_skills_candidate_commit": "33c30bbe0dd528031a23d379905cd00d6b65bc1f",
+    "bridge_candidate_commit": "96a8ea1b58ebe6f9b7c5c46c43995666251911fe",
+    "production_source_changed_after_candidate": false,
+    "version_changed_in_evidence_repair": false
+  },
+  "r1_oracle_led_evidence": {
+    "path": "replay_evidence/manifest.json",
+    "status": "provenance_actual_consumption_only_superseded_for_unbiased_semantic_PASS"
+  },
+  "raw_replay_output_hashes": {
+    "replay_evidence_unbiased/ai_skills_core/candidate_replay_run.json": "f50878f0c96c140213d8572bd4bd7c808b1fba262598daba56890589bbd567c7",
+    "replay_evidence_unbiased/ai_skills_core/child.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "replay_evidence_unbiased/ai_skills_core/child.stdout.jsonl": "23b2912ce7fb7eadec0be433e63aec99048c13d22e4182111c2578301215aef3",
+    "replay_evidence_unbiased/ai_skills_core/plugin-add.json": "dfc63e0fc48e099a3407b38c6a38ddcd54e3f51ad93afcd1459ea0ac58df7d91",
+    "replay_evidence_unbiased/ai_skills_core/raw_evidence_manifest.json": "ce56841228eb25e409d707b214e76fabb619e1e9f8b452c672d68efe430cd451",
+    "replay_evidence_unbiased/ai_skills_core/response.md": "e4b9abfbe04649fde14daa8788c04e5b12d5c758b34b36f4acd7d1ef0b942293",
+    "replay_evidence_unbiased/web_development/candidate_replay_run.json": "03dbee96d99a32b64e4f2bebc3ad8c97d0f698bdca945a69b3af6554f077bbd9",
+    "replay_evidence_unbiased/web_development/child.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "replay_evidence_unbiased/web_development/child.stdout.jsonl": "ba13f19d9dcb3a29f2b390d525ee6e90c9b09107246fccdf22ee6e8eb6a35dab",
+    "replay_evidence_unbiased/web_development/plugin-add.json": "3334dc63c121455af1cb6a26d91f9b88ad124743e69ad55554dd03bb531186e5",
+    "replay_evidence_unbiased/web_development/raw_evidence_manifest.json": "b653d406a3b12cf3954b515fddf0e77dc16ed5e6b35b69cf2622c43c4ed00f11",
+    "replay_evidence_unbiased/web_development/response.md": "0accb859fcc42cbb778d0e0e08c0cc996aa1551d6f1c7916cc2b168e1501df78",
+    "replay_evidence_unbiased/workflow_core/candidate_replay_run.json": "fc4811816fb75ddfec5e21c391bf5766993e2d4e590ca9b4756c67f3125f2529",
+    "replay_evidence_unbiased/workflow_core/child.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "replay_evidence_unbiased/workflow_core/child.stdout.jsonl": "f79f39b8bf723151016cf579d2fdfdb36043e088848c0a888388738960a75b73",
+    "replay_evidence_unbiased/workflow_core/plugin-add.json": "fb02a2abcb83a50a8f38bd48713446697410cca3f5e871f5155c9ac075aef9f9",
+    "replay_evidence_unbiased/workflow_core/raw_evidence_manifest.json": "23af50ea16e8837001f59301693db8551a09ef00bbb4d7265f62635656853cf9",
+    "replay_evidence_unbiased/workflow_core/response.md": "72ed8ae7f9a6bbcdf1d20becd9a9d0a2b766a6d3169b2efcd20424efa3374b4e"
+  },
+  "read_only_adjudication": {
+    "replay_adjudication/ai_skills_core_adjudication.md": "ea79ebb222af4ff202792042b7a7c6fade3801ecdecb45dcb8b784961b9c0cb3",
+    "replay_adjudication/web_development_adjudication.md": "fe110b753679fa46334103b168b27fc3c778359d94993e28dc50398354c90f10",
+    "replay_adjudication/workflow_core_adjudication.md": "25dd3d80f0cd796dca9727b9fdc2b577b4a280605d9492582857b035e44c90b8"
+  },
+  "source_defect_discovered": false,
+  "task_key": "056_product_delivery_discipline"
+}
