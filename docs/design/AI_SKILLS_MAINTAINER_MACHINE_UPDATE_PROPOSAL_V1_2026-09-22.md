@@ -233,9 +233,15 @@ Maintainer reads the formal release delta before mutation, expands the component
 
 Maintainer remains the user entry. Bridge-owned mutations are executed through Bridge’s canonical implementation:
 
-- package/source update uses the formal Bridge release source and existing safe Git/source rules;
-- Host changes use ai-bridge host install and ai-bridge host validate;
-- Lite/Review/Persistent Run/other project consumers use their corresponding ai-bridge install/validate commands only when the release delta requires them.
+- discover the active Bridge runtime with the resolved `ai-bridge` executable and `ai-bridge where`;
+- when that runtime is backed by the canonical editable Git checkout, fetch the formal Bridge `release` ref and verify origin/ancestry before any mutation;
+- if the current checkout is at or behind that formal release and the fast-forward does not overlap user-owned dirty paths, advance it with a fast-forward-only update to the formal release commit without changing remote mappings or stashing/resetting user work;
+- rerun the canonical editable package installation from that same environment/interpreter when entry points or dependencies may need refresh, then re-check runtime path and version;
+- if the checkout is intentionally ahead/diverged on development work, do not downgrade, switch away, reset, or pretend that the formal release owns the active runtime; return `DEVELOPMENT_SOURCE_PRESENT` unless a separately authorized conversion is necessary;
+- Host changes use `ai-bridge host install` and `ai-bridge host validate`;
+- Lite/Review/Persistent Run/other project consumers use their corresponding `ai-bridge` install/validate commands only when the release delta requires them.
+
+The same source rule applies when a canonical local AI_Skills checkout itself must advance for CLI/profile adaptation: fast-forward to the formal release only when ancestry and dirty-path ownership make that safe; otherwise leave development work untouched and use the independent formal Marketplace path where possible.
 
 Maintainer never copies Host Policy generation or validation logic.
 
