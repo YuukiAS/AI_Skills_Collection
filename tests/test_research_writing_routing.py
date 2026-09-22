@@ -32,6 +32,21 @@ class ResearchWritingRoutingTests(unittest.TestCase):
             ],
         )
 
+    def test_research_main_installs_renderer_but_marketplace_research_writing_does_not(self) -> None:
+        profile = json.loads((REPO_ROOT / "profiles/research-main.json").read_text(encoding="utf-8"))
+        self.assertIn("skills/tools/documents-media/render-chinese-math-pdf", profile["skills"])
+
+        data = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
+        research = next(plugin for plugin in data["plugins"] if plugin["name"] == "research-writing")
+        serialized = json.dumps(research)
+        self.assertNotIn("skills/tools/documents-media/render-chinese-math-pdf", serialized)
+
+    def test_research_reporting_formal_pdf_handoff_fails_closed_without_companion(self) -> None:
+        text = read_skill("skills/writing/research/research-reporting")
+        self.assertIn("skills/tools/documents-media/render-chinese-math-pdf", text)
+        self.assertIn("fail closed", text)
+        self.assertIn("markdown-only research authoring requests remain markdown-only", text)
+
     def test_research_writing_aggregate_keeps_internal_paper_boundaries(self) -> None:
         data = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
         research = next(plugin for plugin in data["plugins"] if plugin["name"] == "research-writing")

@@ -1,0 +1,306 @@
+{
+  "commands": {
+    "xelatex": [
+      {
+        "args": [
+          "xelatex",
+          "-interaction=nonstopmode",
+          "-halt-on-error",
+          "-output-directory",
+          "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/documents-media--scientific-pdf-rendering-reliability/work/direct_tex",
+          "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/documents-media--scientific-pdf-rendering-reliability/inputs/direct_tex_note.tex"
+        ],
+        "output": "This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex)\n restricted \\write18 enabled.\nentering extended mode\n\n(/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/do\ncuments-media--scientific-pdf-rendering-reliability/inputs/direct_tex_note.tex\nLaTeX2e <2020-10-01> patch level 4\nL3 programming layer <2021-02-18>\n(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls\nDocument Class: article 2020/04/10 v1.4m Standard LaTeX document class\n(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo))\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty\nFor additional information on amsmath, use the `?' option.\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xetex.def\n(|extractbb --version))\nNo file direct_tex_note.aux.\n(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd) [1]\n(/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/do\ncuments-media--scientific-pdf-rendering-reliability/work/direct_tex/direct_tex_\nnote.aux) )\nOutput written on /tmp/ai-skills-documents-media-scientific-pdf-rendering-relia\nbility/results/documents-media--scientific-pdf-rendering-reliability/work/direc\nt_tex/direct_tex_note.pdf (1 page).\nTranscript written on /tmp/ai-skills-documents-media-scientific-pdf-rendering-r\neliability/results/documents-media--scientific-pdf-rendering-reliability/work/d\nirect_tex/direct_tex_note.log.\n",
+        "returncode": 0
+      },
+      {
+        "args": [
+          "xelatex",
+          "-interaction=nonstopmode",
+          "-halt-on-error",
+          "-output-directory",
+          "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/documents-media--scientific-pdf-rendering-reliability/work/direct_tex",
+          "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/documents-media--scientific-pdf-rendering-reliability/inputs/direct_tex_note.tex"
+        ],
+        "output": "This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex)\n restricted \\write18 enabled.\nentering extended mode\n\n(/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/do\ncuments-media--scientific-pdf-rendering-reliability/inputs/direct_tex_note.tex\nLaTeX2e <2020-10-01> patch level 4\nL3 programming layer <2021-02-18>\n(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls\nDocument Class: article 2020/04/10 v1.4m Standard LaTeX document class\n(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo))\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty\nFor additional information on amsmath, use the `?' option.\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xetex.def\n(|extractbb --version))\n(/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/do\ncuments-media--scientific-pdf-rendering-reliability/work/direct_tex/direct_tex_\nnote.aux) (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd) [1]\n(/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/do\ncuments-media--scientific-pdf-rendering-reliability/work/direct_tex/direct_tex_\nnote.aux) )\nOutput written on /tmp/ai-skills-documents-media-scientific-pdf-rendering-relia\nbility/results/documents-media--scientific-pdf-rendering-reliability/work/direc\nt_tex/direct_tex_note.pdf (1 page).\nTranscript written on /tmp/ai-skills-documents-media-scientific-pdf-rendering-r\neliability/results/documents-media--scientific-pdf-rendering-reliability/work/d\nirect_tex/direct_tex_note.log.\n",
+        "returncode": 0
+      }
+    ]
+  },
+  "effective_profile": {
+    "authority": "source-or-project",
+    "engine": "direct-xelatex",
+    "fonts": {
+      "cjk_sans": "Noto Sans SC",
+      "cjk_serif": "Noto Serif SC",
+      "latin_main": "TeX Gyre Termes",
+      "math": "TeX Gyre Termes Math"
+    },
+    "fontsize": "11pt",
+    "linestretch": "1.15",
+    "margin": "25mm",
+    "number_sections": false,
+    "ordinary_prose_downscaling": false,
+    "paper": "a4",
+    "profile_id": "canonical-formal-note-v0.2",
+    "resource_dir": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf",
+    "route": "direct-xelatex",
+    "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/documents-media--scientific-pdf-rendering-reliability/inputs/direct_tex_note.tex",
+    "toc": false
+  },
+  "output_pdf": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/documents-media--scientific-pdf-rendering-reliability/renders/initial/direct_tex_note.pdf",
+  "probe": {
+    "commands": {
+      "kpsewhich": {
+        "available": true,
+        "first_line": "kpathsea version 6.3.2",
+        "path": "/usr/bin/kpsewhich"
+      },
+      "pandoc": {
+        "available": true,
+        "first_line": "pandoc 2.14.0.3",
+        "path": "/usr/bin/pandoc"
+      },
+      "pdffonts": {
+        "available": true,
+        "first_line": "pdffonts version 21.01.0",
+        "path": "/usr/bin/pdffonts"
+      },
+      "pdftoppm": {
+        "available": true,
+        "first_line": "pdftoppm version 21.01.0",
+        "path": "/usr/bin/pdftoppm"
+      },
+      "pdftotext": {
+        "available": true,
+        "first_line": "pdftotext version 21.01.0",
+        "path": "/usr/bin/pdftotext"
+      },
+      "xelatex": {
+        "available": true,
+        "first_line": "XeTeX 3.14159265-2.6-0.999992 (TeX Live 2020)",
+        "path": "/usr/bin/xelatex"
+      }
+    },
+    "default_renderer": "pandoc_xelatex",
+    "failure_status": null,
+    "fonts": {
+      "newcm_math_calligraphic": {
+        "available": true,
+        "path": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/newcomputermodern/NewCMMath-Regular.otf",
+        "sha256": "d66ac1cc91c55c24d3636ae2df1238076debdff51841f9893fc5419cc2df3df7"
+      },
+      "noto_sans_sc_bold": {
+        "available": true,
+        "path": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSansSC-Bold.otf",
+        "sha256": "c6cb5a93abaa9edc8ee7463b7ebb7f42d618d40e6ed2f7a5371c97b0b64767c0"
+      },
+      "noto_sans_sc_regular": {
+        "available": true,
+        "path": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSansSC-Regular.otf",
+        "sha256": "faa6c9df652116dde789d351359f3d7e5d2285a2b2a1f04a2d7244df706d5ea9"
+      },
+      "noto_serif_sc_bold": {
+        "available": true,
+        "path": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSerifSC-Bold.otf",
+        "sha256": "24693d48bdb9152f0a06b02af625638a1097abd6de4010ebba027f6e82710527"
+      },
+      "noto_serif_sc_regular": {
+        "available": true,
+        "path": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSerifSC-Regular.otf",
+        "sha256": "e8f396decc1f0963a016a989c3d8852e863d1350996f573860a80767c83a1cd3"
+      },
+      "texgyretermes_bold": {
+        "available": true,
+        "path": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-bold.otf",
+        "sha256": "2fb3e952065fa153c7e4e64e04b98b9d79225739b6025aa3f0f0782d299ff61e"
+      },
+      "texgyretermes_bolditalic": {
+        "available": true,
+        "path": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-bolditalic.otf",
+        "sha256": "1bf6af99cb0e26c12951317032d79b96ae009551e59ccf02a5b24f325ecfec87"
+      },
+      "texgyretermes_italic": {
+        "available": true,
+        "path": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-italic.otf",
+        "sha256": "6dd103a1672e50568cd2f8a706ccd48443d44d7d073a59d2286f4e6f746575d6"
+      },
+      "texgyretermes_math": {
+        "available": true,
+        "path": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/texgyre-termes-math/texgyretermes-math.otf",
+        "sha256": "e5ce42b4fe826b7ea4c0874359decf0b294439355c511a4794107a9924e2cd5a"
+      },
+      "texgyretermes_regular": {
+        "available": true,
+        "path": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-regular.otf",
+        "sha256": "cc3fe7c707b81428d23d54df3eadd9228a2bf6a4d43125d94df56f5f63134659"
+      }
+    },
+    "forbidden_default_dependencies": {
+      "chromium_latex_fallback": false,
+      "fc_match_times_new_roman": false,
+      "times_new_roman": false,
+      "windows_fonts_mount": false
+    },
+    "latex_packages": {
+      "booktabs.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty"
+      },
+      "fontspec.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.sty"
+      },
+      "geometry.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty"
+      },
+      "graphicx.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty"
+      },
+      "longtable.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty"
+      },
+      "mathtools.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty"
+      },
+      "unicode-math.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/unicode-math/unicode-math.sty"
+      },
+      "xcolor.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty"
+      },
+      "xeCJK.sty": {
+        "available": true,
+        "path": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/texmf/tex/xelatex/xecjk/xeCJK.sty"
+      }
+    },
+    "local_override_paths_checked": [
+      "/overflow/htzhu/mingcheng_new/.config/ai-skills/local-overrides.toml",
+      "/overflow/htzhu/mingcheng_new/.codex-global/.config/ai-skills/local-overrides.toml"
+    ],
+    "ready": true,
+    "resource_candidates": [
+      "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/render_resources/chinese_math_pdf",
+      "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf",
+      "/tmp/render_resources/chinese_math_pdf",
+      "/render_resources/chinese_math_pdf"
+    ],
+    "resource_dir": "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf"
+  },
+  "qa": {
+    "errors": [],
+    "font_checks": {
+      "canonical_font_rows": [],
+      "cjk_font_rows": [],
+      "cjk_unicode_failures": [],
+      "errors": [],
+      "font_rows": [
+        {
+          "embedded": "yes",
+          "name": "ZURDYF+LMRoman12-Bold-Identity-H",
+          "raw": "ZURDYF+LMRoman12-Bold-Identity-H     CID Type 0C       Identity-H       yes yes yes      5  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "NJPYVD+LMRoman10-Regular-Identity-H",
+          "raw": "NJPYVD+LMRoman10-Regular-Identity-H  CID Type 0C       Identity-H       yes yes yes      7  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "AXIYMV+LMRoman8-Regular-Identity-H",
+          "raw": "AXIYMV+LMRoman8-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes      9  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "KDROIQ+CMR10",
+          "raw": "KDROIQ+CMR10                         Type 1C           Builtin          yes yes yes     10  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "EQOWAT+CMMI10",
+          "raw": "EQOWAT+CMMI10                        Type 1C           Builtin          yes yes yes     11  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "UPSPFD+CMMI8",
+          "raw": "UPSPFD+CMMI8                         Type 1C           Builtin          yes yes yes     12  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "LDNTEN+CMEX10",
+          "raw": "LDNTEN+CMEX10                        Type 1C           Builtin          yes yes yes     13  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "GJOZZN+CMR8",
+          "raw": "GJOZZN+CMR8                          Type 1C           Builtin          yes yes yes     14  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "KASSNE+CMSY10",
+          "raw": "KASSNE+CMSY10                        Type 1C           Builtin          yes yes yes     15  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "RZOUYW+MSBM10",
+          "raw": "RZOUYW+MSBM10                        Type 1C           Builtin          yes yes yes     16  0",
+          "subset": "yes",
+          "unicode": "yes"
+        }
+      ],
+      "unexpected_canonical_fallback_rows": [],
+      "warnings": []
+    },
+    "fonts_embedded": true,
+    "pages": 1,
+    "pdf": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/documents-media--scientific-pdf-rendering-reliability/renders/initial/direct_tex_note.pdf",
+    "pdffonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nZURDYF+LMRoman12-Bold-Identity-H     CID Type 0C       Identity-H       yes yes yes      5  0\nNJPYVD+LMRoman10-Regular-Identity-H  CID Type 0C       Identity-H       yes yes yes      7  0\nAXIYMV+LMRoman8-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes      9  0\nKDROIQ+CMR10                         Type 1C           Builtin          yes yes yes     10  0\nEQOWAT+CMMI10                        Type 1C           Builtin          yes yes yes     11  0\nUPSPFD+CMMI8                         Type 1C           Builtin          yes yes yes     12  0\nLDNTEN+CMEX10                        Type 1C           Builtin          yes yes yes     13  0\nGJOZZN+CMR8                          Type 1C           Builtin          yes yes yes     14  0\nKASSNE+CMSY10                        Type 1C           Builtin          yes yes yes     15  0\nRZOUYW+MSBM10                        Type 1C           Builtin          yes yes yes     16  0\n",
+    "pdfinfo": "Creator:         XeTeX output 2026.09.21:2306\nProducer:       xdvipdfmx (20200315)\nCreationDate:   Mon Sep 21 22:06:43 2026 EDT\nTagged:         no\nUserProperties: no\nSuspects:       no\nForm:           none\nJavaScript:     no\nPages:          1\nEncrypted:      no\nPage size:      595.28 x 841.89 pts (A4)\nPage rot:       0\nFile size:      15411 bytes\nOptimized:      no\nPDF version:    1.5\n",
+    "preview_paths": [
+      "results/documents-media--scientific-pdf-rendering-reliability/renders/initial/direct_tex_note_pages/direct_tex_note-1.png"
+    ],
+    "preview_prefix": "results/documents-media--scientific-pdf-rendering-reliability/renders/initial/direct_tex_note_pages/direct_tex_note",
+    "text_checks": {
+      "errors": [],
+      "fragmentation": {
+        "cjk_lines": 0,
+        "failed": false,
+        "short_cjk_lines": 0,
+        "short_ratio": 0.0
+      },
+      "table_survival": {
+        "failed": false,
+        "matched_rows": 0,
+        "source_table_rows": 0
+      },
+      "warnings": []
+    },
+    "warnings": []
+  },
+  "route": "direct-xelatex",
+  "status": "complete"
+}

@@ -34,6 +34,7 @@ EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
     "workflow-core": "0.2",
     "ai-skills-core": "0.3",
     "writing-style": "0.3",
+    "research-writing": "0.2",
     "presentations": "0.3",
 }
 REPOSITORY_SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
@@ -198,12 +199,12 @@ class CodexMarketplaceTests(unittest.TestCase):
             {
                 name: version
                 for name, version in plugin_versions.items()
-                if name not in {"workflow-core", "ai-skills-core", "writing-style", "presentations"}
+                if name not in {"workflow-core", "ai-skills-core", "writing-style", "research-writing", "presentations"}
             },
             {
                 name: "0.1"
                 for name in CENTRAL_PLUGIN_NAMES
-                if name not in {"workflow-core", "ai-skills-core", "writing-style", "presentations"}
+                if name not in {"workflow-core", "ai-skills-core", "writing-style", "research-writing", "presentations"}
             },
         )
         for plugin_version in plugin_versions.values():

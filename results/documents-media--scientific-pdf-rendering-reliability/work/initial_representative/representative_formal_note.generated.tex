@@ -1,0 +1,173 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+  a4paper,
+]{article}
+\author{}
+\date{}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=25mm]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{unicode-math}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/texgyre-termes/,
+  Extension=.otf,
+  UprightFont=texgyretermes-regular,
+  BoldFont=texgyretermes-bold,
+  ItalicFont=texgyretermes-italic,
+  BoldItalicFont=texgyretermes-bolditalic
+]{texgyretermes-regular}
+
+\setmathfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/texgyre-termes-math/,
+  Extension=.otf
+]{texgyretermes-math}
+
+\setmathfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/newcomputermodern/,
+  Extension=.otf,
+  range={cal,bfcal}
+]{NewCMMath-Regular}
+
+\setCJKmainfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSerifSC-Regular,
+  BoldFont=NotoSerifSC-Bold,
+  AutoFakeSlant=0.18
+]{NotoSerifSC-Regular}
+
+\setCJKsansfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSansSC-Regular,
+  BoldFont=NotoSansSC-Bold,
+  AutoFakeSlant=0.18
+]{NotoSansSC-Regular}
+
+\setCJKmonofont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSansSC-Regular,
+  BoldFont=NotoSansSC-Bold
+]{NotoSansSC-Regular}
+
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}
+\emergencystretch=3em
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\begin{document}
+
+\setstretch{1.15}
+\hypertarget{representative-formal-research-note}{%
+\section{Representative Formal Research
+Note}\label{representative-formal-research-note}}
+
+\hypertarget{question}{%
+\subsection{Question}\label{question}}
+
+This note checks whether a short research report with mixed Chinese and
+English prose can be rendered as a formal PDF without changing the
+requested profile identity.
+
+\hypertarget{evidence}{%
+\subsection{Evidence}\label{evidence}}
+
+第一段说明研究问题：我们希望比较一个简单线性预测器和带正则项的版本。The
+report intentionally mixes scripts so font pairing, line spacing, and
+mathematical context are visible in the rendered artifact.
+
+The core objective is
+
+\[
+\min_{\theta \in \mathbb{R}^{p}}
+\frac{1}{n}\sum_{i=1}^{n}\ell(y_i, x_i^\top\theta) + \lambda \|\theta\|_2^2.
+\]
+
+\hypertarget{compact-result-table}{%
+\subsection{Compact Result Table}\label{compact-result-table}}
+
+\begin{longtable}[]{@{}llrl@{}}
+\toprule
+Model & Metric & Value & Interpretation \\
+\midrule
+\endhead
+Baseline & RMSE & 1.42 & reference setting \\
+Regularized & RMSE & 1.18 & lower is better \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{interpretation}{%
+\subsection{Interpretation}\label{interpretation}}
+
+The numerical values are synthetic and only serve as a rendering
+fixture. The paragraph should look like normal body text, not a
+compressed table export or a browser printout.
+
+\end{document}

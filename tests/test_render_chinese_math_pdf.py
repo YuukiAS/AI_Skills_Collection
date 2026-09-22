@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import json
 import os
 import subprocess
 import sys
@@ -15,6 +16,7 @@ SKILL_ROOT = REPO_ROOT / "skills/tools/documents-media/render-chinese-math-pdf"
 PROBE_PATH = SKILL_ROOT / "scripts/probe_pdf_render_env.py"
 QA_PATH = SKILL_ROOT / "scripts/validate_pdf_layout.py"
 HEADER_PATH = SKILL_ROOT / "scripts/build_chinese_math_header.py"
+ORCHESTRATOR_PATH = SKILL_ROOT / "scripts/render_scientific_pdf.py"
 SKILLS_CLI_PATH = REPO_ROOT / "scripts/skills.py"
 
 
@@ -37,6 +39,7 @@ def digest(path: Path) -> str:
 probe = load_module(PROBE_PATH, "probe_pdf_render_env")
 qa = load_module(QA_PATH, "validate_pdf_layout")
 header_builder = load_module(HEADER_PATH, "build_chinese_math_header")
+orchestrator = load_module(ORCHESTRATOR_PATH, "render_scientific_pdf")
 
 
 class RenderChineseMathPdfTests(unittest.TestCase):
@@ -288,6 +291,49 @@ class RenderChineseMathPdfTests(unittest.TestCase):
         self.assertFalse(result["errors"])
         self.assertTrue(result["preview_paths"][0].endswith("out-1.png"))
 
+    def test_validate_pdf_can_preview_all_pages(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            pdf = Path(tmp) / "out.pdf"
+            pdf.write_bytes(b"%PDF-1.4\n%fake\n")
+            seen: list[list[str]] = []
+
+            def fake_run(args: list[str], timeout: int = 30):
+                seen.append(args)
+                if args[0] == "pdfinfo":
+                    return 0, "Pages: 3\n"
+                if args[0] == "pdffonts":
+                    return 0, "name type encoding emb sub uni object ID\nTeXGyreTermes-Regular TrueType yes yes yes 1 0\n"
+                if args[0] == "pdftotext":
+                    Path(args[-1]).write_text("中文测试内容足够长，表格和公式上下文正常。", encoding="utf-8")
+                    return 0, ""
+                if args[0] == "pdftoppm":
+                    prefix = Path(args[-1])
+                    prefix.parent.mkdir(parents=True, exist_ok=True)
+                    for page in [1, 2, 3]:
+                        (prefix.parent / f"{prefix.name}-{page}.png").write_bytes(b"png")
+                    return 0, ""
+                raise AssertionError(args)
+
+            with mock.patch.object(qa, "run_command", side_effect=fake_run):
+                result = qa.validate_pdf(pdf, preview_pages="all")
+        self.assertFalse(result["errors"])
+        self.assertIn(
+            ["pdftoppm", "-f", "1", "-l", "3", "-r", "120", "-png", str(pdf), str(pdf.parent / "out_preview" / "out")],
+            seen,
+        )
+        self.assertEqual(3, len(result["preview_paths"]))
+
+    def test_canonical_profile_rejects_unexpected_fallback_fonts(self) -> None:
+        pdffonts = "\n".join(
+            [
+                "name type encoding emb sub uni object ID",
+                "TeXGyreTermes-Regular TrueType Custom yes yes yes 1 0",
+                "LiberationSerif TrueType Custom yes yes yes 2 0",
+            ]
+        )
+        result = qa.validate_font_compatibility(pdffonts, "中文测试内容", canonical_profile=True)
+        self.assertIn("unexpected fallback font(s)", "\n".join(result["errors"]))
+
     def test_cjk_fragmentation_flags_excessive_short_lines(self) -> None:
         fragmented = "\n".join(["中", "文", "测", "试", "数", "学", "表", "格", "正常 English"])
         result = qa.validate_text(fragmented)
@@ -298,6 +344,77 @@ class RenderChineseMathPdfTests(unittest.TestCase):
         extracted = "指标        数值\n左室容积    120 mL\n"
         result = qa.validate_text(extracted, source)
         self.assertNotIn("Markdown table rows did not survive in extracted PDF layout text", result["errors"])
+
+    def test_pandoc_math_signature_preserves_ordered_mathtype_and_text(self) -> None:
+        ast = {
+            "blocks": [
+                {"t": "Para", "c": [{"t": "Math", "c": [{"t": "InlineMath"}, "\\hat{x}_i"]}]},
+                {"t": "Para", "c": [{"t": "Math", "c": [{"t": "DisplayMath"}, "\\sum_i \\alpha_i"]}]},
+            ]
+        }
+        self.assertEqual(
+            [
+                {"mathtype": "InlineMath", "text": "\\hat{x}_i"},
+                {"mathtype": "DisplayMath", "text": "\\sum_i \\alpha_i"},
+            ],
+            orchestrator.math_signature_from_ast(ast),
+        )
+
+    def test_generated_tex_math_survival_uses_payload_anchors_not_node_count(self) -> None:
+        signature = [
+            {"mathtype": "InlineMath", "text": "\\hat{x}_i + \\mathbb{R}"},
+            {"mathtype": "DisplayMath", "text": "\\nabla f(\\theta) = \\sum_i \\alpha_i"},
+        ]
+        passed = orchestrator.generated_tex_math_survival(
+            signature,
+            "hat{x}_i \\mathbb{R} and \\nabla f(\\theta) = \\sum_i \\alpha_i",
+        )
+        failed = orchestrator.generated_tex_math_survival(signature, "$$ $$")
+        self.assertTrue(passed["passed"])
+        self.assertFalse(failed["passed"])
+
+    def test_auto_route_keeps_tex_direct_and_markdown_canonical(self) -> None:
+        md_args = type("Args", (), {"route": "auto", "source": Path("note.md")})()
+        tex_args = type("Args", (), {"route": "auto", "source": Path("note.tex")})()
+        self.assertEqual(orchestrator.ROUTE_CANONICAL_MARKDOWN, orchestrator.resolve_route(md_args))
+        self.assertEqual(orchestrator.ROUTE_DIRECT_XELATEX, orchestrator.resolve_route(tex_args))
+
+    def test_default_formal_note_profile_freezes_no_toc_numbering_or_downscaling(self) -> None:
+        profile = json.loads((SKILL_ROOT / "profiles/canonical_formal_note.json").read_text(encoding="utf-8"))
+        self.assertEqual("canonical-formal-note-v0.2", profile["id"])
+        self.assertEqual("a4", profile["paper"])
+        self.assertEqual("11pt", profile["fontsize"])
+        self.assertEqual("25mm", profile["margin"])
+        self.assertEqual("1.15", profile["linestretch"])
+        self.assertFalse(profile["toc"])
+        self.assertFalse(profile["number_sections"])
+        self.assertFalse(profile["ordinary_prose_downscaling"])
+
+    def test_explicit_format_change_creates_new_effective_profile_identity(self) -> None:
+        base = json.loads((SKILL_ROOT / "profiles/canonical_formal_note.json").read_text(encoding="utf-8"))
+        changed = dict(base)
+        changed["id"] = "explicit-letter"
+        changed["paper"] = "letter"
+        source = Path("note.md")
+        resource = Path("/resource")
+        base_identity = orchestrator.effective_profile(
+            base,
+            route=orchestrator.ROUTE_CANONICAL_MARKDOWN,
+            authority="canonical-default",
+            source=source,
+            resource_dir=resource,
+        )
+        changed_identity = orchestrator.effective_profile(
+            changed,
+            route=orchestrator.ROUTE_CANONICAL_MARKDOWN,
+            authority="explicit-user-format",
+            source=source,
+            resource_dir=resource,
+        )
+        self.assertEqual("a4", base_identity["paper"])
+        self.assertEqual("letter", changed_identity["paper"])
+        self.assertNotEqual(base_identity["profile_id"], changed_identity["profile_id"])
+        self.assertNotEqual(base_identity["authority"], changed_identity["authority"])
 
 
 if __name__ == "__main__":

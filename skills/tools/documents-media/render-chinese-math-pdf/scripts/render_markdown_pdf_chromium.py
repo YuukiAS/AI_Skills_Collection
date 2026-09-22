@@ -15,7 +15,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
-from probe_pdf_render_env import find_project_resource_bundles
+from probe_pdf_render_env import find_resource
 
 
 CHROMIUM_COMMANDS = ["chromium-browser", "chromium", "google-chrome", "google-chrome-stable"]
@@ -135,9 +135,7 @@ img {{
 def choose_resource_dir(root: Path, explicit: Path | None) -> Path | None:
     if explicit:
         return explicit.resolve()
-    bundles = find_project_resource_bundles(root)
-    usable = [Path(item["path"]) for item in bundles if item["usable_chinese_math_bundle"]]
-    return usable[0] if usable else None
+    return find_resource(root)
 
 
 def run(args: list[str], timeout: int = 120) -> None:

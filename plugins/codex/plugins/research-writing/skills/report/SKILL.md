@@ -26,6 +26,16 @@ The report should help a researcher or advisor make a scientific decision. It is
 - Use for repo reports, milestone summaries, experiment retrospectives, technical notes, evidence-backed Markdown documents, advisor reports, and group-meeting research notes.
 - Do not use for full manuscript planning, rebuttals, supplements, or grants; route those to the appropriate paper/grant workflow.
 - Do not implement low-level PDF, DOCX, PPTX, or LaTeX file mechanics here.
+- If the user explicitly asks for a final formal PDF, first stabilize the
+  research document semantics here, then hand artifact mechanics to the
+  companion `render-chinese-math-pdf` skill. The exact companion dependency is:
+  `skills/tools/documents-media/render-chinese-math-pdf`.
+- If this skill is installed through standalone Marketplace Research Authoring
+  without that renderer companion, fail closed for formal PDF requests with the
+  dependency above. Do not invent a private XeLaTeX template, silently use
+  Chromium, or ask for a second manual prompt as the normal path.
+- Markdown-only research authoring requests remain Markdown-only. Do not render
+  a PDF unless the user explicitly requests a PDF or a formal rendered artifact.
 - Keep `writing-fidelity` active when facts, equations, labels, citations, versions, or evidence authority must be preserved.
 - For Chinese output, run `chinese-prose` after the evidence structure is stable.
 
@@ -104,6 +114,10 @@ Reject or revise the report if it shows these patterns:
 10. Run an audience-relevance pass: if deleting a paragraph would not change the advisor's understanding of the scientific problem, evidence, or next decision, move it to the internal appendix or remove it.
 11. Run `chinese-prose` or the appropriate language/style pass.
 12. Verify important claims against evidence anchors one more time.
+13. For explicit formal PDF delivery, pass the stable Markdown/LaTeX source,
+    document purpose, table/figure roles, and any user/venue/project formatting
+    contract to `render-chinese-math-pdf`; keep claim/evidence semantics here
+    and leave route/profile/font/layout mechanics to the renderer.
 
 ## Acceptance
 

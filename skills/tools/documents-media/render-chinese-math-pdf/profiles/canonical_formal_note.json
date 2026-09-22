@@ -1,0 +1,19 @@
+{
+  "id": "canonical-formal-note-v0.2",
+  "description": "Default formal scientific note profile for Markdown without stronger user, venue, or project authority.",
+  "authority": "canonical-default",
+  "engine": "pandoc-ast-to-latex-xelatex",
+  "paper": "a4",
+  "fontsize": "11pt",
+  "margin": "25mm",
+  "linestretch": "1.15",
+  "toc": false,
+  "number_sections": false,
+  "ordinary_prose_downscaling": false,
+  "fonts": {
+    "latin_main": "TeX Gyre Termes",
+    "math": "TeX Gyre Termes Math",
+    "cjk_serif": "Noto Serif SC",
+    "cjk_sans": "Noto Sans SC"
+  }
+}

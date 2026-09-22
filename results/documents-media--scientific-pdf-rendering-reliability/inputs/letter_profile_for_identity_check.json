@@ -1,0 +1,19 @@
+{
+  "id": "explicit-letter-identity-check",
+  "description": "Deliberate format-change fixture for resolved-profile identity evidence.",
+  "authority": "explicit-user-format",
+  "engine": "pandoc-ast-to-latex-xelatex",
+  "paper": "letter",
+  "fontsize": "11pt",
+  "margin": "25mm",
+  "linestretch": "1.15",
+  "toc": false,
+  "number_sections": false,
+  "ordinary_prose_downscaling": false,
+  "fonts": {
+    "latin_main": "TeX Gyre Termes",
+    "math": "TeX Gyre Termes Math",
+    "cjk_serif": "Noto Serif SC",
+    "cjk_sans": "Noto Sans SC"
+  }
+}

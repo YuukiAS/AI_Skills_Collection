@@ -108,7 +108,7 @@
     },
     {
       "name": "research-writing",
-      "version": "0.1",
+      "version": "0.2",
       "displayName": "Research Authoring",
       "description": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization.",
       "category": "Research",

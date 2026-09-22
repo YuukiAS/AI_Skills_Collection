@@ -1,0 +1,186 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+  a4paper,
+]{article}
+\author{}
+\date{}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=25mm]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{unicode-math}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/texgyre-termes/,
+  Extension=.otf,
+  UprightFont=texgyretermes-regular,
+  BoldFont=texgyretermes-bold,
+  ItalicFont=texgyretermes-italic,
+  BoldItalicFont=texgyretermes-bolditalic
+]{texgyretermes-regular}
+
+\setmathfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/texgyre-termes-math/,
+  Extension=.otf
+]{texgyretermes-math}
+
+\setmathfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/fonts/newcomputermodern/,
+  Extension=.otf,
+  range={cal,bfcal}
+]{NewCMMath-Regular}
+
+\setCJKmainfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSerifSC-Regular,
+  BoldFont=NotoSerifSC-Bold,
+  AutoFakeSlant=0.18
+]{NotoSerifSC-Regular}
+
+\setCJKsansfont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSansSC-Regular,
+  BoldFont=NotoSansSC-Bold,
+  AutoFakeSlant=0.18
+]{NotoSansSC-Regular}
+
+\setCJKmonofont[
+  Path=/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSansSC-Regular,
+  BoldFont=NotoSansSC-Bold
+]{NotoSansSC-Regular}
+
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}
+\emergencystretch=3em
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\begin{document}
+
+\setstretch{1.15}
+\hypertarget{scientific-pdf-math-regression}{%
+\section{Scientific PDF Math
+Regression}\label{scientific-pdf-math-regression}}
+
+这是一份公开安全的中文/英文/数学混合渲染回归输入，用于验证默认正式笔记路线是否保留数学语义和可读排版。
+
+Inline math next to Chinese text: 估计量 \(\hat{x}_i\) should keep the
+hat and subscript. Greek notation \(\alpha_i + \beta^2\) should remain
+mathematical text, not plain prose.
+
+Display sum and integral:
+
+\[
+\sum_{i=1}^{n} w_i y_i + \int_0^1 f(t)\,dt = \mu
+\]
+
+Gradient and operators:
+
+\[
+\nabla_\theta \mathcal{L}(\theta) = X^\top (X\theta - y) + \lambda \theta
+\]
+
+Matrix and blackboard symbols:
+
+\[
+A =
+\begin{bmatrix}
+1 & 2 \\
+3 & 4
+\end{bmatrix},
+\quad
+v \in \mathbb{R}^{2}
+\]
+
+Long formula:
+
+\[
+\operatorname{argmin}_{\theta \in \mathbb{R}^{p}}
+\left[
+\frac{1}{2n}\sum_{i=1}^{n}(y_i - x_i^\top \theta)^2
++ \lambda \sum_{j=1}^{p}|\theta_j|
+\right]
+\]
+
+\begin{longtable}[]{@{}lrl@{}}
+\toprule
+指标 & 数值 & 说明 \\
+\midrule
+\endhead
+Dice & 0.83 & 表格行应保留为可读列 \\
+Error & 1.20 & 不应因为表格存在而缩小普通段落 \\
+\bottomrule
+\end{longtable}
+
+The closing paragraph is ordinary prose. It should not be classified as
+a table line, and it should keep the same body-text identity as the
+earlier paragraphs.
+
+\end{document}

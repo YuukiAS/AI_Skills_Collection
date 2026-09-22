@@ -18,6 +18,9 @@ CJK_FONT_NAME_RE = re.compile(
     r"WenQuanYi|ARPL|UMing|SimSun|SimHei|KaiTi|Songti|Heiti)",
     re.IGNORECASE,
 )
+CANONICAL_FONT_RE = re.compile(r"(TeXGyreTermes|TeX Gyre Termes|NotoSerifSC|NotoSansSC)", re.IGNORECASE)
+CANONICAL_MATH_RE = re.compile(r"(TeXGyreTermesMath|TeX Gyre Termes Math|texgyretermes-math)", re.IGNORECASE)
+UNEXPECTED_CANONICAL_FALLBACK_RE = re.compile(r"(Liberation|DejaVu|Droid|Fandol)", re.IGNORECASE)
 
 
 def run_command(args: list[str], timeout: int = 30) -> tuple[int, str]:
@@ -116,7 +119,7 @@ def parse_pdffonts_rows(pdffonts: str) -> list[dict[str, str]]:
     return rows
 
 
-def validate_font_compatibility(pdffonts: str, extracted_text: str) -> dict[str, Any]:
+def validate_font_compatibility(pdffonts: str, extracted_text: str, *, canonical_profile: bool = False) -> dict[str, Any]:
     errors: list[str] = []
     warnings: list[str] = []
     rows = parse_pdffonts_rows(pdffonts)
@@ -128,12 +131,22 @@ def validate_font_compatibility(pdffonts: str, extracted_text: str) -> dict[str,
         errors.append(f"CJK font(s) lack ToUnicode mapping according to pdffonts uni column: {failed_names}")
     if has_cjk_text and not cjk_rows:
         warnings.append("CJK text found but no obvious CJK font name was detected in pdffonts")
+    canonical_rows = [row for row in rows if CANONICAL_FONT_RE.search(row["name"]) or CANONICAL_MATH_RE.search(row["name"])]
+    unexpected_rows = [row for row in rows if UNEXPECTED_CANONICAL_FALLBACK_RE.search(row["name"])]
+    if canonical_profile:
+        if unexpected_rows:
+            failed_names = ", ".join(row["name"] for row in unexpected_rows)
+            errors.append(f"unexpected fallback font(s) in canonical formal-note route: {failed_names}")
+        if not any(CANONICAL_FONT_RE.search(row["name"]) for row in rows):
+            errors.append("canonical formal-note route did not report TeX Gyre Termes or Noto SC fonts")
     return {
         "errors": errors,
         "warnings": warnings,
         "font_rows": rows,
         "cjk_font_rows": cjk_rows,
         "cjk_unicode_failures": cjk_unicode_failures,
+        "canonical_font_rows": canonical_rows,
+        "unexpected_canonical_fallback_rows": unexpected_rows,
     }
 
 
@@ -160,6 +173,8 @@ def validate_pdf(
     source: Path | None = None,
     preview_dir: Path | None = None,
     require_preview: bool = True,
+    preview_pages: str = "first",
+    canonical_profile: bool = False,
 ) -> dict[str, Any]:
     result: dict[str, Any] = {"pdf": str(pdf), "errors": [], "warnings": []}
     if not pdf.exists() or pdf.stat().st_size == 0:
@@ -193,7 +208,7 @@ def validate_pdf(
     result["errors"].extend(text_result["errors"])
     result["warnings"].extend(text_result["warnings"])
     if font_code == 0:
-        font_result = validate_font_compatibility(pdffonts, extracted)
+        font_result = validate_font_compatibility(pdffonts, extracted, canonical_profile=canonical_profile)
         result["font_checks"] = font_result
         result["errors"].extend(font_result["errors"])
         result["warnings"].extend(font_result["warnings"])
@@ -202,7 +217,17 @@ def validate_pdf(
     if preview_dir:
         preview_dir.mkdir(parents=True, exist_ok=True)
         prefix = preview_dir / pdf.stem
-        code, preview_output = run_command(["pdftoppm", "-f", "1", "-l", "1", "-r", "120", "-png", str(pdf), str(prefix)])
+        if preview_pages == "all" and pages:
+            first_page, last_page = "1", str(pages)
+        elif preview_pages and preview_pages != "first" and "," not in preview_pages:
+            first_page = last_page = preview_pages
+        elif preview_pages and "," in preview_pages:
+            requested = [int(item) for item in preview_pages.split(",") if item.strip().isdigit()]
+            first_page = str(min(requested)) if requested else "1"
+            last_page = str(max(requested)) if requested else "1"
+        else:
+            first_page = last_page = "1"
+        code, preview_output = run_command(["pdftoppm", "-f", first_page, "-l", last_page, "-r", "120", "-png", str(pdf), str(prefix)])
         result["preview_prefix"] = str(prefix)
         preview_paths = sorted(str(path) for path in preview_dir.glob(f"{pdf.stem}-*.png"))
         result["preview_paths"] = preview_paths
@@ -219,9 +244,18 @@ def main() -> int:
     parser.add_argument("--source", type=Path)
     parser.add_argument("--preview-dir", type=Path)
     parser.add_argument("--no-preview", action="store_true", help="Skip first-page PNG generation.")
+    parser.add_argument("--preview-pages", default="first", help="'first', 'all', or a one-based page/list range supported by this validator.")
+    parser.add_argument("--canonical-profile", action="store_true", help="Enforce canonical formal-note font identity.")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
-    result = validate_pdf(args.pdf, source=args.source, preview_dir=args.preview_dir, require_preview=not args.no_preview)
+    result = validate_pdf(
+        args.pdf,
+        source=args.source,
+        preview_dir=args.preview_dir,
+        require_preview=not args.no_preview,
+        preview_pages=args.preview_pages,
+        canonical_profile=args.canonical_profile,
+    )
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
     else:

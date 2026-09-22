@@ -4,6 +4,42 @@
 
 No unreleased changes.
 
+## 5.0.7 - 2026-09-22
+
+Repository `5.0.7` is a compatible release for scientific PDF rendering reliability and the bounded Research Authoring PDF handoff.
+
+Repository bump decision: PATCH
+Reason: this release improves existing rendering, profile, and research-writing behavior without adding a new repository-level capability or breaking existing contracts.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `research-writing` | `0.1` | `0.2` |
+
+Affected plugins:
+- `research-writing`: `0.1` -> `0.2`
+  Reason: Research Authoring now delegates explicitly requested formal PDF artifact mechanics to the standalone renderer companion in `research-main`, keeps Markdown-only requests unchanged, and fails closed when standalone Marketplace Research Authoring lacks the companion renderer.
+- `presentations`: NO_BUMP
+  Reason: this release only verifies existing presentation profile compatibility; it does not change Presentations production behavior.
+- all other central plugins: NO_BUMP
+  Reason: no other central plugin production behavior changed.
+
+Changed repository behavior:
+
+- `render-chinese-math-pdf` now has a repo-owned canonical orchestration path for Markdown -> Pandoc AST -> LaTeX -> XeLaTeX -> PDF, with explicit route/profile receipts.
+- Canonical Markdown rendering records ordered `Math(mathtype, text)` payload signatures and checks generated-TeX math-token survival before PDF QA.
+- Native `.tex` inputs stay on direct XeLaTeX by default, and Chromium/browser rendering remains an explicit diagnostic route only.
+- The canonical formal-note profile records A4, 11pt, 25mm margins, about 1.15 line spacing, no automatic TOC/numbering, and no ordinary-prose downscaling.
+- PDF QA can enforce canonical font identity and render all pages or selected high-risk pages for visual inspection.
+- `research-main` now installs `render-chinese-math-pdf`; standalone Marketplace Research Authoring still does not include the renderer as a Marketplace skill.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelog:
+
+- `docs/plugin-changelogs/research-writing.md`
+
 ## 5.0.6 - 2026-09-20
 
 Repository `5.0.6` is a compatible release for workflow identity and plugin gate lifecycle hardening.
