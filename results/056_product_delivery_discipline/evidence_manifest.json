@@ -17,12 +17,21 @@
     "replay_inputs_unbiased/workflow_core_scenarios.json": "1bfa9496db5fa1ef02d1728b82e04ceb4ee74a6fdf61f319326c565d0309b871",
     "replay_inputs_unbiased/workflow_core_task.md": "ba00637f75328554e967bb94eb1eac8c5242ecf00ef010335a38cf85f9b44fe3"
   },
-  "pending_real_host_boundary": [
-    "final real-host G1 smoke",
-    "real Host install/update",
-    "real user CODEX_HOME mutation",
-    "release/main integration"
-  ],
+  "final_integration_boundary": {
+    "already_passed": [
+      "G1 final real-user evidence",
+      "G2-G8",
+      "Source Discovery"
+    ],
+    "remaining": [
+      "Bridge 0.8.5 main release push",
+      "AI_Skills 5.0.7 main release push",
+      "normal Bridge root upgrade",
+      "permanent CODEX_HOME install and host validate",
+      "final closure evidence push"
+    ],
+    "repeat_gate_policy": "do_not_rerun_G1_G8_Source_Discovery_when_production_bytes_are_candidate_equivalent"
+  },
   "production_candidate_identity": {
     "ai_skills_branch_at_repair_start": "4480b7e5a7c55c1e3a90fb227421d78509ec47e6",
     "ai_skills_candidate_commit": "33c30bbe0dd528031a23d379905cd00d6b65bc1f",

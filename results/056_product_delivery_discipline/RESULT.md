@@ -1,14 +1,15 @@
-# 056 Product Delivery Discipline — Evidence Repair Handoff
+# 056 Product Delivery Discipline — Integration Release Handoff
 
-Status: `EVIDENCE_ONLY_REPAIR_COMPLETE`
+Status: `G1_G8_SOURCE_DISCOVERY_PASS_FINAL_INTEGRATION_PENDING`
 
-Next handoff: `PLANNER`
+Next handoff: `FINAL_INTEGRATION_EXECUTOR`
 
-This result records the authorized evidence-only repair for
-`C056-I1-NORMAL-ENTRY-REPLAY-LEADING-ORACLE`. It does not modify production
-source, generated production plugin payload, versions, Bridge source, product
-repositories, real Host state, main, tags, releases, deployments, or the frozen
-production candidate.
+This result records the completed G1-G8 and Source Discovery evidence for
+`056_product_delivery_discipline` after the authorized release integration
+preflight. It does not modify the frozen production candidate. At this stage,
+all semantic gates are PASS and the remaining work is the final main integration,
+normal Bridge `0.8.5` installation, permanent Host install/validate, and final
+closure evidence.
 
 ## Candidate Identity
 
@@ -64,10 +65,19 @@ The verified v0.5 package main locator is
 
 `SOURCE_DEFECT_DISCOVERED=NO`
 
-## Pending Boundary
+## Final Integration Boundary
 
-Real Host application, real user `$CODEX_HOME` mutation, real-user
-`ai-bridge host install`, and final live `W2_RESUME_056_FINAL` smoke remain
-pending and were not run in this evidence-only repair.
+G1-G8 and Source Discovery are PASS, including final real-user G1 evidence.
+Do not rerun those gates merely because release/evidence SHAs advance while
+production bytes remain candidate-equivalent.
 
-Do not announce overall 056 achieved from this evidence repair.
+Remaining before overall 056 achieved:
+
+- push the frozen Bridge `0.8.5` release commit to Bridge `main`;
+- push the frozen AI_Skills `5.0.7` release commit to AI `main`;
+- upgrade the normal Bridge root from integrated Bridge `main`;
+- permanently install and validate Host state at
+  `/overflow/htzhu/mingcheng_new/.codex`;
+- write and push final closure evidence.
+
+Do not announce overall 056 achieved until those final closure conditions pass.

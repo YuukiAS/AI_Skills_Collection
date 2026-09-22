@@ -4,7 +4,7 @@
 
 No unreleased changes.
 
-## 0.4 - 2026-09-21
+## 0.4 - 2026-09-22
 
 Before:
 

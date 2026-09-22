@@ -4,10 +4,11 @@
 
 No unreleased changes.
 
-## 5.0.7 - 2026-09-21
+## 5.0.7 - 2026-09-22
 
-Repository `5.0.7` is a compatible release candidate for 056 Product Delivery
-Discipline implementation on the central production plugin path.
+Repository `5.0.7` is a compatible release for 056 Product Delivery Discipline
+implementation on the central production plugin path, including the final
+real-user G1 closure evidence.
 
 Repository bump decision: PATCH
 Reason: this release improves existing workflow, frontend-design, and
@@ -65,9 +66,9 @@ Affected plugin changelogs:
 - `docs/plugin-changelogs/web-development.md`
 - `docs/plugin-changelogs/ai-skills-core.md`
 
-Real-host integration note: this 056 implementation stage does not authorize
-mutating the user's real `$CODEX_HOME` or final live Host Policy smoke. That
-boundary remains pending for a separately authorized Bridge integration step.
+Real-host integration note: final real-user G1 evidence passed. Permanent
+normal Bridge/Host installation is completed by the final integration closure
+evidence after the matching Bridge `0.8.5` main release is verified.
 
 ## 5.0.6 - 2026-09-20
 
