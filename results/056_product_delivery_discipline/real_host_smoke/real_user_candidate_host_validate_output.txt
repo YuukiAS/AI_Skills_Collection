@@ -1,0 +1,101 @@
+$ /overflow/htzhu/mingcheng_new/conda/bin/python -m ai_bridge_kit.cli host validate --codex-home /overflow/htzhu/mingcheng_new/.codex
+rc=0
+--- stdout ---
+Codex Home: /overflow/htzhu/mingcheng_new/.codex
+config.toml exists: true
+approval_policy: "on-request" (configured)
+sandbox_mode: "workspace-write" (configured)
+approvals_reviewer: "auto_review" (configured)
+sandbox_workspace_write.network_access: true (configured)
+features.default_mode_request_user_input: false (configured)
+features.memories: true (configured)
+global AGENTS managed block: configured
+narrative_language: zh-CN (configured)
+artifact_language_policy: repository/task controlled
+ai-bridge-global.rules: configured
+trusted ai-bridge executable: /overflow/htzhu/mingcheng_new/.local/bin/ai-bridge
+project override awareness: none found in current repository
+overall state: configured
+
+Codex version: codex-cli 0.142.0
+Feature availability: default_mode_request_user_input supported/disabled; memories available/enabled
+Trusted ai-bridge executable: /overflow/htzhu/mingcheng_new/.local/bin/ai-bridge
+Execpolicy: ai-bridge plugin-replay --target /overflow/htzhu/mingcheng_new/GPT_Codex_AI_Bridge_Kit-056-product-delivery-discipline --plugin sites --task TASK.md --input INPUT.txt --dry-run => allow
+Execpolicy: squeue -j 156911 -o %.18i %.9P %.30j %.8u %.2t %.12M %.12l %.20R %.30b => allow
+Execpolicy: squeue -u testuser -h => allow
+Execpolicy: sinfo -h => allow
+Execpolicy: sacct -j 156911 => allow
+Execpolicy: sstat -j 156911.batch => allow
+Execpolicy: sprio -j 156911 => allow
+Execpolicy: scontrol show job 156911 => allow
+Execpolicy: scontrol show partition => allow
+Execpolicy: scontrol ping => allow
+Execpolicy: sbatch job.sh => prompt (no_match)
+Execpolicy: srun --pty bash => prompt (no_match)
+Execpolicy: salloc -t 00:10:00 => prompt (no_match)
+Execpolicy: scancel 156911 => prompt (no_match)
+Execpolicy: scontrol update JobId=156911 TimeLimit=30 => prompt (no_match)
+Execpolicy: scontrol hold 156911 => prompt (no_match)
+Execpolicy: scontrol release 156911 => prompt (no_match)
+Execpolicy: scontrol requeue 156911 => prompt (no_match)
+Execpolicy: scontrol suspend 156911 => prompt (no_match)
+Execpolicy: scontrol resume 156911 => prompt (no_match)
+Execpolicy: sacctmgr modify user name=test set Fairshare=2 => prompt (no_match)
+Execpolicy: bash -lc squeue -h | xargs scancel => prompt (no_match)
+Execpolicy: ps -u testuser -o pid,ppid,stat,etime,cmd => allow
+Execpolicy: ps -ef => allow
+Execpolicy: kill 123 => prompt (no_match)
+Execpolicy: pkill python => prompt (no_match)
+Execpolicy: renice 10 -p 123 => prompt (no_match)
+Execpolicy: setsid bash => prompt (no_match)
+Execpolicy: python script.py => prompt (no_match)
+Execpolicy: bash -lc ps -ef => prompt (no_match)
+Execpolicy: sh -c ps -ef => prompt (no_match)
+Execpolicy: zsh -c ps -ef => prompt (no_match)
+Execpolicy: tmux ls => allow
+Execpolicy: tmux list-sessions => allow
+Execpolicy: tmux has-session -t example => allow
+Execpolicy: tmux new-session -d -s example => prompt (no_match)
+Execpolicy: tmux kill-session -t example => prompt (no_match)
+Execpolicy: tmux kill-server => prompt (no_match)
+Execpolicy: tmux send-keys -t example ls Enter => prompt (no_match)
+Execpolicy: tmux attach-session -t example => prompt (no_match)
+Execpolicy: tmux detach-client -s example => prompt (no_match)
+Execpolicy: codex exec -C /tmp - => prompt (no_match)
+Execpolicy: git fetch origin main => allow
+Execpolicy: git fetch --all --prune => allow
+Execpolicy: git fetch https://example.invalid/repo.git main => prompt (no_match)
+Execpolicy: git fetch origin feature:feature => prompt (no_match)
+Execpolicy: git pull --ff-only origin main => allow
+Execpolicy: git pull --rebase origin main => prompt
+Execpolicy: git pull --ff-only --autostash origin main => prompt
+Execpolicy: git pull --ff-only origin main --autostash => prompt
+Execpolicy: git add README.md => allow
+Execpolicy: git commit -m test => allow
+Execpolicy: git commit --amend --no-edit => allow
+Execpolicy: git push origin main => allow
+Execpolicy: git push origin test-branch => prompt (no_match)
+Execpolicy: git push upstream main => no_match
+Execpolicy: git switch main => prompt
+Execpolicy: git switch -c test-branch => prompt
+Execpolicy: git checkout -b test-branch => prompt
+Execpolicy: git branch test-branch => prompt (no_match)
+Execpolicy: git reset --hard => prompt
+Execpolicy: git clean -fd => prompt
+Execpolicy: git restore README.md => prompt
+Execpolicy: git remote add mirror https://example.invalid/repo.git => prompt
+Execpolicy: git remote remove origin => prompt
+Execpolicy: git remote set-url origin https://example.invalid/repo.git => prompt
+Execpolicy: git branch -d test-branch => prompt
+Execpolicy: git branch -D test-branch => prompt
+Execpolicy: git branch -m old-branch new-branch => prompt
+Execpolicy: git worktree add ../wt -b test-branch => prompt
+Execpolicy: git push -u origin test-branch => prompt
+Execpolicy: git push --set-upstream origin test-branch => prompt
+Execpolicy: git push origin --delete test-branch => prompt
+Execpolicy: git push origin --force main => prompt
+Execpolicy: git push origin main --force => prompt
+Execpolicy: git push origin main --force-with-lease => prompt
+Execpolicy: git push origin main -f => prompt
+
+--- stderr ---
