@@ -172,6 +172,29 @@ Expected mapping after 056 completion, to verify rather than assume:
 - Actual-Surface capability: PPT/PDF/Beamer or equivalent user-consumed artifact receives format-appropriate opening/render checks.
 - AI Skills Maintainer / production consumption diagnosis: if repo-output/path rules already exist but delivery still escapes them, inspect the real producer/consumer path instead of adding another duplicate rule.
 
+### Reviewed Handoff exact sibling worktree authorization can still be unexecutable under Host sandbox
+status: NEW / POST_056_REFINEMENT
+source: Project Thread Handoff V1 implementation runtime failure, 2026-09-22
+evidence: the frozen kickoff explicitly authorized task key `science-communication--project-thread-handoff`, branch `reviewed/science-communication--project-thread-handoff`, and sibling worktree `../AI_Skills_Collection-science-communication-project-thread-handoff`. Codex correctly recognized the authorization. The normal command `git worktree add -b reviewed/science-communication--project-thread-handoff ../AI_Skills_Collection-science-communication-project-thread-handoff origin/main` was first routed to approval; after the user explicitly approved that exact command, Auto-review still rejected it because the current environment policy forbids the required escalated sandbox permission and exposes no approval override. The Goal then had no legal continuation path without changing the frozen worktree contract.
+target layer: workflow-core execution handoff / Bridge-owned Git runtime primitive.
+problem: 056/5.0.7 correctly distinguishes current-user authorization from repo text and prevents same-frozen-effect re-asking at the workflow-semantic layer, but a reviewed task can still become operationally impossible when the authorized sibling worktree lies outside the current workspace-write sandbox. Repeating the same approval cannot solve an environment-policy denial. This is not a product-domain failure and should not be patched by weakening the Goal, using `/tmp`, silently changing worktree locators, or globally allowing arbitrary `git worktree add`.
+ownership split:
+- **Bridge Kit owns** the cross-repo bounded execution primitive: a trusted reviewed-worktree/task-branch helper (exact name TBD by later Planner/Critic) that validates repo identity, semantic task key, exact `reviewed/<task_key>` branch, exact authorized worktree locator, allowed base ref, occupied-path/repo/branch mismatch, and fail-closed behavior before performing the Git mutation through the sanctioned Host path.
+- **workflow-core owns** normal consumption: when Goal/Kickoff already freezes an exact reviewed branch/worktree, use the Bridge-owned bounded primitive if available instead of issuing raw `git worktree add` and expecting a second approval to rescue it. If the primitive is unavailable, detect that before substantial implementation rather than spending user time on a command that the Host policy cannot execute.
+candidate action:
+- do not change 056 architecture retroactively; treat this as post-056 real-task regression;
+- design the smallest Bridge helper that can safely carry the already-authorized frozen effect without granting arbitrary branch/path creation;
+- keep raw `git worktree add`, arbitrary branch creation, remote mutation, force/destructive Git and locator substitution approval-gated;
+- wire workflow-core/Reviewed Handoff execution guidance to prefer the helper for exact reviewed task worktrees;
+- preserve current exact-branch/worktree upfront authorization semantics; do not add a second authorization database/state machine/ledger.
+promotion gate:
+1. a frozen kickoff authorizes exact repo/task/branch/sibling worktree and the normal workflow creates it without a second user approval card;
+2. an arbitrary branch, mismatched task key, alternate worktree path, occupied/mismatched repo path, force/destructive option, or unapproved base fails closed;
+3. raw generic `git worktree add` remains approval-gated;
+4. helper works across at least two repositories without repo-specific hardcoding;
+5. workflow-core normal entry consumes the helper and does not silently fall back to `/tmp`, current dirty checkout, or another branch;
+6. if Host/platform policy fundamentally cannot expose a safe sanctioned path, report `UNSUPPORTED_WITH_EVIDENCE` before implementation rather than re-asking the same approval.
+
 ## Do not do
 
 - Do not duplicate Bridge Kit core Reviewed Handoff implementation in this repo.
