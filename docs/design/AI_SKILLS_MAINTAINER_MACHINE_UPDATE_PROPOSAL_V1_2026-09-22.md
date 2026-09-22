@@ -44,19 +44,19 @@ Current OpenAI Codex plugin tooling supports:
 - Git-backed marketplace sources pinned to a Git ref;
 - codex plugin add for installing or reinstalling a plugin from a configured marketplace.
 
-OpenAI documentation also states that installed local-marketplace plugins are materialized into the Codex plugin cache rather than loaded directly from the marketplace source. OpenAI’s current plugin update reference therefore refreshes the marketplace/source, reinstalls the plugin, and uses a new thread/session as the safe boundary for loading the updated plugin.
+OpenAI’s current plugin authoring/update guidance uses the CLI to refresh a configured Marketplace and reinstall the plugin, then treats a new thread/session as the safe boundary for picking up the updated plugin. The public Codex CLI source confirms `codex plugin add`, `codex plugin list --json --available`, and `codex plugin marketplace add/list/upgrade/remove`, including pinning a Git-backed Marketplace with `--ref`.
 
-Codex instruction discovery is also session-bound: global and project AGENTS instructions are assembled when a run/session starts. Updated global instructions therefore require a new run/session to be guaranteed active.
+Codex instruction discovery is session-bound: the official AGENTS.md documentation says the instruction chain is rebuilt once per run and at the start of each TUI session. Updated global/project instructions therefore require a fresh run/session to be guaranteed active.
 
 Sources checked:
 
-- https://developers.openai.com/zh-Hans/plugins/build/plugins
-- https://developers.openai.com/zh-Hans/docs/agent-configuration/agents-md
+- https://developers.openai.com/plugins/build/plugins
+- https://learn.chatgpt.com/docs/agent-configuration/agents-md
 - https://github.com/openai/codex/blob/main/codex-rs/cli/src/plugin_cmd.rs
 - https://github.com/openai/codex/blob/main/codex-rs/cli/src/marketplace_cmd.rs
 - https://github.com/openai/codex/blob/main/codex-rs/skills/src/assets/samples/plugin-creator/references/installing-and-updating.md
 
-Adopted implication: use official Codex plugin commands and a new session boundary; do not hand-edit Marketplace config as the normal updater implementation.
+Adopted implication: use official Codex plugin/Marketplace commands and a new-session verification boundary; do not hand-edit Marketplace config as the normal updater implementation.
 
 ## 4. Alternatives considered
 
