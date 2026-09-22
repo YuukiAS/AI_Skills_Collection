@@ -2,7 +2,11 @@
 
 给 Codex 使用的科研与工程技能库。它把常用的写作、汇报、统计、医学影像、前端设计和仓库维护经验整理成可安装的插件，让日常任务更稳、更容易验收。
 
-Repository / CLI release: `5.0.7`
+Repository / CLI release: `5.1.0`
+
+## 可单独安装的技能
+
+`Project Thread Handoff` 是一个独立 Skill，用在长期科研或工程聊天快到上下文边界时：在原来的长 thread 里显式调用一次，它会生成一份给新 thread 使用的续接 Prompt。它不是中央插件，不写项目仓库，也不替代下面的插件安装入口。
 
 ## 中央插件
 

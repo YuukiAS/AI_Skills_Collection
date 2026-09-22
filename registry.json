@@ -1,9 +1,9 @@
 {
-  "version": "5.0.7",
-  "generated_at": "2026-09-21T06:56:01+00:00",
+  "version": "5.1.0",
+  "generated_at": "2026-09-22T03:29:28+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
-  "skill_count": 150,
+  "skill_count": 151,
   "selectors": {
     "domains": [
       "ai-ml",
@@ -2290,6 +2290,44 @@
         "science/communication/pptx-posters",
         "skills/research/communication/pptx-posters",
         "skills/science/communication/pptx-posters"
+      ]
+    },
+    {
+      "id": "science.research-communication.project-thread-handoff",
+      "name": "project-thread-handoff",
+      "path": "skills/science/communication/project-thread-handoff",
+      "flat_name": "science-communication-project-thread-handoff",
+      "scope": "science",
+      "domain": "research-communication",
+      "category": "communication",
+      "subcategory": "communication",
+      "slug": "project-thread-handoff",
+      "install_selector": "science/communication/project-thread-handoff",
+      "description": "Use only after explicit Skill selection in an existing long project thread to produce one continuation prompt for a new thread; do not use for ordinary summaries, status checks, brainstorming, or general project continuation.",
+      "status": "active",
+      "provenance": "user-authored",
+      "source_repo_url": "",
+      "source_path": "",
+      "source_ref": "",
+      "source_imported_at": "",
+      "source_license": "",
+      "source_note": "",
+      "source_skills": [],
+      "trusted": false,
+      "requires_network": false,
+      "writes_files": false,
+      "executes_code": false,
+      "secrets_needed": [],
+      "last_reviewed": "2026-09-21",
+      "profile_tags": [],
+      "recommended_scope": "project",
+      "selectors": [
+        "project-thread-handoff",
+        "research/communication/project-thread-handoff",
+        "science-communication-project-thread-handoff",
+        "science/communication/project-thread-handoff",
+        "skills/research/communication/project-thread-handoff",
+        "skills/science/communication/project-thread-handoff"
       ]
     },
     {
