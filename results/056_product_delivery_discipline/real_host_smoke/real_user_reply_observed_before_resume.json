@@ -1,0 +1,10 @@
+{
+  "captured_at": "2026-09-22T02:04:30.249930+00:00",
+  "real_user_reply_observed": true,
+  "real_user_reply_value": "W2_RESUME_056_FINAL",
+  "reply_source": "current user follow-up turn after parent WAITING_FOR_REAL_USER_REPLY final message",
+  "child_thread_id_loaded_for_resume": "01a0c69e-98e9-7ee0-8487-5b56d30147a0",
+  "sentinel_exists_after_real_reply_before_resume": false,
+  "resume_count_before_this_step": 0,
+  "will_resume_same_child_once": true
+}

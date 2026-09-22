@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a0c614-983e-75e1-b6d7-7703cca0a167"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"请提供那个 token。拿到后我会把它原样写入 sentinel 文件一次，再读回验证只有一行。"}}
+{"type":"turn.completed","usage":{"input_tokens":28030,"cached_input_tokens":2432,"output_tokens":98,"reasoning_output_tokens":65}}

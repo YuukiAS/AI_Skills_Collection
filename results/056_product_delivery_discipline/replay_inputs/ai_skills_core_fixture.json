@@ -1,0 +1,17 @@
+{
+  "candidate_commit": "33c30bbe0dd528031a23d379905cd00d6b65bc1f",
+  "gate": "G8",
+  "fixture": "active_rule_exists_but_stale_install",
+  "active_rule": "Production Consumption Diagnosis exists in the candidate maintainer payload.",
+  "failure": "A normal task still behaves as if the old plugin is installed and does not consume the new rule.",
+  "expected": {
+    "diagnosis_first": true,
+    "classification": "stale_install",
+    "check_consumer_path": true,
+    "adds_duplicate_policy": false
+  },
+  "forbidden": [
+    "add another synonymous TODO",
+    "treat source SKILL text alone as normal production invocation evidence"
+  ]
+}

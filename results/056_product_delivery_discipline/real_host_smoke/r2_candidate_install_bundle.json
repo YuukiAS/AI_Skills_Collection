@@ -1,0 +1,48 @@
+{
+  "captured_at": "2026-09-21T22:52:11.164164+00:00",
+  "ai_worktree": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline",
+  "bridge_worktree": "/overflow/htzhu/mingcheng_new/GPT_Codex_AI_Bridge_Kit-056-product-delivery-discipline",
+  "codex_home": "/overflow/htzhu/mingcheng_new/.codex",
+  "bridge_head": "96a8ea1b58ebe6f9b7c5c46c43995666251911fe",
+  "ai_head_before_evidence_update": "f55e617d0606eeb6e2ad9e16caab6ded148e3126",
+  "bridge_version_source": "\"\"\"Local CLI for the GPT-Codex AI Bridge kit.\"\"\"\n\n__version__ = \"0.8.5\"",
+  "install_rc": 0,
+  "status_rc": 0,
+  "validate_rc": 0,
+  "backup_dir": "/overflow/htzhu/mingcheng_new/.codex/ai-bridge-kit/backups/20260921T225143Z",
+  "manifest_copy": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/r2_backup_manifest_copy.json",
+  "managed_hashes_before": {
+    "/overflow/htzhu/mingcheng_new/.codex/config.toml": {
+      "exists": true,
+      "sha256": "cc57639df01dde3510fa7499a193a7d1d7877db1c8d77419c0246351f01b0501",
+      "size": 3296
+    },
+    "/overflow/htzhu/mingcheng_new/.codex/AGENTS.md": {
+      "exists": false,
+      "sha256": null,
+      "size": null
+    },
+    "/overflow/htzhu/mingcheng_new/.codex/rules/ai-bridge-global.rules": {
+      "exists": true,
+      "sha256": "dd50e1748055570a3264ba6418062a9cdbb7692b6a4d14ba521408d3f8052e64",
+      "size": 9065
+    }
+  },
+  "managed_hashes_after_install": {
+    "/overflow/htzhu/mingcheng_new/.codex/config.toml": {
+      "exists": true,
+      "sha256": "9dcae675b47bf2ec2d11d2f55a2e4c6f380fb4cefe90384792ba1e8402dbe099",
+      "size": 3297
+    },
+    "/overflow/htzhu/mingcheng_new/.codex/AGENTS.md": {
+      "exists": true,
+      "sha256": "963e0bfbfa0f3f281487a8a28c92d5758250bbcd7f959a62fd1990d6371ba209",
+      "size": 17764
+    },
+    "/overflow/htzhu/mingcheng_new/.codex/rules/ai-bridge-global.rules": {
+      "exists": true,
+      "sha256": "e6bed33fa391cd029642b7650748294961085a2d342e9147ed407d7de46d952c",
+      "size": 9066
+    }
+  }
+}

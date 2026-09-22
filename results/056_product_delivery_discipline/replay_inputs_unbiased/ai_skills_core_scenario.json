@@ -1,0 +1,13 @@
+{
+  "task_key": "056_product_delivery_discipline",
+  "production_candidate": "33c30bbe0dd528031a23d379905cd00d6b65bc1f",
+  "scenario": {
+    "scenario_id": "maintenance-1",
+    "facts": [
+      "The central source tree appears to contain a rule that covers the observed failure.",
+      "The generated/source status does not show an obvious missing payload.",
+      "A normal real task still behaves as if the older rule is being followed.",
+      "The user asks what to diagnose next and whether another rule should be added."
+    ]
+  }
+}

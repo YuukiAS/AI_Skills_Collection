@@ -1,0 +1,52 @@
+{
+  "plugin": "web-development",
+  "normal_entry": "Frontend Design candidate",
+  "input_fixture": "inputs/01-web_development_fixture.json",
+  "candidate_commit_from_fixture": "33c30bbe0dd528031a23d379905cd00d6b65bc1f",
+  "entry_evidence": {
+    "installed_manifest_name": "web-development",
+    "installed_display_name": "Frontend Design",
+    "installed_version": "0.2",
+    "route": "manifest skills -> skills/visual/SKILL.md -> system, figma, motion source workflows",
+    "consumed_payloads": [
+      {
+        "path": "plugins/codex/plugins/web-development/.codex-plugin/plugin.json",
+        "sha256": "3f49553b6641314821378feae520dc7799ca053d4878b6ec09c55653abdfdb63"
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/SKILL.md",
+        "sha256": "3aeabf33be250e0a7e78097bb272119db85939c6f46ce81069b8ee7655d6750c"
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/system/source.md",
+        "sha256": "1846f46f7236ccef2238a973fbcf0746f0232ae695e26060cbd0b55b4f25a584"
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/figma/source.md",
+        "sha256": "eebe302ee158b61415bd774e7e8757ec0dacd536b4467d919f65143c00bc4577"
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/motion/source.md",
+        "sha256": "e73eeb63ffc6ea8d67b02e1bb5d4d2f66eaac6d61ff2c18139630c18b4e149d9"
+      }
+    ]
+  },
+  "G6": {
+    "observed_behavior": {
+      "canonical_design_authority": "将 fixture 指定的 canonical Figma handoff、Product Design Brief 和 existing PNG authority 作为 Bobbio 的只读设计权威，不将其降为灵感参考。F-A 要求编码或审查前读取当前设计源。",
+      "figma_handoff_consumed": "按已读取的 Figma 工作流要求，真实审查需绑定明确 file/page/frame/node IDs，通过官方 Figma 能力检查 components/styles/variables/assets，提取 tokens、复用组件与 variants，检查可访问性，并将渲染结果与指定 frame 对比。本 fixture 未提供这些 locator 或真实画面，因此未声称执行真实 Figma 检查。",
+      "motion_production_wiring_consumed": "正常聚合入口显式路由 motion-interaction，已读取其生产实现与验证指导：以状态反馈和空间连续性为目的，简单效果使用 CSS transitions，复杂 React 状态协调才考虑 Framer Motion，提供 prefers-reduced-motion fallback，并验证 jank、文字遮挡、焦点与主任务延迟。F-B 同时要求共享 motion tokens 和 reduced-motion。未对未知状态自行指定动画。",
+      "missing_material_state_disposition": "fixture 明确实现遗漏了权威设计已有的重要状态，因此该实现不能通过状态覆盖验收；应把遗漏项返回设计源对照闭环，定位已有状态、variant、断点及转换定义后再由实施流程补齐。若实际读取后发现相关细节在设计源中仍未定义，先由设计方补充并确认 canonical source，再进入编码；不得静默在代码中发明状态。当前未提供具体状态或设计内容，因此不虚构其名称、视觉或行为。",
+      "review_decision": "G6 的规则消费及 fixture 行为验证通过；前端实现候选的状态覆盖仍不通过，需完成设计源对照与遗漏修复后重新验收。"
+    },
+    "pass": true,
+    "reason": "已通过已安装 Frontend Design 的正常技能入口消费 production payload、Figma handoff 和 motion 工作流；依据 F-A/F-B/F-C 处理 fixture 中的重要状态遗漏，并明确返回设计源闭环。结论基于实际读取的规则及本次 fixture 处理，不仅基于路径存在。"
+  },
+  "limitations": {
+    "scope": "本地只读 fixture 回放；未读取真实 Bobbio 设计文件、运行产品、执行浏览器或真实宿主测试。",
+    "product_repository_modified": false,
+    "real_host_G1_final_pass_claimed": false,
+    "release_ready_claimed": false,
+    "commit_identity": "normal-entry candidate_replay_run.json 证明已安装 candidate plugin 实际消费，并绑定同一 candidate commit；本文件同时记录 generated payload hashes。"
+  }
+}

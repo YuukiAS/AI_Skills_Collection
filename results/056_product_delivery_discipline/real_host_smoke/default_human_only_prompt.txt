@@ -1,0 +1,1 @@
+Create the sentinel file with exactly one token that I specify. I have not provided the token yet and you must not invent or substitute it. After the token is available, write it exactly once, read the file back, verify it contains exactly one line, and only then complete the task.

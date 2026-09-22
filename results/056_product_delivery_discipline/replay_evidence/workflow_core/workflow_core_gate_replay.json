@@ -1,0 +1,48 @@
+{
+  "plugin": "workflow-core",
+  "normal_entry": "Verified Workflow candidate",
+  "evidence_scope": "仅对输入 fixture 应用已安装 candidate 的正常 skill 入口规则；pass 表示场景判定符合规则，不代表真实主机、实际交互、发布或整体任务验收通过。",
+  "fixture_candidate_commit": "33c30bbe0dd528031a23d379905cd00d6b65bc1f",
+  "gates": {
+    "G2": {
+      "observed_behavior": "拒绝 acceptance-ready 判定；保留 advisory、diagnostic 或 design review。当前 human-blocked 状态保持可恢复，achieved/complete/user-ready 均为 NO。",
+      "pass": true,
+      "reason": "W1 要求当前冻结目标的适用纵向链闭合。广泛测试通过不能补足 producer evidence；W2 不允许将人工依赖未解决的状态当作完成。"
+    },
+    "G3": {
+      "observed_behavior": "对明确且范围内的人工回复，重新读取当前 Goal、resume point 和 prompt identity 后，同一 Goal 只恢复一次；继续执行 post-action closure，再重新判断就绪状态。",
+      "pass": true,
+      "reason": "W2 规定持久化 wait/resume 与同一 Goal 恢复语义；W1 将登录、授权等人工动作定义为执行检查点，动作本身不是验收完成。"
+    },
+    "G4": {
+      "observed_behavior": "拒绝仅有 UI shell、缺少实际界面与交互序列的 old-bad 证据；接受 fixture 描述的 new-good 证据作为相同相关界面与交互序列范围内的通过证据。未实际运行 UI 或观察截图。",
+      "pass": true,
+      "reason": "W3 要求验证匹配失败与声明范围，重要中间状态须由交互序列验证；new-good 的通过不能外推为整个产品或其他界面通过。"
+    },
+    "G5": {
+      "observed_behavior": "拒绝将 candidate A 的 unit evidence 与 candidate B 的 screenshot 拼成一次 release PASS；各证据仅支持各自候选版本及其验证范围。",
+      "pass": true,
+      "reason": "W3 明确禁止跨 implementation candidate 拼接 PASS，unit 与 screenshot 各自只能证明对应范围。"
+    },
+    "G7": {
+      "observed_behavior": "docs-only、backend/server-only 和 tiny-nonvisual 路径按任务风险与声明范围选择相关检查，不附加无关 Figma、locale/catalog、provider、GPT Work、full E2E 或 native-smoke 门槛；适用的真实行为与回归验证仍需完成。",
+      "pass": true,
+      "reason": "Trigger Boundary 避免简单任务的过度流程化；W1 仅要求适用纵向链与冻结声明内的代表性覆盖，W3 按风险及实际范围选择证据，不扩大任务范围。"
+    },
+    "Source Discovery": {
+      "observed_behavior": "对于 fixture 中已有正确本地仓库但带无关脏文件的情形，先验证 canonical 本地源的 identity、branch/ref、origin、freshness 与 dirty ownership，保留无关改动，需要隔离时使用已获授权的本地 worktree；不重复网络 clone，不重映射 remote。本回放不实际创建 worktree。",
+      "pass": true,
+      "reason": "Source Discovery Enforcement 要求本地 canonical source 优先，脏工作区不能成为放弃正确来源的理由；本地隔离仍须在授权边界内。"
+    }
+  },
+  "should_not_change": [
+    "只写 outputs/workflow_core_gate_replay.json；保留输入 fixture、production source、generated layer 和无关用户文件。",
+    "保留既有脏工作与 Git branch/remote 配置；不执行 clone、worktree 创建、清理、commit、push 或发布。",
+    "保持同一 Goal 的身份、冻结范围、恢复点与完成标准；人工动作不能替代 post-action closure。",
+    "保持证据的 candidate identity 和 surface scope；不拼接跨候选版本的 PASS。",
+    "保留 advisory review 与 acceptance review 的区别，避免给简单或非视觉路径增加无关门槛。",
+    "workflow-core 只负责流程、路由、证据和完成语义；领域技术质量规则仍由对应 specialist 负责。",
+    "保留已接受行为和相邻能力；不将成熟结构化交互静默降级为 generic 或 free-text fallback。",
+    "不声称 overall 056 achieved、final real-host G1 PASS 或 release-ready；fixture 规则回放不替代真实主机验收。"
+  ]
+}

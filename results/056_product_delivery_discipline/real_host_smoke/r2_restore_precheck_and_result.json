@@ -1,0 +1,80 @@
+{
+  "captured_at": "2026-09-21T22:55:28.774776+00:00",
+  "backup_dir": "/overflow/htzhu/mingcheng_new/.codex/ai-bridge-kit/backups/20260921T225143Z",
+  "manifest": {
+    "timestamp": "20260921T225143Z",
+    "kit_version": "0.8.5",
+    "codex_home": "/overflow/htzhu/mingcheng_new/.codex",
+    "modified_files": [
+      {
+        "path": "config.toml",
+        "existed": true,
+        "backup_path": "/overflow/htzhu/mingcheng_new/.codex/ai-bridge-kit/backups/20260921T225143Z/config.toml"
+      },
+      {
+        "path": "AGENTS.md",
+        "existed": false,
+        "backup_path": null
+      },
+      {
+        "path": "rules/ai-bridge-global.rules",
+        "existed": true,
+        "backup_path": "/overflow/htzhu/mingcheng_new/.codex/ai-bridge-kit/backups/20260921T225143Z/rules/ai-bridge-global.rules"
+      }
+    ]
+  },
+  "current_before_restore": {
+    "/overflow/htzhu/mingcheng_new/.codex/config.toml": {
+      "exists": true,
+      "sha256": "9dcae675b47bf2ec2d11d2f55a2e4c6f380fb4cefe90384792ba1e8402dbe099",
+      "size": 3297
+    },
+    "/overflow/htzhu/mingcheng_new/.codex/AGENTS.md": {
+      "exists": true,
+      "sha256": "963e0bfbfa0f3f281487a8a28c92d5758250bbcd7f959a62fd1990d6371ba209",
+      "size": 17764
+    },
+    "/overflow/htzhu/mingcheng_new/.codex/rules/ai-bridge-global.rules": {
+      "exists": true,
+      "sha256": "e6bed33fa391cd029642b7650748294961085a2d342e9147ed407d7de46d952c",
+      "size": 9066
+    }
+  },
+  "precheck_ok_candidate_files_unchanged": true,
+  "precheck_mismatches": [],
+  "restore_actions": [
+    {
+      "path": "/overflow/htzhu/mingcheng_new/.codex/config.toml",
+      "action": "restored_from_backup",
+      "backup_path": "/overflow/htzhu/mingcheng_new/.codex/ai-bridge-kit/backups/20260921T225143Z/config.toml"
+    },
+    {
+      "path": "/overflow/htzhu/mingcheng_new/.codex/AGENTS.md",
+      "action": "removed_candidate_created_file"
+    },
+    {
+      "path": "/overflow/htzhu/mingcheng_new/.codex/rules/ai-bridge-global.rules",
+      "action": "restored_from_backup",
+      "backup_path": "/overflow/htzhu/mingcheng_new/.codex/ai-bridge-kit/backups/20260921T225143Z/rules/ai-bridge-global.rules"
+    }
+  ],
+  "post_restore_hashes": {
+    "/overflow/htzhu/mingcheng_new/.codex/config.toml": {
+      "exists": true,
+      "sha256": "cc57639df01dde3510fa7499a193a7d1d7877db1c8d77419c0246351f01b0501",
+      "size": 3296
+    },
+    "/overflow/htzhu/mingcheng_new/.codex/AGENTS.md": {
+      "exists": false,
+      "sha256": null,
+      "size": null
+    },
+    "/overflow/htzhu/mingcheng_new/.codex/rules/ai-bridge-global.rules": {
+      "exists": true,
+      "sha256": "dd50e1748055570a3264ba6418062a9cdbb7692b6a4d14ba521408d3f8052e64",
+      "size": 9065
+    }
+  },
+  "post_restore_matches_r2_prestate": true,
+  "post_restore_mismatches": []
+}

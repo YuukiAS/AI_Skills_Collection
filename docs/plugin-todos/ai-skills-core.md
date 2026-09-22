@@ -5,7 +5,7 @@ Canonical maintenance inbox for the `ai-skills-core` plugin and repository-maint
 ## Open candidates
 
 ### 已有规则仍失效时，先核实实际调用并去重沉淀
-status: NEW
+status: PROMOTED
 source: 2026-09-14 Bobbio / Lucerna / Mica / SeminarArc 跨项目开发反馈；用户要求以后开发不再反复依赖人工提醒，并询问是否自动沉淀 repo-specific TODO
 evidence: [完整修订提案](../design/PRODUCT_DELIVERY_DISCIPLINE_V2_2026-09-14.md)；本仓库现有 `AGENTS.md` 2.1–2.2、`docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md` 及下方已推广的 direct-feedback / production-refinement 条目。Lucerna、Mica 已有真实交互/回归/有限测试规则，Frontend Design 的 Figma 闭环反馈也已存在。
 problem: 规则可能已写入源文件或 TODO，却未被实际安装版本、任务入口或执行者消费；继续添加同义规则容易造成文档膨胀而没有用户可见改善。另一方面，把每次产品故障都自动变成通用插件规则，或把中央插件问题再记进项目 TODO，会制造重复维护。

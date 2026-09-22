@@ -1,0 +1,21 @@
+{
+  "cmd": [
+    "codex",
+    "exec",
+    "resume",
+    "--json",
+    "-o",
+    "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/default_human_only_path_bound_resume_last_message.txt",
+    "01a0c617-73f9-7f63-a473-299f7f94542b",
+    "W2_RESUME_056_FINAL"
+  ],
+  "thread_id": "01a0c617-73f9-7f63-a473-299f7f94542b",
+  "returncode": 0,
+  "elapsed_seconds": 34.23327422142029,
+  "sentinel_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/default_resume_sentinel.txt",
+  "sentinel_exists_after_resume": true,
+  "sentinel_size_after_resume": 20,
+  "sentinel_sha256": "47070a66a09fce1c9f71c39e9a43e64b99e6b021a1fe6c80e462639a2951f0d2",
+  "sentinel_line_count": 1,
+  "sentinel_text_repr": "W2_RESUME_056_FINAL\n"
+}

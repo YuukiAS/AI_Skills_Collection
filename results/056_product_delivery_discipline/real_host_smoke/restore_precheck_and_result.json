@@ -1,0 +1,59 @@
+{
+  "backup_dir": "/overflow/htzhu/mingcheng_new/.codex/ai-bridge-kit/backups/20260921T222437Z",
+  "manifest": {
+    "timestamp": "20260921T222437Z",
+    "kit_version": "0.8.5",
+    "codex_home": "/overflow/htzhu/mingcheng_new/.codex",
+    "modified_files": [
+      {
+        "path": "config.toml",
+        "existed": true,
+        "backup_path": "/overflow/htzhu/mingcheng_new/.codex/ai-bridge-kit/backups/20260921T222437Z/config.toml"
+      },
+      {
+        "path": "AGENTS.md",
+        "existed": false,
+        "backup_path": null
+      },
+      {
+        "path": "rules/ai-bridge-global.rules",
+        "existed": true,
+        "backup_path": "/overflow/htzhu/mingcheng_new/.codex/ai-bridge-kit/backups/20260921T222437Z/rules/ai-bridge-global.rules"
+      }
+    ]
+  },
+  "pre_restore_files": {
+    "config.toml": {
+      "path": "/overflow/htzhu/mingcheng_new/.codex/config.toml",
+      "exists": true,
+      "sha256": "9dcae675b47bf2ec2d11d2f55a2e4c6f380fb4cefe90384792ba1e8402dbe099",
+      "size": 3297
+    },
+    "AGENTS.md": {
+      "path": "/overflow/htzhu/mingcheng_new/.codex/AGENTS.md",
+      "exists": true,
+      "sha256": "963e0bfbfa0f3f281487a8a28c92d5758250bbcd7f959a62fd1990d6371ba209",
+      "size": 17764
+    },
+    "rules/ai-bridge-global.rules": {
+      "path": "/overflow/htzhu/mingcheng_new/.codex/rules/ai-bridge-global.rules",
+      "exists": true,
+      "sha256": "e6bed33fa391cd029642b7650748294961085a2d342e9147ed407d7de46d952c",
+      "size": 9066
+    }
+  },
+  "concurrent_drift": [
+    {
+      "path": "config.toml",
+      "current": {
+        "path": "/overflow/htzhu/mingcheng_new/.codex/config.toml",
+        "exists": true,
+        "sha256": "9dcae675b47bf2ec2d11d2f55a2e4c6f380fb4cefe90384792ba1e8402dbe099",
+        "size": 3297
+      },
+      "expected_sha256": "adc601e4532bbcb820810273587de1e57e9100fb9ad31403275dc465a1418efc",
+      "reason": "current file no longer equals candidate-installed expected content"
+    }
+  ],
+  "restore_performed": false
+}

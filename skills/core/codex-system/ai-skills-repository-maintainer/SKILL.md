@@ -94,6 +94,30 @@ Private/text artifact review is owned by `GPT_Codex_AI_Bridge_Kit` Text Review. 
 
 Real regression case 044: a private `rewritten_report.md` was reported by the user to still contain reader-facing `provenance`, `estimand`, `scientific gap`, `resource contract`, and `state of the art` language that violated the frozen writing requirement, while review passed without reading the full artifact. Future maintenance of the same class must be blocked at the Reviewed Handoff artifact-aware review layer; this maintainer should route it there and should not rewrite the 044 scientific text.
 
+## Production Consumption Diagnosis
+
+When an active rule, TODO promotion, source skill, or generated payload appears
+to cover a failure but a real task still fails, diagnose the production
+consumption path before adding another synonymous rule.
+
+Check, in order:
+
+1. installed plugin identity and version;
+2. source/generated/Marketplace parity for the affected plugin;
+3. whether the normal user invocation loaded that installed payload;
+4. trigger and routing path into the expected skill or aggregate;
+5. task entrypoint, branch/ref, and current session context;
+6. whether the test or replay was faithful to the real failure surface;
+7. whether the executor ignored an active rule, the consumer was not routed, the
+   install was stale, or the capability itself is missing.
+
+Classify the finding as `missing_rule`, `not_loaded`, `stale_install`,
+`consumer_not_routed`, `unfaithful_test`, `execution_noncompliance`, or
+`capability_gap`. Reading a source-tree `SKILL.md` is not production invocation
+evidence. A static string check or generated parity check can support diagnosis,
+but it cannot by itself prove that the normal entry consumed the intended
+behavior.
+
 ## Workflow
 
 1. Read root `AGENTS.md`, `README.md`, `TODO.md`, `scripts/codex_marketplace_config.json`, `profiles/`, relevant workflow docs, and relevant tests.

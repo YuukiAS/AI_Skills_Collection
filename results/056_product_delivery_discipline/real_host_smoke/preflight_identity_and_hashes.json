@@ -1,0 +1,158 @@
+{
+  "approved_package_commit": "1f6d50a0df734534ed7215e5754017fc5ce24cdb",
+  "hostname": "c0824.ll.unc.edu",
+  "user": "aereinh",
+  "home": "/overflow/htzhu/mingcheng_new",
+  "codex_home": "/overflow/htzhu/mingcheng_new/.codex",
+  "ai_branch": {
+    "cmd": [
+      "git",
+      "rev-parse",
+      "--abbrev-ref",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "reviewed/056_product_delivery_discipline",
+    "stderr": ""
+  },
+  "ai_head": {
+    "cmd": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "b4adf85bafe29b20de2c2fbeb95668150642f5ae",
+    "stderr": ""
+  },
+  "ai_status_short": {
+    "cmd": [
+      "git",
+      "status",
+      "--short",
+      "--branch",
+      "--untracked-files=all"
+    ],
+    "returncode": 0,
+    "stdout": "## reviewed/056_product_delivery_discipline...origin/main [ahead 6, behind 16]\n?? results/056_product_delivery_discipline/real_host_smoke/pre_host_status.txt",
+    "stderr": ""
+  },
+  "bridge_branch": {
+    "cmd": [
+      "git",
+      "rev-parse",
+      "--abbrev-ref",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "reviewed/056_product_delivery_discipline",
+    "stderr": ""
+  },
+  "bridge_head": {
+    "cmd": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "96a8ea1b58ebe6f9b7c5c46c43995666251911fe",
+    "stderr": ""
+  },
+  "bridge_status_short": {
+    "cmd": [
+      "git",
+      "status",
+      "--short",
+      "--branch",
+      "--untracked-files=all"
+    ],
+    "returncode": 0,
+    "stdout": "## reviewed/056_product_delivery_discipline...origin/main [ahead 3]",
+    "stderr": ""
+  },
+  "bridge_runtime_version": "0.8.5",
+  "managed_file_hashes_pre": {
+    "config": {
+      "path": "/overflow/htzhu/mingcheng_new/.codex/config.toml",
+      "exists": true,
+      "sha256": "b45441b617f9201ae0b99c7aebb2a1474439f239eb393272d68e86b07b704d52",
+      "size": 3296
+    },
+    "agents": {
+      "path": "/overflow/htzhu/mingcheng_new/.codex/AGENTS.md",
+      "exists": false,
+      "sha256": null,
+      "size": null
+    },
+    "rules": {
+      "path": "/overflow/htzhu/mingcheng_new/.codex/rules/ai-bridge-global.rules",
+      "exists": true,
+      "sha256": "dd50e1748055570a3264ba6418062a9cdbb7692b6a4d14ba521408d3f8052e64",
+      "size": 9065
+    }
+  },
+  "host_status_overall": "drifted",
+  "config_checks": [
+    {
+      "key": "approval_policy",
+      "actual": "\"on-request\"",
+      "expected": "\"on-request\"",
+      "state": "configured"
+    },
+    {
+      "key": "sandbox_mode",
+      "actual": "\"workspace-write\"",
+      "expected": "\"workspace-write\"",
+      "state": "configured"
+    },
+    {
+      "key": "approvals_reviewer",
+      "actual": "\"auto_review\"",
+      "expected": "\"auto_review\"",
+      "state": "configured"
+    },
+    {
+      "key": "sandbox_workspace_write.network_access",
+      "actual": "true",
+      "expected": "true",
+      "state": "configured"
+    },
+    {
+      "key": "features.default_mode_request_user_input",
+      "actual": "true",
+      "expected": "false",
+      "state": "drifted"
+    },
+    {
+      "key": "features.memories",
+      "actual": "true",
+      "expected": "true",
+      "state": "configured"
+    }
+  ],
+  "agents_state": "missing",
+  "rules_state": "drifted",
+  "project_overrides": [],
+  "trusted_ai_bridge_executable_seen_by_candidate": "/overflow/htzhu/mingcheng_new/.local/bin/ai-bridge",
+  "rules_desired_sha256": "e6bed33fa391cd029642b7650748294961085a2d342e9147ed407d7de46d952c",
+  "rules_live_sha256": "dd50e1748055570a3264ba6418062a9cdbb7692b6a4d14ba521408d3f8052e64",
+  "rules_extra_noncomment_line_count": 1,
+  "rules_unsafe_extra_noncomment_lines": [
+    "    paths = [\"/overflow/htzhu/mingcheng_new/conda/bin/ai-bridge\"],"
+  ],
+  "rules_overwrite_safety": "STOP",
+  "rules_required_markers_in_desired": {
+    "host_executable(": true,
+    "pattern = [\"ai-bridge\", \"plugin-replay\"]": true,
+    "pattern = [\"ps\"]": true,
+    "pattern = [\"git\", \"fetch\", \"--all\", \"--prune\"]": true,
+    "pattern = [\"tmux\", [\"ls\", \"list-sessions\", \"has-session\"]]": true
+  },
+  "rules_overwrite_safety_adjudication": {
+    "decision": "OK",
+    "rationale": "Only extra non-comment live rule line is the old Bridge host_executable path pin; candidate install is authorized to reconcile Bridge-managed rules and does not broaden allowlist.",
+    "unsafe_lines_rechecked": [
+      "    paths = [\"/overflow/htzhu/mingcheng_new/conda/bin/ai-bridge\"],"
+    ]
+  }
+}

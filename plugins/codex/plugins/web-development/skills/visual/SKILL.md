@@ -15,6 +15,8 @@ source_skills:
   - skills/tools/frontend/frontend-visual-systems
   - skills/tools/frontend/visual-direction
   - skills/tools/frontend/design-system-tokens
+  - skills/tools/frontend/figma-design-to-code
+  - skills/tools/frontend/motion-interaction
 icon_small: "assets/codex/app-skill-icons/aggregate.svg"
 icon_large: "assets/codex/app-skill-icons/aggregate.svg"
 default_prompt:
@@ -33,6 +35,8 @@ Use this aggregate Codex App skill when the task matches one of the source workf
 - `frontend-visual-systems`: Convert frontend references and product intent into design tokens, visual direction, palette, typography, icon, layout, density, and motion rules for implementation by a frontend builder. Reference: `_src/system/source.md`
 - `visual-direction`: Choose and execute a deliberate frontend visual direction across typography, palette, structure, texture, imagery, and composition. Use when designing or restyling frontend UI and avoiding generic AI-looking output. Reference: `_src/direction/source.md`
 - `design-system-tokens`: Create or refine frontend design systems: primitive, semantic, and component tokens; CSS variables; Tailwind theme config; typography scales; spacing; component states; brand consistency. Use when making reusable UI systems or aligning multiple screens. Reference: `_src/tokens/source.md`
+- `figma-design-to-code`: Plan Figma-to-code handoff: identify frames, tokens, assets, accessibility risks, and implementation notes that complement official Figma tooling. Reference: `_src/figma/source.md`
+- `motion-interaction`: Design and implement frontend motion: page-load choreography, transitions, hover states, scroll effects, feedback animation, and reduced-motion behavior. Use when adding or reviewing animation and interaction polish. Reference: `_src/motion/source.md`
 
 ## Workflow
 

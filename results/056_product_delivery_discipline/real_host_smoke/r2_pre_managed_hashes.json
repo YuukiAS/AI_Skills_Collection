@@ -1,0 +1,21 @@
+{
+  "captured_at": "2026-09-21T22:51:43.571836+00:00",
+  "codex_home": "/overflow/htzhu/mingcheng_new/.codex",
+  "managed_files": {
+    "/overflow/htzhu/mingcheng_new/.codex/config.toml": {
+      "exists": true,
+      "sha256": "cc57639df01dde3510fa7499a193a7d1d7877db1c8d77419c0246351f01b0501",
+      "size": 3296
+    },
+    "/overflow/htzhu/mingcheng_new/.codex/AGENTS.md": {
+      "exists": false,
+      "sha256": null,
+      "size": null
+    },
+    "/overflow/htzhu/mingcheng_new/.codex/rules/ai-bridge-global.rules": {
+      "exists": true,
+      "sha256": "dd50e1748055570a3264ba6418062a9cdbb7692b6a4d14ba521408d3f8052e64",
+      "size": 9065
+    }
+  }
+}

@@ -1,0 +1,20 @@
+$ /overflow/htzhu/mingcheng_new/conda/bin/python -m ai_bridge_kit.cli host status --codex-home /overflow/htzhu/mingcheng_new/.codex
+rc=0
+--- stdout ---
+Codex Home: /overflow/htzhu/mingcheng_new/.codex
+config.toml exists: true
+approval_policy: "on-request" (configured)
+sandbox_mode: "workspace-write" (configured)
+approvals_reviewer: "auto_review" (configured)
+sandbox_workspace_write.network_access: true (configured)
+features.default_mode_request_user_input: false (configured)
+features.memories: true (configured)
+global AGENTS managed block: configured
+narrative_language: zh-CN (configured)
+artifact_language_policy: repository/task controlled
+ai-bridge-global.rules: configured
+trusted ai-bridge executable: /overflow/htzhu/mingcheng_new/.local/bin/ai-bridge
+project override awareness: none found in current repository
+overall state: configured
+
+--- stderr ---

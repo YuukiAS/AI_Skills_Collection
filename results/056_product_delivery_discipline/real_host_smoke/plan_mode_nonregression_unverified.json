@@ -1,0 +1,5 @@
+{
+  "plan_mode_native_input_nonregression": "NOT_VERIFIED",
+  "reason": "Current available Codex CLI/app tools expose codex exec fresh Default sessions and request_user_input in this running task, but no create-thread or CLI switch for a fresh Plan-mode session was available. A fallback request_user_input probe with autoResolution returned no answer and is not counted as PASS because it was not fresh Plan-mode and did not prove blocking.",
+  "codex_features_observed": "features.default_mode_request_user_input=false; plan_mode_reasoning_effort present in config, but no plan-mode launch control discovered"
+}
