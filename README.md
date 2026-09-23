@@ -6,11 +6,15 @@ Repository / CLI release: `5.1.0`
 
 ## 可单独安装的技能
 
-`Project Thread Handoff` 是一个独立 Skill，用在长期科研或工程聊天快到上下文边界时：在原来的长 thread 里显式调用一次，它会生成一份给新 thread 使用的续接 Prompt。它在仓库里的 canonical source 是 `skills/science/communication/project-thread-handoff/`。
+这些是 Standalone Skills：可以按单个 Skill 安装和使用，不是中央 Marketplace Plugins。
 
-支持直接安装 standalone Skill 的产品 surface 可以直接使用这个 Skill。当前已经验证的 ChatGPT regular Chat 个人使用路径，是把同一个 Skill 包装成一个 `skills-only` personal Plugin；这个 wrapper 不含 MCP，也不是第二份 handoff source。以后要改能力逻辑，仍然只改 canonical Skill。
+|  |  |
+|---|---|
+| <img src="./skills/science/communication/project-thread-handoff/assets/app-facing.svg" width="40" alt="Project Thread Handoff icon"> | <strong>Project Thread Handoff</strong><br><code>project-thread-handoff</code> · v`0.1`<br>用于长期项目聊天的上下文交接与新 thread 续接。 |
+| <img src="./skills/tools/documents-media/render-chinese-math-pdf/assets/app-facing.svg" width="40" alt="Chinese Math PDF icon"> | <strong>Chinese Math PDF</strong><br><code>render-chinese-math-pdf</code> · v`0.1`<br>用于中文、中英混合和数学密集型科研 PDF 的可靠渲染与检查。 |
+| <img src="./skills/tools/hpc/slurm-workflows/assets/slurm-workflows.svg" width="40" alt="Slurm Workflows icon"> | <strong>Slurm Workflows</strong><br><code>slurm-workflows</code> · v`0.1`<br>用于 Slurm 学校/HPC 集群任务的规划、提交、监控与诊断。 |
 
-ChatGPT personal Plugin 更新：[docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md](docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md)
+`Project Thread Handoff` 也可以通过一个 `skills-only` ChatGPT personal Plugin wrapper 使用；这个 wrapper 不含 MCP，也不是第二份能力 source。更新说明见：[docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md](docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md)。
 
 ## 中央插件
 

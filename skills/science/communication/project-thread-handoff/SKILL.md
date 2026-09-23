@@ -2,6 +2,7 @@
 name: project-thread-handoff
 description: Use only after explicit Skill selection in an existing long project thread to produce one continuation prompt for a new thread; do not use for ordinary summaries, status checks, brainstorming, or general project continuation.
 status: active
+version: "0.1"
 provenance: user-authored
 trusted: false
 requires_network: false
