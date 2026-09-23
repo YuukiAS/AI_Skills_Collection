@@ -128,3 +128,22 @@ server-research-baseline: copy install OK; installed render-chinese-math-pdf
 ```
 
 Known remaining gate: pre-final independent Critic still must inspect the representative complete PDF/PNG evidence before final release acceptance. No paid review was used.
+
+## Recovery v0.2 Status
+
+Recovery candidate commit: `b2a476b83abfb30b5d0bf370db32d15df54c3de6`
+
+Deterministic recovery gates completed:
+
+- G1 math survival: `renders/recovery_v0_2/math_regression.receipt.json` records required, matched, and missing anchors; all required anchors are present.
+- G2 direct `.tex` identity: `renders/recovery_v0_2/direct_tex_note.receipt.json` records non-canonical route identity without claiming canonical paper, margin, line spacing, or font profile values.
+- G3 project-command identity: `renders/recovery_v0_2/project_venue_note.receipt.json` records `project-command` with `explicit-user-venue-project` authority.
+- G4 complete-document visual QA: `SKILL.md` now requires complete-document visual checks using all pages or all declared high-risk pages.
+- Deterministic validation: `python -m unittest tests.test_render_chinese_math_pdf`, `python -m unittest tests.test_research_writing_routing`, `python -m unittest tests.test_codex_marketplace`, `python -m unittest discover -s tests`, `python scripts/skills.py validate`, `python scripts/skills.py audit --all`, and `python scripts/build_codex_marketplace.py --write --validate --check --path-report` all passed on the recovery worktree.
+
+G5 normal Research Authoring entry replay:
+
+- status: `NOT_TESTED`
+- reason: running the pinned Codex child replay with current Codex identity was rejected by Auto-review as an external model action that requires current explicit user authorization for this specific data/provider/purpose. The subsequent interactive authorization prompt returned an empty answer, which is not consent under repository policy.
+- pre-request evidence: both failed child invocations exited before model output or requested artifact generation; `outputs/` remained empty.
+- recovery: rerun the same isolated `research-main` G5 replay only after explicit user authorization for the synthetic/public-safe G5 input, current Codex identity/provider, and one bounded child replay for this task.
