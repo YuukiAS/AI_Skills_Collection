@@ -5,7 +5,7 @@ Task key: `ai-skills-core--machine-update-orchestration`
 ## Candidate Identity
 
 - AI_Skills task branch: `reviewed/ai-skills-core--machine-update-orchestration`
-- AI_Skills candidate tip: `aa2ab426f0b84fb6e6f1c537aa4d5c9688a0a4ed`
+- AI_Skills candidate tip: `92f974fc56e366a1f6091f699e30f27764608a45`
 - Base integrated during implementation: `origin/main` at `7b76e94ad29cf3bd8547026b942553068754d51f` (`5.1.0` Project Thread Handoff)
 - Version decision after live drift: repository `5.2.0`, `ai-skills-core 0.4 -> 0.5`
 

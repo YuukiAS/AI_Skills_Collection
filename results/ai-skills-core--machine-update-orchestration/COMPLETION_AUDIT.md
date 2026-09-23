@@ -8,9 +8,9 @@ This audit checks the current implementation candidate against the V2.1 frozen o
 ## Current Candidate
 
 - AI_Skills branch: `reviewed/ai-skills-core--machine-update-orchestration`
-- AI_Skills remote tip: `07a8848d7160919a03b236aced6b6d479c5013b3`
+- AI_Skills remote tip: `92f974fc56e366a1f6091f699e30f27764608a45`
 - Candidate implementation commit: `1cd515733f6b0e793f1a18e8e6f86811aee8908b`
-- Candidate evidence commit: `07a8848d7160919a03b236aced6b6d479c5013b3`
+- Candidate evidence commit: `92f974fc56e366a1f6091f699e30f27764608a45`
 - Bridge locator commit on `origin/main`: `dfe093c6f78cdadb22905e811935a772af5cb034`
 - AI_Skills `release` ref: `7b76e94ad29cf3bd8547026b942553068754d51f` (`5.1.0`, `ai-skills-core 0.4`)
 - Bridge `release` ref: `d27259d6706dee951dc0c0ede8c9b03c65f55ca3` (`0.8.5`)
@@ -65,4 +65,3 @@ The implementation candidate is source-complete and deterministic-validation-com
 Recommended next owner action:
 
 - Planner/Reviewer should decide whether to authorize a no-paid fresh runtime normal-entry mechanism, approve a release-candidate promotion path that moves AI_Skills `release` to a capability-bearing candidate before G2, or revise G2/G1 evidence expectations for a no-paid environment.
-
