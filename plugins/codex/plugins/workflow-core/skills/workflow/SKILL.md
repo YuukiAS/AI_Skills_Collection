@@ -77,6 +77,99 @@ Run narrow gates only when the changed source area is explainably isolated and s
 5. Verify with the strongest practical evidence for the requested outcome.
 6. Report status honestly, including skipped checks, residual risk, and required user decisions.
 
+## Product Delivery Discipline
+
+For acceptance, release, user-ready, or other high-risk delivery claims, apply
+these five capabilities before asking for external acceptance. Advisory,
+diagnostic, design, and architecture reviews may happen earlier, but they must
+not claim readiness or completion.
+
+### W1 Acceptance Review Admission
+
+Acceptance/release/user-ready review is allowed only after the applicable
+vertical chain is closed for the current frozen feature or milestone:
+
+```text
+source/contract -> runtime/backend -> state/persistence when applicable
+-> normal entry -> real target behavior -> failure/recovery
+-> targeted regression -> risk-matched actual surface
+```
+
+UI shells, handlers, placeholder setup surfaces, schema fields, broad green
+suites, or `IMPLEMENTED_WHEN_*` conditions do not by themselves prove
+capability completion. Human action such as login, credential entry, OS
+permission, or physical-device confirmation is an execution checkpoint, not
+acceptance. After that action, resume the same Goal and complete the relevant
+post-action closure before reconsidering readiness.
+
+When the frozen claim includes catalog breadth, multiple locales, material
+branches, provider behavior, uploaded/persisted state, or similar breadth,
+include representative coverage for those dimensions. Fallback and recovery
+prove recoverability only; they prove the primary capability only when the
+frozen Goal explicitly accepts the fallback as equivalent.
+
+### W2 Human Decision Gate
+
+Classify every potential user question first:
+
+```text
+HUMAN_ONLY / AGENT_RESOLVABLE / UNSUPPORTED_WITH_EVIDENCE /
+OPTIONAL_NOT_REQUIRED_FOR_CURRENT_CLOSURE / SAFETY_OR_AUTHORITY_BLOCKER
+```
+
+Only genuine `HUMAN_ONLY` dependencies ask the user. Repository discovery,
+clone/sync/worktree setup, diagnostics, test repair, config generation, and
+other agent-resolvable work stays with Codex. Unsupported interfaces close
+truthfully with evidence. Optional enhancements do not block the current frozen
+objective. Safety or authority blockers use the existing Planner/STOP/approval
+route.
+
+In Default mode, required `HUMAN_ONLY` gates must use durable transcript
+wait/resume: preserve the current Goal/resume point/prompt identity, ask one
+concise plain-text question, and stop dependent execution. At the explicit
+deadline or current run boundary with no answer, report recoverable human
+blocked state with achieved/complete/user-ready all `NO`; do not continue by
+default, poll, create a successor, or consume retry/review budget. A later
+explicit in-scope answer resumes the same Goal exactly once after rereading the
+current identity. Plan-mode native blocking question semantics remain separate.
+
+### W3 Evidence Fidelity
+
+Match verification to the exact failure and the claim surface. Prefer
+old-bad/new-good evidence for deterministic bugs. Unit, mock, helper, browser,
+screenshot, native, hosted, and live evidence each prove only their own surface.
+Hosted/external-provider claims require bounded configured-target evidence when
+safe and feasible. Interaction controls whose intermediate state matters need
+sequence-level checks such as type, paste, replace/backspace, and blur/commit.
+Do not stitch PASS evidence across different implementation candidates.
+
+### W4 Repeat-Failure Circuit Breaker
+
+When the same class of failure recurs, tests are green but the real path fails,
+or a user/reviewer finds a violation of an active rule, stop the blind retry
+loop. Before another broad suite, external review, or human retry, record new
+information: candidate identity, consumer/loading path, fixture fidelity, root
+cause, corrected hypothesis, or a concrete environment explanation.
+
+### W5 Change Impact And Should-Not-Change
+
+Before changing shared behavior, identify accepted behavior and adjacent
+capabilities that must not regress. Refactors and rewrites must not silently
+degrade mature structured interactions into generic or free-text fallbacks
+without an explicit product decision. Domain quality remains owned by the
+relevant specialist skill; workflow-core owns gates, routing, evidence, and
+completion semantics.
+
+### Source Discovery Enforcement
+
+When a task points to a known repository, first locate the existing canonical
+local checkout, worktree, or clone. Verify identity, branch/ref, origin,
+freshness, and dirty ownership. Protect unrelated dirty work, but do not abandon
+the canonical source merely because it is dirty; use an authorized clean
+worktree or known-good local clone when isolation is needed. Network clone only
+when no usable local source exists, and do not solve source confusion by
+remapping remotes.
+
 ## Final Status Vocabulary
 
 - `complete`: all acceptance criteria met and verified.

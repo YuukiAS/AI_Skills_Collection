@@ -4,6 +4,26 @@
 
 No unreleased changes.
 
+## 0.4 - 2026-09-22
+
+Before:
+
+- AI Skills Maintainer enforced source-first maintenance, generated parity,
+  replay, regression and release closure, but an existing active rule could
+  still fail in production without a mandatory consumer-path diagnosis first.
+
+After:
+
+- Added production-consumption diagnosis for active-rule regressions: inspect
+  installed plugin identity/version, source/generated/Marketplace parity,
+  normal invocation, trigger/routing, task entry, session loading and replay
+  fidelity before adding another synonymous rule.
+- Diagnoses classify failures as `missing_rule`, `not_loaded`, `stale_install`,
+  `consumer_not_routed`, `unfaithful_test`, `execution_noncompliance`, or
+  `capability_gap`.
+- Source `SKILL.md` reading and generated parity are explicitly supporting
+  evidence, not proof that the normal production entry consumed the behavior.
+
 ## 0.3 - 2026-09-20
 
 Before:

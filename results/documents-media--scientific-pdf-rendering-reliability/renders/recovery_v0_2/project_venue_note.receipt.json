@@ -1,0 +1,125 @@
+{
+  "commands": {
+    "project_command": {
+      "args": [
+        "python",
+        "project_venue_render.py",
+        "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/documents-media--scientific-pdf-rendering-reliability/inputs/project_venue_note.tex",
+        "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/documents-media--scientific-pdf-rendering-reliability/renders/recovery_v0_2/project_venue_note.pdf",
+        "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/documents-media--scientific-pdf-rendering-reliability/work/recovery_v0_2_project_venue"
+      ],
+      "output": "",
+      "returncode": 0
+    }
+  },
+  "effective_profile": {
+    "authority": "explicit-user-venue-project",
+    "project_command": "python project_venue_render.py {source} {output} {work_dir}",
+    "route": "project-command",
+    "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/documents-media--scientific-pdf-rendering-reliability/inputs/project_venue_note.tex"
+  },
+  "output_pdf": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/documents-media--scientific-pdf-rendering-reliability/renders/recovery_v0_2/project_venue_note.pdf",
+  "qa": {
+    "errors": [],
+    "font_checks": {
+      "canonical_font_rows": [],
+      "cjk_font_rows": [],
+      "cjk_unicode_failures": [],
+      "errors": [],
+      "font_rows": [
+        {
+          "embedded": "yes",
+          "name": "ZBFXVO+LMRoman12-Bold-Identity-H",
+          "raw": "ZBFXVO+LMRoman12-Bold-Identity-H     CID Type 0C       Identity-H       yes yes yes      4  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "GOPRKQ+LMRoman10-Regular-Identity-H",
+          "raw": "GOPRKQ+LMRoman10-Regular-Identity-H  CID Type 0C       Identity-H       yes yes yes      6  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "CVXZQZ+LMRoman8-Regular-Identity-H",
+          "raw": "CVXZQZ+LMRoman8-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes      8  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "GZBVHX+CMR10",
+          "raw": "GZBVHX+CMR10                         Type 1C           Builtin          yes yes yes     10  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "XSHMRH+CMMI10",
+          "raw": "XSHMRH+CMMI10                        Type 1C           Builtin          yes yes yes     11  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "LQHHUE+CMMI8",
+          "raw": "LQHHUE+CMMI8                         Type 1C           Builtin          yes yes yes     12  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "WPNOOA+CMEX10",
+          "raw": "WPNOOA+CMEX10                        Type 1C           Builtin          yes yes yes     13  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "KRXDBM+CMR8",
+          "raw": "KRXDBM+CMR8                          Type 1C           Builtin          yes yes yes     14  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "BICAQL+CMSY8",
+          "raw": "BICAQL+CMSY8                         Type 1C           Builtin          yes yes yes     15  0",
+          "subset": "yes",
+          "unicode": "yes"
+        }
+      ],
+      "unexpected_canonical_fallback_rows": [],
+      "warnings": []
+    },
+    "fonts_embedded": true,
+    "pages": 1,
+    "pdf": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/results/documents-media--scientific-pdf-rendering-reliability/renders/recovery_v0_2/project_venue_note.pdf",
+    "pdffonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nZBFXVO+LMRoman12-Bold-Identity-H     CID Type 0C       Identity-H       yes yes yes      4  0\nGOPRKQ+LMRoman10-Regular-Identity-H  CID Type 0C       Identity-H       yes yes yes      6  0\nCVXZQZ+LMRoman8-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes      8  0\nGZBVHX+CMR10                         Type 1C           Builtin          yes yes yes     10  0\nXSHMRH+CMMI10                        Type 1C           Builtin          yes yes yes     11  0\nLQHHUE+CMMI8                         Type 1C           Builtin          yes yes yes     12  0\nWPNOOA+CMEX10                        Type 1C           Builtin          yes yes yes     13  0\nKRXDBM+CMR8                          Type 1C           Builtin          yes yes yes     14  0\nBICAQL+CMSY8                         Type 1C           Builtin          yes yes yes     15  0\n",
+    "pdfinfo": "Creator:          XeTeX output 2026.09.23:1655\nProducer:        xdvipdfmx (20250410)\nCreationDate:    Wed Sep 23 16:55:51 2026 HKT\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           1\nEncrypted:       no\nPage size:       595.28 x 841.89 pts (A4)\nPage rot:        0\nFile size:       16660 bytes\nOptimized:       no\nPDF version:     1.7\n",
+    "preview_paths": [
+      "results/documents-media--scientific-pdf-rendering-reliability/renders/recovery_v0_2/project_venue_note_pages/project_venue_note-1.png"
+    ],
+    "preview_prefix": "results/documents-media--scientific-pdf-rendering-reliability/renders/recovery_v0_2/project_venue_note_pages/project_venue_note",
+    "text_checks": {
+      "errors": [],
+      "fragmentation": {
+        "cjk_lines": 0,
+        "failed": false,
+        "short_cjk_lines": 0,
+        "short_ratio": 0.0
+      },
+      "table_survival": {
+        "failed": false,
+        "matched_rows": 0,
+        "source_table_rows": 0
+      },
+      "warnings": []
+    },
+    "warnings": []
+  },
+  "route": "project-command",
+  "status": "complete"
+}

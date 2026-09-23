@@ -1,0 +1,15 @@
+{
+  "task_key": "056_product_delivery_discipline",
+  "production_candidate": "33c30bbe0dd528031a23d379905cd00d6b65bc1f",
+  "scenario": {
+    "scenario_id": "frontend-1",
+    "facts": [
+      "There is a canonical design authority for the product surface.",
+      "A repo-safe read-only design locator is available: readonly://bobbio/design-handoff/workspace-state-transition.",
+      "The current implementation is missing one material state.",
+      "The missing state is tied to a real interaction and transition in the product flow.",
+      "The product repository is read-only for this task.",
+      "The user asks how to review and handle the gap."
+    ]
+  }
+}

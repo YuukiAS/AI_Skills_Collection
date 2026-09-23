@@ -373,6 +373,82 @@ class RenderChineseMathPdfTests(unittest.TestCase):
         self.assertTrue(passed["passed"])
         self.assertFalse(failed["passed"])
 
+    def test_generated_tex_math_survival_rejects_partial_anchor_subset(self) -> None:
+        signature = [
+            {"mathtype": "DisplayMath", "text": "\\nabla f(\\theta) = \\sum_i \\alpha_i"},
+        ]
+        failed = orchestrator.generated_tex_math_survival(signature, "\\nabla f(\\theta)")
+        self.assertFalse(failed["passed"])
+        self.assertIn("sum", failed["failures"][0]["missing_anchors"])
+        self.assertIn("alpha", failed["failures"][0]["missing_anchors"])
+
+    def test_direct_xelatex_effective_profile_does_not_claim_canonical_values(self) -> None:
+        identity = orchestrator.effective_profile(
+            {},
+            route=orchestrator.ROUTE_DIRECT_XELATEX,
+            authority="source-or-project",
+            source=Path("note.tex"),
+            resource_dir=Path("/resource"),
+        )
+        self.assertEqual(orchestrator.ROUTE_DIRECT_XELATEX, identity["route"])
+        self.assertIsNone(identity["profile_id"])
+        self.assertIsNone(identity["paper"])
+        self.assertIsNone(identity["margin"])
+        self.assertIsNone(identity["linestretch"])
+        self.assertEqual({}, identity["fonts"])
+
+    def test_project_command_receipt_records_project_authority_only(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "note.tex"
+            output = root / "out.pdf"
+            source.write_text("project source", encoding="utf-8")
+            output.write_bytes(b"%PDF")
+            args = type(
+                "Args",
+                (),
+                {
+                    "source": source,
+                    "output": output,
+                    "project_command": "python render.py {source} {output} {work_dir}",
+                    "preview_dir": None,
+                    "preview_pages": "first",
+                },
+            )()
+            qa_result = {"errors": [], "warnings": []}
+            with mock.patch.object(orchestrator, "run_command", return_value={"args": [], "returncode": 0, "output": ""}):
+                with mock.patch.object(orchestrator.pdf_qa, "validate_pdf", return_value=qa_result):
+                    receipt = orchestrator.render_project_command(args, root / "work")
+
+        profile = receipt["effective_profile"]
+        self.assertEqual(orchestrator.ROUTE_PROJECT_COMMAND, profile["route"])
+        self.assertEqual("explicit-user-venue-project", profile["authority"])
+        self.assertNotIn("paper", profile)
+        self.assertNotIn("fonts", profile)
+
+    def test_run_xelatex_uses_probe_resolved_executable(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            tex = root / "note.tex"
+            tex.write_text("\\bye\n", encoding="utf-8")
+            output = root / "note.pdf"
+            work_dir = root / "work"
+            work_dir.mkdir()
+            calls: list[list[str]] = []
+
+            def fake_run(args: list[str], **kwargs):
+                calls.append(args)
+                produced = work_dir / "note.pdf"
+                produced.write_bytes(b"%PDF")
+                return {"args": args, "returncode": 0, "output": ""}
+
+            with mock.patch.object(orchestrator.probe, "resolve_command", return_value="/tinytex/xelatex"):
+                with mock.patch.object(orchestrator, "run_command", side_effect=fake_run):
+                    orchestrator.run_xelatex(tex, output, work_dir, {})
+
+            self.assertTrue(output.exists())
+            self.assertEqual("/tinytex/xelatex", calls[0][0])
+
     def test_auto_route_keeps_tex_direct_and_markdown_canonical(self) -> None:
         md_args = type("Args", (), {"route": "auto", "source": Path("note.md")})()
         tex_args = type("Args", (), {"route": "auto", "source": Path("note.tex")})()

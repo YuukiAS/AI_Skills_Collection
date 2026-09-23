@@ -4,7 +4,7 @@
 
 No pending released changes.
 
-## 0.2 - 2026-09-22
+## 0.2 - 2026-09-23
 
 Research Authoring now has a bounded formal-PDF handoff: research-reporting keeps claim/evidence organization and document semantics, then delegates explicitly requested formal PDF mechanics to the standalone `render-chinese-math-pdf` companion when installed through `research-main`.
 

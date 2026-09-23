@@ -1,0 +1,27 @@
+{
+  "cmd": [
+    "codex",
+    "app-server",
+    "--stdio"
+  ],
+  "thread_id": "01a0c625-984e-7b92-9c4a-c13b3b4266a5",
+  "turn_start_response": {
+    "id": "turn",
+    "result": {
+      "turn": {
+        "id": "01a0c625-9d5e-7361-9078-00e302741ff6",
+        "items": [],
+        "itemsView": "notLoaded",
+        "status": "inProgress",
+        "error": null,
+        "startedAt": null,
+        "completedAt": null,
+        "durationMs": null
+      }
+    }
+  },
+  "request_user_input_seen": false,
+  "request_user_input": null,
+  "turn_completed_before_input": false,
+  "message_count": 26
+}

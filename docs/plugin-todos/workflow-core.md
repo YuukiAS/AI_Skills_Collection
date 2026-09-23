@@ -23,17 +23,17 @@ candidate action: require explicit real blocker / plugin TODO source for long-ru
 promotion gate: apply to the next AI_Skills maintenance batch without creating a second state machine.
 
 ### Review admission、Human Gate 与真实交付止损
-status: PROMOTE_NOW / 056_V0_4_EXECUTION_PACKAGE
+status: PROMOTED / RELEASED_IN_5.0.7
 source: 2026-09-13 to 2026-09-15 official ChatGPT Data Export audit covering Mica, Bobbio, Lucerna, Asteria plus secondary projects; strengthened by Lucerna 01033/01034/01035, the 056 persistent-user-input host probe, Bridge Kit local-repo source-resolution feedback, and CUHK Date Questionnaire V4 real-project failures
 evidence: [Planner v6 proposal](../design/PRODUCT_DELIVERY_DISCIPLINE_V6_PROPOSAL_2026-09-16.md), [post-probe addendum](../design/PRODUCT_DELIVERY_DISCIPLINE_V6_POST_PROBE_ADDENDUM_2026-09-17.md), [probe result](../design/056_PERSISTENT_PROMPT_CAPABILITY_PROBE_RESULT_2026-09-17.md), [CUHK Date feedback](../design/PRODUCT_DELIVERY_DISCIPLINE_V6_CUHK_DATE_REAL_FEEDBACK_2026-09-17.md). The private historical export audit parsed all 27 `conversations-*.json` shards with 0 parse failures and produced curated high-signal project threads; its automatic incident classifier is not treated as ground truth.
 problem: 真实项目反复暴露的是执行机制没有把“producer 自己做完、真实入口证明、只有真正 human-only 才问人、失败后不盲重跑”变成正常入口，而不是缺更多口号。典型表现包括：半成品过早交 GPT Work/用户；mock/browser/helper PASS 冒充真实 surface；用户被当 integration/UI debugger；agent 可解决的 repo/source/environment friction 被包装成 Human Gate；Default-mode prompt 自动过期；broad tests 绿但 catalog/locale/provider/interaction/material branch/hosted lifecycle 未闭环；rewrite 又破坏已接受 interaction。
 project-specific context: Lucerna provider/Longleaf、Bobbio Zotero/Figma、Mica authenticated ChatGPT DOM、Asteria graph grammar、CUHK Programme/GeoNames/YuNet/provider names 等只作为 evidence；通用 workflow 不编码项目产品细节。
 
-维护者处理要求（当前是已过 v6 architecture review 后的 implementation candidate；仍须按 056 post-probe Critic/implementation package 冻结后才可改 production）：
+维护者处理要求（已在 5.0.7 发布；后续只按新的真实反馈另行评估）：
 
 - **Acceptance Review Admission / Vertical Closure**：只对 acceptance/release/user-ready review 设硬 gate；advisory/diagnostic/design/architecture review 可在 candidate 未完成时发生，但不得输出 readiness/completion。进入 acceptance review 前，按当前 frozen feature/milestone 的适用链直接证明 source/contract -> runtime/backend -> state/persistence（若适用）-> normal entry -> real target behavior -> failure/recovery -> targeted regression -> risk-matched actual surface。UI shell、handler、placeholder、setup card、`IMPLEMENTED_WHEN_*`、schema 字段或 broad suite 不能单独算 capability complete。
 - **Human-Gate Eligibility / dependency triage**：任何 user-input request 前先区分 `HUMAN_ONLY`、`AGENT_RESOLVABLE`、`UNSUPPORTED_WITH_EVIDENCE`、`OPTIONAL_NOT_REQUIRED_FOR_CURRENT_CLOSURE`、`SAFETY_OR_AUTHORITY_BLOCKER`。只有不可代理的 secret/login/OS/physical/user-decision 等 `HUMAN_ONLY` 才进入普通 Human Gate；repo/remote source/clone/sync/environment/tests/config generation/diagnostics 等可解决事项由 Executor 自己处理；unsupported interface truthful close；optional enhancement 不冒充 blocker。
-- **Default-mode durable wait/resume，不能再声称 native persistent prompt**：056 probe 在 `codex-cli 0.142.0`、Default mode、feature enabled/tool available 下 114 秒返回空答案并 auto-resolve，`NATIVE_DEFAULT_PERSISTENT_PROMPT=FAIL`；同-thread `DURABLE_TRANSCRIPT_WAIT_RESUME=PASS`。当前 upstream handler 仍按 `mode == Plan` 决定 blocking，当前没有受支持的 Default-mode config timeout/always-wait setting。因此 HUMAN_ONLY gate 的主路线候选是 visible plain-text question + recorded resume point + end dependent turn + explicit same-thread reply 后 exact-once resume；不 polling、不 timeout->BLOCKED。Bridge Kit implementation 阶段应由 Critic 决定是否把 managed `features.default_mode_request_user_input` 设为 false 以 fail-closed，避免 Default tool 被误用于 required gate；不得把 transcript fallback 重命名成 native prompt。
+- **Default-mode durable wait/resume，不能再声称 native persistent prompt**：056 probe 在 `codex-cli 0.142.0`、Default mode、feature enabled/tool available 下 114 秒返回空答案并 auto-resolve，`NATIVE_DEFAULT_PERSISTENT_PROMPT=FAIL`；同-thread `DURABLE_TRANSCRIPT_WAIT_RESUME=PASS`。当前 upstream handler 仍按 `mode == Plan` 决定 blocking，当前没有受支持的 Default-mode config timeout/always-wait setting。因此 HUMAN_ONLY gate 的主路线是 visible plain-text question + recorded resume point + stop dependent execution + explicit same-thread reply 后 exact-once resume；不 polling、不 default inference、不自动继续。到明确 deadline / 当前 run boundary 仍无答案时，必须报告 recoverable Goal blocked / achieved=no / complete=no / user-ready=no，并保留同一 Goal 的恢复点；这不是 impossible/STOP，也不新建 `BLOCKED` enum。Bridge Kit 056 候选把 managed `features.default_mode_request_user_input` 设为 false 以 fail-closed，避免 Default tool 被误用于 required gate；不得把 transcript fallback 重命名成 native prompt。
 - **Human action 与 acceptance 分离 / post-action closure**：secret 输入、OAuth/OS 授权、网页登录、设备确认等只是 execution checkpoint。用户动作后 Executor 自动继续同一 Goal，完成 validation、persistence/runtime consumption、normal state、failure safety、targeted regression 等适用 closure；只有新的 final candidate 重新达到 Review Admission 才进入 acceptance。
 - **Exact failure + faithful evidence**：feature/behavior/bug fix 使用风险匹配验证；deterministic bug 尽量 old-bad/new-good。unit/synthetic/browser/native/live/user evidence 只证明对应 surface，pre-human 不证明 post-human，旧 candidate 不能拼给新 candidate。
 - **Representative coverage when the claim contains breadth**：只有 frozen objective 明确包含 catalog breadth、多 locale、material product branches、多 provider/variant 等时，W1 使用小型 representative coverage。schema/handler/sample list/source count 不能证明 breadth；单 happy path 不能证明所有 material branches。普通小任务不得因此继承全矩阵。
@@ -82,7 +82,7 @@ promotion gate:
 5. no Planner/Critic round is required solely to render the kickoff.
 
 ### Least-privilege equivalent recovery before Human Gate
-status: ABSORB_IN_056_NOW / V6_BOUNDED_AMENDMENT_V0_4
+status: PROMOTED / RELEASED_IN_5.0.7
 source: CUHK Date catalog staging incidents, 2026-09-21
 evidence: after a staging workstation catalog architecture was approved, Codex selected a named Cloudflare Tunnel + cuhkdate.com DNS route. The existing durable Cloudflare credential correctly continued to deploy the established staging Workers but lacked the extra Tunnel Write / DNS Edit permissions needed only by that chosen route. Codex repeatedly reported a credential blocker and asked the founder to broaden the token. The same frozen staging goal could instead be met by an already-authorized Cloudflare Quick Tunnel with the existing application Bearer-secret boundary, avoiding new founder credential maintenance. This was an implementation-route problem, not a missing product decision.
 target layer: workflow-core Human-Gate eligibility / recovery routing.
@@ -171,6 +171,29 @@ Expected mapping after 056 completion, to verify rather than assume:
 - W5 / Should-not-change: acceptance packaging must not mutate the already-certified product candidate/source/G7/rubric.
 - Actual-Surface capability: PPT/PDF/Beamer or equivalent user-consumed artifact receives format-appropriate opening/render checks.
 - AI Skills Maintainer / production consumption diagnosis: if repo-output/path rules already exist but delivery still escapes them, inspect the real producer/consumer path instead of adding another duplicate rule.
+
+### Reviewed Handoff exact sibling worktree authorization can still be unexecutable under Host sandbox
+status: NEW / POST_056_REFINEMENT
+source: Project Thread Handoff V1 implementation runtime failure, 2026-09-22
+evidence: the frozen kickoff explicitly authorized task key `science-communication--project-thread-handoff`, branch `reviewed/science-communication--project-thread-handoff`, and sibling worktree `../AI_Skills_Collection-science-communication-project-thread-handoff`. Codex correctly recognized the authorization. The normal command `git worktree add -b reviewed/science-communication--project-thread-handoff ../AI_Skills_Collection-science-communication-project-thread-handoff origin/main` was first routed to approval; after the user explicitly approved that exact command, Auto-review still rejected it because the current environment policy forbids the required escalated sandbox permission and exposes no approval override. The Goal then had no legal continuation path without changing the frozen worktree contract.
+target layer: workflow-core execution handoff / Bridge-owned Git runtime primitive.
+problem: 056/5.0.7 correctly distinguishes current-user authorization from repo text and prevents same-frozen-effect re-asking at the workflow-semantic layer, but a reviewed task can still become operationally impossible when the authorized sibling worktree lies outside the current workspace-write sandbox. Repeating the same approval cannot solve an environment-policy denial. This is not a product-domain failure and should not be patched by weakening the Goal, using `/tmp`, silently changing worktree locators, or globally allowing arbitrary `git worktree add`.
+ownership split:
+- **Bridge Kit owns** the cross-repo bounded execution primitive: a trusted reviewed-worktree/task-branch helper (exact name TBD by later Planner/Critic) that validates repo identity, semantic task key, exact `reviewed/<task_key>` branch, exact authorized worktree locator, allowed base ref, occupied-path/repo/branch mismatch, and fail-closed behavior before performing the Git mutation through the sanctioned Host path.
+- **workflow-core owns** normal consumption: when Goal/Kickoff already freezes an exact reviewed branch/worktree, use the Bridge-owned bounded primitive if available instead of issuing raw `git worktree add` and expecting a second approval to rescue it. If the primitive is unavailable, detect that before substantial implementation rather than spending user time on a command that the Host policy cannot execute.
+candidate action:
+- do not change 056 architecture retroactively; treat this as post-056 real-task regression;
+- design the smallest Bridge helper that can safely carry the already-authorized frozen effect without granting arbitrary branch/path creation;
+- keep raw `git worktree add`, arbitrary branch creation, remote mutation, force/destructive Git and locator substitution approval-gated;
+- wire workflow-core/Reviewed Handoff execution guidance to prefer the helper for exact reviewed task worktrees;
+- preserve current exact-branch/worktree upfront authorization semantics; do not add a second authorization database/state machine/ledger.
+promotion gate:
+1. a frozen kickoff authorizes exact repo/task/branch/sibling worktree and the normal workflow creates it without a second user approval card;
+2. an arbitrary branch, mismatched task key, alternate worktree path, occupied/mismatched repo path, force/destructive option, or unapproved base fails closed;
+3. raw generic `git worktree add` remains approval-gated;
+4. helper works across at least two repositories without repo-specific hardcoding;
+5. workflow-core normal entry consumes the helper and does not silently fall back to `/tmp`, current dirty checkout, or another branch;
+6. if Host/platform policy fundamentally cannot expose a safe sanctioned path, report `UNSUPPORTED_WITH_EVIDENCE` before implementation rather than re-asking the same approval.
 
 ## Do not do
 

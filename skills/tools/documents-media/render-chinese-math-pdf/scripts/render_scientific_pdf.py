@@ -98,12 +98,8 @@ def math_anchor_tokens(math_text: str) -> list[str]:
         "begin",
         "end",
         "frac",
-        "sum",
-        "int",
         "mathrm",
         "mathbf",
-        "mathbb",
-        "hat",
         "bar",
         "tilde",
         "cdot",
@@ -127,13 +123,15 @@ def generated_tex_math_survival(signature: list[dict[str, str]], tex_text: str) 
     for index, item in enumerate(signature):
         tokens = math_anchor_tokens(item["text"])
         matched = [token for token in tokens if token in tex_text or token in normalized_tex]
+        missing = [token for token in tokens if token not in matched]
         check = {
             "index": index,
             "mathtype": item["mathtype"],
             "text": item["text"],
-            "anchors": tokens,
+            "required_anchors": tokens,
             "matched_anchors": matched,
-            "passed": bool(matched),
+            "missing_anchors": missing,
+            "passed": not missing,
         }
         checks.append(check)
         if not check["passed"]:
@@ -174,22 +172,42 @@ def dependency_probe(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def effective_profile(profile: dict[str, Any], *, route: str, authority: str, source: Path, resource_dir: Path | None) -> dict[str, Any]:
-    return {
-        "profile_id": profile.get("id"),
+    base = {
         "authority": authority,
         "route": route,
         "engine": profile.get("engine") if route == ROUTE_CANONICAL_MARKDOWN else route,
         "source": str(source),
         "resource_dir": str(resource_dir) if resource_dir else None,
-        "paper": profile.get("paper"),
-        "fontsize": profile.get("fontsize"),
-        "margin": profile.get("margin"),
-        "linestretch": profile.get("linestretch"),
-        "toc": bool(profile.get("toc")),
-        "number_sections": bool(profile.get("number_sections")),
-        "ordinary_prose_downscaling": bool(profile.get("ordinary_prose_downscaling")),
-        "fonts": profile.get("fonts", {}),
     }
+    if route != ROUTE_CANONICAL_MARKDOWN:
+        base.update(
+            {
+                "profile_id": None,
+                "paper": None,
+                "fontsize": None,
+                "margin": None,
+                "linestretch": None,
+                "toc": None,
+                "number_sections": None,
+                "ordinary_prose_downscaling": None,
+                "fonts": {},
+            }
+        )
+        return base
+    base.update(
+        {
+            "profile_id": profile.get("id"),
+            "paper": profile.get("paper"),
+            "fontsize": profile.get("fontsize"),
+            "margin": profile.get("margin"),
+            "linestretch": profile.get("linestretch"),
+            "toc": bool(profile.get("toc")),
+            "number_sections": bool(profile.get("number_sections")),
+            "ordinary_prose_downscaling": bool(profile.get("ordinary_prose_downscaling")),
+            "fonts": profile.get("fonts", {}),
+        }
+    )
+    return base
 
 
 def pandoc_latex_args(source: Path, tex: Path, header: Path, profile: dict[str, Any]) -> list[str]:
@@ -223,9 +241,12 @@ def pandoc_latex_args(source: Path, tex: Path, header: Path, profile: dict[str, 
 
 def run_xelatex(tex: Path, output_pdf: Path, work_dir: Path, env: dict[str, str]) -> list[dict[str, Any]]:
     commands: list[dict[str, Any]] = []
+    xelatex = probe.resolve_command("xelatex")
+    if xelatex is None:
+        raise RuntimeError("blocked_missing_dependency: xelatex not found")
     for _ in range(2):
         proc = run_command(
-            ["xelatex", "-interaction=nonstopmode", "-halt-on-error", "-output-directory", str(work_dir), str(tex)],
+            [xelatex, "-interaction=nonstopmode", "-halt-on-error", "-output-directory", str(work_dir), str(tex)],
             cwd=tex.parent,
             env=env,
             timeout=240,
@@ -273,7 +294,9 @@ def render_canonical_markdown(args: argparse.Namespace, work_dir: Path, profile:
         "probe": probe_result,
         "effective_profile": effective_profile(profile, route=ROUTE_CANONICAL_MARKDOWN, authority="canonical-default", source=source, resource_dir=resource),
         "source_math_signature": source_signature,
-        "post_transform_math_signature": source_signature,
+        "post_transform_ast_observed": False,
+        "post_transform_math_signature": None,
+        "post_transform_note": "No independent post-transform Pandoc AST stage is used by this route; generated TeX survival is checked directly.",
         "generated_tex": str(generated_tex),
         "generated_tex_math_survival": math_survival,
         "commands": {"pandoc_latex": pandoc_proc, "xelatex": xelatex_commands},
@@ -290,11 +313,10 @@ def render_direct_xelatex(args: argparse.Namespace, work_dir: Path) -> dict[str,
     qa = pdf_qa.validate_pdf(output, source=None, preview_dir=args.preview_dir, preview_pages=args.preview_pages, canonical_profile=False)
     if qa["errors"]:
         raise RuntimeError("PDF QA failed:\n" + json.dumps(qa, ensure_ascii=False, indent=2))
-    profile = load_json(args.profile)
     return {
         "route": ROUTE_DIRECT_XELATEX,
         "probe": probe_result,
-        "effective_profile": effective_profile(profile, route=ROUTE_DIRECT_XELATEX, authority="source-or-project", source=source, resource_dir=resource),
+        "effective_profile": effective_profile({}, route=ROUTE_DIRECT_XELATEX, authority="source-or-project", source=source, resource_dir=resource),
         "commands": {"xelatex": commands},
         "qa": qa,
     }

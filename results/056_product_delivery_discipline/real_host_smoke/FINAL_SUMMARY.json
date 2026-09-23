@@ -1,0 +1,50 @@
+{
+  "captured_at": "2026-09-21T22:56:53.089517+00:00",
+  "fields": {
+    "HOST_SMOKE_RESULT": "PASS",
+    "SOURCE_DEFECT_DISCOVERED": "NO",
+    "AI_EVIDENCE_FINAL_HEAD": "reported_after_evidence_commit_push",
+    "BRIDGE_CANDIDATE": "96a8ea1b58ebe6f9b7c5c46c43995666251911fe",
+    "TARGET_HOST": "c0824.ll.unc.edu",
+    "TARGET_CODEX_HOME": "/overflow/htzhu/mingcheng_new/.codex",
+    "BACKUP_DIR": "/overflow/htzhu/mingcheng_new/.codex/ai-bridge-kit/backups/20260921T225143Z",
+    "CANDIDATE_HOST_VALIDATE": "PASS",
+    "DEFAULT_HUMAN_ONLY_PLAIN_TEXT": "PASS",
+    "DEFAULT_WAIT_NO_CONTINUATION": "PASS",
+    "SAME_GOAL_EXACT_ONCE_RESUME": "PASS",
+    "POST_ACTION_CLOSURE": "PASS",
+    "AGENT_RESOLVABLE_NO_FALSE_PROMPT": "PASS",
+    "PLAN_MODE_NATIVE_INPUT_NONREGRESSION": "PASS",
+    "HOST_PRESTATE_RESTORED": "YES",
+    "UNEXPECTED_HOST_MUTATION": "NO",
+    "NEXT_HANDOFF": "CRITIC"
+  },
+  "evidence": {
+    "ai_head_before_final_evidence_commit": "f55e617d0606eeb6e2ad9e16caab6ded148e3126",
+    "candidate_install_bundle": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/r2_candidate_install_bundle.json",
+    "candidate_validate_output": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/r2_candidate_host_validate_output.txt",
+    "default_initial_stdout": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/default_human_only_path_bound_initial.stdout.jsonl",
+    "default_resume_stdout": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/default_human_only_path_bound_resume.stdout.jsonl",
+    "agent_resolvable_stdout": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/agent_resolvable.stdout.jsonl",
+    "plan_probe_result": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/r2_plan_mode_appserver_probe_result.json",
+    "restore_result": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/r2_restore_precheck_and_result.json",
+    "post_restore_host_status": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/r2_post_restore_host_status.txt",
+    "sentinel_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/default_resume_sentinel.txt",
+    "sentinel_sha256": "47070a66a09fce1c9f71c39e9a43e64b99e6b021a1fe6c80e462639a2951f0d2",
+    "sentinel_line_count": 1,
+    "default_plain_text_question": "请提供要写入 sentinel 文件的那个 exact token。收到后我会只写入一次、读回验证正好一行，然后再完成任务。",
+    "plan_thread_id": "01a0c62c-6b60-7972-8d69-42ff71dc9ffd",
+    "plan_session_path": "/overflow/htzhu/mingcheng_new/.codex/sessions/2026/09/21/rollout-2026-09-21T18-53-14-01a0c62c-6b60-7972-8d69-42ff71dc9ffd.jsonl",
+    "first_run_note": "Earlier r1 summary recorded a restore mismatch caused by unrelated marketplace metadata drift; r2 reran the candidate install with a fresh backup and restored exactly to r2 prestate."
+  },
+  "condition_audit": {
+    "plain_text_question_no_default_native_request_user_input": true,
+    "sentinel_absent_and_no_dependent_execution_before_reply": true,
+    "same_thread_resumed_once_and_exact_sentinel": true,
+    "read_back_post_action_closure": true,
+    "agent_resolvable_no_false_prompt": true,
+    "plan_native_request_user_input_available_and_blocking": true,
+    "fresh_manifest_restore_exact": true,
+    "candidate_host_validate_pass": true
+  }
+}

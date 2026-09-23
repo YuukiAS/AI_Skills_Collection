@@ -1,0 +1,12 @@
+{
+  "plugin": "ai-skills-core",
+  "normal_entry": "AI Skills Maintainer candidate",
+  "G8": {
+    "observed_behavior": "通过已安装 candidate 的 maintainer skill 入口读取 Production Consumption Diagnosis，并先按消费路径诊断 fixture：已安装身份与版本、source/generated/Marketplace 一致性、正常调用加载的 payload、trigger/routing、任务入口与 branch/ref/session，以及回放忠实度。fixture 表明 active rule 已存在，但正常任务仍表现为消费旧安装，因此归类为 stale_install，而非 missing_rule。",
+    "pass": true,
+    "reason": "本 fixture 的诊断行为符合 G8：先检查消费路径并识别 stale_install，不新增同义规则或 TODO。该 PASS 仅表示 fixture 诊断通过；fixture 未提供实际安装清单、加载日志或 parity 证据，读取已安装 SKILL 文本也不能单独证明失败任务的正常入口消费了预期 payload。真实安装是否陈旧仍需这些运行证据确认。"
+  },
+  "classification": "stale_install",
+  "consumer_path_checked": true,
+  "adds_duplicate_policy": false
+}

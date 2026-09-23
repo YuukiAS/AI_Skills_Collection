@@ -35,6 +35,41 @@ Use this skill to turn research and product intent into an executable visual sys
 5. State responsive and accessibility constraints.
 6. Produce a handoff brief that a frontend implementation tool can execute.
 
+## Production Frontend Design Gates
+
+Apply these gates before a frontend candidate is described as production-ready,
+user-ready, release-ready, or ready for external acceptance.
+
+### F-A Design Authority And State Coverage
+
+Do not force every project into Figma. When a canonical Figma file, design
+handoff, product design brief, or other current design source exists, treat it
+as production visual authority rather than inspiration. Read the current design
+source before coding or reviewing. Material states, variants, responsive
+breakpoints, interaction states, and important transitions that will ship need a
+design target; if they are missing, close the design-source gap instead of
+inventing the state directly in code.
+
+### F-B Design-System Coherence
+
+Use shared component families and tokens for layout, typography, spacing,
+radius, surfaces, icon style, and motion. Icons should belong to a coherent
+family; motion should clarify state or hierarchy and must respect reduced
+motion. Brand/product assets and generic UI chrome must remain visually
+consistent. When the frozen product claim includes multiple locales or finite
+reachable enums, all user-visible tokens for those locales must be covered;
+internal identifiers are not an acceptable production fallback except for
+narrowly approved proper names or acronyms.
+
+### F-C Actual-Surface Convergence
+
+Verify the real target surface, not only component snippets or screenshots.
+When a canonical design exists, compare complete native screens against the
+design source at normal working sizes and record intentional deviations.
+Screenshots alone do not prove click, native, provider, persistence, or live
+behavior. Producer self-QA should catch obvious hierarchy, spacing, overflow,
+translation-token, interaction, and motion defects before external acceptance.
+
 ## Quality Bar
 
 - Avoid generic "AI page" tells: undifferentiated purple gradients, oversized cards, weak contrast, random icon mixes, decorative motion, and unsupported hero copy.

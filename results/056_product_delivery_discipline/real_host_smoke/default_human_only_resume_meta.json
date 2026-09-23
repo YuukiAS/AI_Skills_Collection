@@ -1,0 +1,20 @@
+{
+  "cmd": [
+    "codex",
+    "exec",
+    "resume",
+    "--json",
+    "-o",
+    "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/default_human_only_resume_last_message.txt",
+    "01a0c614-983e-75e1-b6d7-7703cca0a167",
+    "W2_RESUME_056_FINAL"
+  ],
+  "thread_id": "01a0c614-983e-75e1-b6d7-7703cca0a167",
+  "returncode": 0,
+  "elapsed_seconds": 58.614391803741455,
+  "sentinel_exists_after_resume": false,
+  "sentinel_size_after_resume": null,
+  "sentinel_sha256": null,
+  "sentinel_line_count": null,
+  "sentinel_text_repr": null
+}

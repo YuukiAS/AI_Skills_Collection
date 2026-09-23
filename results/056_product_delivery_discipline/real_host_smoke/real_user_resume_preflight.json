@@ -1,0 +1,45 @@
+{
+  "captured_at": "2026-09-22T00:56:22.545651+00:00",
+  "ai_head": "fb30046ce53efb117ed87be89d8283f5ec82a663",
+  "bridge_head": "96a8ea1b58ebe6f9b7c5c46c43995666251911fe",
+  "bridge_version_source": "\"\"\"Local CLI for the GPT-Codex AI Bridge kit.\"\"\"\n\n__version__ = \"0.8.5\"",
+  "codex_home": "/overflow/htzhu/mingcheng_new/.codex",
+  "sentinel_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_resume_sentinel.txt",
+  "sentinel_exists_before_start": false,
+  "managed_hashes_pre_install": {
+    "/overflow/htzhu/mingcheng_new/.codex/config.toml": {
+      "exists": true,
+      "sha256": "cc57639df01dde3510fa7499a193a7d1d7877db1c8d77419c0246351f01b0501",
+      "size": 3296
+    },
+    "/overflow/htzhu/mingcheng_new/.codex/AGENTS.md": {
+      "exists": false,
+      "sha256": null,
+      "size": null
+    },
+    "/overflow/htzhu/mingcheng_new/.codex/rules/ai-bridge-global.rules": {
+      "exists": true,
+      "sha256": "dd50e1748055570a3264ba6418062a9cdbb7692b6a4d14ba521408d3f8052e64",
+      "size": 9065
+    }
+  },
+  "rules_safety_check": {
+    "current_rules_sha256": "dd50e1748055570a3264ba6418062a9cdbb7692b6a4d14ba521408d3f8052e64",
+    "candidate_desired_rules_sha256": "e6bed33fa391cd029642b7650748294961085a2d342e9147ed407d7de46d952c",
+    "diff_line_count": 10,
+    "diff_excerpt": [
+      "--- current",
+      "+++ candidate_desired",
+      "@@ -1,6 +1,6 @@",
+      " host_executable(",
+      "     name = \"ai-bridge\",",
+      "-    paths = [\"/overflow/htzhu/mingcheng_new/conda/bin/ai-bridge\"],",
+      "+    paths = [\"/overflow/htzhu/mingcheng_new/.local/bin/ai-bridge\"],",
+      " )",
+      " ",
+      " prefix_rule("
+    ],
+    "decision": "OK_NO_OBVIOUS_USER_ADDED_NON_BRIDGE_POLICY",
+    "rationale": "Live rules are the Bridge-managed global rules file; observed drift is bounded to candidate-managed desired rules, including trusted ai-bridge executable path reconciliation. No obvious ad hoc non-Bridge user policy was present in the inspected file."
+  }
+}

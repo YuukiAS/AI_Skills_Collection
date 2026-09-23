@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-09-22T00:57:19.041016+00:00",
+  "install_rc": 0,
+  "status_rc": 0,
+  "validate_rc": 0,
+  "backup_dir": "/overflow/htzhu/mingcheng_new/.codex/ai-bridge-kit/backups/20260922T005653Z",
+  "manifest_copy": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_backup_manifest_copy.json",
+  "managed_hashes_after_install": {
+    "/overflow/htzhu/mingcheng_new/.codex/config.toml": {
+      "exists": true,
+      "sha256": "9dcae675b47bf2ec2d11d2f55a2e4c6f380fb4cefe90384792ba1e8402dbe099",
+      "size": 3297
+    },
+    "/overflow/htzhu/mingcheng_new/.codex/AGENTS.md": {
+      "exists": true,
+      "sha256": "963e0bfbfa0f3f281487a8a28c92d5758250bbcd7f959a62fd1990d6371ba209",
+      "size": 17764
+    },
+    "/overflow/htzhu/mingcheng_new/.codex/rules/ai-bridge-global.rules": {
+      "exists": true,
+      "sha256": "e6bed33fa391cd029642b7650748294961085a2d342e9147ed407d7de46d952c",
+      "size": 9066
+    }
+  }
+}

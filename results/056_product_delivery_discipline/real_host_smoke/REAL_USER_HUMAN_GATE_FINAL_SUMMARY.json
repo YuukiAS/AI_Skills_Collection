@@ -1,0 +1,53 @@
+{
+  "captured_at": "2026-09-22T02:08:26.953981+00:00",
+  "fields": {
+    "REAL_USER_HUMAN_GATE_RESULT": "PASS",
+    "REAL_USER_REPLY_OBSERVED": "YES",
+    "REAL_USER_REPLY_VALUE": "W2_RESUME_056_FINAL",
+    "CHILD_THREAD_ID": "01a0c69e-98e9-7ee0-8487-5b56d30147a0",
+    "SAME_CHILD_THREAD_RESUMED": "YES",
+    "RESUME_COUNT": 1,
+    "SENTINEL_ABSENT_BEFORE_REAL_REPLY": "YES",
+    "SENTINEL_LINE_COUNT": 1,
+    "SENTINEL_EXACT_VALUE": "PASS",
+    "POST_ACTION_READBACK": "PASS",
+    "POST_ACTION_CLOSURE": "PASS",
+    "SOURCE_DEFECT_DISCOVERED": "NO",
+    "HOST_PRESTATE_RESTORED": "YES",
+    "UNEXPECTED_HOST_MUTATION": "NO",
+    "AI_EVIDENCE_FINAL_HEAD": "reported_after_evidence_commit_push",
+    "BRIDGE_CANDIDATE": "96a8ea1b58ebe6f9b7c5c46c43995666251911fe",
+    "NEXT_HANDOFF": "CRITIC"
+  },
+  "evidence": {
+    "repair_scope": "Only repaired REAL_USER_REPLY -> SAME_GOAL_EXACT_ONCE_RESUME / POST_ACTION_CLOSURE evidence defect; did not rerun G2-G8, source discovery, agent-resolvable smoke, Plan-mode smoke, full suites, or paid review.",
+    "ai_head_before_repair_commit": "fb30046ce53efb117ed87be89d8283f5ec82a663",
+    "bridge_candidate_head": "96a8ea1b58ebe6f9b7c5c46c43995666251911fe",
+    "fresh_backup_dir": "/overflow/htzhu/mingcheng_new/.codex/ai-bridge-kit/backups/20260922T005653Z",
+    "fresh_backup_manifest_copy": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_backup_manifest_copy.json",
+    "candidate_install_bundle": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_candidate_install_bundle.json",
+    "candidate_validate_output": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_candidate_host_validate_output.txt",
+    "child_initial_prompt": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_child_initial_prompt.txt",
+    "child_initial_stdout": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_child_initial.stdout.jsonl",
+    "child_plain_text_question": "请提供要写入 sentinel 文件的精确 token。  \n我收到 token 后会只写入一次、读回验证文件正好一行，然后再完成任务。",
+    "parent_waiting_record": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_parent_waiting_for_reply.json",
+    "real_reply_observed_record": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_reply_observed_before_resume.json",
+    "child_resume_stdout": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_child_resume.stdout.jsonl",
+    "child_resume_meta": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_child_resume_meta.json",
+    "sentinel_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_resume_sentinel.txt",
+    "sentinel_sha256": "47070a66a09fce1c9f71c39e9a43e64b99e6b021a1fe6c80e462639a2951f0d2",
+    "sentinel_verification": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_sentinel_verification.json",
+    "restore_result": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_restore_precheck_and_result.json",
+    "post_restore_host_status": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-056-product-delivery-discipline/results/056_product_delivery_discipline/real_host_smoke/real_user_post_restore_host_status.txt"
+  },
+  "condition_audit": {
+    "default_initial_plain_text_question": true,
+    "dependent_execution_stopped_before_real_reply": true,
+    "parent_stopped_and_waited": true,
+    "real_followup_observed_before_resume": true,
+    "same_child_thread_resumed_once": true,
+    "sentinel_exact_one_line": true,
+    "readback_and_closure": true,
+    "host_restored_from_fresh_manifest": true
+  }
+}

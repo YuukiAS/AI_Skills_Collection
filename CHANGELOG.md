@@ -4,12 +4,15 @@
 
 No unreleased changes.
 
-## 5.0.7 - 2026-09-22
+## 5.0.8 - 2026-09-23
 
-Repository `5.0.7` is a compatible release for scientific PDF rendering reliability and the bounded Research Authoring PDF handoff.
+Repository `5.0.8` is a compatible release candidate for scientific PDF
+rendering reliability and the bounded Research Authoring PDF handoff.
 
 Repository bump decision: PATCH
-Reason: this release improves existing rendering, profile, and research-writing behavior without adding a new repository-level capability or breaking existing contracts.
+Reason: this release improves existing rendering, profile, and research-writing
+behavior without adding a new repository-level capability or breaking existing
+contracts.
 
 Affected plugin versions:
 
@@ -19,26 +22,110 @@ Affected plugin versions:
 
 Affected plugins:
 - `research-writing`: `0.1` -> `0.2`
-  Reason: Research Authoring now delegates explicitly requested formal PDF artifact mechanics to the standalone renderer companion in `research-main`, keeps Markdown-only requests unchanged, and fails closed when standalone Marketplace Research Authoring lacks the companion renderer.
+  Reason: Research Authoring now delegates explicitly requested formal PDF
+  artifact mechanics to the standalone renderer companion in `research-main`,
+  keeps Markdown-only requests unchanged, and fails closed when standalone
+  Marketplace Research Authoring lacks the companion renderer.
 - `presentations`: NO_BUMP
-  Reason: this release only verifies existing presentation profile compatibility; it does not change Presentations production behavior.
+  Reason: this release only verifies existing presentation profile
+  compatibility; it does not change Presentations production behavior.
 - all other central plugins: NO_BUMP
   Reason: no other central plugin production behavior changed.
 
+Unchanged plugin versions: `workflow-core 0.3`, `ai-skills-core 0.4`,
+`writing-style 0.3`, `presentations 0.3`, `scientific-visualization 0.1`,
+`web-development 0.2`, `statistical-modeling 0.1`, `bioinformatics 0.1`,
+`medical-imaging 0.1`.
+
 Changed repository behavior:
 
-- `render-chinese-math-pdf` now has a repo-owned canonical orchestration path for Markdown -> Pandoc AST -> LaTeX -> XeLaTeX -> PDF, with explicit route/profile receipts.
-- Canonical Markdown rendering records ordered `Math(mathtype, text)` payload signatures and checks generated-TeX math-token survival before PDF QA.
-- Native `.tex` inputs stay on direct XeLaTeX by default, and Chromium/browser rendering remains an explicit diagnostic route only.
-- The canonical formal-note profile records A4, 11pt, 25mm margins, about 1.15 line spacing, no automatic TOC/numbering, and no ordinary-prose downscaling.
-- PDF QA can enforce canonical font identity and render all pages or selected high-risk pages for visual inspection.
-- `research-main` now installs `render-chinese-math-pdf`; standalone Marketplace Research Authoring still does not include the renderer as a Marketplace skill.
+- `render-chinese-math-pdf` now has a repo-owned canonical orchestration path
+  for Markdown -> Pandoc AST -> LaTeX -> XeLaTeX -> PDF, with explicit
+  route/profile receipts.
+- Canonical Markdown rendering records ordered `Math(mathtype, text)` payload
+  signatures and checks generated-TeX math-token survival before PDF QA.
+- Native `.tex` inputs stay on direct XeLaTeX by default, and
+  Chromium/browser rendering remains an explicit diagnostic route only.
+- The canonical formal-note profile records A4, 11pt, 25mm margins, about
+  1.15 line spacing, no automatic TOC/numbering, and no ordinary-prose
+  downscaling.
+- PDF QA can enforce canonical font identity and render all pages or selected
+  high-risk pages for visual inspection.
+- `research-main` now installs `render-chinese-math-pdf`; standalone
+  Marketplace Research Authoring still does not include the renderer as a
+  Marketplace skill.
 
 Plugin changelog index: `docs/plugin-changelogs/README.md`.
 
 Affected plugin changelog:
 
 - `docs/plugin-changelogs/research-writing.md`
+
+## 5.0.7 - 2026-09-22
+
+Repository `5.0.7` is a compatible release for 056 Product Delivery Discipline
+implementation on the central production plugin path, including the final
+real-user G1 closure evidence.
+
+Repository bump decision: PATCH
+Reason: this release improves existing workflow, frontend-design, and
+maintenance behavior without adding a new top-level repository capability or
+breaking existing contracts.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `workflow-core` | `0.2` | `0.3` |
+| `web-development` | `0.1` | `0.2` |
+| `ai-skills-core` | `0.3` | `0.4` |
+
+Affected plugins:
+- `workflow-core`: `0.2` -> `0.3`
+  Reason: Verified Workflow now carries the 056 W1-W5 delivery discipline,
+  including acceptance admission, HUMAN_ONLY dependency triage, least-privilege
+  equivalent recovery, evidence-surface fidelity, repeat-failure stop rules,
+  change-impact protection, and local source discovery enforcement.
+- `web-development`: `0.1` -> `0.2`
+  Reason: Frontend Design now carries F-A/F-B/F-C production gates and its
+  Marketplace payload consumes the existing Figma handoff and motion skills.
+- `ai-skills-core`: `0.3` -> `0.4`
+  Reason: AI Skills Maintainer now diagnoses production consumption paths when
+  an active rule exists but the real installed/generated/invocation/session path
+  still fails.
+
+Unchanged plugin versions: `writing-style 0.3`, `research-writing 0.1`,
+`presentations 0.3`, `scientific-visualization 0.1`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Complex delivery work should finish agent-resolvable implementation, faithful
+  target-surface evidence and post-action closure before asking for acceptance.
+- Only genuine `HUMAN_ONLY` dependencies ask the user; unsupported interfaces
+  close truthfully and agent-resolvable source/environment/test issues stay with
+  Codex.
+- A permission gap on an optional high-privilege route now triggers a bounded
+  least-privilege equivalence check before asking the user for broader
+  credential/provider/resource authority.
+- Frontend Design now treats current canonical design sources as production
+  authority when they exist, while avoiding automatic Figma escalation for
+  docs-only, backend/server-only, or tiny nonvisual tasks.
+- Maintainer review now checks installed identity, source/generated parity,
+  plugin invocation, trigger, task entry, session loading and normal-entry
+  replay before adding duplicate policy.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelogs:
+
+- `docs/plugin-changelogs/workflow-core.md`
+- `docs/plugin-changelogs/web-development.md`
+- `docs/plugin-changelogs/ai-skills-core.md`
+
+Real-host integration note: final real-user G1 evidence passed. Permanent
+normal Bridge/Host installation is completed by the final integration closure
+evidence after the matching Bridge `0.8.5` main release is verified.
 
 ## 5.0.6 - 2026-09-20
 

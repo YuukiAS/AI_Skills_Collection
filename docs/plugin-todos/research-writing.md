@@ -6,7 +6,7 @@ Canonical maintenance inbox for the `research-writing` plugin.
 
 
 ### Formal research reports can be scientifically correct yet still lack a coherent academic document identity
-status: PARTIALLY_PROMOTED_IN_5.0.7
+status: PARTIALLY_PROMOTED_IN_5.0.8
 source: real supervisor / group-meeting research-report rendering, 2026-09-19
 evidence: private user-provided pair of rendered PDFs from the same report (not copied into this public repository); first render 17 pages/A4, second render 24 pages/US Letter; user feedback after the math was repaired: the report was readable and not obviously “wrong”, but still did not feel like a formal research document. Cross-reference: `docs/skill-todos/render-chinese-math-pdf.md` records the lower-level renderer/math/font failures from the same real use.
 problem:
@@ -17,7 +17,7 @@ problem:
 - Current `research-reporting` correctly says it should not implement low-level PDF/DOCX/LaTeX mechanics, and the existing TODO already keeps typography/pagination/render mechanics outside Research Authoring. This real case shows a remaining boundary gap: the document purpose still has to result in a coherent artifact-level identity (for example a formal advisor/group-meeting note rather than a generic article export) before/while the low-level renderer executes it. This NEW record intentionally does not decide whether that contract belongs in Research Authoring, the rendering layer, or a shared artifact layer.
 project-specific context: the report’s scientific topic, methods, datasets, results and exact wording are project-local/private and must not become generic Research Authoring rules. The reusable evidence is only the document-purpose/style mismatch, duplicated hierarchy, page-geometry drift and final “readable but not formal” user experience.
 
-2026-09-22 update: `research-reporting` now keeps document semantics in Research Authoring and delegates explicitly requested formal PDF artifact mechanics to the standalone renderer companion installed by `research-main`. Standalone Marketplace Research Authoring fails closed when that companion is missing. This closes the bounded handoff/profile part of the issue; the broader academic document-identity question remains a future Research Authoring/artifact-quality refinement rather than a claim that all report design problems are solved.
+2026-09-23 update: `research-reporting` now keeps document semantics in Research Authoring and delegates explicitly requested formal PDF artifact mechanics to the standalone renderer companion installed by `research-main`. Standalone Marketplace Research Authoring fails closed when that companion is missing. This closes the bounded handoff/profile part of the issue; the broader academic document-identity question remains a future Research Authoring/artifact-quality refinement rather than a claim that all report design problems are solved.
 
 
 ### Keep research authoring separate from the generic language layer

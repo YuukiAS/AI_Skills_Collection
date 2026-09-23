@@ -1,0 +1,1 @@
+Fresh Plan-mode no-write smoke. There is a genuine user-owned A/B planning choice: Option A = use a concise outline, Option B = use a checklist. Do not choose for the user. Ask the user to choose A or B using native request_user_input and wait; do not write files.

@@ -143,7 +143,8 @@ Pandoc + XeLaTeX render.
 ## Completion States
 
 - `complete`: PDF rendered through Pandoc + XeLaTeX and passed command,
-  page-count, font, text-extraction, and first-page visual checks.
+  page-count, font, text-extraction, and complete-document visual checks using
+  all pages or all declared high-risk pages for the request.
 - `partial_complete`: PDF rendered, but non-critical warnings or limited QA
   remain and are reported with next steps.
 - `blocked_missing_dependency`: no safe Pandoc + XeLaTeX route exists; report

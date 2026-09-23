@@ -2,6 +2,15 @@
 
 Canonical maintenance inbox for the `web-development` plugin.
 
+## Recently promoted / established
+
+### Frontend Design F-A/F-B/F-C production gates
+status: PROMOTED
+source: 056 Product Delivery Discipline v0.3 implementation
+evidence: `web-development 0.2`, `skills/tools/frontend/frontend-visual-systems/SKILL.md`, and Marketplace wiring that adds existing `figma-design-to-code` and `motion-interaction` to the Frontend Design production aggregate.
+current behavior: Frontend Design now requires canonical design authority/state coverage when a current design source exists, coherent component/tokens/icons/motion/localization treatment, and actual-surface convergence before production/user-ready claims. It does not force Figma, provider, locale, full-E2E, or native-smoke gates onto docs-only, backend/server-only, or tiny nonvisual work.
+boundary: the detailed desktop-native, icon-registry, whole-product taste, and Figma round-trip candidates below remain follow-up evidence unless a frozen task explicitly promotes them.
+
 ## Open candidates
 
 ### Production icon sourcing and icon-registry discipline
