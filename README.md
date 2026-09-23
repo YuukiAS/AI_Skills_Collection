@@ -2,7 +2,15 @@
 
 给 Codex 使用的科研与工程技能库。它把常用的写作、汇报、统计、医学影像、前端设计和仓库维护经验整理成可安装的插件，让日常任务更稳、更容易验收。
 
-Repository / CLI release: `5.0.7`
+Repository / CLI release: `5.1.0`
+
+## 可单独安装的技能
+
+`Project Thread Handoff` 是一个独立 Skill，用在长期科研或工程聊天快到上下文边界时：在原来的长 thread 里显式调用一次，它会生成一份给新 thread 使用的续接 Prompt。它在仓库里的 canonical source 是 `skills/science/communication/project-thread-handoff/`。
+
+支持直接安装 standalone Skill 的产品 surface 可以直接使用这个 Skill。当前已经验证的 ChatGPT regular Chat 个人使用路径，是把同一个 Skill 包装成一个 `skills-only` personal Plugin；这个 wrapper 不含 MCP，也不是第二份 handoff source。以后要改能力逻辑，仍然只改 canonical Skill。
+
+ChatGPT personal Plugin 更新：[docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md](docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md)
 
 ## 中央插件
 

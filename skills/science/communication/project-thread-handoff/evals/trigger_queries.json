@@ -1,0 +1,20 @@
+{
+  "positive": [
+    "Use the installed Project Thread Handoff skill on this long project thread and prepare the continuation prompt for a new thread.",
+    "Invoke Project Thread Handoff for this existing DII thread; preserve the latest frozen decisions and give me one initialization prompt.",
+    "Run Project Thread Handoff here so I can continue this project in a fresh chat without pasting the whole history."
+  ],
+  "negative": [
+    "总结一下当前项目",
+    "我们现在做到哪了",
+    "帮我继续研究",
+    "handoff 是什么意思"
+  ],
+  "near_miss": [
+    "Please summarize the current project status for me.",
+    "What should we do next on this project?",
+    "Help me continue the research from here.",
+    "Explain what a project handoff prompt means."
+  ],
+  "notes": "Positive examples require an explicit installed Skill invocation. Ordinary summaries, status checks, continuation requests, and definition questions should not trigger this skill implicitly."
+}

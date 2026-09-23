@@ -4,6 +4,41 @@
 
 No unreleased changes.
 
+## 5.1.0 - 2026-09-23
+
+Repository `5.1.0` formally adds the standalone Project Thread Handoff Skill.
+
+Repository bump decision: MINOR
+Reason: the collection gains a new repository-level user capability: users can
+install a standalone Skill that turns an existing long project thread into one
+minimum-sufficient initialization prompt for a fresh thread, without adding a
+central plugin, MCP service, state database, or repository write mode.
+
+Affected plugins:
+- all central plugins: NO_BUMP
+  Reason: Project Thread Handoff is a standalone Skill and does not change any
+  central Marketplace plugin production behavior or plugin payload.
+
+Unchanged plugin versions: `workflow-core 0.3`, `ai-skills-core 0.4`,
+`writing-style 0.3`, `research-writing 0.1`, `presentations 0.3`,
+`scientific-visualization 0.1`, `web-development 0.2`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Added `project-thread-handoff` under `skills/science/communication/` as an
+  explicit-only, read-only standalone Skill for long-thread project handoff.
+- The Skill freezes read-only capability metadata in `SKILL.md` and keeps
+  invocation policy in `agents/openai.yaml`.
+- Current ChatGPT regular Chat distribution evidence is a user-scope,
+  skills-only personal Plugin wrapper around the canonical Skill.
+- The personal Plugin wrapper has `MCP_ADDED = NO` and is not a second source of
+  truth; future behavior changes remain owned by the standalone Skill source.
+- This release does not claim every account or product surface can invoke a
+  bare standalone Personal Skill directly from regular Chat. The direct
+  standalone route uploaded and loaded in Work, but the observed Pro regular
+  Chat runtime did not load the standalone Skill registry.
+
 ## 5.0.7 - 2026-09-22
 
 Repository `5.0.7` is a compatible release for 056 Product Delivery Discipline
