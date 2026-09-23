@@ -49,3 +49,14 @@ Task key: `ai-skills-core--machine-update-orchestration`
 - Actual `candidate_plugin_replay.py replay` was **not run** because the host safety reviewer rejected launching a fresh Codex child that could trigger an external model or paid request, and this task explicitly says `No paid API`.
 - Therefore release-critical fresh-session normal-entry consumption, one-time legacy Marketplace bootstrap exercise and G1-G5 product-level evidence remain `NOT_RUN_NO_PAID_API` / `NOT_CLAIMED` in this implementation run.
 
+## Legacy Marketplace Discovery
+
+- Current configured AI_Skills Marketplace name: `yuukias-ai-skills`.
+- Source: `https://github.com/YuukiAS/AI_Skills_Collection.git`.
+- Current snapshot metadata file: `/home/yuukias/.codex/.tmp/marketplaces/yuukias-ai-skills/.codex-marketplace-install.json`.
+- Discovered `ref_name`: `main`.
+- Discovered sparse paths: `.agents/plugins`, `plugins/codex/plugins`.
+- Snapshot revision before bootstrap: `999afbfd65702e4c2fb089a36a8d3ebf40baa9e5`, repository version `5.0.7`.
+- Installed production plugin state before bootstrap: `ai-skills-core@yuukias-ai-skills` version `0.4`, enabled.
+- Remote AI_Skills `release` was verified at `7b76e94ad29cf3bd8547026b942553068754d51f`, which is repository `5.1.0` and still contains `ai-skills-core 0.4`.
+- Actual `main -> release` Marketplace migration was **not executed** in this run because the current remote `release` ref does not yet contain the capability-bearing `ai-skills-core 0.5` candidate. Migrating now would only reinstall `0.4` and would not satisfy G2's capability-bearing Maintainer installation requirement.
