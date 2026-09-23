@@ -8,9 +8,10 @@ This audit checks the current implementation candidate against the V2.1 frozen o
 ## Current Candidate
 
 - AI_Skills branch: `reviewed/ai-skills-core--machine-update-orchestration`
-- AI_Skills remote tip: `92f974fc56e366a1f6091f699e30f27764608a45`
+- Pre-release replay candidate commit: `24f574ff20028fedaa3c5382594717cb28234184`
+- Planner decision commit: `10ed6848bba9ad812c892bd3a39441f41034323a`
 - Candidate implementation commit: `1cd515733f6b0e793f1a18e8e6f86811aee8908b`
-- Candidate evidence commit: `92f974fc56e366a1f6091f699e30f27764608a45`
+- Prior evidence commit before Planner continuation: `92f974fc56e366a1f6091f699e30f27764608a45`
 - Bridge locator commit on `origin/main`: `dfe093c6f78cdadb22905e811935a772af5cb034`
 - AI_Skills `release` ref: `7b76e94ad29cf3bd8547026b942553068754d51f` (`5.1.0`, `ai-skills-core 0.4`)
 - Bridge `release` ref: `d27259d6706dee951dc0c0ede8c9b03c65f55ca3` (`0.8.5`)
@@ -41,27 +42,28 @@ This audit checks the current implementation candidate against the V2.1 frozen o
 | `python scripts/build_codex_marketplace.py --write --validate --check --path-report` | PASS, `10` plugins, `29` active skills, path budget OK |
 | Targeted Maintainer tests | PASS |
 | `python -m unittest discover -s tests` | PASS, `251` tests |
+| `python3 scripts/candidate_plugin_replay.py replay --plugin ai-skills-core ...` | PASS, candidate `0.5` consumed by fresh child |
+| `python3 results/ai-skills-core--machine-update-orchestration/fixture_execution/run_g4_g5_fixtures.py` | PASS, six G4/G5 fixture cases |
 
 ## Gate Matrix Audit
 
 | Gate | Required proof | Current evidence | Status |
 |---|---|---|---|
-| G1 short request + formal-release/update-impact routing | Normal entry from short Maintainer requests, isolated/cross-layer/conflict/no-op/unknown target behavior, no user-supplied versions/paths | Source contracts and tests cover route vocabulary, Route A/B/C, `Update impact`, `RELEASE_METADATA_INCONSISTENT`, no arbitrary diff inference | PARTIAL: source/test evidence only; no fresh normal-entry candidate replay |
-| G2 legacy main->release Marketplace bootstrap + install/self-update + fresh session | Real legacy `main` Marketplace, source replacement to verified capability-bearing `release`, reinstall `ai-skills-core`, reload-required, fresh session loads released Maintainer | Real discovery proves current `yuukias-ai-skills` is `main`, sparse paths match, installed `ai-skills-core 0.4`; current remote `release` is `5.1.0` with `ai-skills-core 0.4` | NOT PASSED: migrating now would reinstall 0.4, not capability-bearing 0.5 |
-| G3 Bridge Kit maintenance + producer routing + canonical Bridge delegation | Consumer `update Bridge Kit`; Bridge locator; exact formal commit eligibility; ff-only release behavior; remote ref verification; canonical `ai-bridge` ownership | Bridge locator committed/pushed; Bridge `release` created/verified at exact 0.8.5 commit; source references/tests enforce `ai-bridge` delegation and no runtime copying | PARTIAL: producer/ref bootstrap and source contracts done; no fresh normal-entry `update Bridge Kit` candidate replay |
-| G4 selective managed consumers + dirty/source safety | Managed stale consumer update, unaffected repo unchanged, unmanaged conflict preserved, dirty non-overlap, dirty overlap Human Gate | Source contracts and tests encode managed/unmanaged/dirty/Human Gate rules | PARTIAL: contract tests only; no real managed-consumer fixture execution |
-| G5 failure/recovery/Human Gate/should-not-change | Bounded failure after safe step, truthful `PARTIAL_UPDATE`, no destructive rollback, exact bootstrap restoration, no repeated question, unrelated unchanged | Source contracts and tests encode recovery states and result vocabulary | PARTIAL: contract tests only; no injected bootstrap failure exercise |
+| G1 short request + formal-release/update-impact routing | Normal entry from short Maintainer requests, isolated/cross-layer/conflict/no-op/unknown target behavior, no user-supplied versions/paths | Source contracts/tests plus fresh child candidate replay. `update AI Skills` -> Route A default; `sync this machine` -> Route A/B/C composition; no user-supplied versions/paths requested. | PRE-RELEASE PASS |
+| G2 legacy main->release Marketplace bootstrap + install/self-update + fresh session | Real legacy `main` Marketplace, source replacement to verified capability-bearing `release`, reinstall `ai-skills-core`, reload-required, fresh session loads released Maintainer | Real discovery proves current `yuukias-ai-skills` is `main`, sparse paths match, installed `ai-skills-core 0.4`; current remote `release` is `5.1.0` with `ai-skills-core 0.4`; Planner D2 says wait until Reviewer PASS/formal promotion. | SEQUENCED WAITING: not run before formal release |
+| G3 Bridge Kit maintenance + producer routing + canonical Bridge delegation | Consumer `update Bridge Kit`; Bridge locator; exact formal commit eligibility; ff-only release behavior; remote ref verification; canonical `ai-bridge` ownership | Bridge locator committed/pushed; Bridge `release` created/verified at exact 0.8.5 commit; source references/tests enforce delegation; fresh child replay routed `update Bridge Kit` to Route C / `bridge-kit-maintainer` and rejected newer `main` as stable target. | PRE-RELEASE PASS |
+| G4 selective managed consumers + dirty/source safety | Managed stale consumer update, unaffected repo unchanged, unmanaged conflict preserved, dirty non-overlap, dirty overlap Human Gate | Task-owned fixture repos prove managed update, unaffected no-op, `REPO_OWNED_CONFLICT`, safe dirty non-overlap and dirty-overlap `HUMAN_ONLY` without mutating unrelated real projects. | PRE-RELEASE PASS |
+| G5 failure/recovery/Human Gate/should-not-change | Bounded failure after safe step, truthful `PARTIAL_UPDATE`, no destructive rollback, exact bootstrap restoration, no repeated question, unrelated unchanged | Task-owned fixture repo proves retained safe update after later simulated Marketplace add-release failure, exact legacy Marketplace source restoration, rerun convergence and unrelated README preservation. | PRE-RELEASE PASS |
 
 ## Release-Critical Gaps
 
-1. Fresh-session candidate/production normal-entry evidence is missing. `candidate_plugin_replay.py replay` would launch a fresh Codex child and was rejected by host safety review because this task explicitly says `No paid API`.
-2. The current AI_Skills `release` ref does not contain `ai-skills-core 0.5`; it points to `5.1.0` / `ai-skills-core 0.4`. Therefore actual legacy Marketplace bootstrap would not prove capability-bearing Maintainer installation.
-3. G4/G5 have source/test contracts but no real managed-consumer and failure-injection replay tied to the final candidate.
+1. G2 is intentionally not run in pre-release validation. Planner decision D2 requires independent Reviewer PASS and formal promotion before advancing AI_Skills `release`, migrating the real legacy Marketplace, reinstalling `ai-skills-core 0.5`, and running fresh released normal-entry smoke.
+2. The current AI_Skills `release` ref does not contain `ai-skills-core 0.5`; it points to `5.1.0` / `ai-skills-core 0.4`. Therefore actual legacy Marketplace bootstrap would not prove capability-bearing Maintainer installation before promotion.
 
 ## Completion Decision
 
-The implementation candidate is source-complete and deterministic-validation-complete, but the full V2.1 objective is **not complete**. Current evidence is insufficient to claim G1-G5 PASS or release readiness.
+The implementation candidate is source-complete, deterministic-validation-complete, and pre-release G1/G3/G4/G5 evidence-complete. The full V2.1 objective is **not complete** because G2 is correctly sequenced after independent Reviewer PASS and formal promotion.
 
 Recommended next owner action:
 
-- Planner/Reviewer should decide whether to authorize a no-paid fresh runtime normal-entry mechanism, approve a release-candidate promotion path that moves AI_Skills `release` to a capability-bearing candidate before G2, or revise G2/G1 evidence expectations for a no-paid environment.
+- Hand this exact task branch candidate to the independent Reviewer. After Reviewer PASS, integrate/promote the exact candidate, fast-forward AI_Skills `release`, run the real legacy Marketplace `main -> release` migration, reinstall `ai-skills-core 0.5`, and complete G2 released production smoke.

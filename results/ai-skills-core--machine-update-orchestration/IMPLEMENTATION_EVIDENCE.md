@@ -5,7 +5,8 @@ Task key: `ai-skills-core--machine-update-orchestration`
 ## Candidate Identity
 
 - AI_Skills task branch: `reviewed/ai-skills-core--machine-update-orchestration`
-- AI_Skills candidate tip: `92f974fc56e366a1f6091f699e30f27764608a45`
+- AI_Skills candidate replay commit: `24f574ff20028fedaa3c5382594717cb28234184`
+- Planner decision commit: `10ed6848bba9ad812c892bd3a39441f41034323a`
 - Base integrated during implementation: `origin/main` at `7b76e94ad29cf3bd8547026b942553068754d51f` (`5.1.0` Project Thread Handoff)
 - Version decision after live drift: repository `5.2.0`, `ai-skills-core 0.4 -> 0.5`
 
@@ -46,8 +47,19 @@ Task key: `ai-skills-core--machine-update-orchestration`
 
 - Repo-local replay runtime was verified: `codex-cli 0.153.4`, archive SHA256 `a822187e1a2420c61c5926721bfbd878701ed95547c9bb0d4de4498a16ba1821`.
 - Public-safe replay task/input are saved under `results/ai-skills-core--machine-update-orchestration/candidate_replay/`.
-- Actual `candidate_plugin_replay.py replay` was **not run** because the host safety reviewer rejected launching a fresh Codex child that could trigger an external model or paid request, and this task explicitly says `No paid API`.
-- Therefore release-critical fresh-session normal-entry consumption, one-time legacy Marketplace bootstrap exercise and G1-G5 product-level evidence remain `NOT_RUN_NO_PAID_API` / `NOT_CLAIMED` in this implementation run.
+- Planner decision `10ed6848bba9ad812c892bd3a39441f41034323a` clarified that this canonical candidate replay is the approved no-paid G1/G3 path and is not a Terra/OpenAI Responses paid API call.
+- Actual `candidate_plugin_replay.py replay` ran against commit `24f574ff20028fedaa3c5382594717cb28234184` with task `candidate_replay/machine_update_g1_g3_short_requests.md`.
+- Candidate plugin loaded as `ai-skills-core@ai-skills-candidate` version `0.5`.
+- Actual candidate consumption was proven from parsed child JSONL line `4`, event type `item.started`, reading candidate `skills/orchestrator/SKILL.md`.
+- Child route report covered `update AI Skills`, `sync this machine`, and `update Bridge Kit`; it returned Route A, Route A/B/C composition, and Route C respectively, without asking for versions, commits, checkout paths, `CODEX_HOME`, repo inventories, adaptation templates, or component lists.
+- Replay evidence is recorded in `results/ai-skills-core--machine-update-orchestration/candidate_replay/CANDIDATE_REPLAY_EVIDENCE.md`.
+
+## G4/G5 Fixture Status
+
+- Task-owned local fixture repositories were created under `private/exports/ai-skills-core--machine-update-orchestration/fixtures/`.
+- Fixture execution covered stale managed consumer update, unaffected repo preservation, unmanaged conflict preservation, unrelated dirty non-overlap, overlapping dirty Human Gate, bounded failure/restoration, rerun convergence and should-not-change evidence.
+- Fixture summary is recorded in `results/ai-skills-core--machine-update-orchestration/fixture_execution/G4_G5_FIXTURE_EVIDENCE.md`.
+- JSON evidence is recorded in `results/ai-skills-core--machine-update-orchestration/fixture_execution/g4_g5_fixture_evidence.json`.
 
 ## Legacy Marketplace Discovery
 
@@ -59,4 +71,4 @@ Task key: `ai-skills-core--machine-update-orchestration`
 - Snapshot revision before bootstrap: `999afbfd65702e4c2fb089a36a8d3ebf40baa9e5`, repository version `5.0.7`.
 - Installed production plugin state before bootstrap: `ai-skills-core@yuukias-ai-skills` version `0.4`, enabled.
 - Remote AI_Skills `release` was verified at `7b76e94ad29cf3bd8547026b942553068754d51f`, which is repository `5.1.0` and still contains `ai-skills-core 0.4`.
-- Actual `main -> release` Marketplace migration was **not executed** in this run because the current remote `release` ref does not yet contain the capability-bearing `ai-skills-core 0.5` candidate. Migrating now would only reinstall `0.4` and would not satisfy G2's capability-bearing Maintainer installation requirement.
+- Actual `main -> release` Marketplace migration was **not executed** in this pre-release validation run because Planner decision D2 requires Reviewer PASS and formal promotion first. The current remote `release` ref does not yet contain the capability-bearing `ai-skills-core 0.5` candidate; migrating now would only reinstall `0.4` and would not satisfy G2.
