@@ -58,4 +58,14 @@ evidence: 用户明确追问数据生成、拟合、后验预测、多链、重�
 problem: 需要区分同一数据的算法随机性、不同生成数据的统计重复、先验/截断的模型敏感性；同时说明训练集变换、身份对齐、后验期望区间与预测区间、重采样单位和恢复目标。不能把几个算法seed当成独立数据重复，或将真实数据中不可观测参数标成ground truth。
 project-specific context: 具体随机流机制、seed、变换池和检验门槛仍属于项目设计，不能自动复制成中央插件规则。
 
+## 2026-09-23：长时间统计计算的可观测性反馈
+
+### 小时级 MCMC / 优化不能只在终态输出，必须预先规划 progress logging
+
+status: NEW
+source: 真实 Bayesian reference-MCMC 实施与用户运行期反馈，2026-09-23。
+evidence: 私有研究项目中，多轮正式多链 MCMC 运行达到小时级，但 runner 在长时间 inner loop 中几乎没有中间 stdout 或结构化 progress artifact；执行期间只能重复确认“进程仍在运行”，无法可靠判断当前 chain、warmup/retained 阶段、checkpoint、完成比例或粗略剩余时间。本公开记录只保留通用 workflow failure，不包含私有模型、数据、数值结果或日志。
+problem: statistical-modeling 在规划长时间 MCMC、simulation、bootstrap、optimization 或其他高成本统计计算时，不能只冻结科学目标、sampler 和终态 diagnostics，还应显式检查是否需要结构化 observability contract。对于明显可能运行数十分钟到数小时的任务，缺少 append-only heartbeat/progress logging 会让用户无法区分“正常慢”“卡死”“已进入下一 checkpoint”，也无法在不中断计算的情况下估计进度。需要后续评估插件是否应提示 Planner 预冻结 run identity、chain/phase、iteration或retained progress、elapsed time、checkpoint start/end、gate summary 和 terminal/error event，同时要求 logging 不消费 RNG、不改变 sampler state/update order、也不把 heartbeat 误用成新的 convergence gate。
+project-specific context: 当前私有项目后续已经决定对新的 long-running formal run 强制加入 progress logging；其具体 JSONL schema、1000-sweep/5-minute cadence、错误码和文件路径属于项目合同，不应未经中央审阅直接推广成所有 statistical-modeling 任务的固定默认。
+
 以上条目不授权修改SKILL、runtime、路由、版本、Marketplace或生产测试。后续真实实现若产生新证据，应在对应条目补充或去重；未发现新问题时无需制造TODO。
