@@ -1,0 +1,6 @@
+interface:
+  display_name: "Project Thread Handoff"
+  short_description: "Create a new-thread continuation prompt"
+
+policy:
+  allow_implicit_invocation: false

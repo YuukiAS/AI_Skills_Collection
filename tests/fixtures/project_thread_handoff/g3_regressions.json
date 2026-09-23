@@ -1,0 +1,26 @@
+{
+  "cat_trace": {
+    "scenario": "A long research thread explored several early model and notation routes, then the user froze a later model/notation/data decision.",
+    "must_preserve": [
+      "later frozen decisions override early assistant exploration",
+      "superseded routes remain out of the active plan except as short recurrence guards"
+    ],
+    "must_not_preserve": [
+      "early assistant brainstorming as current direction",
+      "obsolete routes as active candidates"
+    ]
+  },
+  "cardiacnexus": {
+    "scenario": "A project thread includes code, pipeline, and experiment discussion, but the new thread should recover concrete runtime facts from the current repository.",
+    "must_preserve": [
+      "recent judgment",
+      "open question",
+      "immediate next step",
+      "repository locator for code and numeric facts"
+    ],
+    "must_not_preserve": [
+      "chat-only code state as verified repository fact",
+      "fabricated path or commit"
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Project thread handoff skill icon">
+  <rect width="64" height="64" rx="12" fill="#172554"/>
+  <path d="M16 16h24v7H16zM16 28h18v7H16zM16 40h24v7H16z" fill="#DBEAFE"/>
+  <path d="M42 25l7 7-7 7" fill="none" stroke="#FACC15" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M31 32h17" fill="none" stroke="#FACC15" stroke-width="4" stroke-linecap="round"/>
+</svg>
