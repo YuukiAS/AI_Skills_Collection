@@ -26,6 +26,8 @@ Use this skill when the user says anything like:
 
 This is an infrastructure skill. It installs profile selections and writes project routing docs; it does not replace frontend, presentation, bioinformatics, writing, or OpenAI system skills.
 
+For current-machine update requests such as `update presentations`, `update AI Skills`, `update Bridge Kit`, or `sync this machine`, route first to `machine-update-orchestrator`. This installer owns only the AI_Skills manifest/profile/managed-block install or refresh step delegated by that orchestrator.
+
 ## Workflow
 
 1. Identify the target project root.
@@ -83,3 +85,4 @@ scripts. Prefer the v3 profile names above in new examples.
 - Do not clean or rewrite global skills when switching projects.
 - Project skills belong in `<project>/.agents/skills/`.
 - Explicit codex-home installs use `${CODEX_HOME:-$HOME/.codex}/skills` only when the user asks for that advanced compatibility target.
+- Do not migrate Codex Marketplace sources from `main` to `release`; that one-time bootstrap belongs to `machine-update-orchestrator` and must use official Codex Marketplace commands.

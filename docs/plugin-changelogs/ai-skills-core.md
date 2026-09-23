@@ -4,6 +4,32 @@
 
 No unreleased changes.
 
+## 0.5 - 2026-09-23
+
+Before:
+
+- AI Skills Maintainer could maintain AI_Skills_Collection releases and project profile installs, but a normal current-machine update still required the user or operator to know versions, refs, checkout paths, Marketplace details, Bridge location, and companion routing.
+- Bridge Kit distribution/version maintenance was not available through AI Skills Maintainer, and formal release scope expansion was not single-sourced in the Maintainer payload.
+
+After:
+
+- Added `machine-update-orchestrator` as the normal AI Skills Maintainer entry for short requests such as `update presentations`, `update workflow-core`, `update AI Skills`, `update Bridge Kit`, and `sync this machine`.
+- Added `bridge-kit-maintainer` for Bridge Kit source/version/distribution maintenance, formal Bridge `release` channel ownership, editable package refresh, runtime path/version verification, and delegation back to canonical `ai-bridge` commands.
+- Added formal release and `### Update impact` routing references so cross-layer mutation scope comes from the formal release ref and matching root changelog entry, with isolated-by-default behavior.
+- Added Route A/B/C references for isolated AI_Skills updates, formal cross-layer composition, and Bridge Kit distribution/runtime update.
+- Added legacy AI_Skills Marketplace `main -> release` bootstrap, fresh-session truthfulness, selective managed-consumer adaptation, dirty/source safety, Human Gate, recovery, and should-not-change contracts.
+
+Repository bump decision: MINOR
+Reason: after repository `5.1.0` was assigned to Project Thread Handoff, AI_Skills_Collection gains the next repository-level user capability in `5.2.0`: one short Maintainer request can discover and synchronize the current machine's participating AI Research Stack, including Bridge Kit distribution and selective managed adaptation, without user-supplied versions, paths, components or templates.
+
+Affected plugins:
+- `ai-skills-core`: `0.4` -> `0.5`
+  Reason: new current-machine update orchestration and Bridge Kit maintenance capability.
+- `workflow-core`: NO_BUMP
+  Reason: existing delivery semantics are consumed unchanged.
+- domain plugins: NO_BUMP
+  Reason: no domain production behavior changes.
+
 ## 0.4 - 2026-09-22
 
 Before:

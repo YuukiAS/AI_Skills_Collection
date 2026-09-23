@@ -4,6 +4,46 @@
 
 No unreleased changes.
 
+## 5.2.0 - 2026-09-23
+
+Repository `5.2.0` adds AI Skills Maintainer machine update orchestration for the current Codex machine/server.
+
+Repository bump decision: MINOR
+Reason: after this release, AI_Skills_Collection can perform a new repository-level task that `5.0.x` could not: from one short Maintainer request, discover and synchronize the current machine's participating AI Research Stack, including Bridge Kit distribution and selective managed adaptation, without user-supplied versions, paths, components or templates.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `ai-skills-core` | `0.4` | `0.5` |
+
+Affected plugins:
+- `ai-skills-core`: `0.4` -> `0.5`
+  Reason: AI Skills Maintainer now contains `machine-update-orchestrator` and `bridge-kit-maintainer`, formal release/update-impact routing, one-time legacy Marketplace bootstrap, selective managed-consumer adaptation, Bridge Kit distribution delegation, Human Gate/recovery semantics and fresh-session truthfulness for current-machine updates.
+
+Unchanged plugin versions: `workflow-core 0.3`, `writing-style 0.3`,
+`research-writing 0.1`, `presentations 0.3`,
+`scientific-visualization 0.1`, `web-development 0.2`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+### Update impact
+
+- Required companions: none by default. This release adds Maintainer orchestration and uses the formal `release` channel as the stable source.
+- Required managed consumer refresh: none automatically. Managed consumers refresh only when their manifest, managed block, or a future formal release entry explicitly declares it.
+
+Changed repository behavior:
+
+- Stable installation guidance now points Codex Marketplace users at `release`; `main` is explicit development mode.
+- AI Skills Maintainer accepts short update targets including `update presentations`, `update workflow-core`, `update AI Skills`, `update Bridge Kit`, and `sync this machine`.
+- Cross-layer scope expansion is governed by the formal release ref plus the matching root changelog `### Update impact`; absence means isolated by default.
+- Bridge Kit distribution/version maintenance is routed through `bridge-kit-maintainer`, while Bridge runtime and Host behavior remain delegated to canonical `ai-bridge` commands.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelog:
+
+- `docs/plugin-changelogs/ai-skills-core.md`
+
 ## 5.0.7 - 2026-09-22
 
 Repository `5.0.7` is a compatible release for 056 Product Delivery Discipline

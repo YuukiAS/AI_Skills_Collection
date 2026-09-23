@@ -1,6 +1,6 @@
 # core
 
-Active skills: 10
+Active skills: 12
 
 ## Install
 
@@ -13,7 +13,7 @@ ai-skills install --target repo --domain core --mode symlink --write-agents-md
 Install a few skills precisely:
 
 ```bash
-ai-skills install --target repo --skill core/codex-system/ai-skills-repository-maintainer --skill core/codex-system/codex-workflow-protocol --skill core/codex-system/imagegen --mode symlink --write-agents-md
+ai-skills install --target repo --skill core/codex-system/ai-skills-repository-maintainer --skill core/codex-system/bridge-kit-maintainer --skill core/codex-system/codex-workflow-protocol --mode symlink --write-agents-md
 ```
 
 Complete domain installs are supported. If an audit reports high description length or many active skills, treat it as a context-budget warning, not an installation error.
@@ -27,8 +27,10 @@ Complete domain installs are supported. If an audit reports high description len
 ## Skills
 
 - `ai-skills-repository-maintainer` (`skills/core/codex-system/ai-skills-repository-maintainer`): Maintain AI_Skills_Collection itself, including production plugin refinement contracts, source-first changes, generated parity, replay/regression gates, versions, changelogs, registry, catalog, marketplace, and profiles. Use only when the user is working on this repository or explicitly asks to maintain the central skill collection.
+- `bridge-kit-maintainer` (`skills/core/codex-system/bridge-kit-maintainer`): Internal AI Skills Maintainer capability for Bridge Kit source, version, distribution, formal release-channel maintenance, editable package refresh, runtime identity checks, and delegation to canonical ai-bridge commands.
 - `codex-workflow-protocol` (`skills/core/codex-system/codex-workflow-protocol`): Use for complex or risky Codex tasks that require source-of-truth discovery, phased planning, specialist routing, gate-driven verification, live-state supervision, integration ownership, or honest final status reporting.
 - `imagegen` (`skills/core/codex-system/system-skills/imagegen`): Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts.
+- `machine-update-orchestrator` (`skills/core/codex-system/machine-update-orchestrator`): Normal AI Skills Maintainer entry for current-machine update requests such as update presentations, update workflow-core, update AI Skills, update Bridge Kit, and sync this machine. Discovers formal release state, selects the bounded route, delegates to the owning maintainer, and verifies reload/session boundaries.
 - `mcp-builder` (`skills/core/codex-system/mcp-builder`): Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).
 - `openai-docs` (`skills/core/codex-system/system-skills/openai-docs`): Use for openai docs workflows when the task directly names this tool or domain. Prefer narrower project skills or umbrella retrieval skills when the task is only a lookup.
 - `plugin-creator` (`skills/core/codex-system/system-skills/plugin-creator`): Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, and baseline placeholders you can edit before publishing or testing.
@@ -39,10 +41,17 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Main References
 
+- `skills/core/codex-system/bridge-kit-maintainer/references/bridge-release-channel.md`
+- `skills/core/codex-system/bridge-kit-maintainer/references/canonical-ai-bridge-delegation.md`
 - `skills/core/codex-system/codex-workflow-protocol/references/escalation-rules.md`
 - `skills/core/codex-system/codex-workflow-protocol/references/live-state-delegation.md`
 - `skills/core/codex-system/codex-workflow-protocol/references/task-template.md`
 - `skills/core/codex-system/codex-workflow-protocol/references/verification-matrix.md`
+- `skills/core/codex-system/machine-update-orchestrator/references/ai-skills-plugin-profile-update.md`
+- `skills/core/codex-system/machine-update-orchestrator/references/bridge-kit-distribution-runtime-update.md`
+- `skills/core/codex-system/machine-update-orchestrator/references/cross-layer-stack-workflow-composition.md`
+- `skills/core/codex-system/machine-update-orchestrator/references/failure-recovery-human-gate.md`
+- `skills/core/codex-system/machine-update-orchestrator/references/formal-release-and-update-impact.md`
 - `skills/core/codex-system/system-skills/imagegen/references/cli.md`
 - `skills/core/codex-system/system-skills/imagegen/references/codex-network.md`
 - `skills/core/codex-system/system-skills/imagegen/references/image-api.md`

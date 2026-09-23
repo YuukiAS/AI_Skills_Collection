@@ -27,9 +27,9 @@
     },
     {
       "name": "ai-skills-core",
-      "version": "0.4",
+      "version": "0.5",
       "displayName": "AI Skills Maintainer",
-      "description": "Maintenance companion for AI_Skills_Collection plugin refinement: repository contracts, source-first changes, generated parity, replay, regression, versions, changelogs, and profile installation.",
+      "description": "Maintenance companion for AI_Skills_Collection plugin refinement and current-machine AI Research Stack updates: formal release routing, generated parity, replay, regression, versions, changelogs, profile installation, and Bridge Kit distribution delegation.",
       "category": "Developer Tools",
       "installation": "AVAILABLE",
       "brandColor": "#0F766E",
@@ -40,9 +40,17 @@
         "Refine an existing AI_Skills plugin from a real failure.",
         "Maintain a plugin improvement through source, generated layer, replay, regression, version, and changelog closure.",
         "Check whether a plugin refinement should extend an existing skill instead of creating another entry.",
-        "Release a completed AI_Skills plugin improvement safely."
+        "Release a completed AI_Skills plugin improvement safely.",
+        "Update an AI_Skills plugin or profile from the formal release channel.",
+        "Update Bridge Kit through canonical ai-bridge delegation.",
+        "Sync this machine's participating AI Research Stack."
       ],
       "skills": [
+        {
+          "type": "copy",
+          "source": "skills/core/codex-system/machine-update-orchestrator",
+          "artifact_id": "orchestrator"
+        },
         {
           "type": "copy",
           "source": "skills/core/codex-system/project-skill-installer",
@@ -52,6 +60,11 @@
           "type": "copy",
           "source": "skills/core/codex-system/ai-skills-repository-maintainer",
           "artifact_id": "maint"
+        },
+        {
+          "type": "copy",
+          "source": "skills/core/codex-system/bridge-kit-maintainer",
+          "artifact_id": "bridge"
         },
         {
           "type": "copy",

@@ -1,7 +1,7 @@
 {
   "name": "ai-skills-core",
-  "version": "0.4",
-  "description": "Maintenance companion for AI_Skills_Collection plugin refinement: repository contracts, source-first changes, generated parity, replay, regression, versions, changelogs, and profile installation.",
+  "version": "0.5",
+  "description": "Maintenance companion for AI_Skills_Collection plugin refinement and current-machine AI Research Stack updates: formal release routing, generated parity, replay, regression, versions, changelogs, profile installation, and Bridge Kit distribution delegation.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "AI Skills Maintainer",
-    "shortDescription": "Maintenance companion for AI_Skills_Collection plugin refinement: repository contracts, source-first changes, generated parity, replay, regression, versions, changelogs, and profile installation.",
-    "longDescription": "Maintenance companion for AI_Skills_Collection plugin refinement: repository contracts, source-first changes, generated parity, replay, regression, versions, changelogs, and profile installation. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Maintenance companion for AI_Skills_Collection plugin refinement and current-machine AI Research Stack updates: formal release routing, generated parity, replay, regression, versions, changelogs, profile installation, and Bridge Kit distribution delegation.",
+    "longDescription": "Maintenance companion for AI_Skills_Collection plugin refinement and current-machine AI Research Stack updates: formal release routing, generated parity, replay, regression, versions, changelogs, profile installation, and Bridge Kit distribution delegation. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Developer Tools",
     "capabilities": [

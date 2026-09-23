@@ -3,8 +3,10 @@
   "description": "Maintainer profile for AI_Skills_Collection registry, catalog, marketplace, profiles, and central plugin refinement closure.",
   "max_active_skills": 10,
   "skills": [
+    "skills/core/codex-system/machine-update-orchestrator",
     "skills/core/codex-system/project-skill-installer",
     "skills/core/codex-system/ai-skills-repository-maintainer",
+    "skills/core/codex-system/bridge-kit-maintainer",
     "skills/core/codex-system/skill-library-analysis",
     "skills/core/codex-system/codex-workflow-protocol"
   ],
