@@ -27,7 +27,7 @@ Proposed exact task branch:
 
 Exact task-owned worktree:
 
-`TO_BE_RESOLVED_ON_THE_ACTUAL_EXECUTION_MACHINE`
+`/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration`
 
 Before the user sends the final approved kickoff, Codex must discover the canonical local AI_Skills checkout on that machine and replace the locator above with one exact task-owned worktree. Do not guess a path from historical Linux/Windows/macOS machines.
 
