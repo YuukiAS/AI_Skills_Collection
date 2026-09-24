@@ -103,7 +103,8 @@ Evidence: `results/repo--maintenance-board-lifecycle/REVIEW_2.md`.
 
 ```text
 MAIN_INTEGRATION = DONE
-REMOTE_MAIN = 2d2652f83e1a038d0b7bbcd9a8ff58d37d2c6f40
+MAIN_INTEGRATION_COMMIT = 6308fe75b975a518d3e8c43a1bdbcfd76eed01f7
+REMOTE_MAIN = verified after final evidence commit with `git ls-remote origin refs/heads/main`
 README_CLOSURE_CHECK = NO_UPDATE_REQUIRED
 CHATGPT_PROJECT_INSTRUCTIONS_TRIGGER = HUMAN_GATE_PENDING
 PROJECT_STATUS = DOING

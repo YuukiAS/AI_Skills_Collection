@@ -7,7 +7,8 @@ Status date: 2026-09-24
 
 - Implementation review: `REVIEW_2.md` returned `PASS`.
 - Main integration: reviewed maintenance board changes are on `main`.
-- Current remote `main`: `2d2652f83e1a038d0b7bbcd9a8ff58d37d2c6f40`.
+- Main integration commit: `6308fe75b975a518d3e8c43a1bdbcfd76eed01f7`.
+- Remote `main` verification: verify the current branch tip after the final evidence commit with `git ls-remote origin refs/heads/main`.
 - README closure check: no README update required.
 
 Reason for README decision:
