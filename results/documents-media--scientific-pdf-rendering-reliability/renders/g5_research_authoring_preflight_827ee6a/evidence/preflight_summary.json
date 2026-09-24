@@ -38,5 +38,8 @@
     "renderer_line": 27
   },
   "assessment": "READY_FOR_AUTHORIZED_G5_REPLAY: deterministic install evidence proves the current research-main normal-entry instructions route formal research-report PDFs through research-reporting before renderer mechanics, but it does not prove actual child consumption.",
-  "remaining_gate": "Requires a fresh normal Research Authoring child replay with explicit user authorization for this new candidate."
+  "remaining_gate": "Requires a fresh normal Research Authoring child replay with explicit user authorization for this new candidate.",
+  "source_candidate_commit": "827ee6a01fdfec44f0165b1ca9b321b37c257b50",
+  "evidence_publication_tip": "e8a7fd4eab38ec5f347d0a5c2f3ade2408f760b0",
+  "post_candidate_non_results_diff": "empty for 827ee6a01fdfec44f0165b1ca9b321b37c257b50..e8a7fd4eab38ec5f347d0a5c2f3ade2408f760b0 excluding results/documents-media--scientific-pdf-rendering-reliability"
 }

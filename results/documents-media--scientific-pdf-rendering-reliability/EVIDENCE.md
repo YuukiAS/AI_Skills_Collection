@@ -157,6 +157,7 @@ G5 routing repair after the partial replay:
 
 - status: `DETERMINISTIC_REPAIR_READY_FOR_G5_REPLAY`
 - current candidate: `827ee6a01fdfec44f0165b1ca9b321b37c257b50`
+- evidence publication tip: `e8a7fd4eab38ec5f347d0a5c2f3ade2408f760b0`; `git diff --name-only 827ee6a01fdfec44f0165b1ca9b321b37c257b50..e8a7fd4eab38ec5f347d0a5c2f3ade2408f760b0 -- ':!results/documents-media--scientific-pdf-rendering-reliability'` is empty, so no production source/profile/test/release metadata changed after the current candidate.
 - repair: `research-main` now installs a profile-level `Profile Routing Notes` section into managed `AGENTS.md`, explicitly requiring advisor/group-meeting/milestone/experiment/repo-grounded research-report requests that also ask for a formal/readable PDF to first read and apply `research-reporting`, then use `render-chinese-math-pdf` only for PDF mechanics.
 - source routing: `research-reporting` frontmatter now states that it owns report semantics even when the final deliverable is a formal PDF; rendering mechanics remain owned by companion document skills.
 - regression: `tests/test_research_writing_routing.py::ResearchWritingRoutingTests::test_research_main_agents_notes_route_report_pdf_through_reporting_first` installs `research-main` into a temporary project and verifies the generated `AGENTS.md` contains the profile routing note with `research-reporting` before `render-chinese-math-pdf`.
