@@ -1,0 +1,543 @@
+{
+  "commands": {
+    "pandoc_latex": {
+      "args": [
+        "pandoc",
+        "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/advisor_report.md",
+        "--from",
+        "markdown+tex_math_dollars+tex_math_single_backslash",
+        "--to",
+        "latex",
+        "--standalone",
+        "--include-in-header",
+        "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/canonical-header.tex",
+        "--variable",
+        "papersize=a4",
+        "--variable",
+        "fontsize=11pt",
+        "--variable",
+        "geometry:margin=25mm",
+        "--variable",
+        "linestretch=1.15",
+        "-o",
+        "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/advisor_report.generated.tex"
+      ],
+      "output": "",
+      "returncode": 0
+    },
+    "xelatex": [
+      {
+        "args": [
+          "/home/yuukias/.TinyTeX/bin/x86_64-linux/xelatex",
+          "-interaction=nonstopmode",
+          "-halt-on-error",
+          "-output-directory",
+          "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build",
+          "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/advisor_report.generated.tex"
+        ],
+        "output": "This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex)\n restricted \\write18 enabled.\nentering extended mode\n(/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/advisor_report.generated.tex\nLaTeX2e <2025-11-01>\nL3 programming layer <2025-11-14>\n(/home/yuukias/.TinyTeX/texmf-dist/tex/latex/base/article.cls\nDocument Class: article 2025/01/22 v1.4n Standard LaTeX document class\n(/home/yuukias/.TinyTeX/texmf-dist/tex/latex/base/size11.clo)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty\nFor additional information on amsmath, use the `?' option.\n(/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/setspace/setspace.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/base/fix-cm.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/base/ts1enc.def)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex))) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/upquote/upquote.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/base/textcomp.sty)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/microtype/microtype-xetex.def) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/parskip/parskip.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty))) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty))) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty)) (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def) (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/url/url.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/bookmark/bkm-dvipdfm.def)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/tools/longtable.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/tools/array.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/tools/calc.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.sty) (/home/yuukias/render_resources/chinese_math_pdf/texmf/tex/xelatex/xecjk/xeCJK.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty) (/home/yuukias/render_resources/chinese_math_pdf/texmf/tex/latex/ctex/ctexhook.sty)\n\nLaTeX hooks Warning: Generic hook 'package/after/pifont' is deprecated.\n(hooks)              Use hook 'package/pifont/after' instead.\n\n\nLaTeX hooks Warning: Generic hook 'package/after/cprotect' is deprecated.\n(hooks)              Use hook 'package/cprotect/after' instead.\n\n\nLaTeX hooks Warning: Generic hook 'package/after/listings' is deprecated.\n(hooks)              Use hook 'package/listings/after' instead.\n\n\nLaTeX hooks Warning: Generic hook 'package/after/everysel' is deprecated.\n(hooks)              Use hook 'package/everysel/after' instead.\n\n(/home/yuukias/render_resources/chinese_math_pdf/texmf/tex/xelatex/xecjk/xeCJK.cfg)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/mathtools/mathtools.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/mathtools/mhsetup.sty)\n\nPackage mathtools Warning: For best results, please load mathtools *before* \n(mathtools)                unicode-math on input line 127.\n\n) (/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/advisor_report.generated.aux)\n\nPackage unicode-math Warning: Using \\overbracket and \\underbracket from\n(unicode-math)                `mathtools' package.\n(unicode-math)                 \n(unicode-math)                 Use \\Uoverbracket and \\Uunderbracket for\n(unicode-math)                original `unicode-math' definition.\n\n\nPackage unicode-math Warning: I'm going to overwrite the following commands\n(unicode-math)                from the `mathtools' package: \n(unicode-math)                 \n(unicode-math)                     \\dblcolon, \\coloneqq, \\Coloneqq, \\eqqcolon.\n(unicode-math)                \n(unicode-math)                 \n(unicode-math)                 Note that since I won't overwrite the other\n(unicode-math)                colon-like commands, using them will lead to\n(unicode-math)                inconsistencies.\n\n*geometry* driver: auto-detecting\n*geometry* detected driver: xetex\n(/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics/trig.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg))) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg) [1] [2] (/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/advisor_report.generated.aux)\n\nLaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.\n\n )\nOutput written on /tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/advisor_report.generated.pdf (2 pages).\nTranscript written on /tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/advisor_report.generated.log.\n",
+        "returncode": 0
+      },
+      {
+        "args": [
+          "/home/yuukias/.TinyTeX/bin/x86_64-linux/xelatex",
+          "-interaction=nonstopmode",
+          "-halt-on-error",
+          "-output-directory",
+          "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build",
+          "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/advisor_report.generated.tex"
+        ],
+        "output": "This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex)\n restricted \\write18 enabled.\nentering extended mode\n(/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/advisor_report.generated.tex\nLaTeX2e <2025-11-01>\nL3 programming layer <2025-11-14>\n(/home/yuukias/.TinyTeX/texmf-dist/tex/latex/base/article.cls\nDocument Class: article 2025/01/22 v1.4n Standard LaTeX document class\n(/home/yuukias/.TinyTeX/texmf-dist/tex/latex/base/size11.clo)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty\nFor additional information on amsmath, use the `?' option.\n(/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/setspace/setspace.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/base/fix-cm.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/base/ts1enc.def)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex))) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/upquote/upquote.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/base/textcomp.sty)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/microtype/microtype-xetex.def) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/parskip/parskip.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty))) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty))) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty)) (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def) (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/url/url.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/bookmark/bkm-dvipdfm.def)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/tools/longtable.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/tools/array.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/tools/calc.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.sty) (/home/yuukias/render_resources/chinese_math_pdf/texmf/tex/xelatex/xecjk/xeCJK.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty) (/home/yuukias/render_resources/chinese_math_pdf/texmf/tex/latex/ctex/ctexhook.sty)\n\nLaTeX hooks Warning: Generic hook 'package/after/pifont' is deprecated.\n(hooks)              Use hook 'package/pifont/after' instead.\n\n\nLaTeX hooks Warning: Generic hook 'package/after/cprotect' is deprecated.\n(hooks)              Use hook 'package/cprotect/after' instead.\n\n\nLaTeX hooks Warning: Generic hook 'package/after/listings' is deprecated.\n(hooks)              Use hook 'package/listings/after' instead.\n\n\nLaTeX hooks Warning: Generic hook 'package/after/everysel' is deprecated.\n(hooks)              Use hook 'package/everysel/after' instead.\n\n(/home/yuukias/render_resources/chinese_math_pdf/texmf/tex/xelatex/xecjk/xeCJK.cfg)) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/mathtools/mathtools.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/mathtools/mhsetup.sty)\n\nPackage mathtools Warning: For best results, please load mathtools *before* \n(mathtools)                unicode-math on input line 127.\n\n) (/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/advisor_report.generated.aux)\n\nPackage unicode-math Warning: Using \\overbracket and \\underbracket from\n(unicode-math)                `mathtools' package.\n(unicode-math)                 \n(unicode-math)                 Use \\Uoverbracket and \\Uunderbracket for\n(unicode-math)                original `unicode-math' definition.\n\n\nPackage unicode-math Warning: I'm going to overwrite the following commands\n(unicode-math)                from the `mathtools' package: \n(unicode-math)                 \n(unicode-math)                     \\dblcolon, \\coloneqq, \\Coloneqq, \\eqqcolon.\n(unicode-math)                \n(unicode-math)                 \n(unicode-math)                 Note that since I won't overwrite the other\n(unicode-math)                colon-like commands, using them will lead to\n(unicode-math)                inconsistencies.\n\n*geometry* driver: auto-detecting\n*geometry* detected driver: xetex\n(/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics/trig.sty) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg))) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd) (/home/yuukias/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg) [1] [2] (/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/advisor_report.generated.aux) )\nOutput written on /tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/advisor_report.generated.pdf (2 pages).\nTranscript written on /tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/advisor_report.generated.log.\n",
+        "returncode": 0
+      }
+    ]
+  },
+  "effective_profile": {
+    "authority": "canonical-default",
+    "engine": "pandoc-ast-to-latex-xelatex",
+    "fonts": {
+      "cjk_sans": "Noto Sans SC",
+      "cjk_serif": "Noto Serif SC",
+      "latin_main": "TeX Gyre Termes",
+      "math": "TeX Gyre Termes Math"
+    },
+    "fontsize": "11pt",
+    "linestretch": "1.15",
+    "margin": "25mm",
+    "number_sections": false,
+    "ordinary_prose_downscaling": false,
+    "paper": "a4",
+    "profile_id": "canonical-formal-note-v0.2",
+    "resource_dir": "/home/yuukias/render_resources/chinese_math_pdf",
+    "route": "canonical-markdown",
+    "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/advisor_report.md",
+    "toc": false
+  },
+  "generated_tex": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/evidence/build/advisor_report.generated.tex",
+  "generated_tex_math_survival": {
+    "checks": [
+      {
+        "index": 0,
+        "matched_anchors": [
+          "x",
+          "i",
+          "y"
+        ],
+        "mathtype": "InlineMath",
+        "missing_anchors": [],
+        "passed": true,
+        "required_anchors": [
+          "x",
+          "i",
+          "y"
+        ],
+        "text": "(x_i, y_i)"
+      },
+      {
+        "index": 1,
+        "matched_anchors": [
+          "x",
+          "i",
+          "in",
+          "mathbb",
+          "R",
+          "p"
+        ],
+        "mathtype": "InlineMath",
+        "missing_anchors": [],
+        "passed": true,
+        "required_anchors": [
+          "x",
+          "i",
+          "in",
+          "mathbb",
+          "R",
+          "p"
+        ],
+        "text": "x_i \\in \\mathbb{R}^{p}"
+      },
+      {
+        "index": 2,
+        "matched_anchors": [
+          "y",
+          "i"
+        ],
+        "mathtype": "InlineMath",
+        "missing_anchors": [],
+        "passed": true,
+        "required_anchors": [
+          "y",
+          "i"
+        ],
+        "text": "y_i"
+      },
+      {
+        "index": 3,
+        "matched_anchors": [
+          "hat",
+          "theta",
+          "0",
+          "operatorname",
+          "argmin",
+          "in",
+          "mathbb",
+          "R",
+          "p",
+          "1",
+          "n",
+          "sum",
+          "i",
+          "y",
+          "x",
+          "top",
+          "2"
+        ],
+        "mathtype": "DisplayMath",
+        "missing_anchors": [],
+        "passed": true,
+        "required_anchors": [
+          "hat",
+          "theta",
+          "0",
+          "operatorname",
+          "argmin",
+          "in",
+          "mathbb",
+          "R",
+          "p",
+          "1",
+          "n",
+          "sum",
+          "i",
+          "y",
+          "x",
+          "top",
+          "2"
+        ],
+        "text": "\n\\hat{\\theta}_0 =\n\\operatorname*{argmin}_{\\theta \\in \\mathbb{R}^{p}}\n\\frac{1}{n}\\sum_{i=1}^{n}(y_i - x_i^\\top\\theta)^2.\n"
+      },
+      {
+        "index": 4,
+        "matched_anchors": [
+          "hat",
+          "theta",
+          "lambda",
+          "operatorname",
+          "argmin",
+          "in",
+          "mathbb",
+          "R",
+          "p",
+          "1",
+          "n",
+          "sum",
+          "i",
+          "y",
+          "x",
+          "top",
+          "2"
+        ],
+        "mathtype": "DisplayMath",
+        "missing_anchors": [],
+        "passed": true,
+        "required_anchors": [
+          "hat",
+          "theta",
+          "lambda",
+          "operatorname",
+          "argmin",
+          "in",
+          "mathbb",
+          "R",
+          "p",
+          "1",
+          "n",
+          "sum",
+          "i",
+          "y",
+          "x",
+          "top",
+          "2"
+        ],
+        "text": "\n\\hat{\\theta}_\\lambda =\n\\operatorname*{argmin}_{\\theta \\in \\mathbb{R}^{p}}\n\\left[\n\\frac{1}{n}\\sum_{i=1}^{n}(y_i - x_i^\\top\\theta)^2\n+ \\lambda \\|\\theta\\|_2^2\n\\right].\n"
+      },
+      {
+        "index": 5,
+        "matched_anchors": [
+          "lambda"
+        ],
+        "mathtype": "InlineMath",
+        "missing_anchors": [],
+        "passed": true,
+        "required_anchors": [
+          "lambda"
+        ],
+        "text": "\\lambda"
+      },
+      {
+        "index": 6,
+        "matched_anchors": [
+          "Delta",
+          "mean",
+          "1",
+          "2",
+          "sum",
+          "k",
+          "in",
+          "A",
+          "B",
+          "RMSE",
+          "lambda",
+          "0",
+          "155"
+        ],
+        "mathtype": "DisplayMath",
+        "missing_anchors": [],
+        "passed": true,
+        "required_anchors": [
+          "Delta",
+          "mean",
+          "1",
+          "2",
+          "sum",
+          "k",
+          "in",
+          "A",
+          "B",
+          "RMSE",
+          "lambda",
+          "0",
+          "155"
+        ],
+        "text": "\n\\Delta_{\\mathrm{mean}} =\n\\frac{1}{2}\\sum_{k \\in \\{A,B\\}}\n\\left(\\mathrm{RMSE}_{\\lambda,k} - \\mathrm{RMSE}_{0,k}\\right)\n= -0.155.\n"
+      }
+    ],
+    "failures": [],
+    "passed": true
+  },
+  "output_pdf": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/advisor_report.pdf",
+  "post_transform_ast_observed": false,
+  "post_transform_math_signature": null,
+  "post_transform_note": "No independent post-transform Pandoc AST stage is used by this route; generated TeX survival is checked directly.",
+  "probe": {
+    "commands": {
+      "kpsewhich": {
+        "available": true,
+        "first_line": "kpathsea version 6.4.1",
+        "path": "/home/yuukias/.TinyTeX/bin/x86_64-linux/kpsewhich"
+      },
+      "pandoc": {
+        "available": true,
+        "first_line": "pandoc 2.12",
+        "path": "/home/yuukias/conda/bin/pandoc"
+      },
+      "pdffonts": {
+        "available": true,
+        "first_line": "pdffonts version 24.02.0",
+        "path": "/usr/bin/pdffonts"
+      },
+      "pdftoppm": {
+        "available": true,
+        "first_line": "pdftoppm version 24.02.0",
+        "path": "/usr/bin/pdftoppm"
+      },
+      "pdftotext": {
+        "available": true,
+        "first_line": "pdftotext version 24.02.0",
+        "path": "/usr/bin/pdftotext"
+      },
+      "xelatex": {
+        "available": true,
+        "first_line": "XeTeX 3.141592653-2.6-0.999997 (TeX Live 2025)",
+        "path": "/home/yuukias/.TinyTeX/bin/x86_64-linux/xelatex"
+      }
+    },
+    "default_renderer": "pandoc_xelatex",
+    "failure_status": null,
+    "fonts": {
+      "newcm_math_calligraphic": {
+        "available": true,
+        "path": "/home/yuukias/render_resources/chinese_math_pdf/fonts/newcomputermodern/NewCMMath-Regular.otf",
+        "sha256": "d66ac1cc91c55c24d3636ae2df1238076debdff51841f9893fc5419cc2df3df7"
+      },
+      "noto_sans_sc_bold": {
+        "available": true,
+        "path": "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSansSC-Bold.otf",
+        "sha256": "c6cb5a93abaa9edc8ee7463b7ebb7f42d618d40e6ed2f7a5371c97b0b64767c0"
+      },
+      "noto_sans_sc_regular": {
+        "available": true,
+        "path": "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSansSC-Regular.otf",
+        "sha256": "faa6c9df652116dde789d351359f3d7e5d2285a2b2a1f04a2d7244df706d5ea9"
+      },
+      "noto_serif_sc_bold": {
+        "available": true,
+        "path": "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSerifSC-Bold.otf",
+        "sha256": "24693d48bdb9152f0a06b02af625638a1097abd6de4010ebba027f6e82710527"
+      },
+      "noto_serif_sc_regular": {
+        "available": true,
+        "path": "/home/yuukias/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSerifSC-Regular.otf",
+        "sha256": "e8f396decc1f0963a016a989c3d8852e863d1350996f573860a80767c83a1cd3"
+      },
+      "texgyretermes_bold": {
+        "available": true,
+        "path": "/home/yuukias/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-bold.otf",
+        "sha256": "2fb3e952065fa153c7e4e64e04b98b9d79225739b6025aa3f0f0782d299ff61e"
+      },
+      "texgyretermes_bolditalic": {
+        "available": true,
+        "path": "/home/yuukias/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-bolditalic.otf",
+        "sha256": "1bf6af99cb0e26c12951317032d79b96ae009551e59ccf02a5b24f325ecfec87"
+      },
+      "texgyretermes_italic": {
+        "available": true,
+        "path": "/home/yuukias/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-italic.otf",
+        "sha256": "6dd103a1672e50568cd2f8a706ccd48443d44d7d073a59d2286f4e6f746575d6"
+      },
+      "texgyretermes_math": {
+        "available": true,
+        "path": "/home/yuukias/render_resources/chinese_math_pdf/fonts/texgyre-termes-math/texgyretermes-math.otf",
+        "sha256": "e5ce42b4fe826b7ea4c0874359decf0b294439355c511a4794107a9924e2cd5a"
+      },
+      "texgyretermes_regular": {
+        "available": true,
+        "path": "/home/yuukias/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-regular.otf",
+        "sha256": "cc3fe7c707b81428d23d54df3eadd9228a2bf6a4d43125d94df56f5f63134659"
+      }
+    },
+    "forbidden_default_dependencies": {
+      "chromium_latex_fallback": false,
+      "fc_match_times_new_roman": false,
+      "times_new_roman": false,
+      "windows_fonts_mount": false
+    },
+    "latex_packages": {
+      "booktabs.sty": {
+        "available": true,
+        "path": "/home/yuukias/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty"
+      },
+      "fontspec.sty": {
+        "available": true,
+        "path": "/home/yuukias/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty"
+      },
+      "geometry.sty": {
+        "available": true,
+        "path": "/home/yuukias/.TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty"
+      },
+      "graphicx.sty": {
+        "available": true,
+        "path": "/home/yuukias/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty"
+      },
+      "longtable.sty": {
+        "available": true,
+        "path": "/home/yuukias/.TinyTeX/texmf-dist/tex/latex/tools/longtable.sty"
+      },
+      "mathtools.sty": {
+        "available": true,
+        "path": "/home/yuukias/.TinyTeX/texmf-dist/tex/latex/mathtools/mathtools.sty"
+      },
+      "unicode-math.sty": {
+        "available": true,
+        "path": "/home/yuukias/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty"
+      },
+      "xcolor.sty": {
+        "available": true,
+        "path": "/home/yuukias/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty"
+      },
+      "xeCJK.sty": {
+        "available": true,
+        "path": "/home/yuukias/render_resources/chinese_math_pdf/texmf/tex/xelatex/xecjk/xeCJK.sty"
+      }
+    },
+    "local_override_paths_checked": [
+      "/home/yuukias/.config/ai-skills/local-overrides.toml"
+    ],
+    "ready": true,
+    "resource_candidates": [
+      "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/render_resources/chinese_math_pdf",
+      "/home/yuukias/render_resources/chinese_math_pdf",
+      "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/render_resources/chinese_math_pdf",
+      "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/render_resources/chinese_math_pdf",
+      "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/render_resources/chinese_math_pdf",
+      "/tmp/render_resources/chinese_math_pdf",
+      "/render_resources/chinese_math_pdf"
+    ],
+    "resource_dir": "/home/yuukias/render_resources/chinese_math_pdf"
+  },
+  "qa": {
+    "errors": [],
+    "font_checks": {
+      "canonical_font_rows": [
+        {
+          "embedded": "yes",
+          "name": "EGJJGO+TeXGyreTermes-Bold-Identity-H",
+          "raw": "EGJJGO+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes      4  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "ISKYAO+TeXGyreTermes-Regular-Identity-H",
+          "raw": "ISKYAO+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      6  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "BAKRQG+TeXGyreTermesMath-Regular-Identity-H",
+          "raw": "BAKRQG+TeXGyreTermesMath-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      8  0",
+          "subset": "yes",
+          "unicode": "yes"
+        }
+      ],
+      "cjk_font_rows": [],
+      "cjk_unicode_failures": [],
+      "errors": [],
+      "font_rows": [
+        {
+          "embedded": "yes",
+          "name": "EGJJGO+TeXGyreTermes-Bold-Identity-H",
+          "raw": "EGJJGO+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes      4  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "ISKYAO+TeXGyreTermes-Regular-Identity-H",
+          "raw": "ISKYAO+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      6  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "BAKRQG+TeXGyreTermesMath-Regular-Identity-H",
+          "raw": "BAKRQG+TeXGyreTermesMath-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      8  0",
+          "subset": "yes",
+          "unicode": "yes"
+        }
+      ],
+      "unexpected_canonical_fallback_rows": [],
+      "warnings": []
+    },
+    "fonts_embedded": true,
+    "pages": 2,
+    "pdf": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/outputs/advisor_report.pdf",
+    "pdffonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nEGJJGO+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes      4  0\nISKYAO+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      6  0\nBAKRQG+TeXGyreTermesMath-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      8  0\n",
+    "pdfinfo": "Creator:         LaTeX via pandoc\nProducer:        xdvipdfmx (20250410)\nCreationDate:    Thu Sep 24 21:07:25 2026 HKT\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           2\nEncrypted:       no\nPage size:       595.28 x 841.89 pts (A4)\nPage rot:        0\nFile size:       22266 bytes\nOptimized:       no\nPDF version:     1.7\n",
+    "preview_paths": [
+      "outputs/evidence/previews/advisor_report-1.png",
+      "outputs/evidence/previews/advisor_report-2.png"
+    ],
+    "preview_prefix": "outputs/evidence/previews/advisor_report",
+    "text_checks": {
+      "errors": [],
+      "fragmentation": {
+        "cjk_lines": 0,
+        "failed": false,
+        "short_cjk_lines": 0,
+        "short_ratio": 0.0
+      },
+      "table_survival": {
+        "checked_rows": 5,
+        "failed": false,
+        "matched_rows": 4,
+        "source_table_rows": 5
+      },
+      "warnings": []
+    },
+    "warnings": []
+  },
+  "route": "canonical-markdown",
+  "source_math_signature": [
+    {
+      "mathtype": "InlineMath",
+      "text": "(x_i, y_i)"
+    },
+    {
+      "mathtype": "InlineMath",
+      "text": "x_i \\in \\mathbb{R}^{p}"
+    },
+    {
+      "mathtype": "InlineMath",
+      "text": "y_i"
+    },
+    {
+      "mathtype": "DisplayMath",
+      "text": "\n\\hat{\\theta}_0 =\n\\operatorname*{argmin}_{\\theta \\in \\mathbb{R}^{p}}\n\\frac{1}{n}\\sum_{i=1}^{n}(y_i - x_i^\\top\\theta)^2.\n"
+    },
+    {
+      "mathtype": "DisplayMath",
+      "text": "\n\\hat{\\theta}_\\lambda =\n\\operatorname*{argmin}_{\\theta \\in \\mathbb{R}^{p}}\n\\left[\n\\frac{1}{n}\\sum_{i=1}^{n}(y_i - x_i^\\top\\theta)^2\n+ \\lambda \\|\\theta\\|_2^2\n\\right].\n"
+    },
+    {
+      "mathtype": "InlineMath",
+      "text": "\\lambda"
+    },
+    {
+      "mathtype": "DisplayMath",
+      "text": "\n\\Delta_{\\mathrm{mean}} =\n\\frac{1}{2}\\sum_{k \\in \\{A,B\\}}\n\\left(\\mathrm{RMSE}_{\\lambda,k} - \\mathrm{RMSE}_{0,k}\\right)\n= -0.155.\n"
+    }
+  ],
+  "status": "complete"
+}

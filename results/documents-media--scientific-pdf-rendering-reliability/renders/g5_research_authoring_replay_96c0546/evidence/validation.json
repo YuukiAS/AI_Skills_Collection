@@ -1,0 +1,14 @@
+{
+  "status": "complete",
+  "pages": 2,
+  "display_equations_exact": true,
+  "table_markdown_exact": true,
+  "interpretation_and_caveats_verbatim": true,
+  "all_pages_visually_inspected": true,
+  "visual_findings": "Both pages readable; no missing glyphs, equation collisions, clipped text or table overlap. Evidence prose continues across the page break.",
+  "hashes": {
+    "inputs/source.md": "f6309dd772600ced586965138a7d7f5fe0c63ef6a54f14aceacab42984b09722",
+    "outputs/advisor_report.md": "9eedc059bede4c6357efb71cb31478d4ebcc0d732df94c441d39d3a0d52dee83",
+    "outputs/advisor_report.pdf": "8e7eb4a34a12e5c5d358ad34842ad72e3625c94be9555f7814e1d00878e16044"
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "schema_version": 3,
+  "target": "repo",
+  "install_kind": "profile:research-main",
+  "installed_at": "2026-09-24T13:05:21+00:00",
+  "collection_path": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability",
+  "collection_commit": "96c05469f10730bb4eed445ffd8dabfbb81a2e89",
+  "install_mode_requested": "copy",
+  "install_mode_counts": {
+    "copy": 19
+  },
+  "project_path": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project",
+  "skills_root": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay-96c0546/project/.agents/skills",
+  "agents_md_managed": true,
+  "prune_managed": false,
+  "install_request": {
+    "profiles": [
+      "research-main"
+    ],
+    "domains": [],
+    "categories": [],
+    "skills": []
+  },
+  "target_info": {},
+  "audit": {
+    "active_skill_count": 19,
+    "description_total_chars": 4981,
+    "longest_descriptions": [
+      {
+        "path": "skills/science/discovery/research-lookup",
+        "name": "research-lookup",
+        "chars": 342
+      },
+      {
+        "path": "skills/science/discovery/citation-management",
+        "name": "citation-management",
+        "chars": 341
+      },
+      {
+        "path": "skills/writing/research/scientific-writing",
+        "name": "scientific-writing",
+        "chars": 329
+      },
+      {
+        "path": "skills/writing/core/writing-fidelity",
+        "name": "writing-fidelity",
+        "chars": 328
+      },
+      {
+        "path": "skills/writing/core/scientific-prose",
+        "name": "scientific-prose",
+        "chars": 322
+      }
+    ],
+    "duplicate_description_count": 0,
+    "scope_distribution": {
+      "core": 1,
+      "writing": 10,
+      "science": 2,
+      "tool": 6
+    },
+    "domain_distribution": {
+      "core": 1,
+      "research-writing": 7,
+      "research-discovery": 2,
+      "documents-media": 4,
+      "writing": 3,
+      "visualization": 2
+    },
+    "category_distribution": {
+      "codex-system": 1,
+      "research": 7,
+      "discovery": 2,
+      "documents-media": 4,
+      "core": 3,
+      "visualization": 2
+    },
+    "agents_block_chars": 7122,
+    "warnings": []
+  },
+  "installed_skills": [
+    {
+      "name": "codex-workflow-protocol",
+      "path": "skills/core/codex-system/codex-workflow-protocol",
+      "dest": "core-codex-system-codex-workflow-protocol",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/core/codex-system/codex-workflow-protocol",
+      "mode": "copy",
+      "selectors": [
+        "codex-workflow-protocol",
+        "core-codex-system-codex-workflow-protocol",
+        "core/codex-system/codex-workflow-protocol",
+        "skills/core/codex-system/codex-workflow-protocol",
+        "skills/system/codex-system/codex-workflow-protocol",
+        "system/codex-system/codex-workflow-protocol"
+      ]
+    },
+    {
+      "name": "research-reporting",
+      "path": "skills/writing/research/research-reporting",
+      "dest": "writing-research-research-reporting",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/writing/research/research-reporting",
+      "mode": "copy",
+      "selectors": [
+        "research-reporting",
+        "skills/writing/research/research-reporting",
+        "writing-research-research-reporting",
+        "writing/research-reporting",
+        "writing/research/research-reporting"
+      ]
+    },
+    {
+      "name": "scientific-writing",
+      "path": "skills/writing/research/scientific-writing",
+      "dest": "writing-research-scientific-writing",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/writing/research/scientific-writing",
+      "mode": "copy",
+      "selectors": [
+        "scientific-writing",
+        "skills/writing/research/scientific-writing",
+        "writing-research-scientific-writing",
+        "writing/research/scientific-writing",
+        "writing/scientific-writing"
+      ]
+    },
+    {
+      "name": "paper-workflow-orchestrator",
+      "path": "skills/writing/research/paper-workflow-orchestrator",
+      "dest": "writing-research-paper-workflow-orchestrator",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/writing/research/paper-workflow-orchestrator",
+      "mode": "copy",
+      "selectors": [
+        "paper-workflow-orchestrator",
+        "skills/writing/research/paper-workflow-orchestrator",
+        "writing-research-paper-workflow-orchestrator",
+        "writing/paper-workflow-orchestrator",
+        "writing/research/paper-workflow-orchestrator"
+      ]
+    },
+    {
+      "name": "nature-manuscript-workflow",
+      "path": "skills/writing/research/nature-manuscript-workflow",
+      "dest": "writing-research-nature-manuscript-workflow",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/writing/research/nature-manuscript-workflow",
+      "mode": "copy",
+      "selectors": [
+        "nature-manuscript-workflow",
+        "skills/writing/research/nature-manuscript-workflow",
+        "writing-research-nature-manuscript-workflow",
+        "writing/nature-manuscript-workflow",
+        "writing/research/nature-manuscript-workflow"
+      ]
+    },
+    {
+      "name": "citation-verification",
+      "path": "skills/writing/research/citation-verification",
+      "dest": "writing-research-citation-verification",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/writing/research/citation-verification",
+      "mode": "copy",
+      "selectors": [
+        "citation-verification",
+        "skills/writing/research/citation-verification",
+        "writing-research-citation-verification",
+        "writing/citation-verification",
+        "writing/research/citation-verification"
+      ]
+    },
+    {
+      "name": "latex-paper-authoring",
+      "path": "skills/writing/research/latex-paper-authoring",
+      "dest": "writing-research-latex-paper-authoring",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/writing/research/latex-paper-authoring",
+      "mode": "copy",
+      "selectors": [
+        "latex-paper-authoring",
+        "skills/writing/research/latex-paper-authoring",
+        "writing-research-latex-paper-authoring",
+        "writing/latex-paper-authoring",
+        "writing/research/latex-paper-authoring"
+      ]
+    },
+    {
+      "name": "literature-review",
+      "path": "skills/writing/research/literature-review",
+      "dest": "writing-research-literature-review",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/writing/research/literature-review",
+      "mode": "copy",
+      "selectors": [
+        "literature-review",
+        "skills/writing/research/literature-review",
+        "writing-research-literature-review",
+        "writing/literature-review",
+        "writing/research/literature-review"
+      ]
+    },
+    {
+      "name": "citation-management",
+      "path": "skills/science/discovery/citation-management",
+      "dest": "science-discovery-citation-management",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/science/discovery/citation-management",
+      "mode": "copy",
+      "selectors": [
+        "citation-management",
+        "research/discovery/citation-management",
+        "science-discovery-citation-management",
+        "science/discovery/citation-management",
+        "skills/research/discovery/citation-management",
+        "skills/science/discovery/citation-management"
+      ]
+    },
+    {
+      "name": "research-lookup",
+      "path": "skills/science/discovery/research-lookup",
+      "dest": "science-discovery-research-lookup",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/science/discovery/research-lookup",
+      "mode": "copy",
+      "selectors": [
+        "research-lookup",
+        "research/discovery/research-lookup",
+        "science-discovery-research-lookup",
+        "science/discovery/research-lookup",
+        "skills/research/discovery/research-lookup",
+        "skills/science/discovery/research-lookup"
+      ]
+    },
+    {
+      "name": "pdf",
+      "path": "skills/tools/documents-media/pdf",
+      "dest": "tools-documents-media-pdf",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/tools/documents-media/pdf",
+      "mode": "copy",
+      "selectors": [
+        "pdf",
+        "reusable/documents-media/pdf",
+        "skills/reusable/documents-media/pdf",
+        "skills/tools/documents-media/pdf",
+        "tool/documents-media/pdf",
+        "tools-documents-media-pdf",
+        "tools/documents-media/pdf"
+      ]
+    },
+    {
+      "name": "render-chinese-math-pdf",
+      "path": "skills/tools/documents-media/render-chinese-math-pdf",
+      "dest": "tools-documents-media-render-chinese-math-pdf",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/tools/documents-media/render-chinese-math-pdf",
+      "mode": "copy",
+      "selectors": [
+        "render-chinese-math-pdf",
+        "reusable/documents-media/render-chinese-math-pdf",
+        "skills/reusable/documents-media/render-chinese-math-pdf",
+        "skills/tools/documents-media/render-chinese-math-pdf",
+        "tool/documents-media/render-chinese-math-pdf",
+        "tools-documents-media-render-chinese-math-pdf",
+        "tools/documents-media/render-chinese-math-pdf"
+      ]
+    },
+    {
+      "name": "docx",
+      "path": "skills/tools/documents-media/docx",
+      "dest": "tools-documents-media-docx",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/tools/documents-media/docx",
+      "mode": "copy",
+      "selectors": [
+        "docx",
+        "reusable/documents-media/docx",
+        "skills/reusable/documents-media/docx",
+        "skills/tools/documents-media/docx",
+        "tool/documents-media/docx",
+        "tools-documents-media-docx",
+        "tools/documents-media/docx"
+      ]
+    },
+    {
+      "name": "markitdown",
+      "path": "skills/tools/documents-media/markitdown",
+      "dest": "tools-documents-media-markitdown",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/tools/documents-media/markitdown",
+      "mode": "copy",
+      "selectors": [
+        "markitdown",
+        "reusable/documents-media/markitdown",
+        "skills/reusable/documents-media/markitdown",
+        "skills/tools/documents-media/markitdown",
+        "tool/documents-media/markitdown",
+        "tools-documents-media-markitdown",
+        "tools/documents-media/markitdown"
+      ]
+    },
+    {
+      "name": "writing-fidelity",
+      "path": "skills/writing/core/writing-fidelity",
+      "dest": "writing-core-writing-fidelity",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/writing/core/writing-fidelity",
+      "mode": "copy",
+      "selectors": [
+        "reusable/writing/source-faithful-writing-final-pass",
+        "reusable/writing/writing-fidelity",
+        "skills/reusable/writing/source-faithful-writing-final-pass",
+        "skills/reusable/writing/writing-fidelity",
+        "skills/writing/core/writing-fidelity",
+        "source-faithful-writing-final-pass",
+        "writing-core-writing-fidelity",
+        "writing-fidelity",
+        "writing/core/writing-fidelity",
+        "writing/writing-fidelity"
+      ]
+    },
+    {
+      "name": "scientific-prose",
+      "path": "skills/writing/core/scientific-prose",
+      "dest": "writing-core-scientific-prose",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/writing/core/scientific-prose",
+      "mode": "copy",
+      "selectors": [
+        "reusable/writing/scientific-evidence-prose",
+        "reusable/writing/scientific-prose",
+        "scientific-evidence-prose",
+        "scientific-prose",
+        "skills/reusable/writing/scientific-prose",
+        "skills/writing/core/scientific-prose",
+        "writing-core-scientific-prose",
+        "writing/core/scientific-prose",
+        "writing/scientific-prose"
+      ]
+    },
+    {
+      "name": "chinese-prose",
+      "path": "skills/writing/core/chinese-prose",
+      "dest": "writing-core-chinese-prose",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/writing/core/chinese-prose",
+      "mode": "copy",
+      "selectors": [
+        "chinese-prose",
+        "natural-chinese-final-pass",
+        "reusable/writing/chinese-prose",
+        "reusable/writing/natural-chinese-final-pass",
+        "skills/reusable/writing/chinese-prose",
+        "skills/writing/core/chinese-prose",
+        "writing-core-chinese-prose",
+        "writing/chinese-prose",
+        "writing/core/chinese-prose"
+      ]
+    },
+    {
+      "name": "matplotlib",
+      "path": "skills/tools/visualization/matplotlib",
+      "dest": "tools-visualization-matplotlib",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/tools/visualization/matplotlib",
+      "mode": "copy",
+      "selectors": [
+        "matplotlib",
+        "reusable/visualization/matplotlib",
+        "skills/reusable/visualization/matplotlib",
+        "skills/tools/visualization/matplotlib",
+        "tool/visualization/matplotlib",
+        "tools-visualization-matplotlib",
+        "tools/visualization/matplotlib"
+      ]
+    },
+    {
+      "name": "plotly",
+      "path": "skills/tools/visualization/plotly",
+      "dest": "tools-visualization-plotly",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/skills/tools/visualization/plotly",
+      "mode": "copy",
+      "selectors": [
+        "plotly",
+        "reusable/visualization/plotly",
+        "skills/reusable/visualization/plotly",
+        "skills/tools/visualization/plotly",
+        "tool/visualization/plotly",
+        "tools-visualization-plotly",
+        "tools/visualization/plotly"
+      ]
+    }
+  ]
+}

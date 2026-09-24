@@ -1,0 +1,6 @@
+{
+  "user_message": "授权对当前候选执行一次 bounded G5 replay",
+  "scope": "one bounded fresh child replay; synthetic/public-safe G5 inputs only; current Codex identity/provider; no private data, no new credential copy/read, no paid API/Terra, no live production identity or Host Policy change",
+  "child_replay_count": 1,
+  "recorded_artifact": "evidence/consumption_summary.json"
+}

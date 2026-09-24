@@ -1,0 +1,7 @@
+已完成，文件均在 `outputs/`：
+
+- [正式报告 PDF（2 页）](outputs/advisor_report.pdf)
+- [Markdown 源稿](outputs/advisor_report.md)
+- [渲染与检查记录](outputs/evidence/README.md)
+
+已核对公式、表格数值、限制条件和决策边界，并检查全部页面。无需额外手动操作。

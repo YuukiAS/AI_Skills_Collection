@@ -1,0 +1,86 @@
+# Regularized Model as a Candidate Baseline
+
+## Scientific Question
+
+Is a simple regularized model a reasonable baseline before a larger
+experiment? This note uses synthetic, public-safe evidence to inform that
+bounded decision.
+
+The running example is a prediction problem with paired observations
+$(x_i, y_i)$, where $x_i \in \mathbb{R}^{p}$ and $y_i$ is a continuous endpoint.
+The baseline estimator solves
+
+$$
+\hat{\theta}_0 =
+\operatorname*{argmin}_{\theta \in \mathbb{R}^{p}}
+\frac{1}{n}\sum_{i=1}^{n}(y_i - x_i^\top\theta)^2.
+$$
+
+The regularized candidate uses
+
+$$
+\hat{\theta}_\lambda =
+\operatorname*{argmin}_{\theta \in \mathbb{R}^{p}}
+\left[
+\frac{1}{n}\sum_{i=1}^{n}(y_i - x_i^\top\theta)^2
++ \lambda \|\theta\|_2^2
+\right].
+$$
+
+The two estimators use the same squared-error term. The baseline minimizes
+that term alone, whereas the candidate adds a penalty on the squared
+coefficient norm. The parameter $\lambda$ controls the contribution of the
+penalty to the objective. The comparison therefore asks whether this
+regularized candidate merits a place among the baselines for the larger
+experiment; it does not establish the best penalty strength or final method.
+
+## Evidence Design
+
+The comparison is intentionally small. It is meant to check rendering and
+decision structure, not to claim a scientific discovery. We evaluate two
+synthetic folds, report root mean squared error, and inspect whether the
+regularized model is consistently lower without hiding the uncertainty.
+
+| Fold | Baseline RMSE | Regularized RMSE | Delta | Interpretation |
+| --- | ---: | ---: | ---: | --- |
+| A | 1.42 | 1.18 | -0.24 | regularization helps |
+| B | 1.36 | 1.29 | -0.07 | effect is smaller |
+| Mean | 1.39 | 1.235 | -0.155 | promising but limited |
+
+Table entries compare the two models within each synthetic fold. Delta is
+the regularized RMSE minus the baseline RMSE, so a negative value favors the
+regularized candidate. The direction agrees across the two folds, while the
+magnitude differs. This agreement is the useful observation for the current
+decision, but it should not be read as evidence that the gain has a stable
+magnitude across future splits.
+
+The average reduction is
+
+$$
+\Delta_{\mathrm{mean}} =
+\frac{1}{2}\sum_{k \in \{A,B\}}
+\left(\mathrm{RMSE}_{\lambda,k} - \mathrm{RMSE}_{0,k}\right)
+= -0.155.
+$$
+
+The mean weights the two fold-level differences equally. It summarizes the
+observed comparison, but it does not describe a distribution of differences
+or quantify uncertainty. In particular, the smaller improvement in fold B
+remains relevant even though the mean favors the regularized model. The
+fold-level values should remain visible alongside the aggregate when judging
+whether to carry this candidate forward.
+
+## Interpretation
+
+The result supports using the regularized model as a conservative baseline in a
+larger experiment. It does not justify a claim that the regularized model is
+optimal, and it does not distinguish whether the improvement comes from variance
+reduction, implicit feature weighting, or fold-specific noise. The advisor
+decision is therefore narrow: keep the regularized model in the next comparison
+set, but do not make it the final method.
+
+The main caveat is that two folds are not enough to estimate variability. A
+larger run should include at least five folds or repeated random splits, and the
+report should show the distribution of fold-level differences rather than only
+the mean. If the next run still shows a negative mean delta and no severe
+outlier fold, the method is worth using as the default baseline.

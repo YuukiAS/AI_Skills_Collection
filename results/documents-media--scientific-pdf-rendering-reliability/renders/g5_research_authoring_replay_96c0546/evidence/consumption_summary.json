@@ -1,0 +1,490 @@
+{
+  "status": "G5_PASSED_NORMAL_RESEARCH_AUTHORING_REPLAY",
+  "authorization": {
+    "user_message": "授权对当前候选执行一次 bounded G5 replay",
+    "scope": "one bounded fresh child replay; synthetic/public-safe G5 inputs only; current Codex identity/provider; no private data, no new credential copy/read, no paid API/Terra, no live production identity or Host Policy change",
+    "child_replay_count": 1
+  },
+  "candidate_identity": {
+    "replay_branch_tip": "96c05469f10730bb4eed445ffd8dabfbb81a2e89",
+    "source_candidate_commit": "827ee6a01fdfec44f0165b1ca9b321b37c257b50",
+    "identity_note": "96c05469 contains only results/evidence changes after the source candidate; production source/profile/test changes are from 827ee6a.",
+    "installed_collection_commit": "96c05469f10730bb4eed445ffd8dabfbb81a2e89",
+    "installed_profile": "profile:research-main",
+    "install_mode_counts": {
+      "copy": 19
+    }
+  },
+  "normal_entry": {
+    "project_agents_md": "evidence/AGENTS.md",
+    "profile_routing_note_present": true,
+    "natural_request": "request.md",
+    "source": "source.md"
+  },
+  "consumption_evidence": {
+    "stdout_jsonl": "evidence/child.stdout.jsonl",
+    "events": [
+      {
+        "stdout_line": 5,
+        "event_type": "item.completed",
+        "item_id": "item_1",
+        "item_type": "command_execution",
+        "status": "completed",
+        "matched_evidence": [
+          "advisor_report.pdf"
+        ],
+        "command_excerpt": "/bin/bash -lc 'cat inputs/request.md inputs/source.md'",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 7,
+        "event_type": "item.completed",
+        "item_id": "item_2",
+        "item_type": "command_execution",
+        "status": "completed",
+        "matched_evidence": [
+          "tools-documents-media-render-chinese-math-pdf/SKILL.md"
+        ],
+        "command_excerpt": "/bin/bash -lc \"git status --short; rg --files -g AGENTS.md -g '*SKILL.md' .agents/skills/tools-documents-media-pdf .agents/skills/tools-documents-media-render-chinese-math-pdf .agents/skills/writing-core-chinese-prose\"",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 8,
+        "event_type": "item.started",
+        "item_id": "item_3",
+        "item_type": "command_execution",
+        "status": "in_progress",
+        "matched_evidence": [
+          "writing-research-research-reporting/SKILL.md",
+          "tools-documents-media-render-chinese-math-pdf/SKILL.md"
+        ],
+        "command_excerpt": "/bin/bash -lc 'cat .agents/skills/tools-documents-media-pdf/SKILL.md .agents/skills/tools-documents-media-render-chinese-math-pdf/SKILL.md .agents/skills/writing-core-scientific-prose/SKILL.md .agents/skills/writing-research-research-reporting/SKILL.md .agents/skills/writing-core-chinese-prose/SKILL.md'",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 9,
+        "event_type": "item.completed",
+        "item_id": "item_3",
+        "item_type": "command_execution",
+        "status": "completed",
+        "matched_evidence": [
+          "writing-research-research-reporting/SKILL.md",
+          "tools-documents-media-render-chinese-math-pdf/SKILL.md",
+          "render_scientific_pdf.py"
+        ],
+        "command_excerpt": "/bin/bash -lc 'cat .agents/skills/tools-documents-media-pdf/SKILL.md .agents/skills/tools-documents-media-render-chinese-math-pdf/SKILL.md .agents/skills/writing-core-scientific-prose/SKILL.md .agents/skills/writing-research-research-reporting/SKILL.md .agents/skills/writing-core-chinese-prose/SKILL.md'",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": true,
+          "has_advisor_reference_text": true,
+          "has_renderer_skill_text": true,
+          "has_renderer_script_help_or_call": true,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 11,
+        "event_type": "item.started",
+        "item_id": "item_5",
+        "item_type": "command_execution",
+        "status": "in_progress",
+        "matched_evidence": [
+          "writing-research-research-reporting/SKILL.md",
+          "tools-documents-media-render-chinese-math-pdf/references/checklists.md"
+        ],
+        "command_excerpt": "/bin/bash -lc 'cat .agents/skills/writing-research-research-reporting/SKILL.md .agents/skills/writing-core-scientific-prose/SKILL.md .agents/skills/writing-core-writing-fidelity/SKILL.md .agents/skills/tools-documents-media-render-chinese-math-pdf/references/checklists.md'",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 12,
+        "event_type": "item.completed",
+        "item_id": "item_5",
+        "item_type": "command_execution",
+        "status": "completed",
+        "matched_evidence": [
+          "writing-research-research-reporting/SKILL.md",
+          "tools-documents-media-render-chinese-math-pdf/references/checklists.md"
+        ],
+        "command_excerpt": "/bin/bash -lc 'cat .agents/skills/writing-research-research-reporting/SKILL.md .agents/skills/writing-core-scientific-prose/SKILL.md .agents/skills/writing-core-writing-fidelity/SKILL.md .agents/skills/tools-documents-media-render-chinese-math-pdf/references/checklists.md'",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": true,
+          "has_advisor_reference_text": true,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 14,
+        "event_type": "item.completed",
+        "item_id": "item_6",
+        "item_type": "command_execution",
+        "status": "failed",
+        "matched_evidence": [
+          "tools-documents-media-render-chinese-math-pdf/profiles/canonical_formal_note.json",
+          "render_scientific_pdf.py"
+        ],
+        "command_excerpt": "/bin/bash -lc \"pwd; rg --files -g '*render*pdf*' -g '*formal_note*' -g '*probe*pdf*' -g AGENTS.md -g '*render*contract*' -g '*profile*' inputs scripts .agents/skills/tools-documents-media-render-chinese-math-pdf\"",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": true,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 15,
+        "event_type": "item.started",
+        "item_id": "item_7",
+        "item_type": "command_execution",
+        "status": "in_progress",
+        "matched_evidence": [
+          "writing-research-research-reporting/references/group-meeting-advisor-reports.md",
+          "tools-documents-media-render-chinese-math-pdf/profiles/canonical_formal_note.json",
+          "render_scientific_pdf.py"
+        ],
+        "command_excerpt": "/bin/bash -lc 'cat .agents/skills/writing-research-research-reporting/references/group-meeting-advisor-reports.md .agents/skills/tools-documents-media-render-chinese-math-pdf/profiles/canonical_formal_note.json; python .agents/skills/tools-documents-media-render-chinese-math-pdf/scripts/probe_pdf_render_env.py --root . --pretty; python .agents/skills/tools-documents-media-render-chinese-math-pdf/scripts/render_scientific_pdf.py --help'",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 16,
+        "event_type": "item.completed",
+        "item_id": "item_7",
+        "item_type": "command_execution",
+        "status": "completed",
+        "matched_evidence": [
+          "writing-research-research-reporting/references/group-meeting-advisor-reports.md",
+          "tools-documents-media-render-chinese-math-pdf/profiles/canonical_formal_note.json",
+          "render_scientific_pdf.py"
+        ],
+        "command_excerpt": "/bin/bash -lc 'cat .agents/skills/writing-research-research-reporting/references/group-meeting-advisor-reports.md .agents/skills/tools-documents-media-render-chinese-math-pdf/profiles/canonical_formal_note.json; python .agents/skills/tools-documents-media-render-chinese-math-pdf/scripts/probe_pdf_render_env.py --root . --pretty; python .agents/skills/tools-documents-media-render-chinese-math-pdf/scripts/render_scientific_pdf.py --help'",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": true,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 17,
+        "event_type": "item.started",
+        "item_id": "item_8",
+        "item_type": "command_execution",
+        "status": "in_progress",
+        "matched_evidence": [
+          "render_scientific_pdf.py",
+          "render_receipt.json",
+          "advisor_report.pdf"
+        ],
+        "command_excerpt": "/bin/bash -lc \"mkdir -p outputs/evidence\npython - <<'PY'\nfrom pathlib import Path\ns=Path('inputs/source.md').read_text()\nbody, formatting=s.split('## Formatting Requirements For This Replay',1)\nbody=body.replace('# Advisor-Facing Formal PDF Source','# Regularized Model as a Candidate Baseline',1)\nbody=body.replace('We want a concise formal note that helps an advisor decide whether a simple\\\\nregularized model is a reasonable baseline before a larger experiment. The\\\\nsource is synthetic and public-safe, but it is structured like a real internal\\\\nresearch note: it contains a question, assumptions, equations, a compact table,\\\\ninterpretation, and a bounded next-step recommendation.', 'Is a simple regularized model a reasonable baseline before a larger\\\\nexperiment? This note uses synthetic, public-safe evidence to inform that\\\\nbounded decision.')\nPath('outputs/advisor_report.md').write_...",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 18,
+        "event_type": "item.completed",
+        "item_id": "item_8",
+        "item_type": "command_execution",
+        "status": "completed",
+        "matched_evidence": [
+          "render_scientific_pdf.py",
+          "render_receipt.json",
+          "advisor_report.pdf"
+        ],
+        "command_excerpt": "/bin/bash -lc \"mkdir -p outputs/evidence\npython - <<'PY'\nfrom pathlib import Path\ns=Path('inputs/source.md').read_text()\nbody, formatting=s.split('## Formatting Requirements For This Replay',1)\nbody=body.replace('# Advisor-Facing Formal PDF Source','# Regularized Model as a Candidate Baseline',1)\nbody=body.replace('We want a concise formal note that helps an advisor decide whether a simple\\\\nregularized model is a reasonable baseline before a larger experiment. The\\\\nsource is synthetic and public-safe, but it is structured like a real internal\\\\nresearch note: it contains a question, assumptions, equations, a compact table,\\\\ninterpretation, and a bounded next-step recommendation.', 'Is a simple regularized model a reasonable baseline before a larger\\\\nexperiment? This note uses synthetic, public-safe evidence to inform that\\\\nbounded decision.')\nPath('outputs/advisor_report.md').write_...",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 19,
+        "event_type": "item.started",
+        "item_id": "item_9",
+        "item_type": "command_execution",
+        "status": "in_progress",
+        "matched_evidence": [
+          "render_receipt.json"
+        ],
+        "command_excerpt": "/bin/bash -lc 'cat outputs/evidence/render_receipt.json; rg --files outputs; cat outputs/evidence/build/*.txt'",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 20,
+        "event_type": "item.completed",
+        "item_id": "item_9",
+        "item_type": "command_execution",
+        "status": "failed",
+        "matched_evidence": [
+          "render_receipt.json",
+          "advisor_report.pdf",
+          "canonical-formal-note-v0.2"
+        ],
+        "command_excerpt": "/bin/bash -lc 'cat outputs/evidence/render_receipt.json; rg --files outputs; cat outputs/evidence/build/*.txt'",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": true,
+          "has_complete_qa": true
+        }
+      },
+      {
+        "stdout_line": 22,
+        "event_type": "item.started",
+        "item_id": "item_11",
+        "item_type": "command_execution",
+        "status": "in_progress",
+        "matched_evidence": [
+          "render_scientific_pdf.py",
+          "render_receipt.json",
+          "advisor_report.pdf"
+        ],
+        "command_excerpt": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\np=Path('outputs/advisor_report.md')\ns=p.read_text()\ns=s.replace('## Evidence Design', '''The two estimators use the same squared-error term. The baseline minimizes\nthat term alone, whereas the candidate adds a penalty on the squared\ncoefficient norm. The parameter \"'$'\"\\\\\\\\lambda\"'$ controls the contribution of the\npenalty to the objective. The comparison therefore asks whether this\nregularized candidate merits a place among the baselines for the larger\nexperiment; it does not establish the best penalty strength or final method.\n\n## Evidence Design'\"''')\ns=s.replace('The average reduction is', '''Table entries compare the two models within each synthetic fold. Delta is\nthe regularized RMSE minus the baseline RMSE, so a negative value favors the\nregularized candidate. The direction agrees across the two folds, while the\nmagnitude dif...",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 23,
+        "event_type": "item.completed",
+        "item_id": "item_11",
+        "item_type": "command_execution",
+        "status": "completed",
+        "matched_evidence": [
+          "render_scientific_pdf.py",
+          "render_receipt.json",
+          "advisor_report.pdf"
+        ],
+        "command_excerpt": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\np=Path('outputs/advisor_report.md')\ns=p.read_text()\ns=s.replace('## Evidence Design', '''The two estimators use the same squared-error term. The baseline minimizes\nthat term alone, whereas the candidate adds a penalty on the squared\ncoefficient norm. The parameter \"'$'\"\\\\\\\\lambda\"'$ controls the contribution of the\npenalty to the objective. The comparison therefore asks whether this\nregularized candidate merits a place among the baselines for the larger\nexperiment; it does not establish the best penalty strength or final method.\n\n## Evidence Design'\"''')\ns=s.replace('The average reduction is', '''Table entries compare the two models within each synthetic fold. Delta is\nthe regularized RMSE minus the baseline RMSE, so a negative value favors the\nregularized candidate. The direction agrees across the two folds, while the\nmagnitude dif...",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": true
+        }
+      },
+      {
+        "stdout_line": 24,
+        "event_type": "item.started",
+        "item_id": "item_12",
+        "item_type": "command_execution",
+        "status": "in_progress",
+        "matched_evidence": [
+          "render_receipt.json"
+        ],
+        "command_excerpt": "/bin/bash -lc \"du -ah outputs | sort -h | tail -15; python - <<'PY'\nimport json\nfrom pathlib import Path\nr=json.loads(Path('outputs/evidence/render_receipt.json').read_text())\nprint(list(r))\nfor k in r:\n if 'math' in k or 'profile' in k: print(k, r[k])\nPY\"",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 25,
+        "event_type": "item.completed",
+        "item_id": "item_12",
+        "item_type": "command_execution",
+        "status": "completed",
+        "matched_evidence": [
+          "render_receipt.json",
+          "advisor_report.pdf",
+          "canonical-formal-note-v0.2"
+        ],
+        "command_excerpt": "/bin/bash -lc \"du -ah outputs | sort -h | tail -15; python - <<'PY'\nimport json\nfrom pathlib import Path\nr=json.loads(Path('outputs/evidence/render_receipt.json').read_text())\nprint(list(r))\nfor k in r:\n if 'math' in k or 'profile' in k: print(k, r[k])\nPY\"",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": true,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 26,
+        "event_type": "item.started",
+        "item_id": "item_13",
+        "item_type": "command_execution",
+        "status": "in_progress",
+        "matched_evidence": [
+          "render_scientific_pdf.py",
+          "render_receipt.json",
+          "advisor_report.pdf"
+        ],
+        "command_excerpt": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\nimport re,json,hashlib\ns=Path('inputs/source.md').read_text(); m=Path('outputs/advisor_report.md').read_text()\nassert re.findall(r'\\\\\"'$'\"\\\\\"'$(.*?)'\"\\\\\"'$'\"\\\\\"'$'\"',s,re.S)==re.findall(r'\\\\\"'$'\"\\\\\"'$(.*?)'\"\\\\\"'$'\"\\\\\"'$'\"',m,re.S)\nassert [l for l in s.splitlines() if l.startswith('|')]==[l for l in m.splitlines() if l.startswith('|')]\nassert s.split('## Interpretation\\\\n',1)[1].split('## Formatting Requirements',1)[0].strip() in m\nr=json.loads(Path('outputs/evidence/render_receipt.json').read_text())\nassert r['qa']['pages']==2 and not r['qa']['errors']\nqa={'status':'complete','pages':2,'display_equations_exact':True,'table_markdown_exact':True,'interpretation_and_caveats_verbatim':True,'all_pages_visually_inspected':True,'visual_findings':'Both pages readable; no missing glyphs, equation collisions, clipped text or table overlap. Ev...",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 27,
+        "event_type": "item.completed",
+        "item_id": "item_13",
+        "item_type": "command_execution",
+        "status": "completed",
+        "matched_evidence": [
+          "render_scientific_pdf.py",
+          "render_receipt.json",
+          "advisor_report.pdf"
+        ],
+        "command_excerpt": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\nimport re,json,hashlib\ns=Path('inputs/source.md').read_text(); m=Path('outputs/advisor_report.md').read_text()\nassert re.findall(r'\\\\\"'$'\"\\\\\"'$(.*?)'\"\\\\\"'$'\"\\\\\"'$'\"',s,re.S)==re.findall(r'\\\\\"'$'\"\\\\\"'$(.*?)'\"\\\\\"'$'\"\\\\\"'$'\"',m,re.S)\nassert [l for l in s.splitlines() if l.startswith('|')]==[l for l in m.splitlines() if l.startswith('|')]\nassert s.split('## Interpretation\\\\n',1)[1].split('## Formatting Requirements',1)[0].strip() in m\nr=json.loads(Path('outputs/evidence/render_receipt.json').read_text())\nassert r['qa']['pages']==2 and not r['qa']['errors']\nqa={'status':'complete','pages':2,'display_equations_exact':True,'table_markdown_exact':True,'interpretation_and_caveats_verbatim':True,'all_pages_visually_inspected':True,'visual_findings':'Both pages readable; no missing glyphs, equation collisions, clipped text or table overlap. Ev...",
+        "agent_text_excerpt": null,
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      },
+      {
+        "stdout_line": 28,
+        "event_type": "item.completed",
+        "item_id": "item_14",
+        "item_type": "agent_message",
+        "status": null,
+        "matched_evidence": [
+          "advisor_report.pdf"
+        ],
+        "command_excerpt": null,
+        "agent_text_excerpt": "已完成，文件均在 `outputs/`：\n\n- [正式报告 PDF（2 页）](outputs/advisor_report.pdf)\n- [Markdown 源稿](outputs/advisor_report.md)\n- [渲染与检查记录](outputs/evidence/README.md)\n\n已核对公式、表格数值、限制条件和决策边界，并检查全部页面。无需额外手动操作。",
+        "output_markers": {
+          "has_research_reporting_skill_text": false,
+          "has_advisor_reference_text": false,
+          "has_renderer_skill_text": false,
+          "has_renderer_script_help_or_call": false,
+          "has_canonical_profile": false,
+          "has_complete_qa": false
+        }
+      }
+    ],
+    "research_reporting_consumed": true,
+    "advisor_reference_consumed": true,
+    "renderer_skill_consumed": true,
+    "renderer_script_consumed": true
+  },
+  "artifact_evidence": {
+    "markdown": "advisor_report.md",
+    "pdf": "advisor_report.pdf",
+    "receipt": "evidence/render_receipt.json",
+    "validation": "evidence/validation.json",
+    "previews": [
+      "previews/advisor_report-1.png",
+      "previews/advisor_report-2.png"
+    ],
+    "pdfinfo_pages": 2,
+    "receipt_status": "complete",
+    "receipt_route": "canonical-markdown",
+    "profile_id": "canonical-formal-note-v0.2",
+    "receipt_pages": 2,
+    "receipt_qa_errors": [],
+    "validation_status": "complete",
+    "validation_all_pages_visually_inspected": true,
+    "validation_visual_findings": "Both pages readable; no missing glyphs, equation collisions, clipped text or table overlap. Evidence prose continues across the page break."
+  },
+  "sha256": {
+    "request.md": "fc9968ed2511291c37408735fe55715a7f375c0cfa2fc6c709e0c78ba1caabb2",
+    "source.md": "f6309dd772600ced586965138a7d7f5fe0c63ef6a54f14aceacab42984b09722",
+    "advisor_report.md": "9eedc059bede4c6357efb71cb31478d4ebcc0d732df94c441d39d3a0d52dee83",
+    "advisor_report.pdf": "8e7eb4a34a12e5c5d358ad34842ad72e3625c94be9555f7814e1d00878e16044",
+    "evidence/render_receipt.json": "53b567c9ebd2efecdd17ed04f71716b38eccc73950d0abeb9ec2442f1217556c",
+    "evidence/validation.json": "3410293b292030680883fdaa6ace4072528fb56f046a031035e9bede40184b61",
+    "evidence/install_manifest.json": "4193f621d91ef90101015d6be780d6780ab3acbd09cbf192ec338c7e790c53f2",
+    "evidence/child.stdout.jsonl": "59fd2ee507b8295c2ff9ef8a04adcb749efba8a0257984e417cb01a35ac98000",
+    "previews/advisor_report-1.png": "88914e51b76f99bec772a7c52390ea7abcb5c83d84cbac72a73b36533ad195d5",
+    "previews/advisor_report-2.png": "39d126f444ba4bd499dd773db637ca87b7d3c25b7ddc0000d3261d9bda35902c"
+  }
+}
