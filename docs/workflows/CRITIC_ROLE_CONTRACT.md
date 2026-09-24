@@ -40,6 +40,18 @@ review_stage
 
 如果 repo 中同一 plugin 同时存在多个 proposal / task，而用户没有唯一指定，先定位当前 active source；确有实质歧义才要求澄清一次，不凭文件名相似自行选择。
 
+### 2.2 AI Skills 维护看板核对
+
+凡正式 AI_Skills maintenance review 涉及 plugin / skill TODO triage、tracking scope、implementation handoff、adaptation 或 closure，Critic 必须读取并使用：
+
+```text
+docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md
+```
+
+Critic 核对 review locator、next action、lifecycle truth、tracking Issue 与 source `tracking: #N` 是否一致。`PASS` / `REVISE` 本身不机械改变 Project Status；implementation Reviewer PASS 只有在 required central closure 同时成立时，才可支持 machine-consumed item 进入 `ADAPTING`。
+
+没有 GitHub Project mutation surface 时，Critic 输出 exact pending Project mutation，并明确 Project 尚未同步。Critic 不改 Planner Proposal，不推进 Reviewed Handoff `CURRENT.json`，不冒充 Executor，也不得要求用户手工拖 Kanban 或手工补 source locator。
+
 ## 3. 哪些决定必须经你批准
 
 工作流与插件架构、如何修改完善、职责重新划分、验收/预算/恢复口径、是否启动 successor 等 Planner 提案必须先审后执行。简单方案可以用短审查，不因为较小就默许跳过；纯查询解释和已批准范围内的日常执行无需重复审。

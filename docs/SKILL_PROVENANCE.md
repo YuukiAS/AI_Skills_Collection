@@ -5,13 +5,13 @@ This report records what can be proven from files currently in this repository. 
 ## Summary
 
 - Scope: `active_and_non_archived`
-- Skills audited: 149
+- Skills audited: 151
 - Skills with explicit source fields: 11
-- User-authored skills: 18
+- User-authored skills: 19
 - External adapted skills: 11
 - External vendored skills: 0
 - Generated skills: 0
-- Local legacy skills: 6
+- Local legacy skills: 7
 - Unknown-origin historical skills: 114
 - Skills containing URLs in the body: 66
 - Skills containing local license files: 11
@@ -21,9 +21,9 @@ This report records what can be proven from files currently in this repository. 
 | Provenance | Count |
 | --- | --- |
 | external-adapted | 11 |
-| local | 6 |
+| local | 7 |
 | unknown | 114 |
-| user-authored | 18 |
+| user-authored | 19 |
 
 ## User Authored
 
@@ -36,6 +36,7 @@ This report records what can be proven from files currently in this repository. 
 | clinical-guideline-checking | skills/domains/medicine-clinical/clinical-guideline-checking | user-authored |  |
 | medical-literature-evidence-review | skills/domains/medicine-clinical/medical-literature-evidence-review | user-authored |  |
 | medical-safety-boundaries | skills/domains/medicine-clinical/medical-safety-boundaries | user-authored |  |
+| project-thread-handoff | skills/science/communication/project-thread-handoff | user-authored |  |
 | publication-figure-palettes | skills/science/communication/publication-figure-palettes | user-authored |  |
 | scientific-figure-qa | skills/science/communication/scientific-figure-qa | user-authored |  |
 | business-presentations | skills/tools/documents-media/presentations/business-presentations | user-authored |  |
@@ -82,6 +83,7 @@ None.
 | motion-interaction | skills/tools/frontend/motion-interaction | local |  |
 | chinese-prose | skills/writing/core/chinese-prose | local |  |
 | scientific-prose | skills/writing/core/scientific-prose | local |  |
+| scientific-rewrite | skills/writing/core/scientific-rewrite | local |  |
 
 ## Unknown Historical
 

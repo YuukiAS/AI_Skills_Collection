@@ -1,0 +1,30 @@
+diff --git a/skills/tools/documents-media/render-chinese-math-pdf/SKILL.md b/skills/tools/documents-media/render-chinese-math-pdf/SKILL.md
+index 63e1ca5..6b70207 100644
+--- a/skills/tools/documents-media/render-chinese-math-pdf/SKILL.md
++++ b/skills/tools/documents-media/render-chinese-math-pdf/SKILL.md
+@@ -1,24 +1,25 @@
+ ---
+ name: render-chinese-math-pdf
+ description: Render and validate Chinese or mixed Chinese/English mathematical Markdown/LaTeX as PDF. Use for CJK text, Unicode math, equations, tables, Pandoc/XeLaTeX, TeX font/cache failures, citation cleanup, or readable PDF QA.
+ status: active
++version: "0.1"
+ provenance: user-authored
+ trusted: false
+ requires_network: false
+ writes_files: true
+ executes_code: true
+ secrets_needed:
+ last_reviewed: 2026-09-01
+ profile_tags:
+ recommended_scope: global
+ icon_small: assets/app-facing.svg
+ icon_large: assets/app-facing.svg
+ ---
+ # render-chinese-math-pdf
+ 
+ ## Trigger Boundary
+ 
+ Use this skill when the requested deliverable is a readable PDF from Chinese,
+ mixed Chinese/English, or math-heavy Markdown/LaTeX, especially when the likely
+ failure mode is CJK font setup, Unicode math, Pandoc/XeLaTeX behavior, tables,
+ citations, or PDF text readability.

@@ -178,3 +178,88 @@ G5 authorized normal Research Authoring replay after the routing repair:
 - whole-document QA: `renders/g5_research_authoring_replay_96c0546/evidence/validation.json` records exact display-equation/table/interpretation preservation and all-page visual inspection; local human inspection of both preview pages found readable equations, table, prose, and page break with no missing glyphs or layout overlap.
 - conclusion: G5 now closes for the current candidate. This evidence proves the normal `research-main / Research Authoring` entry can consume `research-reporting` for report semantics and the canonical renderer for the formal PDF, while preserving Markdown-only behavior unless the user explicitly requests a PDF.
 - remaining boundary: this is not a final release PASS. The next allowed workflow step is pre-final Critic/Reviewer inspection of the complete G1-G7 evidence; no main merge or release integration has been performed.
+
+## Release Reconciliation And G7 Closure
+
+Current closure date: 2026-09-25
+
+Merged main:
+
+- `origin/main`: `26dfa9f921b0df4b784ae6e3187558fd2509954b`
+- latest main repository version before merge: `5.1.1`
+- merge mode: ordinary merge of `origin/main` into `reviewed/documents-media--scientific-pdf-rendering-reliability`
+- no rebase, force push, PR, main merge, paid API, Terra, Host Policy change, Typst/Quarto migration, renderer redesign, or Research Authoring redesign
+
+Release identity:
+
+- Repository version: `5.1.2`
+- `research-writing`: `0.1` -> `0.2`
+- `presentations`: `NO_BUMP` (`0.3`)
+- standalone `render-chinese-math-pdf`: standalone skill metadata remains `0.1`; no central plugin version is invented
+- all other central plugin versions preserve latest main values: `workflow-core 0.4`, `ai-skills-core 0.4`, `writing-style 0.3`, `scientific-visualization 0.1`, `web-development 0.2`, `statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`
+
+G5 prior PASS and non-impact proof:
+
+- Independent Critic status supplied by user: G5 PASS for the prior candidate.
+- G5 replay evidence remains under `renders/g5_research_authoring_replay_96c0546/`.
+- Latest main did not change `research-reporting`, `research-main` profile/routing, `scripts/skills.py`, `tests/test_render_chinese_math_pdf.py`, or `tests/test_research_writing_routing.py` relative to merge-base `338add2d7ac002a0201a924be3a0ec2818b777c7`.
+- The only latest-main change inside the renderer source file was non-behavioral frontmatter metadata: `version: "0.1"` in `skills/tools/documents-media/render-chinese-math-pdf/SKILL.md`; renderer workflow, entrypoint, font policy, route semantics, scripts, profile routing, and G5 tests were not semantically changed.
+- Exact diff proof:
+  - `g7_release_reconciliation/g5_dependent_main_diff_name_status.txt`
+  - `g7_release_reconciliation/render_skill_latest_main_diff.txt`
+  - `g7_release_reconciliation/no_main_diff_core_g5_routing_surfaces.txt`
+
+G7 local validation on the reconciled candidate worktree:
+
+```text
+python -m unittest discover -s tests
+# Ran 274 tests in 44.247s
+# OK
+
+python scripts/skills.py validate
+# validated 151 active skills, 18 profiles, templates, and trigger eval scaffolds
+
+python scripts/skills.py audit --all
+# exit 0
+
+python scripts/build_codex_marketplace.py --write --validate --check --path-report
+# plugins=10 active_skills=27 source_snapshots=67
+# Windows path budget over_budget=0
+```
+
+Profile install smokes:
+
+- `research-main`: `g7_release_reconciliation/profile_smokes/research-main.json`, `ok: true`, `installed_skill_count: 19`
+- `presentation-desktop`: `g7_release_reconciliation/profile_smokes/presentation-desktop.json`, `ok: true`, `installed_skill_count: 7`
+- `server-research-baseline`: `g7_release_reconciliation/profile_smokes/server-research-baseline.json`, `ok: true`, `installed_skill_count: 7`
+
+Version and release consistency:
+
+- `g7_release_reconciliation/version_consistency.json` records `ok: true`.
+- `VERSION` and `registry.json` are `5.1.2`.
+- README records repository `5.1.2` and Research Authoring `0.2`.
+- CHANGELOG preserves existing `5.1.1`, `5.1.0`, and earlier history, and adds a new `5.1.2` section.
+- `scripts/codex_marketplace_config.json` records `research-writing 0.2` and preserves latest-main released versions for other central plugins.
+
+Generated parity:
+
+- `python scripts/skills.py registry --write` regenerated `registry.json` from source.
+- `python scripts/skills.py catalog --write` regenerated `docs/SKILL_CATALOG.md` and 16 domain pages from source.
+- `python scripts/build_codex_marketplace.py --write --validate --check --path-report` regenerated `.agents/plugins/marketplace.json` and `plugins/codex/plugins/` from the reconciled source, with `over_budget=0`.
+- A second generator run changed only timestamp-bearing `generated_at` lines in `registry.json` and `docs/SKILL_CATALOG.md`; no structural source/generated drift was observed.
+
+Complete artifact locators:
+
+- G5 natural request: `renders/g5_research_authoring_replay_96c0546/request.md`
+- G5 source input: `renders/g5_research_authoring_replay_96c0546/source.md`
+- G5 generated Markdown: `renders/g5_research_authoring_replay_96c0546/advisor_report.md`
+- G5 generated PDF: `renders/g5_research_authoring_replay_96c0546/advisor_report.pdf`
+- G5 all-page previews:
+  - `renders/g5_research_authoring_replay_96c0546/previews/advisor_report-1.png`
+  - `renders/g5_research_authoring_replay_96c0546/previews/advisor_report-2.png`
+- G5 consumption summary: `renders/g5_research_authoring_replay_96c0546/evidence/consumption_summary.json`
+- G5 render receipt: `renders/g5_research_authoring_replay_96c0546/evidence/render_receipt.json`
+- G5 validation: `renders/g5_research_authoring_replay_96c0546/evidence/validation.json`
+- Downloadable local review packet prepared for external GPT/Critic consumption: `/home/yuukias/AI_Skills_Collection/private/exports/documents-media--scientific-pdf-rendering-reliability/g5_review_packet_906b66d.zip`
+
+Final candidate SHA and clean-clone G7 verification are recorded in the final execution report after the commit is frozen, pushed, and verified at the remote tip. A Git commit cannot contain a literal self-reference to its own SHA in this file without changing that SHA.

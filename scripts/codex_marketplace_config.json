@@ -5,7 +5,7 @@
   "plugins": [
     {
       "name": "workflow-core",
-      "version": "0.3",
+      "version": "0.4",
       "displayName": "Verified Workflow",
       "description": "General Codex execution, source-of-truth discovery, planning, verification, and completion gates.",
       "category": "Developer Tools",

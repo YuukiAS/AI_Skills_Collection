@@ -2,13 +2,25 @@
 
 给 Codex 使用的科研与工程技能库。它把常用的写作、汇报、统计、医学影像、前端设计和仓库维护经验整理成可安装的插件，让日常任务更稳、更容易验收。
 
-Repository / CLI release: `5.0.8`
+Repository / CLI release: `5.1.2`
+
+## 可单独安装的技能
+
+这些是 Standalone Skills：可以按单个 Skill 安装和使用，不是中央 Marketplace Plugins。
+
+|  |  |
+|---|---|
+| <img src="./skills/science/communication/project-thread-handoff/assets/app-facing.svg" width="40" alt="Project Thread Handoff icon"> | <strong>Project Thread Handoff</strong><br><code>project-thread-handoff</code> · v`0.1`<br>用于长期项目聊天的上下文交接与新 thread 续接。 |
+| <img src="./skills/tools/documents-media/render-chinese-math-pdf/assets/app-facing.svg" width="40" alt="Chinese Math PDF icon"> | <strong>Chinese Math PDF</strong><br><code>render-chinese-math-pdf</code> · v`0.1`<br>用于中文、中英混合和数学密集型科研 PDF 的可靠渲染与检查。 |
+| <img src="./skills/tools/hpc/slurm-workflows/assets/slurm-workflows.svg" width="40" alt="Slurm Workflows icon"> | <strong>Slurm Workflows</strong><br><code>slurm-workflows</code> · v`0.1`<br>用于 Slurm 学校/HPC 集群任务的规划、提交、监控与诊断。 |
+
+`Project Thread Handoff` 也可以通过一个 `skills-only` ChatGPT personal Plugin wrapper 使用；这个 wrapper 不含 MCP，也不是第二份能力 source。更新说明见：[docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md](docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md)。
 
 ## 中央插件
 
 |  |  |
 |---|---|
-| <img src="./assets/codex/plugin-icons/workflow-core/composer.svg" width="40" alt="Verified Workflow icon"> | <strong>Verified Workflow</strong><br><code>workflow-core</code> · v`0.3`<br>复杂任务的执行、验证与可靠收尾。 |
+| <img src="./assets/codex/plugin-icons/workflow-core/composer.svg" width="40" alt="Verified Workflow icon"> | <strong>Verified Workflow</strong><br><code>workflow-core</code> · v`0.4`<br>复杂任务的执行、验证与可靠收尾。 |
 | <img src="./assets/codex/plugin-icons/ai-skills-core/composer.svg" width="40" alt="AI Skills Maintainer icon"> | <strong>AI Skills Maintainer</strong><br><code>ai-skills-core</code> · v`0.4`<br>维护本仓库的插件、版本、生成层与回归证据。 |
 | <img src="./assets/codex/plugin-icons/writing-style/composer.svg" width="40" alt="Clear Writing icon"> | <strong>Clear Writing</strong><br><code>writing-style</code> · v`0.3`<br>在保留事实与原意的前提下，改善中英文科研和技术表达。 |
 | <img src="./assets/codex/plugin-icons/research-writing/composer.svg" width="40" alt="Research Authoring icon"> | <strong>Research Authoring</strong><br><code>research-writing</code> · v`0.2`<br>支持研究报告、论文、文献、引用和证据组织；正式 PDF 会交给配套渲染器处理。 |

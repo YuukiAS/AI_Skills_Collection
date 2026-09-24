@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "kind": "ai-skills-server-local-installation-smoke",
+  "ok": true,
+  "codex_home": "/tmp/ai-skills-codex-home-smoke.203p5tr_",
+  "auto_created_codex_home": true,
+  "kept_codex_home": false,
+  "selection": {
+    "profiles": [
+      "server-research-baseline"
+    ],
+    "domains": [],
+    "categories": [],
+    "skills": []
+  },
+  "manifest_path": "/tmp/ai-skills-codex-home-smoke.203p5tr_/skills/.ai-skills-collection-manifest.json",
+  "installed_skill_count": 7,
+  "install_mode_counts": {
+    "copy": 7
+  },
+  "collection_commit": "906b66d1b867dc661203c7bf328c4322d5be5a66",
+  "checks": [
+    {
+      "name": "manifest-target",
+      "ok": true,
+      "detail": "codex-home"
+    },
+    {
+      "name": "skills-root-exists",
+      "ok": true,
+      "detail": "/tmp/ai-skills-codex-home-smoke.203p5tr_/skills"
+    },
+    {
+      "name": "manifest-written",
+      "ok": true,
+      "detail": "/tmp/ai-skills-codex-home-smoke.203p5tr_/skills/.ai-skills-collection-manifest.json"
+    },
+    {
+      "name": "installed-skill-count",
+      "ok": true,
+      "detail": "7"
+    },
+    {
+      "name": "installed-frontmatter-and-icons",
+      "ok": true,
+      "detail": "errors=0"
+    },
+    {
+      "name": "marketplace-manifest",
+      "ok": true,
+      "detail": "plugins=10"
+    },
+    {
+      "name": "marketplace-payload",
+      "ok": true,
+      "detail": "errors=0"
+    }
+  ],
+  "warnings": [
+    "optional commands not found: xelatex, kpsewhich, latexmk, sbatch, squeue, sinfo, scontrol"
+  ],
+  "errors": [],
+  "tooling": {
+    "commands": {
+      "git": "/usr/bin/git",
+      "xelatex": null,
+      "kpsewhich": null,
+      "latexmk": null,
+      "pandoc": "/home/yuukias/conda/bin/pandoc",
+      "sbatch": null,
+      "squeue": null,
+      "sinfo": null,
+      "scontrol": null
+    },
+    "python": {
+      "executable": "/home/yuukias/conda/bin/python",
+      "version": "3.13.5",
+      "modules": {
+        "pptx": true
+      }
+    }
+  }
+}

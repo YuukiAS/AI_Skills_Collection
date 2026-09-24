@@ -50,6 +50,22 @@ AI_Skills_Collection 是公开仓库时，`source` / `evidence` / `project-speci
 
 不要要求项目 thread 此时填写 `target layer`、`candidate action` 或 `promotion gate`。这些属于后面的中央整理工作。
 
+## `tracking: #N` 是什么？
+
+进入 central maintenance tracking scope 的条目，会由维护者在同一轮 maintenance action 中写入或更新：
+
+```text
+tracking: #<issue-number>
+```
+
+它只表示“这个 source entry 当前绑定到哪个 top-level tracking Issue”。它不是 maturity，也不是 Project Status；不要把 `TODO / DOING / ADAPTING / DONE` 写回这里。
+
+如果当前 surface 不能修改 GitHub Project，应输出 exact pending Project mutation，等待下一次 Project-capable maintenance action 核对后同步。不要要求用户手工拖 Kanban 或手工补 locator。完整规则见：
+
+```text
+docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md
+```
+
 ## AI_Skills Planner / maintainer 负责整理
 
 Planner 在处理 `NEW` 条目前必须先检查：

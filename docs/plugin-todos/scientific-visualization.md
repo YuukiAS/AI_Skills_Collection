@@ -7,6 +7,7 @@ Canonical maintenance inbox for the `scientific-visualization` plugin.
 ### Delegate captions/annotations without giving away visual semantics
 
 status: READY_FOR_PROMOTION_AFTER_LANGUAGE_LAYER
+tracking: #49
 source: cross-plugin communication boundary audit, 2026-09-05
 proposal: Keep `scientific-visualization` as the owner of visual encoding, axes/scales, panels, uncertainty display, statistical annotations, figure hierarchy and the decision of whether a plot/schematic is scientifically appropriate. After those semantics are frozen, use the canonical generic language layer for figure titles/captions, axis/legend/annotation wording, concise takeaway text and terminology consistency. See `docs/design/READER_FACING_COMMUNICATION_PLUGIN_BOUNDARIES.md`.
 required boundary: the language layer may improve wording only; it must not change the scientific comparison, plotted quantity, statistical meaning, axis semantics, uncertainty encoding or figure structure merely to make the text easier to write. Presentation-specific placement/size remains owned by `presentations`.
@@ -15,6 +16,7 @@ promotion gate: after task 050 closes and the generic language layer identity is
 ### Interactive scientific schematic connectors need actual-render qualitative QA
 
 status: NEW
+tracking: #50
 source: Asteria 2.0 / CAT-TRACE real use, 2026-09-13 to 2026-09-14; corroborated by the user's private official ChatGPT export audit (raw conversations are not committed here)
 evidence: Asteria repeatedly reached late QA with user-visible graph defects involving arrow endpoints touching the wrong part of cards, connectors crossing avoidably, labels and cards crowding paths, visually awkward relation grammar, and broken/weak math presentation. The Asteria repo subsequently added `docs/design/SCIENTIFIC_GRAPH_VISUAL_SYSTEM.md` plus developer visual self-QA, which is evidence that the failure class is real but does not by itself prove a generic Scientific Visualization rule is already needed or consumed.
 problem: In an interactive scientific model map, connector routing, endpoint placement, label grouping and math rendering are not merely frontend decoration: they communicate model dependency, lineage or evidence structure. Mechanical DOM/bbox checks and generic test PASS can miss a diagram that is obviously misleading, cluttered or unreadable at normal scale.
@@ -30,6 +32,7 @@ Planner triage before promotion:
 ### Curriculum-driven capability refinement
 
 status: BLOCKED_NEEDS_EVIDENCE
+tracking: #51
 source: user-approved design direction, 2026-09-01
 proposal: Learn bounded visualization competencies from visualization textbooks, graphical-perception literature, venue guidance, and strong real figure examples. See `docs/workflows/CURRICULUM_DRIVEN_DOMAIN_PLUGIN_REFINEMENT.md`.
 review requirement: text review may validate extracted principles, but production acceptance must include visual review of a real rendered artifact. Mechanical checks such as DPI, font size, contrast, palette status, or export format cannot establish visual quality by themselves.

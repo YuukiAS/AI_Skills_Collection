@@ -4,10 +4,10 @@
 
 No unreleased changes.
 
-## 5.0.8 - 2026-09-23
+## 5.1.2 - 2026-09-25
 
-Repository `5.0.8` is a compatible release candidate for scientific PDF
-rendering reliability and the bounded Research Authoring PDF handoff.
+Repository `5.1.2` is a compatible release for scientific PDF rendering
+reliability and the bounded Research Authoring PDF handoff.
 
 Repository bump decision: PATCH
 Reason: this release improves existing rendering, profile, and research-writing
@@ -32,10 +32,13 @@ Affected plugins:
 - all other central plugins: NO_BUMP
   Reason: no other central plugin production behavior changed.
 
-Unchanged plugin versions: `workflow-core 0.3`, `ai-skills-core 0.4`,
+Unchanged plugin versions: `workflow-core 0.4`, `ai-skills-core 0.4`,
 `writing-style 0.3`, `presentations 0.3`, `scientific-visualization 0.1`,
 `web-development 0.2`, `statistical-modeling 0.1`, `bioinformatics 0.1`,
 `medical-imaging 0.1`.
+
+Standalone skills: `render-chinese-math-pdf` keeps standalone skill metadata
+version `0.1`; no central plugin version is invented for it.
 
 Changed repository behavior:
 
@@ -60,6 +63,84 @@ Plugin changelog index: `docs/plugin-changelogs/README.md`.
 Affected plugin changelog:
 
 - `docs/plugin-changelogs/research-writing.md`
+
+## 5.1.1 - 2026-09-24
+
+Repository `5.1.1` is a compatible release for Verified Workflow Reviewed
+Handoff first-bootstrap consumer routing.
+
+Repository bump decision: PATCH
+Reason: this release improves an existing central workflow plugin's normal
+Reviewed Handoff routing without adding a new repository-level capability or
+breaking existing contracts.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `workflow-core` | `0.3` | `0.4` |
+
+Affected plugins:
+- `workflow-core`: `0.3` -> `0.4`
+  Reason: Verified Workflow now routes brand-new Reviewed tasks through Bridge
+  `reviewed-handoff task bootstrap`, routes existing local or exact remote
+  Reviewed tasks through `materialize-worktree --mode resume`, and fails early
+  when the required Bridge capability/version/policy is unavailable.
+
+Unchanged plugin versions: `ai-skills-core 0.4`, `writing-style 0.3`,
+`research-writing 0.1`, `presentations 0.3`, `scientific-visualization 0.1`,
+`web-development 0.2`, `statistical-modeling 0.1`, `bioinformatics 0.1`,
+`medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Workflow-core now consumes the Bridge 0.9.1 Reviewed Handoff normal entries
+  instead of treating a missing Reviewed task as a raw Git worktree bootstrap
+  problem.
+- Bridge remains the owner of repo-local Git mechanics, remote-only metadata
+  discovery, canonical profile validation, rollback, and REQUEST/CURRENT
+  validation.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelog:
+
+- `docs/plugin-changelogs/workflow-core.md`
+
+## 5.1.0 - 2026-09-23
+
+Repository `5.1.0` formally adds the standalone Project Thread Handoff Skill.
+
+Repository bump decision: MINOR
+Reason: the collection gains a new repository-level user capability: users can
+install a standalone Skill that turns an existing long project thread into one
+minimum-sufficient initialization prompt for a fresh thread, without adding a
+central plugin, MCP service, state database, or repository write mode.
+
+Affected plugins:
+- all central plugins: NO_BUMP
+  Reason: Project Thread Handoff is a standalone Skill and does not change any
+  central Marketplace plugin production behavior or plugin payload.
+
+Unchanged plugin versions: `workflow-core 0.3`, `ai-skills-core 0.4`,
+`writing-style 0.3`, `research-writing 0.1`, `presentations 0.3`,
+`scientific-visualization 0.1`, `web-development 0.2`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Added `project-thread-handoff` under `skills/science/communication/` as an
+  explicit-only, read-only standalone Skill for long-thread project handoff.
+- The Skill freezes read-only capability metadata in `SKILL.md` and keeps
+  invocation policy in `agents/openai.yaml`.
+- Current ChatGPT regular Chat distribution evidence is a user-scope,
+  skills-only personal Plugin wrapper around the canonical Skill.
+- The personal Plugin wrapper has `MCP_ADDED = NO` and is not a second source of
+  truth; future behavior changes remain owned by the standalone Skill source.
+- This release does not claim every account or product surface can invoke a
+  bare standalone Personal Skill directly from regular Chat. The direct
+  standalone route uploaded and loaded in Work, but the observed Pro regular
+  Chat runtime did not load the standalone Skill registry.
 
 ## 5.0.7 - 2026-09-22
 

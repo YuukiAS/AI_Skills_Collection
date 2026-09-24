@@ -7,14 +7,15 @@ This skill is not one of the central Marketplace plugins, so its real-use failur
 ## Open candidates
 
 ### 2026-09-22 release closure note
-status: PROMOTED_IN_5.0.7
+status: PROMOTED_IN_5.1.2
 source: `documents-media--scientific-pdf-rendering-reliability`
 evidence: `skills/tools/documents-media/render-chinese-math-pdf/scripts/render_scientific_pdf.py`; `profiles/canonical_formal_note.json`; `tests/test_render_chinese_math_pdf.py`; release evidence under `results/documents-media--scientific-pdf-rendering-reliability/`
 problem closed: the first three route/math/font/profile-stability failures below are promoted into the canonical renderer orchestration and QA contract. Chromium remains diagnostic-only, canonical Markdown uses Pandoc AST -> LaTeX -> XeLaTeX, ordered Math payload signatures and generated-TeX anchors are checked, canonical font fallback is rejected for the formal-note route, and resolved profile identity is recorded.
 remaining boundary: complete artifact typography still requires actual page/montage review on each final candidate; project/venue templates keep their own typography and are not forced into the canonical formal-note font allowlist.
 
 ### Nominal skill invocation can still bypass the declared Pandoc + XeLaTeX production route
-status: PROMOTED_IN_5.0.7
+status: PROMOTED_IN_5.1.2
+tracking: #80
 source: real mixed Chinese/English mathematical group-meeting report render, 2026-09-19
 evidence: private user-provided first and second PDF renders from the same Markdown report (not copied into this public repository); `pdfinfo` identifies both artifacts as HeadlessChrome / Skia PDFs. Current source contract: `skills/tools/documents-media/render-chinese-math-pdf/SKILL.md`.
 problem:
@@ -25,7 +26,8 @@ problem:
 project-specific context: the underlying biomedical/statistical formulas and report topic are project-local/private. The reusable failure is route identity + mathematical fidelity, not the scientific content.
 
 ### Current PDF validator can miss mathematical corruption and non-canonical font output
-status: PROMOTED_IN_5.0.7
+status: PROMOTED_IN_5.1.2
+tracking: #81
 source: same 2026-09-19 real render; current `validate_pdf_layout.py` and `SKILL.md`
 evidence: first render visibly lost equation structure; second render became readable only after explicit user intervention. `pdffonts` on the supplied artifacts reports Liberation Serif, Droid Sans Japanese/Fallback and, in the second render, FreeSerif and DejaVu Sans. Current source inspection shows `validate_pdf_layout.py` checks page count, embedded fonts, CJK extraction/fragmentation, table survival and a first-page preview, but does not compare source math against rendered math.
 problem:
@@ -37,7 +39,8 @@ problem:
 project-specific context: exact equations, page text and unpublished research content are intentionally omitted. The generic evidence is the mismatch between declared render/font/QA policy and the real output.
 
 ### Rendering defaults can drift across retries even when the document purpose did not change
-status: PROMOTED_IN_5.0.7
+status: PROMOTED_IN_5.1.2
+tracking: #82
 source: same real report, first vs second render
 evidence: first PDF is A4 and 17 pages; second PDF is US Letter and 24 pages, despite representing the same report family. Both identify HeadlessChrome/Skia as producer.
 problem:
@@ -47,7 +50,8 @@ problem:
 project-specific context: whether a future formal report profile should use A4, Letter, particular margins or particular type sizes is not decided here.
 
 ### Technically correct XeLaTeX output can still be visually inconsistent because the template invents typography by block class
-status: PARTIALLY_PROMOTED_IN_5.0.7
+status: PARTIALLY_PROMOTED_IN_5.1.2
+tracking: #83
 source: Clear Writing 055 / real Original-only acceptance PDF render, 2026-09-20
 evidence: private user-provided Clear Writing 055 Case 1 PDF and the producing Codex thread (private material not copied into this public repository). Direct artifact inspection confirms an 8-page A4 PDF produced by XeTeX/xdvipdfmx with embedded TeX Gyre Termes, Noto Serif SC and TeX Gyre Termes Math. The producing thread reports a custom template that assigns `\\LARGE\\bfseries` to the title, `\\small` to explanatory lines, default 10pt to ordinary paragraphs, `\\footnotesize` to blocks classified as `tableline`, and `\\section*` to subheadings.
 problem:
@@ -60,4 +64,4 @@ problem:
 - The real failure therefore sits at the boundary between source-structure interpretation and renderer-level typography QA: a technically successful PDF can still be unacceptable because the renderer invents presentation semantics that were never present in the source.
 project-specific context: the underlying Clear Writing case content and scientific subject matter are private/project-local. The reusable evidence is the unintended size hierarchy, block misclassification, cross-script visual mismatch and the gap between technical render success and coherent typography. This record does not prescribe the future implementation or a single mandatory font/size scheme; those decisions belong to the upcoming Planner/Critic refinement round.
 
-2026-09-22 update: v5.0.7 removes the line-shape/tableline typography route from the canonical renderer path by using Pandoc semantic nodes and a declarative formal-note profile with no ordinary-prose downscaling. The broader qualitative typography responsibility remains active through G3-style complete-artifact review, not a one-time mechanical font check.
+2026-09-25 update: v5.1.2 removes the line-shape/tableline typography route from the canonical renderer path by using Pandoc semantic nodes and a declarative formal-note profile with no ordinary-prose downscaling. The broader qualitative typography responsibility remains active through G3-style complete-artifact review, not a one-time mechanical font check.

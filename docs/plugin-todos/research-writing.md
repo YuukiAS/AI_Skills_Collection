@@ -6,7 +6,8 @@ Canonical maintenance inbox for the `research-writing` plugin.
 
 
 ### Formal research reports can be scientifically correct yet still lack a coherent academic document identity
-status: PARTIALLY_PROMOTED_IN_5.0.8
+status: PARTIALLY_PROMOTED_IN_5.1.2
+tracking: #20
 source: real supervisor / group-meeting research-report rendering, 2026-09-19
 evidence: private user-provided pair of rendered PDFs from the same report (not copied into this public repository); first render 17 pages/A4, second render 24 pages/US Letter; user feedback after the math was repaired: the report was readable and not obviously “wrong”, but still did not feel like a formal research document. Cross-reference: `docs/skill-todos/render-chinese-math-pdf.md` records the lower-level renderer/math/font failures from the same real use.
 problem:
@@ -22,6 +23,7 @@ project-specific context: the report’s scientific topic, methods, datasets, re
 
 ### Keep research authoring separate from the generic language layer
 status: READY_FOR_PROMOTION
+tracking: #21
 source: cross-plugin boundary audit after 050 + Distributed Imaging advisor-report revision, 2026-09-05
 evidence: `docs/design/READER_FACING_COMMUNICATION_PLUGIN_BOUNDARIES.md`; Distributed Imaging report v2; existing `research-reporting` and paper/literature aggregates
 target layer: routing/planning/qa
@@ -37,6 +39,7 @@ promotion gate: do not treat the display-name separation as resolving this respo
 
 ### Reader-first advisor report rewriting must change the document plan, not just the wording
 status: READY_FOR_PROMOTION
+tracking: #22
 source: Distributed_Imaging_Inference group-meeting report v1 failure; earlier Deep Research Chinese rewrite; TRACE v8→v9 reviewer feedback
 evidence: `Distributed_Imaging_Inference/deliverables/group_meeting_2026-09-05/group_meeting_report_v1.md`; human-approved rewrite `共享预训练医学分割模型_极低通信联邦适应_说人话重写版.md`; `TRACE/presentations/group_meetings/2026-07-29/REVISION_CONSTRAINTS.md`
 target layer: planning/prose/qa
@@ -64,6 +67,7 @@ project-specific context: CARE/M&Ms、91/59与91/30/29、DGST、FedFisher、pFLF
 
 ### Meaning-first rewriting should be a reusable transformation pattern
 status: READY_FOR_PROMOTION
+tracking: #23
 source: successful manual Deep Research rewrite + TRACE v8→v9 language review
 evidence: `共享预训练医学分割模型_极低通信联邦适应_说人话重写版.md`; TRACE v9 revision evidence
  target layer: planning/prose
@@ -78,6 +82,7 @@ promotion_gate: replay on one additional long-form scientific report and one adv
 
 ### Cross-project replay of advisor-facing report rules
 status: CANDIDATE_GENERIC
+tracking: #24
 source: Distributed_Imaging_Inference group-meeting report revision
 evidence: `docs/provenance/RESEARCH_GROUP_MEETING_WRITING_REVIEW_2026_08_29.md`, `skills/writing/research/research-reporting/SKILL.md`, `references/group-meeting-advisor-reports.md`
 target layer: writing/qa
@@ -87,6 +92,7 @@ promotion_gate: at least one additional independent real report; protect current
 
 ### Distinguish research-document semantics from comparison/render packaging
 status: CANDIDATE_GENERIC
+tracking: #25
 source: ongoing real research-report use; Clear Writing 055 final user-acceptance comparison failure, 2026-09-17
 evidence: `research-reporting` already delegates low-level artifact mechanics; Clear Writing 055 then produced multiple unusable Original-vs-C6 acceptance artifacts because long-form scientific content was mechanically chunked into misaligned pages and citation/report/gate material was not separated by domain semantics. The generic packaging follow-up is recorded separately in `docs/plugin-todos/workflow-core.md`.
 target layer: research-document planning/qa boundary with workflow-core and artifact/presentation rendering
@@ -105,6 +111,7 @@ promotion_gate: **do not modify the already-reviewed 056 architecture or impleme
 
 ### Advisor/group-meeting reports need method and dataset orientation before project-specific results
 status: NEW
+tracking: #26
 source: Distributed_Imaging_Inference / Supervisor Bridge MOSAiC group-meeting report revision, 2026-09-19
 evidence: DII \`docs/results/SUPERVISOR_BRIDGE_GROUP_MEETING_PRELIMINARY_2026-09-19.md\`; user feedback that an advisor-facing report was not self-contained because it moved too quickly into project execution and omitted a clear explanation of MOSAiC and the two datasets.
 target layer: research-reporting planning / audience model
@@ -119,6 +126,7 @@ promotion_gate: replay on one additional advisor/group-meeting report involving 
 
 ### Advisor-facing research reports should suppress execution/runtime details unless they change the scientific interpretation
 status: NEW
+tracking: #27
 source: Distributed_Imaging_Inference / Supervisor Bridge preliminary group-meeting report revision, 2026-09-19
 evidence: user rejected a report section explaining why a Longleaf run took longer than estimated; the runtime explanation was useful for internal planning but irrelevant to the advisor-facing scientific discussion.
 target layer: research-reporting inclusion/exclusion planning
@@ -133,6 +141,7 @@ promotion_gate: replay on the next long-running computational research project a
 
 ### Bilingual advisor reports should be two audience-calibrated versions, not interleaved translation
 status: NEW
+tracking: #28
 source: Distributed_Imaging_Inference / recurring user preference for group-meeting reports, reinforced 2026-09-19
 evidence: DII \`docs/results/SUPERVISOR_BRIDGE_GROUP_MEETING_PRELIMINARY_2026-09-19.md\`; user explicitly requested English in the first half for the advisor and Chinese in the second half for personal preparation.
 target layer: research-reporting document architecture

@@ -1,0 +1,30 @@
+{
+  "checks": {
+    "changelog_5_1_2_section": true,
+    "changelog_preserves_5_1_0": true,
+    "changelog_preserves_5_1_1": true,
+    "presentations_is_0_3_no_bump": true,
+    "readme_repository_5_1_2": true,
+    "readme_research_authoring_0_2": true,
+    "registry_is_5_1_2": true,
+    "research_writing_is_0_2": true,
+    "version_is_5_1_2": true
+  },
+  "ok": true,
+  "plugins": {
+    "ai-skills-core": "0.4",
+    "bioinformatics": "0.1",
+    "medical-imaging": "0.1",
+    "presentations": "0.3",
+    "research-writing": "0.2",
+    "scientific-visualization": "0.1",
+    "statistical-modeling": "0.1",
+    "web-development": "0.2",
+    "workflow-core": "0.4",
+    "writing-style": "0.3"
+  },
+  "presentations_version": "0.3",
+  "registry_version": "5.1.2",
+  "repository_version": "5.1.2",
+  "research_writing_version": "0.2"
+}
