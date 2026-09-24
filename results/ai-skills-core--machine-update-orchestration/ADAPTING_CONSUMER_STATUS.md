@@ -58,7 +58,9 @@ No remaining consumer may be marked PASS merely because `Workstation` passed.
 N/A requires a frozen durable reason.
 
 Pending consumer-specific stubs now live under `consumers/`; they are
-durable placeholders only and do not prove PASS.
+durable placeholders only and do not prove PASS. Exact bounded prompts for
+executing each remaining consumer are recorded in
+`ADAPTING_CONSUMER_HANDOFF.md`.
 
 ## Next Handoff
 

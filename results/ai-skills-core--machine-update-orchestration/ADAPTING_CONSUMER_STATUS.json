@@ -32,7 +32,8 @@
       "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer; update consumers/Longleaf_Codex_PENDING.md with the durable result.",
       "pending_evidence": [
         "consumers/Longleaf_Codex_PENDING.md"
-      ]
+      ],
+      "handoff_packet": "ADAPTING_CONSUMER_HANDOFF.md"
     },
     {
       "name": "Longleaf_Backup_Codex",
@@ -41,7 +42,8 @@
       "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer; update consumers/Longleaf_Backup_Codex_PENDING.md with the durable result.",
       "pending_evidence": [
         "consumers/Longleaf_Backup_Codex_PENDING.md"
-      ]
+      ],
+      "handoff_packet": "ADAPTING_CONSUMER_HANDOFF.md"
     },
     {
       "name": "CUHK_Workstation_WSL_Codex",
@@ -50,7 +52,8 @@
       "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer; update consumers/CUHK_Workstation_WSL_Codex_PENDING.md with the durable result.",
       "pending_evidence": [
         "consumers/CUHK_Workstation_WSL_Codex_PENDING.md"
-      ]
+      ],
+      "handoff_packet": "ADAPTING_CONSUMER_HANDOFF.md"
     },
     {
       "name": "Legion",
@@ -59,7 +62,8 @@
       "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer; update consumers/Legion_PENDING.md with the durable result.",
       "pending_evidence": [
         "consumers/Legion_PENDING.md"
-      ]
+      ],
+      "handoff_packet": "ADAPTING_CONSUMER_HANDOFF.md"
     }
   ],
   "done_guard": {
@@ -68,5 +72,6 @@
     "issue_must_remain_open": true,
     "project_status_must_remain": "ADAPTING"
   },
-  "next_handoff": "CONSUMER_ADAPTATION_REQUIRED"
+  "next_handoff": "CONSUMER_ADAPTATION_REQUIRED",
+  "consumer_handoff": "ADAPTING_CONSUMER_HANDOFF.md"
 }
