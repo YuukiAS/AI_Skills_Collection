@@ -278,6 +278,22 @@ Affected plugins:
 
 maintenance TODO / changelog /历史记录不应进入普通 generated plugin runtime payload。
 
+### 5.1 AI Skills 维护看板
+
+AI_Skills TODO / Planner / Critic / adaptation / closure 工作必须读取：
+
+```text
+docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md
+```
+
+canonical plugin / standalone-skill TODO 继续保存真实问题、证据和 maturity；GitHub Project `AI Skills Maintenance` 保存执行生命周期。进入 tracking scope 后，同一 maintenance action 必须 create / bind / reuse tracking Issue，并在 canonical source entry 回写或更新 `tracking: #N`。Project Status 不得回写 Markdown。
+
+Codex 不等用户提醒才同步看板。若当前 surface 不能修改 GitHub Project，应输出 exact pending Project mutation；不得要求用户手工拖 Kanban 或手工补 locator，也不得声称已同步。
+
+任何 reader-facing tracking Issue / Project copy 在 GitHub mutation 前必须真实调用当前安装的 Clear Writing（`writing-style`）。Clear Writing 只能改善表达，不能改变 maturity、Project Status、Area、`tracking: #N`、consumer truth、exact locator、Resolution commit 或 evidence meaning。
+
+central implementation complete 不等于 machine-consumed workflow 的最终 DONE。需要 downstream consumer adaptation 时，Project 进入 `ADAPTING`；最终 `DONE` 只能按 canonical board policy 完整关闭。
+
 ## 6. Generated layer
 
 以下是生成层，不手改：

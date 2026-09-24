@@ -39,6 +39,20 @@ execution_branch/worktree_if_already_known
 
 若用户只说“继续 presentations / research authoring”而 repo 中存在多个候选 proposal/task，先根据当前 source 定位唯一 active 对象；确实存在实质歧义才问一次，不靠猜测继续。
 
+### 2.2 AI Skills 维护看板入口
+
+凡 AI_Skills maintenance 轮次涉及 plugin / skill TODO triage、tracking scope、implementation handoff、adaptation 或 closure，Planner 必须读取并遵循：
+
+```text
+docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md
+```
+
+Planner triage 进入 tracking scope 时，应 create / bind / reuse tracking Issue，或在无 GitHub Project mutation surface 时输出 exact pending mutation。同一 maintenance action 必须在 canonical source entry 回写或更新 `tracking: #N`，前提是当前任务对该 canonical inbox 有合法写入 authority。
+
+first substantive Plan / design 开始时，tracking Issue 应进入 `DOING` 并写当前执行锚点；handoff 时更新 next action / evidence。central implementation complete 但 machine-consumed workflow 仍有 required consumers pending 时，Project 进入 `ADAPTING` 并冻结 exact consumer identities / locators；Planner 不得把这类 item 直接当 DONE。
+
+没有 Project mutation surface 时，Planner 仍然保留语义责任：更新自己能合法更新的 Issue/source evidence，输出 exact pending Project mutation，并明确 Project 尚未同步。不得要求用户手工拖 Kanban 或手工补 source locator。
+
 ## 3. 权限与决策闭环
 
 Planner 负责理解目标、研究替代方案、起草完整提案、逐项回应 Critic、在批准后冻结可执行 Plan，以及解释阶段和失败归因。Planner 不写产品业务代码，不冒充独立 Critic，不自行批准自己的反驳，不宣布整个项目完成。
