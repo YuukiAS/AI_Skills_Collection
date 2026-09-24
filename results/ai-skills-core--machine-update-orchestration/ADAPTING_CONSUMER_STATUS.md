@@ -23,10 +23,10 @@ durable evidence before it can be marked PASS or N/A.
 | Consumer | Status | Current identity / locator | Required next evidence | Durable evidence |
 |---|---|---|---|---|
 | `Workstation` | `PASS` | hostname `Workstation`; WSL2; user `yuukias`; `CODEX_HOME=/home/yuukias/.codex` | none for this consumer unless future release changes scope | `ADAPTING_CONSUMER_EVIDENCE.md`; `G2_POST_REVIEW_PROMOTION_EVIDENCE.md`; `g2_released_smoke/released_normal_entry_run.json` |
-| `Longleaf_Codex` | `PENDING_CONSUMER_AUTHORITY` | unknown in this task; not inferred | bounded access to that consumer; discover identity; inspect Marketplace/plugin state; migrate/reinstall if needed; production normal-entry smoke | pending; use `ADAPTING_CONSUMER_RUNBOOK.md` |
-| `Longleaf_Backup_Codex` | `PENDING_CONSUMER_AUTHORITY` | unknown in this task; not inferred | bounded access to that consumer; discover identity; inspect Marketplace/plugin state; migrate/reinstall if needed; production normal-entry smoke | pending; use `ADAPTING_CONSUMER_RUNBOOK.md` |
-| `CUHK_Workstation_WSL_Codex` | `PENDING_CONSUMER_AUTHORITY` | unknown in this task; not inferred | bounded access to that consumer; discover identity; inspect Marketplace/plugin state; migrate/reinstall if needed; production normal-entry smoke | pending; use `ADAPTING_CONSUMER_RUNBOOK.md` |
-| `Legion` | `PENDING_CONSUMER_AUTHORITY` | unknown in this task; not inferred | bounded access to that consumer; discover identity; inspect Marketplace/plugin state; migrate/reinstall if needed; production normal-entry smoke | pending; use `ADAPTING_CONSUMER_RUNBOOK.md` |
+| `Longleaf_Codex` | `PENDING_CONSUMER_AUTHORITY` | unknown in this task; not inferred | bounded access to that consumer; discover identity; inspect Marketplace/plugin state; migrate/reinstall if needed; production normal-entry smoke | `consumers/Longleaf_Codex_PENDING.md`; then update with runbook result |
+| `Longleaf_Backup_Codex` | `PENDING_CONSUMER_AUTHORITY` | unknown in this task; not inferred | bounded access to that consumer; discover identity; inspect Marketplace/plugin state; migrate/reinstall if needed; production normal-entry smoke | `consumers/Longleaf_Backup_Codex_PENDING.md`; then update with runbook result |
+| `CUHK_Workstation_WSL_Codex` | `PENDING_CONSUMER_AUTHORITY` | unknown in this task; not inferred | bounded access to that consumer; discover identity; inspect Marketplace/plugin state; migrate/reinstall if needed; production normal-entry smoke | `consumers/CUHK_Workstation_WSL_Codex_PENDING.md`; then update with runbook result |
+| `Legion` | `PENDING_CONSUMER_AUTHORITY` | unknown in this task; not inferred | bounded access to that consumer; discover identity; inspect Marketplace/plugin state; migrate/reinstall if needed; production normal-entry smoke | `consumers/Legion_PENDING.md`; then update with runbook result |
 
 ## Consumer PASS Requirements
 
@@ -56,6 +56,9 @@ all required consumers PASS/N/A
 
 No remaining consumer may be marked PASS merely because `Workstation` passed.
 N/A requires a frozen durable reason.
+
+Pending consumer-specific stubs now live under `consumers/`; they are
+durable placeholders only and do not prove PASS.
 
 ## Next Handoff
 

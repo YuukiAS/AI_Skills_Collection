@@ -29,25 +29,37 @@
       "name": "Longleaf_Codex",
       "status": "PENDING_CONSUMER_AUTHORITY",
       "identity": null,
-      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer."
+      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer; update consumers/Longleaf_Codex_PENDING.md with the durable result.",
+      "pending_evidence": [
+        "consumers/Longleaf_Codex_PENDING.md"
+      ]
     },
     {
       "name": "Longleaf_Backup_Codex",
       "status": "PENDING_CONSUMER_AUTHORITY",
       "identity": null,
-      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer."
+      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer; update consumers/Longleaf_Backup_Codex_PENDING.md with the durable result.",
+      "pending_evidence": [
+        "consumers/Longleaf_Backup_Codex_PENDING.md"
+      ]
     },
     {
       "name": "CUHK_Workstation_WSL_Codex",
       "status": "PENDING_CONSUMER_AUTHORITY",
       "identity": null,
-      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer."
+      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer; update consumers/CUHK_Workstation_WSL_Codex_PENDING.md with the durable result.",
+      "pending_evidence": [
+        "consumers/CUHK_Workstation_WSL_Codex_PENDING.md"
+      ]
     },
     {
       "name": "Legion",
       "status": "PENDING_CONSUMER_AUTHORITY",
       "identity": null,
-      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer."
+      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer; update consumers/Legion_PENDING.md with the durable result.",
+      "pending_evidence": [
+        "consumers/Legion_PENDING.md"
+      ]
     }
   ],
   "done_guard": {
