@@ -79,6 +79,9 @@ candidate_action:
 - Add an explicit whole-screen composition pass: repeated labels, duplicated CTAs, over-promoted maintenance buttons, unbalanced empty states, panel hierarchy and scrollbar behavior must be reviewed together.
 promotion_gate: validate on Bobbio plus at least one additional desktop/web product before turning the exact checklist into a mandatory generic production gate; the principle that all control states/hierarchy are part of done can be promoted earlier if independent evidence repeats.
 
+
+additional evidence (2026-09-24): Lucerna task 01050 showed sibling status treatments with visibly different chrome for equivalent prominence (for example a plain Installed state beside a pill-backed NORMAL state), plus setup forms and maintenance controls that were individually functional but visually accumulated rather than composed as one system.
+
 ### External review should confirm quality, not discover obvious local P2 defects
 status: NEW
 source: Bobbio repeated native GPT Work repair cycles, 2026-09-14
@@ -93,6 +96,9 @@ candidate_action:
 - Prefer deterministic assertions and fail-closed capture helpers for known state prerequisites; do not generate nominally “healthy” evidence when the required native state was not reached.
 - Use external reviewers for independent product judgment and blind spots after local QA, not for routine defect discovery that can be settled by local screenshots, recordings, performance traces, or state assertions.
 promotion_gate: replay this workflow on Bobbio 0.3 and at least one additional UI-heavy project; if it reduces external review loops without lowering quality, promote it into the Frontend Design production review workflow.
+
+
+additional evidence (2026-09-24): Lucerna task 01050 reached a screenshot handoff with obvious full-screen hierarchy, density, collapse-state and copy problems that the producer could have found by inspecting its own native screenshots. The user again became the first-line visual reviewer. This is independent evidence beyond Bobbio for the same failure mode.
 
 ### Freeze whole-screen visual direction before implementation polish
 status: NEW
@@ -111,6 +117,9 @@ candidate_action:
 - External review should happen only after the producer can defend every visible shape/control: why it exists, why it has that visual weight, and why neighboring controls differ. If the answer is “because that was the easiest CSS/markup,” the screen is not review-ready.
 - Add an explicit ban on using the user as iterative visual QA. The product team/agent must perform the full-screen design pass first; user review is for final taste/product judgment, not discovering arbitrary circles, inconsistent siblings, repeated CTAs, or basic spacing mistakes.
 promotion_gate: treat this as immediately applicable to Bobbio; validate on at least one additional UI-heavy project before promoting the exact checklist into the generic Frontend Design production contract. The underlying principle—freeze whole-screen visual direction before code polish and never use the user as first-line art direction—should be considered high-priority for promotion.
+
+
+additional evidence (2026-09-24): Lucerna task 01050 independently reproduced the same whole-product failure: locally repaired cards, status chips, setup forms, diagnostics and extension panels remained visually inconsistent and over-expanded despite passing implementation gates. This supplies the additional UI-heavy project evidence requested by the original promotion gate; central Planner should now reassess whether the principle is ready for generic promotion rather than creating another near-duplicate rule.
 
 ### Canonical design artifacts must gate production implementation
 status: NEW
@@ -210,6 +219,9 @@ evidence: user-provided release screenshots where healthy/usable Longleaf status
 problem: The interface promoted diagnostic and maintenance information merely because it existed. Routine status, actionable exceptions, recovery tools, scheduler diagnostics and extensions were not separated by user need, so the compact utility became an operations dashboard that increased cognitive load during normal use.
 project-specific context: Lucerna specifically wants recovery, diagnostics and optional extensions under a collapsed bottom area. Other products may choose different placement, but the generic issue is that low-frequency maintenance tooling should not compete with the primary task unless it is currently actionable.
 
+
+additional evidence (2026-09-24): Lucerna task 01050 release screenshots again showed healthy/configured OpenAI, recovery, Overleaf and Zotero setup/maintenance surfaces expanded directly in the normal scroll flow. Already-configured balance and credential inputs remained visible even when no action was needed. The user explicitly rejected this as a software-product hierarchy failure rather than a copy-only defect.
+
 ### Metric labels and rankings must be backed by the data semantics they imply
 status: NEW
 source: Lucerna GitHub Actions resource review, 2026-09-17
@@ -244,6 +256,28 @@ source: Lucerna titlebar-close false-positive acceptance, 2026-09-17
 evidence: `YuukiAS/Lucerna@461dcea4015434f90d50922d9b7ae054286c98bc` reported physical close PASS from a coordinate-based smoke because the window became hidden, while the user still could not close the release by clicking the visible X; the app also had focus-loss/outside-click hide routes that could satisfy the same final-state assertion
 problem: The black-box test verified an outcome (`window hidden`) but not its cause (`the visible X received real pointer input and triggered the canonical close path`). Multiple valid hide routes allowed a false positive to pass and prematurely moved the product to user acceptance.
 project-specific context: Lucerna's hide-to-tray titlebar control and exact coordinates are project-specific. The reusable frontend QA issue is that interaction acceptance should identify the actual rendered hit target and, when competing routes can produce the same final state, prove the intended control/event path rather than infer causality from the outcome alone.
+
+
+### Configured surfaces must collapse from setup mode to status mode
+status: NEW
+source: Lucerna task 01050 OpenAI attribution/UI closure, 2026-09-24
+evidence: private-project release screenshot set reviewed by the user after OpenAI setup was already live; the normal panel still exposed current-balance editing, Admin API key replacement, connection maintenance, recovery details and other setup-oriented controls inline
+problem: The frontend treated configuration controls as permanent content instead of lifecycle-specific UI. A completed setup continued to look like an onboarding/admin form, forcing routine users to scan edit fields and maintenance actions that matter only when changing configuration or recovering from failure.
+project-specific context: OpenAI Admin keys, Lucerna balance calibration, Overleaf paper setup and Zotero first sync are Lucerna-specific. The reusable issue is progressive disclosure by lifecycle: healthy/configured state should present a compact summary and an explicit edit/manage affordance; setup forms, credential replacement, diagnostics and repair controls should expand only when needed.
+
+### Typography governance must define semantic roles and hierarchy, not only token values
+status: NEW
+source: Lucerna task 01050 full-panel visual review, 2026-09-24
+evidence: the project already had typography/token cleanup work, yet the release surface still mixed headings, metric labels, status text, explanatory prose, form labels and maintenance copy without a sufficiently clear product-wide hierarchy
+problem: Merely having font-size/weight variables does not produce a coherent interface. Frontend Design needs a role-level typography contract that defines which reader-facing roles exist, how they relate, where each role may appear, and how hierarchy is checked across a complete screen. Otherwise components can all use “approved tokens” and still look unrelated.
+project-specific context: Lucerna's exact type sizes and compact tray density are project-local. The reusable issue is semantic typography roles and whole-screen enforcement, not a universal numeric scale.
+
+### Status chrome must follow one coherent visual grammar
+status: NEW
+source: Lucerna task 01050 full-panel visual review, 2026-09-24
+evidence: equivalent high-level states were presented with inconsistent container treatment, including plain text states alongside pill-backed/bordered states at comparable hierarchy levels
+problem: A product cannot use background fills, pills, borders and bare labels arbitrarily for sibling status semantics. The inconsistency makes visual weight reflect implementation history instead of meaning and makes the interface look assembled component-by-component rather than designed as one system.
+project-specific context: Lucerna's Installed, Normal, Checking, Ready and other labels are project-specific. The reusable issue is to freeze status-component families by semantic role and severity, then require sibling-state comparison during full-screen review.
 
 ## Watch boundaries
 
