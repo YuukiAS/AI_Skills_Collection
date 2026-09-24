@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "task_key": "documents-media--scientific-pdf-rendering-reliability",
+  "authorized_by": "current user message in this Codex task",
+  "authorized_at_local": "2026-09-24",
+  "scope": "one G5 normal Research Authoring replay only",
+  "allowed": [
+    "current prepared synthetic/public-safe G5 input",
+    "current Codex identity/provider",
+    "bounded fresh child replay to prove research-main / Research Authoring normal entry consumes renderer"
+  ],
+  "forbidden": [
+    "other private data",
+    "copying or reading new credentials",
+    "paid API or Terra calls",
+    "live production identity mutation",
+    "Host Policy mutation",
+    "scope expansion",
+    "main merge or release integration",
+    "final PASS claim"
+  ],
+  "candidate_commit_replayed": "8f7c11d686f81862f6fa132f6073c272ff68380b"
+}

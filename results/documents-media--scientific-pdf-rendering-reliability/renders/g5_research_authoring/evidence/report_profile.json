@@ -1,0 +1,19 @@
+{
+  "id": "advisor-formal-note-12pt-1.5",
+  "description": "Formal advisor report with readable multi-page layout required by supplied source.",
+  "authority": "project-request",
+  "engine": "pandoc-ast-to-latex-xelatex",
+  "paper": "a4",
+  "fontsize": "12pt",
+  "margin": "25mm",
+  "linestretch": "1.5",
+  "toc": false,
+  "number_sections": false,
+  "ordinary_prose_downscaling": false,
+  "fonts": {
+    "latin_main": "TeX Gyre Termes",
+    "math": "TeX Gyre Termes Math",
+    "cjk_serif": "Noto Serif SC",
+    "cjk_sans": "Noto Sans SC"
+  }
+}

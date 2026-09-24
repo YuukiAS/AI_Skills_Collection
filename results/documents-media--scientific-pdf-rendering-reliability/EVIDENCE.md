@@ -143,7 +143,12 @@ Deterministic recovery gates completed:
 
 G5 normal Research Authoring entry replay:
 
-- status: `NOT_TESTED`
-- reason: running the pinned Codex child replay with current Codex identity was rejected by Auto-review as an external model action that requires current explicit user authorization for this specific data/provider/purpose. The subsequent interactive authorization prompt returned an empty answer, which is not consent under repository policy.
-- pre-request evidence: both failed child invocations exited before model output or requested artifact generation; `outputs/` remained empty.
-- recovery: rerun the same isolated `research-main` G5 replay only after explicit user authorization for the synthetic/public-safe G5 input, current Codex identity/provider, and one bounded child replay for this task.
+- status: `PARTIAL_NOT_CLOSED`
+- replay authorization: current user authorized exactly one bounded G5 normal Research Authoring replay on 2026-09-24, limited to the prepared synthetic/public-safe input, current Codex identity/provider, and no private data, credential copy/new credential reads, paid API/Terra, live production identity mutation, Host Policy mutation, main merge, release integration, or final PASS claim.
+- candidate replayed: `8f7c11d686f81862f6fa132f6073c272ff68380b`
+- installed profile: `research-main` was installed into the clean task-local replay project with `install_kind: profile:research-main`, `collection_commit: 8f7c11d686f81862f6fa132f6073c272ff68380b`, and `active_skill_count: 19`.
+- natural request/source: `renders/g5_research_authoring/request.md` and `renders/g5_research_authoring/source.md`.
+- renderer evidence: the fresh child replay read the installed PDF/render skills, executed `.agents/skills/tools-documents-media-render-chinese-math-pdf/scripts/render_scientific_pdf.py`, and produced `renders/g5_research_authoring/advisor_report.pdf`.
+- PDF QA: `renders/g5_research_authoring/evidence/render_receipt.json` records `status: complete`, `route: canonical-markdown`, `pages: 2`, `qa.errors: []`, and all-page previews at `renders/g5_research_authoring/previews/advisor_report-1.png` and `renders/g5_research_authoring/previews/advisor_report-2.png`; `renders/g5_research_authoring/evidence/validation.json` records exact display-equation/table/interpretation checks.
+- consumption finding: `research-reporting` was present in the installed `research-main` routing table, but the child replay did not actually read/use `.agents/skills/writing-research-research-reporting/SKILL.md`. The compact evidence is `renders/g5_research_authoring/evidence/consumption_summary.json`.
+- conclusion: this closes the proof that the normal child replay can consume the canonical renderer and produce a complete multi-page PDF, but it does **not** close the full G5 requirement because actual `research-reporting` consumption is missing. Treat this as a normal-entry routing gap requiring Planner/repair before any final PASS.

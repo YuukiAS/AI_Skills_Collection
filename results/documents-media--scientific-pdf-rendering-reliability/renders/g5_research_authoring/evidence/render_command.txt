@@ -1,0 +1,1 @@
+python .agents/skills/tools-documents-media-render-chinese-math-pdf/scripts/render_scientific_pdf.py outputs/advisor_report.md outputs/advisor_report.pdf --root . --profile outputs/evidence/report_profile.json --work-dir outputs/evidence/build --preview-dir outputs/evidence/previews --preview-pages all --receipt outputs/evidence/render_receipt.json

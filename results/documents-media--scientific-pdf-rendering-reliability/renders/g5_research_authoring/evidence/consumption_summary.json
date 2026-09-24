@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "task_key": "documents-media--scientific-pdf-rendering-reliability",
+  "g5_replay": {
+    "authorized_scope": "one bounded fresh child replay; synthetic/public-safe G5 inputs; current Codex identity/provider; no private data, no credential copy/new credential reads, no paid API/Terra, no live production identity/Host Policy/scope expansion",
+    "child_thread_id": "01a0d36d-fc31-7301-af4c-3f3087be978d",
+    "stdout_jsonl_sha256": "c9344ddbea43a2b77ddc03e9513a32e71c8c0f3399cd4f5a073640574d10eadb",
+    "stdout_jsonl_line_count": 35,
+    "stdout_jsonl_local_path": ".local-runtime/g5-research-main-replay/evidence/child.stdout.jsonl",
+    "stderr_note": "child exited 0; nonfatal -o last_message path write failed because ../evidence was relative to child project"
+  },
+  "installation": {
+    "install_kind": "profile:research-main",
+    "collection_commit": "8f7c11d686f81862f6fa132f6073c272ff68380b",
+    "project_path": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay/project",
+    "active_skill_count": 19,
+    "research_reporting_present_in_routing": true
+  },
+  "consumption_findings": {
+    "routing_table_research_reporting": [
+      {
+        "line": 11,
+        "item_id": "item_4",
+        "item_type": "command_execution",
+        "status": "completed",
+        "exit_code": 0,
+        "command": "/bin/bash -lc 'cat AGENTS.md'"
+      }
+    ],
+    "actual_research_reporting_skill_read": [],
+    "actual_research_reporting_consumed": false,
+    "renderer_skill_read": [
+      {
+        "line": 8,
+        "item_id": "item_3",
+        "item_type": "command_execution",
+        "status": "in_progress",
+        "exit_code": null,
+        "command": "/bin/bash -lc 'cat .agents/skills/tools-documents-media-pdf/SKILL.md .agents/skills/tools-documents-media-render-chinese-math-pdf/SKILL.md .agents/skills/writing-core-writing-fidelity/SKILL.md .agents/skills/writing-core-scientific-prose/SKILL.md .agents/skills/writing-core-chinese-prose/SKILL.md'"
+      },
+      {
+        "line": 9,
+        "item_id": "item_3",
+        "item_type": "command_execution",
+        "status": "completed",
+        "exit_code": 0,
+        "command": "/bin/bash -lc 'cat .agents/skills/tools-documents-media-pdf/SKILL.md .agents/skills/tools-documents-media-render-chinese-math-pdf/SKILL.md .agents/skills/writing-core-writing-fidelity/SKILL.md .agents/skills/writing-core-scientific-prose/SKILL.md .agents/skills/writing-core-chinese-prose/SKILL.md'"
+      },
+      {
+        "line": 11,
+        "item_id": "item_4",
+        "item_type": "command_execution",
+        "status": "completed",
+        "exit_code": 0,
+        "command": "/bin/bash -lc 'cat AGENTS.md'"
+      }
+    ],
+    "renderer_script_execution": [
+      {
+        "line": 9,
+        "item_id": "item_3",
+        "item_type": "command_execution",
+        "status": "completed",
+        "exit_code": 0,
+        "command": "/bin/bash -lc 'cat .agents/skills/tools-documents-media-pdf/SKILL.md .agents/skills/tools-documents-media-render-chinese-math-pdf/SKILL.md .agents/skills/writing-core-writing-fidelity/SKILL.md .agents/skills/writing-core-scientific-prose/SKILL.md .agents/skills/writing-core-chinese-prose/SKILL.md'"
+      },
+      {
+        "line": 16,
+        "item_id": "item_7",
+        "item_type": "command_execution",
+        "status": "completed",
+        "exit_code": 0,
+        "command": "/bin/bash -lc \"rg --files -g '*render*pdf*' -g '*formal*json' -g '*probe*pdf*' -g '*validate*pdf*' .agents /tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/scripts | head -45\""
+      },
+      {
+        "line": 19,
+        "item_id": "item_9",
+        "item_type": "command_execution",
+        "status": "in_progress",
+        "exit_code": null,
+        "command": "/bin/bash -lc 'cat .agents/skills/tools-documents-media-render-chinese-math-pdf/profiles/canonical_formal_note.json && python .agents/skills/tools-documents-media-render-chinese-math-pdf/scripts/render_scientific_pdf.py --help'"
+      },
+      {
+        "line": 20,
+        "item_id": "item_9",
+        "item_type": "command_execution",
+        "status": "completed",
+        "exit_code": 0,
+        "command": "/bin/bash -lc 'cat .agents/skills/tools-documents-media-render-chinese-math-pdf/profiles/canonical_formal_note.json && python .agents/skills/tools-documents-media-render-chinese-math-pdf/scripts/render_scientific_pdf.py --help'"
+      },
+      {
+        "line": 21,
+        "item_id": "item_10",
+        "item_type": "command_execution",
+        "status": "in_progress",
+        "exit_code": null,
+        "command": "/bin/bash -lc \"mkdir -p outputs/evidence\npython - <<'PY'\nfrom pathlib import Path\ns=Path('inputs/source.md').read_text()\nbody, formatting=s.split('## Formatting Requirements For This Replay',1)\nbody=body.replace('# Advisor-Facing Formal PDF Source','# Regularized Regression as a Candidate Baseline',1)\nbody=body.replace('We want a concise formal note that helps an advisor decide whether a simple\\\\nregularized model is a reasonable baseline before a larger experiment. The\\\\nsource is synthetic and public-safe, but it is structured like a real internal\\\\nresearch note: it contains a question, assumptions, equations, a compact table,\\\\ninterpretation, and a bounded next-step recommendation.', 'Is a simple regularized model a reasonable baseline before a larger\\\\nexperiment? This note considers a synthetic, public-safe prediction example\\\\nto support a narrow decision about the next comparison set.')\nPath('outputs/advisor_report.md').write_text(body.rstrip()+'\\\\n')\nPath('outputs/evidence/source_formatting_requirements.md').write_text('## Formatting Requirements For This Replay'+formatting)\nPY\npython .agents/skills/tools-documents-media-render-chinese-math-pdf/scripts/render_scientific_pdf.py outputs/advisor_report.md outputs/advisor_report.pdf --root . --work-dir outputs/evidence/build --preview-dir outputs/evidence/previews --preview-pages all --receipt outputs/evidence/render_receipt.json\""
+      }
+    ],
+    "render_receipt_written_or_read": [
+      {
+        "line": 21,
+        "item_id": "item_10",
+        "item_type": "command_execution",
+        "status": "in_progress",
+        "exit_code": null,
+        "command": "/bin/bash -lc \"mkdir -p outputs/evidence\npython - <<'PY'\nfrom pathlib import Path\ns=Path('inputs/source.md').read_text()\nbody, formatting=s.split('## Formatting Requirements For This Replay',1)\nbody=body.replace('# Advisor-Facing Formal PDF Source','# Regularized Regression as a Candidate Baseline',1)\nbody=body.replace('We want a concise formal note that helps an advisor decide whether a simple\\\\nregularized model is a reasonable baseline before a larger experiment. The\\\\nsource is synthetic and public-safe, but it is structured like a real internal\\\\nresearch note: it contains a question, assumptions, equations, a compact table,\\\\ninterpretation, and a bounded next-step recommendation.', 'Is a simple regularized model a reasonable baseline before a larger\\\\nexperiment? This note considers a synthetic, public-safe prediction example\\\\nto support a narrow decision about the next comparison set.')\nPath('outputs/advisor_report.md').write_text(body.rstrip()+'\\\\n')\nPath('outputs/evidence/source_formatting_requirements.md').write_text('## Formatting Requirements For This Replay'+formatting)\nPY\npython .agents/skills/tools-documents-media-render-chinese-math-pdf/scripts/render_scientific_pdf.py outputs/advisor_report.md outputs/advisor_report.pdf --root . --work-dir outputs/evidence/build --preview-dir outputs/evidence/previews --preview-pages all --receipt outputs/evidence/render_receipt.json\""
+      },
+      {
+        "line": 22,
+        "item_id": "item_10",
+        "item_type": "command_execution",
+        "status": "completed",
+        "exit_code": 0,
+        "command": "/bin/bash -lc \"mkdir -p outputs/evidence\npython - <<'PY'\nfrom pathlib import Path\ns=Path('inputs/source.md').read_text()\nbody, formatting=s.split('## Formatting Requirements For This Replay',1)\nbody=body.replace('# Advisor-Facing Formal PDF Source','# Regularized Regression as a Candidate Baseline',1)\nbody=body.replace('We want a concise formal note that helps an advisor decide whether a simple\\\\nregularized model is a reasonable baseline before a larger experiment. The\\\\nsource is synthetic and public-safe, but it is structured like a real internal\\\\nresearch note: it contains a question, assumptions, equations, a compact table,\\\\ninterpretation, and a bounded next-step recommendation.', 'Is a simple regularized model a reasonable baseline before a larger\\\\nexperiment? This note considers a synthetic, public-safe prediction example\\\\nto support a narrow decision about the next comparison set.')\nPath('outputs/advisor_report.md').write_text(body.rstrip()+'\\\\n')\nPath('outputs/evidence/source_formatting_requirements.md').write_text('## Formatting Requirements For This Replay'+formatting)\nPY\npython .agents/skills/tools-documents-media-render-chinese-math-pdf/scripts/render_scientific_pdf.py outputs/advisor_report.md outputs/advisor_report.pdf --root . --work-dir outputs/evidence/build --preview-dir outputs/evidence/previews --preview-pages all --receipt outputs/evidence/render_receipt.json\""
+      },
+      {
+        "line": 23,
+        "item_id": "item_11",
+        "item_type": "command_execution",
+        "status": "in_progress",
+        "exit_code": null,
+        "command": "/bin/bash -lc 'cat outputs/evidence/render_receipt.json'"
+      },
+      {
+        "line": 24,
+        "item_id": "item_11",
+        "item_type": "command_execution",
+        "status": "completed",
+        "exit_code": 0,
+        "command": "/bin/bash -lc 'cat outputs/evidence/render_receipt.json'"
+      },
+      {
+        "line": 26,
+        "item_id": "item_12",
+        "item_type": "command_execution",
+        "status": "completed",
+        "exit_code": 0,
+        "command": "/bin/bash -lc 'rg --files outputs && pdftotext -layout outputs/advisor_report.pdf outputs/evidence/pdf_text.txt && cat outputs/evidence/pdf_text.txt'"
+      }
+    ],
+    "renderer_consumed": true
+  },
+  "pdf_result": {
+    "status": "complete",
+    "route": "canonical-markdown",
+    "effective_profile": {
+      "authority": "canonical-default",
+      "engine": "pandoc-ast-to-latex-xelatex",
+      "fonts": {
+        "cjk_sans": "Noto Sans SC",
+        "cjk_serif": "Noto Serif SC",
+        "latin_main": "TeX Gyre Termes",
+        "math": "TeX Gyre Termes Math"
+      },
+      "fontsize": "12pt",
+      "linestretch": "1.5",
+      "margin": "25mm",
+      "number_sections": false,
+      "ordinary_prose_downscaling": false,
+      "paper": "a4",
+      "profile_id": "advisor-formal-note-12pt-1.5",
+      "resource_dir": "/home/yuukias/render_resources/chinese_math_pdf",
+      "route": "canonical-markdown",
+      "source": "/tmp/ai-skills-documents-media-scientific-pdf-rendering-reliability/.local-runtime/g5-research-main-replay/project/outputs/advisor_report.md",
+      "toc": false
+    },
+    "pages": 2,
+    "qa_errors": [],
+    "preview_paths": [
+      "outputs/evidence/previews/advisor_report-1.png",
+      "outputs/evidence/previews/advisor_report-2.png"
+    ],
+    "validation_status": "complete",
+    "validation_pages": 2,
+    "display_equations_exact_match": 3,
+    "table_exact_match": true
+  },
+  "g5_gate_assessment": "PARTIAL_NOT_CLOSED: normal child replay consumed the renderer and produced a complete multi-page PDF, but did not actually read/use research-reporting SKILL.md; this exposes a normal-entry routing gap rather than closing G5."
+}

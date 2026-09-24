@@ -1,0 +1,23 @@
+{
+  "status": "complete",
+  "pages": 2,
+  "display_equations_exact_match": 3,
+  "table_exact_match": true,
+  "interpretation_and_caveats_exact_match": true,
+  "table_values_extractable": true,
+  "visual_review": {
+    "pages": [
+      1,
+      2
+    ],
+    "result": "Readable equations, intact table rows, no clipping or overlaps; Interpretation begins on page 2."
+  },
+  "editorial_changes": "Scientific headings and English body preserved; title and opening adapted for an advisor. Source formatting instructions and pagination filler retained separately in source_formatting_requirements.md, not inserted into scientific narrative.",
+  "profile_decision": "Initial canonical 11pt/1.15 profile yielded one page. Final project profile uses A4, 25mm margins, 12pt, 1.5 spacing to meet the explicit multi-page requirement without filler or forced page breaks.",
+  "warnings": "Non-fatal TeX package deprecation/load-order warnings recorded in render receipt; no missing glyph or layout errors found.",
+  "sha256": {
+    "inputs/source.md": "f6309dd772600ced586965138a7d7f5fe0c63ef6a54f14aceacab42984b09722",
+    "outputs/advisor_report.md": "d53cb38eb1c0d9c8f2d05ce7302ca027a5e32b2a29b0ad4e427480a193feb56a",
+    "outputs/advisor_report.pdf": "30c48550c05da880ea67a8631d4c64be67776cc583f6239950d53d65fa6de810"
+  }
+}

@@ -1,0 +1,71 @@
+Regularized Regression as a Candidate Baseline
+
+Scientific Question
+
+Is a simple regularized model a reasonable baseline before a larger experiment? This note con-
+siders a synthetic, public-safe prediction example to support a narrow decision about the next
+comparison set.
+
+The running example is a prediction problem with paired observations (𝑥𝑖 , 𝑦𝑖 ), where 𝑥𝑖 ∈ ℝ𝑝
+and 𝑦𝑖 is a continuous endpoint. The baseline estimator solves
+
+
+                                                      𝑛
+                                               1
+                                   𝜃0̂ = argmin ∑(𝑦𝑖 − 𝑥𝑖⊤ 𝜃)2 .
+                                          𝜃∈ℝ 𝑛 𝑖=1
+                                             𝑝
+
+
+
+The regularized candidate uses
+
+
+                                              𝑛
+                            ̂ = argmin ⎡⎢ 1 ∑(𝑦𝑖 − 𝑥𝑖⊤ 𝜃)2 + 𝜆‖𝜃‖22 ⎤⎥ .
+                           𝜃𝜆
+                                 𝜃∈ℝ𝑝 ⎣ 𝑛 𝑖=1                        ⎦
+
+Evidence Design
+
+The comparison is intentionally small. It is meant to check rendering and decision structure, not
+to claim a scientific discovery. We evaluate two synthetic folds, report root mean squared error,
+and inspect whether the regularized model is consistently lower without hiding the uncertainty.
+
+       Fold       Baseline RMSE      Regularized RMSE            Delta    Interpretation
+
+       A                    1.42                          1.18    -0.24   regularization helps
+       B                    1.36                          1.29    -0.07   effect is smaller
+       Mean                 1.39                      1.235      -0.155   promising but limited
+
+
+
+The average reduction is
+
+
+                               1
+                     Δmean =       ∑ (RMSE𝜆,𝑘 − RMSE0,𝑘 ) = −0.155.
+                               2 𝑘∈{𝐴,𝐵}
+
+
+
+
+                                                  1
+Interpretation
+
+The result supports using the regularized model as a conservative baseline in a larger experiment.
+It does not justify a claim that the regularized model is optimal, and it does not distinguish
+whether the improvement comes from variance reduction, implicit feature weighting, or fold-
+specific noise. The advisor decision is therefore narrow: keep the regularized model in the next
+comparison set, but do not make it the final method.
+
+The main caveat is that two folds are not enough to estimate variability. A larger run should
+include at least five folds or repeated random splits, and the report should show the distribution
+of fold-level differences rather than only the mean. If the next run still shows a negative mean
+delta and no severe outlier fold, the method is worth using as the default baseline.
+
+
+
+
+                                                2
+
