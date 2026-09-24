@@ -2,8 +2,9 @@
 
 Task: `repo--maintenance-board-lifecycle`
 Status date: 2026-09-25
-Central `main` tip when this handoff was prepared:
+Pre-cutover `main` tip when this handoff was prepared:
 `1323616c44680a80938fc4778e6f6f18ba5ca408`
+Final published anchor: use the live `origin/main` tip and Issue #4 `当前执行锚点`.
 Tracking Issue: `#4`
 Project: `AI Skills Maintenance`
 Project status after central cutover: `ADAPTING`

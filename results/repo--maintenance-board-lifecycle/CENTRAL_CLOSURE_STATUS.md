@@ -8,8 +8,11 @@ Status date: 2026-09-25
 - Implementation review: `REVIEW_2.md` returned `PASS`.
 - Main integration: reviewed maintenance board changes are on `main`.
 - Main integration commit: `6308fe75b975a518d3e8c43a1bdbcfd76eed01f7`.
-- Current `main` tip at this closure update: `1323616c44680a80938fc4778e6f6f18ba5ca408`.
-- Remote `main` verification before this update: `git ls-remote origin refs/heads/main` matched `1323616c44680a80938fc4778e6f6f18ba5ca408`.
+- Pre-cutover `main` tip verified before the ADAPTING evidence update:
+  `1323616c44680a80938fc4778e6f6f18ba5ca408`.
+- Final published anchor for the current state is the live `origin/main` tip and
+  Issue #4 `当前执行锚点`; do not treat the pre-cutover SHA above as the latest
+  repository tip after later evidence commits.
 - README closure check: no README update required.
 
 Reason for README decision:
