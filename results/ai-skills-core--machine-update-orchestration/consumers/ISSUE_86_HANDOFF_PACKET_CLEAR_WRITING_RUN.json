@@ -1,0 +1,87 @@
+{
+  "ai_bridge_executable": "/home/yuukias/conda/bin/ai-bridge",
+  "child_argv": [
+    "/home/yuukias/.codex/npm-global/node_modules/@openai/codex/bin/codex.js",
+    "exec",
+    "-c",
+    "approval_policy=\"never\"",
+    "-c",
+    "sandbox_workspace_write.network_access=false",
+    "-c",
+    "sandbox_workspace_write.exclude_slash_tmp=true",
+    "-c",
+    "sandbox_workspace_write.exclude_tmpdir_env_var=true",
+    "--disable",
+    "memories",
+    "-s",
+    "workspace-write",
+    "-C",
+    "/home/yuukias/.ai-bridge/plugin-replay/20260924T175428Z-fce019659008/workspace",
+    "--add-dir",
+    "/home/yuukias/.ai-bridge/plugin-replay/20260924T175428Z-fce019659008/outputs",
+    "--skip-git-repo-check",
+    "--ephemeral",
+    "-o",
+    "/home/yuukias/.ai-bridge/plugin-replay/20260924T175428Z-fce019659008/outputs/last-message.txt",
+    "-"
+  ],
+  "child_output_path": "/home/yuukias/.ai-bridge/plugin-replay/20260924T175428Z-fce019659008/outputs/child-output.txt",
+  "codex_executable": "/home/yuukias/.codex/npm-global/node_modules/@openai/codex/bin/codex.js",
+  "codex_home": "/home/yuukias/.codex",
+  "completed_at": "2026-09-24T17:56:19+00:00",
+  "contract_errors": [],
+  "created_at": "2026-09-24T17:54:28+00:00",
+  "error_code": null,
+  "exit_code": 0,
+  "filesystem_read_scope": {
+    "child_output_path": "/home/yuukias/.ai-bridge/plugin-replay/20260924T175428Z-fce019659008/outputs/read-scope-child-output.txt",
+    "contract_errors": [],
+    "exit_code": 0,
+    "probe_result": "READABLE",
+    "result_path": "/home/yuukias/.ai-bridge/plugin-replay/20260924T175428Z-fce019659008/outputs/read-scope-result.txt",
+    "secret_path": "/home/yuukias/.ai-bridge/plugin-replay/20260924T175428Z-fce019659008/read-scope-neighbor.txt",
+    "strict_read_isolation": false
+  },
+  "inputs": [
+    {
+      "basename": "ISSUE_86_HANDOFF_PACKET_CLEAR_WRITING_TASK.md",
+      "role": "task",
+      "sha256": "af9c8d6213e1988f4987c66c841fe85ef5b85b16925578993f84223199700a13",
+      "size_bytes": 650,
+      "source_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/results/ai-skills-core--machine-update-orchestration/consumers/ISSUE_86_HANDOFF_PACKET_CLEAR_WRITING_TASK.md",
+      "staged_path": "/home/yuukias/.ai-bridge/plugin-replay/20260924T175428Z-fce019659008/inputs/01_task_ISSUE_86_HANDOFF_PACKET_CLEAR_WRITING_TASK.md"
+    },
+    {
+      "basename": "ISSUE_86_HANDOFF_PACKET_COMMENT_DRAFT.md",
+      "role": "input",
+      "sha256": "d29a8ce624def32bfe167e7fcf38c8823d0c7a0ec5cd7d8b6f1a3aa7fee38988",
+      "size_bytes": 1088,
+      "source_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/results/ai-skills-core--machine-update-orchestration/consumers/ISSUE_86_HANDOFF_PACKET_COMMENT_DRAFT.md",
+      "staged_path": "/home/yuukias/.ai-bridge/plugin-replay/20260924T175428Z-fce019659008/inputs/02_input_ISSUE_86_HANDOFF_PACKET_COMMENT_DRAFT.md"
+    }
+  ],
+  "last_message_path": "/home/yuukias/.ai-bridge/plugin-replay/20260924T175428Z-fce019659008/outputs/last-message.txt",
+  "outputs_dir": "/home/yuukias/.ai-bridge/plugin-replay/20260924T175428Z-fce019659008/outputs",
+  "plugin": "writing-style@yuukias-ai-skills",
+  "plugin_check": {
+    "checked": true,
+    "installed": true
+  },
+  "run_dir": "/home/yuukias/.ai-bridge/plugin-replay/20260924T175428Z-fce019659008",
+  "run_id": "20260924T175428Z-fce019659008",
+  "schema": "AI_BRIDGE_PLUGIN_REPLAY_RUN_V1",
+  "started_at": "2026-09-24T17:54:28+00:00",
+  "status": "completed",
+  "target": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration",
+  "workspace": "/home/yuukias/.ai-bridge/plugin-replay/20260924T175428Z-fce019659008/workspace",
+  "write_isolation": {
+    "canary_changed": false,
+    "canary_path": "/home/yuukias/.ai-bridge/plugin-replay-write-probe/20260924T175428Z-fce019659008/outside.txt",
+    "canary_sha256": "b8c97ddaf0d32992a9e1ea1b3e4caee8cf1b43c2230ea9e3a54b49b930c6f187",
+    "child_output_path": "/home/yuukias/.ai-bridge/plugin-replay/20260924T175428Z-fce019659008/outputs/write-isolation-child-output.txt",
+    "contract_errors": [],
+    "error_code": null,
+    "exit_code": 0,
+    "status": "passed"
+  }
+}
