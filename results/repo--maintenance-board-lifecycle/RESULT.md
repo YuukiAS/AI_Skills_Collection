@@ -106,10 +106,33 @@ MAIN_INTEGRATION = DONE
 MAIN_INTEGRATION_COMMIT = 6308fe75b975a518d3e8c43a1bdbcfd76eed01f7
 REMOTE_MAIN = verified after final evidence commit with `git ls-remote origin refs/heads/main`
 README_CLOSURE_CHECK = NO_UPDATE_REQUIRED
-CHATGPT_PROJECT_INSTRUCTIONS_TRIGGER = HUMAN_GATE_PENDING
-PROJECT_STATUS = DOING
+CHATGPT_PROJECT_INSTRUCTIONS_TRIGGER = HUMAN_GATE_PASSED_BY_USER_CONFIRMED_SEMANTIC_INSTALLATION
+PROJECT_STATUS = ADAPTING
 OVERALL_GOAL_ACHIEVED = NO
-NEXT_ACTION = WAIT_FOR_CHATGPT_PROJECT_INSTRUCTIONS_HUMAN_GATE
+NEXT_ACTION = REQUIRED_CONSUMER_ADAPTATION_HANDOFFS
 ```
 
 Evidence: `results/repo--maintenance-board-lifecycle/CENTRAL_CLOSURE_STATUS.md`.
+
+## Central Complete And Adapting Handoff
+
+```text
+CENTRAL_IMPLEMENTATION_COMPLETE = YES
+FROZEN_INBOX_ALLOWLIST_VERIFIED = YES
+SOURCE_TRACKING_LOCATORS_VERIFIED = YES
+PROJECT_STATUS = ADAPTING
+OVERALL_GOAL_ACHIEVED = NO
+FINAL_DONE = OUT_OF_SCOPE_FOR_CENTRAL_STAGE
+```
+
+Issue #4 has enough central-stage evidence to move from `DOING` to `ADAPTING`.
+The five required logical consumers are now frozen for downstream handoff:
+
+- `Longleaf_Codex`
+- `Longleaf_Backup_Codex`
+- `CUHK_Workstation_WSL_Codex`
+- `Workstation`
+- `Legion`
+
+Evidence and per-consumer locator truth:
+`results/repo--maintenance-board-lifecycle/CONSUMER_HANDOFFS.md`.
