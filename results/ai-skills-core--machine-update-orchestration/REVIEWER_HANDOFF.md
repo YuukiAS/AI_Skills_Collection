@@ -9,13 +9,14 @@ This handoff is for independent implementation review only. It does not authoriz
 ## Candidate Identity
 
 - Task branch: `reviewed/ai-skills-core--machine-update-orchestration`
-- Product-surface candidate commit replayed by fresh child: `12ca08dc127f8eee4c13a3a2c9cc598d00ce04ee`
+- Product-surface candidate commit replayed by fresh child: `4b8414733f3efc2d8707c5fbf448cbe8ec7a7d00`
 - Latest evidence commit before this handoff: final task-branch commit containing this file; verify remote tip after push.
-- Base `origin/main` and current AI_Skills `release`: `7b76e94ad29cf3bd8547026b942553068754d51f`
-- Bridge locator commit on Bridge `origin/main`: `dfe093c6f78cdadb22905e811935a772af5cb034`
+- Latest `origin/main` integrated for IR-B004: `58884c1b093e363dc772d17aba8bfbdc51005336`
+- Current AI_Skills `release`: `7b76e94ad29cf3bd8547026b942553068754d51f`
+- Bridge frozen snapshot main: `ff22c97c8193e110d606e179ec1a8a2741b97fad`
 - Bridge `release`: `d27259d6706dee951dc0c0ede8c9b03c65f55ca3`
 
-After `12ca08dc127f8eee4c13a3a2c9cc598d00ce04ee`, the task branch adds only task-owned evidence/handoff updates and the fixture-runner schema adjustment needed to read the candidate child output. No source skill, generated Marketplace/plugin payload, version/changelog, README, Bridge file or runtime file changed after the replayed product-surface candidate.
+After `4b8414733f3efc2d8707c5fbf448cbe8ec7a7d00`, the task branch adds only task-owned evidence/handoff updates and fixture-runner assertion compatibility needed to read the final candidate child output. No source skill, generated Marketplace/plugin payload, version/changelog, README, Bridge file or runtime file changed after the replayed product-surface candidate.
 
 ## Evidence To Review
 
@@ -35,6 +36,16 @@ Task-owned private fixture repositories were created under:
 
 These fixtures are local durable evidence, not unrelated real user projects. The tracked evidence records paths, hashes and result states.
 
+Task-owned Bridge source snapshots used for G3 replay are under:
+
+`private/exports/ai-skills-core--machine-update-orchestration/bridge_git_snapshot/`
+
+and:
+
+`private/exports/ai-skills-core--machine-update-orchestration/bridge_source_snapshot/`
+
+The candidate replay input did not supply the latest formal release answer, current release version, relation classification, or expected `LAGGING` interpretation.
+
 ## Review Scope
 
 Please review the V2.1 implementation against the frozen objective and Planner decision, especially:
@@ -44,9 +55,9 @@ Please review the V2.1 implementation against the frozen objective and Planner d
 3. Minimal routing/boundary changes to `ai-skills-repository-maintainer` and `project-skill-installer`.
 4. Generated payload/profile/Marketplace parity for `ai-skills-core 0.5`.
 5. Version/changelog/README/install guidance for repository `5.2.0` and `ai-skills-core 0.5`.
-6. Bridge `AGENTS.md` locator-only change and absence of Bridge runtime/README/QUICKSTART/CHANGELOG/source changes.
-7. G1/G3 candidate replay evidence and whether it proves fresh child normal-entry routing without paid API, including dynamic Bridge release-state discovery and the real `LAGGING` snapshot case.
-8. G4/G5 fixture evidence and whether it faithfully covers selective managed consumers, dirty/source safety, unmanaged conflict preservation, failure/recovery, Human Gate and should-not-change behavior through the candidate child rather than harness-side business logic.
+6. Bridge `AGENTS.md` owner locator consumption and absence of Bridge runtime/source mutation or Bridge `release` advancement during this repair.
+7. G1/G3 candidate replay evidence and whether it proves fresh child normal-entry routing without paid API, including dynamic Bridge release-state discovery from source/ref/closure evidence and the real `LAGGING` snapshot case.
+8. G4/G5 fixture evidence and whether it faithfully covers selective managed consumers, dirty/source safety, unmanaged conflict preservation, failure/recovery, Human Gate and should-not-change behavior through the candidate child, including isolated official Marketplace recovery commands rather than harness-side business logic.
 9. Whether G2 is correctly left as `SEQUENCED WAITING` until Reviewer PASS, formal promotion, AI_Skills `release` advancement, real legacy Marketplace migration, reinstall of `ai-skills-core 0.5`, and fresh released normal-entry smoke.
 
 ## Reviewer Must Not Treat As Complete Yet

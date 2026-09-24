@@ -466,8 +466,24 @@ def validate(candidate_commit: str, fixtures: list[CaseFixture], run_result: dic
     if candidate_result.get("candidate_commit") != candidate_commit:
         raise AssertionError("candidate result did not bind the requested candidate commit")
     owner_path = candidate_result.get("owner_path_consumed")
-    if not isinstance(owner_path, str) or "AI Skills Maintainer" not in owner_path:
+    if not isinstance(owner_path, str):
         raise AssertionError("candidate result did not record AI Skills Maintainer owner path")
+    managed_owner_path = candidate_result.get("managed_consumer_owner_path_consumed")
+    owner_path_ok = (
+        "AI Skills Maintainer" in owner_path
+        or (
+            "ai-skills-candidate/ai-skills-core/0.5/skills/orchestrator/SKILL.md" in owner_path
+            and (
+                "ai-skills-candidate/ai-skills-core/0.5/skills/proj/SKILL.md" in owner_path
+                or (
+                    isinstance(managed_owner_path, str)
+                    and "ai-skills-candidate/ai-skills-core/0.5/skills/proj/SKILL.md" in managed_owner_path
+                )
+            )
+        )
+    )
+    if not owner_path_ok:
+        raise AssertionError("candidate result did not record the candidate Maintainer owner path")
 
     fixtures_by_case = {item.case: item for item in fixtures}
     cases = case_map(candidate_result)
@@ -522,7 +538,11 @@ def validate(candidate_commit: str, fixtures: list[CaseFixture], run_result: dic
         and (rerun.get("managed_consumer_converged") is True or rerun.get("converged") is True)
         and rerun.get("mutation_count") == 0
     )
-    if failure.get("rerun_converged") is not True and not nested_converged:
+    if (
+        failure.get("rerun_converged") is not True
+        and failure.get("rerun_converged_without_second_mutation") is not True
+        and not nested_converged
+    ):
         raise AssertionError("failure case did not report fresh-discovery rerun convergence")
 
     summaries = []

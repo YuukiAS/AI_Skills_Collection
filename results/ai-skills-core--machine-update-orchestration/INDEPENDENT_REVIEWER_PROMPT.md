@@ -15,14 +15,15 @@ Review the implementation against the frozen V2.1 objective and the Planner deci
 - Repository: `YuukiAS/AI_Skills_Collection`
 - Task branch: `reviewed/ai-skills-core--machine-update-orchestration`
 - Current handoff tip: final task-branch commit containing this prompt; verify remote tip after push.
-- Product-surface candidate replayed by fresh child: `12ca08dc127f8eee4c13a3a2c9cc598d00ce04ee`
-- Base `main` and current AI_Skills `release`: `7b76e94ad29cf3bd8547026b942553068754d51f`
-- Bridge locator commit on `YuukiAS/GPT_Codex_AI_Bridge_Kit origin/main`: `dfe093c6f78cdadb22905e811935a772af5cb034`
+- Product-surface candidate replayed by fresh child: `4b8414733f3efc2d8707c5fbf448cbe8ec7a7d00`
+- Latest `origin/main` integrated for IR-B004: `58884c1b093e363dc772d17aba8bfbdc51005336`
+- Current AI_Skills `release`: `7b76e94ad29cf3bd8547026b942553068754d51f`
+- Bridge frozen snapshot main: `ff22c97c8193e110d606e179ec1a8a2741b97fad`
 - Bridge `release`: `d27259d6706dee951dc0c0ede8c9b03c65f55ca3`
 
 Important identity note:
 
-The product-surface candidate was replayed at `12ca08dc127f8eee4c13a3a2c9cc598d00ce04ee`. Later commits add task-owned evidence, handoff/runbook updates, and fixture-runner schema adjustment only. If you find any post-replay source/generated/Bridge runtime change, treat that as a review issue.
+The product-surface candidate was replayed at `4b8414733f3efc2d8707c5fbf448cbe8ec7a7d00`. Later commits add task-owned evidence/handoff updates and fixture-runner assertion compatibility only. If you find any post-replay source/generated/Bridge runtime change, treat that as a review issue.
 
 ## Source Material To Read
 
@@ -55,11 +56,11 @@ Then inspect the changed source and generated payload required by those evidence
 - `docs/plugin-todos/ai-skills-core.md`
 - relevant tests for Maintainer / Marketplace / skills registry
 
-Bridge-side locator review:
+Bridge-side locator/snapshot review:
 
-- Inspect Bridge commit `dfe093c6f78cdadb22905e811935a772af5cb034`.
-- Verify the Bridge tracked change is limited to `AGENTS.md`.
-- Verify it does not alter Bridge runtime source, Host Policy, Lite, Review, Control, Persistent Run, Human Gate, README, QUICKSTART or CHANGELOG for this task.
+- Inspect the frozen Bridge source/ref evidence described in `BRIDGE_REVALIDATION_SNAPSHOT.md`.
+- Verify Bridge `AGENTS.md` contains the owner locator consumed by the candidate.
+- Verify this repair did not alter Bridge runtime source, Host Policy, Lite, Review, Control, Persistent Run, Human Gate, README, QUICKSTART or CHANGELOG, and did not advance Bridge `release`.
 
 ## Required Review Questions
 

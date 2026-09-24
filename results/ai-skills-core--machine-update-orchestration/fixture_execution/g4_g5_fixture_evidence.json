@@ -1,6 +1,6 @@
 {
-  "candidate_commit": "12ca08dc127f8eee4c13a3a2c9cc598d00ce04ee",
-  "candidate_output_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/.local-runtime/candidate-plugin-replay/runs/20260924T120413Z-2788805/workspace/outputs/g4_g5_candidate_result.json",
+  "candidate_commit": "4b8414733f3efc2d8707c5fbf448cbe8ec7a7d00",
+  "candidate_output_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/.local-runtime/candidate-plugin-replay/runs/20260924T130850Z-3101540/workspace/outputs/g4_g5_candidate_result.json",
   "candidate_plugin": "ai-skills-core@ai-skills-candidate",
   "case_count": 6,
   "cases": [
@@ -9,8 +9,9 @@
       "before_hash": "f4eaa8d367e72c4d76fc9075bde06ca9f64479e48b151f732f3af9890c704bde",
       "case": "stale_managed_consumer",
       "diagnostics": [
-        "Candidate project-skill-installer ownership applied as a bounded managed-block refresh; version 0.4 -> 0.5. No full profile install or current-session hot-reload claimed.",
-        "All non-target bytes and Git HEAD preserved; no Git ref commands executed."
+        "Candidate project-skill-installer ownership boundary applied directly to the fixture exact managed block: ai-skills-core 0.4 -> 0.5; surrounding bytes preserved. No profile-wide install or session reload claimed.",
+        "AI_Skills manifest additionally confirms AGENTS.md ownership.",
+        "Verified unrelated files unchanged and Git HEAD unchanged; initial worktree status: clean"
       ],
       "failure_injection_point": null,
       "fixture_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/stale-managed-consumer",
@@ -31,8 +32,8 @@
       "before_hash": "a937a64909c05c4612b5a706eb40d9956c1d139c60b027045cdc9383ab48e49f",
       "case": "unaffected_repo",
       "diagnostics": [
-        "No managed consumer locator; no installation or mutation performed.",
-        "All non-target bytes and Git HEAD preserved; no Git ref commands executed."
+        "No managed block or manifest grants mutation ownership; all repository bytes preserved.",
+        "Verified unrelated files unchanged and Git HEAD unchanged; initial worktree status: clean"
       ],
       "failure_injection_point": null,
       "fixture_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/unaffected-repo",
@@ -53,8 +54,9 @@
       "before_hash": "4205ddf977e33c7dfb732b99e114d57276402cd31fa6b3eaeb1cf8ed121a418e",
       "case": "unmanaged_conflict",
       "diagnostics": [
-        "Unmanaged repository AI_Skills rule detected; preserved without attempting conflict resolution.",
-        "All non-target bytes and Git HEAD preserved; no Git ref commands executed."
+        "No managed block or manifest grants mutation ownership; all repository bytes preserved.",
+        "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/unmanaged-conflict/AGENTS.md: repo-authored main-channel rule conflicts with the Maintainer release-channel contract; requires a separate repo-owned decision. No migration attempted.",
+        "Verified unrelated files unchanged and Git HEAD unchanged; initial worktree status: clean"
       ],
       "failure_injection_point": null,
       "fixture_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/unmanaged-conflict",
@@ -73,8 +75,8 @@
       "before_hash": "fe9aa5c2aae6594b6f521e7ff39229712bc519f83dfb762893e10bbe987def06",
       "case": "unrelated_dirty_non_overlap",
       "diagnostics": [
-        "Candidate project-skill-installer ownership applied as a bounded managed-block refresh; version 0.4 -> 0.5. No full profile install or current-session hot-reload claimed.",
-        "All non-target bytes and Git HEAD preserved; no Git ref commands executed."
+        "Candidate project-skill-installer ownership boundary applied directly to the fixture exact managed block: ai-skills-core 0.4 -> 0.5; surrounding bytes preserved. No profile-wide install or session reload claimed.",
+        "Verified unrelated files unchanged and Git HEAD unchanged; initial worktree status: M notes.txt"
       ],
       "failure_injection_point": null,
       "fixture_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/unrelated-dirty-non-overlap",
@@ -95,8 +97,8 @@
       "before_hash": "02f9b5ac0f23c541eaac902bca4c9a685f21f6af19596bf8412f686fe195eedb",
       "case": "overlapping_dirty_human_gate",
       "diagnostics": [
-        "Task-declared overlapping dirty target: stopped before mutation; one bounded gate recorded for replay, no live user approval requested.",
-        "All non-target bytes and Git HEAD preserved; no Git ref commands executed."
+        "Unresolved user-owned dirty overlap in AGENTS.md; dependent mutation stopped; file preserved byte-for-byte.",
+        "Verified unrelated files unchanged and Git HEAD unchanged; initial worktree status: M AGENTS.md"
       ],
       "failure_injection_point": null,
       "fixture_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/overlapping-dirty-human-gate",
@@ -115,22 +117,16 @@
       "before_hash": "cda584689289732d046182c0b7599d5a774941df1e53979d560d50106b8557b0",
       "case": "failure_restoration_and_rerun",
       "diagnostics": [
-        "Candidate project-skill-installer ownership applied as a bounded managed-block refresh; version 0.4 -> 0.5. No full profile install or current-session hot-reload claimed.",
-        "Manifest supplies source fixture but no separate injection parameters; user-specified replacement failure simulated locally. No official Marketplace command or global state mutation executed.",
-        "All non-target bytes and Git HEAD preserved; no Git ref commands executed."
+        "Candidate project-skill-installer ownership boundary applied directly to the fixture exact managed block: ai-skills-core 0.4 -> 0.5; surrounding bytes preserved. No profile-wide install or session reload claimed.",
+        "Safe managed update completed before source removal; replacement add failed as injected; exact captured legacy source restored using official commands.",
+        "One fresh discovery confirmed exact original Marketplace metadata and already-current managed content. Rerun converged to a stable partial result without a second consumer mutation or source-swap attempt; requested replacement remains incomplete.",
+        "Explicit candidate fixture replay uses the authorized local source stand-in; this is not verification of a remote formal release or live-global migration.",
+        "Verified unrelated files unchanged and Git HEAD unchanged; initial worktree status: clean"
       ],
-      "failure_injection_point": "after_safe_managed_update:marketplace_source_replacement_after_legacy_removal",
+      "failure_injection_point": "marketplace_add_missing_replacement_after_legacy_remove",
       "fixture_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/failure-restoration-rerun",
       "human_gate_count": 0,
-      "rerun": {
-        "converged": true,
-        "fresh_discovery_count": 1,
-        "managed_consumer_status": "ALREADY_CURRENT",
-        "marketplace_ref": "main",
-        "mutation_count": 0,
-        "overall_status": "PARTIAL_UPDATE",
-        "scope": "Safe managed-consumer update converged; legacy source restored. Marketplace migration remains incomplete."
-      },
+      "rerun": null,
       "status": "PARTIAL_UPDATE",
       "watched_hashes_after": {
         "AGENTS.md": "16385f1c0092fdc40897cfbe0281f6c165a46e45a14b521ad7215660e16f4b2b",
@@ -145,11 +141,99 @@
     }
   ],
   "fixture_root": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures",
+  "isolated_codex_home": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-codex-home",
+  "marketplace_recovery": {
+    "commands_recorded_by_candidate": [
+      {
+        "argv": [
+          "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/.local-runtime/codex/0.153.4/bin/codex",
+          "plugin",
+          "marketplace",
+          "list",
+          "--json"
+        ],
+        "codex_home": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-codex-home",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\n  \"marketplaces\": [\n    {\n      \"name\": \"yuukias-ai-skills\",\n      \"root\": \"/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-marketplaces/legacy-main\",\n      \"marketplaceSource\": {\n        \"sourceType\": \"local\",\n        \"source\": \"/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-marketplaces/legacy-main\"\n      }\n    }\n  ]\n}\n"
+      },
+      {
+        "argv": [
+          "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/.local-runtime/codex/0.153.4/bin/codex",
+          "plugin",
+          "marketplace",
+          "remove",
+          "yuukias-ai-skills",
+          "--json"
+        ],
+        "codex_home": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-codex-home",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\n  \"marketplaceName\": \"yuukias-ai-skills\",\n  \"installedRoot\": null\n}\n"
+      },
+      {
+        "argv": [
+          "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/.local-runtime/codex/0.153.4/bin/codex",
+          "plugin",
+          "marketplace",
+          "add",
+          "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-marketplaces/missing-release-source",
+          "--json"
+        ],
+        "codex_home": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-codex-home",
+        "returncode": 1,
+        "stderr": "Error: failed to resolve local marketplace source path: No such file or directory (os error 2)\n",
+        "stdout": ""
+      },
+      {
+        "argv": [
+          "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/.local-runtime/codex/0.153.4/bin/codex",
+          "plugin",
+          "marketplace",
+          "add",
+          "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-marketplaces/legacy-main",
+          "--json"
+        ],
+        "codex_home": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-codex-home",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\n  \"marketplaceName\": \"yuukias-ai-skills\",\n  \"installedRoot\": \"/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-marketplaces/legacy-main\",\n  \"alreadyAdded\": false\n}\n"
+      },
+      {
+        "argv": [
+          "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/.local-runtime/codex/0.153.4/bin/codex",
+          "plugin",
+          "marketplace",
+          "list",
+          "--json"
+        ],
+        "codex_home": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-codex-home",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\n  \"marketplaces\": [\n    {\n      \"name\": \"yuukias-ai-skills\",\n      \"root\": \"/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-marketplaces/legacy-main\",\n      \"marketplaceSource\": {\n        \"sourceType\": \"local\",\n        \"source\": \"/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-marketplaces/legacy-main\"\n      }\n    }\n  ]\n}\n"
+      }
+    ],
+    "legacy_source": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-marketplaces/legacy-main",
+    "name": "yuukias-ai-skills",
+    "post_run_official_list": {
+      "list_stderr": "",
+      "list_stdout": "{\n  \"marketplaces\": [\n    {\n      \"name\": \"yuukias-ai-skills\",\n      \"root\": \"/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-marketplaces/legacy-main\",\n      \"marketplaceSource\": {\n        \"sourceType\": \"local\",\n        \"source\": \"/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-marketplaces/legacy-main\"\n      }\n    }\n  ]\n}\n",
+      "restored_entry": {
+        "marketplaceSource": {
+          "source": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-marketplaces/legacy-main",
+          "sourceType": "local"
+        },
+        "name": "yuukias-ai-skills",
+        "root": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-marketplaces/legacy-main"
+      }
+    },
+    "replacement_failure_source": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/isolated-marketplaces/missing-release-source"
+  },
   "notes": [
     "Harness created/reset fixtures, captured hashes, invoked the committed candidate replay, and asserted invariants.",
     "Semantic states and fixture mutations came from the candidate child run, not from harness-side business logic."
   ],
-  "owner_path_consumed": "AI Skills Maintainer -> machine-update-orchestrator -> project-skill-installer; machine-update-orchestrator Route A failure recovery",
+  "owner_path_consumed": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/ai-skills-core/0.5/skills/orchestrator/SKILL.md",
   "replay_run": {
     "actual_consumption": {
       "event_type": "item.started",
@@ -164,12 +248,12 @@
       "pluginId": "ai-skills-core@ai-skills-candidate",
       "version": "0.5"
     },
-    "candidate_commit": "12ca08dc127f8eee4c13a3a2c9cc598d00ce04ee",
+    "candidate_commit": "4b8414733f3efc2d8707c5fbf448cbe8ec7a7d00",
     "installed_path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/ai-skills-core/0.5",
     "plugin_id": "ai-skills-core@ai-skills-candidate",
     "runtime_version": "codex-cli 0.153.4",
-    "stderr_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/.local-runtime/candidate-plugin-replay/runs/20260924T120413Z-2788805/child.stderr",
-    "stdout_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/.local-runtime/candidate-plugin-replay/runs/20260924T120413Z-2788805/child.stdout.jsonl",
+    "stderr_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/.local-runtime/candidate-plugin-replay/runs/20260924T130850Z-3101540/child.stderr",
+    "stdout_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/.local-runtime/candidate-plugin-replay/runs/20260924T130850Z-3101540/child.stdout.jsonl",
     "writable_dirs": [
       "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures"
     ]
