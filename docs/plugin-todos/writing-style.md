@@ -4,6 +4,23 @@ Canonical maintenance inbox for the `writing-style` plugin.
 
 ## Incoming real-use feedback
 
+### Codex-authored README should always use Clear Writing, with Chinese README prose kept genuinely Chinese
+status: NEW
+source: user feedback / AI Research Stack README authoring, 2026-09-24
+evidence: repeated cross-repo README edits by Codex can leave technically correct but reader-facing prose full of unnecessary English scaffolding even when the document is explicitly Chinese; user now requires Clear Writing to be part of README authoring rather than an optional afterthought
+target layer: routing / README authoring / Chinese reader-facing prose
+problem: README is a primary user-facing artifact, but Codex can currently treat it as ordinary maintenance text and bypass the dedicated language layer. This creates two recurring failures: (1) README wording remains mechanically technical or implementation-facing even when the repository is meant for ordinary users; (2) Chinese README files regress into unnecessary English nouns, headings, connective phrases and mixed-language scaffolding simply because the underlying code/config uses English identifiers. The technical maintainer should still own facts, commands, versions, install steps and repository semantics, but reader-facing README prose should be passed through Clear Writing before closure.
+candidate_action:
+- When Codex creates a new README or materially rewrites an existing README, require a real production invocation of Clear Writing after technical content and repository facts are frozen. Reading the source skill text is not sufficient proof of invocation.
+- Treat README language as an artifact-level contract. If the README is Chinese, ordinary explanatory prose, headings, transitions, labels and user guidance should be natural Chinese by default.
+- Preserve English only where it is genuinely necessary: exact commands, code/config identifiers, file paths, API names, package/library/product names, standard acronyms, protocol names, version strings, error literals, and other exact technical tokens whose translation would reduce fidelity.
+- Do not leave unnecessary English scaffolding such as generic headings, status labels, workflow prose, implementation nouns or connective phrases merely because Codex is editing a technical repository. Prefer the natural Chinese equivalent when no exact-name constraint exists.
+- Do not translate away exact user-facing product names or code literals just to make the page look uniformly Chinese.
+- The repository maintainer / domain owner remains responsible for factual correctness, install instructions, architecture and scope. Clear Writing owns the final reader-facing language pass and must not change technical meaning.
+- README closure should check the whole affected reader-facing section, not only the lines directly edited in the implementation diff, because surrounding mixed-language prose may make the new section inconsistent.
+promotion_gate: replay on at least two unrelated repositories with Chinese README updates and one English README control. The Chinese cases should show that unnecessary English is removed while exact technical tokens remain intact; the English control should confirm that this rule does not force Chinese when the README language is English.
+
+
 ### Promote `writing-style` into the generic content-preserving language layer
 status: READY_FOR_PROMOTION_AFTER_050
 source: 050 Deep Research rewrite failures + Distributed Imaging report v2 + CAT-TRACE presentation reviews + cross-plugin boundary audit, 2026-09-05
