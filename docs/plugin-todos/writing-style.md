@@ -6,6 +6,7 @@ Canonical maintenance inbox for the `writing-style` plugin.
 
 ### Codex-authored README should always use Clear Writing, with Chinese README prose kept genuinely Chinese
 status: NEW
+tracking: #12
 source: user feedback / AI Research Stack README authoring, 2026-09-24
 evidence: repeated cross-repo README edits by Codex can leave technically correct but reader-facing prose full of unnecessary English scaffolding even when the document is explicitly Chinese; user now requires Clear Writing to be part of README authoring rather than an optional afterthought
 target layer: routing / README authoring / Chinese reader-facing prose
@@ -23,6 +24,7 @@ promotion_gate: replay on at least two unrelated repositories with Chinese READM
 
 ### Promote `writing-style` into the generic content-preserving language layer
 status: READY_FOR_PROMOTION_AFTER_050
+tracking: #13
 source: 050 Deep Research rewrite failures + Distributed Imaging report v2 + CAT-TRACE presentation reviews + cross-plugin boundary audit, 2026-09-05
 evidence: `docs/design/READER_FACING_COMMUNICATION_PLUGIN_BOUNDARIES.md`; task 050 smoke/replay evidence; `docs/plugin-todos/research-writing.md`; `docs/plugin-todos/presentations.md`
 target layer: routing/language/fidelity
@@ -40,6 +42,7 @@ promotion gate: do not treat the display-name cleanup as resolving this capabili
 
 ### Advisor-facing English can sound AI-authored even when every sentence is correct
 status: NEW
+tracking: #14
 source: Distributed_Imaging_Inference / MOSAiC group-meeting report rewrite, 2026-09-19
 evidence: DII advisor-facing draft at commit \`fcf3713ede17afbcfebce2c070dd6e888608edae\`; user-supplied independent style review; revised DII report at commit \`55acbcdcb7253da34a6167be35661e40fba74805\`
 target layer: scientific-prose / advisor-facing English / document-level QA
@@ -63,6 +66,7 @@ promotion_gate: replay on at least one additional advisor-facing English researc
 
 ### English scientific slide microcopy and full-deck prose remain cognitively heavy after a nominal final pass
 status: NEW
+tracking: #15
 source: TRACE / CAT-TRACE group-meeting deck v4–v8 reviews
 evidence: `YuukiAS/TRACE` commits `e36cb5d93fc882ce158d88ac9201fe494b98b69a`, `1de90f2f26b3f787073ecedd7a4df41a985712eb`, `ef08bc25673fb33b639e523504676c0f333d93f4` and `26fd2ad0f042f0a8d7c7dc2154392e3f9460760d`. Earlier rounds exposed `Failure prevented`, mechanical `Example.` language, `What it measures`, `Focal method`, `Backbone` and `Rare fit`. The 33-page v8 deck still contains first-use domain terms that are expanded but not placed in enough context for a statistics audience (`COI`, `Metabarcoding`, `VicFlora`, `MGP`), source-note-like wording such as `That threshold is an implementation choice, not a CAT-TRACE theoretical constant.`, and dense table/slide language that is grammatically valid but unnecessarily hard to parse. The v8 English-final-pass record explicitly says that it only reviewed visible wording touched in v8, so untouched but still difficult language could survive.
 problem: `scientific-prose` / presentation handoff needs to distinguish grammatical correctness from reader effort. A research slide should let a first-time expert reader understand what an unfamiliar term is, why it appears here, and what the sentence is asking them to retain. Expanding an acronym alone is insufficient when the term remains contextless. Final slide prose review also cannot be limited only to source lines modified in the current round: layout changes alter wrapping and old wording may still be cognitively heavy. The desired behavior is a full-deck audience-facing pass after scientific freeze: direct sentences, explicit local context for unfamiliar terms, natural action labels, short explanatory bridges where needed, and removal of internal/defensive/meta wording. This is not detector evasion and must not weaken scientific precision.
@@ -70,6 +74,7 @@ project-specific context: CAT-TRACE, TRACE, CORAL, VicFlora, COI, OTU, GBIF, MGP
 
 ### Versioned Chinese technical documents can regress into English-keyword scaffolding during content-preserving revision
 status: NEW
+tracking: #16
 source: TRACE / CAT-TRACE canonical architecture and code implementation plan, 2026-09-09
 evidence: compare `YuukiAS/TRACE/docs/model/catalog_aware/CAT_TRACE_CANONICAL_NOTATION_AND_ARCHITECTURE_20260908.md` with `...20260909.md`, and `CAT_TRACE_CODE_IMPLEMENTATION_MASTER_PLAN_20260908.md` with `...20260909.md`; user review of the rendered 20260909 PDFs found the newer technical content substantially stronger but the reader-facing Chinese markedly worse. Examples include prose such as `TRACE continuity + 按组标记的开放尾部 + residual structure`, `极端 rare-tail / scale stress test`, `production inference`, `composite 后验 interval`, `independent-residual`, `working set`, `source script`, `taxonomy-proxy variant`, `structured dependence`, `large-p engine`, and many sentences built from English noun chains joined by `/` or `+`. The 20260908 versions were easier to read despite containing older scientific decisions.
 problem: content-preserving revision of an existing Chinese technical document needs a version-aware prose contract: the newest version is authoritative for scientific content, notation, numbers and decisions, while an earlier accepted version may be the style/readability baseline. A revision pass must compare the full document, not only newly changed lines, and must prevent ordinary reasoning words from drifting back into English merely because the executor is editing technical content. Exact code identifiers, library names, method names and necessary acronyms should remain unchanged, but ordinary connective logic, section prose, role descriptions, implementation explanations and phase descriptions should be natural Chinese. This is a readability/fidelity problem, not a request to ban English globally or to alter domain semantics.
@@ -78,6 +83,7 @@ project-specific context: CAT-TRACE notation, zero-slot logic, `C^{tax}`/`C^{phy
 
 ### Product UI microcopy should state user consequence, not internal implementation reassurance
 status: NEW
+tracking: #17
 source: Lucerna task 01050 full-panel user review, 2026-09-24
 evidence: normal UI copy included implementation-facing reassurance and verbose maintenance prose such as force-push disclaimers, repair-visibility explanations, and dense first-sync file-operation summaries even when the primary user question was simply whether the feature was ready and what action was available
 problem: Technically accurate microcopy can still be poor product language when it narrates implementation policy, defensive guarantees or exhaustive operation detail that the user did not ask for. Normal UI needs a strict reader-value filter: say the current state, consequence and next action first; move low-frequency implementation guarantees, diagnostics and detailed change summaries behind details/help/confirmation surfaces.
@@ -87,6 +93,7 @@ project-specific context: Lucerna's Overleaf, recovery and Zotero wording is pro
 
 ### Audit `academic-humanizer` only for genuinely missing academic-writing capabilities
 status: CANDIDATE_GENERIC
+tracking: #18
 source: external resource discovery, 2026-09-02
 evidence: `AIScientists-Dev/academic-humanizer` at commit `94b88b23703bed7df507acae7d6d5876209a0cdf` (`SKILL.md` v0.3.3), MIT. The inspected public skill focuses on English academic editing: AI-assisted paper/thesis/rebuttal/proposal cleanup, claim-evidence calibration, author-voice matching, and paper-vs-NSF/NIH proposal register. It has useful before/after academic examples, but much of its claim-strength and anti-template guidance overlaps the current `scientific-prose`; it also contains team-specific stylistic preferences such as broad AI-tell lists and a blanket em-dash removal rule.
 target layer: writing
@@ -96,6 +103,7 @@ promotion_gate: promote only if the later audit identifies a specific missing pr
 
 ### Keep style cleanup downstream of scientific structure
 status: CANDIDATE_GENERIC
+tracking: #19
 source: real Presentation and advisor-report revisions
 evidence: repeated user feedback on AI-like internal language, rhetorical templates and unnatural Chinese
 target layer: writing

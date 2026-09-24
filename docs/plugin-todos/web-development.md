@@ -15,6 +15,7 @@ boundary: the detailed desktop-native, icon-registry, whole-product taste, and F
 
 ### Production icon sourcing and icon-registry discipline
 status: NEW
+tracking: #52
 source: Lucerna / Windows tray panel production polish, 2026-09-13
 evidence: `YuukiAS/Lucerna` real-shell iterations through commits `e81fa0807d4282b0552fabb0b92ca8287acb4037`, `23a98d33acafb9ffc5fe40ecd3b75abe3df095a2`, plus the user-provided production screenshots in the Lucerna project thread
 problem: Frontend work repeatedly allowed ad-hoc inline SVG/placeholders and generic status dots to survive into a production-looking interface. The resulting icons had inconsistent geometry, stroke/fill weight, optical size, and platform feel; controls looked AI-generated even after spacing/typography polish. A mature frontend-design workflow should choose and freeze an icon source/system early instead of letting the model improvise each glyph.
@@ -35,6 +36,7 @@ Planner note: first verify whether existing `visual-direction`, `design-system-t
 
 ### Desktop-native acceptance must not be inferred from browser fixtures
 status: NEW
+tracking: #53
 source: research desktop reader native acceptance feedback, 2026-09-13
 target layer: frontend QA / acceptance / desktop-shell review
 problem: A browser-fixture review can close obvious layout/copy defects while still missing desktop-only failures: executable/taskbar/sidebar icon mismatch, native WebView jank, slow panel switching, scrollbar hitching, hover/focus feel, titlebar/layout differences, and empty-state flows that depend on native integrations. Declaring a desktop app review-ready from static browser screenshots creates false confidence.
@@ -49,6 +51,7 @@ promotion_gate: validate this rule on at least two desktop/WebView projects befo
 
 ### Motion, hover grammar, and performance budgets belong to the design system
 status: NEW
+tracking: #54
 source: research desktop reader interaction/performance feedback, 2026-09-13
 target layer: frontend implementation / interaction QA
 problem: A visually polished UI can still feel unfinished when tabs switch synchronously with long stalls, buttons have no hover/press feedback, panels remount with flicker, or scrolling janks. Adding animation after the fact can hide rather than solve the underlying state/render bottleneck. Frontend Design currently needs a stronger rule that motion and responsiveness are measurable product qualities, not optional polish.
@@ -65,6 +68,7 @@ promotion_gate: verify these thresholds and motion patterns on real desktop/web 
 
 ### Component craftsmanship must be part of the definition of done
 status: NEW
+tracking: #55
 source: Bobbio native desktop review after performance repair, 2026-09-13
 target layer: frontend design-system execution / visual QA
 problem: Individual controls were technically functional and even had hover transitions, yet the native app still looked under-designed because button hierarchy, padding, icon alignment, grouping, repeated CTAs, empty-state composition, and cross-component spacing were not reviewed as one system. “No overflow + clickable + hover exists” is too low a production bar.
@@ -84,6 +88,7 @@ additional evidence (2026-09-24): Lucerna task 01050 showed sibling status treat
 
 ### External review should confirm quality, not discover obvious local P2 defects
 status: NEW
+tracking: #56
 source: Bobbio repeated native GPT Work repair cycles, 2026-09-14
 target layer: frontend implementation workflow / pre-review QA
 problem: External review was repeatedly asked to identify defects that the implementation agent could have found itself by inspecting the same native evidence: nearly indistinguishable pressed/focus states, destructive controls that still looked neutral, contradictory healthy-flow screenshots containing PDF errors, and missing shell/state proof. This wastes review cycles and trains the development loop to outsource first-line quality control.
@@ -102,6 +107,7 @@ additional evidence (2026-09-24): Lucerna task 01050 reached a screenshot handof
 
 ### Freeze whole-screen visual direction before implementation polish
 status: NEW
+tracking: #57
 source: Bobbio 0.3 repeated native UI rejection after locally green functional/performance gates, 2026-09-14
 target layer: Frontend Design planning / full-screen composition / implementation handoff
 problem: Repeated local repairs optimized individual defects without first freezing the whole-screen composition and component grammar. This produced obviously arbitrary visual decisions in an otherwise functional app: a large decorative `Choose a paper` circle with no semantic role, sibling controls such as `Change paper` and `Retry PDF` rendered in visibly unrelated styles despite adjacent placement, duplicated `Choose a paper` messaging, mismatched control weights, and locally polished components that still did not form a coherent product. The user was repeatedly forced into the role of art director, pointing out visual incoherence one screenshot at a time. The failure is not one bad button; it is the absence of a mandatory design-before-code gate for the entire screen.
@@ -123,6 +129,7 @@ additional evidence (2026-09-24): Lucerna task 01050 independently reproduced th
 
 ### Canonical design artifacts must gate production implementation
 status: NEW
+tracking: #58
 source: Bobbio 0.3 Figma rebase after whole-screen UI rejection, 2026-09-14
 target layer: Frontend Design source-of-truth governance / Figma-to-code / visual regression
 problem: A project can already have an approved Figma/component system and still drift badly if implementation treats it as inspirational rather than normative. Bobbio had a canonical Figma Reading Focus direction, yet production code invented missing states directly in React/CSS. The result was local functional success but system-level visual drift: arbitrary decorative geometry, inconsistent sibling controls, random spacing values, repeated CTAs, and different component grammars across states. The missing workflow rule is that canonical design artifacts must block implementation until the required states and components actually exist in the design source of truth.
@@ -141,6 +148,7 @@ promotion_gate: immediately use this workflow for Bobbio 0.3. Validate the exact
 
 ### Visual acceptance must include a whole-product taste gate, not only defect checklists
 status: NEW
+tracking: #59
 source: Bobbio 0.3 weekend UI convergence failure, 2026-09-14
 target layer: Frontend Design final visual QA / product taste / user handoff
 problem: Even increasingly strict defect checklists can still produce an interface that technically passes local gates while obviously looking incoherent or unfinished at first glance. The missing layer is a deliberate whole-product taste review: does the screen feel intentional, calm, balanced, and like one product? Users should not be forced to identify elementary visual problems one screenshot at a time after the producer has already declared readiness.
@@ -156,6 +164,7 @@ promotion_gate: high-priority candidate for Frontend Design. Validate whether th
 
 ### Design corrections must round-trip through the canonical Figma before code changes
 status: NEW
+tracking: #60
 source: Bobbio 0.3 canonical-Figma drift and repeated code-only visual repair, 2026-09-14
 target layer: Frontend Design repair workflow / Figma governance / implementation discipline
 problem: Having a canonical Figma file is not enough if later visual feedback is repaired directly in React/CSS. That creates two sources of truth: Figma remains nominally approved while production becomes a sequence of undocumented visual patches. Bobbio repeatedly hit exactly this failure mode: a screen was rejected, the code was patched locally, but the canonical design was not updated first, so the next state inherited fresh inconsistencies. A mature workflow needs a mandatory round-trip rule whenever a visual defect is found after implementation begins.
@@ -174,6 +183,7 @@ promotion_gate: treat as immediately mandatory for Bobbio. Validate on another F
 
 ### “Figma complete” needs an explicit definition of done
 status: NEW
+tracking: #61
 source: Bobbio 0.3 redesign/implementation mismatch, 2026-09-14
 target layer: Frontend Design planning / Figma completion / handoff quality
 problem: Teams can say “the Figma is done” when only hero/default screens are polished, while production still needs empty, error, loading, history, transition, compact viewport, focus/pressed, or recovery states that were never designed. The implementation then invents those states ad hoc, and the canonical design becomes incomplete the moment coding starts. The definition of Figma completion must therefore be state- and interaction-complete, not screenshot-complete.
@@ -192,6 +202,7 @@ promotion_gate: high-priority generic candidate. The exact list of mandatory sta
 
 ### Design-to-code goals must not stop at either Figma or implementation
 status: NEW
+tracking: #62
 source: Bobbio 0.3 weekend redesign failure and repeated review loops, 2026-09-14
 target layer: Frontend Design goal construction / delivery workflow / visual QA
 problem: Splitting UI work into “design first, implementation later, QA later” allows each phase to declare success while the product remains visibly inconsistent. Conversely, jumping directly to implementation produces design drift. For design-heavy milestones, the useful unit of completion is the entire closed loop, not one artifact.
@@ -207,6 +218,7 @@ promotion_gate: immediately mandatory for Bobbio; strong candidate for generic F
 
 ### Normal UI must have a human-readable presentation boundary
 status: NEW
+tracking: #63
 source: Lucerna production acceptance review, 2026-09-17
 evidence: `YuukiAS/Lucerna@461dcea4015434f90d50922d9b7ae054286c98bc` plus user-provided release screenshots showing raw Longleaf/Slurm/recovery text such as `status=online`, `controller=available; partition=mixed`, `canonical-longleaf-bridge`, raw exit-code details, and internal recovery IDs in the normal UI
 problem: The frontend rendered backend/runtime diagnostic strings directly into production copy. Technically truthful provider fields became unreadable user-facing prose, forcing the user to understand implementation contracts instead of product state.
@@ -214,6 +226,7 @@ project-specific context: Longleaf, Slurm, Bridge A/B and their exact contract f
 
 ### Primary surfaces should optimize for actionability, not implementation completeness
 status: NEW
+tracking: #64
 source: Lucerna production acceptance review, 2026-09-17
 evidence: user-provided release screenshots where healthy/usable Longleaf status was followed by expanded recovery, scheduler, Bridge internals and other low-actionability operational detail in the main information flow
 problem: The interface promoted diagnostic and maintenance information merely because it existed. Routine status, actionable exceptions, recovery tools, scheduler diagnostics and extensions were not separated by user need, so the compact utility became an operations dashboard that increased cognitive load during normal use.
@@ -224,6 +237,7 @@ additional evidence (2026-09-24): Lucerna task 01050 release screenshots again s
 
 ### Metric labels and rankings must be backed by the data semantics they imply
 status: NEW
+tracking: #65
 source: Lucerna GitHub Actions resource review, 2026-09-17
 evidence: `YuukiAS/Lucerna` GitHub Actions implementation used a deduplicated alphabetically sorted repository list and displayed the first item as `Top`, while the user expected actual usage ranking and separate overall/private views
 problem: The frontend presented a strong analytical label (`Top`) without a matching aggregation/ranking contract. A visually plausible label hid a semantic data error. Frontend/product work needs to treat ranking, filtering, scope and denominator as part of the visible UI contract, not as incidental backend details.
@@ -231,6 +245,7 @@ project-specific context: Lucerna's public-vs-private GitHub Actions quota seman
 
 ### Comparable resource cards need one coherent progress and reset grammar
 status: NEW
+tracking: #66
 source: Lucerna resource-card polish, 2026-09-17
 evidence: user-provided release screenshots showing Codex, GitHub Actions, VPS bandwidth and Longleaf lease information using inconsistent combinations of bucket labels, percentages, reset text, remaining values and progress bars
 problem: Comparable quota/lease resources were each rendered with different copy and visual conventions. Some exposed provider bucket names, some duplicated usage text, and reset/expiry meaning was not visually standardized. The user had to relearn the same concept for every card.
@@ -238,6 +253,7 @@ project-specific context: Lucerna prefers a compact used-versus-remaining status
 
 ### Opaque identifiers and formatting artifacts must not leak into glanceable UI
 status: NEW
+tracking: #67
 source: Lucerna OpenAI/resource acceptance review, 2026-09-17
 evidence: user-provided release screenshots showing raw `proj_...` project identifiers, mixed time formats/timezones, and negative-zero currency such as `-$0.00` in glanceable production UI
 problem: Machine-oriented identifiers and low-level formatting artifacts were technically valid but visually noisy and confusing. The normal UI did not distinguish human labels from diagnostic identifiers, and formatting normalization was treated as optional polish rather than part of production quality.
@@ -245,6 +261,7 @@ project-specific context: OpenAI project IDs and Lucerna's exact time/currency f
 
 ### Severity colors must encode one stable semantic meaning
 status: NEW
+tracking: #68
 source: Lucerna Usage card visual acceptance review, 2026-09-17
 evidence: user-provided release screenshots where an OpenAI Usage card labeled `NORMAL` used an amber/yellow warning treatment while other healthy states used green
 problem: Status text and status color communicated different meanings. Reusing an attention/warning palette for a normal state weakens the entire severity system because users can no longer infer whether color reflects health, category branding, or decoration.
@@ -252,6 +269,7 @@ project-specific context: Lucerna specifically prefers green for normal, amber f
 
 ### Native interaction acceptance must prove the intended control path, not only the final window state
 status: NEW
+tracking: #69
 source: Lucerna titlebar-close false-positive acceptance, 2026-09-17
 evidence: `YuukiAS/Lucerna@461dcea4015434f90d50922d9b7ae054286c98bc` reported physical close PASS from a coordinate-based smoke because the window became hidden, while the user still could not close the release by clicking the visible X; the app also had focus-loss/outside-click hide routes that could satisfy the same final-state assertion
 problem: The black-box test verified an outcome (`window hidden`) but not its cause (`the visible X received real pointer input and triggered the canonical close path`). Multiple valid hide routes allowed a false positive to pass and prematurely moved the product to user acceptance.
@@ -260,6 +278,7 @@ project-specific context: Lucerna's hide-to-tray titlebar control and exact coor
 
 ### Configured surfaces must collapse from setup mode to status mode
 status: NEW
+tracking: #70
 source: Lucerna task 01050 OpenAI attribution/UI closure, 2026-09-24
 evidence: private-project release screenshot set reviewed by the user after OpenAI setup was already live; the normal panel still exposed current-balance editing, Admin API key replacement, connection maintenance, recovery details and other setup-oriented controls inline
 problem: The frontend treated configuration controls as permanent content instead of lifecycle-specific UI. A completed setup continued to look like an onboarding/admin form, forcing routine users to scan edit fields and maintenance actions that matter only when changing configuration or recovering from failure.
@@ -267,6 +286,7 @@ project-specific context: OpenAI Admin keys, Lucerna balance calibration, Overle
 
 ### Typography governance must define semantic roles and hierarchy, not only token values
 status: NEW
+tracking: #71
 source: Lucerna task 01050 full-panel visual review, 2026-09-24
 evidence: the project already had typography/token cleanup work, yet the release surface still mixed headings, metric labels, status text, explanatory prose, form labels and maintenance copy without a sufficiently clear product-wide hierarchy
 problem: Merely having font-size/weight variables does not produce a coherent interface. Frontend Design needs a role-level typography contract that defines which reader-facing roles exist, how they relate, where each role may appear, and how hierarchy is checked across a complete screen. Otherwise components can all use “approved tokens” and still look unrelated.
@@ -274,6 +294,7 @@ project-specific context: Lucerna's exact type sizes and compact tray density ar
 
 ### Status chrome must follow one coherent visual grammar
 status: NEW
+tracking: #72
 source: Lucerna task 01050 full-panel visual review, 2026-09-24
 evidence: equivalent high-level states were presented with inconsistent container treatment, including plain text states alongside pill-backed/bordered states at comparable hierarchy levels
 problem: A product cannot use background fills, pills, borders and bare labels arbitrarily for sibling status semantics. The inconsistency makes visual weight reflect implementation history instead of meaning and makes the interface look assembled component-by-component rather than designed as one system.

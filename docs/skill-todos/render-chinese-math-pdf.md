@@ -8,6 +8,7 @@ This skill is not one of the central Marketplace plugins, so its real-use failur
 
 ### Nominal skill invocation can still bypass the declared Pandoc + XeLaTeX production route
 status: NEW
+tracking: #80
 source: real mixed Chinese/English mathematical group-meeting report render, 2026-09-19
 evidence: private user-provided first and second PDF renders from the same Markdown report (not copied into this public repository); `pdfinfo` identifies both artifacts as HeadlessChrome / Skia PDFs. Current source contract: `skills/tools/documents-media/render-chinese-math-pdf/SKILL.md`.
 problem:
@@ -19,6 +20,7 @@ project-specific context: the underlying biomedical/statistical formulas and rep
 
 ### Current PDF validator can miss mathematical corruption and non-canonical font output
 status: NEW
+tracking: #81
 source: same 2026-09-19 real render; current `validate_pdf_layout.py` and `SKILL.md`
 evidence: first render visibly lost equation structure; second render became readable only after explicit user intervention. `pdffonts` on the supplied artifacts reports Liberation Serif, Droid Sans Japanese/Fallback and, in the second render, FreeSerif and DejaVu Sans. Current source inspection shows `validate_pdf_layout.py` checks page count, embedded fonts, CJK extraction/fragmentation, table survival and a first-page preview, but does not compare source math against rendered math.
 problem:
@@ -31,6 +33,7 @@ project-specific context: exact equations, page text and unpublished research co
 
 ### Rendering defaults can drift across retries even when the document purpose did not change
 status: NEW
+tracking: #82
 source: same real report, first vs second render
 evidence: first PDF is A4 and 17 pages; second PDF is US Letter and 24 pages, despite representing the same report family. Both identify HeadlessChrome/Skia as producer.
 problem:
@@ -41,6 +44,7 @@ project-specific context: whether a future formal report profile should use A4, 
 
 ### Technically correct XeLaTeX output can still be visually inconsistent because the template invents typography by block class
 status: NEW
+tracking: #83
 source: Clear Writing 055 / real Original-only acceptance PDF render, 2026-09-20
 evidence: private user-provided Clear Writing 055 Case 1 PDF and the producing Codex thread (private material not copied into this public repository). Direct artifact inspection confirms an 8-page A4 PDF produced by XeTeX/xdvipdfmx with embedded TeX Gyre Termes, Noto Serif SC and TeX Gyre Termes Math. The producing thread reports a custom template that assigns `\\LARGE\\bfseries` to the title, `\\small` to explanatory lines, default 10pt to ordinary paragraphs, `\\footnotesize` to blocks classified as `tableline`, and `\\section*` to subheadings.
 problem:

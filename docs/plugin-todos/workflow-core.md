@@ -6,6 +6,7 @@ Canonical maintenance inbox for the `workflow-core` plugin.
 
 ### Keep AI_Skills workflow rules separate from Bridge Kit runtime bugs
 status: PROMOTE_NOW
+tracking: #5
 source: 042/043 Reviewed Handoff pause; 044 writing-style production replay
 evidence: AI_Skills validation previously exposed a stale-review/implementation binding blocker for 042; task 044 then exposed a second generic runtime problem when an otherwise authorized plugin replay had to launch a fresh `codex exec` on a private local artifact and the Host Policy approval reviewer stopped it before the plugin could be tested. The generic runtime source of truth is `YuukiAS/GPT_Codex_AI_Bridge_Kit`; the bounded Host Policy design is now recorded there in `docs/design/host_policy_plugin_replay_authorization.md`.
 target layer: external-runtime
@@ -15,6 +16,7 @@ promotion gate: Bridge Kit regression proving legal `PLANNER_DECISION` terminali
 
 ### Real-task-driven Reviewed Handoff batches
 status: PROMOTE_NOW
+tracking: #6
 source: user decision after presentation Stage-5 loop
 evidence: `docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md`
 target layer: routing/qa
@@ -62,6 +64,7 @@ project-specific context: Lucerna provider/Longleaf、Bobbio Zotero/Figma、Mica
 
 ### Approval-sensitive handoff should emit one bounded kickoff before execution
 status: DEFER_AFTER_056_WORKFLOW_CORE
+tracking: #7
 source: CUHK Date release-candidate staging incidents, 2026-09-21
 evidence: a frozen CUHK Date Goal and repo-level AGENTS explicitly authorized a staging-only workstation catalog service and Cloudflare tunnel work, but Codex/auto-review still stopped because repository text was treated as scope evidence rather than current-user-visible authorization. The user had to repeat the same approval in chat. Bridge Kit already has the correct runtime principle in its upfront-authorization guidance: the current user message may authorize a bounded frozen effect and the same effect should not be requested again later. Persistent Run additionally has a specialized kickoff generator, but ordinary approval-sensitive execution has no equally convenient handoff surface.
 target layer: workflow-core task authoring / execution handoff; consume Bridge runtime semantics rather than creating a second authorization engine.
@@ -109,6 +112,7 @@ promotion gate:
 
 ### Subagent browser capability checks must use rendered-page semantics, not foreground-window assumptions
 status: NEW
+tracking: #8
 source: CUHK Date one-parent Work orchestration probe and first targeted parent-run incident, 2026-09-21
 evidence: a native Work subagent A could use the in-app browser and establish visible SauceDemo login/cart state. A second subagent initially reported browser inability because the prompt's "visible browser/UI" wording was interpreted as requiring a foreground / `visible:true` mode. A diagnostic rerun with corrected wording used the same native in-app browser, saw the login form, and proved no inherited A session/cart state. The first real CUHK Date parent run then repeated the same failure pattern: original P01 child and one replacement both stopped pre-auth after trying foreground/visibility modes, while primary handoff remained unconsumed. This is a workflow/runtime-prompt defect, not product failure or absence of browser capability.
 target layer: workflow-core / agent orchestration / actual-surface browser runtime discipline.
@@ -133,6 +137,7 @@ promotion gate:
 
 ### Task-local prohibitions must expire with their task instead of becoming accidental global policy
 status: DEFER_AFTER_056_WORKFLOW_CORE
+tracking: #9
 source: Lucerna 01037 product-polish continuation, 2026-09-17
 evidence: the current objective explicitly required creating `01037_product_polish_closure` task/result artifacts, but execution was repeatedly blocked because a prior task's local instruction said not to create a successor Goal; the user had to explicitly authorize that the current objective superseded the stale old boundary
 problem: Historical task-local prohibitions are being treated as indefinitely persistent safety constraints even after the task that introduced them has ended and a newer user-approved objective explicitly requires the opposite action. This turns stale context into a false Human Gate, forces the user to resolve non-substantive instruction history, and can cause repeated approval loops even when the current task scope is clear.
@@ -140,6 +145,7 @@ project-specific context: The exact `01037` filenames and Lucerna successor-Goal
 
 ### Post-056 acceptance artifact packaging / comparison-review fidelity
 status: DEFER_UNTIL_056_COMPLETE
+tracking: #10
 source: Clear Writing 055 final user-acceptance artifact failures, 2026-09-17
 evidence: the user repeatedly requested a readable Original-vs-C6 acceptance artifact, but successive attempts were too short, mixed report/gate material into the acceptance surface, mechanically split content into hundreds of misaligned pages, confused preview/render claims, and repeatedly surfaced temporary paths. This exposed both a generic workflow packaging gap and a research-document semantic-alignment gap.
 target layer: workflow-core release/user-acceptance closure. Research-document semantics belong to `research-writing`; slide/page composition and render quality belong to the relevant artifact/presentation capability.
@@ -174,6 +180,7 @@ Expected mapping after 056 completion, to verify rather than assume:
 
 ### Reviewed Handoff exact sibling worktree authorization can still be unexecutable under Host sandbox
 status: NEW / POST_056_REFINEMENT
+tracking: #11
 source: Project Thread Handoff V1 implementation runtime failure, 2026-09-22
 evidence: the frozen kickoff explicitly authorized task key `science-communication--project-thread-handoff`, branch `reviewed/science-communication--project-thread-handoff`, and sibling worktree `../AI_Skills_Collection-science-communication-project-thread-handoff`. Codex correctly recognized the authorization. The normal command `git worktree add -b reviewed/science-communication--project-thread-handoff ../AI_Skills_Collection-science-communication-project-thread-handoff origin/main` was first routed to approval; after the user explicitly approved that exact command, Auto-review still rejected it because the current environment policy forbids the required escalated sandbox permission and exposes no approval override. The Goal then had no legal continuation path without changing the frozen worktree contract.
 target layer: workflow-core execution handoff / Bridge-owned Git runtime primitive.
