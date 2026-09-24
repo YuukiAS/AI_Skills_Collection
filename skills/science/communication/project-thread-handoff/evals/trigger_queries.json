@@ -2,19 +2,24 @@
   "positive": [
     "Use the installed Project Thread Handoff skill on this long project thread and prepare the continuation prompt for a new thread.",
     "Invoke Project Thread Handoff for this existing DII thread; preserve the latest frozen decisions and give me one initialization prompt.",
-    "Run Project Thread Handoff here so I can continue this project in a fresh chat without pasting the whole history."
+    "Run Project Thread Handoff here so I can continue this project in a fresh chat without pasting the whole history.",
+    "Use Project Thread Handoff recovery mode in this Project to recover the old full thread about the publisher transport issue and continue from that state.",
+    "Invoke Project Thread Handoff to recover the previous same-Project conversation from its past-chat source, then continue the next step."
   ],
   "negative": [
     "总结一下当前项目",
     "我们现在做到哪了",
     "帮我继续研究",
-    "handoff 是什么意思"
+    "handoff 是什么意思",
+    "你记得我以前的偏好吗",
+    "从记忆里恢复一下这个项目"
   ],
   "near_miss": [
     "Please summarize the current project status for me.",
     "What should we do next on this project?",
     "Help me continue the research from here.",
-    "Explain what a project handoff prompt means."
+    "Explain what a project handoff prompt means.",
+    "Can you use saved memory to guess what the old thread decided?"
   ],
-  "notes": "Positive examples require an explicit installed Skill invocation. Ordinary summaries, status checks, continuation requests, and definition questions should not trigger this skill implicitly."
+  "notes": "Positive examples require an explicit installed Skill invocation. Mode A is current-thread handoff. Mode B is same-Project old-thread recovery with identifiable target past-chat provenance. Ordinary summaries, status checks, continuation requests, definition questions, and generic memory requests should not trigger this skill implicitly."
 }

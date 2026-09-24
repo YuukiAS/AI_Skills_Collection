@@ -22,5 +22,47 @@
       "chat-only code state as verified repository fact",
       "fabricated path or commit"
     ]
+  },
+  "ambiguous_target": {
+    "scenario": "Two same-Project old conversations share the same topic clue, and choosing the wrong one would change the route.",
+    "expected_behavior": "Ask at most one minimal clarification before recovering a route-changing decision.",
+    "must_not_preserve": [
+      "guessing the target conversation",
+      "entering a confirmation loop"
+    ]
+  },
+  "unsourced_recall": {
+    "scenario": "The model remembers a plausible route, but the product surface does not expose an identifiable target past-chat source.",
+    "expected_behavior": "Label the summary as limited or attribution-unverified recovery.",
+    "must_not_preserve": [
+      "generic Saved Memory as target-thread authority",
+      "unsourced recall as a thread-only delta",
+      "paraphrase as a direct quote"
+    ]
+  },
+  "missing_route_provenance": {
+    "scenario": "A recovered route-changing decision lacks target-chat provenance.",
+    "expected_behavior": "Fail closed on that decision and avoid selecting a route.",
+    "must_not_preserve": [
+      "strong recovery PASS",
+      "automatic route selection"
+    ]
+  },
+  "cross_project_boundary": {
+    "scenario": "Relevant context appears to come from another Project or from unattributed memory.",
+    "expected_behavior": "Reject it as Mode B recovery authority.",
+    "must_not_preserve": [
+      "cross-Project thread-only delta",
+      "Saved Memory bridge between Projects"
+    ]
+  },
+  "current_thread_mode_a": {
+    "scenario": "A current long thread needs one copy-ready initialization prompt for a new thread.",
+    "expected_behavior": "Preserve current-context handoff semantics without requiring same-Project recovery.",
+    "must_preserve": [
+      "one initialization prompt",
+      "no second confirmation",
+      "canonical locators for facts"
+    ]
   }
 }

@@ -2,7 +2,7 @@
 
 给 Codex 使用的科研与工程技能库。它把常用的写作、汇报、统计、医学影像、前端设计和仓库维护经验整理成可安装的插件，让日常任务更稳、更容易验收。
 
-Repository / CLI release: `5.1.0`
+Repository / CLI release: `5.1.1`
 
 ## 可单独安装的技能
 
@@ -10,11 +10,11 @@ Repository / CLI release: `5.1.0`
 
 |  |  |
 |---|---|
-| <img src="./skills/science/communication/project-thread-handoff/assets/app-facing.svg" width="40" alt="Project Thread Handoff icon"> | <strong>Project Thread Handoff</strong><br><code>project-thread-handoff</code> · v`0.1`<br>用于长期项目聊天的上下文交接与新 thread 续接。 |
+| <img src="./skills/science/communication/project-thread-handoff/assets/app-facing.svg" width="40" alt="Project Thread Handoff icon"> | <strong>Project Thread Handoff</strong><br><code>project-thread-handoff</code> · v`0.2`<br>用于长期项目聊天的上下文交接；旧 thread 已满时，也可在同一个 ChatGPT Project 的新 thread 中恢复关键续接状态。 |
 | <img src="./skills/tools/documents-media/render-chinese-math-pdf/assets/app-facing.svg" width="40" alt="Chinese Math PDF icon"> | <strong>Chinese Math PDF</strong><br><code>render-chinese-math-pdf</code> · v`0.1`<br>用于中文、中英混合和数学密集型科研 PDF 的可靠渲染与检查。 |
 | <img src="./skills/tools/hpc/slurm-workflows/assets/slurm-workflows.svg" width="40" alt="Slurm Workflows icon"> | <strong>Slurm Workflows</strong><br><code>slurm-workflows</code> · v`0.1`<br>用于 Slurm 学校/HPC 集群任务的规划、提交、监控与诊断。 |
 
-`Project Thread Handoff` 也可以通过一个 `skills-only` ChatGPT personal Plugin wrapper 使用；这个 wrapper 不含 MCP，也不是第二份能力 source。更新说明见：[docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md](docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md)。
+`Project Thread Handoff` 也可以通过一个 `skills-only` ChatGPT personal Plugin wrapper 使用；这个 wrapper 不含 MCP，也不是第二份能力 source。更新 wrapper 时应复用同一个 canonical Skill 和图标，说明见：[docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md](docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md)。
 
 ## 中央插件
 

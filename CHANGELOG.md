@@ -4,6 +4,42 @@
 
 No unreleased changes.
 
+## 5.1.1 - 2026-09-24
+
+Repository `5.1.1` is a compatible patch release candidate for Project Thread
+Handoff v0.2 same-Project recovery.
+
+Repository bump decision: PATCH
+Reason: this release improves the existing standalone Project Thread Handoff
+workflow with same-Project old-thread recovery, without adding a new central
+Plugin, MCP service, database, external API, or repository write mode.
+
+Affected plugins:
+- all central plugins: NO_BUMP
+  Reason: Project Thread Handoff remains a standalone Skill and does not change
+  any central Marketplace plugin payload or production behavior.
+
+Unchanged plugin versions: `workflow-core 0.3`, `ai-skills-core 0.4`,
+`writing-style 0.3`, `research-writing 0.1`, `presentations 0.3`,
+`scientific-visualization 0.1`, `web-development 0.2`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Updated standalone Skill `project-thread-handoff` from `0.1` to `0.2`.
+- Preserved Mode A current-thread handoff: explicit invocation, current context,
+  latest user/frozen decision precedence, thread-only deltas, canonical
+  locators, one initialization prompt, no second confirmation, and no repo
+  write.
+- Added Mode B same-Project old-thread semantic recovery. Strong recovery now
+  requires identifiable target past-chat provenance for route-changing claims.
+- Added limited recovery boundaries: generic Saved Memory, profile summaries
+  and unsourced recall cannot become target-thread authority.
+- Kept the ChatGPT regular Chat distribution path as an existing PRIVATE /
+  USER-scope / skills-only personal Plugin wrapper. The wrapper still has
+  `MCP_ADDED = NO`, and future updates must preserve the same Plugin identity
+  and reuse the canonical `assets/app-facing.svg` icon bytes.
+
 ## 5.1.0 - 2026-09-23
 
 Repository `5.1.0` formally adds the standalone Project Thread Handoff Skill.

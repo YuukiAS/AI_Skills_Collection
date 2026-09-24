@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import sys
 import unittest
 from pathlib import Path
@@ -20,6 +21,8 @@ OPENAI_FILE = SKILL_DIR / "agents" / "openai.yaml"
 EVAL_FILE = SKILL_DIR / "evals" / "trigger_queries.json"
 REGISTRY_FILE = REPO_ROOT / "registry.json"
 G3_FIXTURE = REPO_ROOT / "tests" / "fixtures" / "project_thread_handoff" / "g3_regressions.json"
+ICON_FILE = SKILL_DIR / "assets" / "app-facing.svg"
+CANONICAL_ICON_SHA256 = "a184ec4d25a335e506fed5a37c2fb93fdc3b49c1416372096ba55b2e3e90a643"
 
 
 class ProjectThreadHandoffContractTests(unittest.TestCase):
@@ -28,6 +31,7 @@ class ProjectThreadHandoffContractTests(unittest.TestCase):
 
         self.assertEqual(meta.get("name"), "project-thread-handoff")
         self.assertEqual(meta.get("status"), "active")
+        self.assertEqual(meta.get("version"), "0.2")
         self.assertEqual(meta.get("provenance"), "user-authored")
         self.assertIs(meta.get("trusted"), False)
         self.assertIs(meta.get("requires_network"), False)
@@ -62,6 +66,7 @@ class ProjectThreadHandoffContractTests(unittest.TestCase):
         self.assertIs(record.get("writes_files"), False)
         self.assertIs(record.get("executes_code"), False)
         self.assertEqual(record.get("secrets_needed"), [])
+        self.assertIn("recover a same-Project old thread", record.get("description", ""))
 
     def test_body_preserves_authority_locator_and_read_only_contract(self) -> None:
         _, body = read_frontmatter(SKILL_FILE)
@@ -100,6 +105,47 @@ class ProjectThreadHandoffContractTests(unittest.TestCase):
         self.assertIn("帮我继续研究", data["negative"])
         self.assertIn("handoff 是什么意思", data["negative"])
         self.assertIn("explicit installed Skill invocation", data["notes"])
+        self.assertIn("same-Project old-thread recovery", data["notes"])
+        self.assertTrue(any("recover" in item.lower() for item in data["positive"]))
+        self.assertTrue(any("saved memory" in item.lower() for item in data["near_miss"]))
+
+    def test_mode_b_recovery_contract_is_target_chat_provenance_bound(self) -> None:
+        _, body = read_frontmatter(SKILL_FILE)
+
+        required_phrases = [
+            "Mode B",
+            "same ChatGPT Project",
+            "past-chat retrieval or candidate-identification clues",
+            "Do not describe them as deterministic conversation database keys",
+            "identifiable target past-chat provenance",
+            "Generic Saved Memory",
+            "unsourced semantic recall",
+            "not target-thread authority",
+            "route-changing recovered claims",
+            "target-chat backing",
+            "limited recovery",
+            "fail closed",
+            "ask at most one minimal clarification",
+            "Project-external or unattributed context",
+            "current repositories, artifacts, reports, results",
+        ]
+        for phrase in required_phrases:
+            self.assertIn(phrase, body)
+
+    def test_mode_b_does_not_add_forbidden_runtime_architecture(self) -> None:
+        _, body = read_frontmatter(SKILL_FILE)
+        forbidden_phrases = [
+            "No second Recovery Skill",
+            "no CURRENT file",
+            "no Project-wide full transcript scan",
+            "no periodic checkpoint requirement",
+            "no automatic new thread",
+            "no transcript exporter",
+            "no browser automation or browser extension",
+            "no external API",
+        ]
+        for phrase in forbidden_phrases:
+            self.assertIn(phrase, body)
 
     def test_skill_does_not_add_extra_runtime_surfaces(self) -> None:
         unexpected = [
@@ -108,6 +154,8 @@ class ProjectThreadHandoffContractTests(unittest.TestCase):
             SKILL_DIR / "database",
             SKILL_DIR / "CURRENT.json",
             SKILL_DIR / "history",
+            SKILL_DIR / "mcp",
+            SKILL_DIR / "transcripts",
         ]
         self.assertFalse([path for path in unexpected if path.exists()])
         self.assertEqual(sorted(path.name for path in (SKILL_DIR / "assets").glob("*")), ["app-facing.svg"])
@@ -118,6 +166,11 @@ class ProjectThreadHandoffContractTests(unittest.TestCase):
 
         self.assertIn("cat_trace", fixture)
         self.assertIn("cardiacnexus", fixture)
+        self.assertIn("ambiguous_target", fixture)
+        self.assertIn("unsourced_recall", fixture)
+        self.assertIn("missing_route_provenance", fixture)
+        self.assertIn("cross_project_boundary", fixture)
+        self.assertIn("current_thread_mode_a", fixture)
         self.assertIn("Later assistant brainstorming does not override", body)
         self.assertIn("short recurrence guard", body)
         self.assertIn("Repositories, artifacts, reports, and generated outputs remain the authority", body)
@@ -127,6 +180,10 @@ class ProjectThreadHandoffContractTests(unittest.TestCase):
         self.assertNotIn("CARE", body)
         self.assertNotIn("CAT-TRACE", body)
         self.assertNotIn("CardiacNexus", body)
+
+    def test_canonical_icon_bytes_are_unchanged(self) -> None:
+        digest = hashlib.sha256(ICON_FILE.read_bytes()).hexdigest()
+        self.assertEqual(digest, CANONICAL_ICON_SHA256)
 
 
 if __name__ == "__main__":

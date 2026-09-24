@@ -19,16 +19,19 @@ STANDALONE_SKILLS = {
         "path": Path("skills/science/communication/project-thread-handoff"),
         "display": "Project Thread Handoff",
         "icon": Path("assets/app-facing.svg"),
+        "version": "0.2",
     },
     "render-chinese-math-pdf": {
         "path": Path("skills/tools/documents-media/render-chinese-math-pdf"),
         "display": "Chinese Math PDF",
         "icon": Path("assets/app-facing.svg"),
+        "version": "0.1",
     },
     "slurm-workflows": {
         "path": Path("skills/tools/hpc/slurm-workflows"),
         "display": "Slurm Workflows",
         "icon": Path("assets/slurm-workflows.svg"),
+        "version": "0.1",
     },
 }
 
@@ -47,13 +50,13 @@ EXPECTED_PLUGIN_VERSIONS = {
 
 
 class StandaloneSkillBaselineTests(unittest.TestCase):
-    def test_standalone_skills_have_v01_metadata_and_icons(self) -> None:
+    def test_standalone_skills_have_expected_metadata_and_icons(self) -> None:
         for slug, info in STANDALONE_SKILLS.items():
             skill_dir = REPO_ROOT / info["path"]
             meta, _ = read_frontmatter(skill_dir / "SKILL.md")
 
             self.assertEqual(meta.get("name"), slug)
-            self.assertEqual(meta.get("version"), "0.1")
+            self.assertEqual(meta.get("version"), info["version"])
             self.assertEqual(meta.get("icon_small"), info["icon"].as_posix())
             self.assertEqual(meta.get("icon_large"), info["icon"].as_posix())
 
@@ -82,7 +85,7 @@ class StandaloneSkillBaselineTests(unittest.TestCase):
             self.assertNotIn(info["path"].as_posix(), serialized)
 
     def test_repository_version_and_contact_sheet_are_stable(self) -> None:
-        self.assertEqual((REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip(), "5.1.0")
+        self.assertEqual((REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip(), "5.1.1")
 
         sheet = (REPO_ROOT / "docs" / "audits" / "ICON_CONTACT_SHEET.svg").read_text(encoding="utf-8")
         for slug, info in STANDALONE_SKILLS.items():
