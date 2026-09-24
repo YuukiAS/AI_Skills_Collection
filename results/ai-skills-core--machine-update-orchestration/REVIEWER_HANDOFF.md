@@ -97,3 +97,38 @@ The reviewed product candidate remains `4b8414733f3efc2d8707c5fbf448cbe8ec7a7d00
 The post-review promotion/G2 runbook now binds the exact reviewed candidate/evidence lineage, starts from latest main with a production/version/release overlap check, preserves accepted `workflow-core 0.4` and task `ai-skills-core 0.5`, keeps repository formal candidate `5.2.0`, uses only non-force integration/release advancement, forbids Bridge release advancement, and hands central G2 closure into Maintenance Board `ADAPTING` rather than DONE.
 
 Maintenance Board mutation truth is recorded in `IR_B004_MAINTENANCE_BOARD_PENDING_MUTATION.md`. This ChatGPT Planner surface cannot truthfully invoke the board-required installed Clear Writing plugin and cannot mutate Project V2 fields, so it records `CLEAR_WRITING_UNAVAILABLE` plus the exact pending Issue/source/Project mutation instead of fabricating a tracking number or claiming Project sync.
+
+## Post-Review Promotion / G2 Closure Handoff
+
+Prepared date: 2026-09-25
+
+Independent Implementation Review passed for pre-release promotion. Formal
+promotion and real G2 were completed after that PASS.
+
+Current central identities:
+
+- Formal AI_Skills commit: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
+- Remote `main`: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
+- Remote `release`: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
+- Marketplace `yuukias-ai-skills`: `ref = release`, last revision
+  `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
+- Production `ai-skills-core@yuukias-ai-skills`: installed/enabled, version `0.5`
+- Fresh released smoke: `ai-bridge plugin-replay` run
+  `20260924T172142Z-368783282d6c`, status `completed`, exit code `0`
+
+Maintenance Board:
+
+- Tracking Issue: `#86`
+- Project: `AI Skills Maintenance`
+- Status: `ADAPTING`
+- Area: `ai-skills-core`
+- Resolution commit: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
+- Issue remains open.
+
+Next handoff is not another implementation review for G1-G5. The central
+release/G2 work is complete. The next owner is the Maintenance Board
+required-consumer adaptation phase. Do not mark the overall maintenance action
+DONE until required consumers are PASS/N/A with durable evidence and the board
+closure rule is satisfied.
+
+NEXT_HANDOFF=MAINTENANCE_BOARD_ADAPTING

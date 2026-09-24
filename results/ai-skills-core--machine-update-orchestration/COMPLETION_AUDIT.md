@@ -67,3 +67,39 @@ The implementation candidate is source-complete, deterministic-validation-comple
 Recommended next owner action:
 
 - Hand this exact task branch candidate to the independent Reviewer. After Reviewer PASS, integrate/promote the exact candidate, fast-forward AI_Skills `release`, run the real legacy Marketplace `main -> release` migration, reinstall `ai-skills-core 0.5`, and complete G2 released production smoke.
+
+## Post-Review G2 Closure Addendum
+
+Addendum date: 2026-09-25
+
+After Independent Reviewer PASS, formal promotion and real G2 were completed.
+The release-critical central identity is now:
+
+- Formal AI_Skills commit: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
+- Remote `main`: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
+- Remote `release`: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
+- Repository version: `5.2.0`
+- `ai-skills-core`: `0.5`
+- `workflow-core`: `0.4`
+
+G2 status is now `PASS`:
+
+- legacy `yuukias-ai-skills` Marketplace source metadata was captured at `main`;
+- the source was replaced with the same AI_Skills repository at `release` using
+  official Codex Marketplace commands;
+- production `ai-skills-core@yuukias-ai-skills` was installed at version `0.5`;
+- fresh released normal-entry smoke completed through production
+  `ai-bridge plugin-replay` with wrapper `status=completed`, exit code `0`;
+- the released `sync this machine` normal entry loaded through
+  `ai-skills-core:machine-update-orchestrator` and returned the already-current
+  state boundary truthfully.
+
+Evidence:
+
+- `G2_POST_REVIEW_PROMOTION_EVIDENCE.md`
+- `g2_released_smoke/released_normal_entry_run.json`
+- `g2_released_smoke/released_normal_entry_smoke_report.md`
+
+The central release/G2 objective is closed, but the Maintenance Board lifecycle
+is `ADAPTING`, not `DONE`. Final DONE requires required-consumer adaptation or a
+policy-backed N/A closure.

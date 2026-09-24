@@ -1,0 +1,7 @@
+完成了这次只读 production plugin replay。
+
+结论：`ai-skills-core@yuukias-ai-skills` 已安装并启用，版本 `0.5`；released AI Skills Maintainer normal entry 已加载。`sync this machine` 的内部 owner 是 `ai-skills-core:machine-update-orchestrator`，插件展示名是 `AI Skills Maintainer`。对于已经更新到当前状态的会话，预期用户态是 `ALREADY_CURRENT`；如果实际发生插件更新才应返回 `UPDATED_RELOAD_REQUIRED`。
+
+我没有运行更新、安装、删除、Git、Bridge/Host、网络或 Marketplace mutation 命令。报告已写到：
+
+[released_normal_entry_smoke_report.md](/home/yuukias/.ai-bridge/plugin-replay/20260924T172142Z-368783282d6c/outputs/released_normal_entry_smoke_report.md)

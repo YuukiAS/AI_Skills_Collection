@@ -61,3 +61,30 @@ Task key: `ai-skills-core--machine-update-orchestration`
 ## G2 Sequencing
 
 G2 remains `SEQUENCED WAITING`. This repair did not execute formal promotion, did not fast-forward AI_Skills `release`, did not perform real production Marketplace migration, did not reinstall production `ai-skills-core 0.5`, and did not run released fresh-session smoke.
+
+## Post-Review Formal Promotion And G2
+
+Independent Implementation Review returned
+`IMPLEMENTATION_REVIEW_PASS_FOR_PRE_RELEASE_PROMOTION` for exact reviewed product
+candidate `4b8414733f3efc2d8707c5fbf448cbe8ec7a7d00` and control-doc closure tip
+`e72ec4e520f54564cd4dd657316ca539335edfb6`.
+
+Formal promotion and real G2 were then executed:
+
+- integrated and validated formal AI_Skills commit:
+  `c7776e202ae0324fc00b719b6ef8224b8e0498fe`;
+- remote `main` verified at the same commit;
+- AI_Skills `release` fast-forwarded non-force to the same commit;
+- real legacy `yuukias-ai-skills` Marketplace migrated from `main` to `release`;
+- production `ai-skills-core@yuukias-ai-skills` installed at `0.5`;
+- fresh released normal-entry smoke completed through `ai-bridge plugin-replay`,
+  run `20260924T172142Z-368783282d6c`, wrapper status `completed`, exit code `0`.
+
+Durable G2 evidence is recorded in
+`results/ai-skills-core--machine-update-orchestration/G2_POST_REVIEW_PROMOTION_EVIDENCE.md`.
+
+Maintenance Board tracking Issue `#86` was created and linked from the canonical
+TODO. After central integration + formal release + G2 closure, Project status was
+updated to `ADAPTING` with Resolution commit
+`c7776e202ae0324fc00b719b6ef8224b8e0498fe`. The issue remains open; overall
+maintenance is not `DONE`.
