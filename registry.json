@@ -1,6 +1,6 @@
 {
   "version": "5.0.8",
-  "generated_at": "2026-09-23T09:09:10+00:00",
+  "generated_at": "2026-09-24T12:50:33+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
   "skill_count": 150,
@@ -5640,7 +5640,7 @@
       "subcategory": "research",
       "slug": "research-reporting",
       "install_selector": "writing/research/research-reporting",
-      "description": "Create repo-grounded research reports, milestone summaries, experiment reviews, technical notes, advisor/group-meeting reports, and result retrospectives from project evidence. Use for Markdown reports and internal scientific documentation, not for full journal manuscript workflows.",
+      "description": "Create repo-grounded research reports, milestone summaries, experiment reviews, technical notes, advisor/group-meeting reports, and result retrospectives from project evidence. Use for report semantics even when the final deliverable is a formal PDF; rendering mechanics belong to companion document skills.",
       "status": "active",
       "provenance": "user-authored",
       "source_repo_url": "",

@@ -346,7 +346,15 @@ def codex_home_info(skills_root: Path) -> dict[str, Any]:
     }
 
 
-def agents_block(project: Path, target: str, install_kind: str, records: list[dict[str, Any]], mode: str, prune: bool) -> str:
+def agents_block(
+    project: Path,
+    target: str,
+    install_kind: str,
+    records: list[dict[str, Any]],
+    mode: str,
+    prune: bool,
+    routing_notes: list[str] | None = None,
+) -> str:
     groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for record in records:
         groups[str(record.get("domain") or record.get("scope") or "other")].append(record)
@@ -362,9 +370,13 @@ def agents_block(project: Path, target: str, install_kind: str, records: list[di
         "",
         "When a task matches an installed skill, read that skill's `SKILL.md` before acting. Keep progressive disclosure: load `references/` only when the skill says they are relevant.",
         "",
-        "## Skill Routing",
-        "",
     ]
+    if routing_notes:
+        lines.extend(["## Profile Routing Notes", ""])
+        for note in routing_notes:
+            lines.append(f"- {note}")
+        lines.append("")
+    lines.extend(["## Skill Routing", ""])
     for domain, items in sorted(groups.items()):
         lines.append(f"### {domain}")
         for record in sorted(items, key=lambda r: r["name"]):
@@ -452,6 +464,22 @@ def install_kind(args: argparse.Namespace) -> str:
     return "mixed:" + "+".join(parts) if len(parts) > 1 else (parts[0] if parts else "explicit")
 
 
+def profile_routing_notes(profile_names: list[str] | None) -> list[str]:
+    notes: list[str] = []
+    seen: set[str] = set()
+    profiles = load_profiles()
+    for profile_name in profile_names or []:
+        profile = profiles.get(profile_name)
+        if not profile:
+            continue
+        for raw_note in profile.get("routing_notes", []):
+            note = str(raw_note).strip()
+            if note and note not in seen:
+                notes.append(note)
+                seen.add(note)
+    return notes
+
+
 def install_request(args: argparse.Namespace) -> dict[str, Any]:
     return {
         "profiles": list(args.profile or []),
@@ -514,7 +542,15 @@ def install_result(args: argparse.Namespace) -> dict[str, Any]:
             }
         )
 
-    block = agents_block(project, args.target, install_kind(args), records, args.mode, args.prune_managed)
+    block = agents_block(
+        project,
+        args.target,
+        install_kind(args),
+        records,
+        args.mode,
+        args.prune_managed,
+        profile_routing_notes(args.profile),
+    )
     if args.write_agents_md and args.target == "repo":
         update_agents(project, block, args.dry_run)
     elif args.write_agents_md and args.target != "repo":

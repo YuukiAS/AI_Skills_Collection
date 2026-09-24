@@ -1,11 +1,17 @@
 from __future__ import annotations
 
+import argparse
 import json
+import sys
+import tempfile
 import unittest
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
+
+import skills  # noqa: E402
 
 
 def read_skill(rel_path: str) -> str:
@@ -46,6 +52,39 @@ class ResearchWritingRoutingTests(unittest.TestCase):
         self.assertIn("skills/tools/documents-media/render-chinese-math-pdf", text)
         self.assertIn("fail closed", text)
         self.assertIn("markdown-only research authoring requests remain markdown-only", text)
+        self.assertIn("formal pdf", text)
+
+    def test_research_main_agents_notes_route_report_pdf_through_reporting_first(self) -> None:
+        profile = json.loads((REPO_ROOT / "profiles/research-main.json").read_text(encoding="utf-8"))
+        notes = "\n".join(profile.get("routing_notes", [])).lower()
+        self.assertIn("research-reporting", notes)
+        self.assertIn("render-chinese-math-pdf", notes)
+        self.assertLess(notes.index("research-reporting"), notes.index("render-chinese-math-pdf"))
+
+        with tempfile.TemporaryDirectory() as tmp:
+            args = argparse.Namespace(
+                profile=["research-main"],
+                domain=[],
+                category=[],
+                skill=[],
+                target="repo",
+                project=tmp,
+                mode="copy",
+                dry_run=False,
+                json=True,
+                write_agents_md=True,
+                prune_managed=False,
+            )
+            skills.install_result(args)
+            agents = (Path(tmp) / "AGENTS.md").read_text(encoding="utf-8")
+
+        self.assertIn("## Profile Routing Notes", agents)
+        self.assertIn("first read and apply `research-reporting`", agents)
+        self.assertIn("then use `render-chinese-math-pdf`", agents)
+        self.assertLess(
+            agents.index("first read and apply `research-reporting`"),
+            agents.index("then use `render-chinese-math-pdf`"),
+        )
 
     def test_research_writing_aggregate_keeps_internal_paper_boundaries(self) -> None:
         data = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
