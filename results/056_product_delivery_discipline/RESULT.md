@@ -66,7 +66,8 @@ The verified v0.5 package main locator is
 
 ## Final Integration Closure
 
-G1-G8 and Source Discovery are PASS, including final real-user G1 evidence.
+G1-G8 and Source Discovery are PASS, including final real-user G1 evidence and
+the final real Host install/validate boundary.
 Do not rerun those gates merely because release/evidence SHAs advance while
 production bytes remain candidate-equivalent.
 

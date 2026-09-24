@@ -23,10 +23,26 @@ Use this skill only for maintaining `AI_Skills_Collection`. Do not use it for or
 ## Boundary
 
 - Maintain source skills, profiles, README, registry, catalog, provenance, icon metadata, version/changelog metadata, and Codex App marketplace publication.
+- Own AI_Skills formal release closure and the AI_Skills `release` ref producer path when a release task explicitly authorizes it.
 - Do not duplicate OpenAI system skills such as `skill-creator`, `skill-installer`, or `plugin-creator`.
 - Do not use this as a domain skill. Frontend taste, PPT planning, bioinformatics retrieval, writing, and statistics live in their own plugins or official capabilities.
 - Treat `.agents/plugins/marketplace.json` and `plugins/codex/plugins/` as generated output.
 - Keep external source intake temporary, reviewed, and provenance-recorded.
+
+## Current-Machine Update Companion
+
+When the user asks AI Skills Maintainer for a short machine update such as `update presentations`, `update AI Skills`, `update Bridge Kit`, or `sync this machine`, route the normal entry through `machine-update-orchestrator`.
+
+This repository maintainer remains the owner for AI_Skills source/release production:
+
+- source-first plugin/repository maintenance;
+- generated parity;
+- version/changelog/release closure;
+- formal AI_Skills `release` ref advancement during formal release closure.
+
+It does not replace the orchestrator's current-machine discovery, Marketplace bootstrap, route composition or fresh-session boundary. It also does not own Bridge distribution/version closure; that belongs to `bridge-kit-maintainer` inside the same `ai-skills-core` plugin.
+
+Formal release scope expansion must come from the formal `release` ref and matching root `CHANGELOG.md` release entry, using an optional `### Update impact` subsection. Absence of `### Update impact` means isolated by default; component changelogs cannot independently broaden mutation scope.
 
 ## Plugin Refinement Companion Mode
 

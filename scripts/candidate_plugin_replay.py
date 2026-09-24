@@ -497,6 +497,16 @@ def repo_relative_existing_file(root: Path, path: str) -> Path:
     return candidate
 
 
+def repo_relative_existing_dir(root: Path, path: str) -> Path:
+    candidate = (root / path).resolve() if not Path(path).is_absolute() else Path(path).resolve()
+    root_resolved = root.resolve()
+    if root_resolved != candidate and root_resolved not in candidate.parents:
+        raise ReplayError(f"directory must be inside this repository: {path}")
+    if not candidate.is_dir():
+        raise ReplayError(f"directory does not exist: {path}")
+    return candidate
+
+
 def prepare_workspace(root: Path, run_dir: Path, task: Path, inputs: list[Path]) -> tuple[Path, Path, str]:
     workspace = run_dir / "workspace"
     output_dir = workspace / "outputs"
@@ -619,6 +629,7 @@ def run_child_exec(
     *,
     stdout_path: Path,
     stderr_path: Path,
+    writable_dirs: list[Path] | None = None,
     timeout_seconds: float = DEFAULT_CHILD_TIMEOUT_SECONDS,
     terminate_grace_seconds: float = DEFAULT_CHILD_TERMINATE_GRACE_SECONDS,
 ) -> CommandResult:
@@ -640,6 +651,11 @@ def run_child_exec(
         "--ephemeral",
         "-",
     ]
+    for writable_dir in writable_dirs or []:
+        args[args.index("--skip-git-repo-check"):args.index("--skip-git-repo-check")] = [
+            "--add-dir",
+            str(writable_dir),
+        ]
     stdout_path.parent.mkdir(parents=True, exist_ok=True)
     stderr_path.parent.mkdir(parents=True, exist_ok=True)
     start_new_session = os.name == "posix"
@@ -690,11 +706,19 @@ def terminate_child_tree(proc: subprocess.Popen[str], use_process_group: bool, g
     proc.wait()
 
 
-def run_replay(root: Path, plugin: str, candidate_commit: str, task_arg: str, input_args: list[str]) -> dict[str, Any]:
+def run_replay(
+    root: Path,
+    plugin: str,
+    candidate_commit: str,
+    task_arg: str,
+    input_args: list[str],
+    writable_dir_args: list[str] | None = None,
+) -> dict[str, Any]:
     runtime = ensure_runtime_available(root)
     paths = runtime_paths(root)
     task = repo_relative_existing_file(root, task_arg)
     inputs = [repo_relative_existing_file(root, item) for item in input_args]
+    writable_dirs = [repo_relative_existing_dir(root, item) for item in (writable_dir_args or [])]
     candidate = resolve_candidate_plugin(root, candidate_commit, plugin)
     run_id = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime()) + f"-{os.getpid()}"
     run_dir = paths.state_root / "runs" / run_id
@@ -726,6 +750,7 @@ def run_replay(root: Path, plugin: str, candidate_commit: str, task_arg: str, in
                     prompt,
                     stdout_path=stdout_path,
                     stderr_path=stderr_path,
+                    writable_dirs=writable_dirs,
                 )
                 if not stdout_path.exists():
                     stdout_path.write_text(child.stdout, encoding="utf-8")
@@ -749,6 +774,7 @@ def run_replay(root: Path, plugin: str, candidate_commit: str, task_arg: str, in
                     "add_payload": add_payload,
                     "stdout_path": str(stdout_path),
                     "stderr_path": str(stderr_path),
+                    "writable_dirs": [str(path) for path in writable_dirs],
                 }
                 (run_dir / "run.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
                 return result
@@ -775,6 +801,7 @@ def build_parser() -> argparse.ArgumentParser:
     replay.add_argument("--candidate-commit", required=True)
     replay.add_argument("--task", required=True)
     replay.add_argument("--input", action="append", default=[], required=True)
+    replay.add_argument("--writable-dir", action="append", default=[])
     return parser
 
 
@@ -785,7 +812,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "ensure-runtime":
             result = ensure_runtime(root)
         elif args.command == "replay":
-            result = run_replay(root, args.plugin, args.candidate_commit, args.task, args.input)
+            result = run_replay(root, args.plugin, args.candidate_commit, args.task, args.input, args.writable_dir)
         else:
             raise ReplayError(f"unknown command: {args.command}")
     except ReplayError as exc:

@@ -32,7 +32,7 @@ CENTRAL_PLUGIN_NAMES = [
 ]
 EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
     "workflow-core": "0.4",
-    "ai-skills-core": "0.4",
+    "ai-skills-core": "0.5",
     "writing-style": "0.3",
     "presentations": "0.3",
     "web-development": "0.2",
@@ -168,18 +168,93 @@ class CodexMarketplaceTests(unittest.TestCase):
         skill_artifacts = [entry["artifact_id"] for entry in core["skills"]]
         serialized = json.dumps(core, ensure_ascii=False)
 
-        self.assertEqual(core["version"], "0.4")
+        self.assertEqual(core["version"], "0.5")
         self.assertEqual(core["name"], "ai-skills-core")
         self.assertEqual(core["displayName"], "AI Skills Maintainer")
         self.assertIn("Maintenance companion", core["description"])
+        self.assertIn("current-machine AI Research Stack updates", core["description"])
+        self.assertIn("skills/core/codex-system/machine-update-orchestrator", skill_sources)
         self.assertIn("skills/core/codex-system/project-skill-installer", skill_sources)
         self.assertIn("skills/core/codex-system/ai-skills-repository-maintainer", skill_sources)
+        self.assertIn("skills/core/codex-system/bridge-kit-maintainer", skill_sources)
         self.assertIn("skills/core/codex-system/skill-library-analysis", skill_sources)
         self.assertNotIn("skills/core/codex-system/codex-workflow-protocol", skill_sources)
-        self.assertEqual(skill_artifacts, ["proj", "maint", "analysis"])
+        self.assertEqual(skill_artifacts, ["orchestrator", "proj", "maint", "bridge", "analysis"])
         self.assertIn("Refine an existing AI_Skills plugin from a real failure.", core["defaultPrompt"])
         self.assertIn("source, generated layer, replay, regression, version, and changelog closure", serialized)
         self.assertIn("extend an existing skill instead of creating another entry", serialized)
+        self.assertIn("Update Bridge Kit through canonical ai-bridge delegation.", core["defaultPrompt"])
+        self.assertIn("Sync this machine's participating AI Research Stack.", core["defaultPrompt"])
+
+    def test_ai_skills_core_machine_update_contracts_are_source_authoritative(self) -> None:
+        orchestrator = (REPO_ROOT / "skills/core/codex-system/machine-update-orchestrator/SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        bridge = (REPO_ROOT / "skills/core/codex-system/bridge-kit-maintainer/SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        maintainer = (
+            REPO_ROOT / "skills/core/codex-system/ai-skills-repository-maintainer/SKILL.md"
+        ).read_text(encoding="utf-8")
+        installer = (REPO_ROOT / "skills/core/codex-system/project-skill-installer/SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        refs_root = REPO_ROOT / "skills/core/codex-system/machine-update-orchestrator/references"
+        bridge_refs_root = REPO_ROOT / "skills/core/codex-system/bridge-kit-maintainer/references"
+        refs = "\n".join(path.read_text(encoding="utf-8") for path in sorted(refs_root.glob("*.md")))
+        bridge_refs = "\n".join(path.read_text(encoding="utf-8") for path in sorted(bridge_refs_root.glob("*.md")))
+
+        for target in [
+            "update presentations",
+            "update workflow-core",
+            "update AI Skills",
+            "update Bridge Kit",
+            "sync this machine",
+        ]:
+            self.assertIn(target, orchestrator)
+        for route in ["Route A", "Route B", "Route C"]:
+            self.assertIn(route, orchestrator)
+            self.assertIn(route, refs)
+        self.assertIn("sync this machine` composes the same three routes", orchestrator)
+        self.assertIn("It is not a fourth route", orchestrator)
+        self.assertIn("release ref -> matching root CHANGELOG.md release section -> optional ### Update impact", refs)
+        self.assertIn("RELEASE_METADATA_INCONSISTENT", refs)
+        self.assertIn("Marketplace source pinned to `main`", refs)
+        self.assertIn("restore the exact captured `main` source", refs)
+        self.assertIn("UPDATED_RELOAD_REQUIRED", orchestrator)
+        self.assertIn("REPO_OWNED_CONFLICT", refs)
+        self.assertIn("Do not recursively inventory `/`, all of HOME", orchestrator)
+
+        self.assertIn("bridge-kit-maintainer", bridge)
+        self.assertIn("AI Skills Maintainer (`ai-skills-core` -> `bridge-kit-maintainer`)", bridge)
+        self.assertIn("Do not duplicate that locator into Bridge README", bridge)
+        self.assertIn("refs/heads/release", bridge_refs)
+        for classification in ["ALIGNED", "LAGGING", "AHEAD/INCONSISTENT", "FORMAL_RELEASE_NOT_PROVABLE"]:
+            self.assertIn(classification, bridge)
+            self.assertIn(classification, bridge_refs)
+        self.assertIn("Bridge `AGENTS.md` owner locator", bridge)
+        self.assertIn("version/changelog/closure-evidence", bridge_refs)
+        self.assertIn("newest `main`", bridge_refs)
+        self.assertIn("non-force", bridge_refs)
+        self.assertIn("canonical `ai-bridge` commands", bridge_refs)
+        self.assertIn("Host Policy generation and validation", bridge_refs)
+        self.assertIn("Do not implement alternate Host Policy", bridge_refs)
+
+        self.assertIn("route the normal entry through `machine-update-orchestrator`", maintainer)
+        self.assertIn("Formal release scope expansion", maintainer)
+        self.assertIn("route first to `machine-update-orchestrator`", installer)
+        self.assertIn("one-time bootstrap belongs to `machine-update-orchestrator`", installer)
+
+    def test_stable_install_guidance_uses_release_not_main(self) -> None:
+        readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+        installation = (REPO_ROOT / "docs/INSTALLATION.md").read_text(encoding="utf-8")
+
+        self.assertRegex(readme, r"Ref: release")
+        self.assertRegex(installation, r"Git reference: release")
+        self.assertRegex(installation, r"--ref release")
+        self.assertIn("Stable installs should follow `release`", installation)
+        self.assertIn("Use `main` only", installation)
+        self.assertLess(installation.index("Git reference: release"), installation.index("Use `main` only"))
 
     def test_056_product_delivery_discipline_sources_are_wired(self) -> None:
         config = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
@@ -189,7 +264,7 @@ class CodexMarketplaceTests(unittest.TestCase):
 
         self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "workflow-core")["version"], "0.4")
         self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "web-development")["version"], "0.2")
-        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "ai-skills-core")["version"], "0.4")
+        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "ai-skills-core")["version"], "0.5")
         self.assertIn("skills/tools/frontend/figma-design-to-code", visual_sources)
         self.assertIn("skills/tools/frontend/motion-interaction", visual_sources)
 
