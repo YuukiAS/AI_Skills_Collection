@@ -13,6 +13,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 TARGET_ICONS = {
     "presentations": Path("assets/codex/plugin-icons/presentations/composer.svg"),
     "scientific-visualization": Path("assets/codex/plugin-icons/scientific-visualization/composer.svg"),
+    "web-development": Path("assets/codex/plugin-icons/web-development/composer.svg"),
     "statistical-modeling": Path("assets/codex/plugin-icons/statistical-modeling/composer.svg"),
     "medical-imaging": Path("assets/codex/plugin-icons/medical-imaging/composer.svg"),
 }
@@ -20,6 +21,7 @@ TARGET_ICONS = {
 TARGET_PLUGIN_VERSIONS = {
     "presentations": "0.3",
     "scientific-visualization": "0.1",
+    "web-development": "0.2",
     "statistical-modeling": "0.1",
     "medical-imaging": "0.1",
 }
@@ -32,7 +34,6 @@ PROTECTED_REFERENCE_ICON_SHA256 = {
 UNCHANGED_ICON_SHA256 = {
     "writing-style": "ddd7a6edee8baaae8a5a6212c754fe501e61e5cb0754f522b175127f11f2923a",
     "research-writing": "773b5b9d34c84c330274567ad2c16fecce32b4efd8d80415e4649aa6ebb13c00",
-    "web-development": "543f95478e439bf87e1faf59d1b5eae02871058eac1d07a74ca9a862245a90fd",
     "bioinformatics": "d69ea796cda5a4f58433e6377c64325bb93de74fe2c149bf87cdfc905449ad48",
 }
 

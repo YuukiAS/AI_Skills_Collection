@@ -39,6 +39,8 @@
 <image href="../../skills/tools/documents-media/presentations/business-presentations/assets/app-facing.svg" x="16" y="396" width="56" height="56"/>
 <text x="16" y="474" font-size="10" font-family="Arial, sans-serif" fill="#111827">business-presentations</text>
 <image href="../../assets/codex/plugin-icons/web-development/composer.svg" x="144" y="396" width="56" height="56"/>
+<image href="../../assets/codex/plugin-icons/web-development/composer.svg" x="208" y="404" width="40" height="40"/>
+<text x="210" y="454" font-size="9" font-family="Arial, sans-serif" fill="#4B5563">40px</text>
 <text x="144" y="474" font-size="10" font-family="Arial, sans-serif" fill="#111827">web-development</text>
 <image href="../../skills/tools/frontend/frontend-reference-research/assets/app-facing.svg" x="272" y="396" width="56" height="56"/>
 <text x="272" y="474" font-size="10" font-family="Arial, sans-serif" fill="#111827">frontend-reference-research</text>
