@@ -83,8 +83,17 @@ After independent Reviewer PASS, the next owner may perform the formal promotion
 3. run the real legacy Marketplace `main -> release` migration;
 4. reinstall `ai-skills-core 0.5`;
 5. require reload/fresh session;
-6. run the fresh released normal-entry smoke and close G2.
+6. run the fresh released normal-entry smoke and close G2;
+7. then move the Maintenance Board item to `ADAPTING` for required-consumer rollout; do not mark the top-level maintenance action DONE at central G2 closure.
 
 ## If Reviewer Finds A Defect
 
 Return `REVISE` with exact file/line or evidence references. Do not silently lower G1-G5, do not approve source-test-only substitutes, and do not request Bridge runtime source changes unless the finding proves the frozen design cannot work without returning to Planner/Critic.
+
+## IR-B004 Third-Round Control Closure
+
+The reviewed product candidate remains `4b8414733f3efc2d8707c5fbf448cbe8ec7a7d00`. This repair is docs/control/board governance only; no production or generated ai-skills-core payload is changed, so G1/G3/G4/G5 are not rerun merely for this repair.
+
+The post-review promotion/G2 runbook now binds the exact reviewed candidate/evidence lineage, starts from latest main with a production/version/release overlap check, preserves accepted `workflow-core 0.4` and task `ai-skills-core 0.5`, keeps repository formal candidate `5.2.0`, uses only non-force integration/release advancement, forbids Bridge release advancement, and hands central G2 closure into Maintenance Board `ADAPTING` rather than DONE.
+
+Maintenance Board mutation truth is recorded in `IR_B004_MAINTENANCE_BOARD_PENDING_MUTATION.md`. This ChatGPT Planner surface cannot truthfully invoke the board-required installed Clear Writing plugin and cannot mutate Project V2 fields, so it records `CLEAR_WRITING_UNAVAILABLE` plus the exact pending Issue/source/Project mutation instead of fabricating a tracking number or claiming Project sync.

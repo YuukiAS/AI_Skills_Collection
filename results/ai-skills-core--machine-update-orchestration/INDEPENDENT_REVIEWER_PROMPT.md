@@ -1,87 +1,63 @@
-# Independent Reviewer Prompt - AI Skills Maintainer Machine Update Orchestration
+# Independent Reviewer Prompt - IR-B004 Third-Round Minimal Closure
 
-Use this prompt only after an independent Reviewer is explicitly selected by the user or workflow owner. This prompt does not start automation, does not authorize paid APIs, and does not authorize release promotion.
+Task: `ai-skills-core--machine-update-orchestration`
 
-## Role
+Do not redesign V2.1. Do not reopen already closed product findings unless this control-doc repair unexpectedly changed production/generated payload.
 
-You are the independent implementation Reviewer for AI_Skills_Collection task:
+## Reviewed identities
 
-`ai-skills-core--machine-update-orchestration`
+- repository: `YuukiAS/AI_Skills_Collection`
+- branch: `reviewed/ai-skills-core--machine-update-orchestration`
+- reviewed product candidate: `4b8414733f3efc2d8707c5fbf448cbe8ec7a7d00`
+- prior evidence/handoff tip: `fb31f539058c634568401d2376ff3e64af7417bb`
+- current handoff tip: verify the final docs-only task-branch tip
 
-Review the implementation against the frozen V2.1 objective and the Planner decision. Do not redesign the architecture. Do not lower G1-G5. Do not treat source tests alone as product PASS where normal-entry or fixture evidence is required.
+Finding state:
 
-## Candidate Identity
+- `IR-B001 = CLOSED`
+- `IR-B002 = CLOSED`
+- `IR-B003 = CLOSED`
+- `IR-B004 = REVIEW THIS CONTROL CLOSURE ONLY`
 
-- Repository: `YuukiAS/AI_Skills_Collection`
-- Task branch: `reviewed/ai-skills-core--machine-update-orchestration`
-- Current handoff tip: final task-branch commit containing this prompt; verify remote tip after push.
-- Product-surface candidate replayed by fresh child: `4b8414733f3efc2d8707c5fbf448cbe8ec7a7d00`
-- Latest `origin/main` integrated for IR-B004: `58884c1b093e363dc772d17aba8bfbdc51005336`
-- Current AI_Skills `release`: `7b76e94ad29cf3bd8547026b942553068754d51f`
-- Bridge frozen snapshot main: `ff22c97c8193e110d606e179ec1a8a2741b97fad`
-- Bridge `release`: `d27259d6706dee951dc0c0ede8c9b03c65f55ca3`
+## Read
 
-Important identity note:
+From latest `main`:
 
-The product-surface candidate was replayed at `4b8414733f3efc2d8707c5fbf448cbe8ec7a7d00`. Later commits add task-owned evidence/handoff updates and fixture-runner assertion compatibility only. If you find any post-replay source/generated/Bridge runtime change, treat that as a review issue.
+- `AGENTS.md`
+- `docs/workflows/PLANNER_ROLE_CONTRACT.md`
+- `docs/workflows/CRITIC_ROLE_CONTRACT.md`
+- `docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md`
 
-## Source Material To Read
+From the task branch:
 
-Read these files from the task branch:
-
-1. `results/ai-skills-core--machine-update-orchestration/REVIEWER_HANDOFF.md`
-2. `results/ai-skills-core--machine-update-orchestration/COMPLETION_AUDIT.md`
-3. `results/ai-skills-core--machine-update-orchestration/IMPLEMENTATION_EVIDENCE.md`
-4. `results/ai-skills-core--machine-update-orchestration/PLANNER_DECISION.md`
-5. `results/ai-skills-core--machine-update-orchestration/candidate_replay/CANDIDATE_REPLAY_EVIDENCE.md`
-6. `results/ai-skills-core--machine-update-orchestration/fixture_execution/G4_G5_FIXTURE_EVIDENCE.md`
-7. `results/ai-skills-core--machine-update-orchestration/fixture_execution/g4_g5_fixture_evidence.json`
-8. `results/ai-skills-core--machine-update-orchestration/fixture_execution/candidate_g4_g5_task.md`
-9. `results/ai-skills-core--machine-update-orchestration/fixture_execution/candidate_g4_g5_manifest.json`
-10. `results/ai-skills-core--machine-update-orchestration/POST_REVIEW_PROMOTION_G2_RUNBOOK.md`
-
-Then inspect the changed source and generated payload required by those evidence files:
-
-- `skills/core/codex-system/machine-update-orchestrator/`
-- `skills/core/codex-system/bridge-kit-maintainer/`
-- `skills/core/codex-system/ai-skills-repository-maintainer/SKILL.md`
-- `skills/core/codex-system/project-skill-installer/SKILL.md`
-- `scripts/codex_marketplace_config.json`
-- `profiles/ai-skills-maintainer.json`
-- generated `plugins/codex/plugins/ai-skills-core/`
-- generated Marketplace metadata under `.agents/plugins/`
-- `README.md`
-- `CHANGELOG.md`
-- `docs/plugin-changelogs/ai-skills-core.md`
+- `results/ai-skills-core--machine-update-orchestration/REVIEWER_HANDOFF.md`
+- `results/ai-skills-core--machine-update-orchestration/POST_REVIEW_PROMOTION_G2_RUNBOOK.md`
+- `results/ai-skills-core--machine-update-orchestration/IR_B004_MAINTENANCE_BOARD_PENDING_MUTATION.md`
 - `docs/plugin-todos/ai-skills-core.md`
-- relevant tests for Maintainer / Marketplace / skills registry
 
-Bridge-side locator/snapshot review:
+## Verify only IR-B004
 
-- Inspect the frozen Bridge source/ref evidence described in `BRIDGE_REVALIDATION_SNAPSHOT.md`.
-- Verify Bridge `AGENTS.md` contains the owner locator consumed by the candidate.
-- Verify this repair did not alter Bridge runtime source, Host Policy, Lite, Review, Control, Persistent Run, Human Gate, README, QUICKSTART or CHANGELOG, and did not advance Bridge `release`.
+1. The runbook uses reviewed product candidate `4b8414733f3efc2d8707c5fbf448cbe8ec7a7d00`, not stale `12ca08dc...`.
+2. Promotion fetches latest main and checks for new ai-skills-core production/version/release overlap before integration.
+3. Non-overlapping board/docs/TODO/icon drift does not rebuild the accepted product candidate or rerun G1/G3/G4/G5.
+4. The runbook preserves accepted `workflow-core 0.4`, task `ai-skills-core 0.5`, and repository formal candidate `5.2.0`.
+5. Integration/push/release advancement is non-force and AI_Skills `release` advances only to the exact formally closed integrated 5.2.0 commit.
+6. G2 remains post-Reviewer promotion work; no Bridge `release` advancement, paid API, automation, or Bridge runtime/source mutation is introduced.
+7. Central G2 closure transitions the Maintenance Board lifecycle to `ADAPTING`, not DONE.
+8. This repair changed docs/control only; no product replay is required unless diff inspection proves otherwise.
+9. Board handling is truthful under current tool limits:
+   - no tracking Issue number was invented;
+   - no fake `tracking: #N` was written;
+   - Project synchronization is not claimed;
+   - `CLEAR_WRITING_UNAVAILABLE` is recorded because current board policy requires a real installed Clear Writing invocation before reader-facing Issue creation;
+   - the exact pending Issue/source/Project mutation is preserved for the next capable maintenance surface;
+   - the user is not asked to drag a Project card or manually add the locator.
 
-## Required Review Questions
+If board policy requires actual Issue/backlink/Project mutation before IR-B004 can close, return the **same stable IR-B004** with only that minimum mechanical next action. Do not reopen IR-B001/2/3 or require product replay.
 
-Answer each item with `PASS`, `REVISE`, or `NOT_APPLICABLE`, and cite exact evidence.
+## Output
 
-1. Does the implementation add exactly the approved internal `machine-update-orchestrator` and `bridge-kit-maintainer` capabilities inside `ai-skills-core` without creating a fourth route, daemon, watcher, registry, database or Bridge runtime copy?
-2. Do Route A/B/C and `sync this machine` obey the formal `release -> root CHANGELOG.md -> optional ### Update impact` scope-expansion contract?
-3. Does `bridge-kit-maintainer` own only Bridge maintenance/distribution concerns while delegating Host/project-consumer mutation back to canonical `ai-bridge` commands?
-4. Are Maintainer and project installer boundary updates minimal and non-overlapping?
-5. Are source/generated/profile/Marketplace outputs consistent for `ai-skills-core 0.5`?
-6. Are version/changelog/README/install guidance updates consistent with the approved post-drift release expectation: repository `5.2.0`, `ai-skills-core 0.5`, no workflow-core/domain plugin bump?
-7. Does G1 have enough pre-release evidence from fresh child candidate replay for short normal-entry routing without asking the user for versions, commits, checkout paths, `CODEX_HOME`, repo inventories, adaptation templates or dependency/component lists?
-8. Does G3 have enough pre-release evidence for `update Bridge Kit`, Bridge release-target semantics, formal-release Git behavior and canonical Bridge delegation?
-9. Does G4 fixture evidence faithfully cover stale managed consumer update, unaffected repo preservation, unmanaged conflict preservation, dirty non-overlap and dirty-overlap Human Gate without using unrelated real projects?
-10. Does G5 fixture evidence faithfully cover bounded failure, exact legacy source restoration, truthful `PARTIAL_UPDATE`, rerun convergence and should-not-change behavior?
-11. Is G2 correctly left as `SEQUENCED WAITING` until Reviewer PASS, formal promotion, AI_Skills `release` advancement, real legacy Marketplace migration, reinstall of `ai-skills-core 0.5`, and fresh released normal-entry smoke?
-12. Are there any source/generated changes after the replayed product-surface candidate that would require a new candidate replay before PASS?
-
-## Required Output
-
-Return one of:
+Return:
 
 `IMPLEMENTATION_REVIEW_PASS_FOR_PRE_RELEASE_PROMOTION`
 
@@ -89,28 +65,4 @@ or
 
 `REVISE`
 
-If `PASS`, state clearly:
-
-- this is only pre-release implementation review PASS;
-- G2 is not complete;
-- the overall user-visible Goal is not complete;
-- the next step is the post-review formal promotion/G2 sequence.
-
-If `REVISE`, include:
-
-- exact finding title;
-- severity;
-- exact file/path/line or evidence locator;
-- why the finding violates frozen V2.1 or Planner decision;
-- the minimum acceptable repair boundary.
-
-## Forbidden Reviewer Actions
-
-- Do not run paid APIs, Terra, `/v1/responses`, or a new provider.
-- Do not start automation.
-- Do not advance `release`.
-- Do not migrate Marketplace sources.
-- Do not reinstall production plugins.
-- Do not modify Bridge runtime/source or Host Policy.
-- Do not force-push, rebase, reset, stash, clean or restore user work.
-- Do not declare full completion before G2 released production evidence exists.
+Do not declare the overall Goal complete. G2 and later Maintenance Board ADAPTING remain future work.
