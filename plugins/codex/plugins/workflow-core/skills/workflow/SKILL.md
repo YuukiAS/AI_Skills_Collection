@@ -170,6 +170,34 @@ worktree or known-good local clone when isolation is needed. Network clone only
 when no usable local source exists, and do not solve source confusion by
 remapping remotes.
 
+### Reviewed Handoff Bootstrap And Resume Routing
+
+When an approved Reviewed Handoff task names an exact repository, task key,
+reviewed branch, worktree, and base commit, use the canonical Bridge entry for
+the observed lifecycle state. Do not assemble raw Git topology or invent an
+alternate worktree.
+
+Use this route:
+
+```text
+task missing locally and on the exact reviewed remote
+-> ai-bridge reviewed-handoff task bootstrap
+
+complete local task metadata exists, or the exact reviewed remote contains
+valid REQUEST/CURRENT for the task
+-> ai-bridge reviewed-handoff materialize-worktree --mode resume
+
+required Bridge command, version, or policy support is unavailable
+-> fail early before substantive implementation
+```
+
+The workflow layer owns only this decision and the early capability check.
+Bridge owns the repo-local Git mechanics, canonical remote profile validation,
+remote-only metadata discovery, branch/worktree creation, rollback, and
+REQUEST/CURRENT validation. Never fall back to `git worktree add`, a `/tmp`
+replacement, a second clone, remote remapping, or locally generated task
+metadata to get past a missing Bridge capability.
+
 ## Final Status Vocabulary
 
 - `complete`: all acceptance criteria met and verified.

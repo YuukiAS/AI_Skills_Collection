@@ -2,7 +2,7 @@
 
 Task: `ai-skills-core--machine-update-orchestration`  
 Purpose: G3 implementation-review recovery evidence baseline  
-Observed at: `2026-09-24T19:35:00+08:00`  
+Observed at: `2026-09-24T22:16:00+08:00`  
 Status: `FROZEN_FOR_THIS_REPAIR_REVIEW_ROUND`
 
 This is an execution-time evidence snapshot, not an AI_Skills architecture dependency and not a pinned Bridge version requirement. No Bridge ref or runtime state was mutated while producing this snapshot.
@@ -15,7 +15,7 @@ Repository:
 
 Observed `main`:
 
-`ac4f86b83bd62af0a63b7d020182b22d306e950d`
+`ff22c97c8193e110d606e179ec1a8a2741b97fad`
 
 Version source at observed `main`:
 
@@ -74,6 +74,22 @@ Classification:
 `LAGGING`
 
 This is a real G3 Case B input. It is **not** authorization to advance the Bridge `release` ref during this pre-review repair.
+
+## Frozen source made available to candidate replay
+
+To avoid handing the release relation answer to the candidate while still
+making the discovery input reproducible, this repair created a task-owned
+read-only Bridge source snapshot at:
+
+`private/exports/ai-skills-core--machine-update-orchestration/bridge_git_snapshot`
+
+Supplemental raw copied files from the same observation are stored at:
+
+`private/exports/ai-skills-core--machine-update-orchestration/bridge_source_snapshot`
+
+The candidate replay input points to those raw source/ref/evidence locations
+and does not provide the latest formal release, current release version, or
+relation classification as expected answers.
 
 ## Snapshot freeze rule
 

@@ -21,7 +21,7 @@ Affected plugins:
 - `ai-skills-core`: `0.4` -> `0.5`
   Reason: AI Skills Maintainer now contains `machine-update-orchestrator` and `bridge-kit-maintainer`, formal release/update-impact routing, one-time legacy Marketplace bootstrap, selective managed-consumer adaptation, Bridge Kit distribution delegation, Human Gate/recovery semantics and fresh-session truthfulness for current-machine updates.
 
-Unchanged plugin versions: `workflow-core 0.3`, `writing-style 0.3`,
+Unchanged plugin versions: `workflow-core 0.4`, `writing-style 0.3`,
 `research-writing 0.1`, `presentations 0.3`,
 `scientific-visualization 0.1`, `web-development 0.2`,
 `statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
@@ -43,6 +43,49 @@ Plugin changelog index: `docs/plugin-changelogs/README.md`.
 Affected plugin changelog:
 
 - `docs/plugin-changelogs/ai-skills-core.md`
+
+## 5.1.1 - 2026-09-24
+
+Repository `5.1.1` is a compatible release for Verified Workflow Reviewed
+Handoff first-bootstrap consumer routing.
+
+Repository bump decision: PATCH
+Reason: this release improves an existing central workflow plugin's normal
+Reviewed Handoff routing without adding a new repository-level capability or
+breaking existing contracts.
+
+Affected plugin versions:
+
+| Plugin | Previous | Current |
+|---|---:|---:|
+| `workflow-core` | `0.3` | `0.4` |
+
+Affected plugins:
+- `workflow-core`: `0.3` -> `0.4`
+  Reason: Verified Workflow now routes brand-new Reviewed tasks through Bridge
+  `reviewed-handoff task bootstrap`, routes existing local or exact remote
+  Reviewed tasks through `materialize-worktree --mode resume`, and fails early
+  when the required Bridge capability/version/policy is unavailable.
+
+Unchanged plugin versions: `ai-skills-core 0.4`, `writing-style 0.3`,
+`research-writing 0.1`, `presentations 0.3`, `scientific-visualization 0.1`,
+`web-development 0.2`, `statistical-modeling 0.1`, `bioinformatics 0.1`,
+`medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Workflow-core now consumes the Bridge 0.9.1 Reviewed Handoff normal entries
+  instead of treating a missing Reviewed task as a raw Git worktree bootstrap
+  problem.
+- Bridge remains the owner of repo-local Git mechanics, remote-only metadata
+  discovery, canonical profile validation, rollback, and REQUEST/CURRENT
+  validation.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelog:
+
+- `docs/plugin-changelogs/workflow-core.md`
 
 ## 5.1.0 - 2026-09-23
 

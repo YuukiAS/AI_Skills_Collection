@@ -1,0 +1,32 @@
+{
+  "task": "workflow-core--reviewed-first-bootstrap-normal-entry",
+  "scenarios": [
+    {
+      "id": "missing",
+      "observed_state": "Approved Reviewed Handoff task names exact repo, task key, reviewed branch, sibling worktree, and base commit. No local task metadata, no local reviewed branch, no exact reviewed remote branch, and worktree path is free.",
+      "question": "Which Bridge entry should the workflow consumer invoke?"
+    },
+    {
+      "id": "existing_local",
+      "observed_state": "Complete local REQUEST.md and CURRENT.json exist for the exact task and the reviewed worktree identity matches the frozen locator.",
+      "question": "Which Bridge entry should the workflow consumer invoke?"
+    },
+    {
+      "id": "remote_only",
+      "observed_state": "Canonical checkout has no local task metadata, but origin/reviewed/<task_key> exists and contains valid REQUEST.md and CURRENT.json for the exact task.",
+      "question": "Which Bridge entry should the workflow consumer invoke?"
+    },
+    {
+      "id": "bridge_missing_or_old",
+      "observed_state": "The required Bridge task bootstrap command, materialize resume capability, or Machine Policy support is unavailable or too old.",
+      "question": "Should substantive implementation continue?"
+    }
+  ],
+  "forbidden_fallbacks": [
+    "raw git worktree add",
+    "/tmp replacement worktree",
+    "second clone",
+    "remote remap",
+    "manual local REQUEST/CURRENT generation"
+  ]
+}

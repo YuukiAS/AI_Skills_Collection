@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -19,6 +20,12 @@ FIXTURE_ROOT = REPO_ROOT / "private" / "exports" / TASK_KEY / "fixtures"
 TASK_PATH = RESULT_ROOT / "candidate_g4_g5_task.md"
 MANIFEST_PATH = RESULT_ROOT / "candidate_g4_g5_manifest.json"
 OUTPUT_NAME = "g4_g5_candidate_result.json"
+CODEX_CLI = REPO_ROOT / ".local-runtime" / "codex" / "0.153.4" / "bin" / "codex"
+ISOLATED_CODEX_HOME = FIXTURE_ROOT / "isolated-codex-home"
+MARKETPLACE_ROOT = FIXTURE_ROOT / "isolated-marketplaces"
+LEGACY_MARKETPLACE = MARKETPLACE_ROOT / "legacy-main"
+BROKEN_RELEASE_MARKETPLACE = MARKETPLACE_ROOT / "missing-release-source"
+MARKETPLACE_NAME = "yuukias-ai-skills"
 
 OLD_BLOCK = """<!-- AI_SKILLS_MANAGED:start -->
 AI Skills managed install:
@@ -35,11 +42,31 @@ class CaseFixture:
     watched_hashes: dict[str, str]
 
 
-def run(args: list[str], cwd: Path, *, check: bool = True) -> subprocess.CompletedProcess[str]:
-    proc = subprocess.run(args, cwd=cwd, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
+def run(
+    args: list[str],
+    cwd: Path,
+    *,
+    check: bool = True,
+    env: dict[str, str] | None = None,
+) -> subprocess.CompletedProcess[str]:
+    proc = subprocess.run(
+        args,
+        cwd=cwd,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+        env=env,
+    )
     if check and proc.returncode != 0:
         raise RuntimeError(f"command failed in {cwd}: {' '.join(args)}\n{proc.stderr}")
     return proc
+
+
+def isolated_codex_env() -> dict[str, str]:
+    env = os.environ.copy()
+    env["CODEX_HOME"] = str(ISOLATED_CODEX_HOME)
+    return env
 
 
 def write(path: Path, text: str) -> None:
@@ -85,6 +112,47 @@ def init_repo(path: Path, files: dict[str, str]) -> None:
         ],
         path,
     )
+
+
+def write_marketplace(root: Path, *, ref_label: str) -> None:
+    write(
+        root / ".agents" / "plugins" / "marketplace.json",
+        json.dumps(
+            {
+                "name": MARKETPLACE_NAME,
+                "interface": {"displayName": f"Fixture AI Skills {ref_label}"},
+                "plugins": [],
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+    )
+
+
+def setup_isolated_marketplace() -> dict[str, Any]:
+    if not CODEX_CLI.is_file():
+        raise RuntimeError(f"missing pinned codex CLI: {CODEX_CLI}")
+
+    ISOLATED_CODEX_HOME.mkdir(parents=True, exist_ok=True)
+    write_marketplace(LEGACY_MARKETPLACE, ref_label="main")
+
+    add = run(
+        [str(CODEX_CLI), "plugin", "marketplace", "add", str(LEGACY_MARKETPLACE), "--json"],
+        REPO_ROOT,
+        env=isolated_codex_env(),
+    )
+    listed = run(
+        [str(CODEX_CLI), "plugin", "marketplace", "list", "--json"],
+        REPO_ROOT,
+        env=isolated_codex_env(),
+    )
+    return {
+        "seed_add_stdout": add.stdout,
+        "seed_add_stderr": add.stderr,
+        "seed_list_stdout": listed.stdout,
+        "seed_list_stderr": listed.stderr,
+    }
 
 
 def setup_fixtures() -> list[CaseFixture]:
@@ -179,22 +247,51 @@ def setup_fixtures() -> list[CaseFixture]:
     return fixtures
 
 
-def write_task_and_manifest(fixtures: list[CaseFixture], candidate_commit: str) -> None:
+def write_task_and_manifest(
+    fixtures: list[CaseFixture],
+    candidate_commit: str,
+    marketplace_setup: dict[str, Any],
+) -> None:
     manifest = {
         "task_key": TASK_KEY,
         "candidate_commit": candidate_commit,
         "fixture_root": str(FIXTURE_ROOT),
         "output_name": OUTPUT_NAME,
+        "isolated_codex_home": str(ISOLATED_CODEX_HOME),
+        "codex_cli": str(CODEX_CLI),
+        "marketplace": {
+            "name": MARKETPLACE_NAME,
+            "initial_legacy_source": str(LEGACY_MARKETPLACE),
+            "replacement_source_for_failure_injection": str(BROKEN_RELEASE_MARKETPLACE),
+            "restore_source": str(LEGACY_MARKETPLACE),
+            "official_command_boundary": "Use only `codex plugin marketplace list/remove/add --json` with the isolated CODEX_HOME.",
+            "setup_evidence": marketplace_setup,
+        },
         "cases": [
             {
                 "case": item.case,
                 "fixture_path": str(item.fixture_path),
+                "scenario": {
+                    "stale_managed_consumer": "contains an AI_Skills managed block pinned to ai-skills-core 0.4 and project-owned surrounding text",
+                    "unaffected_repo": "contains no AI_Skills managed manifest or managed block",
+                    "unmanaged_conflict": "contains repo-owned AI_Skills-looking text without managed markers",
+                    "unrelated_dirty_non_overlap": "contains a stale managed block plus unrelated dirty notes.txt",
+                    "overlapping_dirty_human_gate": "contains stale managed content with overlapping user dirty work in the same file",
+                    "failure_restoration_and_rerun": "contains a stale managed block and an isolated legacy Marketplace source that must be restored after injected replacement failure",
+                }[item.case],
                 "before_hash": item.before_hash,
                 "watched_hashes": item.watched_hashes,
             }
             for item in fixtures
         ],
-        "expected_owner_path": "AI Skills Maintainer -> machine-update-orchestrator -> project-skill-installer / bridge-kit-maintainer",
+        "status_vocabulary": [
+            "UPDATED_RELOAD_REQUIRED",
+            "ALREADY_CURRENT",
+            "REPO_OWNED_CONFLICT",
+            "HUMAN_ONLY",
+            "PARTIAL_UPDATE",
+        ],
+        "owner_path_boundary": "Select the canonical AI Skills Maintainer owner path from the candidate plugin; the harness does not prescribe the path.",
     }
     write(MANIFEST_PATH, json.dumps(manifest, indent=2, sort_keys=True) + "\n")
     write(
@@ -218,10 +315,17 @@ Required output: write JSON to `outputs/{OUTPUT_NAME}` with:
   "candidate_commit": "{candidate_commit}",
   "candidate_plugin": "ai-skills-core@ai-skills-candidate",
   "owner_path_consumed": "...",
+  "marketplace_commands": [
+    {{
+      "argv": ["...", "plugin", "marketplace", "list", "--json"],
+      "codex_home": "...",
+      "returncode": 0
+    }}
+  ],
   "cases": [
     {{
       "case": "stale_managed_consumer",
-      "status": "UPDATED_RELOAD_REQUIRED",
+      "status": "...",
       "failure_injection_point": null,
       "diagnostics": ["..."],
       "human_gate_count": 0
@@ -232,22 +336,24 @@ Required output: write JSON to `outputs/{OUTPUT_NAME}` with:
 
 Case requirements:
 
-- `stale_managed_consumer`: update only the AI_Skills managed block from
-  `ai-skills-core: 0.4` to the current candidate `0.5`; preserve project-owned
-  text and return `UPDATED_RELOAD_REQUIRED`.
-- `unaffected_repo`: no managed locator exists; leave bytes unchanged and return
-  `ALREADY_CURRENT`.
-- `unmanaged_conflict`: repo-owned `AGENTS.md` mentions AI_Skills without
-  managed markers; leave bytes unchanged and return `REPO_OWNED_CONFLICT`.
-- `unrelated_dirty_non_overlap`: preserve dirty `notes.txt`, update the managed
-  block and return `UPDATED_RELOAD_REQUIRED`.
-- `overlapping_dirty_human_gate`: `AGENTS.md` has overlapping user dirty work;
-  leave it unchanged and return `HUMAN_ONLY` with exactly one bounded Human
-  Gate.
-- `failure_restoration_and_rerun`: perform the safe managed update, then apply
-  the manifest's marketplace replacement failure injection after that safe step;
-  restore the exact legacy `marketplace-source.json`, return `PARTIAL_UPDATE`,
-  rerun fresh discovery once, and report convergence without a second mutation.
+- For managed consumer fixtures, use the AI_Skills managed markers/manifest to
+  decide whether a candidate-owned update is allowed. Preserve project-owned
+  text and unrelated dirty files.
+- For repo-owned apparent conflicts without managed ownership, preserve bytes
+  and classify using the Maintainer conflict contract.
+- For overlapping user-owned dirty work, emit exactly one bounded Human Gate
+  and leave the overlapping user file unchanged.
+- For the failure/restoration case, perform one safe managed consumer step
+  first. Then use the manifest's isolated temporary `CODEX_HOME`, pinned
+  `codex_cli`, and official `codex plugin marketplace` commands to exercise
+  the legacy-source replacement path. Inject the bounded failure by attempting
+  to add the provided missing replacement source after removing the legacy
+  source. Restore the exact legacy source through the same official command
+  family, run fresh discovery once, and report whether it converged without a
+  second mutation.
+- Select each case's returned status from the manifest vocabulary based on the
+  actual candidate/owner behavior. Do not treat this task prompt as an answer
+  key for the case outcomes.
 
 Do not call paid APIs, do not mutate Marketplace/Host/global Codex state, and
 do not change Git refs. The fixture repos themselves are writable for this
@@ -303,6 +409,58 @@ def assert_case_status(cases: dict[str, dict[str, Any]], case: str, expected: st
     return cases[case]
 
 
+def assert_marketplace_command_evidence(candidate_result: dict[str, Any]) -> list[dict[str, Any]]:
+    commands = candidate_result.get("marketplace_commands")
+    if not isinstance(commands, list) or not commands:
+        raise AssertionError("candidate did not record official Marketplace command evidence")
+    normalized: list[str] = []
+    for item in commands:
+        if not isinstance(item, dict):
+            raise AssertionError("marketplace command evidence entry is not an object")
+        argv = item.get("argv")
+        if isinstance(argv, list):
+            normalized.append(" ".join(str(part) for part in argv))
+        elif isinstance(argv, str):
+            normalized.append(argv)
+        else:
+            raise AssertionError("marketplace command evidence entry lacks argv")
+        if str(item.get("codex_home")) != str(ISOLATED_CODEX_HOME):
+            raise AssertionError("marketplace command did not bind the isolated CODEX_HOME")
+
+    required = [
+        "plugin marketplace list",
+        "plugin marketplace remove",
+        "plugin marketplace add",
+    ]
+    for needle in required:
+        if not any(needle in command for command in normalized):
+            raise AssertionError(f"candidate did not record official Marketplace command: {needle}")
+    return commands
+
+
+def assert_isolated_marketplace_restored() -> dict[str, Any]:
+    proc = run(
+        [str(CODEX_CLI), "plugin", "marketplace", "list", "--json"],
+        REPO_ROOT,
+        env=isolated_codex_env(),
+    )
+    listing = json.loads(proc.stdout)
+    marketplaces = listing.get("marketplaces")
+    if not isinstance(marketplaces, list):
+        raise AssertionError("isolated Marketplace list output is invalid")
+    matches = [item for item in marketplaces if item.get("name") == MARKETPLACE_NAME]
+    if len(matches) != 1:
+        raise AssertionError(f"expected exactly one restored marketplace named {MARKETPLACE_NAME}, got {len(matches)}")
+    source = matches[0].get("marketplaceSource", {})
+    if source.get("sourceType") != "local" or str(source.get("source")) != str(LEGACY_MARKETPLACE):
+        raise AssertionError("legacy Marketplace source was not restored through official isolated Codex state")
+    return {
+        "list_stdout": proc.stdout,
+        "list_stderr": proc.stderr,
+        "restored_entry": matches[0],
+    }
+
+
 def validate(candidate_commit: str, fixtures: list[CaseFixture], run_result: dict[str, Any]) -> dict[str, Any]:
     candidate_result = run_result["candidate"]
     if candidate_result.get("candidate_commit") != candidate_commit:
@@ -345,6 +503,8 @@ def validate(candidate_commit: str, fixtures: list[CaseFixture], run_result: dic
         raise AssertionError("dirty overlap did not report exactly one Human Gate")
 
     failure = assert_case_status(cases, "failure_restoration_and_rerun", "PARTIAL_UPDATE")
+    marketplace_commands = assert_marketplace_command_evidence(candidate_result)
+    marketplace_restoration = assert_isolated_marketplace_restored()
     failure_repo = fixtures_by_case["failure_restoration_and_rerun"].fixture_path
     if fixtures_by_case["failure_restoration_and_rerun"].watched_hashes["AGENTS.md"] == sha256(failure_repo / "AGENTS.md"):
         raise AssertionError("failure case safe managed update was not retained")
@@ -396,6 +556,14 @@ def validate(candidate_commit: str, fixtures: list[CaseFixture], run_result: dic
         "replay_run": run_result["replay"],
         "candidate_output_path": run_result["output_path"],
         "fixture_root": str(FIXTURE_ROOT),
+        "isolated_codex_home": str(ISOLATED_CODEX_HOME),
+        "marketplace_recovery": {
+            "name": MARKETPLACE_NAME,
+            "legacy_source": str(LEGACY_MARKETPLACE),
+            "replacement_failure_source": str(BROKEN_RELEASE_MARKETPLACE),
+            "commands_recorded_by_candidate": marketplace_commands,
+            "post_run_official_list": marketplace_restoration,
+        },
         "case_count": len(summaries),
         "cases": summaries,
         "summary": {
@@ -422,7 +590,9 @@ def write_evidence(payload: dict[str, Any]) -> None:
         f"Candidate commit: `{payload['candidate_commit']}`",
         f"Candidate/plugin/owner path consumed: `{payload['owner_path_consumed']}`",
         f"Fixture root: `{FIXTURE_ROOT}`",
+        f"Isolated CODEX_HOME: `{payload['isolated_codex_home']}`",
         f"Candidate output: `{payload['candidate_output_path']}`",
+        f"Marketplace recovery source restored: `{payload['marketplace_recovery']['legacy_source']}`",
         "",
         "| Case | Status | Before hash | After hash | Failure injection | Diagnostics |",
         "|---|---|---|---|---|---|",
@@ -438,6 +608,7 @@ def write_evidence(payload: dict[str, Any]) -> None:
         [
             "",
             "All fixture repositories are task-owned local repositories under `private/exports/`.",
+            "Marketplace failure/recovery used an isolated temporary Codex identity and official `codex plugin marketplace` commands.",
             "The harness owns setup, failure injection fixtures, hashing, invariant assertions and evidence collation only.",
             "Actual semantic statuses and mutations were produced by the committed candidate through candidate plugin replay.",
         ]
@@ -454,7 +625,8 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> int:
     args = build_parser().parse_args()
     fixtures = setup_fixtures()
-    write_task_and_manifest(fixtures, args.candidate_commit)
+    marketplace_setup = setup_isolated_marketplace()
+    write_task_and_manifest(fixtures, args.candidate_commit, marketplace_setup)
     run_result = run_candidate(args.candidate_commit)
     payload = validate(args.candidate_commit, fixtures, run_result)
     write_evidence(payload)

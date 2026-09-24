@@ -81,6 +81,8 @@ For high-risk domains such as medicine, finance, legal, and system operations, s
 
 Domains are complete collections. Profiles are curated selections. Single skills are exact installs. Do not make a profile just to represent a full domain; use `--domain`.
 
+正式独立发布、需要在 README 展示版本的 standalone Skill 可以拥有独立两段版本，从 `0.1` 开始；版本属于 Skill 自身，不跟 repository 或 Plugin lockstep。
+
 ## Validation
 
 ```bash

@@ -2,6 +2,7 @@
 name: slurm-workflows
 description: Plan, submit, monitor, diagnose, and safely iterate Slurm jobs with generic resource estimation, job arrays, log/scratch layout, queue inspection, failure classification, and optional race execution policy supplied by a site profile.
 status: active
+version: "0.1"
 provenance: user-authored
 trusted: false
 requires_network: false

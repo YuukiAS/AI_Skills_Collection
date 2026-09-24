@@ -2,6 +2,7 @@
 name: render-chinese-math-pdf
 description: Render and validate Chinese or mixed Chinese/English mathematical Markdown/LaTeX as PDF. Use for CJK text, Unicode math, equations, tables, Pandoc/XeLaTeX, TeX font/cache failures, citation cleanup, or readable PDF QA.
 status: active
+version: "0.1"
 provenance: user-authored
 trusted: false
 requires_network: false

@@ -23,6 +23,9 @@ project-specific context: 具体关闭语义、数据源、平台限制、当前
 
 推广前须证明：一个已有规则失效的真实案例被正确定位并回放；同一问题的新案例合并而非复制；纯项目 bug 未误写中央插件；无新教训的正常任务没有额外长篇复盘；中央不可写时诚实报告未记录而非创建影子 TODO。本轮仅记录，不修改 production、不 bump 版本。
 
+
+additional evidence (2026-09-24): Lucerna task 01050 again reached user review with obvious frontend hierarchy/collapse/copy defects despite this repository already containing Frontend Design production gates and earlier Lucerna/Bobbio TODOs for self-review, actionability and whole-screen composition. Treat this as a consumer-path/invocation/version/compliance diagnostic case first; do not respond by adding another generic “review screenshots” rule unless replay proves the current production entry did not actually carry the existing behavior.
+
 ## Recently promoted / established
 
 ### AI Skills Maintainer machine update orchestration

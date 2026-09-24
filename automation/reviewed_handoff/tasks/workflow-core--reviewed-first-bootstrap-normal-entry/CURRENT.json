@@ -1,0 +1,16 @@
+{
+  "base_branch": "main",
+  "base_commit": "b725c7e5d812732f34f2704509eecbd095388ca8",
+  "ci_required": false,
+  "ci_status": "NOT_REQUIRED",
+  "implementation_commit": "c17214449d8ca8761664ff15d49140c692a0fcb1",
+  "last_review_decision": null,
+  "max_plan_revisions": 1,
+  "max_review_rounds": 2,
+  "next_action": "WAIT_SCHEDULED_GPT_REVIEW",
+  "plan_revision": 0,
+  "review_round": 0,
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "state": "READY_FOR_GPT_REVIEW",
+  "task_key": "workflow-core--reviewed-first-bootstrap-normal-entry"
+}

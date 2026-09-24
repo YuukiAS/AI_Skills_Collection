@@ -15,10 +15,15 @@ For each request, identify:
 - the Maintainer route that applies;
 - the internal Maintainer owner skill responsible for the route;
 - whether formal `release` and optional root `### Update impact` may expand scope;
-- for `update Bridge Kit`, the Bridge release-state classification from the
-  public machine state note and how the other formal cases
-  `ALIGNED`, `LAGGING`, `AHEAD/INCONSISTENT`, and
-  `FORMAL_RELEASE_NOT_PROVABLE` should be handled;
+- for `update Bridge Kit`, read the allowed Bridge source named in the public
+  machine state note and dynamically discover:
+  - Bridge `AGENTS.md` owner locator;
+  - version sources;
+  - current `release` ref;
+  - newest formal release commit/version with sufficient closure evidence;
+  - the release-state classification selected by the candidate from
+    `ALIGNED`, `LAGGING`, `AHEAD/INCONSISTENT`, or
+    `FORMAL_RELEASE_NOT_PROVABLE`;
 - what must remain delegated to canonical Bridge / Codex / project-owner commands;
 - the correct dry-run result state.
 
