@@ -356,7 +356,13 @@ def validate(candidate_commit: str, fixtures: list[CaseFixture], run_result: dic
         raise AssertionError("failure case unrelated README changed")
     if failure.get("failure_injection_point") in {None, ""}:
         raise AssertionError("failure case did not record failure injection point")
-    if failure.get("rerun_converged") is not True:
+    rerun = failure.get("rerun")
+    nested_converged = (
+        isinstance(rerun, dict)
+        and (rerun.get("managed_consumer_converged") is True or rerun.get("converged") is True)
+        and rerun.get("mutation_count") == 0
+    )
+    if failure.get("rerun_converged") is not True and not nested_converged:
         raise AssertionError("failure case did not report fresh-discovery rerun convergence")
 
     summaries = []
@@ -378,6 +384,7 @@ def validate(candidate_commit: str, fixtures: list[CaseFixture], run_result: dic
                 "diagnostics": case.get("diagnostics", []),
                 "failure_injection_point": case.get("failure_injection_point"),
                 "human_gate_count": case.get("human_gate_count", 0),
+                "rerun": case.get("rerun"),
             }
         )
 

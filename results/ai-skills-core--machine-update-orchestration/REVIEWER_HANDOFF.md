@@ -9,13 +9,13 @@ This handoff is for independent implementation review only. It does not authoriz
 ## Candidate Identity
 
 - Task branch: `reviewed/ai-skills-core--machine-update-orchestration`
-- Product-surface candidate commit replayed by fresh child: `24f574ff20028fedaa3c5382594717cb28234184`
-- Latest evidence commit before this handoff: `f8b91370da8a1c5fc640e0fed68cbe101fffeed2`
+- Product-surface candidate commit replayed by fresh child: `12ca08dc127f8eee4c13a3a2c9cc598d00ce04ee`
+- Latest evidence commit before this handoff: final task-branch commit containing this file; verify remote tip after push.
 - Base `origin/main` and current AI_Skills `release`: `7b76e94ad29cf3bd8547026b942553068754d51f`
 - Bridge locator commit on Bridge `origin/main`: `dfe093c6f78cdadb22905e811935a772af5cb034`
 - Bridge `release`: `d27259d6706dee951dc0c0ede8c9b03c65f55ca3`
 
-After `24f574ff20028fedaa3c5382594717cb28234184`, the task branch added only task-owned `results/` evidence and the fixture runner. No source skill, generated Marketplace/plugin payload, version/changelog, README, Bridge file or runtime file changed after the replayed product-surface candidate.
+After `12ca08dc127f8eee4c13a3a2c9cc598d00ce04ee`, the task branch adds only task-owned evidence/handoff updates and the fixture-runner schema adjustment needed to read the candidate child output. No source skill, generated Marketplace/plugin payload, version/changelog, README, Bridge file or runtime file changed after the replayed product-surface candidate.
 
 ## Evidence To Review
 
@@ -26,6 +26,8 @@ After `24f574ff20028fedaa3c5382594717cb28234184`, the task branch added only tas
 - G4/G5 fixture evidence: `results/ai-skills-core--machine-update-orchestration/fixture_execution/G4_G5_FIXTURE_EVIDENCE.md`
 - G4/G5 machine-readable summary: `results/ai-skills-core--machine-update-orchestration/fixture_execution/g4_g5_fixture_evidence.json`
 - Fixture runner: `results/ai-skills-core--machine-update-orchestration/fixture_execution/run_g4_g5_fixtures.py`
+- Candidate G4/G5 replay task: `results/ai-skills-core--machine-update-orchestration/fixture_execution/candidate_g4_g5_task.md`
+- Candidate G4/G5 replay manifest: `results/ai-skills-core--machine-update-orchestration/fixture_execution/candidate_g4_g5_manifest.json`
 
 Task-owned private fixture repositories were created under:
 
@@ -43,8 +45,8 @@ Please review the V2.1 implementation against the frozen objective and Planner d
 4. Generated payload/profile/Marketplace parity for `ai-skills-core 0.5`.
 5. Version/changelog/README/install guidance for repository `5.2.0` and `ai-skills-core 0.5`.
 6. Bridge `AGENTS.md` locator-only change and absence of Bridge runtime/README/QUICKSTART/CHANGELOG/source changes.
-7. G1/G3 candidate replay evidence and whether it proves fresh child normal-entry routing without paid API.
-8. G4/G5 fixture evidence and whether it faithfully covers selective managed consumers, dirty/source safety, unmanaged conflict preservation, failure/recovery, Human Gate and should-not-change behavior.
+7. G1/G3 candidate replay evidence and whether it proves fresh child normal-entry routing without paid API, including dynamic Bridge release-state discovery and the real `LAGGING` snapshot case.
+8. G4/G5 fixture evidence and whether it faithfully covers selective managed consumers, dirty/source safety, unmanaged conflict preservation, failure/recovery, Human Gate and should-not-change behavior through the candidate child rather than harness-side business logic.
 9. Whether G2 is correctly left as `SEQUENCED WAITING` until Reviewer PASS, formal promotion, AI_Skills `release` advancement, real legacy Marketplace migration, reinstall of `ai-skills-core 0.5`, and fresh released normal-entry smoke.
 
 ## Reviewer Must Not Treat As Complete Yet

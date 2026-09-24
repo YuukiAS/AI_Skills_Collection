@@ -1,0 +1,62 @@
+{
+  "candidate_commit": "12ca08dc127f8eee4c13a3a2c9cc598d00ce04ee",
+  "cases": [
+    {
+      "before_hash": "f4eaa8d367e72c4d76fc9075bde06ca9f64479e48b151f732f3af9890c704bde",
+      "case": "stale_managed_consumer",
+      "fixture_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/stale-managed-consumer",
+      "watched_hashes": {
+        "AGENTS.md": "d17b24df1c2ae3f34de41eabdd1973b3a33e8b0c09b6a0f4e03b5d9480aefb8d",
+        "README.md": "71495ecc090124e42174ac86dbf893025dcdea42441624bf23d26191ce3a87d2"
+      }
+    },
+    {
+      "before_hash": "a937a64909c05c4612b5a706eb40d9956c1d139c60b027045cdc9383ab48e49f",
+      "case": "unaffected_repo",
+      "fixture_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/unaffected-repo",
+      "watched_hashes": {
+        "AGENTS.md": "3a414b7623fd6d8d3944c92ac691c766e77ba67ec53e1bcfba2ef132331f450f",
+        "README.md": "cd57d16c8ec2d121684a46532213e85a22027d83946e56ac6c2ff66b0178343b"
+      }
+    },
+    {
+      "before_hash": "4205ddf977e33c7dfb732b99e114d57276402cd31fa6b3eaeb1cf8ed121a418e",
+      "case": "unmanaged_conflict",
+      "fixture_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/unmanaged-conflict",
+      "watched_hashes": {
+        "AGENTS.md": "c9618767402588d3910081f57c208278988a97feba95b9d719b59e4bfbd38c6d"
+      }
+    },
+    {
+      "before_hash": "fe9aa5c2aae6594b6f521e7ff39229712bc519f83dfb762893e10bbe987def06",
+      "case": "unrelated_dirty_non_overlap",
+      "fixture_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/unrelated-dirty-non-overlap",
+      "watched_hashes": {
+        "AGENTS.md": "e9cafca9419bf4b026a741852c282386f092c295da45c6c431bf0c59afc571ec",
+        "notes.txt": "78058d0a4650dd0da8b0142d3750ee59fd2b307fae64e372f6d3ec876fa45636"
+      }
+    },
+    {
+      "before_hash": "02f9b5ac0f23c541eaac902bca4c9a685f21f6af19596bf8412f686fe195eedb",
+      "case": "overlapping_dirty_human_gate",
+      "fixture_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/overlapping-dirty-human-gate",
+      "watched_hashes": {
+        "AGENTS.md": "f53abcbda5fff00e2a2f4524ce67f8e5ae73cd499e4a5c0f0b5c3058470463d8"
+      }
+    },
+    {
+      "before_hash": "cda584689289732d046182c0b7599d5a774941df1e53979d560d50106b8557b0",
+      "case": "failure_restoration_and_rerun",
+      "fixture_path": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures/failure-restoration-rerun",
+      "watched_hashes": {
+        "AGENTS.md": "e9cafca9419bf4b026a741852c282386f092c295da45c6c431bf0c59afc571ec",
+        "README.md": "cb3fffa041dc99dca7fa963eba0b9e5f3c77c604478248318b4a194f8adbab9f",
+        "marketplace-source.json": "a4baffbadf4cbce3fc17666dd53b0195e726eb41e4281d1dd371bc736d187633"
+      }
+    }
+  ],
+  "expected_owner_path": "AI Skills Maintainer -> machine-update-orchestrator -> project-skill-installer / bridge-kit-maintainer",
+  "fixture_root": "/home/yuukias/AI_Skills_Collection-ai-skills-core-machine-update-orchestration/private/exports/ai-skills-core--machine-update-orchestration/fixtures",
+  "output_name": "g4_g5_candidate_result.json",
+  "task_key": "ai-skills-core--machine-update-orchestration"
+}

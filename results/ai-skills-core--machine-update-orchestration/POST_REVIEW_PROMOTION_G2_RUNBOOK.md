@@ -9,8 +9,8 @@ This runbook records the exact post-review sequence expected by Planner decision
 ## Current State Before Reviewer
 
 - Task branch: `reviewed/ai-skills-core--machine-update-orchestration`
-- Current task branch tip when this runbook was prepared: `6b90e329e402c147661559639bc667b4e183da98`
-- Product-surface candidate replayed by fresh child: `24f574ff20028fedaa3c5382594717cb28234184`
+- Current task branch tip when this runbook was prepared: final task-branch commit containing this runbook; verify remote tip after push.
+- Product-surface candidate replayed by fresh child: `12ca08dc127f8eee4c13a3a2c9cc598d00ce04ee`
 - AI_Skills `main`: `7b76e94ad29cf3bd8547026b942553068754d51f`
 - AI_Skills `release`: `7b76e94ad29cf3bd8547026b942553068754d51f`
 - Bridge `release`: `d27259d6706dee951dc0c0ede8c9b03c65f55ca3`

@@ -14,15 +14,15 @@ Review the implementation against the frozen V2.1 objective and the Planner deci
 
 - Repository: `YuukiAS/AI_Skills_Collection`
 - Task branch: `reviewed/ai-skills-core--machine-update-orchestration`
-- Current handoff tip: `189c048ad55aad4dcd06f570814c693a5015df1f`
-- Product-surface candidate replayed by fresh child: `24f574ff20028fedaa3c5382594717cb28234184`
+- Current handoff tip: final task-branch commit containing this prompt; verify remote tip after push.
+- Product-surface candidate replayed by fresh child: `12ca08dc127f8eee4c13a3a2c9cc598d00ce04ee`
 - Base `main` and current AI_Skills `release`: `7b76e94ad29cf3bd8547026b942553068754d51f`
 - Bridge locator commit on `YuukiAS/GPT_Codex_AI_Bridge_Kit origin/main`: `dfe093c6f78cdadb22905e811935a772af5cb034`
 - Bridge `release`: `d27259d6706dee951dc0c0ede8c9b03c65f55ca3`
 
 Important identity note:
 
-The product-surface candidate was replayed at `24f574ff20028fedaa3c5382594717cb28234184`. Later commits add task-owned evidence, handoff and runbook files under `results/` only. If you find any post-replay source/generated/Bridge runtime change, treat that as a review issue.
+The product-surface candidate was replayed at `12ca08dc127f8eee4c13a3a2c9cc598d00ce04ee`. Later commits add task-owned evidence, handoff/runbook updates, and fixture-runner schema adjustment only. If you find any post-replay source/generated/Bridge runtime change, treat that as a review issue.
 
 ## Source Material To Read
 
@@ -35,7 +35,9 @@ Read these files from the task branch:
 5. `results/ai-skills-core--machine-update-orchestration/candidate_replay/CANDIDATE_REPLAY_EVIDENCE.md`
 6. `results/ai-skills-core--machine-update-orchestration/fixture_execution/G4_G5_FIXTURE_EVIDENCE.md`
 7. `results/ai-skills-core--machine-update-orchestration/fixture_execution/g4_g5_fixture_evidence.json`
-8. `results/ai-skills-core--machine-update-orchestration/POST_REVIEW_PROMOTION_G2_RUNBOOK.md`
+8. `results/ai-skills-core--machine-update-orchestration/fixture_execution/candidate_g4_g5_task.md`
+9. `results/ai-skills-core--machine-update-orchestration/fixture_execution/candidate_g4_g5_manifest.json`
+10. `results/ai-skills-core--machine-update-orchestration/POST_REVIEW_PROMOTION_G2_RUNBOOK.md`
 
 Then inspect the changed source and generated payload required by those evidence files:
 
