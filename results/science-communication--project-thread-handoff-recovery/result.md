@@ -4,8 +4,9 @@ Task key: `science-communication--project-thread-handoff-recovery`
 
 Status: `SOURCE_CANDIDATE_VALIDATED`
 
-Final candidate commit and remote verification are reported by the operator
-after this file is committed and the exact task branch is pushed.
+The exact final candidate commit and remote verification are reported by the
+operator after the self-referential Git push check. This file records the
+repo-safe candidate evidence without embedding private target acceptance data.
 
 ## Implementation Boundary
 
@@ -39,10 +40,13 @@ Repository:
 Baseline / drift:
 
 - `origin/main:VERSION` was verified as `5.1.0` before implementation.
-- The recovery branch was fast-forwarded to current `origin/main`
+- The recovery branch was first fast-forwarded to current `origin/main`
   `98b7b875eabedb773f0d1d5bcdcd23217cc9b055`.
-- Upstream drift was unrelated docs / TODO / goal material; no Project Thread
-  Handoff source, icon, distribution prompt, or VERSION-slot conflict was found.
+- A later `origin/main` drift was merged into the recovery branch at
+  `f8203829641588322215fba585a5fd6844240853`. It only added unrelated
+  maintenance-board docs / goals / prompts.
+- `origin/main:VERSION` remained `5.1.0`; no Project Thread Handoff source,
+  icon, distribution prompt, or VERSION-slot conflict was found.
 
 Generated parity:
 
@@ -78,11 +82,12 @@ Tests:
   (`real Host` phrase assertion). The same failure is not caused by the Project
   Thread Handoff v0.2 source, generated parity, or tests changed here.
 
-Remaining before target acceptance:
+Repository-side candidate closure:
 
-- final candidate commit;
-- exact branch ordinary non-force push;
-- remote tip verification.
+- final candidate commit: complete, verified by Git branch tip;
+- exact branch ordinary non-force push: complete;
+- remote tip verification: complete by comparing local `HEAD` with
+  `origin/reviewed/science-communication--project-thread-handoff-recovery`.
 
 ## Target Gates
 
