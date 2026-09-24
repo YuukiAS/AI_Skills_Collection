@@ -38,6 +38,22 @@ docs/plugin-todos/<plugin>.md
 
 这里仍然沿用真实项目反馈的原则：项目 thread 先记录 `status: NEW` 的事实和证据；是否抽象成通用规则、如何修改实现、验收标准和 release 决策，留给后续 AI_Skills Planner / maintainer。
 
+## TODO inbox 和维护看板怎么配合？
+
+本页和上面的 TODO 文件负责保存“问题是什么、证据在哪里、现在成熟度如何”。GitHub Project `AI Skills Maintenance` 负责保存“这件事现在做到哪一步、谁接着做、什么时候真正完成”。
+
+当一个 TODO 条目进入 central tracking scope 时，对应 source entry 会多一行：
+
+```text
+tracking: #<issue-number>
+```
+
+这只是指向 tracking Issue 的定位符，不是 Project Status。`status: NEW` 可以继续保持 `NEW`，同时 tracking Issue 在 Project 里显示为 `TODO`。完整规则见：
+
+```text
+docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md
+```
+
 ## 以后在真实项目里发现问题，记到哪里？
 
 先问一个最简单的问题：

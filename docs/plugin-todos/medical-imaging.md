@@ -7,6 +7,7 @@ Canonical maintenance inbox for the `medical-imaging` plugin.
 ### Curriculum-driven capability refinement
 
 status: BLOCKED_NEEDS_EVIDENCE
+tracking: #85
 source: user-approved design direction, 2026-09-01
 proposal: Use standards, consensus/guideline documents, official tool documentation, mature implementations, landmark papers, and selected textbooks as the main learning sources. Textbooks are supporting material rather than the default production source of truth. See `docs/workflows/CURRICULUM_DRIVEN_DOMAIN_PLUGIN_REFINEMENT.md`.
 review requirement: validate modality/task semantics, physical-space geometry, labels, metrics, patient/case structure, and reproducibility on real or realistic imaging artifacts. Toy tensors and import tests are not sufficient.
@@ -19,6 +20,7 @@ Future items should come from real imaging workflows and preserve modality/task 
 ### Hard-case lifecycle and mature-component reuse
 
 status: BLOCKED_NEEDS_EVIDENCE
+tracking: #79
 source: user direction from planned CardiacNexus restructuring, 2026-09-22
 problem: medical-imaging workflows need a first-class hard-case loop, not only aggregate metrics. Difficult cases should be discoverable, visually inspectable, and analyzable with enough provenance to explain whether the failure comes from image quality, anatomy, acquisition/domain shift, preprocessing/geometry, labels/reference standard, registration, model behavior, or evaluation. At the same time, project refactors should prefer mature ANTs/MONAI and adjacent ecosystem components over reimplementing lower-quality local substitutes.
 

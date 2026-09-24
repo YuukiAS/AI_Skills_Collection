@@ -7,6 +7,7 @@ Canonical maintenance inbox for the `bioinformatics` plugin.
 ### Curriculum-driven capability refinement
 
 status: BLOCKED_NEEDS_EVIDENCE
+tracking: #84
 source: user-approved design direction, 2026-09-01
 proposal: Expand capabilities primarily through official workflow documentation, mature repositories, benchmark/best-practice papers, reference-database guidance, and selected textbooks. Public posts and WeChat articles may discover useful candidates but are not integration truth; trace them to authoritative sources before adoption. See `docs/workflows/CURRICULUM_DRIVEN_DOMAIN_PLUGIN_REFINEMENT.md`.
 review requirement: use real data formats/workflow boundaries where practical and verify reference/database provenance, tool-version assumptions, sample structure, and reproducibility.
