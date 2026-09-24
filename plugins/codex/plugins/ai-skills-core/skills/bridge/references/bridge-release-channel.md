@@ -2,6 +2,32 @@
 
 Normal Bridge updates resolve the Bridge Kit formal `release` ref, not arbitrary `main`.
 
+Before choosing a target, dynamically discover:
+
+1. real Bridge repository identity and current `main`;
+2. current remote `refs/heads/release`;
+3. canonical version sources: `pyproject.toml` and `ai_bridge_kit/__init__.py`;
+4. the Bridge `AGENTS.md` owner locator;
+5. root `CHANGELOG.md`;
+6. formal closure evidence sufficient to bind a version to a commit.
+
+The newest formally closed release is the newest commit/version supported by
+that combined version/changelog/closure-evidence contract. It is not inferred
+from newest `main`, highest-looking version text, a changelog heading alone,
+arbitrary docs, TODOs, commit messages or model intuition.
+
+Classify the relation between `refs/heads/release` and the newest provable
+formal release:
+
+- `ALIGNED`: the release ref is exactly the newest provable formal release.
+- `LAGGING`: the release ref is an ancestor of the newest provable formal
+  release; formal distribution closure is pending/incomplete and the older ref
+  must not be reported as latest.
+- `AHEAD/INCONSISTENT`: the release ref is ahead, unrelated, metadata-
+  inconsistent, or the target is not a fast-forward; fail closed.
+- `FORMAL_RELEASE_NOT_PROVABLE`: the formal release cannot be proven from the
+  contract; fail closed.
+
 Daily `update Bridge Kit` is read-only with respect to the `release` ref. It may fast-forward a canonical local checkout to the already published formal release when ancestry and dirty ownership permit, then refresh the editable package/entry point and verify runtime identity.
 
 Formal Bridge release closure may advance `refs/heads/release` only when all conditions hold:

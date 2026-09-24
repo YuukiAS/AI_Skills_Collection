@@ -7,7 +7,7 @@ through the app's Git marketplace flow:
 
 ```text
 Source: https://github.com/YuukiAS/AI_Skills_Collection.git
-Git reference: main
+Git reference: release
 Sparse paths:
 .agents/plugins
 plugins/codex/plugins
@@ -25,7 +25,7 @@ CLI equivalent:
 ```bash
 codex plugin marketplace add \
   https://github.com/YuukiAS/AI_Skills_Collection.git \
-  --ref main \
+  --ref release \
   --sparse .agents/plugins \
   --sparse plugins/codex/plugins
 codex plugin marketplace list
@@ -34,6 +34,17 @@ codex plugin marketplace upgrade
 
 After installing or upgrading plugins, start a new Codex session so the updated
 skills are loaded consistently.
+
+Stable installs should follow `release`. Use `main` only when you explicitly
+want development or unreleased content from this repository:
+
+```bash
+codex plugin marketplace add \
+  https://github.com/YuukiAS/AI_Skills_Collection.git \
+  --ref main \
+  --sparse .agents/plugins \
+  --sparse plugins/codex/plugins
+```
 
 Use the CLI when you need server, HPC, repo-local, user-level, explicit legacy
 codex-home installs, or when you are authoring and validating skills in this

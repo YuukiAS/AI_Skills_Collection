@@ -335,6 +335,18 @@ class ReplayMechanismTests(unittest.TestCase):
 
         self.assertIsNotNone(replay.parse_consumption(event + "\n", installed))
 
+    def test_writable_dir_must_be_existing_repo_local_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            allowed = root / "private" / "exports" / "task" / "fixtures"
+            allowed.mkdir(parents=True)
+
+            self.assertEqual(replay.repo_relative_existing_dir(root, "private/exports/task/fixtures"), allowed.resolve())
+            with self.assertRaisesRegex(replay.ReplayError, "directory does not exist"):
+                replay.repo_relative_existing_dir(root, "private/exports/task/missing")
+            with self.assertRaisesRegex(replay.ReplayError, "inside this repository"):
+                replay.repo_relative_existing_dir(root, "../outside")
+
     def test_plugin_add_uses_top_level_installed_path_only(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -659,6 +671,43 @@ class ReplayMechanismTests(unittest.TestCase):
 
         self.assertIn("plugins.writing-style@ai-skills-candidate.enabled=true", captured)
         self.assertNotIn('plugins."writing-style@ai-skills-candidate".enabled=true', captured)
+
+    def test_child_exec_can_add_repo_local_writable_dirs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workspace = root / "workspace"
+            output_dir = workspace / "outputs"
+            fixture_dir = root / "private" / "exports" / "task" / "fixtures"
+            workspace.mkdir()
+            output_dir.mkdir()
+            fixture_dir.mkdir(parents=True)
+            args_file = root / "args.json"
+            codex = self.make_executable(
+                root,
+                "#!/usr/bin/env python3\n"
+                "import json, pathlib, sys\n"
+                f"pathlib.Path({str(args_file)!r}).write_text(json.dumps(sys.argv[1:]), encoding='utf-8')\n"
+                "sys.stdin.read()\n",
+            )
+            replay.run_child_exec(
+                codex,
+                root / "candidate-marketplace",
+                "writing-style@ai-skills-candidate",
+                workspace,
+                output_dir,
+                "Rewrite this.",
+                stdout_path=root / "run" / "child.stdout.jsonl",
+                stderr_path=root / "run" / "child.stderr",
+                writable_dirs=[fixture_dir],
+                timeout_seconds=5,
+                terminate_grace_seconds=0.1,
+            )
+
+            captured = json.loads(args_file.read_text(encoding="utf-8"))
+
+        add_dir_values = [captured[index + 1] for index, value in enumerate(captured) if value == "--add-dir"]
+        self.assertIn(str(output_dir), add_dir_values)
+        self.assertIn(str(fixture_dir), add_dir_values)
 
 
 if __name__ == "__main__":

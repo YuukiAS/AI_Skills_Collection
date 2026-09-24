@@ -28,6 +28,15 @@ This skill owns Bridge maintenance/distribution concerns:
 - identify `ai-bridge where` runtime/source root;
 - verify package/runtime version and path;
 - resolve the formal Bridge `release` ref;
+- discover current Bridge `main` and the canonical version source without
+  treating either as sufficient release evidence by itself;
+- read the Bridge `AGENTS.md` owner locator before claiming formal
+  distribution ownership;
+- identify the newest Bridge release commit/version that is provably formally
+  closed from version, changelog and closure evidence;
+- classify the relationship among `main`, `release`, and the latest provable
+  formal release as `ALIGNED`, `LAGGING`, `AHEAD/INCONSISTENT`, or
+  `FORMAL_RELEASE_NOT_PROVABLE`;
 - safely update a canonical Bridge checkout when ancestry and dirty ownership permit;
 - refresh the existing editable package/entry point from the formal source;
 - during formal Bridge release closure, verify closure/version/changelog evidence and advance the Bridge `release` ref;
@@ -63,3 +72,40 @@ Formal Bridge release discoverability requires exactly one minimal owner locator
 
 Do not duplicate that locator into Bridge README, QUICKSTART, CHANGELOG or runtime source.
 
+## Release State Discovery
+
+For `update Bridge Kit`, do dynamic discovery from the real Bridge source. Do
+not hard-code a Bridge version or SHA into AI_Skills behavior.
+
+Minimum discovery:
+
+1. verify the Bridge repo origin is `YuukiAS/GPT_Codex_AI_Bridge_Kit`;
+2. discover current `main`;
+3. discover current `refs/heads/release`;
+4. read `pyproject.toml` and `ai_bridge_kit/__init__.py` as canonical version
+   sources;
+5. read Bridge `AGENTS.md` and confirm the formal-distribution owner locator;
+6. inspect root `CHANGELOG.md` and existing formal closure evidence;
+7. identify the newest release commit/version that is actually provable as
+   formally closed.
+
+Do not infer the latest formal release from newest `main` SHA, a high-looking
+version string alone, a changelog heading alone, arbitrary docs/TODO prose or
+model intuition.
+
+Classify the release relation:
+
+- `ALIGNED`: `refs/heads/release` equals the latest provable formal release.
+- `LAGGING`: `refs/heads/release` is an ancestor of the latest provable formal
+  release. Report formal distribution as pending/incomplete; never call the old
+  ref the latest release.
+- `AHEAD/INCONSISTENT`: `refs/heads/release` is ahead of, unrelated to, or
+  otherwise inconsistent with the latest provable formal release, or the
+  intended target cannot fast-forward. Fail closed.
+- `FORMAL_RELEASE_NOT_PROVABLE`: current source lacks sufficient version,
+  changelog or closure evidence. Fail closed for release advancement and do not
+  treat newer `main` as formal.
+
+Daily `update Bridge Kit` may consume this classification but remains read-only
+with respect to `refs/heads/release`. Only formal producer closure may advance
+that ref.

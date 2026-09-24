@@ -229,6 +229,12 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertIn("AI Skills Maintainer (`ai-skills-core` -> `bridge-kit-maintainer`)", bridge)
         self.assertIn("Do not duplicate that locator into Bridge README", bridge)
         self.assertIn("refs/heads/release", bridge_refs)
+        for classification in ["ALIGNED", "LAGGING", "AHEAD/INCONSISTENT", "FORMAL_RELEASE_NOT_PROVABLE"]:
+            self.assertIn(classification, bridge)
+            self.assertIn(classification, bridge_refs)
+        self.assertIn("Bridge `AGENTS.md` owner locator", bridge)
+        self.assertIn("version/changelog/closure-evidence", bridge_refs)
+        self.assertIn("newest `main`", bridge_refs)
         self.assertIn("non-force", bridge_refs)
         self.assertIn("canonical `ai-bridge` commands", bridge_refs)
         self.assertIn("Host Policy generation and validation", bridge_refs)
@@ -238,6 +244,17 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertIn("Formal release scope expansion", maintainer)
         self.assertIn("route first to `machine-update-orchestrator`", installer)
         self.assertIn("one-time bootstrap belongs to `machine-update-orchestrator`", installer)
+
+    def test_stable_install_guidance_uses_release_not_main(self) -> None:
+        readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+        installation = (REPO_ROOT / "docs/INSTALLATION.md").read_text(encoding="utf-8")
+
+        self.assertRegex(readme, r"Ref: release")
+        self.assertRegex(installation, r"Git reference: release")
+        self.assertRegex(installation, r"--ref release")
+        self.assertIn("Stable installs should follow `release`", installation)
+        self.assertIn("Use `main` only", installation)
+        self.assertLess(installation.index("Git reference: release"), installation.index("Use `main` only"))
 
     def test_056_product_delivery_discipline_sources_are_wired(self) -> None:
         config = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
