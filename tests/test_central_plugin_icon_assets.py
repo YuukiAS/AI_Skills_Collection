@@ -30,6 +30,7 @@ PROTECTED_REFERENCE_ICON_SHA256 = {
     "ai-skills-core": "f00921b5fa304780870501dfe6dead055bf22d4814a578cb62693d53fddb6ea4",
     "presentations": "6bc8ccfe0025d00207610b9f96f50e385afd305634d2681d1d11cf937ae43c94",
     "scientific-visualization": "2f08f6e84d6e449a04c7574351d308c5a4e7dba9f5d67b894f4df84f618fb8df",
+    "web-development": "9aef902b4ce9dc8dafa2f7a6eb42e136bc54d016efe41af6446de664b15ca682",
     "workflow-core": "43fa29d8afd649a5f585d4b99f69df7495dd6826e88412beff64dd0d1ac0ccde",
 }
 
