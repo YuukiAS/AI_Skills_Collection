@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "task_key": "documents-media--scientific-pdf-rendering-reliability",
+  "candidate_commit": "827ee6a01fdfec44f0165b1ca9b321b37c257b50",
+  "preflight_kind": "research-main profile install only; no Codex child replay was started",
+  "install": {
+    "install_kind": "profile:research-main",
+    "collection_commit": "827ee6a01fdfec44f0165b1ca9b321b37c257b50",
+    "active_skill_count": 19,
+    "installed_skill_names": [
+      "codex-workflow-protocol",
+      "research-reporting",
+      "scientific-writing",
+      "paper-workflow-orchestrator",
+      "nature-manuscript-workflow",
+      "citation-verification",
+      "latex-paper-authoring",
+      "literature-review",
+      "citation-management",
+      "research-lookup",
+      "pdf",
+      "render-chinese-math-pdf",
+      "docx",
+      "markitdown",
+      "writing-fidelity",
+      "scientific-prose",
+      "chinese-prose",
+      "matplotlib",
+      "plotly"
+    ]
+  },
+  "agents_evidence": {
+    "agents_sha256": "f8acf0a29fc918235990023aa16a42fece7cca370d240a580e67fe08f0e0d938",
+    "routing_note_line": 16,
+    "routing_note": "- For advisor-facing, group-meeting, milestone, experiment-review, or repo-grounded research-report requests that also ask for a formal/readable PDF, first read and apply `research-reporting` for the scientific report semantics, then use `render-chinese-math-pdf` only for PDF route/profile/font/layout mechanics. Do not satisfy such requests by using only PDF/rendering skills.",
+    "routing_note_precedes_skill_routing": true,
+    "research_reporting_line": 39,
+    "renderer_line": 27
+  },
+  "assessment": "READY_FOR_AUTHORIZED_G5_REPLAY: deterministic install evidence proves the current research-main normal-entry instructions route formal research-report PDFs through research-reporting before renderer mechanics, but it does not prove actual child consumption.",
+  "remaining_gate": "Requires a fresh normal Research Authoring child replay with explicit user authorization for this new candidate."
+}
