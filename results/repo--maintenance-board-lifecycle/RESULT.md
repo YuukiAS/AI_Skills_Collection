@@ -75,3 +75,15 @@ The independent implementation Reviewer should check:
 - Project surface evidence satisfies BOARD-01 false-DONE guard;
 - Clear Writing was applied to reader-facing Issue copy before mutation;
 - Issue #4 remains `DOING` and is not closed.
+
+## Review 1 And Repair
+
+```text
+REVIEW_1_RESULT = REVISE
+REVIEW_1_FINDINGS = truncated Issue titles; stale Issue #4 next action
+REVIEW_1_REPAIR = applied
+POST_REPAIR_READBACK = ellipsisTitles=[], missingProjectItems=[], Status DOING=1 TODO=81
+NEXT_ACTION = WAIT_FOR_INDEPENDENT_IMPLEMENTATION_REVIEW_ROUND_2
+```
+
+Evidence: `results/repo--maintenance-board-lifecycle/REVIEW_1.md` and `results/repo--maintenance-board-lifecycle/REVIEW_1_REPAIR.md`.

@@ -57,3 +57,7 @@ Area distribution:
 - `standalone-skill`: 4
 
 Known surface note: `gh project item-list` / `ProjectV2.items` returned an empty list during this run, while every Issue-level `projectItems` readback showed the expected Project item. Verification therefore uses Issue-level Project item readback, which is also the surface used for field mutation.
+
+## Review 1 Reader-Facing Repair
+
+After `REVIEW_1.md` returned `REVISE`, the live GitHub surface was repaired and read back again. The repair replaced all literal `...` truncated Issue titles, updated Issue #4 body to the current review handoff state, and verified that all 82 open `maintenance-track` Issues still have Project items. Post-repair readback: `ellipsisTitles=[]`, `missingProjectItems=[]`, Status distribution `DOING=1`, `TODO=81`.

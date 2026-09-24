@@ -58,7 +58,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 8,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/8",
-      "title": "Subagent browser capability checks must use rendered-page semantics, not foreground-w..."
+      "title": "按页面语义检查子代理浏览器能力"
     },
     {
       "source": "docs/plugin-todos/workflow-core.md",
@@ -69,7 +69,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 9,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/9",
-      "title": "Task-local prohibitions must expire with their task instead of becoming accidental gl..."
+      "title": "防止任务局部禁令变成全局规则"
     },
     {
       "source": "docs/plugin-todos/workflow-core.md",
@@ -91,7 +91,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 11,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/11",
-      "title": "Reviewed Handoff exact sibling worktree authorization can still be unexecutable under..."
+      "title": "修复 sibling worktree 授权与沙箱执行不一致"
     },
     {
       "source": "docs/plugin-todos/writing-style.md",
@@ -102,7 +102,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 12,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/12",
-      "title": "Codex-authored README should always use Clear Writing, with Chinese README prose kept..."
+      "title": "README 写作默认经过 Clear Writing"
     },
     {
       "source": "docs/plugin-todos/writing-style.md",
@@ -135,7 +135,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 15,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/15",
-      "title": "English scientific slide microcopy and full-deck prose remain cognitively heavy after..."
+      "title": "降低英文科研幻灯片的认知负担"
     },
     {
       "source": "docs/plugin-todos/writing-style.md",
@@ -146,7 +146,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 16,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/16",
-      "title": "Versioned Chinese technical documents can regress into English-keyword scaffolding du..."
+      "title": "防止中文技术文档回退到英文脚手架"
     },
     {
       "source": "docs/plugin-todos/writing-style.md",
@@ -157,7 +157,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 17,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/17",
-      "title": "Product UI microcopy should state user consequence, not internal implementation reass..."
+      "title": "产品 UI 文案说明用户影响"
     },
     {
       "source": "docs/plugin-todos/writing-style.md",
@@ -190,7 +190,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 20,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/20",
-      "title": "Formal research reports can be scientifically correct yet still lack a coherent acade..."
+      "title": "让正式科研报告具备清楚的文档身份"
     },
     {
       "source": "docs/plugin-todos/research-writing.md",
@@ -212,7 +212,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 22,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/22",
-      "title": "Reader-first advisor report rewriting must change the document plan, not just the wor..."
+      "title": "导师报告重写先改文档结构"
     },
     {
       "source": "docs/plugin-todos/research-writing.md",
@@ -256,7 +256,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 26,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/26",
-      "title": "Advisor/group-meeting reports need method and dataset orientation before project-spec..."
+      "title": "导师报告先交代方法与数据"
     },
     {
       "source": "docs/plugin-todos/research-writing.md",
@@ -267,7 +267,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 27,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/27",
-      "title": "Advisor-facing research reports should suppress execution/runtime details unless they..."
+      "title": "导师报告隐藏无关执行细节"
     },
     {
       "source": "docs/plugin-todos/research-writing.md",
@@ -278,7 +278,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 28,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/28",
-      "title": "Bilingual advisor reports should be two audience-calibrated versions, not interleaved..."
+      "title": "双语导师报告分成两版"
     },
     {
       "source": "docs/plugin-todos/presentations.md",
@@ -311,7 +311,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 31,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/31",
-      "title": "Page-level language audits can pass while sentence and slide transitions remain mecha..."
+      "title": "检查幻灯片句间与页间过渡"
     },
     {
       "source": "docs/plugin-todos/presentations.md",
@@ -333,7 +333,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 33,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/33",
-      "title": "Citation style, bibliography fidelity, and PDF text-layer integrity need one delivery..."
+      "title": "统一引用、书目和 PDF 文本层"
     },
     {
       "source": "docs/plugin-todos/presentations.md",
@@ -355,7 +355,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 35,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/35",
-      "title": "Full-deck audience-context and responsive-layout review still regresses after repeate..."
+      "title": "强化整套研究幻灯片的读者努力审查"
     },
     {
       "source": "docs/plugin-todos/presentations.md",
@@ -729,7 +729,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 69,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/69",
-      "title": "Native interaction acceptance must prove the intended control path, not only the fina..."
+      "title": "原生交互验收要覆盖真实控制路径"
     },
     {
       "source": "docs/plugin-todos/web-development.md",
@@ -839,7 +839,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 84,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/84",
-      "title": "Curriculum-driven capability refinement"
+      "title": "Bioinformatics curriculum-driven capability refinement"
     },
     {
       "source": "docs/plugin-todos/medical-imaging.md",
@@ -850,7 +850,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 85,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/85",
-      "title": "Curriculum-driven capability refinement"
+      "title": "Medical imaging curriculum-driven capability refinement"
     },
     {
       "source": "docs/plugin-todos/medical-imaging.md",
@@ -894,7 +894,7 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 82,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/82",
-      "title": "Rendering defaults can drift across retries even when the document purpose did not ch..."
+      "title": "保持 PDF 渲染默认配置稳定"
     },
     {
       "source": "docs/skill-todos/render-chinese-math-pdf.md",
@@ -905,7 +905,35 @@
       "draft_note": "needs create/bind Issue after project scope",
       "issue": 83,
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/83",
-      "title": "Technically correct XeLaTeX output can still be visually inconsistent because the tem..."
+      "title": "避免模板按块类型发明 PDF 字体风格"
     }
-  ]
+  ],
+  "review_1_reader_facing_repair": {
+    "repaired_issue_titles": [
+      8,
+      9,
+      11,
+      12,
+      15,
+      16,
+      17,
+      20,
+      22,
+      26,
+      27,
+      28,
+      31,
+      33,
+      35,
+      69,
+      82,
+      83
+    ],
+    "updated_issue_body": 4,
+    "ellipsis_titles_after_repair": 0,
+    "project_item_status_after_repair": {
+      "DOING": 1,
+      "TODO": 81
+    }
+  }
 }
