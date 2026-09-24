@@ -4,6 +4,28 @@
 
 No pending released changes.
 
+## 0.4 - 2026-09-24
+
+Before:
+
+- Verified Workflow could require exact Reviewed Handoff task/worktree
+  authority, but did not state the normal consumer route after Bridge 0.9.1
+  introduced a first-bootstrap entry.
+- A brand-new Reviewed task could still be handled as a manual raw-Git
+  worktree bootstrap problem instead of a Bridge capability/routing problem.
+
+After:
+
+- Added the Reviewed Handoff bootstrap/resume routing contract: missing tasks
+  use `ai-bridge reviewed-handoff task bootstrap`; existing local or exact
+  remote reviewed tasks use `ai-bridge reviewed-handoff materialize-worktree
+  --mode resume`.
+- Required missing or old Bridge capability/version/policy support to fail
+  early before substantive implementation.
+- Kept all Git topology mechanics in Bridge and forbids workflow-core from
+  using raw `git worktree add`, `/tmp` replacement worktrees, alternate clones,
+  remote remapping, or locally forged task metadata as a fallback.
+
 ## 0.3 - 2026-09-22
 
 Before:
