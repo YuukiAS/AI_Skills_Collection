@@ -1,0 +1,60 @@
+{
+  "schema": "AI_SKILLS_MAINTENANCE_ADAPTING_CONSUMER_STATUS_V1",
+  "task_key": "ai-skills-core--machine-update-orchestration",
+  "updated_date": "2026-09-25",
+  "tracking_issue": 86,
+  "project_status": "ADAPTING",
+  "area": "ai-skills-core",
+  "resolution_commit": "c7776e202ae0324fc00b719b6ef8224b8e0498fe",
+  "formal_main": "c7776e202ae0324fc00b719b6ef8224b8e0498fe",
+  "formal_release": "c7776e202ae0324fc00b719b6ef8224b8e0498fe",
+  "overall_done": false,
+  "consumers": [
+    {
+      "name": "Workstation",
+      "status": "PASS",
+      "identity": {
+        "hostname": "Workstation",
+        "platform_summary": "Linux WSL2",
+        "user": "yuukias",
+        "codex_home": "/home/yuukias/.codex"
+      },
+      "evidence": [
+        "ADAPTING_CONSUMER_EVIDENCE.md",
+        "G2_POST_REVIEW_PROMOTION_EVIDENCE.md",
+        "g2_released_smoke/released_normal_entry_run.json"
+      ]
+    },
+    {
+      "name": "Longleaf_Codex",
+      "status": "PENDING_CONSUMER_AUTHORITY",
+      "identity": null,
+      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer."
+    },
+    {
+      "name": "Longleaf_Backup_Codex",
+      "status": "PENDING_CONSUMER_AUTHORITY",
+      "identity": null,
+      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer."
+    },
+    {
+      "name": "CUHK_Workstation_WSL_Codex",
+      "status": "PENDING_CONSUMER_AUTHORITY",
+      "identity": null,
+      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer."
+    },
+    {
+      "name": "Legion",
+      "status": "PENDING_CONSUMER_AUTHORITY",
+      "identity": null,
+      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer."
+    }
+  ],
+  "done_guard": {
+    "all_consumers_pass_or_na_required": true,
+    "na_requires_frozen_durable_reason": true,
+    "issue_must_remain_open": true,
+    "project_status_must_remain": "ADAPTING"
+  },
+  "next_handoff": "CONSUMER_ADAPTATION_REQUIRED"
+}
