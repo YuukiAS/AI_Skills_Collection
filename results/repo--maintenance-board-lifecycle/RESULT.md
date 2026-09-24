@@ -3,8 +3,7 @@
 Task: `repo--maintenance-board-lifecycle`
 Branch: `reviewed/repo--maintenance-board-lifecycle`
 Implementation commit: `6f65493a1e63d1798a4aee93afd817ec2b64c006`
-Handoff commit: `6b5d242d9f49209cb85892c6d56c2a3db9c5b089`
-Remote verification: `git ls-remote origin refs/heads/reviewed/repo--maintenance-board-lifecycle` returned `6b5d242d9f49209cb85892c6d56c2a3db9c5b089`.
+Remote verification: verify the current branch tip after the final handoff commit with `git ls-remote origin refs/heads/reviewed/repo--maintenance-board-lifecycle`.
 
 ## Result
 
@@ -59,7 +58,7 @@ open maintenance-track Issues: 82
 checked Project items through Issue projectItems: 82
 Project item status distribution: DOING=1, TODO=81
 source tracking locator count: 81
-remote task branch tip: 6b5d242d9f49209cb85892c6d56c2a3db9c5b089
+remote task branch tip: verified after the final handoff commit with `git ls-remote origin refs/heads/reviewed/repo--maintenance-board-lifecycle`
 ```
 
 GitHub GraphQL exposes `ProjectV2Workflow` name/enabled/number/timestamps, but not the auto-add filter text. The configured issue-only label gate was therefore verified operationally: Issue #4 and all 81 source tracking Issues carry `maintenance-track` and auto-added to the Project as Issue items. `Pull request merged` and `Auto-close issue` remain disabled.
