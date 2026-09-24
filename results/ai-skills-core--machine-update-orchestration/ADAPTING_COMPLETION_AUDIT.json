@@ -1,0 +1,71 @@
+{
+  "schema": "AI_SKILLS_ADAPTING_COMPLETION_AUDIT_V1",
+  "task_key": "ai-skills-core--machine-update-orchestration",
+  "audit_date": "2026-09-25",
+  "reviewed_branch_tip": "eb329678783ed4779f3d15952d72aaa3ea7655ce",
+  "resolution_commit": "c7776e202ae0324fc00b719b6ef8224b8e0498fe",
+  "remote_main": "c7776e202ae0324fc00b719b6ef8224b8e0498fe",
+  "remote_release": "c7776e202ae0324fc00b719b6ef8224b8e0498fe",
+  "tracking_issue": 86,
+  "issue_state": "OPEN",
+  "project_status": "ADAPTING",
+  "overall_done": false,
+  "central_gates": {
+    "formal_promotion": "PASS",
+    "g2_legacy_marketplace_migration": "PASS",
+    "fresh_released_normal_entry_smoke": "PASS",
+    "bridge_boundary_preserved": "PASS"
+  },
+  "consumers": [
+    {
+      "name": "Longleaf_Codex",
+      "required": true,
+      "status": "PENDING_CONSUMER_AUTHORITY",
+      "evidence": "consumers/Longleaf_Codex_PENDING.md",
+      "completion_judgment": "incomplete_requires_bounded_consumer_authority"
+    },
+    {
+      "name": "Longleaf_Backup_Codex",
+      "required": true,
+      "status": "PENDING_CONSUMER_AUTHORITY",
+      "evidence": "consumers/Longleaf_Backup_Codex_PENDING.md",
+      "completion_judgment": "incomplete_requires_bounded_consumer_authority"
+    },
+    {
+      "name": "CUHK_Workstation_WSL_Codex",
+      "required": true,
+      "status": "PENDING_CONSUMER_AUTHORITY",
+      "evidence": "consumers/CUHK_Workstation_WSL_Codex_PENDING.md",
+      "completion_judgment": "incomplete_requires_bounded_consumer_authority"
+    },
+    {
+      "name": "Workstation",
+      "required": true,
+      "status": "PASS",
+      "evidence": "ADAPTING_CONSUMER_EVIDENCE.md",
+      "completion_judgment": "complete_for_consumer"
+    },
+    {
+      "name": "Legion",
+      "required": true,
+      "status": "PENDING_CONSUMER_AUTHORITY",
+      "evidence": "consumers/Legion_PENDING.md",
+      "completion_judgment": "incomplete_requires_bounded_consumer_authority"
+    }
+  ],
+  "blocked_audit": {
+    "dependent_execution_blocked": true,
+    "blocker_class": "HUMAN_ONLY / EXTERNAL_CONSUMER_AUTHORITY",
+    "blocker_scope": [
+      "Longleaf_Codex",
+      "Longleaf_Backup_Codex",
+      "CUHK_Workstation_WSL_Codex",
+      "Legion"
+    ],
+    "current_workstation_agent_resolvable_work": "EXHAUSTED_FOR_CONSUMER_PASS",
+    "goal_achieved": false,
+    "complete": false,
+    "ready_for_user_review": false
+  },
+  "next_handoff": "CONSUMER_AUTHORITY_REQUIRED"
+}
