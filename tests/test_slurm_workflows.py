@@ -224,6 +224,67 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         self.assertIn("policy_overlay_id: none", reference)
         self.assertEqual(route["decision"], "route")
 
+    def test_g6_known_profile_keeps_distinct_local_site_id(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp) / "project"
+            override = Path(tmp) / "local-overrides.toml"
+            override.write_text(
+                "[sites.unc-longleaf]\nlocal_site_id = \"private-lab-site\"\npartition_priority = \"pi-fast\"\n",
+                encoding="utf-8",
+            )
+            args = argparse.Namespace(
+                site="unc-longleaf",
+                target="repo",
+                project=str(project),
+                hostname=None,
+                path=None,
+                local_override=str(override),
+                dry_run=False,
+                json=True,
+            )
+            plan = skills.environment_plan_payload(args)
+            manifest = skills.environment_apply_plan(args, plan)
+            reference = (
+                Path(manifest["target_root"]) / "slurm-workflows" / "references" / "_generated" / "site-profile.md"
+            ).read_text(encoding="utf-8")
+        self.assertEqual(plan["requested_site_id"], "unc-longleaf")
+        self.assertEqual(plan["local_site_id"], "private-lab-site")
+        self.assertEqual(plan["policy_overlay_id"], "unc-longleaf")
+        self.assertEqual(manifest["local_site_id"], "private-lab-site")
+        self.assertEqual(manifest["policy_overlay_id"], "unc-longleaf")
+        self.assertIn("local_site_id: private-lab-site", reference)
+        self.assertIn("policy_overlay_id: unc-longleaf", reference)
+
+    def test_g6_no_profile_can_attach_optional_public_overlay(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp) / "project"
+            override = Path(tmp) / "local-overrides.toml"
+            override.write_text(
+                "[sites.third-party]\npolicy_overlay_id = \"unc-longleaf\"\naccelerator_priority = \"h100,a100\"\n",
+                encoding="utf-8",
+            )
+            args = argparse.Namespace(
+                site="third-party",
+                target="repo",
+                project=str(project),
+                hostname=None,
+                path=None,
+                local_override=str(override),
+                dry_run=False,
+                json=True,
+            )
+            plan = skills.environment_plan_payload(args)
+            manifest = skills.environment_apply_plan(args, plan)
+            reference = (
+                Path(manifest["target_root"]) / "slurm-workflows" / "references" / "_generated" / "site-profile.md"
+            ).read_text(encoding="utf-8")
+        self.assertEqual(plan["local_site_id"], "third-party")
+        self.assertEqual(plan["policy_overlay_id"], "unc-longleaf")
+        self.assertEqual(manifest["local_site_id"], "third-party")
+        self.assertEqual(manifest["policy_overlay_id"], "unc-longleaf")
+        self.assertIn("local_site_id: third-party", reference)
+        self.assertIn("policy_overlay_id: unc-longleaf", reference)
+
 
 if __name__ == "__main__":
     unittest.main()

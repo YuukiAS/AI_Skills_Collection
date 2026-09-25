@@ -1034,10 +1034,17 @@ def environment_local_site_profile(site_id: str) -> dict[str, Any]:
     }
 
 
+def environment_local_fields(local_data: dict[str, dict[str, str]], *site_ids: str | None) -> dict[str, str]:
+    for site_id in site_ids:
+        if site_id and site_id in local_data:
+            return local_data[site_id]
+    return {}
+
+
 def environment_live_context(profile: dict[str, Any] | None, local_fields: dict[str, str] | None = None) -> dict[str, Any]:
     local_fields = local_fields or {}
     local_site_id = local_fields.get("local_site_id") or (profile["id"] if profile and profile.get("_local_only") else None)
-    policy_overlay_id = profile["id"] if profile and not profile.get("_local_only") else local_fields.get("policy_overlay_id")
+    policy_overlay_id = local_fields.get("policy_overlay_id") or (profile["id"] if profile and not profile.get("_local_only") else None)
     return slurm_routing_helper().discover_live_site_context(
         local_site_id=local_site_id,
         policy_overlay_id=policy_overlay_id,
@@ -1085,7 +1092,7 @@ def environment_doctor_payload(args: argparse.Namespace) -> dict[str, Any]:
     local_data, parse_errors = parse_environment_local_override(local_override_path)
     profiles = load_site_profiles()
     site_id = plan["site_id"]
-    site_fields = local_data.get(str(site_id), {}) if site_id else {}
+    site_fields = environment_local_fields(local_data, plan.get("requested_site_id"), plan.get("local_site_id"), site_id)
     unknown_sites = sorted(site for site in local_data if site not in profiles and site != site_id)
     unknown_fields = sorted(field for field in site_fields if field not in LOCAL_OVERRIDE_ALLOWED_FIELDS)
     empty_fields = sorted(field for field, value in site_fields.items() if field in LOCAL_OVERRIDE_ALLOWED_FIELDS and not str(value).strip())
@@ -1171,12 +1178,18 @@ def environment_plan_payload(args: argparse.Namespace) -> dict[str, Any]:
     profile, matches = environment_detect_profile(args, profiles)
     local_override = Path(args.local_override).expanduser() if args.local_override else DEFAULT_LOCAL_OVERRIDE
     local_data, _parse_errors = parse_environment_local_override(local_override)
-    site_fields = local_data.get(profile["id"], {}) if profile else {}
+    requested_site_id = profile["id"] if profile else None
+    site_fields = environment_local_fields(local_data, requested_site_id)
     live_context = environment_live_context(profile, site_fields)
     if not profile and live_context.get("local_site_id"):
         profile = environment_local_site_profile(str(live_context["local_site_id"]))
-    site_id = profile["id"] if profile else live_context.get("local_site_id")
-    policy_overlay = environment_policy_overlay(profile)
+        requested_site_id = profile["id"]
+    local_site_id = site_fields.get("local_site_id") or live_context.get("local_site_id") or (profile["id"] if profile else None)
+    policy_overlay_id = site_fields.get("policy_overlay_id") or (
+        profile["id"] if profile and not profile.get("_local_only") else live_context.get("policy_overlay_id")
+    )
+    policy_overlay = profiles.get(str(policy_overlay_id)) if policy_overlay_id else None
+    policy_overlay_summary = environment_policy_overlay(policy_overlay)
     target_root = environment_target_root(args)
     actions: list[dict[str, Any]] = []
     for rel in ENVIRONMENT_SKILLS:
@@ -1189,18 +1202,24 @@ def environment_plan_payload(args: argparse.Namespace) -> dict[str, Any]:
                 "action": "materialize-skill",
                 "source": rel,
                 "target": str((target_root / source.name).resolve()),
-                "local_site_id": site_id,
-                "policy_overlay_id": policy_overlay["id"] if policy_overlay else None,
+                "local_site_id": local_site_id,
+                "policy_overlay_id": policy_overlay_summary["id"] if policy_overlay_summary else None,
             }
         )
+    warnings: list[str] = []
+    if not local_site_id:
+        warnings.append("no live Slurm runtime or unambiguous site profile detected; routing mutation will fail closed")
+    if policy_overlay_id and not policy_overlay_summary:
+        warnings.append(f"unknown policy overlay ignored: {policy_overlay_id}")
     manifest_path = target_root / ENV_MANIFEST_NAME
     return {
         "schema_version": 1,
         "kind": "ai-skills-environment-plan",
-        "site_id": site_id,
-        "local_site_id": site_id,
-        "policy_overlay_id": policy_overlay["id"] if policy_overlay else None,
-        "site_profile_path": profile.get("_path") if profile and not profile.get("_local_only") else None,
+        "site_id": local_site_id,
+        "requested_site_id": requested_site_id,
+        "local_site_id": local_site_id,
+        "policy_overlay_id": policy_overlay_summary["id"] if policy_overlay_summary else None,
+        "site_profile_path": policy_overlay.get("_path") if policy_overlay else None,
         "matched_site_ids": [item["id"] for item in matches],
         "ambiguous": len(matches) > 1,
         "runtime_available": live_context.get("runtime_available"),
@@ -1211,7 +1230,7 @@ def environment_plan_payload(args: argparse.Namespace) -> dict[str, Any]:
         "local_override_hash": environment_local_override_hash(local_override),
         "manifest_path": str(manifest_path.resolve()),
         "actions": actions,
-        "warnings": [] if site_id else ["no live Slurm runtime or unambiguous site profile detected; routing mutation will fail closed"],
+        "warnings": warnings,
     }
 
 
@@ -1256,7 +1275,9 @@ def environment_site_reference(profile: dict[str, Any] | None, local_override: P
         lines.append(f"- {key}: {constraints[key]}")
     local_data, _errors = parse_environment_local_override(local_override)
     local_site_id = live_context.get("local_site_id") or profile["id"]
-    local_policy = environment_public_override_policy(local_data.get(str(local_site_id), {}))
+    local_policy = environment_public_override_policy(
+        environment_local_fields(local_data, live_context.get("requested_site_id"), str(local_site_id))
+    )
     if local_policy:
         lines.append("")
         lines.append("local_prompt_policy:")
@@ -1290,8 +1311,11 @@ def environment_apply_plan(args: argparse.Namespace, plan: dict[str, Any]) -> di
     if not profile and plan["site_id"]:
         profile = environment_local_site_profile(str(plan["site_id"]))
     local_data, _parse_errors = parse_environment_local_override(local_override)
-    site_fields = local_data.get(str(plan["site_id"]), {}) if plan["site_id"] else {}
+    site_fields = environment_local_fields(local_data, plan.get("requested_site_id"), plan.get("local_site_id"), plan.get("site_id"))
+    if plan.get("local_site_id") and not site_fields.get("local_site_id"):
+        site_fields = {**site_fields, "local_site_id": str(plan["local_site_id"])}
     live_context = environment_live_context(profile, site_fields)
+    live_context["requested_site_id"] = plan.get("requested_site_id")
     target_root.mkdir(parents=True, exist_ok=True)
     staging_root = target_root.parent / f".ai-skills-environment-staging-{os.getpid()}"
     if staging_root.exists():
