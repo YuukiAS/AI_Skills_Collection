@@ -28,6 +28,16 @@ additional evidence (2026-09-24): Lucerna task 01050 again reached user review w
 
 ## Recently promoted / established
 
+### AI Skills Maintainer machine update orchestration
+status: PROMOTED
+tracking: #86
+source: AI Skills Maintainer machine update orchestration V2.1, user-authorized implementation kickoff on 2026-09-23
+evidence: `machine-update-orchestrator`, `bridge-kit-maintainer`, Route A/B/C references, formal release/update-impact contract, ai-skills-core `0.5`, repository `5.1.0`, Marketplace payload and regression tests.
+target layer: distribution / current-machine maintenance workflow
+problem: updating the AI Research Stack previously required the user/operator to know versions, refs, checkout paths, Marketplace state, Bridge location, companion components and managed-consumer decisions.
+current behavior: AI Skills Maintainer is the normal entry for short requests such as `update presentations`, `update workflow-core`, `update AI Skills`, `update Bridge Kit`, and `sync this machine`. It discovers formal release state, uses exactly Route A/B/C, treats `sync this machine` as composition, delegates AI_Skills release work to `ai-skills-repository-maintainer`, AI_Skills managed installs to `project-skill-installer`, Bridge distribution/version work to `bridge-kit-maintainer`, and Bridge runtime/Host behavior back to canonical `ai-bridge` commands.
+boundary: no new top-level plugin, no daemon/watcher/database/ledger/state machine, no arbitrary `main` as stable target, no unowned repo text rewrite, no Bridge runtime source ownership, and no current-session hot-reload claim.
+
 ### AI_Skills production refinement maintenance companion
 status: PROMOTED
 source: user requirement on 2026-09-01 for task 046

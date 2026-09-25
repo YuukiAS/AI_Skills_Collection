@@ -1,9 +1,9 @@
 {
-  "version": "5.1.2",
-  "generated_at": "2026-09-24T17:10:30+00:00",
+  "version": "5.2.1",
+  "generated_at": "2026-09-25T00:42:07+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
-  "skill_count": 151,
+  "skill_count": 153,
   "selectors": {
     "domains": [
       "ai-ml",
@@ -97,6 +97,46 @@
       ]
     },
     {
+      "id": "core.core.bridge-kit-maintainer",
+      "name": "bridge-kit-maintainer",
+      "path": "skills/core/codex-system/bridge-kit-maintainer",
+      "flat_name": "core-codex-system-bridge-kit-maintainer",
+      "scope": "core",
+      "domain": "core",
+      "category": "codex-system",
+      "subcategory": "codex-system",
+      "slug": "bridge-kit-maintainer",
+      "install_selector": "core/codex-system/bridge-kit-maintainer",
+      "description": "Internal AI Skills Maintainer capability for Bridge Kit source, version, distribution, formal release-channel maintenance, editable package refresh, runtime identity checks, and delegation to canonical ai-bridge commands.",
+      "status": "active",
+      "provenance": "user-authored",
+      "source_repo_url": "",
+      "source_path": "",
+      "source_ref": "",
+      "source_imported_at": "",
+      "source_license": "",
+      "source_note": "",
+      "source_skills": [],
+      "trusted": false,
+      "requires_network": true,
+      "writes_files": true,
+      "executes_code": true,
+      "secrets_needed": [],
+      "last_reviewed": "2026-09-23",
+      "profile_tags": [
+        "ai-skills-maintainer"
+      ],
+      "recommended_scope": "global",
+      "selectors": [
+        "bridge-kit-maintainer",
+        "core-codex-system-bridge-kit-maintainer",
+        "core/codex-system/bridge-kit-maintainer",
+        "skills/core/codex-system/bridge-kit-maintainer",
+        "skills/system/codex-system/bridge-kit-maintainer",
+        "system/codex-system/bridge-kit-maintainer"
+      ]
+    },
+    {
       "id": "core.core.codex-workflow-protocol",
       "name": "codex-workflow-protocol",
       "path": "skills/core/codex-system/codex-workflow-protocol",
@@ -175,6 +215,46 @@
         "skills/core/codex-system/system-skills/imagegen",
         "skills/system/codex-system/imagegen",
         "system/codex-system/imagegen"
+      ]
+    },
+    {
+      "id": "core.core.machine-update-orchestrator",
+      "name": "machine-update-orchestrator",
+      "path": "skills/core/codex-system/machine-update-orchestrator",
+      "flat_name": "core-codex-system-machine-update-orchestrator",
+      "scope": "core",
+      "domain": "core",
+      "category": "codex-system",
+      "subcategory": "codex-system",
+      "slug": "machine-update-orchestrator",
+      "install_selector": "core/codex-system/machine-update-orchestrator",
+      "description": "Normal AI Skills Maintainer entry for current-machine update requests such as update presentations, update workflow-core, update AI Skills, update Bridge Kit, and sync this machine. Discovers formal release state, selects the bounded route, delegates to the owning maintainer, and verifies reload/session boundaries.",
+      "status": "active",
+      "provenance": "user-authored",
+      "source_repo_url": "",
+      "source_path": "",
+      "source_ref": "",
+      "source_imported_at": "",
+      "source_license": "",
+      "source_note": "",
+      "source_skills": [],
+      "trusted": false,
+      "requires_network": true,
+      "writes_files": true,
+      "executes_code": true,
+      "secrets_needed": [],
+      "last_reviewed": "2026-09-23",
+      "profile_tags": [
+        "ai-skills-maintainer"
+      ],
+      "recommended_scope": "global",
+      "selectors": [
+        "core-codex-system-machine-update-orchestrator",
+        "core/codex-system/machine-update-orchestrator",
+        "machine-update-orchestrator",
+        "skills/core/codex-system/machine-update-orchestrator",
+        "skills/system/codex-system/machine-update-orchestrator",
+        "system/codex-system/machine-update-orchestrator"
       ]
     },
     {

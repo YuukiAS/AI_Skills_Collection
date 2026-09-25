@@ -2,7 +2,7 @@
 
 给 Codex 使用的科研与工程技能库。它把常用的写作、汇报、统计、医学影像、前端设计和仓库维护经验整理成可安装的插件，让日常任务更稳、更容易验收。
 
-Repository / CLI release: `5.1.2`
+Repository / CLI release: `5.2.1`
 
 ## 可单独安装的技能
 
@@ -21,7 +21,7 @@ Repository / CLI release: `5.1.2`
 |  |  |
 |---|---|
 | <img src="./assets/codex/plugin-icons/workflow-core/composer.svg" width="40" alt="Verified Workflow icon"> | <strong>Verified Workflow</strong><br><code>workflow-core</code> · v`0.4`<br>复杂任务的执行、验证与可靠收尾。 |
-| <img src="./assets/codex/plugin-icons/ai-skills-core/composer.svg" width="40" alt="AI Skills Maintainer icon"> | <strong>AI Skills Maintainer</strong><br><code>ai-skills-core</code> · v`0.4`<br>维护本仓库的插件、版本、生成层与回归证据。 |
+| <img src="./assets/codex/plugin-icons/ai-skills-core/composer.svg" width="40" alt="AI Skills Maintainer icon"> | <strong>AI Skills Maintainer</strong><br><code>ai-skills-core</code> · v`0.5`<br>维护本仓库插件，也负责用短请求同步当前机器上的 AI_Skills 与 Bridge Kit 正式发布版本。 |
 | <img src="./assets/codex/plugin-icons/writing-style/composer.svg" width="40" alt="Clear Writing icon"> | <strong>Clear Writing</strong><br><code>writing-style</code> · v`0.3`<br>在保留事实与原意的前提下，改善中英文科研和技术表达。 |
 | <img src="./assets/codex/plugin-icons/research-writing/composer.svg" width="40" alt="Research Authoring icon"> | <strong>Research Authoring</strong><br><code>research-writing</code> · v`0.2`<br>支持研究报告、论文、文献、引用和证据组织；正式 PDF 会交给配套渲染器处理。 |
 | <img src="./assets/codex/plugin-icons/presentations/composer.svg" width="40" alt="Presentations icon"> | <strong>Presentations</strong><br><code>presentations</code> · v`0.3`<br>规划和返修科研组会、研究汇报与商务演示文稿。 |
@@ -37,13 +37,15 @@ Repository / CLI release: `5.1.2`
 
 ```text
 Source: https://github.com/YuukiAS/AI_Skills_Collection.git
-Ref: main
+Ref: release
 Sparse paths:
 .agents/plugins
 plugins/codex/plugins
 ```
 
-安装或升级后开启新的 Codex 会话，让插件按最新版本加载。
+稳定使用默认跟随 `release`。需要参与开发或测试未发布内容时，才显式选择 `main`。安装或升级后开启新的 Codex 会话，让插件按最新版本加载。
+
+安装 AI Skills Maintainer 后，日常同步可以直接说：`update presentations`、`update workflow-core`、`update AI Skills`、`update Bridge Kit` 或 `sync this machine`。它会先发现当前机器、Marketplace、插件和 Bridge 状态，再按正式发布说明决定是否只更新一个插件、同步必要配套组件，或交给 Bridge Kit 的 `ai-bridge` 命令处理运行时/Host 相关工作。
 
 ## 研究报告 PDF
 
