@@ -1,6 +1,6 @@
 {
-  "version": "5.2.2",
-  "generated_at": "2026-09-25T02:23:16+00:00",
+  "version": "5.3.0",
+  "generated_at": "2026-09-25T03:02:19+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
   "skill_count": 153,
@@ -4889,7 +4889,7 @@
       "subcategory": "hpc",
       "slug": "slurm-workflows",
       "install_selector": "tool/hpc/slurm-workflows",
-      "description": "Plan, submit, monitor, diagnose, and safely iterate Slurm jobs with generic resource estimation, job arrays, log/scratch layout, queue inspection, failure classification, and optional race execution policy supplied by a site profile.",
+      "description": "Plan, submit, monitor, diagnose, and safely iterate Slurm jobs with live Slurm discovery, optional public policy overlays, sticky resource contracts, workload modes, and guarded capacity lifecycle semantics.",
       "status": "active",
       "provenance": "user-authored",
       "source_repo_url": "",

@@ -26,7 +26,7 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Skills
 
-- `slurm-workflows` (`skills/tools/hpc/slurm-workflows`): Plan, submit, monitor, diagnose, and safely iterate Slurm jobs with generic resource estimation, job arrays, log/scratch layout, queue inspection, failure classification, and optional race execution policy supplied by a site profile.
+- `slurm-workflows` (`skills/tools/hpc/slurm-workflows`): Plan, submit, monitor, diagnose, and safely iterate Slurm jobs with live Slurm discovery, optional public policy overlays, sticky resource contracts, workload modes, and guarded capacity lifecycle semantics.
 
 ## Main References
 

@@ -4,6 +4,45 @@
 
 No unreleased changes.
 
+## 5.3.0 - 2026-09-25
+
+Repository `5.3.0` adds portable Slurm environment materialization and normal
+installed use for sites that do not have a committed public profile.
+
+Repository bump decision: MINOR
+Reason: the collection can now support a normal no-profile Slurm deployment
+through bounded live discovery, local site identity, optional public policy
+overlays, and installed `slurm-workflows` routing. That is a new
+repository-level environment/install capability.
+
+Affected standalone skills:
+- `slurm-workflows`: `0.1` -> `0.2`
+  Reason: Slurm Workflows now separates live facts, hard policy, local
+  preference and workload contracts; supports no-profile SiteContext
+  materialization; preserves sticky resource contracts; and adds guarded
+  persistent-capacity lifecycle/enrollment semantics.
+
+Affected plugins:
+- all central plugins: NO_BUMP
+  Reason: this release does not change central Marketplace plugin behavior.
+
+Unchanged central plugin versions: `workflow-core 0.4`, `ai-skills-core 0.5`,
+`writing-style 0.3`, `research-writing 0.2`, `presentations 0.3`,
+`scientific-visualization 0.1`, `web-development 0.2`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- `ai-skills environment` can plan/apply/doctor an explicit local Slurm site id
+  without adding a committed site profile.
+- Public site profiles are treated as optional policy overlays, while local site
+  identity and private routing preferences remain in local override files.
+- The installed Slurm skill includes a deterministic routing helper for bounded
+  discovery, preference ordering, JobId safety, resource hysteresis, duplicate
+  race authority checks, and persistent-capacity reconciliation.
+- Generated site references are public-safe summaries and do not persist raw
+  scheduler discovery dumps into tracked source.
+
 ## 5.2.2 - 2026-09-25
 
 Repository `5.2.2` is a compatible patch release for standalone scientific PDF

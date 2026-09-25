@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import fnmatch
 import hashlib
+import importlib.util
 import json
 import os
 import platform
@@ -51,12 +52,16 @@ DOMAIN_DOCS = DOCS / "domains"
 SITE_PROFILES_ROOT = ROOT / "site-profiles"
 ENV_MANIFEST_NAME = ".ai-skills-environment-manifest.json"
 DEFAULT_LOCAL_OVERRIDE = Path.home() / ".config" / "ai-skills" / "local-overrides.toml"
+SLURM_ROUTING_HELPER = ROOT / "skills" / "tools" / "hpc" / "slurm-workflows" / "scripts" / "slurm_routing.py"
 ENVIRONMENT_SKILLS = (
     "skills/tools/documents-media/render-chinese-math-pdf",
     "skills/tools/hpc/slurm-workflows",
 )
 LOCAL_OVERRIDE_ALLOWED_FIELDS = {
     "account",
+    "accelerator_priority",
+    "local_site_id",
+    "policy_overlay_id",
     "partition",
     "partition_priority",
     "qos",
@@ -69,6 +74,7 @@ LOCAL_OVERRIDE_ALLOWED_FIELDS = {
     "race_after_minutes",
     "race_partitions",
     "race_cancel_policy",
+    "slurm_runtime_available",
 }
 LOCAL_OVERRIDE_REQUIRED_FIELDS = {
     "account",
@@ -915,9 +921,12 @@ def environment_blank_site_override(site_id: str) -> str:
     return "\n".join(
         [
             f"[sites.{site_id}]",
+            'local_site_id = ""',
+            'policy_overlay_id = ""',
             'account = ""',
             'partition = ""',
-            'partition_priority = "htzhulab,a100,volta-gpu"',
+            'partition_priority = ""',
+            'accelerator_priority = ""',
             'qos = ""',
             'qos_priority = ""',
             'scratch_root = ""',
@@ -926,7 +935,7 @@ def environment_blank_site_override(site_id: str) -> str:
             'python_path = ""',
             'module_init = ""',
             'race_after_minutes = "60"',
-            'race_partitions = "htzhulab,a100,volta-gpu"',
+            'race_partitions = ""',
             'race_cancel_policy = "cancel_after_first_validated_output"',
             "",
         ]
@@ -943,6 +952,7 @@ def environment_local_override_template(site_id: str | None = None) -> str:
         "# - account: required on Slurm sites when your scheduler account differs from username.",
         "# - partition: required when a site does not provide a safe default partition.",
         "# - partition_priority: optional comma-separated fallback order for prompt-guided Slurm routing.",
+        "# - accelerator_priority: optional comma-separated accelerator preference among legal routes.",
         "# - qos: required when jobs need an explicit QoS or queue class.",
         "# - qos_priority: optional comma-separated fallback order for prompt-guided QoS routing.",
         "# - scratch_root: required private writable scratch/work directory; never commit personal paths.",
@@ -959,11 +969,19 @@ def environment_local_override_template(site_id: str | None = None) -> str:
     site_ids = [site_id] if site_id else sorted(profiles)
     sections: list[str] = []
     for current_site_id in site_ids:
-        if current_site_id not in profiles:
+        if current_site_id not in profiles and not site_id:
             raise SystemExit(f"unknown site profile: {current_site_id}")
         sections.append(environment_blank_site_override(current_site_id).rstrip())
     return "\n".join(intro + sections) + "\n"
 
+
+def slurm_routing_helper() -> Any:
+    spec = importlib.util.spec_from_file_location("slurm_workflows_routing", SLURM_ROUTING_HELPER)
+    if spec is None or spec.loader is None:
+        raise SystemExit(f"cannot load Slurm routing helper: {SLURM_ROUTING_HELPER}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def environment_override_list(value: str | None) -> list[str]:
@@ -977,7 +995,7 @@ def environment_override_list(value: str | None) -> list[str]:
 
 def environment_public_override_policy(site_fields: dict[str, str]) -> dict[str, Any]:
     policy: dict[str, Any] = {}
-    for key in ("partition_priority", "qos_priority", "race_partitions"):
+    for key in ("partition_priority", "accelerator_priority", "qos_priority", "race_partitions"):
         values = environment_override_list(site_fields.get(key))
         if values:
             policy[key] = values
@@ -991,6 +1009,39 @@ def environment_public_override_policy(site_fields: dict[str, str]) -> dict[str,
     if cancel_policy:
         policy["race_cancel_policy"] = cancel_policy
     return policy
+
+
+def environment_policy_overlay(profile: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not profile or profile.get("_local_only"):
+        return None
+    return {
+        "id": profile["id"],
+        "display_name": profile.get("display_name", profile["id"]),
+        "revision": profile.get("revision", "unknown"),
+        "scheduler": profile.get("scheduler", "unknown"),
+        "constraints": profile.get("constraints", {}) if isinstance(profile.get("constraints"), dict) else {},
+        "policy": profile.get("policy", {}) if isinstance(profile.get("policy"), dict) else {},
+    }
+
+
+def environment_local_site_profile(site_id: str) -> dict[str, Any]:
+    return {
+        "id": site_id,
+        "display_name": site_id,
+        "revision": "local",
+        "scheduler": "slurm",
+        "_local_only": True,
+    }
+
+
+def environment_live_context(profile: dict[str, Any] | None, local_fields: dict[str, str] | None = None) -> dict[str, Any]:
+    local_fields = local_fields or {}
+    local_site_id = local_fields.get("local_site_id") or (profile["id"] if profile and profile.get("_local_only") else None)
+    policy_overlay_id = profile["id"] if profile and not profile.get("_local_only") else local_fields.get("policy_overlay_id")
+    return slurm_routing_helper().discover_live_site_context(
+        local_site_id=local_site_id,
+        policy_overlay_id=policy_overlay_id,
+    )
 
 
 def parse_environment_local_override(path: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
@@ -1035,11 +1086,13 @@ def environment_doctor_payload(args: argparse.Namespace) -> dict[str, Any]:
     profiles = load_site_profiles()
     site_id = plan["site_id"]
     site_fields = local_data.get(str(site_id), {}) if site_id else {}
-    unknown_sites = sorted(site for site in local_data if site not in profiles)
+    unknown_sites = sorted(site for site in local_data if site not in profiles and site != site_id)
     unknown_fields = sorted(field for field in site_fields if field not in LOCAL_OVERRIDE_ALLOWED_FIELDS)
     empty_fields = sorted(field for field, value in site_fields.items() if field in LOCAL_OVERRIDE_ALLOWED_FIELDS and not str(value).strip())
     public_override_policy = environment_public_override_policy(site_fields)
     missing_required = sorted(field for field in LOCAL_OVERRIDE_REQUIRED_FIELDS if not site_fields.get(field))
+    if plan.get("runtime_available") is True and not plan.get("policy_overlay_id"):
+        missing_required = [field for field in missing_required if field != "partition"]
     inaccessible_paths: dict[str, str] = {}
     for field in sorted(LOCAL_OVERRIDE_PATH_FIELDS):
         value = str(site_fields.get(field) or "").strip()
@@ -1071,6 +1124,9 @@ def environment_doctor_payload(args: argparse.Namespace) -> dict[str, Any]:
         "local_override_exists": local_override_path.exists(),
         "local_override_site_ids": sorted(local_data),
         "commands": {cmd: shutil.which(cmd) for cmd in commands},
+        "runtime_available": plan.get("runtime_available"),
+        "fact_provenance": plan.get("fact_provenance", {}),
+        "policy_overlay_id": plan.get("policy_overlay_id"),
         "diagnostics": diagnostics,
         "public_override_policy": public_override_policy,
         "submit_smoke_job": "requested" if args.submit_smoke_job else "skipped",
@@ -1093,7 +1149,7 @@ def environment_detect_profile(args: argparse.Namespace, profiles: dict[str, dic
     if args.site:
         profile = profiles.get(args.site)
         if not profile:
-            raise SystemExit(f"unknown site profile: {args.site}")
+            profile = environment_local_site_profile(args.site)
         return profile, [profile]
 
     hostname = (args.hostname or platform.node() or os.environ.get("COMPUTERNAME") or "").lower()
@@ -1114,6 +1170,13 @@ def environment_plan_payload(args: argparse.Namespace) -> dict[str, Any]:
     profiles = load_site_profiles()
     profile, matches = environment_detect_profile(args, profiles)
     local_override = Path(args.local_override).expanduser() if args.local_override else DEFAULT_LOCAL_OVERRIDE
+    local_data, _parse_errors = parse_environment_local_override(local_override)
+    site_fields = local_data.get(profile["id"], {}) if profile else {}
+    live_context = environment_live_context(profile, site_fields)
+    if not profile and live_context.get("local_site_id"):
+        profile = environment_local_site_profile(str(live_context["local_site_id"]))
+    site_id = profile["id"] if profile else live_context.get("local_site_id")
+    policy_overlay = environment_policy_overlay(profile)
     target_root = environment_target_root(args)
     actions: list[dict[str, Any]] = []
     for rel in ENVIRONMENT_SKILLS:
@@ -1126,44 +1189,64 @@ def environment_plan_payload(args: argparse.Namespace) -> dict[str, Any]:
                 "action": "materialize-skill",
                 "source": rel,
                 "target": str((target_root / source.name).resolve()),
-                "site_profile": profile["id"] if profile else None,
+                "local_site_id": site_id,
+                "policy_overlay_id": policy_overlay["id"] if policy_overlay else None,
             }
         )
     manifest_path = target_root / ENV_MANIFEST_NAME
     return {
         "schema_version": 1,
         "kind": "ai-skills-environment-plan",
-        "site_id": profile["id"] if profile else None,
-        "site_profile_path": profile.get("_path") if profile else None,
+        "site_id": site_id,
+        "local_site_id": site_id,
+        "policy_overlay_id": policy_overlay["id"] if policy_overlay else None,
+        "site_profile_path": profile.get("_path") if profile and not profile.get("_local_only") else None,
         "matched_site_ids": [item["id"] for item in matches],
         "ambiguous": len(matches) > 1,
+        "runtime_available": live_context.get("runtime_available"),
+        "fact_provenance": live_context.get("fact_provenance", {}),
         "target": args.target,
         "target_root": str(target_root.resolve()),
         "local_override_path": str(local_override),
         "local_override_hash": environment_local_override_hash(local_override),
         "manifest_path": str(manifest_path.resolve()),
         "actions": actions,
-        "warnings": [] if profile else ["no unambiguous site profile detected; pass --site to apply a site overlay"],
+        "warnings": [] if site_id else ["no live Slurm runtime or unambiguous site profile detected; routing mutation will fail closed"],
     }
 
 
-def environment_site_reference(profile: dict[str, Any] | None, local_override: Path) -> str:
+def environment_site_reference(profile: dict[str, Any] | None, local_override: Path, live_context: dict[str, Any] | None = None) -> str:
+    live_context = live_context or {}
     lines = [
-        "# Generated site profile",
+        "# Generated Slurm site context",
         "",
         "This file is generated by `ai-skills environment apply`; edit the public profile or local override instead.",
+        "It is a public-safe locator and policy summary, not a raw scheduler dump.",
         "",
     ]
     if not profile:
-        lines.append("site_id: none")
+        lines.append(f"local_site_id: {live_context.get('local_site_id') or 'none'}")
+        lines.append("policy_overlay_id: none")
+        lines.append(f"runtime_available: {bool(live_context.get('runtime_available'))}")
         return "\n".join(lines) + "\n"
+    policy_overlay_id = profile["id"] if not profile.get("_local_only") else None
     lines.extend(
         [
-            f"site_id: {profile['id']}",
+            f"local_site_id: {live_context.get('local_site_id') or profile['id']}",
+            f"policy_overlay_id: {policy_overlay_id or 'none'}",
             f"display_name: {profile.get('display_name', profile['id'])}",
             f"profile_revision: {profile.get('revision', 'unknown')}",
             f"scheduler: {profile.get('scheduler', 'unknown')}",
+            f"runtime_available: {bool(live_context.get('runtime_available'))}",
             f"local_override_path: {local_override}",
+            "",
+            "fact_provenance:",
+        ]
+    )
+    for key, value in sorted((live_context.get("fact_provenance") or {}).items()):
+        lines.append(f"- {key}: {value}")
+    lines.extend(
+        [
             "",
             "public_constraints:",
         ]
@@ -1172,7 +1255,8 @@ def environment_site_reference(profile: dict[str, Any] | None, local_override: P
     for key in sorted(constraints):
         lines.append(f"- {key}: {constraints[key]}")
     local_data, _errors = parse_environment_local_override(local_override)
-    local_policy = environment_public_override_policy(local_data.get(profile["id"], {}))
+    local_site_id = live_context.get("local_site_id") or profile["id"]
+    local_policy = environment_public_override_policy(local_data.get(str(local_site_id), {}))
     if local_policy:
         lines.append("")
         lines.append("local_prompt_policy:")
@@ -1197,12 +1281,17 @@ def environment_apply_plan(args: argparse.Namespace, plan: dict[str, Any]) -> di
     if plan["ambiguous"] and not args.site:
         raise SystemExit("site detection is ambiguous; rerun with --site")
     if plan["site_id"] is None and not args.site:
-        raise SystemExit("no site profile detected; rerun with --site")
+        raise SystemExit("no Slurm site detected; rerun with --site <local-site-id> or run on a live Slurm login node")
 
     target_root = Path(plan["target_root"])
     local_override = Path(plan["local_override_path"]).expanduser()
     profiles = load_site_profiles()
-    profile = profiles.get(str(plan["site_id"])) if plan["site_id"] else None
+    profile = profiles.get(str(plan["policy_overlay_id"])) if plan.get("policy_overlay_id") else None
+    if not profile and plan["site_id"]:
+        profile = environment_local_site_profile(str(plan["site_id"]))
+    local_data, _parse_errors = parse_environment_local_override(local_override)
+    site_fields = local_data.get(str(plan["site_id"]), {}) if plan["site_id"] else {}
+    live_context = environment_live_context(profile, site_fields)
     target_root.mkdir(parents=True, exist_ok=True)
     staging_root = target_root.parent / f".ai-skills-environment-staging-{os.getpid()}"
     if staging_root.exists():
@@ -1216,7 +1305,7 @@ def environment_apply_plan(args: argparse.Namespace, plan: dict[str, Any]) -> di
             shutil.copytree(source, staged, ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"))
             generated = staged / "references" / "_generated"
             generated.mkdir(parents=True, exist_ok=True)
-            (generated / "site-profile.md").write_text(environment_site_reference(profile, local_override), encoding="utf-8")
+            (generated / "site-profile.md").write_text(environment_site_reference(profile, local_override, live_context), encoding="utf-8")
             installed.append({"name": source.name, "source": rel, "target": str((target_root / source.name).resolve())})
 
         for item in installed:
@@ -1233,8 +1322,12 @@ def environment_apply_plan(args: argparse.Namespace, plan: dict[str, Any]) -> di
             "schema_version": 1,
             "kind": "ai-skills-environment",
             "site_id": plan["site_id"],
+            "local_site_id": plan["local_site_id"],
+            "policy_overlay_id": plan["policy_overlay_id"],
             "site_profile_path": plan["site_profile_path"],
-            "site_revision": profile.get("revision") if profile else None,
+            "site_revision": profile.get("revision") if profile and not profile.get("_local_only") else None,
+            "runtime_available": live_context.get("runtime_available"),
+            "fact_provenance": live_context.get("fact_provenance", {}),
             "collection_commit": git_commit(),
             "target_root": str(target_root.resolve()),
             "local_override_path": str(local_override),

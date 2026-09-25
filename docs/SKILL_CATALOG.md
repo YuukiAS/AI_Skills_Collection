@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Generated at `2026-09-25T02:23:22+00:00` from `registry.json` metadata. Do not edit by hand.
+Generated at `2026-09-25T03:02:26+00:00` from `registry.json` metadata. Do not edit by hand.
 
 Budget warnings in this catalog are guidance for context hygiene; they do not make complete domain installation invalid.
 
@@ -221,7 +221,7 @@ Budget warnings in this catalog are guidance for context hygiene; they do not ma
 
 | Skill | Path | Description | Recommended scope | Network | Executes code | Writes files | Last reviewed | Install |
 |---|---|---|---|---:|---:|---:|---|---|
-| `slurm-workflows` | `skills/tools/hpc/slurm-workflows` | Plan, submit, monitor, diagnose, and safely iterate Slurm jobs with generic resource estimation, job arrays, log/scratch layout, queue inspection, failure classification, and optional race execution policy supplied by a site profile. | `user` | False | True | True | `2026-07-13` | `ai-skills install --target repo --skill tool/hpc/slurm-workflows --mode symlink --write-agents-md` |
+| `slurm-workflows` | `skills/tools/hpc/slurm-workflows` | Plan, submit, monitor, diagnose, and safely iterate Slurm jobs with live Slurm discovery, optional public policy overlays, sticky resource contracts, workload modes, and guarded capacity lifecycle semantics. | `user` | False | True | True | `2026-07-13` | `ai-skills install --target repo --skill tool/hpc/slurm-workflows --mode symlink --write-agents-md` |
 
 ## tool / visualization / visualization
 

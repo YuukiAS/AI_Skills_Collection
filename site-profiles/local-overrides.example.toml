@@ -9,6 +9,10 @@
 # Field guide:
 # - account: Slurm account/allocation name. Usually required; never guess it.
 # - partition: Slurm partition/queue. Required when the site has no safe default.
+# - local_site_id: stable local id for a no-profile Slurm site.
+# - policy_overlay_id: optional public profile id used only as a hard-policy overlay.
+# - partition_priority: optional comma-separated preference among legal partitions.
+# - accelerator_priority: optional comma-separated accelerator preference among legal routes.
 # - qos: Slurm QoS or queue class. Required when the scheduler expects one.
 # - scratch_root: private writable scratch/work directory for temporary outputs.
 # - render_resource_dirs: optional comma-separated local CJK render resource directories;
@@ -21,8 +25,12 @@
 # Keep this file out of project repositories; use ~/.config/ai-skills/ by default.
 
 [sites.cuhk-central-cluster]
+local_site_id = ""
+policy_overlay_id = "cuhk-central-cluster"
 account = ""
 partition = ""
+partition_priority = ""
+accelerator_priority = ""
 qos = ""
 scratch_root = ""
 render_resource_dirs = ""
@@ -31,8 +39,12 @@ python_path = ""
 module_init = ""
 
 [sites.unc-longleaf]
+local_site_id = ""
+policy_overlay_id = "unc-longleaf"
 account = ""
 partition = ""
+partition_priority = ""
+accelerator_priority = ""
 qos = ""
 scratch_root = ""
 render_resource_dirs = ""

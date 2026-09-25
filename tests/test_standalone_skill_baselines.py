@@ -35,7 +35,7 @@ STANDALONE_SKILLS = {
 EXPECTED_STANDALONE_SKILL_VERSIONS = {
     "project-thread-handoff": "0.1",
     "render-chinese-math-pdf": "0.2",
-    "slurm-workflows": "0.1",
+    "slurm-workflows": "0.2",
 }
 
 EXPECTED_PLUGIN_VERSIONS = {
@@ -88,7 +88,7 @@ class StandaloneSkillBaselineTests(unittest.TestCase):
             self.assertNotIn(info["path"].as_posix(), serialized)
 
     def test_repository_version_and_contact_sheet_are_stable(self) -> None:
-        self.assertEqual((REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip(), "5.2.2")
+        self.assertEqual((REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip(), "5.3.0")
 
         sheet = (REPO_ROOT / "docs" / "audits" / "ICON_CONTACT_SHEET.svg").read_text(encoding="utf-8")
         for slug, info in STANDALONE_SKILLS.items():
