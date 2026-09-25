@@ -76,13 +76,6 @@ LOCAL_OVERRIDE_ALLOWED_FIELDS = {
     "race_cancel_policy",
     "slurm_runtime_available",
 }
-LOCAL_OVERRIDE_REQUIRED_FIELDS = {
-    "account",
-    "partition",
-    "qos",
-    "scratch_root",
-    "module_init",
-}
 LOCAL_OVERRIDE_PATH_FIELDS = {"scratch_root", "texlive_path", "python_path"}
 LOCAL_OVERRIDE_LIST_PATH_FIELDS = {"render_resource_dirs"}
 NAME_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")
@@ -934,9 +927,9 @@ def environment_blank_site_override(site_id: str) -> str:
             'texlive_path = ""',
             'python_path = ""',
             'module_init = ""',
-            'race_after_minutes = "60"',
+            'race_after_minutes = ""',
             'race_partitions = ""',
-            'race_cancel_policy = "cancel_after_first_validated_output"',
+            'race_cancel_policy = ""',
             "",
         ]
     )
@@ -1041,6 +1034,31 @@ def environment_local_fields(local_data: dict[str, dict[str, str]], *site_ids: s
     return {}
 
 
+def environment_safe_local_override_locator(path: Path) -> str:
+    expanded = path.expanduser()
+    default = DEFAULT_LOCAL_OVERRIDE.expanduser()
+    if expanded == default:
+        return "~/.config/ai-skills/local-overrides.toml"
+    digest = hashlib.sha256(str(expanded).encode("utf-8")).hexdigest()[:12]
+    return f"local-override:{digest}"
+
+
+def environment_required_local_fields(profile: dict[str, Any] | None, plan: dict[str, Any], site_fields: dict[str, str]) -> list[str]:
+    constraints = profile.get("constraints", {}) if profile and isinstance(profile.get("constraints"), dict) else {}
+    required: set[str] = set()
+    if constraints.get("slurm_requires_site_account"):
+        required.add("account")
+    if constraints.get("slurm_requires_partition"):
+        required.add("partition")
+    if constraints.get("slurm_requires_qos"):
+        required.add("qos")
+    if constraints.get("requires_scratch_root"):
+        required.add("scratch_root")
+    if constraints.get("requires_module_init"):
+        required.add("module_init")
+    return sorted(field for field in required if not site_fields.get(field))
+
+
 def environment_live_context(profile: dict[str, Any] | None, local_fields: dict[str, str] | None = None) -> dict[str, Any]:
     local_fields = local_fields or {}
     local_site_id = local_fields.get("local_site_id") or (profile["id"] if profile and profile.get("_local_only") else None)
@@ -1092,14 +1110,13 @@ def environment_doctor_payload(args: argparse.Namespace) -> dict[str, Any]:
     local_data, parse_errors = parse_environment_local_override(local_override_path)
     profiles = load_site_profiles()
     site_id = plan["site_id"]
+    profile = profiles.get(str(plan.get("policy_overlay_id") or site_id)) if site_id else None
     site_fields = environment_local_fields(local_data, plan.get("requested_site_id"), plan.get("local_site_id"), site_id)
     unknown_sites = sorted(site for site in local_data if site not in profiles and site != site_id)
     unknown_fields = sorted(field for field in site_fields if field not in LOCAL_OVERRIDE_ALLOWED_FIELDS)
     empty_fields = sorted(field for field, value in site_fields.items() if field in LOCAL_OVERRIDE_ALLOWED_FIELDS and not str(value).strip())
     public_override_policy = environment_public_override_policy(site_fields)
-    missing_required = sorted(field for field in LOCAL_OVERRIDE_REQUIRED_FIELDS if not site_fields.get(field))
-    if plan.get("runtime_available") is True and not plan.get("policy_overlay_id"):
-        missing_required = [field for field in missing_required if field != "partition"]
+    missing_required = environment_required_local_fields(profile, plan, site_fields)
     inaccessible_paths: dict[str, str] = {}
     for field in sorted(LOCAL_OVERRIDE_PATH_FIELDS):
         value = str(site_fields.get(field) or "").strip()
@@ -1257,7 +1274,7 @@ def environment_site_reference(profile: dict[str, Any] | None, local_override: P
             f"profile_revision: {profile.get('revision', 'unknown')}",
             f"scheduler: {profile.get('scheduler', 'unknown')}",
             f"runtime_available: {bool(live_context.get('runtime_available'))}",
-            f"local_override_path: {local_override}",
+            f"local_override_locator: {environment_safe_local_override_locator(local_override)}",
             "",
             "fact_provenance:",
         ]
@@ -1342,6 +1359,14 @@ def environment_apply_plan(args: argparse.Namespace, plan: dict[str, Any]) -> di
             (staging_root / item["name"]).replace(target)
             if backup.exists():
                 shutil.rmtree(backup)
+        if plan["target"] == "repo":
+            manifest_target_root = "repo:.agents/skills"
+            manifest_installed = [{**item, "target": item["name"]} for item in installed]
+            manifest_managed_paths = [item["name"] for item in installed]
+        else:
+            manifest_target_root = "user:skills"
+            manifest_installed = [{**item, "target": item["name"]} for item in installed]
+            manifest_managed_paths = [item["name"] for item in installed]
         manifest = {
             "schema_version": 1,
             "kind": "ai-skills-environment",
@@ -1353,12 +1378,13 @@ def environment_apply_plan(args: argparse.Namespace, plan: dict[str, Any]) -> di
             "runtime_available": live_context.get("runtime_available"),
             "fact_provenance": live_context.get("fact_provenance", {}),
             "collection_commit": git_commit(),
-            "target_root": str(target_root.resolve()),
-            "local_override_path": str(local_override),
+            "target_root": manifest_target_root,
+            "local_override_path": environment_safe_local_override_locator(local_override),
+            "local_override_locator": environment_safe_local_override_locator(local_override),
             "local_override_hash": environment_local_override_hash(local_override),
             "installed_at": utc_now(),
-            "installed_skills": installed,
-            "managed_paths": [item["target"] for item in installed],
+            "installed_skills": manifest_installed,
+            "managed_paths": manifest_managed_paths,
         }
         (target_root / ENV_MANIFEST_NAME).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         return manifest
@@ -1390,10 +1416,24 @@ def command_environment_list_sites(args: argparse.Namespace) -> int:
 def command_environment_detect(args: argparse.Namespace) -> int:
     profiles = load_site_profiles()
     profile, matches = environment_detect_profile(args, profiles)
+    local_override = Path(getattr(args, "local_override", None) or DEFAULT_LOCAL_OVERRIDE).expanduser()
+    local_data, _parse_errors = parse_environment_local_override(local_override)
+    requested_site_id = profile["id"] if profile else None
+    site_fields = environment_local_fields(local_data, requested_site_id)
+    live_context = environment_live_context(profile, site_fields)
+    local_site_id = site_fields.get("local_site_id") or live_context.get("local_site_id") or (profile["id"] if profile else None)
+    policy_overlay_id = site_fields.get("policy_overlay_id") or (
+        profile["id"] if profile and not profile.get("_local_only") else live_context.get("policy_overlay_id")
+    )
     data = {
-        "site_id": profile["id"] if profile else None,
+        "site_id": local_site_id,
+        "requested_site_id": requested_site_id,
+        "local_site_id": local_site_id,
+        "policy_overlay_id": policy_overlay_id if policy_overlay_id in profiles else None,
         "matched_site_ids": [item["id"] for item in matches],
         "ambiguous": len(matches) > 1,
+        "runtime_available": live_context.get("runtime_available"),
+        "fact_provenance": live_context.get("fact_provenance", {}),
     }
     print_json(data) if args.json else print(data["site_id"] or "unknown")
     return 2 if data["ambiguous"] else 0
@@ -1499,7 +1539,10 @@ def command_environment_uninstall(args: argparse.Namespace) -> int:
     if not manifest_path.exists():
         raise SystemExit(f"environment manifest not found: {manifest_path}")
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    managed_paths = [Path(path) for path in manifest.get("managed_paths", [])]
+    managed_paths = []
+    for raw_path in manifest.get("managed_paths", []):
+        path = Path(raw_path)
+        managed_paths.append(path if path.is_absolute() else target_root / path)
     if args.dry_run:
         print_json({"would_remove": [str(path) for path in managed_paths], "manifest": str(manifest_path)})
         return 0
@@ -2086,6 +2129,7 @@ def build_parser() -> argparse.ArgumentParser:
     ep.add_argument("--site", help="Explicit site profile id")
     ep.add_argument("--hostname", help="Override hostname detection for testing")
     ep.add_argument("--path", help="Override path detection for testing")
+    ep.add_argument("--local-override", default=str(DEFAULT_LOCAL_OVERRIDE), help="Local override TOML path")
     ep.add_argument("--json", action="store_true", help="Print machine-readable JSON")
     ep.set_defaults(func=command_environment_detect)
 

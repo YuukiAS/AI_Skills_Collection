@@ -10,6 +10,11 @@ import os
 import re
 import shutil
 import subprocess
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - Python < 3.11 fallback
+    tomllib = None
+from datetime import datetime, time, timedelta, timezone
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -45,6 +50,8 @@ SCONTROL_CONFIG_FIELDS = {
     "PrivateData",
     "AccountingStorageType",
 }
+DEFAULT_STATE_PATH = Path.home() / ".config" / "ai-skills" / "slurm-workflows.toml"
+STATE_JSON_TABLES = ("accepted_workload_contracts", "capacity_families", "enrollments")
 
 
 def _run(argv: list[str], timeout: float = 5.0) -> tuple[int, str, str]:
@@ -93,6 +100,93 @@ def parse_scontrol_kv(text: str, allowed: set[str] | None = None) -> dict[str, s
         if allowed is None or key in allowed:
             data[key] = value
     return data
+
+
+def _empty_workflow_state() -> dict[str, Any]:
+    return {
+        "schema_version": 1,
+        "accepted_workload_contracts": {},
+        "capacity_families": {},
+        "enrollments": {},
+        "evidence_locators": {},
+    }
+
+
+def load_workflow_state(path: Path | str | None = None) -> dict[str, Any]:
+    """Load durable local Slurm workflow state without keeping scheduler history."""
+
+    state_path = Path(path).expanduser() if path else DEFAULT_STATE_PATH
+    state = _empty_workflow_state()
+    if not state_path.exists():
+        return state
+    if tomllib is None:
+        raise RuntimeError("TOML state loading requires Python 3.11+ tomllib")
+    parsed = tomllib.loads(state_path.read_text(encoding="utf-8"))
+    state["schema_version"] = int(parsed.get("schema_version", 1) or 1)
+    for table in STATE_JSON_TABLES:
+        values: dict[str, Any] = {}
+        for key, raw in dict(parsed.get(table) or {}).items():
+            if isinstance(raw, str) and raw.strip():
+                values[str(key)] = json.loads(raw)
+            elif isinstance(raw, dict):
+                values[str(key)] = raw
+        state[table] = values
+    state["evidence_locators"] = {str(key): str(value) for key, value in dict(parsed.get("evidence_locators") or {}).items()}
+    return state
+
+
+def _toml_quote(value: str) -> str:
+    return json.dumps(str(value), ensure_ascii=False)
+
+
+def save_workflow_state(state: dict[str, Any], path: Path | str | None = None) -> Path:
+    """Persist declarative workload/capacity state to the local config file."""
+
+    state_path = Path(path).expanduser() if path else DEFAULT_STATE_PATH
+    state_path.parent.mkdir(parents=True, exist_ok=True)
+    lines = ["schema_version = 1", ""]
+    for table in STATE_JSON_TABLES:
+        lines.append(f"[{table}]")
+        for key in sorted(dict(state.get(table) or {})):
+            payload = json.dumps(state[table][key], sort_keys=True, separators=(",", ":"))
+            lines.append(f"{_toml_quote(key)} = {_toml_quote(payload)}")
+        lines.append("")
+    lines.append("[evidence_locators]")
+    for key, value in sorted(dict(state.get("evidence_locators") or {}).items()):
+        lines.append(f"{_toml_quote(key)} = {_toml_quote(str(value))}")
+    state_path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+    return state_path
+
+
+def persist_accepted_workload_contract(
+    state: dict[str, Any],
+    intent: dict[str, Any],
+    resources: dict[str, Any],
+    evidence_locator: str | None = None,
+) -> dict[str, Any]:
+    family = comparable_family_id(intent)
+    if not family:
+        raise ValueError("accepted workload contract requires a comparable family id")
+    state.setdefault("accepted_workload_contracts", {})[family] = {
+        "resources": dict(resources),
+        "accepted_at": datetime.now(timezone.utc).isoformat(),
+    }
+    if evidence_locator:
+        state.setdefault("evidence_locators", {})[family] = evidence_locator
+    return state
+
+
+def persist_capacity_family(state: dict[str, Any], family: dict[str, Any], evidence_locator: str | None = None) -> dict[str, Any]:
+    family_id = family.get("capacity_family_id")
+    if not family_id:
+        raise ValueError("capacity family requires capacity_family_id")
+    state.setdefault("capacity_families", {})[str(family_id)] = dict(family)
+    enrollment = family.get("enrollment")
+    if isinstance(enrollment, dict):
+        state.setdefault("enrollments", {})[str(family_id)] = dict(enrollment)
+    if evidence_locator:
+        state.setdefault("evidence_locators", {})[str(family_id)] = evidence_locator
+    return state
 
 
 def discover_live_site_context(local_site_id: str | None = None, policy_overlay_id: str | None = None) -> dict[str, Any]:
@@ -230,7 +324,8 @@ def resolve_resource_contract(
         contract = dict(project_contracts[family])
     elif family and user_contracts and family in user_contracts:
         source = "user_local_contract"
-        contract = dict(user_contracts[family])
+        stored = user_contracts[family]
+        contract = dict(stored.get("resources") if isinstance(stored, dict) and "resources" in stored else stored)
     else:
         source = "initial_estimate"
         contract = dict(estimate or {})
@@ -370,6 +465,134 @@ def bounded_replacement_decision(monitor: dict[str, Any], old_job: dict[str, Any
     return {"action": "replace_pending", "reason": monitor["replacement_reason"]}
 
 
+def _parse_datetime(value: Any) -> datetime | None:
+    if isinstance(value, datetime):
+        return value
+    if not value:
+        return None
+    text = str(value).strip()
+    if not text:
+        return None
+    if text.endswith("Z"):
+        text = text[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(text)
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed
+
+
+def _parse_duration(value: Any) -> timedelta:
+    if isinstance(value, timedelta):
+        return value
+    if isinstance(value, (int, float)):
+        return timedelta(hours=float(value))
+    if not value:
+        return timedelta(0)
+    text = str(value).strip().lower()
+    match = re.fullmatch(r"(\d+(?:\.\d+)?)([smhd]?)", text)
+    if not match:
+        return timedelta(0)
+    amount = float(match.group(1))
+    unit = match.group(2) or "h"
+    return {
+        "s": timedelta(seconds=amount),
+        "m": timedelta(minutes=amount),
+        "h": timedelta(hours=amount),
+        "d": timedelta(days=amount),
+    }[unit]
+
+
+def _weekday_index(value: Any) -> int | None:
+    if value is None:
+        return None
+    text = str(value).strip().lower()
+    names = {"mon": 0, "monday": 0, "tue": 1, "tuesday": 1, "wed": 2, "wednesday": 2, "thu": 3, "thursday": 3, "fri": 4, "friday": 4, "sat": 5, "saturday": 5, "sun": 6, "sunday": 6}
+    if text in names:
+        return names[text]
+    try:
+        value_int = int(text)
+    except ValueError:
+        return None
+    return value_int if 0 <= value_int <= 6 else None
+
+
+def _parse_time_of_day(value: Any) -> time:
+    if not value:
+        return time(0, 0)
+    text = str(value).strip()
+    try:
+        parts = [int(part) for part in text.split(":")]
+    except ValueError:
+        return time(0, 0)
+    parts += [0, 0]
+    return time(parts[0] % 24, parts[1] % 60, parts[2] % 60)
+
+
+def next_capacity_window(family: dict[str, Any], invocation: dict[str, Any]) -> dict[str, Any] | None:
+    target = dict(invocation.get("target_occurrence") or family.get("target_occurrence") or {})
+    recurrence = dict(family.get("recurrence") or {})
+    now = _parse_datetime(invocation.get("now") or family.get("now")) or datetime.now(timezone.utc)
+    start = _parse_datetime(target.get("start") or target.get("target_start"))
+    if start is None and recurrence:
+        weekday = _weekday_index(recurrence.get("weekday"))
+        if weekday is not None:
+            days = (weekday - now.weekday()) % 7
+            candidate = datetime.combine((now + timedelta(days=days)).date(), _parse_time_of_day(recurrence.get("start_time") or recurrence.get("start")), tzinfo=now.tzinfo)
+            if candidate <= now:
+                candidate += timedelta(days=7)
+            start = candidate
+    if start is None:
+        return None
+    duration = _parse_duration(target.get("duration") or recurrence.get("duration") or recurrence.get("duration_hours") or family.get("target_duration") or 0)
+    if isinstance(recurrence.get("duration_hours"), (int, float)):
+        duration = timedelta(hours=float(recurrence["duration_hours"]))
+    end = _parse_datetime(target.get("end") or target.get("target_end")) or (start + duration if duration else None)
+    minimum_useful_duration = _parse_duration(
+        target.get("minimum_useful_duration")
+        or family.get("minimum_useful_duration")
+        or recurrence.get("minimum_useful_duration")
+        or duration
+    )
+    latest_useful_end = _parse_datetime(target.get("latest_useful_end") or family.get("latest_useful_end") or family.get("cutoff")) or end
+    lead_time = _parse_duration(target.get("successor_lead_time") or family.get("successor_lead_time"))
+    ready_by = _parse_datetime(target.get("target_ready_by") or family.get("target_ready_by")) or (start - lead_time if lead_time else start)
+    return {
+        "start": start,
+        "end": end,
+        "target_ready_by": ready_by,
+        "minimum_useful_duration": minimum_useful_duration,
+        "latest_useful_end": latest_useful_end,
+    }
+
+
+def _covers_capacity_window(item: dict[str, Any], window: dict[str, Any] | None) -> bool:
+    if window is None:
+        return True
+    start = window["start"]
+    minimum_useful_duration = window["minimum_useful_duration"]
+    latest_useful_end = window["latest_useful_end"]
+    item_start = _parse_datetime(item.get("start_time") or item.get("requested_start") or item.get("eligible_time"))
+    item_end = _parse_datetime(item.get("end_time") or item.get("expected_end") or item.get("time_limit_end"))
+    if item_start and item_start > start:
+        return False
+    required_end = latest_useful_end or (start + minimum_useful_duration)
+    if item_end is None or required_end is None:
+        return False
+    if item_end < required_end:
+        return False
+    return item_end >= start + minimum_useful_duration
+
+
+def calendar_submit_options_decision(capabilities: dict[str, Any] | None) -> dict[str, Any]:
+    capabilities = capabilities or {}
+    if capabilities.get("calendar_submit_verified") is True:
+        return {"allowed": True, "reason": "calendar_submit_verified"}
+    return {"allowed": False, "reason": "calendar_submit_unverified"}
+
+
 def capacity_reconcile(
     family: dict[str, Any],
     active_allocations: list[dict[str, Any]],
@@ -378,16 +601,45 @@ def capacity_reconcile(
 ) -> dict[str, Any]:
     if not _activation_matches(family, invocation):
         return {"action": "read_only", "reason": "activation_scope_mismatch"}
-    compatible_active = [item for item in active_allocations if _resource_compatible(family, item) and item.get("state") == "RUNNING"]
+    window = next_capacity_window(family, invocation)
+    compatible_active = [
+        item
+        for item in active_allocations
+        if _resource_compatible(family, item) and item.get("state") == "RUNNING" and _covers_capacity_window(item, window)
+    ]
     if compatible_active:
-        return {"action": "reuse_active", "allocation": compatible_active[0], "successor_mutation": False}
-    lifecycle_successors = [item for item in successors if item.get("lifecycle_owned") and _resource_compatible(family, item)]
+        return {"action": "reuse_active", "allocation": compatible_active[0], "target_window": _json_safe_window(window), "successor_mutation": False}
+    lifecycle_successors = [
+        item
+        for item in successors
+        if item.get("lifecycle_owned") and _resource_compatible(family, item) and _covers_capacity_window(item, window)
+    ]
+    if len(lifecycle_successors) > 1:
+        return {"action": "fail_closed", "reason": "multiple_lifecycle_successors", "successor_mutation": False}
     if lifecycle_successors:
-        return {"action": "keep_successor", "successor": lifecycle_successors[0], "successor_mutation": False}
+        return {"action": "keep_successor", "successor": lifecycle_successors[0], "target_window": _json_safe_window(window), "successor_mutation": False}
     enrollment = family.get("enrollment") or {}
     if not family.get("auto_maintain_successor") or not _valid_enrollment(family, enrollment):
         return {"action": "read_only_proposal", "reason": "missing_valid_enrollment", "successor_mutation": False}
-    return {"action": "plan_one_successor", "max_successors": 1, "successor_mutation": True}
+    if window and family.get("calendar_bound_submission", True):
+        calendar_decision = calendar_submit_options_decision(invocation.get("site_capabilities") or family.get("site_capabilities"))
+        if not calendar_decision["allowed"]:
+            return {"action": "read_only_proposal", "reason": calendar_decision["reason"], "target_window": _json_safe_window(window), "successor_mutation": False}
+    return {"action": "plan_one_successor", "max_successors": 1, "target_window": _json_safe_window(window), "successor_mutation": True}
+
+
+def _json_safe_window(window: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not window:
+        return None
+    safe: dict[str, Any] = {}
+    for key, value in window.items():
+        if isinstance(value, datetime):
+            safe[key] = value.isoformat()
+        elif isinstance(value, timedelta):
+            safe[key] = int(value.total_seconds())
+        else:
+            safe[key] = value
+    return safe
 
 
 def _activation_matches(family: dict[str, Any], invocation: dict[str, Any]) -> bool:
@@ -426,7 +678,7 @@ def _valid_enrollment(family: dict[str, Any], enrollment: dict[str, Any]) -> boo
     if enrollment.get("max_successor", 1) != 1:
         return False
     digest = enrollment.get("scope_digest")
-    return digest in {None, _scope_digest(family)}
+    return isinstance(digest, str) and digest == _scope_digest(family)
 
 
 def build_arg_parser() -> argparse.ArgumentParser:

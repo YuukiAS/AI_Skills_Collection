@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
+import io
 import importlib.util
 import json
 import os
@@ -32,6 +34,17 @@ def load_helper(path: Path = HELPER_PATH):
 def write_executable(path: Path, text: str) -> None:
     path.write_text(text, encoding="utf-8")
     path.chmod(path.stat().st_mode | stat.S_IXUSR)
+
+
+def install_fake_slurm(bindir: Path, cluster_name: str = "PrivateClusterSecret") -> None:
+    write_executable(
+        bindir / "sinfo",
+        "#!/bin/sh\nprintf 'pi-fast*|up|8:00:00|2|64|512000|gpu:h100:4|(null)|idle|100\\nshared-gpu|up|4:00:00|4|32|256000|gpu:a100:2|(null)|mix|50\\n'\n",
+    )
+    write_executable(
+        bindir / "scontrol",
+        f"#!/bin/sh\nif [ \"$2\" = config ]; then printf 'ClusterName={cluster_name}\\nSelectType=select/cons_tres\\nPrivateData=jobs\\nControllerHost=private-controller\\n'; exit 0; fi\nif [ \"$2\" = partition ]; then exit 0; fi\nexit 1\n",
+    )
 
 
 class SlurmWorkflowsRoutingTests(unittest.TestCase):
@@ -128,8 +141,9 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
 
     def test_g7_sticky_contract_and_right_sizing_hysteresis(self) -> None:
         helper = load_helper()
+        intent = {"project": "p", "entrypoint": "train.py", "workload_class": "fit", "scale_signature": "n1", "accelerator_requirement": "h100"}
         contract = helper.resolve_resource_contract(
-            {"project": "p", "entrypoint": "train.py", "workload_class": "fit", "scale_signature": "n1", "accelerator_requirement": "h100"},
+            intent,
             {},
             {"p|train.py|fit|n1|h100": {"memory_mb": 64000, "cpus_per_task": 8, "gpus": 1, "gpu_type": "h100"}},
             {"memory_mb": 32000},
@@ -154,6 +168,19 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         self.assertEqual(low["resources"]["cpu_action"], "stable_first")
         self.assertEqual(low["resources"]["gpu_action"], "preserve_count_and_type")
 
+        with tempfile.TemporaryDirectory() as tmp:
+            state_path = Path(tmp) / "slurm-workflows.toml"
+            state = helper.load_workflow_state(state_path)
+            helper.persist_accepted_workload_contract(state, intent, contract["resources"], "artifact:contract-review")
+            helper.save_workflow_state(state, state_path)
+            first_load = helper.load_workflow_state(state_path)
+            second_load = helper.load_workflow_state(state_path)
+            self.assertEqual(first_load, second_load)
+            reused = helper.resolve_resource_contract(intent, {}, second_load["accepted_workload_contracts"], {"memory_mb": 32000})
+            self.assertEqual(reused["source"], "user_local_contract")
+            self.assertEqual(reused["resources"]["memory_mb"], 64000)
+            self.assertEqual(second_load["evidence_locators"]["p|train.py|fit|n1|h100"], "artifact:contract-review")
+
     def test_g8_modes_capacity_reuse_successor_and_enrollment(self) -> None:
         helper = load_helper()
         self.assertEqual(helper.classify_workload_mode({"entrypoint": "train.py"}), "batch")
@@ -165,24 +192,80 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             "activation_scope": {"family_id": "weekly-gpu", "accelerator_requirement": "h100"},
             "accepted_resource_contract": {"gpus": 1, "gpu_type": "h100"},
             "allowed_resource_envelope": {"gpus": 1, "gpu_type": "h100"},
-            "recurrence": {"weekday": "mon"},
+            "recurrence": {"weekday": "mon", "start_time": "09:00", "duration_hours": 8},
+            "minimum_useful_duration": "6h",
+            "successor_lead_time": "12h",
+            "site_capabilities": {"calendar_submit_verified": True},
             "auto_maintain_successor": True,
         }
+        invocation = {
+            "mode": "persistent",
+            "family_id": "weekly-gpu",
+            "accelerator_requirement": "h100",
+            "now": "2026-09-27T12:00:00+00:00",
+        }
         self.assertEqual(
-            helper.capacity_reconcile(family, [{"state": "RUNNING", "gpus": 1, "gpu_type": "h100"}], [], {"mode": "persistent", "family_id": "weekly-gpu", "accelerator_requirement": "h100"})["action"],
+            helper.capacity_reconcile(
+                family,
+                [{"state": "RUNNING", "gpus": 1, "gpu_type": "h100", "start_time": "2026-09-27T11:00:00+00:00", "end_time": "2026-09-29T00:00:00+00:00"}],
+                [],
+                invocation,
+            )["action"],
             "reuse_active",
         )
         self.assertEqual(
-            helper.capacity_reconcile(family, [], [{"lifecycle_owned": True, "gpus": 1, "gpu_type": "h100"}], {"mode": "persistent", "family_id": "weekly-gpu", "accelerator_requirement": "h100"})["action"],
+            helper.capacity_reconcile(
+                family,
+                [{"state": "RUNNING", "gpus": 1, "gpu_type": "h100", "start_time": "2026-09-27T11:00:00+00:00", "end_time": "2026-09-28T12:00:00+00:00"}],
+                [],
+                invocation,
+            )["action"],
+            "read_only_proposal",
+        )
+        self.assertEqual(
+            helper.capacity_reconcile(
+                family,
+                [],
+                [{"lifecycle_owned": True, "gpus": 1, "gpu_type": "h100", "requested_start": "2026-09-28T08:00:00+00:00", "end_time": "2026-09-28T18:00:00+00:00"}],
+                invocation,
+            )["action"],
             "keep_successor",
         )
         self.assertEqual(
-            helper.capacity_reconcile(family, [], [], {"mode": "persistent", "family_id": "weekly-gpu", "accelerator_requirement": "h100"})["action"],
+            helper.capacity_reconcile(
+                family,
+                [],
+                [
+                    {"lifecycle_owned": True, "gpus": 1, "gpu_type": "h100", "requested_start": "2026-09-28T08:00:00+00:00", "end_time": "2026-09-28T18:00:00+00:00"},
+                    {"lifecycle_owned": True, "gpus": 1, "gpu_type": "h100", "requested_start": "2026-09-28T08:00:00+00:00", "end_time": "2026-09-28T18:00:00+00:00"},
+                ],
+                invocation,
+            )["reason"],
+            "multiple_lifecycle_successors",
+        )
+        self.assertEqual(
+            helper.capacity_reconcile(family, [], [], invocation)["action"],
             "read_only_proposal",
         )
         family["enrollment"] = {"submit_successor": True, "max_successor": 1}
         self.assertEqual(
-            helper.capacity_reconcile(family, [], [], {"mode": "persistent", "family_id": "weekly-gpu", "accelerator_requirement": "h100"})["action"],
+            helper.capacity_reconcile(family, [], [], invocation)["action"],
+            "read_only_proposal",
+        )
+        family["enrollment"] = {"submit_successor": True, "max_successor": 1, "scope_digest": "wrong"}
+        self.assertEqual(
+            helper.capacity_reconcile(family, [], [], invocation)["action"],
+            "read_only_proposal",
+        )
+        family["enrollment"] = {"submit_successor": True, "max_successor": 1, "scope_digest": helper._scope_digest(family)}
+        unverified = dict(family)
+        unverified["site_capabilities"] = {"calendar_submit_verified": False}
+        self.assertEqual(
+            helper.capacity_reconcile(unverified, [], [], invocation)["reason"],
+            "calendar_submit_unverified",
+        )
+        self.assertEqual(
+            helper.capacity_reconcile(family, [], [], invocation)["action"],
             "plan_one_successor",
         )
         self.assertEqual(
@@ -210,7 +293,7 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             )
             plan = skills.environment_plan_payload(args)
             manifest = skills.environment_apply_plan(args, plan)
-            installed = Path(manifest["target_root"]) / "slurm-workflows"
+            installed = skills.environment_target_root(args) / "slurm-workflows"
             helper = load_helper(installed / "scripts" / "slurm_routing.py")
             reference = (installed / "references" / "_generated" / "site-profile.md").read_text(encoding="utf-8")
             route = helper.route_candidates(
@@ -223,6 +306,61 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         self.assertIn("local_site_id: third-party", reference)
         self.assertIn("policy_overlay_id: none", reference)
         self.assertEqual(route["decision"], "route")
+
+    def test_g6_true_normal_entry_detect_plan_apply_doctor_installed_live_route(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bindir = Path(tmp) / "bin"
+            bindir.mkdir()
+            install_fake_slurm(bindir)
+            project = Path(tmp) / "project"
+            override = Path(tmp) / "private" / "local-overrides.toml"
+            override.parent.mkdir()
+            override.write_text(
+                "[sites.privateclustersecret]\npartition_priority = \"pi-fast\"\naccelerator_priority = \"h100,a100\"\n",
+                encoding="utf-8",
+            )
+            args = argparse.Namespace(
+                site=None,
+                target="repo",
+                project=str(project),
+                hostname="ordinary-login",
+                path=str(project),
+                local_override=str(override),
+                dry_run=False,
+                json=True,
+                submit_smoke_job=False,
+            )
+            with mock.patch.dict(os.environ, {"PATH": str(bindir), "USER": "tester"}):
+                with contextlib.redirect_stdout(io.StringIO()):
+                    detected_rc = skills.command_environment_detect(
+                        argparse.Namespace(site=None, hostname="ordinary-login", path=str(project), local_override=str(override), json=True)
+                    )
+                plan = skills.environment_plan_payload(args)
+                manifest = skills.environment_apply_plan(args, plan)
+                doctor = skills.environment_doctor_payload(args)
+                installed = skills.environment_target_root(args) / "slurm-workflows"
+                installed_helper = load_helper(installed / "scripts" / "slurm_routing.py")
+                live_context = installed_helper.discover_live_site_context(local_site_id=manifest["local_site_id"])
+                local_data, _errors = skills.parse_environment_local_override(override)
+                local_policy = skills.environment_public_override_policy(local_data[manifest["local_site_id"]])
+                route = installed_helper.route_candidates(
+                    live_context,
+                    {"gpus": 1, "gpu_type": "h100", "accelerator_hard": True},
+                    local_policy,
+                )
+            reference = (installed / "references" / "_generated" / "site-profile.md").read_text(encoding="utf-8")
+            manifest_text = json.dumps(manifest, sort_keys=True)
+        self.assertEqual(detected_rc, 0)
+        self.assertEqual(plan["local_site_id"], "privateclustersecret")
+        self.assertTrue(plan["runtime_available"])
+        self.assertEqual(doctor["diagnostics"]["missing_required_fields"], [])
+        self.assertEqual(route["decision"], "route")
+        self.assertEqual(route["candidates"][0]["partition"], "pi-fast")
+        self.assertIn("local_override_locator: local-override:", reference)
+        self.assertNotIn(str(Path(tmp)), reference)
+        self.assertNotIn(str(Path(tmp)), manifest_text)
+        self.assertNotIn("PrivateClusterSecret", reference)
+        self.assertNotIn("private-controller", reference)
 
     def test_g6_known_profile_keeps_distinct_local_site_id(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -245,7 +383,7 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             plan = skills.environment_plan_payload(args)
             manifest = skills.environment_apply_plan(args, plan)
             reference = (
-                Path(manifest["target_root"]) / "slurm-workflows" / "references" / "_generated" / "site-profile.md"
+                skills.environment_target_root(args) / "slurm-workflows" / "references" / "_generated" / "site-profile.md"
             ).read_text(encoding="utf-8")
         self.assertEqual(plan["requested_site_id"], "unc-longleaf")
         self.assertEqual(plan["local_site_id"], "private-lab-site")
@@ -254,6 +392,33 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         self.assertEqual(manifest["policy_overlay_id"], "unc-longleaf")
         self.assertIn("local_site_id: private-lab-site", reference)
         self.assertIn("policy_overlay_id: unc-longleaf", reference)
+
+    def test_legacy_race_defaults_and_site_aware_doctor(self) -> None:
+        fresh = skills.environment_blank_site_override("fresh-site")
+        self.assertIn('race_after_minutes = ""', fresh)
+        self.assertIn('race_cancel_policy = ""', fresh)
+        self.assertNotIn('race_after_minutes = "60"', fresh)
+        self.assertNotIn("cancel_after_first_validated_output", fresh)
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp) / "project"
+            override = Path(tmp) / "local-overrides.toml"
+            override.write_text("[sites.unc-longleaf]\naccount = \"\"\n", encoding="utf-8")
+            args = argparse.Namespace(
+                site="unc-longleaf",
+                target="repo",
+                project=str(project),
+                hostname=None,
+                path=None,
+                local_override=str(override),
+                submit_smoke_job=False,
+                json=True,
+            )
+            diagnostics = skills.environment_doctor_payload(args)["diagnostics"]
+        self.assertEqual(diagnostics["missing_required_fields"], ["account"])
+        self.assertNotIn("partition", diagnostics["missing_required_fields"])
+        self.assertNotIn("qos", diagnostics["missing_required_fields"])
+        self.assertNotIn("scratch_root", diagnostics["missing_required_fields"])
+        self.assertNotIn("module_init", diagnostics["missing_required_fields"])
 
     def test_g6_no_profile_can_attach_optional_public_overlay(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -276,7 +441,7 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             plan = skills.environment_plan_payload(args)
             manifest = skills.environment_apply_plan(args, plan)
             reference = (
-                Path(manifest["target_root"]) / "slurm-workflows" / "references" / "_generated" / "site-profile.md"
+                skills.environment_target_root(args) / "slurm-workflows" / "references" / "_generated" / "site-profile.md"
             ).read_text(encoding="utf-8")
         self.assertEqual(plan["local_site_id"], "third-party")
         self.assertEqual(plan["policy_overlay_id"], "unc-longleaf")
