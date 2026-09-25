@@ -4,6 +4,39 @@
 
 No unreleased changes.
 
+## 5.2.2 - 2026-09-25
+
+Repository `5.2.2` is a compatible patch release for standalone scientific PDF
+renderer release identity correction.
+
+Repository bump decision: PATCH
+Reason: the collection release metadata now correctly reflects the standalone
+renderer production improvement that shipped in `5.2.1`, without changing
+renderer behavior.
+
+Affected standalone skills:
+- `render-chinese-math-pdf`: `0.1` -> `0.2`
+  Reason: the standalone renderer gained user-facing production reliability in
+  `5.2.1`; this patch corrects the standalone Skill metadata, README card,
+  registry, catalog, and version tests to match that released capability.
+
+Affected plugins:
+- all central plugins: NO_BUMP
+  Reason: this release does not change central Marketplace plugin behavior.
+
+Unchanged central plugin versions: `workflow-core 0.4`, `ai-skills-core 0.5`,
+`writing-style 0.3`, `research-writing 0.2`, `presentations 0.3`,
+`scientific-visualization 0.1`, `web-development 0.2`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- No renderer behavior changes. The canonical renderer architecture, formal-note
+  profile, Research Authoring routing, and G5 evidence from `5.2.1` remain
+  unchanged.
+- Standalone Skill version tests now use per-skill expected versions instead of
+  incorrectly requiring every standalone Skill to remain at `0.1`.
+
 ## 5.2.1 - 2026-09-25
 
 Repository `5.2.1` is a compatible release for scientific PDF rendering

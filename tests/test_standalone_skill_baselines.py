@@ -32,6 +32,12 @@ STANDALONE_SKILLS = {
     },
 }
 
+EXPECTED_STANDALONE_SKILL_VERSIONS = {
+    "project-thread-handoff": "0.1",
+    "render-chinese-math-pdf": "0.2",
+    "slurm-workflows": "0.1",
+}
+
 EXPECTED_PLUGIN_VERSIONS = {
     "workflow-core": "0.4",
     "ai-skills-core": "0.5",
@@ -47,13 +53,13 @@ EXPECTED_PLUGIN_VERSIONS = {
 
 
 class StandaloneSkillBaselineTests(unittest.TestCase):
-    def test_standalone_skills_have_v01_metadata_and_icons(self) -> None:
+    def test_standalone_skills_have_expected_metadata_and_icons(self) -> None:
         for slug, info in STANDALONE_SKILLS.items():
             skill_dir = REPO_ROOT / info["path"]
             meta, _ = read_frontmatter(skill_dir / "SKILL.md")
 
             self.assertEqual(meta.get("name"), slug)
-            self.assertEqual(meta.get("version"), "0.1")
+            self.assertEqual(meta.get("version"), EXPECTED_STANDALONE_SKILL_VERSIONS[slug])
             self.assertEqual(meta.get("icon_small"), info["icon"].as_posix())
             self.assertEqual(meta.get("icon_large"), info["icon"].as_posix())
 
@@ -82,7 +88,7 @@ class StandaloneSkillBaselineTests(unittest.TestCase):
             self.assertNotIn(info["path"].as_posix(), serialized)
 
     def test_repository_version_and_contact_sheet_are_stable(self) -> None:
-        self.assertEqual((REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip(), "5.2.1")
+        self.assertEqual((REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip(), "5.2.2")
 
         sheet = (REPO_ROOT / "docs" / "audits" / "ICON_CONTACT_SHEET.svg").read_text(encoding="utf-8")
         for slug, info in STANDALONE_SKILLS.items():
