@@ -26,20 +26,20 @@ v0.1
 Execution Plan:
 docs/design/frontend-design/FRONTEND_DESIGN_PRODUCTION_CONSOLIDATION_EXECUTION_PLAN_V0_1_2026-09-27.md
 
-Plan creation commit:
-61462b1a28a58576210be53fd1b43e18b1ab8c4a
+Plan current commit:
+6822f0720c4be060a6fed05a3cf724fa5045d21d
 
 Canonical Goal:
 docs/goals/FRONTEND_DESIGN_PRODUCTION_CONSOLIDATION_GOAL_V0_1.md
 
-Goal creation commit:
-71081907da03b2431a9f3a0d6a263e332294ac15
+Goal current commit:
+545dadceddfb38b2ab954bb7b77499b831250a5f
 
 Kickoff Draft:
 docs/operations/prompts/FRONTEND_DESIGN_PRODUCTION_CONSOLIDATION_KICKOFF_V0_1.md
 
-Kickoff creation commit / execution-package tip:
-3538693b499e765d1a708a285660957e12bbdd47
+Kickoff current commit / execution-package tip:
+e2dcce7be1ef58414f6f8a9595d2253ebcfd7a3
 
 Exact planned task identity:
 
@@ -305,31 +305,51 @@ Package 已把 handoff action reachability 冻结为：
 
 ## 12. Version / final-candidate chronology
 
-当前 main 是 repository 5.3.0、web-development 0.2，但 package 没有硬编码未来 final version。
+package 现在已经把版本结果冻结清楚：
 
-流程是：
+当前 main 基线：
 
-- 开发期间不 bump；
-- behavior + known regression + broad compatibility 稳定后；
-- 重读 then-current version source；
-- 若形成正式 release candidate：
-  - repository compatible PATCH
-  - web-development next two-part release，exactly once
-  - other plugins NO_BUMP
-  - maturity unclassified
-- regenerate
-- freeze final candidate
-- G1–G7 在同一个带最终 version metadata 的 candidate 上重跑
-- independent implementation review
-- Kickoff 不授权 merge/release
+- repository = 5.3.0
+- web-development = 0.2
+- maturity = unclassified
+
+如果 kickoff base 仍为该基线，本任务完成后的正式 release 必须是：
+
+```text
+Repository: 5.3.0 -> 5.3.1
+web-development: 0.2 -> 0.3
+all other central plugins: NO_BUMP
+maturity: unclassified
+```
+
+如果 kickoff 前 main 已被其它正式 release 推进，只允许把版本基线顺延：
+
+- repository = then-current compatible PATCH
+- web-development = then-current two-part next release
+- other plugins = NO_BUMP
+
+不得重新选择 NO_BUMP。原因是本任务实现完成必然改变正式 production behavior。
+
+版本时序：
+
+- 开发早期不提前 bump；
+- implementation + known regression + broad compatibility 稳定后；
+- 写入唯一一次 repository/plugin version bump；
+- 同步 changelog / README / VERSION / version tests / generated manifests；
+- regenerate；
+- freeze final candidate；
+- G1–G7 在同一个带最终 version metadata 的 candidate 上重跑；
+- independent implementation review 若 REVISE，继续修同一 release candidate/version，不再次 bump；
+- 如果 gates 无法通过，任务保持未完成，不允许 unchanged-version 交付。
 
 请独立核对这是否同时满足：
 
 - version policy；
 - same-final-candidate evidence；
 - 并发 main release 不被覆盖；
-- 不提前假设最终版本号；
-- review REVISE 后不重复 bump。
+- 当前基线下明确 5.3.1 / 0.3；
+- review REVISE 后不重复 bump；
+- 不存在“实现完成但不 bump”的 PASS 路径。
 
 如果存在时序矛盾，指出最小修正。
 
