@@ -230,38 +230,51 @@ Lucerna replay 至少读取冻结 ref 下：
 
 ## 8. 版本与 maturity
 
-当前 planning evidence：
+当前 main 的真实版本基线：
 
-- repository current version：`5.3.0`；
-- web-development current version：`0.2`；
+- repository：`5.3.0`；
+- `web-development`：`0.2`；
 - maturity：`unclassified`。
 
-这不是未来版本授权。
+本 Goal 一旦实现完成，必然改变 Frontend Design 的正式 production behavior，因此**正式完成必须伴随版本发布**；不允许实现完 coordinator-first / QA / evidence contract 后仍以 `web-development 0.2` 交付。
 
-### Plan-time decision
+### 当前基线下的明确 release target
+
+如果 approved Kickoff 创建 execution branch 时 main 仍是上述版本：
 
 ```text
-Repository bump decision: NONE
-Reason: execution package 尚未实现或形成正式 release。
+Repository bump decision: PATCH
+Repository: 5.3.0 -> 5.3.1
 
 Affected plugins:
-- web-development: NO_BUMP
+- web-development: 0.2 -> 0.3
 - all other central plugins: NO_BUMP
+
+Maturity:
+- web-development: unclassified (unchanged)
 ```
 
-### Final-candidate conditional decision
+理由：这是现有 `web-development` 的重大兼容性 production improvement，不新增 repository-level 顶级能力，因此 repository 使用 PATCH，而 plugin 推进一个两段版本。
 
-只有当实际 production behavior 改变、原 failure regression PASS、broad compatibility PASS、准备形成正式 release candidate 时：
+### 并发 main release 处理
 
-- 从 then-current repository version 做 compatible PATCH；
-- `web-development` 从 then-current 两段版本推进到下一两段版本，exactly once；
-- all other plugins NO_BUMP；
-- maturity 仍 `unclassified`；
-- 同步 plugin changelog、root CHANGELOG、README、VERSION、version tests、generated manifests。
+若 kickoff 前 main 已被其他正式 release 推进：
 
-如果 kickoff/integration 前 main 已有其它 release，必须从 then-current source 计算，不能硬编码覆盖并发历史。
+- repository 改为 then-current compatible PATCH；
+- `web-development` 改为 then-current two-part version 的下一 release；
+- all other plugins 仍 NO_BUMP。
 
-如果最终没有形成 production behavior release，则 NO_BUMP。
+这只允许**顺延版本基线**，不允许重新把本任务解释成 NO_BUMP。
+
+### 版本时序
+
+- 开发早期不提前改版本；
+- implementation + known regression + broad compatibility 稳定后，写入本任务唯一一次 version bump；
+- 同步 plugin changelog、root CHANGELOG、README、VERSION、version tests、generated manifests；
+- 再冻结 final candidate；
+- G1–G7 必须由该同一带最终版本 metadata 的 final candidate 直接通过；
+- implementation review 若 REVISE，继续修同一 release candidate/version，不再次 bump；
+- 如果 release gates 无法通过，则本任务保持未完成并返回 blocker，不得把 production behavior change 以 unchanged version 交付。
 
 ---
 
