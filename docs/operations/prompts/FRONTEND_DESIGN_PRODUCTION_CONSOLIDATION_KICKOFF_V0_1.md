@@ -282,27 +282,43 @@ EVIDENCE_LOCATOR
 
 ### 11. Final-candidate 与版本纪律
 
-当前 main 观察值不是最终授权：
+当前 main 的明确版本基线：
 
-- repository 当前：5.3.0；
-- web-development 当前：0.2。
+- repository：5.3.0；
+- web-development：0.2；
+- maturity：unclassified。
 
-开发期间不要提前 bump。
+本任务完成后必然改变正式 Frontend Design production behavior，因此**完成即必须发布新版本**。不要把本任务实现完成后仍保持 `web-development 0.2`。
 
-只有 implementation + known regression + broad compatibility 稳定，并准备冻结正式 release candidate 时：
+如果创建 execution branch 时 main 仍是该基线，冻结预期 release：
 
-1. 重读 version policy 与 then-current source；
-2. 若确属 production behavior release：
-   - repository 做 then-current compatible PATCH；
-   - web-development 做 then-current 两段版本的下一 release，exactly once；
-   - all other plugins NO_BUMP；
-   - maturity 仍 unclassified；
-3. 更新 web-development changelog、root CHANGELOG、README、VERSION、version tests；
-4. regenerate；
-5. freeze final candidate；
-6. 所有 release-critical G1–G7 在该 same final candidate 上重跑。
+```text
+Repository: 5.3.0 -> 5.3.1
+web-development: 0.2 -> 0.3
+all other central plugins: NO_BUMP
+maturity: unclassified (unchanged)
+```
 
-若不能形成正式 release，NO_BUMP，并如实报告。
+如果 kickoff-time main 已有其它正式 release：
+
+- repository 使用 then-current compatible PATCH；
+- web-development 使用 then-current two-part version 的下一 release；
+- all other plugins NO_BUMP。
+
+这只允许顺延基线，不允许选择 NO_BUMP。
+
+执行时序：
+
+1. 开发早期不要提前 bump；
+2. implementation + known regression + broad compatibility 稳定后，重新读取 version policy 与 then-current source；
+3. 写入本任务唯一一次 repository/plugin version bump；
+4. 同步 web-development changelog、root CHANGELOG、README、VERSION、version tests、generated manifests；
+5. regenerate；
+6. freeze final candidate；
+7. 所有 release-critical G1–G7 在这个同一、已经带最终版本 metadata 的 candidate 上重跑；
+8. independent implementation review 若 REVISE，修同一 release candidate/version，不再次 bump。
+
+如果 release gates 无法通过，任务保持未完成并返回 blocker。不得把已经改变的 production behavior 以 unchanged version 交付。
 
 ### 12. README / TODO / Board
 
