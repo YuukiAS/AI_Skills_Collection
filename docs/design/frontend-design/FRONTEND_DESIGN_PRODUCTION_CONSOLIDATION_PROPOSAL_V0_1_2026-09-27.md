@@ -859,7 +859,29 @@ Critic blocker 必须满足 contract：指出直接证据、因果风险和最�
 
 ---
 
-## 18. Planner conclusion
+## 18. Maintenance-board pending mutation
+
+本 Proposal 已进入 tracking scope，但当前 GitHub connector surface 没有 GitHub Project 字段 mutation 能力；同时本轮也没有可用的 production Clear Writing invocation，因此不应改写 reader-facing Issue body 来伪装同步。
+
+交给下一次具备 Project mutation 能力的 AI Skills Maintainer 的 exact pending mutation：
+
+```text
+PROJECT = AI Skills Maintenance
+ITEMS = #52,#53,#54,#55,#56,#57,#58,#59,#60,#61,#62,#63,#64,#65,#66,#67,#68,#69,#70,#71,#72
+AREA = web-development
+STATUS = DOING
+CURRENT_ANCHOR = docs/design/frontend-design/FRONTEND_DESIGN_PRODUCTION_CONSOLIDATION_PROPOSAL_V0_1_2026-09-27.md
+NEXT_STEP = independent Critic review
+PRESERVE_SOURCE_TRACKING = YES
+DO_NOT_TOUCH = #73
+DO_NOT_CLOSE_ANY_TODO = YES
+```
+
+若这些 Project items 已经是 `DOING`，则只更新 current anchor / next step，不重复制造状态变更。#73 保持下一阶段，不进入本轮 execution scope。
+
+---
+
+## 19. Planner conclusion
 
 本轮不是把 21 条 TODO 搬进 Skill，而是把它们压成：
 
