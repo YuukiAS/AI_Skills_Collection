@@ -304,3 +304,24 @@ project-specific context: Lucerna's Installed, Normal, Checking, Ready and other
 
 - One product's visual taste is project-local unless repeated or explicitly adopted as a long-term cross-project preference.
 - Runtime bugs belong to the app/repo or build capability, not automatically to this plugin.
+
+### Product UI copy needs an explicit Frontend Design content-architecture contract
+status: NEW
+tracking: #73
+source: CUHK Date / Meet at CU production copy-naturalness audit, 2026-09-26
+target layer: Frontend Design product-UX planning / page composition / rendered acceptance
+evidence: an anonymous production GPT Work audit of 150 Simplified/Traditional Chinese UI strings classified only 53 as fully natural, with 72 readable-but-modelish, 15 clearly unnatural, and 10 product/semantic problems. Repeated failures were not sentence grammar alone: ordinary status was turned into slogans, one product state was repeated across badge/heading/body, pages repeated symmetric `eyebrow -> heading -> paragraph` sections, explicit second person and balanced contrast structures accumulated across the screen, and internal product/legal state leaked into consumer surfaces.
+problem: Frontend Design currently has broad `content discipline` and anti-generic visual rules, but it does not yet own a sufficiently explicit decision layer for **whether a UI location needs text at all, what role that text serves, how much copy belongs on the screen, whether neighboring copy repeats the same state, and when a wording issue is actually an information-architecture/product-semantics defect**. A writing plugin cannot reliably repair a page whose content hierarchy is wrong; polishing each string independently can make a generic/AI-like screen more polished without making it more human.
+candidate_action:
+- Add a page/screen-level **content architecture pass** before wording polish. For every visible text block, classify its role (navigation, status, instruction, CTA, field label/help, empty/loading/error, trust/legal, explanatory, marketing/brand) and ask whether it is necessary on this surface.
+- Detect duplicate semantic payload across badge, hero, metric, section heading/body, CTA and footer. Prefer deleting or merging redundant text instead of asking the writing layer to create multiple distinct phrasings for the same fact.
+- Treat ordinary state as ordinary state by default. A system status such as registration-open / matching-closed should not automatically become a slogan, paired headline or decorative proof block.
+- Add a whole-page copy-rhythm check alongside the visual taste gate: repeated `not X but Y`, `first X then Y`, `only X then Y`, repeated explicit second person, repeated eyebrow/heading/body templates and repeated reassurance can make individually acceptable lines feel generated when viewed together.
+- Classify copy defects before repair: **content-architecture defect**, **wording/localization defect**, **product/semantic defect**, or **legal/trust escalation**. Only wording/localization defects should be handed directly to the writing layer.
+- Define a structured handoff to the writing plugin that includes at least: surface, UI role, product state, intended user consequence/action, neighboring visible copy, locale, protected facts, and length/viewport constraint.
+- Keep zh-Hans and zh-Hant-HK as separate locale realizations. Frontend Design owns placement and hierarchy; it must not treat mechanical Simplified/Traditional conversion as localization acceptance.
+- Rendered acceptance must re-check copy after layout. Mobile first viewport, CTA visibility, line wrapping, repeated labels, visual prominence, and the relationship between copy and controls are part of the content decision.
+- Do not create a generic ban-list or AI detector. The target is product clarity and natural UI behavior, not detector evasion.
+boundary: wording realization belongs to `writing-style`; this item defines Frontend Design ownership and handoff. Product/legal semantics that are unsafe or internally framed must be escalated rather than cosmetically rewritten.
+promotion_gate: first stabilize the broader Frontend Design workflow/TODO consolidation so this contract lands on a reliable content/layout/state-review foundation; then validate the cross-plugin handoff on CUHK Date and at least one independent product before treating it as a mature generic production gate.
+
