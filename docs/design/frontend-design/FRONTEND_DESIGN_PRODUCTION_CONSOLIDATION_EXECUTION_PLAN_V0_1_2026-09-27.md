@@ -364,35 +364,47 @@ coordinator 能正确区分 S1/S2/S3、design authority、browser/native surface
 
 ### G7 — Final Candidate / Release Metadata / Human-Facing Closure
 
-在 final candidate 冻结前重新读取版本政策和 kickoff-time current versions。
+本任务一旦按批准架构实现完成，就一定改变 `web-development` 的正式 production behavior：normal entry、aggregate routing、coordinator/delegate topology、review/admission 与 evidence contract 都会发生用户可观察变化。因此，**完成本任务的 release candidate 必须 bump 版本；不存在“实现完成但 web-development 仍保持 0.2”的合法 PASS 路径。**
 
 **Plan-time 决策**
 
-```text
-Repository bump decision: NONE
-Reason: 当前只是 execution package planning；尚未形成正式 release。
+当前 main 的真实版本基线是：
 
-Affected plugins:
-- web-development: NO_BUMP
-  Reason: 当前尚未实现、回放、独立 review。
-- all other plugins: NO_BUMP
+```text
+Repository = 5.3.0
+web-development = 0.2
 ```
 
-**未来 final-candidate 条件**
+因此，在 kickoff base 仍为该版本基线时，本任务预期正式 release 为：
 
-若本任务确实改变 production user-facing Frontend Design behavior，并已完成原 failure regression、broad compatibility、准备形成正式 release candidate：
+```text
+Repository bump decision: PATCH
+Expected repository release: 5.3.0 -> 5.3.1
 
-- `web-development` 在 reviewed branch 上从**当时 current 两段版本**推进到下一两段版本，exactly once；
-- repository 从**当时 current repository version**做 compatible PATCH；
-- all other central plugins NO_BUMP；
-- maturity 仍 `unclassified`；
-- plugin changelog 写清 before → after；
-- root CHANGELOG / VERSION / README / version tests / generated manifest 同步；
-- README 必须作为 closure 显式检查项。
+Affected plugins:
+- web-development: 0.2 -> 0.3
+  Reason: Frontend Design 获得 coordinator-first normal entry、完整 production QA/evidence/admission 闭环与新的 generated routing。
+- all other central plugins: NO_BUMP
+```
 
-当前观察值为 repository `5.3.0`、web-development `0.2`，仅作 planning evidence，不硬编码未来最终号。若 main 在 kickoff 或 integration 前已有其它 release，必须从 then-current source 计算，不能覆盖并发版本历史。
+如果 kickoff 前 `main` 已被其它已完成 release 推进，则不得覆盖并发历史；Executor 必须从 kickoff-time then-current source 重新计算：
+- repository = then-current compatible PATCH；
+- `web-development` = then-current two-part version 的下一 release；
+- all other plugins = NO_BUMP。
 
-如果最终没有形成 production behavior release，则 NO_BUMP，返回 Planner/Reviewer，不为“计划本来想发布”强行 bump。
+这只是**版本基线顺延**，不是重新决定“要不要 bump”。只要本任务实现完成并通过 release gates，版本 bump 是强制 closure。
+
+**版本时序**
+
+1. 开发早期不提前 bump；
+2. implementation + known regression + broad compatibility 稳定后，重新读取 then-current version source；
+3. 写入本任务唯一一次 repository/plugin version bump，并同步 web-development changelog、root CHANGELOG、README、version tests、generated manifests；
+4. 之后冻结 final candidate；
+5. G1–G7 必须在这个已经带最终版本 metadata 的同一 final candidate 上重新通过；
+6. independent implementation review 若 REVISE，继续修同一个 release candidate/version，不再次 bump；
+7. 如果实现无法达到 release gates，则本任务不能 PASS，也不能把已经完成的 production behavior 以 unchanged version 交付；应如实返回 blocker。
+
+maturity 继续保持 `unclassified`。README 是 mandatory closure。
 
 ---
 
