@@ -1403,7 +1403,7 @@ The v0.1 Critic review artifact is now archived at:
 
 Do not ask the user to maintain the board manually.
 
-## 29. Version and maturity implications## 29. Version and maturity implications
+## 29. Version and maturity implications
 
 No version changes occur in this planning task.
 
