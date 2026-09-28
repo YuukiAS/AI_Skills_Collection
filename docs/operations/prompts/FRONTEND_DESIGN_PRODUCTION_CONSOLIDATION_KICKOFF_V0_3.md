@@ -1,10 +1,10 @@
 # Frontend Design Production Consolidation — Kickoff Draft v0.3
 
-只在 independent execution-ready Critic 对以下 v0.2 recovery package 返回 PASS / READY_FOR_CODEX，并把真实 review 写入固定 repo locator 后使用：
+只在 independent execution-ready Critic 对以下 v0.3 recovery package 返回 PASS / READY_FOR_CODEX，并把真实 review 写入固定 repo locator 后使用：
 
 - `docs/design/frontend-design/FRONTEND_DESIGN_PRODUCTION_CONSOLIDATION_EXECUTION_PLAN_V0_3_2026-09-28.md`
 - `docs/goals/FRONTEND_DESIGN_PRODUCTION_CONSOLIDATION_GOAL_V0_3.md`
-- 本 Kickoff Draft v0.2
+- 本 Kickoff Draft v0.3
 
 Durable Critic review locator：
 
@@ -128,7 +128,7 @@ Execution Plan:
 Planner 在 exact reviewed branch：
 
 1. 读取 REQUEST/CURRENT；
-2. 读取 approved Proposal v0.3、Execution Plan v0.2、Goal v0.2、durable Critic PASS；
+2. 读取 approved Proposal v0.3、Execution Plan v0.3、Goal v0.3、durable Critic PASS；
 3. 按当前 `automation/reviewed_handoff/templates/PLAN.md` 写完整 `AI_BRIDGE_REVIEWED_PLAN_V2`；
 4. task-local PLAN 只落实已批准 package，不重新设计 Frontend；
 5. 重新读取刚写 PLAN 和 current template，自检 frontmatter + required sections；
