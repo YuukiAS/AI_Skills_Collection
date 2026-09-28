@@ -703,13 +703,13 @@ APPROVED_KICKOFF = docs/operations/prompts/FRONTEND_DESIGN_PRODUCTION_CONSOLIDAT
 APPROVED_TASK_KEY = web-development--frontend-design-production-consolidation
 APPROVED_BRANCH = reviewed/web-development--frontend-design-production-consolidation
 APPROVED_WORKTREE = /home/yuukias/AI_Skills_Collection-web-development--frontend-design-production-consolidation
-APPROVED_PACKAGE_COMMIT = <exact main commit containing the reviewed v0.2 Plan/Goal/Kickoff>
+APPROVED_PACKAGE_COMMIT = <exact main commit containing the reviewed v0.3 Plan/Goal/Kickoff>
 ARCHITECTURE_AUTHORITY = Proposal v0.3 @ effa02b4e7e02f012ea24bda1683857609a09fe1
 ```
 
 并保留 Critic 的真实审查正文、non-blocking notes 与权限边界。
 
-v0.2 Kickoff 使用前必须从 repo 读取该 locator，验证 PASS、READY_FOR_CODEX、package version/path/task/branch/worktree/approved commit 均匹配。若文件不存在、是 REVISE、或批准对象不匹配，则保持等待 Critic；不得从旧聊天推断 PASS。
+v0.3 Kickoff 使用前必须从 repo 读取该 locator，验证 PASS、READY_FOR_CODEX、package version/path/task/branch/worktree/approved commit 均匹配。若文件不存在、是 REVISE、或批准对象不匹配，则保持等待 Critic；不得从旧聊天推断 PASS。
 
 review artifact 自身的 Git commit只是 durable provenance locator；不新增 schema、数据库、ledger、hash graph 或新 workflow。
 
