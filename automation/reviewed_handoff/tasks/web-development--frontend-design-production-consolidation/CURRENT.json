@@ -1,0 +1,16 @@
+{
+  "base_branch": "main",
+  "base_commit": "9d1923d2002c529352ad6464599e7da08eb6787c",
+  "ci_required": true,
+  "ci_status": "PENDING",
+  "implementation_commit": null,
+  "last_review_decision": null,
+  "max_plan_revisions": 1,
+  "max_review_rounds": 2,
+  "next_action": "RUN_GPT_PLANNER",
+  "plan_revision": 0,
+  "review_round": 0,
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "state": "PLAN_REQUESTED",
+  "task_key": "web-development--frontend-design-production-consolidation"
+}
