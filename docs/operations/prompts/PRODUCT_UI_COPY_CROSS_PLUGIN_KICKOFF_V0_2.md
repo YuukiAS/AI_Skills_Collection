@@ -99,7 +99,7 @@ GPT Planner must:
 
 1. read `REQUEST.md` / `CURRENT.json`;
 2. read the approved Proposal v0.2;
-3. read Execution Plan v0.1 / Goal v0.1;
+3. read Execution Plan v0.2 / Goal v0.2;
 4. read the durable execution-ready Critic PASS;
 5. write task-local `PLAN.md` using `AI_BRIDGE_REVIEWED_PLAN_V2`;
 6. preserve all G1–G8 gates and H0→H4 chronology;
