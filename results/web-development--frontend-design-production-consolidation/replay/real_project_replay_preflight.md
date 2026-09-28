@@ -42,6 +42,7 @@ v0.3 plan-required files:
 - `docs/workflows/LUCERNA_VISUAL_ACCEPTANCE.md`: missing at current HEAD/worktree
 - `docs/design/lucerna/LUCERNA_UI_PRODUCT_SYSTEM_V1.md`: missing at current HEAD/worktree
 - `docs/design/lucerna/LUCERNA_EXTENSION_IDENTITY_STATUS_AUTH_V1.md`: missing at current HEAD/worktree
+- Additional read-only check: `git ls-tree -r --name-only origin/main` also does not contain the three missing v0.3 paths.
 
 Nearby located files:
 
@@ -90,5 +91,5 @@ Replay classification expectation:
 
 Reasons:
 
-1. Candidate plugin replay has not run because installing `web-development@ai-skills-candidate` requires explicit authorization for temporary live/global Codex plugin config mutation.
-2. Lucerna's exact v0.3-required source files are missing in the current checkout; the current nearby docs are not treated as equivalent.
+1. Candidate plugin replay now PASSed through `scripts/candidate_plugin_replay.py`; see `replay/candidate_plugin_replay_status.md`.
+2. Lucerna's exact v0.3-required source files are missing in the current checkout and in current `origin/main`; the nearby docs are not treated as equivalent.

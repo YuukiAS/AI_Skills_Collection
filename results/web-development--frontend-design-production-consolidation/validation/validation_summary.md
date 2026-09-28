@@ -2,7 +2,7 @@
 
 Task key: `web-development--frontend-design-production-consolidation`
 
-Candidate state: worktree candidate before implementation commit.
+Candidate state: implementation commit `1bb4650d8192d829b850abaccee53773ef50e091`.
 
 ## Implemented
 
@@ -35,11 +35,11 @@ Candidate state: worktree candidate before implementation commit.
 - `python -m unittest discover -s tests`
   - Result: PASS. 296 tests run.
 
-## Candidate Replay Runtime Status
+## Candidate Replay Status
 
-Candidate plugin replay is not yet complete. The global Codex marketplace mutation path was rejected by auto-review and has been superseded by the repository's canonical candidate replay helper.
+Candidate plugin replay completed with the repository's canonical helper. The earlier global Codex marketplace mutation path was rejected by auto-review and is retained as negative evidence; it was not used for the final replay.
 
-Repo-local pinned runtime is ready:
+Repo-local pinned runtime:
 
 ```text
 version: codex-cli 0.153.4
@@ -48,14 +48,25 @@ archive_sha256: a822187e1a2420c61c5926721bfbd878701ed95547c9bb0d4de4498a16ba1821
 binary_sha256: 56ef98ab4032d317ab26e9b5e5a175650717351edb16ed9cde0cb6d1734d62da
 ```
 
-Next replay command after committing the candidate:
+Replay command:
 
 ```bash
 python scripts/candidate_plugin_replay.py replay \
   --plugin web-development \
-  --candidate-commit <implementation-commit> \
+  --candidate-commit 1bb4650d8192d829b850abaccee53773ef50e091 \
   --task results/web-development--frontend-design-production-consolidation/replay/frontend_candidate_replay_task.md \
   --input results/web-development--frontend-design-production-consolidation/candidate_visible_regressions/scenarios.json
 ```
 
-`G6` Bobbio/Lucerna/Asteria real replay remains incomplete; Lucerna also has a source-file preflight gap recorded in `replay/real_project_replay_preflight.md`.
+Replay result:
+
+- Run id: `20260928T030747Z-2077704`
+- Actual plugin consumption: `proven=true`, event `item.started`, line index `8`
+- Candidate selector: `web-development@ai-skills-candidate`
+- Durable outputs:
+  - `results/web-development--frontend-design-production-consolidation/replay/candidate_routing_decisions.md`
+  - `results/web-development--frontend-design-production-consolidation/replay/candidate_source_evidence.json`
+  - `results/web-development--frontend-design-production-consolidation/replay/candidate_plugin_replay_run.json`
+- Output validation: PASS for 8 frozen scenarios and required routing/admission fields.
+
+`G6` Bobbio/Lucerna/Asteria real replay remains incomplete; Lucerna has a source-file preflight gap recorded in `replay/real_project_replay_preflight.md`.

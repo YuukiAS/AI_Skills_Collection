@@ -1,0 +1,22 @@
+{
+  "actual_consumption": {
+    "event_type": "item.started",
+    "line_index": 8,
+    "proven": true
+  },
+  "add_payload": {
+    "authPolicy": "ON_INSTALL",
+    "installedPath": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3",
+    "marketplaceName": "ai-skills-candidate",
+    "name": "web-development",
+    "pluginId": "web-development@ai-skills-candidate",
+    "version": "0.3"
+  },
+  "candidate_commit": "1bb4650d8192d829b850abaccee53773ef50e091",
+  "installed_path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3",
+  "plugin_id": "web-development@ai-skills-candidate",
+  "runtime_version": "codex-cli 0.153.4",
+  "stderr_path": "/home/yuukias/AI_Skills_Collection-web-development--frontend-design-production-consolidation/.local-runtime/candidate-plugin-replay/runs/20260928T030747Z-2077704/child.stderr",
+  "stdout_path": "/home/yuukias/AI_Skills_Collection-web-development--frontend-design-production-consolidation/.local-runtime/candidate-plugin-replay/runs/20260928T030747Z-2077704/child.stdout.jsonl",
+  "writable_dirs": []
+}
