@@ -42,12 +42,15 @@ v0.3 plan-required files:
 - `docs/workflows/LUCERNA_VISUAL_ACCEPTANCE.md`: missing at current HEAD/worktree
 - `docs/design/lucerna/LUCERNA_UI_PRODUCT_SYSTEM_V1.md`: missing at current HEAD/worktree
 - `docs/design/lucerna/LUCERNA_EXTENSION_IDENTITY_STATUS_AUTH_V1.md`: missing at current HEAD/worktree
-- Additional read-only check: `git ls-tree -r --name-only origin/main` also does not contain the three missing v0.3 paths.
+- Additional read-only recovery: after `git fetch origin main`, `origin/main` resolves to `b626c2ce998882941dba0f30a00ecf627cc740b5` and contains the three missing v0.3 paths.
 
 Nearby located files:
 
 - `docs/AUTH.md`
 - `docs/design/VISUAL_DIRECTION.md`
+- `origin/main:docs/workflows/LUCERNA_VISUAL_ACCEPTANCE.md`
+- `origin/main:docs/design/lucerna/LUCERNA_UI_PRODUCT_SYSTEM_V1.md`
+- `origin/main:docs/design/lucerna/LUCERNA_EXTENSION_IDENTITY_STATUS_AUTH_V1.md`
 
 Read-only source notes:
 
@@ -57,8 +60,8 @@ Read-only source notes:
 
 Replay preflight gap:
 
-- Strict G6 replay cannot honestly claim the v0.3-specified Lucerna source set was read from this checkout, because three named files are not present.
-- Do not mutate, pull over dirty state, or substitute these nearby files as equivalent without Planner/Critic or user authority.
+- Strict G6 can use the exact v0.3 Lucerna source set from frozen ref `origin/main` / `b626c2ce998882941dba0f30a00ecf627cc740b5`.
+- The current Lucerna worktree remains dirty and behind; do not mutate, pull over dirty state, clean, reset, or checkout it for replay.
 
 ## Asteria
 
@@ -92,4 +95,4 @@ Replay classification expectation:
 Reasons:
 
 1. Candidate plugin replay now PASSed through `scripts/candidate_plugin_replay.py`; see `replay/candidate_plugin_replay_status.md`.
-2. Lucerna's exact v0.3-required source files are missing in the current checkout and in current `origin/main`; the nearby docs are not treated as equivalent.
+2. Bobbio/Lucerna/Asteria real-project replay is frozen in `replay/real_project_replays/`, but running it requires explicit authorization to transmit those project documents to the child Codex/model provider for analysis.

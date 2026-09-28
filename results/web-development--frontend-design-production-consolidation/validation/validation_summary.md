@@ -69,4 +69,4 @@ Replay result:
   - `results/web-development--frontend-design-production-consolidation/replay/candidate_plugin_replay_run.json`
 - Output validation: PASS for 8 frozen scenarios and required routing/admission fields.
 
-`G6` Bobbio/Lucerna/Asteria real replay remains incomplete; Lucerna has a source-file preflight gap recorded in `replay/real_project_replay_preflight.md`.
+`G6` Bobbio/Lucerna/Asteria real replay remains incomplete. The exact Lucerna v0.3 files are now located at frozen `origin/main` ref `b626c2ce998882941dba0f30a00ecf627cc740b5`, and the real-project replay task/rubric/manifest are frozen under `replay/real_project_replays/`. Running that replay requires explicit user authorization to transmit the frozen Bobbio/Lucerna/Asteria project documents through the child Codex/model-provider path; auto-review rejected the attempt without that authorization.

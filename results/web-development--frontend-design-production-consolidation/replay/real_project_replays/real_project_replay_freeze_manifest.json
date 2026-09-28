@@ -1,0 +1,116 @@
+{
+  "schema": "FRONTEND_DESIGN_REAL_PROJECT_REPLAY_FREEZE_V1",
+  "task_key": "web-development--frontend-design-production-consolidation",
+  "candidate_commit": "fbf70ed65e6d5ff1be69135443522c4c4d7e58a8",
+  "implementation_commit": "1bb4650d8192d829b850abaccee53773ef50e091",
+  "files": {
+    "task": "results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_replay_task.md",
+    "rubric": "results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_replay_rubric.md",
+    "manifest": "results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_replay_freeze_manifest.json"
+  },
+  "projects": [
+    {
+      "name": "Bobbio",
+      "repo_path": "/home/yuukias/code/Bobbio",
+      "frozen_ref": "HEAD",
+      "frozen_commit": "445d31e5d5408b2a39948ad1d98613f6eb31e742",
+      "status_snapshot": "## main...origin/main",
+      "read_only_command_pattern": "git -C /home/yuukias/code/Bobbio show HEAD:<path>",
+      "sources": [
+        {
+          "path": "docs/design/FIGMA_HANDOFF.md",
+          "sha256": "88aa8d6ce622854ead2433464b52ca8685b96589fb35046441c58066e58f9a17"
+        },
+        {
+          "path": "design-qa.md",
+          "sha256": "194466808c1d1676a3891c69152ea3fc9f559d52205cec4186f33dc0f6b7bae8"
+        },
+        {
+          "path": "docs/design/Bobbio_Product_Design_Review.pdf",
+          "sha256": "34bf712135d7c83dc6fbc8a4757561478ea62a8c4a57d83dbe26259335294197",
+          "binary_locator_only": true
+        },
+        {
+          "path": "docs/design/prototype/qa/browser-qa.json",
+          "sha256": "beb202538d81205f93738294bc081242b493fc34f998da5eea0e9d77409f98c4"
+        }
+      ]
+    },
+    {
+      "name": "Lucerna",
+      "repo_path": "/home/yuukias/code/Lucerna",
+      "frozen_ref": "origin/main",
+      "frozen_commit": "b626c2ce998882941dba0f30a00ecf627cc740b5",
+      "status_snapshot": "## main...origin/main [behind 336]; untracked .gitignore, index.html, package.json, prompts/tasks/, src-tauri/, src/, tsconfig.json",
+      "read_only_command_pattern": "git -C /home/yuukias/code/Lucerna show origin/main:<path>",
+      "note": "The exact v0.3 Lucerna files are present at origin/main after read-only fetch. The dirty worktree was not pulled, cleaned, or checked out.",
+      "sources": [
+        {
+          "path": "AGENTS.md",
+          "sha256": "2567155e878496a1c95984acd3780b9e81a90a4d8db57b670fd7ac2cd2dd4d88"
+        },
+        {
+          "path": "docs/workflows/LUCERNA_VISUAL_ACCEPTANCE.md",
+          "sha256": "cc928c61346d7e7509c231cbe45dc3417b44ecc6f934453469890e06ce60bb46"
+        },
+        {
+          "path": "docs/design/lucerna/LUCERNA_UI_PRODUCT_SYSTEM_V1.md",
+          "sha256": "473250b9b1842adda9962bb6af172e07b2e045d54e9f303c39b94cf715d7bc99"
+        },
+        {
+          "path": "docs/design/lucerna/LUCERNA_EXTENSION_IDENTITY_STATUS_AUTH_V1.md",
+          "sha256": "e62a859754cf57943ddf949b6af58396c7228dc995a53e989f09bb8836c6fa92"
+        }
+      ]
+    },
+    {
+      "name": "Asteria",
+      "repo_path": "/home/yuukias/code/Asteria",
+      "frozen_ref": "HEAD",
+      "frozen_commit": "f2fbbc3cd2edb3f005ae939f8d30637966256098",
+      "status_snapshot": "## main...origin/main [behind 4]",
+      "read_only_command_pattern": "git -C /home/yuukias/code/Asteria show HEAD:<path>",
+      "sources": [
+        {
+          "path": "docs/design/accepted-concepts/README.md",
+          "sha256": "0852e274953817685304981c8ddcfd30af85ff79174bb8f6e8e5d08e5eb30f39"
+        },
+        {
+          "path": "results/asteria_v2_rc15_visual_system_result.md",
+          "sha256": "80d9114febeae4b4eb2151d87b83fdab8d83d34033992eb5fd6a403394ad5b2e"
+        },
+        {
+          "path": "docs/design/accepted-concepts/A_light_architecture.png",
+          "sha256": "ccf374f73b48a028661802afc218a35a0f5ca85ad647113590dfd0d70e8f5628",
+          "binary_locator_only": true
+        },
+        {
+          "path": "docs/design/accepted-concepts/B_dark_architecture.png",
+          "sha256": "43a6321582c438f363d47344eea1501be610bee4539af6b3be5fc8b2511f79ac",
+          "binary_locator_only": true
+        },
+        {
+          "path": "docs/design/accepted-concepts/C_symbol_trace.png",
+          "sha256": "fa6879beb5405be21ffa516fcf6e5cd12e2093583cf74b72b39c1656b27011b9",
+          "binary_locator_only": true
+        },
+        {
+          "path": "docs/design/accepted-concepts/D_variant_diff.png",
+          "sha256": "5c1a6bebcbd683aa6c4ed1223aaed96fe761fc020bd4ffc6a7841ea5460c88db",
+          "binary_locator_only": true
+        },
+        {
+          "path": "docs/design/accepted-concepts/E1_lineage.png",
+          "sha256": "99f05ea27157a058b0c557441c5c0886126fc7a067eb3a3620945b87347a0515",
+          "binary_locator_only": true
+        },
+        {
+          "path": "docs/design/accepted-concepts/E2_evidence.png",
+          "sha256": "ae4eb4361418008269d026ede5a448412647c3561067a7e1e2c00c54c1618313",
+          "binary_locator_only": true
+        }
+      ]
+    }
+  ],
+  "evidence_scope": "The manifest freezes locators and hashes only. Project source text is read by candidate replay from frozen Git refs and is not copied into repository evidence."
+}
