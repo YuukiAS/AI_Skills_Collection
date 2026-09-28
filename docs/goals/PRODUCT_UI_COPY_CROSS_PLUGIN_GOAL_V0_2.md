@@ -4,7 +4,7 @@ Status: `DRAFT_FOR_EXECUTION_READY_CRITIC`
 Architecture authority: `docs/design/product-ui-copy/PRODUCT_UI_COPY_CROSS_PLUGIN_PROPOSAL_V0_2_2026-09-28.md` @ `a0ac70226c7b1ddd7d6e33c9d4c00aebbf473f67`  
 Architecture Critic PASS: `docs/design/product-ui-copy/PRODUCT_UI_COPY_CROSS_PLUGIN_CRITIC_REVIEW_V0_2_2026-09-28.md`  
 Execution Plan: `docs/design/product-ui-copy/PRODUCT_UI_COPY_CROSS_PLUGIN_EXECUTION_PLAN_V0_2_2026-09-28.md`  
-Prior execution-ready review: `docs/design/product-ui-copy/PRODUCT_UI_COPY_CROSS_PLUGIN_EXECUTION_CRITIC_REVIEW_V0_2_2026-09-28.md` @ `c1982a3ffddeafbc906087ff1da40e5bcfc43e46` — only `PUC-ER-01` remained.  
+Prior execution-ready review: `docs/design/product-ui-copy/PRODUCT_UI_COPY_CROSS_PLUGIN_EXECUTION_CRITIC_REVIEW_V0_1_2026-09-28.md` @ `c1982a3ffddeafbc906087ff1da40e5bcfc43e46` — only `PUC-ER-01` remained.  
 Implementation authorization: **NO until v0.2 execution-ready Critic PASS + explicit user Kickoff**
 
 ## 1. Exact task identity
