@@ -62,6 +62,7 @@ EXPLICIT_SECRET_NAMES = {
 }
 BOOL_METADATA_FIELDS = ("trusted", "requires_network", "writes_files", "executes_code")
 SCOPE_ORDER = {"project": 0, "user": 1, "global": 2}
+AGGREGATE_ROUTING_MODES = {"choose-one", "coordinator-first"}
 
 
 class BuildError(RuntimeError):
@@ -537,6 +538,31 @@ def normalize_source_items(source_items: list[Any], context: str) -> list[dict[s
     return normalized
 
 
+def aggregate_routing_mode(entry: dict[str, Any], context: str) -> str:
+    value = entry.get("routing_mode", "choose-one")
+    if not isinstance(value, str) or value not in AGGREGATE_ROUTING_MODES:
+        allowed = ", ".join(sorted(AGGREGATE_ROUTING_MODES))
+        raise BuildError(f"{context}: routing_mode must be one of: {allowed}")
+    return value
+
+
+def aggregate_coordinator_artifact_id(entry: dict[str, Any], sources: list[dict[str, Any]], context: str) -> str | None:
+    mode = aggregate_routing_mode(entry, context)
+    value = entry.get("coordinator_artifact_id")
+    if mode == "choose-one":
+        if value:
+            raise BuildError(f"{context}: coordinator_artifact_id requires routing_mode coordinator-first")
+        return None
+
+    if not isinstance(value, str) or not value:
+        raise BuildError(f"{context}: coordinator-first aggregate needs coordinator_artifact_id")
+    artifact_id = validate_artifact_id(value, context)
+    source_ids = {str(source["artifact_id"]) for source in sources}
+    if artifact_id not in source_ids:
+        raise BuildError(f"{context}: coordinator_artifact_id {artifact_id} is not in source_skills")
+    return artifact_id
+
+
 def artifact_dirs_for_plugin(plugin: dict[str, Any], context: str) -> dict[str, str]:
     used: dict[str, str] = {}
     result: dict[str, str] = {}
@@ -623,6 +649,8 @@ def validate_repo_asset(path_text: Any, context: str, field: str) -> Path | None
 def aggregate_skill_markdown(entry: dict[str, Any], sources: list[dict[str, Any]], metadata: dict[str, Any]) -> str:
     name = str(entry["name"])
     description = str(entry["description"])
+    routing_mode = aggregate_routing_mode(entry, f"aggregate {name}")
+    coordinator_id = aggregate_coordinator_artifact_id(entry, sources, f"aggregate {name}")
     lines = [
         "---",
         f"name: {name}",
@@ -644,6 +672,9 @@ def aggregate_skill_markdown(entry: dict[str, Any], sources: list[dict[str, Any]
     lines.extend(yaml_string("brand_color", entry.get("brand_color")))
     lines.extend(yaml_string("icon_small", entry.get("icon_small")))
     lines.extend(yaml_string("icon_large", entry.get("icon_large")))
+    if routing_mode == "coordinator-first":
+        lines.extend(yaml_string("routing_mode", routing_mode))
+        lines.extend(yaml_string("coordinator_artifact_id", coordinator_id))
     prompts = [str(prompt) for prompt in entry.get("default_prompt", [])] if isinstance(entry.get("default_prompt"), list) else []
     lines.extend(yaml_list("default_prompt", prompts[:3]))
     lines.extend(
@@ -656,7 +687,11 @@ def aggregate_skill_markdown(entry: dict[str, Any], sources: list[dict[str, Any]
             "",
             description,
             "",
-            "Use this aggregate Codex App skill when the task matches one of the source workflows below.",
+            (
+                "Use this aggregate Codex App skill by entering the coordinator source first."
+                if routing_mode == "coordinator-first"
+                else "Use this aggregate Codex App skill when the task matches one of the source workflows below."
+            ),
             "",
             "## Source Workflows",
             "",
@@ -668,25 +703,38 @@ def aggregate_skill_markdown(entry: dict[str, Any], sources: list[dict[str, Any]
         source_name = str(meta.get("name") or source_dir.name)
         source_desc = str(meta.get("description") or "").strip()
         ref = f"_src/{source['artifact_id']}/source.md"
+        label = "coordinator" if source["artifact_id"] == coordinator_id else "delegate"
         if source_desc:
-            lines.append(f"- `{source_name}`: {source_desc} Reference: `{ref}`")
+            prefix = f" ({label})" if routing_mode == "coordinator-first" else ""
+            lines.append(f"- `{source_name}`{prefix}: {source_desc} Reference: `{ref}`")
         else:
-            lines.append(f"- `{source_name}`. Reference: `{ref}`")
+            prefix = f" ({label})" if routing_mode == "coordinator-first" else ""
+            lines.append(f"- `{source_name}`{prefix}. Reference: `{ref}`")
     workflow_notes = [str(note) for note in entry.get("workflow_notes", [])] if isinstance(entry.get("workflow_notes"), list) else []
     if workflow_notes:
         lines.extend(["", "## Plugin Workflow Notes", ""])
         lines.extend(f"- {note}" for note in workflow_notes)
-    lines.extend(
-        [
-            "",
-            "## Workflow",
-            "",
-            "1. Choose the source workflow whose trigger boundary best matches the user request.",
-            "2. Read that source workflow's `source.md` before acting.",
-            "3. Load only the needed files under that workflow's copied references, scripts, assets, or evals.",
-            "4. Follow the source workflow unless the current project gives stricter instructions.",
-        ]
-    )
+    lines.extend(["", "## Workflow", ""])
+    if routing_mode == "coordinator-first":
+        coordinator_ref = f"_src/{coordinator_id}/source.md"
+        lines.extend(
+            [
+                f"1. Read the coordinator source `{coordinator_ref}` first.",
+                "2. Let the coordinator classify the task, authority, surface, risk, and required delegates.",
+                "3. Load delegate sources only after the coordinator selects them.",
+                "4. Return delegate findings to the coordinator for convergence, admission, and final handoff.",
+                "5. Follow stricter current-project instructions when they apply.",
+            ]
+        )
+    else:
+        lines.extend(
+            [
+                "1. Choose the source workflow whose trigger boundary best matches the user request.",
+                "2. Read that source workflow's `source.md` before acting.",
+                "3. Load only the needed files under that workflow's copied references, scripts, assets, or evals.",
+                "4. Follow the source workflow unless the current project gives stricter instructions.",
+            ]
+        )
     return "\n".join(lines).rstrip() + "\n"
 
 

@@ -4,6 +4,42 @@
 
 No unreleased changes.
 
+## 5.3.1 - 2026-09-28
+
+Repository `5.3.1` is a compatible patch release for Frontend Design production
+consolidation.
+
+Repository bump decision: PATCH
+Reason: this release improves the existing `web-development` / Frontend Design
+plugin normal entry and production QA workflow without adding a new
+repository-level user capability.
+
+Affected plugins:
+- `web-development`: `0.2` -> `0.3`
+  Reason: Frontend Design now uses a coordinator-first normal entry, keeps
+  research-product frontend work as a specialist delegate, preserves default
+  choose-one aggregate behavior elsewhere, and adds explicit production
+  scale/authority/surface/evidence/admission closure.
+- all other central plugins: NO_BUMP
+  Reason: this release does not change their production behavior.
+
+Unchanged central plugin versions: `workflow-core 0.4`, `ai-skills-core 0.5`,
+`writing-style 0.3`, `research-writing 0.2`, `presentations 0.3`,
+`scientific-visualization 0.1`, `statistical-modeling 0.1`,
+`bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- The generated Frontend Design aggregate enters `frontend-visual-systems` as a
+  coordinator first, then loads product UX, visual direction, tokens, Figma,
+  motion, responsive/accessibility, browser-testing, or research-product
+  specialists only when selected.
+- The shared Marketplace generator supports an opt-in `coordinator-first` mode
+  while non-opt-in aggregates keep their existing choose-one workflow.
+- Candidate-visible Frontend Design regression scenarios now cover scale,
+  authority, browser/native evidence, interaction causality, unsupported visible
+  semantics, and implementation drift boundaries.
+
 ## 5.3.0 - 2026-09-25
 
 Repository `5.3.0` adds portable Slurm environment materialization and normal

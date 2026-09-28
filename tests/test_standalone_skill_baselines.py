@@ -45,7 +45,7 @@ EXPECTED_PLUGIN_VERSIONS = {
     "research-writing": "0.2",
     "presentations": "0.3",
     "scientific-visualization": "0.1",
-    "web-development": "0.2",
+    "web-development": "0.3",
     "statistical-modeling": "0.1",
     "bioinformatics": "0.1",
     "medical-imaging": "0.1",
@@ -88,7 +88,7 @@ class StandaloneSkillBaselineTests(unittest.TestCase):
             self.assertNotIn(info["path"].as_posix(), serialized)
 
     def test_repository_version_and_contact_sheet_are_stable(self) -> None:
-        self.assertEqual((REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip(), "5.3.0")
+        self.assertEqual((REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip(), "5.3.1")
 
         sheet = (REPO_ROOT / "docs" / "audits" / "ICON_CONTACT_SHEET.svg").read_text(encoding="utf-8")
         for slug, info in STANDALONE_SKILLS.items():

@@ -42,6 +42,13 @@ copy of private Notion examples.
 - Keep Figma tooling separate from general visual-design skills.
 - Prefer existing project components over pixel-copying everything.
 - Preserve meaningful design intent, not accidental spacing noise.
+- Treat Figma as authority only when the project or user names it as canonical;
+  no-Figma work remains a normal Frontend Design path through another durable
+  authority or current production grammar for narrow fixes.
+- For material design changes, close the design-source gap before letting
+  implementation drift become the new authority.
+- For round-trip work, record what changed in Figma, what changed in code, and
+  how the rendered result converges back to the canonical frame.
 
 ## Useful Tasks
 

@@ -37,6 +37,11 @@ already uses them or the task clearly needs them.
 - Use familiar controls: icons for toolbar actions, segmented controls for modes,
   checkboxes/toggles for binary options, sliders/inputs for numeric values.
 - Use real data passed by the user or clearly marked sample data.
+- Treat this skill as downstream implementation. It does not own design
+  authority, product semantics, or independent review admission.
+- If implementation exposes a design gap, missing state, unsupported metric,
+  unclear authority, or visual-system conflict, return to the Frontend Design
+  coordinator at P0/P1 instead of silently deciding in code.
 
 ## Tailwind Patterns
 

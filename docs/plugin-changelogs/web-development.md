@@ -4,6 +4,32 @@
 
 No pending released changes.
 
+## 0.3 - 2026-09-28
+
+Before:
+
+- Normal Frontend Design entry still generated a choose-one aggregate, so
+  generic work could start from a peer specialist instead of one coordinator.
+- Research-product frontend planning remained a separate generic active route,
+  which could bypass product/design authority classification.
+- Producer admission, browser/native evidence boundaries, handoff action
+  reachability, and scale-down were not encoded in one production coordinator
+  entry.
+
+After:
+
+- The production `frontend-visual-systems` aggregate is coordinator-first with
+  coordinator artifact `system`.
+- Product UX, visual direction, tokens, Figma handoff, motion,
+  responsive/accessibility review, webapp testing, and research-product
+  frontend are coordinator-selected delegates.
+- The shared generator now has a minimal opt-in `coordinator-first` mode while
+  non-opt-in aggregates retain choose-one behavior.
+- Frontend source skills now preserve S1/S2/S3 scale, conditional Figma,
+  no-Figma completion, browser/native evidence fidelity, interaction causality,
+  P1/P2/P3 producer admission, handoff action reachability, and downstream
+  builder boundaries.
+
 ## 0.2 - 2026-09-22
 
 Before:

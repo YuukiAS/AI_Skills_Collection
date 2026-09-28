@@ -1,0 +1,81 @@
+{
+  "schema": "FRONTEND_DESIGN_FINAL_CANDIDATE_IDENTITY_V1",
+  "task_key": "web-development--frontend-design-production-consolidation",
+  "candidate_status": "implementation_commit_with_candidate_and_real_project_replay",
+  "implementation_commit": "1bb4650d8192d829b850abaccee53773ef50e091",
+  "replay_evidence_commit": "df01fac271e030f9259a1510034380e2ec422f76",
+  "branch": "reviewed/web-development--frontend-design-production-consolidation",
+  "worktree": "/home/yuukias/AI_Skills_Collection-web-development--frontend-design-production-consolidation",
+  "repository_version": "5.3.1",
+  "plugin": "web-development",
+  "plugin_version": "0.3",
+  "release_decision": {
+    "repository_bump": "PATCH",
+    "repository_version_delta": "5.3.0 -> 5.3.1",
+    "affected_plugins": {
+      "web-development": "0.2 -> 0.3"
+    },
+    "all_other_central_plugins": "NO_BUMP",
+    "web_development_maturity": "unclassified"
+  },
+  "candidate_marketplace": {
+    "name": "ai-skills-candidate",
+    "local_path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3",
+    "plugin_selector": "web-development@ai-skills-candidate",
+    "status": "candidate_replay_completed",
+    "reason": "Replay used scripts/candidate_plugin_replay.py with the pinned repo-local Codex runtime and process-local candidate selector."
+  },
+  "candidate_replay_runtime": {
+    "version": "codex-cli 0.153.4",
+    "path": ".local-runtime/codex/0.153.4/bin/codex",
+    "binary_sha256": "56ef98ab4032d317ab26e9b5e5a175650717351edb16ed9cde0cb6d1734d62da",
+    "archive_sha256": "a822187e1a2420c61c5926721bfbd878701ed95547c9bb0d4de4498a16ba1821"
+  },
+  "candidate_replay": {
+    "run_id": "20260928T030747Z-2077704",
+    "runtime_version": "codex-cli 0.153.4",
+    "actual_consumption": {
+      "proven": true,
+      "event_type": "item.started",
+      "line_index": 8
+    },
+    "outputs": {
+      "routing_decisions": "results/web-development--frontend-design-production-consolidation/replay/candidate_routing_decisions.md",
+      "source_evidence": "results/web-development--frontend-design-production-consolidation/replay/candidate_source_evidence.json",
+      "run_manifest": "results/web-development--frontend-design-production-consolidation/replay/candidate_plugin_replay_run.json"
+    },
+    "scope": "routing/admission analysis only; no external project modified"
+  },
+  "real_project_replay": {
+    "run_id": "20260928T032921Z-2135985",
+    "candidate_commit": "df01fac271e030f9259a1510034380e2ec422f76",
+    "runtime_version": "codex-cli 0.153.4",
+    "actual_consumption": {
+      "proven": true,
+      "event_type": "item.started",
+      "line_index": 8
+    },
+    "projects": {
+      "Bobbio": {
+        "counts_as_compatibility": true,
+        "counts_as_plugin_capability": false
+      },
+      "Lucerna": {
+        "counts_as_compatibility": true,
+        "counts_as_plugin_capability": false
+      },
+      "Asteria": {
+        "counts_as_compatibility": true,
+        "counts_as_plugin_capability": false
+      }
+    },
+    "maturity_result": "unclassified",
+    "outputs": {
+      "attribution_md": "results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_attribution.md",
+      "attribution_json": "results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_attribution.json",
+      "source_consumption": "results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_source_consumption.json",
+      "run_manifest": "results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_replay_run.json"
+    },
+    "scope": "read-only frozen-source attribution; no target project modified; source text not copied into repository evidence"
+  }
+}
