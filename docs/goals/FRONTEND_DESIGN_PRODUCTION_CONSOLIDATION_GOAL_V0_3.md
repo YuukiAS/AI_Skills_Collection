@@ -447,7 +447,7 @@ Kickoff v0.3 使用前，Codex 必须从 repo 读取：
 - `REVIEWED_PACKAGE_VERSION = v0.3`
 - `RESULT = PASS`
 - `READY_FOR_CODEX = YES`
-- approved Plan/Goal/Kickoff 都是 v0.2 path
+- approved Plan/Goal/Kickoff 都是 v0.3 path
 - approved task key / branch / sibling worktree 一致
 - `APPROVED_PACKAGE_COMMIT` 是 Critic 实际审查的 package commit
 - architecture authority 仍是 Proposal v0.3 @ `effa02b4e7e02f012ea24bda1683857609a09fe1`
