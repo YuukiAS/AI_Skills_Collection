@@ -50,6 +50,21 @@ specific project documents to the provider.
 No workaround was used. The next required action is an explicit user decision on
 whether this bounded provider transmission is authorized.
 
+If authorized, resume with this exact command from the reviewed worktree:
+
+```bash
+python scripts/candidate_plugin_replay.py replay \
+  --plugin web-development \
+  --candidate-commit 2bd1a3fbba5254a4fe6dbfce752287dd8380e403 \
+  --task results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_replay_task.md \
+  --input results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_replay_freeze_manifest.json \
+  --input results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_replay_rubric.md
+```
+
+After replay, copy only repo-safe summaries from the runtime output directory to
+`results/web-development--frontend-design-production-consolidation/replay/real_project_replays/`.
+Do not copy raw project source text into AI_Skills evidence.
+
 ## Requested Authorization Envelope
 
 Authorize only the following, if approved:
