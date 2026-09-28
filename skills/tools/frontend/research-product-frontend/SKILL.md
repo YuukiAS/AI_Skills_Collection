@@ -24,6 +24,11 @@ Use this skill for frontend surfaces where scientific evidence, models, images, 
 - Define domain-specific UI constraints for medical imaging, CMR, phenotype, model, provenance, and statistical evidence interfaces.
 - Keep project facts in the project repository; this skill supplies reusable interface patterns.
 - Do not build the frontend directly; hand off to `build-web-apps` or project implementation tools.
+- Act as a research-specific specialist after the Frontend Design coordinator
+  has classified the generic product/design route. Do not bypass the coordinator
+  as a second generic frontend owner.
+- Do not duplicate generic product UX rules; focus on research-specific density,
+  evidence, comparison, provenance, uncertainty, and expert review needs.
 
 ## Workflow
 

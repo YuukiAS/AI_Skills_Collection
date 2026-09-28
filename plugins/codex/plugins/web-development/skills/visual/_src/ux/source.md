@@ -23,11 +23,19 @@ page, app, dashboard, workflow, landing page, or product surface.
 
 1. Define the product job in one sentence.
 2. Identify the audience, domain, frequency of use, and content density.
-3. Map the primary workflow and the secondary workflows.
+3. Map the primary workflow, secondary workflows, and handoff actions.
 4. Choose the first screen by user intent, not by marketing convention.
 5. List required states: empty, loading, error, success, permission, offline, long-content, and small-screen.
-6. Decide what information must be real, user-provided, or clearly sample.
-7. Remove filler copy, decorative labels, fake telemetry, and themed wording for standard actions.
+6. Define actionability and lifecycle rules: what is visible, enabled, disabled, pending, destructive, or user-only.
+7. Decide what information must be real, user-provided, or clearly sample.
+8. Remove filler copy, decorative labels, fake telemetry, and themed wording for standard actions.
+
+## Ownership
+
+- Own the P0 product/state contract before visual styling or implementation.
+- Distinguish normal user flows from diagnostics, admin-only tools, and developer-only recovery surfaces.
+- For visible metrics, rankings, model scores, provenance, and status values, require a durable semantic source; do not let UI styling invent unsupported numbers or priority claims.
+- When a UI action will be handed to the user, define the expected next state or the safe user-only boundary so the coordinator can verify reachability.
 
 ## Output Standard
 
@@ -41,6 +49,7 @@ page, app, dashboard, workflow, landing page, or product surface.
 
 After planning, route to:
 
-- `frontend-visual-direction` for the visual system.
-- `frontend-design-system-tokens` for reusable tokens.
-- `frontend-implementation-react-tailwind` for production code.
+- the Frontend Design coordinator for delegate selection and admission;
+- `visual-direction` for whole-screen direction;
+- `design-system-tokens` for reusable tokens;
+- the implementation builder only after the coordinator has accepted the product/design contract.

@@ -1,0 +1,32 @@
+{
+  "schema": "FRONTEND_DESIGN_FINAL_CANDIDATE_IDENTITY_V1",
+  "task_key": "web-development--frontend-design-production-consolidation",
+  "candidate_status": "pre_commit_worktree_candidate",
+  "branch": "reviewed/web-development--frontend-design-production-consolidation",
+  "worktree": "/home/yuukias/AI_Skills_Collection-web-development--frontend-design-production-consolidation",
+  "repository_version": "5.3.1",
+  "plugin": "web-development",
+  "plugin_version": "0.3",
+  "release_decision": {
+    "repository_bump": "PATCH",
+    "repository_version_delta": "5.3.0 -> 5.3.1",
+    "affected_plugins": {
+      "web-development": "0.2 -> 0.3"
+    },
+    "all_other_central_plugins": "NO_BUMP",
+    "web_development_maturity": "unclassified"
+  },
+  "candidate_marketplace": {
+    "name": "ai-skills-candidate",
+    "local_path": ".local-runtime/candidate-plugin-replay/staged-marketplaces/<run-id>",
+    "plugin_selector": "web-development@ai-skills-candidate",
+    "status": "repo_local_replay_runtime_ready",
+    "reason": "Use scripts/candidate_plugin_replay.py with the pinned repo-local Codex runtime; do not mutate live/global Codex plugin configuration."
+  },
+  "candidate_replay_runtime": {
+    "version": "codex-cli 0.153.4",
+    "path": ".local-runtime/codex/0.153.4/bin/codex",
+    "binary_sha256": "56ef98ab4032d317ab26e9b5e5a175650717351edb16ed9cde0cb6d1734d62da",
+    "archive_sha256": "a822187e1a2420c61c5926721bfbd878701ed95547c9bb0d4de4498a16ba1821"
+  }
+}

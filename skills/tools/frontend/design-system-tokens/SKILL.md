@@ -59,6 +59,21 @@ For shared components, define:
 - Responsive behavior.
 - Token dependencies.
 
+## Ownership
+
+- Own semantic typography, color, surface, border, status, spacing, state, and
+  component grammar once the coordinator has accepted the product/design route.
+- For icons, preserve source authority: prefer canonical platform/component
+  sources, separate brand marks from generic UI icons, keep a central registry
+  or component path when the project has one, normalize optical size/stroke, and
+  record third-party source, license, and provenance when external assets are
+  used.
+- Component and icon repairs must preserve accessibility, theme behavior,
+  hover/focus/disabled states, and reduced-motion expectations.
+- Do not treat a token update as authority to change product meaning, Figma
+  intent, or actual-surface evidence requirements; return those gaps to the
+  coordinator.
+
 ## Output
 
 Provide code-ready tokens plus short usage guidance. If an existing design system

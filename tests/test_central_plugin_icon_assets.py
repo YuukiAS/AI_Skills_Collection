@@ -21,7 +21,7 @@ TARGET_ICONS = {
 TARGET_PLUGIN_VERSIONS = {
     "presentations": "0.3",
     "scientific-visualization": "0.1",
-    "web-development": "0.2",
+    "web-development": "0.3",
     "statistical-modeling": "0.1",
     "medical-imaging": "0.1",
 }
@@ -46,7 +46,7 @@ class CentralPluginIconAssetTests(unittest.TestCase):
         config = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         plugins = {plugin["name"]: plugin for plugin in config["plugins"]}
 
-        self.assertEqual((REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip(), "5.3.0")
+        self.assertEqual((REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip(), "5.3.1")
         for slug, version in TARGET_PLUGIN_VERSIONS.items():
             self.assertEqual(plugins[slug]["version"], version)
         for slug, path in TARGET_ICONS.items():

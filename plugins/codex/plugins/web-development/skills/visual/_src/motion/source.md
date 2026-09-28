@@ -50,6 +50,17 @@ Avoid scattered animation that competes with the interface.
 - Avoid animation that changes layout unexpectedly.
 - Provide `prefers-reduced-motion` fallbacks.
 
+## Ownership
+
+- Own motion intent: orientation, continuity, feedback, hierarchy, and deliberate
+  delight.
+- Separate design motion from runtime latency, data loading, and jank. Runtime
+  performance defects go back to implementation/testing; do not invent a
+  universal cross-project millisecond budget as a design rule.
+- Motion should support F-C actual-surface convergence: verify that animation
+  does not hide content, break focus, misrepresent state, or create a competing
+  interaction path.
+
 ## Verification
 
 Confirm animations do not cause jank, obscure text, trap focus, or delay primary tasks.

@@ -47,6 +47,19 @@ unless the user explicitly asks for an exploratory moodboard.
 - Use real visual assets for websites and landing pages when assets matter.
 - Keep palette, typography, surface, and layout mutually consistent.
 
+## Ownership
+
+- Own whole-screen direction: hierarchy, composition, density, rhythm, imagery,
+  texture, and the visible differentiator.
+- Freeze the direction before token or implementation work begins; later drift
+  should return to the coordinator rather than becoming ad hoc code tweaks.
+- Judge taste with observable questions: does the actual screen expose the
+  product, prioritize the right state, use one coherent visual idea, and avoid
+  assembled-demo artifacts?
+- Do not decide product state semantics, Figma authority, browser/native
+  evidence sufficiency, or accessibility closure by yourself; return those to
+  the coordinator and the relevant delegates.
+
 ## Verification
 
 Before shipping, inspect whether:

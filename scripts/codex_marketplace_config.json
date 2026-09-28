@@ -334,7 +334,7 @@
     },
     {
       "name": "web-development",
-      "version": "0.2",
+      "version": "0.3",
       "displayName": "Frontend Design",
       "description": "Frontend reference research, visual taste systems, motion/icon resource routing, and research product frontend constraints that complement official build-web-apps and Figma.",
       "category": "Web Development",
@@ -360,10 +360,16 @@
           "description": "Frontend visual direction, design tokens, typography, palette, icon, layout, density, and motion brief.",
           "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
           "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
+          "routing_mode": "coordinator-first",
+          "coordinator_artifact_id": "system",
           "source_skills": [
             {
               "source": "skills/tools/frontend/frontend-visual-systems",
               "artifact_id": "system"
+            },
+            {
+              "source": "skills/tools/frontend/product-ux-planning",
+              "artifact_id": "ux"
             },
             {
               "source": "skills/tools/frontend/visual-direction",
@@ -380,24 +386,18 @@
             {
               "source": "skills/tools/frontend/motion-interaction",
               "artifact_id": "motion"
-            }
-          ]
-        },
-        {
-          "type": "aggregate",
-          "name": "research-product-frontend",
-          "artifact_id": "research",
-          "description": "High-density research product frontend planning for imaging, phenotype, model comparison, provenance, and experiment interfaces.",
-          "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
-          "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
-          "source_skills": [
-            {
-              "source": "skills/tools/frontend/research-product-frontend",
-              "artifact_id": "product"
             },
             {
-              "source": "skills/tools/frontend/product-ux-planning",
-              "artifact_id": "ux"
+              "source": "skills/tools/frontend/responsive-accessibility-review",
+              "artifact_id": "responsive"
+            },
+            {
+              "source": "skills/tools/frontend/webapp-testing",
+              "artifact_id": "webapp-testing"
+            },
+            {
+              "source": "skills/tools/frontend/research-product-frontend",
+              "artifact_id": "research"
             }
           ]
         }

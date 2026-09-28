@@ -1,0 +1,55 @@
+{
+  "schema": "FRONTEND_DESIGN_COORDINATOR_REGRESSION_SCENARIOS_V1",
+  "task_key": "web-development--frontend-design-production-consolidation",
+  "candidate_visible": true,
+  "scenarios": [
+    {
+      "id": "s1_browser_tiny_spacing_fix",
+      "prompt": "The existing browser dashboard has one primary action button whose label nearly touches the icon at narrow width. Fix only the spacing and alignment so it matches the current product grammar.",
+      "project_context": "The project has shipped components and no active Figma handoff for this small repair.",
+      "surface": "browser"
+    },
+    {
+      "id": "s2_durable_authority_settings_panel",
+      "prompt": "Add a bounded settings panel to an existing admin page using the current design brief and component system. The panel has saved, saving, error, disabled, and permission-denied states.",
+      "project_context": "The design brief is the durable authority. The rest of the page should not be redesigned.",
+      "surface": "browser"
+    },
+    {
+      "id": "s3_no_figma_product_redesign",
+      "prompt": "Redesign a multi-step onboarding workflow for a browser product that has a product brief, existing screenshots, and no Figma file.",
+      "project_context": "The redesign changes information architecture, first screen, state model, and navigation.",
+      "surface": "browser"
+    },
+    {
+      "id": "canonical_figma_material_change",
+      "prompt": "Implement the latest canonical Figma frame for a billing screen. The current code differs from the frame in hierarchy, empty state layout, and button grouping.",
+      "project_context": "The Figma frame is the named design authority for this screen.",
+      "surface": "browser"
+    },
+    {
+      "id": "native_handoff_action_reachability",
+      "prompt": "Review a native WebView tray before asking the user to choose a local folder from the displayed control.",
+      "project_context": "The producer may safely interact with the UI until the folder picker reaches the human-only boundary.",
+      "surface": "native-WebView"
+    },
+    {
+      "id": "competing_route_interaction_claim",
+      "prompt": "Verify that a browser popover closes because of the outside-click path rather than because navigation remounts the page.",
+      "project_context": "Both paths can produce a closed final state.",
+      "surface": "browser"
+    },
+    {
+      "id": "unsupported_metric_ranking_semantic_claim",
+      "prompt": "A model comparison table ranks three experiments and labels one as best, but the repo only provides raw metric values and no ranking rule.",
+      "project_context": "The UI should not invent unsupported priority or metric meaning.",
+      "surface": "browser"
+    },
+    {
+      "id": "implementation_drift_should_not_change_design",
+      "prompt": "The rendered page uses the wrong token for an accepted card border. The design source and product state are otherwise current.",
+      "project_context": "Repair the implementation drift without changing the accepted design authority.",
+      "surface": "browser"
+    }
+  ]
+}
