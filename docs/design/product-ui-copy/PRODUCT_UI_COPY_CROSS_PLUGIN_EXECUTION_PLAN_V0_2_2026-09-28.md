@@ -2,7 +2,7 @@
 
 Date: 2026-09-28  
 Status: `DRAFT_FOR_EXECUTION_READY_CRITIC_RE_REVIEW`  
-Prior execution-ready review: `docs/design/product-ui-copy/PRODUCT_UI_COPY_CROSS_PLUGIN_EXECUTION_CRITIC_REVIEW_V0_2_2026-09-28.md` @ `c1982a3ffddeafbc906087ff1da40e5bcfc43e46` — `REVISE / READY_FOR_CODEX=NO`  
+Prior execution-ready review: `docs/design/product-ui-copy/PRODUCT_UI_COPY_CROSS_PLUGIN_EXECUTION_CRITIC_REVIEW_V0_1_2026-09-28.md` @ `c1982a3ffddeafbc906087ff1da40e5bcfc43e46` — `REVISE / READY_FOR_CODEX=NO`  
 Recovery scope: close only `PUC-ER-01` final-candidate chronology; all other v0.1 execution findings remain PASS.  
 Repository: `YuukiAS/AI_Skills_Collection`  
 Architecture authority: `docs/design/product-ui-copy/PRODUCT_UI_COPY_CROSS_PLUGIN_PROPOSAL_V0_2_2026-09-28.md` @ `a0ac70226c7b1ddd7d6e33c9d4c00aebbf473f67`  
@@ -642,15 +642,19 @@ Do not force every scenario to cover a unique category if a natural scenario cov
 
 Use only known/synthetic/development evidence from G1–G6.
 
-**H2 — final candidate freeze**
+**H2 — versioned final candidate freeze + mandatory same-candidate release rerun**
 
 After implementation + known regressions + rendered acceptance are stable:
 
 1. apply the release metadata once;
-2. regenerate;
-3. freeze exact candidate commit;
+2. regenerate packaged plugins / Marketplace;
+3. freeze the exact versioned H2 candidate commit;
 4. freeze reviewer criteria;
-5. prohibit product tuning before H3/H4.
+5. prohibit production tuning while testing that H2 candidate;
+6. directly rerun every release-critical G1–G6 gate marked `Final candidate = YES` on that exact H2 candidate;
+7. enter H3 only after one exact H2 candidate has complete G1–G6 PASS.
+
+If any H2 G1–G6 gate fails, repair the same selected release version, freeze a new H2 candidate, and rerun all release-critical G1–G6 before H3. Pre-H2 G1–G6 are development evidence only and cannot be spliced into release PASS.
 
 **H3 — independent exact holdout freeze**
 
