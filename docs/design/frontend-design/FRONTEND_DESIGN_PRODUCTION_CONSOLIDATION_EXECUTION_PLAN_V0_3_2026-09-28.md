@@ -50,7 +50,7 @@ state = PLAN_REQUESTED
 next_action = RUN_GPT_PLANNER
 ```
 
-Planner 当前 GitHub surface 不能直接读取用户机器上的 `/home/yuukias` working tree；本轮检查时远端 reviewed branch 也尚未发布。因此 v0.2 不伪称已独立验证本地 clean/base，而把以下项冻结为 recovery hard gate：
+Planner 当前 GitHub surface 不能直接读取用户机器上的 `/home/yuukias` working tree；本轮检查时远端 reviewed branch 也尚未发布。因此 v0.3 不伪称已独立验证本地 clean/base，而把以下项冻结为 recovery hard gate：
 
 - `git worktree list --porcelain` 中 exact sibling path 绑定 exact reviewed branch；
 - `REQUEST.md` 的 Reviewed worktree locator 等于该 sibling path；
@@ -329,7 +329,7 @@ Lucerna 01052 的 `Choose folder` 事故属于该 gate 的已知 regression，�
 
 ---
 
-## 9. Capability Gate Matrix v0.2
+## 9. Capability Gate Matrix v0.3
 
 所有 release-critical gates 必须由同一个 final candidate 直接通过，不拼接不同 commit 的 PASS。
 
