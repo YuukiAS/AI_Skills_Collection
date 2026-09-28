@@ -1,10 +1,10 @@
 # Real-Project Replay Status
 
-Status: `AWAITING_USER_AUTHORIZATION_FOR_PROVIDER_TRANSMISSION`
+Status: `PASS_COMPATIBILITY_ONLY`
 
 Task key: `web-development--frontend-design-production-consolidation`
 
-Candidate plugin commit: `fbf70ed65e6d5ff1be69135443522c4c4d7e58a8`
+Candidate plugin replay commit: `df01fac271e030f9259a1510034380e2ec422f76`
 
 ## What Is Frozen
 
@@ -39,18 +39,10 @@ HEAD. A read-only `git fetch origin main` updated `origin/main` to
 The Lucerna worktree remains dirty/behind and was not pulled, cleaned, reset, or
 checked out.
 
-## Why Replay Has Not Run
+## Replay Authorization And Run
 
-Running the G6 candidate replay would require the child Codex runtime to read
-Bobbio/Lucerna/Asteria project documents and send relevant content to the model
-provider for analysis. Auto-review rejected this operation because the current
-user-visible authorization does not explicitly approve transmitting those
-specific project documents to the provider.
-
-No workaround was used. The next required action is an explicit user decision on
-whether this bounded provider transmission is authorized.
-
-If authorized, resume with this exact command from the reviewed worktree:
+The user explicitly authorized this bounded provider transmission for the frozen
+Bobbio/Lucerna/Asteria files listed in the manifest. The replay was run with:
 
 ```bash
 python scripts/candidate_plugin_replay.py replay \
@@ -61,13 +53,42 @@ python scripts/candidate_plugin_replay.py replay \
   --input results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_replay_rubric.md
 ```
 
-After replay, copy only repo-safe summaries from the runtime output directory to
-`results/web-development--frontend-design-production-consolidation/replay/real_project_replays/`.
-Do not copy raw project source text into AI_Skills evidence.
+Run result:
+
+- Run id: `20260928T032921Z-2135985`
+- Actual plugin consumption: `proven=true`, event `item.started`, line index `8`
+- Candidate selector: `web-development@ai-skills-candidate`
+- Runtime version: `codex-cli 0.153.4`
+- Child stderr: empty
+
+Repo-safe outputs:
+
+```text
+3a58facb4f957c3e7efd79878ab27c7beb7a56a642c1aac14de8eb0aad0123e7  results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_attribution.md
+37ea0eb88308c6726ffde400aaf4b15c9a8b803ea5a666786665b02f85381a13  results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_attribution.json
+dbfff9c3b25176c907327fdc1d6ca8ab38ba23574409f827a0bfb5d4015cb47a  results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_source_consumption.json
+2936acecf0ad2ed6d7c8c3b25cf0afa2fed5b44b7f295ee6bc9198cd2e7667c8  results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_replay_run.json
+```
+
+The freeze manifest was created before the final resume-command evidence commit
+and declares candidate commit `fbf70ed65e6d5ff1be69135443522c4c4d7e58a8`.
+The actual replay installed candidate commit
+`df01fac271e030f9259a1510034380e2ec422f76`. The intervening commits changed only
+task evidence/status files, not the generated `web-development` payload.
+
+## Attribution Result
+
+- Bobbio: `COUNTS_AS_COMPATIBILITY=true`, `COUNTS_AS_PLUGIN_CAPABILITY=false`
+- Lucerna: `COUNTS_AS_COMPATIBILITY=true`, `COUNTS_AS_PLUGIN_CAPABILITY=false`
+- Asteria: `COUNTS_AS_COMPATIBILITY=true`, `COUNTS_AS_PLUGIN_CAPABILITY=false`
+
+All three prove compatibility/regression only. No project supplies plugin
+capability evidence beyond its repo-local rules and historical evidence.
+`web-development` maturity remains `unclassified`.
 
 ## Requested Authorization Envelope
 
-Authorize only the following, if approved:
+The replay used only the authorized envelope:
 
 - Data scope: the frozen files listed in `real_project_replay_freeze_manifest.json`
   from Bobbio, Lucerna, and Asteria.

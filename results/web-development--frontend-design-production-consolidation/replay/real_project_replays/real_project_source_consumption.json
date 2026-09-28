@@ -1,0 +1,386 @@
+{
+  "schema": "FRONTEND_DESIGN_REAL_PROJECT_SOURCE_CONSUMPTION_V1",
+  "task_key": "web-development--frontend-design-production-consolidation",
+  "analysis_mode": "read_only_frozen_source_attribution",
+  "input_manifest": {
+    "path": "inputs/01-real_project_replay_freeze_manifest.json",
+    "sha256": "4903e20d19941eb5c64f6b9da56aadfb6971a3d7492766c67363ea27cb457457"
+  },
+  "input_rubric": {
+    "path": "inputs/02-real_project_replay_rubric.md",
+    "sha256": "41c11b19c34f1f61ed9a632f650972f26e7af705f0bdace173151bb3ae910e1f"
+  },
+  "candidate_identity": {
+    "installed_root": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3",
+    "candidate_commit_declared_by_manifest": "fbf70ed65e6d5ff1be69135443522c4c4d7e58a8",
+    "implementation_commit_declared_by_manifest": "1bb4650d8192d829b850abaccee53773ef50e091",
+    "identity_limit": "安装路径标注 0.3；本轮记录实际读取文件的哈希，未独立证明整个安装 payload 与 manifest candidate commit 的逐文件一致性。"
+  },
+  "entry": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/SKILL.md",
+  "coordinator": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/system/source.md",
+  "candidate_plugin_sources_read": [
+    {
+      "read_order": 1,
+      "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/SKILL.md",
+      "sha256": "f974c12884452f27fc8fb1e411c55ab025d07f7a61f987ae60360d601b624f84",
+      "role": "normal_generated_entry"
+    },
+    {
+      "read_order": 2,
+      "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/system/source.md",
+      "sha256": "cc55cd7637d5209841ba4dfdb24b8117274aa83c03717d3385981d78f130c77a",
+      "role": "coordinator"
+    },
+    {
+      "read_order": 3,
+      "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/figma/source.md",
+      "sha256": "0de0ae7eb88d976e738e032bd40d5dfdd4940145b0ec04b4a33f85a215d82920",
+      "role": "selected_delegate"
+    },
+    {
+      "read_order": 4,
+      "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/ux/source.md",
+      "sha256": "fd3ca2d8d9175b8a364f674892a54ab7d6e34bfa8dc871c60770ed797089eb04",
+      "role": "selected_delegate"
+    },
+    {
+      "read_order": 5,
+      "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/tokens/source.md",
+      "sha256": "64898aea9a77c533e47a89a51164cd87b4db65588a2900033ebdf632dd3f62f7",
+      "role": "selected_delegate"
+    },
+    {
+      "read_order": 6,
+      "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/responsive/source.md",
+      "sha256": "91a6e25732663011a92fda2850da7b4e5477825a5d20951e59953caa5f6ba527",
+      "role": "selected_delegate"
+    },
+    {
+      "read_order": 7,
+      "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/webapp-testing/source.md",
+      "sha256": "0522127c7dd6ef69f4d467a8a991f2da1685edea5b400fddff6365a9c41ca78b",
+      "role": "selected_delegate"
+    },
+    {
+      "read_order": 8,
+      "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/direction/source.md",
+      "sha256": "ed4c05469870b60e5f1300d7217dc51535ab3810e6e58275104c24a9a999178d",
+      "role": "selected_delegate"
+    },
+    {
+      "read_order": 9,
+      "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/research/source.md",
+      "sha256": "6c6f291eab109d4d4c621636b11dce7d84db103356f6d66d590afd2602322003",
+      "role": "selected_delegate"
+    }
+  ],
+  "consumption_sequence": [
+    "read manifest and rubric",
+    "locate installed candidate files by path listing",
+    "read generated normal entry",
+    "read coordinator source",
+    "read frozen project sources and verify hashes",
+    "select per-project delegates from authority/surface/state requirements",
+    "read union of selected delegate sources in recorded order",
+    "converge attribution and validate outputs"
+  ],
+  "projects": [
+    {
+      "project": "Bobbio",
+      "frozen_ref": "HEAD",
+      "frozen_commit": "445d31e5d5408b2a39948ad1d98613f6eb31e742",
+      "ref_resolved_at_read_and_validation": "445d31e5d5408b2a39948ad1d98613f6eb31e742",
+      "read_method": "git -C <repo_path> show <frozen_commit>:<path>; immutable commit pins the manifest ref",
+      "project_sources": [
+        {
+          "path": "docs/design/FIGMA_HANDOFF.md",
+          "expected_sha256": "88aa8d6ce622854ead2433464b52ca8685b96589fb35046441c58066e58f9a17",
+          "actual_sha256": "88aa8d6ce622854ead2433464b52ca8685b96589fb35046441c58066e58f9a17",
+          "hash_match": true,
+          "bytes": 5335,
+          "consumption": "text_read"
+        },
+        {
+          "path": "design-qa.md",
+          "expected_sha256": "194466808c1d1676a3891c69152ea3fc9f559d52205cec4186f33dc0f6b7bae8",
+          "actual_sha256": "194466808c1d1676a3891c69152ea3fc9f559d52205cec4186f33dc0f6b7bae8",
+          "hash_match": true,
+          "bytes": 9799,
+          "consumption": "text_read"
+        },
+        {
+          "path": "docs/design/Bobbio_Product_Design_Review.pdf",
+          "expected_sha256": "34bf712135d7c83dc6fbc8a4757561478ea62a8c4a57d83dbe26259335294197",
+          "actual_sha256": "34bf712135d7c83dc6fbc8a4757561478ea62a8c4a57d83dbe26259335294197",
+          "hash_match": true,
+          "bytes": 8405370,
+          "consumption": "blob_hash_only_no_visual_inspection"
+        },
+        {
+          "path": "docs/design/prototype/qa/browser-qa.json",
+          "expected_sha256": "beb202538d81205f93738294bc081242b493fc34f998da5eea0e9d77409f98c4",
+          "actual_sha256": "beb202538d81205f93738294bc081242b493fc34f998da5eea0e9d77409f98c4",
+          "hash_match": true,
+          "bytes": 9219,
+          "consumption": "text_read"
+        }
+      ],
+      "coordinator_source": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/system/source.md",
+      "route": "本轮为源码归属分析。项目路径为 canonical Figma → 已有产品/状态契约 → tokens/响应式交接 → 对应实现的浏览器验证。若开展后续完整生产 UI 实现，应按 S3/P0–P4 处理；局部修复仍按实际改动另定 S1/S2，不因使用 Figma 自动升级规模。历史原型只作交互/QA 基线，不能取代 Figma 或证明后续实现已收敛。",
+      "delegates": [
+        {
+          "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/figma/source.md",
+          "reason": "核对既定 Figma 权威与交接边界；不访问在线文件。",
+          "mode": "source_only_route_analysis_not_runtime_execution"
+        },
+        {
+          "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/ux/source.md",
+          "reason": "保留阅读、候选知识与人工核验的状态语义。",
+          "mode": "source_only_route_analysis_not_runtime_execution"
+        },
+        {
+          "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/tokens/source.md",
+          "reason": "识别既有组件与 Light/Dark 共享规则；不生成新 tokens。",
+          "mode": "source_only_route_analysis_not_runtime_execution"
+        },
+        {
+          "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/responsive/source.md",
+          "reason": "识别笔记本、宽屏、移动端及阅读区域的既有约束。",
+          "mode": "source_only_route_analysis_not_runtime_execution"
+        },
+        {
+          "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/webapp-testing/source.md",
+          "reason": "解释历史浏览器断言的表面和版本边界；不重跑测试。",
+          "mode": "source_only_route_analysis_not_runtime_execution"
+        }
+      ],
+      "evidence_limits": [
+        "Figma 文件的存在、完成状态和历史 connector 限制仅由冻结 handoff 报告；本轮未打开 Figma、核验节点或做 round-trip。",
+        "browser-qa.json 含历史真实交互断言及布局结果；本轮只是读取记录，未运行浏览器、查看截图或复测当前实现。",
+        "PDF 仅验证 Git blob 与哈希，未解析或看图；其他引用截图/brief/代码不在清单读取范围。",
+        "历史 pre-Figma 原型 PASS 不能升级成当前 production、native、provider、持久化或独立验收 PASS。"
+      ]
+    },
+    {
+      "project": "Lucerna",
+      "frozen_ref": "origin/main",
+      "frozen_commit": "b626c2ce998882941dba0f30a00ecf627cc740b5",
+      "ref_resolved_at_read_and_validation": "b626c2ce998882941dba0f30a00ecf627cc740b5",
+      "read_method": "git -C <repo_path> show <frozen_commit>:<path>; immutable commit pins the manifest ref",
+      "project_sources": [
+        {
+          "path": "AGENTS.md",
+          "expected_sha256": "2567155e878496a1c95984acd3780b9e81a90a4d8db57b670fd7ac2cd2dd4d88",
+          "actual_sha256": "2567155e878496a1c95984acd3780b9e81a90a4d8db57b670fd7ac2cd2dd4d88",
+          "hash_match": true,
+          "bytes": 23588,
+          "consumption": "text_read"
+        },
+        {
+          "path": "docs/workflows/LUCERNA_VISUAL_ACCEPTANCE.md",
+          "expected_sha256": "cc928c61346d7e7509c231cbe45dc3417b44ecc6f934453469890e06ce60bb46",
+          "actual_sha256": "cc928c61346d7e7509c231cbe45dc3417b44ecc6f934453469890e06ce60bb46",
+          "hash_match": true,
+          "bytes": 10844,
+          "consumption": "text_read"
+        },
+        {
+          "path": "docs/design/lucerna/LUCERNA_UI_PRODUCT_SYSTEM_V1.md",
+          "expected_sha256": "473250b9b1842adda9962bb6af172e07b2e045d54e9f303c39b94cf715d7bc99",
+          "actual_sha256": "473250b9b1842adda9962bb6af172e07b2e045d54e9f303c39b94cf715d7bc99",
+          "hash_match": true,
+          "bytes": 18795,
+          "consumption": "text_read"
+        },
+        {
+          "path": "docs/design/lucerna/LUCERNA_EXTENSION_IDENTITY_STATUS_AUTH_V1.md",
+          "expected_sha256": "e62a859754cf57943ddf949b6af58396c7228dc995a53e989f09bb8836c6fa92",
+          "actual_sha256": "e62a859754cf57943ddf949b6af58396c7228dc995a53e989f09bb8836c6fa92",
+          "hash_match": true,
+          "bytes": 10055,
+          "consumption": "text_read"
+        }
+      ],
+      "coordinator_source": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/system/source.md",
+      "route": "本轮为源码归属分析。以项目 v1 产品系统及 01052 补充为非 Figma 权威，按有界 S2 状态/呈现收敛理解 01052；01051 涉及的整面板层级收敛仍须整产品验收。UX/tokens/可访问性委托只检查既定契约，不重新设计。Windows Tauri/native-WebView、真实 provider、tray 生命周期与独立验收继续由项目流程负责，浏览器委托不能替代。",
+      "delegates": [
+        {
+          "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/ux/source.md",
+          "reason": "遵循已冻结的生命周期、披露层级、家庭/实例身份与真实状态语义。",
+          "mode": "source_only_route_analysis_not_runtime_execution"
+        },
+        {
+          "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/tokens/source.md",
+          "reason": "沿用已冻结的字号、状态徽章、间距和表面规则。",
+          "mode": "source_only_route_analysis_not_runtime_execution"
+        },
+        {
+          "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/responsive/source.md",
+          "reason": "将可读性、焦点、溢出、DPI 检查限定在实际原生表面；本轮不作验收。",
+          "mode": "source_only_route_analysis_not_runtime_execution"
+        }
+      ],
+      "evidence_limits": [
+        "读取的是冻结 origin/main 对应 commit 的四份规则文件，不是脏工作树，也未拉取、检出或修改目标仓库。",
+        "这些文件是规范而非当前原生运行证据；未构建/启动 Windows release，未执行 view_image 预检、截图、交互、tray/DPI 或独立审查。",
+        "未访问任何 provider、credential、认证入口或同步功能；不推断本机认证成功、失败或需要用户操作。",
+        "未触发文件中描述的 Windows sandbox fallback；没有本轮失败证据，不能声称存在该 blocker。"
+      ]
+    },
+    {
+      "project": "Asteria",
+      "frozen_ref": "HEAD",
+      "frozen_commit": "f2fbbc3cd2edb3f005ae939f8d30637966256098",
+      "ref_resolved_at_read_and_validation": "f2fbbc3cd2edb3f005ae939f8d30637966256098",
+      "read_method": "git -C <repo_path> show <frozen_commit>:<path>; immutable commit pins the manifest ref",
+      "project_sources": [
+        {
+          "path": "docs/design/accepted-concepts/README.md",
+          "expected_sha256": "0852e274953817685304981c8ddcfd30af85ff79174bb8f6e8e5d08e5eb30f39",
+          "actual_sha256": "0852e274953817685304981c8ddcfd30af85ff79174bb8f6e8e5d08e5eb30f39",
+          "hash_match": true,
+          "bytes": 1313,
+          "consumption": "text_read"
+        },
+        {
+          "path": "results/asteria_v2_rc15_visual_system_result.md",
+          "expected_sha256": "80d9114febeae4b4eb2151d87b83fdab8d83d34033992eb5fd6a403394ad5b2e",
+          "actual_sha256": "80d9114febeae4b4eb2151d87b83fdab8d83d34033992eb5fd6a403394ad5b2e",
+          "hash_match": true,
+          "bytes": 9130,
+          "consumption": "text_read"
+        },
+        {
+          "path": "docs/design/accepted-concepts/A_light_architecture.png",
+          "expected_sha256": "ccf374f73b48a028661802afc218a35a0f5ca85ad647113590dfd0d70e8f5628",
+          "actual_sha256": "ccf374f73b48a028661802afc218a35a0f5ca85ad647113590dfd0d70e8f5628",
+          "hash_match": true,
+          "bytes": 1323843,
+          "consumption": "blob_hash_only_no_visual_inspection"
+        },
+        {
+          "path": "docs/design/accepted-concepts/B_dark_architecture.png",
+          "expected_sha256": "43a6321582c438f363d47344eea1501be610bee4539af6b3be5fc8b2511f79ac",
+          "actual_sha256": "43a6321582c438f363d47344eea1501be610bee4539af6b3be5fc8b2511f79ac",
+          "hash_match": true,
+          "bytes": 1536887,
+          "consumption": "blob_hash_only_no_visual_inspection"
+        },
+        {
+          "path": "docs/design/accepted-concepts/C_symbol_trace.png",
+          "expected_sha256": "fa6879beb5405be21ffa516fcf6e5cd12e2093583cf74b72b39c1656b27011b9",
+          "actual_sha256": "fa6879beb5405be21ffa516fcf6e5cd12e2093583cf74b72b39c1656b27011b9",
+          "hash_match": true,
+          "bytes": 1633778,
+          "consumption": "blob_hash_only_no_visual_inspection"
+        },
+        {
+          "path": "docs/design/accepted-concepts/D_variant_diff.png",
+          "expected_sha256": "5c1a6bebcbd683aa6c4ed1223aaed96fe761fc020bd4ffc6a7841ea5460c88db",
+          "actual_sha256": "5c1a6bebcbd683aa6c4ed1223aaed96fe761fc020bd4ffc6a7841ea5460c88db",
+          "hash_match": true,
+          "bytes": 1781165,
+          "consumption": "blob_hash_only_no_visual_inspection"
+        },
+        {
+          "path": "docs/design/accepted-concepts/E1_lineage.png",
+          "expected_sha256": "99f05ea27157a058b0c557441c5c0886126fc7a067eb3a3620945b87347a0515",
+          "actual_sha256": "99f05ea27157a058b0c557441c5c0886126fc7a067eb3a3620945b87347a0515",
+          "hash_match": true,
+          "bytes": 1635033,
+          "consumption": "blob_hash_only_no_visual_inspection"
+        },
+        {
+          "path": "docs/design/accepted-concepts/E2_evidence.png",
+          "expected_sha256": "ae4eb4361418008269d026ede5a448412647c3561067a7e1e2c00c54c1618313",
+          "actual_sha256": "ae4eb4361418008269d026ede5a448412647c3561067a7e1e2c00c54c1618313",
+          "hash_match": true,
+          "bytes": 1630878,
+          "consumption": "blob_hash_only_no_visual_inspection"
+        }
+      ],
+      "coordinator_source": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/system/source.md",
+      "route": "本轮为源码归属分析。已接受概念图是视觉/交互参考，科学事实由 README 指定的文本权威控制；先通用协调器，再视觉、tokens、可访问性与浏览器证据委托，最后叠加 research 专项约束。RC15 可视为既有产品内的 S2 有界视觉系统修复，但跨视图的重要收敛仍需要整屏和独立判断，不能按微小 S1 修补豁免。无需为该非 Figma 路径新增 Figma。",
+      "delegates": [
+        {
+          "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/direction/source.md",
+          "reason": "识别已接受概念的布局、密度与视觉规则；不另选风格。",
+          "mode": "source_only_route_analysis_not_runtime_execution"
+        },
+        {
+          "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/tokens/source.md",
+          "reason": "识别统一图形比例与组件规则，不改变科学语义。",
+          "mode": "source_only_route_analysis_not_runtime_execution"
+        },
+        {
+          "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/responsive/source.md",
+          "reason": "界定不同视口、缩放、标签碰撞与检查器可读性所需证据。",
+          "mode": "source_only_route_analysis_not_runtime_execution"
+        },
+        {
+          "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/webapp-testing/source.md",
+          "reason": "区分历史浏览器测试报告与本轮未运行的实际验证。",
+          "mode": "source_only_route_analysis_not_runtime_execution"
+        },
+        {
+          "path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3/skills/visual/_src/research/source.md",
+          "reason": "在通用路由之后保持科学事实、出处与视觉参考的权威分离。",
+          "mode": "source_only_route_analysis_not_runtime_execution"
+        }
+      ],
+      "evidence_limits": [
+        "六幅 PNG 仅按 binary_locator_only 校验 blob/hash，未解码查看像素；只能依据 README 解释角色。",
+        "RC15 的 COMPLETE、浏览器/公开部署/性能/视觉 PASS 都是历史生产者报告，本轮未运行命令、访问 URL 或复核截图。",
+        "该报告的下一步仍为截图审查；不能把自检等同于独立确认，也不能据其宣称当前整产品已通过验收。",
+        "科学文本权威只读取了 README 中的定位关系，未读取清单外论文/公式/实现；没有核实科学正确性或现有运行性能。"
+      ]
+    }
+  ],
+  "delegate_exclusions": {
+    "Bobbio": {
+      "direction": "已有接受的 Figma 方向，本轮不重新创作。",
+      "motion": "无本轮运动设计或运行延迟任务。",
+      "research": "本轮知识状态已由 UX 和项目契约覆盖，不另建研究产品设计。"
+    },
+    "Lucerna": {
+      "figma": "项目明确冻结非 Figma 路径。",
+      "direction": "不重新选择既定产品风格。",
+      "motion": "无动画设计/诊断任务。",
+      "webapp-testing": "无浏览器验证任务，且不能替代原生验收。",
+      "research": "桌面工具状态任务，不因工具涉及论文而触发研究界面专项。"
+    },
+    "Asteria": {
+      "figma": "概念图为既有视觉参考，无 canonical Figma 要求。",
+      "ux": "本轮保留现有科学 IA 与状态，不重做产品流程。",
+      "motion": "未请求运动设计或运行诊断。"
+    }
+  },
+  "unread_candidate_sources": [
+    "skills/refs/SKILL.md",
+    "skills/visual/_src/motion/source.md",
+    "delegate references, scripts, examples, and assets"
+  ],
+  "scope_limitations": [
+    "只读取 manifest 指定的三个目标项目和文件；未追读其清单外引用。",
+    "目标 Git 仅使用 rev-parse 和 show；未 fetch/pull、checkout、写入、构建、启动或测试。",
+    "项目源码未保存到 outputs；交付物仅含摘要、定位、哈希及归属。",
+    "binary_locator_only 文件仅在内存中读取字节计算哈希，未复制、渲染或视觉检查。",
+    "未浏览网页或访问 Figma/provider/原生 UI；文档中的历史证据不算本轮运行证据。",
+    "项目文档作为冻结分析对象，其旧任务执行/认证指令未被当成本轮操作授权。",
+    "初次批量文本显示发生截断，已分别补读 Lucerna 四份文件及 Bobbio browser-qa；没有以被截断的未见文本支持结论。",
+    "未修改插件生产源码，也未进行安装、发布或成熟度升级。"
+  ],
+  "counting": {
+    "compatibility_projects": 3,
+    "plugin_capability_projects": 0,
+    "maturity": "unclassified",
+    "reason": "关键答案由项目本地规则直接提供；路由标签和委托分配不足以独立证明候选协调器新增能力。"
+  },
+  "validation": {
+    "all_manifest_source_hashes_match": true,
+    "all_manifest_refs_match_frozen_commits": true,
+    "text_sources_read": 9,
+    "binary_locators_hash_checked": 7,
+    "required_project_fields_exact": true
+  }
+}

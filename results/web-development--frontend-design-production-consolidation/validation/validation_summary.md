@@ -69,4 +69,29 @@ Replay result:
   - `results/web-development--frontend-design-production-consolidation/replay/candidate_plugin_replay_run.json`
 - Output validation: PASS for 8 frozen scenarios and required routing/admission fields.
 
-`G6` Bobbio/Lucerna/Asteria real replay remains incomplete. The exact Lucerna v0.3 files are now located at frozen `origin/main` ref `b626c2ce998882941dba0f30a00ecf627cc740b5`, and the real-project replay task/rubric/manifest are frozen under `replay/real_project_replays/`. Running that replay requires explicit user authorization to transmit the frozen Bobbio/Lucerna/Asteria project documents through the child Codex/model-provider path; auto-review rejected the attempt without that authorization.
+## G6 Real-Project Replay Status
+
+Bobbio/Lucerna/Asteria real replay completed through the candidate plugin normal entry after explicit user authorization for the frozen project-source transmission.
+
+Replay command:
+
+```bash
+python scripts/candidate_plugin_replay.py replay \
+  --plugin web-development \
+  --candidate-commit df01fac271e030f9259a1510034380e2ec422f76 \
+  --task results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_replay_task.md \
+  --input results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_replay_freeze_manifest.json \
+  --input results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_replay_rubric.md
+```
+
+Replay result:
+
+- Run id: `20260928T032921Z-2135985`
+- Actual plugin consumption: `proven=true`, event `item.started`, line index `8`
+- Durable outputs:
+  - `results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_attribution.md`
+  - `results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_attribution.json`
+  - `results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_source_consumption.json`
+  - `results/web-development--frontend-design-production-consolidation/replay/real_project_replays/real_project_replay_run.json`
+- Attribution: Bobbio, Lucerna, and Asteria all count as compatibility/regression only; all three have `COUNTS_AS_PLUGIN_CAPABILITY=false`.
+- Maturity remains `unclassified`.
