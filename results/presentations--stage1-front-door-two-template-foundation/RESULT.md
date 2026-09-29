@@ -49,6 +49,10 @@ canonical `course-standard` template body:
 - explicit editable output values now normalize common extension/style spelling
   such as `.pptx` and `google-slides` so the front door preserves the official
   editable surface for explicit PPTX/Slides requests.
+- research skill guidance now scopes CUHK defaulting to the Stage 1
+  academic/research route only, leaving teaching/courseware to the
+  `course-standard` identity and business/company/client work to editable
+  PPTX/Slides.
 
 No `skills/tools/documents-media/presentations/shared/templates/course-standard`
 template body was created or restored.
