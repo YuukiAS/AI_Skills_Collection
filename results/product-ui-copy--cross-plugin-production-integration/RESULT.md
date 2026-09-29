@@ -123,3 +123,29 @@ GitHub CI completed after the H4 handoff:
 
 Independent Scheduled GPT Reviewer review remains required before final
 acceptance. Main merge and release-ref movement remain out of scope.
+
+## Review Round 1 Repair
+
+Reviewer round 1 returned `REVISE` with three bounded findings. The repair is
+limited to evidence, the rendered acceptance fixture, and canonical tracking
+locators. It does not modify the H2 production candidate or rerun H4.
+
+PUC-R1-01 G6 actual output:
+
+- `results/product-ui-copy--cross-plugin-production-integration/candidate_replay/h2_compatibility_actual_output/G6_COMPATIBILITY_ACTUAL_OUTPUT_EVIDENCE.md`
+- `results/product-ui-copy--cross-plugin-production-integration/candidate_replay/h2_compatibility_actual_output/G6_COMPATIBILITY_REPLAY_RUN.json`
+- `results/product-ui-copy--cross-plugin-production-integration/candidate_replay/h2_compatibility_actual_output/cross-surface-review.md`
+
+PUC-R1-02 rendered fixture repair:
+
+- `results/product-ui-copy--cross-plugin-production-integration/rendered_acceptance/RENDERED_ACCEPTANCE_R1_REPAIR.md`
+- `results/product-ui-copy--cross-plugin-production-integration/rendered_acceptance/render-manifest.json`
+- regenerated `wide-desktop.png`, `narrow-mobile.png`, `trust-disclosure.png`, and `keep-control.png`
+
+PUC-R1-03 tracking repair:
+
+- GitHub Issue `#89`: Frontend Design content-architecture tracking.
+- GitHub Issue `#90`: Clear Writing Product UI microcopy tracking.
+- Project `AI Skills Maintenance`: `#89 Status=DOING Area=web-development`; `#90 Status=DOING Area=writing-style`.
+- Canonical source backlinks updated: `web-development.md tracking: #89`; `writing-style.md tracking: #90`.
+- Evidence: `results/product-ui-copy--cross-plugin-production-integration/tracking/TRACKING_REPAIR_EVIDENCE.md`.

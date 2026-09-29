@@ -144,7 +144,7 @@ promotion_gate: 当前 `writing-style` 在该真实 replay 上无法同时满足
 
 ### Product UI copy naturalness needs a dedicated microcopy capability, not more long-form prose rules
 status: NEW
-tracking: #20
+tracking: #90
 source: CUHK Date / Meet at CU production copy-naturalness audit + founder calibration, 2026-09-26
 evidence_path: `docs/design/product-ui-copy/evidence/CUHK_DATE_PRODUCT_COPY_NATURALNESS_AUDIT_2026-09-26.md`
 target layer: writing-style routing / Chinese product microcopy / cross-plugin frontend handoff

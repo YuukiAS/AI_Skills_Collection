@@ -242,6 +242,12 @@ button {
   padding: 14px 16px;
 }
 
+@media (max-width: 860px) {
+  .surface-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 720px) {
   .app-shell {
     width: min(100vw - 24px, 520px);

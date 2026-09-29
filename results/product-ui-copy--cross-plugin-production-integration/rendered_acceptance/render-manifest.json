@@ -1,81 +1,48 @@
 {
-  "schema": "PRODUCT_UI_COPY_RENDERED_ACCEPTANCE_V1",
-  "task_key": "product-ui-copy--cross-plugin-production-integration",
-  "tool": "Playwright CLI 1.55.0 / Chromium 140.0.7339.16",
-  "source": {
-    "html": {
-      "file": "product-ui-copy-fixture.html",
-      "sha256": "8bffd3761d629b64b40f7b90051aa55a6a7f614b617fcb5313463eec22087f84"
-    },
-    "css": {
-      "file": "product-ui-copy-fixture.css",
-      "sha256": "2a23b2a3cae44071af98147d19cfe1bcd1e05ed23fb9a34e7311099a9bae4ef2"
-    }
+  "fixture": "Product UI Copy rendered acceptance",
+  "html": {
+    "file": "product-ui-copy-fixture.html",
+    "sha256": "8bffd3761d629b64b40f7b90051aa55a6a7f614b617fcb5313463eec22087f84"
+  },
+  "css": {
+    "file": "product-ui-copy-fixture.css",
+    "sha256": "55bee25fa84d2fac2667beac2903d5b405f16aee8811f5254b42f19e9fcf569f"
   },
   "captures": [
     {
+      "name": "wide-desktop",
+      "width": 1440,
+      "height": 1200,
       "file": "wide-desktop.png",
-      "coverage": "wide/desktop layout and multi-block page rhythm",
-      "viewport": {
-        "width": 1440,
-        "height": 1200
-      },
-      "png": {
-        "width": 1440,
-        "height": 1423,
-        "bytes": 238811
-      },
-      "sha256": "0768a2c766cca28abb772dee5b4e82b65c37cdf5b0479c88a2265c7c2d61fcde"
+      "sha256": "135e716a612773f7cfb226d1a39e50c82f10933e9647e30189a4cd348622cff1"
     },
     {
+      "name": "narrow-mobile",
+      "width": 390,
+      "height": 1200,
       "file": "narrow-mobile.png",
-      "coverage": "narrow/mobile layout and stacked controls",
-      "viewport": {
-        "width": 390,
-        "height": 1200
-      },
-      "png": {
-        "width": 390,
-        "height": 1840,
-        "bytes": 188366
-      },
-      "sha256": "042c82c8bab935de9b8f06a183ccb93be2117ceea885c02365bf781d8d8c468c"
+      "sha256": "4a7b3c82c8eacef107a6699dc1adc4495587544479391f575e52a8947ddd1399"
     },
     {
+      "name": "trust-disclosure",
+      "width": 920,
+      "height": 900,
       "file": "trust-disclosure.png",
-      "coverage": "trust/help disclosure and CTA relationship",
-      "viewport": {
-        "width": 920,
-        "height": 900
-      },
-      "png": {
-        "width": 920,
-        "height": 1423,
-        "bytes": 212934
-      },
-      "sha256": "7e2a043001ce6cd6f9bafff667d5bbd2560717df6ac4e3162040eaadfaab14c3"
+      "sha256": "b1efbb0f1edcc0886e5dfeec8d4d5e7a8e6c623d385524267fcb30e5b25004e7"
     },
     {
+      "name": "keep-control",
+      "width": 760,
+      "height": 820,
       "file": "keep-control.png",
-      "coverage": "already-good copy KEEP control",
-      "viewport": {
-        "width": 760,
-        "height": 820
-      },
-      "png": {
-        "width": 760,
-        "height": 1550,
-        "bytes": 214057
-      },
-      "sha256": "805611edda91a11343209cedb33ba2fe8a82f2e43b4b1a7608aab930fe5f6c06"
+      "sha256": "b6683edca7592e24cfed20d126e4f01e92e9abd12e0fb4cd2a00def5107515ec"
     }
   ],
-  "acceptance_dimensions": [
-    "wide/desktop",
-    "narrow/mobile",
-    "multi-block page rhythm",
-    "trust/help disclosure",
-    "CTA relationship",
+  "coverage": [
+    "wide/desktop layout",
+    "narrow/mobile layout",
+    "multi-block linguistic page rhythm",
+    "trust/help disclosure and CTA relationship",
     "already-good KEEP control"
   ]
 }
