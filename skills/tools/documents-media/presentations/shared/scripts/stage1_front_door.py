@@ -48,18 +48,25 @@ def _explicit_beamer(text: str) -> bool:
     return any(term in text for term in ("beamer", "latex slides", ".tex", "overleaf", "academic pdf"))
 
 
+def _output_tokens(explicit_output: str | None) -> set[str]:
+    value = (explicit_output or "").lower().strip()
+    if not value:
+        return set()
+    return {value, value.lstrip(".").replace("-", " ")}
+
+
 def route_request(prompt: str, *, explicit_output: str | None = None, existing_deck: bool = False, locked_template: bool = False) -> Stage1Route:
     text = prompt.lower()
     ratio = _explicit_ratio(text)
-    output = (explicit_output or "").lower().strip()
-    explicit_beamer = output in BEAMER_FORMATS or _explicit_beamer(text)
+    outputs = _output_tokens(explicit_output)
+    explicit_beamer = bool(outputs.intersection(BEAMER_FORMATS)) or _explicit_beamer(text)
     if existing_deck or _contains_any(text, LOCAL_EDIT_TERMS):
         return Stage1Route("local-edit", "official-editable-surface", None, "preserve-existing", "preserve-existing", "no artifact claim until edited surface is produced", "existing/local edit preserves current format/template/ratio")
     if locked_template or _contains_any(text, LOCKED_TEMPLATE_TERMS):
         return Stage1Route("external-locked-template", "pass-through", None, "preserve-locked", "preserve-locked", "pass-through locked input", "external locked template is not a built-in template")
     if _contains_any(text, PLAN_ONLY_TERMS):
         return Stage1Route("plan-only", "deck-plan", None, "plan", None, "no generated artifact claim", "plan-only request")
-    if output in EDITABLE_FORMATS or _contains_any(text, EDITABLE_FORMATS):
+    if outputs.intersection(EDITABLE_FORMATS) or _contains_any(text, EDITABLE_FORMATS):
         return Stage1Route("editable", "official-editable-surface", None, "pptx/slides", ratio, "editable adapter required", "explicit editable output")
     if _contains_any(text, BUSINESS_TERMS):
         return Stage1Route("editable", "official-editable-surface", None, "pptx/slides", ratio, "editable adapter required", "business/executive route remains editable")

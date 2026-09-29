@@ -372,6 +372,17 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(research.adapter, "cuhk-research-beamer")
         self.assertEqual(research.template, "cuhk-research")
 
+    def test_stage1_front_door_normalizes_explicit_editable_output_extensions(self) -> None:
+        pptx = stage1_front_door.route_request("Make a compact methods deck.", explicit_output=".pptx")
+        self.assertEqual(pptx.route, "editable")
+        self.assertEqual(pptx.adapter, "official-editable-surface")
+        self.assertIsNone(pptx.template)
+
+        slides = stage1_front_door.route_request("Make a compact methods deck.", explicit_output="google-slides")
+        self.assertEqual(slides.route, "editable")
+        self.assertEqual(slides.adapter, "official-editable-surface")
+        self.assertIsNone(slides.template)
+
     def test_research_routing_defaults_to_exact_cuhk_beamer_with_editable_override(self) -> None:
         research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")
         real_world_guardrails = (

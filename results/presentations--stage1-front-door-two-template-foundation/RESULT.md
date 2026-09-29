@@ -46,6 +46,9 @@ canonical `course-standard` template body:
 - explicit non-branded `beamer` / `tex` output routing now goes through the
   `course-standard` adapter identity while preserving stronger research context
   precedence for `cuhk-research`.
+- explicit editable output values now normalize common extension/style spelling
+  such as `.pptx` and `google-slides` so the front door preserves the official
+  editable surface for explicit PPTX/Slides requests.
 
 No `skills/tools/documents-media/presentations/shared/templates/course-standard`
 template body was created or restored.
