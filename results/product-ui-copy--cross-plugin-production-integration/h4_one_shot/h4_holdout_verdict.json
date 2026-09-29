@@ -1,0 +1,65 @@
+{
+  "candidate_commit": "a06ff050bc82bb22358dfcb3e4faa885fddd285b",
+  "batch_schema": "PRODUCT_UI_COPY_FRESH_HOLDOUT_V1",
+  "scenario_count": 8,
+  "scenario_results": [
+    {
+      "id": "H3-01",
+      "expected_outcome_class": "KEEP",
+      "actual_outcome_class": "KEEP",
+      "verdict": "PASS",
+      "notes": "状态与按钮原样保留，未增加安全、同步或通知承诺。"
+    },
+    {
+      "id": "H3-02",
+      "expected_outcome_class": "LOCALE/REGISTER",
+      "actual_outcome_class": "LOCALE/REGISTER",
+      "verdict": "PASS",
+      "notes": "使用“儲存至帳戶”和简短“繼續”，保留身份验证完成、资料已保存和继续引导三项含义。"
+    },
+    {
+      "id": "H3-03",
+      "expected_outcome_class": "CONTENT ARCHITECTURE",
+      "actual_outcome_class": "CONTENT ARCHITECTURE",
+      "verdict": "PASS",
+      "notes": "由 Frontend 合并重复内容，仅保留开启状态和管理动作；未虚构备份能力。"
+    },
+    {
+      "id": "H3-04",
+      "expected_outcome_class": "PRODUCT SEMANTICS",
+      "actual_outcome_class": "PRODUCT SEMANTICS",
+      "verdict": "PASS",
+      "notes": "停止最终文案承诺，明确入口移除与数据生命周期不同，列出文件、恢复窗口和管理员恢复三个待确认事实。"
+    },
+    {
+      "id": "H3-05",
+      "expected_outcome_class": "LEGAL/TRUST/SAFETY",
+      "actual_outcome_class": "LEGAL/TRUST/SAFETY",
+      "verdict": "PASS",
+      "notes": "拒绝无依据的安全及零隐私风险承诺，列明保存、上传、删除/撤回及同意范围待确认；未编造政策。"
+    },
+    {
+      "id": "H3-06",
+      "expected_outcome_class": "WORDING/NATURALNESS",
+      "actual_outcome_class": "WORDING/NATURALNESS",
+      "verdict": "PASS",
+      "notes": "保留 14 MB 与 10 MB、上传失败及换文件动作，移除实现参数，未增加自动压缩承诺。"
+    },
+    {
+      "id": "H3-07",
+      "expected_outcome_class": "WORDING/NATURALNESS",
+      "actual_outcome_class": "WORDING/NATURALNESS",
+      "verdict": "PASS",
+      "notes": "整组调整标题、正文和 CTA 的语言节奏，保留协作与优先级含义，无对称套话或夸张承诺；渲染验收仍归 Frontend。"
+    },
+    {
+      "id": "H3-08",
+      "expected_outcome_class": "NO_FRONTEND_OR_PRODUCT_UI_COPY",
+      "actual_outcome_class": "NO_FRONTEND_OR_PRODUCT_UI_COPY",
+      "verdict": "PASS",
+      "notes": "保持 backend/runtime 路由，保留事件触发、失败重试和日志字段要求，不提出 UI 或文案修改。"
+    }
+  ],
+  "overall_verdict": "PASS",
+  "evaluation_scope": "本次单次全批文本与路由自评；逐项核对 evaluation_focus 与 must_not，不包含真实界面渲染或独立评审。"
+}
