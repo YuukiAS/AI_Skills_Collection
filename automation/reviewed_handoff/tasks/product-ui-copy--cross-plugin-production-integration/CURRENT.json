@@ -4,13 +4,13 @@
   "ci_required": true,
   "ci_status": "PASS",
   "implementation_commit": "a06ff050bc82bb22358dfcb3e4faa885fddd285b",
-  "last_review_decision": null,
+  "last_review_decision": "REVISE",
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "RUN_GPT_REVIEWER",
+  "next_action": "RUN_CODEX_REPAIR",
   "plan_revision": 1,
-  "review_round": 0,
+  "review_round": 1,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
-  "state": "READY_FOR_GPT_REVIEW",
+  "state": "REVISE",
   "task_key": "product-ui-copy--cross-plugin-production-integration"
 }
