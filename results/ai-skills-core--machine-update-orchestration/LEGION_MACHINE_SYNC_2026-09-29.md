@@ -5,6 +5,7 @@ Reviewed branch: `reviewed/ai-skills-core--machine-update-orchestration`
 Consumer: `Legion`
 Host/user: `Legion-Y9000P` / `legion-y9000p\yuukias`
 Timestamp: `2026-09-29 12:09:06 +08:00`
+Last updated: `2026-09-29 12:29:01 +08:00`
 
 ## Discovery
 
@@ -62,7 +63,9 @@ Resulting scope for this Legion sync:
 - Update currently installed/enabled AI_Skills components only: `ai-skills-core`, `presentations`.
 - Keep optional/uninstalled AI_Skills plugins uninstalled.
 - No managed consumer refresh was triggered by release metadata.
-- Route C Bridge Kit was discovery/classification only because the user explicitly required no Bridge runtime/source mutation.
+- Route C Bridge Kit required a formal runtime refresh after dynamic Bridge
+  release discovery proved that `refs/heads/release` is the formally closed
+  Bridge Kit `0.9.2` target.
 
 ## Actions
 
@@ -144,18 +147,60 @@ Fresh-process evidence:
 | `ai-bridge where` | `C:\Code\GPT_Codex_AI_Bridge_Kit` |
 | runtime/import source | `C:\Code\GPT_Codex_AI_Bridge_Kit\ai_bridge_kit\__init__.py` |
 | runtime version before | `0.7.1` |
-| runtime version after | `0.7.1` |
+| runtime version after | `0.9.2` |
 | local Bridge branch | `main` |
-| local Bridge HEAD | `3b061167794d593b113ca8f4a8a43c4c8000fc01` |
+| local Bridge HEAD before | `3b061167794d593b113ca8f4a8a43c4c8000fc01` |
+| local Bridge HEAD after | `6bbaca5a3af6240fbc88fa54cf78fa9acc147f67` |
 | Bridge `origin/release` | `6bbaca5a3af6240fbc88fa54cf78fa9acc147f67` |
 | Bridge `origin/release` version source | `0.9.2` |
-| Bridge `origin/main` | `0a6d55361f358cd38aee48e92af9ecf701145c64` |
-| classification | `AHEAD/INCONSISTENT` for formal-consumer purposes: `origin/release` points at a 0.9.2 candidate while README still states current formal distribution is `0.9.1`; source/runtime intentionally unchanged |
+| Bridge `origin/main` | `6043689d6464fc64f51666a9198ffd509fff5a70` |
+| classification | `ALIGNED`: formal release closure evidence on `main` binds Bridge Kit `0.9.2` to release target `6bbaca5a3af6240fbc88fa54cf78fa9acc147f67`, and remote `refs/heads/release` equals that target |
+
+Formal Bridge release authority used for the corrected Route C classification:
+
+- `origin/release:pyproject.toml` declares `version = "0.9.2"`.
+- `origin/release:ai_bridge_kit/__init__.py` declares `__version__ = "0.9.2"`.
+- `origin/release:CHANGELOG.md` contains `## 0.9.2 - 2026-09-25`.
+- `origin/release:AGENTS.md` contains the formal distribution owner locator
+  delegating Bridge distribution/version closure to AI Skills Maintainer /
+  `bridge-kit-maintainer`.
+- `origin/main:results/bridge-core--unattended-execution-refinement/FORMAL_RELEASE_CLOSURE.md`
+  records `FORMAL_DISTRIBUTION_COMPLETE=YES`,
+  `RELEASE_RELATION=ALIGNED`, `VERSION=0.9.2`, and
+  `FORMAL_RELEASE_TARGET=6bbaca5a3af6240fbc88fa54cf78fa9acc147f67`.
+- `origin/main:README.md` has the post-closure documentation truth: current
+  formal distribution version is `0.9.2`; later `main` evidence/docs commits
+  do not automatically become release targets.
+- The stale `origin/release:README.md` sentence still says `0.9.1` / `0.9.2`
+  candidate, but it is not the formal release authority by itself and is
+  superseded for Route C classification by the version sources, changelog,
+  owner locator, closure evidence, and remote release ref equality above.
+
+Route C update actions:
+
+- Verified canonical checkout `C:\Code\GPT_Codex_AI_Bridge_Kit` origin is
+  `https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git`.
+- Verified checkout was clean and `HEAD` was an ancestor of `origin/release`.
+- Fast-forwarded the canonical checkout from
+  `3b061167794d593b113ca8f4a8a43c4c8000fc01` to
+  `6bbaca5a3af6240fbc88fa54cf78fa9acc147f67`.
+- Refreshed the existing editable package / entry point with
+  `python -m pip install -e C:\Code\GPT_Codex_AI_Bridge_Kit`.
+- Verified package metadata and module version:
+  `gpt-codex-ai-bridge-kit==0.9.2` and `ai_bridge_kit.__version__ == "0.9.2"`.
+- Verified `ai-bridge where` still resolves to
+  `C:\Code\GPT_Codex_AI_Bridge_Kit`.
+- Did not advance Bridge `release`, did not track or merge `origin/main`, did
+  not edit Bridge source logic, and did not modify Host / Reviewed Mode /
+  Persistent Run behavior.
 
 Bridge validation note:
 
 - `ai-bridge validate` against `C:\Code\AI_Skills_Collection` reported one workspace error: missing `prompts/tasks/`.
 - This validates the current repository as a Bridge handoff workspace, not the Bridge package installation globally.
+- `ai-bridge --version` remains unsupported as a CLI option; the supported
+  version evidence for this install is package metadata plus
+  `ai_bridge_kit.__version__`.
 
 ## Component Result Table
 
@@ -165,11 +210,17 @@ Bridge validation note:
 | `ai-skills-core` | `4.0.0`, installed/enabled | `0.5`, installed/enabled, includes `machine-update-orchestrator` and `bridge-kit-maintainer` | Route A | Official `plugin add` for existing installed plugin | `UPDATED_RELOAD_REQUIRED` |
 | `presentations` | `4.0.0`, installed/enabled | `0.3`, installed/enabled | Route A | Official `plugin add` for existing installed plugin | `UPDATED_RELOAD_REQUIRED` |
 | Release companions / managed consumers | none detected | none detected | Route B | No mutation; latest applicable `### Update impact` declares none by default | `ALREADY_CURRENT` |
-| Fresh normal entry | not applicable before update | fresh `codex exec --ephemeral` loaded `ai-skills-core@0.5` and confirmed current state | Route A/B/C composition | Fresh discovery only; no mutation | `ALREADY_CURRENT` |
-| Bridge Kit | runtime/source `0.7.1`, local checkout `3b061167...` | unchanged `0.7.1` | Route C | Discovery/classification only; no source/runtime mutation per user constraint | `AHEAD/INCONSISTENT_UNCHANGED` |
+| Fresh normal entry | pre-Bridge correction verification had stale Route C classification | fresh App CLI process loaded `AI Skills Maintainer` and confirmed AI_Skills release state plus Bridge `0.9.2` runtime/package | Route A/B/C composition | Fresh discovery/verification after Bridge update | `PASS` |
+| Bridge Kit | runtime/source `0.7.1`, local checkout `3b061167...` | runtime/package `0.9.2`, local checkout `6bbaca5...` = `origin/release` | Route C | Fast-forward canonical checkout to formal `release`; refresh existing editable package; verify runtime identity | `UPDATED` |
 
 ## Final Status
 
 Consumer status: `PASS`
 
-Reason: AI_Skills components were updated through official Codex App CLI commands, a separate fresh Codex CLI process loaded `AI Skills Maintainer` 0.5 and verified the current state, optional plugins remained uninstalled, and Bridge runtime/source was not mutated per user constraint.
+Reason: AI_Skills components were updated through official Codex App CLI
+commands and remained current; Bridge Route C was corrected from stale README
+classification to formal remote release evidence, then updated from `0.7.1` to
+`0.9.2`; a separate fresh Codex App CLI process loaded `AI Skills Maintainer`
+0.5 and verified AI_Skills plus Bridge current state. Optional plugins remained
+uninstalled. Bridge `release` was not advanced, `main` was not followed, and
+Host / Reviewed Mode / Persistent Run behavior was not modified.

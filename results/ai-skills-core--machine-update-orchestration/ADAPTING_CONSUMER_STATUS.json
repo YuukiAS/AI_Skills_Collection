@@ -1,7 +1,7 @@
 {
   "schema": "AI_SKILLS_MAINTENANCE_ADAPTING_CONSUMER_STATUS_V1",
   "task_key": "ai-skills-core--machine-update-orchestration",
-  "updated_date": "2026-09-25",
+  "updated_date": "2026-09-29",
   "tracking_issue": 86,
   "project_status": "ADAPTING",
   "area": "ai-skills-core",
@@ -57,13 +57,22 @@
     },
     {
       "name": "Legion",
-      "status": "PENDING_CONSUMER_AUTHORITY",
-      "identity": null,
-      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer; update consumers/Legion_PENDING.md with the durable result.",
-      "pending_evidence": [
-        "consumers/Legion_PENDING.md"
-      ],
-      "handoff_packet": "ADAPTING_CONSUMER_HANDOFF.md"
+      "status": "PASS",
+      "identity": {
+        "hostname": "Legion-Y9000P",
+        "platform_summary": "Windows",
+        "user": "legion-y9000p\\yuukias",
+        "codex_home": "C:\\Users\\yuukias\\.codex",
+        "ai_skills_marketplace_ref": "release",
+        "ai_skills_core": "0.5",
+        "presentations": "0.3",
+        "bridge_runtime": "0.9.2"
+      },
+      "evidence": [
+        "LEGION_MACHINE_SYNC_2026-09-29.md",
+        "LEGION_MACHINE_SYNC_2026-09-29.json",
+        "fresh_normal_entry_last_message.md"
+      ]
     }
   ],
   "done_guard": {

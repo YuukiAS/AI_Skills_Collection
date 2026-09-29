@@ -1,0 +1,73 @@
+{
+  "schema": "AI_SKILLS_LEGION_MACHINE_SYNC_EVIDENCE_V1",
+  "task_key": "ai-skills-core--machine-update-orchestration",
+  "reviewed_branch": "reviewed/ai-skills-core--machine-update-orchestration",
+  "consumer": "Legion",
+  "updated_at": "2026-09-29 12:29:01 +08:00",
+  "status": "PASS",
+  "identity": {
+    "hostname": "Legion-Y9000P",
+    "user": "legion-y9000p\\yuukias",
+    "home": "",
+    "userprofile": "C:\\Users\\yuukias",
+    "codex_home_env": "",
+    "effective_codex_home": "C:\\Users\\yuukias\\.codex",
+    "codex_app_cli": "C:\\Users\\yuukias\\AppData\\Local\\OpenAI\\Codex\\bin\\bffc5354119c8421\\codex.exe",
+    "codex_app_cli_version": "codex-cli 0.154.0-alpha.6.2",
+    "path_codex_version": "codex-cli 0.115.0"
+  },
+  "ai_skills": {
+    "marketplace": "yuukias-ai-skills",
+    "source": "https://github.com/YuukiAS/AI_Skills_Collection.git",
+    "ref": "release",
+    "revision": "72ebd56705713c01d05fef34ccab1c5c04c15671",
+    "installed_enabled": {
+      "ai-skills-core@yuukias-ai-skills": "0.5",
+      "presentations@yuukias-ai-skills": "0.3"
+    },
+    "kept_uninstalled": [
+      "workflow-core",
+      "writing-style",
+      "research-writing",
+      "scientific-visualization",
+      "web-development",
+      "statistical-modeling",
+      "bioinformatics",
+      "medical-imaging"
+    ]
+  },
+  "bridge": {
+    "route": "Route C",
+    "repository": "YuukiAS/GPT_Codex_AI_Bridge_Kit",
+    "canonical_checkout": "C:\\Code\\GPT_Codex_AI_Bridge_Kit",
+    "origin": "https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git",
+    "formal_release_version": "0.9.2",
+    "formal_release_target": "6bbaca5a3af6240fbc88fa54cf78fa9acc147f67",
+    "origin_release": "6bbaca5a3af6240fbc88fa54cf78fa9acc147f67",
+    "origin_main": "6043689d6464fc64f51666a9198ffd509fff5a70",
+    "classification": "ALIGNED",
+    "checkout_head_before": "3b061167794d593b113ca8f4a8a43c4c8000fc01",
+    "checkout_head_after": "6bbaca5a3af6240fbc88fa54cf78fa9acc147f67",
+    "runtime_version_before": "0.7.1",
+    "runtime_version_after": "0.9.2",
+    "package_version_after": "0.9.2",
+    "runtime_source_after": "C:\\Code\\GPT_Codex_AI_Bridge_Kit\\ai_bridge_kit\\__init__.py",
+    "actions": [
+      "verified remote formal release evidence dynamically",
+      "fast-forwarded canonical checkout to origin/release",
+      "refreshed existing editable package with python -m pip install -e",
+      "verified ai-bridge where and package/module version"
+    ],
+    "not_done": [
+      "did not advance Bridge release",
+      "did not follow origin/main",
+      "did not edit Bridge source logic",
+      "did not modify Host, Reviewed Mode, or Persistent Run behavior"
+    ]
+  },
+  "fresh_normal_entry": {
+    "status": "PASS",
+    "evidence": "fresh_normal_entry_last_message.md",
+    "summary": "Fresh Codex App CLI process verified AI_Skills release state, ai-skills-core 0.5, presentations 0.3, Bridge formal release 0.9.2, canonical checkout HEAD equals origin/release, and runtime/package 0.9.2."
+  }
+}

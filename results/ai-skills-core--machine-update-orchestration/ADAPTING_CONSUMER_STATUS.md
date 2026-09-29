@@ -1,7 +1,7 @@
 # ADAPTING Consumer Status Matrix
 
 Task key: `ai-skills-core--machine-update-orchestration`  
-Updated date: 2026-09-25
+Updated date: 2026-09-29
 
 ## Current Board State
 
@@ -26,7 +26,7 @@ durable evidence before it can be marked PASS or N/A.
 | `Longleaf_Codex` | `PENDING_CONSUMER_AUTHORITY` | unknown in this task; not inferred | bounded access to that consumer; discover identity; inspect Marketplace/plugin state; migrate/reinstall if needed; production normal-entry smoke | `consumers/Longleaf_Codex_PENDING.md`; then update with runbook result |
 | `Longleaf_Backup_Codex` | `PENDING_CONSUMER_AUTHORITY` | unknown in this task; not inferred | bounded access to that consumer; discover identity; inspect Marketplace/plugin state; migrate/reinstall if needed; production normal-entry smoke | `consumers/Longleaf_Backup_Codex_PENDING.md`; then update with runbook result |
 | `CUHK_Workstation_WSL_Codex` | `PENDING_CONSUMER_AUTHORITY` | unknown in this task; not inferred | bounded access to that consumer; discover identity; inspect Marketplace/plugin state; migrate/reinstall if needed; production normal-entry smoke | `consumers/CUHK_Workstation_WSL_Codex_PENDING.md`; then update with runbook result |
-| `Legion` | `PENDING_CONSUMER_AUTHORITY` | unknown in this task; not inferred | bounded access to that consumer; discover identity; inspect Marketplace/plugin state; migrate/reinstall if needed; production normal-entry smoke | `consumers/Legion_PENDING.md`; then update with runbook result |
+| `Legion` | `PASS` | hostname `Legion-Y9000P`; Windows; user `legion-y9000p\yuukias`; effective Codex root `C:\Users\yuukias\.codex`; AI_Skills Marketplace `release`; `ai-skills-core=0.5`; `presentations=0.3`; Bridge runtime/package `0.9.2` | none for this consumer unless future release changes scope | `LEGION_MACHINE_SYNC_2026-09-29.md`; `LEGION_MACHINE_SYNC_2026-09-29.json`; `fresh_normal_entry_last_message.md` |
 
 ## Consumer PASS Requirements
 
@@ -40,7 +40,7 @@ Per `docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md`, each consumer PASS requires
 - risk-matched should-not-change / failure safety;
 - durable evidence locator.
 
-`Workstation` is the only consumer currently meeting all requirements.
+`Workstation` and `Legion` currently meet the consumer PASS requirements.
 
 ## DONE Guard
 
@@ -54,7 +54,7 @@ all required consumers PASS/N/A
 + issue-closed workflow -> DONE
 ```
 
-No remaining consumer may be marked PASS merely because `Workstation` passed.
+No remaining consumer may be marked PASS merely because another consumer passed.
 N/A requires a frozen durable reason.
 
 Pending consumer-specific stubs now live under `consumers/`; they are
