@@ -1,51 +1,62 @@
-# Workstation Windows Codex Freshness Refresh
+# Workstation Windows Codex Final Closure Refresh
 
-Consumer: `Workstation_Windows_Codex`
-Date: 2026-09-29
-Status: `PASS`
+Consumer: `Workstation`  
+Date: 2026-09-29  
+Status: `PASS`  
+Fresh under `FINAL_CLOSURE_FREEZE.json`: `YES`
 
-Windows 本机 Codex 已对齐当前正式发布。Marketplace 从旧 revision
-`72ebd56705713c01d05fef34ccab1c5c04c15671` 更新到
-`a7028195f3e97d32d51c32ef8c87f658f92048e5`；已安装的
-`writing-style` 从 `0.3` 更新到 `0.4`，并补齐任务明确要求的
-`ai-skills-core 0.5`。其余 optional plugin 未安装，也没有在本轮新增。
+Windows 本机已对齐冻结的正式 release。AI_Skills Marketplace 在本轮开始前已经是
+`release@a7028195f3e97d32d51c32ef8c87f658f92048e5`，因此没有重装 plugin；fresh
+process 内的官方 Marketplace refresh 返回 `upgradedRoots=[]`、`errors=[]`。
+`ai-skills-core 0.5` 与 `writing-style 0.4` 均为 already current，其余 optional
+plugins 保持未安装。
 
-Bridge runtime 与正式 `0.9.2` release 对齐，因此没有重装。Host Policy
-最终为 `configured`。fresh Codex process 已实际加载 production
-`ai-skills-core`，将“使用 AI Skills Maintainer，同步这台机器。”路由到
-`machine-update-orchestrator`，返回 `ALREADY_CURRENT`。
+Bridge 的旧本地状态为 runtime/package `0.9.2`、checkout
+`9d15247d5cec5472a0f3c280a6bdd9d194a193fc`。本轮通过 live remote discovery
+确认 frozen formal release 为
+`9dad0ba4bfa54e251f345091c5151ae991251ec9` / `0.9.3`，随后在 clean、可
+fast-forward 的前提下只推进到该 release，不追 `main`。editable package 已刷新到
+`0.9.3`；Bridge-owned managed drift 通过 `ai-bridge host install` 修复，最终
+`ai-bridge host validate` 为 `configured`。
 
-## Identity
+## Actual identity
 
-- hostname: `Workstation`
+- hostname: `WORKSTATION`
 - platform: Windows
 - user: `WORKSTATION\humc2`
-- `HOME` environment variable: unset
+- `HOME`: unset
 - `USERPROFILE`: `C:\Users\humc2`
-- resolved user home: `C:\Users\humc2`
-- `CODEX_HOME` environment variable: unset
 - effective `CODEX_HOME`: `C:\Users\humc2\.codex`
-- Codex: `codex-cli 0.158.0-alpha.2.1`
+- Codex executable: `C:\Users\humc2\AppData\Local\OpenAI\Codex\bin\faa963e871dd422c\codex.exe`
+- Codex version: `codex-cli 0.158.0-alpha.2.1`
 
-## AI_Skills Marketplace
+## Frozen and live release identity
 
-- name: `yuukias-ai-skills`
-- source: `https://github.com/YuukiAS/AI_Skills_Collection.git`
-- ref: `release`
-- sparse paths: `.agents/plugins`, `plugins/codex/plugins`
-- before revision: `72ebd56705713c01d05fef34ccab1c5c04c15671`
-- current formal release: `a7028195f3e97d32d51c32ef8c87f658f92048e5`
-- repository version: `5.4.0`
-- after revision: `a7028195f3e97d32d51c32ef8c87f658f92048e5`
+| Component | Live `main` | Frozen formal `release` | Version |
+|---|---|---|---|
+| AI_Skills | `85d4b2acd990654e8439c1c0dd007493360fa82b` | `a7028195f3e97d32d51c32ef8c87f658f92048e5` | repository `5.4.0`; `ai-skills-core 0.5` |
+| Bridge | `5a640ec02a20106c778a35ba94eb2164d2b91537` | `9dad0ba4bfa54e251f345091c5151ae991251ec9` | `0.9.3` |
 
-## Installed AI_Skills plugins
+Target-plugin guard: the targeted `ai-skills-core` production/generated paths have no
+`release..main` diff, and both manifests report `0.5`; therefore
+`TARGET_PLUGIN_CHANGED_REVIEW_REQUIRED=NO`.
 
-| Plugin | Before | Formal target | After | Action |
-|---|---:|---:|---:|---|
-| `writing-style@yuukias-ai-skills` | `0.3`, enabled | `0.4` | `0.4`, enabled | refreshed by formal Marketplace upgrade |
-| `ai-skills-core@yuukias-ai-skills` | not installed | `0.5` | `0.5`, enabled | installed because this task requires the formal maintainer to remain enabled |
+## AI_Skills state
 
-Confirmed uninstalled before and after:
+| Installed AI_Skills plugin | Before | After | Action |
+|---|---:|---:|---|
+| `ai-skills-core@yuukias-ai-skills` | `0.5`, enabled | `0.5`, enabled | already current |
+| `writing-style@yuukias-ai-skills` | `0.4`, enabled | `0.4`, enabled | already current |
+
+Marketplace revision before/after:
+
+```text
+BEFORE=a7028195f3e97d32d51c32ef8c87f658f92048e5
+AFTER=a7028195f3e97d32d51c32ef8c87f658f92048e5
+PLUGIN_UPDATES=NONE
+```
+
+The following central optional plugins remained uninstalled:
 
 - `workflow-core`
 - `research-writing`
@@ -58,61 +69,50 @@ Confirmed uninstalled before and after:
 
 ## Bridge Route C
 
-- executable: `D:\Code\env\Scripts\ai-bridge.exe`
-- editable source: `D:\Code\GPT_Codex_AI_Bridge_Kit`
-- package/runtime version: `0.9.2`
-- formal release ref: `6bbaca5a3af6240fbc88fa54cf78fa9acc147f67`
-- local source HEAD: `9d15247d5cec5472a0f3c280a6bdd9d194a193fc`
-- source state: clean; local `main` is intentionally not advanced to newer `origin/main`
-- formal-release comparison: `origin/release..HEAD` changes only `README.md` and
-  formal `0.9.2` closure evidence under `results/`; runtime/package content is
-  unchanged from the formal release
-- action: verification only; no source fast-forward and no editable-package refresh
-- Host Policy: `ai-bridge host validate` -> `overall state: configured`
+- origin: `https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git`
+- canonical checkout: `D:\Code\GPT_Codex_AI_Bridge_Kit`
+- dirty state before update: clean
+- ancestry: old HEAD is an ancestor of `origin/release`
+- checkout before: `9d15247d5cec5472a0f3c280a6bdd9d194a193fc`
+- checkout after: `9dad0ba4bfa54e251f345091c5151ae991251ec9`
+- editable package/runtime before: `0.9.2`
+- editable package/module after: `0.9.3`
+- `ai-bridge where`: `D:\Code\GPT_Codex_AI_Bridge_Kit`
+- Host drift: Bridge-owned managed block/rules only
+- Host backup: `C:\Users\humc2\.codex\ai-bridge-kit\backups\20260929T090311Z`
+- final Host Policy: `configured`
+
+No stash/reset/restore/clean was used. Bridge `main` and `release` were not advanced,
+Bridge source logic was not edited, and user dirty work was not overwritten.
 
 ## Fresh normal entry
 
-- method: production `ai-bridge plugin-replay`
-- plugin: `ai-skills-core@yuukias-ai-skills`
-- exact normal request: `使用 AI Skills Maintainer，同步这台机器。`
-- first diagnostic run: `20260929T070615Z-4c247fca9702`
-  - result: wrapper `CHILD_CONTRACT_DRIFT`, `exit_code=70`
-  - cause: Windows CP1252 reader raised `UnicodeDecodeError` while consuming
-    UTF-8 child output; this run is retained as failed diagnostic evidence and
-    is not counted as acceptance
-- accepted run: `20260929T070826Z-0baf3faafa82`
-  - process-level recovery: `PYTHONUTF8=1`
-  - status: `completed`
-  - exit code: `0`
-  - production plugin check: installed `true`
-  - route: `machine-update-orchestrator`
-  - write isolation: `passed`; canary unchanged
-  - result state: `ALREADY_CURRENT`
+Command shape:
 
-Accepted run hashes:
+```powershell
+codex exec --ephemeral --json --approve-for-me -C D:\Code\AI_Skills_Collection -o results\ai-skills-core--machine-update-orchestration\workstation_windows_final_direct_codex_last_message.txt "使用 AI Skills Maintainer，同步这台机器。"
+```
 
-- task input: `5deb112e2ba95f9ed6f3730ad44f8ccac44e1f29cd23103842a6ae7f3dd80c7d`
-- machine-state input: `e9322b3f7af285d81dda8b174e711fda3a933c53429a5291dcbf955c399d832e`
-- machine-local `run.json`: `7531A6373FAE8E33EEE6BE599E72D35E4D61FCA5FDC7516E2A1480BC6ECB2B6A`
-- machine-local `last-message.txt`: `C3D97B092E7F14BD216EB90032F3942A3D5FE917EFC7E8033B3A2DFC7FB5BD88`
-- machine-local generated report: `86F8534FF618C863FBBB9299AD53D0EA633A9EEB98EA2200196AD961F26A3746`
+- session id: `01a0ec68-0de8-7f52-9433-c72e3c856766`
+- installed production plugin path loaded:
+  `C:\Users\humc2\.codex\plugins\cache\yuukias-ai-skills\ai-skills-core\0.5`
+- route: `machine-update-orchestrator`
+- semantic result: `ALREADY_CURRENT`
+- Host Policy: `configured`
+- durable last message: `workstation_windows_final_direct_codex_last_message.txt`
+- last-message SHA-256:
+  `F2757CF8D8A78ABA39014B109994AB1BA384EC4E3031989C01A1E274F935202B`
 
-## Should-not-change
+## Closure boundary
 
-- optional AI_Skills plugins installed: no
-- Bridge `release` advanced: no
-- Bridge source logic modified: no
-- Bridge editable package refreshed: no, already formal-runtime aligned
-- Host Policy installed/rewritten: no, validation only
-- unrelated consumer evidence modified: no
-- paid API used: no
-- private artifact uploaded: no
+Windows `Workstation` is now fresh/current PASS under the freeze. The reviewed branch
+still lacks a post-freeze PASS from required consumer `CUHK_Workstation_WSL_Codex`;
+therefore aggregate closure, main integration, Issue `#86` closure and Project `DONE`
+remain intentionally deferred.
 
-## Durable artifacts
-
-- `WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.json`
-- `workstation_windows_fresh_normal_entry_task.md`
-- `workstation_windows_machine_state_input.md`
-- `workstation_windows_fresh_replay_run.json`
-- `workstation_windows_fresh_replay_last_message.txt`
-- `workstation_windows_fresh_normal_entry_report.md`
+```text
+NEXT_REQUIRED_CONSUMER=CUHK_Workstation_WSL_Codex
+OVERALL_DONE=NO
+ISSUE_86_OPEN=YES
+PROJECT_STATUS=ADAPTING
+```

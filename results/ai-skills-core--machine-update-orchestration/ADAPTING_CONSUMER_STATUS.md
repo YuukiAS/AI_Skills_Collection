@@ -36,6 +36,13 @@ The existing freeze is still reused; targeted release-to-main checks over
 `ai-skills-core` source/generated/plugin paths showed no production behavior or
 version change.
 
+Windows `Workstation` independently rechecked the same live AI_Skills refs and
+Bridge `main=5a640ec02a20106c778a35ba94eb2164d2b91537`,
+`release=9dad0ba4bfa54e251f345091c5151ae991251ec9`. Its clean Bridge checkout and
+editable package were updated from `0.9.2` to the frozen formal `0.9.3`, Host
+Policy was refreshed only for Bridge-owned managed drift, and a new direct
+`codex exec --ephemeral` session passed.
+
 ## Required Consumers
 
 The final closure contract has exactly five required logical consumers:
@@ -53,7 +60,7 @@ The final closure contract has exactly five required logical consumers:
 | `Longleaf_Codex` | `PASS` | hostname `c0810.ll.unc.edu`; Longleaf USERS namespace; user `aereinh`; `HOME=/users/a/e/aereinh`; `CODEX_HOME=/users/a/e/aereinh/.codex`; AI_Skills Marketplace `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`; `ai-skills-core=0.5`; `writing-style=0.4`; `research-writing=0.2`; `web-development=0.4`; Bridge runtime/package `0.9.3`; Host Policy configured | none for this consumer in this freeze batch | `FINAL_CLOSURE_FREEZE.json`; `LONGLEAF_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.md`; `LONGLEAF_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.json`; `fresh_longleaf_users_direct_codex_last_message.txt` |
 | `Longleaf_Backup_Codex` | `PASS` | hostname `c151404.ll.unc.edu`; Longleaf OVERFLOW namespace; user `aereinh`; `HOME=/overflow/htzhu/mingcheng_new`; `CODEX_HOME=/overflow/htzhu/mingcheng_new/.codex`; AI_Skills Marketplace `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`; `ai-skills-core=0.5`; `workflow-core=0.4`; `writing-style=0.4`; `research-writing=0.2`; `presentations=0.3`; `bioinformatics=0.1`; `medical-imaging=0.1`; `web-development` not installed; Bridge runtime/package `0.9.3`; Bridge relation `ALIGNED`; Host Policy configured | none for this consumer in this freeze batch | `FINAL_CLOSURE_FREEZE.json`; `LONGLEAF_BACKUP_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.md`; `LONGLEAF_BACKUP_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.json`; `fresh_longleaf_backup_final_direct_codex_last_message.txt` |
 | `CUHK_Workstation_WSL_Codex` | `PENDING_CURRENT_FREEZE_REFRESH` | Linux WSL2 consumer; exact current identity must be rediscovered on that consumer | run this same freeze batch from the WSL2 consumer | earlier pre-freeze files retained: `CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.md`; `CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.json` |
-| `Workstation` | `PENDING_CURRENT_FREEZE_REFRESH` | Windows consumer; expected user `WORKSTATION\humc2`; expected `CODEX_HOME=C:\Users\humc2\.codex`; exact current identity must be rediscovered on that consumer | run this same freeze batch from Windows Workstation; only Windows may perform final aggregate cleanup after all five required consumers are current PASS | earlier pre-freeze Windows files retained: `WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.md`; `WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.json` |
+| `Workstation` | `PASS` | hostname `WORKSTATION`; Windows; user `WORKSTATION\humc2`; `HOME=C:\Users\humc2`; `CODEX_HOME=C:\Users\humc2\.codex`; AI_Skills Marketplace `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`; `ai-skills-core=0.5`; `writing-style=0.4`; `web-development` not installed; Bridge runtime/package `0.9.3`; Bridge relation `ALIGNED`; Host Policy configured | none for this consumer in this freeze batch | `FINAL_CLOSURE_FREEZE.json`; `WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.md`; `WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.json`; `workstation_windows_final_direct_codex_last_message.txt` |
 | `Legion` | `PASS` | hostname `Legion-Y9000P`; Windows local Codex App consumer; user `legion-y9000p\yuukias`; `USERPROFILE=C:\Users\yuukias`; `CODEX_HOME=C:\Users\yuukias\.codex`; AI_Skills Marketplace `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`; `ai-skills-core=0.5`; `presentations=0.3`; other central optional AI_Skills plugins not installed; Bridge runtime/package `0.9.3`; Bridge relation `ALIGNED`; Host Policy configured | none for this consumer in this freeze batch | `FINAL_CLOSURE_FREEZE.json`; `LEGION_FINAL_CLOSURE_REFRESH_2026-09-29.md`; `LEGION_FINAL_CLOSURE_REFRESH_2026-09-29.json`; `legion_final_direct_codex_last_message.txt` |
 
 ## Consumer PASS Requirements

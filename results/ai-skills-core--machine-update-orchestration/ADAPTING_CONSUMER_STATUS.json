@@ -90,14 +90,32 @@
     },
     {
       "name": "Workstation",
-      "status": "PENDING_CURRENT_FREEZE_REFRESH",
-      "fresh_under_freeze": false,
-      "identity_expected": {
+      "status": "PASS",
+      "fresh_under_freeze": true,
+      "identity": {
+        "hostname": "WORKSTATION",
         "platform_summary": "Windows",
         "user": "WORKSTATION\\humc2",
-        "codex_home": "C:\\Users\\humc2\\.codex"
+        "home": "C:\\Users\\humc2",
+        "codex_home": "C:\\Users\\humc2\\.codex",
+        "codex_version": "codex-cli 0.158.0-alpha.2.1",
+        "ai_skills_marketplace_ref": "release",
+        "ai_skills_marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+        "ai_skills_core": "0.5",
+        "writing_style": "0.4",
+        "web_development": "not installed",
+        "bridge_runtime": "0.9.3",
+        "bridge_package": "0.9.3",
+        "bridge_release_relation": "ALIGNED",
+        "host_policy": "configured"
       },
-      "next_action": "Run the same FINAL_CLOSURE_FREEZE batch from Windows Workstation and perform final aggregate cleanup only if all five required consumers are fresh/current PASS."
+      "evidence": [
+        "FINAL_CLOSURE_FREEZE.json",
+        "WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.md",
+        "WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.json",
+        "workstation_windows_final_direct_codex_last_message.txt"
+      ],
+      "fresh_session": "01a0ec68-0de8-7f52-9433-c72e3c856766"
     },
     {
       "name": "Legion",
