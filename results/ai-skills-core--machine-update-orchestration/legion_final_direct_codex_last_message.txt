@@ -1,0 +1,7 @@
+同步检查完成：`ALREADY_CURRENT`。
+
+AI_Skills 侧已经对齐：`yuukias-ai-skills` Marketplace 指向 `https://github.com/YuukiAS/AI_Skills_Collection.git` 的 `release`，已启用的 `ai-skills-core 0.5` 和 `presentations 0.3` 都与当前 formal release 一致。最新仓库 release `5.4.0` 影响的是未安装的 `web-development` / `writing-style`，所以没有自动新增插件或扩大安装范围。
+
+Bridge 侧也对齐：`ai-bridge where` 指向 `C:\Code\GPT_Codex_AI_Bridge_Kit`，正式分发版本是 `0.9.3`，本地 checkout 干净且当前 HEAD 等于远端 `release`：`9dad0ba4bfa54e251f345091c5151ae991251ec9`。远端 `main` 有后续 closure 文档提交，但 closure 文件明确说明正式 release target 仍是 `9dad0ba...`，所以我没有把机器更新到 `main`。
+
+`MUTATIONS = NONE`：没有改配置、没有安装/卸载插件、没有改仓库文件。唯一异常是 `git fetch origin release` 被 Windows `.git/FETCH_HEAD` 权限挡住，但本地已有 `origin/release`，并用 `ls-remote` 与本地 ref 完成了验证。`codex --version` 也提示 stale arg0 temp cleanup 权限警告，不影响本次同步结论。

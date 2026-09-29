@@ -101,9 +101,41 @@
     },
     {
       "name": "Legion",
-      "status": "PENDING_CURRENT_FREEZE_REFRESH",
-      "fresh_under_freeze": false,
-      "next_action": "Run the same FINAL_CLOSURE_FREEZE batch from Legion before Windows final closure if still pending."
+      "status": "PASS",
+      "fresh_under_freeze": true,
+      "identity": {
+        "hostname": "Legion-Y9000P",
+        "platform_summary": "Windows local Codex App consumer",
+        "user": "legion-y9000p\\yuukias",
+        "home": "",
+        "userprofile": "C:\\Users\\yuukias",
+        "codex_home": "C:\\Users\\yuukias\\.codex",
+        "codex_app_cli_version": "codex-cli 0.154.0-alpha.6.2",
+        "path_codex_version": "codex-cli 0.115.0",
+        "ai_skills_marketplace_ref": "release",
+        "ai_skills_marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+        "ai_skills_core": "0.5",
+        "presentations": "0.3",
+        "workflow_core": "not installed",
+        "writing_style": "not installed",
+        "research_writing": "not installed",
+        "scientific_visualization": "not installed",
+        "web_development": "not installed",
+        "statistical_modeling": "not installed",
+        "bioinformatics": "not installed",
+        "medical_imaging": "not installed",
+        "bridge_runtime": "0.9.3",
+        "bridge_package": "0.9.3",
+        "bridge_release_relation": "ALIGNED",
+        "host_policy": "configured"
+      },
+      "evidence": [
+        "FINAL_CLOSURE_FREEZE.json",
+        "LEGION_FINAL_CLOSURE_REFRESH_2026-09-29.md",
+        "LEGION_FINAL_CLOSURE_REFRESH_2026-09-29.json",
+        "legion_final_direct_codex_last_message.txt"
+      ],
+      "fresh_session": "01a0ec53-e3e3-7880-a6d5-5108239c0fbd"
     }
   ],
   "required_consumers": [

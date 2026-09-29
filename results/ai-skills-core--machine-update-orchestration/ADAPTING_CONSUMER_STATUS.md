@@ -29,6 +29,13 @@ and `release=a7028195f3e97d32d51c32ef8c87f658f92048e5`. The existing freeze is
 reused for the batch; the ai-skills-core production/version diff from release to
 current main was empty.
 
+Legion live remote discovery later observed
+`YuukiAS/AI_Skills_Collection` `main=85d4b2acd990654e8439c1c0dd007493360fa82b`
+and the same frozen `release=a7028195f3e97d32d51c32ef8c87f658f92048e5`.
+The existing freeze is still reused; targeted release-to-main checks over
+`ai-skills-core` source/generated/plugin paths showed no production behavior or
+version change.
+
 ## Required Consumers
 
 The final closure contract has exactly five required logical consumers:
@@ -47,7 +54,7 @@ The final closure contract has exactly five required logical consumers:
 | `Longleaf_Backup_Codex` | `PASS` | hostname `c151404.ll.unc.edu`; Longleaf OVERFLOW namespace; user `aereinh`; `HOME=/overflow/htzhu/mingcheng_new`; `CODEX_HOME=/overflow/htzhu/mingcheng_new/.codex`; AI_Skills Marketplace `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`; `ai-skills-core=0.5`; `workflow-core=0.4`; `writing-style=0.4`; `research-writing=0.2`; `presentations=0.3`; `bioinformatics=0.1`; `medical-imaging=0.1`; `web-development` not installed; Bridge runtime/package `0.9.3`; Bridge relation `ALIGNED`; Host Policy configured | none for this consumer in this freeze batch | `FINAL_CLOSURE_FREEZE.json`; `LONGLEAF_BACKUP_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.md`; `LONGLEAF_BACKUP_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.json`; `fresh_longleaf_backup_final_direct_codex_last_message.txt` |
 | `CUHK_Workstation_WSL_Codex` | `PENDING_CURRENT_FREEZE_REFRESH` | Linux WSL2 consumer; exact current identity must be rediscovered on that consumer | run this same freeze batch from the WSL2 consumer | earlier pre-freeze files retained: `CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.md`; `CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.json` |
 | `Workstation` | `PENDING_CURRENT_FREEZE_REFRESH` | Windows consumer; expected user `WORKSTATION\humc2`; expected `CODEX_HOME=C:\Users\humc2\.codex`; exact current identity must be rediscovered on that consumer | run this same freeze batch from Windows Workstation; only Windows may perform final aggregate cleanup after all five required consumers are current PASS | earlier pre-freeze Windows files retained: `WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.md`; `WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.json` |
-| `Legion` | `PENDING_CURRENT_FREEZE_REFRESH` | must be discovered on that consumer | run this same freeze batch from `Legion` | earlier pre-freeze files retained: `LEGION_MACHINE_SYNC_2026-09-29.md`; `LEGION_MACHINE_SYNC_2026-09-29.json` |
+| `Legion` | `PASS` | hostname `Legion-Y9000P`; Windows local Codex App consumer; user `legion-y9000p\yuukias`; `USERPROFILE=C:\Users\yuukias`; `CODEX_HOME=C:\Users\yuukias\.codex`; AI_Skills Marketplace `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`; `ai-skills-core=0.5`; `presentations=0.3`; other central optional AI_Skills plugins not installed; Bridge runtime/package `0.9.3`; Bridge relation `ALIGNED`; Host Policy configured | none for this consumer in this freeze batch | `FINAL_CLOSURE_FREEZE.json`; `LEGION_FINAL_CLOSURE_REFRESH_2026-09-29.md`; `LEGION_FINAL_CLOSURE_REFRESH_2026-09-29.json`; `legion_final_direct_codex_last_message.txt` |
 
 ## Consumer PASS Requirements
 
