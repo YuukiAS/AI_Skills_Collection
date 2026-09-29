@@ -410,6 +410,10 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(beamer_lecture.adapter, "course-standard-beamer")
         self.assertEqual(beamer_lecture.template, "course-standard")
 
+        business_beamer = stage1_front_door.route_request("Make Beamer slides for a client strategy review.")
+        self.assertEqual(business_beamer.adapter, "course-standard-beamer")
+        self.assertEqual(business_beamer.template, "course-standard")
+
     def test_stage1_front_door_normalizes_explicit_editable_output_extensions(self) -> None:
         pptx = stage1_front_door.route_request("Make a compact methods deck.", explicit_output=".pptx")
         self.assertEqual(pptx.route, "editable")

@@ -71,14 +71,16 @@ def route_request(prompt: str, *, explicit_output: str | None = None, existing_d
         return Stage1Route("external-locked-template", "pass-through", None, "preserve-locked", "preserve-locked", "pass-through locked input", "external locked template is not a built-in template")
     if outputs.intersection(EDITABLE_FORMATS) or _contains_any(text, EDITABLE_TEXT_TERMS):
         return Stage1Route("editable", "official-editable-surface", None, "pptx/slides", ratio, "editable adapter required", "explicit editable output")
+    if explicit_beamer:
+        if _contains_any(text, RESEARCH_TERMS):
+            return Stage1Route("beamer", "cuhk-research-beamer", "cuhk-research", "tex+pdf", ratio or "16:9", "source plus rendered PDF after render-owner QA", "research route")
+        return Stage1Route("beamer", "course-standard-beamer", "course-standard", "tex+pdf", ratio or "4:3", "source plus rendered PDF after render-owner QA", "explicit/generic non-branded Beamer")
     if _contains_any(text, BUSINESS_TERMS):
         return Stage1Route("editable", "official-editable-surface", None, "pptx/slides", ratio, "editable adapter required", "business/executive route remains editable")
     if _contains_any(text, TEACHING_TERMS):
         return Stage1Route("beamer", "course-standard-beamer", "course-standard", "tex+pdf", ratio or "4:3", "source plus rendered PDF after render-owner QA", "teaching route")
     if _contains_any(text, RESEARCH_TERMS):
         return Stage1Route("beamer", "cuhk-research-beamer", "cuhk-research", "tex+pdf", ratio or "16:9", "source plus rendered PDF after render-owner QA", "research route")
-    if explicit_beamer:
-        return Stage1Route("beamer", "course-standard-beamer", "course-standard", "tex+pdf", ratio or "4:3", "source plus rendered PDF after render-owner QA", "generic non-branded Beamer")
     return Stage1Route("editable", "official-editable-surface", None, "pptx/slides", ratio, "editable adapter required", "unspecified general deck defaults to editable surface unless research/teaching context is present")
 
 

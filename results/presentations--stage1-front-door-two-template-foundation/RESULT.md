@@ -71,6 +71,10 @@ canonical `course-standard` template body:
   misrouted to editable output merely because it contains the word `slides`;
   `google slides` and explicit editable output still route to the official
   editable surface.
+- Business/client/strategy requests with no explicit format still preserve the
+  official editable route, while an explicit Beamer/LaTeX request in that
+  context now routes to the `course-standard` Beamer identity instead of being
+  overridden by the default business route.
 
 No `skills/tools/documents-media/presentations/shared/templates/course-standard`
 template body was created or restored.
