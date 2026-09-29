@@ -2,11 +2,11 @@
   "schema": "AI_SKILLS_CORE_FINAL_ADAPTATION_CLOSURE_V1",
   "task_key": "ai-skills-core--machine-update-orchestration",
   "date": "2026-09-29",
-  "status": "ALL_REQUIRED_CONSUMERS_PASS_PRE_CLOSE",
+  "status": "PRODUCT_AND_REPOSITORY_CLOSURE_COMPLETE_PROJECT_MUTATION_PENDING",
   "exactly_five_required_consumers": true,
   "required_consumer_count": 5,
   "all_required_consumers_pass": true,
-  "current_main": "85d4b2acd990654e8439c1c0dd007493360fa82b",
+  "current_main_at_final_evidence_authoring": "573224edb9b81fc4f53dbc1ce9cc9b719483e8c8",
   "formal_release": {
     "ai_skills_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
     "repository_version": "5.4.0",
@@ -129,8 +129,24 @@
   },
   "durable_evidence_locator": "results/ai-skills-core--machine-update-orchestration/",
   "readme_check": "README checked: no update required",
-  "resolution_commit": null,
+  "product_closure": "COMPLETE",
+  "repository_closure": "COMPLETE",
+  "resolution_commit": "573224edb9b81fc4f53dbc1ce9cc9b719483e8c8",
   "issue_86": "OPEN",
+  "issue_update": {
+    "status": "READER_FACING_BODY_UPDATED",
+    "writing_route": "installed writing-style 0.4 / chinese-prose",
+    "fresh_session": "01a0ecb7-925e-7cf1-ab24-5f7c6f0fd7f6",
+    "updated_at_utc": "2026-09-29T10:32:25Z"
+  },
   "project_status": "ADAPTING",
-  "overall_done": false
+  "project_mutation_pending": {
+    "project": "AI Skills Maintenance",
+    "issue": 86,
+    "status_transition": "ADAPTING -> DONE",
+    "area": "ai-skills-core",
+    "resolution_commit": "573224edb9b81fc4f53dbc1ce9cc9b719483e8c8"
+  },
+  "overall_done": false,
+  "overall_result": "NO_ONLY_BECAUSE_PROJECT_METADATA_PENDING"
 }

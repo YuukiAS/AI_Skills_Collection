@@ -8,8 +8,8 @@ Updated date: 2026-09-29
 - Tracking Issue: `#86`
 - Project Status: `ADAPTING`
 - Area: `ai-skills-core`
-- Resolution commit: not assigned for final closure yet
-- AI_Skills current `main`: `85d4b2acd990654e8439c1c0dd007493360fa82b`
+- Resolution commit: `573224edb9b81fc4f53dbc1ce9cc9b719483e8c8`
+- AI_Skills current `main` at final evidence authoring: `573224edb9b81fc4f53dbc1ce9cc9b719483e8c8`
 - AI_Skills formal `release`: `a7028195f3e97d32d51c32ef8c87f658f92048e5`
 - Current formal repository version: `5.4.0`
 - Bridge current `main`: `5a640ec02a20106c778a35ba94eb2164d2b91537`
@@ -86,18 +86,14 @@ Bridge identities equal to the closure freeze, the recorded direct fresh
 session, and an empty `ai-skills-core` production/version diff from frozen
 release to current main.
 
-## DONE Guard
+## Closure Boundary
 
-Do not close Issue `#86` and do not set Project Status `DONE` until:
-
-```text
-exactly five required consumers current or freeze-equivalent PASS under FINAL_CLOSURE_FREEZE
-+ durable evidence complete
-+ clean final aggregate evidence from latest main
-+ Issue #86 reader-facing copy updated through Clear Writing
-+ Project Status DONE and Resolution commit synchronized
-+ Issue #86 closed
-```
+Product closure, all five required-consumer adaptations, and repository closure
+are complete. Issue `#86` now has reader-facing Chinese copy processed through
+installed `writing-style 0.4`; it remains open. The current environment cannot
+mutate GitHub Project metadata, so Project `AI Skills Maintenance` stays
+`ADAPTING`. This metadata mutation is the only remaining action and is not a
+consumer failure or successor product task.
 
 ## Next Handoff
 
@@ -106,5 +102,8 @@ NEXT_REQUIRED_CONSUMER=NONE
 ALL_REQUIRED_CONSUMERS_PASS=YES
 PROJECT_STATUS=ADAPTING
 ISSUE_86_OPEN=YES
-OVERALL_DONE=NO
+PRODUCT_CLOSURE=COMPLETE
+REPO_CLOSURE=COMPLETE
+PROJECT_MUTATION_PENDING=YES
+OVERALL_DONE=NO_ONLY_BECAUSE_PROJECT_METADATA_PENDING
 ```

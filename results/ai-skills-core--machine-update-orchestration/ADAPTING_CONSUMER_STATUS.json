@@ -5,10 +5,10 @@
   "tracking_issue": 86,
   "project_status": "ADAPTING",
   "area": "ai-skills-core",
-  "resolution_commit": null,
+  "resolution_commit": "573224edb9b81fc4f53dbc1ce9cc9b719483e8c8",
   "freeze": {
     "file": "FINAL_CLOSURE_FREEZE.json",
-    "ai_skills_main": "85d4b2acd990654e8439c1c0dd007493360fa82b",
+    "ai_skills_main": "573224edb9b81fc4f53dbc1ce9cc9b719483e8c8",
     "ai_skills_release": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
     "ai_skills_repository_version": "5.4.0",
     "ai_skills_core_version": "0.5",
@@ -18,6 +18,10 @@
   },
   "overall_done": false,
   "issue_86": "OPEN",
+  "issue_update": "READER_FACING_BODY_UPDATED_VIA_WRITING_STYLE_0.4",
+  "product_closure": "COMPLETE",
+  "repository_closure": "COMPLETE",
+  "overall_reason": "NO_ONLY_BECAUSE_PROJECT_METADATA_PENDING",
   "consumers": [
     {
       "name": "Longleaf_Codex",
@@ -196,10 +200,18 @@
   ],
   "next_required_consumer": null,
   "all_required_consumers_pass": true,
+  "project_mutation_pending": {
+    "project": "AI Skills Maintenance",
+    "issue": 86,
+    "status_transition": "ADAPTING -> DONE",
+    "area": "ai-skills-core",
+    "resolution_commit": "573224edb9b81fc4f53dbc1ce9cc9b719483e8c8"
+  },
   "done_guard": {
     "all_five_required_consumers_pass": true,
     "windows_consumer_only_final_aggregate_closure": true,
     "issue_must_remain_open": true,
-    "project_status_must_remain": "ADAPTING"
+    "project_status_must_remain": "ADAPTING",
+    "only_remaining_action": "PROJECT_MUTATION_PENDING"
   }
 }
