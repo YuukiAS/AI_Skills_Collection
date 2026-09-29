@@ -9,7 +9,6 @@ Updated date: 2026-09-29
 - Project Status: `ADAPTING`
 - Area: `ai-skills-core`
 - Resolution commit: not assigned for final closure yet
-- AI_Skills current `main`: `e2b9809e1326c6d2b072e2bdbabcb368927c5d43`
 - AI_Skills formal `release`: `a7028195f3e97d32d51c32ef8c87f658f92048e5`
 - Current formal repository version: `5.4.0`
 - Bridge current `main`: `5a640ec02a20106c778a35ba94eb2164d2b91537`
@@ -23,6 +22,12 @@ machine controller, daemon, watcher, database, or source of truth for Codex
 config. Earlier pre-freeze consumer evidence remains in this directory as
 history, but a current PASS for this closure batch requires fresh evidence from
 that consumer after `FINAL_CLOSURE_FREEZE.json`.
+
+Note: `Longleaf_Backup_Codex` live remote discovery observed
+`YuukiAS/AI_Skills_Collection` `main=5351f304381501f27833e5c7fa4f536ae5b684f8`
+and `release=a7028195f3e97d32d51c32ef8c87f658f92048e5`. The existing freeze is
+reused for the batch; the ai-skills-core production/version diff from release to
+current main was empty.
 
 ## Required Consumers
 
@@ -39,7 +44,7 @@ The final closure contract has exactly five required logical consumers:
 | Consumer | Current freeze status | Current identity / locator | Required next evidence | Durable evidence |
 |---|---|---|---|---|
 | `Longleaf_Codex` | `PASS` | hostname `c0810.ll.unc.edu`; Longleaf USERS namespace; user `aereinh`; `HOME=/users/a/e/aereinh`; `CODEX_HOME=/users/a/e/aereinh/.codex`; AI_Skills Marketplace `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`; `ai-skills-core=0.5`; `writing-style=0.4`; `research-writing=0.2`; `web-development=0.4`; Bridge runtime/package `0.9.3`; Host Policy configured | none for this consumer in this freeze batch | `FINAL_CLOSURE_FREEZE.json`; `LONGLEAF_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.md`; `LONGLEAF_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.json`; `fresh_longleaf_users_direct_codex_last_message.txt` |
-| `Longleaf_Backup_Codex` | `PENDING_CURRENT_FREEZE_REFRESH` | must be discovered on that consumer | run this same freeze batch from `Longleaf_Backup_Codex`; record fresh direct `codex exec --ephemeral` normal-entry evidence | earlier pre-freeze files retained: `LONGLEAF_BACKUP_CODEX_MACHINE_SYNC_2026-09-29.md`; `LONGLEAF_BACKUP_CODEX_MACHINE_SYNC_2026-09-29.json` |
+| `Longleaf_Backup_Codex` | `PASS` | hostname `c151404.ll.unc.edu`; Longleaf OVERFLOW namespace; user `aereinh`; `HOME=/overflow/htzhu/mingcheng_new`; `CODEX_HOME=/overflow/htzhu/mingcheng_new/.codex`; AI_Skills Marketplace `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`; `ai-skills-core=0.5`; `workflow-core=0.4`; `writing-style=0.4`; `research-writing=0.2`; `presentations=0.3`; `bioinformatics=0.1`; `medical-imaging=0.1`; `web-development` not installed; Bridge runtime/package `0.9.3`; Bridge relation `ALIGNED`; Host Policy configured | none for this consumer in this freeze batch | `FINAL_CLOSURE_FREEZE.json`; `LONGLEAF_BACKUP_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.md`; `LONGLEAF_BACKUP_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.json`; `fresh_longleaf_backup_final_direct_codex_last_message.txt` |
 | `CUHK_Workstation_WSL_Codex` | `PENDING_CURRENT_FREEZE_REFRESH` | Linux WSL2 consumer; exact current identity must be rediscovered on that consumer | run this same freeze batch from the WSL2 consumer | earlier pre-freeze files retained: `CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.md`; `CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.json` |
 | `Workstation` | `PENDING_CURRENT_FREEZE_REFRESH` | Windows consumer; expected user `WORKSTATION\humc2`; expected `CODEX_HOME=C:\Users\humc2\.codex`; exact current identity must be rediscovered on that consumer | run this same freeze batch from Windows Workstation; only Windows may perform final aggregate cleanup after all five required consumers are current PASS | earlier pre-freeze Windows files retained: `WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.md`; `WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.json` |
 | `Legion` | `PENDING_CURRENT_FREEZE_REFRESH` | must be discovered on that consumer | run this same freeze batch from `Legion` | earlier pre-freeze files retained: `LEGION_MACHINE_SYNC_2026-09-29.md`; `LEGION_MACHINE_SYNC_2026-09-29.json` |
@@ -75,7 +80,7 @@ exactly five required consumers fresh/current PASS under FINAL_CLOSURE_FREEZE
 ## Next Handoff
 
 ```text
-NEXT_REQUIRED_CONSUMER=Longleaf_Backup_Codex
+NEXT_REQUIRED_CONSUMER=CUHK_Workstation_WSL_Codex
 PROJECT_STATUS=ADAPTING
 ISSUE_86_OPEN=YES
 OVERALL_DONE=NO
