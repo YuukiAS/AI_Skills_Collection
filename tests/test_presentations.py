@@ -25,6 +25,8 @@ import validate_existing_deck_revision_entry as existing_revision_gate  # noqa: 
 import deck_quality_loop  # noqa: E402
 import scientific_object_semantics  # noqa: E402
 import select_gold_compositions  # noqa: E402
+import stage1_front_door  # noqa: E402
+import render_owner  # noqa: E402
 
 
 HEX64 = "a" * 64
@@ -329,6 +331,29 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(actual["metadata"]["output"], "tex")
         self.assertEqual(actual["metadata"]["editability"], "source-editable")
 
+    def test_stage1_front_door_freezes_routing_matrix(self) -> None:
+        cases = [
+            ("把这篇论文做成组会汇报，没特别格式要求。", "beamer", "cuhk-research", "16:9"),
+            ("把明天 Tutorial 做成课件。", "beamer", "course-standard", "4:3"),
+            ("这个 Tutorial 要 16:9。", "beamer", "course-standard", "16:9"),
+            ("做一套给管理层的产品策略汇报。", "editable", None, None),
+            ("请输出 pptx，我要继续编辑。", "editable", None, None),
+            ("把这个现有 PPT 第 6 页标题改短一点。", "local-edit", None, "preserve-existing"),
+            ("按这个会议官方模板做。", "external-locked-template", None, "preserve-locked"),
+            ("只先给我逐页 storyline，不生成 PPT。", "plan-only", None, None),
+        ]
+        for prompt, route, template, ratio in cases:
+            actual = stage1_front_door.route_request(prompt)
+            self.assertEqual(actual.route, route, prompt)
+            self.assertEqual(actual.template, template, prompt)
+            self.assertEqual(actual.ratio, ratio, prompt)
+
+        manifest = stage1_front_door.built_in_template_manifest()
+        self.assertEqual(manifest["built_in_templates"], ["cuhk-research", "course-standard"])
+        self.assertEqual(manifest["course_standard"]["default_ratio"], "4:3")
+        self.assertTrue(manifest["course_standard"]["same_template_identity_for_16_9"])
+        self.assertEqual(manifest["render_environment_owner"], "render-chinese-math-pdf")
+
     def test_research_routing_defaults_to_exact_cuhk_beamer_with_editable_override(self) -> None:
         research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")
         real_world_guardrails = (
@@ -341,12 +366,17 @@ class PresentationSharedTests(unittest.TestCase):
         cuhk_readme = (SHARED / "templates/cuhk/README.md").read_text(encoding="utf-8")
         visual_qa = (SHARED / "visual-qa.md").read_text(encoding="utf-8")
 
-        self.assertIn("defaults to the exact CUHK Beamer route", research_skill)
+        self.assertIn("defaults to the `cuhk-research` exact CUHK Beamer route", research_skill)
         self.assertIn("source-editable `.tex`", research_skill)
         self.assertIn("PPT, PowerPoint, `.pptx`, editable, Slides, or later manual editing", ppt_routing)
         self.assertIn("PPTX/Slides/editable manual editing is explicitly requested", ppt_routing)
-        self.assertIn("Explicit Beamer, LaTeX slides, `.tex`, academic PDF", ppt_routing)
-        self.assertIn("exact CUHK Beamer route by default", template_routing)
+        self.assertIn("non-branded Beamer without stronger context", ppt_routing)
+        self.assertIn("course-standard` Beamer route, 4:3 by default", ppt_routing)
+        self.assertIn("WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE", ppt_routing)
+        self.assertIn("Teaching with explicit 16:9", ppt_routing)
+        self.assertIn("`cuhk-research` exact CUHK Beamer route by default", template_routing)
+        self.assertIn("`course-standard` Beamer route, 4:3 by default", template_routing)
+        self.assertIn("same `course-standard` template identity with the 16:9 variant", template_routing)
         self.assertIn("explicitly requested editable PPTX/Slides", template_routing)
         self.assertIn("file exists", research_skill)
         self.assertIn("file existence alone is not completion", visual_qa)
@@ -356,11 +386,15 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertIn("If the local skill is not installed", research_skill)
         self.assertIn("Academic presentation compilation must first use", latex_notes)
         self.assertIn("render-chinese-math-pdf", latex_notes)
+        self.assertIn("Record the render-resource location reported by the `render-chinese-math-pdf` probe", latex_notes)
         self.assertIn("beamer/source/` is the canonical CUHK Beamer template", cuhk_readme)
         self.assertIn("derived scaffolds for non-exact workflows only", cuhk_readme)
         self.assertIn("Preserve the first/title slide layout", cuhk_readme)
         self.assertIn("Times New Roman Regular, Bold, Italic, and Bold Italic", cuhk_readme)
         self.assertIn("references/real-world-presentation-guardrails.md", research_skill)
+        self.assertIn("course-standard` Beamer 4:3 route", research_skill)
+        self.assertIn("same `course-standard` template identity with 16:9 ratio", research_skill)
+        self.assertIn("WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE", research_skill)
         for required in [
             "Rule Inheritance",
             "one intellectual job",
@@ -406,6 +440,8 @@ class PresentationSharedTests(unittest.TestCase):
         profile = json.loads((REPO_ROOT / "profiles/presentation-desktop.json").read_text(encoding="utf-8"))
 
         self.assertIn("Chinese business, executive, product, strategy, or decision slide text", business_skill)
+        self.assertIn("business/executive/product/strategy/client requests stay on editable PPTX/Slides by default", business_skill)
+        self.assertIn("only after the canonical standard-Beamer source is available", business_skill)
         self.assertIn("writing-fidelity` plus `chinese-prose", business_skill)
         self.assertIn("Chinese presentation text, including research, business, executive, strategy, product, and teaching decks", ppt_routing)
         self.assertIn("must pass through `writing-fidelity` plus `chinese-prose`", ppt_routing)
@@ -417,6 +453,36 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertIn("skills/tools/documents-media/render-chinese-math-pdf", profile_skills)
         self.assertIn("skills/writing/research/citation-verification", profile_skills)
         self.assertEqual(profile["secondary_skills"], [])
+
+    def test_course_standard_source_is_waiting_on_canonical_template_task(self) -> None:
+        root = SHARED / "templates/course-standard"
+        self.assertFalse(root.exists(), "Stage 1 must not create a second canonical course-standard template source")
+        template_routing = (SHARED / "template-routing.md").read_text(encoding="utf-8")
+        self.assertIn("WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE", template_routing)
+        self.assertIn("Do not treat task-local temporary course-standard files as canonical source", template_routing)
+
+    def test_stage1_render_owner_contract_removes_private_host_paths(self) -> None:
+        source_roots = [
+            REPO_ROOT / "skills/tools/documents-media/presentations",
+        ]
+        forbidden = [
+            "/home/yuukias",
+            "/overflow",
+            "/users",
+            ".TinyTeX/bin",
+        ]
+        for root in source_roots:
+            for path in root.rglob("*"):
+                if path.is_file() and path.suffix in {".py", ".md", ".tex", ".sty", ".json"}:
+                    text = path.read_text(encoding="utf-8", errors="replace")
+                    for needle in forbidden:
+                        self.assertNotIn(needle, text, f"{path} contains {needle}")
+
+        self.assertEqual(render_owner.OWNER, "render-chinese-math-pdf")
+        probe = render_owner.probe(REPO_ROOT / "definitely-missing-root-for-test")
+        manifest = render_owner.manifest(probe)
+        self.assertEqual(manifest["environment_owner"], "render-chinese-math-pdf")
+        self.assertFalse(manifest["private_presentations_resolver"])
 
     def test_cuhk_template_payload_is_complete_and_reference_deck_is_valid(self) -> None:
         root = SHARED / "templates/cuhk"

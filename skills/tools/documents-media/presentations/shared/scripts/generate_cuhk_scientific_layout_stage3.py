@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 
 import build_gold_composition_recipe
+import render_owner
 
 
 SHARED = Path(__file__).resolve().parents[1]
@@ -28,12 +29,6 @@ DEFAULT_OUT = REPO_ROOT / "docs" / "audits" / "research_presentation_cuhk_scient
 SLIDE_W = 16.0
 SLIDE_H = 9.0
 SAFE_REGION = {"x": 0.060, "y": 0.185, "w": 0.880, "h": 0.675}
-LOCAL_RENDER_RESOURCE_DIR = Path("/home/yuukias/render_resources/chinese_math_pdf")
-LOCAL_RENDER_TEXMF = LOCAL_RENDER_RESOURCE_DIR / "texmf"
-LOCAL_FANDOL_DIR = LOCAL_RENDER_TEXMF / "fonts" / "opentype" / "public" / "fandol"
-LOCAL_NOTO_CJK_DIR = LOCAL_RENDER_TEXMF / "fonts" / "opentype" / "public" / "noto-cjk"
-DEFAULT_TIMES_FONT_DIR = LOCAL_RENDER_RESOURCE_DIR / "fonts" / "times"
-LOCAL_TINYTEX_BIN = Path("/home/yuukias/.TinyTeX/bin/x86_64-linux")
 FORBIDDEN_AUDIENCE_TERMS = [
     "RRL-",
     "SRC-",
@@ -340,44 +335,21 @@ def capacity_status(spec: dict[str, Any], recipe: dict[str, Any]) -> dict[str, A
     }
 
 
-def tex_cache_env() -> dict[str, str]:
-    user = os.environ.get("USER", "codex")
-    return {
-        "TEXMFVAR": f"/tmp/tex-cache-{user}/var",
-        "TEXMFCONFIG": f"/tmp/tex-cache-{user}/config",
-        "TEXMFCACHE": f"/tmp/tex-cache-{user}/cache",
-    }
-
-
-def render_search_path() -> str:
-    path_parts = [os.environ.get("PATH", "")]
-    if LOCAL_TINYTEX_BIN.exists():
-        path_parts.insert(0, str(LOCAL_TINYTEX_BIN))
-    return os.pathsep.join(part for part in path_parts if part)
-
-
-def times_font_dir() -> Path:
-    override = os.environ.get("AI_SKILLS_TIMES_FONT_DIR")
-    if override:
-        return Path(override).expanduser()
-    return DEFAULT_TIMES_FONT_DIR
-
-
-def write_fontconfig(build_dir: Path) -> dict[str, Any]:
+def write_fontconfig(build_dir: Path, render_probe: dict[str, Any]) -> dict[str, Any]:
     fontconfig_dir = build_dir / "fontconfig"
     fontconfig_dir.mkdir(exist_ok=True)
-    cache_dir = Path("/tmp/fontconfig-cache-027")
+    cache_dir = build_dir / ".fontconfig-cache"
     cache_dir.mkdir(parents=True, exist_ok=True)
     config = fontconfig_dir / "fonts.conf"
-    times_dir = times_font_dir()
+    times_dir, times_source = render_owner.times_font_dir(render_probe)
+    dirs = [times_dir] if times_dir is not None else []
     config.write_text(
         "\n".join(
             [
                 '<?xml version="1.0"?>',
                 '<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">',
                 "<fontconfig>",
-                f"  <dir>{times_dir}</dir>",
-                "  <dir>/usr/share/fonts</dir>",
+                *[f"  <dir>{path}</dir>" for path in dirs],
                 f"  <cachedir>{cache_dir}</cachedir>",
                 "</fontconfig>",
                 "",
@@ -389,15 +361,15 @@ def write_fontconfig(build_dir: Path) -> dict[str, Any]:
         "fontconfig_file": str(config.resolve()),
         "fontconfig_file_repo_path": rel(config),
         "font_cache_dir": str(cache_dir),
-        "times_font_dir": str(times_dir),
-        "times_font_dir_source": "AI_SKILLS_TIMES_FONT_DIR" if os.environ.get("AI_SKILLS_TIMES_FONT_DIR") else "default_render_resources",
-        "times_font_dir_exists": times_dir.exists(),
-        "times_font_files_present": all((times_dir / name).exists() for name in ["times.ttf", "timesbd.ttf", "timesbi.ttf", "timesi.ttf"]),
+        "times_font_dir": str(times_dir) if times_dir is not None else None,
+        "times_font_dir_source": times_source,
+        "times_font_dir_exists": bool(times_dir and times_dir.exists()),
+        "times_font_files_present": bool(times_dir and all((times_dir / name).exists() for name in ["times.ttf", "timesbd.ttf", "timesbi.ttf", "timesi.ttf"])),
     }
 
 
 def find_command(command: str) -> dict[str, Any]:
-    path = shutil.which(command, path=render_search_path())
+    path = shutil.which(command)
     return {
         "available": path is not None,
         "path": path,
@@ -406,31 +378,7 @@ def find_command(command: str) -> dict[str, Any]:
 
 
 def render_skill_probe() -> dict[str, Any]:
-    probe = REPO_ROOT / "skills" / "tools" / "documents-media" / "render-chinese-math-pdf" / "scripts" / "probe_pdf_render_env.py"
-    if not probe.exists():
-        return {
-            "schema": "RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1",
-            "status": "MISSING_RENDER_SKILL_PROBE",
-            "probe": rel(probe),
-        }
-    run = subprocess.run(
-        [sys.executable, str(probe), "--root", str(REPO_ROOT), "--pretty"],
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    try:
-        payload = json.loads(run.stdout)
-    except json.JSONDecodeError:
-        payload = {"raw_stdout": run.stdout}
-    return {
-        "schema": "RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1",
-        "status": "ok" if run.returncode == 0 else "PROBE_FAILED",
-        "probe": rel(probe),
-        "returncode": run.returncode,
-        "stderr": run.stderr,
-        "payload": payload,
-    }
+    return render_owner.probe(REPO_ROOT)
 
 
 def page_specs() -> list[dict[str, Any]]:
@@ -1482,42 +1430,70 @@ def find_tex_engine() -> dict[str, Any] | None:
 
 
 def dependency_probe() -> dict[str, Any]:
+    render_probe = render_skill_probe()
     commands = {command: find_command(command) for command in ["xelatex", "lualatex", "pdflatex", "tectonic", "pdftoppm", "pdfinfo", "pdftotext", "pdffonts"]}
     tex_engine_available = any(commands[command]["available"] for command in ["xelatex", "lualatex", "pdflatex", "tectonic"])
+    render_manifest = render_owner.manifest(render_probe)
+    times_dir, times_source = render_owner.times_font_dir(render_probe)
     return {
         "schema": "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1",
         "task_key": TASK_KEY,
+        "environment_owner": render_owner.OWNER,
+        "render_owner": render_manifest,
         "commands": commands,
-        "local_render_resources": {
-            "source": "render-chinese-math-pdf probe / host-local render resources",
-            "resource_dir": str(LOCAL_RENDER_RESOURCE_DIR),
-            "resource_dir_exists": LOCAL_RENDER_RESOURCE_DIR.exists(),
-            "texmf": str(LOCAL_RENDER_TEXMF),
-            "texmf_exists": LOCAL_RENDER_TEXMF.exists(),
-            "fandol_dir": str(LOCAL_FANDOL_DIR),
-            "fandol_dir_exists": LOCAL_FANDOL_DIR.exists(),
-            "noto_cjk_dir": str(LOCAL_NOTO_CJK_DIR),
-            "noto_cjk_dir_exists": LOCAL_NOTO_CJK_DIR.exists(),
-            "times_font_dir": str(times_font_dir()),
-            "times_font_dir_source": "AI_SKILLS_TIMES_FONT_DIR" if os.environ.get("AI_SKILLS_TIMES_FONT_DIR") else "default_render_resources",
-            "times_font_dir_exists": times_font_dir().exists(),
-            "tinytex_bin": str(LOCAL_TINYTEX_BIN),
-            "tinytex_bin_exists": LOCAL_TINYTEX_BIN.exists(),
-            "tex_cache_env": tex_cache_env(),
+        "render_resources": {
+            "source": "render-chinese-math-pdf probe",
+            "resource_dir": render_manifest["resolved_route"].get("resource_dir"),
+            "resource_dir_exists": bool(render_manifest["resolved_route"].get("resource_dir")),
+            "times_font_dir": str(times_dir) if times_dir is not None else None,
+            "times_font_dir_source": times_source,
+            "times_font_dir_exists": bool(times_dir and times_dir.exists()),
+            "tex_cache_strategy": "render-owner cache variables scoped to build directory",
         },
         "tex_engine_available": tex_engine_available,
         "pdf_renderer_available": commands["pdftoppm"]["available"],
-        "preferred_route": "latex_to_pdf_to_png" if tex_engine_available else "blocked_missing_dependency",
+        "preferred_route": "latex_to_pdf_to_png" if tex_engine_available and render_probe.get("status") == "ok" else "blocked_missing_dependency",
     }
 
 
 def compile_pdf(build_dir: Path) -> dict[str, Any]:
+    render_probe = render_skill_probe()
+    if render_probe.get("status") != "ok":
+        return {
+            "status": "BLOCKED_MISSING_TEX_ENGINE",
+            "failure_status": "blocked_missing_dependency",
+            "environment_owner": render_owner.OWNER,
+            "missing_dependency": render_probe.get("missing_dependency"),
+            "render_owner": render_owner.manifest(render_probe),
+            "engine": None,
+            "engine_path": None,
+            "fontconfig": None,
+            "pdf": None,
+            "log": None,
+            "message": f"Render-owner probe failed: {render_probe.get('missing_dependency')}",
+        }
     engine = find_tex_engine()
     pdf = build_dir / "main.pdf"
-    fontconfig = write_fontconfig(build_dir)
+    fontconfig = write_fontconfig(build_dir, render_probe)
+    if not fontconfig["times_font_files_present"]:
+        return {
+            "status": "BLOCKED_MISSING_TEX_PACKAGE",
+            "failure_status": "blocked_missing_dependency",
+            "environment_owner": render_owner.OWNER,
+            "missing_dependency": "template-fonts.times",
+            "engine": engine["command"] if engine else None,
+            "engine_path": engine["path"] if engine else None,
+            "fontconfig": fontconfig,
+            "pdf": None,
+            "log": None,
+            "message": "CUHK template requires Times font files resolved through the render owner route or AI_SKILLS_TIMES_FONT_DIR.",
+        }
     if not engine:
         return {
             "status": "BLOCKED_MISSING_TEX_ENGINE",
+            "failure_status": "blocked_missing_dependency",
+            "environment_owner": render_owner.OWNER,
+            "missing_dependency": "tex-engine",
             "engine": None,
             "engine_path": None,
             "fontconfig": fontconfig,
@@ -1530,11 +1506,11 @@ def compile_pdf(build_dir: Path) -> dict[str, Any]:
     else:
         cmd = [engine["path"], "-interaction=nonstopmode", "-halt-on-error", "main.tex"]
     env = os.environ.copy()
-    env["PATH"] = render_search_path()
     env["FONTCONFIG_FILE"] = fontconfig["fontconfig_file"]
     env["XDG_CACHE_HOME"] = fontconfig["font_cache_dir"]
-    env["OSFONTDIR"] = fontconfig["times_font_dir"]
-    env.update(tex_cache_env())
+    env.update(render_owner.tex_cache_env(build_dir, render_probe, template_inputs=[CANONICAL_CUHK]))
+    if fontconfig["times_font_dir"]:
+        env["OSFONTDIR"] = os.pathsep.join([fontconfig["times_font_dir"], env.get("OSFONTDIR", "")]).rstrip(os.pathsep)
     runs = []
     pass_count = 1 if engine["command"] == "tectonic" else 2
     for pass_index in range(pass_count):
@@ -1561,6 +1537,9 @@ def compile_pdf(build_dir: Path) -> dict[str, Any]:
         if missing_latex_file:
             return {
                 "status": "BLOCKED_MISSING_TEX_PACKAGE",
+                "failure_status": "blocked_missing_dependency",
+                "environment_owner": render_owner.OWNER,
+                "missing_dependency": f"tex-package.{missing_latex_file}",
                 "engine": engine["command"],
                 "engine_path": engine["path"],
                 "compile_passes": len(runs),
@@ -1572,6 +1551,7 @@ def compile_pdf(build_dir: Path) -> dict[str, Any]:
             }
         return {
             "status": "COMPILE_FAILED",
+            "environment_owner": render_owner.OWNER,
             "engine": engine["command"],
             "engine_path": engine["path"],
             "compile_passes": len(runs),
@@ -1582,6 +1562,8 @@ def compile_pdf(build_dir: Path) -> dict[str, Any]:
         }
     return {
         "status": "COMPILED",
+        "environment_owner": render_owner.OWNER,
+        "render_owner": render_owner.manifest(render_probe),
         "engine": engine["command"],
         "engine_path": engine["path"],
         "compile_passes": len(runs),
