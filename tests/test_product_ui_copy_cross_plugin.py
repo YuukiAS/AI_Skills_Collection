@@ -85,18 +85,18 @@ class ProductUiCopyCrossPluginTests(unittest.TestCase):
         self.assertIn("Do not claim native desktop/mobile runtime behavior", responsive)
         self.assertIn("browser-only", responsive)
 
-    def test_marketplace_source_exposes_product_ui_copy_without_version_bump(self) -> None:
+    def test_marketplace_source_exposes_product_ui_copy_with_release_bump(self) -> None:
         config = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
         plugins = {plugin["name"]: plugin for plugin in config["plugins"]}
 
         writing = plugins["writing-style"]
-        self.assertEqual(writing["version"], "0.3")
+        self.assertEqual(writing["version"], "0.4")
         self.assertIn("Product UI Copy", writing["description"])
         writing_sources = {skill["artifact_id"]: skill["source"] for skill in writing["skills"]}
         self.assertEqual(writing_sources["product-ui-copy"], "skills/writing/core/product-ui-copy")
 
         frontend = plugins["web-development"]
-        self.assertEqual(frontend["version"], "0.3")
+        self.assertEqual(frontend["version"], "0.4")
         self.assertIn("browser extension", frontend["description"])
         self.assertIn("Product UI Copy handoff", frontend["skills"][1]["description"])
 
