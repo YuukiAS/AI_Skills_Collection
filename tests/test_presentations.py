@@ -2845,6 +2845,10 @@ class PresentationSharedTests(unittest.TestCase):
                 REPO_ROOT / "plugins/codex/plugins/presentations/skills/research/SKILL.md",
             ),
             (
+                REPO_ROOT / "skills/tools/documents-media/presentations/business-presentations/SKILL.md",
+                REPO_ROOT / "plugins/codex/plugins/presentations/skills/business/SKILL.md",
+            ),
+            (
                 REPO_ROOT
                 / "skills/tools/documents-media/presentations/research-presentations/references/real-world-presentation-guardrails.md",
                 REPO_ROOT
@@ -2861,6 +2865,18 @@ class PresentationSharedTests(unittest.TestCase):
             (
                 SHARED / "scripts/markdown_to_deck_plan.py",
                 REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/markdown_to_deck_plan.py",
+            ),
+            (
+                SHARED / "scripts/stage1_front_door.py",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/stage1_front_door.py",
+            ),
+            (
+                SHARED / "scripts/render_owner.py",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/render_owner.py",
+            ),
+            (
+                SHARED / "scripts/prepare_g5_private_review.py",
+                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/prepare_g5_private_review.py",
             ),
             (
                 SHARED / "visual-qa.md",

@@ -75,6 +75,9 @@ canonical `course-standard` template body:
   official editable route, while an explicit Beamer/LaTeX request in that
   context now routes to the `course-standard` Beamer identity instead of being
   overridden by the default business route.
+- Source/generated parity tests now explicitly cover the Stage 1 front-door,
+  render-owner adapter contract, G5 private-review plumbing, and business
+  Presentations skill mirror in the generated plugin payload.
 
 No `skills/tools/documents-media/presentations/shared/templates/course-standard`
 template body was created or restored.
