@@ -344,8 +344,17 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
 
     if dependency.get("schema") != "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1":
         errors.append("dependency_probe.json: invalid schema")
-    if render_probe.get("schema") != "RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1":
+    if dependency.get("environment_owner") not in {None, "render-chinese-math-pdf"}:
+        errors.append("dependency_probe.json: unexpected render environment owner")
+    render_owner_manifest = dependency.get("render_owner", {})
+    if render_owner_manifest and render_owner_manifest.get("environment_owner") != "render-chinese-math-pdf":
+        errors.append("dependency_probe.json: render owner manifest missing render-chinese-math-pdf owner")
+    if render_owner_manifest and render_owner_manifest.get("private_presentations_resolver") is not False:
+        errors.append("dependency_probe.json: Presentations-owned private resolver was used")
+    if render_probe.get("schema") not in {"RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1", "PRESENTATIONS_RENDER_OWNER_PROBE_V1"}:
         errors.append("render_chinese_math_pdf_probe.json: invalid schema")
+    if render_probe.get("environment_owner") not in {None, "render-chinese-math-pdf"}:
+        errors.append("render_chinese_math_pdf_probe.json: unexpected render environment owner")
     if not render_probe_status_allowed(render_probe, render_status, allow_missing_render=allow_missing_render):
         errors.append("render_chinese_math_pdf_probe.json: render probe failed")
 

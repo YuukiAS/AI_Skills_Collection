@@ -1,73 +1,95 @@
-# Executor Result — presentations--stage1-front-door-two-template-foundation
+---
+schema: PRESENTATIONS_STAGE1_EXECUTOR_RESULT_V1
+task_key: presentations--stage1-front-door-two-template-foundation
+status: A_PHASE_PARTIAL_COMPLETE_WAITING_FOR_CANONICAL_COURSE_STANDARD
+---
 
-Status: NEEDS_GPT_PLANNER
+# Executor Result — Presentations Stage 1 A-Phase
 
-This is not a Stage 1 PASS and not a G1/G5 handoff.
+This is not a final Stage 1 PASS, not final G1, and not final G5.
 
-## Reason
+The revised Plan v2 / `plan_revision=1` split the task into:
 
-The frozen PLAN assumes this Stage 1 task creates the `course-standard`
-canonical Beamer source. The user supplied a new execution fact: an independent
-canonical standard-Beamer task now owns that template source, and this Stage 1
-task must not create or continue a second `course-standard` template body.
+- A. `CONTINUE_NOW`;
+- B. `WAIT_FOR_CANONICAL_COURSE_STANDARD`;
+- C. final integration after the independent standard-Beamer task supplies the
+  exact canonical course-standard source path, commit, and consumption boundary.
 
-That invalidates the frozen dependency assumption. Executor cannot choose a
-dual-track template strategy, merge strategy, or substitute source path.
+## Completed Now
 
-Required dependency:
+Implemented and validated A-phase work that does not require owning the final
+canonical `course-standard` template body:
+
+- unified Stage 1 front-door routing helper;
+- research / teaching / business / editable / local-edit / locked-template /
+  plan-only routing infrastructure;
+- exactly-two-template identity manifest with unresolved `course-standard`
+  source status;
+- Marketplace Presentations interface/default prompt routing update;
+- source/generated parity through the canonical Marketplace generator;
+- `render-chinese-math-pdf` owner-consumption helper for Presentations;
+- CUHK generator integration with render-owner-resolved command/resource
+  identity;
+- CUHK adapter manifest recording `render-chinese-math-pdf` as owner;
+- typed `blocked_missing_dependency` helper path;
+- unexpected font fallback rejection helper path;
+- validator compatibility with the new render-owner probe schema;
+- G5 private-review metadata/bundle plumbing that remains `final_g5_ready=false`
+  until canonical course-standard source identity is supplied.
+
+No `skills/tools/documents-media/presentations/shared/templates/course-standard`
+template body was created or restored.
+
+## Deferred Dependency
+
+Remaining dependency:
 
 ```text
 WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE
 ```
 
-Planner must revise the frozen Plan after the independent standard-Beamer task
-provides:
+Only the items listed in the revised Plan's
+`WAIT_FOR_CANONICAL_COURSE_STANDARD` / `FINAL_INTEGRATION` sections remain
+deferred, including:
 
-- exact canonical source path;
-- candidate commit;
-- allowed consumption/integration boundary for this Stage 1 adapter work;
-- updated G1/G5 evidence sequence.
+- exact canonical course-standard source path;
+- exact candidate commit;
+- allowed consumption boundary;
+- final course-standard 4:3 / 16:9 source integration;
+- course-standard template-specific compile/render/fidelity;
+- final two-adapter RP-G1/RP-G5;
+- full G1 and full G5 private visual evidence bundle.
 
-## Preserved Work
+## Validation
 
-The current branch keeps only Stage 1 work that does not depend on owning the
-`course-standard` template body:
+Passed:
 
-- unified front-door routing helper;
-- adapter/routing infrastructure for the two built-in template identities;
-- editable/business/local-edit/pass-through/plan-only route preservation;
-- `render-chinese-math-pdf` owner-consumption helper;
-- portability cleanup removing reusable Presentations host-path assumptions;
-- CUHK Beamer generator integration toward the render-owner contract;
-- routing documentation and template-independent tests reflecting the new
-  dependency wait.
+```text
+python scripts/build_codex_marketplace.py --write --validate --check --path-report
+python -m unittest tests.test_presentations
+python scripts/skills.py validate
+git diff --check
+RP-G2 forbidden-path scan over source + generated Presentations payload
+course-standard template directory absence check
+```
 
-## Removed / Not Claimed
+Reviewed Handoff repository-wide validation was run and failed only on
+pre-existing unrelated historical task metadata:
 
-Temporary `course-standard` source files and the temporary course-standard
-adapter generator were removed from this worktree.
+```text
+ai-bridge reviewed-handoff validate --target /home/yuukias/AI_Skills_Collection-presentations--stage1-front-door-two-template-foundation
+```
 
-No task-local `course-standard` file is canonical.
-No final G1 or G5 evidence has been run from a temporary template.
-No private Chapter1 visual fidelity claim is made.
-
-## Validation State
-
-Full Stage 1 validation is intentionally not complete because the canonical
-course-standard source is unavailable to this task.
-
-Earlier local targeted work exposed unfinished generated-layer/schema/test
-follow-up, and those are not hidden as PASS evidence. Planner should decide the
-next integration sequence after the canonical standard-Beamer source identity is
-known.
+Observed failures were legacy task-key shape errors for older tasks and an
+unrelated `web-development--frontend-design-production-consolidation` RESULT
+frontmatter issue. No current task-specific error was reported.
 
 Repository bump decision: NONE
 
-Reason: this is an incomplete reviewed-handoff implementation checkpoint and
-not a production release.
+Reason: this is an incomplete A-phase checkpoint, not a production release.
 
 Affected plugins:
 
 - presentations: NO_BUMP
-  Reason: Stage 1 is waiting for Planner re-entry and has not passed required
-  G1/G5/CI/Reviewer gates.
+  Reason: final Stage 1 G1/G5/CI/Reviewer gates are still pending on canonical
+  `course-standard` integration.

@@ -368,7 +368,11 @@ def write_fontconfig(build_dir: Path, render_probe: dict[str, Any]) -> dict[str,
     }
 
 
-def find_command(command: str) -> dict[str, Any]:
+def find_command(command: str, render_probe: dict[str, Any] | None = None) -> dict[str, Any]:
+    if render_probe is not None:
+        owner_probe = render_owner.command_probe(render_probe, command)
+        if owner_probe["available"]:
+            return owner_probe
     path = shutil.which(command)
     return {
         "available": path is not None,
@@ -1421,9 +1425,9 @@ def copy_assets(specs: list[dict[str, Any]], build_dir: Path) -> dict[str, str]:
     return asset_map
 
 
-def find_tex_engine() -> dict[str, Any] | None:
+def find_tex_engine(render_probe: dict[str, Any]) -> dict[str, Any] | None:
     for command in ["xelatex", "lualatex", "pdflatex", "tectonic"]:
-        probe = find_command(command)
+        probe = find_command(command, render_probe)
         if probe["available"]:
             return {"command": command, **probe}
     return None
@@ -1431,7 +1435,7 @@ def find_tex_engine() -> dict[str, Any] | None:
 
 def dependency_probe() -> dict[str, Any]:
     render_probe = render_skill_probe()
-    commands = {command: find_command(command) for command in ["xelatex", "lualatex", "pdflatex", "tectonic", "pdftoppm", "pdfinfo", "pdftotext", "pdffonts"]}
+    commands = {command: find_command(command, render_probe) for command in ["xelatex", "lualatex", "pdflatex", "tectonic", "pdftoppm", "pdfinfo", "pdftotext", "pdffonts"]}
     tex_engine_available = any(commands[command]["available"] for command in ["xelatex", "lualatex", "pdflatex", "tectonic"])
     render_manifest = render_owner.manifest(render_probe)
     times_dir, times_source = render_owner.times_font_dir(render_probe)
@@ -1472,7 +1476,7 @@ def compile_pdf(build_dir: Path) -> dict[str, Any]:
             "log": None,
             "message": f"Render-owner probe failed: {render_probe.get('missing_dependency')}",
         }
-    engine = find_tex_engine()
+    engine = find_tex_engine(render_probe)
     pdf = build_dir / "main.pdf"
     fontconfig = write_fontconfig(build_dir, render_probe)
     if not fontconfig["times_font_files_present"]:
@@ -1564,6 +1568,7 @@ def compile_pdf(build_dir: Path) -> dict[str, Any]:
         "status": "COMPILED",
         "environment_owner": render_owner.OWNER,
         "render_owner": render_owner.manifest(render_probe),
+        "render_probe": render_probe,
         "engine": engine["command"],
         "engine_path": engine["path"],
         "compile_passes": len(runs),
@@ -1582,9 +1587,13 @@ def render_pdf(build_dir: Path, compile_status: dict[str, Any]) -> dict[str, Any
             "rendered_png": [],
             "message": compile_status.get("message"),
         }
-    if not shutil.which("pdftoppm"):
+    pdftoppm = render_owner.owner_command_or_path(compile_status.get("render_probe", {}), "pdftoppm")
+    if not pdftoppm:
         return {
             "status": "BLOCKED_MISSING_PDF_RENDERER",
+            "failure_status": "blocked_missing_dependency",
+            "environment_owner": render_owner.OWNER,
+            "missing_dependency": "commands.pdftoppm",
             "png_count": 0,
             "rendered_png": [],
             "message": "pdftoppm is not available.",
@@ -1592,7 +1601,7 @@ def render_pdf(build_dir: Path, compile_status: dict[str, Any]) -> dict[str, Any
     rendered_dir = build_dir / "rendered"
     rendered_dir.mkdir(exist_ok=True)
     prefix = rendered_dir / "slide"
-    run = subprocess.run(["pdftoppm", "-png", "-r", "160", "main.pdf", str(prefix)], cwd=build_dir, check=False, capture_output=True, text=True)
+    run = subprocess.run([pdftoppm, "-png", "-r", "160", "main.pdf", str(prefix)], cwd=build_dir, check=False, capture_output=True, text=True)
     if run.returncode != 0:
         return {
             "status": "RENDER_FAILED",
@@ -1806,6 +1815,19 @@ def generate(
         "schema": "RESEARCH_CUHK_STAGE3_BUILD_MANIFEST_V1",
         "task_key": TASK_KEY,
         "implementation_commit": implementation_commit,
+        "beamer_adapter": render_owner.adapter_manifest(
+            adapter="cuhk-research-beamer",
+            template_identity="cuhk-research",
+            probe_payload=render_probe,
+            source_identity={
+                "source": rel(CANONICAL_CUHK),
+                "sha256": stable_sha({
+                    rel(path): file_sha(path)
+                    for path in sorted(CANONICAL_CUHK.rglob("*"))
+                    if path.is_file()
+                }),
+            },
+        ),
         "canonical_cuhk_source": rel(CANONICAL_CUHK),
         "canonical_files": {
             rel(path): file_sha(path)

@@ -41,7 +41,7 @@ answer/request -> problem or opportunity -> evidence and impact -> plan -> resou
 1. Clarify the decision, audience, time limit, and required output format.
 2. Produce `deck-plan.yaml` for non-trivial decks.
 3. Keep each slide tied to one decision-relevant message.
-4. Use the CUHK default visual system only when no company, client, course, or event template is specified.
+4. Use the Stage 1 front-door routing before choosing a template: business/executive/product/strategy/client requests stay on editable PPTX/Slides by default; teaching/courseware requests without an explicit editable format route to `course-standard` Beamer only after the canonical standard-Beamer source is available; research no-format requests route to `cuhk-research`.
 5. Apply the shared writing handoff before final deck creation: Chinese slide text gets `writing-fidelity` plus `chinese-prose`; English scientific slide prose can use `scientific-prose` when the deck includes research evidence.
 6. Route editable deck creation to official Presentation/Slides and keep visual QA evidence.
 

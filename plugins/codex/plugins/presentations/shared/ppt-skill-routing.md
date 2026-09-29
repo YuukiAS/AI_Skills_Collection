@@ -14,9 +14,12 @@ Use whole-slide images only when the user explicitly asks for image/PDF/social-c
 |---|---|
 | Professional editable PowerPoint with conventional layouts | Editable PPTX through official Presentation/Slides or ChatGPT for PowerPoint, with this repo providing deck plan and QA |
 | PPT, PowerPoint, `.pptx`, editable, Slides, or later manual editing | Editable PPTX/Slides through official Presentation/Slides or ChatGPT for PowerPoint, with this repo providing deck plan, source fidelity, and QA |
-| Group meeting, research update, journal club, seminar, defense, paper talk, or technical research slides with no format specified in `presentation-desktop` | Exact CUHK Beamer route by default; produce source-editable `.tex` from `shared/templates/cuhk/beamer/source/` plus rendered PDF |
+| Group meeting, research update, journal club, seminar, defense, QE/oral, paper talk, or technical research slides with no format specified in `presentation-desktop` | `cuhk-research` exact CUHK Beamer route by default; produce source-editable `.tex` from `shared/templates/cuhk/beamer/source/` plus rendered PDF |
 | PhD group meeting, supervisor discussion, or research progress update with failures, uncertainty, next experiment, or advisor decision | `research-presentations` with `metadata.mode: research-group-meeting`; build Research State and Evidence Board before slide plan, then use exact CUHK Beamer unless PPTX/Slides/editable manual editing is explicitly requested |
-| Explicit Beamer, LaTeX slides, `.tex`, academic PDF, or venue/project-locked TeX template | LaTeX plus Beamer; create `.tex` and PDF, then render and QA |
+| Tutorial, lecture, teaching, courseware, or classroom deck with no explicit ratio | `course-standard` Beamer route, 4:3 by default; canonical source is `WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE` |
+| Teaching with explicit 16:9 | Same `course-standard` template identity with the 16:9 variant; canonical source is pending the independent standard-Beamer task |
+| Explicit Beamer, LaTeX slides, `.tex`, academic PDF, or non-branded Beamer without stronger context | `course-standard` LaTeX plus Beamer unless a project/venue locked template is supplied; do not invent a task-local canonical source |
+| Venue/project-locked TeX template | Pass-through locked template route; do not add it as a built-in template |
 | High visual ceiling, multi-format visual outputs, or poster-like pages | Visual direction first, then confirm whether the user accepts image-heavy slides |
 | Narrative, storyline, decision logic, or quality control | `research-presentations` or `business-presentations` deck plan before file creation |
 | HTML-style expressive slides | Frontend visual system plus explicit HTML/PDF routing; do not pretend it is an editable PPTX |
@@ -39,7 +42,7 @@ Python PowerPoint libraries are not the default implementation path for producti
 
 ## Research Group Meeting Fallback
 
-If the user has a real urgent group meeting and no stronger local template is supplied, prefer the exact CUHK Beamer source route or the user's older working template for that delivery. Keep PPTX experimentation in fixtures or drafts unless the user explicitly needs PowerPoint/Slides editability.
+If the user has a real urgent group meeting and no stronger local template is supplied, prefer the exact CUHK Beamer source route or the user's older working template for that delivery. If the user has urgent teaching/courseware and the canonical standard-Beamer source is not yet available, report `WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE` rather than fabricating a second course-standard template. Keep PPTX experimentation in fixtures or drafts unless the user explicitly needs PowerPoint/Slides editability.
 
 ## Prompt Intake Pattern
 

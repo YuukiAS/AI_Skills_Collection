@@ -274,6 +274,13 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False, task_key: str
 
     if dependency_probe.get("schema") != "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1":
         errors.append(f"{dependency_path}: invalid schema")
+    if dependency_probe.get("environment_owner") != "render-chinese-math-pdf":
+        errors.append(f"{dependency_path}: render environment owner not recorded")
+    render_owner_manifest = dependency_probe.get("render_owner", {})
+    if render_owner_manifest.get("environment_owner") != "render-chinese-math-pdf":
+        errors.append(f"{dependency_path}: render owner manifest missing render-chinese-math-pdf owner")
+    if render_owner_manifest.get("private_presentations_resolver") is not False:
+        errors.append(f"{dependency_path}: Presentations-owned private resolver was used")
     commands = dependency_probe.get("commands", {})
     for command in ["xelatex", "lualatex", "pdflatex", "tectonic", "pdftoppm"]:
         if command not in commands:
@@ -282,8 +289,10 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False, task_key: str
         errors.append(f"{dependency_path}: compile succeeded without a recorded TeX engine")
     if dependency_probe.get("tex_engine_available") is not True and manifest.get("compile_status", {}).get("status") != "BLOCKED_MISSING_TEX_ENGINE":
         errors.append(f"{dependency_path}: missing TeX engine did not map to BLOCKED_MISSING_TEX_ENGINE")
-    if render_probe.get("schema") != "RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1":
+    if render_probe.get("schema") not in {"RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1", "PRESENTATIONS_RENDER_OWNER_PROBE_V1"}:
         errors.append(f"{render_probe_path}: invalid schema")
+    if render_probe.get("environment_owner") not in {None, "render-chinese-math-pdf"}:
+        errors.append(f"{render_probe_path}: unexpected render environment owner")
     render_status = manifest.get("render_status", {})
     if not render_probe_status_allowed(render_probe, render_status, allow_missing_render=allow_missing_render):
         errors.append(f"{render_probe_path}: render-chinese-math-pdf probe failed")

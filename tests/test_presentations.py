@@ -27,6 +27,7 @@ import scientific_object_semantics  # noqa: E402
 import select_gold_compositions  # noqa: E402
 import stage1_front_door  # noqa: E402
 import render_owner  # noqa: E402
+import prepare_g5_private_review  # noqa: E402
 
 
 HEX64 = "a" * 64
@@ -352,6 +353,8 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(manifest["built_in_templates"], ["cuhk-research", "course-standard"])
         self.assertEqual(manifest["course_standard"]["default_ratio"], "4:3")
         self.assertTrue(manifest["course_standard"]["same_template_identity_for_16_9"])
+        self.assertEqual(manifest["course_standard"]["canonical_source_status"], "WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE")
+        self.assertFalse(manifest["course_standard"]["template_body_in_this_task"])
         self.assertEqual(manifest["render_environment_owner"], "render-chinese-math-pdf")
 
     def test_research_routing_defaults_to_exact_cuhk_beamer_with_editable_override(self) -> None:
@@ -464,6 +467,7 @@ class PresentationSharedTests(unittest.TestCase):
     def test_stage1_render_owner_contract_removes_private_host_paths(self) -> None:
         source_roots = [
             REPO_ROOT / "skills/tools/documents-media/presentations",
+            REPO_ROOT / "plugins/codex/plugins/presentations",
         ]
         forbidden = [
             "/home/yuukias",
@@ -483,6 +487,83 @@ class PresentationSharedTests(unittest.TestCase):
         manifest = render_owner.manifest(probe)
         self.assertEqual(manifest["environment_owner"], "render-chinese-math-pdf")
         self.assertFalse(manifest["private_presentations_resolver"])
+
+    def test_stage1_render_owner_contract_gates_missing_dependency_and_font_fallback(self) -> None:
+        missing_probe = {
+            "status": "blocked_missing_dependency",
+            "missing_dependency": "fonts.noto_serif_sc_regular",
+            "resolved_route": {"resource_dir": None},
+        }
+        gate = render_owner.required_dependency_gate(missing_probe)
+        self.assertEqual(gate["status"], "blocked_missing_dependency")
+        self.assertEqual(gate["missing_dependency"], "fonts.noto_serif_sc_regular")
+        self.assertFalse(gate["substitute_pass_artifact"])
+
+        pdffonts = "\n".join(
+            [
+                "name                                 type              encoding         emb sub uni object ID",
+                "------------------------------------ ----------------- ---------------- --- --- --- ---------",
+                "AAAAAA+TeXGyreTermes-Regular         CID Type 0C       Identity-H       yes yes yes      4  0",
+                "BBBBBB+DejaVuSans                    CID TrueType      Identity-H       yes yes yes      5  0",
+            ]
+        )
+        font_gate = render_owner.font_contract_gate(
+            pdffonts,
+            allowed_substrings=["TeXGyreTermes", "NotoSerifSC", "NotoSansSC", "NewCMMath"],
+            required_substrings=["TeXGyreTermes"],
+        )
+        self.assertEqual(font_gate["status"], "BLOCKED_UNEXPECTED_FONT_FALLBACK")
+        self.assertIn("BBBBBB+DejaVuSans", font_gate["unexpected_fonts"])
+
+        owner_probe = {
+            "status": "ok",
+            "probe": "skills/tools/documents-media/render-chinese-math-pdf/scripts/probe_pdf_render_env.py",
+            "resolved_route": {"resource_dir": "/runtime/receipt/only"},
+        }
+        adapter_manifest = render_owner.adapter_manifest(
+            adapter="course-standard-beamer",
+            template_identity="course-standard",
+            probe_payload=owner_probe,
+            pending_dependency="WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE",
+        )
+        self.assertEqual(adapter_manifest["environment_owner"], "render-chinese-math-pdf")
+        self.assertFalse(adapter_manifest["private_presentations_discovery_route"])
+        self.assertEqual(adapter_manifest["pending_dependency"], "WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE")
+
+    def test_presentations_marketplace_front_door_interface(self) -> None:
+        config = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
+        presentations = next(plugin for plugin in config["plugins"] if plugin["name"] == "presentations")
+        description = presentations["description"]
+        prompts = presentations["defaultPrompt"]
+        self.assertIn("Presentation front-door routing", description)
+        self.assertIn("teaching course-standard identity", description)
+        self.assertIn("portable render ownership", description)
+        self.assertIn("Route this deck request", prompts[0])
+        self.assertIn("course-standard identity", "\n".join(prompts))
+        self.assertLessEqual(len(prompts[0]), 128)
+
+    def test_g5_private_review_plumbing_waits_for_canonical_course_standard(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            artifact = root / "cuhk-contact-sheet.png"
+            artifact.write_bytes(b"public-safe-cuhk-preview")
+            bundle = root / "bundle"
+            records = prepare_g5_private_review.copy_artifacts([("cuhk_contact_sheet", artifact)], bundle)
+            manifest = prepare_g5_private_review.build_manifest(
+                implementation_commit=HEX64,
+                chapter1_locator="private/exports/.../inputs/Chapter1.pdf",
+                course_standard_source_identity=None,
+                cuhk_source_identity={"source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source"},
+                render_identities={"cuhk": {"pdf_sha256": HEX64}},
+                render_owner_route={"environment_owner": "render-chinese-math-pdf"},
+                artifact_records=records,
+            )
+        self.assertEqual(manifest["schema"], "PRESENTATIONS_G5_REVIEW_INPUTS_V1")
+        self.assertEqual(manifest["chapter1_expected_sha256"], prepare_g5_private_review.EXPECTED_CHAPTER1_SHA256)
+        self.assertEqual(manifest["course_standard_dependency_status"], "WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE")
+        self.assertFalse(manifest["final_g5_ready"])
+        self.assertFalse(manifest["private_pixels_committed"])
+        self.assertEqual(manifest["candidate_artifacts"][0]["sha256"], records[0]["sha256"])
 
     def test_cuhk_template_payload_is_complete_and_reference_deck_is_valid(self) -> None:
         root = SHARED / "templates/cuhk"
