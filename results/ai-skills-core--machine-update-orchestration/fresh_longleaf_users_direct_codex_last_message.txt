@@ -1,0 +1,14 @@
+PASS。
+
+当前 consumer identity：`USER=aereinh`，`HOME=/users/a/e/aereinh`，`CODEX_HOME=/users/a/e/aereinh/.codex`，Codex `0.142.0`，trusted `ai-bridge` 为 `/users/a/e/aereinh/bin/ai-bridge`。
+
+验证结果：
+- `yuukias-ai-skills` Marketplace：`ref = release`，本地与远端 `release` 都是 `a7028195f3e97d32d51c32ef8c87f658f92048e5`。
+- 已安装/启用：`ai-skills-core 0.5`、`writing-style 0.4`、`research-writing 0.2`、`web-development 0.4`。
+- 未新增/未安装：`workflow-core`、`presentations`、`scientific-visualization`、`statistical-modeling`、`bioinformatics`、`medical-imaging`。
+- Bridge formal release：远端 `release` 是 `9dad0ba4bfa54e251f345091c5151ae991251ec9`；本地 Bridge checkout `HEAD` / `origin/release` 也是这个 commit。
+- Bridge version：wrapper runtime `ai-bridge --version = 0.9.3`；Python module `ai_bridge_kit.__version__ = 0.9.3`；editable package `gpt-codex-ai-bridge-kit = 0.9.3`。
+- `ai-bridge host validate` 通过，报告 `overall state: configured`。当前 0.9.3 CLI 不接受尾随 `configured` 参数，所以用 canonical validate surface 验证 configured 状态。
+- Issue #86：`YuukiAS/AI_Skills_Collection#86` 仍为 `open`。
+
+should-not-change 已遵守：未推进 Bridge `main`/`release`，未修改 Bridge runtime source logic，未执行 stash/reset/restore/clean，未关闭 Issue #86。Bridge checkout 里已有的 `.gitignore` 本地修改和当前 repo 已有未跟踪文件均保持不动。

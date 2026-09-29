@@ -1,0 +1,13 @@
+同步完成，状态：`ALREADY_CURRENT`。
+
+- AI Skills 正式 release：`5.4.0` / `a7028195…`
+- Marketplace 已锁定 `release`，官方刷新命令执行成功：`errors=[]`、无待更新内容。[OpenAI 插件文档](https://developers.openai.com/plugins/build/plugins)
+- 已安装并启用：`ai-skills-core 0.5`、`writing-style 0.4`
+- 未安装插件保持不变，没有顺带扩展安装范围。
+- Bridge Kit：正式版本 `0.9.3` / `9dad0ba…`；运行时、checkout、远端 `release` 完全一致。
+- Host Policy 验证通过：`overall state: configured`。
+- 未修改源码、分支、Host Policy 或 release ref。
+- 因实际插件内容没有变化，无需重启或新建 Codex 会话。
+
+Bridge 的 `main` 比正式 release 多四个后续文档提交；依据正式发布合同，本机正确地继续使用 `release`，没有追随未发布的 `main`。
+

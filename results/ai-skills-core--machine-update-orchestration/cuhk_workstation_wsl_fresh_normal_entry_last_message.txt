@@ -1,0 +1,8 @@
+已用 `AI Skills Maintainer` 同步这台机器，结果是 `UPDATED`：
+
+- AI_Skills Marketplace 已在正式 `release`：`5.4.0` / `a702819`，已安装版本对齐：`workflow-core 0.4`、`ai-skills-core 0.5`、`writing-style 0.4`、`web-development 0.4` 等。
+- Bridge Kit 原本是 editable install，但 package metadata 还停在 `0.7.3`；我已刷新为 `gpt-codex-ai-bridge-kit 0.9.3`。
+- 验证通过：`ai_bridge_kit.__version__ == 0.9.3`，package metadata `0.9.3`，`ai-bridge where` 指向 `/home/yuukias/GPT_Codex_AI_Bridge_Kit`，`ai-bridge host validate` 通过。
+- 没有改当前仓库文件；当前 task worktree 仍是原状态。Bridge checkout 也保持干净。
+
+一个非阻断观察：Bridge `origin/release` 是 `9dad0ba`，`origin/main` 是 `5a640ec`，我没有移动 release ref，因为日常同步按规则是消费正式渠道，不做 producer release ref 推进。

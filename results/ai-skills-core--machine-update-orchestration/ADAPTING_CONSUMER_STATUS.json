@@ -1,0 +1,205 @@
+{
+  "schema": "AI_SKILLS_MAINTENANCE_ADAPTING_CONSUMER_STATUS_V2",
+  "task_key": "ai-skills-core--machine-update-orchestration",
+  "updated_date": "2026-09-29",
+  "tracking_issue": 86,
+  "project_status": "ADAPTING",
+  "area": "ai-skills-core",
+  "resolution_commit": null,
+  "freeze": {
+    "file": "FINAL_CLOSURE_FREEZE.json",
+    "ai_skills_main": "85d4b2acd990654e8439c1c0dd007493360fa82b",
+    "ai_skills_release": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+    "ai_skills_repository_version": "5.4.0",
+    "ai_skills_core_version": "0.5",
+    "bridge_main": "5a640ec02a20106c778a35ba94eb2164d2b91537",
+    "bridge_release": "9dad0ba4bfa54e251f345091c5151ae991251ec9",
+    "bridge_version": "0.9.3"
+  },
+  "overall_done": false,
+  "issue_86": "OPEN",
+  "consumers": [
+    {
+      "name": "Longleaf_Codex",
+      "status": "PASS",
+      "fresh_under_freeze": true,
+      "identity": {
+        "hostname": "c0810.ll.unc.edu",
+        "platform_summary": "Longleaf Linux, USERS namespace",
+        "user": "aereinh",
+        "home": "/users/a/e/aereinh",
+        "codex_home": "/users/a/e/aereinh/.codex",
+        "codex_version": "codex-cli 0.142.0",
+        "ai_skills_marketplace_ref": "release",
+        "ai_skills_marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+        "ai_skills_core": "0.5",
+        "writing_style": "0.4",
+        "research_writing": "0.2",
+        "web_development": "0.4",
+        "bridge_runtime": "0.9.3",
+        "bridge_package": "0.9.3",
+        "host_policy": "configured"
+      },
+      "evidence": [
+        "FINAL_CLOSURE_FREEZE.json",
+        "LONGLEAF_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.md",
+        "LONGLEAF_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.json",
+        "fresh_longleaf_users_direct_codex_last_message.txt"
+      ],
+      "fresh_session": "01a0ec34-838f-7621-8d4e-52b545824ff9"
+    },
+    {
+      "name": "Longleaf_Backup_Codex",
+      "status": "PASS",
+      "fresh_under_freeze": true,
+      "identity": {
+        "hostname": "c151404.ll.unc.edu",
+        "platform_summary": "Longleaf Linux, OVERFLOW namespace",
+        "user": "aereinh",
+        "home": "/overflow/htzhu/mingcheng_new",
+        "codex_home": "/overflow/htzhu/mingcheng_new/.codex",
+        "codex_version": "codex-cli 0.142.0",
+        "ai_skills_marketplace_ref": "release",
+        "ai_skills_marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+        "ai_skills_core": "0.5",
+        "workflow_core": "0.4",
+        "writing_style": "0.4",
+        "research_writing": "0.2",
+        "presentations": "0.3",
+        "bioinformatics": "0.1",
+        "medical_imaging": "0.1",
+        "web_development": "not installed",
+        "bridge_runtime": "0.9.3",
+        "bridge_package": "0.9.3",
+        "bridge_release_relation": "ALIGNED",
+        "host_policy": "configured"
+      },
+      "evidence": [
+        "FINAL_CLOSURE_FREEZE.json",
+        "LONGLEAF_BACKUP_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.md",
+        "LONGLEAF_BACKUP_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.json",
+        "fresh_longleaf_backup_final_direct_codex_last_message.txt"
+      ],
+      "fresh_session": "01a0ec43-0bf4-7f33-a1e3-00ebeb441061"
+    },
+    {
+      "name": "CUHK_Workstation_WSL_Codex",
+      "status": "PASS",
+      "fresh_under_freeze": true,
+      "acceptance_basis": "PASS_FREEZE_EQUIVALENT",
+      "freeze_equivalence": {
+        "evidence_commit": "77f433805de033f60f6c8f9f8b3153d5af3295de",
+        "validated_at_consumer": "Workstation",
+        "exact_target_identity_match": true,
+        "target_plugin_change_check": "none",
+        "mutation_replayed": false,
+        "fresh_session_replayed": false
+      },
+      "identity": {
+        "hostname": "Workstation",
+        "platform_summary": "Linux WSL2",
+        "user": "yuukias",
+        "home": "/home/yuukias",
+        "codex_home": "/home/yuukias/.codex",
+        "ai_skills_marketplace_ref": "release",
+        "ai_skills_marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+        "ai_skills_core": "0.5",
+        "writing_style": "0.4",
+        "web_development": "0.4",
+        "bridge_runtime": "0.9.3",
+        "bridge_package": "0.9.3",
+        "bridge_release_relation": "ALIGNED",
+        "host_policy": "configured"
+      },
+      "evidence": [
+        "FINAL_CLOSURE_FREEZE.json",
+        "CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.md",
+        "CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.json",
+        "cuhk_workstation_wsl_fresh_normal_entry_last_message.txt"
+      ],
+      "fresh_session": "01a0ec12-f8bd-74e0-90df-b28a5e96b350"
+    },
+    {
+      "name": "Workstation",
+      "status": "PASS",
+      "fresh_under_freeze": true,
+      "identity": {
+        "hostname": "WORKSTATION",
+        "platform_summary": "Windows",
+        "user": "WORKSTATION\\humc2",
+        "home": "C:\\Users\\humc2",
+        "codex_home": "C:\\Users\\humc2\\.codex",
+        "codex_version": "codex-cli 0.158.0-alpha.2.1",
+        "ai_skills_marketplace_ref": "release",
+        "ai_skills_marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+        "ai_skills_core": "0.5",
+        "writing_style": "0.4",
+        "web_development": "not installed",
+        "bridge_runtime": "0.9.3",
+        "bridge_package": "0.9.3",
+        "bridge_release_relation": "ALIGNED",
+        "host_policy": "configured"
+      },
+      "evidence": [
+        "FINAL_CLOSURE_FREEZE.json",
+        "WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.md",
+        "WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.json",
+        "workstation_windows_final_direct_codex_last_message.txt"
+      ],
+      "fresh_session": "01a0ec68-0de8-7f52-9433-c72e3c856766"
+    },
+    {
+      "name": "Legion",
+      "status": "PASS",
+      "fresh_under_freeze": true,
+      "identity": {
+        "hostname": "Legion-Y9000P",
+        "platform_summary": "Windows local Codex App consumer",
+        "user": "legion-y9000p\\yuukias",
+        "home": "",
+        "userprofile": "C:\\Users\\yuukias",
+        "codex_home": "C:\\Users\\yuukias\\.codex",
+        "codex_app_cli_version": "codex-cli 0.154.0-alpha.6.2",
+        "path_codex_version": "codex-cli 0.115.0",
+        "ai_skills_marketplace_ref": "release",
+        "ai_skills_marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+        "ai_skills_core": "0.5",
+        "presentations": "0.3",
+        "workflow_core": "not installed",
+        "writing_style": "not installed",
+        "research_writing": "not installed",
+        "scientific_visualization": "not installed",
+        "web_development": "not installed",
+        "statistical_modeling": "not installed",
+        "bioinformatics": "not installed",
+        "medical_imaging": "not installed",
+        "bridge_runtime": "0.9.3",
+        "bridge_package": "0.9.3",
+        "bridge_release_relation": "ALIGNED",
+        "host_policy": "configured"
+      },
+      "evidence": [
+        "FINAL_CLOSURE_FREEZE.json",
+        "LEGION_FINAL_CLOSURE_REFRESH_2026-09-29.md",
+        "LEGION_FINAL_CLOSURE_REFRESH_2026-09-29.json",
+        "legion_final_direct_codex_last_message.txt"
+      ],
+      "fresh_session": "01a0ec53-e3e3-7880-a6d5-5108239c0fbd"
+    }
+  ],
+  "required_consumers": [
+    "Longleaf_Codex",
+    "Longleaf_Backup_Codex",
+    "CUHK_Workstation_WSL_Codex",
+    "Workstation",
+    "Legion"
+  ],
+  "next_required_consumer": null,
+  "all_required_consumers_pass": true,
+  "done_guard": {
+    "all_five_required_consumers_pass": true,
+    "windows_consumer_only_final_aggregate_closure": true,
+    "issue_must_remain_open": true,
+    "project_status_must_remain": "ADAPTING"
+  }
+}
