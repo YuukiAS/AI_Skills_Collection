@@ -357,6 +357,22 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(existing_plan.route, "plan-only")
         self.assertEqual(existing_plan.output, "plan")
 
+        explicit_existing_plan = stage1_front_door.route_request(
+            "Revise this existing deck.",
+            explicit_output="plan",
+            existing_deck=True,
+        )
+        self.assertEqual(explicit_existing_plan.route, "plan-only")
+        self.assertEqual(explicit_existing_plan.artifact_claim, "no generated artifact claim")
+
+        explicit_locked_plan = stage1_front_door.route_request(
+            "Use the provided conference template.",
+            explicit_output="deck-plan",
+            locked_template=True,
+        )
+        self.assertEqual(explicit_locked_plan.route, "plan-only")
+        self.assertEqual(explicit_locked_plan.template, None)
+
         manifest = stage1_front_door.built_in_template_manifest()
         self.assertEqual(manifest["built_in_templates"], ["cuhk-research", "course-standard"])
         self.assertEqual(manifest["course_standard"]["default_ratio"], "4:3")

@@ -13,6 +13,7 @@ from typing import Any
 BUILT_IN_TEMPLATES = ("cuhk-research", "course-standard")
 EDITABLE_FORMATS = ("ppt", "pptx", "powerpoint", "slides", "google slides", "editable")
 BEAMER_FORMATS = ("beamer", "latex", "latex slides", "tex", ".tex", "academic pdf")
+PLAN_ONLY_FORMATS = ("plan", "deck plan", "outline", "outline only", "storyline", "storyline only", "notes")
 RESEARCH_TERMS = ("research", "group meeting", "seminar", "paper talk", "journal club", "defense", "qe", "oral", "phd", "组会", "论文", "答辩", "研究")
 TEACHING_TERMS = ("tutorial", "lecture", "teaching", "courseware", "classroom", "lesson", "课件", "课程", "教学")
 BUSINESS_TERMS = ("business", "executive", "product", "strategy", "client", "management", "管理层", "产品策略", "客户")
@@ -60,7 +61,7 @@ def route_request(prompt: str, *, explicit_output: str | None = None, existing_d
     ratio = _explicit_ratio(text)
     outputs = _output_tokens(explicit_output)
     explicit_beamer = bool(outputs.intersection(BEAMER_FORMATS)) or _explicit_beamer(text)
-    if _contains_any(text, PLAN_ONLY_TERMS):
+    if outputs.intersection(PLAN_ONLY_FORMATS) or _contains_any(text, PLAN_ONLY_TERMS):
         return Stage1Route("plan-only", "deck-plan", None, "plan", None, "no generated artifact claim", "plan-only request")
     if existing_deck or _contains_any(text, LOCAL_EDIT_TERMS):
         return Stage1Route("local-edit", "official-editable-surface", None, "preserve-existing", "preserve-existing", "no artifact claim until edited surface is produced", "existing/local edit preserves current format/template/ratio")

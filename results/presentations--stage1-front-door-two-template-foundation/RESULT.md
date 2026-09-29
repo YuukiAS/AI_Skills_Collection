@@ -58,6 +58,8 @@ canonical `course-standard` template body:
   only and no generated artifact.
 - shared routing documentation and generated Presentations payload now state
   that same plan-only precedence explicitly.
+- explicit `plan` / `deck-plan` output requests now also preserve plan-only
+  precedence over `existing_deck=True` and `locked_template=True` caller hints.
 
 No `skills/tools/documents-media/presentations/shared/templates/course-standard`
 template body was created or restored.
