@@ -40,7 +40,7 @@ Release evidence:
 - Candidate replay proved same-session consumption of both `web-development@ai-skills-candidate 0.4` and `writing-style@ai-skills-candidate 0.4`.
 - Repair CI and PR integration CI both passed.
 
-The formal `release` ref may advance only by fast-forward to this release-closure commit, with remote ref verification after mutation.
+The formal `release` ref was advanced by non-force fast-forward and verified on the remote. Final release target after closure writeback: this integration/release closure commit.
 
 ## Human acceptance evidence
 
