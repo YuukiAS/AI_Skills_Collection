@@ -3,14 +3,14 @@
   "base_commit": "def5ea15f8c28601d8324b3fd6a00275c0a795ee",
   "ci_required": true,
   "ci_status": "PENDING",
-  "implementation_commit": null,
+  "implementation_commit": "a06ff050bc82bb22358dfcb3e4faa885fddd285b",
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "RUN_CODEX_EXECUTOR",
+  "next_action": "RUN_GPT_PLANNER_FOR_H3_FRESH_HOLDOUT",
   "plan_revision": 0,
   "review_round": 0,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
-  "state": "PLAN_FROZEN",
+  "state": "NEEDS_GPT_PLANNER",
   "task_key": "product-ui-copy--cross-plugin-production-integration"
 }
