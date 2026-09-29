@@ -37,6 +37,12 @@ instead of making `chinese-prose` the main route. Hand off English scientific pr
 evidence-strength calibration, and defensive/self-undermining wording to
 `scientific-prose`.
 
+Hand off product-interface microcopy to `product-ui-copy` when the target text
+is a label, CTA, state, help text, onboarding line, settings explanation,
+trust/privacy disclosure, permission prompt, or other short UI copy. In that
+route, this skill protects product meaning and escalation boundaries; it does
+not become the wording owner.
+
 ## Non-Negotiable Rule
 
 Preserve first. Improve second.
@@ -83,6 +89,11 @@ silently satisfy one constraint by violating another.
 
 - Use `chinese-prose` when the main request is "中文说人话", "改自然一点",
   "不要 AI 味", "别像日志", "普通英文能翻就翻", or "别每句话一个 bullet".
+- Use `product-ui-copy` when the main request is to improve product-interface
+  microcopy: labels, buttons, CTA/action text, empty/loading/error/success
+  states, onboarding, settings help, trust/privacy disclosure, permission
+  prompts, browser-extension popup copy, desktop/WebView settings copy, mobile
+  UI wording, landing-page interface copy, or locale-specific UI wording.
 - Use `scientific-rewrite` when the user provides existing Chinese or
   Chinese-dominant scientific/technical material and asks to reorganize,
   structurally rewrite, or rewrite the document into clearer Chinese while
@@ -94,9 +105,40 @@ silently satisfy one constraint by violating another.
 - Keep `writing-fidelity` active as a guardrail when those style passes must
   preserve numbers, equations, citations, paths, headings, user-approved rows,
   final/best labels, or rendered artifact identity.
+- Keep `writing-fidelity` active as a guardrail for Product UI Copy whenever
+  product state, eligibility, user consequence, payment, subscription,
+  deletion, retention, consent, privacy, safety, external visibility,
+  reversibility, required trust/legal disclosure, or exact product/brand/feature
+  identity could drift.
 - Do not treat "去 AI 味" as detector evasion, source laundering, or permission
   to hide authorship. The allowed goal is clearer prose that preserves facts and
   evidence boundaries.
+
+## Product UI Copy Handoff
+
+For interface copy, protect meaning before improving wording. Product UI Copy
+may make text shorter, clearer, more natural, or more locale-appropriate, but
+it must not silently change:
+
+- who can take the action;
+- whether the action is reversible;
+- whether data becomes public, shared, retained, deleted, synced, charged, or
+  sent to another system;
+- whether a state is final, pending, diagnostic, failed, optional, required, or
+  unavailable;
+- pricing, cancellation, subscription, consent, privacy, safety, legal, trust,
+  or eligibility meaning;
+- exact product, brand, feature, policy, or technical identities.
+
+If those facts are missing or contradictory, classify the issue as
+`PRODUCT SEMANTICS` or `LEGAL/TRUST/SAFETY` and ask product/domain/legal
+authority to resolve it. Do not launder uncertainty into polished copy.
+
+Frontend Design owns content architecture and rendered acceptance. If the
+problem is that text is in the wrong place, too much is visible, neighboring
+copy conflicts, disclosure is at the wrong level, or the viewport makes the
+relationship unreadable, route that part back as `CONTENT ARCHITECTURE` instead
+of treating it as a wording-only edit.
 
 ## Version and Label Fidelity
 

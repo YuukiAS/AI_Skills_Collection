@@ -23,6 +23,10 @@ Use this skill to turn research and product intent into an executable visual sys
 
 - Define tokens, density, typography, color, icon strategy, layout rhythm, and interaction tone.
 - Act as the normal Frontend Design coordinator for production UI work. Classify the task before choosing delegates.
+- Treat product-interface work as Frontend work even when the user says
+  "browser extension", "popup", "settings page", "desktop", "Tauri",
+  "Electron", "native-WebView", "mobile", "Android", or "Compose" rather than
+  "web page".
 - Do not implement the app; route implementation to the official `build-web-apps` capability or project code workflow.
 - Do not rely on decorative blobs, generic purple gradients, or unexplained hero copy.
 - Do not use academic or journal-inspired palettes from `palette/` as direct UI colors. Product surfaces need semantic tokens; scientific palettes may map only to chart roles.
@@ -34,6 +38,29 @@ Use this skill to turn research and product intent into an executable visual sys
 3. P2 implementation handoff: translate the accepted direction into concrete tokens, components, states, assets, motion, and implementation notes.
 4. P3 actual-surface convergence: verify the rendered browser or native-WebView surface that the claim is about; record P1/P2/P3 findings against the exact candidate.
 5. P4 whole-product taste: ask observable taste questions and require independent confirmation for substantive redesign, release gates, major canonical-design convergence, major native user-flow milestones, or whole-product hierarchy/interaction-model changes.
+
+For product-interface copy, insert a content-architecture handoff before final
+wording:
+
+```text
+SURFACE:
+UI_ROLE:
+PRODUCT_STATE:
+USER_JOB:
+USER_CONSEQUENCE_OR_NEXT_ACTION:
+NEIGHBORING_VISIBLE_COPY:
+LOCALE:
+PROTECTED_MEANING:
+DISCLOSURE_LEVEL:
+LENGTH_OR_VIEWPORT_CONSTRAINT:
+DESIGN_AUTHORITY: optional
+TERMINOLOGY_OR_BRAND_TOKENS: optional
+```
+
+Send that handoff to Clear Writing `product-ui-copy` for wording under frozen
+meaning. Frontend remains responsible for whether the text belongs there,
+amount, hierarchy, progressive disclosure, neighboring-copy relationship, and
+final rendered page/screen rhythm.
 
 Scale the work before delegating:
 
@@ -53,6 +80,15 @@ Delegate ownership:
 - `responsive-accessibility-review`: applicable P1 accessibility/responsive constraints and P3 closure.
 - `webapp-testing`: browser evidence companion for F-C; not a native or design authority.
 - `research-product-frontend`: research-specific UI constraints after this coordinator has classified the generic product/design route.
+
+Do not activate this coordinator for backend/API/math tasks, provider/runtime
+debugging, network/tunnel changes, Room/WorkManager/data-layer changes, or
+README/docs-only writing when no user-facing product interface is in scope.
+
+When a platform-specific product UI task routes through this coordinator, keep
+local platform authority intact. For example, Android/Compose implementation
+details still belong to the project's Android/Compose owner; Frontend Design
+coordinates product-interface architecture and rendered acceptance.
 
 ## Production Frontend Design Gates
 

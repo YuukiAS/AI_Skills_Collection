@@ -495,7 +495,7 @@ class ReplayMechanismTests(unittest.TestCase):
         self.assertEqual(len(add_payload_files), 1)
         self.assertEqual(stdout_files[0].read_text(encoding="utf-8"), child_stdout)
         self.assertEqual(stderr_files[0].read_text(encoding="utf-8"), child_stderr)
-        self.assertEqual(json.loads(add_payload_files[0].read_text(encoding="utf-8")), {})
+        self.assertEqual(json.loads(add_payload_files[0].read_text(encoding="utf-8")), {"writing-style": {}})
 
     def test_child_exec_normal_completion_persists_streams(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -708,6 +708,60 @@ class ReplayMechanismTests(unittest.TestCase):
         add_dir_values = [captured[index + 1] for index, value in enumerate(captured) if value == "--add-dir"]
         self.assertIn(str(output_dir), add_dir_values)
         self.assertIn(str(fixture_dir), add_dir_values)
+
+    def test_child_exec_can_enable_multiple_candidate_plugins(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workspace = root / "workspace"
+            output_dir = workspace / "outputs"
+            workspace.mkdir()
+            output_dir.mkdir()
+            args_file = root / "args.json"
+            codex = self.make_executable(
+                root,
+                "#!/usr/bin/env python3\n"
+                "import json, pathlib, sys\n"
+                f"pathlib.Path({str(args_file)!r}).write_text(json.dumps(sys.argv[1:]), encoding='utf-8')\n"
+                "sys.stdin.read()\n",
+            )
+            replay.run_child_exec(
+                codex,
+                root / "candidate-marketplace",
+                ["web-development@ai-skills-candidate", "writing-style@ai-skills-candidate"],
+                workspace,
+                output_dir,
+                "Plan product interface copy.",
+                stdout_path=root / "run" / "child.stdout.jsonl",
+                stderr_path=root / "run" / "child.stderr",
+                timeout_seconds=5,
+                terminate_grace_seconds=0.1,
+            )
+
+            captured = json.loads(args_file.read_text(encoding="utf-8"))
+
+        self.assertIn("plugins.web-development@ai-skills-candidate.enabled=true", captured)
+        self.assertIn("plugins.writing-style@ai-skills-candidate.enabled=true", captured)
+
+    def test_parser_accepts_repeated_plugin_arguments_for_same_session_replay(self) -> None:
+        parser = replay.build_parser()
+
+        args = parser.parse_args(
+            [
+                "replay",
+                "--plugin",
+                "web-development",
+                "--plugin",
+                "writing-style",
+                "--candidate-commit",
+                "abc",
+                "--task",
+                "task.md",
+                "--input",
+                "input.md",
+            ]
+        )
+
+        self.assertEqual(args.plugin, ["web-development", "writing-style"])
 
 
 if __name__ == "__main__":

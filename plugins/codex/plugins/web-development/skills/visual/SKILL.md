@@ -1,6 +1,6 @@
 ---
 name: frontend-visual-systems
-description: Frontend visual direction, design tokens, typography, palette, icon, layout, density, and motion brief.
+description: Frontend visual direction, product-interface content architecture, Product UI Copy handoff, rendered acceptance, design tokens, typography, palette, icon, layout, density, and motion brief.
 status: active
 provenance: generated
 trusted: false
@@ -32,7 +32,7 @@ default_prompt:
 
 ## Trigger Boundary
 
-Frontend visual direction, design tokens, typography, palette, icon, layout, density, and motion brief.
+Frontend visual direction, product-interface content architecture, Product UI Copy handoff, rendered acceptance, design tokens, typography, palette, icon, layout, density, and motion brief.
 
 Use this aggregate Codex App skill by entering the coordinator source first.
 
