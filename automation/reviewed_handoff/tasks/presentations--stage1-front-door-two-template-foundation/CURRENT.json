@@ -7,10 +7,10 @@
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "RUN_GPT_PLANNER",
-  "plan_revision": 0,
+  "next_action": "RUN_CODEX_EXECUTOR",
+  "plan_revision": 1,
   "review_round": 0,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
-  "state": "NEEDS_GPT_PLANNER",
+  "state": "PLAN_FROZEN",
   "task_key": "presentations--stage1-front-door-two-template-foundation"
 }
