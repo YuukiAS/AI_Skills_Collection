@@ -2,63 +2,46 @@
 
 Task key: `ai-skills-core--machine-update-orchestration`  
 Consumer: `CUHK_Workstation_WSL_Codex`  
-Status: `PENDING_CONSUMER_AUTHORITY`  
-Prepared date: 2026-09-25
+Status: `PASS`
+Updated date: 2026-09-29
 
-## Current Central Identity
+This stub has been satisfied by the current WSL consumer run. Keep it as the
+consumer-specific locator so older handoff links remain valid.
 
-- Tracking Issue: `#86`
-- Project Status: `ADAPTING`
-- Area: `ai-skills-core`
-- Resolution commit: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
-- Formal AI_Skills `main`: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
-- Formal AI_Skills `release`: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
-- Released repository version: `5.2.0`
-- Released `ai-skills-core`: `0.5`
-- Released `workflow-core`: `0.4`
+## Consumer Identity
 
-## Authority Boundary
+- hostname: `Workstation`
+- platform: Linux WSL2, `6.6.87.2-microsoft-standard-WSL2`
+- user: `yuukias`
+- `HOME`: `/home/yuukias`
+- `CODEX_HOME`: `/home/yuukias/.codex`
+- Codex executable: `/home/yuukias/.local/bin/codex`
+- Codex version: `codex-cli 0.148.0-alpha.9`
 
-No consumer-local authority has been observed in this task for `CUHK_Workstation_WSL_Codex`.
-Do not infer hostname, `CODEX_HOME`, Marketplace state, installed plugin state,
-or Codex runtime identity from any other machine.
+## PASS Evidence
 
-Before changing this status, the adapting run must be executed from this exact
-consumer, or from a session with explicit bounded authority for this exact
-consumer, and must follow `../ADAPTING_CONSUMER_RUNBOOK.md`.
+- durable evidence: `../CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.md`
+- machine-readable evidence: `../CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.json`
+- fresh normal-entry final message: `../cuhk_workstation_wsl_fresh_normal_entry_last_message.txt`
+- fresh session id: `01a0ec12-f8bd-74e0-90df-b28a5e96b350`
+- fresh request: `使用 AI Skills Maintainer，同步这台机器。`
+- fresh result: `UPDATED`
 
-## Required Evidence Before PASS
+## Summary
 
-A future PASS for `CUHK_Workstation_WSL_Codex` must record:
+- AI_Skills Marketplace: `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`, repository `5.4.0`
+- installed/enabled maintainer: `ai-skills-core@yuukias-ai-skills 0.5`
+- updated installed plugins: `writing-style 0.3 -> 0.4`, `web-development 0.3 -> 0.4`
+- refreshed unchanged installed plugins: `workflow-core 0.4`, `research-writing 0.2`, `presentations 0.3`, `statistical-modeling 0.1`
+- optional uninstalled plugins preserved: `scientific-visualization`, `bioinformatics`, `medical-imaging`
+- Bridge module/package: `0.9.3`
+- Host Policy: `configured`
 
-- actual target identity: hostname, platform, user, `HOME`, `CODEX_HOME`, and Codex version;
-- approved adaptation / update action for this consumer;
-- exact `yuukias-ai-skills` Marketplace source, ref, sparse paths, last revision, and owning config layer;
-- installed / enabled identity for `ai-skills-core@yuukias-ai-skills` and relevant companions;
-- official Codex Marketplace/plugin commands used, if migration or reinstall is needed;
-- exact old source metadata and restoration evidence if legacy `main -> release` migration is attempted;
-- fresh production normal-entry consumption through installed `ai-skills-core@yuukias-ai-skills`;
-- fresh-session or reload boundary evidence when required;
-- should-not-change and failure-safety evidence for unrelated project/user state;
-- durable evidence locator for this consumer.
-
-## Forbidden Inferences And Side Effects
-
-This stub does not authorize:
-
-- paid API use;
-- automation;
-- AI_Skills or Bridge `release` advancement;
-- Bridge runtime/source mutation;
-- unrelated project mutation;
-- hand-editing Codex config;
-- marking the Board `DONE`.
-
-## Current Handoff
+## Result
 
 ```text
 CONSUMER=CUHK_Workstation_WSL_Codex
-STATUS=PENDING_CONSUMER_AUTHORITY
-NEXT_ACTION=Run ADAPTING_CONSUMER_RUNBOOK.md only on this authorized consumer.
+STATUS=PASS
 OVERALL_DONE=NO
+ISSUE_86_CLOSE=NO
 ```

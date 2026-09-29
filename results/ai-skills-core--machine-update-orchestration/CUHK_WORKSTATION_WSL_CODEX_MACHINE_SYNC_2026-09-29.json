@@ -1,0 +1,126 @@
+{
+  "schema": "AI_SKILLS_MACHINE_SYNC_EVIDENCE_V1",
+  "task_key": "ai-skills-core--machine-update-orchestration",
+  "consumer": "CUHK_Workstation_WSL_Codex",
+  "date": "2026-09-29",
+  "recorded_at": "2026-09-29T15:36:19+08:00",
+  "status": "PASS",
+  "identity": {
+    "hostname": "Workstation",
+    "platform": "Linux WSL2",
+    "kernel": "6.6.87.2-microsoft-standard-WSL2",
+    "user": "yuukias",
+    "home": "/home/yuukias",
+    "codex_home": "/home/yuukias/.codex",
+    "codex_executable": "/home/yuukias/.local/bin/codex",
+    "codex_version": "codex-cli 0.148.0-alpha.9"
+  },
+  "marketplace": {
+    "name": "yuukias-ai-skills",
+    "source": "https://github.com/YuukiAS/AI_Skills_Collection.git",
+    "ref": "release",
+    "sparse_paths": [
+      ".agents/plugins",
+      "plugins/codex/plugins"
+    ],
+    "owning_config_layer": "/home/yuukias/.codex/config.toml",
+    "before_revision": "72ebd56705713c01d05fef34ccab1c5c04c15671",
+    "after_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+    "repository_version": "5.4.0",
+    "migration_needed": false,
+    "official_upgrade_command": "codex plugin marketplace upgrade yuukias-ai-skills --json"
+  },
+  "plugins": {
+    "installed_refreshed": [
+      {
+        "plugin_id": "workflow-core@yuukias-ai-skills",
+        "before": "0.4",
+        "after": "0.4",
+        "enabled": true
+      },
+      {
+        "plugin_id": "ai-skills-core@yuukias-ai-skills",
+        "before": "0.5",
+        "after": "0.5",
+        "enabled": true,
+        "required_for_this_task": true
+      },
+      {
+        "plugin_id": "writing-style@yuukias-ai-skills",
+        "before": "0.3",
+        "after": "0.4",
+        "enabled": true
+      },
+      {
+        "plugin_id": "research-writing@yuukias-ai-skills",
+        "before": "0.2",
+        "after": "0.2",
+        "enabled": true
+      },
+      {
+        "plugin_id": "presentations@yuukias-ai-skills",
+        "before": "0.3",
+        "after": "0.3",
+        "enabled": true
+      },
+      {
+        "plugin_id": "web-development@yuukias-ai-skills",
+        "before": "0.3",
+        "after": "0.4",
+        "enabled": true
+      },
+      {
+        "plugin_id": "statistical-modeling@yuukias-ai-skills",
+        "before": "0.1",
+        "after": "0.1",
+        "enabled": true
+      }
+    ],
+    "optional_uninstalled_preserved": [
+      "scientific-visualization@yuukias-ai-skills",
+      "bioinformatics@yuukias-ai-skills",
+      "medical-imaging@yuukias-ai-skills"
+    ]
+  },
+  "bridge": {
+    "executable": "/home/yuukias/conda/bin/ai-bridge",
+    "where": "/home/yuukias/GPT_Codex_AI_Bridge_Kit",
+    "origin": "https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git",
+    "branch": "main",
+    "local_head": "5a640ec02a20106c778a35ba94eb2164d2b91537",
+    "remote_release": "9dad0ba4bfa54e251f345091c5151ae991251ec9",
+    "remote_main": "5a640ec02a20106c778a35ba94eb2164d2b91537",
+    "module_version_after": "0.9.3",
+    "package_metadata_after": "0.9.3",
+    "editable_project_location": "/home/yuukias/GPT_Codex_AI_Bridge_Kit",
+    "source_state_after": "clean main...origin/main",
+    "release_ref_advanced": false,
+    "source_logic_modified": false,
+    "non_blocking_observation": "origin/release remains behind origin/main while package/runtime versions report 0.9.3; consumer sync did not perform producer release-ref advancement"
+  },
+  "host_policy": {
+    "validate_result": "configured",
+    "install_run": false
+  },
+  "fresh_session": {
+    "method": "codex exec",
+    "session_id": "01a0ec12-f8bd-74e0-90df-b28a5e96b350",
+    "request": "使用 AI Skills Maintainer，同步这台机器。",
+    "production_plugin_path": "/home/yuukias/.codex/plugins/cache/yuukias-ai-skills/ai-skills-core/0.5",
+    "route": "machine-update-orchestrator",
+    "result": "UPDATED",
+    "last_message": "cuhk_workstation_wsl_fresh_normal_entry_last_message.txt"
+  },
+  "should_not_change": {
+    "optional_plugins_installed": false,
+    "ai_skills_release_advanced": false,
+    "bridge_release_advanced": false,
+    "bridge_source_logic_modified": false,
+    "other_consumer_status_reused": false,
+    "unrelated_dirty_work_overwritten": false,
+    "paid_api_used": false,
+    "private_artifact_uploaded": false
+  },
+  "overall_done": false,
+  "issue_86_close": false
+}

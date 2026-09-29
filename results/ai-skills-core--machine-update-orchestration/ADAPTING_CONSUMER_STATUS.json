@@ -112,13 +112,35 @@
     },
     {
       "name": "CUHK_Workstation_WSL_Codex",
-      "status": "PENDING_CONSUMER_AUTHORITY",
-      "identity": null,
-      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer; update consumers/CUHK_Workstation_WSL_Codex_PENDING.md with the durable result.",
-      "pending_evidence": [
+      "status": "PASS",
+      "identity": {
+        "hostname": "Workstation",
+        "platform_summary": "Linux WSL2",
+        "kernel": "6.6.87.2-microsoft-standard-WSL2",
+        "user": "yuukias",
+        "home": "/home/yuukias",
+        "codex_home": "/home/yuukias/.codex",
+        "codex_version": "codex-cli 0.148.0-alpha.9",
+        "ai_skills_marketplace_ref": "release",
+        "ai_skills_marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+        "ai_skills_core": "0.5",
+        "workflow_core": "0.4",
+        "writing_style": "0.4",
+        "research_writing": "0.2",
+        "presentations": "0.3",
+        "web_development": "0.4",
+        "statistical_modeling": "0.1",
+        "bridge_runtime": "0.9.3",
+        "bridge_package": "0.9.3",
+        "host_policy": "configured"
+      },
+      "evidence": [
+        "CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.md",
+        "CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.json",
+        "cuhk_workstation_wsl_fresh_normal_entry_last_message.txt",
         "consumers/CUHK_Workstation_WSL_Codex_PENDING.md"
       ],
-      "handoff_packet": "ADAPTING_CONSUMER_HANDOFF.md"
+      "fresh_session_note": "codex exec session 01a0ec12-f8bd-74e0-90df-b28a5e96b350 loaded production ai-skills-core 0.5 and routed sync this machine to machine-update-orchestrator; result UPDATED"
     },
     {
       "name": "Legion",
@@ -146,6 +168,6 @@
     "issue_must_remain_open": true,
     "project_status_must_remain": "ADAPTING"
   },
-  "next_handoff": "CONSUMER_ADAPTATION_REQUIRED",
+  "next_handoff": "ISSUE_CLOSE_WORKFLOW_REQUIRED",
   "consumer_handoff": "ADAPTING_CONSUMER_HANDOFF.md"
 }
