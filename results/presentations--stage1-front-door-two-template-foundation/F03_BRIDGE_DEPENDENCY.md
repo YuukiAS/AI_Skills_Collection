@@ -1,94 +1,80 @@
 # Presentations Stage 1 — F03 Bridge Dependency
 
-**Status:** WAITING_ON_GENERIC_BRIDGE_CAPABILITY  
+**Status:** CLOSED_BY_BRIDGE_0_9_3  
 **Date:** 2026-09-29  
 **Presentations task:** \`presentations--stage1-front-door-two-template-foundation\`
 
-## Current Presentations state
+## Closure
 
-Execution package remains:
+Historical blocker:
 
-\`results/presentations--stage1-front-door-two-template-foundation/EXECUTION_PACKAGE_V1_1.md\`
-@ \`049847f4638bb339229c748d3b8f97bd41fae72d\`
+\`PRES-S1-ER-F03\`
 
-Latest execution-ready Critic review:
+is closed.
 
-\`results/presentations--stage1-front-door-two-template-foundation/CRITIC_EXECUTION_READY_REVIEW_V2.md\`
-@ \`9a656214b61206221d8d93c19f67488e43d842c5\`
-
-Verdict:
+Bridge Kit formal release:
 
 \`\`\`text
-PRES-S1-ER-F01 = CLOSED
-PRES-S1-ER-F02 = CLOSED
-PRES-S1-ER-F03 = STILL_OPEN
-READY_FOR_CODEX = NO
+BRIDGE_KIT_VERSION = 0.9.3
+FORMAL_RELEASE_TARGET =
+9dad0ba4bfa54e251f345091c5151ae991251ec9
+FORMAL_DISTRIBUTION_COMPLETE = YES
 \`\`\`
 
-F03 is not a Presentations architecture or routing defect.
+Current production normal entry:
 
-## Generic dependency
-
-Canonical owner:
-
-\`YuukiAS/GPT_Codex_AI_Bridge_Kit\`
-
-Bridge task:
-
-\`reviewed-handoff--first-remote-publication\`
-
-Bridge trigger evidence:
-
-\`docs/TODO_REVIEWED_HANDOFF_FIRST_REMOTE_PUBLICATION.md\`
-
-Current design:
-
-\`docs/design/reviewed_handoff_first_remote_publication_plan_v0.1_2026-09-29.md\`
-review object currently bound at Bridge \`54bf116c38638753a0579b5f18c19fc6c0239fd6\`.
-
-Critic handoff:
-
-\`docs/design/reviewed_handoff_first_remote_publication_critic_handoff_v0.1_2026-09-29.md\`
-first commit \`0a6d55361f358cd38aee48e92af9ecf701145c64\`.
-
-## Required dependency chronology
-
-\`\`\`text
-Bridge design Critic PASS
--> Bridge execution package
--> execution-ready Critic PASS
--> Bridge implementation + tests
--> fresh real-consumer first-publication validation
--> actual installed/available Bridge command verified
--> return to Presentations F03 narrow re-review
+\`\`\`bash
+ai-bridge reviewed-handoff task publish-first \
+  --task-key <task_key> \
+  --expected-repo <owner/repo>
 \`\`\`
 
-Presentations must not:
-- raw \`git push -u\`;
-- request a second ordinary first-publication approval as the normal path;
-- add consumer-local Git wrapper;
-- widen generic publisher;
-- change branch/worktree;
-- modify Presentations product behavior to avoid the gap.
+The command now provides the bounded same-name first remote publication required after \`task bootstrap\` and the exact first REQUEST/CURRENT commit.
 
-## Presentations package amendment rule
+Direct closure evidence:
+- Bridge \`pyproject.toml\` and runtime version = 0.9.3;
+- formal \`release\` ref points to the repaired candidate above;
+- Machine Policy includes bounded \`reviewed-handoff task publish-first\`;
+- fresh AI_Skills real-consumer FP-G6 passed;
+- Presentations narrow F03 Critic review recorded:
+  \`results/presentations--stage1-front-door-two-template-foundation/CRITIC_EXECUTION_READY_REVIEW_V3_F03.md\`.
 
-Do **not** create Presentations v1.2 merely because Bridge gains the generic capability.
+## Superseded historical behavior
 
-After Bridge implementation:
+Do not repeat the historical workaround/blocker language:
 
-- if the actual production command is compatible with the current v1.1 wording
-  “current authorized bounded publication route,” keep Presentations v1.1 unchanged and re-run only the narrow F03 execution-ready review;
-- if the actual production command/semantics must be explicitly named or invoked by the Presentations Kickoff, revise Plan/Goal/Kickoff minimally and consistently, then re-review that narrow amendment.
+- \`UPSTREAM_REMOTE_MISMATCH\` from generic existing-branch publisher;
+- manual/raw \`git push -u\`;
+- second ordinary first-publication approval;
+- consumer-local first-push wrapper.
+
+Those describe pre-0.9.3 capability state and are superseded for a machine running compatible Bridge 0.9.3+.
+
+## Current execution-machine condition
+
+Formal distribution does not prove every machine is updated.
+
+At execution preflight:
+- confirm compatible Bridge 0.9.3+ runtime;
+- confirm \`ai-bridge reviewed-handoff task publish-first --help\` is available;
+- confirm current Host/Reviewed Handoff validation passes.
+
+If the execution machine is stale, use:
+
+\`BLOCKED_BRIDGE_RUNTIME_STALE\`
+
+This is a machine/runtime prerequisite, not reopening \`PRES-S1-ER-F03\`.
+
+## Current Presentations amendment
+
+The prior Stage 1 v1.1 package was execution-ready after F03 closure.
+
+A new v1.2 package is now being reviewed for a **different reason**: real teaching-deck evidence promotes TODO #49 into the course-standard adapter foundation.
+
+Bridge 0.9.3 changes only the execution-control chronology; it does not change Presentations product semantics.
 
 ## Maintenance truth
 
-Issues \`#29–#48\`:
-- Area = presentations
-- lifecycle = DOING
-- source maturity unchanged
-- no PROMOTED / DONE
-- no issue close
-
-Current dependency next action:
-independent Bridge design Critic review for \`reviewed-handoff--first-remote-publication\`.
+Presentations lifecycle remains \`DOING\`.
+Source maturity is changed only where the new Planner amendment explicitly promotes #49.
+No issue is DONE/closed by this dependency closure.
