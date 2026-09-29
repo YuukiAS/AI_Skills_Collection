@@ -38,9 +38,9 @@ def _contains_any(text: str, terms: tuple[str, ...]) -> bool:
 
 
 def _explicit_ratio(text: str) -> str | None:
-    if re.search(r"\b16\s*:\s*9\b|\b169\b|wide", text):
+    if re.search(r"\b16\s*[:x×/]\s*9\b|\b169\b|wide", text):
         return "16:9"
-    if re.search(r"\b4\s*:\s*3\b|\b43\b", text):
+    if re.search(r"\b4\s*[:x×/]\s*3\b|\b43\b", text):
         return "4:3"
     return None
 

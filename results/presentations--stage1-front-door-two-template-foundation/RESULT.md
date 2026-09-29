@@ -60,6 +60,8 @@ canonical `course-standard` template body:
   that same plan-only precedence explicitly.
 - explicit `plan` / `deck-plan` output requests now also preserve plan-only
   precedence over `existing_deck=True` and `locked_template=True` caller hints.
+- explicit ratio parsing now recognizes common `16x9`, `16×9`, `16/9`,
+  `4x3`, `4×3`, and `4/3` spellings without changing template identity.
 
 No `skills/tools/documents-media/presentations/shared/templates/course-standard`
 template body was created or restored.

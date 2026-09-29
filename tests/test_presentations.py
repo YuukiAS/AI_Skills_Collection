@@ -349,6 +349,12 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(actual.template, template, prompt)
             self.assertEqual(actual.ratio, ratio, prompt)
 
+        for prompt in ["这个 Tutorial 要 16x9。", "这个 Tutorial 要 16×9。", "这个 Tutorial 要 16/9。"]:
+            self.assertEqual(stage1_front_door.route_request(prompt).ratio, "16:9", prompt)
+
+        for prompt in ["把明天 lecture 做成 4x3。", "把明天 lecture 做成 4×3。", "把明天 lecture 做成 4/3。"]:
+            self.assertEqual(stage1_front_door.route_request(prompt).ratio, "4:3", prompt)
+
         locked_plan = stage1_front_door.route_request("按这个会议官方模板，只先给我逐页 storyline，不生成 PPT。")
         self.assertEqual(locked_plan.route, "plan-only")
         self.assertEqual(locked_plan.artifact_claim, "no generated artifact claim")
