@@ -53,6 +53,9 @@ canonical `course-standard` template body:
   academic/research route only, leaving teaching/courseware to the
   `course-standard` identity and business/company/client work to editable
   PPTX/Slides.
+- plan-only routing now takes precedence over existing-deck and external
+  locked-template detection when the user explicitly asks for storyline/plan
+  only and no generated artifact.
 
 No `skills/tools/documents-media/presentations/shared/templates/course-standard`
 template body was created or restored.
@@ -88,7 +91,6 @@ python scripts/skills.py validate
 git diff --check
 RP-G2 forbidden-path scan over source + generated Presentations payload
 course-standard template directory absence check
-python scripts/build_codex_marketplace.py --write --validate --check --path-report
 ```
 
 Note: `python -m unittest tests.test_presentations` must be run with write
