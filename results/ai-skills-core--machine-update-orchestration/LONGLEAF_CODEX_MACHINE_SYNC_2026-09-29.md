@@ -90,7 +90,7 @@ Notes:
 
 - `bioinformatics@yuukias-ai-skills` was already installed/enabled at release version `0.1`; no refresh command was rerun after Auto-review rejected an additional add attempt as too broad.
 - No optional AI_Skills plugin was newly installed.
-- Current Codex session did not hot-reload the newly installed `ai-skills-core 0.5`; a fresh Codex process/session is required for normal interactive consumption.
+- The original Codex session did not hot-reload the newly installed `ai-skills-core 0.5`; the later fresh Codex process/session verified normal-entry consumption.
 
 ## After
 
@@ -153,15 +153,15 @@ Observed legacy/advanced codex-home skill state:
 | `ai-bridge` executable | `/overflow/htzhu/mingcheng_new/.local/bin/ai-bridge` |
 | `ai-bridge where` | `/overflow/htzhu/mingcheng_new/GPT_Codex_AI_Bridge_Kit` |
 | runtime/import source | `/overflow/htzhu/mingcheng_new/GPT_Codex_AI_Bridge_Kit/ai_bridge_kit/__init__.py` |
-| runtime version before/after | `0.9.1` / `0.9.1` |
+| runtime version before/after | `0.9.1` / `0.9.2` |
 | local Bridge branch | `main` |
-| local Bridge HEAD | `ff22c97c8193e110d606e179ec1a8a2741b97fad` |
+| local Bridge HEAD before/after | `ff22c97c8193e110d606e179ec1a8a2741b97fad` / `6bbaca5a3af6240fbc88fa54cf78fa9acc147f67` |
 | local Bridge dirty state | `.gitignore` modified |
 | Bridge `origin/release` | `6bbaca5a3af6240fbc88fa54cf78fa9acc147f67` |
 | Bridge `origin/release` version source | `0.9.2` |
 | Bridge `origin/main` | `7573dba5a9d8085480d25feab7e86ccd90d6538f` |
-| release relation | `local_head_ancestor_of_release=YES`; local checkout is `17` commits behind `origin/release` |
-| classification | `LAGGING_LOCAL_RUNTIME`: formal Bridge release `0.9.2` exists, while current editable runtime remains `0.9.1` |
+| release relation | before update: `local_head_ancestor_of_release=YES`; after update: `HEAD == origin/release` |
+| classification | `ALIGNED`: canonical checkout and runtime/package are at formal Bridge release `0.9.2` |
 
 Formal Bridge release evidence read:
 
@@ -175,18 +175,52 @@ Bridge/Host validation:
 - `ai-bridge host validate` returned `overall state: drifted`.
 - Drift evidence included `global AGENTS managed block: drifted`, `ai-bridge-global.rules: drifted`, missing expected allow matches for bounded Bridge/GitHub commands, and an unexpected allow for raw `git push origin main`.
 
+Bridge actions taken:
+
+- Verified Bridge origin as `https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git`.
+- Verified `HEAD` was an ancestor of `origin/release`.
+- Verified dirty path `.gitignore` did not overlap `HEAD..origin/release`.
+- Fast-forwarded the canonical checkout to `origin/release` without stash/reset/restore/clean.
+- Refreshed the existing editable package with `python -m pip install -e /overflow/htzhu/mingcheng_new/GPT_Codex_AI_Bridge_Kit`.
+- Verified `ai-bridge where` returns `/overflow/htzhu/mingcheng_new/GPT_Codex_AI_Bridge_Kit`.
+- Verified package metadata and `ai_bridge_kit.__version__` are both `0.9.2`.
+- Ran `ai-bridge host install` only after `ai-bridge host validate` reported Bridge-owned managed-surface drift.
+- Re-ran `ai-bridge host validate` and got `overall state: configured`.
+
 Bridge actions not taken:
 
 - Did not advance Bridge `release`.
-- Did not fast-forward the Bridge checkout.
-- Did not run `pip install -e` for Bridge.
-- Did not run `ai-bridge host install`.
-- Did not modify Bridge source/runtime or Host Policy files.
+- Did not follow or merge Bridge `origin/main`.
+- Did not modify Bridge source logic.
+- Did not stash/reset/restore/clean.
+
+User dirty work preservation:
+
+- `.gitignore` remained modified after the Bridge fast-forward.
+- `.gitignore` content hash after update: `c3215f8067a10360175a5c6b6f73f405cae43d91`.
+
+## Fresh Session Evidence
+
+Bounded `ai-bridge plugin-replay` was attempted first:
+
+- dry-run passed and verified `ai-skills-core@yuukias-ai-skills` was installed;
+- the real run `20260929T050139Z-fc5f08c187f9` hung in Bridge's filesystem read-scope probe before producing child replay output;
+- it was interrupted and recorded as a plugin-replay runtime issue, not as a plugin failure.
+
+Fresh `codex exec` validation then passed:
+
+- Fresh session id: `01a0eb93-7a66-7b40-a5ab-0969daf97a71`.
+- It loaded installed production `AI Skills Maintainer` / `ai-skills-core 0.5`.
+- It read `skills/orchestrator/SKILL.md` and routed the request to `machine-update-orchestrator`.
+- It verified package metadata `gpt-codex-ai-bridge-kit==0.9.2`.
+- It verified `ai_bridge_kit.__version__ == "0.9.2"`.
+- It verified `ai-bridge host status` and `ai-bridge host validate` both report `overall state: configured`.
+- Evidence: `fresh_longleaf_direct_codex_last_message.txt`.
 
 ## Result
 
-Status: `PENDING_BRIDGE_HOST_UPDATE`
+Status: `PASS`
 
-AI_Skills Marketplace and already-installed AI_Skills plugins were updated to the formal release channel. Bridge Kit and Host Policy were inspected and found lagging/drifted, but were not mutated because this run's user boundary explicitly prohibited Bridge runtime/source mutation and the Bridge checkout was dirty.
+AI_Skills Marketplace and already-installed AI_Skills plugins are aligned with the formal release channel. Bridge Kit runtime/package and canonical checkout are aligned with formal release `0.9.2`. Bridge-owned Host Policy validates as configured. Fresh Codex session consumption of installed `AI Skills Maintainer` / `ai-skills-core 0.5` passed.
 
-Current session reload status: `UPDATED_RELOAD_REQUIRED`.
+Current session reload status: `NOT_REQUIRED_AFTER_FRESH_SESSION_PASS`.

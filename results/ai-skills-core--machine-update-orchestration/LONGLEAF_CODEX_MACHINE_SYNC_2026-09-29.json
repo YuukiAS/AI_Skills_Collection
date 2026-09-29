@@ -4,7 +4,7 @@
   "reviewed_branch": "reviewed/ai-skills-core--machine-update-orchestration",
   "consumer": "Longleaf_Codex",
   "updated_at": "2026-09-29 00:51:22 EDT",
-  "status": "PENDING_BRIDGE_HOST_UPDATE",
+  "status": "PASS",
   "identity": {
     "hostname": "c0810.ll.unc.edu",
     "user": "aereinh",
@@ -51,36 +51,62 @@
     "reason": "AI_Skills release 5.3.1 has no ### Update impact section requiring companion or managed-consumer mutation."
   },
   "bridge": {
-    "route": "Route C discovery",
+    "route": "Route C",
     "repository": "YuukiAS/GPT_Codex_AI_Bridge_Kit",
     "canonical_checkout": "/overflow/htzhu/mingcheng_new/GPT_Codex_AI_Bridge_Kit",
     "origin": "https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git",
     "executable": "/overflow/htzhu/mingcheng_new/.local/bin/ai-bridge",
     "runtime_source": "/overflow/htzhu/mingcheng_new/GPT_Codex_AI_Bridge_Kit/ai_bridge_kit/__init__.py",
     "runtime_version_before": "0.9.1",
-    "runtime_version_after": "0.9.1",
+    "runtime_version_after": "0.9.2",
     "formal_release_version": "0.9.2",
     "formal_release_target": "6bbaca5a3af6240fbc88fa54cf78fa9acc147f67",
     "origin_release": "6bbaca5a3af6240fbc88fa54cf78fa9acc147f67",
     "origin_main": "7573dba5a9d8085480d25feab7e86ccd90d6538f",
-    "checkout_head": "ff22c97c8193e110d606e179ec1a8a2741b97fad",
+    "checkout_head_before": "ff22c97c8193e110d606e179ec1a8a2741b97fad",
+    "checkout_head_after": "6bbaca5a3af6240fbc88fa54cf78fa9acc147f67",
     "checkout_branch": "main",
     "checkout_dirty": [
       ".gitignore"
     ],
-    "classification": "LAGGING_LOCAL_RUNTIME",
-    "host_validate": "DRIFTED",
+    "classification": "ALIGNED",
+    "host_validate_before": "DRIFTED",
+    "host_validate_after": "CONFIGURED",
+    "gitignore_hash_after": "c3215f8067a10360175a5c6b6f73f405cae43d91",
     "actions": [
       "verified remote formal release evidence dynamically",
-      "ran ai-bridge host validate",
-      "did not mutate Bridge source/runtime or Host Policy"
+      "verified dirty .gitignore did not overlap release changes",
+      "fast-forwarded canonical Bridge checkout to origin/release",
+      "refreshed existing editable package with python -m pip install -e",
+      "verified ai-bridge where, package metadata, and module version",
+      "ran ai-bridge host install for Bridge-owned managed-surface drift",
+      "verified ai-bridge host validate PASS"
     ],
     "not_done": [
       "did not advance Bridge release",
-      "did not fast-forward Bridge checkout",
-      "did not refresh editable Bridge package",
-      "did not run ai-bridge host install"
+      "did not follow Bridge origin/main",
+      "did not modify Bridge source logic",
+      "did not stash, reset, restore, or clean user work"
     ]
   },
-  "final_consumer_status": "PENDING_BRIDGE_HOST_UPDATE"
+  "fresh_session": {
+    "status": "PASS",
+    "method": "fresh codex exec after bounded plugin-replay probe hang",
+    "session_id": "01a0eb93-7a66-7b40-a5ab-0969daf97a71",
+    "evidence": "fresh_longleaf_direct_codex_last_message.txt",
+    "confirmed": [
+      "installed production AI Skills Maintainer / ai-skills-core 0.5",
+      "machine-update-orchestrator route consumed the request",
+      "Bridge package metadata 0.9.2",
+      "ai_bridge_kit.__version__ 0.9.2",
+      "ai-bridge host validate overall state configured"
+    ],
+    "plugin_replay_note": {
+      "dry_run": "PASS",
+      "run_id": "20260929T050139Z-fc5f08c187f9",
+      "result": "interrupted after hanging in filesystem read-scope probe before child replay output",
+      "classification": "plugin-replay runtime issue, not plugin failure"
+    }
+  },
+  "final_consumer_status": "PASS"
 }
