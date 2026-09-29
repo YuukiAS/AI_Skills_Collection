@@ -336,6 +336,80 @@ candidate_action: Couple Presentations with Clear Writing at the final rendered-
 promotion_gate: replay across teaching and research decks where the gate catches functionally similar AI/meta prose without relying only on a phrase blacklist.
 
 
+
+### Reviewer runtime contract must include agent type, model, reasoning and image capability
+status: NEW
+tracking: #65
+source: STAT5060 Tutorial 1 V7 blind-calibration failure, 2026-09-29
+evidence: the executor spawned multiple blind-calibration reviewers as built-in `explorer` agents. They could identify text-visible defects such as NB2 first-use and closing/contact issues but repeatedly missed pixel-dependent failures such as header contrast, footer optical alignment, P13 geometry, P20 crowding and P22 wasted space.
+problem: A reviewer prompt is not enough. Presentation acceptance quality depends on the runtime contract that executes it. If a generic code-exploration agent, low-reasoning model or image-incapable context runs the same prompt, the output can still be a false PASS. The final reviewer extracted from STAT5060 must freeze reviewer agent class/capabilities, model/reasoning floor, read-only execution posture and direct image-consumption capability in addition to textual rubric.
+candidate_action: Once the STAT5060 reviewer is human-accepted, capture the exact reviewer runtime contract alongside the prompt. Presentations should refuse visual PASS when reviewer runtime identity/capabilities do not satisfy the frozen contract.
+promotion_gate: one replay showing the same rubric fails under an unsuitable explorer/text-only runtime and succeeds under the intended reviewer runtime.
+
+### Presentation visual review must prove actual pixel consumption, not merely receive an archive
+status: NEW
+tracking: #66
+source: STAT5060 Tutorial 1 V7 calibration bundles
+evidence: blind reviewers were given a tar.gz containing PDF/renders/contact sheet, but repeated misses on visual defects created no proof that the reviewer had actually opened and inspected the rendered pages.
+problem: Supplying image files is not equivalent to consuming them. Visual acceptance needs evidence that the reviewer actually viewed final page pixels. A bundle/archive can degrade into text-only or filename-level review if the agent never invokes image viewing. Presentations should record image evidence consumption or use a review entry that directly attaches/opens whole-slide renders.
+candidate_action: Add a reviewer-evidence requirement such as viewed-image manifest/tool trace/direct image attachment. If visual evidence was not actually consumed, return BLOCKED_VISUAL_REVIEW_NOT_PERFORMED rather than PASS.
+promotion_gate: replay where a reviewer receiving but not viewing images is correctly blocked.
+
+### Blind calibration must be frozen, sentinel-based and must not become prompt tuning on the holdout
+status: NEW
+tracking: #67
+source: STAT5060 Tutorial 1 V7 calibration A–F cycle
+evidence: after A/B failed blind calibration, successive C/D/E/F prompts were made progressively more exhaustive while using the same rejected V6 holdout. This improves hit rate but starts tuning the calibration prompt to the holdout, weakening its meaning as an independent reviewer-quality test.
+problem: Reviewer calibration can itself overfit. A blind holdout cannot remain a meaningful capability test if the prompt is repeatedly edited after each miss. Calibration should use a frozen prompt and a small objective sentinel set rather than require reproduction of every human complaint. Failure should trigger runtime/capability repair or a new calibration fixture, not repeated wording changes against the same expected answers.
+candidate_action: Freeze role-specific calibration prompts before the first run. Use a sentinel policy: require a small set of objective visual/teaching defects plus additional independently discovered findings. Record prompt hash. After a calibration failure, do not edit the prompt against the same holdout.
+promotion_gate: successful fixed-prompt calibration across at least two reviewer runtimes and one fresh rejected deck.
+
+### Artifact review must not depend on the unfinished Presentations production plugin
+status: NEW
+tracking: #68
+source: STAT5060 Tutorial 1 V7 reviewer dispatch failure
+evidence: the executor initially attempted `ai-bridge plugin-replay --plugin presentations`; the current Codex identity did not have the Presentations production plugin installed/enabled and review stalled even though the deck artifacts themselves were reviewable.
+problem: This creates a circular dependency: a deck is being used to improve Presentations, but its independent reviewer requires the unfinished Presentations plugin to run. Generic artifact review must be able to operate as a plain fresh reviewer context/process over explicit PDF/render evidence. Production plugin replay is for validating installed plugins, not a mandatory transport for presentation artifact acceptance.
+candidate_action: Separate `presentation artifact reviewer` from `Presentations plugin production replay`. The former must have a plugin-independent review entry; the latter remains a later product-validation path.
+promotion_gate: independent artifact review of a deck succeeds on a machine without Presentations installed.
+
+### Review transport should distinguish plugin replay from fresh reviewer execution
+status: NEW
+tracking: #69
+source: STAT5060 Tutorial 1 V7 + Bridge Kit 0.9.x usage confusion
+evidence: the executor treated the need for a fresh independent child as a reason to reach for `plugin-replay`, despite the task being artifact review rather than installed-plugin replay.
+problem: “fresh child” and “plugin replay” are different capabilities. Presentation review needs a fresh isolated read-only reviewer context with explicit artifacts; it should not inherit plugin-replay requirements such as installed production plugin identity. Conflating them causes avoidable blocking and fallback pressure.
+candidate_action: Document a canonical reviewer dispatch matrix: artifact review -> native fresh reviewer/subagent or isolated fresh Codex process; plugin regression -> plugin replay; human/ChatGPT review -> explicit external handoff. Fail closed if no qualifying reviewer transport exists.
+promotion_gate: routing tests for all three cases without cross-route fallback.
+
+### Review standards must not Goodhart into renderer hacks
+status: NEW
+tracking: #70
+source: STAT5060 Tutorial 1 V7 footer alignment repair
+evidence: a synthetic “<=2 px centre difference” footer metric caused the executor to replace ordinary Beamer navigation with custom TikZ-drawn chrome purely to satisfy the measured threshold. The result optimized the metric rather than the intended mature Beamer behaviour.
+problem: Quantitative diagnostics are useful evidence, but turning them into implementation targets can create worse designs. Reviewer rules should state the perceptual invariant (“controls and page number are optically aligned”) while numeric measurements remain diagnostic, not a renderer contract. Similar risk applies to whitespace percentages, font-size thresholds and pixel gaps.
+candidate_action: Distinguish hard semantic constraints from diagnostic heuristics. Reviewers may cite measurements to support REVISE, but generators must not be instructed to optimize arbitrary pixel numbers unless the template itself truly requires them.
+promotion_gate: replay where the generic reviewer rejects a visually misaligned footer without requiring custom chrome or a universal pixel constant.
+
+### Native template chrome must remain native; diagrams and scientific graphics use separate rendering ownership
+status: NEW
+tracking: #71
+source: STAT5060 Tutorial 1 V7 footer regression
+evidence: while repairing footer alignment, the executor temporarily introduced custom TikZ navigation/footer controls. The user explicitly rejected this because ordinary Beamer already owns navigation chrome.
+problem: Rendering ownership should be explicit. Template chrome (headline/miniframes/footline/navigation/page numbers) belongs to the template/runtime, not diagram drawing. TikZ may be appropriate for conceptual scientific diagrams; R/Python for data-driven plots; native Beamer for Beamer UI. Crossing these ownership boundaries makes themes brittle and visually inconsistent.
+candidate_action: Add renderer-ownership QA: native Beamer template chrome, R/Python data figures, TikZ only for conceptual diagrams unless a frozen template explicitly says otherwise.
+promotion_gate: accepted standard-Beamer reference and regression test preventing custom-drawn navigation chrome.
+
+### Final candidate review should bind to a frozen artifact identity before independent acceptance
+status: NEW
+tracking: #72
+source: STAT5060 Tutorial 1 V7 finalization
+evidence: repeated emergency fixes changed PDF, render evidence and template after earlier checks. Reviewer status became ambiguous unless every review named the exact candidate hash.
+problem: Presentation review is meaningless if evidence and verdict can refer to different renders. Before independent acceptance, freeze PDF/slide source/render-manifest identities. Reviewer artifacts must state the exact PDF hash and render-set identity they inspected; any subsequent mutation invalidates the verdict and requires fresh review.
+candidate_action: Make artifact identity binding mandatory at candidate freeze. Reuse the same principle for PPTX and other export formats.
+promotion_gate: a mutation-after-review test correctly invalidates previous PASS.
+
+
 真实项目 thread 新增时只需要最小格式：
 
 ```text
