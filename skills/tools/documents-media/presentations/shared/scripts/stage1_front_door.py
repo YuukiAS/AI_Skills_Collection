@@ -11,6 +11,7 @@ from typing import Any
 
 
 BUILT_IN_TEMPLATES = ("cuhk-research", "course-standard")
+COURSE_STANDARD_DEPENDENCY = "WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE"
 EDITABLE_FORMATS = ("ppt", "pptx", "powerpoint", "slides", "google slides", "editable")
 EDITABLE_TEXT_TERMS = ("ppt", "pptx", "powerpoint", "google slides", "editable")
 BEAMER_FORMATS = ("beamer", "latex", "latex slides", "tex", ".tex", "academic pdf")
@@ -32,6 +33,7 @@ class Stage1Route:
     ratio: str | None
     artifact_claim: str
     reason: str
+    dependency_status: str | None = None
 
 
 def _contains_any(text: str, terms: tuple[str, ...]) -> bool:
@@ -74,14 +76,27 @@ def route_request(prompt: str, *, explicit_output: str | None = None, existing_d
     if explicit_beamer:
         if _contains_any(text, RESEARCH_TERMS):
             return Stage1Route("beamer", "cuhk-research-beamer", "cuhk-research", "tex+pdf", ratio or "16:9", "source plus rendered PDF after render-owner QA", "research route")
-        return Stage1Route("beamer", "course-standard-beamer", "course-standard", "tex+pdf", ratio or "4:3", "source plus rendered PDF after render-owner QA", "explicit/generic non-branded Beamer")
+        return course_standard_route(ratio, "explicit/generic non-branded Beamer")
     if _contains_any(text, BUSINESS_TERMS):
         return Stage1Route("editable", "official-editable-surface", None, "pptx/slides", ratio, "editable adapter required", "business/executive route remains editable")
     if _contains_any(text, TEACHING_TERMS):
-        return Stage1Route("beamer", "course-standard-beamer", "course-standard", "tex+pdf", ratio or "4:3", "source plus rendered PDF after render-owner QA", "teaching route")
+        return course_standard_route(ratio, "teaching route")
     if _contains_any(text, RESEARCH_TERMS):
         return Stage1Route("beamer", "cuhk-research-beamer", "cuhk-research", "tex+pdf", ratio or "16:9", "source plus rendered PDF after render-owner QA", "research route")
     return Stage1Route("editable", "official-editable-surface", None, "pptx/slides", ratio, "editable adapter required", "unspecified general deck defaults to editable surface unless research/teaching context is present")
+
+
+def course_standard_route(ratio: str | None, reason: str) -> Stage1Route:
+    return Stage1Route(
+        "beamer",
+        "course-standard-beamer",
+        "course-standard",
+        "tex+pdf",
+        ratio or "4:3",
+        "pending canonical course-standard source before Beamer artifact claim",
+        reason,
+        COURSE_STANDARD_DEPENDENCY,
+    )
 
 
 def built_in_template_manifest() -> dict[str, Any]:
@@ -92,7 +107,7 @@ def built_in_template_manifest() -> dict[str, Any]:
             "default_ratio": "4:3",
             "explicit_ratios": ["4:3", "16:9"],
             "same_template_identity_for_16_9": True,
-            "canonical_source_status": "WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE",
+            "canonical_source_status": COURSE_STANDARD_DEPENDENCY,
             "canonical_source_owner": "independent standard-Beamer task",
             "template_body_in_this_task": False,
         },

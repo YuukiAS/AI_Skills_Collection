@@ -397,10 +397,13 @@ class PresentationSharedTests(unittest.TestCase):
         tex = stage1_front_door.route_request("Make a compact methods deck.", explicit_output="tex")
         self.assertEqual(tex.adapter, "course-standard-beamer")
         self.assertEqual(tex.template, "course-standard")
+        self.assertEqual(tex.dependency_status, "WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE")
+        self.assertEqual(tex.artifact_claim, "pending canonical course-standard source before Beamer artifact claim")
 
         research = stage1_front_door.route_request("Make this paper talk for a seminar.", explicit_output="beamer")
         self.assertEqual(research.adapter, "cuhk-research-beamer")
         self.assertEqual(research.template, "cuhk-research")
+        self.assertIsNone(research.dependency_status)
 
         latex_seminar = stage1_front_door.route_request("Make LaTeX slides for a seminar.")
         self.assertEqual(latex_seminar.adapter, "cuhk-research-beamer")
@@ -409,10 +412,12 @@ class PresentationSharedTests(unittest.TestCase):
         beamer_lecture = stage1_front_door.route_request("Make Beamer slides for a lecture.")
         self.assertEqual(beamer_lecture.adapter, "course-standard-beamer")
         self.assertEqual(beamer_lecture.template, "course-standard")
+        self.assertEqual(beamer_lecture.dependency_status, "WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE")
 
         business_beamer = stage1_front_door.route_request("Make Beamer slides for a client strategy review.")
         self.assertEqual(business_beamer.adapter, "course-standard-beamer")
         self.assertEqual(business_beamer.template, "course-standard")
+        self.assertEqual(business_beamer.dependency_status, "WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE")
 
     def test_stage1_front_door_normalizes_explicit_editable_output_extensions(self) -> None:
         pptx = stage1_front_door.route_request("Make a compact methods deck.", explicit_output=".pptx")

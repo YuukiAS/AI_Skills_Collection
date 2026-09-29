@@ -78,6 +78,9 @@ canonical `course-standard` template body:
 - Source/generated parity tests now explicitly cover the Stage 1 front-door,
   render-owner adapter contract, G5 private-review plumbing, and business
   Presentations skill mirror in the generated plugin payload.
+- `course-standard` route receipts now carry
+  `WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE` and avoid claiming a Beamer
+  artifact before the canonical standard-Beamer source is supplied.
 
 No `skills/tools/documents-media/presentations/shared/templates/course-standard`
 template body was created or restored.
