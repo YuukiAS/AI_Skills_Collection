@@ -1,0 +1,16 @@
+{
+  "base_branch": "main",
+  "base_commit": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+  "ci_required": false,
+  "ci_status": "NOT_REQUIRED",
+  "implementation_commit": null,
+  "last_review_decision": null,
+  "max_plan_revisions": 1,
+  "max_review_rounds": 2,
+  "next_action": "RUN_GPT_PLANNER",
+  "plan_revision": 0,
+  "review_round": 0,
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "state": "PLAN_REQUESTED",
+  "task_key": "workflow-core--first-remote-publication-repair-gate"
+}
