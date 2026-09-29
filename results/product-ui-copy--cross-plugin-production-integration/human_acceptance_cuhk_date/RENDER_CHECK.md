@@ -15,14 +15,18 @@ RENDER_MARGIN=12mm \
   results/product-ui-copy--cross-plugin-production-integration/human_acceptance_cuhk_date/CUHK_DATE_PRODUCT_UI_COPY_ACCEPTANCE.pdf
 ```
 
-Checks performed:
+Checks performed after adding the historical-audit comparison:
 
 - `pdfinfo`: 18 A4 pages.
 - `pdffonts`: Chinese fonts are embedded and Unicode mapped.
 - `pdftotext -layout`: no Markdown fences, HTML tags, raw LaTeX image commands,
-  broken `newpage`, or workflow-state files were found in the rendered text.
-- Visual preview: pages 3, 9, 10, 11, 13, 15, 16, 17, and 18 were inspected.
-  Tables and screenshots are readable; the last page contains only user
-  acceptance questions.
+  broken `newpage`, `CURRENT.json`, `H3`, or `H4` strings were found in the
+  rendered text.
+- Rendered comparison page 17 contains the expected second-stage figures:
+  `118 条仍可见`, `64 / 78`, `10 / 10`, and zero obvious wrong rewrites or
+  material misses.
+- Visual preview: pages 12, 17, and 18 were inspected after re-render. The
+  screenshot page remains readable, the historical comparison table does not
+  overflow, and the last page contains only user acceptance questions.
 - Workflow state was not edited; `CURRENT.json` remains
   `AWAIT_HUMAN_DECISION`.
