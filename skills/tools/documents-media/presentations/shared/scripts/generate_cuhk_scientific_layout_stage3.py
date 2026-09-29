@@ -370,14 +370,11 @@ def write_fontconfig(build_dir: Path, render_probe: dict[str, Any]) -> dict[str,
 
 def find_command(command: str, render_probe: dict[str, Any] | None = None) -> dict[str, Any]:
     if render_probe is not None:
-        owner_probe = render_owner.command_probe(render_probe, command)
-        if owner_probe["available"]:
-            return owner_probe
-    path = shutil.which(command)
+        return render_owner.command_probe(render_probe, command)
     return {
-        "available": path is not None,
-        "path": path,
-        "source": "PATH" if path else None,
+        "available": False,
+        "path": None,
+        "source": "missing-render-owner-probe",
     }
 
 
@@ -1587,7 +1584,7 @@ def render_pdf(build_dir: Path, compile_status: dict[str, Any]) -> dict[str, Any
             "rendered_png": [],
             "message": compile_status.get("message"),
         }
-    pdftoppm = render_owner.owner_command_or_path(compile_status.get("render_probe", {}), "pdftoppm")
+    pdftoppm = render_owner.command_path(compile_status.get("render_probe", {}), "pdftoppm")
     if not pdftoppm:
         return {
             "status": "BLOCKED_MISSING_PDF_RENDERER",

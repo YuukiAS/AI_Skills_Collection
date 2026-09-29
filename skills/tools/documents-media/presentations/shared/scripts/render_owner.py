@@ -12,7 +12,6 @@ from __future__ import annotations
 import json
 import os
 import re
-import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -97,10 +96,6 @@ def command_probe(probe_payload: dict[str, Any], name: str) -> dict[str, Any]:
         "path": path,
         "source": OWNER if path is not None else "missing",
     }
-
-
-def owner_command_or_path(probe_payload: dict[str, Any], name: str) -> str | None:
-    return command_path(probe_payload, name) or shutil.which(name)
 
 
 def resource_dir(probe_payload: dict[str, Any]) -> Path | None:

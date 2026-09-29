@@ -36,6 +36,13 @@ canonical `course-standard` template body:
 - validator compatibility with the new render-owner probe schema;
 - G5 private-review metadata/bundle plumbing that remains `final_g5_ready=false`
   until canonical course-standard source identity is supplied.
+- `presentation-desktop` profile description alignment with the Stage 1 front
+  door, pending course-standard teaching identity, editable route preservation,
+  portable rendering, and visual QA.
+- tightened CUHK adapter command discovery so Beamer compile/render commands
+  come only from the `render-chinese-math-pdf` probe receipt; Presentations no
+  longer falls back to its own `PATH` discovery for formal adapter command
+  paths.
 
 No `skills/tools/documents-media/presentations/shared/templates/course-standard`
 template body was created or restored.
@@ -71,7 +78,13 @@ python scripts/skills.py validate
 git diff --check
 RP-G2 forbidden-path scan over source + generated Presentations payload
 course-standard template directory absence check
+python scripts/build_codex_marketplace.py --write --validate --check --path-report
 ```
+
+Note: `python -m unittest tests.test_presentations` must be run with write
+access to the task worktree because an existing test regenerates
+`docs/audits/research_presentation_gold_composition_library/runtime_probe_traces.json`.
+The same command passes when run with that normal write access.
 
 Reviewed Handoff repository-wide validation was run and failed only on
 pre-existing unrelated historical task metadata:

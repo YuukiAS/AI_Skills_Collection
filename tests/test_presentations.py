@@ -449,6 +449,9 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertIn("Chinese presentation text, including research, business, executive, strategy, product, and teaching decks", ppt_routing)
         self.assertIn("must pass through `writing-fidelity` plus `chinese-prose`", ppt_routing)
         self.assertIn("English scientific slide text can pass through `scientific-prose`", ppt_routing)
+        self.assertIn("Stage 1 Presentations front door", profile["description"])
+        self.assertIn("pending course-standard teaching identity", profile["description"])
+        self.assertIn("editable business/PPTX preservation", profile["description"])
         profile_skills = "\n".join(profile["skills"])
         self.assertIn("skills/writing/core/writing-fidelity", profile_skills)
         self.assertIn("skills/writing/core/chinese-prose", profile_skills)
@@ -487,6 +490,7 @@ class PresentationSharedTests(unittest.TestCase):
         manifest = render_owner.manifest(probe)
         self.assertEqual(manifest["environment_owner"], "render-chinese-math-pdf")
         self.assertFalse(manifest["private_presentations_resolver"])
+        self.assertFalse(hasattr(render_owner, "owner_command_or_path"))
 
     def test_stage1_render_owner_contract_gates_missing_dependency_and_font_fallback(self) -> None:
         missing_probe = {
@@ -529,6 +533,13 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(adapter_manifest["environment_owner"], "render-chinese-math-pdf")
         self.assertFalse(adapter_manifest["private_presentations_discovery_route"])
         self.assertEqual(adapter_manifest["pending_dependency"], "WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE")
+
+        missing_owner_probe = stage3.find_command("pdftoppm", {"payload": {"commands": {}}})
+        self.assertFalse(missing_owner_probe["available"])
+        self.assertEqual(missing_owner_probe["source"], "missing")
+        no_probe = stage3.find_command("pdftoppm", None)
+        self.assertFalse(no_probe["available"])
+        self.assertEqual(no_probe["source"], "missing-render-owner-probe")
 
     def test_presentations_marketplace_front_door_interface(self) -> None:
         config = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))

@@ -1,6 +1,6 @@
 {
   "name": "presentation-desktop",
-  "description": "Desktop presentation profile for evidence-first research-group-meeting, research, and business deck planning with editable PPTX/Slides default routing, writing final passes, and scientific visual QA.",
+  "description": "Desktop presentation profile for the Stage 1 Presentations front door: CUHK Beamer research routing, pending course-standard teaching identity, editable business/PPTX preservation, writing final passes, portable PDF rendering, and scientific visual QA.",
   "max_active_skills": 10,
   "skills": [
     "skills/tools/documents-media/presentations/research-presentations",
