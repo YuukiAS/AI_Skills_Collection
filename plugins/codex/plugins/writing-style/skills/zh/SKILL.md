@@ -1,6 +1,6 @@
 ---
 name: chinese-prose
-description: 中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和“说人话”终审。任何中文 Markdown/PDF/报告/README/面向用户或读者的中文内容都应自动触发本 skill，用于普通中文润色、中文为主、降低 AI 味/翻译腔/模板腔/宣传腔，并保护事实、数字、术语、命令、引用、实验结果和证据边界。
+description: 中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和长文“说人话”终审。任何中文 Markdown/PDF/报告/README/面向读者的文档型中文内容都应自动触发本 skill，用于普通中文润色、中文为主、降低 AI 味/翻译腔/模板腔/宣传腔，并保护事实、数字、术语、命令、引用、实验结果和证据边界。产品界面标签、按钮、状态、帮助、信任/隐私披露和 locale-specific UI microcopy 应路由到 product-ui-copy。
 status: active
 provenance: local
 trusted: true
@@ -21,6 +21,8 @@ license: MIT-compatible synthesis plus public-domain style guidance
 
 这不是事实核查、文件转换、AI 检测规避或伪原创工具。它只处理中文读者看到的表达质量：在 `writing-fidelity` 的保真底线之上，把机器味、翻译腔、模板腔和不必要英文降下来。
 
+产品界面里的短文案不是本 skill 的主路线。按钮、标签、空/加载/错误/成功状态、设置页帮助、onboarding、权限提示、信任/隐私说明、landing-page interface block 或 `zh-Hans` / `zh-Hant-HK` UI microcopy，应交给 `product-ui-copy`；本 skill 只在这些文案已经进入文档、报告或 README 语境时处理文档型说明。
+
 如果用户给的是已有中文或中文为主的科研/技术材料，并要求重新组织、结构性重写或文档级重写，同时要求保留事实、数字、公式、引用、比较条件、限制、路径、配置或命令等精确信息，不要把本 skill 当主路线；应交给 `scientific-rewrite`。本 skill 只在该重路线内部承担 `REALIZE_MEANING` 中文实现角色，或在最终候选稿生成后做自然表达终审。
 
 ## 使用场景
@@ -35,6 +37,8 @@ license: MIT-compatible synthesis plus public-domain style guidance
 - 中文技术文档、报告、README 或提示词里出现大量非必要英文，需要改成中文为主、只保留必要英文。
 
 明确排除：已有科研/技术材料的 source-faithful structural rewrite。只要任务同时具备“已有中文或中文为主的科研/技术材料”“要求重新组织或结构性重写”“要求保留事实、数字、公式、引用、比较条件、限制、路径、配置或命令”等精确信息，应 hand off 给 `scientific-rewrite`，不要停留在本 skill 的普通润色路线。
+
+也明确排除产品界面微文案：如果用户要求改按钮、CTA、字段标签、界面状态、设置页帮助、权限/信任/隐私披露、浏览器插件 popup、桌面/WebView 设置页、移动端/Compose 页面中的短文案，优先 hand off 给 `product-ui-copy`。不要因为文本是中文就留在 `chinese-prose`。
 
 不要用本 skill 做事实核查、逐字翻译、模仿品牌文案，或改写代码、日志、命令。单纯渲染中文 PDF、检查字体或转换格式时，本 skill 作为成稿可读性验收配合使用，不替代 PDF/文档工具。
 

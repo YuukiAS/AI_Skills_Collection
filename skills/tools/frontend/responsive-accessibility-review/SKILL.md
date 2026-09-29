@@ -44,6 +44,10 @@ Use this skill as a quality gate for any user-facing UI.
 - Buttons and links have clear affordance.
 - Destructive actions require confirmation when the risk is meaningful.
 - Dense dashboards support scanning and comparison.
+- Product UI Copy is validated in the rendered surface: CTA/action text,
+  neighboring explanatory copy, trust/help disclosure, empty/error/loading
+  states, and locale-specific strings must fit the actual viewport without
+  overlap, clipping, misleading hierarchy, or broken action relationships.
 
 ## Production Closure
 
@@ -56,6 +60,10 @@ Use this skill as a quality gate for any user-facing UI.
   behavior unless the claim is explicitly browser-equivalent.
 - Report findings as concrete P1/P2/P3 issues tied to the exact screen, state,
   viewport, and evidence.
+- When browser-rendered fixtures are used for Product UI Copy evaluation, bind
+  the finding to the fixture, viewport, copy source, screenshot, and candidate
+  commit. Do not claim native desktop/mobile runtime behavior from browser-only
+  evidence.
 
 ## Review Output
 

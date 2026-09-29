@@ -4,6 +4,62 @@
 
 No unreleased changes.
 
+## 5.4.0 - 2026-09-29
+
+Repository `5.4.0` adds the Product UI Copy cross-plugin normal workflow
+between Frontend Design and Clear Writing.
+
+Repository bump decision: MINOR
+Reason: the collection can now handle a repository-level workflow that `5.3.x`
+could not: user-facing product-interface work can enter through Frontend Design
+for content architecture and rendered acceptance, then hand protected meaning to
+Clear Writing for locale-specific Product UI Copy, and return to Frontend for
+surface validation.
+
+Affected plugins:
+- `web-development`: `0.3` -> `0.4`
+  Reason: Frontend Design now recognizes product-interface work across browser
+  extension, web, desktop/WebView, and mobile/Compose surfaces; freezes
+  lightweight Product UI Copy handoff fields; keeps backend/runtime/data/docs
+  negatives out of the frontend route; and validates final copy in the rendered
+  surface.
+- `writing-style`: `0.3` -> `0.4`
+  Reason: Clear Writing now includes a dedicated `product-ui-copy` route for
+  protected-meaning interface microcopy, while keeping long-form Chinese,
+  scientific rewrite, fidelity-only, and English scientific prose routes
+  separate.
+- all other central plugins: NO_BUMP
+  Reason: this release does not change their production behavior.
+
+Unchanged central plugin versions: `workflow-core 0.4`, `ai-skills-core 0.5`,
+`research-writing 0.2`, `presentations 0.3`,
+`scientific-visualization 0.1`, `statistical-modeling 0.1`,
+`bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Product UI Copy requests for labels, CTA/action text, empty/loading/error
+  states, onboarding, settings help, trust/privacy disclosure, and
+  locale-specific UI wording route to a dedicated Clear Writing sibling instead
+  of the long-form Chinese prose route.
+- Frontend Design owns content architecture, placement, disclosure level,
+  neighboring copy, viewport constraints, and rendered acceptance before and
+  after Product UI Copy wording.
+- Product state, user consequence, eligibility, privacy, retention, deletion,
+  payment, safety, legal/trust disclosure, and exact product identities are
+  protected by `writing-fidelity` and must escalate when facts are missing.
+- `zh-Hans` and `zh-Hant-HK` interface wording are treated as independent
+  realizations from one protected meaning rather than character conversion.
+- Candidate replay can stage multiple candidate plugins from one commit and
+  prove same-session consumption of both `web-development` and `writing-style`.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelogs:
+
+- `docs/plugin-changelogs/web-development.md`
+- `docs/plugin-changelogs/writing-style.md`
+
 ## 5.3.1 - 2026-09-28
 
 Repository `5.3.1` is a compatible patch release for Frontend Design production

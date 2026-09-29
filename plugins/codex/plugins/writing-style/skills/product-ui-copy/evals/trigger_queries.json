@@ -1,0 +1,25 @@
+{
+  "positive": [
+    "这个设置页中文按钮和状态说明读起来很像 AI，帮我改自然，但不要改变开关含义。",
+    "把浏览器插件 popup 的错误、空状态和 CTA 文案整理成用户看得懂的中文。",
+    "这组 zh-Hans / zh-Hant-HK 的登录页微文案要分别自然，不能只做简繁转换。",
+    "帮我改 Tauri 设置页的帮助说明和按钮文案，保留隐私和删除后果。",
+    "这个 onboarding 里权限说明太吓人，改得自然一点，但不能弱化数据使用事实。"
+  ],
+  "indirect": [
+    "这个产品页的按钮关系和说明文案都不顺，先判断哪些该留、哪些该改。",
+    "用户看到这个付款失败提示不知道下一步该做什么，帮我整理界面文案。",
+    "这个移动端 Compose 页面层级还行，但状态文字和帮助说明需要更像真实 app。"
+  ],
+  "near_miss": [
+    "把这份中文 README 写自然一点，开头先说项目做什么。",
+    "重新组织这份中文科研报告，保留数字、公式、引用和结论强度。",
+    "Polish this English scientific abstract without overclaiming."
+  ],
+  "negative": [
+    "把后端 API 的 retry 和 provider timeout 逻辑重构一下，UI 不变。",
+    "迁移 Room 数据库并保持 WorkManager 后台任务语义，不涉及界面。",
+    "Render this Chinese Markdown to PDF and inspect fonts."
+  ],
+  "notes": "Use for product-interface microcopy, locale-specific UI wording, protected-meaning copy edits, and Frontend handoff outputs. Do not use for long-form reports, README/doc prose, scientific structural rewrites, backend/runtime/data-only work, or PDF rendering."
+}

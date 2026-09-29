@@ -1,0 +1,4 @@
+[0929/134649.137110:WARNING:media/gpu/vaapi/vaapi_wrapper.cc:1660] drmGetDevices2() has not found any devices
+[0929/134649.138235:WARNING:sandbox/policy/linux/sandbox_linux.cc:405] InitializeSandbox() called with multiple threads in process gpu-process.
+[0929/134649.153977:WARNING:components/dbus/xdg/portal.cc:126] Failed to register with org.freedesktop.host.portal.Registry
+1448005 bytes written to file results/product-ui-copy--cross-plugin-production-integration/human_acceptance_cuhk_date/live_site/screenshots/zh-Hans_home.png

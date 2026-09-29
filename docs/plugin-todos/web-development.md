@@ -328,7 +328,7 @@ project-specific context: Lucerna's Installed, Normal, Checking, Ready and other
 
 ### Product UI copy needs an explicit Frontend Design content-architecture contract
 status: NEW
-tracking: #73
+tracking: #89
 source: CUHK Date / Meet at CU production copy-naturalness audit, 2026-09-26
 evidence_path: `docs/design/product-ui-copy/evidence/CUHK_DATE_PRODUCT_COPY_NATURALNESS_AUDIT_2026-09-26.md`
 target layer: Frontend Design product-UX planning / page composition / rendered acceptance

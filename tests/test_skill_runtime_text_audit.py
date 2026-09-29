@@ -13,13 +13,14 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
 
     def test_chinese_prose_requires_automatic_final_pass(self):
         text = (REPO_ROOT / "skills/writing/core/chinese-prose/SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("任何中文 Markdown/PDF/报告/README/面向用户或读者的中文内容都应自动触发", text)
+        self.assertIn("任何中文 Markdown/PDF/报告/README/面向读者的文档型中文内容都应自动触发", text)
         self.assertIn("用户不需要显式说“说人话”", text)
         self.assertIn("第一段必须先给人能读懂的判断", text)
+        self.assertIn("应交给 `product-ui-copy`", text)
 
     def test_generated_plugin_exposes_chinese_final_pass_trigger(self):
         text = (REPO_ROOT / "plugins/codex/plugins/writing-style/skills/zh/SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("任何中文 Markdown/PDF/报告/README/面向用户或读者的中文内容都应自动触发", text)
+        self.assertIn("任何中文 Markdown/PDF/报告/README/面向读者的文档型中文内容都应自动触发", text)
 
     def test_writing_fidelity_fails_unreadable_chinese_final_artifacts(self):
         text = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")

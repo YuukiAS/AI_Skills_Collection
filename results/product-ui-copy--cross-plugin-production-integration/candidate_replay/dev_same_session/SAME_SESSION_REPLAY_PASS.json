@@ -1,0 +1,45 @@
+{
+  "schema": "PRODUCT_UI_COPY_DEV_SAME_SESSION_REPLAY_V1",
+  "task_key": "product-ui-copy--cross-plugin-production-integration",
+  "phase": "H1 development evidence",
+  "candidate_commit": "53d42f621864a779f93de7e8a81007ef73ed55cc",
+  "run_id": "20260929T030946Z-664205",
+  "runtime_version": "codex-cli 0.153.4",
+  "helper": "scripts/candidate_plugin_replay.py replay",
+  "command_scope": {
+    "plugins": [
+      "web-development",
+      "writing-style"
+    ],
+    "task": "results/product-ui-copy--cross-plugin-production-integration/candidate_replay/dev_inputs/cross_plugin_replay_task.md",
+    "inputs": [
+      "results/product-ui-copy--cross-plugin-production-integration/candidate_replay/dev_inputs/compatibility_sources.md",
+      "results/product-ui-copy--cross-plugin-production-integration/rendered_acceptance/product-ui-copy-fixture.html",
+      "results/product-ui-copy--cross-plugin-production-integration/rendered_acceptance/product-ui-copy-fixture.css"
+    ]
+  },
+  "actual_consumption_by_plugin": {
+    "web-development": {
+      "plugin_id": "web-development@ai-skills-candidate",
+      "installed_path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3",
+      "proven": true,
+      "event_type": "item.started",
+      "line_index": 4
+    },
+    "writing-style": {
+      "plugin_id": "writing-style@ai-skills-candidate",
+      "installed_path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/writing-style/0.3",
+      "proven": true,
+      "event_type": "item.started",
+      "line_index": 4
+    }
+  },
+  "cleanup_expectation": {
+    "candidate_plugins_removed_by_helper": true,
+    "production_same_name_plugin_identity_unchanged_by_helper": true
+  },
+  "notes": [
+    "Full child stdout/stderr remain in .local-runtime and were not copied into repository results because stdout includes replay-expanded source and skill contents.",
+    "First development replay attempt installed both candidates but did not prove web-development consumption; the neutral task prompt was revised to emphasize interface architecture before wording, then the same candidate commit passed."
+  ]
+}

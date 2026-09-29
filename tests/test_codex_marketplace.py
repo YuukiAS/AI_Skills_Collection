@@ -33,10 +33,10 @@ CENTRAL_PLUGIN_NAMES = [
 EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
     "workflow-core": "0.4",
     "ai-skills-core": "0.5",
-    "writing-style": "0.3",
+    "writing-style": "0.4",
     "research-writing": "0.2",
     "presentations": "0.3",
-    "web-development": "0.3",
+    "web-development": "0.4",
 }
 REPOSITORY_SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 PLUGIN_VERSION_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)$")
@@ -264,7 +264,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         visual_sources = {entry["source"] for entry in visual["source_skills"]}
 
         self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "workflow-core")["version"], "0.4")
-        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "web-development")["version"], "0.3")
+        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "web-development")["version"], "0.4")
         self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "ai-skills-core")["version"], "0.5")
         self.assertIn("skills/tools/frontend/figma-design-to-code", visual_sources)
         self.assertIn("skills/tools/frontend/motion-interaction", visual_sources)

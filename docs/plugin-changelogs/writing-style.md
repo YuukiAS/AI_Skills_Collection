@@ -4,6 +4,38 @@
 
 No pending released changes.
 
+## 0.4 - 2026-09-29
+
+Before:
+
+- Clear Writing handled long-form Chinese prose, source-faithful scientific
+  rewrites, fidelity guardrails and English scientific prose, but product UI
+  microcopy had no dedicated route.
+- Chinese interface labels, buttons, states, onboarding, settings help and
+  trust/privacy disclosures could fall into the long-form `chinese-prose`
+  route merely because they were Chinese.
+- Protected product consequences such as deletion, retention, visibility,
+  payment, eligibility, consent and privacy were not called out as a UI-copy
+  handoff contract.
+
+After:
+
+- Added `product-ui-copy` as a Clear Writing sibling route for product-interface
+  microcopy under frozen product meaning.
+- Product UI Copy covers labels, CTA/action text, empty/loading/error/success
+  states, onboarding, settings text, permission prompts, trust/privacy
+  disclosure, landing-page interface blocks and locale-specific UI wording.
+- `chinese-prose` now stays focused on document/report/README-style Chinese and
+  routes product interface short copy away to `product-ui-copy`.
+- `writing-fidelity` now protects product state, user consequence,
+  reversibility, external visibility, payment/subscription, deletion,
+  retention, consent, privacy, safety, legal/trust disclosure, and exact
+  product/brand/technical identities during Product UI Copy work.
+- Product UI Copy uses `KEEP`, `WORDING/NATURALNESS`, `LOCALE/REGISTER`,
+  `CONTENT ARCHITECTURE`, `PRODUCT SEMANTICS`, and `LEGAL/TRUST/SAFETY` as
+  ownership-preserving reasoning labels, and treats `zh-Hans` / `zh-Hant-HK` as
+  independent realizations rather than character conversion.
+
 ## 0.3 - 2026-09-15
 
 Clear Writing's scientific-rewrite route now treats reader-facing relevance as an explicit semantic contract rather than a post-hoc cleanup pass. Reader Plans must assign a disposition to every meaning, including core content, supporting content, structured technical material, relocated reproduction details, source-author future work, wrappers, and irrelevant traces.

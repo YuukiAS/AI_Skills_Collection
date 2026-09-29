@@ -19,6 +19,11 @@ icon_large: assets/app-facing.svg
 Use this skill before visual styling or implementation when the task involves a
 page, app, dashboard, workflow, landing page, or product surface.
 
+Product surfaces include browser extensions, web apps, desktop/Tauri/Electron
+or native-WebView surfaces, mobile apps, and Android/Compose screens. The user
+does not need to say "Frontend Design" when the work is clearly about a
+user-facing interface.
+
 ## Workflow
 
 1. Define the product job in one sentence.
@@ -29,6 +34,10 @@ page, app, dashboard, workflow, landing page, or product surface.
 6. Define actionability and lifecycle rules: what is visible, enabled, disabled, pending, destructive, or user-only.
 7. Decide what information must be real, user-provided, or clearly sample.
 8. Remove filler copy, decorative labels, fake telemetry, and themed wording for standard actions.
+9. For Product UI Copy handoff, freeze `SURFACE`, `UI_ROLE`,
+   `PRODUCT_STATE`, `USER_JOB`, `USER_CONSEQUENCE_OR_NEXT_ACTION`,
+   `NEIGHBORING_VISIBLE_COPY`, `LOCALE`, `PROTECTED_MEANING`,
+   `DISCLOSURE_LEVEL`, and `LENGTH_OR_VIEWPORT_CONSTRAINT`.
 
 ## Ownership
 
@@ -36,6 +45,9 @@ page, app, dashboard, workflow, landing page, or product surface.
 - Distinguish normal user flows from diagnostics, admin-only tools, and developer-only recovery surfaces.
 - For visible metrics, rankings, model scores, provenance, and status values, require a durable semantic source; do not let UI styling invent unsupported numbers or priority claims.
 - When a UI action will be handed to the user, define the expected next state or the safe user-only boundary so the coordinator can verify reachability.
+- Escalate missing product/legal/trust facts rather than letting wording hide
+  them. Product UI Copy may improve expression only after protected meaning is
+  stable.
 
 ## Output Standard
 

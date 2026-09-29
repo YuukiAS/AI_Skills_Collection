@@ -1,9 +1,9 @@
 {
-  "version": "5.3.1",
-  "generated_at": "2026-09-28T02:53:59+00:00",
+  "version": "5.4.0",
+  "generated_at": "2026-09-29T03:17:01+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
-  "skill_count": 153,
+  "skill_count": 154,
   "selectors": {
     "domains": [
       "ai-ml",
@@ -5908,7 +5908,7 @@
       "subcategory": "core",
       "slug": "chinese-prose",
       "install_selector": "writing/core/chinese-prose",
-      "description": "中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和“说人话”终审。任何中文 Markdown/PDF/报告/README/面向用户或读者的中文内容都应自动触发本 skill，用于普通中文润色、中文为主、降低 AI 味/翻译腔/模板腔/宣传腔，并保护事实、数字、术语、命令、引用、实验结果和证据边界。",
+      "description": "中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和长文“说人话”终审。任何中文 Markdown/PDF/报告/README/面向读者的文档型中文内容都应自动触发本 skill，用于普通中文润色、中文为主、降低 AI 味/翻译腔/模板腔/宣传腔，并保护事实、数字、术语、命令、引用、实验结果和证据边界。产品界面标签、按钮、状态、帮助、信任/隐私披露和 locale-specific UI microcopy 应路由到 product-ui-copy。",
       "status": "active",
       "provenance": "local",
       "source_repo_url": "",
@@ -5936,6 +5936,48 @@
         "writing-core-chinese-prose",
         "writing/chinese-prose",
         "writing/core/chinese-prose"
+      ]
+    },
+    {
+      "id": "writing.writing.product-ui-copy",
+      "name": "product-ui-copy",
+      "path": "skills/writing/core/product-ui-copy",
+      "flat_name": "writing-core-product-ui-copy",
+      "scope": "writing",
+      "domain": "writing",
+      "category": "core",
+      "subcategory": "core",
+      "slug": "product-ui-copy",
+      "install_selector": "writing/core/product-ui-copy",
+      "description": "Natural product-interface microcopy for labels, CTAs, states, help text, onboarding, settings, trust/privacy disclosures, landing-page interface copy, and locale-specific UI wording under frozen product meaning. Use for browser extension, web, desktop/WebView, mobile, and app surfaces after product semantics and UI role are known.",
+      "status": "active",
+      "provenance": "user-authored",
+      "source_repo_url": "",
+      "source_path": "",
+      "source_ref": "",
+      "source_imported_at": "",
+      "source_license": "",
+      "source_note": "",
+      "source_skills": [],
+      "trusted": false,
+      "requires_network": false,
+      "writes_files": true,
+      "executes_code": false,
+      "secrets_needed": [],
+      "last_reviewed": "2026-09-29",
+      "profile_tags": [
+        "writing",
+        "frontend"
+      ],
+      "recommended_scope": "project",
+      "selectors": [
+        "product-ui-copy",
+        "reusable/writing/product-ui-copy",
+        "skills/reusable/writing/product-ui-copy",
+        "skills/writing/core/product-ui-copy",
+        "writing-core-product-ui-copy",
+        "writing/core/product-ui-copy",
+        "writing/product-ui-copy"
       ]
     },
     {

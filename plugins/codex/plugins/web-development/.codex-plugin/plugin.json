@@ -1,7 +1,7 @@
 {
   "name": "web-development",
-  "version": "0.3",
-  "description": "Frontend reference research, visual taste systems, motion/icon resource routing, and research product frontend constraints that complement official build-web-apps and Figma.",
+  "version": "0.4",
+  "description": "Frontend Design coordinator for product-interface content architecture, rendered acceptance, visual systems, reference research, motion/icon resource routing, and research product frontend constraints across browser extension, web, desktop/WebView, and mobile UI surfaces.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Frontend Design",
-    "shortDescription": "Frontend reference research, visual taste systems, motion/icon resource routing, and research product frontend constraints that complement official build-web-apps and Figma.",
-    "longDescription": "Frontend reference research, visual taste systems, motion/icon resource routing, and research product frontend constraints that complement official build-web-apps and Figma. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Frontend Design coordinator for product-interface content architecture, rendered acceptance, visual systems, reference research, motion/icon resource routing, and research product frontend constraints across browser extension, web, desktop/WebView, and mobile UI surfaces.",
+    "longDescription": "Frontend Design coordinator for product-interface content architecture, rendered acceptance, visual systems, reference research, motion/icon resource routing, and research product frontend constraints across browser extension, web, desktop/WebView, and mobile UI surfaces. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Web Development",
     "capabilities": [
