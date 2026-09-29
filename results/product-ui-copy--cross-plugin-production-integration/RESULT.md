@@ -112,6 +112,14 @@ pre-existing rendered acceptance evidence, real GitHub CI, independent
 Scheduled GPT Reviewer inspection, final user acceptance, main merge, or
 release-ref movement.
 
-Because `ci_required=true`, this handoff leaves `CURRENT.ci_status` as
-`PENDING` and moves the task to `WAITING_FOR_CI`. GitHub CI and independent
-Scheduled GPT Reviewer review remain required before final acceptance.
+GitHub CI completed after the H4 handoff:
+
+- Workflow: `Codex Marketplace`
+- Run id: `36521168595`
+- Trigger: `workflow_dispatch`
+- Branch: `reviewed/product-ui-copy--cross-plugin-production-integration`
+- Result: `PASS`
+- URL: `https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/36521168595`
+
+Independent Scheduled GPT Reviewer review remains required before final
+acceptance. Main merge and release-ref movement remain out of scope.
