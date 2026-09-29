@@ -149,3 +149,12 @@ PUC-R1-03 tracking repair:
 - Project `AI Skills Maintenance`: `#89 Status=DOING Area=web-development`; `#90 Status=DOING Area=writing-style`.
 - Canonical source backlinks updated: `web-development.md tracking: #89`; `writing-style.md tracking: #90`.
 - Evidence: `results/product-ui-copy--cross-plugin-production-integration/tracking/TRACKING_REPAIR_EVIDENCE.md`.
+
+Repair CI:
+
+- Workflow: `Codex Marketplace`
+- Run id: `36523988225`
+- Branch: `reviewed/product-ui-copy--cross-plugin-production-integration`
+- Head SHA: `9c3e35933ee38fffd1c78bccb7b8e074444b536a`
+- Result: `PASS`
+- URL: `https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/36523988225`
