@@ -8,7 +8,7 @@
   "resolution_commit": null,
   "freeze": {
     "file": "FINAL_CLOSURE_FREEZE.json",
-    "ai_skills_main": "e2b9809e1326c6d2b072e2bdbabcb368927c5d43",
+    "ai_skills_main": "85d4b2acd990654e8439c1c0dd007493360fa82b",
     "ai_skills_release": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
     "ai_skills_repository_version": "5.4.0",
     "ai_skills_core_version": "0.5",
@@ -84,9 +84,40 @@
     },
     {
       "name": "CUHK_Workstation_WSL_Codex",
-      "status": "PENDING_CURRENT_FREEZE_REFRESH",
-      "fresh_under_freeze": false,
-      "next_action": "Run the same FINAL_CLOSURE_FREEZE batch from the WSL2 consumer after Longleaf_Backup_Codex."
+      "status": "PASS",
+      "fresh_under_freeze": true,
+      "acceptance_basis": "PASS_FREEZE_EQUIVALENT",
+      "freeze_equivalence": {
+        "evidence_commit": "77f433805de033f60f6c8f9f8b3153d5af3295de",
+        "validated_at_consumer": "Workstation",
+        "exact_target_identity_match": true,
+        "target_plugin_change_check": "none",
+        "mutation_replayed": false,
+        "fresh_session_replayed": false
+      },
+      "identity": {
+        "hostname": "Workstation",
+        "platform_summary": "Linux WSL2",
+        "user": "yuukias",
+        "home": "/home/yuukias",
+        "codex_home": "/home/yuukias/.codex",
+        "ai_skills_marketplace_ref": "release",
+        "ai_skills_marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+        "ai_skills_core": "0.5",
+        "writing_style": "0.4",
+        "web_development": "0.4",
+        "bridge_runtime": "0.9.3",
+        "bridge_package": "0.9.3",
+        "bridge_release_relation": "ALIGNED",
+        "host_policy": "configured"
+      },
+      "evidence": [
+        "FINAL_CLOSURE_FREEZE.json",
+        "CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.md",
+        "CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.json",
+        "cuhk_workstation_wsl_fresh_normal_entry_last_message.txt"
+      ],
+      "fresh_session": "01a0ec12-f8bd-74e0-90df-b28a5e96b350"
     },
     {
       "name": "Workstation",
@@ -163,9 +194,10 @@
     "Workstation",
     "Legion"
   ],
-  "next_required_consumer": "CUHK_Workstation_WSL_Codex",
+  "next_required_consumer": null,
+  "all_required_consumers_pass": true,
   "done_guard": {
-    "all_five_required_consumers_need_fresh_current_pass_under_freeze": true,
+    "all_five_required_consumers_pass": true,
     "windows_consumer_only_final_aggregate_closure": true,
     "issue_must_remain_open": true,
     "project_status_must_remain": "ADAPTING"

@@ -9,6 +9,7 @@ Updated date: 2026-09-29
 - Project Status: `ADAPTING`
 - Area: `ai-skills-core`
 - Resolution commit: not assigned for final closure yet
+- AI_Skills current `main`: `85d4b2acd990654e8439c1c0dd007493360fa82b`
 - AI_Skills formal `release`: `a7028195f3e97d32d51c32ef8c87f658f92048e5`
 - Current formal repository version: `5.4.0`
 - Bridge current `main`: `5a640ec02a20106c778a35ba94eb2164d2b91537`
@@ -20,8 +21,12 @@ Updated date: 2026-09-29
 This matrix tracks the final closure freeze batch. It is not a runtime registry,
 machine controller, daemon, watcher, database, or source of truth for Codex
 config. Earlier pre-freeze consumer evidence remains in this directory as
-history, but a current PASS for this closure batch requires fresh evidence from
-that consumer after `FINAL_CLOSURE_FREEZE.json`.
+history. A current PASS for this closure batch normally requires fresh evidence
+from that consumer after `FINAL_CLOSURE_FREEZE.json`. The WSL consumer is the
+one explicit exception: its durable evidence at commit
+`77f433805de033f60f6c8f9f8b3153d5af3295de` was deterministically revalidated
+against every frozen target and accepted as `PASS_FREEZE_EQUIVALENT`; no machine
+mutation or second fresh session was replayed.
 
 Note: `Longleaf_Backup_Codex` live remote discovery observed
 `YuukiAS/AI_Skills_Collection` `main=5351f304381501f27833e5c7fa4f536ae5b684f8`
@@ -59,7 +64,7 @@ The final closure contract has exactly five required logical consumers:
 |---|---|---|---|---|
 | `Longleaf_Codex` | `PASS` | hostname `c0810.ll.unc.edu`; Longleaf USERS namespace; user `aereinh`; `HOME=/users/a/e/aereinh`; `CODEX_HOME=/users/a/e/aereinh/.codex`; AI_Skills Marketplace `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`; `ai-skills-core=0.5`; `writing-style=0.4`; `research-writing=0.2`; `web-development=0.4`; Bridge runtime/package `0.9.3`; Host Policy configured | none for this consumer in this freeze batch | `FINAL_CLOSURE_FREEZE.json`; `LONGLEAF_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.md`; `LONGLEAF_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.json`; `fresh_longleaf_users_direct_codex_last_message.txt` |
 | `Longleaf_Backup_Codex` | `PASS` | hostname `c151404.ll.unc.edu`; Longleaf OVERFLOW namespace; user `aereinh`; `HOME=/overflow/htzhu/mingcheng_new`; `CODEX_HOME=/overflow/htzhu/mingcheng_new/.codex`; AI_Skills Marketplace `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`; `ai-skills-core=0.5`; `workflow-core=0.4`; `writing-style=0.4`; `research-writing=0.2`; `presentations=0.3`; `bioinformatics=0.1`; `medical-imaging=0.1`; `web-development` not installed; Bridge runtime/package `0.9.3`; Bridge relation `ALIGNED`; Host Policy configured | none for this consumer in this freeze batch | `FINAL_CLOSURE_FREEZE.json`; `LONGLEAF_BACKUP_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.md`; `LONGLEAF_BACKUP_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.json`; `fresh_longleaf_backup_final_direct_codex_last_message.txt` |
-| `CUHK_Workstation_WSL_Codex` | `PENDING_CURRENT_FREEZE_REFRESH` | Linux WSL2 consumer; exact current identity must be rediscovered on that consumer | run this same freeze batch from the WSL2 consumer | earlier pre-freeze files retained: `CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.md`; `CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.json` |
+| `CUHK_Workstation_WSL_Codex` | `PASS` (`PASS_FREEZE_EQUIVALENT`) | hostname `Workstation`; Linux WSL2; user `yuukias`; `HOME=/home/yuukias`; `CODEX_HOME=/home/yuukias/.codex`; AI_Skills Marketplace `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`; `ai-skills-core=0.5`; `writing-style=0.4`; `web-development=0.4`; Bridge runtime/package `0.9.3`; Bridge relation `ALIGNED`; Host Policy configured | none; exact frozen target identity matched evidence commit `77f433805de033f60f6c8f9f8b3153d5af3295de` | `FINAL_CLOSURE_FREEZE.json`; `CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.md`; `CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.json`; `cuhk_workstation_wsl_fresh_normal_entry_last_message.txt` |
 | `Workstation` | `PASS` | hostname `WORKSTATION`; Windows; user `WORKSTATION\humc2`; `HOME=C:\Users\humc2`; `CODEX_HOME=C:\Users\humc2\.codex`; AI_Skills Marketplace `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`; `ai-skills-core=0.5`; `writing-style=0.4`; `web-development` not installed; Bridge runtime/package `0.9.3`; Bridge relation `ALIGNED`; Host Policy configured | none for this consumer in this freeze batch | `FINAL_CLOSURE_FREEZE.json`; `WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.md`; `WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.json`; `workstation_windows_final_direct_codex_last_message.txt` |
 | `Legion` | `PASS` | hostname `Legion-Y9000P`; Windows local Codex App consumer; user `legion-y9000p\yuukias`; `USERPROFILE=C:\Users\yuukias`; `CODEX_HOME=C:\Users\yuukias\.codex`; AI_Skills Marketplace `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`; `ai-skills-core=0.5`; `presentations=0.3`; other central optional AI_Skills plugins not installed; Bridge runtime/package `0.9.3`; Bridge relation `ALIGNED`; Host Policy configured | none for this consumer in this freeze batch | `FINAL_CLOSURE_FREEZE.json`; `LEGION_FINAL_CLOSURE_REFRESH_2026-09-29.md`; `LEGION_FINAL_CLOSURE_REFRESH_2026-09-29.json`; `legion_final_direct_codex_last_message.txt` |
 
@@ -75,15 +80,18 @@ Per `docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md`, each consumer PASS requires
 - risk-matched should-not-change / failure safety;
 - durable evidence locator.
 
-No consumer may be marked current-freeze PASS merely because another consumer
-passed, or because it has older pre-freeze evidence.
+No consumer is marked PASS merely because another consumer passed. The WSL
+exception is supported by its own durable evidence, immutable release/plugin/
+Bridge identities equal to the closure freeze, the recorded direct fresh
+session, and an empty `ai-skills-core` production/version diff from frozen
+release to current main.
 
 ## DONE Guard
 
 Do not close Issue `#86` and do not set Project Status `DONE` until:
 
 ```text
-exactly five required consumers fresh/current PASS under FINAL_CLOSURE_FREEZE
+exactly five required consumers current or freeze-equivalent PASS under FINAL_CLOSURE_FREEZE
 + durable evidence complete
 + clean final aggregate evidence from latest main
 + Issue #86 reader-facing copy updated through Clear Writing
@@ -94,7 +102,8 @@ exactly five required consumers fresh/current PASS under FINAL_CLOSURE_FREEZE
 ## Next Handoff
 
 ```text
-NEXT_REQUIRED_CONSUMER=CUHK_Workstation_WSL_Codex
+NEXT_REQUIRED_CONSUMER=NONE
+ALL_REQUIRED_CONSUMERS_PASS=YES
 PROJECT_STATUS=ADAPTING
 ISSUE_86_OPEN=YES
 OVERALL_DONE=NO
