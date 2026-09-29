@@ -6,8 +6,9 @@
   "project_status": "ADAPTING",
   "area": "ai-skills-core",
   "resolution_commit": "c7776e202ae0324fc00b719b6ef8224b8e0498fe",
-  "formal_main": "c7776e202ae0324fc00b719b6ef8224b8e0498fe",
-  "formal_release": "c7776e202ae0324fc00b719b6ef8224b8e0498fe",
+  "formal_main": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+  "formal_release": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+  "formal_repository_version": "5.4.0",
   "overall_done": false,
   "consumers": [
     {
@@ -24,6 +25,33 @@
         "G2_POST_REVIEW_PROMOTION_EVIDENCE.md",
         "g2_released_smoke/released_normal_entry_run.json"
       ]
+    },
+    {
+      "name": "Workstation_Windows_Codex",
+      "status": "PASS",
+      "identity": {
+        "hostname": "Workstation",
+        "platform_summary": "Windows",
+        "user": "WORKSTATION\\humc2",
+        "home": "C:\\Users\\humc2",
+        "codex_home": "C:\\Users\\humc2\\.codex",
+        "codex_version": "codex-cli 0.158.0-alpha.2.1",
+        "ai_skills_marketplace_ref": "release",
+        "ai_skills_marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+        "ai_skills_core": "0.5",
+        "writing_style": "0.4",
+        "bridge_runtime": "0.9.2",
+        "bridge_formal_release": "6bbaca5a3af6240fbc88fa54cf78fa9acc147f67",
+        "host_policy": "configured"
+      },
+      "evidence": [
+        "WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.md",
+        "WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.json",
+        "workstation_windows_fresh_replay_run.json",
+        "workstation_windows_fresh_replay_last_message.txt",
+        "workstation_windows_fresh_normal_entry_report.md"
+      ],
+      "fresh_session_note": "production plugin-replay run 20260929T070826Z-0baf3faafa82 PASS after process-level UTF-8 recovery; result ALREADY_CURRENT"
     },
     {
       "name": "Longleaf_Codex",

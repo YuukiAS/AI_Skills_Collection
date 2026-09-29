@@ -1,0 +1,12 @@
+验收完成，最终状态：`ALREADY_CURRENT`。
+
+- 生产插件 `ai-skills-core@yuukias-ai-skills 0.5` 已实际加载。
+- 正常请求正确路由至 `machine-update-orchestrator`。
+- `ai-skills-core 0.5`、`writing-style 0.4` 均为正式版本。
+- Marketplace revision 与正式 release 完全一致。
+- 可选插件保持未安装。
+- Bridge 运行时与正式 `0.9.2` release 对齐。
+- Host Policy 已配置。
+- 全程只读，未进行更新、安装、网络访问或外部上传。
+
+详细报告：[workstation_windows_fresh_normal_entry_report.md](C:/Users/humc2/.ai-bridge/plugin-replay/20260929T070826Z-0baf3faafa82/outputs/workstation_windows_fresh_normal_entry_report.md)
