@@ -43,6 +43,9 @@ canonical `course-standard` template body:
   come only from the `render-chinese-math-pdf` probe receipt; Presentations no
   longer falls back to its own `PATH` discovery for formal adapter command
   paths.
+- explicit non-branded `beamer` / `tex` output routing now goes through the
+  `course-standard` adapter identity while preserving stronger research context
+  precedence for `cuhk-research`.
 
 No `skills/tools/documents-media/presentations/shared/templates/course-standard`
 template body was created or restored.

@@ -12,6 +12,7 @@ from typing import Any
 
 BUILT_IN_TEMPLATES = ("cuhk-research", "course-standard")
 EDITABLE_FORMATS = ("ppt", "pptx", "powerpoint", "slides", "google slides", "editable")
+BEAMER_FORMATS = ("beamer", "latex", "latex slides", "tex", ".tex", "academic pdf")
 RESEARCH_TERMS = ("research", "group meeting", "seminar", "paper talk", "journal club", "defense", "qe", "oral", "phd", "组会", "论文", "答辩", "研究")
 TEACHING_TERMS = ("tutorial", "lecture", "teaching", "courseware", "classroom", "lesson", "课件", "课程", "教学")
 BUSINESS_TERMS = ("business", "executive", "product", "strategy", "client", "management", "管理层", "产品策略", "客户")
@@ -51,6 +52,7 @@ def route_request(prompt: str, *, explicit_output: str | None = None, existing_d
     text = prompt.lower()
     ratio = _explicit_ratio(text)
     output = (explicit_output or "").lower().strip()
+    explicit_beamer = output in BEAMER_FORMATS or _explicit_beamer(text)
     if existing_deck or _contains_any(text, LOCAL_EDIT_TERMS):
         return Stage1Route("local-edit", "official-editable-surface", None, "preserve-existing", "preserve-existing", "no artifact claim until edited surface is produced", "existing/local edit preserves current format/template/ratio")
     if locked_template or _contains_any(text, LOCKED_TEMPLATE_TERMS):
@@ -65,7 +67,7 @@ def route_request(prompt: str, *, explicit_output: str | None = None, existing_d
         return Stage1Route("beamer", "course-standard-beamer", "course-standard", "tex+pdf", ratio or "4:3", "source plus rendered PDF after render-owner QA", "teaching route")
     if _contains_any(text, RESEARCH_TERMS):
         return Stage1Route("beamer", "cuhk-research-beamer", "cuhk-research", "tex+pdf", ratio or "16:9", "source plus rendered PDF after render-owner QA", "research route")
-    if _explicit_beamer(text):
+    if explicit_beamer:
         return Stage1Route("beamer", "course-standard-beamer", "course-standard", "tex+pdf", ratio or "4:3", "source plus rendered PDF after render-owner QA", "generic non-branded Beamer")
     return Stage1Route("editable", "official-editable-surface", None, "pptx/slides", ratio, "editable adapter required", "unspecified general deck defaults to editable surface unless research/teaching context is present")
 

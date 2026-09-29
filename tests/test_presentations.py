@@ -357,6 +357,21 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertFalse(manifest["course_standard"]["template_body_in_this_task"])
         self.assertEqual(manifest["render_environment_owner"], "render-chinese-math-pdf")
 
+    def test_stage1_front_door_routes_explicit_nonbranded_beamer_output(self) -> None:
+        generic = stage1_front_door.route_request("Make a compact methods deck.", explicit_output="beamer")
+        self.assertEqual(generic.route, "beamer")
+        self.assertEqual(generic.adapter, "course-standard-beamer")
+        self.assertEqual(generic.template, "course-standard")
+        self.assertEqual(generic.ratio, "4:3")
+
+        tex = stage1_front_door.route_request("Make a compact methods deck.", explicit_output="tex")
+        self.assertEqual(tex.adapter, "course-standard-beamer")
+        self.assertEqual(tex.template, "course-standard")
+
+        research = stage1_front_door.route_request("Make this paper talk for a seminar.", explicit_output="beamer")
+        self.assertEqual(research.adapter, "cuhk-research-beamer")
+        self.assertEqual(research.template, "cuhk-research")
+
     def test_research_routing_defaults_to_exact_cuhk_beamer_with_editable_override(self) -> None:
         research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")
         real_world_guardrails = (
