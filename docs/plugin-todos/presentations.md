@@ -188,8 +188,9 @@ project-specific context: 具体 CAT-TRACE 术语和句子属于当前 deck；�
 
 
 ### Course-standard teaching template needs structural navigation, not only colours and bands
-status: NEW
+status: PROMOTE_NOW
 tracking: #49
+planner disposition: promoted only into Presentations Stage 1 two-template adapter foundation; implementation remains pending execution-ready Critic PASS
 source: STAT5060 Tutorial 1 annotated Beamer review, 2026-09-29
 evidence: `YuukiAS/STAT5060-TA` work branch `work/stat5060--tutorial-01-v2`, content commit `4366e33bb58594ead5156002eba0aae30a2595dd`; 27-page Beamer candidate reviewed by the user with 56 highlight annotations in a local annotated PDF (not committed to this public repo). The first real course-standard use was judged too bare even though the blue-title/white-body visual direction was acceptable.
 problem: The current `course-standard` contract captures a 4:3 reference look, frame-title colour, bullets and page number, but real teaching use needs a fuller structural shell: a deliberately sparse opening slide, section-aware navigation, PDF outline/bookmarks, top/bottom navigation/action affordances where the Beamer runtime supports them, stable footline/page-number behaviour, and an intentional concluding frame. Template identity should separate this structural/navigation grammar from a rigid aspect ratio: exact Chapter1 reproduction may default to 4:3, but a user-requested 16:9 teaching deck should be able to preserve the same course-standard identity instead of falling back to an unrelated template.
