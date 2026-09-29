@@ -20,6 +20,7 @@ Use whole-slide images only when the user explicitly asks for image/PDF/social-c
 | Teaching with explicit 16:9 | Same `course-standard` template identity with the 16:9 variant; canonical source is pending the independent standard-Beamer task |
 | Explicit Beamer, LaTeX slides, `.tex`, academic PDF, or non-branded Beamer without stronger context | `course-standard` LaTeX plus Beamer unless a project/venue locked template is supplied; do not invent a task-local canonical source |
 | Venue/project-locked TeX template | Pass-through locked template route; do not add it as a built-in template |
+| Existing deck or locked template plus an explicit plan-only/storyline-only request | Deck plan/notes only; do not claim a generated artifact |
 | High visual ceiling, multi-format visual outputs, or poster-like pages | Visual direction first, then confirm whether the user accepts image-heavy slides |
 | Narrative, storyline, decision logic, or quality control | `research-presentations` or `business-presentations` deck plan before file creation |
 | HTML-style expressive slides | Frontend visual system plus explicit HTML/PDF routing; do not pretend it is an editable PPTX |

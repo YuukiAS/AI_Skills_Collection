@@ -56,6 +56,8 @@ canonical `course-standard` template body:
 - plan-only routing now takes precedence over existing-deck and external
   locked-template detection when the user explicitly asks for storyline/plan
   only and no generated artifact.
+- shared routing documentation and generated Presentations payload now state
+  that same plan-only precedence explicitly.
 
 No `skills/tools/documents-media/presentations/shared/templates/course-standard`
 template body was created or restored.

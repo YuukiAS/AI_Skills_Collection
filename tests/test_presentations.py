@@ -415,6 +415,8 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertIn("`course-standard` Beamer route, 4:3 by default", template_routing)
         self.assertIn("same `course-standard` template identity with the 16:9 variant", template_routing)
         self.assertIn("explicitly requested editable PPTX/Slides", template_routing)
+        self.assertIn("plan-only route takes precedence", template_routing)
+        self.assertIn("Existing deck or locked template plus an explicit plan-only/storyline-only request", ppt_routing)
         self.assertIn("file exists", research_skill)
         self.assertIn("file existence alone is not completion", visual_qa)
         self.assertNotIn("Do not default academic or research decks to Beamer", research_skill)

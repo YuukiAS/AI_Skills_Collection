@@ -21,6 +21,10 @@ Default routing:
 - External locked template -> pass-through locked input; do not add it to the built-in template set.
 - Plan-only/storyline-only -> plan/notes only; do not claim a generated artifact.
 
+When a request explicitly asks for plan/storyline only and no generated deck,
+the plan-only route takes precedence even if the prompt also mentions an
+existing deck or an external locked template.
+
 Do not route explicitly requested editable PPTX/Slides work to Beamer only because the content is academic. Do not use `python-pptx`, python-ppt, rendered PDF pages, or whole-slide images to fake an editable PPTX when official Presentation/Slides should create editable objects.
 
 CUHK exact mode:
