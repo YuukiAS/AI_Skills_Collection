@@ -1,0 +1,40 @@
+{
+  "schema": "AI_SKILLS_CORE_MACHINE_UPDATE_FINAL_CLOSURE_FREEZE_V1",
+  "task_key": "ai-skills-core--machine-update-orchestration",
+  "reviewed_branch": "reviewed/ai-skills-core--machine-update-orchestration",
+  "created_at_utc": "2026-09-29T07:57:53Z",
+  "created_by_consumer": "Longleaf_Codex",
+  "current_consumer_identity": {
+    "hostname": "c0810.ll.unc.edu",
+    "user": "aereinh",
+    "home": "/users/a/e/aereinh",
+    "codex_home": "/users/a/e/aereinh/.codex"
+  },
+  "live_remote_refs": {
+    "ai_skills": {
+      "repository": "YuukiAS/AI_Skills_Collection",
+      "main": "e2b9809e1326c6d2b072e2bdbabcb368927c5d43",
+      "release": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+      "reviewed_branch": "77f433805de033f60f6c8f9f8b3153d5af3295de"
+    },
+    "bridge": {
+      "repository": "YuukiAS/GPT_Codex_AI_Bridge_Kit",
+      "main": "5a640ec02a20106c778a35ba94eb2164d2b91537",
+      "release": "9dad0ba4bfa54e251f345091c5151ae991251ec9"
+    }
+  },
+  "frozen_targets": {
+    "ai_skills_formal_release": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+    "ai_skills_repository_version": "5.4.0",
+    "ai_skills_core_version": "0.5",
+    "bridge_formal_release": "9dad0ba4bfa54e251f345091c5151ae991251ec9",
+    "bridge_version": "0.9.3"
+  },
+  "target_plugin_change_check": {
+    "origin_release_to_origin_main_ai_skills_core_diff": "none",
+    "release_manifest_version": "0.5",
+    "main_manifest_version": "0.5",
+    "result": "NO_TARGET_PLUGIN_CHANGED_REVIEW_REQUIRED"
+  },
+  "closure_rule": "Later consumers must reuse this freeze and must not choose newer candidates for this closure batch."
+}
