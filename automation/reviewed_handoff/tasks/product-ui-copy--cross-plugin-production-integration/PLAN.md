@@ -366,6 +366,33 @@ Only after exact-H2 G1–G6 PASS:
 
 No second automatic Planner revision remains.
 
+**H3 frozen binding — planner revision 1**
+
+The Planner has now frozen the exact fresh-holdout identity after verifying the H2 release-critical evidence.
+
+```text
+H2 candidate commit =
+a06ff050bc82bb22358dfcb3e4faa885fddd285b
+
+H2 release-critical evidence =
+results/product-ui-copy--cross-plugin-production-integration/h2_release_candidate/H2_G1_G6_EVIDENCE.md
+
+H0 rubric =
+results/product-ui-copy--cross-plugin-production-integration/h0_preflight/H0_FRESH_EVIDENCE_PREFLIGHT.md
+blob = 687d7e33c3281d52e06c30df5f104cc720d33f45
+
+H3 exact batch =
+results/product-ui-copy--cross-plugin-production-integration/fresh_holdout/final_holdout_batch.json
+blob = 8eec188b2c146713df5a67775ddabe74a336efda
+
+H3 scenario count = 8
+plan_revision = 1
+```
+
+The H3 batch is now part of the frozen Plan and may be consumed only by the unchanged H2 candidate above.
+
+No production source may change between this binding and H4 verdict. No prompt replacement, cherry-picking, padding, or second fresh batch is allowed. If the H4 result is used to repair production behavior, this exact batch immediately becomes known regression evidence and cannot remain fresh.
+
 **H4 one-shot**
 
 Executor runs the complete H3 batch once on the unchanged H2 candidate.
