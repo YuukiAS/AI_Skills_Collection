@@ -58,7 +58,7 @@ canonical `course-standard` template body:
   only and no generated artifact.
 - shared routing documentation and generated Presentations payload now state
   that same plan-only precedence explicitly.
-- explicit `plan` / `deck-plan` output requests now also preserve plan-only
+- explicit `plan` / `plan-only` / `deck-plan` output requests now also preserve plan-only
   precedence over `existing_deck=True` and `locked_template=True` caller hints.
 - explicit ratio parsing now recognizes common `16x9`, `16×9`, `16/9`,
   `4x3`, `4×3`, and `4/3` spellings without changing template identity.

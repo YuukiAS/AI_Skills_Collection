@@ -13,7 +13,7 @@ from typing import Any
 BUILT_IN_TEMPLATES = ("cuhk-research", "course-standard")
 EDITABLE_FORMATS = ("ppt", "pptx", "powerpoint", "slides", "google slides", "editable")
 BEAMER_FORMATS = ("beamer", "latex", "latex slides", "tex", ".tex", "academic pdf")
-PLAN_ONLY_FORMATS = ("plan", "deck plan", "outline", "outline only", "storyline", "storyline only", "notes")
+PLAN_ONLY_FORMATS = ("plan", "plan only", "deck plan", "outline", "outline only", "storyline", "storyline only", "notes")
 RESEARCH_TERMS = ("research", "group meeting", "seminar", "paper talk", "journal club", "defense", "qe", "oral", "phd", "组会", "论文", "答辩", "研究")
 TEACHING_TERMS = ("tutorial", "lecture", "teaching", "courseware", "classroom", "lesson", "课件", "课程", "教学")
 BUSINESS_TERMS = ("business", "executive", "product", "strategy", "client", "management", "管理层", "产品策略", "客户")

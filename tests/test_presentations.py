@@ -365,7 +365,7 @@ class PresentationSharedTests(unittest.TestCase):
 
         explicit_existing_plan = stage1_front_door.route_request(
             "Revise this existing deck.",
-            explicit_output="plan",
+            explicit_output="plan-only",
             existing_deck=True,
         )
         self.assertEqual(explicit_existing_plan.route, "plan-only")
