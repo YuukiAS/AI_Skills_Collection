@@ -12,6 +12,7 @@ from typing import Any
 
 BUILT_IN_TEMPLATES = ("cuhk-research", "course-standard")
 EDITABLE_FORMATS = ("ppt", "pptx", "powerpoint", "slides", "google slides", "editable")
+EDITABLE_TEXT_TERMS = ("ppt", "pptx", "powerpoint", "google slides", "editable")
 BEAMER_FORMATS = ("beamer", "latex", "latex slides", "tex", ".tex", "academic pdf")
 PLAN_ONLY_FORMATS = ("plan", "plan only", "deck plan", "outline", "outline only", "storyline", "storyline only", "notes")
 RESEARCH_TERMS = ("research", "group meeting", "seminar", "paper talk", "journal club", "defense", "qe", "oral", "phd", "组会", "论文", "答辩", "研究")
@@ -68,7 +69,7 @@ def route_request(prompt: str, *, explicit_output: str | None = None, existing_d
         return Stage1Route("local-edit", "official-editable-surface", None, "preserve-existing", "preserve-existing", "no artifact claim until edited surface is produced", "existing/local edit preserves current format/template/ratio")
     if locked_template or _contains_any(text, LOCKED_TEMPLATE_TERMS):
         return Stage1Route("external-locked-template", "pass-through", None, "preserve-locked", "preserve-locked", "pass-through locked input", "external locked template is not a built-in template")
-    if outputs.intersection(EDITABLE_FORMATS) or _contains_any(text, EDITABLE_FORMATS):
+    if outputs.intersection(EDITABLE_FORMATS) or _contains_any(text, EDITABLE_TEXT_TERMS):
         return Stage1Route("editable", "official-editable-surface", None, "pptx/slides", ratio, "editable adapter required", "explicit editable output")
     if _contains_any(text, BUSINESS_TERMS):
         return Stage1Route("editable", "official-editable-surface", None, "pptx/slides", ratio, "editable adapter required", "business/executive route remains editable")

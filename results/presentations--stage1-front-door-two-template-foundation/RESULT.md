@@ -67,6 +67,10 @@ canonical `course-standard` template body:
 - Beamer adapter manifests now record both render-owner `resolved_route` and
   `resolved_profile` identity for CUHK and pending course-standard adapters,
   while still declaring no Presentations-owned discovery route.
+- Prompt text such as `LaTeX slides` and `Beamer slides` no longer gets
+  misrouted to editable output merely because it contains the word `slides`;
+  `google slides` and explicit editable output still route to the official
+  editable surface.
 
 No `skills/tools/documents-media/presentations/shared/templates/course-standard`
 template body was created or restored.

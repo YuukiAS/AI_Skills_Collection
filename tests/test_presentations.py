@@ -402,6 +402,14 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(research.adapter, "cuhk-research-beamer")
         self.assertEqual(research.template, "cuhk-research")
 
+        latex_seminar = stage1_front_door.route_request("Make LaTeX slides for a seminar.")
+        self.assertEqual(latex_seminar.adapter, "cuhk-research-beamer")
+        self.assertEqual(latex_seminar.template, "cuhk-research")
+
+        beamer_lecture = stage1_front_door.route_request("Make Beamer slides for a lecture.")
+        self.assertEqual(beamer_lecture.adapter, "course-standard-beamer")
+        self.assertEqual(beamer_lecture.template, "course-standard")
+
     def test_stage1_front_door_normalizes_explicit_editable_output_extensions(self) -> None:
         pptx = stage1_front_door.route_request("Make a compact methods deck.", explicit_output=".pptx")
         self.assertEqual(pptx.route, "editable")
@@ -417,6 +425,11 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(snake_case_slides.route, "editable")
         self.assertEqual(snake_case_slides.adapter, "official-editable-surface")
         self.assertIsNone(snake_case_slides.template)
+
+        google_slides_prompt = stage1_front_door.route_request("Make Google Slides for a client strategy review.")
+        self.assertEqual(google_slides_prompt.route, "editable")
+        self.assertEqual(google_slides_prompt.adapter, "official-editable-surface")
+        self.assertIsNone(google_slides_prompt.template)
 
     def test_research_routing_defaults_to_exact_cuhk_beamer_with_editable_override(self) -> None:
         research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")
