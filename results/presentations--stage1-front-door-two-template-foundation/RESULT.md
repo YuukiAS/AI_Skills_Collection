@@ -60,6 +60,8 @@ canonical `course-standard` template body:
   that same plan-only precedence explicitly.
 - explicit `plan` / `plan-only` / `deck-plan` output requests now also preserve plan-only
   precedence over `existing_deck=True` and `locked_template=True` caller hints.
+- explicit output normalization now treats snake_case values such as
+  `google_slides` and `plan_only` the same as their hyphen/space equivalents.
 - explicit ratio parsing now recognizes common `16x9`, `16×9`, `16/9`,
   `4x3`, `4×3`, and `4/3` spellings without changing template identity.
 

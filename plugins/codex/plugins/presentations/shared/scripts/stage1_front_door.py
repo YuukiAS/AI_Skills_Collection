@@ -53,7 +53,8 @@ def _output_tokens(explicit_output: str | None) -> set[str]:
     value = (explicit_output or "").lower().strip()
     if not value:
         return set()
-    return {value, value.lstrip(".").replace("-", " ")}
+    normalized = value.lstrip(".").replace("-", " ").replace("_", " ")
+    return {value, normalized}
 
 
 def route_request(prompt: str, *, explicit_output: str | None = None, existing_deck: bool = False, locked_template: bool = False) -> Stage1Route:

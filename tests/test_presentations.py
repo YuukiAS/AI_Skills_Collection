@@ -365,7 +365,7 @@ class PresentationSharedTests(unittest.TestCase):
 
         explicit_existing_plan = stage1_front_door.route_request(
             "Revise this existing deck.",
-            explicit_output="plan-only",
+            explicit_output="plan_only",
             existing_deck=True,
         )
         self.assertEqual(explicit_existing_plan.route, "plan-only")
@@ -412,6 +412,11 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(slides.route, "editable")
         self.assertEqual(slides.adapter, "official-editable-surface")
         self.assertIsNone(slides.template)
+
+        snake_case_slides = stage1_front_door.route_request("Make a compact methods deck.", explicit_output="google_slides")
+        self.assertEqual(snake_case_slides.route, "editable")
+        self.assertEqual(snake_case_slides.adapter, "official-editable-surface")
+        self.assertIsNone(snake_case_slides.template)
 
     def test_research_routing_defaults_to_exact_cuhk_beamer_with_editable_override(self) -> None:
         research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")
