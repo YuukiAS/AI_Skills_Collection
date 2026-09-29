@@ -259,9 +259,22 @@ def adapter_manifest(
         "environment_owner": OWNER,
         "render_owner": manifest(probe_payload),
         "resolved_route": (probe_payload.get("resolved_route") or {}),
+        "resolved_profile": profile_identity(probe_payload),
         "source_identity": source_identity,
         "pending_dependency": pending_dependency,
         "private_presentations_discovery_route": False,
+    }
+
+
+def profile_identity(probe_payload: dict[str, Any]) -> dict[str, Any]:
+    payload = probe_payload.get("payload") or {}
+    if isinstance(payload.get("effective_profile"), dict):
+        return payload["effective_profile"]
+    return {
+        "environment_owner": OWNER,
+        "profile_source": "render-chinese-math-pdf probe",
+        "default_renderer": payload.get("default_renderer") or (probe_payload.get("resolved_route") or {}).get("default_renderer"),
+        "resource_dir": payload.get("resource_dir") or (probe_payload.get("resolved_route") or {}).get("resource_dir"),
     }
 
 

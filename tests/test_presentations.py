@@ -589,17 +589,29 @@ class PresentationSharedTests(unittest.TestCase):
         owner_probe = {
             "status": "ok",
             "probe": "skills/tools/documents-media/render-chinese-math-pdf/scripts/probe_pdf_render_env.py",
-            "resolved_route": {"resource_dir": "/runtime/receipt/only"},
+            "payload": {"default_renderer": "xelatex", "resource_dir": "/runtime/receipt/only"},
+            "resolved_route": {"resource_dir": "/runtime/receipt/only", "default_renderer": "xelatex"},
         }
-        adapter_manifest = render_owner.adapter_manifest(
+        course_adapter_manifest = render_owner.adapter_manifest(
             adapter="course-standard-beamer",
             template_identity="course-standard",
             probe_payload=owner_probe,
             pending_dependency="WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE",
         )
-        self.assertEqual(adapter_manifest["environment_owner"], "render-chinese-math-pdf")
-        self.assertFalse(adapter_manifest["private_presentations_discovery_route"])
-        self.assertEqual(adapter_manifest["pending_dependency"], "WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE")
+        cuhk_adapter_manifest = render_owner.adapter_manifest(
+            adapter="cuhk-research-beamer",
+            template_identity="cuhk-research",
+            probe_payload=owner_probe,
+            source_identity={"source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source"},
+        )
+        for adapter_manifest in [course_adapter_manifest, cuhk_adapter_manifest]:
+            self.assertEqual(adapter_manifest["environment_owner"], "render-chinese-math-pdf")
+            self.assertEqual(adapter_manifest["resolved_route"]["resource_dir"], "/runtime/receipt/only")
+            self.assertEqual(adapter_manifest["resolved_profile"]["default_renderer"], "xelatex")
+            self.assertEqual(adapter_manifest["resolved_profile"]["resource_dir"], "/runtime/receipt/only")
+            self.assertFalse(adapter_manifest["private_presentations_discovery_route"])
+        self.assertEqual(course_adapter_manifest["pending_dependency"], "WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE")
+        self.assertEqual(cuhk_adapter_manifest["source_identity"]["source"], "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source")
 
         missing_owner_probe = stage3.find_command("pdftoppm", {"payload": {"commands": {}}})
         self.assertFalse(missing_owner_probe["available"])

@@ -64,6 +64,9 @@ canonical `course-standard` template body:
   `google_slides` and `plan_only` the same as their hyphen/space equivalents.
 - explicit ratio parsing now recognizes common `16x9`, `16×9`, `16/9`,
   `4x3`, `4×3`, and `4/3` spellings without changing template identity.
+- Beamer adapter manifests now record both render-owner `resolved_route` and
+  `resolved_profile` identity for CUHK and pending course-standard adapters,
+  while still declaring no Presentations-owned discovery route.
 
 No `skills/tools/documents-media/presentations/shared/templates/course-standard`
 template body was created or restored.
