@@ -82,27 +82,32 @@ Because Host Policy was already configured, `ai-bridge host install` was not run
 
 ## Fresh Session
 
-After plugin refresh, a fresh Codex process was launched through Bridge's production replay entry:
+Final fresh normal-entry evidence is a direct Codex fresh process, not the previous `ai-bridge plugin-replay` wrapper run.
+
+Command shape:
 
 ```text
-ai-bridge plugin-replay --target /overflow/htzhu/mingcheng_new/AI_Skills_Collection --plugin ai-skills-core@yuukias-ai-skills ...
+codex exec --ephemeral --skip-git-repo-check --disable memories -s workspace-write -C /tmp/longleaf_backup_direct_fresh_20260929 -o /tmp/longleaf_backup_direct_fresh_20260929/last-message.txt -
 ```
 
-Fresh child evidence:
+Direct fresh evidence:
 
-- Run id: `20260929T052859Z-38b39c52f386`
-- Child session id: `01a0eba4-7cf8-7bd2-b12c-706aadd6b670`
-- Last message: `fresh_longleaf_backup_plugin_replay_last_message.txt`
-- Child semantic result: `STATE=ALREADY_CURRENT`, `ROUTE_C=VALIDATED`, `HOST_VALIDATE=PASS`, `BRIDGE_RELEASE_RELATION=ALIGNED`
-- Replay report: `/overflow/htzhu/mingcheng_new/.ai-bridge/plugin-replay/20260929T052859Z-38b39c52f386/outputs/machine_update_orchestration_replay_report.md`
+- Codex session id: `01a0ebb5-74b6-76e1-a4d3-afde618dc3eb`
+- Last message: `fresh_longleaf_backup_direct_codex_last_message.txt`
+- Request: `使用 AI Skills Maintainer，同步这台机器。`
+- Scope: read-only verification only; no Marketplace/plugin/Bridge/Host mutation
+- Result: `PASS`
 
-Replay wrapper diagnostic:
+Verified by the direct fresh process:
 
-- Wrapper status: `failed`
-- Wrapper exit code: `70`
-- Contract error: `child Codex reported danger-full-access`
+1. `ai-skills-core@yuukias-ai-skills` is installed/enabled at `0.5` and loaded from the production plugin cache.
+2. `sync this machine` routes to `machine-update-orchestrator`.
+3. Marketplace `yuukias-ai-skills` is on `release`.
+4. Bridge package/runtime is `0.9.2`.
+5. Bridge release relation is `ALIGNED`: `HEAD == origin/release == 6bbaca5a3af6240fbc88fa54cf78fa9acc147f67`; later `origin/main` evidence/docs commits were not treated as formal release.
+6. `ai-bridge host validate` reports `overall state: configured`.
 
-Interpretation: the fresh Codex child did execute the installed AI Skills Maintainer path and completed the machine-sync semantic validation. The wrapper contract diagnostic is recorded as a replay-harness issue and did not reveal Marketplace, Bridge, Host Policy, or plugin misalignment.
+Previous replay-wrapper evidence is retained as diagnostic history only: `ai-bridge plugin-replay` child semantics passed, but the wrapper returned `exit_code=70` with `child Codex reported danger-full-access`, so it is not used as the sole final fresh-session PASS basis.
 
 ## Should-Not-Change Evidence
 
@@ -123,7 +128,7 @@ AI_SKILLS_MAINTAINER=ai-skills-core@yuukias-ai-skills 0.5 enabled
 BRIDGE_ROUTE_C=ALIGNED
 BRIDGE_VERSION=0.9.2
 HOST_POLICY=configured
-FRESH_SESSION=semantic PASS; replay wrapper diagnostic recorded
+FRESH_SESSION=direct codex exec --ephemeral PASS
 OPTIONAL_PLUGINS_INSTALLED=NO
 OVERALL_DONE=NO
 ```

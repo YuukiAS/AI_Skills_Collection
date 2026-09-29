@@ -31,6 +31,7 @@ Durable evidence for this consumer is recorded in:
 
 - `../LONGLEAF_BACKUP_CODEX_MACHINE_SYNC_2026-09-29.md`
 - `../LONGLEAF_BACKUP_CODEX_MACHINE_SYNC_2026-09-29.json`
+- `../fresh_longleaf_backup_direct_codex_last_message.txt`
 - `../fresh_longleaf_backup_plugin_replay_last_message.txt`
 
 Summary:
@@ -41,8 +42,9 @@ Summary:
 - Optional AI_Skills plugins that were not installed stayed uninstalled.
 - Bridge Route C is aligned to formal release `6bbaca5a3af6240fbc88fa54cf78fa9acc147f67`, version `0.9.2`.
 - `ai-bridge host validate` reports `overall state: configured`.
-- Fresh Codex child session consumed the installed AI Skills Maintainer path and reported `STATE=ALREADY_CURRENT`.
-- Replay wrapper returned `exit_code=70` because of the harness diagnostic `child Codex reported danger-full-access`; this is recorded in the evidence and did not indicate component misalignment.
+- Direct `codex exec --ephemeral` fresh session consumed the installed AI Skills Maintainer path and reported PASS for all six requested checks.
+- The direct fresh session verified installed `ai-skills-core 0.5`, `machine-update-orchestrator` routing, Marketplace `release`, Bridge `0.9.2`, Bridge `ALIGNED`, and Host Policy `configured`.
+- Previous `ai-bridge plugin-replay` wrapper returned `exit_code=70` because of the harness diagnostic `child Codex reported danger-full-access`; it is retained only as diagnostic history and is not the sole final fresh-session PASS basis.
 
 ## Forbidden Side Effects Preserved
 

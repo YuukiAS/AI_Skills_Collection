@@ -76,10 +76,11 @@
       "evidence": [
         "LONGLEAF_BACKUP_CODEX_MACHINE_SYNC_2026-09-29.md",
         "LONGLEAF_BACKUP_CODEX_MACHINE_SYNC_2026-09-29.json",
+        "fresh_longleaf_backup_direct_codex_last_message.txt",
         "fresh_longleaf_backup_plugin_replay_last_message.txt",
         "consumers/Longleaf_Backup_Codex_PENDING.md"
       ],
-      "fresh_session_note": "fresh child semantic PASS; plugin-replay wrapper exit_code=70 due harness contract diagnostic child Codex reported danger-full-access"
+      "fresh_session_note": "direct codex exec --ephemeral PASS; previous plugin-replay wrapper exit_code=70 retained only as diagnostic history"
     },
     {
       "name": "CUHK_Workstation_WSL_Codex",
