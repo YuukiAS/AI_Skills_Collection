@@ -18,12 +18,21 @@ Reviewer approval.
 - `CURRENT.plan_revision` remains `1`.
 - `ci_required` remains `true`; real GitHub CI has not been started for a final
   integrated candidate.
-- The only missing dependency for final integration is the independent
-  canonical standard-Beamer owner supplying:
+- The only missing dependency for final course-standard adapter integration is
+  the independent canonical standard-Beamer owner supplying:
   - exact canonical `course-standard` source path;
   - exact candidate commit;
   - allowed consumption boundary;
   - verified source identity.
+- Private G5 reference preflight on 2026-09-29 found that the preferred
+  execution-machine input is not currently present at
+  `private/exports/presentations--stage1-front-door-two-template-foundation/inputs/Chapter1.pdf`
+  in the canonical checkout or the task worktree. This does not change the
+  A-phase routing/render-owner evidence, but final G5 must not proceed until
+  the exact `Chapter1.pdf` with SHA-256
+  `ed205507a6d2de320b77d47d41e55bb0b406aef48144bc2c55d3bbba8c77ddf7`
+  and 50 pages is available; otherwise the final integration/review path must
+  use `BLOCKED_REFERENCE_UNAVAILABLE`.
 
 ## A-Phase Evidence Map
 
@@ -57,8 +66,9 @@ Reviewer approval.
 - No temporary or task-local course-standard source is treated as canonical.
 - Final teaching route artifacts are not claimed.
 - Final RP-G1/RP-G5 two-adapter evidence is not claimed.
-- Final G1/G5, private G5 direct-pixel evidence, real GitHub CI, and Scheduled
-  GPT implementation review remain pending.
+- Final G1/G5, exact Chapter1 private-reference consumption, private G5
+  direct-pixel evidence, real GitHub CI, and Scheduled GPT implementation
+  review remain pending.
 
 ## Dependency Wait
 

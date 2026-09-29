@@ -108,6 +108,22 @@ deferred, including:
 - final two-adapter RP-G1/RP-G5;
 - full G1 and full G5 private visual evidence bundle.
 
+Additional private-reference preflight:
+
+- On 2026-09-29, the preferred execution-machine input
+  `private/exports/presentations--stage1-front-door-two-template-foundation/inputs/Chapter1.pdf`
+  was not present in the canonical checkout or task worktree.
+- No substitute PDF was located by exact filename search under
+  `/home/yuukias/AI_Skills_Collection`,
+  `/home/yuukias/AI_Skills_Collection-presentations--stage1-front-door-two-template-foundation`,
+  or `/home/yuukias` at bounded depth.
+- This is not a substitute for the canonical course-standard dependency and
+  does not change A-phase PASS evidence, but final G5 must not run or claim
+  PASS unless the exact private `Chapter1.pdf` is available with SHA-256
+  `ed205507a6d2de320b77d47d41e55bb0b406aef48144bc2c55d3bbba8c77ddf7`
+  and 50 pages. If it remains unavailable at final G5 time, use
+  `BLOCKED_REFERENCE_UNAVAILABLE`.
+
 ## Validation
 
 Passed:
