@@ -1,0 +1,86 @@
+{
+  "schema": "AI_SKILLS_LONGLEAF_CODEX_MACHINE_SYNC_EVIDENCE_V1",
+  "task_key": "ai-skills-core--machine-update-orchestration",
+  "reviewed_branch": "reviewed/ai-skills-core--machine-update-orchestration",
+  "consumer": "Longleaf_Codex",
+  "updated_at": "2026-09-29 00:51:22 EDT",
+  "status": "PENDING_BRIDGE_HOST_UPDATE",
+  "identity": {
+    "hostname": "c0810.ll.unc.edu",
+    "user": "aereinh",
+    "home": "/overflow/htzhu/mingcheng_new",
+    "codex_home": "/overflow/htzhu/mingcheng_new/.codex",
+    "codex_cli_version": "codex-cli 0.142.0"
+  },
+  "ai_skills": {
+    "marketplace": "yuukias-ai-skills",
+    "source": "https://github.com/YuukiAS/AI_Skills_Collection.git",
+    "ref_before": "main",
+    "ref_after": "release",
+    "revision_before": "c4fd2c64b3211529a61a33e5f80eb7afc2e2960a",
+    "revision_after": "72ebd56705713c01d05fef34ccab1c5c04c15671",
+    "route": "Route A",
+    "installed_enabled_before": {
+      "workflow-core@yuukias-ai-skills": "0.1",
+      "ai-skills-core@yuukias-ai-skills": "0.2",
+      "writing-style@yuukias-ai-skills": "0.3",
+      "research-writing@yuukias-ai-skills": "0.1",
+      "presentations@yuukias-ai-skills": "0.3",
+      "bioinformatics@yuukias-ai-skills": "0.1",
+      "medical-imaging@yuukias-ai-skills": "0.1"
+    },
+    "installed_enabled_after": {
+      "workflow-core@yuukias-ai-skills": "0.4",
+      "ai-skills-core@yuukias-ai-skills": "0.5",
+      "writing-style@yuukias-ai-skills": "0.3",
+      "research-writing@yuukias-ai-skills": "0.2",
+      "presentations@yuukias-ai-skills": "0.3",
+      "bioinformatics@yuukias-ai-skills": "0.1",
+      "medical-imaging@yuukias-ai-skills": "0.1"
+    },
+    "kept_uninstalled": [
+      "scientific-visualization",
+      "web-development",
+      "statistical-modeling"
+    ],
+    "reload_required": true
+  },
+  "route_b": {
+    "route": "Route B",
+    "required": false,
+    "reason": "AI_Skills release 5.3.1 has no ### Update impact section requiring companion or managed-consumer mutation."
+  },
+  "bridge": {
+    "route": "Route C discovery",
+    "repository": "YuukiAS/GPT_Codex_AI_Bridge_Kit",
+    "canonical_checkout": "/overflow/htzhu/mingcheng_new/GPT_Codex_AI_Bridge_Kit",
+    "origin": "https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git",
+    "executable": "/overflow/htzhu/mingcheng_new/.local/bin/ai-bridge",
+    "runtime_source": "/overflow/htzhu/mingcheng_new/GPT_Codex_AI_Bridge_Kit/ai_bridge_kit/__init__.py",
+    "runtime_version_before": "0.9.1",
+    "runtime_version_after": "0.9.1",
+    "formal_release_version": "0.9.2",
+    "formal_release_target": "6bbaca5a3af6240fbc88fa54cf78fa9acc147f67",
+    "origin_release": "6bbaca5a3af6240fbc88fa54cf78fa9acc147f67",
+    "origin_main": "7573dba5a9d8085480d25feab7e86ccd90d6538f",
+    "checkout_head": "ff22c97c8193e110d606e179ec1a8a2741b97fad",
+    "checkout_branch": "main",
+    "checkout_dirty": [
+      ".gitignore"
+    ],
+    "classification": "LAGGING_LOCAL_RUNTIME",
+    "host_validate": "DRIFTED",
+    "actions": [
+      "verified remote formal release evidence dynamically",
+      "ran ai-bridge host validate",
+      "did not mutate Bridge source/runtime or Host Policy"
+    ],
+    "not_done": [
+      "did not advance Bridge release",
+      "did not fast-forward Bridge checkout",
+      "did not refresh editable Bridge package",
+      "did not run ai-bridge host install"
+    ]
+  },
+  "final_consumer_status": "PENDING_BRIDGE_HOST_UPDATE"
+}

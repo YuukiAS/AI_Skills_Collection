@@ -1,64 +1,35 @@
-# Longleaf_Codex ADAPTING Evidence Stub
+# Longleaf_Codex Consumer Sync Evidence
 
 Task key: `ai-skills-core--machine-update-orchestration`  
 Consumer: `Longleaf_Codex`  
-Status: `PENDING_CONSUMER_AUTHORITY`  
-Prepared date: 2026-09-25
+Status: `PENDING_BRIDGE_HOST_UPDATE`
+Updated date: 2026-09-29
 
-## Current Central Identity
+Longleaf_Codex has now been inspected from the actual consumer environment.
 
-- Tracking Issue: `#86`
-- Project Status: `ADAPTING`
-- Area: `ai-skills-core`
-- Resolution commit: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
-- Formal AI_Skills `main`: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
-- Formal AI_Skills `release`: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
-- Released repository version: `5.2.0`
-- Released `ai-skills-core`: `0.5`
-- Released `workflow-core`: `0.4`
+Durable evidence:
 
-## Authority Boundary
+- `results/ai-skills-core--machine-update-orchestration/LONGLEAF_CODEX_MACHINE_SYNC_2026-09-29.md`
+- `results/ai-skills-core--machine-update-orchestration/LONGLEAF_CODEX_MACHINE_SYNC_2026-09-29.json`
 
-No consumer-local authority has been observed in this task for `Longleaf_Codex`.
-Do not infer hostname, `CODEX_HOME`, Marketplace state, installed plugin state,
-or Codex runtime identity from any other machine.
+Summary:
 
-Before changing this status, the adapting run must be executed from this exact
-consumer, or from a session with explicit bounded authority for this exact
-consumer, and must follow `../ADAPTING_CONSUMER_RUNBOOK.md`.
+- AI_Skills Marketplace was migrated from `main` to formal `release`.
+- Already installed AI_Skills plugins were refreshed or verified at release versions.
+- No optional uninstalled AI_Skills plugin was installed.
+- `ai-skills-core@yuukias-ai-skills` is now installed/enabled at `0.5` and contains `machine-update-orchestrator`, `bridge-kit-maintainer`, and Route A/B/C references.
+- Current Codex session requires restart/reopen to consume the newly installed plugin payload.
+- Bridge Kit was checked and found lagging/drifted: local runtime remains `0.9.1`, formal `origin/release` is `0.9.2`, and `ai-bridge host validate` reports drift.
+- Bridge source/runtime and Host Policy were not mutated in this run because the user boundary explicitly prohibited Bridge runtime/source mutation, and the Bridge checkout also has a local `.gitignore` modification.
 
-## Required Evidence Before PASS
-
-A future PASS for `Longleaf_Codex` must record:
-
-- actual target identity: hostname, platform, user, `HOME`, `CODEX_HOME`, and Codex version;
-- approved adaptation / update action for this consumer;
-- exact `yuukias-ai-skills` Marketplace source, ref, sparse paths, last revision, and owning config layer;
-- installed / enabled identity for `ai-skills-core@yuukias-ai-skills` and relevant companions;
-- official Codex Marketplace/plugin commands used, if migration or reinstall is needed;
-- exact old source metadata and restoration evidence if legacy `main -> release` migration is attempted;
-- fresh production normal-entry consumption through installed `ai-skills-core@yuukias-ai-skills`;
-- fresh-session or reload boundary evidence when required;
-- should-not-change and failure-safety evidence for unrelated project/user state;
-- durable evidence locator for this consumer.
-
-## Forbidden Inferences And Side Effects
-
-This stub does not authorize:
-
-- paid API use;
-- automation;
-- AI_Skills or Bridge `release` advancement;
-- Bridge runtime/source mutation;
-- unrelated project mutation;
-- hand-editing Codex config;
-- marking the Board `DONE`.
-
-## Current Handoff
+Current handoff:
 
 ```text
 CONSUMER=Longleaf_Codex
-STATUS=PENDING_CONSUMER_AUTHORITY
-NEXT_ACTION=Run ADAPTING_CONSUMER_RUNBOOK.md only on this authorized consumer.
+STATUS=PENDING_BRIDGE_HOST_UPDATE
+AI_SKILLS_MARKETPLACE=UPDATED_TO_RELEASE
+AI_SKILLS_INSTALLED_PLUGINS=UPDATED_OR_VERIFIED
+BRIDGE=CHECKED_NOT_UPDATED
+RELOAD_REQUIRED=YES
 OVERALL_DONE=NO
 ```
