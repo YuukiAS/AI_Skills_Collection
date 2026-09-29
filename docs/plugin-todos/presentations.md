@@ -75,8 +75,8 @@ project-specific context: CAT-TRACE, VicFlora, COI, OTU, MGP and specific slide 
 ### Full-deck audience-context and responsive-layout review still regresses after repeated real revisions
 status: NEW
 tracking: #35
-source: TRACE / CAT-TRACE 33-page group-meeting deck v8 review
-evidence: `YuukiAS/TRACE` commit `26fd2ad0f042f0a8d7c7dc2154392e3f9460760d`. v8 successfully fixed several long-running issues by adding spacing tokens and regenerating presentation-specific figures, but human/GPT review still found: inconsistent same-role label scale/gutters on P2; a cognitively repetitive catalogue explanation on P3; first-use terms on P4/P19 that were expanded without enough local purpose/context; repeated/non-unified Example treatment across P3/P5/P15; diagram transition text on P10 colliding with arrows or wrapping formulas awkwardly; sequential CORAL content still arranged as three columns despite large unused vertical space; short table row labels wrapping unnecessarily on P16; a newly introduced duplicate `diag(Sigma_W)=1` step on P18; a contextless MGP acronym and defensive source-note-like threshold sentence on P19; cramped oracle-side text on P24; inconsistent Question line spacing/hyphenation across P27-P29; and P29/P30 body compositions whose figure/data regions remain visually unbalanced. The v8 English-final-pass record also states that it only reviewed visible wording touched in v8.
+source: TRACE / CAT-TRACE 33-page group-meeting deck v8 review; STAT5060 Tutorial 1 annotated teaching deck review, 2026-09-29
+evidence: STAT5060 adds unrelated real-use evidence: pages 8–10, 12–14, 18, 20 and 22 were called out for weak composition despite no simple overflow failure - content stranded at page bottoms, awkward side-by-side figure/table pairings, over-centred captions, a cramped posterior-summary/PPC page, and a visibly inconsistent type scale on page 22. Existing TRACE evidence: `YuukiAS/TRACE` commit `26fd2ad0f042f0a8d7c7dc2154392e3f9460760d`. v8 successfully fixed several long-running issues by adding spacing tokens and regenerating presentation-specific figures, but human/GPT review still found: inconsistent same-role label scale/gutters on P2; a cognitively repetitive catalogue explanation on P3; first-use terms on P4/P19 that were expanded without enough local purpose/context; repeated/non-unified Example treatment across P3/P5/P15; diagram transition text on P10 colliding with arrows or wrapping formulas awkwardly; sequential CORAL content still arranged as three columns despite large unused vertical space; short table row labels wrapping unnecessarily on P16; a newly introduced duplicate `diag(Sigma_W)=1` step on P18; a contextless MGP acronym and defensive source-note-like threshold sentence on P19; cramped oracle-side text on P24; inconsistent Question line spacing/hyphenation across P27-P29; and P29/P30 body compositions whose figure/data regions remain visually unbalanced. The v8 English-final-pass record also states that it only reviewed visible wording touched in v8.
 problem: The production path now has many local rules, but it still lacks a sufficiently strong full-artifact reader-effort gate. A final presentation review should not ask only whether each requested object changed. It must inspect every final page for: (1) unfamiliar term introduced with both expansion and immediate purpose/context; (2) one clear reading path with minimal semantic repetition; (3) columns used only for genuinely peer-level comparison, not sequential stages; (4) same-role typography, gutters, question leading and intra-node text/formula spacing; (5) short labels kept on one line when space permits; (6) no new duplicate math, awkward hyphenation, defensive/meta prose or source-note language introduced by a repair; and (7) responsive fallback when a region becomes cramped. Full-deck language/readability QA must cover the final rendered artifact, not only source lines edited in the current round.
 project-specific context: VicFlora, COI, metabarcoding, MGP, CAT-TRACE equations and specific page numbers belong to TRACE. The generic issue is full-deck audience-context, cognitive-load, responsive layout and no-new-regression review, not a CAT-TRACE-specific template.
 
@@ -99,8 +99,8 @@ project-specific context: CAT-TRACE 的具体页码、公式和图形属于项�
 ### Deck-wide formula, text and emphasis scale still lacks a stable hierarchy
 status: NEW
 tracking: #38
-source: TRACE / CAT-TRACE group-meeting deck v5 and v7 reviews
-evidence: v5 shows an oversized residual formula, an oversized connective word and a too-small model-closure formula; v7 P18 still leaves a key three-step mathematical chain comparatively small in a large empty body area
+source: TRACE / CAT-TRACE group-meeting deck v5 and v7 reviews; STAT5060 Tutorial 1 annotated teaching deck review, 2026-09-29
+evidence: STAT5060 independently exposed the same hierarchy drift: page 22 mixed visibly different text scales in one dense frame, page 18 made the formula/plot/table hierarchy feel unbalanced, and several sparse pages left key explanatory objects smaller than the available space justified. Existing TRACE evidence: v5 shows an oversized residual formula, an oversized connective word and a too-small model-closure formula; v7 P18 still leaves a key three-step mathematical chain comparatively small in a large empty body area
 problem: 当前 plugin 有“按科学重要性分配空间”的原则，但缺少足够稳定的 deck-level typography/math scale contract。核心公式、supporting formula、diagram/table 内数学、正文、caption/source、强调粗体之间会逐页漂移；`resizebox` 还可能把普通连接词和数学对象一起放大。需要一种模板相对、角色驱动的尺度层级，并把“页面有大量空白但 supporting/core math 仍然偏小”也纳入最终层级检查，而不是只防止公式过大。
 project-specific context: 用户把 CAT-TRACE v5 P14 的核心 borrowing equation 视为当前 deck 可接受的最大公式视觉尺度，这是本 deck 的局部标尺；通用规则不应硬编码该页或某个绝对字号。
 
@@ -150,8 +150,8 @@ project-specific context: Finland/Madagascar/Victoria prevalence 图和 grouped-
 ### Table, list and paragraph primitives still drift across one deck
 status: NEW
 tracking: #40
-source: TRACE / CAT-TRACE group-meeting deck v4, v5 and v7 reviews
-evidence: v4 P11–P13, P21–P26；v5 metabarcoding definition block and tables; v7 P3 still reads heavily because one concept is split across a definition paragraph, three boxed statements, a separate sample matrix and a bottom example paragraph
+source: TRACE / CAT-TRACE group-meeting deck v4, v5 and v7 reviews; STAT5060 Tutorial 1 annotated teaching deck review, 2026-09-29
+evidence: STAT5060 adds teaching-mode evidence: the user explicitly asked whether page 12 should use bullets or prose, requested interpretation next to tables rather than a table alone, disliked a figure and table forced side-by-side on page 18, and found multiple pages to have facts placed in visually arbitrary bottom paragraphs. Existing TRACE evidence: v4 P11–P13, P21–P26；v5 metabarcoding definition block and tables; v7 P3 still reads heavily because one concept is split across a definition paragraph, three boxed statements, a separate sample matrix and a bottom example paragraph
 problem: paragraph/list/table 的选择规则还不足以覆盖整页 composition。连续论证适合短 paragraph；多个并列、可独立理解的定义/事实适合 bullets；重复比较相同属性或数值对齐才适合 table。除此以外，还应限制同一页同时出现的 container/primitive 类型：不要为了“结构化”把一个简单关系拆成多组卡片 + diagram + prose。相同意思的事实应该合并，而不是分别占一个 box。
 project-specific context: P3 的 VicFlora/catalogue 页面是新的真实证据；通用问题是 paragraph/bullet/table 选择与 information-slide composition grammar。
 
@@ -185,6 +185,53 @@ source: TRACE / CAT-TRACE group-meeting deck v4 review
 evidence: v4 task要求读取 `scientific-prose`，但最终仍反复出现 `Failure prevented`, 机械 `Example.` 标签、noun-stack/table microcopy 和不自然开场；presentation skill 当前只规定英文 slide text “can use” scientific-prose
 problem: presentation 结构和科学事实稳定后，没有一个明确的 reader-facing English final-pass handoff/acceptance gate。仅“读取 writing skill”或让 Codex顺手润色不足以阻止模板化、机器式科研英语进入最终 PDF。
 project-specific context: 具体 CAT-TRACE 术语和句子属于当前 deck；通用问题是 presentations 与 writing-style 的 routing/QA 边界，不能把 presentation layout 责任交给 writing-style。
+
+
+### Course-standard teaching template needs structural navigation, not only colours and bands
+status: NEW
+tracking: #49
+source: STAT5060 Tutorial 1 annotated Beamer review, 2026-09-29
+evidence: `YuukiAS/STAT5060-TA` work branch `work/stat5060--tutorial-01-v2`, content commit `4366e33bb58594ead5156002eba0aae30a2595dd`; 27-page Beamer candidate reviewed by the user with 56 highlight annotations in a local annotated PDF (not committed to this public repo). The first real course-standard use was judged too bare even though the blue-title/white-body visual direction was acceptable.
+problem: The current `course-standard` contract captures a 4:3 reference look, frame-title colour, bullets and page number, but real teaching use needs a fuller structural shell: a deliberately sparse opening slide, section-aware navigation, PDF outline/bookmarks, top/bottom navigation/action affordances where the Beamer runtime supports them, stable footline/page-number behaviour, and an intentional concluding frame. Template identity should separate this structural/navigation grammar from a rigid aspect ratio: exact Chapter1 reproduction may default to 4:3, but a user-requested 16:9 teaching deck should be able to preserve the same course-standard identity instead of falling back to an unrelated template.
+project-specific context: STAT5060 exact section names, page count and tomorrow's tutorial content remain course-local. The generic issue is that a teaching template is more than colours/fonts; it also owns opening/closing structure, section state, navigation/bookmarks and ratio-aware identity.
+candidate_action: Treat this as a narrow Stage-1 course-standard template-contract amendment before the two-template foundation is implemented. Do not pull later composition/storyline intelligence into Stage 1.
+
+### Teaching decks need a presenter-learning companion distinct from student-visible slides
+status: NEW
+tracking: #50
+source: STAT5060 Tutorial 1 annotated Beamer review, 2026-09-29
+evidence: user marked technically acceptable content in blue where the presenter still needed to learn how to explain it, especially the Poisson Pearson-residual plot and model-misspecification interpretation; yellow questions also asked what NB2 means, what adding a random intercept changes, why the simulation uses a chosen kappa, what the true slope 0.5 represents, and how to interpret posterior diagnostics.
+problem: A teaching deck can be visually correct and student-readable while still leaving the presenter unable to teach the method confidently. Teaching mode needs an optional instructor-learning artifact separate from speaker-facing slide copy: for each nontrivial diagnostic/model object, record why it appears, what the displayed object means, how to read a good/poor pattern, what a common misconception is, one likely student question, and a source anchor for deeper review. This material must not inflate student slides or turn ordinary speaker notes into an internal QA dump.
+project-specific context: Poisson residuals, NB2, Ohio GLMM, the specific simulation and PyMC/brms details belong to STAT5060. The generic gap is presenter preparation for technical teaching content.
+candidate_action: Keep out of Stage 1 template implementation. Promote later only as a bounded teaching-mode notes/companion capability, ideally consuming source-grounded domain explanations rather than inventing pedagogy from layout rules.
+
+### Teaching presentations need optional lecture/source cross-references without duplicating the lecture
+status: NEW
+tracking: #51
+source: STAT5060 Tutorial 1 annotated Beamer review, 2026-09-29
+evidence: on the multinomial/alligator section the user asked for an explicit pointer to the relevant Lecture Note page so students can connect Tutorial material back to the course source, while also warning not to repeat too much of the Lecture or conflict with it.
+problem: Current source-fidelity machinery is mostly internal. Teaching presentations sometimes need a small audience-facing cross-reference such as “Lecture 2, pp. 42–46” or an equivalent source cue so students know where the model was introduced. The cue should be optional, compact and source-verified; it must not become citation clutter, reproduce the lecture, or let a tutorial silently contradict the canonical course source.
+project-specific context: the exact Chapter 2/3 pages and course file locations belong to STAT5060. The generic issue is a teaching-source anchor that connects derived tutorial material to canonical lecture material without duplicating it.
+candidate_action: Record now; implement after the base course-standard adapter unless the existing source/citation layer already supports a trivial teaching-source role.
+
+### Assessment-introduction slides need answer-leakage and provisional-administration guardrails
+status: NEW
+tracking: #52
+source: STAT5060 Tutorial 1 annotated Beamer review, 2026-09-29
+evidence: the user rejected a detailed “Tutorial topic -> Application in HW1” matrix because it felt like a solution scaffold rather than a student-facing tutorial slide; the course-assessment/project pages also need to tolerate still-unknown dates and evolving oral-defense details without sounding like internal engineering status.
+problem: Teaching decks that introduce homework/projects need a distinct audience contract. They should explain what the assessment is for, broad deliverables, what skills students are expected to demonstrate, and what information is confirmed vs forthcoming. They should not expose internal alignment matrices, rubric logic, model-by-model answer hints, or unstable administrative placeholders. Provisional details should use normal course language (“details will be announced on Blackboard / stay tuned”) rather than “unconfirmed/release blocker” language. Project rationale may explain why the assessment format changed (for example, to emphasize analysis and explanation in an AI-assisted environment) without leaking grading internals.
+project-specific context: STAT5060's exact HW1 questions, deadlines, weights, oral-defense duration and AI policy are course-local and remain in the course repo. The generic issue is student-facing assessment introduction versus instructor/internal assessment design.
+candidate_action: Keep out of Stage 1 template work. Use the current tutorial as real evidence for a later teaching-mode semantic/composition guardrail.
+
+### Closing frames need a teaching-purpose contract, not a generic Questions/Thanks default
+status: NEW
+tracking: #53
+source: STAT5060 Tutorial 1 annotated Beamer review, 2026-09-29
+evidence: the user explicitly questioned whether the final frame should be a question, a takeaway, a Thanks frame, or another conclusion form, and whether the current “What evidence would make you reconsider a fitted model?” actually aligns with Tutorial 1, HW1 and Lectures 2–3.
+problem: The presentation layer should choose the closing job from the talk's purpose. For a teaching deck, an integrative question can be useful when it rehearses the central reasoning students need next; a recap is better when the session introduced several methods that need consolidation; a bare “Thanks” is only a terminal social frame and should not replace pedagogical closure. Template structure should provide a closing frame slot, while semantic planning chooses recap/question/Q&A/thanks based on audience and next action. The closing prompt itself must be checked against the actual lecture/tutorial/assessment goals rather than generated as generic reflective prose.
+project-specific context: the current STAT5060 closing question belongs to this tutorial. The generic issue is structural closing support plus a purpose-driven choice of closing content.
+candidate_action: Split ownership: Stage 1 template may add a canonical closing-frame primitive; semantic choice should remain a later composition/storyline responsibility.
+
 
 真实项目 thread 新增时只需要最小格式：
 
@@ -234,8 +281,8 @@ promotion_gate: theorem/statistical-method real deck replay + unrelated math-hea
 ### Simulation, metric and structured-fact presentation
 status: CANDIDATE_GENERIC
 tracking: #47
-source: repeated real statistics deck feedback
-evidence: presentation maintenance archive
+source: repeated real statistics deck feedback; STAT5060 Tutorial 1 annotated teaching deck review, 2026-09-29
+evidence: presentation maintenance archive + STAT5060 pages 16–18. The tutorial exposed exactly the unresolved reader questions this candidate targets: why run the simulation at all, what the true slope 0.5 represents, why NB2 uses kappa=1.5, and how Bias/RMSE relate to the displayed figure rather than appearing as detached formulas.
 target layer: reasoning/rendering/qa
 problem: DGP、estimand、baseline、metric direction、dataset facts、seed/reproducibility 信息容易混成段落或弱表格，读起来很累。
 candidate_action: 新的 simulation-heavy / real-data deck 再次出现时，再提炼更稳定的 table/list patterns 和 QA。
@@ -244,8 +291,8 @@ promotion_gate: 至少一个 simulation-heavy 和一个 real-data deck 的真实
 ### Natural scientific slide language
 status: CANDIDATE_GENERIC
 tracking: #48
-source: repeated presentation and writing-style feedback
-evidence: presentation maintenance archive + `docs/plugin-todos/writing-style.md`
+source: repeated presentation and writing-style feedback; STAT5060 Tutorial 1 annotated teaching deck review, 2026-09-29
+evidence: presentation maintenance archive + `docs/plugin-todos/writing-style.md` + nine pink annotations in the STAT5060 27-page tutorial candidate. The teaching deck still contained formulaic/AI-like prose even after a dedicated content rewrite, including generic caveat sentences, mechanical “same displayed probabilities”/“these are specified parameters” phrasing, and engineering-flavoured audience copy.
 target layer: writing/qa
 problem: slides 仍可能出现内部流程词、模板化对比句、面向作者而不是面向听众的说法。
 candidate_action: 真实失败出现后再决定应该改 `research-presentations`、`scientific-prose`，还是两者的交接；不要重复造一套写作规则。
