@@ -81,6 +81,9 @@ canonical `course-standard` template body:
 - `course-standard` route receipts now carry
   `WAITING_FOR_CANONICAL_COURSE_STANDARD_TEMPLATE` and avoid claiming a Beamer
   artifact before the canonical standard-Beamer source is supplied.
+- Added `A_PHASE_COMPLETION_AUDIT.md` mapping each revised Plan `CONTINUE_NOW`
+  item to current source/test/evidence and recording the exact dependency that
+  still gates final integration.
 
 No `skills/tools/documents-media/presentations/shared/templates/course-standard`
 template body was created or restored.
