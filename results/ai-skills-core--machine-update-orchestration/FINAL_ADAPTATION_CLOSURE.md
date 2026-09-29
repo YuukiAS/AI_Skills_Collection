@@ -4,7 +4,7 @@ Task key: `ai-skills-core--machine-update-orchestration`
 
 Date: 2026-09-29
 
-State: `PRODUCT_AND_REPOSITORY_CLOSURE_COMPLETE_PROJECT_MUTATION_PENDING`
+State: `COMPLETE`
 
 ## Closure Truth
 
@@ -70,17 +70,17 @@ All listed records are under:
 - Five required consumers: `PASS`.
 - Repository closure: `COMPLETE`.
 - Resolution commit: `573224edb9b81fc4f53dbc1ce9cc9b719483e8c8`.
-- Issue `#86`: reader-facing body updated through installed `writing-style 0.4`; Issue remains `OPEN`.
-- Project `AI Skills Maintenance`: `ADAPTING`.
-- Overall result: `NO_ONLY_BECAUSE_PROJECT_METADATA_PENDING`.
+- Issue `#86`: `CLOSED`.
+- Project `AI Skills Maintenance`: `DONE`.
+- Project Area: `ai-skills-core`.
+- Overall result: `PASS`.
 
-The only remaining action is the Project metadata mutation below. It is not a
-consumer failure, a product change, or a successor task.
+README checked: no update required.
 
 ```text
-PROJECT_MUTATION_PENDING:
-- Project: AI Skills Maintenance
-- Issue: #86
-- Status: ADAPTING -> DONE
-- Resolution commit: 573224edb9b81fc4f53dbc1ce9cc9b719483e8c8
+PROJECT_STATUS=DONE
+ISSUE_86=CLOSED
+OVERALL_DONE=YES
+RESOLUTION_COMMIT=573224edb9b81fc4f53dbc1ce9cc9b719483e8c8
+VERSION_BUMP=NONE
 ```

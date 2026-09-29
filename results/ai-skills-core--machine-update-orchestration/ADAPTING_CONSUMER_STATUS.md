@@ -6,7 +6,7 @@ Updated date: 2026-09-29
 ## Current Board State
 
 - Tracking Issue: `#86`
-- Project Status: `ADAPTING`
+- Project Status: `DONE`
 - Area: `ai-skills-core`
 - Resolution commit: `573224edb9b81fc4f53dbc1ce9cc9b719483e8c8`
 - AI_Skills current `main` at final evidence authoring: `573224edb9b81fc4f53dbc1ce9cc9b719483e8c8`
@@ -16,7 +16,7 @@ Updated date: 2026-09-29
 - Bridge formal `release`: `9dad0ba4bfa54e251f345091c5151ae991251ec9`
 - Bridge formal version: `0.9.3`
 - Closure freeze: `FINAL_CLOSURE_FREEZE.json`
-- Overall DONE: `NO`
+- Overall DONE: `YES`
 
 This matrix tracks the final closure freeze batch. It is not a runtime registry,
 machine controller, daemon, watcher, database, or source of truth for Codex
@@ -88,22 +88,23 @@ release to current main.
 
 ## Closure Boundary
 
-Product closure, all five required-consumer adaptations, and repository closure
-are complete. Issue `#86` now has reader-facing Chinese copy processed through
-installed `writing-style 0.4`; it remains open. The current environment cannot
-mutate GitHub Project metadata, so Project `AI Skills Maintenance` stays
-`ADAPTING`. This metadata mutation is the only remaining action and is not a
-consumer failure or successor product task.
+Product closure, all five required-consumer adaptations, repository closure,
+and GitHub Project closure are complete. Issue `#86` has reader-facing Chinese
+copy processed through installed `writing-style 0.4`; it is now closed. Project
+`AI Skills Maintenance` is `DONE`.
 
 ## Next Handoff
 
 ```text
 NEXT_REQUIRED_CONSUMER=NONE
 ALL_REQUIRED_CONSUMERS_PASS=YES
-PROJECT_STATUS=ADAPTING
-ISSUE_86_OPEN=YES
+PROJECT_STATUS=DONE
+ISSUE_86=CLOSED
 PRODUCT_CLOSURE=COMPLETE
 REPO_CLOSURE=COMPLETE
-PROJECT_MUTATION_PENDING=YES
-OVERALL_DONE=NO_ONLY_BECAUSE_PROJECT_METADATA_PENDING
+PROJECT_AREA=ai-skills-core
+RESOLUTION_COMMIT=573224edb9b81fc4f53dbc1ce9cc9b719483e8c8
+README_CHECKED=NO_UPDATE_REQUIRED
+VERSION_BUMP=NONE
+OVERALL_DONE=YES
 ```

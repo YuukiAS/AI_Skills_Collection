@@ -2,9 +2,8 @@
 
 Task: `ai-skills-core--machine-update-orchestration`
 
-The product, five required-consumer adaptations, and repository closure are
-complete. GitHub Project metadata is the only remaining item; it does not
-invalidate the machine-sync or repository result.
+The product, five required-consumer adaptations, repository closure, and
+GitHub Project closure are complete.
 
 ## Final Identity
 
@@ -32,23 +31,23 @@ ordinary `PASS`. There is no sixth `Workstation_Windows_Codex` row.
 ## Tracking State
 
 Issue `#86` reader-facing copy was processed through installed
-`writing-style 0.4` and updated successfully. The Issue remains `OPEN` because
-the current environment cannot modify GitHub Project metadata. Project
-`AI Skills Maintenance` therefore remains `ADAPTING`.
+`writing-style 0.4` and updated successfully. The Issue is `CLOSED`. Project
+`AI Skills Maintenance` is `DONE`.
 
 ```text
-PROJECT_MUTATION_PENDING:
-- Project: AI Skills Maintenance
-- Issue: #86
-- Status: ADAPTING -> DONE
-- Resolution commit: 573224edb9b81fc4f53dbc1ce9cc9b719483e8c8
+PROJECT_STATUS=DONE
+ISSUE_86=CLOSED
+PROJECT_AREA=ai-skills-core
+RESOLUTION_COMMIT=573224edb9b81fc4f53dbc1ce9cc9b719483e8c8
 ```
 
 ```text
 PRODUCT_CLOSURE=COMPLETE
 FIVE_CONSUMERS=PASS
 REPO_CLOSURE=COMPLETE
-ISSUE_UPDATE=READER_FACING_BODY_UPDATED_OPEN
-PROJECT_STATUS=ADAPTING
-OVERALL_DONE=NO_ONLY_BECAUSE_PROJECT_METADATA_PENDING
+ISSUE_UPDATE=READER_FACING_BODY_UPDATED_CLOSED
+PROJECT_STATUS=DONE
+README_CHECKED=NO_UPDATE_REQUIRED
+VERSION_BUMP=NONE
+OVERALL_DONE=YES
 ```
