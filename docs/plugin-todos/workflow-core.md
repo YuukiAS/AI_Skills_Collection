@@ -4,6 +4,15 @@ Canonical maintenance inbox for the `workflow-core` plugin.
 
 ## Open candidates
 
+
+### Loaded workflow-core still misclassified environment capability and attempted an unapproved fallback
+status: NEW
+source: STAT5060 Tutorial 1 V7 materialization on Longleaf, 2026-09-29
+evidence: before the bad fallback decision, Codex explicitly said it would use `codex-workflow-protocol` and then read `/users/a/e/aereinh/.codex/skills/core-codex-system-codex-workflow-protocol/SKILL.md`. It then checked only the default shell `python` / `Rscript`, treated missing packages/commands on the default PATH as proof that the toolchain was unavailable, and proposed a Node/stdlib SVG/PNG plotting route. A follow-up check found Longleaf modules `python/3.12.4` and `r/4.5.0`; after loading them, the required Python/R toolchain was available. The project execution contract had already said to prefer existing usable environments and required actual R/Python execution.
+problem: this is not an installation or invocation failure in the observed run; workflow-core was loaded but its source-of-truth/environment-discovery discipline was not enforced strongly enough. A complex task must not equate “not on the current PATH” with “capability absent”, and must not silently change implementation method, quality, reproducibility, or acceptance evidence through a fallback before checking platform-native/project-declared environments. The user also requires the later Planner to verify that workflow-core is reliably triggered for the complex/risky task families it claims to cover, instead of treating “installed” as sufficient normal-entry coverage.
+project-specific context: the exact Longleaf module names, STAT5060 files, R/Python teaching requirements, and the attempted Node plotting substitution are project-specific evidence. The reusable workflow concern is capability discovery before declaring a dependency unavailable, reliable normal-entry invocation for complex tasks, and preventing non-equivalent fallback from bypassing the frozen execution contract.
+
+
 ### Keep AI_Skills workflow rules separate from Bridge Kit runtime bugs
 status: PROMOTE_NOW
 tracking: #5
