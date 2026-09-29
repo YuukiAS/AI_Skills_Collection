@@ -7,11 +7,19 @@
   "last_review_decision": "PASS",
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "WAIT_FOR_HUMAN_DECISION",
+  "next_action": "NO_AUTOMATIC_TRANSITION",
   "plan_revision": 1,
   "review_round": 2,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "state": "AWAIT_HUMAN_DECISION",
   "task_key": "product-ui-copy--cross-plugin-production-integration",
-  "human_gate_reason": "PASS"
+  "human_gate_reason": "PASS",
+  "human_decision": {
+    "decision": "ACCEPT",
+    "recorded_at": "2026-09-29T13:30:00+08:00",
+    "body": "用户明确认可 Product UI Copy 当前中央候选及 CUHK Date 真实验收表现，并要求继续下一步。",
+    "previous_human_gate_reason": "PASS",
+    "review_round": 2,
+    "plan_revision": 1
+  }
 }
