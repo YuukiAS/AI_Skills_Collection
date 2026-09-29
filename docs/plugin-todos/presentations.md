@@ -234,6 +234,108 @@ project-specific context: the current STAT5060 closing question belongs to this 
 candidate_action: Split ownership: Stage 1 template may add a canonical closing-frame primitive; semantic choice should remain a later composition/storyline responsibility.
 
 
+
+### Final presentation reviewer must be extracted from the human-accepted STAT5060 reviewer, not reconstructed from memory
+status: NEW
+tracking: #54
+source: STAT5060 Tutorial 1 V4–V7 repeated false-positive review cycle, 2026-09-29
+evidence: `YuukiAS/STAT5060-TA` work branch `work/stat5060--tutorial-01-v2`; V4/V5/V6 all produced executor/reviewer PASS artifacts that were immediately rejected by the user after inspecting the rendered PDF. The review protocol is still being hardened in the course repo and is not yet frozen.
+problem: Presentations currently has reviewer logic, but repeated real use shows that a reviewer can still self-certify a visibly poor deck by over-weighting mechanical evidence such as successful build, no clipping, page count, outline existence, or executor-written closure narratives. The final generic reviewer must not be reinvented later from these intermediate TODO notes. Once the STAT5060 reviewer reaches a human-accepted frozen version, Presentations should extract that exact reviewed contract, genericize only course-specific names/thresholds, preserve the acceptance semantics, and regression-test it against the known V4/V5/V6 rejected artifacts.
+candidate_action: Do not promote an intermediate STAT5060 reviewer into production. Add an explicit extraction task after the Tutorial reaches human acceptance: record exact source commit/path, copy the final reviewer contract into Presentations, remove course-specific details, and verify that historical rejected decks still deterministically fail.
+promotion_gate: human acceptance of a final STAT5060 Tutorial reviewer package + successful replay on at least V4, V5 and V6 rejected artifacts + one unrelated deck.
+project-specific context: STAT5060 page numbers, lecture references, assessment wording and exact course slides stay in `STAT5060-TA`. The generic asset to extract is the reviewer architecture and gate semantics.
+
+### Reviewer calibration must be blind, artifact-bound and proven before candidate review
+status: NEW
+tracking: #55
+source: STAT5060 Tutorial 1 V6/V7 reviewer hardening
+evidence: the initial calibration proposal exposed the expected V6 failure list to the reviewer before calibration, making it possible to pass by paraphrasing the answer sheet rather than detecting defects from pixels.
+problem: A reviewer-quality check is meaningless if the reviewer sees the expected failures in advance. Presentation review needs a blind pre-gate: a fresh isolated calibration run receives only a rejected artifact, rendered evidence, role and broad categories; an external aggregator holds the expected minimum-hit set. Candidate review starts only after calibration proves that the reviewer independently detected the required defects with page/evidence/concrete observation. Calibration run identity and output hash should travel with the candidate-review artifact.
+candidate_action: Add reviewer calibration as a reusable QA primitive after #54 is extracted. Keep expected failure sets outside the reviewer context; never pass human-rejection answer keys into the calibration run.
+promotion_gate: replay where a weak/answer-fed reviewer fails calibration while a genuinely pixel-reading reviewer passes, without requiring project-specific page names.
+
+### Human rejection must invalidate prior reviewer PASS and create persistent regression guards
+status: NEW
+tracking: #56
+source: STAT5060 Tutorial 1 V4–V7; repeated recurrence of already-rejected patterns
+evidence: after prior PASS claims, later candidates reintroduced previously rejected behaviour including answer-mapping assessment slides, first-use violations, AI-like source wording, oversized diagram elements, cramped code stacks and weak closing frames.
+problem: Current revision workflows can treat the latest candidate as a fresh deck and forget that a human already rejected specific visible patterns. A human rejection must be higher authority than any earlier executor/reviewer PASS. Every rejection should produce a persistent regression-guard ledger that later candidates must check explicitly; a candidate cannot pass merely because the original page changed enough that the old finding no longer matches by line number.
+candidate_action: Store semantic regression guards such as “no answer scaffold”, “no first-use before introduction”, “no low-contrast header”, “no internal QA language”, rather than page-number-only fixes. On every later round, report ABSENT/PRESENT against the full final render.
+promotion_gate: at least one replay where the guard ledger catches a regression that ordinary changed-page review misses.
+
+### Independent presentation review needs role separation, verdict isolation and role-scoped closure
+status: NEW
+tracking: #57
+source: STAT5060 Tutorial 1 V6/V7 reviewer redesign
+evidence: repeated false PASS showed that one generic reviewer can shallowly repeat executor claims. The hardened course review separates visual/template QA from teaching/language QA and isolates their verdicts.
+problem: One reviewer asked to judge template fidelity, figure readability, natural scientific language, pedagogy, first-use order and assessment boundaries tends to perform each shallowly. The generic reviewer system should support at least two independent roles: visual/presentation and teaching/language (or domain/audience for non-teaching decks). Both inspect the full deck, but each owns explicit gates. Neither sees executor PASS narratives or the other reviewer verdict before freezing its own decision. Round-2 closure is role-scoped; only an aggregator checks the union after both verdicts freeze and it cannot override reviewer findings.
+candidate_action: Promote only after the final STAT5060 reviewer is frozen; preserve distinct run IDs, isolated contexts, role-owned finding IDs, full-deck re-review after repair and aggregator non-override semantics.
+promotion_gate: successful two-role replay on a rejected deck where each role catches distinct failures and neither can hide the other's failure behind a top-level PASS.
+
+### Rendered-pixel review must use whole-slide projection scale before zoomed diagnostics
+status: NEW
+tracking: #58
+source: STAT5060 Tutorial 1 V4–V7 + CAT-TRACE figure-readability failures
+evidence: reviewers repeatedly called small plots/readability acceptable when high-resolution evidence could be zoomed, even though the same axes, legends and labels were poor in the whole projected slide.
+problem: High-resolution screenshots can make an unreadable slide appear acceptable. Presentation QA should judge every page first at a fixed whole-slide projection representation (for example 1920×1080 fit-to-screen, no zoom), then use high-resolution pages/crops only to diagnose failures. Figure-internal text, code, tables, header/footer controls and captions must be judged at the final rendered scale.
+candidate_action: Add a mandatory whole-slide evidence tier and make high-res diagnostic-only. A page that fails whole-slide readability cannot be rescued by a zoomed crop.
+promotion_gate: historical replay where at least one figure passes zoomed inspection but correctly fails whole-slide review.
+
+### Template QA must test semantic behaviour and optical geometry, not element presence
+status: NEW
+tracking: #59
+source: STAT5060 Tutorial 1 V5–V7 course-standard template iterations
+evidence: a candidate contained section labels, dots, navigation symbols and page numbers yet remained visibly poor: inactive labels/dots had weak contrast, current-state emphasis was unclear, footer controls and page number were not optically aligned, and ordinary navigation leaked onto title/closing frames.
+problem: “Section dots exist” and “footer exists” are not enough. Template review needs semantic and geometric invariants: section/bookmark order, dot count/order/current state, readable active/inactive contrast, title/closing special behaviour, stable source safe-zone, and optical alignment of navigation controls with page number. Renderer/source implementation details such as independent raisebox hacks should not be accepted when the final pixels remain misaligned.
+candidate_action: Add template-specific rendered crops/evidence and behaviour checks to course-standard and CUHK-research adapters. Keep thresholds template-relative, with contrast and pixel-alignment checks used as evidence rather than universal design constants.
+promotion_gate: replay on at least one failed teaching template and one research template.
+
+### First-use dependency checks must inspect legends, plot titles, captions, annotations and footers
+status: NEW
+tracking: #60
+source: STAT5060 Tutorial 1 V6 first-use regression
+evidence: the crab-data slide displayed an NB2 curve/legend before NB2 had been introduced, while body-text-oriented review still reported the sequence as acceptable.
+problem: Current first-use checks can miss scientific concepts introduced visually. A term/model shown in a legend, figure title, caption, annotation, table label or footer counts as audience-visible use. Narrative-order QA must build first-use from the final rendered artifact, not only body copy or source headings.
+candidate_action: Extend first-use/dependency scan to every visible text surface and figure semantics. When a concept is intentionally previewed, the planner must explicitly justify the preview rather than letting it happen accidentally.
+promotion_gate: replay where a visual legend/caption first-use violation is caught although body text alone would pass.
+
+### Figure-caption policy must be semantic: explain the scientific object, never narrate the slide
+status: NEW
+tracking: #61
+source: STAT5060 Tutorial 1 V7 emergency repair
+evidence: a mechanical “every image needs a caption” interpretation generated audience-noise such as “Data plot: ...” and “Crab image: context only.” The user rejected these immediately even though they technically satisfied a caption checklist.
+problem: Caption existence is not the goal. Scientific figures need enough explanation to identify the statistic/comparison/reference line/panel when the visual is not self-explanatory. Obvious contextual images do not need meta captions that merely say what the image is. Captions should be concise, audience-facing, normally left-aligned, and should not duplicate the frame title or narrate slide construction.
+candidate_action: Replace boolean caption-presence QA with a semantic caption-role check: REQUIRED / OPTIONAL / REMOVE. Require captions for ambiguous scientific plots; permit no caption when axes/legend + nearby prose already fully explain an obvious object; always retain source attribution separately when needed.
+promotion_gate: replay where a technically present but useless meta-caption is rejected and a meaningful statistical caption passes.
+
+### Teaching/course-standard route should freeze a reusable standard Beamer separate from CUHK research and commercial PPT
+status: NEW
+tracking: #62
+source: STAT5060 Tutorial 1 V7 course-standard hardening
+evidence: repeated tutorial work showed that the research CUHK Beamer, a generic teaching Beamer and commercial/business PPT have different structural needs. The user now requires a cleaned reusable standard Beamer to be extracted from the human-accepted Tutorial design.
+problem: Presentations currently discusses two built-in templates but real product routing needs a clearer modality boundary. CUHK research decks can keep the research template and research-specific rhythm; tutorial/course teaching needs a restrained standard Beamer with readable section navigation, stable footer, title/closing primitives, figure-caption discipline and audience-safe typography; commercial PPT should remain a separate workflow rather than being forced into either academic route.
+candidate_action: After final STAT5060 human acceptance, import the exact standard-Beamer theme/usage note as the canonical course-standard reference implementation. Do not accept the earlier failed theme or a renamed copy. Preserve aspect-ratio flexibility and template identity across 4:3/16:9 where supported.
+promotion_gate: accepted STAT5060 standard Beamer + one additional tutorial/course deck + one regression check that CUHK research routing remains unchanged.
+
+### Teaching closing frames may combine pedagogical recap with durable contact information
+status: NEW
+tracking: #63
+source: STAT5060 Tutorial 1 V7 closing-frame redesign
+evidence: generic Questions/Thanks/reflective-question endings repeatedly felt unfinished. The teaching use case benefits from leaving a concise summary plus TA/instructor contact information visible during Q&A.
+problem: A teaching closing frame often has two legitimate jobs: consolidate the session and provide a stable contact path. A bare “Thanks” wastes the final visible screen; a generic reflective question can feel generated; a pure contact card loses pedagogical closure.
+candidate_action: Add a course-standard closing primitive supporting 2–4 recap bullets plus a compact contact block (name/email/optional phone/office when explicitly supplied). Contact fields are user/course data, not inferred. Closing frames normally suppress ordinary navigation/header clutter.
+promotion_gate: accepted real teaching deck where recap+contact is judged better than generic Questions/Thanks.
+
+### Student-facing slide language needs a rendered full-deck anti-meta/anti-AI gate
+status: NEW
+tracking: #64
+source: STAT5060 Tutorial 1 V4–V7 language failures
+evidence: repeated candidates reintroduced phrases such as “Course anchor”, validation/parity wording, internal release language, assessment-design explanation, generic “under a ... lens” titles and meta narration even after source-level writing passes.
+problem: Clear Writing/source prose checks alone are insufficient if the final slide language is not independently re-read in context. The presentation reviewer needs a full-deck rendered-language gate focused on audience function: every visible sentence should teach, label, interpret, source, or instruct the audience. Sentences whose main function is to explain internal workflow, validation status, assessment design, slide construction or generic AI-style framing should fail.
+candidate_action: Couple Presentations with Clear Writing at the final rendered-artifact stage, but keep presentation-specific anti-meta checks in the reviewer. Ordinary academic titles should be preferred over slogan-like generated headings.
+promotion_gate: replay across teaching and research decks where the gate catches functionally similar AI/meta prose without relying only on a phrase blacklist.
+
+
 真实项目 thread 新增时只需要最小格式：
 
 ```text
