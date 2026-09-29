@@ -54,13 +54,32 @@
     },
     {
       "name": "Longleaf_Backup_Codex",
-      "status": "PENDING_CONSUMER_AUTHORITY",
-      "identity": null,
-      "next_evidence": "Run ADAPTING_CONSUMER_RUNBOOK.md on the authorized target consumer; update consumers/Longleaf_Backup_Codex_PENDING.md with the durable result.",
-      "pending_evidence": [
+      "status": "PASS",
+      "identity": {
+        "hostname": "c151404.ll.unc.edu",
+        "platform_summary": "Longleaf Linux",
+        "user": "aereinh",
+        "home": "/overflow/htzhu/mingcheng_new",
+        "codex_home": "/overflow/htzhu/mingcheng_new/.codex",
+        "ai_skills_marketplace_ref": "release",
+        "ai_skills_marketplace_revision": "72ebd56705713c01d05fef34ccab1c5c04c15671",
+        "ai_skills_core": "0.5",
+        "workflow_core": "0.4",
+        "writing_style": "0.3",
+        "research_writing": "0.2",
+        "presentations": "0.3",
+        "bioinformatics": "0.1",
+        "medical_imaging": "0.1",
+        "bridge_runtime": "0.9.2",
+        "host_policy": "configured"
+      },
+      "evidence": [
+        "LONGLEAF_BACKUP_CODEX_MACHINE_SYNC_2026-09-29.md",
+        "LONGLEAF_BACKUP_CODEX_MACHINE_SYNC_2026-09-29.json",
+        "fresh_longleaf_backup_plugin_replay_last_message.txt",
         "consumers/Longleaf_Backup_Codex_PENDING.md"
       ],
-      "handoff_packet": "ADAPTING_CONSUMER_HANDOFF.md"
+      "fresh_session_note": "fresh child semantic PASS; plugin-replay wrapper exit_code=70 due harness contract diagnostic child Codex reported danger-full-access"
     },
     {
       "name": "CUHK_Workstation_WSL_Codex",

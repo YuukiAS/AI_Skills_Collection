@@ -1,0 +1,154 @@
+{
+  "schema": "AI_SKILLS_MACHINE_CONSUMER_SYNC_EVIDENCE_V1",
+  "consumer": "Longleaf_Backup_Codex",
+  "date": "2026-09-29",
+  "status": "PASS",
+  "identity": {
+    "hostname": "c151404.ll.unc.edu",
+    "user": "aereinh",
+    "home": "/overflow/htzhu/mingcheng_new",
+    "codex_home": "/overflow/htzhu/mingcheng_new/.codex",
+    "codex_executable": "/overflow/htzhu/mingcheng_new/bin/codex",
+    "codex_version": "codex-cli 0.142.0"
+  },
+  "ai_skills_marketplace": {
+    "name": "yuukias-ai-skills",
+    "source_type": "git",
+    "source": "https://github.com/YuukiAS/AI_Skills_Collection.git",
+    "ref": "release",
+    "sparse_paths": [
+      ".agents/plugins",
+      "plugins/codex/plugins"
+    ],
+    "revision_before": "72ebd56705713c01d05fef34ccab1c5c04c15671",
+    "revision_after": "72ebd56705713c01d05fef34ccab1c5c04c15671",
+    "remote_release": "72ebd56705713c01d05fef34ccab1c5c04c15671",
+    "upgrade_result": {
+      "selectedMarketplaces": [
+        "yuukias-ai-skills"
+      ],
+      "upgradedRoots": [],
+      "errors": []
+    }
+  },
+  "installed_ai_skills_plugins": [
+    {
+      "plugin": "workflow-core@yuukias-ai-skills",
+      "version": "0.4",
+      "enabled": true,
+      "action": "official codex plugin add refresh"
+    },
+    {
+      "plugin": "ai-skills-core@yuukias-ai-skills",
+      "version": "0.5",
+      "enabled": true,
+      "action": "official codex plugin add refresh; AI Skills Maintainer installed/enabled"
+    },
+    {
+      "plugin": "research-writing@yuukias-ai-skills",
+      "version": "0.2",
+      "enabled": true,
+      "action": "official codex plugin add refresh"
+    },
+    {
+      "plugin": "bioinformatics@yuukias-ai-skills",
+      "version": "0.1",
+      "enabled": true,
+      "action": "official codex plugin add refresh"
+    },
+    {
+      "plugin": "medical-imaging@yuukias-ai-skills",
+      "version": "0.1",
+      "enabled": true,
+      "action": "official codex plugin add refresh"
+    },
+    {
+      "plugin": "presentations@yuukias-ai-skills",
+      "version": "0.3",
+      "enabled": true,
+      "action": "official codex plugin add refresh"
+    },
+    {
+      "plugin": "writing-style@yuukias-ai-skills",
+      "version": "0.3",
+      "enabled": true,
+      "action": "official codex plugin add refresh"
+    }
+  ],
+  "not_installed_and_preserved": [
+    {
+      "plugin": "scientific-visualization@yuukias-ai-skills",
+      "version": "0.1"
+    },
+    {
+      "plugin": "web-development@yuukias-ai-skills",
+      "version": "0.3"
+    },
+    {
+      "plugin": "statistical-modeling@yuukias-ai-skills",
+      "version": "0.1"
+    }
+  ],
+  "bridge": {
+    "ai_bridge_executable": "/overflow/htzhu/mingcheng_new/conda/bin/ai-bridge",
+    "ai_bridge_where": "/overflow/htzhu/mingcheng_new/GPT_Codex_AI_Bridge_Kit",
+    "origin": "https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git",
+    "current_branch": "main",
+    "head_before": "6bbaca5a3af6240fbc88fa54cf78fa9acc147f67",
+    "head_after": "6bbaca5a3af6240fbc88fa54cf78fa9acc147f67",
+    "remote_release": "6bbaca5a3af6240fbc88fa54cf78fa9acc147f67",
+    "relation": "ALIGNED",
+    "package_version": "0.9.2",
+    "module_version": "0.9.2",
+    "editable_project_location": "/overflow/htzhu/mingcheng_new/GPT_Codex_AI_Bridge_Kit",
+    "dirty_paths_preserved": [
+      ".gitignore"
+    ],
+    "runtime_refresh_action": "not needed; editable package already points at formal release source/version",
+    "source_mutation": "none"
+  },
+  "host_policy": {
+    "validate_command": "ai-bridge host validate",
+    "result": "configured",
+    "install_rerun": false,
+    "reason_install_not_run": "validate already reported overall state: configured; no managed block/rules drift observed"
+  },
+  "fresh_session": {
+    "method": "ai-bridge plugin-replay",
+    "plugin": "ai-skills-core@yuukias-ai-skills",
+    "run_id": "20260929T052859Z-38b39c52f386",
+    "child_session_id": "01a0eba4-7cf8-7bd2-b12c-706aadd6b670",
+    "child_last_message_result": "STATE=ALREADY_CURRENT; ROUTE_C=VALIDATED; HOST_VALIDATE=PASS; BRIDGE_RELEASE_RELATION=ALIGNED",
+    "wrapper_status": "failed",
+    "wrapper_exit_code": 70,
+    "wrapper_contract_error": "child Codex reported danger-full-access",
+    "interpretation": "fresh Codex child executed installed AI Skills Maintainer and completed semantic validation; wrapper contract diagnostic is recorded as a replay-harness issue, not a component alignment failure",
+    "run_dir": "/overflow/htzhu/mingcheng_new/.ai-bridge/plugin-replay/20260929T052859Z-38b39c52f386",
+    "last_message_evidence": "fresh_longleaf_backup_plugin_replay_last_message.txt"
+  },
+  "should_not_change": {
+    "optional_plugins_installed": false,
+    "release_advanced": false,
+    "research_repositories_modified": false,
+    "codex_config_hand_edited": false,
+    "bridge_source_logic_modified": false,
+    "user_dirty_bridge_paths_preserved": true
+  },
+  "commands": [
+    "git ls-remote --heads https://github.com/YuukiAS/AI_Skills_Collection.git release main",
+    "codex plugin marketplace upgrade yuukias-ai-skills --json",
+    "codex plugin add <installed-plugin>@yuukias-ai-skills --json",
+    "git ls-remote --heads https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git release main",
+    "ai-bridge where",
+    "python -m pip show gpt-codex-ai-bridge-kit",
+    "python -c \"import ai_bridge_kit, inspect; ...\"",
+    "ai-bridge plugin-replay --target /overflow/htzhu/mingcheng_new/AI_Skills_Collection --plugin ai-skills-core@yuukias-ai-skills ...",
+    "ai-bridge host validate"
+  ],
+  "evidence_files": [
+    "LONGLEAF_BACKUP_CODEX_MACHINE_SYNC_2026-09-29.md",
+    "LONGLEAF_BACKUP_CODEX_MACHINE_SYNC_2026-09-29.json",
+    "fresh_longleaf_backup_plugin_replay_last_message.txt",
+    "consumers/Longleaf_Backup_Codex_PENDING.md"
+  ]
+}

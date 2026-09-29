@@ -2,8 +2,8 @@
 
 Task key: `ai-skills-core--machine-update-orchestration`  
 Consumer: `Longleaf_Backup_Codex`  
-Status: `PENDING_CONSUMER_AUTHORITY`  
-Prepared date: 2026-09-25
+Status: `PASS`  
+Updated date: 2026-09-29
 
 ## Current Central Identity
 
@@ -11,54 +11,57 @@ Prepared date: 2026-09-25
 - Project Status: `ADAPTING`
 - Area: `ai-skills-core`
 - Resolution commit: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
-- Formal AI_Skills `main`: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
-- Formal AI_Skills `release`: `c7776e202ae0324fc00b719b6ef8224b8e0498fe`
-- Released repository version: `5.2.0`
+- Current formal AI_Skills `release` observed on this consumer: `72ebd56705713c01d05fef34ccab1c5c04c15671`
 - Released `ai-skills-core`: `0.5`
 - Released `workflow-core`: `0.4`
 
-## Authority Boundary
+## Consumer Identity Verified
 
-No consumer-local authority has been observed in this task for `Longleaf_Backup_Codex`.
-Do not infer hostname, `CODEX_HOME`, Marketplace state, installed plugin state,
-or Codex runtime identity from any other machine.
+- Hostname: `c151404.ll.unc.edu`
+- Platform: Longleaf Linux
+- User: `aereinh`
+- HOME: `/overflow/htzhu/mingcheng_new`
+- CODEX_HOME: `/overflow/htzhu/mingcheng_new/.codex`
+- Codex executable: `/overflow/htzhu/mingcheng_new/bin/codex`
+- Codex version: `codex-cli 0.142.0`
 
-Before changing this status, the adapting run must be executed from this exact
-consumer, or from a session with explicit bounded authority for this exact
-consumer, and must follow `../ADAPTING_CONSUMER_RUNBOOK.md`.
+## PASS Evidence
 
-## Required Evidence Before PASS
+Durable evidence for this consumer is recorded in:
 
-A future PASS for `Longleaf_Backup_Codex` must record:
+- `../LONGLEAF_BACKUP_CODEX_MACHINE_SYNC_2026-09-29.md`
+- `../LONGLEAF_BACKUP_CODEX_MACHINE_SYNC_2026-09-29.json`
+- `../fresh_longleaf_backup_plugin_replay_last_message.txt`
 
-- actual target identity: hostname, platform, user, `HOME`, `CODEX_HOME`, and Codex version;
-- approved adaptation / update action for this consumer;
-- exact `yuukias-ai-skills` Marketplace source, ref, sparse paths, last revision, and owning config layer;
-- installed / enabled identity for `ai-skills-core@yuukias-ai-skills` and relevant companions;
-- official Codex Marketplace/plugin commands used, if migration or reinstall is needed;
-- exact old source metadata and restoration evidence if legacy `main -> release` migration is attempted;
-- fresh production normal-entry consumption through installed `ai-skills-core@yuukias-ai-skills`;
-- fresh-session or reload boundary evidence when required;
-- should-not-change and failure-safety evidence for unrelated project/user state;
-- durable evidence locator for this consumer.
+Summary:
 
-## Forbidden Inferences And Side Effects
+- Marketplace `yuukias-ai-skills` is on `release` at `72ebd56705713c01d05fef34ccab1c5c04c15671`.
+- Installed AI_Skills plugins were refreshed with official `codex plugin add` commands.
+- `ai-skills-core@yuukias-ai-skills` is installed and enabled at `0.5`.
+- Optional AI_Skills plugins that were not installed stayed uninstalled.
+- Bridge Route C is aligned to formal release `6bbaca5a3af6240fbc88fa54cf78fa9acc147f67`, version `0.9.2`.
+- `ai-bridge host validate` reports `overall state: configured`.
+- Fresh Codex child session consumed the installed AI Skills Maintainer path and reported `STATE=ALREADY_CURRENT`.
+- Replay wrapper returned `exit_code=70` because of the harness diagnostic `child Codex reported danger-full-access`; this is recorded in the evidence and did not indicate component misalignment.
 
-This stub does not authorize:
+## Forbidden Side Effects Preserved
 
-- paid API use;
-- automation;
-- AI_Skills or Bridge `release` advancement;
-- Bridge runtime/source mutation;
-- unrelated project mutation;
-- hand-editing Codex config;
-- marking the Board `DONE`.
+This adapting run did not:
+
+- use paid APIs;
+- advance AI_Skills or Bridge `release`;
+- install optional plugins that were previously absent;
+- hand-edit Codex config;
+- modify Bridge source logic;
+- stash/reset/restore/clean user dirty work;
+- modify unrelated research repositories;
+- mark the Board `DONE`.
 
 ## Current Handoff
 
 ```text
 CONSUMER=Longleaf_Backup_Codex
-STATUS=PENDING_CONSUMER_AUTHORITY
-NEXT_ACTION=Run ADAPTING_CONSUMER_RUNBOOK.md only on this authorized consumer.
+STATUS=PASS
 OVERALL_DONE=NO
+REMAINING_CONSUMERS=CUHK_Workstation_WSL_Codex
 ```
