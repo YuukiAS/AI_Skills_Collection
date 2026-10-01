@@ -1,0 +1,255 @@
+{
+  "captured_at": "2026-10-01T13:55:06.219244+00:00",
+  "cutover_allowed": true,
+  "incompatible_labels": [],
+  "latest_main_semantic_drift_check": {
+    "latest_main_conflicts_with_v7_board_append": false,
+    "notes": [
+      "origin/main has no v7 section 18 in docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md; task branch appends the reviewed v7 taxonomy/intake/audit/stale-safety section.",
+      "origin/main parallel commits are docs/design, docs/goals, docs/operations, docs/plugin-todos, docs/skill-todos updates unrelated to the reviewed v7 append or label definitions."
+    ],
+    "parallel_main_commits_preserved_for_stage_b_integration": true,
+    "v6_1_remains_independent": true
+  },
+  "lifecycle_repair_review": {
+    "G7_LABEL_CUTOVER_AUTHORIZED": "YES",
+    "LIFECYCLE_DRIFT_REPAIR": "PASS",
+    "path": "results/repo--maintenance-board-issue-maturity/LIFECYCLE_DRIFT_REVIEW.md"
+  },
+  "maintenance_track_protected_baseline": {
+    "before": {
+      "color": "5319e7",
+      "description": "Tracked by AI Skills Maintenance board",
+      "exists": true
+    },
+    "intended": {
+      "color": "5319e7",
+      "description": "Tracked by AI Skills Maintenance board",
+      "name": "maintenance-track"
+    },
+    "matches_protected_definition": true,
+    "mutated_by_v7": false
+  },
+  "origin_main": "79206bfa423f346bd2567fd76e12ef35ef070155",
+  "repo": "YuukiAS/AI_Skills_Collection",
+  "schema": "ai-skills-maintenance-board-v7-pre-cutover-label-definitions/v1",
+  "task_branch_head": "2a3f0d5f48495933b077d2af658c1574e9fbb723",
+  "v7_label_definitions": [
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "fbca04",
+      "intended_description": "进入正式维护前，等待 AI_Skills central triage",
+      "name": "triage:needed",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "fef2c0",
+      "intended_description": "进入正式维护前仍缺少关键事实或证据",
+      "name": "triage:needs-info",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "d73a4a",
+      "intended_description": "已建立能力或规则在真实使用中失效或回归",
+      "name": "kind:regression",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "a2eeef",
+      "intended_description": "改进现有能力的质量、易用性、完整性或可维护性",
+      "name": "kind:enhancement",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "0e8a16",
+      "intended_description": "新增当前系统尚未实质提供的用户能力",
+      "name": "kind:new-capability",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "7057ff",
+      "intended_description": "维护流程、生命周期、发布、交接或治理机制",
+      "name": "kind:governance",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "c5def5",
+      "intended_description": "主要属于一个中央 plugin 的维护工作",
+      "name": "scope:plugin",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "bfdadc",
+      "intended_description": "主要属于独立安装的 standalone skill",
+      "name": "scope:standalone-skill",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "f9d0c4",
+      "intended_description": "AI_Skills_Collection 仓库级 workflow 或治理",
+      "name": "scope:repo-workflow",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "d4c5f9",
+      "intended_description": "AI_Skills owner 的工作跨越一个以上 canonical repo",
+      "name": "scope:cross-repo",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "ededed",
+      "intended_description": "Search mirror of Project Area: workflow-core",
+      "name": "area:workflow-core",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "ededed",
+      "intended_description": "Search mirror of Project Area: ai-skills-core",
+      "name": "area:ai-skills-core",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "ededed",
+      "intended_description": "Search mirror of Project Area: writing-style",
+      "name": "area:writing-style",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "ededed",
+      "intended_description": "Search mirror of Project Area: research-writing",
+      "name": "area:research-writing",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "ededed",
+      "intended_description": "Search mirror of Project Area: presentations",
+      "name": "area:presentations",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "ededed",
+      "intended_description": "Search mirror of Project Area: scientific-visualization",
+      "name": "area:scientific-visualization",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "ededed",
+      "intended_description": "Search mirror of Project Area: web-development",
+      "name": "area:web-development",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "ededed",
+      "intended_description": "Search mirror of Project Area: statistical-modeling",
+      "name": "area:statistical-modeling",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "ededed",
+      "intended_description": "Search mirror of Project Area: bioinformatics",
+      "name": "area:bioinformatics",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "ededed",
+      "intended_description": "Search mirror of Project Area: medical-imaging",
+      "name": "area:medical-imaging",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "ededed",
+      "intended_description": "Search mirror of Project Area: standalone-skill",
+      "name": "area:standalone-skill",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "ededed",
+      "intended_description": "Search mirror of Project Area: repo",
+      "name": "area:repo",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "ededed",
+      "intended_description": "Search mirror of Project Area: cross-plugin",
+      "name": "area:cross-plugin",
+      "semantic_compatibility": "ABSENT"
+    },
+    {
+      "current_color": null,
+      "current_description": null,
+      "existed_before_v7": false,
+      "intended_color": "0366d6",
+      "intended_description": "AI_Skills-owned work has a real Bridge Kit integration/dependency dimension",
+      "name": "integration:bridge-kit",
+      "semantic_compatibility": "ABSENT"
+    }
+  ]
+}
