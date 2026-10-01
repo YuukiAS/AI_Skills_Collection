@@ -1,0 +1,69 @@
+name: Existing plugin / skill real failure
+description: Report a real failure from an existing AI_Skills plugin or standalone skill.
+title: "[Failure] "
+labels:
+  - triage:needed
+body:
+  - type: dropdown
+    id: owner_type
+    attributes:
+      label: Owner type
+      description: Choose the closest owner. Maintainers will confirm during triage.
+      options:
+        - Central plugin
+        - Standalone skill
+        - Unsure
+    validations:
+      required: true
+  - type: input
+    id: target
+    attributes:
+      label: Target plugin or skill
+      description: Name the plugin or standalone skill if you know it.
+      placeholder: e.g. presentations, writing-style, render-chinese-math-pdf
+    validations:
+      required: true
+  - type: textarea
+    id: real_context
+    attributes:
+      label: Real task or project context
+      description: Describe where the failure happened without pasting private material.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should the plugin or skill have done?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or reproduction locator
+      description: Link or path to a safe artifact, issue, commit, render, or task note.
+    validations:
+      required: true
+  - type: textarea
+    id: project_specific
+    attributes:
+      label: Project-specific details
+      description: What context belongs only to this project and should not become a generic rule?
+    validations:
+      required: false
+  - type: checkboxes
+    id: privacy_check
+    attributes:
+      label: Privacy check
+      options:
+        - label: I did not paste private, unpublished, sensitive, or restricted material into this public Issue.
+          required: true
+    validations:
+      required: true

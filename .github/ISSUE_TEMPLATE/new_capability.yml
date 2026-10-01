@@ -1,0 +1,59 @@
+name: New AI_Skills capability proposal
+description: Propose a user-visible capability that AI_Skills does not currently provide.
+title: "[Capability] "
+labels:
+  - triage:needed
+  - kind:new-capability
+body:
+  - type: textarea
+    id: user_problem
+    attributes:
+      label: User problem
+      description: What real user problem should AI_Skills help solve?
+    validations:
+      required: true
+  - type: textarea
+    id: current_gap
+    attributes:
+      label: Current gap
+      description: Why do the current plugin, skill, or workflow entries not cover it?
+    validations:
+      required: true
+  - type: textarea
+    id: expected_entry
+    attributes:
+      label: Expected normal entry
+      description: How should a user naturally ask for or trigger this capability?
+    validations:
+      required: true
+  - type: input
+    id: owner_if_known
+    attributes:
+      label: Owner if known
+      description: Optional plugin, standalone skill, or repo workflow owner.
+      placeholder: e.g. workflow-core, ai-skills-core, standalone-skill
+    validations:
+      required: false
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples or evidence
+      description: Give concrete safe examples, artifacts, projects, or links that show the need.
+    validations:
+      required: true
+  - type: textarea
+    id: non_goal
+    attributes:
+      label: Non-goal or project-local detail
+      description: What should stay out of the generic capability?
+    validations:
+      required: false
+  - type: checkboxes
+    id: privacy_check
+    attributes:
+      label: Privacy check
+      options:
+        - label: I did not paste private, unpublished, sensitive, or restricted material into this public Issue.
+          required: true
+    validations:
+      required: true
