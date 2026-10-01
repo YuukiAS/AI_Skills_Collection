@@ -342,3 +342,27 @@ Current state:
 - v4.1 architecture is Critic-approved; multiple real AI Research Stack regressions have now been recorded, and the user has intentionally stopped further Project-setting micro-tuning until a broader Planner round evaluates the standalone Skill direction;
 - **no production standalone Skill is authorized or created yet**;
 - do not add a Skill directory, runtime metadata, README card, registry/catalog entry, version bump, Marketplace route, Plugin wrapper, or release artifact until a later user instruction explicitly opens implementation.
+
+
+## 2026-10-01 standalone Skill design round v1
+
+The broader product/design round is now anchored at:
+
+`docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_STANDALONE_SKILL_DESIGN_V1_PLANNER_PROPOSAL_2026-10-01.md`
+
+Planner conclusion:
+
+- the candidate remains justified as a standalone Skill because the reusable problem is live-setting/history/canonical-source reconciliation under a finite instruction budget, not ordinary prose polishing;
+- `chinese-prose` remains the Chinese realization/final-readability helper, `writing-fidelity` remains the preservation guardrail, and `scientific-rewrite` remains a scientific-document structural rewrite route;
+- `workflow-core` owns complex-task process/gates and `ai-skills-core` owns later AI_Skills repository implementation/release maintenance; neither replaces the candidate Skill's Project-instruction placement judgment;
+- exact live Project setting is required before any safe full replacement claim;
+- missing history/canonical source/budget information must degrade the edit honestly rather than being guessed;
+- bounded edit is the default; full rewrite requires a real cross-cutting contradiction, pervasive placement failure, material multi-scope imbalance, budget impossibility, source-authority drift, or an explicit user request;
+- no Skill implementation, Plugin, README/version/registry/catalog/Marketplace/profile/release work is authorized.
+
+Current next step: independent Critic review of the v1 standalone-Skill design proposal.
+
+```text
+READY_FOR_FUTURE_SKILL_DESIGN=YES
+READY_FOR_SKILL_IMPLEMENTATION=NO
+```
