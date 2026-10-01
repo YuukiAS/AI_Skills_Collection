@@ -1,0 +1,323 @@
+{
+  "blocker": "DUPLICATE_PROJECT_AUTOMATION_READD_FALSE_DONE",
+  "captured_at": "2026-10-01T14:06:32.343645+00:00",
+  "duplicate_violation_count": 11,
+  "duplicate_violations": [
+    {
+      "code": "not-planned-false-done",
+      "issue": 52,
+      "message": "Non-completion closed Issue must not be false-DONE.",
+      "title": "Production icon sourcing and icon-registry discipline"
+    },
+    {
+      "code": "not-planned-false-done",
+      "issue": 60,
+      "message": "Non-completion closed Issue must not be false-DONE.",
+      "title": "Design corrections must round-trip through the canonical Figma before code changes"
+    },
+    {
+      "code": "not-planned-false-done",
+      "issue": 61,
+      "message": "Non-completion closed Issue must not be false-DONE.",
+      "title": "“Figma complete” needs an explicit definition of done"
+    },
+    {
+      "code": "not-planned-false-done",
+      "issue": 62,
+      "message": "Non-completion closed Issue must not be false-DONE.",
+      "title": "Design-to-code goals must not stop at either Figma or implementation"
+    },
+    {
+      "code": "not-planned-false-done",
+      "issue": 66,
+      "message": "Non-completion closed Issue must not be false-DONE.",
+      "title": "Comparable resource cards need one coherent progress and reset grammar"
+    },
+    {
+      "code": "not-planned-false-done",
+      "issue": 67,
+      "message": "Non-completion closed Issue must not be false-DONE.",
+      "title": "Opaque identifiers and formatting artifacts must not leak into glanceable UI"
+    },
+    {
+      "code": "not-planned-false-done",
+      "issue": 68,
+      "message": "Non-completion closed Issue must not be false-DONE.",
+      "title": "Severity colors must encode one stable semantic meaning"
+    },
+    {
+      "code": "not-planned-false-done",
+      "issue": 69,
+      "message": "Non-completion closed Issue must not be false-DONE.",
+      "title": "原生交互验收要覆盖真实控制路径"
+    },
+    {
+      "code": "not-planned-false-done",
+      "issue": 70,
+      "message": "Non-completion closed Issue must not be false-DONE.",
+      "title": "Configured surfaces must collapse from setup mode to status mode"
+    },
+    {
+      "code": "not-planned-false-done",
+      "issue": 71,
+      "message": "Non-completion closed Issue must not be false-DONE.",
+      "title": "Typography governance must define semantic roles and hierarchy, not only token values"
+    },
+    {
+      "code": "not-planned-false-done",
+      "issue": 72,
+      "message": "Non-completion closed Issue must not be false-DONE.",
+      "title": "Status chrome must follow one coherent visual grammar"
+    }
+  ],
+  "forbidden_actions_not_taken": [
+    "did not remove maintenance-track",
+    "did not reopen or re-close duplicate Issues",
+    "did not change Issue state/reason/title/body",
+    "did not continue to Forms/Action/Search acceptance after audit failure"
+  ],
+  "live_duplicate_readback": [
+    {
+      "issue": 52,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Production icon sourcing and icon-registry discipline"
+    },
+    {
+      "issue": 60,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Design corrections must round-trip through the canonical Figma before code changes"
+    },
+    {
+      "issue": 61,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "“Figma complete” needs an explicit definition of done"
+    },
+    {
+      "issue": 62,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Design-to-code goals must not stop at either Figma or implementation"
+    },
+    {
+      "issue": 66,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Comparable resource cards need one coherent progress and reset grammar"
+    },
+    {
+      "issue": 67,
+      "labels": [
+        "area:web-development",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Opaque identifiers and formatting artifacts must not leak into glanceable UI"
+    },
+    {
+      "issue": 68,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Severity colors must encode one stable semantic meaning"
+    },
+    {
+      "issue": 69,
+      "labels": [
+        "area:web-development",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "原生交互验收要覆盖真实控制路径"
+    },
+    {
+      "issue": 70,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Configured surfaces must collapse from setup mode to status mode"
+    },
+    {
+      "issue": 71,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Typography governance must define semantic roles and hierarchy, not only token values"
+    },
+    {
+      "issue": 72,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Status chrome must follow one coherent visual grammar"
+    }
+  ],
+  "metadata_audit_ok": false,
+  "metadata_audit_path": "results/repo--maintenance-board-issue-maturity/METADATA_AUDIT.json",
+  "metadata_audit_violation_count": 11,
+  "post_migration_evidence_path": "results/repo--maintenance-board-issue-maturity/POST_MIGRATION_ISSUE_METADATA.json",
+  "post_repair_evidence_path": "results/repo--maintenance-board-issue-maturity/LIFECYCLE_DRIFT_POST_REPAIR.json",
+  "post_repair_review_path": "results/repo--maintenance-board-issue-maturity/LIFECYCLE_DRIFT_REVIEW.md",
+  "repo": "YuukiAS/AI_Skills_Collection",
+  "required_next_action": "PLANNER_OR_REVIEWER_DECISION_FOR_DUPLICATE_PROJECT_AUTOMATION_READD",
+  "schema": "ai-skills-maintenance-board-v7-stage-b-blocker/v1",
+  "stage": "Stage B after taxonomy migration, before Forms/Action/Search acceptance",
+  "stop_reason": "Closed DUPLICATE maintenance-track Issues are again present in AI Skills Maintenance Project with Status DONE after taxonomy label migration; frozen contract requires stop/report rather than removing maintenance-track or changing Issue state."
+}

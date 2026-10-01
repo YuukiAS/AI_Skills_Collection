@@ -1,0 +1,4499 @@
+{
+  "changed_issue_count": 86,
+  "changed_issues": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    89,
+    90,
+    92
+  ],
+  "finished_at": "2026-10-01T14:04:39.561473+00:00",
+  "issue_count": 86,
+  "issue_set": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    89,
+    90,
+    92
+  ],
+  "migration_status": "PASS",
+  "mutation_boundary": {
+    "changed_only_issue_labels": true,
+    "issue_state_title_body_project_source_tracking_changed_by_this_script": false
+  },
+  "operations": [
+    {
+      "add_labels": [
+        "area:repo",
+        "kind:governance",
+        "scope:repo-workflow"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:repo",
+            "kind:governance",
+            "scope:repo-workflow"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:repo",
+        "kind:governance",
+        "scope:repo-workflow"
+      ],
+      "issue": 4,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "建立 AI_Skills 维护看板和源码追踪"
+    },
+    {
+      "add_labels": [
+        "area:workflow-core",
+        "integration:bridge-kit",
+        "kind:governance",
+        "scope:cross-repo"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:workflow-core",
+            "integration:bridge-kit",
+            "kind:governance",
+            "scope:cross-repo"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:workflow-core",
+        "integration:bridge-kit",
+        "kind:governance",
+        "scope:cross-repo"
+      ],
+      "issue": 5,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Keep AI_Skills workflow rules separate from Bridge Kit runtime bugs"
+    },
+    {
+      "add_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:workflow-core",
+            "kind:governance",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 6,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Real-task-driven Reviewed Handoff batches"
+    },
+    {
+      "add_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:workflow-core",
+            "kind:governance",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 7,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Approval-sensitive handoff should emit one bounded kickoff before execution"
+    },
+    {
+      "add_labels": [
+        "area:workflow-core",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:workflow-core",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:workflow-core",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 8,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "按页面语义检查子代理浏览器能力"
+    },
+    {
+      "add_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:workflow-core",
+            "kind:governance",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 9,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "防止任务局部禁令变成全局规则"
+    },
+    {
+      "add_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:workflow-core",
+            "kind:governance",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 10,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Post-056 acceptance artifact packaging / comparison-review fidelity"
+    },
+    {
+      "add_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:workflow-core",
+            "kind:governance",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 11,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "修复 sibling worktree 授权与沙箱执行不一致"
+    },
+    {
+      "add_labels": [
+        "area:writing-style",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:writing-style",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 12,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "README 写作默认经过 Clear Writing"
+    },
+    {
+      "add_labels": [
+        "area:writing-style",
+        "kind:new-capability",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:writing-style",
+            "kind:new-capability",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:new-capability",
+        "scope:plugin"
+      ],
+      "issue": 13,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Promote writing-style into the generic content-preserving language layer"
+    },
+    {
+      "add_labels": [
+        "area:writing-style",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:writing-style",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 14,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Advisor-facing English can sound AI-authored even when every sentence is correct"
+    },
+    {
+      "add_labels": [
+        "area:writing-style",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:writing-style",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 15,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "降低英文科研幻灯片的认知负担"
+    },
+    {
+      "add_labels": [
+        "area:writing-style",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:writing-style",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 16,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "防止中文技术文档回退到英文脚手架"
+    },
+    {
+      "add_labels": [
+        "area:writing-style",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:writing-style",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 17,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "产品 UI 文案说明用户影响"
+    },
+    {
+      "add_labels": [
+        "area:writing-style",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:writing-style",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 18,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Audit academic-humanizer only for genuinely missing academic-writing capabilities"
+    },
+    {
+      "add_labels": [
+        "area:writing-style",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:writing-style",
+            "kind:governance",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 19,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Keep style cleanup downstream of scientific structure"
+    },
+    {
+      "add_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:research-writing",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 20,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "让正式科研报告具备清楚的文档身份"
+    },
+    {
+      "add_labels": [
+        "area:research-writing",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:research-writing",
+            "kind:governance",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 21,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Keep research authoring separate from the generic language layer"
+    },
+    {
+      "add_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:research-writing",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 22,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "导师报告重写先改文档结构"
+    },
+    {
+      "add_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:research-writing",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 23,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Meaning-first rewriting should be a reusable transformation pattern"
+    },
+    {
+      "add_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:research-writing",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 24,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Cross-project replay of advisor-facing report rules"
+    },
+    {
+      "add_labels": [
+        "area:research-writing",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:research-writing",
+            "kind:governance",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 25,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Distinguish research-document semantics from comparison/render packaging"
+    },
+    {
+      "add_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:research-writing",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 26,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "导师报告先交代方法与数据"
+    },
+    {
+      "add_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:research-writing",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 27,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "导师报告隐藏无关执行细节"
+    },
+    {
+      "add_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:research-writing",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 28,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "双语导师报告分成两版"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:governance",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 29,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "CAT-TRACE v13/v14 follow-up feedback is consolidated into the canonical inbox"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 30,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Advisor discussion questions need a decision-value and answerability gate"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 31,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "检查幻灯片句间与页间过渡"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 32,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Accent colour and emphasis can drift without a semantic-role contract"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 33,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "统一引用、书目和 PDF 文本层"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 34,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Audience/page-job briefing before prose handoff materially improved a real research deck"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 35,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "强化整套研究幻灯片的读者努力审查"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 36,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Review coverage can self-certify unresolved reviewer feedback"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 37,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Presentations 0.2 completion evidence can still miss obvious rendered regressions"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 38,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Deck-wide formula, text and emphasis scale still lacks a stable hierarchy"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 39,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Diagram planning needs a semantic-purpose gate before geometry"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 40,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Table, list and paragraph primitives still drift across one deck"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 41,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Complex multi-slide models can finish without a model-closure page"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 42,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Question/background callout lacks a stable research-deck primitive"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 43,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Slide source/figure citation style is inconsistent and underspecified"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 44,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Diagram geometry and canonical edge/node treatment"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 45,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Deck-wide style system and terminology hierarchy"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 46,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Math and theory slide hierarchy"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 47,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Simulation, metric and structured-fact presentation"
+    },
+    {
+      "add_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:presentations",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 48,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Natural scientific slide language"
+    },
+    {
+      "add_labels": [
+        "area:scientific-visualization",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:scientific-visualization",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:scientific-visualization",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 49,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Delegate captions/annotations without giving away visual semantics"
+    },
+    {
+      "add_labels": [
+        "area:scientific-visualization",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:scientific-visualization",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:scientific-visualization",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 50,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Interactive scientific schematic connectors need actual-render qualitative QA"
+    },
+    {
+      "add_labels": [
+        "area:scientific-visualization",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:scientific-visualization",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:scientific-visualization",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 51,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Curriculum-driven capability refinement"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 52,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Production icon sourcing and icon-registry discipline"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 53,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Desktop-native acceptance must not be inferred from browser fixtures"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 54,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Motion, hover grammar, and performance budgets belong to the design system"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 55,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Component craftsmanship must be part of the definition of done"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 56,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "External review should confirm quality, not discover obvious local P2 defects"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 57,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Freeze whole-screen visual direction before implementation polish"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 58,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Canonical design artifacts must gate production implementation"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 59,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Visual acceptance must include a whole-product taste gate, not only defect checklists"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 60,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Design corrections must round-trip through the canonical Figma before code changes"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 61,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "“Figma complete” needs an explicit definition of done"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 62,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Design-to-code goals must not stop at either Figma or implementation"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 63,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Normal UI must have a human-readable presentation boundary"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 64,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Primary surfaces should optimize for actionability, not implementation completeness"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 65,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Metric labels and rankings must be backed by the data semantics they imply"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 66,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Comparable resource cards need one coherent progress and reset grammar"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 67,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Opaque identifiers and formatting artifacts must not leak into glanceable UI"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 68,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Severity colors must encode one stable semantic meaning"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:regression",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 69,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "原生交互验收要覆盖真实控制路径"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 70,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Configured surfaces must collapse from setup mode to status mode"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 71,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Typography governance must define semantic roles and hierarchy, not only token values"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 72,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Status chrome must follow one coherent visual grammar"
+    },
+    {
+      "add_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:statistical-modeling",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 73,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Delegate reader-facing wording without giving away statistical semantics"
+    },
+    {
+      "add_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:statistical-modeling",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 74,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Curriculum-driven capability refinement pilot"
+    },
+    {
+      "add_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:statistical-modeling",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 75,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "统计方案不能只给方法名称而把算法选择留给执行者"
+    },
+    {
+      "add_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:statistical-modeling",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 76,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "独立参照、近似误差和数值实现误差应分别说明"
+    },
+    {
+      "add_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:statistical-modeling",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 77,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "随机数与数据处理应绑定到统计目标，而不是只记录一个seed"
+    },
+    {
+      "add_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:statistical-modeling",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 78,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "小时级 MCMC / 优化不能只在终态输出，必须预先规划 progress logging"
+    },
+    {
+      "add_labels": [
+        "area:medical-imaging",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:medical-imaging",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:medical-imaging",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 79,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Hard-case lifecycle and mature-component reuse"
+    },
+    {
+      "add_labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "scope:standalone-skill"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:standalone-skill",
+            "kind:regression",
+            "scope:standalone-skill"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "scope:standalone-skill"
+      ],
+      "issue": 80,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Nominal skill invocation can still bypass the declared Pandoc + XeLaTeX production route"
+    },
+    {
+      "add_labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "scope:standalone-skill"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:standalone-skill",
+            "kind:regression",
+            "scope:standalone-skill"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "scope:standalone-skill"
+      ],
+      "issue": 81,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Current PDF validator can miss mathematical corruption and non-canonical font output"
+    },
+    {
+      "add_labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "scope:standalone-skill"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:standalone-skill",
+            "kind:regression",
+            "scope:standalone-skill"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "scope:standalone-skill"
+      ],
+      "issue": 82,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "保持 PDF 渲染默认配置稳定"
+    },
+    {
+      "add_labels": [
+        "area:standalone-skill",
+        "kind:enhancement",
+        "scope:standalone-skill"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:standalone-skill",
+            "kind:enhancement",
+            "scope:standalone-skill"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:standalone-skill",
+        "kind:enhancement",
+        "scope:standalone-skill"
+      ],
+      "issue": 83,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "避免模板按块类型发明 PDF 字体风格"
+    },
+    {
+      "add_labels": [
+        "area:bioinformatics",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:bioinformatics",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:bioinformatics",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 84,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Bioinformatics curriculum-driven capability refinement"
+    },
+    {
+      "add_labels": [
+        "area:medical-imaging",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:medical-imaging",
+            "kind:enhancement",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:medical-imaging",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 85,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "Medical imaging curriculum-driven capability refinement"
+    },
+    {
+      "add_labels": [
+        "area:ai-skills-core",
+        "kind:new-capability",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:ai-skills-core",
+            "kind:new-capability",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:ai-skills-core",
+        "kind:new-capability",
+        "scope:plugin"
+      ],
+      "issue": 86,
+      "remove_labels": [],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "让 AI Skills Maintainer 统一同步当前机器上的 AI Research Stack"
+    },
+    {
+      "add_labels": [
+        "area:web-development",
+        "kind:new-capability",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:web-development",
+            "kind:new-capability",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:new-capability",
+        "scope:plugin"
+      ],
+      "issue": 89,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "为产品 UI 文案补上页面级内容架构"
+    },
+    {
+      "add_labels": [
+        "area:writing-style",
+        "kind:new-capability",
+        "scope:plugin"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:writing-style",
+            "kind:new-capability",
+            "scope:plugin"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:new-capability",
+        "scope:plugin"
+      ],
+      "issue": 90,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "为产品 UI 微文案建立独立自然度能力"
+    },
+    {
+      "add_labels": [
+        "area:repo",
+        "kind:governance",
+        "scope:repo-workflow"
+      ],
+      "before_labels": [
+        "maintenance-track"
+      ],
+      "commands": [
+        {
+          "labels": [
+            "area:repo",
+            "kind:governance",
+            "scope:repo-workflow"
+          ],
+          "operation": "add",
+          "returncode": 0,
+          "stderr": ""
+        }
+      ],
+      "desired_taxonomy_labels": [
+        "area:repo",
+        "kind:governance",
+        "scope:repo-workflow"
+      ],
+      "issue": 92,
+      "remove_labels": [],
+      "state": "OPEN",
+      "stateReason": "",
+      "title": "完善 AI Skills Maintenance Board 的 Issue 分类与 intake"
+    }
+  ],
+  "readback": [
+    {
+      "desired_taxonomy_labels": [
+        "area:repo",
+        "kind:governance",
+        "scope:repo-workflow"
+      ],
+      "issue": 4,
+      "labels": [
+        "area:repo",
+        "kind:governance",
+        "maintenance-track",
+        "scope:repo-workflow"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "建立 AI_Skills 维护看板和源码追踪"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:workflow-core",
+        "integration:bridge-kit",
+        "kind:governance",
+        "scope:cross-repo"
+      ],
+      "issue": 5,
+      "labels": [
+        "area:workflow-core",
+        "integration:bridge-kit",
+        "kind:governance",
+        "maintenance-track",
+        "scope:cross-repo"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Keep AI_Skills workflow rules separate from Bridge Kit runtime bugs"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 6,
+      "labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Real-task-driven Reviewed Handoff batches"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 7,
+      "labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Approval-sensitive handoff should emit one bounded kickoff before execution"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:workflow-core",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 8,
+      "labels": [
+        "area:workflow-core",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "按页面语义检查子代理浏览器能力"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 9,
+      "labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "防止任务局部禁令变成全局规则"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 10,
+      "labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Post-056 acceptance artifact packaging / comparison-review fidelity"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 11,
+      "labels": [
+        "area:workflow-core",
+        "kind:governance",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "修复 sibling worktree 授权与沙箱执行不一致"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 12,
+      "labels": [
+        "area:writing-style",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "README 写作默认经过 Clear Writing"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:new-capability",
+        "scope:plugin"
+      ],
+      "issue": 13,
+      "labels": [
+        "area:writing-style",
+        "kind:new-capability",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Promote writing-style into the generic content-preserving language layer"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 14,
+      "labels": [
+        "area:writing-style",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Advisor-facing English can sound AI-authored even when every sentence is correct"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 15,
+      "labels": [
+        "area:writing-style",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "降低英文科研幻灯片的认知负担"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 16,
+      "labels": [
+        "area:writing-style",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "防止中文技术文档回退到英文脚手架"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 17,
+      "labels": [
+        "area:writing-style",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "产品 UI 文案说明用户影响"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 18,
+      "labels": [
+        "area:writing-style",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Audit academic-humanizer only for genuinely missing academic-writing capabilities"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 19,
+      "labels": [
+        "area:writing-style",
+        "kind:governance",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Keep style cleanup downstream of scientific structure"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 20,
+      "labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "让正式科研报告具备清楚的文档身份"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 21,
+      "labels": [
+        "area:research-writing",
+        "kind:governance",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Keep research authoring separate from the generic language layer"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 22,
+      "labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "导师报告重写先改文档结构"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 23,
+      "labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Meaning-first rewriting should be a reusable transformation pattern"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 24,
+      "labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Cross-project replay of advisor-facing report rules"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 25,
+      "labels": [
+        "area:research-writing",
+        "kind:governance",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Distinguish research-document semantics from comparison/render packaging"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 26,
+      "labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "导师报告先交代方法与数据"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 27,
+      "labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "导师报告隐藏无关执行细节"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 28,
+      "labels": [
+        "area:research-writing",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "双语导师报告分成两版"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:governance",
+        "scope:plugin"
+      ],
+      "issue": 29,
+      "labels": [
+        "area:presentations",
+        "kind:governance",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "CAT-TRACE v13/v14 follow-up feedback is consolidated into the canonical inbox"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 30,
+      "labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Advisor discussion questions need a decision-value and answerability gate"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 31,
+      "labels": [
+        "area:presentations",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "检查幻灯片句间与页间过渡"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 32,
+      "labels": [
+        "area:presentations",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Accent colour and emphasis can drift without a semantic-role contract"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 33,
+      "labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "统一引用、书目和 PDF 文本层"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 34,
+      "labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Audience/page-job briefing before prose handoff materially improved a real research deck"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 35,
+      "labels": [
+        "area:presentations",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "强化整套研究幻灯片的读者努力审查"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 36,
+      "labels": [
+        "area:presentations",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Review coverage can self-certify unresolved reviewer feedback"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 37,
+      "labels": [
+        "area:presentations",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Presentations 0.2 completion evidence can still miss obvious rendered regressions"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 38,
+      "labels": [
+        "area:presentations",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Deck-wide formula, text and emphasis scale still lacks a stable hierarchy"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 39,
+      "labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Diagram planning needs a semantic-purpose gate before geometry"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 40,
+      "labels": [
+        "area:presentations",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Table, list and paragraph primitives still drift across one deck"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 41,
+      "labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Complex multi-slide models can finish without a model-closure page"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 42,
+      "labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Question/background callout lacks a stable research-deck primitive"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 43,
+      "labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Slide source/figure citation style is inconsistent and underspecified"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 44,
+      "labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Diagram geometry and canonical edge/node treatment"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 45,
+      "labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Deck-wide style system and terminology hierarchy"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 46,
+      "labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Math and theory slide hierarchy"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 47,
+      "labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Simulation, metric and structured-fact presentation"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 48,
+      "labels": [
+        "area:presentations",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Natural scientific slide language"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:scientific-visualization",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 49,
+      "labels": [
+        "area:scientific-visualization",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Delegate captions/annotations without giving away visual semantics"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:scientific-visualization",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 50,
+      "labels": [
+        "area:scientific-visualization",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Interactive scientific schematic connectors need actual-render qualitative QA"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:scientific-visualization",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 51,
+      "labels": [
+        "area:scientific-visualization",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Curriculum-driven capability refinement"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 52,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "taxonomy_ready": true,
+      "title": "Production icon sourcing and icon-registry discipline"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 53,
+      "labels": [
+        "area:web-development",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "taxonomy_ready": true,
+      "title": "Desktop-native acceptance must not be inferred from browser fixtures"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 54,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "taxonomy_ready": true,
+      "title": "Motion, hover grammar, and performance budgets belong to the design system"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 55,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "taxonomy_ready": true,
+      "title": "Component craftsmanship must be part of the definition of done"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 56,
+      "labels": [
+        "area:web-development",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "taxonomy_ready": true,
+      "title": "External review should confirm quality, not discover obvious local P2 defects"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 57,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "taxonomy_ready": true,
+      "title": "Freeze whole-screen visual direction before implementation polish"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 58,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "taxonomy_ready": true,
+      "title": "Canonical design artifacts must gate production implementation"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 59,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "taxonomy_ready": true,
+      "title": "Visual acceptance must include a whole-product taste gate, not only defect checklists"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 60,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "taxonomy_ready": true,
+      "title": "Design corrections must round-trip through the canonical Figma before code changes"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 61,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "taxonomy_ready": true,
+      "title": "“Figma complete” needs an explicit definition of done"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 62,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "taxonomy_ready": true,
+      "title": "Design-to-code goals must not stop at either Figma or implementation"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 63,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "taxonomy_ready": true,
+      "title": "Normal UI must have a human-readable presentation boundary"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 64,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "taxonomy_ready": true,
+      "title": "Primary surfaces should optimize for actionability, not implementation completeness"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 65,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "taxonomy_ready": true,
+      "title": "Metric labels and rankings must be backed by the data semantics they imply"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 66,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "taxonomy_ready": true,
+      "title": "Comparable resource cards need one coherent progress and reset grammar"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 67,
+      "labels": [
+        "area:web-development",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "taxonomy_ready": true,
+      "title": "Opaque identifiers and formatting artifacts must not leak into glanceable UI"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 68,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "taxonomy_ready": true,
+      "title": "Severity colors must encode one stable semantic meaning"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:regression",
+        "scope:plugin"
+      ],
+      "issue": 69,
+      "labels": [
+        "area:web-development",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "taxonomy_ready": true,
+      "title": "原生交互验收要覆盖真实控制路径"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 70,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "taxonomy_ready": true,
+      "title": "Configured surfaces must collapse from setup mode to status mode"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 71,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "taxonomy_ready": true,
+      "title": "Typography governance must define semantic roles and hierarchy, not only token values"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 72,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "taxonomy_ready": true,
+      "title": "Status chrome must follow one coherent visual grammar"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 73,
+      "labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Delegate reader-facing wording without giving away statistical semantics"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 74,
+      "labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Curriculum-driven capability refinement pilot"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 75,
+      "labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "统计方案不能只给方法名称而把算法选择留给执行者"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 76,
+      "labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "独立参照、近似误差和数值实现误差应分别说明"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 77,
+      "labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "随机数与数据处理应绑定到统计目标，而不是只记录一个seed"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 78,
+      "labels": [
+        "area:statistical-modeling",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "小时级 MCMC / 优化不能只在终态输出，必须预先规划 progress logging"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:medical-imaging",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 79,
+      "labels": [
+        "area:medical-imaging",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Hard-case lifecycle and mature-component reuse"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "scope:standalone-skill"
+      ],
+      "issue": 80,
+      "labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "maintenance-track",
+        "scope:standalone-skill"
+      ],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "taxonomy_ready": true,
+      "title": "Nominal skill invocation can still bypass the declared Pandoc + XeLaTeX production route"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "scope:standalone-skill"
+      ],
+      "issue": 81,
+      "labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "maintenance-track",
+        "scope:standalone-skill"
+      ],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "taxonomy_ready": true,
+      "title": "Current PDF validator can miss mathematical corruption and non-canonical font output"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "scope:standalone-skill"
+      ],
+      "issue": 82,
+      "labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "maintenance-track",
+        "scope:standalone-skill"
+      ],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "taxonomy_ready": true,
+      "title": "保持 PDF 渲染默认配置稳定"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:standalone-skill",
+        "kind:enhancement",
+        "scope:standalone-skill"
+      ],
+      "issue": 83,
+      "labels": [
+        "area:standalone-skill",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:standalone-skill"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "避免模板按块类型发明 PDF 字体风格"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:bioinformatics",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 84,
+      "labels": [
+        "area:bioinformatics",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Bioinformatics curriculum-driven capability refinement"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:medical-imaging",
+        "kind:enhancement",
+        "scope:plugin"
+      ],
+      "issue": 85,
+      "labels": [
+        "area:medical-imaging",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "Medical imaging curriculum-driven capability refinement"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:ai-skills-core",
+        "kind:new-capability",
+        "scope:plugin"
+      ],
+      "issue": 86,
+      "labels": [
+        "area:ai-skills-core",
+        "kind:new-capability",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "taxonomy_ready": true,
+      "title": "让 AI Skills Maintainer 统一同步当前机器上的 AI Research Stack"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:web-development",
+        "kind:new-capability",
+        "scope:plugin"
+      ],
+      "issue": 89,
+      "labels": [
+        "area:web-development",
+        "kind:new-capability",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "为产品 UI 文案补上页面级内容架构"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:writing-style",
+        "kind:new-capability",
+        "scope:plugin"
+      ],
+      "issue": 90,
+      "labels": [
+        "area:writing-style",
+        "kind:new-capability",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "为产品 UI 微文案建立独立自然度能力"
+    },
+    {
+      "desired_taxonomy_labels": [
+        "area:repo",
+        "kind:governance",
+        "scope:repo-workflow"
+      ],
+      "issue": 92,
+      "labels": [
+        "area:repo",
+        "kind:governance",
+        "maintenance-track",
+        "scope:repo-workflow"
+      ],
+      "state": "OPEN",
+      "stateReason": "",
+      "taxonomy_ready": true,
+      "title": "完善 AI Skills Maintenance Board 的 Issue 分类与 intake"
+    }
+  ],
+  "repo": "YuukiAS/AI_Skills_Collection",
+  "schema": "ai-skills-maintenance-board-v7-post-migration/v1",
+  "started_at": "2026-10-01T14:04:39.561415+00:00",
+  "violations": []
+}
