@@ -1,0 +1,273 @@
+{
+  "blocker": "DUPLICATE_PROJECT_AUTOMATION_READD_FALSE_DONE",
+  "blocker_still_present": true,
+  "captured_at": "2026-10-01T14:10:15.656128+00:00",
+  "contract_effect": "Stop before Forms/Action/Search/Issue #92 closure; do not remove maintenance-track or change Issue state/reason without a reviewed amendment.",
+  "duplicate_issue_count": 11,
+  "live_duplicate_readback": [
+    {
+      "has_maintenance_track": true,
+      "in_ai_skills_maintenance_done": true,
+      "issue": 52,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Production icon sourcing and icon-registry discipline"
+    },
+    {
+      "has_maintenance_track": true,
+      "in_ai_skills_maintenance_done": true,
+      "issue": 60,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Design corrections must round-trip through the canonical Figma before code changes"
+    },
+    {
+      "has_maintenance_track": true,
+      "in_ai_skills_maintenance_done": true,
+      "issue": 61,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "“Figma complete” needs an explicit definition of done"
+    },
+    {
+      "has_maintenance_track": true,
+      "in_ai_skills_maintenance_done": true,
+      "issue": 62,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Design-to-code goals must not stop at either Figma or implementation"
+    },
+    {
+      "has_maintenance_track": true,
+      "in_ai_skills_maintenance_done": true,
+      "issue": 66,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Comparable resource cards need one coherent progress and reset grammar"
+    },
+    {
+      "has_maintenance_track": true,
+      "in_ai_skills_maintenance_done": true,
+      "issue": 67,
+      "labels": [
+        "area:web-development",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Opaque identifiers and formatting artifacts must not leak into glanceable UI"
+    },
+    {
+      "has_maintenance_track": true,
+      "in_ai_skills_maintenance_done": true,
+      "issue": 68,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Severity colors must encode one stable semantic meaning"
+    },
+    {
+      "has_maintenance_track": true,
+      "in_ai_skills_maintenance_done": true,
+      "issue": 69,
+      "labels": [
+        "area:web-development",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "原生交互验收要覆盖真实控制路径"
+    },
+    {
+      "has_maintenance_track": true,
+      "in_ai_skills_maintenance_done": true,
+      "issue": 70,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Configured surfaces must collapse from setup mode to status mode"
+    },
+    {
+      "has_maintenance_track": true,
+      "in_ai_skills_maintenance_done": true,
+      "issue": 71,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Typography governance must define semantic roles and hierarchy, not only token values"
+    },
+    {
+      "has_maintenance_track": true,
+      "in_ai_skills_maintenance_done": true,
+      "issue": 72,
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "projectItems": [
+        {
+          "status": {
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "title": "AI Skills Maintenance"
+        }
+      ],
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Status chrome must follow one coherent visual grammar"
+    }
+  ],
+  "next_action": "PLANNER_OR_REVIEWER_DECISION_FOR_DUPLICATE_PROJECT_AUTOMATION_READD",
+  "origin_main": "9a23a734f75d6ff1aa8db87a211b89c5643583a7",
+  "origin_task_branch": "0293e4177339b22778a92fdbc8caa17cabbdafaf",
+  "prior_evidence": [
+    "results/repo--maintenance-board-issue-maturity/STAGE_B_DUPLICATE_AUTOMATION_READD_BLOCKER.json",
+    "results/repo--maintenance-board-issue-maturity/METADATA_AUDIT.json",
+    "results/repo--maintenance-board-issue-maturity/POST_MIGRATION_ISSUE_METADATA.json"
+  ],
+  "repo": "YuukiAS/AI_Skills_Collection",
+  "schema": "ai-skills-maintenance-board-v7-stage-b-blocker-continuation/v1",
+  "task_branch_head": "0293e4177339b22778a92fdbc8caa17cabbdafaf"
+}
