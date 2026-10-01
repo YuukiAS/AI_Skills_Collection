@@ -55,6 +55,23 @@ problem:
 project-specific context: the concrete AI Research Stack workflow names and repositories are local examples. The reusable failure is instruction-budget waste caused by unnecessary English, duplicated contract prose and failure to distinguish exact identifiers from ordinary translatable concepts.
 
 
+
+### Live Project editing must use the actual setting, Project history, and canonical repo together
+status: NEW
+source: repeated real AI Research Stack Project-setting regressions, 2026-10-01
+evidence: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_REAL_PROJECT_REGRESSION_LESSONS_2026-10-01.md`
+problem:
+- A repository candidate can become stale relative to the text actually saved in ChatGPT Project Settings. In this real round, treating an older repo Reference/Candidate as the live baseline would have removed later user-approved governance rules.
+- Future Project-instruction editing must therefore start from the actual current Project setting, then reconcile relevant Project thread history and current canonical repo sources. Old candidates and summaries are evidence, not automatic authority.
+- The reusable product problem is broader than Chinese readability. It includes finite character budget, bounded edits, semantic preservation, multi-scope balance, durable locators, exact identifiers, and protection of the user's latest accepted decisions.
+- Chinese readability regressions showed that source-heavy tasks can leak descriptive English labels into user-facing prose even when the Project has a reading-layer contract. This is one evaluation dimension, not the standalone Skill's entire product definition.
+- Examples of leaked English are regression evidence only. They must not become a banned-word list, mandatory translation dictionary, English-count/ratio threshold, or other surface-form scoring system.
+- Repeatedly tightening one Project setting can reach diminishing returns and overfit one test prompt. Regression comparisons should freeze the source/ref where possible, distinguish source changes from setting changes, and stop adding rules when marginal benefit is not demonstrated.
+- The editor should make changes reviewable: show a bounded diff against the actual live setting, explain substantive edits briefly, preserve unchanged governance semantics, and also provide a clean full replacement when requested.
+- The empirical ~8,000-character budget used in these Project revisions is a user/project planning constraint, not a universal ChatGPT product limit. The reusable requirement is to inspect the active budget, preserve semantic density, and leave maintainable headroom.
+project-specific context: AI Research Stack and the workflow-core 0.4/0.5 comparison were the regression environment. The reusable requirement is a Project-instruction editor that reasons over live Project state + relevant history + canonical repo context under a finite budget, rather than a generic Chinese rewriter or blacklist-driven linter.
+
+
 ## Reference snapshots for future design/evaluation
 
 These are user-provided real Project-instruction snapshots retained as evidence for the future standalone skill. They are examples for comparison, not canonical workflow contracts and not instructions to copy verbatim into other Projects.
@@ -316,11 +333,12 @@ The recent ChatGPT readability / Project-instruction design rounds are now prese
 - current AI Research Stack candidate: `docs/design/project-instructions-editor/AI_RESEARCH_STACK_PROJECT_INSTRUCTIONS_CANDIDATE_V0_1_2026-10-01.md`
 - semantic-preservation audit: `docs/design/project-instructions-editor/AI_RESEARCH_STACK_PROJECT_INSTRUCTIONS_SEMANTIC_PRESERVATION_V0_1_2026-10-01.md`
 - current independent-review package: `docs/design/project-instructions-editor/AI_RESEARCH_STACK_PROJECT_INSTRUCTIONS_REVIEW_PACKAGE_V0_1_2026-10-01.md`
+- real Project regression lessons: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_REAL_PROJECT_REGRESSION_LESSONS_2026-10-01.md`
 
 Current state:
 
 - the reusable problem is now mature enough for explicit Planner/Critic design;
 - real AI Research Stack before/after evidence shows that a Project-level reading bridge helps but does not completely eliminate ordinary-English leakage;
-- v4.1 architecture is Critic-approved; the current phase is a real AI Research Stack Project-instruction candidate plus governance semantic-preservation review, still before real Project regression;
+- v4.1 architecture is Critic-approved; multiple real AI Research Stack regressions have now been recorded, and the user has intentionally stopped further Project-setting micro-tuning until a broader Planner round evaluates the standalone Skill direction;
 - **no production standalone Skill is authorized or created yet**;
 - do not add a Skill directory, runtime metadata, README card, registry/catalog entry, version bump, Marketplace route, Plugin wrapper, or release artifact until a later user instruction explicitly opens implementation.
