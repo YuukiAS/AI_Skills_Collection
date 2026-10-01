@@ -4,6 +4,8 @@ Maintenance inbox for a candidate standalone support skill for editing ChatGPT P
 
 No production skill or Plugin is created by this file. This inbox records real failures first; architecture, packaging, release route and acceptance gates remain for later Planner/Critic work.
 
+tracking: #93
+
 ## Open candidates
 
 ### Shared Project instructions can become scope-imbalanced and bloated after a local addition request
@@ -308,12 +310,13 @@ AI_Skills 的 Plan、review、测试、render、报告和交接文件必须留�
 The recent ChatGPT readability / Project-instruction design rounds are now preserved in the repository:
 
 - design history: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_READABILITY_DESIGN_HISTORY_2026-10-01.md`
-- current Planner proposal awaiting independent review: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_V4_PLANNER_PROPOSAL_2026-10-01.md`
+- prior Critic review: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_V4_CRITIC_REVIEW_2026-10-01.md`
+- current Planner proposal awaiting independent re-review: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_V4_1_PLANNER_PROPOSAL_2026-10-01.md`
 
 Current state:
 
 - the reusable problem is now mature enough for explicit Planner/Critic design;
 - real AI Research Stack before/after evidence shows that a Project-level reading bridge helps but does not completely eliminate ordinary-English leakage;
-- the current proposal considers a three-layer model: user-reading output, semantically unchanged governance text with optional language normalization, and exact machine/formal identifiers;
+- the current proposal keeps the three-layer model and adds two explicit semantic-preservation gates: governance-language normalization must preserve governance meaning, and the final user-reading rewrite must preserve conclusion/condition/authorization/evidence/uncertainty strength;
 - **no production standalone Skill is authorized or created yet**;
 - do not add a Skill directory, runtime metadata, README card, registry/catalog entry, version bump, Marketplace route, Plugin wrapper, or release artifact until a later user instruction explicitly opens implementation.
