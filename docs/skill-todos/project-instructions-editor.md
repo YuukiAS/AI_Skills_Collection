@@ -301,3 +301,19 @@ AI_Skills 的 Plan、review、测试、render、报告和交接文件必须留�
 
 默认自然中文，先结论、实际含义和下一步，再给技术证据；复杂概念先直觉后公式。简单问题短答，复杂问题完整分析，不以冗长代替思考。
 ```
+
+
+## 2026-10-01 design handoff
+
+The recent ChatGPT readability / Project-instruction design rounds are now preserved in the repository:
+
+- design history: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_READABILITY_DESIGN_HISTORY_2026-10-01.md`
+- current Planner proposal awaiting independent review: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_V4_PLANNER_PROPOSAL_2026-10-01.md`
+
+Current state:
+
+- the reusable problem is now mature enough for explicit Planner/Critic design;
+- real AI Research Stack before/after evidence shows that a Project-level reading bridge helps but does not completely eliminate ordinary-English leakage;
+- the current proposal considers a three-layer model: user-reading output, semantically unchanged governance text with optional language normalization, and exact machine/formal identifiers;
+- **no production standalone Skill is authorized or created yet**;
+- do not add a Skill directory, runtime metadata, README card, registry/catalog entry, version bump, Marketplace route, Plugin wrapper, or release artifact until a later user instruction explicitly opens implementation.
