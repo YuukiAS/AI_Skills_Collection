@@ -311,12 +311,16 @@ The recent ChatGPT readability / Project-instruction design rounds are now prese
 
 - design history: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_READABILITY_DESIGN_HISTORY_2026-10-01.md`
 - prior Critic review: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_V4_CRITIC_REVIEW_2026-10-01.md`
-- current Planner proposal awaiting independent re-review: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_V4_1_PLANNER_PROPOSAL_2026-10-01.md`
+- v4.1 architecture Critic PASS: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_V4_1_CRITIC_REVIEW_2026-10-01.md`
+- approved Planner architecture: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_V4_1_PLANNER_PROPOSAL_2026-10-01.md`
+- current AI Research Stack candidate: `docs/design/project-instructions-editor/AI_RESEARCH_STACK_PROJECT_INSTRUCTIONS_CANDIDATE_V0_1_2026-10-01.md`
+- semantic-preservation audit: `docs/design/project-instructions-editor/AI_RESEARCH_STACK_PROJECT_INSTRUCTIONS_SEMANTIC_PRESERVATION_V0_1_2026-10-01.md`
+- current independent-review package: `docs/design/project-instructions-editor/AI_RESEARCH_STACK_PROJECT_INSTRUCTIONS_REVIEW_PACKAGE_V0_1_2026-10-01.md`
 
 Current state:
 
 - the reusable problem is now mature enough for explicit Planner/Critic design;
 - real AI Research Stack before/after evidence shows that a Project-level reading bridge helps but does not completely eliminate ordinary-English leakage;
-- the current proposal keeps the three-layer model and adds two explicit semantic-preservation gates: governance-language normalization must preserve governance meaning, and the final user-reading rewrite must preserve conclusion/condition/authorization/evidence/uncertainty strength;
+- v4.1 architecture is Critic-approved; the current phase is a real AI Research Stack Project-instruction candidate plus governance semantic-preservation review, still before real Project regression;
 - **no production standalone Skill is authorized or created yet**;
 - do not add a Skill directory, runtime metadata, README card, registry/catalog entry, version bump, Marketplace route, Plugin wrapper, or release artifact until a later user instruction explicitly opens implementation.
