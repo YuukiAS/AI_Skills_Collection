@@ -98,11 +98,15 @@ tracking label = maintenance-track
 
 Project lifecycle item 只能是带 `maintenance-track` label 的 Issue。
 
-Auto-add 至少满足：
+Active auto-add admission must satisfy:
 
 ```text
-is:issue label:maintenance-track
+is:issue is:open label:maintenance-track
 ```
+
+Open `maintenance-track` Issues are eligible for automatic Project admission.
+`maintenance-track` remains the formal tracking/admission label, but the
+auto-add filter is only the active-open admission predicate.
 
 Implementation/design PR 不作为 lifecycle item。`pull request merged -> Done` 必须禁用。`issue closed -> Done` 只用于完整 closure 后的最后机械动作。
 
@@ -114,6 +118,21 @@ Implementation/design PR 不作为 lifecycle item。`pull request merged -> Done
 - repository-wide auto-close 规则保持原样。
 
 Rejected、superseded、duplicate、not-planned item 不得显示为 DONE。需要关闭时，先从 Project 移除或归档，再 truthfully close。
+
+Completed Issues that are already present in the Project remain DONE / History
+after closure. The active auto-add filter is not the mechanism for rebuilding
+completed History after a completed Project item has been removed, and tightening
+the filter must not remove existing completed Project items.
+
+Closed non-completion Issues, including duplicate, not-planned, rejected, and
+superseded Issues, remain out of the Project after removal or archival. They may
+retain `maintenance-track` as historical tracking metadata; because they are
+closed, they do not match the active auto-add admission filter.
+
+If a tracked Issue is truthfully reopened, it becomes open and can again match
+the active auto-add admission predicate.
+
+The existing `issue closed -> DONE` workflow remains unchanged.
 
 ## 6. Tracking Issue Copy
 
