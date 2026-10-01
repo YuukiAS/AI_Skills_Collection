@@ -410,6 +410,34 @@ candidate_action: Make artifact identity binding mandatory at candidate freeze. 
 promotion_gate: a mutation-after-review test correctly invalidates previous PASS.
 
 
+
+### Final presentation artifacts must be surfaced as actual openable/downloadable deliverables
+status: NEW
+tracking: #73
+source: STAT5060 Tutorial 1 Rich Edition final handoff, 2026-10-01
+evidence: `YuukiAS/STAT5060-TA` commit `511fddfda9721f00c1d8bdb3774d9a17f37c3e95` produced `STAT5060_TUTORIAL_01_RICH_EDITION_BEAMER.pdf` plus complete build/render evidence, but the executor completion message primarily exposed repository paths and status fields. The user had to ask separately whether the PDF existed and requested a result they could click to open/save locally.
+problem: A deck can pass build/render/QA and still fail the user-facing handoff if the finished PDF/PPTX is not surfaced as an actual artifact. Repository paths, commits and hashes are provenance; they are not a substitute for handing the user the file. A presentation run should not claim final human handoff merely because an artifact exists somewhere in the repo.
+candidate_action:
+- Add a final delivery gate: when a finished PDF/PPTX/source bundle exists and the host supports attachment/file-card/download/open surfaces, the final response must expose the real artifact through that surface.
+- Report canonical repo path, commit and SHA separately for provenance, but never make them the only delivery mechanism when a direct artifact surface is available.
+- Prefer at least the primary audience artifact (PDF or PPTX) and, when useful, the editable source as separate user-accessible artifacts.
+- If the runtime genuinely cannot surface a file, state that limitation explicitly and use the nearest supported materialization/handoff mechanism. Path-only output must not be treated as `READY_FOR_HUMAN_ACCEPTANCE=YES`.
+promotion_gate: one real Beamer/PDF delivery and one real editable PPTX delivery where the user can directly open/save the produced artifact from the completion message.
+
+### Beamer navigation QA must reject duplicate section declarations and duplicate visible section labels
+status: NEW
+tracking: #74
+source: STAT5060 Tutorial 1 Rich Edition human acceptance, 2026-10-01
+evidence: `YuukiAS/STAT5060-TA` commit `511fddfda9721f00c1d8bdb3774d9a17f37c3e95`; the generated Rich Edition TeX contained pairs such as `\\section{GLMs}` followed by `\\section[GLMs]{GLMs}`, likewise for GLMMs/Simulation/Bayesian/Assessment/Summary. The compiled PDF therefore exposed duplicated top-navigation labels such as `GLMs GLMs`, `GLMMs GLMMs`, `Simulation Sim`, while the automated `navigation_check.json` still reported PASS because frame counts, page denominator and destination coverage were correct.
+problem: Current navigation checks can verify page count and miniframe coverage yet miss a visibly broken section model. In Beamer, section identity is structural template chrome: duplicate section declarations must not survive merely because all frame destinations exist. This is also direct evidence for TODO #49: a course-standard template needs one canonical section declaration per logical section and a reviewer that inspects the rendered section labels, not only frame counts.
+candidate_action:
+- For generated Beamer, maintain a canonical logical-section manifest and assert exactly one `\\section...` declaration per logical section unless an explicit frozen template requires otherwise.
+- Compare the declared section sequence with rendered headline/miniframe labels; reject duplicated adjacent labels and long-title/short-title pairs that accidentally become two sections.
+- Navigation QA should check both structure and rendered text: logical section count, declaration count, visible label sequence, frame membership, destination coverage and page denominator.
+- Keep native Beamer ownership. Do not repair duplicate labels by drawing custom navigation chrome or hiding them with overlays.
+- Add a regression fixture from this Rich Edition failure so a 37-page deck with correct frame counts but duplicated section labels deterministically fails.
+promotion_gate: course-standard template implementation plus one unrelated Beamer deck both pass the structural/rendered-label gate, while the Rich Edition pre-repair artifact fails.
+
 真实项目 thread 新增时只需要最小格式：
 
 ```text
