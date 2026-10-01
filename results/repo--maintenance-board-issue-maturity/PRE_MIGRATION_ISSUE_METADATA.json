@@ -1,0 +1,4437 @@
+{
+  "canonical_tracking_issue_numbers": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    89,
+    90
+  ],
+  "issue_count": 86,
+  "issues": [
+    {
+      "canonicalTrackingSources": [],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:33:24Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 4,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "repo",
+            "optionId": "e1597c6e"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "ADAPTING",
+            "optionId": "7527fc31"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "建立 AI_Skills 维护看板和源码追踪"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jBUc",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "建立 AI_Skills 维护看板和源码追踪",
+      "updatedAt": "2026-09-24T16:39:23Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/4"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Keep AI_Skills workflow rules separate from Bridge Kit runtime bugs",
+          "source": "docs/plugin-todos/workflow-core.md",
+          "status": "PROMOTE_NOW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:35:01Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 5,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "workflow-core",
+            "optionId": "9650a835"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Keep AI_Skills workflow rules separate from Bridge Kit runtime bugs"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jCjM",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Keep AI_Skills workflow rules separate from Bridge Kit runtime bugs",
+      "updatedAt": "2026-09-24T12:35:01Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/5"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Real-task-driven Reviewed Handoff batches",
+          "source": "docs/plugin-todos/workflow-core.md",
+          "status": "PROMOTE_NOW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:35:52Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 6,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "workflow-core",
+            "optionId": "9650a835"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Real-task-driven Reviewed Handoff batches"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jDIA",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Real-task-driven Reviewed Handoff batches",
+      "updatedAt": "2026-09-24T12:35:52Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/6"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Approval-sensitive handoff should emit one bounded kickoff before execution",
+          "source": "docs/plugin-todos/workflow-core.md",
+          "status": "DEFER_AFTER_056_WORKFLOW_CORE"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:35:59Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 7,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "workflow-core",
+            "optionId": "9650a835"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Approval-sensitive handoff should emit one bounded kickoff before execution"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jDNI",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Approval-sensitive handoff should emit one bounded kickoff before execution",
+      "updatedAt": "2026-09-24T12:35:59Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/7"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Subagent browser capability checks must use rendered-page semantics, not foreground-window assumptions",
+          "source": "docs/plugin-todos/workflow-core.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:36:05Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 8,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "workflow-core",
+            "optionId": "9650a835"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "按页面语义检查子代理浏览器能力"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jDSk",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "按页面语义检查子代理浏览器能力",
+      "updatedAt": "2026-09-24T13:01:11Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/8"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Task-local prohibitions must expire with their task instead of becoming accidental global policy",
+          "source": "docs/plugin-todos/workflow-core.md",
+          "status": "DEFER_AFTER_056_WORKFLOW_CORE"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:36:11Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 9,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "workflow-core",
+            "optionId": "9650a835"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "防止任务局部禁令变成全局规则"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jDWY",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "防止任务局部禁令变成全局规则",
+      "updatedAt": "2026-09-24T13:01:12Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/9"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Post-056 acceptance artifact packaging / comparison-review fidelity",
+          "source": "docs/plugin-todos/workflow-core.md",
+          "status": "DEFER_UNTIL_056_COMPLETE"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:36:18Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 10,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "workflow-core",
+            "optionId": "9650a835"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Post-056 acceptance artifact packaging / comparison-review fidelity"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jDbo",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Post-056 acceptance artifact packaging / comparison-review fidelity",
+      "updatedAt": "2026-09-24T12:36:18Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/10"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Reviewed Handoff exact sibling worktree authorization can still be unexecutable under Host sandbox",
+          "source": "docs/plugin-todos/workflow-core.md",
+          "status": "NEW / POST_056_REFINEMENT"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:36:24Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 11,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "workflow-core",
+            "optionId": "9650a835"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "修复 sibling worktree 授权与沙箱执行不一致"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jDfA",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "修复 sibling worktree 授权与沙箱执行不一致",
+      "updatedAt": "2026-09-24T13:01:13Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/11"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Codex-authored README should always use Clear Writing, with Chinese README prose kept genuinely Chinese",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:36:30Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 12,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "writing-style",
+            "optionId": "ccae687a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "README 写作默认经过 Clear Writing"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jDig",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "README 写作默认经过 Clear Writing",
+      "updatedAt": "2026-09-24T13:01:15Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/12"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Promote `writing-style` into the generic content-preserving language layer",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "READY_FOR_PROMOTION_AFTER_050"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:36:35Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 13,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "writing-style",
+            "optionId": "ccae687a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Promote writing-style into the generic content-preserving language layer"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jDnI",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Promote writing-style into the generic content-preserving language layer",
+      "updatedAt": "2026-09-24T12:36:35Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/13"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Advisor-facing English can sound AI-authored even when every sentence is correct",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:36:41Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 14,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "writing-style",
+            "optionId": "ccae687a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Advisor-facing English can sound AI-authored even when every sentence is correct"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jDrE",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Advisor-facing English can sound AI-authored even when every sentence is correct",
+      "updatedAt": "2026-09-24T12:36:41Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/14"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "English scientific slide microcopy and full-deck prose remain cognitively heavy after a nominal final pass",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:36:46Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 15,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "writing-style",
+            "optionId": "ccae687a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "降低英文科研幻灯片的认知负担"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jDvk",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "降低英文科研幻灯片的认知负担",
+      "updatedAt": "2026-09-24T13:01:16Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/15"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Versioned Chinese technical documents can regress into English-keyword scaffolding during content-preserving revision",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:36:52Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 16,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "writing-style",
+            "optionId": "ccae687a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "防止中文技术文档回退到英文脚手架"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jD0U",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "防止中文技术文档回退到英文脚手架",
+      "updatedAt": "2026-09-24T13:01:17Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/16"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Product UI microcopy should state user consequence, not internal implementation reassurance",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:36:59Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 17,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "writing-style",
+            "optionId": "ccae687a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "产品 UI 文案说明用户影响"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jD48",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "产品 UI 文案说明用户影响",
+      "updatedAt": "2026-09-24T13:01:19Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/17"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Audit `academic-humanizer` only for genuinely missing academic-writing capabilities",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:37:04Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 18,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "writing-style",
+            "optionId": "ccae687a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Audit academic-humanizer only for genuinely missing academic-writing capabilities"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jD_A",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Audit academic-humanizer only for genuinely missing academic-writing capabilities",
+      "updatedAt": "2026-09-24T12:37:04Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/18"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Keep style cleanup downstream of scientific structure",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:37:10Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 19,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "writing-style",
+            "optionId": "ccae687a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Keep style cleanup downstream of scientific structure"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jEFI",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Keep style cleanup downstream of scientific structure",
+      "updatedAt": "2026-09-24T12:37:10Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/19"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Formal research reports can be scientifically correct yet still lack a coherent academic document identity",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "PARTIALLY_PROMOTED_IN_5.2.1"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:37:18Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 20,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "research-writing",
+            "optionId": "f81a05b4"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "让正式科研报告具备清楚的文档身份"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jELs",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "让正式科研报告具备清楚的文档身份",
+      "updatedAt": "2026-09-25T01:55:35Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/20"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Keep research authoring separate from the generic language layer",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "READY_FOR_PROMOTION"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:37:23Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 21,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "research-writing",
+            "optionId": "f81a05b4"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Keep research authoring separate from the generic language layer"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jEQM",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Keep research authoring separate from the generic language layer",
+      "updatedAt": "2026-09-24T12:37:23Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/21"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Reader-first advisor report rewriting must change the document plan, not just the wording",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "READY_FOR_PROMOTION"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:37:30Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 22,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "research-writing",
+            "optionId": "f81a05b4"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "导师报告重写先改文档结构"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jEVo",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "导师报告重写先改文档结构",
+      "updatedAt": "2026-09-24T13:01:22Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/22"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Meaning-first rewriting should be a reusable transformation pattern",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "READY_FOR_PROMOTION"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:37:36Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 23,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "research-writing",
+            "optionId": "f81a05b4"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Meaning-first rewriting should be a reusable transformation pattern"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jEaw",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Meaning-first rewriting should be a reusable transformation pattern",
+      "updatedAt": "2026-09-24T12:37:36Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/23"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Cross-project replay of advisor-facing report rules",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:37:43Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 24,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "research-writing",
+            "optionId": "f81a05b4"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Cross-project replay of advisor-facing report rules"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jEfA",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Cross-project replay of advisor-facing report rules",
+      "updatedAt": "2026-09-24T12:37:43Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/24"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Distinguish research-document semantics from comparison/render packaging",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:37:49Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 25,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "research-writing",
+            "optionId": "f81a05b4"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Distinguish research-document semantics from comparison/render packaging"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jEko",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Distinguish research-document semantics from comparison/render packaging",
+      "updatedAt": "2026-09-24T12:37:49Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/25"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Advisor/group-meeting reports need method and dataset orientation before project-specific results",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:37:56Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 26,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "research-writing",
+            "optionId": "f81a05b4"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "导师报告先交代方法与数据"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jEoU",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "导师报告先交代方法与数据",
+      "updatedAt": "2026-09-24T13:01:24Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/26"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Advisor-facing research reports should suppress execution/runtime details unless they change the scientific interpretation",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:38:01Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 27,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "research-writing",
+            "optionId": "f81a05b4"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "导师报告隐藏无关执行细节"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jEtg",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "导师报告隐藏无关执行细节",
+      "updatedAt": "2026-09-24T13:01:26Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/27"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Bilingual advisor reports should be two audience-calibrated versions, not interleaved translation",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:38:07Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 28,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "research-writing",
+            "optionId": "f81a05b4"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "双语导师报告分成两版"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jEyI",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "双语导师报告分成两版",
+      "updatedAt": "2026-09-24T13:01:27Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/28"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "CAT-TRACE v13/v14 follow-up feedback is consolidated into the canonical inbox",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:38:15Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 29,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "CAT-TRACE v13/v14 follow-up feedback is consolidated into the canonical inbox"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jE3Q",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "CAT-TRACE v13/v14 follow-up feedback is consolidated into the canonical inbox",
+      "updatedAt": "2026-09-24T12:38:15Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/29"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Advisor discussion questions need a decision-value and answerability gate",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:38:22Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 30,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Advisor discussion questions need a decision-value and answerability gate"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jE8U",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Advisor discussion questions need a decision-value and answerability gate",
+      "updatedAt": "2026-09-24T12:38:22Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/30"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Page-level language audits can pass while sentence and slide transitions remain mechanical",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:38:32Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 31,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "检查幻灯片句间与页间过渡"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jFE8",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "检查幻灯片句间与页间过渡",
+      "updatedAt": "2026-09-24T13:01:29Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/31"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Accent colour and emphasis can drift without a semantic-role contract",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:38:38Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 32,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Accent colour and emphasis can drift without a semantic-role contract"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jFI8",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Accent colour and emphasis can drift without a semantic-role contract",
+      "updatedAt": "2026-09-24T12:38:38Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/32"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Citation style, bibliography fidelity, and PDF text-layer integrity need one delivery contract",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:38:44Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 33,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "统一引用、书目和 PDF 文本层"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jFNg",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "统一引用、书目和 PDF 文本层",
+      "updatedAt": "2026-09-24T13:01:31Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/33"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Audience/page-job briefing before prose handoff materially improved a real research deck",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:38:51Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 34,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Audience/page-job briefing before prose handoff materially improved a real research deck"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jFR4",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Audience/page-job briefing before prose handoff materially improved a real research deck",
+      "updatedAt": "2026-09-24T12:38:51Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/34"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Full-deck audience-context and responsive-layout review still regresses after repeated real revisions",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:38:57Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 35,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "强化整套研究幻灯片的读者努力审查"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jFXI",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "强化整套研究幻灯片的读者努力审查",
+      "updatedAt": "2026-09-24T13:01:32Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/35"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Review coverage can self-certify unresolved reviewer feedback",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:39:03Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 36,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Review coverage can self-certify unresolved reviewer feedback"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jFcM",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Review coverage can self-certify unresolved reviewer feedback",
+      "updatedAt": "2026-09-24T12:39:03Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/36"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Presentations 0.2 completion evidence can still miss obvious rendered regressions",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:39:08Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 37,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Presentations 0.2 completion evidence can still miss obvious rendered regressions"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jFiI",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Presentations 0.2 completion evidence can still miss obvious rendered regressions",
+      "updatedAt": "2026-09-24T12:39:08Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/37"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Deck-wide formula, text and emphasis scale still lacks a stable hierarchy",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:39:14Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 38,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Deck-wide formula, text and emphasis scale still lacks a stable hierarchy"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jFmE",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Deck-wide formula, text and emphasis scale still lacks a stable hierarchy",
+      "updatedAt": "2026-09-24T12:39:14Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/38"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Diagram planning needs a semantic-purpose gate before geometry",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:39:21Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 39,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Diagram planning needs a semantic-purpose gate before geometry"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jFsI",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Diagram planning needs a semantic-purpose gate before geometry",
+      "updatedAt": "2026-09-24T12:39:21Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/39"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Table, list and paragraph primitives still drift across one deck",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:39:28Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 40,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Table, list and paragraph primitives still drift across one deck"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jFxM",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Table, list and paragraph primitives still drift across one deck",
+      "updatedAt": "2026-09-24T12:39:28Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/40"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Complex multi-slide models can finish without a model-closure page",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:39:33Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 41,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Complex multi-slide models can finish without a model-closure page"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jF2c",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Complex multi-slide models can finish without a model-closure page",
+      "updatedAt": "2026-09-24T12:39:33Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/41"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Question/background callout lacks a stable research-deck primitive",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:39:40Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 42,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Question/background callout lacks a stable research-deck primitive"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jF8g",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Question/background callout lacks a stable research-deck primitive",
+      "updatedAt": "2026-09-24T12:39:40Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/42"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Slide source/figure citation style is inconsistent and underspecified",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:39:47Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 43,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Slide source/figure citation style is inconsistent and underspecified"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jGFE",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Slide source/figure citation style is inconsistent and underspecified",
+      "updatedAt": "2026-09-24T12:39:47Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/43"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Diagram geometry and canonical edge/node treatment",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "BLOCKED_NEEDS_EVIDENCE"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:39:53Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 44,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Diagram geometry and canonical edge/node treatment"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jGK8",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Diagram geometry and canonical edge/node treatment",
+      "updatedAt": "2026-09-24T12:39:53Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/44"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Deck-wide style system and terminology hierarchy",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:40:00Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 45,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Deck-wide style system and terminology hierarchy"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jGQU",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Deck-wide style system and terminology hierarchy",
+      "updatedAt": "2026-09-24T12:40:00Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/45"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Math and theory slide hierarchy",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:40:06Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 46,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Math and theory slide hierarchy"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jGWI",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Math and theory slide hierarchy",
+      "updatedAt": "2026-09-24T12:40:06Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/46"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Simulation, metric and structured-fact presentation",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:40:11Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 47,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Simulation, metric and structured-fact presentation"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jGZw",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Simulation, metric and structured-fact presentation",
+      "updatedAt": "2026-09-24T12:40:11Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/47"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Natural scientific slide language",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:40:17Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 48,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "presentations",
+            "optionId": "0b2a7a2a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Natural scientific slide language"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jGfw",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Natural scientific slide language",
+      "updatedAt": "2026-09-24T12:40:17Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/48"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Course-standard teaching template needs structural navigation, not only colours and bands",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "PROMOTE_NOW"
+        },
+        {
+          "entry": "Delegate captions/annotations without giving away visual semantics",
+          "source": "docs/plugin-todos/scientific-visualization.md",
+          "status": "READY_FOR_PROMOTION_AFTER_LANGUAGE_LAYER"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:40:23Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 49,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "scientific-visualization",
+            "optionId": "987d548a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Delegate captions/annotations without giving away visual semantics"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jGkY",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Delegate captions/annotations without giving away visual semantics",
+      "updatedAt": "2026-09-24T12:40:23Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/49"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Teaching decks need a presenter-learning companion distinct from student-visible slides",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Interactive scientific schematic connectors need actual-render qualitative QA",
+          "source": "docs/plugin-todos/scientific-visualization.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:40:29Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 50,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "scientific-visualization",
+            "optionId": "987d548a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Interactive scientific schematic connectors need actual-render qualitative QA"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jGpc",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Interactive scientific schematic connectors need actual-render qualitative QA",
+      "updatedAt": "2026-09-24T12:40:29Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/50"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Teaching presentations need optional lecture/source cross-references without duplicating the lecture",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Curriculum-driven capability refinement",
+          "source": "docs/plugin-todos/scientific-visualization.md",
+          "status": "BLOCKED_NEEDS_EVIDENCE"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:40:36Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 51,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "scientific-visualization",
+            "optionId": "987d548a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Curriculum-driven capability refinement"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jGug",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Curriculum-driven capability refinement",
+      "updatedAt": "2026-09-24T12:40:36Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/51"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Assessment-introduction slides need answer-leakage and provisional-administration guardrails",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:47Z",
+      "createdAt": "2026-09-24T12:40:42Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 52,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Production icon sourcing and icon-registry discipline"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jG1E",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Production icon sourcing and icon-registry discipline",
+      "updatedAt": "2026-09-28T04:04:47Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/52"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Closing frames need a teaching-purpose contract, not a generic Questions/Thanks default",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Desktop-native acceptance must not be inferred from browser fixtures",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        },
+        {
+          "entry": "Native interaction acceptance must prove the intended control path, not only the final window state",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:24Z",
+      "createdAt": "2026-09-24T12:40:48Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 53,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Desktop-native acceptance must not be inferred from browser fixtures"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jG54",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Desktop-native acceptance must not be inferred from browser fixtures",
+      "updatedAt": "2026-09-28T04:04:24Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/53"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Final presentation reviewer must be extracted from the human-accepted STAT5060 reviewer, not reconstructed from memory",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Motion, hover grammar, and performance budgets belong to the design system",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:26Z",
+      "createdAt": "2026-09-24T12:40:54Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 54,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Motion, hover grammar, and performance budgets belong to the design system"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jG-8",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Motion, hover grammar, and performance budgets belong to the design system",
+      "updatedAt": "2026-09-28T04:04:26Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/54"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Reviewer calibration must be blind, artifact-bound and proven before candidate review",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Production icon sourcing and icon-registry discipline",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        },
+        {
+          "entry": "Component craftsmanship must be part of the definition of done",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        },
+        {
+          "entry": "Comparable resource cards need one coherent progress and reset grammar",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        },
+        {
+          "entry": "Severity colors must encode one stable semantic meaning",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        },
+        {
+          "entry": "Typography governance must define semantic roles and hierarchy, not only token values",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        },
+        {
+          "entry": "Status chrome must follow one coherent visual grammar",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:28Z",
+      "createdAt": "2026-09-24T12:41:00Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 55,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Component craftsmanship must be part of the definition of done"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jHFA",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Component craftsmanship must be part of the definition of done",
+      "updatedAt": "2026-09-28T04:04:28Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/55"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Human rejection must invalidate prior reviewer PASS and create persistent regression guards",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "External review should confirm quality, not discover obvious local P2 defects",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:30Z",
+      "createdAt": "2026-09-24T12:41:07Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 56,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "External review should confirm quality, not discover obvious local P2 defects"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jHMI",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "External review should confirm quality, not discover obvious local P2 defects",
+      "updatedAt": "2026-09-28T04:04:30Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/56"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Independent presentation review needs role separation, verdict isolation and role-scoped closure",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Freeze whole-screen visual direction before implementation polish",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:32Z",
+      "createdAt": "2026-09-24T12:41:12Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 57,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Freeze whole-screen visual direction before implementation polish"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jHRU",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Freeze whole-screen visual direction before implementation polish",
+      "updatedAt": "2026-09-28T04:04:32Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/57"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Rendered-pixel review must use whole-slide projection scale before zoomed diagnostics",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Canonical design artifacts must gate production implementation",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        },
+        {
+          "entry": "Design corrections must round-trip through the canonical Figma before code changes",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        },
+        {
+          "entry": "“Figma complete” needs an explicit definition of done",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        },
+        {
+          "entry": "Design-to-code goals must not stop at either Figma or implementation",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:34Z",
+      "createdAt": "2026-09-24T12:41:17Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 58,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Canonical design artifacts must gate production implementation"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jHWk",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Canonical design artifacts must gate production implementation",
+      "updatedAt": "2026-09-28T04:04:34Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/58"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Template QA must test semantic behaviour and optical geometry, not element presence",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Visual acceptance must include a whole-product taste gate, not only defect checklists",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:36Z",
+      "createdAt": "2026-09-24T12:41:23Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 59,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Visual acceptance must include a whole-product taste gate, not only defect checklists"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jHcI",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Visual acceptance must include a whole-product taste gate, not only defect checklists",
+      "updatedAt": "2026-09-28T04:04:36Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/59"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "First-use dependency checks must inspect legends, plot titles, captions, annotations and footers",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:49Z",
+      "createdAt": "2026-09-24T12:41:29Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 60,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Design corrections must round-trip through the canonical Figma before code changes"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jHhY",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Design corrections must round-trip through the canonical Figma before code changes",
+      "updatedAt": "2026-09-28T04:04:49Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/60"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Figure-caption policy must be semantic: explain the scientific object, never narrate the slide",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:52Z",
+      "createdAt": "2026-09-24T12:41:34Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 61,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "“Figma complete” needs an explicit definition of done"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jHmI",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "“Figma complete” needs an explicit definition of done",
+      "updatedAt": "2026-09-28T04:04:52Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/61"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Teaching/course-standard route should freeze a reusable standard Beamer separate from CUHK research and commercial PPT",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:54Z",
+      "createdAt": "2026-09-24T12:41:40Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 62,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Design-to-code goals must not stop at either Figma or implementation"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jHp4",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Design-to-code goals must not stop at either Figma or implementation",
+      "updatedAt": "2026-09-28T04:04:54Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/62"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Teaching closing frames may combine pedagogical recap with durable contact information",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Normal UI must have a human-readable presentation boundary",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        },
+        {
+          "entry": "Opaque identifiers and formatting artifacts must not leak into glanceable UI",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:38Z",
+      "createdAt": "2026-09-24T12:41:45Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 63,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Normal UI must have a human-readable presentation boundary"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jHu0",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Normal UI must have a human-readable presentation boundary",
+      "updatedAt": "2026-09-28T04:04:38Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/63"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Student-facing slide language needs a rendered full-deck anti-meta/anti-AI gate",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Primary surfaces should optimize for actionability, not implementation completeness",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        },
+        {
+          "entry": "Configured surfaces must collapse from setup mode to status mode",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:40Z",
+      "createdAt": "2026-09-24T12:41:51Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 64,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Primary surfaces should optimize for actionability, not implementation completeness"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jH0o",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Primary surfaces should optimize for actionability, not implementation completeness",
+      "updatedAt": "2026-09-28T04:04:40Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/64"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Reviewer runtime contract must include agent type, model, reasoning and image capability",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Metric labels and rankings must be backed by the data semantics they imply",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:42Z",
+      "createdAt": "2026-09-24T12:41:59Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 65,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Metric labels and rankings must be backed by the data semantics they imply"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jH5k",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Metric labels and rankings must be backed by the data semantics they imply",
+      "updatedAt": "2026-09-28T04:04:42Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/65"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Presentation visual review must prove actual pixel consumption, not merely receive an archive",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:56Z",
+      "createdAt": "2026-09-24T12:42:05Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 66,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Comparable resource cards need one coherent progress and reset grammar"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jH-8",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Comparable resource cards need one coherent progress and reset grammar",
+      "updatedAt": "2026-09-28T04:04:56Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/66"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Blind calibration must be frozen, sentinel-based and must not become prompt tuning on the holdout",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": "2026-09-28T04:04:58Z",
+      "createdAt": "2026-09-24T12:42:11Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 67,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Opaque identifiers and formatting artifacts must not leak into glanceable UI"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jIFc",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Opaque identifiers and formatting artifacts must not leak into glanceable UI",
+      "updatedAt": "2026-09-28T04:04:58Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/67"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Artifact review must not depend on the unfinished Presentations production plugin",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": "2026-09-28T04:05:00Z",
+      "createdAt": "2026-09-24T12:42:17Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 68,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Severity colors must encode one stable semantic meaning"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jIMw",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Severity colors must encode one stable semantic meaning",
+      "updatedAt": "2026-09-28T04:05:00Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/68"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Review transport should distinguish plugin replay from fresh reviewer execution",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": "2026-09-28T04:05:03Z",
+      "createdAt": "2026-09-24T12:42:23Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 69,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "原生交互验收要覆盖真实控制路径"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jISc",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "原生交互验收要覆盖真实控制路径",
+      "updatedAt": "2026-09-28T04:05:03Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/69"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Review standards must not Goodhart into renderer hacks",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": "2026-09-28T04:05:05Z",
+      "createdAt": "2026-09-24T12:42:30Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 70,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Configured surfaces must collapse from setup mode to status mode"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jIYQ",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Configured surfaces must collapse from setup mode to status mode",
+      "updatedAt": "2026-09-28T04:05:05Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/70"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Native template chrome must remain native; diagrams and scientific graphics use separate rendering ownership",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": "2026-09-28T04:05:07Z",
+      "createdAt": "2026-09-24T12:42:36Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 71,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Typography governance must define semantic roles and hierarchy, not only token values"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jIdA",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Typography governance must define semantic roles and hierarchy, not only token values",
+      "updatedAt": "2026-09-28T04:05:07Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/71"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Final candidate review should bind to a frozen artifact identity before independent acceptance",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": "2026-09-28T04:05:10Z",
+      "createdAt": "2026-09-24T12:42:43Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 72,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Status chrome must follow one coherent visual grammar"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jIi4",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Status chrome must follow one coherent visual grammar",
+      "updatedAt": "2026-09-28T04:05:10Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/72"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Delegate reader-facing wording without giving away statistical semantics",
+          "source": "docs/plugin-todos/statistical-modeling.md",
+          "status": "READY_FOR_PROMOTION_AFTER_LANGUAGE_LAYER"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:42:50Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 73,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "statistical-modeling",
+            "optionId": "bbde5998"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Delegate reader-facing wording without giving away statistical semantics"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jIoM",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Delegate reader-facing wording without giving away statistical semantics",
+      "updatedAt": "2026-09-24T12:42:50Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/73"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Curriculum-driven capability refinement pilot",
+          "source": "docs/plugin-todos/statistical-modeling.md",
+          "status": "BLOCKED_NEEDS_EVIDENCE"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:42:56Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 74,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "statistical-modeling",
+            "optionId": "bbde5998"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Curriculum-driven capability refinement pilot"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jIsk",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Curriculum-driven capability refinement pilot",
+      "updatedAt": "2026-09-24T12:42:56Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/74"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "统计方案不能只给方法名称而把算法选择留给执行者",
+          "source": "docs/plugin-todos/statistical-modeling.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:43:01Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 75,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "statistical-modeling",
+            "optionId": "bbde5998"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "统计方案不能只给方法名称而把算法选择留给执行者"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jIy4",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "统计方案不能只给方法名称而把算法选择留给执行者",
+      "updatedAt": "2026-09-24T12:43:01Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/75"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "独立参照、近似误差和数值实现误差应分别说明",
+          "source": "docs/plugin-todos/statistical-modeling.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:43:08Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 76,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "statistical-modeling",
+            "optionId": "bbde5998"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "独立参照、近似误差和数值实现误差应分别说明"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jI4s",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "独立参照、近似误差和数值实现误差应分别说明",
+      "updatedAt": "2026-09-24T12:43:08Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/76"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "随机数与数据处理应绑定到统计目标，而不是只记录一个seed",
+          "source": "docs/plugin-todos/statistical-modeling.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:43:13Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 77,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "statistical-modeling",
+            "optionId": "bbde5998"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "随机数与数据处理应绑定到统计目标，而不是只记录一个seed"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jI9E",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "随机数与数据处理应绑定到统计目标，而不是只记录一个seed",
+      "updatedAt": "2026-09-24T12:43:13Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/77"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "小时级 MCMC / 优化不能只在终态输出，必须预先规划 progress logging",
+          "source": "docs/plugin-todos/statistical-modeling.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:43:19Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 78,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "statistical-modeling",
+            "optionId": "bbde5998"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "小时级 MCMC / 优化不能只在终态输出，必须预先规划 progress logging"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jJB0",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "小时级 MCMC / 优化不能只在终态输出，必须预先规划 progress logging",
+      "updatedAt": "2026-09-24T12:43:19Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/78"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Hard-case lifecycle and mature-component reuse",
+          "source": "docs/plugin-todos/medical-imaging.md",
+          "status": "BLOCKED_NEEDS_EVIDENCE"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:43:29Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 79,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "medical-imaging",
+            "optionId": "361cbf53"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Hard-case lifecycle and mature-component reuse"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jJN8",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Hard-case lifecycle and mature-component reuse",
+      "updatedAt": "2026-09-24T12:43:29Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/79"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Nominal skill invocation can still bypass the declared Pandoc + XeLaTeX production route",
+          "source": "docs/skill-todos/render-chinese-math-pdf.md",
+          "status": "PROMOTED_IN_5.2.1"
+        }
+      ],
+      "closedAt": "2026-09-25T01:55:55Z",
+      "createdAt": "2026-09-24T12:43:35Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 80,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "standalone-skill",
+            "optionId": "a990d9e6"
+          },
+          "Resolution commit": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+            "text": "10e7cdfdebbac3a021dccfc964b57349bcd4aab7"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Nominal skill invocation can still bypass the declared Pandoc + XeLaTeX production route"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jJV8",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Nominal skill invocation can still bypass the declared Pandoc + XeLaTeX production route",
+      "updatedAt": "2026-09-25T01:55:55Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/80"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Current PDF validator can miss mathematical corruption and non-canonical font output",
+          "source": "docs/skill-todos/render-chinese-math-pdf.md",
+          "status": "PROMOTED_IN_5.2.1"
+        }
+      ],
+      "closedAt": "2026-09-25T01:55:55Z",
+      "createdAt": "2026-09-24T12:43:40Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 81,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "standalone-skill",
+            "optionId": "a990d9e6"
+          },
+          "Resolution commit": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+            "text": "10e7cdfdebbac3a021dccfc964b57349bcd4aab7"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Current PDF validator can miss mathematical corruption and non-canonical font output"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jJac",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Current PDF validator can miss mathematical corruption and non-canonical font output",
+      "updatedAt": "2026-09-25T01:55:55Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/81"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Rendering defaults can drift across retries even when the document purpose did not change",
+          "source": "docs/skill-todos/render-chinese-math-pdf.md",
+          "status": "PROMOTED_IN_5.2.1"
+        }
+      ],
+      "closedAt": "2026-09-25T01:55:55Z",
+      "createdAt": "2026-09-24T12:43:46Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 82,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "standalone-skill",
+            "optionId": "a990d9e6"
+          },
+          "Resolution commit": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+            "text": "10e7cdfdebbac3a021dccfc964b57349bcd4aab7"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "保持 PDF 渲染默认配置稳定"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jJgo",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "保持 PDF 渲染默认配置稳定",
+      "updatedAt": "2026-09-25T01:55:55Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/82"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Technically correct XeLaTeX output can still be visually inconsistent because the template invents typography by block class",
+          "source": "docs/skill-todos/render-chinese-math-pdf.md",
+          "status": "PARTIALLY_PROMOTED_IN_5.2.1"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:43:52Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 83,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "standalone-skill",
+            "optionId": "a990d9e6"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "避免模板按块类型发明 PDF 字体风格"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jJpA",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "避免模板按块类型发明 PDF 字体风格",
+      "updatedAt": "2026-09-25T01:55:35Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/83"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Curriculum-driven capability refinement",
+          "source": "docs/plugin-todos/bioinformatics.md",
+          "status": "BLOCKED_NEEDS_EVIDENCE"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:44:47Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 84,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "bioinformatics",
+            "optionId": "4bf9c97a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Bioinformatics curriculum-driven capability refinement"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jKVc",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Bioinformatics curriculum-driven capability refinement",
+      "updatedAt": "2026-09-24T12:44:47Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/84"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Curriculum-driven capability refinement",
+          "source": "docs/plugin-todos/medical-imaging.md",
+          "status": "BLOCKED_NEEDS_EVIDENCE"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-24T12:44:52Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 85,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "medical-imaging",
+            "optionId": "361cbf53"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "TODO",
+            "optionId": "ab128b18"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "Medical imaging curriculum-driven capability refinement"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8jKZQ",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "Medical imaging curriculum-driven capability refinement",
+      "updatedAt": "2026-09-24T12:44:52Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/85"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "AI Skills Maintainer machine update orchestration",
+          "source": "docs/plugin-todos/ai-skills-core.md",
+          "status": "PROMOTED"
+        }
+      ],
+      "closedAt": "2026-09-29T10:40:31Z",
+      "createdAt": "2026-09-24T17:00:47Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 86,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "ai-skills-core",
+            "optionId": "e1281083"
+          },
+          "Resolution commit": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+            "text": "573224edb9b81fc4f53dbc1ce9cc9b719483e8c8"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DONE",
+            "optionId": "53de53ba"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "让 AI Skills Maintainer 统一同步当前机器上的 AI Research Stack"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg8mSmA",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "让 AI Skills Maintainer 统一同步当前机器上的 AI Research Stack",
+      "updatedAt": "2026-09-29T10:44:58Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/86"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Product UI copy needs an explicit Frontend Design content-architecture contract",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-29T04:53:10Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 89,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "web-development",
+            "optionId": "78957c15"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DOING",
+            "optionId": "5bc96327"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "为产品 UI 文案补上页面级内容架构"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg9Ws2s",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "为产品 UI 文案补上页面级内容架构",
+      "updatedAt": "2026-09-29T04:53:10Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/89"
+    },
+    {
+      "canonicalTrackingSources": [
+        {
+          "entry": "Product UI copy naturalness needs a dedicated microcopy capability, not more long-form prose rules",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "NEW"
+        }
+      ],
+      "closedAt": null,
+      "createdAt": "2026-09-29T04:53:21Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 90,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "writing-style",
+            "optionId": "ccae687a"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DOING",
+            "optionId": "5bc96327"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "为产品 UI 微文案建立独立自然度能力"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg9Ws-I",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "为产品 UI 微文案建立独立自然度能力",
+      "updatedAt": "2026-09-29T04:53:21Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/90"
+    },
+    {
+      "canonicalTrackingSources": [],
+      "closedAt": null,
+      "createdAt": "2026-10-01T02:32:08Z",
+      "labels": [
+        {
+          "color": "5319e7",
+          "description": "Tracked by AI Skills Maintenance board",
+          "name": "maintenance-track"
+        }
+      ],
+      "number": 92,
+      "projectItem": {
+        "fields": {
+          "Area": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+            "name": "repo",
+            "optionId": "e1597c6e"
+          },
+          "Status": {
+            "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+            "name": "DOING",
+            "optionId": "5bc96327"
+          },
+          "Title": {
+            "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+            "text": "完善 AI Skills Maintenance Board 的 Issue 分类与 intake"
+          }
+        },
+        "id": "PVTI_lAHOA0Lgf84BkjCUzg9ziS8",
+        "project": {
+          "id": "PVT_kwHOA0Lgf84BkjCU",
+          "number": 5,
+          "title": "AI Skills Maintenance",
+          "url": "https://github.com/users/YuukiAS/projects/5"
+        }
+      },
+      "state": "OPEN",
+      "stateReason": null,
+      "title": "完善 AI Skills Maintenance Board 的 Issue 分类与 intake",
+      "updatedAt": "2026-10-01T02:32:08Z",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/92"
+    }
+  ],
+  "project": {
+    "id": "PVT_kwHOA0Lgf84BkjCU",
+    "number": 5,
+    "title": "AI Skills Maintenance",
+    "url": "https://github.com/users/YuukiAS/projects/5"
+  },
+  "repo": "YuukiAS/AI_Skills_Collection",
+  "task_key": "repo--maintenance-board-issue-maturity"
+}

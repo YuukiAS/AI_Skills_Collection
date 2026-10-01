@@ -1,0 +1,589 @@
+{
+  "actions": [
+    {
+      "action": "REMOVE_FROM_PROJECT_AS_NON_COMPLETION",
+      "closure_evidence_locators": [
+        "GitHub Issue #52 live state: CLOSED/DUPLICATE",
+        "GitHub Project item PVTI_lAHOA0Lgf84BkjCUzg8jG1E: Status DONE / Area web-development",
+        "docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md::False-DONE Guard"
+      ],
+      "direct_support_explanation": "Closed duplicate/non-completion Issue is currently represented as Project DONE; canonical repair is removal from Project, preserving Issue CLOSED/DUPLICATE and source tracking unchanged.",
+      "issue_number": 52,
+      "proposed_resolution_commit": "",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "maintenance-track",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "re-add the same Issue to AI Skills Maintenance and restore exact pre-repair Project fields",
+        "project_area_before_repair": "web-development",
+        "project_item_id_before_repair": "PVTI_lAHOA0Lgf84BkjCUzg8jG1E",
+        "project_status_before_repair": "DONE",
+        "resolution_commit_before_repair": ""
+      },
+      "title": "Production icon sourcing and icon-registry discipline"
+    },
+    {
+      "action": "SET_RESOLUTION_COMMIT",
+      "closure_evidence_locators": [
+        "docs/plugin-todos/web-development.md:38::Desktop-native acceptance must not be inferred from browser fixtures",
+        "docs/plugin-todos/web-development.md:41::resolution",
+        "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+        "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+        "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+        "GitHub Issue #53 body/comments (examined; no SHA found)"
+      ],
+      "direct_support_explanation": "Current canonical source entry has status PROMOTED, tracking #53, and resolution text directly naming production integration commit c232f2ea906277f2217c4bbce4f56df1ebd5827c; commit exists in owner repo. Issue body/comments were examined and did not contain an alternate commit SHA.",
+      "issue_number": 53,
+      "proposed_resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "Project Status",
+          "Project Area",
+          "labels",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "restore the exact pre-repair Resolution commit field value",
+        "pre_repair_resolution_commit": ""
+      },
+      "title": "Desktop-native acceptance must not be inferred from browser fixtures"
+    },
+    {
+      "action": "SET_RESOLUTION_COMMIT",
+      "closure_evidence_locators": [
+        "docs/plugin-todos/web-development.md:54::Motion, hover grammar, and performance budgets belong to the design system",
+        "docs/plugin-todos/web-development.md:57::resolution",
+        "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+        "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+        "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+        "GitHub Issue #54 body/comments (examined; no SHA found)"
+      ],
+      "direct_support_explanation": "Current canonical source entry has status PROMOTED, tracking #54, and resolution text directly naming production integration commit c232f2ea906277f2217c4bbce4f56df1ebd5827c; commit exists in owner repo. Issue body/comments were examined and did not contain an alternate commit SHA.",
+      "issue_number": 54,
+      "proposed_resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "Project Status",
+          "Project Area",
+          "labels",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "restore the exact pre-repair Resolution commit field value",
+        "pre_repair_resolution_commit": ""
+      },
+      "title": "Motion, hover grammar, and performance budgets belong to the design system"
+    },
+    {
+      "action": "SET_RESOLUTION_COMMIT",
+      "closure_evidence_locators": [
+        "docs/plugin-todos/web-development.md:72::Component craftsmanship must be part of the definition of done",
+        "docs/plugin-todos/web-development.md:75::resolution",
+        "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+        "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+        "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+        "GitHub Issue #55 body/comments (examined; no SHA found)"
+      ],
+      "direct_support_explanation": "Current canonical source entry has status PROMOTED, tracking #55, and resolution text directly naming production integration commit c232f2ea906277f2217c4bbce4f56df1ebd5827c; commit exists in owner repo. Issue body/comments were examined and did not contain an alternate commit SHA.",
+      "issue_number": 55,
+      "proposed_resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "Project Status",
+          "Project Area",
+          "labels",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "restore the exact pre-repair Resolution commit field value",
+        "pre_repair_resolution_commit": ""
+      },
+      "title": "Component craftsmanship must be part of the definition of done"
+    },
+    {
+      "action": "SET_RESOLUTION_COMMIT",
+      "closure_evidence_locators": [
+        "docs/plugin-todos/web-development.md:93::External review should confirm quality, not discover obvious local P2 defects",
+        "docs/plugin-todos/web-development.md:96::resolution",
+        "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+        "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+        "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+        "GitHub Issue #56 body/comments (examined; no SHA found)"
+      ],
+      "direct_support_explanation": "Current canonical source entry has status PROMOTED, tracking #56, and resolution text directly naming production integration commit c232f2ea906277f2217c4bbce4f56df1ebd5827c; commit exists in owner repo. Issue body/comments were examined and did not contain an alternate commit SHA.",
+      "issue_number": 56,
+      "proposed_resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "Project Status",
+          "Project Area",
+          "labels",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "restore the exact pre-repair Resolution commit field value",
+        "pre_repair_resolution_commit": ""
+      },
+      "title": "External review should confirm quality, not discover obvious local P2 defects"
+    },
+    {
+      "action": "SET_RESOLUTION_COMMIT",
+      "closure_evidence_locators": [
+        "docs/plugin-todos/web-development.md:113::Freeze whole-screen visual direction before implementation polish",
+        "docs/plugin-todos/web-development.md:116::resolution",
+        "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+        "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+        "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+        "GitHub Issue #57 body/comments (examined; no SHA found)"
+      ],
+      "direct_support_explanation": "Current canonical source entry has status PROMOTED, tracking #57, and resolution text directly naming production integration commit c232f2ea906277f2217c4bbce4f56df1ebd5827c; commit exists in owner repo. Issue body/comments were examined and did not contain an alternate commit SHA.",
+      "issue_number": 57,
+      "proposed_resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "Project Status",
+          "Project Area",
+          "labels",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "restore the exact pre-repair Resolution commit field value",
+        "pre_repair_resolution_commit": ""
+      },
+      "title": "Freeze whole-screen visual direction before implementation polish"
+    },
+    {
+      "action": "SET_RESOLUTION_COMMIT",
+      "closure_evidence_locators": [
+        "docs/plugin-todos/web-development.md:136::Canonical design artifacts must gate production implementation",
+        "docs/plugin-todos/web-development.md:139::resolution",
+        "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+        "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+        "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+        "GitHub Issue #58 body/comments (examined; no SHA found)"
+      ],
+      "direct_support_explanation": "Current canonical source entry has status PROMOTED, tracking #58, and resolution text directly naming production integration commit c232f2ea906277f2217c4bbce4f56df1ebd5827c; commit exists in owner repo. Issue body/comments were examined and did not contain an alternate commit SHA.",
+      "issue_number": 58,
+      "proposed_resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "Project Status",
+          "Project Area",
+          "labels",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "restore the exact pre-repair Resolution commit field value",
+        "pre_repair_resolution_commit": ""
+      },
+      "title": "Canonical design artifacts must gate production implementation"
+    },
+    {
+      "action": "SET_RESOLUTION_COMMIT",
+      "closure_evidence_locators": [
+        "docs/plugin-todos/web-development.md:156::Visual acceptance must include a whole-product taste gate, not only defect checklists",
+        "docs/plugin-todos/web-development.md:159::resolution",
+        "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+        "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+        "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+        "GitHub Issue #59 body/comments (examined; no SHA found)"
+      ],
+      "direct_support_explanation": "Current canonical source entry has status PROMOTED, tracking #59, and resolution text directly naming production integration commit c232f2ea906277f2217c4bbce4f56df1ebd5827c; commit exists in owner repo. Issue body/comments were examined and did not contain an alternate commit SHA.",
+      "issue_number": 59,
+      "proposed_resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "Project Status",
+          "Project Area",
+          "labels",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "restore the exact pre-repair Resolution commit field value",
+        "pre_repair_resolution_commit": ""
+      },
+      "title": "Visual acceptance must include a whole-product taste gate, not only defect checklists"
+    },
+    {
+      "action": "REMOVE_FROM_PROJECT_AS_NON_COMPLETION",
+      "closure_evidence_locators": [
+        "GitHub Issue #60 live state: CLOSED/DUPLICATE",
+        "GitHub Project item PVTI_lAHOA0Lgf84BkjCUzg8jHhY: Status DONE / Area web-development",
+        "docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md::False-DONE Guard"
+      ],
+      "direct_support_explanation": "Closed duplicate/non-completion Issue is currently represented as Project DONE; canonical repair is removal from Project, preserving Issue CLOSED/DUPLICATE and source tracking unchanged.",
+      "issue_number": 60,
+      "proposed_resolution_commit": "",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "maintenance-track",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "re-add the same Issue to AI Skills Maintenance and restore exact pre-repair Project fields",
+        "project_area_before_repair": "web-development",
+        "project_item_id_before_repair": "PVTI_lAHOA0Lgf84BkjCUzg8jHhY",
+        "project_status_before_repair": "DONE",
+        "resolution_commit_before_repair": ""
+      },
+      "title": "Design corrections must round-trip through the canonical Figma before code changes"
+    },
+    {
+      "action": "REMOVE_FROM_PROJECT_AS_NON_COMPLETION",
+      "closure_evidence_locators": [
+        "GitHub Issue #61 live state: CLOSED/DUPLICATE",
+        "GitHub Project item PVTI_lAHOA0Lgf84BkjCUzg8jHmI: Status DONE / Area web-development",
+        "docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md::False-DONE Guard"
+      ],
+      "direct_support_explanation": "Closed duplicate/non-completion Issue is currently represented as Project DONE; canonical repair is removal from Project, preserving Issue CLOSED/DUPLICATE and source tracking unchanged.",
+      "issue_number": 61,
+      "proposed_resolution_commit": "",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "maintenance-track",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "re-add the same Issue to AI Skills Maintenance and restore exact pre-repair Project fields",
+        "project_area_before_repair": "web-development",
+        "project_item_id_before_repair": "PVTI_lAHOA0Lgf84BkjCUzg8jHmI",
+        "project_status_before_repair": "DONE",
+        "resolution_commit_before_repair": ""
+      },
+      "title": "“Figma complete” needs an explicit definition of done"
+    },
+    {
+      "action": "REMOVE_FROM_PROJECT_AS_NON_COMPLETION",
+      "closure_evidence_locators": [
+        "GitHub Issue #62 live state: CLOSED/DUPLICATE",
+        "GitHub Project item PVTI_lAHOA0Lgf84BkjCUzg8jHp4: Status DONE / Area web-development",
+        "docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md::False-DONE Guard"
+      ],
+      "direct_support_explanation": "Closed duplicate/non-completion Issue is currently represented as Project DONE; canonical repair is removal from Project, preserving Issue CLOSED/DUPLICATE and source tracking unchanged.",
+      "issue_number": 62,
+      "proposed_resolution_commit": "",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "maintenance-track",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "re-add the same Issue to AI Skills Maintenance and restore exact pre-repair Project fields",
+        "project_area_before_repair": "web-development",
+        "project_item_id_before_repair": "PVTI_lAHOA0Lgf84BkjCUzg8jHp4",
+        "project_status_before_repair": "DONE",
+        "resolution_commit_before_repair": ""
+      },
+      "title": "Design-to-code goals must not stop at either Figma or implementation"
+    },
+    {
+      "action": "SET_RESOLUTION_COMMIT",
+      "closure_evidence_locators": [
+        "docs/plugin-todos/web-development.md:230::Normal UI must have a human-readable presentation boundary",
+        "docs/plugin-todos/web-development.md:233::resolution",
+        "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+        "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+        "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+        "GitHub Issue #63 body/comments (examined; no SHA found)"
+      ],
+      "direct_support_explanation": "Current canonical source entry has status PROMOTED, tracking #63, and resolution text directly naming production integration commit c232f2ea906277f2217c4bbce4f56df1ebd5827c; commit exists in owner repo. Issue body/comments were examined and did not contain an alternate commit SHA.",
+      "issue_number": 63,
+      "proposed_resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "Project Status",
+          "Project Area",
+          "labels",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "restore the exact pre-repair Resolution commit field value",
+        "pre_repair_resolution_commit": ""
+      },
+      "title": "Normal UI must have a human-readable presentation boundary"
+    },
+    {
+      "action": "SET_RESOLUTION_COMMIT",
+      "closure_evidence_locators": [
+        "docs/plugin-todos/web-development.md:239::Primary surfaces should optimize for actionability, not implementation completeness",
+        "docs/plugin-todos/web-development.md:242::resolution",
+        "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+        "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+        "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+        "GitHub Issue #64 body/comments (examined; no SHA found)"
+      ],
+      "direct_support_explanation": "Current canonical source entry has status PROMOTED, tracking #64, and resolution text directly naming production integration commit c232f2ea906277f2217c4bbce4f56df1ebd5827c; commit exists in owner repo. Issue body/comments were examined and did not contain an alternate commit SHA.",
+      "issue_number": 64,
+      "proposed_resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "Project Status",
+          "Project Area",
+          "labels",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "restore the exact pre-repair Resolution commit field value",
+        "pre_repair_resolution_commit": ""
+      },
+      "title": "Primary surfaces should optimize for actionability, not implementation completeness"
+    },
+    {
+      "action": "SET_RESOLUTION_COMMIT",
+      "closure_evidence_locators": [
+        "docs/plugin-todos/web-development.md:251::Metric labels and rankings must be backed by the data semantics they imply",
+        "docs/plugin-todos/web-development.md:254::resolution",
+        "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+        "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+        "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+        "GitHub Issue #65 body/comments (examined; no SHA found)"
+      ],
+      "direct_support_explanation": "Current canonical source entry has status PROMOTED, tracking #65, and resolution text directly naming production integration commit c232f2ea906277f2217c4bbce4f56df1ebd5827c; commit exists in owner repo. Issue body/comments were examined and did not contain an alternate commit SHA.",
+      "issue_number": 65,
+      "proposed_resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "Project Status",
+          "Project Area",
+          "labels",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "restore the exact pre-repair Resolution commit field value",
+        "pre_repair_resolution_commit": ""
+      },
+      "title": "Metric labels and rankings must be backed by the data semantics they imply"
+    },
+    {
+      "action": "REMOVE_FROM_PROJECT_AS_NON_COMPLETION",
+      "closure_evidence_locators": [
+        "GitHub Issue #66 live state: CLOSED/DUPLICATE",
+        "GitHub Project item PVTI_lAHOA0Lgf84BkjCUzg8jH-8: Status DONE / Area web-development",
+        "docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md::False-DONE Guard"
+      ],
+      "direct_support_explanation": "Closed duplicate/non-completion Issue is currently represented as Project DONE; canonical repair is removal from Project, preserving Issue CLOSED/DUPLICATE and source tracking unchanged.",
+      "issue_number": 66,
+      "proposed_resolution_commit": "",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "maintenance-track",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "re-add the same Issue to AI Skills Maintenance and restore exact pre-repair Project fields",
+        "project_area_before_repair": "web-development",
+        "project_item_id_before_repair": "PVTI_lAHOA0Lgf84BkjCUzg8jH-8",
+        "project_status_before_repair": "DONE",
+        "resolution_commit_before_repair": ""
+      },
+      "title": "Comparable resource cards need one coherent progress and reset grammar"
+    },
+    {
+      "action": "REMOVE_FROM_PROJECT_AS_NON_COMPLETION",
+      "closure_evidence_locators": [
+        "GitHub Issue #67 live state: CLOSED/DUPLICATE",
+        "GitHub Project item PVTI_lAHOA0Lgf84BkjCUzg8jIFc: Status DONE / Area web-development",
+        "docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md::False-DONE Guard"
+      ],
+      "direct_support_explanation": "Closed duplicate/non-completion Issue is currently represented as Project DONE; canonical repair is removal from Project, preserving Issue CLOSED/DUPLICATE and source tracking unchanged.",
+      "issue_number": 67,
+      "proposed_resolution_commit": "",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "maintenance-track",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "re-add the same Issue to AI Skills Maintenance and restore exact pre-repair Project fields",
+        "project_area_before_repair": "web-development",
+        "project_item_id_before_repair": "PVTI_lAHOA0Lgf84BkjCUzg8jIFc",
+        "project_status_before_repair": "DONE",
+        "resolution_commit_before_repair": ""
+      },
+      "title": "Opaque identifiers and formatting artifacts must not leak into glanceable UI"
+    },
+    {
+      "action": "REMOVE_FROM_PROJECT_AS_NON_COMPLETION",
+      "closure_evidence_locators": [
+        "GitHub Issue #68 live state: CLOSED/DUPLICATE",
+        "GitHub Project item PVTI_lAHOA0Lgf84BkjCUzg8jIMw: Status DONE / Area web-development",
+        "docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md::False-DONE Guard"
+      ],
+      "direct_support_explanation": "Closed duplicate/non-completion Issue is currently represented as Project DONE; canonical repair is removal from Project, preserving Issue CLOSED/DUPLICATE and source tracking unchanged.",
+      "issue_number": 68,
+      "proposed_resolution_commit": "",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "maintenance-track",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "re-add the same Issue to AI Skills Maintenance and restore exact pre-repair Project fields",
+        "project_area_before_repair": "web-development",
+        "project_item_id_before_repair": "PVTI_lAHOA0Lgf84BkjCUzg8jIMw",
+        "project_status_before_repair": "DONE",
+        "resolution_commit_before_repair": ""
+      },
+      "title": "Severity colors must encode one stable semantic meaning"
+    },
+    {
+      "action": "REMOVE_FROM_PROJECT_AS_NON_COMPLETION",
+      "closure_evidence_locators": [
+        "GitHub Issue #69 live state: CLOSED/DUPLICATE",
+        "GitHub Project item PVTI_lAHOA0Lgf84BkjCUzg8jISc: Status DONE / Area web-development",
+        "docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md::False-DONE Guard"
+      ],
+      "direct_support_explanation": "Closed duplicate/non-completion Issue is currently represented as Project DONE; canonical repair is removal from Project, preserving Issue CLOSED/DUPLICATE and source tracking unchanged.",
+      "issue_number": 69,
+      "proposed_resolution_commit": "",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "maintenance-track",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "re-add the same Issue to AI Skills Maintenance and restore exact pre-repair Project fields",
+        "project_area_before_repair": "web-development",
+        "project_item_id_before_repair": "PVTI_lAHOA0Lgf84BkjCUzg8jISc",
+        "project_status_before_repair": "DONE",
+        "resolution_commit_before_repair": ""
+      },
+      "title": "原生交互验收要覆盖真实控制路径"
+    },
+    {
+      "action": "REMOVE_FROM_PROJECT_AS_NON_COMPLETION",
+      "closure_evidence_locators": [
+        "GitHub Issue #70 live state: CLOSED/DUPLICATE",
+        "GitHub Project item PVTI_lAHOA0Lgf84BkjCUzg8jIYQ: Status DONE / Area web-development",
+        "docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md::False-DONE Guard"
+      ],
+      "direct_support_explanation": "Closed duplicate/non-completion Issue is currently represented as Project DONE; canonical repair is removal from Project, preserving Issue CLOSED/DUPLICATE and source tracking unchanged.",
+      "issue_number": 70,
+      "proposed_resolution_commit": "",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "maintenance-track",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "re-add the same Issue to AI Skills Maintenance and restore exact pre-repair Project fields",
+        "project_area_before_repair": "web-development",
+        "project_item_id_before_repair": "PVTI_lAHOA0Lgf84BkjCUzg8jIYQ",
+        "project_status_before_repair": "DONE",
+        "resolution_commit_before_repair": ""
+      },
+      "title": "Configured surfaces must collapse from setup mode to status mode"
+    },
+    {
+      "action": "REMOVE_FROM_PROJECT_AS_NON_COMPLETION",
+      "closure_evidence_locators": [
+        "GitHub Issue #71 live state: CLOSED/DUPLICATE",
+        "GitHub Project item PVTI_lAHOA0Lgf84BkjCUzg8jIdA: Status DONE / Area web-development",
+        "docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md::False-DONE Guard"
+      ],
+      "direct_support_explanation": "Closed duplicate/non-completion Issue is currently represented as Project DONE; canonical repair is removal from Project, preserving Issue CLOSED/DUPLICATE and source tracking unchanged.",
+      "issue_number": 71,
+      "proposed_resolution_commit": "",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "maintenance-track",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "re-add the same Issue to AI Skills Maintenance and restore exact pre-repair Project fields",
+        "project_area_before_repair": "web-development",
+        "project_item_id_before_repair": "PVTI_lAHOA0Lgf84BkjCUzg8jIdA",
+        "project_status_before_repair": "DONE",
+        "resolution_commit_before_repair": ""
+      },
+      "title": "Typography governance must define semantic roles and hierarchy, not only token values"
+    },
+    {
+      "action": "REMOVE_FROM_PROJECT_AS_NON_COMPLETION",
+      "closure_evidence_locators": [
+        "GitHub Issue #72 live state: CLOSED/DUPLICATE",
+        "GitHub Project item PVTI_lAHOA0Lgf84BkjCUzg8jIi4: Status DONE / Area web-development",
+        "docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md::False-DONE Guard"
+      ],
+      "direct_support_explanation": "Closed duplicate/non-completion Issue is currently represented as Project DONE; canonical repair is removal from Project, preserving Issue CLOSED/DUPLICATE and source tracking unchanged.",
+      "issue_number": 72,
+      "proposed_resolution_commit": "",
+      "rollback_plan": {
+        "do_not_change": [
+          "Issue state",
+          "Issue stateReason",
+          "maintenance-track",
+          "source TODO",
+          "tracking:#N"
+        ],
+        "if_repair_executed": "re-add the same Issue to AI Skills Maintenance and restore exact pre-repair Project fields",
+        "project_area_before_repair": "web-development",
+        "project_item_id_before_repair": "PVTI_lAHOA0Lgf84BkjCUzg8jIi4",
+        "project_status_before_repair": "DONE",
+        "resolution_commit_before_repair": ""
+      },
+      "title": "Status chrome must follow one coherent visual grammar"
+    }
+  ],
+  "branch": "reviewed/repo--maintenance-board-issue-maturity",
+  "g7_label_cutover_authorized": false,
+  "generated_at": "2026-10-01T07:54:33Z",
+  "global_mutation_limits_after_review_pass": [
+    "Only set reviewed Resolution commit on the ten completed Issues' existing Project items",
+    "Only remove the eleven duplicate/non-completion Issues from AI Skills Maintenance Project",
+    "Do not edit Issue state, title, body, labels, source TODOs, tracking:#N, Project Area, or taxonomy labels"
+  ],
+  "live_lifecycle_repair_authorized": false,
+  "live_mutation_performed": false,
+  "material_live_state_delta_from_stage_a": [],
+  "repair_may_proceed_after_review_pass": true,
+  "required_review_fields_before_mutation": {
+    "LIFECYCLE_RECONCILIATION_PLAN": "PASS",
+    "LIVE_LIFECYCLE_REPAIR_AUTHORIZED": "YES"
+  },
+  "requires_independent_review_before_live_mutation": true,
+  "schema": "AI_SKILLS_MAINTENANCE_BOARD_LIFECYCLE_DRIFT_RECONCILIATION_PLAN_V1",
+  "task": "repo--maintenance-board-issue-maturity"
+}
