@@ -147,3 +147,38 @@ Maintenance inbox:
 Current Planner proposal:
 
 `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_V4_PLANNER_PROPOSAL_2026-10-01.md`
+
+
+## 9. v4.1 后的真实 Project 回归：从“继续加规则”转向“记录边界”
+
+v4.1 架构通过后，AI Research Stack Project 使用同一个高风险问题反复做真实回归：比较 `workflow-core 0.4` 与规划中的 `0.5` 对实际使用的差异。
+
+这些回归进一步确认：
+
+- 用户阅读层能明显改善自然段、结论顺序和部分普通术语中文化；
+- source-heavy 技术问答仍可能把 repo / design proposal 中的描述性英文标签带入最终解释；
+- 模型为了检索或核对英文 source 而需要原文，不等于用户最终需要看到该原文；
+- 精确身份 / 机器字符串与来源中的描述性标签必须分开；
+- 继续围绕单个失败样本追加同义规则会迅速出现边际收益下降，并增加 Project-setting 字符预算压力。
+
+更重要的是，本轮暴露了一个编辑流程问题：repo 中保存的 Candidate / Reference 可能落后于用户实际 Project Settings。未来编辑不能把旧 repo candidate 当 live truth；必须先取得真实 setting，再结合 Project 历史 thread 和 canonical repo 做 bounded edit。
+
+详细经验见：
+
+`docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_REAL_PROJECT_REGRESSION_LESSONS_2026-10-01.md`
+
+## 10. 对未来 standalone Skill 的含义
+
+中文可读性只是 `project-instructions-editor` 的一个真实验收维度，不应把未来 Skill 设计成中文润色器。
+
+未来 Planner 应从更完整的 Project-instruction 生命周期出发：真实 live setting、Project 历史决定、repo 当前事实源、有限字符预算、多 scope 平衡、稳定 locator、exact identifier、bounded edit、语义保真和可审差异。
+
+本轮明确留下的反模式也属于设计证据：
+
+- 不用禁词表或大型中英替换词典代替语义判断；
+- 不用英文数量/比例、固定段落/标题/公式数量等表面阈值；
+- 不靠不断追加“禁止 XX”把 Project setting 变成规则墙；
+- 不围绕单一 regression prompt 过拟合；
+- 不因为某一版完整候选“看起来更干净”就覆盖用户 live setting 中后来新增且已接受的规则。
+
+当前用户决定是暂时停止继续微调 AI Research Stack Project setting，把这些经验交给下一轮 Planner。下一轮仍只允许继续设计，standalone Skill implementation 需要新的明确授权。
