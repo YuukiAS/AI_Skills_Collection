@@ -10,6 +10,7 @@ tracking: #93
 
 ### Shared Project instructions can become scope-imbalanced and bloated after a local addition request
 status: NEW
+tracking: #93
 source: real ChatGPT Project settings revision, 2026-09-28
 evidence: two private user-provided Project-instruction drafts, not copied into this public repository. One draft is about 9,375 characters / 480 lines; a later compressed draft is about 6,486 characters / 353 lines. Both describe one shared Project for two statistics courses.
 problem:
@@ -24,6 +25,7 @@ project-specific context: STAT5050/STAT5060 names, course roles, repository name
 
 ### Follow-up review: Project instructions need semantic prioritization, not equal-detail accumulation
 status: NEW
+tracking: #93
 source: user review of the same shared-course Project settings, 2026-09-28
 evidence: detailed user comparison of what the Project should preserve versus what should move to course repositories/workflows; same two private Project-instruction drafts above.
 problem:
@@ -43,6 +45,7 @@ project-specific context: the concrete courses, assessment design and note workf
 
 ### Unnecessary English and copied workflow-contract detail waste the Project-instruction character budget
 status: NEW
+tracking: #93
 source: real AI Research Stack Project-instruction revision, 2026-09-29
 evidence: exact before/after reference snapshots are preserved below in this TODO as Reference A and Reference B.
 problem:
@@ -58,6 +61,7 @@ project-specific context: the concrete AI Research Stack workflow names and repo
 
 ### Live Project editing must use the actual setting, Project history, and canonical repo together
 status: NEW
+tracking: #93
 source: repeated real AI Research Stack Project-setting regressions, 2026-10-01
 evidence: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_REAL_PROJECT_REGRESSION_LESSONS_2026-10-01.md`
 problem:
