@@ -7,6 +7,9 @@ Branch: `work/workflow-core--normal-entry-reliability`
 Final production candidate commit:
 `671eb532e0ec949dc7889427379a1113cf7a6ea9`
 
+Latest evidence repair commit covered by remote CI:
+`877073bd47eba14bf4277de6b951015377368834`
+
 ## Local Broad Verification
 
 The final candidate G1-G6 evidence records these PASS checks:
@@ -36,6 +39,10 @@ Required remote workflow:
 
 Observed PASS runs:
 
+- <https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/36984481687>
+  - event: `workflow_dispatch`
+  - head SHA: `877073bd47eba14bf4277de6b951015377368834`
+  - conclusion: `success`
 - <https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/36964684181>
   - head SHA: `331f2d155ff5bad015fb278dcd884ceb39a363e6`
   - conclusion: `success`
@@ -50,8 +57,8 @@ The workflow jobs include:
 - `editable-install-smoke (ubuntu-latest)`
 - `editable-install-smoke (windows-latest)`
 
-If this evidence file is committed after the listed runs, the final Critic must
-verify the latest branch `HEAD` with:
+If this evidence file or the Final Critic handoff file is committed after the
+listed runs, the final Critic must verify the latest branch `HEAD` with:
 
 ```text
 gh run list --workflow codex-marketplace.yml --branch work/workflow-core--normal-entry-reliability --limit 5 --json databaseId,status,conclusion,headSha,url,event

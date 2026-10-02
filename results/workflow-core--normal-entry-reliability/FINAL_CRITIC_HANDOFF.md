@@ -14,6 +14,12 @@ Final production candidate commit:
 Current evidence HEAD:
 verify with `git rev-parse HEAD` on the task branch.
 
+Final Critic repair status:
+the prior Final Critic returned `REVISE` for evidence quality only. The current
+handoff keeps final production candidate
+`671eb532e0ec949dc7889427379a1113cf7a6ea9`, `workflow-core 0.5`, and
+repository `5.4.1`; it repairs only tracked Gate evidence and handoff records.
+
 ## Scope
 
 This is the single independent final-candidate Critic checkpoint required by:
@@ -36,6 +42,7 @@ Read:
 - `results/workflow-core--normal-entry-reliability/GATE_CASES.json`
 - `results/workflow-core--normal-entry-reliability/QUALIFICATION_RESULT.md`
 - `results/workflow-core--normal-entry-reliability/G1_G6_RESULT.md`
+- `results/workflow-core--normal-entry-reliability/G1_TRIGGER_TRACE.md`
 - `results/workflow-core--normal-entry-reliability/G4_NORMAL_ENTRY_TRACE.md`
 - `results/workflow-core--normal-entry-reliability/G6_NORMAL_ENTRY_TRACE.md`
 - `results/workflow-core--normal-entry-reliability/G6_ROUTE_IDENTITY.md`
@@ -44,8 +51,12 @@ Read:
 Raw candidate replay evidence:
 
 - `results/workflow-core--normal-entry-reliability/qualification_candidate_replay_raw/`
-- `results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw/`
-- `results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw/`
+- `results/workflow-core--normal-entry-reliability/g1_positive_implicit_raw/`
+- `results/workflow-core--normal-entry-reliability/g1_positive_contextual_raw/`
+- `results/workflow-core--normal-entry-reliability/g1_hard_negative_raw/`
+- `results/workflow-core--normal-entry-reliability/g1_simple_negative_raw/`
+- `results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/`
+- `results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw_v4/`
 
 ## Review Questions
 
@@ -59,17 +70,23 @@ Check at least:
    global `workflow-core@yuukias-ai-skills` installation.
 3. G1-G6 evidence is direct enough and all gates bind back to the same final
    production candidate commit.
-4. G4 and G6 prove actual `workflow-core@ai-skills-candidate` consumption from
+4. G1 trigger evidence includes production-compatible positive and negative
+   replay traces, including non-consumption proof for specialist-contained and
+   simple-negative cases.
+5. G4 and G6 prove actual `workflow-core@ai-skills-candidate` consumption from
    the candidate plugin replay route.
-5. G6 validates the real bounded publisher route boundary, no raw fallback, no
-   second same-class retry, and local evidence preservation.
-6. Version/changelog/README/generated parity and release metadata match the
+6. G4 proves actual targeted capability discovery/probe output before route
+   choice and does not substitute a non-equivalent artifact fallback.
+7. G6 validates a real fixture Git repository, build/check, local commit,
+   bounded publisher route boundary, no raw fallback, no second same-class
+   retry, and local evidence preservation.
+8. Version/changelog/README/generated parity and release metadata match the
    approved exactly-once version policy.
-7. Broad local checks and required remote CI are PASS.
-8. Evidence-only commits after the final candidate do not modify production
+9. Broad local checks and required remote CI are PASS.
+10. Evidence-only commits after the final candidate do not modify production
    source, generated payload, version metadata, release metadata, or frozen
    gate semantics.
-9. No paid API, live-global candidate install, production Marketplace mutation,
+11. No paid API, live-global candidate install, production Marketplace mutation,
    Bridge/Host Policy mutation, force/destructive Git, branch deletion, or
    unauthorized branch/ref publication occurred.
 
