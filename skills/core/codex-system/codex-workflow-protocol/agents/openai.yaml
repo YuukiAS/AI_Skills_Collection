@@ -7,8 +7,12 @@ trigger:
     - cross-file or generated-layer refactor
     - task with explicit acceptance gates
     - long-running execution or delegation requiring final integration
+    - approval-boundary recovery that must preserve local evidence and avoid broader fallback
+    - normal-entry routing across a repository, specialist runtime, and publication boundary
   negative:
     - simple one-command help
     - short wording polish
     - casual explanation of a tool or command
     - single-format task better handled directly by a specialist
+    - specialist-contained render or PDF task with its own formal runner
+    - optional cleanup failure after the required artifact is already produced
