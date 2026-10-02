@@ -18,6 +18,7 @@ from datetime import datetime, time, timedelta, timezone
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 
 UNKNOWN = "UNKNOWN"
@@ -542,6 +543,32 @@ def _parse_time_of_day(value: Any) -> time:
     return time(parts[0] % 24, parts[1] % 60, parts[2] % 60)
 
 
+def _family_timezone(family: dict[str, Any]) -> tuple[Any | None, str | None]:
+    name = str(family.get("timezone") or "").strip()
+    if not name:
+        return None, None
+    try:
+        return ZoneInfo(name), None
+    except (ZoneInfoNotFoundError, ValueError):
+        return None, "invalid_or_unavailable_timezone"
+
+
+def _recurrence_datetime(local_date: Any, recurrence: dict[str, Any], tzinfo: Any) -> datetime:
+    return datetime.combine(local_date, _parse_time_of_day(recurrence.get("start_time") or recurrence.get("start")), tzinfo=tzinfo)
+
+
+def _next_recurrence_after(anchor: datetime, recurrence: dict[str, Any], tzinfo: Any) -> datetime | None:
+    weekday = _weekday_index(recurrence.get("weekday"))
+    if weekday is None:
+        return None
+    days = (weekday - anchor.weekday()) % 7
+    candidate_date = (anchor + timedelta(days=days)).date()
+    candidate = _recurrence_datetime(candidate_date, recurrence, tzinfo)
+    if candidate <= anchor:
+        candidate = _recurrence_datetime(candidate_date + timedelta(days=7), recurrence, tzinfo)
+    return candidate
+
+
 def _capacity_window_for_start(
     family: dict[str, Any],
     target: dict[str, Any],
@@ -574,46 +601,53 @@ def capacity_windows(family: dict[str, Any], invocation: dict[str, Any], limit: 
     target = dict(invocation.get("target_occurrence") or family.get("target_occurrence") or {})
     recurrence = dict(family.get("recurrence") or {})
     now = _parse_datetime(invocation.get("now") or family.get("now")) or datetime.now(timezone.utc)
+    family_tz, timezone_error = _family_timezone(family)
+    if timezone_error:
+        return []
     start = _parse_datetime(target.get("start") or target.get("target_start"))
     if start is not None:
         windows = [_capacity_window_for_start(family, target, recurrence, start)]
-        weekday = _weekday_index(recurrence.get("weekday"))
-        if weekday is None or len(windows) >= limit:
+        recurrence_tz = family_tz or start.tzinfo
+        anchor = start.astimezone(recurrence_tz) if family_tz else start
+        cursor = _next_recurrence_after(anchor, recurrence, recurrence_tz)
+        if cursor is None or len(windows) >= limit:
             return windows
         follow_on_target = {key: value for key, value in target.items() if key not in {"start", "target_start", "end", "target_end"}}
-        days = (weekday - start.weekday()) % 7
-        cursor = datetime.combine((start + timedelta(days=days)).date(), _parse_time_of_day(recurrence.get("start_time") or recurrence.get("start")), tzinfo=start.tzinfo)
-        if cursor <= start:
-            cursor += timedelta(days=7)
+        cursor_date = cursor.date()
         attempts = 0
         while len(windows) < limit and attempts < max(limit * 4, 4):
+            cursor = _recurrence_datetime(cursor_date, recurrence, recurrence_tz)
             window = _capacity_window_for_start(family, follow_on_target, recurrence, cursor)
             window_end = window.get("latest_useful_end") or window.get("end")
             if not window_end or window_end >= now:
                 windows.append(window)
-            cursor = cursor + timedelta(days=7)
+            cursor_date = cursor_date + timedelta(days=7)
             attempts += 1
         return windows
     if recurrence:
         weekday = _weekday_index(recurrence.get("weekday"))
         if weekday is not None:
-            days = (weekday - now.weekday()) % 7
-            candidate = datetime.combine((now + timedelta(days=days)).date(), _parse_time_of_day(recurrence.get("start_time") or recurrence.get("start")), tzinfo=now.tzinfo)
-            if candidate > now:
-                previous = candidate - timedelta(days=7)
+            recurrence_tz = family_tz or now.tzinfo
+            local_now = now.astimezone(recurrence_tz) if family_tz else now
+            days = (weekday - local_now.weekday()) % 7
+            candidate_date = (local_now + timedelta(days=days)).date()
+            candidate = _recurrence_datetime(candidate_date, recurrence, recurrence_tz)
+            if candidate > local_now:
+                previous = _recurrence_datetime(candidate_date - timedelta(days=7), recurrence, recurrence_tz)
                 previous_window = _capacity_window_for_start(family, target, recurrence, previous)
                 previous_end = previous_window.get("latest_useful_end") or previous_window.get("end")
-                if previous_end and previous_end >= now:
+                if previous_end and previous_end >= local_now:
                     candidate = previous
             windows: list[dict[str, Any]] = []
-            cursor = candidate
+            cursor_date = candidate.date()
             attempts = 0
             while len(windows) < limit and attempts < max(limit * 4, 4):
+                cursor = _recurrence_datetime(cursor_date, recurrence, recurrence_tz)
                 window = _capacity_window_for_start(family, target, recurrence, cursor)
                 window_end = window.get("latest_useful_end") or window.get("end")
-                if not window_end or window_end >= now:
+                if not window_end or window_end >= local_now:
                     windows.append(window)
-                cursor = cursor + timedelta(days=7)
+                cursor_date = cursor_date + timedelta(days=7)
                 attempts += 1
             return windows
     return []
@@ -659,6 +693,9 @@ def capacity_reconcile(
 ) -> dict[str, Any]:
     if not _activation_matches(family, invocation):
         return {"action": "read_only", "reason": "activation_scope_mismatch"}
+    _tzinfo, timezone_error = _family_timezone(family)
+    if timezone_error:
+        return {"action": "read_only_proposal", "reason": timezone_error, "successor_mutation": False}
     windows = capacity_windows(family, invocation)
     window = windows[0] if windows else None
     compatible_active = [

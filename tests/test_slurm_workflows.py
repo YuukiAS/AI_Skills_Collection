@@ -221,7 +221,7 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             helper.capacity_reconcile(
                 family,
                 [],
-                [{"lifecycle_owned": True, "gpus": 1, "gpu_type": "h100", "requested_start": "2026-09-28T08:00:00+00:00", "end_time": "2026-09-28T18:00:00+00:00"}],
+                [{"lifecycle_owned": True, "gpus": 1, "gpu_type": "h100", "requested_start": "2026-09-28T08:00:00-04:00", "end_time": "2026-09-28T18:00:00-04:00"}],
                 invocation,
             )["action"],
             "keep_successor",
@@ -231,8 +231,8 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
                 family,
                 [],
                 [
-                    {"lifecycle_owned": True, "gpus": 1, "gpu_type": "h100", "requested_start": "2026-09-28T08:00:00+00:00", "end_time": "2026-09-28T18:00:00+00:00"},
-                    {"lifecycle_owned": True, "gpus": 1, "gpu_type": "h100", "requested_start": "2026-09-28T08:00:00+00:00", "end_time": "2026-09-28T18:00:00+00:00"},
+                    {"lifecycle_owned": True, "gpus": 1, "gpu_type": "h100", "requested_start": "2026-09-28T08:00:00-04:00", "end_time": "2026-09-28T18:00:00-04:00"},
+                    {"lifecycle_owned": True, "gpus": 1, "gpu_type": "h100", "requested_start": "2026-09-28T08:00:00-04:00", "end_time": "2026-09-28T18:00:00-04:00"},
                 ],
                 invocation,
             )["reason"],
@@ -261,16 +261,16 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         )
         planned = helper.capacity_reconcile(family, [], [], invocation)
         self.assertEqual(planned["action"], "plan_one_successor")
-        self.assertEqual(planned["target_window"]["start"], "2026-09-28T09:00:00+00:00")
+        self.assertEqual(planned["target_window"]["start"], "2026-09-28T09:00:00-04:00")
 
         different_occurrence = json.loads(json.dumps(family))
         different_occurrence["target_occurrence"] = {
-            "start": "2026-10-05T09:00:00+00:00",
-            "end": "2026-10-05T17:00:00+00:00",
+            "start": "2026-10-05T13:00:00+00:00",
+            "end": "2026-10-05T21:00:00+00:00",
         }
         same_scope_plan = helper.capacity_reconcile(different_occurrence, [], [], invocation)
         self.assertEqual(same_scope_plan["action"], "plan_one_successor")
-        self.assertEqual(same_scope_plan["target_window"]["start"], "2026-10-05T09:00:00+00:00")
+        self.assertEqual(same_scope_plan["target_window"]["start"], "2026-10-05T13:00:00+00:00")
 
         changed_window_scope = json.loads(json.dumps(family))
         changed_window_scope["minimum_useful_duration"] = "7h"
@@ -290,55 +290,82 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             helper.capacity_reconcile(changed_timezone_scope, [], [], invocation)["action"],
             "read_only_proposal",
         )
+        invalid_timezone_scope = json.loads(json.dumps(family))
+        invalid_timezone_scope["timezone"] = "Not/AZone"
+        invalid_timezone_scope["enrollment"]["scope_digest"] = helper._scope_digest(invalid_timezone_scope)
+        invalid_timezone = helper.capacity_reconcile(invalid_timezone_scope, [], [], invocation)
+        self.assertEqual(invalid_timezone["action"], "read_only_proposal")
+        self.assertEqual(invalid_timezone["reason"], "invalid_or_unavailable_timezone")
+        self.assertFalse(invalid_timezone["successor_mutation"])
 
         monday_invocation = dict(invocation)
-        monday_invocation["now"] = "2026-09-28T10:00:00+00:00"
+        monday_invocation["now"] = "2026-09-28T14:00:00+00:00"
         active_current = {
             "state": "RUNNING",
             "gpus": 1,
             "gpu_type": "h100",
-            "start_time": "2026-09-28T08:00:00+00:00",
-            "end_time": "2026-09-28T18:00:00+00:00",
+            "start_time": "2026-09-28T08:00:00-04:00",
+            "end_time": "2026-09-28T18:00:00-04:00",
         }
         future_successor = {
             "lifecycle_owned": True,
             "gpus": 1,
             "gpu_type": "h100",
-            "requested_start": "2026-10-05T08:00:00+00:00",
-            "end_time": "2026-10-05T18:00:00+00:00",
+            "requested_start": "2026-10-05T08:00:00-04:00",
+            "end_time": "2026-10-05T18:00:00-04:00",
         }
         next_plan = helper.capacity_reconcile(family, [active_current], [], monday_invocation)
         self.assertEqual(next_plan["action"], "plan_one_successor")
-        self.assertEqual(next_plan["target_window"]["start"], "2026-10-05T09:00:00+00:00")
+        self.assertEqual(next_plan["target_window"]["start"], "2026-10-05T09:00:00-04:00")
         self.assertEqual(
             helper.capacity_reconcile(family, [active_current], [future_successor], monday_invocation)["action"],
             "keep_successor",
         )
         spanning_active = dict(active_current)
-        spanning_active["end_time"] = "2026-10-06T18:00:00+00:00"
+        spanning_active["end_time"] = "2026-10-06T18:00:00-04:00"
         spanning_plan = helper.capacity_reconcile(family, [spanning_active], [], monday_invocation)
         self.assertEqual(spanning_plan["action"], "plan_one_successor")
-        self.assertEqual(spanning_plan["target_window"]["start"], "2026-10-12T09:00:00+00:00")
+        self.assertEqual(spanning_plan["target_window"]["start"], "2026-10-12T09:00:00-04:00")
         current_window_plan = helper.capacity_reconcile(family, [], [], monday_invocation)
         self.assertEqual(current_window_plan["action"], "plan_one_successor")
-        self.assertEqual(current_window_plan["target_window"]["start"], "2026-09-28T09:00:00+00:00")
+        self.assertEqual(current_window_plan["target_window"]["start"], "2026-09-28T09:00:00-04:00")
         explicit_recurring = json.loads(json.dumps(family))
         explicit_recurring["target_occurrence"] = {
-            "start": "2026-09-28T09:00:00+00:00",
-            "end": "2026-09-28T17:00:00+00:00",
+            "start": "2026-09-28T13:00:00+00:00",
+            "end": "2026-09-28T21:00:00+00:00",
         }
         explicit_next_plan = helper.capacity_reconcile(explicit_recurring, [active_current], [], monday_invocation)
         self.assertEqual(explicit_next_plan["action"], "plan_one_successor")
-        self.assertEqual(explicit_next_plan["target_window"]["start"], "2026-10-05T09:00:00+00:00")
+        self.assertEqual(explicit_next_plan["target_window"]["start"], "2026-10-05T09:00:00-04:00")
         self.assertEqual(
             helper.capacity_reconcile(explicit_recurring, [active_current], [future_successor], monday_invocation)["action"],
             "keep_successor",
         )
+        dst_invocation = dict(invocation)
+        dst_invocation["now"] = "2026-10-26T14:00:00+00:00"
+        dst_active = {
+            "state": "RUNNING",
+            "gpus": 1,
+            "gpu_type": "h100",
+            "start_time": "2026-10-26T08:00:00-04:00",
+            "end_time": "2026-10-26T18:00:00-04:00",
+        }
+        dst_next_plan = helper.capacity_reconcile(family, [dst_active], [], dst_invocation)
+        self.assertEqual(dst_next_plan["action"], "plan_one_successor")
+        self.assertEqual(dst_next_plan["target_window"]["start"], "2026-11-02T09:00:00-05:00")
+        explicit_dst = json.loads(json.dumps(family))
+        explicit_dst["target_occurrence"] = {
+            "start": "2026-10-26T13:00:00+00:00",
+            "end": "2026-10-26T21:00:00+00:00",
+        }
+        explicit_dst_plan = helper.capacity_reconcile(explicit_dst, [dst_active], [], dst_invocation)
+        self.assertEqual(explicit_dst_plan["action"], "plan_one_successor")
+        self.assertEqual(explicit_dst_plan["target_window"]["start"], "2026-11-02T09:00:00-05:00")
         one_off = json.loads(json.dumps(family))
         one_off.pop("recurrence")
         one_off["target_occurrence"] = {
-            "start": "2026-09-28T09:00:00+00:00",
-            "end": "2026-09-28T17:00:00+00:00",
+            "start": "2026-09-28T09:00:00-04:00",
+            "end": "2026-09-28T17:00:00-04:00",
         }
         self.assertEqual(
             helper.capacity_reconcile(one_off, [active_current], [], monday_invocation)["action"],
