@@ -27,8 +27,9 @@ Final Critic repair:
   outputs;
 - default PATH absence is not treated as capability absence;
 - no non-equivalent HTML/PNG/screenshot fallback is executed;
-- true absent contrast is recorded from a real `PATH` probe rather than a text
-  assumption.
+- true absent contrast is recorded separately under
+  `g4_absent_contrast_raw/` using a controlled closed-world fixture whose
+  canonical, specialist, and project-declared routes are all probed.
 
 Observed probes:
 
@@ -71,3 +72,68 @@ Decision summary:
 - the minimal byte-writer PDF is only diagnostic, not the delivery route;
 - Chromium/HTML/PNG are not selected as equivalent fallback;
 - full artifact rendering remains out of scope for this Gate and is not claimed.
+
+## True Capability-Absent Contrast
+
+Command:
+
+```text
+python3 results/workflow-core--normal-entry-reliability/tools/replay_observer.py --candidate-commit 671eb532e0ec949dc7889427379a1113cf7a6ea9 --plugin workflow-core --expect-consumed workflow-core --task results/workflow-core--normal-entry-reliability/g4_absent_contrast_task.md --input results/workflow-core--normal-entry-reliability/g4_absent_contrast_input.md --writable-dir results/workflow-core--normal-entry-reliability/g4_absent_fixture --copy-run-to results/workflow-core--normal-entry-reliability/g4_absent_contrast_raw --label g4-absent-contrast
+```
+
+Replay identity:
+
+- plugin id: `workflow-core@ai-skills-candidate`
+- plugin version: `0.5`
+- runtime: `codex-cli 0.153.4`
+- actual consumption: `proven=true`, event `item.started`, line `6`
+- observer expectation failures: `missing=[]`, `unexpected=[]`
+
+Controlled fixture:
+
+- fixture contract:
+  `g4_absent_fixture/.ai-skills/capability-contract.md`;
+- declared legal routes:
+  canonical task route, matched specialist route, and project-declared runtime
+  route;
+- safe probe:
+  `g4_absent_fixture/tools/capability_absent_probe.py`.
+
+Observed absent result:
+
+- declared route count: `3`;
+- usable route count: `0`;
+- canonical task route usable: `false`;
+- matched specialist route usable: `false`;
+- project-declared runtime route usable: `false`;
+- final status: `blocked_target_not_met`;
+- dependency classification: `UNSUPPORTED_WITH_EVIDENCE`;
+- user decision required: `false`;
+- undeclared fallback attempted: `false`;
+- replacement artifact produced: `false`;
+- PDF artifact completed: `false`.
+
+Trace boundary:
+
+- the child read the candidate workflow skill and PDF specialist skill;
+- the child read only the fixture contract/probe and workspace inputs/outputs
+  for the absent decision;
+- the child did not run Node, Chromium, browser print, screenshot, host PATH
+  exploration, unrelated home/overflow filesystem search, network access, or a
+  non-equivalent artifact fallback;
+- the contrast is not a single made-up executable check: the probe checks all
+  three fixture-declared legal route classes.
+
+Absent contrast evidence:
+
+| File | SHA256 |
+|---|---|
+| `g4_absent_contrast_task.md` | `a998455f3f23eeb7b65db151e9f64c4cccada8b60b0a7f9b53517611af497c1a` |
+| `g4_absent_contrast_input.md` | `2b402a77b79d16334deef2dfc9a6e49d53455221e9bf2d1ec4cf8669446416ff` |
+| `g4_absent_fixture/.ai-skills/capability-contract.md` | `34de7a817f087d2bee29a5deed83c2412948d743732d98a773c1dccf0e9224b4` |
+| `g4_absent_fixture/tools/capability_absent_probe.py` | `bc25d1be10e929c0187f0ff694cd720807b33c32def72b02a5e3bc7796eefc02` |
+| `g4_absent_contrast_raw/run.json` | `9ecb1eaf4e6f1bf07f9fccaf171df1d014c93d12260dda9c5efb704b6e640604` |
+| `g4_absent_contrast_raw/child.stdout.jsonl` | `052053476641eb008cfda9e01775e7f63aa3ccf4e226dd2b69a34ec01485fa3e` |
+| `g4_absent_contrast_raw/workspace/outputs/absent_probe/capability_report.json` | `3f0eb22601aebe7757974c04b76bf7534ecfec209c646153ec43794dd2aaad2f` |
+| `g4_absent_contrast_raw/workspace/outputs/g4_absent_contrast_decision.md` | `c7bfb04feafc5d1d591a63448a12281fac814189ec94ac0866620a78355f23bc` |
+| `g4_absent_contrast_raw/workspace/outputs/g4_absent_contrast_manifest.json` | `45e92f798808da68d3ea73fb5f8fd907e5f0e8b061df9d1f9311a5f090b6d2f7` |

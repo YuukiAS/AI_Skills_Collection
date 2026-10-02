@@ -112,8 +112,16 @@ Evidence:
 - Decision:
   use discovered PDF/specialist route; do not infer capability absence from an
   initial PATH miss; do not use HTML/PNG/screenshot as equivalent fallback.
+- True capability-absent contrast:
+  `g4_absent_contrast_raw/` proves the same final candidate consumes
+  `workflow-core@ai-skills-candidate`, checks a controlled closed-world fixture
+  covering canonical task, matched specialist, and project-declared runtime
+  routes, and fails closed as `blocked_target_not_met` /
+  `UNSUPPORTED_WITH_EVIDENCE` without Human Gate or undeclared fallback.
 - Raw evidence:
   `results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/`.
+  Absent contrast raw evidence:
+  `results/workflow-core--normal-entry-reliability/g4_absent_contrast_raw/`.
 
 ### G5 — Broad Should-Not-Change
 

@@ -28,7 +28,8 @@
       "primary_evidence": [
         "tests/test_workflow_core_normal_entry_reliability.py",
         "results/workflow-core--normal-entry-reliability/G4_NORMAL_ENTRY_TRACE.md",
-        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/run.json"
+        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/run.json",
+        "results/workflow-core--normal-entry-reliability/g4_absent_contrast_raw/run.json"
       ]
     },
     {
@@ -50,7 +51,9 @@
         "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/child.stdout.jsonl",
         "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/g4_normal_entry_decision.md",
         "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/g4_probe/probe.json",
-        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/g4_render_env.json"
+        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/g4_render_env.json",
+        "results/workflow-core--normal-entry-reliability/g4_absent_contrast_raw/workspace/outputs/g4_absent_contrast_manifest.json",
+        "results/workflow-core--normal-entry-reliability/g4_absent_contrast_raw/workspace/outputs/absent_probe/capability_report.json"
       ]
     },
     {

@@ -20,6 +20,15 @@ handoff keeps final production candidate
 `671eb532e0ec949dc7889427379a1113cf7a6ea9`, `workflow-core 0.5`, and
 repository `5.4.1`; it repairs only tracked Gate evidence and handoff records.
 
+Second-round closure status:
+the second Final Critic returned `REVISE` only for WC05-FC2 and WC05-FC4.
+This closure keeps the same production candidate and versions. WC05-FC2 is
+closed by a new true capability-absent contrast under
+`g4_absent_contrast_raw/`. WC05-FC4 is closed by normalizing the canonical TODO
+status in `docs/plugin-todos/workflow-core.md` from
+`PROMOTED / RELEASED_IN_5.4.1` to `PROMOTED`; release evidence remains in the
+TODO release-evidence field and changelog/version metadata.
+
 ## Scope
 
 This is the single independent final-candidate Critic checkpoint required by:
@@ -56,6 +65,7 @@ Raw candidate replay evidence:
 - `results/workflow-core--normal-entry-reliability/g1_hard_negative_raw/`
 - `results/workflow-core--normal-entry-reliability/g1_simple_negative_raw/`
 - `results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/`
+- `results/workflow-core--normal-entry-reliability/g4_absent_contrast_raw/`
 - `results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw_v4/`
 
 ## Review Questions
@@ -77,16 +87,24 @@ Check at least:
    the candidate plugin replay route.
 6. G4 proves actual targeted capability discovery/probe output before route
    choice and does not substitute a non-equivalent artifact fallback.
-7. G6 validates a real fixture Git repository, build/check, local commit,
+7. G4 also includes a true capability-absent contrast where canonical task,
+   matched specialist, and project-declared runtime routes are all unavailable
+   in a controlled fixture, and the candidate fails closed without unrelated
+   host scanning, invented stack, product downgrade, false completion, or
+   Human Gate.
+8. G6 validates a real fixture Git repository, build/check, local commit,
    bounded publisher route boundary, no raw fallback, no second same-class
    retry, and local evidence preservation.
-8. Version/changelog/README/generated parity and release metadata match the
+9. Version/changelog/README/generated parity and release metadata match the
    approved exactly-once version policy.
-9. Broad local checks and required remote CI are PASS.
-10. Evidence-only commits after the final candidate do not modify production
+10. `docs/plugin-todos/workflow-core.md` uses canonical status vocabulary for
+    the promoted workflow-core 0.5 item (`status: PROMOTED`) while preserving
+    release evidence separately.
+11. Broad local checks and required remote CI are PASS.
+12. Evidence-only/metadata correction commits after the final candidate do not modify production
    source, generated payload, version metadata, release metadata, or frozen
    gate semantics.
-11. No paid API, live-global candidate install, production Marketplace mutation,
+13. No paid API, live-global candidate install, production Marketplace mutation,
    Bridge/Host Policy mutation, force/destructive Git, branch deletion, or
    unauthorized branch/ref publication occurred.
 
