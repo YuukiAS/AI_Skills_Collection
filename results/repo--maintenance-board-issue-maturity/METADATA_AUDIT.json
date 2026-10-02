@@ -589,11 +589,6 @@
           "entry": "CAT-TRACE v13/v14 follow-up feedback is consolidated into the canonical inbox",
           "source": "docs/plugin-todos/presentations.md",
           "status": "NEW"
-        },
-        {
-          "entry": "Final research artifacts must be surfaced as actual user-openable/downloadable deliverables",
-          "source": "docs/plugin-todos/research-writing.md",
-          "status": "NEW"
         }
       ]
     },
@@ -1127,7 +1122,7 @@
         "kind:enhancement"
       ],
       "project_area": "",
-      "project_status": "DONE",
+      "project_status": "",
       "scope": [
         "scope:plugin"
       ],
@@ -1391,7 +1386,7 @@
         "kind:enhancement"
       ],
       "project_area": "",
-      "project_status": "DONE",
+      "project_status": "",
       "scope": [
         "scope:plugin"
       ],
@@ -1414,7 +1409,7 @@
         "kind:enhancement"
       ],
       "project_area": "",
-      "project_status": "DONE",
+      "project_status": "",
       "scope": [
         "scope:plugin"
       ],
@@ -1437,7 +1432,7 @@
         "kind:enhancement"
       ],
       "project_area": "",
-      "project_status": "DONE",
+      "project_status": "",
       "scope": [
         "scope:plugin"
       ],
@@ -1554,7 +1549,7 @@
         "kind:enhancement"
       ],
       "project_area": "",
-      "project_status": "DONE",
+      "project_status": "",
       "scope": [
         "scope:plugin"
       ],
@@ -1577,7 +1572,7 @@
         "kind:regression"
       ],
       "project_area": "",
-      "project_status": "DONE",
+      "project_status": "",
       "scope": [
         "scope:plugin"
       ],
@@ -1600,7 +1595,7 @@
         "kind:enhancement"
       ],
       "project_area": "",
-      "project_status": "DONE",
+      "project_status": "",
       "scope": [
         "scope:plugin"
       ],
@@ -1623,7 +1618,7 @@
         "kind:regression"
       ],
       "project_area": "",
-      "project_status": "DONE",
+      "project_status": "",
       "scope": [
         "scope:plugin"
       ],
@@ -1646,7 +1641,7 @@
         "kind:enhancement"
       ],
       "project_area": "",
-      "project_status": "DONE",
+      "project_status": "",
       "scope": [
         "scope:plugin"
       ],
@@ -1669,7 +1664,7 @@
         "kind:enhancement"
       ],
       "project_area": "",
-      "project_status": "DONE",
+      "project_status": "",
       "scope": [
         "scope:plugin"
       ],
@@ -1692,7 +1687,7 @@
         "kind:enhancement"
       ],
       "project_area": "",
-      "project_status": "DONE",
+      "project_status": "",
       "scope": [
         "scope:plugin"
       ],
@@ -1723,11 +1718,6 @@
       "state_reason": "",
       "tracking_sources": [
         {
-          "entry": "Final presentation artifacts must be surfaced as actual openable/downloadable deliverables",
-          "source": "docs/plugin-todos/presentations.md",
-          "status": "NEW"
-        },
-        {
           "entry": "Delegate reader-facing wording without giving away statistical semantics",
           "source": "docs/plugin-todos/statistical-modeling.md",
           "status": "READY_FOR_PROMOTION_AFTER_LANGUAGE_LAYER"
@@ -1750,11 +1740,6 @@
       "state": "OPEN",
       "state_reason": "",
       "tracking_sources": [
-        {
-          "entry": "Beamer navigation QA must reject duplicate section declarations and duplicate visible section labels",
-          "source": "docs/plugin-todos/presentations.md",
-          "status": "NEW"
-        },
         {
           "entry": "Curriculum-driven capability refinement pilot",
           "source": "docs/plugin-todos/statistical-modeling.md",
@@ -2100,9 +2085,26 @@
       "state": "OPEN",
       "state_reason": "",
       "tracking_sources": []
+    },
+    {
+      "area": [
+        "area:standalone-skill"
+      ],
+      "issue": 93,
+      "kind": [
+        "kind:new-capability"
+      ],
+      "project_area": "",
+      "project_status": "TODO",
+      "scope": [
+        "scope:standalone-skill"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": []
     }
   ],
-  "issue_count": 86,
+  "issue_count": 87,
   "ok": false,
   "project": {
     "id": "PVT_kwHOA0Lgf84BkjCU",
@@ -2113,73 +2115,13 @@
   "project_number": 5,
   "project_owner": "YuukiAS",
   "repo": "YuukiAS/AI_Skills_Collection",
-  "violation_count": 11,
+  "violation_count": 1,
   "violations": [
     {
-      "code": "not-planned-false-done",
-      "issue": 52,
-      "message": "Non-completion closed Issue must not be false-DONE.",
-      "title": "Production icon sourcing and icon-registry discipline"
-    },
-    {
-      "code": "not-planned-false-done",
-      "issue": 60,
-      "message": "Non-completion closed Issue must not be false-DONE.",
-      "title": "Design corrections must round-trip through the canonical Figma before code changes"
-    },
-    {
-      "code": "not-planned-false-done",
-      "issue": 61,
-      "message": "Non-completion closed Issue must not be false-DONE.",
-      "title": "“Figma complete” needs an explicit definition of done"
-    },
-    {
-      "code": "not-planned-false-done",
-      "issue": 62,
-      "message": "Non-completion closed Issue must not be false-DONE.",
-      "title": "Design-to-code goals must not stop at either Figma or implementation"
-    },
-    {
-      "code": "not-planned-false-done",
-      "issue": 66,
-      "message": "Non-completion closed Issue must not be false-DONE.",
-      "title": "Comparable resource cards need one coherent progress and reset grammar"
-    },
-    {
-      "code": "not-planned-false-done",
-      "issue": 67,
-      "message": "Non-completion closed Issue must not be false-DONE.",
-      "title": "Opaque identifiers and formatting artifacts must not leak into glanceable UI"
-    },
-    {
-      "code": "not-planned-false-done",
-      "issue": 68,
-      "message": "Non-completion closed Issue must not be false-DONE.",
-      "title": "Severity colors must encode one stable semantic meaning"
-    },
-    {
-      "code": "not-planned-false-done",
-      "issue": 69,
-      "message": "Non-completion closed Issue must not be false-DONE.",
-      "title": "原生交互验收要覆盖真实控制路径"
-    },
-    {
-      "code": "not-planned-false-done",
-      "issue": 70,
-      "message": "Non-completion closed Issue must not be false-DONE.",
-      "title": "Configured surfaces must collapse from setup mode to status mode"
-    },
-    {
-      "code": "not-planned-false-done",
-      "issue": 71,
-      "message": "Non-completion closed Issue must not be false-DONE.",
-      "title": "Typography governance must define semantic roles and hierarchy, not only token values"
-    },
-    {
-      "code": "not-planned-false-done",
-      "issue": 72,
-      "message": "Non-completion closed Issue must not be false-DONE.",
-      "title": "Status chrome must follow one coherent visual grammar"
+      "code": "missing-source-backlink",
+      "issue": 93,
+      "message": "TODO-backed plugin/standalone Issue has no canonical tracking:#N source backlink.",
+      "title": "Project Instructions Editor: Project 可读性与指令编辑架构"
     }
   ]
 }
