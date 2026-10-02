@@ -4,6 +4,49 @@
 
 No unreleased changes.
 
+## 5.5.0 - 2026-10-02
+
+Repository `5.5.0` adds the Project Instructions Editor standalone Skill for
+long-lived ChatGPT Project instruction editing.
+
+Repository bump decision: MINOR
+Reason: the collection can now handle a repository-level user task that
+`5.4.x` could not: install a standalone capability that creates, edits,
+compresses, synchronizes, or resets ChatGPT Project instructions while
+reasoning over live settings, targeted history, canonical sources, effective
+Project enforcement, protected absence, and finite instruction budgets.
+
+Affected plugins:
+- all central plugins: NO_BUMP
+  Reason: this release adds a standalone Skill and does not change central
+  Marketplace plugin production behavior.
+
+Affected standalone skills:
+- `project-instructions-editor`: initial standalone version `0.1`
+  Reason: new installable Skill for Project-instruction semantic placement,
+  preservation-sensitive / greenfield / explicit-reset modes, bounded edit
+  defaults, locator substitution, no-op handling, and proportional user
+  delivery.
+
+Unchanged central plugin versions: `workflow-core 0.4`, `ai-skills-core 0.5`,
+`writing-style 0.4`, `research-writing 0.2`, `presentations 0.3`,
+`scientific-visualization 0.1`, `web-development 0.4`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- `project-instructions-editor` is available as a standalone Skill under
+  `skills/core/codex-system/project-instructions-editor/`.
+- Natural Project-instruction editing requests may enter the standalone Skill
+  without requiring users to name it, while ordinary prose polishing, generic
+  agent/system prompt work, global Custom Instructions, workflow control, and
+  AI_Skills repository maintenance remain outside its owner boundary.
+- The Skill is instruction/reference-only: it does not require network access,
+  write files, execute code, mutate live ChatGPT accounts, or add a Plugin
+  wrapper.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
 ## 5.4.0 - 2026-09-29
 
 Repository `5.4.0` adds the Product UI Copy cross-plugin normal workflow
