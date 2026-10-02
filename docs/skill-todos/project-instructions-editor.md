@@ -469,3 +469,39 @@ Current lifecycle remains `DOING`, waiting for a future explicit user decision o
 DESIGN_FREEZE=PASS
 READY_FOR_SKILL_IMPLEMENTATION=NO
 ```
+
+
+## 2026-10-02 implementation phase opened
+
+The user has explicitly opened implementation after the final product/architecture design freeze PASS.
+
+Current implementation package:
+
+- Plan: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_IMPLEMENTATION_PLAN_V0_1_2026-10-02.md`
+- Goal: `docs/goals/PROJECT_INSTRUCTIONS_EDITOR_IMPLEMENTATION_GOAL_V0_1.md`
+- Kickoff Draft: `docs/operations/prompts/PROJECT_INSTRUCTIONS_EDITOR_IMPLEMENTATION_KICKOFF_V0_1.md`
+
+Implementation task identity:
+
+```text
+task_key = project-instructions-editor--standalone-skill-implementation
+branch = work/project-instructions-editor--standalone-skill-implementation
+worktree = ../AI_Skills_Collection-project-instructions-editor--standalone-skill-implementation
+```
+
+The package translates the frozen design into implementation scope without reopening product decisions:
+
+- canonical source path: `skills/core/codex-system/project-instructions-editor/`;
+- standalone Skill version starts at `0.1`;
+- instruction/reference-only capability by default: no runtime script, database, ledger, watcher or state machine;
+- natural implicit normal entry plus the frozen near-miss owners;
+- four capability families remain the release evidence structure;
+- formal repository release candidate is planned as `5.4.0 -> 5.5.0` only if `origin/main` remains `5.4.0`; all central plugins remain `NO_BUMP`;
+- Executor must stop before main merge/formal release at independent review.
+
+The user has authorized entering the implementation phase, but Codex execution still waits for independent execution-ready Critic review of the same Plan + Goal + Kickoff package.
+
+```text
+USER_AUTHORIZED_IMPLEMENTATION_PHASE=YES
+READY_FOR_CODEX=NO
+```
