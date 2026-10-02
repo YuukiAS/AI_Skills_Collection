@@ -2,7 +2,7 @@
 name: slurm-workflows
 description: Plan, submit, monitor, diagnose, and safely iterate Slurm jobs with live Slurm discovery, optional public policy overlays, sticky resource contracts, workload modes, and guarded capacity lifecycle semantics.
 status: active
-version: "0.2"
+version: "0.3"
 provenance: user-authored
 trusted: false
 requires_network: false

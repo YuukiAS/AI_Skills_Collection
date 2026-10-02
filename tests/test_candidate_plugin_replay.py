@@ -577,7 +577,7 @@ class ReplayMechanismTests(unittest.TestCase):
                         "prompt text",
                         stdout_path=stdout_path,
                         stderr_path=stderr_path,
-                        timeout_seconds=0.5,
+                        timeout_seconds=2.0,
                         terminate_grace_seconds=0.2,
                     )
 
