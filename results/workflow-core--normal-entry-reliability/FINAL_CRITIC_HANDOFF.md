@@ -29,6 +29,14 @@ status in `docs/plugin-todos/workflow-core.md` from
 `PROMOTED / RELEASED_IN_5.4.1` to `PROMOTED`; release evidence remains in the
 TODO release-evidence field and changelog/version metadata.
 
+Second-round closure commit:
+`7355d085c57ac3ba314f31edbec801b8d6c1a32d`
+
+Remote CI for that closure commit:
+<https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/36987162156>
+with `event=workflow_dispatch`, `headSha=7355d085c57ac3ba314f31edbec801b8d6c1a32d`,
+and `conclusion=success`.
+
 ## Scope
 
 This is the single independent final-candidate Critic checkpoint required by:
@@ -101,9 +109,9 @@ Check at least:
     the promoted workflow-core 0.5 item (`status: PROMOTED`) while preserving
     release evidence separately.
 11. Broad local checks and required remote CI are PASS.
-12. Evidence-only/metadata correction commits after the final candidate do not modify production
-   source, generated payload, version metadata, release metadata, or frozen
-   gate semantics.
+12. Evidence-only/metadata correction commits after the final candidate do not
+    modify production source, generated payload, version metadata, release
+    metadata, or frozen gate semantics.
 13. No paid API, live-global candidate install, production Marketplace mutation,
    Bridge/Host Policy mutation, force/destructive Git, branch deletion, or
    unauthorized branch/ref publication occurred.

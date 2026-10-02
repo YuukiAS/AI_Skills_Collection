@@ -8,7 +8,7 @@ Final production candidate commit:
 `671eb532e0ec949dc7889427379a1113cf7a6ea9`
 
 Latest evidence repair commit covered by remote CI:
-`877073bd47eba14bf4277de6b951015377368834`
+`7355d085c57ac3ba314f31edbec801b8d6c1a32d`
 
 ## Local Broad Verification
 
@@ -39,6 +39,10 @@ Required remote workflow:
 
 Observed PASS runs:
 
+- <https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/36987162156>
+  - event: `workflow_dispatch`
+  - head SHA: `7355d085c57ac3ba314f31edbec801b8d6c1a32d`
+  - conclusion: `success`
 - <https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/36984481687>
   - event: `workflow_dispatch`
   - head SHA: `877073bd47eba14bf4277de6b951015377368834`
