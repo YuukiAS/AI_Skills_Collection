@@ -14,9 +14,11 @@
       "name": "Trigger precision",
       "status": "PASS",
       "primary_evidence": [
-        "tests/test_workflow_core_normal_entry_reliability.py",
-        "skills/core/codex-system/codex-workflow-protocol/evals/trigger_queries.json",
-        "results/workflow-core--normal-entry-reliability/G1_G6_RESULT.md"
+        "results/workflow-core--normal-entry-reliability/G1_TRIGGER_TRACE.md",
+        "results/workflow-core--normal-entry-reliability/g1_positive_implicit_raw/run.json",
+        "results/workflow-core--normal-entry-reliability/g1_positive_contextual_raw/run.json",
+        "results/workflow-core--normal-entry-reliability/g1_hard_negative_raw/run.json",
+        "results/workflow-core--normal-entry-reliability/g1_simple_negative_raw/run.json"
       ]
     },
     {
@@ -26,7 +28,7 @@
       "primary_evidence": [
         "tests/test_workflow_core_normal_entry_reliability.py",
         "results/workflow-core--normal-entry-reliability/G4_NORMAL_ENTRY_TRACE.md",
-        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw/run.json"
+        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/run.json"
       ]
     },
     {
@@ -36,7 +38,7 @@
       "primary_evidence": [
         "tests/test_workflow_core_normal_entry_reliability.py",
         "results/workflow-core--normal-entry-reliability/G6_NORMAL_ENTRY_TRACE.md",
-        "results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw/run.json"
+        "results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw_v4/run.json"
       ]
     },
     {
@@ -45,8 +47,10 @@
       "status": "PASS",
       "primary_evidence": [
         "results/workflow-core--normal-entry-reliability/G4_NORMAL_ENTRY_TRACE.md",
-        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw/child.stdout.jsonl",
-        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw/g4_normal_entry_decision.md"
+        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/child.stdout.jsonl",
+        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/g4_normal_entry_decision.md",
+        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/g4_probe/probe.json",
+        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/g4_render_env.json"
       ]
     },
     {
@@ -68,8 +72,9 @@
       "primary_evidence": [
         "results/workflow-core--normal-entry-reliability/G6_ROUTE_IDENTITY.md",
         "results/workflow-core--normal-entry-reliability/G6_NORMAL_ENTRY_TRACE.md",
-        "results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw/child.stdout.jsonl",
-        "results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw/bounded_publisher_result.md"
+        "results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw_v4/child.stdout.jsonl",
+        "results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw_v4/workspace/outputs/bounded_publisher_result.md",
+        "results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw_v4/fixture_git_evidence/head_show_patch.txt"
       ]
     }
   ],

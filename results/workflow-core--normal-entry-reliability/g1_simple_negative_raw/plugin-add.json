@@ -1,0 +1,10 @@
+{
+  "workflow-core": {
+    "authPolicy": "ON_INSTALL",
+    "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/workflow-core/0.5",
+    "marketplaceName": "ai-skills-candidate",
+    "name": "workflow-core",
+    "pluginId": "workflow-core@ai-skills-candidate",
+    "version": "0.5"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "candidate_commit": "671eb532e0ec949dc7889427379a1113cf7a6ea9",
+  "child_returncode": 0,
+  "command_events": [
+    "/usr/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\nsource = Path('inputs/01-g1_simple_negative_input.md').read_text()\nprint(source)\nPY\"",
+    "/usr/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\nsource = Path('inputs/01-g1_simple_negative_input.md').read_text()\nprint(source)\nPY\"",
+    "/usr/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\noutput = Path('outputs/g1_simple_negative_result.txt')\noutput.parent.mkdir(parents=True, exist_ok=True)\noutput.write_text('alpha\\\\nbeta\\\\ngamma\\\\n')\nPY\"",
+    "/usr/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\noutput = Path('outputs/g1_simple_negative_result.txt')\noutput.parent.mkdir(parents=True, exist_ok=True)\noutput.write_text('alpha\\\\nbeta\\\\ngamma\\\\n')\nPY\""
+  ],
+  "expect_consumed": [],
+  "expect_not_consumed": [
+    "workflow-core"
+  ],
+  "expectation_failures": {
+    "missing": [],
+    "unexpected": []
+  },
+  "extra_env_keys": [],
+  "label": "g1-simple-negative",
+  "plugins": [
+    {
+      "actual_consumption": null,
+      "add_payload": {
+        "authPolicy": "ON_INSTALL",
+        "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/workflow-core/0.5",
+        "marketplaceName": "ai-skills-candidate",
+        "name": "workflow-core",
+        "pluginId": "workflow-core@ai-skills-candidate",
+        "version": "0.5"
+      },
+      "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/workflow-core/0.5",
+      "name": "workflow-core",
+      "plugin_id": "workflow-core@ai-skills-candidate"
+    }
+  ],
+  "runtime_version": "codex-cli 0.153.4",
+  "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/workflow-core--normal-entry-reliability/observer-runs/20261002T075848Z-1340697-g1-simple-negative/child.stderr",
+  "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/workflow-core--normal-entry-reliability/observer-runs/20261002T075848Z-1340697-g1-simple-negative/child.stdout.jsonl",
+  "writable_dirs": []
+}

@@ -7,6 +7,12 @@ Product version: `workflow-core 0.5`
 Repository version: `5.4.1`
 Status: `PASS`
 
+Final Critic repair note: after the Final Critic returned `REVISE`, this file
+was updated with evidence-only repairs for G1, G4, and G6. The product
+candidate remains `671eb532e0ec949dc7889427379a1113cf7a6ea9`; no production
+source, generated Marketplace payload, version file, release metadata, or
+frozen Gate semantics were changed.
+
 ## Candidate Boundary
 
 The final candidate product commit is
@@ -35,10 +41,23 @@ Result: `PASS`
 
 Evidence:
 
-- `python3 -m unittest tests.test_workflow_core_normal_entry_reliability`
-- `/usr/bin/python3 -m unittest tests.test_standalone_skill_baselines tests.test_codex_marketplace tests.test_central_plugin_icon_assets tests.test_candidate_plugin_replay tests.test_workflow_core_reviewed_handoff_routing`
-- Trigger assets now include positive normal-entry / approval-boundary cases
-  and negative specialist-contained/cache cases.
+- `G1_TRIGGER_TRACE.md`
+- positive A implicit workflow-level candidate replay:
+  `workflow-core@ai-skills-candidate`, version `0.5`,
+  `actual_consumption.proven=true`;
+- positive B contextual workflow candidate replay:
+  `workflow-core@ai-skills-candidate`, version `0.5`,
+  `actual_consumption.proven=true`;
+- complex specialist-contained hard negative:
+  `workflow-core@ai-skills-candidate` installed/discoverable but not consumed,
+  while `writing-style@ai-skills-candidate` is consumed;
+- simple negative:
+  `workflow-core@ai-skills-candidate` installed/discoverable but not consumed;
+- raw JSON/tool traces:
+  `g1_positive_implicit_raw/`,
+  `g1_positive_contextual_raw/`,
+  `g1_hard_negative_raw/`,
+  `g1_simple_negative_raw/`.
 
 ### G2 — Specialist-First + Least-Privilege Normal Entry
 
@@ -77,15 +96,24 @@ Evidence:
 - Final candidate replay command:
 
   ```text
-  python3 scripts/candidate_plugin_replay.py replay --plugin workflow-core --candidate-commit 671eb532e0ec949dc7889427379a1113cf7a6ea9 --task results/workflow-core--normal-entry-reliability/g4_candidate_replay_task.md --input results/workflow-core--normal-entry-reliability/g4_capability_discovery_input.md
+  python3 scripts/candidate_plugin_replay.py replay --plugin workflow-core --candidate-commit 671eb532e0ec949dc7889427379a1113cf7a6ea9 --task results/workflow-core--normal-entry-reliability/g4_candidate_replay_task_v2.md --input results/workflow-core--normal-entry-reliability/g4_capability_discovery_input_v2.md
   ```
 
 - Candidate identity:
   `workflow-core@ai-skills-candidate`, version `0.5`.
 - Actual consumption:
-  `proven=true`, event `item.started`, line `6`.
+  `proven=true`, event `item.started`, line `9`.
+- Specialist consumption:
+  PDF skill and Chinese math PDF specialist instructions were read in the child
+  run, followed by real project/specialist probes.
+- Capability evidence:
+  `g4_probe/probe.json`, `g4_probe/minimal_probe.pdf`, and
+  `g4_render_env.json`.
+- Decision:
+  use discovered PDF/specialist route; do not infer capability absence from an
+  initial PATH miss; do not use HTML/PNG/screenshot as equivalent fallback.
 - Raw evidence:
-  `results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw/`.
+  `results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw_v2/`.
 
 ### G5 — Broad Should-Not-Change
 
@@ -112,23 +140,33 @@ Evidence:
 - Final candidate replay command:
 
   ```text
-  python3 scripts/candidate_plugin_replay.py replay --plugin workflow-core --candidate-commit 671eb532e0ec949dc7889427379a1113cf7a6ea9 --task results/workflow-core--normal-entry-reliability/g6_candidate_replay_task.md --input results/workflow-core--normal-entry-reliability/g6_publication_boundary_input.md
+  python3 results/workflow-core--normal-entry-reliability/tools/replay_observer.py --candidate-commit 671eb532e0ec949dc7889427379a1113cf7a6ea9 --plugin workflow-core --expect-consumed workflow-core --task results/workflow-core--normal-entry-reliability/g6_candidate_replay_task_v4.md --input results/workflow-core--normal-entry-reliability/g6_publication_boundary_input_v3.md --env GIT_ASKPASS=/bin/false --copy-run-to results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw_v4 --label g6-v4
   ```
 
 - Candidate identity:
   `workflow-core@ai-skills-candidate`, version `0.5`.
 - Actual consumption:
-  `proven=true`, event `item.started`, line `5`.
-- Workspace-write local operation:
-  `workspace_check.txt` contains `workspace-write-ok`.
-- Bounded route invocation:
-  `GIT_ASKPASS=/bin/false ai-bridge host publish-current-branch --expected-repo YuukiAS/AI_Skills_Collection --expected-branch work/workflow-core--normal-entry-reliability`
-- Deterministic pre-network blocker:
+  `proven=true`, event `item.started`, line `7`.
+- Real fixture:
+  initialized Git repository, task-owned artifact, build/check, and one local
+  commit.
+- Commit SHA before and after publication attempt:
+  `bba3c4044761345482ba4184e4df199dd6f464a5`.
+- Artifact hash before and after publication attempt:
+  `faff44293620793ba4bd6e0269659c57280c39d1e041af4f74039abb005e5263`.
+- Bounded route:
+  selected from the fixture publication contract and invoked once as
+  `ai-bridge host publish-current-branch --expected-repo YuukiAS/AI_Skills_Collection --expected-branch work/workflow-core--normal-entry-reliability`.
+- Deterministic blocker:
   `ERROR: ASKPASS_REQUIRES_APPROVAL`.
 - Raw fallback:
-  not attempted; child trace contains no raw `git push` command.
+  not attempted; command trace contains no raw `git push`, `scp`, or `rsync`
+  publication fallback.
+- Retry:
+  no second same-class publication retry; the raw trace's `item.started` and
+  `item.completed` entries share the same command lifecycle for `item_17`.
 - Raw evidence:
-  `results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw/`.
+  `results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw_v4/`.
 
 ## Version Decision
 

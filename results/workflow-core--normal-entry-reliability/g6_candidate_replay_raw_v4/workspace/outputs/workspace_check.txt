@@ -1,0 +1,19 @@
+本地构建：PASS
+项目检查：PASS
+提交前已检查暂存区统计与完整差异。
+{
+  "commit": "bba3c4044761345482ba4184e4df199dd6f464a5",
+  "artifact_sha256": "faff44293620793ba4bd6e0269659c57280c39d1e041af4f74039abb005e5263",
+  "branch": "work/workflow-core--normal-entry-reliability",
+  "build": "PASS",
+  "check": "PASS",
+  "clean": true,
+  "commit_count": 1,
+  "recorded_before_publication": true
+}
+发布前证据已记录；发布尚未尝试。
+
+发布尝试后复核：PASS
+check-ok faff44293620793ba4bd6e0269659c57280c39d1e041af4f74039abb005e5263
+HEAD 与发布前记录一致；工作区干净；提交总数为 1；提交内产物与磁盘产物哈希一致。
+本地 build/check/commit 证据仍有效。

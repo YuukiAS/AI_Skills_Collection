@@ -1,0 +1,8 @@
+bba3c40 Build and verify task fixture artifact
+ .ai-skills/publication-contract.md | 14 ++++++++++++++
+ dist/artifact.sha256               |  1 +
+ dist/artifact.txt                  |  2 ++
+ src/message.txt                    |  1 +
+ tools/build.py                     | 17 +++++++++++++++++
+ tools/check.py                     | 14 ++++++++++++++
+ 6 files changed, 49 insertions(+)
