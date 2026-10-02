@@ -298,6 +298,22 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         self.assertEqual(invalid_timezone["reason"], "invalid_or_unavailable_timezone")
         self.assertFalse(invalid_timezone["successor_mutation"])
 
+        gap_family = json.loads(json.dumps(family))
+        gap_family["recurrence"] = {"weekday": "sun", "start_time": "02:30", "duration_hours": 8}
+        gap_family["enrollment"] = {"submit_successor": True, "max_successor": 1, "scope_digest": helper._scope_digest(gap_family)}
+        gap_plan = helper.capacity_reconcile(gap_family, [], [], {**invocation, "now": "2026-03-08T06:00:00+00:00"})
+        self.assertEqual(gap_plan["action"], "read_only_proposal")
+        self.assertEqual(gap_plan["reason"], "nonexistent_recurrence_local_time")
+        self.assertFalse(gap_plan["successor_mutation"])
+
+        fold_family = json.loads(json.dumps(family))
+        fold_family["recurrence"] = {"weekday": "sun", "start_time": "01:30", "duration_hours": 8}
+        fold_family["enrollment"] = {"submit_successor": True, "max_successor": 1, "scope_digest": helper._scope_digest(fold_family)}
+        fold_plan = helper.capacity_reconcile(fold_family, [], [], {**invocation, "now": "2026-11-01T04:30:00+00:00"})
+        self.assertEqual(fold_plan["action"], "read_only_proposal")
+        self.assertEqual(fold_plan["reason"], "ambiguous_recurrence_local_time")
+        self.assertFalse(fold_plan["successor_mutation"])
+
         monday_invocation = dict(invocation)
         monday_invocation["now"] = "2026-09-28T14:00:00+00:00"
         active_current = {

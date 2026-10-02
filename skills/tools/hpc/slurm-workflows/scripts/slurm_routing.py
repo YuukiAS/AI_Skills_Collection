@@ -553,20 +553,40 @@ def _family_timezone(family: dict[str, Any]) -> tuple[Any | None, str | None]:
         return None, "invalid_or_unavailable_timezone"
 
 
-def _recurrence_datetime(local_date: Any, recurrence: dict[str, Any], tzinfo: Any) -> datetime:
-    return datetime.combine(local_date, _parse_time_of_day(recurrence.get("start_time") or recurrence.get("start")), tzinfo=tzinfo)
+def _recurrence_datetime(local_date: Any, recurrence: dict[str, Any], tzinfo: Any) -> tuple[datetime | None, str | None]:
+    local_time = _parse_time_of_day(recurrence.get("start_time") or recurrence.get("start"))
+    if not isinstance(tzinfo, ZoneInfo):
+        return datetime.combine(local_date, local_time, tzinfo=tzinfo), None
+    naive = datetime.combine(local_date, local_time)
+    valid_candidates: list[datetime] = []
+    valid_instants: set[datetime] = set()
+    for fold in (0, 1):
+        candidate = naive.replace(tzinfo=tzinfo, fold=fold)
+        roundtrip = candidate.astimezone(timezone.utc).astimezone(tzinfo).replace(tzinfo=None, fold=0)
+        if roundtrip == naive:
+            valid_candidates.append(candidate)
+            valid_instants.add(candidate.astimezone(timezone.utc))
+    if not valid_candidates:
+        return None, "nonexistent_recurrence_local_time"
+    if len(valid_instants) > 1:
+        return None, "ambiguous_recurrence_local_time"
+    return valid_candidates[0], None
 
 
-def _next_recurrence_after(anchor: datetime, recurrence: dict[str, Any], tzinfo: Any) -> datetime | None:
+def _next_recurrence_after(anchor: datetime, recurrence: dict[str, Any], tzinfo: Any) -> tuple[datetime | None, str | None]:
     weekday = _weekday_index(recurrence.get("weekday"))
     if weekday is None:
-        return None
+        return None, None
     days = (weekday - anchor.weekday()) % 7
     candidate_date = (anchor + timedelta(days=days)).date()
-    candidate = _recurrence_datetime(candidate_date, recurrence, tzinfo)
+    candidate, calendar_error = _recurrence_datetime(candidate_date, recurrence, tzinfo)
+    if calendar_error or candidate is None:
+        return None, calendar_error
     if candidate <= anchor:
-        candidate = _recurrence_datetime(candidate_date + timedelta(days=7), recurrence, tzinfo)
-    return candidate
+        candidate, calendar_error = _recurrence_datetime(candidate_date + timedelta(days=7), recurrence, tzinfo)
+        if calendar_error or candidate is None:
+            return None, calendar_error
+    return candidate, None
 
 
 def _capacity_window_for_start(
@@ -597,33 +617,37 @@ def _capacity_window_for_start(
     }
 
 
-def capacity_windows(family: dict[str, Any], invocation: dict[str, Any], limit: int = 8) -> list[dict[str, Any]]:
+def _capacity_windows_result(family: dict[str, Any], invocation: dict[str, Any], limit: int = 8) -> tuple[list[dict[str, Any]], str | None]:
     target = dict(invocation.get("target_occurrence") or family.get("target_occurrence") or {})
     recurrence = dict(family.get("recurrence") or {})
     now = _parse_datetime(invocation.get("now") or family.get("now")) or datetime.now(timezone.utc)
     family_tz, timezone_error = _family_timezone(family)
     if timezone_error:
-        return []
+        return [], timezone_error
     start = _parse_datetime(target.get("start") or target.get("target_start"))
     if start is not None:
         windows = [_capacity_window_for_start(family, target, recurrence, start)]
         recurrence_tz = family_tz or start.tzinfo
         anchor = start.astimezone(recurrence_tz) if family_tz else start
-        cursor = _next_recurrence_after(anchor, recurrence, recurrence_tz)
+        cursor, calendar_error = _next_recurrence_after(anchor, recurrence, recurrence_tz)
+        if calendar_error:
+            return windows, calendar_error
         if cursor is None or len(windows) >= limit:
-            return windows
+            return windows, None
         follow_on_target = {key: value for key, value in target.items() if key not in {"start", "target_start", "end", "target_end"}}
         cursor_date = cursor.date()
         attempts = 0
         while len(windows) < limit and attempts < max(limit * 4, 4):
-            cursor = _recurrence_datetime(cursor_date, recurrence, recurrence_tz)
+            cursor, calendar_error = _recurrence_datetime(cursor_date, recurrence, recurrence_tz)
+            if calendar_error or cursor is None:
+                return windows, calendar_error
             window = _capacity_window_for_start(family, follow_on_target, recurrence, cursor)
             window_end = window.get("latest_useful_end") or window.get("end")
             if not window_end or window_end >= now:
                 windows.append(window)
             cursor_date = cursor_date + timedelta(days=7)
             attempts += 1
-        return windows
+        return windows, None
     if recurrence:
         weekday = _weekday_index(recurrence.get("weekday"))
         if weekday is not None:
@@ -631,9 +655,13 @@ def capacity_windows(family: dict[str, Any], invocation: dict[str, Any], limit: 
             local_now = now.astimezone(recurrence_tz) if family_tz else now
             days = (weekday - local_now.weekday()) % 7
             candidate_date = (local_now + timedelta(days=days)).date()
-            candidate = _recurrence_datetime(candidate_date, recurrence, recurrence_tz)
+            candidate, calendar_error = _recurrence_datetime(candidate_date, recurrence, recurrence_tz)
+            if calendar_error or candidate is None:
+                return [], calendar_error
             if candidate > local_now:
-                previous = _recurrence_datetime(candidate_date - timedelta(days=7), recurrence, recurrence_tz)
+                previous, calendar_error = _recurrence_datetime(candidate_date - timedelta(days=7), recurrence, recurrence_tz)
+                if calendar_error or previous is None:
+                    return [], calendar_error
                 previous_window = _capacity_window_for_start(family, target, recurrence, previous)
                 previous_end = previous_window.get("latest_useful_end") or previous_window.get("end")
                 if previous_end and previous_end >= local_now:
@@ -642,15 +670,22 @@ def capacity_windows(family: dict[str, Any], invocation: dict[str, Any], limit: 
             cursor_date = candidate.date()
             attempts = 0
             while len(windows) < limit and attempts < max(limit * 4, 4):
-                cursor = _recurrence_datetime(cursor_date, recurrence, recurrence_tz)
+                cursor, calendar_error = _recurrence_datetime(cursor_date, recurrence, recurrence_tz)
+                if calendar_error or cursor is None:
+                    return windows, calendar_error
                 window = _capacity_window_for_start(family, target, recurrence, cursor)
                 window_end = window.get("latest_useful_end") or window.get("end")
                 if not window_end or window_end >= local_now:
                     windows.append(window)
                 cursor_date = cursor_date + timedelta(days=7)
                 attempts += 1
-            return windows
-    return []
+            return windows, None
+    return [], None
+
+
+def capacity_windows(family: dict[str, Any], invocation: dict[str, Any], limit: int = 8) -> list[dict[str, Any]]:
+    windows, _calendar_error = _capacity_windows_result(family, invocation, limit)
+    return windows
 
 
 def next_capacity_window(family: dict[str, Any], invocation: dict[str, Any]) -> dict[str, Any] | None:
@@ -693,10 +728,9 @@ def capacity_reconcile(
 ) -> dict[str, Any]:
     if not _activation_matches(family, invocation):
         return {"action": "read_only", "reason": "activation_scope_mismatch"}
-    _tzinfo, timezone_error = _family_timezone(family)
-    if timezone_error:
-        return {"action": "read_only_proposal", "reason": timezone_error, "successor_mutation": False}
-    windows = capacity_windows(family, invocation)
+    windows, calendar_error = _capacity_windows_result(family, invocation)
+    if calendar_error:
+        return {"action": "read_only_proposal", "reason": calendar_error, "successor_mutation": False}
     window = windows[0] if windows else None
     compatible_active = [
         item
