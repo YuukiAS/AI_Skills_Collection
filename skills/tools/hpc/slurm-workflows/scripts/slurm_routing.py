@@ -576,7 +576,24 @@ def capacity_windows(family: dict[str, Any], invocation: dict[str, Any], limit: 
     now = _parse_datetime(invocation.get("now") or family.get("now")) or datetime.now(timezone.utc)
     start = _parse_datetime(target.get("start") or target.get("target_start"))
     if start is not None:
-        return [_capacity_window_for_start(family, target, recurrence, start)]
+        windows = [_capacity_window_for_start(family, target, recurrence, start)]
+        weekday = _weekday_index(recurrence.get("weekday"))
+        if weekday is None or len(windows) >= limit:
+            return windows
+        follow_on_target = {key: value for key, value in target.items() if key not in {"start", "target_start", "end", "target_end"}}
+        days = (weekday - start.weekday()) % 7
+        cursor = datetime.combine((start + timedelta(days=days)).date(), _parse_time_of_day(recurrence.get("start_time") or recurrence.get("start")), tzinfo=start.tzinfo)
+        if cursor <= start:
+            cursor += timedelta(days=7)
+        attempts = 0
+        while len(windows) < limit and attempts < max(limit * 4, 4):
+            window = _capacity_window_for_start(family, follow_on_target, recurrence, cursor)
+            window_end = window.get("latest_useful_end") or window.get("end")
+            if not window_end or window_end >= now:
+                windows.append(window)
+            cursor = cursor + timedelta(days=7)
+            attempts += 1
+        return windows
     if recurrence:
         weekday = _weekday_index(recurrence.get("weekday"))
         if weekday is not None:
@@ -752,6 +769,7 @@ def _scope_window_contract(family: dict[str, Any]) -> dict[str, Any]:
             if key in target:
                 target_scope[key] = target[key]
     return {
+        "timezone": family.get("timezone"),
         "recurrence": recurrence,
         "target_occurrence": target_scope,
         "target_ready_by": family.get("target_ready_by"),

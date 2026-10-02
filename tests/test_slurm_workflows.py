@@ -191,6 +191,7 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         base_family = {
             "local_site_id": "site-a",
             "capacity_family_id": "weekly-gpu",
+            "timezone": "America/New_York",
             "activation_scope": {"family_id": "weekly-gpu", "accelerator_requirement": "h100"},
             "accepted_resource_contract": {"gpus": 1, "gpu_type": "h100"},
             "allowed_resource_envelope": {"gpus": 1, "gpu_type": "h100"},
@@ -262,6 +263,15 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         self.assertEqual(planned["action"], "plan_one_successor")
         self.assertEqual(planned["target_window"]["start"], "2026-09-28T09:00:00+00:00")
 
+        different_occurrence = json.loads(json.dumps(family))
+        different_occurrence["target_occurrence"] = {
+            "start": "2026-10-05T09:00:00+00:00",
+            "end": "2026-10-05T17:00:00+00:00",
+        }
+        same_scope_plan = helper.capacity_reconcile(different_occurrence, [], [], invocation)
+        self.assertEqual(same_scope_plan["action"], "plan_one_successor")
+        self.assertEqual(same_scope_plan["target_window"]["start"], "2026-10-05T09:00:00+00:00")
+
         changed_window_scope = json.loads(json.dumps(family))
         changed_window_scope["minimum_useful_duration"] = "7h"
         self.assertEqual(
@@ -272,6 +282,12 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         changed_action_scope["authorized_actions"] = {"cancel_stale_successor": True}
         self.assertEqual(
             helper.capacity_reconcile(changed_action_scope, [], [], invocation)["action"],
+            "read_only_proposal",
+        )
+        changed_timezone_scope = json.loads(json.dumps(family))
+        changed_timezone_scope["timezone"] = "UTC"
+        self.assertEqual(
+            helper.capacity_reconcile(changed_timezone_scope, [], [], invocation)["action"],
             "read_only_proposal",
         )
 
@@ -306,6 +322,28 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         current_window_plan = helper.capacity_reconcile(family, [], [], monday_invocation)
         self.assertEqual(current_window_plan["action"], "plan_one_successor")
         self.assertEqual(current_window_plan["target_window"]["start"], "2026-09-28T09:00:00+00:00")
+        explicit_recurring = json.loads(json.dumps(family))
+        explicit_recurring["target_occurrence"] = {
+            "start": "2026-09-28T09:00:00+00:00",
+            "end": "2026-09-28T17:00:00+00:00",
+        }
+        explicit_next_plan = helper.capacity_reconcile(explicit_recurring, [active_current], [], monday_invocation)
+        self.assertEqual(explicit_next_plan["action"], "plan_one_successor")
+        self.assertEqual(explicit_next_plan["target_window"]["start"], "2026-10-05T09:00:00+00:00")
+        self.assertEqual(
+            helper.capacity_reconcile(explicit_recurring, [active_current], [future_successor], monday_invocation)["action"],
+            "keep_successor",
+        )
+        one_off = json.loads(json.dumps(family))
+        one_off.pop("recurrence")
+        one_off["target_occurrence"] = {
+            "start": "2026-09-28T09:00:00+00:00",
+            "end": "2026-09-28T17:00:00+00:00",
+        }
+        self.assertEqual(
+            helper.capacity_reconcile(one_off, [active_current], [], monday_invocation)["action"],
+            "reuse_active",
+        )
         self.assertEqual(
             helper.capacity_reconcile(family, [], [], {"mode": "batch", "family_id": "cpu-maint", "accelerator_requirement": "cpu"})["action"],
             "read_only",
