@@ -505,3 +505,58 @@ The user has authorized entering the implementation phase, but Codex execution s
 USER_AUTHORIZED_IMPLEMENTATION_PHASE=YES
 READY_FOR_CODEX=NO
 ```
+
+
+## 2026-10-02 implementation package revision v0.2
+
+Prior execution-ready Critic review:
+
+`docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_IMPLEMENTATION_EXECUTION_CRITIC_REVIEW_V0_1_2026-10-02.md`
+
+Prior result:
+
+```text
+CRITIC_RESULT=REVISE
+BLOCKERS=E1,E2
+READY_FOR_CODEX=NO
+```
+
+Planner disposition:
+
+- E1 `ACCEPT`: Executor owns G1–G3 PASS and prepares the full G4 representative input/source/output packet, but does not own G4 qualitative PASS. Executor may stop at `G4_READY_FOR_INDEPENDENT_REVIEW=YES` and `FINAL_CANDIDATE_READY_FOR_INDEPENDENT_REVIEW=YES`; the independent Reviewer owns `G4=PASS|REVISE` and implementation overall `PASS|REVISE`.
+- E2 `ACCEPT`: all candidate-owned content must be frozen into exact `FINAL_CANDIDATE_COMMIT=C` before runtime Gates. G1–G3 and the G4 packet run from `C`; the portable zip is built from `C`; later commits are evidence-only and produce `EVIDENCE_HEAD=E`. Reviewer handoff must prove `C..E` contains no candidate-owned change. Any candidate-owned mutation invalidates stale Gate evidence and requires a new candidate plus blast-radius-matched rerun.
+
+Current execution package:
+
+- Plan: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_IMPLEMENTATION_PLAN_V0_2_2026-10-02.md`
+- Goal: `docs/goals/PROJECT_INSTRUCTIONS_EDITOR_IMPLEMENTATION_GOAL_V0_2.md`
+- Kickoff: `docs/operations/prompts/PROJECT_INSTRUCTIONS_EDITOR_IMPLEMENTATION_KICKOFF_V0_2.md`
+- Package commit: `bc191c2875ced0a2a551258bddeeb2d819161f25`
+- Critic handoff: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_IMPLEMENTATION_EXECUTION_CRITIC_PROMPT_V0_3_2026-10-02.md`
+
+The frozen product architecture, four-Gate taxonomy, version decision, ChatGPT/Codex surface boundary, source path, metadata contract and authorization scope are unchanged.
+
+Current Project target remains:
+
+```text
+Project = AI Skills Maintenance
+Issue = #93
+Status = DOING
+Area = standalone-skill
+current execution anchor =
+docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_IMPLEMENTATION_PLAN_V0_2_2026-10-02.md
+```
+
+The current surface still has no GitHub Project-field mutation capability, so this remains an exact pending mutation rather than a synchronization claim.
+
+Issue reader-facing copy still requires a real Clear Writing invocation before substantive mutation. No verifiable invocation surface is available in this runtime:
+
+```text
+CLEAR_WRITING_UNAVAILABLE
+```
+
+```text
+USER_AUTHORIZED_IMPLEMENTATION_PHASE=YES
+READY_FOR_CODEX=NO
+NEXT_HANDOFF=CRITIC
+```
