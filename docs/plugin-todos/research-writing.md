@@ -139,6 +139,23 @@ candidate_action:
 - Group-meeting main text should prioritize method, data, estimand, comparison, evidence and next scientific decision over implementation status.
 promotion_gate: replay on the next long-running computational research project and confirm that internal execution evidence remains available without contaminating the advisor-facing narrative.
 
+### Advisor reports drafted before experiment completion should freeze the scientific story and leave only bounded result slots
+status: NEW
+tracking: UNASSIGNED
+source: Distributed_Imaging_Inference / reusable-risk advisor report, 2026-10-02
+evidence: DII `deliverables/group_meeting_2026-10-03/group_meeting_report_v1.md` at commit `259c9fcc1821a63533401e402b9b4a6016c58916`; frozen feasibility design and execution goal in `docs/research/2026-10-02_risk_transmission/05_FIRST_REUSABLE_RISK_FEASIBILITY_PROTOCOL.md` and `jobs/GOAL_MMS_FIRST_REUSABLE_RISK_FEASIBILITY_2026-10-02.md`
+target layer: research-reporting planning / evidence-boundary / late-result update
+problem: Advisor-facing reports are often prepared before a bounded experiment finishes. A common failure mode is to make the document look “complete” by filling it with runtime status, execution chronology or speculative interpretation; the opposite failure is to leave the whole report structurally unfinished and then rewrite the narrative after seeing the result. In this real case, the scientific question, loss definitions, experimental role and decision logic were already stable before the GPU result, while only a small set of decision-relevant empirical fields was genuinely unknown.
+candidate_action:
+- When the scientific question and experiment contract are already frozen, author the advisor-facing document around the stable story first: motivation, mathematical object, estimand/loss definition, why the experiment is informative, and the exact interpretation boundary.
+- Represent unfinished evidence with a **bounded result slot**, not a generic “results coming later” section. Predeclare only the small set of quantities or decisions that the finished experiment is allowed to fill.
+- Do not use queue state, runtime progress, job IDs, partial logs or executor chronology to fill missing scientific content. A concise sentence such as “formal result pending QA” is enough unless execution feasibility itself changes the science.
+- Do not invent placeholder numbers, provisional claims, empty decorative figures or anticipated conclusions.
+- After the audited result arrives, patch the bounded result slot and the directly dependent interpretation only. Do not silently rewrite the earlier motivation or method story to make the observed result look inevitable.
+- If the result genuinely invalidates the frozen scientific framing, treat that as a research-design revision and explicitly rebuild the report rather than disguising it as a routine result insertion.
+- Preserve the distinction between **document completeness** and **evidence completeness**: an advisor report can be structurally complete before every number exists, provided the unknown evidence is clearly bounded and the claim strength remains pending.
+promotion_gate: replay on one additional advisor/group-meeting report prepared before a formal experiment completes; verify that late evidence can be inserted without execution-log filler, fabricated provisional claims, or post-hoc restructuring of the scientific story.
+
 ### Bilingual advisor reports should be two audience-calibrated versions, not interleaved translation
 status: NEW
 tracking: #28
