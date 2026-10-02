@@ -1,0 +1,82 @@
+{
+  "task": "workflow-core--normal-entry-reliability",
+  "branch": "work/workflow-core--normal-entry-reliability",
+  "approved_package_commit": "314b28289ee92d4115396fd3c486a4100741692f",
+  "implementation_candidate_commit": "0e6c134fef60cd9c22895dba42d7823e01644793",
+  "final_candidate_commit": "671eb532e0ec949dc7889427379a1113cf7a6ea9",
+  "product_version": {
+    "repository": "5.4.1",
+    "workflow-core": "0.5"
+  },
+  "gate_cases": [
+    {
+      "gate": "G1",
+      "name": "Trigger precision",
+      "status": "PASS",
+      "primary_evidence": [
+        "tests/test_workflow_core_normal_entry_reliability.py",
+        "skills/core/codex-system/codex-workflow-protocol/evals/trigger_queries.json",
+        "results/workflow-core--normal-entry-reliability/G1_G6_RESULT.md"
+      ]
+    },
+    {
+      "gate": "G2",
+      "name": "Specialist-first and least-privilege normal entry",
+      "status": "PASS",
+      "primary_evidence": [
+        "tests/test_workflow_core_normal_entry_reliability.py",
+        "results/workflow-core--normal-entry-reliability/G4_NORMAL_ENTRY_TRACE.md",
+        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw/run.json"
+      ]
+    },
+    {
+      "gate": "G3",
+      "name": "Approval-aware privilege-non-increasing recovery",
+      "status": "PASS",
+      "primary_evidence": [
+        "tests/test_workflow_core_normal_entry_reliability.py",
+        "results/workflow-core--normal-entry-reliability/G6_NORMAL_ENTRY_TRACE.md",
+        "results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw/run.json"
+      ]
+    },
+    {
+      "gate": "G4",
+      "name": "Existing inseparable capability-discovery normal entry",
+      "status": "PASS",
+      "primary_evidence": [
+        "results/workflow-core--normal-entry-reliability/G4_NORMAL_ENTRY_TRACE.md",
+        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw/child.stdout.jsonl",
+        "results/workflow-core--normal-entry-reliability/g4_candidate_replay_raw/g4_normal_entry_decision.md"
+      ]
+    },
+    {
+      "gate": "G5",
+      "name": "Broad should-not-change",
+      "status": "PASS",
+      "primary_evidence": [
+        "results/workflow-core--normal-entry-reliability/G1_G6_RESULT.md",
+        "python3 -m unittest discover -s tests",
+        "scripts/build_codex_marketplace.py --check",
+        "scripts/skills.py validate",
+        "scripts/skills.py audit --all"
+      ]
+    },
+    {
+      "gate": "G6",
+      "name": "Real least-privilege / approval-boundary normal-entry replay",
+      "status": "PASS",
+      "primary_evidence": [
+        "results/workflow-core--normal-entry-reliability/G6_ROUTE_IDENTITY.md",
+        "results/workflow-core--normal-entry-reliability/G6_NORMAL_ENTRY_TRACE.md",
+        "results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw/child.stdout.jsonl",
+        "results/workflow-core--normal-entry-reliability/g6_candidate_replay_raw/bounded_publisher_result.md"
+      ]
+    }
+  ],
+  "explicit_non_evidence": [
+    "global workflow-core@yuukias-ai-skills installation status",
+    "source grep without candidate replay",
+    "mock-only publisher behavior",
+    "raw git push fallback"
+  ]
+}
