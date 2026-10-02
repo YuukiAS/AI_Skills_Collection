@@ -1,71 +1,56 @@
-# Slurm Workflows Routing Refactor Prefinal Repair Result
+# Slurm Workflows Routing Refactor Prefinal Repair Result R2
 
 RESULT = READY_FOR_FINAL_CRITIC
 TASK = hpc--slurm-workflows-routing-refactor
 BRANCH = reviewed/hpc--slurm-workflows-routing-refactor
 WORKTREE = /tmp/ai-skills-hpc-slurm-workflows-routing-refactor
-START_MAIN = ee852eff56a755a8d4dfd226fb9607b733fdc1df
+START_MAIN = 72f43c4e135ec8d0a88348a126ec10faeacb965f
 FORMAL_RELEASE_BASELINE = a7028195f3e97d32d51c32ef8c87f658f92048e5
-PRE_REPAIR_REVIEWED_REMOTE = 133c2f7f68cd6209df9f8db616f12c69eeb9bd66
-RECONCILED_MAIN_MERGE = 4ab88662
-FINAL_CANDIDATE = ed48521941f82eeedcfc490c55fa175780db64c9
+PRE_R2_REVIEWED_REMOTE = 3a64a8e8d8915ea60183e96972ec4720376e87ac
+RECONCILED_MAIN_MERGE = fcdffa01
+PREVIOUS_PRODUCT_CANDIDATE = ed48521941f82eeedcfc490c55fa175780db64c9
+FINAL_CANDIDATE = 569f85dde6f676fb2c249f89062c3f81168cac9e
 
 ## Scope And Drift
 
 - Existing worktree was recoverable at `/tmp/ai-skills-hpc-slurm-workflows-routing-refactor`.
-- `origin/main` was fetched and had advanced to `ee852eff56a755a8d4dfd226fb9607b733fdc1df`.
-- The new `origin/main` commits were Project Instructions Editor documentation/review commits and showed no Slurm production source/test/version semantic drift.
-- Local reviewed branch was first fast-forwarded to `origin/reviewed/hpc--slurm-workflows-routing-refactor` at `133c2f7f68cd6209df9f8db616f12c69eeb9bd66`, then latest compatible `origin/main` was merged with ordinary non-force merge commit `4ab88662`.
+- `origin/main` was fetched and had advanced to `72f43c4e135ec8d0a88348a126ec10faeacb965f`.
+- Local reviewed branch was fast-forwarded to `origin/reviewed/hpc--slurm-workflows-routing-refactor` at `3a64a8e8d8915ea60183e96972ec4720376e87ac`.
+- Diff from R2 handoff main `ee852eff9278fda18952f687dda12bd787f01f72` to latest `origin/main` showed no Slurm production source/test/version/generated semantic drift. The new main commits were Project Instructions Editor docs/TODO only.
+- Latest compatible `origin/main` was merged into the existing reviewed branch with ordinary non-force merge commit `fcdffa01`.
 - No rebase, force-push, main integration, release advancement, successor task, new branch, or new worktree occurred.
 
-## Prefinal Blockers
+## R2 Blockers
 
 SWR-PF1 = PASS
-- Enrollment digest scope now binds durable calendar/window/action contract fields, including recurrence/window shape, target readiness, lead time, minimum/latest useful window fields, calendar-bound submission, max successor, submit-successor authority, and stale successor cancel/retarget authority.
-- `_valid_enrollment` and CLI `scope-digest` both use the same `_scope_digest(family)` normalized contract.
-- Same recurrence across occurrence dates remains valid; changing durable window/action fields invalidates an old digest.
+- The existing normalized enrollment scope now includes durable top-level `timezone` through `_scope_window_contract(family)`.
+- `_scope_digest()`, `_valid_enrollment()`, and CLI `scope-digest` continue to share the same normalized object.
+- Same durable recurrence/window/action scope with the same timezone remains valid when only occurrence date changes.
+- Changing only top-level `timezone` invalidates the old digest and returns reconciliation to `read_only_proposal`.
 
 SWR-PF2 = PASS
-- `capacity_reconcile` now scans recurrence windows to the first uncovered target instead of returning immediately when the current window is covered by an active allocation.
-- Covered cases include current occurrence already started but still useful, active allocation covering current N then planning N+1, active + lifecycle successor for N+1 without duplicate planning, active spanning multiple recurrences then planning the first uncovered later recurrence, fail-closed multiple compatible active allocations, fail-closed multiple lifecycle successors, and activation mismatch/read-only unrelated workload behavior.
-- No daemon, watcher, new registry, new gate, or state machine was added.
+- Explicit `target_occurrence` is now treated as the first capacity window.
+- If the family also has the existing weekly recurrence contract, later windows continue from that recurrence after the explicit first occurrence.
+- Active capacity covering explicit N now continues to earliest uncovered N+1/N+k; an existing lifecycle successor for that uncovered occurrence is kept without duplication.
+- Explicit one-off target without recurrence remains single-window and returns `reuse_active` when active allocation covers that window.
 
-SWR-PF3 = PASS
-- Added installed normal-entry G6 coverage for persistent capacity state.
-- The test materializes the installed `slurm-workflows` skill, loads the installed helper from the installed skill path, persists a capacity family with exact enrollment digest to a temp state path, reloads state, reuses a compatible active allocation while planning exactly one missing successor, keeps an existing lifecycle successor without duplication, and keeps unrelated CPU/batch input read-only.
+SWR-PF3 = CLOSED / REGRESSION PASS
+- Installed persistent-capacity G6 normal-entry coverage remains intact.
+- The installed helper path still persists/reloads capacity state and validates missing successor, existing successor, and unrelated CPU/batch read-only behavior.
 
-SWR-PF4 = PASS
-- Runtime/local identity and repo-targeted tracked identity are separated.
-- Explicit local aliases remain stable; raw discovered `ClusterName` values are represented in repo-targeted generated reference/manifest fields as non-reversible `local-slurm-<sha256-prefix>` aliases.
-- Regression checks assert the lower-cased generated reference and manifest do not contain `privateclustersecret`.
+SWR-PF4 = CLOSED / REGRESSION PASS
+- Runtime/raw site identity remains separated from repo-targeted tracked identity.
+- Repo-targeted generated reference/manifest still do not contain raw or normalized private `ClusterName`; explicit local alias behavior remains stable.
 
 ## Required Fields
 
 STICKY_STATE_PERSISTENCE = PASS
-- Candidate keeps the `~/.config/ai-skills/slurm-workflows.toml` state contract for accepted workload contracts, capacity families, enrollments, and optional evidence locators.
-- `tests.test_slurm_workflows.test_g7_sticky_contract_and_right_sizing_hysteresis` proves save/load/reload reuse across independent loads.
-
 CALENDAR_CAPACITY_COVERAGE = PASS
-- Candidate computes recurring capacity windows from recurrence/target occurrence, successor lead time, minimum useful duration, latest useful end/cutoff, and target readiness.
-- Running allocations and lifecycle successors are evaluated against the first uncovered useful target window.
-
 ENROLLMENT_DIGEST_FAIL_CLOSED = PASS
-- Mutation-capable enrollment requires exact valid `scope_digest`.
-- Missing, stale, or mismatched digest remains read-only.
-
 LEGACY_CONFIG_CLEANUP = PASS
-- Fresh generated local override sections emit blank race defaults.
-- Legacy fields remain readable for compatibility.
-
 DOCTOR_SITE_AWARE = PASS
-- `environment doctor` derives requiredness from public profile constraints and local/live facts instead of universal account/partition/qos/scratch/module assumptions.
-
 G6_TRUE_NORMAL_ENTRY = PASS
-- Fake Slurm on PATH exercises detect -> plan -> apply -> doctor -> installed helper -> live discovery -> local preference -> route.
-- Installed persistent-capacity state coverage uses the installed helper, not the source helper.
-
 PUBLIC_SAFE_GENERATED_REFERENCE = PASS
-- Repo-targeted generated site references and manifests use public-safe tracked identities and safe local override locators.
 
 REAL_SLURM_MUTATION = NO
 - No `sbatch`, `salloc`, `scancel`, mutating `scontrol`, or real weekly GPU enrollment was run.
@@ -80,9 +65,14 @@ TRACKING_ISSUE = #95
 - URL: https://github.com/YuukiAS/AI_Skills_Collection/issues/95
 - Existing maintenance tracking remains the single top-level Slurm Workflows regression item.
 - Canonical source backlink remains `docs/skill-todos/slurm-workflows.md` with `tracking: #95`.
+- Reader-facing body was updated after Clear Writing replay with installed `writing-style@yuukias-ai-skills`.
+- Clear Writing run id: `20261002T080321Z-060417b9d5e3`.
+- Issue body now anchors current product candidate `569f85dde6f676fb2c249f89062c3f81168cac9e`, R2 progress, and next action.
 
 PROJECT_STATUS = DOING
-- Issue #95 remains `DOING` pending independent Critic and later integration/release closure.
+- `gh issue view 95 --json projectItems` reported Project `AI Skills Maintenance` status `DOING`.
+- Labels remain `maintenance-track`, `kind:regression`, `scope:standalone-skill`, `area:standalone-skill`.
+- Resolution commit remains intentionally empty before final Critic and integration/release closure.
 
 INTEGRATED_TO_MAIN = NO
 FORMAL_RELEASE_ADVANCED = NO
@@ -90,16 +80,16 @@ FINAL_CRITIC = PENDING
 
 ## Gate Evidence
 
-All commands below were run after the repair on the worktree that was committed as `ed48521941f82eeedcfc490c55fa175780db64c9`.
+All final gate evidence below is bound to product candidate `569f85dde6f676fb2c249f89062c3f81168cac9e`.
 
-- `python -m py_compile skills/tools/hpc/slurm-workflows/scripts/slurm_routing.py scripts/skills.py tests/test_slurm_workflows.py` -> PASS.
-- Affected G6/G8 targeted command -> PASS, 6 tests, 1.884s.
-- `python -m unittest tests.test_slurm_workflows` -> PASS, 13 tests, 1.913s.
-- `python -m unittest tests.test_skill_update` -> PASS, 11 tests, 0.787s.
+- `python -m py_compile skills/tools/hpc/slurm-workflows/scripts/slurm_routing.py tests/test_slurm_workflows.py` -> PASS.
+- PF1/PF2/G8 targeted: `python -m unittest tests.test_slurm_workflows.SlurmWorkflowsRoutingTests.test_g8_modes_capacity_reuse_successor_and_enrollment` -> PASS, 1 test, 0.040s.
+- Full G1-G8: `python -m unittest tests.test_slurm_workflows` -> PASS, 13 tests, 2.380s.
+- `python -m unittest tests.test_skill_update` -> PASS, 11 tests, 7.367s.
 - `python scripts/skills.py validate` -> PASS, 154 active skills, 18 profiles.
 - `python scripts/skills.py audit --all` -> PASS, exit 0; output contained profile/domain budget advice only.
 - `python scripts/build_codex_marketplace.py --write --validate --check --path-report` -> PASS, `plugins=10`, `active_skills=29`, `source_snapshots=72`, `over_budget=0`.
-- `python -m unittest discover -s tests` -> PASS, 320 tests, 132.368s.
+- `python -m unittest discover -s tests` -> PASS, 320 tests, 170.999s.
 
 ## Version Decision
 
@@ -124,27 +114,27 @@ Review `YuukiAS/AI_Skills_Collection` task `hpc--slurm-workflows-routing-refacto
 Use product candidate:
 
 ```text
-ed48521941f82eeedcfc490c55fa175780db64c9
+569f85dde6f676fb2c249f89062c3f81168cac9e
 ```
 
 Read:
 
-- `results/hpc--slurm-workflows-routing-refactor/PLANNER_REPAIR_HANDOFF_R1_2026-10-02.md`
-- `results/hpc--slurm-workflows-routing-refactor/PREFINAL_CRITIC_REVIEW_R1_2026-10-02.md`
+- `results/hpc--slurm-workflows-routing-refactor/PLANNER_REPAIR_HANDOFF_R2_2026-10-02.md`
+- `results/hpc--slurm-workflows-routing-refactor/PREFINAL_CRITIC_REVIEW_R2_2026-10-02.md`
 - `results/hpc--slurm-workflows-routing-refactor/RESULT.md`
-- changed source and tests in candidate `ed48521941f82eeedcfc490c55fa175780db64c9`
-- version metadata, generated registry/catalog parity, tracking evidence, and canonical standalone-skill TODO as needed
+- changed source and tests in candidate `569f85dde6f676fb2c249f89062c3f81168cac9e`
+- tracking artifacts under `results/hpc--slurm-workflows-routing-refactor/tracking/`
+- Issue #95 and `docs/skill-todos/slurm-workflows.md` as needed
 
-Independently verify whether the bounded prefinal repair contract is satisfied:
+Independently verify whether the bounded R2 prefinal repair contract is satisfied:
 
-- SWR-PF1: exact enrollment `scope_digest` covers durable calendar/window/action scope; same recurrence across occurrence dates remains valid; changing durable window/action fields invalidates old digest; `_valid_enrollment` and CLI `scope-digest` share the same normalized object.
-- SWR-PF2: capacity lifecycle scans to the first uncovered recurrence; current useful window, N+1 successor maintenance, active spanning multiple recurrences, multiple active/successor fail-closed behavior, activation mismatch, and unrelated read-only behavior are covered without daemon/watcher/state-machine expansion.
-- SWR-PF3: G6 installed normal-entry coverage uses an installed skill helper and persisted/reloaded capacity state, then validates active reuse plus one missing successor, existing successor no duplicate, and unrelated CPU/batch read-only behavior.
-- SWR-PF4: repo-targeted generated references/manifests do not leak raw discovered `ClusterName`, including lower-cased `privateclustersecret`, while explicit local aliases remain stable.
+- SWR-PF1: durable top-level `timezone` is included in the existing normalized enrollment digest scope; same timezone with occurrence date changes stays valid; changing only timezone invalidates the old digest and returns to read-only; `_valid_enrollment` and CLI `scope-digest` still use the same normalized object.
+- SWR-PF2: explicit `target_occurrence` is the first window; recurring families continue to N+1/N+k after the explicit first occurrence; active covering explicit N plans one missing successor for N+1; existing lifecycle successor for N+1 is kept without duplication; explicit one-off target without recurrence remains single-window `reuse_active`.
+- SWR-PF3/PF4 remain closed with regression coverage: installed persistent-capacity G6 normal-entry still passes, and repo-targeted tracked identity still does not leak raw or normalized private `ClusterName` while explicit aliases remain stable.
 - Latest compatible `origin/main` was merged into the existing reviewed branch without rebase/force-push and without relevant Slurm semantic conflict.
-- G6/G8 targeted tests, complete G1-G8, generated parity, and full suite are credible and bound to product candidate `ed48521941f82eeedcfc490c55fa175780db64c9`.
+- PF1/PF2/G8 targeted test, complete G1-G8, generated parity, and full suite are credible and bound to product candidate `569f85dde6f676fb2c249f89062c3f81168cac9e`.
 - Versions remain repository `5.4.1`, standalone `slurm-workflows 0.3`, central Plugins `NO_BUMP`, Bridge Kit `NO CHANGE`.
-- Issue #95 remains the single top-level maintenance tracking issue and remains `DOING`.
+- Issue #95 remains the single top-level maintenance tracking issue, remains `DOING`, keeps classification/Area/source backlink/empty Resolution commit, and its body has been updated through Clear Writing to the current candidate and next action.
 - `REAL_SLURM_MUTATION = NO`; no main integration, release advancement, or self-approval occurred.
 
 Return `PASS` only if the product candidate can proceed to integration/release closure. Otherwise return `REVISE` with concrete file/line findings.
