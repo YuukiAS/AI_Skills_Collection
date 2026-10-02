@@ -1,0 +1,16 @@
+{
+  "absent_contrast": {
+    "definitely_missing_renderer": null
+  },
+  "default_path": {
+    "typst": null,
+    "xelatex": "/usr/bin/xelatex"
+  },
+  "project_probe": {
+    "minimal_pdf_writer": {
+      "available": true,
+      "path": "outputs/g4_probe/minimal_probe.pdf",
+      "sha256": "651c1d5beb8810f5442741b99bc878e2dc218f470838655cc38c1397f5925bae"
+    }
+  }
+}

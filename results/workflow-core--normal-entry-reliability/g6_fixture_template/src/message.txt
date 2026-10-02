@@ -1,0 +1,1 @@
+workflow-core normal entry fixture

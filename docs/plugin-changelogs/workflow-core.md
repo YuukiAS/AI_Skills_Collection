@@ -4,6 +4,36 @@
 
 No pending released changes.
 
+## 0.5 - 2026-10-02
+
+Before:
+
+- Verified Workflow could still overread a missing default tool, local flag
+  failure, or approval rejection as proof that a capability was absent.
+- Bounded route failure could tempt an executor to retry through a broader raw
+  route instead of preserving already-successful local work and blocking only
+  the affected publication or transport effect.
+
+After:
+
+- Added least-privilege normal-entry selection before escalation: current-user
+  / frozen-task / repository canonical routes first, then specialist probes or
+  project-declared runtimes, then current workspace capability, and only then an
+  authority path for effects that truly exceed all normal boundaries.
+- Required `required`, `optional`, and `unknown` effect classification so
+  optional cleanup or convenience work cannot drive escalation or block a frozen
+  objective.
+- Added approval-aware, privilege-non-increasing recovery: automatic recovery
+  must preserve frozen effect, professional quality, evidence strength,
+  safety/privacy, artifact identity, and authorization scope without broadening
+  privilege.
+- Required approval rejection to be classified as non-required effect,
+  unnecessarily privileged route, genuine authority/safety boundary, or broken
+  canonical/normal entry before retry.
+- Strengthened repeat-rejection handling so switching shell wrappers, raw
+  commands, escalation flags, or command spelling is not treated as new
+  information.
+
 ## 0.4 - 2026-09-24
 
 Before:

@@ -4,6 +4,51 @@
 
 No unreleased changes.
 
+## 5.4.1 - 2026-10-02
+
+Repository `5.4.1` is a compatible patch release for Verified Workflow
+normal-entry reliability.
+
+Repository bump decision: PATCH
+Reason: this release improves the existing `workflow-core` / Verified Workflow
+normal entry, approval-boundary recovery, and evidence accounting behavior
+without adding a new repository-level user capability.
+
+Affected plugins:
+- `workflow-core`: `0.4` -> `0.5`
+  Reason: Verified Workflow now requires least-privilege normal-entry selection
+  before escalation, distinguishes required/optional/unknown effects, classifies
+  approval rejection and bounded route failures before retry, forbids broader
+  raw fallbacks when no privilege-non-increasing equivalent exists, and
+  preserves successful local evidence when only publication or transport is
+  blocked.
+- all other central plugins: NO_BUMP
+  Reason: this release does not change their production behavior.
+
+Unchanged central plugin versions: `ai-skills-core 0.5`,
+`writing-style 0.4`, `research-writing 0.2`, `presentations 0.3`,
+`scientific-visualization 0.1`, `web-development 0.4`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Verified Workflow checks repository canonical, specialist, project runtime,
+  and workspace-normal routes before deciding a capability is absent or
+  escalating authority.
+- Approval rejection and bounded route failures now preserve already-successful
+  local build/check/artifact/commit evidence and block only the specific
+  publication or external transport effect when no safe equivalent recovery is
+  available.
+- Candidate replay evidence for the qualification candidate proved
+  `workflow-core@ai-skills-candidate` actual consumption without live-global
+  workflow-core installation or production Marketplace mutation.
+
+Plugin changelog index: `docs/plugin-changelogs/README.md`.
+
+Affected plugin changelog:
+
+- `docs/plugin-changelogs/workflow-core.md`
+
 ## 5.4.0 - 2026-09-29
 
 Repository `5.4.0` adds the Product UI Copy cross-plugin normal workflow

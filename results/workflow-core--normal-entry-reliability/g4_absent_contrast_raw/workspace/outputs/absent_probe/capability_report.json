@@ -1,0 +1,53 @@
+{
+  "capability_status": "blocked_target_not_met",
+  "closed_world_contract": ".ai-skills/capability-contract.md",
+  "declared_route_count": 3,
+  "fixture_root": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/results/workflow-core--normal-entry-reliability/g4_absent_fixture",
+  "missing_scope": [
+    "canonical_task_route",
+    "matched_specialist_route",
+    "project_declared_runtime_route"
+  ],
+  "routes": [
+    {
+      "kind": "canonical",
+      "name": "canonical_task_route",
+      "reason": "declared route script is absent in controlled fixture",
+      "relative_command": [
+        "python3",
+        "tools/canonical_pdf_route.py",
+        "outputs/final.pdf"
+      ],
+      "script": "tools/canonical_pdf_route.py",
+      "script_exists": false,
+      "usable": false
+    },
+    {
+      "kind": "specialist",
+      "name": "matched_specialist_route",
+      "reason": "declared route script is absent in controlled fixture",
+      "relative_command": [
+        "python3",
+        "specialist/render_pdf.py",
+        "outputs/final.pdf"
+      ],
+      "script": "specialist/render_pdf.py",
+      "script_exists": false,
+      "usable": false
+    },
+    {
+      "kind": "project_runtime",
+      "name": "project_declared_runtime_route",
+      "reason": "declared route script is absent in controlled fixture",
+      "relative_command": [
+        "python3",
+        ".project-runtime/render_pdf.py",
+        "outputs/final.pdf"
+      ],
+      "script": ".project-runtime/render_pdf.py",
+      "script_exists": false,
+      "usable": false
+    }
+  ],
+  "usable_route_count": 0
+}

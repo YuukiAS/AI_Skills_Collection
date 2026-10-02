@@ -1,0 +1,111 @@
+{
+  "final_status": "blocked_target_not_met",
+  "decision_status": "complete",
+  "pdf_artifact_completed": false,
+  "release_gate_passed": false,
+  "requested_artifact": {
+    "type": "PDF",
+    "content": "signed fixture certificate",
+    "declared_output_path": "outputs/final.pdf",
+    "produced_by_declared_route": false,
+    "valid_pdf_produced": false,
+    "signature_verified": false
+  },
+  "canonical_task_route_usable": false,
+  "matched_specialist_route_usable": false,
+  "project_declared_runtime_route_usable": false,
+  "routes": [
+    {
+      "kind": "canonical",
+      "name": "canonical_task_route",
+      "reason": "declared route script is absent in controlled fixture",
+      "relative_command": [
+        "python3",
+        "tools/canonical_pdf_route.py",
+        "outputs/final.pdf"
+      ],
+      "script": "tools/canonical_pdf_route.py",
+      "script_exists": false,
+      "usable": false
+    },
+    {
+      "kind": "specialist",
+      "name": "matched_specialist_route",
+      "reason": "declared route script is absent in controlled fixture",
+      "relative_command": [
+        "python3",
+        "specialist/render_pdf.py",
+        "outputs/final.pdf"
+      ],
+      "script": "specialist/render_pdf.py",
+      "script_exists": false,
+      "usable": false
+    },
+    {
+      "kind": "project_runtime",
+      "name": "project_declared_runtime_route",
+      "reason": "declared route script is absent in controlled fixture",
+      "relative_command": [
+        "python3",
+        ".project-runtime/render_pdf.py",
+        "outputs/final.pdf"
+      ],
+      "script": ".project-runtime/render_pdf.py",
+      "script_exists": false,
+      "usable": false
+    }
+  ],
+  "declared_route_count": 3,
+  "usable_route_count": 0,
+  "closed_world_capability_absence": true,
+  "ordinary_path_miss": false,
+  "undeclared_fallback_attempted": false,
+  "replacement_artifact_produced": false,
+  "network_accessed": false,
+  "authority_escalation_attempted": false,
+  "user_decision_required": false,
+  "dependency_classification": "UNSUPPORTED_WITH_EVIDENCE",
+  "route_equivalence": {
+    "frozen_effect": "未满足：没有声明路径可以交付签名 fixture 证书。",
+    "professional_quality": "未验证：没有证书产物，无法检查内容或签名。",
+    "acceptance_evidence_strength": "探针证明路由缺失；不能替代声明路径生成有效 %PDF- 文件的验收证据。",
+    "safety_privacy": "保持原边界：仅本地读取与安全探针，无网络访问。",
+    "artifact_identity": "保留 PDF 要求；Markdown、JSON 是门禁记录，不是证书替代物。",
+    "current_authorization_scope": "仅限三条声明路径；未扩大权限或尝试未声明路径。"
+  },
+  "probe": {
+    "command": "python3 /overflow/htzhu/mingcheng_new/AI_Skills_Collection/results/workflow-core--normal-entry-reliability/g4_absent_fixture/tools/capability_absent_probe.py outputs/absent_probe",
+    "exit_code": 0,
+    "report": "outputs/absent_probe/capability_report.json"
+  },
+  "evidence": {
+    "input": {
+      "path": "inputs/01-g4_absent_contrast_input.md",
+      "sha256": "2b402a77b79d16334deef2dfc9a6e49d53455221e9bf2d1ec4cf8669446416ff"
+    },
+    "route_contract": {
+      "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/results/workflow-core--normal-entry-reliability/g4_absent_fixture/.ai-skills/capability-contract.md",
+      "sha256": "34de7a817f087d2bee29a5deed83c2412948d743732d98a773c1dccf0e9224b4"
+    },
+    "safe_probe": {
+      "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/results/workflow-core--normal-entry-reliability/g4_absent_fixture/tools/capability_absent_probe.py",
+      "sha256": "bc25d1be10e929c0187f0ff694cd720807b33c32def72b02a5e3bc7796eefc02"
+    },
+    "probe_report": {
+      "path": "outputs/absent_probe/capability_report.json",
+      "sha256": "3f0eb22601aebe7757974c04b76bf7534ecfec209c646153ec43794dd2aaad2f"
+    },
+    "process_skill": {
+      "path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/workflow-core/0.5/skills/workflow/SKILL.md",
+      "sha256": "1befaedd644df86c290cbeb2cfe7aa7f718f857ac91463b1006c2bb695f982e0"
+    },
+    "specialist_skill": {
+      "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.agents/skills/tools-documents-media-pdf/SKILL.md",
+      "sha256": "6e282b2851fe139329035096bc9ea80394a944d2498da79e920a863fdff65678"
+    }
+  },
+  "decision_document": {
+    "path": "outputs/g4_absent_contrast_decision.md",
+    "sha256": "c7bfb04feafc5d1d591a63448a12281fac814189ec94ac0866620a78355f23bc"
+  }
+}
