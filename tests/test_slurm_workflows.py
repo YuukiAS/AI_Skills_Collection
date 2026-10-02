@@ -68,6 +68,8 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         self.assertEqual(context["fact_provenance"]["associations"], "UNKNOWN")
         self.assertEqual(context["fact_provenance"]["partition_detail"], "UNKNOWN")
         self.assertTrue(context["local_site_id"].startswith("privatecluster"))
+        self.assertTrue(context["tracked_site_id"].startswith("local-slurm-"))
+        self.assertNotEqual(context["tracked_site_id"], context["local_site_id"])
         self.assertNotIn("PrivateCluster ", json.dumps(context))
 
     def test_g1_generic_source_has_no_deployment_routing_constants(self) -> None:
@@ -186,7 +188,7 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         self.assertEqual(helper.classify_workload_mode({"entrypoint": "train.py"}), "batch")
         self.assertEqual(helper.classify_workload_mode({"persistent": True}), "persistent")
         self.assertEqual(helper.classify_workload_mode({"debug": True}), "debug")
-        family = {
+        base_family = {
             "local_site_id": "site-a",
             "capacity_family_id": "weekly-gpu",
             "activation_scope": {"family_id": "weekly-gpu", "accelerator_requirement": "h100"},
@@ -198,21 +200,13 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             "site_capabilities": {"calendar_submit_verified": True},
             "auto_maintain_successor": True,
         }
+        family = json.loads(json.dumps(base_family))
         invocation = {
             "mode": "persistent",
             "family_id": "weekly-gpu",
             "accelerator_requirement": "h100",
             "now": "2026-09-27T12:00:00+00:00",
         }
-        self.assertEqual(
-            helper.capacity_reconcile(
-                family,
-                [{"state": "RUNNING", "gpus": 1, "gpu_type": "h100", "start_time": "2026-09-27T11:00:00+00:00", "end_time": "2026-09-29T00:00:00+00:00"}],
-                [],
-                invocation,
-            )["action"],
-            "reuse_active",
-        )
         self.assertEqual(
             helper.capacity_reconcile(
                 family,
@@ -264,10 +258,54 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             helper.capacity_reconcile(unverified, [], [], invocation)["reason"],
             "calendar_submit_unverified",
         )
+        planned = helper.capacity_reconcile(family, [], [], invocation)
+        self.assertEqual(planned["action"], "plan_one_successor")
+        self.assertEqual(planned["target_window"]["start"], "2026-09-28T09:00:00+00:00")
+
+        changed_window_scope = json.loads(json.dumps(family))
+        changed_window_scope["minimum_useful_duration"] = "7h"
         self.assertEqual(
-            helper.capacity_reconcile(family, [], [], invocation)["action"],
-            "plan_one_successor",
+            helper.capacity_reconcile(changed_window_scope, [], [], invocation)["action"],
+            "read_only_proposal",
         )
+        changed_action_scope = json.loads(json.dumps(family))
+        changed_action_scope["authorized_actions"] = {"cancel_stale_successor": True}
+        self.assertEqual(
+            helper.capacity_reconcile(changed_action_scope, [], [], invocation)["action"],
+            "read_only_proposal",
+        )
+
+        monday_invocation = dict(invocation)
+        monday_invocation["now"] = "2026-09-28T10:00:00+00:00"
+        active_current = {
+            "state": "RUNNING",
+            "gpus": 1,
+            "gpu_type": "h100",
+            "start_time": "2026-09-28T08:00:00+00:00",
+            "end_time": "2026-09-28T18:00:00+00:00",
+        }
+        future_successor = {
+            "lifecycle_owned": True,
+            "gpus": 1,
+            "gpu_type": "h100",
+            "requested_start": "2026-10-05T08:00:00+00:00",
+            "end_time": "2026-10-05T18:00:00+00:00",
+        }
+        next_plan = helper.capacity_reconcile(family, [active_current], [], monday_invocation)
+        self.assertEqual(next_plan["action"], "plan_one_successor")
+        self.assertEqual(next_plan["target_window"]["start"], "2026-10-05T09:00:00+00:00")
+        self.assertEqual(
+            helper.capacity_reconcile(family, [active_current], [future_successor], monday_invocation)["action"],
+            "keep_successor",
+        )
+        spanning_active = dict(active_current)
+        spanning_active["end_time"] = "2026-10-06T18:00:00+00:00"
+        spanning_plan = helper.capacity_reconcile(family, [spanning_active], [], monday_invocation)
+        self.assertEqual(spanning_plan["action"], "plan_one_successor")
+        self.assertEqual(spanning_plan["target_window"]["start"], "2026-10-12T09:00:00+00:00")
+        current_window_plan = helper.capacity_reconcile(family, [], [], monday_invocation)
+        self.assertEqual(current_window_plan["action"], "plan_one_successor")
+        self.assertEqual(current_window_plan["target_window"]["start"], "2026-09-28T09:00:00+00:00")
         self.assertEqual(
             helper.capacity_reconcile(family, [], [], {"mode": "batch", "family_id": "cpu-maint", "accelerator_requirement": "cpu"})["action"],
             "read_only",
@@ -307,6 +345,84 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         self.assertIn("policy_overlay_id: none", reference)
         self.assertEqual(route["decision"], "route")
 
+    def test_g6_installed_persistent_capacity_state_normal_entry(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp) / "project"
+            override = Path(tmp) / "local-overrides.toml"
+            override.write_text(
+                "[sites.third-party]\nlocal_site_id = \"third-party\"\npartition_priority = \"pi-fast\"\n",
+                encoding="utf-8",
+            )
+            args = argparse.Namespace(
+                site="third-party",
+                target="repo",
+                project=str(project),
+                hostname=None,
+                path=None,
+                local_override=str(override),
+                dry_run=False,
+                json=True,
+            )
+            plan = skills.environment_plan_payload(args)
+            skills.environment_apply_plan(args, plan)
+            installed = skills.environment_target_root(args) / "slurm-workflows"
+            installed_helper = load_helper(installed / "scripts" / "slurm_routing.py")
+            state_path = Path(tmp) / "runtime-home" / ".config" / "ai-skills" / "slurm-workflows.toml"
+            family = {
+                "local_site_id": "third-party",
+                "capacity_family_id": "weekly-gpu",
+                "activation_scope": {"family_id": "weekly-gpu", "accelerator_requirement": "h100"},
+                "accepted_resource_contract": {"gpus": 1, "gpu_type": "h100"},
+                "allowed_resource_envelope": {"gpus": 1, "gpu_type": "h100"},
+                "recurrence": {"weekday": "mon", "start_time": "09:00", "duration_hours": 8},
+                "minimum_useful_duration": "6h",
+                "successor_lead_time": "12h",
+                "site_capabilities": {"calendar_submit_verified": True},
+                "auto_maintain_successor": True,
+            }
+            family["enrollment"] = {"submit_successor": True, "max_successor": 1, "scope_digest": installed_helper._scope_digest(family)}
+            state = installed_helper.load_workflow_state(state_path)
+            installed_helper.persist_capacity_family(state, family, "artifact:capacity-review")
+            installed_helper.save_workflow_state(state, state_path)
+            loaded_family = installed_helper.load_workflow_state(state_path)["capacity_families"]["weekly-gpu"]
+            invocation = {
+                "mode": "persistent",
+                "family_id": "weekly-gpu",
+                "accelerator_requirement": "h100",
+                "now": "2026-09-28T10:00:00+00:00",
+            }
+            active_current = {
+                "state": "RUNNING",
+                "gpus": 1,
+                "gpu_type": "h100",
+                "start_time": "2026-09-28T08:00:00+00:00",
+                "end_time": "2026-09-28T18:00:00+00:00",
+            }
+            future_successor = {
+                "lifecycle_owned": True,
+                "gpus": 1,
+                "gpu_type": "h100",
+                "requested_start": "2026-10-05T08:00:00+00:00",
+                "end_time": "2026-10-05T18:00:00+00:00",
+            }
+
+        missing_successor = installed_helper.capacity_reconcile(loaded_family, [active_current], [], invocation)
+        self.assertEqual(missing_successor["action"], "plan_one_successor")
+        self.assertEqual(missing_successor["target_window"]["start"], "2026-10-05T09:00:00+00:00")
+        self.assertEqual(
+            installed_helper.capacity_reconcile(loaded_family, [active_current], [future_successor], invocation)["action"],
+            "keep_successor",
+        )
+        self.assertEqual(
+            installed_helper.capacity_reconcile(
+                loaded_family,
+                [],
+                [{"lifecycle_owned": True, "gpus": 0, "gpu_type": "cpu", "requested_start": "2026-10-05T08:00:00+00:00", "end_time": "2026-10-05T18:00:00+00:00"}],
+                {"mode": "batch", "family_id": "cpu-maint", "accelerator_requirement": "cpu"},
+            )["action"],
+            "read_only",
+        )
+
     def test_g6_true_normal_entry_detect_plan_apply_doctor_installed_live_route(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             bindir = Path(tmp) / "bin"
@@ -342,7 +458,7 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
                 installed_helper = load_helper(installed / "scripts" / "slurm_routing.py")
                 live_context = installed_helper.discover_live_site_context(local_site_id=manifest["local_site_id"])
                 local_data, _errors = skills.parse_environment_local_override(override)
-                local_policy = skills.environment_public_override_policy(local_data[manifest["local_site_id"]])
+                local_policy = skills.environment_public_override_policy(local_data[plan["local_site_id"]])
                 route = installed_helper.route_candidates(
                     live_context,
                     {"gpus": 1, "gpu_type": "h100", "accelerator_hard": True},
@@ -352,6 +468,8 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             manifest_text = json.dumps(manifest, sort_keys=True)
         self.assertEqual(detected_rc, 0)
         self.assertEqual(plan["local_site_id"], "privateclustersecret")
+        self.assertTrue(manifest["local_site_id"].startswith("local-slurm-"))
+        self.assertNotEqual(manifest["local_site_id"], plan["local_site_id"])
         self.assertTrue(plan["runtime_available"])
         self.assertEqual(doctor["diagnostics"]["missing_required_fields"], [])
         self.assertEqual(route["decision"], "route")
@@ -360,6 +478,8 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         self.assertNotIn(str(Path(tmp)), reference)
         self.assertNotIn(str(Path(tmp)), manifest_text)
         self.assertNotIn("PrivateClusterSecret", reference)
+        self.assertNotIn("privateclustersecret", reference.lower())
+        self.assertNotIn("privateclustersecret", manifest_text.lower())
         self.assertNotIn("private-controller", reference)
 
     def test_g6_known_profile_keeps_distinct_local_site_id(self) -> None:

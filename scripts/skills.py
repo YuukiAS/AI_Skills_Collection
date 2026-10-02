@@ -1202,6 +1202,7 @@ def environment_plan_payload(args: argparse.Namespace) -> dict[str, Any]:
         profile = environment_local_site_profile(str(live_context["local_site_id"]))
         requested_site_id = profile["id"]
     local_site_id = site_fields.get("local_site_id") or live_context.get("local_site_id") or (profile["id"] if profile else None)
+    tracked_site_id = live_context.get("tracked_site_id") or local_site_id
     policy_overlay_id = site_fields.get("policy_overlay_id") or (
         profile["id"] if profile and not profile.get("_local_only") else live_context.get("policy_overlay_id")
     )
@@ -1235,6 +1236,7 @@ def environment_plan_payload(args: argparse.Namespace) -> dict[str, Any]:
         "site_id": local_site_id,
         "requested_site_id": requested_site_id,
         "local_site_id": local_site_id,
+        "tracked_site_id": tracked_site_id,
         "policy_overlay_id": policy_overlay_summary["id"] if policy_overlay_summary else None,
         "site_profile_path": policy_overlay.get("_path") if policy_overlay else None,
         "matched_site_ids": [item["id"] for item in matches],
@@ -1253,6 +1255,8 @@ def environment_plan_payload(args: argparse.Namespace) -> dict[str, Any]:
 
 def environment_site_reference(profile: dict[str, Any] | None, local_override: Path, live_context: dict[str, Any] | None = None) -> str:
     live_context = live_context or {}
+    runtime_site_id = live_context.get("local_site_id")
+    tracked_site_id = live_context.get("tracked_site_id") or runtime_site_id
     lines = [
         "# Generated Slurm site context",
         "",
@@ -1261,16 +1265,20 @@ def environment_site_reference(profile: dict[str, Any] | None, local_override: P
         "",
     ]
     if not profile:
-        lines.append(f"local_site_id: {live_context.get('local_site_id') or 'none'}")
+        lines.append(f"local_site_id: {tracked_site_id or 'none'}")
         lines.append("policy_overlay_id: none")
         lines.append(f"runtime_available: {bool(live_context.get('runtime_available'))}")
         return "\n".join(lines) + "\n"
     policy_overlay_id = profile["id"] if not profile.get("_local_only") else None
+    reference_site_id = tracked_site_id or profile["id"]
+    display_name = profile.get("display_name", profile["id"])
+    if profile.get("_local_only") and tracked_site_id:
+        display_name = str(tracked_site_id)
     lines.extend(
         [
-            f"local_site_id: {live_context.get('local_site_id') or profile['id']}",
+            f"local_site_id: {reference_site_id}",
             f"policy_overlay_id: {policy_overlay_id or 'none'}",
-            f"display_name: {profile.get('display_name', profile['id'])}",
+            f"display_name: {display_name}",
             f"profile_revision: {profile.get('revision', 'unknown')}",
             f"scheduler: {profile.get('scheduler', 'unknown')}",
             f"runtime_available: {bool(live_context.get('runtime_available'))}",
@@ -1291,7 +1299,7 @@ def environment_site_reference(profile: dict[str, Any] | None, local_override: P
     for key in sorted(constraints):
         lines.append(f"- {key}: {constraints[key]}")
     local_data, _errors = parse_environment_local_override(local_override)
-    local_site_id = live_context.get("local_site_id") or profile["id"]
+    local_site_id = runtime_site_id or profile["id"]
     local_policy = environment_public_override_policy(
         environment_local_fields(local_data, live_context.get("requested_site_id"), str(local_site_id))
     )
@@ -1333,6 +1341,7 @@ def environment_apply_plan(args: argparse.Namespace, plan: dict[str, Any]) -> di
         site_fields = {**site_fields, "local_site_id": str(plan["local_site_id"])}
     live_context = environment_live_context(profile, site_fields)
     live_context["requested_site_id"] = plan.get("requested_site_id")
+    live_context["tracked_site_id"] = plan.get("tracked_site_id") or live_context.get("tracked_site_id") or plan.get("local_site_id")
     target_root.mkdir(parents=True, exist_ok=True)
     staging_root = target_root.parent / f".ai-skills-environment-staging-{os.getpid()}"
     if staging_root.exists():
@@ -1363,15 +1372,17 @@ def environment_apply_plan(args: argparse.Namespace, plan: dict[str, Any]) -> di
             manifest_target_root = "repo:.agents/skills"
             manifest_installed = [{**item, "target": item["name"]} for item in installed]
             manifest_managed_paths = [item["name"] for item in installed]
+            manifest_site_id = live_context.get("tracked_site_id") or plan["local_site_id"]
         else:
             manifest_target_root = "user:skills"
             manifest_installed = [{**item, "target": item["name"]} for item in installed]
             manifest_managed_paths = [item["name"] for item in installed]
+            manifest_site_id = plan["local_site_id"]
         manifest = {
             "schema_version": 1,
             "kind": "ai-skills-environment",
-            "site_id": plan["site_id"],
-            "local_site_id": plan["local_site_id"],
+            "site_id": manifest_site_id,
+            "local_site_id": manifest_site_id,
             "policy_overlay_id": plan["policy_overlay_id"],
             "site_profile_path": plan["site_profile_path"],
             "site_revision": profile.get("revision") if profile and not profile.get("_local_only") else None,

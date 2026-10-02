@@ -74,6 +74,15 @@ def _safe_id(value: str | None) -> str | None:
     return raw
 
 
+def _tracked_site_id(value: str | None, *, explicit: bool = False) -> str | None:
+    if explicit:
+        return _safe_id(value)
+    if not value:
+        return None
+    digest = hashlib.sha256(str(value).strip().lower().encode("utf-8")).hexdigest()[:12]
+    return f"local-slurm-{digest}"
+
+
 def parse_sinfo(text: str) -> list[dict[str, Any]]:
     partitions: list[dict[str, Any]] = []
     for raw in text.splitlines():
@@ -230,10 +239,12 @@ def discover_live_site_context(local_site_id: str | None = None, policy_overlay_
 
     cluster_name = config.get("ClusterName")
     resolved_site_id = local_site_id or _safe_id(cluster_name)
+    tracked_site_id = _tracked_site_id(local_site_id, explicit=True) or _tracked_site_id(cluster_name)
     return {
         "schema_version": 1,
         "kind": "slurm-workflows-site-context",
         "local_site_id": resolved_site_id,
+        "tracked_site_id": tracked_site_id,
         "policy_overlay_id": policy_overlay_id,
         "runtime_available": bool(partitions),
         "fact_provenance": {
@@ -531,21 +542,12 @@ def _parse_time_of_day(value: Any) -> time:
     return time(parts[0] % 24, parts[1] % 60, parts[2] % 60)
 
 
-def next_capacity_window(family: dict[str, Any], invocation: dict[str, Any]) -> dict[str, Any] | None:
-    target = dict(invocation.get("target_occurrence") or family.get("target_occurrence") or {})
-    recurrence = dict(family.get("recurrence") or {})
-    now = _parse_datetime(invocation.get("now") or family.get("now")) or datetime.now(timezone.utc)
-    start = _parse_datetime(target.get("start") or target.get("target_start"))
-    if start is None and recurrence:
-        weekday = _weekday_index(recurrence.get("weekday"))
-        if weekday is not None:
-            days = (weekday - now.weekday()) % 7
-            candidate = datetime.combine((now + timedelta(days=days)).date(), _parse_time_of_day(recurrence.get("start_time") or recurrence.get("start")), tzinfo=now.tzinfo)
-            if candidate <= now:
-                candidate += timedelta(days=7)
-            start = candidate
-    if start is None:
-        return None
+def _capacity_window_for_start(
+    family: dict[str, Any],
+    target: dict[str, Any],
+    recurrence: dict[str, Any],
+    start: datetime,
+) -> dict[str, Any]:
     duration = _parse_duration(target.get("duration") or recurrence.get("duration") or recurrence.get("duration_hours") or family.get("target_duration") or 0)
     if isinstance(recurrence.get("duration_hours"), (int, float)):
         duration = timedelta(hours=float(recurrence["duration_hours"]))
@@ -566,6 +568,45 @@ def next_capacity_window(family: dict[str, Any], invocation: dict[str, Any]) -> 
         "minimum_useful_duration": minimum_useful_duration,
         "latest_useful_end": latest_useful_end,
     }
+
+
+def capacity_windows(family: dict[str, Any], invocation: dict[str, Any], limit: int = 8) -> list[dict[str, Any]]:
+    target = dict(invocation.get("target_occurrence") or family.get("target_occurrence") or {})
+    recurrence = dict(family.get("recurrence") or {})
+    now = _parse_datetime(invocation.get("now") or family.get("now")) or datetime.now(timezone.utc)
+    start = _parse_datetime(target.get("start") or target.get("target_start"))
+    if start is not None:
+        return [_capacity_window_for_start(family, target, recurrence, start)]
+    if recurrence:
+        weekday = _weekday_index(recurrence.get("weekday"))
+        if weekday is not None:
+            days = (weekday - now.weekday()) % 7
+            candidate = datetime.combine((now + timedelta(days=days)).date(), _parse_time_of_day(recurrence.get("start_time") or recurrence.get("start")), tzinfo=now.tzinfo)
+            if candidate > now:
+                previous = candidate - timedelta(days=7)
+                previous_window = _capacity_window_for_start(family, target, recurrence, previous)
+                previous_end = previous_window.get("latest_useful_end") or previous_window.get("end")
+                if previous_end and previous_end >= now:
+                    candidate = previous
+            windows: list[dict[str, Any]] = []
+            cursor = candidate
+            attempts = 0
+            while len(windows) < limit and attempts < max(limit * 4, 4):
+                window = _capacity_window_for_start(family, target, recurrence, cursor)
+                window_end = window.get("latest_useful_end") or window.get("end")
+                if not window_end or window_end >= now:
+                    windows.append(window)
+                cursor = cursor + timedelta(days=7)
+                attempts += 1
+            return windows
+    return []
+
+
+def next_capacity_window(family: dict[str, Any], invocation: dict[str, Any]) -> dict[str, Any] | None:
+    windows = capacity_windows(family, invocation, limit=1)
+    if not windows:
+        return None
+    return windows[0]
 
 
 def _covers_capacity_window(item: dict[str, Any], window: dict[str, Any] | None) -> bool:
@@ -601,23 +642,36 @@ def capacity_reconcile(
 ) -> dict[str, Any]:
     if not _activation_matches(family, invocation):
         return {"action": "read_only", "reason": "activation_scope_mismatch"}
-    window = next_capacity_window(family, invocation)
+    windows = capacity_windows(family, invocation)
+    window = windows[0] if windows else None
     compatible_active = [
         item
         for item in active_allocations
-        if _resource_compatible(family, item) and item.get("state") == "RUNNING" and _covers_capacity_window(item, window)
+        if _resource_compatible(family, item) and item.get("state") == "RUNNING"
     ]
-    if compatible_active:
-        return {"action": "reuse_active", "allocation": compatible_active[0], "target_window": _json_safe_window(window), "successor_mutation": False}
+    if len(compatible_active) > 1:
+        return {"action": "fail_closed", "reason": "multiple_compatible_active_allocations", "successor_mutation": False}
     lifecycle_successors = [
         item
         for item in successors
-        if item.get("lifecycle_owned") and _resource_compatible(family, item) and _covers_capacity_window(item, window)
+        if item.get("lifecycle_owned") and _resource_compatible(family, item)
     ]
     if len(lifecycle_successors) > 1:
         return {"action": "fail_closed", "reason": "multiple_lifecycle_successors", "successor_mutation": False}
-    if lifecycle_successors:
-        return {"action": "keep_successor", "successor": lifecycle_successors[0], "target_window": _json_safe_window(window), "successor_mutation": False}
+    active = compatible_active[0] if compatible_active else None
+    successor = lifecycle_successors[0] if lifecycle_successors else None
+    first_covered_active: dict[str, Any] | None = None
+    for candidate in windows or [None]:
+        if active and _covers_capacity_window(active, candidate):
+            first_covered_active = first_covered_active or active
+            continue
+        if successor and _covers_capacity_window(successor, candidate):
+            return {"action": "keep_successor", "successor": successor, "target_window": _json_safe_window(candidate), "successor_mutation": False}
+        window = candidate
+        break
+    else:
+        if first_covered_active:
+            return {"action": "reuse_active", "allocation": first_covered_active, "target_window": _json_safe_window(windows[0] if windows else None), "successor_mutation": False}
     enrollment = family.get("enrollment") or {}
     if not family.get("auto_maintain_successor") or not _valid_enrollment(family, enrollment):
         return {"action": "read_only_proposal", "reason": "missing_valid_enrollment", "successor_mutation": False}
@@ -659,6 +713,57 @@ def _resource_compatible(family: dict[str, Any], item: dict[str, Any]) -> bool:
     return True
 
 
+def _normalize_digest_value(value: Any) -> Any:
+    if isinstance(value, datetime):
+        return value.isoformat()
+    if isinstance(value, timedelta):
+        return int(value.total_seconds())
+    if isinstance(value, dict):
+        return {str(key): _normalize_digest_value(value[key]) for key in sorted(value)}
+    if isinstance(value, list):
+        return [_normalize_digest_value(item) for item in value]
+    return value
+
+
+def _scope_action_contract(family: dict[str, Any]) -> dict[str, Any]:
+    raw = family.get("authorized_actions") or family.get("allowed_actions") or {}
+    actions = dict(raw) if isinstance(raw, dict) else {}
+    actions["submit_successor"] = bool(family.get("submit_successor", actions.get("submit_successor", True)))
+    for key in ("cancel_stale_successor", "retarget_stale_successor", "stale_successor_retarget"):
+        if key in family:
+            actions[key] = bool(family[key])
+    return actions
+
+
+def _scope_window_contract(family: dict[str, Any]) -> dict[str, Any]:
+    target = dict(family.get("target_occurrence") or {})
+    recurrence = dict(family.get("recurrence") or {})
+    scoped_target_keys = (
+        "duration",
+        "minimum_useful_duration",
+        "latest_useful_end",
+        "cutoff",
+        "successor_lead_time",
+        "target_ready_by",
+    )
+    target_scope = {key: target[key] for key in scoped_target_keys if key in target}
+    if not recurrence:
+        for key in ("start", "target_start", "end", "target_end"):
+            if key in target:
+                target_scope[key] = target[key]
+    return {
+        "recurrence": recurrence,
+        "target_occurrence": target_scope,
+        "target_ready_by": family.get("target_ready_by"),
+        "successor_lead_time": family.get("successor_lead_time"),
+        "minimum_useful_duration": family.get("minimum_useful_duration"),
+        "latest_useful_end": family.get("latest_useful_end"),
+        "cutoff": family.get("cutoff"),
+        "target_duration": family.get("target_duration"),
+        "calendar_bound_submission": family.get("calendar_bound_submission", True),
+    }
+
+
 def _scope_digest(family: dict[str, Any]) -> str:
     scoped = {
         "local_site_id": family.get("local_site_id"),
@@ -666,10 +771,11 @@ def _scope_digest(family: dict[str, Any]) -> str:
         "activation_scope": family.get("activation_scope"),
         "accepted_resource_contract": family.get("accepted_resource_contract"),
         "allowed_resource_envelope": family.get("allowed_resource_envelope"),
-        "recurrence": family.get("recurrence"),
+        "window": _scope_window_contract(family),
+        "authorized_actions": _scope_action_contract(family),
         "max_successor": 1,
     }
-    return hashlib.sha256(json.dumps(scoped, sort_keys=True).encode("utf-8")).hexdigest()
+    return hashlib.sha256(json.dumps(_normalize_digest_value(scoped), sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
 
 
 def _valid_enrollment(family: dict[str, Any], enrollment: dict[str, Any]) -> bool:
