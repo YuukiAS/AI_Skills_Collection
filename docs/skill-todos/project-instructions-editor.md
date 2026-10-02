@@ -370,3 +370,26 @@ Current next step: independent Critic review of the v1 standalone-Skill design p
 READY_FOR_FUTURE_SKILL_DESIGN=YES
 READY_FOR_SKILL_IMPLEMENTATION=NO
 ```
+
+
+## 2026-10-02 standalone Skill design revision v2
+
+Current design anchor:
+
+`docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_STANDALONE_SKILL_DESIGN_V2_PLANNER_PROPOSAL_2026-10-02.md`
+
+The v1 Critic review returned `REVISE` with B1–B4. Planner disposition for v2:
+
+- B1 `ACCEPT`: distinguish preservation-sensitive replacement from greenfield / explicit-reset replacement. Only the former requires a live baseline to claim preservation of existing semantics.
+- B2 `ACCEPT`: distinguish canonical/semantic ownership from effective enforcement placement. A rule may be owned elsewhere yet still require a Project-resident semantic subset or bridge because Project instructions govern the current Project.
+- B3 `ACCEPT`: when relevant history is partial/unavailable, a durable rule absent from the live baseline and present only in old Candidate/Reference/summary is treated as protected absence for the current edit unless the current user re-adopts it or the task explicitly authorizes synchronization from its current canonical owner.
+- B4 `ACCEPT`: future acceptance must cover ordinary unnamed Project-instruction editing and near-miss routing boundaries with `chinese-prose`, `writing-fidelity`, `scientific-rewrite`, `workflow-core`, and `ai-skills-core`.
+
+The standalone Skill direction itself is unchanged: bounded semantic placement/editing remains the product core; no implementation, Plugin, trigger eval, package, or release is authorized.
+
+Current next step: independent Critic review of v2, with priority on closure of B1–B4.
+
+```text
+READY_FOR_FUTURE_SKILL_DESIGN=YES
+READY_FOR_SKILL_IMPLEMENTATION=NO
+```
