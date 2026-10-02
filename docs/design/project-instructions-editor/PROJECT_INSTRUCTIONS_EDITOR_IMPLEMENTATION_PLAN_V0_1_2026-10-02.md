@@ -347,7 +347,7 @@ release claim 必须来自同一 final candidate。
 
 ## 11. ChatGPT 与 Codex surface claim
 
-当前官方 OpenAI 文档说明，ChatGPT Skills 的直接创建/安装/自动使用面向符合条件的 Business、Enterprise、Healthcare、Edu workspace，且不同产品/surface 可用性不同。当前 release 不应把 ChatGPT workspace upload/auto-use 宣称为所有账户都可用。citeturn348768search0turn348768search1
+当前官方 OpenAI 文档说明，ChatGPT Skills 的直接创建/安装/自动使用面向符合条件的 Business、Enterprise、Healthcare、Edu workspace，且不同产品/surface 可用性不同。当前 release 不应把 ChatGPT workspace upload/auto-use 宣称为所有账户都可用。外部核查依据为 OpenAI Help Center《Skills in ChatGPT》和 OpenAI Academy《Using skills》（均于 2026-10-02 核查）。
 
 因此 v0.1 的 required normal-entry production evidence 冻结为：
 
