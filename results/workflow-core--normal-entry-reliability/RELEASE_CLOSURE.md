@@ -8,6 +8,7 @@ Date: 2026-10-02
 - Final handoff HEAD: `5f2cfdeb8682f2b152bb29cfc2fcdc2269036663`
 - Integration base before merge: `origin/main` at `98721a202bc557c0b9c0800e66e50cab466bfba2`
 - Integrated main HEAD: `8c55d467ab4b7fdf6158d4104b8889480344653c`
+- Initial release closure evidence commit: `b43d9a1d7ccedd29ee90075b74f4e657e9c53731`
 - workflow-core version: `0.5`
 - Repository version: `5.4.1`
 
@@ -126,14 +127,55 @@ a7028195f3e97d32d51c32ef8c87f658f92048e5
 `8c55d467ab4b7fdf6158d4104b8889480344653c`, so the required release ref closure
 is eligible for fast-forward-only update after bounded `main` publication.
 
-## Pending publication steps
+## Publication and release ref closure
 
-At the time this file is added, the remaining release closure effects are:
+`main` publication used the canonical bounded current-branch publisher:
 
-1. Commit this release closure evidence on `main`.
-2. Publish `main` through the canonical bounded current-branch publisher.
-3. Complete fast-forward-only `release` ref closure if still required by the
-   current repository contract.
-4. Verify final local/remote/release identity, workflow-core `0.5`, repository
-   `5.4.1`, generated parity, changelog/README/version consistency, install
-   smoke, and clean working tree.
+```text
+ai-bridge host publish-current-branch \
+  --expected-repo YuukiAS/AI_Skills_Collection \
+  --expected-branch main
+```
+
+Result:
+
+```json
+{
+  "branch": "main",
+  "destination": "origin/refs/heads/main",
+  "pushed_oid": "b43d9a1d7ccedd29ee90075b74f4e657e9c53731",
+  "repo": "YuukiAS/AI_Skills_Collection",
+  "status": "published"
+}
+```
+
+The release ref closure also used the bounded current-branch publisher, not a
+raw Git fallback. A direct raw release-ref push was rejected by host policy before
+execution, and no raw fallback was used. The local `release` branch was created
+at the verified release commit, bound to `origin/release`, and then published
+through:
+
+```text
+ai-bridge host publish-current-branch \
+  --expected-repo YuukiAS/AI_Skills_Collection \
+  --expected-branch release
+```
+
+Result:
+
+```json
+{
+  "branch": "release",
+  "destination": "origin/refs/heads/release",
+  "pushed_oid": "b43d9a1d7ccedd29ee90075b74f4e657e9c53731",
+  "repo": "YuukiAS/AI_Skills_Collection",
+  "status": "published"
+}
+```
+
+This document update is the final release-closure writeback. It does not alter
+production workflow-core source, generated payload, version metadata, changelog
+semantics, or release behavior. The final release target after this writeback is
+the commit containing this file update; both `origin/main` and `origin/release`
+must be advanced to that same commit through the same bounded publisher and
+verified after publication.
