@@ -1,0 +1,2156 @@
+{
+  "checked": [
+    {
+      "area": [
+        "area:repo"
+      ],
+      "issue": 4,
+      "kind": [
+        "kind:governance"
+      ],
+      "project_area": "repo",
+      "project_status": "ADAPTING",
+      "scope": [
+        "scope:repo-workflow"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": []
+    },
+    {
+      "area": [
+        "area:workflow-core"
+      ],
+      "issue": 5,
+      "kind": [
+        "kind:governance"
+      ],
+      "project_area": "workflow-core",
+      "project_status": "TODO",
+      "scope": [
+        "scope:cross-repo"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Keep AI_Skills workflow rules separate from Bridge Kit runtime bugs",
+          "source": "docs/plugin-todos/workflow-core.md",
+          "status": "PROMOTE_NOW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:workflow-core"
+      ],
+      "issue": 6,
+      "kind": [
+        "kind:governance"
+      ],
+      "project_area": "workflow-core",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Real-task-driven Reviewed Handoff batches",
+          "source": "docs/plugin-todos/workflow-core.md",
+          "status": "PROMOTE_NOW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:workflow-core"
+      ],
+      "issue": 7,
+      "kind": [
+        "kind:governance"
+      ],
+      "project_area": "workflow-core",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Approval-sensitive handoff should emit one bounded kickoff before execution",
+          "source": "docs/plugin-todos/workflow-core.md",
+          "status": "DEFER_AFTER_056_WORKFLOW_CORE"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:workflow-core"
+      ],
+      "issue": 8,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "workflow-core",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Subagent browser capability checks must use rendered-page semantics, not foreground-window assumptions",
+          "source": "docs/plugin-todos/workflow-core.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:workflow-core"
+      ],
+      "issue": 9,
+      "kind": [
+        "kind:governance"
+      ],
+      "project_area": "workflow-core",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Task-local prohibitions must expire with their task instead of becoming accidental global policy",
+          "source": "docs/plugin-todos/workflow-core.md",
+          "status": "DEFER_AFTER_056_WORKFLOW_CORE"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:workflow-core"
+      ],
+      "issue": 10,
+      "kind": [
+        "kind:governance"
+      ],
+      "project_area": "workflow-core",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Post-056 acceptance artifact packaging / comparison-review fidelity",
+          "source": "docs/plugin-todos/workflow-core.md",
+          "status": "DEFER_UNTIL_056_COMPLETE"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:workflow-core"
+      ],
+      "issue": 11,
+      "kind": [
+        "kind:governance"
+      ],
+      "project_area": "workflow-core",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Reviewed Handoff exact sibling worktree authorization can still be unexecutable under Host sandbox",
+          "source": "docs/plugin-todos/workflow-core.md",
+          "status": "NEW / POST_056_REFINEMENT"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:writing-style"
+      ],
+      "issue": 12,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "writing-style",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Codex-authored README should always use Clear Writing, with Chinese README prose kept genuinely Chinese",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:writing-style"
+      ],
+      "issue": 13,
+      "kind": [
+        "kind:new-capability"
+      ],
+      "project_area": "writing-style",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Promote `writing-style` into the generic content-preserving language layer",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "READY_FOR_PROMOTION_AFTER_050"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:writing-style"
+      ],
+      "issue": 14,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "writing-style",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Advisor-facing English can sound AI-authored even when every sentence is correct",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:writing-style"
+      ],
+      "issue": 15,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "writing-style",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "English scientific slide microcopy and full-deck prose remain cognitively heavy after a nominal final pass",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:writing-style"
+      ],
+      "issue": 16,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "writing-style",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Versioned Chinese technical documents can regress into English-keyword scaffolding during content-preserving revision",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:writing-style"
+      ],
+      "issue": 17,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "writing-style",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Product UI microcopy should state user consequence, not internal implementation reassurance",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:writing-style"
+      ],
+      "issue": 18,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "writing-style",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Audit `academic-humanizer` only for genuinely missing academic-writing capabilities",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:writing-style"
+      ],
+      "issue": 19,
+      "kind": [
+        "kind:governance"
+      ],
+      "project_area": "writing-style",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Keep style cleanup downstream of scientific structure",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:research-writing"
+      ],
+      "issue": 20,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "research-writing",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Formal research reports can be scientifically correct yet still lack a coherent academic document identity",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "PARTIALLY_PROMOTED_IN_5.2.1"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:research-writing"
+      ],
+      "issue": 21,
+      "kind": [
+        "kind:governance"
+      ],
+      "project_area": "research-writing",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Keep research authoring separate from the generic language layer",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "READY_FOR_PROMOTION"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:research-writing"
+      ],
+      "issue": 22,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "research-writing",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Reader-first advisor report rewriting must change the document plan, not just the wording",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "READY_FOR_PROMOTION"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:research-writing"
+      ],
+      "issue": 23,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "research-writing",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Meaning-first rewriting should be a reusable transformation pattern",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "READY_FOR_PROMOTION"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:research-writing"
+      ],
+      "issue": 24,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "research-writing",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Cross-project replay of advisor-facing report rules",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:research-writing"
+      ],
+      "issue": 25,
+      "kind": [
+        "kind:governance"
+      ],
+      "project_area": "research-writing",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Distinguish research-document semantics from comparison/render packaging",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:research-writing"
+      ],
+      "issue": 26,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "research-writing",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Advisor/group-meeting reports need method and dataset orientation before project-specific results",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:research-writing"
+      ],
+      "issue": 27,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "research-writing",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Advisor-facing research reports should suppress execution/runtime details unless they change the scientific interpretation",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:research-writing"
+      ],
+      "issue": 28,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "research-writing",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Bilingual advisor reports should be two audience-calibrated versions, not interleaved translation",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 29,
+      "kind": [
+        "kind:governance"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "CAT-TRACE v13/v14 follow-up feedback is consolidated into the canonical inbox",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Final research artifacts must be surfaced as actual user-openable/downloadable deliverables",
+          "source": "docs/plugin-todos/research-writing.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 30,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Advisor discussion questions need a decision-value and answerability gate",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 31,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Page-level language audits can pass while sentence and slide transitions remain mechanical",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 32,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Accent colour and emphasis can drift without a semantic-role contract",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 33,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Citation style, bibliography fidelity, and PDF text-layer integrity need one delivery contract",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 34,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Audience/page-job briefing before prose handoff materially improved a real research deck",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 35,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Full-deck audience-context and responsive-layout review still regresses after repeated real revisions",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 36,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Review coverage can self-certify unresolved reviewer feedback",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 37,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Presentations 0.2 completion evidence can still miss obvious rendered regressions",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 38,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Deck-wide formula, text and emphasis scale still lacks a stable hierarchy",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 39,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Diagram planning needs a semantic-purpose gate before geometry",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 40,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Table, list and paragraph primitives still drift across one deck",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 41,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Complex multi-slide models can finish without a model-closure page",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 42,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Question/background callout lacks a stable research-deck primitive",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 43,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Slide source/figure citation style is inconsistent and underspecified",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 44,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Diagram geometry and canonical edge/node treatment",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "BLOCKED_NEEDS_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 45,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Deck-wide style system and terminology hierarchy",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 46,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Math and theory slide hierarchy",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 47,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Simulation, metric and structured-fact presentation",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:presentations"
+      ],
+      "issue": 48,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "presentations",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Natural scientific slide language",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "CANDIDATE_GENERIC"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:scientific-visualization"
+      ],
+      "issue": 49,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "scientific-visualization",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Course-standard teaching template needs structural navigation, not only colours and bands",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "PROMOTE_NOW"
+        },
+        {
+          "entry": "Delegate captions/annotations without giving away visual semantics",
+          "source": "docs/plugin-todos/scientific-visualization.md",
+          "status": "READY_FOR_PROMOTION_AFTER_LANGUAGE_LAYER"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:scientific-visualization"
+      ],
+      "issue": 50,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "scientific-visualization",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Teaching decks need a presenter-learning companion distinct from student-visible slides",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Interactive scientific schematic connectors need actual-render qualitative QA",
+          "source": "docs/plugin-todos/scientific-visualization.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:scientific-visualization"
+      ],
+      "issue": 51,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "scientific-visualization",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Teaching presentations need optional lecture/source cross-references without duplicating the lecture",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Curriculum-driven capability refinement",
+          "source": "docs/plugin-todos/scientific-visualization.md",
+          "status": "BLOCKED_NEEDS_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 52,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "",
+      "project_status": "",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "tracking_sources": [
+        {
+          "entry": "Assessment-introduction slides need answer-leakage and provisional-administration guardrails",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 53,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "web-development",
+      "project_status": "DONE",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "tracking_sources": [
+        {
+          "entry": "Closing frames need a teaching-purpose contract, not a generic Questions/Thanks default",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Desktop-native acceptance must not be inferred from browser fixtures",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        },
+        {
+          "entry": "Native interaction acceptance must prove the intended control path, not only the final window state",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 54,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "web-development",
+      "project_status": "DONE",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "tracking_sources": [
+        {
+          "entry": "Final presentation reviewer must be extracted from the human-accepted STAT5060 reviewer, not reconstructed from memory",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Motion, hover grammar, and performance budgets belong to the design system",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 55,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "web-development",
+      "project_status": "DONE",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "tracking_sources": [
+        {
+          "entry": "Reviewer calibration must be blind, artifact-bound and proven before candidate review",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Production icon sourcing and icon-registry discipline",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        },
+        {
+          "entry": "Component craftsmanship must be part of the definition of done",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        },
+        {
+          "entry": "Comparable resource cards need one coherent progress and reset grammar",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        },
+        {
+          "entry": "Severity colors must encode one stable semantic meaning",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        },
+        {
+          "entry": "Typography governance must define semantic roles and hierarchy, not only token values",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        },
+        {
+          "entry": "Status chrome must follow one coherent visual grammar",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 56,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "web-development",
+      "project_status": "DONE",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "tracking_sources": [
+        {
+          "entry": "Human rejection must invalidate prior reviewer PASS and create persistent regression guards",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "External review should confirm quality, not discover obvious local P2 defects",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 57,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "web-development",
+      "project_status": "DONE",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "tracking_sources": [
+        {
+          "entry": "Independent presentation review needs role separation, verdict isolation and role-scoped closure",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Freeze whole-screen visual direction before implementation polish",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 58,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "web-development",
+      "project_status": "DONE",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "tracking_sources": [
+        {
+          "entry": "Rendered-pixel review must use whole-slide projection scale before zoomed diagnostics",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Canonical design artifacts must gate production implementation",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        },
+        {
+          "entry": "Design corrections must round-trip through the canonical Figma before code changes",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        },
+        {
+          "entry": "“Figma complete” needs an explicit definition of done",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        },
+        {
+          "entry": "Design-to-code goals must not stop at either Figma or implementation",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 59,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "web-development",
+      "project_status": "DONE",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "tracking_sources": [
+        {
+          "entry": "Template QA must test semantic behaviour and optical geometry, not element presence",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Visual acceptance must include a whole-product taste gate, not only defect checklists",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 60,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "",
+      "project_status": "",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "tracking_sources": [
+        {
+          "entry": "First-use dependency checks must inspect legends, plot titles, captions, annotations and footers",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 61,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "",
+      "project_status": "",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "tracking_sources": [
+        {
+          "entry": "Figure-caption policy must be semantic: explain the scientific object, never narrate the slide",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 62,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "",
+      "project_status": "",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "tracking_sources": [
+        {
+          "entry": "Teaching/course-standard route should freeze a reusable standard Beamer separate from CUHK research and commercial PPT",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 63,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "web-development",
+      "project_status": "DONE",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "tracking_sources": [
+        {
+          "entry": "Teaching closing frames may combine pedagogical recap with durable contact information",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Normal UI must have a human-readable presentation boundary",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        },
+        {
+          "entry": "Opaque identifiers and formatting artifacts must not leak into glanceable UI",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 64,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "web-development",
+      "project_status": "DONE",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "tracking_sources": [
+        {
+          "entry": "Student-facing slide language needs a rendered full-deck anti-meta/anti-AI gate",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Primary surfaces should optimize for actionability, not implementation completeness",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        },
+        {
+          "entry": "Configured surfaces must collapse from setup mode to status mode",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "SUPERSEDED"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 65,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "web-development",
+      "project_status": "DONE",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "tracking_sources": [
+        {
+          "entry": "Reviewer runtime contract must include agent type, model, reasoning and image capability",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Metric labels and rankings must be backed by the data semantics they imply",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "PROMOTED"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 66,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "",
+      "project_status": "",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "tracking_sources": [
+        {
+          "entry": "Presentation visual review must prove actual pixel consumption, not merely receive an archive",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 67,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "",
+      "project_status": "",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "tracking_sources": [
+        {
+          "entry": "Blind calibration must be frozen, sentinel-based and must not become prompt tuning on the holdout",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 68,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "",
+      "project_status": "",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "tracking_sources": [
+        {
+          "entry": "Artifact review must not depend on the unfinished Presentations production plugin",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 69,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "",
+      "project_status": "",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "tracking_sources": [
+        {
+          "entry": "Review transport should distinguish plugin replay from fresh reviewer execution",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 70,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "",
+      "project_status": "",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "tracking_sources": [
+        {
+          "entry": "Review standards must not Goodhart into renderer hacks",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 71,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "",
+      "project_status": "",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "tracking_sources": [
+        {
+          "entry": "Native template chrome must remain native; diagrams and scientific graphics use separate rendering ownership",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 72,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "",
+      "project_status": "",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "tracking_sources": [
+        {
+          "entry": "Final candidate review should bind to a frozen artifact identity before independent acceptance",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:statistical-modeling"
+      ],
+      "issue": 73,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "statistical-modeling",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Final presentation artifacts must be surfaced as actual openable/downloadable deliverables",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Delegate reader-facing wording without giving away statistical semantics",
+          "source": "docs/plugin-todos/statistical-modeling.md",
+          "status": "READY_FOR_PROMOTION_AFTER_LANGUAGE_LAYER"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:statistical-modeling"
+      ],
+      "issue": 74,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "statistical-modeling",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Beamer navigation QA must reject duplicate section declarations and duplicate visible section labels",
+          "source": "docs/plugin-todos/presentations.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Curriculum-driven capability refinement pilot",
+          "source": "docs/plugin-todos/statistical-modeling.md",
+          "status": "BLOCKED_NEEDS_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:statistical-modeling"
+      ],
+      "issue": 75,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "statistical-modeling",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "统计方案不能只给方法名称而把算法选择留给执行者",
+          "source": "docs/plugin-todos/statistical-modeling.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:statistical-modeling"
+      ],
+      "issue": 76,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "statistical-modeling",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "独立参照、近似误差和数值实现误差应分别说明",
+          "source": "docs/plugin-todos/statistical-modeling.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:statistical-modeling"
+      ],
+      "issue": 77,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "statistical-modeling",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "随机数与数据处理应绑定到统计目标，而不是只记录一个seed",
+          "source": "docs/plugin-todos/statistical-modeling.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:statistical-modeling"
+      ],
+      "issue": 78,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "statistical-modeling",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "小时级 MCMC / 优化不能只在终态输出，必须预先规划 progress logging",
+          "source": "docs/plugin-todos/statistical-modeling.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:medical-imaging"
+      ],
+      "issue": 79,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "medical-imaging",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Hard-case lifecycle and mature-component reuse",
+          "source": "docs/plugin-todos/medical-imaging.md",
+          "status": "BLOCKED_NEEDS_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:standalone-skill"
+      ],
+      "issue": 80,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "standalone-skill",
+      "project_status": "DONE",
+      "scope": [
+        "scope:standalone-skill"
+      ],
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "tracking_sources": [
+        {
+          "entry": "Nominal skill invocation can still bypass the declared Pandoc + XeLaTeX production route",
+          "source": "docs/skill-todos/render-chinese-math-pdf.md",
+          "status": "PROMOTED_IN_5.2.1"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:standalone-skill"
+      ],
+      "issue": 81,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "standalone-skill",
+      "project_status": "DONE",
+      "scope": [
+        "scope:standalone-skill"
+      ],
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "tracking_sources": [
+        {
+          "entry": "Current PDF validator can miss mathematical corruption and non-canonical font output",
+          "source": "docs/skill-todos/render-chinese-math-pdf.md",
+          "status": "PROMOTED_IN_5.2.1"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:standalone-skill"
+      ],
+      "issue": 82,
+      "kind": [
+        "kind:regression"
+      ],
+      "project_area": "standalone-skill",
+      "project_status": "DONE",
+      "scope": [
+        "scope:standalone-skill"
+      ],
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "tracking_sources": [
+        {
+          "entry": "Rendering defaults can drift across retries even when the document purpose did not change",
+          "source": "docs/skill-todos/render-chinese-math-pdf.md",
+          "status": "PROMOTED_IN_5.2.1"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:standalone-skill"
+      ],
+      "issue": 83,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "standalone-skill",
+      "project_status": "TODO",
+      "scope": [
+        "scope:standalone-skill"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Technically correct XeLaTeX output can still be visually inconsistent because the template invents typography by block class",
+          "source": "docs/skill-todos/render-chinese-math-pdf.md",
+          "status": "PARTIALLY_PROMOTED_IN_5.2.1"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:bioinformatics"
+      ],
+      "issue": 84,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "bioinformatics",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Curriculum-driven capability refinement",
+          "source": "docs/plugin-todos/bioinformatics.md",
+          "status": "BLOCKED_NEEDS_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:medical-imaging"
+      ],
+      "issue": 85,
+      "kind": [
+        "kind:enhancement"
+      ],
+      "project_area": "medical-imaging",
+      "project_status": "TODO",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Curriculum-driven capability refinement",
+          "source": "docs/plugin-todos/medical-imaging.md",
+          "status": "BLOCKED_NEEDS_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:ai-skills-core"
+      ],
+      "issue": 86,
+      "kind": [
+        "kind:new-capability"
+      ],
+      "project_area": "ai-skills-core",
+      "project_status": "DONE",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "tracking_sources": [
+        {
+          "entry": "AI Skills Maintainer machine update orchestration",
+          "source": "docs/plugin-todos/ai-skills-core.md",
+          "status": "PROMOTED"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:web-development"
+      ],
+      "issue": 89,
+      "kind": [
+        "kind:new-capability"
+      ],
+      "project_area": "web-development",
+      "project_status": "DOING",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Product UI copy needs an explicit Frontend Design content-architecture contract",
+          "source": "docs/plugin-todos/web-development.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:writing-style"
+      ],
+      "issue": 90,
+      "kind": [
+        "kind:new-capability"
+      ],
+      "project_area": "writing-style",
+      "project_status": "DOING",
+      "scope": [
+        "scope:plugin"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Product UI copy naturalness needs a dedicated microcopy capability, not more long-form prose rules",
+          "source": "docs/plugin-todos/writing-style.md",
+          "status": "NEW"
+        }
+      ]
+    },
+    {
+      "area": [
+        "area:repo"
+      ],
+      "issue": 92,
+      "kind": [
+        "kind:governance"
+      ],
+      "project_area": "repo",
+      "project_status": "DOING",
+      "scope": [
+        "scope:repo-workflow"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": []
+    },
+    {
+      "area": [
+        "area:standalone-skill"
+      ],
+      "issue": 93,
+      "kind": [
+        "kind:new-capability"
+      ],
+      "project_area": "standalone-skill",
+      "project_status": "DOING",
+      "scope": [
+        "scope:standalone-skill"
+      ],
+      "state": "OPEN",
+      "state_reason": "",
+      "tracking_sources": [
+        {
+          "entry": "Shared Project instructions can become scope-imbalanced and bloated after a local addition request",
+          "source": "docs/skill-todos/project-instructions-editor.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Follow-up review: Project instructions need semantic prioritization, not equal-detail accumulation",
+          "source": "docs/skill-todos/project-instructions-editor.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Unnecessary English and copied workflow-contract detail waste the Project-instruction character budget",
+          "source": "docs/skill-todos/project-instructions-editor.md",
+          "status": "NEW"
+        },
+        {
+          "entry": "Live Project editing must use the actual setting, Project history, and canonical repo together",
+          "source": "docs/skill-todos/project-instructions-editor.md",
+          "status": "NEW"
+        }
+      ]
+    }
+  ],
+  "issue_count": 87,
+  "ok": true,
+  "project": {
+    "id": "PVT_kwHOA0Lgf84BkjCU",
+    "number": 5,
+    "title": "AI Skills Maintenance",
+    "url": "https://github.com/users/YuukiAS/projects/5"
+  },
+  "project_number": 5,
+  "project_owner": "YuukiAS",
+  "repo": "YuukiAS/AI_Skills_Collection",
+  "violation_count": 0,
+  "violations": []
+}

@@ -1,0 +1,889 @@
+{
+  "captured_at": "2026-10-02T00:39:58.636756+00:00",
+  "completed_history": [
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-frjw",
+      "labels": [
+        "area:web-development",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 53,
+      "project": {
+        "id": "PVT_kwHOA0Lgf84BkjCU",
+        "number": 5,
+        "title": "AI Skills Maintenance",
+        "url": "https://github.com/users/YuukiAS/projects/5"
+      },
+      "projectFields": {
+        "Area": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+          "kind": "single_select",
+          "name": "web-development",
+          "optionId": "78957c15"
+        },
+        "Resolution commit": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+          "kind": "text",
+          "text": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+        },
+        "Status": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+          "kind": "single_select",
+          "name": "DONE",
+          "optionId": "53de53ba"
+        },
+        "Title": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+          "kind": "text",
+          "text": "Desktop-native acceptance must not be inferred from browser fixtures"
+        }
+      },
+      "projectItemId": "PVTI_lAHOA0Lgf84BkjCUzg8jG54",
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Desktop-native acceptance must not be inferred from browser fixtures",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/53"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-fvpA",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 54,
+      "project": {
+        "id": "PVT_kwHOA0Lgf84BkjCU",
+        "number": 5,
+        "title": "AI Skills Maintenance",
+        "url": "https://github.com/users/YuukiAS/projects/5"
+      },
+      "projectFields": {
+        "Area": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+          "kind": "single_select",
+          "name": "web-development",
+          "optionId": "78957c15"
+        },
+        "Resolution commit": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+          "kind": "text",
+          "text": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+        },
+        "Status": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+          "kind": "single_select",
+          "name": "DONE",
+          "optionId": "53de53ba"
+        },
+        "Title": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+          "kind": "text",
+          "text": "Motion, hover grammar, and performance budgets belong to the design system"
+        }
+      },
+      "projectItemId": "PVTI_lAHOA0Lgf84BkjCUzg8jG-8",
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Motion, hover grammar, and performance budgets belong to the design system",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/54"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-f0FA",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 55,
+      "project": {
+        "id": "PVT_kwHOA0Lgf84BkjCU",
+        "number": 5,
+        "title": "AI Skills Maintenance",
+        "url": "https://github.com/users/YuukiAS/projects/5"
+      },
+      "projectFields": {
+        "Area": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+          "kind": "single_select",
+          "name": "web-development",
+          "optionId": "78957c15"
+        },
+        "Resolution commit": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+          "kind": "text",
+          "text": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+        },
+        "Status": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+          "kind": "single_select",
+          "name": "DONE",
+          "optionId": "53de53ba"
+        },
+        "Title": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+          "kind": "text",
+          "text": "Component craftsmanship must be part of the definition of done"
+        }
+      },
+      "projectItemId": "PVTI_lAHOA0Lgf84BkjCUzg8jHFA",
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Component craftsmanship must be part of the definition of done",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/55"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-f5pA",
+      "labels": [
+        "area:web-development",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 56,
+      "project": {
+        "id": "PVT_kwHOA0Lgf84BkjCU",
+        "number": 5,
+        "title": "AI Skills Maintenance",
+        "url": "https://github.com/users/YuukiAS/projects/5"
+      },
+      "projectFields": {
+        "Area": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+          "kind": "single_select",
+          "name": "web-development",
+          "optionId": "78957c15"
+        },
+        "Resolution commit": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+          "kind": "text",
+          "text": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+        },
+        "Status": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+          "kind": "single_select",
+          "name": "DONE",
+          "optionId": "53de53ba"
+        },
+        "Title": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+          "kind": "text",
+          "text": "External review should confirm quality, not discover obvious local P2 defects"
+        }
+      },
+      "projectItemId": "PVTI_lAHOA0Lgf84BkjCUzg8jHMI",
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "External review should confirm quality, not discover obvious local P2 defects",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/56"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-f-Dw",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 57,
+      "project": {
+        "id": "PVT_kwHOA0Lgf84BkjCU",
+        "number": 5,
+        "title": "AI Skills Maintenance",
+        "url": "https://github.com/users/YuukiAS/projects/5"
+      },
+      "projectFields": {
+        "Area": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+          "kind": "single_select",
+          "name": "web-development",
+          "optionId": "78957c15"
+        },
+        "Resolution commit": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+          "kind": "text",
+          "text": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+        },
+        "Status": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+          "kind": "single_select",
+          "name": "DONE",
+          "optionId": "53de53ba"
+        },
+        "Title": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+          "kind": "text",
+          "text": "Freeze whole-screen visual direction before implementation polish"
+        }
+      },
+      "projectItemId": "PVTI_lAHOA0Lgf84BkjCUzg8jHRU",
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Freeze whole-screen visual direction before implementation polish",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/57"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-gCHg",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 58,
+      "project": {
+        "id": "PVT_kwHOA0Lgf84BkjCU",
+        "number": 5,
+        "title": "AI Skills Maintenance",
+        "url": "https://github.com/users/YuukiAS/projects/5"
+      },
+      "projectFields": {
+        "Area": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+          "kind": "single_select",
+          "name": "web-development",
+          "optionId": "78957c15"
+        },
+        "Resolution commit": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+          "kind": "text",
+          "text": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+        },
+        "Status": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+          "kind": "single_select",
+          "name": "DONE",
+          "optionId": "53de53ba"
+        },
+        "Title": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+          "kind": "text",
+          "text": "Canonical design artifacts must gate production implementation"
+        }
+      },
+      "projectItemId": "PVTI_lAHOA0Lgf84BkjCUzg8jHWk",
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Canonical design artifacts must gate production implementation",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/58"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-gHGw",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 59,
+      "project": {
+        "id": "PVT_kwHOA0Lgf84BkjCU",
+        "number": 5,
+        "title": "AI Skills Maintenance",
+        "url": "https://github.com/users/YuukiAS/projects/5"
+      },
+      "projectFields": {
+        "Area": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+          "kind": "single_select",
+          "name": "web-development",
+          "optionId": "78957c15"
+        },
+        "Resolution commit": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+          "kind": "text",
+          "text": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+        },
+        "Status": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+          "kind": "single_select",
+          "name": "DONE",
+          "optionId": "53de53ba"
+        },
+        "Title": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+          "kind": "text",
+          "text": "Visual acceptance must include a whole-product taste gate, not only defect checklists"
+        }
+      },
+      "projectItemId": "PVTI_lAHOA0Lgf84BkjCUzg8jHcI",
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Visual acceptance must include a whole-product taste gate, not only defect checklists",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/59"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-gZAg",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 63,
+      "project": {
+        "id": "PVT_kwHOA0Lgf84BkjCU",
+        "number": 5,
+        "title": "AI Skills Maintenance",
+        "url": "https://github.com/users/YuukiAS/projects/5"
+      },
+      "projectFields": {
+        "Area": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+          "kind": "single_select",
+          "name": "web-development",
+          "optionId": "78957c15"
+        },
+        "Resolution commit": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+          "kind": "text",
+          "text": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+        },
+        "Status": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+          "kind": "single_select",
+          "name": "DONE",
+          "optionId": "53de53ba"
+        },
+        "Title": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+          "kind": "text",
+          "text": "Normal UI must have a human-readable presentation boundary"
+        }
+      },
+      "projectItemId": "PVTI_lAHOA0Lgf84BkjCUzg8jHu0",
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Normal UI must have a human-readable presentation boundary",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/63"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-gd1A",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 64,
+      "project": {
+        "id": "PVT_kwHOA0Lgf84BkjCU",
+        "number": 5,
+        "title": "AI Skills Maintenance",
+        "url": "https://github.com/users/YuukiAS/projects/5"
+      },
+      "projectFields": {
+        "Area": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+          "kind": "single_select",
+          "name": "web-development",
+          "optionId": "78957c15"
+        },
+        "Resolution commit": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+          "kind": "text",
+          "text": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+        },
+        "Status": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+          "kind": "single_select",
+          "name": "DONE",
+          "optionId": "53de53ba"
+        },
+        "Title": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+          "kind": "text",
+          "text": "Primary surfaces should optimize for actionability, not implementation completeness"
+        }
+      },
+      "projectItemId": "PVTI_lAHOA0Lgf84BkjCUzg8jH0o",
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Primary surfaces should optimize for actionability, not implementation completeness",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/64"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-gjkg",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 65,
+      "project": {
+        "id": "PVT_kwHOA0Lgf84BkjCU",
+        "number": 5,
+        "title": "AI Skills Maintenance",
+        "url": "https://github.com/users/YuukiAS/projects/5"
+      },
+      "projectFields": {
+        "Area": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+          "kind": "single_select",
+          "name": "web-development",
+          "optionId": "78957c15"
+        },
+        "Resolution commit": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+          "kind": "text",
+          "text": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+        },
+        "Status": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+          "kind": "single_select",
+          "name": "DONE",
+          "optionId": "53de53ba"
+        },
+        "Title": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+          "kind": "text",
+          "text": "Metric labels and rankings must be backed by the data semantics they imply"
+        }
+      },
+      "projectItemId": "PVTI_lAHOA0Lgf84BkjCUzg8jH5k",
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Metric labels and rankings must be backed by the data semantics they imply",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/65"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-huKw",
+      "labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "maintenance-track",
+        "scope:standalone-skill"
+      ],
+      "number": 80,
+      "project": {
+        "id": "PVT_kwHOA0Lgf84BkjCU",
+        "number": 5,
+        "title": "AI Skills Maintenance",
+        "url": "https://github.com/users/YuukiAS/projects/5"
+      },
+      "projectFields": {
+        "Area": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+          "kind": "single_select",
+          "name": "standalone-skill",
+          "optionId": "a990d9e6"
+        },
+        "Resolution commit": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+          "kind": "text",
+          "text": "10e7cdfdebbac3a021dccfc964b57349bcd4aab7"
+        },
+        "Status": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+          "kind": "single_select",
+          "name": "DONE",
+          "optionId": "53de53ba"
+        },
+        "Title": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+          "kind": "text",
+          "text": "Nominal skill invocation can still bypass the declared Pandoc + XeLaTeX production route"
+        }
+      },
+      "projectItemId": "PVTI_lAHOA0Lgf84BkjCUzg8jJV8",
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Nominal skill invocation can still bypass the declared Pandoc + XeLaTeX production route",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/80"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-hy3w",
+      "labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "maintenance-track",
+        "scope:standalone-skill"
+      ],
+      "number": 81,
+      "project": {
+        "id": "PVT_kwHOA0Lgf84BkjCU",
+        "number": 5,
+        "title": "AI Skills Maintenance",
+        "url": "https://github.com/users/YuukiAS/projects/5"
+      },
+      "projectFields": {
+        "Area": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+          "kind": "single_select",
+          "name": "standalone-skill",
+          "optionId": "a990d9e6"
+        },
+        "Resolution commit": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+          "kind": "text",
+          "text": "10e7cdfdebbac3a021dccfc964b57349bcd4aab7"
+        },
+        "Status": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+          "kind": "single_select",
+          "name": "DONE",
+          "optionId": "53de53ba"
+        },
+        "Title": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+          "kind": "text",
+          "text": "Current PDF validator can miss mathematical corruption and non-canonical font output"
+        }
+      },
+      "projectItemId": "PVTI_lAHOA0Lgf84BkjCUzg8jJac",
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "Current PDF validator can miss mathematical corruption and non-canonical font output",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/81"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-h3lQ",
+      "labels": [
+        "area:standalone-skill",
+        "kind:regression",
+        "maintenance-track",
+        "scope:standalone-skill"
+      ],
+      "number": 82,
+      "project": {
+        "id": "PVT_kwHOA0Lgf84BkjCU",
+        "number": 5,
+        "title": "AI Skills Maintenance",
+        "url": "https://github.com/users/YuukiAS/projects/5"
+      },
+      "projectFields": {
+        "Area": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+          "kind": "single_select",
+          "name": "standalone-skill",
+          "optionId": "a990d9e6"
+        },
+        "Resolution commit": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+          "kind": "text",
+          "text": "10e7cdfdebbac3a021dccfc964b57349bcd4aab7"
+        },
+        "Status": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+          "kind": "single_select",
+          "name": "DONE",
+          "optionId": "53de53ba"
+        },
+        "Title": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+          "kind": "text",
+          "text": "保持 PDF 渲染默认配置稳定"
+        }
+      },
+      "projectItemId": "PVTI_lAHOA0Lgf84BkjCUzg8jJgo",
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "保持 PDF 渲染默认配置稳定",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/82"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABTBptAg",
+      "labels": [
+        "area:ai-skills-core",
+        "kind:new-capability",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 86,
+      "project": {
+        "id": "PVT_kwHOA0Lgf84BkjCU",
+        "number": 5,
+        "title": "AI Skills Maintenance",
+        "url": "https://github.com/users/YuukiAS/projects/5"
+      },
+      "projectFields": {
+        "Area": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+          "kind": "single_select",
+          "name": "ai-skills-core",
+          "optionId": "e1281083"
+        },
+        "Resolution commit": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+          "kind": "text",
+          "text": "573224edb9b81fc4f53dbc1ce9cc9b719483e8c8"
+        },
+        "Status": {
+          "fieldId": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+          "kind": "single_select",
+          "name": "DONE",
+          "optionId": "53de53ba"
+        },
+        "Title": {
+          "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
+          "kind": "text",
+          "text": "让 AI Skills Maintainer 统一同步当前机器上的 AI Research Stack"
+        }
+      },
+      "projectItemId": "PVTI_lAHOA0Lgf84BkjCUzg8mSmA",
+      "state": "CLOSED",
+      "stateReason": "COMPLETED",
+      "title": "让 AI Skills Maintainer 统一同步当前机器上的 AI Research Stack",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/86"
+    }
+  ],
+  "duplicate_issues": [
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-fnSw",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 52,
+      "project": null,
+      "projectFields": {},
+      "projectItemId": null,
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Production icon sourcing and icon-registry discipline",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/52"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-gL6A",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 60,
+      "project": null,
+      "projectFields": {},
+      "projectItemId": null,
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Design corrections must round-trip through the canonical Figma before code changes",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/60"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-gQFA",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 61,
+      "project": null,
+      "projectFields": {},
+      "projectItemId": null,
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "“Figma complete” needs an explicit definition of done",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/61"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-gU4g",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 62,
+      "project": null,
+      "projectFields": {},
+      "projectItemId": null,
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Design-to-code goals must not stop at either Figma or implementation",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/62"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-gogQ",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 66,
+      "project": null,
+      "projectFields": {},
+      "projectItemId": null,
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Comparable resource cards need one coherent progress and reset grammar",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/66"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-gsuQ",
+      "labels": [
+        "area:web-development",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 67,
+      "project": null,
+      "projectFields": {},
+      "projectItemId": null,
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Opaque identifiers and formatting artifacts must not leak into glanceable UI",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/67"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-gxFA",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 68,
+      "project": null,
+      "projectFields": {},
+      "projectItemId": null,
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Severity colors must encode one stable semantic meaning",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/68"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-g2CA",
+      "labels": [
+        "area:web-development",
+        "kind:regression",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 69,
+      "project": null,
+      "projectFields": {},
+      "projectItemId": null,
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "原生交互验收要覆盖真实控制路径",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/69"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-g63Q",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 70,
+      "project": null,
+      "projectFields": {},
+      "projectItemId": null,
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Configured surfaces must collapse from setup mode to status mode",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/70"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-hAYw",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 71,
+      "project": null,
+      "projectFields": {},
+      "projectItemId": null,
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Typography governance must define semantic roles and hierarchy, not only token values",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/71"
+    },
+    {
+      "id": "I_kwDOSWdKMM8AAAABS-hFkg",
+      "labels": [
+        "area:web-development",
+        "kind:enhancement",
+        "maintenance-track",
+        "scope:plugin"
+      ],
+      "number": 72,
+      "project": null,
+      "projectFields": {},
+      "projectItemId": null,
+      "state": "CLOSED",
+      "stateReason": "DUPLICATE",
+      "title": "Status chrome must follow one coherent visual grammar",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/72"
+    }
+  ],
+  "issue_count": 87,
+  "project_id": "PVT_kwHOA0Lgf84BkjCU",
+  "project_number": 5,
+  "project_owner": "YuukiAS",
+  "project_title": "AI Skills Maintenance",
+  "repo": "YuukiAS/AI_Skills_Collection",
+  "schema": "ai-skills-maintenance-board-v7-stage-b-recovery-v0.4-live-readback/v1",
+  "workflows": {
+    "id": "PVT_kwHOA0Lgf84BkjCU",
+    "number": 5,
+    "title": "AI Skills Maintenance",
+    "url": "https://github.com/users/YuukiAS/projects/5",
+    "workflows": {
+      "nodes": [
+        {
+          "createdAt": "2026-09-24T12:12:01Z",
+          "enabled": true,
+          "id": "PWF_lAHOA0Lgf84BkjCUzgcUzTo",
+          "name": "Auto-add to project",
+          "number": 7,
+          "updatedAt": "2026-09-24T12:12:01Z"
+        },
+        {
+          "createdAt": "2026-09-24T11:59:53Z",
+          "enabled": false,
+          "id": "PWF_lAHOA0Lgf84BkjCUzgcUxKo",
+          "name": "Auto-close issue",
+          "number": 3,
+          "updatedAt": "2026-09-24T12:18:53Z"
+        },
+        {
+          "createdAt": "2026-09-24T11:59:53Z",
+          "enabled": true,
+          "id": "PWF_lAHOA0Lgf84BkjCUzgcUxK0",
+          "name": "Item added to project",
+          "number": 6,
+          "updatedAt": "2026-09-24T12:13:16Z"
+        },
+        {
+          "createdAt": "2026-09-24T11:59:53Z",
+          "enabled": true,
+          "id": "PWF_lAHOA0Lgf84BkjCUzgcUxKg",
+          "name": "Item closed",
+          "number": 1,
+          "updatedAt": "2026-09-24T12:12:50Z"
+        },
+        {
+          "createdAt": "2026-09-24T11:59:53Z",
+          "enabled": false,
+          "id": "PWF_lAHOA0Lgf84BkjCUzgcUxKw",
+          "name": "Pull request linked to issue",
+          "number": 5,
+          "updatedAt": "2026-09-24T12:19:05Z"
+        },
+        {
+          "createdAt": "2026-09-24T11:59:53Z",
+          "enabled": false,
+          "id": "PWF_lAHOA0Lgf84BkjCUzgcUxKk",
+          "name": "Pull request merged",
+          "number": 2,
+          "updatedAt": "2026-09-24T12:19:16Z"
+        }
+      ]
+    }
+  }
+}
