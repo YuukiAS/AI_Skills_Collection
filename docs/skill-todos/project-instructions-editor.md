@@ -393,3 +393,36 @@ Current next step: independent Critic review of v2, with priority on closure of 
 READY_FOR_FUTURE_SKILL_DESIGN=YES
 READY_FOR_SKILL_IMPLEMENTATION=NO
 ```
+
+
+## 2026-10-02 pre-implementation design freeze candidate
+
+Current design anchor:
+
+`docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_PRE_IMPLEMENTATION_DESIGN_FREEZE_V1_PLANNER_PROPOSAL_2026-10-02.md`
+
+The standalone Skill product architecture v2 has independent Critic PASS. The current Planner judgment is that no further product fact is needed before an implementation-before-freeze review.
+
+The freeze candidate preserves the approved architecture and fixes the implementation-facing product contract:
+
+- the Skill owns long-lived ChatGPT Project instruction placement/editing, not generic prose or prompt optimization;
+- normal-entry and near-miss owner boundaries are explicit;
+- preservation-sensitive, greenfield, and explicit-reset modes are fixed;
+- live setting, targeted history, canonical source, and character-budget degradation behavior is fixed;
+- semantic ownership is separated from effective Project enforcement placement;
+- bounded edit remains default; full rewrite requires a real cross-cutting reason or explicit reset;
+- protected absence remains a current-edit rule, not a persistent tombstone registry;
+- no-op remains a valid product result;
+- user delivery is proportional to edit risk;
+- future capability verification is grouped into four distinct families: normal entry/routing, core Project editing semantics, fidelity/authority/should-not-change, and representative complete task + qualitative final artifact review;
+- A–L remain regression/task-family evidence, not fixed Gate count.
+
+No Skill implementation, Plugin, trigger eval, implementation Goal/Kickoff, package, version, Marketplace, profile, or release is authorized.
+
+Current next step: independent Critic review of the pre-implementation design freeze candidate.
+
+```text
+DESIGN_FREEZE_CANDIDATE=YES
+READY_FOR_FUTURE_SKILL_DESIGN=YES
+READY_FOR_SKILL_IMPLEMENTATION=NO
+```
