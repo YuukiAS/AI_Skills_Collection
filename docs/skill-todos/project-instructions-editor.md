@@ -426,3 +426,46 @@ DESIGN_FREEZE_CANDIDATE=YES
 READY_FOR_FUTURE_SKILL_DESIGN=YES
 READY_FOR_SKILL_IMPLEMENTATION=NO
 ```
+
+
+## 2026-10-02 final design-freeze closure
+
+Final design-freeze evidence:
+
+- approved architecture: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_STANDALONE_SKILL_DESIGN_V2_PLANNER_PROPOSAL_2026-10-02.md`
+- architecture Critic PASS: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_STANDALONE_SKILL_DESIGN_V2_CRITIC_REVIEW_2026-10-02.md`
+- approved final freeze: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_PRE_IMPLEMENTATION_DESIGN_FREEZE_V1_PLANNER_PROPOSAL_2026-10-02.md`
+- design-freeze Critic PASS: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_PRE_IMPLEMENTATION_DESIGN_FREEZE_V1_CRITIC_REVIEW_2026-10-02.md`
+- design-freeze Critic review commit: `bf9add585924e93ab8844bb59a366f1cd4f837d6`
+- closure record: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_DESIGN_FREEZE_CLOSURE_2026-10-02.md`
+
+The standalone Skill product/architecture design is now frozen.
+
+Frozen product contracts include:
+
+- product responsibility and non-responsibility;
+- natural normal-entry trigger boundary and near-miss owners;
+- preservation-sensitive / greenfield / explicit-reset edit modes;
+- live setting / targeted history / canonical source / instruction-budget inputs and degradation behavior;
+- semantic ownership versus effective Project enforcement placement;
+- locator-substitution safety boundary;
+- protected absence under partial/unavailable history;
+- bounded edit default and full-rewrite boundary;
+- no-op as a valid product result;
+- proportional user delivery contract;
+- four capability families for future implementation/release validation:
+  1. normal entry / routing boundary;
+  2. core Project editing semantics;
+  3. fidelity / authority / should-not-change;
+  4. representative complete task + qualitative final artifact.
+
+A–L remain regression/task-family evidence and are not a fixed Gate count.
+
+Implementation-specific choices such as exact Skill file layout, final `SKILL.md` prose, description wording, helper choice, concrete trigger eval queries, fixtures, tests, installation and release details remain intentionally unfrozen until the user explicitly opens implementation planning / implementation. Those choices must implement the frozen contract rather than redesign it.
+
+Current lifecycle remains `DOING`, waiting for a future explicit user decision on implementation planning / implementation. No Skill, Plugin, trigger eval, Goal, Kickoff, package, version, Marketplace/profile or release work is authorized or created by this closure.
+
+```text
+DESIGN_FREEZE=PASS
+READY_FOR_SKILL_IMPLEMENTATION=NO
+```
