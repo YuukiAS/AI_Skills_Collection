@@ -41,7 +41,7 @@ class WorkflowCoreReviewedHandoffRoutingTests(unittest.TestCase):
         workflow = next(plugin for plugin in config["plugins"] if plugin["name"] == "workflow-core")
         generated = GENERATED_SKILL.read_text(encoding="utf-8")
 
-        self.assertEqual(workflow["version"], "0.4")
+        self.assertEqual(workflow["version"], "0.5")
         self.assertIn("ai-bridge reviewed-handoff task bootstrap", generated)
         self.assertIn("ai-bridge reviewed-handoff materialize-worktree --mode resume", generated)
         self.assertIn("Bridge owns the repo-local Git mechanics", generated)
