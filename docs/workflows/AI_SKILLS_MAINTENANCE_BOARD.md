@@ -297,22 +297,30 @@ ADAPTING 不等于 DONE。
 
 ## 14. Required Consumers For Machine-Consumed Work
 
-当前默认 required logical consumers：
+对于 machine-consumed workflow / shared maintenance mechanism，required
+consumers 是当前 tracked item 的 frozen completion claim 成立所必须覆盖的
+actual normal-entry consumers，加上该 tracked item 或其产品合同明确承诺的
+fallback environments。
 
-Server / remote Codex：
+某台机器不能仅因为以下事实而自动成为 required consumer：
 
-1. `Longleaf_Codex`
-2. `Longleaf_Backup_Codex`
-3. `CUHK_Workstation_WSL_Codex`
+- AI Skills Maintainer 安装在那里；
+- 它出现在另一个 product / machine-update acceptance matrix 中；
+- 它安装了 Codex；
+- 它技术上能够 clone 或运行本 repo。
 
-Local：
+fallback / backup environment 只有在当前 tracked item 或其 frozen product
+contract 明确承诺该 fallback path 时才 required。
 
-4. `Workstation`
-5. `Legion`
-
-这些 consumer requirement 只适用于 machine-consumed workflow / shared maintenance mechanism。普通文档、单一 artifact quality improvement、普通 domain plugin quality improvement 不自动继承五机验收。
+这些 required-consumer 规则只适用于 machine-consumed workflow / shared
+maintenance mechanism。普通文档、单一 artifact quality improvement、普通
+domain plugin quality improvement 不自动继承 machine-consumer 验收。
 
 进入 ADAPTING 时，tracking Issue 必须冻结每个 required consumer 的 exact current identity / locator。若解析 identity 需要访问某台机器，必须先获得该 consumer 的 bounded authority；不得猜 locator。
+
+required-consumer set 必须由 evidence 支撑。若 normal-entry / fallback
+evidence 有实质歧义，item 保持 ADAPTING 并返回 Planner；不得为了保险多加
+机器，也不得静默漏掉产品合同明确承诺的 environment。
 
 每个 consumer PASS 至少需要：
 
@@ -324,7 +332,8 @@ Local：
 - risk-matched should-not-change / failure safety；
 - durable evidence locator。
 
-单台 consumer PASS 不能关闭 top-level Issue。
+单个 required consumer PASS 不能关闭 top-level Issue，除非当前 tracked item
+冻结的 required-consumer set 只包含这一项，且最终 DONE 的其他条件也全部成立。
 
 ## 15. AI Skills Maintainer Boundary
 
@@ -339,7 +348,7 @@ AI Skills Maintainer 是 per-current-consumer adaptation executor，不是 cross
 - durable evidence；
 - current-consumer PASS / truthful blocker。
 
-五 consumer aggregate truth 属于 tracking Issue / Project lifecycle。AI Skills Maintainer 不持有 machine registry，不做五机 orchestrator，不做 credential broker。
+当前 tracked item 的 required-consumer 聚合真值属于 tracking Issue / Project lifecycle。AI Skills Maintainer 不持有 machine registry，不做多机器 orchestrator，不做 credential broker。
 
 ## 16. Final DONE
 
