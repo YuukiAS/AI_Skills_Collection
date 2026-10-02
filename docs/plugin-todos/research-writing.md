@@ -173,6 +173,44 @@ promotion_gate: replay on two independent bilingual research reports and confirm
 
 
 
+### Formula display and notation should follow scientific role, not a blanket inline/block rule
+status: NEW
+tracking: UNASSIGNED
+source: Distributed_Imaging_Inference / advisor-report PDF review, 2026-10-02
+evidence: DII \`deliverables/group_meeting_2026-10-03/group_meeting_report_v1.pdf\` rendered from commit \`259c9fcc1821a63533401e402b9b4a6016c58916\`; user feedback that key formulas were visually buried while difficult calligraphic notation reduced readability; revised source in DII commit \`53c910c060782ecb1e925f35cf232462654adfd4\`
+target layer: research-reporting document semantics / mathematical presentation / QA
+problem:
+- A previous anti-overuse correction pushed too many formulas into running prose. This made scientifically decisive definitions such as the centre empirical risk, cross-entropy, Dice and global Dice visually indistinguishable from ordinary notation.
+- The opposite extreme is also wrong: turning every mathematical fragment into a display equation creates unnecessary vertical breaks and destroys reading flow.
+- Decorative or difficult-to-distinguish mathematical symbols can further reduce readability in advisor-facing documents. Calligraphic symbols such as \(\mathcal V\) are inappropriate when a plain symbol such as \(V\) carries the same meaning.
+candidate_action:
+- Decide inline versus display from the **scientific role of the formula**, not from formula length alone and not from a global “prefer inline” or “prefer display” rule.
+- Use a display equation when the formula defines a central estimand, objective, model map, theorem-level relation, or other mathematical object that the reader must notice and return to.
+- Keep short definitions, parameter values, simple equalities, and one-step relations inline when they are subordinate to the prose.
+- **Never isolate a single symbol or trivial fragment such as \(x\), \(\theta\), \(n\), \(p\), \(t=0\), or \(r=5\) as a display equation.** A display equation must carry a complete mathematical statement or definition with independent reading value.
+- Avoid ornamental, calligraphic, script or otherwise hard-to-recognize notation in advisor-facing research artifacts when an ordinary Latin or Greek symbol is sufficient. Prefer \(V\) to \(\mathcal V\), and short named quantities such as \(D_{\mathrm{fg}}\) to visually dense constructions such as long textual subscripts.
+- Preserve established notation when it has genuine mathematical meaning or is required by a cited theorem/method; do not simplify notation in a way that changes semantics.
+- Research Authoring should decide **which formulas deserve emphasis and which notation is reader-appropriate**. The low-level renderer owns font embedding, spacing and actual equation layout after that semantic decision is fixed.
+promotion_gate: replay on one additional advisor-facing mathematical report and one manuscript-like artifact; confirm that important formulas are easy to locate, routine symbols stay inline, and notation simplification does not alter meaning.
+
+### Advisor-facing reports should separate reader-facing sources from internal authoring provenance
+status: NEW
+tracking: UNASSIGNED
+source: Distributed_Imaging_Inference / advisor-report PDF review, 2026-10-02
+evidence: the first rendered DII advisor PDF placed repository paths, internal source notes and authoring reminders on its final page together with real references; after review, public-facing references were kept in the report while internal paths were moved to \`deliverables/group_meeting_2026-10-03/group_meeting_report_v1_sources.md\`
+target layer: research-reporting inclusion/exclusion planning / provenance boundary
+problem:
+- Internal source tracking is useful for authorship and reproducibility, but it is not automatically useful to an advisor reading the scientific argument.
+- Repository paths, canonical filenames, rendering instructions, update reminders and “fill this after QA” notes can make a finished research report look like an internal export rather than a deliberate advisor-facing document.
+- Genuine literature references and evidence sources needed to evaluate the scientific claims must remain visible; the problem is mixing those reader-facing sources with author-only tracking material.
+candidate_action:
+- In an advisor-facing report, keep only sources that the reader may reasonably need to understand, verify or follow the scientific argument: papers, datasets, externally meaningful reports, and concise evidence references.
+- Move author-only material such as repository paths, internal filenames, canonical-source locators, rendering instructions, future-edit reminders and update rules into a companion provenance/source file or machine-readable metadata.
+- Do not expose internal research-management traces merely because they are available in the source Markdown.
+- Do not remove attribution that changes claim authority. If an internal artifact itself is the scientific evidence the advisor needs to inspect, reference it in a reader-facing form rather than hiding it.
+- The final artifact should not contain author instructions such as “insert results after QA” unless the user explicitly wants that workflow state visible.
+promotion_gate: replay on one additional advisor report and one formal manuscript/supplement workflow; verify that internal provenance remains recoverable without appearing as reader-facing scientific content.
+
 ### Final research artifacts must be surfaced as actual user-openable/downloadable deliverables
 status: NEW
 tracking: #29
