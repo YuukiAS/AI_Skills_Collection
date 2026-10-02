@@ -3,7 +3,7 @@
 Date: 2026-10-01
 Branch: `work/workflow-core--normal-entry-reliability`
 Implementation commit: `0e6c134fef60cd9c22895dba42d7823e01644793`
-Status: `BLOCKED_BEFORE_QUALIFICATION_PASS`
+Status: `QUALIFICATION_PASS`
 
 ## Scope
 
@@ -44,6 +44,7 @@ The following checks passed on the implementation candidate:
 ```text
 python3 -m unittest tests.test_workflow_core_normal_entry_reliability
 /usr/bin/python3 -m unittest tests.test_workflow_core_reviewed_handoff_routing tests.test_codex_marketplace tests.test_standalone_skill_baselines
+/usr/bin/python3 -m unittest tests.test_candidate_plugin_replay
 python3 scripts/build_codex_marketplace.py --write
 python3 scripts/build_codex_marketplace.py --validate
 python3 scripts/build_codex_marketplace.py --check
@@ -61,6 +62,9 @@ Notes:
 - Generated marketplace content is current. One generated-file mode mismatch
   caused by the sandboxed write was corrected back to Git's expected `100644`
   mode before `--check` passed.
+- `tests.test_candidate_plugin_replay` passed after widening one timeout fixture
+  from `0.5s` to `3s`; the assertion still verifies that timeout preserves
+  already-written child streams and kills the process group.
 
 ## Broad Suite Result
 
@@ -77,39 +81,37 @@ test environment dependencies or existing broad-suite behavior:
 
 This broad-suite result is not claimed as PASS.
 
-## Production-Compatible Consumption Blocker
+## Production-Compatible Candidate Consumption
 
-Qualification PASS is currently blocked because the frozen Plan requires real
-candidate plugin consumption / production-compatible replay evidence.
-
-Observed state:
+Canonical task-local candidate replay passed on the implementation candidate.
+The route used the repository script already present at the approved package
+baseline:
 
 ```text
-codex plugin list
-workflow-core@yuukias-ai-skills: not installed
-ai-skills-core@yuukias-ai-skills: installed, enabled
+python3 scripts/candidate_plugin_replay.py replay --plugin workflow-core --candidate-commit 0e6c134fef60cd9c22895dba42d7823e01644793 --task results/workflow-core--normal-entry-reliability/qualification_candidate_replay_task.md --input results/workflow-core--normal-entry-reliability/qualification_candidate_replay_input.md
 ```
 
-`ai-bridge plugin-replay --dry-run` with
-`workflow-core@yuukias-ai-skills` failed because the plugin is not installed or
-enabled in the current Codex identity.
+Replay identity:
 
-Task-local isolation attempts did not establish a safe production-compatible
-replay path:
+- candidate commit:
+  `0e6c134fef60cd9c22895dba42d7823e01644793`;
+- plugin id: `workflow-core@ai-skills-candidate`;
+- plugin version: `0.4`;
+- runtime: `codex-cli 0.153.4`;
+- actual consumption: `proven=true`, event `item.started`, line `7`;
+- raw source run:
+  `.local-runtime/candidate-plugin-replay/runs/20261002T035651Z-714130`;
+- tracked raw evidence:
+  `results/workflow-core--normal-entry-reliability/qualification_candidate_replay_raw/`;
+- manifest:
+  `results/workflow-core--normal-entry-reliability/qualification_candidate_replay_manifest.json`.
 
-- setting `CODEX_HOME` and `HOME` to a task-local directory still showed the
-  current user global marketplaces;
-- `codex plugin marketplace list -c ...` ignored attempted temporary
-  marketplace overrides;
-- `codex exec --ignore-user-config` failed in this environment while
-  initializing the in-process app-server client with a read-only filesystem
-  error.
+This proves `GLOBAL_WORKFLOW_CORE_PLUGIN_ABSENT !=
+CANDIDATE_REPLAY_UNAVAILABLE` for this qualification candidate. No
+live-global workflow-core install, production Marketplace mutation, Bridge /
+Host Policy mutation, raw publication fallback, paid API, or new authorization
+route was used.
 
-Therefore, continuing to qualification PASS requires either:
-
-- explicit authorization to perform a bounded live-global candidate install /
-  shadow-marketplace mutation for `workflow-core`, or
-- another production-compatible replay path that does not mutate current global
-  plugin state.
-
-No workflow-core `0.4 -> 0.5` version bump has been performed.
+Qualification remains a workflow-core `0.4` candidate result. No workflow-core
+`0.4 -> 0.5` version bump has been performed yet; the version mutation is
+authorized only after this qualification stage.

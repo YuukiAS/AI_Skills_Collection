@@ -1,0 +1,46 @@
+{
+  "actual_consumption": {
+    "event_type": "item.started",
+    "line_index": 7,
+    "proven": true
+  },
+  "candidate_commit": "0e6c134fef60cd9c22895dba42d7823e01644793",
+  "candidate_plugin_id": "workflow-core@ai-skills-candidate",
+  "candidate_plugin_version": "0.4",
+  "command": "python3 scripts/candidate_plugin_replay.py replay --plugin workflow-core --candidate-commit 0e6c134fef60cd9c22895dba42d7823e01644793 --task results/workflow-core--normal-entry-reliability/qualification_candidate_replay_task.md --input results/workflow-core--normal-entry-reliability/qualification_candidate_replay_input.md",
+  "global_workflow_core_plugin_absent_is_not_a_blocker": true,
+  "production_marketplace_mutation": false,
+  "raw_run_id": "20261002T035651Z-714130",
+  "raw_source_run_dir": ".local-runtime/candidate-plugin-replay/runs/20261002T035651Z-714130",
+  "runtime_version": "codex-cli 0.153.4",
+  "tracked_evidence": {
+    "child.stderr": {
+      "path": "results/workflow-core--normal-entry-reliability/qualification_candidate_replay_raw/child.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "child.stdout.jsonl": {
+      "path": "results/workflow-core--normal-entry-reliability/qualification_candidate_replay_raw/child.stdout.jsonl",
+      "sha256": "a6ac996eb7f1a04a6f31a61d173d982b20924fc0631f0c6b1189e464d5f08933"
+    },
+    "plugin-add.json": {
+      "path": "results/workflow-core--normal-entry-reliability/qualification_candidate_replay_raw/plugin-add.json",
+      "sha256": "687ce1f3a7da8d685d31991ee641667fde62c28edb3b06c1d85d85cf259aafd0"
+    },
+    "qualification_candidate_replay_input.md": {
+      "path": "results/workflow-core--normal-entry-reliability/qualification_candidate_replay_input.md",
+      "sha256": "79ef90478d0ba5a286b4afb9dca8c87721c21fc60472166c1a390b2706d52e3b"
+    },
+    "qualification_candidate_replay_response.md": {
+      "path": "results/workflow-core--normal-entry-reliability/qualification_candidate_replay_raw/qualification_candidate_replay_response.md",
+      "sha256": "72807f6bea355dac0111412f6e1e30df7847333f6a7740da1ba21438d2a8d197"
+    },
+    "qualification_candidate_replay_task.md": {
+      "path": "results/workflow-core--normal-entry-reliability/qualification_candidate_replay_task.md",
+      "sha256": "5fa4520a29de54adeee34b821e23b73118161526e47b487f10b6e44490b30171"
+    },
+    "run.json": {
+      "path": "results/workflow-core--normal-entry-reliability/qualification_candidate_replay_raw/run.json",
+      "sha256": "5d41eedbfc1a7d58f806e7519a1182e462535a00e921767502610874b1584698"
+    }
+  }
+}
