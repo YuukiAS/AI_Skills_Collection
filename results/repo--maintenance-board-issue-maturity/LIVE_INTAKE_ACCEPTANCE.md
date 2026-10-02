@@ -17,9 +17,17 @@ Configured live Issue templates on `main`:
   - `blank_issues_enabled: true`
   - no contact-link replacement for blank Issues
 
-Longleaf does not expose a supported GitHub Issue chooser UI readback surface.
-The final live chooser visibility check remains isolated as the only UI-bound
-acceptance item if all non-UI gates pass.
+Live Issue chooser UI readback was completed by the user after Codex opened:
+
+```text
+https://github.com/YuukiAS/AI_Skills_Collection/issues/new/choose
+```
+
+Confirmed visible entries:
+
+- `Existing plugin / skill real failure`
+- `New AI_Skills capability proposal`
+- blank Issue route
 
 ## Pre-admission Action Smoke
 
@@ -65,5 +73,6 @@ closedAt = 2026-10-02T00:57:57Z
 
 ```text
 ACTION_SMOKE = PASS
-LIVE_FORMS_CHOOSER_UI_READBACK = PENDING_UI_ONLY
+LIVE_FORMS_CHOOSER_UI_READBACK = PASS
+LIVE_FORMS = PASS
 ```
